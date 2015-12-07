@@ -1,0 +1,14 @@
+---
+extends:
+  - "eslint-config-defaults/configurations/walmart/es6-test"
+  - "./.eslintrc-react"
+globals:
+  document: false
+  expect: false
+  sinon: false
+  Element: false
+rules:
+  "no-unused-expressions": 0 # for `chai.expect`
+  "max-len": [2, 100, 2, {ignorePattern: "^\\s*(?:it|describe)\\(.*"}]
+  "max-statements": 0
+  "max-nested-callbacks": 0
