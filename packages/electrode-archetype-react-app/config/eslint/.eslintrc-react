@@ -1,0 +1,9 @@
+---
+extends:
+  - "eslint-config-defaults/configurations/walmart/es6-react"
+globals:
+  window: false
+  ReactElement: false
+rules:
+  "react/jsx-boolean-value": 0
+  "react/jsx-closing-bracket-location": 0
