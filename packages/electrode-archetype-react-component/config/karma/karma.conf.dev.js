@@ -26,12 +26,6 @@ module.exports = function (config) {
       mocha: {
         ui: "bdd"
       }
-    },
-    plugins: [
-      require("karma-mocha"),
-      require("karma-spec-reporter"),
-      require("karma-phantomjs-shim"),
-      require("karma-phantomjs-launcher")
-    ]
+    }
   });
 };
