@@ -18,7 +18,6 @@ module.exports = _.merge({}, testCfg, {
         exclude: /node_modules\//,
         loader: ispartaLoader
       }
-    ],
-    loaders: testCfg.module.loaders
+    ]
   }
 });

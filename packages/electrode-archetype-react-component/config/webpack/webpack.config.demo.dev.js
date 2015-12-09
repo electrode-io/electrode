@@ -8,19 +8,16 @@ var base = require("./webpack.config");
 var _ = require("lodash");
 
 module.exports = {
-
   devServer: {
     port: (process.env.WEBPACK_DEVSERVER_PORT || "4000"),
     contentBase: path.join(process.cwd(), "demo"),
     noInfo: false
   },
-
   output: {
     path: process.cwd(),
     filename: "bundle.js",
     publicPath: "/assets/"
   },
-
   cache: true,
   devtool: "source-map",
   entry: {

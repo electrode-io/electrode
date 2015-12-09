@@ -13,7 +13,7 @@ PREPROCESSORS[MAIN_PATH] = ["webpack"];
 module.exports = function (config) {
   config.set({
     basePath: process.cwd(),
-    frameworks: ["mocha", "sinon-chai", "phantomjs-shim", "intl-shim"],
+    frameworks: ["mocha", "phantomjs-shim", "intl-shim"],
     files: [
       // Sinon has issues with webpack. Do global include.
       require.resolve("sinon/pkg/sinon"),
