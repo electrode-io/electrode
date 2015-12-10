@@ -6,10 +6,10 @@ var path = require("path");
 var _ = require("lodash");
 var prodCfg = require("./webpack.config");
 
-module.exports =  {
+module.exports = {
   cache: true,
   context: path.join(process.cwd(), "test/client"),
-  entry: "../../node_modules/electrode-bolt/config/karma/entry",
+  entry: require.resolve("@walmart/electrode-archetype-react-component/config/karma/entry"),
   output: {
     path: process.cwd(),
     filename: "bundle.js",
