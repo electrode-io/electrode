@@ -6,6 +6,10 @@ var path = require("path");
 var _ = require("lodash");
 var prodCfg = require("./webpack.config");
 
+prodCfg.module.noParse = [
+   /node_modules\/sinon\//,
+];
+
 module.exports = {
   cache: true,
   context: path.join(process.cwd(), "test/client"),
@@ -25,7 +29,7 @@ module.exports = {
   externals: {
     jsdom: "window",
     cheerio: "window",
-    react/lib/ExecutionEnvironment: true
+    "react/lib/ExecutionEnvironment": true
   },
   resolveLoader: prodCfg.resolveLoader,
   module: prodCfg.module,
