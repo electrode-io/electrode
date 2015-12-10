@@ -19,13 +19,13 @@ module.exports = {
     alias: {
       // Allow root import of `src/FOO` from ROOT/src.
       src: path.join(process.cwd(), "src"),
-      'sinon': 'sinon/pkg/sinon'
+      sinon: "sinon/pkg/sinon"
     }
   }),
   externals: {
-    'jsdom': 'window',
-    'cheerio': 'window',
-    'react/lib/ExecutionEnvironment': true
+    jsdom: "window",
+    cheerio: "window",
+    react/lib/ExecutionEnvironment: true
   },
   resolveLoader: prodCfg.resolveLoader,
   module: prodCfg.module,
