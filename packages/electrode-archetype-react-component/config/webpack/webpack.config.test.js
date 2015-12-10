@@ -20,7 +20,7 @@ module.exports = {
       // Allow root import of `src/FOO` from ROOT/src.
       src: path.join(process.cwd(), "src"),
       'sinon': 'sinon/pkg/sinon'
-   }
+    }
   }),
   externals: {
     'jsdom': 'window',
