@@ -29,5 +29,5 @@ module.exports = {
   },
   resolveLoader: prodCfg.resolveLoader,
   module: prodCfg.module,
-  devtool: "#source-map"
+  devtool: "source-map"
 };
