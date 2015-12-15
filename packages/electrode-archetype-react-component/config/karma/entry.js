@@ -12,6 +12,7 @@ require("babel-core/polyfill");
 /*globals window:false*/
 var chai = require("chai");
 var sinonChai = require("sinon-chai");
+window.sinon = require("sinon");
 
 // --------------------------------------------------------------------------
 // Chai / Sinon / Mocha configuration.
