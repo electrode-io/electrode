@@ -6,6 +6,13 @@ var path = require("path");
 var _ = require("lodash");
 var prodCfg = require("./webpack.config");
 
+// Get Paths to give node_modules by resolving based on assumed presence of
+// `package.json`.
+var _archNodeModules = function (arch) {
+  var archDir = path.dirname(require.resolve(path.join(arch, "package.json")));
+  return path.join(archDir, "node_modules");
+};
+
 module.exports = {
   cache: true,
   context: path.join(process.cwd(), "test/client"),
@@ -19,7 +26,12 @@ module.exports = {
     alias: {
       // Allow root import of `src/FOO` from ROOT/src.
       src: path.join(process.cwd(), "src")
-    }
+    },
+    modulesDirectories: [
+      "node_modules",
+      _archNodeModules("@walmart/electrode-archetype-react-component"),
+      _archNodeModules("@walmart/electrode-archetype-react-component-dev")
+    ]
   }),
   resolveLoader: prodCfg.resolveLoader,
   module: prodCfg.module,
