@@ -29,7 +29,7 @@ module.exports = {
     alias: {
       // Allow root import of `src/FOO` from ROOT/src.
       src: path.join(process.cwd(), "src"),
-      sinon: "sinon/pkg/sinon"
+      sinon: require.resolve("sinon/pkg/sinon")
     },
     modulesDirectories: [
       "node_modules",
