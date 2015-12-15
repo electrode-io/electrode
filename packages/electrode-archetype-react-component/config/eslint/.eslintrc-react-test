@@ -6,7 +6,6 @@ globals:
   document: false
   expect: false
   sandbox: false
-  sinon: false
   Element: false
 rules:
   "no-unused-expressions": 0 # for `chai.expect`
