@@ -7,8 +7,14 @@ var _ = require("lodash");
 var prodCfg = require("./webpack.config");
 
 prodCfg.module.noParse = [
-   /node_modules\/sinon\//,
+   /node_modules\/sinon\//
 ];
+// Get Paths to give node_modules by resolving based on assumed presence of
+// `package.json`.
+var _archNodeModules = function (arch) {
+  var archDir = path.dirname(require.resolve(path.join(arch, "package.json")));
+  return path.join(archDir, "node_modules");
+};
 
 module.exports = {
   cache: true,
@@ -24,7 +30,12 @@ module.exports = {
       // Allow root import of `src/FOO` from ROOT/src.
       src: path.join(process.cwd(), "src"),
       sinon: "sinon/pkg/sinon"
-    }
+    },
+    modulesDirectories: [
+      "node_modules",
+      _archNodeModules("@walmart/electrode-archetype-react-component"),
+      _archNodeModules("@walmart/electrode-archetype-react-component-dev")
+    ]
   }),
   externals: {
     jsdom: "window",
