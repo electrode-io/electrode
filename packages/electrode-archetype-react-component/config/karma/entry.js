@@ -14,7 +14,7 @@ var chai = require("chai");
 var sinonChai = require("sinon-chai");
 /*
  * We need a global sinon to maintain compatibility
- * with existing test suites. However, this will be 
+ * with existing test suites. However, this will be
  * removed in the future and is being tracked by
  * https://gecgithub01.walmart.com/electrode/electrode-archetype-react-component/issues/10
  */

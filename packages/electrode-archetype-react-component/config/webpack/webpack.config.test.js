@@ -7,16 +7,16 @@ var _ = require("lodash");
 var prodCfg = require("./webpack.config");
 
 /*
- * This prevents webpack from running its 
+ * This prevents webpack from running its
  * parsers on any sinon files. Sinon breaks
- * when it is `import`ed by a file or module. 
- * Such as enzyme or your spec files. 
- * See here: 
+ * when it is `import`ed by a file or module.
+ * Such as enzyme or your spec files.
+ * See here:
  * https://github.com/webpack/webpack/issues/304
- * https://github.com/sinonjs/sinon/pull/600#issuecomment-162529457 
+ * https://github.com/sinonjs/sinon/pull/600#issuecomment-162529457
  */
 prodCfg.module.noParse = [
-   /node_modules\/sinon\//
+  /node_modules\/sinon\//
 ];
 // Get Paths to give node_modules by resolving based on assumed presence of
 // `package.json`.
