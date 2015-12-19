@@ -11,7 +11,8 @@ module.exports = {
   devServer: {
     port: process.env.WEBPACK_DEVSERVER_PORT || "4000",
     contentBase: path.join(process.cwd(), "demo"),
-    noInfo: false
+    noInfo: false,
+    historyApiFallback: true
   },
   output: {
     path: process.cwd(),
