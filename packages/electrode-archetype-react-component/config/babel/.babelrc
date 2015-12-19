@@ -1,4 +1,9 @@
 {
-  "stage": 0,
-  "nonStandard": true
+  "presets": [
+    "es2015",
+    "react"
+  ],
+  "plugins": [
+    "babel-plugin-transform-object-rest-spread"
+  ]
 }
