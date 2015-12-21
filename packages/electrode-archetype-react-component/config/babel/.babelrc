@@ -1,7 +1,8 @@
 {
   "presets": [
     "es2015",
-    "react"
+    "react",
+    "transform-object-rest-spread"
   ],
   "plugins": [
     "babel-plugin-transform-object-rest-spread"
