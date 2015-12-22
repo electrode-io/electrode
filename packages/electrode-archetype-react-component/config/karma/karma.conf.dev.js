@@ -16,10 +16,11 @@ module.exports = function (config) {
     basePath: process.cwd(), // repository root.
     files: [
       // Test bundle (must be created via `npm run dev|hot|server-test`)
-      "http://127.0.0.1:8080/assets/bundle.js"
+      "http://127.0.0.1:3001/assets/bundle.js"
     ],
     port: 9999,
     singleRun: true,
+    autoWatchBatchDelay: 500,
     client: {
       mocha: {
         ui: "bdd"
