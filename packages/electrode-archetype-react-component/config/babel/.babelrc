@@ -4,6 +4,10 @@
     "react"
   ],
   "plugins": [
-    "babel-plugin-transform-object-rest-spread"
+    "babel-plugin-transform-object-rest-spread",
+    ["babel-plugin-react-intl", {
+      "messagesDir": "./tmp/messages/",
+      "enforceDescriptions": true
+    }]
   ]
 }
