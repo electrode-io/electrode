@@ -1,5 +1,5 @@
-const _ = require("lodash");
-const Promise = require("bluebird");
+import {first as getFirstElementInArray, partial} from "lodash";
+import Promise from "bluebird";
 
 const fs = Promise.promisifyAll(require("fs"));
 const getFilePaths = Promise.promisify(require("glob"));
@@ -45,12 +45,12 @@ const getAllDefaultMessages = function getAllDefaultMessages(messageFilesPathPat
     }, {});
 };
 
-const writeRawMessages = _.partial(writeFileAsJSON, RAW_MESSAGES_DIR, RAW_MESSAGES_NAME);
+const writeRawMessages = partial(writeFileAsJSON, RAW_MESSAGES_DIR, RAW_MESSAGES_NAME);
 
 Promise.all([
   getAllDefaultMessages(MESSAGES_PATTERN),
   createDirectory(RAW_MESSAGES_DIR)
 ])
-  .then(_.first)
+  .then(getFirstElementInArray)
   .then(writeRawMessages)
   .then(() => { console.log("Success!"); });
