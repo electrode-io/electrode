@@ -1,9 +1,8 @@
 const _ = require("lodash");
 const Promise = require("bluebird");
 
-const fs = Promise.promisifyAll(require("fs"));
+const fs = Promise.promisifyAll(require("fs-extra"));
 const getFilePaths = Promise.promisify(require("glob"));
-const createDirectory = Promise.promisify(require("mkdirp"));
 
 const MESSAGES_PATTERN = "./lib/tmp/messages/**/*.json";
 const RAW_MESSAGES_DIR = "./lib/";
@@ -49,7 +48,7 @@ const writeRawMessages = _.partial(writeFileAsJSON, RAW_MESSAGES_DIR, RAW_MESSAG
 
 Promise.all([
   getAllDefaultMessages(MESSAGES_PATTERN),
-  createDirectory(RAW_MESSAGES_DIR)
+  fs.ensureDirAsync(RAW_MESSAGES_DIR)
 ])
   .then(_.first)
   .then(writeRawMessages)
