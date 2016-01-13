@@ -39,7 +39,8 @@ module.exports = {
   externals: {
     jsdom: "window",
     cheerio: "window",
-    "react/lib/ExecutionEnvironment": true
+    "react/lib/ExecutionEnvironment": true,
+    "react/lib/ReactContext": true
   },
   resolveLoader: prodCfg.resolveLoader,
   module: prodCfg.module,
