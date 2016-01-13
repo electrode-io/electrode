@@ -15,8 +15,6 @@ module.exports = function (config) {
     browsers: ["PhantomJS"],
     basePath: process.cwd(), // repository root.
     files: [
-      // Sinon has issues with webpack. Do global include.
-      require.resolve("sinon/pkg/sinon"),
       // Test bundle (must be created via `npm run dev|hot|server-test`)
       "http://127.0.0.1:3000/assets/bundle.js"
     ],
