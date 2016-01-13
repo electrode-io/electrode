@@ -5,6 +5,8 @@ extends:
 globals:
   document: false
   expect: false
+  # this will by removed by
+  # https://gecgithub01.walmart.com/electrode/electrode-archetype-react-component/issues/10
   sinon: false
   Element: false
 rules:

@@ -15,8 +15,6 @@ module.exports = function (config) {
     basePath: process.cwd(),
     frameworks: ["mocha", "sinon-chai", "phantomjs-shim"],
     files: [
-      // Sinon has issues with webpack. Do global include.
-      require.resolve("sinon/pkg/sinon"),
       MAIN_PATH
     ],
     preprocessors: PREPROCESSORS,
