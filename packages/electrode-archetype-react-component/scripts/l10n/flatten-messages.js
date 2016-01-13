@@ -53,5 +53,5 @@ Promise.all([
 ])
   .then(_.first)
   .then(writeRawMessages)
-  .then(() => { process.exit(0); });
+  .then(() => { process.exit(0); })
   .catch(() => { process.exit(1); });
