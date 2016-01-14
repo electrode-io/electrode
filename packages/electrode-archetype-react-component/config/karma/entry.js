@@ -12,6 +12,7 @@ require("babel-core/polyfill");
 /*globals window:false*/
 var chai = require("chai");
 var sinonChai = require("sinon-chai");
+var chaiShallowly = require("@walmart/chai-shallowly");
 /*
  * We need a global sinon to maintain compatibility
  * with existing test suites. However, this will be
@@ -28,6 +29,7 @@ window.expect = chai.expect;
 
 // Plugins
 chai.use(sinonChai);
+chai.use(chaiShallowly);
 
 // Mocha (part of static include).
 window.mocha.setup({
