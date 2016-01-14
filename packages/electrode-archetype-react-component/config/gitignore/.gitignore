@@ -1,5 +1,5 @@
 
-# Created by https://www.gitignore.io/api/osx,windows,linux,xcode,objective-c,swift,android,java,jetbrains,eclipse,sublimetext,node,vim,netneans,emacs,vagrant,textmate,otto,gradle
+# Created by https://www.gitignore.io/api/osx,windows,linux,xcode,objective-c,swift,android,java,jetbrains,eclipse,sublimetext,node,vim,netbeans,emacs,vagrant,textmate,otto,gradle
 
 ### OSX ###
 .DS_Store
@@ -421,7 +421,15 @@ Session.vim
 *~
 
 
-#!! ERROR: netneans is undefined. Use list command to see defined gitignore types !!#
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+.nb-gradle/
+
 
 ### Emacs ###
 # -*- mode: gitignore; -*-
