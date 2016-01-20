@@ -1,4 +1,16 @@
 {
-  "stage": 0,
-  "nonStandard": true
+  "presets": [
+    "es2015",
+    "react"
+  ],
+  "plugins": [
+    "babel-plugin-transform-object-rest-spread",
+    ["babel-plugin-i18n-id-hashing", {
+      "varsContainingMessages": ["defaultMessages", "translations"]
+    }],
+    ["babel-plugin-react-intl", {
+      "messagesDir": "./lib/tmp/messages/",
+      "enforceDescriptions": true
+    }]
+  ]
 }
