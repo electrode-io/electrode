@@ -13,7 +13,7 @@ PREPROCESSORS[MAIN_PATH] = ["webpack"];
 module.exports = function (config) {
   config.set({
     basePath: process.cwd(),
-    frameworks: ["mocha", "sinon-chai", "phantomjs-shim"],
+    frameworks: ["mocha", "phantomjs-shim"],
     files: [
       MAIN_PATH
     ],

@@ -1,5 +1,7 @@
 "use strict";
 
+require("babel-core/polyfill");
+
 /**
  * Test setup for client-side tests.
  *
