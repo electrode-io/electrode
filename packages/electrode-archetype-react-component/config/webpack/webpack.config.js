@@ -33,7 +33,7 @@ module.exports = {
       loader: styleLoader + "!" + cssLoader
     }, {
       test: /\.styl$/,
-      loader: styleLoader + "!" + cssLoader + "!" + stylusLoader
+      loader: styleLoader + "!" + cssLoader + "?modules!" + stylusLoader
     }, {
       test: /\.(png|jpg|svg|gif)$/,
       loader: urlLoader
