@@ -1,7 +1,9 @@
 "use strict";
+
 var webpack = require("webpack");
 var path = require("path");
 var archetypeNodeModules = path.join(__dirname, "../../", "node_modules");
+
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
 var autoprefixer = require("autoprefixer-stylus");
