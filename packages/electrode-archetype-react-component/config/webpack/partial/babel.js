@@ -1,6 +1,6 @@
-const partial = require("webpack-partial").default;
+const mergeWebpackConfig = require("webpack-partial").default;
 
-module.exports = (babel) => (config) => partial(config, {
+module.exports = (babel) => (config) => mergeWebpackConfig(config, {
   module: {
     loaders: [{
       name: "babel",

@@ -1,4 +1,4 @@
-const partial = require("webpack-partial").default;
+const mergeWebpackConfig = require("webpack-partial").default;
 const webpack = require("webpack");
 const SourceMapDevToolPlugin = webpack.SourceMapDevToolPlugin;
 
@@ -6,7 +6,7 @@ module.exports = () => (config) => {
   // TODO: Generate real URLs using SOURCE_MAP_URL.
   const url = () => "[url]";
 
-  return partial(config, {
+  return mergeWebpackConfig(config, {
     plugins: [
       new SourceMapDevToolPlugin({
         test: /\.(css|js)($|\?)/,

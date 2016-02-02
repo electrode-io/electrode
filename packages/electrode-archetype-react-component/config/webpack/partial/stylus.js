@@ -1,10 +1,10 @@
-const partial = require("webpack-partial").default;
+const mergeWebpackConfig = require("webpack-partial").default;
 
 const styleLoader = require.resolve("style-loader");
 const cssLoader = require.resolve("css-loader");
 const stylusLoader = require.resolve("stylus-loader");
 
-module.exports = () => (config) => partial(config, {
+module.exports = () => (config) => mergeWebpackConfig(config, {
   module: {
     loaders: [{
       name: "stylus",
