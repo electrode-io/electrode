@@ -1,6 +1,6 @@
 "use strict";
 
-const _ = require("lodash");
+const compose = require("lodash/function/compose");
 const partial = require("webpack-partial").default;
 const path = require("path");
 const webpack = require("webpack");
@@ -34,7 +34,7 @@ const baseConfiguration = {
   }
 };
 
-const createConfig = _.compose(
+const createConfig = compose(
   babelConfig(),
   cssConfig(),
   defineConfig(),
