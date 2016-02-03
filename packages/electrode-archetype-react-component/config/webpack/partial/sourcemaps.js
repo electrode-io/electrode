@@ -13,7 +13,7 @@ module.exports = () => (config) => {
         filename: "[file].map",
         append: `\n//# sourceMappingURL=${url()}`,
         module: true,
-        columns: true,
+        columns: true
       })
     ]
   });

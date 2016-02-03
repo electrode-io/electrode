@@ -9,7 +9,9 @@ module.exports = () => (config) => mergeWebpackConfig(config, {
     loaders: [{
       name: "stylus",
       test: /\.styl$/,
+      /* eslint-disable prefer-template */
       loader: styleLoader + "!" + cssLoader + "?modules!" + stylusLoader
+      /* eslint-enable prefer-template */
     }]
   }
 });

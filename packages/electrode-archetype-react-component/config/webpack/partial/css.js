@@ -8,7 +8,7 @@ module.exports = () => (config) => mergeWebpackConfig(config, {
     loaders: [{
       name: "css",
       test: /\.css$/,
-      loader: styleLoader + "!" + cssLoader
+      loader: styleLoader + "!" + cssLoader // eslint-disable-line prefer-template
     }]
   }
 });

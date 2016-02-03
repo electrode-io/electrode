@@ -1,9 +1,5 @@
-"use strict";
-
 const compose = require("lodash/function/compose");
-const partial = require("webpack-partial").default;
 const path = require("path");
-const webpack = require("webpack");
 
 const babelConfig = require("./partial/babel.js");
 const cssConfig = require("./partial/css.js");
@@ -14,7 +10,7 @@ const optimizeConfig = require("./partial/optimize.js");
 const sourceMapsConfig = require("./partial/sourcemaps.js");
 const stylusConfig = require("./partial/stylus.js");
 
-var archetypeNodeModules = path.join(__dirname, "../../", "node_modules");
+const archetypeNodeModules = path.join(__dirname, "../../", "node_modules");
 
 const baseConfiguration = {
   cache: true,

@@ -1,6 +1,6 @@
 const mergeWebpackConfig = require("webpack-partial").default;
 
-var urlLoader = require.resolve("url-loader");
+const urlLoader = require.resolve("url-loader");
 
 module.exports = () => (config) => mergeWebpackConfig(config, {
   module: {
