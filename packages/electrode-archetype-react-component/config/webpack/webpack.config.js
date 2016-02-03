@@ -1,4 +1,4 @@
-const compose = require("lodash/function/compose");
+const compose = require("lodash/function/flowRight");
 const path = require("path");
 
 const babelConfig = require("./partial/babel.js");
