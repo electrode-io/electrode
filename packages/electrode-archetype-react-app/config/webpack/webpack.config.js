@@ -26,7 +26,7 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.jsx?$/, include: path.join(process.cwd(), "client"),
-        loader: babelLoader + "?optional=runtime" },
+        loader: babelLoader },
       { test: /\.styl$/,
         loader: ExtractTextPlugin.extract(
           styleLoader, cssLoader + "!" + stylusLoader) },
