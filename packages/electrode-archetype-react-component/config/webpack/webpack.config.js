@@ -1,58 +1,25 @@
-"use strict";
+const compose = require("lodash/function/flowRight");
+const path = require("path");
 
-var webpack = require("webpack");
-var path = require("path");
-var archetypeNodeModules = path.join(__dirname, "../../", "node_modules");
+const babelConfig = require("./partial/babel.js");
+const cssConfig = require("./partial/css.js");
+const defineConfig = require("./partial/define.js");
+const imageConfig = require("./partial/images.js");
+const jsonConfig = require("./partial/json.js");
+const optimizeConfig = require("./partial/optimize.js");
+const sourceMapsConfig = require("./partial/sourcemaps.js");
+const stylusConfig = require("./partial/stylus.js");
 
-var babelLoader = require.resolve("babel-loader");
-var jsonLoader = require.resolve("json-loader");
-var styleLoader = require.resolve("style-loader");
-var cssLoader = require.resolve("css-loader");
-var stylusLoader = require.resolve("stylus-loader");
-var urlLoader = require.resolve("url-loader");
+const archetypeNodeModules = path.join(__dirname, "../../", "node_modules");
 
-module.exports = {
+const baseConfiguration = {
   cache: true,
   debug: false,
-  devtool: "source-map",
   entry: path.join(process.cwd(), "src/index.js"),
   output: {
     path: path.join(process.cwd(), "dist"),
     filename: "bundle.min.js"
   },
-  module: {
-    loaders: [{
-      test: /\.jsx?$/,
-      exclude: [/node_modules/],
-      loader: babelLoader
-    }, {
-      test: /\.json$/,
-      loader: jsonLoader
-    }, {
-      test: /\.css$/,
-      loader: styleLoader + "!" + cssLoader
-    }, {
-      test: /\.styl$/,
-      loader: styleLoader + "!" + cssLoader + "?modules!" + stylusLoader
-    }, {
-      test: /\.(png|jpg|svg|gif)$/,
-      loader: urlLoader
-    }]
-  },
-  plugins: [
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    }),
-    new webpack.DefinePlugin({
-      // Signal production, so that webpack removes non-production code that
-      // is in condtionals like: `if (process.env.NODE_ENV === "production")`
-      "process.env.NODE_ENV": JSON.stringify("production")
-    }),
-    new webpack.SourceMapDevToolPlugin("[file].map")
-  ],
   resolve: {
     root: [archetypeNodeModules, process.cwd()],
     modulesDirectories: ["node_modules"],
@@ -62,3 +29,16 @@ module.exports = {
     root: [archetypeNodeModules, process.cwd()]
   }
 };
+
+const createConfig = compose(
+  babelConfig(),
+  cssConfig(),
+  defineConfig(),
+  imageConfig(),
+  jsonConfig(),
+  optimizeConfig(),
+  sourceMapsConfig(),
+  stylusConfig()
+);
+
+module.exports = createConfig(baseConfiguration);
