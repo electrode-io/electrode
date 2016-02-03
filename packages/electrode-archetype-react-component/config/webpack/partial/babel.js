@@ -7,6 +7,7 @@ module.exports = (babel) => (config) => mergeWebpackConfig(config, {
       test: /\.jsx?$/,
       exclude: /node_modules/,
       loader: require.resolve("babel-loader"),
+      // The babel-loader treats queries as babel config. E.g. `{ "presets": ["react"] }`
       query: babel
     }]
   }
