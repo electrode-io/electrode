@@ -1,3 +1,5 @@
+"use strict";
+
 const compose = require("lodash/function/flowRight");
 const path = require("path");
 

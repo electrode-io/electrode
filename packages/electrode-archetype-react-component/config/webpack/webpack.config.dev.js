@@ -1,5 +1,7 @@
-const webpack = require("webpack");
-const config = require("./webpack.config");
+"use strict";
+
+var webpack = require("webpack");
+var config = require("./webpack.config");
 
 config.output.filename = config.output.filename.replace(/\.min\.js$/, ".js");
 

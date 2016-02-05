@@ -1,10 +1,12 @@
-const path = require("path");
+"use strict";
 
-const webpackCfg = require("../webpack/webpack.config.test");
+var path = require("path");
 
-const MAIN_PATH = require.resolve("@walmart/electrode-archetype-react-component/config/karma/entry.js"); // eslint-disable-line max-len
+var webpackCfg = require("../webpack/webpack.config.test");
 
-const PREPROCESSORS = {};
+var MAIN_PATH = require.resolve("@walmart/electrode-archetype-react-component/config/karma/entry.js"); // eslint-disable-line max-len
+
+var PREPROCESSORS = {};
 
 PREPROCESSORS[MAIN_PATH] = ["webpack"];
 

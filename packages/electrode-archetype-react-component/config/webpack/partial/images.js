@@ -1,3 +1,5 @@
+"use strict";
+
 const mergeWebpackConfig = require("webpack-partial").default;
 
 const urlLoader = require.resolve("url-loader");

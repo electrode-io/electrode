@@ -1,3 +1,5 @@
+"use strict";
+
 const mergeWebpackConfig = require("webpack-partial").default;
 
 const styleLoader = require.resolve("style-loader");
