@@ -1,12 +1,12 @@
-"use strict";
-
 /*
  * Karma Configuration: "watch" version.
  *
  * This configuration allows live updates of code changes.
  */
+const baseConf = require("./karma.conf.dev");
+
 module.exports = function (config) {
-  require("./karma.conf.dev")(config);
+  baseConf(config);
   config.set({
     files: [
       // Test bundle (must be created via `npm run dev|hot|server-test`)
@@ -16,8 +16,8 @@ module.exports = function (config) {
       "demo/**",
       "src/**",
       "test/**"
-    ].map(function (pattern) {
-      return { pattern: pattern, included: false, served: false, watched: true };
+    ].map((pattern) => {
+      return { pattern, included: false, served: false, watched: true };
     }))
   });
 };

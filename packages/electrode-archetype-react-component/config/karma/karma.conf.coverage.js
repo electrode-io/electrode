@@ -1,14 +1,13 @@
-"use strict";
-
 /*
  * Karma Configuration: "coverage" version.
  *
  * This configuration is the same as basic one-shot version, just with coverage.
  */
-var webpackCovCfg = require("../webpack/webpack.config.coverage");
+const webpackCovCfg = require("../webpack/webpack.config.coverage");
+const baseConf = require("./karma.conf");
 
 module.exports = function (config) {
-  require("./karma.conf")(config);
+  baseConf(config);
   config.set({
     reporters: ["spec", "coverage"],
     webpack: webpackCovCfg,
