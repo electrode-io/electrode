@@ -1,10 +1,11 @@
 /*globals __dirname:false */
+"use strict";
 
-const webpack = require("webpack");
-const path = require("path");
-const base = require("./webpack.config");
+var webpack = require("webpack");
+var path = require("path");
+var base = require("./webpack.config");
 
-const _ = require("lodash");
+var _ = require("lodash");
 
 module.exports = {
   devServer: {

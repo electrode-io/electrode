@@ -1,6 +1,10 @@
-const path = require("path");
-const _ = require("lodash");
-const prodCfg = require("./webpack.config");
+"use strict";
+/**
+ * Webpack frontend test configuration.
+ */
+var path = require("path");
+var _ = require("lodash");
+var prodCfg = require("./webpack.config");
 
 /*
  * This prevents webpack from running its
@@ -16,8 +20,8 @@ prodCfg.module.noParse = [
 ];
 // Get Paths to give node_modules by resolving based on assumed presence of
 // `package.json`.
-const _archNodeModules = function (arch) {
-  const archDir = path.dirname(require.resolve(path.join(arch, "package.json")));
+var _archNodeModules = function (arch) {
+  var archDir = path.dirname(require.resolve(path.join(arch, "package.json")));
   return path.join(archDir, "node_modules");
 };
 

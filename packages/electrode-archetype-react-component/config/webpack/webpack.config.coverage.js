@@ -1,7 +1,12 @@
-const _ = require("lodash");
-const testCfg = require("./webpack.config.test");
+"use strict";
 
-const ispartaLoader = require.resolve("isparta-loader");
+/**
+ * Webpack frontend test (w/ coverage) configuration.
+ */
+var _ = require("lodash");
+var testCfg = require("./webpack.config.test");
+
+var ispartaLoader = require.resolve("isparta-loader");
 
 module.exports = _.merge({}, testCfg, {
   module: {
