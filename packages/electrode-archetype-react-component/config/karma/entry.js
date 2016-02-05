@@ -44,7 +44,7 @@ var srcReq = require.context("src", true, /\.jsx?$/);
 srcReq.keys().map(srcReq);
 
 // Use webpack to infer and `require` tests automatically.
-var testsReq = require.context("test", true, /\.spec.jsx?$/);
+var testsReq = require.context("test/client", true, /\.spec.jsx?$/);
 testsReq.keys().map(testsReq);
 
 // Only start mocha in browser.
