@@ -1,5 +1,3 @@
-"use strict";
-
 const mergeWebpackConfig = require("webpack-partial").default;
 
 module.exports = (babel) => (config) => mergeWebpackConfig(config, {
