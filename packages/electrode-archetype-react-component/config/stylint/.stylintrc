@@ -1,14 +1,29 @@
 {
   "blocks": false,
-  "brackets": "always",
-  "colons": "always",
+  "brackets": {
+    "expect": "always",
+    "error": true
+  },
+  "colons": {
+    "expect": "always",
+    "error": true
+  },
   "colors": false,
-  "commaSpace": "always",
-  "commentSpace": "always",
+  "commaSpace": {
+    "expect": "always",
+    "error": true
+  },
+  "commentSpace": {
+    "expect": "always",
+    "error": true
+  },
   "cssLiteral": "never",
   "depthLimit": false,
   "duplicates": true,
-  "efficient": "always",
+  "efficient": {
+    "expect": "always",
+    "error": true
+  },
   "extendPref": false,
   "globalDupe": false,
   "indentPref": 2,
@@ -22,9 +37,15 @@
   "noImportant": true,
   "parenSpace": "never",
   "placeholders": false,
-  "prefixVarsWithDollar": "always",
+  "prefixVarsWithDollar": {
+    "expect": "always",
+    "error": true
+  },
   "quotePref": "double",
-  "semicolons": "always",
+  "semicolons": {
+    "expect": "always",
+    "error": true
+  },
   "sortOrder": false,
   "stackedProperties": "never",
   "trailingWhitespace": "never",
@@ -33,3 +54,4 @@
   "zeroUnits": "never",
   "zIndexNormalize": false
 }
+
