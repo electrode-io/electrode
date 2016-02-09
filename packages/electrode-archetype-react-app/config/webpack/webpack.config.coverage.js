@@ -16,7 +16,7 @@ module.exports = _.merge({}, testCfg, {
       {
         test: /(test|client)\/.*\.jsx?$/,
         exclude: /node_modules\//,
-        loader: ispartaLoader + "?{ babel: { stage: 1 } }"
+        loader: ispartaLoader
       }
     ],
     loaders: testCfg.module.loaders
