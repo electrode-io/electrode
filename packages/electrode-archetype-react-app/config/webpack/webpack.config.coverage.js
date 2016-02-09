@@ -1,24 +1,22 @@
 "use strict";
-
-/**
- * Webpack frontend test (w/ coverage) configuration.
+/***
+ * Webpack frontend test (coverage) configuration.
  */
-var _ = require("lodash");
-var testCfg = require("./webpack.config.test");
+const assign = require("lodash/object/assign");
 
-var ispartaLoader = require.resolve("isparta-loader");
+const isparta = require.resolve("isparta-loader");
 
-module.exports = _.merge({}, testCfg, {
-  module: {
-    preLoaders: [
-      // Manually instrument client code for code coverage.
-      // https://github.com/deepsweet/isparta-loader handles ES6 + normal JS.
-      {
-        test: /(test|client)\/.*\.jsx?$/,
-        exclude: /node_modules\//,
-        loader: ispartaLoader + "?{ babel: { stage: 1 } }"
-      }
-    ],
-    loaders: testCfg.module.loaders
+const config = require("./webpack.config.test");
+
+config.module.preLoaders = [
+  // Manually instrument client code for code coverage.
+  // https://github.com/deepsweet/isparta-loader handles ES6 + normal JS.
+  {
+    test: /(test|client)\/.*\.jsx?$/,
+    exclude: /node_modules\//,
+    loader: isparta + "?{ babel: { stage: 1 } }"
   }
-});
+];
+
+module.exports = config;
+

@@ -2,36 +2,46 @@
 /**
  * Webpack hot configuration
  */
-var path = require("path");
-var base = require("./webpack.config.dev");
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+const path = require("path");
 
-module.exports = {
-  cache: true,
-  context: base.context,
+const assign = require("lodash/object/assign");
+const compose = require("lodash/function/flowRight");
+const find = require("lodash/collection/find");
+
+// config partials
+const babelConfig = require("./partial/babel");
+const extractStylesConfig = require("./partial/extract");
+const staticConfig = require("./partial/static");
+
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+// NOTE: webpack.config.dev.js depends on webpack.config.js
+const baseConfig = require("./webpack.config.dev");
+
+const createConfig = compose(
+  babelConfig(),
+  extractStylesConfig(),
+  staticConfig()
+);
+
+// add `module.loaders`
+const config = createConfig({
+  devtool: "source-map",
   entry: [
     "webpack-dev-server/client?http://127.0.0.1:2992",
     "webpack/hot/only-dev-server",
-    base.entry
-  ],
-  output: base.output,
-  module: {
-    // Copy this because of `react-hot` injection.
-    loaders: [
-      { test: /\.js(x|)?$/, include: path.join(process.cwd(), "client"),
-        loaders: ["react-hot", "babel-loader"] },
-      { test: /\.styl$/,
-        loader: ExtractTextPlugin.extract(
-          "style-loader", "css-loader!stylus-loader") },
-      { test: /\.woff(2)?$/,
-        loader: "url-loader?limit=10000&minetype=application/font-woff" },
-      { test: /\.(ttf|eot|svg|png)$/,
-        loader: "file-loader" }
-    ]
-  },
-  stylus: base.stylus,
-  resolve: base.resolve,
-  resolveLoader: base.resolveLoader,
-  devtool: "source-map",
-  plugins: base.plugins
-};
+    baseConfig.entry
+  ]
+});
+
+/****
+ * Hot Mods
+ */
+const babel = find(config.module.loaders, { name: "babel" });
+
+// update babel loaders for hot loading
+babel.loaders = [].concat(["react-hot"], babel.loaders);
+babel.include = path.join(process.cwd(), "client");
+
+module.exports = assign({}, baseConfig, config);
+
