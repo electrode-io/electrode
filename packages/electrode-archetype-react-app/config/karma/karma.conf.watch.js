@@ -1,12 +1,10 @@
-"use strict";
-
 /*
  * Karma Configuration: "watch" version.
  *
  * This configuration allows live updates of code changes.
  */
-module.exports = function (config) {
-  require("./karma.conf.dev")(config);
+module.exports = (config) => {
+  require("./karma.conf.dev")(config); //eslint-disable-line global-require
   config.set({
     files: [
       // Test bundle (must be created via `npm run dev|hot|server-test`)
@@ -15,8 +13,13 @@ module.exports = function (config) {
     ].concat([
       "client/**",
       "test/**"
-    ].map(function (pattern) {
-      return { pattern: pattern, included: false, served: false, watched: true };
+    ].map((pattern) => {
+      return {
+        pattern,
+        included: false,
+        served: false,
+        watched: true
+      };
     }))
   });
 };

@@ -1,4 +1,3 @@
-"use strict";
 /***
  * Webpack frontend test configuration.
  */

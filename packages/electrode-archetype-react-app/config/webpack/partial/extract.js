@@ -12,7 +12,7 @@ module.exports = () => (config) => mergeWebpackConfig(config, {
     loaders: [{
       name: "extract",
       test: /\.styl$/,
-      loader: ExtractTextPlugin.extract(styleLoader, cssLoader + "!" + stylusLoader)
+      loader: ExtractTextPlugin.extract(styleLoader, `${cssLoader}!${stylusLoader}`)
     }]
   },
   stylus: {

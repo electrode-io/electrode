@@ -8,7 +8,7 @@ module.exports = () => (config) => mergeWebpackConfig(config, {
       // non-production code that is in conditionals
       // like: `if (process.env.NODE_ENV === "production")`
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV || "production")
-    }),
+    })
   ]
 });
 

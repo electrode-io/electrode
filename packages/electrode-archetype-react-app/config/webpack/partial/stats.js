@@ -5,7 +5,7 @@ module.exports = () => (config) => mergeWebpackConfig(config, {
   plugins: [
     new StatsWriterPlugin({
       filename: "../server/stats.json"
-    }),
+    })
   ]
 });
 

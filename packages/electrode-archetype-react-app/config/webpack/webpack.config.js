@@ -1,4 +1,3 @@
-"use strict";
 /***
  * Webpack base configuration (XXX production build config)
  */
@@ -41,7 +40,7 @@ const config = createConfig({
   },
   resolve: {
     root: [archetypeNodeModules, process.cwd()],
-    modulesDirectories: modulesDirectories,
+    modulesDirectories,
     extensions: ["", ".js", ".jsx"]
   },
   resolveLoader: {

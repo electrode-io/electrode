@@ -1,4 +1,3 @@
-"use strict";
 /**
  * Webpack hot configuration
  */
@@ -12,8 +11,6 @@ const find = require("lodash/collection/find");
 const babelConfig = require("./partial/babel");
 const extractStylesConfig = require("./partial/extract");
 const staticConfig = require("./partial/static");
-
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 // NOTE: webpack.config.dev.js depends on webpack.config.js
 const baseConfig = require("./webpack.config.dev");
