@@ -1,6 +1,4 @@
 "use strict";
-require("babel-core/polyfill");
-
 /**
  * Test setup for client-side tests.
  *
@@ -9,8 +7,8 @@ require("babel-core/polyfill");
  * - Browser tests: `http://localhost:3000/test/client/test.html`
  */
 /*globals window:false*/
-const chai = require("chai");
-const sinonChai = require("sinon-chai");
+var chai = require("chai");
+var sinonChai = require("sinon-chai");
 /*
  * We need a global sinon to maintain compatibility
  * with existing test suites. However, this will be
@@ -39,11 +37,11 @@ window.mocha.setup({
 // --------------------------------------------------------------------------
 // Use webpack to include all app code _except_ the entry point so we can get
 // code coverage in the bundle, whether tested or not.
-const srcReq = require.context("client", true, /^((?!app).)*\.jsx?$/);
+var srcReq = require.context("client", true, /^((?!app).)*\.jsx?$/);
 srcReq.keys().map(srcReq);
 
 // Use webpack to infer and `require` tests automatically.
-const testsReq = require.context("test", true, /\.spec.jsx?$/);
+var testsReq = require.context("test", true, /\.spec.jsx?$/);
 testsReq.keys().map(testsReq);
 
 // Only start mocha in browser.

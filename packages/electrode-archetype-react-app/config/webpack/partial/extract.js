@@ -1,23 +1,30 @@
-const mergeWebpackConfig = require("webpack-partial").default;
+"use strict";
 
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+var mergeWebpackConfig = require("webpack-partial").default;
 
-const autoprefixer = require("autoprefixer-stylus");
-const cssLoader = require.resolve("css-loader");
-const styleLoader = require.resolve("style-loader");
-const stylusLoader = require.resolve("stylus-loader");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-module.exports = () => (config) => mergeWebpackConfig(config, {
-  module: {
-    loaders: [{
-      name: "extract",
-      test: /\.styl$/,
-      loader: ExtractTextPlugin.extract(styleLoader, `${cssLoader}!${stylusLoader}`)
-    }]
-  },
-  stylus: {
-    use: [autoprefixer({ browsers: ["last 2 versions"] })]
-  },
-  plugins: [new ExtractTextPlugin("style.[hash].css")]
-});
+var autoprefixer = require("autoprefixer-stylus");
+var cssLoader = require.resolve("css-loader");
+var styleLoader = require.resolve("style-loader");
+var stylusLoader = require.resolve("stylus-loader");
+
+module.exports = function () {
+  return function (config) {
+    var query = cssLoader + "!" + stylusLoader;
+    return mergeWebpackConfig(config, {
+      module: {
+        loaders: [{
+          name: "extract",
+          test: /\.styl$/,
+          loader: ExtractTextPlugin.extract(styleLoader, query)
+        }]
+      },
+      stylus: {
+        use: [autoprefixer({ browsers: ["last 2 versions"] })]
+      },
+      plugins: [new ExtractTextPlugin("style.[hash].css")]
+    });
+  };
+};
 

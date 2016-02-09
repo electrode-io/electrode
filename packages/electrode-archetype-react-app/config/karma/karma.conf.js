@@ -1,10 +1,11 @@
-const path = require("path");
+"use strict";
+var path = require("path");
 
-const webpackCfg = require("../webpack/webpack.config.test");
+var webpackCfg = require("../webpack/webpack.config.test");
 
-const MAIN_PATH = require.resolve("@walmart/electrode-archetype-react-app/config/karma/entry.js");
+var MAIN_PATH = require.resolve("@walmart/electrode-archetype-react-app/config/karma/entry.js");
 
-const PREPROCESSORS = {};
+var PREPROCESSORS = {};
 
 PREPROCESSORS[MAIN_PATH] = ["webpack"];
 

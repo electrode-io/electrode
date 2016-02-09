@@ -1,21 +1,22 @@
+"use strict";
 /***
  * Webpack base configuration (XXX production build config)
  */
-const path = require("path");
+var path = require("path");
 
-const compose = require("lodash/function/flowRight");
+var _ = require("lodash");
 
 // config partials
-const babelConfig = require("./partial/babel");
-const defineConfig = require("./partial/define");
-const extractStylesConfig = require("./partial/extract");
-const optimizeConfig = require("./partial/optimize");
-const sourcemapsConfig = require("./partial/sourcemaps");
-const staticConfig = require("./partial/static");
-const statsConfig = require("./partial/stats");
+var babelConfig = require("./partial/babel");
+var defineConfig = require("./partial/define");
+var extractStylesConfig = require("./partial/extract");
+var optimizeConfig = require("./partial/optimize");
+var sourcemapsConfig = require("./partial/sourcemaps");
+var staticConfig = require("./partial/static");
+var statsConfig = require("./partial/stats");
 
 // create module loaders factory
-const createConfig = compose(
+var createConfig = _.compose(
   babelConfig(),
   defineConfig(),
   extractStylesConfig(),
@@ -25,11 +26,10 @@ const createConfig = compose(
   statsConfig()
 );
 
-const archetypeNodeModules = path.join(__dirname, "../../", "node_modules");
-const modulesDirectories = ["client", "node_modules", "node_modules/@walmart"];
+var archetypeNodeModules = path.join(__dirname, "../../node_modules");
 
 // create config
-const config = createConfig({
+var config = createConfig({
   cache: true,
   context: path.join(process.cwd(), "client"),
   debug: false,
@@ -40,7 +40,7 @@ const config = createConfig({
   },
   resolve: {
     root: [archetypeNodeModules, process.cwd()],
-    modulesDirectories,
+    modulesDirectories: ["client", "node_modules", "node_modules/@walmart"],
     extensions: ["", ".js", ".jsx"]
   },
   resolveLoader: {

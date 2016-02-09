@@ -1,21 +1,27 @@
-const mergeWebpackConfig = require("webpack-partial").default;
+"use strict";
 
-const urlLoader = require.resolve("url-loader");
+var mergeWebpackConfig = require("webpack-partial").default;
 
-module.exports = () => (config) => mergeWebpackConfig(config, {
-  module: {
-    loaders: [
-      {
-        name: "static",
-        test: /\.(ttf|eot|svg|png)$/,
-        loader: require.resolve("file-loader")
-      },
-      {
-        name: "woff",
-        test: /\.woff(2)?$/,
-        loader: `${urlLoader}?limit=10000&mimetype=application/font-woff`
+var urlLoader = require.resolve("url-loader");
+
+module.exports = function () {
+  return function (config) {
+    return mergeWebpackConfig(config, {
+      module: {
+        loaders: [
+          {
+            name: "static",
+            test: /\.(ttf|eot|svg|png)$/,
+            loader: require.resolve("file-loader")
+          },
+          {
+            name: "woff",
+            test: /\.woff(2)?$/,
+            loader: urlLoader + "?limit=10000&mimetype=application/font-woff"
+          }
+        ]
       }
-    ]
-  }
-});
+    });
+  };
+};
 

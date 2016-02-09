@@ -1,13 +1,14 @@
+"use strict";
 /***
  * Webpack frontend test configuration.
  */
-const path = require("path");
+var path = require("path");
 
-const assign = require("lodash/object/assign");
+var _ = require("lodash");
 
-const baseConfig = require("./webpack.config");
+var baseConfig = require("./webpack.config");
 
-const config = assign({}, baseConfig, {
+var config = _.assign({}, baseConfig, {
   context: path.join(process.cwd(), "test/client"),
   devtool: "source-map",
   entry: require.resolve("@walmart/electrode-archetype-react-app/config/karma/entry"),

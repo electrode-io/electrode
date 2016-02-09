@@ -1,12 +1,13 @@
-const path = require("path");
-const karmaConf = require("./karma.conf");
+"use strict";
+var path = require("path");
+var karmaConf = require("./karma.conf");
 
 /*
  * Karma Configuration: "coverage" version.
  *
  * This configuration is the same as basic one-shot version, just with coverage.
  */
-const webpackCovCfg = require("../webpack/webpack.config.coverage");
+var webpackCovCfg = require("../webpack/webpack.config.coverage");
 
 module.exports = function (config) {
   karmaConf(config);
