@@ -10,19 +10,19 @@ var _ = require("lodash");
 module.exports = {
   devServer: {
     port: process.env.WEBPACK_DEVSERVER_PORT || "4000",
-    contentBase: path.join(process.cwd(), "demo"),
+    contentBase: path.join(__dirname, "../../demo-server"),
     noInfo: false,
     historyApiFallback: true
   },
   output: {
     path: process.cwd(),
-    filename: "bundle.js",
-    publicPath: "/assets/"
+    filename: "bundle.dev.js",
+    publicPath: "/js/"
   },
   cache: true,
   devtool: "source-map",
   entry: {
-    app: ["./demo/demo.jsx"]
+    app: [path.join(__dirname, "../../demo-server/app.js")]
   },
   stats: {
     colors: true,
@@ -31,7 +31,9 @@ module.exports = {
   resolve: _.merge({}, base.resolve, {
     alias: {
       // Allow root import of `src/FOO` from ROOT/src.
-      src: path.join(process.cwd(), "src")
+      src: path.join(process.cwd(), "src"),
+      "local-component-demo": path.join(process.cwd() + "/demo/demo.jsx"),
+      "local-demo-styl": path.join(process.cwd() + "/demo/demo.styl")
     }
   }),
   resolveLoader: base.resolveLoader,
