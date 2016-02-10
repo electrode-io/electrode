@@ -1,5 +1,6 @@
 /*global document:false*/
 "use strict";
+// NO JSX because this is running from `/node_modules`
 const React = require("react");
 const Resolver = require("react-resolver").Resolver;
 const Router = require("react-router").Router;
