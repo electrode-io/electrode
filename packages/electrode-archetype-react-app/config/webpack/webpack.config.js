@@ -3,16 +3,16 @@
  * Webpack base configuration (XXX production build config)
  */
 var path = require("path");
-
 var _ = require("lodash");
 
 // config partials
 var babelConfig = require("./partial/babel");
 var defineConfig = require("./partial/define");
 var extractStylesConfig = require("./partial/extract");
+var fontsConfig = require("./partial/fonts");
+var imagesConfig = require("./partial/images");
 var optimizeConfig = require("./partial/optimize");
 var sourcemapsConfig = require("./partial/sourcemaps");
-var staticConfig = require("./partial/static");
 var statsConfig = require("./partial/stats");
 
 // create module loaders factory
@@ -20,9 +20,10 @@ var createConfig = _.compose(
   babelConfig(),
   defineConfig(),
   extractStylesConfig(),
+  fontsConfig(),
+  imagesConfig(),
   optimizeConfig(),
   sourcemapsConfig(),
-  staticConfig(),
   statsConfig()
 );
 
@@ -49,4 +50,3 @@ var config = createConfig({
 });
 
 module.exports = config;
-
