@@ -7,7 +7,8 @@ module.exports = function () {
   return function (config) {
     return mergeWebpackConfig(config, {
       plugins: [
-        // TODO: switch to internal sourcemaps server.
+        // TODO: Generate real URLs using SOURCE_MAP_URL.
+        // TODO: And, switch to internal sourcemaps server.
         // https://gecgithub01.walmart.com/electrode/electrode-archetype-react-app/issues/39
         new SourceMapDevToolPlugin(
           "../map/bundle.[hash].js.map",
