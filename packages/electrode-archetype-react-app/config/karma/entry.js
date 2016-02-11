@@ -1,5 +1,4 @@
 "use strict";
-
 /**
  * Test setup for client-side tests.
  *
