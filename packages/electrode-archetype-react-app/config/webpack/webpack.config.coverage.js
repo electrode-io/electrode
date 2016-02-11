@@ -1,5 +1,4 @@
 "use strict";
-
 /**
  * Webpack frontend test (w/ coverage) configuration.
  */

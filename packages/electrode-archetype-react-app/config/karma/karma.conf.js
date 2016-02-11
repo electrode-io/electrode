@@ -1,5 +1,4 @@
 "use strict";
-
 var path = require("path");
 
 var webpackCfg = require("../webpack/webpack.config.test");
