@@ -1,6 +1,6 @@
 "use strict";
 
-require("babel/polyfill");
+require("babel-polyfill");
 
 /**
  * Test setup for client-side tests.
