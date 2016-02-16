@@ -9,11 +9,13 @@ var _ = require("lodash");
 var config = require("./webpack.config.dev");
 
 config.devtool = "eval";
+config.devServer = {}; // use webpack default verbosity
 config.entry = [
   "webpack-dev-server/client?http://dev.walmart.com:2992",
   "webpack/hot/only-dev-server",
   config.entry
 ];
+config.output.publicPath = "http://dev.walmart.com:2992/js";
 
 
 /****
