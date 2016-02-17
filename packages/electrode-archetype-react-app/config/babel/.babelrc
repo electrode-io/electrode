@@ -9,7 +9,7 @@
       "varsContainingMessages": ["defaultMessages", "translations"]
     }],
     ["babel-plugin-react-intl", {
-      "messagesDir": "./lib/tmp/messages/",
+      "messagesDir": "./tmp/messages/",
       "enforceDescriptions": true
     }]
   ]
