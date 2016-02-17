@@ -4,8 +4,8 @@ const Promise = require("bluebird");
 const fs = Promise.promisifyAll(require("fs-extra"));
 const getFilePaths = Promise.promisify(require("glob"));
 
-const MESSAGES_PATTERN = "./lib/tmp/messages/**/*.json";
-const RAW_MESSAGES_DIR = "./lib/";
+const MESSAGES_PATTERN = "./tmp/messages/**/*.json";
+const RAW_MESSAGES_DIR = "./dist/";
 const RAW_MESSAGES_NAME = "raw-messages.json";
 
 /**
