@@ -2,42 +2,34 @@
 const Promise = require("bluebird");
 const path = require("path");
 const fs = Promise.promisifyAll(require("fs-extra"));
+const _ = require("lodash");
 
 const babPath = "./node_modules/@walmart/electrode-archetype-react-component/config/babel/.babelrc";
 const babelConfig = JSON.parse(fs.readFileSync(path.resolve(babPath), "utf8"));
 
 require("babel-core/register")(babelConfig);
 
-const _ = require("lodash");
 const electrodeServer = require("@walmart/electrode-server");
 const defaultElectrodeServerConfig = require("./default-electrode-server-config");
 
-const readFileAsJSON = function readFileAsJSON(filePath) {
-  return fs.readFileAsync(filePath, "utf8")
-    .then(JSON.parse);
-};
+const overrideConfigPath = path.join(process.cwd(), "archetype-demo-server.config.js");
 
 const doesFileExist = function doesFileExist(filePath) {
   try {
-    return fs.accessSync(filePath, fs.F_OK);
+    // Throws if not found otherwise returns undefined
+    fs.accessSync(filePath, fs.F_OK);
+
+    return true;
   } catch (e) {
     return false;
   }
 };
 
 const getConfigOverrides = function getConfigOverrides(filePath) {
-  return doesFileExist(filePath) ? readFileAsJSON(filePath) : {};
+  return doesFileExist(filePath) ? require(filePath) : {}; // eslint-disable-line global-require
 };
 
-Promise.all([
-  defaultElectrodeServerConfig,
-  getConfigOverrides()
-])
-  .then((config) => _.merge.apply(null, config))
-  .then(electrodeServer)
-  .catch((err) => {
-    throw err;
-  })
-  .catch(() => {
-    process.exit(1); //eslint-disable-line no-process-exit
-  });
+const localConfig = getConfigOverrides(overrideConfigPath);
+const demoServerConfig = _.merge(defaultElectrodeServerConfig, localConfig);
+
+electrodeServer(demoServerConfig);
