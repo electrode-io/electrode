@@ -39,7 +39,7 @@ var getAllDefaultMessages = function getAllDefaultMessages(messageFilesPathPatte
   return getFilePaths(messageFilesPathPattern)
     .map(readFileAsJSON)
     .reduce(function (previousValue, defaultMessageDescriptors) {
-      defaultMessageDescriptors.forEach(function (descriptor) { return previousValue[descriptor.id] = descriptor; });
+      defaultMessageDescriptors.forEach(function (descriptor) { previousValue[descriptor.id] = descriptor; });
       return previousValue;
     }, {});
 };
