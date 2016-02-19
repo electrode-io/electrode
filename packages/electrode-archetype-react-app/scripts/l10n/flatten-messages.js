@@ -1,12 +1,12 @@
-const _ = require("lodash");
-const Promise = require("bluebird");
+var _ = require("lodash");
+var Promise = require("bluebird");
 
-const fs = Promise.promisifyAll(require("fs-extra"));
-const getFilePaths = Promise.promisify(require("glob"));
+var fs = Promise.promisifyAll(require("fs-extra"));
+var getFilePaths = Promise.promisify(require("glob"));
 
-const MESSAGES_PATTERN = "./tmp/messages/**/*.json";
-const RAW_MESSAGES_DIR = "./dist/";
-const RAW_MESSAGES_NAME = "raw-messages.json";
+var MESSAGES_PATTERN = "./tmp/messages/**/*.json";
+var RAW_MESSAGES_DIR = "./dist/";
+var RAW_MESSAGES_NAME = "raw-messages.json";
 
 /**
  * @param  {String}  filePath  The file path
@@ -14,16 +14,16 @@ const RAW_MESSAGES_NAME = "raw-messages.json";
  * @param  {Object}  contents  The contents written to the file
  * @return  {Promise}  A promise that resolves when the file has been written
  */
-const writeFileAsJSON = function writeFileAsJSON(filePath, name, contents) {
-  return Promise.try(() => JSON.stringify(contents, null, 2))
-    .then((result) => fs.writeFileAsync(filePath + name, result));
+var writeFileAsJSON = function writeFileAsJSON(filePath, name, contents) {
+  return Promise.try(function () { return JSON.stringify(contents, null, 2); })
+    .then(function (result) { return fs.writeFileAsync(filePath + name, result); });
 };
 
 /**
  * @param  {String}  filePath  The file of a file to read
  * @return  {Promise}  A promise that resolves to a POJO with the file's contents
  */
-const readFileAsJSON = function readFileAsJSON(filePath) {
+var readFileAsJSON = function readFileAsJSON(filePath) {
   return fs.readFileAsync(filePath, "utf8")
     .then(JSON.parse);
 };
@@ -35,16 +35,16 @@ const readFileAsJSON = function readFileAsJSON(filePath) {
  * @return  {Promise}  A promise that resolves to a flat POJO with the default messages extracted
  *                     from all files
  */
-const getAllDefaultMessages = function getAllDefaultMessages(messageFilesPathPattern) {
+var getAllDefaultMessages = function getAllDefaultMessages(messageFilesPathPattern) {
   return getFilePaths(messageFilesPathPattern)
     .map(readFileAsJSON)
-    .reduce((previousValue, defaultMessageDescriptors) => {
-      defaultMessageDescriptors.forEach((descriptor) => previousValue[descriptor.id] = descriptor);
+    .reduce(function (previousValue, defaultMessageDescriptors) {
+      defaultMessageDescriptors.forEach(function (descriptor) { return previousValue[descriptor.id] = descriptor; });
       return previousValue;
     }, {});
 };
 
-const writeRawMessages = _.partial(writeFileAsJSON, RAW_MESSAGES_DIR, RAW_MESSAGES_NAME);
+var writeRawMessages = _.partial(writeFileAsJSON, RAW_MESSAGES_DIR, RAW_MESSAGES_NAME);
 
 Promise.all([
   getAllDefaultMessages(MESSAGES_PATTERN),
@@ -52,5 +52,5 @@ Promise.all([
 ])
   .then(_.first)
   .then(writeRawMessages)
-  .then(() => { process.exit(0); })
-  .catch(() => { process.exit(1); });
+  .then(function () { process.exit(0); })
+  .catch(function () { process.exit(1); });
