@@ -1,0 +1,4 @@
+--require node_modules/@walmart/electrode-archetype-react-app/config/mocha/setup.js
+--reporter spec
+--recursive
+--ui bdd
