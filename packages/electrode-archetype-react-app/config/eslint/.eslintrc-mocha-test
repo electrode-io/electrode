@@ -1,0 +1,16 @@
+---
+extends:
+  - "eslint-config-defaults/configurations/walmart/es5-node"
+globals:
+  expect: false
+  sandbox: false
+  # this will by removed by
+  # https://gecgithub01.walmart.com/electrode/electrode-archetype-react-component/issues/10
+  sinon: false
+env:
+  mocha: true
+rules:
+  "no-unused-expressions": 0 # for `chai.expect`
+  "max-len": [2, 100, 2, {ignorePattern: "^\\s*(?:it|describe)\\(.*"}]
+  "max-statements": 0
+  "max-nested-callbacks": 0
