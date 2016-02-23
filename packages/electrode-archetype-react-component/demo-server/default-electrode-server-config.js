@@ -1,7 +1,7 @@
 "use strict";
 const routes = require("./server-routes");
 
-const routerResolverEngine = require("@walmart/router-resolver-engine").default;
+const routerResolverEngine = require("@walmart/router-resolver-engine");
 
 const engine = routerResolverEngine(routes);
 
