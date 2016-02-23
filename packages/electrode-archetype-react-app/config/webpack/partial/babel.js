@@ -9,7 +9,7 @@ module.exports = function (babel) {
         loaders: [{
           name: "babel",
           test: /\.jsx?$/,
-          exclude: /node_modules/,
+          exclude: /(node_modules|\bclient\/vendor\b)/,
           // NOTE: webpack.config.hot.js inserts "react-hot" into loaders array
           loaders: [require.resolve("babel-loader")],
           query: babel
