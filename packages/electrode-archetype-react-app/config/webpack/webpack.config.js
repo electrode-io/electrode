@@ -16,7 +16,7 @@ var sourcemapsConfig = require("./partial/sourcemaps");
 var statsConfig = require("./partial/stats");
 
 // create module loaders factory
-var createConfig = _.compose(
+var createConfig = _.flowRight(
   babelConfig(),
   defineConfig(),
   extractStylesConfig(),

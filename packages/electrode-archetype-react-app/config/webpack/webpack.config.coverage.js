@@ -14,7 +14,7 @@ module.exports = _.merge({}, testCfg, {
       // https://github.com/deepsweet/isparta-loader handles ES6 + normal JS.
       {
         test: /(test|client)\/.*\.jsx?$/,
-        exclude: /node_modules\//,
+        exclude: /(node_modules|\bclient\/vendor\b)/,
         loader: ispartaLoader
       }
     ],
