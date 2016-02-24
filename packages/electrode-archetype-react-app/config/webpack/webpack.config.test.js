@@ -16,8 +16,7 @@ var prodCfg = require("./webpack.config");
  * https://github.com/sinonjs/sinon/pull/600#issuecomment-162529457
  */
 prodCfg.module.noParse = [
-  /node_modules\/sinon\//,
-  /test\/server\//
+  /node_modules\/sinon\//
 ];
 
 
