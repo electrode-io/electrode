@@ -1,16 +1,16 @@
 "use strict";
 
 var mergeWebpackConfig = require("webpack-partial").default;
-var fileLoader = require.resolve("file-loader");
+var urlLoader = require.resolve("url-loader");
 
 module.exports = function () {
   return function (config) {
     return mergeWebpackConfig(config, {
       module: {
         loaders: [{
-          name: "static",
-          test: /\.(ttf|eot|svg|png|gif|jpe?g)$/,
-          loader: fileLoader
+          name: "images",
+          test: /\.(svg|png|gif|jpe?g)$/,
+          loader: urlLoader + "?limit=10000"
         }]
       }
     });
