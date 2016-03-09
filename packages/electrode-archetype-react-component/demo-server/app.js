@@ -10,6 +10,8 @@ const routes = require("./client-routes");
 
 const content = document.querySelector(".js-content");
 
+require("./demo.styl");
+
 Resolver.render(() => {
   return React.createElement(
     Router,
