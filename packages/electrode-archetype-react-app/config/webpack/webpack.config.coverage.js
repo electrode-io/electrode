@@ -1,23 +1,14 @@
 "use strict";
-/**
- * Webpack frontend test (w/ coverage) configuration.
- */
+
 var _ = require("lodash");
-var testCfg = require("./webpack.config.test");
+var mergeWebpackConfig = require("webpack-partial").default;
 
-var ispartaLoader = require.resolve("isparta-loader");
+var coverageConfig = require("./partial/coverage");
+var inlineSourcemapsConfig = require("./partial/sourcemaps-inline");
+var testConfig = require("./base-test.js");
 
-module.exports = _.merge({}, testCfg, {
-  module: {
-    preLoaders: [
-      // Manually instrument client code for code coverage.
-      // https://github.com/deepsweet/isparta-loader handles ES6 + normal JS.
-      {
-        test: /(test|client)\/.*\.jsx?$/,
-        exclude: /(node_modules|\bclient\/vendor\b)/,
-        loader: ispartaLoader
-      }
-    ],
-    loaders: testCfg.module.loaders
-  }
-});
+module.exports = _.flow(
+  mergeWebpackConfig.bind(null, {}, testConfig),
+  coverageConfig(),
+  inlineSourcemapsConfig()
+)();

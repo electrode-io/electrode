@@ -2,9 +2,8 @@
 /**
  * Webpack hot configuration
  */
-var path = require("path");
-
 var _ = require("lodash");
+var path = require("path");
 
 var config = require("./webpack.config.dev");
 
@@ -28,4 +27,3 @@ babel.loaders = [].concat(["react-hot"], babel.loaders);
 babel.include = path.join(process.cwd(), "client");
 
 module.exports = config;
-
