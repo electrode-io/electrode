@@ -7,7 +7,7 @@ var MAIN_PATH = require.resolve("@walmart/electrode-archetype-react-app/config/k
 
 var PREPROCESSORS = {};
 
-PREPROCESSORS[MAIN_PATH] = ["webpack"];
+PREPROCESSORS[MAIN_PATH] = ["webpack", "sourcemap"];
 
 module.exports = function (config) {
   config.set({
