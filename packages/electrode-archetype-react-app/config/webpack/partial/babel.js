@@ -11,11 +11,10 @@ module.exports = function (babel) {
           test: /\.jsx?$/,
           exclude: /(node_modules|\bclient\/vendor\b)/,
           // NOTE: webpack.config.hot.js inserts "react-hot" into loaders array
-          loaders: [require.resolve("babel-loader")],
+          loader: require.resolve("babel-loader"),
           query: babel
         }]
       }
     });
   };
 };
-
