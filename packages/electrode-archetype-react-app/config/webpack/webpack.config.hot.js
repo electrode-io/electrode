@@ -7,7 +7,7 @@ var path = require("path");
 var mergeWebpackConfig = require("webpack-partial").default;
 var config = require("./webpack.config.dev");
 
-mergeWebpackConfig(config, {
+config = mergeWebpackConfig(config, {
   devtool: "eval",
   output: {
     publicPath: "http://dev.walmart.com:2992/js"

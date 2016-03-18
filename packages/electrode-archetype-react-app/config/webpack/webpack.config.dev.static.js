@@ -11,11 +11,11 @@ var mergeWebpackConfig = require("webpack-partial").default;
 
 var config = require("./webpack.config");
 
-mergeWebpackConfig(config, {
+config = mergeWebpackConfig(config, {
   output: {
     filename: "bundle.dev.js",
     path: path.join(process.cwd(), "dist/js"),
-    publicPath: "/js/"
+    publicPath: "http://dev.walmart.com:2992/js"
   },
   plugins: [
     new webpack.SourceMapDevToolPlugin("[file].map"),
