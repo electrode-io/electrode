@@ -4,22 +4,19 @@
  */
 var _ = require("lodash");
 var path = require("path");
-
+var mergeWebpackConfig = require("webpack-partial").default;
 var config = require("./webpack.config.dev");
 
-_.merge(config, {
+mergeWebpackConfig(config, {
   devtool: "eval",
   output: {
     publicPath: "http://dev.walmart.com:2992/js"
   },
   entry: [
     "webpack-dev-server/client?http://dev.walmart.com:2992",
-    "webpack/hot/only-dev-server"
+    "webpack/hot/only-dev-server",
+    config.entry
   ]
-}, function unionArray(a, b) {
-  if (_.isArray(b) && _.isArray(a)) {
-    return _.union(a, b);
-  }
 });
 
 config.devServer = {}; // use webpack default verbosity
