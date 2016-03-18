@@ -1,7 +1,13 @@
 "use strict";
 
+var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 var mergeWebpackConfig = require("webpack-partial").default;
 var urlLoader = require.resolve("url-loader");
+var isoToolsPlugin = new WebpackIsomorphicToolsPlugin(require("../webpack-isomorphic-tools-config"));
+
+if (process.env.NODE_ENV !== "production") {
+  isoToolsPlugin = isoToolsPlugin.development();
+}
 
 module.exports = function () {
   return function (config) {
@@ -9,10 +15,13 @@ module.exports = function () {
       module: {
         loaders: [{
           name: "images",
-          test: /\.(svg|png|gif|jpe?g)$/,
+          test: isoToolsPlugin.regular_expression('images'),
           loader: urlLoader + "?limit=10000"
         }]
-      }
+      },
+      plugins: [
+        isoToolsPlugin
+      ]
     });
   };
 };
