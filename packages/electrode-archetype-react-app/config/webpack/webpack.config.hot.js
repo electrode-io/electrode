@@ -7,20 +7,27 @@ var path = require("path");
 
 var config = require("./webpack.config.dev");
 
-config.devtool = "eval";
-config.devServer = {}; // use webpack default verbosity
-config.entry = [
-  "webpack-dev-server/client?http://dev.walmart.com:2992",
-  "webpack/hot/only-dev-server",
-  config.entry
-];
-config.output.publicPath = "http://dev.walmart.com:2992/js";
+_.merge(config, {
+  devtool: "eval",
+  output: {
+    publicPath: "http://dev.walmart.com:2992/js"
+  },
+  entry: [
+    "webpack-dev-server/client?http://dev.walmart.com:2992",
+    "webpack/hot/only-dev-server"
+  ]
+}, function unionArray(a, b) {
+  if (_.isArray(b) && _.isArray(a)) {
+    return _.union(a, b);
+  }
+});
 
+config.devServer = {}; // use webpack default verbosity
 
 /****
  * Hot Mods
  */
-var babel = _.find(config.module.loaders, { name: "babel" });
+var babel = _.find(config.module.loaders, {name: "babel"});
 
 // update babel loaders for hot loading
 babel.loaders = [].concat(["react-hot"], babel.loaders);
