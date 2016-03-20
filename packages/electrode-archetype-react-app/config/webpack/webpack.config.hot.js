@@ -5,19 +5,18 @@
 var _ = require("lodash");
 var path = require("path");
 var mergeWebpackConfig = require("webpack-partial").default;
-var config = require("./webpack.config.dev");
+var hotConfig = require("./partial/hot");
+var baseConfig = require("./base.js");
+var defineConfig = require("./partial/define.js");
+var devConfig = require("./partial/dev.js");
 
-config = mergeWebpackConfig(config, {
-  devtool: "eval",
-  output: {
-    publicPath: "http://dev.walmart.com:2992/js"
-  },
-  entry: [
-    "webpack-dev-server/client?http://dev.walmart.com:2992",
-    "webpack/hot/only-dev-server",
-    config.entry
-  ]
-});
+var config = module.exports = _.flow(
+  mergeWebpackConfig.bind(null, {}, baseConfig),
+  defineConfig(),
+  devConfig(),
+  hotConfig()
+)();
+
 
 config.devServer = {}; // use webpack default verbosity
 
