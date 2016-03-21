@@ -2,7 +2,7 @@
 
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 var mergeWebpackConfig = require("webpack-partial").default;
-var urlLoader = require.resolve("url-loader");
+var cdnLoader = require.resolve("@walmart/cdn-file-loader");
 var isoToolsPlugin = new WebpackIsomorphicToolsPlugin(require("../webpack-isomorphic-tools-config"));
 
 if (process.env.NODE_ENV !== "production") {
@@ -16,7 +16,7 @@ module.exports = function () {
         loaders: [{
           name: "images",
           test: isoToolsPlugin.regular_expression('images'),
-          loader: urlLoader + "?limit=10000"
+          loader: cdnLoader + "?limit=10000"
         }]
       },
       plugins: [
