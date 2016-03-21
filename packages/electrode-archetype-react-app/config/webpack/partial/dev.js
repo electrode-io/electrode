@@ -9,7 +9,7 @@ module.exports = function () {
     return mergeWebpackConfig(config, {
       output: {
         filename: "bundle.dev.js",
-        publicPath: "http://dev.walmart.com:2992/js"
+        publicPath: "http://dev.walmart.com:2992/js/"
       },
       plugins: [
         new webpack.SourceMapDevToolPlugin("[file].map"),
