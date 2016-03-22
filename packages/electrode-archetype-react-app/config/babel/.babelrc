@@ -11,6 +11,7 @@
     ["babel-plugin-react-intl", {
       "messagesDir": "./tmp/messages/",
       "enforceDescriptions": true
-    }]
+    }],
+    "transform-node-env-inline"
   ]
 }
