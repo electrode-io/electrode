@@ -1,30 +1,16 @@
 "use strict";
 /**
- * Webpack dev configuration
+ * Webpack dev static configuration
  */
-var webpack = require("webpack");
-var path = require("path");
+var _ = require("lodash");
+var mergeWebpackConfig = require("webpack-partial").default;
 
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
+var baseConfig = require("./base.js");
+var defineConfig = require("./partial/define.js");
+var devConfig = require("./partial/dev.js");
 
-var config = require("./webpack.config");
-
-config.output.filename = "bundle.dev.js";
-
-config.output = {
-  filename: "bundle.dev.js",
-  path: path.join(process.cwd(), "dist/js"),
-  publicPath: "/js/"
-};
-
-config.plugins = [
-  new webpack.SourceMapDevToolPlugin("[file].map"),
-  new ExtractTextPlugin("style.css"),
-  new webpack.NoErrorsPlugin(),
-  new StatsWriterPlugin({
-    filename: "../server/stats.json"
-  })
-];
-
-module.exports = config;
+module.exports = _.flow(
+  mergeWebpackConfig.bind(null, {}, baseConfig),
+  defineConfig(),
+  devConfig()
+)();
