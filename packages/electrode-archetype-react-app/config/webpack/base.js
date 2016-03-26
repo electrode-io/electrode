@@ -20,7 +20,7 @@ var baseConfig = {
   entry: "./app.jsx",
   output: {
     path: path.join(process.cwd(), "dist/js"),
-    publicPath: "/js/",
+    publicPath: "./",
     filename: "bundle.[hash].js"
   },
   resolve: {
