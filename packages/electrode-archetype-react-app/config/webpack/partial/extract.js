@@ -21,10 +21,9 @@ module.exports = function () {
         }]
       },
       stylus: {
-        use: [autoprefixer({ browsers: ["last 2 versions"] })]
+        use: [autoprefixer({ browsers: ["last 2 versions", "ie >= 9"] })]
       },
       plugins: [new ExtractTextPlugin("style.[hash].css")]
     });
   };
 };
-
