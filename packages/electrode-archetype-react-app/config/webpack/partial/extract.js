@@ -11,7 +11,7 @@ var stylusLoader = require.resolve("stylus-loader");
 
 module.exports = function () {
   return function (config) {
-    var query = cssLoader + "!" + stylusLoader;
+    var query = cssLoader + "?-autoprefixer!" + stylusLoader;
     return mergeWebpackConfig(config, {
       module: {
         loaders: [{
