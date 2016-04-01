@@ -11,7 +11,7 @@ module.exports = function () {
         // TODO: And, switch to internal sourcemaps server.
         // https://gecgithub01.walmart.com/electrode/electrode-archetype-react-app/issues/39
         new SourceMapDevToolPlugin(
-          "../map/bundle.[hash].js.map",
+          "../map/[file].map",
           "\n//# sourceMappingURL=http://dev.walmart.com:2992/dist/map/[url]"
         )
       ]
