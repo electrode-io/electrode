@@ -9,15 +9,18 @@ module.exports = function () {
   return function (config) {
     return mergeWebpackConfig(config, {
       module: {
-        loaders: [{
-          name: "woff",
-          test: /\.woff(2)?$/,
-          loader: urlLoader + "?limit=10000&mimetype=application/font-woff"
-        }, {
-          name: "fonts",
-          test: /\.(ttf|eot)$/,
-          loader: fileLoader
-        }]
+        loaders: [
+          {
+            name: "woff",
+            test: /\.woff(2)?$/i,
+            loader: urlLoader + "?limit=10000&mimetype=application/font-woff!isomorphic"
+          },
+          {
+            name: "fonts",
+            test: /\.(ttf|eot)$/i,
+            loader: fileLoader + "!isomorphic"
+          }
+        ]
       }
     });
   };

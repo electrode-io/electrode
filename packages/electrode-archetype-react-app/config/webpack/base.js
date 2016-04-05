@@ -10,6 +10,7 @@ var extractStylesConfig = require("./partial/extract");
 var fontsConfig = require("./partial/fonts");
 var imagesConfig = require("./partial/images");
 var statsConfig = require("./partial/stats");
+var isomorphicConfig = require("./partial/isomorphic");
 
 var archetypeNodeModules = path.join(__dirname, "../../node_modules");
 
@@ -20,7 +21,6 @@ var baseConfig = {
   entry: "./app.jsx",
   output: {
     path: path.join(process.cwd(), "dist/js"),
-    publicPath: "./",
     filename: "bundle.[hash].js"
   },
   resolve: {
@@ -39,5 +39,6 @@ module.exports = _.flow(
   extractStylesConfig(),
   fontsConfig(),
   imagesConfig(),
-  statsConfig()
+  statsConfig(),
+  isomorphicConfig()
 )();
