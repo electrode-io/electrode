@@ -8,6 +8,7 @@ module.exports = function () {
     return mergeWebpackConfig(config, {
       plugins: [
         new IsomorphicLoaderPlugin({
+          assetsFile: "../isomorphic-assets.json",
           webpackDev: {
             url: "http://dev.walmart.com:2992",
             addUrl: false
