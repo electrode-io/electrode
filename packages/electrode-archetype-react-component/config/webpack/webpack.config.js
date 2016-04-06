@@ -1,6 +1,6 @@
 "use strict";
 
-const compose = require("lodash/function/flowRight");
+const _ = require("lodash");
 const path = require("path");
 
 const babelConfig = require("./partial/babel.js");
@@ -32,7 +32,7 @@ const baseConfiguration = {
   }
 };
 
-const createConfig = compose(
+const createConfig = _.flowRight(
   babelConfig(),
   cssConfig(),
   defineConfig(),
