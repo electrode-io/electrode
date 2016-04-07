@@ -20,7 +20,8 @@ const baseConfiguration = {
   entry: path.join(process.cwd(), "src/index.js"),
   output: {
     path: path.join(process.cwd(), "dist"),
-    filename: "bundle.min.js"
+    filename: "bundle.min.js",
+    libraryTarget: "umd"
   },
   resolve: {
     root: [archetypeNodeModules, process.cwd()],
