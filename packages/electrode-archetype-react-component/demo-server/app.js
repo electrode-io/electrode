@@ -6,11 +6,11 @@ const Resolver = require("react-resolver").Resolver;
 const Router = require("react-router").Router;
 const createHistory = require("history").createHistory;
 
+require("./demo.styl");
+
 const routes = require("./client-routes");
 
 const content = document.querySelector(".js-content");
-
-require("./demo.styl");
 
 Resolver.render(() => {
   return React.createElement(
