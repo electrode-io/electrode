@@ -6,6 +6,7 @@ const path = require("path");
 const babelConfig = require("./partial/babel.js");
 const cssConfig = require("./partial/css.js");
 const defineConfig = require("./partial/define.js");
+const fontsConfig = require("./partial/fonts");
 const imageConfig = require("./partial/images.js");
 const jsonConfig = require("./partial/json.js");
 const optimizeConfig = require("./partial/optimize.js");
@@ -37,6 +38,7 @@ const createConfig = _.flowRight(
   babelConfig(),
   cssConfig(),
   defineConfig(),
+  fontsConfig(),
   imageConfig(),
   jsonConfig(),
   optimizeConfig(),
