@@ -3,6 +3,7 @@
 var mergeWebpackConfig = require("webpack-partial").default;
 
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var CSSSplitPlugin = require("css-split-webpack-plugin").default;
 
 var autoprefixer = require("autoprefixer-stylus");
 var cssLoader = require.resolve("css-loader");
@@ -23,7 +24,10 @@ module.exports = function () {
       stylus: {
         use: [autoprefixer({ browsers: ["last 2 versions", "ie >= 9"] })]
       },
-      plugins: [new ExtractTextPlugin("style.[hash].css")]
+      plugins: [
+        new ExtractTextPlugin("style.[hash].css"),
+        new CSSSplitPlugin({size: 4000, imports: true})
+      ]
     });
   };
 };
