@@ -2,7 +2,7 @@
 /**
  * Webpack frontend test configuration.
  */
-var archDevRequire = require("builder-react-component-dev/require");
+var archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
 var path = require("path");
 var _ = archDevRequire("lodash");
 var prodCfg = require("./webpack.config");

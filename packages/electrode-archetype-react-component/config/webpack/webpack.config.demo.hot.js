@@ -1,6 +1,6 @@
 "use strict";
 
-var archDevRequire = require("builder-react-component-dev/require");
+var archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
 var webpack = archDevRequire("webpack");
 var _ = archDevRequire("lodash");
 var base = require("./webpack.config.demo.dev");

@@ -1,7 +1,7 @@
 /*globals __dirname:false */
 "use strict";
 
-var archDevRequire = require("builder-react-component-dev/require");
+var archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
 var webpack = archDevRequire("webpack");
 var path = require("path");
 var base = require("./webpack.config");
