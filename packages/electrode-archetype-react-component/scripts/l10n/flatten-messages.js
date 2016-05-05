@@ -1,8 +1,9 @@
-var _ = require("lodash");
-var Promise = require("bluebird");
+var archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
+var _ = archDevRequire("lodash");
+var Promise = archDevRequire("bluebird");
 
-var fs = Promise.promisifyAll(require("fs-extra"));
-var getFilePaths = Promise.promisify(require("glob"));
+var fs = Promise.promisifyAll(archDevRequire("fs-extra"));
+var getFilePaths = Promise.promisify(archDevRequire("glob"));
 
 var MESSAGES_PATTERN = "./tmp/messages/**/*.json";
 var RAW_MESSAGES_DIR = "./dist/";
