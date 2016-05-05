@@ -3,10 +3,11 @@
 /**
  * Webpack frontend test (w/ coverage) configuration.
  */
-var _ = require("lodash");
+var archDevRequire = require("builder-react-component-dev/require");
+var _ = archDevRequire("lodash");
 var testCfg = require("./webpack.config.test");
 
-var ispartaLoader = require.resolve("isparta-loader");
+var ispartaLoader = archDevRequire.resolve("isparta-loader");
 
 module.exports = _.merge({}, testCfg, {
   module: {

@@ -2,8 +2,9 @@
 /**
  * Webpack frontend test configuration.
  */
+var archDevRequire = require("builder-react-component-dev/require");
 var path = require("path");
-var _ = require("lodash");
+var _ = archDevRequire("lodash");
 var prodCfg = require("./webpack.config");
 
 /*
@@ -38,7 +39,7 @@ module.exports = {
     alias: {
       // Allow root import of `src/FOO` from ROOT/src.
       src: path.join(process.cwd(), "src"),
-      sinon: require.resolve("sinon/pkg/sinon")
+      sinon: archDevRequire.resolve("sinon/pkg/sinon")
     },
     modulesDirectories: [
       "node_modules",
