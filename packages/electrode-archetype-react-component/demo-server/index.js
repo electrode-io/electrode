@@ -1,15 +1,16 @@
 "use strict";
-const Promise = require("bluebird");
+const archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
+const Promise = archDevRequire("bluebird");
 const path = require("path");
-const fs = Promise.promisifyAll(require("fs-extra"));
-const _ = require("lodash");
+const fs = Promise.promisifyAll(archDevRequire("fs-extra"));
+const _ = archDevRequire("lodash");
 
 const babPath = "./node_modules/@walmart/electrode-archetype-react-component/config/babel/.babelrc";
 const babelConfig = JSON.parse(fs.readFileSync(path.resolve(babPath), "utf8"));
 
-require("babel-core/register")(babelConfig);
+archDevRequire("babel-core/register")(babelConfig);
 
-const electrodeServer = require("@walmart/electrode-server");
+const electrodeServer = archDevRequire("@walmart/electrode-server");
 const defaultElectrodeServerConfig = require("./default-electrode-server-config");
 
 const overrideConfigPath = path.join(process.cwd(), "archetype-demo-server.config.js");
