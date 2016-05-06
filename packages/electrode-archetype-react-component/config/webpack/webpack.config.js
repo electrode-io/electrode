@@ -14,6 +14,7 @@ const sourceMapsConfig = require("./partial/sourcemaps.js");
 const stylusConfig = require("./partial/stylus.js");
 
 const archetypeNodeModules = path.join(__dirname, "../../", "node_modules");
+const archetypeDevNodeModules = path.join("../../dev/", "node_modules");
 
 const baseConfiguration = {
   cache: true,
@@ -25,7 +26,7 @@ const baseConfiguration = {
     libraryTarget: "umd"
   },
   resolve: {
-    root: [archetypeNodeModules, process.cwd()],
+    root: [archetypeNodeModules, archetypeDevNodeModules, process.cwd()],
     modulesDirectories: ["node_modules"],
     extensions: ["", ".js", ".jsx"]
   },

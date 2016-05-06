@@ -1,11 +1,10 @@
 /*global document:false*/
 "use strict";
 // NO JSX because this is running from `/node_modules`
-const archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
-const React = archDevRequire("react");
-const Resolver = archDevRequire("react-resolver").Resolver;
-const Router = archDevRequire("react-router").Router;
-const createHistory = archDevRequire("history").createHistory;
+const React = require("react");
+const Resolver = require("react-resolver").Resolver;
+const Router = require("react-router").Router;
+const createHistory = require("history").createHistory;
 
 require("./demo.styl");
 
@@ -13,7 +12,7 @@ const routes = require("./client-routes");
 
 const content = document.querySelector(".js-content");
 
-archDevRequire("@walmart/lithe-core");
+require("@walmart/lithe-core");
 
 Resolver.render(() => {
   return React.createElement(
