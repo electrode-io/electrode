@@ -14,7 +14,13 @@ const sourceMapsConfig = require("./partial/sourcemaps.js");
 const stylusConfig = require("./partial/stylus.js");
 
 const archetypeNodeModules = path.join(__dirname, "../../", "node_modules");
-const archetypeDevNodeModules = path.join("../../dev/", "node_modules");
+const archetypeDevNodeModules = path.join(
+  // A normal `require.resolve` looks at `package.json:main`. We instead want
+  // just the _directory_ of the module. So use heuristic of finding dir of
+  // package.json which **must** exist at a predictable location.
+  path.dirname(require.resolve("@walmart/electrode-archetype-react-component-dev/package.json")),
+  "node_modules"
+);
 
 const baseConfiguration = {
   cache: true,
