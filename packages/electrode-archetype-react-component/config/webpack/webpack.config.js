@@ -31,7 +31,7 @@ const baseConfiguration = {
     extensions: ["", ".js", ".jsx"]
   },
   resolveLoader: {
-    root: [archetypeNodeModules, process.cwd()]
+    root: [archetypeNodeModules, archetypeDevNodeModules, process.cwd()]
   }
 };
 
