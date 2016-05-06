@@ -1,7 +1,8 @@
 "use strict";
 
-const mergeWebpackConfig = require("webpack-partial").default;
-const SourceMapDevToolPlugin = require("webpack").SourceMapDevToolPlugin;
+const archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
+const mergeWebpackConfig = archDevRequire("webpack-partial").default;
+const SourceMapDevToolPlugin = archDevRequire("webpack").SourceMapDevToolPlugin;
 
 module.exports = () => (config) => {
   // TODO: Generate real URLs using SOURCE_MAP_URL.

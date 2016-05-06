@@ -1,7 +1,8 @@
 "use strict";
 
-const mergeWebpackConfig = require("webpack-partial").default;
-const optimize = require("webpack").optimize;
+const archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
+const mergeWebpackConfig = archDevRequire("webpack-partial").default;
+const optimize = archDevRequire("webpack").optimize;
 
 module.exports = () => (config) => mergeWebpackConfig(config, {
   plugins: [
