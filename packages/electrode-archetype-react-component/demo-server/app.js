@@ -12,8 +12,6 @@ const routes = require("./client-routes");
 
 const content = document.querySelector(".js-content");
 
-require("@walmart/lithe-core");
-
 Resolver.render(() => {
   return React.createElement(
     Router,
