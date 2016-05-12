@@ -12,7 +12,8 @@
       "messagesDir": "./tmp/messages/",
       "enforceDescriptions": true
     }],
-    "transform-node-env-inline"
+    "transform-node-env-inline",
+    "lodash"
   ],
   "env": {
     "production": {
