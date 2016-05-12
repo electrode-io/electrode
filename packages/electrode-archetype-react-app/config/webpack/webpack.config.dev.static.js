@@ -2,8 +2,9 @@
 /**
  * Webpack dev static configuration
  */
-var _ = require("lodash");
-var mergeWebpackConfig = require("webpack-partial").default;
+var archDevRequire = require("@walmart/electrode-archetype-react-app-dev/require");
+var _ = archDevRequire("lodash");
+var mergeWebpackConfig = archDevRequire("webpack-partial").default;
 
 var baseConfig = require("./base.js");
 var defineConfig = require("./partial/define.js");

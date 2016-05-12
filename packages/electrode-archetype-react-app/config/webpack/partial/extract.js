@@ -1,14 +1,15 @@
 "use strict";
 
-var mergeWebpackConfig = require("webpack-partial").default;
+var archDevRequire = require("@walmart/electrode-archetype-react-app-dev/require");
+var mergeWebpackConfig = archDevRequire("webpack-partial").default;
 
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var CSSSplitPlugin = require("css-split-webpack-plugin").default;
+var ExtractTextPlugin = archDevRequire("extract-text-webpack-plugin");
+var CSSSplitPlugin = archDevRequire("css-split-webpack-plugin").default;
 
-var autoprefixer = require("autoprefixer-stylus");
-var cssLoader = require.resolve("css-loader");
-var styleLoader = require.resolve("style-loader");
-var stylusLoader = require.resolve("stylus-loader");
+var autoprefixer = archDevRequire("autoprefixer-stylus");
+var cssLoader = archDevRequire.resolve("css-loader");
+var styleLoader = archDevRequire.resolve("style-loader");
+var stylusLoader = archDevRequire.resolve("stylus-loader");
 
 module.exports = function () {
   return function (config) {

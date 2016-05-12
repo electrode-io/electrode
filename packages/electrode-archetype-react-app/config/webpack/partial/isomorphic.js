@@ -1,7 +1,8 @@
 "use strict";
 
-var IsomorphicLoaderPlugin = require("isomorphic-loader/lib/webpack-plugin");
-var mergeWebpackConfig = require("webpack-partial").default;
+var archDevRequire = require("@walmart/electrode-archetype-react-app-dev/require");
+var IsomorphicLoaderPlugin = archDevRequire("isomorphic-loader/lib/webpack-plugin");
+var mergeWebpackConfig = archDevRequire("webpack-partial").default;
 
 module.exports = function () {
   return function (config) {

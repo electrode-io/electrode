@@ -1,7 +1,8 @@
 "use strict";
 
-var mergeWebpackConfig = require("webpack-partial").default;
-var ispartaLoader = require.resolve("isparta-loader");
+var archDevRequire = require("@walmart/electrode-archetype-react-app-dev/require");
+var mergeWebpackConfig = archDevRequire("webpack-partial").default;
+var ispartaLoader = archDevRequire.resolve("isparta-loader");
 
 module.exports = function () {
   return function (config) {

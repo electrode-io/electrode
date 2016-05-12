@@ -1,7 +1,8 @@
 "use strict";
 
-var mergeWebpackConfig = require("webpack-partial").default;
-var StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
+var archDevRequire = require("@walmart/electrode-archetype-react-app-dev/require");
+var mergeWebpackConfig = archDevRequire("webpack-partial").default;
+var StatsWriterPlugin = archDevRequire("webpack-stats-plugin").StatsWriterPlugin;
 
 module.exports = function () {
   return function (config) {

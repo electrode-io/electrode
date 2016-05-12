@@ -14,6 +14,13 @@ var statsConfig = require("./partial/stats");
 var isomorphicConfig = require("./partial/isomorphic");
 
 var archetypeNodeModules = path.join(__dirname, "../../node_modules");
+var archetypeDevNodeModules = path.join(
+  // A normal `require.resolve` looks at `package.json:main`. We instead want
+  // just the _directory_ of the module. So use heuristic of finding dir of
+  // package.json which **must** exist at a predictable location.
+  path.dirname(require.resolve("@walmart/electrode-archetype-react-app-dev/package.json")),
+  "node_modules"
+);
 
 var context = path.join(process.cwd(), "client");
 
@@ -39,12 +46,12 @@ var baseConfig = {
     filename: "bundle.[hash].js"
   },
   resolve: {
-    root: [archetypeNodeModules, process.cwd()],
+    root: [archetypeNodeModules, archetypeDevNodeModules, process.cwd()],
     modulesDirectories: ["client", "node_modules", "node_modules/@walmart"],
     extensions: ["", ".js", ".jsx"]
   },
   resolveLoader: {
-    root: [archetypeNodeModules, process.cwd()]
+    root: [archetypeNodeModules, archetypeDevNodeModules, process.cwd()]
   }
 };
 
