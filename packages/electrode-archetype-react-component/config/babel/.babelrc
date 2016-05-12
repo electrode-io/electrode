@@ -11,7 +11,8 @@
     ["babel-plugin-react-intl", {
       "messagesDir": "./lib/tmp/messages/",
       "enforceDescriptions": true
-    }]
+    }],
+    "lodash"
   ],
   "env": {
     "production": {
