@@ -1,6 +1,6 @@
 "use strict";
 
-var archDevRequire("@walmart/electrode-archetype-react-app-dev/require");
+var archDevRequire = require("@walmart/electrode-archetype-react-app-dev/require");
 archDevRequire("babel-polyfill");
 
 /**
