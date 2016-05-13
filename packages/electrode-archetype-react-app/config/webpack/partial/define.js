@@ -1,7 +1,8 @@
 "use strict";
 
-var mergeWebpackConfig = require("webpack-partial").default;
-var DefinePlugin = require("webpack").DefinePlugin;
+var archDevRequire = require("@walmart/electrode-archetype-react-app-dev/require");
+var mergeWebpackConfig = archDevRequire("webpack-partial").default;
+var DefinePlugin = archDevRequire("webpack").DefinePlugin;
 
 module.exports = function () {
   return function (config) {

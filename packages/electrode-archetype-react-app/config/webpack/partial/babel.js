@@ -1,6 +1,7 @@
 "use strict";
 
-var mergeWebpackConfig = require("webpack-partial").default;
+var archDevRequire = require("@walmart/electrode-archetype-react-app-dev/require");
+var mergeWebpackConfig = archDevRequire("webpack-partial").default;
 
 module.exports = function (babel) {
   return function (config) {
@@ -11,7 +12,7 @@ module.exports = function (babel) {
           test: /\.jsx?$/,
           exclude: /(node_modules|\bclient\/vendor\b)/,
           // NOTE: webpack.config.hot.js inserts "react-hot" into loaders array
-          loader: require.resolve("babel-loader"),
+          loader: archDevRequire.resolve("babel-loader"),
           query: babel
         }]
       }

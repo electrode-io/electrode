@@ -2,9 +2,10 @@
 /**
  * Webpack hot configuration
  */
-var _ = require("lodash");
+var archDevRequire = require("@walmart/electrode-archetype-react-app-dev/require");
+var _ = archDevRequire("lodash");
 var path = require("path");
-var mergeWebpackConfig = require("webpack-partial").default;
+var mergeWebpackConfig = archDevRequire("webpack-partial").default;
 var hotConfig = require("./partial/hot");
 var baseConfig = require("./base.js");
 var defineConfig = require("./partial/define.js");

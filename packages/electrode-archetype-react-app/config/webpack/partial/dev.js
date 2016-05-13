@@ -1,8 +1,9 @@
 "use strict";
 
-var mergeWebpackConfig = require("webpack-partial").default;
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var webpack = require("webpack");
+var archDevRequire = require("@walmart/electrode-archetype-react-app-dev/require");
+var mergeWebpackConfig = archDevRequire("webpack-partial").default;
+var ExtractTextPlugin = archDevRequire("extract-text-webpack-plugin");
+var webpack = archDevRequire("webpack");
 
 module.exports = function () {
   return function (config) {

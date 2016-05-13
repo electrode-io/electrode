@@ -1,7 +1,8 @@
 "use strict";
 
-var _ = require("lodash");
-var mergeWebpackConfig = require("webpack-partial").default;
+var archDevRequire = require("@walmart/electrode-archetype-react-app-dev/require");
+var _ = archDevRequire("lodash");
+var mergeWebpackConfig = archDevRequire("webpack-partial").default;
 
 var testConfig = require("./base-test.js");
 var inlineSourcemapsConfig = require("./partial/sourcemaps-inline");

@@ -1,6 +1,7 @@
 "use strict";
 
-var mergeWebpackConfig = require("webpack-partial").default;
+var archDevRequire = require("@walmart/electrode-archetype-react-app-dev/require");
+var mergeWebpackConfig = archDevRequire("webpack-partial").default;
 var path = require("path");
 
 var baseConfig = require("./base.js");
@@ -33,7 +34,7 @@ var testConfig = {
     alias: {
       // Allow root import of `src/FOO` from ROOT/src.
       src: process.cwd(),
-      sinon: require.resolve("sinon/pkg/sinon")
+      sinon: archDevRequire.resolve("sinon/pkg/sinon")
     }
   },
   // Enzyme depends jsdom and cheerio being global to render their DOM.
