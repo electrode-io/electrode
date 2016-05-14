@@ -13,7 +13,8 @@
       "messagesDir": "./lib/tmp/messages/",
       "enforceDescriptions": true
     }],
-    "lodash"
+    "lodash",
+    "transform-runtime"
   ],
   "env": {
     "production": {
