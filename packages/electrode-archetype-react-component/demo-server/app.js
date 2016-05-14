@@ -1,10 +1,11 @@
 /*global document:false*/
 "use strict";
 // NO JSX because this is running from `/node_modules`
-const React = require("react");
-const Resolver = require("react-resolver").Resolver;
-const Router = require("react-router").Router;
-const createHistory = require("history").createHistory;
+const archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
+const React = archDevRequire("react");
+const Resolver = archDevRequire("react-resolver").Resolver;
+const Router = archDevRequire("react-router").Router;
+const createHistory = archDevRequire("history").createHistory;
 
 require("./demo.styl");
 

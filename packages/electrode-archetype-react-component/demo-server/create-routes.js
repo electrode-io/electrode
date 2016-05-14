@@ -1,7 +1,8 @@
 "use strict";
 // NO JSX because this is running from `/node_modules`
-const React = require("react");
-const ReactRouter = require("react-router");
+const archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
+const React = archDevRequire("react");
+const ReactRouter = archDevRequire("react-router");
 const IndexRoute = ReactRouter.IndexRoute;
 const Route = ReactRouter.Route;
 
