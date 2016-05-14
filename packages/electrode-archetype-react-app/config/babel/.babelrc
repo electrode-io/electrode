@@ -14,7 +14,8 @@
       "enforceDescriptions": true
     }],
     "transform-node-env-inline",
-    "lodash"
+    "lodash",
+    "transform-runtime"
   ],
   "env": {
     "production": {
