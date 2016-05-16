@@ -2,9 +2,13 @@
 /**
  * Webpack frontend test configuration.
  */
-var archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
 var path = require("path");
+
+var archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
 var _ = archDevRequire("lodash");
+var sinonPkg = archDevRequire.resolve("sinon/pkg/sinon");
+
+var karmaEntry = require.resolve("@walmart/electrode-archetype-react-component/config/karma/entry");
 var prodCfg = require("./webpack.config");
 
 /*
@@ -29,7 +33,7 @@ var _archNodeModules = function (arch) {
 module.exports = {
   cache: true,
   context: path.join(process.cwd(), "test/client"),
-  entry: require.resolve("@walmart/electrode-archetype-react-component/config/karma/entry"),
+  entry: karmaEntry,
   output: {
     path: process.cwd(),
     filename: "bundle.js",
@@ -39,7 +43,7 @@ module.exports = {
     alias: {
       // Allow root import of `src/FOO` from ROOT/src.
       src: path.join(process.cwd(), "src"),
-      sinon: archDevRequire.resolve("sinon/pkg/sinon")
+      sinon: sinonPkg
     },
     modulesDirectories: [
       "node_modules",

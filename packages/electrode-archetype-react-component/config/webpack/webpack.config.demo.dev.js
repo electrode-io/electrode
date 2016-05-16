@@ -1,12 +1,14 @@
 /*globals __dirname:false */
 "use strict";
 
+var path = require("path");
+
 var archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
 var webpack = archDevRequire("webpack");
-var path = require("path");
-var base = require("./webpack.config");
-
 var _ = archDevRequire("lodash");
+
+
+var base = require("./webpack.config");
 
 module.exports = {
   devServer: {

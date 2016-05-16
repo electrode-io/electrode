@@ -5,9 +5,10 @@
  */
 var archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
 var _ = archDevRequire("lodash");
-var testCfg = require("./webpack.config.test");
-
 var ispartaLoader = archDevRequire.resolve("isparta-loader");
+
+
+var testCfg = require("./webpack.config.test");
 
 module.exports = _.merge({}, testCfg, {
   module: {

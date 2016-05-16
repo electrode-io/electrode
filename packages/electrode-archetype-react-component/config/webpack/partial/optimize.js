@@ -3,7 +3,6 @@
 const archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
 const mergeWebpackConfig = archDevRequire("webpack-partial").default;
 const optimize = archDevRequire("webpack").optimize;
-
 const LodashModuleReplacementPlugin = archDevRequire("lodash-webpack-plugin");
 
 module.exports = () => (config) => mergeWebpackConfig(config, {

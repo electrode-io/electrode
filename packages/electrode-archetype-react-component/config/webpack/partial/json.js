@@ -2,13 +2,14 @@
 
 const archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
 const mergeWebpackConfig = archDevRequire("webpack-partial").default;
+const jsonLoader = archDevRequire.resolve("json-loader");
 
 module.exports = () => (config) => mergeWebpackConfig(config, {
   module: {
     loaders: [{
       name: "json",
       test: /\.json$/,
-      loader: archDevRequire.resolve("json-loader")
+      loader: jsonLoader
     }]
   }
 });
