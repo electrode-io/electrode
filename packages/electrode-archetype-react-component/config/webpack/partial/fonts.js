@@ -1,8 +1,6 @@
 "use strict";
 const archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
-
 const mergeWebpackConfig = archDevRequire("webpack-partial").default;
-
 const urlLoader = archDevRequire.resolve("url-loader");
 const fileLoader = archDevRequire.resolve("file-loader");
 

@@ -1,8 +1,9 @@
 "use strict";
-const archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
-
-const _ = archDevRequire("lodash");
 const path = require("path");
+
+const archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
+const _ = archDevRequire("lodash");
+
 
 const babelConfig = require("./partial/babel.js");
 const cssConfig = require("./partial/css.js");

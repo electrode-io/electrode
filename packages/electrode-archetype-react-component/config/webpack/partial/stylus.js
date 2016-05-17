@@ -2,7 +2,6 @@
 
 const archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
 const mergeWebpackConfig = archDevRequire("webpack-partial").default;
-
 const styleLoader = archDevRequire.resolve("style-loader");
 const cssLoader = archDevRequire.resolve("css-loader");
 const stylusLoader = archDevRequire.resolve("stylus-loader");

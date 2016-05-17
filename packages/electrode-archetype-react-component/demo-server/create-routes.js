@@ -1,8 +1,12 @@
 "use strict";
 // NO JSX because this is running from `/node_modules`
-const archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
-const React = archDevRequire("react");
-const ReactRouter = archDevRequire("react-router");
+
+//
+// Must use static require since this file gets bundled by webpack statically.
+//
+
+const React = require("react");
+const ReactRouter = require("react-router");
 const IndexRoute = ReactRouter.IndexRoute;
 const Route = ReactRouter.Route;
 
