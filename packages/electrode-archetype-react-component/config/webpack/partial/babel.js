@@ -2,7 +2,7 @@
 
 const archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
 const mergeWebpackConfig = archDevRequire("webpack-partial").default;
-const babelLoader = archDevRequire.resolve("babel-loader")
+const babelLoader = archDevRequire.resolve("babel-loader");
 
 module.exports = (babel) => (config) => mergeWebpackConfig(config, {
   module: {
