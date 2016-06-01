@@ -11,7 +11,7 @@ module.exports = function () {
   if (process.env.OPTIMIZE_STATS === "true") {
     statsOptions.fields = null;
     statsOptions.transform = function (data) {
-      data.modules.forEach((m) => {
+      data.modules.forEach(function (m) {
         delete m.source;
       });
       delete data.children;
@@ -26,4 +26,3 @@ module.exports = function () {
     });
   };
 };
-
