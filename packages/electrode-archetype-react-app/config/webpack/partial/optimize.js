@@ -5,13 +5,18 @@ var mergeWebpackConfig = archDevRequire("webpack-partial").default;
 var optimize = archDevRequire("webpack").optimize;
 var _ = archDevRequire("lodash");
 
-var LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
+// var LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
 
 module.exports = function () {
   return function (config) {
     return mergeWebpackConfig(config, {
       plugins: [
-        new LodashModuleReplacementPlugin(),
+        //
+        // Disabled because it was silently breaking functionality.
+        // TODO: Re-enable when this is resolved.
+        // https://gecgithub01.walmart.com/electrode/electrode-archetype-react-app/issues/158
+        //
+        //new LodashModuleReplacementPlugin(),
         new optimize.DedupePlugin(),
         new optimize.UglifyJsPlugin(_.merge(
           {
