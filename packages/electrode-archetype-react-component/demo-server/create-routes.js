@@ -1,16 +1,16 @@
 "use strict";
-// NO JSX because this is running from `/node_modules`
+// NO JSX/ES6 because this is running from `/node_modules` and needs to be able to run on IE9 as is
 
 //
 // Must use static require since this file gets bundled by webpack statically.
 //
 
-const React = require("react");
-const ReactRouter = require("react-router");
-const IndexRoute = ReactRouter.IndexRoute;
-const Route = ReactRouter.Route;
+var React = require("react");
+var ReactRouter = require("react-router");
+var IndexRoute = ReactRouter.IndexRoute;
+var Route = ReactRouter.Route;
 
-const Page = (props) => {
+var Page = function (props) {
   return React.createElement(
     "div",
     null,
@@ -22,7 +22,7 @@ Page.propTypes = {
   children: React.PropTypes.any
 };
 
-module.exports = (Demo) => {
+module.exports = function (Demo) {
   return React.createElement(
     Route,
     { path: "/", component: Page },
