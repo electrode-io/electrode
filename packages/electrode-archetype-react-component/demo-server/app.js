@@ -17,7 +17,7 @@ var routes = require("./client-routes");
 
 var content = document.querySelector(".js-content");
 
-Resolver.render(function() {
+Resolver.render(function () {
   return React.createElement(
     Router,
     { history: createHistory() },
