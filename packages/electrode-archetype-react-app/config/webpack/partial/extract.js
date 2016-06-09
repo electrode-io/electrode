@@ -26,14 +26,14 @@ module.exports = function () {
         use: [autoprefixer({browsers: ["last 2 versions", "ie >= 9"]})]
       },
       plugins: [
-        new ExtractTextPlugin("style.[hash].css")
-      ].concat(
-        //
-        // Only split CSS for IE9 if env WEBPACK_CSS_SPLIT is defined, due to 3x
-        // slow down with split enabled.
-        //
-        process.env.WEBPACK_CSS_SPLIT ? [new CSSSplitPlugin({size: 4000, imports: true})] : []
-      )
+        new ExtractTextPlugin("style.[hash].css"),
+        /*
+        preserve: default: false. Keep the original unsplit file as well.
+        Sometimes this is desirable if you want to target a specific browser (IE)
+        with the split files and then serve the unsplit ones to everyone else.
+         */
+        new CSSSplitPlugin({size: 4000, imports: true, preserve: true})
+      ]
     });
   };
 };
