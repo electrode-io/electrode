@@ -41,6 +41,11 @@ module.exports = {
   }),
   resolveLoader: base.resolveLoader,
   module: base.module,
+  stylus: {
+    define: {
+      $tenant: process.env.ELECTRODE_TENANT || "walmart"
+    }
+  },
   plugins: [
     new webpack.NoErrorsPlugin()
   ]
