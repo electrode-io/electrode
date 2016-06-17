@@ -9,7 +9,7 @@ var CSSSplitPlugin = archDevRequire("css-split-webpack-plugin").default;
 var autoprefixer = archDevRequire("autoprefixer-stylus");
 var cssLoader = archDevRequire.resolve("css-loader");
 var styleLoader = archDevRequire.resolve("style-loader");
-var stylusLoader = archDevRequire.resolve("stylus-loader");
+var stylusLoader = archDevRequire.resolve("stylus-relative-loader");
 
 module.exports = function () {
   return function (config) {
