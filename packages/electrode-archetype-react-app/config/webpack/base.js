@@ -27,12 +27,20 @@ var context = path.join(process.cwd(), "client");
 /* eslint-disable func-style */
 
 /*
+ * Allow an application to opt in for *multiple* entry points and consequently for
+ * multiple bundles in the app by placing `bundle.config.js` in application root
+ * directory.
+ *
  * If you need to set something like __webpack_public_path__, then your entry file
  * must be vanilla JS because webpack can only process those, so support having a
  * vanilla JS file as entry.
  */
-
 function appEntry() {
+  var entryPath = path.join(process.cwd(), "bundle.config.js");
+  if (fs.existsSync(entryPath)) {
+    return require(entryPath).entry;
+  }
+
   return fs.existsSync(path.join(context, "app.js")) ? "./app.js" : "./app.jsx";
 }
 
@@ -43,7 +51,7 @@ var baseConfig = {
   entry: appEntry(),
   output: {
     path: path.join(process.cwd(), "dist/js"),
-    filename: "bundle.[hash].js"
+    filename: "[name].bundle.[hash].js"
   },
   resolve: {
     root: [archetypeNodeModules, archetypeDevNodeModules, process.cwd()],
