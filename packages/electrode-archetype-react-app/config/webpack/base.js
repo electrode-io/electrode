@@ -36,7 +36,7 @@ var context = path.join(process.cwd(), "client");
  * vanilla JS file as entry.
  */
 function appEntry() {
-  var entryPath = path.join(process.cwd(), "bundle.config.js");
+  var entryPath = path.join(process.cwd(), "platform.config.js");
   if (fs.existsSync(entryPath)) {
     return require(entryPath).entry;
   }
