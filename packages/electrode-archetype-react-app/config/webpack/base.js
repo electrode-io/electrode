@@ -44,14 +44,20 @@ function appEntry() {
   return fs.existsSync(path.join(context, "app.js")) ? "./app.js" : "./app.jsx";
 }
 
+var entry = appEntry();
+var multiBundle = _.isObject(entry);
+
 var baseConfig = {
+  __wmlMultiBundle: multiBundle,
   cache: true,
   context: context,
   debug: false,
-  entry: appEntry(),
+  entry: entry,
   output: {
     path: path.join(process.cwd(), "dist/js"),
-    filename: "[name].bundle.[hash].js"
+    filename: multiBundle
+      ? "[name].bundle.[hash].js"
+      : "bundle.[hash].js"
   },
   resolve: {
     root: [archetypeNodeModules, archetypeDevNodeModules, process.cwd()],

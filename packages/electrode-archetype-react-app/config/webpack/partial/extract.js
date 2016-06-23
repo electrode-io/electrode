@@ -26,7 +26,10 @@ module.exports = function () {
         use: [autoprefixer({browsers: ["last 2 versions", "ie >= 9"]})]
       },
       plugins: [
-        new ExtractTextPlugin("[name].style.[hash].css"),
+        new ExtractTextPlugin(config.__wmlMultiBundle
+          ? "[name].style.[hash].css"
+          : "style.[hash].css"),
+
         /*
         preserve: default: false. Keep the original unsplit file as well.
         Sometimes this is desirable if you want to target a specific browser (IE)
