@@ -37,8 +37,10 @@ var context = path.join(process.cwd(), "client");
  */
 function appEntry() {
   var entryPath = path.join(context, "entry.config.js");
-  if (fs.existsSync(entryPath)) {
+  try {
     return require(entryPath);
+  } catch (ex) {
+    console.log("Entry point configuration is not found, using default entry point...");
   }
 
   return fs.existsSync(path.join(context, "app.js")) ? "./app.js" : "./app.jsx";
