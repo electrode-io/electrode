@@ -37,11 +37,14 @@ var context = path.join(process.cwd(), "client");
  */
 function appEntry() {
   var entryPath = path.join(context, "entry.config.js");
+
+  /* eslint-disable no-console, global-require */
   try {
     return require(entryPath);
   } catch (ex) {
     console.log("Entry point configuration is not found, using default entry point...");
   }
+  /* eslint-enable no-console, global-require */
 
   return fs.existsSync(path.join(context, "app.js")) ? "./app.js" : "./app.jsx";
 }
