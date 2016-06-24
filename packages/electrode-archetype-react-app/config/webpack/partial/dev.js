@@ -9,12 +9,14 @@ module.exports = function () {
   return function (config) {
     return mergeWebpackConfig(config, {
       output: {
-        filename: "bundle.dev.js",
-        publicPath: "http://dev.walmart.com:2992/js/"
+        publicPath: "http://dev.walmart.com:2992/js/",
+        filename: config.__wmlMultiBundle
+          ? "[name].bundle.dev.js"
+          : "bundle.dev.js",
       },
       plugins: [
         new webpack.SourceMapDevToolPlugin("[file].map"),
-        new ExtractTextPlugin("style.css"),
+        new ExtractTextPlugin(config.__wmlMultiBundle ? "[name].style.css" : "style.css"),
         new webpack.NoErrorsPlugin()
       ]
     });
