@@ -12,7 +12,7 @@ module.exports = function () {
         publicPath: "http://dev.walmart.com:2992/js/",
         filename: config.__wmlMultiBundle
           ? "[name].bundle.dev.js"
-          : "bundle.dev.js",
+          : "bundle.dev.js"
       },
       plugins: [
         new webpack.SourceMapDevToolPlugin("[file].map"),
