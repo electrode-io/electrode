@@ -23,7 +23,7 @@ module.exports = function () {
         }]
       },
       stylus: {
-        use: [autoprefixer({browsers: ["last 2 versions", "ie >= 9"]})]
+        use: [autoprefixer({browsers: ["last 2 versions", "ie >= 9", "> 5%"]})]
       },
       plugins: [
         new ExtractTextPlugin(config.__wmlMultiBundle
