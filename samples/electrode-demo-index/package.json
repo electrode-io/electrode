@@ -1,8 +1,12 @@
 {
   "name": "@walmart/electrode-demo-index",
   "version": "1.0.0",
-  "description": "",
+  "description": "An extendable class for demos in Electrode components",
   "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://gecgithub01.walmart.com/electrode/demo-index.git"
+  },
   "scripts": {
     "preversion": "builder run test",
     "test:dev": "builder run test-frontend",
