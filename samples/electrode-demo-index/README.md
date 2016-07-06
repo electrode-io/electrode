@@ -36,7 +36,8 @@ const components = [{
       </ul>
     )
   }
-} // any additional components here];
+} // any additional components here
+];
 
 export default class Index extends ElectrodeDemoIndex {
 
