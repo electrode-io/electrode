@@ -1,0 +1,30 @@
+{
+  "name": "@walmart/electrode-demo-index",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "preversion": "builder run test",
+    "test:dev": "builder run test-frontend",
+    "test": "builder run check-cov && builder run cov-frontend",
+    "demo": "builder run server-dev",
+    "hot": "builder run server-hot",
+    "build": "npm run generate && builder run build-lib",
+    "generate": "npm run generate-metadata && npm run generate-documentation",
+    "generate-metadata": "electrode-docgen --package ./package.json --src ./src --metadata components.json",
+    "generate-documentation": "electrode-docgen --package ./package.json --src ./src --markdown components.md",
+    "prepublish": "builder run build"
+  },
+  "keywords": [],
+  "author": "Dave Stevens <dstevens@walmartlabs.com>",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "component-playground": "^1.3.0",
+    "react": "^0.14.8"
+  },
+  "devDependencies": {
+    "@walmart/electrode-archetype-react-component": "^10.2.2",
+    "@walmart/electrode-archetype-react-component-dev": "^10.2.2",
+    "builder": "^2.10.1"
+  }
+}
