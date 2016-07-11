@@ -46,7 +46,7 @@ export default class ElectrodeDemoIndex extends Component {
                 <div key={subindex}>
                   {example.title ? <h4>{example.title}</h4> : null}
                   <Playground codeText={example.code}
-                    scope={localScope}
+                    scope={assign(localScope, example.extraScope || {})}
                     noRender={example.noRender}/>
                 </div>
               ))}
