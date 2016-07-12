@@ -1,5 +1,5 @@
 {
   "library": "@walmart/electrode-demo-index",
-  "description": "",
+  "description": "An extendable class for demos in Electrode components",
   "components": []
 }

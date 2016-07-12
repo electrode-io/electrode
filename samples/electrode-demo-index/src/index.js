@@ -42,7 +42,7 @@ export default class ElectrodeDemoIndex extends Component {
             <div key={index}>
               <h3 id={title}>{title}</h3>
               {examples.map((example, subindex) => (
-                <div key={subindex}>
+                <div className="component-section" key={subindex}>
                   {example.title ?
                     <a name={example.title.replace(/\s/g, "").toLowerCase()}/> : null }
                   {example.title ? <h4>{example.title}</h4> : null}
