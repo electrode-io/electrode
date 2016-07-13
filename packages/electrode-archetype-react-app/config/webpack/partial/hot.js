@@ -3,21 +3,21 @@
 var archDevRequire = require("@walmart/electrode-archetype-react-app-dev/require");
 var mergeWebpackConfig = archDevRequire("webpack-partial").default;
 
-function getDefaultEntry(entry) {
+var getDefaultEntry = function (entry) {
   return [
     "webpack-dev-server/client?http://dev.walmart.com:2992",
     "webpack/hot/only-dev-server",
     entry
   ];
-}
+};
 
-function getMultiBundleEntry(entries) {
+var getMultiBundleEntry = function (entries) {
   var multiBundleEntry = {};
   for (var entryName in entries) {
     multiBundleEntry[entryName] = getDefaultEntry(entries[entryName]);
   }
   return multiBundleEntry;
-}
+};
 
 module.exports = function () {
   return function (config) {
