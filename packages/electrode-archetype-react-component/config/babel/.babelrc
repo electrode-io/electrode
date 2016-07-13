@@ -1,0 +1,19 @@
+{
+  "presets": [
+    "es2015",
+    "es2015-loose",
+    "react"
+  ],
+  "plugins": [
+    "babel-plugin-transform-object-rest-spread",
+    "lodash",
+    "transform-runtime"
+  ],
+  "env": {
+    "production": {
+      "plugins": [
+        "babel-plugin-transform-react-constant-elements"
+      ]
+    }
+  }
+}

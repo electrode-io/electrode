@@ -1,0 +1,40 @@
+{
+  "name": "<%= packageName %>",
+  "version": "1.0.0",
+  "description": "<%= packageDescription || packageName %>",
+  "main": "lib/index.js",<% if (packageGitHubOrg) { %>
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/<%= packageGitHubOrg %>/<%= packageName %>.git"
+  },
+  "bugs": {
+    "url": "https://github.com/<%= packageGitHubOrg %>/<%= packageName %>/issues"
+  },
+  "homepage": "https://github.com/<%= packageGitHubOrg %>/<%= packageName %>",<% } %>
+  "scripts": {
+    "demo": "builder run generate && builder run server-dev",
+    "demo-iso": "builder run dev-iso",
+    "generate": "npm run generate-metadata && npm run generate-documentation",
+    "generate-documentation": "electrode-docgen --package ./package.json --src ./src --markdown components.md",
+    "generate-metadata": "electrode-docgen --package ./package.json --src ./src --metadata components.json",
+    "prepublish": "builder run npm:prepublish",
+    "preversion": "builder run test",
+    "test": "builder run check-cov"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "electrode-archetype-react-component": "<%= archetype.package.version ? '^' + archetype.package.version : '*' %>",
+    "electrode-archetype-react-component-dev": "<%= archetype.devPackage.version ? '^' + archetype.devPackage.version : '*' %>",
+    "builder": "^2.10.1",
+    "component-playground": "^1.2.0",
+    "object-assign": "^4.1.0",
+    "react": "^15.2.0",
+    "react-dom": "^15.2.0"
+  },
+  "engines": {
+    "node": "^4.2.6",
+    "npm": "^3.5.3"
+  }
+}
