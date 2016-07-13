@@ -4,7 +4,7 @@ var archDevRequire = require("@walmart/electrode-archetype-react-app-dev/require
 var mergeWebpackConfig = archDevRequire("webpack-partial").default;
 var optimize = archDevRequire("webpack").optimize;
 var _ = archDevRequire("lodash");
-var inspectpack = process.env.npm_package_config_inspectpack_debug === "true";
+var inspectpack = process.env.INSPECTPACK_DEBUG === "true";
 
 // var LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
 

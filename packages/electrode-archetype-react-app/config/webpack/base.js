@@ -21,7 +21,7 @@ var archetypeDevNodeModules = path.join(
   path.dirname(require.resolve("@walmart/electrode-archetype-react-app-dev/package.json")),
   "node_modules"
 );
-var inspectpack = process.env.npm_package_config_inspectpack_debug === "true";
+var inspectpack = process.env.INSPECTPACK_DEBUG === "true";
 
 var context = path.join(process.cwd(), "client");
 
