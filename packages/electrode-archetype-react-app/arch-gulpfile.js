@@ -57,20 +57,20 @@ function checkFrontendCov(minimum) {
  */
 
 const tasks = {
-  "~production-env": () => setProductionEnv(),
-  "~webpack-dev": () => setWebpackDev(),
-  "~optimize-stats": () => setOptimizeStats(),
+  ".production-env": () => setProductionEnv(),
+  ".webpack-dev": () => setWebpackDev(),
+  ".optimize-stats": () => setOptimizeStats(),
   "build": {
     desc: "Build your app's client bundle for production",
     task: ["build-dist"]
   },
-  "~build-browser-coverage-1": () => {
+  ".build-browser-coverage-1": () => {
     setProductionEnv();
     return exec(`webpack --config ${__dirname}/config/webpack/webpack.config.browsercoverage.js --colors`);
   },
   "build-browser-coverage": {
     desc: "Build browser coverage",
-    task: ["clean-dist", "~build-browser-coverage-1", "build-dist:flatten-l10n", "build-dist:clean-tmp"]
+    task: ["clean-dist", ".build-browser-coverage-1", "build-dist:flatten-l10n", "build-dist:clean-tmp"]
   },
   "build-dev-static": {
     desc: "Build static copy of your app's client bundle for development",
@@ -82,7 +82,7 @@ const tasks = {
     task: () => exec(`webpack --config ${__dirname}/config/webpack/webpack.config.dev.static.js --colors`)
   },
   "build-dist-min": {
-    dep: ["~production-env"],
+    dep: [".production-env"],
     desc: false,
     task: () => exec(`webpack --config ${__dirname}/config/webpack/webpack.config.dev.static.js --colors`)
   },
@@ -102,7 +102,7 @@ const tasks = {
   "debug": ["build-dev-static", "server-debug"],
   "dev": {
     desc: "Start server with watch in development mode with webpack-dev-server",
-    task: ["~webpack-dev", ["server-dev", "server-watch"]]
+    task: [".webpack-dev", ["server-dev", "server-watch"]]
   },
   "dev-static": {
     desc: "Start server in development mode with statically built files",
@@ -110,7 +110,7 @@ const tasks = {
   },
   "hot": {
     desc: "Start server with watch in hot mode with webpack-dev-server",
-    task: ["~webpack-dev", ["server-hot", "server-watch"]]
+    task: [".webpack-dev", ["server-hot", "server-watch"]]
   },
   "install-dev-peer-dep": () => {
   },
@@ -121,10 +121,10 @@ const tasks = {
   "lint-client-test": () => exec(`eslint --ext .js,.jsx -c ${__dirname}/config/eslint/.eslintrc-react-test test/client`),
   "lint-server": () => exec(`eslint -c ${__dirname}/config/eslint/.eslintrc-node server`),
   "lint-server-test": () => exec(`eslint -c ${__dirname}/config/eslint/.eslintrc-mocha-test test/server test/func`),
-  "~optimize-stats-gen": () => exec(`node ${__dirname}/scripts/gen-optimize-stats.js dist/js/bundle.*.js > optimize-stats.txt`),
+  ".optimize-stats-gen": () => exec(`node ${__dirname}/scripts/gen-optimize-stats.js dist/js/bundle.*.js > optimize-stats.txt`),
   "optimize-stats": {
     desc: "Generate a TSV file optimize-stats.txt with list of all files that went into production bundle JS",
-    task: ["~optimize-stats", "build", "~optimize-stats-gen"]
+    task: [".optimize-stats", "build", ".optimize-stats-gen"]
   },
   "npm:test": ["check"],
   "npm:release": () => exec(`node ${__dirname}/scripts/map-isomorphic-cdn.js`),
