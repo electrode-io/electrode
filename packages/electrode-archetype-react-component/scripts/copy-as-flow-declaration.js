@@ -11,7 +11,7 @@ const IS_VERBOSE = process.argv.some((arg) => arg === "--verbose" || arg === "-v
 const fs = require("fs");
 const path = require("path");
 const cwd = process.cwd();
-const input = path.join(cwd, "src");
+const inputRelativeDir = "src";
 
 /* eslint-disable */
 // disable eslint because:
@@ -25,11 +25,16 @@ function log() {
 }
 /* eslint-enable */
 
-const copyFile = (dir, filename) => {
-  const stream = fs.createReadStream(path.join(dir, filename));
-  const destPath = path.join(dir.replace("src", "lib"), filename.replace(/x$/, ""));
+const getDirWithPWD(dir) {
+  return path.join(cwd, dir);
+};
+
+const copyFile = (filename) => {
+  const libDir = getDirWithPWD("lib")
+  const stream = fs.createReadStream(path.join(libDir, filename));
+  const destPath = path.join(libDir, filename.replace(/x$/, ""));
   const dest = `${destPath}.flow`;
-  log("Copying %s to %s", dir.replace(cwd, ".") + path.sep + filename, dest.replace(cwd, "."));
+  log("Copying %s to %s", libDir.replace(cwd, ".") + path.sep + filename, dest.replace(cwd, "."));
   stream.pipe(fs.createWriteStream(dest));
 };
 
@@ -44,19 +49,21 @@ const handleFile = (dir) => (filename) => {
       // handleFile recusively calls copyDir
       copyDir(path.join(dir, filename)); // eslint-disable-line no-use-before-define
     } else if (stats.isFile() && /\.jsx?$/.test(filename)) {
-      copyFile(dir, filename);
+      copyFile(filename);
     }
   });
 };
 
 const copyDir = (dir) => {
-  fs.readdir(dir, (err, data) => {
+  const inputDir = getDirWithPWD(dir);
+  fs.readdir(inputDir, (err, data) => {
     if (err) {
       throw err;
     }
-    data.forEach(handleFile(dir));
+    data.forEach(handleFile(inputDir));
   });
 };
 
-copyDir(input);
+copyDir(inputRelativeDir);
+
 
