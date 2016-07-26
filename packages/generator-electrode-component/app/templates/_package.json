@@ -1,0 +1,36 @@
+{
+  "name": "<%= packageName %>",
+  "version": "1.0.0",
+  "description": "<%= projectName %>",
+  "main": "lib/index.js",
+  "author": "<%= developerName %>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/<%= packageGitHubOrg %>/<%= ghRepo %>.git"
+  },
+  "bugs": {
+    "url": "https://github.com/<%= packageGitHubOrg %>/<%= ghRepo %>/issues"
+  },
+  "homepage": "https://github.com/<%= packageGitHubOrg %>/<%= ghRepo %>",
+  "dependencies": {},
+  "devDependencies": {
+    "electrode-archetype-react-component": "^1.0.0",
+    "electrode-archetype-react-component-dev": "^1.0.0",
+    "component-playground": "^1.2.0",
+    "object-assign": "^4.1.0",
+    "react": "^15.2.0",
+    "react-dom": "^15.2.0"
+  },
+  "engines": {
+    "node": "^4.2.6",
+    "npm": "^3.5.3"
+  },
+  "scripts": {
+  },
+  "keywords": [
+    "react",
+    "electrode",
+    "electrode-component",
+    "react-component"
+  ]
+}
