@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import Playground from "component-playground";
 import assign from "object-assign";
 
@@ -22,7 +23,7 @@ export default class ElectrodeDemoIndex extends Component {
 
   render() {
 
-    const localScope = assign({ React }, this.props.scope || {}, this.state.libraryScope);
+    const localScope = assign({ React, ReactDOM }, this.props.scope || {}, this.state.libraryScope);
     const components = this.state.components;
 
     return (
