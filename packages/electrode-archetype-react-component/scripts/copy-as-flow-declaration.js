@@ -11,7 +11,8 @@ const IS_VERBOSE = process.argv.some((arg) => arg === "--verbose" || arg === "-v
 const fs = require("fs");
 const path = require("path");
 const cwd = process.cwd();
-const input = path.join(cwd, "src");
+const srcRootDir = path.join(cwd, "src");
+const destRootDir = path.join(cwd, "lib");
 
 /* eslint-disable */
 // disable eslint because:
@@ -26,8 +27,9 @@ function log() {
 /* eslint-enable */
 
 const copyFile = (dir, filename) => {
+  const destDir = dir.replace(srcRootDir, destRootDir);
   const stream = fs.createReadStream(path.join(dir, filename));
-  const destPath = path.join(dir.replace("src", "lib"), filename.replace(/x$/, ""));
+  const destPath = path.join(destDir, filename.replace(/x$/, ""));
   const dest = `${destPath}.flow`;
   log("Copying %s to %s", dir.replace(cwd, ".") + path.sep + filename, dest.replace(cwd, "."));
   stream.pipe(fs.createWriteStream(dest));
@@ -58,5 +60,4 @@ const copyDir = (dir) => {
   });
 };
 
-copyDir(input);
-
+copyDir(srcRootDir);
