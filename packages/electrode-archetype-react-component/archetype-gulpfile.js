@@ -3,7 +3,8 @@
 const $$ = require("shelljs");
 const Path = require("path");
 const archDevRequire = require("./dev/require");
-const gulpLoadTasks = archDevRequire("electrode-gulp-load-tasks");
+const gulpLoadTasks = archDevRequire("electrode-gulp-helper").loadTasks;
+const exec = archDevRequire("electrode-gulp-helper").exec;
 
 function setupPath() {
   const nm = Path.resolve("node_modules/.bin");
@@ -22,24 +23,6 @@ function setWebpackDev() {
 
 function setOptimizeStats() {
   process.env.OPTIMIZE_STATS = "true";
-}
-
-function exec(cmd, cb) {
-  if (typeof cb === "function") {
-    $$.exec(cmd, (code, stdout, stderr) => {
-      cb(code !== 0 ? new Error(`command exit code ${code}`) : undefined);
-    });
-  } else {
-    return new Promise((resolve, reject) => {
-      $$.exec(cmd, (code, stdout, stderr) => {
-        if (code !== 0) {
-          reject(new Error(`command exit code ${code}`));
-        } else {
-          resolve();
-        }
-      });
-    });
-  }
 }
 
 function checkFrontendCov(minimum) {

@@ -78,7 +78,6 @@
   "devDependencies": {
     "builder-init": "^0.2.3",
     "builder-support": "0.0.1",
-    "electrode-gulp-load-tasks": "^1.0.0",
     "eslint": "^1.10.1",
     "eslint-config-defaults": "^9.0.0",
     "eslint-plugin-filenames": "^0.1.2",
