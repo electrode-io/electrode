@@ -114,6 +114,7 @@ var ReactComponentGenerator = yeoman.generators.Base.extend({
 		component: function() {
 			this.template("src/components/_component.jsx", "src/components/" + this.projectName + ".jsx");
 			this.template("src/styles/_component.styl", "src/styles/" + this.projectName + ".styl");
+			this.template("src/_Component.js", "src/index.js");
 		},
 		demo: function() {
 			this.template("demo/_demo.jsx", "demo/demo.jsx");
@@ -122,7 +123,7 @@ var ReactComponentGenerator = yeoman.generators.Base.extend({
 			this.template("demo/examples/_component.example", "demo/examples/" + this.projectName + ".example");
 		},
 		test: function() {
-			this.copy("test/client/eslintrc", ".eslintrc");
+			this.copy("test/client/eslintrc", "test/client/.eslintrc");
 			this.template("test/client/components/_component.spec.jsx", "test/client/components/" + this.projectName + ".spec.jsx");
 		}
 	},
