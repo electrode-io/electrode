@@ -1,5 +1,7 @@
 "use strict";
 
+const exec = require("electrode-gulp-helper").exec;
+
 /**
  * There is a full range of gulp tasks defined in the above archetype
  * but here is a concise list of most often used gulp tasks at the
