@@ -55,6 +55,7 @@ module.exports = {
   externals: {
     jsdom: "window",
     cheerio: "window",
+    "react/addons": true, // important!! https://github.com/airbnb/enzyme/issues/302
     "react/lib/ExecutionEnvironment": true,
     "react/lib/ReactContext": true
   },

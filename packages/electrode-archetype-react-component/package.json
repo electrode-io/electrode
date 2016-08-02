@@ -19,6 +19,7 @@
   "config": {
     "archetype": "node_modules/electrode-archetype-react-component"
   },
+  "main": "archetype-gulpfile.js",
   "scripts": {
     "build": "builder run build-lib && builder run build-dist",
     "build-dist": "builder run clean-dist && builder run build-dist-min && builder run build-dist-dev",
@@ -77,6 +78,7 @@
   "devDependencies": {
     "builder-init": "^0.2.3",
     "builder-support": "0.0.1",
+    "electrode-gulp-load-tasks": "^1.0.0",
     "eslint": "^1.10.1",
     "eslint-config-defaults": "^9.0.0",
     "eslint-plugin-filenames": "^0.1.2",
