@@ -1,8 +1,8 @@
 "use strict";
 
-var archDevRequire = require("@walmart/electrode-archetype-react-app-dev/require");
-var IsomorphicLoaderPlugin = archDevRequire("isomorphic-loader/lib/webpack-plugin");
-var mergeWebpackConfig = archDevRequire("webpack-partial").default;
+var archetype = require("../../archtype");
+var IsomorphicLoaderPlugin = archetype.devRequire("isomorphic-loader/lib/webpack-plugin");
+var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
 
 module.exports = function () {
   return function (config) {
@@ -11,7 +11,7 @@ module.exports = function () {
         new IsomorphicLoaderPlugin({
           assetsFile: "../isomorphic-assets.json",
           webpackDev: {
-            url: "http://dev.walmart.com:2992",
+            url: `http://${archetype.webpack.devHostname}:${archetype.webpack.devPort}`,
             addUrl: false
           }
         })

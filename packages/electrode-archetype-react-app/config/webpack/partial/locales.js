@@ -1,8 +1,8 @@
 "use strict";
 
-var archDevRequire = require("@walmart/electrode-archetype-react-app-dev/require");
-var mergeWebpackConfig = archDevRequire("webpack-partial").default;
-var ContextReplacementPlugin = archDevRequire("webpack").ContextReplacementPlugin;
+var archetype = require("../../archtype");
+var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
+var ContextReplacementPlugin = archetype.devRequire("webpack").ContextReplacementPlugin;
 
 // Note that in modern versions of `moment`, there is actually no
 // `locale/en.js`, `en` is simply the default and included in `moment` itself.

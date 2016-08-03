@@ -1,10 +1,10 @@
 "use strict";
 
-var archDevRequire = require("@walmart/electrode-archetype-react-app-dev/require");
-var mergeWebpackConfig = archDevRequire("webpack-partial").default;
+var archetype = require("../../archtype");
+var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
 
-var urlLoader = archDevRequire.resolve("url-loader");
-var fileLoader = archDevRequire.resolve("file-loader");
+var urlLoader = archetype.devRequire.resolve("url-loader");
+var fileLoader = archetype.devRequire.resolve("file-loader");
 
 module.exports = function () {
   return function (config) {

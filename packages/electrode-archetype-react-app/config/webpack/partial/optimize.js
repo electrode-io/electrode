@@ -1,9 +1,9 @@
 "use strict";
 
-var archDevRequire = require("@walmart/electrode-archetype-react-app-dev/require");
-var mergeWebpackConfig = archDevRequire("webpack-partial").default;
-var optimize = archDevRequire("webpack").optimize;
-var _ = archDevRequire("lodash");
+var archetype = require("../../archtype");
+var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
+var optimize = archetype.devRequire("webpack").optimize;
+var _ = archetype.devRequire("lodash");
 var inspectpack = process.env.INSPECTPACK_DEBUG === "true";
 
 // var LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
@@ -12,12 +12,6 @@ module.exports = function () {
   return function (config) {
     return mergeWebpackConfig(config, {
       plugins: [
-        //
-        // Disabled because it was silently breaking functionality.
-        // TODO: Re-enable when this is resolved.
-        // https://gecgithub01.walmart.com/electrode/electrode-archetype-react-app/issues/158
-        //
-        //new LodashModuleReplacementPlugin(),
         new optimize.DedupePlugin()
       ].concat(
         // Allow env var to disable minifcation for inspectpack usage.

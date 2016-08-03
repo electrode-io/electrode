@@ -2,9 +2,9 @@
 /**
  * Webpack dev configuration
  */
-var archDevRequire = require("@walmart/electrode-archetype-react-app-dev/require");
-var _ = archDevRequire("lodash");
-var mergeWebpackConfig = archDevRequire("webpack-partial").default;
+var archetype = require("../archtype");
+var _ = archetype.devRequire("lodash");
+var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
 
 var baseConfig = require("./base.js");
 var defineConfig = require("./partial/define.js");

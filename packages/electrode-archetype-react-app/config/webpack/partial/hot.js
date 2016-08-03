@@ -1,11 +1,11 @@
 "use strict";
 
-var archDevRequire = require("@walmart/electrode-archetype-react-app-dev/require");
-var mergeWebpackConfig = archDevRequire("webpack-partial").default;
+var archetype = require("../../archtype");
+var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
 
 var getDefaultEntry = function (entry) {
   return [
-    "webpack-dev-server/client?http://dev.walmart.com:2992",
+    `webpack-dev-server/client?http://${archetype.webpack.devHostname}:${archetype.webpack.devPort}`,
     "webpack/hot/only-dev-server",
     entry
   ];

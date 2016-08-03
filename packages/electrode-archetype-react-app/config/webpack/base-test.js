@@ -1,7 +1,7 @@
 "use strict";
 
-var archDevRequire = require("@walmart/electrode-archetype-react-app-dev/require");
-var mergeWebpackConfig = archDevRequire("webpack-partial").default;
+var archetype = require("../archtype");
+var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
 var path = require("path");
 
 var baseConfig = require("./base.js");
@@ -24,7 +24,7 @@ var testConfig = {
   devServer: {
     stats: "errors-only"  // only show errors
   },
-  entry: require.resolve("@walmart/electrode-archetype-react-app/config/karma/entry"),
+  entry: path.join(__dirname, "../karma/entry"),
   output: {
     path: process.cwd(),
     filename: "bundle.js",
@@ -34,7 +34,7 @@ var testConfig = {
     alias: {
       // Allow root import of `src/FOO` from ROOT/src.
       src: process.cwd(),
-      sinon: archDevRequire.resolve("sinon/pkg/sinon")
+      sinon: archetype.devRequire.resolve("sinon/pkg/sinon")
     }
   },
   // Enzyme depends jsdom and cheerio being global to render their DOM.

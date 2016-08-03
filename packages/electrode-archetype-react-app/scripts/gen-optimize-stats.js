@@ -3,9 +3,9 @@
 const fs = require("fs");
 const Path = require("path");
 
-const archDevRequire = require("@walmart/electrode-archetype-react-app-dev/require");
-const acorn = archDevRequire("acorn");
-const _ = archDevRequire("lodash");
+const archetype = require("../config/archtype");
+const acorn = archetype.devRequire("acorn");
+const _ = archetype.devRequire("lodash");
 
 const code = fs.readFileSync(process.argv[2]).toString();
 let comments = [];

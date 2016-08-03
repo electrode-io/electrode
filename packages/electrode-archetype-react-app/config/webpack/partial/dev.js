@@ -1,15 +1,15 @@
 "use strict";
 
-var archDevRequire = require("@walmart/electrode-archetype-react-app-dev/require");
-var mergeWebpackConfig = archDevRequire("webpack-partial").default;
-var ExtractTextPlugin = archDevRequire("extract-text-webpack-plugin");
-var webpack = archDevRequire("webpack");
+var archetype = require("../../archtype");
+var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
+var ExtractTextPlugin = archetype.devRequire("extract-text-webpack-plugin");
+var webpack = archetype.devRequire("webpack");
 
 module.exports = function () {
   return function (config) {
     return mergeWebpackConfig(config, {
       output: {
-        publicPath: "http://dev.walmart.com:2992/js/",
+        publicPath: `http://${archetype.webpack.devHostname}:${archetype.webpack.devPort}/js/`,
         filename: config.__wmlMultiBundle
           ? "[name].bundle.dev.js"
           : "bundle.dev.js"
