@@ -9,18 +9,6 @@ const exec = require("electrode-gulp-helper").exec;
  *
  * TODO: insert link to the github gulp tasks in the archetype
  *
- * Tasks:
- * "demo": ["generate", "server-dev"],
- * "demo-iso": ["dev-iso"],
- * "generate": ["generate-metadata", "generate-documentation"],
- *
- * TODO: convert the following to gulp tasks and pass them to the archetype gulp file
- * TODO: OSS electrode-docgen
- * "generate-documentation": "electrode-docgen --package ./package.json --src ./src --markdown components.md",
- * "generate-metadata": "electrode-docgen --package ./package.json --src ./src --metadata components.json",
- *
- * "prepublish": ["npm:prepublish"],
- * "preversion": ["check-cov"]
  */
 
 const tasks = {
