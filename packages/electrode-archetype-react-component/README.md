@@ -4,52 +4,60 @@ A Walmart Labs flavored react component archetype.
 
 ## Creating A New Component
 
-> If you want to use [builder] as a CLI tool (recommended), follow the instructions at [formidablelabs/builder to modify your `PATH`]
-
-First, install [builder-init] to help quickly create an empty component:
+First, install [yeoman](http://yeoman.io/) to help quickly create an empty component:
 
 ```bash
-$ npm install -g builder-init
+$ npm install -g yo
 ```
 
-Now, builder-init can scaffold the project for you.
+Now, `yo` can scaffold the project for you.
 
 ```bash
-$ builder-init electrode-archetype-react-component
+$ yo electrode-component
 ```
-Note: builder-init needs to have a `.npmrc` file in your Home dir. (`~/.npmrc`).
-See the project documentation for a further explanation of how `.npmrc` files
-work with with `builder-init`: https://github.com/FormidableLabs/builder-init#npmrc-file
 
 You should see something similar to the below session:
 
 ```bash
-$ builder-init electrode-archetype-react-component@^4
-walmart-electrode-archetype-react-component-4.0.2.tgz
-[builder-init] Preparing templates for: electrode-archetype-react-component@^4
-? Package / GitHub project name (e.g., 'whiz-bang-component') test-comp
-? GitHub organization username (e.g., 'electrode') electrode
-? Package description test
-? Destination directory to write test-comp
+$ yo electrode-component
 
-[builder-init] Wrote files:
- - test-comp/.babelrc
- - test-comp/.builderrc
- - test-comp/.editorconfig
- - test-comp/README.md
- - test-comp/package.json
- - test-comp/.gitignore
- - test-comp/.npmignore
- - test-comp/.npmrc
- - test-comp/demo/demo.jsx
- - test-comp/demo/demo.styl
- - test-comp/demo/index.html
- - test-comp/src/index.js
- - test-comp/src/components/test-comp.jsx
- - test-comp/src/styles/.gitignore
- - test-comp/test/client/components/test-comp.spec.jsx
+Welcome to the Electrode Component generator
 
-[builder-init] New electrode-archetype-react-component@^4 project is ready at: test-comp
+Were going to set up a new Electrode Component, ready for development with
+gulp, webpack, demo, electrode component archetype, live-reload
+
+? What is your Package/GitHub project name? (e.g., 'wysiwyg-component') product-card
+? What is the ClassName for your component? ProductCard
+? What will be the npm package name? product-card
+? What will be the GitHub organization username (e.g., 'walmartlabs')? electrodeio
+? What is your name? (for copyright notice, etc.) arpan nanavati
+? What is your GitHub Username? ananavati
+? What is the name of the GitHub repo this will be published at? product-card
+? Would you like to create a new directory for your project? Yes
+
+
+   create .babelrc
+   create .gitignore
+   create .npmignore
+   create .editorconfig
+   create gulpfile.js
+   create package.json
+   create README.md
+   create src/components/product-card.jsx
+   create src/styles/product-card.styl
+   create src/index.js
+   create demo/demo.jsx
+   create demo/demo.styl
+   create demo/index.jsx
+   create demo/examples/product-card.example
+   create test/client/.eslintrc
+   create test/client/components/product-card.spec.jsx
+
+Your new Electrode Component is ready!
+
+Your component is in '/src' and your demo files are in '/demo/*'
+
+Type 'cd product-card' then 'gulp demo' to run the development build and demo tasks.
 ```
 
 ## Configuring an existing project / manual setup
@@ -59,18 +67,9 @@ If you prefer to create your component manually or if you have an existing compo
 ###### run the following in your project
 
 ```bash
-$ npm install --save-dev builder electrode-archetype-react-component electrode-archetype-react-component-dev
+$ npm install --save-dev electrode-gulp-helper electrode-archetype-react-component electrode-archetype-react-component-dev
 ```
 
-###### Add a `.builderrc`
-
-The `.builderrc` should contain the following:
-
-```yaml
----
-archetypes:
-  - "electrode-archetype-react-component"
-```
 
 ###### Add a `.babelrc` to your project
 
@@ -82,6 +81,30 @@ The `.babelrc` needs to extend
   "extends": "./node_modules/electrode-archetype-react-component/config/babel/.babelrc"
 }
 ```
+
+###### Add a `gulpfile.js` to your project
+
+The `gulpfile.js` needs to extend
+[the archetype's gulp tasks](/arhcetype-gulpfile.js) in order to apply the shared tasks on your new/existing electrode component. Add this following lines of code to the newly created `gulpfile.js`
+
+```javascript
+"use strict";
+
+const exec = require("electrode-gulp-helper").exec;
+
+const tasks = {
+  "demo": ["generate", "server-dev"],
+  "demo-iso": ["dev-iso"],
+  "generate": ["generate-metadata", "generate-documentation"],
+  "generate-documentation": () => exec(`electrode-docgen --package ./package.json --src ./src --markdown components.md`),
+  "generate-metadata": () => exec(`electrode-docgen --package ./package.json --src ./src --metadata components.json`),
+  "prepublish": ["npm:prepublish"],
+  "preversion": ["check-cov"]
+}
+
+require("electrode-archetype-react-component")(tasks);
+```
+
 
 ## Managing Dependencies
 
@@ -109,7 +132,7 @@ test
       *.jsx?
     main.js
     test.html
-.builderrc
+.babelrc
 package.json
 ```
 
@@ -145,123 +168,87 @@ If you would like to augment or override the demo server config you can add `arc
 // Sample archetype-demo-server.config.js
 module.exports = {
   "plugins": {
-    "@walmart/store-info-plugin": {}
+    "my-electrode-plugin": {}
   }
 };
 ```
 
-## Tasks
+## Tasks exposed via npm scripts & gulp as part of the electrode-archetype-react-component
 
-```
-$ builder help electrode-archetype-react-component
+```bash
+$ gulp help
+[13:02:10] Using gulpfile ~/walmart-oss/test-generator-electrode-component/product-card/gulpfile.js
+[13:02:10] Starting 'help'...
 
-[builder:help]
+Usage
+  gulp [TASK] [OPTIONS...]
 
-Usage:
-
-  builder [action] [task]
-
-Actions:
-
-  help, init, run, concurrent, install
-
-Tasks:
-
-  build
-    [electrode-archetype-react-component] builder run build-lib && builder run build-dist
-
-  build-dist
-    [electrode-archetype-react-component] builder run clean-dist && builder run build-dist-min && builder run build-dist-dev
-
+Available tasks
+  archetype:check ..............   tasks: ["archetype:lint","archetype:test-dev-pkg","clean-test-init"]
+  archetype:lint ---------------   tasks: ["archetype:lint-server"]
+  archetype:lint-server
+  archetype:test-dev-pkg
+  babel-src-step
+  build ........................   tasks: ["build-lib","build-dist"]
+  build-dist -------------------   tasks: ["clean-dist","build-dist-min","build-dist-dev"]
   build-dist-dev
-    [electrode-archetype-react-component] webpack --config node_modules/electrode-archetype-react-component/config/webpack/webpack.config.dev.js --colors
-
-  build-dist-min
-    [electrode-archetype-react-component] webpack --config node_modules/electrode-archetype-react-component/config/webpack/webpack.config.js --colors
-
-  build-lib
-    [electrode-archetype-react-component] builder run clean-lib && babel src -d lib
-
-  check
-    [electrode-archetype-react-component] builder run lint && builder run test-cov
-
-  check-ci
-    [electrode-archetype-react-component] builder run lint && builder run test-ci
-
-  check-cov
-    [electrode-archetype-react-component] builder run lint && builder run test-cov
-
-  check-dev
-    [electrode-archetype-react-component] builder run lint && builder run test-dev
-
-  clean
-    [electrode-archetype-react-component] builder run clean-lib && builder run clean-dist
-
+  build-dist-min ............... Build minified dist files for production
+                                   deps: ["~production-env"]
+  build-lib --------------------   deps: ["~production-env"]
+  build-lib:clean-tmp
+  build-lib:copy-flow
+  build-lib:flatten-l10n
+  check ........................   tasks: ["check-dep","lint","test-cov"]
+  check-ci ---------------------   tasks: ["check-dep","lint","test-ci"]
+  check-cov ....................   tasks: ["lint","test-cov"]
+  check-dep
+  check-dev --------------------   tasks: ["lint","test-dev"]
+  clean ........................   tasks: ["clean-lib","clean-dist"]
   clean-dist
-    [electrode-archetype-react-component] rimraf dist
-
   clean-lib
-    [electrode-archetype-react-component] rimraf lib
-
+  clean-test-init
   cov-frontend
-    [electrode-archetype-react-component] istanbul check-coverage 'coverage/client/*/coverage.json' --config=node_modules/electrode-archetype-react-component/config/istanbul/.istanbul.yml
-
-  dev
-    [electrode-archetype-react-component] builder concurrent server-dev server-test
-
-  dev-iso
-    [electrode-archetype-react-component] builder concurrent iso-render-server-start server-dev-iso
-
-  hot
-    [electrode-archetype-react-component] builder concurrent server-hot server-test
-
-  iso-render-server-start
-    [electrode-archetype-react-component] WEBPACK_DEV=true nodemon -w demo -w server -w src node_modules/electrode-archetype-react-component/demo-server/index.js | node_modules/electrode-archetype-react-component/node_modules/.bin/bunyan -l warn
-
-  lint
-    [electrode-archetype-react-component] builder concurrent lint-react-demo lint-react-src lint-react-test
-
+  cov-frontend-50
+  cov-frontend-70
+  cov-frontend-85
+  cov-frontend-95
+  default ---------------------- Invokes 'gulp help'
+  demo .........................   tasks: ["generate","server-dev"]
+  demo-iso ---------------------   tasks: ["dev-iso"]
+  dev .......................... Start server in development mode
+                                   tasks: ["~webpack-dev",["server-dev","server-test"]]
+  dev-iso ---------------------- Start ISO server in development mode
+                                   tasks: ["~webpack-dev",["iso-render-server-start","server-dev-iso"]]
+  generate .....................   tasks: ["generate-metadata","generate-documentation"]
+  generate-documentation
+  generate-metadata
+  help ------------------------- Display this help text.
+  hot .......................... Start server in hot/auto-watch mode
+                                   tasks: ["~webpack-dev",["server-hot","server-test"]]
+  iso-render-server-start ------   tasks: ["~webpack-dev","iso-render-server-start-watch"]
+  iso-render-server-start-watch
+  lint .........................   tasks: ["lint-stylus","lint-react-demo","lint-react-src","lint-react-test","lint-scripts"]
   lint-react-demo
-    [electrode-archetype-react-component] eslint --ext .js,.jsx -c ./node_modules/electrode-archetype-react-component/config/eslint/.eslintrc-react-demo demo/*.jsx --color
-
   lint-react-src
-    [electrode-archetype-react-component] eslint --ext .js,.jsx -c ./node_modules/electrode-archetype-react-component/config/eslint/.eslintrc-react src --color
-
   lint-react-test
-    [electrode-archetype-react-component] eslint --ext .js,.jsx -c ./node_modules/electrode-archetype-react-component/config/eslint/.eslintrc-react-test test/client --color
-
+  lint-scripts
+  lint-stylus
+  npm:prepublish ---------------   tasks: ["build-lib","build-dist-dev","build-dist-min"]
+  prepublish ...................   tasks: ["npm:prepublish"]
+  preversion -------------------   tasks: ["check-cov"]
   server-dev
-    [electrode-archetype-react-component] webpack-dev-server --port 4000 --config node_modules/electrode-archetype-react-component/config/webpack/webpack.config.demo.dev.js --colors
-
   server-dev-iso
-    [electrode-archetype-react-component] webpack-dev-server --port 2992 --config node_modules/electrode-archetype-react-component/config/webpack/webpack.config.demo.dev.js --colors
-
   server-hot
-    [electrode-archetype-react-component] webpack-dev-server --port 4000 --config node_modules/electrode-archetype-react-component/config/webpack/webpack.config.demo.hot.js --colors
-
   server-test
-    [electrode-archetype-react-component] webpack-dev-server --port 3001 --config node_modules/electrode-archetype-react-component/config/webpack/webpack.config.test.js --colors
-
-  test-ci
-    [electrode-archetype-react-component] builder run test-frontend-ci
-
-  test-cov
-    [electrode-archetype-react-component] builder run test-frontend-cov
-
-  test-dev
-    [electrode-archetype-react-component] builder run test-frontend-dev
-
+  test-ci ......................   tasks: ["test-frontend-ci"]
+  test-cov ---------------------   tasks: ["test-frontend-cov"]
+  test-dev .....................   tasks: ["test-frontend-dev"]
   test-frontend
-    [electrode-archetype-react-component] karma start node_modules/electrode-archetype-react-component/config/karma/karma.conf.js --colors
-
   test-frontend-ci
-    [electrode-archetype-react-component] karma start --browsers PhantomJS,Firefox node_modules/electrode-archetype-react-component/config/karma/karma.conf.coverage.js --colors
-
   test-frontend-cov
-    [electrode-archetype-react-component] karma start node_modules/electrode-archetype-react-component/config/karma/karma.conf.coverage.js --colors
-
   test-frontend-dev
-    [electrode-archetype-react-component] karma start node_modules/electrode-archetype-react-component/config/karma/karma.conf.dev.js --colors
+  test-frontend-dev-watch
+  test-watch -------------------   tasks: ["test-frontend-dev-watch"]
 
 ```
 
@@ -273,9 +260,5 @@ please see [`CONTRIBUTING.md`](./CONTRIBUTING.md) for our guidelines.
 The main check we provide for the archetype itself is:
 
 ```sh
-$ npm run builder:check
+$ gulp check
 ```
-
-[builder]: https://github.com/FormidableLabs/builder
-[builder-init]: https://github.com/FormidableLabs/builder-init
-[formidablelabs/builder to modify your `PATH`]: https://github.com/formidablelabs/builder#local-install

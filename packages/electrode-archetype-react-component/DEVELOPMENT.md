@@ -1,18 +1,8 @@
 Development
 ===========
 
-We use [builder][] and `npm` to control all aspects of development and
+We use `gulp` and `npm` to control all aspects of development and
 publishing.
-
-As a preliminary matter, please update your shell to include
-`./node_modules/.bin` in `PATH` like:
-
-```sh
-export PATH="${PATH}:./node_modules/.bin"
-```
-
-So you can type `builder` instead of `./node_modules/.bin/builder` for all
-commands.
 
 
 ## Build
@@ -21,7 +11,7 @@ Build for production use (NPM, bower, etc) and create `dist` UMD bundles
 (min'ed, non-min'ed)
 
 ```
-$ builder run build
+$ gulp build
 ```
 
 Note that `dist/` files are only updated and committed on **tagged releases**.
@@ -37,8 +27,8 @@ Run the `demo` application with watched rebuilds either doing:
 ### Basic Watched Builds
 
 ```sh
-$ builder run dev       # dev test/app server
-$ builder run open-dev  # (OR) dev servers _and a browser window opens!_
+$ gulp dev       # dev test/app server
+$ gulp open-dev  # (OR) dev servers _and a browser window opens!_
 ```
 
 ### Watched Builds + Hot Reloading
@@ -46,8 +36,8 @@ $ builder run open-dev  # (OR) dev servers _and a browser window opens!_
 Same as above, but with hot reloading of React components.
 
 ```sh
-$ builder run hot       # hot test/app server
-$ builder run open-hot  # (OR) hot servers _and a browser window opens!_
+$ gulp hot       # hot test/app server
+$ gulp open-hot  # (OR) hot servers _and a browser window opens!_
 ```
 
 From there, using either `dev` or `hot`, you can see:
@@ -67,7 +57,7 @@ Testing is an important part of the development process at Walmart. The technolo
 - [Chai](http://chaijs.com/) is our assertion framework. This is how we tell the testing framework if the test passes or fails. Specifically we use the [expect](http://chaijs.com/api/bdd/) syntax.
 - [Karma](https://karma-runner.github.io/0.13/index.html) is a test runner. Karma takes your specs and allows you to run them in a browser.
 - [Enzyme](airbnb.io/enzyme/) is a wrapper for React's TestUtils. Enzyme greatly reduces boilerplate for tests and makes tests easier to write. See examples below. Do not use React.TestUtils, instead rely upon Enzyme to do your assertions, unless you have a really good reason to go against this convention. New tests added will be required to use enzyme (even if that file did not previously use enzyme).
-- [Chai-Shallowly](https://gecgithub01.walmart.com/bbayard/chai-shallowly) is a plugin for Chai to help with testing React. Chai Shallowly is a wrapper around Enzyme for our assertion framework. See examples below.
+- [Chai-Shallowly](https://github.com/walmartlabs/chai-shallowly) is a plugin for Chai to help with testing React. Chai Shallowly is a wrapper around Enzyme for our assertion framework. See examples below.
 - [Sinon](sinonjs.org/docs/) is a mocking framework for Javascript. It allows you to stub and spy on functions as well as a fake server.
 - [Sinon-chai](https://github.com/domenic/sinon-chai) is a plugin for chai to allow us to directly assert against sinon in chai.
 
@@ -81,31 +71,31 @@ Testing is an important part of the development process at Walmart. The technolo
 During development, you are expected to be running either:
 
 ```sh
-$ builder run dev
+$ gulp dev
 ```
 
 to build the lib and test files. With these running, you can run the faster
 
 ```sh
-$ builder run check-dev
+$ gulp check-dev
 ```
 
 Command. It is comprised of:
 
 ```sh
-$ builder run lint
-$ builder run test-dev
+$ gulp lint
+$ gulp test-dev
 ```
 
 Note that the tests here are not instrumented for code coverage and are thus
 more development / debugging friendly.
 
 ### Hot Test Running
-Assuming you have one terminal with `builder run hot` you can have your tests run hot as well:
+Assuming you have one terminal with `gulp hot` you can have your tests run hot as well:
 
 ```sh
-$ builder run test-watch # if you already have hot running on a tab.
-$ builder concurrent hot test-watch # If you want to run in only 1 terminal window.
+$ gulp test-watch # if you already have hot running on a tab.
+$ gulp concurrent-test-watch # If you want to run in only 1 terminal window.
 ```
 
 **NOTE: ** This feature is relatively new and occasionally your tests will run _before_ the new
@@ -117,19 +107,19 @@ CI doesn't have source / test file watchers, so has to _build_ the test files
 via the commands:
 
 ```sh
-$ builder run check     # PhantomJS only
-$ builder run check-cov # (OR) PhantomJS w/ coverage
-$ builder run check-ci  # (OR) PhantomJS,Firefox + coverage - available on Travis.
+$ gulp check     # PhantomJS only
+$ gulp check-cov # (OR) PhantomJS w/ coverage
+$ gulp check-ci  # (OR) PhantomJS,Firefox + coverage - available on Travis.
 ```
 
 Which is currently comprised of:
 
 ```sh
-$ builder run lint  # AND ...
+$ gulp lint  # AND ...
 
-$ builder run test      # PhantomJS only
-$ builder run test-cov  # (OR) PhantomJS w/ coverage
-$ builder run test-ci   # (OR) PhantomJS,Firefox + coverage
+$ gulp test      # PhantomJS only
+$ gulp test-cov  # (OR) PhantomJS w/ coverage
+$ gulp test-ci   # (OR) PhantomJS,Firefox + coverage
 ```
 
 Note that `(test|check)-(cov|ci)` run code coverage and thus the
@@ -139,9 +129,14 @@ test code may be harder to debug because it is instrumented.
 
 The client tests rely on webpack dev server to create and serve the bundle
 of the app/test code at: http://127.0.0.1:3001/assets/main.js which is done
-with the task `builder run server-test` (part of `npm dev`).
+with the task `gulp server-test` (part of `npm dev`).
 
-#### Code Coverage
+### Code Coverage
+Code coverage is generated via the commands:
+
+```sh
+$ gulp check-cov # part of `gulp check` task
+```
 
 Code coverage reports are outputted to:
 
@@ -152,16 +147,16 @@ coverage/
       lcov-report/index.html  # Viewable web report.
 ```
 
-#### Browser client test
+### Browser client test
 Test results are output to test.html which can view by opening
 [test.html](http://localhost:3001/node_modules/%40walmart/electrode-archetype-react-component/config/browser_test/test.html)
 
 Run either of the below commands before opening the link.
 
-```
-builder run server-test
-builder run dev # (OR) (which includes `server-test`)
-builder run hot # (OR) (which includes `server-test`)
+```sh
+gulp server-test
+gulp dev            # (OR) (which includes `server-test`)
+gulp hot            # (OR) (which includes `server-test`)
 ```
 ## Releases
 
@@ -172,7 +167,7 @@ sure that you have a very modern `npm` binary:
 $ npm install -g npm
 ```
 
-Built files in `dist/` should **not** be committeed during development or PRs.
+Built files in `dist/` should **not** be committed during development or PRs.
 Instead we _only_ build and commit them for published, tagged releases. So
 the basic workflow is:
 
@@ -200,5 +195,3 @@ $ npm publish
 ```
 
 And you've published!
-
-[builder]: https://github.com/FormidableLabs/builder

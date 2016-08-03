@@ -34,7 +34,6 @@
     "babel-preset-es2015-loose": "^7.0.0",
     "babel-preset-react": "^6.5.0",
     "bluebird": "^2.10.1",
-    "builder": "^2.10.1",
     "bunyan": "^1.5.1",
     "chai": "^3.2.0",
     "chai-shallowly": "^0.9.10",

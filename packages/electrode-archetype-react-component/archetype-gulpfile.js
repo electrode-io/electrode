@@ -103,6 +103,10 @@ const tasks = {
     task: ["~webpack-dev", ["server-hot", "server-test"]]
   },
 
+  "open-dev": ["dev", "open-demo"],
+  "open-hot": ["hot", "open-demo"],
+  "open-demo": "opener http://127.0.0.1:4000",
+
   "iso-render-server-start": ["~webpack-dev", "iso-render-server-start-watch"],
   "iso-render-server-start-watch": () => exec(`nodemon -w demo -w server -w src ${__dirname}/demo-server/index.js | bunyan -l warn`),
   "lint": ["lint-stylus", "lint-react-demo", "lint-react-src", "lint-react-test", "lint-scripts"],
@@ -121,6 +125,7 @@ const tasks = {
   "test-cov": ["test-frontend-cov"],
   "test-dev": ["test-frontend-dev"],
   "test-watch": ["test-frontend-dev-watch"],
+  "concurrent-test-watch": ["hot", "test-frontend-dev-watch"],
   "test-frontend": () => exec(`karma start ${__dirname}/config/karma/karma.conf.js --colors`),
   "test-frontend-ci": () => exec(`karma start --browsers PhantomJS,Firefox ${__dirname}/config/karma/karma.conf.coverage.js --colors`),
   "test-frontend-cov": () => exec(`karma start ${__dirname}/config/karma/karma.conf.coverage.js --colors`),

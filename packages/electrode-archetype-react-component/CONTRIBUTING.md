@@ -23,19 +23,19 @@ do all of the following steps:
 Check the archetype configs:
 
 ```sh
-$ npm run builder:check
+$ gulp check
 ```
 
 Check a fresh init'ed project:
 
 ```sh
-$ npm install -g builder-init
+$ npm install -g yo
 $ cd /TEMP/DIR
-$ builder-init /PATH/TO/ARCHETYPE
+$ yo electrode-component
 (answer prompts)
+
 $ cd NEW_PROJ
-$ npm install
-$ builder run check-cov
+$ gulp check-cov
 ```
 
 ## Documentation
@@ -43,7 +43,7 @@ $ builder run check-cov
 To generate the usage snippet in the `README.md`, run:
 
 ```sh
-$ builder help electrode-archetype-react-component
+$ gulp help
 ```
 
 in any project where this archetype is installed and paste in the output.
@@ -59,13 +59,13 @@ For tagged official releases _only_, make sure to:
 
 ```sh
 $ vim CHANGELOG.md              # Version notes
-$ vim package.json            # Bump version
-$ npm run builder:prepublish  # Generate `dev/package.json`
-$ npm run builder:check       # Last check!
+$ vim package.json              # Bump version
+$ gulp prepublish               # Generate `dev/package.json`
+$ gulp check                    # Last check!
 $ git add package.json dev CHANGELOG.md
 $ git commit -m "Version bump"
 $ git tag -a "vNUMBER" -m "Version NUMBER"
 $ git push && git push --tags
-$ npm publish                 # Publish main project
-$ cd dev && npm publish       # Publish dev project
+$ npm publish                   # Publish main project
+$ cd dev && npm publish         # Publish dev project
 ```

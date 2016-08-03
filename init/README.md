@@ -18,12 +18,12 @@ before starting development on a component library.
 
 ## Scripts
 
-If you want to use `builder` as a CLI tool (recommended), follow the instructions at [formidablelabs/builder to modify your `PATH`](https://github.com/formidablelabs/builder#local-install)
+Electrode uses `gulp` as the CLI tool for running tasks/commands.
 
 To run the demo:
 
 ```
-builder run demo
+gulp demo
 ```
 
 To view the demo, navigate to `http://localhost:4000`
@@ -33,20 +33,20 @@ To view the demo with hot reload enabled, navigate to `http://localhost:4000/web
 To run tests:
 
 ```
-builder run test
+gulp test
 ```
 
 To build /lib:
 
 ```
-builder run build
+gulp build
 ```
 
 ##npm link
 
 When using npm link, you must delete react from `zeus-components-layout/node_modules/`. This is because npm link is just a symlink, not a proper `npm install`.
 
-You must also run `builder run build`
+You must also run `gulp build`
 
 ## Issues
 

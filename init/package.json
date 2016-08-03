@@ -27,7 +27,6 @@
   "devDependencies": {
     "electrode-archetype-react-component": "<%= archetype.package.version ? '^' + archetype.package.version : '*' %>",
     "electrode-archetype-react-component-dev": "<%= archetype.devPackage.version ? '^' + archetype.devPackage.version : '*' %>",
-    "builder": "^2.10.1",
     "component-playground": "^1.2.0",
     "object-assign": "^4.1.0",
     "react": "^15.2.0",
