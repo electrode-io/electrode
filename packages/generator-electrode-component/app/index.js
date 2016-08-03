@@ -14,7 +14,7 @@ var ReactComponentGenerator = yeoman.generators.Base.extend({
 		var done = this.async();
 
 		this.log(
-			"\n" + chalk.bold.underline("Welcome to the React Component generator- Arpan") +
+			"\n" + chalk.bold.underline("Welcome to the Electrode Component generator") +
 			"\n" +
 			"\nWe\"re going to set up a new " + chalk.bold("Electrode") + " Component, ready for development with" +
 			"\n" + chalk.bold("gulp, webpack, demo, electrode component archetype, live-reload") +
@@ -137,7 +137,7 @@ var ReactComponentGenerator = yeoman.generators.Base.extend({
 		this.log(
 			"\n" + chalk.green.underline("Your new Electrode Component is ready!") +
 			"\n" +
-			"\nYour component is in /src and your demo are in /demo/*" +
+			"\nYour component is in /src and your demo files are in /demo/*" +
 			"\n" +
 			"\nType " + chdir + "'gulp demo' to run the development build and demo tasks." +
 			"\n"
