@@ -1,1 +1,3 @@
-<<%= componentName %> />
+<div>
+  <<%= componentName %> />
+</div>

@@ -4,7 +4,7 @@ import React from "react";
 import Playground from "component-playground";
 import assign from "object-assign";
 
-import * as libraryScope from "../src/index.js";
+import * as libraryScope from "../src/index";
 
 export default class Index extends React.Component {
   render() {
