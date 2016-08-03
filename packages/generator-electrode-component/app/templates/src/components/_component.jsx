@@ -2,7 +2,7 @@ import React from "react";
 
 export default class <%= componentName %> extends React.Component {
   render() {
-    return(
+    return (
       <div><%= componentName %></div>
     );
   }
