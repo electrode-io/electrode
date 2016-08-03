@@ -78,7 +78,7 @@ var ReactComponentGenerator = yeoman.generators.Base.extend({
 			type: "input",
 			name: "ghUser",
 			message: "What is your GitHub Username?",
-			default: _.capitalize(_.camelCase(this.developerName))
+			default: this.developerName.split(" ").map(_.toLower).join("")
 		}, {
 			type: "input",
 			name: "ghRepo",
