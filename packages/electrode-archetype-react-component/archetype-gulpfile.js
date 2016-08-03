@@ -2,15 +2,15 @@
 
 const $$ = require("shelljs");
 const Path = require("path");
-const archDevRequire = require("./dev/require");
-const gulpLoadTasks = archDevRequire("electrode-gulp-helper").loadTasks;
-const exec = archDevRequire("electrode-gulp-helper").exec;
+const archetype = require("./config/archetype");
+const gulpHelper = archetype.devRequire("electrode-gulp-helper");
+const exec = gulpHelper.exec;
 
 function setupPath() {
-  const nm = Path.resolve("node_modules/.bin");
-  if (process.env.PATH && process.env.PATH.indexOf(nm) < 0) {
-    process.env.PATH += `:${nm}`;
-  }
+  const nmBin = "node_modules/.bin";
+  gulpHelper.envPath.addToFront(Path.resolve(nmBin));
+  gulpHelper.envPath.addToFront(Path.join(archetype.devPath, nmBin));
+  gulpHelper.envPath.addToFront(Path.join(__dirname, nmBin));
 }
 
 function setProductionEnv() {
@@ -138,5 +138,5 @@ const tasks = {
 
 module.exports = function (componentTasks, gulp) {
   setupPath();
-  gulpLoadTasks(Object.assign(tasks, componentTasks), gulp || require("gulp"));
+  gulpHelper.loadTasks(Object.assign(tasks, componentTasks), gulp || require("gulp"));
 };
