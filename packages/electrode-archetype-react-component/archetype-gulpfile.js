@@ -109,13 +109,16 @@ const tasks = {
 
   "iso-render-server-start": ["~webpack-dev", "iso-render-server-start-watch"],
   "iso-render-server-start-watch": () => exec(`nodemon -w demo -w server -w src ${__dirname}/demo-server/index.js | bunyan -l warn`),
+
   "lint": ["lint-stylus", "lint-react-demo", "lint-react-src", "lint-react-test", "lint-scripts"],
   "lint-react-demo": () => exec(`eslint --ext .js,.jsx -c ${__dirname}/config/eslint/.eslintrc-react-demo demo/*.jsx --color`),
   "lint-react-src": () => exec(`eslint --ext .js,.jsx -c ${__dirname}/config/eslint/.eslintrc-react src --color`),
   "lint-react-test": () => exec(`eslint --ext .js,.jsx -c ${__dirname}/config/eslint/.eslintrc-react-test test/client --color`),
   "lint-scripts": () => exec(`eslint --ext .js -c ${__dirname}/config/eslint/.eslintrc-base scripts --color`),
   "lint-stylus": () => exec(`if [ -d src/styles ]; then stylint src/styles -c ${__dirname}/config/stylint/.stylintrc; else echo 'Skipping Stylint as no src/styles directory'; fi`),
+
   "npm:prepublish": ["build-lib", "build-dist-dev", "build-dist-min"],
+
   "server-dev": () => exec(`webpack-dev-server --port 4000 --config ${__dirname}/config/webpack/webpack.config.demo.dev.js --colors`),
   "server-dev-iso": () => exec(`webpack-dev-server --port 2992 --config ${__dirname}/config/webpack/webpack.config.demo.dev.js --colors`),
   "server-hot": () => exec(`webpack-dev-server --port 4000 --config ${__dirname}/config/webpack/webpack.config.demo.hot.js --colors`),
