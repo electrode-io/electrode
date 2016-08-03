@@ -23,7 +23,6 @@
     "babel-core": "^6.7.2",
     "babel-eslint": "^5.0.0",
     "babel-loader": "^6.2.4",
-    "babel-plugin-i18n-id-hashing": "^2.1.0",
     "babel-plugin-lodash": "^3.1.3",
     "babel-plugin-react-intl": "^2.1.2",
     "babel-plugin-transform-object-rest-spread": "^6.6.5",
