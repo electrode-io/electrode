@@ -116,15 +116,15 @@ var ReactComponentGenerator = yeoman.generators.Base.extend({
 			this.template("src/styles/_component.styl", "src/styles/" + this.projectName + ".styl");
 			this.template("src/_Component.js", "src/index.js");
 		},
+		test: function() {
+			this.copy("test/client/eslintrc", "test/client/.eslintrc");
+			this.template("test/client/components/_component.spec.jsx", "test/client/components/" + this.projectName + ".spec.jsx");
+		},
 		demo: function() {
 			this.template("demo/_demo.jsx", "demo/demo.jsx");
 			this.template("demo/_demo.styl", "demo/demo.styl");
 			this.template("demo/_index.jsx", "demo/index.jsx");
 			this.template("demo/examples/_component.example", "demo/examples/" + this.projectName + ".example");
-		},
-		test: function() {
-			this.copy("test/client/eslintrc", "test/client/.eslintrc");
-			this.template("test/client/components/_component.spec.jsx", "test/client/components/" + this.projectName + ".spec.jsx");
 		}
 	},
 
