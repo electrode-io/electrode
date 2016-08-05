@@ -22,7 +22,7 @@ module.exports = () => (config) => mergeWebpackConfig(config, {
       /* eslint-enable prefer-template */
     }]
   },
-  postcss() {
-    return [atImport, cssnext];
+  postcss: function () {
+    return cssModuleSupport ? [atImport, cssnext] : [];
   }
 });
