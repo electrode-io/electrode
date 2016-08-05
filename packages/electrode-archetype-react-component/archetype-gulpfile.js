@@ -43,8 +43,8 @@ const tasks = {
   "~optimize-stats": () => setOptimizeStats(),
 
   // code build/compile tasks
-  "build": ["build-lib", "build-dist"],
-  "build-dist": ["clean-dist", "build-dist-min", "build-dist-dev"],
+  "build": ["clean-dist", "build-lib", "build-dist"],
+  "build-dist": ["build-dist-min", "build-dist-dev"],
   "build-dist-dev": {
     desc: "",
     task: () => exec(`webpack --config ${__dirname}/config/webpack/webpack.config.dev.js --colors`)
@@ -56,7 +56,7 @@ const tasks = {
   },
   "build-lib": {
     dep: ["~production-env"],
-    task: () => ["clean-lib", "babel-src-step", "build-lib:flatten-l10n", "build-lib:copy-flow", "build-lib:clean-tmp"]
+    task: ["clean-lib", "babel-src-step", "build-lib:flatten-l10n", "build-lib:copy-flow", "build-lib:clean-tmp"]
   },
   "babel-src-step": () => exec(`babel src -d lib`),
   "build-lib:clean-tmp": () => $$.rm("-rf", "./tmp"),

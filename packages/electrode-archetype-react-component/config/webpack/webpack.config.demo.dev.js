@@ -47,6 +47,12 @@ module.exports = {
     }
   },
   plugins: [
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
+      "process.env": {
+        "ELECTRODE_LOCALE": JSON.stringify(process.env.ELECTRODE_LOCALE || "en"),
+        "ELECTRODE_TENANT": JSON.stringify(process.env.ELECTRODE_TENANT || "walmart")
+      }
+    })
   ]
 };
