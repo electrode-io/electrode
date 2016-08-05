@@ -25,7 +25,7 @@ var ReactComponentGenerator = yeoman.generators.Base.extend({
 			type: "input",
 			name: "projectName",
 			message: "What is your Package/GitHub project name? (e.g., 'wysiwyg-component')",
-			default: "My Component"
+			default: "wysiwyg-component"
 		}];
 
 		this.prompt(prompts, function (props) {
@@ -114,11 +114,21 @@ var ReactComponentGenerator = yeoman.generators.Base.extend({
 		component: function() {
 			this.template("src/components/_component.jsx", "src/components/" + this.projectName + ".jsx");
 			this.template("src/styles/_component.styl", "src/styles/" + this.projectName + ".styl");
+
+			// l10n language templates
+			this.template("src/lang/_DefaultMessages.js", "src/lang/default-messages.js");
+			this.template("src/lang/_en.json", "src/lang/en.json");
+			this.template("src/lang/tenants/asda/_defaultMessages.js", "src/lang/tenants/asda/default-messages.js");
+			this.template("src/lang/tenants/electrodeio/_defaultMessages.js", "src/lang/tenants/electrodeio/default-messages.js");
+			this.template("src/lang/tenants/samsclub/_defaultMessages.js", "src/lang/tenants/samsclub/default-messages.js");
+			this.template("src/lang/tenants/walmart/_defaultMessages.js", "src/lang/tenants/walmart/default-messages.js");
+
 			this.template("src/_Component.js", "src/index.js");
 		},
 		test: function() {
 			this.copy("test/client/eslintrc", "test/client/.eslintrc");
 			this.template("test/client/components/_component.spec.jsx", "test/client/components/" + this.projectName + ".spec.jsx");
+			this.copy("test/client/components/helpers/_intlEnzymeTestHelper.js", "test/client/components/helpers/intl-enzyme-test-helper.js");
 		},
 		demo: function() {
 			this.template("demo/_demo.jsx", "demo/demo.jsx");
