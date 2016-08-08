@@ -6,7 +6,7 @@ var assert = require("yeoman-assert");
 var helpers = require("yeoman-test");
 var os = require("os");
 
-describe("react:app", function () {
+describe("electrode::generator-electrode-component", function () {
   before(function () {
     return helpers.run(path.join(__dirname, "../app"))
       .withOptions({ "skip-install": true })
