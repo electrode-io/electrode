@@ -1,15 +1,15 @@
 /*global describe, beforeEach, it*/
-'use strict';
+"use strict";
 
-var path = require('path');
+var path = require("path");
 var assert = require("yeoman-assert");
 var helpers = require("yeoman-test");
-var os = require('os');
+var os = require("os");
 
-describe('react:app', function () {
+describe("react:app", function () {
   before(function () {
-    return helpers.run(path.join(__dirname, '../app'))
-      .withOptions({ 'skip-install': true })
+    return helpers.run(path.join(__dirname, "../app"))
+      .withOptions({ "skip-install": true })
       .withPrompts({
         projectName: "electrode-component",
         componentName: "ElectrodeComponent",
@@ -20,9 +20,9 @@ describe('react:app', function () {
       .toPromise();
   });
 
-  it('creates files', function () {
+  it("creates files", function () {
     assert.file([
-      'package.json',
+      "package.json",
       "gulpfile.js"
     ]);
   });

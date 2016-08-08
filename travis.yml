@@ -1,7 +1,0 @@
-language: node_js
-node_js:
-  - '0.10'
-before_install:
-  - currentfolder=${PWD##*/}
-  - if [ "$currentfolder" != 'generator-react-component' ]; then cd .. && eval "mv $currentfolder generator-react-component" && cd generator-react-component; fi
-
