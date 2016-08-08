@@ -148,7 +148,7 @@ By default, this archetype assumes you are using Stylus and `.styl` files contai
 
 Once enabled, you can import css files in your components and reference class names via the exported object `src/components/<%= componentPath %>.js`:
 
-```
+```javascript
 import React from "react";
 
 import styles from "../styles/<%= componentPath %>.css";
@@ -159,11 +159,12 @@ class <%= componentName %> extends React.Component {
       <div className={styles.someStyle}>Hello Modules!</div>
     );
   }
-}```
+}
+```
 
 Add following styling to `src/styles/<%= componentPath %>.css`
 
-```
+```css
 :root {
   --black: #000;
   --white: #fff;
