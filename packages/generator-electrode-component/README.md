@@ -1,6 +1,6 @@
-# generator-react-component
+[![Build Status](https://travis-ci.com/electrode-io/generator-electrode-component.svg?token=9dyHRhqfyW5wqcpfkeLr&branch=master)](https://travis-ci.com/electrode-io/generator-electrode-component)
 
-https://travis-ci.com/electrode-io/generator-electrode-component.svg?token=9dyHRhqfyW5wqcpfkeLr&branch=master
+# generator-react-component
 
 > [Yeoman](http://yeoman.io) generator for Electrode [React](http://facebook.github.io/react/) Components
 
