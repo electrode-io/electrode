@@ -11,4 +11,14 @@ describe("index", () => {
     const component = shallow(React.createElement(ElectrodeDemoIndex));
     expect(component).to.not.be.null;
   });
+
+  it("should throw a warning when calling _setDemoContext", () => {
+    class Demo extends ElectrodeDemoIndex {
+      componentDidMount() {
+        this._setDemoContext({libraryScope: {}, components: []})
+      }
+    }
+
+    const component = shallow(React.createElement(Demo));
+  });
 });
