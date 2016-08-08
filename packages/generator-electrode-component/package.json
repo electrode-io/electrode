@@ -4,13 +4,13 @@
   "description": "Yeoman generator for Electrode-ReactJS Component projects",
   "license": "MIT",
   "main": "app/index.js",
-  "homepage": "https://github.com/electrodeio/generator-electrode-component",
+  "homepage": "https://github.com/electrode-io/generator-electrode-component",
   "repository": {
     "type": "git",
-    "url": "https://github.com/electrodeio/generator-electrode-component.git"
+    "url": "https://github.com/electrode-io/generator-electrode-component.git"
   },
   "bugs": {
-    "url": "https://github.com/electrodeio/generator-electrode-component/issues"
+    "url": "https://github.com/electrode-io/generator-electrode-component/issues"
   },
   "author": {
     "name": "Arpan Nanavati",
@@ -26,6 +26,7 @@
     "app"
   ],
   "keywords": [
+    "electrode",
     "yeoman-generator",
     "react",
     "component",
@@ -39,6 +40,8 @@
   },
   "devDependencies": {
     "chai": "^3.2.0",
-    "mocha": "^2.3.2"
+    "mocha": "^2.3.2",
+    "yeoman-assert": "^2.2.1",
+    "yeoman-test": "^1.4.0"
   }
 }

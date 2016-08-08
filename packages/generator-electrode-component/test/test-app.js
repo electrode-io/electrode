@@ -2,27 +2,24 @@
 'use strict';
 
 var path = require('path');
-var assert = require('yeoman-generator').assert;
-var helpers = require('yeoman-generator').test;
+var assert = require("yeoman-assert");
+var helpers = require("yeoman-test");
 var os = require('os');
 
-describe('react-express:app', function () {
-  before(function (done) {
-    helpers.run(path.join(__dirname, '../app'))
-      .inDir(path.join(os.tmpdir(), './temp-test'))
+describe('react:app', function () {
+  before(function () {
+    return helpers.run(path.join(__dirname, '../app'))
       .withOptions({ 'skip-install': true })
-      .withPrompt({
-        someOption: true
+      .withPrompts({
+        projectName: "electrode-component"
       })
-      .on('end', done);
+      .toPromise();
   });
 
   it('creates files', function () {
     assert.file([
-      'bower.json',
       'package.json',
-      '.editorconfig',
-      '.jshintrc'
+      "gulpfile.js"
     ]);
   });
 });

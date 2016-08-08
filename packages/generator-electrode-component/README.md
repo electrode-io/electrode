@@ -1,10 +1,10 @@
 # generator-react-component
 
-> [Yeoman](http://yeoman.io) generator for [React](http://facebook.github.io/react/) Components
+> [Yeoman](http://yeoman.io) generator for Electrode [React](http://facebook.github.io/react/) Components
 
 Builds a React Component project with useful gulp tasks for development, build and publishing.
 
-See [react-component-gulp-tasks](https://github.com/JedWatson/react-component-gulp-tasks) for documentation on how to use the gulp tasks.
+See [electrode-archetype-react-component-component-gulp-tasks] for documentation on how to use the gulp tasks.
 
 
 ## Getting Started
@@ -37,17 +37,17 @@ It's a great idea to add a description, documentation and other information to y
 Preview your component with LiveReload:
 
 ```bash
-npm start
+gulp demo ; gulp open-demo
 ```
 
-A webserver will be started on [localhost:8000](http://localhost:8000) running the examples in `example/src`.
+A webserver will be started on [localhost:4000](http://127.0.0.1:4000) running the examples in `demo/examples/*`
 
-You can use this playpen to test your component, and then publish it as live examples to GitHub Pages, which is a great way to let potential users try out your component and see what it can do.
+You can use this code-playground to test your component, and then publish it which is a great way to let potential users try out your component and see what it can do.
 
-### Lint your code!
+### Lint & unit-test code!
 
 ```bash
-npm run lint
+gulp check
 ```
 
 Your code will be linted with ESLint, using the Babel parser and the React plugin. You can customise the settings by editing the `.eslintrc` file.
@@ -55,37 +55,17 @@ Your code will be linted with ESLint, using the Babel parser and the React plugi
 ### Build and Publish
 
 ```bash
-npm run build
+gulp build
 ```
 
 This will build your `lib`, `dist` and `example/dist` folders ready for release.
-
-You can then publish your component to npm and GitHub Pages by running:
-
-```bash
-npm run release
-```
 
 ### Other npm scripts
 
 #### `examples`
 
-Just run the examples server; no code will be built or watched, everything in `example/dist` will be served on [localhost:8000](http://localhost:8000).
-
-#### `publish:site`
-
-Usually run as part of the `release` script, this will copy the contents of `example/dist` to your `gh-pages` branch and push it.
-
-#### `watch`
-
-This task watches the `src` folder for changes, and builds automatically into `lib`. This is useful if you are developing your component in another project using `npm link`.
-
-
-## Feedback?
-
-I'd love to hear it. Open an issue or submit a PR.
-
+Just run the examples server; no code will be built or watched, everything in `example/dist` will be served on [localhost:4000](http://localhost:4000)
 
 ## License
 
-[MIT License](http://en.wikipedia.org/wiki/MIT_License). Copyright (c) 2016 Jed Watson.
+[MIT License](http://en.wikipedia.org/wiki/MIT_License)
