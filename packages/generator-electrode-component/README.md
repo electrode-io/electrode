@@ -1,5 +1,7 @@
 # generator-react-component
 
+https://travis-ci.com/electrode-io/generator-electrode-component.svg?token=9dyHRhqfyW5wqcpfkeLr&branch=master
+
 > [Yeoman](http://yeoman.io) generator for Electrode [React](http://facebook.github.io/react/) Components
 
 Builds a React Component project with useful gulp tasks for development, build and publishing.
