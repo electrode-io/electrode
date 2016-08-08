@@ -1,6 +1,6 @@
 # Archetype: Electrode React Component
 
-A Walmart Labs flavored react component archetype.
+Electrode flavored react component archetype.
 
 ## Creating A New Component
 
