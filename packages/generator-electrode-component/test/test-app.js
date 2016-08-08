@@ -11,7 +11,11 @@ describe('react:app', function () {
     return helpers.run(path.join(__dirname, '../app'))
       .withOptions({ 'skip-install': true })
       .withPrompts({
-        projectName: "electrode-component"
+        projectName: "electrode-component",
+        componentName: "ElectrodeComponent",
+        packageName: "electrode-component",
+        packageGitHubOrg: "electrode-component",
+        developerName: "Tony Stark"
       })
       .toPromise();
   });
