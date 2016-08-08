@@ -109,7 +109,7 @@ var ReactComponentGenerator = yeoman.generators.Base.extend({
 			this.copy("editorconfig", ".editorconfig");
 			this.template("_gulpfile.js", "gulpfile.js");
 			this.template("_package.json", "package.json");
-			this.template("_README.md", "README.md");
+			this.template("_readme.md", "README.md");
 		},
 		component: function() {
 			this.template("src/components/_component.jsx", "src/components/" + this.projectName + ".jsx");
