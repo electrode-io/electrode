@@ -146,15 +146,6 @@ By default, this archetype assumes you are using Stylus and `.styl` files contai
 }
 ```
 
-This is an example for enabling css modules/next.
-
-```javascript
-To enable these features, add the following config to your package.json:
-
-"config": {
-  "electrode_archetype_react_component_webpack_css_modules": "true"
-}```
-
 Once enabled, you can import css files in your components and reference class names via the exported object `src/components/<%= componentPath %>.js`:
 
 ```javascript
