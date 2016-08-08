@@ -136,15 +136,59 @@ test
 package.json
 ```
 
-## CSS Modules
+## CSS Modules + CSS next
 
-By default, this archetype assumes your Stylus files contain Global CSS. If you are using CSS Modules, you need
-to opt-in to CSS Modules support by adding a `config` section to your *project's* `package.json` and setting the
-necessary env variable to `true`:
+By default, this archetype assumes you are using Stylus and `.styl` files containing Global CSS. If you want to use `CSS-Modules + CSS-Next`, you need opt-in and use `.css` files. This archetype does not support using Stylus and `CSS-Modules + CSS-Next` together. You can opt-in to `CSS-Modules + CSS-Next` by adding a config section to your project's package.json and setting the necessary `env` variable to true:
 
 ```
 "config": {
   "electrode_archetype_react_component_webpack_css_modules": "true"
+}
+```
+
+This is an example for enabling css modules/next.
+
+```javascript
+To enable these features, add the following config to your package.json:
+
+"config": {
+  "electrode_archetype_react_component_webpack_css_modules": "true"
+}```
+
+Once enabled, you can import css files in your components and reference class names via the exported object `src/components/<%= componentPath %>.js`:
+
+```javascript
+
+
+import React from "react";
+
+import styles from "../styles/<%= componentPath %>.css";
+
+class <%= componentName %> extends React.Component {
+  render() {
+    return (
+      <div className={styles.someStyle}>Hello Modules!</div>
+    );
+  }
+}```
+
+Add following styling to `src/styles/<%= componentPath %>.css`
+
+```css
+
+:root {
+  --black: #000;
+  --white: #fff;
+}
+
+.baseStyle {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+.someStyle {
+  composes: baseComponent;
+  font-size: 18px;
 }
 ```
 
