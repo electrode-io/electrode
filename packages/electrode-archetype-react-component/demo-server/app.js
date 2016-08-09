@@ -1,19 +1,23 @@
 /*global document:false*/
 "use strict";
-// NO JSX because this is running from `/node_modules`
-const React = require("react");
-const Resolver = require("react-resolver").Resolver;
-const Router = require("react-router").Router;
-const createHistory = require("history").createHistory;
+// NO JSX/ES6 because this is running from `/node_modules` and needs to be able to run on IE9 as is
 
-const routes = require("./client-routes");
+//
+// Must use static require since this file gets bundled by webpack statically.
+//
 
-const content = document.querySelector(".js-content");
+var React = require("react");
+var Resolver = require("react-resolver").Resolver;
+var Router = require("react-router").Router;
+var createHistory = require("history").createHistory;
 
-require("@walmart/lithe-core");
 require("./demo.styl");
 
-Resolver.render(() => {
+var routes = require("./client-routes");
+
+var content = document.querySelector(".js-content");
+
+Resolver.render(function () {
   return React.createElement(
     Router,
     { history: createHistory() },

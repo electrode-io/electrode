@@ -1,11 +1,14 @@
 /*globals __dirname:false */
 "use strict";
 
-var webpack = require("webpack");
 var path = require("path");
-var base = require("./webpack.config");
 
-var _ = require("lodash");
+var archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
+var webpack = archDevRequire("webpack");
+var _ = archDevRequire("lodash");
+
+
+var base = require("./webpack.config");
 
 module.exports = {
   devServer: {
@@ -38,6 +41,11 @@ module.exports = {
   }),
   resolveLoader: base.resolveLoader,
   module: base.module,
+  stylus: {
+    define: {
+      $tenant: process.env.ELECTRODE_TENANT || "walmart"
+    }
+  },
   plugins: [
     new webpack.NoErrorsPlugin()
   ]

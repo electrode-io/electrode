@@ -1,35 +1,31 @@
 "use strict";
-const Promise = require("bluebird");
-const path = require("path");
-const fs = Promise.promisifyAll(require("fs-extra"));
-const _ = require("lodash");
+const archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
 
-const babPath = "./node_modules/@walmart/electrode-archetype-react-component/config/babel/.babelrc";
-const babelConfig = JSON.parse(fs.readFileSync(path.resolve(babPath), "utf8"));
+const Promise = archDevRequire("bluebird");
+const path = archDevRequire("path");
+const fs = Promise.promisifyAll(archDevRequire("fs-extra"));
+const _ = archDevRequire("lodash");
 
-require("babel-core/register")(babelConfig);
+const babPath = require.resolve("@walmart/electrode-archetype-react-component/config/babel/.babelrc"); // eslint-disable-line
+const babelConfig = JSON.parse(fs.readFileSync(babPath, "utf8"));
 
-const electrodeServer = require("@walmart/electrode-server");
+archDevRequire("babel-core/register")(babelConfig);
+
+const electrodeServer = archDevRequire("@walmart/electrode-server");
+
+
 const defaultElectrodeServerConfig = require("./default-electrode-server-config");
 
-const overrideConfigPath = path.join(process.cwd(), "archetype-demo-server.config.js");
-
-const doesFileExist = function doesFileExist(filePath) {
+const getConfigOverrides = function getConfigOverrides(filePath) {
   try {
-    // Throws if not found otherwise returns undefined
-    fs.accessSync(filePath, fs.F_OK);
-
-    return true;
+    return require(filePath); // eslint-disable-line global-require
   } catch (e) {
-    return false;
+    return {};
   }
 };
 
-const getConfigOverrides = function getConfigOverrides(filePath) {
-  return doesFileExist(filePath) ? require(filePath) : {}; // eslint-disable-line global-require
-};
+const localConfig = getConfigOverrides(path.join(process.cwd(), "archetype-demo-server.config.js"));
 
-const localConfig = getConfigOverrides(overrideConfigPath);
 const demoServerConfig = _.merge(defaultElectrodeServerConfig, localConfig);
 
 electrodeServer(demoServerConfig);

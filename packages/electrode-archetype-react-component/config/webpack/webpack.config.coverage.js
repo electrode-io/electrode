@@ -3,10 +3,12 @@
 /**
  * Webpack frontend test (w/ coverage) configuration.
  */
-var _ = require("lodash");
-var testCfg = require("./webpack.config.test");
+var archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
+var _ = archDevRequire("lodash");
+var ispartaLoader = archDevRequire.resolve("isparta-loader");
 
-var ispartaLoader = require.resolve("isparta-loader");
+
+var testCfg = require("./webpack.config.test");
 
 module.exports = _.merge({}, testCfg, {
   module: {

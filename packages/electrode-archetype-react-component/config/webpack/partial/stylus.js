@@ -1,10 +1,10 @@
 "use strict";
 
-const mergeWebpackConfig = require("webpack-partial").default;
-
-const styleLoader = require.resolve("style-loader");
-const cssLoader = require.resolve("css-loader");
-const stylusLoader = require.resolve("stylus-loader");
+const archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
+const mergeWebpackConfig = archDevRequire("webpack-partial").default;
+const styleLoader = archDevRequire.resolve("style-loader");
+const cssLoader = archDevRequire.resolve("css-loader");
+const stylusLoader = archDevRequire.resolve("stylus-relative-loader");
 
 const cssModuleSupport = process.env.npm_package_config_electrode_archetype_react_component_webpack_css_modules === "true" ? // eslint-disable-line max-len
   "?modules" :
