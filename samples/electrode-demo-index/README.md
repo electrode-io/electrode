@@ -80,18 +80,7 @@ Locate `Index.Components = [`... and replace `Index.Components =` with `const co
 Then create the new export:
 
 ```js
-export default class Index extends ElectrodeDemoIndex {
-
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-    // pass through  the libraryScope and components info for this component
-    this._setDemoContext(libraryScope, components);
-  }
-
-}
+export default () => <ElectrodeDemoIndex libraryScope={libraryScope} components={components} />;
 ```
 
 The `demo/demo.jsx` file should now resemble the example in **Usage** above.
