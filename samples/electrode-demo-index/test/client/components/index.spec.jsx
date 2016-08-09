@@ -15,10 +15,13 @@ describe("index", () => {
   it("should throw a warning when calling _setDemoContext", () => {
     class Demo extends ElectrodeDemoIndex {
       componentDidMount() {
-        this._setDemoContext({libraryScope: {}, components: []})
+        this._setDemoContext({libraryScope: {}, components: []});
       }
     }
 
+    // TODO: fix this dummy test to check for console warning
+    // https://gecgithub01.walmart.com/electrode/demo-index/issues/10
     const component = shallow(React.createElement(Demo));
+    expect(component).to.not.be.null;
   });
 });
