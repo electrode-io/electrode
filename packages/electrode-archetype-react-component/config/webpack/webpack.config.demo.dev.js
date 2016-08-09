@@ -46,6 +46,7 @@ module.exports = {
       $tenant: process.env.ELECTRODE_TENANT || "walmart"
     }
   },
+  postcss: base.postcss,
   plugins: [
     new webpack.NoErrorsPlugin()
   ]
