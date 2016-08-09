@@ -39,18 +39,7 @@ const components = [{
 } // any additional components here
 ];
 
-export default class Index extends ElectrodeDemoIndex {
-
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-    // pass through  the libraryScope and components info for this component
-    this._setDemoContext(libraryScope, components);
-  }
-
-}
+export default () => <ElectrodeDemoIndex libraryScope={libraryScope} components={components} />;
 
 ```
 
