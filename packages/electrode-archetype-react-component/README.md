@@ -293,5 +293,5 @@ please see [`CONTRIBUTING.md`](./CONTRIBUTING.md) for our guidelines.
 The main check we provide for the archetype itself is:
 
 ```sh
-$ gulp check
+$ gulp archetype:check
 ```
