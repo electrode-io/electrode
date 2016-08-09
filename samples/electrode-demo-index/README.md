@@ -1,6 +1,6 @@
 #Electrode Demo Index
 
-An extendable class for demos in Electrode components.
+A shared demo component for Electrode components.
 
 ## Installation
 
@@ -84,3 +84,9 @@ export default () => <ElectrodeDemoIndex libraryScope={libraryScope} components=
 ```
 
 The `demo/demo.jsx` file should now resemble the example in **Usage** above.
+
+The component will likely have a `devDependency` of `component-playground` which should now be removed.
+
+If the component has a `devDependency` of `object-assign`, `grep` for `assign` in `src`, `test` and `demo`
+and if there are no instances of it, you can safely remove the dependency of `object-assign` too.
+
