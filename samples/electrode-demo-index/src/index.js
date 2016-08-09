@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import Playground from "component-playground";
 import assign from "object-assign";
+import warning from "warning";
+
+const EMPTY_ARRAY = [];
 
 export default class ElectrodeDemoIndex extends Component {
 
@@ -9,12 +12,43 @@ export default class ElectrodeDemoIndex extends Component {
     super(props);
 
     this.state = {
-      libraryScope: null,
-      components: []
+      libraryScope: props.libraryScope,
+      components: props.components
     };
   }
 
+  componentWillReceiveProps(props) {
+    if (
+      props.libraryScope !== this.state.libraryScope ||
+      props.components !== this.state.components
+    ) {
+      this.setState({
+        libraryScope: props.libraryScope,
+        components: props.components
+      });
+    }
+  }
+
   _setDemoContext(libraryScope, components) {
+    warning(
+      false,
+      "DEPRECATED! Extending ElectrodeDemoIndex has been deprecated and will be " +
+      "removed in the next major version. Please update the code: \n" +
+      "```\n" +
+      "export default class extends ElectrodeDemoIndex {\n" +
+      "  componentDidMount () {\n" +
+      "    this._setDemoContext(libraryScope, components);\n" +
+      "  }\n" +
+      "}\n" +
+      "```\n" +
+      " to be:\n" +
+      "```\n" +
+      "export default () => (\n" +
+      "  <ElectrodeDemoIndex libraryScope={libraryScope} components={components} />;\n" +
+      ");\n" +
+      "```\n"
+    );
+
     this.setState({
       libraryScope,
       components
@@ -24,7 +58,7 @@ export default class ElectrodeDemoIndex extends Component {
   render() {
 
     const localScope = assign({ React, ReactDOM }, this.props.scope || {}, this.state.libraryScope);
-    const components = this.state.components;
+    const components = this.state.components || EMPTY_ARRAY;
 
     return (
       <div className="component-documentation">
@@ -62,5 +96,7 @@ export default class ElectrodeDemoIndex extends Component {
 }
 
 ElectrodeDemoIndex.propTypes = {
-  scope: React.PropTypes.object
+  scope: React.PropTypes.object,
+  libraryScope: React.PropTypes.object,
+  components: React.PropTypes.array
 };
