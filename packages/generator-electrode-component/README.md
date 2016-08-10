@@ -14,7 +14,7 @@ See [electrode-archetype-react-component-component-gulp-tasks] for documentation
 Install the generator:
 
 ```bash
-npm install -g generator-react-component
+npm install -g generator-electrode-component
 ```
 
 Then run the generator:
