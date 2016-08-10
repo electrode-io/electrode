@@ -1,0 +1,13 @@
+{
+  "plugins": {
+    "inert": {
+      "enable": true
+    },
+    "staticPaths": {
+      "enable": true,
+      "options": {
+        "pathPrefix": "dist"
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "description": "Isomorphic React Application With NodeJS backend",
+  "homepage": "",
+  "author": {},
+  "contributors": [],
+  "files": [],
+  "main": "server/index.js",
+  "keywords": [],
+  "repository": {},
+  "license": "UNLICENSED",
+  "scripts": {
+    "test": "gulp test",
+    "coverage": "gulp check"
+  },
+  "dependencies": {
+    "bluebird": "^2.10.2",
+    "electrode-router-resolver-engine": "^1.0.0",
+    "electrode-server": "^1.0.0",
+    "lodash": "^4.10.1"
+  },
+  "devDependencies": {
+    "electrode-archetype-react-app": "^1.0.0",
+    "electrode-archetype-react-app-dev": "^1.0.0",
+    "gulp": "^3.9.1"
+  }
+}
