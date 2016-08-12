@@ -16,7 +16,7 @@
   },
   "scripts": {},
   "dependencies": {
-    "electrode-check-dependencies": "/Users/ananava/walmart-oss/electrode-check-dependencies",
+    "electrode-check-dependencies": "^1.0.2",
     "electrode-docgen": "^1.0.0",
     "electrode-gulp-helper": "^1.0.0",
     "babel-cli": "^6.6.5",
