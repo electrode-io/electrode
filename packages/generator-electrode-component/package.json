@@ -1,6 +1,6 @@
 {
   "name": "generator-electrode-component",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Yeoman generator for Electrode-ReactJS Component projects",
   "license": "MIT",
   "main": "app/index.js",
