@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import Playground from "component-playground";
 import assign from "object-assign";
-import warning from "warning";
 
 const EMPTY_ARRAY = [];
 
@@ -27,32 +26,6 @@ export default class ElectrodeDemoIndex extends Component {
         components: props.components
       });
     }
-  }
-
-  _setDemoContext(libraryScope, components) {
-    warning(
-      false,
-      "DEPRECATED! Extending ElectrodeDemoIndex has been deprecated and will be " +
-      "removed in the next major version. Please update the code: \n" +
-      "```\n" +
-      "export default class extends ElectrodeDemoIndex {\n" +
-      "  componentDidMount () {\n" +
-      "    this._setDemoContext(libraryScope, components);\n" +
-      "  }\n" +
-      "}\n" +
-      "```\n" +
-      " to be:\n" +
-      "```\n" +
-      "export default () => (\n" +
-      "  <ElectrodeDemoIndex libraryScope={libraryScope} components={components} />;\n" +
-      ");\n" +
-      "```\n"
-    );
-
-    this.setState({
-      libraryScope,
-      components
-    });
   }
 
   render() {

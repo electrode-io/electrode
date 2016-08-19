@@ -1,36 +1,36 @@
 {
-  "name": "@walmart/electrode-demo-index",
-  "version": "1.4.0",
+  "name": "electrode-demo-index",
+  "version": "1.0.0",
   "description": "An extendable class for demos in Electrode components",
   "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "git://gecgithub01.walmart.com/electrode/demo-index.git"
+    "url": "git://github.com/electrode-io/demo-index.git"
   },
   "scripts": {
-    "preversion": "builder run test",
-    "test:dev": "builder run test-frontend",
-    "test": "builder run check-cov && builder run cov-frontend",
-    "demo": "builder run server-dev",
-    "hot": "builder run server-hot",
-    "build": "npm run generate && builder run build-lib",
+    "preversion": "gulp test",
+    "test:dev": "gulp test-frontend",
+    "test": "gulp check-cov && gulp cov-frontend",
+    "demo": "gulp server-dev",
+    "hot": "gulp server-hot",
+    "build": "npm run generate && gulp build-lib",
     "generate": "npm run generate-metadata && npm run generate-documentation",
     "generate-metadata": "electrode-docgen --package ./package.json --src ./src --metadata components.json",
     "generate-documentation": "electrode-docgen --package ./package.json --src ./src --markdown components.md",
-    "prepublish": "builder run build"
+    "prepublish": "gulp build"
   },
-  "keywords": [],
+  "keywords": [
+    "electrode",
+    "demo"
+  ],
   "author": "Dave Stevens <dstevens@walmartlabs.com>",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "dependencies": {
-    "component-playground": "^1.3.0",
-    "warning": "^3.0.0"
+    "component-playground": "^1.3.1",
+    "object-assign": "^4.1.0"
   },
   "devDependencies": {
-    "@walmart/electrode-archetype-react-component": "^10.2.2",
-    "@walmart/electrode-archetype-react-component-dev": "^10.2.2",
-    "builder": "^2.10.1",
-    "react": "^0.14.8",
-    "react-dom": "^0.14.8"
+    "electrode-archetype-react-component": "^1.0.0",
+    "electrode-archetype-react-component-dev": "^1.0.0"
   }
 }
