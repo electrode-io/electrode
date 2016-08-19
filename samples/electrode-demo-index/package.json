@@ -23,7 +23,16 @@
     "electrode",
     "demo"
   ],
-  "author": "Dave Stevens <dstevens@walmartlabs.com>",
+  "author": [
+    {
+      "name": "Dave Stevens",
+      "email": "dstevens@walmartlabs.com"
+    },
+    {
+      "name": "Caoyang Shi",
+      "url": "https://github.com/caoyangs"
+    }
+  ],
   "license": "MIT",
   "dependencies": {
     "component-playground": "^1.3.1",

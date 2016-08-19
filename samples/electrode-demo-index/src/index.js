@@ -5,6 +5,14 @@ import assign from "object-assign";
 
 const EMPTY_ARRAY = [];
 
+const getCodeText = (example) => {
+  return example.noRender ? [
+    "<IntlProvider locale={locale} messages={messages}>\n",
+    ` ${example.code}`,
+    "</IntlProvider>\n"
+  ].join("") : example.code;
+};
+
 export default class ElectrodeDemoIndex extends Component {
 
   constructor(props) {
@@ -38,13 +46,9 @@ export default class ElectrodeDemoIndex extends Component {
         {components.map((component, index) => {
 
           const {
-            options,
             title,
             examples
           } = component;
-
-          const ux = options && options.ux ?
-            options.ux() : null;
 
           return (
             <div key={index}>
@@ -54,12 +58,11 @@ export default class ElectrodeDemoIndex extends Component {
                   {example.title ?
                     <a name={example.title.replace(/\s/g, "").toLowerCase()}/> : null }
                   {example.title ? <h4>{example.title}</h4> : null}
-                  <Playground codeText={example.code}
+                  <Playground codeText={getCodeText(example)}
                     scope={assign(localScope, example.extraScope || {})}
                     noRender={example.noRender}/>
-                </div>
+                  </div>
               ))}
-              {index === 0 && ux ? ux : ""}
             </div>
           );
         })}
