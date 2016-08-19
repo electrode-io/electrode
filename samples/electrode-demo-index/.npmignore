@@ -34,6 +34,7 @@ $RECYCLE.BIN/
 coverage
 node_modules
 test
+dist
 
 # Misc
 
