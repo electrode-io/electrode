@@ -78,6 +78,10 @@ const tasks = {
     desc: false,
     task: () => shell.rm("-rf", "./tmp")
   },
+  "build-dist:generate-service-worker": {
+    desc: "Generate Service Worker using the options provided in the app/config/sw-precache-config.json file in PROD mode",
+    task: `sw-precache --config=config/sw-precache-config.json --verbose`
+  },
   "build-dist:flatten-l10n": {
     desc: false,
     task: `node ${__dirname}/scripts/l10n/flatten-messages.js`
@@ -105,6 +109,10 @@ const tasks = {
   "hot": {
     desc: "Start server with watch in hot mode with webpack-dev-server",
     task: [".webpack-dev", ["server-hot", "server-watch"]]
+  },
+  "generate-service-worker": {
+    desc: "Generate Service Worker using the options provided in the app/config/sw-precache-config.json file for dev/hot mode",
+    task: `sw-precache --config=config/sw-precache-config.json --verbose --no-handle-fetch`
   },
   "lint": [["lint-client", "lint-client-test", "lint-server", "lint-server-test"]],
   "lint-client": `eslint --ext .js,.jsx -c ${config.eslint}/.eslintrc-react client templates`,
