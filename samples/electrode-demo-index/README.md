@@ -8,8 +8,7 @@ A shared demo component for Electrode components.
 
 ## Usage
 
-Components should implement a `demo/demo.jsx` file as follows (there should be no
-`demo/index.jsx`).
+Components should implement a `demo/demo.jsx` file as follows.
 
 `demo/demo.jsx`
 
@@ -18,6 +17,12 @@ import React from "react";
 import Demo from "electrode-demo-index";
 
 import * as libraryScope from "../src/index";
+
+const locale = "en";
+const messages = require(`../src/lang/${locale}.json`);
+const localeData = require(`react-intl/locale-data/${locale}`);
+
+addLocaleData(localeData);
 
 const components = [
   {
@@ -31,5 +36,6 @@ const components = [
     ]
   } // any additional components here
 ];
+const localScope = {IntlProvider, messages, locale};
 
 export default () => <Demo libraryScope={libraryScope} components={components} />;
