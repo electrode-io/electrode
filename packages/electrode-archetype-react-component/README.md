@@ -48,7 +48,6 @@ gulp, webpack, demo, electrode component archetype, live-reload
    create src/index.js
    create demo/demo.jsx
    create demo/demo.styl
-   create demo/index.jsx
    create demo/examples/product-card.example
    create test/client/.eslintrc
    create test/client/components/product-card.spec.jsx
