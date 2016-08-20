@@ -1,6 +1,6 @@
 {
   "name": "electrode-demo-index",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An extendable class for demos in Electrode components",
   "main": "lib/index.js",
   "repository": {
