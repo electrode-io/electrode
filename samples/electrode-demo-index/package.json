@@ -8,7 +8,7 @@
     "url": "git://github.com/electrode-io/demo-index.git"
   },
   "scripts": {
-    "preversion": "gulp test",
+    "preversion": "npm test",
     "test:dev": "gulp test-frontend",
     "test": "gulp check-cov && gulp cov-frontend",
     "demo": "gulp server-dev",
