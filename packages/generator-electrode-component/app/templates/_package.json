@@ -16,10 +16,7 @@
   "devDependencies": {
     "electrode-archetype-react-component": "^1.0.0",
     "electrode-archetype-react-component-dev": "^1.0.0",
-    "component-playground": "^1.2.0",
-    "object-assign": "^4.1.0",
-    "react": "^15.2.0",
-    "react-dom": "^15.2.0"
+    "electrode-demo-index": "^1.0.1"
   },
   "engines": {
     "node": "^4.2.6",

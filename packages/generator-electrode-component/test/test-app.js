@@ -20,10 +20,11 @@ describe("electrode::generator-electrode-component", function () {
       .toPromise();
   });
 
-  it("creates files", function () {
+  it("creates files", function (done) {
     assert.file([
       "package.json",
       "gulpfile.js"
     ]);
+    done();
   });
 });

@@ -19,6 +19,6 @@ const tasks = {
   "generate-metadata": () => exec(`electrode-docgen --package ./package.json --src ./src --metadata components.json`),
   "prepublish": ["npm:prepublish"],
   "preversion": ["check-cov"]
-}
+};
 
 require("electrode-archetype-react-component")(tasks);

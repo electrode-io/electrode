@@ -1,13 +1,32 @@
 /*@flow*/
 /*global document:false*/
 import React from "react";
+import { addLocaleData, IntlProvider } from "react-intl";
+import Demo from "electrode-demo-index";
 
-import Index from "./index.jsx";
+import * as libraryScope from "../src/index";
 
-export default class Demo extends React.Component {
-  render() {
-    return (
-      <Index />
-    );
+const locale = "en";
+const messages = require(`../src/lang/${locale}.json`);
+const localeData = require(`react-intl/locale-data/${locale}`);
+
+addLocaleData(localeData);
+
+const localScope = {IntlProvider, messages, locale};
+
+const components = [
+  {
+    title: "<%= componentName %>",
+    examples: [
+      {
+        type: "playground",
+        code: require("raw!./examples/<%= projectName %>.example"),
+        noRender: true
+      }
+    ]
   }
-}
+];
+
+export default () => (
+  <Demo scope={localScope} libraryScope={libraryScope} components={components} />
+);
