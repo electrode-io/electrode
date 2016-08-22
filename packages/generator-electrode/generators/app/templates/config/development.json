@@ -3,7 +3,7 @@
     "inert": {
       "enable": true
     },
-    "staticPaths": {
+    "electrodeStaticPaths": {
       "enable": true,
       "options": {
         "pathPrefix": "dist"
