@@ -2,6 +2,7 @@
 
 const shell = require("shelljs");
 const Path = require("path");
+const fs = require("fs");
 const archetype = require("./config/archtype");
 const gulpHelper = archetype.devRequire("electrode-gulp-helper");
 const config = archetype.config;
@@ -36,6 +37,51 @@ function checkFrontendCov(minimum) {
   return exec(`istanbul check-coverage 'coverage/client/*/coverage.json' --config=${config.istanbul}/.istanbul.${minimum}yml`);
 }
 
+function checkFileExists(path) {
+  /**
+   * fs.accessSync is a synchronous version of fs.access().
+   * fs.accessSync() throws if any accessibility checks fail, and does nothing otherwise.
+   *
+   * https://nodejs.org/api/fs.html#fs_fs_accesssync_path_mode
+   */
+  try {
+    fs.accessSync(path, fs.F_OK);
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+/**
+ * [generateServiceWorker gulp task to generate service worker code that will precache specific resources so they work offline.]
+ *
+ */
+function generateServiceWorker() {
+  const NODE_ENV = process.env.NODE_ENV;
+  const serviceWorkerExists = checkFileExists("./service-worker.js");
+  const serviceWorkerConfigExists = checkFileExists("config/sw-precache-config.json");
+
+  /**
+   * Determines whether the fetch event handler is included in the generated service worker code,
+   * by default value is set to true for development builds set the value to false
+   *
+   * https://github.com/GoogleChrome/sw-precache#handlefetch-boolean
+   *
+   */
+  const cacheRequestFetch = (NODE_ENV !== "production" ? "--no-handle-fetch" : "");
+
+  if (serviceWorkerConfigExists) {
+    // generate-service-worker
+    return exec(`sw-precache --config=config/sw-precache-config.json --verbose ${cacheRequestFetch}`);
+  } else if (serviceWorkerExists && !serviceWorkerConfigExists) {
+    // this is the case when service-worker exists from the previous build but service-worker-config
+    // does not exist/deleted on purpose for future builds
+    return shell.rm("-rf", "./service-worker.js");
+  } else {
+    // default case
+    return false;
+  }
+}
 /*
  *
  * For information on how to specify a task, see:
@@ -64,7 +110,7 @@ const tasks = {
     desc: "Build static copy of your app's client bundle for development",
     task: ["clean-dist", "build-dist-dev-static"]
   },
-  "build-dist": ["clean-dist", "build-dist-min", "build-dist:flatten-l10n", "build-dist:clean-tmp"],
+  "build-dist": ["clean-dist", "build-dist-min", "build-dist:flatten-l10n", "generate-service-worker", "build-dist:clean-tmp"],
   "build-dist-dev-static": {
     desc: false,
     task: `webpack --config ${config.webpack}/webpack.config.dev.static.js --colors`
@@ -77,10 +123,6 @@ const tasks = {
   "build-dist:clean-tmp": {
     desc: false,
     task: () => shell.rm("-rf", "./tmp")
-  },
-  "build-dist:generate-service-worker": {
-    desc: "Generate Service Worker using the options provided in the app/config/sw-precache-config.json file in PROD mode",
-    task: `sw-precache --config=config/sw-precache-config.json --verbose`
   },
   "build-dist:flatten-l10n": {
     desc: false,
@@ -100,7 +142,7 @@ const tasks = {
   "debug": ["build-dev-static", "server-debug"],
   "dev": {
     desc: "Start server with watch in development mode with webpack-dev-server",
-    task: [".webpack-dev", ["server-dev", "server-watch"]]
+    task: [".webpack-dev", ["server-dev", "server-watch", "generate-service-worker"]]
   },
   "dev-static": {
     desc: "Start server in development mode with statically built files",
@@ -108,11 +150,11 @@ const tasks = {
   },
   "hot": {
     desc: "Start server with watch in hot mode with webpack-dev-server",
-    task: [".webpack-dev", ["server-hot", "server-watch"]]
+    task: [".webpack-dev", ["server-hot", "server-watch", "generate-service-worker"]]
   },
   "generate-service-worker": {
-    desc: "Generate Service Worker using the options provided in the app/config/sw-precache-config.json file for dev/hot mode",
-    task: `sw-precache --config=config/sw-precache-config.json --verbose --no-handle-fetch`
+    desc: "Generate Service Worker using the options provided in the app/config/sw-precache-config.json file for prod/dev/hot mode",
+    task: () => generateServiceWorker()
   },
   "lint": [["lint-client", "lint-client-test", "lint-server", "lint-server-test"]],
   "lint-client": `eslint --ext .js,.jsx -c ${config.eslint}/.eslintrc-react client templates`,
