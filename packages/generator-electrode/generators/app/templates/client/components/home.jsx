@@ -3,7 +3,7 @@ import React from "react";
 export class Home extends React.Component {
   render() {
     return (
-      <h1>Hello React</h1>
+      <div><h1>Hello <a href="https://github.com/electrode-io">Electrode</a></h1></div>
     );
   }
 }

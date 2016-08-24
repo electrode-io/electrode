@@ -3,6 +3,7 @@ import { routes } from "./routes";
 import { Router } from "react-router";
 import { Resolver } from "react-resolver";
 import { createHistory } from "history";
+import "./styles/base.styl";
 
 window.webappStart = () => {
   Resolver.render(
