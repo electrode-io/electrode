@@ -15,8 +15,7 @@
   "dependencies": {},
   "devDependencies": {
     "electrode-archetype-react-component": "^1.0.0",
-    "electrode-archetype-react-component-dev": "^1.0.0",
-    "electrode-demo-index": "^1.0.1"
+    "electrode-archetype-react-component-dev": "^1.0.0"
   },
   "engines": {
     "node": "^4.2.6",
