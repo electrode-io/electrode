@@ -17,6 +17,7 @@
   "scripts": {},
   "dependencies": {
     "electrode-check-dependencies": "^1.0.2",
+    "electrode-demo-index": "^1.0.0",
     "electrode-docgen": "^1.0.0",
     "electrode-gulp-helper": "^1.0.0",
     "babel-cli": "^6.6.5",
