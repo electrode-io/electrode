@@ -27,6 +27,8 @@ const components = [
   }
 ];
 
-export default () => (
+const demo = () => (
   <Demo scope={localScope} libraryScope={libraryScope} components={components} />
 );
+
+export default demo;
