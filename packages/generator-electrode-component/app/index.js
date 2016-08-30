@@ -3,8 +3,10 @@
 var _ = require("lodash");
 var chalk = require("chalk");
 var yeoman = require("yeoman-generator");
+var optionOrPrompt = require("yeoman-option-or-prompt");
 
 var ReactComponentGenerator = yeoman.generators.Base.extend({
+	_optionOrPrompt: optionOrPrompt,
 
 	initializing: function() {
 		this.pkg = require("../package.json");
@@ -28,7 +30,7 @@ var ReactComponentGenerator = yeoman.generators.Base.extend({
 			default: "wysiwyg-component"
 		}];
 
-		this.prompt(prompts, function (props) {
+		this._optionOrPrompt(prompts, function (props) {
 			_.extend(this, props);
 			this.packageName = _.kebabCase(_.deburr(this.projectName));
 			this.componentName = this.packageName
@@ -65,7 +67,7 @@ var ReactComponentGenerator = yeoman.generators.Base.extend({
 			message: "What is your name? (for copyright notice, etc.)"
 		}];
 
-		this.prompt(prompts, function (props) {
+		this._optionOrPrompt(prompts, function (props) {
 			_.extend(this, props);
 			done();
 		}.bind(this));
@@ -91,7 +93,7 @@ var ReactComponentGenerator = yeoman.generators.Base.extend({
 			default: true
 		}];
 
-		this.prompt(prompts, function (props) {
+		this._optionOrPrompt(prompts, function (props) {
 			_.extend(this, props);
 			if (props.createDirectory) {
 				this.destinationRoot(this.packageName);
@@ -113,7 +115,7 @@ var ReactComponentGenerator = yeoman.generators.Base.extend({
 		},
 		component: function() {
 			this.template("src/components/_component.jsx", "src/components/" + this.projectName + ".jsx");
-			this.template("src/styles/_component.styl", "src/styles/" + this.projectName + ".styl");
+			this.template("src/styles/_component.css", "src/styles/" + this.projectName + ".css");
 
 			// l10n language templates
 			this.template("src/lang/_DefaultMessages.js", "src/lang/default-messages.js");
@@ -132,7 +134,7 @@ var ReactComponentGenerator = yeoman.generators.Base.extend({
 		},
 		demo: function() {
 			this.template("demo/_demo.jsx", "demo/demo.jsx");
-			this.template("demo/_demo.styl", "demo/demo.styl");
+			this.template("demo/_demo.css", "demo/demo.css");
 			this.template("demo/examples/_component.example", "demo/examples/" + this.projectName + ".example");
 		}
 	},

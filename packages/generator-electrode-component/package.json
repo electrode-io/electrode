@@ -26,17 +26,17 @@
     "app"
   ],
   "keywords": [
-    "electrode",
     "yeoman-generator",
+    "electrode",
     "react",
     "component",
-    "browserify",
     "app"
   ],
   "dependencies": {
     "chalk": "^1.1.1",
     "lodash": "^4.13.1",
-    "yeoman-generator": "^0.20.3"
+    "yeoman-generator": "^0.20.3",
+    "yeoman-option-or-prompt": "^1.0.2"
   },
   "devDependencies": {
     "chai": "^3.2.0",

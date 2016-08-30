@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "<%= projectName %>",
   "main": "lib/index.js",
-  "author": "<%= developerName %>",
+  "author": {
+    "name": "<%= developerName %>",
+    "url": "https://github.com/<%= ghUser %>"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/<%= packageGitHubOrg %>/<%= ghRepo %>.git"

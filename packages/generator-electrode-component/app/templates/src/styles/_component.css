@@ -1,0 +1,14 @@
+:root {
+  --black: #000;
+  --white: #fff;
+}
+
+.baseStyle {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+.someStyle {
+  composes: baseStyle;
+  font-size: 18px;
+}
