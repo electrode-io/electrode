@@ -1,0 +1,30 @@
+yo electrode-component --projectName=product-card --packageName=product-card --packageGitHubOrg=walmartlabs --developerName="Arpan Nanavati" --ghUser=ananavati --ghRepo=product-card --createDirectory=Y
+
+language: node_js
+
+node_js:
+  - "4.2"
+  - "5.0"
+
+brances:
+  only:
+    - master
+
+before_install:
+  - currentfolder=${PWD##*/}
+  - if [ "$currentfolder" != 'electrode-archetype-react-component' ]; then cd .. && eval "mv $currentfolder electrode-archetype-react-component" && cd electrode-archetype-react-component; fi
+  - npm install
+  - cd dev ; npm install ; cd ..
+
+script:
+  # run the archetype check task.
+  - gulp archetype:check
+
+  # create a new component using electrode-component yeoman generator to run the components unit-tests.
+  - npm install -g yo gulp generator-electrode-component
+  - yo electrode-component --projectName=product-card --packageName=product-card --packageGitHubOrg=walmartlabs --developerName="Arpan Nanavati" --ghUser=ananavati --ghRepo=product-card --createDirectory=Y
+  - cd product-card
+
+  # run ci tests and generate a bundle.
+  - gulp check-ci
+  - gulp build
