@@ -63,15 +63,12 @@ const tasks = {
   "build-lib:copy-flow": () => exec(`node ${__dirname}/scripts/copy-as-flow-declaration.js`),
   "build-lib:flatten-l10n": () => exec(`node ${__dirname}/scripts/l10n/flatten-messages.js`),
 
-  // TODO: fix builder-init tasks using yoeman or something like builder-init
-  // "archetype:check": "npm run archetype:lint && npm run archetype:test-dev-pkg && rm -rf test-init && npm run archetype:test-init && npm run archetype:test-init-pkg && rm -rf test-init",
-  "archetype:check": ["archetype:lint", "archetype:test-dev-pkg", "clean-test-init"],
+  "archetype:check": ["archetype:lint", "archetype:test-dev-pkg", "clean-test-init", "archetype:test-init", "archetype:test-init-pkg", "clean-test-init"],
   "archetype:lint": ["archetype:lint-server"],
   "archetype:lint-server": () => exec(`eslint --color -c config/eslint/.eslintrc-node config/karma config/webpack demo-server`),
-  // "archetype:prepublish": "archetype-support gen-dev",
   "archetype:test-dev-pkg": () => exec(`pjv -f dev/package.json`),
-  // "archetype:test-init": "builder-init `pwd` --prompts='{\"packageName\":\"test-init\",\"packageGitHubOrg\":\"electrode\",\"packageDescription\":\"test\",\"licenseDate\":\"2016\",\"licenseOrg\":\"WML\",\"destination\":\"test-init\"}'",
-  // "archetype:test-init-pkg": "pjv -f test-init/package.json",
+  "archetype:test-init": () => exec(`yo electrode-component --projectName=test-init --packageName=test-init --packageGitHubOrg=walmartlabs --developerName="Arpan Nanavati" --ghUser=ananavati --ghRepo=test-init --createDirectory=Y`),
+  "archetype:test-init-pkg": "pjv -f test-init/package.json",
 
   "check": ["check-dep", "lint", "test-cov"],
   "check-ci": ["check-dep", "lint", "test-ci"],
