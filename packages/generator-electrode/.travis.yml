@@ -5,3 +5,7 @@ node_js:
   - v4
   - '0.12'
   - '0.10'
+notifications:
+  email:
+    - XChen@walmartlabs.com
+    - ananavati@walmartlabs.com
