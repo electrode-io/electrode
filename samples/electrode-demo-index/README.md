@@ -38,4 +38,8 @@ const components = [
 ];
 const localScope = {IntlProvider, messages, locale};
 
-export default () => <Demo libraryScope={libraryScope} components={components} />;
+const demo = () => <Demo libraryScope={libraryScope} components={components} />;
+
+export default demo;
+```
+
