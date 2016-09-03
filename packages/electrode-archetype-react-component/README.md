@@ -47,7 +47,7 @@ gulp, webpack, demo, electrode component archetype, live-reload
    create src/styles/product-card.styl
    create src/index.js
    create demo/demo.jsx
-   create demo/demo.styl
+   create demo/demo.css
    create demo/examples/product-card.example
    create test/client/.eslintrc
    create test/client/components/product-card.spec.jsx
@@ -118,10 +118,12 @@ This archetype assumes an architecture as follows:
 ```
 demo/
   demo.jsx
-  demo.styl
+  demo.css
 src
   components/
     *.jsx
+  styles/
+    *.css
   index.js
 test
   client/
@@ -137,15 +139,10 @@ package.json
 
 ## CSS Modules + CSS next
 
-By default, this archetype assumes you are using Stylus and `.styl` files containing Global CSS. If you want to use `CSS-Modules + CSS-Next`, you need opt-in and use `.css` files. This archetype does not support using Stylus and `CSS-Modules + CSS-Next` together. You can opt-in to `CSS-Modules + CSS-Next` by adding a config section to your project's package.json and setting the necessary `env` variable to true:
+By default, this archetype assumes you are using CSS-Modules + CSS-Next, you need
+to opt-in to stylus support by adding a `*.styl` to your *project's* `demo/demo.styl` & `src/styles/*.styl`
 
-```
-"config": {
-  "electrode_archetype_react_component_webpack_css_modules": "true"
-}
-```
-
-Once enabled, you can import css files in your components and reference class names via the exported object `src/components/<%= componentPath %>.js`:
+Import css files in your components and reference class names via the exported object `src/components/<%= componentPath %>.js`:
 
 ```javascript
 import React from "react";
@@ -175,7 +172,7 @@ Add following styling to `src/styles/<%= componentPath %>.css`
 }
 
 .someStyle {
-  composes: baseComponent;
+  composes: baseStyle;
   font-size: 18px;
 }
 ```

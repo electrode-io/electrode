@@ -36,7 +36,8 @@ module.exports = {
       // Allow root import of `src/FOO` from ROOT/src.
       src: path.join(process.cwd(), "src"),
       "local-component-demo": path.join(process.cwd() + "/demo/demo.jsx"),
-      "local-demo-styl": path.join(process.cwd() + "/demo/demo.styl")
+      // By default, this archetype assumes you are using CSS-Modules + CSS-Next
+      "local-demo-css": path.join(process.cwd() + "/demo/demo")
     }
   }),
   resolveLoader: base.resolveLoader,

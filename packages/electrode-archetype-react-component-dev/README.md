@@ -46,7 +46,7 @@ gulp, webpack, demo, electrode component archetype, live-reload
     create src/styles/product-card.styl
     create src/index.js
     create demo/demo.jsx
-    create demo/demo.styl
+    create demo/demo.css
     create demo/index.jsx
     create demo/examples/product-card.example
     create test/client/.eslintrc
@@ -118,10 +118,12 @@ This archetype assumes an architecture as follows:
 ```
 demo/
   demo.jsx
-  demo.styl
+  demo.css
 src
   components/
     *.jsx
+  styles/
+    *.css
   index.js
 test
   client/
@@ -137,15 +139,8 @@ package.json
 
 ## CSS Modules
 
-By default, this archetype assumes your Stylus files contain Global CSS. If you are using CSS Modules, you need
-to opt-in to CSS Modules support by adding a `config` section to your *project's* `package.json` and setting the
-necessary env variable to `true`:
-
-```
-"config": {
-  "electrode_archetype_react_component_webpack_css_modules": "true"
-}
-```
+By default, this archetype assumes you are using CSS-Modules + CSS-Next, you need
+to opt-in to stylus support by adding a `*.styl` to your *project's* `demo/demo.styl` & `src/styles/*.styl`
 
 ## Gotchas
 
