@@ -9,5 +9,19 @@
         "pathPrefix": "dist"
       }
     }
+  },
+  "server": {
+    "connections": {
+      "compression": false
+    },
+    "debug": {
+      "log": ["error"],
+      "request": ["error"]
+    }
+  },
+  "connections": {
+    "default": {
+      "port": 3000
+    }
   }
 }
