@@ -24,46 +24,48 @@ config
 
 ```
 {
-  server: {
-    connections: {
-      compression: false
+  "server": {
+    "connections": {
+      "compression": false
     },
-    debug: {
-      log: ['error'],
-      request: ['error']
+    "debug": {
+      "log": ["error"],
+      "request": ["error"]
     }
   },
-  connections: {
-    default: {
-      port: 3000
+  "connections": {
+    "default": {
+      "port": 3000
     }
   }
 }
 ```
 
--  The above settings should show server log errors that may be beneficial for debugging, disables content encoding, and run server in port 3000
+- The above settings should show server log errors that may be beneficial for debugging, disables content encoding, and run server in port 3000
 - Update the `config/production.json` to have the following settings: 
 
 ```
 {
-  server: {
-    connections: {
-      compression: true
+  "server": {
+    "connections": {
+      "compression": true
     },
-    debug: {
-      log: false,
-      request: false
+    "debug": {
+      "log": false,
+      "request": false
     }
   },
-  connections: {
-    default: {
-      port: 8000
+  "connections": {
+    "default": {
+      "port": 8000
     }
   }
 }
 ```
 
--  The above settings should disable server log errors, enables content encoding, and run server in port 8000
+- The above settings should disable server log errors, enable content encoding, and run server in port 8000
+- The `server` key related configs are from hapi.js. More config options can be found here: http://hapijs.com/api#new-serveroptions
+- The `connections` key are electrode server specific: https://github.com/electrode-io/electrode-server/tree/master/lib/config
 - Start the electrode app in `development` environment: 
 
 ```

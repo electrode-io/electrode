@@ -6,5 +6,19 @@
     "electrodeStaticPaths": {
       "enable": false
     }
+  },
+  "server": {
+    "connections": {
+      "compression": true
+    },
+    "debug": {
+      "log": false,
+      "request": false
+    }
+  },
+  "connections": {
+    "default": {
+      "port": 8000
+    }
   }
 }
