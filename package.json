@@ -1,0 +1,42 @@
+{
+  "name": "electrode-app-confippet",
+  "version": "0.0.0",
+  "description": "electrode app confippet quickstart",
+  "homepage": "https://github.com/electrode-io/electrode-app-confippet",
+  "author": {
+    "name": "Ray de Castro",
+    "email": "captray108@gmail.com",
+    "url": ""
+  },
+  "contributors": [],
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "keywords": [
+    "electrode",
+    "app",
+    "confippet"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/raydecastro/electrode-app-confippet.git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "test": "gulp test",
+    "coverage": "gulp check"
+  },
+  "dependencies": {
+    "bluebird": "^2.10.2",
+    "electrode-router-resolver-engine": "^1.0.0",
+    "electrode-server": "^1.0.0",
+    "electrode-static-paths": "^1.0.0",
+    "lodash": "^4.10.1"
+  },
+  "devDependencies": {
+    "electrode-archetype-react-app": "^1.0.0",
+    "electrode-archetype-react-app-dev": "^1.0.0",
+    "gulp": "^3.9.1"
+  }
+}

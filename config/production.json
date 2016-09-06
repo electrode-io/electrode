@@ -1,0 +1,10 @@
+{
+  "plugins": {
+    "inert": {
+      "enable": false
+    },
+    "electrodeStaticPaths": {
+      "enable": false
+    }
+  }
+}
