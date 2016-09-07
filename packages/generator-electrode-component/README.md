@@ -20,7 +20,7 @@ npm install -g generator-electrode-component
 Then run the generator:
 
 ```bash
-yo react-component
+yo electrode-component
 ```
 
 ... and follow the prompts.
