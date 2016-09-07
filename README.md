@@ -1,8 +1,9 @@
 # Electrode App Confippet 
+- This repo is a sample app generated from `yo electrode`
 
 ## Quickstart guide
 
-- Confippet is built-in to electrode. 
+- Confippet is a standalone module that can be used w/o other parts of electrode
 - Scaffold an electrode app using the following commands: 
 
 ```
@@ -69,15 +70,13 @@ config
 - Start the electrode app in `development` environment: 
 
 ```
-export NODE_ENV=development
-gulp hot
+NODE_ENV=development gulp hot
 ```
 
 - Start the electrode app in `production` environment: 
 
 ```
-export NODE_ENV=production
-gulp hot
+NODE_ENV=production gulp hot
 ```
 
 - Running in the selected environment should load the appropriate configuration settings
