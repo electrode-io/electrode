@@ -81,3 +81,12 @@ gulp hot
 ```
 
 - Running in the selected environment should load the appropriate configuration settings
+- Keys that exist in the `config/default.json` that are also in the other environment configs will be replaced by the environment specific versions
+- In Electrode, the configurations are loaded from `server/index.js` at this line: 
+
+```
+const config = require("electrode-confippet").config;
+const staticPathsDecor = require("electrode-static-paths");
+
+require("electrode-server")(config, [staticPathsDecor()]);
+```
