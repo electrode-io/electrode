@@ -1,5 +1,3 @@
-yo electrode-component --projectName=product-card --packageName=product-card --packageGitHubOrg=walmartlabs --developerName="Arpan Nanavati" --ghUser=ananavati --ghRepo=product-card --createDirectory=Y
-
 language: node_js
 
 node_js:
