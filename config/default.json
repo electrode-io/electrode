@@ -1,0 +1,16 @@
+{
+  "plugins": {
+    "webapp": {
+      "module": "./server/plugins/webapp",
+      "options": {
+        "paths": {
+          "/{args*}": {
+            "content": {
+              "module": "./server/views/index-view"
+            }
+          }
+        }
+      }
+    }
+  }
+}
