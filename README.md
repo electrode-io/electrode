@@ -2,8 +2,7 @@
 - This repo is a sample Electrode app generated from `yo electrode` with Electrode modules
 
 ## Electrode Confippet
-- Confippet is a versatile utility for managing your NodeJS application configuration. Its goal is customization and extensibility, but offers a preset config out of the box.
-- https://github.com/electrode-io/electrode-confippet
+- [Confippet](https://github.com/electrode-io/electrode-confippet) is a versatile utility for managing your NodeJS application configuration. Its goal is customization and extensibility, but offers a preset config out of the box.
 - Scaffold an electrode app using the following commands: 
 
 ```
