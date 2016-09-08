@@ -1,5 +1,5 @@
-# Electrode Boilerplate App 
-- This repo is a sample app generated from `yo electrode` with electrode modules
+# Electrode app with Electrode Modules
+- This repo is a sample Electrode app generated from `yo electrode` with Electrode modules
 
 ## Electrode Confippet
 - Confippet is a standalone module that can be used w/o other parts of electrode

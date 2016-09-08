@@ -1,13 +1,8 @@
 {
-  "name": "electrode-app-confippet",
+  "name": "electrode-app-with-electrode-modules",
   "version": "0.0.0",
-  "description": "electrode app confippet quickstart",
-  "homepage": "https://github.com/electrode-io/electrode-app-confippet",
-  "author": {
-    "name": "Ray de Castro",
-    "email": "captray108@gmail.com",
-    "url": ""
-  },
+  "description": "electrode app with electrode modules",
+  "homepage": "https://github.com/electrode-io",
   "contributors": [],
   "files": [
     "lib"
@@ -20,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/raydecastro/electrode-app-confippet.git"
+    "url": "https://github.com/electrode-io/electrode-app-with-electrode-modules.git"
   },
   "license": "MIT",
   "scripts": {
