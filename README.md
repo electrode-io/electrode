@@ -1,8 +1,7 @@
-# Electrode App Confippet 
-- This repo is a sample app generated from `yo electrode`
+# Electrode Boilerplate App 
+- This repo is a sample app generated from `yo electrode` with electrode modules
 
-## Quickstart guide
-
+## Electrode Confippet
 - Confippet is a standalone module that can be used w/o other parts of electrode
 - Scaffold an electrode app using the following commands: 
 
@@ -12,6 +11,7 @@ npm install -g generator-electrode
 yo electrode
 ```
 
+### Config Files
 - Once the scaffolding is complete, open the following config files: 
 
 ```
@@ -67,6 +67,8 @@ config
 - The above settings should disable server log errors, enable content encoding, and run the server in port 8000
 - The `server` key related configs are from hapi.js. More config options can be found here: http://hapijs.com/api
 - The `connections` key are electrode server specific: https://github.com/electrode-io/electrode-server/tree/master/lib/config
+
+### Running Electrode app
 - Start the electrode app in `development` environment: 
 
 ```
