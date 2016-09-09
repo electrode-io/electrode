@@ -115,6 +115,11 @@ const tasks = {
     desc: false,
     task: `webpack --config ${config.webpack}/webpack.config.dev.static.js --colors`
   },
+  "electrify": ["clean-dist", "build-webpack-stats-with-fullpath", "build-dist:clean-tmp", "run-electrify-cli"],
+  "build-webpack-stats-with-fullpath": {
+    desc: "Build static bundle with stats.json containing fullPaths to inspect the bundle on electrode-electrify",
+    task: `webpack --config ${config.webpack}/webpack.config.stats.electrify.js --colors`
+  },
   "build-dist-min": {
     dep: [".production-env"],
     desc: false,
@@ -127,6 +132,10 @@ const tasks = {
   "build-dist:flatten-l10n": {
     desc: false,
     task: `node ${__dirname}/scripts/l10n/flatten-messages.js`
+  },
+  "run-electrify-cli": {
+    desc: false,
+    task: `electrify dist/server/stats.json -O`
   },
   "check": ["lint", "test-cov"],
   "check-ci": ["lint", "test-ci"],
