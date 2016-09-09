@@ -283,7 +283,6 @@ module.exports = generators.Base.extend({
         local: require.resolve('../webapp')
       });
     }
-
   },
 
   install: function () {
