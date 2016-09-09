@@ -4,10 +4,16 @@ var archetype = require("../../archtype");
 var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
 var StatsWriterPlugin = archetype.devRequire("webpack-stats-plugin").StatsWriterPlugin;
 
-module.exports = function () {
+module.exports = function (opts) {
   var statsOptions = {
     filename: "../server/stats.json"
   };
+
+  if (opts.fullPaths) {
+    // generate stats json with full paths
+    statsOptions.fields = null;
+  }
+
   if (process.env.OPTIMIZE_STATS === "true") {
     statsOptions.fields = null;
     statsOptions.transform = function (data) {
