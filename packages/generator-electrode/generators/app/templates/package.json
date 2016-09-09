@@ -15,7 +15,7 @@
     "coverage": "gulp check"
   },
   "dependencies": {
-    "bluebird": "^2.10.2",
+    "bluebird": "^3.4.6",
     "electrode-router-resolver-engine": "^1.0.0",
     "electrode-server": "^1.0.0",
     "electrode-static-paths": "^1.0.0",
