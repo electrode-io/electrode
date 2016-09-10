@@ -1,5 +1,12 @@
 {
   "plugins": {
+    "electrode-csrf-jwt": {
+      "options": {
+        "secret": "shhhhhh",
+        "expiresIn": 60
+      }
+    },
+    "./server/plugins/csrf": {},
     "webapp": {
       "module": "./server/plugins/webapp",
       "options": {
