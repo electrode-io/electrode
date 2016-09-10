@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "bluebird": "^2.10.2",
+    "electrode-csrf-jwt": "^3.0.1",
     "electrode-router-resolver-engine": "^1.0.0",
     "electrode-server": "^1.0.0",
     "electrode-static-paths": "^1.0.0",
