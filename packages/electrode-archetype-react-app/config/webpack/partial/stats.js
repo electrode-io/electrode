@@ -9,7 +9,7 @@ module.exports = function (opts) {
     filename: "../server/stats.json"
   };
 
-  if (opts.fullPaths) {
+  if (opts && opts.fullPaths) {
     // generate stats json with full paths
     statsOptions.fields = null;
   }
