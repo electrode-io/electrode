@@ -179,7 +179,7 @@ module.exports = generators.Base.extend({
   writing: function () {
     // Re-read the content at this point because a composed generator might modify it.
     var currentPkg = this.fs.readJSON(this.destinationPath('package.json'), {});
-    var defaultPkg = require(this.templatePath('package.json'));
+    var defaultPkg = require(this.templatePath('_package.json'));
 
     ['name', 'version', 'description', 'homepage', 'main', 'license'].forEach((x) => {
       currentPkg[x] = currentPkg[x] || undefined;
