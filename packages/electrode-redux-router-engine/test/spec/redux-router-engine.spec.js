@@ -4,6 +4,8 @@ const Promise = require("bluebird");
 
 const ReduxRouterEngine = require("../..");
 
+const expect = require("chai").expect;
+
 require("babel-register");
 
 const createStore = require("redux").createStore;
@@ -140,18 +142,31 @@ describe("redux-router-engine", function () {
   });
 
   it("should use optional callbacks", () => {
+    let error;
     const engine = new ReduxRouterEngine({
       routes,
       createReduxStore,
       stringifyPreloadedState: () => `window.__TEST_STATE__`,
-      logError: (req, err) => err,
       renderToString: () => "test"
     });
     testReq.url.path = "/test";
 
-    return engine.render(testReq).then((result) => {
-      expect(result.prefetch).to.equal(`window.__TEST_STATE__`);
-    });
+    return engine.render(testReq)
+      .then((result) => {
+        expect(result.prefetch).to.equal(`window.__TEST_STATE__`);
+        expect(result.html).to.equal("test");
+        return new ReduxRouterEngine({
+          routes: badRoutes,
+          createReduxStore,
+          logError: (req, err) => {
+            error = err;
+          }
+        }).render(testReq);
+      })
+      .then((result) => {
+        expect(result.status).to.equal(500);
+        expect(error).to.not.equal(undefined);
+      });
   });
 
   it("should override constructor prop with render prop", () => {
