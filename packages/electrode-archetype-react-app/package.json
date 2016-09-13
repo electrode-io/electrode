@@ -16,7 +16,6 @@
   "dependencies": {},
   "devDependencies": {
     "babel-eslint": "^4.1.8",
-    "electrode-electrify": "^1.0.0",
     "eslint": "^1.10.3",
     "eslint-config-defaults": "^7.0.1",
     "eslint-plugin-filenames": "^0.1.2",
