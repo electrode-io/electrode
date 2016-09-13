@@ -1,6 +1,6 @@
 "use strict";
 
-process.on('SIGINT', function () {
+process.on("SIGINT", () => {
   process.exit(0);
 });
 
