@@ -3,6 +3,7 @@ extends:
   - "eslint-config-defaults/configurations/walmart/es6-react"
 globals:
   window: false
+  document: false
   ReactElement: false
 rules:
   "react/jsx-boolean-value": 0
