@@ -1,6 +1,6 @@
 "use strict";
 /*eslint-env es6*/
-var plugin = {};
+const plugin = {};
 
 /*
   Sample endpoints to demonstrate CSRF protection via the electrode-csrf-jwt module.
@@ -11,7 +11,7 @@ plugin.register = function (server, options, next) {
   server.route({
     method: "GET",
     path: "/1",
-    handler: function (req, reply) {
+    handler: (req, reply) => {
       reply("valid");
     }
   });
@@ -19,7 +19,7 @@ plugin.register = function (server, options, next) {
   server.route({
     method: "POST",
     path: "/2",
-    handler: function (req, reply) {
+    handler: (req, reply) => {
       reply("valid");
     }
   });
