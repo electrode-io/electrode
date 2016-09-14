@@ -1,0 +1,13 @@
+body {
+  font: 12px Helvetica;
+}
+
+.aboveFold {
+  border: 2px solid blue;
+  border-radius: 5px;
+  background-color: red;
+}
+
+.renderMessage {
+  color: red;
+}
