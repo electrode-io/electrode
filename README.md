@@ -117,6 +117,42 @@ NODE_ENV=production gulp hot
 - Running in the selected environment should load the appropriate configuration settings
 
 ---
+## Electrode CSRF-JWT
+
+[CSRF-JWT](https://github.com/electrode-io/electrode-csrf-jwt) is an Electrode plugin that allows you to authenticate HTTP requests using JWT in your Electrode applications.
+
+### Installation
+
+Add the `electrode-csrf-jwt` component:
+
+```bash
+$ npm install electrode-csrf-jwt --save
+```
+
+Next, register the plugin with the Electrode server. Add the following configuration to the `plugins` section of `config/default.json`:
+
+```json
+    "electrode-csrf-jwt": {
+      "options": {
+        "secret": "test",
+        "expiresIn": 60
+      }
+    }
+```
+
+That's it! CSRF protection will be automatically enabled for endpoints added to the app. CSRF JWT tokens will be returned in the headers of every `GET` response and must be provided as a header in every `POST` request.
+
+> You can read more about options and usage details on [the component's README page](https://github.com/electrode-io/electrode-csrf-jwt#usage)
+
+### CSRF-JWT Demonstration code
+
+In addition to the above steps, the following modifications were made in order to demonstrate functionality:
+
+* A plugin with two endpoints was added as `server/plugins/csrf.js` and registered via `config/default.json`
+* AJAX testing logic was added to `client/components/csrf.jsx`
+
+---
+
 ## <a name="bundle-viewer"></a>Electrode Javascript Bundle Viewer - How to use/integrate guide ##
 
 Electrode Javascript bundle viewer is named [electrify](https://github.com/electrode-io/electrify), it is a tool that helps for analyzing the module tree of webpack based projects. It's especially handy for catching large and/or duplicate modules which might be either bloating up your bundle or slowing down the build/install process.
