@@ -30,7 +30,7 @@
   ],
   "license": "Apache-2.0",
   "dependencies": {
-    "bluebird": "^2",
+    "bluebird": "^3",
     "hoek": "^3.0.1",
     "little-loader": "^0.1.1",
     "lodash": "^4.0.0",
