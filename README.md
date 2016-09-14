@@ -145,7 +145,7 @@ $ NODE_ENV=production gulp hot
 npm install electrode-csrf-jwt --save
 ```
 
--Next, register the plugin with the Electrode server. Add the following configuration to the `plugins` section of `config/default.json`:
+- Next, register the plugin with the Electrode server. Add the following configuration to the `plugins` section of `config/default.json`:
 
 ```json
 "electrode-csrf-jwt": {
