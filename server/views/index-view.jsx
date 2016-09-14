@@ -26,35 +26,7 @@ function storeInitializer(req) {
 
       const store = createStore(rootReducer, initialState);
       return store;
-    } else if(req.path === "/profile/get") {
-      let initialState = {
-        type: "get"
-      };
-
-      const store = createStore(rootReducer, initialState);
-      return store;
-    } else if(req.path === "/profile/clear") {
-      let initialState = {
-        type: "clear"
-      };
-
-      const store = createStore(rootReducer, initialState);
-      return store;
-    } else if(req.path === "/profile/enable") {
-      let initialState = {
-        type: "enable"
-      };
-
-      const store = createStore(rootReducer, initialState);
-      return store;
-    } else if(req.path === "/profile/disable") {
-      let initialState = {
-        type: "disable"
-      };
-
-      const store = createStore(rootReducer, initialState);
-      return store;
-    }
+    } 
 }
 
 module.exports = (req) => {
