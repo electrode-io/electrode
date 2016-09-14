@@ -1,6 +1,4 @@
 import React from "react";
-import AboveFold from "./above-the-fold";
-import styles from "../styles/base.css";
 
 export class Home extends React.Component {
   render() {
