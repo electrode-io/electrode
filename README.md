@@ -171,12 +171,10 @@ When you install electrify globally using `sudo npm install -g electrode-electri
 Head over to the electrify [repository](https://github.com/electrode-io/electrify#electrify) for a detailed view of the bundle viewer and checkout the source-code. [electrify](https://github.com/electrode-io/electrify) relies on webpack to generate the application modules/dependency tree and is independent of whichever server framework(hapijs, expressjs, etc.) you choose to use.
 
 ---
-## <a name="redux-router-engine"></a>Electrode Javascript Bundle Viewer ##
+## <a name="redux-router-engine"></a>Electrode Redux Router Engine ##
 - [Redux Router Engine](https://github.com/electrode-io/electrode-redux-router-engine) handles async data for React Server Side Rendering using [react-router], Redux, and the [Redux Server Rendering] pattern.
 
 ### Install 
 ```
 npm install --save electrode-redux-router-engine
 ```
-
-### Usage
