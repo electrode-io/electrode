@@ -84,16 +84,16 @@ function makeRouteHandler(options, userContent) {
     const renderPage = (content) => {
       return html.replace(/{{[A-Z_]*}}/g, (m) => {
         switch (m) {
-          case CONTENT_MARKER:
-            return content.html || "";
-          case TITLE_MARKER:
-            return options.pageTitle;
-          case BUNDLE_MARKER:
-            return makeBundles();
-          case PREFETCH_MARKER:
-            return `<script>${content.prefetch}</script>`;
-          default:
-            return `Unknown marker ${m}`;
+        case CONTENT_MARKER:
+          return content.html || "";
+        case TITLE_MARKER:
+          return options.pageTitle;
+        case BUNDLE_MARKER:
+          return makeBundles();
+        case PREFETCH_MARKER:
+          return `<script>${content.prefetch}</script>`;
+        default:
+          return `Unknown marker ${m}`;
         }
       });
     };
