@@ -13,7 +13,9 @@ npm install -g generator-electrode
 Then generate your new project:
 
 ```bash
-yo electrode
+$ mkdir your-project-name
+$ cd your-project-name
+$ yo electrode
 ```
 
 ## Getting To Know Yeoman
