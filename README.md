@@ -16,6 +16,7 @@ NODE_ENV=development gulp hot
 ## Instructions
 - You can build the app from scratch by following the instructions below: 
   - [Electrode Confippet](#electrode-confippet)
+  - [Electrode CSRF JWT](#csrf-jwt)
   - [Electrode Javascript Bundle Viewer](#bundle-viewer)
   - [Electrode Redux Router Engine](#redux-router-engine)
   
@@ -117,7 +118,7 @@ NODE_ENV=production gulp hot
 - Running in the selected environment should load the appropriate configuration settings
 
 ---
-## Electrode CSRF-JWT
+## <a name="csrf-jwt"></a>Electrode CSRF-JWT
 
 [CSRF-JWT](https://github.com/electrode-io/electrode-csrf-jwt) is an Electrode plugin that allows you to authenticate HTTP requests using JWT in your Electrode applications.
 
