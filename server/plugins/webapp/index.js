@@ -84,16 +84,16 @@ function makeRouteHandler(options, userContent) {
     const renderPage = (content) => {
       return html.replace(/{{[A-Z_]*}}/g, (m) => {
         switch (m) {
-          case CONTENT_MARKER:
-            return content.html || "";
-          case TITLE_MARKER:
-            return options.pageTitle;
-          case BUNDLE_MARKER:
-            return makeBundles();
-          case PREFETCH_MARKER:
-            return "";
-          default:
-            return `Unknown marker ${m}`;
+        case CONTENT_MARKER:
+          return content.html || "";
+        case TITLE_MARKER:
+          return options.pageTitle;
+        case BUNDLE_MARKER:
+          return makeBundles();
+        case PREFETCH_MARKER:
+          return "";
+        default:
+          return `Unknown marker ${m}`;
         }
       });
     };
@@ -145,7 +145,7 @@ const registerRoutes = (server, options, next) => {
 
   const resolveContent = (content) => {
     if (!_.isString(content) && !_.isFunction(content) && content.module) {
-      const module = content.module.startsWith(".") ? Path.join(process.cwd(), content.module) : content.module;
+      const module = content.module.startsWith(".") ? Path.join(process.cwd(), content.module) : content.module; // eslint-disable-line
       return require(module); // eslint-disable-line
     }
 
