@@ -81,6 +81,10 @@ function makeRouteHandler(options, userContent) {
       return `${cssLink}${jsLink}`;
     };
 
+    const addPrefetch = (prefetch) => {
+      return prefetch ? `<script>${prefetch}</script>` : "";
+    };
+
     const renderPage = (content) => {
       return html.replace(/{{[A-Z_]*}}/g, (m) => {
         switch (m) {
@@ -91,7 +95,7 @@ function makeRouteHandler(options, userContent) {
         case BUNDLE_MARKER:
           return makeBundles();
         case PREFETCH_MARKER:
-          return "";
+          return addPrefetch(content.prefetch);
         default:
           return `Unknown marker ${m}`;
         }
