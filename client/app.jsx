@@ -1,13 +1,23 @@
 import React from "react";
 import { routes } from "./routes";
 import { Router } from "react-router";
+import { createStore } from "redux";
 import { Resolver } from "react-resolver";
 import { createHistory } from "history";
+import { Provider } from "react-redux";
 import "./styles/base.styl";
+
+const initialState = window.__WML_REDUX_INITIAL_STATE__;
+
+let rootReducer = (s, a) => s
+const store = createStore(rootReducer, initialState);
 
 window.webappStart = () => {
   Resolver.render(
-    () => <Router history={createHistory()}>{routes}</Router>,
+    () =>
+      <Provider store={store}>
+        <Router history={createHistory()}>{routes}</Router>
+      </Provider>,
     document.querySelector(".js-content")
   );
 };

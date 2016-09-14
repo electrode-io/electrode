@@ -1,10 +1,13 @@
 {
   "plugins": {
     "inert": {
-      "enable": false
+      "enable": true
     },
     "electrodeStaticPaths": {
-      "enable": false
+      "enable": true,
+      "options": {
+        "pathPrefix": "dist"
+      }
     }
   },
   "server": {
