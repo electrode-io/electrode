@@ -145,7 +145,7 @@ const registerRoutes = (server, options, next) => {
 
   const resolveContent = (content) => {
     if (!_.isString(content) && !_.isFunction(content) && content.module) {
-      const module = content.module.startsWith(".") ? Path.join(process.cwd(), content.module) : content.module;
+      const module = content.module.startsWith(".") ? Path.join(process.cwd(), content.module) : content.module; // eslint-disable-line
       return require(module); // eslint-disable-line
     }
 

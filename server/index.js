@@ -2,7 +2,7 @@
 
 var SSRCaching = require("electrode-react-ssr-caching");
 
-process.on('SIGINT', function () {
+process.on("SIGINT", () => {
   process.exit(0);
 });
 
