@@ -169,7 +169,7 @@ Next, register the plugin with the Electrode server. Add the following configura
     }
 ```
 
-That's it! CSRF protection will be automatically enabled for endpoints added to the app. CSRF JWT tokens will be returned in the headers of every `GET` response and must be provided as a header in every `POST` request.
+That's it! CSRF protection will be automatically enabled for endpoints added to the app. CSRF JWT tokens will be returned in the headers and set as cookies for every `GET` response and must be provided as both a header and a cookie in every `POST` request.
 
 > You can read more about options and usage details on [the component's README page](https://github.com/electrode-io/electrode-csrf-jwt#usage)
 
