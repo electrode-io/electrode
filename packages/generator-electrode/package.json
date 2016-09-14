@@ -45,6 +45,11 @@
     "yeoman-assert": "^2.2.1",
     "yeoman-test": "^1.4.0"
   },
+  "eslintConfig": {
+    "env": {
+      "mocha": true
+    }
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/electrode-io/generator-electrode"
