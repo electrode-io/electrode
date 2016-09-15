@@ -81,16 +81,7 @@ module.exports = function () {
         }
       },
       plugins: [
-        new ExtractTextPlugin(config.__wmlMultiBundle
-          ? "[name].style.[hash].css"
-          : "style.[hash].css"),
-
-        /*
-        preserve: default: false. Keep the original unsplit file as well.
-        Sometimes this is desirable if you want to target a specific browser (IE)
-        with the split files and then serve the unsplit ones to everyone else.
-         */
-        new CSSSplitPlugin({size: 4000, imports: true, preserve: true})
+        new ExtractTextPlugin("style.[hash].css")
       ]
     });
   };

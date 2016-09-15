@@ -34,7 +34,6 @@
     "chai": "^3.2.0",
     "chalk": "^1.1.1",
     "css-loader": "^0.23.1",
-    "css-split-webpack-plugin": "^0.2.0",
     "electrode-electrify": "^1.0.0",
     "electrode-gulp-helper": "^1.0.0",
     "eslint": "^1.7.0",
