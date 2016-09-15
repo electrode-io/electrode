@@ -123,7 +123,7 @@ const tasks = {
   "build-dist-min": {
     dep: [".production-env"],
     desc: false,
-    task: `webpack --config ${config.webpack}/webpack.config.dev.static.js --colors`
+    task: `webpack --config ${config.webpack}/webpack.config.js --colors`
   },
   "build-dist:clean-tmp": {
     desc: false,
