@@ -10,8 +10,7 @@
 
 ```bash
 git clone https://github.com/electrode-io/electrode-boilerplate-universal-react-node.git
-cd hapiApp
-npm install
+npm install 
 ```
 
 ## Run
