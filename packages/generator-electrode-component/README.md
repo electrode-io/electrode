@@ -85,4 +85,4 @@ This will build your `lib`, `dist` and `example/dist` folders for release.
 
 ## License
 
-[MIT License](http://en.wikipedia.org/wiki/MIT_License)
+[Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0)
