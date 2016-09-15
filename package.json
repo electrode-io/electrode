@@ -23,17 +23,18 @@
     "coverage": "gulp check"
   },
   "dependencies": {
-    "bluebird": "^2.10.2",
+    "bluebird": "^3.0.0",
     "electrode-csrf-jwt": "^3.0.1",
     "electrode-react-ssr-caching": "^0.1.3",
+    "electrode-redux-router-engine": "^1.0.0",
     "electrode-router-resolver-engine": "^1.0.0",
     "electrode-server": "^1.0.0",
     "electrode-static-paths": "^1.0.0",
     "lodash": "^4.10.1"
   },
   "devDependencies": {
-    "electrode-archetype-react-app": "^1.0.0",
-    "electrode-archetype-react-app-dev": "^1.0.0",
+    "electrode-archetype-react-app": "^1.1.0",
+    "electrode-archetype-react-app-dev": "^1.1.0",
     "gulp": "^3.9.1"
   }
 }

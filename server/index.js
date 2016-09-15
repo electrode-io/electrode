@@ -9,6 +9,10 @@ process.on("SIGINT", () => {
 const config = require("electrode-confippet").config;
 const staticPathsDecor = require("electrode-static-paths");
 
+require.extensions[".css"] = () => {
+  return;
+};
+
 require("babel-register")({
   ignore: /node_modules\/(?!react\/)/
 });

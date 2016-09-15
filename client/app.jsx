@@ -5,7 +5,7 @@ import { createStore } from "redux";
 import { Resolver } from "react-resolver";
 import { createHistory } from "history";
 import { Provider } from "react-redux";
-import "./styles/base.styl";
+import "styles/base.css";
 
 const initialState = window.__WML_REDUX_INITIAL_STATE__;
 
@@ -21,4 +21,3 @@ window.webappStart = () => {
     document.querySelector(".js-content")
   );
 };
-
