@@ -105,9 +105,3 @@ function myContent() {
   });
 }
 ```
-
-## Support/Contact Authors:
-
-Dave Stevens <dstevens@walmartlabs.com> Slack: @dstevens
-
-Joel Chen <xchen@walmartlabs.com> Slack: @joelchen
