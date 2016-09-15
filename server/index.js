@@ -1,5 +1,7 @@
 "use strict";
 
+var SSRCaching = require("electrode-react-ssr-caching");
+
 process.on("SIGINT", () => {
   process.exit(0);
 });
@@ -14,5 +16,21 @@ require.extensions[".css"] = () => {
 require("babel-register")({
   ignore: /node_modules\/(?!react\/)/
 });
+
+const cacheConfig = {
+  components: {
+    SSRCachingTemplateType: {
+      strategy: "template",
+      enable: true
+    },
+    SSRCachingSimpleType: {
+      strategy: "simple",
+      enable: true
+    }
+  }
+};
+
+SSRCaching.enableCaching();
+SSRCaching.setCachingConfig(cacheConfig);
 
 require("electrode-server")(config, [staticPathsDecor()]);

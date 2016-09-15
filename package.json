@@ -25,6 +25,7 @@
   "dependencies": {
     "bluebird": "^3.0.0",
     "electrode-csrf-jwt": "^3.0.1",
+    "electrode-react-ssr-caching": "^0.1.3",
     "electrode-redux-router-engine": "^1.0.0",
     "electrode-router-resolver-engine": "^1.0.0",
     "electrode-server": "^1.0.0",

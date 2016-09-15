@@ -185,6 +185,42 @@ When you install electrify globally using `sudo npm install -g electrode-electri
 
 Head over to the electrify [repository](https://github.com/electrode-io/electrify#electrify) for a detailed view of the bundle viewer and checkout the source-code. [electrify](https://github.com/electrode-io/electrify) relies on webpack to generate the application modules/dependency tree and is independent of whichever server framework(hapijs, expressjs, etc.) you choose to use.
 
+## Caching of React Components during Server Side Rendering
+
+[electrode-react-ssr-caching](https://github.com/electrode-io/electrode-react-ssr-caching) module supports profiling React Server Side Rendering time and component caching to help you speed up SSR.
+
+It supports 2 types of caching:
+
+* Simple - Component Props become the cache key. This is useful for cases like Header and Footer where the number of variations of props data is minimal which will make sure the cache size stays small.
+* Template - Components Props are first tokenized and then the generated template html is cached. The idea is akin to generating logic-less handlebars template from your React components and then use string replace to process the template with different props. This is useful for cases like displaying Product information in a Carousel where you have millions of products in the repository.
+
+To demonstrate functionality,
+
+* Added component `client/components/SSRCachingSimpleType.jsx` to demostrate Simple strategy. 
+* Added component `client/components/SSRCachingTemplateType.jsx` to demostrate Template strategy. 
+* To enable caching using `electrode-react-ssr-caching` we need to do the below configuration:
+
+```
+const cacheConfig = {
+  components: {
+    SSRCachingTemplateType: {
+      strategy: "template",
+      enable: true
+    },
+    SSRCachingSimpleType: {
+      strategy: "simple",
+      enable: true
+    }
+  }
+};
+
+SSRCaching.enableCaching();
+SSRCaching.setCachingConfig(cacheConfig);
+```
+
+The above configuration is done in `server/index.js`.
+
+To read more, go to [electrode-react-ssr-caching](https://github.com/electrode-io/electrode-react-ssr-caching)
 ---
 ## <a name="redux-router-engine"></a>Electrode Redux Router Engine ##
 - [Redux Router Engine](https://github.com/electrode-io/electrode-redux-router-engine) handles async data for React Server Side Rendering using [react-router], Redux, and the [Redux Server Rendering] pattern.

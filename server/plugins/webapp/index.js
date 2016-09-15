@@ -91,7 +91,7 @@ function makeRouteHandler(options, userContent) {
         case BUNDLE_MARKER:
           return makeBundles();
         case PREFETCH_MARKER:
-          return "";
+          return `<script>${content.prefetch}</script>`;
         default:
           return `Unknown marker ${m}`;
         }
