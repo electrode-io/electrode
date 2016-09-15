@@ -27,7 +27,7 @@ require("babel-register")({
  * https://github.com/css-modules/postcss-modules-scope
  */
 hook({
-  generateScopedName: "[name]__[local]___[hash:base64:5]",
+  generateScopedName: "[name]__[local]___[hash:base64:5]"
 });
 
 require("electrode-server")(config, [staticPathsDecor()]);
