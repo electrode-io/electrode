@@ -11,6 +11,7 @@
   "repository": {},
   "license": "ISC",
   "scripts": {
+    "start": "gulp dev",
     "test": "gulp test",
     "coverage": "gulp check"
   },
