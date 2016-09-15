@@ -17,7 +17,7 @@
     "type": "git",
     "url": "https://github.com/electrode-io/electrode-app-with-electrode-modules.git"
   },
-  "license": "MIT",
+  "license": "Apache-2.0",
   "scripts": {
     "test": "gulp test",
     "coverage": "gulp check"
