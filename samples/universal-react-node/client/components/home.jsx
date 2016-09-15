@@ -1,6 +1,15 @@
 import React from "react";
+import { connect } from "react-redux";
 
-export class Home extends React.Component {
+class HomeWrapper extends React.Component {
+  render() {
+    return (
+     <Home data={this.props.data}/>
+    );
+  }
+}
+
+class Home extends React.Component {
   render() {
     return (
       <div>
@@ -16,7 +25,16 @@ export class Home extends React.Component {
             </button>
           </li>
         </ul>
+        <p>{this.props.data}</p>
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  data: state.data
+})
+
+export default connect(
+  mapStateToProps
+)(Home);
