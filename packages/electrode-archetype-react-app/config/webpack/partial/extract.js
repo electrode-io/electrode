@@ -7,7 +7,6 @@ var archetype = require("../../archtype");
 var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
 
 var ExtractTextPlugin = archetype.devRequire("extract-text-webpack-plugin");
-var CSSSplitPlugin = archetype.devRequire("css-split-webpack-plugin").default;
 var atImport = archetype.devRequire("postcss-import");
 var cssnext = archetype.devRequire("postcss-cssnext");
 
