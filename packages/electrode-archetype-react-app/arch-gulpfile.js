@@ -18,6 +18,10 @@ function setProductionEnv() {
   process.env.NODE_ENV = "production";
 }
 
+function setStaticFilesEnv() {
+  process.env.STATIC_FILES = "true";
+}
+
 function setWebpackDev() {
   process.env.WEBPACK_DEV = "true";
 }
@@ -92,6 +96,7 @@ function generateServiceWorker() {
 
 const tasks = {
   ".production-env": () => setProductionEnv(),
+  ".static-files-env": () => setStaticFilesEnv(),
   ".webpack-dev": () => setWebpackDev(),
   ".optimize-stats": () => setOptimizeStats(),
   "build": {
@@ -178,7 +183,12 @@ const tasks = {
   "npm:test": ["check"],
   "npm:release": `node ${__dirname}/scripts/map-isomorphic-cdn.js`,
   "server": {
-    desc: "Start the app server only, need build first.",
+    desc: "Start the app server only, Must have dist by running `gulp build` first.",
+    task: `node server/index.js`
+  },
+  "server-prod": {
+    dep: [".production-env", ".static-files-env"],
+    desc: "Start server in production mode with static files routes.  Must have dist by running `gulp build`.",
     task: `node server/index.js`
   },
   "server-debug": `node debug server/index.js`,
