@@ -16,10 +16,10 @@ var ReactComponentGenerator = yeoman.generators.Base.extend({
 		var done = this.async();
 
 		this.log(
-			"\n" + chalk.bold.underline("Welcome to the Electrode Component generator") +
+			"\n" + chalk.bold.underline("Welcome to the Electrode Component Generator") +
 			"\n" +
-			"\nWe\"re going to set up a new " + chalk.bold("Electrode") + " Component, ready for development with" +
-			"\n" + chalk.bold("gulp, webpack, demo, electrode component archetype, live-reload") +
+			"\nWe're going to set up a new " + chalk.bold("Electrode") + " component, ready for development with" +
+			"\n" + chalk.bold("gulp, webpack, demo, electrode component archetype, and live-reload") +
 			"\n"
 		);
 
@@ -84,7 +84,7 @@ var ReactComponentGenerator = yeoman.generators.Base.extend({
 		}, {
 			type: "input",
 			name: "ghRepo",
-			message: "What is the name of the GitHub repo this will be published at?",
+			message: "What is the name of the GitHub repo where this will be published?",
 			default: this.packageName
 		}, {
 			type: "confirm",
@@ -146,9 +146,9 @@ var ReactComponentGenerator = yeoman.generators.Base.extend({
 	end: function() {
 		var chdir = this.createDirectory ? "'cd " + this.packageName + "' then " : "";
 		this.log(
-			"\n" + chalk.green.underline("Your new Electrode Component is ready!") +
+			"\n" + chalk.green.underline("Your new Electrode component is ready!") +
 			"\n" +
-			"\nYour component is in /src and your demo files are in /demo/*" +
+      "\nYour component is in src/ and your demo files are in demo/" +
 			"\n" +
 			"\nType " + chdir + "'gulp demo' to run the development build and demo tasks." +
 			"\n"
