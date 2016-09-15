@@ -3,7 +3,7 @@ import { routes } from "./routes";
 import { Router } from "react-router";
 import { Resolver } from "react-resolver";
 import { createHistory } from "history";
-import "./styles/base.styl";
+import "styles/base.css";
 
 window.webappStart = () => {
   Resolver.render(
@@ -11,4 +11,3 @@ window.webappStart = () => {
     document.querySelector(".js-content")
   );
 };
-

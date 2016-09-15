@@ -8,6 +8,13 @@ export class Home extends React.Component {
         <h2>Demonstration Components</h2>
         <ul>
           <li><a href="/csrf">CSRF protection using electrode-csrf-jwt</a></li>
+          <li className="aboveFold">
+            <button>
+              <a href="/above-the-fold">
+                Above the Fold Render - increase your App's performance by using a skip prop
+              </a>
+            </button>
+          </li>
         </ul>
       </div>
     );
