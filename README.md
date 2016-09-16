@@ -25,7 +25,7 @@ $ NODE_ENV=development gulp hot
 - Start the electrode app in `production` environment:
 
 ```bash
-$ NODE_ENV=production gulp hot
+ gulp hot
 ```
 
 - Running in the selected environment should load the appropriate configuration settings
@@ -270,7 +270,7 @@ Change this to:
 Run the commands below and test it out in your app:
 
 ```bash
-  npm run build && npm run start
+  gulp hot
 ```
 
 The code in the <h3> tags that are above and below the <AboveTheFoldOnlyServerRender skip={true}> + </AboveTheFoldOnlyServerRender> will render first:
