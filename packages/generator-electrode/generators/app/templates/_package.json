@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "bluebird": "^3.4.6",
+    "electrode-confippet": "^1.0.0",
     "electrode-router-resolver-engine": "^1.0.0",
     "electrode-server": "^1.0.0",
     "electrode-static-paths": "^1.0.0",
