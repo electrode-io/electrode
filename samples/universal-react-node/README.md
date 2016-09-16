@@ -300,7 +300,7 @@ On the Home page, click the link to render the `localhost:3000/above-the-fold` p
 
 The best way to demo this existing component is actually going to be in your `node_modules.`
 
-Navigate to `<your-electrode-app>/node_modules/above-the-fold-only-server-render/components/above-the-fold-only-server-render.js` line 29:
+Navigate to `<your-electrode-app>/node_modules/above-the-fold-only-server-render/lib/components/above-the-fold-only-server-render.js` line 29:
 
 ```javascript
 var SHOW_TIMEOUT = 50;
