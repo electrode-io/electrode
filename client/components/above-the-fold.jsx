@@ -11,8 +11,8 @@ export class AboveFold extends React.Component {
             <div className="renderMessage" style={{color: "blue"}}>
               <p>This will skip server rendering if the 'AboveTheFoldOnlyServerRender'
                 lines are present, or uncommented out.</p>
-              <p>This will be rendered on the server and visible if the 'AboveTheFoldOnlyServerRender'
-                lines are commented out.</p>
+              <p>This will be rendered on the server and visible
+                if the 'AboveTheFoldOnlyServerRender' lines are commented out.</p>
               <p>Try manually toggling this component to see it in action</p>
               <p>
                 <a href="https://github.com/electrode-io/above-the-fold-only-server-render"
