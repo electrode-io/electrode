@@ -267,18 +267,10 @@ Change this to:
   var SHOW_TIMEOUT = 3000;
 ```
 
-We need to import the AboveTheFoldOnlyServerRender component from it's node module. Navigate to the `<electrode-boilerplate-universal-react-node>/client/components/above-the-fold.jsx`.
-
-Add the code below `import React from "react"` in line 1:
-
-```javascript
-import {AboveTheFoldOnlyServerRender} from "above-the-fold-only-server-render";
-```
-
 Run the commands below and test it out in your app:
 
 ```bash
-  npm run build && npm run start
+  gulp hot
 ```
 
 The code in the <h3> tags that are above and below the <AboveTheFoldOnlyServerRender skip={true}> + </AboveTheFoldOnlyServerRender> will render first:
