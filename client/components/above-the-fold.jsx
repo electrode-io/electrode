@@ -1,4 +1,5 @@
 import React from "react";
+import {AboveTheFoldOnlyServerRender} from "above-the-fold-only-server-render";
 
 export class AboveFold extends React.Component {
 
