@@ -310,7 +310,13 @@ When we use this module at [WalmartLabs](www.walmartlabs.com), it's all about op
 Change this to:
 
 ```javascript
-var SHOW_TIMEOUT = 300;
+var SHOW_TIMEOUT = 3000;
+```
+
+Run the commands below and test it out in your app:
+
+```bash
+  gulp hot
 ```
 
 The code in the <h3> tags that are above and below the <AboveTheFoldOnlyServerRender skip={true}> + </AboveTheFoldOnlyServerRender> will render first:
