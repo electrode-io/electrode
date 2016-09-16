@@ -4,6 +4,7 @@
   - [Electrode CSRF JWT](https://github.com/electrode-io/electrode-csrf-jwt)
   - [Electrode Javascript Bundle Viewer](https://github.com/electrode-io/electrify)
   - [Electrode Redux Router Engine](https://github.com/electrode-io/electrode-redux-router-engine)
+  - [Electrode React SSR Caching](https://github.com/electrode-io/electrode-react-ssr-caching)
   - [Electrode Above the Fold Rendering](https://github.com/electrode-io/above-the-fold-only-server-render)
 
 ## Install
@@ -185,7 +186,7 @@ When you install electrify globally using `sudo npm install -g electrode-electri
 
 Head over to the electrify [repository](https://github.com/electrode-io/electrify#electrify) for a detailed view of the bundle viewer and checkout the source-code. [electrify](https://github.com/electrode-io/electrify) relies on webpack to generate the application modules/dependency tree and is independent of whichever server framework(hapijs, expressjs, etc.) you choose to use.
 
-## Caching of React Components during Server Side Rendering
+## <a name="electrode-react-ssr-caching"></a>Electrode Server Side Rendering Component Caching ##
 
 [electrode-react-ssr-caching](https://github.com/electrode-io/electrode-react-ssr-caching) module supports profiling React Server Side Rendering time and component caching to help you speed up SSR.
 
@@ -196,8 +197,8 @@ It supports 2 types of caching:
 
 To demonstrate functionality,
 
-* Added component `client/components/SSRCachingSimpleType.jsx` to demostrate Simple strategy. 
-* Added component `client/components/SSRCachingTemplateType.jsx` to demostrate Template strategy. 
+* Added component `client/components/SSRCachingSimpleType.jsx` to demostrate Simple strategy.
+* Added component `client/components/SSRCachingTemplateType.jsx` to demostrate Template strategy.
 * To enable caching using `electrode-react-ssr-caching` we need to do the below configuration:
 
 ```
