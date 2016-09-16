@@ -5,7 +5,6 @@ ENV DIR /usr/src/app
 RUN mkdir -p $DIR
 WORKDIR $DIR
 COPY . $DIR
-RUN ls -A $DIR
 RUN npm install
 RUN $DIR/node_modules/.bin/gulp build
 CMD node server
