@@ -2,4 +2,4 @@ dist
 node_modules
 .git
 .isomorphic-loader-config.json
-
+.idea
