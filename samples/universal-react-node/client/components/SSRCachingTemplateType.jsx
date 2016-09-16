@@ -7,7 +7,7 @@ class SSRCachingTemplateTypeWrapper extends React.Component {
     var elements = [];
 
     for(var i = 0; i < count; i++) {
-      elements.push(<SSRCachingTemplateType name={"name"+i} title={"title"+i} rating={"rating"+i}/>);
+      elements.push(<SSRCachingTemplateType key={i} name={"name"+i} title={"title"+i} rating={"rating"+i}/>);
     }
 
     return (
