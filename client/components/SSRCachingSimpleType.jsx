@@ -7,8 +7,8 @@ class SSRCachingSimpleTypeWrapper extends React.Component {
 
     var elements = [];
 
-    for(var i = 0; i < count; i++) {
-      elements.push(<SSRCachingSimpleType key={i} navEntry={"NavEntry" + i}/>);
+    for (var i = 0; i < count; i++) {
+      elements.push(<SSRCachingSimpleType key={i} navEntry={`NavEntry${i}`}/>);
     }
 
     return (
@@ -31,7 +31,7 @@ class SSRCachingSimpleType extends React.Component {
 
 const mapStateToProps = (state) => ({
   count: state.count
-})
+});
 
 export default connect(
   mapStateToProps

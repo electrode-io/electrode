@@ -9,7 +9,7 @@ import "styles/base.css";
 
 const initialState = window.__PRELOADED_STATE__;
 
-let rootReducer = (s, a) => s
+const rootReducer = (s, a) => s; // eslint-disable-line no-unused-vars
 const store = createStore(rootReducer, initialState);
 
 window.webappStart = () => {

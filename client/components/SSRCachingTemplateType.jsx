@@ -6,8 +6,10 @@ class SSRCachingTemplateTypeWrapper extends React.Component {
     const count = this.props.count;
     var elements = [];
 
-    for(var i = 0; i < count; i++) {
-      elements.push(<SSRCachingTemplateType key={i} name={"name"+i} title={"title"+i} rating={"rating"+i}/>);
+    for (var i = 0; i < count; i++) {
+      elements.push(
+        <SSRCachingTemplateType key={i} name={`name${i}`} title={`title${i}`} rating={`rating${i}`} />
+      );
     }
 
     return (
@@ -30,7 +32,7 @@ class SSRCachingTemplateType extends React.Component {
 
 const mapStateToProps = (state) => ({
   count: state.count
-})
+});
 
 export default connect(
   mapStateToProps

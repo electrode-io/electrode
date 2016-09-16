@@ -242,12 +242,40 @@ To read more, go to [electrode-react-ssr-caching](https://github.com/electrode-i
 
 ## <a name="redux-router-engine"></a>Electrode Redux Router Engine ##
 
-- [Redux Router Engine](https://github.com/electrode-io/electrode-redux-router-engine) handles async data for React Server Side Rendering using [react-router], Redux, and the [Redux Server Rendering] pattern.
+[Redux Router Engine](https://github.com/electrode-io/electrode-redux-router-engine) handles async data for React Server Side Rendering using [react-router], Redux, and the [Redux Server Rendering] pattern.
 
 ### Install
+```bash
+$ npm install --save electrode-redux-router-engine
 ```
-  npm install --save electrode-redux-router-engine
+
+### Wiring
+
+In this demo, the redux-router has been configured to work with the `server/views/index-view.jsx` component. A standard redux `storeInitializer` function was wrapped with a new function, `createdReduxStore`, which is used to wire a new `ReduxRouterEngine` instance in the component's `module.exports` clause:
+
+```javascript
+function createReduxStore(req, match) {
+  const store = storeInitializer(req);
+  return Promise.all([
+      // DO ASYNC THUNK ACTIONS HERE : store.dispatch(boostrapApp())
+      Promise.resolve({})
+    ]).then(() => {
+      return store;
+  });
+}
+
+module.exports = (req) => {
+
+  if (!req.server.app.routesEngine) {
+    req.server.app.routesEngine = new ReduxRouterEngine({ routes, createReduxStore });
+  }
+
+  return req.server.app.routesEngine.render(req);
+};
 ```
+
+> For more information on using this module, refer to the [redux-router README](https://github.com/electrode-io/electrode-redux-router-engine/blob/master/README.md).
+
 ---
 
 ## <a name="above-the-fold"></a>Electrode Above the Fold Server Rendering
