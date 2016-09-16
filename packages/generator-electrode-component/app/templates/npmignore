@@ -18,7 +18,6 @@ npm-debug.log*
 coverage
 node_modules
 bower_components
-demo
 test
 karma*
 webpack*
