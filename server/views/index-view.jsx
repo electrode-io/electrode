@@ -1,45 +1,49 @@
-import RouterResolverEngine from "electrode-router-resolver-engine";
+import ReduxRouterEngine from 'electrode-redux-router-engine';
+import React from 'react';
+import ReactDOM from 'react-dom/server';
+
 import { routes } from "../../client/routes";
 const Promise = require("bluebird");
 import { createStore } from "redux";
 let rootReducer = (s, a) => s;
 
 function storeInitializer(req) {
+    let initialState;
     if(req.path === "/") {
-      let initialState = {
+      initialState = {
         data: "This data is obtained from Redux store"
       };
-
-      const store = createStore(rootReducer, initialState);
-      return store;
     } else if(req.path === "/ssrcachingtemplatetype") {
-      let initialState = {
+      initialState = {
         count: 100
       };
-
-      const store = createStore(rootReducer, initialState);
-      return store;
     } else if(req.path === "/ssrcachingsimpletype") {
-      let initialState = {
+      initialState = {
         count: 100
       };
+    } else {
+      let initialState = {};
+    }
 
-      const store = createStore(rootReducer, initialState);
+    const store = createStore(rootReducer, initialState);
+    return store;
+}
+
+function createReduxStore(req, match) {
+  const store = storeInitializer(req);
+  return Promise.all([
+      // DO ASYNC THUNK ACTIONS HERE : store.dispatch(boostrapApp())
+      Promise.resolve({})
+    ]).then(() => {
       return store;
-    } 
+  });
 }
 
 module.exports = (req) => {
-  var options = {
-    redux: {
-      storeInitializer: storeInitializer
-    }
-  };
 
   if (!req.server.app.routesEngine) {
-    req.server.app.routesEngine = RouterResolverEngine(routes, options);
+    req.server.app.routesEngine = new ReduxRouterEngine({ routes, createReduxStore });
   }
 
-
-  return req.server.app.routesEngine(req, options);
+  return req.server.app.routesEngine.render(req);
 };
