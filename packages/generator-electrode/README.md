@@ -1,14 +1,15 @@
 # generator-electrode [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
-> Generate Electrode Isomorphic React App with NodeJS backend.
+> Generate Electrode ~~Isomorphic~~ Universal React App with NodeJS backend.
 
 ## Installation
 
-First, install [Yeoman](http://yeoman.io) and generator-electrode using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+First, install [Yeoman], [gulp], and generator-electrode using [npm] (we assume you have pre-installed [node.js] (> 4.2.x required)).
 
 ```bash
-npm install -g yo
-npm install -g generator-electrode
+$ npm install -g yo gulp generator-electrode
 ```
+
+> Note: You may need add `sudo` to the command. 
 
 Then generate your new project:
 
@@ -17,6 +18,26 @@ $ mkdir your-project-name
 $ cd your-project-name
 $ yo electrode
 ```
+
+## Running the app
+
+Once the application is generated and `npm install` is completed, you are ready to try it out.
+
+```bash
+$ npm start
+```
+
+Wait for webpack to be ready and navigate to `http://localhost:3000` with your browser.
+
+You can run [gulp] to see the list of tasks available.
+
+Some common ones:
+
+  - `gulp dev` - start in webpack-dev-server development mode
+  - `gulp hot` - start in webpack-dev-server hot mode
+  - `gulp build` - build production `dist` files
+  - `gulp server-prod` - start server in production mode
+  - `gulp check` - run unit tests with coverage
 
 ## Getting To Know Yeoman
 
@@ -36,3 +57,7 @@ Apache-2.0 © WalmartLabs
 [travis-url]: https://travis-ci.org/electrode-io/generator-electrode
 [daviddm-image]: https://david-dm.org/electrode-io/generator-electrode.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/electrode-io/generator-electrode
+[gulp]: http://gulpjs.com/
+[Yeoman]: http://yeoman.io
+[npm]: https://www.npmjs.com/
+[node.js]: https://nodejs.org/
