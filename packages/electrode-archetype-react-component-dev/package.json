@@ -4,12 +4,12 @@
   "description": "Electrode Component (Development)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/walmartlabs/electrode-archetype-react-component.git"
+    "url": "https://github.com/electrode-io/electrode-archetype-react-component.git"
   },
   "bugs": {
-    "url": "https://github.com/walmartlabs/electrode-archetype-react-component/issues"
+    "url": "https://github.com/electrode-io/electrode-archetype-react-component/issues"
   },
-  "homepage": "https://github.com/walmartlabs/electrode-archetype-react-component/README.md",
+  "homepage": "https://github.com/electrode-io/electrode-archetype-react-component/README.md",
   "license": "UNLICENSED",
   "config": {
     "archetype": "node_modules/electrode-archetype-react-component"

@@ -4,17 +4,17 @@
   "description": "Archetype - Electrode Component",
   "repository": {
     "type": "git",
-    "url": "https://github.com/electrodeio/electrode-archetype-react-component.git"
+    "url": "https://github.com/electrode-io/electrode-archetype-react-component.git"
   },
   "bugs": {
-    "url": "https://github.com/electrodeio/electrode-archetype-react-component/issues"
+    "url": "https://github.com/electrode-io/electrode-archetype-react-component/issues"
   },
   "author": {
     "name": "Arpan Nanavati",
     "email": "nanavatiarpan@gmail.com",
     "url": "https://github.com/ananavati"
   },
-  "homepage": "https://github.com/electrodeio/electrode-archetype-react-component/README.md",
+  "homepage": "https://github.com/electrode-io/electrode-archetype-react-component/README.md",
   "license": "UNLICENSED",
   "config": {
     "archetype": "node_modules/electrode-archetype-react-component"
