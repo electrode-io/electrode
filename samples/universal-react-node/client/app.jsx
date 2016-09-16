@@ -7,7 +7,7 @@ import { createHistory } from "history";
 import { Provider } from "react-redux";
 import "styles/base.css";
 
-const initialState = window.__WML_REDUX_INITIAL_STATE__;
+const initialState = window.__PRELOADED_STATE__;
 
 const rootReducer = (s, a) => s; // eslint-disable-line no-unused-vars
 const store = createStore(rootReducer, initialState);
