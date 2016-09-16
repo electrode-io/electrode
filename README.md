@@ -27,7 +27,8 @@ $ NODE_ENV=development gulp hot
 - Start the electrode app in `production` environment:
 
 ```bash
- gulp hot
+$ gulp build
+$ gulp server-prod
 ```
 
 - Running in the selected environment should load the appropriate configuration settings
