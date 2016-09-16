@@ -13,15 +13,14 @@
     "node",
     "webserver"
   ],
-  "author": "Dave Stevens <dstevens@walmartlabs.com>",
   "contributors": [
-    {
-      "name": "Dave Stevens",
-      "email": "dstevens@walmartlabs.com"
-    },
     {
       "name": "Joel Chen",
       "email": "xchen@walmartlabs.com"
+    },
+    {
+      "name": "Caoyang Shi",
+      "email": "cshi@walmartlabs.com"
     },
     {
       "name": "Arpan Nanavati",
