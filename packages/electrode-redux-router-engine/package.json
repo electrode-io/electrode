@@ -8,6 +8,10 @@
     "lint": "gulp lint",
     "coverage": "gulp check"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electrode-io/electrode-redux-router-engine.git"
+  },
   "keywords": [
     "React",
     "Redux",
