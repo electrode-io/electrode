@@ -8,7 +8,7 @@ class SSRCachingSimpleTypeWrapper extends React.Component {
     var elements = [];
 
     for(var i = 0; i < count; i++) {
-      elements.push(<SSRCachingSimpleType navEntry={"NavEntry" + i}/>);
+      elements.push(<SSRCachingSimpleType key={i} navEntry={"NavEntry" + i}/>);
     }
 
     return (
