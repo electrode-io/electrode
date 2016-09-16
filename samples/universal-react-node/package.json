@@ -23,6 +23,7 @@
     "coverage": "gulp check"
   },
   "dependencies": {
+    "above-the-fold-only-server-render": "^1.0.2",
     "bluebird": "^3.4.6",
     "electrode-csrf-jwt": "^1.0.0",
     "electrode-react-ssr-caching": "^0.1.3",
@@ -33,8 +34,8 @@
     "lodash": "^4.10.1"
   },
   "devDependencies": {
-    "electrode-archetype-react-app": "^1.1.0",
-    "electrode-archetype-react-app-dev": "^1.1.0",
+    "electrode-archetype-react-app": "^1.0.0",
+    "electrode-archetype-react-app-dev": "^1.0.0",
     "gulp": "^3.9.1"
   }
 }
