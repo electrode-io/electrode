@@ -259,7 +259,7 @@ $ npm install --save electrode-redux-router-engine
 
 #### Wiring
 
-In this demo, the redux-router has been configured to work with the `server/views/index-view.jsx` component. A standard redux `storeInitializer` function was wrapped with a new function, `createdReduxStore`, which is used to wire a new `ReduxRouterEngine` instance in the component's `module.exports` clause:
+In this demo, the redux-router has been configured to work with the `server/views/index-view.jsx` component.`createdReduxStore` is used to perform async thunk actions to build the redux store and which gets wired into a new `ReduxRouterEngine` instance in the component's `module.exports` clause:
 
 ```javascript
 function createReduxStore(req, match) {
