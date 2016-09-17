@@ -215,6 +215,9 @@ $ npm install --save electrode-react-ssr-caching
 
 #### Wiring
 
+*GOTCHA:
+SSR CACHING OF COMPONENTS ONLY WORKS IN PRODUCTION MODE, SINCE THE PROPS(WHICH ARE READ ONLY) ARE MUTATED FOR CACHING PURPOSES AND MUTATING THE PROPS IS NOT ALLOWED IN DEVELOPMENT MODE*
+
 To demonstrate functionality, we have added:
 
 * `client/components/SSRCachingSimpleType.jsx` for Simple strategy.
