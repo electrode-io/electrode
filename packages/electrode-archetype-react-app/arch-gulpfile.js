@@ -5,6 +5,7 @@ const Path = require("path");
 const fs = require("fs");
 const archetype = require("./config/archtype");
 const gulpHelper = archetype.devRequire("electrode-gulp-helper");
+const mkdirp = archetype.devRequire("mkdirp");
 const config = archetype.config;
 
 function setupPath() {
@@ -56,6 +57,15 @@ function checkFileExists(path) {
   }
 }
 
+function createElectrodeTmpDir() {
+  const eTmp = Path.resolve(".etmp");
+  const eTmpGitIgnore = Path.join(eTmp, ".gitignore");
+  if (!checkFileExists(eTmpGitIgnore)) {
+    mkdirp.sync(eTmp);
+    fs.writeFileSync(eTmpGitIgnore, "# Electrode tmp dir\n*\n");
+  }
+}
+
 /**
  * [generateServiceWorker gulp task to generate service worker code that will precache specific resources so they work offline.]
  *
@@ -102,6 +112,11 @@ const tasks = {
   "build": {
     desc: "Build your app's client bundle for production",
     task: ["build-dist"]
+  },
+  "build-analyze": {
+    dep: [".optimize-stats"],
+    desc: "Build your app's client bundle for production and run bundle analyzer",
+    task: ["build-dist", "optimize-stats"]
   },
   ".build-browser-coverage-1": () => {
     setProductionEnv();
@@ -175,10 +190,9 @@ const tasks = {
   "lint-client-test": `eslint --ext .js,.jsx -c ${config.eslint}/.eslintrc-react-test test/client`,
   "lint-server": `eslint -c ${config.eslint}/.eslintrc-node server`,
   "lint-server-test": `eslint -c ${config.eslint}/.eslintrc-mocha-test test/server test/func`,
-  ".optimize-stats-gen": `node ${__dirname}/scripts/gen-optimize-stats.js dist/js/bundle.*.js > optimize-stats.txt`,
   "optimize-stats": {
-    desc: "Generate a TSV file optimize-stats.txt with list of all files that went into production bundle JS",
-    task: [".optimize-stats", "build", ".optimize-stats-gen"]
+    desc: "Generate a list of all files that went into production bundle JS (results in .etmp)",
+    task: `analyze-bundle -b dist/js/bundle.*.js -s dist/server/stats.json`
   },
   "npm:test": ["check"],
   "npm:release": `node ${__dirname}/scripts/map-isomorphic-cdn.js`,
@@ -192,7 +206,7 @@ const tasks = {
     task: `node server/index.js`
   },
   "server-debug": `node debug server/index.js`,
-  "server-watch": `nodemon --ext js,jsx --watch .isomorphic-loader-config.json --watch server --watch config server/index.js --exec node`,
+  "server-watch": `nodemon -C --ext js,jsx --watch .etmp/bundle.valid.log --watch server --watch config server/index.js --exec node`,
   "server-dev": {
     desc: "Start server in dev mode with webpack-dev-server",
     task: `webpack-dev-server --config ${config.webpack}/webpack.config.dev.js --progress --colors --port ${archetype.webpack.devPort}`
@@ -226,5 +240,6 @@ const tasks = {
 
 module.exports = function (gulp) {
   setupPath();
+  createElectrodeTmpDir();
   gulpHelper.loadTasks(tasks, gulp || require("gulp"));
 };
