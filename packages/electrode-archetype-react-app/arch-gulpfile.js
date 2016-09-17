@@ -206,7 +206,7 @@ const tasks = {
     task: `node server/index.js`
   },
   "server-debug": `node debug server/index.js`,
-  "server-watch": `nodemon -C --ext js,jsx --watch .etmp/bundle.valid.log --watch server --watch config server/index.js --exec node`,
+  "server-watch": `nodemon -C --ext js,jsx,json,yaml --watch .etmp/bundle.valid.log --watch server --watch config server/index.js --exec node`,
   "server-dev": {
     desc: "Start server in dev mode with webpack-dev-server",
     task: `webpack-dev-server --config ${config.webpack}/webpack.config.dev.js --progress --colors --port ${archetype.webpack.devPort}`
