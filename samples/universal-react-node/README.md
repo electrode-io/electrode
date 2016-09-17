@@ -2,8 +2,8 @@
 
 This repo is a sample Electrode app with the following Electrode modules:
   - [Electrode Confippet](https://github.com/electrode-io/electrode-confippet)
-  - [Electrode CSRF JWT](https://github.com/electrode-io/electrode-csrf-jwt)
   - [Electrode Javascript Bundle Viewer](https://github.com/electrode-io/electrify)
+  - [Electrode CSRF JWT](https://github.com/electrode-io/electrode-csrf-jwt)
   - [Electrode Redux Router Engine](https://github.com/electrode-io/electrode-redux-router-engine)
   - [Electrode React SSR Caching](https://github.com/electrode-io/electrode-react-ssr-caching)
   - [Electrode Above the Fold Rendering](https://github.com/electrode-io/above-the-fold-only-server-render)
@@ -33,31 +33,29 @@ $ gulp server-prod
 
 - Running in the selected environment should load the appropriate configuration settings
 
-## Instructions
-- You can build the app from scratch by following the instructions below:
-  - [Electrode Confippet](#electrode-confippet)
-  - [Electrode CSRF JWT](#csrf-jwt)
-  - [Electrode Javascript Bundle Viewer](#bundle-viewer)
-  - [Electrode Redux Router Engine](#redux-router-engine)
-
----
-
-## <a name="electrode-confippet"></a>Electrode Confippet ##
-
-- [Confippet](https://github.com/electrode-io/electrode-confippet) is a versatile utility for managing your NodeJS application configuration. Its goal is customization and extensibility, but offers a preset config out of the box.
-- Scaffold an electrode app using the following commands:
-
-### Install
+## Instructions for boostrapping new electrode application
+You can bootstrap a new electrode webapplication from scratch by doing:
 
 ```bash
 npm install -g yo
 npm install -g generator-electrode
 yo electrode
 ```
+This will set up an Electrode webapplication which will have 2 of the above 6 modules. The two modules that are available by default are:
+  - [Electrode Confippet](https://github.com/electrode-io/electrode-confippet)
+  - [Electrode Javascript Bundle Viewer](https://github.com/electrode-io/electrify)
+  
+---
+
+## Instructions about standalone modules
+
+### <a name="electrode-confippet"></a>Electrode Confippet ###
+
+- [Confippet](https://github.com/electrode-io/electrode-confippet) is a versatile utility for managing your NodeJS application configuration. Its goal is customization and extensibility, but offers a preset config out of the box.
 
 #### Config
 
-- Once the scaffolding is complete, open the following config files:
+- Once the bootstrapping is done using `yo electrode`, open the following config files:
 
 ```
 config
@@ -66,7 +64,7 @@ config
 |_ production.json
 ```
 
-#### Development environment
+##### Development environment
 
 - Update the `config/development.json` to have the following settings:
 
@@ -91,7 +89,7 @@ config
 
 - The above settings should show server log errors that may be beneficial for debugging, disable content encoding, and run the server in port 3000
 
-#### Production environment
+##### Production environment
 
 - Update the `config/production.json` to have the following settings:
 
@@ -119,7 +117,7 @@ config
 - The `connections` key are electrode server specific: https://github.com/electrode-io/electrode-server/tree/master/lib/config
 - Keys that exist in the `config/default.json` that are also in the other environment configs will be replaced by the environment specific versions
 
-#### Require
+##### Require
 
 - In Electrode, the configurations are loaded from `server/index.js` at this line:
 
@@ -130,7 +128,7 @@ const staticPathsDecor = require("electrode-static-paths");
 require("electrode-server")(config, [staticPathsDecor()]);
 ```
 
-#### Run
+##### Run
 
 - Start the electrode app in `development` environment:
 
@@ -141,17 +139,18 @@ $ NODE_ENV=development gulp hot
 - Start the electrode app in `production` environment:
 
 ```bash
-$ NODE_ENV=production gulp hot
+$ gulp build
+$ gulp server-prod
 ```
 
 - Running in the selected environment should load the appropriate configuration settings
 
 ---
 
-## <a name="csrf-jwt"></a>Electrode CSRF-JWT
+### <a name="csrf-jwt"></a>Electrode CSRF-JWT
 [CSRF-JWT](https://github.com/electrode-io/electrode-csrf-jwt) is an Electrode plugin that allows you to authenticate HTTP requests using JWT in your Electrode applications.
 
-### Install
+#### Install
 - Add the `electrode-csrf-jwt` component:
 
 ```bash
@@ -173,7 +172,7 @@ That's it! CSRF protection will be automatically enabled for endpoints added to 
 
 > You can read more about options and usage details on [the component's README page](https://github.com/electrode-io/electrode-csrf-jwt#usage)
 
-### CSRF-JWT Demonstration code
+#### CSRF-JWT Demonstration code
 
 In addition to the above steps, the following modifications were made in order to demonstrate functionality:
 
@@ -182,7 +181,7 @@ In addition to the above steps, the following modifications were made in order t
 
 ---
 
-## <a name="bundle-viewer"></a>Electrode Javascript Bundle Viewer - How to use/integrate guide ##
+### <a name="bundle-viewer"></a>Electrode Javascript Bundle Viewer - How to use/integrate guide ###
 
 An Electrode Javascript bundle viewer aptly named [Electrify](https://github.com/electrode-io/electrify), this is a stunning visual tool that helps for analyzing the module tree of Webpack based projects. It's especially handy for catching large and/or duplicate modules which might be either bloating up your bundle or slowing down the build/install process.
 
@@ -201,7 +200,7 @@ Head over to the Electrify [repository](https://github.com/electrode-io/electrif
 
 ---
 
-## <a name="electrode-react-ssr-caching"></a>Electrode Server Side Rendering Component Caching ##
+### <a name="electrode-react-ssr-caching"></a>Electrode Server Side Rendering Component Caching ###
 
 [Electrode-react-ssr-caching](https://github.com/electrode-io/electrode-react-ssr-caching) module supports profiling React Server Side Rendering time and component caching to help you speed up SSR.
 
@@ -240,7 +239,7 @@ To read more, go to [electrode-react-ssr-caching](https://github.com/electrode-i
 
 ---
 
-## <a name="redux-router-engine"></a>Electrode Redux Router Engine ##
+### <a name="redux-router-engine"></a>Electrode Redux Router Engine ###
 
 [Redux Router Engine](https://github.com/electrode-io/electrode-redux-router-engine) handles async data for React Server Side Rendering using [react-router], Redux, and the [Redux Server Rendering] pattern.
 
@@ -249,7 +248,7 @@ To read more, go to [electrode-react-ssr-caching](https://github.com/electrode-i
 $ npm install --save electrode-redux-router-engine
 ```
 
-### Wiring
+#### Wiring
 
 In this demo, the redux-router has been configured to work with the `server/views/index-view.jsx` component. A standard redux `storeInitializer` function was wrapped with a new function, `createdReduxStore`, which is used to wire a new `ReduxRouterEngine` instance in the component's `module.exports` clause:
 
@@ -278,7 +277,7 @@ module.exports = (req) => {
 
 ---
 
-## <a name="above-the-fold"></a>Electrode Above the Fold Server Rendering
+### <a name="above-the-fold"></a>Electrode Above the Fold Server Rendering
 
 [Above the Fold Server Rendering](https://github.com/electrode-io/above-the-fold-only-server-render) is a React component for optionally skipping server side rendering of components outside above-the-fold (or outside of the viewport). This component helps render your components on the server that are above the fold and the remaining components on the client.
 
@@ -286,7 +285,7 @@ module.exports = (req) => {
 
 By default, the [above-the-fold-only-server-render](https://github.com/electrode-io/above-the-fold-only-server-render) component is an exercise in simplicity; it does nothing and only returns the child component.
 
-### Install
+#### Install
 
 - Add the `above-the-fold-only-server-render` component:
 
