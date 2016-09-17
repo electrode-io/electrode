@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/electrode-io/demo-index.git"
+    "url": "git://github.com/electrode-io/electrode-demo-index.git"
   },
   "scripts": {
     "preversion": "npm test",
