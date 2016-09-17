@@ -16,7 +16,7 @@
     "generate": "npm run generate-metadata && npm run generate-documentation",
     "generate-metadata": "electrode-docgen --package ./package.json --src ./src --metadata components.json",
     "generate-documentation": "electrode-docgen --package ./package.json --src ./src --markdown components.md",
-    "prepublish": "gulp prepublish"
+    "prepublish": "gulp npm:prepublish"
   },
   "keywords": [
     "electrode",
