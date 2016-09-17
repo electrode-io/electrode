@@ -37,8 +37,7 @@ $ gulp server-prod
 You can bootstrap a new electrode webapplication from scratch by doing:
 
 ```bash
-npm install -g yo
-npm install -g generator-electrode
+npm install -g yo generator-electrode gulp
 yo electrode
 ```
 This will set up an Electrode webapplication which will have 2 of the above 6 modules. The two modules that are available by default are:
