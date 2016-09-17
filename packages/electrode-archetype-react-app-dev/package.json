@@ -13,7 +13,6 @@
   "license": "Apache-2.0",
   "scripts": {},
   "dependencies": {
-    "acorn": "^3.1.0",
     "autoprefixer-stylus": "^0.9.1",
     "babel-cli": "^6.4.5",
     "babel-core": "^6.4.0",
@@ -35,6 +34,7 @@
     "chalk": "^1.1.1",
     "css-loader": "^0.23.1",
     "css-modules-require-hook": "^4.0.2",
+    "electrode-bundle-analyzer": "^1.0.0",
     "electrode-electrify": "^1.0.0",
     "electrode-gulp-helper": "^1.0.0",
     "eslint": "^1.7.0",

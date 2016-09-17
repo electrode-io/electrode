@@ -5,6 +5,7 @@ const Path = require("path");
 const fs = require("fs");
 const archetype = require("./config/archtype");
 const gulpHelper = archetype.devRequire("electrode-gulp-helper");
+const mkdirp = archetype.devRequire("mkdirp");
 const config = archetype.config;
 
 function setupPath() {
@@ -103,6 +104,11 @@ const tasks = {
     desc: "Build your app's client bundle for production",
     task: ["build-dist"]
   },
+  "build-analyze": {
+    dep: [".optimize-stats"],
+    desc: "Build your app's client bundle for production and run bundle analyzer",
+    task: ["build-dist", "optimize-stats"]
+  },
   ".build-browser-coverage-1": () => {
     setProductionEnv();
     return exec(`webpack --config ${config.webpack}/webpack.config.browsercoverage.js --colors`);
@@ -175,10 +181,9 @@ const tasks = {
   "lint-client-test": `eslint --ext .js,.jsx -c ${config.eslint}/.eslintrc-react-test test/client`,
   "lint-server": `eslint -c ${config.eslint}/.eslintrc-node server`,
   "lint-server-test": `eslint -c ${config.eslint}/.eslintrc-mocha-test test/server test/func`,
-  ".optimize-stats-gen": `node ${__dirname}/scripts/gen-optimize-stats.js dist/js/bundle.*.js > optimize-stats.txt`,
   "optimize-stats": {
-    desc: "Generate a TSV file optimize-stats.txt with list of all files that went into production bundle JS",
-    task: [".optimize-stats", "build", ".optimize-stats-gen"]
+    desc: "Generate a list of all files that went into production bundle JS (results in .etmp)",
+    task: `analyze-bundle -b dist/js/bundle.*.js -s dist/server/stats.json`
   },
   "npm:test": ["check"],
   "npm:release": `node ${__dirname}/scripts/map-isomorphic-cdn.js`,
@@ -226,5 +231,10 @@ const tasks = {
 
 module.exports = function (gulp) {
   setupPath();
+  const eTmp = Path.resolve(".etmp");
+  if (!checkFileExists(eTmp)) {
+    mkdirp.sync(eTmp);
+    fs.fileWriteSync(Path.join(eTmp, ".gitignore"), "# Electrode tmp dir\n*\n");
+  }
   gulpHelper.loadTasks(tasks, gulp || require("gulp"));
 };
