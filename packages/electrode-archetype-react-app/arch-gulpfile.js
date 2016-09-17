@@ -57,6 +57,15 @@ function checkFileExists(path) {
   }
 }
 
+function createElectrodeTmpDir() {
+  const eTmp = Path.resolve(".etmp");
+  const eTmpGitIgnore = Path.join(eTmp, ".gitignore");
+  if (!checkFileExists(eTmpGitIgnore)) {
+    mkdirp.sync(eTmp);
+    fs.writeFileSync(eTmpGitIgnore, "# Electrode tmp dir\n*\n");
+  }
+}
+
 /**
  * [generateServiceWorker gulp task to generate service worker code that will precache specific resources so they work offline.]
  *
@@ -197,7 +206,7 @@ const tasks = {
     task: `node server/index.js`
   },
   "server-debug": `node debug server/index.js`,
-  "server-watch": `nodemon --ext js,jsx --watch .isomorphic-loader-config.json --watch server --watch config server/index.js --exec node`,
+  "server-watch": `nodemon -C --ext js,jsx --watch .etmp/bundle.valid.log --watch server --watch config server/index.js --exec node`,
   "server-dev": {
     desc: "Start server in dev mode with webpack-dev-server",
     task: `webpack-dev-server --config ${config.webpack}/webpack.config.dev.js --progress --colors --port ${archetype.webpack.devPort}`
@@ -231,10 +240,6 @@ const tasks = {
 
 module.exports = function (gulp) {
   setupPath();
-  const eTmp = Path.resolve(".etmp");
-  if (!checkFileExists(eTmp)) {
-    mkdirp.sync(eTmp);
-    fs.fileWriteSync(Path.join(eTmp, ".gitignore"), "# Electrode tmp dir\n*\n");
-  }
+  createElectrodeTmpDir();
   gulpHelper.loadTasks(tasks, gulp || require("gulp"));
 };

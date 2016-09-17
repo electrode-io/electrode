@@ -18,9 +18,6 @@ var config = module.exports = _.flow(
   hotConfig()
 )();
 
-
-config.devServer = {}; // use webpack default verbosity
-
 /****
  * Hot Mods
  */
