@@ -325,7 +325,7 @@ Run the commands below and test it out in your app:
   gulp hot
 ```
 
-The code in the <h3> tags that are above and below the <AboveTheFoldOnlyServerRender skip={true}> + </AboveTheFoldOnlyServerRender> will render first:
+The code in the `<h3>` tags that are above and below the `<AboveTheFoldOnlyServerRender skip={true}> </AboveTheFoldOnlyServerRender>` will render first:
 
 ```javascript
   import React from "react";
