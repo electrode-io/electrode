@@ -206,16 +206,23 @@ Head over to the Electrify [repository](https://github.com/electrode-io/electrif
 
 It supports 2 types of caching:
 
-* Simple - Component Props become the cache key. This is useful for cases like Header and Footer, where the number of variations of props data is minimal which will make sure the cache size stays small.
-* Template - Components Props are first tokenized and then the generated template html is cached. The idea is akin to generating logic-less handlebars template from your React components and then use string replace to process the template with different props. This is useful for cases like displaying Product information in a Carousel where you have millions of products in the repository.
+* Simple - Component Props become the cache key. This is useful for use cases like Header and Footer, where the number of variations of props data is minimal which will make sure the cache size stays small.
+* Template - Components Props are first tokenized and then the generated template html is cached. The idea is akin to generating logic-less handlebars template from your React components and then use string replace to process the template with different props. This is useful for use cases like displaying Product information in a Carousel where you have millions of products in the repository and only cache one templatized html and then do a string replace to generate the final html
 
-To demonstrate functionality, there is:
+#### Install
+```bash
+$ npm install --save electrode-react-ssr-caching
+```
 
-* An added component `client/components/SSRCachingSimpleType.jsx` to demostrate Simple strategy.
-* An added component `client/components/SSRCachingTemplateType.jsx` to demostrate Template strategy.
+#### Wiring
+
+To demonstrate functionality, we have added:
+
+* `client/components/SSRCachingSimpleType.jsx` for Simple strategy.
+* `client/components/SSRCachingTemplateType.jsx` for Template strategy.
 * To enable caching using `electrode-react-ssr-caching`, we need to do the below configuration:
 
-```
+```javascript
   const cacheConfig = {
     components: {
       SSRCachingTemplateType: {
@@ -235,7 +242,7 @@ To demonstrate functionality, there is:
 
 The above configuration is done in `server/index.js`.
 
-To read more, go to [electrode-react-ssr-caching](https://github.com/electrode-io/electrode-react-ssr-caching)
+To read more, go to [electrode-react-ssr-caching](https://github.com/electrode-io/electrode-react-ssr-caching). The core implementation for caching is [available here](https://github.com/electrode-io/electrode-react-ssr-caching/blob/master/lib/ssr-caching.js). You can also do [Profiling of components](https://github.com/electrode-io/electrode-react-ssr-caching#profiling) 
 
 ---
 
@@ -243,7 +250,7 @@ To read more, go to [electrode-react-ssr-caching](https://github.com/electrode-i
 
 [Redux Router Engine](https://github.com/electrode-io/electrode-redux-router-engine) handles async data for React Server Side Rendering using [react-router], Redux, and the [Redux Server Rendering] pattern.
 
-### Install
+#### Install
 ```bash
 $ npm install --save electrode-redux-router-engine
 ```
