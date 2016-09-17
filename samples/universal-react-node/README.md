@@ -215,8 +215,13 @@ $ npm install --save electrode-react-ssr-caching
 
 #### Wiring
 
-*GOTCHA:
-SSR CACHING OF COMPONENTS ONLY WORKS IN PRODUCTION MODE, SINCE THE PROPS(WHICH ARE READ ONLY) ARE MUTATED FOR CACHING PURPOSES AND MUTATING THE PROPS IS NOT ALLOWED IN DEVELOPMENT MODE BY REACT*
+##### GOTCHA:
+
+- SSR caching of components only works in PRODUCTION mode, since the props(which are read only) are mutated for caching purposes and mutating of props is not allowed in development mode by react.
+
+- Make sure the `electrode-react-ssr-caching` module is imported first followed by the imports of react and react-dom module. SSR caching will not work if the ordering is changed since caching module has to have a chance to patch react's code first. Also if you are importing `electrode-react-ssr-caching`, `react`  and `react-dom` in the same file , make sure you are using all `require` or all `import`. Found that SSR caching was NOT working if, `electrode-react-ssr-caching` is `require`d first and then `react` and `react-dom` is imported.
+
+---
 
 To demonstrate functionality, we have added:
 
