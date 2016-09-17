@@ -10,7 +10,7 @@
     "url": "https://github.com/electrode-io/electrode-archetype-react-component/issues"
   },
   "homepage": "https://github.com/electrode-io/electrode-archetype-react-component/README.md",
-  "license": "UNLICENSED",
+  "license": "Apache-2.0",
   "config": {
     "archetype": "node_modules/electrode-archetype-react-component"
   },
