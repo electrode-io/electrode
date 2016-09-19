@@ -4,7 +4,7 @@
 
 This repo is a sample Electrode app with the following Electrode modules:
   - [Electrode Confippet](https://github.com/electrode-io/electrode-confippet)
-  - [Electrode Javascript Bundle Viewer](https://github.com/electrode-io/electrify)
+  - [Electrode Electrify](https://github.com/electrode-io/electrify)
   - [Electrode CSRF JWT](https://github.com/electrode-io/electrode-csrf-jwt)
   - [Electrode Redux Router Engine](https://github.com/electrode-io/electrode-redux-router-engine)
   - [Electrode React SSR Caching](https://github.com/electrode-io/electrode-react-ssr-caching)
@@ -182,7 +182,7 @@ In addition to the above steps, the following modifications were made in order t
 
 ---
 
-### <a name="bundle-viewer"></a>Electrode Javascript Bundle Viewer - How to use/integrate guide ###
+### <a name="electrode-electrify"></a>Electrode Electrify ###
 
 An Electrode Javascript bundle viewer aptly named [Electrify](https://github.com/electrode-io/electrify), this is a stunning visual tool that helps for analyzing the module tree of Webpack based projects. It's especially handy for catching large and/or duplicate modules which might be either bloating up your bundle or slowing down the build/install process.
 
