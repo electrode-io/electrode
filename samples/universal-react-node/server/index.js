@@ -1,6 +1,6 @@
 "use strict";
 
-var SSRCaching = require("electrode-react-ssr-caching");
+const SSRCaching = require("electrode-react-ssr-caching");
 
 process.on("SIGINT", () => {
   process.exit(0);
