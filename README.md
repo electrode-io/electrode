@@ -295,7 +295,7 @@ module.exports = (req) => {
 
 ### <a name="above-the-fold-only-server-render"></a>Above The Fold Only Server Render
 
-[Above The Fold Only Server Render](https://github.com/electrode-io/above-the-fold-only-server-render) is a React component for optionally skipping server side rendering of components outside above-the-fold (or outside of the viewport). This component helps render your components on the server that are above the fold and the remaining components on the client.
+[Above The Fold Only Server Render](https://github.com/electrode-io/above-the-fold-only-server-render) is a React component for optionally skipping server side rendering of components outside above-the-fold (or inside of the viewport). This component helps render your components on the server that are above the fold and the remaining components on the client.
 
 [above-the-fold-only-server-render](https://github.com/electrode-io/above-the-fold-only-server-render) helps increase performance both by decreasing the load on renderToString and sending the end user a smaller amount of markup.
 
