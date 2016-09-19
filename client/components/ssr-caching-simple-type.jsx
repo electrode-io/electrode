@@ -1,13 +1,13 @@
-import React from "react";
+import React, {PropTypes} from "react";
 import { connect } from "react-redux";
 
 class SSRCachingSimpleTypeWrapper extends React.Component {
   render() {
     const count = this.props.count;
 
-    var elements = [];
+    const elements = [];
 
-    for (var i = 0; i < count; i++) {
+    for (let i = 0; i < count; i++) {
       elements.push(<SSRCachingSimpleType key={i} navEntry={`NavEntry${i}`}/>);
     }
 
@@ -19,6 +19,10 @@ class SSRCachingSimpleTypeWrapper extends React.Component {
   }
 }
 
+SSRCachingSimpleTypeWrapper.propTypes = {
+  count: PropTypes.number
+};
+
 class SSRCachingSimpleType extends React.Component {
   render() {
     return (
@@ -28,6 +32,10 @@ class SSRCachingSimpleType extends React.Component {
     );
   }
 }
+
+SSRCachingSimpleType.propTypes = {
+  navEntry: PropTypes.string
+};
 
 const mapStateToProps = (state) => ({
   count: state.count

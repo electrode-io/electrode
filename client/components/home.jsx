@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PropTypes } from "react";
 import { connect } from "react-redux";
 
 class HomeWrapper extends React.Component {
@@ -9,7 +9,11 @@ class HomeWrapper extends React.Component {
   }
 }
 
-class Home extends React.Component {
+HomeWrapper.propTypes = {
+  data: PropTypes.object
+};
+
+export class Home extends React.Component {
   render() {
     return (
       <div>
@@ -30,6 +34,10 @@ class Home extends React.Component {
     );
   }
 }
+
+Home.propTypes = {
+  data: PropTypes.object
+};
 
 const mapStateToProps = (state) => ({
   data: state.data
