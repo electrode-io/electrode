@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/electrode-io/electrode-demo-index.svg?branch=master)](https://travis-ci.org/electrode-io/electrode-demo-index)
+
 #Electrode Demo Index
 
 A shared demo component for Electrode components.
