@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/electrode-io/electrode-archetype-react-component.svg?branch=master)](https://travis-ci.org/electrode-io/electrode-archetype-react-component)
+
 # Archetype: Electrode React Component
 
 Electrode flavored react component archetype.
