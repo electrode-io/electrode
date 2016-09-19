@@ -4,11 +4,11 @@
 
 This repo is a sample Electrode app with the following Electrode modules:
   - [Electrode Confippet](https://github.com/electrode-io/electrode-confippet)
-  - [Electrode Javascript Bundle Viewer](https://github.com/electrode-io/electrify)
+  - [Electrode Electrify](https://github.com/electrode-io/electrify)
   - [Electrode CSRF JWT](https://github.com/electrode-io/electrode-csrf-jwt)
   - [Electrode Redux Router Engine](https://github.com/electrode-io/electrode-redux-router-engine)
   - [Electrode React SSR Caching](https://github.com/electrode-io/electrode-react-ssr-caching)
-  - [Electrode Above the Fold Rendering](https://github.com/electrode-io/above-the-fold-only-server-render)
+  - [Above The Fold Only Server Render](https://github.com/electrode-io/above-the-fold-only-server-render)
 
 ## Install
 
@@ -182,7 +182,7 @@ In addition to the above steps, the following modifications were made in order t
 
 ---
 
-### <a name="bundle-viewer"></a>Electrode Javascript Bundle Viewer - How to use/integrate guide ###
+### <a name="electrode-electrify"></a>Electrode Electrify ###
 
 An Electrode Javascript bundle viewer aptly named [Electrify](https://github.com/electrode-io/electrify), this is a stunning visual tool that helps for analyzing the module tree of Webpack based projects. It's especially handy for catching large and/or duplicate modules which might be either bloating up your bundle or slowing down the build/install process.
 
@@ -201,7 +201,7 @@ Head over to the Electrify [repository](https://github.com/electrode-io/electrif
 
 ---
 
-### <a name="electrode-react-ssr-caching"></a>Electrode Server Side Rendering Component Caching ###
+### <a name="electrode-react-ssr-caching"></a>Electrode React SSR Caching ###
 
 [Electrode-react-ssr-caching](https://github.com/electrode-io/electrode-react-ssr-caching) module supports profiling React Server Side Rendering time and component caching to help you speed up SSR.
 
@@ -293,11 +293,11 @@ module.exports = (req) => {
 
 ---
 
-### <a name="above-the-fold"></a>Electrode Above the Fold Server Rendering
+### <a name="above-the-fold-only-server-render"></a>Above The Fold Only Server Render
 
-[Above the Fold Server Rendering](https://github.com/electrode-io/above-the-fold-only-server-render) is a React component for optionally skipping server side rendering of components outside above-the-fold (or outside of the viewport). This component helps render your components on the server that are above the fold and the remaining components on the client.
+[Above The Fold Only Server Render](https://github.com/electrode-io/above-the-fold-only-server-render) is a React component for optionally skipping server side rendering of components outside above-the-fold (or inside of the viewport). This component helps render your components on the server that are above the fold and the remaining components on the client.
 
-[Above-the-fold-only-server-render](https://github.com/electrode-io/above-the-fold-only-server-render) helps increase performance both by decreasing the load on renderToString and sending the end user a smaller amount of markup.
+[above-the-fold-only-server-render](https://github.com/electrode-io/above-the-fold-only-server-render) helps increase performance both by decreasing the load on renderToString and sending the end user a smaller amount of markup.
 
 By default, the [above-the-fold-only-server-render](https://github.com/electrode-io/above-the-fold-only-server-render) component is an exercise in simplicity; it does nothing and only returns the child component.
 
