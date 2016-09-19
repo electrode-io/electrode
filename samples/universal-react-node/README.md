@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/electrode-io/electrode-boilerplate-universal-react-node.svg?branch=master)](https://travis-ci.org/electrode-io/electrode-boilerplate-universal-react-node)
+
 # Electrode Boilerplate Universal React Node
 
 This repo is a sample Electrode app with the following Electrode modules:
@@ -43,7 +45,7 @@ yo electrode
 This will set up an Electrode webapplication which will have 2 of the above 6 modules. The two modules that are available by default are:
   - [Electrode Confippet](https://github.com/electrode-io/electrode-confippet)
   - [Electrode Javascript Bundle Viewer](https://github.com/electrode-io/electrify)
-  
+
 ---
 
 ## Instructions about standalone modules
@@ -249,7 +251,7 @@ To demonstrate functionality, we have added:
 
 The above configuration is done in `server/index.js`.
 
-To read more, go to [electrode-react-ssr-caching](https://github.com/electrode-io/electrode-react-ssr-caching). The core implementation for caching is [available here](https://github.com/electrode-io/electrode-react-ssr-caching/blob/master/lib/ssr-caching.js). You can also do [Profiling of components](https://github.com/electrode-io/electrode-react-ssr-caching#profiling) 
+To read more, go to [electrode-react-ssr-caching](https://github.com/electrode-io/electrode-react-ssr-caching). The core implementation for caching is [available here](https://github.com/electrode-io/electrode-react-ssr-caching/blob/master/lib/ssr-caching.js). You can also do [Profiling of components](https://github.com/electrode-io/electrode-react-ssr-caching#profiling)
 
 ---
 
