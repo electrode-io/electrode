@@ -201,7 +201,7 @@ Head over to the Electrify [repository](https://github.com/electrode-io/electrif
 
 ---
 
-### <a name="electrode-react-ssr-caching"></a>Electrode Server Side Rendering Component Caching ###
+### <a name="electrode-react-ssr-caching"></a>Electrode React SSR Caching ###
 
 [Electrode-react-ssr-caching](https://github.com/electrode-io/electrode-react-ssr-caching) module supports profiling React Server Side Rendering time and component caching to help you speed up SSR.
 
