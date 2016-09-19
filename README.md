@@ -8,7 +8,7 @@ This repo is a sample Electrode app with the following Electrode modules:
   - [Electrode CSRF JWT](https://github.com/electrode-io/electrode-csrf-jwt)
   - [Electrode Redux Router Engine](https://github.com/electrode-io/electrode-redux-router-engine)
   - [Electrode React SSR Caching](https://github.com/electrode-io/electrode-react-ssr-caching)
-  - [Electrode Above the Fold Rendering](https://github.com/electrode-io/above-the-fold-only-server-render)
+  - [Above The Fold Only Server Render](https://github.com/electrode-io/above-the-fold-only-server-render)
 
 ## Install
 
