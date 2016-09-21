@@ -1,3 +1,8 @@
-/**
- * Created by mgoel1 on 9/21/16.
- */
+import React from "react";
+import identity from "lodash/identity";
+
+const DevTools = () => <div />;
+
+DevTools.instrument = () => identity;
+
+export default DevTools;
