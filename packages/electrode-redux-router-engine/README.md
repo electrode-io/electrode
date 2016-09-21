@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/electrode-io/electrode-redux-router-engine.svg?branch=master)](https://travis-ci.org/electrode-io/electrode-redux-router-engine)
+
 # Electrode Redux Router Engine
 
 Handle async data for React Server Side Rendering using [react-router], Redux, and the [Redux Server Rendering] pattern.
@@ -35,7 +37,7 @@ function createReduxStore(req, match) {
     // this refs to engine
 
     const store = configureStore();
-    
+
     return Promise.all([
       store.dispatch(boostrapApp())
       // dispatch any other asynchronous actions here
@@ -76,7 +78,7 @@ Where options could contain the following fields:
     - If it's a `function` then its `this` references the engine instance
   - `renderToString` - **optional** callback to provide custom renderToString
     - It should take `(req, store, match, withIds)` arguments
-    
+
 ### [engine.render(req, options)]()
 
 Method to render a route.
