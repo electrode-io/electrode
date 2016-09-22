@@ -1,4 +1,6 @@
-# Archetype: Electrode React Isomorphic App
+# Archetype: Electrode React ~~Isomorphic~~ Universal App
+
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 
 A Walmart Labs flavored React Universal App archetype.
 
@@ -132,3 +134,11 @@ module.exports = {
 ## Tasks
 
 Run `gulp` to see list of tasks.
+
+
+[npm-image]: https://badge.fury.io/js/electrode-archetype-react-app.svg
+[npm-url]: https://npmjs.org/package/electrode-archetype-react-app
+[travis-image]: https://travis-ci.org/electrode-io/electrode-archetype-react-app.svg?branch=master
+[travis-url]: https://travis-ci.org/electrode-io/electrode-archetype-react-app
+[daviddm-image]: https://david-dm.org/electrode-io/electrode-archetype-react-app.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/electrode-io/electrode-archetype-react-app
