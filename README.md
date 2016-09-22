@@ -27,6 +27,8 @@ npm install
 $ NODE_ENV=development gulp hot
 ```
 
+Running in development mode will also enable Redux Devtools so you can easily access the state of the Redux store. Please install the [Redux Devtools extension in Chrome](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en) to enable this feature.
+
 - Start the electrode app in `production` environment:
 
 ```bash
