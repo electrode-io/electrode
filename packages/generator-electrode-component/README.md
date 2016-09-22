@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.com/electrode-io/generator-electrode-component.svg?token=9dyHRhqfyW5wqcpfkeLr&branch=master)](https://travis-ci.com/electrode-io/generator-electrode-component)
-
 # generator-electrode-component
+
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 
 A [Yeoman](http://yeoman.io) generator for Electrode
 [React](http://facebook.github.io/react/) components.
@@ -86,3 +86,10 @@ This will build your `lib`, `dist` and `example/dist` folders for release.
 ## License
 
 [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0)
+
+[npm-image]: https://badge.fury.io/js/generator-electrode-component.svg
+[npm-url]: https://npmjs.org/package/generator-electrode-component
+[travis-image]: https://travis-ci.org/electrode-io/generator-electrode-component.svg?branch=master
+[travis-url]: https://travis-ci.org/electrode-io/generator-electrode-component
+[daviddm-image]: https://david-dm.org/electrode-io/generator-electrode-component.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/electrode-io/generator-electrode-component
