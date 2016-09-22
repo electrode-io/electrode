@@ -1,11 +1,9 @@
 language: node_js
 node_js:
-  - v6
-  - v5
   - v4
-  - '0.12'
-  - '0.10'
+  - v6
 notifications:
   email:
     - XChen@walmartlabs.com
     - ananavati@walmartlabs.com
+before_install: if [[ `npm -v` != 3* ]]; then npm i -g npm@3; npm --version; fi
