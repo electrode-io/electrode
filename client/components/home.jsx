@@ -10,7 +10,7 @@ class HomeWrapper extends React.Component {
 }
 
 HomeWrapper.propTypes = {
-  data: PropTypes.object
+  data: PropTypes.string
 };
 
 export class Home extends React.Component {
@@ -36,7 +36,7 @@ export class Home extends React.Component {
 }
 
 Home.propTypes = {
-  data: PropTypes.object
+  data: PropTypes.string
 };
 
 const mapStateToProps = (state) => ({
