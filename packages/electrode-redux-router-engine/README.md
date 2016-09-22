@@ -27,6 +27,12 @@ export default (
 );
 ```
 
+For each route, you can add an optional attribute `methods` to specify the HTTP methods you want the route to allow.
+
+i.e. `<Route methods="get,post" path="/form" component={Form}>`
+
+If the attribute is not specified then it's defaulted to `"get"`.
+
 And an example using the [Redux Async Actions] pattern:
 
 ```js

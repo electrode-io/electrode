@@ -25,6 +25,7 @@ describe("redux-router-engine", function () {
 
   beforeEach(() => {
     testReq = {
+      method: "get",
       log: () => {
       },
       app: {},
@@ -178,4 +179,21 @@ describe("redux-router-engine", function () {
     });
   });
 
+  it("should return 500 for method not allowed", () => {
+    const req = {
+      path: "/test",
+      method: "post",
+      log: () => {
+      },
+      app: {},
+      url: {}
+    };
+
+    const engine = new ReduxRouterEngine({routes, createReduxStore});
+
+    return engine.render(req).then((result) => {
+      expect(result.status).to.equal(500);
+      expect(result.message).to.include(`doesn't allow request method post`);
+    });
+  });
 });

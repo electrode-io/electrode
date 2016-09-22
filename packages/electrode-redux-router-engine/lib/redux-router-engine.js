@@ -45,8 +45,15 @@ class ReduxRouterEngine {
         if (!match.renderProps) {
           return {
             status: 404,
-            message: `router-resolver: Path ${location} not found`
+            message: `redux-router-engine: Path ${location} not found`
           };
+        }
+
+        const methods = match.renderProps.routes.find((x) => x.path === location).methods || "get";
+
+        if (methods.toLowerCase().indexOf(req.method.toLowerCase()) < 0) {
+          throw new Error(
+            `redux-router-engine: ${location} doesn't allow request method ${req.method}`);
         }
 
         return this._handleRender(req, match, options || {});
