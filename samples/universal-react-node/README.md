@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/electrode-io/electrode-boilerplate-universal-react-node.svg?branch=master)](https://travis-ci.org/electrode-io/electrode-boilerplate-universal-react-node)
-
 # Electrode Boilerplate Universal React Node
+
+[![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 
 This repo is a sample Electrode app with the following Electrode modules:
   - [Electrode Confippet](https://github.com/electrode-io/electrode-confippet)
@@ -481,3 +481,12 @@ analyze-bundle --bundle dist/js/bundle.42603ce3a63db995958f.js --stats dist/serv
 ```
 
 Navigate to the `.etmp` folder to view the `bundle.analyze.json` or `bundle.analyze.tsv` output files. 
+
+
+[npm-image]: https://badge.fury.io/js/electrode-boilerplate-universal-react-node.svg
+[npm-url]: https://npmjs.org/package/electrode-boilerplate-universal-react-node
+[travis-image]: https://travis-ci.org/electrode-io/electrode-boilerplate-universal-react-node.svg?branch=master
+[travis-url]: https://travis-ci.org/electrode-io/electrode-boilerplate-universal-react-node
+[daviddm-image]: https://david-dm.org/electrode-io/electrode-boilerplate-universal-react-node.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/electrode-io/electrode-boilerplate-universal-react-node
+
