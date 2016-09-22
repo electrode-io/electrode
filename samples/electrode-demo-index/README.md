@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/electrode-io/electrode-demo-index.svg?branch=master)](https://travis-ci.org/electrode-io/electrode-demo-index)
-
 #Electrode Demo Index
+
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 
 A shared demo component for Electrode components.
 
@@ -45,3 +45,9 @@ const demo = () => <Demo libraryScope={libraryScope} components={components} />;
 export default demo;
 ```
 
+[npm-image]: https://badge.fury.io/js/electrode-demo-index.svg
+[npm-url]: https://npmjs.org/package/electrode-demo-index
+[travis-image]: https://travis-ci.org/electrode-io/electrode-demo-index.svg?branch=master
+[travis-url]: https://travis-ci.org/electrode-io/electrode-demo-index
+[daviddm-image]: https://david-dm.org/electrode-io/electrode-demo-index.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/electrode-io/electrode-demo-index
