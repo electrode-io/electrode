@@ -156,7 +156,7 @@ const registerRoutes = (server, options, next) => {
     return content;
   };
 
-  const pluginOptions = _.defaultsDeep({}, pluginOptionsDefaults, options);
+  const pluginOptions = _.defaultsDeep({}, options, pluginOptionsDefaults);
 
   return Promise.try(() => loadAssetsFromStats(pluginOptions.stats))
     .then((assets) => {
