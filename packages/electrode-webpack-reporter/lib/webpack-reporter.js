@@ -1,6 +1,8 @@
 "use strict";
 
-const EventEmitter = require('events');
+/* eslint-disable no-console, no-magic-numbers, max-statements, complexity, prefer-template, curly, max-len, max-params */
+
+const EventEmitter = require("events");
 
 class WebpackReporter extends EventEmitter {
   constructor() {
@@ -31,17 +33,17 @@ class WebpackReporter extends EventEmitter {
 
   _webReport(req, res) {
     const jsonData = () => {
-      let data = this._reporterOptions.stats.toJson(true);
+      const data = this._reporterOptions.stats.toJson(true);
       data.modules.forEach((m) => {
         delete m.source;
       });
       delete data.children;
       return data;
-  };
+    };
 
     res.format({
       html: () => {
-        res.status(200).send(`<pre>${this.jsonToString(jsonData(), false)}</pre>`);
+        res.status(200).send(`<html><body><pre>${this.jsonToHtml(jsonData(), true)}</pre></body></html>`);
       },
 
       json: () => {
@@ -51,143 +53,122 @@ class WebpackReporter extends EventEmitter {
       default: function () {
         res.status(404).send("Not found");
       }
-    })
+    });
   }
 
   //
-  // A quick one copied from webpack Stat
+  // A quick HTML output adapted from original Stat.jsonToString
   //
-  jsonToString(obj, useColors) {	var buf = [];
+  jsonToHtml(obj, useColors) {
+    const buf = [];
 
-    function normal(str) {
-      buf.push(str);
-    }
+    const normal = (str) => buf.push(str);
 
-    function bold(str) {
-      if(useColors) buf.push("\u001b[1m");
-      buf.push(str);
-      if(useColors) buf.push("\u001b[22m");
-    }
+    const bold = useColors ? (str) => buf.push(`<b>${str}</b>`) : (str) => buf.push(str);
 
-    function yellow(str) {
-      if(useColors) buf.push("\u001b[1m\u001b[33m");
-      buf.push(str);
-      if(useColors) buf.push("\u001b[39m\u001b[22m");
-    }
+    const colorOut = useColors ?
+      (color, str) => buf.push(`<span style="color:${color}">${str}</span>`) :
+      (color, str) => buf.push(str);
 
-    function red(str) {
-      if(useColors) buf.push("\u001b[1m\u001b[31m");
-      buf.push(str);
-      if(useColors) buf.push("\u001b[39m\u001b[22m");
-    }
+    const yellow = (str) => colorOut("#cccc33", str);
+    const red = (str) => colorOut("red", str);
+    const green = (str) => colorOut("green", str);
+    const cyan = (str) => colorOut("cyan", str);
+    const magenta = (str) => colorOut("magenta", str);
 
-    function green(str) {
-      if(useColors) buf.push("\u001b[1m\u001b[32m");
-      buf.push(str);
-      if(useColors) buf.push("\u001b[39m\u001b[22m");
-    }
-
-    function cyan(str) {
-      if(useColors) buf.push("\u001b[1m\u001b[36m");
-      buf.push(str);
-      if(useColors) buf.push("\u001b[39m\u001b[22m");
-    }
-
-    function magenta(str) {
-      if(useColors) buf.push("\u001b[1m\u001b[35m");
-      buf.push(str);
-      if(useColors) buf.push("\u001b[39m\u001b[22m");
-    }
-
-    function coloredTime(time) {
-      var times = [800, 400, 200, 100];
-      if(obj.time) {
+    const coloredTime = (time) => {
+      let times = [800, 400, 200, 100];
+      if (obj.time) {
         times = [obj.time / 2, obj.time / 4, obj.time / 8, obj.time / 16];
       }
-      if(time < times[3])
+      if (time < times[3]) {
         normal(time + "ms");
-      else if(time < times[2])
+      } else if (time < times[2]) {
         bold(time + "ms");
-      else if(time < times[1])
+      } else if (time < times[1]) {
         green(time + "ms");
-      else if(time < times[0])
+      } else if (time < times[0]) {
         yellow(time + "ms");
-      else
+      } else {
         red(time + "ms");
-    }
+      }
+    };
 
-    function newline() {
-      buf.push("\n");
-    }
+    const newline = () => buf.push("\n");
 
-    function table(array, formats, align, splitter) {
-      var rows = array.length;
-      var cols = array[0].length;
-      var colSizes = new Array(cols);
-      for(var col = 0; col < cols; col++)
+    const table = (array, formats, align, splitter) => {
+      const rows = array.length;
+      const cols = array[0].length;
+      const colSizes = new Array(cols);
+      for (let col = 0; col < cols; col++) {
         colSizes[col] = 3;
-      for(var row = 0; row < rows; row++) {
-        for(var col = 0; col < cols; col++) {
-          var value = array[row][col] + "";
-          if(value.length > colSizes[col]) {
+      }
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          const value = array[row][col] + "";
+          if (value.length > colSizes[col]) {
             colSizes[col] = value.length;
           }
         }
       }
-      for(var row = 0; row < rows; row++) {
-        for(var col = 0; col < cols; col++) {
-          var format = row === 0 ? bold : formats[col];
-          var value = array[row][col] + "";
-          var l = value.length;
-          if(align[col] === "l")
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          const format = row === 0 ? bold : formats[col];
+          const value = `${array[row][col]}`;
+          let l = value.length;
+          if (align[col] === "l") {
             format(value);
-          for(; l < colSizes[col] && col !== cols - 1; l++)
+          }
+          for (; l < colSizes[col] && col !== cols - 1; l++) {
             normal(" ");
-          if(align[col] === "r")
+          }
+          if (align[col] === "r") {
             format(value);
-          if(col + 1 < cols)
+          }
+          if (col + 1 < cols) {
             normal(splitter || "  ");
+          }
         }
         newline();
       }
-    }
+    };
 
-    function formatSize(size) {
-      if(size <= 0) return "0 bytes";
+    const formatSize = (size) => {
+      if (size <= 0) return "0 bytes";
 
-      var abbreviations = ["bytes", "kB", "MB", "GB"];
-      var index = Math.floor(Math.log(size) / Math.log(1000));
+      const abbreviations = ["bytes", "kB", "MB", "GB"];
+      const index = Math.floor(Math.log(size) / Math.log(1000));
 
       return +(size / Math.pow(1000, index))
           .toPrecision(3) + " " + abbreviations[index];
-    }
+    };
 
-    if(obj.hash) {
+    if (obj.hash) {
       normal("Hash: ");
       bold(obj.hash);
       newline();
     }
-    if(obj.version) {
+    if (obj.version) {
       normal("Version: webpack ");
       bold(obj.version);
       newline();
     }
-    if(typeof obj.time === "number") {
+    if (typeof obj.time === "number") {
       normal("Time: ");
       bold(obj.time);
       normal("ms");
       newline();
     }
-    if(obj.publicPath) {
+    if (obj.publicPath) {
       normal("PublicPath: ");
       bold(obj.publicPath);
       newline();
     }
-    if(obj.assets && obj.assets.length > 0) {
-      var t = [
+    if (obj.assets && obj.assets.length > 0) {
+      const t = [
         ["Asset", "Size", "Chunks", "", "Chunk Names"]
       ];
-      obj.assets.forEach(function(asset) {
+      obj.assets.forEach((asset) => {
         t.push([
           asset.name,
           formatSize(asset.size),
@@ -198,168 +179,169 @@ class WebpackReporter extends EventEmitter {
       });
       table(t, [green, normal, bold, green, normal], "rrrll");
     }
-    var modulesByIdentifier = {};
-    if(obj.modules) {
-      obj.modules.forEach(function(module) {
+    const modulesByIdentifier = {};
+    if (obj.modules) {
+      obj.modules.forEach((module) => {
         modulesByIdentifier["$" + module.identifier] = module;
       });
-    } else if(obj.chunks) {
-      obj.chunks.forEach(function(chunk) {
-        if(chunk.modules) {
-          chunk.modules.forEach(function(module) {
+    } else if (obj.chunks) {
+      obj.chunks.forEach((chunk) => {
+        if (chunk.modules) {
+          chunk.modules.forEach((module) => {
             modulesByIdentifier["$" + module.identifier] = module;
           });
         }
       });
     }
 
-    function processProfile(module) {
-      if(module.profile) {
+    const processProfile = (module) => {
+      if (module.profile) {
         normal("      ");
-        var sum = 0,
-          allowSum = true;
-        var path = [];
-        var current = module;
-        while(current.issuer) {
-          if(!modulesByIdentifier["$" + current.issuer]) {
+        let sum = 0;
+        let allowSum = true;
+        const path = [];
+        let current = module;
+        while (current.issuer) {
+          if (!modulesByIdentifier["$" + current.issuer]) {
             normal(" ... ->");
             allowSum = false;
             break;
           }
           path.unshift(current = modulesByIdentifier["$" + current.issuer]);
         }
-        path.forEach(function(module) {
+        path.forEach((mod) => {
           normal(" [");
-          normal(module.id);
+          normal(mod.id);
           normal("] ");
-          if(module.profile) {
-            var time = (module.profile.factory || 0) + (module.profile.building || 0);
+          if (mod.profile) {
+            const time = (mod.profile.factory || 0) + (mod.profile.building || 0);
             coloredTime(time);
             sum += time;
             normal(" ");
           }
           normal("->");
         });
-        Object.keys(module.profile).forEach(function(key) {
+        Object.keys(module.profile).forEach((key) => {
           normal(" " + key + ":");
-          var time = module.profile[key];
+          const time = module.profile[key];
           coloredTime(time);
           sum += time;
         });
-        if(allowSum) {
+        if (allowSum) {
           normal(" = ");
           coloredTime(sum);
         }
         newline();
       }
-    }
+    };
 
     function processModuleAttributes(module) {
       normal(" ");
       normal(formatSize(module.size));
-      if(module.chunks) {
-        module.chunks.forEach(function(chunk) {
+      if (module.chunks) {
+        module.chunks.forEach((chunk) => {
           normal(" {");
           yellow(chunk);
           normal("}");
         });
       }
-      if(!module.cacheable) {
+      if (!module.cacheable) {
         red(" [not cacheable]");
       }
-      if(module.optional) {
+      if (module.optional) {
         yellow(" [optional]");
       }
-      if(module.built) {
+      if (module.built) {
         green(" [built]");
       }
-      if(module.prefetched) {
+      if (module.prefetched) {
         magenta(" [prefetched]");
       }
-      if(module.failed)
+      if (module.failed)
         red(" [failed]");
-      if(module.warnings)
+      if (module.warnings)
         yellow(" [" + module.warnings + " warning" + (module.warnings === 1 ? "" : "s") + "]");
-      if(module.errors)
+      if (module.errors)
         red(" [" + module.errors + " error" + (module.errors === 1 ? "" : "s") + "]");
     }
-    if(obj.chunks) {
-      obj.chunks.forEach(function(chunk) {
+
+    if (obj.chunks) {
+      obj.chunks.forEach((chunk) => {
         normal("chunk ");
-        if(chunk.id < 1000) normal(" ");
-        if(chunk.id < 100) normal(" ");
-        if(chunk.id < 10) normal(" ");
+        if (chunk.id < 1000) normal(" ");
+        if (chunk.id < 100) normal(" ");
+        if (chunk.id < 10) normal(" ");
         normal("{");
         yellow(chunk.id);
         normal("} ");
         green(chunk.files.join(", "));
-        if(chunk.names && chunk.names.length > 0) {
+        if (chunk.names && chunk.names.length > 0) {
           normal(" (");
           normal(chunk.names.join(", "));
           normal(")");
         }
         normal(" ");
         normal(formatSize(chunk.size));
-        chunk.parents.forEach(function(id) {
+        chunk.parents.forEach((id) => {
           normal(" {");
           yellow(id);
           normal("}");
         });
-        if(chunk.rendered) {
+        if (chunk.rendered) {
           green(" [rendered]");
         }
         newline();
-        if(chunk.origins) {
-          chunk.origins.forEach(function(origin) {
+        if (chunk.origins) {
+          chunk.origins.forEach((origin) => {
             normal("    > ");
-            if(origin.reasons && origin.reasons.length) {
+            if (origin.reasons && origin.reasons.length) {
               yellow(origin.reasons.join(" "));
               normal(" ");
             }
-            if(origin.name) {
+            if (origin.name) {
               normal(origin.name);
               normal(" ");
             }
-            if(origin.module) {
+            if (origin.module) {
               normal("[");
               normal(origin.moduleId);
               normal("] ");
-              var module = modulesByIdentifier["$" + origin.module];
-              if(module) {
+              const module = modulesByIdentifier["$" + origin.module];
+              if (module) {
                 bold(module.name);
                 normal(" ");
               }
-              if(origin.loc) {
+              if (origin.loc) {
                 normal(origin.loc);
               }
             }
             newline();
           });
         }
-        if(chunk.modules) {
-          chunk.modules.forEach(function(module) {
+        if (chunk.modules) {
+          chunk.modules.forEach((module) => {
             normal(" ");
-            if(module.id < 1000) normal(" ");
-            if(module.id < 100) normal(" ");
-            if(module.id < 10) normal(" ");
+            if (module.id < 1000) normal(" ");
+            if (module.id < 100) normal(" ");
+            if (module.id < 10) normal(" ");
             normal("[");
             normal(module.id);
             normal("] ");
             bold(module.name);
             processModuleAttributes(module);
             newline();
-            if(module.reasons) {
-              module.reasons.forEach(function(reason) {
+            if (module.reasons) {
+              module.reasons.forEach((reason) => {
                 normal("        ");
                 normal(reason.type);
                 normal(" ");
                 cyan(reason.userRequest);
-                if(reason.templateModules) cyan(reason.templateModules.join(" "));
+                if (reason.templateModules) cyan(reason.templateModules.join(" "));
                 normal(" [");
                 normal(reason.moduleId);
                 normal("] ");
                 magenta(reason.module);
-                if(reason.loc) {
+                if (reason.loc) {
                   normal(" ");
                   normal(reason.loc);
                 }
@@ -368,36 +350,36 @@ class WebpackReporter extends EventEmitter {
             }
             processProfile(module);
           });
-          if(chunk.filteredModules > 0) {
+          if (chunk.filteredModules > 0) {
             normal("     + " + chunk.filteredModules + " hidden modules");
             newline();
           }
         }
       });
     }
-    if(obj.modules) {
-      obj.modules.forEach(function(module) {
-        if(module.id < 1000) normal(" ");
-        if(module.id < 100) normal(" ");
-        if(module.id < 10) normal(" ");
+    if (obj.modules) {
+      obj.modules.forEach((module) => {
+        if (module.id < 1000) normal(" ");
+        if (module.id < 100) normal(" ");
+        if (module.id < 10) normal(" ");
         normal("[");
         normal(module.id);
         normal("] ");
         bold(module.name || module.identifier);
         processModuleAttributes(module);
         newline();
-        if(module.reasons) {
-          module.reasons.forEach(function(reason) {
+        if (module.reasons) {
+          module.reasons.forEach((reason) => {
             normal("       ");
             normal(reason.type);
             normal(" ");
             cyan(reason.userRequest);
-            if(reason.templateModules) cyan(reason.templateModules.join(" "));
+            if (reason.templateModules) cyan(reason.templateModules.join(" "));
             normal(" [");
             normal(reason.moduleId);
             normal("] ");
             magenta(reason.module);
-            if(reason.loc) {
+            if (reason.loc) {
               normal(" ");
               normal(reason.loc);
             }
@@ -406,28 +388,28 @@ class WebpackReporter extends EventEmitter {
         }
         processProfile(module);
       });
-      if(obj.filteredModules > 0) {
+      if (obj.filteredModules > 0) {
         normal("    + " + obj.filteredModules + " hidden modules");
         newline();
       }
     }
-    if(obj._showWarnings && obj.warnings) {
-      obj.warnings.forEach(function(warning) {
+    if (obj._showWarnings && obj.warnings) {
+      obj.warnings.forEach((warning) => {
         newline();
         yellow("WARNING in " + warning);
         newline();
       });
     }
-    if(obj._showErrors && obj.errors) {
-      obj.errors.forEach(function(error) {
+    if (obj._showErrors && obj.errors) {
+      obj.errors.forEach((error) => {
         newline();
         red("ERROR in " + error);
         newline();
       });
     }
-    if(obj.children) {
-      obj.children.forEach(function(child) {
-        if(child.name) {
+    if (obj.children) {
+      obj.children.forEach((child) => {
+        if (child.name) {
           normal("Child ");
           bold(child.name);
           normal(":");
@@ -436,12 +418,12 @@ class WebpackReporter extends EventEmitter {
         }
         newline();
         buf.push("    ");
-        buf.push(Stats.jsonToString(child, useColors).replace(/\n/g, "\n    "));
+        buf.push(this.jsonToHtml(child, useColors).replace(/\n/g, "\n    "));
         newline();
       });
     }
 
-    while(buf[buf.length - 1] === "\n") buf.pop();
+    while (buf[buf.length - 1] === "\n") buf.pop();
     return buf.join("");
   }
 }
