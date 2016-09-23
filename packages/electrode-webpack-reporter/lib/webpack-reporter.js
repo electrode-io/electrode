@@ -33,11 +33,7 @@ class WebpackReporter extends EventEmitter {
 
   _webReport(req, res) {
     const jsonData = () => {
-      const data = this._reporterOptions.stats.toJson(true);
-      data.modules.forEach((m) => {
-        delete m.source;
-      });
-      delete data.children;
+      const data = this._reporterOptions.stats.toJson({}, true);
       return data;
     };
 
