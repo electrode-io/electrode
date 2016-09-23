@@ -1,0 +1,19 @@
+{
+  "name": "electrode-webpack-reporter",
+  "version": "0.1.0",
+  "description": "A HTML based reporter for webpack dev server",
+  "main": "lib/webpack-reporter.js",
+  "scripts": {
+    "test": "gulp check"
+  },
+  "keywords": [
+    "electrode",
+    "webpack",
+    "reporter"
+  ],
+  "author": "Joel Chen <xchen@walmartlabs.com>",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "electrode-archetype-njs-module-dev": "^1.2.1"
+  }
+}
