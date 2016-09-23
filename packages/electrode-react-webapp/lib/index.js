@@ -66,10 +66,10 @@ function makeRouteHandler(options, userContent) {
     const callUserContent = (content) => {
       const x = content(request);
       return !x.catch ? x : x.catch((err) => {
-        return {
+        return Promise.reject({
           status: err.status || HTTP_ERROR_500,
-          html: err.toString()
-        };
+          html: err.message || err.toString()
+        });
       });
     };
 
@@ -127,7 +127,7 @@ function makeRouteHandler(options, userContent) {
         return data.status ? handleStatus(data) : reply(data);
       })
       .catch((err) => {
-        reply(err.message).code(err.status || HTTP_ERROR_500);
+        reply(err.html).code(err.status || HTTP_ERROR_500);
       });
   };
 }
@@ -156,7 +156,7 @@ const registerRoutes = (server, options, next) => {
     return content;
   };
 
-  const pluginOptions = _.defaultsDeep({}, pluginOptionsDefaults, options);
+  const pluginOptions = _.defaultsDeep({}, options, pluginOptionsDefaults);
 
   return Promise.try(() => loadAssetsFromStats(pluginOptions.stats))
     .then((assets) => {
