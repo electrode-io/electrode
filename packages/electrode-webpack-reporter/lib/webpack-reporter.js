@@ -3,6 +3,8 @@
 /* eslint-disable no-console, no-magic-numbers, max-statements, complexity, prefer-template, curly, max-len, max-params */
 
 const EventEmitter = require("events");
+const chalk = require("chalk");
+const AnsiConvert = require("ansi-to-html");
 
 class WebpackReporter extends EventEmitter {
   constructor() {
@@ -17,10 +19,13 @@ class WebpackReporter extends EventEmitter {
 
   _reporter(reporterOptions) {
     if (reporterOptions.state) {
+      const stats = reporterOptions.stats;
       this._reporterOptions = reporterOptions;
       const opt = reporterOptions.options;
-      console.log(`webpack report is available at http://${opt.host}:${opt.port}/reporter`);
-      console.log("webpack bundle is now VALID");
+      const error = stats.hasErrors() ? chalk.red(" ERRORS") : "";
+      const warning = stats.hasWarnings() ? chalk.yellow(" WARNINGS") : "";
+      console.log(`webpack bundle is now VALID${error}${warning}`);
+      console.log(`webpack report is served from http://${opt.host}:${opt.port}/reporter`);
     } else {
       console.log("webpack bundle is now INVALID");
     }
@@ -33,13 +38,14 @@ class WebpackReporter extends EventEmitter {
 
   _webReport(req, res) {
     const jsonData = () => {
-      const data = this._reporterOptions.stats.toJson({}, true);
-      return data;
+      return this._reporterOptions.stats.toJson({}, true);
     };
 
     res.format({
       html: () => {
-        res.status(200).send(`<html><body><pre>${this.jsonToHtml(jsonData(), true)}</pre></body></html>`);
+        res.status(200).send(
+          `<html><body style="background-color:black;color:gray">
+<pre>${this.jsonToHtml(jsonData(), true)}</pre></body></html>`);
       },
 
       json: () => {
@@ -397,9 +403,10 @@ class WebpackReporter extends EventEmitter {
       });
     }
     if (obj._showErrors && obj.errors) {
+      const convert = new AnsiConvert();
       obj.errors.forEach((error) => {
         newline();
-        red("ERROR in " + error);
+        red("ERROR in " + convert.toHtml(error));
         newline();
       });
     }
