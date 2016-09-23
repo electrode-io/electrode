@@ -49,6 +49,7 @@
     "electrode-archetype-njs-module-dev": "^1.0.1",
     "electrode-server": "^1.0.1",
     "gulp": "^3.9.1",
+    "object-assign": "^4.1.0",
     "superagent": "^1.6.1",
     "uglify-js": "^2.6.2"
   }
