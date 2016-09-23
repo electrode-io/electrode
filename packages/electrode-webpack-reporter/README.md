@@ -1,5 +1,7 @@
 # Electrode Webpack Reporter
 
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+
 A HTML based reporter for [webpack-dev-server].  Adds a new route `/reporter` to your [webpack-dev-server] HTTP server.
 
 ```js
@@ -25,3 +27,10 @@ reporter.on("report", (reporterOptions) => {
 ```
 
 [webpack-dev-server]: https://webpack.github.io/docs/webpack-dev-server.html
+[npm-image]: https://badge.fury.io/js/electrode-webpack-reporter.svg
+[npm-url]: https://npmjs.org/package/electrode-webpack-reporter
+[travis-image]: https://travis-ci.org/electrode-io/electrode-webpack-reporter.svg?branch=master
+[travis-url]: https://travis-ci.org/electrode-io/electrode-webpack-reporter
+[daviddm-image]: https://david-dm.org/electrode-io/electrode-webpack-reporter.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/electrode-io/electrode-webpack-reporter
+
