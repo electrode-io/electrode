@@ -1,11 +1,11 @@
 "use strict";
 
-var glob = require("glob");
 var Path = require("path");
 
 var archetype = require("../../archtype");
 var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
 
+var glob = archetype.devRequire("glob");
 var ExtractTextPlugin = archetype.devRequire("extract-text-webpack-plugin");
 var atImport = archetype.devRequire("postcss-import");
 var cssnext = archetype.devRequire("postcss-cssnext");

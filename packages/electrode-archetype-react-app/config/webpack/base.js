@@ -4,7 +4,7 @@ var _ = require("lodash");
 var path = require("path");
 var fs = require("fs");
 var archetype = require("../archtype");
-var mergeWebpackConfig = require("webpack-partial").default;
+var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
 
 // config partials
 var babelConfig = require("./partial/babel");
