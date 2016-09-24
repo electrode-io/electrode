@@ -66,10 +66,10 @@ function makeRouteHandler(options, userContent) {
     const callUserContent = (content) => {
       const x = content(request);
       return !x.catch ? x : x.catch((err) => {
-        return {
+        return Promise.reject({
           status: err.status || HTTP_ERROR_500,
-          html: err.toString()
-        };
+          html: err.message || err.toString()
+        });
       });
     };
 
@@ -127,7 +127,7 @@ function makeRouteHandler(options, userContent) {
         return data.status ? handleStatus(data) : reply(data);
       })
       .catch((err) => {
-        reply(err.message).code(err.status || HTTP_ERROR_500);
+        reply(err.html).code(err.status || HTTP_ERROR_500);
       });
   };
 }
@@ -149,15 +149,14 @@ const registerRoutes = (server, options, next) => {
 
   const resolveContent = (content) => {
     if (!_.isString(content) && !_.isFunction(content) && content.module) {
-      const module = content.module.startsWith(".") ?
-        Path.join(process.cwd(), content.module) : content.module;
+      const module = content.module.startsWith(".") ? Path.join(process.cwd(), content.module) : content.module; // eslint-disable-line
       return require(module); // eslint-disable-line
     }
 
     return content;
   };
 
-  const pluginOptions = _.defaultsDeep({}, pluginOptionsDefaults, options);
+  const pluginOptions = _.defaultsDeep({}, options, pluginOptionsDefaults);
 
   return Promise.try(() => loadAssetsFromStats(pluginOptions.stats))
     .then((assets) => {
