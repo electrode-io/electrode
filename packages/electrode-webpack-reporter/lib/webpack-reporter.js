@@ -24,8 +24,9 @@ class WebpackReporter extends EventEmitter {
       const opt = reporterOptions.options;
       const error = stats.hasErrors() ? chalk.red(" ERRORS") : "";
       const warning = stats.hasWarnings() ? chalk.yellow(" WARNINGS") : "";
-      console.log(`webpack bundle is now VALID${error}${warning}`);
-      console.log(`webpack report is served from http://${opt.host}:${opt.port}/reporter`);
+      const but = (error || warning) && chalk.yellow(" but has") || "";
+      console.log(`webpack bundle is now VALID${but}${error}${warning}`);
+      console.log(chalk.magenta(`webpack report is served from`), chalk.cyan(`http://${opt.host}:${opt.port}/reporter`));
     } else {
       console.log("webpack bundle is now INVALID");
     }
