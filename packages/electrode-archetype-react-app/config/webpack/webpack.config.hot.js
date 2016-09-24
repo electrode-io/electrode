@@ -4,7 +4,7 @@
  */
 var archetype = require("../archtype");
 var _ = archetype.devRequire("lodash");
-var path = require("path");
+var Path = archetype.PlatformPath;
 var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
 var hotConfig = require("./partial/hot");
 var baseConfig = require("./base.js");
@@ -25,6 +25,6 @@ var babel = _.find(config.module.loaders, {name: "babel"});
 
 // update babel loaders for hot loading
 babel.loaders = [].concat(["react-hot"], babel.loaders);
-babel.include = path.join(process.cwd(), "client");
+babel.include = Path.resolve(archetype.clientSrcDir);
 
 module.exports = config;

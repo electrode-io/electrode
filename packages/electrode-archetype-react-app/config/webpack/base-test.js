@@ -2,7 +2,7 @@
 
 var archetype = require("../archtype");
 var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
-var path = require("path");
+var Path = archetype.PlatformPath;
 
 var baseConfig = require("./base.js");
 
@@ -19,12 +19,12 @@ var testConfig = {
       /node_modules\/sinon\//
     ]
   },
-  context: path.join(process.cwd(), "test/client"),
+  context: Path.join(process.cwd(), "test/client"),
   debug: false,
   devServer: {
     stats: "errors-only"  // only show errors
   },
-  entry: path.join(__dirname, "../karma/entry"),
+  entry: Path.join(__dirname, "../karma/entry"),
   output: {
     path: process.cwd(),
     filename: "bundle.js",
