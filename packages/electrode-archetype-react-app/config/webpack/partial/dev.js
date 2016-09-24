@@ -4,10 +4,16 @@ var archetype = require("../../archtype");
 var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
 var ExtractTextPlugin = archetype.devRequire("extract-text-webpack-plugin");
 var webpack = archetype.devRequire("webpack");
-
+var WebpackReporter = archetype.devRequire("electrode-webpack-reporter");
 var fs = require("fs");
 
-var webpackDevReporter = function (reporterOptions) {
+function notifyBundleValid() {
+  setTimeout(function () {
+    fs.writeFileSync(".etmp/bundle.valid.log", `${Date.now()}`);
+  }, 100);
+}
+
+function webpackDevReporter(reporterOptions) {
   var state = reporterOptions.state;
   var stats = reporterOptions.stats;
   var options = reporterOptions.options;
@@ -37,8 +43,7 @@ var webpackDevReporter = function (reporterOptions) {
   } else {
     console.info("webpack: bundle is now INVALID.");
   }
-};
-
+}
 
 module.exports = function () {
   return function (config) {
@@ -58,6 +63,16 @@ module.exports = function () {
         new webpack.NoErrorsPlugin()
       ]
     });
+
+    if (!process.env.HTML_WEBPACK_REPORTER_OFF) {
+      const reporter = new WebpackReporter();
+      reporter.apply(config);
+      reporter.on("report", (reporterOptions) => {
+        if (reporterOptions.state && !reporterOptions.stats.hasErrors()) {
+          notifyBundleValid();
+        }
+      });
+    }
 
     return config;
   };
