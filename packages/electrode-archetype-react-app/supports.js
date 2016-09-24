@@ -2,6 +2,7 @@
 
 module.exports = {
   cssModuleHook: require("css-modules-require-hook"),
-  babelRegister: require("babel-register")
+  babelRegister: require("babel-register"),
+  require: require("./require")
 };
 
