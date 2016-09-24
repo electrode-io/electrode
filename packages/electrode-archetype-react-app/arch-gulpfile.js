@@ -1,10 +1,10 @@
 "use strict";
 
-const shell = require("shelljs");
 const Path = require("path");
 const fs = require("fs");
 const archetype = require("./config/archtype");
 const gulpHelper = archetype.devRequire("electrode-gulp-helper");
+const shell = gulpHelper.shell;
 const mkdirp = archetype.devRequire("mkdirp");
 const config = archetype.config;
 

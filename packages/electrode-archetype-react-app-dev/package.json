@@ -36,7 +36,7 @@
     "css-modules-require-hook": "^4.0.2",
     "electrode-bundle-analyzer": "^1.0.0",
     "electrode-electrify": "^1.0.0",
-    "electrode-gulp-helper": "^1.0.0",
+    "electrode-gulp-helper": "^1.0.5",
     "electrode-webpack-reporter": "^0.1.0",
     "eslint": "^1.7.0",
     "eslint-config-defaults": "^7.0.0",
