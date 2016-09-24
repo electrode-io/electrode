@@ -1,9 +1,9 @@
 "use strict";
 
 var _ = require("lodash");
-var path = require("path");
 var fs = require("fs");
 var archetype = require("../archtype");
+var Path = archetype.PlatformPath;
 var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
 
 // config partials
@@ -14,11 +14,11 @@ var imagesConfig = require("./partial/images");
 var statsConfig = require("./partial/stats");
 var isomorphicConfig = require("./partial/isomorphic");
 
-var archetypeNodeModules = path.join(__dirname, "../../node_modules");
-var archetypeDevNodeModules = path.join(archetype.devPath, "node_modules");
+var archetypeNodeModules = Path.join(__dirname, "../../node_modules");
+var archetypeDevNodeModules = Path.join(archetype.devPath, "node_modules");
 var inspectpack = process.env.INSPECTPACK_DEBUG === "true";
 
-var context = path.join(process.cwd(), "client");
+var context = Path.resolve(archetype.clientSrcDir);
 
 /* eslint-disable func-style */
 
@@ -32,7 +32,7 @@ var context = path.join(process.cwd(), "client");
  * vanilla JS file as entry.
  */
 function appEntry() {
-  var entryPath = path.join(context, "entry.config.js");
+  var entryPath = Path.join(context, "entry.config.js");
 
   /* eslint-disable no-console, global-require */
   try {
@@ -42,7 +42,7 @@ function appEntry() {
   }
   /* eslint-enable no-console, global-require */
 
-  return fs.existsSync(path.join(context, "app.js")) ? "./app.js" : "./app.jsx";
+  return fs.existsSync(Path.join(context, "app.js")) ? "./app.js" : "./app.jsx";
 }
 
 var entry = appEntry();
@@ -55,19 +55,19 @@ var baseConfig = {
   debug: false,
   entry: entry,
   output: {
-    path: path.join(process.cwd(), "dist/js"),
+    path: Path.resolve("dist/js"),
     pathinfo: inspectpack, // Enable path information for inspectpack
     filename: multiBundle
       ? "[name].bundle.[hash].js"
       : "bundle.[hash].js"
   },
   resolve: {
-    root: [archetypeNodeModules, archetypeDevNodeModules, process.cwd()],
-    modulesDirectories: ["client", "node_modules"].concat(archetype.webpack.modulesDirectories),
+    root: [archetypeNodeModules, archetypeDevNodeModules, context],
+    modulesDirectories: ["node_modules"].concat(archetype.webpack.modulesDirectories),
     extensions: ["", ".js", ".jsx"]
   },
   resolveLoader: {
-    root: [archetypeNodeModules, archetypeDevNodeModules, process.cwd()]
+    root: [archetypeNodeModules, archetypeDevNodeModules, context]
   }
 };
 

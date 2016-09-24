@@ -5,6 +5,7 @@ var PlatformPath = Path[process.platform] || Path;
 
 module.exports = {
   PlatformPath,
+  clientSrcDir: "client",
   devRequire: require("electrode-archetype-react-app-dev/require"),
   // A normal `require.resolve` looks at `package.json:main`. We instead want
   // just the _directory_ of the module. So use heuristic of finding dir of
