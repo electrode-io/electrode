@@ -32,9 +32,7 @@ function webpackDevReporter(reporterOptions) {
     if (!options.noInfo && !options.quiet) {
       var errMsg = ".";
       if (!stats.hasErrors()) {
-        setTimeout(function () {
-          fs.writeFileSync(".etmp/bundle.valid.log", `${Date.now()}`);
-        }, 100);
+        notifyBundleValid();
       } else {
         errMsg = " but there were errors."
       }
