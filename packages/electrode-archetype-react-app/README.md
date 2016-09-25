@@ -135,6 +135,7 @@ module.exports = {
 
 Run `gulp` to see list of tasks.
 
+Built with :heart: by [Team Electrode](https://github.com/orgs/electrode-io/people) @WalmartLabs.
 
 [npm-image]: https://badge.fury.io/js/electrode-archetype-react-app.svg
 [npm-url]: https://npmjs.org/package/electrode-archetype-react-app
