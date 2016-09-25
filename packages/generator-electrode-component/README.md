@@ -82,10 +82,11 @@ gulp build
 
 This will build your `lib`, `dist` and `example/dist` folders for release.
 
-
 ## License
 
 [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0)
+
+Built with :heart: by [Team Electrode](https://github.com/orgs/electrode-io/people) @WalmartLabs.
 
 [npm-image]: https://badge.fury.io/js/generator-electrode-component.svg
 [npm-url]: https://npmjs.org/package/generator-electrode-component
