@@ -8,7 +8,7 @@
 //
 
 const serveStaticFiles = () => {
-  return process.env.STATIC_FILES === "true";
+  return process.env.STATIC_FILES_OFF !== "true";
 };
 
 module.exports = {

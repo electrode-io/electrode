@@ -1,5 +1,14 @@
 {
   "plugins": {
+    "inert": {
+      "enable": true
+    },
+    "electrodeStaticPaths": {
+      "enable": true,
+      "options": {
+        "pathPrefix": "dist"
+      }
+    },
     "webapp": {
       "module": "./server/plugins/webapp",
       "options": {
