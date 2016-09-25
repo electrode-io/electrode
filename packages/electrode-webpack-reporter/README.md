@@ -26,6 +26,8 @@ reporter.on("report", (reporterOptions) => {
 });
 ```
 
+Built with :heart: by [Team Electrode](https://github.com/orgs/electrode-io/people) @WalmartLabs.
+
 [webpack-dev-server]: https://webpack.github.io/docs/webpack-dev-server.html
 [npm-image]: https://badge.fury.io/js/electrode-webpack-reporter.svg
 [npm-url]: https://npmjs.org/package/electrode-webpack-reporter
@@ -33,4 +35,3 @@ reporter.on("report", (reporterOptions) => {
 [travis-url]: https://travis-ci.org/electrode-io/electrode-webpack-reporter
 [daviddm-image]: https://david-dm.org/electrode-io/electrode-webpack-reporter.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/electrode-io/electrode-webpack-reporter
-
