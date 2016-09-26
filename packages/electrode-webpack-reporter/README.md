@@ -2,7 +2,7 @@
 
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 
-A HTML based reporter for [webpack-dev-server].  Adds a new route `/reporter` to your [webpack-dev-server] HTTP server.
+An HTML based reporter for [webpack-dev-server].  Adds a new route `/reporter` to your [webpack-dev-server] HTTP server.
 
 ```js
 const WebpackReporter = require("electrode-webpack-reporter");
