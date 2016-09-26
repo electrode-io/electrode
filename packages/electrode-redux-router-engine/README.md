@@ -134,6 +134,8 @@ If react-router found a redirect route, then it returns a promise resolving to:
 }
 ```
 
+Built with :heart: by [Team Electrode](https://github.com/orgs/electrode-io/people) @WalmartLabs.
+
 [Redux Async Actions]: http://redux.js.org/docs/advanced/AsyncActions.html
 [Redux Server Rendering]: http://redux.js.org/docs/recipes/ServerRendering.html
 [react-router]: https://github.com/reactjs/react-router
