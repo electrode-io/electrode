@@ -9,7 +9,7 @@ First, install [Yeoman], [gulp], and generator-electrode using [npm] (we assume 
 $ npm install -g yo gulp generator-electrode
 ```
 
-> Note: You may need add `sudo` to the command. 
+> Note: You may need add `sudo` to the command.
 
 Then generate your new project:
 
@@ -45,6 +45,8 @@ Some common ones:
  * Yeoman is a person with feelings and opinions, but is very easy to work with.
  * Yeoman can be too opinionated at times but is easily convinced not to be.
  * Feel free to [learn more about Yeoman](http://yeoman.io/).
+
+Built with :heart: by [Team Electrode](https://github.com/orgs/electrode-io/people) @WalmartLabs.
 
 ## License
 
