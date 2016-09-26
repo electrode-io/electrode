@@ -420,7 +420,7 @@ sudo npm install -g electrode-bundle-analyzer
 
 ## Configure
 
-Bundle Analyzer expects a particular set of data for it to work. 
+Bundle Analyzer expects a particular set of data for it to work.
 
 Bundle Analyzer looks for the webpack module ID comment that normally looks something like this:
 
@@ -448,7 +448,7 @@ Options:
 ```
 
 When you install Bundle Analyzer globally, `analyze-bundle` command-line tool is made
-available as the quickest means of checking out your bundle. 
+available as the quickest means of checking out your bundle.
 
 If you don't specify an output directory, a default one `.etmp` will be created and a `.gitignore `file is also added there to avoid git picking it up.
 
@@ -473,15 +473,16 @@ Module ID       Full Path       Identity Path   Size (bytes)
 You can view an example [`bundle.analyze.tsv`](https://docs.google.com/spreadsheets/d/1IomT2fYCKEwVY0CO-0jImc7CBj_uAmgy70Egsm4CnVE/edit?usp=sharing&rm=minimal) output using the [Electrode Boilerplate](https://github.com/electrode-io/electrode-boilerplate-universal-react-node#electrode-bundle-analyzer) code.
 
 ## Run
-The Electrode Boilerplate's webpack config is already preconfigured to work with Bundle Analyzer, we just need to set the `OPTIMIZE_STATS=true` environment variable to generate the appropriate webpack build output: 
+The Electrode Boilerplate's webpack config is already preconfigured to work with Bundle Analyzer, we just need to set the `OPTIMIZE_STATS=true` environment variable to generate the appropriate webpack build output:
 
 ```bash
 NODE_ENV=development OPTIMIZE_STATS=true gulp build
 analyze-bundle --bundle dist/js/bundle.42603ce3a63db995958f.js --stats dist/server/stats.json
 ```
 
-Navigate to the `.etmp` folder to view the `bundle.analyze.json` or `bundle.analyze.tsv` output files. 
+Navigate to the `.etmp` folder to view the `bundle.analyze.json` or `bundle.analyze.tsv` output files.
 
+Built with :heart: by [Team Electrode](https://github.com/orgs/electrode-io/people) @WalmartLabs.
 
 [npm-image]: https://badge.fury.io/js/electrode-boilerplate-universal-react-node.svg
 [npm-url]: https://npmjs.org/package/electrode-boilerplate-universal-react-node
@@ -489,4 +490,3 @@ Navigate to the `.etmp` folder to view the `bundle.analyze.json` or `bundle.anal
 [travis-url]: https://travis-ci.org/electrode-io/electrode-boilerplate-universal-react-node
 [daviddm-image]: https://david-dm.org/electrode-io/electrode-boilerplate-universal-react-node.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/electrode-io/electrode-boilerplate-universal-react-node
-
