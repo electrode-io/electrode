@@ -45,6 +45,8 @@ const demo = () => <Demo libraryScope={libraryScope} components={components} />;
 export default demo;
 ```
 
+Built with :heart: by [Team Electrode](https://github.com/orgs/electrode-io/people) @WalmartLabs.
+
 [npm-image]: https://badge.fury.io/js/electrode-demo-index.svg
 [npm-url]: https://npmjs.org/package/electrode-demo-index
 [travis-image]: https://travis-ci.org/electrode-io/electrode-demo-index.svg?branch=master
