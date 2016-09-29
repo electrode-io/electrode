@@ -48,8 +48,8 @@ class ReduxRouterEngine {
             message: `redux-router-engine: Path ${location} not found`
           };
         }
-
-        const methods = match.renderProps.routes.find((x) => x.path === location).methods || "get";
+        const routes = match.renderProps.routes;
+        const methods = routes[routes.length - 1].methods || "get";
 
         if (methods.toLowerCase().indexOf(req.method.toLowerCase()) < 0) {
           throw new Error(
