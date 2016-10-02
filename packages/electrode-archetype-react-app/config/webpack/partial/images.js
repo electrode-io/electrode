@@ -2,6 +2,8 @@
 
 var archetype = require("../../archtype");
 var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
+var fileLoader = archetype.devRequire.resolve("file-loader");
+var isomorphicLoader = archetype.devRequire.resolve("isomorphic-loader");
 
 module.exports = function () {
   return function (config) {
@@ -10,7 +12,7 @@ module.exports = function () {
         loaders: [{
           name: "images",
           test: /\.(jpe?g|png|gif|svg)$/i,
-          loader: "isomorphic"
+          loader: fileLoader + "?limit=10000!" + isomorphicLoader
         }]
       }
     });
