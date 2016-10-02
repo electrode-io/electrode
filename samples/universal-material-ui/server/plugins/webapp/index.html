@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{PAGE_TITLE}}</title>
+    {{PREFETCH_BUNDLES}}
+    {{WEBAPP_BUNDLES}}
+</head>
+<body>
+<div class="js-content">{{SSR_CONTENT}}</div>
+<script>if (window.webappStart) webappStart();</script>
+</body>
+</html>

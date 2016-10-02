@@ -1,0 +1,52 @@
+# electrode-react-sample-material-ui
+
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+
+> Electrode Universal React Sample App with material-ui components
+
+## Installation
+
+```sh
+$ npm install --save electrode-react-sample-material-ui
+```
+
+## About
+
+This app was created with the following steps.
+
+Pre requisite: make sure you have installed NodeJS >= 4.x and npm >= 3.x.
+
+  ```bash
+  $ node -v
+  v6.6.0
+  $ npm -v
+  3.10.3
+  ```
+
+1. First generate the Electrode Universal App with the following commands:
+
+  ```bash
+  $ npm install -g gulp yo generator-electrode
+  $ mkdir electrode-react-sample-material-ui
+  $ cd electrode-react-sample-material-ui
+  $ yo electrode
+  # ... answer questions and wait for app to be generated and npm install completed ...
+  ```
+
+2. Run `gulp dev` in the newly generated app
+3. Navigate to `http://localhost:3000` to make sure app is working.
+
+## Usage
+
+
+## License
+
+Apache-2.0 © [Joel Chen](https://github.com/jchip)
+
+
+[npm-image]: https://badge.fury.io/js/electrode-react-sample-material-ui.svg
+[npm-url]: https://npmjs.org/package/electrode-react-sample-material-ui
+[travis-image]: https://travis-ci.org/jchip/electrode-react-sample-material-ui.svg?branch=master
+[travis-url]: https://travis-ci.org/jchip/electrode-react-sample-material-ui
+[daviddm-image]: https://david-dm.org/jchip/electrode-react-sample-material-ui.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/jchip/electrode-react-sample-material-ui
