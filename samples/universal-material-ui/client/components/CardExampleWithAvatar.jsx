@@ -1,18 +1,20 @@
 import React from 'react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+import natureJpg from "../images/nature-600-337.jpg";
+import avatarJpg from "../images/jchip-128.jpg";
 
 const CardExampleWithAvatar = () => (
   <Card>
     <CardHeader
       title="URL Avatar"
       subtitle="Subtitle"
-      avatar="images/jsa-128.jpg"
+      avatar={avatarJpg}
     />
     <CardMedia
       overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle" />}
     >
-      <img src="images/nature-600-337.jpg" />
+      <img src={natureJpg} />
     </CardMedia>
     <CardTitle title="Card title" subtitle="Card subtitle" />
     <CardText>

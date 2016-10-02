@@ -35,4 +35,6 @@ supports.cssModuleHook({
   generateScopedName: "[name]__[local]___[hash:base64:5]"
 });
 
-require("electrode-server")(config, [staticPathsDecor()]);
+supports.isomorphicExtendRequire().then(() => {
+  require("electrode-server")(config, [staticPathsDecor()]);
+});

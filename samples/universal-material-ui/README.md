@@ -4,6 +4,7 @@
 
 > Electrode Universal React Sample App with [material-ui] components
 
+![screenshot][screenshot]
 
 ## Installation
 
@@ -120,6 +121,41 @@ In this section we add the [Card example].
 
 > You can replace the image URLs with the full URLs to the images by adding `http://www.material-ui.com/` to them to fix the broken images, but we will explore isomorphic images next.
 
+#### Isomorphic Images
+
+Electrode core comes with isomorphic images support built in using [isomorphic-loader].  In this section we explore using that feature to load the images for the [Card example].
+
+1. Create a directory `client/images` and copy the following images there
+  - http://www.material-ui.com/images/nature-600-337.jpg
+  - http://www.material-ui.com/images/jsa-128.jpg (Or your own favorite 128x128 Avatar image)
+    - Note that in my sample I use `jchip-128.jpg` as my avatar.
+1. In `client/components/CardExampleWithAvatar.jsx`, import the images:
+
+  ```js
+  import natureJpg from "../images/nature-600-337.jpg";
+  import avatarJpg from "../images/jsa-128.jpg";
+  ```
+
+1. Replace the URLs for `avatar` and `CarMedia` img `src`, as follows:
+
+  ```
+  ...
+    avatar={avatarJpg}
+  ...
+    src={natureJpg}
+  ```
+
+1. In `server/index.js`, activate [isomorphic-loader]'s `extend-require` by changing the last line to:
+
+  ```js
+    supports.isomorphicExtendRequire().then(() => {
+      require("electrode-server")(config, [staticPathsDecor()]);
+    });
+  ```
+
+1. Watch [webpack-dev-server] update your bundle and refresh browser to see changes.
+
+> Note that you will see the message `Warning: Unknown prop onTouchTap on <button> tag.` show up on the server side rendering because of the tapping event plugin, which we don't need on server anyways.
 
 ## License
 
@@ -142,3 +178,5 @@ Apache-2.0 © [Joel Chen](https://github.com/jchip)
 [BottomNavigation example]: http://www.material-ui.com/#/components/bottom-navigation
 [yeoman]: http://yeoman.io/
 [Card example]: http://www.material-ui.com/#/components/card
+[isomorphic-loader]: https://github.com/electrode-io/isomorphic-loader
+[screenshot]: https://cloud.githubusercontent.com/assets/5876741/19024379/377359ec-88b7-11e6-863b-a41133cc42ef.png
