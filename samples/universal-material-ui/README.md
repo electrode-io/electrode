@@ -43,6 +43,7 @@ Pre requisite: make sure you have installed NodeJS >= 4.x and npm >= 3.x.
 
 5. Restart `gulp dev` and reload browser to make sure things are still working.
 6. Add [material-ui]'s required font *Roboto* to `server/plugins/webapp/index.html`
+7. Update `client/styles/base.css` with styles for [material-ui].
 
 ## Usage
 
