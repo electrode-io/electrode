@@ -42,6 +42,7 @@ Pre requisite: make sure you have installed NodeJS >= 4.x and npm >= 3.x.
   ```
 
 5. Restart `gulp dev` and reload browser to make sure things are still working.
+6. Add [material-ui]'s required font *Roboto* to `server/plugins/webapp/index.html`
 
 ## Usage
 
@@ -57,3 +58,4 @@ Apache-2.0 © [Joel Chen](https://github.com/jchip)
 [travis-url]: https://travis-ci.org/jchip/electrode-react-sample-material-ui
 [daviddm-image]: https://david-dm.org/jchip/electrode-react-sample-material-ui.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/jchip/electrode-react-sample-material-ui
+[material-ui]: http://www.material-ui.com/
