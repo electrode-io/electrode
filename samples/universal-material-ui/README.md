@@ -109,6 +109,17 @@ Next add the [BottomNavigation example]
 3. Watch [webpack-dev-server] update your bundle and refresh browser to see changes.
 4. You should see AppBar and BottomNavigation show up.  You should be able to interact with the buttons on the BottomNavigation component.
 
+#### [Card example]
+
+In this section we add the [Card example].
+
+1. Copy the source from the [Card example] into a file `client/components/CardExampleWithAvatar.jsx`
+2. Import the component in `client/components/home.jsx` and add it to `render` after the `AppBarExampleIconMenu` component.
+3. Watch [webpack-dev-server] update your bundle and refresh browser to see changes.
+4. You should see Card show up but with broken images
+
+> You can replace the image URLs with the full URLs to the images by adding `http://www.material-ui.com/` to them to fix the broken images, but we will explore isomorphic images next.
+
 
 ## License
 
@@ -130,3 +141,4 @@ Apache-2.0 © [Joel Chen](https://github.com/jchip)
 [AppBar example]:  http://www.material-ui.com/#/components/app-bar
 [BottomNavigation example]: http://www.material-ui.com/#/components/bottom-navigation
 [yeoman]: http://yeoman.io/
+[Card example]: http://www.material-ui.com/#/components/card
