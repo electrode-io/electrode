@@ -44,6 +44,8 @@ Pre requisite: make sure you have installed NodeJS >= 4.x and npm >= 3.x.
 5. Restart `gulp dev` and reload browser to make sure things are still working.
 6. Add [material-ui]'s required font *Roboto* to `server/plugins/webapp/index.html`
 7. Update `client/styles/base.css` with styles for [material-ui].
+8. Test [material-ui] component by adding a [RaisedButton] to `client/components/home.jsx`
+9. Watch [webpack-dev-server] update your bundle and refresh browser to see changes.
 
 ## Usage
 
@@ -60,3 +62,5 @@ Apache-2.0 © [Joel Chen](https://github.com/jchip)
 [daviddm-image]: https://david-dm.org/jchip/electrode-react-sample-material-ui.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/jchip/electrode-react-sample-material-ui
 [material-ui]: http://www.material-ui.com/
+[RaisedButton]: http://www.material-ui.com/#/components/raised-button
+[webpack-dev-server]: https://webpack.github.io/docs/webpack-dev-server.html
