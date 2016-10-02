@@ -37,7 +37,9 @@
     "electrode-router-resolver-engine": "^1.0.0",
     "electrode-server": "^1.0.0",
     "electrode-static-paths": "^1.0.0",
-    "lodash": "^4.10.1"
+    "lodash": "^4.10.1",
+    "material-ui": "^0.15.4",
+    "react-tap-event-plugin": "^1.0.0"
   },
   "devDependencies": {
     "electrode-archetype-react-app-dev": "^1.0.0",

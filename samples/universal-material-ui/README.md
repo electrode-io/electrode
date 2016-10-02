@@ -35,6 +35,13 @@ Pre requisite: make sure you have installed NodeJS >= 4.x and npm >= 3.x.
 
 2. Run `gulp dev` in the newly generated app
 3. Navigate to `http://localhost:3000` to make sure app is working.
+4. Stop the app and install [material-ui] dependencies
+
+  ```bash
+  $ npm install material-ui react-tap-event-plugin --save
+  ```
+
+5. Restart `gulp dev` and reload browser to make sure things are still working.
 
 ## Usage
 
