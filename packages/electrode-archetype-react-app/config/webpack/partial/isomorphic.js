@@ -1,7 +1,7 @@
 "use strict";
 
 var archetype = require("../../archtype");
-var IsomorphicLoaderPlugin = archetype.devRequire("isomorphic-loader/lib/webpack-plugin");
+var IsomorphicLoaderPlugin = require("isomorphic-loader/lib/webpack-plugin");
 var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
 
 module.exports = function () {
