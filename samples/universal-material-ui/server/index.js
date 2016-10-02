@@ -1,5 +1,7 @@
 "use strict";
 
+global.navigator = {userAgent: "all"};
+
 process.on("SIGINT", () => {
   process.exit(0);
 });

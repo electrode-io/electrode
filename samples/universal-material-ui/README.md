@@ -46,6 +46,8 @@ Pre requisite: make sure you have installed NodeJS >= 4.x and npm >= 3.x.
 7. Update `client/styles/base.css` with styles for [material-ui].
 8. Test [material-ui] component by adding a [RaisedButton] to `client/components/home.jsx`
 9. Watch [webpack-dev-server] update your bundle and refresh browser to see changes.
+10. Add `global.navigator.userAgent` to `server/index.js` as required by [material-ui] for [Server Rendering].
+11. Watch [webpack-dev-server] update your bundle and refresh browser to see changes.
 
 ## Usage
 
@@ -64,3 +66,4 @@ Apache-2.0 © [Joel Chen](https://github.com/jchip)
 [material-ui]: http://www.material-ui.com/
 [RaisedButton]: http://www.material-ui.com/#/components/raised-button
 [webpack-dev-server]: https://webpack.github.io/docs/webpack-dev-server.html
+[Server Rendering]: http://www.material-ui.com/#/get-started/server-rendering
