@@ -12,6 +12,7 @@
     "webapp": {
       "module": "./server/plugins/webapp",
       "options": {
+        "pageTitle": "Electrode React Sample App with material-ui",
         "paths": {
           "/{args*}": {
             "content": {
