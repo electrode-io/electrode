@@ -22,7 +22,8 @@
     "start": "if [ \"$NODE_ENV\" == \"production\" ]; then npm run prod; else gulp dev; fi",
     "test": "gulp test",
     "coverage": "gulp check",
-    "prod": "echo 'Starting standalone server in PROD mode'; node ."
+    "prod": "echo 'Starting standalone server in PROD mode'; node .",
+    "heroku-postbuild": "gulp build"
   },
   "dependencies": {
     "bluebird": "^3.4.6",
