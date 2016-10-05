@@ -5,15 +5,24 @@
   "homepage": "",
   "author": {},
   "contributors": [],
-  "files": [],
+  "files": [
+    "server",
+    "client",
+    "test"
+  ],
   "main": "server/index.js",
   "keywords": [],
   "repository": {},
   "license": "ISC",
+  "engines": {
+    "node": ">= 4.2.x",
+    "npm": ">= 3.x.x"
+  },
   "scripts": {
-    "start": "gulp dev",
+    "start": "if [ \"$NODE_ENV\" == \"production\" ]; then npm run prod; else gulp dev; fi",
     "test": "gulp test",
-    "coverage": "gulp check"
+    "coverage": "gulp check",
+    "prod": "echo 'Starting standalone server in PROD mode'; node ."
   },
   "dependencies": {
     "bluebird": "^3.4.6",
