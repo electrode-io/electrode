@@ -2,8 +2,7 @@
   "presets": [
     "es2015",
     "es2015-loose",
-    "react",
-    "stage-1"
+    "react"
   ],
   "plugins": [
     "babel-plugin-transform-object-rest-spread",
