@@ -61,7 +61,7 @@ describe('electrode:app', function () {
       assert.file('package.json');
       assert.jsonFileContent('package.json', {
         name: 'generator-electrode',
-        version: '0.0.0',
+        version: '0.0.1',
         description: this.answers.description,
         homepage: this.answers.homepage,
         repository: {url: 'electrode-io/generator-electrode'},
@@ -72,7 +72,7 @@ describe('electrode:app', function () {
         },
         files: [],
         keywords: this.answers.keywords,
-        main: 'lib/index.js'
+        main: 'server/index.js'
       });
     });
 
