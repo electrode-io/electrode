@@ -51,7 +51,7 @@ module.exports = generators.Base.extend({
     this.option('projectRoot', {
       type: String,
       required: false,
-      defaults: 'lib',
+      defaults: 'server',
       desc: 'Relative path to the project code root'
     });
 
@@ -187,7 +187,7 @@ module.exports = generators.Base.extend({
 
     var updatePkg = _.defaultsDeep(currentPkg, {
       name: _.kebabCase(this.props.name),
-      version: '0.0.0',
+      version: '0.0.1',
       description: this.props.description,
       homepage: this.props.homepage,
       author: {
