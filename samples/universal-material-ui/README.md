@@ -75,7 +75,9 @@ Second part of the process is to add [material-ui] dependencies.  Follow the ste
 
 ### Add [material-ui] Examples
 
-Now we are ready to add some of the [material-ui examples] to the app.
+Now we are ready to add some of the [material-ui examples] to the app.  
+
+> Note that the examples are written with babel stage-1 which is not supported in Electrode so you might have to rewrite some of them.
 
 #### Enable tapping
 
