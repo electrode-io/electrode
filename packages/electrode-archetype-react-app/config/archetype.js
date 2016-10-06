@@ -3,6 +3,17 @@
 var Path = require("path");
 var PlatformPath = Path[process.platform] || Path;
 
+function getInt(str, def) {
+  if (str) {
+    const n = parseInt(str, 10);
+    if (n !== null && !isNaN(n)) {
+      return n;
+    }
+  }
+
+  return def;
+}
+
 module.exports = {
   PlatformPath,
   clientSrcDir: "client",
@@ -13,8 +24,8 @@ module.exports = {
   devPath: Path.dirname(require.resolve("electrode-archetype-react-app-dev/package.json")),
   webpack: {
     devHostname: "localhost",
-    devPort: 2992,
-    testPort: 3001,
+    devPort: getInt(process.env.WEBPACK_DEV_PORT, 2992),
+    testPort: getInt(process.env.WEBPACK_TEST_PORT, 3001),
     modulesDirectories: []
   },
   config: {
