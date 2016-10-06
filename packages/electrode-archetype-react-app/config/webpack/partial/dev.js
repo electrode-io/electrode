@@ -1,6 +1,6 @@
 "use strict";
 
-var archetype = require("../../archtype");
+var archetype = require("../../archetype");
 var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
 var ExtractTextPlugin = archetype.devRequire("extract-text-webpack-plugin");
 var webpack = archetype.devRequire("webpack");

@@ -1,6 +1,6 @@
 "use strict";
 
-var archetype = require("../../archtype");
+var archetype = require("../../archetype");
 var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
 var optimize = archetype.devRequire("webpack").optimize;
 var _ = archetype.devRequire("lodash");

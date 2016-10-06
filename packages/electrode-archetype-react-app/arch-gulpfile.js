@@ -2,7 +2,7 @@
 
 const Path = require("path");
 const fs = require("fs");
-const archetype = require("./config/archtype");
+const archetype = require("./config/archetype");
 const gulpHelper = archetype.devRequire("electrode-gulp-helper");
 const shell = gulpHelper.shell;
 const mkdirp = archetype.devRequire("mkdirp");
