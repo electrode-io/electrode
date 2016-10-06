@@ -2,7 +2,7 @@
 /**
  * Webpack hot configuration
  */
-var archetype = require("../archtype");
+var archetype = require("../archetype");
 var _ = archetype.devRequire("lodash");
 var Path = archetype.PlatformPath;
 var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;

@@ -1,6 +1,6 @@
 "use strict";
 
-var archetype = require("../../archtype");
+var archetype = require("../../archetype");
 var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
 var fileLoader = archetype.devRequire.resolve("file-loader");
 var isomorphicLoader = require.resolve("isomorphic-loader");

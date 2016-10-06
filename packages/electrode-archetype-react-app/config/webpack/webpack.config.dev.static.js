@@ -2,7 +2,7 @@
 /**
  * Webpack dev static configuration
  */
-var archetype = require("../archtype");
+var archetype = require("../archetype");
 var _ = archetype.devRequire("lodash");
 var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
 

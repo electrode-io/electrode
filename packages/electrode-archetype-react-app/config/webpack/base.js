@@ -2,7 +2,7 @@
 
 var _ = require("lodash");
 var fs = require("fs");
-var archetype = require("../archtype");
+var archetype = require("../archetype");
 var Path = archetype.PlatformPath;
 var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
 
