@@ -14,11 +14,16 @@ const nearbyIcon = <IconLocationOn />;
  * state (for instance, by the URL).
  */
 class BottomNavigationExampleSimple extends Component {
-  state = {
-    selectedIndex: 0,
-  };
+  constructor() {
+    super();
+    this.state = {
+      selectedIndex: 0
+    };
+  }
 
-  select = (index) => this.setState({selectedIndex: index});
+  select(index) {
+    return this.setState({selectedIndex: index});
+  }
 
   render() {
     return (
