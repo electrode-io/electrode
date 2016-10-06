@@ -62,12 +62,12 @@ var baseConfig = {
       : "bundle.[hash].js"
   },
   resolve: {
-    root: [archetypeNodeModules, archetypeDevNodeModules, context],
-    modulesDirectories: ["node_modules"].concat(archetype.webpack.modulesDirectories),
+    root: [archetypeNodeModules, archetypeDevNodeModules, process.cwd()],
+    modulesDirectories: ["client", "node_modules"].concat(archetype.webpack.modulesDirectories),
     extensions: ["", ".js", ".jsx"]
   },
   resolveLoader: {
-    root: [archetypeNodeModules, archetypeDevNodeModules, context]
+    root: [archetypeNodeModules, archetypeDevNodeModules, process.cwd()]
   }
 };
 
