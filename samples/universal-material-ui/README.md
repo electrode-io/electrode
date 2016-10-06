@@ -10,14 +10,14 @@
 
 ### Prerequisites
 
-Make sure you have installed NodeJS >= 4.x and npm >= 3.x, and [gulp].
+Make sure you have installed NodeJS >= 4.x and npm >= 3.x, and [gulp-cli].
 
   ```bash
   $ node -v
   v6.6.0
   $ npm -v
   3.10.3
-  $ npm install -g gulp
+  $ npm install -g gulp-cli
   ```
 
 ### Check it out
@@ -172,7 +172,7 @@ Apache-2.0 © [Joel Chen](https://github.com/jchip)
 [RaisedButton]: http://www.material-ui.com/#/components/raised-button
 [webpack-dev-server]: https://webpack.github.io/docs/webpack-dev-server.html
 [Server Rendering]: http://www.material-ui.com/#/get-started/server-rendering
-[gulp]: http://gulpjs.com/
+[gulp-cli]: https://www.npmjs.com/package/gulp-cli
 [material-ui examples]: http://www.material-ui.com/#/components/app-bar
 [AppBar example]:  http://www.material-ui.com/#/components/app-bar
 [BottomNavigation example]: http://www.material-ui.com/#/components/bottom-navigation
