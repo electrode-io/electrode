@@ -144,14 +144,14 @@ package.json
 By default, this archetype assumes you are using CSS-Modules + CSS-Next, you need
 to opt-in to stylus support by adding a `*.styl` to your *project's* `demo/demo.styl` & `src/styles/*.styl`
 
-Import css files in your components and reference class names via the exported object `src/components/<%= componentPath %>.js`:
+Import css files in your components and reference class names via the exported object `src/components/your-component.js`:
 
 ```javascript
 import React from "react";
 
-import styles from "../styles/<%= componentPath %>.css";
+import styles from "../styles/your-component.css";
 
-class <%= componentName %> extends React.Component {
+class YourComponent extends React.Component {
   render() {
     return (
       <div className={styles.someStyle}>Hello Modules!</div>
@@ -160,7 +160,7 @@ class <%= componentName %> extends React.Component {
 }
 ```
 
-Add following styling to `src/styles/<%= componentPath %>.css`
+Add following styling to `src/styles/your-component.css`
 
 ```css
 :root {
