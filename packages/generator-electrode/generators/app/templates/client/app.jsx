@@ -1,8 +1,15 @@
+//
+// This is the client side entry point for the React app.
+//
+
 import React from "react";
+import {render} from "react-dom";
 import {routes} from "./routes";
 import {Router} from "react-router";
-import {Resolver} from "react-resolver";
+import {createStore} from "redux";
+import {Provider} from "react-redux";
 import "./styles/base.css";
+import rootReducer from "./reducers";
 
 //
 // Add the client app start up code to a function as window.webappStart.
@@ -11,9 +18,13 @@ import "./styles/base.css";
 //
 
 window.webappStart = () => {
-  Resolver.render(
-    () => <Router>{routes}</Router>,
+  const initialState = window.__PRELOADED_STATE__;
+  const store = createStore(rootReducer, initialState);
+  render(
+    <Provider store={store}>
+      <Router>{routes}</Router>
+    </Provider>,
     document.querySelector(".js-content")
-
   );
 };
+
