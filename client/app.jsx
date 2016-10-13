@@ -3,10 +3,9 @@ import { routes } from "./routes";
 import { Router, browserHistory } from "react-router";
 import { createStore, compose } from "redux";
 import { Resolver } from "react-resolver";
-import { createHistory } from "history";
 import { Provider } from "react-redux";
 import "styles/base.css";
-import rootReducer from './reducers/index';
+import rootReducer from "./reducers/index";
 
 import DevTools from "../client/devtools";
 
