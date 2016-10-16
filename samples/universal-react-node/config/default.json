@@ -10,6 +10,7 @@
     "webapp": {
       "module": "./server/plugins/webapp",
       "options": {
+        "pageTitle": "Electrode Boilerplate Universal React App",
         "paths": {
           "/{args*}": {
             "content": {
