@@ -221,12 +221,11 @@ Available tasks
                                    tasks: ["~webpack-dev",["server-hot","server-test"]]
   iso-render-server-start ------   tasks: ["~webpack-dev","iso-render-server-start-watch"]
   iso-render-server-start-watch
-  lint .........................   tasks: ["lint-stylus","lint-react-demo","lint-react-src","lint-react-test","lint-scripts"]
+  lint .........................   tasks: ["lint-react-demo","lint-react-src","lint-react-test","lint-scripts"]
   lint-react-demo
   lint-react-src
   lint-react-test
   lint-scripts
-  lint-stylus
   npm:prepublish ---------------   tasks: ["build-lib","build-dist-dev","build-dist-min"]
   prepublish ...................   tasks: ["npm:prepublish"]
   preversion -------------------   tasks: ["check-cov"]
