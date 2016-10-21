@@ -44,7 +44,7 @@ const tasks = {
 
   // code build/compile tasks
   "build": ["clean-dist", "build-lib", "build-dist"],
-  "build-dist": ["build-dist-min", "build-dist-dev"],
+  "build-dist": ["build-dist-min", "build-dist-dev", "build-lib:clean-tmp"],
   "build-dist-dev": {
     desc: "",
     task: () => exec(`webpack --config ${__dirname}/config/webpack/webpack.config.dev.js --colors`)
@@ -70,8 +70,8 @@ const tasks = {
   "archetype:test-init": () => exec(`yo electrode-component --projectName=test-init --packageName=test-init --packageGitHubOrg=walmartlabs --developerName="Arpan Nanavati" --ghUser=ananavati --ghRepo=test-init --createDirectory=Y`),
   "archetype:test-init-pkg": "pjv -f test-init/package.json",
 
-  "check": ["check-dep", "lint", "test-cov"],
-  "check-ci": ["check-dep", "lint", "test-ci"],
+  "check": ["check-dep", "lint", "test-cov", "build-lib:clean-tmp"],
+  "check-ci": ["check-dep", "lint", "test-ci", "build-lib:clean-tmp"],
   "check-cov": ["lint", "test-cov"],
   "check-dep": () => exec(`ecd -f package.json --cf ${__dirname}/config/dependencies/check.json -w`),
   "check-dev": ["lint", "test-dev"],
