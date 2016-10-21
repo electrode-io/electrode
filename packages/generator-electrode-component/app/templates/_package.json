@@ -26,7 +26,9 @@
     "npm": "^3.5.3"
   },
   "scripts": {
-    "prepublish": "gulp prepublish"
+    "prepublish": "gulp prepublish",
+    "start": "gulp demo",
+    "test": "gulp check"
   },
   "keywords": [
     "react",
