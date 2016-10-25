@@ -275,6 +275,16 @@ module.exports = generators.Base.extend({
       });
     }
 
+    if (!this.fs.exists(this.destinationPath('config/default.json'))) {
+      this.composeWith('electrode:config', {
+        options: {
+          name: this.props.name
+        }
+      }, {
+        local: require.resolve('../config')
+      });
+    }
+
     if (!this.fs.exists(this.destinationPath('server/plugins/webapp'))) {
       this.composeWith('electrode:webapp', {
         options: {
