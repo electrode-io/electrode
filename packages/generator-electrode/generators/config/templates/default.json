@@ -12,6 +12,7 @@
     "webapp": {
       "module": "./server/plugins/webapp",
       "options": {
+        "pageTitle": "<%= projectName %>",
         "paths": {
           "/{args*}": {
             "content": {
