@@ -1,68 +1,75 @@
-import React from "react";
+import React, {PropTypes} from "react";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import {Tabs, Tab} from 'material-ui/Tabs';
-import {GridList, GridTile} from 'material-ui/GridList';
+import {Card, CardHeader, CardText} from "material-ui/Card";
+import {Tabs, Tab} from "material-ui/Tabs";
+import WebpackInfo from "./webpack-info";
+import Legacy from "./legacy";
+import WebpackAssets from "./webpack-assets";
+import ModulesByPkg from "./modules-by-pkg";
+import {connect} from "react-redux";
 
-const styles = {
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around'
-  },
-  gridList: {
-    width: 500,
-    height: 450,
-    overflowY: 'auto',
-    marginBottom: 24
-  }
-};
+//////
 
-const Home = () => (
-  <MuiThemeProvider>
+const Home = (props) => {
+  const warningsErrors = () => (
+    <Card initiallyExpanded={true}>
+      <CardHeader showExpandableButton={true} actAsExpander={true} subtitle="Warnings and Errors" />
+      <CardText expandable={true} style={ {background: "black", color: "gray"} }>
+        {props.warnings.map((e) => (<pre dangerouslySetInnerHTML={ {__html: e} }></pre>))}
+      </CardText>
+      <CardText expandable={true} style={ {background: "black", color: "gray"} }>
+        {props.errors.map((e) => (<pre dangerouslySetInnerHTML={ {__html: e} }></pre>))}
+      </CardText>
+    </Card>
+  );
+
+  return (<MuiThemeProvider>
     <Tabs>
       <Tab label="Report">
         <div>
-          <Card>
-            <CardTitle title="Status"></CardTitle>
+          <Card initiallyExpanded={true}>
+            <CardText expandable={true}>
+              <WebpackInfo {...props.info} />
+            </CardText>
           </Card>
-          <Card>
-            <CardTitle title="Logs"></CardTitle>
+          <Card initiallyExpanded={true}>
+            <CardHeader showExpandableButton={true} actAsExpander={true} subtitle="Assets" />
+            <CardText expandable={true}>
+              <WebpackAssets assets={props.assets}/>
+            </CardText>
           </Card>
-          <Card>
-            <CardTitle title="Modules"></CardTitle>
+          {props.errors.length > 0 || props.warnings.length > 0 ? warningsErrors() : ""}
+          <Card initiallyExpanded={true}>
+            <CardHeader showExpandableButton={true} actAsExpander={true} subtitle="Modules" />
+            <CardText expandable={true}>
+              <ModulesByPkg modulesByPkg={props.modulesByPkg} totalSize={props.totalSizeByPkg}/>
+            </CardText>
           </Card>
         </div>
       </Tab>
       <Tab label="Legacy">
-        <div style={styles.root}>
-          <GridList cols={2}>
-            <GridTile title="Status" titlePosition="top">
-              blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah
-              blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah
-              blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah
-              blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah
-              blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah
-            </GridTile>
-            <GridTile title="Modules" titlePosition="top">
-              blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah
-              blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah
-              blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah
-              blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah
-              blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah
-            </GridTile>
-            <GridTile title="Logs" rows={2} cols={2} titlePosition="top">
-              blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah
-              blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah
-              blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah
-              blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah
-              blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah
-            </GridTile>
-          </GridList>
+        <div style={ {background: "black", color: "gray", padding: "5px"} }>
+          <Legacy legacy={props.legacy}/>
         </div>
       </Tab>
     </Tabs>
-  </MuiThemeProvider>
-);
+  </MuiThemeProvider>);
+};
 
-export default Home;
+
+Home.propTypes = {
+  info: PropTypes.object,
+  assets: PropTypes.object,
+  modulesByPkg: PropTypes.object,
+  warnings: PropTypes.array,
+  errors: PropTypes.array,
+  legacy: PropTypes.string,
+  totalSizeByPkg: PropTypes.number
+};
+
+const mapStateToProps = (state) => state;
+
+export default connect(
+  mapStateToProps
+)(Home);
+

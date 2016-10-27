@@ -138,7 +138,7 @@ const registerRoutes = (server, options, next) => {
     pageTitle: "Untitled Electrode Web Application",
     webpackDev: process.env.WEBPACK_DEV === "true",
     renderJS: true,
-    serverSideRendering: true,
+    serverSideRendering: false,
     devServer: {
       host: "127.0.0.1",
       port: "2992"
