@@ -42,7 +42,7 @@ require("electrode-server")(config, [staticPathsDecor()])
       method: "GET",
       path: "/reporter",
       handler: (req, reply) => {
-        const stats = require("./../test/stats_err.json"); // eslint-disable-line
+        const stats = require("./stats_err.json"); // eslint-disable-line
         const byPkg = statsUtils.getModulesByPkg(stats);
 
         const data = {

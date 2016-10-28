@@ -1,7 +1,11 @@
 import React, {PropTypes} from "react";
 
+const style = {
+  whiteSpace: "pre-wrap"
+};
+
 const Legacy = (props) => (
-  <pre dangerouslySetInnerHTML={ {__html: props.legacy} }></pre>
+  <pre style={style} dangerouslySetInnerHTML={ {__html: props.legacy} }></pre>
 );
 
 Legacy.propTypes = {
