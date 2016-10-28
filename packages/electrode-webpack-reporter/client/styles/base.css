@@ -1,0 +1,18 @@
+html {
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    font-size: 13px;
+    line-height: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    border: dashed 1px;
+}
+
+th, td {
+    padding: 1ch;
+    border: dashed 1px;
+}

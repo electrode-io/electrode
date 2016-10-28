@@ -1,1 +1,1 @@
-require("electrode-archetype-njs-module-dev")();
+require("electrode-archetype-react-app")();
