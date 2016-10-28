@@ -4,6 +4,10 @@
 
 An HTML based reporter for [webpack-dev-server].  Adds a new route `/reporter` to your [webpack-dev-server] HTTP server.
 
+![screenshot][screenshot]
+
+# Usage
+
 ```js
 const WebpackReporter = require("electrode-webpack-reporter");
 
@@ -35,3 +39,4 @@ Built with :heart: by [Team Electrode](https://github.com/orgs/electrode-io/peop
 [travis-url]: https://travis-ci.org/electrode-io/electrode-webpack-reporter
 [daviddm-image]: https://david-dm.org/electrode-io/electrode-webpack-reporter.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/electrode-io/electrode-webpack-reporter
+[screenshot]: https://cloud.githubusercontent.com/assets/5876741/19782792/49d63a1e-9c44-11e6-8dbb-8287352f1822.gif
