@@ -22,7 +22,7 @@ $ gulp dev
 
 #### What is `hot mode`?
 
-`Hot mode` is where webpack transpiles your javascript and css code and continues to watch for any changes, and, builds and loads only the code that has changed on disk. It allows you to develop without re-loading your browser page as the changes will be automagically piped in.
+`Hot mode` enables Hot module reloading(HMR), it is where webpack transpiles your javascript and css code and continues to watch for any changes, and, builds and loads only the code that has changed on disk. It allows you to develop without re-loading your browser page as the changes will be automagically piped in.
 
 #### How do I run my application tests?
 
