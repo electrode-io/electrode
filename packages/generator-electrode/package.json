@@ -57,5 +57,9 @@
     "prepublish": "gulp prepublish",
     "test": "gulp"
   },
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "engines": {
+    "node": "^4.4.6 || ^6.2.1",
+    "npm": "^3.5.3"
+  }
 }
