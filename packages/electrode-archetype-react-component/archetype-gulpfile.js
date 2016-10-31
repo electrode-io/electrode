@@ -115,9 +115,9 @@ const tasks = {
 
   "npm:prepublish": ["build-lib", "build-dist-dev", "build-dist-min"],
 
-  "server-dev": () => exec(`webpack-dev-server --port 4000 --config ${__dirname}/config/webpack/webpack.config.demo.dev.js --colors`),
+  "server-dev": () => exec(`webpack-dev-server --config ${__dirname}/config/webpack/webpack.config.demo.dev.js --colors`),
   "server-dev-iso": () => exec(`webpack-dev-server --port 2992 --config ${__dirname}/config/webpack/webpack.config.demo.dev.js --colors`),
-  "server-hot": () => exec(`webpack-dev-server --port 4000 --config ${__dirname}/config/webpack/webpack.config.demo.hot.js --colors`),
+  "server-hot": () => exec(`webpack-dev-server --config ${__dirname}/config/webpack/webpack.config.demo.hot.js --colors`),
   "server-test": () => exec(`webpack-dev-server --port 3001 --config ${__dirname}/config/webpack/webpack.config.test.js --colors`),
 
   "test-ci": ["test-frontend-ci"],
