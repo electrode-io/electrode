@@ -5,7 +5,7 @@ __COMPONENT DESCRIPTION GOES HERE__
 
 ## Demo & Examples
 
-Live demo: [<%= ghUser %>.github.io/<%= ghRepo %>](http://<%= ghUser %>.github.io/<%= ghRepo %>/)
+Live demo: [<%= ghUser %>.github.io/<%= packageName %>](http://<%= ghUser %>.github.io/<%= packageName %>/)
 
 To build the examples locally, run:
 
@@ -58,4 +58,3 @@ To build, watch and serve the examples (which will also watch the component sour
 __PUT LICENSE HERE__
 
 Copyright (c) <%= currentYear %> <%= developerName %>.
-

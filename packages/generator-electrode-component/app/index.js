@@ -82,11 +82,6 @@ var ReactComponentGenerator = yeoman.generators.Base.extend({
 			message: "What is your GitHub Username?",
 			default: this.developerName.split(" ").map(_.toLower).join("")
 		}, {
-			type: "input",
-			name: "ghRepo",
-			message: "What is the name of the GitHub repo where this will be published?",
-			default: this.packageName
-		}, {
 			type: "confirm",
 			name: "createDirectory",
 			message: "Would you like to create a new directory for your project?",
