@@ -6,13 +6,6 @@ module.exports = generators.Base.extend({
   constructor: function () {
     generators.Base.apply(this, arguments);
 
-    this.option('generateInto', {
-      type: String,
-      required: false,
-      defaults: '',
-      desc: 'Relocate the location of the generated files.'
-    });
-
     this.option('name', {
       type: String,
       required: true,
@@ -29,15 +22,15 @@ module.exports = generators.Base.extend({
   initializing: function () {
     this.fs.copy(
       this.templatePath('gitattributes'),
-      this.destinationPath(this.options.generateInto, '.gitattributes')
+      this.destinationPath('.gitattributes')
     );
 
     this.fs.copy(
       this.templatePath('gitignore'),
-      this.destinationPath(this.options.generateInto, '.gitignore')
+      this.destinationPath('.gitignore')
     );
 
-    return originUrl(this.destinationPath(this.options.generateInto))
+    return originUrl(this.destinationPath())
       .then(function (url) {
         this.originUrl = url;
       }.bind(this), function () {
@@ -46,7 +39,7 @@ module.exports = generators.Base.extend({
   },
 
   writing: function () {
-    this.pkg = this.fs.readJSON(this.destinationPath(this.options.generateInto, 'package.json'), {});
+    this.pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
 
     var repository = '';
     if (this.originUrl) {
@@ -61,12 +54,12 @@ module.exports = generators.Base.extend({
       this.pkg.repository.url = repository;
     }
 
-    this.fs.writeJSON(this.destinationPath(this.options.generateInto, 'package.json'), this.pkg);
+    this.fs.writeJSON(this.destinationPath('package.json'), this.pkg);
   },
 
   end: function () {
     this.spawnCommandSync('git', ['init'], {
-      cwd: this.destinationPath(this.options.generateInto)
+      cwd: this.destinationPath()
     });
 
     if (!this.originUrl) {
@@ -76,7 +69,7 @@ module.exports = generators.Base.extend({
         repoSSH = 'git@github.com:' + this.pkg.repository + '.git';
       }
       this.spawnCommandSync('git', ['remote', 'add', 'origin', repoSSH], {
-        cwd: this.destinationPath(this.options.generateInto)
+        cwd: this.destinationPath()
       });
     }
   }

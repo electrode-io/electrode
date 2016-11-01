@@ -15,13 +15,6 @@ module.exports = generators.Base.extend({
   constructor: function () {
     generators.Base.apply(this, arguments);
 
-    this.option('generateInto', {
-      type: String,
-      required: false,
-      defaults: '',
-      desc: 'Relocate the location of the generated files.'
-    });
-
     this.option('travis', {
       type: Boolean,
       required: false,
@@ -103,22 +96,26 @@ module.exports = generators.Base.extend({
 
       var prompts = [
         {
+          type: "input",
           name: 'name',
           message: 'Application Name',
           when: !this.props.name,
           default: path.basename(process.cwd())
         },
         {
+          type: "input",
           name: 'description',
           message: 'Description',
           when: !this.props.description
         },
         {
+          type: "input",
           name: 'homepage',
           message: 'Project homepage url',
           when: !this.props.homepage
         },
         {
+          type: "input",
           name: 'authorName',
           message: 'Author\'s Name',
           when: !this.props.authorName,
@@ -126,6 +123,7 @@ module.exports = generators.Base.extend({
           store: true
         },
         {
+          type: "input",
           name: 'authorEmail',
           message: 'Author\'s Email',
           when: !this.props.authorEmail,
@@ -133,23 +131,36 @@ module.exports = generators.Base.extend({
           store: true
         },
         {
+          type: "input",
           name: 'authorUrl',
           message: 'Author\'s Homepage',
           when: !this.props.authorUrl,
           store: true
         },
         {
+          type: "input",
           name: 'keywords',
           message: 'Package keywords (comma to split)',
           when: _.isEmpty(this.pkg.keywords),
           filter: function (words) {
             return words.split(/\s*,\s*/g).filter((x) => x);
           }
+        },
+        {
+          type: "confirm",
+          name: "createDirectory",
+          message: "Would you like to create a new directory for your project?",
+          default: true
         }
       ];
 
       return this.prompt(prompts).then((props) => {
         this.props = extend(this.props, props);
+
+        if (this.props.createDirectory) {
+          var newRoot = this.destinationPath() + '/' + _.kebabCase(_.deburr(this.props.name));
+          this.destinationRoot(newRoot);
+        }
       });
     },
 
@@ -217,13 +228,13 @@ module.exports = generators.Base.extend({
 
     this.fs.copy(
       this.templatePath('babelrc'),
-      this.destinationPath(this.options.generateInto, '.babelrc')
+      this.destinationPath('.babelrc')
     );
 
     ['gulpfile.js', 'client', 'config', 'server', 'test'].forEach((f) => {
       this.fs.copy(
         this.templatePath(f),
-        this.destinationPath(this.options.generateInto, f)
+        this.destinationPath(f)
       );
     });
   },
@@ -286,10 +297,7 @@ module.exports = generators.Base.extend({
     }
 
     if (!this.fs.exists(this.destinationPath('server/plugins/webapp'))) {
-      this.composeWith('electrode:webapp', {
-        options: {
-        }
-      }, {
+      this.composeWith('electrode:webapp', {}, {
         local: require.resolve('../webapp')
       });
     }
@@ -299,5 +307,15 @@ module.exports = generators.Base.extend({
     this.installDependencies({
       bower: false
     });
+  },
+
+  end: function() {
+    var chdir = this.props.createDirectory ? "'cd " + _.kebabCase(_.deburr(this.props.name)) + "' then " : "";
+    this.log(
+      "\n" + chalk.green.underline("Your new Electrode application is ready!") +
+      "\n" +
+      "\nType " + chdir + "'gulp dev' to start the server." +
+      "\n"
+    );
   }
 });
