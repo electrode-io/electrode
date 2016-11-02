@@ -6,13 +6,6 @@ module.exports = generators.Base.extend({
   constructor: function () {
     generators.Base.apply(this, arguments);
 
-    this.option('generateInto', {
-      type: String,
-      required: false,
-      defaults: '',
-      desc: 'Relocate the location of the generated files.'
-    });
-
     this.option('name', {
       type: String,
       required: true,
@@ -57,10 +50,10 @@ module.exports = generators.Base.extend({
   },
 
   writing: function () {
-    var pkg = this.fs.readJSON(this.destinationPath(this.options.generateInto, 'package.json'), {});
+    var pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
     this.fs.copyTpl(
       this.templatePath('README.md'),
-      this.destinationPath(this.options.generateInto, 'README.md'),
+      this.destinationPath('README.md'),
       {
         projectName: this.options.name,
         safeProjectName: _.camelCase(this.options.name),
