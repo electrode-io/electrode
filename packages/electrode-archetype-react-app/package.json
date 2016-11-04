@@ -33,10 +33,10 @@
   },
   "devDependencies": {
     "babel-eslint": "^5.0.0",
-    "eslint": "^1.10.3",
-    "eslint-config-defaults": "^7.0.1",
-    "eslint-plugin-filenames": "^0.1.2",
-    "eslint-plugin-react": "^3.16.1"
+    "eslint": "^3.9.1",
+    "eslint-config-defaults": "^9.0.0",
+    "eslint-plugin-filenames": "^1.1.0",
+    "eslint-plugin-react": "^6.5.0"
   },
   "engines": {
     "node": "^4.4.6 || ^6.2.1",
