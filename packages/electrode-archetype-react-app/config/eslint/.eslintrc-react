@@ -6,6 +6,6 @@ globals:
   document: false
   ReactElement: false
 rules:
-  "react/jsx-boolean-value": 0
-  "react/jsx-closing-bracket-location": 0
-  "react/no-string-refs": 0 
+  "react/jsx-boolean-value": "off"
+  "react/jsx-closing-bracket-location": "off"
+  "react/no-string-refs": "off" 

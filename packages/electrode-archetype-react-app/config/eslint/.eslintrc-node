@@ -2,6 +2,6 @@
 extends:
   - "eslint-config-defaults/configurations/walmart/es6-node"
 rules:
-  "strict": [0, "global"]
-  "no-process-exit": [0]
-  "func-style": [0]
+  "strict": ["off", "global"]
+  "no-process-exit": ["off"]
+  "func-style": ["off"]

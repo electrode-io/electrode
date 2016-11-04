@@ -4,5 +4,5 @@ extends:
 globals:
   document: false
 rules:
-  "complexity": 0
-  "max-len": 0
+  "complexity": "off"
+  "max-len": "off"
