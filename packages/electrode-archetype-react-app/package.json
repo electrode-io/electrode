@@ -32,7 +32,7 @@
     "isomorphic-loader": "^1.0.0"
   },
   "devDependencies": {
-    "babel-eslint": "^5.0.0",
+    "babel-eslint": "^7.1.0",
     "eslint": "^3.9.1",
     "eslint-config-defaults": "^9.0.0",
     "eslint-plugin-filenames": "^1.1.0",
