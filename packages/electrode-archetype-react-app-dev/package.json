@@ -24,7 +24,7 @@
     "electrode-gulp-helper": "^1.0.5",
     "electrode-webpack-reporter": "^0.1.0",
     "eslint": "^3.9.1",
-    "eslint-config-defaults": "^9.0.0",
+    "eslint-config-walmart": "^1.1.0",
     "eslint-plugin-filenames": "^1.1.0",
     "eslint-plugin-react": "^6.5.0",
     "extract-text-webpack-plugin": "^1.0.1",

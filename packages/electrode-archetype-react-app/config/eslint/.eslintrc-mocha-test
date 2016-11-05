@@ -1,6 +1,6 @@
 ---
 extends:
-  - "eslint-config-defaults/configurations/walmart/es5-node"
+  - "walmart/configurations/es5-test"
 globals:
   expect: false
   sandbox: false
