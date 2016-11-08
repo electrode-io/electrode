@@ -8,6 +8,14 @@
 </head>
 <body>
 <div class="js-content">{{SSR_CONTENT}}</div>
+<script>
+(function() {
+  if('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+})();
+</script>
+{{REGISTER_SW_MARKER}}
 <script>if (window.webappStart) webappStart();</script>
 </body>
 </html>

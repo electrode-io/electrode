@@ -28,6 +28,12 @@ function loadAssetsFromStats(statsFilePath) {
           assets.css = v;
         }
       });
+      const manifest = _.find(stats.assets, (asset) => {
+        return asset.name === "manifest.json";
+      });
+      if (manifest) {
+        assets.manifest = manifest.name;
+      }
       return assets;
     })
     .catch(() => ({}));
@@ -38,6 +44,7 @@ function makeRouteHandler(options, userContent) {
   const BUNDLE_MARKER = "{{WEBAPP_BUNDLES}}";
   const TITLE_MARKER = "{{PAGE_TITLE}}";
   const PREFETCH_MARKER = "{{PREFETCH_BUNDLES}}";
+  const REGISTER_SW_MARKER = "{{REGISTER_SW_MARKER}}";
   const WEBPACK_DEV = options.webpackDev;
   const RENDER_JS = options.renderJS;
   const RENDER_SS = options.serverSideRendering;
@@ -63,6 +70,10 @@ function makeRouteHandler(options, userContent) {
       return WEBPACK_DEV ? devJSBundle : assets.js && `/js/${assets.js}` || "";
     };
 
+    const bundleManifest = () => {
+        return assets.manifest ? `/js/${assets.manifest}` : "";
+    }
+
     const callUserContent = (content) => {
       const x = content(request);
       return !x.catch ? x : x.catch((err) => {
@@ -74,11 +85,24 @@ function makeRouteHandler(options, userContent) {
     };
 
     const makeBundles = () => {
+      const manifest = bundleManifest();
+      const manifestLink = manifest
+        ? `<link rel="manifest" href="${manifest}" />`
+        : ''
       const css = bundleCss();
       const cssLink = css ? `<link rel="stylesheet" href="${css}" />` : "";
       const js = bundleJs();
       const jsLink = js ? `<script src="${js}"></script>` : "";
-      return `${cssLink}${jsLink}`;
+      return `${manifestLink}${cssLink}${jsLink}`;
+    };
+
+    const registerServiceWorker = () => {
+      if (assets.manifest) {
+        const SWtemplate = Path.join(__dirname, "register-sw.html")
+        const SWRegistration = fs.readFileSync(SWtemplate).toString();
+        return SWRegistration || '';
+      }
+      return '';
     };
 
     const renderPage = (content) => {
@@ -92,6 +116,8 @@ function makeRouteHandler(options, userContent) {
           return makeBundles();
         case PREFETCH_MARKER:
           return `<script>${content.prefetch}</script>`;
+        case REGISTER_SW_MARKER:
+          return registerServiceWorker();
         default:
           return `Unknown marker ${m}`;
         }
@@ -142,6 +168,14 @@ const registerRoutes = (server, options, next) => {
     paths: {},
     stats: "dist/server/stats.json"
   };
+
+  server.route({
+      method: 'GET',
+      path: '/sw.js',
+      handler: {
+          file: 'dist/sw.js'
+      }
+  });
 
   const resolveContent = (content) => {
     if (!_.isString(content) && !_.isFunction(content) && content.module) {
