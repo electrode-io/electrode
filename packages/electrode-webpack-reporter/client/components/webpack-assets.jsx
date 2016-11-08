@@ -2,7 +2,6 @@ import React, {PropTypes} from "react";
 import formatSize from "../../lib/format-size.js";
 import {Card, CardHeader, CardText} from "material-ui/Card";
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
-import classNames from 'classnames';
 import styles from '../styles/base.css'
 
 const assetRow = (asset) => (

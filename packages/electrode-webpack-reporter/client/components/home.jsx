@@ -14,7 +14,8 @@ import WebpackModules from './webpack-modules';
 //////
 
 const Home = (props) => {
-  return (<div className={styles.container}>
+  return (
+    <div className={styles.container}>
       <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
         <Tabs>
           <Tab label="Report">   
@@ -34,7 +35,8 @@ const Home = (props) => {
           </Tab>
         </Tabs>
       </MuiThemeProvider>
-    </div>);
+    </div>
+  );
 };
 
 Home.propTypes = {
