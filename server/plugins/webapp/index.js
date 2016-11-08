@@ -71,8 +71,8 @@ function makeRouteHandler(options, userContent) {
     };
 
     const bundleManifest = () => {
-        return assets.manifest ? `/js/${assets.manifest}` : "";
-    }
+      return assets.manifest ? `/js/${assets.manifest}` : "";
+    };
 
     const callUserContent = (content) => {
       const x = content(request);
@@ -88,7 +88,7 @@ function makeRouteHandler(options, userContent) {
       const manifest = bundleManifest();
       const manifestLink = manifest
         ? `<link rel="manifest" href="${manifest}" />`
-        : ''
+        : "";
       const css = bundleCss();
       const cssLink = css ? `<link rel="stylesheet" href="${css}" />` : "";
       const js = bundleJs();
@@ -98,11 +98,11 @@ function makeRouteHandler(options, userContent) {
 
     const registerServiceWorker = () => {
       if (assets.manifest) {
-        const SWtemplate = Path.join(__dirname, "register-sw.html")
+        const SWtemplate = Path.join(__dirname, "register-sw.html");
         const SWRegistration = fs.readFileSync(SWtemplate).toString();
-        return SWRegistration || '';
+        return SWRegistration || "";
       }
-      return '';
+      return "";
     };
 
     const renderPage = (content) => {
@@ -170,11 +170,11 @@ const registerRoutes = (server, options, next) => {
   };
 
   server.route({
-      method: 'GET',
-      path: '/sw.js',
-      handler: {
-          file: 'dist/sw.js'
-      }
+    method: "GET",
+    path: "/sw.js",
+    handler: {
+      file: "dist/sw.js"
+    }
   });
 
   const resolveContent = (content) => {
