@@ -1,24 +1,34 @@
 import React, {PropTypes} from "react";
+import {Card, CardHeader, CardText} from "material-ui/Card";
+import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
+import styles from '../styles/base.css'
 
 const WebpackInfo = (props) => (
-  <table>
-    <thead>
-    <tr>
-      <th>Hash</th>
-      <th>Version</th>
-      <th>Time</th>
-      <th>publicPath</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td>{props.hash}</td>
-      <td>{props.version}</td>
-      <td>{props.time !== undefined ? `${props.time}ms` : ""}</td>
-      <td>{props.publicPath}</td>
-    </tr>
-    </tbody>
-  </table>
+    <Card initiallyExpanded={false}>
+      <CardHeader showExpandableButton={true} actAsExpander={true} subtitle="Webpack Info" />
+      <CardText expandable={true}>
+        <div className={styles.content}>
+          <Table style={{margin: '0 auto'}}>
+            <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+              <TableRow>
+                <TableHeaderColumn>Hash</TableHeaderColumn>
+                <TableHeaderColumn>Version</TableHeaderColumn>
+                <TableHeaderColumn>Time</TableHeaderColumn>
+                <TableHeaderColumn>publicPath</TableHeaderColumn>
+              </TableRow>
+            </TableHeader>
+            <TableBody displayRowCheckbox={false}>
+              <TableRow>
+                <TableRowColumn>{props.hash}</TableRowColumn>
+                <TableRowColumn>{props.version}</TableRowColumn>
+                <TableRowColumn>{props.time !== undefined ? `${props.time}ms` : ""}</TableRowColumn>
+                <TableRowColumn>{props.publicPath}</TableRowColumn>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </div>
+      </CardText>
+    </Card>
 );
 
 WebpackInfo.propTypes = {
