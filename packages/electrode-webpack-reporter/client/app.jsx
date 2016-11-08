@@ -26,9 +26,9 @@ window.webappStart = () => {
     method: "GET",
     headers
   })).then((response) => {
-
+    
     // for developing with electrode server <Router history={browserHistory}>{routes}</Router>
-
+    
     return response.json().then((initialState) => {
       const store = createStore(rootReducer, initialState);
       render(

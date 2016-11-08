@@ -1,17 +1,16 @@
 import React, {PropTypes} from "react";
-import {connect} from "react-redux";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme'
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {Card, CardHeader, CardText} from "material-ui/Card";
 import {Tabs, Tab} from "material-ui/Tabs";
+import WarningsErrors from './warnings-errors';
 import WebpackInfo from "./webpack-info";
 import Legacy from "./legacy";
 import WebpackAssets from "./webpack-assets";
-import ModulesByPkg from "./modules-by-pkg";
-import styles from "../styles/base.css";
 import WebpackModules from './webpack-modules';
-//////
+import {connect} from "react-redux";
+import styles from "../styles/base.css";
 
 const Home = (props) => {
   return (

@@ -90,3 +90,4 @@ function dirsizes(child) {
         return size + ("size" in child ? child.size : dirsizes(child))
       }, 0);
 }
+
