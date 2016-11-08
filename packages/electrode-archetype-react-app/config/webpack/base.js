@@ -13,6 +13,7 @@ var fontsConfig = require("./partial/fonts");
 var imagesConfig = require("./partial/images");
 var statsConfig = require("./partial/stats");
 var isomorphicConfig = require("./partial/isomorphic");
+var manifestConfig = require('./partial/manifest');
 
 var archetypeNodeModules = Path.join(__dirname, "../../node_modules");
 var archetypeDevNodeModules = Path.join(archetype.devPath, "node_modules");
@@ -78,5 +79,6 @@ module.exports = _.flow(
   fontsConfig(),
   imagesConfig(),
   statsConfig(),
-  isomorphicConfig()
+  isomorphicConfig(),
+  manifestConfig()
 )();

@@ -36,7 +36,9 @@
     "eslint": "^1.10.3",
     "eslint-config-defaults": "^7.0.1",
     "eslint-plugin-filenames": "^0.1.2",
-    "eslint-plugin-react": "^3.16.1"
+    "eslint-plugin-react": "^3.16.1",
+    "sw-precache-webpack-plugin": "^0.5.1",
+    "web-app-manifest-loader": "^0.1.1"
   },
   "engines": {
     "node": "^4.4.6 || ^6.2.1",
