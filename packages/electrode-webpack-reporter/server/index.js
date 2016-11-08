@@ -1,5 +1,4 @@
 "use strict";
-
 global.navigator = {userAgent: false};
 
 process.on("SIGINT", () => {
@@ -44,7 +43,6 @@ require("electrode-server")(config, [staticPathsDecor()])
       handler: (req, reply) => {
         const stats = require("./stats_err.json"); // eslint-disable-line
         const byPkg = statsUtils.getModulesByPkg(stats);
-
         const data = {
           info: statsUtils.getInfo(stats),
           assets: statsUtils.getAssets(stats),
@@ -52,7 +50,8 @@ require("electrode-server")(config, [staticPathsDecor()])
           totalSizeByPkg: byPkg.totalSize,
           warnings: statsUtils.getWarningsHtml(stats),
           errors: statsUtils.getErrorsHtml(stats),
-          legacy: statsUtils.jsonToHtml(stats, true)
+          legacy: statsUtils.jsonToHtml(stats, true),
+          pureWebpackStats: stats
         };
         reply(data);
       }

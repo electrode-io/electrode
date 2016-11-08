@@ -35,3 +35,4 @@ export const bundle = function(bundles, opts, callback) {
 
    return callback(null, {data})
   }
+  
