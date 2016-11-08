@@ -65,7 +65,7 @@ describe("process modules", function () {
   });
 
   it("should generate modules by NPM package names", function () {
-    const stats = require("../stats.json");
+    const stats = require("../../server/stats.json");
 
     const mp = new ModuleProcessor(stats);
     const byPkg = mp.makeModulesByPackage();

@@ -7,13 +7,13 @@
 
 const Path = require("path");
 
-const tildaSep = Path.join(Path.sep, "~", Path.sep);
-const nmSep = Path.join(Path.sep, "node_modules", Path.sep);
+const tildaSep = "/~/";
+const nmSep = "/node_modules/";
 
 // match @namespace/packageName/file
-const atModRegex = new RegExp(`([^\\${Path.sep}]+\\${Path.sep}[^\\${Path.sep}]+)\\${Path.sep}(.+)`);
+const atModRegex = new RegExp(`([^/]+/[^/]+)/(.+)`);
 // match packageName/file
-const modRegex = new RegExp(`([^\\${Path.sep}]+)\\${Path.sep}(.+)`);
+const modRegex = new RegExp(`([^/]+)/(.+)`);
 
 class ModuleProcessor {
   constructor(statJson) {
