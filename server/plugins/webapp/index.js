@@ -44,7 +44,7 @@ function makeRouteHandler(options, userContent) {
   const BUNDLE_MARKER = "{{WEBAPP_BUNDLES}}";
   const TITLE_MARKER = "{{PAGE_TITLE}}";
   const PREFETCH_MARKER = "{{PREFETCH_BUNDLES}}";
-  const REGISTER_SW_MARKER = "{{REGISTER_SW_MARKER}}";
+  const REGISTER_SW_MARKER = "{{REGISTER_SW}}";
   const WEBPACK_DEV = options.webpackDev;
   const RENDER_JS = options.renderJS;
   const RENDER_SS = options.serverSideRendering;
