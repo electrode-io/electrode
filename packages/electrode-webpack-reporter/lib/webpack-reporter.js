@@ -22,8 +22,9 @@ const reporterStats = require("../dist/server/stats.json");
 class WebpackReporter extends EventEmitter {
   constructor() {
     super();
-    const distJs = Path.join(__dirname, "../dist/js", reporterStats.assetsByChunkName.main[0]);
-    const distCss = Path.join(__dirname, "../dist/js", reporterStats.assetsByChunkName.main[1]);
+    const localHostPath = Path.parse(__dirname)
+    const distJs = Path.join(localHostPath.root, "node_modules/electrode-webpack-reporter/dist/js", reporterStats.assetsByChunkName.main[0]);
+    const distCss = Path.join(localHostPath.root, "node_modules/electrode-webpack-reporter/dist/js", reporterStats.assetsByChunkName.main[1]);
     this._reporterHtml = fs.readFileSync(Path.resolve(Path.join(__dirname, "reporter.html"))).toString()
       .replace("{{CSS}}", removeCwd(distCss)).replace("{{JS}}", removeCwd(distJs));
   }
