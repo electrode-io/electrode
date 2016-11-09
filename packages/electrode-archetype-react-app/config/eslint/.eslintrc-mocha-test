@@ -1,6 +1,6 @@
 ---
 extends:
-  - "walmart/configurations/es5-test"
+  - "walmart/configurations/es5-node"
 globals:
   expect: false
   sandbox: false
