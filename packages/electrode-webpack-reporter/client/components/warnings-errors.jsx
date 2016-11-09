@@ -13,7 +13,7 @@ const WarningsErrors = (props) => {
       </CardText>
     </Card>
   );
-  return props.errors.length > 0 || props.warnings.length > 0 ? createWarningsErrorsCard() : "";
+  return props.errors.length > 0 || props.warnings.length > 0 ? createWarningsErrorsCard() : null;
 };
 
 WarningsErrors.propTypes = {
