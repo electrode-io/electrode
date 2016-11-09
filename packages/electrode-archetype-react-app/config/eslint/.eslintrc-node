@@ -1,6 +1,11 @@
 ---
 extends:
   - "walmart/configurations/es6-node"
+parserOptions:
+  # this is not in the Walmart default configuration, for fairly good reason:
+  # V8 (and thus Node) does not support ES6 import syntax. Server-side code
+  # is transpiled, but this is not reflected in tests.
+  sourceType: "module"
 rules:
   "strict": ["off", "global"]
   "no-process-exit": ["off"]
