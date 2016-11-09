@@ -9,3 +9,6 @@ rules:
   "react/jsx-boolean-value": "off"
   "react/jsx-closing-bracket-location": "off"
   "react/no-string-refs": "off" 
+  # disable invalid rules from walmart default configs:
+  "react/wrap-multilines": "off"
+  "react/jsx-wrap-multilines": "error"
