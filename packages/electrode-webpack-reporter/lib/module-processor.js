@@ -7,13 +7,13 @@
 
 const Path = require("path");
 
-const tildaSep = Path.join(Path.sep, "~", Path.sep);
-const nmSep = Path.join(Path.sep, "node_modules", Path.sep);
+const tildaSep = "/~/";
+const nmSep = "/node_modules/";
 
 // match @namespace/packageName/file
-const atModRegex = new RegExp(`([^\\${Path.sep}]+\\${Path.sep}[^\\${Path.sep}]+)\\${Path.sep}(.+)`);
+const atModRegex = new RegExp(`([^/]+/[^/]+)/(.+)`);
 // match packageName/file
-const modRegex = new RegExp(`([^\\${Path.sep}]+)\\${Path.sep}(.+)`);
+const modRegex = new RegExp(`([^/]+)/(.+)`);
 
 class ModuleProcessor {
   constructor(statJson) {
@@ -44,19 +44,26 @@ class ModuleProcessor {
     return mbn;
   }
 
-  _splitPathName(name) {
+ _splitPathName(name) {
     // name could be ./~/name1/~/name2/lib/index.js or ./client/app.jsx
-          // ERROR <-- first name was 'multi main'
     const pkgs = name.indexOf(tildaSep) < 0 ? // not a NPM module
       [name] : name.split(tildaSep).splice(1);
     const n = pkgs.pop();
     const match = n.match(n.startsWith("@") ? atModRegex : modRegex);
-          //ERROR <-- match === null when 'multi name'
-    return {
-      name: match[1], // ERROR <-- null throws error
-      parents: pkgs,
-      file: match[2]
-    };
+
+    if (match) {
+      return {
+        name: match[1],
+        parents: pkgs,
+        file: match[2]
+      };
+    } else {
+      return {
+        name,
+        parents: pkgs,
+        file: ""
+      };
+    }
   }
 
   /**
@@ -81,9 +88,10 @@ class ModuleProcessor {
     const byPkg = this.modulesByPackage = {};
     this.totalSize = 0;
 //strange work around to shift off 'multi main' from the array
-    const minusMultiMain = Object.keys(this.modulesByName)
-    minusMultiMain.shift();
-    minusMultiMain.forEach((name) => {
+    // const minusMultiMain = Object.keys(this.modulesByName)
+    // minusMultiMain.shift();
+    // minusMultiMain.forEach((name) => {
+    Object.keys(this.modulesByName).forEach((name) => {
       const split = this._splitPathName(name);
       const pkg = byPkg[split.name] || (byPkg[split.name] = {size: 0});
       const getVersion = (parents) => {
