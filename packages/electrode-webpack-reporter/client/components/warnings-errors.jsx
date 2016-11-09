@@ -13,7 +13,15 @@ const WarningsErrors = (props) => {
       </CardText>
     </Card>
   );
-  return props.errors.length > 0 || props.warnings.length > 0 ? createWarningsErrorsCard() : null;
+  const createEmptyWarningsErrorsCard = () => (
+    <Card initiallyExpanded={false}>
+      <CardHeader showExpandableButton={true} actAsExpander={true} subtitle="Warnings and Errors"/>
+        <CardText expandable={true} style={ {background: "black", color: "gray"} }>
+          <h1>No warnings or errors</h1>
+        </CardText>
+    </Card>
+  )
+  return props.errors.length > 0 || props.warnings.length > 0 ? createWarningsErrorsCard() : createEmptyWarningsErrorsCard();
 };
 
 WarningsErrors.propTypes = {
