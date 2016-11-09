@@ -1,16 +1,57 @@
 module.exports = function jsonTree(json) {
-
-  var modules = json.chunks[0].modules
-  var maxDepth = 1;
-  var rootSize = 0;
-
-  var root = {
+  const modules = json.chunks[0].modules;
+  let maxDepth = 1;
+  let rootSize = 0;
+  const root = {
     children: [],
-    name: 'root'
+    name: "root"
   };
 
-  modules.forEach(function addToTree(module) {
-    var size;
+  const getChild = function (arr, name) {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].name === name) {
+        return arr[i];
+      }
+    }
+  };
+
+  const getFile = function (module, fileName, parentTree) {
+    const charIndex = fileName.indexOf("/");
+
+    if (charIndex !== -1) {
+      let folder = fileName.slice(0, charIndex);
+      if (folder === "~") {
+        folder = "node_modules";
+      }
+
+      let childFolder = getChild(parentTree.children, folder);
+      if (!childFolder) {
+        childFolder = {
+          name: folder,
+          children: []
+        };
+
+        parentTree.children.push(childFolder);
+      }
+
+      getFile(module, fileName.slice(charIndex + 1), childFolder);
+    } else {
+      module.name = fileName;
+      parentTree.children.push(module);
+    }
+  };
+
+  const dirsizes = function (child) {
+    return child.size = "size" in child
+      ? child.size
+      : child.children.reduce((size, child) => {
+        return size + ("size" in child ? child.size : dirsizes(child));
+      }, 0);
+  };
+
+  modules.forEach(
+    function addToTree(module) {
+    let size;
 
     if (module.source) {
       size = module.source.length;
@@ -20,22 +61,22 @@ module.exports = function jsonTree(json) {
 
     rootSize += size;
 
-    var mod = {
+    const mod = {
       id: module.id,
       fullName: module.name,
-      size: size,
+      size,
       reasons: module.reasons
     };
 
-    var depth = mod.fullName.split('/').length - 1;
+    const depth = mod.fullName.split("/").length - 1;
     if (depth > maxDepth) {
       maxDepth = depth;
     }
 
-    var fileName = mod.fullName;
+    let fileName = mod.fullName;
 
-    var beginning = mod.fullName.slice(0, 2);
-    if (beginning === './') {
+    const beginning = mod.fullName.slice(0, 2);
+    if (beginning === "./") {
       fileName = fileName.slice(2);
     }
 
@@ -46,48 +87,9 @@ module.exports = function jsonTree(json) {
   root.size = rootSize;
 
   return root;
-}
+};
 
 
-function getFile(module, fileName, parentTree) {
-  var charIndex = fileName.indexOf('/');
 
-  if (charIndex !== -1) {
-    var folder = fileName.slice(0, charIndex);
-    if (folder === '~') {
-      folder = 'node_modules';
-    }
 
-    var childFolder = getChild(parentTree.children, folder);
-    if (!childFolder) {
-      childFolder = {
-        name: folder,
-        children: []
-      };
-
-      parentTree.children.push(childFolder);
-    }
-
-    getFile(module, fileName.slice(charIndex + 1), childFolder);
-  } else {
-    module.name = fileName;
-    parentTree.children.push(module);
-  }
-}
-
-function getChild(arr, name) {
-  for (var i = 0; i < arr.length; i++) {
-    if (arr[i].name === name) {
-      return arr[i];
-    }
-  }
-}
-
-function dirsizes(child) {
-  return child.size = "size" in child
-    ? child.size
-    : child.children.reduce(function(size, child) {
-        return size + ("size" in child ? child.size : dirsizes(child))
-      }, 0);
-}
 

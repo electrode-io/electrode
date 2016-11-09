@@ -1,13 +1,12 @@
 import React, {PropTypes} from "react";
 import {Card, CardHeader, CardText} from "material-ui/Card";
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
+
 import {Tabs, Tab} from "material-ui/Tabs";
-import Electrify from './webpack-modules/electrify';
-import ModulesByPkg from './webpack-modules/modules-by-pkg';
-  
+import Electrify from "./webpack-modules/electrify";
+import ModulesByPkg from "./webpack-modules/modules-by-pkg";
+
 const WebpackModules = (props) => {
-  console.log('webpack modules props', props);
-  return(
+  return (
   <Card initiallyExpanded={true}>
     <CardHeader showExpandableButton={true} actAsExpander={true} subtitle="Modules"/>
       <CardText expandable={true}>
@@ -20,8 +19,14 @@ const WebpackModules = (props) => {
           </Tab>
         </Tabs>
       </CardText>
-  </Card>    
+  </Card>
   );
-}
+};
+
+WebpackModules.propTypes = {
+  pureWebpackStats: PropTypes.object,
+  modulesByPkg: PropTypes.object,
+  totalSize: PropTypes.number
+};
 
 export default WebpackModules;

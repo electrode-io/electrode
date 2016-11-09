@@ -1,12 +1,10 @@
 import React, {PropTypes} from "react";
-import {Card, CardHeader, CardText} from "material-ui/Card";
 import {List, ListItem} from "material-ui/List";
 import formatSize from "../../../lib/format-size.js";
 
 /* eslint-disable max-statements, react/jsx-indent-props */
 
 const listPkg = (totalSize, pkg) => {
-  
   const nestModules = (modules) => Object.keys(modules).map((name) => {
     const m = modules[name];
     const pt = `${name} [${formatSize(m.size)}]`;
@@ -25,7 +23,10 @@ const listPkg = (totalSize, pkg) => {
     size = byParents.reduce((acc, k) => acc + pkg[k].size, 0);
     nestedItems = byParents.sort().map((p) => {
       const pt = p === "$" ? "at top level" : `under ${parentsStr(p)}`;
-      return (<ListItem primaryText={pt} primaryTogglesNestedList={true} nestedItems={nestModules(pkg[p].modules)}/>);
+      return (<ListItem
+        primaryText={pt}
+        primaryTogglesNestedList={true}
+        nestedItems={nestModules(pkg[p].modules)}/>);
     });
   } else {
     nestedItems = nestModules($.modules);
@@ -39,11 +40,13 @@ const listPkg = (totalSize, pkg) => {
     <span> [{formatSize(size)}]</span>
     <span> [{pct.toFixed(2)}%]</span>
   </div>);
-  return (<ListItem primaryText={primaryText} primaryTogglesNestedList={true} nestedItems={nestedItems}/>);
+  return (<ListItem
+    primaryText={primaryText}
+    primaryTogglesNestedList={true}
+    nestedItems={nestedItems}/>);
 };
 
 const ModulesByPkg = (props) => {
-  console.log('modulesByPkg props: ', props)
   return (<List>
     {Object.keys(props.modulesByPkg).sort().map((name) =>
       listPkg(props.totalSize, props.modulesByPkg[name]))}

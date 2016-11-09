@@ -1,14 +1,13 @@
 import React, {PropTypes} from "react";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme'
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import {Card, CardHeader, CardText} from "material-ui/Card";
+import darkBaseTheme from "material-ui/styles/baseThemes/darkBaseTheme";
+import getMuiTheme from "material-ui/styles/getMuiTheme";
 import {Tabs, Tab} from "material-ui/Tabs";
-import WarningsErrors from './warnings-errors';
+import WarningsErrors from "./warnings-errors";
 import WebpackInfo from "./webpack-info";
 import Legacy from "./legacy";
 import WebpackAssets from "./webpack-assets";
-import WebpackModules from './webpack-modules';
+import WebpackModules from "./webpack-modules";
 import {connect} from "react-redux";
 import styles from "../styles/base.css";
 
@@ -17,15 +16,19 @@ const Home = (props) => {
     <div className={styles.container}>
       <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
         <Tabs>
-          <Tab label="Report">   
+          <Tab label="Report">
             <WebpackInfo {...props.info} />
             <WarningsErrors errors={props.errors} warnings={props.warnings} />
             <div className={styles.leftColumn}>
-              <WebpackModules pureWebpackStats={props.pureWebpackStats} modulesByPkg={props.modulesByPkg} totalSize={props.totalSizeByPkg}/>
+              <WebpackModules
+                pureWebpackStats={props.pureWebpackStats}
+                modulesByPkg={props.modulesByPkg}
+                totalSize={props.totalSizeByPkg}
+              />
             </div>
             <div className={styles.rightColumn}>
               <WebpackAssets assets={props.assets}/>
-            </div>        
+            </div>
           </Tab>
           <Tab label="Legacy">
             <div style={ {background: "black", color: "gray", padding: "10px"} }>
@@ -45,7 +48,8 @@ Home.propTypes = {
   warnings: PropTypes.array,
   errors: PropTypes.array,
   legacy: PropTypes.string,
-  totalSizeByPkg: PropTypes.number
+  totalSizeByPkg: PropTypes.number,
+  pureWebpackStats: PropTypes.object
 };
 
 const mapStateToProps = (state) => state;

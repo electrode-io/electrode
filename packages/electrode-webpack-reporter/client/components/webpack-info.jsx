@@ -1,14 +1,21 @@
 import React, {PropTypes} from "react";
 import {Card, CardHeader, CardText} from "material-ui/Card";
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
-import styles from '../styles/base.css'
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn
+} from "material-ui/Table";
+import styles from "../styles/base.css";
 
 const WebpackInfo = (props) => (
     <Card initiallyExpanded={false}>
       <CardHeader showExpandableButton={true} actAsExpander={true} subtitle="Webpack Info" />
       <CardText expandable={true}>
         <div className={styles.content}>
-          <Table style={{margin: '0 auto'}}>
+          <Table style={{margin: "0 auto"}}>
             <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
               <TableRow>
                 <TableHeaderColumn>Hash</TableHeaderColumn>

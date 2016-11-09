@@ -1,5 +1,4 @@
 import React from "react";
-
 // import {routes} from "./routes";
 // import {Router, browserHistory} from "react-router";
 import {render} from "react-dom";
@@ -16,9 +15,7 @@ import Home from "./components/home";
 //
 
 window.webappStart = () => {
-  //
   injectTapEventPlugin(); // https://github.com/callemall/material-ui/issues/4670
-
   const headers = new Headers(); // eslint-disable-line
   headers.append("Content-Type", "application/json");
   headers.append("Accept", "application/json");
@@ -26,9 +23,7 @@ window.webappStart = () => {
     method: "GET",
     headers
   })).then((response) => {
-    
     // for developing with electrode server <Router history={browserHistory}>{routes}</Router>
-    
     return response.json().then((initialState) => {
       const store = createStore(rootReducer, initialState);
       render(

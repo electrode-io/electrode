@@ -46,13 +46,14 @@ class ModuleProcessor {
 
   _splitPathName(name) {
     // name could be ./~/name1/~/name2/lib/index.js or ./client/app.jsx
+          // ERROR <-- first name was 'multi main'
     const pkgs = name.indexOf(tildaSep) < 0 ? // not a NPM module
       [name] : name.split(tildaSep).splice(1);
     const n = pkgs.pop();
     const match = n.match(n.startsWith("@") ? atModRegex : modRegex);
-
+          //ERROR <-- match === null when 'multi name'
     return {
-      name: match[1],
+      name: match[1], // ERROR <-- null throws error
       parents: pkgs,
       file: match[2]
     };
@@ -79,7 +80,10 @@ class ModuleProcessor {
   makeModulesByPackage() {
     const byPkg = this.modulesByPackage = {};
     this.totalSize = 0;
-    Object.keys(this.modulesByName).forEach((name) => {
+//strange work around to shift off 'multi main' from the array
+    const minusMultiMain = Object.keys(this.modulesByName)
+    minusMultiMain.shift();
+    minusMultiMain.forEach((name) => {
       const split = this._splitPathName(name);
       const pkg = byPkg[split.name] || (byPkg[split.name] = {size: 0});
       const getVersion = (parents) => {

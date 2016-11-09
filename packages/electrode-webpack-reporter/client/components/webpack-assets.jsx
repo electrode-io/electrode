@@ -1,9 +1,15 @@
 import React, {PropTypes} from "react";
 import formatSize from "../../lib/format-size.js";
 import {Card, CardHeader, CardText} from "material-ui/Card";
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
-import classNames from 'classnames';
-import styles from '../styles/base.css'
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn
+} from "material-ui/Table";
+import styles from "../styles/base.css";
 
 const assetRow = (asset) => (
   <TableRow>
@@ -19,8 +25,8 @@ const WebpackAssets = (props) => (
   <Card initiallyExpanded={true}>
     <CardHeader showExpandableButton={true} actAsExpander={true} subtitle="Webpack Assets"/>
       <CardText expandable={true}>
-        <div className={styles.content}>                
-          <Table style={{margin: '0 auto'}}>
+        <div className={styles.content}>
+          <Table style={{margin: "0 auto"}}>
            <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>
               <TableHeaderColumn>Asset</TableHeaderColumn>
