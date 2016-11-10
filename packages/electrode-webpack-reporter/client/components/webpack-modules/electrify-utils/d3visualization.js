@@ -18,15 +18,15 @@ export default function (d3Data) { //eslint disbable line max-statements
     radius = Math.min(width, height) * 0.45,
     deg = 120;
 
-  const svg = d3.select(domElements.svg).append("div")
-    .classed("svgContainer", true)
+  const svg = d3.select(domElements.svg)
     .append("svg")
-    .attr("preserveAspectRatio", "xMinYMin meet") //responsive SVG needs these 2 attr and no width or hight attr
-    .attr("viewBox", "0 0 660 380")
-    .style("overflow", "visible")
+    //responsive SVG needs these 2 attr and no width or hight attr
+    .attr("preserveAspectRatio", "xMinYMin meet") 
+    .attr("viewBox", `0 0 ${width} ${height}`)
+    .style("overflow", "visible")  
     .append("g")
-    .attr("transform", `translate(${width / 3.6},${height * .3})`);
-
+    .attr("transform", `translate(${width/ 2},${height/2})`);
+    
   const partition = d3.layout.partition()
     .sort(null)
     .size([2 * Math.PI, radius * radius])
