@@ -5,7 +5,6 @@ import { Router, browserHistory } from "react-router";
 import { createStore, compose } from "redux";
 import { Provider } from "react-redux";
 import "styles/base.css";
-import "./manifest.json";
 import rootReducer from "./reducers";
 
 import DevTools from "../client/devtools";

@@ -1,0 +1,11 @@
+{
+  "marked": {},
+  "chunks": {
+    "main": [
+      "./js/bundle.072d87fca71227958135.js",
+      "style.072d87fca71227958135.css",
+      "../map/./js/bundle.072d87fca71227958135.js.map",
+      "../map/style.072d87fca71227958135.css.map"
+    ]
+  }
+}
