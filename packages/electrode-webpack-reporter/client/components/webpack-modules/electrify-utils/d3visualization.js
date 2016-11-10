@@ -13,8 +13,10 @@ const modeFns = {
 export default function (d3Data) { //eslint disbable line max-statements
   const domElements = d3Data.refs, //eslint disable-line one-var
     root = d3Data.root,
-    width = window.innerWidth * 0.8,
-    height = Math.max(window.innerHeight - 100, 100) * 0.8,
+    // width = window.innerWidth * 0.8,
+    // height = Math.max(window.innerHeight - 100, 100) * 0.8,
+    width = 850,
+    height = 500,
     radius = Math.min(width, height) * 0.45,
     deg = 120;
 
@@ -265,7 +267,6 @@ const groups = svg.datum(root).selectAll("g")
   }
 
   createModes(updateMode, domElements);
-
   updateMode(modeInitial, false);
 
   function updateMode(mode, update) {
