@@ -43,7 +43,7 @@ class ModuleProcessor {
 
     return mbn;
   }
-
+  
  _splitPathName(name) {
     // name could be ./~/name1/~/name2/lib/index.js or ./client/app.jsx
     const pkgs = name.indexOf(tildaSep) < 0 ? // not a NPM module
@@ -65,7 +65,6 @@ class ModuleProcessor {
       };
     }
   }
-
   /**
    *
    * {
