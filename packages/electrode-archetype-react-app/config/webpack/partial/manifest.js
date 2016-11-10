@@ -5,6 +5,7 @@ var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
 var fileLoader = archetype.devRequire.resolve("file-loader");
 var webAppManifestLoader = require.resolve("web-app-manifest-loader");
 var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+var FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 
 var runtimeCachePath = path.resolve(process.cwd(), 'client/pwa-runtime-cache.json');
@@ -49,7 +50,21 @@ module.exports = function () {
         ]
       },
       plugins: [
-        new SWPrecacheWebpackPlugin(precacheConfig)
+        new SWPrecacheWebpackPlugin(precacheConfig),
+        new FaviconsWebpackPlugin({
+          logo: './images/electrode.png',
+          emitStats: true,
+          inject: false,
+          background: '#FFFFFF',
+          title: 'Electrode',
+          statsFilename: '../server/iconstats.json',
+          icons: {
+            android: true,
+            appleIcon: true,
+            appleStartup: true,
+            favicons: true
+          }
+        })
       ]
     });
   };

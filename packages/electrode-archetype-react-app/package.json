@@ -37,6 +37,7 @@
     "eslint-config-defaults": "^7.0.1",
     "eslint-plugin-filenames": "^0.1.2",
     "eslint-plugin-react": "^3.16.1",
+    "favicons-webpack-plugin": "0.0.7",
     "sw-precache-webpack-plugin": "^0.5.1",
     "web-app-manifest-loader": "^0.1.1"
   },
