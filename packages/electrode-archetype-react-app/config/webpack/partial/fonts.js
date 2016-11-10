@@ -18,7 +18,7 @@ module.exports = function () {
           },
           {
             name: "fonts",
-            test: /\.(eot|ttf|svg)(\?\S*)?$/i,
+            test: /\.(eot|ttf)(\?\S*)?$/i,
             loader: fileLoader + "!isomorphic"
           }
         ]
