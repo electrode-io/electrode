@@ -1,7 +1,7 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
 
-import styles from "../styles/<%= projectName %>.css";
+import styles from "../../src/styles/<%= projectName %>.css";
 import messages from "../lang/default-messages";
 
 export default class <%= componentName %> extends React.Component {
