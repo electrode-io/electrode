@@ -29,17 +29,17 @@
     "babel-preset-react": "^6.3.13",
     "babel-register": "^6.14.0",
     "css-modules-require-hook": "^4.0.2",
-    "isomorphic-loader": "^1.0.0"
+    "isomorphic-loader": "^1.0.0",
+    "favicons-webpack-plugin": "0.0.7",
+    "sw-precache-webpack-plugin": "^0.5.1",
+    "web-app-manifest-loader": "^0.1.1"
   },
   "devDependencies": {
     "babel-eslint": "^5.0.0",
     "eslint": "^1.10.3",
     "eslint-config-defaults": "^7.0.1",
     "eslint-plugin-filenames": "^0.1.2",
-    "eslint-plugin-react": "^3.16.1",
-    "favicons-webpack-plugin": "0.0.7",
-    "sw-precache-webpack-plugin": "^0.5.1",
-    "web-app-manifest-loader": "^0.1.1"
+    "eslint-plugin-react": "^3.16.1"
   },
   "engines": {
     "node": "^4.4.6 || ^6.2.1",
