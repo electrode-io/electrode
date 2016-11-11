@@ -26,6 +26,11 @@ function getSWConfig() {
 module.exports = function () {
   return function (config) {
     var swConfig = getSWConfig();
+
+    if (!swConfig.manifest) {
+      return mergeWebpackConfig(config, {});
+    }
+
     var manifestConfig = assign({
       background: "#FFFFFF",
       logo: "./images/electrode.png",
