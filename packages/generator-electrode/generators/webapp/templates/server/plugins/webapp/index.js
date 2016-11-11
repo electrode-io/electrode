@@ -141,7 +141,7 @@ const registerRoutes = (server, options, next) => {
     serverSideRendering: true,
     devServer: {
       host: "127.0.0.1",
-      port: "2992"
+      port: process.env.WEBPACK_DEV_PORT || "2992"
     },
     paths: {},
     stats: "dist/server/stats.json"
