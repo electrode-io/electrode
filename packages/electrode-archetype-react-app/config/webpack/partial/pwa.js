@@ -26,6 +26,11 @@ module.exports = function () {
   return function (config) {
     var runtimeCacheJSON = getRuntimeCacheJSON();
     var precacheConfig = {
+      staticFileGlobs: [
+        'dist/js/*.{js,css,png,jpg,svg}',
+        'dist/js/icons**/*.png'
+      ],
+      stripPrefix: 'dist',
       cacheId: 'electrode',
       filepath: 'dist/sw.js',
       maximumFileSizeToCacheInBytes: 4194304
@@ -50,7 +55,6 @@ module.exports = function () {
         ]
       },
       plugins: [
-        new SWPrecacheWebpackPlugin(precacheConfig),
         new FaviconsWebpackPlugin({
           logo: './images/electrode.png',
           emitStats: true,
@@ -64,7 +68,8 @@ module.exports = function () {
             appleStartup: true,
             favicons: true
           }
-        })
+        }),
+        new SWPrecacheWebpackPlugin(precacheConfig)
       ]
     });
   };
