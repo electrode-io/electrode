@@ -12,10 +12,10 @@ var FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 var swConfigPath = path.resolve(process.cwd(), "config/sw-config.js");
 
 function getSWConfig() {
-  var swConfig = {};
+  var swConfig;
 
   try {
-    swConfig = require(runtimeCachePath);
+    swConfig = require(swConfigPath);
   } catch(err) {
     swConfig = {};
   }
@@ -26,7 +26,7 @@ function getSWConfig() {
 module.exports = function () {
   return function (config) {
     var swConfig = getSWConfig();
-    var manfiestConfig = assign({
+    var manifestConfig = assign({
       background: "#FFFFFF",
       logo: "./images/electrode.png",
       title: "Electrode",
@@ -43,6 +43,9 @@ module.exports = function () {
       filepath: "dist/sw.js",
       maximumFileSizeToCacheInBytes: 4194304
     };
+
+    console.log(swConfigPath);
+    console.log(swConfig);
 
     if (cacheConfig.runtimeCaching) {
       precacheConfig.runtimeCaching = cacheConfig.runtimeCaching.map(function(runtimeCache) {
@@ -68,7 +71,7 @@ module.exports = function () {
           emitStats: true,
           inject: false,
           background: manifestConfig.background,
-          title: manfiestConfig.title,
+          title: manifestConfig.title,
           statsFilename: manifestConfig.statsFilename,
           icons: {
             android: true,
