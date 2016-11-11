@@ -44,9 +44,6 @@ module.exports = function () {
       maximumFileSizeToCacheInBytes: 4194304
     };
 
-    console.log(swConfigPath);
-    console.log(swConfig);
-
     if (cacheConfig.runtimeCaching) {
       precacheConfig.runtimeCaching = cacheConfig.runtimeCaching.map(function(runtimeCache) {
         return {
