@@ -11,7 +11,7 @@ module.exports = function () {
       module: {
         loaders: [{
           name: "images",
-          test: /\.(jpe?g|png|gif|svg)$/i,
+          test: /\.(jpe?g|png|gif|svg)(\?\S*)?$/i,
           loader: fileLoader + "?limit=10000!" + isomorphicLoader
         }]
       }

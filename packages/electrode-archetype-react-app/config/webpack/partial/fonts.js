@@ -13,12 +13,12 @@ module.exports = function () {
         loaders: [
           {
             name: "woff",
-            test: /\.woff(2)?$/i,
+            test: /\.(woff|woff2)(\?\S*)?$/i,
             loader: urlLoader + "?limit=10000&mimetype=application/font-woff!isomorphic"
           },
           {
             name: "fonts",
-            test: /\.(ttf|eot)$/i,
+            test: /\.(eot|ttf)(\?\S*)?$/i,
             loader: fileLoader + "!isomorphic"
           }
         ]
