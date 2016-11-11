@@ -9,7 +9,7 @@ var SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin");
 var FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 
 
-var swConfigPath = path.resolve(process.cwd(), "config/sw-config.json");
+var swConfigPath = path.resolve(process.cwd(), "config/sw-config.js");
 
 function getSWConfig() {
   var swConfig = {};
