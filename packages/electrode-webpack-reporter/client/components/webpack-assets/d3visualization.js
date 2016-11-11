@@ -1,10 +1,9 @@
 import d3 from 'd3';
-import parseAssetsData from './assets-utils';
 import formatSize from "../../../lib/format-size";
 import createDataViews from './data-view';
 import max from 'lodash/max'
-export default function({refs, data}) {
 
+export default function({refs, data}) {
    		const width = 850
 	    const height = 500
 	    const barHeight = 40
