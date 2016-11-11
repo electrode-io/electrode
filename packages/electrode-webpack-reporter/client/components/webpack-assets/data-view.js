@@ -12,11 +12,8 @@ export default (updateView, refs) => {
     .style('display', 'inline')
     .style('margin-right', '25px')
     .append("text")
-    .text((d) => d)
-    .on("click", (d) => {
-        console.log(d, ' clicked')
-        updateView(d, true)
-    })
+    .text((d) => `${d} view`)
+    .on("click", (d) => updateView(d, true))
     .on("mouseover", (d) => {
       d3.select(`[ref=${d}]`)
         .style("left", "0px")
