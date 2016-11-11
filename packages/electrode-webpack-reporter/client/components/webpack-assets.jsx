@@ -10,33 +10,18 @@ import {
   TableRowColumn
 } from "material-ui/Table";
 import styles from "../styles/base.css";
-import createD3Visualization from './webpack-assets/d3visualization'
+import AssetsVisualization from './webpack-assets/assets-visualization';
 
-export default class WebpackAssets extends React.Component {
-  componentDidMount(){
-    console.log('webpack assests props: ', this.props.assets)
-    createD3Visualization({
-      refs: this.refs,
-      data: this.props.assets
-    })
-  }
-  render() {
-    return (
+const WebpackAssets = (props) => (
       <Card initiallyExpanded={true}>
         <CardHeader showExpandableButton={true} actAsExpander={true} subtitle="Webpack Assets"/>
           <CardText expandable={true}>
-            
-              <div>
-                <ul ref='dataView' ></ul>
-              </div>
-              <div ref='assets'/>
-            
+            <AssetsVisualization assets={props.assets} /> {/*this extra component is needed because expanding an mui card triggers a component re-mount*/}
           </CardText>
       </Card>
     )
-  }
-}
-
 WebpackAssets.propTypes = {
   assets: PropTypes.array
 };
+
+export default WebpackAssets
