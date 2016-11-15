@@ -51,11 +51,19 @@ class ModuleProcessor {
     const n = pkgs.pop();
     const match = n.match(n.startsWith("@") ? atModRegex : modRegex);
 
-    return {
-      name: match[1],
-      parents: pkgs,
-      file: match[2]
-    };
+    if (match) {
+      return {
+        name: match[1],
+        parents: pkgs,
+        file: match[2]
+      };
+    } else {
+      return {
+        name,
+        parents: pkgs,
+        file: ""
+      };
+    }
   }
 
   /**
