@@ -1,6 +1,6 @@
 import React, {PropTypes} from "react";
 import {bundle} from "./electrify-utils/parsing-utils";
-import createD3Visualization from "./electrify-utils/d3Visualization";
+import createD3Visualization from "./electrify-utils/d3visualization";
 import styles from "./electrify-utils/style/electrify.css";
 
 export default class D3ElectrifyChart extends React.Component {
