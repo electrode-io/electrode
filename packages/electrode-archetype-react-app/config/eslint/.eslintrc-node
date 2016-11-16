@@ -1,7 +1,12 @@
 ---
 extends:
-  - "eslint-config-defaults/configurations/walmart/es6-node"
+  - "walmart/configurations/es6-node"
+parserOptions:
+  # this is not in the Walmart default configuration, for fairly good reason:
+  # V8 (and thus Node) does not support ES6 import syntax. Server-side code
+  # is transpiled, but this is not reflected in tests.
+  sourceType: "module"
 rules:
-  "strict": [0, "global"]
-  "no-process-exit": [0]
-  "func-style": [0]
+  "strict": ["off", "global"]
+  "no-process-exit": ["off"]
+  "func-style": ["off"]

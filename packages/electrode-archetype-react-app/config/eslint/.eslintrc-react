@@ -1,11 +1,14 @@
 ---
 extends:
-  - "eslint-config-defaults/configurations/walmart/es6-react"
+  - "walmart/configurations/es6-react"
 globals:
   window: false
   document: false
   ReactElement: false
 rules:
-  "react/jsx-boolean-value": 0
-  "react/jsx-closing-bracket-location": 0
-  "react/no-string-refs": 0 
+  "react/jsx-boolean-value": "off"
+  "react/jsx-closing-bracket-location": "off"
+  "react/no-string-refs": "off" 
+  # disable invalid rules from walmart default configs:
+  "react/wrap-multilines": "off"
+  "react/jsx-wrap-multilines": "error"
