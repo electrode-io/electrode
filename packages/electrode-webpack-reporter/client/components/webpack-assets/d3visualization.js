@@ -4,7 +4,6 @@ import {map, each} from "lodash";
 
 export default function ({refs, data}) { //eslint-disable-line func-style, max-statements
   const width = 850;
-  const height = 500;
   const barHeight = 70;
   data = data.sort((x, y) => d3.ascending(y.size, x.size));
   const maxAssetFileSize = d3.max(map(data, (d) => d.size));
@@ -47,14 +46,14 @@ export default function ({refs, data}) { //eslint-disable-line func-style, max-s
 
   bars
     .on("mouseover", function () { //do not use arrow fn
-      d3.select(this)
+      d3.select(this) //eslint-disable-line no-invalid-this
         .transition()
         .ease("back-out", 5)
         .duration(500)
         .attr("height", barHeight * 0.8);
     })
     .on("mouseleave", function () { //do not use arrow fn
-      d3.select(this)
+      d3.select(this) //eslint-disable-line no-invalid-this
         .transition()
         .ease("back-out", 5)
         .duration(500)
@@ -68,10 +67,10 @@ export default function ({refs, data}) { //eslint-disable-line func-style, max-s
     .text((d) => formatSize(d.size))
     .style("font-size", "2.6em")
     .style("fill", "white")
-    .on("mouseover", function (d, i) { //do not use arrow fn
+    .on("mouseover", function (d, i) { // eslint-disable-line prefer-arrow-callback
       bars.each(function (e, j) {
         if (j === i) {
-          d3.select(this)
+          d3.select(this) //eslint-disable-line no-invalid-this
             .transition()
             .ease("back-out", 5)
             .duration(500)
@@ -79,10 +78,10 @@ export default function ({refs, data}) { //eslint-disable-line func-style, max-s
         }
       });
     })
-    .on("mouseleave", function (d, i) { //do not use arrow fn
+    .on("mouseleave", function (d, i) { // eslint-disable-line prefer-arrow-callback
       bars.each(function (e, j) {
         if (j === i) {
-          d3.select(this)
+          d3.select(this) //eslint-disable-line no-invalid-this
             .transition()
             .ease("back-out", 5)
             .duration(500)

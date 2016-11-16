@@ -10,13 +10,13 @@ const modeFns = {
   size: (d) => d.size
 };
 
-export default function (d3Data) { //eslint-disbable-line func-style, max-statements
-  const domElements = d3Data.refs,
-    root = d3Data.root,
-    width = 850,
-    height = 500,
-    radius = Math.min(width, height) * 0.45,
-    deg = 120;
+export default function (d3Data) { //eslint-disable-line func-style, max-statements
+  const domElements = d3Data.refs;
+  const root = d3Data.root;
+  const width = 850;
+  const height = 500;
+  const radius = Math.min(width, height) * 0.45;
+  const deg = 120;
 
   const svg = d3.select(domElements.svg)
     .append("svg")
@@ -99,7 +99,7 @@ export default function (d3Data) { //eslint-disbable-line func-style, max-statem
     .each(function (d) {
       d.x0 = d.x;
       d.dx0 = d.dx;
-      d.el = this;
+      d.el = this; //eslint-disable-line no-invalid-this
     });
 
   let found = [];
@@ -117,7 +117,7 @@ export default function (d3Data) { //eslint-disbable-line func-style, max-statem
   _select(root, () => true);
 
   d3.select(domElements.search).on("keyup", function () {
-    const text = this.value.replace(/^\s+/, "").replace(/\s+$/, "");
+    const text = this.value.replace(/^\s+/, "").replace(/\s+$/, ""); //eslint-disable-line no-invalid-this, max-len
     if (text.length > 0) {
       found = [];
       const re = new RegExp(text, "i");
@@ -151,11 +151,11 @@ export default function (d3Data) { //eslint-disbable-line func-style, max-statem
   // Triggered immediately with the default
   // scheme, must be passed a d3 selection.
   //
-  let scheme = 0,
-    specials,
-    color;
+  const scheme = 0;
+  let specials;
+  let color;
 
-  function useScheme(n) {
+  function useScheme(n) { //eslint-disable-line func-style
     specials = schemes[n].specials;
 
     const colors = schemes[n].main;
@@ -219,15 +219,15 @@ export default function (d3Data) { //eslint-disbable-line func-style, max-statem
       }
     });
 
-  function highlight(d) {
+  function highlight(d) { //eslint-disable-line func-style
     if (d) {
       d3.select(d.el)
         .transition()
-        .delay((d) => (d.depth - 1) * 300 / maxdepth)
+        .delay((d) => (d.depth - 1) * 300 / maxdepth) //eslint-disable-line no-shadow
         .ease("back-out", 10)
         .duration(500)
         .attrTween("d", highlight.tween)
-        .style("fill", (d) => d.c);
+        .style("fill", (d) => d.c); //eslint-disable-line no-shadow
     }
     if (d.children) {
       let i = d.children.length;
@@ -236,15 +236,15 @@ export default function (d3Data) { //eslint-disbable-line func-style, max-statem
   }
   highlight.tween = hoverTween(1);
 
-  function unhighlight (d) {
+  function unhighlight(d) { //eslint-disable-line func-style
     if (d.el) {
       d3.select(d.el)
         .transition()
-        .delay(d => (d.depth - 1) * 300 / maxdepth)
+        .delay((d) => (d.depth - 1) * 300 / maxdepth) //eslint-disable-line no-shadow
         .ease("back-out", 4)
         .duration(500)
         .attrTween("d", unhighlight.tween)
-        .style("fill", d => d.c);
+        .style("fill", (d) => d.c); //eslint-disable-line no-shadow
     }
     if (d.children) {
       let i = d.children.length;

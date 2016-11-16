@@ -1,3 +1,4 @@
+/*eslint-disable react/prop-types*/
 import React, {PropTypes} from "react";
 import {Card, CardHeader, CardText} from "material-ui/Card";
 
