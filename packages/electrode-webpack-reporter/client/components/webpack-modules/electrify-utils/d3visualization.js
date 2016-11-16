@@ -10,11 +10,9 @@ const modeFns = {
   size: (d) => d.size
 };
 
-export default function (d3Data) { //eslint disbable line max-statements
-  const domElements = d3Data.refs, //eslint disable-line one-var
+export default function (d3Data) { //eslint-disbable-line func-style, max-statements
+  const domElements = d3Data.refs,
     root = d3Data.root,
-    // width = window.innerWidth * 0.8,
-    // height = Math.max(window.innerHeight - 100, 100) * 0.8,
     width = 850,
     height = 500,
     radius = Math.min(width, height) * 0.45,
@@ -23,12 +21,12 @@ export default function (d3Data) { //eslint disbable line max-statements
   const svg = d3.select(domElements.svg)
     .append("svg")
     //responsive SVG needs these 2 attr and no width or hight attr
-    .attr("preserveAspectRatio", "xMinYMin meet") 
+    .attr("preserveAspectRatio", "xMinYMin meet")
     .attr("viewBox", `0 0 ${width} ${height}`)
-    .style("overflow", "visible")  
+    .style("overflow", "visible")
     .append("g")
-    .attr("transform", `translate(${width/ 2},${height/2})`);
-    
+    .attr("transform", `translate(${width / 2},${height / 2})`);
+
   const partition = d3.layout.partition()
     .sort(null)
     .size([2 * Math.PI, radius * radius])
@@ -52,7 +50,7 @@ export default function (d3Data) { //eslint disbable line max-statements
   // Likewise, this is the file
   // percentage size stat below the title
   //
-  let percentageSize = svg.append("text")
+  const percentageSize = svg.append("text")
     .text(pretty(root.value || root.size))
     .attr("x", 0)
     .attr("y", 20)
@@ -60,7 +58,7 @@ export default function (d3Data) { //eslint disbable line max-statements
     .style("font-size", "16px")
     .style("font-weight", 300)
     .style("alignment-baseline", "middle")
-    .style("text-anchor", "middle")
+    .style("text-anchor", "middle");
 
   //
   // Likewise, this is the file
@@ -80,7 +78,7 @@ export default function (d3Data) { //eslint disbable line max-statements
   // to apply rotation transforms while
   // changing size and shape.
   //
-const groups = svg.datum(root).selectAll("g")
+  const groups = svg.datum(root).selectAll("g")
     .data(partition.nodes)
     .enter()
     .append("g")
@@ -101,24 +99,24 @@ const groups = svg.datum(root).selectAll("g")
     .each(function (d) {
       d.x0 = d.x;
       d.dx0 = d.dx;
-      d.el = this
-    })
+      d.el = this;
+    });
 
   let found = [];
-  let _select = (node, selector) => {
+  const _select = (node, selector) => {
     node.enabled = selector(node);
     if (node.enabled) {
       found.push(node);
     }
     if (node.children) {
-      for (let c of node.children) {
+      for (const c of node.children) {
         _select(c, selector);
       }
     }
-  }
+  };
   _select(root, () => true);
 
-  d3.select(domElements.search).on("keyup", function() {
+  d3.select(domElements.search).on("keyup", function () {
     const text = this.value.replace(/^\s+/, "").replace(/\s+$/, "");
     if (text.length > 0) {
       found = [];
@@ -130,7 +128,7 @@ const groups = svg.datum(root).selectAll("g")
       } else {
         title.text("Multiple found");
         let completeSize = 0;
-        for (let n of found) {
+        for (const n of found) {
           completeSize += n.size;
         }
         size.text(`${pretty(completeSize)} total`);
@@ -153,18 +151,18 @@ const groups = svg.datum(root).selectAll("g")
   // Triggered immediately with the default
   // scheme, must be passed a d3 selection.
   //
-  let background,
-  scheme = 0,
-  specials,
-  color;
+  let scheme = 0,
+    specials,
+    color;
 
-   function useScheme(n) {
+  function useScheme(n) {
     specials = schemes[n].specials;
 
     const colors = schemes[n].main;
+
     Object.keys(specials).forEach((key) => {
-      const idx = colors.indexOf(specials[key].toLowerCase())
-      if (idx === -1) { return };
+      const idx = colors.indexOf(specials[key].toLowerCase());
+      if (idx === -1) { return; }
       colors.splice(idx, 1);
     });
 
@@ -179,13 +177,14 @@ const groups = svg.datum(root).selectAll("g")
 
     _path.style("fill", (d) => {
       const name = d.children ? d.name : d.parent.name;
-      d.c = schemes[n].modifier.call(d
-        , specials[name] || color(name)
-        , root
+      d.c = schemes[n].modifier.call(d,
+        specials[name] || color(name),
+        root
       );
       return d.c;
     });
   }
+
   useScheme(scheme);
 
   let ptrans = 0;
@@ -220,63 +219,65 @@ const groups = svg.datum(root).selectAll("g")
       }
     });
 
+  function highlight(d) {
+    if (d) {
+      d3.select(d.el)
+        .transition()
+        .delay((d) => (d.depth - 1) * 300 / maxdepth)
+        .ease("back-out", 10)
+        .duration(500)
+        .attrTween("d", highlight.tween)
+        .style("fill", (d) => d.c);
+    }
+    if (d.children) {
+      let i = d.children.length;
+      while (i--) { highlight(d.children[i]); }
+    }
+  }
+  highlight.tween = hoverTween(1);
+
+  function unhighlight (d) {
+    if (d.el) {
+      d3.select(d.el)
+        .transition()
+        .delay(d => (d.depth - 1) * 300 / maxdepth)
+        .ease("back-out", 4)
+        .duration(500)
+        .attrTween("d", unhighlight.tween)
+        .style("fill", d => d.c);
+    }
+    if (d.children) {
+      let i = d.children.length;
+      while (i--) { unhighlight(d.children[i]); }
+    }
+  }
+  unhighlight.tween = hoverTween(0);
+
   groups.on("mouseover", (d) => {
     highlight(d);
     title.text(d.name);
-
-    let sizeInPercentage = (d.value/root.value*100).toFixed(2);
-    percentageSize.text(`${sizeInPercentage}%`)
-
-    size.text("(" + pretty(d.value || d.size) + ")");
-  }).on("mouseout", (d) => {
+    const sizeInPercentage = (d.value / root.value * 100).toFixed(2);
+    percentageSize.text(`${sizeInPercentage}%`);
+    size.text(`(${pretty(d.value || d.size)})`);
+  })
+  .on("mouseout", (d) => {
     unhighlight(d);
     title.text(root.name);
     size.text(pretty(root.value || root.size));
   });
 
-  highlight.tween = hoverTween(1);
-  function highlight(d){
-    if (d.el) d3.select(d.el)
+
+  const updateMode = function (mode, update) {
+    highlightMode(mode);
+    if (!update) { return; }
+    groups
+      .data(partition.value(modeFns[mode]).nodes)
+      .select("path")
       .transition()
-      .delay(d => (d.depth - 1) * 300 / maxdepth)
-      .ease('back-out', 10)
-      .duration(500)
-      .attrTween('d', highlight.tween)
-      .style('fill', d => d.c)
-
-    if (d.children) {
-      let i = d.children.length;
-      while (i--){ highlight(d.children[i]) };
-    }
-  }
-
-  unhighlight.tween = hoverTween(0)
-  function unhighlight(d) {
-    if (d.el) d3.select(d.el)
-      .transition()
-      .delay(d => (d.depth - 1) * 300 / maxdepth)
-      .ease('back-out', 4)
-      .duration(500)
-      .attrTween('d', unhighlight.tween)
-      .style('fill', d => d.c);
-
-    if (d.children) {
-      let i = d.children.length
-      while (i--){ unhighlight(d.children[i]) }
-    }
-  }
+      .duration(1500)
+      .attrTween("d", arcTween);
+  };
 
   createModes(updateMode, domElements);
   updateMode(modeInitial, false);
-
-  function updateMode(mode, update) {
-    highlightMode(mode);
-    if (!update){ return };
-    groups
-      .data(partition.value(modeFns[mode]).nodes)
-      .select('path')
-      .transition()
-      .duration(1500)
-      .attrTween('d', arcTween);
-  };
 }

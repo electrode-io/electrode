@@ -30,7 +30,6 @@ module.exports = function jsonTree(json) {
           name: folder,
           children: []
         };
-
         parentTree.children.push(childFolder);
       }
 
@@ -42,54 +41,48 @@ module.exports = function jsonTree(json) {
   };
 
   const dirsizes = function (child) {
-    return child.size = "size" in child
+    return child.size = "size" in child //eslint-disable-line no-return-assign
       ? child.size
-      : child.children.reduce((size, child) => {
+      : child.children.reduce((size, child) => { //eslint-disable-line no-shadow
         return size + ("size" in child ? child.size : dirsizes(child));
       }, 0);
   };
 
   modules.forEach(
-    function addToTree(module) {
-    let size;
+    function addToTree(module) { //eslint-disable-line prefer-arrow-callback
+      let size;
 
-    if (module.source) {
-      size = module.source.length;
-    } else {
-      size = module.size;
-    }
+      if (module.source) {
+        size = module.source.length;
+      } else {
+        size = module.size;
+      }
 
-    rootSize += size;
+      rootSize += size;
 
-    const mod = {
-      id: module.id,
-      fullName: module.name,
-      size,
-      reasons: module.reasons
-    };
+      const mod = {
+        id: module.id,
+        fullName: module.name,
+        size,
+        reasons: module.reasons
+      };
 
-    const depth = mod.fullName.split("/").length - 1;
-    if (depth > maxDepth) {
-      maxDepth = depth;
-    }
+      const depth = mod.fullName.split("/").length - 1;
+      if (depth > maxDepth) {
+        maxDepth = depth;
+      }
 
-    let fileName = mod.fullName;
+      let fileName = mod.fullName;
 
-    const beginning = mod.fullName.slice(0, 2);
-    if (beginning === "./") {
-      fileName = fileName.slice(2);
-    }
+      const beginning = mod.fullName.slice(0, 2);
+      if (beginning === "./") {
+        fileName = fileName.slice(2);
+      }
 
-    getFile(mod, fileName, root);
-  });
+      getFile(mod, fileName, root);
+    });
 
   root.maxDepth = maxDepth;
   root.size = rootSize;
-
   return root;
 };
-
-
-
-
-

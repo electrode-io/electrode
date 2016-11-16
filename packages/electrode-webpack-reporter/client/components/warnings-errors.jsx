@@ -20,8 +20,9 @@ const WarningsErrors = (props) => {
           <h1>No warnings or errors</h1>
         </CardText>
     </Card>
-  )
-  return props.errors.length > 0 || props.warnings.length > 0 ? createWarningsErrorsCard() : createEmptyWarningsErrorsCard();
+  );
+  return props.errors.length > 0 || props.warnings.length > 0 ?
+    createWarningsErrorsCard() : createEmptyWarningsErrorsCard();
 };
 
 WarningsErrors.propTypes = {

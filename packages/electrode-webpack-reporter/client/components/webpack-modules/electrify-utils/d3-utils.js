@@ -68,6 +68,6 @@ export const hoverTween = (z) => {
 //
 export const rotateTween = (deg) => {
   return () => {
-    return (t) => `rotate(${(1-t)*deg})`;
+    return (t) => `rotate(${(1 - t) * deg})`;
   };
 };

@@ -51,13 +51,13 @@ export default (updateMode, domElements) => {
     .attr({ width: 48, height: 48 })
     .append("g")
     .each(function (type) {
-      d3.select(this)
+      d3.select(this) //eslint-disable-line no-invalid-this
         .attr("transform", "translate(8, 8)")
         .selectAll("circle")
         .data(d3.range(0, 16))
         .enter()
         .append("circle").attr("fill", "#fff")
-        .attr("r", (d, i) => type !== "size" ? 3 : (i === 0 || i === 6) ? 6 : 3)
+        .attr("r", (d, i) => type !== "size" ? 3 : (i === 0 || i === 6) ? 6 : 3) //eslint-disable-line no-nested-ternary, max-len
         .attr("transform", (d) => `translate(${[(d % 4) * 10, Math.floor(d / 4) * 10]})`);
     });
 };

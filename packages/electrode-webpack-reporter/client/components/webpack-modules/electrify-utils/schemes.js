@@ -7,7 +7,7 @@ const original = {
   name: "Original",
   background: "#6A4A3C",
   specials: {
-    node_modules: "#FF8553"
+    node_modules: "#FF8553" //eslint-disable-line camelcase
   },
   main: [
     "#00A0B0",
@@ -28,7 +28,7 @@ const highlights = {
   name: "Structure Highlights",
   background: "#1A1C1E",
   specials: {
-    node_modules: "#E1F200",
+    node_modules: "#E1F200", //eslint-disable-line camelcase
     lib: "#FF9D3C"
   },
   main: [
@@ -70,7 +70,7 @@ const types = {
   background: "#160F1F",
   specials: {},
   main: typeScale.range(),
-  modifier: (color, root) => typeScale(extname(this.name))
+  modifier: () => typeScale(extname(this.name)) //eslint-disable-line no-invalid-this
 };
 
 schemes.push(
@@ -79,7 +79,6 @@ schemes.push(
   pastel,
   types
 );
-
 
 const identity = (a) => a;
 module.exports = schemes.map((d) => {
