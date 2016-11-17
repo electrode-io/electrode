@@ -145,28 +145,19 @@ export default function (d3Data) { //eslint-disable-line func-style, max-stateme
       });
   });
 
-  //
-  // Colour scheme functionality.
-  //
-  // Triggered immediately with the default
-  // scheme, must be passed a d3 selection.
-  //
-  const scheme = 0;
-  let specials;
-  let color;
+  // create color scheme
+  function useScheme() { //eslint-disable-line func-style
+    const specials = schemes.specials;
+    const colors = schemes.main;
 
-  function useScheme(n) { //eslint-disable-line func-style
-    specials = schemes[n].specials;
+    Object.keys(specials)
+      .forEach((k) => {
+        const idx = colors.indexOf(specials[k].toLowerCase()); //
+        if (idx === -1) { return; }
+        colors.splice(idx, 1);
+      });
 
-    const colors = schemes[n].main;
-
-    Object.keys(specials).forEach((key) => {
-      const idx = colors.indexOf(specials[key].toLowerCase());
-      if (idx === -1) { return; }
-      colors.splice(idx, 1);
-    });
-
-    color = d3.scale
+    const color = d3.scale
       .ordinal()
       .range(colors);
 
@@ -177,15 +168,12 @@ export default function (d3Data) { //eslint-disable-line func-style, max-stateme
 
     _path.style("fill", (d) => {
       const name = d.children ? d.name : d.parent.name;
-      d.c = schemes[n].modifier.call(d,
-        specials[name] || color(name),
-        root
-      );
+      d.c = specials[name] || color(name);
       return d.c;
     });
   }
 
-  useScheme(scheme);
+  useScheme();
 
   let ptrans = 0;
   path.transition()
