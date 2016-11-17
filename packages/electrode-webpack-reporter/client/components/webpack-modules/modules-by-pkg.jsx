@@ -4,11 +4,11 @@ import formatSize from "../../../lib/format-size.js";
 
 /* eslint-disable max-statements, react/jsx-indent-props */
 
-const listPkg = (totalSize, pkg) => {
-  const nestModules = (modules) => Object.keys(modules).map((name) => {
+const listPkg = (totalSize, pkg, key) => {
+  const nestModules = (modules) => Object.keys(modules).map((name, i) => {
     const m = modules[name];
     const pt = `${name} [${formatSize(m.size)}]`;
-    return <ListItem primaryText={pt}/>;
+    return <ListItem key={i} primaryText={pt}/>;
   });
 
   const parentsStr = (parents) => parents.substr(1).split(":").join("/");
@@ -21,9 +21,10 @@ const listPkg = (totalSize, pkg) => {
   if (byParents.length > 1) {
     dups = <span> [{byParents.length} dups] </span>;
     size = byParents.reduce((acc, k) => acc + pkg[k].size, 0);
-    nestedItems = byParents.sort().map((p) => {
+    nestedItems = byParents.sort().map((p, i) => {
       const pt = p === "$" ? "at top level" : `under ${parentsStr(p)}`;
       return (<ListItem
+        key={i}
         primaryText={pt}
         primaryTogglesNestedList={true}
         nestedItems={nestModules(pkg[p].modules)}/>);
@@ -41,6 +42,7 @@ const listPkg = (totalSize, pkg) => {
     <span> [{pct.toFixed(2)}%]</span>
   </div>);
   return (<ListItem
+    key={key}
     primaryText={primaryText}
     primaryTogglesNestedList={true}
     nestedItems={nestedItems}/>);
@@ -48,8 +50,8 @@ const listPkg = (totalSize, pkg) => {
 
 const ModulesByPkg = (props) => {
   return (<List>
-    {Object.keys(props.modulesByPkg).sort().map((name) =>
-      listPkg(props.totalSize, props.modulesByPkg[name]))}
+    {Object.keys(props.modulesByPkg).sort().map((name, key) =>
+      listPkg(props.totalSize, props.modulesByPkg[name], key))}
   </List>);
 };
 
