@@ -33,6 +33,55 @@ function setOptimizeStats() {
 
 const exec = gulpHelper.exec;
 
+
+/*
+ *  There are multiple eslint config for different groups of code
+ *
+ *   - eslintrc-react for directories client and templates (React Code)
+ *   - eslintrc-react-test for test/client (React test code)
+ *   - eslintrc-node for server (NodeJS code)
+ *   - eslintrc-mocha-test for test/server and test/func (NodeJS test code)
+ *
+ *  If the directory contains a .eslintrc then it's used instead
+ *
+ */
+
+function lint(options) {
+  const ext = options.ext ? `--ext ${options.ext}` : "";
+
+  const checkCustom = (t) => {
+    const f =  [ "", ".json", ".yml" ].find((e) => {
+      const x = Path.resolve(Path.join(t, `.eslintrc${e}`));
+      return fs.existsSync(x);
+    });
+    return f !== undefined;
+  };
+
+  //
+  // group target directories into custom and archetype
+  // custom - .eslintrc file exist
+  // archetype - no .eslintrc, use config from archetype
+  //
+  const grouped = options.targets.reduce((a, t) => {
+    (checkCustom(t) ? a.custom : a.archetype).push(t);
+    return a;
+  }, {custom: [], archetype: []});
+
+  let promise;
+
+  if (grouped.custom.length > 0) {
+    const cmd = `eslint ${ext} ${grouped.custom.join(" ")}`;
+    promise = exec(cmd);
+  }
+
+  if (grouped.archetype.length > 0) {
+    const cmd = `eslint ${ext} --no-eslintrc -c ${options.config} ${grouped.archetype.join(" ")}`;
+    promise = promise ? promise.then(() => exec(cmd)) : exec(cmd);
+  }
+
+  return promise;
+}
+
 function checkFrontendCov(minimum) {
   if (typeof minimum === "string") {
     minimum += ".";
@@ -42,25 +91,10 @@ function checkFrontendCov(minimum) {
   return exec(`istanbul check-coverage 'coverage/client/*/coverage.json' --config=${config.istanbul}/.istanbul.${minimum}yml`);
 }
 
-function checkFileExists(path) {
-  /**
-   * fs.accessSync is a synchronous version of fs.access().
-   * fs.accessSync() throws if any accessibility checks fail, and does nothing otherwise.
-   *
-   * https://nodejs.org/api/fs.html#fs_fs_accesssync_path_mode
-   */
-  try {
-    fs.accessSync(path, fs.F_OK);
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
-
 function createElectrodeTmpDir() {
   const eTmp = Path.resolve(".etmp");
   const eTmpGitIgnore = Path.join(eTmp, ".gitignore");
-  if (!checkFileExists(eTmpGitIgnore)) {
+  if (!fs.existsSync(eTmpGitIgnore)) {
     mkdirp.sync(eTmp);
     fs.writeFileSync(eTmpGitIgnore, "# Electrode tmp dir\n*\n");
   }
@@ -72,8 +106,8 @@ function createElectrodeTmpDir() {
  */
 function generateServiceWorker() {
   const NODE_ENV = process.env.NODE_ENV;
-  const serviceWorkerExists = checkFileExists("./service-worker.js");
-  const serviceWorkerConfigExists = checkFileExists("config/sw-precache-config.json");
+  const serviceWorkerExists = fs.existsSync("./service-worker.js");
+  const serviceWorkerConfigExists = fs.existsSync("config/sw-precache-config.json");
 
   /**
    * Determines whether the fetch event handler is included in the generated service worker code,
@@ -186,10 +220,36 @@ const tasks = {
     task: () => generateServiceWorker()
   },
   "lint": [["lint-client", "lint-client-test", "lint-server", "lint-server-test"]],
-  "lint-client": `eslint --ext .js,.jsx -c ${config.eslint}/.eslintrc-react client templates`,
-  "lint-client-test": `eslint --ext .js,.jsx -c ${config.eslint}/.eslintrc-react-test test/client`,
-  "lint-server": `eslint -c ${config.eslint}/.eslintrc-node server`,
-  "lint-server-test": `eslint -c ${config.eslint}/.eslintrc-mocha-test test/server test/func`,
+  "lint-client": {
+    desc: "Run eslint on client code in directories client and templates",
+    task: () => lint({
+      ext: ".js,.jsx",
+      config: `${config.eslint}/.eslintrc-react`,
+      targets: ["client", "templates"]
+    })
+  },
+  "lint-client-test": {
+    desc: "Run eslint on client test code in directory test/client",
+    task: () => lint({
+      ext: ".js,.jsx",
+      config: `${config.eslint}/.eslintrc-react-test`,
+      targets: ["test/client"]
+    })
+  },
+  "lint-server": {
+    desc: "Run eslint on server code in directory server",
+    task: () => lint({
+      config: `${config.eslint}/.eslintrc-node`,
+      targets: ["server"]
+    })
+  },
+  "lint-server-test": {
+    desc: "Run eslint on server test code in directories test/server and test/func",
+    task: () => lint({
+      config: `${config.eslint}/.eslintrc-mocha-test`,
+      targets: ["test/server", "test/func"]
+    })
+  },
   "optimize-stats": {
     desc: "Generate a list of all files that went into production bundle JS (results in .etmp)",
     task: `analyze-bundle -b dist/js/bundle.*.js -s dist/server/stats.json`
