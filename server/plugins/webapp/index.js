@@ -21,19 +21,16 @@ function loadAssetsFromStats(statsFilePath) {
     .then(require)
     .then((stats) => {
       const assets = {};
-      _.each(stats.assetsByChunkName.main, (v) => {
-        if (v.endsWith(".js")) {
-          assets.js = v;
-        } else if (v.endsWith(".css")) {
-          assets.css = v;
+      _.each(stats.assets, (asset) => {
+        var name = asset.name;
+        if (name.startsWith('bundle')) {
+          assets.js = name;
+        } else if (name.endsWith(".css")) {
+          assets.css = name;
+        } else if (name.endsWith("manifest.json")) {
+          assets.manifest = name;
         }
       });
-      const manifest = _.find(stats.assets, (asset) => {
-        return asset.name.endsWith("manifest.json");
-      });
-      if (manifest) {
-        assets.manifest = manifest.name;
-      }
       return assets;
     })
     .catch(() => ({}));
@@ -62,7 +59,6 @@ function makeRouteHandler(options, userContent) {
   const BUNDLE_MARKER = "{{WEBAPP_BUNDLES}}";
   const TITLE_MARKER = "{{PAGE_TITLE}}";
   const PREFETCH_MARKER = "{{PREFETCH_BUNDLES}}";
-  const REGISTER_SW_MARKER = "{{REGISTER_SW}}";
   const META_TAGS_MARKER = "{{META_TAGS}}";
   const WEBPACK_DEV = options.webpackDev;
   const RENDER_JS = options.renderJS;
@@ -116,15 +112,6 @@ function makeRouteHandler(options, userContent) {
       return `${manifestLink}${cssLink}${jsLink}`;
     };
 
-    const registerServiceWorker = () => {
-      if (assets.manifest) {
-        const SWtemplate = Path.join(__dirname, "register-sw.html");
-        const SWRegistration = fs.readFileSync(SWtemplate).toString();
-        return SWRegistration || "";
-      }
-      return "";
-    };
-
     const renderPage = (content) => {
       return html.replace(/{{[A-Z_]*}}/g, (m) => {
         switch (m) {
@@ -136,8 +123,6 @@ function makeRouteHandler(options, userContent) {
           return makeBundles();
         case PREFETCH_MARKER:
           return `<script>${content.prefetch}</script>`;
-        case REGISTER_SW_MARKER:
-          return registerServiceWorker();
         case META_TAGS_MARKER:
           return iconStats;
         default:
