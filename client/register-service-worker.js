@@ -20,6 +20,7 @@
 var registration;
 
 module.exports = function registerServiceWorker(callback) {
+    callback = callback || function() {};
     if (!'serviceWorker' in navigator) {
       callback(null);
     }
