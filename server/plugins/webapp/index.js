@@ -44,12 +44,8 @@ function getIconStats(iconStatsPath) {
   } catch (err) {
     // noop
   }
-  /* Include the path prefix so the icons resolve */
   if (iconStats && iconStats.html) {
-    const prefix = iconStats.outputFilePrefix;
-    iconStats = iconStats.html
-      .map((asset) => asset.replace(prefix, `/js/${prefix}`))
-      .join("");
+    return iconStats.html.join("");
   }
   return iconStats;
 }
@@ -204,7 +200,7 @@ const registerRoutes = (server, options, next) => {
         devJSBundle: `http://${devServer.host}:${devServer.port}/js/bundle.dev.js`,
         devCSSBundle: `http://${devServer.host}:${devServer.port}/js/style.css`
       };
-
+      
       _.each(options.paths, (v, path) => {
         assert(v.content, `You must define content for the webapp plugin path ${path}`);
         server.route({
