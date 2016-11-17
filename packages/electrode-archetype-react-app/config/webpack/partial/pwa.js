@@ -53,7 +53,7 @@ module.exports = function () {
       precacheConfig.runtimeCaching = cacheConfig.runtimeCaching.map(function(runtimeCache) {
         return {
           handler: runtimeCache.handler,
-          urlPattern: runtimeCache.urlPattern
+          urlPattern: new RegExp(runtimeCache.urlPattern)
         }
       });
     }
