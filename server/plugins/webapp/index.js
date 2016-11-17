@@ -52,7 +52,8 @@ function getIconStats(iconStatsPath) {
 
 function makeRouteHandler(options, userContent) {
   const CONTENT_MARKER = "{{SSR_CONTENT}}";
-  const BUNDLE_MARKER = "{{WEBAPP_BUNDLES}}";
+  const HEADER_BUNDLE_MARKER = "{{WEBAPP_HEADER_BUNDLES}}";
+  const BODY_BUNDLE_MARKER = "{{WEBAPP_BODY_BUNDLES}}";
   const TITLE_MARKER = "{{PAGE_TITLE}}";
   const PREFETCH_MARKER = "{{PREFETCH_BUNDLES}}";
   const META_TAGS_MARKER = "{{META_TAGS}}";
@@ -96,16 +97,20 @@ function makeRouteHandler(options, userContent) {
       });
     };
 
-    const makeBundles = () => {
+    const makeHeaderBundles = () => {
       const manifest = bundleManifest();
       const manifestLink = manifest
         ? `<link rel="manifest" href="${manifest}" />`
         : "";
       const css = bundleCss();
       const cssLink = css ? `<link rel="stylesheet" href="${css}" />` : "";
+      return `${manifestLink}${cssLink}`;
+    };
+
+    const makeBodyBundles = () => {
       const js = bundleJs();
       const jsLink = js ? `<script src="${js}"></script>` : "";
-      return `${manifestLink}${cssLink}${jsLink}`;
+      return jsLink;
     };
 
     const renderPage = (content) => {
@@ -115,8 +120,10 @@ function makeRouteHandler(options, userContent) {
           return content.html || "";
         case TITLE_MARKER:
           return options.pageTitle;
-        case BUNDLE_MARKER:
-          return makeBundles();
+        case HEADER_BUNDLE_MARKER:
+          return makeHeaderBundles();
+        case BODY_BUNDLE_MARKER:
+          return makeBodyBundles();
         case PREFETCH_MARKER:
           return `<script>${content.prefetch}</script>`;
         case META_TAGS_MARKER:
@@ -200,7 +207,7 @@ const registerRoutes = (server, options, next) => {
         devJSBundle: `http://${devServer.host}:${devServer.port}/js/bundle.dev.js`,
         devCSSBundle: `http://${devServer.host}:${devServer.port}/js/style.css`
       };
-      
+
       _.each(options.paths, (v, path) => {
         assert(v.content, `You must define content for the webapp plugin path ${path}`);
         server.route({
