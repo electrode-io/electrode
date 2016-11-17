@@ -7,7 +7,7 @@ var fileLoader = archetype.devRequire.resolve("file-loader");
 var webAppManifestLoader = require.resolve("web-app-manifest-loader");
 var SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin");
 var FaviconsWebpackPlugin = require("favicons-webpack-plugin");
-
+var AddManifestFieldsPlugin = require('../plugins/add-manifest-fields');
 
 var swConfigPath = path.resolve(process.cwd(), "config/sw-config.js");
 
@@ -82,7 +82,11 @@ module.exports = function () {
             favicons: true
           }
         }),
-        new SWPrecacheWebpackPlugin(precacheConfig)
+        new AddManifestFieldsPlugin({
+          gcm_sender_id: "123456789",
+          theme_color: "#FF44AA"
+        }),
+        new SWPrecacheWebpackPlugin(precacheConfig),
       ]
     });
   };
