@@ -43,7 +43,7 @@ module.exports = function () {
         "dist/js/*.{js,css,png,jpg,svg}",
         "dist/js/icons**/*.png"
       ],
-      stripPrefix: "dist",
+      stripPrefix: "dist/js/",
       cacheId: "electrode",
       filepath: "dist/sw.js",
       maximumFileSizeToCacheInBytes: 4194304
