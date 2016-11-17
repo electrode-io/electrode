@@ -24,10 +24,10 @@
     "electrode-redux-router-engine": "^1.2.2",
     "electrode-server": "^1.1.1",
     "electrode-static-paths": "^1.0.0",
-    "material-ui": "^0.15.4",
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2",
-    "react-tap-event-plugin": "^1.0.0"
+    "material-ui": "^0.16.2",
+    "react": "^15.4.0",
+    "react-dom": "^15.4.0",
+    "react-tap-event-plugin": "^2.0.0"
   },
   "dependencies": {
     "ansi-to-html": "^0.4.1",
