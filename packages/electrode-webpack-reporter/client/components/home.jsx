@@ -43,7 +43,7 @@ const Home = (props) => {
 
 Home.propTypes = {
   info: PropTypes.object,
-  assets: PropTypes.object,
+  assets: PropTypes.array,
   modulesByPkg: PropTypes.object,
   warnings: PropTypes.array,
   errors: PropTypes.array,

@@ -41,7 +41,7 @@ const WebpackInfo = (props) => (
 WebpackInfo.propTypes = {
   hash: PropTypes.string,
   version: PropTypes.string,
-  time: PropTypes.string,
+  time: PropTypes.number,
   publicPath: PropTypes.string
 };
 
