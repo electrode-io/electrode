@@ -22,7 +22,7 @@ var registration;
 module.exports = function registerServiceWorker(callback) {
     callback = callback || function() {};
     if (!'serviceWorker' in navigator) {
-      callback(null);
+      return callback(null);
     }
     // Your service-worker.js *must* be located at the top-level directory relative to your site.
     // It won't be able to control pages unless it's located at the same level or higher than them.
