@@ -83,8 +83,8 @@ module.exports = function () {
           }
         }),
         new AddManifestFieldsPlugin({
-          gcm_sender_id: "123456789",
-          theme_color: "#FF44AA"
+          gcm_sender_id: manifestConfig.gcm_sender_id,
+          theme_color: manifestConfig.theme_color
         }),
         new SWPrecacheWebpackPlugin(precacheConfig),
       ]
