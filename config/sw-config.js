@@ -12,6 +12,8 @@ module.exports = {
   },
   manifest: {
     title: "Electrode",
-    logo: "./images/electrode.png"
+    logo: "./images/electrode.png",
+    gcm_sender_id: "432576648327",
+    theme_color: "#FFFFFF"
   }
 }
