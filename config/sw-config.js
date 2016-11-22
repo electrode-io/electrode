@@ -2,9 +2,9 @@ module.exports = {
   cache: {
     cacheId: "electrode",
     staticFileGlobs: [
-      "dist/js/*.{js,css,png,jpg,svg}",
-      "dist/js/icons**/*.png"
+      "dist/js/*.{js,css,png,jpg,svg}"
     ],
+    stripPrefix: "dist/js/",
     runtimeCaching: [{
       handler: "fastest",
       urlPattern: "\/$"
