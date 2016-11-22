@@ -22,8 +22,8 @@ function loadAssetsFromStats(statsFilePath) {
     .then((stats) => {
       const assets = {};
       _.each(stats.assets, (asset) => {
-        var name = asset.name;
-        if (name.startsWith('bundle')) {
+        const name = asset.name;
+        if (name.startsWith("bundle")) {
           assets.js = name;
         } else if (name.endsWith(".css")) {
           assets.css = name;
