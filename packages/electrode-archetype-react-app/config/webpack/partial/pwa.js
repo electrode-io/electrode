@@ -46,8 +46,9 @@ module.exports = function () {
       stripPrefix: "dist/js/",
       cacheId: "electrode",
       filepath: "dist/sw.js",
-      maximumFileSizeToCacheInBytes: 4194304
-    };
+      maximumFileSizeToCacheInBytes: 4194304,
+      skipWaiting: false
+    }, swConfig.cache);
 
     if (cacheConfig.runtimeCaching) {
       precacheConfig.runtimeCaching = cacheConfig.runtimeCaching.map(function(runtimeCache) {
