@@ -110,9 +110,8 @@ export default class PushNotifications extends React.Component {
     const endpointSections = subscription.endpoint.split("/");
     const subscriptionId = endpointSections[endpointSections.length - 1];
 
-    const curlCommand = `curl --header "Authorization: key='${API_KEY}'" ` +
-    `--header Content-Type:"application/json" ${GCM_ENDPOINT} -d ` +
-    `"{\"registration_ids\":[\"${subscriptionId}\"]}"`;
+    const curlCommand = `curl --header "Authorization: key=${API_KEY}" ` +
+    `--header Content-Type:"application/json" ${GCM_ENDPOINT} -d ` + `"{\\"registration_ids\\":[\\"${subscriptionId}\\"]}"`;
 
     return (
       <div>
