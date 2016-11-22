@@ -1,6 +1,8 @@
 /* eslint-disable react/no-did-mount-set-state */
 /* global navigator */
 import React from "react";
+import icon from "../images/logo-192x192.png";
+import badge from "../images/logo-72x72.png";
 
 export default class PushNotifications extends React.Component {
 
@@ -74,8 +76,9 @@ export default class PushNotifications extends React.Component {
 
   sendNotification() {
     const { title, body } = this.state;
+    const options = { body, icon, badge };
     navigator.serviceWorker.ready.then((registration) => {
-      registration.showNotification(title, { body });
+      registration.showNotification(title, options);
     });
   }
 
@@ -110,8 +113,9 @@ export default class PushNotifications extends React.Component {
     const endpointSections = subscription.endpoint.split("/");
     const subscriptionId = endpointSections[endpointSections.length - 1];
 
-    const curlCommand = `curl --header "Authorization: key=${API_KEY}" ` +
-    `--header Content-Type:"application/json" ${GCM_ENDPOINT} -d ` + `"{\\"registration_ids\\":[\\"${subscriptionId}\\"]}"`;
+    const curlCommand = `curl --header "Authorization: key=${API_KEY}"
+    --header Content-Type:"application/json" ${GCM_ENDPOINT} -d
+    "{\\"registration_ids\\":[\\"${subscriptionId}\\"]}"`;
 
     return (
       <div>
