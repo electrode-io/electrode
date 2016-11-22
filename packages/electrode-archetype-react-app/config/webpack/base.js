@@ -59,6 +59,7 @@ var baseConfig = {
     path: Path.resolve("dist/js"),
     pathinfo: inspectpack, // Enable path information for inspectpack
     publicPath: "/js/",
+    chunkFilename: "[hash].[name].js",
     filename: multiBundle
       ? "[name].bundle.[hash].js"
       : "bundle.[hash].js"
