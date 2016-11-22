@@ -31,7 +31,7 @@
     "css-modules-require-hook": "^4.0.2",
     "isomorphic-loader": "^1.0.0",
     "favicons-webpack-plugin": "0.0.7",
-    "sw-precache-webpack-plugin": "^0.5.1",
+    "sw-precache-webpack-plugin": "^0.6.2",
     "web-app-manifest-loader": "^0.1.1"
   },
   "devDependencies": {
