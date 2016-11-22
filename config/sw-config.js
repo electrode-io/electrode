@@ -8,8 +8,10 @@ module.exports = {
     runtimeCaching: [{
       handler: "fastest",
       urlPattern: "\/$"
-    }]
-  },
+    }],
+    // context for script paths is the client folder
+    importScripts: ['./sw.js']
+    },
   manifest: {
     title: "Electrode",
     logo: "./images/electrode.png",
