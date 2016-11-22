@@ -9,9 +9,9 @@ import rootReducer from "./reducers";
 
 import DevTools from "../client/devtools";
 
-require.ensure(["./register-service-worker"], function(require) {
+require.ensure(["./register-service-worker"], (require) => {
   require("./register-service-worker")();
-});
+}, "register-service-worker");
 
 
 const enhancer = compose(
