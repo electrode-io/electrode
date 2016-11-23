@@ -8,7 +8,7 @@ import WebpackInfo from "./webpack-info";
 import Legacy from "./legacy";
 import {connect} from "react-redux";
 import styles from "../styles/base.css";
-import Electrify from "electrode-electrify-react-component"
+import Electrify from "electrode-electrify-react-component";
 
 const Home = (props) => {
   return (
