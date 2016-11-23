@@ -6,13 +6,9 @@ import {Tabs, Tab} from "material-ui/Tabs";
 import WarningsErrors from "./warnings-errors";
 import WebpackInfo from "./webpack-info";
 import Legacy from "./legacy";
-
-
-// import WebpackAssets from "./webpack-assets";
-// import WebpackModules from "./webpack-modules";
 import {connect} from "react-redux";
 import styles from "../styles/base.css";
-import Electrify from "weiler-electrify-react-component";
+import Electrify from "electrode-electrify-react-component"
 
 const Home = (props) => {
   return (
@@ -22,17 +18,7 @@ const Home = (props) => {
           <Tab label="Report">
             <WebpackInfo {...props.info} />
             <WarningsErrors errors={props.errors} warnings={props.warnings} />
-            <Electrify props={props} />
-            {/*<div className={styles.leftColumn}>
-                          <WebpackModules
-                            pureWebpackStats={props.pureWebpackStats}
-                            modulesByPkg={props.modulesByPkg}
-                            totalSize={props.totalSizeByPkg}
-                          />
-                        </div>
-                        <div className={styles.rightColumn}>
-                          <WebpackAssets assets={props.assets}/>
-                        </div>*/}
+            <Electrify webpackInfo={props} />
           </Tab>
           <Tab label="Legacy">
             <div style={ {background: "black", color: "gray", padding: "10px"} }>
