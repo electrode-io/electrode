@@ -11,6 +11,8 @@ export default class PushNotifications extends React.Component {
     this.state = {
       // Whether ServiceWorkers are supported
       supported: false,
+      // Did something fail?
+      error: null,
       // Waiting on the service worker to be ready
       loading: true,
       // Whether we"ve got a push notification subscription
@@ -45,6 +47,18 @@ export default class PushNotifications extends React.Component {
               supported: true
             });
           }
+        })
+        .catch((error) => {
+          this.setState({
+            loading: false,
+            error
+          });
+        });
+      })
+      .catch((error) => {
+        this.setState({
+          loading: false,
+          error
         });
       });
     } else {
@@ -64,6 +78,9 @@ export default class PushNotifications extends React.Component {
             subscription,
             subscribed: true
           });
+        })
+        .catch((error) => {
+          this.setState({ error });
         });
     });
   }
@@ -83,11 +100,28 @@ export default class PushNotifications extends React.Component {
   }
 
   render() {
-    const { loading, subscribed, subscription, supported } = this.state;
+    const {
+      error,
+      loading,
+      supported,
+      subscribed,
+      subscription
+    } = this.state;
 
     if (!loading && !supported) {
       return (
         <div>Sorry, service workers are not supported in this browser.</div>
+      );
+    }
+
+    if (error) {
+      return (
+        <div>
+          Woops! Looks like there was an error:
+          <span style={{ fontFamily: "monospace", color: "red" }}>
+            {error.name}: {error.message}
+            </span>
+        </div>
       );
     }
 
