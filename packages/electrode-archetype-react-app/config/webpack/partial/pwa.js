@@ -63,7 +63,10 @@ function createEntryConfigFromScripts(importScripts, entry) {
 
 module.exports = function () {
   return function (config) {
-    var swConfig = getSWConfig();
+    var swConfig = assign({
+      cacheId: "electrode",
+      maximumFileSizeToCacheInBytes: 4194304
+    }, getSWConfig());
 
     if (!swConfig.manifest) {
       return mergeWebpackConfig(config, {});
@@ -73,6 +76,7 @@ module.exports = function () {
       background: "#FFFFFF",
       logo: "./images/electrode.png",
       title: "Electrode",
+      short_name: "Electrode",
       statsFilename: "../server/iconstats.json"
     }, swConfig.manifest);
 
@@ -81,9 +85,9 @@ module.exports = function () {
         "dist/js/*.{js,css}"
       ],
       stripPrefix: "dist/js/",
-      cacheId: "electrode",
+      cacheId: swConfig.cacheId,
       filepath: "dist/sw.js",
-      maximumFileSizeToCacheInBytes: 4194304,
+      maximumFileSizeToCacheInBytes: swConfig.maximumFileSizeToCacheInBytes,
       skipWaiting: false
     }, swConfig.cache);
 
@@ -140,6 +144,7 @@ module.exports = function () {
         }),
         new AddManifestFieldsPlugin({
           gcm_sender_id: manifestConfig.gcm_sender_id,
+          short_name: manifestConfig.short_name,
           theme_color: manifestConfig.theme_color
         }),
         new SWPrecacheWebpackPlugin(cacheConfig),

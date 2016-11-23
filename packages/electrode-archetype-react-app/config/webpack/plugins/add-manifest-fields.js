@@ -26,7 +26,7 @@ AddManifestFieldsPlugin.prototype.apply = function(compiler) {
         for (var field in fields) {
           manifest[field] = fields[field];
         }
-        var newManifestAsset = JSON.stringify(manifest);
+        var newManifestAsset = JSON.stringify(manifest, null, 2);
         compilation.assets[filename] = {
           source: function() {
             return newManifestAsset;
