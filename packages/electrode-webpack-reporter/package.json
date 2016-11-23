@@ -32,7 +32,7 @@
   "dependencies": {
     "ansi-to-html": "^0.4.1",
     "chalk": "^1.1.3",
-    "electrode-electrify-react-component": "4.3.1",
+    "electrode-electrify-react-component": "4.3.0",
     "material-ui": "^0.15.4",
     "prettysize": "0.0.3"
   }
