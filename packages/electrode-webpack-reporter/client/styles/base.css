@@ -32,25 +32,6 @@ h1 {
 	margin: 0 2%;
 }
 
-.leftColumn {
-	float: left;
-	width: 100%;
-	display: inline-block;
-}
-.rightColumn {
-	/*border-left: 5px solid #6a4a3c;*/
-	display: inline-block;
-	float: left;
-	width: 100%;
-}
-@media (min-width: 900px) {
-	.leftColumn {
-		width: 55%;
-	}
-	.rightColumn {
-		width: 45%;
-	}
-}
 .card {
 	margin: 5px solid #6a4a3c;;
 }
