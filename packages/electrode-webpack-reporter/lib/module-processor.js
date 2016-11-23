@@ -45,12 +45,10 @@ class ModuleProcessor {
   }
   
  _splitPathName(name) {
-    // name could be ./~/name1/~/name2/lib/index.js or ./client/app.jsx
-    const pkgs = name.indexOf(tildaSep) < 0 ? // not a NPM module
+    const pkgs = name.indexOf(tildaSep) < 0 ?
       [name] : name.split(tildaSep).splice(1);
     const n = pkgs.pop();
     const match = n.match(n.startsWith("@") ? atModRegex : modRegex);
-
     if (match) {
       return {
         name: match[1],
@@ -86,10 +84,6 @@ class ModuleProcessor {
   makeModulesByPackage() {
     const byPkg = this.modulesByPackage = {};
     this.totalSize = 0;
-//strange work around to shift off 'multi main' from the array
-    // const minusMultiMain = Object.keys(this.modulesByName)
-    // minusMultiMain.shift();
-    // minusMultiMain.forEach((name) => {
     Object.keys(this.modulesByName).forEach((name) => {
       const split = this._splitPathName(name);
       const pkg = byPkg[split.name] || (byPkg[split.name] = {size: 0});
