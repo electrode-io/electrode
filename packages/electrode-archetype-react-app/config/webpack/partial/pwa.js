@@ -63,10 +63,7 @@ function createEntryConfigFromScripts(importScripts, entry) {
 
 module.exports = function () {
   return function (config) {
-    var swConfig = assign({
-      cacheId: "electrode",
-      maximumFileSizeToCacheInBytes: 4194304
-    }, getSWConfig());
+    var swConfig = getSWConfig();
 
     if (!swConfig.manifest) {
       return mergeWebpackConfig(config, {});
@@ -85,9 +82,9 @@ module.exports = function () {
         "dist/js/*.{js,css}"
       ],
       stripPrefix: "dist/js/",
-      cacheId: swConfig.cacheId,
+      cacheId: "electrode",
       filepath: "dist/sw.js",
-      maximumFileSizeToCacheInBytes: swConfig.maximumFileSizeToCacheInBytes,
+      maximumFileSizeToCacheInBytes: 4194304,
       skipWaiting: false
     }, swConfig.cache);
 
