@@ -49,6 +49,7 @@ class ModuleProcessor {
       [name] : name.split(tildaSep).splice(1);
     const n = pkgs.pop();
     const match = n.match(n.startsWith("@") ? atModRegex : modRegex);
+    
     if (match) {
       return {
         name: match[1],
