@@ -73,6 +73,7 @@ module.exports = function () {
       background: "#FFFFFF",
       logo: "./images/electrode.png",
       title: "Electrode",
+      short_name: "Electrode",
       statsFilename: "../server/iconstats.json"
     }, swConfig.manifest);
 
@@ -140,6 +141,7 @@ module.exports = function () {
         }),
         new AddManifestFieldsPlugin({
           gcm_sender_id: manifestConfig.gcm_sender_id,
+          short_name: manifestConfig.short_name,
           theme_color: manifestConfig.theme_color
         }),
         new SWPrecacheWebpackPlugin(cacheConfig),
