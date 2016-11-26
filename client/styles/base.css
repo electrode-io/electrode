@@ -12,3 +12,8 @@ body {
 .renderMessage {
   color: red;
 }
+
+input, label {
+  margin: 2px;
+  display: block;
+}
