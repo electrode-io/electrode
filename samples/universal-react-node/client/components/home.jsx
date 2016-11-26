@@ -45,6 +45,7 @@ export class Home extends React.Component {
           </li>
           <li><a href="/ssrcachingsimpletype">SSR Caching Simple Type Example</a></li>
           <li><a href="/ssrcachingtemplatetype">SSR Caching Template Type Example</a></li>
+          <li><a href="/push-notifications">Push Notifications Example</a></li>
         </ul>
         <p>{this.props.data}</p>
       </div>
