@@ -6,7 +6,8 @@ var StatsWriterPlugin = archetype.devRequire("webpack-stats-plugin").StatsWriter
 
 module.exports = function (opts) {
   var statsOptions = {
-    filename: "../server/stats.json"
+    filename: "../server/stats.json",
+    fields: ['assetsByChunkName', 'assets']
   };
 
   if (opts && opts.fullPaths) {
