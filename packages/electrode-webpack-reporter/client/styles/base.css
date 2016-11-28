@@ -1,16 +1,17 @@
 * {
   -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
+
 html {
-    font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
-    font-size: 13px;
-    line-height: 20px;
-    background-color: #6a4a3c;
+  font-size: 13px;
+  line-height: 20px;
+  background-color: #6a4a3c;
 }
 
 h1 {
@@ -28,34 +29,34 @@ h1 {
 }
 
 .container {
-	position: relative;
-	margin: 0 2%;
+  position: relative;
+  margin: 0 2%;
 }
 
 .card {
-	margin: 5px solid #6a4a3c;;
+  margin: 5px solid #6a4a3c;;
 }
 .webpackInfo {
-	display: inline-block;
-	float: left;
+  display: inline-block;
+  float: left;
 
 }
 
 .warningsErrors {
-	display: inline-block;
-	float: left;
+  display: inline-block;
+  float: left;
 }
 
 .modules {
-	display: inline-block;
-	float: left;
-	width: 50%;
-	padding-bottom: 8% !important;
+  display: inline-block;
+  float: left;
+  width: 50%;
+  padding-bottom: 8% !important;
 }
 .content {
-	margin-top: 5px;
-	width: 100%;
-	padding: 5px;
-	background-color: lightgrey;
+  margin-top: 5px;
+  width: 100%;
+  padding: 5px;
+  background-color: lightgrey;
 }
 
