@@ -84,7 +84,8 @@ class WebpackReporter extends EventEmitter {
           totalSizeByPkg: byPkg.totalSize,
           warnings: statsUtils.getWarningsHtml(stats),
           errors: statsUtils.getErrorsHtml(stats),
-          legacy: statsUtils.jsonToHtml(stats, true)
+          legacy: statsUtils.jsonToHtml(stats, true),
+          pureWebpackStats: stats
         };
         res.json(data);
       },
