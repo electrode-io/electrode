@@ -72,6 +72,17 @@ This will serve the static assets for test.html
 
 open [test.html]((http://localhost:3001/node_modules/electrode-archetype-react-app/config/browser_test/test.html)) to view test result.
 
+#### How do I generate a manifest.json and a service-worker file?
+First we need to add a `sw-config.js` file under the app's `config` folder.
+
+This file contains two sections:  
+1. manifest - for app icon, logo and title  
+2. cache - for static assest and runtime caching of routes  
+Sample [config.js](https://github.com/electrode-io/electrode-boilerplate-universal-react-node/blob/master/config/sw-config.js)
+
+Once the file is add, running `gulp build` will generate a `manifest.json` file inside `dist/js/icons-[hash]` folder and a service worker file `dist/sw.js`
+
+More on [PWA here](https://developers.google.com/web/progressive-web-apps/)
 
 ## Installation
 
