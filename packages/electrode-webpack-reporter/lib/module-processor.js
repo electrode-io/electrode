@@ -43,14 +43,13 @@ class ModuleProcessor {
 
     return mbn;
   }
-
-  _splitPathName(name) {
-    // name could be ./~/name1/~/name2/lib/index.js or ./client/app.jsx
-    const pkgs = name.indexOf(tildaSep) < 0 ? // not a NPM module
+  
+ _splitPathName(name) {
+    const pkgs = name.indexOf(tildaSep) < 0 ?
       [name] : name.split(tildaSep).splice(1);
     const n = pkgs.pop();
     const match = n.match(n.startsWith("@") ? atModRegex : modRegex);
-
+    
     if (match) {
       return {
         name: match[1],
@@ -65,7 +64,6 @@ class ModuleProcessor {
       };
     }
   }
-
   /**
    *
    * {

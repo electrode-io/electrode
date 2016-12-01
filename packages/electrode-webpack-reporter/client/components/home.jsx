@@ -1,70 +1,45 @@
 import React, {PropTypes} from "react";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import {Card, CardHeader, CardText} from "material-ui/Card";
+import darkBaseTheme from "material-ui/styles/baseThemes/darkBaseTheme";
+import getMuiTheme from "material-ui/styles/getMuiTheme";
 import {Tabs, Tab} from "material-ui/Tabs";
+import WarningsErrors from "./warnings-errors";
 import WebpackInfo from "./webpack-info";
 import Legacy from "./legacy";
-import WebpackAssets from "./webpack-assets";
-import ModulesByPkg from "./modules-by-pkg";
 import {connect} from "react-redux";
-
-//////
+import styles from "../styles/base.css";
+import Electrify from "electrode-electrify-react-component";
 
 const Home = (props) => {
-  const warningsErrors = () => (
-    <Card initiallyExpanded={true}>
-      <CardHeader showExpandableButton={true} actAsExpander={true} subtitle="Warnings and Errors" />
-      <CardText expandable={true} style={ {background: "black", color: "gray"} }>
-        {props.warnings.map((e) => (<pre dangerouslySetInnerHTML={ {__html: e} }></pre>))}
-      </CardText>
-      <CardText expandable={true} style={ {background: "black", color: "gray"} }>
-        {props.errors.map((e) => (<pre dangerouslySetInnerHTML={ {__html: e} }></pre>))}
-      </CardText>
-    </Card>
+  return (
+    <div className={styles.container}>
+      <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+        <Tabs>
+          <Tab label="Report">
+            <WebpackInfo {...props.info} />
+            <WarningsErrors errors={props.errors} warnings={props.warnings} />
+            <Electrify webpackInfo={props} />
+          </Tab>
+          <Tab label="Legacy">
+            <div style={ {background: "black", color: "gray", padding: "10px"} }>
+              <Legacy legacy={props.legacy}/>
+            </div>
+          </Tab>
+        </Tabs>
+      </MuiThemeProvider>
+    </div>
   );
-
-  return (<MuiThemeProvider>
-    <Tabs>
-      <Tab label="Report">
-        <div>
-          <Card initiallyExpanded={true}>
-            <CardText expandable={true}>
-              <WebpackInfo {...props.info} />
-            </CardText>
-          </Card>
-          <Card initiallyExpanded={true}>
-            <CardHeader showExpandableButton={true} actAsExpander={true} subtitle="Assets" />
-            <CardText expandable={true}>
-              <WebpackAssets assets={props.assets}/>
-            </CardText>
-          </Card>
-          {props.errors.length > 0 || props.warnings.length > 0 ? warningsErrors() : ""}
-          <Card initiallyExpanded={true}>
-            <CardHeader showExpandableButton={true} actAsExpander={true} subtitle="Modules" />
-            <CardText expandable={true}>
-              <ModulesByPkg modulesByPkg={props.modulesByPkg} totalSize={props.totalSizeByPkg}/>
-            </CardText>
-          </Card>
-        </div>
-      </Tab>
-      <Tab label="Legacy">
-        <div style={ {background: "black", color: "gray", padding: "5px"} }>
-          <Legacy legacy={props.legacy}/>
-        </div>
-      </Tab>
-    </Tabs>
-  </MuiThemeProvider>);
 };
-
 
 Home.propTypes = {
   info: PropTypes.object,
-  assets: PropTypes.object,
+  assets: PropTypes.array,
   modulesByPkg: PropTypes.object,
   warnings: PropTypes.array,
   errors: PropTypes.array,
   legacy: PropTypes.string,
-  totalSizeByPkg: PropTypes.number
+  totalSizeByPkg: PropTypes.number,
+  pureWebpackStats: PropTypes.object
 };
 
 const mapStateToProps = (state) => state;
