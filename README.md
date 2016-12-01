@@ -50,8 +50,8 @@ This will set up an Electrode webapplication which will have 2 of the above 6 mo
   - [Electrode Javascript Bundle Viewer](https://github.com/electrode-io/electrify)
 
 ## Instructions for setting up push notification
-Push notifications are based on service workers. So we need to register our service worker first.  
-Take a look at [this guideline](https://github.com/electrode-io/electrode-archetype-react-app/blob/master/README.md#how-do-i-generate-a-manifestjson-and-a-service-worker-file) to generate a service worker.  
+Push Notification is based on service workers because service workers operate in the background. So we need to register our service worker first.  
+Check out [this guideline](https://github.com/electrode-io/electrode-archetype-react-app/blob/master/README.md#how-do-i-generate-a-manifestjson-and-a-service-worker-file) to generate a service worker in an electrode app.  
 
 Next we need to add a `push` event to this existing service worker:  
 1 Create a new file `sw.js`,  
@@ -80,7 +80,7 @@ module.exports = {
 [Sample file](https://github.com/electrode-io/electrode-boilerplate-universal-react-node/blob/master/config/sw-config.js)
 
 
-3 Register this `push` event and install the new service worker:  
+3 Now we can register this `push` event in the browser and install the new service worker:  
 ```
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("sw.js", { scope: "./" })
@@ -91,7 +91,46 @@ if ("serviceWorker" in navigator) {
 ```
 [Sample file](https://github.com/electrode-io/electrode-boilerplate-universal-react-node/blob/master/client/register-service-worker.js)
 
- Now the service worker is ready to accept `push` from the server. On receiving the push, it will provide the `notification` to the browser.  
+ The service worker is ready to accept `push` from the server. On receiving the push, it will provide the `notification` to the browser.
+
+## Instructions for sending a push notification  
+Now that we have our service worker up and running, we can send a `push` with the following steps:  
+
+1 Requesting Permission and Subscribing Users  
+The code for requesting permission and subscribing users in done in your app's code, rather than the service worker code.
+```
+navigator.serviceWorker.ready.then((registration) => {
+  // Ask for user permission and subscribe
+  registration.pushManager.subscribe({ userVisibleOnly: true })
+    .then((subscription) => {
+      // Successfully subscribed
+      this.setState({
+        subscription,
+        subscribed: true
+      });
+    });
+});
+```
+[Sample subscription](https://github.com/electrode-io/electrode-boilerplate-universal-react-node/blob/master/client/components/push-notifications.jsx#L73-L86)  
+
+Typically, after the user subscribes, we send the subscription information to the server and the server uses the `subscriptionId` to trigger a notification.
+
+2 Sending Messages  
+Sending message is as easy as executing a curl command. The curl command contains the `subscriptionId`, `API_KEY` (Your cloud messaging API key from [firebase](https://console.firebase.google.com)) and [GCM_ENDPOINT](https://github.com/electrode-io/electrode-boilerplate-universal-react-node/blob/master/client/components/push-notifications.jsx#L145-L146)
+
+Alternatively, you can also send notifications from the service worker:
+```
+sendNotification() {
+   const title = 'This Notification'
+   const body = 'Is brought to you by your server worker!'
+   const options = {body};
+   navigator.serviceWorker.ready.then((registration) => {
+     registration.showNotification(title, options);
+   });
+ }
+```
+[Sample](https://github.com/electrode-io/electrode-boilerplate-universal-react-node/blob/master/client/components/push-notifications.jsx#L94-L100)
+
 
 ---
 
