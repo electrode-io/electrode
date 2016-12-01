@@ -5,7 +5,7 @@
 import React from "react";
 import {render} from "react-dom";
 import {routes} from "./routes";
-import {Router} from "react-router";
+import {Router, browserHistory} from "react-router";
 import {createStore} from "redux";
 import {Provider} from "react-redux";
 import "./styles/base.css";
@@ -22,7 +22,7 @@ window.webappStart = () => {
   const store = createStore(rootReducer, initialState);
   render(
     <Provider store={store}>
-      <Router>{routes}</Router>
+      <Router history={browserHistory}>{routes}</Router>
     </Provider>,
     document.querySelector(".js-content")
   );
