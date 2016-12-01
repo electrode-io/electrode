@@ -86,6 +86,11 @@ class ModuleProcessor {
     const byPkg = this.modulesByPackage = {};
     this.totalSize = 0;
     Object.keys(this.modulesByName).forEach((name) => {
+      // Ignore "ignored" modules i.e. node shims etc.
+      if (name.indexOf('(ignored)') > -1) {
+        return;
+      }
+
       const split = this._splitPathName(name);
       const pkg = byPkg[split.name] || (byPkg[split.name] = {size: 0});
       const getVersion = (parents) => {
