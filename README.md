@@ -54,7 +54,7 @@ Push Notification is based on service workers because service workers operate in
 Check out [this guideline](https://github.com/electrode-io/electrode-archetype-react-app/blob/master/README.md#how-do-i-generate-a-manifestjson-and-a-service-worker-file) to generate a service worker in an electrode app.  
 
 Next we need to add a `push` event to this existing service worker:  
-1 Create a new file `sw.js`,  
+##### 1. Create a new file `sw.js`,  
 ```
 self.addEventListener("push", (event) => {
   const title = "It worked!";
@@ -69,7 +69,7 @@ self.addEventListener("push", (event) => {
 [Sample file](https://github.com/electrode-io/electrode-boilerplate-universal-react-node/blob/master/client/sw.js)
 
 
-2 Include this file in your webpack bundle by referencing it in `sw-config.js` :
+##### 2. Include this file in your webpack bundle by referencing it in `sw-config.js` :
 ```
 module.exports = {
   cache: {
@@ -80,7 +80,7 @@ module.exports = {
 [Sample file](https://github.com/electrode-io/electrode-boilerplate-universal-react-node/blob/master/config/sw-config.js)
 
 
-3 Now we can register this `push` event in the browser and install the new service worker:  
+##### 3. Now we can register this `push` event in the browser and install the new service worker:  
 ```
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("sw.js", { scope: "./" })
@@ -96,7 +96,7 @@ if ("serviceWorker" in navigator) {
 ## Instructions for sending a push notification  
 Now that we have our service worker up and running, we can send a `push` with the following steps:  
 
-1 Requesting Permission and Subscribing Users  
+##### 1. Requesting Permission and Subscribing Users  
 The code for requesting permission and subscribing users in done in your app's code, rather than the service worker code.
 ```
 navigator.serviceWorker.ready.then((registration) => {
@@ -115,7 +115,7 @@ navigator.serviceWorker.ready.then((registration) => {
 
 Typically, after the user subscribes, we send the subscription information to the server and the server uses the `subscriptionId` to trigger a notification.
 
-2 Sending Messages  
+##### 2. Sending Messages  
 Sending message is as easy as executing a curl command. The curl command contains the `subscriptionId`, `API_KEY` (Your cloud messaging API key from [firebase](https://console.firebase.google.com)) and [GCM_ENDPOINT](https://github.com/electrode-io/electrode-boilerplate-universal-react-node/blob/master/client/components/push-notifications.jsx#L145-L146)
 
 Alternatively, you can also send notifications from the service worker:
