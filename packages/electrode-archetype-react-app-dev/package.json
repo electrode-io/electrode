@@ -22,7 +22,7 @@
     "electrode-bundle-analyzer": "^1.0.0",
     "electrode-electrify": "^1.0.0",
     "electrode-gulp-helper": "^1.0.5",
-    "electrode-webpack-reporter": "^0.1.0",
+    "electrode-webpack-reporter": "^0.2.3",
     "eslint": "^3.9.1",
     "eslint-config-walmart": "^1.1.0",
     "eslint-plugin-filenames": "^1.1.0",
