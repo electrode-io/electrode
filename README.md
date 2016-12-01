@@ -49,6 +49,50 @@ This will set up an Electrode webapplication which will have 2 of the above 6 mo
   - [Electrode Confippet](https://github.com/electrode-io/electrode-confippet)
   - [Electrode Javascript Bundle Viewer](https://github.com/electrode-io/electrify)
 
+## Instructions for setting up push notification
+Push notifications are based on service workers. So we need to register our service worker first.  
+Take a look at [this guideline](https://github.com/electrode-io/electrode-archetype-react-app/blob/master/README.md#how-do-i-generate-a-manifestjson-and-a-service-worker-file) to generate a service worker.  
+
+Next we need to add a `push` event to this existing service worker:  
+1 Create a new file `sw.js`,  
+```
+self.addEventListener("push", (event) => {
+  const title = "It worked!";
+  const options = {
+    body: "Great job sending that push notification!"
+  };
+  event.waitUntil(
+    self.registration.showNotification(title, options)
+  );
+});
+```
+[Sample file](https://github.com/electrode-io/electrode-boilerplate-universal-react-node/blob/master/client/sw.js)
+
+
+2 Include this file in your webpack bundle by referencing it in `sw-config.js` :
+```
+module.exports = {
+  cache: {
+    importScripts: ['./sw.js']
+    }
+}
+```
+[Sample file](https://github.com/electrode-io/electrode-boilerplate-universal-react-node/blob/master/config/sw-config.js)
+
+
+3 Register this `push` event and install the new service worker:  
+```
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js", { scope: "./" })
+  .then((registration) => {
+    // Service worker registration was successful
+  }
+}
+```
+[Sample file](https://github.com/electrode-io/electrode-boilerplate-universal-react-node/blob/master/client/register-service-worker.js)
+
+ Now the service worker is ready to accept `push` from the server. On receiving the push, it will provide the `notification` to the browser.  
+
 ---
 
 ## Instructions about standalone modules
