@@ -52,21 +52,24 @@ This will set up an Electrode webapplication which will have 2 of the above 6 mo
 ## Progressive Web App (PWA) features supported by the Electrode framework  
 #### 1. Offline first  
   Offline first lets your app run without a network connection. At the same time it provides a great performance boost for repeat visit to your web site.
-  This is done with a service worker and by pre-caching your static assets as well as run time caching of react routes.  
+  This is done with a service worker and by pre-caching your static assets as well as runtime caching of React routes.  
   [Learn More](https://github.com/electrode-io/electrode-archetype-react-app/blob/master/README.md#2-cache)  
 #### 2. Add To Homescreen  
-  After visiting you website, users will get a prompt to add your application to their homescreen (web or mobile). Combined with offline caching, this means your web app can be used exactly like a native application.  
+  After visiting you website, users will get a prompt (if the user has visited your site at least twice, with at least five minutes between visits.) to add your application to their homescreen (web or [mobile](https://developers.google.com/web/updates/2015/03/increasing-engagement-with-app-install-banners-in-chrome-for-android)). Combined with offline caching, this means your web app can be used exactly like a native application.  
   [Learn More](https://github.com/electrode-io/electrode-archetype-react-app/blob/master/README.md#1-manifest)  
 #### 3. Push Notifications  
   Web push notifications allow users to opt-in to timely updates from sites they love and allow you to effectively re-engage them with customized, relevant content.  
   We will learn about Push Notifications in the next couple of sections.
 
-## Instructions for setting up push notification
-Push Notification is based on service workers because service workers operate in the background. So we need to register our service worker first.  
+## Instructions for setting up Push Notifications
+### Web push is only supported on: Google Chrome 42+ (Desktop & Android)
+The [Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API) requires a registered service worker so it can send notifications in the background when the web application isn't running. So we need to register our service worker first.  
 Check out [this guideline](https://github.com/electrode-io/electrode-archetype-react-app/blob/master/README.md#how-do-i-generate-a-manifestjson-and-a-service-worker-file) to generate a service worker in an electrode app.  
+Also, check out the [Adding Push Notifications to a Web App](https://developers.google.com/web/fundamentals/getting-started/codelabs/push-notifications/) Codelab provided by Google for an in-depth guide on how push notifications and service workers work together.
 
-Next we need to add a `push` event to this existing service worker:  
-#### 1. Create a new file `sw.js`,  
+Next we need to add a `push` event to this existing service worker for sending notifications to the client from a push server:  
+#### 1. Creating a new file service worker file to listen to push events  
+In order to respond to push notifications events received from a remote server we need to listen for the `push` event on the active service worker. Since our service worker file is generated automatically we need to use the `importScripts` API, which lets us execute additional scripts in the context of the service worker.  
 ```
 self.addEventListener("push", (event) => {
   const title = "It worked!";
@@ -80,8 +83,7 @@ self.addEventListener("push", (event) => {
 ```
 [Sample file](https://github.com/electrode-io/electrode-boilerplate-universal-react-node/blob/master/client/sw.js)
 
-
-#### 2. Include this file in your webpack bundle by referencing it in `sw-config.js` :
+#### 2. Include this file in your webpack bundle by referencing it in `sw-config.js`  
 ```
 module.exports = {
   cache: {
@@ -91,8 +93,7 @@ module.exports = {
 ```
 [Sample file](https://github.com/electrode-io/electrode-boilerplate-universal-react-node/blob/master/config/sw-config.js)
 
-
-#### 3. Now we can register this `push` event in the browser and install the new service worker:  
+#### 3. Register this service worker with the `push` event  
 ```
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("sw.js", { scope: "./" })
@@ -103,7 +104,10 @@ if ("serviceWorker" in navigator) {
 ```
 [Sample file](https://github.com/electrode-io/electrode-boilerplate-universal-react-node/blob/master/client/register-service-worker.js)
 
- The service worker is ready to accept `push` from the server. On receiving the push, it will provide the `notification` to the browser.
+The service worker is ready to accept `push` from the server. On receiving the push, it will provide the `notification` to the browser.
+
+#### 4. Setting up your API_KEY and GCM_SENDER_ID  
+We will be needing the API_KEY and GCM_ENDPOINT to send the messages from the server. To generate these values, visit [firebase](https://console.firebase.google.com) and create a new project. Click on the setting icons and open `Project settings`. Navigate to the `CLOUD MESSAGING` tab to view your `Server key or Legacy Server key` (API_KEY) and the `Sender ID`. You need to update your `manifest` in `sw-config.js` to update the (gcm_sender_id)[https://github.com/electrode-io/electrode-boilerplate-universal-react-node/blob/master/config/sw-config.js#L18].  
 
 ## Instructions for sending a push notification  
 Now that we have our service worker up and running, we can send a `push` with the following steps:  
@@ -128,7 +132,7 @@ navigator.serviceWorker.ready.then((registration) => {
 Typically, after the user subscribes, we send the subscription information to the server and the server uses the `subscriptionId` to trigger a notification.
 
 #### 2. Sending Messages  
-Sending message is as easy as executing a curl command. The curl command contains the `subscriptionId`, `API_KEY` (Your cloud messaging API key from [firebase](https://console.firebase.google.com)) and [GCM_ENDPOINT](https://github.com/electrode-io/electrode-boilerplate-universal-react-node/blob/master/client/components/push-notifications.jsx#L145-L146)
+Sending message is as easy as executing a curl command. The curl command contains the `subscriptionId`, `API_KEY` (Your cloud messaging API key from [firebase](https://console.firebase.google.com)) and GCM_ENDPOINT (https://android.googleapis.com/gcm/send).  
 
 Alternatively, you can also send notifications from the service worker:
 ```
@@ -142,6 +146,8 @@ sendNotification() {
  }
 ```
 [Sample](https://github.com/electrode-io/electrode-boilerplate-universal-react-node/blob/master/client/components/push-notifications.jsx#L94-L100)
+
+`navigator.serviceWorker.ready` is a Promise that will resolve once a service worker is registered, and it returns a reference to the active [ServiceWorkerRegistration](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration). The showNotification() method of the ServiceWorkerRegistration interface creates a notification and returns a Promise that resolves to a [NotificationEvent](https://developer.mozilla.org/en-US/docs/Web/API/NotificationEvent).
 
 ---
 
