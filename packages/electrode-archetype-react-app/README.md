@@ -85,7 +85,7 @@ manifest: {
   start_url: "/"
 }
   ```
-  Manifest gives you control over how your web app is installed on user's home screen with `short_name, name and icons` properties. You can also specify a starting path to launch your app with `start_url` property. Manifest defines how your app appears to the user and more importantly how they can launch it.  
+  Manifest gives you control over how your web app is installed on user's home screen with `short_name, title and logo` properties. You can also specify a starting path to launch your app with `start_url` property. Manifest defines how your app appears to the user and more importantly how they can launch it.  
 ##### 2. Cache  
 ```
 cache: {
