@@ -171,7 +171,7 @@ export default class PushNotifications extends React.Component {
 
       <h3>Push Notification Subscription</h3>
       <code>
-        {JSON.stringify(this.state.subscription, null, 4)}
+        {this.state.subscription.endpoint}
       </code>
       <h3>Curl Command</h3>
       <code>
