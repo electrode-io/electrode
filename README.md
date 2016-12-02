@@ -38,6 +38,14 @@ $ gulp server-prod
 
 - Running in the selected environment should load the appropriate configuration settings
 
+- Start the electrode app with `service workers`
+
+```bash
+$ gulp build
+$ gulp server
+```
+Service worker currently does not work with webpack dev server. You need to build first and then run the server.
+
 ## Instructions for boostrapping new electrode application
 You can bootstrap a new electrode webapplication from scratch by doing:
 
@@ -52,10 +60,10 @@ This will set up an Electrode webapplication which will have 2 of the above 6 mo
 ## Progressive Web App (PWA) features supported by the Electrode framework  
 #### 1. Offline first  
   Offline first lets your app run without a network connection. At the same time it provides a great performance boost for repeat visit to your web site.
-  This is done with a service worker and by pre-caching your static assets as well as runtime caching of React routes.  
+  This is done with a service worker and by pre-caching your static assets as well as runtime caching of dynamic server routes and external resources.  
   [Learn More](https://github.com/electrode-io/electrode-archetype-react-app/blob/master/README.md#2-cache)  
 #### 2. Add To Homescreen  
-  After visiting you website, users will get a prompt (if the user has visited your site at least twice, with at least five minutes between visits.) to add your application to their homescreen (web or [mobile](https://developers.google.com/web/updates/2015/03/increasing-engagement-with-app-install-banners-in-chrome-for-android)). Combined with offline caching, this means your web app can be used exactly like a native application.  
+  After visiting your website, users will get a prompt (if the user has visited your site at least twice, with at least five minutes between visits.) to add your application to their homescreen (web or [mobile](https://developers.google.com/web/updates/2015/03/increasing-engagement-with-app-install-banners-in-chrome-for-android)). Combined with offline caching, this means your web app can be used exactly like a native application.  
   [Learn More](https://github.com/electrode-io/electrode-archetype-react-app/blob/master/README.md#1-manifest)  
 #### 3. Push Notifications  
   Web push notifications allow users to opt-in to timely updates from sites they love and allow you to effectively re-engage them with customized, relevant content.  
@@ -107,7 +115,11 @@ if ("serviceWorker" in navigator) {
 The service worker is ready to accept `push` from the server. On receiving the push, it will provide the `notification` to the browser.
 
 #### 4. Setting up your API_KEY and GCM_SENDER_ID  
-We will be needing the API_KEY and GCM_ENDPOINT to send the messages from the server. To generate these values, visit [firebase](https://console.firebase.google.com) and create a new project. Click on the setting icons and open `Project settings`. Navigate to the `CLOUD MESSAGING` tab to view your `Server key or Legacy Server key` (API_KEY) and the `Sender ID`. You need to update your `manifest` in `sw-config.js` to update the (gcm_sender_id)[https://github.com/electrode-io/electrode-boilerplate-universal-react-node/blob/master/config/sw-config.js#L18].  
+We will be needing the API_KEY and GCM_ENDPOINT to send the messages from the server.  
+To generate these values, visit [Firebase](https://console.firebase.google.com) and create a new project.  
+Click on the setting icons and open `Project settings`.  
+Navigate to the `CLOUD MESSAGING` tab to view your `Server key or Legacy Server key` (API_KEY) and the `Sender ID`.  
+You need to update your `manifest` in `sw-config.js` to update the [gcm_sender_id](https://github.com/electrode-io/electrode-boilerplate-universal-react-node/blob/master/config/sw-config.js#L18).  
 
 ## Instructions for sending a push notification  
 Now that we have our service worker up and running, we can send a `push` with the following steps:  

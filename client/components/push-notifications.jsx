@@ -154,6 +154,7 @@ export default class PushNotifications extends React.Component {
     return (
       <div>
         <h2>Push Notifications with Service Workers</h2>
+
         Use the form below to define the parameters for a push notification.
         Click the send button to trigger the notification itself.
 
