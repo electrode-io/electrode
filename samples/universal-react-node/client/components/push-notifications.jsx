@@ -153,30 +153,35 @@ export default class PushNotifications extends React.Component {
 
     return (
       <div>
-      <h2>Push Notifications with Service Workers</h2>
-      Use the form below to define the parameters for a push notification.
-      Click the send button to trigger the notification itself.
+        <h2>Push Notifications with Service Workers</h2>
+
+        Use the form below to define the parameters for a push notification.
+        Click the send button to trigger the notification itself.
+
         <label htmlFor="title">Title</label>
         <input
           onChange={this.handleInputChange}
           name="title"
         />
+
         <label htmlFor="body">Body</label>
         <input
           onChange={this.handleInputChange}
           name="body"
         />
-          <br/>
+
+        <br/>
         <button onClick={this.sendNotification}>Send</button>
 
-      <h3>Push Notification Subscription</h3>
-      <code>
-        {this.state.subscription.endpoint}
-      </code>
-      <h3>Curl Command</h3>
-      <code>
-        {curlCommand}
-      </code>
+        <h3>Subscription Endpoint</h3>
+        <code>
+          {this.state.subscription.endpoint}
+        </code>
+
+        <h3>Curl Command</h3>
+        <code>
+          {curlCommand}
+        </code>
       </div>
     );
   }
