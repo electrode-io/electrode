@@ -8,12 +8,12 @@ const WarningsErrors = (props) => {
       <CardHeader showExpandableButton={true} actAsExpander={true} subtitle="Warnings and Errors"/>
         <CardText expandable={true} style={ {background: "black", color: "gray"} }>
         {props.warnings.map((e, i) => (
-          <pre key={i} dangerouslySetInnerHTML={ {__html: e} }></pre>
+          <pre key={i} dangerouslySetInnerHTML={ {__html: e} } />
         ))}
         </CardText>
         <CardText expandable={true} style={ {background: "black", color: "gray"} }>
         {props.errors.map((e, i) => (
-          <pre key={i} dangerouslySetInnerHTML={ {__html: e} }></pre>
+          <pre key={i} dangerouslySetInnerHTML={ {__html: e} } />
         ))}
       </CardText>
     </Card>
