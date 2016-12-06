@@ -11,12 +11,19 @@ module.exports = generators.Base.extend({
       defaults: '',
       desc: 'Relocate the location of the generated files.'
     });
+
+    this.option('pwa', {
+      type: String,
+      required: true,
+      desc: 'Progressive Web App'
+    });
   },
 
   writing: function () {
-    this.fs.copy(
+    this.fs.copyTpl(
       this.templatePath('server'),
-      this.destinationPath(this.options.generateInto, 'server')
+      this.destinationPath(this.options.generateInto, 'server'),
+      { pwa: this.options.pwa }
     );
   }
 });

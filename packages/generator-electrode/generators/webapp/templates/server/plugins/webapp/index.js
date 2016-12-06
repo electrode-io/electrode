@@ -21,11 +21,14 @@ function loadAssetsFromStats(statsFilePath) {
     .then(require)
     .then((stats) => {
       const assets = {};
-      _.each(stats.assetsByChunkName.main, (v) => {
-        if (v.endsWith(".js")) {
-          assets.js = v;
-        } else if (v.endsWith(".css")) {
-          assets.css = v;
+      _.each(stats.assets, (asset) => {
+        const name = asset.name;
+        if (name.startsWith("bundle")) {
+          assets.js = name;
+        } else if (name.endsWith(".css")) {
+          assets.css = name;
+        } else if (name.endsWith("manifest.json")) {
+          assets.manifest = name;
         }
       });
       return assets;
@@ -33,11 +36,28 @@ function loadAssetsFromStats(statsFilePath) {
     .catch(() => ({}));
 }
 
+function getIconStats(iconStatsPath) {
+  let iconStats;
+  try {
+    iconStats = fs.readFileSync(Path.resolve(iconStatsPath)).toString();
+    iconStats = JSON.parse(iconStats);
+  } catch (err) {
+    // noop
+  }
+  if (iconStats && iconStats.html) {
+    return iconStats.html.join("");
+  }
+  return iconStats;
+}
+
+/* eslint max-statements: [2, 16] */
 function makeRouteHandler(options, userContent) {
   const CONTENT_MARKER = "{{SSR_CONTENT}}";
-  const BUNDLE_MARKER = "{{WEBAPP_BUNDLES}}";
+  const HEADER_BUNDLE_MARKER = "{{WEBAPP_HEADER_BUNDLES}}";
+  const BODY_BUNDLE_MARKER = "{{WEBAPP_BODY_BUNDLES}}";
   const TITLE_MARKER = "{{PAGE_TITLE}}";
   const PREFETCH_MARKER = "{{PREFETCH_BUNDLES}}";
+  const META_TAGS_MARKER = "{{META_TAGS}}";
   const WEBPACK_DEV = options.webpackDev;
   const RENDER_JS = options.renderJS;
   const RENDER_SS = options.serverSideRendering;
@@ -45,8 +65,10 @@ function makeRouteHandler(options, userContent) {
   const assets = options.__internals.assets;
   const devJSBundle = options.__internals.devJSBundle;
   const devCSSBundle = options.__internals.devCSSBundle;
+  const iconStats = getIconStats(options.iconStats);
 
   /* Create a route handler */
+  /*eslint max-statements: 0*/
   return (request, reply) => {
     const mode = request.query.__mode || "";
     const renderJs = RENDER_JS && mode !== "nojs";
@@ -63,6 +85,10 @@ function makeRouteHandler(options, userContent) {
       return WEBPACK_DEV ? devJSBundle : assets.js && `/js/${assets.js}` || "";
     };
 
+    const bundleManifest = () => {
+      return assets.manifest ? `/js/${assets.manifest}` : "";
+    };
+
     const callUserContent = (content) => {
       const x = content(request);
       return !x.catch ? x : x.catch((err) => {
@@ -73,16 +99,22 @@ function makeRouteHandler(options, userContent) {
       });
     };
 
-    const makeBundles = () => {
+    const makeHeaderBundles = () => {
+      const manifest = bundleManifest();
+      const manifestLink = manifest
+        ? `<link rel="manifest" href="${manifest}" />`
+        : "";
       const css = bundleCss();
       const cssLink = css ? `<link rel="stylesheet" href="${css}" />` : "";
-      const js = bundleJs();
-      const jsLink = js ? `<script src="${js}"></script>` : "";
-      return `${cssLink}${jsLink}`;
+      const font = "https://fonts.googleapis.com/icon?family=Material+Icons|Open+Sans";
+      const fontLink = `<link rel="stylesheet" href="${font}" />`;
+      return `${manifestLink}${cssLink}${fontLink}`;
     };
 
-    const addPrefetch = (prefetch) => {
-      return prefetch ? `<script>${prefetch}</script>` : "";
+    const makeBodyBundles = () => {
+      const js = bundleJs();
+      const jsLink = js ? `<script src="${js}"></script>` : "";
+      return jsLink;
     };
 
     const renderPage = (content) => {
@@ -92,10 +124,14 @@ function makeRouteHandler(options, userContent) {
           return content.html || "";
         case TITLE_MARKER:
           return options.pageTitle;
-        case BUNDLE_MARKER:
-          return makeBundles();
+        case HEADER_BUNDLE_MARKER:
+          return makeHeaderBundles();
+        case BODY_BUNDLE_MARKER:
+          return makeBodyBundles();
         case PREFETCH_MARKER:
-          return addPrefetch(content.prefetch);
+          return `<script>${content.prefetch}</script>`;
+        case META_TAGS_MARKER:
+          return iconStats;
         default:
           return `Unknown marker ${m}`;
         }
@@ -127,7 +163,7 @@ function makeRouteHandler(options, userContent) {
         return data.status ? handleStatus(data) : reply(data);
       })
       .catch((err) => {
-        reply(err.html).code(err.status || HTTP_ERROR_500);
+        reply(err.message).code(err.status || HTTP_ERROR_500);
       });
   };
 }
@@ -144,9 +180,18 @@ const registerRoutes = (server, options, next) => {
       port: process.env.WEBPACK_DEV_PORT || "2992"
     },
     paths: {},
-    stats: "dist/server/stats.json"
+    stats: "dist/server/stats.json",
+    iconStats: "dist/server/iconstats.json"
   };
-
+<% if (pwa) { %>
+  server.route({
+    method: "GET",
+    path: "/sw.js",
+    handler: {
+      file: "dist/sw.js"
+    }
+  });
+<% } %>
   const resolveContent = (content) => {
     if (!_.isString(content) && !_.isFunction(content) && content.module) {
       const module = content.module.startsWith(".") ? Path.join(process.cwd(), content.module) : content.module; // eslint-disable-line
