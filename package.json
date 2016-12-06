@@ -20,6 +20,9 @@
   },
   "license": "Apache-2.0",
   "scripts": {
+    "build": "gulp build",
+    "start": "gulp server",
+    "hot": "gulp hot",
     "test": "gulp check",
     "coverage": "gulp check",
     "nuke": "rm -rf dist; rm -rf .etemp; rm -rf node_modules; rm -rf .isomorphic-loader-config.json; rm -rf npm-debug.log"
