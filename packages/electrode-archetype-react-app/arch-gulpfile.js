@@ -256,6 +256,10 @@ const tasks = {
   },
   "npm:test": ["check"],
   "npm:release": `node ${__dirname}/scripts/map-isomorphic-cdn.js`,
+  "pwa": {
+    desc: "PWA must have dist by running `gulp build` first and then start the app server only.",
+    task: ["build", "server"]
+  },
   "server": {
     desc: "Start the app server only, Must have dist by running `gulp build` first.",
     task: `node server/index.js`
