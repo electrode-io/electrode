@@ -21,7 +21,7 @@ var getMultiBundleEntry = function (entries) {
 
 module.exports = function () {
   return function (config) {
-    var entry = config.__wmlMultiBundle ?
+    var entry = typeof config.entry === "object" ?
       getMultiBundleEntry(config.entry) :
       getDefaultEntry(config.entry);
 
