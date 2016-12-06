@@ -1,19 +1,25 @@
 "use strict";
 
-var CHUNKS = {
+const CHUNKS = {
   ENTRY: {
     js: "entry",
     css: "entry"
   }
 };
 
-var getChunks = function (path) {
+const getChunks = (path) => {
+
   /* Return "entry" for all paths */
   if (path.startsWith("/")) {
     return CHUNKS.ENTRY;
   }
+
+  return {
+    js: "",
+    css: ""
+  };
 };
 
-module.exports = function (request) {
+module.exports = (request) => {
   return getChunks(request.path);
 };

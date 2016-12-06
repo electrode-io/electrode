@@ -22,9 +22,9 @@ export default class PushNotifications extends React.Component {
       title: "",
       body: ""
     };
-    this.sendNotification = this.sendNotification.bind(this);
+    this.handleSendNotification = this.handleSendNotification.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.subscribe = this.subscribe.bind(this);
+    this.handleSubscribe = this.handleSubscribe.bind(this);
   }
 
   componentDidMount() {
@@ -91,7 +91,7 @@ export default class PushNotifications extends React.Component {
     });
   }
 
-  sendNotification() {
+  handleSendNotification() {
     const { title, body } = this.state;
     const options = { body, icon, badge };
     navigator.serviceWorker.ready.then((registration) => {
@@ -137,7 +137,7 @@ export default class PushNotifications extends React.Component {
       return (
         <div>
           Click below to subscribe to push notifications
-          <button onClick={this.subscribe}>Subscribe</button>
+          <button onClick={this.handleSubscribe}>Subscribe</button>
         </div>
       );
     }
@@ -171,7 +171,7 @@ export default class PushNotifications extends React.Component {
         />
 
         <br/>
-        <button onClick={this.sendNotification}>Send</button>
+        <button onClick={this.handleSendNotification}>Send</button>
 
         <h3>Subscription Endpoint</h3>
         <code>

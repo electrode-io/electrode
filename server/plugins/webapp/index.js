@@ -93,6 +93,7 @@ function makeRouteHandler(options, userContent) {
   const iconStats = getIconStats(options.iconStats);
 
   /* Create a route handler */
+  /* eslint max-statements: [2, 20] */
   return (request, reply) => {
     const mode = request.query.__mode || "";
     const renderJs = RENDER_JS && mode !== "nojs";
