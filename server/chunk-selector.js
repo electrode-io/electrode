@@ -19,7 +19,7 @@ const getChunks = (path) => {
   }
 
   return CHUNKS.DEFAULT;
-}
+};
 
 module.exports = (request) => {
   return getChunks(request.path);
