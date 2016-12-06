@@ -1,6 +1,10 @@
 "use strict";
 
 const CHUNKS = {
+  DEFAULT: {
+    js: "",
+    css: ""
+  },
   ENTRY: {
     js: "entry",
     css: "entry"
@@ -14,11 +18,8 @@ const getChunks = (path) => {
     return CHUNKS.ENTRY;
   }
 
-  return {
-    js: "",
-    css: ""
-  };
-};
+  return CHUNKS.DEFAULT;
+}
 
 module.exports = (request) => {
   return getChunks(request.path);
