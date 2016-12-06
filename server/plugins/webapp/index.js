@@ -10,6 +10,25 @@ const HTTP_ERROR_500 = 500;
 const HTTP_REDIRECT = 302;
 
 /**
+ * Tries to import bundle chunk selector function if the corresponding option is set in the
+ * webapp plugin configuration. The function takes a `request` object as an argument and
+ * returns the chunk name.
+ *
+ * @param {Object} options - webapp plugin configuration options
+ * @return {Function} function that selects the bundle based on the request object
+ */
+function resolveChunkSelector(options) {
+  if (options.bundleChunkSelector) {
+    return require(Path.join(process.cwd(), options.bundleChunkSelector));  // eslint-disable-line
+  }
+
+  return () => ({
+    css: "",
+    js: ""
+  });
+}
+
+/**
  * Load stats.json which is created during build.
  * The file contains bundle files which are to be loaded on the client side.
  *
@@ -21,16 +40,23 @@ function loadAssetsFromStats(statsFilePath) {
     .then(require)
     .then((stats) => {
       const assets = {};
-      _.each(stats.assets, (asset) => {
-        const name = asset.name;
-        if (name.startsWith("bundle")) {
-          assets.js = name;
-        } else if (name.endsWith(".css")) {
-          assets.css = name;
-        } else if (name.endsWith("manifest.json")) {
-          assets.manifest = name;
-        }
+      const manifestAsset = _.find(stats.assets, (asset) => {
+        return asset.name.endsWith("manifest.json");
       });
+      const jsAssets = stats.assets.filter((asset) => {
+        return asset.name.endsWith(".js");
+      });
+      const cssAssets = stats.assets.filter((asset) => {
+        return asset.name.endsWith(".css");
+      });
+
+      if (manifestAsset) {
+        assets.manifest = manifestAsset.name;
+      }
+
+      assets.js = jsAssets;
+      assets.css = cssAssets;
+
       return assets;
     })
     .catch(() => ({}));
@@ -47,7 +73,7 @@ function getIconStats(iconStatsPath) {
   if (iconStats && iconStats.html) {
     return iconStats.html.join("");
   }
-  return iconStats;
+  return iconStats || "";
 }
 
 function makeRouteHandler(options, userContent) {
@@ -62,8 +88,8 @@ function makeRouteHandler(options, userContent) {
   const RENDER_SS = options.serverSideRendering;
   const html = fs.readFileSync(Path.join(__dirname, "index.html")).toString();
   const assets = options.__internals.assets;
-  const devJSBundle = options.__internals.devJSBundle;
-  const devCSSBundle = options.__internals.devCSSBundle;
+  const devBundleBase = options.__internals.devBundleBase;
+  const chunkSelector = options.__internals.chunkSelector;
   const iconStats = getIconStats(options.iconStats);
 
   /* Create a route handler */
@@ -71,16 +97,25 @@ function makeRouteHandler(options, userContent) {
     const mode = request.query.__mode || "";
     const renderJs = RENDER_JS && mode !== "nojs";
     const renderSs = RENDER_SS && mode !== "noss";
+    const chunkNames = chunkSelector(request);
+    const jsChunk = _.find(assets.js, (asset) => asset.chunkNames[0] === chunkNames.js);
+    const cssChunk = _.find(assets.css, (asset) => asset.chunkNames[0] === chunkNames.css);
+    const devCSSBundle = chunkNames.css ?
+      `${devBundleBase}${chunkNames.css}.style.css` :
+      `${devBundleBase}style.css`;
+    const devJSBundle = chunkNames.js ?
+      `${devBundleBase}${chunkNames.js}.bundle.dev.js` :
+      `${devBundleBase}bundle.dev.js`;
 
     const bundleCss = () => {
-      return WEBPACK_DEV ? devCSSBundle : assets.css && `/js/${assets.css}` || "";
+      return WEBPACK_DEV ? devCSSBundle : cssChunk.name && `/js/${cssChunk.name}` || "";
     };
 
     const bundleJs = () => {
       if (!renderJs) {
         return "";
       }
-      return WEBPACK_DEV ? devJSBundle : assets.js && `/js/${assets.js}` || "";
+      return WEBPACK_DEV ? devJSBundle : jsChunk.name && `/js/${jsChunk.name}` || "";
     };
 
     const bundleManifest = () => {
@@ -198,14 +233,15 @@ const registerRoutes = (server, options, next) => {
   };
 
   const pluginOptions = _.defaultsDeep({}, options, pluginOptionsDefaults);
+  const chunkSelector = resolveChunkSelector(pluginOptions);
+  const devBundleBase = `http://${pluginOptions.devServer.host}:${pluginOptions.devServer.port}/js/`;
 
   return Promise.try(() => loadAssetsFromStats(pluginOptions.stats))
     .then((assets) => {
-      const devServer = pluginOptions.devServer;
       pluginOptions.__internals = {
         assets,
-        devJSBundle: `http://${devServer.host}:${devServer.port}/js/bundle.dev.js`,
-        devCSSBundle: `http://${devServer.host}:${devServer.port}/js/style.css`
+        chunkSelector,
+        devBundleBase
       };
 
       _.each(options.paths, (v, path) => {
