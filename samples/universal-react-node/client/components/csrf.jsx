@@ -7,8 +7,8 @@ export class CSRF extends React.Component {
     this.state = {
       testResult: ""
     };
-    this.testValid = this.testValid.bind(this);
-    this.testInvalid = this.testInvalid.bind(this);
+    this.handleTestValid = this.handleTestValid.bind(this);
+    this.handleTestInvalid = this.handleTestInvalid.bind(this);
   }
 
   doPost(csrfToken) {
@@ -35,7 +35,7 @@ export class CSRF extends React.Component {
     });
   }
 
-  testValid() {
+  handleTestValid() {
     this.setState({testResult: "valid"});
     fetch("/1", {credentials: "same-origin"}) // eslint-disable-line
     .then((resp) => {
@@ -56,7 +56,7 @@ export class CSRF extends React.Component {
     });
   }
 
-  testInvalid() {
+  handleTestInvalid() {
     this.doPost("fake", true);
   }
 
@@ -76,9 +76,9 @@ export class CSRF extends React.Component {
         </ul>
         <p>Two simple tests via AJAX (JavaScript must be enabled) are demonstrated below:</p>
         <ul>
-          <li><a href="#" onClick={this.testValid}>Test Valid POST</a> using a token
+          <li><a href="#" onClick={this.handleTestValid}>Test Valid POST</a> using a token
             retrieved from <code>/1</code> first (should succeed with a 200 status)</li>
-          <li><a href="#" onClick={this.testInvalid}>Test Invalid POST </a>
+          <li><a href="#" onClick={this.handleTestInvalid}>Test Invalid POST </a>
            using a forged token (should fail with a 400 status)</li>
         </ul>
         <div>
