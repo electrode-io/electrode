@@ -50,6 +50,12 @@ function getIconStats(iconStatsPath) {
   return iconStats;
 }
 
+function getCriticalCSS(path) {
+  const criticalCSSPath = Path.resolve(process.cwd(), path);
+  const criticalCSS = fs.readFileSync(criticalCSSPath).toString();
+  return `<style>${criticalCSS}</style>`;
+}
+
 function makeRouteHandler(options, userContent) {
   const CONTENT_MARKER = "{{SSR_CONTENT}}";
   const HEADER_BUNDLE_MARKER = "{{WEBAPP_HEADER_BUNDLES}}";
@@ -57,6 +63,7 @@ function makeRouteHandler(options, userContent) {
   const TITLE_MARKER = "{{PAGE_TITLE}}";
   const PREFETCH_MARKER = "{{PREFETCH_BUNDLES}}";
   const META_TAGS_MARKER = "{{META_TAGS}}";
+  const CRITICAL_CSS_MARKER = "{{CRITICAL_CSS}}";
   const WEBPACK_DEV = options.webpackDev;
   const RENDER_JS = options.renderJS;
   const RENDER_SS = options.serverSideRendering;
@@ -65,6 +72,7 @@ function makeRouteHandler(options, userContent) {
   const devJSBundle = options.__internals.devJSBundle;
   const devCSSBundle = options.__internals.devCSSBundle;
   const iconStats = getIconStats(options.iconStats);
+  const criticalCSS = getCriticalCSS(options.criticalCSS);
 
   /* Create a route handler */
   return (request, reply) => {
@@ -128,6 +136,8 @@ function makeRouteHandler(options, userContent) {
           return `<script>${content.prefetch}</script>`;
         case META_TAGS_MARKER:
           return iconStats;
+        case CRITICAL_CSS_MARKER:
+          return criticalCSS;
         default:
           return `Unknown marker ${m}`;
         }
@@ -177,7 +187,8 @@ const registerRoutes = (server, options, next) => {
     },
     paths: {},
     stats: "dist/server/stats.json",
-    iconStats: "dist/server/iconstats.json"
+    iconStats: "dist/server/iconstats.json",
+    criticalCSS: "dist/js/critical.css"
   };
 
   server.route({

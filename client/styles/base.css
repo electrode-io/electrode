@@ -2,6 +2,12 @@ body {
   font: 12px Helvetica;
 }
 
+.container {
+  width: "50%";
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .aboveFold {
   margin: 20px 0;
   border: 2px solid blue;
@@ -17,3 +23,4 @@ input, label {
   margin: 2px;
   display: block;
 }
+
