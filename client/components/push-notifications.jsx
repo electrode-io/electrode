@@ -70,7 +70,7 @@ export default class PushNotifications extends React.Component {
     }
   }
 
-  subscribe() {
+  handleSubscribe() {
     navigator.serviceWorker.ready.then((registration) => {
       registration.pushManager.subscribe({ userVisibleOnly: true })
         .then((subscription) => {
