@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "bluebird": "^3.4.6",
-    "electrode-archetype-react-app": "^1.0.0",
+    "electrode-archetype-react-app": "^1.4.1",
     "electrode-confippet": "^1.0.0",
     "electrode-redux-router-engine": "^1.2.2",
     "electrode-server": "^1.0.0",
@@ -35,7 +35,7 @@
     "lodash": "^4.10.1"
   },
   "devDependencies": {
-    "electrode-archetype-react-app-dev": "^1.0.0",
+    "electrode-archetype-react-app-dev": "^1.4.1",
     "gulp": "^3.9.1"
   }
 }
