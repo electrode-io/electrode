@@ -99,24 +99,30 @@ function makeRouteHandler(options, userContent) {
     const renderJs = RENDER_JS && mode !== "nojs";
     const renderSs = RENDER_SS && mode !== "noss";
     const chunkNames = chunkSelector(request);
-    const jsChunk = _.find(assets.js, (asset) => asset.chunkNames[0] === chunkNames.js);
-    const cssChunk = _.find(assets.css, (asset) => asset.chunkNames[0] === chunkNames.css);
     const devCSSBundle = chunkNames.css ?
       `${devBundleBase}${chunkNames.css}.style.css` :
       `${devBundleBase}style.css`;
     const devJSBundle = chunkNames.js ?
       `${devBundleBase}${chunkNames.js}.bundle.dev.js` :
       `${devBundleBase}bundle.dev.js`;
+    const jsChunk = _.find(
+      assets.js,
+      (asset) => asset.chunkNames[0] === (chunkNames.js || "bundle")
+    );
+    const cssChunk = _.find(
+      assets.css,
+      (asset) => asset.chunkNames[0] === (chunkNames.css || "bundle")
+    );
 
     const bundleCss = () => {
-      return WEBPACK_DEV ? devCSSBundle : cssChunk.name && `/js/${cssChunk.name}` || "";
+      return WEBPACK_DEV ? devCSSBundle : cssChunk && `/js/${cssChunk.name}` || "";
     };
 
     const bundleJs = () => {
       if (!renderJs) {
         return "";
       }
-      return WEBPACK_DEV ? devJSBundle : jsChunk.name && `/js/${jsChunk.name}` || "";
+      return WEBPACK_DEV ? devJSBundle : jsChunk && `/js/${jsChunk.name}` || "";
     };
 
     const bundleManifest = () => {

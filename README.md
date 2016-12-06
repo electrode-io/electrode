@@ -408,6 +408,77 @@ module.exports = (req) => {
 
 ---
 
+### <a name="multiple-entry-points"></a>Multiple Entry Points
+
+The `electrode-archetype-react-app` supports multiple entry points per app. In order to enable this feature:
+
+- Add an entry file in `client/entry.config.js`.
+
+```js
+module.exports = {
+  home: "./home.jsx",
+  about: "./about.jsx"
+};
+```
+
+- Add a chunk selector to `server/chunk-selector.js`
+
+```js
+"use strict";
+
+const CHUNKS = {
+  DEFAULT: {
+    css: "",
+    js: ""
+  },
+  HOME: {
+    css: "home",
+    js: "home"
+  },
+  about: {
+    css: "home",
+    js: "home"
+  }
+};
+
+const getChunks = (path) => {
+  if (path.endsWith("/about")) {
+    return CHUNKS.ABOUT;
+  }
+
+  return CHUNKS.HOME;
+};
+
+module.exports = (request) => {
+  return getChunks(request.path);
+};
+```
+
+- Add a bundleChunkSelector option to the webapp key in `config/default.json`
+
+```js
+{
+  "plugins": {
+    "webapp": {
+      "bundleChunkSelector": "./server/chunk-selector.js",
+      "module": "./server/plugins/webapp",
+      "options": {
+        "pageTitle": "Electrode Boilerplate Universal React App",
+        "paths": {
+          "/{args*}": {
+            "content": {
+              "module": "./server/views/index-view"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+---
+
 ### <a name="above-the-fold-only-server-render"></a>Above The Fold Only Server Render
 
 [Above The Fold Only Server Render](https://github.com/electrode-io/above-the-fold-only-server-render) is a React component for optionally skipping server side rendering of components outside above-the-fold (or inside of the viewport). This component helps render your components on the server that are above the fold and the remaining components on the client.

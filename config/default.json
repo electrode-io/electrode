@@ -10,7 +10,6 @@
     "webapp": {
       "module": "./server/plugins/webapp",
       "options": {
-        "bundleChunkSelector": "./server/chunk-selector.js",
         "pageTitle": "Electrode Boilerplate Universal React App",
         "paths": {
           "/{args*}": {
