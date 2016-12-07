@@ -52,8 +52,12 @@ function getIconStats(iconStatsPath) {
 
 function getCriticalCSS(path) {
   const criticalCSSPath = Path.resolve(process.cwd(), path);
-  const criticalCSS = fs.readFileSync(criticalCSSPath).toString();
-  return `<style>${criticalCSS}</style>`;
+  try {
+    const criticalCSS = fs.readFileSync(criticalCSSPath).toString();
+    return `<style>${criticalCSS}</style>`;
+  } catch (err) {
+    return '';
+  }
 }
 
 function makeRouteHandler(options, userContent) {
