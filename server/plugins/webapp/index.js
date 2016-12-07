@@ -68,12 +68,12 @@ function getIconStats(iconStatsPath) {
     iconStats = fs.readFileSync(Path.resolve(iconStatsPath)).toString();
     iconStats = JSON.parse(iconStats);
   } catch (err) {
-    // noop
+    iconStats = "";
   }
   if (iconStats && iconStats.html) {
     return iconStats.html.join("");
   }
-  return iconStats || "";
+  return iconStats;
 }
 
 function makeRouteHandler(options, userContent) {
