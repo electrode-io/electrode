@@ -1,0 +1,48 @@
+{
+  "name": "electrode-react-sample-material-ui",
+  "version": "0.0.0",
+  "description": "Electrode Universal React Sample App with material-ui components",
+  "homepage": "http://electrode.io",
+  "author": {
+    "name": "Joel Chen",
+    "email": "xchen@walmartlabs.com",
+    "url": "https://github.com/jchip"
+  },
+  "contributors": [],
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "keywords": [
+    "Electrode",
+    "Universal",
+    "React",
+    "Sample",
+    "material-ui"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "jchip/electrode-react-sample-material-ui"
+  },
+  "license": "Apache-2.0",
+  "scripts": {
+    "start": "gulp dev",
+    "test": "gulp test",
+    "coverage": "gulp check"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "electrode-archetype-react-app": "^1.4.1",
+    "electrode-confippet": "^1.0.0",
+    "electrode-router-resolver-engine": "^1.0.0",
+    "electrode-server": "^1.0.0",
+    "electrode-static-paths": "^1.0.0",
+    "lodash": "^4.10.1",
+    "material-ui": "^0.16.4",
+    "react-tap-event-plugin": "^2.0.0"
+  },
+  "devDependencies": {
+    "electrode-archetype-react-app-dev": "^1.4.1",
+    "gulp": "^3.9.1"
+  }
+}
