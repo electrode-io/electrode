@@ -1,5 +1,6 @@
 import React, {PropTypes} from "react";
 import {connect} from "react-redux";
+import Notifications from "react-notify-toast";
 import electrodeLogo from "../images/electrode.svg";
 import { container } from "../styles/base.css";
 
@@ -21,6 +22,7 @@ export class Home extends React.Component {
   render() {
     return (
       <div>
+        <Notifications />
         <div className={container}>
           <a href="https://github.com/electrode-io"> <img style={{
             width: "100%"

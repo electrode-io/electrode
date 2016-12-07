@@ -4,14 +4,15 @@ import { routes } from "./routes";
 import { Router, browserHistory } from "react-router";
 import { createStore, compose } from "redux";
 import { Provider } from "react-redux";
+import {notify} from "react-notify-toast";
 import "styles/base.css";
 import rootReducer from "./reducers";
 
 import DevTools from "../client/devtools";
 
-require.ensure(["./register-service-worker"], (require) => {
-  require("./register-service-worker")();
-}, "register-service-worker");
+require.ensure(["./sw-registration"], (require) => {
+  require("./sw-registration")(notify);
+}, "sw-registration");
 
 
 const enhancer = compose(
