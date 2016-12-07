@@ -55,6 +55,6 @@ supports.cssModuleHook({
   generateScopedName: "[name]__[local]___[hash:base64:5]"
 });
 
-supports.isomorphicExtendRequire().then(() => {
+module.exports = supports.isomorphicExtendRequire().then(() => {
   require("electrode-server")(config, [staticPathsDecor()]); // eslint-disable-line
 });

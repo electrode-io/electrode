@@ -9,6 +9,14 @@ const assert = require("assert");
 const HTTP_ERROR_500 = 500;
 const HTTP_REDIRECT = 302;
 
+const CONTENT_MARKER = "{{SSR_CONTENT}}";
+const HEADER_BUNDLE_MARKER = "{{WEBAPP_HEADER_BUNDLES}}";
+const BODY_BUNDLE_MARKER = "{{WEBAPP_BODY_BUNDLES}}";
+const TITLE_MARKER = "{{PAGE_TITLE}}";
+const PREFETCH_MARKER = "{{PREFETCH_BUNDLES}}";
+const META_TAGS_MARKER = "{{META_TAGS}}";
+const CRITICAL_CSS_MARKER = "{{CRITICAL_CSS}}";
+
 /**
  * Tries to import bundle chunk selector function if the corresponding option is set in the
  * webapp plugin configuration. The function takes a `request` object as an argument and
@@ -76,13 +84,17 @@ function getIconStats(iconStatsPath) {
   return iconStats;
 }
 
+function getCriticalCSS(path) {
+  const criticalCSSPath = Path.resolve(process.cwd(), path);
+  try {
+    const criticalCSS = fs.readFileSync(criticalCSSPath).toString();
+    return `<style>${criticalCSS}</style>`;
+  } catch (err) {
+    return "";
+  }
+}
+
 function makeRouteHandler(options, userContent) {
-  const CONTENT_MARKER = "{{SSR_CONTENT}}";
-  const HEADER_BUNDLE_MARKER = "{{WEBAPP_HEADER_BUNDLES}}";
-  const BODY_BUNDLE_MARKER = "{{WEBAPP_BODY_BUNDLES}}";
-  const TITLE_MARKER = "{{PAGE_TITLE}}";
-  const PREFETCH_MARKER = "{{PREFETCH_BUNDLES}}";
-  const META_TAGS_MARKER = "{{META_TAGS}}";
   const WEBPACK_DEV = options.webpackDev;
   const RENDER_JS = options.renderJS;
   const RENDER_SS = options.serverSideRendering;
@@ -91,6 +103,7 @@ function makeRouteHandler(options, userContent) {
   const devBundleBase = options.__internals.devBundleBase;
   const chunkSelector = options.__internals.chunkSelector;
   const iconStats = getIconStats(options.iconStats);
+  const criticalCSS = getCriticalCSS(options.criticalCSS);
 
   /* Create a route handler */
   /* eslint max-statements: [2, 20] */
@@ -145,14 +158,20 @@ function makeRouteHandler(options, userContent) {
         ? `<link rel="manifest" href="${manifest}" />`
         : "";
       const css = bundleCss();
-      const cssLink = css ? `<link rel="stylesheet" href="${css}" />` : "";
+      const cssLink = css && !criticalCSS
+        ? `<link rel="stylesheet" href="${css}" />`
+        : "";
       return `${manifestLink}${cssLink}`;
     };
 
     const makeBodyBundles = () => {
       const js = bundleJs();
+      const css = bundleCss();
+      const cssLink = css && criticalCSS
+      ? `<link rel="stylesheet" href="${css}" />`
+      : "";
       const jsLink = js ? `<script src="${js}"></script>` : "";
-      return jsLink;
+      return `${cssLink}${jsLink}`;
     };
 
     const renderPage = (content) => {
@@ -170,6 +189,8 @@ function makeRouteHandler(options, userContent) {
           return `<script>${content.prefetch}</script>`;
         case META_TAGS_MARKER:
           return iconStats;
+        case CRITICAL_CSS_MARKER:
+          return criticalCSS;
         default:
           return `Unknown marker ${m}`;
         }
@@ -219,7 +240,8 @@ const registerRoutes = (server, options, next) => {
     },
     paths: {},
     stats: "dist/server/stats.json",
-    iconStats: "dist/server/iconstats.json"
+    iconStats: "dist/server/iconstats.json",
+    criticalCSS: "dist/js/critical.css"
   };
 
   server.route({

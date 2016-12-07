@@ -1,6 +1,7 @@
 import React, {PropTypes} from "react";
 import {connect} from "react-redux";
 import electrodeLogo from "../images/electrode.svg";
+import { container } from "../styles/base.css";
 
 class HomeWrapper extends React.Component {
   render() {
@@ -20,11 +21,7 @@ export class Home extends React.Component {
   render() {
     return (
       <div>
-        <div style={{
-          width: "50%",
-          marginLeft: "auto",
-          marginRight: "auto"
-        }}>
+        <div className={container}>
           <a href="https://github.com/electrode-io"> <img style={{
             width: "100%"
           }} alt="Electrode Logo" src={electrodeLogo}/>
