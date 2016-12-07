@@ -116,14 +116,20 @@ function makeRouteHandler(options, userContent) {
         ? `<link rel="manifest" href="${manifest}" />`
         : "";
       const css = bundleCss();
-      const cssLink = css ? `<link rel="stylesheet" href="${css}" />` : "";
+      const cssLink = css && !criticalCSS
+        ? `<link rel="stylesheet" href="${css}" />`
+        : "";
       return `${manifestLink}${cssLink}`;
     };
 
     const makeBodyBundles = () => {
       const js = bundleJs();
+      const css = bundleCss();
+      const cssLink = css && criticalCSS
+      ? `<link rel="stylesheet" href="${css}" />`
+      : "";
       const jsLink = js ? `<script src="${js}"></script>` : "";
-      return jsLink;
+      return `${cssLink}${jsLink}`;
     };
 
     const renderPage = (content) => {
