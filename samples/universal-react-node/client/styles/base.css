@@ -1,0 +1,19 @@
+body {
+  font: 12px Helvetica;
+}
+
+.aboveFold {
+  margin: 20px 0;
+  border: 2px solid blue;
+  border-radius: 5px;
+  background-color: red;
+}
+
+.renderMessage {
+  color: red;
+}
+
+input, label {
+  margin: 2px;
+  display: block;
+}
