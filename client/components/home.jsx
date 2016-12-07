@@ -1,7 +1,7 @@
 import React, {PropTypes} from "react";
 import {connect} from "react-redux";
 import electrodeLogo from "../images/electrode.svg";
-import { container } from '../styles/base.css';
+import { container } from "../styles/base.css";
 
 class HomeWrapper extends React.Component {
   render() {

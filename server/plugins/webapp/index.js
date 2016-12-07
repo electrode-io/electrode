@@ -9,6 +9,14 @@ const assert = require("assert");
 const HTTP_ERROR_500 = 500;
 const HTTP_REDIRECT = 302;
 
+const CONTENT_MARKER = "{{SSR_CONTENT}}";
+const HEADER_BUNDLE_MARKER = "{{WEBAPP_HEADER_BUNDLES}}";
+const BODY_BUNDLE_MARKER = "{{WEBAPP_BODY_BUNDLES}}";
+const TITLE_MARKER = "{{PAGE_TITLE}}";
+const PREFETCH_MARKER = "{{PREFETCH_BUNDLES}}";
+const META_TAGS_MARKER = "{{META_TAGS}}";
+const CRITICAL_CSS_MARKER = "{{CRITICAL_CSS}}";
+
 /**
  * Load stats.json which is created during build.
  * The file contains bundle files which are to be loaded on the client side.
@@ -56,18 +64,11 @@ function getCriticalCSS(path) {
     const criticalCSS = fs.readFileSync(criticalCSSPath).toString();
     return `<style>${criticalCSS}</style>`;
   } catch (err) {
-    return '';
+    return "";
   }
 }
 
 function makeRouteHandler(options, userContent) {
-  const CONTENT_MARKER = "{{SSR_CONTENT}}";
-  const HEADER_BUNDLE_MARKER = "{{WEBAPP_HEADER_BUNDLES}}";
-  const BODY_BUNDLE_MARKER = "{{WEBAPP_BODY_BUNDLES}}";
-  const TITLE_MARKER = "{{PAGE_TITLE}}";
-  const PREFETCH_MARKER = "{{PREFETCH_BUNDLES}}";
-  const META_TAGS_MARKER = "{{META_TAGS}}";
-  const CRITICAL_CSS_MARKER = "{{CRITICAL_CSS}}";
   const WEBPACK_DEV = options.webpackDev;
   const RENDER_JS = options.renderJS;
   const RENDER_SS = options.serverSideRendering;
