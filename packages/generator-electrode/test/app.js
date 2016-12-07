@@ -85,9 +85,9 @@ describe('electrode:app', function () {
       assert.fileContent('README.md', '[travis-image]: https://travis-ci.org/electrode-io/generator-electrode.svg?branch=master');
     });
 
-    it('creates and fills the pageTitle field in config/default.json', function () {
-      assert.file('./config/default.json');
-      assert.fileContent('./config/default.json', '"pageTitle": "generator-electrode"');
+    it('creates and fills the pageTitle field in config/default.js', function () {
+      assert.file('./config/default.js');
+      assert.fileContent('./config/default.js', '"pageTitle": "generator-electrode"');
     });
   });
 });

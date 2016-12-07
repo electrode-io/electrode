@@ -74,6 +74,9 @@ module.exports = generators.Base.extend({
       this.props.authorName = this.pkg.author.name;
       this.props.authorEmail = this.pkg.author.email;
       this.props.authorUrl = this.pkg.author.url;
+      this.props.createDirectory = false;
+      this.props.serverType = this.fs.exists(this.destinationPath('server/express-server.js')) ? "expressjs" : "hapijs";
+      this.props.pwa = this.fs.exists(this.destinationPath('client/sw-register.js'));
     } else if (_.isString(this.pkg.author)) {
       var info = parseAuthor(this.pkg.author);
       this.props.authorName = info.name;
@@ -115,6 +118,17 @@ module.exports = generators.Base.extend({
           when: !this.props.homepage
         },
         {
+          type: 'list',
+          name: 'serverType',
+          message: 'Which framework for the server?',
+          when: !this.props.serverType,
+          choices: ['HapiJS', "ExpressJS"],
+          default: 'HapiJS',
+          filter: function(ans) {
+            return ans.toLowerCase();
+          }
+        },
+        {
           type: "input",
           name: 'authorName',
           message: 'Author\'s Name',
@@ -150,24 +164,26 @@ module.exports = generators.Base.extend({
           type: "confirm",
           name: "pwa",
           message: "Would you like to make a Progressive Web App?",
-          when: !this.props.pwa,
+          when: this.props.pwa === undefined,
           default: true
         },
         {
           type: "confirm",
           name: "createDirectory",
           message: "Would you like to create a new directory for your project?",
+          when: this.props.createDirectory === undefined,
           default: true
         }
       ];
 
       return this.prompt(prompts).then((props) => {
         this.props = extend(this.props, props);
-
         if (this.props.createDirectory) {
           var newRoot = this.destinationPath() + '/' + _.kebabCase(_.deburr(this.props.name));
           this.destinationRoot(newRoot);
         }
+        // saving to storage after the correct destination root is set
+        this.config.set('serverType', this.props.serverType);
       });
     },
 
@@ -238,12 +254,23 @@ module.exports = generators.Base.extend({
       this.destinationPath('.babelrc')
     );
 
-    ['gulpfile.js', 'config', 'server', 'test'].forEach((f) => {
+    ['gulpfile.js','config', 'test'].forEach((f) => {
       this.fs.copy(
         this.templatePath(f),
         this.destinationPath(f)
       );
     });
+      //special handling for the server file
+      const isHapi = this.config.get('serverType') === 'hapijs';
+      this.fs.copyTpl(
+        this.templatePath('server'),
+        this.destinationPath('server'),
+        {isHapi},
+        {},
+        {
+          globOptions: { ignore: [ isHapi ? '**/server/express-server.js' : '' ] }
+        }
+      );
 
     this.fs.copyTpl(
       this.templatePath('client'),
@@ -311,7 +338,7 @@ module.exports = generators.Base.extend({
       });
     }
 
-    if (!this.fs.exists(this.destinationPath('config/default.json'))) {
+    if (!this.fs.exists(this.destinationPath('config/default.js'))) {
       this.composeWith('electrode:config', {
         options: {
           name: this.props.name,
