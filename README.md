@@ -1,26 +1,27 @@
-# Electrode
+## ![electrode logo][logo-192x192]Electrode 
 
-# What is Electrode?
+### A Platform for building Universal React/Node.js applications
 
-Electrode is a platform for building universal React/Node.js applications with a standardized structure, best practices, and modern technologies baked in. Electrode focuses on performance, component reusability, and simple deployment to multiple cloud providers—so you can focus on what makes your app unique.
+> Built at @WalmartLabs powering the walmart.com eCommerce site, Electrode is a platform for building universal React/Node.js applications with a standardized structure, best practices, and modern technologies baked in. Electrode focuses on performance, component reusability, and simple deployment to multiple cloud providers—so you can focus on what makes your app unique.
 
 Read the [Announcement Blog] Post.
 
-# Go to Electrode Site
+# Getting Started
 
-http://www.electrode.io
+  - [Getting Started with Electrode](http://www.electrode.io/docs/get_started.html)
 
-# Docs
+  - [Electrode Site](http://www.electrode.io)
 
-http://www.electrode.io/docs/what_is_electrode.html
+  - [Docs](http://www.electrode.io/docs/what_is_electrode.html)
+
+## Report a bug or request a feature
+
+https://github.com/electrode-io/electrode/issues
 
 ## Report an issue or help out with the docs
 
 https://github.com/electrode-io/electrode-io.github.io/issues
 
-# Report a bug or request a feature
-
-https://github.com/electrode-io/electrode/issues
 
 # Packages
 
@@ -28,22 +29,20 @@ This repo uses [Lerna] to manage multiple related packages that are part of the 
 
 ## App Archetype
 
-This "app archetype" provides for common patterns across all app projects so that each app project can standardize on common development behavior and patterns. Its essentially pre-made patterns for build scripts.
+[electrode-archetype-react-app] is a NPM module that provides for common patterns across all app projects so that each app project can standardize on common development behavior and patterns. Its essentially pre-made patterns for build scripts.  It also requires a companion module [electrode-archetype-react-app-dev] that's meant for your app's `devDependencies`.
 
-## Yoeman Generator
+## Yeoman Generator
 
-The Yoeman app generator allow you to quickly create an Universal React App with support from the app archetype, and server in Node with Hapi or Express.
+The Yeoman [generator-electrode] NPM module allows you to quickly create an Universal React App with support from the app archetype, and server in Node with Hapi or Express.
 
 # Sample Applications
 
-Some sample applications can be found under the `samples` directory.
+Some sample applications can be found under the [`samples`](samples) directory.
 
 ## Boilerplate Universal React Node
 
-Under `samples/universal-react-node`, this is a sample Electrode app that was created with the Electrode generator and consumes the Electrode App archetype modules.  We've added other demos and features to it to serve as examples.  It demonstrates usage with the following Electrode modules:
+Under [`samples/universal-react-node`](samples/universal-react-node) is a sample Electrode app that was created with the Electrode generator and consumes the Electrode App archetype modules.  We've added other demos and features to it to serve as examples.  It demonstrates usage with the following Electrode modules:
 
-See its [README](samples/universal-react-node/README.md) for more details.
-  
   - [Electrode Confippet](https://github.com/electrode-io/electrode-confippet)
   - [Electrode Electrify](https://github.com/electrode-io/electrify)
   - [Electrode CSRF JWT](https://github.com/electrode-io/electrode-csrf-jwt)
@@ -52,12 +51,17 @@ See its [README](samples/universal-react-node/README.md) for more details.
   - [Above The Fold Only Server Render](https://github.com/electrode-io/above-the-fold-only-server-render)
   - [Electrode Bundle Analyzer](https://github.com/electrode-io/electrode-bundle-analyzer)
 
+See its [README](samples/universal-react-node/README.md) for more details.
+  
 ## Sample Universal React Node with [material-ui]
 
-Under `samples/universal-material-ui`, this is a sample Electrode app that uses the [material-ui] React components.
+Under [`samples/universal-material-ui`](samples/universal-material-ui) is a sample Electrode app that uses the [material-ui] React components.
 
 See its [README](samples/universal-material-ui/README.md) for more details.
 
+# More Samples
+
+We have more separate Electrode Sample Apps at https://github.com/electrode-samples that you can use as references.
 
 Built with :heart: by [Team Electrode] @WalmartLabs.
 
@@ -65,4 +69,7 @@ Built with :heart: by [Team Electrode] @WalmartLabs.
 [Announcement Blog]: https://medium.com/walmartlabs/introducing-electrode-an-open-source-release-from-walmartlabs-14b836135319#.pwbddxg1z
 [material-ui]: http://www.material-ui.com
 [Lerna]: https://lernajs.io/
-
+[electrode-archetype-react-app]: packages/electrode-archetype-react-app
+[electrode-archetype-react-app-dev]: packages/electrode-archetype-react-app-dev
+[generator-electrode]: packages/generator-electrode
+[logo-192x192]: https://raw.githubusercontent.com/electrode-io/electrode/cc4ea3e1851cee3333ecca08fdbf5534f51b1ae7/samples/universal-react-node/client/images/logo-192x192.png
