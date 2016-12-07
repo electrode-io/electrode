@@ -74,6 +74,9 @@ module.exports = generators.Base.extend({
       this.props.authorName = this.pkg.author.name;
       this.props.authorEmail = this.pkg.author.email;
       this.props.authorUrl = this.pkg.author.url;
+      this.props.createDirectory = false;
+      this.props.serverType = this.fs.exists(this.destinationPath('server/express-server.js')) ? "expressjs" : "hapijs";
+      this.props.pwa = this.fs.exists(this.destinationPath('client/sw-register.js'));
     } else if (_.isString(this.pkg.author)) {
       var info = parseAuthor(this.pkg.author);
       this.props.authorName = info.name;
@@ -118,7 +121,7 @@ module.exports = generators.Base.extend({
           type: 'list',
           name: 'serverType',
           message: 'Which framework for the server?',
-          when: !this.props.framework,
+          when: !this.props.serverType,
           choices: ['HapiJS', "ExpressJS"],
           default: 'HapiJS',
           filter: function(ans) {
@@ -161,13 +164,14 @@ module.exports = generators.Base.extend({
           type: "confirm",
           name: "pwa",
           message: "Would you like to make a Progressive Web App?",
-          when: !this.props.pwa,
+          when: this.props.pwa === undefined,
           default: true
         },
         {
           type: "confirm",
           name: "createDirectory",
           message: "Would you like to create a new directory for your project?",
+          when: this.props.createDirectory === undefined,
           default: true
         }
       ];
