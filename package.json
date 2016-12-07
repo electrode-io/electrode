@@ -1,5 +1,26 @@
 {
+  "name": "electrode",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Electrode Platform for NodeJS/React Universal Application",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electrode-io/electrode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/electrode-io/electrode/issues"
+  },
+  "homepage": "http://www.electrode.io",
+  "license": "Apache-2.0",
+  "scripts": {
+    "test": ""
+  },
   "devDependencies": {
+    "gulp": "^3.9.1",
     "lerna": "2.0.0-beta.30"
+  },
+  "engines": {
+    "node": "^4.4.6 || ^6.2.1",
+    "npm": "^3.5.3"
   }
 }
