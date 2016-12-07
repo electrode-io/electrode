@@ -18,6 +18,7 @@ $ mkdir your-project-name
 $ cd your-project-name
 $ yo electrode
 ```
+> Note: If the app is not properly generated at the correct destination, make sure you do not have a .yo-rc.json file hidden in your CWD.
 
 ## Running the app
 

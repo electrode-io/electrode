@@ -32,5 +32,4 @@ supports.babelRegister({
 supports.cssModuleHook({
   generateScopedName: "[name]__[local]___[hash:base64:5]"
 });
-
-require("electrode-server")(config, [staticPathsDecor()]);
+require<% if (isHapi) { %>("electrode-server")(config, [staticPathsDecor()])<% } else { %>("./express-server")(config)<% } %>;

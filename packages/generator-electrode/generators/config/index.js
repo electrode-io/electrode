@@ -20,10 +20,14 @@ module.exports = generators.Base.extend({
   },
 
   writing: function () {
+    let routeMatch = (this.config.get('serverType') === 'hapijs') ? "/{args*}" : "*";
     this.fs.copyTpl(
-      this.templatePath('default.json'),
-      this.destinationPath('config/default.json'),
-      { projectName: this.options.name }
+      this.templatePath('default.js'),
+      this.destinationPath('config/default.js'),
+      {
+        projectName: this.options.name,
+        routeValue: routeMatch
+      }
     );
 
     if (this.options.pwa) {
