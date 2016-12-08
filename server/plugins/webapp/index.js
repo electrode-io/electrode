@@ -106,7 +106,7 @@ function makeRouteHandler(options, userContent) {
   const criticalCSS = getCriticalCSS(options.criticalCSS);
 
   /* Create a route handler */
-  /* eslint max-statements: [2, 20] */
+  /* eslint max-statements: [2, 23] */
   return (request, reply) => {
     const mode = request.query.__mode || "";
     const renderJs = RENDER_JS && mode !== "nojs";
@@ -116,7 +116,7 @@ function makeRouteHandler(options, userContent) {
     if (!renderSs) {
       if (request.server && request.server.app) {
         request.app.disableSSR = true;
-      } else if(req.app) {
+      } else if (request.app) {
         request.app.disableSSR = true;
       }
     }
