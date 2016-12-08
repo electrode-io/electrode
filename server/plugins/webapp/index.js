@@ -111,6 +111,15 @@ function makeRouteHandler(options, userContent) {
     const mode = request.query.__mode || "";
     const renderJs = RENDER_JS && mode !== "nojs";
     const renderSs = RENDER_SS && mode !== "noss";
+    // Persist disabled SSR in request if flag not set
+    // For the benefit of electrode-redux-router-engine
+    if (!renderSs) {
+      if (request.server && request.server.app) {
+        request.app.disableSSR = true;
+      } else if(req.app) {
+        request.app.disableSSR = true;
+      }
+    }
     const chunkNames = chunkSelector(request);
     const devCSSBundle = chunkNames.css ?
       `${devBundleBase}${chunkNames.css}.style.css` :
@@ -214,7 +223,7 @@ function makeRouteHandler(options, userContent) {
     };
 
     const doRender = () => {
-      return renderSs ? renderSSRContent(userContent) : renderPage("");
+      return renderSSRContent(userContent);
     };
 
     Promise.try(doRender)
