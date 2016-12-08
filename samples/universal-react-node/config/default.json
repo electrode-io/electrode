@@ -7,8 +7,9 @@
       }
     },
     "./server/plugins/csrf": {},
+    "./server/plugins/pwa": {},
     "webapp": {
-      "module": "./server/plugins/webapp",
+      "module": "electrode-react-webapp",
       "options": {
         "pageTitle": "Electrode Boilerplate Universal React App",
         "paths": {
