@@ -64,6 +64,7 @@ The current defaults are:
   webpackDev: process.env.WEBPACK_DEV === "true",
   renderJS: true,
   serverSideRendering: true,
+  htmlFile: "node_modules/electrode-react-webapp/lib/index.html",
   devServer: {
     host: "127.0.0.1",
     port: "2992"
@@ -80,6 +81,12 @@ What you can do with the options:
    * `pageTitle` `(String)` The value to be shown in the browser's title bar
    * `webpackDev` `(Boolean)` whether to use webpack-dev-server's URLs for retrieving CSS and JS bundles.
    * `serverSideRendering` `(Boolean)` Toggle server-side rendering.
+   * `htmlFile` `(String)` Absolute or relative path to the application root html file. 
+      It must contains the following placeholders:
+      - `{{PAGE_TITLE}}` page title. 
+      - `{{WEBAPP_BUNDLES}}` injected `<script>` and `<link>` tags to load bundled JavaScript and Css
+      - `{{PREFETCH_BUNDLES}}` `<script>` tag containing code that will contains prefetched JavaScript code
+      - `{{SSR_CONTENT}}` injected content rendered on server side
    * `paths` `(Object)` An object of key/value pairs specifying paths within your application with their view and (optionally) initial content for server-side render
      - _path_ `(Object)`
        - `view` `(String)` Name of the view to be used for this path **required**

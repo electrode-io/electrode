@@ -98,7 +98,7 @@ function makeRouteHandler(options, userContent) {
   const WEBPACK_DEV = options.webpackDev;
   const RENDER_JS = options.renderJS;
   const RENDER_SS = options.serverSideRendering;
-  const html = fs.readFileSync(Path.join(__dirname, "index.html")).toString();
+  const html = fs.readFileSync(options.htmlFile).toString();
   const assets = options.__internals.assets;
   const devBundleBase = options.__internals.devBundleBase;
   const chunkSelector = options.__internals.chunkSelector;
@@ -234,6 +234,7 @@ const registerRoutes = (server, options, next) => {
     webpackDev: process.env.WEBPACK_DEV === "true",
     renderJS: true,
     serverSideRendering: true,
+    htmlFile: Path.join(__dirname, 'index.html'),
     devServer: {
       host: "127.0.0.1",
       port: "2992"
