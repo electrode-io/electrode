@@ -72,10 +72,10 @@ function createEntryConfigFromScripts(importScripts, entry) {
   // Handle the case where there might already be multiple
   // entry points. If it is we create a new object with all
   // existing entry points to avoid mutating the config. If its not,
-  // we assume its a string and use it as the bundle entry point.
+  // we assume its a string and use it as the main entry point.
   var newEntry = typeof entry === "object"
     ? Object.assign({}, entry)
-    : { bundle: entry };
+    : { main: entry };
   return importScripts.reduce(function(acc, script) {
     var name = path.parse(script).name;
     acc[name] = script;
