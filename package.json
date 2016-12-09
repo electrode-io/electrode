@@ -33,6 +33,7 @@
     "electrode-archetype-react-app": "^1.4.1",
     "electrode-csrf-jwt": "^1.0.0",
     "electrode-react-ssr-caching": "^0.1.3",
+    "electrode-react-webapp": "git+https://github.com/jmcriffey/electrode-react-webapp.git#pwa",
     "electrode-redux-router-engine": "^1.0.0",
     "electrode-server": "^1.0.0",
     "electrode-static-paths": "^1.0.0",
