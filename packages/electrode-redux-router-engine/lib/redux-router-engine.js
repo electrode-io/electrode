@@ -101,14 +101,17 @@ class ReduxRouterEngine {
   }
 
   _renderToString(req, store, match, withIds) { // eslint-disable-line
-    return (withIds ? ReactDomServer.renderToString : ReactDomServer.renderToStaticMarkup)(
-      React.createElement(
-        Provider, {store},
-        React.createElement(ReactRouter.RouterContext, match.renderProps)
-      )
-    );
+    if (req.app && req.app.disableSSR) {
+      return "";
+    } else {
+      return (withIds ? ReactDomServer.renderToString : ReactDomServer.renderToStaticMarkup)(
+        React.createElement(
+          Provider, {store},
+          React.createElement(ReactRouter.RouterContext, match.renderProps)
+        )
+      );
+    }
   }
 }
 
 module.exports = ReduxRouterEngine;
-
