@@ -59,7 +59,7 @@ This will set up an Electrode webapplication which will have 2 of the above 6 mo
 
 ## Multiple Entry Points
 
-The `electrode-archetype-react-app` supports multiple entry points per app. In order to enable this feature:
+The `electrode-archetype-react-app` module supports multiple entry points per app. In order to enable this feature:
 
 - Add an entry file in `client/entry.config.js`.
 
@@ -76,17 +76,13 @@ module.exports = {
 "use strict";
 
 const CHUNKS = {
-  DEFAULT: {
-    css: "",
-    js: ""
-  },
   HOME: {
     css: "home",
     js: "home"
   },
-  about: {
-    css: "home",
-    js: "home"
+  ABOUT: {
+    css: "about",
+    js: "about"
   }
 };
 
