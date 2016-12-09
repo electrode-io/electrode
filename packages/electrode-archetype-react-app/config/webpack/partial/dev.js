@@ -51,13 +51,11 @@ module.exports = function () {
       },
       output: {
         publicPath: `http://${archetype.webpack.devHostname}:${archetype.webpack.devPort}/js/`,
-        filename: config.__wmlMultiBundle
-          ? "[name].bundle.dev.js"
-          : "bundle.dev.js"
+        filename: "[name].bundle.dev.js"
       },
       plugins: [
         new webpack.SourceMapDevToolPlugin("[file].map"),
-        new ExtractTextPlugin(config.__wmlMultiBundle ? "[name].style.css" : "style.css"),
+        new ExtractTextPlugin("[name].style.css"),
         new webpack.NoErrorsPlugin()
       ]
     });
