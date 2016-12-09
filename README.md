@@ -1,3 +1,5 @@
+[![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+
 ## ![electrode logo][logo-192x192]Electrode 
 
 ### A Platform for building Universal React/Node.js applications
@@ -73,3 +75,7 @@ Built with :heart: by [Team Electrode] @WalmartLabs.
 [electrode-archetype-react-app-dev]: packages/electrode-archetype-react-app-dev
 [generator-electrode]: packages/generator-electrode
 [logo-192x192]: https://raw.githubusercontent.com/electrode-io/electrode/cc4ea3e1851cee3333ecca08fdbf5534f51b1ae7/samples/universal-react-node/client/images/logo-192x192.png
+[travis-image]: https://travis-ci.org/electrode-io/electrode.svg?branch=master
+[travis-url]: https://travis-ci.org/electrode-io/electrode
+[daviddm-image]: https://david-dm.org/electrode-io/electrode.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/electrode-io/electrode
