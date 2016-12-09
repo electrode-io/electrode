@@ -71,11 +71,14 @@ function makeRouteHandler(options, userContent) {
     const mode = options.mode;
     const renderJs = RENDER_JS && mode !== "nojs";
     const renderSs = RENDER_SS && mode !== "noss";
-    const dataSs = RENDER_SS && mode === "datass";
-
-    if (dataSs) {
-      if (options.request && options.request.app) {
-        options.request.app.disableSSR = true;
+    let renderSs = RENDER_SS;
+    if (renderSs) {
+      if ( mode === "noss") {
+        renderSs = false;
+      } else if (mode === "datass") {
+        if (options.request && options.request.app) {
+          options.request.app.disableSSR = true;
+        }
       }
     }
 
@@ -154,7 +157,7 @@ function makeRouteHandler(options, userContent) {
       return p.then((c) => renderPage(c));
     };
 
-    return renderSSRContent((renderSs||dataSs) ? userContent : "");
+    return renderSSRContent(renderSs ? userContent : "");
   };
 }
 
