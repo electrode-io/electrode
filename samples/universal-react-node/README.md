@@ -103,15 +103,15 @@ module.exports = (request) => {
 };
 ```
 
-- Add a bundleChunkSelector option to the webapp key in `config/default.json`
+- Add a bundleChunkSelector option to `plugins.webapp.options` in `config/default.json`
 
 ```js
 {
   "plugins": {
     "webapp": {
-      "bundleChunkSelector": "./server/chunk-selector.js",
-      "module": "./server/plugins/webapp",
+      "module": "electrode-react-webapp",
       "options": {
+        "bundleChunkSelector": "./server/chunk-selector.js",
         "pageTitle": "Electrode Boilerplate Universal React App",
         "paths": {
           "/{args*}": {
