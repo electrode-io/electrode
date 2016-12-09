@@ -1,5 +1,5 @@
 import React, {PropTypes} from "react";
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 
 class SSRCachingTemplateTypeWrapper extends React.Component {
   render() {
@@ -15,7 +15,7 @@ class SSRCachingTemplateTypeWrapper extends React.Component {
 
     return (
       <div>
-        { elements }
+        {elements}
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import React, {PropTypes} from "react";
 import {connect} from "react-redux";
 import electrodeLogo from "../images/electrode.svg";
+import Notifications from "react-notify-toast";
 
 class HomeWrapper extends React.Component {
   render() {
@@ -15,11 +16,11 @@ HomeWrapper.propTypes = {
 };
 
 /* eslint-disable max-len */
-
 export class Home extends React.Component {
   render() {
     return (
       <div>
+        <Notifications />
         <div style={{
           width: "50%",
           marginLeft: "auto",

@@ -10,7 +10,7 @@ module.exports = {
       urlPattern: "\/$"
     }],
     // context for script paths is the client folder
-    importScripts: ['./sw.js']
+    importScripts: ['./sw-events.js']
     },
   manifest: {
     title: "Electrode",
