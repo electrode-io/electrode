@@ -249,7 +249,7 @@ const registerRoutes = (server, options, next) => {
     webpackDev: process.env.WEBPACK_DEV === "true",
     renderJS: true,
     serverSideRendering: true,
-    htmlFile: Path.join(__dirname, 'index.html'),
+    htmlFile: Path.join(__dirname, "index.html"),
     devServer: {
       host: "127.0.0.1",
       port: "2992"
