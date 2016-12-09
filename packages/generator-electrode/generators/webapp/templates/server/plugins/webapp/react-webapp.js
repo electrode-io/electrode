@@ -6,7 +6,6 @@ const fs = require("fs");
 const Path = require("path");
 const assert = require("assert");
 
-
 /**
  * Load stats.json which is created during build.
  * The file contains bundle files which are to be loaded on the client side.
@@ -152,7 +151,6 @@ function makeRouteHandler(options, userContent) {
 }
 
 const setupOptions = (options) => {
-
   const pluginOptionsDefaults = {
     pageTitle: "Untitled Electrode Web Application",
     webpackDev: process.env.WEBPACK_DEV === "true",
@@ -181,7 +179,6 @@ const setupOptions = (options) => {
     });
 };
 
-
 const resolveContent = (content) => {
   if (!_.isString(content) && !_.isFunction(content) && content.module) {
     const module = content.module.startsWith(".") ? Path.join(process.cwd(), content.module) : content.module; // eslint-disable-line
@@ -190,7 +187,6 @@ const resolveContent = (content) => {
 
   return content;
 };
-
 
 module.exports = {
   setupOptions,

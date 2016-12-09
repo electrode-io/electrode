@@ -14,7 +14,6 @@ const registerRoutes = (server, options, next) => {
         assert(v.content, `You must define content for the webapp plugin path ${path}`);
 
         const routeHandler = ReactWebapp.makeRouteHandler(registerOptions, ReactWebapp.resolveContent(v.content));
-
         <% if (pwa) { %>
           server.route({
             method: "GET",
@@ -24,13 +23,11 @@ const registerRoutes = (server, options, next) => {
             }
           });
         <% } %>
-
         server.route({
           method: "GET",
           path,
           config: v.config || {},
           handler: (request, reply) => {
-
             const handleStatus = (data) => {
               const status = data.status;
               if (status === HTTP_REDIRECT) {

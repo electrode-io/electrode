@@ -7,7 +7,6 @@ const ReactWebapp = require("./react-webapp");
 const HTTP_ERROR_500 = 500;
 const HTTP_REDIRECT = 302;
 
-
 const registerRoutes = (app, options, next) => {
   ReactWebapp.setupOptions(options)
     .then((registerOptions) => {
