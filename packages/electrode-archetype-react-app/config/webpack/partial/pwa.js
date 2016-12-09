@@ -46,7 +46,7 @@ function getHashedPath(filepath) {
 }
 
 /**
- * Takes a file path and returns a webpack-dev ompatible
+ * Takes a file path and returns a webpack-dev compatible
  * filename descriptor matching the current naming schema
  * @param  {string} filepath  original file path
  * @return {string}           parsed file path
