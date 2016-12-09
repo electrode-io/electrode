@@ -9,9 +9,8 @@ module.exports = {
       handler: "fastest",
       urlPattern: "\/$"
     }],
-    // context for script paths is the client folder
-    importScripts: ['./sw.js']
-    },
+    importScripts: ['./sw-events.js']
+  },
   manifest: {
     title: "Electrode",
     logo: "./images/electrode.png",
