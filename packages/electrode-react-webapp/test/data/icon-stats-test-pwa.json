@@ -1,0 +1,7 @@
+{
+  "html": [
+    "<meta name=\"mobile-web-app-capable\" content=\"yes\">",
+    "<meta name=\"application-name\" content=\"Electrode\">",
+    "<link rel=\"icon\" href=\"\/js\/favicon-32x32.png\">"
+  ]
+}
