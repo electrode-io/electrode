@@ -13,9 +13,10 @@
   "homepage": "http://www.electrode.io",
   "license": "Apache-2.0",
   "scripts": {
-    "test": ""
+    "test": "gulp test"
   },
   "devDependencies": {
+    "electrode-gulp-helper": "^1.0.5",
     "gulp": "^3.9.1",
     "lerna": "2.0.0-beta.30"
   },
