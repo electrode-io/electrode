@@ -79,6 +79,7 @@
     "web-app-manifest-loader": "^0.1.1",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1",
+    "webpack-disk-plugin": "0.0.2",
     "webpack-partial": "^1.1.2",
     "webpack-stats-plugin": "^0.1.1"
   },

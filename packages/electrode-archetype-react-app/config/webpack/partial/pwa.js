@@ -113,6 +113,55 @@ module.exports = function () {
       };
     }
 
+
+    var plugins = [
+      new FaviconsWebpackPlugin({
+        logo: manifestConfig.logo,
+        emitStats: true,
+        inject: false,
+        background: manifestConfig.background,
+        title: manifestConfig.title,
+        statsFilename: manifestConfig.statsFilename,
+        icons: {
+          android: true,
+          appleIcon: true,
+          appleStartup: true,
+          favicons: true
+        }
+      }),
+      new AddManifestFieldsPlugin({
+        gcm_sender_id: manifestConfig.gcm_sender_id,
+        short_name: manifestConfig.short_name,
+        theme_color: manifestConfig.theme_color
+      }),
+      new SWPrecacheWebpackPlugin(cacheConfig)
+    ];
+
+    /**
+     * In dev we need to write the stats file to disk
+     * so we can properly read which chunk(s) need to be
+     * served. We write the stats file to our build artifacts
+     * folder, which is .build by default.
+     */
+    if (process.env.WEBPACK_DEV === "true") {
+      plugins.push(
+        new DiskPlugin({
+          output: {
+            path: path.resolve(
+              process.cwd(),
+              severConfig.buildArtifactsPath || ".build"
+            )
+          },
+          files: [{
+            asset: /\/stats.json$/,
+            output: {
+              filename: 'stats.json'
+            }
+          }]
+        })
+      );
+    }
+
     return mergeWebpackConfig(config, {
       entry: entry,
       output: output,
@@ -124,28 +173,7 @@ module.exports = function () {
           }
         ]
       },
-      plugins: [
-        new FaviconsWebpackPlugin({
-          logo: manifestConfig.logo,
-          emitStats: true,
-          inject: false,
-          background: manifestConfig.background,
-          title: manifestConfig.title,
-          statsFilename: manifestConfig.statsFilename,
-          icons: {
-            android: true,
-            appleIcon: true,
-            appleStartup: true,
-            favicons: true
-          }
-        }),
-        new AddManifestFieldsPlugin({
-          gcm_sender_id: manifestConfig.gcm_sender_id,
-          short_name: manifestConfig.short_name,
-          theme_color: manifestConfig.theme_color
-        }),
-        new SWPrecacheWebpackPlugin(cacheConfig),
-      ]
+      plugins: plugins
     });
   };
 };
