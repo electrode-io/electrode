@@ -73,7 +73,7 @@
     "stylus": "^0.54.5",
     "stylus-relative-loader": "^3.0.0",
     "sw-precache": "^4.0.0",
-    "sw-precache-webpack-plugin": "^0.6.2",
+    "sw-precache-webpack-plugin": "^0.7.0",
     "sw-toolbox": "^3.2.1",
     "url-loader": "^0.5.6",
     "web-app-manifest-loader": "^0.1.1",
