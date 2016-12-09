@@ -8,6 +8,7 @@ import {routes} from "./routes";
 import {Router, browserHistory} from "react-router";
 import {createStore} from "redux";
 import {Provider} from "react-redux";
+<% if (pwa) { %>import {notify} from "react-notify-toast";<% } %>
 import "./styles/base.css";
 import rootReducer from "./reducers";
 
@@ -15,9 +16,9 @@ import rootReducer from "./reducers";
 // The webapp's full HTML will check and call it once the js-content
 // DOM is created.
 <% if (pwa) { %>
-require.ensure(["./sw-register"], (require) => {
-  require("./sw-register")();
-}, "sw-register");
+require.ensure(["./sw-registration"], (require) => {
+  require("./sw-registration")(notify);
+}, "sw-registration");
 <% } %>
 window.webappStart = () => {
   const initialState = window.__PRELOADED_STATE__;
