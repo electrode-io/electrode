@@ -9,7 +9,7 @@ const path = require("path");
 const yoTest = require("yeoman-test");
 const _ = require("lodash");
 
-const packagesDir = path.resolve("packages");
+process.env.PACKAGES_DIR = path.resolve("packages");
 
 const runAppTest = (dir, forceLocal) => {
   const localPkgs = ["electrode-archetype-react-app", "electrode-react-webapp", "electrode-redux-router-engine"];
@@ -22,7 +22,7 @@ const runAppTest = (dir, forceLocal) => {
     if (pkgSection) {
       pkgs.forEach((pkg) => {
         if (pkgSection[pkg]) {
-          pkgSection[pkg] = path.join(packagesDir, pkg);
+          pkgSection[pkg] = path.join(process.env.PACKAGES_DIR, pkg);
         }
       });
     }
@@ -45,7 +45,7 @@ const runAppTest = (dir, forceLocal) => {
 };
 
 const testGenerator = (testDir, clean, prompts) => {
-  const yoApp = path.join(packagesDir, ("generator-electrode/generators/app/index.js"));
+  const yoApp = path.join(process.env.PACKAGES_DIR, ("generator-electrode/generators/app/index.js"));
   const defaultPrompts = {
     name: "test-app",
     description: "test test",
