@@ -22,6 +22,7 @@
     "electrode-gulp-helper": "^1.0.5",
     "gulp": "^3.9.1",
     "lerna": "2.0.0-beta.30",
+    "lodash": "^4.17.2",
     "yeoman-test": "^1.6.0"
   },
   "engines": {

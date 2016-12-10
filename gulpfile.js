@@ -7,6 +7,7 @@ const exec = helper.exec;
 const fs = require("fs");
 const path = require("path");
 const yoTest = require("yeoman-test");
+const _ = require("lodash");
 
 const packagesDir = path.resolve("packages");
 
@@ -14,7 +15,7 @@ const runAppTest = (dir, forceLocal) => {
   const localPkgs = ["electrode-archetype-react-app", "electrode-react-webapp", "electrode-redux-router-engine"];
   const localDevPkgs = ["electrode-archetype-react-app-dev"];
   const appPkgFile = `${dir}/package.json`;
-  const appPkg = require(appPkgFile);
+  const appPkg = JSON.parse(fs.readFileSync(appPkgFile).toString());
 
   function updateToLocalPkgs(pkgs, section) {
     const pkgSection = appPkg[section];
@@ -43,6 +44,33 @@ const runAppTest = (dir, forceLocal) => {
     });
 };
 
+const testGenerator = (testDir, clean, prompts) => {
+  const yoApp = path.join(packagesDir, ("generator-electrode/generators/app/index.js"));
+  const defaultPrompts = {
+    name: "test-app",
+    description: "test test",
+    homepage: "http://test",
+    serverType: "ExpressJS",
+    authorName: "John Smith",
+    authorEmail: "john@smith.com",
+    authorUrl: "http://www.test.com",
+    keywords: ["test", "electrode"],
+    pwa: true,
+    createDirectory: true,
+    githubAccount: "test",
+    license: "Apache-2.0"
+  };
+  prompts = _.extend({}, defaultPrompts, prompts || {});
+
+  const yoRun = yoTest.run(yoApp);
+  return (clean ? yoRun.inDir(testDir) : yoRun.cd(testDir))
+    .withOptions({
+      "skip-install": true
+    })
+    .withPrompts(prompts)
+    .then(() => runAppTest(path.join(testDir, "test-app"), true));
+};
+
 helper.loadTasks({
   "build-test": {
     task: () => {
@@ -67,30 +95,15 @@ helper.loadTasks({
 
   "test-generator": {
     task: () => {
-      const yoApp = path.dirname(require.resolve("./packages/generator-electrode/generators/app/index.js"));
       const testDir = path.resolve("tmp");
-      shell.pushd("packages/generator-electrode");
+      shell.cd("packages/generator-electrode");
       return exec("npm test")
-        .then(() => yoTest.run(yoApp)
-          .inDir(testDir)
-          .withOptions({
-            "skip-install": true
-          })
-          .withPrompts({
-            name: "test-app",
-            description: "test test",
-            homepage: "http://test",
-            serverType: "ExpressJS",
-            authorName: "John Smith",
-            authorEmail: "john@smith.com",
-            authorUrl: "http://www.test.com",
-            keywords: "test, electrode",
-            pwa: true,
-            createDirectory: true,
-            githubAccount: "test",
-            license: "Apache-2.0"
-          })
-          .then(() => runAppTest(path.join(testDir, "test-app"), true)));
+        .then(() => testGenerator(testDir, true, {serverType: "ExpressJS"}))
+        .then(() => {
+          const appFiles = ["package.json", "client", "config", "server", "test"];
+          shell.rm("-rf", appFiles.map((x) => path.join(testDir, "test-app", x)));
+        })
+        .then(() => testGenerator(testDir, false, {serverType: "HapiJS"}));
     }
   }
 }, gulp);

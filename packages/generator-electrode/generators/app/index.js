@@ -11,6 +11,9 @@ var extend = _.merge;
 var parseAuthor = require('parse-author');
 var githubUsername = require('github-username');
 
+const ExpressJS = 'ExpressJS';
+const HapiJS = 'HapiJS';
+
 module.exports = generators.Base.extend({
   constructor: function () {
     generators.Base.apply(this, arguments);
@@ -75,7 +78,7 @@ module.exports = generators.Base.extend({
       this.props.authorEmail = this.pkg.author.email;
       this.props.authorUrl = this.pkg.author.url;
       this.props.createDirectory = false;
-      this.props.serverType = this.fs.exists(this.destinationPath('server/express-server.js')) ? "expressjs" : "hapijs";
+      this.props.serverType = this.fs.exists(this.destinationPath('server/express-server.js')) ? ExpressJS : HapiJS;
       this.props.pwa = this.fs.exists(this.destinationPath('client/sw-register.js'));
     } else if (_.isString(this.pkg.author)) {
       var info = parseAuthor(this.pkg.author);
@@ -122,11 +125,8 @@ module.exports = generators.Base.extend({
           name: 'serverType',
           message: 'Which framework for the server?',
           when: !this.props.serverType,
-          choices: ['HapiJS', "ExpressJS"],
-          default: 'HapiJS',
-          filter: function (ans) {
-            return ans.toLowerCase();
-          }
+          choices: [HapiJS, ExpressJS],
+          default: HapiJS
         },
         {
           type: "input",
@@ -211,12 +211,13 @@ module.exports = generators.Base.extend({
   },
 
   writing: function () {
-    const isHapi = this.config.get('serverType') === 'hapijs';
+    const isHapi = this.config.get('serverType') === HapiJS;
 
     // Re-read the content at this point because a composed generator might modify it.
     var currentPkg = this.fs.readJSON(this.destinationPath('package.json'), {});
 
     const _pkg = '_package.json';
+
     this.fs.copyTpl(
       this.templatePath(_pkg),
       this.destinationPath(_pkg),
