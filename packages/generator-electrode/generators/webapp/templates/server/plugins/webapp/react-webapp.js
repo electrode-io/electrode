@@ -4,8 +4,8 @@ const _ = require("lodash");
 const Promise = require("bluebird");
 const fs = require("fs");
 const Path = require("path");
-const assert = require("assert");
 
+const HTTP_ERROR_500 = 500;
 
 /**
  * Load stats.json which is created during build.
@@ -40,7 +40,7 @@ function getIconStats(iconStatsPath) {
     iconStats = fs.readFileSync(Path.resolve(iconStatsPath)).toString();
     iconStats = JSON.parse(iconStats);
   } catch (err) {
-    return '';
+    return "";
   }
   if (iconStats && iconStats.html) {
     return iconStats.html.join("");
@@ -67,8 +67,8 @@ function makeRouteHandler(options, userContent) {
 
   /* Create a route handler */
   /*eslint max-statements: 0*/
-  return (options) => {
-    const mode = options.mode;
+  return (opts) => {
+    const mode = opts.mode;
     const renderJs = RENDER_JS && mode !== "nojs";
     const renderSs = RENDER_SS && mode !== "noss";
 
@@ -88,7 +88,7 @@ function makeRouteHandler(options, userContent) {
     };
 
     const callUserContent = (content) => {
-      const x = content(options.request);
+      const x = content(opts.request);
       return !x.catch ? Promise.resolve(x) : x.catch((err) => {
         return Promise.reject({
           status: err.status || HTTP_ERROR_500,
@@ -115,17 +115,13 @@ function makeRouteHandler(options, userContent) {
       return jsLink;
     };
 
-    const addPrefetch = (prefetch) => {
-      return prefetch ? `<script>${prefetch}</script>` : "";
-    };
-
     const renderPage = (content) => {
       return html.replace(/{{[A-Z_]*}}/g, (m) => {
         switch (m) {
         case CONTENT_MARKER:
           return content.html || "";
         case TITLE_MARKER:
-          return options.pageTitle;
+          return opts.pageTitle;
         case HEADER_BUNDLE_MARKER:
           return makeHeaderBundles();
         case BODY_BUNDLE_MARKER:
