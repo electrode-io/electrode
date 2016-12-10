@@ -124,7 +124,7 @@ module.exports = generators.Base.extend({
           when: !this.props.serverType,
           choices: ['HapiJS', "ExpressJS"],
           default: 'HapiJS',
-          filter: function(ans) {
+          filter: function (ans) {
             return ans.toLowerCase();
           }
         },
@@ -211,9 +211,20 @@ module.exports = generators.Base.extend({
   },
 
   writing: function () {
+    const isHapi = this.config.get('serverType') === 'hapijs';
+
     // Re-read the content at this point because a composed generator might modify it.
     var currentPkg = this.fs.readJSON(this.destinationPath('package.json'), {});
-    var defaultPkg = require(this.templatePath('_package.json'));
+
+    const _pkg = '_package.json';
+    this.fs.copyTpl(
+      this.templatePath(_pkg),
+      this.destinationPath(_pkg),
+      {isHapi}
+    );
+
+    var defaultPkg = this.fs.readJSON(this.destinationPath(_pkg));
+    this.fs.delete(this.destinationPath(_pkg));
 
     ['name', 'version', 'description', 'homepage', 'main', 'license'].forEach((x) => {
       currentPkg[x] = currentPkg[x] || undefined;
@@ -254,28 +265,28 @@ module.exports = generators.Base.extend({
       this.destinationPath('.babelrc')
     );
 
-    ['gulpfile.js','config', 'test'].forEach((f) => {
+    ['gulpfile.js', 'config', 'test'].forEach((f) => {
       this.fs.copy(
         this.templatePath(f),
         this.destinationPath(f)
       );
     });
-      //special handling for the server file
-      const isHapi = this.config.get('serverType') === 'hapijs';
-      this.fs.copyTpl(
-        this.templatePath('server'),
-        this.destinationPath('server'),
-        {isHapi},
-        {},
-        {
-          globOptions: { ignore: [ isHapi ? '**/server/express-server.js' : '' ] }
-        }
-      );
+
+    //special handling for the server file
+    this.fs.copyTpl(
+      this.templatePath('server'),
+      this.destinationPath('server'),
+      {isHapi},
+      {},
+      {
+        globOptions: {ignore: [isHapi ? '**/server/express-server.js' : '']}
+      }
+    );
 
     this.fs.copyTpl(
       this.templatePath('client'),
       this.destinationPath('client'),
-      { pwa: this.props.pwa },
+      {pwa: this.props.pwa},
       {}, // template options
       { // copy options
         globOptions: {
@@ -366,7 +377,7 @@ module.exports = generators.Base.extend({
     });
   },
 
-  end: function() {
+  end: function () {
     var chdir = this.props.createDirectory ? "'cd " + _.kebabCase(_.deburr(this.props.name)) + "' then " : "";
     this.log(
       "\n" + chalk.green.underline("Your new Electrode application is ready!") +

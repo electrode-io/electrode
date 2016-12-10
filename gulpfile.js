@@ -71,26 +71,28 @@ helper.loadTasks({
     task: () => {
       const yoApp = path.dirname(require.resolve("./packages/generator-electrode/generators/app/index.js"));
       const testDir = path.resolve("tmp");
-      return yoTest.run(yoApp)
-        .inDir(testDir)
-        .withOptions({
-          "skip-install": true
-        })
-        .withPrompts({
-          name: "test-app",
-          description: "test test",
-          homepage: "http://test",
-          serverType: "ExpressJS",
-          authorName: "John Smith",
-          authorEmail: "john@smith.com",
-          authorUrl: "http://www.test.com",
-          keywords: "test, electrode",
-          pwa: true,
-          createDirectory: true,
-          githubAccount: "test",
-          license: "Apache-2.0"
-        })
-        .then(() => runAppTest(path.join(testDir, "test-app")));
+      shell.pushd("packages/generator-electrode");
+      return exec("npm test")
+        .then(() => yoTest.run(yoApp)
+          .inDir(testDir)
+          .withOptions({
+            "skip-install": true
+          })
+          .withPrompts({
+            name: "test-app",
+            description: "test test",
+            homepage: "http://test",
+            serverType: "ExpressJS",
+            authorName: "John Smith",
+            authorEmail: "john@smith.com",
+            authorUrl: "http://www.test.com",
+            keywords: "test, electrode",
+            pwa: true,
+            createDirectory: true,
+            githubAccount: "test",
+            license: "Apache-2.0"
+          })
+          .then(() => runAppTest(path.join(testDir, "test-app"))));
     }
   }
 }, gulp);
