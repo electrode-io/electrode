@@ -10,9 +10,7 @@ const yoTest = require("yeoman-test");
 
 const packagesDir = path.resolve("packages");
 
-let isBuildTest = false;
-
-const runAppTest = (dir) => {
+const runAppTest = (dir, forceLocal) => {
   const localPkgs = ["electrode-archetype-react-app", "electrode-react-webapp", "electrode-redux-router-engine"];
   const localDevPkgs = ["electrode-archetype-react-app-dev"];
   const appPkgFile = `${dir}/package.json`;
@@ -29,7 +27,7 @@ const runAppTest = (dir) => {
     }
   }
 
-  if (isBuildTest) {
+  if (forceLocal || process.env.BUILD_TEST) {
     updateToLocalPkgs(localPkgs, "dependencies");
     updateToLocalPkgs(localDevPkgs, "devDependencies");
   }
@@ -48,7 +46,7 @@ const runAppTest = (dir) => {
 helper.loadTasks({
   "build-test": {
     task: () => {
-      isBuildTest = true;
+      process.env.BUILD_TEST = "true";
       let updated;
       return exec("lerna updated")
         .then((output) => {
@@ -92,7 +90,7 @@ helper.loadTasks({
             githubAccount: "test",
             license: "Apache-2.0"
           })
-          .then(() => runAppTest(path.join(testDir, "test-app"))));
+          .then(() => runAppTest(path.join(testDir, "test-app"), true)));
     }
   }
 }, gulp);
