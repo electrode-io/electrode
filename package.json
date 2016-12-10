@@ -15,6 +15,7 @@
   "scripts": {
     "test": "lerna bootstrap && gulp build-test",
     "test-generator": "gulp test-generator",
+    "test-boilerplate": "gulp test-boilerplate",
     "bootstrap": "lerna bootstrap"
   },
   "devDependencies": {
