@@ -6,33 +6,85 @@ const shell = helper.shell;
 const exec = helper.exec;
 const fs = require("fs");
 const path = require("path");
+const yoTest = require("yeoman-test");
+
+const packagesDir = path.resolve("packages");
+
+const runAppTest = (dir) => {
+  const localPkgs = ["electrode-archetype-react-app", "electrode-react-webapp", "electrode-redux-router-engine"];
+  const localDevPkgs = ["electrode-archetype-react-app-dev"];
+  const appPkgFile = `${dir}/package.json`;
+  const appPkg = require(appPkgFile);
+
+  function updateToLocalPkgs(pkgs, section) {
+    const pkgSection = appPkg[section];
+    if (pkgSection) {
+      pkgs.forEach((pkg) => {
+        if (pkgSection[pkg]) {
+          pkgSection[pkg] = path.join(packagesDir, pkg);
+        }
+      });
+    }
+  }
+
+  updateToLocalPkgs(localPkgs, "dependencies");
+  updateToLocalPkgs(localDevPkgs, "devDependencies");
+  fs.writeFileSync(appPkgFile, JSON.stringify(appPkg, null, 2));
+  shell.pushd(dir);
+  return exec(`npm i`)
+    .then(() => exec(`npm test`))
+    .then(() => shell.popd())
+    .catch((err) => {
+      shell.popd();
+      throw err;
+    });
+};
 
 helper.loadTasks({
-  "test": {
+  "build-test": {
     task: () => {
-      const boilerplateDir = "./samples/universal-react-node";
-      const localPkgs = ["electrode-archetype-react-app", "electrode-react-webapp", "electrode-redux-router-engine"];
-      const localDevPkgs = ["electrode-archetype-react-app-dev"];
-      const samplePkgFile = `${boilerplateDir}/package.json`;
-      const samplePkg = require(samplePkgFile);
+      let updated;
+      return exec("lerna updated")
+        .then((output) => {
+          updated = output.stdout.split("\n").filter((x) => x.startsWith("- ")).map((x) => x.substr(2));
+        })
+        .then(() => {
+          if (updated.indexOf("generator-electrode")) {
+            return exec("gulp test-generator");
+          }
+        })
+        .then(() => exec("gulp test-boilerplate"));
+    }
+  },
 
-      function updateToLocalPkgs(pkgs, section) {
-        pkgs.forEach((pkg) => {
-          samplePkg[section][pkg] = `../../packages/${pkg}`;
-        });
-      }
+  "test-boilerplate": {
+    task: () => runAppTest(path.resolve("samples/universal-react-node"))
+  },
 
-      updateToLocalPkgs(localPkgs, "dependencies");
-      updateToLocalPkgs(localDevPkgs, "devDependencies");
-      fs.writeFileSync(samplePkgFile, JSON.stringify(samplePkg, null, 2));
-      shell.pushd(boilerplateDir);
-      return exec(`npm i`)
-        .then(() => exec(`npm test`))
-        .then(() => shell.popd())
-        .catch((err) => {
-          shell.popd();
-          throw err;
-        });
+  "test-generator": {
+    task: () => {
+      const yoApp = path.dirname(require.resolve("./packages/generator-electrode/generators/app/index.js"));
+      const testDir = path.resolve("tmp");
+      return yoTest.run(yoApp)
+        .inDir(testDir)
+        .withOptions({
+          "skip-install": true
+        })
+        .withPrompts({
+          name: "test-app",
+          description: "test test",
+          homepage: "http://test",
+          serverType: "ExpressJS",
+          authorName: "John Smith",
+          authorEmail: "john@smith.com",
+          authorUrl: "http://www.test.com",
+          keywords: "test, electrode",
+          pwa: true,
+          createDirectory: true,
+          githubAccount: "test",
+          license: "Apache-2.0"
+        })
+        .then(() => runAppTest(path.join(testDir, "test-app")));
     }
   }
 }, gulp);
