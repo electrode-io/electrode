@@ -96,9 +96,7 @@ helper.loadTasks({
   "test-generator": {
     task: () => {
       const testDir = path.resolve("tmp");
-      shell.cd("packages/generator-electrode");
-      return exec("npm test")
-        .then(() => testGenerator(testDir, true, {serverType: "ExpressJS"}))
+      return testGenerator(testDir, true, {serverType: "ExpressJS"})
         .then(() => {
           const appFiles = ["package.json", "client", "config", "server", "test"];
           shell.rm("-rf", appFiles.map((x) => path.join(testDir, "test-app", x)));
