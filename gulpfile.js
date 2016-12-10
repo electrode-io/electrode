@@ -9,7 +9,9 @@ const path = require("path");
 const yoTest = require("yeoman-test");
 const _ = require("lodash");
 
-process.env.PACKAGES_DIR = path.resolve("packages");
+if (!process.env.PACKAGES_DIR) {
+  process.env.PACKAGES_DIR = path.resolve("packages");
+}
 
 const runAppTest = (dir, forceLocal) => {
   const localPkgs = ["electrode-archetype-react-app", "electrode-react-webapp", "electrode-redux-router-engine"];
@@ -33,7 +35,7 @@ const runAppTest = (dir, forceLocal) => {
     updateToLocalPkgs(localDevPkgs, "devDependencies");
   }
 
-  fs.writeFileSync(appPkgFile, JSON.stringify(appPkg, null, 2));
+  fs.writeFileSync(appPkgFile, `${JSON.stringify(appPkg, null, 2)}\n`);
   shell.pushd(dir);
   return exec(`npm i`)
     .then(() => exec(`npm test`))
