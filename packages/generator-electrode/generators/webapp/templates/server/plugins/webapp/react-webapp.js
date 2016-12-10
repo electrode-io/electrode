@@ -49,21 +49,21 @@ function getIconStats(iconStatsPath) {
 }
 
 /* eslint max-statements: [2, 16] */
-function makeRouteHandler(options, userContent) {
+function makeRouteHandler(routeOpts, userContent) {
   const CONTENT_MARKER = "{{SSR_CONTENT}}";
   const HEADER_BUNDLE_MARKER = "{{WEBAPP_HEADER_BUNDLES}}";
   const BODY_BUNDLE_MARKER = "{{WEBAPP_BODY_BUNDLES}}";
   const TITLE_MARKER = "{{PAGE_TITLE}}";
   const PREFETCH_MARKER = "{{PREFETCH_BUNDLES}}";
   const META_TAGS_MARKER = "{{META_TAGS}}";
-  const WEBPACK_DEV = options.webpackDev;
-  const RENDER_JS = options.renderJS;
-  const RENDER_SS = options.serverSideRendering;
+  const WEBPACK_DEV = routeOpts.webpackDev;
+  const RENDER_JS = routeOpts.renderJS;
+  const RENDER_SS = routeOpts.serverSideRendering;
   const html = fs.readFileSync(Path.join(__dirname, "index.html")).toString();
-  const assets = options.__internals.assets;
-  const devJSBundle = options.__internals.devJSBundle;
-  const devCSSBundle = options.__internals.devCSSBundle;
-  const iconStats = getIconStats(options.iconStats);
+  const assets = routeOpts.__internals.assets;
+  const devJSBundle = routeOpts.__internals.devJSBundle;
+  const devCSSBundle = routeOpts.__internals.devCSSBundle;
+  const iconStats = getIconStats(routeOpts.iconStats);
 
   /* Create a route handler */
   /*eslint max-statements: 0*/
@@ -75,8 +75,8 @@ function makeRouteHandler(options, userContent) {
       if (mode === "noss") {
         renderSs = false;
       } else if (mode === "datass") {
-        if (options.request && options.request.app) {
-          options.request.app.disableSSR = true;
+        if (opts.request && opts.request.app) {
+          opts.request.app.disableSSR = true;
         }
       }
     }
