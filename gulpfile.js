@@ -81,7 +81,7 @@ helper.loadTasks({
           updated = output.stdout.split("\n").filter((x) => x.startsWith("- ")).map((x) => x.substr(2));
         })
         .then(() => {
-          if (updated.indexOf("generator-electrode")) {
+          if (updated.indexOf("generator-electrode") >= 0) {
             return exec("gulp test-generator");
           }
         })
