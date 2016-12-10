@@ -70,10 +70,9 @@ function makeRouteHandler(options, userContent) {
   return (opts) => {
     const mode = opts.mode;
     const renderJs = RENDER_JS && mode !== "nojs";
-    const renderSs = RENDER_SS && mode !== "noss";
     let renderSs = RENDER_SS;
     if (renderSs) {
-      if ( mode === "noss") {
+      if (mode === "noss") {
         renderSs = false;
       } else if (mode === "datass") {
         if (options.request && options.request.app) {
