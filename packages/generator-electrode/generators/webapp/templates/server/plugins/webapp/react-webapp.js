@@ -71,6 +71,16 @@ function makeRouteHandler(options, userContent) {
     const mode = opts.mode;
     const renderJs = RENDER_JS && mode !== "nojs";
     const renderSs = RENDER_SS && mode !== "noss";
+    let renderSs = RENDER_SS;
+    if (renderSs) {
+      if ( mode === "noss") {
+        renderSs = false;
+      } else if (mode === "datass") {
+        if (options.request && options.request.app) {
+          options.request.app.disableSSR = true;
+        }
+      }
+    }
 
     const bundleCss = () => {
       return WEBPACK_DEV ? devCSSBundle : assets.css && `/js/${assets.css}` || "";
