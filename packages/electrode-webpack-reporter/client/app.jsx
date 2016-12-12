@@ -27,7 +27,6 @@ window.webappStart = () => {
   })).then((response) => {
     // for developing with electrode server <Router history={browserHistory}>{routes}</Router>
     return response.json().then((initialState) => {
-      console.log('webpack reporter initialized...')
       const store = createStore(rootReducer, initialState);
       const appContainer = document.querySelector(".js-content");
       unmountComponentAtNode(appContainer);

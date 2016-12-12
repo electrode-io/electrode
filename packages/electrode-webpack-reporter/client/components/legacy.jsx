@@ -5,7 +5,7 @@ const style = {
 };
 
 const Legacy = (props) => (
-  <pre style={style} dangerouslySetInnerHTML={ {__html: props.legacy} } />
+  <pre style={style} dangerouslySetInnerHTML={{__html: props.legacy}} />
 );
 
 Legacy.propTypes = {
