@@ -21,11 +21,16 @@
         s.parentNode.insertBefore(wf, s);
     })();
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.1/socket.io.js"></script>
 <script>
     if (!window.fetch) {
         alert("Browser doesn't support fetch!  Update your browser.");
     } else if (window.webappStart) {
         webappStart();
+        var socket = io('http://localhost:5000');
+        socket.on('hmr', function (data) {
+            webappStart()
+        });
     }
 </script>
 </body>
