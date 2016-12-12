@@ -35,6 +35,14 @@ const setRouteHandler = () => new Promise((resolve, reject) => {
   );
 });
 
+const startIOserver = () => new Promise((resolve, reject) => {
+  const io = require('socket.io')(5000);
+  io.on('connection', function (socket) {
+    socket.emit("hmr")
+  });
+  resolve();
+})
+
 const startServer = () => new Promise((resolve, reject) => {
   app.listen(defaultConfig.$("connections.default.port"), (err) => {
     if (err) {
@@ -51,6 +59,7 @@ module.exports = function electrodeServer(userConfig, callback) {
     .then(loadConfigs)
     .then(setStaticPaths)
     .then(setRouteHandler)
+    .then(startIOserver)
     .then(startServer);
 
   return callback ? promise.nodeify(callback) : promise;
