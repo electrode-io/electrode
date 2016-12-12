@@ -37,6 +37,14 @@ supports.cssModuleHook({
 
 require("electrode-server")(config, [staticPathsDecor()])
   .then((server) => {
+    server.connection({port: 5000, labels: ['webpackReporter']})
+    const ioServer = server.select('webpackReporter');
+    server.start()
+    const io = require('socket.io')(ioServer.listener)
+    io.on('connection', (socket) => {
+      socket.emit('hmr');
+    })
+    
     server.route({
       method: "GET",
       path: "/reporter",
