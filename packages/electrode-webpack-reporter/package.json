@@ -19,8 +19,8 @@
   "author": "Joel Chen <xchen@walmartlabs.com>",
   "license": "Apache-2.0",
   "devDependencies": {
-    "electrode-archetype-react-app": "^1.4.1",
-    "electrode-archetype-react-app-dev": "^1.4.1",
+    "electrode-archetype-react-app": "^1.4.7",
+    "electrode-archetype-react-app-dev": "^1.4.7",
     "electrode-redux-router-engine": "^1.2.2",
     "electrode-server": "^1.1.1",
     "electrode-static-paths": "^1.0.0",
