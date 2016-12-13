@@ -107,7 +107,7 @@ describe("Test electrode-react-webapp", () => {
           url: "/"
         }).then((res) => {
           expect(res.statusCode).to.equal(500);
-          expect(res.result).to.equal("Internal server error");
+          expect(res.statusMessage).to.equal("Internal Server Error");
           stopServer(server);
         })
         .catch((err) => {

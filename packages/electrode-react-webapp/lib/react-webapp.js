@@ -98,7 +98,7 @@ function makeRouteHandler(options, userContent) {
 
   /* Create a route handler */
   /* eslint max-statements: [2, 20] */
-  return (request, reply) => {
+  return (request) => {
     const mode = request.query.__mode || "";
     const renderJs = RENDER_JS && mode !== "nojs";
     const renderSs = RENDER_SS && mode !== "noss";
@@ -168,21 +168,21 @@ function makeRouteHandler(options, userContent) {
     const renderPage = (content) => {
       return html.replace(/{{[A-Z_]*}}/g, (m) => {
         switch (m) {
-          case CONTENT_MARKER:
+        case CONTENT_MARKER:
           return content.html || "";
-          case TITLE_MARKER:
+        case TITLE_MARKER:
           return options.pageTitle;
-          case HEADER_BUNDLE_MARKER:
+        case HEADER_BUNDLE_MARKER:
           return makeHeaderBundles();
-          case BODY_BUNDLE_MARKER:
+        case BODY_BUNDLE_MARKER:
           return makeBodyBundles();
-          case PREFETCH_MARKER:
+        case PREFETCH_MARKER:
           return `<script>${content.prefetch}</script>`;
-          case META_TAGS_MARKER:
+        case META_TAGS_MARKER:
           return iconStats;
-          case CRITICAL_CSS_MARKER:
+        case CRITICAL_CSS_MARKER:
           return criticalCSS;
-          default:
+        default:
           return `Unknown marker ${m}`;
         }
       });

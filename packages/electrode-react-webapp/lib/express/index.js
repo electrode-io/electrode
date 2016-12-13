@@ -2,11 +2,10 @@
 
 const _ = require("lodash");
 const assert = require("assert");
-const ReactWebapp = require("./react-webapp");
+const ReactWebapp = require("../react-webapp");
 
 const HTTP_ERROR_500 = 500;
 const HTTP_REDIRECT = 302;
-
 
 const registerRoutes = (app, options, next) => {
   ReactWebapp.setupOptions(options)
