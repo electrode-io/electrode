@@ -7,7 +7,7 @@ process.on("SIGINT", () => {
 });
 
 const config = require("electrode-confippet").config;
-const staticPathsDecor = require("electrode-static-paths");
+<% if (isHapi) { %>const staticPathsDecor = require("electrode-static-paths");<% } %>
 const supports = require("electrode-archetype-react-app/supports");
 
 require.extensions[".css"] = () => {
