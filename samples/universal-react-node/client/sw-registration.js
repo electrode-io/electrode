@@ -24,7 +24,7 @@ module.exports = (notify) => {
               console.log("Installing a new service worker...");
               break;
             case "installed":
-              console.log(navigator.serviceWorker.controller);
+              console.log("Server worker installed");
               // We check the active controller which tells us if
               // new content is available, or the current service worker
               // is up to date (?)
@@ -39,7 +39,7 @@ module.exports = (notify) => {
               console.log("Activating a service worker...");
               break;
             case "activated":
-              console.log("Successfully activated service worker.");
+              console.log("Successfully activated service worker");
               break;
             case "redundant":
               console.log("Service worker has become redundant");
