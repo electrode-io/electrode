@@ -109,8 +109,9 @@ function makeRouteHandler(options, userContent) {
   /* eslint max-statements: [2, 20] */
   return (request, reply) => {
     const mode = request.query.__mode || "";
+    const disableSsrFlag = request.server.app && request.server.app.disableSSR;
     const renderJs = RENDER_JS && mode !== "nojs";
-    const renderSs = RENDER_SS && mode !== "noss";
+    const renderSs = RENDER_SS && mode !== "noss" && !disableSsrFlag;
     const chunkNames = chunkSelector(request);
     const devCSSBundle = chunkNames.css ?
       `${devBundleBase}${chunkNames.css}.style.css` :
