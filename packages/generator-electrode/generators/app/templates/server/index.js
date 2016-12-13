@@ -32,13 +32,4 @@ supports.babelRegister({
 supports.cssModuleHook({
   generateScopedName: "[name]__[local]___[hash:base64:5]"
 });
-require<% if (isHapi) {
-  %>("electrode-server")(config, [staticPathsDecor()]).then((server) => {
-  server.connection({port: 5000, labels: ["webpackReporter"]});
-  const ioServer = server.select("webpackReporter");
-  server.start();
-  const io = require("socket.io")(ioServer.listener); //eslint-disable-line global-require
-  io.on("connection", (socket) => {
-    socket.emit("hmr");
-  });
-})<% } else { %>("./express-server")(config)<% } %>;
+require<% if (isHapi) { %>("electrode-server")(config, [staticPathsDecor()])<% } else { %>("./express-server")(config)<% } %>;

@@ -1,2 +1,14 @@
 {
+  "connections":{
+    "webpackReporter":{
+	  "port": 5000
+	}
+  },
+  "plugins": {
+    "electrode-webpack-reporter-socket-plugin": {
+    	"options" : {
+    		"connectionLabel": "webpackReporter"
+    	}
+    }
+  }
 }
