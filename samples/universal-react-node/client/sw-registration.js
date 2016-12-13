@@ -24,7 +24,7 @@ module.exports = (notify) => {
               console.log("Installing a new service worker...");
               break;
             case "installed":
-              console.log("Server worker installed");
+              console.log("Service worker installed");
               // We check the active controller which tells us if
               // new content is available, or the current service worker
               // is up to date (?)
