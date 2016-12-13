@@ -13,7 +13,7 @@ describe("Test electrode-react-webapp", () => {
   const getConfig = () => {
     return {
       plugins: {
-        "./lib/index": {
+        "./lib/hapi/index": {
           options: {
             pageTitle: "Electrode App",
             paths: {
@@ -34,7 +34,7 @@ describe("Test electrode-react-webapp", () => {
 
   beforeEach(() => {
     config = getConfig();
-    configOptions = config.plugins["./lib/index"].options;
+    configOptions = config.plugins["./lib/hapi/index"].options;
     paths = configOptions.paths["/{args*}"];
   });
 

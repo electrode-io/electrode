@@ -342,7 +342,8 @@ module.exports = generators.Base.extend({
       this.composeWith('electrode:config', {
         options: {
           name: this.props.name,
-          pwa: this.props.pwa
+          pwa: this.props.pwa,
+          serverType: this.props.serverType
         }
       }, {
         local: require.resolve('../config')

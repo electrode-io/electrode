@@ -17,6 +17,12 @@ module.exports = generators.Base.extend({
       required: true,
       desc: 'Progressive Web App'
     });
+
+    this.option('serverType', {
+      type: String,
+      required: true,
+      desc: 'Server Type can be Hapi or Express'
+    });
   },
 
   writing: function () {
@@ -26,7 +32,9 @@ module.exports = generators.Base.extend({
       this.destinationPath('config/default.js'),
       {
         projectName: this.options.name,
-        routeValue: routeMatch
+        routeValue: routeMatch,
+        pwa: this.options.pwa,
+        serverType: this.options.serverType
       }
     );
 

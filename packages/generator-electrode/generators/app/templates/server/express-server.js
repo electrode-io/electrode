@@ -20,7 +20,7 @@ const setStaticPaths = function() {
 }
 
 const setRouteHandler = () => new Promise((resolve, reject) => {
-  const registerRoutes = require(path.resolve(defaultConfig.$("plugins.webapp.module")));
+  const registerRoutes = require(path.resolve(process.cwd() + '/node_modules/', defaultConfig.$("plugins.webapp.module")));
   return registerRoutes(app, defaultConfig.$("plugins.webapp.options"),
     function (err) {
       if (err) {

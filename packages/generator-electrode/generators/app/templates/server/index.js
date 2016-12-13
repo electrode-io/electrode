@@ -1,5 +1,7 @@
 "use strict";
 
+const SSRCaching = require("electrode-react-ssr-caching");
+
 process.on("SIGINT", () => {
   process.exit(0);
 });
@@ -7,6 +9,10 @@ process.on("SIGINT", () => {
 const config = require("electrode-confippet").config;
 const staticPathsDecor = require("electrode-static-paths");
 const supports = require("electrode-archetype-react-app/supports");
+
+require.extensions[".css"] = () => {
+  return;
+};
 
 /**
  * Use babel register to transpile any JSX code on the fly to run
@@ -16,6 +22,22 @@ const supports = require("electrode-archetype-react-app/supports");
 supports.babelRegister({
   ignore: /node_modules\/(?!react\/)/
 });
+
+const cacheConfig = {
+  components: {
+    SSRCachingTemplateType: {
+      strategy: "template",
+      enable: true
+    },
+    SSRCachingSimpleType: {
+      strategy: "simple",
+      enable: true
+    }
+  }
+};
+
+SSRCaching.enableCaching();
+SSRCaching.setCachingConfig(cacheConfig);
 
 /**
  * css-modules-require-hook: handle css-modules on node.js server.
@@ -32,4 +54,7 @@ supports.babelRegister({
 supports.cssModuleHook({
   generateScopedName: "[name]__[local]___[hash:base64:5]"
 });
-require<% if (isHapi) { %>("electrode-server")(config, [staticPathsDecor()])<% } else { %>("./express-server")(config)<% } %>;
+
+supports.isomorphicExtendRequire().then(() => {
+  require<% if (isHapi) { %>("electrode-server")(config, [staticPathsDecor()])<% } else { %>("./express-server")(config)<% } %>;  // eslint-disable-line
+});
