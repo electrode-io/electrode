@@ -37,6 +37,7 @@
   },
   "devDependencies": {
     "electrode-archetype-react-app-dev": "^1.4.1",
-    "gulp": "^3.9.1"
+    "gulp": "^3.9.1",
+    "electrode-webpack-reporter-socket-plugin": "^1.0.0"
   }
 }
