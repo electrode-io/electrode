@@ -138,7 +138,6 @@ module.exports = function () {
       };
     }
 
-
     var plugins = [
       new FaviconsWebpackPlugin({
         logo: manifestConfig.logo,
