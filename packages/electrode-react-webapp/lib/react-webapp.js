@@ -29,13 +29,21 @@ function resolveChunkSelector(options) {
   }
 
   return () => ({
-    css: "",
-    js: ""
+    css: "main",
+    js: "main"
   });
 }
 
-function loadAssetsFromStats(statsFilePath) {
-  return Promise.resolve(Path.resolve(statsFilePath))
+/**
+ * Load stats.json which is created during build.
+ * Attempt to load the stats.json file which contains a manifest of
+ * The file contains bundle files which are to be loaded on the client side.
+ *
+ * @param {string} statsPath - path of stats.json
+ * @returns {Promise.<Object>} an object containing an array of file names
+ */
+function loadAssetsFromStats(statsPath) {
+  return Promise.resolve(Path.resolve(statsPath))
   .then(require)
   .then((stats) => {
     const assets = {};
@@ -85,6 +93,21 @@ function getCriticalCSS(path) {
   }
 }
 
+/**
+ * Resolves the path to the stats.json file containing our
+ * asset list. In dev the stats.json file is written to a
+ * build artifacts directory, while in produciton its contained
+ * within the dist/server folder
+ * @param  {string} statsFilePath      path to stats.json
+ * @param  {string} buildArtifactsPath path to stats.json in dev
+ * @return {string}                    current active path
+ */
+function getStatsPath(statsFilePath, buildArtifactsPath) {
+  return process.env.WEBPACK_DEV === "true"
+    ? Path.resolve(process.cwd(), buildArtifactsPath, "stats.json")
+    : statsFilePath;
+}
+
 function makeRouteHandler(routeOpts, userContent) {
   const WEBPACK_DEV = routeOpts.webpackDev;
   const RENDER_JS = routeOpts.renderJS;
@@ -99,7 +122,7 @@ function makeRouteHandler(routeOpts, userContent) {
   /* Create a route handler */
   /* eslint max-statements: [2, 22] */
   return (opts) => {
-    const mode = opts.query.__mode || "";
+    const mode = opts.query;
     const renderJs = RENDER_JS && mode !== "nojs";
     let renderSs = RENDER_SS;
     if (renderSs) {
@@ -121,11 +144,11 @@ function makeRouteHandler(routeOpts, userContent) {
     `${devBundleBase}bundle.dev.js`;
     const jsChunk = _.find(
       assets.js,
-      (asset) => asset.chunkNames[0] === (chunkNames.js || "bundle")
+      (asset) => _.includes(asset.chunkNames, chunkNames.js)
     );
     const cssChunk = _.find(
       assets.css,
-      (asset) => asset.chunkNames[0] === (chunkNames.css || "bundle")
+      (asset) => _.includes(asset.chunkNames, chunkNames.css)
     );
 
     const bundleCss = () => {
@@ -223,14 +246,15 @@ const setupOptions = (options) => {
     paths: {},
     stats: "dist/server/stats.json",
     iconStats: "dist/server/iconstats.json",
-    criticalCSS: "dist/js/critical.css"
+    criticalCSS: "dist/js/critical.css",
+    buildArtifacts: ".build"
   };
 
   const pluginOptions = _.defaultsDeep({}, options, pluginOptionsDefaults);
   const chunkSelector = resolveChunkSelector(pluginOptions);
   const devBundleBase = `http://${pluginOptions.devServer.host}:${pluginOptions.devServer.port}/js/`;
 
-  return Promise.try(() => loadAssetsFromStats(pluginOptions.stats))
+  return Promise.try(() => loadAssetsFromStats(statsPath))
   .then((assets) => {
     pluginOptions.__internals = {
       assets,
