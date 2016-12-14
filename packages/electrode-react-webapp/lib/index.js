@@ -116,8 +116,8 @@ function makeRouteHandler(options, userContent) {
       if (mode === "noss") {
         renderSs = false;
       } else if ((mode === "datass" || disableSsrFlag) && request.app) {
-          request.app.disableSSR = true;
-      } else if(request.app && request.app.disableSSR) {
+        request.app.disableSSR = true;
+      } else if (request.app && request.app.disableSSR) {
         request.app.disableSSR = false;
       }
     }
