@@ -19,7 +19,6 @@ function removeCwd(s) {
 }
 
 const reporterStats = require("../dist/server/stats.json");
-let socketIO;
 
 class WebpackReporter extends EventEmitter {
   constructor() {
@@ -28,6 +27,7 @@ class WebpackReporter extends EventEmitter {
     const distCss = Path.join(__dirname, "../dist/js", reporterStats.assetsByChunkName.main[1]);
     this._reporterHtml = fs.readFileSync(Path.resolve(Path.join(__dirname, "reporter.html"))).toString()
       .replace("{{CSS}}", removeCwd(distCss)).replace("{{JS}}", removeCwd(distJs));
+    this._socketIO = null;
   }
 
   apply(config) {
@@ -45,7 +45,7 @@ class WebpackReporter extends EventEmitter {
       const warning = stats.hasWarnings() ? chalk.yellow(" WARNINGS") : "";
       const but = (error || warning) && chalk.yellow(" but has") || "";
       console.log(`webpack bundle is now VALID${but}${error}${warning}`);
-      socketIO ? socketIO.emit("hmr") : console.log(chalk.magenta(`webpack report is served from`), chalk.cyan(`http://${opt.host}:${opt.port}/reporter`));
+      this._socketIO ? this._socketIO.emit("hmr") : console.log(chalk.magenta(`webpack report is served from`), chalk.cyan(`http://${opt.host}:${opt.port}/reporter`));
     } else {
       console.log("webpack bundle is now INVALID");
     }
@@ -60,7 +60,7 @@ class WebpackReporter extends EventEmitter {
     const io = require('socket.io')(server);
     server.listen(5000);
     io.on("connection", (socket) => {
-      socketIO = socket;
+      this._socketIO = socket;
     });
   }
 
