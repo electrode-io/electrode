@@ -106,12 +106,22 @@ function makeRouteHandler(options, userContent) {
   const criticalCSS = getCriticalCSS(options.criticalCSS);
 
   /* Create a route handler */
-  /* eslint max-statements: [2, 20] */
+  /* eslint max-statements: [2, 25] */
   return (request, reply) => {
     const mode = request.query.__mode || "";
     const disableSsrFlag = request.server.app && request.server.app.disableSSR;
     const renderJs = RENDER_JS && mode !== "nojs";
-    const renderSs = RENDER_SS && mode !== "noss" && !disableSsrFlag;
+    let renderSs = RENDER_SS;
+    if (renderSs) {
+      if (mode === "noss") {
+        renderSs = false;
+      } else if ((mode === "datass" || disableSsrFlag) && request.app) {
+          request.app.disableSSR = true;
+      } else if(request.app && request.app.disableSSR) {
+        request.app.disableSSR = false;
+      }
+    }
+
     const chunkNames = chunkSelector(request);
     const devCSSBundle = chunkNames.css ?
       `${devBundleBase}${chunkNames.css}.style.css` :
@@ -215,7 +225,7 @@ function makeRouteHandler(options, userContent) {
     };
 
     const doRender = () => {
-      return renderSs ? renderSSRContent(userContent) : renderPage("");
+      return renderSSRContent(renderSs ? userContent : "");
     };
 
     Promise.try(doRender)
