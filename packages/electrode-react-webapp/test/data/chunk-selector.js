@@ -9,8 +9,8 @@ const BAR_BUNDLE = {
   js: "bar"
 };
 const DEFAULT_BUNDLE = {
-  css: "",
-  js: ""
+  css: "home",
+  js: "home"
 };
 
 module.exports = (request) => {

@@ -31,20 +31,21 @@ function resolveChunkSelector(options) {
   }
 
   return () => ({
-    css: "",
-    js: ""
+    css: "main",
+    js: "main"
   });
 }
 
 /**
  * Load stats.json which is created during build.
+ * Attempt to load the stats.json file which contains a manifest of
  * The file contains bundle files which are to be loaded on the client side.
  *
- * @param {string} statsFilePath - path of stats.json
+ * @param {string} statsPath - path of stats.json
  * @returns {Promise.<Object>} an object containing an array of file names
  */
-function loadAssetsFromStats(statsFilePath) {
-  return Promise.resolve(Path.resolve(statsFilePath))
+function loadAssetsFromStats(statsPath) {
+  return Promise.resolve(Path.resolve(statsPath))
     .then(require)
     .then((stats) => {
       const assets = {};
@@ -64,7 +65,6 @@ function loadAssetsFromStats(statsFilePath) {
 
       assets.js = jsAssets;
       assets.css = cssAssets;
-
       return assets;
     })
     .catch(() => ({}));
@@ -94,6 +94,21 @@ function getCriticalCSS(path) {
   }
 }
 
+/**
+ * Resolves the path to the stats.json file containing our
+ * asset list. In dev the stats.json file is written to a
+ * build artifacts directory, while in produciton its contained
+ * within the dist/server folder
+ * @param  {string} statsFilePath      path to stats.json
+ * @param  {string} buildArtifactsPath path to stats.json in dev
+ * @return {string}                    current active path
+ */
+function getStatsPath(statsFilePath, buildArtifactsPath) {
+  return process.env.WEBPACK_DEV === "true"
+    ? Path.resolve(process.cwd(), buildArtifactsPath, "stats.json")
+    : statsFilePath;
+}
+
 function makeRouteHandler(options, userContent) {
   const WEBPACK_DEV = options.webpackDev;
   const RENDER_JS = options.renderJS;
@@ -120,11 +135,11 @@ function makeRouteHandler(options, userContent) {
       `${devBundleBase}bundle.dev.js`;
     const jsChunk = _.find(
       assets.js,
-      (asset) => asset.chunkNames[0] === (chunkNames.js || "bundle")
+      (asset) => _.includes(asset.chunkNames, chunkNames.js)
     );
     const cssChunk = _.find(
       assets.css,
-      (asset) => asset.chunkNames[0] === (chunkNames.css || "bundle")
+      (asset) => _.includes(asset.chunkNames, chunkNames.css)
     );
 
     const bundleCss = () => {
@@ -242,7 +257,8 @@ const registerRoutes = (server, options, next) => {
     paths: {},
     stats: "dist/server/stats.json",
     iconStats: "dist/server/iconstats.json",
-    criticalCSS: "dist/js/critical.css"
+    criticalCSS: "dist/js/critical.css",
+    buildArtifacts: ".build"
   };
 
   const resolveContent = (content) => {
@@ -257,8 +273,9 @@ const registerRoutes = (server, options, next) => {
   const pluginOptions = _.defaultsDeep({}, options, pluginOptionsDefaults);
   const chunkSelector = resolveChunkSelector(pluginOptions);
   const devBundleBase = `http://${pluginOptions.devServer.host}:${pluginOptions.devServer.port}/js/`;
+  const statsPath = getStatsPath(pluginOptions.stats, pluginOptions.buildArtifacts);
 
-  return Promise.try(() => loadAssetsFromStats(pluginOptions.stats))
+  return Promise.try(() => loadAssetsFromStats(statsPath))
     .then((assets) => {
       pluginOptions.__internals = {
         assets,
