@@ -67,7 +67,7 @@ function getIconStats(iconStatsPath) {
     iconStats = fs.readFileSync(Path.resolve(iconStatsPath)).toString();
     iconStats = JSON.parse(iconStats);
   } catch (err) {
-    iconStats = "";
+    return "";
   }
   if (iconStats && iconStats.html) {
     return iconStats.html.join("");
@@ -85,24 +85,34 @@ function getCriticalCSS(path) {
   }
 }
 
-function makeRouteHandler(options, userContent) {
-  const WEBPACK_DEV = options.webpackDev;
-  const RENDER_JS = options.renderJS;
-  const RENDER_SS = options.serverSideRendering;
-  const html = fs.readFileSync(options.htmlFile).toString();
-  const assets = options.__internals.assets;
-  const devBundleBase = options.__internals.devBundleBase;
-  const chunkSelector = options.__internals.chunkSelector;
-  const iconStats = getIconStats(options.iconStats);
-  const criticalCSS = getCriticalCSS(options.criticalCSS);
+function makeRouteHandler(routeOpts, userContent) {
+  const WEBPACK_DEV = routeOpts.webpackDev;
+  const RENDER_JS = routeOpts.renderJS;
+  const RENDER_SS = routeOpts.serverSideRendering;
+  const html = fs.readFileSync(routeOpts.htmlFile).toString();
+  const assets = routeOpts.__internals.assets;
+  const devBundleBase = routeOpts.__internals.devBundleBase;
+  const chunkSelector = routeOpts.__internals.chunkSelector;
+  const iconStats = getIconStats(routeOpts.iconStats);
+  const criticalCSS = getCriticalCSS(routeOpts.criticalCSS);
 
   /* Create a route handler */
-  /* eslint max-statements: [2, 20] */
-  return (request) => {
-    const mode = request.query.__mode || "";
+  /* eslint max-statements: [2, 22] */
+  return (opts) => {
+    const mode = opts.query.__mode || "";
     const renderJs = RENDER_JS && mode !== "nojs";
-    const renderSs = RENDER_SS && mode !== "noss";
-    const chunkNames = chunkSelector(request);
+    let renderSs = RENDER_SS;
+    if (renderSs) {
+      if (mode === "noss") {
+        renderSs = false;
+      } else if (mode === "datass") {
+        if (opts.app) {
+          opts.app.disableSSR = true;
+        }
+      }
+    }
+
+    const chunkNames = chunkSelector(opts);
     const devCSSBundle = chunkNames.css ?
     `${devBundleBase}${chunkNames.css}.style.css` :
     `${devBundleBase}style.css`;
@@ -134,7 +144,7 @@ function makeRouteHandler(options, userContent) {
     };
 
     const callUserContent = (content) => {
-      const x = content(request);
+      const x = content(opts);
       return !x.catch ? x : x.catch((err) => {
         return Promise.reject({
           status: err.status || HTTP_ERROR_500,
@@ -171,7 +181,7 @@ function makeRouteHandler(options, userContent) {
         case CONTENT_MARKER:
           return content.html || "";
         case TITLE_MARKER:
-          return options.pageTitle;
+          return opts.pageTitle;
         case HEADER_BUNDLE_MARKER:
           return makeHeaderBundles();
         case BODY_BUNDLE_MARKER:
