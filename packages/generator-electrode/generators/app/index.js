@@ -11,6 +11,9 @@ var extend = _.merge;
 var parseAuthor = require('parse-author');
 var githubUsername = require('github-username');
 
+const ExpressJS = 'ExpressJS';
+const HapiJS = 'HapiJS';
+
 module.exports = generators.Base.extend({
   constructor: function () {
     generators.Base.apply(this, arguments);
@@ -75,7 +78,7 @@ module.exports = generators.Base.extend({
       this.props.authorEmail = this.pkg.author.email;
       this.props.authorUrl = this.pkg.author.url;
       this.props.createDirectory = false;
-      this.props.serverType = this.fs.exists(this.destinationPath('server/express-server.js')) ? "expressjs" : "hapijs";
+      this.props.serverType = this.fs.exists(this.destinationPath('server/express-server.js')) ? ExpressJS : HapiJS;
       this.props.pwa = this.fs.exists(this.destinationPath('client/sw-register.js'));
     } else if (_.isString(this.pkg.author)) {
       var info = parseAuthor(this.pkg.author);
@@ -122,11 +125,8 @@ module.exports = generators.Base.extend({
           name: 'serverType',
           message: 'Which framework for the server?',
           when: !this.props.serverType,
-          choices: ['HapiJS', "ExpressJS"],
-          default: 'HapiJS',
-          filter: function(ans) {
-            return ans.toLowerCase();
-          }
+          choices: [HapiJS, ExpressJS],
+          default: HapiJS
         },
         {
           type: "input",
@@ -211,9 +211,22 @@ module.exports = generators.Base.extend({
   },
 
   writing: function () {
+    const isHapi = this.config.get('serverType') === HapiJS;
+    const isPWA = this.props.pwa;
+
     // Re-read the content at this point because a composed generator might modify it.
     var currentPkg = this.fs.readJSON(this.destinationPath('package.json'), {});
-    var defaultPkg = require(this.templatePath('_package.json'));
+
+    const _pkg = '_package.json';
+
+    this.fs.copyTpl(
+      this.templatePath(_pkg),
+      this.destinationPath(_pkg),
+      {isHapi, isPWA}
+    );
+
+    var defaultPkg = this.fs.readJSON(this.destinationPath(_pkg));
+    this.fs.delete(this.destinationPath(_pkg));
 
     ['name', 'version', 'description', 'homepage', 'main', 'license'].forEach((x) => {
       currentPkg[x] = currentPkg[x] || undefined;
@@ -254,33 +267,33 @@ module.exports = generators.Base.extend({
       this.destinationPath('.babelrc')
     );
 
-    ['gulpfile.js','config', 'test'].forEach((f) => {
+    ['gulpfile.js', 'config', 'test'].forEach((f) => {
       this.fs.copy(
         this.templatePath(f),
         this.destinationPath(f)
       );
     });
-      //special handling for the server file
-      const isHapi = this.config.get('serverType') === 'hapijs';
-      this.fs.copyTpl(
-        this.templatePath('server'),
-        this.destinationPath('server'),
-        {isHapi},
-        {},
-        {
-          globOptions: { ignore: [ isHapi ? '**/server/express-server.js' : '' ] }
-        }
-      );
+
+    //special handling for the server file
+    this.fs.copyTpl(
+      this.templatePath('server'),
+      this.destinationPath('server'),
+      {isHapi},
+      {},
+      {
+        globOptions: {ignore: [isHapi ? '**/server/express-server.js' : '']}
+      }
+    );
 
     this.fs.copyTpl(
       this.templatePath('client'),
       this.destinationPath('client'),
-      { pwa: this.props.pwa },
+      {pwa: isPWA},
       {}, // template options
       { // copy options
         globOptions: {
           // Images are damaged by the template compiler
-          ignore: ['**/client/images/**', !this.props.pwa && '**/client/sw-register.js' || '']
+          ignore: ['**/client/images/**', !isPWA && '**/client/sw-register.js' || '']
         }
       }
     );
@@ -342,7 +355,8 @@ module.exports = generators.Base.extend({
       this.composeWith('electrode:config', {
         options: {
           name: this.props.name,
-          pwa: this.props.pwa
+          pwa: this.props.pwa,
+          serverType: this.props.serverType
         }
       }, {
         local: require.resolve('../config')
@@ -366,7 +380,7 @@ module.exports = generators.Base.extend({
     });
   },
 
-  end: function() {
+  end: function () {
     var chdir = this.props.createDirectory ? "'cd " + _.kebabCase(_.deburr(this.props.name)) + "' then " : "";
     this.log(
       "\n" + chalk.green.underline("Your new Electrode application is ready!") +

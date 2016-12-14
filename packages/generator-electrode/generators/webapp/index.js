@@ -21,6 +21,7 @@ module.exports = generators.Base.extend({
 
   writing: function () {
     const isHapi = this.config.get('serverType') === 'hapijs';
+
     this.fs.copyTpl(
       this.templatePath('server'),
       this.destinationPath(this.options.generateInto, 'server'),
@@ -30,8 +31,20 @@ module.exports = generators.Base.extend({
       },
       {},
       {
-        globOptions: { ignore: [ isHapi ? '**/server/plugins/webapp/express-middleware.js' : '**/server/plugins/webapp/hapi-plugin.js' ] }
+        globOptions: {
+          ignore: [
+            isHapi ? '**/server/plugins/webapp/express-middleware.js' : '**/server/plugins/webapp/hapi-plugin.js',
+            '**/server/plugins/pwa.js'
+          ]
+        }
       }
     );
+
+    if (this.options.pwa) {
+      this.fs.copy(
+        this.templatePath('server/plugins/pwa.js'),
+        this.destinationPath(this.options.generateInto, 'server/plugins/pwa.js')
+      );
+    }
   }
 });

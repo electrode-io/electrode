@@ -20,22 +20,26 @@
   },
   "scripts": {
     "start": "if test \"$NODE_ENV\" = \"production\"; then npm run prod; else gulp dev; fi",
-    "test": "gulp test",
+    "test": "gulp check",
     "coverage": "gulp check",
     "prod": "echo 'Starting standalone server in PROD mode'; node .",
     "heroku-postbuild": "gulp build"
   },
   "dependencies": {
     "bluebird": "^3.4.6",
-    "electrode-archetype-react-app": "^1.4.1",
+    "electrode-archetype-react-app": "^1.5.0",
     "electrode-confippet": "^1.0.0",
+    "electrode-react-ssr-caching": "^0.1.3",
+    "electrode-react-webapp": "^1.1.0",
     "electrode-redux-router-engine": "^1.2.2",
     "electrode-server": "^1.0.0",
     "electrode-static-paths": "^1.0.0",
+<% if (!isHapi) { %>"express": "^4.0.0",<% } %>
+<% if (!isPWA) { %>"react-notify-toast": "^0.1.3",<% } %>
     "lodash": "^4.10.1"
   },
   "devDependencies": {
-    "electrode-archetype-react-app-dev": "^1.4.1",
+    "electrode-archetype-react-app-dev": "^1.5.0",
     "gulp": "^3.9.1"
   }
 }

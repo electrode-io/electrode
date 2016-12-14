@@ -13,12 +13,17 @@
   "homepage": "http://www.electrode.io",
   "license": "Apache-2.0",
   "scripts": {
-    "test": "lerna bootstrap && gulp test"
+    "test": "lerna bootstrap && lerna run test && gulp build-test",
+    "test-generator": "gulp test-generator",
+    "test-boilerplate": "gulp test-boilerplate",
+    "bootstrap": "lerna bootstrap"
   },
   "devDependencies": {
     "electrode-gulp-helper": "^1.0.5",
     "gulp": "^3.9.1",
-    "lerna": "2.0.0-beta.30"
+    "lerna": "2.0.0-beta.30",
+    "lodash": "^4.17.2",
+    "yeoman-test": "^1.6.0"
   },
   "engines": {
     "node": "^4.4.6 || ^6.2.1",
