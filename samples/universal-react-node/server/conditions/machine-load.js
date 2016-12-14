@@ -36,10 +36,12 @@ module.exports = (_opts) => {
     const THRESHOLD_LOAD = _opts.loadThreshold || DEFAULT_LOAD_THRESHOLD;
     const THRESHOLD_MEM = _opts.memoryThreshold || DEFAULT_MEM_THRESHOLD;
 
+    // 1min and 5min load average is over threshold
+    // when factoring in number of CPUs
     if (
-      (loadAvgs[0] / numCpus) > THRESHOLD_LOAD && // 1min and 5min load average is over threshold
-      (loadAvgs[1] / numCpus) > THRESHOLD_LOAD || // when factoring in number of CPUs
-      (request.server.load.rss / machine.totalMem()) > THRESHOLD_MEM
+      (loadAvgs[0] / numCpus) > THRESHOLD_LOAD && //eslint-disable-line
+      (loadAvgs[1] / numCpus) > THRESHOLD_LOAD || //eslint-disable-line
+      (request.server.load.rss / machine.totalMem()) > THRESHOLD_MEM //eslint-disable-line
       // Memory usage is over threshold % of total mem
     ) {
 
@@ -54,4 +56,3 @@ module.exports = (_opts) => {
   };
 
 };
-

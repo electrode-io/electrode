@@ -19,7 +19,7 @@ module.exports = {
     return function responseTimeConditionDetector(request) {
       // Measure elapsed time, increment number of tracked long response
       // times if over threshold
-      if ((request.info.responded - request.info.received) >= longResponseThreshold) {
+      if ((request.info.responded - request.info.received) >= longResponseThreshold) {//eslint-disable-line
         ++request.server.app.longResponses;
       }
 
@@ -27,7 +27,7 @@ module.exports = {
       // amount, disable SSR for specified number of minutes
       if (request.server.app.longResponses > longResponseAmount) {
 
-        const expires = Date.now() + (disableExpiryMins * MS_IN_SEC * SEC_IN_MIN);
+        const expires = Date.now() + (disableExpiryMins * MS_IN_SEC * SEC_IN_MIN); //eslint-disable-line
         request.server.app.disableSSR = true;
         request.server.app.disableSSRExpiry = expires;
 
@@ -51,4 +51,3 @@ module.exports = {
 
   }
 };
-
