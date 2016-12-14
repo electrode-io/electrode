@@ -33,6 +33,7 @@
     "fs-extra": "^0.26.5",
     "glob": "^7.0.6",
     "gulp": "^3.9.1",
+    "isomorphic-loader": "^1.0.0",
     "isparta-loader": "^2.0.0",
     "istanbul": "^0.3.18",
     "json-loader": "^0.5.3",
