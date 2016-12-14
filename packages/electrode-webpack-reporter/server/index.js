@@ -51,7 +51,7 @@ require("electrode-server")(config, [staticPathsDecor()])
           warnings: statsUtils.getWarningsHtml(stats),
           errors: statsUtils.getErrorsHtml(stats),
           legacy: statsUtils.jsonToHtml(stats, true),
-          pureWebpackStats: stats
+          modules: stats.chunks[0].modules
         };
         reply(data);
       }
