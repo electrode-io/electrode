@@ -28,7 +28,7 @@ function requireModuleSafelyWithFallback(path, fallback) {
   } catch (err) {
     requiredModule = fallback;
   }
-  return requiredModule
+  return requiredModule;
 }
 
 
