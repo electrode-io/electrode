@@ -37,8 +37,7 @@ supports.cssModuleHook({
 
 require("electrode-server")(config, [staticPathsDecor()])
   .then((server) => {
- 
-     server.route({
+    server.route({
       method: "GET",
       path: "/reporter",
       handler: (req, reply) => {
