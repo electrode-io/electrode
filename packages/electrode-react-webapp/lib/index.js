@@ -109,16 +109,13 @@ function makeRouteHandler(options, userContent) {
   /* eslint max-statements: [2, 25] */
   return (request, reply) => {
     const mode = request.query.__mode || "";
-    const disableSsrFlag = request.server.app && request.server.app.disableSSR;
     const renderJs = RENDER_JS && mode !== "nojs";
     let renderSs = RENDER_SS;
     if (renderSs) {
       if (mode === "noss") {
         renderSs = false;
-      } else if ((mode === "datass" || disableSsrFlag) && request.app) {
+      } else if (mode === "datass" && request.app) {
         request.app.disableSSR = true;
-      } else if (request.app && request.app.disableSSR) {
-        request.app.disableSSR = false;
       }
     }
 
