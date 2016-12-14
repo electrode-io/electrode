@@ -30,7 +30,7 @@ const registerRoutes = (server, options, next) => {
             }
           };
 
-          routeHandler({mode: request.query.__mode || "", request})
+          routeHandler(request)
           .then((data) => {
             return data.status ? handleStatus(data) : reply(data);
           })

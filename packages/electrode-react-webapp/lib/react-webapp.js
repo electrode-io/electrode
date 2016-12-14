@@ -108,34 +108,24 @@ function getStatsPath(statsFilePath, buildArtifactsPath) {
     : statsFilePath;
 }
 
-function makeRouteHandler(routeOpts, userContent) {
-  const WEBPACK_DEV = routeOpts.webpackDev;
-  const RENDER_JS = routeOpts.renderJS;
-  const RENDER_SS = routeOpts.serverSideRendering;
-  const html = fs.readFileSync(routeOpts.htmlFile).toString();
-  const assets = routeOpts.__internals.assets;
-  const devBundleBase = routeOpts.__internals.devBundleBase;
-  const chunkSelector = routeOpts.__internals.chunkSelector;
-  const iconStats = getIconStats(routeOpts.iconStats);
-  const criticalCSS = getCriticalCSS(routeOpts.criticalCSS);
+function makeRouteHandler(options, userContent) {
+  const WEBPACK_DEV = options.webpackDev;
+  const RENDER_JS = options.renderJS;
+  const RENDER_SS = options.serverSideRendering;
+  const html = fs.readFileSync(options.htmlFile).toString();
+  const assets = options.__internals.assets;
+  const devBundleBase = options.__internals.devBundleBase;
+  const chunkSelector = options.__internals.chunkSelector;
+  const iconStats = getIconStats(options.iconStats);
+  const criticalCSS = getCriticalCSS(options.criticalCSS);
 
   /* Create a route handler */
   /* eslint max-statements: [2, 22] */
-  return (opts) => {
-    const mode = opts.query;
+  return (request) => {
+    const mode = request.query && request.query.__mode || "";
     const renderJs = RENDER_JS && mode !== "nojs";
-    let renderSs = RENDER_SS;
-    if (renderSs) {
-      if (mode === "noss") {
-        renderSs = false;
-      } else if (mode === "datass") {
-        if (opts.app) {
-          opts.app.disableSSR = true;
-        }
-      }
-    }
-
-    const chunkNames = chunkSelector(opts);
+    const renderSs = RENDER_SS && mode !== "noss";
+    const chunkNames = chunkSelector(request);
     const devCSSBundle = chunkNames.css ?
     `${devBundleBase}${chunkNames.css}.style.css` :
     `${devBundleBase}style.css`;
@@ -167,7 +157,7 @@ function makeRouteHandler(routeOpts, userContent) {
     };
 
     const callUserContent = (content) => {
-      const x = content(opts);
+      const x = content(request);
       return !x.catch ? x : x.catch((err) => {
         return Promise.reject({
           status: err.status || HTTP_ERROR_500,
@@ -204,7 +194,7 @@ function makeRouteHandler(routeOpts, userContent) {
         case CONTENT_MARKER:
           return content.html || "";
         case TITLE_MARKER:
-          return opts.pageTitle;
+          return options.pageTitle;
         case HEADER_BUNDLE_MARKER:
           return makeHeaderBundles();
         case BODY_BUNDLE_MARKER:
@@ -253,6 +243,7 @@ const setupOptions = (options) => {
   const pluginOptions = _.defaultsDeep({}, options, pluginOptionsDefaults);
   const chunkSelector = resolveChunkSelector(pluginOptions);
   const devBundleBase = `http://${pluginOptions.devServer.host}:${pluginOptions.devServer.port}/js/`;
+  const statsPath = getStatsPath(pluginOptions.stats, pluginOptions.buildArtifacts);
 
   return Promise.try(() => loadAssetsFromStats(statsPath))
   .then((assets) => {
