@@ -4,8 +4,8 @@ const _ = require("lodash");
 const Promise = require("bluebird");
 const fs = require("fs");
 const Path = require("path");
-const assert = require("assert");
 
+const HTTP_ERROR_500 = 500;
 
 /**
  * Load stats.json which is created during build.
@@ -40,7 +40,7 @@ function getIconStats(iconStatsPath) {
     iconStats = fs.readFileSync(Path.resolve(iconStatsPath)).toString();
     iconStats = JSON.parse(iconStats);
   } catch (err) {
-    return '';
+    return "";
   }
   if (iconStats && iconStats.html) {
     return iconStats.html.join("");
@@ -49,35 +49,34 @@ function getIconStats(iconStatsPath) {
 }
 
 /* eslint max-statements: [2, 16] */
-function makeRouteHandler(options, userContent) {
+function makeRouteHandler(routeOpts, userContent) {
   const CONTENT_MARKER = "{{SSR_CONTENT}}";
   const HEADER_BUNDLE_MARKER = "{{WEBAPP_HEADER_BUNDLES}}";
   const BODY_BUNDLE_MARKER = "{{WEBAPP_BODY_BUNDLES}}";
   const TITLE_MARKER = "{{PAGE_TITLE}}";
   const PREFETCH_MARKER = "{{PREFETCH_BUNDLES}}";
   const META_TAGS_MARKER = "{{META_TAGS}}";
-  const WEBPACK_DEV = options.webpackDev;
-  const RENDER_JS = options.renderJS;
-  const RENDER_SS = options.serverSideRendering;
+  const WEBPACK_DEV = routeOpts.webpackDev;
+  const RENDER_JS = routeOpts.renderJS;
+  const RENDER_SS = routeOpts.serverSideRendering;
   const html = fs.readFileSync(Path.join(__dirname, "index.html")).toString();
-  const assets = options.__internals.assets;
-  const devJSBundle = options.__internals.devJSBundle;
-  const devCSSBundle = options.__internals.devCSSBundle;
-  const iconStats = getIconStats(options.iconStats);
+  const assets = routeOpts.__internals.assets;
+  const devJSBundle = routeOpts.__internals.devJSBundle;
+  const devCSSBundle = routeOpts.__internals.devCSSBundle;
+  const iconStats = getIconStats(routeOpts.iconStats);
 
   /* Create a route handler */
   /*eslint max-statements: 0*/
-  return (options) => {
-    const mode = options.mode;
+  return (opts) => {
+    const mode = opts.mode;
     const renderJs = RENDER_JS && mode !== "nojs";
-    const renderSs = RENDER_SS && mode !== "noss";
     let renderSs = RENDER_SS;
     if (renderSs) {
-      if ( mode === "noss") {
+      if (mode === "noss") {
         renderSs = false;
       } else if (mode === "datass") {
-        if (options.request && options.request.app) {
-          options.request.app.disableSSR = true;
+        if (opts.request && opts.request.app) {
+          opts.request.app.disableSSR = true;
         }
       }
     }
@@ -98,7 +97,7 @@ function makeRouteHandler(options, userContent) {
     };
 
     const callUserContent = (content) => {
-      const x = content(options.request);
+      const x = content(opts.request);
       return !x.catch ? Promise.resolve(x) : x.catch((err) => {
         return Promise.reject({
           status: err.status || HTTP_ERROR_500,
@@ -125,17 +124,13 @@ function makeRouteHandler(options, userContent) {
       return jsLink;
     };
 
-    const addPrefetch = (prefetch) => {
-      return prefetch ? `<script>${prefetch}</script>` : "";
-    };
-
     const renderPage = (content) => {
       return html.replace(/{{[A-Z_]*}}/g, (m) => {
         switch (m) {
         case CONTENT_MARKER:
           return content.html || "";
         case TITLE_MARKER:
-          return options.pageTitle;
+          return opts.pageTitle;
         case HEADER_BUNDLE_MARKER:
           return makeHeaderBundles();
         case BODY_BUNDLE_MARKER:
