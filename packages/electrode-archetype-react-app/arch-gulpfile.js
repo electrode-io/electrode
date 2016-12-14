@@ -140,7 +140,7 @@ function inlineCriticalCSS(cb) {
   const url = `http://${HOST}:${PORT}${PATH}`;
   const statsPath = Path.resolve(process.cwd(), 'dist/server/stats.json');
   const stats = JSON.parse(fs.readFileSync(statsPath));
-  const cssAsset = stats.assets.find(({ name }) => name.endsWith('.css'));
+  const cssAsset = stats.assets.find((asset) => asset.name.endsWith('.css'));
   const cssAssetPath = Path.resolve(process.cwd(), `dist/js/${cssAsset.name}`);
   const targetPath = Path.resolve(process.cwd(), 'dist/js/critical.css');
   var serverPromise = require(Path.resolve(process.cwd(), 'server/index.js'));
