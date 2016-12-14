@@ -1,4 +1,5 @@
 "use strict";
+
 const Promise = require("bluebird");
 const express = require("express");
 const app = express();
@@ -23,13 +24,13 @@ const setStaticPaths = function () {
 
 const setRouteHandler = () => new Promise((resolve, reject) => {
   const registerRoutes = require(
-    path.resolve(process.cwd() + '/node_modules/', defaultConfig.$("plugins.webapp.module"))
-  );
+    path.resolve(`${process.cwd()}/node_modules/`, defaultConfig.$("plugins.webapp.module"))
+  ); //eslint-disable-line global-require
 
   return registerRoutes(app, defaultConfig.$("plugins.webapp.options"),
     (err) => {
       if (err) {
-        console.error(err); // eslint-disable-line
+        console.error(err); //eslint-disable-line
         reject(err);
       } else {
         resolve();
@@ -43,10 +44,8 @@ const startServer = () => new Promise((resolve, reject) => {
     if (err) {
       reject(err);
     } else {
-      console.log(
-        "App listening on port:", defaultConfig.$("connections.default.port")
-      ); // eslint-disable-line
-
+      //eslint-disable-next-line
+      console.log(`App listening on port: ${defaultConfig.$("connections.default.port")}`);
       resolve();
     }
   });
