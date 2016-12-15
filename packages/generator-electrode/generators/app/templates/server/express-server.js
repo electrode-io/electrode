@@ -23,9 +23,8 @@ const setStaticPaths = function () {
 };
 
 const setRouteHandler = () => new Promise((resolve, reject) => {
-  const registerRoutes = require(
-    path.resolve(`${process.cwd()}/node_modules/`, defaultConfig.$("plugins.webapp.module"))
-  ); //eslint-disable-line global-require
+  const webapp = (p) => p.startsWith(".") ? path.resolve(p) : p;
+  const registerRoutes = require(webapp(defaultConfig.$("plugins.webapp.module"))); //eslint-disable-line
 
   return registerRoutes(app, defaultConfig.$("plugins.webapp.options"),
     (err) => {
