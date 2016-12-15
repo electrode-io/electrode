@@ -1,9 +1,9 @@
 "use strict";
-const archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
+const archDevRequire = require("electrode-archetype-react-component-dev/require");
 
 const routes = require("./server-routes");
 
-const routerResolverEngine = archDevRequire("@walmart/router-resolver-engine");
+const routerResolverEngine = archDevRequire("router-resolver-engine");
 
 const engine = routerResolverEngine(routes);
 

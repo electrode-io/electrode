@@ -1,7 +1,7 @@
 "use strict";
 const path = require("path");
 
-const archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
+const archDevRequire = require("electrode-archetype-react-component-dev/require");
 const _ = archDevRequire("lodash");
 
 
@@ -20,7 +20,7 @@ const archetypeDevNodeModules = path.join(
   // A normal `require.resolve` looks at `package.json:main`. We instead want
   // just the _directory_ of the module. So use heuristic of finding dir of
   // package.json which **must** exist at a predictable location.
-  path.dirname(require.resolve("@walmart/electrode-archetype-react-component-dev/package.json")),
+  path.dirname(require.resolve("electrode-archetype-react-component-dev/package.json")),
   "node_modules"
 );
 

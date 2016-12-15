@@ -1,4 +1,4 @@
-var archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
+var archDevRequire = require("electrode-archetype-react-component-dev/require");
 var _ = archDevRequire("lodash");
 var Promise = archDevRequire("bluebird");
 

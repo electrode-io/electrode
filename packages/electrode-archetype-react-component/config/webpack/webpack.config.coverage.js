@@ -3,7 +3,7 @@
 /**
  * Webpack frontend test (w/ coverage) configuration.
  */
-var archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
+var archDevRequire = require("electrode-archetype-react-component-dev/require");
 var _ = archDevRequire("lodash");
 var ispartaLoader = archDevRequire.resolve("isparta-loader");
 

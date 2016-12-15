@@ -9,7 +9,8 @@
 var React = require("react");
 var Resolver = require("react-resolver").Resolver;
 var Router = require("react-router").Router;
-var createHistory = require("history").createHistory;
+
+var browserHistory = require("react-router").browserHistory;
 
 require("./demo.styl");
 
@@ -20,7 +21,7 @@ var content = document.querySelector(".js-content");
 Resolver.render(function () {
   return React.createElement(
     Router,
-    { history: createHistory() },
+    { history: browserHistory },
     routes
   );
 }, content);

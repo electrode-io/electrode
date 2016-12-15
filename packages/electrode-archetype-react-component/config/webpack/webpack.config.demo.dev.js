@@ -3,7 +3,7 @@
 
 var path = require("path");
 
-var archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
+var archDevRequire = require("electrode-archetype-react-component-dev/require");
 var webpack = archDevRequire("webpack");
 var _ = archDevRequire("lodash");
 
@@ -36,7 +36,8 @@ module.exports = {
       // Allow root import of `src/FOO` from ROOT/src.
       src: path.join(process.cwd(), "src"),
       "local-component-demo": path.join(process.cwd() + "/demo/demo.jsx"),
-      "local-demo-styl": path.join(process.cwd() + "/demo/demo.styl")
+      // By default, this archetype assumes you are using CSS-Modules + CSS-Next
+      "local-demo-css": path.join(process.cwd() + "/demo/demo")
     }
   }),
   resolveLoader: base.resolveLoader,
@@ -48,6 +49,12 @@ module.exports = {
   },
   postcss: base.postcss,
   plugins: [
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
+      "process.env": {
+        "ELECTRODE_LOCALE": JSON.stringify(process.env.ELECTRODE_LOCALE || "en"),
+        "ELECTRODE_TENANT": JSON.stringify(process.env.ELECTRODE_TENANT || "walmart")
+      }
+    })
   ]
 };

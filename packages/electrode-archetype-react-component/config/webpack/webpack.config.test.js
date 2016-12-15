@@ -4,11 +4,11 @@
  */
 var path = require("path");
 
-var archDevRequire = require("@walmart/electrode-archetype-react-component-dev/require");
+var archDevRequire = require("electrode-archetype-react-component-dev/require");
 var _ = archDevRequire("lodash");
 var sinonPkg = archDevRequire.resolve("sinon/pkg/sinon");
 
-var karmaEntry = require.resolve("@walmart/electrode-archetype-react-component/config/karma/entry");
+var karmaEntry = require.resolve("electrode-archetype-react-component/config/karma/entry");
 var prodCfg = require("./webpack.config");
 
 /*
@@ -47,14 +47,15 @@ module.exports = {
     },
     modulesDirectories: [
       "node_modules",
-      _archNodeModules("@walmart/electrode-archetype-react-component"),
-      _archNodeModules("@walmart/electrode-archetype-react-component-dev")
+      _archNodeModules("electrode-archetype-react-component"),
+      _archNodeModules("electrode-archetype-react-component-dev")
     ]
   }),
   // Enzyme depends jsdom and cheerio being global to render their DOM.
   externals: {
     jsdom: "window",
     cheerio: "window",
+    "react/addons": true, // important!! https://github.com/airbnb/enzyme/issues/302
     "react/lib/ExecutionEnvironment": true,
     "react/lib/ReactContext": true
   },

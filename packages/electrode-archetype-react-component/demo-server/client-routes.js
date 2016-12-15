@@ -10,6 +10,6 @@ var createRoutes = require("./create-routes");
 var Demo = require("local-component-demo").default;
 
 // Also aliased for same reason as above
-require("local-demo-styl");
+require("local-demo-css");
 
 module.exports = createRoutes(Demo);
