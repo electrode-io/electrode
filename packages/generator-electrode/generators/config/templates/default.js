@@ -18,9 +18,10 @@ module.exports = {
       "options": {
         "pathPrefix": "dist"
       }
-    },
+    },<%if(pwa){%>
+    "./server/plugins/pwa": {},<%}%>
     "webapp": {
-      "module": "./server/plugins/webapp",
+      "module": <%if(serverType==="HapiJS"){%>"electrode-react-webapp/lib/hapi"<%}else{%>"electrode-react-webapp/lib/express"<%}%>,
       "options": {
         "pageTitle": "<%= projectName %>",
         "paths": {

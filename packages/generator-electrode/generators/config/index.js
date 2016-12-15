@@ -17,16 +17,24 @@ module.exports = generators.Base.extend({
       required: true,
       desc: 'Progressive Web App'
     });
+
+    this.option('serverType', {
+      type: String,
+      required: true,
+      desc: 'Server Type can be hapijs or express'
+    });
   },
 
   writing: function () {
-    let routeMatch = (this.config.get('serverType') === 'hapijs') ? "/{args*}" : "*";
+    let routeMatch = (this.options.serverType === 'HapiJS') ? "/{args*}" : "*";
     this.fs.copyTpl(
       this.templatePath('default.js'),
       this.destinationPath('config/default.js'),
       {
         projectName: this.options.name,
-        routeValue: routeMatch
+        routeValue: routeMatch,
+        pwa: this.options.pwa,
+        serverType: this.options.serverType
       }
     );
 
