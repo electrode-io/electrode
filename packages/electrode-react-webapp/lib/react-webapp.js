@@ -16,13 +16,13 @@ const CRITICAL_CSS_MARKER = "{{CRITICAL_CSS}}";
 const HTTP_ERROR_500 = 500;
 
 /**
-* Tries to import bundle chunk selector function if the corresponding option is set in the
-* webapp plugin configuration. The function takes a `request` object as an argument and
-* returns the chunk name.
-*
-* @param {Object} options - webapp plugin configuration options
-* @return {Function} function that selects the bundle based on the request object
-*/
+ * Tries to import bundle chunk selector function if the corresponding option is set in the
+ * webapp plugin configuration. The function takes a `request` object as an argument and
+ * returns the chunk name.
+ *
+ * @param {Object} options - webapp plugin configuration options
+ * @return {Function} function that selects the bundle based on the request object
+ */
 function resolveChunkSelector(options) {
   if (options.bundleChunkSelector) {
     return require(Path.join(process.cwd(), options.bundleChunkSelector));  // eslint-disable-line
@@ -44,29 +44,29 @@ function resolveChunkSelector(options) {
  */
 function loadAssetsFromStats(statsPath) {
   return Promise.resolve(Path.resolve(statsPath))
-  .then(require)
-  .then((stats) => {
-    const assets = {};
-    const manifestAsset = _.find(stats.assets, (asset) => {
-      return asset.name.endsWith("manifest.json");
-    });
-    const jsAssets = stats.assets.filter((asset) => {
-      return asset.name.endsWith(".js");
-    });
-    const cssAssets = stats.assets.filter((asset) => {
-      return asset.name.endsWith(".css");
-    });
+    .then(require)
+    .then((stats) => {
+      const assets = {};
+      const manifestAsset = _.find(stats.assets, (asset) => {
+        return asset.name.endsWith("manifest.json");
+      });
+      const jsAssets = stats.assets.filter((asset) => {
+        return asset.name.endsWith(".js");
+      });
+      const cssAssets = stats.assets.filter((asset) => {
+        return asset.name.endsWith(".css");
+      });
 
-    if (manifestAsset) {
-      assets.manifest = manifestAsset.name;
-    }
+      if (manifestAsset) {
+        assets.manifest = manifestAsset.name;
+      }
 
-    assets.js = jsAssets;
-    assets.css = cssAssets;
+      assets.js = jsAssets;
+      assets.css = cssAssets;
 
-    return assets;
-  })
-  .catch(() => ({}));
+      return assets;
+    })
+    .catch(() => ({}));
 }
 
 function getIconStats(iconStatsPath) {
@@ -108,38 +108,38 @@ function getStatsPath(statsFilePath, buildArtifactsPath) {
     : statsFilePath;
 }
 
-function makeRouteHandler(options, userContent) {
-  const WEBPACK_DEV = options.webpackDev;
-  const RENDER_JS = options.renderJS;
-  const RENDER_SS = options.serverSideRendering;
-  const html = fs.readFileSync(options.htmlFile).toString();
-  const assets = options.__internals.assets;
-  const devBundleBase = options.__internals.devBundleBase;
-  const chunkSelector = options.__internals.chunkSelector;
-  const iconStats = getIconStats(options.iconStats);
-  const criticalCSS = getCriticalCSS(options.criticalCSS);
+function makeRouteHandler(routeOptions, userContent) {
+  const WEBPACK_DEV = routeOptions.webpackDev;
+  const RENDER_JS = routeOptions.renderJS;
+  const RENDER_SS = routeOptions.serverSideRendering;
+  const html = fs.readFileSync(routeOptions.htmlFile).toString();
+  const assets = routeOptions.__internals.assets;
+  const devBundleBase = routeOptions.__internals.devBundleBase;
+  const chunkSelector = routeOptions.__internals.chunkSelector;
+  const iconStats = getIconStats(routeOptions.iconStats);
+  const criticalCSS = getCriticalCSS(routeOptions.criticalCSS);
 
   /* Create a route handler */
   /* eslint max-statements: [2, 22] */
-  return (request) => {
-    const mode = request.query && request.query.__mode || "";
+  return (options) => {
+    const mode = options.mode;
     const renderJs = RENDER_JS && mode !== "nojs";
     let renderSs = RENDER_SS;
     if (renderSs) {
       if (mode === "noss") {
         renderSs = false;
-      } else if (mode === "datass" && request.app) {
-        request.app.disableSSR = true;
+      } else if (mode === "datass" && options.request.app) {
+        options.request.app.disableSSR = true;
       }
     }
 
-    const chunkNames = chunkSelector(request);
+    const chunkNames = chunkSelector(options.request);
     const devCSSBundle = chunkNames.css ?
-    `${devBundleBase}${chunkNames.css}.style.css` :
-    `${devBundleBase}style.css`;
+      `${devBundleBase}${chunkNames.css}.style.css` :
+      `${devBundleBase}style.css`;
     const devJSBundle = chunkNames.js ?
-    `${devBundleBase}${chunkNames.js}.bundle.dev.js` :
-    `${devBundleBase}bundle.dev.js`;
+      `${devBundleBase}${chunkNames.js}.bundle.dev.js` :
+      `${devBundleBase}bundle.dev.js`;
     const jsChunk = _.find(
       assets.js,
       (asset) => _.includes(asset.chunkNames, chunkNames.js)
@@ -165,7 +165,7 @@ function makeRouteHandler(options, userContent) {
     };
 
     const callUserContent = (content) => {
-      const x = content(request);
+      const x = content(options.request);
       return !x.catch ? x : x.catch((err) => {
         return Promise.reject({
           status: err.status || HTTP_ERROR_500,
@@ -177,12 +177,12 @@ function makeRouteHandler(options, userContent) {
     const makeHeaderBundles = () => {
       const manifest = bundleManifest();
       const manifestLink = manifest
-      ? `<link rel="manifest" href="${manifest}" />`
-      : "";
+        ? `<link rel="manifest" href="${manifest}" />`
+        : "";
       const css = bundleCss();
       const cssLink = css && !criticalCSS
-      ? `<link rel="stylesheet" href="${css}" />`
-      : "";
+        ? `<link rel="stylesheet" href="${css}" />`
+        : "";
       return `${manifestLink}${cssLink}`;
     };
 
@@ -190,8 +190,8 @@ function makeRouteHandler(options, userContent) {
       const js = bundleJs();
       const css = bundleCss();
       const cssLink = css && criticalCSS
-      ? `<link rel="stylesheet" href="${css}" />`
-      : "";
+        ? `<link rel="stylesheet" href="${css}" />`
+        : "";
       const jsLink = js ? `<script src="${js}"></script>` : "";
       return `${cssLink}${jsLink}`;
     };
@@ -202,7 +202,7 @@ function makeRouteHandler(options, userContent) {
         case CONTENT_MARKER:
           return content.html || "";
         case TITLE_MARKER:
-          return options.pageTitle;
+          return routeOptions.pageTitle;
         case HEADER_BUNDLE_MARKER:
           return makeHeaderBundles();
         case BODY_BUNDLE_MARKER:
@@ -221,8 +221,8 @@ function makeRouteHandler(options, userContent) {
 
     const renderSSRContent = (content) => {
       const p = _.isFunction(content) ?
-      callUserContent(content) :
-      Promise.resolve(_.isObject(content) ? content : {html: content});
+        callUserContent(content) :
+        Promise.resolve(_.isObject(content) ? content : {html: content});
       return p.then((c) => renderPage(c));
     };
 
@@ -254,15 +254,15 @@ const setupOptions = (options) => {
   const statsPath = getStatsPath(pluginOptions.stats, pluginOptions.buildArtifacts);
 
   return Promise.try(() => loadAssetsFromStats(statsPath))
-  .then((assets) => {
-    pluginOptions.__internals = {
-      assets,
-      chunkSelector,
-      devBundleBase
-    };
+    .then((assets) => {
+      pluginOptions.__internals = {
+        assets,
+        chunkSelector,
+        devBundleBase
+      };
 
-    return pluginOptions;
-  });
+      return pluginOptions;
+    });
 };
 
 const resolveContent = (content) => {

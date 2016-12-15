@@ -26,7 +26,7 @@ const registerRoutes = (app, options, next) => {
             }
           };
 
-          return routeHandler(request)
+          return routeHandler({mode: request.query.__mode || "", request})
             .then((data) => {
               return data.status ? handleStatus(data) : response.send(data);
             })
