@@ -8,6 +8,7 @@
     },
     "./server/plugins/csrf": {},
     "./server/plugins/pwa": {},
+    "./server/plugins/autossr": {},
     "webapp": {
       "module": "electrode-react-webapp",
       "options": {

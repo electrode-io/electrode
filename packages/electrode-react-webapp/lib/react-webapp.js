@@ -124,7 +124,15 @@ function makeRouteHandler(options, userContent) {
   return (request) => {
     const mode = request.query && request.query.__mode || "";
     const renderJs = RENDER_JS && mode !== "nojs";
-    const renderSs = RENDER_SS && mode !== "noss";
+    let renderSs = RENDER_SS;
+    if (renderSs) {
+      if (mode === "noss") {
+        renderSs = false;
+      } else if (mode === "datass" && request.app) {
+        request.app.disableSSR = true;
+      }
+    }
+
     const chunkNames = chunkSelector(request);
     const devCSSBundle = chunkNames.css ?
     `${devBundleBase}${chunkNames.css}.style.css` :
