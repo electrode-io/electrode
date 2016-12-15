@@ -4,10 +4,6 @@ const _ = require("lodash");
 const Promise = require("bluebird");
 const fs = require("fs");
 const Path = require("path");
-const assert = require("assert");
-
-const HTTP_ERROR_500 = 500;
-const HTTP_REDIRECT = 302;
 
 const CONTENT_MARKER = "{{SSR_CONTENT}}";
 const HEADER_BUNDLE_MARKER = "{{WEBAPP_HEADER_BUNDLES}}";
@@ -17,57 +13,60 @@ const PREFETCH_MARKER = "{{PREFETCH_BUNDLES}}";
 const META_TAGS_MARKER = "{{META_TAGS}}";
 const CRITICAL_CSS_MARKER = "{{CRITICAL_CSS}}";
 
+const HTTP_ERROR_500 = 500;
+
 /**
- * Tries to import bundle chunk selector function if the corresponding option is set in the
- * webapp plugin configuration. The function takes a `request` object as an argument and
- * returns the chunk name.
- *
- * @param {Object} options - webapp plugin configuration options
- * @return {Function} function that selects the bundle based on the request object
- */
+* Tries to import bundle chunk selector function if the corresponding option is set in the
+* webapp plugin configuration. The function takes a `request` object as an argument and
+* returns the chunk name.
+*
+* @param {Object} options - webapp plugin configuration options
+* @return {Function} function that selects the bundle based on the request object
+*/
 function resolveChunkSelector(options) {
   if (options.bundleChunkSelector) {
     return require(Path.join(process.cwd(), options.bundleChunkSelector));  // eslint-disable-line
   }
 
   return () => ({
-    css: "",
-    js: ""
+    css: "main",
+    js: "main"
   });
 }
 
 /**
  * Load stats.json which is created during build.
+ * Attempt to load the stats.json file which contains a manifest of
  * The file contains bundle files which are to be loaded on the client side.
  *
- * @param {string} statsFilePath - path of stats.json
+ * @param {string} statsPath - path of stats.json
  * @returns {Promise.<Object>} an object containing an array of file names
  */
-function loadAssetsFromStats(statsFilePath) {
-  return Promise.resolve(Path.resolve(statsFilePath))
-    .then(require)
-    .then((stats) => {
-      const assets = {};
-      const manifestAsset = _.find(stats.assets, (asset) => {
-        return asset.name.endsWith("manifest.json");
-      });
-      const jsAssets = stats.assets.filter((asset) => {
-        return asset.name.endsWith(".js");
-      });
-      const cssAssets = stats.assets.filter((asset) => {
-        return asset.name.endsWith(".css");
-      });
+function loadAssetsFromStats(statsPath) {
+  return Promise.resolve(Path.resolve(statsPath))
+  .then(require)
+  .then((stats) => {
+    const assets = {};
+    const manifestAsset = _.find(stats.assets, (asset) => {
+      return asset.name.endsWith("manifest.json");
+    });
+    const jsAssets = stats.assets.filter((asset) => {
+      return asset.name.endsWith(".js");
+    });
+    const cssAssets = stats.assets.filter((asset) => {
+      return asset.name.endsWith(".css");
+    });
 
-      if (manifestAsset) {
-        assets.manifest = manifestAsset.name;
-      }
+    if (manifestAsset) {
+      assets.manifest = manifestAsset.name;
+    }
 
-      assets.js = jsAssets;
-      assets.css = cssAssets;
+    assets.js = jsAssets;
+    assets.css = cssAssets;
 
-      return assets;
-    })
-    .catch(() => ({}));
+    return assets;
+  })
+  .catch(() => ({}));
 }
 
 function getIconStats(iconStatsPath) {
@@ -76,12 +75,12 @@ function getIconStats(iconStatsPath) {
     iconStats = fs.readFileSync(Path.resolve(iconStatsPath)).toString();
     iconStats = JSON.parse(iconStats);
   } catch (err) {
-    // noop
+    return "";
   }
   if (iconStats && iconStats.html) {
     return iconStats.html.join("");
   }
-  return iconStats || "";
+  return iconStats;
 }
 
 function getCriticalCSS(path) {
@@ -92,6 +91,21 @@ function getCriticalCSS(path) {
   } catch (err) {
     return "";
   }
+}
+
+/**
+ * Resolves the path to the stats.json file containing our
+ * asset list. In dev the stats.json file is written to a
+ * build artifacts directory, while in produciton its contained
+ * within the dist/server folder
+ * @param  {string} statsFilePath      path to stats.json
+ * @param  {string} buildArtifactsPath path to stats.json in dev
+ * @return {string}                    current active path
+ */
+function getStatsPath(statsFilePath, buildArtifactsPath) {
+  return process.env.WEBPACK_DEV === "true"
+    ? Path.resolve(process.cwd(), buildArtifactsPath, "stats.json")
+    : statsFilePath;
 }
 
 function makeRouteHandler(options, userContent) {
@@ -106,9 +120,9 @@ function makeRouteHandler(options, userContent) {
   const criticalCSS = getCriticalCSS(options.criticalCSS);
 
   /* Create a route handler */
-  /* eslint max-statements: [2, 25] */
-  return (request, reply) => {
-    const mode = request.query.__mode || "";
+  /* eslint max-statements: [2, 22] */
+  return (request) => {
+    const mode = request.query && request.query.__mode || "";
     const renderJs = RENDER_JS && mode !== "nojs";
     let renderSs = RENDER_SS;
     if (renderSs) {
@@ -121,18 +135,18 @@ function makeRouteHandler(options, userContent) {
 
     const chunkNames = chunkSelector(request);
     const devCSSBundle = chunkNames.css ?
-      `${devBundleBase}${chunkNames.css}.style.css` :
-      `${devBundleBase}style.css`;
+    `${devBundleBase}${chunkNames.css}.style.css` :
+    `${devBundleBase}style.css`;
     const devJSBundle = chunkNames.js ?
-      `${devBundleBase}${chunkNames.js}.bundle.dev.js` :
-      `${devBundleBase}bundle.dev.js`;
+    `${devBundleBase}${chunkNames.js}.bundle.dev.js` :
+    `${devBundleBase}bundle.dev.js`;
     const jsChunk = _.find(
       assets.js,
-      (asset) => asset.chunkNames[0] === (chunkNames.js || "bundle")
+      (asset) => _.includes(asset.chunkNames, chunkNames.js)
     );
     const cssChunk = _.find(
       assets.css,
-      (asset) => asset.chunkNames[0] === (chunkNames.css || "bundle")
+      (asset) => _.includes(asset.chunkNames, chunkNames.css)
     );
 
     const bundleCss = () => {
@@ -163,12 +177,12 @@ function makeRouteHandler(options, userContent) {
     const makeHeaderBundles = () => {
       const manifest = bundleManifest();
       const manifestLink = manifest
-        ? `<link rel="manifest" href="${manifest}" />`
-        : "";
+      ? `<link rel="manifest" href="${manifest}" />`
+      : "";
       const css = bundleCss();
       const cssLink = css && !criticalCSS
-        ? `<link rel="stylesheet" href="${css}" />`
-        : "";
+      ? `<link rel="stylesheet" href="${css}" />`
+      : "";
       return `${manifestLink}${cssLink}`;
     };
 
@@ -207,36 +221,16 @@ function makeRouteHandler(options, userContent) {
 
     const renderSSRContent = (content) => {
       const p = _.isFunction(content) ?
-        callUserContent(content) :
-        Promise.resolve(_.isObject(content) ? content : {html: content});
+      callUserContent(content) :
+      Promise.resolve(_.isObject(content) ? content : {html: content});
       return p.then((c) => renderPage(c));
     };
 
-    const handleStatus = (data) => {
-      const status = data.status;
-      if (status === HTTP_REDIRECT) {
-        reply.redirect(data.path);
-      } else {
-        reply({message: "error"}).code(status);
-      }
-    };
-
-    const doRender = () => {
-      return renderSSRContent(renderSs ? userContent : "");
-    };
-
-    Promise.try(doRender)
-      .then((data) => {
-        return data.status ? handleStatus(data) : reply(data);
-      })
-      .catch((err) => {
-        reply(err.html).code(err.status || HTTP_ERROR_500);
-      });
+    return renderSSRContent(renderSs ? userContent : "");
   };
 }
 
-const registerRoutes = (server, options, next) => {
-
+const setupOptions = (options) => {
   const pluginOptionsDefaults = {
     pageTitle: "Untitled Electrode Web Application",
     webpackDev: process.env.WEBPACK_DEV === "true",
@@ -250,49 +244,38 @@ const registerRoutes = (server, options, next) => {
     paths: {},
     stats: "dist/server/stats.json",
     iconStats: "dist/server/iconstats.json",
-    criticalCSS: "dist/js/critical.css"
-  };
-
-  const resolveContent = (content) => {
-    if (!_.isString(content) && !_.isFunction(content) && content.module) {
-      const module = content.module.startsWith(".") ? Path.join(process.cwd(), content.module) : content.module; // eslint-disable-line
-      return require(module); // eslint-disable-line
-    }
-
-    return content;
+    criticalCSS: "dist/js/critical.css",
+    buildArtifacts: ".build"
   };
 
   const pluginOptions = _.defaultsDeep({}, options, pluginOptionsDefaults);
   const chunkSelector = resolveChunkSelector(pluginOptions);
   const devBundleBase = `http://${pluginOptions.devServer.host}:${pluginOptions.devServer.port}/js/`;
+  const statsPath = getStatsPath(pluginOptions.stats, pluginOptions.buildArtifacts);
 
-  return Promise.try(() => loadAssetsFromStats(pluginOptions.stats))
-    .then((assets) => {
-      pluginOptions.__internals = {
-        assets,
-        chunkSelector,
-        devBundleBase
-      };
+  return Promise.try(() => loadAssetsFromStats(statsPath))
+  .then((assets) => {
+    pluginOptions.__internals = {
+      assets,
+      chunkSelector,
+      devBundleBase
+    };
 
-      _.each(options.paths, (v, path) => {
-        assert(v.content, `You must define content for the webapp plugin path ${path}`);
-        server.route({
-          method: "GET",
-          path,
-          config: v.config || {},
-          handler: makeRouteHandler(pluginOptions, resolveContent(v.content))
-        });
-      });
-      next();
-    })
-    .catch(next);
+    return pluginOptions;
+  });
 };
 
-registerRoutes.attributes = {
-  pkg: {
-    name: "webapp",
-    version: "1.0.0"
+const resolveContent = (content) => {
+  if (!_.isString(content) && !_.isFunction(content) && content.module) {
+    const module = content.module.startsWith(".") ? Path.join(process.cwd(), content.module) : content.module; // eslint-disable-line
+    return require(module); // eslint-disable-line
   }
+
+  return content;
 };
 
-module.exports = registerRoutes;
+module.exports = {
+  setupOptions,
+  makeRouteHandler,
+  resolveContent
+};

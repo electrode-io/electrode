@@ -28,7 +28,7 @@ function requireModuleSafelyWithFallback(path, fallback) {
   } catch (err) {
     requiredModule = fallback;
   }
-  return requiredModule
+  return requiredModule;
 }
 
 
@@ -137,7 +137,6 @@ module.exports = function () {
         filename: "[name].[hash].js"
       };
     }
-
 
     var plugins = [
       new FaviconsWebpackPlugin({

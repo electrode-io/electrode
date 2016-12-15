@@ -7,6 +7,10 @@
     "bar": [
       "bar.bundle.f07a873ce87fc904a6a5.js",
       "bar.style.f07a873ce87fc904a6a5.css"
+    ],
+    "home": [
+      "home.bundle.f07a873ce87fc904a6a5.js",
+      "home.style.f07a873ce87fc904a6a5.css"
     ]
   },
   "assets": [{
@@ -46,22 +50,22 @@
       "bar"
     ]
   }, {
-     "name": "style.f07a873ce87fc904a6a5.css",
+     "name": "home.style.f07a873ce87fc904a6a5.css",
       "size": 888,
       "chunks": [
         0
       ],
       "chunkNames": [
-        "bundle"
+        "home"
       ]
   }, {
-    "name": "bundle.f07a873ce87fc904a6a5.js",
+    "name": "home.bundle.f07a873ce87fc904a6a5.js",
     "size": 888,
     "chunks": [
       0
     ],
     "chunkNames": [
-      "bundle"
+      "home"
     ]
   }]
 }

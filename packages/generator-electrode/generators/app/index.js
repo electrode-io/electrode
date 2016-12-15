@@ -212,6 +212,7 @@ module.exports = generators.Base.extend({
 
   writing: function () {
     const isHapi = this.config.get('serverType') === HapiJS;
+    const isPWA = this.props.pwa;
 
     // Re-read the content at this point because a composed generator might modify it.
     var currentPkg = this.fs.readJSON(this.destinationPath('package.json'), {});
@@ -221,7 +222,7 @@ module.exports = generators.Base.extend({
     this.fs.copyTpl(
       this.templatePath(_pkg),
       this.destinationPath(_pkg),
-      {isHapi}
+      {isHapi, isPWA}
     );
 
     var defaultPkg = this.fs.readJSON(this.destinationPath(_pkg));
@@ -287,12 +288,12 @@ module.exports = generators.Base.extend({
     this.fs.copyTpl(
       this.templatePath('client'),
       this.destinationPath('client'),
-      {pwa: this.props.pwa},
+      {pwa: isPWA},
       {}, // template options
       { // copy options
         globOptions: {
           // Images are damaged by the template compiler
-          ignore: ['**/client/images/**', !this.props.pwa && '**/client/sw-register.js' || '']
+          ignore: ['**/client/images/**', !isPWA && '**/client/sw-register.js' || '']
         }
       }
     );
@@ -354,7 +355,8 @@ module.exports = generators.Base.extend({
       this.composeWith('electrode:config', {
         options: {
           name: this.props.name,
-          pwa: this.props.pwa
+          pwa: this.props.pwa,
+          serverType: this.props.serverType
         }
       }, {
         local: require.resolve('../config')
