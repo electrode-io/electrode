@@ -1,0 +1,62 @@
+### SublimeText ###
+*.sublime-workspace
+
+### IntelliJ ###
+.idea
+
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+### Windows ###
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Node
+
+coverage
+node_modules
+test
+dist
+
+# Misc
+
+.tmp
+*.log*
+
+.editor*
+.eslint*
+.travis*
+
+# App specific
+
+cache
+
+bower_components
+
+.*gulpfile.js
+gulpfile.js
+Procfile
+.git
+.hg
+.project
+karma*
+karma.*
+

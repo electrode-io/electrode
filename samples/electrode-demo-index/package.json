@@ -1,0 +1,44 @@
+{
+  "name": "electrode-demo-index",
+  "version": "1.0.3",
+  "description": "An extendable class for demos in Electrode components",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/electrode-io/electrode-demo-index.git"
+  },
+  "scripts": {
+    "test:dev": "gulp test-frontend",
+    "test": "gulp check-cov && gulp cov-frontend",
+    "demo": "gulp server-dev",
+    "hot": "gulp server-hot",
+    "build": "npm run generate && gulp build-lib",
+    "generate": "npm run generate-metadata && npm run generate-documentation",
+    "generate-metadata": "electrode-docgen --package ./package.json --src ./src --metadata components.json",
+    "generate-documentation": "electrode-docgen --package ./package.json --src ./src --markdown components.md",
+    "prepublish": "gulp npm:prepublish"
+  },
+  "keywords": [
+    "electrode",
+    "demo"
+  ],
+  "author": [
+    {
+      "name": "Dave Stevens",
+      "email": "dstevens@walmartlabs.com"
+    },
+    {
+      "name": "Caoyang Shi",
+      "url": "https://github.com/caoyangs"
+    }
+  ],
+  "license": "Apache-2.0",
+  "dependencies": {
+    "component-playground": "^1.3.1",
+    "object-assign": "^4.1.0"
+  },
+  "devDependencies": {
+    "electrode-archetype-react-component": "^1.0.0",
+    "electrode-archetype-react-component-dev": "^1.0.0"
+  }
+}
