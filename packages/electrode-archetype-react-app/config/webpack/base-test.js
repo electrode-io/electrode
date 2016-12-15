@@ -24,7 +24,7 @@ var testConfig = {
   devServer: {
     stats: "errors-only"  // only show errors
   },
-  entry: Path.join(__dirname, "../karma/entry"),
+  entry: require.resolve("../karma/entry"),
   output: {
     path: process.cwd(),
     filename: "bundle.js",
@@ -41,6 +41,7 @@ var testConfig = {
   externals: {
     jsdom: "window",
     cheerio: "window",
+    "react/addons": true,
     "react/lib/ExecutionEnvironment": true,
     "react/lib/ReactContext": true
   }
