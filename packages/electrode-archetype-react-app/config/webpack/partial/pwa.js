@@ -94,7 +94,7 @@ module.exports = function () {
 
     var manifestConfig = assign({
       background: "#FFFFFF",
-      logo: "./images/electrode.png",
+      logo: "images/electrode.png",
       title: "Electrode",
       short_name: "Electrode",
       statsFilename: "../server/iconstats.json"
@@ -138,9 +138,10 @@ module.exports = function () {
       };
     }
 
+    var logoPath = `${process.cwd()}/client/${manifestConfig.logo}`;
     var plugins = [
       new FaviconsWebpackPlugin({
-        logo: manifestConfig.logo,
+        logo: logoPath,
         emitStats: true,
         inject: false,
         background: manifestConfig.background,
