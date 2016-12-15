@@ -165,7 +165,7 @@ module.exports = generators.Base.extend({
           name: "pwa",
           message: "Would you like to make a Progressive Web App?",
           when: this.props.pwa === undefined,
-          default: true
+          default: false
         },
         {
           type: "confirm",
