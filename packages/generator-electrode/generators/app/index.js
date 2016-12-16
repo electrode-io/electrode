@@ -79,7 +79,7 @@ module.exports = generators.Base.extend({
       this.props.authorUrl = this.pkg.author.url;
       this.props.createDirectory = false;
       this.props.serverType = this.fs.exists(this.destinationPath('server/express-server.js')) ? ExpressJS : HapiJS;
-      this.props.pwa = this.fs.exists(this.destinationPath('client/sw-register.js'));
+      this.props.pwa = this.fs.exists(this.destinationPath('client/sw-registration.js'));
     } else if (_.isString(this.pkg.author)) {
       var info = parseAuthor(this.pkg.author);
       this.props.authorName = info.name;
@@ -293,7 +293,7 @@ module.exports = generators.Base.extend({
       { // copy options
         globOptions: {
           // Images are damaged by the template compiler
-          ignore: ['**/client/images/**', !isPWA && '**/client/sw-register.js' || '']
+          ignore: ['**/client/images/**', !isPWA && '**/client/sw-registration.js' || '']
         }
       }
     );
