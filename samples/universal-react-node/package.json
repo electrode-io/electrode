@@ -1,8 +1,15 @@
 {
-  "name": "electrode-app-with-electrode-modules",
+  "name": "electrode-universal-react-node",
   "version": "0.0.0",
-  "description": "electrode app with electrode modules",
-  "homepage": "https://github.com/electrode-io",
+  "description": "Universal React/Node.js boilerplate sample using Electrode platform",
+  "homepage": "http://www.electrode.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electrode-io/electrode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/electrode-io/electrode/issues"
+  },
   "contributors": [],
   "files": [
     "lib"
@@ -14,10 +21,6 @@
     "confippet",
     "progressive"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/electrode-io/electrode-app-with-electrode-modules.git"
-  },
   "license": "Apache-2.0",
   "scripts": {
     "build": "gulp build",

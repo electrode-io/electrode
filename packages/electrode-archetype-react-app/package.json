@@ -3,14 +3,14 @@
   "version": "1.6.0",
   "description": "Electrode NodeJS/React Universal Application Archetype",
   "main": "arch-gulpfile.js",
+  "homepage": "http://www.electrode.io",
   "repository": {
     "type": "git",
-    "url": "https://github.com/electrode-io/electrode-archetype-react-app.git"
+    "url": "https://github.com/electrode-io/electrode.git"
   },
   "bugs": {
-    "url": "https://github.com/electrode-io/electrode-archetype-react-app/issues"
+    "url": "https://github.com/electrode-io/electrode/issues"
   },
-  "homepage": "https://github.com/electrode-io/electrode-archetype-react-app",
   "license": "Apache-2.0",
   "scripts": {},
   "dependencies": {
