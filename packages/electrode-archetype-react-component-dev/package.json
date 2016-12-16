@@ -2,14 +2,14 @@
   "name": "electrode-archetype-react-component-dev",
   "version": "1.1.6",
   "description": "Electrode Component (Development)",
+  "homepage": "http://www.electrode.io",
   "repository": {
     "type": "git",
-    "url": "https://github.com/electrode-io/electrode-archetype-react-component.git"
+    "url": "https://github.com/electrode-io/electrode.git"
   },
   "bugs": {
-    "url": "https://github.com/electrode-io/electrode-archetype-react-component/issues"
+    "url": "https://github.com/electrode-io/electrode/issues"
   },
-  "homepage": "https://github.com/electrode-io/electrode-archetype-react-component/README.md",
   "license": "Apache-2.0",
   "config": {
     "archetype": "node_modules/electrode-archetype-react-component"

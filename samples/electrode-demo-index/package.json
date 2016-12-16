@@ -3,9 +3,13 @@
   "version": "1.0.3",
   "description": "An extendable class for demos in Electrode components",
   "main": "lib/index.js",
+  "homepage": "http://www.electrode.io",
   "repository": {
     "type": "git",
-    "url": "git://github.com/electrode-io/electrode-demo-index.git"
+    "url": "https://github.com/electrode-io/electrode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/electrode-io/electrode/issues"
   },
   "scripts": {
     "test:dev": "gulp test-frontend",

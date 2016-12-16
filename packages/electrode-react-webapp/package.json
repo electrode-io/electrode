@@ -7,9 +7,13 @@
     "test": "npm run lint && gulp test",
     "prepublish": "npm test"
   },
+  "homepage": "http://www.electrode.io",
   "repository": {
     "type": "git",
-    "url": "https://github.com/electrode-io/electrode-react-webapp"
+    "url": "https://github.com/electrode-io/electrode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/electrode-io/electrode/issues"
   },
   "keywords": [
     "electrode",
