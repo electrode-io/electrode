@@ -18,7 +18,12 @@ const Home = (props) => {
           <Tab label="Report">
             <WebpackInfo {...props.info} />
             <WarningsErrors errors={props.errors} warnings={props.warnings} />
-            <Electrify webpackInfo={props} />
+            <Electrify
+              assets={props.assets}
+              modulesByPkg={props.modulesByPkg}
+              totalSizeByPkg={props.totalSizeByPkg}
+              modules={props.modules}
+            />
           </Tab>
           <Tab label="Legacy">
             <div style={ {background: "black", color: "gray", padding: "10px"} }>
@@ -39,7 +44,7 @@ Home.propTypes = {
   errors: PropTypes.array,
   legacy: PropTypes.string,
   totalSizeByPkg: PropTypes.number,
-  pureWebpackStats: PropTypes.object
+  modules: PropTypes.array
 };
 
 const mapStateToProps = (state) => state;
