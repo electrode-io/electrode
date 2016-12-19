@@ -1,6 +1,6 @@
 import React, {PropTypes} from "react";
-import {connect} from "react-redux";
-<% if (pwa) { %>import Notifications from "react-notify-toast";<% } %>
+import {connect} from "react-redux";<%if(pwa){%>
+import Notifications from "react-notify-toast";<%}%>
 import {toggleCheck, incNumber, decNumber} from "../actions";
 
 class Home extends React.Component {
@@ -8,8 +8,8 @@ class Home extends React.Component {
     const props = this.props;
     const {checked, value} = props;
     return (
-      <div>
-        <% if (pwa) { %><Notifications /><% } %>
+      <div><%if(pwa){%>
+        <Notifications /><%}%>
         <h1>Hello <a href={"https://github.com/electrode-io"}>{"Electrode"}</a></h1>
         <div>
           <h2>Managing States with Redux</h2>

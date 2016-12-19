@@ -82,6 +82,7 @@ Where options could contain the following fields:
   - `logError` - **optional** callback to log any error
     - It should take `(req, err)` arguments
     - If it's a `function` then its `this` references the engine instance
+    - Defaulted to `console.log`
   - `renderToString` - **optional** callback to provide custom renderToString
     - It should take `(req, store, match, withIds)` arguments
 

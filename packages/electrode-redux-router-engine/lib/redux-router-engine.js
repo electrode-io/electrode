@@ -22,7 +22,8 @@ class ReduxRouterEngine {
     }
 
     if (!this.options.logError) {
-      this.options.logError = () => undefined;
+      this.options.logError = (req, err) =>
+        console.log("Electrode ReduxRouterEngine Error:", err); //eslint-disable-line
     }
 
     if (this.options.renderToString) {
