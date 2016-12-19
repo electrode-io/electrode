@@ -2,6 +2,61 @@
 
 [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 
+## Features
+[Electrode Boilerplate](https://github.com/electrode-io/electrode#boilerplate-universal-react-node) comes fully loaded with the best technologies available:
+
+*  <a href="https://facebook.github.io/react/index.html" target="_blank">React</a> - an awesome JavaScript library for building user interfaces, created by Facebook.
+
+*  <a href="http://redux.js.org/docs/basics/UsageWithReact.html" target="_blank">Redux</a> - a predictable state container for JavaScript apps.
+
+*  <a href="https://github.com/ReactTraining/react-router/tree/master/docs" target="_blank">React Router</a> - a powerful routing library built on top of React.
+
+* <a href="https://github.com/css-modules/css-modules" target="_blank">CSS Modules</a> - a CSS file in which all class names and animation names are scoped locally by default. Fixes the problem of the global scope in CSS.
+
+*  <a href="https://medium.com/@mjackson/universal-javascript-4761051b7ae9#.xjxr5yj5z" target="_blank">Universal rendering</a>
+
+*  <a href="https://webpack.github.io/docs/motivation.html" target="_blank">Webpack</a> - a powerful module bundler.
+
+* [Offline-first](https://github.com/electrode-io/electrode/tree/master/samples/universal-react-node#progressive-web-app-pwa-features-supported-by-the-electrode-framework)
+The next frontier in performant progressive web apps: availability without a network connection from the instant your users load the app.
+
+*  <a href="https://github.com/jchip/isomorphic-loader" target="_blank">Webpack Isomorphic Loader</a> - a powerful tool that makes NodeJS `require` understand files such as images for SSR.
+
+*  <a href="https://babeljs.io/" target="_blank">Babel</a> - a utility to transpile ES6 + 7.
+
+*  <a href="http://eslint.org/" target="_blank">ESLint</a> - a pluggable linting utility for Javascript.
+
+*  <a href="https://mochajs.org/" target="_blank">Mocha</a> - a feature-rich Javascript testing framework.
+
+*  <a href="https://github.com/airbnb/enzyme" target="_blank">Enzyme</a> - a Javascript testing utility for React, created by airbnb.
+
+*  <a href="https://travis-ci.org/" target="_blank">TravisCI</a> - a continuous integration service to build and test software projects.
+
+*  <a href="http://gulpjs.com/" target="_blank">Gulp</a> - a Javascript build tool that lets us automate tasks.
+
+*  <a href="http://yeoman.io/" target="_blank">Yeoman</a> - a Scaffolding tool for modern webapps.
+
+*  <a href="https://www.npmjs.com/package/history" target="_blank">History</a> - a Javascript library for managing session history.
+
+*  <a href="http://bluebirdjs.com/docs/why-promises.html" target="_blank">Bluebird</a> - a great Javascript promise library.
+
+*  [Electrode Confippet](https://github.com/electrode-io/electrode-confippet) - a versatile and flexible utility for managing configurations of Node.js applications.
+
+*  [Electrode JWT CSRF](https://github.com/electrode-io/electrode-csrf-jwt) - a module to enable stateless Cross-Site Request Forgery (CSRF) protection with JWT.
+
+*  [Electrode-Redux-Router-Engine](https://github.com/electrode-io/electrode-redux-router-engine) - an Electrode routing and rendering engine using react-router and redux.
+
+*  [Component Caching](https://github.com/electrode-io/electrode-react-ssr-caching) - an optimizer to improve React Server Side Rendering speed
+
+*  [Electrode-Server](https://github.com/electrode-io/electrode-server) - a configurable web server using Hapi.js on top of Node.js.
+
+*  [Electrify](https://github.com/electrode-io/electrify) - a tool for analyzing the module tree of webpack projects.
+
+*  [Electrode-Docgen](https://github.com/electrode-io/electrode-docgen) - a custom metadata extractor for the Electrode framework, automates component documentation.
+mentation.
+
+
+
 This repo is a sample Electrode app with the following Electrode modules:
   - [Electrode Confippet](https://github.com/electrode-io/electrode-confippet)
   - [Electrode Electrify](https://github.com/electrode-io/electrify)
@@ -46,8 +101,8 @@ $ gulp server
 ```
 Service worker currently does not work with webpack dev server. You need to build first and then run the server.
 
-## Instructions for boostrapping new electrode application
-You can bootstrap a new electrode webapplication from scratch by doing:
+## Instructions for boostrapping/Scaffolding new electrode application
+You can bootstrap a new electrode web application from scratch by doing:
 
 ```bash
 npm install -g yo generator-electrode gulp
