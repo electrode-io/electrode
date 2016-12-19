@@ -32,6 +32,10 @@ module.exports = {
           }
         }
       }
+    },
+    "ElectrodeSSRFlag":{
+      "enable":"true",
+      "module":"./server/plugins/autossr.js"
     }
   },
   "connections": {
