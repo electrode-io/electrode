@@ -221,7 +221,6 @@ module.exports = generators.Base.extend({
   writing: function () {
     const isHapi = this.config.get('serverType') === HapiJS;
     const isPWA = this.props.pwa;
-    const isAutoSsr = this.props.autoSsr;
 
     // Re-read the content at this point because a composed generator might modify it.
     var currentPkg = this.fs.readJSON(this.destinationPath('package.json'), {});
