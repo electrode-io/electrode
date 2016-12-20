@@ -10,6 +10,12 @@ const config = archetype.config;
 const penthouse = require("penthouse");
 const CleanCSS = require('clean-css');
 
+
+const envify = archetype.devRequire("gulp-envify");
+const uglify = archetype.devRequire("gulp-uglify");
+const filter = archetype.devRequire("gulp-filter");
+const assert = require("assert");
+
 function setupPath() {
   const nmBin = "node_modules/.bin";
   gulpHelper.envPath.addToFront(Path.resolve(nmBin));
@@ -179,6 +185,29 @@ function inlineCriticalCSS(cb) {
  */
 
 function makeTasks(gulp) {
+  const optimizeModuleForProd = (module) => {
+    const modulePath = Path.resolve(Path.join("node_modules", module));
+    assert(shell.test("-d", modulePath), `${modulePath} is not a directory`);
+    return gulp.src(`${modulePath}/**/*.js`)
+      .pipe(filter(["**", "!**/dist/**"]))
+      .pipe(envify({
+        NODE_ENV: "production"
+      }))
+      .pipe(uglify({
+        compress: {
+          sequences: false,
+          dead_code: true,
+          drop_debugger: true
+        },
+        output: {
+          beautify: false,
+          comments: false,
+          bracketize: true
+        }
+      }))
+      .pipe(gulp.dest(`.prod/${module}`));
+  };
+
   return {
     ".production-env": () => setProductionEnv(),
     ".static-files-env": () => setStaticFilesEnv(),
@@ -186,7 +215,7 @@ function makeTasks(gulp) {
     ".optimize-stats": () => setOptimizeStats(),
     "build": {
       desc: "Build your app's client bundle for production",
-      task: ["build-dist"]
+      task: ["ss-prod-react", "build-dist"]
     },
     "build-analyze": {
       dep: [".optimize-stats"],
@@ -209,6 +238,17 @@ function makeTasks(gulp) {
     "build-dist-dev-static": {
       desc: false,
       task: `webpack --config ${config.webpack}/webpack.config.dev.static.js --colors`
+    },
+    ".ss-prod-react": () => optimizeModuleForProd("react"),
+    ".ss-prod-react-dom": () => optimizeModuleForProd("react-dom"),
+    ".ss-clean-prod-react": () => {
+      shell.rm("-rf", ".prod/react");
+      shell.rm("-rf", ".prod/react-dom");
+    },
+    "ss-prod-react": {
+      desc: "Make optimized copy of react&react-dom for server side in directory .prod",
+      dep: [".ss-clean-prod-react"],
+      task: [[".ss-prod-react", ".ss-prod-react-dom"]]
     },
     "electrify": ["clean-dist", "build-webpack-stats-with-fullpath", "build-dist:clean-tmp", "run-electrify-cli"],
     "build-webpack-stats-with-fullpath": {
