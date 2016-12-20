@@ -20,9 +20,18 @@ var prodCfg = require("./webpack.config");
  * https://github.com/webpack/webpack/issues/304
  * https://github.com/sinonjs/sinon/pull/600#issuecomment-162529457
  */
-prodCfg.module.noParse = [
-  /node_modules\/sinon\//
-];
+/*
+ * Added fix for "gulp check" on Windows
+ */
+if (process.platform === "win32") {
+    prodCfg.module.noParse = [
+        /node_modules\\sinon\\/
+    ];
+} else {
+    prodCfg.module.noParse = [
+        /node_modules\/sinon\//
+    ];
+}
 // Get Paths to give node_modules by resolving based on assumed presence of
 // `package.json`.
 var _archNodeModules = function (arch) {
