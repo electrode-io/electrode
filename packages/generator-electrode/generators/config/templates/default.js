@@ -20,7 +20,7 @@ module.exports = {
       }
     },<%if(pwa){%>
     "./server/plugins/pwa": {},<%} if(autoSsr){%>
-    "./server/plugins/autossr.js": {}, <%}%>
+    "electrode-auto-ssr": {}, <%}%>
     "webapp": {
       "module": <%if(serverType==="HapiJS"){%>"electrode-react-webapp/lib/hapi"<%}else{%>"electrode-react-webapp/lib/express"<%}%>,
       "options": {
