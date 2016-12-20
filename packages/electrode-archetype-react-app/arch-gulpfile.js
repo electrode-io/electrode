@@ -178,180 +178,183 @@ function inlineCriticalCSS(cb) {
  *
  */
 
-const tasks = {
-  ".production-env": () => setProductionEnv(),
-  ".static-files-env": () => setStaticFilesEnv(),
-  ".webpack-dev": () => setWebpackDev(),
-  ".optimize-stats": () => setOptimizeStats(),
-  "build": {
-    desc: "Build your app's client bundle for production",
-    task: ["build-dist"]
-  },
-  "build-analyze": {
-    dep: [".optimize-stats"],
-    desc: "Build your app's client bundle for production and run bundle analyzer",
-    task: ["build-dist", "optimize-stats"]
-  },
-  ".build-browser-coverage-1": () => {
-    setProductionEnv();
-    return exec(`webpack --config ${config.webpack}/webpack.config.browsercoverage.js --colors`);
-  },
-  "build-browser-coverage": {
-    desc: "Build browser coverage",
-    task: ["clean-dist", ".build-browser-coverage-1", "build-dist:flatten-l10n", "build-dist:clean-tmp"]
-  },
-  "build-dev-static": {
-    desc: "Build static copy of your app's client bundle for development",
-    task: ["clean-dist", "build-dist-dev-static"]
-  },
-  "build-dist": ["clean-dist", "build-dist-min", "build-dist:flatten-l10n", "generate-service-worker", "build-dist:clean-tmp"],
-  "build-dist-dev-static": {
-    desc: false,
-    task: `webpack --config ${config.webpack}/webpack.config.dev.static.js --colors`
-  },
-  "electrify": ["clean-dist", "build-webpack-stats-with-fullpath", "build-dist:clean-tmp", "run-electrify-cli"],
-  "build-webpack-stats-with-fullpath": {
-    desc: "Build static bundle with stats.json containing fullPaths to inspect the bundle on electrode-electrify",
-    task: `webpack --config ${config.webpack}/webpack.config.stats.electrify.js --colors`
-  },
-  "build-dist-min": {
-    dep: [".production-env"],
-    desc: false,
-    task: `webpack --config ${config.webpack}/webpack.config.js --colors`
-  },
-  "build-dist:clean-tmp": {
-    desc: false,
-    task: () => shell.rm("-rf", "./tmp")
-  },
-  "build-dist:flatten-l10n": {
-    desc: false,
-    task: `node ${__dirname}/scripts/l10n/flatten-messages.js`
-  },
-  "run-electrify-cli": {
-    desc: false,
-    task: `electrify dist/server/stats.json -O`
-  },
-  "check": ["lint", "test-cov"],
-  "check-ci": ["lint", "test-ci"],
-  "check-cov": ["lint", "test-cov"],
-  "check-dev": ["lint", "test-dev"],
-  "clean": ["clean-dist"],
-  "clean-dist": () => shell.rm("-rf", "dist"),
-  "cov-frontend": () => checkFrontendCov(),
-  "cov-frontend-50": () => checkFrontendCov("50"),
-  "cov-frontend-70": () => checkFrontendCov("70"),
-  "cov-frontend-85": () => checkFrontendCov("85"),
-  "cov-frontend-95": () => checkFrontendCov("95"),
-  "debug": ["build-dev-static", "server-debug"],
-  "dev": {
-    desc: "Start server with watch in development mode with webpack-dev-server",
-    task: [".webpack-dev", ["server-dev", "server-watch", "generate-service-worker"]]
-  },
-  "dev-static": {
-    desc: "Start server in development mode with statically built files",
-    task: ["build-dev-static", "server"]
-  },
-  "hot": {
-    desc: "Start server with watch in hot mode with webpack-dev-server",
-    task: [".webpack-dev", ["server-hot", "server-watch", "generate-service-worker"]]
-  },
-  "critical-css": {
-    desc: "Start server and run penthouse to output critical CSS",
-    task: inlineCriticalCSS
-  },
-  "generate-service-worker": {
-    desc: "Generate Service Worker using the options provided in the app/config/sw-precache-config.json file for prod/dev/hot mode",
-    task: () => generateServiceWorker()
-  },
-  "lint": [["lint-client", "lint-client-test", "lint-server", "lint-server-test"]],
-  "lint-client": {
-    desc: "Run eslint on client code in directories client and templates",
-    task: () => lint({
-      ext: ".js,.jsx",
-      config: `${config.eslint}/.eslintrc-react`,
-      targets: ["client", "templates"]
-    })
-  },
-  "lint-client-test": {
-    desc: "Run eslint on client test code in directory test/client",
-    task: () => lint({
-      ext: ".js,.jsx",
-      config: `${config.eslint}/.eslintrc-react-test`,
-      targets: ["test/client"]
-    })
-  },
-  "lint-server": {
-    desc: "Run eslint on server code in directory server",
-    task: () => lint({
-      config: `${config.eslint}/.eslintrc-node`,
-      targets: ["server"]
-    })
-  },
-  "lint-server-test": {
-    desc: "Run eslint on server test code in directories test/server and test/func",
-    task: () => lint({
-      config: `${config.eslint}/.eslintrc-mocha-test`,
-      targets: ["test/server", "test/func"]
-    })
-  },
-  "optimize-stats": {
-    desc: "Generate a list of all files that went into production bundle JS (results in .etmp)",
-    task: `analyze-bundle -b dist/js/bundle.*.js -s dist/server/stats.json`
-  },
-  "npm:test": ["check"],
-  "npm:release": `node ${__dirname}/scripts/map-isomorphic-cdn.js`,
-  "pwa": {
-    desc: "PWA must have dist by running `gulp build` first and then start the app server only.",
-    task: ["build", "server"]
-  },
-  "server": {
-    desc: "Start the app server only, Must have dist by running `gulp build` first.",
-    task: `node server/index.js`
-  },
-  "server-prod": {
-    dep: [".production-env", ".static-files-env"],
-    desc: "Start server in production mode with static files routes.  Must have dist by running `gulp build`.",
-    task: `node server/index.js`
-  },
-  "server-debug": `node debug server/index.js`,
-  ".init-bundle.valid.log": () => fs.writeFileSync(Path.resolve(".etmp/bundle.valid.log"), `${Date.now()}`),
-  "server-watch": {
-    dep: [".init-bundle.valid.log"],
-    task: `nodemon -C --ext js,jsx,json,yaml --watch .etmp/bundle.valid.log --watch server --watch config server/index.js --exec node`
-  },
-  "server-dev": {
-    desc: "Start server in dev mode with webpack-dev-server",
-    task: `webpack-dev-server --config ${config.webpack}/webpack.config.dev.js --progress --colors --port ${archetype.webpack.devPort}`
-  },
-  "server-hot": {
-    desc: "Start server in hot mode with webpack-dev-server",
-    task: `webpack-dev-server --config ${config.webpack}/webpack.config.hot.js --hot --progress --colors --port ${archetype.webpack.devPort} --inline`
-  },
-  "server-test": {
-    desc: "Start server in test mode with webpack-dev-server",
-    task: `webpack-dev-server --config ${config.webpack}/webpack.config.test.js --progress --colors --port ${archetype.webpack.testPort}`
-  },
-  "test-ci": ["test-frontend-ci"],
-  "test-cov": ["test-frontend-cov", "test-server-cov"],
-  "test-dev": ["test-frontend-dev", "test-server-dev"],
-  "test-watch": () => exec(`pgrep -fl 'webpack-dev-server.*${archetype.webpack.testPort}`)
-    .then(() => exec(`gulp test-frontend-dev-watch`))
-    .catch(() => exec(`gulp test-watch-all`)),
-  "test-watch-all": ["server-test", "test-frontend-dev-watch"],
-  "test-frontend": `karma start ${config.karma}/karma.conf.js --colors`,
-  "test-frontend-ci": `karma start --browsers PhantomJS,Firefox ${config.karma}/karma.conf.coverage.js --colors`,
-  "test-frontend-cov": `karma start ${config.karma}/karma.conf.coverage.js --colors`,
-  "test-frontend-dev": () => exec(`pgrep -fl 'webpack-dev-server.*${archetype.webpack.testPort}'`)
-    .then(() => exec(`karma start ${config.karma}/karma.conf.dev.js --colors`))
-    .catch(() => exec(`gulp test-frontend`)),
-  "test-frontend-dev-watch": `karma start ${config.karma}/karma.conf.watch.js --colors --browsers Chrome --no-single-run --auto-watch`,
-  "test-server": () => [["lint-server", "lint-server-test"], "test-server-cov"],
-  "test-server-cov": () => shell.test("-d", "test/server") && exec(`istanbul cover _mocha -- -c --opts ${config.mocha}/mocha.opts test/server`),
-  "test-server-dev": () => shell.test("-d", "test/server") && exec(`mocha -c --opts ${config.mocha}/mocha.opts test/server`)
-};
+function makeTasks(gulp) {
+  return {
+    ".production-env": () => setProductionEnv(),
+    ".static-files-env": () => setStaticFilesEnv(),
+    ".webpack-dev": () => setWebpackDev(),
+    ".optimize-stats": () => setOptimizeStats(),
+    "build": {
+      desc: "Build your app's client bundle for production",
+      task: ["build-dist"]
+    },
+    "build-analyze": {
+      dep: [".optimize-stats"],
+      desc: "Build your app's client bundle for production and run bundle analyzer",
+      task: ["build-dist", "optimize-stats"]
+    },
+    ".build-browser-coverage-1": () => {
+      setProductionEnv();
+      return exec(`webpack --config ${config.webpack}/webpack.config.browsercoverage.js --colors`);
+    },
+    "build-browser-coverage": {
+      desc: "Build browser coverage",
+      task: ["clean-dist", ".build-browser-coverage-1", "build-dist:flatten-l10n", "build-dist:clean-tmp"]
+    },
+    "build-dev-static": {
+      desc: "Build static copy of your app's client bundle for development",
+      task: ["clean-dist", "build-dist-dev-static"]
+    },
+    "build-dist": ["clean-dist", "build-dist-min", "build-dist:flatten-l10n", "generate-service-worker", "build-dist:clean-tmp"],
+    "build-dist-dev-static": {
+      desc: false,
+      task: `webpack --config ${config.webpack}/webpack.config.dev.static.js --colors`
+    },
+    "electrify": ["clean-dist", "build-webpack-stats-with-fullpath", "build-dist:clean-tmp", "run-electrify-cli"],
+    "build-webpack-stats-with-fullpath": {
+      desc: "Build static bundle with stats.json containing fullPaths to inspect the bundle on electrode-electrify",
+      task: `webpack --config ${config.webpack}/webpack.config.stats.electrify.js --colors`
+    },
+    "build-dist-min": {
+      dep: [".production-env"],
+      desc: false,
+      task: `webpack --config ${config.webpack}/webpack.config.js --colors`
+    },
+    "build-dist:clean-tmp": {
+      desc: false,
+      task: () => shell.rm("-rf", "./tmp")
+    },
+    "build-dist:flatten-l10n": {
+      desc: false,
+      task: `node ${__dirname}/scripts/l10n/flatten-messages.js`
+    },
+    "run-electrify-cli": {
+      desc: false,
+      task: `electrify dist/server/stats.json -O`
+    },
+    "check": ["lint", "test-cov"],
+    "check-ci": ["lint", "test-ci"],
+    "check-cov": ["lint", "test-cov"],
+    "check-dev": ["lint", "test-dev"],
+    "clean": ["clean-dist"],
+    "clean-dist": () => shell.rm("-rf", "dist"),
+    "cov-frontend": () => checkFrontendCov(),
+    "cov-frontend-50": () => checkFrontendCov("50"),
+    "cov-frontend-70": () => checkFrontendCov("70"),
+    "cov-frontend-85": () => checkFrontendCov("85"),
+    "cov-frontend-95": () => checkFrontendCov("95"),
+    "debug": ["build-dev-static", "server-debug"],
+    "dev": {
+      desc: "Start server with watch in development mode with webpack-dev-server",
+      task: [".webpack-dev", ["server-dev", "server-watch", "generate-service-worker"]]
+    },
+    "dev-static": {
+      desc: "Start server in development mode with statically built files",
+      task: ["build-dev-static", "server"]
+    },
+    "hot": {
+      desc: "Start server with watch in hot mode with webpack-dev-server",
+      task: [".webpack-dev", ["server-hot", "server-watch", "generate-service-worker"]]
+    },
+    "critical-css": {
+      desc: "Start server and run penthouse to output critical CSS",
+      task: inlineCriticalCSS
+    },
+    "generate-service-worker": {
+      desc: "Generate Service Worker using the options provided in the app/config/sw-precache-config.json file for prod/dev/hot mode",
+      task: () => generateServiceWorker()
+    },
+    "lint": [["lint-client", "lint-client-test", "lint-server", "lint-server-test"]],
+    "lint-client": {
+      desc: "Run eslint on client code in directories client and templates",
+      task: () => lint({
+        ext: ".js,.jsx",
+        config: `${config.eslint}/.eslintrc-react`,
+        targets: ["client", "templates"]
+      })
+    },
+    "lint-client-test": {
+      desc: "Run eslint on client test code in directory test/client",
+      task: () => lint({
+        ext: ".js,.jsx",
+        config: `${config.eslint}/.eslintrc-react-test`,
+        targets: ["test/client"]
+      })
+    },
+    "lint-server": {
+      desc: "Run eslint on server code in directory server",
+      task: () => lint({
+        config: `${config.eslint}/.eslintrc-node`,
+        targets: ["server"]
+      })
+    },
+    "lint-server-test": {
+      desc: "Run eslint on server test code in directories test/server and test/func",
+      task: () => lint({
+        config: `${config.eslint}/.eslintrc-mocha-test`,
+        targets: ["test/server", "test/func"]
+      })
+    },
+    "optimize-stats": {
+      desc: "Generate a list of all files that went into production bundle JS (results in .etmp)",
+      task: `analyze-bundle -b dist/js/bundle.*.js -s dist/server/stats.json`
+    },
+    "npm:test": ["check"],
+    "npm:release": `node ${__dirname}/scripts/map-isomorphic-cdn.js`,
+    "pwa": {
+      desc: "PWA must have dist by running `gulp build` first and then start the app server only.",
+      task: ["build", "server"]
+    },
+    "server": {
+      desc: "Start the app server only, Must have dist by running `gulp build` first.",
+      task: `node server/index.js`
+    },
+    "server-prod": {
+      dep: [".production-env", ".static-files-env"],
+      desc: "Start server in production mode with static files routes.  Must have dist by running `gulp build`.",
+      task: `node server/index.js`
+    },
+    "server-debug": `node debug server/index.js`,
+    ".init-bundle.valid.log": () => fs.writeFileSync(Path.resolve(".etmp/bundle.valid.log"), `${Date.now()}`),
+    "server-watch": {
+      dep: [".init-bundle.valid.log"],
+      task: `nodemon -C --ext js,jsx,json,yaml --watch .etmp/bundle.valid.log --watch server --watch config server/index.js --exec node`
+    },
+    "server-dev": {
+      desc: "Start server in dev mode with webpack-dev-server",
+      task: `webpack-dev-server --config ${config.webpack}/webpack.config.dev.js --progress --colors --port ${archetype.webpack.devPort}`
+    },
+    "server-hot": {
+      desc: "Start server in hot mode with webpack-dev-server",
+      task: `webpack-dev-server --config ${config.webpack}/webpack.config.hot.js --hot --progress --colors --port ${archetype.webpack.devPort} --inline`
+    },
+    "server-test": {
+      desc: "Start server in test mode with webpack-dev-server",
+      task: `webpack-dev-server --config ${config.webpack}/webpack.config.test.js --progress --colors --port ${archetype.webpack.testPort}`
+    },
+    "test-ci": ["test-frontend-ci"],
+    "test-cov": ["test-frontend-cov", "test-server-cov"],
+    "test-dev": ["test-frontend-dev", "test-server-dev"],
+    "test-watch": () => exec(`pgrep -fl 'webpack-dev-server.*${archetype.webpack.testPort}`)
+      .then(() => exec(`gulp test-frontend-dev-watch`))
+      .catch(() => exec(`gulp test-watch-all`)),
+    "test-watch-all": ["server-test", "test-frontend-dev-watch"],
+    "test-frontend": `karma start ${config.karma}/karma.conf.js --colors`,
+    "test-frontend-ci": `karma start --browsers PhantomJS,Firefox ${config.karma}/karma.conf.coverage.js --colors`,
+    "test-frontend-cov": `karma start ${config.karma}/karma.conf.coverage.js --colors`,
+    "test-frontend-dev": () => exec(`pgrep -fl 'webpack-dev-server.*${archetype.webpack.testPort}'`)
+      .then(() => exec(`karma start ${config.karma}/karma.conf.dev.js --colors`))
+      .catch(() => exec(`gulp test-frontend`)),
+    "test-frontend-dev-watch": `karma start ${config.karma}/karma.conf.watch.js --colors --browsers Chrome --no-single-run --auto-watch`,
+    "test-server": () => [["lint-server", "lint-server-test"], "test-server-cov"],
+    "test-server-cov": () => shell.test("-d", "test/server") && exec(`istanbul cover _mocha -- -c --opts ${config.mocha}/mocha.opts test/server`),
+    "test-server-dev": () => shell.test("-d", "test/server") && exec(`mocha -c --opts ${config.mocha}/mocha.opts test/server`)
+  }
+}
 
 module.exports = function (gulp) {
   setupPath();
   createElectrodeTmpDir();
-  gulpHelper.loadTasks(tasks, gulp || require("gulp"));
+  gulp = gulp || require("gulp");
+  gulpHelper.loadTasks(makeTasks(gulp), gulp);
 };
