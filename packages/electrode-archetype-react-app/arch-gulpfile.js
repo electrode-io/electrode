@@ -153,20 +153,20 @@ function inlineCriticalCSS(cb) {
     strict: false,
     maxEmbeddedBase64Length: 1000,
     renderWaitTime: 2000,
-    blockJSRequests: false,
+    blockJSRequests: false
   };
   serverPromise.then(() => {
-    penthouse(penthouseOptions, (err, css)  => {
+    penthouse(penthouseOptions, (err, css) => {
+      if (err) {
+        throw err;
+      }
+      const minifiedCSS = new CleanCSS().minify(css).styles;
+      fs.writeFile(targetPath, minifiedCSS, (err) => {
         if (err) {
           throw err;
         }
-        const minifiedCSS = new CleanCSS().minify(css).styles;
-        fs.writeFile(targetPath, minifiedCSS, (err) => {
-          if (err) {
-            throw err;
-          }
-          process.exit(0);
-        })
+        process.exit(0);
+      })
     });
   });
 }
