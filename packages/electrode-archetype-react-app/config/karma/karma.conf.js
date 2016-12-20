@@ -3,7 +3,7 @@ var Path = require("path");
 
 var webpackCfg = require("../webpack/webpack.config.test");
 
-var MAIN_PATH = Path.join(__dirname, "/entry.js");
+var MAIN_PATH = require.resolve("./entry.js");
 
 var PREPROCESSORS = {};
 
@@ -42,9 +42,9 @@ module.exports = function (config) {
     browserNoActivityTimeout: 60000,
     coverageReporter: {
       reporters: [
-        {type: "json", file: "coverage.json"},
-        {type: "lcov"},
-        {type: "text"}
+        { type: "json", file: "coverage.json" },
+        { type: "lcov" },
+        { type: "text" }
       ],
       dir: Path.join(process.cwd(), "coverage/client")
     },
