@@ -17,19 +17,10 @@ module.exports = generators.Base.extend({
       required: true,
       desc: 'Progressive Web App'
     });
-    /*
-    this.option('autoSsr', {
-      type: String,
-      required: true,
-      desc: 'Automatically disable server side rendering'
-    }); */
   },
 
   writing: function () {
     const isHapi = this.config.get('serverType') === 'hapijs';
-    ///*let isAutoSsr = this.options.autoSsr ? '' : ['**/server/plugins/autossr.js',
-    //'**/server/conditions/machine-info.js', '**/server/conditions/machine-load.js',
-    //'**/server/conditions/response-time.js', '**/server/conditions/server-load.js'];
 
     this.fs.copyTpl(
       this.templatePath('server'),
@@ -44,7 +35,7 @@ module.exports = generators.Base.extend({
           ignore: [
             isHapi ? '**/server/plugins/webapp/express-middleware.js' : '**/server/plugins/webapp/hapi-plugin.js',
             '**/server/plugins/pwa.js'
-          ]//.concat(isAutoSsr)
+          ]
         }
       }
     );
