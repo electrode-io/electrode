@@ -1,5 +1,7 @@
 # Electrode React Webapp
 
+[![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url]
+
 This is a Hapi plugin that register a default route for your Webapp to return
 a bootstrapping React application.  With support for webpack dev server integrations.
 
@@ -81,9 +83,9 @@ What you can do with the options:
    * `pageTitle` `(String)` The value to be shown in the browser's title bar
    * `webpackDev` `(Boolean)` whether to use webpack-dev-server's URLs for retrieving CSS and JS bundles.
    * `serverSideRendering` `(Boolean)` Toggle server-side rendering.
-   * `htmlFile` `(String)` Absolute or relative path to the application root html file. 
+   * `htmlFile` `(String)` Absolute or relative path to the application root html file.
       It must contains the following placeholders:
-      - `{{PAGE_TITLE}}` page title. 
+      - `{{PAGE_TITLE}}` page title.
       - `{{WEBAPP_BUNDLES}}` injected `<script>` and `<link>` tags to load bundled JavaScript and Css
       - `{{PREFETCH_BUNDLES}}` `<script>` tag containing code that will contains prefetched JavaScript code
       - `{{SSR_CONTENT}}` injected content rendered on server side
@@ -112,3 +114,8 @@ function myContent() {
   });
 }
 ```
+
+[npm-image]: https://badge.fury.io/js/electrode-react-webapp.svg
+[npm-url]: https://npmjs.org/package/electrode-react-webapp
+[daviddm-image]: https://david-dm.org/electrode-io/electrode-react-webapp.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/electrode-io/electrode-react-webapp
