@@ -19,7 +19,8 @@ module.exports = {
         "pathPrefix": "dist"
       }
     },<%if(pwa){%>
-    "./server/plugins/pwa": {},<%}%>
+    "./server/plugins/pwa": {},<%} if(autoSsr){%>
+    "./server/plugins/autossr.js": {}, <%}%>
     "webapp": {
       "module": <%if(serverType==="HapiJS"){%>"electrode-react-webapp/lib/hapi"<%}else{%>"electrode-react-webapp/lib/express"<%}%>,
       "options": {
@@ -32,10 +33,6 @@ module.exports = {
           }
         }
       }
-    },
-    "ElectrodeSSRFlag":{
-      "enable":"true",
-      "module":"./server/plugins/autossr.js"
     }
   },
   "connections": {
