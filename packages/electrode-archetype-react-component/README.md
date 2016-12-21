@@ -1,6 +1,6 @@
 # Archetype: Electrode React Component
 
-[![NPM version][npm-image]][npm-url]
+[![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url] [![devDependency Status][daviddm-dev-image]][daviddm-dev-url]
 
 Electrode flavored react component archetype.
 
@@ -297,3 +297,7 @@ Built with :heart: by [Team Electrode](https://github.com/orgs/electrode-io/peop
 
 [npm-image]: https://badge.fury.io/js/electrode-archetype-react-component.svg
 [npm-url]: https://npmjs.org/package/electrode-archetype-react-component
+[daviddm-image]: https://david-dm.org/electrode-io/electrode/status.svg?path=packages/electrode-archetype-react-component
+[daviddm-url]: https://david-dm.org/electrode-io/electrode?path=packages/electrode-archetype-react-component
+[daviddm-dev-image]: https://david-dm.org/electrode-io/electrode/dev-status.svg?path=packages/electrode-archetype-react-component
+[daviddm-dev-url]: https://david-dm.org/electrode-io/electrode?path=packages/electrode-archetype-react-component?type=dev
