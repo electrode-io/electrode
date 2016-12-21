@@ -1,6 +1,6 @@
 # Electrode Boilerplate Universal React Node
 
-[![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+[![Dependency Status][daviddm-image]][daviddm-url] [![devDependency Status][daviddm-dev-image]][daviddm-dev-url]
 
 ## Features
 [Electrode Boilerplate](https://github.com/electrode-io/electrode#boilerplate-universal-react-node) comes fully loaded with the best technologies available:
@@ -716,9 +716,7 @@ Navigate to the `.etmp` folder to view the `bundle.analyze.json` or `bundle.anal
 
 Built with :heart: by [Team Electrode](https://github.com/orgs/electrode-io/people) @WalmartLabs.
 
-[npm-image]: https://badge.fury.io/js/electrode-boilerplate-universal-react-node.svg
-[npm-url]: https://npmjs.org/package/electrode-boilerplate-universal-react-node
-[travis-image]: https://travis-ci.org/electrode-io/electrode-boilerplate-universal-react-node.svg?branch=master
-[travis-url]: https://travis-ci.org/electrode-io/electrode-boilerplate-universal-react-node
-[daviddm-image]: https://david-dm.org/electrode-io/electrode-boilerplate-universal-react-node.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/electrode-io/electrode-boilerplate-universal-react-node
+[daviddm-image]: https://david-dm.org/electrode-io/electrode/status.svg?path=samples/universal-react-node
+[daviddm-url]: https://david-dm.org/electrode-io/electrode?path=samples/universal-react-node
+[daviddm-dev-image]:https://david-dm.org/electrode-io/electrode/dev-status.svg?path=samples/universal-react-node
+[daviddm-dev-url]:https://david-dm.org/electrode-io/electrode?path=samples/universal-react-nodeM?type-dev
