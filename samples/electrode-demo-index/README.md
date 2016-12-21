@@ -1,6 +1,6 @@
-#Electrode Demo Index
+# Electrode Demo Index
 
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+[![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url] [![devDependency Status][daviddm-dev-image]][daviddm-dev-url]
 
 A shared demo component for Electrode components.
 
@@ -49,7 +49,7 @@ Built with :heart: by [Team Electrode](https://github.com/orgs/electrode-io/peop
 
 [npm-image]: https://badge.fury.io/js/electrode-demo-index.svg
 [npm-url]: https://npmjs.org/package/electrode-demo-index
-[travis-image]: https://travis-ci.org/electrode-io/electrode-demo-index.svg?branch=master
-[travis-url]: https://travis-ci.org/electrode-io/electrode-demo-index
-[daviddm-image]: https://david-dm.org/electrode-io/electrode-demo-index.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/electrode-io/electrode-demo-index
+[daviddm-image]: https://david-dm.org/electrode-io/electrode/status.svg?path=samples/electrode-demo-index
+[daviddm-url]: https://david-dm.org/electrode-io/electrode?path=samples/electrode-demo-index
+[daviddm-dev-image]:https://david-dm.org/electrode-io/electrode/dev-status.svg?path=samples/electrode-demo-index
+[daviddm-dev-url]:https://david-dm.org/electrode-io/electrode?path=samples/electrode-demo-index?type-dev
