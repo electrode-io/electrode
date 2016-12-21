@@ -1,6 +1,6 @@
 # generator-electrode-component
 
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+[![NPM version][npm-image]][npm-url]
 
 A [Yeoman](http://yeoman.io) generator for Electrode
 [React](http://facebook.github.io/react/) components.
@@ -90,7 +90,3 @@ Built with :heart: by [Team Electrode](https://github.com/orgs/electrode-io/peop
 
 [npm-image]: https://badge.fury.io/js/generator-electrode-component.svg
 [npm-url]: https://npmjs.org/package/generator-electrode-component
-[travis-image]: https://travis-ci.org/electrode-io/generator-electrode-component.svg?branch=master
-[travis-url]: https://travis-ci.org/electrode-io/generator-electrode-component
-[daviddm-image]: https://david-dm.org/electrode-io/generator-electrode-component.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/electrode-io/generator-electrode-component

@@ -1,5 +1,7 @@
 # Archetype: Electrode React Component
 
+[![NPM version][npm-image]][npm-url]
+
 A Walmart Labs flavored react component archetype.
 
 ## Creating A New Component
@@ -255,3 +257,6 @@ The main check we provide for the archetype itself is:
 ```sh
 $ gulp check
 ```
+
+[npm-image]: https://badge.fury.io/js/electrode-archetype-react-component-dev.svg
+[npm-url]: https://npmjs.org/package/electrode-archetype-react-component-dev
