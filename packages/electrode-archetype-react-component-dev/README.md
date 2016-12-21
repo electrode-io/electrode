@@ -1,6 +1,6 @@
 # Archetype: Electrode React Component
 
-[![NPM version][npm-image]][npm-url]
+[![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url] [![devDependency Status][daviddm-dev-image]][daviddm-dev-url]
 
 A Walmart Labs flavored react component archetype.
 
@@ -260,3 +260,7 @@ $ gulp check
 
 [npm-image]: https://badge.fury.io/js/electrode-archetype-react-component-dev.svg
 [npm-url]: https://npmjs.org/package/electrode-archetype-react-component-dev
+[daviddm-image]: https://david-dm.org/electrode-io/electrode/status.svg?path=packages/electrode-archetype-react-component-dev
+[daviddm-url]: https://david-dm.org/electrode-io/electrode?path=packages/electrode-archetype-react-component-dev
+[daviddm-dev-image]:https://david-dm.org/electrode-io/electrode/dev-status.svg?path=packages/electrode-archetype-react-component-dev
+[daviddm-dev-url]:https://david-dm.org/electrode-io/electrode?path=packages/electrode-archetype-react-component-dev?type-dev
