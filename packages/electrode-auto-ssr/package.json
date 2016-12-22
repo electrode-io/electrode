@@ -1,0 +1,28 @@
+{
+  "name": "electrode-auto-ssr",
+  "version": "1.0.0",
+  "description": "Detect server load and response times to detect server side rendering",
+  "main": "lib/autossr.js",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "electrode-archetype-njs-module-dev": "^1.0.1"
+  },
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/electrode-io/electrode.git"
+  },
+  "keywords": [
+    "electrode",
+    "serverSideRendering"
+  ],
+  "author": "Animesh Dutta",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/electrode-io/electrode-auto-ssr/issues"
+  },
+  "homepage": "https://github.com/electrode-io/electrode-auto-ssr#readme"
+}
