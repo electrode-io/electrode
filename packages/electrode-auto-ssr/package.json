@@ -6,7 +6,8 @@
   "dependencies": {},
   "devDependencies": {
     "gulp": "^3.9.1",
-    "electrode-archetype-njs-module-dev": "^1.0.1"
+    "electrode-archetype-njs-module-dev": "^1.0.1",
+    "hapi": "^16.0.0"
   },
   "scripts": {
     "test": "gulp test"
