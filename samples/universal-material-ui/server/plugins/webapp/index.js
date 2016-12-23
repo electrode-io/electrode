@@ -163,8 +163,8 @@ const registerRoutes = (server, options, next) => {
       const devServer = pluginOptions.devServer;
       pluginOptions.__internals = {
         assets,
-        devJSBundle: `http://${devServer.host}:${devServer.port}/js/bundle.dev.js`,
-        devCSSBundle: `http://${devServer.host}:${devServer.port}/js/style.css`
+        devJSBundle: `http://${devServer.host}:${devServer.port}/js/main.bundle.dev.js`,
+        devCSSBundle: `http://${devServer.host}:${devServer.port}/js/main.style.css`
       };
 
       _.each(options.paths, (v, path) => {
