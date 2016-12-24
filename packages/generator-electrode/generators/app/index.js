@@ -366,7 +366,7 @@ module.exports = generators.Base.extend({
           name: this.props.name,
           pwa: this.props.pwa,
           serverType: this.props.serverType,
-          autoSsr: this.props.autoSsr
+          isAutoSsr: this.props.autoSsr
         }
       }, {
         local: require.resolve('../config')
@@ -377,7 +377,7 @@ module.exports = generators.Base.extend({
       this.composeWith('electrode:webapp', {
         options: {
           pwa: this.props.pwa,
-          autoSsr: this.props.autoSsr
+          isAutoSsr: this.props.autoSsr
         }
       }, {
         local: require.resolve('../webapp')

@@ -40,7 +40,7 @@ module.exports = generators.Base.extend({
         routeValue: routeMatch,
         pwa: this.options.pwa,
         serverType: this.options.serverType,
-        autoSsr: this.options.autoSsr
+        isAutoSsr: this.options.autoSsr
       }
     );
 
