@@ -19,7 +19,7 @@ module.exports = {
         "pathPrefix": "dist"
       }
     },<%if(pwa){%>
-    "./server/plugins/pwa": {},<%} if(autoSsr){%>
+    "./server/plugins/pwa": {},<%} if(isAutoSsr){%>
     "electrode-auto-ssr": {}, <%}%>
     "webapp": {
       "module": <%if(serverType==="HapiJS"){%>"electrode-react-webapp/lib/hapi"<%}else{%>"electrode-react-webapp/lib/express"<%}%>,
