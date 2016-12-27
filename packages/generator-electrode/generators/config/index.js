@@ -23,6 +23,11 @@ module.exports = generators.Base.extend({
       required: true,
       desc: 'Server Type can be hapijs or express'
     });
+    this.option('autoSsr', {
+      type: String,
+      required: true,
+      desc: 'Automatically disable server side rendering'
+    });
   },
 
   writing: function () {
@@ -34,7 +39,8 @@ module.exports = generators.Base.extend({
         projectName: this.options.name,
         routeValue: routeMatch,
         pwa: this.options.pwa,
-        serverType: this.options.serverType
+        serverType: this.options.serverType,
+        isAutoSsr: this.options.autoSsr
       }
     );
 

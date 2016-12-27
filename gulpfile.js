@@ -14,7 +14,7 @@ if (!process.env.PACKAGES_DIR) {
 }
 
 const runAppTest = (dir, forceLocal) => {
-  const localPkgs = ["electrode-archetype-react-app", "electrode-react-webapp", "electrode-redux-router-engine"];
+  const localPkgs = ["electrode-archetype-react-app", "electrode-react-webapp", "electrode-redux-router-engine", "electrode-auto-ssr"];
   const localDevPkgs = ["electrode-archetype-react-app-dev"];
 
   const updateToLocalPkgs = (pkgSection, pkgs) => {
@@ -68,6 +68,7 @@ const testGenerator = (testDir, clean, prompts) => {
     authorUrl: "http://www.test.com",
     keywords: ["test", "electrode"],
     pwa: true,
+    autoSsr: true,
     createDirectory: true,
     githubAccount: "test",
     license: "Apache-2.0"
