@@ -2,8 +2,7 @@
 
 const Promise = require("bluebird");
 const koa = require("koa");
-const send = require('koa-send');
-const koaStatic = require('koa-static');
+const koaStatic = require("koa-static");
 const app = koa();
 const path = require("path");
 const _ = require("lodash");
