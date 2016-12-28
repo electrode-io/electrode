@@ -82,6 +82,7 @@ module.exports = generators.Base.extend({
       this.props.serverType = this.fs.exists(this.destinationPath('server/express-server.js')) ? ExpressJS :
                                 this.fs.exists(this.destinationPath('server/koa-server.js')) ? koaJS  : HapiJS;
       this.props.pwa = this.fs.exists(this.destinationPath('client/sw-registration.js'));
+      this.props.autoSsr = this.fs.exists(this.destinationPath('server/plugins/autossr.js'));
     } else if (_.isString(this.pkg.author)) {
       var info = parseAuthor(this.pkg.author);
       this.props.authorName = info.name;
@@ -171,6 +172,13 @@ module.exports = generators.Base.extend({
         },
         {
           type: "confirm",
+          name: "autoSsr",
+          message: "Disable server side rendering based on high load?",
+          when: this.props.autoSsr === undefined,
+          default: false
+        },
+        {
+          type: "confirm",
           name: "createDirectory",
           message: "Would you like to create a new directory for your project?",
           when: this.props.createDirectory === undefined,
@@ -216,6 +224,7 @@ module.exports = generators.Base.extend({
     const isHapi = this.config.get('serverType') === HapiJS;
     const isExpress = this.config.get('serverType') === ExpressJS;
     const isPWA = this.props.pwa;
+    const isAutoSSR = this.props.autoSsr;
 
     // Re-read the content at this point because a composed generator might modify it.
     var currentPkg = this.fs.readJSON(this.destinationPath('package.json'), {});
@@ -225,7 +234,7 @@ module.exports = generators.Base.extend({
     this.fs.copyTpl(
       this.templatePath(_pkg),
       this.destinationPath(_pkg),
-      {isHapi, isExpress, isPWA}
+      {isHapi, isExpress, isPWA, isAutoSSR}
     );
 
     var defaultPkg = this.fs.readJSON(this.destinationPath(_pkg));
@@ -360,7 +369,8 @@ module.exports = generators.Base.extend({
         options: {
           name: this.props.name,
           pwa: this.props.pwa,
-          serverType: this.props.serverType
+          serverType: this.props.serverType,
+          isAutoSsr: this.props.autoSsr
         }
       }, {
         local: require.resolve('../config')
@@ -370,7 +380,8 @@ module.exports = generators.Base.extend({
     if (!this.fs.exists(this.destinationPath('server/plugins/webapp'))) {
       this.composeWith('electrode:webapp', {
         options: {
-          pwa: this.props.pwa
+          pwa: this.props.pwa,
+          isAutoSsr: this.props.autoSsr
         }
       }, {
         local: require.resolve('../webapp')
