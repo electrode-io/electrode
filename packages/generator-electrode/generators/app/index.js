@@ -13,6 +13,7 @@ var githubUsername = require('github-username');
 
 const ExpressJS = 'ExpressJS';
 const HapiJS = 'HapiJS';
+const KoaJs = 'KoaJs';
 
 module.exports = generators.Base.extend({
   constructor: function () {
@@ -78,7 +79,8 @@ module.exports = generators.Base.extend({
       this.props.authorEmail = this.pkg.author.email;
       this.props.authorUrl = this.pkg.author.url;
       this.props.createDirectory = false;
-      this.props.serverType = this.fs.exists(this.destinationPath('server/express-server.js')) ? ExpressJS : HapiJS;
+      this.props.serverType = this.fs.exists(this.destinationPath('server/express-server.js')) ? ExpressJS :
+                                this.fs.exists(this.destinationPath('server/koa-server.js')) ? koaJS  : HapiJS;
       this.props.pwa = this.fs.exists(this.destinationPath('client/sw-registration.js'));
     } else if (_.isString(this.pkg.author)) {
       var info = parseAuthor(this.pkg.author);
@@ -125,7 +127,7 @@ module.exports = generators.Base.extend({
           name: 'serverType',
           message: 'Which framework for the server?',
           when: !this.props.serverType,
-          choices: [HapiJS, ExpressJS],
+          choices: [HapiJS, ExpressJS, KoaJS],
           default: HapiJS
         },
         {
@@ -212,6 +214,7 @@ module.exports = generators.Base.extend({
 
   writing: function () {
     const isHapi = this.config.get('serverType') === HapiJS;
+    const isExpress = this.config.get('serverType') === ExpressJS;
     const isPWA = this.props.pwa;
 
     // Re-read the content at this point because a composed generator might modify it.
@@ -222,7 +225,7 @@ module.exports = generators.Base.extend({
     this.fs.copyTpl(
       this.templatePath(_pkg),
       this.destinationPath(_pkg),
-      {isHapi, isPWA}
+      {isHapi, isExpress, isPWA}
     );
 
     var defaultPkg = this.fs.readJSON(this.destinationPath(_pkg));
@@ -278,10 +281,11 @@ module.exports = generators.Base.extend({
     this.fs.copyTpl(
       this.templatePath('server'),
       this.destinationPath('server'),
-      {isHapi},
+      {isHapi, isExpress},
       {},
       {
-        globOptions: {ignore: [isHapi ? '**/server/express-server.js' : '']}
+        globOptions: {ignore: [isHapi ? '**/server/express-server.js', '**/server/koa-server.js' :
+          isExpress ? '**/server/koa-server.js' : '**/server/express-server.js']}
       }
     );
 
