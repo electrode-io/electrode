@@ -13,7 +13,7 @@ var githubUsername = require('github-username');
 
 const ExpressJS = 'ExpressJS';
 const HapiJS = 'HapiJS';
-const KoaJs = 'KoaJs';
+const KoaJS = 'KoaJS';
 
 module.exports = generators.Base.extend({
   constructor: function () {
@@ -284,7 +284,7 @@ module.exports = generators.Base.extend({
       {isHapi, isExpress},
       {},
       {
-        globOptions: {ignore: [isHapi ? '**/server/express-server.js', '**/server/koa-server.js' :
+        globOptions: {ignore: [isHapi ? '**/server/express-server.js, **/server/koa-server.js' :
           isExpress ? '**/server/koa-server.js' : '**/server/express-server.js']}
       }
     );

@@ -12,6 +12,6 @@ module.exports = {
   },
   babelRegister: require("babel-register"),
   isomorphicExtendRequire: require("isomorphic-loader/lib/extend-require"),
-  require: require("./require")
+  require: require("./require"),
+  babelPolyfill: require("babel-polyfill")
 };
-
