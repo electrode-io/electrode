@@ -188,24 +188,31 @@ function makeTasks(gulp) {
   const optimizeModuleForProd = (module) => {
     const modulePath = Path.resolve(Path.join("node_modules", module));
     assert(shell.test("-d", modulePath), `${modulePath} is not a directory`);
-    return gulp.src(`${modulePath}/**/*.js`)
-      .pipe(filter(["**", "!**/dist/**"]))
-      .pipe(envify({
-        NODE_ENV: "production"
-      }))
-      .pipe(uglify({
-        compress: {
-          sequences: false,
-          dead_code: true,
-          drop_debugger: true
-        },
-        output: {
-          beautify: false,
-          comments: false,
-          bracketize: true
-        }
-      }))
-      .pipe(gulp.dest(`.prod/${module}`));
+    const prodPath = Path.join(".prod", module);
+    return new Promise((resolve, reject) =>
+      gulp.src(`${modulePath}/**/*.js`)
+        .pipe(filter(["**", "!**/dist/**"]))
+        .pipe(envify({
+          NODE_ENV: "production"
+        }))
+        .pipe(uglify({
+          compress: {
+            sequences: false,
+            dead_code: true,
+            drop_debugger: true
+          },
+          output: {
+            beautify: false,
+            comments: false,
+            bracketize: true
+          }
+        }))
+        .pipe(gulp.dest(prodPath))
+        .on("error", reject)
+        .on("end", resolve))
+      .then(() => {
+        shell.cp(Path.join(modulePath, "package.json"), Path.join(prodPath, "package.json"));
+      });
   };
 
   return {
