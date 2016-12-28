@@ -21,7 +21,7 @@ module.exports = {
     },<%if(pwa){%>
     "./server/plugins/pwa": {},<%}%>
     "webapp": {
-      "module": <%if(serverType==="HapiJS"){%>"electrode-react-webapp/lib/hapi"<%}else{%>"electrode-react-webapp/lib/express"<%}%>,
+      "module": <%if(serverType==="HapiJS"){%>"electrode-react-webapp/lib/hapi"<%}else if (serverType==="ExpressJS"){%>"electrode-react-webapp/lib/express"<%} else {%>"electrode-react-webapp/lib/koa"<%}%>,
       "options": {
         "pageTitle": "<%= projectName %>",
         "paths": {
