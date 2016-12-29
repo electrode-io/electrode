@@ -6,6 +6,7 @@ import SSRCachingSimpleType from "./components/ssr-caching-simple-type";
 import {CSRF} from "./components/csrf";
 import AboveFold from "./components/above-the-fold";
 import PushNotifications from "./components/push-notifications";
+import TodoApp from "./components/todo-app";
 
 export const routes = (
   <Route path="/">
@@ -15,5 +16,6 @@ export const routes = (
     <Route path="csrf" component={CSRF}/>
     <Route path="above-the-fold" component={AboveFold}/>
     <Route path="push-notifications" component={PushNotifications}/>
+    <Route path="todo-app" component={TodoApp}/>
   </Route>
 );

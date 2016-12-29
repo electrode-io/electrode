@@ -8,6 +8,10 @@ import rootReducer from "../../client/reducers";
 
 function storeInitializer(req) {
     let initialState;
+    let todo = {
+      id:1,
+      text: "hi"
+    };
     if(req.path === "/") {
       initialState = {
         data: "This data is obtained from Redux store"
@@ -23,6 +27,11 @@ function storeInitializer(req) {
     } else if (req.path === "/above-the-fold") {
       initialState = {
         skip: req.query.skip === "true"
+      }
+    } else if (req.path === "todo-app"){
+      initialState = {
+        todos: todo,
+        visibilityFilter: "SHOW_ALL"
       }
     } else {
       initialState = {};
