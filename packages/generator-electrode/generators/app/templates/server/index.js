@@ -56,5 +56,5 @@ supports.cssModuleHook({
 });
 
 supports.isomorphicExtendRequire().then(() => {
-  require<% if (isHapi) { %>("electrode-server")(config, [staticPathsDecor()])<% } else { %>("./express-server")(config)<% } %>;  // eslint-disable-line
+  require<% if (isHapi) { %>("electrode-server")(config, [staticPathsDecor()])<% } else if (isExpress){ %>("./express-server")(config)<% } else { %>("./koa-server")(config)<% } %>;  // eslint-disable-line
 });

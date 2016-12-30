@@ -13,6 +13,6 @@ module.exports = {
   babelRegister: require("babel-register"),
   isomorphicExtendRequire: require("isomorphic-loader/lib/extend-require"),
   require: require("./require"),
+  babelPolyfill: require("babel-polyfill"),
   optimizeModulesForProduction: require("./scripts/optimize-modules-for-production")
 };
-
