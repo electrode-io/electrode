@@ -12,14 +12,14 @@ body {
   background-color: #cccccc;
 }
 
-@font-face {
+/*@font-face {
     font-family: Gotham-Rounded;
     src: url("./fonts/Gotham-Rounded-Light.ttf");
 }
 @font-face {
     font-family: Gotham-Rounded-Book;
     src: url("./fonts/Gotham-Rounded-Book.ttf");
-}
+}*/
 .navbar { 
   width: 100%;
   background-color: #00294b;
@@ -33,6 +33,7 @@ body {
   display: inline-block;
   width: 100px;
   border-top: 7px solid #00294b;
+  text-decoration: none;
 }
 
 .navbarItemSelected {
@@ -40,6 +41,7 @@ body {
   display: inline-block;
   width: 100px;
   border-top: 7px solid white;
+  text-decoration: none;
 }
 
 .navbarItem h2 {
@@ -47,7 +49,17 @@ body {
   font-family: sans-serif;
   font-size: 20px;
   font-weight: 500;
-  font-family: Gotham-Rounded;
+  margin-left: 25%;
+  /*font-family: Gotham-Rounded;*/
+}
+
+.navbarItemSelected h2 {
+  color: white;
+  font-family: sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  margin-left: 25%;
+  /*font-family: Gotham-Rounded;*/
 }
 
 .electrodeLogo {
