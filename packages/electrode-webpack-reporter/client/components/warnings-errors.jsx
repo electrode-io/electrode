@@ -1,69 +1,127 @@
 /*eslint-disable react/prop-types*/
 import React, {PropTypes} from "react";
 import {Card, CardHeader, CardText} from "material-ui/Card";
-import CodeExpandButton from "./code-expand-button";
-import {warningsErrorsStyles as styles} from "../styles/inline-styles";
+import {warningsErrorsStyles as inlineStyles} from "../styles/inline-styles";
+import styles from "../styles/base.css";
+import classNames from "classnames/bind";
+import RaisedButton from "material-ui/RaisedButton";
+const cx = classNames.bind(styles);
 
-const WarningsErrors = (props) => {
-  const createWarningsErrorsCard = () => {
+class WarningsErrors extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {codeExpanded: false};
+  }
+
+  createWarningsErrorsCard() {
+    const hasWarnings = this.props.warnings.length > 0;
+    const hasErrors = this.props.errors.length > 0;
+    const warningErrorMessage = hasWarnings ? "Warning" : "Error";
     return (
-      <div style={styles().container}>
-        <div style={styles().title}>
-          <i style={styles().icon} className="material-icons md-36">warning</i>
-          <h2 style={styles().titleText}>
-            Warnings and Errors!
+      <div className={styles.warningsErrorsContainer}>
+        <div className={cx({
+          warningTitle: hasWarnings,
+          errorTitle: hasErrors
+        })}>
+        <div className={cx([
+          {iconContainer: true,
+            errorIconContainer: hasErrors,
+            warningIconContainer: hasWarnings}
+        ])}>
+          <i
+            className={cx([
+              {warningErrorIcon: true},
+              "material-icons",
+              "md-36",
+              "md-light"
+            ])}>warning</i>
+        </div>
+          <h2 className={styles.warningErrorText}>
+            {warningErrorMessage}
           </h2>
         </div>
-        {props.errors.map((e) => {
+
+        {this.props.errors.map((e) => {
           const errorHasExpandableCode = e.indexOf(")") > 0;
           const errorTitle = errorHasExpandableCode ? e.slice(0, e.indexOf(")") + 1) : e;
           if (errorHasExpandableCode) {
             return (<div>
                 <Card>
-                  <CardHeader actAsExpander={true} style={styles().errorContainer}>
-                    <pre style={styles().error}>
+                  <CardHeader
+                    actAsExpander={true}
+                    style={inlineStyles().errorContainer}
+                    onClick={() => this.setState({
+                      codeExpanded: !this.state.codeExpanded
+                    })}>
+                    <pre style={inlineStyles().error}>
                       {errorTitle}
                     </pre>
-                    <CodeExpandButton />
+                    <RaisedButton
+                      onClick={() => this.setState({codeExpanded: !this.state.codeExpanded})}
+                      label={this.state.codeExpanded ? "Hide" : "View code"}
+                      style={inlineStyles().expandCodeButton}
+                      backgroundColor="white"
+                      labelColor="black"
+                      expander={true} />
                   </CardHeader>
-                  <CardText expandable={true}>
-                    <pre
-                      dangerouslySetInnerHTML={{__html: e.slice(e.indexOf("<span"), e.length)}}
-                    />
+                  <CardText expandable={true} style={{backgroundColor: "black"}}>
+                    <pre dangerouslySetInnerHTML={{__html: e.slice(e.indexOf("<span"), e.length)}}/>
                   </CardText>
                 </Card>
               </div>);
           } else {
             return (<div>
               <Card>
-                <CardHeader style={styles().errorContainer}>
-                  <pre style={styles().error}>
+                <CardHeader style={inlineStyles().errorContainer}>
+                  <pre style={inlineStyles().error}>
                     {errorTitle}
                   </pre>
                 </CardHeader>
               </Card>
             </div>);
           }
-        }
-      )}
-      </div>
-    );
-  };
+        })}
+      </div>);
+  }
 
-  const createEmptyWarningsErrorsCard = () => {
-    return (<h2>No warnings or errors</h2>);
-  };
+  createEmptyWarningsErrorsCard() {
+    return (
+      <div className={styles.warningsErrorsContainer}>
+        <div className={cx({
+          warningErrorCardTitle: true,
+          successTitle: true
+        })}>
+          <div className={cx([
+            {iconContainer: true},
+            {successIconContainer: true}
+          ])}>
+            <i
+              className={cx([
+                {successIcon: true},
+                {warningErrorIcon: true},
+                "material-icons",
+                "md-36",
+                "md-light"
+              ])}>
+              check_circle
+            </i>
+          </div>
+          <h2 className={styles.warningErrorText}>
+            Webpack build complete - No Warnings or Errors!
+          </h2>
+        </div>
+      </div>);
+  }
 
-  return (
-    props.errors.length > 0 || props.warnings.length > 0 ?
-    createWarningsErrorsCard() : createEmptyWarningsErrorsCard()
-  );
-};
+  render() {
+    return (this.props.errors.length > 0 || this.props.warnings.length > 0 ?
+      this.createWarningsErrorsCard() : this.createEmptyWarningsErrorsCard());
+  }
+}
 
 WarningsErrors.propTypes = {
   warnings: PropTypes.array,
   errors: PropTypes.array
 };
-
 
 export default WarningsErrors;

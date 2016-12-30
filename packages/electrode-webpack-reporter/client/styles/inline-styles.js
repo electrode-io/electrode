@@ -20,10 +20,7 @@ export const warningsErrorsStyles = () => {
       padding: 10
     },
     errorContainer: {
-      paddingLeft: 15,
-      paddingBottom: 0,
-      paddingTop: 0,
-      paddingRight: 0
+      paddingBottom: 10
     },
     error: {
       marginBottom: 10,
@@ -35,6 +32,23 @@ export const warningsErrorsStyles = () => {
       float: "right",
       marginRight: 30,
       marginTop: 10
+    }
+  };
+};
+
+export const homeStyles = () => {
+  return {
+    inkbar: {
+      marginBottom: 30
+    },
+    tabItem: {
+      width: 300,
+      backgroundColor: "grey"
+    },
+    legacy: {
+      background: "black",
+      color: "gray",
+      padding: "10px"
     }
   };
 };
