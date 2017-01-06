@@ -1,6 +1,6 @@
 {
-  "name": "electrode-archetype-react-app-sync-internal-jmcriffey",
-  "version": "0.0.1",
+  "name": "electrode-archetype-react-app",
+  "version": "1.6.0",
   "description": "Electrode NodeJS/React Universal Application Archetype",
   "main": "arch-gulpfile.js",
   "repository": {

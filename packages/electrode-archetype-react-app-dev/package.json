@@ -1,6 +1,6 @@
 {
-  "name": "electrode-archetype-react-app-dev-sync-internal-jmcriffey",
-  "version": "0.0.1",
+  "name": "electrode-archetype-react-app-dev",
+  "version": "1.6.0",
   "description": "Electrode NodeJS/React Application Archetype (Development)",
   "repository": {
     "type": "git",
