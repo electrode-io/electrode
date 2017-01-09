@@ -1,0 +1,8 @@
+{
+  "todos": [
+    { "id":2,
+      "text": "Item from Storage",
+      "completed": false
+    }
+  ]
+}

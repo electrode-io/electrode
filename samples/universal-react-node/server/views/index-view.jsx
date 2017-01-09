@@ -1,5 +1,7 @@
 import ReduxRouterEngine from 'electrode-redux-router-engine';
 import React from 'react';
+const fs = require('fs');
+var path = require('path');
 
 import { routes } from "../../client/routes";
 const Promise = require("bluebird");
@@ -45,8 +47,18 @@ function createReduxStore(req, match) {
   const store = storeInitializer(req);
   return Promise.all([
       // DO ASYNC THUNK ACTIONS HERE : store.dispatch(boostrapApp())
-      Promise.resolve({})
-    ]).then(() => {
+      Promise.resolve({}),
+      new Promise((resolve, reject) => {
+        fs.readFile(path.join(process.cwd(),"/server/storage.json") , (err, data)=> {
+          if(err) {
+            reject(err);
+          } else {
+            resolve(JSON.parse(data));
+          }
+        });
+      })
+    ]).then(([resulta, resultb]) => {
+      store.items = resultb;
       return store;
   });
 }
