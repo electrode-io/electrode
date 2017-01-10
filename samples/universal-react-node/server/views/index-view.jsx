@@ -8,7 +8,7 @@ const Promise = require("bluebird");
 import { createStore } from "redux";
 import rootReducer from "../../client/reducers";
 
-function storeInitializer(req) {
+function storeInitializer(req, items) {
     let initialState;
     let todo = [{
       id:1,
@@ -40,11 +40,11 @@ function storeInitializer(req) {
       initialState = {};
     }
 
+    initialState.items = items;
     return createStore(rootReducer, initialState);
 }
 
 function createReduxStore(req, match) {
-  const store = storeInitializer(req);
   return Promise.all([
       // DO ASYNC THUNK ACTIONS HERE : store.dispatch(boostrapApp())
       Promise.resolve({}),
@@ -58,7 +58,7 @@ function createReduxStore(req, match) {
         });
       })
     ]).then(([resulta, resultb]) => {
-      store.items = resultb;
+      const store = storeInitializer(req, resultb);
       return store;
   });
 }

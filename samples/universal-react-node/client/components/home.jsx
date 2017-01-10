@@ -6,7 +6,7 @@ import Notifications from "react-notify-toast";
 class HomeWrapper extends React.Component {
   render() {
     return (
-      <Home data={this.props.data}/>
+      <Home data={this.props.data} items={this.props.items}/>
     );
   }
 }
@@ -50,18 +50,24 @@ export class Home extends React.Component {
           <li><a href="/todo-app">Todo List Example</a></li>
         </ul>
         <p>{this.props.data}</p>
+        <p>List</p>
+        <p>{this.props.items}</p>
       </div>
     );
   }
 }
 
 Home.propTypes = {
-  data: PropTypes.string
+  data: PropTypes.string,
+  items: PropTypes.string
 };
 
-const mapStateToProps = (state) => ({
-  data: state && state.data
-});
+const mapStateToProps = (state) => {
+  return {
+    data: state && state.defaultReducer && state.defaultReducer.data,
+    items: state && state.defaultReducer.items && state.defaultReducer.items.todos[0].text
+  }
+};
 
 export default connect(
   mapStateToProps
