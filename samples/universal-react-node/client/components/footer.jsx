@@ -2,6 +2,7 @@ import React from "react";
 import FilterLink from "../containers/filter-link";
 
 const Footer = () => (
+  <div>
   <p>
     Show:
     {" "}
@@ -17,6 +18,10 @@ const Footer = () => (
       Completed
     </FilterLink>
   </p>
+  <a href="/">
+    Home
+  </a>
+</div>
 );
 
 export default Footer;
