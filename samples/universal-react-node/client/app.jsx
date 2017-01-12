@@ -8,7 +8,7 @@ import {notify} from "react-notify-toast";
 import "styles/base.css";
 import rootReducer from "./reducers";
 import DevTools from "../client/devtools";
-import updateStorage from "./middleware"
+import updateStorage from "./middleware";
 
 require.ensure(["./sw-registration"], (require) => {
   require("./sw-registration")(notify);

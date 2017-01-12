@@ -3,22 +3,23 @@
 const plugin = {};
 const fs = require("fs");
 const path = require("path");
+const HTTP_CREATED = 201;
 
 plugin.register = function (server, options, next) {
   server.route({
     method: "POST",
     path: "/updateStorage",
-    handler: function(request, reply) {
-        fs.writeFile(path.join(process.cwd(),"/server/storage.json"),
-          JSON.stringify(request.payload),
-          'utf-8',
-          (err) => {
-            if (err) throw err;
-          }
-        );
-        reply('created').code(201);
+    handler: (request, reply) => {
+      fs.writeFile(path.join(process.cwd(), "/server/storage.json"),
+        JSON.stringify(request.payload),
+        "utf-8",
+        (err) => {
+          if (err) { throw err; }
+        }
+      );
+      reply("created").code(HTTP_CREATED);
     }
-  })
+  });
   next();
 };
 
