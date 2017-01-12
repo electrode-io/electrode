@@ -1,14 +1,9 @@
 {
   "plugins": {
-    "electrode-csrf-jwt": {
-      "options": {
-        "secret": "shhhhhh",
-        "expiresIn": 60
-      }
-    },
     "./server/plugins/csrf": {},
     "./server/plugins/pwa": {},
     "./server/plugins/autossr": {},
+    "./server/plugins/updateStorage": {},
     "webapp": {
       "module": "electrode-react-webapp/lib/hapi",
       "options": {
