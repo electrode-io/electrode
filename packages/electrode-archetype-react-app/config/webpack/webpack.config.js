@@ -1,7 +1,8 @@
 "use strict";
 
 var _ = require("lodash");
-var mergeWebpackConfig = require("webpack-partial").default;
+var archetype = require("../archetype");
+var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
 var WebpackConfig = require("webpack-config").default;
 var getRootConfig = require("./get-root-config");
 var addDllReferences = require("./add-dll-references");
