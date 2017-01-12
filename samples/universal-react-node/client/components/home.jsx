@@ -59,11 +59,9 @@ Home.propTypes = {
   data: PropTypes.string
 };
 
-const mapStateToProps = (state) => {
-  return {
-    data: state && state.data
-  }
-};
+const mapStateToProps = (state) => ({
+  data: state && state.data
+});
 
 export default connect(
   mapStateToProps
