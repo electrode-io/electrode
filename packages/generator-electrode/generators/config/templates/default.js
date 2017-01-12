@@ -19,9 +19,10 @@ module.exports = {
         "pathPrefix": "dist"
       }
     },<%if(pwa){%>
-    "./server/plugins/pwa": {},<%}%>
+    "./server/plugins/pwa": {},<%} if(isAutoSsr){%>
+    "electrode-auto-ssr": {}, <%}%>
     "webapp": {
-      "module": <%if(serverType==="HapiJS"){%>"electrode-react-webapp/lib/hapi"<%}else{%>"electrode-react-webapp/lib/express"<%}%>,
+      "module": <%if(serverType==="HapiJS"){%>"electrode-react-webapp/lib/hapi"<%}else if (serverType==="ExpressJS"){%>"electrode-react-webapp/lib/express"<%} else {%>"electrode-react-webapp/lib/koa"<%}%>,
       "options": {
         "pageTitle": "<%= projectName %>",
         "paths": {

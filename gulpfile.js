@@ -14,13 +14,10 @@ if (!process.env.PACKAGES_DIR) {
 }
 
 const runAppTest = (dir, forceLocal) => {
-  const localPkgs = ["electrode-archetype-react-app", "electrode-react-webapp", "electrode-redux-router-engine"];
+  const localPkgs = ["electrode-archetype-react-app", "electrode-react-webapp", "electrode-redux-router-engine", "electrode-auto-ssr"];
   const localDevPkgs = ["electrode-archetype-react-app-dev"];
-  const appPkgFile = `${dir}/package.json`;
-  const appPkg = JSON.parse(fs.readFileSync(appPkgFile).toString());
 
-  function updateToLocalPkgs(pkgs, section) {
-    const pkgSection = appPkg[section];
+  const updateToLocalPkgs = (pkgSection, pkgs) => {
     if (pkgSection) {
       pkgs.forEach((pkg) => {
         if (pkgSection[pkg]) {
@@ -28,20 +25,33 @@ const runAppTest = (dir, forceLocal) => {
         }
       });
     }
-  }
+  };
+
+  const appPkgFile = `${dir}/package.json`;
+  let appPkgData;
 
   if (forceLocal || process.env.BUILD_TEST) {
-    updateToLocalPkgs(localPkgs, "dependencies");
-    updateToLocalPkgs(localDevPkgs, "devDependencies");
+    appPkgData = fs.readFileSync(appPkgFile).toString();
+    const appPkg = JSON.parse(appPkgData);
+    updateToLocalPkgs(appPkg["dependencies"], localPkgs);
+    updateToLocalPkgs(appPkg["devDependencies"], localDevPkgs);
+    fs.writeFileSync(appPkgFile, `${JSON.stringify(appPkg, null, 2)}\n`);
   }
 
-  fs.writeFileSync(appPkgFile, `${JSON.stringify(appPkg, null, 2)}\n`);
   shell.pushd(dir);
+
+  const restore = () => {
+    shell.popd();
+    if (appPkgData) {
+      fs.writeFileSync(appPkgFile, appPkgData);
+    }
+  };
+
   return exec(`npm i`)
     .then(() => exec(`npm test`))
-    .then(() => shell.popd())
+    .then(restore)
     .catch((err) => {
-      shell.popd();
+      restore();
       throw err;
     });
 };
@@ -58,6 +68,7 @@ const testGenerator = (testDir, clean, prompts) => {
     authorUrl: "http://www.test.com",
     keywords: ["test", "electrode"],
     pwa: true,
+    autoSsr: true,
     createDirectory: true,
     githubAccount: "test",
     license: "Apache-2.0"

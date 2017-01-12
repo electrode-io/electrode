@@ -1,15 +1,15 @@
 {
   "name": "electrode-archetype-react-app-dev",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Electrode NodeJS/React Application Archetype (Development)",
+  "homepage": "http://www.electrode.io",
   "repository": {
     "type": "git",
-    "url": "https://github.com/electrode-io/electrode-archetype-react-app.git"
+    "url": "https://github.com/electrode-io/electrode.git"
   },
   "bugs": {
-    "url": "https://github.com/electrode-io/electrode-archetype-react-app/issues"
+    "url": "https://github.com/electrode-io/electrode/issues"
   },
-  "homepage": "https://github.com/electrode-io/electrode-archetype-react-app",
   "license": "Apache-2.0",
   "scripts": {},
   "dependencies": {
@@ -36,6 +36,9 @@
     "fs-extra": "^0.26.5",
     "glob": "^7.0.6",
     "gulp": "^3.9.1",
+    "gulp-envify": "^1.0.0",
+    "gulp-filter": "^4.0.0",
+    "gulp-uglify": "^2.0.0",
     "isomorphic-loader": "^1.0.0",
     "isparta-loader": "^2.0.0",
     "istanbul": "^0.3.18",

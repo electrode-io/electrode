@@ -13,6 +13,7 @@ var githubUsername = require('github-username');
 
 const ExpressJS = 'ExpressJS';
 const HapiJS = 'HapiJS';
+const KoaJS = 'KoaJS';
 
 module.exports = generators.Base.extend({
   constructor: function () {
@@ -78,8 +79,10 @@ module.exports = generators.Base.extend({
       this.props.authorEmail = this.pkg.author.email;
       this.props.authorUrl = this.pkg.author.url;
       this.props.createDirectory = false;
-      this.props.serverType = this.fs.exists(this.destinationPath('server/express-server.js')) ? ExpressJS : HapiJS;
-      this.props.pwa = this.fs.exists(this.destinationPath('client/sw-register.js'));
+      this.props.serverType = this.fs.exists(this.destinationPath('server/express-server.js')) ? ExpressJS :
+                                this.fs.exists(this.destinationPath('server/koa-server.js')) ? koaJS  : HapiJS;
+      this.props.pwa = this.fs.exists(this.destinationPath('client/sw-registration.js'));
+      this.props.autoSsr = this.fs.exists(this.destinationPath('server/plugins/autossr.js'));
     } else if (_.isString(this.pkg.author)) {
       var info = parseAuthor(this.pkg.author);
       this.props.authorName = info.name;
@@ -125,7 +128,7 @@ module.exports = generators.Base.extend({
           name: 'serverType',
           message: 'Which framework for the server?',
           when: !this.props.serverType,
-          choices: [HapiJS, ExpressJS],
+          choices: [HapiJS, ExpressJS, KoaJS],
           default: HapiJS
         },
         {
@@ -165,7 +168,14 @@ module.exports = generators.Base.extend({
           name: "pwa",
           message: "Would you like to make a Progressive Web App?",
           when: this.props.pwa === undefined,
-          default: true
+          default: false
+        },
+        {
+          type: "confirm",
+          name: "autoSsr",
+          message: "Disable server side rendering based on high load?",
+          when: this.props.autoSsr === undefined,
+          default: false
         },
         {
           type: "confirm",
@@ -212,7 +222,9 @@ module.exports = generators.Base.extend({
 
   writing: function () {
     const isHapi = this.config.get('serverType') === HapiJS;
+    const isExpress = this.config.get('serverType') === ExpressJS;
     const isPWA = this.props.pwa;
+    const isAutoSSR = this.props.autoSsr;
 
     // Re-read the content at this point because a composed generator might modify it.
     var currentPkg = this.fs.readJSON(this.destinationPath('package.json'), {});
@@ -222,7 +234,7 @@ module.exports = generators.Base.extend({
     this.fs.copyTpl(
       this.templatePath(_pkg),
       this.destinationPath(_pkg),
-      {isHapi, isPWA}
+      {isHapi, isExpress, isPWA, isAutoSSR}
     );
 
     var defaultPkg = this.fs.readJSON(this.destinationPath(_pkg));
@@ -278,10 +290,11 @@ module.exports = generators.Base.extend({
     this.fs.copyTpl(
       this.templatePath('server'),
       this.destinationPath('server'),
-      {isHapi},
+      {isHapi, isExpress},
       {},
       {
-        globOptions: {ignore: [isHapi ? '**/server/express-server.js' : '']}
+        globOptions: {ignore: [isHapi ? '**/server/express-server.js, **/server/koa-server.js' :
+          isExpress ? '**/server/koa-server.js' : '**/server/express-server.js']}
       }
     );
 
@@ -293,7 +306,7 @@ module.exports = generators.Base.extend({
       { // copy options
         globOptions: {
           // Images are damaged by the template compiler
-          ignore: ['**/client/images/**', !isPWA && '**/client/sw-register.js' || '']
+          ignore: ['**/client/images/**', !isPWA && '**/client/sw-registration.js' || '']
         }
       }
     );
@@ -356,7 +369,8 @@ module.exports = generators.Base.extend({
         options: {
           name: this.props.name,
           pwa: this.props.pwa,
-          serverType: this.props.serverType
+          serverType: this.props.serverType,
+          isAutoSsr: this.props.autoSsr
         }
       }, {
         local: require.resolve('../config')
@@ -366,7 +380,8 @@ module.exports = generators.Base.extend({
     if (!this.fs.exists(this.destinationPath('server/plugins/webapp'))) {
       this.composeWith('electrode:webapp', {
         options: {
-          pwa: this.props.pwa
+          pwa: this.props.pwa,
+          isAutoSsr: this.props.autoSsr
         }
       }, {
         local: require.resolve('../webapp')

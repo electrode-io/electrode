@@ -1,6 +1,6 @@
 # electrode-react-sample-material-ui
 
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+[![Dependency Status][daviddm-image]][daviddm-url] [![devDependency Status][daviddm-dev-image]][daviddm-dev-url]
 
 > Electrode Universal React Sample App with [material-ui] components
 
@@ -90,7 +90,7 @@ import injectTapEventPlugin from "react-tap-event-plugin";
 
 window.webappStart = () => {
   injectTapEventPlugin(); // https://github.com/callemall/material-ui/issues/4670
-  
+
 };
 ```
 
@@ -163,13 +163,10 @@ Electrode core comes with isomorphic images support built in using [isomorphic-l
 
 Apache-2.0 © [Joel Chen](https://github.com/jchip)
 
-
-[npm-image]: https://badge.fury.io/js/electrode-react-sample-material-ui.svg
-[npm-url]: https://npmjs.org/package/electrode-react-sample-material-ui
-[travis-image]: https://travis-ci.org/jchip/electrode-react-sample-material-ui.svg?branch=master
-[travis-url]: https://travis-ci.org/jchip/electrode-react-sample-material-ui
-[daviddm-image]: https://david-dm.org/jchip/electrode-react-sample-material-ui.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/jchip/electrode-react-sample-material-ui
+[daviddm-image]: https://david-dm.org/electrode-io/electrode/status.svg?path=samples/universal-material-ui
+[daviddm-url]: https://david-dm.org/electrode-io/electrode?path=samples/universal-material-ui
+[daviddm-dev-image]:https://david-dm.org/electrode-io/electrode/dev-status.svg?path=samples/universal-material-ui
+[daviddm-dev-url]:https://david-dm.org/electrode-io/electrode?path=samples/universal-material-ui?type-dev
 [material-ui]: http://www.material-ui.com/
 [RaisedButton]: http://www.material-ui.com/#/components/raised-button
 [webpack-dev-server]: https://webpack.github.io/docs/webpack-dev-server.html

@@ -10,7 +10,7 @@
     "./server/plugins/pwa": {},
     "./server/plugins/autossr": {},
     "webapp": {
-      "module": "electrode-react-webapp",
+      "module": "electrode-react-webapp/lib/hapi",
       "options": {
         "pageTitle": "Electrode Boilerplate Universal React App",
         "paths": {
