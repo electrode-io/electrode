@@ -23,6 +23,7 @@
     "css-loader": "^0.23.1",
     "css-split-webpack-plugin": "^0.2.0",
     "electrode-bundle-analyzer": "^1.0.0",
+    "electrode-cdn-file-loader": "^1.0.0",
     "electrode-electrify": "^1.0.0",
     "electrode-gulp-helper": "^1.0.5",
     "electrode-webpack-reporter": "^0.2.4",
