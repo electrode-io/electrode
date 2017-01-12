@@ -52,14 +52,14 @@ module.exports = function () {
     var loaders = [{
       name: "extract-css",
       test: /\.css$/,
-      loader: ExtractTextPlugin.extract(styleLoader, cssQuery)
+      loader: ExtractTextPlugin.extract(styleLoader, cssQuery, {publicPath: ""})
     }];
 
     if (!cssModuleSupport) {
       loaders.push({
         name: "extract-stylus",
         test: /\.styl$/,
-        loader: ExtractTextPlugin.extract(styleLoader, stylusQuery)
+        loader: ExtractTextPlugin.extract(styleLoader, stylusQuery, {publicPath: "" })
       });
     }
 
