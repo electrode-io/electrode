@@ -1,8 +1,12 @@
 const todo = (state = {}, action) => {
+  let currentId;
+  if (state.length > 0) {
+    currentId = state[state.length -1].id;
+  }
   switch (action.type) {
     case 'ADD_TODO':
       return {
-        id: action.id,
+        id: ++currentId || action.id,
         text: action.text,
         completed: false
       }
@@ -25,7 +29,7 @@ const todos = (state = [], action) => {
     case 'ADD_TODO':
       return [
         ...state,
-        todo(undefined, action)
+        todo(state, action)
       ]
     case 'TOGGLE_TODO':
       return state.map(t =>

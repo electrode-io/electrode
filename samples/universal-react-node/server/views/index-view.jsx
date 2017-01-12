@@ -10,11 +10,6 @@ import rootReducer from "../../client/reducers";
 
 function storeInitializer(req, items) {
     let initialState;
-    let todo = [{
-      id:1,
-      text: "Item 1",
-      completed: false
-    }];
     if(req.path === "/") {
       initialState = {
         data: "This data is obtained from Redux store"
@@ -32,15 +27,13 @@ function storeInitializer(req, items) {
         skip: req.query.skip === "true"
       };
     } else if (req.path === "/todo-app"){
-      initialState = {
-        todos: todo,
-        visibilityFilter: "SHOW_ALL"
-      };
+      if(items){
+        initialState = items;
+      }
     } else {
       initialState = {};
     }
 
-    initialState.items = items;
     return createStore(rootReducer, initialState);
 }
 
@@ -52,8 +45,10 @@ function createReduxStore(req, match) {
         fs.readFile(path.join(process.cwd(),"/server/storage.json") , (err, data)=> {
           if(err) {
             reject(err);
-          } else {
+          } else if(data.length > 0){
             resolve(JSON.parse(data));
+          } else {
+            resolve({});
           }
         });
       })
