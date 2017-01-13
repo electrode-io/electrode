@@ -1,5 +1,6 @@
-require('es6-promise').polyfill();
-require('isomorphic-fetch');
+require("es6-promise").polyfill();
+require("isomorphic-fetch");
+const HTTP_BAD_REQUEST = 400;
 
 const updateStorage = (store) => (next) => (action) => {
   const result = next(action);
@@ -13,12 +14,12 @@ const updateStorage = (store) => (next) => (action) => {
     },
     body: JSON.stringify(completeState)
   })
-  .then( function(response) {
-    if (response.status >= 400) {
+  .then((response) => {
+    if (response.status >= HTTP_BAD_REQUEST) {
       throw new Error("Bad response from server");
     }
     return result;
-  })
+  });
 };
 
 export default updateStorage;
