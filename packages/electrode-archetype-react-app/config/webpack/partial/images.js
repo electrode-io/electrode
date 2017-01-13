@@ -3,7 +3,8 @@
 var archetype = require("../../archetype");
 var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
 var fileLoader = archetype.devRequire.resolve("file-loader");
-var isomorphicLoader = require.resolve("isomorphic-loader");
+var isomorphicLoader = archetype.devRequire.resolve("isomorphic-loader");
+var cdnLoader = archetype.devRequire.resolve('electrode-cdn-file-loader');
 
 module.exports = function () {
   return function (config) {
@@ -12,7 +13,7 @@ module.exports = function () {
         loaders: [{
           name: "images",
           test: /\.(jpe?g|png|gif|svg)(\?\S*)?$/i,
-          loader: fileLoader + "?limit=10000!" + isomorphicLoader
+          loader: cdnLoader + "?limit=10000!" + isomorphicLoader
         }]
       }
     });

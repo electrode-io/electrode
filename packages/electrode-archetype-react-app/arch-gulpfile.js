@@ -7,8 +7,8 @@ const gulpHelper = archetype.devRequire("electrode-gulp-helper");
 const shell = gulpHelper.shell;
 const mkdirp = archetype.devRequire("mkdirp");
 const config = archetype.config;
-const penthouse = require("penthouse");
-const CleanCSS = require('clean-css');
+const penthouse = archetype.devRequire("penthouse");
+const CleanCSS = archetype.devRequire('clean-css');
 
 
 const envify = archetype.devRequire("gulp-envify");

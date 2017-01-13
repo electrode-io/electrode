@@ -6,6 +6,7 @@ var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
 
 var glob = archetype.devRequire("glob");
 var ExtractTextPlugin = archetype.devRequire("extract-text-webpack-plugin");
+var CSSSplitPlugin = archetype.devRequire("css-split-webpack-plugin").default;
 var atImport = archetype.devRequire("postcss-import");
 var cssnext = archetype.devRequire("postcss-cssnext");
 
@@ -51,14 +52,14 @@ module.exports = function () {
     var loaders = [{
       name: "extract-css",
       test: /\.css$/,
-      loader: ExtractTextPlugin.extract(styleLoader, cssQuery)
+      loader: ExtractTextPlugin.extract(styleLoader, cssQuery, {publicPath: ""})
     }];
 
     if (!cssModuleSupport) {
       loaders.push({
         name: "extract-stylus",
         test: /\.styl$/,
-        loader: ExtractTextPlugin.extract(styleLoader, stylusQuery)
+        loader: ExtractTextPlugin.extract(styleLoader, stylusQuery, {publicPath: "" })
       });
     }
 
@@ -79,7 +80,16 @@ module.exports = function () {
         }
       },
       plugins: [
-        new ExtractTextPlugin("style.[hash].css")
+        new ExtractTextPlugin(config.__wmlMultiBundle
+          ? "[name].style.[hash].css"
+          : "style.[hash].css"),
+
+        /*
+        preserve: default: false. Keep the original unsplit file as well.
+        Sometimes this is desirable if you want to target a specific browser (IE)
+        with the split files and then serve the unsplit ones to everyone else.
+         */
+        new CSSSplitPlugin({size: 4000, imports: true, preserve: true})
       ]
     });
   };
