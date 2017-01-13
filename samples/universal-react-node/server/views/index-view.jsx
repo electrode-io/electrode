@@ -46,7 +46,11 @@ function createReduxStore(req, match) {
           if(err) {
             reject(err);
           } else if(data.length > 0){
-            resolve(JSON.parse(data));
+            try {
+              resolve(JSON.parse(data));
+            } catch (e) {
+              resolve({});
+            }
           } else {
             resolve({});
           }

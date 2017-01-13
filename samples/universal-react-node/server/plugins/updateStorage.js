@@ -4,6 +4,7 @@ const plugin = {};
 const fs = require("fs");
 const path = require("path");
 const HTTP_CREATED = 201;
+const HTTP_ISE = 500;
 
 plugin.register = function (server, options, next) {
   server.route({
@@ -14,10 +15,13 @@ plugin.register = function (server, options, next) {
         JSON.stringify(request.payload),
         "utf-8",
         (err) => {
-          if (err) { throw err; }
+          if (err) {
+            reply("Write Error").code(HTTP_ISE);
+          } else {
+            reply("created").code(HTTP_CREATED);
+          }
         }
       );
-      reply("created").code(HTTP_CREATED);
     }
   });
   next();
