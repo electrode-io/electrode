@@ -45,16 +45,14 @@ function createReduxStore(req, match) {
         fs.readFile(path.join(process.cwd(),"/server/storage.json") , (err, data)=> {
           if(err) {
             reject(err);
-          } else if(data.length > 0){
-            try {
-              resolve(JSON.parse(data));
-            } catch (e) {
-              resolve({});
-            }
           } else {
-            resolve({});
+            resolve(data);
           }
-        });
+        })
+      })
+      .then(JSON.parse)
+      .catch(() => {
+        return {};
       })
     ]).then(([resulta, resultb]) => {
       const store = storeInitializer(req, resultb);
