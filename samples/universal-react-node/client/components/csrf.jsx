@@ -1,5 +1,5 @@
 import React from "react";
-
+const HTTP_OK = 200;
 export class CSRF extends React.Component {
 
   constructor() {
@@ -23,7 +23,7 @@ export class CSRF extends React.Component {
       body: JSON.stringify({message: "hello"})
     })
     .then((resp) => {
-      if (resp.status === "200") {
+      if (resp.status === HTTP_OK) {
         this.setState({testResult: `POST SUCCEEDED with status ${resp.status}` });
       } else {
         this.setState({testResult: `POST FAILED with status ${resp.status}` });
@@ -39,7 +39,7 @@ export class CSRF extends React.Component {
     this.setState({testResult: "valid"});
     fetch("/1", {credentials: "same-origin"}) // eslint-disable-line
     .then((resp) => {
-      if (resp.status === "200") {
+      if (resp.status === HTTP_OK) {
         const token = resp.headers.get("x-csrf-jwt");
         if (token !== "") {
           console.log("Got CSRF token OK"); // eslint-disable-line

@@ -1,12 +1,14 @@
 import ReduxRouterEngine from 'electrode-redux-router-engine';
 import React from 'react';
+import fs from 'fs';
+import path from 'path';
 
 import { routes } from "../../client/routes";
 const Promise = require("bluebird");
 import { createStore } from "redux";
 import rootReducer from "../../client/reducers";
 
-function storeInitializer(req) {
+function storeInitializer(req, items) {
     let initialState;
     if(req.path === "/") {
       initialState = {
@@ -23,6 +25,10 @@ function storeInitializer(req) {
     } else if (req.path === "/above-the-fold") {
       initialState = {
         skip: req.query.skip === "true"
+      };
+    } else if (req.path === "/todo-app"){
+      if(items){
+        initialState = items;
       }
     } else {
       initialState = {};
@@ -32,11 +38,24 @@ function storeInitializer(req) {
 }
 
 function createReduxStore(req, match) {
-  const store = storeInitializer(req);
   return Promise.all([
       // DO ASYNC THUNK ACTIONS HERE : store.dispatch(boostrapApp())
-      Promise.resolve({})
-    ]).then(() => {
+      Promise.resolve({}),
+      new Promise((resolve, reject) => {
+        fs.readFile(path.join(process.cwd(),"/server/storage.json") , (err, data)=> {
+          if(err) {
+            reject(err);
+          } else {
+            resolve(data);
+          }
+        })
+      })
+      .then(JSON.parse)
+      .catch(() => {
+        return {};
+      })
+    ]).then(([resulta, resultb]) => {
+      const store = storeInitializer(req, resultb);
       return store;
   });
 }
