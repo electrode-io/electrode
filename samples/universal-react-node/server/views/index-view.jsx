@@ -1,7 +1,7 @@
 import ReduxRouterEngine from 'electrode-redux-router-engine';
 import React from 'react';
-const fs = require('fs');
-var path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 import { routes } from "../../client/routes";
 const Promise = require("bluebird");
