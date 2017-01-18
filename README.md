@@ -1,3 +1,4 @@
+[![Gitter](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/electrode-io/electrode)
 [![Build Status][travis-image]][travis-url] [![devDependencies Status][daviddm-image]][daviddm-url]
 
 ## ![electrode logo][logo-192x192]Electrode 
