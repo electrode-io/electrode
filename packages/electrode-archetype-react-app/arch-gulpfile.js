@@ -12,7 +12,7 @@ const gulpHelper = devRequire("electrode-gulp-helper");
 const chalk = devRequire("chalk");
 const shell = gulpHelper.shell;
 const config = archetype.config;
-const mkdirp = require("mkdirp");
+const mkdirp = devRequire("mkdirp");
 const envify = devRequire("gulp-envify");
 const uglify = devRequire("gulp-uglify");
 const filter = devRequire("gulp-filter");
@@ -89,7 +89,7 @@ function lint(options) {
   const checkCustom = (t) => {
     const f = ["", ".json", ".yml"].find((e) => {
       const x = Path.resolve(Path.join(t, `.eslintrc${e}`));
-      return fs.existsSync(x);
+      return Fs.existsSync(x);
     });
     return f !== undefined;
   };
@@ -125,8 +125,8 @@ function lint(options) {
  */
 function generateServiceWorker() {
   const NODE_ENV = process.env.NODE_ENV;
-  const serviceWorkerExists = fs.existsSync("./service-worker.js");
-  const serviceWorkerConfigExists = fs.existsSync("config/sw-precache-config.json");
+  const serviceWorkerExists = Fs.existsSync("./service-worker.js");
+  const serviceWorkerConfigExists = Fs.existsSync("config/sw-precache-config.json");
 
   /**
    * Determines whether the fetch event handler is included in the generated service worker code,
@@ -156,7 +156,7 @@ function inlineCriticalCSS(cb) {
   const PATH = process.env.CRITICAL_PATH || '/';
   const url = `http://${HOST}:${PORT}${PATH}`;
   const statsPath = Path.resolve(process.cwd(), 'dist/server/stats.json');
-  const stats = JSON.parse(fs.readFileSync(statsPath));
+  const stats = JSON.parse(Fs.readFileSync(statsPath));
   const cssAsset = stats.assets.find((asset) => asset.name.endsWith('.css'));
   const cssAssetPath = Path.resolve(process.cwd(), `dist/js/${cssAsset.name}`);
   const targetPath = Path.resolve(process.cwd(), 'dist/js/critical.css');
@@ -178,7 +178,7 @@ function inlineCriticalCSS(cb) {
         throw err;
       }
       const minifiedCSS = new CleanCSS().minify(css).styles;
-      fs.writeFile(targetPath, minifiedCSS, (err) => {
+      Fs.writeFile(targetPath, minifiedCSS, (err) => {
         if (err) {
           throw err;
         }
@@ -188,13 +188,13 @@ function inlineCriticalCSS(cb) {
   });
 }
 
-  /*
-   *
-   * For information on how to specify a task, see:
-   *
-   * https://www.npmjs.com/package/electrode-gulp-helper#taskdata
-   *
-   */
+/*
+ *
+ * For information on how to specify a task, see:
+ *
+ * https://www.npmjs.com/package/electrode-gulp-helper#taskdata
+ *
+ */
 
 function makeTasks(gulp) {
   const checkFrontendCov = (minimum) => {

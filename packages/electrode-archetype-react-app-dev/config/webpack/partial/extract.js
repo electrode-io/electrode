@@ -4,7 +4,7 @@ var archetype = require("../../archetype");
 var Path = archetype.Path;
 var mergeWebpackConfig = require("webpack-partial").default;
 
-var glob = archetype.devRequire("glob");
+var glob = require("glob");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var CSSSplitPlugin = require("css-split-webpack-plugin").default;
 var atImport = require("postcss-import");

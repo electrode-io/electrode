@@ -19,7 +19,7 @@ var AppMode = archetype.AppMode;
 var context = Path.resolve(AppMode.src.client);
 
 var archetypeNodeModules = Path.join(__dirname, "../../node_modules");
-var archetypeDevNodeModules = Path.join(archetype.devPath, "node_modules");
+var archetypeDevNodeModules = Path.join(archetype.devDir, "node_modules");
 var inspectpack = process.env.INSPECTPACK_DEBUG === "true";
 
 /* eslint-disable func-style */

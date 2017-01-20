@@ -1,5 +1,6 @@
 "use strict";
 
+var archetype = require("../../archetype");
 var mergeWebpackConfig = require("webpack-partial").default;
 var SourceMapDevToolPlugin = require("webpack").SourceMapDevToolPlugin;
 

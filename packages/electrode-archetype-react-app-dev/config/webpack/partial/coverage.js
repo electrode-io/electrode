@@ -1,6 +1,6 @@
 "use strict";
 
-var ispartaLoader = archetype.devRequire.resolve("isparta-loader");
+var ispartaLoader = require.resolve("isparta-loader");
 var mergeWebpackConfig = require("webpack-partial").default;
 
 module.exports = function () {

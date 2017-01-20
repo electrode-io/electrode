@@ -2,6 +2,7 @@
 
 var mergeWebpackConfig = require("webpack-partial").default;
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var WebpackReporter = require("electrode-webpack-reporter");
 var webpack = require("webpack");
 var Fs = require("fs");
 var archetype = require("../../archetype");
