@@ -2,9 +2,7 @@
 
 var _ = require("lodash");
 var fs = require("fs");
-var archetype = require("../archetype");
-var Path = archetype.PlatformPath;
-var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
+var mergeWebpackConfig = require("webpack-partial").default;
 
 // config partials
 var babelConfig = require("./partial/babel");
@@ -15,12 +13,14 @@ var statsConfig = require("./partial/stats");
 var isomorphicConfig = require("./partial/isomorphic");
 var jsonConfig = require("./partial/json");
 var pwaConfig = require("./partial/pwa");
+var archetype = require("../archetype");
+var Path = archetype.Path;
+var AppMode = archetype.AppMode;
+var context = Path.resolve(AppMode.src.client);
 
 var archetypeNodeModules = Path.join(__dirname, "../../node_modules");
 var archetypeDevNodeModules = Path.join(archetype.devPath, "node_modules");
 var inspectpack = process.env.INSPECTPACK_DEBUG === "true";
-
-var context = Path.resolve(archetype.clientSrcDir);
 
 /* eslint-disable func-style */
 
@@ -66,12 +66,22 @@ var baseConfig = {
       : "bundle.[hash].js"
   },
   resolve: {
-    root: [archetypeNodeModules, archetypeDevNodeModules, process.cwd()],
-    modulesDirectories: ["client", "node_modules"].concat(archetype.webpack.modulesDirectories),
+    root: [
+      archetypeNodeModules,
+      archetypeDevNodeModules,
+      AppMode.isSrc && Path.resolve(AppMode.src.dir) || null,
+      process.cwd()
+    ].filter((x) => x),
+    modulesDirectories: [AppMode.src.client, "node_modules"].concat(archetype.webpack.modulesDirectories),
     extensions: ["", ".js", ".jsx"]
   },
   resolveLoader: {
-    root: [archetypeNodeModules, archetypeDevNodeModules, process.cwd()]
+    root: [
+      archetypeNodeModules,
+      archetypeDevNodeModules,
+      AppMode.isSrc && Path.resolve(AppMode.src.dir) || null,
+      process.cwd()
+    ].filter((x) => x)
   }
 };
 

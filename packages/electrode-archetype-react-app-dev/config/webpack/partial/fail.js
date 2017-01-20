@@ -1,8 +1,7 @@
 "use strict";
 
-var archDevRequire = require("electrode-archetype-react-app-dev/require");
-var mergeWebpackConfig = archDevRequire("webpack-partial").default;
-var FailPlugin = archDevRequire("webpack-fail-plugin");
+var mergeWebpackConfig = require("webpack-partial").default;
+var FailPlugin = require("webpack-fail-plugin");
 
 module.exports = function () {
   return function (config) {

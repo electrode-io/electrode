@@ -1,9 +1,8 @@
 "use strict";
 
-var archetype = require("../archetype");
-var _ = archetype.devRequire("lodash");
-var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
-var WebpackConfig = archetype.devRequire("webpack-config").default;
+var _ = require("lodash");
+var mergeWebpackConfig = require("webpack-partial").default;
+var WebpackConfig = require("webpack-config").default;
 var getRootConfig = require("./get-root-config");
 
 var coverageConfig = require("./partial/coverage");

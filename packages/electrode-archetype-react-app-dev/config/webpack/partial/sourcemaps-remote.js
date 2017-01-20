@@ -1,8 +1,7 @@
 "use strict";
 
-var archetype = require("../../archetype");
-var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
-var SourceMapDevToolPlugin = archetype.devRequire("webpack").SourceMapDevToolPlugin;
+var mergeWebpackConfig = require("webpack-partial").default;
+var SourceMapDevToolPlugin = require("webpack").SourceMapDevToolPlugin;
 
 module.exports = function () {
   return function (config) {

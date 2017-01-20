@@ -2,19 +2,19 @@
 
 var archetype = require("../../archetype");
 var Path = archetype.PlatformPath;
-var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
+var mergeWebpackConfig = require("webpack-partial").default;
 
 var glob = archetype.devRequire("glob");
-var ExtractTextPlugin = archetype.devRequire("extract-text-webpack-plugin");
-var CSSSplitPlugin = archetype.devRequire("css-split-webpack-plugin").default;
-var atImport = archetype.devRequire("postcss-import");
-var cssnext = archetype.devRequire("postcss-cssnext");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var CSSSplitPlugin = require("css-split-webpack-plugin").default;
+var atImport = require("postcss-import");
+var cssnext = require("postcss-cssnext");
 
-var autoprefixer = archetype.devRequire("autoprefixer-stylus");
-var cssLoader = archetype.devRequire.resolve("css-loader");
-var styleLoader = archetype.devRequire.resolve("style-loader");
-var stylusLoader = archetype.devRequire.resolve("stylus-relative-loader");
-var postcssLoader = archetype.devRequire.resolve("postcss-loader");
+var autoprefixer = require("autoprefixer-stylus");
+var cssLoader = require.resolve("css-loader");
+var styleLoader = require.resolve("style-loader");
+var stylusLoader = require.resolve("stylus-relative-loader");
+var postcssLoader = require.resolve("postcss-loader");
 
 /**
  * [cssModuleSupport By default, this archetype assumes you are using CSS-Modules + CSS-Next]

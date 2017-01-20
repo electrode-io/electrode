@@ -1,10 +1,10 @@
 "use strict";
 
 var archetype = require("../../archetype");
-var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
-var fileLoader = archetype.devRequire.resolve("file-loader");
-var isomorphicLoader = archetype.devRequire.resolve("isomorphic-loader");
-var cdnLoader = archetype.devRequire.resolve('electrode-cdn-file-loader');
+var mergeWebpackConfig = require("webpack-partial").default;
+var fileLoader = require.resolve("file-loader");
+var isomorphicLoader = require.resolve("isomorphic-loader");
+var cdnLoader = require.resolve('electrode-cdn-file-loader');
 
 module.exports = function () {
   return function (config) {

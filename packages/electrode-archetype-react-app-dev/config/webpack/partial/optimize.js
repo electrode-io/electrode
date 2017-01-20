@@ -1,9 +1,9 @@
 "use strict";
 
 var archetype = require("../../archetype");
-var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
-var optimize = archetype.devRequire("webpack").optimize;
-var _ = archetype.devRequire("lodash");
+var mergeWebpackConfig = require("webpack-partial").default;
+var optimize = require("webpack").optimize;
+var _ = require("lodash");
 var inspectpack = process.env.INSPECTPACK_DEBUG === "true";
 
 // var LodashModuleReplacementPlugin = require("lodash-webpack-plugin");

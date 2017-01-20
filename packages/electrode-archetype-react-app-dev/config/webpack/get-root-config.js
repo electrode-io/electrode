@@ -10,9 +10,7 @@ module.exports = function (rootConfigFileName) {
   var rootConfig;
 
   try {
-    rootConfig = require( // eslint-disable-line global-require
-      path.join(process.cwd(), rootConfigFileName)
-    );
+    rootConfig = require(path.resolve(rootConfigFileName)); // eslint-disable-line global-require
   } catch (err) {
     rootConfig = {};
   }

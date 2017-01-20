@@ -1,15 +1,15 @@
 "use strict";
 
+var mergeWebpackConfig = require("webpack-partial").default;
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var webpack = require("webpack");
+var Fs = require("fs");
 var archetype = require("../../archetype");
-var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
-var ExtractTextPlugin = archetype.devRequire("extract-text-webpack-plugin");
-var webpack = archetype.devRequire("webpack");
-var WebpackReporter = archetype.devRequire("electrode-webpack-reporter");
-var fs = require("fs");
+var Path = archetype.Path;
 
 function notifyBundleValid() {
   setTimeout(function () {
-    fs.writeFileSync(".etmp/bundle.valid.log", `${Date.now()}`);
+    Fs.writeFileSync(Path.resolve(archetype.eTmpDir, "bundle.valid.log"), `${Date.now()}`);
   }, 100);
 }
 

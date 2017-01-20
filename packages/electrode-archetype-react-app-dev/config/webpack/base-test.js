@@ -1,8 +1,7 @@
 "use strict";
-
 var archetype = require("../archetype");
-var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
-var Path = archetype.PlatformPath;
+var mergeWebpackConfig = require("webpack-partial").default;
+var Path = archetype.Path;
 
 var baseConfig = require("./base.js");
 
@@ -19,7 +18,7 @@ var testConfig = {
       /node_modules\/sinon\//
     ]
   },
-  context: Path.join(process.cwd(), "test/client"),
+  context: Path.resolve("test", "client"),
   debug: false,
   devServer: {
     stats: "errors-only"  // only show errors
@@ -34,7 +33,7 @@ var testConfig = {
     alias: {
       // Allow root import of `src/FOO` from ROOT/src.
       src: process.cwd(),
-      sinon: archetype.devRequire.resolve("sinon/pkg/sinon")
+      sinon: require.resolve("sinon/pkg/sinon")
     }
   },
   // Enzyme depends jsdom and cheerio being global to render their DOM.

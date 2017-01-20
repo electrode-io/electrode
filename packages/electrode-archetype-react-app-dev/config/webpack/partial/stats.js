@@ -1,8 +1,7 @@
 "use strict";
 
-var archetype = require("../../archetype");
-var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
-var StatsWriterPlugin = archetype.devRequire("webpack-stats-plugin").StatsWriterPlugin;
+var mergeWebpackConfig = require("webpack-partial").default;
+var StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
 
 module.exports = function (opts) {
   var statsOptions = {

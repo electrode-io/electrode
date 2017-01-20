@@ -1,9 +1,8 @@
 "use strict";
 var path = require("path");
 var assign = require("lodash/assign");
-var archetype = require("../../archetype");
-var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
-var fileLoader = archetype.devRequire.resolve("file-loader");
+var mergeWebpackConfig = require("webpack-partial").default;
+var fileLoader = require.resolve("file-loader");
 var webAppManifestLoader = require.resolve("web-app-manifest-loader");
 var SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin");
 var FaviconsWebpackPlugin = require("favicons-webpack-plugin");

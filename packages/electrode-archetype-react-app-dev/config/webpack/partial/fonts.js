@@ -1,10 +1,9 @@
 "use strict";
 
-var archetype = require("../../archetype");
-var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
+var mergeWebpackConfig = require("webpack-partial").default;
 
-var urlLoader = archetype.devRequire.resolve("url-loader");
-var fileLoader = archetype.devRequire.resolve("file-loader");
+var urlLoader = require.resolve("url-loader");
+var fileLoader = require.resolve("file-loader");
 
 module.exports = function () {
   return function (config) {

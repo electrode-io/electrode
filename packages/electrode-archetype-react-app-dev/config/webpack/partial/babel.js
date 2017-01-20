@@ -1,20 +1,28 @@
 "use strict";
 
+var mergeWebpackConfig = require("webpack-partial").default;
 var archetype = require("../../archetype");
-var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
+var AppMode = archetype.AppMode;
+var Path = archetype.Path;
 
 module.exports = function (babel) {
+  var babelExcludeRegex = new RegExp(`(node_modules|\b${Path.join(AppMode.src.client, "vendor")}\b)`);
   return function (config) {
     return mergeWebpackConfig(config, {
       module: {
         loaders: [{
           name: "babel",
           test: /\.jsx?$/,
-          exclude: /(node_modules|\bclient\/vendor\b)/,
+          exclude: babelExcludeRegex,
           // NOTE: webpack.config.hot.js inserts "react-hot" into loaders array
-          loader: archetype.devRequire.resolve("babel-loader"),
+          loader: "babel-loader",
           query: babel
-        }]
+        },
+          {
+            name: "json",
+            test: /\.json$/,
+            loader: "json"
+          }]
       }
     });
   };

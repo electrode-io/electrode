@@ -1,7 +1,6 @@
 "use strict";
 
-var archetype = require("../../archetype");
-var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
+var mergeWebpackConfig = require("webpack-partial").default;
 
 var getDefaultEntry = function (entry) {
   return [

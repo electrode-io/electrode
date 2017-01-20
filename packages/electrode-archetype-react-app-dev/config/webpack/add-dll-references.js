@@ -1,16 +1,16 @@
 "use strict";
 
-var archetype = require("../archetype");
 var _ = require("lodash");
 var fs = require("fs");
-var path = require("path");
-var glob = archetype.devRequire("glob");
+var glob = require("glob");
 var webpack = require("webpack");
+var archetype = require("../archetype");
+var Path = archetype.Path;
 
 module.exports = function (config) {
   try {
-    var exists = fs.accessSync(path.join(process.cwd(), "client/dll.config.js"));
-    var filenames = glob.sync(path.join(process.cwd(), "dll/js/*-manifest.*.json"));
+    var exists = fs.existsSync(Path.resolve(archetype.AppMode.src.client, "dll.config.js"));
+    var filenames = glob.sync(Path.resolve("dll", "js", "*-manifest.*.json"));
 
     if (exists && filenames.length) {
       config.plugins = _.concat(config.plugins || [], filenames.map(function (filename) {

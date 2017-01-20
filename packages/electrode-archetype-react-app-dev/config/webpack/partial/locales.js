@@ -1,8 +1,7 @@
 "use strict";
 
-var archetype = require("../../archetype");
-var mergeWebpackConfig = archetype.devRequire("webpack-partial").default;
-var ContextReplacementPlugin = archetype.devRequire("webpack").ContextReplacementPlugin;
+var mergeWebpackConfig = require("webpack-partial").default;
+var ContextReplacementPlugin = require("webpack").ContextReplacementPlugin;
 
 // Note that in modern versions of `moment`, there is actually no
 // `locale/en.js`, `en` is simply the default and included in `moment` itself.
