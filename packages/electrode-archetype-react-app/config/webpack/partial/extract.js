@@ -28,8 +28,8 @@ var postcssLoader = archetype.devRequire.resolve("postcss-loader");
  * case 4: *none* *.css & *.styl exists => CSS-Modules + CSS-Next takes priority
  */
 
-var cssNextExists = (glob.sync(Path.join(process.cwd() + "/client/styles/*.css")).length > 0);
-var stylusExists = (glob.sync(Path.join(process.cwd() + "/client/styles/*.styl")).length > 0);
+var cssNextExists = (glob.sync(Path.join(process.cwd() + "/client/**/*.css")).length > 0);
+var stylusExists = (glob.sync(Path.join(process.cwd() + "/client/**/*.styl")).length > 0);
 
 // By default, this archetype assumes you are using CSS-Modules + CSS-Next
 var cssModuleSupport = true;
