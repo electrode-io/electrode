@@ -20,7 +20,7 @@ module.exports = function (config) {
         { type: "lcov" },
         { type: "text" }
       ],
-      dir: path.join(process.cwd(), "coverage/client")
+      dir: path.resolve("coverage", "client")
     }
   });
 };

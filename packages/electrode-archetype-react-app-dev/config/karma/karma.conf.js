@@ -1,5 +1,5 @@
 "use strict";
-var Path = require("path");
+var path = require("path");
 
 var webpackCfg = require("../webpack/webpack.config.test");
 
@@ -46,7 +46,7 @@ module.exports = function (config) {
         { type: "lcov" },
         { type: "text" }
       ],
-      dir: Path.join(process.cwd(), "coverage/client")
+      dir: path.resolve("coverage", "client")
     },
     captureTimeout: 100000,
     singleRun: true

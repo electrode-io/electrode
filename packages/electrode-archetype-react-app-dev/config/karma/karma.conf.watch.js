@@ -18,7 +18,7 @@ module.exports = function (config) {
       // Watch these files but do not add them to the bundle.
     ].concat(
       [
-        "client/**",
+        "src/client/**",
         "test/**"
       ].map(function (pattern) {
         return {
@@ -32,4 +32,3 @@ module.exports = function (config) {
   });
 
 };
-
