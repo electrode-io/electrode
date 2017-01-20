@@ -1,7 +1,7 @@
 "use strict";
 
 var archetype = require("../../archetype");
-var Path = archetype.PlatformPath;
+var Path = archetype.Path;
 var mergeWebpackConfig = require("webpack-partial").default;
 
 var glob = archetype.devRequire("glob");
