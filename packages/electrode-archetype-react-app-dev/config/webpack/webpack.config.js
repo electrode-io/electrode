@@ -12,6 +12,7 @@ var optimizeConfig = require("./partial/optimize");
 var localesConfig = require("./partial/locales");
 var productionSourcemapsConfig = require("./partial/sourcemaps-remote");
 var failConfig = require("./partial/fail");
+var simpleProgress = require("./partial/simple-progress");
 
 var config = new WebpackConfig().merge(_.flow(
   mergeWebpackConfig.bind(null, {}, baseConfig),
@@ -19,7 +20,8 @@ var config = new WebpackConfig().merge(_.flow(
   localesConfig(),
   defineConfig(),
   productionSourcemapsConfig(),
-  failConfig()
+  failConfig(),
+  simpleProgress()
 )()).merge(getRootConfig("webpack.config.js"));
 
 addDllReferences(config);
