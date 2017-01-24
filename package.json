@@ -16,7 +16,8 @@
     "test": "lerna bootstrap && lerna run test && gulp build-test",
     "test-generator": "gulp test-generator",
     "test-boilerplate": "gulp test-boilerplate",
-    "bootstrap": "lerna bootstrap"
+    "bootstrap": "lerna bootstrap",
+    "nuke-samples": "gulp nuke-samples"
   },
   "devDependencies": {
     "electrode-gulp-helper": "^1.0.5",
