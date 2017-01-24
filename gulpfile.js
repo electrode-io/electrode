@@ -116,11 +116,5 @@ helper.loadTasks({
         })
         .then(() => testGenerator(testDir, false, {serverType: "HapiJS"}));
     }
-  },
-
-  "nuke-samples": {
-    task: () => {
-      del(['samples/universal-react-node/node_modules/']);
-    }
   }
 }, gulp);
