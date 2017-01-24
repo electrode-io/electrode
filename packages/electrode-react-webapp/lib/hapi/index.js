@@ -17,7 +17,7 @@ const registerRoutes = (server, options, next) => {
         );
 
         server.route({
-          method: "GET",
+          method: v.method || "GET",
           path,
           config: v.config || {},
           handler: (request, reply) => {
