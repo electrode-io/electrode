@@ -18,7 +18,7 @@ var Path = archetype.Path;
 var AppMode = archetype.AppMode;
 var context = Path.resolve(AppMode.src.client);
 
-var archetypeNodeModules = Path.join(__dirname, "../../node_modules");
+var archetypeNodeModules = Path.join(archetype.dir, "node_modules");
 var archetypeDevNodeModules = Path.join(archetype.devDir, "node_modules");
 var inspectpack = process.env.INSPECTPACK_DEBUG === "true";
 
@@ -57,7 +57,7 @@ var baseConfig = {
   debug: false,
   entry: entry,
   output: {
-    path: Path.resolve("dist/js"),
+    path: Path.resolve("dist", "js"),
     pathinfo: inspectpack, // Enable path information for inspectpack
     publicPath: "/js/",
     chunkFilename: "[hash].[name].js",
@@ -72,14 +72,14 @@ var baseConfig = {
       AppMode.isSrc && Path.resolve(AppMode.src.dir) || null,
       process.cwd()
     ].filter((x) => x),
-    modulesDirectories: [AppMode.src.client, "node_modules"].concat(archetype.webpack.modulesDirectories),
+    modulesDirectories: ["node_modules"].concat(archetype.webpack.modulesDirectories),
     extensions: ["", ".js", ".jsx"]
   },
   resolveLoader: {
     root: [
       archetypeNodeModules,
       archetypeDevNodeModules,
-      AppMode.isSrc && Path.resolve(AppMode.src.dir) || null,
+      Path.resolve("lib"),
       process.cwd()
     ].filter((x) => x)
   }
