@@ -28,7 +28,7 @@ module.exports = {
         "paths": {
           "<%= routeValue %>": {
             "content": {
-              "module": "./server/views/index-view"
+              "module": "./{{env.APP_SRC_DIR}}/server/views/index-view"
             }
           }
         }
