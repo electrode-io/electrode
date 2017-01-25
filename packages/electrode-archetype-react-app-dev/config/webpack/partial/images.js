@@ -7,7 +7,7 @@ var isomorphicLoader = require.resolve("isomorphic-loader");
 var _ = require("lodash");
 
 function getCdnLoader() {
-  var loader = _(["electrode-cdn-file-loader", "cd-file-loader", "file-loader"]).find(function(x) {
+  var loader = _(["electrode-cdn-file-loader", "cdn-file-loader", "file-loader"]).find(function(x) {
     try {
       return require.resolve(x);
     } catch (e) {
