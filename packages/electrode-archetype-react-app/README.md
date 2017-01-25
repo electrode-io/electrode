@@ -133,6 +133,16 @@ So where is your code being executed from?  `src` or `lib`?  Actually, it could 
 
 If you need to refer to your client or server code from outside, you can use [`APP_SRC_DIR` environment variable](#app_src_dir) to automatically refer to the directory where code is being executed from.
 
+For UI code under `src/client` or `test/client`, webpack config sets `src` as a root so you can refer to code in `src/client` with `"client/foo"`.
+
+For example:
+
+```js
+import Hello from "client/components/hello"
+```
+
+For code under `src/server`, you can refer to client with `"../client/foo"`.
+
 ##### development
 
 In dev mode, your code will be executed from the `src` directory.  Your client code is transpiled and packed by `webpack-dev-server` on the fly.  Your node server is executed by `babel-node`.
