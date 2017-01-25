@@ -1,5 +1,9 @@
 "use strict";
-var path = require("path");
+
+var archetype = require("../../archetype");
+var Path = archetype.Path;
+var AppMode = archetype.AppMode;
+
 var assign = require("lodash/assign");
 var mergeWebpackConfig = require("webpack-partial").default;
 var fileLoader = require.resolve("file-loader");
@@ -9,8 +13,8 @@ var FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 var AddManifestFieldsPlugin = require('../plugins/add-manifest-fields');
 var DiskPlugin = require('webpack-disk-plugin');
 
-var swConfigPath = path.resolve(process.cwd(), "config/sw-config.js");
-var serverConfigPath = path.resolve(process.cwd(), "config/default.json");
+var swConfigPath = Path.resolve("config", "sw-config.js");
+var serverConfigPath = Path.resolve("config", "default.json");
 
 
 /**
@@ -38,7 +42,7 @@ function requireModuleSafelyWithFallback(path, fallback) {
  * @return {string}           parsed file path
  */
 function getHashedPath(filepath) {
-  var parsed = path.parse(filepath);
+  var parsed = Path.parse(filepath);
   var name = parsed.name;
   var ext = parsed.ext;
   return name + '.[hash]' + ext;
@@ -51,7 +55,7 @@ function getHashedPath(filepath) {
  * @return {string}           parsed file path
  */
 function getDevelopmentPath(filepath) {
-  var parsed = path.parse(filepath);
+  var parsed = Path.parse(filepath);
   var name = parsed.name;
   var ext = parsed.ext;
   return name + '.bundle.dev' + ext;
@@ -76,7 +80,7 @@ function createEntryConfigFromScripts(importScripts, entry) {
     ? Object.assign({}, entry)
     : { main: entry };
   return importScripts.reduce(function(acc, script) {
-    var name = path.parse(script).name;
+    var name = Path.parse(script).name;
     acc[name] = script;
     return acc;
   }, newEntry);
@@ -137,7 +141,7 @@ module.exports = function () {
       };
     }
 
-    var logoPath = `${process.cwd()}/client/${manifestConfig.logo}`;
+    var logoPath = Path.resolve(AppMode.src.client, manifestConfig.logo);
     var plugins = [
       new FaviconsWebpackPlugin({
         logo: logoPath,
@@ -171,10 +175,7 @@ module.exports = function () {
       plugins.push(
         new DiskPlugin({
           output: {
-            path: path.resolve(
-              process.cwd(),
-              severConfig.buildArtifactsPath || ".build"
-            )
+            path: Path.resolve(severConfig.buildArtifactsPath || ".build")
           },
           files: [{
             asset: /\/stats.json$/,
