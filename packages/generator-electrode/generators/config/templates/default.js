@@ -19,7 +19,9 @@ module.exports = {
         "pathPrefix": "dist"
       }
     },<%if(pwa){%>
-    "./server/plugins/pwa": {},<%} if(isAutoSsr){%>
+    "server/plugins/pwa": {
+      "module": "./{{env.APP_SRC_DIR}}/server/plugins/pwa"
+    },<%} if(isAutoSsr){%>
     "electrode-auto-ssr": {}, <%}%>
     "webapp": {
       "module": <%if(serverType==="HapiJS"){%>"electrode-react-webapp/lib/hapi"<%}else if (serverType==="ExpressJS"){%>"electrode-react-webapp/lib/express"<%} else {%>"electrode-react-webapp/lib/koa"<%}%>,
