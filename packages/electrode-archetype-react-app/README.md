@@ -106,6 +106,8 @@ It accepts a single `options` object, with the following supported fields:
   - `optimizeModulesForProduction` - Set to `false` to disable loading optimized copy of React modules.
     - also disabled unless `NODE_ENV=production`
     - If this is an object, then it's used as `options` for `optimizeModulesForProduction`
+  - `cssModuleHook` - Set to `false` to disable loading [css-module-hook]
+    - If this is an object, then it's used as `options` for `cssModuleHook`
   - `isomorphicExtendRequire` - Set to `false` to disable loading isomorphic-loader support
 
 #### optimizeModulesForProduction Options
