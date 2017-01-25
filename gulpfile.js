@@ -30,7 +30,7 @@ const runAppTest = (dir, forceLocal) => {
   const appPkgFile = `${dir}/package.json`;
   let appPkgData;
 
-  if (forceLocal || process.env.BUILD_TEST) {
+  if (forceLocal || process.env.BUILD_TEST || process.env.CI) {
     appPkgData = fs.readFileSync(appPkgFile).toString();
     const appPkg = JSON.parse(appPkgData);
     updateToLocalPkgs(appPkg["dependencies"], localPkgs);
