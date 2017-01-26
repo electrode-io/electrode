@@ -16,6 +16,8 @@ var styleLoader = require.resolve("style-loader");
 var stylusLoader = require.resolve("stylus-relative-loader");
 var postcssLoader = require.resolve("postcss-loader");
 
+var AppMode = archetype.AppMode;
+
 /**
  * [cssModuleSupport By default, this archetype assumes you are using CSS-Modules + CSS-Next]
  *
@@ -28,8 +30,8 @@ var postcssLoader = require.resolve("postcss-loader");
  * case 4: *none* *.css & *.styl exists => CSS-Modules + CSS-Next takes priority
  */
 
-var cssNextExists = (glob.sync(Path.join(process.cwd() + "/client/styles/*.css")).length > 0);
-var stylusExists = (glob.sync(Path.join(process.cwd() + "/client/styles/*.styl")).length > 0);
+var cssNextExists = (glob.sync(Path.resolve(AppMode.src.client, "**", "*.css")).length > 0);
+var stylusExists = (glob.sync(Path.resolve(AppMode.src.client, "**", "*.styl")).length > 0);
 
 // By default, this archetype assumes you are using CSS-Modules + CSS-Next
 var cssModuleSupport = true;

@@ -27,8 +27,7 @@
     "start": "gulp server",
     "hot": "gulp hot",
     "test": "gulp check",
-    "coverage": "gulp check",
-    "nuke": "rm -rf dist; rm -rf .etemp; rm -rf node_modules; rm -rf .isomorphic-loader-config.json; rm -rf npm-debug.log"
+    "coverage": "gulp check"
   },
   "dependencies": {
     "above-the-fold-only-server-render": "^1.0.2",
