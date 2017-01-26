@@ -5,9 +5,9 @@ import {Router, browserHistory} from "react-router";
 import {createStore, compose, applyMiddleware} from "redux";
 import {Provider} from "react-redux";
 import {notify} from "react-notify-toast";
-import "styles/base.css";
+import "./styles/base.css";
 import rootReducer from "./reducers";
-import DevTools from "../client/devtools";
+import DevTools from "./devtools";
 import updateStorage from "./middleware";
 
 require.ensure(["./sw-registration"], (require) => {
