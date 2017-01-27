@@ -1,41 +1,31 @@
-const todo = (state = {}, action) => {
-  let currentId;
-  if (state.length > 0) {
-    currentId = state[state.length - 1].id;
-  }
-  switch (action.type) {
-  case "ADD_TODO":
-    return {
-      id: ++currentId || action.id,
-      text: action.text,
-      completed: false
-    };
-  case "TOGGLE_TODO":
-    if (state.id !== action.id) {
-      return state;
-    }
-    return Object.assign({}, state, {
-      completed: !state.completed
-    });
-  default:
-    return state;
-  }
+const newTodo = (id, text, completed) => {
+  return {
+    id, text, completed
+  };
 };
 
-const todos = (state = [], action) => {
+export default (state = [], action) => {
+  const todos = state;
   switch (action.type) {
   case "ADD_TODO":
     return [
-      ...state,
-      todo(state, action)
+      ...todos,
+      newTodo((todos.length > 0) ? todos[todos.length - 1].id + 1 : action.id, action.text, false)
     ];
-  case "TOGGLE_TODO":
-    return state.map((t) =>
-      todo(t, action)
-    );
+  case "TOGGLE_TODO": {
+    const x = todos.findIndex((t) => t.id === action.id);
+    if (x >= 0) {
+      const toggled = todos.slice();
+      const o = toggled[x];
+      toggled[x] = newTodo(o.id, o.text, !o.completed);
+      return toggled;
+    }
+
+    break;
+  }
   default:
     return state;
   }
-};
 
-export default todos;
+  return state;
+};
