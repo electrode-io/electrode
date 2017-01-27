@@ -16,12 +16,13 @@ const registerRoutes = (app, options, next) => {
         const routeHandler = ReactWebapp.makeRouteHandler(
           registerOptions, ReactWebapp.resolveContent(v.content));
 
-      	const methods = v.methods || ["GET"];
+        /*eslint max-nested-callbacks: [0, 4]*/
+        const methods = v.methods || ["GET"];
         _.each(methods, (method) => {
-          if(method === "*") { 
+          if (method === "*") {
             method = "ALL";
           }
-          app[method.toLowerCase()](path, (request, response) => {
+          app[method.toLowerCase()](path, (request, response) => { //eslint-disable-line
             const handleStatus = (data) => {
               const status = data.status;
               if (status === HTTP_REDIRECT) {

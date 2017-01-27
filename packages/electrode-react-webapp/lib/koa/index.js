@@ -17,33 +17,40 @@ const registerRoutes = (app, options, next) => {
       const routeHandler = ReactWebapp.makeRouteHandler(
         registerOptions, ReactWebapp.resolveContent(v.content));
 
-      koaRouter.get(path, function *() {
-        const request = this.request; //eslint-disable-line
-        const respond = (data) => {
-          this.body = data; //eslint-disable-line
-        };
+      const methods = v.methods || ["GET"];
+      _.each(methods, (method) => {
+        if (method === "*") {
+          method = "ALL";
+        }
+        /*eslint max-nested-callbacks: [0, 4]*/
+        koaRouter[method.toLowerCase()](path, function *() {
+          const request = this.request; //eslint-disable-line
+          const respond = (data) => {
+            this.body = data; //eslint-disable-line
+          };
 
-        const handleStatus = (data) => {
-          const status = data.status;
-          if (status === HTTP_REDIRECT) {
-            this.redirect(data.path); //eslint-disable-line
-          } else {
-            respond({message: "error"});
-          }
-        };
+          const handleStatus = (data) => {
+            const status = data.status;
+            if (status === HTTP_REDIRECT) {
+              this.redirect(data.path); //eslint-disable-line
+            } else {
+              respond({message: "error"});
+            }
+          };
 
-        yield routeHandler({mode: request.__mode || "", request})
-        .then((data) => {
-          if (data.status) {
-            handleStatus(data);
-          } else {
-            respond(data);
-          }
-        })
-        .catch((err) => {
-          respond(err.html);//.code(err.status || HTTP_ERROR_500);
-        });
-      }); //end get
+          yield routeHandler({mode: request.__mode || "", request})
+          .then((data) => {
+            if (data.status) {
+              handleStatus(data);
+            } else {
+              respond(data);
+            }
+          })
+          .catch((err) => {
+            respond(err.html);//.code(err.status || HTTP_ERROR_500);
+          });
+        }); //end get
+      });
     });
     app.use(koaRouter.routes());
   })
