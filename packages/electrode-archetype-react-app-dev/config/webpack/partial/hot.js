@@ -2,6 +2,7 @@
 
 var archetype = require("../../archetype");
 var mergeWebpackConfig = require("webpack-partial").default;
+var webpack = require("webpack");
 
 var getDefaultEntry = function (entry) {
   return [
@@ -27,7 +28,11 @@ module.exports = function () {
 
     return mergeWebpackConfig(config, {
       devtool: "eval",
-      entry: entry
+      entry: entry,
+      plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin()
+      ]
     });
   };
 };

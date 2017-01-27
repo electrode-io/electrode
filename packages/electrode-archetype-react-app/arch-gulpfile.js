@@ -31,6 +31,10 @@ function setProductionEnv() {
   process.env.NODE_ENV = "production";
 }
 
+function setDevelopmentEnv() {
+  process.env.NODE_ENV = "development";
+}
+
 function setStaticFilesEnv() {
   process.env.STATIC_FILES = "true";
 }
@@ -52,7 +56,7 @@ function createGitIgnoreDir(dir, comment) {
   const dirFP = Path.resolve(dir);
   try {
     mkdirp.sync(dirFP);
-  } catch(e) {
+  } catch (e) {
     console.log("mkdir", e);
   }
 
@@ -254,6 +258,7 @@ function makeTasks(gulp) {
   let tasks = {
     ".mk-prod-dir": () => createGitIgnoreDir(Path.resolve(archetype.prodDir), "Electrode production dir"),
     ".production-env": () => setProductionEnv(),
+    ".development-env": () => setDevelopmentEnv(),
     ".webpack-dev": () => setWebpackDev(),
     ".static-files-env": () => setStaticFilesEnv(),
     ".optimize-stats": () => setOptimizeStats(),
@@ -406,6 +411,7 @@ INFO: Individual .babelrc files were generated for you in src/client and src/ser
 
     "hot": {
       desc: "Start server with watch in hot mode with webpack-dev-server",
+      dep: [".development-env"],
       task: [".webpack-dev", ["server-hot", "server-watch", "generate-service-worker"]]
     },
 
@@ -500,7 +506,7 @@ INFO: Individual .babelrc files were generated for you in src/client and src/ser
       desc: "Start webpack-dev-server in hot mode",
       task: mkCmd("webpack-dev-server",
         `--config ${config.webpack}/webpack.config.hot.js`,
-        `--hot --progress --colors --inline`,
+        `--progress --colors --inline`,
         `--port ${archetype.webpack.devPort}`)
     },
 
