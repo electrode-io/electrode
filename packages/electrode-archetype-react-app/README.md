@@ -1,6 +1,6 @@
 # Archetype: Electrode React ~~Isomorphic~~ Universal App
 
-[![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url] [![devDependency Status][daviddm-dev-image]][daviddm-dev-url]
+[![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url] [![devDependency Status][daviddm-dev-image]][daviddm-dev-url] [![npm downloads][npm-downloads-image]][npm-downloads-url]
 
 A Walmart Labs flavored React Universal App archetype.
 
@@ -173,7 +173,7 @@ For example, to pass your server side React app entry to react-webapp:
           "/{args*}": {
             "view": "index",
             "content": {
-              "module": "./{{env.APP_SRC_DIR}}/server/app"   // Note the use of APP_SRC_DIR here 
+              "module": "./{{env.APP_SRC_DIR}}/server/app"   // Note the use of APP_SRC_DIR here
             }
           }
         }
@@ -206,7 +206,7 @@ module.exports = {
 
 
 ## NodeJS Server Required Runtime Support
- 
+
 If you don't use the `support.load` API to get the runtime support needed for some of the features in your NodeJS server, then you need to initialize them manually during your server startup.
 
 
@@ -246,5 +246,7 @@ Built with :heart: by [Team Electrode](https://github.com/orgs/electrode-io/peop
 [daviddm-url]: https://david-dm.org/electrode-io/electrode?path=packages/electrode-archetype-react-app
 [daviddm-dev-image]:https://david-dm.org/electrode-io/electrode/dev-status.svg?path=packages/electrode-archetype-react-app
 [daviddm-dev-url]:https://david-dm.org/electrode-io/electrode?path=packages/electrode-archetype-react-app?type-dev
+[npm-downloads-image]:https://img.shields.io/npm/dm/electrode-archetype-react-app.svg
+[npm-downloads-url]:https://www.npmjs.com/package/electrode-archetype-react-app
 [generator-electrode]: https://www.npmjs.com/package/generator-electrode
 [Electrode getting started]: http://www.electrode.io/docs/get_started.html

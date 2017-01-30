@@ -1,6 +1,6 @@
 # Electrode React Webapp
 
-[![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url] [![devDependency Status][daviddm-dev-image]][daviddm-dev-url]
+[![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url] [![devDependency Status][daviddm-dev-image]][daviddm-dev-url] [![npm downloads][npm-downloads-image]][npm-downloads-url]
 
 This is a Hapi plugin that register a default route for your Webapp to return
 a bootstrapping React application.  With support for webpack dev server integrations.
@@ -121,3 +121,5 @@ function myContent() {
 [daviddm-url]: https://david-dm.org/electrode-io/electrode?path=packages/electrode-react-webapp
 [daviddm-dev-image]:https://david-dm.org/electrode-io/electrode/dev-status.svg?path=packages/electrode-react-webapp
 [daviddm-dev-url]:https://david-dm.org/electrode-io/electrode?path=packages/electrode-react-webapp?type-dev
+[npm-downloads-image]:https://img.shields.io/npm/dm/electrode-react-webapp.svg
+[npm-downloads-url]:https://www.npmjs.com/package/electrode-react-webapp
