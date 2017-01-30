@@ -13,36 +13,41 @@ if (!process.env.PACKAGES_DIR) {
   process.env.PACKAGES_DIR = path.resolve("packages");
 }
 
-const runAppTest = (dir, forceLocal) => {
+const pullLocalPackages = (dir) => {
+  dir = path.resolve(dir);
   const localPkgs = ["electrode-archetype-react-app", "electrode-react-webapp", "electrode-redux-router-engine", "electrode-auto-ssr"];
   const localDevPkgs = ["electrode-archetype-react-app-dev"];
+  const localPackagesDir = path.relative(dir, process.env.PACKAGES_DIR);
 
   const updateToLocalPkgs = (pkgSection, pkgs) => {
     if (pkgSection) {
       pkgs.forEach((pkg) => {
         if (pkgSection[pkg]) {
-          pkgSection[pkg] = path.join(process.env.PACKAGES_DIR, pkg);
+          pkgSection[pkg] = path.join(localPackagesDir, pkg);
         }
       });
     }
   };
 
-  const appPkgFile = `${dir}/package.json`;
-  let appPkgData;
+  const appPkgFile = path.join(dir, "package.json");
+  const appPkgData = fs.readFileSync(appPkgFile).toString();
+  const appPkg = JSON.parse(appPkgData);
+  updateToLocalPkgs(appPkg["dependencies"], localPkgs);
+  updateToLocalPkgs(appPkg["devDependencies"], localDevPkgs);
+  fs.writeFileSync(appPkgFile, `${JSON.stringify(appPkg, null, 2)}\n`);
 
-  if (forceLocal || process.env.BUILD_TEST) {
-    appPkgData = fs.readFileSync(appPkgFile).toString();
-    const appPkg = JSON.parse(appPkgData);
-    updateToLocalPkgs(appPkg["dependencies"], localPkgs);
-    updateToLocalPkgs(appPkg["devDependencies"], localDevPkgs);
-    fs.writeFileSync(appPkgFile, `${JSON.stringify(appPkg, null, 2)}\n`);
-  }
+  return appPkgData;
+};
+
+const runAppTest = (dir, forceLocal) => {
+  const appPkgData = (forceLocal || process.env.BUILD_TEST || process.env.CI) && pullLocalPackages(dir);
 
   shell.pushd(dir);
 
   const restore = () => {
     shell.popd();
     if (appPkgData) {
+      const appPkgFile = path.resolve(dir, "package.json");
       fs.writeFileSync(appPkgFile, appPkgData);
     }
   };
@@ -104,6 +109,15 @@ helper.loadTasks({
 
   "test-boilerplate": {
     task: () => runAppTest(path.resolve("samples/universal-react-node"))
+  },
+
+  "samples-local": {
+    desc: "modify all samples to pull electrode packages from local",
+    task: () => {
+      ["electrode-demo-index", "universal-material-ui", "universal-react-node"].forEach((a) => {
+        pullLocalPackages(path.resolve("samples", a));
+      });
+    }
   },
 
   "test-generator": {

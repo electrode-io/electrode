@@ -1,30 +1,38 @@
 "use strict";
 
-const Path = require("path");
-const fs = require("fs");
+const Fs = require("fs");
 const archetype = require("./config/archetype");
-const gulpHelper = archetype.devRequire("electrode-gulp-helper");
+const assert = require("assert");
+
+assert(!archetype.noDev, "dev archetype is missing - development & build tasks not possible");
+
+const Path = archetype.Path;
+const devRequire = archetype.devRequire;
+const gulpHelper = devRequire("electrode-gulp-helper");
+const chalk = devRequire("chalk");
 const shell = gulpHelper.shell;
-const mkdirp = archetype.devRequire("mkdirp");
 const config = archetype.config;
+const mkdirp = devRequire("mkdirp");
+const envify = devRequire("gulp-envify");
+const uglify = devRequire("gulp-uglify");
+const filter = devRequire("gulp-filter");
+
 const penthouse = archetype.devRequire("penthouse");
 const CleanCSS = archetype.devRequire('clean-css');
 
-
-const envify = archetype.devRequire("gulp-envify");
-const uglify = archetype.devRequire("gulp-uglify");
-const filter = archetype.devRequire("gulp-filter");
-const assert = require("assert");
-
 function setupPath() {
-  const nmBin = "node_modules/.bin";
+  const nmBin = Path.join("node_modules", ".bin");
   gulpHelper.envPath.addToFront(Path.resolve(nmBin));
-  gulpHelper.envPath.addToFront(Path.join(archetype.devPath, nmBin));
+  gulpHelper.envPath.addToFront(Path.join(archetype.devDir, nmBin));
   gulpHelper.envPath.addToFront(Path.join(__dirname, nmBin));
 }
 
 function setProductionEnv() {
   process.env.NODE_ENV = "production";
+}
+
+function setDevelopmentEnv() {
+  process.env.NODE_ENV = "development";
 }
 
 function setStaticFilesEnv() {
@@ -40,6 +48,31 @@ function setOptimizeStats() {
 }
 
 const exec = gulpHelper.exec;
+
+const eTmpDir = archetype.eTmpDir;
+
+function createGitIgnoreDir(dir, comment) {
+  comment = comment || "";
+  const dirFP = Path.resolve(dir);
+  try {
+    mkdirp.sync(dirFP);
+  } catch (e) {
+    console.log("mkdir", e);
+  }
+
+  const gitIgnore = Path.join(dirFP, ".gitignore");
+  if (!Fs.existsSync(gitIgnore)) {
+    Fs.writeFileSync(gitIgnore, `# ${comment}\n*\n`);
+  }
+}
+
+function createElectrodeTmpDir() {
+  createGitIgnoreDir(Path.resolve(eTmpDir), "Electrode tmp dir");
+}
+
+function mkCmd(a) {
+  return Array.isArray(a) ? a.join(" ") : Array.prototype.slice.call(arguments).join(" ");
+}
 
 
 /*
@@ -60,7 +93,7 @@ function lint(options) {
   const checkCustom = (t) => {
     const f = ["", ".json", ".yml"].find((e) => {
       const x = Path.resolve(Path.join(t, `.eslintrc${e}`));
-      return fs.existsSync(x);
+      return Fs.existsSync(x);
     });
     return f !== undefined;
   };
@@ -90,32 +123,14 @@ function lint(options) {
   return promise;
 }
 
-function checkFrontendCov(minimum) {
-  if (typeof minimum === "string") {
-    minimum += ".";
-  } else {
-    minimum = "";
-  }
-  return exec(`istanbul check-coverage 'coverage/client/*/coverage.json' --config=${config.istanbul}/.istanbul.${minimum}yml`);
-}
-
-function createElectrodeTmpDir() {
-  const eTmp = Path.resolve(".etmp");
-  const eTmpGitIgnore = Path.join(eTmp, ".gitignore");
-  if (!fs.existsSync(eTmpGitIgnore)) {
-    mkdirp.sync(eTmp);
-    fs.writeFileSync(eTmpGitIgnore, "# Electrode tmp dir\n*\n");
-  }
-}
-
 /**
  * [generateServiceWorker gulp task to generate service worker code that will precache specific resources so they work offline.]
  *
  */
 function generateServiceWorker() {
   const NODE_ENV = process.env.NODE_ENV;
-  const serviceWorkerExists = fs.existsSync("./service-worker.js");
-  const serviceWorkerConfigExists = fs.existsSync("config/sw-precache-config.json");
+  const serviceWorkerExists = Fs.existsSync("./service-worker.js");
+  const serviceWorkerConfigExists = Fs.existsSync("config/sw-precache-config.json");
 
   /**
    * Determines whether the fetch event handler is included in the generated service worker code,
@@ -145,7 +160,7 @@ function inlineCriticalCSS(cb) {
   const PATH = process.env.CRITICAL_PATH || '/';
   const url = `http://${HOST}:${PORT}${PATH}`;
   const statsPath = Path.resolve(process.cwd(), 'dist/server/stats.json');
-  const stats = JSON.parse(fs.readFileSync(statsPath));
+  const stats = JSON.parse(Fs.readFileSync(statsPath));
   const cssAsset = stats.assets.find((asset) => asset.name.endsWith('.css'));
   const cssAssetPath = Path.resolve(process.cwd(), `dist/js/${cssAsset.name}`);
   const targetPath = Path.resolve(process.cwd(), 'dist/js/critical.css');
@@ -167,7 +182,7 @@ function inlineCriticalCSS(cb) {
         throw err;
       }
       const minifiedCSS = new CleanCSS().minify(css).styles;
-      fs.writeFile(targetPath, minifiedCSS, (err) => {
+      Fs.writeFile(targetPath, minifiedCSS, (err) => {
         if (err) {
           throw err;
         }
@@ -176,6 +191,7 @@ function inlineCriticalCSS(cb) {
     });
   });
 }
+
 /*
  *
  * For information on how to specify a task, see:
@@ -185,10 +201,21 @@ function inlineCriticalCSS(cb) {
  */
 
 function makeTasks(gulp) {
+  const checkFrontendCov = (minimum) => {
+    if (typeof minimum === "string") {
+      minimum += ".";
+    } else {
+      minimum = "";
+    }
+    return exec(`istanbul check-coverage 'coverage/client/*/coverage.json'`,
+      `--config=${config.istanbul}/.istanbul.${minimum}yml`);
+  };
+
   const optimizeModuleForProd = (module) => {
-    const modulePath = Path.resolve(Path.join("node_modules", module));
+    const modulePath = Path.resolve("node_modules", module);
     assert(shell.test("-d", modulePath), `${modulePath} is not a directory`);
-    const prodPath = Path.join(".prod", module);
+    createGitIgnoreDir(Path.resolve(archetype.prodModulesDir), "Electrode production modules dir");
+    const prodPath = Path.join(archetype.prodModulesDir, module);
     return new Promise((resolve, reject) =>
       gulp.src(`${modulePath}/**/*.js`)
         .pipe(filter(["**", "!**/dist/**"]))
@@ -215,109 +242,186 @@ function makeTasks(gulp) {
       });
   };
 
-  return {
+  const makeBabelRc = (destDir, rcFile) => {
+    const fn = Path.resolve(destDir, ".babelrc");
+    if (!Fs.existsSync(fn)) {
+      console.log(chalk.green(`INFO: generating ${fn} for you - please commit it.`));
+      const rc = JSON.stringify({
+        extends: `${Path.join(archetype.devPkg.name, "config", "babel", rcFile)}`
+      }, null, 2);
+      Fs.writeFileSync(fn, `${rc}\n`);
+    }
+  };
+
+  const AppMode = archetype.AppMode;
+
+  let tasks = {
+    ".mk-prod-dir": () => createGitIgnoreDir(Path.resolve(archetype.prodDir), "Electrode production dir"),
     ".production-env": () => setProductionEnv(),
-    ".static-files-env": () => setStaticFilesEnv(),
+    ".development-env": () => setDevelopmentEnv(),
     ".webpack-dev": () => setWebpackDev(),
+    ".static-files-env": () => setStaticFilesEnv(),
     ".optimize-stats": () => setOptimizeStats(),
     "build": {
-      desc: "Build your app's client bundle for production",
-      task: ["ss-prod-react", "build-dist"]
+      desc: AppMode.isSrc
+        ? `Build your app's ${AppMode.src.dir} directory into ${AppMode.lib.dir} for production`
+        : "Build your app's client bundle",
+      task: ["build-dist", ".build-lib", "ss-prod-react", ".check.top.level.babelrc"]
     },
-    "build-analyze": {
-      dep: [".optimize-stats"],
-      desc: "Build your app's client bundle for production and run bundle analyzer",
-      task: ["build-dist", "optimize-stats"]
-    },
+
+    //
+    // browser coverage
+    //
     ".build-browser-coverage-1": () => {
       setProductionEnv();
-      return exec(`webpack --config ${config.webpack}/webpack.config.browsercoverage.js --colors`);
+      return exec(`webpack`,
+        `--config ${config.webpack}/webpack.config.browsercoverage.js`,
+        `--colors`);
     },
     "build-browser-coverage": {
       desc: "Build browser coverage",
-      task: ["clean-dist", ".build-browser-coverage-1", "build-dist:flatten-l10n", "build-dist:clean-tmp"]
+      task: [".clean.dist", ".build-browser-coverage-1", "build-dist:flatten-l10n", "build-dist:clean-tmp"]
     },
+
     "build-dev-static": {
       desc: "Build static copy of your app's client bundle for development",
-      task: ["clean-dist", "build-dist-dev-static"]
+      task: [".clean.dist", "build-dist-dev-static"]
     },
-    "build-dist": ["clean-dist", "build-dist-min", "build-dist:flatten-l10n", "generate-service-worker", "build-dist:clean-tmp"],
+
+    "build-dist": [".clean.dist", ".clean.dll", "build-dist-dll", "build-dist-min", "build-dist:flatten-l10n",
+      "build-dist:merge-isomorphic-assets", "copy-dll", "build-dist:clean-tmp"],
+
     "build-dist-dev-static": {
       desc: false,
       task: `webpack --config ${config.webpack}/webpack.config.dev.static.js --colors`
     },
+
     ".ss-prod-react": () => optimizeModuleForProd("react"),
     ".ss-prod-react-dom": () => optimizeModuleForProd("react-dom"),
-    ".ss-clean-prod-react": () => {
-      shell.rm("-rf", ".prod/react");
-      shell.rm("-rf", ".prod/react-dom");
+    ".ss-clean.prod-react": () => {
+      shell.rm("-rf",
+        Path.join(archetype.prodModulesDir, "react"),
+        Path.join(archetype.prodModulesDir, "react-dom"));
     },
     "ss-prod-react": {
-      desc: "Make optimized copy of react&react-dom for server side in directory .prod",
-      dep: [".ss-clean-prod-react"],
+      desc: `Make optimized copy of react&react-dom for server side in dir ${archetype.prodModulesDir}`,
+      dep: [".ss-clean.prod-react", ".mk-prod-dir"],
       task: [[".ss-prod-react", ".ss-prod-react-dom"]]
     },
-    "electrify": ["clean-dist", "build-webpack-stats-with-fullpath", "build-dist:clean-tmp", "run-electrify-cli"],
-    "build-webpack-stats-with-fullpath": {
-      desc: "Build static bundle with stats.json containing fullPaths to inspect the bundle on electrode-electrify",
-      task: `webpack --config ${config.webpack}/webpack.config.stats.electrify.js --colors`
+
+    "build-dist-dll": () => {
+      setProductionEnv();
+      createGitIgnoreDir(Path.resolve("dll"), "Webpack DLL Output dir");
+      return exec(`webpack --config ${config.webpack}/webpack.config.dll.js --colors`)
     },
+
     "build-dist-min": {
       dep: [".production-env"],
       desc: false,
       task: `webpack --config ${config.webpack}/webpack.config.js --colors`
     },
+
     "build-dist:clean-tmp": {
       desc: false,
       task: () => shell.rm("-rf", "./tmp")
     },
+
     "build-dist:flatten-l10n": {
       desc: false,
-      task: `node ${__dirname}/scripts/l10n/flatten-messages.js`
+      task: `node ${archetype.devDir}/scripts/l10n/flatten-messages.js`
     },
-    "run-electrify-cli": {
+
+    "build-dist:merge-isomorphic-assets": {
       desc: false,
-      task: `electrify dist/server/stats.json -O`
+      task: `node ${archetype.devDir}/scripts/merge-isomorphic-assets.js`
     },
+
+    ".build-lib": () => undefined,
+
+    ".check.top.level.babelrc": () => {
+      if (AppMode.isSrc && archetype.checkUserBabelRc() !== false) {
+        console.log(chalk.yellow(`
+INFO: You are using src for client & server, archetype will ignore your top level .babelrc
+INFO: Please remove your top level .babelrc file if you have no other use of it.
+INFO: Individual .babelrc files were generated for you in src/client and src/server
+`));
+      }
+    },
+
+    ".clean.lib:client": () => shell.rm("-rf", AppMode.lib.client),
+    ".mk.lib.client.dir": () => {
+      createGitIgnoreDir(Path.resolve(AppMode.lib.client), `Electrode app transpiled code from ${AppMode.src.client}`);
+    },
+
+    ".build.client.babelrc": () => makeBabelRc(AppMode.src.client, "babelrc-client"),
+
+    "build-lib:client": {
+      desc: false,
+      dep: [".clean.lib:client", ".mk.lib.client.dir", ".build.client.babelrc"],
+      task: mkCmd(`babel`,
+        `--source-maps=inline --copy-files --out-dir ${AppMode.lib.client}`,
+        `${AppMode.src.client}`)
+    },
+
+    ".clean.lib:server": () => shell.rm("-rf", AppMode.lib.server),
+    ".mk.lib.server.dir": () => {
+      createGitIgnoreDir(Path.resolve(AppMode.lib.server), `Electrode app transpiled code from ${AppMode.src.server}`);
+    },
+
+    ".build.server.babelrc": () => makeBabelRc(AppMode.src.server, "babelrc-server"),
+
+    "build-lib:server": {
+      desc: false,
+      dep: [".clean.lib:server", ".mk.lib.server.dir", ".build.server.babelrc"],
+      task: mkCmd(`babel`,
+        `--source-maps=inline --copy-files --out-dir ${AppMode.lib.server}`,
+        `${AppMode.src.server}`)
+    },
+
     "check": ["lint", "test-cov"],
     "check-ci": ["lint", "test-ci"],
     "check-cov": ["lint", "test-cov"],
     "check-dev": ["lint", "test-dev"],
-    "clean": ["clean-dist"],
-    "clean-dist": () => shell.rm("-rf", "dist"),
+
+    "clean": [".clean.dist", ".clean.lib", ".clean.prod", ".clean.etmp", ".clean.dll"],
+    ".clean.dist": () => shell.rm("-rf", "dist"),
+    ".clean.lib": () => undefined, // to be updated below for src mode
+    ".clean.prod": () => shell.rm("-rf", archetype.prodDir),
+    ".clean.etmp": () => shell.rm("-rf", eTmpDir),
+    ".clean.dll": () => shell.rm("-rf", "dll"),
+
+    "copy-dll": () => shell.cp("-r", "dll/*", "dist"),
+
     "cov-frontend": () => checkFrontendCov(),
     "cov-frontend-50": () => checkFrontendCov("50"),
     "cov-frontend-70": () => checkFrontendCov("70"),
     "cov-frontend-85": () => checkFrontendCov("85"),
     "cov-frontend-95": () => checkFrontendCov("95"),
+
     "debug": ["build-dev-static", "server-debug"],
     "dev": {
       desc: "Start server with watch in development mode with webpack-dev-server",
       task: [".webpack-dev", ["server-dev", "server-watch", "generate-service-worker"]]
     },
+
     "dev-static": {
       desc: "Start server in development mode with statically built files",
-      task: ["build-dev-static", "server"]
+      task: ["build-dev-static", "app-server"]
     },
+
     "hot": {
       desc: "Start server with watch in hot mode with webpack-dev-server",
+      dep: [".development-env"],
       task: [".webpack-dev", ["server-hot", "server-watch", "generate-service-worker"]]
     },
-    "critical-css": {
-      desc: "Start server and run penthouse to output critical CSS",
-      task: inlineCriticalCSS
-    },
-    "generate-service-worker": {
-      desc: "Generate Service Worker using the options provided in the app/config/sw-precache-config.json file for prod/dev/hot mode",
-      task: () => generateServiceWorker()
-    },
+
     "lint": [["lint-client", "lint-client-test", "lint-server", "lint-server-test"]],
     "lint-client": {
       desc: "Run eslint on client code in directories client and templates",
       task: () => lint({
         ext: ".js,.jsx",
         config: `${config.eslint}/.eslintrc-react`,
-        targets: ["client", "templates"]
+        targets: [AppMode.src.client, "templates"]
       })
     },
     "lint-client-test": {
@@ -342,66 +446,175 @@ function makeTasks(gulp) {
         targets: ["test/server", "test/func"]
       })
     },
+
+    "npm:test": ["check"],
+    "npm:release": `node ${archetype.devDir}/scripts/map-isomorphic-cdn.js`,
+
+    "server": ["app-server"],  // keep old server name for backward compat
+
+    "app-server": {
+      desc: "Start the app server only, Must have dist by running `gulp build` first.",
+      task: () => {
+        AppMode.setEnv(AppMode.lib.dir);
+        return exec(`node ${Path.join(AppMode.lib.server, "index.js")}`);
+      }
+    },
+
+    "server-debug": () => {
+      AppMode.setEnv(AppMode.lib.dir);
+      return exec(`node debug ${Path.join(AppMode.lib.server, "index.js")}`);
+    },
+
+    "server-prod": {
+      dep: [".production-env", ".static-files-env"],
+      desc: "Start server in production mode with static files routes.  Must have dist by running `gulp build`.",
+      task: () => {
+        AppMode.setEnv(AppMode.lib.dir);
+        return exec(`node ${Path.join(AppMode.lib.server, "index.js")}`);
+      }
+    },
+
+    ".init-bundle.valid.log": () => Fs.writeFileSync(Path.resolve(eTmpDir, "bundle.valid.log"), `${Date.now()}`),
+
+    "server-watch": {
+      dep: [".init-bundle.valid.log"],
+      desc: "Start app's node server in watch mode with nodemon",
+      task: () => {
+        const watches = [
+          Path.join(eTmpDir, "bundle.valid.log"),
+          AppMode.src.server,
+          "config"
+        ].map((n) => `--watch ${n}`).join(" ");
+        AppMode.setEnv(AppMode.src.dir);
+        const node = AppMode.isSrc ? `babel-node` : "node";
+        const serverIndex = Path.join(AppMode.src.server, "index.js");
+        return exec(`nodemon`,
+          `--delay 1 -C --ext js,jsx,json,yaml ${watches}`,
+          `--exec ${node} ${serverIndex}`);
+      }
+    },
+
+    "server-dev": {
+      desc: "Start webpack-dev-server in dev mode",
+      task: mkCmd("webpack-dev-server",
+        `--config ${config.webpack}/webpack.config.dev.js`,
+        `--progress --colors`,
+        `--port ${archetype.webpack.devPort}`)
+    },
+
+    "server-hot": {
+      desc: "Start webpack-dev-server in hot mode",
+      task: mkCmd("webpack-dev-server",
+        `--config ${config.webpack}/webpack.config.hot.js`,
+        `--hot --progress --colors --inline`,
+        `--port ${archetype.webpack.devPort}`)
+    },
+
+    "server-test": {
+      desc: "Start webpack-dev-server in test mode",
+      task: mkCmd("webpack-dev-server",
+        `--config ${config.webpack}/webpack.config.test.js`,
+        `--progress --colors`,
+        `--port ${archetype.webpack.testPort}`)
+    },
+
+    "test-server": () => [["lint-server", "lint-server-test"], "test-server-cov"],
+    "test-watch-all": ["server-test", "test-frontend-dev-watch"],
+
+    "test-ci": ["test-frontend-ci"],
+    "test-cov": ["test-frontend-cov", "test-server-cov"],
+    "test-dev": ["test-frontend-dev", "test-server-dev"],
+
+    "test-watch": () => exec(`pgrep -fl 'webpack-dev-server.*${archetype.webpack.testPort}`)
+      .then(() => exec(`gulp test-frontend-dev-watch`))
+      .catch(() => exec(`gulp test-watch-all`)),
+
+    "test-frontend": `karma start ${config.karma}/karma.conf.js --colors`,
+
+    "test-frontend-ci": mkCmd(`karma`,
+      `start --browsers PhantomJS,Firefox ${config.karma}/karma.conf.coverage.js`,
+      `--colors`),
+
+    "test-frontend-cov": mkCmd(`karma`,
+      `start ${config.karma}/karma.conf.coverage.js`, `--colors`),
+
+    "test-frontend-dev": () => exec(`pgrep -fl 'webpack-dev-server.*${archetype.webpack.testPort}'`)
+      .then(() => exec(`karma start ${config.karma}/karma.conf.dev.js --colors`))
+      .catch(() => exec(`gulp test-frontend`)),
+
+    "test-frontend-dev-watch": mkCmd(`karma start`,
+      `${config.karma}/karma.conf.watch.js`,
+      `--colors --browsers Chrome --no-single-run --auto-watch`),
+
+    "test-server-cov": () => {
+      if (shell.test("-d", "test/server")) {
+        AppMode.setEnv(AppMode.src.dir);
+        return exec(`istanbul cover _mocha`,
+          `-- -c --opts ${config.mocha}/mocha.opts test/server`);
+      }
+    },
+
+    "test-server-dev": () => {
+      if (shell.test("-d", "test/server")) {
+        AppMode.setEnv(AppMode.src.dir);
+        return exec(`mocha`,
+          `-c --opts ${config.mocha}/mocha.opts test/server`);
+      }
+    },
+
+    "build-analyze": {
+      dep: [".optimize-stats"],
+      desc: "Build your app's client bundle for production and run bundle analyzer",
+      task: ["build-dist", "optimize-stats"]
+    },
+    "run-electrify-cli": {
+      desc: false,
+      task: `electrify dist/server/stats.json -O`
+    },
+    "electrify": ["clean-dist", "build-webpack-stats-with-fullpath", "build-dist:clean-tmp", "run-electrify-cli"],
+    "build-webpack-stats-with-fullpath": {
+      desc: "Build static bundle with stats.json containing fullPaths to inspect the bundle on electrode-electrify",
+      task: `webpack --config ${config.webpack}/webpack.config.stats.electrify.js --colors`
+    },
+    "critical-css": {
+      desc: "Start server and run penthouse to output critical CSS",
+      task: inlineCriticalCSS
+    },
+    "generate-service-worker": {
+      desc: "Generate Service Worker using the options provided in the app/config/sw-precache-config.json file for prod/dev/hot mode",
+      task: () => generateServiceWorker()
+    },
     "optimize-stats": {
       desc: "Generate a list of all files that went into production bundle JS (results in .etmp)",
       task: `analyze-bundle -b dist/js/bundle.*.js -s dist/server/stats.json`
     },
-    "npm:test": ["check"],
-    "npm:release": `node ${__dirname}/scripts/map-isomorphic-cdn.js`,
     "pwa": {
       desc: "PWA must have dist by running `gulp build` first and then start the app server only.",
       task: ["build", "server"]
-    },
-    "server": {
-      desc: "Start the app server only, Must have dist by running `gulp build` first.",
-      task: `node server/index.js`
-    },
-    "server-prod": {
-      dep: [".production-env", ".static-files-env"],
-      desc: "Start server in production mode with static files routes.  Must have dist by running `gulp build`.",
-      task: `node server/index.js`
-    },
-    "server-debug": `node debug server/index.js`,
-    ".init-bundle.valid.log": () => fs.writeFileSync(Path.resolve(".etmp/bundle.valid.log"), `${Date.now()}`),
-    "server-watch": {
-      dep: [".init-bundle.valid.log"],
-      task: `nodemon -C --ext js,jsx,json,yaml --watch .etmp/bundle.valid.log --watch server --watch config server/index.js --exec node`
-    },
-    "server-dev": {
-      desc: "Start server in dev mode with webpack-dev-server",
-      task: `webpack-dev-server --config ${config.webpack}/webpack.config.dev.js --progress --colors --port ${archetype.webpack.devPort}`
-    },
-    "server-hot": {
-      desc: "Start server in hot mode with webpack-dev-server",
-      task: `webpack-dev-server --config ${config.webpack}/webpack.config.hot.js --hot --progress --colors --port ${archetype.webpack.devPort} --inline`
-    },
-    "server-test": {
-      desc: "Start server in test mode with webpack-dev-server",
-      task: `webpack-dev-server --config ${config.webpack}/webpack.config.test.js --progress --colors --port ${archetype.webpack.testPort}`
-    },
-    "test-ci": ["test-frontend-ci"],
-    "test-cov": ["test-frontend-cov", "test-server-cov"],
-    "test-dev": ["test-frontend-dev", "test-server-dev"],
-    "test-watch": () => exec(`pgrep -fl 'webpack-dev-server.*${archetype.webpack.testPort}`)
-      .then(() => exec(`gulp test-frontend-dev-watch`))
-      .catch(() => exec(`gulp test-watch-all`)),
-    "test-watch-all": ["server-test", "test-frontend-dev-watch"],
-    "test-frontend": `karma start ${config.karma}/karma.conf.js --colors`,
-    "test-frontend-ci": `karma start --browsers PhantomJS,Firefox ${config.karma}/karma.conf.coverage.js --colors`,
-    "test-frontend-cov": `karma start ${config.karma}/karma.conf.coverage.js --colors`,
-    "test-frontend-dev": () => exec(`pgrep -fl 'webpack-dev-server.*${archetype.webpack.testPort}'`)
-      .then(() => exec(`karma start ${config.karma}/karma.conf.dev.js --colors`))
-      .catch(() => exec(`gulp test-frontend`)),
-    "test-frontend-dev-watch": `karma start ${config.karma}/karma.conf.watch.js --colors --browsers Chrome --no-single-run --auto-watch`,
-    "test-server": () => [["lint-server", "lint-server-test"], "test-server-cov"],
-    "test-server-cov": () => shell.test("-d", "test/server") && exec(`istanbul cover _mocha -- -c --opts ${config.mocha}/mocha.opts test/server`),
-    "test-server-dev": () => shell.test("-d", "test/server") && exec(`mocha -c --opts ${config.mocha}/mocha.opts test/server`)
+    }
+  };
+
+  if (AppMode.isSrc) {
+    tasks = Object.assign(tasks, {
+      ".clean.lib": () => shell.rm("-rf", AppMode.lib.client, AppMode.lib.server, AppMode.savedFile),
+      ".build-lib:app-mode": () => Fs.writeFileSync(Path.resolve(AppMode.savedFile), JSON.stringify(AppMode, null, 2)),
+      ".build-lib": {
+        desc: false,
+        dep: [".clean.lib", ".mk-prod-dir"],
+        task: ["build-lib:client", "build-lib:server", ".build-lib:app-mode"]
+      }
+    });
+
   }
+
+  return tasks;
 }
+
 
 module.exports = function (gulp) {
   setupPath();
   createElectrodeTmpDir();
   gulp = gulp || require("gulp");
+  process.env.FORCE_COLOR = "true"; // force color for chalk
   gulpHelper.loadTasks(makeTasks(gulp), gulp);
 };

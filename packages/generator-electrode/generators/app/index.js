@@ -80,7 +80,7 @@ module.exports = generators.Base.extend({
       this.props.authorUrl = this.pkg.author.url;
       this.props.createDirectory = false;
       this.props.serverType = this.fs.exists(this.destinationPath('server/express-server.js')) ? ExpressJS :
-                                this.fs.exists(this.destinationPath('server/koa-server.js')) ? koaJS  : HapiJS;
+        this.fs.exists(this.destinationPath('server/koa-server.js')) ? koaJS : HapiJS;
       this.props.pwa = this.fs.exists(this.destinationPath('client/sw-registration.js'));
       this.props.autoSsr = this.fs.exists(this.destinationPath('server/plugins/autossr.js'));
     } else if (_.isString(this.pkg.author)) {
@@ -271,13 +271,16 @@ module.exports = generators.Base.extend({
       pkg.keywords = _.uniq(this.props.keywords.concat(pkg.keywords)).filter((x) => x);
     }
 
+    const sortDep = (dep) => {
+      if (typeof pkg[dep] === "object") {
+        pkg[dep] = _.pick(pkg[dep], Object.keys(pkg[dep]).sort());
+      }
+    };
+
+    ["dependencies", "devDependencies", "peerDependencies", "optionalDependencies"].forEach(sortDep);
+
     // Let's extend package.json so we're not overwriting user previous fields
     this.fs.writeJSON(this.destinationPath('package.json'), pkg);
-
-    this.fs.copy(
-      this.templatePath('babelrc'),
-      this.destinationPath('.babelrc')
-    );
 
     ['gulpfile.js', 'config', 'test'].forEach((f) => {
       this.fs.copy(
@@ -288,19 +291,21 @@ module.exports = generators.Base.extend({
 
     //special handling for the server file
     this.fs.copyTpl(
-      this.templatePath('server'),
-      this.destinationPath('server'),
+      this.templatePath('src/server'),
+      this.destinationPath('src/server'),
       {isHapi, isExpress},
       {},
       {
-        globOptions: {ignore: [isHapi ? '**/server/express-server.js, **/server/koa-server.js' :
-          isExpress ? '**/server/koa-server.js' : '**/server/express-server.js']}
+        globOptions: {
+          ignore: [isHapi ? '**/server/express-server.js, **/server/koa-server.js' :
+            isExpress ? '**/server/koa-server.js' : '**/server/express-server.js']
+        }
       }
     );
 
     this.fs.copyTpl(
-      this.templatePath('client'),
-      this.destinationPath('client'),
+      this.templatePath('src/client'),
+      this.destinationPath('src/client'),
       {pwa: isPWA},
       {}, // template options
       { // copy options
@@ -311,9 +316,13 @@ module.exports = generators.Base.extend({
       }
     );
 
+    ['src/client', 'src/server', 'test/client', 'test/server'].forEach((d) => {
+      this.fs.move(this.destinationPath(d + '/babelrc'), this.destinationPath(d + '/.babelrc'));
+    });
+
     this.fs.copy(
-      this.templatePath('client/images'),
-      this.destinationPath('client/images')
+      this.templatePath('src/client/images'),
+      this.destinationPath('src/client/images')
     );
   },
 

@@ -23,8 +23,8 @@ module.exports = generators.Base.extend({
     const isHapi = this.config.get('serverType') === 'hapijs';
 
     this.fs.copyTpl(
-      this.templatePath('server'),
-      this.destinationPath(this.options.generateInto, 'server'),
+      this.templatePath('src/server'),
+      this.destinationPath(this.options.generateInto, 'src/server'),
       {
         isHapi,
         pwa: this.options.pwa
@@ -42,8 +42,8 @@ module.exports = generators.Base.extend({
 
     if (this.options.pwa) {
       this.fs.copy(
-        this.templatePath('server/plugins/pwa.js'),
-        this.destinationPath(this.options.generateInto, 'server/plugins/pwa.js')
+        this.templatePath('src/server/plugins/pwa.js'),
+        this.destinationPath(this.options.generateInto, 'src/server/plugins/pwa.js')
       );
     }
   }

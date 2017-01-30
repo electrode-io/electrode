@@ -9,7 +9,7 @@
     "./server/plugins/csrf": {},
     "./server/plugins/pwa": {},
     "./server/plugins/autossr": {},
-    "./server/plugins/updateStorage": {},
+    "./server/plugins/update-storage": {},
     "webapp": {
       "module": "electrode-react-webapp/lib/hapi",
       "options": {

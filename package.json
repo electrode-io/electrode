@@ -16,7 +16,10 @@
     "test": "lerna bootstrap && lerna run test && gulp build-test",
     "test-generator": "gulp test-generator",
     "test-boilerplate": "gulp test-boilerplate",
-    "bootstrap": "lerna bootstrap"
+    "bootstrap": "lerna bootstrap",
+    "nuke": "rm -rf node_modules tmp lerna-debug.log npm-debug.log",
+    "nuke-packages": "rm -rf packages/*/node_modules packages/*/coverage",
+    "nuke-samples": "rm -rf samples/*/node_modules samples/*/coverage samples/*/dist samples/*/.isomorphic-loader-config.json samples/*/.etmp"
   },
   "devDependencies": {
     "electrode-gulp-helper": "^1.0.5",

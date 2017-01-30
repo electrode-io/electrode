@@ -1,8 +1,8 @@
 import React, {PropTypes} from "react";
-import { connect } from "react-redux";
-import { addTodo } from "../actions";
+import {connect} from "react-redux";
+import {addTodo} from "../actions";
 
-let AddTodo = ({ dispatch }) => {
+let AddTodo = ({dispatch}) => {
   let input;
 
   return (
@@ -17,7 +17,7 @@ let AddTodo = ({ dispatch }) => {
       }}>
         <input ref={(node) => {
           input = node;
-        }} />
+        }}/>
         <button type="submit">
           Add Todo
         </button>
