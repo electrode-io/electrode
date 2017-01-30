@@ -18,7 +18,7 @@ const registerRoutes = (app, options, next) => {
         registerOptions, ReactWebapp.resolveContent(v.content));
 
       let methods = v.method || ["GET"];
-      if (typeof (methods) !== "object") {
+      if (!Array.isArray(methods)) {
         methods = [methods];
       }
       _.each(methods, (method) => {

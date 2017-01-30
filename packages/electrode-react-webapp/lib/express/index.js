@@ -18,7 +18,7 @@ const registerRoutes = (app, options, next) => {
 
         /*eslint max-nested-callbacks: [0, 4]*/
         let methods = v.method || ["GET"];
-        if (typeof (methods) !== "object") {
+        if (!Array.isArray(methods)) {
           methods = [methods];
         }
         _.each(methods, (method) => {
