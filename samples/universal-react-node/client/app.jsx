@@ -22,9 +22,6 @@ const enhancer = compose(
 );
 
 window.webappStart = () => {
-  if (module.hot) {
-    module.hot.accept();
-  }
   const initialState = window.__PRELOADED_STATE__;
   const store = createStore(rootReducer, initialState, enhancer);
   render(

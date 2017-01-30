@@ -506,7 +506,7 @@ INFO: Individual .babelrc files were generated for you in src/client and src/ser
       desc: "Start webpack-dev-server in hot mode",
       task: mkCmd("webpack-dev-server",
         `--config ${config.webpack}/webpack.config.hot.js`,
-        `--progress --colors --inline`,
+        `--hot --progress --colors --inline`,
         `--port ${archetype.webpack.devPort}`)
     },
 
@@ -615,5 +615,6 @@ module.exports = function (gulp) {
   setupPath();
   createElectrodeTmpDir();
   gulp = gulp || require("gulp");
+  process.env.FORCE_COLOR = "true"; // force color for chalk
   gulpHelper.loadTasks(makeTasks(gulp), gulp);
 };

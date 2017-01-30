@@ -28,11 +28,7 @@ module.exports = function () {
 
     return mergeWebpackConfig(config, {
       devtool: "eval",
-      entry: entry,
-      plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin()
-      ]
+      entry: entry
     });
   };
 };
