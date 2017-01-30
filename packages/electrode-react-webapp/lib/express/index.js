@@ -16,23 +16,30 @@ const registerRoutes = (app, options, next) => {
         const routeHandler = ReactWebapp.makeRouteHandler(
           registerOptions, ReactWebapp.resolveContent(v.content));
 
-        app.get(path, (request, response) => {
-          const handleStatus = (data) => {
-            const status = data.status;
-            if (status === HTTP_REDIRECT) {
-              response.redirect(data.path);
-            } else {
-              response.send({message: "error"}).code(status);
-            }
-          };
+        /*eslint max-nested-callbacks: [0, 4]*/
+        const methods = v.methods || ["GET"];
+        _.each(methods, (method) => {
+          if (method === "*") {
+            method = "ALL";
+          }
+          app[method.toLowerCase()](path, (request, response) => { //eslint-disable-line
+            const handleStatus = (data) => {
+              const status = data.status;
+              if (status === HTTP_REDIRECT) {
+                response.redirect(data.path);
+              } else {
+                response.send({message: "error"}).code(status);
+              }
+            };
 
-          return routeHandler({mode: request.query.__mode || "", request})
-            .then((data) => {
-              return data.status ? handleStatus(data) : response.send(data);
-            })
-            .catch((err) => {
-              response.send(err.html).code(err.status || HTTP_ERROR_500);
-            });
+            return routeHandler({mode: request.query.__mode || "", request})
+              .then((data) => {
+                return data.status ? handleStatus(data) : response.send(data);
+              })
+              .catch((err) => {
+                response.send(err.html).code(err.status || HTTP_ERROR_500);
+              });
+          });
         });
       });
     })
