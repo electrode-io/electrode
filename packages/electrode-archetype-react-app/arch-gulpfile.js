@@ -400,8 +400,8 @@ INFO: Individual .babelrc files were generated for you in src/client and src/ser
 
     "debug": ["build-dev-static", "server-debug"],
     "dev": {
-      desc: "Start server with watch in development mode with webpack-dev-server",
-      task: [".webpack-dev", ["server-dev", "server-watch", "generate-service-worker"]]
+      desc: "Start your app with watch in development mode with webpack-dev-server",
+      task: [".webpack-dev", ["wds.dev", "server-watch", "generate-service-worker"]]
     },
 
     "dev-static": {
@@ -410,9 +410,9 @@ INFO: Individual .babelrc files were generated for you in src/client and src/ser
     },
 
     "hot": {
-      desc: "Start server with watch in hot mode with webpack-dev-server",
+      desc: "Start your app with watch in hot mode with webpack-dev-server",
       dep: [".development-env"],
-      task: [".webpack-dev", ["server-hot", "server-watch", "generate-service-worker"]]
+      task: [".webpack-dev", ["wds.hot", "server-watch", "generate-service-worker"]]
     },
 
     "lint": [["lint-client", "lint-client-test", "lint-server", "lint-server-test"]],
@@ -494,7 +494,7 @@ INFO: Individual .babelrc files were generated for you in src/client and src/ser
       }
     },
 
-    "server-dev": {
+    "wds.dev": {
       desc: "Start webpack-dev-server in dev mode",
       task: mkCmd("webpack-dev-server",
         `--config ${config.webpack}/webpack.config.dev.js`,
@@ -502,15 +502,15 @@ INFO: Individual .babelrc files were generated for you in src/client and src/ser
         `--port ${archetype.webpack.devPort}`)
     },
 
-    "server-hot": {
-      desc: "Start webpack-dev-server in hot mode",
+    "wds.hot": {
+      desc: "Start webpack-dev-server with Hot Module Reload",
       task: mkCmd("webpack-dev-server",
         `--config ${config.webpack}/webpack.config.hot.js`,
         `--hot --progress --colors --inline`,
         `--port ${archetype.webpack.devPort}`)
     },
 
-    "server-test": {
+    "wds.test": {
       desc: "Start webpack-dev-server in test mode",
       task: mkCmd("webpack-dev-server",
         `--config ${config.webpack}/webpack.config.test.js`,
@@ -519,7 +519,7 @@ INFO: Individual .babelrc files were generated for you in src/client and src/ser
     },
 
     "test-server": () => [["lint-server", "lint-server-test"], "test-server-cov"],
-    "test-watch-all": ["server-test", "test-frontend-dev-watch"],
+    "test-watch-all": ["wds.test", "test-frontend-dev-watch"],
 
     "test-ci": ["test-frontend-ci"],
     "test-cov": ["test-frontend-cov", "test-server-cov"],
