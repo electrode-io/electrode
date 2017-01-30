@@ -1,6 +1,6 @@
 # generator-electrode
 
-[![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url] [![devDependency Status][daviddm-dev-image]][daviddm-dev-url]
+[![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url] [![devDependency Status][daviddm-dev-image]][daviddm-dev-url] [![npm downloads][npm-downloads-image]][npm-downloads-url]
 > Generate Electrode ~~Isomorphic~~ Universal React App with NodeJS backend.
 
 ## Installation
@@ -62,6 +62,8 @@ Apache-2.0 © WalmartLabs
 [daviddm-url]: https://david-dm.org/electrode-io/electrode?path=packages/generator-electrode
 [daviddm-dev-image]:https://david-dm.org/electrode-io/electrode/dev-status.svg?path=packages/generator-electrode
 [daviddm-dev-url]:https://david-dm.org/electrode-io/electrode?path=packages/generator-electrode?type-dev
+[npm-downloads-image]:https://img.shields.io/npm/dm/generator-electrode.svg
+[npm-downloads-url]:https://www.npmjs.com/package/generator-electrode
 [gulp]: http://gulpjs.com/
 [Yeoman]: http://yeoman.io
 [npm]: https://www.npmjs.com/

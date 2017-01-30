@@ -1,6 +1,6 @@
 # Electrode Redux Router Engine
 
-[![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url] [![devDependency Status][daviddm-dev-image]][daviddm-dev-url]
+[![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url] [![devDependency Status][daviddm-dev-image]][daviddm-dev-url] [![npm downloads][npm-downloads-image]][npm-downloads-url]
 
 Handle async data for React Server Side Rendering using [react-router], Redux, and the [Redux Server Rendering] pattern.
 
@@ -146,3 +146,5 @@ Built with :heart: by [Team Electrode](https://github.com/orgs/electrode-io/peop
 [daviddm-url]: https://david-dm.org/electrode-io/electrode?path=packages/electrode-redux-router-engine
 [daviddm-dev-image]:https://david-dm.org/electrode-io/electrode/dev-status.svg?path=packages/electrode-redux-router-engine
 [daviddm-dev-url]:https://david-dm.org/electrode-io/electrode?path=packages/electrode-redux-router-engine?type-dev
+[npm-downloads-image]:https://img.shields.io/npm/dm/electrode-redux-router-engine.svg
+[npm-downloads-url]:https://www.npmjs.com/package/electrode-redux-router-engine
