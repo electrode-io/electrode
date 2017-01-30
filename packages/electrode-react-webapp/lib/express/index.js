@@ -17,7 +17,10 @@ const registerRoutes = (app, options, next) => {
           registerOptions, ReactWebapp.resolveContent(v.content));
 
         /*eslint max-nested-callbacks: [0, 4]*/
-        const methods = v.methods || ["GET"];
+        let methods = v.method || ["GET"];
+        if (!Array.isArray(methods)) {
+          methods = [methods];
+        }
         _.each(methods, (method) => {
           if (method === "*") {
             method = "ALL";

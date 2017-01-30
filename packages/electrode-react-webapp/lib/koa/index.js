@@ -17,7 +17,10 @@ const registerRoutes = (app, options, next) => {
       const routeHandler = ReactWebapp.makeRouteHandler(
         registerOptions, ReactWebapp.resolveContent(v.content));
 
-      const methods = v.methods || ["GET"];
+      let methods = v.method || ["GET"];
+      if (!Array.isArray(methods)) {
+        methods = [methods];
+      }
       _.each(methods, (method) => {
         if (method === "*") {
           method = "ALL";
