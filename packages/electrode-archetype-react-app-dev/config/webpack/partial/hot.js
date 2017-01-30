@@ -2,6 +2,7 @@
 
 var archetype = require("../../archetype");
 var mergeWebpackConfig = require("webpack-partial").default;
+var webpack = require("webpack");
 
 var getDefaultEntry = function (entry) {
   return [
