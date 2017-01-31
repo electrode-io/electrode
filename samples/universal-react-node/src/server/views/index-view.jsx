@@ -2,7 +2,6 @@ import ReduxRouterEngine from "electrode-redux-router-engine";
 import React from "react";
 import fs from "fs";
 import path from "path";
-
 import {routes} from "../../client/routes";
 import Promise from "bluebird";
 import {createStore} from "redux";

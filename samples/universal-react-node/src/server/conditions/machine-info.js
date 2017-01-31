@@ -7,4 +7,3 @@ module.exports = {
   loadAvgs: () => os.loadavg(),
   totalMem: () => os.totalmem()
 };
-

@@ -8,7 +8,6 @@ const SEC_IN_MIN = 60;
 
 module.exports = {
   detector: (_opts) => {
-
     const longResponseThreshold = _opts.longResponseThreshold ||
       DEFAULT_LONG_RESPONSE_THRESHOLD_MS;
     const longResponseAmount = _opts.longResponseAmount ||
@@ -26,28 +25,22 @@ module.exports = {
       // If number of tracked long response times exceeds permissible
       // amount, disable SSR for specified number of minutes
       if (request.server.app.longResponses > longResponseAmount) {
-
         const expires = Date.now() + (disableExpiryMins * MS_IN_SEC * SEC_IN_MIN); //eslint-disable-line
+
         request.server.app.disableSSR = true;
         request.server.app.disableSSRExpiry = expires;
-
         request.server.app.longResponses = 0;
       }
-
     };
   },
   actor: function responseTimeConditionActor(request, reply) {
     if (request.server.app.disableSSR) {
-
       if (request.info.received > request.server.app.disableSSRExpiry) {
         request.server.app.disableSSR = false;
       }
 
       request.app.disableSSR = true;
-
     }
-
     reply.continue();
-
   }
 };
