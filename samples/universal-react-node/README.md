@@ -209,7 +209,7 @@ self.addEventListener("push", (event) => {
   );
 });
 ```
-[Sample file](https://github.com/electrode-io/electrode-boilerplate-universal-react-node/blob/master/client/sw.js)
+[Sample file](https://github.com/electrode-io/electrode/blob/master/samples/universal-react-node/client/sw-events.js)
 
 #### 2. Include this file in your webpack bundle by referencing it in `sw-config.js`  
 ```
@@ -219,7 +219,7 @@ module.exports = {
     }
 }
 ```
-[Sample file](https://github.com/electrode-io/electrode-boilerplate-universal-react-node/blob/master/config/sw-config.js)
+[Sample file](https://github.com/electrode-io/electrode/blob/master/samples/universal-react-node/config/sw-config.js)
 
 #### 3. Register this service worker with the `push` event  
 ```
@@ -230,7 +230,7 @@ if ("serviceWorker" in navigator) {
   }
 }
 ```
-[Sample file](https://github.com/electrode-io/electrode-boilerplate-universal-react-node/blob/master/client/register-service-worker.js)
+[Sample file](https://github.com/electrode-io/electrode/blob/master/samples/universal-react-node/client/sw-registration.js)
 
 The service worker is ready to accept `push` from the server. On receiving the push, it will provide the `notification` to the browser.
 
@@ -239,7 +239,7 @@ We will be needing the API_KEY and GCM_ENDPOINT to send the messages from the se
 To generate these values, visit [Firebase](https://console.firebase.google.com) and create a new project.  
 Click on the setting icons and open `Project settings`.  
 Navigate to the `CLOUD MESSAGING` tab to view your `Server key or Legacy Server key` (API_KEY) and the `Sender ID`.  
-You need to update your `manifest` in `sw-config.js` to update the [gcm_sender_id](https://github.com/electrode-io/electrode-boilerplate-universal-react-node/blob/master/config/sw-config.js#L18).  
+You need to update your `manifest` in `sw-config.js` to update the [gcm_sender_id](https://github.com/electrode-io/electrode/blob/master/samples/universal-react-node/config/sw-config.js#L18).  
 
 ## Instructions for sending a push notification  
 Now that we have our service worker up and running, we can send a `push` with the following steps:  
@@ -259,7 +259,7 @@ navigator.serviceWorker.ready.then((registration) => {
     });
 });
 ```
-[Sample subscription](https://github.com/electrode-io/electrode-boilerplate-universal-react-node/blob/master/client/components/push-notifications.jsx#L73-L86)  
+[Sample subscription](https://github.com/electrode-io/electrode/blob/master/samples/universal-react-node/client/components/push-notifications.jsx#L73-L86)  
 
 Typically, after the user subscribes, we send the subscription information to the server and the server uses the `subscriptionId` to trigger a notification.
 
@@ -277,7 +277,7 @@ sendNotification() {
    });
  }
 ```
-[Sample](https://github.com/electrode-io/electrode-boilerplate-universal-react-node/blob/master/client/components/push-notifications.jsx#L94-L100)
+[Sample](https://github.com/electrode-io/electrode/blob/master/samples/universal-react-node/client/components/push-notifications.jsx#L94-L100)
 
 `navigator.serviceWorker.ready` is a Promise that will resolve once a service worker is registered, and it returns a reference to the active [ServiceWorkerRegistration](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration). The showNotification() method of the ServiceWorkerRegistration interface creates a notification and returns a Promise that resolves to a [NotificationEvent](https://developer.mozilla.org/en-US/docs/Web/API/NotificationEvent).
 
