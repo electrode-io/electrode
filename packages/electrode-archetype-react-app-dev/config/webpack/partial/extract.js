@@ -49,7 +49,7 @@ module.exports = function () {
   return function (config) {
     var stylusQuery = cssLoader + "?-autoprefixer!" + stylusLoader;
     var cssQuery = cssLoader + "?modules&-autoprefixer!" + postcssLoader;
-
+    var hmr = process.env.HMR === "true";
     // By default, this archetype assumes you are using CSS-Modules + CSS-Next
     var loaders = [{
         name: "extract-css",
