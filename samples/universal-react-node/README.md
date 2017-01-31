@@ -69,7 +69,7 @@ This repo is a sample Electrode app with the following Electrode modules:
 ## Install
 
 ```bash
-git clone https://github.com/electrode-io/electrode-boilerplate-universal-react-node.git
+git clone https://github.com/electrode-io/electrode.git
 cd electrode-boilerplate-universal-react-node
 npm install
 ```
