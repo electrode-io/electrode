@@ -12,21 +12,16 @@ ElectrodeSSRFlag.register = function (server, options, next) {
   }, options);
 
   if (!_opts.disabled.serverLoadCondition) {
-
     const serverLoadHandler = serverLoadCondition(_opts);
     server.ext("onPreHandler", serverLoadHandler);
-
   }
 
   if (!_opts.disabled.machineLoadCondition) {
-
     const machineLoadHandler = machineLoadCondition(_opts);
     server.ext("onPreHandler", machineLoadHandler);
-
   }
 
   if (!_opts.disabled.responseTimeCondition) {
-
     if (server.app.longResponses === undefined) {
       server.app.longResponses = 0;
     }
@@ -36,11 +31,9 @@ ElectrodeSSRFlag.register = function (server, options, next) {
 
     const responseTimeActor = responseTimeCondition.actor;
     server.ext("onPreHandler", responseTimeActor);
-
   }
 
   next();
-
 };
 
 ElectrodeSSRFlag.register.attributes = {

@@ -10,6 +10,7 @@ plugin.register = function (server, options, next) {
       file: "dist/sw.js"
     }
   });
+
   next();
 };
 

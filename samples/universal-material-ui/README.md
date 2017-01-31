@@ -178,4 +178,4 @@ Apache-2.0 © [Joel Chen](https://github.com/jchip)
 [yeoman]: http://yeoman.io/
 [Card example]: http://www.material-ui.com/#/components/card
 [isomorphic-loader]: https://github.com/electrode-io/isomorphic-loader
-[screenshot]: https://cloud.githubusercontent.com/assets/5876741/19024379/377359ec-88b7-11e6-863b-a41133cc42ef.png
+[screenshot]: https://cloud.githubusercontent.com/assets/4782871/22477359/996f3d36-e79a-11e6-8d93-377b1ad1f2f3.png
