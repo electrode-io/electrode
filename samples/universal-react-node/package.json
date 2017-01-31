@@ -14,7 +14,7 @@
   "files": [
     "lib"
   ],
-  "main": "server/index.js",
+  "main": "{{env.APP_SRC_DIR}}server/index.js",
   "keywords": [
     "electrode",
     "app",

@@ -6,10 +6,18 @@
         "expiresIn": 60
       }
     },
-    "./server/plugins/csrf": {},
-    "./server/plugins/pwa": {},
-    "./server/plugins/autossr": {},
-    "./server/plugins/update-storage": {},
+    "./server/plugins/csrf": {
+      "module": "./{{env.APP_SRC_DIR}}server/plugins/csrf"
+    },
+    "./server/plugins/pwa": {
+      "module": "./{{env.APP_SRC_DIR}}server/plugins/pwa"
+    },
+    "./server/plugins/autossr": {
+      "module": "./{{env.APP_SRC_DIR}}server/plugins/autossr"
+    },
+    "./server/plugins/updateStorage": {
+      "module": "./{{env.APP_SRC_DIR}}server/plugins/update-storage"
+    },
     "webapp": {
       "module": "electrode-react-webapp/lib/hapi",
       "options": {
@@ -17,7 +25,7 @@
         "paths": {
           "/{args*}": {
             "content": {
-              "module": "./server/views/index-view"
+              "module": "./{{env.APP_SRC_DIR}}server/views/index-view"
             }
           }
         }
