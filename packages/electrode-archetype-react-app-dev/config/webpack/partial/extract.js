@@ -54,14 +54,14 @@ module.exports = function () {
     var loaders = [{
         name: "extract-css",
         test: /\.css$/,
-        loader: hmr ? "style!css?modules&-autoprefixer!postcss" : ExtractTextPlugin.extract(styleLoader, cssQuery, {publicPath: ""})
+        loader: hmr ? `${styleLoader}!${cssQuery}` : ExtractTextPlugin.extract(styleLoader, cssQuery, {publicPath: ""})
       }];
 
     if (!cssModuleSupport) {
       loaders.push({
         name: "extract-stylus",
         test: /\.styl$/,
-        loader: hmr ? "style!css?-autoprefixer!stylus-relative-loader" : ExtractTextPlugin.extract(styleLoader, stylusQuery, {publicPath: "" })
+        loader: hmr ? `${styleLoader}!${stylusQuery}` : ExtractTextPlugin.extract(styleLoader, stylusQuery, {publicPath: "" })
       });
     }
 
