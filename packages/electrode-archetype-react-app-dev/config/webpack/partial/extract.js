@@ -52,16 +52,16 @@ module.exports = function () {
 
     // By default, this archetype assumes you are using CSS-Modules + CSS-Next
     var loaders = [{
-      name: "extract-css",
-      test: /\.css$/,
-      loader: ExtractTextPlugin.extract(styleLoader, cssQuery, {publicPath: ""})
-    }];
+        name: "extract-css",
+        test: /\.css$/,
+        loader: hmr ? "style!css?modules&-autoprefixer!postcss" : ExtractTextPlugin.extract(styleLoader, cssQuery, {publicPath: ""})
+      }];
 
     if (!cssModuleSupport) {
       loaders.push({
         name: "extract-stylus",
         test: /\.styl$/,
-        loader: ExtractTextPlugin.extract(styleLoader, stylusQuery, {publicPath: "" })
+        loader: hmr ? "style!css??-autoprefixer!stylus-relative-loader" : ExtractTextPlugin.extract(styleLoader, stylusQuery, {publicPath: "" })
       });
     }
 
