@@ -61,7 +61,7 @@ module.exports = function () {
       loaders.push({
         name: "extract-stylus",
         test: /\.styl$/,
-        loader: hmr ? "style!css??-autoprefixer!stylus-relative-loader" : ExtractTextPlugin.extract(styleLoader, stylusQuery, {publicPath: "" })
+        loader: hmr ? "style!css?-autoprefixer!stylus-relative-loader" : ExtractTextPlugin.extract(styleLoader, stylusQuery, {publicPath: "" })
       });
     }
 
