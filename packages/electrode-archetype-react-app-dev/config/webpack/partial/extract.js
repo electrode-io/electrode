@@ -28,6 +28,7 @@ var AppMode = archetype.AppMode;
  * case 3: *both* *.css & *.styl exists => CSS-Modules + CSS-Next takes priority
  *          with a warning message
  * case 4: *none* *.css & *.styl exists => CSS-Modules + CSS-Next takes priority
+ * case 5: *cssStylusSupport* config is true => Use both Stylus and CSS Modules
  */
 
 var cssNextExists = (glob.sync(Path.resolve(AppMode.src.client, "**", "*.css")).length > 0);
@@ -47,8 +48,10 @@ if (stylusExists && !cssNextExists) {
 
 module.exports = function () {
   return function (config) {
+    var cssStylusSupport = config.cssStylusSupport;
     var stylusQuery = cssLoader + "?-autoprefixer!" + stylusLoader;
     var cssQuery = cssLoader + "?modules&-autoprefixer!" + postcssLoader;
+    var cssStylusQuery = cssLoader + "?modules&-autoprefixer!" + postcssLoader + "!" + stylusLoader;
 
     // By default, this archetype assumes you are using CSS-Modules + CSS-Next
     var loaders = [{
@@ -57,7 +60,13 @@ module.exports = function () {
       loader: ExtractTextPlugin.extract(styleLoader, cssQuery, {publicPath: ""})
     }];
 
-    if (!cssModuleSupport) {
+    if (config.cssStylusSupport) {
+      loaders.push({
+        name: "extract-css-stylus",
+        test: /\.styl$/,
+        loader: ExtractTextPlugin.extract(styleLoader, cssStylusQuery, {publicPath: "" })
+      });
+    } else if (!cssModuleSupport) {
       loaders.push({
         name: "extract-stylus",
         test: /\.styl$/,
