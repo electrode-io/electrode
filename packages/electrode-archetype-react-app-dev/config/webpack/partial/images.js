@@ -23,7 +23,6 @@ module.exports = function () {
     return mergeWebpackConfig(config, {
       module: {
         rules: [{
-          name: "images",
           test: /\.(jpe?g|png|gif|svg)(\?\S*)?$/i,
           use: [
             {

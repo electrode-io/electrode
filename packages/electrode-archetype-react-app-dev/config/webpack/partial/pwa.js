@@ -188,7 +188,7 @@ module.exports = function () {
     }
 
     return mergeWebpackConfig(config, {
-      __wmlMultiBundle: typeof entry === 'object',
+      // __wmlMultiBundle: typeof entry === 'object', // TODO: webpack 2.0 invalid
       entry: entry,
       output: output,
       module: {

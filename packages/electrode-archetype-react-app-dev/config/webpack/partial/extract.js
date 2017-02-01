@@ -7,8 +7,9 @@ var mergeWebpackConfig = require("webpack-partial").default;
 var glob = require("glob");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var CSSSplitPlugin = require("css-split-webpack-plugin").default;
-var atImport = require("postcss-import");
-var cssnext = require("postcss-cssnext");
+// TODO: fix postcss for webpack 2.0
+// var atImport = require("postcss-import");
+// var cssnext = require("postcss-cssnext");
 
 var autoprefixer = require("autoprefixer-stylus");
 var cssLoader = require.resolve("css-loader");
@@ -52,33 +53,46 @@ module.exports = function () {
 
     // By default, this archetype assumes you are using CSS-Modules + CSS-Next
     var rules = [{
-      name: "extract-css-loader",
       test: /\.css$/,
       loader: ExtractTextPlugin.extract({fallbackLoader: styleLoader, loader: cssQuery, publicPath: ""})
     }];
 
     if (!cssModuleSupport) {
       rules.push({
-        name: "extract-stylus-loader",
         test: /\.styl$/,
         loader: ExtractTextPlugin.extract({fallbackLoader: styleLoader, loader: stylusQuery, publicPath: ""})
       });
     }
 
+    if (cssModuleSupport) {
+      rules.push({
+        test: /\.scss$/,
+        use: [
+          {
+            loader: "postcss-loader",
+            options: {
+              browsers: ["last 2 versions", "ie >= 9", "> 5%"]
+            }
+          }
+        ]
+      });
+    }
+
     return mergeWebpackConfig(config, {
       module: {rules},
-      postcss: function () {
-        return cssModuleSupport ? [atImport, cssnext({
-          browsers: ["last 2 versions", "ie >= 9", "> 5%"]
-        })] : [];
-      },
-      stylus: {
-        use: function () {
-          return !cssModuleSupport ? [autoprefixer({
-            browsers: ["last 2 versions", "ie >= 9", "> 5%"]
-          })] : [];
-        }
-      },
+      // TODO: invalid with webpack 2.0
+      // postcss: function () {
+      //   return cssModuleSupport ? [atImport, cssnext({
+      //     browsers: ["last 2 versions", "ie >= 9", "> 5%"]
+      //   })] : [];
+      // },
+      // stylus: {
+      //   use: function () {
+      //     return !cssModuleSupport ? [autoprefixer({
+      //       browsers: ["last 2 versions", "ie >= 9", "> 5%"]
+      //     })] : [];
+      //   }
+      // },
       plugins: [
         new ExtractTextPlugin(
           {filename: config.__wmlMultiBundle ? "[name].style.[hash].css" : "style.[hash].css"}),

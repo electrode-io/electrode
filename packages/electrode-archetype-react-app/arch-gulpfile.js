@@ -288,8 +288,12 @@ function makeTasks(gulp) {
       task: [".clean.dist", "build-dist-dev-static"]
     },
 
-    "build-dist": [".clean.dist", ".clean.dll", "build-dist-dll", "build-dist-min", "build-dist:flatten-l10n",
-      "build-dist:merge-isomorphic-assets", "copy-dll", "build-dist:clean-tmp"],
+    // TODO: fix DLL for webpack 2.0
+    // "build-dist": [".clean.dist", ".clean.dll", "build-dist-dll", "build-dist-min", "build-dist:flatten-l10n",
+    //   "build-dist:merge-isomorphic-assets", "copy-dll", "build-dist:clean-tmp"],
+
+    "build-dist": [".clean.dist", "build-dist-min", "build-dist:flatten-l10n",
+      "build-dist:merge-isomorphic-assets", "build-dist:clean-tmp"],
 
     "build-dist-dev-static": {
       desc: false,

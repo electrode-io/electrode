@@ -11,7 +11,7 @@ var fontsConfig = require("./partial/fonts");
 var imagesConfig = require("./partial/images");
 var statsConfig = require("./partial/stats");
 var isomorphicConfig = require("./partial/isomorphic");
-var pwaConfig = require("./partial/pwa");
+// var pwaConfig = require("./partial/pwa");
 var archetype = require("../archetype");
 var Path = archetype.Path;
 var AppMode = archetype.AppMode;
@@ -50,10 +50,10 @@ var entry = appEntry();
 var multiBundle = _.isObject(entry);
 
 var baseConfig = {
-  __wmlMultiBundle: multiBundle,
+  // __wmlMultiBundle: multiBundle, // TODO: webpack 2.0 invalid
   cache: true,
   context: context,
-  debug: false,
+  // debug: false, // TODO: webpack 2.0 invalid
   entry: entry,
   output: {
     path: Path.resolve("dist", "js"),
@@ -68,10 +68,11 @@ var baseConfig = {
     modules: [
       archetypeNodeModules,
       archetypeDevNodeModules,
-      AppMode.isSrc && Path.resolve(AppMode.src.dir) || null,
-      process.cwd(),
-      "node_modules"
-    ].concat(archetype.webpack.modulesDirectories).filter(_.identity),
+      AppMode.isSrc && Path.resolve(AppMode.src.dir) || null
+    ]
+      .concat(archetype.webpack.modulesDirectories)
+      .concat(["node_modules"])
+      .filter(_.identity),
     extensions: [".js", ".jsx", ".json"]
   },
   resolveLoader: {
@@ -79,7 +80,7 @@ var baseConfig = {
       archetypeNodeModules,
       archetypeDevNodeModules,
       Path.resolve("lib"),
-      process.cwd(),
+      // process.cwd(),
       "node_modules"
     ].filter(_.identity)
   }
@@ -92,6 +93,6 @@ module.exports = _.flow(
   fontsConfig(),
   imagesConfig(),
   statsConfig(),
-  isomorphicConfig(),
-  pwaConfig()
+  isomorphicConfig()
+  // pwaConfig() // TODO: fix pwa for webpack 2.0
 )();

@@ -12,7 +12,6 @@ module.exports = function () {
       module: {
         rules: [
           {
-            name: "woff",
             test: /\.(woff|woff2)(\?\S*)?$/i,
             use: [
               {
@@ -26,7 +25,6 @@ module.exports = function () {
             ]
           },
           {
-            name: "fonts",
             test: /\.(eot|ttf)(\?\S*)?$/i,
             use: [
               fileLoader,

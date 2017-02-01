@@ -11,23 +11,23 @@ module.exports = function (babel) {
   var babelExcludeRegex = new RegExp(`(node_modules|\b${Path.join(AppMode.src.client, "vendor")}\b)`);
   return function (config) {
     var hmr = process.env.HMR !== undefined;
-
+    var babelLoader = {
+      test: /\.jsx?$/,
+      exclude: babelExcludeRegex,
+      use: [
+        hmr && "react-hot-loader",
+        {
+          loader: "babel-loader",
+          options: babel
+        }
+      ].filter(_.identity)
+    };
+    if (hmr) {
+      babelLoader.include = Path.resolve(AppMode.src.client);
+    }
     return mergeWebpackConfig(config, {
       module: {
-        rules: [
-          {
-            test: /\.jsx?$/,
-            include: hmr && Path.resolve(AppMode.src.client),
-            exclude: babelExcludeRegex,
-            use: [
-              hmr && "react-hot-loader",
-              {
-                loader: "babel-loader",
-                options: babel
-              }
-            ].filter(_.identity)
-          }
-        ]
+        rules: [ babelLoader ]
       }
     });
   };
