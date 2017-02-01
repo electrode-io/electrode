@@ -8,7 +8,7 @@ var _ = require("lodash");
 
 module.exports = function (babel) {
   // regex \b for word boundaries
-  var babelExcludeRegex = new RegExp(`(node_modules|\b${Path.join(AppMode.src.client, "vendor")}\b)`);
+  var babelExcludeRegex = new RegExp(`(node_modules|\\b${Path.join(AppMode.src.client, "vendor")}\\b)`);
   return function (config) {
     var hmr = process.env.HMR !== undefined;
 
