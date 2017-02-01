@@ -78,8 +78,8 @@ function createEntryConfigFromScripts(importScripts, entry) {
   // we assume its a string and use it as the main entry point.
   var newEntry = typeof entry === "object"
     ? Object.assign({}, entry)
-    : { main: entry };
-  return importScripts.reduce(function(acc, script) {
+    : {main: entry};
+  return importScripts.reduce(function (acc, script) {
     var name = Path.parse(script).name;
     acc[name] = script;
     return acc;
@@ -115,7 +115,7 @@ module.exports = function () {
     }, swConfig.cache);
 
     if (cacheConfig.runtimeCaching) {
-      cacheConfig.runtimeCaching = cacheConfig.runtimeCaching.map(function(runtimeCache) {
+      cacheConfig.runtimeCaching = cacheConfig.runtimeCaching.map(function (runtimeCache) {
         return {
           handler: runtimeCache.handler,
           urlPattern: new RegExp(runtimeCache.urlPattern)
@@ -192,10 +192,18 @@ module.exports = function () {
       entry: entry,
       output: output,
       module: {
-        loaders: [
+        rules: [
           {
             test: /manifest.json$/,
-            loader: fileLoader + "?name=manifest.json!" + webAppManifestLoader
+            use: [
+              {
+                loader: fileLoader,
+                options: {
+                  name: "manifest.json"
+                }
+              },
+              webAppManifestLoader
+            ]
           }
         ]
       },

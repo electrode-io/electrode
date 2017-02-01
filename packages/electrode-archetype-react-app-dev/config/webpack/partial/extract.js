@@ -51,45 +51,42 @@ module.exports = function () {
     var cssQuery = cssLoader + "?modules&-autoprefixer!" + postcssLoader;
 
     // By default, this archetype assumes you are using CSS-Modules + CSS-Next
-    var loaders = [{
-      name: "extract-css",
+    var rules = [{
+      name: "extract-css-loader",
       test: /\.css$/,
-      loader: ExtractTextPlugin.extract(styleLoader, cssQuery, {publicPath: ""})
+      loader: ExtractTextPlugin.extract({fallbackLoader: styleLoader, loader: cssQuery, publicPath: ""})
     }];
 
     if (!cssModuleSupport) {
-      loaders.push({
-        name: "extract-stylus",
+      rules.push({
+        name: "extract-stylus-loader",
         test: /\.styl$/,
-        loader: ExtractTextPlugin.extract(styleLoader, stylusQuery, {publicPath: "" })
+        loader: ExtractTextPlugin.extract({fallbackLoader: styleLoader, loader: stylusQuery, publicPath: ""})
       });
     }
 
     return mergeWebpackConfig(config, {
-      module: {
-        loaders: loaders
-      },
+      module: {rules},
       postcss: function () {
         return cssModuleSupport ? [atImport, cssnext({
           browsers: ["last 2 versions", "ie >= 9", "> 5%"]
         })] : [];
       },
       stylus: {
-        use: function() {
+        use: function () {
           return !cssModuleSupport ? [autoprefixer({
             browsers: ["last 2 versions", "ie >= 9", "> 5%"]
           })] : [];
         }
       },
       plugins: [
-        new ExtractTextPlugin(config.__wmlMultiBundle
-          ? "[name].style.[hash].css"
-          : "style.[hash].css"),
+        new ExtractTextPlugin(
+          {filename: config.__wmlMultiBundle ? "[name].style.[hash].css" : "style.[hash].css"}),
 
         /*
-        preserve: default: false. Keep the original unsplit file as well.
-        Sometimes this is desirable if you want to target a specific browser (IE)
-        with the split files and then serve the unsplit ones to everyone else.
+         preserve: default: false. Keep the original unsplit file as well.
+         Sometimes this is desirable if you want to target a specific browser (IE)
+         with the split files and then serve the unsplit ones to everyone else.
          */
         new CSSSplitPlugin({size: 4000, imports: true, preserve: true})
       ]

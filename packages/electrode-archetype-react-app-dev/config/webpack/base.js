@@ -11,7 +11,6 @@ var fontsConfig = require("./partial/fonts");
 var imagesConfig = require("./partial/images");
 var statsConfig = require("./partial/stats");
 var isomorphicConfig = require("./partial/isomorphic");
-var jsonConfig = require("./partial/json");
 var pwaConfig = require("./partial/pwa");
 var archetype = require("../archetype");
 var Path = archetype.Path;
@@ -66,22 +65,23 @@ var baseConfig = {
       : "bundle.[hash].js"
   },
   resolve: {
-    root: [
+    modules: [
       archetypeNodeModules,
       archetypeDevNodeModules,
       AppMode.isSrc && Path.resolve(AppMode.src.dir) || null,
-      process.cwd()
-    ].filter((x) => x),
-    modulesDirectories: ["node_modules"].concat(archetype.webpack.modulesDirectories),
-    extensions: ["", ".js", ".jsx"]
+      process.cwd(),
+      "node_modules"
+    ].concat(archetype.webpack.modulesDirectories).filter(_.identity),
+    extensions: [".js", ".jsx", ".json"]
   },
   resolveLoader: {
-    root: [
+    modules: [
       archetypeNodeModules,
       archetypeDevNodeModules,
       Path.resolve("lib"),
-      process.cwd()
-    ].filter((x) => x)
+      process.cwd(),
+      "node_modules"
+    ].filter(_.identity)
   }
 };
 
@@ -93,6 +93,5 @@ module.exports = _.flow(
   imagesConfig(),
   statsConfig(),
   isomorphicConfig(),
-  jsonConfig(),
   pwaConfig()
 )();

@@ -7,7 +7,7 @@ var isomorphicLoader = require.resolve("isomorphic-loader");
 var _ = require("lodash");
 
 function getCdnLoader() {
-  var loader = _(["electrode-cdn-file-loader", "cdn-file-loader", "file-loader"]).find(function(x) {
+  var loader = _(["electrode-cdn-file-loader", "cdn-file-loader", "file-loader"]).find(function (x) {
     try {
       return require.resolve(x);
     } catch (e) {
@@ -18,14 +18,22 @@ function getCdnLoader() {
   return loader && require.resolve(loader) || "file-loader";
 }
 
-module.exports = function() {
-  return function(config) {
+module.exports = function () {
+  return function (config) {
     return mergeWebpackConfig(config, {
       module: {
-        loaders: [{
+        rules: [{
           name: "images",
           test: /\.(jpe?g|png|gif|svg)(\?\S*)?$/i,
-          loader: getCdnLoader() + "?limit=10000!" + isomorphicLoader
+          use: [
+            {
+              loader: getCdnLoader(),
+              options: {
+                limit: 10000
+              }
+            },
+            isomorphicLoader
+          ]
         }]
       }
     });

@@ -14,22 +14,18 @@ module.exports = function (babel) {
 
     return mergeWebpackConfig(config, {
       module: {
-        loaders: [
+        rules: [
           {
-            name: "babel",
             test: /\.jsx?$/,
             include: hmr && Path.resolve(AppMode.src.client),
             exclude: babelExcludeRegex,
-            loaders: [
+            use: [
               hmr && "react-hot-loader",
-              "babel-loader"
-            ].filter(_.identity),
-            query: babel
-          },
-          {
-            name: "json",
-            test: /\.json$/,
-            loader: "json"
+              {
+                loader: "babel-loader",
+                options: babel
+              }
+            ].filter(_.identity)
           }
         ]
       }
