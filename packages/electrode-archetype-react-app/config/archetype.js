@@ -137,20 +137,20 @@ function loadDev() {
     devDir,
     devPkg,
     devRequire,
-    webpack: Object.assign({}, archetypeOptions.webpack, {
+    webpack: Object.assign({}, {
       devHostname: "localhost",
       devPort: getInt(process.env.WEBPACK_DEV_PORT, 2992),
       testPort: getInt(process.env.WEBPACK_TEST_PORT, 3001),
       modulesDirectories: []
-    }),
-    config: Object.assign({}, archetypeOptions.configPaths, {
+    }, archetypeOptions.webpack),
+    config: Object.assign({}, {
       babel: `${configDir}/babel`,
       eslint: `${configDir}/eslint`,
       istanbul: `${configDir}/istanbul`,
       karma: `${configDir}/karma`,
       mocha: `${configDir}/mocha`,
       webpack: `${configDir}/webpack`
-    })
+    }, archetypeOptions.configPaths)
   });
 }
 
