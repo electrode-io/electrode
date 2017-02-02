@@ -100,12 +100,14 @@ function getArchetypeOptions() {
   return archetypeOptions;
 }
 
+const archetypeOptions = getArchetypeOptions();
+
 
 module.exports = {
   dir: Path.resolve(__dirname, ".."),
   pkg,
   Path,
-  options: getArchetypeOptions(),
+  options: archetypeOptions,
   AppMode: makeAppMode(),
   prodDir,
   eTmpDir: ".etmp",
@@ -135,20 +137,20 @@ function loadDev() {
     devDir,
     devPkg,
     devRequire,
-    webpack: {
+    webpack: Object.assign({}, archetypeOptions.webpack, {
       devHostname: "localhost",
       devPort: getInt(process.env.WEBPACK_DEV_PORT, 2992),
       testPort: getInt(process.env.WEBPACK_TEST_PORT, 3001),
       modulesDirectories: []
-    },
-    config: {
+    }),
+    config: Object.assign({}, archetypeOptions.configPaths, {
       babel: `${configDir}/babel`,
       eslint: `${configDir}/eslint`,
       istanbul: `${configDir}/istanbul`,
       karma: `${configDir}/karma`,
       mocha: `${configDir}/mocha`,
       webpack: `${configDir}/webpack`
-    }
+    })
   });
 }
 
