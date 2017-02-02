@@ -107,7 +107,6 @@ module.exports = {
   dir: Path.resolve(__dirname, ".."),
   pkg,
   Path,
-  options: archetypeOptions,
   AppMode: makeAppMode(),
   prodDir,
   eTmpDir: ".etmp",

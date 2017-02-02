@@ -43,7 +43,7 @@ if (stylusExists && !cssNextExists) {
 
 module.exports = function () {
   return function (config) {
-    var cssModuleStylusSupport = archetype.options.cssModuleStylusSupport;
+    var cssModuleStylusSupport = archetype.webpack.cssModuleStylusSupport;
     var stylusQuery = cssLoader + "?-autoprefixer!" + stylusLoader;
     var cssQuery = cssLoader + "?modules&-autoprefixer!" + postcssLoader;
     var cssStylusQuery = cssLoader + "?modules&-autoprefixer!" + postcssLoader + "!" + stylusLoader;
