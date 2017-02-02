@@ -87,11 +87,25 @@ function checkUserBabelRc() {
   return false;
 }
 
+function getArchetypeOptions() {
+  var archetypeOptionsPath = Path.join(process.cwd(), "archetype", "config.js");
+  var archetypeOptions;
+
+  try {
+    archetypeOptions = require(archetypeOptionsPath) || {};
+  } catch (err) {
+    archetypeOptions = {};
+  }
+
+  return archetypeOptions;
+}
+
 
 module.exports = {
   dir: Path.resolve(__dirname, ".."),
   pkg,
   Path,
+  options: getArchetypeOptions(),
   AppMode: makeAppMode(),
   prodDir,
   eTmpDir: ".etmp",
