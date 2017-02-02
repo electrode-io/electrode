@@ -47,11 +47,25 @@ function appEntry() {
   return fs.existsSync(Path.join(context, "app.js")) ? "./app.js" : "./app.jsx";
 }
 
+function getArchetypeConfig() {
+  var archetypeConfigPath = Path.join(process.cwd(), "archetype", "config.js");
+  var archetypeConfig;
+
+  try {
+    archetypeConfig = require(archetypeConfigPath);
+  } catch (err) {
+    archetypeConfig = {};
+  }
+
+  return archetypeConfig;
+}
+
 var entry = appEntry();
 var multiBundle = _.isObject(entry);
 
 var baseConfig = {
   __wmlMultiBundle: multiBundle,
+  __archetypeConfig: getArchetypeConfig(),
   cache: true,
   context: context,
   debug: false,

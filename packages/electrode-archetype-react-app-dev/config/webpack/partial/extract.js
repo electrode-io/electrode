@@ -18,23 +18,6 @@ var postcssLoader = require.resolve("postcss-loader");
 
 var AppMode = archetype.AppMode;
 
-function getCssModuleStylusSupport() {
-  var configPath = Path.resolve("config", "css-config.js");
-  var cssModuleStylusSupport = false;
-
-  try {
-    var cssModuleStylusConfig = require(configPath);
-
-    if (cssModuleStylusConfig && cssModuleStylusConfig.cssModuleStylusSupport === true) {
-      cssModuleStylusSupport = true;
-    }
-  } catch (err) {
-   //
-  }
-
-  return cssModuleStylusSupport;
-}
-
 /**
  * [cssModuleSupport By default, this archetype assumes you are using CSS-Modules + CSS-Next]
  *
@@ -53,7 +36,6 @@ var stylusExists = (glob.sync(Path.resolve(AppMode.src.client, "**", "*.styl")).
 
 // By default, this archetype assumes you are using CSS-Modules + CSS-Next
 var cssModuleSupport = true;
-var cssModuleStylusSupport = getCssModuleStylusSupport();
 
 if (stylusExists && !cssNextExists) {
   cssModuleSupport = false;
@@ -61,6 +43,7 @@ if (stylusExists && !cssNextExists) {
 
 module.exports = function () {
   return function (config) {
+    var cssModuleStylusSupport = config.__archetypeConfig.cssModuleStylusSupport;
     var stylusQuery = cssLoader + "?-autoprefixer!" + stylusLoader;
     var cssQuery = cssLoader + "?modules&-autoprefixer!" + postcssLoader;
     var cssStylusQuery = cssLoader + "?modules&-autoprefixer!" + postcssLoader + "!" + stylusLoader;
