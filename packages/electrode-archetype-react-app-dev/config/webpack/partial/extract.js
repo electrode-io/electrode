@@ -28,6 +28,7 @@ var AppMode = archetype.AppMode;
  * case 3: *both* *.css & *.styl exists => CSS-Modules + CSS-Next takes priority
  *          with a warning message
  * case 4: *none* *.css & *.styl exists => CSS-Modules + CSS-Next takes priority
+ * case 5: *cssModuleStylusSupport* config is true => Use both Stylus and CSS Modules
  */
 
 var cssNextExists = (glob.sync(Path.resolve(AppMode.src.client, "**", "*.css")).length > 0);
@@ -38,17 +39,14 @@ var cssModuleSupport = true;
 
 if (stylusExists && !cssNextExists) {
   cssModuleSupport = false;
-} else if (stylusExists && cssNextExists) {
-  /* eslint-disable no-console */
-  console.log(`\n\n **** you have demo.css & demo.styl please delete *.styl
-    and upgrade to using *.css for CSS-Modules + CSS-Next support **** \n\n`);
-  /* eslint-enable no-console */
 }
 
 module.exports = function () {
   return function (config) {
+    var cssModuleStylusSupport = archetype.webpack.cssModuleStylusSupport;
     var stylusQuery = cssLoader + "?-autoprefixer!" + stylusLoader;
     var cssQuery = cssLoader + "?modules&-autoprefixer!" + postcssLoader;
+    var cssStylusQuery = cssLoader + "?modules&-autoprefixer!" + postcssLoader + "!" + stylusLoader;
 
     // By default, this archetype assumes you are using CSS-Modules + CSS-Next
     var loaders = [{
@@ -57,7 +55,13 @@ module.exports = function () {
       loader: ExtractTextPlugin.extract(styleLoader, cssQuery, {publicPath: ""})
     }];
 
-    if (!cssModuleSupport) {
+    if (cssModuleStylusSupport) {
+      loaders.push({
+        name: "extract-css-stylus",
+        test: /\.styl$/,
+        loader: ExtractTextPlugin.extract(styleLoader, cssStylusQuery, {publicPath: "" })
+      });
+    } else if (!cssModuleSupport) {
       loaders.push({
         name: "extract-stylus",
         test: /\.styl$/,

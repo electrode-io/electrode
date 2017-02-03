@@ -87,6 +87,21 @@ function checkUserBabelRc() {
   return false;
 }
 
+function getArchetypeOptions() {
+  var archetypeOptionsPath = Path.join(process.cwd(), "archetype", "config.js");
+  var archetypeOptions;
+
+  try {
+    archetypeOptions = require(archetypeOptionsPath) || {};
+  } catch (err) {
+    archetypeOptions = {};
+  }
+
+  return archetypeOptions;
+}
+
+const archetypeOptions = getArchetypeOptions();
+
 
 module.exports = {
   dir: Path.resolve(__dirname, ".."),
@@ -121,20 +136,20 @@ function loadDev() {
     devDir,
     devPkg,
     devRequire,
-    webpack: {
+    webpack: Object.assign({}, {
       devHostname: "localhost",
       devPort: getInt(process.env.WEBPACK_DEV_PORT, 2992),
       testPort: getInt(process.env.WEBPACK_TEST_PORT, 3001),
       modulesDirectories: []
-    },
-    config: {
+    }, archetypeOptions.webpack),
+    config: Object.assign({}, {
       babel: `${configDir}/babel`,
       eslint: `${configDir}/eslint`,
       istanbul: `${configDir}/istanbul`,
       karma: `${configDir}/karma`,
       mocha: `${configDir}/mocha`,
       webpack: `${configDir}/webpack`
-    }
+    }, archetypeOptions.configPaths)
   });
 }
 
