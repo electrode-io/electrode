@@ -3,17 +3,12 @@
 var archetype = require("../../archetype");
 var mergeWebpackConfig = require("webpack-partial").default;
 var isomorphicLoader = require.resolve("isomorphic-loader");
+var optionalRequire = require("optional-require")(require);
 
 var _ = require("lodash");
 
 function getCdnLoader() {
-  var loader = _(["electrode-cdn-file-loader", "cdn-file-loader", "file-loader"]).find(function(x) {
-    try {
-      return require.resolve(x);
-    } catch (e) {
-      return undefined;
-    }
-  });
+  var loader = _(["electrode-cdn-file-loader", "cdn-file-loader", "file-loader"]).find(optionalRequire.resolve);
 
   return loader && require.resolve(loader) || "file-loader";
 }

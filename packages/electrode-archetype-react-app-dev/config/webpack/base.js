@@ -22,6 +22,8 @@ var archetypeNodeModules = Path.join(archetype.dir, "node_modules");
 var archetypeDevNodeModules = Path.join(archetype.devDir, "node_modules");
 var inspectpack = process.env.INSPECTPACK_DEBUG === "true";
 
+var optionalRequire = require("optional-require")(require);
+
 /* eslint-disable func-style */
 
 /*
@@ -36,15 +38,11 @@ var inspectpack = process.env.INSPECTPACK_DEBUG === "true";
 function appEntry() {
   var entryPath = Path.join(context, "entry.config.js");
 
-  /* eslint-disable no-console, global-require */
-  try {
-    return require(entryPath);
-  } catch (ex) {
-    console.log("Entry point configuration is not found, using default entry point...");
-  }
-  /* eslint-enable no-console, global-require */
+  const entry = optionalRequire(entryPath,
+    "Entry point configuration is not found, using default entry point...");
 
-  return fs.existsSync(Path.join(context, "app.js")) ? "./app.js" : "./app.jsx";
+  return entry ? entry :
+    fs.existsSync(Path.join(context, "app.js")) ? "./app.js" : "./app.jsx";
 }
 
 var entry = appEntry();
