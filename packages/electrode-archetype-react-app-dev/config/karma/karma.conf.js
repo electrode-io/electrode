@@ -16,6 +16,21 @@ module.exports = function (config) {
     files: [
       MAIN_PATH
     ],
+    plugins : [
+      'karma-chrome-launcher',
+      'karma-coverage',
+      'karma-firefox-launcher',
+      'karma-ie-launcher',
+      'karma-intl-shim',
+      'karma-mocha',
+      'karma-mocha-reporter',
+      'karma-phantomjs-shim',
+      'karma-phantomjs-launcher',
+      'karma-safari-launcher',
+      'karma-sourcemap-loader',
+      'karma-spec-reporter',
+      'karma-webpack'
+    ],
     preprocessors: PREPROCESSORS,
     webpack: webpackCfg,
     webpackServer: {
