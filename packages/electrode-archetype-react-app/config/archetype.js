@@ -4,6 +4,7 @@ var Path = require("path");
 Path = Path[process.platform] || Path;
 var Fs = require("fs");
 var pkg = require("../package.json");
+var optionalRequire = require("optional-require")(require);
 
 const prodDir = ".prod";
 
@@ -87,21 +88,7 @@ function checkUserBabelRc() {
   return false;
 }
 
-function getArchetypeOptions() {
-  var archetypeOptionsPath = Path.join(process.cwd(), "archetype", "config.js");
-  var archetypeOptions;
-
-  try {
-    archetypeOptions = require(archetypeOptionsPath) || {};
-  } catch (err) {
-    archetypeOptions = {};
-  }
-
-  return archetypeOptions;
-}
-
-const archetypeOptions = getArchetypeOptions();
-
+const archetypeOptions = optionalRequire(Path.resolve("archetype", "config.js")) || {};
 
 module.exports = {
   dir: Path.resolve(__dirname, ".."),
@@ -120,10 +107,8 @@ module.exports = {
 //
 function loadDev() {
   const devPkgFile = "electrode-archetype-react-app-dev/package.json";
-  let devPkg;
-  try {
-    devPkg = require(devPkgFile);
-  } catch (e) { // eslint-disable-line
+  const devPkg = optionalRequire(devPkgFile);
+  if (!devPkg) {
     module.exports.noDev = true;
     return;
   }

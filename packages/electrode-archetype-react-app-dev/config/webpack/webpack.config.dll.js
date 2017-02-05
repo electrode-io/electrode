@@ -8,16 +8,9 @@ var getRootConfig = require("./get-root-config");
 var archetype = require("../archetype");
 var Path = archetype.Path;
 var AppMode = archetype.AppMode;
+var optionalRequire = require("optional-require")(require);
 
 /* eslint-disable func-style */
-
-function getDllEntry() {
-  try {
-    return require(Path.resolve(AppMode.src.client, "dll.config.js")); // eslint-disable-line global-require
-  } catch (err) {
-    return {};
-  }
-}
 
 var extensions = {};
 var baseConfigPath = require.resolve("./webpack.config");
@@ -42,7 +35,7 @@ extensions[baseConfigPath] = function (config) {
 };
 
 var dllConfig = new WebpackConfig().extend(extensions).merge({
-  entry: getDllEntry(),
+  entry: optionalRequire(Path.resolve(AppMode.src.client, "dll.config.js")) || {},
   output: {
     path: Path.resolve("dll/js"),
     filename: "[name].bundle.[hash].js",

@@ -4,16 +4,9 @@
  * This helper attempts to return a root level webpack config for the given file.
  */
 
-var path = require("path");
+var archetype = require("../archetype");
+var optionalRequire = require("optional-require")(require);
 
 module.exports = function (rootConfigFileName) {
-  var rootConfig;
-
-  try {
-    rootConfig = require(path.resolve(rootConfigFileName)); // eslint-disable-line global-require
-  } catch (err) {
-    rootConfig = {};
-  }
-
-  return rootConfig;
+  return optionalRequire(archetype.Path.resolve(rootConfigFileName)) || {};
 };
