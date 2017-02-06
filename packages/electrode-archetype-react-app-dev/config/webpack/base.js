@@ -2,6 +2,7 @@
 
 var _ = require("lodash");
 var fs = require("fs");
+var webpack = require("webpack");
 var mergeWebpackConfig = require("webpack-partial").default;
 
 // config partials
@@ -11,7 +12,7 @@ var fontsConfig = require("./partial/fonts");
 var imagesConfig = require("./partial/images");
 var statsConfig = require("./partial/stats");
 var isomorphicConfig = require("./partial/isomorphic");
-// var pwaConfig = require("./partial/pwa");
+var pwaConfig = require("./partial/pwa");
 var archetype = require("../archetype");
 var Path = archetype.Path;
 var AppMode = archetype.AppMode;
@@ -53,7 +54,13 @@ var baseConfig = {
   // __wmlMultiBundle: multiBundle, // TODO: webpack 2.0 invalid
   cache: true,
   context: context,
-  // debug: false, // TODO: webpack 2.0 invalid
+  plugins: [
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        debug: false
+      }
+    })
+  ],
   entry: entry,
   output: {
     path: Path.resolve("dist", "js"),
@@ -93,6 +100,6 @@ module.exports = _.flow(
   fontsConfig(),
   imagesConfig(),
   statsConfig(),
-  isomorphicConfig()
-  // pwaConfig() // TODO: fix pwa for webpack 2.0
+  isomorphicConfig(),
+  pwaConfig()
 )();
