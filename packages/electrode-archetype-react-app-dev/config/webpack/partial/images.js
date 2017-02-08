@@ -13,7 +13,7 @@ function getCdnLoader() {
   return loader && require.resolve(loader) || "file-loader";
 }
 
-module.exports = function() {
+module.exports = Object.defineProperties(function() {
   return function(config) {
     return mergeWebpackConfig(config, {
       module: {
@@ -25,4 +25,8 @@ module.exports = function() {
       }
     });
   };
-};
+}, {
+  sequence: {
+    value: 0
+  }
+});

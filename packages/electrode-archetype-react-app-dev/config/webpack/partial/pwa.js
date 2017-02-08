@@ -68,7 +68,7 @@ function createEntryConfigFromScripts(importScripts, entry) {
   }, newEntry);
 }
 
-module.exports = function () {
+module.exports = Object.defineProperties(function () {
   return function (config) {
     var swConfig = optionalRequire(swConfigPath, true) || {};
     var severConfig = optionalRequire(serverConfigPath, true) || {};
@@ -184,4 +184,8 @@ module.exports = function () {
       plugins: plugins
     });
   };
-};
+}, {
+  sequence: {
+    value: 0
+  }
+});
