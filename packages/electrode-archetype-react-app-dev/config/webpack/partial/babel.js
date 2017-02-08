@@ -19,7 +19,7 @@ module.exports = function (babel) {
             name: "babel",
             test: /\.jsx?$/,
             include: hmr && Path.resolve(AppMode.src.client),
-            exclude: babelExcludeRegex,
+            exclude: archetype.webpack.babelExclude || babelExcludeRegex,
             loaders: [
               hmr && "react-hot-loader",
               "babel-loader"
