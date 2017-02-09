@@ -35,9 +35,9 @@ AddManifestFieldsPlugin.prototype.apply = function(compiler) {
             return newManifestAsset.length;
           }
         }
-        callback();
       }
     }
+    callback();
   });
 }
 
