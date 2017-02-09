@@ -54,13 +54,13 @@ module.exports = function () {
     // By default, this archetype assumes you are using CSS-Modules + CSS-Next
     var rules = [{
       test: /\.css$/,
-      loader: ExtractTextPlugin.extract({fallbackLoader: styleLoader, loader: cssQuery, publicPath: ""})
+      loader: ExtractTextPlugin.extract({fallback: styleLoader, use: cssQuery, publicPath: ""})
     }];
 
     if (!cssModuleSupport) {
       rules.push({
         test: /\.styl$/,
-        loader: ExtractTextPlugin.extract({fallbackLoader: styleLoader, loader: stylusQuery, publicPath: ""})
+        loader: ExtractTextPlugin.extract({fallback: styleLoader, use: stylusQuery, publicPath: ""})
       });
     }
 
@@ -70,6 +70,18 @@ module.exports = function () {
         use: [
           {
             loader: "postcss-loader",
+            options: {
+              browsers: ["last 2 versions", "ie >= 9", "> 5%"]
+            }
+          }
+        ]
+      });
+    } else {
+      rules.push({
+        test: /\.scss$/,
+        use: [
+          {
+            loader: "autoprefixer-loader",
             options: {
               browsers: ["last 2 versions", "ie >= 9", "> 5%"]
             }

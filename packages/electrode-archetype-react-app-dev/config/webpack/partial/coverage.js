@@ -12,7 +12,7 @@ module.exports = function () {
           // https://github.com/deepsweet/isparta-loader handles ES6 + normal JS.
           {
             test: /(test|client)\/.*\.jsx?$/,
-            enforce:"pre",
+            enforce: "pre",
             exclude: /(node_modules|\bclient\/vendor\b)/,
             loader: ispartaLoader
           }
