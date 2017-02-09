@@ -10,7 +10,7 @@ var fileLoader = require.resolve("file-loader");
 var webAppManifestLoader = require.resolve("web-app-manifest-loader");
 var SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin");
 var FaviconsWebpackPlugin = require("favicons-webpack-plugin");
-// var AddManifestFieldsPlugin = require('../plugins/add-manifest-fields');
+var AddManifestFieldsPlugin = require('../plugins/add-manifest-fields');
 var DiskPlugin = require('webpack-disk-plugin');
 
 var swConfigPath = Path.resolve("config", "sw-config.js");
@@ -157,11 +157,11 @@ module.exports = function () {
           favicons: true
         }
       }),
-      // new AddManifestFieldsPlugin({
-      //   gcm_sender_id: manifestConfig.gcm_sender_id,
-      //   short_name: manifestConfig.short_name,
-      //   theme_color: manifestConfig.theme_color
-      // }),
+      new AddManifestFieldsPlugin({
+        gcm_sender_id: manifestConfig.gcm_sender_id,
+        short_name: manifestConfig.short_name,
+        theme_color: manifestConfig.theme_color
+      }),
       new SWPrecacheWebpackPlugin(cacheConfig)
     ];
 
