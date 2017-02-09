@@ -122,7 +122,7 @@ function loadDev() {
     devPkg,
     devRequire,
     webpack: Object.assign({}, {
-      devHostname: "localhost",
+      devHostname: process.env.WEBPACK_HOST || "localhost",
       devPort: getInt(process.env.WEBPACK_DEV_PORT, 2992),
       testPort: getInt(process.env.WEBPACK_TEST_PORT, 3001),
       modulesDirectories: []
