@@ -288,9 +288,8 @@ function makeTasks(gulp) {
       task: [".clean.dist", "build-dist-dev-static"]
     },
 
-    // TODO: fix DLL for webpack 2.0
     "build-dist": [".clean.dist", ".clean.dll", "build-dist-min", "build-dist-dll", "build-dist:flatten-l10n",
-     "build-dist:merge-isomorphic-assets", "copy-dll", "build-dist:clean-tmp"],
+      "build-dist:merge-isomorphic-assets", "copy-dll", "build-dist:clean-tmp"],
 
     "build-dist-dev-static": {
       desc: false,
@@ -310,11 +309,8 @@ function makeTasks(gulp) {
       task: [[".ss-prod-react", ".ss-prod-react-dom"]]
     },
 
-    "build-dist-dll": () => {
-      setProductionEnv();
-      createGitIgnoreDir(Path.resolve("dll"), "Webpack DLL Output dir");
-      return exec(`webpack --config ${config.webpack}/webpack.config.dll.js --colors`)
-    },
+    "build-dist-dll": () => undefined,
+    "copy-dll": () => undefined,
 
     "build-dist-min": {
       dep: [".production-env"],
@@ -390,8 +386,6 @@ INFO: Individual .babelrc files were generated for you in src/client and src/ser
     ".clean.prod": () => shell.rm("-rf", archetype.prodDir),
     ".clean.etmp": () => shell.rm("-rf", eTmpDir),
     ".clean.dll": () => shell.rm("-rf", "dll"),
-
-    "copy-dll": () => shell.cp("-r", "dll/*", "dist"),
 
     "cov-frontend": () => checkFrontendCov(),
     "cov-frontend-50": () => checkFrontendCov("50"),
@@ -605,7 +599,17 @@ INFO: Individual .babelrc files were generated for you in src/client and src/ser
         task: ["build-lib:client", "build-lib:server", ".build-lib:app-mode"]
       }
     });
+  }
 
+  if (Fs.existsSync(Path.resolve(AppMode.src.client, "dll.config.js"))) {
+    tasks = Object.assign(tasks, {
+      "build-dist-dll": () => {
+        setProductionEnv();
+        createGitIgnoreDir(Path.resolve("dll"), "Webpack DLL Output dir");
+        return exec(`webpack --config ${config.webpack}/webpack.config.dll.js --colors`)
+      },
+      "copy-dll": () => shell.cp("-r", "dll/*", "dist")
+    });
   }
 
   return tasks;
