@@ -8,8 +8,8 @@ var glob = require("glob");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var CSSSplitPlugin = require("css-split-webpack-plugin").default;
 // TODO: fix postcss for webpack 2.0
-// var atImport = require("postcss-import");
-// var cssnext = require("postcss-cssnext");
+var atImport = require("postcss-import");
+var cssnext = require("postcss-cssnext");
 
 var autoprefixer = require("autoprefixer-stylus");
 var cssLoader = require.resolve("css-loader");
@@ -70,6 +70,18 @@ module.exports = function () {
         use: [
           {
             loader: "postcss-loader",
+            options: {
+              browsers: ["last 2 versions", "ie >= 9", "> 5%"]
+            }
+          }
+        ]
+      });
+    } else {
+      rules.push({
+        test: /\.scss$/,
+        use: [
+          {
+            loader: "autoprefixer-loader",
             options: {
               browsers: ["last 2 versions", "ie >= 9", "> 5%"]
             }
