@@ -15,17 +15,17 @@ module.exports = function (babel) {
     return mergeWebpackConfig(config, {
       module: {
         loaders: [
-          {
+          _.assign({}, {
             name: "babel",
             test: /\.jsx?$/,
             include: hmr && Path.resolve(AppMode.src.client),
-            exclude: archetype.webpack.babelExclude || babelExcludeRegex,
+            exclude: babelExcludeRegex,
             loaders: [
               hmr && "react-hot-loader",
               "babel-loader"
             ].filter(_.identity),
             query: babel
-          },
+          }, archetype.webpack.extendBabelLoader),
           {
             name: "json",
             test: /\.json$/,
