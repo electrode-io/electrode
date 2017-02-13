@@ -79,8 +79,8 @@ module.exports = generators.Base.extend({
       this.props.authorEmail = this.pkg.author.email;
       this.props.authorUrl = this.pkg.author.url;
       this.props.createDirectory = false;
-      this.props.serverType = this.fs.exists(this.destinationPath('server/express-server.js')) ? ExpressJS :
-        this.fs.exists(this.destinationPath('server/koa-server.js')) ? koaJS : HapiJS;
+      this.props.serverType = this.fs.exists(this.destinationPath('src/server/express-server.js')) ? ExpressJS :
+        this.fs.exists(this.destinationPath('src/server/koa-server.js')) ? KoaJS : HapiJS;
       this.props.pwa = this.fs.exists(this.destinationPath('client/sw-registration.js'));
       this.props.autoSsr = this.fs.exists(this.destinationPath('server/plugins/autossr.js'));
     } else if (_.isString(this.pkg.author)) {
@@ -94,7 +94,7 @@ module.exports = generators.Base.extend({
   prompting: {
     greeting: function () {
       this.log(yosay(
-        'Welcome to the phenomenal ' + chalk.red('Electrode App') + ' generator!'
+        'Welcome to the YOYOYOYOY phenomenal ' + chalk.red('Electrode App') + ' generator!'
       ));
     },
 
@@ -226,6 +226,16 @@ module.exports = generators.Base.extend({
     const isPWA = this.props.pwa;
     const isAutoSSR = this.props.autoSsr;
 
+    let ignoreArray = [];
+    if (isHapi) {
+      ignoreArray.push('**/src/server/express-server.js');
+      ignoreArray.push('**/src/server/koa-server.js');
+    } else if (isExpress)  {
+      ignoreArray.push('**/src/server/koa-server.js');
+    } else {
+      ignoreArray.push('**/src/server/express-server.js');
+    }
+
     // Re-read the content at this point because a composed generator might modify it.
     var currentPkg = this.fs.readJSON(this.destinationPath('package.json'), {});
 
@@ -297,8 +307,7 @@ module.exports = generators.Base.extend({
       {},
       {
         globOptions: {
-          ignore: [isHapi ? '**/server/express-server.js, **/server/koa-server.js' :
-            isExpress ? '**/server/koa-server.js' : '**/server/express-server.js']
+          ignore: ignoreArray
         }
       }
     );
