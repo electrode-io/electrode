@@ -3,7 +3,7 @@
 var archetype = require("../../archetype");
 var Path = archetype.Path;
 var mergeWebpackConfig = require("webpack-partial").default;
-
+const webpack = require("webpack");
 var glob = require("glob");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var CSSSplitPlugin = require("css-split-webpack-plugin").default;
@@ -76,35 +76,10 @@ module.exports = function () {
           }
         ]
       });
-    } else {
-      rules.push({
-        test: /\.scss$/,
-        use: [
-          {
-            loader: "autoprefixer-loader",
-            options: {
-              browsers: ["last 2 versions", "ie >= 9", "> 5%"]
-            }
-          }
-        ]
-      });
     }
 
     return mergeWebpackConfig(config, {
       module: {rules},
-      // TODO: invalid with webpack 2.0
-      // postcss: function () {
-      //   return cssModuleSupport ? [atImport, cssnext({
-      //     browsers: ["last 2 versions", "ie >= 9", "> 5%"]
-      //   })] : [];
-      // },
-      // stylus: {
-      //   use: function () {
-      //     return !cssModuleSupport ? [autoprefixer({
-      //       browsers: ["last 2 versions", "ie >= 9", "> 5%"]
-      //     })] : [];
-      //   }
-      // },
       plugins: [
         new ExtractTextPlugin(
           {filename: config.__wmlMultiBundle ? "[name].style.[hash].css" : "style.[hash].css"}),
@@ -114,7 +89,23 @@ module.exports = function () {
          Sometimes this is desirable if you want to target a specific browser (IE)
          with the split files and then serve the unsplit ones to everyone else.
          */
-        new CSSSplitPlugin({size: 4000, imports: true, preserve: true})
+        new CSSSplitPlugin({size: 4000, imports: true, preserve: true}),
+        new webpack.LoaderOptionsPlugin({
+          options: {
+            postcss: function () {
+              return cssModuleSupport ? [atImport, cssnext({
+                browsers: ["last 2 versions", "ie >= 9", "> 5%"]
+              })] : [];
+            },
+            stylus: {
+              use: function () {
+                return !cssModuleSupport ? [autoprefixer({
+                  browsers: ["last 2 versions", "ie >= 9", "> 5%"]
+                })] : [];
+              }
+            }
+          }
+        })
       ]
     });
   };
