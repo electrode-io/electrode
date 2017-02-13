@@ -94,7 +94,7 @@ module.exports = generators.Base.extend({
   prompting: {
     greeting: function () {
       this.log(yosay(
-        'Welcome to the YOYOYOYOY phenomenal ' + chalk.red('Electrode App') + ' generator!'
+        'Welcome to the phenomenal ' + chalk.red('Electrode App') + ' generator!'
       ));
     },
 
