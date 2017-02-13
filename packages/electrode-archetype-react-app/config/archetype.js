@@ -4,6 +4,7 @@ var Path = require("path");
 Path = Path[process.platform] || Path;
 var Fs = require("fs");
 var pkg = require("../package.json");
+var optionalRequire = require("optional-require")(require);
 
 const prodDir = ".prod";
 
@@ -87,6 +88,7 @@ function checkUserBabelRc() {
   return false;
 }
 
+const archetypeOptions = optionalRequire(Path.resolve("archetype", "config.js")) || {};
 
 module.exports = {
   dir: Path.resolve(__dirname, ".."),
@@ -105,10 +107,8 @@ module.exports = {
 //
 function loadDev() {
   const devPkgFile = "electrode-archetype-react-app-dev/package.json";
-  let devPkg;
-  try {
-    devPkg = require(devPkgFile);
-  } catch (e) { // eslint-disable-line
+  const devPkg = optionalRequire(devPkgFile);
+  if (!devPkg) {
     module.exports.noDev = true;
     return;
   }
@@ -121,20 +121,20 @@ function loadDev() {
     devDir,
     devPkg,
     devRequire,
-    webpack: {
-      devHostname: "localhost",
+    webpack: Object.assign({}, {
+      devHostname: process.env.WEBPACK_HOST || "localhost",
       devPort: getInt(process.env.WEBPACK_DEV_PORT, 2992),
       testPort: getInt(process.env.WEBPACK_TEST_PORT, 3001),
       modulesDirectories: []
-    },
-    config: {
+    }, archetypeOptions.webpack),
+    config: Object.assign({}, {
       babel: `${configDir}/babel`,
       eslint: `${configDir}/eslint`,
       istanbul: `${configDir}/istanbul`,
       karma: `${configDir}/karma`,
       mocha: `${configDir}/mocha`,
       webpack: `${configDir}/webpack`
-    }
+    }, archetypeOptions.configPaths)
   });
 }
 

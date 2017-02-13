@@ -494,7 +494,8 @@ INFO: Individual .babelrc files were generated for you in src/client and src/ser
       task: mkCmd("webpack-dev-server",
         `--config ${config.webpack}/webpack.config.dev.js`,
         `--progress --colors`,
-        `--port ${archetype.webpack.devPort}`)
+        `--port ${archetype.webpack.devPort}`,
+        `--host ${archetype.webpack.devHostname}`)
     },
 
     "wds.hot": {
@@ -502,7 +503,8 @@ INFO: Individual .babelrc files were generated for you in src/client and src/ser
       task: mkCmd("webpack-dev-server",
         `--config ${config.webpack}/webpack.config.hot.js`,
         `--hot --progress --colors --inline`,
-        `--port ${archetype.webpack.devPort}`)
+        `--port ${archetype.webpack.devPort}`,
+        `--host ${archetype.webpack.devHostname}`)
     },
 
     "wds.test": {
@@ -510,7 +512,8 @@ INFO: Individual .babelrc files were generated for you in src/client and src/ser
       task: mkCmd("webpack-dev-server",
         `--config ${config.webpack}/webpack.config.test.js`,
         `--progress --colors`,
-        `--port ${archetype.webpack.testPort}`)
+        `--port ${archetype.webpack.testPort}`,
+        `--host ${archetype.webpack.devHostname}`)
     },
 
     "test-server": () => [["lint-server", "lint-server-test"], "test-server-cov"],
