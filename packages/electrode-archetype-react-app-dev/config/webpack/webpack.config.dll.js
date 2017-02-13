@@ -8,7 +8,8 @@ var getRootConfig = require("./get-root-config");
 var archetype = require("../archetype");
 var Path = archetype.Path;
 var AppMode = archetype.AppMode;
-var dllConfig = require(Path.resolve(AppMode.src.client, "dll.config.js"));
+var clientDllConfig = require(Path.resolve(AppMode.src.client, "dll.config.js"));
+
 
 var extensions = {};
 var baseConfigPath = require.resolve("./webpack.config");
@@ -32,7 +33,7 @@ extensions[baseConfigPath] = function (config) {
 };
 
 var dllConfig = new WebpackConfig().extend(extensions).merge({
-  entry: dllConfig,
+  entry: clientDllConfig,
   output: {
     path: Path.resolve("dll/js"),
     filename: "[name].bundle.[hash].js",

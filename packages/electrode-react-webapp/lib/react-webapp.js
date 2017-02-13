@@ -238,8 +238,8 @@ const setupOptions = (options) => {
     serverSideRendering: true,
     htmlFile: Path.join(__dirname, "index.html"),
     devServer: {
-      host: "127.0.0.1",
-      port: "2992"
+      host: process.env.WEBPACK_HOST || "127.0.0.1",
+      port: process.env.WEBPACK_DEV_PORT || "2992"
     },
     paths: {},
     stats: "dist/server/stats.json",

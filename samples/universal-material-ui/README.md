@@ -25,8 +25,12 @@ Make sure you have installed NodeJS >= 4.x and npm >= 3.x, and [gulp-cli].
 To try out this ready made sample app, use git to clone the repo:
 
 ```sh
-$ git clone https://github.com/electrode-io/electrode-react-sample-material-ui.git
-$ cd electrode-react-sample-material-ui
+$ git clone https://github.com/electrode-io/electrode.git
+$ cd electrode
+$ npm install
+$ npm run bootstrap
+$ gulp samples-local
+$ cd samples/universal-material-ui
 $ npm install
 $ gulp dev
 ```

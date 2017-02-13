@@ -25,7 +25,7 @@ module.exports = function (config) {
       }));
     }
   } catch (err) {
-    //eslint-disable-line no-empty
+    console.log("add-dll-references failed", err);
   }
 
   return config;

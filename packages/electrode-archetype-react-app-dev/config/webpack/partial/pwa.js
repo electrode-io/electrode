@@ -12,28 +12,10 @@ var SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin");
 var FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 var AddManifestFieldsPlugin = require('../plugins/add-manifest-fields');
 var DiskPlugin = require('webpack-disk-plugin');
+var optionalRequire = require("optional-require")(require);
 
 var swConfigPath = Path.resolve("config", "sw-config.js");
 var serverConfigPath = Path.resolve("config", "default.json");
-
-
-/**
- * Attempt to load a module using require, return a fallback
- * value if the require fails for some reason.
- * @param  {string} path     path to module
- * @param  {object} fallback fallback/default value
- * @return {object}          module or fallback value
- */
-function requireModuleSafelyWithFallback(path, fallback) {
-  var requiredModule;
-  try {
-    requiredModule = require(path);
-  } catch (err) {
-    requiredModule = fallback;
-  }
-  return requiredModule;
-}
-
 
 /**
  * Takes a file path and returns a webpack-compatible
@@ -88,8 +70,8 @@ function createEntryConfigFromScripts(importScripts, entry) {
 
 module.exports = function () {
   return function (config) {
-    var swConfig = requireModuleSafelyWithFallback(swConfigPath, {});
-    var severConfig = requireModuleSafelyWithFallback(serverConfigPath, {});
+    var swConfig = optionalRequire(swConfigPath, true) || {};
+    var severConfig = optionalRequire(serverConfigPath, true) || {};
 
     if (!swConfig.manifest) {
       return mergeWebpackConfig(config, {});
