@@ -1,5 +1,8 @@
 "use strict";
 
+const Path = require("path");
+const Fs = require("fs");
+
 function getInt(str, def) {
   if (str) {
     const n = parseInt(str, 10);
