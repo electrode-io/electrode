@@ -5,7 +5,7 @@
   "scripts": {
     "lint": "gulp lint",
     "test": "npm run lint && gulp test",
-    "prepublish": "npm test"
+    "prepublish": "if in-publish; then npm test; fi"
   },
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -38,11 +38,12 @@
   "dependencies": {
     "bluebird": "^3",
     "hoek": "^3.0.1",
+    "in-publish": "^2.0.0",
+    "koa-router": "^5.4.0",
     "little-loader": "^0.1.1",
     "lodash": "^4.0.0",
     "react": "^15.3.1",
-    "react-dom": "^15.3.1",
-    "koa-router": "^5.4.0"
+    "react-dom": "^15.3.1"
   },
   "devDependencies": {
     "babel-cli": "^6.1.1",
