@@ -27,7 +27,7 @@ module.exports = function (babel) {
     }
     return mergeWebpackConfig(config, {
       module: {
-        rules: [ babelLoader ]
+        rules: [_.assign({}, babelLoader, archetype.webpack.extendBabelLoader)]
       }
     });
   };
