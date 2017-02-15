@@ -45,11 +45,7 @@ function appEntry() {
     fs.existsSync(Path.join(context, "app.js")) ? "./app.js" : "./app.jsx";
 }
 
-var entry = appEntry();
-var multiBundle = _.isObject(entry);
-
 var baseConfig = {
-  // __wmlMultiBundle: multiBundle, // TODO: webpack 2.0 invalid
   cache: true,
   context: context,
   plugins: [
@@ -59,15 +55,13 @@ var baseConfig = {
       }
     })
   ],
-  entry: entry,
+  entry: appEntry(),
   output: {
     path: Path.resolve("dist", "js"),
     pathinfo: inspectpack, // Enable path information for inspectpack
     publicPath: "/js/",
     chunkFilename: "[hash].[name].js",
-    filename: multiBundle
-      ? "[name].bundle.[hash].js"
-      : "bundle.[hash].js"
+    filename: "[name].bundle.[hash].js"
   },
   resolve: {
     modules: [

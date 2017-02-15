@@ -84,8 +84,7 @@ module.exports = function () {
     return mergeWebpackConfig(config, {
       module: {rules},
       plugins: [
-        new ExtractTextPlugin(
-          {filename: config.__wmlMultiBundle ? "[name].style.[hash].css" : "style.[hash].css"}),
+        new ExtractTextPlugin({filename: "[name].style.[hash].css"}),
 
         /*
          preserve: default: false. Keep the original unsplit file as well.
