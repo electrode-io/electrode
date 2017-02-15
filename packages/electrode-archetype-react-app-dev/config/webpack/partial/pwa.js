@@ -151,13 +151,13 @@ module.exports = function () {
      * In dev we need to write the stats file to disk
      * so we can properly read which chunk(s) need to be
      * served. We write the stats file to our build artifacts
-     * folder, which is .build by default.
+     * folder, which is .etmp by default.
      */
     if (process.env.WEBPACK_DEV === "true") {
       plugins.push(
         new DiskPlugin({
           output: {
-            path: Path.resolve(severConfig.buildArtifactsPath || ".build")
+            path: Path.resolve(severConfig.buildArtifactsPath || ".etmp")
           },
           files: [{
             asset: /\/stats.json$/,
