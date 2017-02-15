@@ -288,7 +288,7 @@ function makeTasks(gulp) {
       task: [".clean.dist", "build-dist-dev-static"]
     },
 
-    "build-dist": [".clean.dist", ".clean.dll", "build-dist-min", "build-dist-dll", "build-dist:flatten-l10n",
+    "build-dist": [".clean.dist", ".clean.dll", "build-dist-dll", "build-dist-min", "build-dist:flatten-l10n",
       "build-dist:merge-isomorphic-assets", "copy-dll", "build-dist:clean-tmp"],
 
     "build-dist-dev-static": {
@@ -609,6 +609,7 @@ INFO: Individual .babelrc files were generated for you in src/client and src/ser
       "build-dist-dll": () => {
         setProductionEnv();
         createGitIgnoreDir(Path.resolve("dll"), "Webpack DLL Output dir");
+        mkdirp.sync(Path.resolve("dist"));
         return exec(`webpack --config ${config.webpack}/webpack.config.dll.js --colors`)
       },
       "copy-dll": () => shell.cp("-r", "dll/*", "dist")
