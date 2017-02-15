@@ -203,6 +203,29 @@ describe("Test electrode-react-webapp", () => {
       });
   });
 
+  it("should inject a pwa manfiest in dev mode", () => {
+    configOptions.stats = "test/data/stats-test-pwa.json";
+    configOptions.webpackDev = true;
+
+    return electrodeServer(config)
+      .then((server) => {
+        return server.inject({
+          method: "GET",
+          url: "/"
+        }).then((res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.result).to.contain(
+            "<link rel=\"manifest\" href=\"http://127.0.0.1:2992/js/manifest.json\" />"
+          );
+          stopServer(server);
+        })
+        .catch((err) => {
+          stopServer(server);
+          throw err;
+        });
+      });
+  });
+
   it("should inject pwa icons", () => {
     configOptions.iconStats = "test/data/icon-stats-test-pwa.json";
 
