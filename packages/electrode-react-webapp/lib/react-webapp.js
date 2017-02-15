@@ -161,7 +161,11 @@ function makeRouteHandler(routeOptions, userContent) {
     };
 
     const bundleManifest = () => {
-      return assets.manifest ? `/js/${assets.manifest}` : "";
+       if (!assets.manifest) {
+        return "";
+      }
+
+      return WEBPACK_DEV ? `${devBundleBase}${assets.manifest}` : `/js/${assets.manifest}`;
     };
 
     const callUserContent = (content) => {
