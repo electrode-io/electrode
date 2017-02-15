@@ -161,7 +161,7 @@ function makeRouteHandler(routeOptions, userContent) {
     };
 
     const bundleManifest = () => {
-       if (!assets.manifest) {
+      if (!assets.manifest) {
         return "";
       }
 
