@@ -28,6 +28,7 @@ extensions[baseConfigPath] = function (config) {
 
   statsPlugin.opts.filename = "../../dll/server/stats.dll.json";
   isomorphicPlugin.options.assetsFile = "../../dll/isomorphic-assets.dll.json";
+  config.entry ={};
 
   return config;
 };
