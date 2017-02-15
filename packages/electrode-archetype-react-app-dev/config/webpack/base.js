@@ -70,7 +70,7 @@ var baseConfig = {
       AppMode.isSrc && Path.resolve(AppMode.src.dir) || null
     ]
       .concat(archetype.webpack.modulesDirectories)
-      .concat(["node_modules"])
+      .concat([process.cwd(), "node_modules"])
       .filter(_.identity),
     extensions: [".js", ".jsx", ".json"]
   },
@@ -79,7 +79,7 @@ var baseConfig = {
       archetypeNodeModules,
       archetypeDevNodeModules,
       Path.resolve("lib"),
-      // process.cwd(),
+      process.cwd(),
       "node_modules"
     ].filter(_.identity)
   }
