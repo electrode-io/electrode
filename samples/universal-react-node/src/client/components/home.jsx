@@ -48,6 +48,7 @@ export class Home extends React.Component {
           <li><a href="/ssrcachingtemplatetype">SSR Caching Template Type Example</a></li>
           <li><a href="/push-notifications">Push Notifications Example</a></li>
           <li><a href="/todo-app">Todo List Example</a></li>
+          <li><a href="/post-css">Post CSS Example</a></li>
         </ul>
         <p>{this.props.data}</p>
       </div>
