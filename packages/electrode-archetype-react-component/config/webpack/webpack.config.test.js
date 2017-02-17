@@ -51,7 +51,7 @@ module.exports = {
   resolve: _.merge({}, prodCfg.resolve, {
     alias: {
       // Allow root import of `src/FOO` from ROOT/src.
-      src: process.cwd(),
+      src: path.join(process.cwd(), "src"),
       sinon: sinonPkg
     },
     modulesDirectories: [
