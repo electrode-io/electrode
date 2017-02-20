@@ -522,7 +522,7 @@ INFO: Individual .babelrc files were generated for you in src/client and src/ser
     },
 
     "test-server": () => [["lint-server", "lint-server-test"], "test-server-cov"],
-    "test-watch-all": ["wds.test", "test-frontend-dev-watch"],
+    "test-watch-all": [["wds.test", "test-frontend-dev-watch"]],
 
     "test-ci": ["test-frontend-ci"],
     "test-cov": ["test-frontend-cov", "test-server-cov"],
