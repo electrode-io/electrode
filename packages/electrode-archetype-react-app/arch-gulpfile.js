@@ -257,6 +257,8 @@ function makeTasks(gulp) {
 
   let tasks = {
     ".mk-prod-dir": () => createGitIgnoreDir(Path.resolve(archetype.prodDir), "Electrode production dir"),
+    ".mk-dist-dir": () => createGitIgnoreDir(Path.resolve("dist"), "Electrode dist dir"),
+    ".mk-dll-dir": () => createGitIgnoreDir(Path.resolve("dll"), "Electrode dll dir"),
     ".production-env": () => setProductionEnv(),
     ".development-env": () => setDevelopmentEnv(),
     ".webpack-dev": () => setWebpackDev(),
@@ -288,7 +290,7 @@ function makeTasks(gulp) {
       task: [".clean.dist", "build-dist-dev-static"]
     },
 
-    "build-dist": [".clean.dist", ".clean.dll", "build-dist-dll", "build-dist-min", "build-dist:flatten-l10n",
+    "build-dist": [".clean.build", "build-dist-dll", "build-dist-min", "build-dist:flatten-l10n",
       "build-dist:merge-isomorphic-assets", "copy-dll", "build-dist:clean-tmp"],
 
     "build-dist-dev-static": {
@@ -309,11 +311,8 @@ function makeTasks(gulp) {
       task: [[".ss-prod-react", ".ss-prod-react-dom"]]
     },
 
-    "build-dist-dll": () => {
-      setProductionEnv();
-      createGitIgnoreDir(Path.resolve("dll"), "Webpack DLL Output dir");
-      return exec(`webpack --config ${config.webpack}/webpack.config.dll.js --colors`)
-    },
+    "build-dist-dll": () => undefined,
+    "copy-dll": () => undefined,
 
     "build-dist-min": {
       dep: [".production-env"],
@@ -389,8 +388,7 @@ INFO: Individual .babelrc files were generated for you in src/client and src/ser
     ".clean.prod": () => shell.rm("-rf", archetype.prodDir),
     ".clean.etmp": () => shell.rm("-rf", eTmpDir),
     ".clean.dll": () => shell.rm("-rf", "dll"),
-
-    "copy-dll": () => shell.cp("-r", "dll/*", "dist"),
+    ".clean.build": [".clean.dist", ".clean.dll"],
 
     "cov-frontend": () => checkFrontendCov(),
     "cov-frontend-50": () => checkFrontendCov("50"),
@@ -401,6 +399,7 @@ INFO: Individual .babelrc files were generated for you in src/client and src/ser
     "debug": ["build-dev-static", "server-debug"],
     "dev": {
       desc: "Start your app with watch in development mode with webpack-dev-server",
+      dep: [".development-env", ".clean.build", ".mk-dist-dir"],
       task: [".webpack-dev", ["wds.dev", "server-watch", "generate-service-worker"]]
     },
 
@@ -411,7 +410,7 @@ INFO: Individual .babelrc files were generated for you in src/client and src/ser
 
     "hot": {
       desc: "Start your app with watch in hot mode with webpack-dev-server",
-      dep: [".development-env"],
+      dep: [".development-env", ".clean.build", ".mk-dist-dir"],
       task: [".webpack-dev", ["wds.hot", "server-watch", "generate-service-worker"]]
     },
 
@@ -607,7 +606,18 @@ INFO: Individual .babelrc files were generated for you in src/client and src/ser
         task: ["build-lib:client", "build-lib:server", ".build-lib:app-mode"]
       }
     });
+  }
 
+  if (Fs.existsSync(Path.resolve(AppMode.src.client, "dll.config.js"))) {
+    tasks = Object.assign(tasks, {
+      "build-dist-dll": {
+        dep: [".mk-dll-dir", ".mk-dist-dir", ".production-env"],
+        task: () => exec(`webpack`,
+          `--config ${config.webpack}/webpack.config.dll.js`,
+          `--colors`)
+      },
+      "copy-dll": () => shell.cp("-r", "dll/*", "dist")
+    });
   }
 
   return tasks;

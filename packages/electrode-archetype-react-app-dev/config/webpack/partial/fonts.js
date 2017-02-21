@@ -4,21 +4,32 @@ var mergeWebpackConfig = require("webpack-partial").default;
 
 var urlLoader = require.resolve("url-loader");
 var fileLoader = require.resolve("file-loader");
+var isomorphicLoader = require.resolve("isomorphic-loader");
 
 module.exports = function () {
   return function (config) {
     return mergeWebpackConfig(config, {
       module: {
-        loaders: [
+        rules: [
           {
-            name: "woff",
             test: /\.(woff|woff2)(\?\S*)?$/i,
-            loader: urlLoader + "?limit=10000&mimetype=application/font-woff!isomorphic"
+            use: [
+              {
+                loader: urlLoader,
+                options: {
+                  limit: 10000,
+                  mimetype: "application/font-woff"
+                }
+              },
+              isomorphicLoader
+            ]
           },
           {
-            name: "fonts",
             test: /\.(eot|ttf)(\?\S*)?$/i,
-            loader: fileLoader + "!isomorphic"
+            use: [
+              fileLoader,
+              isomorphicLoader
+            ]
           }
         ]
       }

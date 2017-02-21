@@ -8,10 +8,10 @@ module.exports = function () {
   return function (config) {
     return mergeWebpackConfig(config, {
       plugins: [
-        new SourceMapDevToolPlugin(
-          "../map/[file].map",
-          `\n//# sourceMappingURL=http://${archetype.webpack.devHostname}:${archetype.webpack.devPort}/dist/map/[url]`
-        )
+        new SourceMapDevToolPlugin({
+          filename: "../map/[file].map",
+          append: `\n//# sourceMappingURL=http://${archetype.webpack.devHostname}:${archetype.webpack.devPort}/dist/map/[url]`
+        })
       ]
     });
   };

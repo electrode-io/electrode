@@ -56,8 +56,8 @@ module.exports = function () {
       },
       plugins: [
         new webpack.SourceMapDevToolPlugin("[file].map"),
-        new ExtractTextPlugin("[name].style.css"),
-        new webpack.NoErrorsPlugin()
+        new ExtractTextPlugin({filename: "[name].style.css"}),
+        new webpack.NoEmitOnErrorsPlugin()
       ]
     });
 

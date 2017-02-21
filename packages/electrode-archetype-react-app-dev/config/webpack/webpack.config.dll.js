@@ -8,9 +8,8 @@ var getRootConfig = require("./get-root-config");
 var archetype = require("../archetype");
 var Path = archetype.Path;
 var AppMode = archetype.AppMode;
-var optionalRequire = require("optional-require")(require);
+var clientDllConfig = require(Path.resolve(AppMode.src.client, "dll.config.js"));
 
-/* eslint-disable func-style */
 
 var extensions = {};
 var baseConfigPath = require.resolve("./webpack.config");
@@ -29,13 +28,13 @@ extensions[baseConfigPath] = function (config) {
 
   statsPlugin.opts.filename = "../../dll/server/stats.dll.json";
   isomorphicPlugin.options.assetsFile = "../../dll/isomorphic-assets.dll.json";
-  config.entry = {};
+  config.entry ={};
 
   return config;
 };
 
 var dllConfig = new WebpackConfig().extend(extensions).merge({
-  entry: optionalRequire(Path.resolve(AppMode.src.client, "dll.config.js")) || {},
+  entry: clientDllConfig,
   output: {
     path: Path.resolve("dll/js"),
     filename: "[name].bundle.[hash].js",

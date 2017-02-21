@@ -13,14 +13,21 @@ function getCdnLoader() {
   return loader && require.resolve(loader) || "file-loader";
 }
 
-module.exports = function() {
-  return function(config) {
+module.exports = function () {
+  return function (config) {
     return mergeWebpackConfig(config, {
       module: {
-        loaders: [{
-          name: "images",
+        rules: [{
           test: /\.(jpe?g|png|gif|svg)(\?\S*)?$/i,
-          loader: getCdnLoader() + "?limit=10000!" + isomorphicLoader
+          use: [
+            {
+              loader: getCdnLoader(),
+              options: {
+                limit: 10000
+              }
+            },
+            isomorphicLoader
+          ]
         }]
       }
     });

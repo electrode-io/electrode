@@ -2,6 +2,7 @@
 
 var _ = require("lodash");
 var fs = require("fs");
+var webpack = require("webpack");
 var mergeWebpackConfig = require("webpack-partial").default;
 
 // config partials
@@ -11,7 +12,6 @@ var fontsConfig = require("./partial/fonts");
 var imagesConfig = require("./partial/images");
 var statsConfig = require("./partial/stats");
 var isomorphicConfig = require("./partial/isomorphic");
-var jsonConfig = require("./partial/json");
 var pwaConfig = require("./partial/pwa");
 var archetype = require("../archetype");
 var Path = archetype.Path;
@@ -45,41 +45,43 @@ function appEntry() {
     fs.existsSync(Path.join(context, "app.js")) ? "./app.js" : "./app.jsx";
 }
 
-var entry = appEntry();
-var multiBundle = _.isObject(entry);
-
 var baseConfig = {
-  __wmlMultiBundle: multiBundle,
   cache: true,
   context: context,
-  debug: false,
-  entry: entry,
+  plugins: [
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        debug: false
+      }
+    })
+  ],
+  entry: appEntry(),
   output: {
     path: Path.resolve("dist", "js"),
     pathinfo: inspectpack, // Enable path information for inspectpack
     publicPath: "/js/",
     chunkFilename: "[hash].[name].js",
-    filename: multiBundle
-      ? "[name].bundle.[hash].js"
-      : "bundle.[hash].js"
+    filename: "[name].bundle.[hash].js"
   },
   resolve: {
-    root: [
+    modules: [
       archetypeNodeModules,
       archetypeDevNodeModules,
-      AppMode.isSrc && Path.resolve(AppMode.src.dir) || null,
-      process.cwd()
-    ].filter((x) => x),
-    modulesDirectories: ["node_modules"].concat(archetype.webpack.modulesDirectories),
-    extensions: ["", ".js", ".jsx"]
+      AppMode.isSrc && Path.resolve(AppMode.src.dir) || null
+    ]
+      .concat(archetype.webpack.modulesDirectories)
+      .concat([process.cwd(), "node_modules"])
+      .filter(_.identity),
+    extensions: [".js", ".jsx", ".json"]
   },
   resolveLoader: {
-    root: [
+    modules: [
       archetypeNodeModules,
       archetypeDevNodeModules,
       Path.resolve("lib"),
-      process.cwd()
-    ].filter((x) => x)
+      process.cwd(),
+      "node_modules"
+    ].filter(_.identity)
   }
 };
 
@@ -91,6 +93,5 @@ module.exports = _.flow(
   imagesConfig(),
   statsConfig(),
   isomorphicConfig(),
-  jsonConfig(),
   pwaConfig()
 )();

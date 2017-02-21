@@ -3,10 +3,11 @@
 var archetype = require("../../archetype");
 var Path = archetype.Path;
 var mergeWebpackConfig = require("webpack-partial").default;
-
+const webpack = require("webpack");
 var glob = require("glob");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var CSSSplitPlugin = require("css-split-webpack-plugin").default;
+// TODO: fix postcss for webpack 2.0
 var atImport = require("postcss-import");
 var cssnext = require("postcss-cssnext");
 
@@ -49,53 +50,64 @@ module.exports = function () {
     var cssStylusQuery = cssLoader + "?modules&-autoprefixer!" + postcssLoader + "!" + stylusLoader;
 
     // By default, this archetype assumes you are using CSS-Modules + CSS-Next
-    var loaders = [{
-      name: "extract-css",
+    var rules = [{
       test: /\.css$/,
-      loader: ExtractTextPlugin.extract(styleLoader, cssQuery, {publicPath: ""})
+      loader: ExtractTextPlugin.extract({fallback: styleLoader, use: cssQuery, publicPath: ""})
     }];
 
     if (cssModuleStylusSupport) {
-      loaders.push({
-        name: "extract-css-stylus",
+      rules.push({
         test: /\.styl$/,
-        loader: ExtractTextPlugin.extract(styleLoader, cssStylusQuery, {publicPath: "" })
+        loader: ExtractTextPlugin.extract({fallback: styleLoader, use: cssStylusQuery, publicPath: "" })
       });
     } else if (!cssModuleSupport) {
-      loaders.push({
-        name: "extract-stylus",
+      rules.push({
         test: /\.styl$/,
-        loader: ExtractTextPlugin.extract(styleLoader, stylusQuery, {publicPath: "" })
+        loader: ExtractTextPlugin.extract({fallback: styleLoader, use: stylusQuery, publicPath: ""})
+      });
+    }
+
+    if (cssModuleSupport) {
+      rules.push({
+        test: /\.scss$/,
+        use: [
+          {
+            loader: "postcss-loader",
+            options: {
+              browsers: ["last 2 versions", "ie >= 9", "> 5%"]
+            }
+          }
+        ]
       });
     }
 
     return mergeWebpackConfig(config, {
-      module: {
-        loaders: loaders
-      },
-      postcss: function () {
-        return cssModuleSupport ? [atImport, cssnext({
-          browsers: ["last 2 versions", "ie >= 9", "> 5%"]
-        })] : [];
-      },
-      stylus: {
-        use: function() {
-          return !cssModuleSupport ? [autoprefixer({
-            browsers: ["last 2 versions", "ie >= 9", "> 5%"]
-          })] : [];
-        }
-      },
+      module: {rules},
       plugins: [
-        new ExtractTextPlugin(config.__wmlMultiBundle
-          ? "[name].style.[hash].css"
-          : "style.[hash].css"),
+        new ExtractTextPlugin({filename: "[name].style.[hash].css"}),
 
         /*
-        preserve: default: false. Keep the original unsplit file as well.
-        Sometimes this is desirable if you want to target a specific browser (IE)
-        with the split files and then serve the unsplit ones to everyone else.
+         preserve: default: false. Keep the original unsplit file as well.
+         Sometimes this is desirable if you want to target a specific browser (IE)
+         with the split files and then serve the unsplit ones to everyone else.
          */
-        new CSSSplitPlugin({size: 4000, imports: true, preserve: true})
+        new CSSSplitPlugin({size: 4000, imports: true, preserve: true}),
+        new webpack.LoaderOptionsPlugin({
+          options: {
+            postcss: function () {
+              return cssModuleSupport ? [atImport, cssnext({
+                browsers: ["last 2 versions", "ie >= 9", "> 5%"]
+              })] : [];
+            },
+            stylus: {
+              use: function () {
+                return !cssModuleSupport ? [autoprefixer({
+                  browsers: ["last 2 versions", "ie >= 9", "> 5%"]
+                })] : [];
+              }
+            }
+          }
+        })
       ]
     });
   };

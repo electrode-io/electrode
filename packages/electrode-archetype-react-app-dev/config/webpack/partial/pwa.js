@@ -9,7 +9,7 @@ var mergeWebpackConfig = require("webpack-partial").default;
 var fileLoader = require.resolve("file-loader");
 var webAppManifestLoader = require.resolve("web-app-manifest-loader");
 var SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin");
-var FaviconsWebpackPlugin = require("favicons-webpack-plugin");
+var FaviconsWebpackPlugin = require("../plugins/favicons");
 var AddManifestFieldsPlugin = require('../plugins/add-manifest-fields');
 var DiskPlugin = require('webpack-disk-plugin');
 var optionalRequire = require("optional-require")(require);
@@ -60,8 +60,8 @@ function createEntryConfigFromScripts(importScripts, entry) {
   // we assume its a string and use it as the main entry point.
   var newEntry = typeof entry === "object"
     ? Object.assign({}, entry)
-    : { main: entry };
-  return importScripts.reduce(function(acc, script) {
+    : {main: entry};
+  return importScripts.reduce(function (acc, script) {
     var name = Path.parse(script).name;
     acc[name] = script;
     return acc;
@@ -97,7 +97,7 @@ module.exports = function () {
     }, swConfig.cache);
 
     if (cacheConfig.runtimeCaching) {
-      cacheConfig.runtimeCaching = cacheConfig.runtimeCaching.map(function(runtimeCache) {
+      cacheConfig.runtimeCaching = cacheConfig.runtimeCaching.map(function (runtimeCache) {
         return {
           handler: runtimeCache.handler,
           urlPattern: new RegExp(runtimeCache.urlPattern)
@@ -151,13 +151,13 @@ module.exports = function () {
      * In dev we need to write the stats file to disk
      * so we can properly read which chunk(s) need to be
      * served. We write the stats file to our build artifacts
-     * folder, which is .build by default.
+     * folder, which is .etmp by default.
      */
     if (process.env.WEBPACK_DEV === "true") {
       plugins.push(
         new DiskPlugin({
           output: {
-            path: Path.resolve(severConfig.buildArtifactsPath || ".build")
+            path: Path.resolve(severConfig.buildArtifactsPath || ".etmp")
           },
           files: [{
             asset: /\/stats.json$/,
@@ -170,14 +170,21 @@ module.exports = function () {
     }
 
     return mergeWebpackConfig(config, {
-      __wmlMultiBundle: typeof entry === 'object',
       entry: entry,
       output: output,
       module: {
-        loaders: [
+        rules: [
           {
             test: /manifest.json$/,
-            loader: fileLoader + "?name=manifest.json!" + webAppManifestLoader
+            use: [
+              {
+                loader: fileLoader,
+                options: {
+                  name: "manifest.json"
+                }
+              },
+              webAppManifestLoader
+            ]
           }
         ]
       },

@@ -19,7 +19,7 @@ var testConfig = {
     ]
   },
   context: Path.resolve("test", "client"),
-  debug: false,
+  // debug: false, // TODO: webpack 2.0 invalid
   devServer: {
     stats: "errors-only"  // only show errors
   },
