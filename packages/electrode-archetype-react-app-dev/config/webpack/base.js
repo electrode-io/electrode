@@ -3,26 +3,21 @@
 var _ = require("lodash");
 var fs = require("fs");
 var mergeWebpackConfig = require("webpack-partial").default;
+var glob = require("glob");
 
 // config partials
-var babelConfig = require("./partial/babel");
-var extractStylesConfig = require("./partial/extract");
-var fontsConfig = require("./partial/fonts");
-var imagesConfig = require("./partial/images");
-var statsConfig = require("./partial/stats");
-var isomorphicConfig = require("./partial/isomorphic");
-var jsonConfig = require("./partial/json");
-var pwaConfig = require("./partial/pwa");
 var archetype = require("../archetype");
 var Path = archetype.Path;
 var AppMode = archetype.AppMode;
 var context = Path.resolve(AppMode.src.client);
+var configContext = Path.resolve(AppMode.src.dir);
 
 var archetypeNodeModules = Path.join(archetype.dir, "node_modules");
 var archetypeDevNodeModules = Path.join(archetype.devDir, "node_modules");
 var inspectpack = process.env.INSPECTPACK_DEBUG === "true";
 
 var optionalRequire = require("optional-require")(require);
+
 
 /* eslint-disable func-style */
 
@@ -83,14 +78,41 @@ var baseConfig = {
   }
 };
 
-module.exports = _.flow(
+
+const basePartials = {};
+glob.sync(Path.join(__dirname, 'partial/*.js')).forEach(function(filePath) {
+  const fileName = Path.parse(filePath).name;
+  const partial = require(filePath);
+  // Potentially sort order of partials by sequence in the future. If multiple partials of equal
+  // sequence, assume order is not important.
+  if(partial.sequence === 0) {
+    basePartials[fileName] = require(filePath);
+  }
+});
+
+const customPartials = {};
+glob.sync(Path.join(configContext, 'config/webpack/partial/*.js')).forEach(function(filePath) {
+  const fileName = Path.parse(filePath).name;
+  const partial = require(filePath);
+  if(partial.sequence === 0) {
+    customPartials[fileName] = require(filePath);
+  }
+});
+
+const mergedPartials = _.merge(basePartials, customPartials);
+const partials = _.reduce(
+    mergedPartials,
+    function(results, func) { 
+      results.push(func()); 
+      return results;
+    },
+    []
+);
+
+var configPartials = _.concat(
+  [],
   mergeWebpackConfig.bind(null, {}, baseConfig),
-  babelConfig(),
-  extractStylesConfig(),
-  fontsConfig(),
-  imagesConfig(),
-  statsConfig(),
-  isomorphicConfig(),
-  jsonConfig(),
-  pwaConfig()
-)();
+  partials
+);
+
+module.exports = _.flow(configPartials)();

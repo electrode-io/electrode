@@ -4,7 +4,7 @@ var archetype = require("../../archetype");
 var IsomorphicLoaderPlugin = require("isomorphic-loader/lib/webpack-plugin");
 var mergeWebpackConfig = require("webpack-partial").default;
 
-module.exports = function () {
+module.exports = Object.defineProperties(function () {
   return function (config) {
     return mergeWebpackConfig(config, {
       plugins: [
@@ -18,4 +18,8 @@ module.exports = function () {
       ]
     });
   };
-};
+}, {
+  sequence: {
+    value: 0
+  }
+});

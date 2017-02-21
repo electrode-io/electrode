@@ -5,7 +5,7 @@ var webpack = require("webpack");
 
 var lastPct;
 
-module.exports = function () {
+const partial = function () {
   return function (config) {
     return mergeWebpackConfig(config, {
       plugins: [
@@ -34,3 +34,5 @@ module.exports = function () {
     });
   };
 };
+
+module.exports = partial;

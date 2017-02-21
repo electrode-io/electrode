@@ -5,7 +5,7 @@ var mergeWebpackConfig = require("webpack-partial").default;
 var urlLoader = require.resolve("url-loader");
 var fileLoader = require.resolve("file-loader");
 
-module.exports = function () {
+module.exports = Object.defineProperties(function () {
   return function (config) {
     return mergeWebpackConfig(config, {
       module: {
@@ -24,4 +24,8 @@ module.exports = function () {
       }
     });
   };
-};
+}, {
+  sequence: {
+    value: 0
+  }
+});

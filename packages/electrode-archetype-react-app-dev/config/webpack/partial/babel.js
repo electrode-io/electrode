@@ -6,7 +6,9 @@ var AppMode = archetype.AppMode;
 var Path = archetype.Path;
 var _ = require("lodash");
 
-module.exports = function (babel) {
+
+
+module.exports = Object.defineProperties(function (babel) {
   // regex \b for word boundaries
   var babelExcludeRegex = new RegExp(`(node_modules|\\b${Path.join(AppMode.src.client, "vendor")}\\b)`);
   return function (config) {
@@ -35,4 +37,8 @@ module.exports = function (babel) {
       }
     });
   };
-};
+}, { 
+  sequence: {
+    value: 0
+  }
+});

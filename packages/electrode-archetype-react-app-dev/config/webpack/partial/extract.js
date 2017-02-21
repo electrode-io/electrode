@@ -41,7 +41,7 @@ if (stylusExists && !cssNextExists) {
   cssModuleSupport = false;
 }
 
-module.exports = function () {
+module.exports = Object.defineProperties(function () {
   return function (config) {
     var cssModuleStylusSupport = archetype.webpack.cssModuleStylusSupport;
     var stylusQuery = cssLoader + "?-autoprefixer!" + stylusLoader;
@@ -99,4 +99,8 @@ module.exports = function () {
       ]
     });
   };
-};
+}, {
+  sequence: {
+    value: 0
+  }
+});
