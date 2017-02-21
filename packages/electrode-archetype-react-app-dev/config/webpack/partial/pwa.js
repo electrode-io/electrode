@@ -16,6 +16,7 @@ var optionalRequire = require("optional-require")(require);
 
 var swConfigPath = Path.resolve("config", "sw-config.js");
 var serverConfigPath = Path.resolve("config", "default.json");
+var mkdirp = require("mkdirp");
 
 /**
  * Takes a file path and returns a webpack-compatible
@@ -60,7 +61,7 @@ function createEntryConfigFromScripts(importScripts, entry) {
   // we assume its a string and use it as the main entry point.
   var newEntry = typeof entry === "object"
     ? Object.assign({}, entry)
-    : {main: entry};
+    : { main: entry };
   return importScripts.reduce(function (acc, script) {
     var name = Path.parse(script).name;
     acc[name] = script;
@@ -76,6 +77,10 @@ module.exports = function () {
     if (!swConfig.manifest) {
       return mergeWebpackConfig(config, {});
     }
+
+    console.log(`Just FYI: PWA enabled with config from ${swConfigPath}`);
+
+    mkdirp.sync(Path.resolve("dist"));
 
     var manifestConfig = assign({
       background: "#FFFFFF",
