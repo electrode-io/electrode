@@ -2,7 +2,8 @@
 
 -   electrode-archetype-react-app-dev@2.0.2
 -   electrode-archetype-react-app@2.0.2
--   electrode-archetype-react-component@1.1.11
+-   electrode-archetype-react-component@1.1.12
+-   electrode-archetype-react-component-dev@1.1.12
 -   generator-electrode-component@1.2.4
 -   generator-electrode@1.8.0
 
