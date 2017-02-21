@@ -12,7 +12,10 @@
     "url": "https://github.com/electrode-io/electrode/issues"
   },
   "license": "Apache-2.0",
-  "scripts": {},
+  "scripts": {
+    "test": "npm run lint",
+    "lint": "eslint **/*.js"
+  },
   "dependencies": {
     "babel-core": "^6.4.0",
     "babel-plugin-i18n-id-hashing": "^2.1.0",
@@ -37,7 +40,8 @@
   "devDependencies": {
     "babel-eslint": "^7.1.0",
     "eslint": "^3.9.1",
-    "eslint-config-walmart": "^1.1.0",
+    "eslint-config-walmart": "^1.1.1",
+    "eslint-plugin-babel": "^4.0.1",
     "eslint-plugin-filenames": "^1.1.0",
     "eslint-plugin-react": "^6.5.0"
   },

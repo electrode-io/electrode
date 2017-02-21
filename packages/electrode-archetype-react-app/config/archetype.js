@@ -1,12 +1,12 @@
 "use strict";
 
-var Path = require("path");
-var pkg = require("../package.json");
-var optionalRequire = require("optional-require")(require);
-var constants = require("./constants");
-var utils = require("../lib/utils");
-var makeAppMode = require("../lib/app-mode");
-var archetypeOptions = optionalRequire(Path.resolve("archetype", "config.js"), {default: {}});
+const Path = require("path");
+const pkg = require("../package.json");
+const optionalRequire = require("optional-require")(require);
+const constants = require("./constants");
+const utils = require("../lib/utils");
+const makeAppMode = require("../lib/app-mode");
+const archetypeOptions = optionalRequire(Path.resolve("archetype", "config.js"), { default: {} });
 
 module.exports = {
   dir: Path.resolve(__dirname, ".."),
@@ -57,4 +57,3 @@ function loadDev() {
 }
 
 loadDev();
-

@@ -2,6 +2,7 @@
 
 const Path = require("path");
 const Fs = require("fs");
+const pkg = require("../package.json");
 
 function getInt(str, def) {
   if (str) {
