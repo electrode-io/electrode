@@ -83,6 +83,7 @@ module.exports = generators.Base.extend({
         this.fs.exists(this.destinationPath('src/server/koa-server.js')) ? KoaJS : HapiJS;
       this.props.pwa = this.fs.exists(this.destinationPath('client/sw-registration.js'));
       this.props.autoSsr = this.fs.exists(this.destinationPath('server/plugins/autossr.js'));
+      this.props.quoteType = this.fs.exists(this.destinationPath('.eslintrc')) ? "'" : "\"";
     } else if (_.isString(this.pkg.author)) {
       var info = parseAuthor(this.pkg.author);
       this.props.authorName = info.name;
@@ -178,6 +179,14 @@ module.exports = generators.Base.extend({
           default: false
         },
         {
+          type: "list",
+          name: "quoteType",
+          message: "Use double quotes or single quotes?",
+          choices: ["\"", "'"],
+          when: this.props.quoteType === undefined,
+          default: "\""
+        },
+        {
           type: "confirm",
           name: "createDirectory",
           message: "Would you like to create a new directory for your project?",
@@ -225,6 +234,7 @@ module.exports = generators.Base.extend({
     const isExpress = this.config.get('serverType') === ExpressJS;
     const isPWA = this.props.pwa;
     const isAutoSSR = this.props.autoSsr;
+    const isSingleQuote = this.props.quoteType === "'";
 
     let ignoreArray = [];
     if (isHapi) {
@@ -292,10 +302,13 @@ module.exports = generators.Base.extend({
     // Let's extend package.json so we're not overwriting user previous fields
     this.fs.writeJSON(this.destinationPath('package.json'), pkg);
 
-    ['gulpfile.js', 'config', 'test'].forEach((f) => {
-      this.fs.copy(
+    const rootConfigsToCopy = ['gulpfile.js', 'config', 'test'];
+    if (isSingleQuote) rootConfigsToCopy.push('.eslintrc');
+    rootConfigsToCopy.forEach((f) => {
+      this.fs.copyTpl(
         this.templatePath(f),
-        this.destinationPath(f)
+        this.destinationPath(f),
+        { isSingleQuote }
       );
     });
 
@@ -327,6 +340,10 @@ module.exports = generators.Base.extend({
 
     ['src/client', 'src/server', 'test/client', 'test/server'].forEach((d) => {
       this.fs.move(this.destinationPath(d + '/babelrc'), this.destinationPath(d + '/.babelrc'));
+    });
+
+    ['test/client', 'test/server'].forEach((d) => {
+      this.fs.move(this.destinationPath(d + '/eslintrc'), this.destinationPath(d + '/.eslintrc'));
     });
 
     this.fs.copy(
@@ -414,6 +431,10 @@ module.exports = generators.Base.extend({
   },
 
   end: function () {
+    if (this.props.quoteType === "'") {
+      this.spawnCommandSync("node_modules/.bin/eslint", ["--fix", "src", "test", "config", "--ext", ".js,.jsx"]);
+    }
+
     var chdir = this.props.createDirectory ? "'cd " + _.kebabCase(_.deburr(this.props.name)) + "' then " : "";
     this.log(
       "\n" + chalk.green.underline("Your new Electrode application is ready!") +
