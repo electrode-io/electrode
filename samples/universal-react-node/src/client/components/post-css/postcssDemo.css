@@ -1,0 +1,14 @@
+:root {
+  --highlightColor: rgb(100 222.2 100.9 / 30%);
+  --bodyFont: 16px Helvetica;
+  --bgColor: gray(20%, 40%);
+  --divFontSize: 1rem;
+  --danger-theme: {
+    color: white;
+    background-color: red;
+  };
+}
+
+.outline {
+  border: 1px solid black;
+}

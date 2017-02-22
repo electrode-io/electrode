@@ -1,0 +1,24 @@
+:root {
+  --highlightColor: rgb(100 222.2 100.9 / 30%);
+  --bodyFont: 16px Helvetica;
+  --bgColor: gray(20%, 40%);
+  --divFontSize: 1rem;
+  --danger-theme: {
+    color: white;
+    background-color: red;
+  };
+}
+
+.main {
+  background-color: var(--bgColor);
+  font: var(--bodyFont);
+  font-size: calc(var(--divFontSize) * 1.2);
+}
+
+.highlighted {
+  background-color: var(--highlightColor);
+}
+
+.danger{
+  @apply --danger-theme;
+}
