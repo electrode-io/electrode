@@ -1,7 +1,7 @@
 "use strict";
 
-var Path = require("path");
-var Fs = require("fs");
+const Path = require("path");
+const Fs = require("fs");
 
 function makeAppMode(prodDir) {
   const client = "client";

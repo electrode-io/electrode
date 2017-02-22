@@ -6,6 +6,7 @@ const fs = require("fs");
 const archetype = require("../config/archetype");
 const Path = archetype.Path;
 
+/* eslint max-statements: 0 */
 function optimizeModulesForProduction(options) {
   const originalResolve = Module._resolveFilename;
 

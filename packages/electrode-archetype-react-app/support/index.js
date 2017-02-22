@@ -9,7 +9,7 @@ const AppMode = archetype.AppMode;
 const Path = require("path");
 
 const support = {
-  cssModuleHook: function (options) {
+  cssModuleHook: (options) => {
     options = options || {};
     options.generateScopedName = options.generateScopedName || "[hash:base64]";
     options.rootDir = options.rootDir || Path.resolve(process.cwd(), "client");
@@ -21,7 +21,7 @@ const support = {
   isomorphicExtendRequire: () => {
     return isomorphicExtendRequire({
       processAssets: (assets) => {
-        let appSrcDir = (AppMode.getEnv() || AppMode.lib.dir).split("/")[0];
+        const appSrcDir = (AppMode.getEnv() || AppMode.lib.dir).split("/")[0];
         if (appSrcDir !== AppMode.src.dir && assets.marked) {
           const marked = assets.marked;
           Object.keys(marked).forEach((k) => {
@@ -57,6 +57,7 @@ if (AppMode.isSrc) {
   console.log(`Just FYI: ${AppMode.envKey} set to`, AppMode.getEnv());
 }
 
+/* eslint max-statements: 0 complexity: 0 */
 support.load = function (options, callback) {
   if (typeof options === "function") {
     callback = options;
@@ -79,7 +80,8 @@ support.load = function (options, callback) {
       extensions: [".es6", ".es", ".jsx", ".js"]
     }, options.babelRegister || {});
 
-    console.log(`Just FYI: installing babel-register for runtime transpilation files (extensions: ${regOptions.extensions}).`);
+    console.log(`Just FYI: installing babel-register for runtime transpilation`
+      + ` files (extensions: ${regOptions.extensions}).`);
     console.log(`Just FYI: the transpilation only occurs the first time you load a file.`);
     support.babelRegister(regOptions);
   }
@@ -114,11 +116,7 @@ support.load = function (options, callback) {
     return support.isomorphicExtendRequire();
   }
 
-  if (callback) {
-    callback();
-  } else {
-    return Promise.resolve();
-  }
+  return callback ? callback() : Promise.resolve();
 };
 
 module.exports = support;
