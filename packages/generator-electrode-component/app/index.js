@@ -65,7 +65,24 @@ var ReactComponentGenerator = yeoman.generators.Base.extend({
 			type: "input",
 			name: "developerName",
 			message: "What is your name? (for copyright notice, etc.)"
+		}, {
+			type: "list",
+			name: "quoteType",
+			message: "Use double quotes or single quotes?",
+			choices: ["\"", "'"],
+			default: "\""
 		}];
+
+		this._optionOrPrompt(prompts, function (props) {
+			_.extend(this, props);
+			done();
+		}.bind(this));
+	},
+
+	prompting_libraries: function() {
+		var done = this.async();
+
+		var prompts = [];
 
 		this._optionOrPrompt(prompts, function (props) {
 			_.extend(this, props);
@@ -104,6 +121,9 @@ var ReactComponentGenerator = yeoman.generators.Base.extend({
 			this.copy("gitignore", ".gitignore");
 			this.copy("npmignore", ".npmignore");
 			this.copy("editorconfig", ".editorconfig");
+			if (this.quoteType === "'") {
+				this.template("eslintrc", ".eslintrc");
+			}
 			this.template("_gulpfile.js", "gulpfile.js");
 			this.template("_package.json", "package.json");
 			this.template("_readme.md", "README.md");
@@ -136,6 +156,9 @@ var ReactComponentGenerator = yeoman.generators.Base.extend({
 	},
 
 	end: function() {
+		if (this.quoteType === "'") {
+			this.spawnCommandSync("node_modules/.bin/eslint", ["--fix", "src", "demo", "example", "test", "--ext", ".js,.jsx"]);
+		}
 		var chdir = this.createDirectory ? "'cd " + this.packageName + "' then " : "";
 		this.log(
 			"\n" + chalk.green.underline("Your new Electrode component is ready!") +

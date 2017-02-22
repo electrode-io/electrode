@@ -18,6 +18,9 @@ const tasks = {
   "generate": ["generate-metadata", "generate-documentation"],
   "generate-documentation": () => exec(`electrode-docgen --package ./package.json --src ./src --markdown components.md`),
   "generate-metadata": () => exec(`electrode-docgen --package ./package.json --src ./src --metadata components.json`),
+<% if (quoteType === "'") { %>
+  'archetype:lint-server': () => exec(`eslint --color -c ./.eslintrc config/karma config/webpack demo-server`),
+<% } %>
   "prepublish": ["npm:prepublish"],
   "preversion": ["check-cov"]
 };
