@@ -1,7 +1,7 @@
 "use strict";
 
-var ispartaLoader = require.resolve("isparta-loader");
-var mergeWebpackConfig = require("webpack-partial").default;
+const ispartaLoader = require.resolve("isparta-loader");
+const mergeWebpackConfig = require("webpack-partial").default;
 
 module.exports = function () {
   return function (config) {

@@ -1,26 +1,25 @@
 "use strict";
 
-var _ = require("lodash");
-var webpack = require("webpack");
-var WebpackConfig = require("webpack-config").default;
-var removeDllReferences = require("./remove-dll-references");
-var getRootConfig = require("./get-root-config");
-var archetype = require("../archetype");
-var Path = archetype.Path;
-var AppMode = archetype.AppMode;
-var clientDllConfig = require(Path.resolve(AppMode.src.client, "dll.config.js"));
+const _ = require("lodash");
+const webpack = require("webpack");
+const WebpackConfig = require("webpack-config").default;
+const removeDllReferences = require("./remove-dll-references");
+const getRootConfig = require("./get-root-config");
+const archetype = require("../archetype");
+const Path = archetype.Path;
+const AppMode = archetype.AppMode;
+const clientDllConfig = require(Path.resolve(AppMode.src.client, "dll.config.js"));
 
-
-var extensions = {};
-var baseConfigPath = require.resolve("./webpack.config");
+const extensions = {};
+const baseConfigPath = require.resolve("./webpack.config");
 
 extensions[baseConfigPath] = function (config) {
-  var statsPlugin = _.find(config.plugins, {
+  const statsPlugin = _.find(config.plugins, {
     opts: {
       filename: "../server/stats.json"
     }
   });
-  var isomorphicPlugin = _.find(config.plugins, {
+  const isomorphicPlugin = _.find(config.plugins, {
     options: {
       assetsFile: "../isomorphic-assets.json"
     }
@@ -28,12 +27,12 @@ extensions[baseConfigPath] = function (config) {
 
   statsPlugin.opts.filename = "../../dll/server/stats.dll.json";
   isomorphicPlugin.options.assetsFile = "../../dll/isomorphic-assets.dll.json";
-  config.entry ={};
+  config.entry = {};
 
   return config;
 };
 
-var dllConfig = new WebpackConfig().extend(extensions).merge({
+const dllConfig = new WebpackConfig().extend(extensions).merge({
   entry: clientDllConfig,
   output: {
     path: Path.resolve("dll/js"),

@@ -11,7 +11,10 @@
     "url": "https://github.com/electrode-io/electrode/issues"
   },
   "license": "Apache-2.0",
-  "scripts": {},
+  "scripts": {
+    "test": "npm run lint",
+    "lint": "eslint **/*.js"
+  },
   "peerDependencies": {
     "electrode-archetype-react-app": "^2.0.0"
   },

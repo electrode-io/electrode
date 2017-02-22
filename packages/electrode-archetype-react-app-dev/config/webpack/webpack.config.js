@@ -1,20 +1,20 @@
 "use strict";
 
-var _ = require("lodash");
-var mergeWebpackConfig = require("webpack-partial").default;
-var WebpackConfig = require("webpack-config").default;
-var getRootConfig = require("./get-root-config");
-var addDllReferences = require("./add-dll-references");
+const _ = require("lodash");
+const mergeWebpackConfig = require("webpack-partial").default;
+const WebpackConfig = require("webpack-config").default;
+const getRootConfig = require("./get-root-config");
+const addDllReferences = require("./add-dll-references");
 
-var baseConfig = require("./base.js");
-var defineConfig = require("./partial/define.js");
-var optimizeConfig = require("./partial/optimize");
-var localesConfig = require("./partial/locales");
-var productionSourcemapsConfig = require("./partial/sourcemaps-remote");
-var failConfig = require("./partial/fail");
-var simpleProgress = require("./partial/simple-progress");
+const baseConfig = require("./base.js");
+const defineConfig = require("./partial/define.js");
+const optimizeConfig = require("./partial/optimize");
+const localesConfig = require("./partial/locales");
+const productionSourcemapsConfig = require("./partial/sourcemaps-remote");
+const failConfig = require("./partial/fail");
+const simpleProgress = require("./partial/simple-progress");
 
-var config = new WebpackConfig().merge(_.flow(
+const config = new WebpackConfig().merge(_.flow(
   mergeWebpackConfig.bind(null, {}, baseConfig),
   optimizeConfig(),
   localesConfig(),

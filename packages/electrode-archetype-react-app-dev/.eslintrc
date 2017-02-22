@@ -1,0 +1,28 @@
+---
+extends:
+  - walmart/configurations/es6-node
+parserOptions:
+  sourceType: module
+rules:
+  strict:
+    - 'off'
+    - global
+  no-process-exit:
+    - 'off'
+  func-style:
+    - 'off'
+  global-require:
+    - 'off'
+  no-magic-numbers:
+    - 'off'
+  no-console:
+    - 'off'
+  quotes:
+    - error
+    - double
+    - avoidEscape: true
+      allowTemplateLiterals: true
+  max-len:
+    - 2
+    - 120
+  no-extra-parens: [0]

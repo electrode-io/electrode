@@ -1,4 +1,7 @@
 "use strict";
+
+/* eslint-disable */
+
 var path = require("path");
 
 var webpackCfg = require("../webpack/webpack.config.test");
@@ -16,7 +19,7 @@ module.exports = function (config) {
     files: [
       MAIN_PATH
     ],
-    plugins : [
+    plugins: [
       'karma-chrome-launcher',
       'karma-coverage',
       'karma-firefox-launcher',

@@ -1,6 +1,6 @@
 "use strict";
 
-var mergeWebpackConfig = require("webpack-partial").default;
+const mergeWebpackConfig = require("webpack-partial").default;
 
 module.exports = function () {
   return function (config) {

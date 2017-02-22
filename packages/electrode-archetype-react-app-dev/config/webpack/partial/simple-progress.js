@@ -1,9 +1,9 @@
 "use strict";
 
-var mergeWebpackConfig = require("webpack-partial").default;
-var webpack = require("webpack");
+const mergeWebpackConfig = require("webpack-partial").default;
+const webpack = require("webpack");
 
-var lastPct;
+let lastPct;
 
 module.exports = function () {
   return function (config) {
@@ -15,13 +15,13 @@ module.exports = function () {
             return;
           }
           if (pct === 0) {
-            process.stdout.write("\nwebpack " + msg + ": ");
+            process.stdout.write(`\nwebpack ${msg}: `);
           }
           process.stdout.write(".");
           if (pct > 0 && pct % 20 === 0) {
             process.stdout.write("\n");
             if (msg && pct < 100) {
-              process.stdout.write("  " + msg + ": ");
+              process.stdout.write(`  ${msg}: `);
             }
           }
           if (pct === 100) {

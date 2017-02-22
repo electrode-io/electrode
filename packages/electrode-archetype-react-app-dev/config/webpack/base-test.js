@@ -1,11 +1,11 @@
 "use strict";
-var archetype = require("../archetype");
-var mergeWebpackConfig = require("webpack-partial").default;
-var Path = archetype.Path;
+const archetype = require("../archetype");
+const mergeWebpackConfig = require("webpack-partial").default;
+const Path = archetype.Path;
 
-var baseConfig = require("./base.js");
+const baseConfig = require("./base.js");
 
-var testConfig = {
+const testConfig = {
   module: {
     /*
      * This prevents webpack from running its parsers on any sinon files. Sinon breaks when it is

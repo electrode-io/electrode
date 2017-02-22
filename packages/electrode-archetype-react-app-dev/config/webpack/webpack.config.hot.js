@@ -5,16 +5,16 @@
 
 process.env.HMR = "true";
 
-var _ = require("lodash");
-var mergeWebpackConfig = require("webpack-partial").default;
-var hotConfig = require("./partial/hot");
-var baseConfig = require("./base.js");
-var defineConfig = require("./partial/define.js");
-var devConfig = require("./partial/dev.js");
-var WebpackConfig = require("webpack-config").default;
-var getRootConfig = require("./get-root-config");
+const _ = require("lodash");
+const mergeWebpackConfig = require("webpack-partial").default;
+const hotConfig = require("./partial/hot");
+const baseConfig = require("./base.js");
+const defineConfig = require("./partial/define.js");
+const devConfig = require("./partial/dev.js");
+const WebpackConfig = require("webpack-config").default;
+const getRootConfig = require("./get-root-config");
 
-var config = module.exports = _.flow(
+const config = module.exports = _.flow(
   mergeWebpackConfig.bind(null, {}, baseConfig),
   defineConfig(),
   devConfig(),

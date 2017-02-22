@@ -1,7 +1,7 @@
 "use strict";
 
-var mergeWebpackConfig = require("webpack-partial").default;
-var DefinePlugin = require("webpack").DefinePlugin;
+const mergeWebpackConfig = require("webpack-partial").default;
+const DefinePlugin = require("webpack").DefinePlugin;
 
 module.exports = function () {
   return function (config) {

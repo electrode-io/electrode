@@ -1,5 +1,7 @@
 "use strict";
 
+/* eslint-disable */
+
 require("babel-polyfill");
 
 /**

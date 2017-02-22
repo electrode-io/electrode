@@ -1,7 +1,7 @@
 "use strict";
 
-var mergeWebpackConfig = require("webpack-partial").default;
-var ContextReplacementPlugin = require("webpack").ContextReplacementPlugin;
+const mergeWebpackConfig = require("webpack-partial").default;
+const ContextReplacementPlugin = require("webpack").ContextReplacementPlugin;
 
 // Note that in modern versions of `moment`, there is actually no
 // `locale/en.js`, `en` is simply the default and included in `moment` itself.
@@ -9,8 +9,8 @@ var ContextReplacementPlugin = require("webpack").ContextReplacementPlugin;
 // So don't expect to actually see `en.js` in the module list. `en` is listed
 // here anyway so (1) the list of locales makes more sense and (2) just in case
 // a past or future version of `moment` is used which does have `en.js`.
-var LOCALES = ["en"];
-var LOCALES_REGEX = new RegExp("^\./(" + LOCALES.join("|") + ")$");
+const LOCALES = ["en"];
+const LOCALES_REGEX = new RegExp(`^\./(${LOCALES.join("|")})$`);
 
 module.exports = function () {
   return function (config) {

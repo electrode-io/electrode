@@ -1,5 +1,7 @@
 "use strict";
 
+/* eslint-disable */
+
 /*
  * Karma Configuration: "watch" version.
  *
@@ -28,7 +30,7 @@ module.exports = function (config) {
           watched: true
         };
       })
-    )
+      )
   });
 
 };
