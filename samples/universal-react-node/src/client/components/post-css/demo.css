@@ -9,7 +9,7 @@
   };
 }
 
-.postcss {
+.main {
   background-color: var(--bgColor);
   font: var(--bodyFont);
   font-size: calc(var(--divFontSize) * 1.2);

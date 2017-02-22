@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "./postcss.css";
+import styles from "./demo.css";
 
-const PostCSS = () => (
-  <div className={styles.postcss}>
+const Demo = () => (
+  <div className={styles.main}>
     Div font-size uses `calc` and `gray()` for background-color.
     <p className={styles.highlighted}>This is a `p` tag highlighted using a variable.</p>
     <ul>
@@ -13,4 +13,4 @@ const PostCSS = () => (
   </div>
 );
 
-export default PostCSS;
+export default Demo;
