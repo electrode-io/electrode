@@ -1,7 +1,11 @@
+<p align="center">
+<a><img src="https://raw.githubusercontent.com/electrode-io/electrode/cc4ea3e1851cee3333ecca08fdbf5534f51b1ae7/samples/universal-react-node/client/images/logo-192x192.png" alt="Electrode Logo"></a>
+<br>
+<b>Electrode</b>
+</p>
+
 [![Gitter](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/electrode-io/electrode)
 [![Build Status][travis-image]][travis-url] [![devDependencies Status][daviddm-image]][daviddm-url]
-
-## ![electrode logo][logo-192x192]Electrode 
 
 ### A Platform for building Universal React/Node.js applications
 
@@ -75,7 +79,6 @@ Built with :heart: by [Team Electrode] @WalmartLabs.
 [electrode-archetype-react-app]: packages/electrode-archetype-react-app
 [electrode-archetype-react-app-dev]: packages/electrode-archetype-react-app-dev
 [generator-electrode]: packages/generator-electrode
-[logo-192x192]: https://raw.githubusercontent.com/electrode-io/electrode/cc4ea3e1851cee3333ecca08fdbf5534f51b1ae7/samples/universal-react-node/client/images/logo-192x192.png
 [travis-image]: https://travis-ci.org/electrode-io/electrode.svg?branch=master
 [travis-url]: https://travis-ci.org/electrode-io/electrode
 [daviddm-image]: https://david-dm.org/electrode-io/electrode/dev-status.svg
