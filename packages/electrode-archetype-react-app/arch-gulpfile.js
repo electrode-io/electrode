@@ -91,7 +91,7 @@ function lint(options) {
   const ext = options.ext ? `--ext ${options.ext}` : "";
 
   const checkCustom = (t) => {
-    const f = ["", ".json", ".yml"].find((e) => {
+    const f = ["", ".json", ".yml", ".yaml", ".js"].find((e) => {
       const x = Path.resolve(Path.join(t, `.eslintrc${e}`));
       return Fs.existsSync(x);
     });
