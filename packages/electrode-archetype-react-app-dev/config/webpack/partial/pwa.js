@@ -10,8 +10,8 @@ const fileLoader = require.resolve("file-loader");
 const webAppManifestLoader = require.resolve("web-app-manifest-loader");
 const SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin");
 const FaviconsWebpackPlugin = require("../plugins/favicons");
-const AddManifestFieldsPlugin = require('../plugins/add-manifest-fields');
-const DiskPlugin = require('webpack-disk-plugin');
+const AddManifestFieldsPlugin = require("../plugins/add-manifest-fields");
+const DiskPlugin = require("webpack-disk-plugin");
 const optionalRequire = require("optional-require")(require);
 
 const swConfigPath = Path.resolve("config", "sw-config.js");

@@ -12,33 +12,29 @@
 function AddManifestFieldsPlugin(fields) {
   this.fields = fields || {};
   this.regex = /manifest\.json/;
-};
+}
 
-AddManifestFieldsPlugin.prototype.apply = function(compiler) {
-  var regex = this.regex;
-  var fields = this.fields;
-  compiler.plugin('emit', function(compilation, callback) {
-    for (var filename in compilation.assets) {
+AddManifestFieldsPlugin.prototype.apply = function (compiler) {
+  const regex = this.regex;
+  const fields = this.fields;
+  compiler.plugin("emit", (compilation, callback) => {
+    for (const filename in compilation.assets) {
       if (regex.test(filename)) {
-        var manifestAsset = compilation.assets[filename];
-        var source = manifestAsset.source();
-        var manifest = JSON.parse(source);
-        for (var field in fields) {
+        const manifestAsset = compilation.assets[filename];
+        const source = manifestAsset.source();
+        const manifest = JSON.parse(source);
+        for (const field in fields) {
           manifest[field] = fields[field];
         }
-        var newManifestAsset = JSON.stringify(manifest, null, 2);
+        const newManifestAsset = JSON.stringify(manifest, null, 2);
         compilation.assets[filename] = {
-          source: function() {
-            return newManifestAsset;
-          },
-          size: function() {
-            return newManifestAsset.length;
-          }
-        }
+          source: () => newManifestAsset,
+          size: () => newManifestAsset.length
+        };
       }
     }
     callback();
   });
-}
+};
 
 module.exports = AddManifestFieldsPlugin;
