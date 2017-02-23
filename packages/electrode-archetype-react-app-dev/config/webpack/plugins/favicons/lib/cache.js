@@ -3,6 +3,7 @@
  * it offers helpers to prevent recompilation of the favicons on
  * every build
  */
+/* eslint-disable */
 'use strict';
 var fs = require('fs');
 var path = require('path');

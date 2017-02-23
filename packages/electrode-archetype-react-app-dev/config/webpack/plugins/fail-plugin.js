@@ -10,7 +10,7 @@ module.exports = function () {
 
   this.plugin("done", (stats) => {
     if (stats.compilation.errors && stats.compilation.errors.length && !isWatch) {
-      process.on("beforeExit", function () {
+      process.on("beforeExit", () => {
         process.exit(1);
       });
     }

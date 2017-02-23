@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use strict';
 var path = require('path');
 var SingleEntryPlugin = require('webpack/lib/SingleEntryPlugin');

@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use strict';
 var loaderUtils = require('loader-utils');
 var favicons = require('favicons/es5');

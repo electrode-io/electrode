@@ -5,7 +5,7 @@
  * Keeping this until official version merges with the PR or update
  * to support webpack 2.0 better.
  */
-
+/* eslint-disable */
 'use strict';
 var childCompiler = require('./lib/compiler.js');
 var assert = require('assert');
