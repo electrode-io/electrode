@@ -1,12 +1,12 @@
 "use strict";
 
-var mergeWebpackConfig = require("webpack-partial").default;
-var StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
+const mergeWebpackConfig = require("webpack-partial").default;
+const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
 
 module.exports = function (opts) {
-  var statsOptions = {
+  const statsOptions = {
     filename: "../server/stats.json",
-    fields: ['assetsByChunkName', 'assets']
+    fields: ["assetsByChunkName", "assets"]
   };
 
   if (opts && opts.fullPaths) {
@@ -16,8 +16,8 @@ module.exports = function (opts) {
 
   if (process.env.OPTIMIZE_STATS === "true") {
     statsOptions.fields = null;
-    statsOptions.transform = function (data) {
-      data.modules.forEach(function (m) {
+    statsOptions.transform = (data) => {
+      data.modules.forEach((m) => {
         delete m.source;
       });
       delete data.children;

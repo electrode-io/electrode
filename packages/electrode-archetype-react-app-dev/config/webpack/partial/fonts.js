@@ -1,10 +1,10 @@
 "use strict";
 
-var mergeWebpackConfig = require("webpack-partial").default;
+const mergeWebpackConfig = require("webpack-partial").default;
 
-var urlLoader = require.resolve("url-loader");
-var fileLoader = require.resolve("file-loader");
-var isomorphicLoader = require.resolve("isomorphic-loader");
+const urlLoader = require.resolve("url-loader");
+const fileLoader = require.resolve("file-loader");
+const isomorphicLoader = require.resolve("isomorphic-loader");
 
 module.exports = function () {
   return function (config) {

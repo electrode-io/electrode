@@ -1,28 +1,28 @@
 "use strict";
 
-var _ = require("lodash");
-var fs = require("fs");
-var webpack = require("webpack");
-var mergeWebpackConfig = require("webpack-partial").default;
+const _ = require("lodash");
+const fs = require("fs");
+const webpack = require("webpack");
+const mergeWebpackConfig = require("webpack-partial").default;
 
 // config partials
-var babelConfig = require("./partial/babel");
-var extractStylesConfig = require("./partial/extract");
-var fontsConfig = require("./partial/fonts");
-var imagesConfig = require("./partial/images");
-var statsConfig = require("./partial/stats");
-var isomorphicConfig = require("./partial/isomorphic");
-var pwaConfig = require("./partial/pwa");
-var archetype = require("../archetype");
-var Path = archetype.Path;
-var AppMode = archetype.AppMode;
-var context = Path.resolve(AppMode.src.client);
+const babelConfig = require("./partial/babel");
+const extractStylesConfig = require("./partial/extract");
+const fontsConfig = require("./partial/fonts");
+const imagesConfig = require("./partial/images");
+const statsConfig = require("./partial/stats");
+const isomorphicConfig = require("./partial/isomorphic");
+const pwaConfig = require("./partial/pwa");
+const archetype = require("../archetype");
+const Path = archetype.Path;
+const AppMode = archetype.AppMode;
+const context = Path.resolve(AppMode.src.client);
 
-var archetypeNodeModules = Path.join(archetype.dir, "node_modules");
-var archetypeDevNodeModules = Path.join(archetype.devDir, "node_modules");
-var inspectpack = process.env.INSPECTPACK_DEBUG === "true";
+const archetypeNodeModules = Path.join(archetype.dir, "node_modules");
+const archetypeDevNodeModules = Path.join(archetype.devDir, "node_modules");
+const inspectpack = process.env.INSPECTPACK_DEBUG === "true";
 
-var optionalRequire = require("optional-require")(require);
+const optionalRequire = require("optional-require")(require);
 
 /* eslint-disable func-style */
 
@@ -36,18 +36,18 @@ var optionalRequire = require("optional-require")(require);
  * vanilla JS file as entry.
  */
 function appEntry() {
-  var entryPath = Path.join(context, "entry.config.js");
+  const entryPath = Path.join(context, "entry.config.js");
 
   const entry = optionalRequire(entryPath,
     "Entry point configuration is not found, using default entry point...");
 
-  return entry ? entry :
+  return entry ||
     fs.existsSync(Path.join(context, "app.js")) ? "./app.js" : "./app.jsx";
 }
 
-var baseConfig = {
+const baseConfig = {
   cache: true,
-  context: context,
+  context,
   plugins: [
     new webpack.LoaderOptionsPlugin({
       options: {

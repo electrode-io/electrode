@@ -1,43 +1,44 @@
 "use strict";
 
-var mergeWebpackConfig = require("webpack-partial").default;
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var WebpackReporter = require("electrode-webpack-reporter");
-var webpack = require("webpack");
-var Fs = require("fs");
-var archetype = require("../../archetype");
-var Path = archetype.Path;
+const mergeWebpackConfig = require("webpack-partial").default;
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const WebpackReporter = require("electrode-webpack-reporter");
+const webpack = require("webpack");
+const Fs = require("fs");
+const archetype = require("../../archetype");
+const Path = archetype.Path;
 
 function notifyBundleValid() {
-  setTimeout(function () {
+  setTimeout(() => {
     Fs.writeFileSync(Path.resolve(archetype.eTmpDir, "bundle.valid.log"), `${Date.now()}`);
   }, 100);
 }
 
+/* eslint max-statements: 0 */
 function webpackDevReporter(reporterOptions) {
-  var state = reporterOptions.state;
-  var stats = reporterOptions.stats;
-  var options = reporterOptions.options;
+  const state = reporterOptions.state;
+  const stats = reporterOptions.stats;
+  const options = reporterOptions.options;
 
   if (state) {
-    var displayStats = (!options.quiet && options.stats !== false);
+    let displayStats = (!options.quiet && options.stats !== false);
 
     if (displayStats && !(stats.hasErrors() || stats.hasWarnings()) && options.noInfo) {
       displayStats = false;
     }
 
     if (displayStats) {
-      console.log(stats.toString(options.stats))
+      console.log(stats.toString(options.stats));
     }
 
     if (!options.noInfo && !options.quiet) {
-      var errMsg = ".";
+      let errMsg = ".";
       if (!stats.hasErrors()) {
         notifyBundleValid();
       } else {
-        errMsg = " but there were errors."
+        errMsg = " but there were errors.";
       }
-      console.info("webpack: bundle is now VALID" + errMsg);
+      console.info(`webpack: bundle is now VALID ${errMsg}`);
     }
   } else {
     console.info("webpack: bundle is now INVALID.");
@@ -56,7 +57,7 @@ module.exports = function () {
       },
       plugins: [
         new webpack.SourceMapDevToolPlugin("[file].map"),
-        new ExtractTextPlugin({filename: "[name].style.css"}),
+        new ExtractTextPlugin({ filename: "[name].style.css" }),
         new webpack.NoEmitOnErrorsPlugin()
       ]
     });

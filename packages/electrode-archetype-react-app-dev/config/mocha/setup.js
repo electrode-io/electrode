@@ -1,8 +1,8 @@
 "use strict";
 
-var chai = require("chai");
-var sinonChai = require("sinon-chai");
-var chaiShallowly = require("chai-shallowly");
+const chai = require("chai");
+const sinonChai = require("sinon-chai");
+const chaiShallowly = require("chai-shallowly");
 
 chai.use(sinonChai);
 chai.use(chaiShallowly);

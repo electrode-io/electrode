@@ -1,29 +1,30 @@
 "use strict";
 
-var fs = require("fs");
-var glob = require("glob");
-var path = require("path");
+const fs = require("fs");
+const glob = require("glob");
+const path = require("path");
 
-var assetsPattern = path.resolve("@(dist|dll)/isomorphic-assets.*");
-var assetsPath = path.resolve("dist/isomorphic-assets.json");
+const assetsPattern = path.resolve("@(dist|dll)/isomorphic-assets.*");
+const assetsPath = path.resolve("dist/isomorphic-assets.json");
 
-glob(assetsPattern, function (readErr, filenames) {
-  var assets = filenames.reduce(function (result, filename) {
-    var fileAssets = require(filename);
+glob(assetsPattern, (readErr, filenames) => {
+  const assets = filenames.reduce((result, filename) => {
+    const fileAssets = require(filename);
 
     Object.assign(result.marked, fileAssets.marked);
     Object.assign(result.chunks, fileAssets.chunks);
 
     return result;
-  }, {
-    chunks: {},
-    marked: {}
-  });
+  },
+    {
+      chunks: {},
+      marked: {}
+    }
+  );
 
-  fs.writeFile(assetsPath, JSON.stringify(assets, null, 2), function (err) {
+  fs.writeFile(assetsPath, JSON.stringify(assets, null, 2), (err) => {
     if (err) {
       throw err;
     }
   });
 });
-

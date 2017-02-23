@@ -1,10 +1,9 @@
 "use strict";
 
-var archetype = require("../../archetype");
-var mergeWebpackConfig = require("webpack-partial").default;
-var webpack = require("webpack");
+const archetype = require("../../archetype");
+const mergeWebpackConfig = require("webpack-partial").default;
 
-var getDefaultEntry = function (entry) {
+const getDefaultEntry = function (entry) {
   return [
     `webpack-dev-server/client?http://${archetype.webpack.devHostname}:${archetype.webpack.devPort}`,
     "webpack/hot/only-dev-server",
@@ -12,9 +11,9 @@ var getDefaultEntry = function (entry) {
   ];
 };
 
-var getMultiBundleEntry = function (entries) {
-  var multiBundleEntry = {};
-  for (var entryName in entries) {
+const getMultiBundleEntry = function (entries) {
+  const multiBundleEntry = {};
+  for (const entryName in entries) {
     multiBundleEntry[entryName] = getDefaultEntry(entries[entryName]);
   }
   return multiBundleEntry;
@@ -22,13 +21,13 @@ var getMultiBundleEntry = function (entries) {
 
 module.exports = function () {
   return function (config) {
-    var entry = typeof config.entry === "object" ?
+    const entry = typeof config.entry === "object" ?
       getMultiBundleEntry(config.entry) :
       getDefaultEntry(config.entry);
 
     return mergeWebpackConfig(config, {
       devtool: "eval",
-      entry: entry
+      entry
     });
   };
 };

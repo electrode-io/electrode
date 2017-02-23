@@ -1,4 +1,7 @@
 "use strict";
+
+/* eslint-disable */
+
 var path = require("path");
 var karmaConf = require("./karma.conf");
 

@@ -1,16 +1,16 @@
 "use strict";
 
-var _ = require("lodash");
-var mergeWebpackConfig = require("webpack-partial").default;
-var WebpackConfig = require("webpack-config").default;
-var getRootConfig = require("./get-root-config");
+const _ = require("lodash");
+const mergeWebpackConfig = require("webpack-partial").default;
+const WebpackConfig = require("webpack-config").default;
+const getRootConfig = require("./get-root-config");
 
-var baseConfig = require("./base.js");
-var defineConfig = require("./partial/define.js");
-var optimizeConfig = require("./partial/optimize");
-var localesConfig = require("./partial/locales");
-var coverageConfig = require("./partial/coverage");
-var inlineSourcemapsConfig = require("./partial/sourcemaps-inline");
+const baseConfig = require("./base.js");
+const defineConfig = require("./partial/define.js");
+const optimizeConfig = require("./partial/optimize");
+const localesConfig = require("./partial/locales");
+const coverageConfig = require("./partial/coverage");
+const inlineSourcemapsConfig = require("./partial/sourcemaps-inline");
 
 module.exports = new WebpackConfig().merge(_.flow(
   mergeWebpackConfig.bind(null, {}, baseConfig),

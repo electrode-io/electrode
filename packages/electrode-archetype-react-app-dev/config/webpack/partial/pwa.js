@@ -1,22 +1,22 @@
 "use strict";
 
-var archetype = require("../../archetype");
-var Path = archetype.Path;
-var AppMode = archetype.AppMode;
+const archetype = require("../../archetype");
+const Path = archetype.Path;
+const AppMode = archetype.AppMode;
 
-var assign = require("lodash/assign");
-var mergeWebpackConfig = require("webpack-partial").default;
-var fileLoader = require.resolve("file-loader");
-var webAppManifestLoader = require.resolve("web-app-manifest-loader");
-var SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin");
-var FaviconsWebpackPlugin = require("../plugins/favicons");
-var AddManifestFieldsPlugin = require('../plugins/add-manifest-fields');
-var DiskPlugin = require('webpack-disk-plugin');
-var optionalRequire = require("optional-require")(require);
+const assign = require("lodash/assign");
+const mergeWebpackConfig = require("webpack-partial").default;
+const fileLoader = require.resolve("file-loader");
+const webAppManifestLoader = require.resolve("web-app-manifest-loader");
+const SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin");
+const FaviconsWebpackPlugin = require("../plugins/favicons");
+const AddManifestFieldsPlugin = require('../plugins/add-manifest-fields');
+const DiskPlugin = require('webpack-disk-plugin');
+const optionalRequire = require("optional-require")(require);
 
-var swConfigPath = Path.resolve("config", "sw-config.js");
-var serverConfigPath = Path.resolve("config", "default.json");
-var mkdirp = require("mkdirp");
+const swConfigPath = Path.resolve("config", "sw-config.js");
+const serverConfigPath = Path.resolve("config", "default.json");
+const mkdirp = require("mkdirp");
 
 /**
  * Takes a file path and returns a webpack-compatible
@@ -25,10 +25,10 @@ var mkdirp = require("mkdirp");
  * @return {string}           parsed file path
  */
 function getHashedPath(filepath) {
-  var parsed = Path.parse(filepath);
-  var name = parsed.name;
-  var ext = parsed.ext;
-  return name + '.[hash]' + ext;
+  const parsed = Path.parse(filepath);
+  const name = parsed.name;
+  const ext = parsed.ext;
+  return `${name}.[hash]${ext}`;
 }
 
 /**
@@ -38,10 +38,10 @@ function getHashedPath(filepath) {
  * @return {string}           parsed file path
  */
 function getDevelopmentPath(filepath) {
-  var parsed = Path.parse(filepath);
-  var name = parsed.name;
-  var ext = parsed.ext;
-  return name + '.bundle.dev' + ext;
+  const parsed = Path.parse(filepath);
+  const name = parsed.name;
+  const ext = parsed.ext;
+  return `${name}.bundle.dev${ext}`;
 }
 
 /**
@@ -50,8 +50,8 @@ function getDevelopmentPath(filepath) {
  * representing the webpack entry config. Each script
  * will get its own entry point so they can be independantly
  * imported by the service worker.
- * @param  {array<string>} importScripts
- * @param  {object}        current entry config
+ * @param  {array<string>} importScripts import scripts
+ * @param  {object}        entry current entry config
  * @return {object}        new entry config
  */
 function createEntryConfigFromScripts(importScripts, entry) {
@@ -59,20 +59,21 @@ function createEntryConfigFromScripts(importScripts, entry) {
   // entry points. If it is we create a new object with all
   // existing entry points to avoid mutating the config. If its not,
   // we assume its a string and use it as the main entry point.
-  var newEntry = typeof entry === "object"
+  const newEntry = typeof entry === "object"
     ? Object.assign({}, entry)
     : { main: entry };
-  return importScripts.reduce(function (acc, script) {
-    var name = Path.parse(script).name;
+  return importScripts.reduce((acc, script) => {
+    const name = Path.parse(script).name;
     acc[name] = script;
     return acc;
   }, newEntry);
 }
 
 module.exports = function () {
-  return function (config) {
-    var swConfig = optionalRequire(swConfigPath, true) || {};
-    var severConfig = optionalRequire(serverConfigPath, true) || {};
+  /* eslint max-statements: 0 */
+  return (config) => {
+    const swConfig = optionalRequire(swConfigPath, true) || {};
+    const severConfig = optionalRequire(serverConfigPath, true) || {};
 
     if (!swConfig.manifest) {
       return mergeWebpackConfig(config, {});
@@ -82,15 +83,15 @@ module.exports = function () {
 
     mkdirp.sync(Path.resolve("dist"));
 
-    var manifestConfig = assign({
+    const manifestConfig = assign({
       background: "#FFFFFF",
       logo: "images/electrode.png",
       title: "Electrode",
-      short_name: "Electrode",
+      "short_name": "Electrode",
       statsFilename: "../server/iconstats.json"
     }, swConfig.manifest);
 
-    var cacheConfig = assign({
+    const cacheConfig = assign({
       staticFileGlobs: [
         "dist/js/*.{js,css}"
       ],
@@ -102,11 +103,11 @@ module.exports = function () {
     }, swConfig.cache);
 
     if (cacheConfig.runtimeCaching) {
-      cacheConfig.runtimeCaching = cacheConfig.runtimeCaching.map(function (runtimeCache) {
+      cacheConfig.runtimeCaching = cacheConfig.runtimeCaching.map((runtimeCache) => {
         return {
           handler: runtimeCache.handler,
           urlPattern: new RegExp(runtimeCache.urlPattern)
-        }
+        };
       });
     }
 
@@ -115,10 +116,10 @@ module.exports = function () {
      * the entry config and output config so we get an entry point for each
      * script with unique names.
      */
-    var entry = config.entry;
-    var output = config.output;
+    let entry = config.entry;
+    let output = config.output;
     if (cacheConfig.importScripts) {
-      var importScripts = cacheConfig.importScripts;
+      const importScripts = cacheConfig.importScripts;
       cacheConfig.importScripts = process.env.WEBPACK_DEV === "true"
         ? importScripts.map(getDevelopmentPath)
         : importScripts.map(getHashedPath);
@@ -128,8 +129,8 @@ module.exports = function () {
       };
     }
 
-    var logoPath = Path.resolve(AppMode.src.client, manifestConfig.logo);
-    var plugins = [
+    const logoPath = Path.resolve(AppMode.src.client, manifestConfig.logo);
+    const plugins = [
       new FaviconsWebpackPlugin({
         logo: logoPath,
         emitStats: true,
@@ -145,9 +146,9 @@ module.exports = function () {
         }
       }),
       new AddManifestFieldsPlugin({
-        gcm_sender_id: manifestConfig.gcm_sender_id,
-        short_name: manifestConfig.short_name,
-        theme_color: manifestConfig.theme_color
+        "gcm_sender_id": manifestConfig.gcm_sender_id,
+        "short_name": manifestConfig.short_name,
+        "theme_color": manifestConfig.theme_color
       }),
       new SWPrecacheWebpackPlugin(cacheConfig)
     ];
@@ -167,7 +168,7 @@ module.exports = function () {
           files: [{
             asset: /\/stats.json$/,
             output: {
-              filename: 'stats.json'
+              filename: "stats.json"
             }
           }]
         })
@@ -175,8 +176,8 @@ module.exports = function () {
     }
 
     return mergeWebpackConfig(config, {
-      entry: entry,
-      output: output,
+      entry,
+      output,
       module: {
         rules: [
           {
@@ -193,7 +194,7 @@ module.exports = function () {
           }
         ]
       },
-      plugins: plugins
+      plugins
     });
   };
 };
