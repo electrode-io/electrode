@@ -18,11 +18,10 @@ const Path = archetype.Path;
 const AppMode = archetype.AppMode;
 const context = Path.resolve(AppMode.src.client);
 
-const archetypeNodeModules = Path.join(archetype.dir, "node_modules");
-const archetypeDevNodeModules = Path.join(archetype.devDir, "node_modules");
-const inspectpack = process.env.INSPECTPACK_DEBUG === "true";
-
 const optionalRequire = require("optional-require")(require);
+const ModuleResolver = require("./plugins/module-resolver");
+
+const inspectpack = process.env.INSPECTPACK_DEBUG === "true";
 
 /* eslint-disable func-style */
 
@@ -65,23 +64,24 @@ const baseConfig = {
   },
   resolve: {
     modules: [
-      archetypeNodeModules,
-      archetypeDevNodeModules,
-      AppMode.isSrc && Path.resolve(AppMode.src.dir) || null
-    ]
-      .concat(archetype.webpack.modulesDirectories)
-      .concat([process.cwd(), "node_modules"])
+      AppMode.isSrc && Path.resolve(AppMode.src.dir) || null,
+      process.cwd()
+    ].concat(archetype.webpack.modulesDirectories)
       .filter(_.identity),
+    plugins: [
+      new ModuleResolver("module", undefined, "resolve")
+    ],
     extensions: [".js", ".jsx", ".json"]
   },
   resolveLoader: {
     modules: [
-      archetypeNodeModules,
-      archetypeDevNodeModules,
       Path.resolve("lib"),
-      process.cwd(),
-      "node_modules"
-    ].filter(_.identity)
+      process.cwd()
+    ].concat(archetype.webpack.loaderDirectories)
+      .filter(_.identity),
+    plugins: [
+      new ModuleResolver("module", undefined, "resolve")
+    ]
   }
 };
 
