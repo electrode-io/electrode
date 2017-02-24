@@ -16,6 +16,7 @@ const pwaConfig = require("./partial/pwa");
 const archetype = require("../archetype");
 const Path = archetype.Path;
 const AppMode = archetype.AppMode;
+const polyfill = archetype.enableBabelPolyfill;
 const context = Path.resolve(AppMode.src.client);
 
 const archetypeNodeModules = Path.join(archetype.dir, "node_modules");
@@ -55,7 +56,9 @@ const baseConfig = {
       }
     })
   ],
-  entry: appEntry(),
+  entry: {
+    main: polyfill ? ["babel-polyfill", appEntry()] : appEntry()
+  },
   output: {
     path: Path.resolve("dist", "js"),
     pathinfo: inspectpack, // Enable path information for inspectpack

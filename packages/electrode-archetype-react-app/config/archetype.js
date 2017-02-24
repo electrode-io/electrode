@@ -16,7 +16,8 @@ module.exports = {
   prodDir: constants.PROD_DIR,
   eTmpDir: constants.ETMP_DIR,
   prodModulesDir: Path.join(constants.PROD_DIR, "modules"),
-  checkUserBabelRc: utils.checkUserBabelRc
+  checkUserBabelRc: utils.checkUserBabelRc,
+  enableBabelPolyfill: true
 };
 
 //
