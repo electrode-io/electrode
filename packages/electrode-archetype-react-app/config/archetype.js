@@ -16,8 +16,7 @@ module.exports = {
   prodDir: constants.PROD_DIR,
   eTmpDir: constants.ETMP_DIR,
   prodModulesDir: Path.join(constants.PROD_DIR, "modules"),
-  checkUserBabelRc: utils.checkUserBabelRc,
-  enableBabelPolyfill: true
+  checkUserBabelRc: utils.checkUserBabelRc
 };
 
 //
@@ -44,7 +43,8 @@ function loadDev() {
       devHostname: process.env.WEBPACK_HOST || "localhost",
       devPort: utils.getInt(process.env.WEBPACK_DEV_PORT, 2992),
       testPort: utils.getInt(process.env.WEBPACK_TEST_PORT, 3001),
-      modulesDirectories: []
+      modulesDirectories: [],
+      enableBabelPolyfill: true
     }, archetypeOptions.webpack),
     config: Object.assign({}, {
       babel: `${configDir}/babel`,

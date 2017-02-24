@@ -16,7 +16,7 @@ const pwaConfig = require("./partial/pwa");
 const archetype = require("../archetype");
 const Path = archetype.Path;
 const AppMode = archetype.AppMode;
-const polyfill = archetype.enableBabelPolyfill;
+const polyfill = archetype.webpack.enableBabelPolyfill;
 const context = Path.resolve(AppMode.src.client);
 
 const archetypeNodeModules = Path.join(archetype.dir, "node_modules");
