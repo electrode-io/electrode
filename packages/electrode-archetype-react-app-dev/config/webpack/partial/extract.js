@@ -79,6 +79,18 @@ module.exports = function () {
           }
         ]
       });
+    } else {
+      rules.push({
+        test: /\.scss$/,
+        use: [
+          {
+            loader: "autoprefixer-loader",
+            options: {
+              browsers: ["last 2 versions", "ie >= 9", "> 5%"]
+            }
+          }
+        ]
+      });
     }
 
     return mergeWebpackConfig(config, {
