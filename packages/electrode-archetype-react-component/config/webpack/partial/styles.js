@@ -12,7 +12,7 @@ const cssLoader = archDevRequire.resolve("css-loader");
 const postcssLoader = archDevRequire.resolve("postcss-loader");
 const stylusLoader = archDevRequire.resolve("stylus-relative-loader");
 
-const configPath = Path.resolve("config.json");
+const configPath = Path.resolve("archetype", "config.js");
 const config = require(configPath);
 const cssModuleStylusSupport = config.cssModuleStylusSupport;
 
