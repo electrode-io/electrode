@@ -10,6 +10,11 @@ const cssnext = archDevRequire("postcss-cssnext");
 const styleLoader = archDevRequire.resolve("style-loader");
 const cssLoader = archDevRequire.resolve("css-loader");
 const postcssLoader = archDevRequire.resolve("postcss-loader");
+const stylusLoader = archDevRequire.resolve("stylus-relative-loader");
+
+const configPath = Path.resolve("config.json");
+const config = require(configPath);
+const cssModuleStylusSupport = config.cssModuleStylusSupport;
 
 /**
  * [cssModuleSupport By default, this archetype assumes you are using CSS-Modules + CSS-Next]
@@ -21,6 +26,7 @@ const postcssLoader = archDevRequire.resolve("postcss-loader");
  * case 3: *both* demo.css & demo.styl exists => CSS-Modules + CSS-Next takes priority
  *          with a warning message
  * case 4: *none* demo.css & demo.styl exists => CSS-Modules + CSS-Next takes priority
+ * case 5: *cssModuleStylusSupport
  */
 
 const cssNextExists = glob.sync(Path.join(process.cwd() + "/demo/*.css")).length > 0;
@@ -38,17 +44,36 @@ if (stylusExists && !cssNextExists) {
   /* eslint-enable no-console */
 }
 
-module.exports = () => (config) => mergeWebpackConfig(config, {
-  module: {
-    loaders: [{
+module.exports = () => config => {
+  const loaders = [
+    {
       name: "css",
       test: /\.css$/,
       /* eslint-disable prefer-template */
       loader: styleLoader + "!" + cssLoader + cssModuleSupport
       /* eslint-enable prefer-template */
-    }]
-  },
-  postcss: function () {
-    return cssModuleSupport ? [atImport, cssnext] : [];
+    }
+  ];
+
+  if (cssModuleStylusSupport) {
+    loaders.push({
+      name: "stylus-modules",
+      test: /\.styl$/,
+      /* eslint-disable prefer-template */
+      loader: styleLoader + "!" + cssLoader + "?modules!" + stylusLoader
+      /* eslint-enable prefer-template */
+    });
+  } else {
+    loaders.push({
+      name: "stylus",
+      test: /\.styl$/,
+      /* eslint-disable prefer-template */
+      loader: styleLoader + "!" + cssLoader + "!" + stylusLoader
+      /* eslint-enable prefer-template */
+    });
   }
-});
+
+  return mergeWebpackConfig(config, {
+    module: { loaders: loaders }
+  });
+};
