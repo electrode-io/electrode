@@ -7,7 +7,7 @@ module.exports = function () {
   return function (config) {
     return mergeWebpackConfig(config, {
       plugins: [
-        FailPlugin
+        new FailPlugin()
       ]
     });
   };
