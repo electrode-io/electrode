@@ -118,6 +118,8 @@ The archetypes are split into two parts: `<archetype>` and `<archetype>-dev`. Bo
 This archetype assumes an architecture as follows:
 
 ```
+archetype
+  config.js
 demo/
   demo.jsx
   demo.css
@@ -142,7 +144,9 @@ package.json
 ## CSS Modules + CSS next
 
 By default, this archetype assumes you are using CSS-Modules + CSS-Next, you need
-to opt-in to stylus support by adding a `*.styl` to your *project's* `demo/demo.styl` & `src/styles/*.styl`
+to opt-in to stylus support by adding a `*.styl` to your *project's* `demo/demo.styl` & `src/styles/*.styl`.
+You can use stylus and CSS-Modules together by enabling setting the 'cssModuleStylusSupport' option in 
+`archetype/config.js` to `true`.
 
 Import css files in your components and reference class names via the exported object `src/components/your-component.js`:
 
