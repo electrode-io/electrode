@@ -16,7 +16,8 @@
     "url": "https://github.com/jchip"
   },
   "files": [
-    "generators"
+    "generators",
+    "component"
   ],
   "main": "generators/index.js",
   "keywords": [
@@ -33,6 +34,7 @@
     "lodash": "^4.16.1",
     "parse-author": "^1.0.0",
     "yeoman-generator": "^0.23.4",
+    "yeoman-option-or-prompt": "^1.0.2",
     "yosay": "^1.0.0"
   },
   "devDependencies": {
