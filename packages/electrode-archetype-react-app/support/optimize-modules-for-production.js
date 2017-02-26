@@ -4,7 +4,7 @@ const Module = require("module");
 const assert = require("assert");
 const fs = require("fs");
 const archetype = require("../config/archetype");
-const Path = archetype.Path;
+const Path = require("path");
 
 /* eslint max-statements: 0 */
 function optimizeModulesForProduction(options) {

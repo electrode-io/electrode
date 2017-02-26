@@ -1,52 +1,38 @@
 "use strict";
 
-const _ = require("lodash");
-const webpack = require("webpack");
-const WebpackConfig = require("webpack-config").default;
-const removeDllReferences = require("./remove-dll-references");
-const getRootConfig = require("./get-root-config");
-const archetype = require("../archetype");
-const Path = archetype.Path;
-const AppMode = archetype.AppMode;
-const clientDllConfig = require(Path.resolve(AppMode.src.client, "dll.config.js"));
+const Path = require("path");
+const baseProfile = require("./profile.base");
+const generateConfig = require("./util/generate-config");
 
-const extensions = {};
-const baseConfigPath = require.resolve("./webpack.config");
-
-extensions[baseConfigPath] = function (config) {
-  const statsPlugin = _.find(config.plugins, {
-    opts: {
-      filename: "../server/stats.json"
+function makeConfig() {
+  const dllProfile = {
+    partials: {
+      "_dll-entry": { order: 10100 },
+      "_dll-output": { order: 10200 },
+      "_dll": { order: 10300 },
+      "_stats": {
+        options: {
+          filename: "../../dll/server/stats.dll.json"
+        }
+      },
+      "_isomorphic": {
+        options: {
+          assetsFile: "../../dll/isomorphic-assets.dll.json"
+        }
+      }
     }
-  });
-  const isomorphicPlugin = _.find(config.plugins, {
-    options: {
-      assetsFile: "../isomorphic-assets.json"
-    }
-  });
+  };
 
-  statsPlugin.opts.filename = "../../dll/server/stats.dll.json";
-  isomorphicPlugin.options.assetsFile = "../../dll/isomorphic-assets.dll.json";
-  config.entry = {};
+  const options = {
+    profiles: {
+      _base: baseProfile,
+      _dll: dllProfile
+    },
+    profileNames: ["_base", "_dll"],
+    configFilename: Path.basename(__filename)
+  };
 
-  return config;
-};
+  return generateConfig(options);
+}
 
-const dllConfig = new WebpackConfig().extend(extensions).merge({
-  entry: clientDllConfig,
-  output: {
-    path: Path.resolve("dll/js"),
-    filename: "[name].bundle.[hash].js",
-    library: "[name]_[hash]"
-  },
-  plugins: [
-    new webpack.DllPlugin({
-      name: "[name]_[hash]",
-      path: Path.resolve("dll/js/[name]-manifest.[hash].json")
-    })
-  ]
-}).merge(getRootConfig("webpack.config.dll.js"));
-
-removeDllReferences(dllConfig);
-
-module.exports = dllConfig;
+module.exports = makeConfig();

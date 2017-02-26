@@ -1,22 +1,32 @@
 "use strict";
+/**
+ * Webpack browser coverage configuration
+ */
+const baseProfile = require("./profile.base");
+const generateConfig = require("./util/generate-config");
+const Path = require("path");
 
-const _ = require("lodash");
-const mergeWebpackConfig = require("webpack-partial").default;
-const WebpackConfig = require("webpack-config").default;
-const getRootConfig = require("./get-root-config");
+function makeConfig() {
+  const browserCoverageProfile = {
+    partials: {
+      "_uglify": { order: 10100 },
+      "_locales": { order: 10200 },
+      "_define": { order: 10300 },
+      "_coverage": { order: 10400 },
+      "_sourcemaps-inline": { order: 10500 }
+    }
+  };
 
-const baseConfig = require("./base.js");
-const defineConfig = require("./partial/define.js");
-const optimizeConfig = require("./partial/optimize");
-const localesConfig = require("./partial/locales");
-const coverageConfig = require("./partial/coverage");
-const inlineSourcemapsConfig = require("./partial/sourcemaps-inline");
+  const options = {
+    profiles: {
+      _base: baseProfile,
+      "_browser-coverage": browserCoverageProfile
+    },
+    profileNames: ["_base", "_browser-coverage"],
+    configFilename: Path.basename(__filename)
+  };
 
-module.exports = new WebpackConfig().merge(_.flow(
-  mergeWebpackConfig.bind(null, {}, baseConfig),
-  optimizeConfig(),
-  localesConfig(),
-  defineConfig(),
-  coverageConfig(),
-  inlineSourcemapsConfig()
-)()).merge(getRootConfig("webpack.config.browsercoverage.js"));
+  return generateConfig(options);
+}
+
+module.exports = makeConfig();

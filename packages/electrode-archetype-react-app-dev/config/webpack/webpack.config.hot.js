@@ -3,24 +3,34 @@
  * Webpack hot configuration
  */
 
-process.env.HMR = "true";
+const baseProfile = require("./profile.base");
+const generateConfig = require("./util/generate-config");
+const Path = require("path");
 
-const _ = require("lodash");
-const mergeWebpackConfig = require("webpack-partial").default;
-const hotConfig = require("./partial/hot");
-const baseConfig = require("./base.js");
-const defineConfig = require("./partial/define.js");
-const devConfig = require("./partial/dev.js");
-const WebpackConfig = require("webpack-config").default;
-const getRootConfig = require("./get-root-config");
+function makeConfig() {
+  const hotProfile = {
+    partials: {
+      "_define": { order: 10100 },
+      "_dev": { order: 10200 },
+      "_hot": { order: 10300 },
+      "_babel": {
+        options: {
+          HotModuleReload: true
+        }
+      }
+    }
+  };
 
-const config = module.exports = _.flow(
-  mergeWebpackConfig.bind(null, {}, baseConfig),
-  defineConfig(),
-  devConfig(),
-  hotConfig()
-)();
+  const options = {
+    profiles: {
+      _base: baseProfile,
+      _hot: hotProfile
+    },
+    profileNames: ["_base", "_hot"],
+    configFilename: Path.basename(__filename)
+  };
 
-module.exports = new WebpackConfig()
-  .merge(config)
-  .merge(getRootConfig("webpack.config.hot.js"));
+  return generateConfig(options);
+}
+
+module.exports = makeConfig();

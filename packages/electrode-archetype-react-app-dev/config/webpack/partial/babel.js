@@ -1,34 +1,35 @@
 "use strict";
 
-const mergeWebpackConfig = require("webpack-partial").default;
-const archetype = require("../../archetype");
+const archetype = require("electrode-archetype-react-app/config/archetype");
 const AppMode = archetype.AppMode;
-const Path = archetype.Path;
+const Path = require("path");
 const _ = require("lodash");
 
-module.exports = function (babel) {
+module.exports = function (options) {
   // regex \b for word boundaries
   const babelExcludeRegex = new RegExp(`(node_modules|\\b${Path.join(AppMode.src.client, "vendor")}\\b)`);
-  return function (config) {
-    const hmr = process.env.HMR !== undefined;
-    const babelLoader = {
-      test: /\.jsx?$/,
-      exclude: babelExcludeRegex,
-      use: [
-        hmr && "react-hot-loader",
-        {
-          loader: "babel-loader",
-          options: babel
-        }
-      ].filter(_.identity)
-    };
-    if (hmr) {
-      babelLoader.include = Path.resolve(AppMode.src.client);
-    }
-    return mergeWebpackConfig(config, {
-      module: {
-        rules: [_.assign({}, babelLoader, archetype.webpack.extendBabelLoader)]
+
+  const babelLoader = {
+    _name: "babel",
+    test: /\.jsx?$/,
+    exclude: babelExcludeRegex,
+    use: [
+      options.HotModuleReload && "react-hot-loader",
+      {
+        loader: "babel-loader",
+        options: options.babel
       }
-    });
+    ].filter(_.identity)
+  };
+
+  if (options.HotModuleReload) {
+    console.log("Just FYI: Enabling Hot Module Reload support in webpack babel loader");
+    babelLoader.include = Path.resolve(AppMode.src.client);
+  }
+
+  return {
+    module: {
+      rules: [_.assign({}, babelLoader, archetype.webpack.extendBabelLoader)]
+    }
   };
 };

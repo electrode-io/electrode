@@ -26,3 +26,5 @@ rules:
     - 2
     - 120
   no-extra-parens: [0]
+  prefer-spread:
+    - 'off'

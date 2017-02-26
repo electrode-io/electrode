@@ -1,29 +1,32 @@
 "use strict";
 
-const _ = require("lodash");
-const mergeWebpackConfig = require("webpack-partial").default;
-const WebpackConfig = require("webpack-config").default;
-const getRootConfig = require("./get-root-config");
-const addDllReferences = require("./add-dll-references");
+const baseProfile = require("./profile.base");
+const generateConfig = require("./util/generate-config");
+const Path = require("path");
 
-const baseConfig = require("./base.js");
-const defineConfig = require("./partial/define.js");
-const optimizeConfig = require("./partial/optimize");
-const localesConfig = require("./partial/locales");
-const productionSourcemapsConfig = require("./partial/sourcemaps-remote");
-const failConfig = require("./partial/fail");
-const simpleProgress = require("./partial/simple-progress");
+function makeConfig() {
+  const productionProfile = {
+    partials: {
+      "_dll-reference": { order: 10100 },
+      "_uglify": { order: 10200 },
+      "_locales": { order: 10300 },
+      "_define": { order: 10400 },
+      "_sourcemaps-remote": { order: 10500 },
+      "_fail": { order: 10600 },
+      "_simple-progress": { order: 10700 }
+    }
+  };
 
-const config = new WebpackConfig().merge(_.flow(
-  mergeWebpackConfig.bind(null, {}, baseConfig),
-  optimizeConfig(),
-  localesConfig(),
-  defineConfig(),
-  productionSourcemapsConfig(),
-  failConfig(),
-  simpleProgress()
-)()).merge(getRootConfig("webpack.config.js"));
+  const options = {
+    profiles: {
+      _base: baseProfile,
+      _production: productionProfile
+    },
+    profileNames: ["_base", "_production"],
+    configFilename: Path.basename(__filename)
+  };
 
-addDllReferences(config);
+  return generateConfig(options);
+}
 
-module.exports = config;
+module.exports = makeConfig();
