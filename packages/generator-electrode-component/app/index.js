@@ -140,7 +140,7 @@ var ReactComponentGenerator = yeoman.generators.Base.extend({
 			this.template("src/_Component.js", "src/index.js");
 		},
 		test: function() {
-			this.copy("test/client/eslintrc", "test/client/.eslintrc");
+			this.template("test/client/eslintrc", "test/client/.eslintrc");
 			this.template("test/client/components/_component.spec.jsx", "test/client/components/" + this.projectName + ".spec.jsx");
 			this.copy("test/client/components/helpers/_intlEnzymeTestHelper.js", "test/client/components/helpers/intl-enzyme-test-helper.js");
 		},
