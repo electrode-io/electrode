@@ -34,10 +34,10 @@ var ReactComponentGenerator = yeoman.generators.Base.extend({
 			_.extend(this, props);
 			this.packageName = _.kebabCase(_.deburr(this.projectName));
 			this.componentName = this.packageName
-        .replace(/^\s+|\s+$/g, "")
-        .replace(/(^|[-_ ])+(.)/g, function (match, first, second) {
-          return second.toUpperCase();
-        });
+			.replace(/^\s+|\s+$/g, "")
+			.replace(/(^|[-_ ])+(.)/g, function (match, first, second) {
+			return second.toUpperCase();
+		});
 			this.currentYear = new Date().getFullYear();
 			done();
 		}.bind(this));
@@ -152,7 +152,7 @@ var ReactComponentGenerator = yeoman.generators.Base.extend({
 		this.log(
 			"\n" + chalk.green.underline("Your new Electrode component is ready!") +
 			"\n" +
-      "\nYour component is in src/ and your demo files are in demo/" +
+			"\nYour component is in src/ and your demo files are in demo/" +
 			"\n" +
 			"\nType " + chdir + "'gulp demo' to run the development build and demo tasks." +
 			"\n"
