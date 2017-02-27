@@ -6,7 +6,7 @@ const _ = archDevRequire("lodash");
 
 
 const babelConfig = require("./partial/babel.js");
-const cssConfig = require("./partial/css.js");
+const stylesConfig = require("./partial/styles.js");
 const defineConfig = require("./partial/define.js");
 const fontsConfig = require("./partial/fonts");
 const imageConfig = require("./partial/images.js");
@@ -45,14 +45,13 @@ const baseConfiguration = {
 
 const createConfig = _.flowRight(
   babelConfig(),
-  cssConfig(),
+  stylesConfig(),
   defineConfig(),
   fontsConfig(),
   imageConfig(),
   jsonConfig(),
   optimizeConfig(),
-  sourceMapsConfig(),
-  stylusConfig()
+  sourceMapsConfig()
 );
 
 module.exports = createConfig(baseConfiguration);

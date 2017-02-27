@@ -128,7 +128,10 @@ var ReactComponentGenerator = yeoman.generators.Base.extend({
 			this.template("demo/_demo.jsx", "demo/demo.jsx");
 			this.template("demo/_demo.css", "demo/demo.css");
 			this.template("demo/examples/_component.example", "demo/examples/" + this.projectName + ".example");
-		}
+		},
+    config: function() {
+      this.template("archetype/_config.js", "archetype/config.js");
+    }
 	},
 
 	install: function() {
