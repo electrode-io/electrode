@@ -74,6 +74,9 @@ module.exports = () => config => {
   }
 
   return mergeWebpackConfig(config, {
-    module: { loaders: loaders }
+    module: { loaders: loaders },
+    postcss: function () {
+      return cssModuleSupport ? [atImport, cssnext] : [];
+    }
   });
 };
