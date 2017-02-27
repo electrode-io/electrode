@@ -79,17 +79,6 @@ var ReactComponentGenerator = yeoman.generators.Base.extend({
 		}.bind(this));
 	},
 
-	prompting_libraries: function() {
-		var done = this.async();
-
-		var prompts = [];
-
-		this._optionOrPrompt(prompts, function (props) {
-			_.extend(this, props);
-			done();
-		}.bind(this));
-	},
-
 	prompting_project: function() {
 		var done = this.async();
 
