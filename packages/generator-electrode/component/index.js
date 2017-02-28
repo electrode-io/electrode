@@ -3,149 +3,150 @@
 var _ = require("lodash");
 var chalk = require("chalk");
 var yeoman = require("yeoman-generator");
-var optionOrPrompt = require("yeoman-option-or-prompt");
+var path = require('path');
+var extend = _.merge;
+var parseAuthor = require('parse-author');
 
-var ReactComponentGenerator = yeoman.generators.Base.extend({
-	_optionOrPrompt: optionOrPrompt,
+var ReactComponentGenerator = yeoman.Base.extend({
+  constructor: function () {
+    yeoman.Base.apply(this, arguments);
+  },
+  initializing: function () {
+    this.pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
 
-	initializing: function() {
-		this.pkg = require("../package.json");
-	},
+    // Pre set the default props from the information we have at this point
+    this.props = {
+      packageName: this.pkg.name
+    };
 
-	prompting_init: function() {
-		var done = this.async();
+    if (_.isObject(this.pkg.author)) {
+      this.props.developerName = this.pkg.author.name;
+      this.props.createDirectory = true;
+    } else if (_.isString(this.pkg.author)) {
+      var info = parseAuthor(this.pkg.author);
+      this.props.developerName = info.name;
+    }
+  },
+  prompting: {
+    greeting: function () {
+      this.log(
+        "\n" + chalk.bold.underline("Welcome to the Electrode Component Generator") +
+        "\n" +
+        "\nWe're going to set up a new " + chalk.bold("Electrode") + " component, ready for development with" +
+        "\n" + chalk.bold("gulp, webpack, demo, electrode component archetype, and live-reload")
+      );
+    },
+    askFor: function () {
+      if (this.pkg.name || this.options.name) {
+        this.props.name = this.pkg.name || _.kebabCase(this.options.name);
+      }
+      var prompts = [{
+        type: "input",
+        name: "projectName",
+        message: "What is your Package/GitHub project name? (e.g., 'wysiwyg-component')",
+        default: "wysiwyg-component"
+      },
+      {
+        type: "input",
+        name: "packageName",
+        message: "What is the ClassName for your component?",
+        default: this.props.componentName
+      }, {
+        type: "input",
+        name: "packageName",
+        message: "What will be the npm package name?",
+        default: this.props.packageName
+      }, {
+        type: "input",
+        name: "packageGitHubOrg",
+        message: "What will be the GitHub organization username (e.g., 'walmartlabs')?",
+        default: this.props.packageGitHubOrg
+      }, {
+        type: "input",
+        name: "developerName",
+        message: "What is your name? (for copyright notice, etc.)",
+        default: this.props.developerName
+      },
+      {
+        type: "input",
+        name: "ghUser",
+        message: "What is your GitHub Username?",
+        default: this.props.developerName
+      }, {
+        type: "confirm",
+        name: "createDirectory",
+        message: "Would you like to create a new directory for your project?",
+        default: true
+      }];
+      return this.prompt(prompts).then((props) => {
+        this.props = extend(this.props, props);
+        this.projectName = this.props.projectName;
+        this.packageName = _.kebabCase(_.deburr(this.props.projectName));
+        this.developerName = this.props.developerName.split(" ").map(_.toLower).join("");
+        this.ghUser = this.props.ghUser;
+        this.packageGitHubOrg = this.props.packageGitHubOrg;
+        this.componentName = this.props.packageName
+          .replace(/^\s+|\s+$/g, "")
+          .replace(/(^|[-_ ])+(.)/g, function (match, first, second) {
+            return second.toUpperCase();
+          });
+        this.currentYear = new Date().getFullYear();
+        if (this.props.createDirectory) {
+          var newRoot = this.destinationPath() + '/' + _.kebabCase(_.deburr(this.props.packageName));
+          this.destinationRoot(newRoot);
+        }
+      });
+    }
+  },
 
-		this.log(
-			"\n" + chalk.bold.underline("Welcome to the Electrode Component Generator") +
-			"\n" +
-			"\nWe're going to set up a new " + chalk.bold("Electrode") + " component, ready for development with" +
-			"\n" + chalk.bold("gulp, webpack, demo, electrode component archetype, and live-reload") +
-			"\n"
-		);
+  writing: {
+    project: function () {
+      this.copy("babelrc", ".babelrc");
+      this.copy("gitignore", ".gitignore");
+      this.copy("npmignore", ".npmignore");
+      this.copy("editorconfig", ".editorconfig");
+      this.template("_gulpfile.js", "gulpfile.js");
+      this.template("_package.json", "package.json");
+      this.template("_readme.md", "README.md");
+    },
+    component: function () {
+      this.template("src/components/_component.jsx", "src/components/" + this.projectName + ".jsx");
+      this.template("src/styles/_component.css", "src/styles/" + this.projectName + ".css");
 
-		var prompts = [{
-			type: "input",
-			name: "projectName",
-			message: "What is your Package/GitHub project name? (e.g., 'wysiwyg-component')",
-			default: "wysiwyg-component"
-		}];
+      // l10n language templates
+      this.template("src/lang/_DefaultMessages.js", "src/lang/default-messages.js");
+      this.template("src/lang/_en.json", "src/lang/en.json");
+      this.template("src/lang/tenants/electrodeio/_defaultMessages.js", "src/lang/tenants/electrodeio/default-messages.js");
 
-		this._optionOrPrompt(prompts, function (props) {
-			_.extend(this, props);
-			this.packageName = _.kebabCase(_.deburr(this.projectName));
-			this.componentName = this.packageName
-        .replace(/^\s+|\s+$/g, "")
-        .replace(/(^|[-_ ])+(.)/g, function (match, first, second) {
-          return second.toUpperCase();
-        });
-			this.currentYear = new Date().getFullYear();
-			done();
-		}.bind(this));
-	},
+      this.template("src/_Component.js", "src/index.js");
+    },
+    test: function () {
+      this.copy("test/client/eslintrc", "test/client/.eslintrc");
+      this.template("test/client/components/_component.spec.jsx", "test/client/components/" + this.projectName + ".spec.jsx");
+      this.copy("test/client/components/helpers/_intlEnzymeTestHelper.js", "test/client/components/helpers/intl-enzyme-test-helper.js");
+    },
+    demo: function () {
+      this.template("demo/_demo.jsx", "demo/demo.jsx");
+      this.template("demo/_demo.css", "demo/demo.css");
+      this.template("demo/examples/_component.example", "demo/examples/" + this.projectName + ".example");
+    }
+  },
 
-	prompting_names: function() {
-		var done = this.async();
+  install: function () {
+    this.npmInstall();
+  },
 
-		var prompts = [{
-			type: "input",
-			name: "packageName",
-			message: "What is the ClassName for your component?",
-			default: this.componentName
-		}, {
-			type: "input",
-			name: "packageName",
-			message: "What will be the npm package name?",
-			default: this.packageName
-		},  {
-			type: "input",
-			name: "packageGitHubOrg",
-			message: "What will be the GitHub organization username (e.g., 'walmartlabs')?",
-			default: this.packageGitHubOrg
-		}, {
-			type: "input",
-			name: "developerName",
-			message: "What is your name? (for copyright notice, etc.)"
-		}];
-
-		this._optionOrPrompt(prompts, function (props) {
-			_.extend(this, props);
-			done();
-		}.bind(this));
-	},
-
-	prompting_project: function() {
-		var done = this.async();
-
-		var prompts = [{
-			type: "input",
-			name: "ghUser",
-			message: "What is your GitHub Username?",
-			default: this.developerName.split(" ").map(_.toLower).join("")
-		}, {
-			type: "confirm",
-			name: "createDirectory",
-			message: "Would you like to create a new directory for your project?",
-			default: true
-		}];
-
-		this._optionOrPrompt(prompts, function (props) {
-			_.extend(this, props);
-			if (props.createDirectory) {
-				this.destinationRoot(this.packageName);
-			}
-			this.log("\n");
-			done();
-		}.bind(this));
-	},
-
-	writing: {
-		project: function() {
-			this.copy("babelrc", ".babelrc");
-			this.copy("gitignore", ".gitignore");
-			this.copy("npmignore", ".npmignore");
-			this.copy("editorconfig", ".editorconfig");
-			this.template("_gulpfile.js", "gulpfile.js");
-			this.template("_package.json", "package.json");
-			this.template("_readme.md", "README.md");
-		},
-		component: function() {
-			this.template("src/components/_component.jsx", "src/components/" + this.projectName + ".jsx");
-			this.template("src/styles/_component.css", "src/styles/" + this.projectName + ".css");
-
-			// l10n language templates
-			this.template("src/lang/_DefaultMessages.js", "src/lang/default-messages.js");
-			this.template("src/lang/_en.json", "src/lang/en.json");
-			this.template("src/lang/tenants/electrodeio/_defaultMessages.js", "src/lang/tenants/electrodeio/default-messages.js");
-			
-			this.template("src/_Component.js", "src/index.js");
-		},
-		test: function() {
-			this.copy("test/client/eslintrc", "test/client/.eslintrc");
-			this.template("test/client/components/_component.spec.jsx", "test/client/components/" + this.projectName + ".spec.jsx");
-			this.copy("test/client/components/helpers/_intlEnzymeTestHelper.js", "test/client/components/helpers/intl-enzyme-test-helper.js");
-		},
-		demo: function() {
-			this.template("demo/_demo.jsx", "demo/demo.jsx");
-			this.template("demo/_demo.css", "demo/demo.css");
-			this.template("demo/examples/_component.example", "demo/examples/" + this.projectName + ".example");
-		}
-	},
-
-	install: function() {
-		this.npmInstall();
-	},
-
-	end: function() {
-		var chdir = this.createDirectory ? "'cd " + this.packageName + "' then " : "";
-		this.log(
-			"\n" + chalk.green.underline("Your new Electrode component is ready!") +
-			"\n" +
+  end: function () {
+    var chdir = this.createDirectory ? "'cd " + this.packageName + "' then " : "";
+    this.log(
+      "\n" + chalk.green.underline("Your new Electrode component is ready!") +
+      "\n" +
       "\nYour component is in src/ and your demo files are in demo/" +
-			"\n" +
-			"\nType " + chdir + "'gulp demo' to run the development build and demo tasks." +
-			"\n"
-		);
-	}
+      "\n" +
+      "\nType " + chdir + "'gulp demo' to run the development build and demo tasks." +
+      "\n"
+    );
+  }
 
 });
 
