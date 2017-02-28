@@ -1,7 +1,7 @@
 # generator-electrode
 
 [![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url] [![devDependency Status][daviddm-dev-image]][daviddm-dev-url] [![npm downloads][npm-downloads-image]][npm-downloads-url]
-> Generate Electrode ~~Isomorphic~~ Universal React App with NodeJS backend.
+> Generate Electrode ~~Isomorphic~~ Universal React App with NodeJS backend or a React component with useful gulp tasks for development, building and publishing.
 
 ## Installation
 
@@ -41,6 +41,47 @@ Some common ones:
   - `gulp build` - build production `dist` files
   - `gulp server-prod` - start server in production mode
   - `gulp check` - run unit tests with coverage
+
+## Generating a React Component
+  Install the generator if you haven't already:
+
+  ```bash
+  npm install -g generator-electrode
+  ```
+
+  Then run the generator:
+
+  ```bash
+  yo electrode:component
+  ```
+
+...and follow the prompts.
+
+## Developing Your Component
+
+### Source
+
+Your component source code is in `src`. You can use JSX and ES6 syntax freely in
+your component source; it will be transpiled to `lib` with Babel before being
+published to npm so that your users will simply be able to include it.
+
+It's a great idea to add a description, documentation and other information to
+your `README.md` file, to help people who are interested in using your
+component.
+
+### Example and Preview
+
+Preview your component with LiveReload:
+
+```bash
+gulp demo ; gulp open-demo
+```
+
+A webserver will be started on [localhost:4000](http://127.0.0.1:4000) running
+the examples in `demo/examples/*`
+
+You can use this code-playground to test your component, then publish it to let
+potential users try out your component and see what it can do.
 
 ## Getting To Know Yeoman
 
