@@ -85,6 +85,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
         this.developerName = this.props.developerName.split(" ").map(_.toLower).join("");
         this.ghUser = this.props.ghUser;
         this.packageGitHubOrg = this.props.packageGitHubOrg;
+        this.createDirectory = this.props.createDirectory;
         this.componentName = this.props.packageName
           .replace(/^\s+|\s+$/g, "")
           .replace(/(^|[-_ ])+(.)/g, function (match, first, second) {
@@ -92,7 +93,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
           });
         this.currentYear = new Date().getFullYear();
         if (this.props.createDirectory) {
-          var newRoot = this.destinationPath() + '/' + _.kebabCase(_.deburr(this.props.packageName));
+          var newRoot = this.destinationPath() + '/' + this.packageName;
           this.destinationRoot(newRoot);
         }
       });
