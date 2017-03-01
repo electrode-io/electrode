@@ -2,6 +2,7 @@
 
 const Path = require("path");
 const Fs = require("fs");
+const logger = require("./logger");
 
 function makeAppMode(prodDir) {
   const client = "client";
@@ -20,7 +21,7 @@ function makeAppMode(prodDir) {
   }
 
   if (!srcDir) {
-    console.log(`Just FYI: There's a new src/lib mode that doesn't need babel-register.`);
+    logger.info(`There's a new src/lib mode that doesn't need babel-register.`);
   }
 
   const envKey = "APP_SRC_DIR";

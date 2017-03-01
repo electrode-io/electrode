@@ -7,6 +7,7 @@ const babelPolyfill = require("babel-polyfill");
 const archetype = require("../config/archetype");
 const AppMode = archetype.AppMode;
 const Path = require("path");
+const logger = require("../lib/logger");
 
 const support = {
   cssModuleHook: (options) => {
@@ -54,7 +55,7 @@ if (AppMode.isSrc) {
     };
     AppMode.setEnv(guessAppSrcDir());
   }
-  console.log(`Just FYI: ${AppMode.envKey} set to`, AppMode.getEnv());
+  logger.info(`${AppMode.envKey} set to`, AppMode.getEnv());
 }
 
 /* eslint max-statements: 0 complexity: 0 */
@@ -80,9 +81,9 @@ support.load = function (options, callback) {
       extensions: [".es6", ".es", ".jsx", ".js"]
     }, options.babelRegister || {});
 
-    console.log(`Just FYI: installing babel-register for runtime transpilation`
+    logger.info(`Installing babel-register for runtime transpilation`
       + ` files (extensions: ${regOptions.extensions}).`);
-    console.log(`Just FYI: the transpilation only occurs the first time you load a file.`);
+    logger.info(`The transpilation only occurs the first time you load a file.`);
     support.babelRegister(regOptions);
   }
 

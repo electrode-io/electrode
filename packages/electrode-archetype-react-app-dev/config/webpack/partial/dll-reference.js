@@ -10,9 +10,13 @@ const glob = require("glob");
 const webpack = require("webpack");
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const Path = require("path");
+const logger = require("electrode-archetype-react-app/lib/logger");
 
 module.exports = function (options) {
   const config = options.currentConfig;
+  logger.verbose("add-dll-references configurations", {
+    config
+  });
 
   try {
     const exists = fs.existsSync(Path.resolve(archetype.AppMode.src.client, "dll.config.js"));
@@ -27,7 +31,7 @@ module.exports = function (options) {
       };
     }
   } catch (err) {
-    console.log("add-dll-references failed", err);
+    logger.error("add-dll-references failed: %s", err);
   }
 
   return {};

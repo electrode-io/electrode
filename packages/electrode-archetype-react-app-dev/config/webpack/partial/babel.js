@@ -4,6 +4,7 @@ const archetype = require("electrode-archetype-react-app/config/archetype");
 const AppMode = archetype.AppMode;
 const Path = require("path");
 const _ = require("lodash");
+const logger = require("electrode-archetype-react-app/lib/logger");
 
 module.exports = function (options) {
   // regex \b for word boundaries
@@ -23,7 +24,7 @@ module.exports = function (options) {
   };
 
   if (options.HotModuleReload) {
-    console.log("Just FYI: Enabling Hot Module Reload support in webpack babel loader");
+    logger.info("Enabling Hot Module Reload support in webpack babel loader");
     babelLoader.include = Path.resolve(AppMode.src.client);
   }
 

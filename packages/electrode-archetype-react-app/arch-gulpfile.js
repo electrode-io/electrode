@@ -9,7 +9,6 @@ assert(!archetype.noDev, "dev archetype is missing - development & build tasks n
 const Path = require("path");
 const devRequire = archetype.devRequire;
 const gulpHelper = devRequire("electrode-gulp-helper");
-const chalk = devRequire("chalk");
 const shell = gulpHelper.shell;
 const config = archetype.config;
 const mkdirp = devRequire("mkdirp");
@@ -19,6 +18,8 @@ const filter = devRequire("gulp-filter");
 
 const penthouse = archetype.devRequire("penthouse");
 const CleanCSS = archetype.devRequire("clean-css");
+
+const logger = require("./lib/logger");
 
 function setupPath() {
   const nmBin = Path.join("node_modules", ".bin");
@@ -57,7 +58,7 @@ function createGitIgnoreDir(dir, comment) {
   try {
     mkdirp.sync(dirFP);
   } catch (e) {
-    console.log("mkdir", e);
+    logger.info("mkdir", e);
   }
 
   const gitIgnore = Path.join(dirFP, ".gitignore");
@@ -246,7 +247,7 @@ function makeTasks(gulp) {
   const makeBabelRc = (destDir, rcFile) => {
     const fn = Path.resolve(destDir, ".babelrc");
     if (!Fs.existsSync(fn)) {
-      console.log(chalk.green(`INFO: generating ${fn} for you - please commit it.`));
+      logger.info(`Generating ${fn} for you - please commit it.`);
       const rc = JSON.stringify({
         extends: `${Path.join(archetype.devPkg.name, "config", "babel", rcFile)}`
       }, null, 2);
@@ -340,11 +341,11 @@ function makeTasks(gulp) {
 
     ".check.top.level.babelrc": () => {
       if (AppMode.isSrc && archetype.checkUserBabelRc() !== false) {
-        console.log(chalk.yellow(`
-INFO: You are using src for client & server, archetype will ignore your top level .babelrc
-INFO: Please remove your top level .babelrc file if you have no other use of it.
-INFO: Individual .babelrc files were generated for you in src/client and src/server
-`));
+        logger.warn(`
+You are using src for client & server, archetype will ignore your top level .babelrc
+Please remove your top level .babelrc file if you have no other use of it.
+Individual .babelrc files were generated for you in src/client and src/server
+`);
       }
     },
 

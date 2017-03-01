@@ -7,6 +7,7 @@ function webpackDevReporter(reporterOptions) {
   const state = reporterOptions.state;
   const stats = reporterOptions.stats;
   const options = reporterOptions.options;
+  const logger = require("electrode-archetype-react-app/lib/logger");
 
   if (state) {
     let displayStats = (!options.quiet && options.stats !== false);
@@ -16,7 +17,7 @@ function webpackDevReporter(reporterOptions) {
     }
 
     if (displayStats) {
-      console.log(stats.toString(options.stats));
+      logger.info(stats.toString(options.stats));
     }
 
     if (!options.noInfo && !options.quiet) {
@@ -26,10 +27,10 @@ function webpackDevReporter(reporterOptions) {
       } else {
         errMsg = " but there were errors.";
       }
-      console.info(`webpack: bundle is now VALID ${errMsg}`);
+      logger.info(`webpack: bundle is now VALID ${errMsg}`);
     }
   } else {
-    console.info("webpack: bundle is now INVALID.");
+    logger.info("webpack: bundle is now INVALID.");
   }
 }
 
