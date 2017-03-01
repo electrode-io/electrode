@@ -5,6 +5,19 @@ const fs = require("fs");
 const glob = require("glob");
 const webpack = require("webpack");
 const archetype = require("../archetype");
+const bunyan = require('bunyan');
+
+const log = bunyan.createLogger({
+  name: "electrode",
+  src: true,
+  streams: [
+    {
+      level: 'error',
+      path: './bunyan-logs.json'
+    }
+  ]
+});
+
 const Path = archetype.Path;
 
 module.exports = function (config) {
@@ -25,7 +38,7 @@ module.exports = function (config) {
       }));
     }
   } catch (err) {
-    console.log("add-dll-references failed", err);
+    log.error(err.message);
   }
 
   return config;
