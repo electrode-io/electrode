@@ -140,6 +140,10 @@ or:
 const webpackConfig = composer.compose({}, ["profile1", "profile2", anotherProfile, "profile3", "profile4"]);
 ```
 
+### `static WebpackConfigComposer.deleteCustomProps(webpackConfig)`
+
+Deletes all [custom props](#custom-config-props) from `webpackConfig`.
+
 ### Partial Objects
 
 When calling `composer.addPartials`, you pass partial objects that contain one or more actual partials.

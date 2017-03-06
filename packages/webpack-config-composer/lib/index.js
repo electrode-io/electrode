@@ -128,4 +128,6 @@ class WebpackConfigComposer {
   }
 }
 
+WebpackConfigComposer.deleteCustomProps = deleteCustomProps;
+
 module.exports = WebpackConfigComposer;
