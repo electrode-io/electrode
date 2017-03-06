@@ -19,7 +19,7 @@
     "npm": ">= 3.x.x"
   },
   "scripts": {
-    "prestart": "gulp build"
+    "prestart": "gulp build",
     "start": "if test \"$NODE_ENV\" = \"production\"; then npm run prod; else gulp dev; fi",
     "test": "gulp check",
     "coverage": "gulp check",
