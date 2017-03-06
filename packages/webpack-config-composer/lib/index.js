@@ -65,7 +65,13 @@ class WebpackConfigComposer {
     }
 
     const name = profile.join("-");
-    profile = profile.map((p) => _.isString(p) ? this.profiles[p] : p);
+    profile = profile.map((p) => {
+      if (_.isString(p)) {
+        assert(this.profiles.hasOwnProperty(p), `Profile ${p} doesn't exist in the composer`);
+        return this.profiles[p];
+      }
+      return p;
+    });
     profile.unshift({});
     profile = _.merge.apply(null, profile);
     profile.name = name;
