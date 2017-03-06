@@ -18,7 +18,7 @@ const loadConfigs = function (userConfig) {
 };
 
 const setStaticPaths = function () {
-  app.use(express.static(path.join(__dirname,
+  app.use(express.static(path.join(__dirname, "../..",
     defaultConfig.$("plugins.electrodeStaticPaths.options.pathPrefix"))));
 };
 

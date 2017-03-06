@@ -19,7 +19,7 @@ const loadConfigs = function (userConfig) {
 };
 
 const setStaticPaths = function () {
-  app.use(koaStatic(path.join(__dirname,
+  app.use(koaStatic(path.join(__dirname, "../..",
     defaultConfig.$("plugins.electrodeStaticPaths.options.pathPrefix"))));
 };
 
