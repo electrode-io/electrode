@@ -15,7 +15,7 @@
   "repository": {},
   "license": "ISC",
   "engines": {
-    "node": "^4.x.x || ^6.x.x",
+    "node": "^4.x.x || ^6.x.x || ^7.x.x",
     "npm": ">= 3.x.x"
   },
   "scripts": {
