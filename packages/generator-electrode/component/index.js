@@ -73,6 +73,11 @@ var ReactComponentGenerator = yeoman.Base.extend({
         message: "What is your GitHub Username?",
         default: this.props.developerName
       }, {
+        type: "input",
+        name: "ghRepo",
+        message: "What is the name of the GitHub repo where this will be published?",
+        default: this.packageName
+      }, {
         type: "confirm",
         name: "createDirectory",
         message: "Would you like to create a new directory for your project?",
@@ -81,12 +86,13 @@ var ReactComponentGenerator = yeoman.Base.extend({
       return this.prompt(prompts).then((props) => {
         this.props = extend(this.props, props);
         this.projectName = this.props.projectName;
-        this.packageName = _.kebabCase(_.deburr(this.props.projectName));
+        this.packageName = this.props.projectName;
         this.developerName = this.props.developerName.split(" ").map(_.toLower).join("");
         this.ghUser = this.props.ghUser;
+        this.ghRepo = this.props.ghRepo;
         this.packageGitHubOrg = this.props.packageGitHubOrg;
         this.createDirectory = this.props.createDirectory;
-        this.componentName = this.props.packageName
+        this.componentName = _.kebabCase(_.deburr(this.props.projectName))
           .replace(/^\s+|\s+$/g, "")
           .replace(/(^|[-_ ])+(.)/g, function (match, first, second) {
             return second.toUpperCase();
