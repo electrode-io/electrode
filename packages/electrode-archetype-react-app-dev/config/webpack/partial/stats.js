@@ -1,11 +1,10 @@
 "use strict";
 
-const mergeWebpackConfig = require("webpack-partial").default;
-const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
-
 module.exports = function (opts) {
+  const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
+
   const statsOptions = {
-    filename: "../server/stats.json",
+    filename: opts.filename || "../server/stats.json",
     fields: ["assetsByChunkName", "assets"]
   };
 
@@ -24,11 +23,9 @@ module.exports = function (opts) {
       return JSON.stringify(data, null, 2);
     };
   }
-  return function (config) {
-    return mergeWebpackConfig(config, {
-      plugins: [
-        new StatsWriterPlugin(statsOptions)
-      ]
-    });
+  return {
+    plugins: [
+      new StatsWriterPlugin(statsOptions)
+    ]
   };
 };

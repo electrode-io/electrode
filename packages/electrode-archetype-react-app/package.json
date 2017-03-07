@@ -14,7 +14,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "test": "npm run lint",
-    "lint": "eslint **/*.js"
+    "lint": "eslint \"**/**/*.js\""
   },
   "dependencies": {
     "babel-core": "^6.4.0",

@@ -1,7 +1,6 @@
 "use strict";
 
-const archetype = require("../../archetype");
-const mergeWebpackConfig = require("webpack-partial").default;
+const archetype = require("electrode-archetype-react-app/config/archetype");
 
 const getDefaultEntry = function (entry) {
   return [
@@ -19,15 +18,14 @@ const getMultiBundleEntry = function (entries) {
   return multiBundleEntry;
 };
 
-module.exports = function () {
-  return function (config) {
-    const entry = typeof config.entry === "object" ?
-      getMultiBundleEntry(config.entry) :
-      getDefaultEntry(config.entry);
+module.exports = function (options) {
+  const config = options.currentConfig;
+  const entry = typeof config.entry === "object" ?
+    getMultiBundleEntry(config.entry) :
+    getDefaultEntry(config.entry);
 
-    return mergeWebpackConfig(config, {
-      devtool: "eval",
-      entry
-    });
+  return {
+    devtool: "eval",
+    entry
   };
 };

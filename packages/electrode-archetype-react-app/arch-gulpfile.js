@@ -6,7 +6,7 @@ const assert = require("assert");
 
 assert(!archetype.noDev, "dev archetype is missing - development & build tasks not possible");
 
-const Path = archetype.Path;
+const Path = require("path");
 const devRequire = archetype.devRequire;
 const gulpHelper = devRequire("electrode-gulp-helper");
 const chalk = devRequire("chalk");
@@ -18,7 +18,7 @@ const uglify = devRequire("gulp-uglify");
 const filter = devRequire("gulp-filter");
 
 const penthouse = archetype.devRequire("penthouse");
-const CleanCSS = archetype.devRequire('clean-css');
+const CleanCSS = archetype.devRequire("clean-css");
 
 function setupPath() {
   const nmBin = Path.join("node_modules", ".bin");
@@ -106,7 +106,7 @@ function lint(options) {
   const grouped = options.targets.reduce((a, t) => {
     (checkCustom(t) ? a.custom : a.archetype).push(t);
     return a;
-  }, {custom: [], archetype: []});
+  }, { custom: [], archetype: [] });
 
   let promise;
 
@@ -123,8 +123,9 @@ function lint(options) {
   return promise;
 }
 
-/**
- * [generateServiceWorker gulp task to generate service worker code that will precache specific resources so they work offline.]
+/*
+ * [generateServiceWorker gulp task to generate service worker code that will precache specific
+ * resources so they work offline.]
  *
  */
 function generateServiceWorker() {
@@ -154,19 +155,19 @@ function generateServiceWorker() {
   }
 }
 
-function inlineCriticalCSS(cb) {
-  const HOST = process.env.HOST || 'localhost';
+function inlineCriticalCSS() {
+  const HOST = process.env.HOST || "localhost";
   const PORT = process.env.PORT || 3000;
-  const PATH = process.env.CRITICAL_PATH || '/';
+  const PATH = process.env.CRITICAL_PATH || "/";
   const url = `http://${HOST}:${PORT}${PATH}`;
-  const statsPath = Path.resolve(process.cwd(), 'dist/server/stats.json');
+  const statsPath = Path.resolve(process.cwd(), "dist/server/stats.json");
   const stats = JSON.parse(Fs.readFileSync(statsPath));
-  const cssAsset = stats.assets.find((asset) => asset.name.endsWith('.css'));
+  const cssAsset = stats.assets.find((asset) => asset.name.endsWith(".css"));
   const cssAssetPath = Path.resolve(process.cwd(), `dist/js/${cssAsset.name}`);
-  const targetPath = Path.resolve(process.cwd(), 'dist/js/critical.css');
-  var serverPromise = require(Path.resolve(process.cwd(), 'server/index.js'));
+  const targetPath = Path.resolve(process.cwd(), "dist/js/critical.css");
+  const serverPromise = require(Path.resolve(process.cwd(), "server/index.js"));
   const penthouseOptions = {
-    url: url,
+    url,
     css: cssAssetPath,
     width: 1440,
     height: 900,
@@ -182,12 +183,12 @@ function inlineCriticalCSS(cb) {
         throw err;
       }
       const minifiedCSS = new CleanCSS().minify(css).styles;
-      Fs.writeFile(targetPath, minifiedCSS, (err) => {
-        if (err) {
-          throw err;
+      Fs.writeFile(targetPath, minifiedCSS, (writeErr) => {
+        if (writeErr) {
+          throw writeErr;
         }
         process.exit(0);
-      })
+      });
     });
   });
 }
@@ -207,7 +208,7 @@ function makeTasks(gulp) {
     } else {
       minimum = "";
     }
-    return exec(`istanbul check-coverage 'coverage/client/*/coverage.json'`,
+    return exec(`istanbul check-coverage "coverage/client/*/coverage.json"`,
       `--config=${config.istanbul}/.istanbul.${minimum}yml`);
   };
 
@@ -224,9 +225,9 @@ function makeTasks(gulp) {
         }))
         .pipe(uglify({
           compress: {
-            sequences: false,
-            dead_code: true,
-            drop_debugger: true
+            "sequences": false,
+            "dead_code": true,
+            "drop_debugger": true
           },
           output: {
             beautify: false,
@@ -527,7 +528,7 @@ INFO: Individual .babelrc files were generated for you in src/client and src/ser
     "test-cov": ["test-frontend-cov", "test-server-cov"],
     "test-dev": ["test-frontend-dev", "test-server-dev"],
 
-    "test-watch": () => exec(`pgrep -fl 'webpack-dev-server.*${archetype.webpack.testPort}`)
+    "test-watch": () => exec(`pgrep -fl "webpack-dev-server.*${archetype.webpack.testPort}"`)
       .then(() => exec(`gulp test-frontend-dev-watch`))
       .catch(() => exec(`gulp test-watch-all`)),
 
@@ -540,7 +541,7 @@ INFO: Individual .babelrc files were generated for you in src/client and src/ser
     "test-frontend-cov": mkCmd(`karma`,
       `start ${config.karma}/karma.conf.coverage.js`, `--colors`),
 
-    "test-frontend-dev": () => exec(`pgrep -fl 'webpack-dev-server.*${archetype.webpack.testPort}'`)
+    "test-frontend-dev": () => exec(`pgrep -fl "webpack-dev-server.*${archetype.webpack.testPort}"`)
       .then(() => exec(`karma start ${config.karma}/karma.conf.dev.js --colors`))
       .catch(() => exec(`gulp test-frontend`)),
 
@@ -554,6 +555,7 @@ INFO: Individual .babelrc files were generated for you in src/client and src/ser
         return exec(`istanbul cover _mocha`,
           `-- -c --opts ${config.mocha}/mocha.opts test/server`);
       }
+      return undefined;
     },
 
     "test-server-dev": () => {
@@ -562,6 +564,7 @@ INFO: Individual .babelrc files were generated for you in src/client and src/ser
         return exec(`mocha`,
           `-c --opts ${config.mocha}/mocha.opts test/server`);
       }
+      return undefined;
     },
 
     "build-analyze": {
@@ -573,7 +576,7 @@ INFO: Individual .babelrc files were generated for you in src/client and src/ser
       desc: false,
       task: `electrify dist/server/stats.json -O`
     },
-    "electrify": ["clean-dist", "build-webpack-stats-with-fullpath", "build-dist:clean-tmp", "run-electrify-cli"],
+    "electrify": [".clean.dist", "build-webpack-stats-with-fullpath", "build-dist:clean-tmp", "run-electrify-cli"],
     "build-webpack-stats-with-fullpath": {
       desc: "Build static bundle with stats.json containing fullPaths to inspect the bundle on electrode-electrify",
       task: `webpack --config ${config.webpack}/webpack.config.stats.electrify.js --colors`
@@ -583,7 +586,8 @@ INFO: Individual .babelrc files were generated for you in src/client and src/ser
       task: inlineCriticalCSS
     },
     "generate-service-worker": {
-      desc: "Generate Service Worker using the options provided in the app/config/sw-precache-config.json file for prod/dev/hot mode",
+      desc: "Generate Service Worker using the options provided in the app/config/sw-precache-config.json " +
+      "file for prod/dev/hot mode",
       task: () => generateServiceWorker()
     },
     "optimize-stats": {

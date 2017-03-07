@@ -1,11 +1,6 @@
 "use strict";
-const archetype = require("../archetype");
-const mergeWebpackConfig = require("webpack-partial").default;
-const Path = archetype.Path;
 
-const baseConfig = require("./base.js");
-
-const testConfig = {
+module.exports = {
   module: {
     /*
      * This prevents webpack from running its parsers on any sinon files. Sinon breaks when it is
@@ -18,23 +13,8 @@ const testConfig = {
       /node_modules\/sinon\//
     ]
   },
-  context: Path.resolve("test", "client"),
-  // debug: false, // TODO: webpack 2.0 invalid
   devServer: {
     stats: "errors-only"  // only show errors
-  },
-  entry: require.resolve("../karma/entry"),
-  output: {
-    path: process.cwd(),
-    filename: "bundle.js",
-    publicPath: "/assets/"
-  },
-  resolve: {
-    alias: {
-      // Allow root import of `src/FOO` from ROOT/src.
-      src: process.cwd(),
-      sinon: require.resolve("sinon/pkg/sinon")
-    }
   },
   // Enzyme depends jsdom and cheerio being global to render their DOM.
   externals: {
@@ -45,5 +25,3 @@ const testConfig = {
     "react/lib/ReactContext": true
   }
 };
-
-module.exports = mergeWebpackConfig(baseConfig, testConfig);
