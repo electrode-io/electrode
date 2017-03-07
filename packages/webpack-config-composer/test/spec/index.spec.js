@@ -78,6 +78,14 @@ describe("composer", function () {
     expect(config.hello).to.equal("world");
   });
 
+  it("instance should have deleteCustomProps", () => {
+    const composer = new WebpackConfigComposer();
+    expect(composer.deleteCustomProps({
+      _name: "test",
+      hello: "world"
+    })).to.deep.equal({ hello: "world" });
+  })
+
   it("should skip adding __name to plugins", () => {
     const composer = new WebpackConfigComposer();
     composer.addPartials({

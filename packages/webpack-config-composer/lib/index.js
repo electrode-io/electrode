@@ -126,6 +126,10 @@ class WebpackConfigComposer {
 
     return currentConfig;
   }
+
+  deleteCustomProps(config) {
+    return deleteCustomProps(config);
+  }
 }
 
 WebpackConfigComposer.deleteCustomProps = deleteCustomProps;
