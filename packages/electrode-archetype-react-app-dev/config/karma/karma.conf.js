@@ -15,7 +15,7 @@ PREPROCESSORS[MAIN_PATH] = ["webpack", "sourcemap"];
 module.exports = function (config) {
   config.set({
     basePath: process.cwd(),
-    frameworks: ["mocha", "phantomjs-shim"],
+    frameworks: ["mocha", "phantomjs-shim", "intl-shim"],
     files: [
       MAIN_PATH
     ],
