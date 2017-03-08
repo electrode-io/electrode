@@ -73,6 +73,12 @@ var ReactComponentGenerator = yeoman.Base.extend({
         message: "What is your GitHub Username?",
         default: this.props.developerName
       }, {
+        type: "list",
+        name: "quoteType",
+        message: "Use double quotes or single quotes?",
+        choices: ["\"", "'"],
+        default: "\""
+      }, {
         type: "input",
         name: "ghRepo",
         message: "What is the name of the GitHub repo where this will be published?",
@@ -88,6 +94,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
         this.projectName = this.props.projectName;
         this.packageName = this.props.projectName;
         this.developerName = this.props.developerName.split(" ").map(_.toLower).join("");
+        this.quoteType = this.props.quoteType;
         this.ghUser = this.props.ghUser;
         this.ghRepo = this.props.ghRepo;
         this.packageGitHubOrg = this.props.packageGitHubOrg;
@@ -112,6 +119,9 @@ var ReactComponentGenerator = yeoman.Base.extend({
       this.copy("gitignore", ".gitignore");
       this.copy("npmignore", ".npmignore");
       this.copy("editorconfig", ".editorconfig");
+      if (this.quoteType === "'") {
+        this.template("eslintrc", ".eslintrc");
+      }
       this.template("_gulpfile.js", "gulpfile.js");
       this.template("_package.json", "package.json");
       this.template("_readme.md", "README.md");
@@ -128,7 +138,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
       this.template("src/_Component.js", "src/index.js");
     },
     test: function () {
-      this.copy("test/client/eslintrc", "test/client/.eslintrc");
+      this.template("test/client/eslintrc", "test/client/.eslintrc");
       this.template("test/client/components/_component.spec.jsx", "test/client/components/" + this.projectName + ".spec.jsx");
       this.copy("test/client/components/helpers/_intlEnzymeTestHelper.js", "test/client/components/helpers/intl-enzyme-test-helper.js");
     },
@@ -144,6 +154,9 @@ var ReactComponentGenerator = yeoman.Base.extend({
   },
 
   end: function () {
+    if (this.quoteType === "'") {
+      this.spawnCommandSync("node_modules/.bin/eslint", ["--fix", "src", "demo", "example", "test", "--ext", ".js,.jsx"]);
+    }
     var chdir = this.createDirectory ? "'cd " + this.packageName + "' then " : "";
     this.log(
       "\n" + chalk.green.underline("Your new Electrode component is ready!") +
