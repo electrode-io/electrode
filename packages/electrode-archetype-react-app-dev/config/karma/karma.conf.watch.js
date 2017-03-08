@@ -1,19 +1,19 @@
 "use strict";
 
-/* eslint-disable */
-
 /*
  * Karma Configuration: "watch" version.
  *
  * This configuration allows live updates of code changes.
  */
 
-var dev = require("./karma.conf.dev");
+const dev = require("./karma.conf.dev");
+const loadUserConfig = require("./util/load-user-config");
+const Path = require("path");
+
 
 module.exports = function (config) {
   dev(config);
-
-  config.set({
+  const settings = {
     files: [
       // Test bundle (must be created via `npm run dev|hot|server-test`)
       "http://127.0.0.1:3001/assets/bundle.js"
@@ -22,15 +22,16 @@ module.exports = function (config) {
       [
         "src/client/**",
         "test/**"
-      ].map(function (pattern) {
+      ].map((pattern) => {
         return {
-          pattern: pattern,
+          pattern,
           included: false,
           served: false,
           watched: true
         };
       })
       )
-  });
+  };
 
+  loadUserConfig(Path.basename(__filename), config, settings);
 };

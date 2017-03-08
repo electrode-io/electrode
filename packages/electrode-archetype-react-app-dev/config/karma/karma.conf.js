@@ -1,38 +1,38 @@
 "use strict";
 
-/* eslint-disable */
+const Path = require("path");
 
-var path = require("path");
+const webpackCfg = require("../webpack/webpack.config.test");
 
-var webpackCfg = require("../webpack/webpack.config.test");
+const MAIN_PATH = require.resolve("./entry.js");
 
-var MAIN_PATH = require.resolve("./entry.js");
+const PREPROCESSORS = {};
 
-var PREPROCESSORS = {};
+const loadUserConfig = require("./util/load-user-config");
 
 PREPROCESSORS[MAIN_PATH] = ["webpack", "sourcemap"];
 
 module.exports = function (config) {
-  config.set({
+  const settings = {
     basePath: process.cwd(),
     frameworks: ["mocha", "phantomjs-shim", "intl-shim"],
     files: [
       MAIN_PATH
     ],
     plugins: [
-      'karma-chrome-launcher',
-      'karma-coverage',
-      'karma-firefox-launcher',
-      'karma-ie-launcher',
-      'karma-intl-shim',
-      'karma-mocha',
-      'karma-mocha-reporter',
-      'karma-phantomjs-shim',
-      'karma-phantomjs-launcher',
-      'karma-safari-launcher',
-      'karma-sourcemap-loader',
-      'karma-spec-reporter',
-      'karma-webpack'
+      "karma-chrome-launcher",
+      "karma-coverage",
+      "karma-firefox-launcher",
+      "karma-ie-launcher",
+      "karma-intl-shim",
+      "karma-mocha",
+      "karma-mocha-reporter",
+      "karma-phantomjs-shim",
+      "karma-phantomjs-launcher",
+      "karma-safari-launcher",
+      "karma-sourcemap-loader",
+      "karma-spec-reporter",
+      "karma-webpack"
     ],
     preprocessors: PREPROCESSORS,
     webpack: webpackCfg,
@@ -64,9 +64,11 @@ module.exports = function (config) {
         { type: "lcov" },
         { type: "text" }
       ],
-      dir: path.resolve("coverage", "client")
+      dir: Path.resolve("coverage", "client")
     },
     captureTimeout: 100000,
     singleRun: true
-  });
+  };
+
+  loadUserConfig(Path.basename(__filename), config, settings);
 };

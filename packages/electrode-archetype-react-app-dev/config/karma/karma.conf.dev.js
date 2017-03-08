@@ -7,8 +7,12 @@
  * then the alternate `karma.conf.js` file will _also_ run the webpack dev
  * server during the test run.
  */
+
+const loadUserConfig = require("./util/load-user-config");
+const Path = require("path");
+
 module.exports = function (config) {
-  config.set({
+  const settings = {
     frameworks: ["mocha", "phantomjs-shim"],
     reporters: ["spec"],
     browsers: ["PhantomJS"],
@@ -25,5 +29,7 @@ module.exports = function (config) {
         ui: "bdd"
       }
     }
-  });
+  };
+
+  loadUserConfig(Path.basename(__filename), config, settings);
 };

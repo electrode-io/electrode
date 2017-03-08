@@ -1,20 +1,18 @@
 "use strict";
 
-/* eslint-disable */
-
-var path = require("path");
-var karmaConf = require("./karma.conf");
-
 /*
  * Karma Configuration: "coverage" version.
  *
  * This configuration is the same as basic one-shot version, just with coverage.
  */
-var webpackCovCfg = require("../webpack/webpack.config.coverage");
+const webpackCovCfg = require("../webpack/webpack.config.coverage");
+const karmaConf = require("./karma.conf");
+const loadUserConfig = require("./util/load-user-config");
+const Path = require("path");
 
 module.exports = function (config) {
   karmaConf(config);
-  config.set({
+  const settings = {
     reporters: ["spec", "coverage"],
     webpack: webpackCovCfg,
     coverageReporter: {
@@ -23,7 +21,9 @@ module.exports = function (config) {
         { type: "lcov" },
         { type: "text" }
       ],
-      dir: path.resolve("coverage", "client")
+      dir: Path.resolve("coverage", "client")
     }
-  });
+  };
+
+  loadUserConfig(Path.basename(__filename), config, settings);
 };
