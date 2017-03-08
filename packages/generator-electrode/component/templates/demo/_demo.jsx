@@ -1,5 +1,5 @@
 /*@flow*/
-/*global document:false*/
+
 import React from "react";
 import { addLocaleData, IntlProvider } from "react-intl";
 import Demo from "electrode-demo-index";
@@ -12,7 +12,7 @@ const localeData = require(`react-intl/locale-data/${locale}`);
 
 addLocaleData(localeData);
 
-const localScope = {IntlProvider, messages, locale};
+const localScope = { IntlProvider, messages, locale };
 
 const components = [
   {
