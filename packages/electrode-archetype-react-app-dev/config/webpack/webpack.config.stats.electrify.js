@@ -1,16 +1,31 @@
 "use strict";
-/**
- * Webpack dev static configuration
- */
-const _ = require("lodash");
-const mergeWebpackConfig = require("webpack-partial").default;
 
-const baseConfig = require("./base.js");
-const statsConfig = require("./partial/stats.js");
+const baseProfile = require("./profile.base");
+const generateConfig = require("./util/generate-config");
+const Path = require("path");
 
-module.exports = _.flow(
-  mergeWebpackConfig.bind(null, {}, baseConfig),
-  statsConfig({
-    fullPaths: true
-  })
-)();
+function makeConfig() {
+  const statsElectrifyProfile = {
+    partials: {
+      "_stats": {
+        order: 10100,
+        options: {
+          fullPaths: true
+        }
+      }
+    }
+  };
+
+  const options = {
+    profiles: {
+      _base: baseProfile,
+      "_stats-electrify": statsElectrifyProfile
+    },
+    profileNames: ["_base", "_stats-electrify"],
+    configFilename: Path.basename(__filename)
+  };
+
+  return generateConfig(options);
+}
+
+module.exports = makeConfig();

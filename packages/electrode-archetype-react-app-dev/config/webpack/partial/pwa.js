@@ -1,11 +1,10 @@
 "use strict";
 
-const archetype = require("../../archetype");
-const Path = archetype.Path;
+const archetype = require("electrode-archetype-react-app/config/archetype");
+const Path = require("path");
 const AppMode = archetype.AppMode;
 
 const assign = require("lodash/assign");
-const mergeWebpackConfig = require("webpack-partial").default;
 const fileLoader = require.resolve("file-loader");
 const webAppManifestLoader = require.resolve("web-app-manifest-loader");
 const SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin");
@@ -69,132 +68,132 @@ function createEntryConfigFromScripts(importScripts, entry) {
   }, newEntry);
 }
 
-module.exports = function () {
+module.exports = function (options) {
   /* eslint max-statements: 0 */
-  return (config) => {
-    const swConfig = optionalRequire(swConfigPath, true) || {};
-    const severConfig = optionalRequire(serverConfigPath, true) || {};
+  const swConfig = optionalRequire(swConfigPath, true) || {};
+  const severConfig = optionalRequire(serverConfigPath, true) || {};
 
-    if (!swConfig.manifest) {
-      return mergeWebpackConfig(config, {});
-    }
+  if (!swConfig.manifest) {
+    return {};
+  }
 
-    console.log(`Just FYI: PWA enabled with config from ${swConfigPath}`);
+  console.log(`Just FYI: PWA enabled with config from ${swConfigPath}`);
 
-    mkdirp.sync(Path.resolve("dist"));
+  mkdirp.sync(Path.resolve("dist"));
 
-    const manifestConfig = assign({
-      background: "#FFFFFF",
-      logo: "images/electrode.png",
-      title: "Electrode",
-      "short_name": "Electrode",
-      statsFilename: "../server/iconstats.json"
-    }, swConfig.manifest);
+  const manifestConfig = assign({
+    background: "#FFFFFF",
+    logo: "images/electrode.png",
+    title: "Electrode",
+    "short_name": "Electrode",
+    statsFilename: "../server/iconstats.json"
+  }, swConfig.manifest);
 
-    const cacheConfig = assign({
-      staticFileGlobs: [
-        "dist/js/*.{js,css}"
-      ],
-      stripPrefix: "dist/js/",
-      cacheId: "electrode",
-      filepath: "dist/sw.js",
-      maximumFileSizeToCacheInBytes: 4194304,
-      skipWaiting: false
-    }, swConfig.cache);
+  const cacheConfig = assign({
+    staticFileGlobs: [
+      "dist/js/*.{js,css}"
+    ],
+    stripPrefix: "dist/js/",
+    cacheId: "electrode",
+    filepath: "dist/sw.js",
+    maximumFileSizeToCacheInBytes: 4194304,
+    skipWaiting: false
+  }, swConfig.cache);
 
-    if (cacheConfig.runtimeCaching) {
-      cacheConfig.runtimeCaching = cacheConfig.runtimeCaching.map((runtimeCache) => {
-        return {
-          handler: runtimeCache.handler,
-          urlPattern: new RegExp(runtimeCache.urlPattern)
-        };
-      });
-    }
-
-    /**
-     * If importScripts exists in the cache config we need to overwrite
-     * the entry config and output config so we get an entry point for each
-     * script with unique names.
-     */
-    let entry = config.entry;
-    let output = config.output;
-    if (cacheConfig.importScripts) {
-      const importScripts = cacheConfig.importScripts;
-      cacheConfig.importScripts = process.env.WEBPACK_DEV === "true"
-        ? importScripts.map(getDevelopmentPath)
-        : importScripts.map(getHashedPath);
-      entry = createEntryConfigFromScripts(importScripts, entry);
-      output = {
-        filename: "[name].[hash].js"
+  if (cacheConfig.runtimeCaching) {
+    cacheConfig.runtimeCaching = cacheConfig.runtimeCaching.map((runtimeCache) => {
+      return {
+        handler: runtimeCache.handler,
+        urlPattern: new RegExp(runtimeCache.urlPattern)
       };
-    }
-
-    const logoPath = Path.resolve(AppMode.src.client, manifestConfig.logo);
-    const plugins = [
-      new FaviconsWebpackPlugin({
-        logo: logoPath,
-        emitStats: true,
-        inject: false,
-        background: manifestConfig.background,
-        title: manifestConfig.title,
-        statsFilename: manifestConfig.statsFilename,
-        icons: {
-          android: true,
-          appleIcon: true,
-          appleStartup: true,
-          favicons: true
-        }
-      }),
-      new AddManifestFieldsPlugin({
-        "gcm_sender_id": manifestConfig.gcm_sender_id,
-        "short_name": manifestConfig.short_name,
-        "theme_color": manifestConfig.theme_color
-      }),
-      new SWPrecacheWebpackPlugin(cacheConfig)
-    ];
-
-    /**
-     * In dev we need to write the stats file to disk
-     * so we can properly read which chunk(s) need to be
-     * served. We write the stats file to our build artifacts
-     * folder, which is .etmp by default.
-     */
-    if (process.env.WEBPACK_DEV === "true") {
-      plugins.push(
-        new DiskPlugin({
-          output: {
-            path: Path.resolve(severConfig.buildArtifactsPath || ".etmp")
-          },
-          files: [{
-            asset: /\/stats.json$/,
-            output: {
-              filename: "stats.json"
-            }
-          }]
-        })
-      );
-    }
-
-    return mergeWebpackConfig(config, {
-      entry,
-      output,
-      module: {
-        rules: [
-          {
-            test: /manifest.json$/,
-            use: [
-              {
-                loader: fileLoader,
-                options: {
-                  name: "manifest.json"
-                }
-              },
-              webAppManifestLoader
-            ]
-          }
-        ]
-      },
-      plugins
     });
+  }
+
+  /**
+   * If importScripts exists in the cache config we need to overwrite
+   * the entry config and output config so we get an entry point for each
+   * script with unique names.
+   */
+  let output = {};
+  if (cacheConfig.importScripts) {
+    const importScripts = cacheConfig.importScripts;
+
+    cacheConfig.importScripts = process.env.WEBPACK_DEV === "true"
+      ? importScripts.map(getDevelopmentPath)
+      : importScripts.map(getHashedPath);
+
+    createEntryConfigFromScripts(importScripts, options.currentConfig.entry);
+
+    output = {
+      filename: "[name].[hash].js"
+    };
+  }
+
+  const logoPath = Path.resolve(AppMode.src.client, manifestConfig.logo);
+  const plugins = [
+    new FaviconsWebpackPlugin({
+      logo: logoPath,
+      emitStats: true,
+      inject: false,
+      background: manifestConfig.background,
+      title: manifestConfig.title,
+      statsFilename: manifestConfig.statsFilename,
+      icons: {
+        android: true,
+        appleIcon: true,
+        appleStartup: true,
+        favicons: true
+      }
+    }),
+    new AddManifestFieldsPlugin({
+      "gcm_sender_id": manifestConfig.gcm_sender_id,
+      "short_name": manifestConfig.short_name,
+      "theme_color": manifestConfig.theme_color
+    }),
+    new SWPrecacheWebpackPlugin(cacheConfig)
+  ];
+
+  /**
+   * In dev we need to write the stats file to disk
+   * so we can properly read which chunk(s) need to be
+   * served. We write the stats file to our build artifacts
+   * folder, which is .etmp by default.
+   */
+  if (process.env.WEBPACK_DEV === "true") {
+    plugins.push(
+      new DiskPlugin({
+        output: {
+          path: Path.resolve(severConfig.buildArtifactsPath || ".etmp")
+        },
+        files: [{
+          asset: /\/stats.json$/,
+          output: {
+            filename: "stats.json"
+          }
+        }]
+      })
+    );
+  }
+
+  return {
+    output,
+    module: {
+      rules: [
+        {
+          _name: "manifest",
+          test: /manifest.json$/,
+          use: [
+            {
+              loader: fileLoader,
+              options: {
+                name: "manifest.json"
+              }
+            },
+            webAppManifestLoader
+          ]
+        }
+      ]
+    },
+    plugins
   };
 };

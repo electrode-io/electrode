@@ -14,7 +14,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "test": "npm run lint",
-    "lint": "eslint **/*.js"
+    "lint": "eslint \"**/**/*.js\""
   },
   "dependencies": {
     "babel-core": "^6.4.0",
@@ -46,7 +46,7 @@
     "eslint-plugin-react": "^6.5.0"
   },
   "engines": {
-    "node": "^4.4.6 || ^6.2.1",
-    "npm": "^3.5.3"
+    "node": "^4.4.6 || ^6.2.1 || ^7.x.x",
+    "npm": "^3.5.3 || 4.x.x"
   }
 }

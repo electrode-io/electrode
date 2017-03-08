@@ -1,0 +1,10 @@
+---
+extends:
+  - "../../node_modules/electrode-archetype-react-app-dev/config/eslint/.eslintrc-mocha-test"
+
+<% if (isSingleQuote) { %>
+rules:
+  quotes:
+    - 2
+    - "single"
+<% } %>

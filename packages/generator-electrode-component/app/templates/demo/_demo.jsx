@@ -1,5 +1,4 @@
 /*@flow*/
-/*global document:false*/
 import React from "react";
 import { addLocaleData, IntlProvider } from "react-intl";
 import Demo from "electrode-demo-index";

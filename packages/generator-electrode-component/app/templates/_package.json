@@ -9,12 +9,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/<%= packageGitHubOrg %>/<%= packageName %>.git"
+    "url": "https://github.com/<%= packageGitHubOrg %>/<%= ghRepo %>.git"
   },
   "bugs": {
-    "url": "https://github.com/<%= packageGitHubOrg %>/<%= packageName %>/issues"
+    "url": "https://github.com/<%= packageGitHubOrg %>/<%= ghRepo %>/issues"
   },
-  "homepage": "https://github.com/<%= packageGitHubOrg %>/<%= packageName %>",
+  "homepage": "https://github.com/<%= packageGitHubOrg %>/<%= ghRepo %>",
   "dependencies": {},
   "devDependencies": {
     "electrode-archetype-react-component": "^1.0.0",

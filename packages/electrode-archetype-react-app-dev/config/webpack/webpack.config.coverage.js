@@ -1,18 +1,32 @@
 "use strict";
+/**
+ * Webpack coverage configuration
+ */
+const baseProfile = require("./profile.base");
+const testBaseProfile = require("./profile.base.test");
+const generateConfig = require("./util/generate-config");
+const Path = require("path");
 
-const _ = require("lodash");
-const mergeWebpackConfig = require("webpack-partial").default;
-const WebpackConfig = require("webpack-config").default;
-const getRootConfig = require("./get-root-config");
+function makeConfig() {
+  const coverageProfile = {
+    partials: {
+      "_coverage": { order: 10100 },
+      "_sourcemaps-inline": { order: 10200 },
+      "_simple-progress": { order: 10300 }
+    }
+  };
 
-const coverageConfig = require("./partial/coverage");
-const inlineSourcemapsConfig = require("./partial/sourcemaps-inline");
-const testConfig = require("./base-test.js");
-const simpleProgress = require("./partial/simple-progress");
+  const options = {
+    profiles: {
+      _base: baseProfile,
+      "_test-base": testBaseProfile,
+      _coverage: coverageProfile
+    },
+    profileNames: ["_base", "_test-base", "_coverage"],
+    configFilename: Path.basename(__filename)
+  };
 
-module.exports = new WebpackConfig().merge(_.flow(
-  mergeWebpackConfig.bind(null, {}, testConfig),
-  coverageConfig(),
-  inlineSourcemapsConfig(),
-  simpleProgress()
-)()).merge(getRootConfig("webpack.config.coverage.js"));
+  return generateConfig(options);
+}
+
+module.exports = makeConfig();

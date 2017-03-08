@@ -1,18 +1,29 @@
 "use strict";
 /**
- * Webpack dev static configuration
+ * Webpack static dev configuration
  */
-const _ = require("lodash");
-const mergeWebpackConfig = require("webpack-partial").default;
-const WebpackConfig = require("webpack-config").default;
-const getRootConfig = require("./get-root-config");
+const baseProfile = require("../profile.base");
+const generateConfig = require("./util/generate-config");
+const Path = require("path");
 
-const baseConfig = require("./base.js");
-const defineConfig = require("./partial/define.js");
-const devConfig = require("./partial/dev.js");
+function makeConfig() {
+  const devProfile = {
+    partials: {
+      "_define": { order: 10100 },
+      "_dev": { order: 10200 }
+    }
+  };
 
-module.exports = new WebpackConfig().merge(_.flow(
-  mergeWebpackConfig.bind(null, {}, baseConfig),
-  defineConfig(),
-  devConfig()
-)()).merge(getRootConfig("webpack.config.dev.static.js"));
+  const options = {
+    profiles: {
+      _base: baseProfile,
+      "_dev-static": devProfile
+    },
+    profileNames: ["_base", "_dev-static"],
+    configFilename: Path.basename(__filename)
+  };
+
+  return generateConfig(options);
+}
+
+module.exports = makeConfig();

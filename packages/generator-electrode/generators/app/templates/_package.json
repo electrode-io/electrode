@@ -15,14 +15,15 @@
   "repository": {},
   "license": "ISC",
   "engines": {
-    "node": "^4.x.x || ^6.x.x",
+    "node": "^4.x.x || ^6.x.x || ^7.x.x",
     "npm": ">= 3.x.x"
   },
   "scripts": {
+    "prestart": "gulp build",
     "start": "if test \"$NODE_ENV\" = \"production\"; then npm run prod; else gulp dev; fi",
     "test": "gulp check",
     "coverage": "gulp check",
-    "prod": "echo 'Starting standalone server in PROD mode'; node .",
+    "prod": "echo 'Starting standalone server in PROD mode'; node ./lib/server/",
     "heroku-postbuild": "gulp build"
   },
   "dependencies": {

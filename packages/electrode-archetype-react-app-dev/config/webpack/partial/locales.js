@@ -1,6 +1,5 @@
 "use strict";
 
-const mergeWebpackConfig = require("webpack-partial").default;
 const ContextReplacementPlugin = require("webpack").ContextReplacementPlugin;
 
 // Note that in modern versions of `moment`, there is actually no
@@ -13,11 +12,9 @@ const LOCALES = ["en"];
 const LOCALES_REGEX = new RegExp(`^\./(${LOCALES.join("|")})$`);
 
 module.exports = function () {
-  return function (config) {
-    return mergeWebpackConfig(config, {
-      plugins: [
-        new ContextReplacementPlugin(/moment[\\\/]locale$/, LOCALES_REGEX)
-      ]
-    });
+  return {
+    plugins: [
+      new ContextReplacementPlugin(/moment[\\\/]locale$/, LOCALES_REGEX)
+    ]
   };
 };

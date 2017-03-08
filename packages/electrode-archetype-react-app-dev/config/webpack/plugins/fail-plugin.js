@@ -1,18 +1,31 @@
 "use strict";
 
-module.exports = function () {
-  let isWatch = true;
+module.exports = class FailPlugin {
+  constructor() {
+    this.isWatch = true;
+  }
 
-  this.plugin("run", (compiler, callback) => {
-    isWatch = false;
-    callback.call(compiler);
-  });
-
-  this.plugin("done", (stats) => {
-    if (stats.compilation.errors && stats.compilation.errors.length && !isWatch) {
-      process.on("beforeExit", () => {
-        process.exit(1);
-      });
+  fail() {
+    if (!this.isWatch) {
+      process.on("beforeExit", () => process.exit(1));
     }
-  });
+  }
+
+  apply(compiler) {
+    compiler.plugin("run", (runCompiler, callback) => {
+      this.isWatch = false;
+      callback.call(runCompiler);
+    });
+
+    compiler.plugin("fail", () => {
+      this.fail();
+    });
+
+    compiler.plugin("done", (stats) => {
+      const errors = stats.compilation.errors;
+      if (errors && errors.length) {
+        this.fail();
+      }
+    });
+  }
 };
