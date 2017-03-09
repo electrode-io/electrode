@@ -7,7 +7,7 @@ const AppMode = archetype.AppMode;
 const assign = require("lodash/assign");
 const fileLoader = require.resolve("file-loader");
 const webAppManifestLoader = require.resolve("web-app-manifest-loader");
-const SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin");
+const SWPrecacheWebpackPlugin = require("../plugins/sw-precache");
 const FaviconsWebpackPlugin = require("../plugins/favicons");
 const AddManifestFieldsPlugin = require("../plugins/add-manifest-fields");
 const DiskPlugin = require("webpack-disk-plugin");
@@ -97,7 +97,8 @@ module.exports = function (options) {
     cacheId: "electrode",
     filepath: "dist/sw.js",
     maximumFileSizeToCacheInBytes: 4194304,
-    skipWaiting: false
+    skipWaiting: false,
+    noWarning: true
   }, swConfig.cache);
 
   if (cacheConfig.runtimeCaching) {
