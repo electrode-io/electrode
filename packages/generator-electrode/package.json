@@ -16,7 +16,8 @@
     "url": "https://github.com/jchip"
   },
   "files": [
-    "generators"
+    "generators",
+    "component"
   ],
   "main": "generators/index.js",
   "keywords": [

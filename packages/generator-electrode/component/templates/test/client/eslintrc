@@ -1,0 +1,10 @@
+---
+extends:
+  - "electrode-archetype-react-component/config/eslint/.eslintrc-react-test"
+
+<% if (quoteType === "'") { %>
+rules:
+  quotes:
+    - 2
+    - "single"
+<% } %>
