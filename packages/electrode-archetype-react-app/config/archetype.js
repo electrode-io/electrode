@@ -6,11 +6,17 @@ const optionalRequire = require("optional-require")(require);
 const constants = require("./constants");
 const utils = require("../lib/utils");
 const makeAppMode = require("../lib/app-mode");
+const userConfig = optionalRequire(Path.resolve("archetype/config"),
+  {
+    default: {
+      options: { reactLib: "react" }
+    }
+  });
 
 module.exports = {
   dir: Path.resolve(__dirname, ".."),
   pkg,
-  AppMode: makeAppMode(constants.PROD_DIR),
+  AppMode: makeAppMode(constants.PROD_DIR, userConfig.options.reactLib),
   prodDir: constants.PROD_DIR,
   eTmpDir: constants.ETMP_DIR,
   prodModulesDir: Path.join(constants.PROD_DIR, "modules"),
