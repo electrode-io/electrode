@@ -30,7 +30,7 @@ function generateConfig(options) {
     config = compose();
   }
 
-  logger.verbose(config);
+  logger.verbose(JSON.stringify(config));
 
   return config;
 }

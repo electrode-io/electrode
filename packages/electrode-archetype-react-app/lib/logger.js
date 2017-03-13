@@ -27,11 +27,15 @@ if (devRequire) {
   module.exports = logger;
 } else {
   console.verbose = function () {
-    console.log("Verbose: ", arguments);
+    const args = Array.prototype.slice.call(arguments);
+    args.unshift("Verbose: ");
+    console.log.apply(console.args); // eslint-disable-line
   };
 
   console.debug = function () {
-    console.log("Debug: ", arguments);
+    const args = Array.prototype.slice.call(arguments);
+    args.unshift("Debug: ");
+    console.log.apply(console.args); // eslint-disable-line
   };
 
   module.exports = console;
