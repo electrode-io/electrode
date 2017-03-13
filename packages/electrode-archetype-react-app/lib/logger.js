@@ -26,8 +26,13 @@ if (devRequire) {
   });
   module.exports = logger;
 } else {
-  console.verbose = function (message) {
-    console.info(`Verbose: ${message}`);
+  console.verbose = function () {
+    console.log("Verbose: ", arguments);
   };
+
+  console.debug = function () {
+    console.log("Debug: ", arguments);
+  };
+
   module.exports = console;
 }
