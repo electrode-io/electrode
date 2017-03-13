@@ -3,28 +3,37 @@
 const Path = require("path");
 const Fs = require("fs");
 
-function makeAppMode(prodDir) {
+function makeAppMode(prodDir, reactLib) {
   const client = "client";
   const server = "server";
 
   let srcDir = "";
   let libDir = "";
-  let saved = {};
   const savedFile = Path.join(prodDir, ".app-mode.json");
-  const savedFileFP = Path.resolve(savedFile);
-  if (Fs.existsSync(Path.resolve("src", client)) || Fs.existsSync(Path.resolve("src", server))) {
-    srcDir = "src";
-    libDir = "lib";
-  } else if (Fs.existsSync(savedFileFP)) {
-    saved = JSON.parse(Fs.readFileSync(savedFileFP));
-  }
+
+  const loadSavedAppMode = () => {
+    const savedFileFP = Path.resolve(savedFile);
+    if (Fs.existsSync(Path.resolve("src", client)) || Fs.existsSync(Path.resolve("src", server))) {
+      srcDir = "src";
+      libDir = "lib";
+    } else if (Fs.existsSync(savedFileFP)) {
+      return JSON.parse(Fs.readFileSync(savedFileFP));
+    }
+
+    return {};
+  };
+
+  const saved = loadSavedAppMode();
 
   if (!srcDir) {
     console.log(`Just FYI: There's a new src/lib mode that doesn't need babel-register.`);
   }
 
+  reactLib = reactLib || "react";
+
   const envKey = "APP_SRC_DIR";
   return Object.assign({
+    reactLib,
     savedFile,
     envKey,
     isSrc: !!srcDir,
