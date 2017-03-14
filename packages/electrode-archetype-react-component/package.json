@@ -31,9 +31,5 @@
     "opener": "^1.4.1",
     "package-json-validator": "^0.6.1",
     "shelljs": "^0.7.0"
-  },
-  "engines": {
-    "node": "^4.2.6",
-    "npm": "^3.5.3"
   }
 }
