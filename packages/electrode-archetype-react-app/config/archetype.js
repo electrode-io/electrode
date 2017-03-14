@@ -16,7 +16,7 @@ const userConfig = optionalRequire(Path.resolve("archetype/config"),
 module.exports = {
   dir: Path.resolve(__dirname, ".."),
   pkg,
-  AppMode: makeAppMode(constants.PROD_DIR, userConfig.options.reactLib),
+  AppMode: makeAppMode(constants.PROD_DIR, userConfig.options && userConfig.options.reactLib),
   prodDir: constants.PROD_DIR,
   eTmpDir: constants.ETMP_DIR,
   prodModulesDir: Path.join(constants.PROD_DIR, "modules"),
