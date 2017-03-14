@@ -3,6 +3,7 @@
 const isomorphicLoader = require.resolve("isomorphic-loader");
 const optionalRequire = require("optional-require")(require);
 const _ = require("lodash");
+const logger = require("electrode-archetype-react-app/lib/logger");
 
 function getCdnLoader(optLoader) {
   if (optLoader) {
@@ -10,7 +11,7 @@ function getCdnLoader(optLoader) {
     if (resolvedOptLoader) {
       return resolvedOptLoader;
     }
-    console.log(`WARNING: optional CDN loader "${optLoader}" can't be resolved`);
+    logger.warn(`Optional CDN loader "${optLoader}" can't be resolved`);
   }
 
   const loader = _(["electrode-cdn-file-loader", "cdn-file-loader", "file-loader"]).find(optionalRequire.resolve);

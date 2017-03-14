@@ -1,6 +1,7 @@
 "use strict";
 
 let appDir = process.cwd();
+const logger = require("electrode-archetype-react-app/lib/logger");
 
 if (process.argv[2]) {
   appDir = process.argv[2];
@@ -22,9 +23,9 @@ const uniques = Object.keys(cdnAssets).reduce((acc, k) => {
 const paths = Object.keys(uniques);
 
 if (paths.length > 1) {
-  console.log("Error: CDN upload files has different base paths");
+  logger.error("CDN upload files has different base paths");
   paths.forEach((p) => {
-    console.log(` - "${p}"`);
+    logger.info(` - "${p}"`);
   });
   process.exit(1);
 }
@@ -34,9 +35,9 @@ if (paths.length === 1) {
   pp += pp.endsWith("/") ? "" : "/";
   isoConfig.output.publicPath = pp;
   fs.writeFileSync(isoConfigFile, JSON.stringify(isoConfig, null, 2));
-  console.log(`\n===\nISOMORPHIC loader config publicPath updated to CDN path ${pp}\n`);
+  logger.info(`\n===\nISOMORPHIC loader config publicPath updated to CDN path ${pp}\n`);
 } else {
-  console.log(`No CDN path found from CDN assets file ${cdnAssetsFile}`);
+  logger.info(`No CDN path found from CDN assets file ${cdnAssetsFile}`);
 }
 
 process.exit(0);

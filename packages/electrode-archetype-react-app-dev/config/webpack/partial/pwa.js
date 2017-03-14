@@ -16,6 +16,7 @@ const optionalRequire = require("optional-require")(require);
 const swConfigPath = Path.resolve("config", "sw-config.js");
 const serverConfigPath = Path.resolve("config", "default.json");
 const mkdirp = require("mkdirp");
+const logger = require("electrode-archetype-react-app/lib/logger");
 
 /**
  * Takes a file path and returns a webpack-compatible
@@ -77,7 +78,7 @@ module.exports = function (options) {
     return {};
   }
 
-  console.log(`Just FYI: PWA enabled with config from ${swConfigPath}`);
+  logger.info(`PWA enabled with config from ${swConfigPath}`);
 
   mkdirp.sync(Path.resolve("dist"));
 
