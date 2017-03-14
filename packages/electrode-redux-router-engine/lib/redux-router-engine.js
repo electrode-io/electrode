@@ -34,7 +34,7 @@ class ReduxRouterEngine {
   render(req, options) {
     const location = req.path || (req.url && req.url.path);
 
-    return this._matchRoute({routes: this.options.routes, location})
+    return this._matchRoute({ routes: this.options.routes, location })
       .then((match) => {
         if (match.redirectLocation) {
           return {
@@ -79,7 +79,7 @@ class ReduxRouterEngine {
         if (err) {
           reject(err);
         } else {
-          resolve({redirectLocation, renderProps});
+          resolve({ redirectLocation, renderProps });
         }
       });
     });
@@ -107,7 +107,7 @@ class ReduxRouterEngine {
     } else {
       return (withIds ? ReactDomServer.renderToString : ReactDomServer.renderToStaticMarkup)(
         React.createElement(
-          Provider, {store},
+          Provider, { store },
           React.createElement(ReactRouter.RouterContext, match.renderProps)
         )
       );
