@@ -5,6 +5,7 @@ const assert = require("assert");
 const fs = require("fs");
 const archetype = require("../config/archetype");
 const Path = require("path");
+const logger = require("../lib/logger");
 
 /* eslint max-statements: 0 */
 function optimizeModulesForProduction(options) {
@@ -28,11 +29,11 @@ function optimizeModulesForProduction(options) {
   if (!isProd()) {
     if (!options.force) {
       if (verbose) {
-        console.log(`Just FYI: optimizeModulesForProduction - skipping since NODE_ENV !== "production"`); // eslint-disable-line
+        logger.info(`OptimizeModulesForProduction - skipping since NODE_ENV !== "production"`);
       }
       return;
     } else if (verbose) {
-      console.log(`Just FYI: optimizeModulesForProduction - force enabled`); // eslint-disable-line
+      logger.info(`OptimizeModulesForProduction - force enabled`);
     }
   }
 
@@ -46,7 +47,7 @@ function optimizeModulesForProduction(options) {
 
     const notify = (m) => {
       if (verbose && !notified[m]) {
-        console.log(`Just FYI: overriding module ${m} with copy optimized for production`); // eslint-disable-line
+        logger.info(`Overriding module ${m} with copy optimized for production`);
         notified[m] = true;
       }
     };
@@ -67,7 +68,7 @@ function optimizeModulesForProduction(options) {
       return originalResolve.call(this, request, parent);
     };
   } else if (verbose) {
-    console.log(`Just FYI: optimizeModulesForProduction - no optimized modules found in ${archetype.prodModulesDir}`); // eslint-disable-line
+    logger.info(`OptimizeModulesForProduction - no optimized modules found in ${archetype.prodModulesDir}`);
   }
 }
 
