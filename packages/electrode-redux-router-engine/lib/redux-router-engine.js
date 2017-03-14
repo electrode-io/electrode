@@ -2,8 +2,9 @@
 
 const Promise = require("bluebird");
 const assert = require("assert");
-const React = require("react");
-const ReactDomServer = require("react-dom/server");
+const optionalRequire = require("optional-require")(require);
+const React = optionalRequire("react");
+const ReactDomServer = optionalRequire("react-dom/server");
 const ReactRouter = require("react-router");
 const Provider = require("react-redux").Provider;
 
@@ -34,7 +35,7 @@ class ReduxRouterEngine {
   render(req, options) {
     const location = req.path || (req.url && req.url.path);
 
-    return this._matchRoute({routes: this.options.routes, location})
+    return this._matchRoute({ routes: this.options.routes, location })
       .then((match) => {
         if (match.redirectLocation) {
           return {
@@ -79,7 +80,7 @@ class ReduxRouterEngine {
         if (err) {
           reject(err);
         } else {
-          resolve({redirectLocation, renderProps});
+          resolve({ redirectLocation, renderProps });
         }
       });
     });
@@ -105,9 +106,11 @@ class ReduxRouterEngine {
     if (req.app && req.app.disableSSR) {
       return "";
     } else {
+      assert(React, "Can't do SSR because React module is not available");
+      assert(ReactDomServer, "Can't do SSR because ReactDomServer module is not available");
       return (withIds ? ReactDomServer.renderToString : ReactDomServer.renderToStaticMarkup)(
         React.createElement(
-          Provider, {store},
+          Provider, { store },
           React.createElement(ReactRouter.RouterContext, match.renderProps)
         )
       );
