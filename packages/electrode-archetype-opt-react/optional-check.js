@@ -7,7 +7,7 @@ const cwd = process.cwd();
 function findAppDir() {
   if (cwd.indexOf("node_modules") > 0) {
     const splits = cwd.split("node_modules");
-    return Path.dirname(splits[0]);
+    return Path.dirname(Path.join(splits[0], "x")); // remove trailing slash
   }
   return cwd;
 }
