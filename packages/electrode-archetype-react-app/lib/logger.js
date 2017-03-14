@@ -3,9 +3,9 @@
 const archetype = require("../config/archetype");
 const devRequire = archetype.devRequire;
 
-if (devRequire) {
+const internalWinsonLogger = function() {
   const winston = devRequire("winston");
-  const logger = new (winston.Logger)({
+  return new (winston.Logger)({
     exceptionHandlers: [
       new (winston.transports.File)({
         filename: "archetype-exceptions.log"
@@ -18,25 +18,40 @@ if (devRequire) {
         prettyPrint: true
       }),
       new (winston.transports.File)({
-        name: "archetype-loggers-file",
-        filename: "archetype-loggers.log",
+        name: "archetype-debug-file",
+        filename: "archetype-debug.log",
         level: "debug"
       })
     ]
   });
-  module.exports = logger;
+}
+
+const internalConsoleLogger = function(type, params) {
+  if(params) {
+    const args = Array.prototype.slice.call(params);
+    args.unshift(`${type}:`);
+    switch(type) {
+      case 'warn':
+        console.warn.apply(console, args); // eslint-disable-line
+        break;
+      case 'error':
+        console.error.apply(console, args); // eslint-disable-line
+        break;
+      default:
+        console.log.apply(console, args); // eslint-disable-line
+        break;
+    }
+  }
+}
+
+if (devRequire) {
+  module.exports = internalWinsonLogger();
 } else {
-  console.verbose = function () {
-    const args = Array.prototype.slice.call(arguments);
-    args.unshift("Verbose: ");
-    console.log.apply(console.args); // eslint-disable-line
-  };
-
-  console.debug = function () {
-    const args = Array.prototype.slice.call(arguments);
-    args.unshift("Debug: ");
-    console.log.apply(console.args); // eslint-disable-line
-  };
-
-  module.exports = console;
+  const logger = {
+    info: function() { internalConsoleLogger("info", arguments)},
+    warn: function() { internalConsoleLogger("warn", arguments)},
+    error: function() { internalConsoleLogger("error", arguments)},
+    verbose: function() { internalConsoleLogger("info", arguments)}
+  }
+  module.exports = logger;
 }
