@@ -1,0 +1,24 @@
+{
+  "name": "electrode-archetype-opt-react",
+  "version": "0.1.0",
+  "description": "Electrode NodeJS/React Optional Archetype - react",
+  "main": "index.js",
+  "homepage": "http://www.electrode.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electrode-io/electrode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/electrode-io/electrode/issues"
+  },
+  "license": "Apache-2.0",
+  "scripts": {
+    "preinstall": "node optional-check.js"
+  },
+  "dependencies": {
+    "react": "^15.0.0 || ^0.14.0",
+    "react-dom": "^15.0.0 || ^0.14.0"
+  },
+  "devDependencies": {
+  }
+}
