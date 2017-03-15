@@ -6,10 +6,12 @@ const winston = require("winston");
 const winstonLogger = require("../lib/winston-logger");
 
 describe("#winston-logger", function () {
+  const logger = winstonLogger(winston);
+
   it("#winstonLogger.warn", function () {
     const winstonWarnSpy = sinon.spy(winston, "warn");
 
-    winstonLogger(winston).warn("electrode");
+    logger.warn("electrode");
 
     expect(winstonWarnSpy).calledOnce;
     expect(winstonLogger(winston)).to.be.instanceof(winston.Logger);
@@ -27,7 +29,7 @@ describe("#winston-logger", function () {
   it("#winstonLogger.error", function () {
     const winstonErrorSpy = sinon.spy(winston, "error");
 
-    winstonLogger(winston).error("electrode");
+    logger.error("electrode");
 
     expect(winstonErrorSpy).calledOnce;
     expect(winstonLogger(winston)).to.be.instanceof(winston.Logger);
@@ -45,7 +47,7 @@ describe("#winston-logger", function () {
   it("#winstonLogger.info", function () {
     const winstonInfoSpy = sinon.spy(winston, "info");
 
-    winstonLogger(winston).info("electrode");
+    logger.info("electrode");
 
     expect(winstonInfoSpy).calledOnce;
     expect(winstonLogger(winston)).to.be.instanceof(winston.Logger);
@@ -63,7 +65,7 @@ describe("#winston-logger", function () {
   it("#winstonLogger.verbose", function () {
     const winstonVerboseSpy = sinon.spy(winston, "verbose");
 
-    winstonLogger(winston).info("electrode");
+    logger.info("electrode");
 
     expect(winstonVerboseSpy).calledOnce;
     expect(winstonLogger(winston)).to.be.instanceof(winston.Logger);
