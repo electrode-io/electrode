@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.1.0",
+    "electrode-archetype-njs-module-dev": "^1.0.1",
     "eslint": "^3.9.1",
     "eslint-config-walmart": "^1.1.1",
     "eslint-plugin-babel": "^4.0.1",
