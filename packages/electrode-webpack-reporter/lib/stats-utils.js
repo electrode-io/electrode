@@ -21,7 +21,7 @@ function getAssets(stats) {
   if (stats.assets && stats.assets.length > 0) {
     return stats.assets.map((asset) => {
       return _.pick(asset, ["name", "size", "chunks", "emitted", "chunkNames"]);
-    })
+    });
   }
 
   return [];
@@ -58,6 +58,7 @@ function getWarningsHtml(stats) {
 //
 // A quick HTML output adapted from original Stat.jsonToString
 //
+/* eslint-disable */
 function jsonToHtml(obj, useColors) {
   const buf = [];
 
@@ -139,7 +140,7 @@ function jsonToHtml(obj, useColors) {
     const index = Math.floor(Math.log(size) / Math.log(1000));
 
     return +(size / Math.pow(1000, index))
-        .toPrecision(3) + " " + abbreviations[index];
+      .toPrecision(3) + " " + abbreviations[index];
   };
 
   //
