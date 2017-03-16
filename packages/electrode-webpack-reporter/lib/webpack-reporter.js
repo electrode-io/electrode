@@ -4,7 +4,6 @@
 
 const EventEmitter = require("events");
 const chalk = require("chalk");
-const AnsiConvert = require("ansi-to-html");
 const fs = require("fs");
 const Path = require("path");
 const statsUtils = require("./stats-utils");
@@ -13,7 +12,7 @@ const http = require("http");
 function removeCwd(s) {
   const cwd = process.cwd();
   if (s.indexOf(cwd) === 0) {
-    return Path.join ("..", s.substr(cwd.length));
+    return Path.join("..", s.substr(cwd.length));
   }
   return s;
 }
@@ -45,7 +44,12 @@ class WebpackReporter extends EventEmitter {
       const warning = stats.hasWarnings() ? chalk.yellow(" WARNINGS") : "";
       const but = (error || warning) && chalk.yellow(" but has") || "";
       console.log(`webpack bundle is now VALID${but}${error}${warning}`);
-      this._socketIO ? this._socketIO.emit("hmr") : console.log(chalk.magenta(`webpack report is served from`), chalk.cyan(`http://${opt.host}:${opt.port}/reporter`));
+      if (this._socketIO) {
+        this._socketIO.emit("hmr");
+      } else {
+        console.log(chalk.magenta(`webpack report is served from`),
+          chalk.cyan(`http://${opt.host}:${opt.port}/reporter`));
+      }
     } else {
       console.log("webpack bundle is now INVALID");
     }
@@ -55,7 +59,7 @@ class WebpackReporter extends EventEmitter {
   _setup(app) {
     app.get("/reporter", this._webReport.bind(this));
     app.get("/reporter/stats", this._stats.bind(this));
-    
+
     const server = new http.Server(app);
     const io = require('socket.io')(server);
     server.listen(5000);
@@ -73,7 +77,7 @@ class WebpackReporter extends EventEmitter {
       json: () => {
         res.json(jsonData());
       }
-    })
+    });
   }
 
   _webReport(req, res) {
@@ -103,7 +107,7 @@ class WebpackReporter extends EventEmitter {
         res.json(data);
       },
 
-      default: function () {
+      default: () => {
         res.status(404).send("Not found");
       }
     });

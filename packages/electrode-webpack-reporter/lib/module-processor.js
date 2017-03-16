@@ -43,13 +43,13 @@ class ModuleProcessor {
 
     return mbn;
   }
-  
- _splitPathName(name) {
+
+  _splitPathName(name) {
     const pkgs = name.indexOf(tildaSep) < 0 ?
       [name] : name.split(tildaSep).splice(1);
     const n = pkgs.pop();
     const match = n.match(n.startsWith("@") ? atModRegex : modRegex);
-    
+
     if (match) {
       return {
         name: match[1],
@@ -64,19 +64,19 @@ class ModuleProcessor {
       };
     }
   }
-  /**
+  /*
    *
    * {
    *  packageName: {
    *    $: {
-    *    modules: {
-    *     filename: {
-    *       chunks: [],
-    *       size: 123
-    *     }
-    *    },
-    *    parents: {
-    *    }
+   *    modules: {
+   *     filename: {
+   *       chunks: [],
+   *       size: 123
+   *     }
+   *    },
+   *    parents: {
+   *    }
    *    }
    *  }
    * }
@@ -87,12 +87,12 @@ class ModuleProcessor {
     this.totalSize = 0;
     Object.keys(this.modulesByName).forEach((name) => {
       // Ignore "ignored" modules i.e. node shims etc.
-      if (name.indexOf('(ignored)') > -1) {
+      if (name.indexOf("(ignored)") > -1) {
         return;
       }
 
       const split = this._splitPathName(name);
-      const pkg = byPkg[split.name] || (byPkg[split.name] = {size: 0});
+      const pkg = byPkg[split.name] || (byPkg[split.name] = { size: 0 });
       const getVersion = (parents) => {
         try {
           if (split.name !== ".") {
