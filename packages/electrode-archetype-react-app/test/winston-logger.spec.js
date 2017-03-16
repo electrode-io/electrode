@@ -14,16 +14,16 @@ describe("#winston-logger", function () {
     logger.warn("electrode");
 
     expect(winstonWarnSpy).calledOnce;
-    expect(winstonLogger(winston)).to.be.instanceof(winston.Logger);
-    expect(winstonLogger(winston).exceptionHandlers.file.filename).to.equal("archetype-exceptions.log");
+    expect(logger).to.be.instanceof(winston.Logger);
+    expect(logger.exceptionHandlers.file.filename).to.equal("archetype-exceptions.log");
 
-    expect(winstonLogger(winston).transports.console.level).to.equal("info");
-    expect(winstonLogger(winston).transports.console.colorize).to.be.true;
-    expect(winstonLogger(winston).transports.console.prettyPrint).to.be.true;
+    expect(logger.transports.console.level).to.equal("info");
+    expect(logger.transports.console.colorize).to.be.true;
+    expect(logger.transports.console.prettyPrint).to.be.true;
 
-    expect(winstonLogger(winston).transports["archetype-debug-file"].name).to.equal("archetype-debug-file");
-    expect(winstonLogger(winston).transports["archetype-debug-file"].filename).to.equal("archetype-debug.log");
-    expect(winstonLogger(winston).transports["archetype-debug-file"].level).to.equal("debug");
+    expect(logger.transports["archetype-debug-file"].name).to.equal("archetype-debug-file");
+    expect(logger.transports["archetype-debug-file"].filename).to.equal("archetype-debug.log");
+    expect(logger.transports["archetype-debug-file"].level).to.equal("debug");
   });
 
   it("#winstonLogger.error", function () {
@@ -32,16 +32,16 @@ describe("#winston-logger", function () {
     logger.error("electrode");
 
     expect(winstonErrorSpy).calledOnce;
-    expect(winstonLogger(winston)).to.be.instanceof(winston.Logger);
-    expect(winstonLogger(winston).exceptionHandlers.file.filename).to.equal("archetype-exceptions.log");
+    expect(logger).to.be.instanceof(winston.Logger);
+    expect(logger.exceptionHandlers.file.filename).to.equal("archetype-exceptions.log");
 
-    expect(winstonLogger(winston).transports.console.level).to.equal("info");
-    expect(winstonLogger(winston).transports.console.colorize).to.be.true;
-    expect(winstonLogger(winston).transports.console.prettyPrint).to.be.true;
+    expect(logger.transports.console.level).to.equal("info");
+    expect(logger.transports.console.colorize).to.be.true;
+    expect(logger.transports.console.prettyPrint).to.be.true;
 
-    expect(winstonLogger(winston).transports["archetype-debug-file"].name).to.equal("archetype-debug-file");
-    expect(winstonLogger(winston).transports["archetype-debug-file"].filename).to.equal("archetype-debug.log");
-    expect(winstonLogger(winston).transports["archetype-debug-file"].level).to.equal("debug");
+    expect(logger.transports["archetype-debug-file"].name).to.equal("archetype-debug-file");
+    expect(logger.transports["archetype-debug-file"].filename).to.equal("archetype-debug.log");
+    expect(logger.transports["archetype-debug-file"].level).to.equal("debug");
   });
 
   it("#winstonLogger.info", function () {
@@ -50,16 +50,16 @@ describe("#winston-logger", function () {
     logger.info("electrode");
 
     expect(winstonInfoSpy).calledOnce;
-    expect(winstonLogger(winston)).to.be.instanceof(winston.Logger);
-    expect(winstonLogger(winston).exceptionHandlers.file.filename).to.equal("archetype-exceptions.log");
+    expect(logger).to.be.instanceof(winston.Logger);
+    expect(logger.exceptionHandlers.file.filename).to.equal("archetype-exceptions.log");
 
-    expect(winstonLogger(winston).transports.console.level).to.equal("info");
-    expect(winstonLogger(winston).transports.console.colorize).to.be.true;
-    expect(winstonLogger(winston).transports.console.prettyPrint).to.be.true;
+    expect(logger.transports.console.level).to.equal("info");
+    expect(logger.transports.console.colorize).to.be.true;
+    expect(logger.transports.console.prettyPrint).to.be.true;
 
-    expect(winstonLogger(winston).transports["archetype-debug-file"].name).to.equal("archetype-debug-file");
-    expect(winstonLogger(winston).transports["archetype-debug-file"].filename).to.equal("archetype-debug.log");
-    expect(winstonLogger(winston).transports["archetype-debug-file"].level).to.equal("debug");
+    expect(logger.transports["archetype-debug-file"].name).to.equal("archetype-debug-file");
+    expect(logger.transports["archetype-debug-file"].filename).to.equal("archetype-debug.log");
+    expect(logger.transports["archetype-debug-file"].level).to.equal("debug");
   });
 
   it("#winstonLogger.verbose", function () {
@@ -68,15 +68,15 @@ describe("#winston-logger", function () {
     logger.info("electrode");
 
     expect(winstonVerboseSpy).calledOnce;
-    expect(winstonLogger(winston)).to.be.instanceof(winston.Logger);
-    expect(winstonLogger(winston).exceptionHandlers.file.filename).to.equal("archetype-exceptions.log");
+    expect(logger).to.be.instanceof(winston.Logger);
+    expect(logger.exceptionHandlers.file.filename).to.equal("archetype-exceptions.log");
 
-    expect(winstonLogger(winston).transports.console.level).to.equal("info");
-    expect(winstonLogger(winston).transports.console.colorize).to.be.true;
-    expect(winstonLogger(winston).transports.console.prettyPrint).to.be.true;
+    expect(logger.transports.console.level).to.equal("info");
+    expect(logger.transports.console.colorize).to.be.true;
+    expect(logger.transports.console.prettyPrint).to.be.true;
 
-    expect(winstonLogger(winston).transports["archetype-debug-file"].name).to.equal("archetype-debug-file");
-    expect(winstonLogger(winston).transports["archetype-debug-file"].filename).to.equal("archetype-debug.log");
-    expect(winstonLogger(winston).transports["archetype-debug-file"].level).to.equal("debug");
+    expect(logger.transports["archetype-debug-file"].name).to.equal("archetype-debug-file");
+    expect(logger.transports["archetype-debug-file"].filename).to.equal("archetype-debug.log");
+    expect(logger.transports["archetype-debug-file"].level).to.equal("debug");
   });
 });

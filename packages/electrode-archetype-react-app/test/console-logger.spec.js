@@ -6,7 +6,7 @@ const consoleLogger = require("../lib/console-logger");
 
 describe("#console-logger", function () {
   describe("#consoleLogger.error", function () {
-    var consoleErrorSpy;
+    let consoleErrorSpy;
 
     beforeEach(function () {
       consoleErrorSpy = sinon.spy(console, "error");
@@ -33,7 +33,7 @@ describe("#console-logger", function () {
   });
 
   describe("#consoleLogger.warn", function () {
-    var consoleWarnSpy;
+    let consoleWarnSpy;
 
     beforeEach(function () {
       consoleWarnSpy = sinon.spy(console, "warn");
@@ -60,7 +60,7 @@ describe("#console-logger", function () {
   });
 
   describe("#consoleLogger.log", function () {
-    var consoleLogSpy;
+    let consoleLogSpy;
 
     beforeEach(function () {
       consoleLogSpy = sinon.spy(console, "log");
