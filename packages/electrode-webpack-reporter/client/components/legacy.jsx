@@ -1,11 +1,10 @@
 import React, {PropTypes} from "react";
-
-const style = {
-  whiteSpace: "pre-wrap"
-};
+import styles from "../styles/base.css";
 
 const Legacy = (props) => (
-  <pre style={style} dangerouslySetInnerHTML={{__html: props.legacy}} />
+  <div className={styles.legacy}>
+    <pre dangerouslySetInnerHTML={{__html: props.legacy}} />
+  </div>
 );
 
 Legacy.propTypes = {
