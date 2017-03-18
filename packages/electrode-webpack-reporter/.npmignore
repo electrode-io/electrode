@@ -1,0 +1,15 @@
+.etmp
+.idea
+/test
+/node_modules
+/coverage
+/client
+/server
+/config
+/.babelrc
+/.eslintrc
+/gulpfile.js
+/.isomorphic-loader-config.json
+/.npmignore
+/.travis.yml
+

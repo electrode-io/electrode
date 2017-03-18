@@ -13,19 +13,20 @@
   "homepage": "http://www.electrode.io",
   "license": "Apache-2.0",
   "scripts": {
-    "test": "lerna bootstrap && lerna run test && gulp build-test",
+    "test": "lerna bootstrap --ignore=electrode-webpack-reporter && lerna run test --ignore=electrode-webpack-reporter && npm run test-reporter && gulp build-test",
     "test-generator": "gulp test-generator",
     "test-boilerplate": "gulp test-boilerplate",
     "bootstrap": "lerna bootstrap",
     "clean": "npm run nuke && npm run nuke-packages && npm run nuke-samples",
     "nuke": "rm -rf node_modules tmp lerna-debug.log npm-debug.log",
     "nuke-packages": "rm -rf packages/*/node_modules packages/*/coverage",
-    "nuke-samples": "rm -rf samples/*/node_modules samples/*/coverage samples/*/dist samples/*/.isomorphic-loader-config.json samples/*/.etmp"
+    "nuke-samples": "rm -rf samples/*/node_modules samples/*/coverage samples/*/dist samples/*/.isomorphic-loader-config.json samples/*/.etmp",
+    "test-reporter": "if lerna updated | grep electrode-webpack-reporter; then cd packages/electrode-webpack-reporter && npm install && npm test; fi"
   },
   "devDependencies": {
     "electrode-gulp-helper": "^1.0.5",
     "gulp": "^3.9.1",
-    "lerna": "2.0.0-beta.32",
+    "lerna": "2.0.0-beta.38",
     "lodash": "^4.17.2",
     "yeoman-test": "^1.6.0"
   },
