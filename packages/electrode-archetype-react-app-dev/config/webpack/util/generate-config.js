@@ -30,7 +30,7 @@ function generateConfig(options) {
     config = compose();
   }
 
-  logger.verbose(JSON.stringify(config));
+  logger.verbose("Final Webpack config", JSON.stringify(config, null, 2));
 
   return config;
 }

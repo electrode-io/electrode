@@ -8,6 +8,8 @@ const AppMode = archetype.AppMode;
 const context = Path.resolve(AppMode.src.client);
 const polyfill = archetype.webpack.enableBabelPolyfill;
 
+const logger = require("electrode-archetype-react-app/lib/logger");
+
 /*
  * Allow an application to opt in for *multiple* entry points and consequently for
  * multiple bundles in the app by placing `bundle.config.js` in application root
@@ -20,8 +22,9 @@ const polyfill = archetype.webpack.enableBabelPolyfill;
 function appEntry() {
   const entryPath = Path.join(context, "entry.config.js");
 
-  const entry = optionalRequire(entryPath,
-    "Entry point configuration is not found, using default entry point...");
+  const entry = optionalRequire(entryPath, {
+    notFound: () => logger.info(`Entry point configuration ${entryPath} is not found, using default entry point...`)
+  });
 
   return entry ||
     Fs.existsSync(Path.join(context, "app.js")) ? "./app.js" : "./app.jsx";

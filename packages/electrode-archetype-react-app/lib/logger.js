@@ -1,5 +1,5 @@
-const archetype = require("../config/archetype");
-const devRequire = archetype.devRequire;
+const optionalRequire = require("optional-require")(require);
+const devRequire = optionalRequire("electrode-archetype-react-app-dev/require");
 
 const winstonLogger = require("./winston-logger");
 
