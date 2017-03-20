@@ -1,6 +1,6 @@
 ---
 extends:
-  - "walmart/configurations/es6-react"
+  - "eslint-config-walmart/configurations/es6-react"
 globals:
   window: false
   ReactElement: false
