@@ -1,6 +1,6 @@
 ---
 extends:
-  - "eslint-config-defaults/configurations/walmart/es5-node"
+  - "walmart/configurations/es6-node"
 
 # Our subset of Node ES features.
 # Switch to `es6-node` config when ready for Node.js + ES specifically.
