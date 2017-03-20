@@ -14,9 +14,7 @@ const logger = require("electrode-archetype-react-app/lib/logger");
 
 module.exports = function (options) {
   const config = options.currentConfig;
-  logger.verbose("add-dll-references configurations", {
-    config
-  });
+  logger.verbose("add-dll-references configurations", JSON.stringify(config, null, 2));
 
   try {
     const exists = fs.existsSync(Path.resolve(archetype.AppMode.src.client, "dll.config.js"));
