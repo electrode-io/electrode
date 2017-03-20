@@ -46,7 +46,7 @@
     "electrode-electrify": "^1.0.0",
     "electrode-gulp-helper": "^1.0.5",
     "electrode-webpack-reporter": "^0.2.4",
-    "eslint": "^3.9.1",
+    "eslint": "^3.18.0",
     "eslint-config-walmart": "^1.1.0",
     "eslint-plugin-filenames": "^1.1.0",
     "eslint-plugin-react": "^6.5.0",
