@@ -1,11 +1,3 @@
 ---
 extends:
   - "eslint-config-walmart/configurations/es5-node"
-
-# Our subset of Node ES features.
-# Switch to `es6-node` config when ready for Node.js + ES specifically.
-# https://github.com/walmartlabs/eslint-config-defaults/issues/58
-ecmaFeatures:
-  blockBindings: true
-  arrowFunctions: true
-  templateStrings: true
