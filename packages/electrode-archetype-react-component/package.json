@@ -24,11 +24,12 @@
   "dependencies": {},
   "devDependencies": {
     "electrode-gulp-helper": "^1.0.4",
-    "eslint": "^1.10.1",
-    "eslint-config-defaults": "^9.0.0",
-    "eslint-plugin-filenames": "^0.1.2",
+    "eslint": "^3.18.0",
+    "eslint-config-walmart": "^1.1.0",
+    "eslint-plugin-filenames": "^1.1.0",
     "gulp": "^3.9.1",
     "opener": "^1.4.1",
+    "optional-require": "^1.0.0",
     "package-json-validator": "^0.6.1",
     "shelljs": "^0.7.0"
   },
