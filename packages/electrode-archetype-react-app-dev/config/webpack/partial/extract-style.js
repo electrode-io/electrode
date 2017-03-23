@@ -40,8 +40,9 @@ const cssModuleSupport = stylusExists && !cssNextExists;
 module.exports = function () {
   const cssModuleStylusSupport = archetype.webpack.cssModuleStylusSupport;
   const stylusQuery = cssLoader + "?-autoprefixer!" + stylusLoader;
-  const cssQuery = cssLoader + "?modules&localIdentName=[name]__[local]___[hash:base64:5]&-autoprefixer!" + postcssLoader;
-  const cssStylusQuery = cssLoader + "?modules&localIdentName=[name]__[local]___[hash:base64:5]&-autoprefixer!" + postcssLoader + "!" + stylusLoader;
+  const cssLoaderOptions = "?modules&localIdentName=[name]__[local]___[hash:base64:5]&-autoprefixer";
+  const cssQuery = cssLoader + cssLoaderOptions + "!" + postcssLoader;
+  const cssStylusQuery = cssLoader + cssLoaderOptions + "!" + postcssLoader + "!" + stylusLoader;
 
   // By default, this archetype assumes you are using CSS-Modules + CSS-Next
   const rules = [{
