@@ -1,4 +1,6 @@
-import modules from './modules'
+/* eslint-disable */
+import modules from "./modules";
+
 const init_state = {
   "info": {
     "hash": "14b489a06b63dbd1763a",
