@@ -6,14 +6,15 @@ const fileLoader = archDevRequire.resolve("file-loader");
 
 module.exports = () => (config) => mergeWebpackConfig(config, {
   module: {
-    loaders: [{
-      name: "woff",
-      test: /\.woff(2)?$/i,
-      loader: urlLoader + "?limit=10000&mimetype=application/font-woff"
-    }, {
-      name: "fonts",
-      test: /\.(ttf|eot)$/i,
-      loader: fileLoader
-    }]
+    rules: [
+      {
+        test: /\.woff(2)?$/i,
+        loader: urlLoader + "?limit=10000&mimetype=application/font-woff"
+      },
+      {
+        test: /\.(ttf|eot)$/i,
+        loader: fileLoader
+      }
+    ]
   }
 });

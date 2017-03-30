@@ -15,7 +15,7 @@ const stylusLoader = archDevRequire.resolve("stylus-relative-loader");
 const optionalRequire = require("optional-require")(require);
 const configPath = Path.resolve("archetype", "config.js");
 const config = optionalRequire(configPath);
-const cssModuleStylusSupport = config.cssModuleStylusSupport;
+const cssModuleStylusSupport = config && config.cssModuleStylusSupport;
 
 /**
  * [cssModuleSupport By default, this archetype assumes you are using CSS-Modules + CSS-Next]
@@ -48,7 +48,6 @@ if (stylusExists && !cssNextExists) {
 module.exports = () => config => {
   const loaders = [
     {
-      name: "css",
       test: /\.css$/,
       /* eslint-disable prefer-template */
       loader: styleLoader + "!" + cssLoader + cssModuleSupport
@@ -58,7 +57,6 @@ module.exports = () => config => {
 
   if (cssModuleStylusSupport) {
     loaders.push({
-      name: "stylus-modules",
       test: /\.styl$/,
       /* eslint-disable prefer-template */
       loader: styleLoader + "!" + cssLoader + "?modules!" + stylusLoader
@@ -66,7 +64,6 @@ module.exports = () => config => {
     });
   } else {
     loaders.push({
-      name: "stylus",
       test: /\.styl$/,
       /* eslint-disable prefer-template */
       loader: styleLoader + "!" + cssLoader + "!" + stylusLoader
@@ -75,6 +72,8 @@ module.exports = () => config => {
   }
 
   return mergeWebpackConfig(config, {
-    module: { loaders: loaders }
+    module: {
+      rules: loaders
+    }
   });
 };
