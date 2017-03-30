@@ -1,6 +1,6 @@
 "use strict";
 
-const archetype = require("electrode-archetype-react-app/config/archetype");
+const archetype = require("@kununu/electrode-archetype-react-app/config/archetype");
 const IsomorphicLoaderPlugin = require("isomorphic-loader/lib/webpack-plugin");
 
 module.exports = function (opts) {

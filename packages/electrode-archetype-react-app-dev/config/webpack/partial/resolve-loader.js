@@ -3,7 +3,7 @@
 const _ = require("lodash");
 const Path = require("path");
 const ModuleResolver = require("../plugins/module-resolver");
-const archetype = require("electrode-archetype-react-app/config/archetype");
+const archetype = require("@kununu/electrode-archetype-react-app/config/archetype");
 
 module.exports = {
   resolveLoader: {

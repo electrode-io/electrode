@@ -2,7 +2,7 @@
 
 const Fs = require("fs");
 const Path = require("path");
-const archetype = require("electrode-archetype-react-app/config/archetype");
+const archetype = require("@kununu/electrode-archetype-react-app/config/archetype");
 
 module.exports = function notifyBundleValid() {
   setTimeout(() => {

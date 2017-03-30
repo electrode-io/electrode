@@ -7,7 +7,7 @@ process.on("SIGINT", () => {
 
 const config = require("electrode-confippet").config;
 const staticPathsDecor = require("electrode-static-paths");
-const supports = require("electrode-archetype-react-app/supports");
+const supports = require("@kununu/electrode-archetype-react-app/supports");
 const statsUtils = require("../lib/stats-utils");
 
 /**

@@ -1,7 +1,7 @@
 "use strict";
 
 let appDir = process.cwd();
-const logger = require("electrode-archetype-react-app/lib/logger");
+const logger = require("@kununu/electrode-archetype-react-app/lib/logger");
 
 if (process.argv[2]) {
   appDir = process.argv[2];

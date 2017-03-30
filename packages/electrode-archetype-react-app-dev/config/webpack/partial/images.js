@@ -3,7 +3,7 @@
 const isomorphicLoader = require.resolve("isomorphic-loader");
 const optionalRequire = require("optional-require")(require);
 const _ = require("lodash");
-const logger = require("electrode-archetype-react-app/lib/logger");
+const logger = require("@kununu/electrode-archetype-react-app/lib/logger");
 
 function getCdnLoader(optLoader) {
   if (optLoader) {

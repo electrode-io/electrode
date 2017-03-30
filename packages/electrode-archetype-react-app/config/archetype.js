@@ -25,7 +25,7 @@ module.exports = {
 };
 
 function checkTopDevArchetype() {
-  const devArchName = "electrode-archetype-react-app-dev";
+  const devArchName = "@kununu/electrode-archetype-react-app-dev";
   const topPkg = require(Path.resolve("package.json"));
   // in case this is being used for test/dev in the -dev archetype
   if (topPkg.name === devArchName) {

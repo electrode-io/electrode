@@ -5,7 +5,7 @@ const WebpackConfigComposer = require("webpack-config-composer");
 const optionalRequire = require("optional-require")(require);
 const Path = require("path");
 const _ = require("lodash");
-const logger = require("electrode-archetype-react-app/lib/logger");
+const logger = require("@kununu/electrode-archetype-react-app/lib/logger");
 
 function generateConfig(options) {
   const composer = new WebpackConfigComposer();

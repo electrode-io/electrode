@@ -1,7 +1,7 @@
 "use strict";
 
 const notifyBundleValid = require("../util/notify-bundle-valid");
-const WebpackReporter = require("electrode-webpack-reporter");
+const WebpackReporter = require("@kununu/electrode-webpack-reporter");
 
 module.exports = function (options) {
   if (!process.env.HTML_WEBPACK_REPORTER_OFF) {

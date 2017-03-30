@@ -62,7 +62,7 @@ gulp hot # (OR) (which includes `server-test`)
 ```
 This will serve the static assets for test.html
 
-open [test.html]((http://localhost:3001/node_modules/electrode-archetype-react-app/config/browser_test/test.html)) to view test result.
+open [test.html]((http://localhost:3001/node_modules/@kununu/electrode-archetype-react-app/config/browser_test/test.html)) to view test result.
 
 #### How do I generate a manifest.json and a service-worker file?
 

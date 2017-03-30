@@ -1,6 +1,9 @@
 {
-  "name": "electrode-webpack-reporter",
-  "version": "0.2.4",
+  "name": "@kununu/electrode-webpack-reporter",
+  "version": "0.2.5-prerelease.1",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "A HTML based reporter for webpack dev server",
   "main": "lib/webpack-reporter.js",
   "scripts": {
@@ -20,8 +23,8 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "classnames": "^2.2.5",
-    "electrode-archetype-react-app": "^1.4.7",
-    "electrode-archetype-react-app-dev": "^1.4.7",
+    "@kununu/electrode-archetype-react-app": "^2.0.3-prerelease.2",
+    "@kununu/electrode-archetype-react-app-dev": "^2.0.3-prerelease.8",
     "electrode-electrify-react-component": "^4.4.13",
     "electrode-redux-router-engine": "^1.2.2",
     "electrode-server": "^1.1.1",

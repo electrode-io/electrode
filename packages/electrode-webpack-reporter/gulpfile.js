@@ -1,1 +1,1 @@
-require("electrode-archetype-react-app")();
+require("@kununu/electrode-archetype-react-app")();

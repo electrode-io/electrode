@@ -1,6 +1,6 @@
 "use strict";
 
-const archetype = require("electrode-archetype-react-app/config/archetype");
+const archetype = require("@kununu/electrode-archetype-react-app/config/archetype");
 const Path = require("path");
 const webpack = require("webpack");
 const glob = require("glob");

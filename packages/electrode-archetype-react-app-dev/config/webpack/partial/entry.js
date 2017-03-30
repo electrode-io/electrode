@@ -2,13 +2,13 @@
 const Fs = require("fs");
 const optionalRequire = require("optional-require")(require);
 const Path = require("path");
-const archetype = require("electrode-archetype-react-app/config/archetype");
+const archetype = require("@kununu/electrode-archetype-react-app/config/archetype");
 const AppMode = archetype.AppMode;
 
 const context = Path.resolve(AppMode.src.client);
 const polyfill = archetype.webpack.enableBabelPolyfill;
 
-const logger = require("electrode-archetype-react-app/lib/logger");
+const logger = require("@kununu/electrode-archetype-react-app/lib/logger");
 
 /*
  * Allow an application to opt in for *multiple* entry points and consequently for

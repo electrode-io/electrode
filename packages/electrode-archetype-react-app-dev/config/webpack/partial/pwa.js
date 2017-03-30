@@ -1,6 +1,6 @@
 "use strict";
 
-const archetype = require("electrode-archetype-react-app/config/archetype");
+const archetype = require("@kununu/electrode-archetype-react-app/config/archetype");
 const Path = require("path");
 const AppMode = archetype.AppMode;
 
@@ -16,7 +16,7 @@ const optionalRequire = require("optional-require")(require);
 const swConfigPath = Path.resolve("config", "sw-config.js");
 const serverConfigPath = Path.resolve("config", "default.json");
 const mkdirp = require("mkdirp");
-const logger = require("electrode-archetype-react-app/lib/logger");
+const logger = require("@kununu/electrode-archetype-react-app/lib/logger");
 
 /**
  * Takes a file path and returns a webpack-compatible

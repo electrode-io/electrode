@@ -9,7 +9,7 @@ const devDir = Path.join(__dirname, "..");
 const devRequire = require(`../require`);
 const configDir = `${devDir}/config`;
 
-const utils = require("electrode-archetype-react-app/lib/utils");
+const utils = require("@kununu/electrode-archetype-react-app/lib/utils");
 
 module.exports = {
   devDir,

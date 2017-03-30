@@ -8,9 +8,9 @@
 const fs = require("fs");
 const glob = require("glob");
 const webpack = require("webpack");
-const archetype = require("electrode-archetype-react-app/config/archetype");
+const archetype = require("@kununu/electrode-archetype-react-app/config/archetype");
 const Path = require("path");
-const logger = require("electrode-archetype-react-app/lib/logger");
+const logger = require("@kununu/electrode-archetype-react-app/lib/logger");
 
 module.exports = function (options) {
   const config = options.currentConfig;

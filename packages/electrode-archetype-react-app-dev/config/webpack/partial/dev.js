@@ -2,7 +2,7 @@
 
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const webpack = require("webpack");
-const archetype = require("electrode-archetype-react-app/config/archetype");
+const archetype = require("@kununu/electrode-archetype-react-app/config/archetype");
 const webpackDevReporter = require("../util/webpack-dev-reporter");
 
 module.exports = function () {

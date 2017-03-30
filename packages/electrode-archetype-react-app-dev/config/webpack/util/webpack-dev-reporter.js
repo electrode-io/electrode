@@ -7,7 +7,7 @@ function webpackDevReporter(reporterOptions) {
   const state = reporterOptions.state;
   const stats = reporterOptions.stats;
   const options = reporterOptions.options;
-  const logger = require("electrode-archetype-react-app/lib/logger");
+  const logger = require("@kununu/electrode-archetype-react-app/lib/logger");
 
   if (state) {
     let displayStats = (!options.quiet && options.stats !== false);

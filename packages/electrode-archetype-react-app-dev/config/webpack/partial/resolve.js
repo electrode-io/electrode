@@ -1,6 +1,6 @@
 "use strict";
 
-const archetype = require("electrode-archetype-react-app/config/archetype");
+const archetype = require("@kununu/electrode-archetype-react-app/config/archetype");
 const AppMode = archetype.AppMode;
 const Path = require("path");
 const ModuleResolver = require("../plugins/module-resolver");
