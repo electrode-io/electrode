@@ -40,8 +40,9 @@ const cssModuleSupport = stylusExists && !cssNextExists;
 module.exports = function () {
   const cssModuleStylusSupport = archetype.webpack.cssModuleStylusSupport;
   const stylusQuery = cssLoader + "?-autoprefixer!" + stylusLoader;
-  const cssQuery = cssLoader + "?modules&-autoprefixer!" + postcssLoader;
-  const cssStylusQuery = cssLoader + "?modules&-autoprefixer!" + postcssLoader + "!" + stylusLoader;
+  const cssLoaderOptions = "?modules&localIdentName=[name]__[local]___[hash:base64:5]&-autoprefixer";
+  const cssQuery = cssLoader + cssLoaderOptions + "!" + postcssLoader;
+  const cssStylusQuery = cssLoader + cssLoaderOptions + "!" + postcssLoader + "!" + stylusLoader;
 
   // By default, this archetype assumes you are using CSS-Modules + CSS-Next
   const rules = [{
@@ -92,6 +93,7 @@ module.exports = function () {
       new CSSSplitPlugin({ size: 4000, imports: true, preserve: true }),
       new webpack.LoaderOptionsPlugin({
         options: {
+          context: Path.resolve(process.cwd(), "client"),
           postcss: () => {
             return cssModuleSupport ? [atImport, cssnext({
               browsers: ["last 2 versions", "ie >= 9", "> 5%"]
