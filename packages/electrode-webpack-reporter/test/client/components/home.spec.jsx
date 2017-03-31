@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Home from "client/components/home";
-import {createStore} from "redux";
-import rootReducer from "../../../client/reducers";
-import initialState from "../../init-state.js";
+import { createStore } from "redux";
+import rootReducer from "../../../src/client/reducers";
+import initialState from "../init-state";
 
 describe("Home", function () {
   let component;
@@ -24,7 +24,7 @@ describe("Home", function () {
     const store = createStore(rootReducer, initialState);
 
     component = ReactDOM.render(
-      <Home store={store}/>,
+      <Home store={store} />,
       container
     );
 
