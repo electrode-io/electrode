@@ -1,62 +1,27 @@
-/*globals __dirname:false */
 "use strict";
 
-var path = require("path");
+var baseProfile = require("./profile.base");
+var generateConfig = require("./util/generate-config");
+var Path = require("path");
 
-var archDevRequire = require("electrode-archetype-react-component-dev/require");
-var webpack = archDevRequire("webpack");
-var _ = archDevRequire("lodash");
-var base = require("./webpack.config");
-
-module.exports = {
-  devServer: {
-    port: process.env.WEBPACK_DEVSERVER_PORT || "4000",
-    contentBase: path.join(__dirname, "../../demo-server"),
-    noInfo: false,
-    historyApiFallback: true
-  },
-  output: {
-    path: process.cwd(),
-    filename: "bundle.dev.js",
-    publicPath: "/js/"
-  },
-  cache: true,
-  devtool: "source-map",
-  entry: {
-    app: [path.join(__dirname, "../../demo-server/app.js")]
-  },
-  stats: {
-    colors: true,
-    reasons: true
-  },
-  resolve: _.merge({}, base.resolve, {
-    alias: {
-      // Allow root import of `src/FOO` from ROOT/src.
-      src: path.join(process.cwd(), "src"),
-      "local-component-demo": path.join(process.cwd() + "/demo/demo.jsx"),
-      // By default, this archetype assumes you are using CSS-Modules + CSS-Next
-      "local-demo-css": path.join(process.cwd() + "/demo/demo")
+function makeConfig() {
+  const devProfile = {
+    partials: {
+      "_define": { order: 10100 },
+      "_dev": { order: 10200 }
     }
-  }),
-  resolveLoader: base.resolveLoader,
-  module: base.module,
-  plugins: [
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.DefinePlugin({
-      "process.env": {
-        "ELECTRODE_LOCALE": JSON.stringify(process.env.ELECTRODE_LOCALE || "en"),
-        "ELECTRODE_TENANT": JSON.stringify(process.env.ELECTRODE_TENANT || "walmart")
-      }
-    }),
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        postcss: base.postcss,
-        stylus: {
-          define: {
-            $tenant: process.env.ELECTRODE_TENANT || "walmart"
-          }
-        }
-      }
-    })
-  ]
+  };
+
+  const options = {
+    profiles: {
+      "_base": baseProfile,
+      "_dev": devProfile
+    },
+    profileNames: ["_base", "_dev"],
+    configFilename: Path.basename(__filename)
+  };
+
+  return generateConfig(options);
 };
+
+module.exports = makeConfig();

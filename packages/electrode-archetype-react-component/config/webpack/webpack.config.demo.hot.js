@@ -1,30 +1,33 @@
 "use strict";
 
-var archDevRequire = require("electrode-archetype-react-component-dev/require");
-var webpack = archDevRequire("webpack");
-var _ = archDevRequire("lodash");
+const baseProfile = require("./profile.base");
+const generateConfig = require("./util/generate-config");
+const Path = require("path");
 
-var base = require("./webpack.config.demo.dev");
+function makeConfig() {
+  const hotProfile = {
+    partials: {
+      "_define": { order: 10100 },
+      "_dev": { order: 10200 },
+      "_hot": { order: 10300 },
+      "_babel": {
+        options: {
+           HotModuleReload: true
+         }
+      }
+    }
+  };
 
-// Update our own module version.
-var mod = _.cloneDeep(base.module);
-// First loader needs react hot.
-mod.rules[0].loader = ["react-hot-loader"].concat(mod.rules[0].loader);
-base.devServer.hot = true;
+  const options = {
+    profiles: {
+      "_base": baseProfile,
+      "_hot": hotProfile
+    },
+    profileNames: ["_base", "_hot"],
+    configFilename: Path.basename(__filename)
+  };
 
-module.exports = _.merge({}, _.omit(base, "entry", "module"), {
-  entry: {
-    app: [
-      "webpack-dev-server/client?http://0.0.0.0:" +
-        (process.env.WEBPACK_DEVSERVER_PORT || "4000"), // WebpackDevServer host and port
-      "webpack/hot/only-dev-server",
-      "./demo/demo.jsx"
-    ].concat(base.entry.app)
-  },
+  return generateConfig(options);
+};
 
-  module: mod,
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
-  ].concat(base.plugins)
-});
+module.exports = makeConfig();

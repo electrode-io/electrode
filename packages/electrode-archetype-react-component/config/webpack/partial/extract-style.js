@@ -4,13 +4,13 @@ const Path = require("path");
 const glob = require("glob");
 
 const archDevRequire = require("electrode-archetype-react-component-dev/require");
-const mergeWebpackConfig = archDevRequire("webpack-partial").default;
 const atImport = archDevRequire("postcss-import");
 const cssnext = archDevRequire("postcss-cssnext");
 const styleLoader = archDevRequire.resolve("style-loader");
 const cssLoader = archDevRequire.resolve("css-loader");
 const postcssLoader = archDevRequire.resolve("postcss-loader");
 const stylusLoader = archDevRequire.resolve("stylus-relative-loader");
+const webpack = archDevRequire("webpack");
 
 const optionalRequire = require("optional-require")(require);
 const configPath = Path.resolve("archetype", "config.js");
@@ -45,7 +45,7 @@ if (stylusExists && !cssNextExists) {
   /* eslint-enable no-console */
 }
 
-module.exports = () => config => {
+module.exports = function(){
   const loaders = [
     {
       test: /\.css$/,
@@ -71,9 +71,20 @@ module.exports = () => config => {
     });
   }
 
-  return mergeWebpackConfig(config, {
+  return {
     module: {
       rules: loaders
-    }
-  });
+    },
+    plugins: [
+      new webpack.LoaderOptionsPlugin({
+        options: {
+          stylus: {
+            define: {
+              $tenant: process.env.ELECTRODE_TENANT || "walmart"
+            }
+          }
+        }
+      })
+    ]
+  }
 };
