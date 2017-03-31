@@ -1,11 +1,11 @@
 import React from "react";
 // import {Router, browserHistory} from "react-router";
 import Routes from "./routes";
-import {render, unmountComponentAtNode} from "react-dom";
+import { render, unmountComponentAtNode } from "react-dom";
 import "./styles/base.css";
 import injectTapEventPlugin from "react-tap-event-plugin";
-import {createStore} from "redux";
-import {Provider} from "react-redux";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
 import rootReducer from "./reducers";
 
 //
@@ -20,7 +20,7 @@ window.webappStart = () => {
   const headers = new Headers(); // eslint-disable-line no-undef
   headers.append("Content-Type", "application/json");
   headers.append("Accept", "application/json");
-  fetch(new Request("/reporter", { // eslint-disable-line no-undef
+  fetch(new Request("/reporter_data", { // eslint-disable-line no-undef
     method: "GET",
     headers
   })).then((response) => {

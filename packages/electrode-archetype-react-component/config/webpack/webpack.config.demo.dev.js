@@ -6,8 +6,6 @@ var path = require("path");
 var archDevRequire = require("electrode-archetype-react-component-dev/require");
 var webpack = archDevRequire("webpack");
 var _ = archDevRequire("lodash");
-
-
 var base = require("./webpack.config");
 
 module.exports = {
@@ -42,18 +40,22 @@ module.exports = {
   }),
   resolveLoader: base.resolveLoader,
   module: base.module,
-  stylus: {
-    define: {
-      $tenant: process.env.ELECTRODE_TENANT || "walmart"
-    }
-  },
-  postcss: base.postcss,
   plugins: [
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
       "process.env": {
         "ELECTRODE_LOCALE": JSON.stringify(process.env.ELECTRODE_LOCALE || "en"),
         "ELECTRODE_TENANT": JSON.stringify(process.env.ELECTRODE_TENANT || "walmart")
+      }
+    }),
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: base.postcss,
+        stylus: {
+          define: {
+            $tenant: process.env.ELECTRODE_TENANT || "walmart"
+          }
+        }
       }
     })
   ]

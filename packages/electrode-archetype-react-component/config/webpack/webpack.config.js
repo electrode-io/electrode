@@ -3,14 +3,13 @@ const path = require("path");
 
 const archDevRequire = require("electrode-archetype-react-component-dev/require");
 const _ = archDevRequire("lodash");
-
+const webpack = archDevRequire("webpack");
 
 const babelConfig = require("./partial/babel.js");
 const stylesConfig = require("./partial/styles.js");
 const defineConfig = require("./partial/define.js");
 const fontsConfig = require("./partial/fonts");
 const imageConfig = require("./partial/images.js");
-const jsonConfig = require("./partial/json.js");
 const optimizeConfig = require("./partial/optimize.js");
 const sourceMapsConfig = require("./partial/sourcemaps.js");
 
@@ -25,20 +24,33 @@ const archetypeDevNodeModules = path.join(
 
 const baseConfiguration = {
   cache: true,
-  debug: false,
   entry: path.join(process.cwd(), "src/index.js"),
   output: {
     path: path.join(process.cwd(), "dist"),
     filename: "bundle.min.js",
     libraryTarget: "umd"
   },
+  plugins: [
+   new webpack.LoaderOptionsPlugin({
+     debug: false
+   })
+  ],
   resolve: {
-    root: [archetypeNodeModules, archetypeDevNodeModules, process.cwd()],
-    modulesDirectories: ["node_modules"],
-    extensions: ["", ".js", ".jsx"]
+    modules: [
+      archetypeNodeModules,
+      archetypeDevNodeModules,
+      "node_modules",
+      process.cwd()
+    ],
+    extensions: [".js", ".jsx"]
   },
   resolveLoader: {
-    root: [archetypeNodeModules, archetypeDevNodeModules, process.cwd()]
+    modules: [
+      archetypeNodeModules,
+      archetypeDevNodeModules,
+      "node_modules",
+      process.cwd()
+    ]
   }
 };
 
@@ -48,7 +60,6 @@ const createConfig = _.flowRight(
   defineConfig(),
   fontsConfig(),
   imageConfig(),
-  jsonConfig(),
   optimizeConfig(),
   sourceMapsConfig()
 );

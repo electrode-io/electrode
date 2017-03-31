@@ -2,7 +2,7 @@
 There are few guidelines that we need contributors to follow so that we can have a chance of keeping on top of things.
 
 ## Getting Started
-This repo uses Lerna(https://lernajs.io/) as a top level setup, which is a tool that optimizes the workflow around managing multi-package repositories with git and npm.
+This repo uses Lerna (https://lernajs.io/) as a top level setup, which is a tool that optimizes the workflow around managing multi-package repositories with git and npm.
 
 * Make sure you have installed gulp-cli
 
@@ -10,7 +10,7 @@ This repo uses Lerna(https://lernajs.io/) as a top level setup, which is a tool 
 $ npm install -g gulp-cli
 ````
 
-* Make sure you have forked the desired repo(https://github.com/electrode-io/electrode.git) for developing and testing your code changes.
+* Make sure you have forked the desired repo (https://github.com/electrode-io/electrode.git) for developing and testing your code changes.
 
 ````
 $ git clone https://github.com/electrode-io/electrode.git

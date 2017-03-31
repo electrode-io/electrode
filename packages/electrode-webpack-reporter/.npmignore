@@ -3,8 +3,9 @@
 /test
 /node_modules
 /coverage
-/client
-/server
+/src
+/lib/client
+/lib/server
 /config
 /.babelrc
 /.eslintrc
@@ -12,4 +13,3 @@
 /.isomorphic-loader-config.json
 /.npmignore
 /.travis.yml
-

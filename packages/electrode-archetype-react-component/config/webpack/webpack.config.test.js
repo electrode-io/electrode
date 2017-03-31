@@ -54,7 +54,7 @@ module.exports = {
       src: path.join(process.cwd(), "src"),
       sinon: sinonPkg
     },
-    modulesDirectories: [
+    modules: [
       "node_modules",
       _archNodeModules("electrode-archetype-react-component"),
       _archNodeModules("electrode-archetype-react-component-dev")

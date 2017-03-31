@@ -6,13 +6,14 @@ const babelLoader = archDevRequire.resolve("babel-loader");
 
 module.exports = (babel) => (config) => mergeWebpackConfig(config, {
   module: {
-    loaders: [{
-      name: "babel",
-      test: /\.jsx?$/,
-      exclude: /node_modules/,
-      loader: babelLoader,
-      // The babel-loader treats queries as babel config. E.g. `{ "presets": ["react"] }`
-      query: babel
-    }]
+    rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: babelLoader,
+        // The babel-loader treats queries as babel config. E.g. `{ "presets": ["react"] }`
+        query: babel
+      }
+    ]
   }
 });

@@ -245,8 +245,9 @@ function makeTasks(gulp) {
   };
 
   const makeBabelRc = (destDir, rcFile) => {
-    const fn = Path.resolve(destDir, ".babelrc");
-    if (!Fs.existsSync(fn)) {
+    destDir = Path.resolve(destDir);
+    const fn = Path.join(destDir, ".babelrc");
+    if (Fs.existsSync(destDir) && !Fs.existsSync(fn)) {
       logger.info(`Generating ${fn} for you - please commit it.`);
       const rc = JSON.stringify({
         extends: `${Path.join(archetype.devPkg.name, "config", "babel", rcFile)}`
@@ -377,6 +378,14 @@ Individual .babelrc files were generated for you in src/client and src/server
       task: mkCmd(`babel`,
         `--source-maps=inline --copy-files --out-dir ${AppMode.lib.server}`,
         `${AppMode.src.server}`)
+    },
+
+    ".build.test.client.babelrc": () => {
+      return AppMode.isSrc && makeBabelRc("test/client", "babelrc-client");
+    },
+
+    ".build.test.server.babelrc": () => {
+      return AppMode.isSrc && makeBabelRc("test/server", "babelrc-server");
     },
 
     "check": ["lint", "test-cov"],
@@ -526,7 +535,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     "test-watch-all": [["wds.test", "test-frontend-dev-watch"]],
 
     "test-ci": ["test-frontend-ci"],
-    "test-cov": ["test-frontend-cov", "test-server-cov"],
+    "test-cov": [".build.test.client.babelrc", ".build.test.server.babelrc", "test-frontend-cov", "test-server-cov"],
     "test-dev": ["test-frontend-dev", "test-server-dev"],
 
     "test-watch": () => exec(`pgrep -fl "webpack-dev-server.*${archetype.webpack.testPort}"`)
