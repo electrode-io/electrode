@@ -10,9 +10,10 @@ const Path = require("path");
 function makeConfig() {
   const devProfile = {
     partials: {
-      "_define": { order: 10100 },
-      "_dev": { order: 10200 },
-      "_sourcemaps-remote": { order: 10300 }
+      "_uglify": {order: 10100},
+      "_define": {order: 10200},
+      "_sourcemaps-remote": {order: 10300},
+      "_fail": {order: 10400}
     }
   };
 
@@ -25,7 +26,9 @@ function makeConfig() {
     configFilename: Path.basename(__filename)
   };
 
-  return generateConfig(options);
+  let config = generateConfig(options);
+  config.output.filename = config.output.filename.replace(/\.min\.js$/, ".js");
+  return config;
 }
 
 module.exports = makeConfig();
