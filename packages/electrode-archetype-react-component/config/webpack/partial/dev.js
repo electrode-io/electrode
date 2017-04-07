@@ -6,7 +6,6 @@ var webpack = archDevRequire("webpack");
 
 module.exports = function(){
   return {
-    cache: true,
     devtool: "source-map",
     entry: {
       app: [Path.join(__dirname, "../../../demo-server/app.js")]
@@ -36,13 +35,7 @@ module.exports = function(){
       }
     },
     plugins: [
-      new webpack.NoEmitOnErrorsPlugin(),
-      new webpack.DefinePlugin({
-        "process.env": {
-          "ELECTRODE_LOCALE": JSON.stringify(process.env.ELECTRODE_LOCALE || "en"),
-          "ELECTRODE_TENANT": JSON.stringify(process.env.ELECTRODE_TENANT || "walmart")
-        }
-      })
+      new webpack.NoEmitOnErrorsPlugin()
     ]
   }
 };

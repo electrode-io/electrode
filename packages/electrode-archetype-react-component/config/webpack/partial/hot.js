@@ -24,11 +24,7 @@ module.exports = function() {
       hot: true
     },
     plugins: [
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoEmitOnErrorsPlugin(),
-      new webpack.LoaderOptionsPlugin({
-        debug: false
-      })
+      new webpack.HotModuleReplacementPlugin()
     ]
   };
 };
