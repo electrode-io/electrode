@@ -5,7 +5,7 @@ process.on("SIGINT", () => {
 });
 
 const SSRCaching = require("electrode-react-ssr-caching");
-const support = require("electrode-archetype-react-app/support");
+const support = require("kununu-electrode-archetype-react-app/support");
 const electrodeConfippet = require("electrode-confippet");
 const electrodeServer = require("electrode-server");
 const staticPathsDecor = require("electrode-static-paths");

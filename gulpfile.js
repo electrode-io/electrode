@@ -15,8 +15,8 @@ if (!process.env.PACKAGES_DIR) {
 
 const pullLocalPackages = (dir) => {
   dir = path.resolve(dir);
-  const localPkgs = ["electrode-archetype-react-app", "electrode-react-webapp", "electrode-redux-router-engine", "electrode-auto-ssr"];
-  const localDevPkgs = ["electrode-archetype-react-app-dev"];
+  const localPkgs = ["kununu-electrode-archetype-react-app", "electrode-react-webapp", "electrode-redux-router-engine", "electrode-auto-ssr"];
+  const localDevPkgs = ["kununu-electrode-archetype-react-app-dev"];
   const localPackagesDir = path.relative(dir, process.env.PACKAGES_DIR);
 
   const updateToLocalPkgs = (pkgSection, pkgs) => {

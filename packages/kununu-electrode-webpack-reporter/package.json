@@ -1,0 +1,41 @@
+{
+  "name": "kununu-electrode-webpack-reporter",
+  "version": "0.2.5-prerelease.1",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "A HTML based reporter for webpack dev server",
+  "main": "lib/webpack-reporter.js",
+  "scripts": {
+    "test": "gulp check",
+    "prepublish": "gulp build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electrode-io/kununu-electrode-webpack-reporter.git"
+  },
+  "keywords": [
+    "electrode",
+    "webpack",
+    "reporter"
+  ],
+  "author": "Joel Chen <xchen@walmartlabs.com>",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "kununu-electrode-archetype-react-app": "../kununu-electrode-archetype-react-app",
+    "kununu-electrode-archetype-react-app-dev": "../kununu-electrode-archetype-react-app-dev",
+    "classnames": "^2.2.5",
+    "electrode-electrify-react-component": "^4.4.13",
+    "electrode-react-webapp": "../electrode-react-webapp",
+    "electrode-redux-router-engine": "^1.2.2",
+    "electrode-server": "^1.1.1",
+    "electrode-static-paths": "^1.0.0",
+    "material-design-icons": "^3.0.1",
+    "material-ui": "^0.17.0",
+    "react-tap-event-plugin": "^2.0.1"
+  },
+  "dependencies": {
+    "ansi-to-html": "^0.6.0",
+    "chalk": "^1.1.3"
+  }
+}

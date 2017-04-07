@@ -8,7 +8,7 @@ process.on("SIGINT", () => {
 
 const electrodeConfippet = require("electrode-confippet");
 <% if (isHapi) { %>const staticPathsDecor = require("electrode-static-paths");<% } %>
-const support = require("electrode-archetype-react-app/support");
+const support = require("kununu-electrode-archetype-react-app/support");
 
 require.extensions[".css"] = () => {
   return;
