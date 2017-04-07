@@ -19,7 +19,7 @@
       "module": "./{{env.APP_SRC_DIR}}server/plugins/update-storage"
     },
     "webapp": {
-      "module": "electrode-react-webapp/lib/hapi",
+      "module": "kununu-electrode-react-webapp/lib/hapi",
       "options": {
         "pageTitle": "Electrode Boilerplate Universal React App",
         "paths": {

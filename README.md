@@ -36,7 +36,7 @@ This repo uses [Lerna] to manage multiple related packages that are part of the 
 
 ## App Archetype
 
-[electrode-archetype-react-app] is a NPM module that provides for common patterns across all app projects so that each app project can standardize on common development behavior and patterns. Its essentially pre-made patterns for build scripts.  It also requires a companion module [electrode-archetype-react-app-dev] that's meant for your app's `devDependencies`.
+[electrode-archetype-react-app] is a NPM module that provides for common patterns across all app projects so that each app project can standardize on common development behavior and patterns. Its essentially pre-made patterns for build scripts.  It also requires a companion module [kununu-electrode-archetype-react-app-dev] that's meant for your app's `devDependencies`.
 
 ## Yeoman Generator
 
@@ -76,8 +76,8 @@ Built with :heart: by [Team Electrode] @WalmartLabs.
 [Announcement Blog]: https://medium.com/walmartlabs/introducing-electrode-an-open-source-release-from-walmartlabs-14b836135319#.pwbddxg1z
 [material-ui]: http://www.material-ui.com
 [Lerna]: https://lernajs.io/
-[electrode-archetype-react-app]: packages/electrode-archetype-react-app
-[electrode-archetype-react-app-dev]: packages/electrode-archetype-react-app-dev
+[electrode-archetype-react-app]: packages/kununu-electrode-archetype-react-app
+[electrode-archetype-react-app-dev]: packages/kununu-electrode-archetype-react-app-dev
 [generator-electrode]: packages/generator-electrode
 [travis-image]: https://travis-ci.org/electrode-io/electrode.svg?branch=master
 [travis-url]: https://travis-ci.org/electrode-io/electrode

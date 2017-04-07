@@ -1,4 +1,0 @@
---require @kununu/electrode-archetype-react-app-dev/config/mocha/setup.js
---reporter spec
---recursive
---ui bdd

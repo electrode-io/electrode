@@ -24,7 +24,7 @@ module.exports = {
     },<%} if(isAutoSsr){%>
     "electrode-auto-ssr": {}, <%}%>
     "webapp": {
-      "module": <%if(serverType==="HapiJS"){%>"electrode-react-webapp/lib/hapi"<%}else if (serverType==="ExpressJS"){%>"electrode-react-webapp/lib/express"<%} else {%>"electrode-react-webapp/lib/koa"<%}%>,
+      "module": <%if(serverType==="HapiJS"){%>"kununu-electrode-react-webapp/lib/hapi"<%}else if (serverType==="ExpressJS"){%>"kununu-electrode-react-webapp/lib/express"<%} else {%>"kununu-electrode-react-webapp/lib/koa"<%}%>,
       "options": {
         "pageTitle": "<%= projectName %>",
         "paths": {

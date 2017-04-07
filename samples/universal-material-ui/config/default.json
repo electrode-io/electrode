@@ -10,7 +10,7 @@
       }
     },
     "webapp": {
-      "module": "electrode-react-webapp/lib/hapi",
+      "module": "kununu-electrode-react-webapp/lib/hapi",
       "options": {
         "pageTitle": "Electrode React Sample App with material-ui",
         "paths": {

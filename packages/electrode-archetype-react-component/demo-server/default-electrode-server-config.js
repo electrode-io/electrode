@@ -14,7 +14,7 @@ module.exports = {
     }
   },
   "plugins": {
-    "@walmart/electrode-react-webapp": {
+    "@walmart/kununu-electrode-react-webapp": {
       options: {
         pageTitle: "Demo",
         paths: {
