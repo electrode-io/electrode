@@ -22,7 +22,7 @@
   "author": "Joel Chen <xchen@walmartlabs.com>",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@kununu/electrode-archetype-react-app": "^2.0.3-prerelease.2",
+    "@kununu/electrode-archetype-react-app": "^2.0.3-prerelease.3",
     "@kununu/electrode-archetype-react-app-dev": "^2.0.3-prerelease.8",
     "classnames": "^2.2.5",
     "electrode-electrify-react-component": "^4.4.13",

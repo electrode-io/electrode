@@ -19,7 +19,7 @@
     "lint": "eslint \"**/**/*.js\""
   },
   "peerDependencies": {
-    "@kununu/electrode-archetype-react-app": "^2.0.3-prerelease.2"
+    "@kununu/electrode-archetype-react-app": "^2.0.3-prerelease.3"
   },
   "dependencies": {
     "@kununu/electrode-webpack-reporter": "^0.2.5-prerelease.1",
