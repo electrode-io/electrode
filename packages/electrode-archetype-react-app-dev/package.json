@@ -112,7 +112,7 @@
     "electrode-archetype-opt-react": "^0.1.0"
   },
   "devDependencies": {
-    "@kununu/electrode-archetype-react-app": "../@kununu/electrode-archetype-react-app"
+    "@kununu/electrode-archetype-react-app": "../electrode-archetype-react-app"
   },
   "engines": {
     "node": "^4.4.6 || ^6.2.1 || ^7.x.x",
