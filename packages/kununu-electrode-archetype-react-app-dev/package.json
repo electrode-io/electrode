@@ -22,7 +22,7 @@
     "kununu-electrode-archetype-react-app": "^2.0.3-prerelease.3"
   },
   "dependencies": {
-    "kununu-electrode-webpack-reporter": "^0.2.4",
+    "kununu-electrode-webpack-reporter": "0.2.5-prerelease.2",
     "autoprefixer-stylus": "^0.9.1",
     "babel-cli": "^6.4.5",
     "babel-core": "^6.4.0",
