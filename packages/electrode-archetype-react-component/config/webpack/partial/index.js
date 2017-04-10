@@ -18,20 +18,13 @@ const orders = [
   "_extract-style",
   "_fonts",
   "_images",
-  "_isomorphic",
-  "_pwa",
-  "_stats",
   "_uglify",
-  "_locales",
   "_define",
   "_sourcemaps-remote",
   "_fail",
   "_coverage",
   "_dev",
-  "_hot",
-  "_html-reporter",
-  "_simple-progress",
-  "_sourcemaps-inline"
+  "_hot"
 ];
 
 const files = Fs.readdirSync(__dirname).filter((x) => x !== "index.js").map((x) => x.substr(0, x.length - 3));
