@@ -60,6 +60,9 @@ module.exports = generators.Base.extend({
     if (this.options && this.options.isExtended) {
       this.isExtended = true;
     }
+    if (this.options && this.options.githubUrl) {
+      this.githubUrl = this.options.githubUrl;
+    }
   },
 
   initializing: function () {
