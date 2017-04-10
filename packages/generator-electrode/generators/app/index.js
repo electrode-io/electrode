@@ -60,6 +60,9 @@ module.exports = generators.Base.extend({
     if (this.options && this.options.isExtended) {
       this.isExtended = true;
     }
+    if (this.options && this.options.serverType) {
+      this.serverType = this.options.serverType;
+    }
     if (this.options && this.options.githubUrl) {
       this.githubUrl = this.options.githubUrl;
     }
@@ -96,8 +99,8 @@ module.exports = generators.Base.extend({
       this.props.authorEmail = info.email;
       this.props.authorUrl = info.url;
     }
-    if (this.isExtended) {
-      this.props.serverType = HapiJS;
+    if (this.serverType) {
+      this.props.serverType = this.serverType || HapiJS;
     }
   },
 
