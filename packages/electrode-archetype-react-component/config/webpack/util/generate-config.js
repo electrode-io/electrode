@@ -12,14 +12,16 @@ function generateConfig(options) {
   composer.addPartials(partialConfig.partials);
 
   const customConfig = optionalRequire(Path.resolve(options.configFilename)) ||
-  optionalRequire(Path.resolve("archetype/config/webpack", options.configFilename));
+    optionalRequire(Path.resolve("archetype/config/webpack", options.configFilename));
   const keepCustomProps = options.keepCustomProps;
-  const compose = () => composer.compose({keepCustomProps}, options.profileNames);
+  const compose = () => composer.compose({
+    keepCustomProps
+  }, options.profileNames);
 
   let config;
 
-  if(customConfig) {
-    if(_.isFunction(customConfig)) {
+  if (customConfig) {
+    if (_.isFunction(customConfig)) {
       config = customConfig(composer, options, compose);
     } else {
       config = _.merge(compose(), customConfig);
@@ -28,7 +30,7 @@ function generateConfig(options) {
     config = compose();
   }
 
-  if(process.env.DUMP_WEBPACK_CONFIG) {
+  if (process.env.DUMP_WEBPACK_CONFIG) {
     console.log(JSON.stringify(config, null, 2));
   }
 

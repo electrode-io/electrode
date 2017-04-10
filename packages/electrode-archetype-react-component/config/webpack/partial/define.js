@@ -4,7 +4,7 @@ const archDevRequire = require("electrode-archetype-react-component-dev/require"
 const webpack = archDevRequire("webpack");
 const DefinePlugin = webpack.DefinePlugin;
 
-module.exports = function () {
+module.exports = function() {
   return {
     plugins: [
       new DefinePlugin({

@@ -38,10 +38,12 @@ const files = Fs.readdirSync(__dirname).filter((x) => x !== "index.js").map((x) 
 
 module.exports = {
   orders,
-  partials: files.reduce( (a,p) => {
+  partials: files.reduce((a, p) => {
     const k = `_${p}`;
     assert(orders.indexOf(k) >= 0, `No default order specified for partial ${p}`);
-    a[k] = { config: () => require(`./${p}`) };
+    a[k] = {
+      config: () => require(`./${p}`)
+    };
     return a;
   }, {})
 };

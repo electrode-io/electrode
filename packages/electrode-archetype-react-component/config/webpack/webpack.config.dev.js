@@ -10,10 +10,18 @@ const Path = require("path");
 function makeConfig() {
   const devProfile = {
     partials: {
-      "_uglify": {order: 10100},
-      "_define": {order: 10200},
-      "_sourcemaps-remote": {order: 10300},
-      "_fail": {order: 10400}
+      "_uglify": {
+        order: 10100
+      },
+      "_define": {
+        order: 10200
+      },
+      "_sourcemaps-remote": {
+        order: 10300
+      },
+      "_fail": {
+        order: 10400
+      }
     }
   };
 

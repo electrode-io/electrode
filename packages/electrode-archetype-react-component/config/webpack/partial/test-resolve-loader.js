@@ -2,7 +2,7 @@
 
 var prodCfg = require("../webpack.config");
 
-module.exports = function(){
+module.exports = function() {
   return {
     resolveLoader: prodCfg.resolveLoader
   };

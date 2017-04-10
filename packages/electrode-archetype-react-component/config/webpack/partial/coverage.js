@@ -2,7 +2,7 @@
 
 var ispartaLoader = archDevRequire.resolve("isparta-loader");
 
-module.exports = function(){
+module.exports = function() {
   return {
     module: {
       rules: [{

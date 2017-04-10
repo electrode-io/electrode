@@ -3,7 +3,7 @@
 const archDevRequire = require("electrode-archetype-react-component-dev/require");
 const SourceMapDevToolPlugin = archDevRequire("webpack").SourceMapDevToolPlugin;
 
-module.exports = function(){
+module.exports = function() {
   const url = () => "[url]";
 
   return {

@@ -2,7 +2,7 @@
 
 const Path = require("path");
 
-module.exports = function(){
+module.exports = function() {
   var karmaEntry = require.resolve("electrode-archetype-react-component/config/karma/entry");
 
   return {

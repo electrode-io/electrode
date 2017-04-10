@@ -4,7 +4,7 @@ var Path = require("path");
 var archDevRequire = require("electrode-archetype-react-component-dev/require");
 var webpack = archDevRequire("webpack");
 
-module.exports = function(){
+module.exports = function() {
   return {
     devtool: "source-map",
     entry: {

@@ -6,10 +6,10 @@ var archDevRequire = require("electrode-archetype-react-component-dev/require");
 var sinonPkg = archDevRequire.resolve("sinon/pkg/sinon");
 var _ = archDevRequire("lodash");
 
-module.exports = function(){
+module.exports = function() {
   // Get Paths to give node_modules by resolving based on assumed presence of
   // `package.json`.
-  var _archNodeModules = function (arch) {
+  var _archNodeModules = function(arch) {
     var archDir = Path.dirname(require.resolve(Path.join(arch, "package.json")));
     return Path.join(archDir, "node_modules");
   };

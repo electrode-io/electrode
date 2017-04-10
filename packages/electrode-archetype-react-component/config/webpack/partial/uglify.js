@@ -4,7 +4,7 @@ const archDevRequire = require("electrode-archetype-react-component-dev/require"
 const optimize = archDevRequire("webpack").optimize;
 const LodashModuleReplacementPlugin = archDevRequire("lodash-webpack-plugin");
 
-module.exports = function(){
+module.exports = function() {
   return {
     plugins: [
       new LodashModuleReplacementPlugin(),

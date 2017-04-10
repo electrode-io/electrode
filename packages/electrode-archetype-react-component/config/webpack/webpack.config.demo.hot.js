@@ -7,13 +7,19 @@ const Path = require("path");
 function makeConfig() {
   const hotProfile = {
     partials: {
-      "_define": { order: 10100 },
-      "_dev": { order: 10200 },
-      "_hot": { order: 10300 },
+      "_define": {
+        order: 10100
+      },
+      "_dev": {
+        order: 10200
+      },
+      "_hot": {
+        order: 10300
+      },
       "_babel": {
         options: {
-           HotModuleReload: true
-         }
+          HotModuleReload: true
+        }
       }
     }
   };

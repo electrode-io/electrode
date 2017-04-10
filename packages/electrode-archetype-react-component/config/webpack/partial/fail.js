@@ -2,7 +2,7 @@
 
 const FailPlugin = require("../plugins/fail-plugin");
 
-module.exports = function () {
+module.exports = function() {
   return {
     plugins: [
       new FailPlugin()

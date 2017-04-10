@@ -14,7 +14,9 @@ var generateConfig = require("./util/generate-config");
 function makeConfig() {
   const browserCoverageProfile = {
     partials: {
-      "_coverage": { order: 10100 }
+      "_coverage": {
+        order: 10100
+      }
     }
   };
 

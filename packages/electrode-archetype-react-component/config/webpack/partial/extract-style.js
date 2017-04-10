@@ -45,15 +45,13 @@ if (stylusExists && !cssNextExists) {
   /* eslint-enable no-console */
 }
 
-module.exports = function(){
-  const loaders = [
-    {
-      test: /\.css$/,
-      /* eslint-disable prefer-template */
-      loader: styleLoader + "!" + cssLoader + cssModuleSupport
-      /* eslint-enable prefer-template */
-    }
-  ];
+module.exports = function() {
+  const loaders = [{
+    test: /\.css$/,
+    /* eslint-disable prefer-template */
+    loader: styleLoader + "!" + cssLoader + cssModuleSupport
+    /* eslint-enable prefer-template */
+  }];
 
   if (cssModuleStylusSupport) {
     loaders.push({

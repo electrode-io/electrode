@@ -15,13 +15,13 @@ var prodCfg = require("../webpack.config");
  * Added fix for "gulp check" on Windows
  */
 if (process.platform === "win32") {
-    prodCfg.module.noParse = [
-        /node_modules\\sinon\\/
-    ];
+  prodCfg.module.noParse = [
+    /node_modules\\sinon\\/
+  ];
 } else {
-    prodCfg.module.noParse = [
-        /node_modules\/sinon\//
-    ];
+  prodCfg.module.noParse = [
+    /node_modules\/sinon\//
+  ];
 }
 
 module.exports = {
