@@ -60,10 +60,7 @@ module.exports = generators.Base.extend({
 
     //overwrite with given repo path if present
     if (this.options.githubUrl) {
-      let repoPath = this.options.githubUrl;
-      repoPath += this.options.githubAccount ? '/' + this.options.githubAccount : '';
-      repoPath += '/' + this.options.name;
-      this.pkg.repository.url = repoPath;
+      this.pkg.repository.url = [this.options.githubUrl, this.options.githubAccount, this.options.name].filter((x) => x).join("/");
     }
     this.fs.writeJSON(this.destinationPath('package.json'), this.pkg);
   },

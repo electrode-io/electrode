@@ -34,11 +34,18 @@ module.exports = generators.Base.extend({
         globOptions: {
           ignore: [
             isHapi ? '**/server/plugins/webapp/express-middleware.js' : '**/server/plugins/webapp/hapi-plugin.js',
-            '**/server/plugins/pwa.js'
+            '**/server/plugins/pwa.js', '**/server/views/index-view.js'
           ]
         }
       }
     );
+
+    if (!this.fs.exists(this.destinationPath('src/server/views/index-view.jsx'))) {
+      this.fs.copy(
+        this.templatePath('src/server/views/index-view.js'),
+        this.destinationPath(this.options.generateInto, 'src/server/views/index-view.jsx')
+      );
+    }
 
     if (this.options.pwa) {
       this.fs.copy(
