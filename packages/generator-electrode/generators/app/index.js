@@ -14,11 +14,11 @@ var githubUsername = require('github-username');
 const ExpressJS = 'ExpressJS';
 const HapiJS = 'HapiJS';
 const KoaJS = 'KoaJS';
+var isExtended = false;
 
 module.exports = generators.Base.extend({
   constructor: function () {
     generators.Base.apply(this, arguments);
-
     this.option('travis', {
       type: Boolean,
       required: false,
@@ -240,7 +240,7 @@ module.exports = generators.Base.extend({
     if (isHapi) {
       ignoreArray.push('**/src/server/express-server.js');
       ignoreArray.push('**/src/server/koa-server.js');
-    } else if (isExpress)  {
+    } else if (isExpress) {
       ignoreArray.push('**/src/server/koa-server.js');
     } else {
       ignoreArray.push('**/src/server/express-server.js');
@@ -254,7 +254,7 @@ module.exports = generators.Base.extend({
     this.fs.copyTpl(
       this.templatePath(_pkg),
       this.destinationPath(_pkg),
-      {isHapi, isExpress, isPWA, isAutoSSR}
+      { isHapi, isExpress, isPWA, isAutoSSR }
     );
 
     var defaultPkg = this.fs.readJSON(this.destinationPath(_pkg));
@@ -316,7 +316,7 @@ module.exports = generators.Base.extend({
     this.fs.copyTpl(
       this.templatePath('src/server'),
       this.destinationPath('src/server'),
-      {isHapi, isExpress},
+      { isHapi, isExpress },
       {},
       {
         globOptions: {
@@ -328,7 +328,7 @@ module.exports = generators.Base.extend({
     this.fs.copyTpl(
       this.templatePath('src/client'),
       this.destinationPath('src/client'),
-      {pwa: isPWA},
+      { pwa: isPWA },
       {}, // template options
       { // copy options
         globOptions: {
@@ -369,8 +369,8 @@ module.exports = generators.Base.extend({
         githubAccount: this.props.githubAccount
       }
     }, {
-      local: require.resolve('../git')
-    });
+        local: require.resolve('../git')
+      });
 
     if (this.options.license && !this.pkg.license) {
       this.composeWith('license', {
@@ -380,8 +380,8 @@ module.exports = generators.Base.extend({
           website: this.props.authorUrl
         }
       }, {
-        local: require.resolve('generator-license/app')
-      });
+          local: require.resolve('generator-license/app')
+        });
     }
 
     if (!this.fs.exists(this.destinationPath('README.md'))) {
@@ -395,8 +395,8 @@ module.exports = generators.Base.extend({
           content: this.options.readme
         }
       }, {
-        local: require.resolve('../readme')
-      });
+          local: require.resolve('../readme')
+        });
     }
 
     if (!this.fs.exists(this.destinationPath('config/default.js'))) {
@@ -408,8 +408,8 @@ module.exports = generators.Base.extend({
           isAutoSsr: this.props.autoSsr
         }
       }, {
-        local: require.resolve('../config')
-      });
+          local: require.resolve('../config')
+        });
     }
 
     if (!this.fs.exists(this.destinationPath('server/plugins/webapp'))) {
@@ -419,15 +419,17 @@ module.exports = generators.Base.extend({
           isAutoSsr: this.props.autoSsr
         }
       }, {
-        local: require.resolve('../webapp')
-      });
+          local: require.resolve('../webapp')
+        });
     }
   },
 
   install: function () {
-    this.installDependencies({
-      bower: false
-    });
+    if (!isExtended) {
+      this.installDependencies({
+        bower: false
+      });
+    }
   },
 
   end: function () {
