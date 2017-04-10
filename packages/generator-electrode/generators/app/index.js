@@ -14,7 +14,6 @@ var githubUsername = require('github-username');
 const ExpressJS = 'ExpressJS';
 const HapiJS = 'HapiJS';
 const KoaJS = 'KoaJS';
-var isExtended = false;
 
 module.exports = generators.Base.extend({
   constructor: function () {
@@ -57,6 +56,10 @@ module.exports = generators.Base.extend({
       required: false,
       desc: 'Content to insert in the README.md file'
     });
+    //Flag to check if the OSS generator is being called as a subgenerator
+    if (this.options && this.options.isExtended) {
+      this.isExtended = true;
+    }
   },
 
   initializing: function () {
@@ -89,6 +92,9 @@ module.exports = generators.Base.extend({
       this.props.authorName = info.name;
       this.props.authorEmail = info.email;
       this.props.authorUrl = info.url;
+    }
+    if (this.isExtended) {
+      this.props.serverType = HapiJS;
     }
   },
 
@@ -425,7 +431,7 @@ module.exports = generators.Base.extend({
   },
 
   install: function () {
-    if (!isExtended) {
+    if (!this.isExtended) {
       this.installDependencies({
         bower: false
       });
