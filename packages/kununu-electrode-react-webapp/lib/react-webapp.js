@@ -118,6 +118,7 @@ function makeRouteHandler(routeOptions, userContent) {
   const chunkSelector = routeOptions.__internals.chunkSelector;
   const iconStats = getIconStats(routeOptions.iconStats);
   const criticalCSS = getCriticalCSS(routeOptions.criticalCSS);
+  const fontPath = routeOptions.fontPath;
 
   /* Create a route handler */
   /* eslint max-statements: [2, 22] */
@@ -187,7 +188,9 @@ function makeRouteHandler(routeOptions, userContent) {
       const cssLink = css && !criticalCSS
         ? `<link rel="stylesheet" href="${css}" />`
         : "";
-      return `${manifestLink}${cssLink}`;
+      const font = fontPath ? `<link rel="stylesheet" href="${fontPath}" />` : "";
+
+      return `${manifestLink}${cssLink}${font}`;
     };
 
     const makeBodyBundles = () => {
