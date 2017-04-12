@@ -1,6 +1,6 @@
 {
   "name": "electrode-redux-router-engine",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "description": "Handle async data for React Server Side Rendering using Redux and Router",
   "main": "lib/redux-router-engine.js",
   "scripts": {
@@ -25,12 +25,12 @@
   "author": "Joel Chen <xchen@walmartlabs.com>",
   "license": "Apache-2.0",
   "devDependencies": {
-    "electrode-archetype-njs-module-dev": "^1.0.1",
     "babel-cli": "^6.1.1",
     "babel-preset-es2015": "^6.0.15",
     "babel-preset-react": "^6.0.15",
     "babel-preset-stage-0": "^6.0.15",
     "babel-register": "^6.5.2",
+    "electrode-archetype-njs-module-dev": "^1.0.1",
     "react": "^15.3.1 || ^0.14.8",
     "react-dom": "^15.3.1 || ^0.14.8"
   },
@@ -44,6 +44,6 @@
   },
   "peerDependencies": {
     "react": "^15.3.1 || ^0.14.8",
-    "react-dom": "^15.3.1 || ^0.14.8"    
+    "react-dom": "^15.3.1 || ^0.14.8"
   }
 }

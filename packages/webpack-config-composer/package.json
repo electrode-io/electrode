@@ -1,6 +1,6 @@
 {
   "name": "webpack-config-composer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Flexible webpack config partials composing",
   "homepage": "http://www.electrode.io",
   "main": "lib/index.js",

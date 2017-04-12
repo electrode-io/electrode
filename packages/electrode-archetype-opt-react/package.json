@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-opt-react",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Electrode NodeJS/React Optional Archetype - react",
   "main": "index.js",
   "homepage": "http://www.electrode.io",
@@ -19,6 +19,5 @@
     "react": "^15.0.0 || ^0.14.0",
     "react-dom": "^15.0.0 || ^0.14.0"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
