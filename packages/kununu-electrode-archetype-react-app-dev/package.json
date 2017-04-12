@@ -1,6 +1,6 @@
 {
   "name": "kununu-electrode-archetype-react-app-dev",
-  "version": "2.0.3-prerelease.9",
+  "version": "2.0.3-prerelease.11",
   "description": "Electrode NodeJS/React Application Archetype (Development)",
   "homepage": "http://www.electrode.io",
   "publishConfig": {
@@ -22,7 +22,6 @@
     "kununu-electrode-archetype-react-app": "^2.0.3-prerelease.3"
   },
   "dependencies": {
-    "kununu-electrode-webpack-reporter": "0.2.5-prerelease.2",
     "autoprefixer-stylus": "^0.9.1",
     "babel-cli": "^6.4.5",
     "babel-core": "^6.4.0",
@@ -71,6 +70,8 @@
     "jest-serializer-enzyme": "^1.0.0",
     "json-loader": "^0.5.3",
     "jsonfile": "^2.2.2",
+    "kununu-electrode-webpack-reporter": "0.2.5-prerelease.2",
+    "kununu-webpack-config-composer": "^1.0.1",
     "loader-utils": "^0.2.14",
     "lodash": "^4.13.1",
     "mkdirp": "^0.5.1",
@@ -101,7 +102,6 @@
     "url-loader": "^0.5.6",
     "web-app-manifest-loader": "^0.1.1",
     "webpack": "^2.2.0",
-    "webpack-config-composer": "^1.0.0",
     "webpack-dev-server": "^2.2.0",
     "webpack-disk-plugin": "0.0.2",
     "webpack-stats-plugin": "^0.1.1",

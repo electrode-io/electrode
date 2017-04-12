@@ -1,7 +1,7 @@
 "use strict";
 
 const partialConfigs = require("../partial");
-const WebpackConfigComposer = require("webpack-config-composer");
+const WebpackConfigComposer = require("kununu-webpack-config-composer");
 const optionalRequire = require("optional-require")(require);
 const Path = require("path");
 const _ = require("lodash");
