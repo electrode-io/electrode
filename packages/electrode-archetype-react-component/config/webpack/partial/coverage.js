@@ -7,7 +7,7 @@ module.exports = function() {
     module: {
       rules: [{
         test: /src\/.*\.jsx?$/,
-        enforce: "pre"
+        enforce: "pre",
         exclude: /(test|node_modules)\//,
         loader: ispartaLoader
       }]
