@@ -6,19 +6,8 @@
     "electrodeStaticPaths": {
       "enable": true,
       "options": {
+        "routePrefix": "/dist",
         "pathPrefix": "dist"
-      }
-    },
-    "electrode-react-webapp/lib/hapi": {
-      "options": {
-        "serverSideRendering": false,
-        "paths": {
-          "/{args*}": {
-            "content": {
-              "module": "./{{env.APP_SRC_DIR}}/server/views/index-view"
-            }
-          }
-        }
       }
     }
   }

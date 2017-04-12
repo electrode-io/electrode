@@ -8,6 +8,7 @@ const fs = require("fs");
 const Path = require("path");
 const statsUtils = require("./stats-utils");
 const http = require("http");
+const RoutePaths = require("./route-paths");
 
 function removeCwd(s) {
   const cwd = process.cwd();
@@ -17,15 +18,24 @@ function removeCwd(s) {
   return s;
 }
 
-const reporterStats = require("../dist/server/stats.json");
+const optionalRequire = require("optional-require")(require);
+const reporterStats = optionalRequire("../dist/server/stats.json");
 
 class WebpackReporter extends EventEmitter {
-  constructor() {
+  constructor(options) {
     super();
-    const distJs = Path.join(__dirname, "../dist/js", reporterStats.assetsByChunkName.main[0]);
-    const distCss = Path.join(__dirname, "../dist/js", reporterStats.assetsByChunkName.main[1]);
-    this._reporterHtml = fs.readFileSync(Path.resolve(Path.join(__dirname, "reporter.html"))).toString()
-      .replace("{{CSS}}", removeCwd(distCss)).replace("{{JS}}", removeCwd(distJs));
+
+    this.options = options || {};
+
+    if (reporterStats) {
+      const distJs = Path.join(__dirname, "../dist/js", reporterStats.assetsByChunkName.main[0]);
+      const distCss = Path.join(__dirname, "../dist/js", reporterStats.assetsByChunkName.main[1]);
+      this._reporterHtml = fs.readFileSync(Path.resolve(Path.join(__dirname, "reporter.html"))).toString()
+        .replace("{{CSS}}", removeCwd(distCss)).replace("{{JS}}", removeCwd(distJs));
+    } else if (!options.skipReportRoutes) {
+      throw new Error("webpack-reporter unable to setup routes");
+    }
+
     this._socketIO = null;
   }
 
@@ -57,16 +67,20 @@ class WebpackReporter extends EventEmitter {
   }
 
   _setup(app) {
-    app.get("/reporter", this._webReport.bind(this));
-    app.get("/reporter_data", this._data.bind(this));
-    app.get("/reporter_stats", this._stats.bind(this));
+    if (!this.options.skipReportRoutes) {
+      app.get(RoutePaths.BASE, this._webReport.bind(this));
+    }
+    app.get(RoutePaths.DATA, this._data.bind(this));
+    app.get(RoutePaths.STATS, this._stats.bind(this));
 
-    const server = new http.Server(app);
-    const io = require('socket.io')(server);
-    server.listen(5000);
-    io.on("connection", (socket) => {
-      this._socketIO = socket;
-    });
+    if (!this.options.skipSocket) {
+      const server = new http.Server(app);
+      const io = require('socket.io')(server);
+      server.listen(this.options.socketPort || 5000);
+      io.on("connection", (socket) => {
+        this._socketIO = socket;
+      });
+    }
   }
 
   _stats(req, res) {
@@ -74,11 +88,7 @@ class WebpackReporter extends EventEmitter {
       return this._reporterOptions.stats.toJson({}, true);
     };
 
-    res.format({
-      json: () => {
-        res.json(jsonData());
-      }
-    });
+    res.json(jsonData());
   }
 
   _data(req, res) {
@@ -86,40 +96,24 @@ class WebpackReporter extends EventEmitter {
       return this._reporterOptions.stats.toJson({}, true);
     };
 
-    res.format({
-      json: () => {
-        const stats = jsonData();
-        const byPkg = statsUtils.getModulesByPkg(stats);
+    const stats = jsonData();
+    const byPkg = statsUtils.getModulesByPkg(stats);
 
-        const data = {
-          info: statsUtils.getInfo(stats),
-          assets: statsUtils.getAssets(stats),
-          modulesByPkg: byPkg.modulesByPkg,
-          totalSizeByPkg: byPkg.totalSize,
-          warnings: statsUtils.getWarningsHtml(stats),
-          errors: statsUtils.getErrorsHtml(stats),
-          legacy: statsUtils.jsonToHtml(stats, true),
-          modules: stats.chunks[0].modules
-        };
-        res.json(data);
-      },
-
-      default: () => {
-        res.status(404).send("Not found");
-      }
-    });
+    const data = {
+      info: statsUtils.getInfo(stats),
+      assets: statsUtils.getAssets(stats),
+      modulesByPkg: byPkg.modulesByPkg,
+      totalSizeByPkg: byPkg.totalSize,
+      warnings: statsUtils.getWarningsHtml(stats),
+      errors: statsUtils.getErrorsHtml(stats),
+      legacy: statsUtils.jsonToHtml(stats, true),
+      modules: stats.chunks[0].modules
+    };
+    res.json(data);
   }
 
   _webReport(req, res) {
-    res.format({
-      html: () => {
-        res.status(200).send(this._reporterHtml);
-      },
-
-      default: () => {
-        res.status(404).send("Not found");
-      }
-    });
+    res.send(this._reporterHtml);
   }
 }
 

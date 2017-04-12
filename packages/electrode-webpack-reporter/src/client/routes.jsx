@@ -4,13 +4,14 @@ import { Router, Route, browserHistory, IndexRoute } from "react-router";
 import Home from "./components/home";
 import Report from "./components/report";
 import Legacy from "./components/legacy";
+import RoutePaths from "../../lib/route-paths";
 
 const Routes = (props) => (
   <Router history={browserHistory}>
-    <Route path="/reporter" component={Home}>
+    <Route path={RoutePaths.BASE} component={Home}>
       <IndexRoute component={() => (<Report webpackInfo={props} />)} />
-      <Route path="/reporter/report" component={() => (<Report webpackInfo={props} />)} />
-      <Route path="/reporter/legacy" component={() => (<Legacy legacy={props.legacy} />)} />
+      <Route path={RoutePaths.REPORT} component={() => (<Report webpackInfo={props} />)} />
+      <Route path={RoutePaths.LEGACY} component={() => (<Legacy legacy={props.legacy} />)} />
     </Route>
   </Router>);
 
