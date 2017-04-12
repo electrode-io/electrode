@@ -1,15 +1,42 @@
 "use strict";
 
-var archDevRequire = require("electrode-archetype-react-component-dev/require");
-var webpack = archDevRequire("webpack");
+/**
+ * Webpack dev configuration
+ */
+const baseProfile = require("./profile.base");
+const generateConfig = require("./util/generate-config");
+const Path = require("path");
 
-var config = require("./webpack.config");
+function makeConfig() {
+  const devProfile = {
+    partials: {
+      "_uglify": {
+        order: 10100
+      },
+      "_define": {
+        order: 10200
+      },
+      "_sourcemaps-remote": {
+        order: 10300
+      },
+      "_fail": {
+        order: 10400
+      }
+    }
+  };
 
-config.output.filename = config.output.filename.replace(/\.min\.js$/, ".js");
+  const options = {
+    profiles: {
+      _base: baseProfile,
+      _dev: devProfile
+    },
+    profileNames: ["_base", "_dev"],
+    configFilename: Path.basename(__filename)
+  };
 
-config.plugins = [
-  new webpack.SourceMapDevToolPlugin("[file].map")
-];
+  let config = generateConfig(options);
+  config.output.filename = config.output.filename.replace(/\.min\.js$/, ".js");
+  return config;
+}
 
-// Export mutated base.
-module.exports = config;
+module.exports = makeConfig();

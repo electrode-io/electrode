@@ -1,67 +1,37 @@
 "use strict";
-const path = require("path");
 
-const archDevRequire = require("electrode-archetype-react-component-dev/require");
-const _ = archDevRequire("lodash");
-const webpack = archDevRequire("webpack");
+const baseProfile = require("./profile.base");
+const generateConfig = require("./util/generate-config");
+const Path = require("path");
 
-const babelConfig = require("./partial/babel.js");
-const stylesConfig = require("./partial/styles.js");
-const defineConfig = require("./partial/define.js");
-const fontsConfig = require("./partial/fonts");
-const imageConfig = require("./partial/images.js");
-const optimizeConfig = require("./partial/optimize.js");
-const sourceMapsConfig = require("./partial/sourcemaps.js");
+function makeConfig() {
+  const productionProfile = {
+    partials: {
+      "_uglify": {
+        order: 10100
+      },
+      "_define": {
+        order: 10200
+      },
+      "_sourcemaps-remote": {
+        order: 10300
+      },
+      "_fail": {
+        order: 10400
+      }
+    }
+  };
 
-const archetypeNodeModules = path.join(__dirname, "../../", "node_modules");
-const archetypeDevNodeModules = path.join(
-  // A normal `require.resolve` looks at `package.json:main`. We instead want
-  // just the _directory_ of the module. So use heuristic of finding dir of
-  // package.json which **must** exist at a predictable location.
-  path.dirname(require.resolve("electrode-archetype-react-component-dev/package.json")),
-  "node_modules"
-);
+  const options = {
+    profiles: {
+      _base: baseProfile,
+      _production: productionProfile
+    },
+    profileNames: ["_base", "_production"],
+    configFilename: Path.basename(__filename)
+  };
 
-const baseConfiguration = {
-  cache: true,
-  entry: path.join(process.cwd(), "src/index.js"),
-  output: {
-    path: path.join(process.cwd(), "dist"),
-    filename: "bundle.min.js",
-    libraryTarget: "umd"
-  },
-  plugins: [
-   new webpack.LoaderOptionsPlugin({
-     debug: false
-   })
-  ],
-  resolve: {
-    modules: [
-      archetypeNodeModules,
-      archetypeDevNodeModules,
-      "node_modules",
-      process.cwd()
-    ],
-    extensions: [".js", ".jsx"]
-  },
-  resolveLoader: {
-    modules: [
-      archetypeNodeModules,
-      archetypeDevNodeModules,
-      "node_modules",
-      process.cwd()
-    ]
-  }
+  return generateConfig(options);
 };
 
-const createConfig = _.flowRight(
-  babelConfig(),
-  stylesConfig(),
-  defineConfig(),
-  fontsConfig(),
-  imageConfig(),
-  optimizeConfig(),
-  sourceMapsConfig()
-);
-
-module.exports = createConfig(baseConfiguration);
+module.exports = makeConfig();

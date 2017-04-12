@@ -1,14 +1,12 @@
 "use strict";
 
 const archDevRequire = require("electrode-archetype-react-component-dev/require");
-const mergeWebpackConfig = archDevRequire("webpack-partial").default;
 const SourceMapDevToolPlugin = archDevRequire("webpack").SourceMapDevToolPlugin;
 
-module.exports = () => (config) => {
-  // TODO: Generate real URLs using SOURCE_MAP_URL.
+module.exports = function() {
   const url = () => "[url]";
 
-  return mergeWebpackConfig(config, {
+  return {
     plugins: [
       new SourceMapDevToolPlugin({
         test: /\.(css|js)($|\?)/,
@@ -18,5 +16,5 @@ module.exports = () => (config) => {
         columns: true
       })
     ]
-  });
+  }
 };
