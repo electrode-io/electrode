@@ -58,7 +58,8 @@ class WebpackReporter extends EventEmitter {
 
   _setup(app) {
     app.get("/reporter", this._webReport.bind(this));
-    app.get("/reporter/stats", this._stats.bind(this));
+    app.get("/reporter_data", this._data.bind(this));
+    app.get("/reporter_stats", this._stats.bind(this));
 
     const server = new http.Server(app);
     const io = require('socket.io')(server);
@@ -80,16 +81,12 @@ class WebpackReporter extends EventEmitter {
     });
   }
 
-  _webReport(req, res) {
+  _data(req, res) {
     const jsonData = () => {
       return this._reporterOptions.stats.toJson({}, true);
     };
 
     res.format({
-      html: () => {
-        res.status(200).send(this._reporterHtml);
-      },
-
       json: () => {
         const stats = jsonData();
         const byPkg = statsUtils.getModulesByPkg(stats);
@@ -105,6 +102,18 @@ class WebpackReporter extends EventEmitter {
           modules: stats.chunks[0].modules
         };
         res.json(data);
+      },
+
+      default: () => {
+        res.status(404).send("Not found");
+      }
+    });
+  }
+
+  _webReport(req, res) {
+    res.format({
+      html: () => {
+        res.status(200).send(this._reporterHtml);
       },
 
       default: () => {

@@ -13,3 +13,4 @@
 /.isomorphic-loader-config.json
 /.npmignore
 /.travis.yml
+*.log
