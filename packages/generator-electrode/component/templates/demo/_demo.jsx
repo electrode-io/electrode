@@ -20,7 +20,7 @@ const components = [
     examples: [
       {
         type: "playground",
-        code: require("raw!./examples/<%= projectName %>.example"),
+        code: require("raw-loader!./examples/<%= projectName %>.example"),
         noRender: true
       }
     ]
