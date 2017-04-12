@@ -57,15 +57,9 @@ module.exports = generators.Base.extend({
       desc: 'Content to insert in the README.md file'
     });
     //Flag to check if the OSS generator is being called as a subgenerator
-    if (this.options && this.options.isExtended) {
-      this.isExtended = true;
-    }
-    if (this.options && this.options.serverType) {
-      this.serverType = this.options.serverType;
-    }
-    if (this.options && this.options.githubUrl) {
-      this.githubUrl = this.options.githubUrl;
-    }
+    this.isExtended = this.options.isExtended || false;
+    this.serverType = this.options.serverType || HapiJS;
+    this.githubUrl = this.options.githubUrl || "";
   },
 
   initializing: function () {
@@ -99,9 +93,8 @@ module.exports = generators.Base.extend({
       this.props.authorEmail = info.email;
       this.props.authorUrl = info.url;
     }
-    if (this.serverType) {
-      this.props.serverType = this.serverType || HapiJS;
-    }
+    this.props.serverType = this.serverType || HapiJS;
+    this.props.githubUrl = this.githubUrl;
   },
 
   prompting: {
@@ -378,7 +371,8 @@ module.exports = generators.Base.extend({
     this.composeWith('electrode:git', {
       options: {
         name: this.props.name,
-        githubAccount: this.props.githubAccount
+        githubAccount: this.props.githubAccount,
+        githubUrl: this.props.githubUrl
       }
     }, {
         local: require.resolve('../git')

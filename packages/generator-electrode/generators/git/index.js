@@ -18,9 +18,7 @@ module.exports = generators.Base.extend({
       desc: 'GitHub username or organization'
     });
     // Set a gitHub uRL if being passed
-    if (this.githubUrl) {
-      this.git = this.githubUrl;
-    }
+    this.githubUrl = this.options.githubUrl || "";
   },
 
   initializing: function () {
