@@ -16,7 +16,7 @@
     "test": "lerna bootstrap --ignore=electrode-webpack-reporter && lerna run test --ignore=electrode-webpack-reporter && npm run test-reporter && gulp build-test",
     "test-generator": "gulp test-generator",
     "test-boilerplate": "gulp test-boilerplate",
-    "bootstrap": "lerna bootstrap",
+    "bootstrap": "lerna bootstrap --ignore=electrode-webpack-reporter",
     "clean": "npm run nuke && npm run nuke-packages && npm run nuke-samples",
     "nuke": "rm -rf node_modules tmp lerna-debug.log npm-debug.log",
     "nuke-packages": "rm -rf packages/*/node_modules packages/*/coverage",
@@ -26,7 +26,7 @@
   "devDependencies": {
     "electrode-gulp-helper": "^1.0.5",
     "gulp": "^3.9.1",
-    "lerna": "2.0.0-beta.38",
+    "lerna": "^2.0.0-rc.1",
     "lodash": "^4.17.2",
     "yeoman-test": "^1.6.0"
   },
