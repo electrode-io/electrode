@@ -32,17 +32,20 @@ module.exports = generators.Base.extend({
 
   writing: function () {
     let routeMatch = (this.options.serverType === 'HapiJS') ? "/{args*}" : "*";
-    this.fs.copyTpl(
-      this.templatePath('default.js'),
-      this.destinationPath('config/default.js'),
-      {
-        projectName: this.options.name,
-        routeValue: routeMatch,
-        pwa: this.options.pwa,
-        serverType: this.options.serverType,
-        isAutoSsr: this.options.autoSsr
-      }
-    );
+    //do not overwrite if file already exists
+    if (!this.fs.exists(this.destinationPath('config/default.js'))) {
+      this.fs.copyTpl(
+        this.templatePath('default.js'),
+        this.destinationPath('config/default.js'),
+        {
+          projectName: this.options.name,
+          routeValue: routeMatch,
+          pwa: this.options.pwa,
+          serverType: this.options.serverType,
+          isAutoSsr: this.options.autoSsr
+        }
+      );
+    }
 
     if (this.options.pwa) {
       this.fs.copyTpl(

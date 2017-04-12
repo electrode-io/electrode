@@ -17,6 +17,8 @@ module.exports = generators.Base.extend({
       required: true,
       desc: 'GitHub username or organization'
     });
+    // Set a gitHub uRL if being passed
+    this.githubUrl = this.options.githubUrl || "";
   },
 
   initializing: function () {
@@ -54,6 +56,10 @@ module.exports = generators.Base.extend({
       this.pkg.repository.url = repository;
     }
 
+    //overwrite with given repo path if present
+    if (this.options.githubUrl) {
+      this.pkg.repository.url = [this.options.githubUrl, this.options.githubAccount, this.options.name].filter((x) => x).join("/");
+    }
     this.fs.writeJSON(this.destinationPath('package.json'), this.pkg);
   },
 
@@ -62,11 +68,16 @@ module.exports = generators.Base.extend({
       cwd: this.destinationPath()
     });
 
-    if (!this.originUrl) {
+    // prioritize given repo URL if present
+    if (this.options.githubUrl) {
+      this.spawnCommandSync('git', ['remote', 'add', 'origin', this.pkg.repository.url], {
+        cwd: this.destinationPath()
+      });
+    } else if (!this.originUrl) {
       var repoSSH = this.pkg.repository;
       var url = this.pkg.repository && this.pkg.repository.url;
       if (url && url.indexOf('.git') === -1) {
-        repoSSH = 'git@github.com:' + this.pkg.repository + '.git';
+        repoSSH = 'git@github.com:' + this.pkg.repository.url + '.git';
       }
       this.spawnCommandSync('git', ['remote', 'add', 'origin', repoSSH], {
         cwd: this.destinationPath()

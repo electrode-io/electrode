@@ -18,7 +18,6 @@ const KoaJS = 'KoaJS';
 module.exports = generators.Base.extend({
   constructor: function () {
     generators.Base.apply(this, arguments);
-
     this.option('travis', {
       type: Boolean,
       required: false,
@@ -57,6 +56,10 @@ module.exports = generators.Base.extend({
       required: false,
       desc: 'Content to insert in the README.md file'
     });
+    //Flag to check if the OSS generator is being called as a subgenerator
+    this.isExtended = this.options.isExtended || false;
+    this.serverType = this.options.serverType || HapiJS;
+    this.githubUrl = this.options.githubUrl || "";
   },
 
   initializing: function () {
@@ -90,6 +93,8 @@ module.exports = generators.Base.extend({
       this.props.authorEmail = info.email;
       this.props.authorUrl = info.url;
     }
+    this.props.serverType = this.serverType || HapiJS;
+    this.props.githubUrl = this.githubUrl;
   },
 
   prompting: {
@@ -240,7 +245,7 @@ module.exports = generators.Base.extend({
     if (isHapi) {
       ignoreArray.push('**/src/server/express-server.js');
       ignoreArray.push('**/src/server/koa-server.js');
-    } else if (isExpress)  {
+    } else if (isExpress) {
       ignoreArray.push('**/src/server/koa-server.js');
     } else {
       ignoreArray.push('**/src/server/express-server.js');
@@ -254,7 +259,7 @@ module.exports = generators.Base.extend({
     this.fs.copyTpl(
       this.templatePath(_pkg),
       this.destinationPath(_pkg),
-      {isHapi, isExpress, isPWA, isAutoSSR}
+      { isHapi, isExpress, isPWA, isAutoSSR }
     );
 
     var defaultPkg = this.fs.readJSON(this.destinationPath(_pkg));
@@ -316,7 +321,7 @@ module.exports = generators.Base.extend({
     this.fs.copyTpl(
       this.templatePath('src/server'),
       this.destinationPath('src/server'),
-      {isHapi, isExpress},
+      { isHapi, isExpress },
       {},
       {
         globOptions: {
@@ -328,7 +333,7 @@ module.exports = generators.Base.extend({
     this.fs.copyTpl(
       this.templatePath('src/client'),
       this.destinationPath('src/client'),
-      {pwa: isPWA},
+      { pwa: isPWA },
       {}, // template options
       { // copy options
         globOptions: {
@@ -366,11 +371,12 @@ module.exports = generators.Base.extend({
     this.composeWith('electrode:git', {
       options: {
         name: this.props.name,
-        githubAccount: this.props.githubAccount
+        githubAccount: this.props.githubAccount,
+        githubUrl: this.props.githubUrl
       }
     }, {
-      local: require.resolve('../git')
-    });
+        local: require.resolve('../git')
+      });
 
     if (this.options.license && !this.pkg.license) {
       this.composeWith('license', {
@@ -380,8 +386,8 @@ module.exports = generators.Base.extend({
           website: this.props.authorUrl
         }
       }, {
-        local: require.resolve('generator-license/app')
-      });
+          local: require.resolve('generator-license/app')
+        });
     }
 
     if (!this.fs.exists(this.destinationPath('README.md'))) {
@@ -395,8 +401,8 @@ module.exports = generators.Base.extend({
           content: this.options.readme
         }
       }, {
-        local: require.resolve('../readme')
-      });
+          local: require.resolve('../readme')
+        });
     }
 
     if (!this.fs.exists(this.destinationPath('config/default.js'))) {
@@ -408,8 +414,8 @@ module.exports = generators.Base.extend({
           isAutoSsr: this.props.autoSsr
         }
       }, {
-        local: require.resolve('../config')
-      });
+          local: require.resolve('../config')
+        });
     }
 
     if (!this.fs.exists(this.destinationPath('server/plugins/webapp'))) {
@@ -419,15 +425,17 @@ module.exports = generators.Base.extend({
           isAutoSsr: this.props.autoSsr
         }
       }, {
-        local: require.resolve('../webapp')
-      });
+          local: require.resolve('../webapp')
+        });
     }
   },
 
   install: function () {
-    this.installDependencies({
-      bower: false
-    });
+    if (!this.isExtended) {
+      this.installDependencies({
+        bower: false
+      });
+    }
   },
 
   end: function () {
