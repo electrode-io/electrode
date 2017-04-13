@@ -1,4 +1,5 @@
 "use strict";
+
 global.navigator = { userAgent: false };
 
 process.on("SIGINT", () => {
@@ -16,7 +17,7 @@ supports.load()
   .then(() => electrodeServer(confippet.config, [staticPathsDecor()]))
   .then((server) => {
 
-    const app = function () { }
+    const app = {};
     app.get = (path, cb) => {
       server.route({
         method: "GET",
@@ -31,8 +32,14 @@ supports.load()
     };
 
     const reporter = new WebpackReporter({
+      //
+      // When running in production mode, it means the reporter is being used as a
+      // module installed so can only rely on the reporter installing a route to
+      // serve the files from its dist directory.  So skipReportRoutes should be false.
+      //
       skipReportRoutes: process.env.NODE_ENV !== "production",
-      skipSocket: true
+      skipSocket: process.env.NODE_ENV !== "production",
+      socketPort: 5001
     });
 
     const reporterOptions = {
@@ -53,4 +60,8 @@ supports.load()
     reporter.apply(config);
     config.setup(app);
     config.reporter(reporterOptions);
+    //
+    // Trigger refresh event every 5 seconds
+    //
+    setInterval(() => config.reporter(reporterOptions), 5000);
   });
