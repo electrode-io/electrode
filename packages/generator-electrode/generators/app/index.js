@@ -60,6 +60,8 @@ module.exports = generators.Base.extend({
     this.isExtended = this.options.isExtended || false;
     this.serverType = this.options.serverType || HapiJS;
     this.githubUrl = this.options.githubUrl || "";
+    this.license = this.options.license;
+    this.quotes = this.options.quotes;
   },
 
   initializing: function () {
@@ -95,6 +97,8 @@ module.exports = generators.Base.extend({
     }
     this.props.serverType = this.serverType || HapiJS;
     this.props.githubUrl = this.githubUrl;
+    this.props.quoteType = this.quotes;
+    this.props.license = this.license;
   },
 
   prompting: {
@@ -379,12 +383,16 @@ module.exports = generators.Base.extend({
       });
 
     if (this.options.license && !this.pkg.license) {
+      let licenseOptions = {
+        name: this.props.authorName,
+        email: this.props.authorEmail,
+        website: this.props.authorUrl
+      };
+      if (this.props.license) {
+        licenseOptions.license = this.props.license;
+      }
       this.composeWith('license', {
-        options: {
-          name: this.props.authorName,
-          email: this.props.authorEmail,
-          website: this.props.authorUrl
-        }
+        options: licenseOptions
       }, {
           local: require.resolve('generator-license/app')
         });
