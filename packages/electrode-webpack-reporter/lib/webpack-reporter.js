@@ -9,6 +9,8 @@ const Path = require("path");
 const statsUtils = require("./stats-utils");
 const http = require("http");
 const RoutePaths = require("./route-paths");
+const SocketIO = require("socket.io");
+const _ = require("lodash");
 
 function removeCwd(s) {
   const cwd = process.cwd();
@@ -25,15 +27,22 @@ class WebpackReporter extends EventEmitter {
   constructor(options) {
     super();
 
-    this.options = options || {};
+    this.options = _.defaults( {}, options, {socketPort: 5000});
 
     if (reporterStats) {
+      //
+      // When the reporter is attached to webpack-dev-server, it relies on WDS exporting
+      // an enumerable directory view of CWD where node_modules is reachable, and under
+      // which this module should be installed with its dist files.
+      //
       const distJs = Path.join(__dirname, "../dist/js", reporterStats.assetsByChunkName.main[0]);
       const distCss = Path.join(__dirname, "../dist/js", reporterStats.assetsByChunkName.main[1]);
       this._reporterHtml = fs.readFileSync(Path.resolve(Path.join(__dirname, "reporter.html"))).toString()
-        .replace("{{CSS}}", removeCwd(distCss)).replace("{{JS}}", removeCwd(distJs));
+        .replace("{{CSS}}", removeCwd(distCss))
+        .replace("{{JS}}", removeCwd(distJs))
+        .replace(/{{SOCKET_PORT}}/g, options.socketPort)
     } else if (!options.skipReportRoutes) {
-      throw new Error("webpack-reporter unable to setup routes");
+      throw new Error("webpack-reporter unable to setup routes - check dist has server/stat.json or run build");
     }
 
     this._socketIO = null;
@@ -74,9 +83,7 @@ class WebpackReporter extends EventEmitter {
     app.get(RoutePaths.STATS, this._stats.bind(this));
 
     if (!this.options.skipSocket) {
-      const server = new http.Server(app);
-      const io = require('socket.io')(server);
-      server.listen(this.options.socketPort || 5000);
+      const io = SocketIO(this.options.socketPort);
       io.on("connection", (socket) => {
         this._socketIO = socket;
       });
