@@ -477,16 +477,16 @@ Individual .babelrc files were generated for you in src/client and src/server
 
     "server-devTools-debug": {
       desc: 'Build and debug with devTools the built version',
-      task: ["build", ".server-build-and-devTools-debug"]
+        task: ["build", "server-devTools-debug-built"]
     },
 
-    ".server-build-and-devTools-debug": () => {
+    "server-devTools-debug-built": () => {
       console.log('server:inspect HELP: To terminate this server break this call AND also close the devTools!')
       AppMode.setEnv(AppMode.lib.dir);
-      return exec(`node --inspect ${Path.join(AppMode.lib.server, "index.js")}`);
+      return exec(`node --inspect --debug-brk ${Path.join(AppMode.lib.server, "index.js")}`);
     },
 
-    "server-prod": {
+  "server-prod": {
       dep: [".production-env", ".static-files-env"],
       desc: "Start server in production mode with static files routes.  Must have dist by running `gulp build`.",
       task: () => {
