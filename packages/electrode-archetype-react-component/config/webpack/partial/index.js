@@ -21,6 +21,7 @@ const orders = [
   "_uglify",
   "_define",
   "_sourcemaps-remote",
+  "_sourcemaps-inline",
   "_fail",
   "_coverage",
   "_dev",
