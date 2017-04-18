@@ -5,16 +5,16 @@
   "main": "lib/index.js",
   "author": {
     "name": "<%= developerName %>",
-    "url": "https://github.com/<%= ghUser %>"
+    "url": "<%= githubUrl %>/<%= ghUser %>"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/<%= packageGitHubOrg %>/<%= ghRepo %>.git"
+    "url": "<%= githubUrl %>/<%= packageGitHubOrg %>/<%= ghRepo %>.git"
   },
   "bugs": {
-    "url": "https://github.com/<%= packageGitHubOrg %>/<%= ghRepo %>/issues"
+    "url": "<%= githubUrl %>/<%= packageGitHubOrg %>/<%= ghRepo %>/issues"
   },
-  "homepage": "https://github.com/<%= packageGitHubOrg %>/<%= ghRepo %>",
+  "homepage": "<%= githubUrl %>/<%= packageGitHubOrg %>/<%= ghRepo %>",
   "dependencies": {},
   "devDependencies": {
     "electrode-archetype-react-component": "^1.0.0",
