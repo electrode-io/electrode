@@ -388,7 +388,7 @@ module.exports = generators.Base.extend({
           name: this.props.authorName,
           email: this.props.authorEmail,
           website: this.props.authorUrl,
-          license: this.props.license || ''
+          license: this.props.license || ""
         }
       }, {
           local: require.resolve('generator-license/app')
