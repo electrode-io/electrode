@@ -1,4 +1,5 @@
-import React, {PropTypes} from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import {AboveTheFoldOnlyServerRender} from "above-the-fold-only-server-render";
 import {connect} from "react-redux";
 import smileyPng from "../images/718smiley.png";

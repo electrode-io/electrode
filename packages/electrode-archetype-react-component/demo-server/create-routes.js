@@ -6,6 +6,7 @@
 //
 
 var React = require("react");
+var PropTypes = require("prop-types");
 var ReactRouter = require("react-router");
 var IndexRoute = ReactRouter.IndexRoute;
 var Route = ReactRouter.Route;
@@ -19,7 +20,7 @@ var Page = function (props) {
 };
 
 Page.propTypes = {
-  children: React.PropTypes.any
+  children: PropTypes.any
 };
 
 module.exports = function (Demo) {
