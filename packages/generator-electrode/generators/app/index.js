@@ -383,16 +383,13 @@ module.exports = generators.Base.extend({
       });
 
     if (this.options.license && !this.pkg.license) {
-      let licenseOptions = {
-        name: this.props.authorName,
-        email: this.props.authorEmail,
-        website: this.props.authorUrl
-      };
-      if (this.props.license) {
-        licenseOptions.license = this.props.license;
-      }
       this.composeWith('license', {
-        options: licenseOptions
+        options: {
+          name: this.props.authorName,
+          email: this.props.authorEmail,
+          website: this.props.authorUrl,
+          license: this.props.license || ''
+        }
       }, {
           local: require.resolve('generator-license/app')
         });
