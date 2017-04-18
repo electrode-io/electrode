@@ -10,9 +10,10 @@ var baseProfile = require("./profile.base");
 var testBaseProfile = require("./profile.base.test");
 
 var generateConfig = require("./util/generate-config");
+var Path = require("path");
 
 function makeConfig() {
-  const browserCoverageProfile = {
+  const coverageProfile = {
     partials: {
       "_coverage": {
         order: 10100
