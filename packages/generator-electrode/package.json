@@ -27,7 +27,7 @@
   ],
   "dependencies": {
     "chalk": "^1.0.0",
-    "generator-license": "^4.0.0",
+    "generator-license": "^5.0.0",
     "generator-travis": "^1.3.0",
     "git-remote-origin-url": "^2.0.0",
     "github-username": "^2.1.0",
