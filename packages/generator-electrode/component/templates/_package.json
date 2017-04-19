@@ -1,0 +1,13 @@
+{
+  "name": "<%= projectName %>",
+  "version": "1.0.0",
+  "description": "<%= projectName %>-component",
+  "author": {
+    "name": "<%= developerName %>"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "lerna": "^2.0.0-rc.1",
+    "lodash": "^4.10.1"
+  }
+}

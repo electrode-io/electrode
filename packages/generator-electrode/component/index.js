@@ -114,6 +114,13 @@ var ReactComponentGenerator = yeoman.Base.extend({
   },
 
   writing: {
+    lernaStructure: function () {
+      // copy lerna and top level templates
+      this.copy("gitignore", ".gitignore");
+      this.template("_package.json", "package.json");
+      this.template("_readme.md", "README.md");
+      this.template("lerna.json", "lerna.json");
+    },
     project: function () {
       this.copy("packages/component/babelrc", "packages/" + this.projectName + "/.babelrc");
       this.copy("packages/component/gitignore", "packages/" + this.projectName + "/.gitignore");
@@ -141,13 +148,11 @@ var ReactComponentGenerator = yeoman.Base.extend({
       this.template("packages/component/test/client/eslintrc", "packages/" + this.projectName + "/test/client/.eslintrc");
       this.template("packages/component/test/client/components/_component.spec.jsx", "packages/" + this.projectName + "/test/client/components/" + this.projectName + ".spec.jsx");
       this.copy("packages/component/test/client/components/helpers/_intlEnzymeTestHelper.js", "packages/" + this.projectName + "/test/client/components/helpers/intl-enzyme-test-helper.js");
-    }
-    /*
+    },
+
     demo: function () {
-      this.template("demo/_demo.jsx", "demo/demo.jsx");
-      this.template("demo/_demo.css", "demo/demo.css");
-      this.template("demo/examples/_component.example", "demo/examples/" + this.projectName + ".example");
-    } */
+      //this should now call the demo app generator and generate the demo App
+    }
   },
 
   install: function () {
