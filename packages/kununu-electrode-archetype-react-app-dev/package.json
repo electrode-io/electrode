@@ -1,6 +1,6 @@
 {
   "name": "kununu-electrode-archetype-react-app-dev",
-  "version": "2.0.3-prerelease.11",
+  "version": "2.0.3-prerelease.14",
   "description": "Electrode NodeJS/React Application Archetype (Development)",
   "homepage": "http://www.electrode.io",
   "publishConfig": {
@@ -19,7 +19,7 @@
     "lint": "eslint \"**/**/*.js\""
   },
   "peerDependencies": {
-    "kununu-electrode-archetype-react-app": "^2.0.3-prerelease.3"
+    "kununu-electrode-archetype-react-app": "^2.0.3-prerelease.4"
   },
   "dependencies": {
     "autoprefixer-stylus": "^0.9.1",
@@ -76,6 +76,7 @@
     "lodash": "^4.13.1",
     "mkdirp": "^0.5.1",
     "node-sass": "^3.8.0",
+    "node-sass-tilde-importer": "karlhorky/node-sass-tilde-importer#aa870fc25cd6dede73513466e5491b479abd14eb",
     "nodemon": "^1.8.1",
     "offline-plugin": "^4.6.1",
     "optional-require": "^1.0.0",

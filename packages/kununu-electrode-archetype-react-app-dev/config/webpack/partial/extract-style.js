@@ -1,3 +1,4 @@
+
 "use strict";
 
 const archetype = require("kununu-electrode-archetype-react-app/config/archetype");
@@ -10,83 +11,56 @@ const CSSSplitPlugin = require("css-split-webpack-plugin").default;
 const atImport = require("postcss-import");
 const cssnext = require("postcss-cssnext");
 
-const autoprefixer = require("autoprefixer-stylus");
+const autoprefixer = require("autoprefixer");
 const cssLoader = require.resolve("css-loader");
 const styleLoader = require.resolve("style-loader");
-const stylusLoader = require.resolve("stylus-relative-loader");
+const sassLoader = require.resolve("sass-loader");
 const postcssLoader = require.resolve("postcss-loader");
 
 const AppMode = archetype.AppMode;
 
 /**
- * [cssModuleSupport By default, this archetype assumes you are using CSS-Modules + CSS-Next]
+ * [cssModuleSupport By default, this archetype assumes you are using SCSS + CSS-Modules + CSS-Next]
  *
  * Stylus is also supported for which the following cases can occur.
  *
  * case 1: *only* *.css exists => CSS-Modules + CSS-Next
- * case 2: *only* *.styl exists => stylus
- * case 3: *both* *.css & *.styl exists => CSS-Modules + CSS-Next takes priority
+ * case 2: *only* *.scss exists => SCSS + CSS-Modules + CSS-Next
+ * case 3: *both* *.css & *.scss exists => SCSS + CSS-Modules + CSS-Next takes priority
  *          with a warning message
- * case 4: *none* *.css & *.styl exists => CSS-Modules + CSS-Next takes priority
- * case 5: *cssModuleStylusSupport* config is true => Use both Stylus and CSS Modules
  */
 
 const cssNextExists = (glob.sync(Path.resolve(AppMode.src.client, "**", "*.css")).length > 0);
-const stylusExists = (glob.sync(Path.resolve(AppMode.src.client, "**", "*.styl")).length > 0);
+const sassExists = (glob.sync(Path.resolve(AppMode.src.client, "**", "*.scss")).length > 0);
 
 // By default, this archetype assumes you are using CSS-Modules + CSS-Next
-const cssModuleSupport = stylusExists && !cssNextExists;
+const cssModuleSupport = sassExists && !cssNextExists;
 
 module.exports = function () {
-  const cssModuleStylusSupport = archetype.webpack.cssModuleStylusSupport;
-  const stylusQuery = cssLoader + "?-autoprefixer!" + stylusLoader;
   const cssLoaderOptions = "?modules&localIdentName=[name]__[local]___[hash:base64:5]&-autoprefixer";
   const cssQuery = cssLoader + cssLoaderOptions + "!" + postcssLoader;
-  const cssStylusQuery = cssLoader + cssLoaderOptions + "!" + postcssLoader + "!" + stylusLoader;
+  const cssSassQuery = cssLoader + cssLoaderOptions + "!" + postcssLoader + "!" + sassLoader;
 
   // By default, this archetype assumes you are using CSS-Modules + CSS-Next
-  const rules = [{
-    _name: "extract-css",
-    test: /\.css$/,
-    loader: ExtractTextPlugin.extract({ fallback: styleLoader, use: cssQuery, publicPath: "" })
-  }];
-
-  rules.push({
-    test: /main\.scss$/,
-    use: ExtractTextPlugin.extract({
-      fallback: 'style-loader',
-      use: ['css-loader', 'sass-loader'],
-    }),
-  });
-
-  if (cssModuleStylusSupport) {
-    rules.push({
-      _name: "extract-css-stylus",
-      test: /\.styl$/,
-      use: ExtractTextPlugin.extract({ fallback: styleLoader, use: cssStylusQuery, publicPath: "" })
-    });
-  } else if (!cssModuleSupport) {
-    rules.push({
-      _name: "extract-stylus",
-      test: /\.styl$/,
-      use: ExtractTextPlugin.extract({ fallback: styleLoader, use: stylusQuery, publicPath: "" })
-    });
-  }
-
-  if (cssModuleSupport) {
-    rules.push({
-      _name: "postcss",
+  const rules = [
+    {
+      _name: "extract-css",
+      test: /\.css$/,
+      loader: ExtractTextPlugin.extract({ fallback: styleLoader, use: cssQuery, publicPath: "" })
+    },
+    {
+      test: /main\.scss$/,
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: ['css-loader', 'sass-loader'],
+      }),
+    },
+    {
+      _name: "extract-css-sass",
       test: /((?!main).{4})\.scss$/,
-      use: [
-        {
-          loader: "postcss-loader",
-          options: {
-            browsers: ["last 2 versions", "ie >= 9", "> 5%"]
-          }
-        }
-      ]
-    });
-  }
+      use: ExtractTextPlugin.extract({ fallback: styleLoader, use: cssSassQuery, publicPath: "" })
+    }
+  ];
 
   return {
     module: { rules },
@@ -107,7 +81,7 @@ module.exports = function () {
               browsers: ["last 2 versions", "ie >= 9", "> 5%"]
             })] : [];
           },
-          stylus: {
+          sass: {
             use: () => {
               return !cssModuleSupport ? [autoprefixer({
                 browsers: ["last 2 versions", "ie >= 9", "> 5%"]

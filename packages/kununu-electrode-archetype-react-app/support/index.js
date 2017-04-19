@@ -7,7 +7,9 @@ const babelPolyfill = require("babel-polyfill");
 const archetype = require("../config/archetype");
 const AppMode = archetype.AppMode;
 const Path = require("path");
+const sass = require("node-sass");
 const logger = require("../lib/logger");
+const tildeImporter = require('node-sass-tilde-importer');
 
 const support = {
   cssModuleHook: (options) => {
@@ -107,7 +109,15 @@ support.load = function (options, callback) {
    */
   if (options.cssModuleHook !== false) {
     const opts = Object.assign({
-      generateScopedName: "[name]__[local]___[hash:base64:5]"
+      extensions: ['.css', '.scss'],
+      generateScopedName: "[name]__[local]___[hash:base64:5]",
+      preprocessCss: (data) => {
+        return sass.renderSync({
+          data,
+          includePaths: [Path.resolve(__dirname, './src/client/components/**/*.scss')],
+          importer: tildeImporter
+        }).css;
+      },
     }, options.cssModuleHook || {});
 
     support.cssModuleHook(opts);
