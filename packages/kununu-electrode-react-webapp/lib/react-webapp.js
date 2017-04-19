@@ -203,6 +203,21 @@ function makeRouteHandler(routeOptions, userContent) {
       return `${cssLink}${jsLink}`;
     };
 
+    const detectMetaRegEx = /<meta[^>]+\/>/g;
+    const metaCloseRegEx = /\/>/;
+
+    const getCustomMetaTags = (content) => {
+      if (!content.html) return '';
+
+      let metas = (content.html.match(detectMetaRegEx)||{})
+          .map(s => s.replace(metaCloseRegEx, '>'))
+          .join('');
+
+      content.html = content.html.replace(detectMetaRegEx, '');
+
+      return metas;
+    }
+
     const renderPage = (content) => {
       return html.replace(/{{[A-Z_]*}}/g, (m) => {
         switch (m) {
@@ -217,7 +232,7 @@ function makeRouteHandler(routeOptions, userContent) {
         case PREFETCH_MARKER:
           return `<script>${content.prefetch}</script>`;
         case META_TAGS_MARKER:
-          return iconStats;
+          return getCustomMetaTags(content) + iconStats;
         case CRITICAL_CSS_MARKER:
           return criticalCSS;
         default:
