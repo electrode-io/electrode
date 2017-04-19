@@ -115,38 +115,39 @@ var ReactComponentGenerator = yeoman.Base.extend({
 
   writing: {
     project: function () {
-      this.copy("babelrc", ".babelrc");
-      this.copy("gitignore", ".gitignore");
-      this.copy("npmignore", ".npmignore");
-      this.copy("editorconfig", ".editorconfig");
+      this.copy("packages/component/babelrc", "packages/" + this.projectName + "/.babelrc");
+      this.copy("packages/component/gitignore", "packages/" + this.projectName + "/.gitignore");
+      this.copy("packages/component/npmignore", "packages/" + this.projectName + "/.npmignore");
+      this.copy("packages/component/editorconfig", "packages/" + this.projectName + "/.editorconfig");
       if (this.quoteType === "'") {
-        this.template("eslintrc", ".eslintrc");
+        this.template("packages/component/eslintrc", "packages/" + this.projectName + "/.eslintrc");
       }
-      this.template("_gulpfile.js", "gulpfile.js");
-      this.template("_package.json", "package.json");
-      this.template("_readme.md", "README.md");
+      this.template("packages/component/_gulpfile.js", "packages/" + this.projectName + "/gulpfile.js");
+      this.template("packages/component/_package.json", "packages/" + this.projectName + "/package.json");
+      this.template("packages/component/_readme.md", "packages/" + this.projectName + "/README.md");
     },
     component: function () {
-      this.template("src/components/_component.jsx", "src/components/" + this.projectName + ".jsx");
-      this.template("src/styles/_component.css", "src/styles/" + this.projectName + ".css");
+      this.template("packages/component/src/components/_component.jsx", "packages/" + this.projectName + "/src/components/" + this.projectName + ".jsx");
+      this.template("packages/component/src/styles/_component.css", "packages/" + this.projectName + "/src/styles/" + this.projectName + ".css");
 
       // l10n language templates
-      this.template("src/lang/_DefaultMessages.js", "src/lang/default-messages.js");
-      this.template("src/lang/_en.json", "src/lang/en.json");
-      this.template("src/lang/tenants/electrodeio/_defaultMessages.js", "src/lang/tenants/electrodeio/default-messages.js");
+      this.template("packages/component/src/lang/_DefaultMessages.js", "packages/" + this.projectName + "/src/lang/default-messages.js");
+      this.template("packages/component/src/lang/_en.json", "packages/" + this.projectName + "/src/lang/en.json");
+      this.template("packages/component/src/lang/tenants/electrodeio/_defaultMessages.js", "packages/" + this.projectName + "/src/lang/tenants/electrodeio/default-messages.js");
 
-      this.template("src/_Component.js", "src/index.js");
+      this.template("packages/component/src/_Component.js", "packages/" + this.projectName + "/src/index.js");
     },
     test: function () {
-      this.template("test/client/eslintrc", "test/client/.eslintrc");
-      this.template("test/client/components/_component.spec.jsx", "test/client/components/" + this.projectName + ".spec.jsx");
-      this.copy("test/client/components/helpers/_intlEnzymeTestHelper.js", "test/client/components/helpers/intl-enzyme-test-helper.js");
-    },
+      this.template("packages/component/test/client/eslintrc", "packages/" + this.projectName + "/test/client/.eslintrc");
+      this.template("packages/component/test/client/components/_component.spec.jsx", "packages/" + this.projectName + "/test/client/components/" + this.projectName + ".spec.jsx");
+      this.copy("packages/component/test/client/components/helpers/_intlEnzymeTestHelper.js", "packages/" + this.projectName + "/test/client/components/helpers/intl-enzyme-test-helper.js");
+    }
+    /*
     demo: function () {
       this.template("demo/_demo.jsx", "demo/demo.jsx");
       this.template("demo/_demo.css", "demo/demo.css");
       this.template("demo/examples/_component.example", "demo/examples/" + this.projectName + ".example");
-    }
+    } */
   },
 
   install: function () {
