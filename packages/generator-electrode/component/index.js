@@ -148,11 +148,21 @@ var ReactComponentGenerator = yeoman.Base.extend({
       this.template("packages/component/test/client/eslintrc", "packages/" + this.projectName + "/test/client/.eslintrc");
       this.template("packages/component/test/client/components/_component.spec.jsx", "packages/" + this.projectName + "/test/client/components/" + this.projectName + ".spec.jsx");
       this.copy("packages/component/test/client/components/helpers/_intlEnzymeTestHelper.js", "packages/" + this.projectName + "/test/client/components/helpers/intl-enzyme-test-helper.js");
-    },
-
+    }
+    /*
     demo: function () {
       //this should now call the demo app generator and generate the demo App
-    }
+    }*/
+  },
+
+  default: function () {
+    let options = {
+      packageName: this.packageName,
+      developerName: this.developerName
+    };
+    this.composeWith('electrode:demo', { options }, {
+      local: require.resolve('../demo')
+    });
   },
 
   install: function () {
