@@ -158,7 +158,8 @@ var ReactComponentGenerator = yeoman.Base.extend({
   default: function () {
     let options = {
       packageName: this.packageName,
-      developerName: this.developerName
+      developerName: this.developerName,
+      className: this.className
     };
     this.composeWith('electrode:demo', { options }, {
       local: require.resolve('../demo')
