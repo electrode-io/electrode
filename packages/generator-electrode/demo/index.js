@@ -39,8 +39,6 @@ module.exports = generators.Base.extend({
       this.props.authorEmail = this.pkg.author.email;
       this.props.authorUrl = this.pkg.author.url;
       this.props.createDirectory = false;
-      this.props.serverType = this.fs.exists(this.destinationPath('src/server/express-server.js')) ? ExpressJS :
-        this.fs.exists(this.destinationPath('src/server/koa-server.js')) ? KoaJS : HapiJS;
       this.props.pwa = this.fs.exists(this.destinationPath('client/sw-registration.js'));
       this.props.autoSsr = this.fs.exists(this.destinationPath('server/plugins/autossr.js'));
       this.props.quoteType = this.fs.exists(this.destinationPath('.eslintrc')) ? "'" : "\"";
@@ -50,12 +48,11 @@ module.exports = generators.Base.extend({
       this.props.authorEmail = info.email;
       this.props.authorUrl = info.url;
     }
-    this.props.serverType = this.serverType || HapiJS;
+    this.props.serverType = this.serverType || "HapiJS";
     this.props.githubUrl = this.githubUrl;
   },
 
   writing: function () {
-
     //@TODO: while writing check to see if the demo App/ already exists
     // if so, we only need to edit the package.json to add and point to the new package
     // Also, update the home.jsx to use the new package.
@@ -63,7 +60,6 @@ module.exports = generators.Base.extend({
 
     var newRoot = this.destinationPath() + '/' + _.kebabCase(_.deburr(this.packageName)) + "-demo-app";
     this.destinationRoot(newRoot);
-
     this.template("_package.json", "package.json");
 
     const rootConfigsToCopy = ['gulpfile.js', 'config', 'test', 'archetype'];
@@ -88,10 +84,12 @@ module.exports = generators.Base.extend({
       { // copy options
         globOptions: {
           // Images are damaged by the template compiler
-          ignore: ['**/client/images/**']
+          ignore: ['**/client/images/**', '**/client/components/home.jsx']
         }
       }
     );
+
+    this.template("src/client/components/home.jsx", "src/client/components/home.jsx");
 
     ['src/client', 'src/server', 'test/client', 'test/server'].forEach((d) => {
       this.fs.move(this.destinationPath(d + '/babelrc'), this.destinationPath(d + '/.babelrc'));

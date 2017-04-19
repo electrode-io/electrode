@@ -27,7 +27,7 @@
     "heroku-postbuild": "gulp build"
   },
   "dependencies": {
-    "<%= packageName %>": "../../packages/<%= packageName %>",
+    "<%= packageName %>": "../packages/<%= packageName %>",
     "bluebird": "^3.4.6",
     "electrode-archetype-react-app": "^2.0.0",
     "electrode-confippet": "^1.0.0",
