@@ -256,7 +256,7 @@ const setupOptions = (options) => {
   const pluginOptions = _.defaultsDeep({}, options, pluginOptionsDefaults);
   const chunkSelector = resolveChunkSelector(pluginOptions);
   const devProtocol = process.env.WEBPACK_DEV_HTTPS ? "https://" : "http://";
-  const devBundleBase = `${devProtocol}://${pluginOptions.devServer.host}:${pluginOptions.devServer.port}/js/`;
+  const devBundleBase = `${devProtocol}${pluginOptions.devServer.host}:${pluginOptions.devServer.port}/js/`; // eslint-disable-line max-len
   const statsPath = getStatsPath(pluginOptions.stats, pluginOptions.buildArtifacts);
 
   return Promise.try(() => loadAssetsFromStats(statsPath))

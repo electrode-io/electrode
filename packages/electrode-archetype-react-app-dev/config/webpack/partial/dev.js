@@ -14,7 +14,7 @@ module.exports = function () {
       https: Boolean(process.env.WEBPACK_DEV_HTTPS)
     },
     output: {
-      publicPath: `${devProtocol}://${archetype.webpack.devHostname}:${archetype.webpack.devPort}/js/`,
+      publicPath: `${devProtocol}${archetype.webpack.devHostname}:${archetype.webpack.devPort}/js/`,
       filename: "[name].bundle.dev.js"
     },
     plugins: [
