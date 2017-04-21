@@ -7,7 +7,6 @@ const HTTP_CREATED = 201;
 const HTTP_ISE = 500;
 const mongojs = require("mongojs");
 const uuidV1 = require("uuid/v1");
-const Joi = require("Joi");
 
 plugin.register = function (server, options, next) {
   let db = mongojs('electrode-mongo', ['records']);
