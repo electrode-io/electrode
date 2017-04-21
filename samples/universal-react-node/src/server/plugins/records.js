@@ -21,8 +21,7 @@ plugin.register = function (server, options, next) {
         if (err) {
           return reply('Internal MongoDB error', err);
         }
-        let responseString = docs.map((record) => JSON.stringify(record)).toString();
-        return reply(responseString);
+        return reply(docs);
       });
     }
   });
@@ -53,7 +52,6 @@ plugin.register = function (server, options, next) {
     method: 'POST',
     path: '/addRecord',
     handler: function (request, reply) {
-      console.log("CAME HERE", request.payload);
       const record = request.payload;
       //Create an id
       record._id = uuidV1();
@@ -63,18 +61,9 @@ plugin.register = function (server, options, next) {
           console.log(err);
           return reply('Internal MongoDB error');
         }
-        console.log("RESULT:::", result);
         reply(record).code(201);
       });
-    } /*
-    config: {
-      validate: {
-        payload: {
-          title: Joi.string().min(10).max(50).required(),
-          artist: Joi.string().min(10).max(50).required()
-        }
-      }
-    }*/
+    }
   });
 
   next();

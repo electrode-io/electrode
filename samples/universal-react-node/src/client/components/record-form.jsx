@@ -70,17 +70,20 @@ class RecordForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} >
-        <label>
-          Name:
+      <div>
+        <h3>Add a Record</h3>
+        <form onSubmit={this.handleSubmit} >
+          <label>
+            Name:
           <input type="text" value={this.state.name} onChange={this.handleNameChange} />
-        </label>
-        <label>
-          Artist:
+          </label>
+          <label>
+            Artist:
           <input type="text" value={this.state.artist} onChange={this.handleArtistChange} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form >
+          </label>
+          <input type="submit" value="Submit" />
+        </form >
+      </div>
     );
   }
 }
