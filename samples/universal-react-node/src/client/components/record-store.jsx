@@ -3,7 +3,7 @@ import "es6-promise";
 import "isomorphic-fetch";
 import RecordForm from "./record-form";
 
-let HTTP_BAD_REQUEST = 400;
+const HTTP_BAD_REQUEST = 400;
 
 class RecordStore extends React.Component {
   constructor(props) {
@@ -14,18 +14,18 @@ class RecordStore extends React.Component {
         name: "IV",
         _id: "1"
       }]
-    }
+    };
   }
 
   componentDidMount() {
-    fetch('/records')
+    fetch("/records")
       .then((response) => {
         if (response.status >= HTTP_BAD_REQUEST) {
           throw new Error("Bad response from server");
         }
         response.json().then((records) => {
           this.setState({ records });
-        })
+        });
       })
       .catch((err) => {
         throw new Error("Error Fetching Records", err);

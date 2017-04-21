@@ -10,8 +10,8 @@ class RecordForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      artist: ''
+      name: "",
+      artist: ""
     };
 
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -30,21 +30,19 @@ class RecordForm extends React.Component {
     });
   }
   handleSubmit(event) {
-    //alert('A new record was submitted: ' + this.state.name + " By: " + this.state.artist);
     fetch("/1", { credentials: "same-origin" })
       .then((resp) => {
         if (resp.status === HTTP_OK) {
           token = resp.headers.get("x-csrf-jwt");
-          //console.log("TOKEN IS:::", token);
         } else {
           throw new Error("token generation failed");
         }
-        fetch('/addRecord', {
+        fetch("/addRecord", {
           credentials: "same-origin",
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
+            "Accept": "application/json",
+            "Content-Type": "application/json",
             "x-csrf-jwt": token
           },
           body: JSON.stringify({
