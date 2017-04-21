@@ -1,6 +1,6 @@
 {
   "name": "kununu-electrode-archetype-react-app",
-  "version": "2.0.3-prerelease.4",
+  "version": "2.0.3-prerelease.5",
   "publishConfig": {
     "access": "public"
   },

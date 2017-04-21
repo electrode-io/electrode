@@ -23,7 +23,7 @@
     "start": "if test \"$NODE_ENV\" = \"production\"; then npm run prod; else gulp dev; fi",
     "test": "gulp check",
     "coverage": "gulp check",
-    "prod": "echo 'Starting standalone server in PROD mode'; node ./lib/server/",
+    "prod": "echo 'Starting standalone server in PROD mode'; NODE_ENV=production node ./lib/server/",
     "heroku-postbuild": "gulp build"
   },
   "dependencies": {

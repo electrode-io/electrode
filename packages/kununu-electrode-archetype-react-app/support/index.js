@@ -13,9 +13,10 @@ const tildeImporter = require('node-sass-tilde-importer');
 
 const support = {
   cssModuleHook: (options) => {
+    const defaultRootDirPath = process.env.NODE_ENV === "production" ? "lib" : "src";
     options = options || {};
     options.generateScopedName = options.generateScopedName || "[hash:base64]";
-    options.rootDir = options.rootDir || Path.resolve(process.cwd(), "client");
+    options.rootDir = options.rootDir || Path.resolve(process.cwd(), defaultRootDirPath);
 
     require("css-modules-require-hook")(options);
   },
