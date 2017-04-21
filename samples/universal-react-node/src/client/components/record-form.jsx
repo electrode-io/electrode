@@ -35,7 +35,7 @@ class RecordForm extends React.Component {
       .then((resp) => {
         if (resp.status === HTTP_OK) {
           token = resp.headers.get("x-csrf-jwt");
-          console.log("TOKEN IS:::", token);
+          //console.log("TOKEN IS:::", token);
         } else {
           throw new Error("token generation failed");
         }
@@ -56,7 +56,7 @@ class RecordForm extends React.Component {
             if (response.status >= HTTP_BAD_REQUEST) {
               throw new Error("Bad response from server");
             }
-            return result;
+            return response.status;
           })
           .catch((err) => {
             throw new Error("Error Adding Record", err);
