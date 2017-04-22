@@ -1,8 +1,6 @@
 "use strict";
 
-const sinonRegex = process.platform === "win32" ?
-  /node_modules\\sinon\\/ :
-  /node_modules\/sinon\//;
+const Path = require("path");
 
 module.exports = {
   module: {
@@ -14,7 +12,7 @@ module.exports = {
      * https://github.com/sinonjs/sinon/pull/600#issuecomment-162529457
      */
     noParse: [
-      sinonRegex
+      new RegExp(Path.normalize("node_modules/sinon/").replace(/\\/g, "\\\\"))
     ]
   },
   devServer: {
