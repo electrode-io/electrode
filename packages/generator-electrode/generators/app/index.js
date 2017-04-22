@@ -321,6 +321,10 @@ module.exports = generators.Base.extend({
       );
     });
 
+    //copy .eslintc into the client directory
+    if (isSingleQuote) {
+      this.template("src/client/.eslintrc", this.destinationPath("src/client/.eslintrc"));
+    }
     //special handling for the server file
     this.fs.copyTpl(
       this.templatePath('src/server'),
