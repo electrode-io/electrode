@@ -23,9 +23,7 @@ const orders = [
   "_sourcemaps-remote",
   "_sourcemaps-inline",
   "_fail",
-  "_coverage",
-  "_dev",
-  "_hot"
+  "_coverage"
 ];
 
 const files = Fs.readdirSync(__dirname).filter((x) => x !== "index.js").map((x) => x.substr(0, x.length - 3));
