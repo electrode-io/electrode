@@ -35,7 +35,7 @@ const cssNextExists = (glob.sync(Path.resolve(AppMode.src.client, "**", "*.css")
 const stylusExists = (glob.sync(Path.resolve(AppMode.src.client, "**", "*.styl")).length > 0);
 
 // By default, this archetype assumes you are using CSS-Modules + CSS-Next
-const cssModuleSupport = stylusExists && !cssNextExists;
+const cssModuleSupport = !stylusExists && cssNextExists;
 
 module.exports = function () {
   const cssModuleStylusSupport = archetype.webpack.cssModuleStylusSupport;
