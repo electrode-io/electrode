@@ -243,7 +243,8 @@ const setupOptions = (options) => {
     htmlFile: Path.join(__dirname, "index.html"),
     devServer: {
       host: process.env.WEBPACK_HOST || "127.0.0.1",
-      port: process.env.WEBPACK_DEV_PORT || "2992"
+      port: process.env.WEBPACK_DEV_PORT || "2992",
+      https: Boolean(process.env.WEBPACK_DEV_HTTPS)
     },
     paths: {},
     stats: "dist/server/stats.json",
@@ -254,7 +255,8 @@ const setupOptions = (options) => {
 
   const pluginOptions = _.defaultsDeep({}, options, pluginOptionsDefaults);
   const chunkSelector = resolveChunkSelector(pluginOptions);
-  const devBundleBase = `http://${pluginOptions.devServer.host}:${pluginOptions.devServer.port}/js/`;
+  const devProtocol = process.env.WEBPACK_DEV_HTTPS ? "https://" : "http://";
+  const devBundleBase = `${devProtocol}${pluginOptions.devServer.host}:${pluginOptions.devServer.port}/js/`; // eslint-disable-line max-len
   const statsPath = getStatsPath(pluginOptions.stats, pluginOptions.buildArtifacts);
 
   return Promise.try(() => loadAssetsFromStats(statsPath))
