@@ -1,5 +1,7 @@
 "use strict";
 
+const Path = require("path");
+
 module.exports = {
   module: {
     /*
@@ -10,7 +12,7 @@ module.exports = {
      * https://github.com/sinonjs/sinon/pull/600#issuecomment-162529457
      */
     noParse: [
-      /node_modules\/sinon\//
+      new RegExp(Path.normalize("node_modules/sinon/").replace(/\\/g, "\\\\"))
     ]
   },
   devServer: {

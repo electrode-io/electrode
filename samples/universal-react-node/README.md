@@ -607,6 +607,8 @@ You can also skip server side rendering by `setting context in your app and pass
 
 ```js
 
+  import PropTypes from "prop-types";
+
   const YourComponent = () => {
       return (
         <AboveTheFoldOnlyServerRender contextKey="aboveTheFoldOnlyServerRender.SomeComponent">
@@ -632,8 +634,8 @@ You can also skip server side rendering by `setting context in your app and pass
   }
 
   YourApp.childContextTypes = {
-    aboveTheFoldOnlyServerRender: React.PropTypes.shape({
-      AnotherComponent: React.PropTypes.bool
+    aboveTheFoldOnlyServerRender: PropTypes.shape({
+      AnotherComponent: PropTypes.bool
     })
   };
 ```

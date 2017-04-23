@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import Playground from "component-playground";
 import assign from "object-assign";
@@ -81,7 +82,7 @@ export default class ElectrodeDemoIndex extends Component {
 }
 
 ElectrodeDemoIndex.propTypes = {
-  scope: React.PropTypes.object,
-  libraryScope: React.PropTypes.object,
-  components: React.PropTypes.array
+  scope: PropTypes.object,
+  libraryScope: PropTypes.object,
+  components: PropTypes.array
 };
