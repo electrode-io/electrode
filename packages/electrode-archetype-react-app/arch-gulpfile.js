@@ -562,7 +562,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     "test-server-cov": () => {
       if (shell.test("-d", "test/server")) {
         AppMode.setEnv(AppMode.src.dir);
-        return exec(`istanbul cover _mocha`,
+        return exec(`istanbul cover node_modules/mocha/bin/_mocha`,
           `-- -c --opts ${config.mocha}/mocha.opts test/server`);
       }
       return undefined;
