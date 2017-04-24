@@ -156,6 +156,9 @@ var ReactComponentGenerator = yeoman.Base.extend({
   },
 
   install: function () {
+    //install the dependencies for the package
+    let packageDirectory = this.destinationPath() + "/packages/" + this.packageName;
+    process.chdir(packageDirectory);
     this.installDependencies({
       bower: false
     });
