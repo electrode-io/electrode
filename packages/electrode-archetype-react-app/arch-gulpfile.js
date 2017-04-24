@@ -476,28 +476,29 @@ Individual .babelrc files were generated for you in src/client and src/server
     },
 
     "server-build-devtools": {
-      desc: 'Build and debug with devTools',
+      desc: "Build and debug with devTools",
       task: ["build", "server-devtools"]
     },
 
     "server-build-devtools-startup-breakpoint": {
-      desc: 'Build and debug with devTools with breakpoint starting the app',
+      desc: "Build and debug with devTools with breakpoint starting the app",
       task: ["build", "server-devtools-startup-breakpoint"]
     },
 
     "server-devtools": {
-      desc: 'Debug the built app (in dist/)',
+      desc: "Debug the built app (in dist/)",
       task: () => {
-        console.log('server-devtools HELP: To terminate this server Control-Break this AND also close the devTools!')
+        console.log("server-devtools HELP: To terminate this server Control-Break this AND also close the devTools!");
         AppMode.setEnv(AppMode.lib.dir);
         return exec(`node --inspect ${Path.join(AppMode.lib.server, "index.js")}`);
       }
     },
 
     "server-devtools-startup-breakpoint": {
-      desc: 'Debug the built app (in dist/) with breakpoint starting of the app',
+      desc: "Debug the built app (in dist/) with breakpoint starting of the app",
       task: () => {
-        console.log('start-devtools-startup-breakpoint HELP: To terminate this server Control-Break this call AND also close the devTools!')
+        console.log("start-devtools-startup-breakpoint " +
+          "HELP: To terminate this server Control-Break this call AND also close the devTools!");
         AppMode.setEnv(AppMode.lib.dir);
         return exec(`node --inspect --debug-brk ${Path.join(AppMode.lib.server, "index.js")}`);
       }
