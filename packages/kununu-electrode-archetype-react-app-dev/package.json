@@ -19,7 +19,7 @@
     "lint": "eslint \"**/**/*.js\""
   },
   "peerDependencies": {
-    "kununu-electrode-archetype-react-app": "^2.0.3-prerelease.4"
+    "kununu-electrode-archetype-react-app": "^2.0.3-prerelease.5"
   },
   "dependencies": {
     "autoprefixer-stylus": "^0.9.1",
