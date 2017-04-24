@@ -12,6 +12,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
     yeoman.Base.apply(this, arguments);
   },
   initializing: function () {
+    this.isAddon = this.options.isAddon || false;
     this.pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
 
     // Pre set the default props from the information we have at this point
@@ -109,6 +110,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
           var newRoot = this.destinationPath() + '/' + this.packageName;
           this.destinationRoot(newRoot);
         }
+        this.rootPath = this.isAddon ? '' : "packages/" + this.projectName + "/";
       });
     }
   },
@@ -116,38 +118,40 @@ var ReactComponentGenerator = yeoman.Base.extend({
   writing: {
     lernaStructure: function () {
       // copy lerna and top level templates
-      this.copy("gitignore", ".gitignore");
-      this.template("_package.json", "package.json");
-      this.template("_readme.md", "README.md");
-      this.template("lerna.json", "lerna.json");
+      if (!this.isAddon) {
+        this.copy("gitignore", ".gitignore");
+        this.template("_package.json", "package.json");
+        this.template("_readme.md", "README.md");
+        this.template("lerna.json", "lerna.json");
+      }
     },
     project: function () {
-      this.copy("packages/component/babelrc", "packages/" + this.projectName + "/.babelrc");
-      this.copy("packages/component/gitignore", "packages/" + this.projectName + "/.gitignore");
-      this.copy("packages/component/npmignore", "packages/" + this.projectName + "/.npmignore");
-      this.copy("packages/component/editorconfig", "packages/" + this.projectName + "/.editorconfig");
+      this.copy("packages/component/babelrc", this.rootPath + ".babelrc");
+      this.copy("packages/component/gitignore", this.rootPath + ".gitignore");
+      this.copy("packages/component/npmignore", this.rootPath + ".npmignore");
+      this.copy("packages/component/editorconfig", this.rootPath + ".editorconfig");
       if (this.quoteType === "'") {
-        this.template("packages/component/eslintrc", "packages/" + this.projectName + "/.eslintrc");
+        this.template("packages/component/eslintrc", this.rootPath + ".eslintrc");
       }
-      this.template("packages/component/_gulpfile.js", "packages/" + this.projectName + "/gulpfile.js");
-      this.template("packages/component/_package.json", "packages/" + this.projectName + "/package.json");
-      this.template("packages/component/_readme.md", "packages/" + this.projectName + "/README.md");
+      this.template("packages/component/_gulpfile.js", this.rootPath + "gulpfile.js");
+      this.template("packages/component/_package.json", this.rootPath + "package.json");
+      this.template("packages/component/_readme.md", this.rootPath + "README.md");
     },
     component: function () {
-      this.template("packages/component/src/components/_component.jsx", "packages/" + this.projectName + "/src/components/" + this.projectName + ".jsx");
-      this.template("packages/component/src/styles/_component.css", "packages/" + this.projectName + "/src/styles/" + this.projectName + ".css");
+      this.template("packages/component/src/components/_component.jsx", this.rootPath + "src/components/" + this.projectName + ".jsx");
+      this.template("packages/component/src/styles/_component.css", this.rootPath + "src/styles/" + this.projectName + ".css");
 
       // l10n language templates
-      this.template("packages/component/src/lang/_DefaultMessages.js", "packages/" + this.projectName + "/src/lang/default-messages.js");
-      this.template("packages/component/src/lang/_en.json", "packages/" + this.projectName + "/src/lang/en.json");
-      this.template("packages/component/src/lang/tenants/electrodeio/_defaultMessages.js", "packages/" + this.projectName + "/src/lang/tenants/electrodeio/default-messages.js");
+      this.template("packages/component/src/lang/_DefaultMessages.js", this.rootPath + "src/lang/default-messages.js");
+      this.template("packages/component/src/lang/_en.json", this.rootPath + "src/lang/en.json");
+      this.template("packages/component/src/lang/tenants/electrodeio/_defaultMessages.js", this.rootPath + "src/lang/tenants/electrodeio/default-messages.js");
 
-      this.template("packages/component/src/_Component.js", "packages/" + this.projectName + "/src/index.js");
+      this.template("packages/component/src/_Component.js", this.rootPath + "src/index.js");
     },
     test: function () {
-      this.template("packages/component/test/client/eslintrc", "packages/" + this.projectName + "/test/client/.eslintrc");
-      this.template("packages/component/test/client/components/_component.spec.jsx", "packages/" + this.projectName + "/test/client/components/" + this.projectName + ".spec.jsx");
-      this.copy("packages/component/test/client/components/helpers/_intlEnzymeTestHelper.js", "packages/" + this.projectName + "/test/client/components/helpers/intl-enzyme-test-helper.js");
+      this.template("packages/component/test/client/eslintrc", this.rootPath + "test/client/.eslintrc");
+      this.template("packages/component/test/client/components/_component.spec.jsx", this.rootPath + "test/client/components/" + this.projectName + ".spec.jsx");
+      this.copy("packages/component/test/client/components/helpers/_intlEnzymeTestHelper.js", this.rootPath + "test/client/components/helpers/intl-enzyme-test-helper.js");
     }
     /*
     demo: function () {
@@ -157,7 +161,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
 
   install: function () {
     //install the dependencies for the package
-    let packageDirectory = this.destinationPath() + "/packages/" + this.packageName;
+    let packageDirectory = this.isAddon ? this.destinationPath() : this.destinationPath() + "/" + this.rootPath;
     process.chdir(packageDirectory);
     this.installDependencies({
       bower: false
@@ -168,15 +172,18 @@ var ReactComponentGenerator = yeoman.Base.extend({
     if (this.quoteType === "'") {
       this.spawnCommandSync("node_modules/.bin/eslint", ["--fix", "src", "demo", "example", "test", "--ext", ".js,.jsx"]);
     }
+    //Do not generate the demo app if called from the add on generator
+    if (!isAddon) {
+      let options = {
+        packageName: this.packageName,
+        developerName: this.developerName,
+        className: this.componentName
+      };
+      this.composeWith('electrode:demo', { options }, {
+        local: require.resolve('../demo')
+      });
+    }
 
-    let options = {
-      packageName: this.packageName,
-      developerName: this.developerName,
-      className: this.componentName
-    };
-    this.composeWith('electrode:demo', { options }, {
-      local: require.resolve('../demo')
-    });
     var chdir = this.createDirectory ? "'cd " + this.packageName + "' then " : "";
     this.log(
       "\n" + chalk.green.underline("Your new Electrode component is ready!") +

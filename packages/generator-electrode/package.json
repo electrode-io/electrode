@@ -17,7 +17,8 @@
   },
   "files": [
     "generators",
-    "component"
+    "component",
+    "component-add"
   ],
   "main": "generators/index.js",
   "keywords": [
