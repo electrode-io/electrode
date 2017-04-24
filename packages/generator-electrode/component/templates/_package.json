@@ -5,6 +5,10 @@
   "author": {
     "name": "<%= developerName %>"
   },
+  "scripts": {
+    "test": "lerna bootstrap && lerna run test"
+  },
+  "dependency": {},
   "devDependencies": {
     "gulp": "^3.9.1",
     "lerna": "^2.0.0-rc.1",
