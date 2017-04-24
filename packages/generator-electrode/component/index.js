@@ -155,7 +155,17 @@ var ReactComponentGenerator = yeoman.Base.extend({
     }*/
   },
 
-  default: function () {
+  install: function () {
+    this.installDependencies({
+      bower: false
+    });
+  },
+
+  end: function () {
+    if (this.quoteType === "'") {
+      this.spawnCommandSync("node_modules/.bin/eslint", ["--fix", "src", "demo", "example", "test", "--ext", ".js,.jsx"]);
+    }
+
     let options = {
       packageName: this.packageName,
       developerName: this.developerName,
@@ -164,21 +174,11 @@ var ReactComponentGenerator = yeoman.Base.extend({
     this.composeWith('electrode:demo', { options }, {
       local: require.resolve('../demo')
     });
-  },
-
-  install: function () {
-    this.npmInstall();
-  },
-
-  end: function () {
-    if (this.quoteType === "'") {
-      this.spawnCommandSync("node_modules/.bin/eslint", ["--fix", "src", "demo", "example", "test", "--ext", ".js,.jsx"]);
-    }
     var chdir = this.createDirectory ? "'cd " + this.packageName + "' then " : "";
     this.log(
       "\n" + chalk.green.underline("Your new Electrode component is ready!") +
       "\n" +
-      "\nYour component is in src/ and your demo files are in demo/" +
+      "\nYour component is in packages/ and your demo files are in " + this.packageName + "-demo-app/" +
       "\n" +
       "\nType " + chdir + "'gulp demo' to run the development build and demo tasks." +
       "\n"
