@@ -11,7 +11,6 @@ var extend = _.merge;
 var parseAuthor = require('parse-author');
 var githubUsername = require('github-username');
 var glob = require("glob");
-//var fs = require("fs");
 
 /*
 * This generator should check that it is invoked from within a packages folder
@@ -69,6 +68,27 @@ module.exports = generators.Base.extend({
     // check for missing
     checkError();
     this.props = {};
+    let homeFile = this.fs.read(this.destinationPath("../" + this.demoAppName + "/src/client/components/home.jsx"));
+    let homeArray = homeFile.split("\n");
+    //@TODO:: add a proper react parser 
+    // add import at the top
+    let rx = "import {Re} from \"re\";";
+    let rxTag = "<Re />";
+    homeArray.unshift(rx);
+    //get the first closing div, home shoud have one closing div.
+    let splitPoint = homeArray.findIndex((value, index, array) => {
+      if (value.match("</div>")) {
+        return index;
+      }
+    });
+    // insert the new class before the div
+    //splice the array into 2, before closing div and after
+    let topHalf = homeArray.splice(0, splitPoint);
+    topHalf.push(rxTag);
+    let newHomeString = topHalf.concat(homeArray).join("\n");
+
+
+
   },
 
   prompting: {
@@ -112,6 +132,7 @@ module.exports = generators.Base.extend({
     this.fs.extendJSON(this.destinationPath("../../" + this.demoAppName + "/package.json"), dependencies);
     //@TODO: Kill overwrite prompt for extend
     //@TODO: add content to the home file, parse react for that
+    let homeFile = this.fs.read(this.destinationPath("../../" + this.demoAppName + "/src/client/components/home.jsx"));
   },
 
   end: function () {
