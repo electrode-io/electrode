@@ -37,17 +37,17 @@ module.exports = generators.Base.extend({
   initializing: function () {
     let appPkgPath = '';
     let homeComponentPath = '';
-    let demoAppName = '';
+    this.demoAppName = '';
 
     //This function checks if all required pieces are present
     const checkError = () => {
-      if (_.isEmpty(demoAppName)) {
+      if (_.isEmpty(this.demoAppName)) {
         this.env.error("We could not find your demo-app. Make sure your directory structure is preserved after running `yo electrode-component");
       }
-      if (_.isEmpty(this.pkg)) {
+      if (!(this.pkg)) {
         this.env.error("We could not find package.json for your demo-app. Make sure your directory structure is preserved after running `yo electrode-component");
       }
-      if (_.isEmpty(this.homeComponent)) {
+      if (!(this.homeComponent)) {
         this.env.error("We could not find home.jsx for your demo-app. Make sure your directory structure is preserved after running `yo electrode-component");
       }
     };
@@ -58,9 +58,9 @@ module.exports = generators.Base.extend({
     }
 
     try {
-      demoAppName = glob.sync("../**-demo-app").pop().split("/").pop();
-      this.pkg = this.fs.readJSON(this.destinationPath("../" + demoAppName + "/package.json"));
-      this.homeComponent = this.fs.read(this.destinationPath("../" + demoAppName + "/src/client/components/home.jsx"));
+      this.demoAppName = glob.sync("../**-demo-app").pop().split("/").pop();
+      this.pkg = this.fs.exists(this.destinationPath("../" + this.demoAppName + "/package.json"));
+      this.homeComponent = this.fs.exists(this.destinationPath("../" + this.demoAppName + "/src/client/components/home.jsx"));
     }
     catch (e) {
       checkError();
@@ -68,69 +68,54 @@ module.exports = generators.Base.extend({
 
     // check for missing
     checkError();
-
-    // We can call the component generator now
-
+    this.props = {};
   },
+
+  prompting: {
+    greeting: function () {
+      this.log(yosay(
+        'Welcome to the ' + chalk.red('Electrode Add Component') + ' generator!'
+      ));
+    },
+
+    askFor: function () {
+      var prompts = [
+        {
+          type: "input",
+          name: 'name',
+          message: 'Component Name',
+          when: !this.props.name,
+          default: path.basename(process.cwd())
+        }
+      ];
+      return this.prompt(prompts).then((props) => {
+        this.props = extend(this.props, props);
+        this.packageName = this.props.name;
+      });
+    }
+  },
+
   default: function () {
     let options = {
-      isAddon: true
+      isAddon: true,
+      name: this.packageName
     };
     this.composeWith('electrode:component', { options }, {
       local: require.resolve('../component')
     });
   },
   writing: function () {
-
     //add new package to the dependencies
-    //this.pkg.dependencies[this.packageName] = "../packages/" + this.packageName;
-    //console.log(this.pkg);
-
-    //add content to the home file, parse react for that
-    //@TODO: while writing check to see if the demo App/ already exists
-    // if so, we only need to edit the package.json to add and point to the new package
-    // Also, update the home.jsx to use the new package.
-
-    /*
-    var newRoot = this.destinationPath() + '/' + _.kebabCase(_.deburr(this.packageName)) + "-demo-app";
-    this.destinationRoot(newRoot);
-    this.template("_package.json", "package.json");
-  
-    const rootConfigsToCopy = ['gulpfile.js', 'config', 'test', 'archetype'];
-    rootConfigsToCopy.forEach((f) => {
-      this.template(
-        this.templatePath(f),
-        this.destinationPath(f)
-      );
-    });
-  
-    //special handling for the server file
-    this.fs.copyTpl(
-      this.templatePath('src/server'),
-      this.destinationPath('src/server')
-    ); */
-
-  },
-
-  install: function () {
-    // if (!this.isExtended) {
-    //   this.installDependencies({
-    //     bower: false
-    //   });
-    // }
+    let dependencies = {};
+    dependencies[this.packageName] = "../packages/" + this.packageName;
+    //overwrite the Demo App package.json
+    this.fs.extendJSON(this.destinationPath("../../" + this.demoAppName + "/package.json"), dependencies);
+    //@TODO: Kill overwrite prompt for extend
+    //@TODO: add content to the home file, parse react for that
   },
 
   end: function () {
-    if (this.props.quoteType === "'") {
-      this.spawnCommandSync("node_modules/.bin/eslint", ["--fix", "src", "test", "config", "--ext", ".js,.jsx"]);
-    }
-
-    var chdir = this.props.createDirectory ? "'cd " + _.kebabCase(_.deburr(this.props.name)) + "' then " : "";
-    this.log(
-      "\n" + chalk.green.underline("Your new Electrode Demo application is ready!") +
-      "\n" +
-      "\nType " + chdir + "'gulp dev' to start the server." +
-      "\n"
-    );
+    console.log("END FUNCTION");
+    // run npmi for the demo app again
   }
 });

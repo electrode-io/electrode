@@ -17,7 +17,8 @@ var ReactComponentGenerator = yeoman.Base.extend({
 
     // Pre set the default props from the information we have at this point
     this.props = {
-      packageName: this.pkg.name
+      packageName: this.pkg.name,
+      projectName: this.options.name
     };
 
     if (_.isObject(this.pkg.author)) {
@@ -30,12 +31,14 @@ var ReactComponentGenerator = yeoman.Base.extend({
   },
   prompting: {
     greeting: function () {
-      this.log(
-        "\n" + chalk.bold.underline("Welcome to the Electrode Component Generator") +
-        "\n" +
-        "\nWe're going to set up a new " + chalk.bold("Electrode") + " component, ready for development with" +
-        "\n" + chalk.bold("gulp, webpack, demo, electrode component archetype, and live-reload")
-      );
+      if (!this.isAddon) {
+        this.log(
+          "\n" + chalk.bold.underline("Welcome to the Electrode Component Generator") +
+          "\n" +
+          "\nWe're going to set up a new " + chalk.bold("Electrode") + " component, ready for development with" +
+          "\n" + chalk.bold("gulp, webpack, demo, electrode component archetype, and live-reload")
+        );
+      }
     },
     askFor: function () {
       if (this.pkg.name || this.options.name) {
@@ -45,7 +48,8 @@ var ReactComponentGenerator = yeoman.Base.extend({
         type: "input",
         name: "projectName",
         message: "What is your Package/GitHub project name? (e.g., 'wysiwyg-component')",
-        default: "wysiwyg-component"
+        default: "wysiwyg-component",
+        when: !this.props.name
       },
       {
         type: "input",
@@ -173,7 +177,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
       this.spawnCommandSync("node_modules/.bin/eslint", ["--fix", "src", "demo", "example", "test", "--ext", ".js,.jsx"]);
     }
     //Do not generate the demo app if called from the add on generator
-    if (!isAddon) {
+    if (!this.isAddon) {
       let options = {
         packageName: this.packageName,
         developerName: this.developerName,
