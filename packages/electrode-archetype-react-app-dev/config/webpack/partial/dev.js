@@ -12,7 +12,10 @@ module.exports = function () {
     devServer: {
       reporter: webpackDevReporter,
       https: Boolean(process.env.WEBPACK_DEV_HTTPS),
-      public: `${archetype.webpack.devHostname}:${archetype.webpack.devPort}`
+      public: `${archetype.webpack.devHostname}:${archetype.webpack.devPort}`,
+      headers: {
+        "Access-Control-Allow-Origin": `http://${archetype.webpack.devHostname}:${archetype.webpack.devPort}`
+      }
     },
     output: {
       publicPath: `${devProtocol}${archetype.webpack.devHostname}:${archetype.webpack.devPort}/js/`,
