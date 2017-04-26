@@ -68,27 +68,6 @@ module.exports = generators.Base.extend({
     // check for missing
     checkError();
     this.props = {};
-    let homeFile = this.fs.read(this.destinationPath("../" + this.demoAppName + "/src/client/components/home.jsx"));
-    let homeArray = homeFile.split("\n");
-    //@TODO:: add a proper react parser 
-    // add import at the top
-    let rx = "import {Re} from \"re\";";
-    let rxTag = "<Re />";
-    homeArray.unshift(rx);
-    //get the first closing div, home shoud have one closing div.
-    let splitPoint = homeArray.findIndex((value, index, array) => {
-      if (value.match("</div>")) {
-        return index;
-      }
-    });
-    // insert the new class before the div
-    //splice the array into 2, before closing div and after
-    let topHalf = homeArray.splice(0, splitPoint);
-    topHalf.push(rxTag);
-    let newHomeString = topHalf.concat(homeArray).join("\n");
-
-
-
   },
 
   prompting: {
@@ -106,11 +85,23 @@ module.exports = generators.Base.extend({
           message: 'Component Name',
           when: !this.props.name,
           default: path.basename(process.cwd())
+        },
+        {
+          type: "input",
+          name: "componentName",
+          message: "What is the ClassName for your component?",
+          default: this.props.componentName,
+          when: !this.props.componentName
         }
       ];
       return this.prompt(prompts).then((props) => {
         this.props = extend(this.props, props);
         this.packageName = this.props.name;
+        this.componentName = _.kebabCase(_.deburr(this.props.componentName))
+          .replace(/^\s+|\s+$/g, "")
+          .replace(/(^|[-_ ])+(.)/g, function (match, first, second) {
+            return second.toUpperCase();
+          });
       });
     }
   },
@@ -118,7 +109,9 @@ module.exports = generators.Base.extend({
   default: function () {
     let options = {
       isAddon: true,
-      name: this.packageName
+      name: this.packageName,
+      componentName: this.componentName,
+      demoAppName: this.demoAppName
     };
     this.composeWith('electrode:component', { options }, {
       local: require.resolve('../component')
@@ -129,14 +122,36 @@ module.exports = generators.Base.extend({
     let dependencies = {};
     dependencies[this.packageName] = "../packages/" + this.packageName;
     //overwrite the Demo App package.json
-    this.fs.extendJSON(this.destinationPath("../../" + this.demoAppName + "/package.json"), dependencies);
-    //@TODO: Kill overwrite prompt for extend
-    //@TODO: add content to the home file, parse react for that
+    let existingPkg = this.fs.readJSON(this.destinationPath("../../" + this.demoAppName + "/package.json"));
+    existingPkg.dependencies[this.packageName] = "../packages/" + this.packageName;
+
+    this.fs.writeJSON(this.destinationPath("../../" + this.demoAppName + "/package.json"), existingPkg);
+
     let homeFile = this.fs.read(this.destinationPath("../../" + this.demoAppName + "/src/client/components/home.jsx"));
+    let homeArray = homeFile.split("\n");
+    // add import at the top
+    let rx = "import {" + this.componentName + "} from \"" + this.packageName + "\";";
+    let rxTag = "<" + this.componentName + " />";
+    homeArray.unshift(rx);
+    //get the first closing div, home shoud have one closing div.
+    let splitPoint = homeArray.findIndex((value, index, array) => {
+      if (value.match("</div>")) {
+        return index;
+      }
+    });
+    // insert the new class before the div
+    //splice the array into 2, before closing div and after
+    let topHalf = homeArray.splice(0, splitPoint);
+    topHalf.push(rxTag);
+    let newHomeString = topHalf.concat(homeArray).join("\n");
+    this.fs.write(this.destinationPath("../../" + this.demoAppName + "/src/client/components/home.jsx"), newHomeString);
   },
 
   end: function () {
-    console.log("END FUNCTION");
     // run npmi for the demo app again
+    process.chdir(this.destinationPath("../../" + this.demoAppName));
+    this.installDependencies({
+      bower: false
+    });
   }
 });

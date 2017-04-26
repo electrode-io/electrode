@@ -13,11 +13,12 @@ var ReactComponentGenerator = yeoman.Base.extend({
   },
   initializing: function () {
     this.isAddon = this.options.isAddon || false;
+    this.demoAppName = this.options.demoAppName;
     this.pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
 
     // Pre set the default props from the information we have at this point
     this.props = {
-      packageName: this.pkg.name,
+      packageName: this.pkg.name || this.options.name,
       projectName: this.options.name
     };
 
@@ -44,6 +45,10 @@ var ReactComponentGenerator = yeoman.Base.extend({
       if (this.pkg.name || this.options.name) {
         this.props.name = this.pkg.name || _.kebabCase(this.options.name);
       }
+      if (this.options.componentName) {
+        this.props.componentName = this.options.componentName;
+      }
+
       var prompts = [{
         type: "input",
         name: "projectName",
@@ -55,7 +60,8 @@ var ReactComponentGenerator = yeoman.Base.extend({
         type: "input",
         name: "packageName",
         message: "What is the ClassName for your component?",
-        default: this.props.componentName
+        default: this.props.componentName,
+        when: !this.props.componentName
       }, {
         type: "input",
         name: "packageName",
@@ -188,13 +194,13 @@ var ReactComponentGenerator = yeoman.Base.extend({
       });
     }
 
-    var chdir = this.createDirectory ? "'cd " + this.packageName + "' then " : "";
+    var appName = this.demoAppName ? this.demoAppName : this.packageName + "-demo-app/";
     this.log(
       "\n" + chalk.green.underline("Your new Electrode component is ready!") +
       "\n" +
-      "\nYour component is in packages/ and your demo files are in " + this.packageName + "-demo-app/" +
+      "\nYour component is in packages/" + this.packageName + " and your demo app is " + appName +
       "\n" +
-      "\nType " + chdir + "'gulp demo' to run the development build and demo tasks." +
+      "\nType 'cd ../" + appName + "' then 'gulp dev' to run the development build for the demo app." +
       "\n"
     );
   }
