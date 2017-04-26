@@ -11,7 +11,11 @@ module.exports = function () {
   const config = {
     devServer: {
       reporter: webpackDevReporter,
-      https: Boolean(process.env.WEBPACK_DEV_HTTPS)
+      https: Boolean(process.env.WEBPACK_DEV_HTTPS),
+      public: `${archetype.webpack.devHostname}:${archetype.webpack.devPort}`,
+      headers: {
+        "Access-Control-Allow-Origin": `http://${archetype.webpack.devHostname}:${archetype.webpack.devPort}`
+      }
     },
     output: {
       publicPath: `${devProtocol}${archetype.webpack.devHostname}:${archetype.webpack.devPort}/js/`,
