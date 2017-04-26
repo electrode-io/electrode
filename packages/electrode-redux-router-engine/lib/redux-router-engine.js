@@ -1,12 +1,15 @@
 "use strict";
 
-const Promise = require("bluebird");
+/* eslint-disable max-params,indent,global-require */
+
 const assert = require("assert");
 const optionalRequire = require("optional-require")(require);
+const Promise = optionalRequire("bluebird", { message: false, default: global.Promise });
 const React = optionalRequire("react");
 const ReactDomServer = optionalRequire("react-dom/server");
 const ReactRouter = require("react-router");
 const Provider = require("react-redux").Provider;
+const Path = require("path");
 
 class ReduxRouterEngine {
   constructor(options) {
@@ -30,6 +33,15 @@ class ReduxRouterEngine {
     if (this.options.renderToString) {
       this._renderToString = this.options.renderToString;
     }
+
+    if (!this.options.routesHandlerPath) {
+      // Default for Electrode app
+      this.options.routesHandlerPath = Path.join(process.env.APP_SRC_DIR || "", "server/routes");
+    }
+
+    this.options.routesHandlerPath = Path.resolve(this.options.routesHandlerPath);
+
+    this._handlers = {};
   }
 
   render(req, options) {
@@ -51,14 +63,15 @@ class ReduxRouterEngine {
           };
         }
         const routes = match.renderProps.routes;
-        const methods = routes[routes.length - 1].methods || "get";
+        const route = routes[routes.length - 1];
+        const methods = route.methods || "get";
 
         if (methods.toLowerCase().indexOf(req.method.toLowerCase()) < 0) {
           throw new Error(
             `redux-router-engine: ${location} doesn't allow request method ${req.method}`);
         }
 
-        return this._handleRender(req, match, options || {});
+        return this._handleRender(req, match, route, options || {});
       })
       .catch((err) => {
         this.options.logError.call(this, req, err);
@@ -86,12 +99,12 @@ class ReduxRouterEngine {
     });
   }
 
-  _handleRender(req, match, options) {
+  _handleRender(req, match, route, options) {
     const withIds = options.withIds !== undefined ? options.withIds : this.options.withIds;
     const stringifyPreloadedState =
       options.stringifyPreloadedState || this.options.stringifyPreloadedState;
 
-    return (options.createReduxStore || this.options.createReduxStore).call(this, req, match)
+    return this._getReduxStoreInitializer(route, options).call(this, req, match)
       .then((store) => {
         return {
           status: 200,
@@ -99,7 +112,6 @@ class ReduxRouterEngine {
           prefetch: stringifyPreloadedState(store.getState())
         };
       });
-
   }
 
   _renderToString(req, store, match, withIds) { // eslint-disable-line
@@ -116,6 +128,31 @@ class ReduxRouterEngine {
       );
     }
   }
+
+  _getReduxStoreInitializer(route, options) {
+    let h = this._handlers[route.path];
+    if (h) {
+      return h;
+    }
+
+    switch (route.init) {
+      case undefined:
+        h = options.createReduxStore || this.options.createReduxStore;
+        break;
+      case true:
+        h = require(Path.join(this.options.routesHandlerPath, route.path));
+        break;
+      default:
+        assert(typeof route.init === "string", "route init prop must be a string");
+        h = require(Path.join(this.options.routesHandlerPath, route.init));
+        break;
+    }
+
+    this._handlers[route.path] = h;
+
+    return h;
+  }
+
 }
 
 module.exports = ReduxRouterEngine;
