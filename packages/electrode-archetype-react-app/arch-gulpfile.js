@@ -42,6 +42,8 @@ function setStaticFilesEnv() {
 
 function setWebpackDev() {
   process.env.WEBPACK_DEV = "true";
+  process.env.WEBPACK_DEV_PORT = 3000;
+  process.env.WEBPACK_DEV_HOST = "dev.walmart.com";
 }
 
 function setOptimizeStats() {
