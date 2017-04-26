@@ -18,6 +18,9 @@
     "./server/plugins/updateStorage": {
       "module": "./{{env.APP_SRC_DIR}}server/plugins/update-storage"
     },
+    "./server/plugins/records": {
+      "module": "./{{env.APP_SRC_DIR}}server/plugins/records"
+    },
     "webapp": {
       "module": "electrode-react-webapp/lib/hapi",
       "options": {
