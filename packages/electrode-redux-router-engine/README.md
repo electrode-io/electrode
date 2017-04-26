@@ -23,11 +23,27 @@ export default (
   <Route path="/test" component={Page}>
     <IndexRoute component={Home}/>
     <Redirect from="source" to="target" />
+    <Route methods="get" path="/subroute" init="subroute-init" component={SubRoute} />
   </Route>
 );
 ```
 
-For each route, you can add an optional attribute `methods` to specify the HTTP methods you want the route to allow.
+For each route, you can add the following optional attributes:
+
+-  `init` to specify custom redux store initializer for the route
+-  `methods` to specify the HTTP methods you want the route to allow.
+
+### `init` attribute
+
+If `true`, then uses route's path to load JS file that provides the store initializer.
+
+i.e. `<Route path="/subroute" init={true} />`, will require file `CWD/${options.routesHandlerPath}/subroute`.
+
+i.e. `<Route path="/subroute" init="custom-init" />`, will require file `CWD/${options.routesHandlerPath}/custom-init`
+
+If `undefined` then will use the default `createReduxStore` passed through options.
+
+### `methods` attribute
 
 i.e. `<Route methods="get,post" path="/form" component={Form}>`
 
@@ -66,7 +82,6 @@ function handler(req, res) {
 }
 ```
 
-
 ## API
 
 ### [constructor(options)]()
@@ -85,6 +100,8 @@ Where options could contain the following fields:
     - Defaulted to `console.log`
   - `renderToString` - **optional** callback to provide custom renderToString
     - It should take `(req, store, match, withIds)` arguments
+  - `routesHandlerPath` - **optional** Path to directory to lookup individual route's `createReduxStore` handlers.
+    - This is defaulted to `${process.env.APP_SRC_DIR}/server/routes` (for Electrode apps)
 
 ### [engine.render(req, options)]()
 
