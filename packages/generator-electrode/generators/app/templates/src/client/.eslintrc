@@ -1,0 +1,8 @@
+---
+extends:
+  - "../../node_modules/electrode-archetype-react-app-dev/config/eslint/.eslintrc-react"
+
+rules:
+  quotes:
+    - 2
+    - "single"

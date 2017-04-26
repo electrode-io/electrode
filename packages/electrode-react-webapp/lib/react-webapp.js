@@ -4,6 +4,7 @@ const _ = require("lodash");
 const Promise = require("bluebird");
 const fs = require("fs");
 const Path = require("path");
+const Helmet = require("react-helmet").Helmet;
 
 const CONTENT_MARKER = "{{SSR_CONTENT}}";
 const HEADER_BUNDLE_MARKER = "{{WEBAPP_HEADER_BUNDLES}}";
@@ -120,7 +121,7 @@ function makeRouteHandler(routeOptions, userContent) {
   const criticalCSS = getCriticalCSS(routeOptions.criticalCSS);
 
   /* Create a route handler */
-  /* eslint max-statements: [2, 22] */
+  /* eslint max-statements: [2, 35] */
   return (options) => {
     const mode = options.mode;
     const renderJs = RENDER_JS && mode !== "nojs";
@@ -178,7 +179,7 @@ function makeRouteHandler(routeOptions, userContent) {
       });
     };
 
-    const makeHeaderBundles = () => {
+    const makeHeaderBundles = (helmet) => {
       const manifest = bundleManifest();
       const manifestLink = manifest
         ? `<link rel="manifest" href="${manifest}" />`
@@ -187,34 +188,51 @@ function makeRouteHandler(routeOptions, userContent) {
       const cssLink = css && !criticalCSS
         ? `<link rel="stylesheet" href="${css}" />`
         : "";
-      return `${manifestLink}${cssLink}`;
+      const scriptsFromHelmet = ["link", "style"]
+          .map((tagName) => helmet[tagName].toString()).join("");
+
+      return `${manifestLink}${cssLink}${scriptsFromHelmet}`;
     };
 
-    const makeBodyBundles = () => {
+    const makeBodyBundles = (helmet) => {
       const js = bundleJs();
       const css = bundleCss();
       const cssLink = css && criticalCSS
         ? `<link rel="stylesheet" href="${css}" />`
         : "";
       const jsLink = js ? `<script src="${js}"></script>` : "";
-      return `${cssLink}${jsLink}`;
+      const scriptsFromHelmet = ["script", "noscript"]
+          .map((tagName) => helmet[tagName].toString()).join("");
+
+      return `${cssLink}${jsLink}${scriptsFromHelmet}`;
+    };
+
+    const emptyTitleRegex = /<title[^>]*><\/title>/;
+
+    const makeTitle = (helmet) => {
+      const helmetTitleScript = helmet.title.toString();
+      const helmetTitleEmpty = helmetTitleScript.match(emptyTitleRegex);
+
+      return helmetTitleEmpty ? `<title>${routeOptions.pageTitle}</title>` : helmetTitleScript;
     };
 
     const renderPage = (content) => {
+      const helmet = Helmet.renderStatic();
+
       return html.replace(/{{[A-Z_]*}}/g, (m) => {
         switch (m) {
         case CONTENT_MARKER:
           return content.html || "";
         case TITLE_MARKER:
-          return routeOptions.pageTitle;
+          return makeTitle(helmet);
         case HEADER_BUNDLE_MARKER:
-          return makeHeaderBundles();
+          return makeHeaderBundles(helmet);
         case BODY_BUNDLE_MARKER:
-          return makeBodyBundles();
+          return makeBodyBundles(helmet);
         case PREFETCH_MARKER:
           return `<script>${content.prefetch}</script>`;
         case META_TAGS_MARKER:
-          return iconStats;
+          return helmet.meta.toString() + iconStats;
         case CRITICAL_CSS_MARKER:
           return criticalCSS;
         default:
@@ -243,7 +261,8 @@ const setupOptions = (options) => {
     htmlFile: Path.join(__dirname, "index.html"),
     devServer: {
       host: process.env.WEBPACK_HOST || "127.0.0.1",
-      port: process.env.WEBPACK_DEV_PORT || "2992"
+      port: process.env.WEBPACK_DEV_PORT || "2992",
+      https: Boolean(process.env.WEBPACK_DEV_HTTPS)
     },
     paths: {},
     stats: "dist/server/stats.json",
@@ -254,7 +273,8 @@ const setupOptions = (options) => {
 
   const pluginOptions = _.defaultsDeep({}, options, pluginOptionsDefaults);
   const chunkSelector = resolveChunkSelector(pluginOptions);
-  const devBundleBase = `http://${pluginOptions.devServer.host}:${pluginOptions.devServer.port}/js/`;
+  const devProtocol = process.env.WEBPACK_DEV_HTTPS ? "https://" : "http://";
+  const devBundleBase = `${devProtocol}${pluginOptions.devServer.host}:${pluginOptions.devServer.port}/js/`; // eslint-disable-line max-len
   const statsPath = getStatsPath(pluginOptions.stats, pluginOptions.buildArtifacts);
 
   return Promise.try(() => loadAssetsFromStats(statsPath))

@@ -3,8 +3,17 @@
   "version": "1.0.0",
   "description": "<%= projectName %>-component",
   "author": {
-    "name": "<%= developerName %>"
+    "name": "<%= developerName %>",
+    "url": "<%= githubUrl %>/<%= ghUser %>"
   },
+  "repository": {
+    "type": "git",
+    "url": "<%= githubUrl %>/<%= packageGitHubOrg %>/<%= ghRepo %>.git"
+  },
+  "bugs": {
+    "url": "<%= githubUrl %>/<%= packageGitHubOrg %>/<%= ghRepo %>/issues"
+  },
+  "homepage": "<%= githubUrl %>/<%= packageGitHubOrg %>/<%= ghRepo %>",
   "scripts": {
     "test": "lerna bootstrap && lerna run test"
   },

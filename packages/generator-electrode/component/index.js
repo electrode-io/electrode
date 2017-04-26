@@ -10,6 +10,8 @@ var parseAuthor = require('parse-author');
 var ReactComponentGenerator = yeoman.Base.extend({
   constructor: function () {
     yeoman.Base.apply(this, arguments);
+    this.quotes = this.options.quotes;
+    this.githubUrl = this.options.githubUrl || "https://github.com";
   },
   initializing: function () {
     this.isAddon = this.options.isAddon || false;
@@ -29,6 +31,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
       var info = parseAuthor(this.pkg.author);
       this.props.developerName = info.name;
     }
+    this.props.quoteType = this.quotes;
   },
   prompting: {
     greeting: function () {
@@ -88,7 +91,8 @@ var ReactComponentGenerator = yeoman.Base.extend({
         name: "quoteType",
         message: "Use double quotes or single quotes?",
         choices: ["\"", "'"],
-        default: "\""
+        default: "\"",
+        when: !this.props.quoteType
       }, {
         type: "input",
         name: "ghRepo",
