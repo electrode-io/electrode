@@ -1,6 +1,6 @@
 {
   "name": "electrode-react-webapp",
-  "version": "1.4.2",
+  "version": "1.5.0",
   "description": "Hapi plugin that provides a default React web app template",
   "scripts": {
     "lint": "gulp lint",
@@ -37,12 +37,12 @@
   "license": "Apache-2.0",
   "dependencies": {
     "bluebird": "^3",
-    "react": "^15.3.1 || ^0.14.8",
-    "react-helmet": "^5.0.3",
     "hoek": "^3.0.1",
     "in-publish": "^2.0.0",
     "koa-router": "^5.4.0",
-    "lodash": "^4.0.0"
+    "lodash": "^4.0.0",
+    "react": "^15.3.1 || ^0.14.8",
+    "react-helmet": "^5.0.3"
   },
   "devDependencies": {
     "babel-cli": "^6.1.1",
