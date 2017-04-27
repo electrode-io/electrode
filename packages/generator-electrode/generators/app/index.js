@@ -58,10 +58,11 @@ module.exports = generators.Base.extend({
     });
     //Flag to check if the OSS generator is being called as a subgenerator
     this.isExtended = this.options.isExtended || false;
-    this.serverType = this.options.serverType || HapiJS;
-    this.githubUrl = this.options.githubUrl || "";
-    this.license = this.options.license;
-    this.quotes = this.options.quotes;
+    this.isDemoApp = this.options.isDemoApp || false;
+    //data should be passed to the generator using props
+    this.props = this.options.props || {};
+
+    console.log("PROPS IN APP GEN INIT::", this.props);
   },
 
   initializing: function () {
@@ -71,13 +72,6 @@ module.exports = generators.Base.extend({
       this.pkg.keywords = this.pkg.keywords.filter((x) => x);
     }
 
-    // Pre set the default props from the information we have at this point
-    this.props = {
-      name: this.pkg.name,
-      description: this.pkg.description,
-      version: this.pkg.version,
-      homepage: this.pkg.homepage
-    };
 
     if (_.isObject(this.pkg.author)) {
       this.props.authorName = this.pkg.author.name;
@@ -95,10 +89,15 @@ module.exports = generators.Base.extend({
       this.props.authorEmail = info.email;
       this.props.authorUrl = info.url;
     }
-    this.props.serverType = this.serverType || HapiJS;
-    this.props.githubUrl = this.githubUrl;
-    this.props.quoteType = this.quotes;
-    this.props.license = this.license;
+    // Pre set the default props from the information we have at this point
+    this.props = extend({
+      name: this.pkg.name,
+      description: this.pkg.description,
+      version: this.pkg.version,
+      homepage: this.pkg.homepage
+    }, this.props);
+
+    console.log("PROPS IN APP GEN INIT MERGE::", this.props);
   },
 
   prompting: {
@@ -168,7 +167,7 @@ module.exports = generators.Base.extend({
           type: "input",
           name: 'keywords',
           message: 'Package keywords (comma to split)',
-          when: _.isEmpty(this.pkg.keywords),
+          when: _.isEmpty(this.pkg.keywords) || !this.props.keywords,
           filter: function (words) {
             return words.split(/\s*,\s*/g).filter((x) => x);
           }
@@ -192,7 +191,7 @@ module.exports = generators.Base.extend({
           name: "quoteType",
           message: "Use double quotes or single quotes?",
           choices: ["\"", "'"],
-          when: this.props.quoteType === undefined,
+          when: !this.props.quoteType,
           default: "\""
         },
         {
@@ -216,7 +215,7 @@ module.exports = generators.Base.extend({
     },
 
     askForGithubAccount: function () {
-      if (this.options.githubAccount) {
+      if (this.props.githubAccount || this.options.githubAccount) {
         this.props.githubAccount = this.options.githubAccount;
         return;
       }

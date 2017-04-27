@@ -188,13 +188,29 @@ var ReactComponentGenerator = yeoman.Base.extend({
     }
     //Do not generate the demo app if called from the add on generator
     if (!this.isAddon) {
+      let originalDemoAppName = _.kebabCase(_.deburr(this.packageName)) + "-demo-app";
+      //custom props to pass to the App Generator
+      this.props.description = this.description || "The demo App";
+      this.props.createDirectory = false;
+      this.props.name = originalDemoAppName;
+      this.props.homepage = this.githubUrl + "/" + this.packageGitHubOrg + "/" + this.ghRepo;
+      this.props.serverType = "HapiJS";
+      this.props.githubUrl = this.githubUrl;
+      this.props.authorName = this.developerName;
+      this.props.authorEmail = this.ghUser + "@" + this.packageGitHubOrg + ".com";
+      this.props.authorUrl = this.githubUrl + "/" + this.ghUser;
+      this.props.pwa = false;
+      this.props.autoSsr = false;
+      this.props.license = "nolicense";
+      this.props.githubAccount = this.ghUser;
+      this.props.keywords = "electrode";
       let options = {
-        packageName: this.packageName,
-        developerName: this.developerName,
-        className: this.componentName
+        props: this.props
       };
-      this.composeWith('electrode:demo', { options }, {
-        local: require.resolve('../demo')
+      var newRoot = this.destinationPath() + '/' + originalDemoAppName;
+      this.destinationRoot(newRoot);
+      this.composeWith('electrode:app', { options }, {
+        local: require.resolve('../generators/app')
       });
     }
 

@@ -48,16 +48,27 @@ module.exports = generators.Base.extend({
       this.props.authorEmail = info.email;
       this.props.authorUrl = info.url;
     }
-    this.props.serverType = this.serverType || "HapiJS";
+    this.props.serverType = "HapiJS";
     this.props.githubUrl = this.githubUrl;
   },
 
   writing: function () {
+    this.props.description = this.description || "The demo App";
+
+    var newRoot = this.destinationPath() + '/' + _.kebabCase(_.deburr(this.packageName)) + "-demo-app";
+    this.destinationRoot(newRoot);
+    let options = {
+      props: this.props
+    };
+    console.log("DEMO PROPS::::", this.props);
+    this.composeWith('electrode:app', { options }, {
+      local: require.resolve('../generators/app')
+    });
     //@TODO: while writing check to see if the demo App/ already exists
     // if so, we only need to edit the package.json to add and point to the new package
     // Also, update the home.jsx to use the new package.
 
-
+    /*
     var newRoot = this.destinationPath() + '/' + _.kebabCase(_.deburr(this.packageName)) + "-demo-app";
     this.destinationRoot(newRoot);
     this.template("_package.json", "package.json");
@@ -84,7 +95,7 @@ module.exports = generators.Base.extend({
       { // copy options
         globOptions: {
           // Images are damaged by the template compiler
-          ignore: ['**/client/images/**', '**/client/components/home.jsx']
+          //
         }
       }
     );
@@ -102,14 +113,14 @@ module.exports = generators.Base.extend({
     this.fs.copy(
       this.templatePath('src/client/images'),
       this.destinationPath('src/client/images')
-    );
+    ); */
   },
 
   install: function () {
     if (!this.isExtended) {
-      this.installDependencies({
-        bower: false
-      });
+      // this.installDependencies({
+      //   bower: false
+      // });
     }
   },
 
