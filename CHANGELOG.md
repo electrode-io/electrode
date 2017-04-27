@@ -1,5 +1,33 @@
 # Packages
 
+-   electrode-archetype-react-app-dev@2.2.0
+-   electrode-archetype-react-app@2.2.0
+-   electrode-archetype-react-component-dev@1.4.0
+-   electrode-archetype-react-component@1.4.0
+-   electrode-react-webapp@1.5.0
+-   electrode-redux-router-engine@1.3.0
+-   electrode-webpack-reporter@0.3.4
+-   generator-electrode@1.12.0
+
+## Commits
+
+-   [commit](http://github.com/electrode-io/electrode/commit/0871a19008656ccb3ea7c32c6715a685283c10f9) Add prop-types for react 15.5.0 (#279)
+-   [commit](http://github.com/electrode-io/electrode/commit/f0140655a9587cd360e7c547e3e7ba08ac810124) invert cssModuleSupport so that it chooses the correct loaders (#283)
+-   [commit](http://github.com/electrode-io/electrode/commit/9605bf1bd7bab73775979ed1352367e4ed8afc5c) Update proptypes (#287)
+-   [commit](http://github.com/electrode-io/electrode/commit/a5f3a7c2e0163a235a07411b4cef707b9919294b) Add environment variable for webpack dev HTTPS (#290)
+-   [commit](http://github.com/electrode-io/electrode/commit/15754928ac46e9f920c7fa38ad983f783bd8f65b) Use socketPort from defaults (#294)
+-   [commit](http://github.com/electrode-io/electrode/commit/9c88e4424af8a423d6e44828c4dfc15a146eeffd) Fix CSS Modules FOUC with production build (#296)
+-   [commit](http://github.com/electrode-io/electrode/commit/5e4ccb680b5a5807e7c60e26569ae0c882193909) add an eslint file for the client directory (#297)
+-   [commit](http://github.com/electrode-io/electrode/commit/853f1da230a7ab1646508f5189acd841b461f8db) Allow dynamic head and body tags with react-helmet (#299)
+-   [commit](http://github.com/electrode-io/electrode/commit/1b8b789b628f609efca38aa8f522b5de28cebd49) Fix Windows coverage errors and Windows Sinon error (#292)
+-   [commit](http://github.com/electrode-io/electrode/commit/efe4bd776bd80e85bf115821e4445435034f4f35) Add readme for extending webpack config (#284)
+-   [commit](http://github.com/electrode-io/electrode/commit/2f5b0da61c11d75fcf5188c8582e89e5f04590f4) Fix archetype component test issues (#291)
+-   [commit](http://github.com/electrode-io/electrode/commit/beb0743051823c06c8dcf814344782fd691cf5e6) Mongo db example (#301)
+-   [commit](http://github.com/electrode-io/electrode/commit/51eeb115bb60b553471fe6aedf6742b8eaad028b) [WIP] invalid host header fixes for oss archetype (#305)
+-   [commit](http://github.com/electrode-io/electrode/commit/fac6b68c840a31e36afc0a343ae49ce092e164a2) redux-router-engine: support custom store initializer for each route (#306)
+
+# Packages
+
 -   electrode-archetype-opt-inferno@0.1.1
 -   electrode-archetype-opt-react@0.1.1
 -   electrode-archetype-react-app-dev@2.1.0
