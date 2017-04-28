@@ -106,11 +106,19 @@ class ReduxRouterEngine {
 
     return this._getReduxStoreInitializer(route, options).call(this, req, match)
       .then((store) => {
-        return {
-          status: 200,
-          html: this._renderToString(req, store, match, withIds),
-          prefetch: stringifyPreloadedState(store.getState())
-        };
+        const r = { prefetch: stringifyPreloadedState(store.getState()) };
+        const x = this._renderToString(req, store, match, withIds);
+        if (x.then !== undefined) { // a Promise?
+          return x.then((html) => {
+            r.status = 200;
+            r.html = html;
+            return r;
+          });
+        } else {
+          r.status = 200;
+          r.html = x;
+          return r;
+        }
       });
   }
 
