@@ -99,6 +99,7 @@ Where options could contain the following fields:
     -   Defaulted to `console.log`
 -   `renderToString` - **optional** callback to provide custom renderToString
     -   It should take `(req, store, match, withIds)` arguments
+    -   If desired, it can return a `Promise` that resolves the HTML string.
 -   `routesHandlerPath` - **optional** Path to directory to lookup individual route's `createReduxStore` handlers.
     -   This is defaulted to `${process.env.APP_SRC_DIR}/server/routes` (for Electrode apps)
 
