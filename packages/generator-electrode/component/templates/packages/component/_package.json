@@ -17,8 +17,8 @@
   "homepage": "https://github.com/<%= packageGitHubOrg %>/<%= ghRepo %>",
   "dependencies": {},
   "devDependencies": {
-    "electrode-archetype-react-component": "^1.0.0",
-    "electrode-archetype-react-component-dev": "^1.0.0",
+    "electrode-archetype-react-component": "^2.0.0",
+    "electrode-archetype-react-component-dev": "^2.0.0",
     "gulp": "^3.9.1"
   },
   "engines": {
