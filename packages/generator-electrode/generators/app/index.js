@@ -243,6 +243,8 @@ module.exports = generators.Base.extend({
     const isPWA = this.props.pwa;
     const isAutoSSR = this.props.autoSsr;
     const isSingleQuote = this.props.quoteType === "'";
+    const className = this.props.className;
+    const packageName = this.props.packageName;
 
     let ignoreArray = [];
     if (isHapi) {
@@ -272,7 +274,7 @@ module.exports = generators.Base.extend({
       currentPkg[x] = currentPkg[x] || undefined;
     });
 
-    var updatePkg = _.defaultsDeep(currentPkg, {
+    var packageContents = {
       name: _.kebabCase(this.props.name),
       version: '0.0.1',
       description: this.props.description,
@@ -290,7 +292,13 @@ module.exports = generators.Base.extend({
         'index.js'
       ).replace(/\\/g, '/'),
       keywords: []
-    });
+    };
+    if (this.isDemoApp) {
+      packageContents.dependencies = {};
+      packageContents.dependencies[this.props.packageName] = "../packages/" + this.props.packageName;
+    }
+
+    var updatePkg = _.defaultsDeep(currentPkg, packageContents);
 
     var pkg = extend({}, defaultPkg, updatePkg);
 
@@ -345,7 +353,7 @@ module.exports = generators.Base.extend({
       { // copy options
         globOptions: {
           // Images are damaged by the template compiler
-          ignore: ['**/client/images/**', !isPWA && '**/client/sw-registration.js' || '']
+          ignore: ['**/client/images/**', !isPWA && '**/client/sw-registration.js' || '', '**/client/components/**']
         }
       }
     );
@@ -361,6 +369,14 @@ module.exports = generators.Base.extend({
     this.fs.copy(
       this.templatePath('src/client/images'),
       this.destinationPath('src/client/images')
+    );
+
+    //copy correct home file based on Demo App or not
+    let homeFileName = this.isDemoApp ? 'src/client/components/demoHome.jsx' : 'src/client/components/home.jsx';
+    this.fs.copyTpl(
+      this.templatePath(homeFileName),
+      this.destinationPath('src/client/components/home.jsx'),
+      { className, packageName }
     );
   },
 
@@ -385,7 +401,7 @@ module.exports = generators.Base.extend({
         local: require.resolve('../git')
       });
 
-    if (this.options.license && !this.pkg.license) {
+    if (this.props.license && !this.pkg.license) {
       this.composeWith('license', {
         options: {
           name: this.props.authorName,

@@ -57,7 +57,8 @@ module.exports = generators.Base.extend({
     }
 
     try {
-      this.demoAppName = glob.sync("../**-demo-app").pop().split("/").pop();
+      //fetch the demo App Name, which is "demo-app" by default
+      this.demoAppName = glob.sync("../**demo-app").pop().split("/").pop();
       this.pkg = this.fs.exists(this.destinationPath("../" + this.demoAppName + "/package.json"));
       this.homeComponent = this.fs.exists(this.destinationPath("../" + this.demoAppName + "/src/client/components/home.jsx"));
     }

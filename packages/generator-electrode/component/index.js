@@ -188,10 +188,12 @@ var ReactComponentGenerator = yeoman.Base.extend({
     }
     //Do not generate the demo app if called from the add on generator
     if (!this.isAddon) {
-      let originalDemoAppName = _.kebabCase(_.deburr(this.packageName)) + "-demo-app";
+      let originalDemoAppName = "demo-app";
       //custom props to pass to the App Generator
       this.props.description = this.description || "The demo App";
       this.props.createDirectory = false;
+      this.props.packageName = this.packageName;
+      this.props.className = this.componentName;
       this.props.name = originalDemoAppName;
       this.props.homepage = this.githubUrl + "/" + this.packageGitHubOrg + "/" + this.ghRepo;
       this.props.serverType = "HapiJS";
@@ -205,6 +207,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
       this.props.githubAccount = this.ghUser;
       this.props.keywords = "electrode";
       let options = {
+        isDemoApp: true,
         props: this.props
       };
       var newRoot = this.destinationPath() + '/' + originalDemoAppName;
@@ -214,7 +217,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
       });
     }
 
-    var appName = this.demoAppName ? this.demoAppName : this.packageName + "-demo-app/";
+    var appName = this.demoAppName ? this.demoAppName : this.originalDemoAppName;
     this.log(
       "\n" + chalk.green.underline("Your new Electrode component is ready!") +
       "\n" +
