@@ -63,6 +63,18 @@ describe("redux-router-engine", function () {
     });
   });
 
+  it("should handle a Promise returned from renderToString", () => {
+    const testHtml = "test promise result from RTS";
+    const engine = new ReduxRouterEngine({
+      routes, createReduxStore, renderToString: () => Promise.resolve(testHtml)
+    });
+    testReq.url.path = "/test";
+
+    return engine.render(testReq).then((result) => {
+      expect(result.html).to.equal(testHtml);
+    });
+
+  });
 
   it("should resolve index route", () => {
     const engine = new ReduxRouterEngine({ routes, createReduxStore });
