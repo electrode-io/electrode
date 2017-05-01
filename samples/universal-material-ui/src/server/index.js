@@ -1,6 +1,6 @@
 "use strict";
 
-global.navigator = {userAgent: "all"};
+global.navigator = { userAgent: "all" };
 
 process.on("SIGINT", () => {
   process.exit(0);
@@ -8,16 +8,7 @@ process.on("SIGINT", () => {
 
 const config = require("electrode-confippet").config;
 const staticPathsDecor = require("electrode-static-paths");
-const supports = require("electrode-archetype-react-app/supports");
-
-/**
- * Use babel register to transpile any JSX code on the fly to run
- * in server mode, and also transpile react code to apply process.env.NODE_ENV
- * removal to improve performance in production mode.
- */
-supports.babelRegister({
-  ignore: /node_modules\/(?!react\/)/
-});
+const support = require("electrode-archetype-react-app/support");
 
 /**
  * css-modules-require-hook: handle css-modules on node.js server.
@@ -31,10 +22,12 @@ supports.babelRegister({
  * https://github.com/webpack/css-loader#local-scope
  * https://github.com/css-modules/postcss-modules-scope
  */
-supports.cssModuleHook({
+support.cssModuleHook({
   generateScopedName: "[name]__[local]___[hash:base64:5]"
 });
 
-supports.isomorphicExtendRequire().then(() => {
+support.load({
+  isomorphicExtendRequire: true
+}).then(() => {
   require("electrode-server")(config, [staticPathsDecor()]);
 });
