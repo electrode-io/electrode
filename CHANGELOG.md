@@ -1,5 +1,16 @@
 # Packages
 
+-   electrode-archetype-react-app-dev@2.3.0
+-   electrode-archetype-react-app@2.3.0
+-   electrode-redux-router-engine@1.4.0
+-   electrode-webpack-reporter@0.3.5
+
+## Commits
+
+-   [commit](http://github.com/electrode-io/electrode/commit/05f2d90fe0607dff212dff53cff4218a4d821367) redux-router-engine: [feat][minor] Support async result from optional renderToString (#309)
+
+# Packages
+
 -   electrode-archetype-react-app-dev@2.2.0
 -   electrode-archetype-react-app@2.2.0
 -   electrode-archetype-react-component-dev@1.4.0
