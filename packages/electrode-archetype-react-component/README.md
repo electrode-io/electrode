@@ -48,17 +48,11 @@ gulp, webpack, demo, electrode component archetype, live-reload
    create src/components/product-card.jsx
    create src/styles/product-card.styl
    create src/index.js
-   create demo/demo.jsx
-   create demo/demo.css
-   create demo/examples/product-card.example
    create test/client/.eslintrc
    create test/client/components/product-card.spec.jsx
 
-Your new Electrode Component is ready!
+Your new Electrode Component is ready and your component is in '/src'.
 
-Your component is in '/src' and your demo files are in '/demo/*'
-
-Type 'cd product-card' then 'gulp demo' to run the development build and demo tasks.
 ```
 
 ## Configuring an existing project / manual setup
@@ -94,11 +88,6 @@ The `gulpfile.js` needs to extend
 const exec = require("electrode-gulp-helper").exec;
 
 const tasks = {
-  "demo": ["generate", "server-dev"],
-  "demo-iso": ["dev-iso"],
-  "generate": ["generate-metadata", "generate-documentation"],
-  "generate-documentation": () => exec(`electrode-docgen --package ./package.json --src ./src --markdown components.md`),
-  "generate-metadata": () => exec(`electrode-docgen --package ./package.json --src ./src --metadata components.json`),
   "prepublish": ["npm:prepublish"],
   "preversion": ["check-cov"]
 }
@@ -120,9 +109,6 @@ This archetype assumes an architecture as follows:
 ```
 archetype
   config.js
-demo/
-  demo.jsx
-  demo.css
 src
   components/
     *.jsx
@@ -145,7 +131,7 @@ package.json
 
 By default, this archetype assumes you are using CSS-Modules + CSS-Next, you need
 to opt-in to stylus support by adding a `*.styl` to your *project's* `demo/demo.styl` & `src/styles/*.styl`.
-You can use stylus and CSS-Modules together by enabling setting the 'cssModuleStylusSupport' option in 
+You can use stylus and CSS-Modules together by enabling setting the 'cssModuleStylusSupport' option in
 `archetype/config.js` to `true`.
 
 Import css files in your components and reference class names via the exported object `src/components/your-component.js`:
@@ -181,31 +167,6 @@ Add following styling to `src/styles/your-component.css`
   composes: baseStyle;
   font-size: 18px;
 }
-```
-
-## Gotchas
-
-For the `demo-iso` task to work, `demo/demo.jsx` has some limitations:
-
-* `demo/demo.jsx` can't use `react-router`
-* `demo/demo.jsx` can't import files that rely on webpack loaders e.g. `.styl` files.
-
-This is because the server rendering uses node for both routing and import statements.
-Specifically for routing, `react-router` instances create a history that relies on DOM availability.
-This will break server render with an error like this:
-`Unhandled rejection Invariant Violation: Browser history needs a DOM`
-
-## Demo server config
-
-If you would like to augment or override the demo server config you can add `archetype-demo-server.config.js` file to the root of the project. This file will be merged with the default config and passed into the `electrode-server` instance. Add any hapi plugins or settings here.
-
-```js
-// Sample archetype-demo-server.config.js
-module.exports = {
-  "plugins": {
-    "my-electrode-plugin": {}
-  }
-};
 ```
 
 ## Tasks exposed via npm scripts & gulp as part of the electrode-archetype-react-component
@@ -248,31 +209,16 @@ Available tasks
   cov-frontend-85
   cov-frontend-95
   default ---------------------- Invokes 'gulp help'
-  demo .........................   tasks: ["generate","server-dev"]
-  demo-iso ---------------------   tasks: ["dev-iso"]
-  dev .......................... Start server in development mode
-                                   tasks: ["~webpack-dev",["server-dev","server-test"]]
-  dev-iso ---------------------- Start ISO server in development mode
-                                   tasks: ["~webpack-dev",["iso-render-server-start","server-dev-iso"]]
-  generate .....................   tasks: ["generate-metadata","generate-documentation"]
-  generate-documentation
-  generate-metadata
   help ------------------------- Display this help text.
-  hot .......................... Start server in hot/auto-watch mode
-                                   tasks: ["~webpack-dev",["server-hot","server-test"]]
   iso-render-server-start ------   tasks: ["~webpack-dev","iso-render-server-start-watch"]
   iso-render-server-start-watch
-  lint .........................   tasks: ["lint-react-demo","lint-react-src","lint-react-test","lint-scripts"]
-  lint-react-demo
+  lint .........................   tasks: ["lint-react-src","lint-react-test","lint-scripts"]
   lint-react-src
   lint-react-test
   lint-scripts
   npm:prepublish ---------------   tasks: ["build-lib","build-dist-dev","build-dist-min"]
   prepublish ...................   tasks: ["npm:prepublish"]
   preversion -------------------   tasks: ["check-cov"]
-  server-dev
-  server-dev-iso
-  server-hot
   server-test
   test-ci ......................   tasks: ["test-frontend-ci"]
   test-cov ---------------------   tasks: ["test-frontend-cov"]

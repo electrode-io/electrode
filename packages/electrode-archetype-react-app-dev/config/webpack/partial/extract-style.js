@@ -35,7 +35,7 @@ const cssNextExists = (glob.sync(Path.resolve(AppMode.src.client, "**", "*.css")
 const stylusExists = (glob.sync(Path.resolve(AppMode.src.client, "**", "*.styl")).length > 0);
 
 // By default, this archetype assumes you are using CSS-Modules + CSS-Next
-const cssModuleSupport = stylusExists && !cssNextExists;
+const cssModuleSupport = !stylusExists && cssNextExists;
 
 module.exports = function () {
   const cssModuleStylusSupport = archetype.webpack.cssModuleStylusSupport;
@@ -93,7 +93,7 @@ module.exports = function () {
       new CSSSplitPlugin({ size: 4000, imports: true, preserve: true }),
       new webpack.LoaderOptionsPlugin({
         options: {
-          context: Path.resolve(process.cwd(), "client"),
+          context: Path.resolve(process.cwd(), "src"),
           postcss: () => {
             return cssModuleSupport ? [atImport, cssnext({
               browsers: ["last 2 versions", "ie >= 9", "> 5%"]

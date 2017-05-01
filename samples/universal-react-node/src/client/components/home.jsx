@@ -1,12 +1,13 @@
-import React, {PropTypes} from "react";
-import {connect} from "react-redux";
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import electrodeLogo from "../images/electrode.svg";
 import Notifications from "react-notify-toast";
 
 class HomeWrapper extends React.Component {
   render() {
     return (
-      <Home data={this.props.data}/>
+      <Home data={this.props.data} />
     );
   }
 }
@@ -28,7 +29,7 @@ export class Home extends React.Component {
         }}>
           <a href="https://github.com/electrode-io"> <img style={{
             width: "100%"
-          }} alt="Electrode Logo" src={electrodeLogo}/>
+          }} alt="Electrode Logo" src={electrodeLogo} />
           </a>
         </div>
         <h2>Demonstration Components</h2>
@@ -48,6 +49,7 @@ export class Home extends React.Component {
           <li><a href="/ssrcachingtemplatetype">SSR Caching Template Type Example</a></li>
           <li><a href="/push-notifications">Push Notifications Example</a></li>
           <li><a href="/todo-app">Todo List Example</a></li>
+          <li><a href="/record-store">MongoDB Example</a></li>
         </ul>
         <p>{this.props.data}</p>
       </div>

@@ -1,5 +1,6 @@
 /*eslint-disable react/prop-types*/
-import React, {PropTypes} from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import {Card, CardHeader, CardText} from "material-ui/Card";
 import {warningsErrorsStyles as inlineStyles} from "../styles/inline-styles";
 import styles from "../styles/base.css";

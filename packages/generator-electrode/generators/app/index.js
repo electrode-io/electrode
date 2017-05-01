@@ -60,6 +60,8 @@ module.exports = generators.Base.extend({
     this.isExtended = this.options.isExtended || false;
     this.serverType = this.options.serverType || HapiJS;
     this.githubUrl = this.options.githubUrl || "";
+    this.license = this.options.license;
+    this.quotes = this.options.quotes;
   },
 
   initializing: function () {
@@ -95,6 +97,8 @@ module.exports = generators.Base.extend({
     }
     this.props.serverType = this.serverType || HapiJS;
     this.props.githubUrl = this.githubUrl;
+    this.props.quoteType = this.quotes;
+    this.props.license = this.license;
   },
 
   prompting: {
@@ -317,6 +321,10 @@ module.exports = generators.Base.extend({
       );
     });
 
+    //copy .eslintc into the client directory
+    if (isSingleQuote) {
+      this.template("src/client/.eslintrc", this.destinationPath("src/client/.eslintrc"));
+    }
     //special handling for the server file
     this.fs.copyTpl(
       this.templatePath('src/server'),
@@ -383,7 +391,8 @@ module.exports = generators.Base.extend({
         options: {
           name: this.props.authorName,
           email: this.props.authorEmail,
-          website: this.props.authorUrl
+          website: this.props.authorUrl,
+          license: this.props.license || ""
         }
       }, {
           local: require.resolve('generator-license/app')
