@@ -167,13 +167,19 @@ var ReactComponentGenerator = yeoman.Base.extend({
       this.template("packages/component/test/client/components/_component.spec.jsx", this.rootPath + "test/client/components/" + this.projectName + ".spec.jsx");
       this.copy("packages/component/test/client/components/helpers/_intlEnzymeTestHelper.js", this.rootPath + "test/client/components/helpers/intl-enzyme-test-helper.js");
     }
-    /*
-    demo: function () {
-      //this should now call the demo app generator and generate the demo App
-    }*/
   },
 
   install: function () {
+    //git init and npmi for lerna lernaStructure
+    if (!this.isAddon) {
+      this.spawnCommandSync('git', ['init'], {
+        cwd: this.destinationPath()
+      });
+      this.spawnCommandSync('npm', ['install'], {
+        cwd: this.destinationPath()
+      });
+    }
+
     //install the dependencies for the package
     let packageDirectory = this.isAddon ? this.destinationPath() : this.destinationPath() + "/" + this.rootPath;
     process.chdir(packageDirectory);
@@ -188,7 +194,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
     }
     //Do not generate the demo app if called from the add on generator
     if (!this.isAddon) {
-      let originalDemoAppName = "demo-app";
+      this.originalDemoAppName = "demo-app";
       //custom props to pass to the App Generator
       this.props.description = this.description || "The demo App";
       this.props.createDirectory = false;
@@ -210,22 +216,24 @@ var ReactComponentGenerator = yeoman.Base.extend({
         isDemoApp: true,
         props: this.props
       };
+
+      //change the destinationRoot for generating the demo app
       var newRoot = this.destinationPath() + '/' + originalDemoAppName;
       this.destinationRoot(newRoot);
       this.composeWith('electrode:app', { options }, {
         local: require.resolve('../generators/app')
       });
-    }
 
-    var appName = this.demoAppName ? this.demoAppName : this.originalDemoAppName;
-    this.log(
-      "\n" + chalk.green.underline("Your new Electrode component is ready!") +
-      "\n" +
-      "\nYour component is in packages/" + this.packageName + " and your demo app is " + appName +
-      "\n" +
-      "\nType 'cd ../" + appName + "' then 'gulp dev' to run the development build for the demo app." +
-      "\n"
-    );
+      this.appName = _.isEmpty(this.demoAppName) ? this.originalDemoAppName : this.demoAppName;
+      this.log(
+        "\n" + chalk.green.underline("Your new Electrode component is ready!") +
+        "\n" +
+        "\nYour component is in packages/" + this.packageName + " and your demo app is " + this.appName +
+        "\n" +
+        "\nType 'cd ../" + this.appName + "' then 'gulp dev' to run the development build for the demo app." +
+        "\n"
+      );
+    }
   }
 
 });
