@@ -1,0 +1,3 @@
+{
+  "extends": "@walmart/electrode-archetype-react-app-dev/config/babel/babelrc-client"
+}
