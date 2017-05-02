@@ -200,7 +200,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
       this.props.createDirectory = false;
       this.props.packageName = this.packageName;
       this.props.className = this.componentName;
-      this.props.name = originalDemoAppName;
+      this.props.name = this.originalDemoAppName;
       this.props.homepage = this.githubUrl + "/" + this.packageGitHubOrg + "/" + this.ghRepo;
       this.props.serverType = "HapiJS";
       this.props.githubUrl = this.githubUrl;
@@ -218,7 +218,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
       };
 
       //change the destinationRoot for generating the demo app
-      var newRoot = this.destinationPath() + '/' + originalDemoAppName;
+      var newRoot = this.destinationPath() + '/' + this.originalDemoAppName;
       this.destinationRoot(newRoot);
       this.composeWith('electrode:app', { options }, {
         local: require.resolve('../generators/app')

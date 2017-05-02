@@ -479,7 +479,7 @@ module.exports = generators.Base.extend({
         "\n" +
         "\nYour component is in packages/" + this.props.packageName + " and your demo app is " + this.props.name +
         "\n" +
-        "\nType 'cd ../" + this.props.name + "' then 'gulp dev' to run the development build for the demo app." +
+        "\nType 'cd " + this.props.packageName + "/" + this.props.name + "' then 'gulp dev' to run the development build for the demo app." +
         "\n"
       );
     }
