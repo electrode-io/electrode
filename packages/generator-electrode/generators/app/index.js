@@ -10,6 +10,7 @@ var _ = require('lodash');
 var extend = _.merge;
 var parseAuthor = require('parse-author');
 var githubUsername = require('github-username');
+var demoHelperPath = require.resolve('electrode-demo-helper');
 
 const ExpressJS = 'ExpressJS';
 const HapiJS = 'HapiJS';
@@ -244,6 +245,15 @@ module.exports = generators.Base.extend({
     const className = this.props.className;
     const packageName = this.props.packageName;
 
+    let getDemoFilePath = function (filepath) {
+      try {
+        let demoFilePath = path.resolve(demoHelperPath, '..', filepath);
+        return demoFilePath;
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
     let ignoreArray = [];
     if (isHapi) {
       ignoreArray.push('**/src/server/express-server.js');
@@ -369,8 +379,16 @@ module.exports = generators.Base.extend({
       this.destinationPath('src/client/images')
     );
 
+    //copy files from the demoHelper if this is the demo-app
+    if (this.isDemoApp) {
+      //copy archetype webpack config extension
+      this.fs.copy(
+        getDemoFilePath('archetype/config.js'),
+        this.destinationPath('archetype/config.js')
+      );
+    }
     //copy correct home file based on Demo App or not
-    let homeFileName = this.isDemoApp ? 'src/client/components/demoHome.jsx' : 'src/client/components/home.jsx';
+    let homeFileName = this.isDemoApp ? getDemoFilePath('src/client/components/home.jsx') : 'src/client/components/home.jsx';
     this.fs.copyTpl(
       this.templatePath(homeFileName),
       this.destinationPath('src/client/components/home.jsx'),
