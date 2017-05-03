@@ -68,7 +68,7 @@ function createEntryConfigFromScripts(importScripts, entry) {
   }, newEntry);
 }
 
-module.exports = function(options) {
+module.exports = function (options) {
   /* eslint max-statements: 0 */
   const swConfig = optionalRequire(swConfigPath, true) || {};
   const severConfig = optionalRequire(serverConfigPath, true) || {};
@@ -114,8 +114,8 @@ module.exports = function(options) {
    * If importScripts exists in the cache config we need to overwrite
    * the entry config and output config so we get an entry point for each
    * script with unique names.
-   */
-  let entry = {};
+    */
+  let entry = options.currentConfig.entry;
   let output = {};
   if (cacheConfig.importScripts) {
     const importScripts = cacheConfig.importScripts;
@@ -185,11 +185,11 @@ module.exports = function(options) {
         _name: "manifest",
         test: /manifest.json$/,
         use: [{
-            loader: fileLoader,
-            options: {
-              name: "manifest.json"
-            }
-          },
+          loader: fileLoader,
+          options: {
+            name: "manifest.json"
+          }
+        },
           webAppManifestLoader
         ]
       }]
