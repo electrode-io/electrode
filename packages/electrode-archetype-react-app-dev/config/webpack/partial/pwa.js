@@ -59,9 +59,8 @@ function createEntryConfigFromScripts(importScripts, entry) {
   // entry points. If it is we create a new object with all
   // existing entry points to avoid mutating the config. If its not,
   // we assume its a string and use it as the main entry point.
-  const newEntry = typeof entry === "object"
-    ? Object.assign({}, entry)
-    : { main: entry };
+  const newEntry = typeof entry === "object" ?
+    Object.assign({}, entry) : { main: entry };
   return importScripts.reduce((acc, script) => {
     const name = Path.parse(script).name;
     acc[name] = script;
@@ -115,16 +114,17 @@ module.exports = function (options) {
    * If importScripts exists in the cache config we need to overwrite
    * the entry config and output config so we get an entry point for each
    * script with unique names.
-   */
+    */
+  let entry = options.currentConfig.entry;
   let output = {};
   if (cacheConfig.importScripts) {
     const importScripts = cacheConfig.importScripts;
 
-    cacheConfig.importScripts = process.env.WEBPACK_DEV === "true"
-      ? importScripts.map(getDevelopmentPath)
-      : importScripts.map(getHashedPath);
+    cacheConfig.importScripts = process.env.WEBPACK_DEV === "true" ?
+      importScripts.map(getDevelopmentPath) :
+      importScripts.map(getHashedPath);
 
-    createEntryConfigFromScripts(importScripts, options.currentConfig.entry);
+    entry = createEntryConfigFromScripts(importScripts, options.currentConfig.entry);
 
     output = {
       filename: "[name].[hash].js"
@@ -178,23 +178,21 @@ module.exports = function (options) {
   }
 
   return {
+    entry,
     output,
     module: {
-      rules: [
-        {
-          _name: "manifest",
-          test: /manifest.json$/,
-          use: [
-            {
-              loader: fileLoader,
-              options: {
-                name: "manifest.json"
-              }
-            },
-            webAppManifestLoader
-          ]
-        }
-      ]
+      rules: [{
+        _name: "manifest",
+        test: /manifest.json$/,
+        use: [{
+          loader: fileLoader,
+          options: {
+            name: "manifest.json"
+          }
+        },
+          webAppManifestLoader
+        ]
+      }]
     },
     plugins
   };
