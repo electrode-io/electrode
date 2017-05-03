@@ -13,14 +13,6 @@
 
 Read the [Announcement Blog] Post.
 
-# Getting Started
-
-  - [Getting Started with Electrode](http://www.electrode.io/docs/get_started.html)
-
-  - [Electrode Site](http://www.electrode.io)
-
-  - [Docs](http://www.electrode.io/docs/what_is_electrode.html)
-
 ## Report a bug or request a feature
 
 https://github.com/electrode-io/electrode/issues
@@ -46,9 +38,6 @@ The Yeoman [generator-electrode] NPM module allows you to quickly create an Univ
 
 Some sample applications can be found under the [`samples`](samples) directory.
 
-# Docs
-Hosts generated content for electrode-based reference material
-
 ## Boilerplate Universal React Node
 
 Under [`samples/universal-react-node`](samples/universal-react-node) is a sample Electrode app that was created with the Electrode generator and consumes the Electrode App archetype modules.  We've added other demos and features to it to serve as examples.  It demonstrates usage with the following Electrode modules:
@@ -62,7 +51,7 @@ Under [`samples/universal-react-node`](samples/universal-react-node) is a sample
   - [Electrode Bundle Analyzer](https://github.com/electrode-io/electrode-bundle-analyzer)
 
 See its [README](samples/universal-react-node/README.md) for more details.
-
+  
 ## Sample Universal React Node with [material-ui]
 
 Under [`samples/universal-material-ui`](samples/universal-material-ui) is a sample Electrode app that uses the [material-ui] React components.
@@ -73,7 +62,7 @@ See its [README](samples/universal-material-ui/README.md) for more details.
 
 We have more separate Electrode Sample Apps at https://github.com/electrode-samples that you can use as references.
 
-Built with :heart: by [Team Electrode] @WalmartLabs.
+Built with ♡ by [Team Electrode] @WalmartLabs.
 
 [Team Electrode]: https://github.com/orgs/electrode-io/people
 [Announcement Blog]: https://medium.com/walmartlabs/introducing-electrode-an-open-source-release-from-walmartlabs-14b836135319#.pwbddxg1z

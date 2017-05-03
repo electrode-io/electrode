@@ -1,0 +1,251 @@
+# Server Side Render Caching + Profiling
+
+Optimize React SSR with profiling and component caching. The [electrode-react-ssr-caching](https://github.com/electrode-io/electrode-react-ssr-caching) module supports profiling React Server Side Rendering time to enable component caching to help you speed up Server Side Rendering of your components.
+
+[electrode-react-ssr-caching](https://github.com/electrode-io/electrode-react-ssr-caching) module can be used as a\_standalone\_module and is\_agnostic\_to your web-server framework. In this tutorial we will demonstrate how to use this module in Electrode, Express.js and Hapi.js applications.
+
+## Module: [electrode-react-ssr-caching](https://github.com/electrode-io/electrode-react-ssr-caching)
+
+### Install via`npm`
+
+```
+$ npm install --save electrode-react-ssr-caching
+```
+
+### Example Applications
+
+* [Electrode Boilerplate](https://github.com/electrode-io/electrode-boilerplate-universal-react-node#electrode-react-ssr-caching)
+
+* [Express React Redux Webpack Example](https://github.com/docs-code-examples-electrode-io/express-react-redux-webpack#electrode-react-ssr-caching)
+
+* [Hapi React Redux Example](https://github.com/docs-code-examples-electrode-io/hapi-react-redux#electrode-react-ssr-caching)
+
+## Usage
+
+#### Profiling
+
+You can use this module to inspect the time each component took to render.
+
+```
+import SSRCaching from "electrode-react-ssr-caching";
+import { renderToString } from "react-dom/server";
+import MyComponent from "mycomponent";
+
+// First you should render your component in
+// a loop to prime the JS engine (i.e: V8 for NodeJS)
+for( let i = 0; i < 10; i ++ ) {
+    renderToString(<MyComponent />);
+}
+
+SSRCaching.clearProfileData();
+SSRCaching.enableProfiling();
+const html = renderToString(<MyComponent />);
+SSRCaching.enableProfiling(false);
+console.log(JSON.stringify(SSRCaching.profileData, null, 2));
+```
+
+#### Caching
+
+Once you've determined the most expensive components with profiling, you can enable the component caching in this module to speed up SSR performance.
+
+The basic steps to enabling caching are:
+
+```
+import SSRCaching from "electrode-react-ssr-caching";
+
+SSRCaching.enableCaching();
+SSRCaching.setCachingConfig(cacheConfig);
+```
+
+Where `cacheConfig` contains information on what component to apply caching to. See below for details.
+
+##### cacheConfig
+
+SSR component caching was first demonstrated in [Sasha Aickin's talk](https://www.youtube.com/watch?v=PnpfGy7q96U).
+
+His demo requires each component to provide a function for generating the cache key.
+
+Here we implemented two cache key generation strategies: `simple` and `template`.
+
+You are required to pass in the `cacheConfig` to tell this module what component to apply caching to.
+
+For example:
+
+```
+const cacheConfig = {
+  components: {
+    "Component1": {
+      strategy: "simple",
+      enable: true
+    },
+    "Component2": {
+      strategy: "template",
+      enable: true
+    }
+  }
+}
+
+SSRCaching.setCachingConfig(cacheConfig);
+```
+
+#### Caching Strategies
+
+##### simple
+
+The `simple`caching strategy is basically doing a `JSON.stringify` on the component's props. You can also specify a callback in `cacheConfig` to return the key.
+
+For example:
+
+```
+const cacheConfig = {
+  components: {
+    Component1: {
+      strategy: "simple",
+      enable: true,
+      genCacheKey: (props) => JSON.stringify(props)
+    }
+  }
+};
+```
+
+This strategy is not very flexible. You need a cache entry for each component instance with different props. However it requires very little processing time.
+
+##### template
+
+The`template`caching strategy is more complex but flexible.
+
+The idea is akin to generating logic-less handlebars templates from your React components and then use string replace to process the template with different props.
+
+If you have this component:
+
+```
+class Hello extends Component {
+  render() {
+    return <div>Hello, {this.props.name}.  {this.props.message}</div>
+  }
+}
+```
+
+And you render it with props:
+
+```
+const props = { name: "Bob", message: "How're you?" }
+```
+
+You get back HTML string:
+
+```
+<div>Hello, <span>Bob</span>.  <span>How&#x27;re you?</span></div>
+```
+
+Now if you replace values in props with tokens, and you remember that `@0@` refers to `props.name` and `@1@` refers to `props.message`:
+
+```
+const tokenProps = { name: "@0@", message: "@1@" }
+```
+
+You get back HTML string that could be akin to a handlebars template:
+
+```
+<div>Hello, <span>@0@</span>.  <span>@1@</span></div>
+```
+
+We cache this template html using the tokenized props as cache key. When we need to render the same component with a different props later, we can just lookup the template from cache and use string replace to apply the values:
+
+```
+cachedTemplateHtml.replace( /@0@/g, props.name ).replace( /@1@/g, props.message );
+```
+
+That's the gist of the template strategy. Of course there are many small details such as handling the encoding of special characters, preserving props that can't be tokenized, avoiding tokenizing non-string props, or preserving`data-reactid` and `data-react-checksum`.
+
+To specify a component to be cached with the `template` strategy:
+
+```
+const cacheConfig = {
+    components: {
+        Hello: {
+            strategy: "template",
+            enable: true,
+            preserveKeys: [ "key1", "key2" ],
+            preserveEmptyKeys: [ "key3", "key4" ],
+            ignoreKeys: [ "key5", "key6" ],
+            whiteListNonStringKeys: [ "key7", "key8" ]
+        }
+    }
+};
+```
+
+* `preserveKeys`- List of keys that should not be tokenized.
+* `preserveEmptyKeys`- List of keys that should not be tokenized if they are the empty string `""`
+* `ignoreKeys`- List of keys that should be completely ignored as part of the template cache key.
+* `whiteListNonStringKeys`- List of non-string keys that should be tokenized.
+
+# API
+
+### [`enableProfiling(flag)`](http://www.electrode.io/docs/server_side_render_cache.html#enableprofilingflag)
+
+Enable profiling according to flag
+
+* `undefined`or `true`- enable profiling
+* `false`- disable profiling
+
+### [`enableCaching(flag)`](http://www.electrode.io/docs/server_side_render_cache.html#enablecachingflag)
+
+Enable cache according to flag
+
+* `undefined` or `true`- enable caching
+* `false`- disable caching
+
+### [`enableCachingDebug(flag)`](http://www.electrode.io/docs/server_side_render_cache.html#enablecachingdebugflag)
+
+Enable cache debugging according to flag.
+
+> Caching must be enabled for this to have any effect.
+
+* `undefined` or `true`- enable cache debugging
+* `false`- disable cache debugging
+
+### [`setCachingConfig(config)`](http://www.electrode.io/docs/server_side_render_cache.html#setcachingconfigconfig)
+
+Set caching config to`config`.
+
+### [`stripUrlProtocol(flag)`](http://www.electrode.io/docs/server_side_render_cache.html#stripurlprotocolflag)
+
+Remove`http:`or`https:`from prop values that are URLs according to flag.
+
+> Caching must be enabled for this to have any effect.
+
+* `undefined`or `true`- strip URL protocol
+* `false`- don't strip
+
+### [`shouldHashKeys(flag, [hashFn])`](http://www.electrode.io/docs/server_side_render_cache.html#shouldhashkeysflaghashfn)
+
+Set whether the `template` strategy should hash the cache key and use that instead.
+
+> Caching must be enabled for this to have any effect.
+
+* `flag`
+
+* * `undefined` or `true` - use a hash value of the cache key 
+  * `false`- don't use a hash valueo f the cache key
+* `hashFn`- optional, a custom callback to generate the hash from the cache key, which is passed in as a string
+  * i.e.`function customHashFn(key) { return hash(key); }`
+
+If no `hashFn` is provided, then [farmhash](https://github.com/google/farmhash) is used if it's available, otherwise hashing is turned off.
+
+### [`clearProfileData()`](http://www.electrode.io/docs/server_side_render_cache.html#clearprofiledata)
+
+Clear profiling data
+
+### [`clearCache()`](http://www.electrode.io/docs/server_side_render_cache.html#clearcache)
+
+Clear caching data
+
+### [`cacheEntries()`](http://www.electrode.io/docs/server_side_render_cache.html#cacheentries)
+
+Get total number of cache entries
+
+### [`cacheHitReport()`](http://www.electrode.io/docs/server_side_render_cache.html#cachehitreport)
+
+Print out cache entries and number of hits each one has.
+
