@@ -252,7 +252,7 @@ module.exports = generators.Base.extend({
       } catch (e) {
         console.log(e);
       }
-    }
+    };
 
     let ignoreArray = [];
     if (isHapi) {
@@ -361,7 +361,11 @@ module.exports = generators.Base.extend({
       { // copy options
         globOptions: {
           // Images are damaged by the template compiler
-          ignore: ['**/client/images/**', !isPWA && '**/client/sw-registration.js' || '', '**/client/components/**']
+          ignore: ['**/client/images/**',
+            !isPWA && '**/client/sw-registration.js' || '',
+            this.isDemoApp && '**/client/components/**' || '',
+            this.isDemoApp && '**/client/actions/**' || '',
+            this.isDemoApp && '**/client/reducers/**' || '']
         }
       }
     );
@@ -386,14 +390,26 @@ module.exports = generators.Base.extend({
         getDemoFilePath('archetype/config.js'),
         this.destinationPath('archetype/config.js')
       );
+
+      //copy home file
+      this.fs.copyTpl(
+        this.templatePath(getDemoFilePath('src/client/components/Home.jsx')),
+        this.destinationPath('src/client/components/home.jsx'),
+        { className, packageName, pwa: isPWA }
+      );
+
+      //copy reducer file
+      this.fs.copyTpl(
+        this.templatePath(getDemoFilePath('src/client/reducers/index.js')),
+        this.destinationPath('src/client/reducers/index.jsx')
+      );
+
+      //copy actions file
+      this.fs.copyTpl(
+        this.templatePath(getDemoFilePath('src/client/actions/index.js')),
+        this.destinationPath('src/client/actions/index.jsx')
+      );
     }
-    //copy correct home file based on Demo App or not
-    let homeFileName = this.isDemoApp ? getDemoFilePath('src/client/components/home.jsx') : 'src/client/components/home.jsx';
-    this.fs.copyTpl(
-      this.templatePath(homeFileName),
-      this.destinationPath('src/client/components/home.jsx'),
-      { className, packageName, pwa: isPWA }
-    );
   },
 
   default: function () {
