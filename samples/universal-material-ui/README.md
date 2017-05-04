@@ -70,11 +70,11 @@ Second part of the process is to add [material-ui] dependencies.  Follow the ste
   ```
 
 1. Restart `gulp dev` and reload browser to make sure things are still working.
-1. Add [material-ui]'s required font *Roboto* to `server/plugins/webapp/index.html`
-1. Update `client/styles/base.css` with styles for [material-ui].
-1. Test [material-ui] component by adding a [RaisedButton] to `client/components/home.jsx`
+1. Add [material-ui]'s required font *Roboto* to `src/server/views/index-view.js`
+1. Update `src/client/styles/base.css` with styles for [material-ui].
+1. Test [material-ui] component by adding a [RaisedButton] to `src/client/components/home.jsx`
 1. Watch [webpack-dev-server] update your bundle and refresh browser to see changes.
-1. Add `global.navigator.userAgent` to `server/index.js` as required by [material-ui] for [Server Rendering].
+1. Add `global.navigator.userAgent` to `src/server/index.js` as required by [material-ui] for [Server Rendering].
 1. Watch [webpack-dev-server] update your bundle and refresh browser to see changes.
 
 ### Add [material-ui] Examples
@@ -87,7 +87,7 @@ Now we are ready to add some of the [material-ui examples] to the app.
 
 First we have to add the resolution for this issue https://github.com/callemall/material-ui/issues/4670.
 
-Add the following code to `client/app.jsx`
+Add the following code to `src/client/app.jsx`
 
 ```js
 import injectTapEventPlugin from "react-tap-event-plugin";
@@ -102,8 +102,8 @@ window.webappStart = () => {
 
 First add the IconMenu [AppBar example] by following the steps below.
 
-1. Copy the source from the example into a file `client/components/AppBarExampleIconMenu.jsx`
-2. Replace the `Hello Electrode` and the RaisedButton content in `client/components/home.jsx` with `<AppBarExampleIconMenu />`;
+1. Copy the source from the example into a file `src/client/components/AppBarExampleIconMenu.jsx`
+2. Replace the `Hello Electrode` and the RaisedButton content in `src/client/components/home.jsx` with `<AppBarExampleIconMenu />`;
 3. Watch [webpack-dev-server] update your bundle and refresh browser to see changes.
 4. If the AppBar shows up, click on the right menu button, you should see a menu pops up.
 
@@ -111,8 +111,8 @@ First add the IconMenu [AppBar example] by following the steps below.
 
 Next add the [BottomNavigation example]
 
-1. Copy the source from the example into a file `client/components/BottomNavigationExampleSimple.jsx`
-2. Import the component in `client/components/home.jsx` and add it to `render` after the `AppBarExampleIconMenu` component.
+1. Copy the source from the example into a file `src/client/components/BottomNavigationExampleSimple.jsx`
+2. Import the component in `src/client/components/home.jsx` and add it to `render` after the `AppBarExampleIconMenu` component.
 3. Watch [webpack-dev-server] update your bundle and refresh browser to see changes.
 4. You should see AppBar and BottomNavigation show up.  You should be able to interact with the buttons on the BottomNavigation component.
 
@@ -120,8 +120,8 @@ Next add the [BottomNavigation example]
 
 In this section we add the [Card example].
 
-1. Copy the source from the [Card example] into a file `client/components/CardExampleWithAvatar.jsx`
-2. Import the component in `client/components/home.jsx` and add it to `render` after the `AppBarExampleIconMenu` component.
+1. Copy the source from the [Card example] into a file `src/client/components/CardExampleWithAvatar.jsx`
+2. Import the component in `src/client/components/home.jsx` and add it to `render` after the `AppBarExampleIconMenu` component.
 3. Watch [webpack-dev-server] update your bundle and refresh browser to see changes.
 4. You should see Card show up but with broken images
 
@@ -131,11 +131,11 @@ In this section we add the [Card example].
 
 Electrode core comes with isomorphic images support built in using [isomorphic-loader].  In this section we explore using that feature to load the images for the [Card example].
 
-1. Create a directory `client/images` and copy the following images there
+1. Create a directory `src/client/images` and copy the following images there
   - http://www.material-ui.com/images/nature-600-337.jpg
   - http://www.material-ui.com/images/jsa-128.jpg (Or your own favorite 128x128 Avatar image)
     - Note that in my sample I use `jchip-128.jpg` as my avatar.
-1. In `client/components/CardExampleWithAvatar.jsx`, import the images:
+1. In `src/client/components/CardExampleWithAvatar.jsx`, import the images:
 
   ```js
   import natureJpg from "../images/nature-600-337.jpg";
@@ -151,7 +151,7 @@ Electrode core comes with isomorphic images support built in using [isomorphic-l
     src={natureJpg}
   ```
 
-1. In `server/index.js`, activate [isomorphic-loader]'s `extend-require` by changing the last line to:
+1. In `src/server/index.js`, activate [isomorphic-loader]'s `extend-require` by changing the last line to:
 
   ```js
     supports.isomorphicExtendRequire().then(() => {
