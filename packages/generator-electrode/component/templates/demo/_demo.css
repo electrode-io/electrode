@@ -1,4 +1,0 @@
-/* Component styles */
-.demoStyle {
-  composes: className from "../src/styles/<%= projectName %>.css";
-}

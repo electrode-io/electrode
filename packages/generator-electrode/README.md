@@ -61,7 +61,7 @@ Some common ones:
 
 ### Source
 
-Your component source code is in `src`. You can use JSX and ES6 syntax freely in
+Your component source code is in `packages/componentName/src`. You can use JSX and ES6 syntax freely in
 your component source; it will be transpiled to `lib` with Babel before being
 published to npm so that your users will simply be able to include it.
 
@@ -69,18 +69,96 @@ It's a great idea to add a description, documentation and other information to
 your `README.md` file, to help people who are interested in using your
 component.
 
-### Example and Preview
-
-Preview your component with LiveReload:
+The component project structure uses a [Lerna](https://lernajs.io/) structure, which can help manage multiple repos within your `packages` directory. Your initial prokect structure will be :
 
 ```bash
-gulp demo ; gulp open-demo
+test-component/
+├── README.md
+├── demo-app
+│   ├── LICENSE
+│   ├── README.md
+│   ├── config
+│   │   ├── default.js
+│   │   ├── development.json
+│   │   ├── production.js
+│   │   └── production.json
+│   ├── gulpfile.js
+│   ├── package.json
+│   ├── src
+│   │   ├── client
+│   │   │   ├── actions
+│   │   │   │   └── index.jsx
+│   │   │   ├── app.jsx
+│   │   │   ├── components
+│   │   │   │   └── home.jsx
+│   │   │   ├── images
+│   │   │   │   └── electrode.png
+│   │   │   ├── reducers
+│   │   │   │   └── index.jsx
+│   │   │   ├── routes.jsx
+│   │   │   └── styles
+│   │   │       └── base.css
+│   │   └── server
+│   │       ├── index.js
+│   │       └── views
+│   │           └── index-view.jsx
+│   └── test
+│       ├── client
+│       │   └── components
+│       │       └── home.spec.jsx
+│       └── server
+├── lerna.json
+├── package.json
+└── packages
+    └── test-component
+        ├── README.md
+        ├── gulpfile.js
+        ├── package.json
+        ├── src
+        │   ├── components
+        │   │   └── test-component.jsx
+        │   ├── index.js
+        │   ├── lang
+        │   │   ├── default-messages.js
+        │   │   ├── en.json
+        │   │   └── tenants
+        │   │       └── electrodeio
+        │   │           └── default-messages.js
+        │   └── styles
+        │       └── test-component.css
+        └── test
+            └── client
+                └── components
+                    ├── helpers
+                    │   └── intl-enzyme-test-helper.js
+                    └── test-component.spec.jsx
 ```
 
-A webserver will be started on [localhost:4000](http://127.0.0.1:4000) running
-the examples in `demo/examples/*`
+### Adding Components to the Repo
 
-You can use this code-playground to test your component, then publish it to let
+The component structure shown above supports multiple packages under the `packages` folder.
+You can add another component to your project by running `yo electrode:component-add` from withing the `packages` directory.
+
+```
+cd packages ; yo electrode:component-add
+```
+And follow the prompts.
+
+This will generate a new package and also update the `demo-app`.
+The `demo-app/src/client/components/home.jsx` and `demo-app/package.json` will be overwritten during the update.
+
+### Example and Preview
+
+Preview your component by using the `demo-app`. This is an electrode app which uses your newly created component:
+
+```bash
+cd demo-app; gulp demo
+```
+
+A webserver will be started on [localhost:3000](http://127.0.0.1:3000).
+Your new component will be used in `demo-app/src/client/components/home.jsx`
+
+You can use this demo-app to test your component, then publish it to let
 potential users try out your component and see what it can do.
 
 ## Getting To Know Yeoman

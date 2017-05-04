@@ -10,6 +10,7 @@ var _ = require('lodash');
 var extend = _.merge;
 var parseAuthor = require('parse-author');
 var githubUsername = require('github-username');
+var demoHelperPath = require.resolve('electrode-demo-helper');
 
 const ExpressJS = 'ExpressJS';
 const HapiJS = 'HapiJS';
@@ -58,10 +59,9 @@ module.exports = generators.Base.extend({
     });
     //Flag to check if the OSS generator is being called as a subgenerator
     this.isExtended = this.options.isExtended || false;
-    this.serverType = this.options.serverType || HapiJS;
-    this.githubUrl = this.options.githubUrl || "";
-    this.license = this.options.license;
-    this.quotes = this.options.quotes;
+    this.isDemoApp = this.options.isDemoApp || false;
+    //data should be passed to the generator using props
+    this.props = this.options.props || {};
   },
 
   initializing: function () {
@@ -71,13 +71,6 @@ module.exports = generators.Base.extend({
       this.pkg.keywords = this.pkg.keywords.filter((x) => x);
     }
 
-    // Pre set the default props from the information we have at this point
-    this.props = {
-      name: this.pkg.name,
-      description: this.pkg.description,
-      version: this.pkg.version,
-      homepage: this.pkg.homepage
-    };
 
     if (_.isObject(this.pkg.author)) {
       this.props.authorName = this.pkg.author.name;
@@ -95,17 +88,22 @@ module.exports = generators.Base.extend({
       this.props.authorEmail = info.email;
       this.props.authorUrl = info.url;
     }
-    this.props.serverType = this.serverType || HapiJS;
-    this.props.githubUrl = this.githubUrl;
-    this.props.quoteType = this.quotes;
-    this.props.license = this.license;
+    // Pre set the default props from the information we have at this point
+    this.props = extend({
+      name: this.pkg.name,
+      description: this.pkg.description,
+      version: this.pkg.version,
+      homepage: this.pkg.homepage
+    }, this.props);
   },
 
   prompting: {
     greeting: function () {
-      this.log(yosay(
-        'Welcome to the phenomenal ' + chalk.red('Electrode App') + ' generator!'
-      ));
+      if (!this.isDemoApp) {
+        this.log(yosay(
+          'Welcome to the phenomenal ' + chalk.red('Electrode App') + ' generator!'
+        ));
+      }
     },
 
     askFor: function () {
@@ -168,7 +166,7 @@ module.exports = generators.Base.extend({
           type: "input",
           name: 'keywords',
           message: 'Package keywords (comma to split)',
-          when: _.isEmpty(this.pkg.keywords),
+          when: _.isEmpty(this.pkg.keywords) && _.isEmpty(this.props.keywords),
           filter: function (words) {
             return words.split(/\s*,\s*/g).filter((x) => x);
           }
@@ -192,7 +190,7 @@ module.exports = generators.Base.extend({
           name: "quoteType",
           message: "Use double quotes or single quotes?",
           choices: ["\"", "'"],
-          when: this.props.quoteType === undefined,
+          when: !this.props.quoteType,
           default: "\""
         },
         {
@@ -216,7 +214,7 @@ module.exports = generators.Base.extend({
     },
 
     askForGithubAccount: function () {
-      if (this.options.githubAccount) {
+      if (this.props.githubAccount || this.options.githubAccount) {
         this.props.githubAccount = this.options.githubAccount;
         return;
       }
@@ -244,6 +242,17 @@ module.exports = generators.Base.extend({
     const isPWA = this.props.pwa;
     const isAutoSSR = this.props.autoSsr;
     const isSingleQuote = this.props.quoteType === "'";
+    const className = this.props.className;
+    const packageName = this.props.packageName;
+
+    let getDemoFilePath = function (filepath) {
+      try {
+        let demoFilePath = path.resolve(demoHelperPath, '..', filepath);
+        return demoFilePath;
+      } catch (e) {
+        console.log(e);
+      }
+    };
 
     let ignoreArray = [];
     if (isHapi) {
@@ -273,7 +282,7 @@ module.exports = generators.Base.extend({
       currentPkg[x] = currentPkg[x] || undefined;
     });
 
-    var updatePkg = _.defaultsDeep(currentPkg, {
+    var packageContents = {
       name: _.kebabCase(this.props.name),
       version: '0.0.1',
       description: this.props.description,
@@ -291,7 +300,13 @@ module.exports = generators.Base.extend({
         'index.js'
       ).replace(/\\/g, '/'),
       keywords: []
-    });
+    };
+    if (this.isDemoApp) {
+      packageContents.dependencies = {};
+      packageContents.dependencies[this.props.packageName] = "../packages/" + this.props.packageName;
+    }
+
+    var updatePkg = _.defaultsDeep(currentPkg, packageContents);
 
     var pkg = extend({}, defaultPkg, updatePkg);
 
@@ -346,7 +361,11 @@ module.exports = generators.Base.extend({
       { // copy options
         globOptions: {
           // Images are damaged by the template compiler
-          ignore: ['**/client/images/**', !isPWA && '**/client/sw-registration.js' || '']
+          ignore: ['**/client/images/**',
+            !isPWA && '**/client/sw-registration.js' || '',
+            this.isDemoApp && '**/client/components/**' || '',
+            this.isDemoApp && '**/client/actions/**' || '',
+            this.isDemoApp && '**/client/reducers/**' || '']
         }
       }
     );
@@ -363,6 +382,34 @@ module.exports = generators.Base.extend({
       this.templatePath('src/client/images'),
       this.destinationPath('src/client/images')
     );
+
+    //copy files from the demoHelper if this is the demo-app
+    if (this.isDemoApp) {
+      //copy archetype webpack config extension
+      this.fs.copy(
+        getDemoFilePath('archetype/config.js'),
+        this.destinationPath('archetype/config.js')
+      );
+
+      //copy home file
+      this.fs.copyTpl(
+        this.templatePath(getDemoFilePath('src/client/components/Home.jsx')),
+        this.destinationPath('src/client/components/home.jsx'),
+        { className, packageName, pwa: isPWA }
+      );
+
+      //copy reducer file
+      this.fs.copyTpl(
+        this.templatePath(getDemoFilePath('src/client/reducers/index.js')),
+        this.destinationPath('src/client/reducers/index.jsx')
+      );
+
+      //copy actions file
+      this.fs.copyTpl(
+        this.templatePath(getDemoFilePath('src/client/actions/index.js')),
+        this.destinationPath('src/client/actions/index.jsx')
+      );
+    }
   },
 
   default: function () {
@@ -386,7 +433,7 @@ module.exports = generators.Base.extend({
         local: require.resolve('../git')
       });
 
-    if (this.options.license && !this.pkg.license) {
+    if (this.props.license && !this.pkg.license) {
       this.composeWith('license', {
         options: {
           name: this.props.authorName,
@@ -452,12 +499,23 @@ module.exports = generators.Base.extend({
       this.spawnCommandSync("node_modules/.bin/eslint", ["--fix", "src", "test", "config", "--ext", ".js,.jsx"]);
     }
 
-    var chdir = this.props.createDirectory ? "'cd " + _.kebabCase(_.deburr(this.props.name)) + "' then " : "";
-    this.log(
-      "\n" + chalk.green.underline("Your new Electrode application is ready!") +
-      "\n" +
-      "\nType " + chdir + "'gulp dev' to start the server." +
-      "\n"
-    );
+    if (!this.isDemoApp) {
+      var chdir = this.props.createDirectory ? "'cd " + _.kebabCase(_.deburr(this.props.name)) + "' then " : "";
+      this.log(
+        "\n" + chalk.green.underline("Your new Electrode application is ready!") +
+        "\n" +
+        "\nType " + chdir + "'gulp dev' to start the server." +
+        "\n"
+      );
+    } else { //a demo-app was generated by the component generator
+      this.log(
+        "\n" + chalk.green.underline("Your new Electrode component is ready!") +
+        "\n" +
+        "\nYour component is in packages/" + this.props.packageName + " and your demo app is " + this.props.name +
+        "\n" +
+        "\nType 'cd " + this.props.packageName + "/" + this.props.name + "' then 'gulp dev' to run the development build for the demo app." +
+        "\n"
+      );
+    }
   }
 });

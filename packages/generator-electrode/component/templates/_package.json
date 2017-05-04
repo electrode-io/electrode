@@ -1,8 +1,7 @@
 {
-  "name": "<%= packageName %>",
+  "name": "<%= projectName %>",
   "version": "1.0.0",
-  "description": "<%= projectName %>",
-  "main": "lib/index.js",
+  "description": "<%= projectName %>-component",
   "author": {
     "name": "<%= developerName %>",
     "url": "<%= githubUrl %>/<%= ghUser %>"
@@ -15,25 +14,13 @@
     "url": "<%= githubUrl %>/<%= packageGitHubOrg %>/<%= ghRepo %>/issues"
   },
   "homepage": "<%= githubUrl %>/<%= packageGitHubOrg %>/<%= ghRepo %>",
-  "dependencies": {},
-  "devDependencies": {
-    "electrode-archetype-react-component": "^1.0.0",
-    "electrode-archetype-react-component-dev": "^1.0.0",
-    "gulp": "^3.9.1"
-  },
-  "engines": {
-    "node": "^4.2.6",
-    "npm": "^3.5.3"
-  },
   "scripts": {
-    "prepublish": "gulp prepublish",
-    "start": "gulp demo",
-    "test": "gulp check"
+    "test": "lerna bootstrap && lerna run test"
   },
-  "keywords": [
-    "react",
-    "electrode",
-    "electrode-component",
-    "react-component"
-  ]
+  "dependency": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "lerna": "^2.0.0-rc.1",
+    "lodash": "^4.10.1"
+  }
 }
