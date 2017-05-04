@@ -32,7 +32,5 @@ function appEntry() {
 
 module.exports = {
   context,
-  entry: polyfill ? {
-    main: ["babel-polyfill", appEntry()]
-  } : appEntry()
+  entry: polyfill ? { main: ["babel-polyfill", appEntry()] } : appEntry()
 };
