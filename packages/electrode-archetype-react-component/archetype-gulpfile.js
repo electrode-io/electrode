@@ -70,10 +70,6 @@ const tasks = {
   "cov-frontend-85": () => checkFrontendCov("85"),
   "cov-frontend-95": () => checkFrontendCov("95"),
 
-  "open-dev": ["dev", "open-demo"],
-  "open-hot": ["hot", "open-demo"],
-  "open-demo": "opener http://127.0.0.1:4000",
-
   "lint": ["lint-react-src", "lint-react-test", "lint-scripts"],
   "lint-react-src": () => exec(`eslint --ext .js,.jsx -c ${__dirname}/config/eslint/.eslintrc-react src --color`),
   "lint-react-test": () => exec(`eslint --ext .js,.jsx -c ${__dirname}/config/eslint/.eslintrc-react-test test/client --color`),
@@ -95,7 +91,7 @@ const tasks = {
   "test-frontend-dev-watch": () => exec(`karma start ${__dirname}/config/karma/karma.conf.watch.js --colors --browsers Chrome --no-single-run --auto-watch`)
 };
 
-module.exports = function(componentTasks, gulp) {
+module.exports = function (componentTasks, gulp) {
   setupPath();
   gulpHelper.loadTasks(Object.assign(tasks, componentTasks), gulp || require("gulp"));
 };
