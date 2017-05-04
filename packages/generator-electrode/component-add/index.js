@@ -68,7 +68,7 @@ module.exports = generators.Base.extend({
 
     // check for missing
     checkError();
-    this.props = {};
+    this.props = this.options.props || {};
   },
 
   prompting: {
@@ -112,7 +112,8 @@ module.exports = generators.Base.extend({
       isAddon: true,
       name: this.packageName,
       componentName: this.componentName,
-      demoAppName: this.demoAppName
+      demoAppName: this.demoAppName,
+      quotes: this.props.quotes
     };
     this.composeWith('electrode:component', { options }, {
       local: require.resolve('../component')
