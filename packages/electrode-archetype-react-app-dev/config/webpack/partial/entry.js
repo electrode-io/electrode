@@ -27,12 +27,10 @@ function appEntry() {
   });
 
   return entry ||
-    Fs.existsSync(Path.join(context, "app.js")) ? "./app.js" : "./app.jsx";
+    (Fs.existsSync(Path.join(context, "app.js")) ? "./app.js" : "./app.jsx");
 }
 
 module.exports = {
   context,
-  entry: {
-    main: polyfill ? ["babel-polyfill", appEntry()] : appEntry()
-  }
+  entry: polyfill ? { main: ["babel-polyfill", appEntry()] } : appEntry()
 };
