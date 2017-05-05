@@ -8,11 +8,25 @@ const webpackDevReporter = require("../util/webpack-dev-reporter");
 const devProtocol = process.env.WEBPACK_DEV_HTTPS ? "https://" : "http://";
 
 module.exports = function () {
+  const devServerConfig = {
+    reporter: webpackDevReporter,
+    https: Boolean(process.env.WEBPACK_DEV_HTTPS)
+  };
+  
+  if (process.env.WEBPACK_HOST) {
+    devServerConfig.host = process.env.WEBPACK_HOST;
+    devServerConfig.headers = {
+      "Access-Control-Allow-Origin": `${devProtocol}${process.env.WEBPACK_HOST}`
+    };
+  } else {
+    devServerConfig.disableHostCheck = true;
+    devServerConfig.headers = {
+      "Access-Control-Allow-Origin": "*"
+    };
+  }
+
   const config = {
-    devServer: {
-      reporter: webpackDevReporter,
-      https: Boolean(process.env.WEBPACK_DEV_HTTPS)
-    },
+    devServer: devServerConfig,
     output: {
       publicPath: `${devProtocol}${archetype.webpack.devHostname}:${archetype.webpack.devPort}/js/`,
       filename: "[name].bundle.dev.js"
