@@ -1,5 +1,5 @@
 {
-  "root": "docs",
-  "title": "Electrode Docs",
-  "description": "Hosts generated content for electrode-based reference material"
+  "root": "./docs",
+  "title": "Electrode Guide",
+  "description": "A guide book for electrode developers."
 }

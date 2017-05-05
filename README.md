@@ -47,7 +47,10 @@ The Yeoman [generator-electrode] NPM module allows you to quickly create an Univ
 Some sample applications can be found under the [`samples`](samples) directory.
 
 # Docs
-Hosts generated content for electrode-based reference material
+
+Electrode platform creates and hosts books under [`docs`](docs) directory. It contains the full documentation of electrode, generated using GitBook.
+
+See [Gitbook Toolchain](https://toolchain.gitbook.com/) for more details.
 
 ## Boilerplate Universal React Node
 
