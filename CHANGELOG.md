@@ -1,5 +1,18 @@
 # Packages
 
+## Commits
+
+  - [commit](http://github.com/electrode-io/electrode/commit/cbb0c01e5cb49e40c7832e4d5873484a4950681f) Service worker fixes for oss archetype app (#314)
+  - [commit](http://github.com/electrode-io/electrode/commit/5a7e2baaff5e2c9f5055ac4ad294f274ecc521d5) archetype-react-app: [bug] [patch] Update initial entry path for PWA (#315)
+  - [commit](http://github.com/electrode-io/electrode/commit/5e843c99317ec18a806fedcdb365be789110a12e) Generator-electrode: [Feat] [major] New component structure with Demo App (#312)
+  - [commit](http://github.com/electrode-io/electrode/commit/5ce88a7351173b0b93e0e0cf199623c4853814da) clean remaining dev and hot tasks (#313)
+  - [commit](http://github.com/electrode-io/electrode/commit/b8cc45566f0f8833fc8d5941d204c75773f677a4) universal-material-ui: [Chore][Major] Update Material-UI sample to src/lib mode (#280)
+  - [commit](http://github.com/electrode-io/electrode/commit/c0164f4b267947fb3d0c2dc05e6792a91fa0a921) Accept props as options (#318)
+  - [commit](http://github.com/electrode-io/electrode/commit/af3d4ca4460b1253a72988b5e245ebefd064fea4) archetype-react-app: [patch] archetype app entry configurations (#317)
+  - [commit](http://github.com/electrode-io/electrode/commit/f8e02869b8359e59e7aa2fe6a63542286e3ff1fb) update Path for Dockerfile (#323)
+
+# Packages
+
 -   electrode-archetype-react-app-dev@2.3.0
 -   electrode-archetype-react-app@2.3.0
 -   electrode-redux-router-engine@1.4.0
