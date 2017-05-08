@@ -12,7 +12,7 @@ module.exports = function () {
     reporter: webpackDevReporter,
     https: Boolean(process.env.WEBPACK_DEV_HTTPS)
   };
-  
+
   if (process.env.WEBPACK_HOST) {
     devServerConfig.host = process.env.WEBPACK_HOST;
     devServerConfig.headers = {
