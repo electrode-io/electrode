@@ -7,5 +7,4 @@ WORKDIR $DIR
 COPY . $DIR
 RUN npm install
 RUN $DIR/node_modules/.bin/gulp build
-CMD node server
-
+CMD node src/server
