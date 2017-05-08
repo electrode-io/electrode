@@ -1,0 +1,72 @@
+# Component Helpers
+
+## Develop helpers for the components
+
+Sometimes it makes sense to do the heavy lifting of your application in one or more separate modules that are imported. For example, let's make a helper module to handle different types of graphs. Remember that this helper was imported into the app in the last section via:
+
+```
+import style from "../helpers/graph-styles";
+```
+
+In `src`, create a folder named `helpers` with a file named `graph-styles.js` inside \(`<your-awesome-component>/src/helpers/graph-styles.js`\). Copy the code from below into this file:
+
+    const PARENT = {divisor: 2};
+    const CHILD = {divisor: 4, rotateBack: -1};
+    const SINGLE = {marginDivisor: 8};
+    const CONTAINER = {paddingDivisor: .13, marginDivisor: .13};
+
+    export default (type, size, rotateVal) => {
+
+      const nodeSize = type === "child" ? (size / CHILD.divisor) : (size / PARENT.divisor);
+
+      const parentOrSingle = {
+        width: `${nodeSize}em`,
+        height: `${nodeSize}em`,
+        margin: `-${nodeSize / PARENT.divisor}em`,
+        display: `block`,
+        position: `absolute`,
+        top: `50%`,
+        left: `50%`,
+        transform: `translate(0em)`
+      };
+
+      switch (type) {
+
+      case "single": {
+        const singleNode = {
+          display: `inline-block`,
+          position: `relative`,
+          margin: `${nodeSize / SINGLE.marginDivisor}em`
+        };
+        ["width", "height"].map((prop) => singleNode[prop] = parentOrSingle[prop]);
+        return singleNode;
+      }
+
+      case "child": {
+        const childNode = {
+          transform: `rotate(${rotateVal * 1}deg) translate(${nodeSize * PARENT.divisor}em) rotate(${rotateVal * CHILD.rotateBack}deg)`, // eslint-disable-line max-len
+          backgroundSize: `100%`
+        };
+        return Object.assign(parentOrSingle, childNode);
+      }
+
+      case "container": {
+        return {
+          position: `relative`,
+          width: `${size}em`,
+          height: `${size}em`,
+          padding: `${size * CONTAINER.paddingDivisor}em`,
+          borderRadius: `50%`,
+          display: `inline-block`,
+          margin: `${size * CONTAINER.marginDivisor}em`
+        };
+      }
+
+      default: {
+        return parentOrSingle;
+      }
+      }
+    };
+
+
+

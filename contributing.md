@@ -37,6 +37,54 @@ After running above, you should see a similar text as `Hapi.js server running at
 
 And when you open the browser at `http://localhost:3000`, you should see a large Electrode icon with a few demonstration components below.
 
+## Create Your Own Gitbook
+
+### Requirements
+
+1. NodeJS (v4.0.0 and above is recommended)
+1. Windows, Linux, Unix, or Mac OS X
+
+### Installation
+
+Make sure you have installed gitbook-cli
+```
+$ npm install gitbook-cli -g
+```
+
+### Create a book
+
+GitBook can setup a boilerplate book:
+```
+$ gitbook init
+```
+
+> If you wish to create the book into a new directory, you can do so by running gitbook init ./directory
+
+### Preview and serve a book
+
+```
+$ gitbook serve
+```
+
+After running above, you should see a similar text as `Serving book on http://localhost:4000` in command line.
+And when you open the browser at `http://localhost:4000`, you should see a gitbook demo.
+
+### Build the static website
+
+```
+$ gitbook build
+```
+
+### Integrate with repo under subdirectory
+You can use a subdirectory (like docs/) to store the book for the project's documentation. You can configure the root option to indicate the folder where GitBook can find the book's files.
+
+book.json:
+```
+{
+    "root": "./docs"
+}
+```
+
 ## Contributing Guidelines
 1. Push your changes to a topic branch in your fork of the repository.
 1. Ensure that your code adheres to the existing style in the sample to which

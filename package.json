@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "electrode-gulp-helper": "^1.0.5",
+    "gitbook-cli": "^2.3.0",
     "gulp": "^3.9.1",
     "lerna": "^2.0.0-rc.4",
     "lodash": "^4.17.2",
