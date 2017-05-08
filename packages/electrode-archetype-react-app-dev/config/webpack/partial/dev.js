@@ -8,7 +8,7 @@ const webpackDevReporter = require("../util/webpack-dev-reporter");
 const devProtocol = process.env.WEBPACK_DEV_HTTPS ? "https://" : "http://";
 
 module.exports = function () {
-  const devServerConfig = {
+  let devServerConfig = {
     reporter: webpackDevReporter,
     https: Boolean(process.env.WEBPACK_DEV_HTTPS)
   };
