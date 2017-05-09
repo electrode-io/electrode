@@ -5,17 +5,18 @@ const webpack = require("webpack");
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const webpackDevReporter = require("../util/webpack-dev-reporter");
 
-const devProtocol = process.env.WEBPACK_DEV_HTTPS ? "https://" : "http://";
+const devProtocol = archetype.webpack.devProtocol ? "https://" : "http://";
 
 module.exports = function () {
-  let devServerConfig = {
+  const devServerConfig = {
     reporter: webpackDevReporter,
-    https: Boolean(process.env.WEBPACK_DEV_HTTPS)
+    https: Boolean(archetype.webpack.devProtocol)
   };
-  if (process.env.WEBPACK_HOST) {
-    devServerConfig.host = process.env.WEBPACK_HOST;
+
+  if (process.env.WEBPACK_DEV_HOST) {
+    devServerConfig.public = `${archetype.webpack.devHostname}:${archetype.webpack.devPort}`;
     devServerConfig.headers = {
-      "Access-Control-Allow-Origin": `${devProtocol}${process.env.WEBPACK_HOST}`
+      "Access-Control-Allow-Origin": `${devProtocol}${archetype.webpack.devHostname}:${archetype.webpack.devPort}`
     };
   } else {
     devServerConfig.disableHostCheck = true;
