@@ -69,7 +69,7 @@ It's a great idea to add a description, documentation and other information to
 your `README.md` file, to help people who are interested in using your
 component.
 
-The component project structure uses a [Lerna](https://lernajs.io/) structure, which can help manage multiple repos within your `packages` directory. Your initial prokect structure will be :
+The component project structure uses a [Lerna](https://lernajs.io/) structure, which can help manage multiple repos within your `packages` directory. Your initial project structure will be :
 
 ```bash
 test-component/
@@ -140,7 +140,8 @@ The component structure shown above supports multiple packages under the `packag
 You can add another component to your project by running `yo electrode:component-add` from withing the `packages` directory.
 
 ```
-cd packages ; yo electrode:component-add
+$ cd packages
+$ yo electrode:component-add
 ```
 And follow the prompts.
 
@@ -152,7 +153,8 @@ The `demo-app/src/client/components/home.jsx` and `demo-app/package.json` will b
 Preview your component by using the `demo-app`. This is an electrode app which uses your newly created component:
 
 ```bash
-cd demo-app; gulp demo
+$ cd demo-app
+$ gulp demo
 ```
 
 A webserver will be started on [localhost:3000](http://127.0.0.1:3000).
