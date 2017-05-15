@@ -16,10 +16,10 @@ module.exports = {
   devPkg,
   devRequire,
   webpack: Object.assign({}, {
-    devHostname: process.env.WEBPACK_DEV_HOST || "localhost",
+    devHostname: process.env.WEBPACK_HOST || "localhost",
     devPort: utils.getInt(process.env.WEBPACK_DEV_PORT, 2992),
     testPort: utils.getInt(process.env.WEBPACK_TEST_PORT, 3001),
-    devProtocol: process.env.WEBPACK_DEV_HTTPS,
+    https: process.env.WEBPACK_DEV_HTTPS,
     modulesDirectories: [],
     enableBabelPolyfill: false
   }, archetypeOptions.webpack),

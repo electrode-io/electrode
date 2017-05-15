@@ -5,12 +5,12 @@ const webpack = require("webpack");
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const webpackDevReporter = require("../util/webpack-dev-reporter");
 
-const devProtocol = archetype.webpack.devProtocol ? "https://" : "http://";
+const devProtocol = archetype.webpack.https ? "https://" : "http://";
 
 module.exports = function () {
   const devServerConfig = {
     reporter: webpackDevReporter,
-    https: Boolean(archetype.webpack.devProtocol)
+    https: Boolean(archetype.webpack.https)
   };
 
   if (process.env.WEBPACK_DEV_HOST) {
