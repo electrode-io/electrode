@@ -6,16 +6,12 @@
 
 #### How to run tests
 
-```
-# Basic testing and linting
-$ gulp check
+We generate unit test and code coverage check for failure. The app test files are located at `demo-app/test/` folder, and component test files are located at `packages/<componentName>/test/` folder which you can add on more unit tests for each new method or feature in the future.
 
-# Continous Testing
-## In one terminal
-$ gulp server-test
-## In a different terminal
-$ gulp test-frontend-dev-watch
+To run the test, please go to the root level of your repo (ex. your-awesome-component), and run
+
+```
+$ npm test
 ```
 
-
-
+This will run `lerna bootstrap && lerna run test` behind, which goes into every `packages/` folder and run `npm test` for each component.

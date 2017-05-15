@@ -1,6 +1,6 @@
 # Intermediate
 
-* [Create a Reusable Component](/chapter1/intermediate/create-a-reusable-component.md)
+* [Create a Reusable Component](/chapter1/intermediate/create-a-electrode-component.md)
 * [Build a Server Plugin](/chapter1/intermediate/build-a-server-plugin.md)
 * [Add Routes](/chapter1/intermediate/add-routes.md)
 * [Server Config](/chapter1/intermediate/server-config.md)
