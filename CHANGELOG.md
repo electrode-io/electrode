@@ -1,5 +1,14 @@
 # Packages
 
+## Commits
+
+-   [commit](http://github.com/electrode-io/electrode/commit/5ef57e46ea535b60a4beba87817a1dbd6ec1fcef) gitbook: [Feature] Add gitbook (#322)
+-   [commit](http://github.com/electrode-io/electrode/commit/801e3222c260959fc03f29d69acb3d1739c22eb5) minor fixes for readme (#329)
+-   [commit](http://github.com/electrode-io/electrode/commit/5d70b97207bb1d37a2f3b78e346a7e19794e297e) archetype-react-app: [minor][bug] Invalid host header fixes (#321)
+-   [commit](http://github.com/electrode-io/electrode/commit/65884aa271ed76398c7bc062675d99627da94b8e) fix the require statement for pulling in the profile base (#327)
+
+# Packages
+
 -   electrode-archetype-react-app-dev@2.3.1
 -   electrode-archetype-react-app@2.3.1
 -   electrode-archetype-react-component-dev@2.0.1
