@@ -1,5 +1,11 @@
 # Packages
 
+-   electrode-archetype-react-app-dev@2.3.2
+-   electrode-archetype-react-app@2.3.2
+-   electrode-archetype-react-component-dev@2.0.2
+-   electrode-archetype-react-component@2.0.2
+-   generator-electrode@2.0.1
+
 ## Commits
 
 -   [commit](http://github.com/electrode-io/electrode/commit/5ef57e46ea535b60a4beba87817a1dbd6ec1fcef) gitbook: [Feature] Add gitbook (#322)
