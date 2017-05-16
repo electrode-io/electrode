@@ -5,14 +5,28 @@ const webpack = require("webpack");
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const webpackDevReporter = require("../util/webpack-dev-reporter");
 
-const devProtocol = process.env.WEBPACK_DEV_HTTPS ? "https://" : "http://";
+const devProtocol = archetype.webpack.https ? "https://" : "http://";
 
 module.exports = function () {
+  const devServerConfig = {
+    reporter: webpackDevReporter,
+    https: Boolean(archetype.webpack.https)
+  };
+
+  if (process.env.WEBPACK_DEV_HOST || process.env.WEBPACK_HOST) {
+    devServerConfig.public = `${archetype.webpack.devHostname}:${archetype.webpack.devPort}`;
+    devServerConfig.headers = {
+      "Access-Control-Allow-Origin": `${devProtocol}${archetype.webpack.devHostname}:${archetype.webpack.devPort}`
+    };
+  } else {
+    devServerConfig.disableHostCheck = true;
+    devServerConfig.headers = {
+      "Access-Control-Allow-Origin": "*"
+    };
+  }
+
   const config = {
-    devServer: {
-      reporter: webpackDevReporter,
-      https: Boolean(process.env.WEBPACK_DEV_HTTPS)
-    },
+    devServer: devServerConfig,
     output: {
       publicPath: `${devProtocol}${archetype.webpack.devHostname}:${archetype.webpack.devPort}/js/`,
       filename: "[name].bundle.dev.js"
