@@ -2,7 +2,7 @@
 /**
  * Webpack static dev configuration
  */
-const baseProfile = require("../profile.base");
+const baseProfile = require("./profile.base");
 const generateConfig = require("./util/generate-config");
 const Path = require("path");
 
