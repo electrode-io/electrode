@@ -44,7 +44,7 @@ Fill out the prompts again with your information, we took `test1` as a new compo
    ...
 ```
 
-This will generate a new package and also update the demo-app. Don'tgett panic if you saw conflicts, the `demo-app/src/client/components/home.jsx` and `demo-app/package.json` expected to be overwritten during the update.
+This will generate a new package and also update the demo-app. Don't get panic if you saw conflicts, the `demo-app/src/client/components/home.jsx` and `demo-app/package.json` expected to be overwritten during the update.
 
 #### Develop the new generated component
 
