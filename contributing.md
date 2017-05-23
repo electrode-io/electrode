@@ -91,3 +91,13 @@ book.json:
    you are contributing.
 1. Ensure that your code has an appropriate set of unit tests which all pass by running `npm run test` on the project root.
 1. Submit a pull request with a proper title and detailed description.
+1. Specify if the pull request will cause `[major]`, `[minor]` or `[patch]` version.
+1. Specify which package the pull request affects.
+1. Each pull request must affect a single package only.
+1. The pull request title message should indicate if it's `[feat]`, `[bug]`, `[chore]` or `[docs]`.
+
+A sample pull request message will look like:
+```
+archetype-react-app: [feat] [minor] implement SSR support for Inferno
+```
+>Note: Branching is recommended on Publish commits only so it's possible to rely on lerna to publish from that branch.
