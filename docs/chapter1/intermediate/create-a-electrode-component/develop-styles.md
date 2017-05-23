@@ -4,9 +4,10 @@
 
 Let's also add some style elements using [CSS modules](https://github.com/css-modules/css-modules) to create a dynamic application. Use the code below to replace what is in
 
-`<your-awesome-component>/src/styles/your-awesome-component.css`:
+`<your-awesome-component>/packages/<componentName>/src/styles/<your-awesome-component>.css`:
 
 ```
+
 body {
   font-family: sans-serif;
 }
@@ -14,10 +15,17 @@ body {
 p {
   padding: 15px;
 }
+
 @keyframes partyLights {
-  0%{background-position:0% 51%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 51%}
+  0% {
+    background-position: 0% 51%
+  }
+  50% {
+    background-position: 100% 50%
+  }
+  100% {
+    background-position: 0% 51%
+  }
 }
 
 @keyframes shake {
@@ -45,8 +53,12 @@ p {
   animation-iteration-count: infinite;
 }
 
+.hideParty {
+  visibility: hidden;
+}
+
 .houseParty {
-    -webkit-clip-path: polygon(2% 97%, 98% 97%, 98% 44%, 51% 8%, 3% 45%);
+  -webkit-clip-path: polygon(2% 97%, 98% 97%, 98% 44%, 51% 8%, 3% 45%);
   clip-path: polygon(2% 97%, 98% 97%, 98% 44%, 51% 8%, 3% 45%);
   background: linear-gradient(269deg, #ff90f1, #27ff8f, #6db0ff, #a398ff);
   background-size: 800% 800%;
@@ -67,7 +79,6 @@ p {
   margin-left: auto;
   margin-right: auto;
   margin-top: 10%;
-
   position: relative;
   transition: filter .7s ease-in-out;
 }
@@ -113,23 +124,42 @@ a, a:hover, a:active, a:visited {
   color: rgb(93, 245, 255);
   text-decoration: none;
 }
-```
-
-Create a file named: `<your-awesome-component>/src/styles/guest-list.css`. Copy the code from below into this file:
 
 ```
+
+Create a file named: `<your-awesome-component>/packages/<componentName>/src/styles/guest-list.css`. Copy the code from below into this file:
+
+```
+
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+label {
+  font-size: 2em;
+}
 
-label { font-size: 2em; }
-input[type=checkbox] { display:none; }
-input[type=checkbox] + label:before {
+input[type=checkbox] {
+  display: none;
+}
+
+input[type=checkbox]+label:before {
   font-family: FontAwesome;
   display: inline-block;
 }
-input[type=checkbox] + label:before { content: "\f096"; }
-input[type=checkbox] + label:before { letter-spacing: 10px; }
-input[type=checkbox]:checked + label:before { content: "\f046"; }
-input[type=checkbox]:checked + label:before { letter-spacing: 5px; }
+
+input[type=checkbox]+label:before {
+  content: "\f096";
+}
+
+input[type=checkbox]+label:before {
+  letter-spacing: 10px;
+}
+
+input[type=checkbox]:checked+label:before {
+  content: "\f046";
+}
+
+input[type=checkbox]:checked+label:before {
+  letter-spacing: 5px;
+}
 
 .guestList {
   position: absolute;
@@ -153,11 +183,13 @@ input[type=checkbox]:checked + label:before { letter-spacing: 5px; }
 .guestName {
   margin-bottom: .5em;
 }
-```
-
-Create a file named: `<your-awesome-component>/src/styles/render-friend.css`. Copy the code from below into this file:
 
 ```
+
+Create a file named: `<your-awesome-component>/packages/<componentName>/src/styles/render-friend.css`. Copy the code from below into this file:
+
+```
+
 @keyframes shake {
   from {
     transform: scale3d(1, 1, 1);
@@ -190,7 +222,5 @@ Create a file named: `<your-awesome-component>/src/styles/render-friend.css`. Co
   background-size: 60%;
   float: right;
 }
+
 ```
-
-
-

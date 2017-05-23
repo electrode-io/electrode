@@ -16,7 +16,7 @@ Electrode archetypes are a way for every electrode module to share common script
 >
 > * [electrode-archetype-react-app](https://github.com/electrode-io/electrode#app-archetype): Electrode Archetype for Apps.
 >
-> * [electrode-archetype-react-component](https://github.com/electrode-io/electrode-archetype-react-component): Electrode archetype for react components.
+> * [electrode-archetype-react-component](https://github.com/electrode-io/electrode/tree/master/packages/electrode-archetype-react-component): Electrode archetype for react components.
 >
 > * [electrode-archetype-njs-module-dev](https://github.com/electrode-io/electrode-archetype-njs-module-dev): Electrode archetype for server components.
 
@@ -195,6 +195,3 @@ Time: 6607ms
                      ../server/stats.json  233 bytes          [emitted]
                 ../isomorphic-assets.json  239 bytes          [emitted]
 ```
-
-
-
