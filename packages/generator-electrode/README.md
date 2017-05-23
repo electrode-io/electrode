@@ -22,6 +22,8 @@ $ yo electrode
 ```
 > Note: If the app is not properly generated at the correct destination, make sure you do not have a .yo-rc.json file hidden in your CWD.
 
+[Here](https://github.com/animesh10/tutorials/blob/master/generateApp.gif) is a sample screen capture the app generation process.
+
 ## Running the app
 
 Once the application is generated and `npm install` is completed, you are ready to try it out.
