@@ -18,7 +18,7 @@ Then create a completely new folder and run the generator:
 
 ```
 $ mkdir your-awesome-component-folder
-$ cd mkdir your-awesome-component-folder
+$ cd your-awesome-component-folder
 $ yo electrode:component
 ```
 

@@ -1,6 +1,6 @@
 # Add Components to Your Demo-app
 
-After finished components developing, its time for us to demo them in `demo-app`. Rebuild your developed components by running anther npm install:
+After you have finished developing your components, its time for us to demo them in `demo-app`. Rebuild your developed components by running anther npm install:
 
 ```
 $ cd <your-awesome-component>/packages/<componentName>
