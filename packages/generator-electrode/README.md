@@ -150,6 +150,7 @@ And follow the prompts.
 This will generate a new package and also update the `demo-app`.
 The `demo-app/src/client/components/home.jsx` and `demo-app/package.json` will be overwritten during the update.
 
+[Here](https://github.com/animesh10/tutorials/blob/master/componentGenerator.gif) is a sample screen capture the component generation process.
 ### Example and Preview
 
 Preview your component by using the `demo-app`. This is an electrode app which uses your newly created component:
