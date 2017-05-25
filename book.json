@@ -1,5 +1,13 @@
 {
   "root": "./docs",
-  "title": "Electrode Guide",
-  "description": "A guide book for electrode developers"
+  "gitbook": "3.2.2",
+  "title": "Electrode Developer's Guide",
+  "description": "Electrode Platform Developer's Guide",
+  "plugins": ["edit-link", "prism", "-highlight"],
+  "pluginsConfig": {
+    "edit-link": {
+      "base": "https://github.com/electrode-io/electrode/tree/master/docs",
+      "label": "Edit This Page"
+    }
+  }
 }
