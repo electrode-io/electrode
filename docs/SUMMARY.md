@@ -24,8 +24,12 @@
     -   [Eslint Config](/chapter1/intermediate/app-archetype/eslint.md)
     -   [Webpack Config](/chapter1/intermediate/app-archetype/webpack-config.md)
     -   [Environment Variables](/chapter1/intermediate/app-archetype/env-vars.md)
--   [Create an Electrode Component](chapter1/intermediate/create-a-electrode-component.md)
 
+-   [Component Archetype](chapter1/intermediate/component-archetype/README.md)
+    -   [Structure](/chapter1/intermediate/component-archetype/component-archetype-structure.md)
+    -   [Webpack Config](/chapter1/intermediate/component-archetype/webpack-config.md)
+
+-   [Create an Electrode Component](chapter1/intermediate/create-a-electrode-component.md)
     -   [Component Generator Setup](/chapter1/intermediate/create-a-electrode-component/component-generator-setup.md)
     -   [What's Inside](/chapter1/intermediate/create-a-electrode-component/what-is-inside.md)
     -   [Low-Level Components](chapter1/intermediate/create-a-electrode-component/low-level-components.md)

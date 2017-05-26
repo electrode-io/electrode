@@ -1,6 +1,7 @@
 # Intermediate
 
 -   [Application Archetype](/chapter1/intermediate/app-archetype/README.md)
+-   [Component Archetype](/chapter1/intermediate/component-archetype/README.md)
 -   [Create a Reusable Component](/chapter1/intermediate/create-a-electrode-component.md)
 -   [Build a Server Plugin](/chapter1/intermediate/build-a-server-plugin.md)
 -   [Add Routes](/chapter1/intermediate/add-routes.md)
