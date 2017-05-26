@@ -1,10 +1,11 @@
 'use strict';
-var generators = require('yeoman-generator');
+
+var Generator = require('yeoman-generator');
 var originUrl = require('git-remote-origin-url');
 
-module.exports = generators.Base.extend({
-  constructor: function () {
-    generators.Base.apply(this, arguments);
+module.exports = class extends Generator {
+  constructor(args, options) {
+    super(args, options);
 
     this.option('name', {
       type: String,
@@ -17,11 +18,12 @@ module.exports = generators.Base.extend({
       required: true,
       desc: 'GitHub username or organization'
     });
+
     // Set a gitHub uRL if being passed
     this.githubUrl = this.options.githubUrl || "https://github.com";
-  },
+  }
 
-  initializing: function () {
+  initializing() {
     this.fs.copy(
       this.templatePath('gitattributes'),
       this.destinationPath('.gitattributes')
@@ -38,9 +40,9 @@ module.exports = generators.Base.extend({
       }.bind(this), function () {
         this.originUrl = '';
       }.bind(this));
-  },
+  }
 
-  writing: function () {
+  writing() {
     this.pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
 
     var repository = '';
@@ -56,19 +58,19 @@ module.exports = generators.Base.extend({
       this.pkg.repository.url = repository;
     }
 
-    //overwrite with given repo path if present
+    // Overwrite with given repo path if present
     if (this.options.githubUrl) {
       this.pkg.repository.url = [this.options.githubUrl, this.options.githubAccount, this.options.name].filter((x) => x).join("/");
     }
     this.fs.writeJSON(this.destinationPath('package.json'), this.pkg);
-  },
+  }
 
-  end: function () {
+  end() {
     this.spawnCommandSync('git', ['init'], {
       cwd: this.destinationPath()
     });
 
-    // prioritize given repo URL if present
+    // Prioritize given repo URL if present
     if (this.options.githubUrl) {
       this.spawnCommandSync('git', ['remote', 'add', 'origin', this.pkg.repository.url], {
         cwd: this.destinationPath()
@@ -84,4 +86,4 @@ module.exports = generators.Base.extend({
       });
     }
   }
-});
+};

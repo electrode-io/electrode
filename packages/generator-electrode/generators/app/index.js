@@ -2,11 +2,11 @@
 
 /* eslint-disable arrow-parens */
 
-var generators = require("yeoman-generator");
-var chalk = require("chalk");
-var yosay = require("yosay");
-var path = require("path");
-var _ = require("lodash");
+var Generator = require('yeoman-generator');
+var chalk = require('chalk');
+var yosay = require('yosay');
+var path = require('path');
+var _ = require('lodash');
 var extend = _.merge;
 var parseAuthor = require("parse-author");
 var githubUsername = require("github-username");
@@ -16,10 +16,11 @@ const ExpressJS = "ExpressJS";
 const HapiJS = "HapiJS";
 const KoaJS = "KoaJS";
 
-module.exports = generators.Base.extend({
-  constructor: function() {
-    generators.Base.apply(this, arguments);
-    this.option("travis", {
+module.exports = class extends Generator {
+  constructor(args, options) {
+    super(args, options);
+
+    this.option('travis', {
       type: Boolean,
       required: false,
       defaults: true,
@@ -58,15 +59,16 @@ module.exports = generators.Base.extend({
       desc: "Content to insert in the README.md file"
     });
 
-    this.isDemoApp = this.options.isDemoApp || false;
-    //data should be passed to the generator using props
-    this.props = this.options.props || {};
-    //Flag to check if the OSS generator is being called as a subgenerator
-    this.isExtended = this.props.isExtended || false;
-  },
+    // Flag to check if the OSS generator is being called as a subgenerator
+    this.isExtended = this.options.isExtended || false;
 
-  initializing: function() {
-    this.pkg = this.fs.readJSON(this.destinationPath("package.json"), {});
+    this.isDemoApp = this.options.isDemoApp || false;
+    // Data should be passed to the generator using props
+    this.props = this.options.props || {};
+  }
+
+  initializing() {
+    this.pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
 
     if (this.pkg.keywords) {
       this.pkg.keywords = this.pkg.keywords.filter(x => x);
@@ -90,25 +92,22 @@ module.exports = generators.Base.extend({
       this.props.authorUrl = info.url;
     }
     // Pre set the default props from the information we have at this point
-    this.props = extend(
-      {
-        name: this.pkg.name,
-        description: this.pkg.description,
-        version: this.pkg.version,
-        homepage: this.pkg.homepage
-      },
-      this.props
-    );
-  },
+    this.props = extend({
+      name: this.pkg.name,
+      description: this.pkg.description,
+      version: this.pkg.version,
+      homepage: this.pkg.homepage
+    }, this.props);
+  }
 
-  prompting: {
-    greeting: function() {
+  prompting() {
+    greeting: {
       if (!this.isDemoApp) {
         this.log(yosay("Welcome to the phenomenal " + chalk.red("Electrode App") + " generator!"));
       }
-    },
+    }
 
-    askFor: function() {
+    askFor: {
       if (this.pkg.name || this.options.name) {
         this.props.name = this.pkg.name || _.kebabCase(this.options.name);
       }
@@ -201,6 +200,13 @@ module.exports = generators.Base.extend({
           message: "Would you like to create a new directory for your project?",
           when: this.props.createDirectory === undefined,
           default: true
+        },
+        {
+          type: "confirm",
+          name: "yarn",
+          message: "Would you like to yarn install packages?",
+          when: this.props.yarn === undefined,
+          default: false
         }
       ];
 
@@ -210,12 +216,12 @@ module.exports = generators.Base.extend({
           var newRoot = this.destinationPath() + "/" + _.kebabCase(_.deburr(this.props.name));
           this.destinationRoot(newRoot);
         }
-        // saving to storage after the correct destination root is set
-        this.config.set("serverType", this.props.serverType);
+        // Saving to storage after the correct destination root is set
+        this.config.set('serverType', this.props.serverType);
       });
-    },
+    }
 
-    askForGithubAccount: function() {
+    askForGithubAccount: {
       if (this.props.githubAccount || this.options.githubAccount) {
         this.props.githubAccount = this.options.githubAccount;
         return;
@@ -236,11 +242,11 @@ module.exports = generators.Base.extend({
         });
       });
     }
-  },
+  }
 
-  writing: function() {
-    const isHapi = this.config.get("serverType") === HapiJS;
-    const isExpress = this.config.get("serverType") === ExpressJS;
+  writing() {
+    const isHapi = this.config.get('serverType') === HapiJS;
+    const isExpress = this.config.get('serverType') === ExpressJS;
     const isPWA = this.props.pwa;
     const isAutoSSR = this.props.autoSsr;
     const isSingleQuote = this.props.quoteType === "'";
@@ -339,9 +345,14 @@ module.exports = generators.Base.extend({
 
     //copy .eslintc into the client directory
     if (isSingleQuote) {
-      this.template("src/client/.eslintrc", this.destinationPath("src/client/.eslintrc"));
+      this.fs.copy(
+        this.templatePath('src/client/.eslintrc'),
+        this.destinationPath('src/client/.eslintrc'),
+        {}
+      );
     }
-    //special handling for the server file
+
+    // Special handling for the server file
     this.fs.copyTpl(
       this.templatePath("src/server"),
       this.destinationPath("src/server"),
@@ -358,9 +369,8 @@ module.exports = generators.Base.extend({
       this.templatePath("src/client"),
       this.destinationPath("src/client"),
       { pwa: isPWA },
-      {}, // template options
+      {},
       {
-        // copy options
         globOptions: {
           // Images are damaged by the template compiler
           ignore: [
@@ -384,36 +394,37 @@ module.exports = generators.Base.extend({
 
     this.fs.copy(this.templatePath("src/client/images"), this.destinationPath("src/client/images"));
 
-    //copy files from the demoHelper if this is the demo-app
+    // Copy files from the demoHelper if this is the demo-app
     if (this.isDemoApp) {
       //copy archetype webpack config extension
-      this.fs.copyTpl(
+      this.fs.copy(
         this.templatePath(getDemoFilePath("archetype")),
         this.destinationPath("archetype"),
         { components: [packageName] }
       );
 
-      //copy home file
+      // Copy home file
       this.fs.copyTpl(
         this.templatePath(getDemoFilePath("src/client/components/Home.jsx")),
         this.destinationPath("src/client/components/home.jsx"),
         { className, packageName, pwa: isPWA }
       );
 
-      //copy reducer file
+      // Copy reducer file
       this.fs.copyTpl(
         this.templatePath(getDemoFilePath("src/client/reducers/index.js")),
         this.destinationPath("src/client/reducers/index.jsx")
       );
 
-      //copy actions file
+      // Copy actions file
       this.fs.copyTpl(
         this.templatePath(getDemoFilePath("src/client/actions/index.js")),
         this.destinationPath("src/client/actions/index.jsx")
       );
     }
-  },
+  }
 
+<<<<<<< HEAD
   default: function() {
     if (this.options.travis) {
       this.composeWith(
@@ -514,18 +525,97 @@ module.exports = generators.Base.extend({
           local: require.resolve("../webapp")
         }
       );
+=======
+  default() {
+    if (this.options.travis) {
+      this.composeWith('travis', {}, {
+        local: require.resolve('generator-travis')
+      });
     }
-  },
 
+    this.composeWith('electrode:editorconfig', {}, {
+      local: require.resolve('../editorconfig')
+    });
+
+    this.composeWith('electrode:git', {
+      name: this.props.name,
+      githubAccount: this.props.githubAccount,
+      githubUrl: this.props.githubUrl
+    }, {
+      local: require.resolve('../git')
+    });
+
+    if (this.props.license && !this.pkg.license) {
+      this.composeWith('license', {
+        name: this.props.authorName,
+        email: this.props.authorEmail,
+        website: this.props.authorUrl,
+        license: this.props.license || ""
+      }, {
+        local: require.resolve('generator-license')
+      });
+    }
+
+    if (!this.fs.exists(this.destinationPath('README.md'))) {
+      this.composeWith('electrode:readme', {
+        name: this.props.name,
+        description: this.props.description,
+        githubAccount: this.props.githubAccount,
+        authorName: this.props.authorName,
+        authorUrl: this.props.authorUrl,
+        content: this.options.readme
+      }, {
+        local: require.resolve('../readme')
+      });
+    }
+
+    if (!this.fs.exists(this.destinationPath('config/default.js'))) {
+      this.composeWith('electrode:config', {
+        name: this.props.name,
+        pwa: this.props.pwa,
+        serverType: this.props.serverType,
+        isAutoSsr: this.props.autoSsr
+      }, {
+        local: require.resolve('../config')
+      });
+    }
+
+    if (!this.fs.exists(this.destinationPath('server/plugins/webapp'))) {
+      this.composeWith('electrode:webapp', {
+        pwa: this.props.pwa,
+        isAutoSsr: this.props.autoSsr
+      }, {
+        local: require.resolve('../webapp')
+      });
+>>>>>>> yeoman 1.1 and yarn support
+    }
+  }
+
+<<<<<<< HEAD
   install: function() {
     if (!this.isExtended && !this.isDemoApp) {
       this.installDependencies({
         bower: false
       });
+=======
+  install() {
+    if (!this.isExtended) {
+      if (this.props.yarn) {
+        this.yarnInstall();
+      } else {
+        this.installDependencies({
+          bower: false
+        });
+      }
+>>>>>>> yeoman 1.1 and yarn support
     }
-  },
+  }
 
+<<<<<<< HEAD
   end: function() {
+=======
+  end() {
+>>>>>>> yeoman 1.1 and yarn support
     if (this.props.quoteType === "'") {
       this.spawnCommandSync("node_modules/.bin/eslint", [
         "--fix",
@@ -542,6 +632,19 @@ module.exports = generators.Base.extend({
         ? "'cd " + _.kebabCase(_.deburr(this.props.name)) + "' then "
         : "";
       this.log(
+<<<<<<< HEAD
+=======
+        "\n" + chalk.green.underline("Your new Electrode application is ready!") +
+        "\n" +
+        "\nType " + chdir + "'gulp dev' to start the server." +
+        "\n"
+      );
+    } else { // A demo-app was generated by the component generator
+      this.log(
+        "\n" + chalk.green.underline("Your new Electrode component is ready!") +
+        "\n" +
+        "\nYour component is in packages/" + this.props.packageName + " and your demo app is " + this.props.name +
+>>>>>>> yeoman 1.1 and yarn support
         "\n" +
           chalk.green.underline("Your new Electrode application is ready!") +
           "\n" +
@@ -552,4 +655,4 @@ module.exports = generators.Base.extend({
       );
     }
   }
-});
+};
