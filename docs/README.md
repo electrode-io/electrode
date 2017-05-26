@@ -36,7 +36,7 @@ The Yeoman [generator-electrode] NPM module allows you to quickly create an Univ
 
 # Sample Applications
 
-Some sample applications can be found under the [`samples`](samples) directory.
+Some sample applications can be found under the [`samples`](https://github.com/electrode-io/electrode/tree/master/samples) directory.
 
 ## Boilerplate Universal React Node
 
