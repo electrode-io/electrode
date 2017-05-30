@@ -4,7 +4,7 @@ var path = require("path");
 
 var webpackCfg = require("../webpack/webpack.config.test");
 
-var MAIN_PATH = require.resolve("electrode-archetype-react-component/config/karma/entry.js"); // eslint-disable-line max-len
+var MAIN_PATH = require.resolve("electrode-archetype-react-component-dev/config/karma/entry.js"); // eslint-disable-line max-len
 
 var PREPROCESSORS = {};
 

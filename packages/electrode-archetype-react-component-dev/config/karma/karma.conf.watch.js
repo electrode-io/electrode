@@ -15,7 +15,6 @@ module.exports = function (config) {
       "http://127.0.0.1:3001/assets/bundle.js"
       // Watch these files but do not add them to the bundle.
     ].concat([
-      "demo/**",
       "src/**",
       "test/**"
     ].map(function (pattern) {

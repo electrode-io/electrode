@@ -1,7 +1,6 @@
 "use strict";
 
-const archDevRequire = require("electrode-archetype-react-component-dev/require");
-const SourceMapDevToolPlugin = archDevRequire("webpack").SourceMapDevToolPlugin;
+const SourceMapDevToolPlugin = require("webpack").SourceMapDevToolPlugin;
 
 module.exports = function() {
   const url = () => "[url]";

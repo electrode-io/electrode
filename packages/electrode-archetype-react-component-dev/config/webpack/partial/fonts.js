@@ -1,8 +1,7 @@
 "use strict";
 
-const archDevRequire = require("electrode-archetype-react-component-dev/require");
-const urlLoader = archDevRequire.resolve("url-loader");
-const fileLoader = archDevRequire.resolve("file-loader");
+const urlLoader = require.resolve("url-loader");
+const fileLoader = require.resolve("file-loader");
 
 module.exports = function() {
   return {

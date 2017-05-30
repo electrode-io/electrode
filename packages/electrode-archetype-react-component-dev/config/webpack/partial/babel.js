@@ -1,7 +1,6 @@
 "use strict";
 
-const archDevRequire = require("electrode-archetype-react-component-dev/require");
-const babelLoader = archDevRequire.resolve("babel-loader");
+const babelLoader = require.resolve("babel-loader");
 
 module.exports = function(options) {
   return {
