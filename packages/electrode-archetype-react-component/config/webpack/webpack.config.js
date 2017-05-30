@@ -13,7 +13,6 @@ const imageConfig = require("./partial/images.js");
 const jsonConfig = require("./partial/json.js");
 const optimizeConfig = require("./partial/optimize.js");
 const sourceMapsConfig = require("./partial/sourcemaps.js");
-const stylusConfig = require("./partial/stylus.js");
 
 const archetypeNodeModules = path.join(__dirname, "../../", "node_modules");
 const archetypeDevNodeModules = path.join(
