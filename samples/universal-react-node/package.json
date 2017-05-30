@@ -14,7 +14,7 @@
   "files": [
     "lib"
   ],
-  "main": "lib/server/index.js",
+  "main": "src/server/index.js",
   "keywords": [
     "electrode",
     "app",
