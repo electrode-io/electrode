@@ -40,7 +40,7 @@ Some sample applications can be found under the [`samples`](https://github.com/e
 
 ## Boilerplate Universal React Node
 
-Under [`samples/universal-react-node`](samples/universal-react-node) is a sample Electrode app that was created with the Electrode generator and consumes the Electrode App archetype modules.  We've added other demos and features to it to serve as examples.  It demonstrates usage with the following Electrode modules:
+Under [`samples/universal-react-node`](https://github.com/electrode-io/electrode/tree/master/samples/universal-react-node) is a sample Electrode app that was created with the Electrode generator and consumes the Electrode App archetype modules.  We've added other demos and features to it to serve as examples.  It demonstrates usage with the following Electrode modules:
 
   - [Electrode Confippet](https://github.com/electrode-io/electrode-confippet)
   - [Electrode Electrify](https://github.com/electrode-io/electrify)
@@ -50,13 +50,13 @@ Under [`samples/universal-react-node`](samples/universal-react-node) is a sample
   - [Above The Fold Only Server Render](https://github.com/electrode-io/above-the-fold-only-server-render)
   - [Electrode Bundle Analyzer](https://github.com/electrode-io/electrode-bundle-analyzer)
 
-See its [README](samples/universal-react-node/README.md) for more details.
+See its [README](https://github.com/electrode-io/electrode/blob/master/samples/universal-react-node/README.md) for more details.
   
 ## Sample Universal React Node with [material-ui]
 
-Under [`samples/universal-material-ui`](samples/universal-material-ui) is a sample Electrode app that uses the [material-ui] React components.
+Under [`samples/universal-material-ui`](https://github.com/electrode-io/electrode/tree/master/samples/universal-material-ui) is a sample Electrode app that uses the [material-ui] React components.
 
-See its [README](samples/universal-material-ui/README.md) for more details.
+See its [README](https://github.com/electrode-io/electrode/tree/master/samples/universal-material-ui/README.md) for more details.
 
 # More Samples
 
@@ -68,9 +68,9 @@ Built with ♡ by [Team Electrode] @WalmartLabs.
 [Announcement Blog]: https://medium.com/walmartlabs/introducing-electrode-an-open-source-release-from-walmartlabs-14b836135319#.pwbddxg1z
 [material-ui]: http://www.material-ui.com
 [Lerna]: https://lernajs.io/
-[electrode-archetype-react-app]: packages/electrode-archetype-react-app
-[electrode-archetype-react-app-dev]: packages/electrode-archetype-react-app-dev
-[generator-electrode]: packages/generator-electrode
+[electrode-archetype-react-app]: https://github.com/electrode-io/electrode/tree/master/packages/electrode-archetype-react-app
+[electrode-archetype-react-app-dev]: https://github.com/electrode-io/electrode/tree/master/packages/electrode-archetype-react-app-dev
+[generator-electrode]: https://github.com/electrode-io/electrode/tree/master/packages/generator-electrode
 [travis-image]: https://travis-ci.org/electrode-io/electrode.svg?branch=master
 [travis-url]: https://travis-ci.org/electrode-io/electrode
 [daviddm-image]: https://david-dm.org/electrode-io/electrode/dev-status.svg
