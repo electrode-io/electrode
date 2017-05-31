@@ -1,7 +1,7 @@
 'use strict';
 
 var Generator = require('yeoman-generator');
-var originUrl = require('git-remote-origin-url');
+var gitRemoteOriginUrl = require('git-remote-origin-url');
 
 module.exports = class extends Generator {
   constructor(args, options) {
@@ -34,7 +34,7 @@ module.exports = class extends Generator {
       this.destinationPath('.gitignore')
     );
 
-    return originUrl(this.destinationPath())
+    return gitRemoteOriginUrl()
       .then(function (url) {
         this.originUrl = url;
       }.bind(this), function () {
@@ -62,6 +62,7 @@ module.exports = class extends Generator {
     if (this.options.githubUrl) {
       this.pkg.repository.url = [this.options.githubUrl, this.options.githubAccount, this.options.name].filter((x) => x).join("/");
     }
+
     this.fs.writeJSON(this.destinationPath('package.json'), this.pkg);
   }
 

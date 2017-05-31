@@ -424,108 +424,6 @@ module.exports = class extends Generator {
     }
   }
 
-<<<<<<< HEAD
-  default: function() {
-    if (this.options.travis) {
-      this.composeWith(
-        "travis",
-        {},
-        {
-          local: require.resolve("generator-travis/generators/app")
-        }
-      );
-    }
-
-    this.composeWith(
-      "electrode:editorconfig",
-      {},
-      {
-        local: require.resolve("../editorconfig")
-      }
-    );
-    if (!this.isDemoApp) {
-      this.composeWith(
-        "electrode:git",
-        {
-          options: {
-            name: this.props.name,
-            githubAccount: this.props.githubAccount,
-            githubUrl: this.props.githubUrl
-          }
-        },
-        {
-          local: require.resolve("../git")
-        }
-      );
-    }
-
-    if (this.options.license && !this.pkg.license) {
-      this.composeWith(
-        "license",
-        {
-          options: {
-            name: this.props.authorName,
-            email: this.props.authorEmail,
-            website: this.props.authorUrl,
-            license: this.props.license || ""
-          }
-        },
-        {
-          local: require.resolve("generator-license/app")
-        }
-      );
-    }
-
-    if (!this.fs.exists(this.destinationPath("README.md"))) {
-      this.composeWith(
-        "electrode:readme",
-        {
-          options: {
-            name: this.props.name,
-            description: this.props.description,
-            githubAccount: this.props.githubAccount,
-            authorName: this.props.authorName,
-            authorUrl: this.props.authorUrl,
-            content: this.options.readme
-          }
-        },
-        {
-          local: require.resolve("../readme")
-        }
-      );
-    }
-
-    if (!this.fs.exists(this.destinationPath("config/default.js")) && !this.isExtended) {
-      this.composeWith(
-        "electrode:config",
-        {
-          options: {
-            name: this.props.name,
-            pwa: this.props.pwa,
-            serverType: this.props.serverType,
-            isAutoSsr: this.props.autoSsr
-          }
-        },
-        {
-          local: require.resolve("../config")
-        }
-      );
-    }
-
-    if (!this.fs.exists(this.destinationPath("server/plugins/webapp"))) {
-      this.composeWith(
-        "electrode:webapp",
-        {
-          options: {
-            pwa: this.props.pwa,
-            isAutoSsr: this.props.autoSsr
-          }
-        },
-        {
-          local: require.resolve("../webapp")
-        }
-      );
-=======
   default() {
     if (this.options.travis) {
       this.composeWith('travis', {}, {
@@ -587,17 +485,9 @@ module.exports = class extends Generator {
       }, {
         local: require.resolve('../webapp')
       });
->>>>>>> yeoman 1.1 and yarn support
     }
   }
 
-<<<<<<< HEAD
-  install: function() {
-    if (!this.isExtended && !this.isDemoApp) {
-      this.installDependencies({
-        bower: false
-      });
-=======
   install() {
     if (!this.isExtended) {
       if (this.props.yarn) {
@@ -607,15 +497,10 @@ module.exports = class extends Generator {
           bower: false
         });
       }
->>>>>>> yeoman 1.1 and yarn support
     }
   }
 
-<<<<<<< HEAD
-  end: function() {
-=======
   end() {
->>>>>>> yeoman 1.1 and yarn support
     if (this.props.quoteType === "'") {
       this.spawnCommandSync("node_modules/.bin/eslint", [
         "--fix",
@@ -632,8 +517,6 @@ module.exports = class extends Generator {
         ? "'cd " + _.kebabCase(_.deburr(this.props.name)) + "' then "
         : "";
       this.log(
-<<<<<<< HEAD
-=======
         "\n" + chalk.green.underline("Your new Electrode application is ready!") +
         "\n" +
         "\nType " + chdir + "'gulp dev' to start the server." +
@@ -644,7 +527,6 @@ module.exports = class extends Generator {
         "\n" + chalk.green.underline("Your new Electrode component is ready!") +
         "\n" +
         "\nYour component is in packages/" + this.props.packageName + " and your demo app is " + this.props.name +
->>>>>>> yeoman 1.1 and yarn support
         "\n" +
           chalk.green.underline("Your new Electrode application is ready!") +
           "\n" +
