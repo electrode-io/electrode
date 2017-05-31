@@ -11,7 +11,7 @@ module.exports = function (content) {
   if (!self.async) throw new Error('async is required');
 
   var callback = self.async();
-  var query = loaderUtils.parseQuery(self.query);
+  var query = loaderUtils.getOptions(self.query);
   var pathPrefix = loaderUtils.interpolateName(self, query.outputFilePrefix, {
     context: query.context || this.options.context,
     content: content,
