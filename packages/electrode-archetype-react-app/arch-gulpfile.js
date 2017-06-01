@@ -446,7 +446,7 @@ Individual .babelrc files were generated for you in src/client and src/server
       desc: "Run eslint on server code in directory server",
       task: () => lint({
         config: `${config.eslint}/.eslintrc-node`,
-        targets: ["server"]
+        targets: [AppMode.src.server]
       })
     },
     "lint-server-test": {
