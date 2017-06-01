@@ -15,7 +15,7 @@ const stylusLoader = archDevRequire.resolve("stylus-relative-loader");
 
 const configPath = Path.resolve("archetype", "config.js");
 const config = optionalRequire(configPath, {default: {}});
-const cssModuleStylusSupport = config.cssModuleStylusSupport;
+const cssModuleStylusSupport = !!config.cssModuleStylusSupport;
 
 /**
  * [cssModuleSupport By default, this archetype assumes you are using CSS-Modules + CSS-Next]
