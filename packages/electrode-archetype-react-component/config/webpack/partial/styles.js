@@ -3,6 +3,7 @@
 const Path = require("path");
 const glob = require("glob");
 
+const optionalRequire = require("optional-require")(require);
 const archDevRequire = require("electrode-archetype-react-component-dev/require");
 const mergeWebpackConfig = archDevRequire("webpack-partial").default;
 const atImport = archDevRequire("postcss-import");
@@ -13,7 +14,7 @@ const postcssLoader = archDevRequire.resolve("postcss-loader");
 const stylusLoader = archDevRequire.resolve("stylus-relative-loader");
 
 const configPath = Path.resolve("archetype", "config.js");
-const config = require(configPath);
+const config = optionalRequire(configPath, {default: {}});
 const cssModuleStylusSupport = config.cssModuleStylusSupport;
 
 /**
