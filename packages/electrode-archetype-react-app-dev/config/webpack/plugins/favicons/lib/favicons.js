@@ -12,7 +12,6 @@ module.exports = function (content) {
 
   var callback = self.async();
   var query = loaderUtils.getOptions(self.query);
-  
   var pathPrefix = loaderUtils.interpolateName(self, query.outputFilePrefix, {
     context: query.context || this.options.context,
     content: content,
