@@ -5,7 +5,7 @@ const Path = require("path");
 const webpack = require("webpack");
 const glob = require("glob");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const CSSSplitPlugin = require("css-split-webpack-plugin").default;
 
 const atImport = require("postcss-import");
