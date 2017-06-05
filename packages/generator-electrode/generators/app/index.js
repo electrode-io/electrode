@@ -57,6 +57,14 @@ module.exports = generators.Base.extend({
       required: false,
       desc: 'Content to insert in the README.md file'
     });
+    
+    this.option('serverType', {
+      type: String,
+      required: false,
+      defaults: 'HapiJS',
+      desc: 'Server type to use [HapiJS, ExpressJS, KoaJS]'
+    });
+
     //Flag to check if the OSS generator is being called as a subgenerator
     this.isExtended = this.options.isExtended || false;
     this.isDemoApp = this.options.isDemoApp || false;
