@@ -139,7 +139,7 @@ test-component/
 ### Adding Components to the Repo
 
 The component structure shown above supports multiple packages under the `packages` folder.
-You can add another component to your project by running `yo electrode:component-add` from withing the `packages` directory.
+You can add another component to your project by running `yo electrode:component-add` from within the `packages` directory.
 
 ```
 $ cd packages
