@@ -23,6 +23,9 @@ module.exports = {
     modulesDirectories: [],
     enableBabelPolyfill: false
   }, archetypeOptions.webpack),
+  karma: Object.assign({}, {
+    enableChromeHeadless: process.env.ENABLE_CHROME_HEADLESS
+  }),
   config: Object.assign({}, {
     babel: `${configDir}/babel`,
     eslint: `${configDir}/eslint`,
