@@ -161,6 +161,29 @@ describe("Test electrode-react-webapp", () => {
       });
   });
 
+  it("should handle multiple entry points with a prodBundleBase", () => {
+    configOptions.prodBundleBase = "http://awesome-cdn.com/multi";
+    configOptions.bundleChunkSelector = "test/data/chunk-selector.js";
+    configOptions.stats = "test/data/stats-test-multibundle.json";
+
+    return electrodeServer(config)
+      .then((server) => {
+        return server.inject({
+          method: "GET",
+          url: "/bar"
+        }).then((res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.result).to.contain("<script src=\"http://awesome-cdn.com/multi/js/bar.bundle.f07a873ce87fc904a6a5.js\"");
+          expect(res.result).to.contain("<link rel=\"stylesheet\" href=\"http://awesome-cdn.com/multi/js/bar.style.f07a873ce87fc904a6a5.css\"");
+          stopServer(server);
+        })
+        .catch((err) => {
+          stopServer(server);
+          throw err;
+        });
+      });
+  });
+
   it("should handle multiple entry points - default", () => {
     configOptions.bundleChunkSelector = "test/data/chunk-selector.js";
     configOptions.stats = "test/data/stats-test-multibundle.json";
@@ -226,6 +249,27 @@ describe("Test electrode-react-webapp", () => {
       });
   });
 
+  it("should inject a pwa manfiest with a prodBundleBase", () => {
+    configOptions.prodBundleBase = "http://awesome-cdn.com/subdir";
+    configOptions.stats = "test/data/stats-test-pwa.json";
+
+    return electrodeServer(config)
+      .then((server) => {
+        return server.inject({
+          method: "GET",
+          url: "/"
+        }).then((res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.result).to.contain("<link rel=\"manifest\" href=\"http://awesome-cdn.com/subdir/js/manifest.json\" />");
+          stopServer(server);
+        })
+        .catch((err) => {
+          stopServer(server);
+          throw err;
+        });
+      });
+  });
+
   it("should inject pwa icons", () => {
     configOptions.iconStats = "test/data/icon-stats-test-pwa.json";
 
@@ -267,4 +311,26 @@ describe("Test electrode-react-webapp", () => {
         });
       });
   });
+
+  it("should inject a script reference with a provided prodBundleBase", () => {
+    configOptions.prodBundleBase = "http://awesome-cdn.com/myapp";
+    configOptions.stats = "test/data/stats-test-one-bundle.json";
+
+    return electrodeServer(config)
+      .then((server) => {
+        return server.inject({
+          method: "GET",
+          url: "/"
+        }).then((res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.result).to.contain("<script src=\"http://awesome-cdn.com/myapp/js/bundle.f07a873ce87fc904a6a5.js\">");
+          stopServer(server);
+        })
+        .catch((err) => {
+          stopServer(server);
+          throw err;
+        });
+      });
+  });
+
 });
