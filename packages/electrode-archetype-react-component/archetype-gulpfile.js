@@ -8,9 +8,9 @@ const exec = gulpHelper.exec;
 
 function setupPath() {
   const nmBin = "node_modules/.bin";
-  gulpHelper.envPath.addToFront(Path.resolve(nmBin));
-  gulpHelper.envPath.addToFront(Path.join(archetype.devPath, nmBin));
   gulpHelper.envPath.addToFront(Path.join(__dirname, nmBin));
+  gulpHelper.envPath.addToFront(Path.join(archetype.devPath, nmBin));
+  gulpHelper.envPath.addToFront(Path.resolve(nmBin));
 }
 
 function setProductionEnv() {
