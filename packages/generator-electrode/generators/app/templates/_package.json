@@ -24,7 +24,9 @@
     "test": "gulp check",
     "coverage": "gulp check",
     "prod": "echo 'Starting standalone server in PROD mode'; NODE_ENV=production node ./lib/server/",
-    "heroku-postbuild": "gulp build"
+    "heroku-postbuild": "gulp build",
+    "format": "prettier<% if (isSingleQuote) { %> --single-quote<% } %> --write \"{archetype,config,src,test}/**/*.{js,jsx}\"",
+    "precommit": "lint-staged"
   },
   "dependencies": {
     "bluebird": "^3.4.6",
