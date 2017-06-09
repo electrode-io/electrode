@@ -15,11 +15,11 @@ Read the [Announcement Blog] Post.
 
 # Getting Started
 
-  - [Getting Started with Electrode](http://www.electrode.io/docs/get_started.html)
+  - [Getting Started with Electrode](https://electrode.gitbooks.io/electrode/content/chapter1/quick-start/get-started.html)
 
   - [Electrode Site](http://www.electrode.io)
 
-  - [Docs](http://www.electrode.io/docs/what_is_electrode.html)
+  - [Docs](https://electrode.gitbooks.io/electrode/content/overview/what-is-electrode.html)
 
 ## Report a bug or request a feature
 
