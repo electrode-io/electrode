@@ -3,30 +3,35 @@
 const webpack = require("webpack");
 
 let lastPct;
+let currentRun = 0;
+let lastMsg;
+let noChangeCount = 0;
 
-module.exports = function () {
+/* eslint-disable max-statements */
+module.exports = function() {
   return {
     plugins: [
       new webpack.ProgressPlugin((pct, msg) => {
         pct = Math.ceil(pct * 100);
-        if (lastPct === pct) {
+        if (msg === lastMsg && lastPct === pct && ++noChangeCount < 10) {
           return;
         }
-        if (pct === 0) {
-          process.stdout.write(`\nwebpack ${msg}: `);
-        }
-        process.stdout.write(".");
-        if (pct > 0 && pct % 20 === 0) {
-          process.stdout.write("\n");
-          if (msg && pct < 100) {
-            process.stdout.write(`  ${msg}: `);
-          }
-        }
-        if (pct === 100) {
+        noChangeCount = 0;
+        if (pct >= 100) {
           lastPct = undefined;
+          process.stdout.write("\n");
+          return;
         } else {
           lastPct = pct;
         }
+        if (lastMsg !== msg || currentRun >= 78) {
+          const x = `${pct === 0 ? "webpack " : "  "}${msg}: `;
+          lastMsg = msg;
+          currentRun = x.length;
+          process.stdout.write(`\n${x}`);
+        }
+        currentRun++;
+        process.stdout.write(".");
       })
     ]
   };
