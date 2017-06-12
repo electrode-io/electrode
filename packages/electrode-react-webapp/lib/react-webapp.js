@@ -116,6 +116,7 @@ function makeRouteHandler(routeOptions, userContent) {
   const html = fs.readFileSync(routeOptions.htmlFile).toString();
   const assets = routeOptions.__internals.assets;
   const devBundleBase = routeOptions.__internals.devBundleBase;
+  const prodBundleBase = routeOptions.prodBundleBase;
   const chunkSelector = routeOptions.__internals.chunkSelector;
   const iconStats = getIconStats(routeOptions.iconStats);
   const criticalCSS = getCriticalCSS(routeOptions.criticalCSS);
@@ -151,14 +152,14 @@ function makeRouteHandler(routeOptions, userContent) {
     );
 
     const bundleCss = () => {
-      return WEBPACK_DEV ? devCSSBundle : cssChunk && `/js/${cssChunk.name}` || "";
+      return WEBPACK_DEV ? devCSSBundle : cssChunk && `${prodBundleBase}${cssChunk.name}` || "";
     };
 
     const bundleJs = () => {
       if (!renderJs) {
         return "";
       }
-      return WEBPACK_DEV ? devJSBundle : jsChunk && `/js/${jsChunk.name}` || "";
+      return WEBPACK_DEV ? devJSBundle : jsChunk && `${prodBundleBase}${jsChunk.name}` || "";
     };
 
     const bundleManifest = () => {
@@ -166,7 +167,8 @@ function makeRouteHandler(routeOptions, userContent) {
         return "";
       }
 
-      return WEBPACK_DEV ? `${devBundleBase}${assets.manifest}` : `/js/${assets.manifest}`;
+      return WEBPACK_DEV ? `${devBundleBase}${assets.manifest}` :
+        `${prodBundleBase}${assets.manifest}`;
     };
 
     const callUserContent = (content) => {
@@ -268,7 +270,8 @@ const setupOptions = (options) => {
     stats: "dist/server/stats.json",
     iconStats: "dist/server/iconstats.json",
     criticalCSS: "dist/js/critical.css",
-    buildArtifacts: ".build"
+    buildArtifacts: ".build",
+    prodBundleBase: "/js/"
   };
 
   const pluginOptions = _.defaultsDeep({}, options, pluginOptionsDefaults);
