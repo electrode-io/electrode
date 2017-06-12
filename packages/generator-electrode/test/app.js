@@ -6,6 +6,7 @@ var helpers = require('yeoman-test');
 var Promise = require('pinkie-promise');
 
 describe('electrode:app', function () {
+  this.timeout(10000);
   before(function () {
     mockery.enable({
       warnOnReplace: false,
