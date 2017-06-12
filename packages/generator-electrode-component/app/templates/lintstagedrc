@@ -1,0 +1,6 @@
+{
+  "{archetype,demo,src,test}/**/*.{js,jsx}": [
+    "prettier<% if (quoteType === "'") { %> --single-quote <% } %> --write",
+    "git add"
+  ]
+}

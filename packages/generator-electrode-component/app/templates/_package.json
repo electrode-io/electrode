@@ -28,7 +28,9 @@
   "scripts": {
     "prepublish": "gulp prepublish",
     "start": "gulp demo",
-    "test": "gulp check"
+    "test": "gulp check",
+    "format": "prettier<% if (quoteType === "'") { %> --single-quote<% } %> --write \"{archetype,demo,src,test}/**/*.{js,jsx}\"",
+    "precommit": "lint-staged"
   },
   "keywords": [
     "react",

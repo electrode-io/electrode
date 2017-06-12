@@ -23,7 +23,8 @@ describe("electrode::generator-electrode-component", function () {
   it("creates files", function (done) {
     assert.file([
       "package.json",
-      "gulpfile.js"
+      "gulpfile.js",
+      ".lintstagedrc"
     ]);
     done();
   });
