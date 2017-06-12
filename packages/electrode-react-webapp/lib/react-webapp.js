@@ -152,14 +152,14 @@ function makeRouteHandler(routeOptions, userContent) {
     );
 
     const bundleCss = () => {
-      return WEBPACK_DEV ? devCSSBundle : cssChunk && `${prodBundleBase}/js/${cssChunk.name}` || "";
+      return WEBPACK_DEV ? devCSSBundle : cssChunk && `${prodBundleBase}${cssChunk.name}` || "";
     };
 
     const bundleJs = () => {
       if (!renderJs) {
         return "";
       }
-      return WEBPACK_DEV ? devJSBundle : jsChunk && `${prodBundleBase}/js/${jsChunk.name}` || "";
+      return WEBPACK_DEV ? devJSBundle : jsChunk && `${prodBundleBase}${jsChunk.name}` || "";
     };
 
     const bundleManifest = () => {
@@ -168,7 +168,7 @@ function makeRouteHandler(routeOptions, userContent) {
       }
 
       return WEBPACK_DEV ? `${devBundleBase}${assets.manifest}` :
-        `${prodBundleBase}/js/${assets.manifest}`;
+        `${prodBundleBase}${assets.manifest}`;
     };
 
     const callUserContent = (content) => {
@@ -271,7 +271,7 @@ const setupOptions = (options) => {
     iconStats: "dist/server/iconstats.json",
     criticalCSS: "dist/js/critical.css",
     buildArtifacts: ".build",
-    prodBundleBase: ""
+    prodBundleBase: "/js/"
   };
 
   const pluginOptions = _.defaultsDeep({}, options, pluginOptionsDefaults);

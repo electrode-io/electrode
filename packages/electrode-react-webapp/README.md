@@ -96,6 +96,7 @@ What you can do with the options:
    * `devServer` `(Object)` Options for webpack's DevServer
        - `host` `(String)` The host that webpack-dev-server runs on
        - `port` `(String)` The port that webpack-dev-server runs on
+   * `prodBundleBase` `(String)` Base path to locate the JavaScript, CSS and manifest bundles. Defaults to "/js/". Should end with "/".
 
 ### Content details
 
