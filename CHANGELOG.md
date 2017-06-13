@@ -1,5 +1,47 @@
 # Packages
 
+## 6/13/2017
+
+-   electrode-archetype-react-app-dev@2.3.3 `(2.3.2 => 2.3.3)`
+-   electrode-archetype-react-app@2.3.3 `(2.3.2 => 2.3.3)`
+-   electrode-archetype-react-component-dev@2.0.3 `(2.0.2 => 2.0.3)`
+-   electrode-archetype-react-component@2.0.3 `(2.0.2 => 2.0.3)`
+-   electrode-react-webapp@1.6.0 `(1.5.0 => 1.6.0)`
+-   electrode-redux-router-engine@1.4.1 `(1.4.0 => 1.4.1)`
+-   electrode-webpack-reporter@0.3.6 `(0.3.5 => 0.3.6)`
+-   generator-electrode@2.1.0 `(2.0.1 => 2.1.0)`
+
+## Commits
+
+-   [commit](http://github.com/electrode-io/electrode/commit/778aae9675d65a5255e605adb45bd39827befb84) gitbook: Add gitbook documentations for electrode component generators (#328)
+-   [commit](http://github.com/electrode-io/electrode/commit/7fbfb5a64904d1064a82e010d68ddc045086d657) update contributing guidelines and demo video (#332)
+-   [commit](http://github.com/electrode-io/electrode/commit/d306c8624462b5d59a48500295ff33b1112c1c1a) update gitbook book.json
+-   [commit](http://github.com/electrode-io/electrode/commit/6107cc811c2ed2753f8a8eac47350f2bb038b63a) Demo gif for component generator.
+-   [commit](http://github.com/electrode-io/electrode/commit/176a9331a86c517ed2416b3de1c53dd9003091a1) docs: add app archetype docs (#339)
+-   [commit](http://github.com/electrode-io/electrode/commit/bd464cae05040d21bca72f18f842b3348d5b3d83) update book.json
+-   [commit](http://github.com/electrode-io/electrode/commit/1c1ffc7b1301c42eb2f570687b33d9bbe637ff51) docs: add new component archetype docs in gitbook (#341)
+-   [commit](http://github.com/electrode-io/electrode/commit/aab4d0471a668609f213fb7702d3d94a1cffe214) add node 8 to CI
+-   [commit](http://github.com/electrode-io/electrode/commit/312467d2d3ed3b2650b5bfce27e75d8ecb336ad0) docs: display iframe url in address bar (#346)
+-   [commit](http://github.com/electrode-io/electrode/commit/eabfbc7f448016fc908e208720837c84de92753c) docs: [bug][patch] Issue338: Update Samples Link (#340)
+-   [commit](http://github.com/electrode-io/electrode/commit/c2111967faf138e28a244483a0abe96a4402793d) archetype-react-app: [patch] FIX DeprecationWarning: loaderUtils.parseQuery() received a non-strin… (#347)
+-   [commit](http://github.com/electrode-io/electrode/commit/77f518601db3d0f96e29227adbb90f6755abd9f9) generator-electrode: Fix typo (#348)
+-   [commit](http://github.com/electrode-io/electrode/commit/a61e45832b67ac9c4bfad58895cb1ec9c32498be) archetype-react-app: Add Prettier and precommit hook packages (#349)
+-   [commit](http://github.com/electrode-io/electrode/commit/b3c007a40258aabc32fc57cf99c53ddc8e2aa640) archetype-react-app: [patch] FIX gulp lint as it skips src/server files (#353)
+-   [commit](http://github.com/electrode-io/electrode/commit/2f16584b726b67407d97d5410ae7775ea1f98612) archetype-react-app: [patch] A Webpack plugin to optimize / minimize CSS assets. (#355)
+-   [commit](http://github.com/electrode-io/electrode/commit/2155b4e4b01de078d7185c16dfbc1786533ff490) update docs links in README
+-   [commit](http://github.com/electrode-io/electrode/commit/1066459dbcb1ac8159c06db01eefe84332e04359) archetype-react-app: [patch] fix webpack simple-progress output (#364)
+-   [commit](http://github.com/electrode-io/electrode/commit/245d88aa68f17a304a096460f98df3224d51dac6) generator-electrode: [chore] increase test timeout
+-   [commit](http://github.com/electrode-io/electrode/commit/0a8e13dd94192dce716a8c7445a63ed3c4cb5b59) react-web-app: [feat][minor] Allow an external base URL for resources on production runs (#359) (#360)
+-   [commit](http://github.com/electrode-io/electrode/commit/0f6d3bd08c1ffa32fe9cd469fab00ce4c3262d02) archetype-react-component: Add Prettier and precommit hook packages (#350)
+-   [commit](http://github.com/electrode-io/electrode/commit/d7075177ccaad6d3bd122b0d04128f7384f84695) webpack-reporter: [chore][patch] fix eslint, update .npmignore (#367)
+-   [commit](http://github.com/electrode-io/electrode/commit/c8264acb9d95279125e832b26315c703c5e2ec37) redux-router-engine: update README and docs (#366)
+-   [commit](http://github.com/electrode-io/electrode/commit/9e72f81b524bafceb4452c950cf9fa07f30d0e76) archetype-react-component: update travis commands for new component generator (#368)
+-   [commit](http://github.com/electrode-io/electrode/commit/b092823a2a07c60268ba25a1228dc6e8feb4d19c) generator-electrode: support command line arguments (#369)
+-   [commit](http://github.com/electrode-io/electrode/commit/911bcd0da1ca027c947480b77818a5603fe725e8) generator-electrode-component: delete generator-electrode-component (#370)
+-   [commit](http://github.com/electrode-io/electrode/commit/26c7505d8904c468a4f1435d68988db945b37227) update contributing doc
+
+# Packages
+
 -   electrode-archetype-react-app-dev@2.3.2
 -   electrode-archetype-react-app@2.3.2
 -   electrode-archetype-react-component-dev@2.0.2
@@ -24,10 +66,10 @@
 ## Commits
 
 -   [commit](http://github.com/electrode-io/electrode/commit/cbb0c01e5cb49e40c7832e4d5873484a4950681f) Service worker fixes for oss archetype app (#314)
--   [commit](http://github.com/electrode-io/electrode/commit/5a7e2baaff5e2c9f5055ac4ad294f274ecc521d5) archetype-react-app: [bug] [patch] Update initial entry path for PWA (#315)
--   [commit](http://github.com/electrode-io/electrode/commit/5e843c99317ec18a806fedcdb365be789110a12e) Generator-electrode: [Feat] [major] New component structure with Demo App (#312)
+-   [commit](http://github.com/electrode-io/electrode/commit/5a7e2baaff5e2c9f5055ac4ad294f274ecc521d5) archetype-react-app: [bug][patch] Update initial entry path for PWA (#315)
+-   [commit](http://github.com/electrode-io/electrode/commit/5e843c99317ec18a806fedcdb365be789110a12e) Generator-electrode: [Feat][major] New component structure with Demo App (#312)
 -   [commit](http://github.com/electrode-io/electrode/commit/5ce88a7351173b0b93e0e0cf199623c4853814da) clean remaining dev and hot tasks (#313)
--   [commit](http://github.com/electrode-io/electrode/commit/b8cc45566f0f8833fc8d5941d204c75773f677a4) universal-material-ui: [Chore][Major] Update Material-UI sample to src/lib mode (#280)
+-   [commit](http://github.com/electrode-io/electrode/commit/b8cc45566f0f8833fc8d5941d204c75773f677a4) universal-material-ui: [Chore][major] Update Material-UI sample to src/lib mode (#280)
 -   [commit](http://github.com/electrode-io/electrode/commit/c0164f4b267947fb3d0c2dc05e6792a91fa0a921) Accept props as options (#318)
 -   [commit](http://github.com/electrode-io/electrode/commit/af3d4ca4460b1253a72988b5e245ebefd064fea4) archetype-react-app: [patch] archetype app entry configurations (#317)
 -   [commit](http://github.com/electrode-io/electrode/commit/f8e02869b8359e59e7aa2fe6a63542286e3ff1fb) update Path for Dockerfile (#323)
