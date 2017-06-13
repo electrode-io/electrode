@@ -1,43 +1,63 @@
 # Redux Router Engine
 
-Electrode Redux Router Engine is a tool that handles async data for React Server Side Rendering using [react-router](https://github.com/reactjs/react-router), Redux, and the [Redux Server Rendering](http://redux.js.org/docs/recipes/ServerRendering.html) pattern.
+Electrode Redux Router Engine is a tool that handles async data for React Server Side Rendering using [react-router], Redux, and the [Redux Server Rendering] pattern.
 
-## Module: [electrode-redux-router-engine](https://github.com/electrode-io/electrode-redux-router-engine)
+## Module: [electrode-redux-router-engine]
 
 ### Install via `npm`
 
-```
-$ npm install --save electrode-redux-router-engine
-```
+    $ npm install --save electrode-redux-router-engine
 
 ### Example Applications
 
-* [Electrode Boilerplate](https://github.com/electrode-io/electrode-boilerplate-universal-react-node#electrode-redux-router-engine)
+-   [Electrode Boilerplate]
 
-* [Express React Redux Webpack Example](https://github.com/docs-code-examples-electrode-io/express-react-redux-webpack#electrode-redux-router-engine)
+-   [Express React Redux Webpack Example]
 
-* [Hapi React Redux Example](https://github.com/docs-code-examples-electrode-io/hapi-react-redux#electrode-redux-router-engine)
+-   [Hapi React Redux Example]
 
 ## Usage
 
 ## Configuration
 
-The [redux-router engine](#redux-router-engine) is initialized by passing a set of [options](#redux-router-engine-api) including both the [react-router](#redux-router-engine-react-router) routes and the initial [Redux Store](#redux-router-engine-redux-store).
+The [redux-router engine](#redux-router-engine) is initialized by passing a set of [options](#redux-router-engine-api) including both the [your react router routes](#define-your-routes) routes and the initial [Redux Store](#redux-router-engine-redux-store).
 
-#### React-Router {#redux-router-engine-react-router}
+## Define Your Routes {#define-your-routes}
 
-Therefore, to configure the engine, you will first need specify your app's routes according to [react-router](https://github.com/reactjs/react-router)'s specs. For example, a typical `routes.jsx` file might look like this:
+Therefore, to configure the engine, you will first need specify your app's routes according to [react-router]'s specs. For example, a typical `routes.jsx` file might look like this:
 
-```
+```js
 import { Route, IndexRoute, Redirect } from "react-router";
 
 export default (
   <Route path="/test" component={Page}>
     <IndexRoute component={Home}/>
     <Redirect from="source" to="target" />
+    <Route methods="get" path="/subroute" init="subroute-init" component={SubRoute} />
   </Route>
 );
 ```
+
+For each route, you can add the following optional attributes:
+
+-   `init` to specify custom redux store initializer for the route
+-   `methods` to specify the HTTP methods you want the route to allow.
+
+### `init` attribute
+
+If `true`, then uses route's path to load JS file that provides the store initializer.
+
+i.e. `<Route path="/subroute" init={true} />`, will require file `CWD/${options.routesHandlerPath}/subroute`.
+
+i.e. `<Route path="/subroute" init="custom-init" />`, will require file `CWD/${options.routesHandlerPath}/custom-init`
+
+If `undefined` then will use the default `createReduxStore` passed through options.
+
+### `methods` attribute
+
+i.e. `<Route methods="get,post" path="/form" component={Form}>`
+
+If the attribute is not specified then it's defaulted to `"get"`.
 
 #### Redux Store {#redux-router-engine-redux-store}
 
@@ -45,7 +65,7 @@ Next, you'll want to configure the redux store using the [Redux Async Actions](h
 
 `configureStore.js`
 
-```
+```js
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers';
 import thunkMiddleware from 'redux-thunk';
@@ -61,9 +81,9 @@ export default function configureStore(initialState) {
 }
 ```
 
-Now let's create the redux store using the configure function from above. This pattern creates the store in a \_server-side component \_and initializes it with a promise library \(the example below uses [bluebird](https://github.com/petkaantonov/bluebird/)\):
+Now let's create the redux store using the configure function from above. This pattern creates the store in a \_server-side component \_and initializes it with a promise library (the example below uses [bluebird](https://github.com/petkaantonov/bluebird/)):
 
-```
+```js
 import configureStore from "./configureStore";
 const Promise = require("bluebird");
 
@@ -88,9 +108,9 @@ The `ReduxRouterEngine`  is created using both the `Redux Store` and the `routes
 
 In an Electrode app, the engine configuration is straightforward: the route handling logic simply returns the output of the engine's `render` function in the `module.exports` clause:
 
-```
+```js
 import ReduxRouterEngine from "electrode-redux-router-engine";
-import { routes } from "../../client/routes";
+import { routes } from "../client/routes";
 import CreateReduxStore from "./createReduxStore"
 
 module.exports = (req) => {
@@ -107,15 +127,32 @@ module.exports = (req) => {
 
 To configure the Redux Router Engine in an Express or Hapi application, first initialize the engine and then use it within a route handler to return the HTML. An example usage follows:
 
-```
+```js
+const ReduxRouterEngine = require("electrode-redux-router-engine");
+
+function createReduxStore(req, match) {
+    // this refs to engine
+
+    const store = configureStore();
+
+    return Promise.all([
+      store.dispatch(boostrapApp())
+      // dispatch any other asynchronous actions here
+    ]).then( () => {
+      return store;
+    });
+}
+
 const routes = require("./routes");
+
 const engine = new ReduxRouterEngine({routes, createReduxStore});
 
 // express or Hapi route handler:
+
 function handler(req, res) {
   engine.render(req)
     .then( (result) => {
-      // TODO: send full HTML with result back using res
+      // send full HTML with result back using res
     });
 }
 ```
@@ -124,35 +161,39 @@ Note the route handler configuration above is a stub in this case. In a real Hap
 
 ## API {#redux-router-engine-api}
 
-### [constructor\(options\)](/chapter1/advanced/stand-alone-modules/redux-router-engine.md)
+### [constructor(options)](/chapter1/advanced/stand-alone-modules/redux-router-engine.md)
 
 Where options could contain the following fields:
 
-* `routes`- **required **The react-router routes
-* `createReduxStore`- **required **async callback that returns a promise resolving to the Redux store.
-  * It should take `(req, match)` arguments where match is react-router's match result.
-  * If it's a `function` then its `this` references the engine instance.
-* `withIds`- **optional **boolean to indicate whether to render with react-dataids.
-* `stringifyPreloadedState`**optional **callback to return string for the preloaded state
-* `logError`- **optional **callback to log any error
-  * It should take `(req, err)`arguments
-  * If it's a `function` then its `this` references the engine instance
-* `renderToString`- **optional **callback to provide custom renderToString
-  * It should take `(req, store, match, withIds)` arguments
+-   `routes` - **required** The react-router routes
+-   `createReduxStore` - **required** async callback that returns a promise resolving to the Redux store
+    -   It should take `(req, match)` arguments where match is react-router's match result.
+    -   If it's a `function` then its `this` references the engine instance.
+-   `withIds` - **optional** boolean to indicate whether to render with react-dataids.
+-   `stringifyPreloadedState` **optional** callback to return string for the preloaded state
+-   `logError` - **optional** callback to log any error
+    -   It should take `(req, err)` arguments
+    -   If it's a `function` then its `this` references the engine instance
+    -   Defaulted to `console.log`
+-   `renderToString` - **optional** callback to provide custom renderToString
+    -   It should take `(req, store, match, withIds)` arguments
+    -   If desired, it can return a `Promise` that resolves the HTML string.
+-   `routesHandlerPath` - **optional** Path to directory to lookup individual route's `createReduxStore` handlers.
+    -   This is defaulted to `${process.env.APP_SRC_DIR}/server/routes` (for Electrode apps)
 
-### [engine.render\(req, options\)](/chapter1/advanced/stand-alone-modules/redux-router-engine.md)
+### [engine.render(req, options)](/chapter1/advanced/stand-alone-modules/redux-router-engine.md)
 
 Method to render a route.
 
-* `req` - express/Hapi request object
-* `options` - override options passed to constructor
-  * `withIds`
-  * `stringifyPreloadedState`
-  * `createReduxStore`
+-   `req` - express/Hapi request object
+-   `options` - override options passed to constructor
+    -   `withIds`
+    -   `stringifyPreloadedState`
+    -   `createReduxStore`
 
 If rendering the route is a success, then it returns a promise resolving to:
 
-```
+```js
 {
   status: 200,
   html: // string from React renderToString,
@@ -162,7 +203,7 @@ If rendering the route is a success, then it returns a promise resolving to:
 
 If an error occured, then it returns a promise resolving to:
 
-```
+```js
 {
   status: react-router status or 500,
   message: err.message,
@@ -173,19 +214,30 @@ If an error occured, then it returns a promise resolving to:
 
 If no route matched, then it returns a promise resolving to:
 
-    {
-      status: 404,
-      message: `router-resolver: Path <path> not found`
-    }
+```js
+{
+  status: 404,
+  message: `router-resolver: Path <path> not found`
+}
+```
 
 If react-router found a redirect route, then it returns a promise resolving to:
 
-```
+```js
 {
   status: 302,
   path: // redirect location
 }
 ```
 
+[react-router]: https://www.npmjs.com/package/react-router
 
+[redux server rendering]: http://redux.js.org/docs/recipes/ServerRendering.html
 
+[electrode-redux-router-engine]: https://github.com/electrode-io/electrode-redux-router-engine
+
+[hapi react redux example]: https://github.com/electrode-samples/hapi-react-redux#electrode-redux-router-engine
+
+[express react redux webpack example]: https://github.com/electrode-samples/express-react-redux-webpack#electrode-redux-router-engine
+
+[electrode boilerplate]: https://github.com/electrode-io/electrode/tree/0f6d3bd08c1ffa32fe9cd469fab00ce4c3262d02/samples/universal-react-node

@@ -1,32 +1,14 @@
-# Add Routes
+# Creating Component For Your Route
 
-From previous steps we have our open source friends, the ability to have a resource-list house party, and a working demo. It's time to build out our components to handle user interaction and send requests to our Hapi Plugin \(for getting more friends to our party\). We will use [React-Router](https://github.com/ReactTraining/react-router) and create separate routes to serve different content to our views.
+After you tell [react-router] in the file `src/client/routes.jsx` what React Component to redirect matching routes, you have to create the actual component itself.
 
-Now we can integrate your published`<your-awesome-component>`as a node module and build out the app. Make sure you are inside of **Your Awesome App **and follow the steps below:
+## Example
 
-```
-$ npm i your-awesome-published-npm-module --save
-```
-
-Navigate to `<your-awesome-app>/src/client/routes.jsx`. Copy, paste and save the code below into this file. Change from the literal `YourAwesomeComponent` and `your-awesome-node-module` to your actual component name:
-
-```
-import React from "react";
-import { Route, IndexRoute } from "react-router";
-import { Home } from "./components/home";
-import { YourAwesomeComponent } from "your-awesome-published-npm-module";
-
-export const routes = (
-  <Route path="/" component={Home}>
-    <IndexRoute component={YourAwesomeComponent}/>
-    <Route path="/invite" component={YourAwesomeComponent}/>
-  </Route>
-);
-```
+For example, here is a Home component for our example routes.
 
 Navigate to `<your-awesome-app>/src/client/components/home.jsx`. Override the existing code by copying, pasting and saving the code below:
 
-```
+```js
 import React, { Component, PropTypes } from "react";
 import { Link } from "react-router";
 
@@ -100,5 +82,4 @@ Home.propTypes = {
 };
 ```
 
-Navigate to [Intermediate: Server Config](/chapter1/intermediate/server-config.md) to learn about [Confippet](http://www.electrode.io/docs/confippet.html) and add our Hapi plugin to our server config.
-
+[react-router]: https://www.npmjs.com/package/react-router

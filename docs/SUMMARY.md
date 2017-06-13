@@ -21,15 +21,18 @@
 
 -   [Intermediate](chapter1/Intermediate.md)
 -   [Application Archetype](/chapter1/intermediate/app-archetype/README.md)
+
     -   [Eslint Config](/chapter1/intermediate/app-archetype/eslint.md)
     -   [Webpack Config](/chapter1/intermediate/app-archetype/webpack-config.md)
     -   [Environment Variables](/chapter1/intermediate/app-archetype/env-vars.md)
 
 -   [Component Archetype](chapter1/intermediate/component-archetype/README.md)
+
     -   [Structure](/chapter1/intermediate/component-archetype/component-archetype-structure.md)
     -   [Webpack Config](/chapter1/intermediate/component-archetype/webpack-config.md)
 
 -   [Create an Electrode Component](chapter1/intermediate/create-a-electrode-component.md)
+
     -   [Component Generator Setup](/chapter1/intermediate/create-a-electrode-component/component-generator-setup.md)
     -   [What's Inside](/chapter1/intermediate/create-a-electrode-component/what-is-inside.md)
     -   [Low-Level Components](chapter1/intermediate/create-a-electrode-component/low-level-components.md)
@@ -41,7 +44,10 @@
     -   [Test Components](chapter1/intermediate/create-a-electrode-component/test-components.md)
 
 -   [Build a Server Plugin](chapter1/intermediate/build-a-server-plugin.md)
--   [Add Routes](chapter1/intermediate/add-routes.md)
+-   [React App Routes](chapter1/intermediate/react-routes/react-routes.md)
+    -   [Add your routes](chapter1/intermediate/react-routes/add-routes.md)
+    -   [Component for a route](chapter1/intermediate/react-routes/route-component.md)
+    -   [Route action on server side](chapter1/intermediate/react-routes/server-actions.md)
 -   [Server Config](chapter1/intermediate/server-config.md)
 -   [More Deployments](chapter1/intermediate/more-deployments.md)
     -   [Docker](chapter1/intermediate/more-deployments/docker.md)
