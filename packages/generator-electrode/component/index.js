@@ -6,12 +6,14 @@ var yeoman = require("yeoman-generator");
 var path = require('path');
 var extend = _.merge;
 var parseAuthor = require('parse-author');
+var optionOrPrompt = require("yeoman-option-or-prompt");
 
 var ReactComponentGenerator = yeoman.Base.extend({
   constructor: function () {
     yeoman.Base.apply(this, arguments);
     this.quotes = this.options.quotes;
     this.githubUrl = this.options.githubUrl || "https://github.com";
+    this.optionOrPrompt = optionOrPrompt;
   },
   initializing: function () {
     this.isAddon = this.options.isAddon || false;
@@ -104,7 +106,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
         message: "Would you like to create a new directory for your project?",
         default: true
       }];
-      return this.prompt(prompts).then((props) => {
+      return this.optionOrPrompt(prompts).then((props) => {
         this.props = extend(this.props, props);
         this.projectName = this.props.projectName;
         this.packageName = this.props.projectName;
