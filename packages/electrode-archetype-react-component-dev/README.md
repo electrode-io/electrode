@@ -173,7 +173,7 @@ module.exports = {
 
 ```bash
 $ gulp help
-[13:02:10] Using gulpfile ~/walmart-oss/test-generator-electrode-component/product-card/gulpfile.js
+[13:02:10] Using gulpfile ~/walmart-oss/electrode/gulpfile.js
 [13:02:10] Starting 'help'...
 
 Usage

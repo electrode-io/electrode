@@ -8,7 +8,7 @@ brances:
     - master
 
 before_install:
-  - npm install -g gulp yo generator-electrode-component
+  - npm install -g gulp yo generator-electrode
   - currentfolder=${PWD##*/}
   - if [ "$currentfolder" != 'electrode-archetype-react-component' ]; then cd .. && eval "mv $currentfolder electrode-archetype-react-component" && cd electrode-archetype-react-component; fi
   - npm install
@@ -22,9 +22,9 @@ script:
   # run the archetype check task.
   - gulp archetype:check
 
-  # create a new component using electrode-component yeoman generator to run the components unit-tests.
-  - yo electrode-component --projectName=product-card --packageName=product-card --packageGitHubOrg=walmartlabs --developerName="Arpan Nanavati" --ghUser=ananavati --ghRepo=product-card --createDirectory=Y
-  - cd product-card
+  # create a new component using electrode:component yeoman generator to run the components unit-tests.
+  - yo electrode:component --projectName=product-card --packageName=product-card --packageGitHubOrg=walmartlabs --developerName="Animesh Dutta" --ghUser=animesh10 --ghRepo=product-card --createDirectory=Y --quotes='"'
+  - cd product-card/packages/product-card
 
   # run ci tests and generate a bundle.
   - gulp check-ci
