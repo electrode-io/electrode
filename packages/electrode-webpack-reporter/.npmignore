@@ -14,3 +14,4 @@
 /.npmignore
 /.travis.yml
 *.log
+/dist/map
