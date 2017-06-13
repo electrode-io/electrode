@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-component-dev",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Electrode Component (Development)",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -102,7 +102,6 @@
     "webpack-config-composer": "^1.0.0",
     "webpack-dev-server": "^2.4.2"
   },
-  "devDependencies": {},
   "engines": {
     "node": "^4.2.6",
     "npm": "^3.5.3"

@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-component",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Archetype - Electrode Component",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -21,7 +21,6 @@
   },
   "main": "archetype-gulpfile.js",
   "scripts": {},
-  "dependencies": {},
   "devDependencies": {
     "electrode-gulp-helper": "^1.0.4",
     "eslint": "^3.18.0",
