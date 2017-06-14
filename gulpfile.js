@@ -13,15 +13,20 @@ if (!process.env.PACKAGES_DIR) {
   process.env.PACKAGES_DIR = path.resolve("packages");
 }
 
-const pullLocalPackages = (dir) => {
+const pullLocalPackages = dir => {
   dir = path.resolve(dir);
-  const localPkgs = ["electrode-archetype-react-app", "electrode-react-webapp", "electrode-redux-router-engine", "electrode-auto-ssr"];
+  const localPkgs = [
+    "electrode-archetype-react-app",
+    "electrode-react-webapp",
+    "electrode-redux-router-engine",
+    "electrode-auto-ssr"
+  ];
   const localDevPkgs = ["electrode-archetype-react-app-dev"];
   const localPackagesDir = path.relative(dir, process.env.PACKAGES_DIR);
 
   const updateToLocalPkgs = (pkgSection, pkgs) => {
     if (pkgSection) {
-      pkgs.forEach((pkg) => {
+      pkgs.forEach(pkg => {
         if (pkgSection[pkg]) {
           pkgSection[pkg] = path.join(localPackagesDir, pkg);
         }
@@ -40,7 +45,8 @@ const pullLocalPackages = (dir) => {
 };
 
 const runAppTest = (dir, forceLocal) => {
-  const appPkgData = (forceLocal || process.env.BUILD_TEST || process.env.CI) && pullLocalPackages(dir);
+  const appPkgData =
+    (forceLocal || process.env.BUILD_TEST || process.env.CI) && pullLocalPackages(dir);
 
   shell.pushd(dir);
 
@@ -52,17 +58,14 @@ const runAppTest = (dir, forceLocal) => {
     }
   };
 
-  return exec(`npm i`)
-    .then(() => exec(`npm test`))
-    .then(restore)
-    .catch((err) => {
-      restore();
-      throw err;
-    });
+  return exec(`npm i`).then(() => exec(`npm test`)).then(restore).catch(err => {
+    restore();
+    throw err;
+  });
 };
 
 const testGenerator = (testDir, clean, prompts) => {
-  const yoApp = path.join(process.env.PACKAGES_DIR, ("generator-electrode/generators/app/index.js"));
+  const yoApp = path.join(process.env.PACKAGES_DIR, "generator-electrode/generators/app/index.js");
   const defaultPrompts = {
     name: "test-app",
     description: "test test",
@@ -89,46 +92,57 @@ const testGenerator = (testDir, clean, prompts) => {
     .then(() => runAppTest(path.join(testDir, "test-app"), true));
 };
 
-helper.loadTasks({
-  "build-test": {
-    task: () => {
-      process.env.BUILD_TEST = "true";
-      let updated;
-      return exec("lerna updated")
-        .then((output) => {
-          updated = output.stdout.split("\n").filter((x) => x.startsWith("- ")).map((x) => x.substr(2));
-        })
-        .then(() => {
-          if (updated.indexOf("generator-electrode") >= 0) {
-            return exec("gulp test-generator");
-          }
-        })
-        .then(() => exec("gulp test-boilerplate"));
+helper.loadTasks(
+  {
+    "build-test": {
+      task: () => {
+        process.env.BUILD_TEST = "true";
+        let updated;
+        return exec("lerna updated")
+          .then(output => {
+            updated = output.stdout
+              .split("\n")
+              .filter(x => x.startsWith("- "))
+              .map(x => x.substr(2));
+          })
+          .then(() => {
+            if (updated.indexOf("generator-electrode") >= 0) {
+              return exec("gulp test-generator");
+            }
+          })
+          .then(() => exec("gulp test-boilerplate"))
+          .catch(err => {
+            if (err.stderr.indexOf("No packages need updating") < 0) {
+              throw err;
+            }
+          });
+      }
+    },
+
+    "test-boilerplate": {
+      task: () => runAppTest(path.resolve("samples/universal-react-node"))
+    },
+
+    "samples-local": {
+      desc: "modify all samples to pull electrode packages from local",
+      task: () => {
+        ["electrode-demo-index", "universal-material-ui", "universal-react-node"].forEach(a => {
+          pullLocalPackages(path.resolve("samples", a));
+        });
+      }
+    },
+
+    "test-generator": {
+      task: () => {
+        const testDir = path.resolve("tmp");
+        return testGenerator(testDir, true, { serverType: "ExpressJS" })
+          .then(() => {
+            const appFiles = ["package.json", "client", "config", "server", "test"];
+            shell.rm("-rf", appFiles.map(x => path.join(testDir, "test-app", x)));
+          })
+          .then(() => testGenerator(testDir, false, { serverType: "HapiJS" }));
+      }
     }
   },
-
-  "test-boilerplate": {
-    task: () => runAppTest(path.resolve("samples/universal-react-node"))
-  },
-
-  "samples-local": {
-    desc: "modify all samples to pull electrode packages from local",
-    task: () => {
-      ["electrode-demo-index", "universal-material-ui", "universal-react-node"].forEach((a) => {
-        pullLocalPackages(path.resolve("samples", a));
-      });
-    }
-  },
-
-  "test-generator": {
-    task: () => {
-      const testDir = path.resolve("tmp");
-      return testGenerator(testDir, true, {serverType: "ExpressJS"})
-        .then(() => {
-          const appFiles = ["package.json", "client", "config", "server", "test"];
-          shell.rm("-rf", appFiles.map((x) => path.join(testDir, "test-app", x)));
-        })
-        .then(() => testGenerator(testDir, false, {serverType: "HapiJS"}));
-    }
-  }
-}, gulp);
+  gulp
+);
