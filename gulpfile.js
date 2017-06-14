@@ -110,7 +110,12 @@ helper.loadTasks(
               return exec("gulp test-generator");
             }
           })
-          .then(() => exec("gulp test-boilerplate"));
+          .then(() => exec("gulp test-boilerplate"))
+          .catch(err => {
+            if (err.stderr.indexOf("No packages need updating") < 0) {
+              throw err;
+            }
+          });
       }
     },
 
