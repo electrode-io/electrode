@@ -77,10 +77,6 @@ module.exports = function(config) {
         Chrome_without_security: { // eslint-disable-line camelcase
           base: "Chrome",
           flags: ["--disable-web-security"]
-        },
-        Chrome_travis_ci: { // eslint-disable-line camelcase
-          base: "Chrome",
-          flags: ["--no-sandbox"]
         }
       }
     });
@@ -92,10 +88,6 @@ module.exports = function(config) {
 
     // eslint-disable-next-line max-len
     logger.warn("PhantomJS has been deprecated, to use chrome headless, please set env 'ENABLE_CHROME_HEADLESS' to true.");
-  }
-
-  if (process.env.TRAVIS) {
-    settings.browsers = ["Chrome_travis_ci"];
   }
 
   loadUserConfig(Path.basename(__filename), config, settings);
