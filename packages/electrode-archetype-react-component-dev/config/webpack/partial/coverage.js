@@ -1,7 +1,6 @@
 "use strict";
 
-var archDevRequire = require("electrode-archetype-react-component-dev/require");
-var ispartaLoader = archDevRequire.resolve("isparta-loader");
+var ispartaLoader = require.resolve("isparta-loader");
 
 module.exports = function() {
   return {

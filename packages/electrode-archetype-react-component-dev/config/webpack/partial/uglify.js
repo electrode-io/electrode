@@ -1,8 +1,7 @@
 "use strict";
 
-const archDevRequire = require("electrode-archetype-react-component-dev/require");
-const optimize = archDevRequire("webpack").optimize;
-const LodashModuleReplacementPlugin = archDevRequire("lodash-webpack-plugin");
+const optimize = require("webpack").optimize;
+const LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
 
 module.exports = function() {
   return {

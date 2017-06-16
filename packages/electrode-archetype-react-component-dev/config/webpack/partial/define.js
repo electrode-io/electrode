@@ -1,7 +1,6 @@
 "use strict";
 
-const archDevRequire = require("electrode-archetype-react-component-dev/require");
-const webpack = archDevRequire("webpack");
+const webpack = require("webpack");
 const DefinePlugin = webpack.DefinePlugin;
 
 module.exports = function() {
