@@ -1,2 +1,2 @@
-process.env.ES6_LINT = true;
+process.env.SERVER_ES6 = true;
 require("electrode-archetype-react-app")();
