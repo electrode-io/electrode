@@ -452,7 +452,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     "lint-server-test": {
       desc: "Run eslint on server test code in directories test/server and test/func",
       task: () => lint({
-        config: process.env.ES6_LINT ? `${config.eslint}/.eslintrc-mocha-test-es6`
+        config: process.env.SERVER_ES6 ? `${config.eslint}/.eslintrc-mocha-test-es6`
           : `${config.eslint}/.eslintrc-mocha-test`,
         targets: ["test/server", "test/func"]
       })
@@ -644,6 +644,5 @@ module.exports = function (gulp) {
   createElectrodeTmpDir();
   gulp = gulp || require("gulp");
   process.env.FORCE_COLOR = "true"; // force color for chalk
-  process.env.ES6_LINT = process.env.ES6_LINT || false; //enable lint es6 config for tests
   gulpHelper.loadTasks(makeTasks(gulp), gulp);
 };
