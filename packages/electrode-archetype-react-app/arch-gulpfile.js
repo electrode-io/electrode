@@ -12,9 +12,6 @@ const gulpHelper = devRequire("electrode-gulp-helper");
 const shell = gulpHelper.shell;
 const config = archetype.config;
 const mkdirp = devRequire("mkdirp");
-const envify = devRequire("gulp-envify");
-const uglify = devRequire("gulp-uglify");
-const filter = devRequire("gulp-filter");
 
 const penthouse = archetype.devRequire("penthouse");
 const CleanCSS = archetype.devRequire("clean-css");
@@ -206,7 +203,7 @@ function inlineCriticalCSS() {
  *
  */
 
-function makeTasks(gulp) {
+function makeTasks() {
   const checkFrontendCov = minimum => {
     if (typeof minimum === "string") {
       minimum += ".";
@@ -224,34 +221,16 @@ function makeTasks(gulp) {
     assert(shell.test("-d", modulePath), `${modulePath} is not a directory`);
     createGitIgnoreDir(Path.resolve(archetype.prodModulesDir), "Electrode production modules dir");
     const prodPath = Path.join(archetype.prodModulesDir, module);
-    return new Promise((resolve, reject) =>
-      gulp
-        .src(`${modulePath}/**/*.js`)
-        .pipe(filter(["**", "!**/dist/**"]))
-        .pipe(
-          envify({
-            NODE_ENV: "production"
-          })
-        )
-        .pipe(
-          uglify({
-            compress: {
-              sequences: false,
-              dead_code: true,
-              drop_debugger: true
-            },
-            output: {
-              beautify: false,
-              comments: false,
-              bracketize: true
-            }
-          })
-        )
-        .pipe(gulp.dest(prodPath))
-        .on("error", reject)
-        .on("end", resolve)
-    ).then(() => {
-      shell.cp(Path.join(modulePath, "package.json"), Path.join(prodPath, "package.json"));
+    const cmd = mkCmd(
+      `babel -q ${modulePath} --no-babelrc --ignore dist -D`,
+      `--plugins transform-node-env-inline,minify-dead-code-elimination`,
+      `-d ${prodPath}`
+    );
+    return exec(cmd).then(() => {
+      const dist = Path.join(modulePath, "dist");
+      if (Fs.existsSync(dist)) {
+        shell.cp("-rf", dist, prodPath);
+      }
     });
   };
 
