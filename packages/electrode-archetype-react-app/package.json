@@ -18,20 +18,6 @@
     "format": "prettier --write --print-width 100 *.{js,jsx} `find . -type d -d 1 -exec echo '{}/**/*.{js,jsx}' \\; | egrep -v '(/node_modules/|/dist/|/coverage/)'`"
   },
   "dependencies": {
-    "babel-core": "^6.4.0",
-    "babel-plugin-i18n-id-hashing": "^2.1.0",
-    "babel-plugin-lodash": "^3.1.3",
-    "babel-plugin-react-intl": "^2.1.2",
-    "babel-plugin-transform-node-env-inline": "^6.5.0",
-    "babel-plugin-transform-object-rest-spread": "^6.3.13",
-    "babel-plugin-transform-react-constant-elements": "^6.5.0",
-    "babel-plugin-transform-react-inline-elements": "^6.6.5",
-    "babel-plugin-transform-runtime": "^6.8.0",
-    "babel-polyfill": "^6.5.0",
-    "babel-preset-es2015": "^6.3.13",
-    "babel-preset-es2015-loose": "^7.0.0",
-    "babel-preset-react": "^6.3.13",
-    "babel-register": "^6.14.0",
     "css-modules-require-hook": "^4.0.2",
     "isomorphic-loader": "^1.6.1",
     "optional-require": "^1.0.0"
