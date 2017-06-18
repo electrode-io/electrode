@@ -10,8 +10,7 @@ const dev = require("./karma.conf.dev");
 const loadUserConfig = require("./util/load-user-config");
 const Path = require("path");
 
-
-module.exports = function (config) {
+module.exports = function(config) {
   dev(config);
   const settings = {
     files: [
@@ -19,10 +18,7 @@ module.exports = function (config) {
       "http://127.0.0.1:3001/assets/bundle.js"
       // Watch these files but do not add them to the bundle.
     ].concat(
-      [
-        "src/client/**",
-        "test/**"
-      ].map((pattern) => {
+      ["src/client/**", "test/**"].map(pattern => {
         return {
           pattern,
           included: false,
@@ -30,7 +26,7 @@ module.exports = function (config) {
           watched: true
         };
       })
-      )
+    )
   };
 
   loadUserConfig(Path.basename(__filename), config, settings);

@@ -2,7 +2,7 @@
 
 const Path = require("path");
 
-module.exports = function () {
+module.exports = function() {
   return {
     context: Path.resolve("test", "client"),
     entry: require.resolve("../../karma/entry")

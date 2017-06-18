@@ -2,7 +2,7 @@
 
 const webpack = require("webpack");
 
-module.exports = function () {
+module.exports = function() {
   return {
     cache: true,
     plugins: [

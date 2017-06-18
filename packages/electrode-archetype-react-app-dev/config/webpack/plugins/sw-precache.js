@@ -4,42 +4,45 @@
 /* From https://github.com/goldhand/sw-precache-webpack-plugin */
 /* Copied locally to turn off warning */
 
-'use strict';
+"use strict";
 
 var _extends = Object.assign;
 
-var _path = require('path');
+var _path = require("path");
 
 var _path2 = _interopRequireDefault(_path);
 
-var _url = require('url');
+var _url = require("url");
 
 var _url2 = _interopRequireDefault(_url);
 
-var _del = require('del');
+var _del = require("del");
 
 var _del2 = _interopRequireDefault(_del);
 
-var _swPrecache = require('sw-precache');
+var _swPrecache = require("sw-precache");
 
 var _swPrecache2 = _interopRequireDefault(_swPrecache);
 
-var _uglifyJs = require('uglify-js');
+var _uglifyJs = require("uglify-js");
 
 var _uglifyJs2 = _interopRequireDefault(_uglifyJs);
 
-var _fs = require('fs');
+var _fs = require("fs");
 
 var _fs2 = _interopRequireDefault(_fs);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
 
-const FILEPATH_WARNING = 'sw-prechache-webpack-plugin filepath: You are using a custom path for your service worker, this may prevent the service worker from working correctly if it is not available in the same path as your application.';
+const FILEPATH_WARNING =
+  "sw-prechache-webpack-plugin filepath: You are using a custom path for your service worker, this may prevent the service worker from working correctly if it is not available in the same path as your application.";
 
-const DEFAULT_CACHE_ID = 'sw-precache-webpack-plugin',
-  DEFAULT_WORKER_FILENAME = 'service-worker.js',
-  DEFAULT_OUTPUT_PATH = '',
-  DEFAULT_PUBLIC_PATH = '',
+const DEFAULT_CACHE_ID = "sw-precache-webpack-plugin",
+  DEFAULT_WORKER_FILENAME = "service-worker.js",
+  DEFAULT_OUTPUT_PATH = "",
+  DEFAULT_PUBLIC_PATH = "",
   DEFAULT_IMPORT_SCRIPTS = [],
   DEFAULT_IGNORE_PATTERNS = [];
 
@@ -54,7 +57,6 @@ const DEFAULT_OPTIONS = {
 };
 
 class SWPrecacheWebpackPlugin {
-
   /**
    * SWPrecacheWebpackPlugin - A wrapper for sw-precache to use with webpack
    * @constructor
@@ -103,9 +105,7 @@ class SWPrecacheWebpackPlugin {
   }
 
   apply(compiler) {
-
-    compiler.plugin('after-emit', (compilation, callback) => {
-
+    compiler.plugin("after-emit", (compilation, callback) => {
       // get the defaults from options
       var _options = this.options;
       const importScripts = _options.importScripts,
@@ -118,8 +118,9 @@ class SWPrecacheWebpackPlugin {
 
       // get the public path specified in webpack config
       var _compiler$options$out = compiler.options.output.publicPath;
-      const publicPath = _compiler$options$out === undefined ? DEFAULT_PUBLIC_PATH : _compiler$options$out;
-
+      const publicPath = _compiler$options$out === undefined
+        ? DEFAULT_PUBLIC_PATH
+        : _compiler$options$out;
 
       if (this.options.filepath && !this.options.noWarning) {
         // warn about changing filepath
@@ -127,10 +128,14 @@ class SWPrecacheWebpackPlugin {
       }
 
       // get all assets outputted by webpack
-      const assetGlobs = Object.keys(compilation.assets).map(f => _path2.default.join(outputPath, f));
+      const assetGlobs = Object.keys(compilation.assets).map(f =>
+        _path2.default.join(outputPath, f)
+      );
 
       // merge assetGlobs with provided staticFileGlobs and filter using staticFileGlobsIgnorePatterns
-      const staticFileGlobs = assetGlobs.concat(this.options.staticFileGlobs || []).filter(text => !staticFileGlobsIgnorePatterns.some(regex => regex.test(text)));
+      const staticFileGlobs = assetGlobs
+        .concat(this.options.staticFileGlobs || [])
+        .filter(text => !staticFileGlobsIgnorePatterns.some(regex => regex.test(text)));
 
       const stripPrefixMulti = _extends({}, this.options.stripPrefixMulti);
 
@@ -145,7 +150,8 @@ class SWPrecacheWebpackPlugin {
       });
 
       if (importScripts) {
-        this.overrides.importScripts = importScripts.map(f => f.replace(/\[hash\]/g, compilation.hash)) // need to override importScripts with stats.hash
+        this.overrides.importScripts = importScripts
+          .map(f => f.replace(/\[hash\]/g, compilation.hash)) // need to override importScripts with stats.hash
           .map(f => _url2.default.resolve(publicPath, f)); // add publicPath to importScripts
       }
 
@@ -167,18 +173,24 @@ class SWPrecacheWebpackPlugin {
   writeServiceWorker(compiler) {
     const fileDir = compiler.options.output.path || DEFAULT_OUTPUT_PATH;
     var _options$filepath = this.options.filepath;
-    const filepath = _options$filepath === undefined ? _path2.default.join(fileDir, this.options.filename) : _options$filepath;
+    const filepath = _options$filepath === undefined
+      ? _path2.default.join(fileDir, this.options.filename)
+      : _options$filepath;
 
-
-    return (0, _del2.default)(filepath, { force: this.options.forceDelete }).then(() => _swPrecache2.default.generate(this.workerOptions)).then(serviceWorkerFileContents => {
-      if (this.options.minify) {
-        const uglifyFiles = {};
-        uglifyFiles[this.options.filename] = serviceWorkerFileContents;
-        const minifedCodeObj = _uglifyJs2.default.minify(uglifyFiles, { fromString: true });
-        return minifedCodeObj.code;
-      }
-      return serviceWorkerFileContents;
-    }).then(possiblyMinifiedServiceWorkerFileContents => _fs2.default.writeFileSync(filepath, possiblyMinifiedServiceWorkerFileContents));
+    return (0, _del2.default)(filepath, { force: this.options.forceDelete })
+      .then(() => _swPrecache2.default.generate(this.workerOptions))
+      .then(serviceWorkerFileContents => {
+        if (this.options.minify) {
+          const uglifyFiles = {};
+          uglifyFiles[this.options.filename] = serviceWorkerFileContents;
+          const minifedCodeObj = _uglifyJs2.default.minify(uglifyFiles, { fromString: true });
+          return minifedCodeObj.code;
+        }
+        return serviceWorkerFileContents;
+      })
+      .then(possiblyMinifiedServiceWorkerFileContents =>
+        _fs2.default.writeFileSync(filepath, possiblyMinifiedServiceWorkerFileContents)
+      );
   }
 }
 

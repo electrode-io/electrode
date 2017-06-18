@@ -14,27 +14,31 @@ function getCdnLoader(optLoader) {
     logger.warn(`Optional CDN loader "${optLoader}" can't be resolved`);
   }
 
-  const loader = _(["electrode-cdn-file-loader", "cdn-file-loader", "file-loader"]).find(optionalRequire.resolve);
+  const loader = _(["electrode-cdn-file-loader", "cdn-file-loader", "file-loader"]).find(
+    optionalRequire.resolve
+  );
 
-  return loader && require.resolve(loader) || "file-loader";
+  return (loader && require.resolve(loader)) || "file-loader";
 }
 
-module.exports = function (options) {
+module.exports = function(options) {
   return {
     module: {
-      rules: [{
-        _name: "image",
-        test: /\.(jpe?g|png|gif|svg)(\?\S*)?$/i,
-        use: [
-          {
-            loader: getCdnLoader(options.cdnLoader),
-            options: {
-              limit: 10000
-            }
-          },
-          isomorphicLoader
-        ]
-      }]
+      rules: [
+        {
+          _name: "image",
+          test: /\.(jpe?g|png|gif|svg)(\?\S*)?$/i,
+          use: [
+            {
+              loader: getCdnLoader(options.cdnLoader),
+              options: {
+                limit: 10000
+              }
+            },
+            isomorphicLoader
+          ]
+        }
+      ]
     }
   };
 };

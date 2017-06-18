@@ -15,20 +15,28 @@ module.exports = {
   devDir,
   devPkg,
   devRequire,
-  webpack: Object.assign({}, {
-    devHostname: process.env.WEBPACK_HOST || process.env.WEBPACK_DEV_HOST || "localhost",
-    devPort: utils.getInt(process.env.WEBPACK_DEV_PORT, 2992),
-    testPort: utils.getInt(process.env.WEBPACK_TEST_PORT, 3001),
-    https: process.env.WEBPACK_DEV_HTTPS,
-    modulesDirectories: [],
-    enableBabelPolyfill: false
-  }, archetypeOptions.webpack),
-  config: Object.assign({}, {
-    babel: `${configDir}/babel`,
-    eslint: `${configDir}/eslint`,
-    istanbul: `${configDir}/istanbul`,
-    karma: `${configDir}/karma`,
-    mocha: `${configDir}/mocha`,
-    webpack: `${configDir}/webpack`
-  }, archetypeOptions.configPaths)
+  webpack: Object.assign(
+    {},
+    {
+      devHostname: process.env.WEBPACK_HOST || process.env.WEBPACK_DEV_HOST || "localhost",
+      devPort: utils.getInt(process.env.WEBPACK_DEV_PORT, 2992),
+      testPort: utils.getInt(process.env.WEBPACK_TEST_PORT, 3001),
+      https: process.env.WEBPACK_DEV_HTTPS,
+      modulesDirectories: [],
+      enableBabelPolyfill: false
+    },
+    archetypeOptions.webpack
+  ),
+  config: Object.assign(
+    {},
+    {
+      babel: `${configDir}/babel`,
+      eslint: `${configDir}/eslint`,
+      istanbul: `${configDir}/istanbul`,
+      karma: `${configDir}/karma`,
+      mocha: `${configDir}/mocha`,
+      webpack: `${configDir}/webpack`
+    },
+    archetypeOptions.configPaths
+  )
 };

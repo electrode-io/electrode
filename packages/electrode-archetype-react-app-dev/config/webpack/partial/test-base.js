@@ -11,12 +11,10 @@ module.exports = {
      * https://github.com/webpack/webpack/issues/304
      * https://github.com/sinonjs/sinon/pull/600#issuecomment-162529457
      */
-    noParse: [
-      new RegExp(Path.normalize("node_modules/sinon/").replace(/\\/g, "\\\\"))
-    ]
+    noParse: [new RegExp(Path.normalize("node_modules/sinon/").replace(/\\/g, "\\\\"))]
   },
   devServer: {
-    stats: "errors-only"  // only show errors
+    stats: "errors-only" // only show errors
   },
   // Enzyme depends jsdom and cheerio being global to render their DOM.
   externals: {

@@ -19,8 +19,11 @@ function checkUserBabelRc() {
   const user = Path.resolve(".babelrc");
   if (Fs.existsSync(user)) {
     const userRc = JSON.parse(Fs.readFileSync(user).toString());
-    if (Object.keys(userRc).length === 1 && typeof userRc.extends === "string" &&
-      userRc.extends.indexOf(pkg.name) >= 0) {
+    if (
+      Object.keys(userRc).length === 1 &&
+      typeof userRc.extends === "string" &&
+      userRc.extends.indexOf(pkg.name) >= 0
+    ) {
       return "extendsOnly";
     } else {
       return "custom";

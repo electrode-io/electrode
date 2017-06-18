@@ -41,25 +41,27 @@ function optimizeModulesForProduction(options) {
 
   if (modules.length > 0) {
     assert(Module._resolveFilename, "module._resolveFilename is not defined");
-    assert(typeof Module._resolveFilename === "function", "module._resolveFilename is not function");
+    assert(
+      typeof Module._resolveFilename === "function",
+      "module._resolveFilename is not function"
+    );
 
     const notified = {};
 
-    const notify = (m) => {
+    const notify = m => {
       if (verbose && !notified[m]) {
         logger.info(`Overriding module ${m} with copy optimized for production`);
         notified[m] = true;
       }
     };
 
-    Module._resolveFilename = function (request, parent) {
+    Module._resolveFilename = function(request, parent) {
       if (isProd()) {
-        const name = modules.find((m) => {
-          return (m === request) || request.startsWith(`${m}/`);
+        const name = modules.find(m => {
+          return m === request || request.startsWith(`${m}/`);
         });
 
         if (name && !request.startsWith(`${name}/dist`)) {
-
           notify(name);
           request = Path.join(prodModulesDir, request);
         }
@@ -68,7 +70,9 @@ function optimizeModulesForProduction(options) {
       return originalResolve.call(this, request, parent);
     };
   } else if (verbose) {
-    logger.info(`OptimizeModulesForProduction - no optimized modules found in ${archetype.prodModulesDir}`);
+    logger.info(
+      `OptimizeModulesForProduction - no optimized modules found in ${archetype.prodModulesDir}`
+    );
   }
 }
 

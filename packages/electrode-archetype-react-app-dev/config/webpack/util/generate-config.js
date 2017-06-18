@@ -12,7 +12,8 @@ function generateConfig(options) {
   composer.addProfiles(options.profiles);
   composer.addPartials(partialConfigs.partials);
 
-  const customConfig = optionalRequire(Path.resolve(options.configFilename)) ||
+  const customConfig =
+    optionalRequire(Path.resolve(options.configFilename)) ||
     optionalRequire(Path.resolve("archetype/config/webpack", options.configFilename));
 
   const keepCustomProps = options.keepCustomProps;

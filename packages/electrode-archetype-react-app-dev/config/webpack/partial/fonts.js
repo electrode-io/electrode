@@ -4,7 +4,7 @@ const urlLoader = require.resolve("url-loader");
 const fileLoader = require.resolve("file-loader");
 const isomorphicLoader = require.resolve("isomorphic-loader");
 
-module.exports = function () {
+module.exports = function() {
   return {
     module: {
       rules: [
@@ -25,10 +25,7 @@ module.exports = function () {
         {
           _name: "font-file",
           test: /\.(eot|ttf)(\?\S*)?$/i,
-          use: [
-            fileLoader,
-            isomorphicLoader
-          ]
+          use: [fileLoader, isomorphicLoader]
         }
       ]
     }

@@ -3,7 +3,7 @@
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const IsomorphicLoaderPlugin = require("isomorphic-loader/lib/webpack-plugin");
 
-module.exports = function (opts) {
+module.exports = function(opts) {
   return {
     plugins: [
       new IsomorphicLoaderPlugin({

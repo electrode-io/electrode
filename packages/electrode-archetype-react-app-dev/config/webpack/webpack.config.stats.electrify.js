@@ -7,7 +7,7 @@ const Path = require("path");
 function makeConfig() {
   const statsElectrifyProfile = {
     partials: {
-      "_stats": {
+      _stats: {
         order: 10100,
         options: {
           fullPaths: true

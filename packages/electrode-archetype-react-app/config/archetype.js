@@ -6,12 +6,11 @@ const optionalRequire = require("optional-require")(require);
 const constants = require("./constants");
 const utils = require("../lib/utils");
 const makeAppMode = require("../lib/app-mode");
-const userConfig = optionalRequire(Path.resolve("archetype/config"),
-  {
-    default: {
-      options: { reactLib: "react" }
-    }
-  });
+const userConfig = optionalRequire(Path.resolve("archetype/config"), {
+  default: {
+    options: { reactLib: "react" }
+  }
+});
 
 module.exports = {
   dir: Path.resolve(__dirname, ".."),
@@ -21,7 +20,7 @@ module.exports = {
   eTmpDir: constants.ETMP_DIR,
   prodModulesDir: Path.join(constants.PROD_DIR, "modules"),
   checkUserBabelRc: utils.checkUserBabelRc,
-  addArchetypeConfig: (config) => Object.assign(module.exports, config)
+  addArchetypeConfig: config => Object.assign(module.exports, config)
 };
 
 function checkTopDevArchetype() {

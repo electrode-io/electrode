@@ -3,7 +3,7 @@
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const SourceMapDevToolPlugin = require("webpack").SourceMapDevToolPlugin;
 
-module.exports = function () {
+module.exports = function() {
   const host = `http://${archetype.webpack.devHostname}:${archetype.webpack.devPort}`;
   return {
     plugins: [
