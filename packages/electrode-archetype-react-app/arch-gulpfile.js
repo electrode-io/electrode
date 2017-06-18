@@ -68,6 +68,16 @@ function createElectrodeTmpDir() {
   createGitIgnoreDir(Path.resolve(eTmpDir), "Electrode tmp dir");
 }
 
+function removeLogFiles() {
+  try {
+    Fs.unlinkSync(Path.resolve("archetype-exceptions.log"));
+  } catch (e) {} // eslint-disable-line
+
+  try {
+    Fs.unlinkSync(Path.resolve("archetype-debug.log"));
+  } catch (e) {} // eslint-disable-line
+}
+
 function mkCmd(a) {
   return Array.isArray(a) ? a.join(" ") : Array.prototype.slice.call(arguments).join(" ");
 }
@@ -262,7 +272,9 @@ function makeTasks() {
     ".webpack-dev": () => setWebpackDev(),
     ".static-files-env": () => setStaticFilesEnv(),
     ".optimize-stats": () => setOptimizeStats(),
+    ".remove-log-files": () => removeLogFiles(),
     build: {
+      dep: [".remove-log-files"],
       desc: AppMode.isSrc
         ? `Build your app's ${AppMode.src.dir} directory into ${AppMode.lib.dir} for production`
         : "Build your app's client bundle",
@@ -431,7 +443,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     debug: ["build-dev-static", "server-debug"],
     dev: {
       desc: "Start your app with watch in development mode with webpack-dev-server",
-      dep: [".development-env", ".clean.build", ".mk-dist-dir"],
+      dep: [".remove-log-files", ".development-env", ".clean.build", ".mk-dist-dir"],
       task: [".webpack-dev", ["wds.dev", "server-watch", "generate-service-worker"]]
     },
 
