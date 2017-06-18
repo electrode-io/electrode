@@ -32,25 +32,28 @@ const AppMode = archetype.AppMode;
  * case 5: *cssModuleStylusSupport* config is true => Use both Stylus and CSS Modules
  */
 
-const cssNextExists = (glob.sync(Path.resolve(AppMode.src.client, "**", "*.css")).length > 0);
-const stylusExists = (glob.sync(Path.resolve(AppMode.src.client, "**", "*.styl")).length > 0);
+const cssNextExists = glob.sync(Path.resolve(AppMode.src.client, "**", "*.css")).length > 0;
+const stylusExists = glob.sync(Path.resolve(AppMode.src.client, "**", "*.styl")).length > 0;
 
 // By default, this archetype assumes you are using CSS-Modules + CSS-Next
 const cssModuleSupport = !stylusExists && cssNextExists;
 
-module.exports = function () {
+module.exports = function() {
   const cssModuleStylusSupport = archetype.webpack.cssModuleStylusSupport;
   const stylusQuery = cssLoader + "?-autoprefixer!" + stylusLoader;
-  const cssLoaderOptions = "?modules&localIdentName=[name]__[local]___[hash:base64:5]&-autoprefixer";
+  const cssLoaderOptions =
+    "?modules&localIdentName=[name]__[local]___[hash:base64:5]&-autoprefixer";
   const cssQuery = cssLoader + cssLoaderOptions + "!" + postcssLoader;
   const cssStylusQuery = cssLoader + cssLoaderOptions + "!" + postcssLoader + "!" + stylusLoader;
 
   // By default, this archetype assumes you are using CSS-Modules + CSS-Next
-  const rules = [{
-    _name: "extract-css",
-    test: /\.css$/,
-    loader: ExtractTextPlugin.extract({ fallback: styleLoader, use: cssQuery, publicPath: "" })
-  }];
+  const rules = [
+    {
+      _name: "extract-css",
+      test: /\.css$/,
+      loader: ExtractTextPlugin.extract({ fallback: styleLoader, use: cssQuery, publicPath: "" })
+    }
+  ];
 
   if (cssModuleStylusSupport) {
     rules.push({
@@ -97,15 +100,24 @@ module.exports = function () {
         options: {
           context: Path.resolve(process.cwd(), "src"),
           postcss: () => {
-            return cssModuleSupport ? [atImport, cssnext({
-              browsers: ["last 2 versions", "ie >= 9", "> 5%"]
-            })] : [];
+            return cssModuleSupport
+              ? [
+                  atImport,
+                  cssnext({
+                    browsers: ["last 2 versions", "ie >= 9", "> 5%"]
+                  })
+                ]
+              : [];
           },
           stylus: {
             use: () => {
-              return !cssModuleSupport ? [autoprefixer({
-                browsers: ["last 2 versions", "ie >= 9", "> 5%"]
-              })] : [];
+              return !cssModuleSupport
+                ? [
+                    autoprefixer({
+                      browsers: ["last 2 versions", "ie >= 9", "> 5%"]
+                    })
+                  ]
+                : [];
             }
           }
         }

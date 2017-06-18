@@ -11,7 +11,7 @@
 const loadUserConfig = require("./util/load-user-config");
 const Path = require("path");
 
-module.exports = function (config) {
+module.exports = function(config) {
   const settings = {
     frameworks: ["mocha", "phantomjs-shim"],
     reporters: ["spec"],

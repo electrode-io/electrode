@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = function (opts) {
+module.exports = function(opts) {
   const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
 
   const statsOptions = {
@@ -15,8 +15,8 @@ module.exports = function (opts) {
 
   if (process.env.OPTIMIZE_STATS === "true") {
     statsOptions.fields = null;
-    statsOptions.transform = (data) => {
-      data.modules.forEach((m) => {
+    statsOptions.transform = data => {
+      data.modules.forEach(m => {
         delete m.source;
       });
       delete data.children;
@@ -24,8 +24,6 @@ module.exports = function (opts) {
     };
   }
   return {
-    plugins: [
-      new StatsWriterPlugin(statsOptions)
-    ]
+    plugins: [new StatsWriterPlugin(statsOptions)]
   };
 };

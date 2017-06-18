@@ -10,17 +10,13 @@ const karmaConf = require("./karma.conf");
 const loadUserConfig = require("./util/load-user-config");
 const Path = require("path");
 
-module.exports = function (config) {
+module.exports = function(config) {
   karmaConf(config);
   const settings = {
     reporters: ["spec", "coverage"],
     webpack: webpackCovCfg,
     coverageReporter: {
-      reporters: [
-        { type: "json", file: "coverage.json" },
-        { type: "lcov" },
-        { type: "text" }
-      ],
+      reporters: [{ type: "json", file: "coverage.json" }, { type: "lcov" }, { type: "text" }],
       dir: Path.resolve("coverage", "client")
     }
   };

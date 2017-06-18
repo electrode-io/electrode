@@ -41,7 +41,13 @@ module.exports = class ModuleResolver {
         path,
         request: `./${req.request}`
       });
-      return resolver.doResolve(this.target, obj, `looking for modules in ${obj.path}`, callback, true);
+      return resolver.doResolve(
+        this.target,
+        obj,
+        `looking for modules in ${obj.path}`,
+        callback,
+        true
+      );
     });
   }
 };

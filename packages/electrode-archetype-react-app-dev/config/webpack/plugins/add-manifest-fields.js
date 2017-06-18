@@ -8,13 +8,12 @@
  * then this plugin should be included *after* this one
  */
 
-
 function AddManifestFieldsPlugin(fields) {
   this.fields = fields || {};
   this.regex = /manifest\.json/;
 }
 
-AddManifestFieldsPlugin.prototype.apply = function (compiler) {
+AddManifestFieldsPlugin.prototype.apply = function(compiler) {
   const regex = this.regex;
   const fields = this.fields;
   compiler.plugin("emit", (compilation, callback) => {

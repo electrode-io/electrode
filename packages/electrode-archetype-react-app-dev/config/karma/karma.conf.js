@@ -12,13 +12,11 @@ const loadUserConfig = require("./util/load-user-config");
 
 PREPROCESSORS[MAIN_PATH] = ["webpack", "sourcemap"];
 
-module.exports = function (config) {
+module.exports = function(config) {
   const settings = {
     basePath: process.cwd(),
     frameworks: ["mocha", "phantomjs-shim", "intl-shim"],
-    files: [
-      MAIN_PATH
-    ],
+    files: [MAIN_PATH],
     plugins: [
       "karma-chrome-launcher",
       "karma-coverage",
@@ -59,11 +57,7 @@ module.exports = function (config) {
     reporters: ["spec", "coverage"],
     browserNoActivityTimeout: 60000,
     coverageReporter: {
-      reporters: [
-        { type: "json", file: "coverage.json" },
-        { type: "lcov" },
-        { type: "text" }
-      ],
+      reporters: [{ type: "json", file: "coverage.json" }, { type: "lcov" }, { type: "text" }],
       dir: Path.resolve("coverage", "client")
     },
     captureTimeout: 100000,

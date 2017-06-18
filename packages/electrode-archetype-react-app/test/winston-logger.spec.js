@@ -5,10 +5,10 @@ const sinon = require("sinon");
 const winston = require("winston");
 const winstonLogger = require("../lib/winston-logger");
 
-describe("#winston-logger", function () {
+describe("#winston-logger", function() {
   const logger = winstonLogger(winston);
 
-  it("#winstonLogger.warn", function () {
+  it("#winstonLogger.warn", function() {
     const winstonWarnSpy = sinon.spy(winston, "warn");
 
     logger.warn("electrode");
@@ -26,7 +26,7 @@ describe("#winston-logger", function () {
     expect(logger.transports["archetype-debug-file"].level).to.equal("debug");
   });
 
-  it("#winstonLogger.error", function () {
+  it("#winstonLogger.error", function() {
     const winstonErrorSpy = sinon.spy(winston, "error");
 
     logger.error("electrode");
@@ -44,7 +44,7 @@ describe("#winston-logger", function () {
     expect(logger.transports["archetype-debug-file"].level).to.equal("debug");
   });
 
-  it("#winstonLogger.info", function () {
+  it("#winstonLogger.info", function() {
     const winstonInfoSpy = sinon.spy(winston, "info");
 
     logger.info("electrode");
@@ -62,7 +62,7 @@ describe("#winston-logger", function () {
     expect(logger.transports["archetype-debug-file"].level).to.equal("debug");
   });
 
-  it("#winstonLogger.verbose", function () {
+  it("#winstonLogger.verbose", function() {
     const winstonVerboseSpy = sinon.spy(winston, "verbose");
 
     logger.info("electrode");

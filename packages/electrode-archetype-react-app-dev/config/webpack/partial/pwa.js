@@ -59,8 +59,7 @@ function createEntryConfigFromScripts(importScripts, entry) {
   // entry points. If it is we create a new object with all
   // existing entry points to avoid mutating the config. If its not,
   // we assume its a string and use it as the main entry point.
-  const newEntry = typeof entry === "object" ?
-    Object.assign({}, entry) : { main: entry };
+  const newEntry = typeof entry === "object" ? Object.assign({}, entry) : { main: entry };
   return importScripts.reduce((acc, script) => {
     const name = Path.parse(script).name;
     acc[name] = script;
@@ -68,7 +67,7 @@ function createEntryConfigFromScripts(importScripts, entry) {
   }, newEntry);
 }
 
-module.exports = function (options) {
+module.exports = function(options) {
   /* eslint max-statements: 0 */
   const swConfig = optionalRequire(swConfigPath, true) || {};
   const severConfig = optionalRequire(serverConfigPath, true) || {};
@@ -81,28 +80,32 @@ module.exports = function (options) {
 
   mkdirp.sync(Path.resolve("dist"));
 
-  const manifestConfig = assign({
-    background: "#FFFFFF",
-    logo: "images/electrode.png",
-    title: "Electrode",
-    "short_name": "Electrode",
-    statsFilename: "../server/iconstats.json"
-  }, swConfig.manifest);
+  const manifestConfig = assign(
+    {
+      background: "#FFFFFF",
+      logo: "images/electrode.png",
+      title: "Electrode",
+      short_name: "Electrode",
+      statsFilename: "../server/iconstats.json"
+    },
+    swConfig.manifest
+  );
 
-  const cacheConfig = assign({
-    staticFileGlobs: [
-      "dist/js/*.{js,css}"
-    ],
-    stripPrefix: "dist/js/",
-    cacheId: "electrode",
-    filepath: "dist/sw.js",
-    maximumFileSizeToCacheInBytes: 4194304,
-    skipWaiting: false,
-    noWarning: true
-  }, swConfig.cache);
+  const cacheConfig = assign(
+    {
+      staticFileGlobs: ["dist/js/*.{js,css}"],
+      stripPrefix: "dist/js/",
+      cacheId: "electrode",
+      filepath: "dist/sw.js",
+      maximumFileSizeToCacheInBytes: 4194304,
+      skipWaiting: false,
+      noWarning: true
+    },
+    swConfig.cache
+  );
 
   if (cacheConfig.runtimeCaching) {
-    cacheConfig.runtimeCaching = cacheConfig.runtimeCaching.map((runtimeCache) => {
+    cacheConfig.runtimeCaching = cacheConfig.runtimeCaching.map(runtimeCache => {
       return {
         handler: runtimeCache.handler,
         urlPattern: new RegExp(runtimeCache.urlPattern)
@@ -120,9 +123,9 @@ module.exports = function (options) {
   if (cacheConfig.importScripts) {
     const importScripts = cacheConfig.importScripts;
 
-    cacheConfig.importScripts = process.env.WEBPACK_DEV === "true" ?
-      importScripts.map(getDevelopmentPath) :
-      importScripts.map(getHashedPath);
+    cacheConfig.importScripts = process.env.WEBPACK_DEV === "true"
+      ? importScripts.map(getDevelopmentPath)
+      : importScripts.map(getHashedPath);
 
     entry = createEntryConfigFromScripts(importScripts, options.currentConfig.entry);
 
@@ -148,9 +151,9 @@ module.exports = function (options) {
       }
     }),
     new AddManifestFieldsPlugin({
-      "gcm_sender_id": manifestConfig.gcm_sender_id,
-      "short_name": manifestConfig.short_name,
-      "theme_color": manifestConfig.theme_color
+      gcm_sender_id: manifestConfig.gcm_sender_id,
+      short_name: manifestConfig.short_name,
+      theme_color: manifestConfig.theme_color
     }),
     new SWPrecacheWebpackPlugin(cacheConfig)
   ];
@@ -167,12 +170,14 @@ module.exports = function (options) {
         output: {
           path: Path.resolve(severConfig.buildArtifactsPath || ".etmp")
         },
-        files: [{
-          asset: /\/stats.json$/,
-          output: {
-            filename: "stats.json"
+        files: [
+          {
+            asset: /\/stats.json$/,
+            output: {
+              filename: "stats.json"
+            }
           }
-        }]
+        ]
       })
     );
   }
@@ -181,18 +186,21 @@ module.exports = function (options) {
     entry,
     output,
     module: {
-      rules: [{
-        _name: "manifest",
-        test: /manifest.json$/,
-        use: [{
-          loader: fileLoader,
-          options: {
-            name: "manifest.json"
-          }
-        },
-          webAppManifestLoader
-        ]
-      }]
+      rules: [
+        {
+          _name: "manifest",
+          test: /manifest.json$/,
+          use: [
+            {
+              loader: fileLoader,
+              options: {
+                name: "manifest.json"
+              }
+            },
+            webAppManifestLoader
+          ]
+        }
+      ]
     },
     plugins
   };

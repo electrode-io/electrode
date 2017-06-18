@@ -12,7 +12,7 @@ const archetype = require("electrode-archetype-react-app/config/archetype");
 const Path = require("path");
 const logger = require("electrode-archetype-react-app/lib/logger");
 
-module.exports = function (options) {
+module.exports = function(options) {
   const config = options.currentConfig;
   logger.verbose("add-dll-references configurations", JSON.stringify(config, null, 2));
 
@@ -22,10 +22,13 @@ module.exports = function (options) {
 
     if (exists && filenames.length) {
       return {
-        plugins: filenames.map((filename) => new webpack.DllReferencePlugin({
-          context: config.context,
-          manifest: require(filename) // eslint-disable-line global-require
-        }))
+        plugins: filenames.map(
+          filename =>
+            new webpack.DllReferencePlugin({
+              context: config.context,
+              manifest: require(filename) // eslint-disable-line global-require
+            })
+        )
       };
     }
   } catch (err) {
