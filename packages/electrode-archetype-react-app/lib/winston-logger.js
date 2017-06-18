@@ -9,6 +9,8 @@ const makeWinstonLogger = winston => {
       }),
       new winston.transports.File({
         json: false,
+        maxsize: 5 * 1024 * 1024, // 5 MB
+        maxFiles: 1,
         filename: "archetype-exceptions.log"
       })
     ],
@@ -20,6 +22,8 @@ const makeWinstonLogger = winston => {
       }),
       new winston.transports.File({
         json: false,
+        maxsize: 10 * 1024 * 1024, // 10 MB
+        maxFiles: 1,
         name: "archetype-debug-file",
         filename: "archetype-debug.log",
         level: "debug"
