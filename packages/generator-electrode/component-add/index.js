@@ -168,8 +168,8 @@ module.exports = generators.Base.extend({
     );
 
     const modifyWPConfig = configFile => {
+
       let wpConfigArray = wpConfig.split("\n");
-      // add import at the top
       let aliasEntry = '"' + this.packageName + '": Path.join(repoPackagesDir, "' + this.packageName + '/src"),';
       let modulesEntryNM = 'Path.join(repoPackagesDir, "' + this.packageName + '/node_modules"),';
       let modulesEntry = 'Path.join(repoPackagesDir, "' + this.packageName + '"),';
@@ -198,7 +198,7 @@ module.exports = generators.Base.extend({
       return configString;
 
     };
-    //write add new component to archetype/webpack
+    //write new component to archetype/webpack
     let wpConfig = this.fs.read(
       this.destinationPath("../../" + this.demoAppName + "/archetype/config/webpack/webpack.config.js")
     );
