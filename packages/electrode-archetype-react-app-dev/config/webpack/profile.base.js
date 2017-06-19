@@ -14,7 +14,8 @@ const profile = {
     _images: { order: 2300 },
     _stats: { order: 2400 },
     _isomorphic: { order: 2500 },
-    _pwa: { order: 2600 }
+    _pwa: { order: 2600 },
+    _node: { order: 30000 }
   }
 };
 

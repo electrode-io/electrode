@@ -11,6 +11,7 @@ const assert = require("assert");
 const orders = [
   "_base-options",
   "_entry",
+  "_node",
   "_output",
   "_resolve",
   "_resolve-loader",
@@ -39,7 +40,8 @@ const orders = [
   "_hot",
   "_html-reporter",
   "_simple-progress",
-  "_sourcemaps-inline"
+  "_sourcemaps-inline",
+  "_node"
 ];
 
 const files = Fs.readdirSync(__dirname)
