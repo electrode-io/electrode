@@ -127,8 +127,3 @@ This is where we extend our `electrode-archetype-react-app` [Babel](https://babe
 > &lt;your-awesome-app&gt;/.isomorphic-loader-config.json
 
 This [powerful tool](https://github.com/electrode-io/isomorphic-loader) makes NodeJS `require` work with files such as images for server-side rendering. It contains three pieces: a Webpack loader, Webpack plugin, and a library for your NodeJS app.
-
----
-
-With `generator-electrode`, we've created a dynamic and performant full stack Electrode app in under five minutes, using some of our favorite technologies, like [React](https://www.gitbook.com/book/electrode/electrode/edit#) and [Hapi](https://www.gitbook.com/book/electrode/electrode/edit#). Let's explore and personalize this web application in our next section, [Intermediate: Create a Resuable Component.](https://www.gitbook.com/book/electrode/electrode/edit#)
-
