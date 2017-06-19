@@ -9,13 +9,13 @@ var parseAuthor = require("parse-author");
 var optionOrPrompt = require("yeoman-option-or-prompt");
 
 var ReactComponentGenerator = yeoman.Base.extend({
-  constructor: function() {
+  constructor: function () {
     yeoman.Base.apply(this, arguments);
     this.quotes = this.options.quotes;
     this.githubUrl = this.options.githubUrl || "https://github.com";
     this.optionOrPrompt = optionOrPrompt;
   },
-  initializing: function() {
+  initializing: function () {
     this.isAddon = this.options.isAddon || false;
     this.demoAppName = this.options.demoAppName;
     this.pkg = this.fs.readJSON(this.destinationPath("package.json"), {});
@@ -36,21 +36,21 @@ var ReactComponentGenerator = yeoman.Base.extend({
     this.props.quoteType = this.quotes;
   },
   prompting: {
-    greeting: function() {
+    greeting: function () {
       if (!this.isAddon) {
         this.log(
           "\n" +
-            chalk.bold.underline("Welcome to the Electrode Component Generator") +
-            "\n" +
-            "\nWe're going to set up a new " +
-            chalk.bold("Electrode") +
-            " component, ready for development with" +
-            "\n" +
-            chalk.bold("gulp, webpack, demo, electrode component archetype, and live-reload")
+          chalk.bold.underline("Welcome to the Electrode Component Generator") +
+          "\n" +
+          "\nWe're going to set up a new " +
+          chalk.bold("Electrode") +
+          " component, ready for development with" +
+          "\n" +
+          chalk.bold("gulp, webpack, demo, electrode component archetype, and live-reload")
         );
       }
     },
-    askFor: function() {
+    askFor: function () {
       if (this.pkg.name || this.options.name) {
         this.props.name = this.pkg.name || _.kebabCase(this.options.name);
       }
@@ -130,7 +130,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
         this.createDirectory = this.props.createDirectory;
         this.componentName = _.kebabCase(_.deburr(this.props.projectName))
           .replace(/^\s+|\s+$/g, "")
-          .replace(/(^|[-_ ])+(.)/g, function(match, first, second) {
+          .replace(/(^|[-_ ])+(.)/g, function (match, first, second) {
             return second.toUpperCase();
           });
         this.currentYear = new Date().getFullYear();
@@ -144,7 +144,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
   },
 
   writing: {
-    lernaStructure: function() {
+    lernaStructure: function () {
       // copy lerna and top level templates
       if (!this.isAddon) {
         this.copy("gitignore", ".gitignore");
@@ -153,7 +153,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
         this.template("lerna.json", "lerna.json");
       }
     },
-    project: function() {
+    project: function () {
       this.copy("packages/component/babelrc", this.rootPath + ".babelrc");
       this.copy("packages/component/gitignore", this.rootPath + ".gitignore");
       this.copy("packages/component/npmignore", this.rootPath + ".npmignore");
@@ -165,7 +165,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
       this.template("packages/component/_package.json", this.rootPath + "package.json");
       this.template("packages/component/_readme.md", this.rootPath + "README.md");
     },
-    component: function() {
+    component: function () {
       this.template(
         "packages/component/src/components/_component.jsx",
         this.rootPath + "src/components/" + this.projectName + ".jsx"
@@ -188,7 +188,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
 
       this.template("packages/component/src/_Component.js", this.rootPath + "src/index.js");
     },
-    test: function() {
+    test: function () {
       this.template(
         "packages/component/test/client/eslintrc",
         this.rootPath + "test/client/.eslintrc"
@@ -201,12 +201,56 @@ var ReactComponentGenerator = yeoman.Base.extend({
         "packages/component/test/client/components/helpers/_intlEnzymeTestHelper.js",
         this.rootPath + "test/client/components/helpers/intl-enzyme-test-helper.js"
       );
+    },
+
+    demoApp: function () {
+      //Do not generate the demo app if called from the add on generator
+      this.originalDemoAppName = "demo-app";
+      if (!this.isAddon) {
+        //custom props to pass to the App Generator
+        this.props.description = this.description || "The demo App";
+        this.props.createDirectory = false;
+        this.props.packageName = this.packageName;
+        this.props.className = this.componentName;
+        this.props.name = this.originalDemoAppName;
+        this.props.homepage = this.githubUrl + "/" + this.packageGitHubOrg + "/" + this.ghRepo;
+        this.props.serverType = "HapiJS";
+        this.props.githubUrl = this.githubUrl;
+        this.props.authorName = this.developerName;
+        this.props.authorEmail = this.ghUser + "@" + this.packageGitHubOrg + ".com";
+        this.props.authorUrl = this.githubUrl + "/" + this.ghUser;
+        this.props.pwa = false;
+        this.props.autoSsr = false;
+        this.props.license = "nolicense";
+        this.props.githubAccount = this.ghUser;
+        this.props.keywords = "electrode";
+        let options = {
+          isDemoApp: true,
+          props: this.props
+        };
+
+        //change the destinationRoot for generating the demo app
+        this.oldRoot = this.destinationRoot();
+        var newRoot = this.destinationPath() + "/" + this.originalDemoAppName;
+        this.destinationRoot(newRoot);
+        this.composeWith(
+          "electrode:app",
+          { options },
+          {
+            local: require.resolve("../generators/app")
+          }
+        );
+      }
     }
   },
 
-  install: function() {
+  install: function () {
     //git init and npmi for lerna lernaStructure
     if (!this.isAddon) {
+      //reset the path to the actual root
+      this.destinationRoot(this.oldRoot);
+      this.destinationRoot()
+
       this.spawnCommandSync("git", ["init"], {
         cwd: this.destinationPath()
       });
@@ -219,13 +263,26 @@ var ReactComponentGenerator = yeoman.Base.extend({
     let packageDirectory = this.isAddon
       ? this.destinationPath()
       : this.destinationPath() + "/" + this.rootPath;
-    process.chdir(packageDirectory);
-    this.installDependencies({
-      bower: false
+
+    this.destinationRoot(packageDirectory);
+    console.log("PACKAGE DIRECTORY:::::", this.destinationPath());
+
+    this.spawnCommandSync("npm", ["install"], {
+      cwd: this.destinationPath()
+    });
+
+    //install demo-app dependencies
+    let demoDirectory = this.isAddon
+      ? this.destinationPath("../../" + this.originalDemoAppName)
+      : this.oldRoot + "/" + this.originalDemoAppName;
+    this.destinationRoot(demoDirectory);
+    this.spawnCommandSync("npm", ["install"], {
+      cwd: this.destinationPath()
     });
   },
 
-  end: function() {
+  end: function () {
+
     if (this.quoteType === "'") {
       this.spawnCommandSync("node_modules/.bin/eslint", [
         "--fix",
@@ -237,56 +294,22 @@ var ReactComponentGenerator = yeoman.Base.extend({
         ".js,.jsx"
       ]);
     }
-    //Do not generate the demo app if called from the add on generator
+
     if (!this.isAddon) {
-      this.originalDemoAppName = "demo-app";
-      //custom props to pass to the App Generator
-      this.props.description = this.description || "The demo App";
-      this.props.createDirectory = false;
-      this.props.packageName = this.packageName;
-      this.props.className = this.componentName;
-      this.props.name = this.originalDemoAppName;
-      this.props.homepage = this.githubUrl + "/" + this.packageGitHubOrg + "/" + this.ghRepo;
-      this.props.serverType = "HapiJS";
-      this.props.githubUrl = this.githubUrl;
-      this.props.authorName = this.developerName;
-      this.props.authorEmail = this.ghUser + "@" + this.packageGitHubOrg + ".com";
-      this.props.authorUrl = this.githubUrl + "/" + this.ghUser;
-      this.props.pwa = false;
-      this.props.autoSsr = false;
-      this.props.license = "nolicense";
-      this.props.githubAccount = this.ghUser;
-      this.props.keywords = "electrode";
-      let options = {
-        isDemoApp: true,
-        props: this.props
-      };
-
-      //change the destinationRoot for generating the demo app
-      var newRoot = this.destinationPath() + "/" + this.originalDemoAppName;
-      this.destinationRoot(newRoot);
-      this.composeWith(
-        "electrode:app",
-        { options },
-        {
-          local: require.resolve("../generators/app")
-        }
-      );
-
       this.appName = _.isEmpty(this.demoAppName) ? this.originalDemoAppName : this.demoAppName;
       this.log(
         "\n" +
-          chalk.green.underline("Your new Electrode component is ready!") +
-          "\n" +
-          "\nYour component is in packages/" +
-          this.packageName +
-          " and your demo app is " +
-          this.appName +
-          "\n" +
-          "\nType 'cd ../" +
-          this.appName +
-          "' then 'gulp dev' to run the development build for the demo app." +
-          "\n"
+        chalk.green.underline("Your new Electrode component is ready!") +
+        "\n" +
+        "\nYour component is in packages/" +
+        this.packageName +
+        " and your demo app is " +
+        this.appName +
+        "\n" +
+        "\nType 'cd ../" +
+        this.appName +
+        "' then 'gulp dev' to run the development build for the demo app." +
+        "\n"
       );
     }
   }
