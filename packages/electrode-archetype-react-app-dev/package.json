@@ -113,7 +113,8 @@
     "webpack-dev-server": "^2.2.0",
     "webpack-disk-plugin": "0.0.2",
     "webpack-stats-plugin": "^0.1.1",
-    "winston": "^2.3.1"
+    "winston": "^2.3.1",
+    "xsh": "^0.3.2"
   },
   "optionalDependencies": {
     "electrode-archetype-opt-inferno": "^0.1.0",
