@@ -3,14 +3,13 @@
 const Path = require("path");
 const glob = require("glob");
 
-const archDevRequire = require("electrode-archetype-react-component-dev/require");
-const atImport = archDevRequire("postcss-import");
-const cssnext = archDevRequire("postcss-cssnext");
-const styleLoader = archDevRequire.resolve("style-loader");
-const cssLoader = archDevRequire.resolve("css-loader");
-const postcssLoader = archDevRequire.resolve("postcss-loader");
-const stylusLoader = archDevRequire.resolve("stylus-relative-loader");
-const webpack = archDevRequire("webpack");
+const atImport = require("postcss-import");
+const cssnext = require("postcss-cssnext");
+const styleLoader = require.resolve("style-loader");
+const cssLoader = require.resolve("css-loader");
+const postcssLoader = require.resolve("postcss-loader");
+const stylusLoader = require.resolve("stylus-relative-loader");
+const webpack = require("webpack");
 
 const optionalRequire = require("optional-require")(require);
 const configPath = Path.resolve("archetype", "config.js");

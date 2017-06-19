@@ -2,7 +2,7 @@
 
 const DefinePlugin = require("webpack").DefinePlugin;
 
-module.exports = function () {
+module.exports = function() {
   return {
     plugins: [
       new DefinePlugin({

@@ -1,6 +1,36 @@
-# Packages
+# 6/19/2017
 
-## 6/13/2017
+## Packages
+
+-   electrode-archetype-react-app-dev@2.4.0 `(2.3.3 => 2.4.0)`
+-   electrode-archetype-react-app2.4.0 `(2.3.3 => 2.4.0)`
+-   electrode-archetype-react-component-dev@2.1.0 `(2.0.3 => 2.1.0)`
+-   electrode-archetype-react-component@2.1.0 `(2.0.3 => 2.1.0)`
+-   generator-electrode@2.2.0 `(2.1.0 => 2.2.0)`
+-   webpack-config-composer@1.0.2 `(1.0.1 => 1.0.2)`
+
+## Commits
+
+-   [commit](http://github.com/electrode-io/electrode/commit/5b55a8dbdeed46752a3fa47a58e7df24fd53bf07) add config for mocha tests with es6
+-   [commit](http://github.com/electrode-io/electrode/commit/b2cf439c20794e54acb37f772edda375b30e701b) format gulpefile.js
+-   [commit](http://github.com/electrode-io/electrode/commit/6b3d49054c738c1f12d681cfc78ae74fe1ee31c8) ignore lerna no updating error
+-   [commit](http://github.com/electrode-io/electrode/commit/df369da6eff15744a56083d732d01f0699d4cdc5) update front facing README
+-   [commit](http://github.com/electrode-io/electrode/commit/b848a3a0342e62d2fb217a31eeb3a7615bb5000d) archetype-react-component: [minor][chore]move configs to component dev (#356)
+-   [commit](http://github.com/electrode-io/electrode/commit/87a6fb358da0199fd5f6f25c485621ec619fedc2) archetype-react-app-dev: [patch] add config for mocha tests with es6 (#373)
+-   [commit](http://github.com/electrode-io/electrode/commit/f51c1f7aa2f80566b63d6437dbe415ac0e55ef0a) archetype-react-app: [minor][chore] Modify gulp task based on flag (#371)
+-   [commit](http://github.com/electrode-io/electrode/commit/829ff161b60c58591726066f13e20bb2a07c6408) archetype-react-app: [patch][chore] format code
+-   [commit](http://github.com/electrode-io/electrode/commit/6a85b4b72052464e3676c5bbf6f128a6e72feefa) archetype-react-app: [patch] use babel to optimize modules for PROD
+-   [commit](http://github.com/electrode-io/electrode/commit/a184fff313d41758efcbd7db8d5b095495435fc0) archetype-react-app: [patch][chore] prettier format all code (#378)
+-   [commit](http://github.com/electrode-io/electrode/commit/f804916d39e9239e13be9c475b56f2b8362aaebc) archetype-react-app: [patch] remove log files (#381)
+-   [commit](http://github.com/electrode-io/electrode/commit/62b19038de1d715c6c09cc314ff73cecdaf93fae) archetype-react-app: [patch] log loading custom webpack config (#382)
+-   [commit](http://github.com/electrode-io/electrode/commit/ed62e36d5a86925a62209d1eff1b8f8ebbbec8bc) (multiple): [patch][chore] update engines to node 8 (#379)
+-   [commit](http://github.com/electrode-io/electrode/commit/b6284abb52a8055be8406ee71b042d1815631473) generator-electrode: [patch][bug] Add default classNames to components (#376)
+-   [commit](http://github.com/electrode-io/electrode/commit/d81593a99f1bf324fae6c83f597db74e7dbc462a) generator-electrode: [minor][chore] Set ES6 flag in gulpfile. (#374)
+-   [commit](http://github.com/electrode-io/electrode/commit/da5e945b8f39ff5a6f5c64ef28bf2cb09afc5df9) generator-electrode: [patch][bug] Write all files before installing (#383)
+
+# 6/13/2017
+
+## Packages
 
 -   electrode-archetype-react-app-dev@2.3.3 `(2.3.2 => 2.3.3)`
 -   electrode-archetype-react-app@2.3.3 `(2.3.2 => 2.3.3)`

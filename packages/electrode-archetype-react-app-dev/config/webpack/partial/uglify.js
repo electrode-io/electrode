@@ -2,7 +2,7 @@
 
 const optimize = require("webpack").optimize;
 
-module.exports = function () {
+module.exports = function() {
   // Allow env var to disable minifcation for inspectpack usage.
   if (process.env.INSPECTPACK_DEBUG === "true") {
     return {};

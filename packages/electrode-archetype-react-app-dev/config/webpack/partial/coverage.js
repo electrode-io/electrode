@@ -2,7 +2,7 @@
 
 const ispartaLoader = require.resolve("isparta-loader");
 
-module.exports = function () {
+module.exports = function() {
   return {
     module: {
       rules: [

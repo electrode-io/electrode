@@ -21,7 +21,7 @@ module.exports = class FailPlugin {
       this.fail();
     });
 
-    compiler.plugin("done", (stats) => {
+    compiler.plugin("done", stats => {
       const errors = stats.compilation.errors;
       if (errors && errors.length) {
         this.fail();

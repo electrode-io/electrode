@@ -2,9 +2,8 @@
 
 var Path = require("path");
 var prodCfg = require("../webpack.config");
-var archDevRequire = require("electrode-archetype-react-component-dev/require");
-var sinonPkg = archDevRequire.resolve("sinon/pkg/sinon");
-var _ = archDevRequire("lodash");
+var sinonPkg = require.resolve("sinon/pkg/sinon");
+var _ = require("lodash");
 
 module.exports = function() {
   // Get Paths to give node_modules by resolving based on assumed presence of

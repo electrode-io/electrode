@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-app",
-  "version": "2.3.3",
+  "version": "2.4.0",
   "description": "Electrode NodeJS/React Universal Application Archetype",
   "main": "arch-gulpfile.js",
   "homepage": "http://www.electrode.io",
@@ -14,7 +14,8 @@
   "license": "Apache-2.0",
   "scripts": {
     "test": "npm run lint",
-    "lint": "eslint \"**/**/*.js\""
+    "lint": "eslint \"**/**/*.js\"",
+    "format": "prettier --write --print-width 100 *.{js,jsx} `find . -type d -d 1 -exec echo '{}/**/*.{js,jsx}' \\; | egrep -v '(/node_modules/|/dist/|/coverage/)'`"
   },
   "dependencies": {
     "babel-core": "^6.4.0",
@@ -47,10 +48,11 @@
     "eslint-plugin-babel": "^4.0.1",
     "eslint-plugin-filenames": "^1.1.0",
     "eslint-plugin-react": "^6.5.0",
+    "prettier": "^1.4.4",
     "winston": "^2.3.1"
   },
   "engines": {
-    "node": "^4.4.6 || ^6.2.1 || ^7.x.x",
-    "npm": "^3.5.3 || 4.x.x"
+    "node": ">= 4 <= 8",
+    "npm": ">= 3 <= 5"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "webpack-config-composer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Flexible webpack config partials composing",
   "homepage": "http://www.electrode.io",
   "main": "lib/index.js",
@@ -28,7 +28,7 @@
     "mocha": "^3.2.0"
   },
   "engines": {
-    "node": "^4.4.6 || ^6.2.1 || ^7.x.x",
-    "npm": "^3.5.3 || 4.x.x"
+    "node": ">= 4 <= 8",
+    "npm": ">= 3 <= 5"
   }
 }

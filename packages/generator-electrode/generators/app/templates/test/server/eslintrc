@@ -1,6 +1,6 @@
 ---
 extends:
-  - "../../node_modules/electrode-archetype-react-app-dev/config/eslint/.eslintrc-mocha-test"
+  - "../../node_modules/electrode-archetype-react-app-dev/config/eslint/.eslintrc-mocha-test-es6"
 
 <% if (isSingleQuote) { %>
 rules:

@@ -15,7 +15,7 @@ function makeConsoleLogger() {
   }
 
   return levels.reduce((a, l) => {
-    a[l] = function () {
+    a[l] = function() {
       log(l, arguments);
     };
     return a;

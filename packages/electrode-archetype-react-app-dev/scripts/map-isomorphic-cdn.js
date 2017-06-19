@@ -24,7 +24,7 @@ const paths = Object.keys(uniques);
 
 if (paths.length > 1) {
   logger.error("CDN upload files has different base paths");
-  paths.forEach((p) => {
+  paths.forEach(p => {
     logger.info(` - "${p}"`);
   });
   process.exit(1);

@@ -13,8 +13,9 @@ const RAW_MESSAGES_NAME = "raw-messages.json";
  * @return  {Promise}  A promise that resolves when the file has been written
  */
 function writeFileAsJSON(filePath, name, contents) {
-  return Promise.try(() => JSON.stringify(contents, null, 2))
-    .then((result) => fs.writeFileAsync(filePath + name, result));
+  return Promise.try(() => JSON.stringify(contents, null, 2)).then(result =>
+    fs.writeFileAsync(filePath + name, result)
+  );
 }
 
 /**
@@ -22,8 +23,7 @@ function writeFileAsJSON(filePath, name, contents) {
  * @return  {Promise}  A promise that resolves to a POJO with the file's contents
  */
 function readFileAsJSON(filePath) {
-  return fs.readFileAsync(filePath, "utf8")
-    .then(JSON.parse);
+  return fs.readFileAsync(filePath, "utf8").then(JSON.parse);
 }
 
 /**
@@ -37,18 +37,21 @@ function getAllDefaultMessages(messageFilesPathPattern) {
   return getFilePaths(messageFilesPathPattern)
     .map(readFileAsJSON)
     .reduce((previousValue, defaultMessageDescriptors) => {
-      defaultMessageDescriptors.forEach((descriptor) => { previousValue[descriptor.id] = descriptor; });
+      defaultMessageDescriptors.forEach(descriptor => {
+        previousValue[descriptor.id] = descriptor;
+      });
       return previousValue;
     }, {});
 }
 
 const writeRawMessages = _.partial(writeFileAsJSON, RAW_MESSAGES_DIR, RAW_MESSAGES_NAME);
 
-Promise.all([
-  getAllDefaultMessages(MESSAGES_PATTERN),
-  fs.ensureDirAsync(RAW_MESSAGES_DIR)
-])
+Promise.all([getAllDefaultMessages(MESSAGES_PATTERN), fs.ensureDirAsync(RAW_MESSAGES_DIR)])
   .then(_.first)
   .then(writeRawMessages)
-  .then(() => { process.exit(0); })
-  .catch(() => { process.exit(1); });
+  .then(() => {
+    process.exit(0);
+  })
+  .catch(() => {
+    process.exit(1);
+  });

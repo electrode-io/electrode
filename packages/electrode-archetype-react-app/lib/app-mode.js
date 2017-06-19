@@ -33,38 +33,41 @@ function makeAppMode(prodDir, reactLib) {
   reactLib = reactLib || "react";
 
   const envKey = "APP_SRC_DIR";
-  return Object.assign({
-    reactLib,
-    savedFile,
-    envKey,
-    isSrc: !!srcDir,
-    setEnv: (dir) => {
-      if (dir) {
-        if (!dir.endsWith("/")) {
-          dir += "/";
+  return Object.assign(
+    {
+      reactLib,
+      savedFile,
+      envKey,
+      isSrc: !!srcDir,
+      setEnv: dir => {
+        if (dir) {
+          if (!dir.endsWith("/")) {
+            dir += "/";
+          }
+          process.env[envKey] = dir;
+        } else {
+          delete process.env[envKey];
         }
-        process.env[envKey] = dir;
-      } else {
-        delete process.env[envKey];
+      },
+      getEnv: () => {
+        return process.env[envKey];
+      },
+      hasEnv: () => {
+        return !!process.env[envKey];
+      },
+      src: {
+        dir: srcDir,
+        client: Path.join(srcDir, client),
+        server: Path.join(srcDir, server)
+      },
+      lib: {
+        dir: libDir,
+        client: Path.join(libDir, client),
+        server: Path.join(libDir, server)
       }
     },
-    getEnv: () => {
-      return process.env[envKey];
-    },
-    hasEnv: () => {
-      return !!process.env[envKey];
-    },
-    src: {
-      dir: srcDir,
-      client: Path.join(srcDir, client),
-      server: Path.join(srcDir, server)
-    },
-    lib: {
-      dir: libDir,
-      client: Path.join(libDir, client),
-      server: Path.join(libDir, server)
-    }
-  }, saved);
+    saved
+  );
 }
 
 module.exports = makeAppMode;

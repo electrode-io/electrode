@@ -23,11 +23,13 @@ function appEntry() {
   const entryPath = Path.join(context, "entry.config.js");
 
   const entry = optionalRequire(entryPath, {
-    notFound: () => logger.info(`Entry point configuration ${entryPath} is not found, using default entry point...`)
+    notFound: () =>
+      logger.info(
+        `Entry point configuration ${entryPath} is not found, using default entry point...`
+      )
   });
 
-  return entry ||
-    (Fs.existsSync(Path.join(context, "app.js")) ? "./app.js" : "./app.jsx");
+  return entry || (Fs.existsSync(Path.join(context, "app.js")) ? "./app.js" : "./app.jsx");
 }
 
 module.exports = {

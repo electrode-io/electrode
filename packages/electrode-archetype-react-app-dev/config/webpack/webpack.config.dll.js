@@ -9,13 +9,13 @@ function makeConfig() {
     partials: {
       "_dll-entry": { order: 10100 },
       "_dll-output": { order: 10200 },
-      "_dll": { order: 10300 },
-      "_stats": {
+      _dll: { order: 10300 },
+      _stats: {
         options: {
           filename: "../../dll/server/stats.dll.json"
         }
       },
-      "_isomorphic": {
+      _isomorphic: {
         options: {
           assetsFile: "../../dll/isomorphic-assets.dll.json"
         }

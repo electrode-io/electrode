@@ -10,7 +10,7 @@ function webpackDevReporter(reporterOptions) {
   const logger = require("electrode-archetype-react-app/lib/logger");
 
   if (state) {
-    let displayStats = (!options.quiet && options.stats !== false);
+    let displayStats = !options.quiet && options.stats !== false;
 
     if (displayStats && !(stats.hasErrors() || stats.hasWarnings()) && options.noInfo) {
       displayStats = false;

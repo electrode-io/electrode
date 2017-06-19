@@ -6,9 +6,11 @@ const Path = require("path");
 const _ = require("lodash");
 const logger = require("electrode-archetype-react-app/lib/logger");
 
-module.exports = function (options) {
+module.exports = function(options) {
   // regex \b for word boundaries
-  const babelExcludeRegex = new RegExp(`(node_modules|\\b${Path.join(AppMode.src.client, "vendor")}\\b)`);
+  const babelExcludeRegex = new RegExp(
+    `(node_modules|\\b${Path.join(AppMode.src.client, "vendor")}\\b)`
+  );
 
   const babelLoader = {
     _name: "babel",
