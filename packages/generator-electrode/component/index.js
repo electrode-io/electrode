@@ -265,7 +265,6 @@ var ReactComponentGenerator = yeoman.Base.extend({
       : this.destinationPath() + "/" + this.rootPath;
 
     this.destinationRoot(packageDirectory);
-    console.log("PACKAGE DIRECTORY:::::", this.destinationPath());
 
     this.spawnCommandSync("npm", ["install"], {
       cwd: this.destinationPath()
