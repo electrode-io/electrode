@@ -216,14 +216,15 @@ var ReactComponentGenerator = yeoman.Base.extend({
         this.props.homepage = this.githubUrl + "/" + this.packageGitHubOrg + "/" + this.ghRepo;
         this.props.serverType = "HapiJS";
         this.props.githubUrl = this.githubUrl;
-        this.props.authorName = this.developerName;
+        this.props.authorName = this.developerName || this.user.git.name();
         this.props.authorEmail = this.ghUser + "@" + this.packageGitHubOrg + ".com";
         this.props.authorUrl = this.githubUrl + "/" + this.ghUser;
         this.props.pwa = false;
         this.props.autoSsr = false;
         this.props.license = "nolicense";
-        this.props.githubAccount = this.ghUser;
+        this.props.githubAccount = this.ghUser || this.user.git.name();
         this.props.keywords = "electrode";
+
         let options = {
           isDemoApp: true,
           props: this.props
