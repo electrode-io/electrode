@@ -220,10 +220,13 @@ module.exports = generators.Base.extend({
   },
 
   end: function () {
-    // run npmi for the demo app again
-    process.chdir(this.destinationPath("../../" + this.demoAppName));
-    this.installDependencies({
-      bower: false
-    });
+    this.log(
+      "\n" + chalk.green.underline("Your new Electrode component is ready!") +
+      "\n" +
+      "\nYour component is in " + this.packageName + " and your demo app is in ../" + this.demoAppName +
+      "\n" +
+      "\nType 'cd ../" + this.demoAppName + "' then 'gulp dev' to run the development build for the demo app." +
+      "\n"
+    );
   }
 });
