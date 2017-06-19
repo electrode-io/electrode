@@ -1,6 +1,4 @@
 import React from "react";
-import "es6-promise";
-import "isomorphic-fetch";
 import RecordForm from "./record-form";
 
 const HTTP_BAD_REQUEST = 400;

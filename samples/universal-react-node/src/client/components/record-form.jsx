@@ -1,6 +1,4 @@
 import React from "react";
-import "es6-promise";
-import "isomorphic-fetch";
 
 const HTTP_BAD_REQUEST = 400;
 const HTTP_OK = 200;
