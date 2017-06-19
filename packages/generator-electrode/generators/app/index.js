@@ -386,11 +386,11 @@ module.exports = generators.Base.extend({
     //copy files from the demoHelper if this is the demo-app
     if (this.isDemoApp) {
       //copy archetype webpack config extension
-      this.fs.copy(
-        getDemoFilePath('archetype/config.js'),
-        this.destinationPath('archetype/config.js')
-      );
-
+      this.fs.copyTpl(
+        this.templatePath(getDemoFilePath('archetype')),
+        this.destinationPath('archetype'),
+        { componentName: packageName }
+      )
       //copy home file
       this.fs.copyTpl(
         this.templatePath(getDemoFilePath('src/client/components/Home.jsx')),

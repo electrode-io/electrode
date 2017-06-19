@@ -24,14 +24,14 @@ var glob = require("glob");
 */
 
 module.exports = generators.Base.extend({
-  constructor: function() {
+  constructor: function () {
     generators.Base.apply(this, arguments);
     this.packageName = this.options.packageName || "demo-app";
     this.developerName = this.options.developerName || "demoDeveloper";
     this.className = this.options.className;
   },
 
-  initializing: function() {
+  initializing: function () {
     let appPkgPath = "";
     let homeComponentPath = "";
     this.demoAppName = "";
@@ -79,11 +79,11 @@ module.exports = generators.Base.extend({
   },
 
   prompting: {
-    greeting: function() {
+    greeting: function () {
       this.log(yosay("Welcome to the " + chalk.red("Electrode Add Component") + " generator!"));
     },
 
-    askFor: function() {
+    askFor: function () {
       var prompts = [
         {
           type: "input",
@@ -105,14 +105,14 @@ module.exports = generators.Base.extend({
         this.packageName = this.props.name;
         this.componentName = _.kebabCase(_.deburr(this.props.componentName))
           .replace(/^\s+|\s+$/g, "")
-          .replace(/(^|[-_ ])+(.)/g, function(match, first, second) {
+          .replace(/(^|[-_ ])+(.)/g, function (match, first, second) {
             return second.toUpperCase();
           });
       });
     }
   },
 
-  default: function() {
+  default: function () {
     let options = {
       isAddon: true,
       name: this.packageName,
@@ -128,7 +128,7 @@ module.exports = generators.Base.extend({
       }
     );
   },
-  writing: function() {
+  writing: function () {
     //add new package to the dependencies
     let dependencies = {};
     dependencies[this.packageName] = "../packages/" + this.packageName;
@@ -166,9 +166,60 @@ module.exports = generators.Base.extend({
       this.destinationPath("../../" + this.demoAppName + "/src/client/components/home.jsx"),
       newHomeString
     );
+
+    const modifyWPConfig = configFile => {
+      let wpConfigArray = wpConfig.split("\n");
+      // add import at the top
+      let aliasEntry = '"' + this.packageName + '": Path.join(repoPackagesDir, "' + this.packageName + '/src"),';
+      let modulesEntryNM = 'Path.join(repoPackagesDir, "' + this.packageName + '/node_modules"),';
+      let modulesEntry = 'Path.join(repoPackagesDir, "' + this.packageName + '"),';
+
+      let aliasIndex = wpConfigArray.findIndex((value, index, array) => {
+        if (value.match("alias")) {
+          return index;
+        }
+      });
+
+      let configWithAlias = wpConfigArray.splice(0, aliasIndex + 1);
+      configWithAlias.push(aliasEntry);
+
+      let modulesIndex = wpConfigArray.findIndex((value, index, array) => {
+        if (value.match("modules")) {
+          return index;
+        }
+      });
+
+      let fromAliastoModules = wpConfigArray.splice(0, modulesIndex + 1);
+
+      fromAliastoModules.push(modulesEntry);
+      fromAliastoModules.push(modulesEntryNM);
+
+      let configString = configWithAlias.concat(fromAliastoModules).concat(wpConfigArray).join("\n");
+      return configString;
+
+    };
+    //write add new component to archetype/webpack
+    let wpConfig = this.fs.read(
+      this.destinationPath("../../" + this.demoAppName + "/archetype/config/webpack/webpack.config.js")
+    );
+    let wpConfigDev = this.fs.read(
+      this.destinationPath("../../" + this.demoAppName + "/archetype/config/webpack/webpack.config.dev.js")
+    );
+
+    let newWpConfigString = modifyWPConfig(wpConfig);
+    let newWpDevConfigString = modifyWPConfig(wpConfigDev);
+    this.fs.write(
+      this.destinationPath("../../" + this.demoAppName + "/archetype/config/webpack/webpack.config.js"),
+      newWpConfigString
+    );
+
+    this.fs.write(
+      this.destinationPath("../../" + this.demoAppName + "/archetype/config/webpack/webpack.config.dev.js"),
+      newWpDevConfigString
+    );
   },
 
-  end: function() {
+  end: function () {
     // run npmi for the demo app again
     process.chdir(this.destinationPath("../../" + this.demoAppName));
     this.installDependencies({
