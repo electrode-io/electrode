@@ -13,9 +13,9 @@
   "homepage": "http://www.electrode.io",
   "license": "Apache-2.0",
   "scripts": {
-    "test": "lerna bootstrap --ignore=electrode-webpack-reporter && lerna run test --ignore=electrode-webpack-reporter && npm run test-reporter && gulp build-test",
-    "test-generator": "gulp test-generator",
-    "test-boilerplate": "gulp test-boilerplate",
+    "test": "lerna bootstrap --ignore=electrode-webpack-reporter && lerna run test --ignore=electrode-webpack-reporter && npm run test-reporter && clap build-test",
+    "test-generator": "clap test-generator",
+    "test-boilerplate": "clap test-boilerplate",
     "bootstrap": "lerna bootstrap --ignore=electrode-webpack-reporter",
     "clean": "npm run nuke && npm run nuke-packages && npm run nuke-samples",
     "nuke": "rm -rf node_modules tmp lerna-debug.log npm-debug.log",
@@ -24,15 +24,13 @@
     "test-reporter": "if lerna updated | grep electrode-webpack-reporter; then cd packages/electrode-webpack-reporter && npm install && npm test; fi"
   },
   "devDependencies": {
-    "electrode-gulp-helper": "^1.0.5",
-    "gitbook-cli": "^2.3.0",
-    "gulp": "^3.9.1",
     "lerna": "^2.0.0-rc.4",
     "lodash": "^4.17.2",
+    "xclap": "^0.2.0",
     "yeoman-test": "^1.6.0"
   },
   "engines": {
-    "node": "^4.4.6 || ^6.2.1",
-    "npm": "^3.5.3"
+    "node": ">= 4 <= 8",
+    "npm": ">= 3 <= 5"
   }
 }
