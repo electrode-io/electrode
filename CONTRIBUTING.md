@@ -8,10 +8,10 @@ There are [few guidelines](#contributing-guidelines) that we request contributor
 
 This repo uses [Lerna] as a top level setup.
 
--   Install `gulp` command
+-   Install `clap` command
 
 ```bash
-$ npm install -g gulp-cli
+$ npm install -g xclap-cli
 ```
 
 -   Fork and clone the repo at <https://github.com/electrode-io/electrode.git>
@@ -28,7 +28,7 @@ Run:
 ```bash
 $ npm install
 $ npm run bootstrap
-$ gulp samples-local
+$ clap samples-local
 ```
 
 -   Now you can go to the `samples` folder, pick or create any samples, develop and test your changes over there.
@@ -38,7 +38,7 @@ For example, run the `universal-react-node` samples in `dev` mode:
 ```bash
 $ cd samples/universal-react-node
 $ npm install
-$ gulp dev
+$ clap dev
 ```
 
 After running above, you should see a similar text as `Hapi.js server running at http://m-C02SL0GSG8WM.local:3000` in command line.
@@ -48,7 +48,7 @@ And when you open the browser at `http://localhost:3000`, you should see a large
 You can also run in `hot` mode.  However, `hot` mode is still experimental and there are issues.
 
 ```bash
-$ gulp hot
+$ clap hot
 ```
 
 ## Contributing Guidelines

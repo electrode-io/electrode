@@ -4,10 +4,8 @@
 
 Now run it and explore the live demo!
 
-```
-$ cd demo-app
-$ gulp dev
-```
+    $ cd demo-app
+    $ clap dev
 
 Open `http://localhost:3000` in your browser to see your live demo. You will first see a Guest List header with a checkbox listing all of our resources, now referred to as Friends:
 

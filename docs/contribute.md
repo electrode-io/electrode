@@ -10,7 +10,6 @@ for contributors. Make an impact: Help to maintain Electrode and make it even gr
 
 [electrode](https://github.com/electrode-io/electrode)
 
-* [263](https://github.com/electrode-io/electrode/issues/263) gulp build broken
 * [232](https://github.com/electrode-io/electrode/issues/232) Boilerplate not running in Production mode, test fails
 * [135](https://github.com/electrode-io/electrode/issues/135) \[HMR\] css are not updated in hot mode
 
@@ -39,4 +38,3 @@ for contributors. Make an impact: Help to maintain Electrode and make it even gr
 * [219](https://github.com/electrode-io/electrode/issues/219) Can we have an Electrode + Parse Server\(express.js\) sample project with SSR
 
 [See All](https://github.com/repos/electrode-io/electrode/issues%7B/number%7D)
-

@@ -67,7 +67,7 @@ We'll need a place to keep all of the resources we learned in the [Get Started](
 
 `<your-awesome-app> /src/client/components/home.jsx`:
 
-```
+```js
 import React, {PropTypes} from "react";
 import {connect} from "react-redux";
 import {toggleCheck, incNumber, decNumber} from "../actions";
@@ -144,7 +144,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 Let's finish the UI by adding styles. Navigate to`<your-awesome-app>/src/client/styles/base.css` and add the code below:
 
-```
+```css
 h1 {
   font-size: 16px;
   color: red;
@@ -175,8 +175,8 @@ a:hover {
 
 Run our new favorite command to see your tech list:
 
-```
-$ gulp dev
+```bash
+$ clap dev
 ```
 
 Navigate to [https://localhost:3000](https://localhost:3000]/).
@@ -188,4 +188,3 @@ Navigate to [https://localhost:3000](https://localhost:3000]/).
 ![](http://i.imgur.com/nwEl64l.png)
 
 Now let's jump to our next step, where we will deploy Your Awesome App to [Heroku](/chapter1/quick-start/deploy-your-app.md).
-

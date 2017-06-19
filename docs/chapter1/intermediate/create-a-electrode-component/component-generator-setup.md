@@ -6,17 +6,17 @@ Are you ready to build your first Electrode Component?
 
 ## Installation
 
-First, install [Yeoman](http://yeoman.io/) and [gulp](http://gulpjs.com/) if you haven't yet. Install  [generator-electrode](https://github.com/electrode-io/electrode/tree/master/packages/generator-electrode) using npm (we assume you have pre-installed node.js (> 4.2.x required)).
+First, install [Yeoman](http://yeoman.io/) and [xclap-cli] if you haven't yet. Install  [generator-electrode](https://github.com/electrode-io/electrode/tree/master/packages/generator-electrode) using npm (we assume you have pre-installed node.js (> 4.2.x required)).
 
+```bash
+$ npm install -g yo xclap-cli generator-electrode
 ```
-$ npm install -g yo gulp
-$ npm install -g generator-electrode
-```
+
 > Note: You may need sudo depending on your machine permissions.
 
 Then create a completely new folder and run the generator:
 
-```
+```bash
 $ mkdir your-awesome-component-folder
 $ cd your-awesome-component-folder
 $ yo electrode:component
@@ -24,11 +24,11 @@ $ yo electrode:component
 
 Fill out the Electrode Component generator with your information (below is a sample):
 
-```
+```bash
 Welcome to the Electrode Component Generator
 
 We're going to set up a new Electrode component, ready for development with
-gulp, webpack, demo, electrode component archetype, and live-reload
+[xclap], webpack, demo, electrode component archetype, and live-reload
 ? What is your Package/GitHub project name? (e.g., 'wysiwyg-component') your-awesome-component
 ? What is the ClassName for your component?
 ? What will be the npm package name?
@@ -38,11 +38,11 @@ gulp, webpack, demo, electrode component archetype, and live-reload
 ? Use double quotes or single quotes? "
 ? What is the name of the GitHub repo where this will be published?
 ? Would you like to create a new directory for your project? Yes
-   create .gitignore
-   create package.json
-   create README.md
-   create lerna.json
-   create packages/wysiwyg-component/.babelrc
+    create .gitignore
+    create package.json
+    create README.md
+    create lerna.json
+    create packages/wysiwyg-component/.babelrc
 ```
 
 After the installation finished, your new Electrode component is ready!
@@ -51,9 +51,9 @@ After the installation finished, your new Electrode component is ready!
 
 Preview your component by using the demo-app. This is an electrode app which uses your newly created component:
 
-```
+```bash
 $ cd <your-awesome-component>/demo-app
-$ gulp dev
+$ clap dev
 ```
 
 A webserver will be started on localhost:3000. Your new component will be used in `demo-app/src/client/components/home.jsx`
@@ -62,7 +62,7 @@ A webserver will be started on localhost:3000. Your new component will be used i
 
 If you want to add one more component to your project, you can run `yo electrode:component-add` within the packages directory.
 
-```
+```bash
 $ cd packages
 $ yo electrode:component-add
 ```
