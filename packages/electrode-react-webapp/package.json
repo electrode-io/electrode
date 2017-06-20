@@ -3,8 +3,8 @@
   "version": "1.6.0",
   "description": "Hapi plugin that provides a default React web app template",
   "scripts": {
-    "lint": "gulp lint",
-    "test": "npm run lint && gulp test",
+    "lint": "clap lint",
+    "test": "npm run lint && clap test",
     "prepublish": "if in-publish; then npm test; fi"
   },
   "homepage": "http://www.electrode.io",
@@ -50,11 +50,11 @@
     "babel-preset-es2015-loose": "^7.0.0",
     "babel-preset-react": "^6.0.15",
     "babel-preset-stage-0": "^6.0.15",
-    "electrode-archetype-njs-module-dev": "^1.0.1",
+    "electrode-archetype-njs-module-dev": "^2.1.0",
     "electrode-server": "^1.0.1",
-    "gulp": "^3.9.1",
     "object-assign": "^4.1.0",
     "superagent": "^1.6.1",
-    "uglify-js": "^2.6.2"
+    "uglify-js": "^2.6.2",
+    "xclap": "^0.2.0"
   }
 }
