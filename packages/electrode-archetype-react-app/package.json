@@ -2,7 +2,7 @@
   "name": "electrode-archetype-react-app",
   "version": "2.4.0",
   "description": "Electrode NodeJS/React Universal Application Archetype",
-  "main": "arch-gulpfile.js",
+  "main": "arch-clap.js",
   "homepage": "http://www.electrode.io",
   "repository": {
     "type": "git",

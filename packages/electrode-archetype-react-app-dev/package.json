@@ -48,7 +48,6 @@
     "electrode-bundle-analyzer": "^1.0.0",
     "electrode-cdn-file-loader": "^1.0.0",
     "electrode-electrify": "^1.0.0",
-    "electrode-gulp-helper": "^1.0.5",
     "electrode-webpack-reporter": "^0.3.6",
     "eslint": "^3.9.1",
     "eslint-config-walmart": "^1.1.0",
@@ -59,7 +58,6 @@
     "file-loader": "^0.11.1",
     "fs-extra": "^0.26.5",
     "glob": "^7.0.6",
-    "gulp": "^3.9.1",
     "isomorphic-loader": "^1.0.0",
     "isparta-loader": "^2.0.0",
     "istanbul": "^0.3.18",
@@ -115,6 +113,7 @@
     "webpack-disk-plugin": "0.0.2",
     "webpack-stats-plugin": "^0.1.1",
     "winston": "^2.3.1",
+    "xclap": "^0.2.0",
     "xsh": "^0.3.2"
   },
   "optionalDependencies": {
