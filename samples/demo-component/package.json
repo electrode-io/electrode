@@ -1,0 +1,26 @@
+{
+  "name": "demo-component",
+  "version": "1.0.0",
+  "description": "Electrode Demo Component repo",
+  "author": {
+    "name": "Joel Chen",
+    "url": "https://github.com/jchip"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electrode-io/electrode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/electrode-io/electrode/issues"
+  },
+  "homepage": "https://github.com/electrode-io/electrode",
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "test": "npm run bootstrap && lerna run test"
+  },
+  "dependency": {},
+  "devDependencies": {
+    "lerna": "^2.0.0-rc.1",
+    "lodash": "^4.10.1"
+  }
+}

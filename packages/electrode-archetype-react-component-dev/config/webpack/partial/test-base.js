@@ -12,16 +12,12 @@ var prodCfg = require("../webpack.config");
  * https://github.com/sinonjs/sinon/pull/600#issuecomment-162529457
  */
 /*
- * Added fix for "gulp check" on Windows
+ * Added fix for "clap check" on Windows
  */
 if (process.platform === "win32") {
-  prodCfg.module.noParse = [
-    /node_modules\\sinon\\/
-  ];
+  prodCfg.module.noParse = [/node_modules\\sinon\\/];
 } else {
-  prodCfg.module.noParse = [
-    /node_modules\/sinon\//
-  ];
+  prodCfg.module.noParse = [/node_modules\/sinon\//];
 }
 
 module.exports = {
@@ -34,5 +30,5 @@ module.exports = {
     "react/addons": true, // important!! https://github.com/airbnb/enzyme/issues/302
     "react/lib/ExecutionEnvironment": true,
     "react/lib/ReactContext": true
-  },
-}
+  }
+};

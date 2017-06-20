@@ -1,7 +1,7 @@
 Development
 ===========
 
-We use `gulp` and `npm` to control all aspects of development and
+We use `clap` and `npm` to control all aspects of development and
 publishing.
 
 
@@ -11,7 +11,7 @@ Build for production use (NPM, bower, etc) and create `dist` UMD bundles
 (min'ed, non-min'ed)
 
 ```
-$ gulp build
+$ clap build
 ```
 
 Note that `dist/` files are only updated and committed on **tagged releases**.
@@ -26,18 +26,18 @@ Run the `demo` application with watched rebuilds either doing:
 
 ### Basic Watched Builds
 
-```sh
-$ gulp dev       # dev test/app server
-$ gulp open-dev  # (OR) dev servers _and a browser window opens!_
+```bash
+$ clap dev       # dev test/app server
+$ clap open-dev  # (OR) dev servers _and a browser window opens!_
 ```
 
 ### Watched Builds + Hot Reloading
 
 Same as above, but with hot reloading of React components.
 
-```sh
-$ gulp hot       # hot test/app server
-$ gulp open-hot  # (OR) hot servers _and a browser window opens!_
+```bash
+$ clap hot       # hot test/app server
+$ clap open-hot  # (OR) hot servers _and a browser window opens!_
 ```
 
 From there, using either `dev` or `hot`, you can see:
@@ -70,32 +70,32 @@ Testing is an important part of the development process at Walmart. The technolo
 
 During development, you are expected to be running either:
 
-```sh
-$ gulp dev
+```bash
+$ clap dev
 ```
 
 to build the lib and test files. With these running, you can run the faster
 
-```sh
-$ gulp check-dev
+```bash
+$ clap check-dev
 ```
 
 Command. It is comprised of:
 
-```sh
-$ gulp lint
-$ gulp test-dev
+```bash
+$ clap lint
+$ clap test-dev
 ```
 
 Note that the tests here are not instrumented for code coverage and are thus
 more development / debugging friendly.
 
 ### Hot Test Running
-Assuming you have one terminal with `gulp hot` you can have your tests run hot as well:
+Assuming you have one terminal with `clap hot` you can have your tests run hot as well:
 
-```sh
-$ gulp test-watch # if you already have hot running on a tab.
-$ gulp concurrent-test-watch # If you want to run in only 1 terminal window.
+```bash
+$ clap test-watch # if you already have hot running on a tab.
+$ clap concurrent-test-watch # If you want to run in only 1 terminal window.
 ```
 
 **NOTE: ** This feature is relatively new and occasionally your tests will run _before_ the new
@@ -106,20 +106,20 @@ webpack build is completed. This is okay, just try saving a file to reload all o
 CI doesn't have source / test file watchers, so has to _build_ the test files
 via the commands:
 
-```sh
-$ gulp check     # PhantomJS only
-$ gulp check-cov # (OR) PhantomJS w/ coverage
-$ gulp check-ci  # (OR) PhantomJS,Firefox + coverage - available on Travis.
+```bash
+$ clap check     # PhantomJS only
+$ clap check-cov # (OR) PhantomJS w/ coverage
+$ clap check-ci  # (OR) PhantomJS,Firefox + coverage - available on Travis.
 ```
 
 Which is currently comprised of:
 
-```sh
-$ gulp lint  # AND ...
+```bash
+$ clap lint  # AND ...
 
-$ gulp test      # PhantomJS only
-$ gulp test-cov  # (OR) PhantomJS w/ coverage
-$ gulp test-ci   # (OR) PhantomJS,Firefox + coverage
+$ clap test      # PhantomJS only
+$ clap test-cov  # (OR) PhantomJS w/ coverage
+$ clap test-ci   # (OR) PhantomJS,Firefox + coverage
 ```
 
 Note that `(test|check)-(cov|ci)` run code coverage and thus the
@@ -129,13 +129,13 @@ test code may be harder to debug because it is instrumented.
 
 The client tests rely on webpack dev server to create and serve the bundle
 of the app/test code at: http://127.0.0.1:3001/assets/main.js which is done
-with the task `gulp server-test` (part of `npm dev`).
+with the task `clap server-test` (part of `npm dev`).
 
 ### Code Coverage
 Code coverage is generated via the commands:
 
-```sh
-$ gulp check-cov # part of `gulp check` task
+```bash
+$ clap check-cov # part of `clap check` task
 ```
 
 Code coverage reports are outputted to:
@@ -153,17 +153,17 @@ Test results are output to test.html which can view by opening
 
 Run either of the below commands before opening the link.
 
-```sh
-gulp server-test
-gulp dev            # (OR) (which includes `server-test`)
-gulp hot            # (OR) (which includes `server-test`)
+```bash
+clap server-test
+clap dev            # (OR) (which includes `server-test`)
+clap hot            # (OR) (which includes `server-test`)
 ```
 ## Releases
 
 **IMPORTANT - NPM**: To correctly run `preversion` your first step is to make
 sure that you have a very modern `npm` binary:
 
-```sh
+```bash
 $ npm install -g npm
 ```
 
@@ -171,7 +171,7 @@ Built files in `dist/` should **not** be committed during development or PRs.
 Instead we _only_ build and commit them for published, tagged releases. So
 the basic workflow is:
 
-```sh
+```bash
 # Make sure you have a clean, up-to-date `master`
 $ git pull
 $ git status # (should be no changes)

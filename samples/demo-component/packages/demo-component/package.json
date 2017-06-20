@@ -1,0 +1,42 @@
+{
+  "name": "demo-component",
+  "version": "1.0.0",
+  "description": "Electrode Demo Component",
+  "main": "lib/index.js",
+  "author": {
+    "name": "Joel Chen",
+    "url": "https://github.com/jchip"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electrode-io/electrode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/electrode-io/electrode/issues"
+  },
+  "homepage": "https://github.com/electrode-io/electrode",
+  "dependencies": {
+    "material-ui": "^0.18.3",
+    "react-tap-event-plugin": "^2.0.1"
+  },
+  "devDependencies": {
+    "electrode-archetype-react-component": "../../../../packages/electrode-archetype-react-component",
+    "electrode-archetype-react-component-dev": "../../../../packages/electrode-archetype-react-component-dev",
+    "xclap": "^0.2.0"
+  },
+  "engines": {
+    "node": ">= 4",
+    "npm": ">= 3"
+  },
+  "scripts": {
+    "prepublish": "clap prepublish",
+    "start": "clap demo",
+    "test": "clap check"
+  },
+  "keywords": [
+    "react",
+    "electrode",
+    "electrode-component",
+    "react-component"
+  ]
+}
