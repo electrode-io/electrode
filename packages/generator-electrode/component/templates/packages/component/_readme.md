@@ -9,16 +9,16 @@ Live demo: [<%= ghUser %>.github.io/<%= packageName %>](http://<%= ghUser %>.git
 
 To build the package locally, run:
 
-```
-npm install
+```bash
+$ npm install
 
 ```
 
 To run the package demo locally, run the `demo-app` :
 
-```
-npm install
-gulp dev
+```bash
+$ npm install
+$ clap dev
 
 ```
 
@@ -31,8 +31,8 @@ The easiest way to use <%= packageName %> is to install it from NPM and include 
 
 You can also use the standalone build by including `dist/<%= packageName %>.js` in your page. If you use this, make sure you have already included React, and it is available as a global variable.
 
-```
-npm install <%= packageName %> --save
+```bash
+$ npm install <%= packageName %> --save
 ```
 
 
@@ -40,7 +40,7 @@ npm install <%= packageName %> --save
 
 __EXPLAIN USAGE HERE__
 
-```
+```js
 var <%= componentName %> = require('<%= packageName %>');
 
 <<%= componentName %>>Example</<%= componentName %>>

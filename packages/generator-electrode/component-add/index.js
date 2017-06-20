@@ -194,7 +194,7 @@ module.exports = generators.Base.extend({
       "\n" +
       "\nYour component is in " + this.packageName + " and your demo app is in ../" + this.demoAppName +
       "\n" +
-      "\nType 'cd ../" + this.demoAppName + "' then 'gulp dev' to run the development build for the demo app." +
+      "\nType 'cd ../" + this.demoAppName + "' then 'clap dev' to run the development build for the demo app." +
       "\n"
     );
   }

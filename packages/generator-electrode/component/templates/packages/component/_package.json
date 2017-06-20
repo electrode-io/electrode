@@ -18,17 +18,16 @@
   "dependencies": {},
   "devDependencies": {
     "electrode-archetype-react-component": "^2.0.0",
-    "electrode-archetype-react-component-dev": "^2.0.0",
-    "gulp": "^3.9.1"
+    "electrode-archetype-react-component-dev": "^2.0.0"
   },
   "engines": {
-    "node": "^4.2.6",
-    "npm": "^3.5.3"
+    "node": ">= 4",
+    "npm": ">= 3"
   },
   "scripts": {
-    "prepublish": "gulp prepublish",
-    "start": "gulp demo",
-    "test": "gulp check"
+    "prepublish": "clap prepublish",
+    "start": "clap demo",
+    "test": "clap check"
   },
   "keywords": [
     "react",

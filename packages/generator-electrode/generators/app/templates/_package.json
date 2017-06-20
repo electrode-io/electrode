@@ -15,16 +15,16 @@
   "repository": {},
   "license": "ISC",
   "engines": {
-    "node": "^4.x.x || ^6.x.x || ^7.x.x",
-    "npm": ">= 3.x.x"
+    "node": ">= 4",
+    "npm": ">= 3"
   },
   "scripts": {
-    "prestart": "gulp build",
-    "start": "if test \"$NODE_ENV\" = \"production\"; then npm run prod; else gulp dev; fi",
-    "test": "gulp check",
-    "coverage": "gulp check",
+    "prestart": "clap build",
+    "start": "if test \"$NODE_ENV\" = \"production\"; then npm run prod; else clap dev; fi",
+    "test": "clap check",
+    "coverage": "clap check",
     "prod": "echo 'Starting standalone server in PROD mode'; NODE_ENV=production node ./lib/server/",
-    "heroku-postbuild": "gulp build"
+    "heroku-postbuild": "clap build"
   },
   "dependencies": {
     "bluebird": "^3.4.6",
@@ -46,6 +46,6 @@
   },
   "devDependencies": {
     "electrode-archetype-react-app-dev": "^2.0.0",
-    "gulp": "^3.9.1"
+    "xclap": "^0.2.0"
   }
 }

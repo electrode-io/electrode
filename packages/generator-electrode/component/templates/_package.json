@@ -15,12 +15,13 @@
   },
   "homepage": "<%= githubUrl %>/<%= packageGitHubOrg %>/<%= ghRepo %>",
   "scripts": {
-    "test": "lerna bootstrap && lerna run test"
+    "bootstrap": "lerna bootstrap",
+    "test": "lerna run test"
   },
   "dependency": {},
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "lerna": "^2.0.0-rc.1",
-    "lodash": "^4.10.1"
+    "lerna": "^2.0.0-rc.5",
+    "lodash": "^4.10.1",
+    "xclap": "^0.2.0"
   }
 }

@@ -326,7 +326,7 @@ module.exports = generators.Base.extend({
     // Let's extend package.json so we're not overwriting user previous fields
     this.fs.writeJSON(this.destinationPath('package.json'), pkg);
 
-    const rootConfigsToCopy = ['gulpfile.js', 'config', 'test'];
+    const rootConfigsToCopy = ['clap.js', 'config', 'test'];
     if (isSingleQuote) rootConfigsToCopy.push('.eslintrc');
     rootConfigsToCopy.forEach((f) => {
       this.fs.copyTpl(
@@ -505,7 +505,7 @@ module.exports = generators.Base.extend({
       this.log(
         "\n" + chalk.green.underline("Your new Electrode application is ready!") +
         "\n" +
-        "\nType " + chdir + "'gulp dev' to start the server." +
+        "\nType " + chdir + "'clap dev' to start the server." +
         "\n"
       );
     }

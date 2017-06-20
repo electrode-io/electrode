@@ -1,14 +1,14 @@
 # generator-electrode
 
 [![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url] [![devDependency Status][daviddm-dev-image]][daviddm-dev-url] [![npm downloads][npm-downloads-image]][npm-downloads-url]
-> Generate Electrode ~~Isomorphic~~ Universal React App with NodeJS backend or a React component with useful gulp tasks for development, building and publishing.
+> Generate Electrode ~~Isomorphic~~ Universal React App with NodeJS backend or a React component with useful clap tasks for development, building and publishing.
 
 ## Installation
 
-First, install [Yeoman], [gulp], and generator-electrode using [npm] (we assume you have pre-installed [node.js] (> 4.2.x required)).
+First, install [Yeoman], [xclap-cli], and generator-electrode using [npm] (we assume you have pre-installed [node.js] (> 4.2.x required)).
 
 ```bash
-$ npm install -g yo gulp generator-electrode
+$ npm install -g yo xclap-cli generator-electrode
 ```
 
 > Note: You may need add `sudo` to the command.
@@ -34,15 +34,15 @@ $ npm start
 
 Wait for webpack to be ready and navigate to `http://localhost:3000` with your browser.
 
-You can run [gulp] to see the list of tasks available.
+You can run [clap] to see the list of tasks available.
 
 Some common ones:
 
-  - `gulp dev` - start in webpack-dev-server development mode
-  - `gulp hot` - start in webpack-dev-server hot mode
-  - `gulp build` - build production `dist` files
-  - `gulp server-prod` - start server in production mode
-  - `gulp check` - run unit tests with coverage
+  - `clap dev` - start in webpack-dev-server development mode
+  - `clap hot` - start in webpack-dev-server hot mode
+  - `clap build` - build production `dist` files
+  - `clap server-prod` - start server in production mode
+  - `clap check` - run unit tests with coverage
 
 ## Generating a React Component
   Install the generator if you haven't already:
@@ -73,7 +73,7 @@ component.
 
 The component project structure uses a [Lerna](https://lernajs.io/) structure, which can help manage multiple repos within your `packages` directory. Your initial project structure will be :
 
-```bash
+```text
 test-component/
 ├── README.md
 ├── demo-app
@@ -84,7 +84,7 @@ test-component/
 │   │   ├── development.json
 │   │   ├── production.js
 │   │   └── production.json
-│   ├── gulpfile.js
+│   ├── clap.js
 │   ├── package.json
 │   ├── src
 │   │   ├── client
@@ -114,7 +114,7 @@ test-component/
 └── packages
     └── test-component
         ├── README.md
-        ├── gulpfile.js
+        ├── clap.js
         ├── package.json
         ├── src
         │   ├── components
@@ -157,7 +157,7 @@ Preview your component by using the `demo-app`. This is an electrode app which u
 
 ```bash
 $ cd demo-app
-$ gulp demo
+$ clap demo
 ```
 
 A webserver will be started on [localhost:3000](http://127.0.0.1:3000).
@@ -188,7 +188,7 @@ Apache-2.0 © WalmartLabs
 [daviddm-dev-url]:https://david-dm.org/electrode-io/electrode?path=packages/generator-electrode?type-dev
 [npm-downloads-image]:https://img.shields.io/npm/dm/generator-electrode.svg
 [npm-downloads-url]:https://www.npmjs.com/package/generator-electrode
-[gulp]: http://gulpjs.com/
+[xclap-cli]: https://www.npmjs.com/package/xclap-cli
 [Yeoman]: http://yeoman.io
 [npm]: https://www.npmjs.com/
 [node.js]: https://nodejs.org/
