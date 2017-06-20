@@ -32,8 +32,6 @@ The next frontier in performant progressive web apps: availability without a net
 
 *  <a href="https://travis-ci.org/" target="_blank">TravisCI</a> - a continuous integration service to build and test software projects.
 
-*  <a href="http://gulpjs.com/" target="_blank">Gulp</a> - a Javascript build tool that lets us automate tasks.
-
 *  <a href="http://yeoman.io/" target="_blank">Yeoman</a> - a Scaffolding tool for modern webapps.
 
 *  <a href="https://www.npmjs.com/package/history" target="_blank">History</a> - a Javascript library for managing session history.
@@ -79,7 +77,7 @@ npm install
 - Start the electrode app in `development` environment:
 
 ```bash
-$ NODE_ENV=development gulp hot
+$ NODE_ENV=development clap hot
 ```
 
 Running in development mode will also enable Redux Devtools so you can easily access the state of the Redux store. Please install the [Redux Devtools extension in Chrome](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en) to enable this feature.
@@ -87,8 +85,8 @@ Running in development mode will also enable Redux Devtools so you can easily ac
 - Start the electrode app in `production` environment:
 
 ```bash
-$ gulp build
-$ gulp server-prod
+$ clap build
+$ clap server-prod
 ```
 
 - Running in the selected environment should load the appropriate configuration settings
@@ -96,8 +94,8 @@ $ gulp server-prod
 - Start the electrode app with `service workers`
 
 ```bash
-$ gulp build
-$ gulp server
+$ clap build
+$ clap server
 ```
 Service worker currently does not work with webpack dev server. You need to build first and then run the server.
 
@@ -105,7 +103,7 @@ Service worker currently does not work with webpack dev server. You need to buil
 You can bootstrap a new electrode web application from scratch by doing:
 
 ```bash
-npm install -g yo generator-electrode gulp
+npm install -g yo generator-electrode xclap-cli
 yo electrode
 ```
 This will set up an Electrode webapplication which will have 2 of the above 6 modules. The two modules that are available by default are:
@@ -369,14 +367,14 @@ require("electrode-server")(config, [staticPathsDecor()]);
 - Start the electrode app in `development` environment:
 
 ```bash
-$ NODE_ENV=development gulp hot
+$ NODE_ENV=development clap hot
 ```
 
 - Start the electrode app in `production` environment:
 
 ```bash
-$ gulp build
-$ gulp server-prod
+$ clap build
+$ clap server-prod
 ```
 
 - Running in the selected environment should load the appropriate configuration settings
@@ -423,12 +421,12 @@ An Electrode Javascript bundle viewer aptly named [Electrify](https://github.com
 
 #### Integration points in your app ####
 
-- Use [electrode-archetype-react-app](https://github.com/electrode-io/electrode-archetype-react-app) which is already integrated with [electrify](https://github.com/electrode-io/electrify) and part of [electrode-boilerplate-universal-react-node](https://github.com/electrode-io/electrode-boilerplate-universal-react-node), all you have to do is run **gulp electrify** after installing [electrode-archetype-react-app](https://github.com/electrode-io/electrode-archetype-react-app) in your app.
+- Use [electrode-archetype-react-app](https://github.com/electrode-io/electrode-archetype-react-app) which is already integrated with [electrify](https://github.com/electrode-io/electrify) and part of [electrode-boilerplate-universal-react-node](https://github.com/electrode-io/electrode-boilerplate-universal-react-node), all you have to do is run **clap electrify** after installing [electrode-archetype-react-app](https://github.com/electrode-io/electrode-archetype-react-app) in your app.
 - [Electrify](https://github.com/electrode-io/electrify) dependency `sudo npm install -g electrode-electrify
 ` and npm task runner integration.
 - [Electrify](https://github.com/electrode-io/electrify) command line interface (CLI) `electrify <path-to-stats.json> --open`.
 
-`Electrode-boilerplate-universal-react-node` & [electrode-scaffolder](https://github.com/electrode-io/generator-electrode) internally use `electrode-archetype-react-app` hence `gulp electrify` on your terminal will start the bundle viewer in the browser.
+`Electrode-boilerplate-universal-react-node` & [electrode-scaffolder](https://github.com/electrode-io/generator-electrode) internally use `electrode-archetype-react-app` hence `clap electrify` on your terminal will start the bundle viewer in the browser.
 
 When you install Electrify globally using `sudo npm install -g electrode-electrify`, the `Electrify` command-line tool is made available as the quickest means of checking out your bundle. As of `electrode-electrify v1.0.0`, the tool takes any [webpack-stats](http://webpack.github.io/docs/node.js-api.html#stats-tojson) object as input and starts out a standalone HTML page as output in your browser, all you have to do is type `electrify <path to stats.json> --open` on your terminal.
 
@@ -567,7 +565,7 @@ Change this to:
 Run the commands below and test it out in your app:
 
 ```bash
-  gulp hot
+  clap hot
 ```
 
 The code in the `<h3>` tags that are above and below the `<AboveTheFoldOnlyServerRender skip={true}> </AboveTheFoldOnlyServerRender>` will render first:
@@ -710,7 +708,7 @@ You can view an example [`bundle.analyze.tsv`](https://docs.google.com/spreadshe
 The Electrode Boilerplate's webpack config is already preconfigured to work with Bundle Analyzer, we just need to set the `OPTIMIZE_STATS=true` environment variable to generate the appropriate webpack build output:
 
 ```bash
-NODE_ENV=development OPTIMIZE_STATS=true gulp build
+NODE_ENV=development OPTIMIZE_STATS=true clap build
 analyze-bundle --bundle dist/js/bundle.42603ce3a63db995958f.js --stats dist/server/stats.json
 ```
 

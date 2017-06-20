@@ -6,10 +6,10 @@ This "app archetype" provides for common patterns across all app projects so tha
 
 ```bash
 # This runs both the node server and webpack (in hot mode)
-$ gulp hot
+$ clap hot
 
 # Also try `dev` mode when running off battery power and you wish to maximize battery life.
-$ gulp dev
+$ clap dev
 ```
 
 #### What is `hot mode`?
@@ -20,35 +20,35 @@ $ gulp dev
 
 ```bash
 # This will run test eslint and your spec tests
-$ gulp check
+$ clap check
 ```
 
 #### How do I run my application tests without going through eslint (i.e., while I'm developing)?
 
 ```bash
 # This will run only your spec tests
-$ gulp test-dev
+$ clap test-dev
 ```
 
 #### Why can't my test and code changes get automatically run with the tests?  Why do the tests take so long to start?
 
 ```bash
 # This will start a webpack-dev-server to hot watch your code and also start a karma test browser that auto-reruns when specs or client code changes.
-$ gulp test-watch-all
+$ clap test-watch-all
 ```
 
 #### How do I use and/or view the final build files without minifying/uglifying but also with sourcemaps?
 
 ```bash
 # This will build your code and save to disk, and then start a node server (without using webpack-dev-server).
-$ gulp dev-static
+$ clap dev-static
 ```
 
 #### Is there anything else that might be nice for my development?
 
 ```bash
 # This will start the node server in debug mode so that you can place breakpoints, "debugger" statements, or use `node-inspector`.
-$ gulp debug
+$ clap debug
 ```
 
 #### How do I view my test result in the browser?
@@ -56,9 +56,9 @@ $ gulp debug
 Run either of the below commands before opening the link.
 
 ```
-gulp server-test
-gulp dev # (OR) (which includes `server-test`)
-gulp hot # (OR) (which includes `server-test`)
+clap server-test
+clap dev # (OR) (which includes `server-test`)
+clap hot # (OR) (which includes `server-test`)
 ```
 This will serve the static assets for test.html
 
@@ -71,19 +71,21 @@ First we need to add a `sw-config.js` file under the app's `config` folder.
 This file contains two sections:
 
 ##### 1. Manifest
-  ```
+
+```js
 manifest: {
   logo: "./images/icon.png",
   title: "Electrode Progressive App",
   short_name: "EPA",
   start_url: "/"
 }
-  ```
+```
+
   Manifest gives you control over how your web app is installed on user's home screen with `short_name, title and logo` properties. You can also specify a starting path to launch your app with `start_url` property. Manifest defines how your app appears to the user and more importantly how they can launch it.
 
 ##### 2. Cache
 
-```
+```js
 cache: {
   runtimeCaching: [{
     handler: "fastest",
@@ -101,8 +103,8 @@ cache: {
 
 Once this file is added, running
 
-```
-gulp build
+```bash
+$ clap build
 ```
 
 will generate a `manifest.json` file inside of `dist/js/icons-[hash]` and a service worker file `dist/sw.js`.
@@ -110,7 +112,7 @@ will generate a `manifest.json` file inside of `dist/js/icons-[hash]` and a serv
 `Service Worker` file is generated during the build step and it will precache all the static resources as per the configuration in `sw-config.js`.
 Using `AboveTheFoldOnlyServerRender` you can avoid caching of certain components inside the crucial pages of your app to make your _App shell_ even lighter.
 
-```
+```js
 <AboveTheFoldOnlyServerRender skip={true}>
   <div>
     this will not be a part of your app shell

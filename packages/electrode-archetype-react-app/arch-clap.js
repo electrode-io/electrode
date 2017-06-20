@@ -6,12 +6,27 @@ const assert = require("assert");
 
 assert(!archetype.noDev, "dev archetype is missing - development & build tasks not possible");
 
+
 const Path = require("path");
 const devRequire = archetype.devRequire;
-const gulpHelper = devRequire("electrode-gulp-helper");
-const shell = gulpHelper.shell;
+
+const chalk = devRequire("chalk");
+
+if (process.argv[1].indexOf("gulp") >= 0) {
+  const cmd = chalk.magenta(`clap ${process.argv.slice(2).join(" ")}`);
+  console.log(`\nPlease use ${chalk.magenta("clap")} to run archetype commands.`);
+  console.log(`\nie:  ${cmd}`);
+  const icmd = chalk.magenta(`'npm i -g xclap-cli'`);
+  console.log(`\nIf you haven't done so, please run ${icmd}\n`);
+  process.exit(1);
+}
+
 const config = archetype.config;
 const mkdirp = devRequire("mkdirp");
+const xsh = devRequire("xsh");
+const shell = xsh.$;
+const exec = xsh.exec;
+const mkCmd = xsh.mkCmd;
 
 const penthouse = archetype.devRequire("penthouse");
 const CleanCSS = archetype.devRequire("clean-css");
@@ -20,9 +35,9 @@ const logger = require("./lib/logger");
 
 function setupPath() {
   const nmBin = Path.join("node_modules", ".bin");
-  gulpHelper.envPath.addToFront(Path.resolve(nmBin));
-  gulpHelper.envPath.addToFront(Path.join(archetype.devDir, nmBin));
-  gulpHelper.envPath.addToFront(Path.join(__dirname, nmBin));
+  xsh.envPath.addToFront(Path.resolve(nmBin));
+  xsh.envPath.addToFront(Path.join(archetype.devDir, nmBin));
+  xsh.envPath.addToFront(Path.join(__dirname, nmBin));
 }
 
 function setProductionEnv() {
@@ -45,7 +60,6 @@ function setOptimizeStats() {
   process.env.OPTIMIZE_STATS = "true";
 }
 
-const exec = gulpHelper.exec;
 
 const eTmpDir = archetype.eTmpDir;
 
@@ -76,10 +90,6 @@ function removeLogFiles() {
   try {
     Fs.unlinkSync(Path.resolve("archetype-debug.log"));
   } catch (e) {} // eslint-disable-line
-}
-
-function mkCmd(a) {
-  return Array.isArray(a) ? a.join(" ") : Array.prototype.slice.call(arguments).join(" ");
 }
 
 /*
@@ -134,7 +144,7 @@ function lint(options) {
 }
 
 /*
- * [generateServiceWorker gulp task to generate service worker code that will precache specific
+ * [generateServiceWorker clap task to generate service worker code that will precache specific
  * resources so they work offline.]
  *
  */
@@ -209,7 +219,7 @@ function inlineCriticalCSS() {
  *
  * For information on how to specify a task, see:
  *
- * https://www.npmjs.com/package/electrode-gulp-helper#taskdata
+ * https://www.npmjs.com/package/xclap
  *
  */
 
@@ -502,7 +512,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     server: ["app-server"], // keep old server name for backward compat
 
     "app-server": {
-      desc: "Start the app server only, Must have dist by running `gulp build` first.",
+      desc: "Start the app server only, Must have dist by running `clap build` first.",
       task: () => {
         AppMode.setEnv(AppMode.lib.dir);
         return exec(`node ${Path.join(AppMode.lib.server, "index.js")}`);
@@ -517,7 +527,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     "server-prod": {
       dep: [".production-env", ".static-files-env"],
       desc:
-        "Start server in production mode with static files routes.  Must have dist by running `gulp build`.",
+        "Start server in production mode with static files routes.  Must have dist by running `clap build`.",
       task: () => {
         AppMode.setEnv(AppMode.lib.dir);
         return exec(`node ${Path.join(AppMode.lib.server, "index.js")}`);
@@ -592,8 +602,8 @@ Individual .babelrc files were generated for you in src/client and src/server
 
     "test-watch": () =>
       exec(`pgrep -fl "webpack-dev-server.*${archetype.webpack.testPort}"`)
-        .then(() => exec(`gulp test-frontend-dev-watch`))
-        .catch(() => exec(`gulp test-watch-all`)),
+        .then(() => `test-frontend-dev-watch`)
+        .catch(() => `test-watch-all`),
 
     "test-frontend": mkCmd(`karma`,
       `start ${config.karma}/karma.conf.js --colors`),
@@ -607,7 +617,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     "test-frontend-dev": () =>
       exec(`pgrep -fl "webpack-dev-server.*${archetype.webpack.testPort}"`)
         .then(() => exec(`karma start ${config.karma}/karma.conf.dev.js --colors`))
-        .catch(() => exec(`gulp test-frontend`)),
+        .catch(() => `test-frontend`),
 
     "test-frontend-dev-watch": mkCmd(
       `karma start`,
@@ -649,7 +659,7 @@ Individual .babelrc files were generated for you in src/client and src/server
       "build-dist:clean-tmp",
       "run-electrify-cli"
     ],
-    "build-webpack-stats-with-fullpath": {
+    "build-fp-stats": {
       desc:
         "Build static bundle with stats.json containing fullPaths to inspect the bundle on electrode-electrify",
       task: `webpack --config ${config.webpack}/webpack.config.stats.electrify.js --colors`
@@ -669,7 +679,7 @@ Individual .babelrc files were generated for you in src/client and src/server
       task: `analyze-bundle -b dist/js/bundle.*.js -s dist/server/stats.json`
     },
     pwa: {
-      desc: "PWA must have dist by running `gulp build` first and then start the app server only.",
+      desc: "PWA must have dist by running `clap build` first and then start the app server only.",
       task: ["build", "server"]
     }
   };
@@ -701,10 +711,10 @@ Individual .babelrc files were generated for you in src/client and src/server
   return tasks;
 }
 
-module.exports = function(gulp) {
+module.exports = function(xclap) {
   setupPath();
   createElectrodeTmpDir();
-  gulp = gulp || require("gulp");
+  xclap = xclap || devRequire("xclap");
   process.env.FORCE_COLOR = "true"; // force color for chalk
-  gulpHelper.loadTasks(makeTasks(gulp), gulp);
+  xclap.load("electrode", makeTasks());
 };

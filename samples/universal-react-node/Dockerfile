@@ -6,5 +6,5 @@ RUN mkdir -p $DIR
 WORKDIR $DIR
 COPY . $DIR
 RUN npm install
-RUN $DIR/node_modules/.bin/gulp build
+RUN $DIR/node_modules/.bin/clap build
 CMD node src/server
