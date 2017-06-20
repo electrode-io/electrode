@@ -10,16 +10,16 @@ assert(!archetype.noDev, "dev archetype is missing - development & build tasks n
 const Path = require("path");
 const devRequire = archetype.devRequire;
 
-const chalk = devRequire("chalk"); 
- 
-if (process.argv[1].indexOf("gulp") >= 0) { 
-  const cmd = chalk.magenta(`clap ${process.argv.slice(2).join(" ")}`); 
-  console.log(`\nPlease use ${chalk.magenta("clap")} to run archetype commands.`); 
-  console.log(`\nie:  ${cmd}`); 
-  const icmd = chalk.magenta(`'npm i -g xclap-cli'`); 
-  console.log(`\nIf you haven't done so, please run ${icmd}\n`); 
-  process.exit(1); 
-} 
+const chalk = devRequire("chalk");
+
+if (process.argv[1].indexOf("gulp") >= 0) {
+  const cmd = chalk.magenta(`clap ${process.argv.slice(2).join(" ")}`);
+  console.log(`\nPlease use ${chalk.magenta("clap")} to run archetype commands.`);
+  console.log(`\nie:  ${cmd}`);
+  const icmd = chalk.magenta(`'npm i -g xclap-cli'`);
+  console.log(`\nIf you haven't done so, please run ${icmd}\n`);
+  process.exit(1);
+}
 
 const config = archetype.config;
 const mkdirp = devRequire("mkdirp");
