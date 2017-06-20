@@ -8,11 +8,11 @@ Your component source code is in `packages/<componentName>/src` and test code is
 
 Here is the layout of packages/<componentName>:
 
-```
+```text
 └── packages
     └── <componentName>
         ├── README.md
-        ├── gulpfile.js
+        ├── clap.js
         ├── package.json
         ├── src
         │   ├── components
@@ -40,7 +40,7 @@ Here is the layout of packages/<componentName>:
 
 Here is the layout of demo-app:
 
-```
+```text
 ├── demo-app
 │   ├── LICENSE
 │   ├── README.md
@@ -49,7 +49,7 @@ Here is the layout of demo-app:
 │   │   ├── development.json
 │   │   ├── production.js
 │   │   └── production.json
-│   ├── gulpfile.js
+│   ├── clap.js
 │   ├── package.json
 │   ├── src
 │   │   ├── client

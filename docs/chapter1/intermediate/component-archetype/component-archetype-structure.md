@@ -6,7 +6,7 @@ Meanwhile, in the [new electrode components](/chapter1/intermediate/create-a-ele
 
 Below is the new structure of the Electrode React Component Archetype:
 
-```
+```text
 - electrode-archetype-react-component
   |- config/
   |  |- babel
@@ -32,11 +32,10 @@ Below is the new structure of the Electrode React Component Archetype:
   |    |- webpack.config.test.js
   |  |- archetype.js
   |- scripts/
-  |- archetype-gulpfile.js
-  |- gulpfile.js
+  |- archetype-clap.js
+  |- clap.js
   |- package.json
   ...
-
 ```
 
 The Component Archetype still provides babel, eslint, karma and webpack config files as before, files can be found under `electrode-archetype-react-component/config` folder. But there are some updates for webpack config files, which can be found in the [next section](/chapter1/intermediate/component-archetype/webpack-config.md).

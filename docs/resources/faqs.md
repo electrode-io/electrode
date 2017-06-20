@@ -23,11 +23,11 @@ Most likely you are using npm@2. Upgrade to npm@3 by running command `npm i -g n
 
 [Electrode Boilerplate](/chapter1/advanced/you-can-view-an-example-bundleanalyzetsv-output-using-the-electrode-boilerplate-code.md) includes all the bells and whistles for the SSR optimizations using the following modules configured and integrated for your use:
 
-* [Electrode Confippet](https://github.com/electrode-io/electrode-confippet)
-* [Electrode CSRF JWT](https://github.com/electrode-io/electrode-csrf-jwt)
-* [Electrode React SSR Caching](https://github.com/electrode-io/electrode-react-ssr-caching)
-* [Electrode Redux Router Engine](https://github.com/electrode-io/electrode-redux-router-engine)
-* [Above The Fold Only Server Render](https://github.com/electrode-io/above-the-fold-only-server-render)
+-   [Electrode Confippet](https://github.com/electrode-io/electrode-confippet)
+-   [Electrode CSRF JWT](https://github.com/electrode-io/electrode-csrf-jwt)
+-   [Electrode React SSR Caching](https://github.com/electrode-io/electrode-react-ssr-caching)
+-   [Electrode Redux Router Engine](https://github.com/electrode-io/electrode-redux-router-engine)
+-   [Above The Fold Only Server Render](https://github.com/electrode-io/above-the-fold-only-server-render)
 
 Head over to this amazing [blog](https://medium.com/walmartlabs/using-electrode-to-improve-react-server-side-render-performance-by-up-to-70-e43f9494eb8b#.9qjftiinq) written by [Alex Grigoryan](https://twitter.com/lexgrigoryan) about How Electrode improved Server Render performance by 70% using the [stand alone modules](/chapter1/advanced/stand-alone-modules.md) listed above.
 
@@ -39,32 +39,16 @@ _Note: If you just have one app, they probably shouldn't follow this model and e
 
 #### 6. Why do we focus on Universal JavaScript?
 
-* SEO - Because [Walmart.com](/www.walmart.com) is an eCommerce site, Search Engine Optimization is critical for our business model. To benefit from search indexing, SSR allows us to return an HTML string to search engines and our search analytics.
+-   SEO - Because [Walmart.com](/www.walmart.com) is an eCommerce site, Search Engine Optimization is critical for our business model. To benefit from search indexing, SSR allows us to return an HTML string to search engines and our search analytics.
 
-* Reusability - At [Walmart.com](/www.walmart.com) we handle highly complex user interactions at an unbelievable scale. [ReactJS](https://facebook.github.io/react/) is the chosen framework to deal with this so our developers can create reusable components that we can then run universally: on the client and the server. Creating modular and reusable components has helped us to share the same code across several different pages and even different brands. The shared components all have one single source of truth and are easy to read, debug and implement, so our engineers can focus on building great features to enrich user experience.
+-   Reusability - At [Walmart.com](/www.walmart.com) we handle highly complex user interactions at an unbelievable scale. [ReactJS](https://facebook.github.io/react/) is the chosen framework to deal with this so our developers can create reusable components that we can then run universally: on the client and the server. Creating modular and reusable components has helped us to share the same code across several different pages and even different brands. The shared components all have one single source of truth and are easy to read, debug and implement, so our engineers can focus on building great features to enrich user experience.
 
-* Maintainability - "[Code is a liability](https://medium.com/capital-one-developers/why-everyone-is-talking-about-isomorphic-universal-javascript-and-why-it-matters-38c07c87905#.y7cy5jki3)". Universal javascript allows developers to use modular components that are sharable, self-contained, and easy to reason about. We mentioned that we have thousands of components shared by thousand of developers at WalmartLabs. Creating strict best practices and tools like [Electrode-Explorer](/chapter1/advanced/powerful-electrode-tools/electrode-explorer.md) help us to strengthen the increase in maintainability that Universal JS gives us.
+-   Maintainability - "[Code is a liability](https://medium.com/capital-one-developers/why-everyone-is-talking-about-isomorphic-universal-javascript-and-why-it-matters-38c07c87905#.y7cy5jki3)". Universal javascript allows developers to use modular components that are sharable, self-contained, and easy to reason about. We mentioned that we have thousands of components shared by thousand of developers at WalmartLabs. Creating strict best practices and tools like [Electrode-Explorer](/chapter1/advanced/powerful-electrode-tools/electrode-explorer.md) help us to strengthen the increase in maintainability that Universal JS gives us.
 
 #### 7. Any plan with Graphql and React Native in the future ?
 
-We have plans for GraphQL, but it’s a bit further out. Regarding React Native, we are currently investing in it as we speak. Our first RN open source piece will be released in a few weeks, sometime in mid Oct :\). I’m super excited about it.
+We have plans for GraphQL, but it’s a bit further out. Regarding React Native, we are currently investing in it as we speak. Our first RN open source piece will be released in a few weeks, sometime in mid Oct :). I’m super excited about it.
 
 #### 8. Does electrode support hot reloading?
 
-hot-reloading of jsx is already built in electrode. `gulp hot` will enable hot-reloading.
-
-#### 9. Why does Electrode use Gulp?
-
-Initial versions of Electrode archetypes were certainly using\_npm scripts\_but we started running into a few problems and here are some of the brief benefits using gulp, we feel will help make it easy and simple for developers:
-
-### Benefits
-
-* **Maintenance**: While npm scripts in package.json are simple, they are restrictive to shell commands, and can be messy to maintain since the shell commands have to go in the package.json files and separated from any extra work that requires JS code.
-* **tasks integrated in JS**: When we turn these scripts into JS files, we get the full benefits of writing any JS code as part of the build task. We no longer have to write JS scripts and then invoke them from npm scripts.
-* **Gulp features**: By using gulp, we get to use other gulp features, particularly the streaming feature, and if we could explore use cases that can benefit.
-* **Community**: npm scripts are generally for simple tasks, and for more complicate build tasks, the community is more a tune to a JS task runner such as grunt and gulp. Gulp being code centric vs grunt's config centric, has been gaining ground fast with a thriving supporting community. So going to gulp will be more familiar to the developer community.
-* **Compatibility**: At the moment our build tasks being shell scripts some are only compatible for Unix. If we go with tasks written in JS it's easier to make them compatible on other OS such as Windows.
-* **Resource**: With a large community behind gulp, there are a lot of plugins in the open source community for supporting various common build tasks and we can utilize them.
-
-gulp scripts can still be wrapped in **npm scripts **here is an example of using using npm scripts to execute JS tasks in the archetype [here](https://github.com/electrode-io/electrode/blob/d4142ee0c938cbf973a429ee8467052aa4e1c9be/samples/universal-react-node/package.json#L22-L29).
-
+hot-reloading of jsx is already built in electrode. `clap hot` will enable hot-reloading.
