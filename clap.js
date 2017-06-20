@@ -1,9 +1,9 @@
 "use strict";
 
-const gulp = require("gulp");
-const helper = require("electrode-gulp-helper");
-const shell = helper.shell;
-const exec = helper.exec;
+const xclap = require("xclap");
+const xsh = require("xsh");
+const shell = xsh.$;
+const exec = xsh.exec;
 const fs = require("fs");
 const path = require("path");
 const yoTest = require("yeoman-test");
@@ -92,57 +92,54 @@ const testGenerator = (testDir, clean, prompts) => {
     .then(() => runAppTest(path.join(testDir, "test-app"), true));
 };
 
-helper.loadTasks(
-  {
-    "build-test": {
-      task: () => {
-        process.env.BUILD_TEST = "true";
-        let updated;
-        return exec("lerna updated")
-          .then(output => {
-            updated = output.stdout
-              .split("\n")
-              .filter(x => x.startsWith("- "))
-              .map(x => x.substr(2));
-          })
-          .then(() => {
-            if (updated.indexOf("generator-electrode") >= 0) {
-              return exec("gulp test-generator");
-            }
-          })
-          .then(() => exec("gulp test-boilerplate"))
-          .catch(err => {
-            if (err.stderr.indexOf("No packages need updating") < 0) {
-              throw err;
-            }
-          });
-      }
-    },
-
-    "test-boilerplate": {
-      task: () => runAppTest(path.resolve("samples/universal-react-node"))
-    },
-
-    "samples-local": {
-      desc: "modify all samples to pull electrode packages from local",
-      task: () => {
-        ["electrode-demo-index", "universal-material-ui", "universal-react-node"].forEach(a => {
-          pullLocalPackages(path.resolve("samples", a));
+xclap.load({
+  "build-test": {
+    desc: "Run CI test",
+    task: () => {
+      process.env.BUILD_TEST = "true";
+      let updated;
+      return exec("lerna updated")
+        .then(output => {
+          updated = output.stdout.split("\n").filter(x => x.startsWith("- ")).map(x => x.substr(2));
+        })
+        .then(() => {
+          if (updated.indexOf("generator-electrode") >= 0) {
+            return "test-generator";
+          }
+        })
+        .then(() => "test-boilerplate")
+        .catch(err => {
+          if (err.stderr.indexOf("No packages need updating") < 0) {
+            throw err;
+          }
         });
-      }
-    },
-
-    "test-generator": {
-      task: () => {
-        const testDir = path.resolve("tmp");
-        return testGenerator(testDir, true, { serverType: "ExpressJS" })
-          .then(() => {
-            const appFiles = ["package.json", "client", "config", "server", "test"];
-            shell.rm("-rf", appFiles.map(x => path.join(testDir, "test-app", x)));
-          })
-          .then(() => testGenerator(testDir, false, { serverType: "HapiJS" }));
-      }
     }
   },
-  gulp
-);
+
+  "test-boilerplate": {
+    desc: "Run tests for the boilerplage app universal-react-node",
+    task: () => runAppTest(path.resolve("samples/universal-react-node"))
+  },
+
+  "samples-local": {
+    desc: "modify all samples to pull electrode packages from local",
+    task: () => {
+      ["electrode-demo-index", "universal-material-ui", "universal-react-node"].forEach(a => {
+        pullLocalPackages(path.resolve("samples", a));
+      });
+    }
+  },
+
+  "test-generator": {
+    desc: "Run tests for the yeoman generators",
+    task: () => {
+      const testDir = path.resolve("tmp");
+      return testGenerator(testDir, true, { serverType: "ExpressJS" })
+        .then(() => {
+          const appFiles = ["package.json", "client", "config", "server", "test"];
+          shell.rm("-rf", appFiles.map(x => path.join(testDir, "test-app", x)));
+        })
+        .then(() => testGenerator(testDir, false, { serverType: "HapiJS" }));
+    }
+  }
+});
