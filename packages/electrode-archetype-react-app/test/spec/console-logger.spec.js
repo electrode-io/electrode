@@ -2,7 +2,7 @@
 
 const expect = require("chai").expect;
 const sinon = require("sinon");
-const consoleLogger = require("../lib/console-logger");
+const consoleLogger = require("../../lib/console-logger");
 
 describe("#console-logger", function() {
   describe("#consoleLogger.error", function() {

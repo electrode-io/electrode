@@ -80,7 +80,9 @@ support.load = function(options, callback) {
 
   if (br) {
     if (!support.babelRegister) {
-      console.log("To use babel-register mode, you need to install the babel-register and support modules.");
+      console.log(
+        "To use babel-register mode, you need to install the babel-register and support modules."
+      );
       console.log("Please see documentation for more details.");
       return process.exit(1);
     }

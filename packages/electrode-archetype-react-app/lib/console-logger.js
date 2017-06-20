@@ -1,5 +1,7 @@
 "use strict";
 
+/* eslint-disable no-console */
+
 function makeConsoleLogger() {
   const levels = ["info", "warn", "error", "debug", "verbose"];
 

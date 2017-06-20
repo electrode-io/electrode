@@ -6,7 +6,6 @@ const assert = require("assert");
 
 assert(!archetype.noDev, "dev archetype is missing - development & build tasks not possible");
 
-
 const Path = require("path");
 const devRequire = archetype.devRequire;
 
@@ -59,7 +58,6 @@ function setWebpackDev() {
 function setOptimizeStats() {
   process.env.OPTIMIZE_STATS = "true";
 }
-
 
 const eTmpDir = archetype.eTmpDir;
 
@@ -605,12 +603,9 @@ Individual .babelrc files were generated for you in src/client and src/server
         .then(() => `test-frontend-dev-watch`)
         .catch(() => `test-watch-all`),
 
-    "test-frontend": mkCmd(`karma`,
-      `start ${config.karma}/karma.conf.js --colors`),
+    "test-frontend": mkCmd(`karma`, `start ${config.karma}/karma.conf.js --colors`),
 
-    "test-frontend-ci": mkCmd(`karma`,
-      `start ${config.karma}/karma.conf.coverage.js`,
-      `--colors`),
+    "test-frontend-ci": mkCmd(`karma`, `start ${config.karma}/karma.conf.coverage.js`, `--colors`),
 
     "test-frontend-cov": mkCmd(`karma`, `start ${config.karma}/karma.conf.coverage.js`, `--colors`),
 

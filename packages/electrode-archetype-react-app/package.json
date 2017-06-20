@@ -13,8 +13,7 @@
   },
   "license": "Apache-2.0",
   "scripts": {
-    "test": "npm run lint",
-    "lint": "eslint \"**/**/*.js\"",
+    "test": "clap check",
     "format": "prettier --write --print-width 100 *.{js,jsx} `find . -type d -d 1 -exec echo '{}/**/*.{js,jsx}' \\; | egrep -v '(/node_modules/|/dist/|/coverage/)'`"
   },
   "dependencies": {
@@ -27,13 +26,7 @@
     "electrode-archetype-opt-react": "^0.1.0"
   },
   "devDependencies": {
-    "babel-eslint": "^7.1.0",
-    "electrode-archetype-njs-module-dev": "^1.0.1",
-    "eslint": "^3.9.1",
-    "eslint-config-walmart": "^1.1.1",
-    "eslint-plugin-babel": "^4.0.1",
-    "eslint-plugin-filenames": "^1.1.0",
-    "eslint-plugin-react": "^6.5.0",
+    "electrode-archetype-njs-module-dev": "^2.0.0",
     "prettier": "^1.4.4",
     "winston": "^2.3.1"
   },
