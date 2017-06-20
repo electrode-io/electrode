@@ -137,3 +137,8 @@ node_modules
 
 .tmp
 dist
+
+/.npmignore
+/clap.js
+/.babelrc
+/test
