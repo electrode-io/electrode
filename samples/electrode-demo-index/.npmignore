@@ -51,12 +51,10 @@ cache
 
 bower_components
 
-.*gulpfile.js
-gulpfile.js
+clap.js
 Procfile
 .git
 .hg
 .project
 karma*
 karma.*
-
