@@ -595,13 +595,12 @@ Individual .babelrc files were generated for you in src/client and src/server
         .then(() => exec(`gulp test-frontend-dev-watch`))
         .catch(() => exec(`gulp test-watch-all`)),
 
-    "test-frontend": `karma start ${config.karma}/karma.conf.js --colors`,
+    "test-frontend": mkCmd(`karma`,
+      `start ${config.karma}/karma.conf.js --colors`),
 
-    "test-frontend-ci": mkCmd(
-      `karma`,
-      `start --browsers PhantomJS,Firefox ${config.karma}/karma.conf.coverage.js`,
-      `--colors`
-    ),
+    "test-frontend-ci": mkCmd(`karma`,
+      `start ${config.karma}/karma.conf.coverage.js`,
+      `--colors`),
 
     "test-frontend-cov": mkCmd(`karma`, `start ${config.karma}/karma.conf.coverage.js`, `--colors`),
 
