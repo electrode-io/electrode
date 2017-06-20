@@ -1,7 +1,8 @@
 "use strict";
 
+const optionalRequire = require("optional-require")(require);
 const optimizeModulesForProduction = require("./optimize-modules-for-production");
-const babelRegister = require("babel-register");
+const babelRegister = optionalRequire("babel-register");
 const isomorphicExtendRequire = require("isomorphic-loader/lib/extend-require");
 const babelPolyfill = require("babel-polyfill");
 const archetype = require("../config/archetype");
@@ -78,6 +79,11 @@ support.load = function(options, callback) {
   }
 
   if (br) {
+    if (!support.babelRegister) {
+      console.log("To use babel-register mode, you need to install the babel-register and support modules.");
+      console.log("Please see documentation for more details.");
+      return process.exit(1);
+    }
     const regOptions = Object.assign(
       {
         extensions: [".es6", ".es", ".jsx", ".js"]
@@ -86,8 +92,7 @@ support.load = function(options, callback) {
     );
 
     logger.info(
-      `Installing babel-register for runtime transpilation` +
-        ` files (extensions: ${regOptions.extensions}).`
+      `Loading babel-register for runtime transpilation files (extensions: ${regOptions.extensions}).`
     );
     logger.info(`The transpilation only occurs the first time you load a file.`);
     support.babelRegister(regOptions);
