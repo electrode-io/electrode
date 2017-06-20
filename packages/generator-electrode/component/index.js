@@ -120,9 +120,9 @@ var ReactComponentGenerator = yeoman.Base.extend({
       ];
       return this.optionOrPrompt(prompts).then(props => {
         this.props = extend(this.props, props);
-        this.projectName = this.props.projectName;
-        this.packageName = this.props.projectName;
-        this.developerName = this.props.developerName.split(" ").map(_.toLower).join("");
+        this.projectName = this.props.projectName.split(" ").map(_.toLower).join("");
+        this.packageName = this.props.projectName.split(" ").map(_.toLower).join("");
+        this.developerName = this.props.developerName;
         this.quoteType = this.props.quoteType;
         this.ghUser = this.props.ghUser;
         this.ghRepo = this.props.ghRepo;
