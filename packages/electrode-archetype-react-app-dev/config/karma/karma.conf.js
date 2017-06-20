@@ -10,15 +10,14 @@ const PREPROCESSORS = {};
 
 const loadUserConfig = require("./util/load-user-config");
 
-const logger = require("electrode-archetype-react-app/lib/logger");
-const archetype = require("electrode-archetype-react-app/config/archetype");
+const browserSettings = require("./browser-settings");
 
 PREPROCESSORS[MAIN_PATH] = ["webpack", "sourcemap"];
 
 module.exports = function(config) {
   const settings = {
     basePath: process.cwd(),
-    frameworks: ["mocha", "phantomjs-shim", "intl-shim"],
+    frameworks: ["mocha", "intl-shim"],
     files: [MAIN_PATH],
     plugins: [
       "karma-chrome-launcher",
@@ -66,26 +65,6 @@ module.exports = function(config) {
     singleRun: true
   };
 
-  if (archetype.karma.enableChromeHeadless) {
-    Object.assign(settings, {
-      frameworks: ["mocha", "intl-shim"],
-      browsers: ["Chrome", "Chrome_without_security"],
-      customLaunchers: {
-        Chrome_without_security: { // eslint-disable-line camelcase
-          base: "Chrome",
-          flags: ["--disable-web-security"]
-        }
-      }
-    });
-  } else {
-    Object.assign(settings, {
-      frameworks: ["mocha", "phantomjs-shim", "intl-shim"],
-      browsers: ["PhantomJS"]
-    });
-
-    // eslint-disable-next-line max-len
-    logger.warn("PhantomJS has been deprecated, to use chrome headless, please set env 'ENABLE_CHROME_HEADLESS' to true.");
-  }
-
+  browserSettings(settings);
   loadUserConfig(Path.basename(__filename), config, settings);
 };

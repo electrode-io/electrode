@@ -27,9 +27,11 @@ module.exports = {
     },
     archetypeOptions.webpack
   ),
-  karma: Object.assign({}, {
-    enableChromeHeadless: process.env.ENABLE_CHROME_HEADLESS
-  }),
+  karma: Object.assign(
+    {},
+    { browser: process.env.KARMA_BROWSER === undefined ? "chrome" : process.env.KARMA_BROWSER },
+    archetypeOptions.karma
+  ),
   config: Object.assign(
     {},
     {
