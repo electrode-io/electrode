@@ -138,5 +138,12 @@ node_modules
 .tmp
 .npmrc
 
-src
-test
+lib/templates
+minified/
+
+/.npmignore
+/clap.js
+/.eslintrc
+/.eslintignore
+/.babelrc
+/test
