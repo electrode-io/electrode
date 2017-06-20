@@ -3,6 +3,7 @@ node_js:
   - v4
   - v6
   - v8
+dist: trusty
 notifications:
   email:
     - XChen@walmartlabs.com

@@ -6,18 +6,13 @@ const logger = require("electrode-archetype-react-app/lib/logger");
 module.exports = function(settings) {
   const browser = archetype.karma.browser.toLowerCase();
   if (browser === "chrome") {
-    settings.browsers = ["Chrome", "Chrome_without_security"];
-    settings.customLaunchers = {
-      Chrome_without_security: {
-        base: "Chrome",
-        flags: ["--disable-web-security"]
-      }
-    };
+    settings.browsers = ["ChromeHeadless"];
+
     logger.info("Using Chrome Headless to run Karma test");
   } else if (browser === "phantomjs") {
     settings.frameworks.push("phantomjs-shim");
     settings.browser = ["PhantomJS"];
-    // eslint-disable-next-line max-len
+
     logger.warn(
       "Using PhantomJS to run Karma test. It's been deprecated and may be removed in the future."
     );
