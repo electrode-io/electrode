@@ -10,3 +10,6 @@ notifications:
 before_install:
   - if [[ `npm -v` != 3* ]]; then npm i -g npm@3; npm --version; fi
   - npm install -g xclap-cli
+  - export CHROME_BIN=chromium-browser
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start

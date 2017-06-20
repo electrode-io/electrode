@@ -11,13 +11,21 @@ module.exports = function(settings) {
       Chrome_without_security: {
         base: "Chrome",
         flags: ["--disable-web-security"]
+      },
+      Chrome_travis_ci: {
+        base: "Chrome",
+        flags: ["--no-sandbox"]
       }
     };
     logger.info("Using Chrome Headless to run Karma test");
+
+    if (process.env.TRAVIS) {
+      settings.browsers = ["Chrome_travis_ci"];
+    }
+
   } else if (browser === "phantomjs") {
     settings.frameworks.push("phantomjs-shim");
     settings.browser = ["PhantomJS"];
-    // eslint-disable-next-line max-len
     logger.warn(
       "Using PhantomJS to run Karma test. It's been deprecated and may be removed in the future."
     );
