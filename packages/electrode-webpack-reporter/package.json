@@ -4,8 +4,8 @@
   "description": "A HTML based reporter for webpack dev server",
   "main": "lib/webpack-reporter.js",
   "scripts": {
-    "test": "gulp check",
-    "prepublish": "gulp build"
+    "test": "clap check",
+    "prepublish": "clap build"
   },
   "repository": {
     "type": "git",
@@ -29,7 +29,8 @@
     "electrode-static-paths": "^1.0.0",
     "material-design-icons": "^3.0.1",
     "material-ui": "^0.17.0",
-    "react-tap-event-plugin": "^2.0.1"
+    "react-tap-event-plugin": "^2.0.1",
+    "xclap": "^0.2.0"
   },
   "dependencies": {
     "ansi-to-html": "^0.6.0",

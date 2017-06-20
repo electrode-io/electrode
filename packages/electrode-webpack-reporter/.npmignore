@@ -9,9 +9,9 @@
 /config
 /.babelrc
 /.eslintrc
-/gulpfile.js
 /.isomorphic-loader-config.json
 /.npmignore
 /.travis.yml
 *.log
 /dist/map
+/clap.js
