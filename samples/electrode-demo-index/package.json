@@ -12,15 +12,15 @@
     "url": "https://github.com/electrode-io/electrode/issues"
   },
   "scripts": {
-    "test:dev": "gulp test-frontend",
-    "test": "gulp check-cov && gulp cov-frontend",
-    "demo": "gulp server-dev",
-    "hot": "gulp server-hot",
-    "build": "npm run generate && gulp build-lib",
+    "test:dev": "clap test-frontend",
+    "test": "clap check-cov && clap cov-frontend",
+    "demo": "clap server-dev",
+    "hot": "clap server-hot",
+    "build": "npm run generate && clap build-lib",
     "generate": "npm run generate-metadata && npm run generate-documentation",
     "generate-metadata": "electrode-docgen --package ./package.json --src ./src --metadata components.json",
     "generate-documentation": "electrode-docgen --package ./package.json --src ./src --markdown components.md",
-    "prepublish": "gulp npm:prepublish"
+    "prepublish": "clap npm:prepublish"
   },
   "keywords": [
     "electrode",
@@ -42,7 +42,7 @@
     "object-assign": "^4.1.0"
   },
   "devDependencies": {
-    "electrode-archetype-react-component": "^1.0.0",
-    "electrode-archetype-react-component-dev": "^1.0.0"
+    "electrode-archetype-react-component": "../../packages/electrode-archetype-react-component",
+    "electrode-archetype-react-component-dev": "../../packages/electrode-archetype-react-component-dev"
   }
 }
