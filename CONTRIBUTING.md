@@ -69,17 +69,22 @@ Our [prettier] settings are: `--print-width 100`
 
 Since we use independent lerna mode, to help keep the changelog clear, please format all your commit message with the following guideline:
 
-`package: [major|minor|patch|docs][feat|bug|chore] <message>`
+`[<semver>][feat|bug|chore] <message>`
 
--   `package` should be one of the packge under `packages` or `samples` directory without the `electrode-` prefix.
--   Please do everything you can to keep a commit and PR to a single package only, except `docs`.
--   If the commit is generic and not specific to a package, then don't include the `package:` part.
+-   `<semver>` can be:
+    -   `major` - `maj` or `major`
+    -   `minor` - `min` or `minor`
+    -   `patch` - `pat` or `patch`
 -   Only include `[feat|bug|chore]` if it's applicable.
 -   Please format your PR's title with the same format.
 
+> **_Please do everything you can to keep commits for a PR to a single package in `packages`._**
+
 A sample commit and PR message should look like:
 
-    archetype-react-app: [minor][feat] implement SSR support for Inferno
+```text
+[minor][feat] implement SSR support for Inferno
+```
 
 > Note: Branching is recommended on Publish commits only so it's possible to rely on lerna to publish from that branch.
 
