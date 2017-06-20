@@ -512,3 +512,6 @@ tmp
 #  All changes made above this line are subject to overwrites as the standard #
 #      .gitignore evolves. Please add any project specific ignores below.     #
 ###############################################################################
+
+/.npmignore
+
