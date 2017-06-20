@@ -5,12 +5,12 @@
   "main": "lib/autossr.js",
   "dependencies": {},
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "electrode-archetype-njs-module-dev": "^1.0.1",
-    "hapi": "^16.0.0"
+    "electrode-archetype-njs-module-dev": "^2.1.0",
+    "hapi": "^16.0.0",
+    "xclap": "^0.2.0"
   },
   "scripts": {
-    "test": "gulp test"
+    "test": "clap test"
   },
   "repository": {
     "type": "git",
