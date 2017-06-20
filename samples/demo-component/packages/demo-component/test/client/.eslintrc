@@ -1,0 +1,5 @@
+---
+extends:
+  - "../../node_modules/electrode-archetype-react-component-dev/config/eslint/.eslintrc-react-test"
+
+
