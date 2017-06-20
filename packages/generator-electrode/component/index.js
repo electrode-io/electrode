@@ -161,6 +161,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
       if (this.quoteType === "'") {
         this.template("packages/component/eslintrc", this.rootPath + ".eslintrc");
       }
+      this.template("packages/component/lintstagedrc", this.rootPath + ".lintstagedrc");
       this.template("packages/component/_gulpfile.js", this.rootPath + "gulpfile.js");
       this.template("packages/component/_package.json", this.rootPath + "package.json");
       this.template("packages/component/_readme.md", this.rootPath + "README.md");

@@ -54,6 +54,7 @@ describe('electrode:app', function () {
         '.editorconfig',
         '.gitignore',
         '.gitattributes',
+        '.lintstagedrc',
         'README.md'
       ]);
     });

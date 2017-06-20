@@ -272,7 +272,7 @@ module.exports = generators.Base.extend({
     this.fs.copyTpl(
       this.templatePath(_pkg),
       this.destinationPath(_pkg),
-      { isHapi, isExpress, isPWA, isAutoSSR }
+      { isHapi, isExpress, isPWA, isAutoSSR, isSingleQuote }
     );
 
     var defaultPkg = this.fs.readJSON(this.destinationPath(_pkg));
@@ -326,7 +326,7 @@ module.exports = generators.Base.extend({
     // Let's extend package.json so we're not overwriting user previous fields
     this.fs.writeJSON(this.destinationPath('package.json'), pkg);
 
-    const rootConfigsToCopy = ['gulpfile.js', 'config', 'test'];
+    const rootConfigsToCopy = ['gulpfile.js', 'config', 'test', '.lintstagedrc'];
     if (isSingleQuote) rootConfigsToCopy.push('.eslintrc');
     rootConfigsToCopy.forEach((f) => {
       this.fs.copyTpl(
