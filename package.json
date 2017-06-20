@@ -21,12 +21,16 @@
     "nuke": "rm -rf node_modules tmp lerna-debug.log npm-debug.log",
     "nuke-packages": "rm -rf packages/*/node_modules packages/*/coverage",
     "nuke-samples": "rm -rf samples/*/node_modules samples/*/coverage samples/*/dist samples/*/.isomorphic-loader-config.json samples/*/.etmp",
-    "test-reporter": "if lerna updated | grep electrode-webpack-reporter; then cd packages/electrode-webpack-reporter && npm install && npm test; fi"
+    "test-reporter": "if lerna updated | grep electrode-webpack-reporter; then cd packages/electrode-webpack-reporter && npm install && npm test; fi",
+    "update-changelog": "node tools/update-changelog.js"
   },
   "devDependencies": {
+    "bluebird": "^3.5.0",
     "lerna": "^2.0.0-rc.4",
     "lodash": "^4.17.2",
+    "semver": "^5.3.0",
     "xclap": "^0.2.0",
+    "xsh": "^0.3.2",
     "yeoman-test": "^1.6.0"
   },
   "engines": {
