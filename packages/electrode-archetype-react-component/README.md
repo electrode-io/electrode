@@ -26,7 +26,7 @@ $ yo electrode-component
 Welcome to the Electrode Component generator
 
 Were going to set up a new Electrode Component, ready for development with
-gulp, webpack, demo, electrode component archetype, live-reload
+react, webpack, demo, electrode component archetype, live-reload
 
 ? What is your Package/GitHub project name? (e.g., 'wysiwyg-component') product-card
 ? What is the ClassName for your component? ProductCard
@@ -42,7 +42,7 @@ gulp, webpack, demo, electrode component archetype, live-reload
    create .gitignore
    create .npmignore
    create .editorconfig
-   create gulpfile.js
+   create clap.js
    create package.json
    create README.md
    create src/components/product-card.jsx
@@ -62,7 +62,7 @@ If you prefer to create your component manually or if you have an existing compo
 ###### run the following in your project
 
 ```bash
-$ npm install --save-dev electrode-gulp-helper electrode-archetype-react-component electrode-archetype-react-component-dev
+$ npm install --save-dev electrode-archetype-react-component electrode-archetype-react-component-dev
 ```
 
 
@@ -77,22 +77,23 @@ The `.babelrc` needs to extend
 }
 ```
 
-###### Add a `gulpfile.js` to your project
+###### Add a `clap.js` to your project
 
-The `gulpfile.js` needs to extend
-[the archetype's gulp tasks](/arhcetype-gulpfile.js) in order to apply the shared tasks on your new/existing electrode component. Add this following lines of code to the newly created `gulpfile.js`
+The `clap.js` needs to extend
+[the archetype's clap tasks](/arhcetype-clap.js) in order to apply the shared tasks on your new/existing electrode component. Add this following lines of code to the newly created `clap.js`
 
-```javascript
+```js
 "use strict";
 
-const exec = require("electrode-gulp-helper").exec;
+const xclap = require("xclap");
 
 const tasks = {
   "prepublish": ["npm:prepublish"],
   "preversion": ["check-cov"]
 }
+xclap.load("myprj", tasks);
 
-require("electrode-archetype-react-component")(tasks);
+require("electrode-archetype-react-component")(xclap);
 ```
 
 
@@ -106,7 +107,7 @@ The archetypes are split into two parts: `<archetype>` and `<archetype>-dev`. Bo
 
 This archetype assumes an architecture as follows:
 
-```
+```text
 archetype
   config.js
 src
@@ -169,69 +170,6 @@ Add following styling to `src/styles/your-component.css`
 }
 ```
 
-## Tasks exposed via npm scripts & gulp as part of the electrode-archetype-react-component
-
-```bash
-$ gulp help
-[13:02:10] Using gulpfile ~/walmart-oss/test-generator-electrode-component/product-card/gulpfile.js
-[13:02:10] Starting 'help'...
-
-Usage
-  gulp [TASK] [OPTIONS...]
-
-Available tasks
-  archetype:check ..............   tasks: ["archetype:lint","archetype:test-dev-pkg","clean-test-init"]
-  archetype:lint ---------------   tasks: ["archetype:lint-server"]
-  archetype:lint-server
-  archetype:test-dev-pkg
-  babel-src-step
-  build ........................   tasks: ["build-lib","build-dist"]
-  build-dist -------------------   tasks: ["clean-dist","build-dist-min","build-dist-dev"]
-  build-dist-dev
-  build-dist-min ............... Build minified dist files for production
-                                   deps: ["~production-env"]
-  build-lib --------------------   deps: ["~production-env"]
-  build-lib:clean-tmp
-  build-lib:copy-flow
-  build-lib:flatten-l10n
-  check ........................   tasks: ["check-dep","lint","test-cov"]
-  check-ci ---------------------   tasks: ["check-dep","lint","test-ci"]
-  check-cov ....................   tasks: ["lint","test-cov"]
-  check-dep
-  check-dev --------------------   tasks: ["lint","test-dev"]
-  clean ........................   tasks: ["clean-lib","clean-dist"]
-  clean-dist
-  clean-lib
-  clean-test-init
-  cov-frontend
-  cov-frontend-50
-  cov-frontend-70
-  cov-frontend-85
-  cov-frontend-95
-  default ---------------------- Invokes 'gulp help'
-  help ------------------------- Display this help text.
-  iso-render-server-start ------   tasks: ["~webpack-dev","iso-render-server-start-watch"]
-  iso-render-server-start-watch
-  lint .........................   tasks: ["lint-react-src","lint-react-test","lint-scripts"]
-  lint-react-src
-  lint-react-test
-  lint-scripts
-  npm:prepublish ---------------   tasks: ["build-lib","build-dist-dev","build-dist-min"]
-  prepublish ...................   tasks: ["npm:prepublish"]
-  preversion -------------------   tasks: ["check-cov"]
-  server-test
-  test-ci ......................   tasks: ["test-frontend-ci"]
-  test-cov ---------------------   tasks: ["test-frontend-cov"]
-  test-dev .....................   tasks: ["test-frontend-dev"]
-  test-frontend
-  test-frontend-ci
-  test-frontend-cov
-  test-frontend-dev
-  test-frontend-dev-watch
-  test-watch -------------------   tasks: ["test-frontend-dev-watch"]
-
-```
-
 ## Check the archetype configs:
 
 If you are enhancing / refactoring this archetype and have locally checked it out,
@@ -240,7 +178,7 @@ please see [`CONTRIBUTING.md`](./CONTRIBUTING.md) for our guidelines.
 The main check we provide for the archetype itself is:
 
 ```sh
-$ gulp archetype:check
+$ clap archetype:check
 ```
 
 Built with :heart: by [Team Electrode](https://github.com/orgs/electrode-io/people) @WalmartLabs.
