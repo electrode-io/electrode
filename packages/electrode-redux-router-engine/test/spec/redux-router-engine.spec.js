@@ -3,6 +3,7 @@
 const Promise = require("bluebird");
 const Path = require("path");
 const ReduxRouterEngine = require("../..");
+const xstdout = require("xstdout");
 
 const expect = require("chai").expect;
 
@@ -43,10 +44,12 @@ describe("redux-router-engine", function () {
   });
 
   it("should return string error", () => {
+    const intercept = xstdout.intercept(true);
     const engine = new ReduxRouterEngine({ routes: getIndexRoutes, createReduxStore });
     testReq.url.path = "/test";
 
     return engine.render(testReq).then((result) => {
+      intercept.restore();
       expect(result.status).to.equal(500);
       expect(result._err).to.equal("failed");
     });
@@ -54,10 +57,12 @@ describe("redux-router-engine", function () {
 
 
   it("should return Error error", () => {
+    const intercept = xstdout.intercept(true);
     const engine = new ReduxRouterEngine({ routes: ErrorRoute, createReduxStore });
     testReq.url.path = "/test";
 
     return engine.render(testReq).then((result) => {
+      intercept.restore();
       expect(result.status).to.equal(500);
       expect(result._err.message).to.equal("failed error");
     });
@@ -115,10 +120,12 @@ describe("redux-router-engine", function () {
   });
 
   it("should return 500 for invalid component", () => {
+    const intercept = xstdout.intercept(true);
     const engine = new ReduxRouterEngine({ routes: badRoutes, createReduxStore });
     testReq.url.path = "/test";
 
     return engine.render(testReq).then((result) => {
+      intercept.restore();
       expect(result.status).to.equal(500);
       expect(result._err.message)
         .to.contain("Page.render(): A valid React element (or null) must be returned");
@@ -126,20 +133,24 @@ describe("redux-router-engine", function () {
   });
 
   it("should return 404 if component throws 404", () => {
+    const intercept = xstdout.intercept(true);
     const engine = new ReduxRouterEngine({ routes: errorRoutes, createReduxStore });
     testReq.url.path = "/";
 
     return engine.render(testReq).then((result) => {
+      intercept.restore();
       expect(result.status).to.equal(404);
       expect(result._err).to.be.ok;
     });
   });
 
   it("should return 302 and redirect path if component throws related error", () => {
+    const intercept = xstdout.intercept(true);
     const engine = new ReduxRouterEngine({ routes: RedirectRoute, createReduxStore });
     testReq.url.path = "/redirect";
 
     return engine.render(testReq).then((result) => {
+      intercept.restore();
       expect(result.status).to.equal(302);
       expect(result.path).to.equal("/new/location");
       expect(result._err).to.be.ok;
@@ -202,6 +213,7 @@ describe("redux-router-engine", function () {
   });
 
   it("should return 500 for method not allowed", () => {
+    const intercept = xstdout.intercept(true);
     const req = {
       path: "/test",
       method: "post",
@@ -214,6 +226,7 @@ describe("redux-router-engine", function () {
     const engine = new ReduxRouterEngine({ routes, createReduxStore });
 
     return engine.render(req).then((result) => {
+      intercept.restore();
       expect(result.status).to.equal(500);
       expect(result.message).to.include(`doesn't allow request method post`);
     });
