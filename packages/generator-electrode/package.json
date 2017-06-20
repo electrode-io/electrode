@@ -1,6 +1,6 @@
 {
   "name": "generator-electrode",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Generate Electrode React App",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -40,18 +40,11 @@
     "yosay": "^1.0.0"
   },
   "devDependencies": {
-    "eslint": "^3.1.1",
-    "gulp": "^3.9.0",
-    "gulp-eslint": "^2.0.0",
-    "gulp-ignore": "^2.0.1",
-    "gulp-istanbul": "^1.0.0",
-    "gulp-line-ending-corrector": "^1.0.1",
-    "gulp-mocha": "^2.0.0",
-    "gulp-nsp": "^2.1.0",
-    "gulp-plumber": "^1.0.0",
-    "mocha": "^3.0.2",
+    "electrode-archetype-njs-module-dev": "^2.1.0",
     "mockery": "^1.7.0",
     "pinkie-promise": "^2.0.1",
+    "xclap": "^0.2.0",
+    "xclap-cli": "^0.1.1",
     "yeoman-assert": "^2.2.1",
     "yeoman-test": "^1.4.0"
   },
@@ -61,8 +54,7 @@
     }
   },
   "scripts": {
-    "prepublish": "gulp prepublish",
-    "test": "gulp"
+    "test": "clap check"
   },
   "license": "Apache-2.0",
   "engines": {

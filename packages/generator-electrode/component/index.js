@@ -9,13 +9,13 @@ var parseAuthor = require("parse-author");
 var optionOrPrompt = require("yeoman-option-or-prompt");
 
 var ReactComponentGenerator = yeoman.Base.extend({
-  constructor: function () {
+  constructor: function() {
     yeoman.Base.apply(this, arguments);
     this.quotes = this.options.quotes;
     this.githubUrl = this.options.githubUrl || "https://github.com";
     this.optionOrPrompt = optionOrPrompt;
   },
-  initializing: function () {
+  initializing: function() {
     this.isAddon = this.options.isAddon || false;
     this.demoAppName = this.options.demoAppName;
     this.pkg = this.fs.readJSON(this.destinationPath("package.json"), {});
@@ -36,21 +36,21 @@ var ReactComponentGenerator = yeoman.Base.extend({
     this.props.quoteType = this.quotes;
   },
   prompting: {
-    greeting: function () {
+    greeting: function() {
       if (!this.isAddon) {
         this.log(
           "\n" +
-          chalk.bold.underline("Welcome to the Electrode Component Generator") +
-          "\n" +
-          "\nWe're going to set up a new " +
-          chalk.bold("Electrode") +
-          " component, ready for development with" +
-          "\n" +
-          chalk.bold("gulp, webpack, demo, electrode component archetype, and live-reload")
+            chalk.bold.underline("Welcome to the Electrode Component Generator") +
+            "\n" +
+            "\nWe're going to set up a new " +
+            chalk.bold("Electrode") +
+            " component, ready for development with" +
+            "\n" +
+            chalk.bold("react, webpack, demo, electrode component archetype, and live-reload")
         );
       }
     },
-    askFor: function () {
+    askFor: function() {
       if (this.pkg.name || this.options.name) {
         this.props.name = this.pkg.name || _.kebabCase(this.options.name);
       }
@@ -130,7 +130,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
         this.createDirectory = this.props.createDirectory;
         this.componentName = _.kebabCase(_.deburr(this.props.projectName))
           .replace(/^\s+|\s+$/g, "")
-          .replace(/(^|[-_ ])+(.)/g, function (match, first, second) {
+          .replace(/(^|[-_ ])+(.)/g, function(match, first, second) {
             return second.toUpperCase();
           });
         this.currentYear = new Date().getFullYear();
@@ -144,7 +144,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
   },
 
   writing: {
-    lernaStructure: function () {
+    lernaStructure: function() {
       // copy lerna and top level templates
       if (!this.isAddon) {
         this.copy("gitignore", ".gitignore");
@@ -153,7 +153,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
         this.template("lerna.json", "lerna.json");
       }
     },
-    project: function () {
+    project: function() {
       this.copy("packages/component/babelrc", this.rootPath + ".babelrc");
       this.copy("packages/component/gitignore", this.rootPath + ".gitignore");
       this.copy("packages/component/npmignore", this.rootPath + ".npmignore");
@@ -161,11 +161,11 @@ var ReactComponentGenerator = yeoman.Base.extend({
       if (this.quoteType === "'") {
         this.template("packages/component/eslintrc", this.rootPath + ".eslintrc");
       }
-      this.template("packages/component/_gulpfile.js", this.rootPath + "gulpfile.js");
+      this.template("packages/component/_clap.js", this.rootPath + "clap.js");
       this.template("packages/component/_package.json", this.rootPath + "package.json");
       this.template("packages/component/_readme.md", this.rootPath + "README.md");
     },
-    component: function () {
+    component: function() {
       this.template(
         "packages/component/src/components/_component.jsx",
         this.rootPath + "src/components/" + this.projectName + ".jsx"
@@ -188,7 +188,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
 
       this.template("packages/component/src/_Component.js", this.rootPath + "src/index.js");
     },
-    test: function () {
+    test: function() {
       this.template(
         "packages/component/test/client/eslintrc",
         this.rootPath + "test/client/.eslintrc"
@@ -203,7 +203,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
       );
     },
 
-    demoApp: function () {
+    demoApp: function() {
       //Do not generate the demo app if called from the add on generator
       this.originalDemoAppName = "demo-app";
       if (!this.isAddon) {
@@ -245,12 +245,12 @@ var ReactComponentGenerator = yeoman.Base.extend({
     }
   },
 
-  install: function () {
+  install: function() {
     //git init and npmi for lerna lernaStructure
     if (!this.isAddon) {
       //reset the path to the actual root
       this.destinationRoot(this.oldRoot);
-      this.destinationRoot()
+      this.destinationRoot();
 
       this.spawnCommandSync("git", ["init"], {
         cwd: this.destinationPath()
@@ -281,8 +281,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
     });
   },
 
-  end: function () {
-
+  end: function() {
     if (this.quoteType === "'") {
       this.spawnCommandSync("node_modules/.bin/eslint", [
         "--fix",
@@ -305,7 +304,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
         " and your demo app is " + this.packageName + "/" + this.appName +
         "\n" +
         "\nType 'cd " + this.packageName + "/" + this.appName +
-        "' then 'gulp dev' to run the development build for the demo app." +
+        "' then 'clap dev' to run the development build for the demo app." +
         "\n"
       );
     }
