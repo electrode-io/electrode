@@ -223,7 +223,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
         this.props.autoSsr = false;
         this.props.license = "nolicense";
         this.props.githubAccount = this.ghUser || this.user.git.name();
-        this.props.keywords = "electrode";
+        this.props.keywords = ["electrode"];
 
         let options = {
           isDemoApp: true,
