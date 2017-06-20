@@ -3,6 +3,10 @@ node_js:
   - v4
   - v6
   - v8
+dist: trusty # needs Ubuntu Trusty
+sudo: false  # no need for virtualization.
+addons:
+  chrome: stable # have Travis install chrome stable.
 notifications:
   email:
     - XChen@walmartlabs.com
