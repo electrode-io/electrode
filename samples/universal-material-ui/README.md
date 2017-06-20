@@ -10,15 +10,15 @@
 
 ### Prerequisites
 
-Make sure you have installed NodeJS >= 4.x and npm >= 3.x, and [gulp-cli].
+Make sure you have installed NodeJS >= 4.x and npm >= 3.x, and [clap-cli].
 
-  ```bash
-  $ node -v
-  v6.6.0
-  $ npm -v
-  3.10.3
-  $ npm install -g gulp-cli
-  ```
+```bash
+$ node -v
+v6.6.0
+$ npm -v
+3.10.3
+$ npm install -g clap-cli
+```
 
 ### Check it out
 
@@ -29,10 +29,10 @@ $ git clone https://github.com/electrode-io/electrode.git
 $ cd electrode
 $ npm install
 $ npm run bootstrap
-$ gulp samples-local
+$ clap samples-local
 $ cd samples/universal-material-ui
 $ npm install
-$ gulp dev
+$ clap dev
 ```
 
 Now navigate your browser to `http://localhost:3000` to see the sample app with [material-ui] components.
@@ -48,15 +48,15 @@ First part of the process is to generate an Electrode Universal App using the [y
 
 1. First generate the Electrode Universal App with the following commands:
 
-  ```bash
-  $ npm install -g yo generator-electrode
-  $ mkdir electrode-react-sample-material-ui
-  $ cd electrode-react-sample-material-ui
-  $ yo electrode
-  # ... answer questions and wait for app to be generated and npm install completed ...
-  ```
+```bash
+$ npm install -g yo generator-electrode
+$ mkdir electrode-react-sample-material-ui
+$ cd electrode-react-sample-material-ui
+$ yo electrode
+# ... answer questions and wait for app to be generated and npm install completed ...
+```
 
-2. Run `gulp dev` in the newly generated app
+2. Run `clap dev` in the newly generated app
 3. Navigate to `http://localhost:3000` to make sure app is working.
 
 ### Add [material-ui]
@@ -65,11 +65,11 @@ Second part of the process is to add [material-ui] dependencies.  Follow the ste
 
 1. Stop the app and install [material-ui] dependencies
 
-  ```bash
-  $ npm install material-ui react-tap-event-plugin --save
-  ```
+```bash
+$ npm install material-ui react-tap-event-plugin --save
+```
 
-1. Restart `gulp dev` and reload browser to make sure things are still working.
+1. Restart `clap dev` and reload browser to make sure things are still working.
 1. Add [material-ui]'s required font *Roboto* to `src/server/views/index-view.js`
 1. Update `src/client/styles/base.css` with styles for [material-ui].
 1. Test [material-ui] component by adding a [RaisedButton] to `src/client/components/home.jsx`
@@ -144,20 +144,27 @@ Electrode core comes with isomorphic images support built in using [isomorphic-l
 
 1. Replace the URLs for `avatar` and `CarMedia` img `src`, as follows:
 
-  ```
-  ...
-    avatar={avatarJpg}
-  ...
-    src={natureJpg}
-  ```
+```
+...
+  avatar={avatarJpg}
+...
+  src={natureJpg}
+```
 
 1. In `src/server/index.js`, activate [isomorphic-loader]'s `extend-require` by changing the last line to:
 
-  ```js
-    supports.isomorphicExtendRequire().then(() => {
-      require("electrode-server")(config, [staticPathsDecor()]);
-    });
-  ```
+```js
+const config = require("electrode-confippet").config;
+const staticPathsDecor = require("electrode-static-paths");
+const support = require("electrode-archetype-react-app/support");
+
+support.load({
+  isomorphicExtendRequire: true
+}).then(() => {
+  require("electrode-server")(config, [staticPathsDecor()]);
+});
+
+```
 
 1. Watch [webpack-dev-server] update your bundle and refresh browser to see changes.
 
@@ -175,7 +182,7 @@ Apache-2.0 © [Joel Chen](https://github.com/jchip)
 [RaisedButton]: http://www.material-ui.com/#/components/raised-button
 [webpack-dev-server]: https://webpack.github.io/docs/webpack-dev-server.html
 [Server Rendering]: http://www.material-ui.com/#/get-started/server-rendering
-[gulp-cli]: https://www.npmjs.com/package/gulp-cli
+[clap-cli]: https://www.npmjs.com/package/clap-cli
 [material-ui examples]: http://www.material-ui.com/#/components/app-bar
 [AppBar example]:  http://www.material-ui.com/#/components/app-bar
 [BottomNavigation example]: http://www.material-ui.com/#/components/bottom-navigation
