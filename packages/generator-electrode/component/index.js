@@ -265,7 +265,6 @@ var ReactComponentGenerator = yeoman.Base.extend({
       : this.destinationPath() + "/" + this.rootPath;
 
     this.destinationRoot(packageDirectory);
-    console.log("PACKAGE DIRECTORY:::::", this.destinationPath());
 
     this.spawnCommandSync("npm", ["install"], {
       cwd: this.destinationPath()
@@ -301,13 +300,10 @@ var ReactComponentGenerator = yeoman.Base.extend({
         "\n" +
         chalk.green.underline("Your new Electrode component is ready!") +
         "\n" +
-        "\nYour component is in packages/" +
-        this.packageName +
-        " and your demo app is " +
-        this.appName +
+        "Your component is in " + this.packageName + "/packages" +
+        " and your demo app is " + this.packageName + "/" + this.appName +
         "\n" +
-        "\nType 'cd ../" +
-        this.appName +
+        "\nType 'cd " + this.packageName + "/" + this.appName +
         "' then 'gulp dev' to run the development build for the demo app." +
         "\n"
       );

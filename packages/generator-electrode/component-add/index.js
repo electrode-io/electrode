@@ -11,6 +11,8 @@ var extend = _.merge;
 var parseAuthor = require("parse-author");
 var githubUsername = require("github-username");
 var glob = require("glob");
+var nodeFS = require("fs");
+var demoHelperPath = require.resolve('electrode-demo-helper');
 
 /*
 * This generator should check that it is invoked from within a packages folder
@@ -24,14 +26,14 @@ var glob = require("glob");
 */
 
 module.exports = generators.Base.extend({
-  constructor: function() {
+  constructor: function () {
     generators.Base.apply(this, arguments);
     this.packageName = this.options.packageName || "demo-app";
     this.developerName = this.options.developerName || "demoDeveloper";
     this.className = this.options.className;
   },
 
-  initializing: function() {
+  initializing: function () {
     let appPkgPath = "";
     let homeComponentPath = "";
     this.demoAppName = "";
@@ -79,11 +81,11 @@ module.exports = generators.Base.extend({
   },
 
   prompting: {
-    greeting: function() {
+    greeting: function () {
       this.log(yosay("Welcome to the " + chalk.red("Electrode Add Component") + " generator!"));
     },
 
-    askFor: function() {
+    askFor: function () {
       var prompts = [
         {
           type: "input",
@@ -105,14 +107,14 @@ module.exports = generators.Base.extend({
         this.packageName = this.props.name;
         this.componentName = _.kebabCase(_.deburr(this.props.componentName))
           .replace(/^\s+|\s+$/g, "")
-          .replace(/(^|[-_ ])+(.)/g, function(match, first, second) {
+          .replace(/(^|[-_ ])+(.)/g, function (match, first, second) {
             return second.toUpperCase();
           });
       });
     }
   },
 
-  default: function() {
+  default: function () {
     let options = {
       isAddon: true,
       name: this.packageName,
@@ -128,7 +130,17 @@ module.exports = generators.Base.extend({
       }
     );
   },
-  writing: function() {
+  writing: function () {
+
+    let getDemoFilePath = function (filepath) {
+      try {
+        let demoFilePath = path.resolve(demoHelperPath, '..', filepath);
+        return demoFilePath;
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
     //add new package to the dependencies
     let dependencies = {};
     dependencies[this.packageName] = "../packages/" + this.packageName;
@@ -166,13 +178,24 @@ module.exports = generators.Base.extend({
       this.destinationPath("../../" + this.demoAppName + "/src/client/components/home.jsx"),
       newHomeString
     );
+
+    let directories = nodeFS.readdirSync(this.destinationPath(".."));
+    this.fs.copyTpl(
+      this.templatePath(getDemoFilePath('archetype')),
+      this.destinationPath('../../demo-app/archetype'),
+      { components: directories }
+    );
+
   },
 
-  end: function() {
-    // run npmi for the demo app again
-    process.chdir(this.destinationPath("../../" + this.demoAppName));
-    this.installDependencies({
-      bower: false
-    });
+  end: function () {
+    this.log(
+      "\n" + chalk.green.underline("Your new Electrode component is ready!") +
+      "\n" +
+      "\nYour component is in " + this.packageName + " and your demo app is in ../" + this.demoAppName +
+      "\n" +
+      "\nType 'cd ../" + this.demoAppName + "' then 'gulp dev' to run the development build for the demo app." +
+      "\n"
+    );
   }
 });
