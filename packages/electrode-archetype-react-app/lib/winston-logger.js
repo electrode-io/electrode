@@ -1,5 +1,7 @@
 "use strict";
 
+/* eslint-disable no-magic-numbers */
+
 const makeWinstonLogger = winston => {
   return new winston.Logger({
     exceptionHandlers: [

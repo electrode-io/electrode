@@ -1,3 +1,5 @@
+"use strict";
+
 const optionalRequire = require("optional-require")(require);
 const devRequire = optionalRequire("electrode-archetype-react-app-dev/require");
 

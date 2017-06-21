@@ -502,7 +502,9 @@ sauce_connect*.txt
 *.dmp
 
 ### Walmart Projects ###
+dist
 tmp
+.etmp
 
 ###############################################################################
 #########################_WALMART_STANDARD_GITIGNORE_##########################
@@ -511,5 +513,5 @@ tmp
 #      .gitignore evolves. Please add any project specific ignores below.     #
 ###############################################################################
 
-/.nyc_output
-
+/.npmignore
+/.eslintrc

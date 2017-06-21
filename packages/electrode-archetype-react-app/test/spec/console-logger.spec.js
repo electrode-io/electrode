@@ -2,7 +2,7 @@
 
 const expect = require("chai").expect;
 const sinon = require("sinon");
-const consoleLogger = require("../lib/console-logger");
+const consoleLogger = require("../../lib/console-logger");
 
 describe("#console-logger", function() {
   describe("#consoleLogger.error", function() {
@@ -70,14 +70,14 @@ describe("#console-logger", function() {
       consoleLogSpy.restore();
     });
 
-    it("consoleLogger.debug should log info message in console", function() {
+    it.skip("consoleLogger.debug should log info message in console", function() {
       consoleLogger.debug("electrode");
       expect(consoleLogSpy).calledOnce;
       expect(consoleLogSpy.getCall(0).args[0]).to.equal("DEBUG:");
       expect(consoleLogSpy.getCall(0).args[1]).to.equal("electrode");
     });
 
-    it("consoleLogger.debug should log multi info message in console", function() {
+    it.skip("consoleLogger.debug should log multi info message in console", function() {
       consoleLogger.debug("hello", "electrode");
       expect(consoleLogSpy).calledOnce;
       expect(consoleLogSpy.getCall(0).args[0]).to.equal("DEBUG:");

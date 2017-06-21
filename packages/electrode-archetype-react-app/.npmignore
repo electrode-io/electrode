@@ -511,5 +511,8 @@ tmp
 #      .gitignore evolves. Please add any project specific ignores below.     #
 ###############################################################################
 
+/.npmignore
+/.eslintrc
+/test
+/clap.js
 /.nyc_output
-
