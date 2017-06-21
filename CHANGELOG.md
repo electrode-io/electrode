@@ -2,6 +2,25 @@
 
 ## Packages
 
+### Directly Updated
+
+-   electrode-webpack-reporter@0.3.8 `(0.3.7 => 0.3.8)`
+
+### Lerna Updated
+
+-   electrode-archetype-react-app@3.0.3 `(3.0.2 => 3.0.3)`
+-   electrode-archetype-react-app-dev@3.0.3 `(3.0.2 => 3.0.3)`
+
+## Commits
+
+-   `packages/electrode-webpack-reporter`
+
+    -   [patch] fix webpack-reporter ([#417](https://github.com/electrode-io/electrode/pull/417)) [commit](http://github.com/electrode-io/electrode/commit/f57955582d1b4243f75ab8f7ec441013df71aa04)
+
+# 6/21/2017
+
+## Packages
+
 -   generator-electrode@3.0.2 `(3.0.1 => 3.0.2)`
 
 ## Commits
