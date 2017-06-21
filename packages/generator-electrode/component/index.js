@@ -18,7 +18,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
   initializing: function() {
 
     //check if the command is being run from within an existing app
-    if (_.includes(process.env.PWD,"src/client/components") || _.includes(process.env.PWD,"src/client")) {
+    if (_.includes(process.env.PWD,"src/client")) {
       this.env.error(
         "Please do not run this command from within an application" +
         "\n Component structure should be generated in its own folder"
