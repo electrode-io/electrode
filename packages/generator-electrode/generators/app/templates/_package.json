@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "bluebird": "^3.4.6",
-    "electrode-archetype-react-app": "^2.0.0",
+    "electrode-archetype-react-app": "^3.0.0",
     "electrode-confippet": "^1.0.0",
     "electrode-react-webapp": "^1.1.0",
     "electrode-redux-router-engine": "^1.2.2",<% if (isHapi) { %>
@@ -44,7 +44,7 @@
     "lodash": "^4.10.1"
   },
   "devDependencies": {
-    "electrode-archetype-react-app-dev": "^2.0.0",
+    "electrode-archetype-react-app-dev": "^3.0.0",
     "xclap": "^0.2.0"
   }
 }
