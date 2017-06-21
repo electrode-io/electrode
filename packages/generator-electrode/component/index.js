@@ -16,6 +16,15 @@ var ReactComponentGenerator = yeoman.Base.extend({
     this.optionOrPrompt = optionOrPrompt;
   },
   initializing: function() {
+
+    //check if the command is being run from within an existing app
+    if (_.includes(process.env.PWD,"src/client/components") || _.includes(process.env.PWD,"src/client")) {
+      this.env.error(
+        "Please do not run this command from within an application" +
+        "\n Component structure should be generated in its own folder"
+      );
+    }
+
     this.isAddon = this.options.isAddon || false;
     this.demoAppName = this.options.demoAppName;
     this.pkg = this.fs.readJSON(this.destinationPath("package.json"), {});
