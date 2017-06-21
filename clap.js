@@ -109,7 +109,7 @@ xclap.load({
         })
         .then(() => "test-boilerplate")
         .catch(err => {
-          if (err.stderr.indexOf("No packages need updating") < 0) {
+          if (err.output.stderr.indexOf("No packages need updating") < 0) {
             throw err;
           }
         });
