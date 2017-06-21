@@ -11,8 +11,6 @@
 
     -   [patch] update peer dep ([#415](https://github.com/electrode-io/electrode/pull/415)) [commit](http://github.com/electrode-io/electrode/commit/3799989a37482c6b094c17f3e2f1e17e283a2b72)
 
--   `MISC`
-
 # 6/20/2017
 
 ## Packages

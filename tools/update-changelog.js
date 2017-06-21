@@ -200,7 +200,9 @@ const updateChangelog = collated => {
   };
 
   const outputCommitMsgs = (items, prefix) => {
-    Object.keys(items).sort().forEach(p => {
+    const keys = Object.keys(items);
+    if (keys.length === 0) return;
+    keys.sort().forEach(p => {
       const pkg = items[p];
       output.push("-   `" + prefix + p + "`\n\n");
       pkg.msgs.slice().reverse().forEach(emitCommitMsg);
