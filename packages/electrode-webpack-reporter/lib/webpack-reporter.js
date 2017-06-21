@@ -41,7 +41,7 @@ class WebpackReporter extends EventEmitter {
         .replace("{{CSS}}", removeCwd(distCss))
         .replace("{{JS}}", removeCwd(distJs))
         .replace(/{{SOCKET_PORT}}/g, this.options.socketPort)
-    } else if (!options.skipReportRoutes) {
+    } else if (!this.options.skipReportRoutes) {
       throw new Error("webpack-reporter unable to setup routes - check dist has server/stat.json or run build");
     }
 

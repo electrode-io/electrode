@@ -147,5 +147,4 @@ node_modules
 /.eslintignore
 *.log
 /dist/**/*.map
-/dist/server/stats.json
 /src
