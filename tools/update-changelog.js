@@ -204,6 +204,7 @@ const updateChangelog = collated => {
     if (keys.length === 0) return;
     keys.sort().forEach(p => {
       const pkg = items[p];
+      if (pkg.msgs.length === 0) return;
       output.push("-   `" + prefix + p + "`\n\n");
       pkg.msgs.slice().reverse().forEach(emitCommitMsg);
       output.push("\n");
