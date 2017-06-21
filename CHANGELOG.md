@@ -2,6 +2,23 @@
 
 ## Packages
 
+-   generator-electrode@3.0.2 `(3.0.1 => 3.0.2)`
+
+## Commits
+
+-   `packages/generator-electrode`
+
+    -   update template dep ([#416](https://github.com/electrode-io/electrode/pull/416)) [commit](http://github.com/electrode-io/electrode/commit/240903f2e084501cf829d7e0da13ef40e60e516d)
+
+-   `tools`
+
+    -   update tools script [commit](http://github.com/electrode-io/electrode/commit/5471ef382546c50c6c24d1ac7d33300ee78f78ba)
+    -   fix tools update changelog [commit](http://github.com/electrode-io/electrode/commit/4011529aeb22078f8d84704bd39dad57d4d82a2f)
+
+# 6/21/2017
+
+## Packages
+
 -   electrode-archetype-react-app-dev@3.0.2 `(3.0.1 => 3.0.2)`
 -   electrode-archetype-react-app@3.0.2 `(3.0.1 => 3.0.2)`
 
