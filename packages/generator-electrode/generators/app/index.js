@@ -183,7 +183,7 @@ module.exports = generators.Base.extend({
           name: "autoSsr",
           message: "Disable server side rendering based on high load?",
           when: this.props.autoSsr === undefined,
-          default: false
+          default: true
         },
         {
           type: "list",
