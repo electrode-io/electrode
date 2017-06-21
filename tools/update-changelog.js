@@ -192,7 +192,7 @@ const updateChangelog = collated => {
 
   const prUrl = "https://github.com/electrode-io/electrode/pull";
 
-  const linkifyPR = x => x.replace(/\(#([0-9]+)\)$/, `([$1](${prUrl}/$1))`);
+  const linkifyPR = x => x.replace(/\(#([0-9]+)\)$/, `([#$1](${prUrl}/$1))`);
 
   const emitCommitMsg = msg => {
     emitCommitMsg[msg.id] = true;
