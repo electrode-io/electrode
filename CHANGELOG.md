@@ -1,3 +1,78 @@
+# 6/22/2017
+
+## Packages
+
+-   electrode-archetype-react-app@3.0.4 `(3.0.3 => 3.0.4)`
+-   electrode-archetype-react-app-dev@3.0.4 `(3.0.3 => 3.0.4)`
+-   electrode-archetype-react-component@3.0.2 `(3.0.1 => 3.0.2)`
+-   electrode-archetype-react-component-dev@3.0.2 `(3.0.1 => 3.0.2)`
+-   electrode-auto-ssr@1.0.3 `(1.0.2 => 1.0.3)`
+-   electrode-react-webapp@1.6.3 `(1.6.2 => 1.6.3)`
+-   electrode-redux-router-engine@1.4.4 `(1.4.3 => 1.4.4)`
+-   electrode-webpack-reporter@0.3.9 `(0.3.8 => 0.3.9)`
+-   generator-electrode@3.0.3 `(3.0.2 => 3.0.3)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [patch] rename clap.js to xclap.js ([#424](https://github.com/electrode-io/electrode/pull/424)) [commit](http://github.com/electrode-io/electrode/commit/2da5a892a7b828f2120b3b23d354fd807c7de2ea)
+    -   [patch][chore] clean up env get ([#419](https://github.com/electrode-io/electrode/pull/419)) [commit](http://github.com/electrode-io/electrode/commit/3a91a830516d88e455bb90a97babe04a3464d5b1)
+    -   [chore] add test mocha opts and nyc coverage config [commit](http://github.com/electrode-io/electrode/commit/6aa8bfcacb9f4d89309e321b2f0033ad63deaf7d)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   [patch] rename clap.js to xclap.js ([#424](https://github.com/electrode-io/electrode/pull/424)) [commit](http://github.com/electrode-io/electrode/commit/2da5a892a7b828f2120b3b23d354fd807c7de2ea)
+
+-   `packages/electrode-auto-ssr`
+
+    -   [patch] rename clap.js to xclap.js ([#424](https://github.com/electrode-io/electrode/pull/424)) [commit](http://github.com/electrode-io/electrode/commit/2da5a892a7b828f2120b3b23d354fd807c7de2ea)
+    -   [chore] add test mocha opts and nyc coverage config [commit](http://github.com/electrode-io/electrode/commit/6aa8bfcacb9f4d89309e321b2f0033ad63deaf7d)
+
+-   `packages/electrode-react-webapp`
+
+    -   [patch] rename clap.js to xclap.js ([#424](https://github.com/electrode-io/electrode/pull/424)) [commit](http://github.com/electrode-io/electrode/commit/2da5a892a7b828f2120b3b23d354fd807c7de2ea)
+    -   [chore] add test mocha opts and nyc coverage config [commit](http://github.com/electrode-io/electrode/commit/6aa8bfcacb9f4d89309e321b2f0033ad63deaf7d)
+
+-   `packages/electrode-redux-router-engine`
+
+    -   [patch] rename clap.js to xclap.js ([#424](https://github.com/electrode-io/electrode/pull/424)) [commit](http://github.com/electrode-io/electrode/commit/2da5a892a7b828f2120b3b23d354fd807c7de2ea)
+    -   [chore] add test mocha opts and nyc coverage config [commit](http://github.com/electrode-io/electrode/commit/6aa8bfcacb9f4d89309e321b2f0033ad63deaf7d)
+
+-   `packages/electrode-webpack-reporter`
+
+    -   [patch] rename clap.js to xclap.js ([#424](https://github.com/electrode-io/electrode/pull/424)) [commit](http://github.com/electrode-io/electrode/commit/2da5a892a7b828f2120b3b23d354fd807c7de2ea)
+
+-   `packages/generator-electrode`
+
+    -   [patch] rename clap.js to xclap.js ([#424](https://github.com/electrode-io/electrode/pull/424)) [commit](http://github.com/electrode-io/electrode/commit/2da5a892a7b828f2120b3b23d354fd807c7de2ea)
+    -   [patch] check component generators is invoked inside app. ([#422](https://github.com/electrode-io/electrode/pull/422)) [commit](http://github.com/electrode-io/electrode/commit/7fe029720c8fa261ca91da6e1975670300431680)
+    -   [chore] add test mocha opts and nyc coverage config [commit](http://github.com/electrode-io/electrode/commit/6aa8bfcacb9f4d89309e321b2f0033ad63deaf7d)
+
+-   `samples/demo-component`
+
+    -   [patch] rename clap.js to xclap.js ([#424](https://github.com/electrode-io/electrode/pull/424)) [commit](http://github.com/electrode-io/electrode/commit/2da5a892a7b828f2120b3b23d354fd807c7de2ea)
+
+-   `samples/electrode-demo-index`
+
+    -   [patch] rename clap.js to xclap.js ([#424](https://github.com/electrode-io/electrode/pull/424)) [commit](http://github.com/electrode-io/electrode/commit/2da5a892a7b828f2120b3b23d354fd807c7de2ea)
+
+-   `samples/universal-material-ui`
+
+    -   [patch] rename clap.js to xclap.js ([#424](https://github.com/electrode-io/electrode/pull/424)) [commit](http://github.com/electrode-io/electrode/commit/2da5a892a7b828f2120b3b23d354fd807c7de2ea)
+
+-   `samples/universal-react-node`
+
+    -   [patch] rename clap.js to xclap.js ([#424](https://github.com/electrode-io/electrode/pull/424)) [commit](http://github.com/electrode-io/electrode/commit/2da5a892a7b828f2120b3b23d354fd807c7de2ea)
+
+-   `docs`
+
+    -   [patch] rename clap.js to xclap.js ([#424](https://github.com/electrode-io/electrode/pull/424)) [commit](http://github.com/electrode-io/electrode/commit/2da5a892a7b828f2120b3b23d354fd807c7de2ea)
+
+-   `MISC`
+
+    -   [chore] consolidate 6/21 changelog [commit](http://github.com/electrode-io/electrode/commit/16ec599201c66911273ad2305a6de666fc01b5d9)
+
 # 6/21/2017
 
 Update and fix dependencies after major releases.
