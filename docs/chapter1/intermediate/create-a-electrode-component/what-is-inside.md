@@ -12,7 +12,7 @@ Here is the layout of packages/<componentName>:
 └── packages
     └── <componentName>
         ├── README.md
-        ├── clap.js
+        ├── xclap.js
         ├── package.json
         ├── src
         │   ├── components
@@ -49,7 +49,7 @@ Here is the layout of demo-app:
 │   │   ├── development.json
 │   │   ├── production.js
 │   │   └── production.json
-│   ├── clap.js
+│   ├── xclap.js
 │   ├── package.json
 │   ├── src
 │   │   ├── client

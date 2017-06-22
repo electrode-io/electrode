@@ -42,7 +42,7 @@ react, webpack, demo, electrode component archetype, live-reload
    create .gitignore
    create .npmignore
    create .editorconfig
-   create clap.js
+   create xclap.js
    create package.json
    create README.md
    create src/components/product-card.jsx
@@ -52,7 +52,6 @@ react, webpack, demo, electrode component archetype, live-reload
    create test/client/components/product-card.spec.jsx
 
 Your new Electrode Component is ready and your component is in '/src'.
-
 ```
 
 ## Configuring an existing project / manual setup
@@ -65,7 +64,6 @@ If you prefer to create your component manually or if you have an existing compo
 $ npm install --save-dev electrode-archetype-react-component electrode-archetype-react-component-dev
 ```
 
-
 ###### Add a `.babelrc` to your project
 
 The `.babelrc` needs to extend
@@ -77,10 +75,10 @@ The `.babelrc` needs to extend
 }
 ```
 
-###### Add a `clap.js` to your project
+###### Add a `xclap.js` to your project
 
-The `clap.js` needs to extend
-[the archetype's clap tasks](/arhcetype-clap.js) in order to apply the shared tasks on your new/existing electrode component. Add this following lines of code to the newly created `clap.js`
+The `xclap.js` needs to extend
+[the archetype's clap tasks](/arhcetype-clap.js) in order to apply the shared tasks on your new/existing electrode component. Add this following lines of code to the newly created `xclap.js`
 
 ```js
 "use strict";
@@ -96,12 +94,11 @@ xclap.load("myprj", tasks);
 require("electrode-archetype-react-component")(xclap);
 ```
 
-
 ## Managing Dependencies
 
 The archetypes are split into two parts: `<archetype>` and `<archetype>-dev`. Both archetypes need to be in each component and should be included in the `package.json`'s `devDependencies`.
 
----
+* * *
 
 ## Project Structure
 
@@ -131,7 +128,7 @@ package.json
 ## CSS Modules + CSS next
 
 By default, this archetype assumes you are using CSS-Modules + CSS-Next, you need
-to opt-in to stylus support by adding a `*.styl` to your *project's* `demo/demo.styl` & `src/styles/*.styl`.
+to opt-in to stylus support by adding a `*.styl` to your _project's_ `demo/demo.styl` & `src/styles/*.styl`.
 You can use stylus and CSS-Modules together by enabling setting the 'cssModuleStylusSupport' option in
 `archetype/config.js` to `true`.
 
@@ -184,10 +181,17 @@ $ clap archetype:check
 Built with :heart: by [Team Electrode](https://github.com/orgs/electrode-io/people) @WalmartLabs.
 
 [npm-image]: https://badge.fury.io/js/electrode-archetype-react-component.svg
+
 [npm-url]: https://npmjs.org/package/electrode-archetype-react-component
+
 [daviddm-image]: https://david-dm.org/electrode-io/electrode/status.svg?path=packages/electrode-archetype-react-component
+
 [daviddm-url]: https://david-dm.org/electrode-io/electrode?path=packages/electrode-archetype-react-component
+
 [daviddm-dev-image]: https://david-dm.org/electrode-io/electrode/dev-status.svg?path=packages/electrode-archetype-react-component
+
 [daviddm-dev-url]: https://david-dm.org/electrode-io/electrode?path=packages/electrode-archetype-react-component?type=dev
-[npm-downloads-image]:https://img.shields.io/npm/dm/electrode-archetype-react-component.svg
-[npm-downloads-url]:https://www.npmjs.com/package/electrode-archetype-react-component
+
+[npm-downloads-image]: https://img.shields.io/npm/dm/electrode-archetype-react-component.svg
+
+[npm-downloads-url]: https://www.npmjs.com/package/electrode-archetype-react-component

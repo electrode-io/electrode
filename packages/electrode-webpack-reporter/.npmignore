@@ -140,7 +140,7 @@ node_modules
 .isomorphic-loader-config.json
 
 /.npmignore
-/clap.js
+/xclap.js
 /.babelrc
 /test
 /.eslintrc

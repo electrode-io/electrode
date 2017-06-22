@@ -19,9 +19,9 @@ $ npm install --save electrode-archetype-react-app
 $ npm install --save-dev electrode-archetype-react-app-dev
 ```
 
-###### Add a `clap.js`
+###### Add a `xclap.js`
 
-The `clap.js` should contain the following and be located in the root of your project
+The `xclap.js` should contain the following and be located in the root of your project
 
 ```js
 require("electrode-archetype-react-app")();
