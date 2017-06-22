@@ -17,15 +17,17 @@ var ReactComponentGenerator = yeoman.Base.extend({
     this.optionOrPrompt = optionOrPrompt;
   },
   initializing: function() {
-
     //check if the command is being run from within an existing app
-    if(this.fs.exists(this.destinationPath("package.json"))) {
+    if (this.fs.exists(this.destinationPath("package.json"))) {
       var appPkg = this.fs.readJSON(this.destinationPath("package.json"));
-      if(!_.isEmpty(appPkg.dependencies) && _.includes(Object.keys(appPkg.dependencies), "electrode-archetype-react-app")) {
+      if (
+        !_.isEmpty(appPkg.dependencies) &&
+        _.includes(Object.keys(appPkg.dependencies), "electrode-archetype-react-app")
+      ) {
         this.env.error(
-        "Please do not run this command from within an application." +
-        "\nComponent structure should be generated in its own folder."
-      );
+          "Please do not run this command from within an application." +
+            "\nComponent structure should be generated in its own folder."
+        );
       }
     }
 
@@ -311,14 +313,22 @@ var ReactComponentGenerator = yeoman.Base.extend({
       this.appName = _.isEmpty(this.demoAppName) ? this.originalDemoAppName : this.demoAppName;
       this.log(
         "\n" +
-        chalk.green.underline("Your new Electrode component is ready!") +
-        "\n" +
-        "Your component is in " + this.packageName + "/packages" +
-        " and your demo app is " + this.packageName + "/" + this.appName +
-        "\n" +
-        "\nType 'cd " + this.packageName + "/" + this.appName +
-        "' then 'clap dev' to run the development build for the demo app." +
-        "\n"
+          chalk.green.underline("Your new Electrode component is ready!") +
+          "\n" +
+          "Your component is in " +
+          this.packageName +
+          "/packages" +
+          " and your demo app is " +
+          this.packageName +
+          "/" +
+          this.appName +
+          "\n" +
+          "\nType 'cd " +
+          this.packageName +
+          "/" +
+          this.appName +
+          "' then 'clap dev' to run the development build for the demo app." +
+          "\n"
       );
     }
   }
