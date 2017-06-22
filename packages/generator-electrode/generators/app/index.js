@@ -326,7 +326,7 @@ module.exports = generators.Base.extend({
     // Let's extend package.json so we're not overwriting user previous fields
     this.fs.writeJSON(this.destinationPath("package.json"), pkg);
 
-    const rootConfigsToCopy = ["clap.js", "config", "test"];
+    const rootConfigsToCopy = ["xclap.js", "config", "test"];
     if (isSingleQuote) rootConfigsToCopy.push(".eslintrc");
     rootConfigsToCopy.forEach(f => {
       this.fs.copyTpl(this.templatePath(f), this.destinationPath(f), { isSingleQuote });
