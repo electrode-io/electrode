@@ -1,10 +1,15 @@
 # 6/21/2017
 
+Update and fix dependencies after major releases.
+
 ## Packages
 
 ### Directly Updated
 
+-   electrode-archetype-react-app-dev@3.0.2 `(3.0.1 => 3.0.2)`
+-   electrode-archetype-react-app@3.0.2 `(3.0.1 => 3.0.2)`
 -   electrode-webpack-reporter@0.3.8 `(0.3.7 => 0.3.8)`
+-   generator-electrode@3.0.2 `(3.0.1 => 3.0.2)`
 
 ### Lerna Updated
 
@@ -13,17 +18,13 @@
 
 ## Commits
 
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [patch] update peer dep ([#415](https://github.com/electrode-io/electrode/pull/415)) [commit](http://github.com/electrode-io/electrode/commit/3799989a37482c6b094c17f3e2f1e17e283a2b72)
+
 -   `packages/electrode-webpack-reporter`
 
     -   [patch] fix webpack-reporter ([#417](https://github.com/electrode-io/electrode/pull/417)) [commit](http://github.com/electrode-io/electrode/commit/f57955582d1b4243f75ab8f7ec441013df71aa04)
-
-# 6/21/2017
-
-## Packages
-
--   generator-electrode@3.0.2 `(3.0.1 => 3.0.2)`
-
-## Commits
 
 -   `packages/generator-electrode`
 
@@ -33,19 +34,6 @@
 
     -   update tools script [commit](http://github.com/electrode-io/electrode/commit/5471ef382546c50c6c24d1ac7d33300ee78f78ba)
     -   fix tools update changelog [commit](http://github.com/electrode-io/electrode/commit/4011529aeb22078f8d84704bd39dad57d4d82a2f)
-
-# 6/21/2017
-
-## Packages
-
--   electrode-archetype-react-app-dev@3.0.2 `(3.0.1 => 3.0.2)`
--   electrode-archetype-react-app@3.0.2 `(3.0.1 => 3.0.2)`
-
-## Commits
-
--   `packages/electrode-archetype-react-app[-dev]`
-
-    -   [patch] update peer dep ([#415](https://github.com/electrode-io/electrode/pull/415)) [commit](http://github.com/electrode-io/electrode/commit/3799989a37482c6b094c17f3e2f1e17e283a2b72)
 
 # 6/20/2017
 
