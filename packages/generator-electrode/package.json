@@ -60,5 +60,20 @@
   "engines": {
     "node": ">= 4 <= 8",
     "npm": ">= 3 <= 5"
+  },
+  "nyc": {
+    "all": true,
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "exclude": [
+      "coverage",
+      "*clap.js",
+      "gulpfile.js",
+      "dist",
+      "test"
+    ]
   }
 }
