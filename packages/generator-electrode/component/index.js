@@ -7,6 +7,7 @@ var path = require("path");
 var extend = _.merge;
 var parseAuthor = require("parse-author");
 var optionOrPrompt = require("yeoman-option-or-prompt");
+var nodeFS = require("fs");
 
 var ReactComponentGenerator = yeoman.Base.extend({
   constructor: function() {
@@ -16,6 +17,18 @@ var ReactComponentGenerator = yeoman.Base.extend({
     this.optionOrPrompt = optionOrPrompt;
   },
   initializing: function() {
+
+    //check if the command is being run from within an existing app
+    if(this.fs.exists(this.destinationPath("package.json"))) {
+      var appPkg = this.fs.readJSON(this.destinationPath("package.json"));
+      if(!_.isEmpty(appPkg.dependencies) && _.includes(Object.keys(appPkg.dependencies), "electrode-archetype-react-app")) {
+        this.env.error(
+        "Please do not run this command from within an application." +
+        "\nComponent structure should be generated in its own folder."
+      );
+      }
+    }
+
     this.isAddon = this.options.isAddon || false;
     this.demoAppName = this.options.demoAppName;
     this.pkg = this.fs.readJSON(this.destinationPath("package.json"), {});
