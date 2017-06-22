@@ -139,6 +139,6 @@ node_modules
 dist
 
 /.npmignore
-/clap.js
+/xclap.js
 /.babelrc
 /test

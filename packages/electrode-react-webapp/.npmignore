@@ -142,7 +142,7 @@ lib/templates
 minified/
 
 /.npmignore
-/clap.js
+/xclap.js
 /.eslintrc
 /.eslintignore
 /.babelrc
