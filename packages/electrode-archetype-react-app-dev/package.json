@@ -114,6 +114,7 @@
     "webpack-stats-plugin": "^0.1.1",
     "winston": "^2.3.1",
     "xclap": "^0.2.0",
+    "xclap-cli": "^0.1.1",
     "xenv-config": "^1.0.0",
     "xsh": "^0.3.2"
   },
