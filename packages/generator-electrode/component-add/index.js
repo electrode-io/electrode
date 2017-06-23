@@ -80,9 +80,7 @@ module.exports = generators.Base.extend({
 
     try {
       //fetch the demo App Name, which is "demo-app" by default
-      glob.sync("**demo-app", { cwd: path.resolve("..") }).map(x => {
-        this.demoAppName = x;
-      });
+      this.demoAppName = _.first(glob.sync("**demo-app", { cwd: path.resolve("..") }));
       this.pkg = this.fs.exists(
         this.destinationPath(path.join("..", this.demoAppName, "package.json"))
       );
