@@ -1,19 +1,19 @@
 "use strict";
 
-const ispartaLoader = require.resolve("isparta-loader");
+const iiLoader = require.resolve("../loaders/istanbul-instrument-loader");
+process.traceDeprecation = true;
 
 module.exports = function() {
   return {
     module: {
       rules: [
-        // Manually instrument client code for code coverage.
-        // https://github.com/deepsweet/isparta-loader handles ES6 + normal JS.
         {
-          _name: "isparta",
+          _name: "istanbul-instrument-loader",
+          loader: iiLoader,
           test: /(test|client)\/.*\.jsx?$/,
           enforce: "pre",
           exclude: /(node_modules|\bclient\/vendor\b)/,
-          loader: ispartaLoader
+          query: "esModules=true"
         }
       ]
     }
