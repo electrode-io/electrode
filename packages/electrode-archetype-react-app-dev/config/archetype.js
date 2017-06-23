@@ -11,7 +11,7 @@ const configDir = `${devDir}/config`;
 const xenvConfig = devRequire("xenv-config");
 
 const webpackConfigSpec = {
-  devHostName: { env: ["WEBPACK_HOST", "WEBPACK_DEV_HOST"], default: "localhost" },
+  devHostname: { env: ["WEBPACK_HOST", "WEBPACK_DEV_HOST"], default: "localhost" },
   devPort: { env: "WEBPACK_DEV_PORT", default: 2992 },
   testPort: { env: "WEBPACK_TEST_PORT", default: 3001 },
   https: { env: "WEBPACK_DEV_HTTPS", default: false },
