@@ -2,8 +2,8 @@
 
 ## Packages
 
--   electrode-archetype-react-app@3.0.4 `(3.0.3 => 3.0.4)`
--   electrode-archetype-react-app-dev@3.0.4 `(3.0.3 => 3.0.4)`
+-   electrode-archetype-react-app@3.0.5 `(3.0.3 => 3.0.5)`
+-   electrode-archetype-react-app-dev@3.0.5 `(3.0.3 => 3.0.5)`
 -   electrode-archetype-react-component@3.0.2 `(3.0.1 => 3.0.2)`
 -   electrode-archetype-react-component-dev@3.0.2 `(3.0.1 => 3.0.2)`
 -   electrode-auto-ssr@1.0.3 `(1.0.2 => 1.0.3)`
@@ -16,6 +16,7 @@
 
 -   `packages/electrode-archetype-react-app[-dev]`
 
+    -   [patch] fix devHostname [commit](http://github.com/electrode-io/electrode/commit/bcc2de27ea9382dd2b7256c13732029ae6f08bc2)
     -   [patch] rename clap.js to xclap.js ([#424](https://github.com/electrode-io/electrode/pull/424)) [commit](http://github.com/electrode-io/electrode/commit/2da5a892a7b828f2120b3b23d354fd807c7de2ea)
     -   [patch][chore] clean up env get ([#419](https://github.com/electrode-io/electrode/pull/419)) [commit](http://github.com/electrode-io/electrode/commit/3a91a830516d88e455bb90a97babe04a3464d5b1)
     -   [chore] add test mocha opts and nyc coverage config [commit](http://github.com/electrode-io/electrode/commit/6aa8bfcacb9f4d89309e321b2f0033ad63deaf7d)
