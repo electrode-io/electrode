@@ -62,7 +62,7 @@ describe("electrode:app", function() {
         },
         files: [],
         keywords: this.answers.keywords,
-        main: "server/index.js"
+        main: "lib/server/index.js"
       });
     });
 

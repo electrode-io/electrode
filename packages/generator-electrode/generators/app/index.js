@@ -182,7 +182,7 @@ module.exports = generators.Base.extend({
         {
           type: "confirm",
           name: "autoSsr",
-          message: "Disable server side rendering based on high load?",
+          message: "Support disabling server side rendering based on high load?",
           when: this.props.autoSsr === undefined,
           default: false
         },
@@ -295,7 +295,7 @@ module.exports = generators.Base.extend({
         url: this.props.authorUrl
       },
       files: [this.options.projectRoot],
-      main: path.join(this.options.projectRoot, "index.js").replace(/\\/g, "/"),
+      main: path.posix.join("lib", this.options.projectRoot, "index.js"),
       keywords: []
     };
     if (this.isDemoApp) {
