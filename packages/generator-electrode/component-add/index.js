@@ -160,10 +160,6 @@ module.exports = generators.Base.extend({
       }
     };
 
-    //add new package to the dependencies
-    //let dependencies = {};
-    //dependencies[this.packageName] = path.join("..", "packages", this.packageName);
-
     //overwrite the Demo App package.json
     let existingPkg = this.fs.readJSON(
       this.destinationPath(path.join("..", "..", this.demoAppName, "package.json"))
