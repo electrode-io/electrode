@@ -295,7 +295,7 @@ module.exports = generators.Base.extend({
         url: this.props.authorUrl
       },
       files: [this.options.projectRoot],
-      main: path.join("src", this.options.projectRoot, "index.js").replace(/\\/g, "/"),
+      main: path.posix.join("lib", this.options.projectRoot, "index.js"),
       keywords: []
     };
     if (this.isDemoApp) {
