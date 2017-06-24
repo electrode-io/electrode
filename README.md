@@ -15,7 +15,7 @@ Read the [Announcement Blog] Post.
 
 Visit our site at <http://www.electrode.io>.
 
-See the [README.md in docs](/docs/README.md) or visit our [gitbook documents].
+See the [Full README.md in docs](/docs/README.md) or visit our [gitbook documents].
 
 # Getting Started
 
@@ -31,9 +31,8 @@ Check [gitbook] for more info about gitbook.
 
 Please see the [CONTRIBUTING guide](/CONTRIBUTING.md)
 
-Built with :heart: by [Team Electrode] @WalmartLabs.
 
-[team electrode]: https://github.com/orgs/electrode-io/people
+
 
 [announcement blog]: https://medium.com/walmartlabs/introducing-electrode-an-open-source-release-from-walmartlabs-14b836135319#.pwbddxg1z
 
@@ -57,4 +56,4 @@ Built with :heart: by [Team Electrode] @WalmartLabs.
 
 [gitbook]: https://www.gitbook.com/
 
-[gitbook documents]: https://electrode.gitbooks.io/electrode/content/overview/what-is-electrode.html
+[gitbook documents]: https://docs.electrode.io/overview/what-is-electrode.html

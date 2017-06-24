@@ -11,15 +11,9 @@
 
 > Built at @WalmartLabs powering the walmart.com eCommerce site, Electrode is a platform for building universal React/Node.js applications with a standardized structure, best practices, and modern technologies baked in. Electrode focuses on performance, component reusability, and simple deployment to multiple cloud providers—so you can focus on what makes your app unique.
 
-Read the [Announcement Blog] Post.
+## Contributing
 
-## Report a bug or request a feature
-
-https://github.com/electrode-io/electrode/issues
-
-## Report an issue or help out with the docs
-
-https://github.com/electrode-io/electrode-io.github.io/issues
+See our [contributing guide] for instructions on [submitting a PR] or [reporting an issue].
 
 
 # Packages
@@ -33,6 +27,8 @@ This repo uses [Lerna] to manage multiple related packages that are part of the 
 ## Yeoman Generator
 
 The Yeoman [generator-electrode] NPM module allows you to quickly create an Universal React App with support from the app archetype, and server in Node with Hapi or Express.
+
+You can learn how to use them [here](https://docs.electrode.io/chapter1/quick-start/get-started.html).
 
 # Sample Applications
 
@@ -56,16 +52,13 @@ See its [README](https://github.com/electrode-io/electrode/blob/master/samples/u
 
 Under [`samples/universal-material-ui`](https://github.com/electrode-io/electrode/tree/master/samples/universal-material-ui) is a sample Electrode app that uses the [material-ui] React components.
 
-See its [README](https://github.com/electrode-io/electrode/tree/master/samples/universal-material-ui/README.md) for more details.
+See its [README](https://github.com/electrode-io/electrode/blob/master/samples/universal-material-ui/README.md) for more details.
 
 # More Samples
 
 We have more separate Electrode Sample Apps at https://github.com/electrode-samples that you can use as references.
 
-Built with ♡ by [Team Electrode] @WalmartLabs.
 
-[Team Electrode]: https://github.com/orgs/electrode-io/people
-[Announcement Blog]: https://medium.com/walmartlabs/introducing-electrode-an-open-source-release-from-walmartlabs-14b836135319#.pwbddxg1z
 [material-ui]: http://www.material-ui.com
 [Lerna]: https://lernajs.io/
 [electrode-archetype-react-app]: https://github.com/electrode-io/electrode/tree/master/packages/electrode-archetype-react-app
@@ -75,3 +68,6 @@ Built with ♡ by [Team Electrode] @WalmartLabs.
 [travis-url]: https://travis-ci.org/electrode-io/electrode
 [daviddm-image]: https://david-dm.org/electrode-io/electrode/dev-status.svg
 [daviddm-url]: https://david-dm.org/electrode-io/electrode?type=dev
+[contributing guide]: https://github.com/electrode-io/electrode/blob/master/CONTRIBUTING.md
+[submitting a PR]: https://github.com/electrode-io/electrode/pulls
+[reporting an issue]: https://github.com/electrode-io/electrode/issues
