@@ -8,7 +8,7 @@ There are [few guidelines](#contributing-guidelines) that we request contributor
 
 This repo uses [Lerna] as a top level setup.
 
--   Install `clap` command
+-   Install the `clap` command globally if you don't want to invoke from `node_modules/.bin`.
 
 ```bash
 $ npm install -g xclap-cli
@@ -23,17 +23,14 @@ $ cd electrode
 
 -   Quick Test
 
-Run:
+Run at the top level:
 
 ```bash
 $ npm install
 $ npm run bootstrap
-$ clap samples-local
 ```
 
--   Now you can go to the `samples` folder, pick or create any samples, develop and test your changes over there.
-
-For example, run the `universal-react-node` samples in `dev` mode:
+-   Now you can go to the `samples` folder and try the `universal-react-node` sample app, develop and test your changes over there.
 
 ```bash
 $ cd samples/universal-react-node
@@ -41,11 +38,11 @@ $ npm install
 $ clap dev
 ```
 
-After running above, you should see a similar text as `Hapi.js server running at http://m-C02SL0GSG8WM.local:3000` in command line.
+After running above, you should see a similar text as `Hapi.js server running at http://localhost:3000` in command line.
 
-And when you open the browser at `http://localhost:3000`, you should see a large Electrode icon with a few demonstration components below.
+And when you open the browser at `http://localhost:3000`, you should see a large Electrode icon with a few demonstration components.
 
-You can also run in `hot` mode.  However, `hot` mode is still experimental and there are issues.
+You can also run in `hot` mode.  However, `hot` mode is still experimental and there may be issues.
 
 ```bash
 $ clap hot
