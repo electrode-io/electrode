@@ -48,6 +48,10 @@ function setDevelopmentEnv() {
   process.env.NODE_ENV = "development";
 }
 
+function setWebpackHot() {
+  process.env.HMR = "true";
+}
+
 function setStaticFilesEnv() {
   process.env.STATIC_FILES = "true";
 }
@@ -287,6 +291,7 @@ function makeTasks() {
     ".mk-dll-dir": () => createGitIgnoreDir(Path.resolve("dll"), "Electrode dll dir"),
     ".production-env": () => setProductionEnv(),
     ".development-env": () => setDevelopmentEnv(),
+    ".webpack-hot": () => setWebpackHot(),
     ".webpack-dev": () => setWebpackDev(),
     ".static-files-env": () => setStaticFilesEnv(),
     ".optimize-stats": () => setOptimizeStats(),
@@ -472,7 +477,7 @@ Individual .babelrc files were generated for you in src/client and src/server
 
     hot: {
       desc: "Start your app with watch in hot mode with webpack-dev-server",
-      dep: [".development-env", ".clean.build", ".mk-dist-dir"],
+      dep: [".development-env", ".webpack-hot"],
       task: [".webpack-dev", ["wds.hot", "server-watch", "generate-service-worker"]]
     },
 
