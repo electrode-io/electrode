@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/electrode-io/cdn-file-loader.git"
+    "url": "https://github.com/electrode-io/electrode-cdn-file-loader.git"
   },
   "keywords": [],
   "author": "",
   "license": "UNLICENSED",
   "dependencies": {
-    "loader-utils": "^0.2.12"
+    "loader-utils": "^1.1.0"
   }
 }
