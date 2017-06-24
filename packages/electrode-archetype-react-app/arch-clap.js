@@ -3,6 +3,7 @@
 const Fs = require("fs");
 const archetype = require("./config/archetype");
 const assert = require("assert");
+const requireAt = require("require-at");
 
 assert(!archetype.noDev, "dev archetype is missing - development & build tasks not possible");
 
@@ -709,7 +710,7 @@ Individual .babelrc files were generated for you in src/client and src/server
 module.exports = function(xclap) {
   setupPath();
   createElectrodeTmpDir();
-  xclap = xclap || devRequire("xclap");
+  xclap = xclap || requireAt(process.cwd())("xclap") || devRequire("xclap");
   process.env.FORCE_COLOR = "true"; // force color for chalk
   xclap.load("electrode", makeTasks());
 };

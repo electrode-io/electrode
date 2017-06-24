@@ -104,7 +104,7 @@
     "style-loader": "^0.13.1",
     "stylus": "^0.54.5",
     "stylus-relative-loader": "^3.0.0",
-    "sw-precache": "^4.3.0",
+    "sw-precache": "^5.0.0",
     "sw-toolbox": "^3.4.0",
     "url-loader": "^0.5.6",
     "web-app-manifest-loader": "^0.1.1",
@@ -115,7 +115,6 @@
     "webpack-stats-plugin": "^0.1.1",
     "winston": "^2.3.1",
     "xclap": "^0.2.0",
-    "xclap-cli": "^0.1.1",
     "xenv-config": "^1.0.0",
     "xsh": "^0.3.2"
   },
