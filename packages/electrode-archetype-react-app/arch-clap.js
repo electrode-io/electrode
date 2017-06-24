@@ -214,6 +214,14 @@ function inlineCriticalCSS() {
   });
 }
 
+function startAppServer(options) {
+  options = options || [];
+  logger.info.log("Starting app server with options:", options);
+  logger.info.log("To terminate press Ctrl+C.");
+  archetype.Appmode.setEnv(archetype.AppMode.lib.dir);
+  return exec(`node`, options, Path.join(archetype.AppMode.lib.server, "index.js"));
+}
+
 /*
  *
  * For information on how to specify a task, see:
@@ -511,26 +519,40 @@ Individual .babelrc files were generated for you in src/client and src/server
     server: ["app-server"], // keep old server name for backward compat
 
     "app-server": {
-      desc: "Start the app server only, Must have dist by running `clap build` first.",
-      task: () => {
-        AppMode.setEnv(AppMode.lib.dir);
-        return exec(`node ${Path.join(AppMode.lib.server, "index.js")}`);
-      }
+      desc: "Start the app server only. Must run 'clap build' first.",
+      task: () => startAppServer()
     },
 
-    "server-debug": () => {
-      AppMode.setEnv(AppMode.lib.dir);
-      return exec(`node debug ${Path.join(AppMode.lib.server, "index.js")}`);
+    "server-debug": {
+      desc: "Start the app serve with 'node debug'",
+      task: () => startAppServer(["debug"])
+    },
+
+    "server-build-debug": {
+      desc: "Build and debug with devTools",
+      task: ["build", "server-devtools"]
+    },
+
+    "server-build-debug-brk": {
+      desc: "Build and debug with devTools with breakpoint starting the app",
+      task: ["build", "server-devtools-debug-brk"]
+    },
+
+    "server-devtools": {
+      desc: "Debug the app server with 'node --inspect'",
+      task: () => startAppServer(["--inspect"])
+    },
+
+    "server-devtools-debug-brk": {
+      desc: "Debug the app server with 'node --inspect --debug-brk'",
+      task: () => startAppServer(["--inspect", "--debug-brk"])
     },
 
     "server-prod": {
       dep: [".production-env", ".static-files-env"],
       desc:
-        "Start server in production mode with static files routes.  Must have dist by running `clap build`.",
-      task: () => {
-        AppMode.setEnv(AppMode.lib.dir);
-        return exec(`node ${Path.join(AppMode.lib.server, "index.js")}`);
-      }
+        "Start server in production mode with static files routes.  Must run 'clap build' first.",
+      task: () => startAppServer()
     },
 
     ".init-bundle.valid.log": () =>
