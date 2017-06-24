@@ -216,9 +216,10 @@ function inlineCriticalCSS() {
 
 function startAppServer(options) {
   options = options || [];
-  logger.info.log("Starting app server with options:", options);
-  logger.info.log("To terminate press Ctrl+C.");
-  archetype.Appmode.setEnv(archetype.AppMode.lib.dir);
+  const x = options.length > 0 ? ` with options: ${options.join(" ")}` : "";
+  logger.info(`Starting app server${x}`);
+  logger.info("To terminate press Ctrl+C.");
+  archetype.AppMode.setEnv(archetype.AppMode.lib.dir);
   return exec(`node`, options, Path.join(archetype.AppMode.lib.server, "index.js"));
 }
 
