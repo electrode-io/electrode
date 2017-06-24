@@ -441,8 +441,7 @@ module.exports = generators.Base.extend({
         local: require.resolve("../git")
       }
     );
-
-    if (this.props.license && !this.pkg.license) {
+    if (this.options.license && !this.pkg.license) {
       this.composeWith(
         "license",
         {
