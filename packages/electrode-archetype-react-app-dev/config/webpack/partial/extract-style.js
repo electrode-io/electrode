@@ -94,7 +94,7 @@ module.exports = function() {
     module: { rules },
     plugins: [
       new ExtractTextPlugin({ filename: "[name].style.[hash].css" }),
-      new OptimizeCssAssetsPlugin(),
+      process.env.NODE_ENV === "production" && new OptimizeCssAssetsPlugin(),
 
       /*
        preserve: default: false. Keep the original unsplit file as well.
@@ -128,6 +128,6 @@ module.exports = function() {
           }
         }
       })
-    ]
+    ].filter(x => !!x)
   };
 };
