@@ -1,61 +1,54 @@
+/*
+ * This is a demo component the Eletrode app generator included
+ * to show using Skeleton CSS lib (named base.css) and Redux
+ * store for display HTML elements and managing states.
+ *
+ * To start your own app, please replace or remove these files:
+ *
+ * - this file (home.jsx)
+ * - demo-buttons.jsx
+ * - demo-pure-states.jsx
+ * - demo-states.jsx
+ * - reducers/index.jsx
+ * - styles/*.css
+ *
+ */
+
 import React from "react";
-import PropTypes from "prop-types";
-import {connect} from "react-redux";
+import "../styles/normalize.css";
+import "../styles/raleway.css";
+import skeleton from "../styles/skeleton.css";
+import custom from "../styles/custom.css";
+import electrodePng from "../images/electrode.png";
+import DemoStates from "./demo-states";
+import DemoPureStates from "./demo-pure-states";
+import { DemoButtons } from "./demo-buttons";
 /*<% if (pwa) { %>*/
 import Notifications from "react-notify-toast";
 /*<% } %>*/
-import {toggleCheck, incNumber, decNumber} from "../actions";
 
-class Home extends React.Component {
-  render() {
-    const props = this.props;
-    const {checked, value} = props;
-    return (
-      <div>
-        {/*<% if (pwa) { %>*/}
-        <Notifications />
-        {/*<% } %>*/}
-        <h1>Hello <a href={"https://github.com/electrode-io"}>{"Electrode"}</a></h1>
-        <div>
-          <h2>Managing States with Redux</h2>
-          <label>
-            <input onChange={props.onChangeCheck} type={"checkbox"} checked={checked}/>
-            Checkbox
-          </label>
-          <div>
-            <button type={"button"} onClick={props.onDecrease}>-</button>
-            &nbsp;{value}&nbsp;
-            <button type={"button"} onClick={props.onIncrease}>+</button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
+export default () =>
+  <div className={custom.container}>
+    {/*<% if (pwa) { %>*/}
+    <Notifications />
+    {/*<% } %>*/}
 
-Home.propTypes = {
-  checked: PropTypes.bool,
-  value: PropTypes.number.isRequired
-};
+    <section className={custom.header}>
+      <h2 className={skeleton.title}>
+        Hello from {" "}
+        <a href="https://github.com/electrode-io">{"Electrode"} <img src={electrodePng} /></a>
+      </h2>
+    </section>
 
-const mapStateToProps = (state) => {
-  return {
-    checked: state.checkBox.checked, value: state.number.value
-  };
-};
+    <div className={custom["docs-section"]}>
+      <DemoStates />
+    </div>
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onChangeCheck: () => {
-      dispatch(toggleCheck());
-    },
-    onIncrease: () => {
-      dispatch(incNumber());
-    },
-    onDecrease: () => {
-      dispatch(decNumber());
-    }
-  };
-};
+    <div className={custom["docs-section"]}>
+      <DemoPureStates />
+    </div>
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+    <div className={custom["docs-section"]}>
+      <DemoButtons />
+    </div>
+  </div>;

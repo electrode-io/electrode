@@ -5,12 +5,18 @@ process.on("SIGINT", () => {
 });
 
 const electrodeConfippet = require("electrode-confippet");
-<% if (isHapi) { %>const staticPathsDecor = require("electrode-static-paths");<% } %>
 const support = require("electrode-archetype-react-app/support");
 
-support.load()
-  .then(() => {
-    const config = electrodeConfippet.config;
+/* eslint-disable global-require <% if (isHapi) { %>*/
+const staticPathsDecor = require("electrode-static-paths");
+const startServer = config => require("electrode-server")(config, [staticPathsDecor()]);
+//<% } else if (isExpress) { %>
+const startServer = config => require("./express-server")(config);
+//<% } else { %>
+const startServer = config => require("./koa-server")(config);
+//<% } %>
 
-    require<% if (isHapi) { %>("electrode-server")(config, [staticPathsDecor()])<% } else if (isExpress){ %>("./express-server")(config)<% } else { %>("./koa-server")(config)<% } %>;  // eslint-disable-line
-  });
+support.load().then(() => {
+  const config = electrodeConfippet.config;
+  return startServer(config);
+});
