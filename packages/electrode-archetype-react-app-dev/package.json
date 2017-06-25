@@ -60,7 +60,7 @@
     "fs-extra": "^0.26.5",
     "glob": "^7.0.6",
     "isomorphic-loader": "^1.0.0",
-    "istanbul": "^0.3.18",
+    "istanbul": "^0.4.5",
     "istanbul-lib-instrument": "^1.7.2",
     "json-loader": "^0.5.3",
     "jsonfile": "^2.2.2",
