@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Home from "client/components/home";
-import {createStore} from "redux";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
 import rootReducer from "client/reducers";
 
 describe("Home", () => {
@@ -18,16 +19,13 @@ describe("Home", () => {
 
   it("has expected content with deep render", () => {
     const initialState = {
-      checkBox: {checked: false},
-      number: {value: 999}
+      checkBox: { checked: false },
+      number: { value: 999 }
     };
 
     const store = createStore(rootReducer, initialState);
 
-    component = ReactDOM.render(
-      <Home store={store}/>,
-      container
-    );
+    component = ReactDOM.render(<Provider store={store}><Home /></Provider>, container);
 
     expect(component).to.not.be.false;
   });
