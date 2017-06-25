@@ -1,3 +1,56 @@
+# 6/24/2017
+
+## Packages
+
+-   electrode-archetype-react-app@3.1.0 `(3.0.5 => 3.1.0)`
+-   electrode-archetype-react-app-dev@3.1.0 `(3.0.5 => 3.1.0)`
+-   electrode-archetype-react-component@3.0.3 `(3.0.2 => 3.0.3)`
+-   electrode-archetype-react-component-dev@3.0.3 `(3.0.2 => 3.0.3)`
+-   generator-electrode@3.0.4 `(3.0.3 => 3.0.4)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [minor] update mocha ([#434](https://github.com/electrode-io/electrode/pull/434)) [commit](http://github.com/electrode-io/electrode/commit/286d79aa4642ac57fe8c1346cc48069e42dfba6d)
+    -   [patch] update dep extract-text-plugin ([#433](https://github.com/electrode-io/electrode/pull/433)) [commit](http://github.com/electrode-io/electrode/commit/03c8eda0c78fc87fbba545562adc52ba22ae03ae)
+    -   [patch] fix startAppServer [commit](http://github.com/electrode-io/electrode/commit/cca48935944e809312a3e9572a33ea73dc555970)
+    -   [patch] update dep, xclap, sw-precache ([#431](https://github.com/electrode-io/electrode/pull/431)) [commit](http://github.com/electrode-io/electrode/commit/31a350a5effb8fe9a70f147fa83d476a53df434e)
+    -   [patch] update the deprecated isparta-loader ([#428](https://github.com/electrode-io/electrode/pull/428)) [commit](http://github.com/electrode-io/electrode/commit/013c14b521b720d4211bc2999e3935624a2ec0d5)
+    -   [patch] add xclai-cli to archetype app ([#426](https://github.com/electrode-io/electrode/pull/426)) [commit](http://github.com/electrode-io/electrode/commit/01416b5f5eff2060a99a5d55e9c00e27bcc55484)
+    -   Fix eslint errors [commit](http://github.com/electrode-io/electrode/commit/4f132586b81dab1ed1e7a40f259f77db5a09dfaf)
+    -   Debug server side components with Chrome Developer Tools (DevTools) [commit](http://github.com/electrode-io/electrode/commit/eb8124b0baf8b0af8d86f743e70a365db5f7423f)
+    -   code refactor [commit](http://github.com/electrode-io/electrode/commit/533b94138e3465ad7f8b2ef5509703ff8a5f824d)
+    -   fix typo [commit](http://github.com/electrode-io/electrode/commit/c2086c13bf7e6e628dfae08a8bc29cd0164a463a)
+    -   added missing variable [commit](http://github.com/electrode-io/electrode/commit/b1b0a0fca7c098d7a4f02e274ef183b36be99edd)
+    -   remove extractTextPlugin in hot mode [commit](http://github.com/electrode-io/electrode/commit/19c6e08da5b371a39c6bed3c97407a4c6be5541f)
+    -   [minor] update istanbul ([#435](https://github.com/electrode-io/electrode/pull/435)) [commit](http://github.com/electrode-io/electrode/commit/415ea039cb2f6f309a032b3c838eb384a99919de)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   [patch] improve resolving xclap ([#432](https://github.com/electrode-io/electrode/pull/432)) [commit](http://github.com/electrode-io/electrode/commit/1d4051cfd1cae8e29f21ff6795626be96923c3ae)
+
+-   `packages/generator-electrode`
+
+    -   [patch] [bug] fix license prompt for app generator, use path. ([#429](https://github.com/electrode-io/electrode/pull/429)) [commit](http://github.com/electrode-io/electrode/commit/0461a59dfd12c6bd2ed9f3a022744908320d1f1e)
+    -   [patch] change autoSSR message ([#425](https://github.com/electrode-io/electrode/pull/425)) [commit](http://github.com/electrode-io/electrode/commit/7212b70180e39421d2a5774e4ef3ff8dd9edab77)
+    -   rename clap.js to xclap.js ([#427](https://github.com/electrode-io/electrode/pull/427)) [commit](http://github.com/electrode-io/electrode/commit/4030b1cc626575c4d2f8736f36804c0c82352478)
+    -   Debug server side components with Chrome Developer Tools (DevTools) [commit](http://github.com/electrode-io/electrode/commit/eb8124b0baf8b0af8d86f743e70a365db5f7423f)
+
+-   `samples/universal-react-node`
+
+    -   [chore] remove xlap-cli from sample [commit](http://github.com/electrode-io/electrode/commit/1efdcf86a9934cea9137eff09d60255b967693cf)
+    -   [chore] default samples to pull from local package ([#430](https://github.com/electrode-io/electrode/pull/430)) [commit](http://github.com/electrode-io/electrode/commit/acf58194afbedc7819ebe32371b9ce03311d8820)
+
+-   `docs`
+
+    -   update readme [commit](http://github.com/electrode-io/electrode/commit/f195c72c174fd13d8fd9800c03d79ba73356bb95)
+
+-   `MISC`
+
+    -   update contributing guide [commit](http://github.com/electrode-io/electrode/commit/84e5eb682f3b2b9b0c73d34f284fc0562dc8a0db)
+    -   update lerna [commit](http://github.com/electrode-io/electrode/commit/c4e70ae0dc8fae527edabc2ea3a8a6b03310ba54)
+
 # 6/22/2017
 
 ## Packages
