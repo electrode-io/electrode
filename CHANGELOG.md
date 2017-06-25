@@ -2,8 +2,8 @@
 
 ## Packages
 
--   electrode-archetype-react-app@3.1.0 `(3.0.5 => 3.1.0)`
--   electrode-archetype-react-app-dev@3.1.0 `(3.0.5 => 3.1.0)`
+-   electrode-archetype-react-app@3.1.1 `(3.0.5 => 3.1.1)`
+-   electrode-archetype-react-app-dev@3.1.1 `(3.0.5 => 3.1.1)`
 -   electrode-archetype-react-component@3.0.3 `(3.0.2 => 3.0.3)`
 -   electrode-archetype-react-component-dev@3.0.3 `(3.0.2 => 3.0.3)`
 -   generator-electrode@3.0.4 `(3.0.3 => 3.0.4)`
@@ -12,6 +12,7 @@
 
 -   `packages/electrode-archetype-react-app[-dev]`
 
+    -   [patch] only optimize CSS for production build ([#436](https://github.com/electrode-io/electrode/pull/436)) [commit](http://github.com/electrode-io/electrode/commit/7ab6f54defae2995becef5b9e5a1d154774a7ab8)
     -   [minor] update mocha ([#434](https://github.com/electrode-io/electrode/pull/434)) [commit](http://github.com/electrode-io/electrode/commit/286d79aa4642ac57fe8c1346cc48069e42dfba6d)
     -   [patch] update dep extract-text-plugin ([#433](https://github.com/electrode-io/electrode/pull/433)) [commit](http://github.com/electrode-io/electrode/commit/03c8eda0c78fc87fbba545562adc52ba22ae03ae)
     -   [patch] fix startAppServer [commit](http://github.com/electrode-io/electrode/commit/cca48935944e809312a3e9572a33ea73dc555970)
@@ -32,7 +33,7 @@
 
 -   `packages/generator-electrode`
 
-    -   [patch] [bug] fix license prompt for app generator, use path. ([#429](https://github.com/electrode-io/electrode/pull/429)) [commit](http://github.com/electrode-io/electrode/commit/0461a59dfd12c6bd2ed9f3a022744908320d1f1e)
+    -   [patch][bug] fix license prompt for app generator, use path. ([#429](https://github.com/electrode-io/electrode/pull/429)) [commit](http://github.com/electrode-io/electrode/commit/0461a59dfd12c6bd2ed9f3a022744908320d1f1e)
     -   [patch] change autoSSR message ([#425](https://github.com/electrode-io/electrode/pull/425)) [commit](http://github.com/electrode-io/electrode/commit/7212b70180e39421d2a5774e4ef3ff8dd9edab77)
     -   rename clap.js to xclap.js ([#427](https://github.com/electrode-io/electrode/pull/427)) [commit](http://github.com/electrode-io/electrode/commit/4030b1cc626575c4d2f8736f36804c0c82352478)
     -   Debug server side components with Chrome Developer Tools (DevTools) [commit](http://github.com/electrode-io/electrode/commit/eb8124b0baf8b0af8d86f743e70a365db5f7423f)
