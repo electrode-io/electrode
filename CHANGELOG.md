@@ -1,3 +1,22 @@
+# 6/26/2017
+
+## Packages
+
+-   electrode-archetype-react-app@3.1.2 `(3.1.1 => 3.1.2)`
+-   electrode-archetype-react-app-dev@3.1.2 `(3.1.1 => 3.1.2)`
+-   generator-electrode@3.1.0 `(3.0.4 => 3.1.0)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [patch] fix eslint rules for server tests ([#439](https://github.com/electrode-io/electrode/pull/439)) [commit](http://github.com/electrode-io/electrode/commit/e28b12bdb3f021d2c1569e0ca4ff1e3d097cdf3d)
+    -   [chore] enclose node env in ' [commit](http://github.com/electrode-io/electrode/commit/5c48e4d063f67d1cc0d8cfb8014a018a3bb9b9ab)
+
+-   `packages/generator-electrode`
+
+    -   [minor] improve demos included in the generated app ([#438](https://github.com/electrode-io/electrode/pull/438)) [commit](http://github.com/electrode-io/electrode/commit/8292cb39157a7473323698e55b01a659d68d2189)
+
 # 6/24/2017
 
 ## Packages
