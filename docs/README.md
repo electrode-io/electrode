@@ -71,6 +71,18 @@ See its [README](https://github.com/electrode-io/electrode/blob/master/samples/u
 
 We have more separate Electrode Sample Apps at <https://github.com/electrode-samples> that you can use as references.
 
+# Support and Acknowledgement
+
+We'd like to thank our employer @WalmartLabs because we can work on the development of Electrode platform and associated modules as Open Sourced Software for the needs of our internal teams and projects.  We love the public community and the support we get, and we address your requests as much as we could, even on our off hours.  We are always excited to get feedbacks, bug reports, and PRs.  Even if you just show us your support and encouragements, or help us promote Electrode, and we love to make Electrode work better for everyone.  Thank you.
+
+# License
+
+Copyright 2016 WalmartLabs
+
+Licensed under the [Apache License, Version 2.0].
+
+[apache license, version 2.0]: https://www.apache.org/licenses/LICENSE-2.0
+
 [electrode main repo]: https://github.com/electrode-io/electrode
 
 [material-ui]: http://www.material-ui.com
