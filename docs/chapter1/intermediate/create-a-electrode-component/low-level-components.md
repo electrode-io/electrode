@@ -11,7 +11,7 @@ $ yo electrode:component-add
 
 Fill out the prompts again with your information, we took `your-awesome-component2` as a new component name and you should see something like below:
 
-```text
+```bash
   _-----_
   |       |    ╭──────────────────────────╮
   |--(o)--|    │ Welcome to the Electrode │
@@ -61,6 +61,7 @@ Fill out the prompts again with your information, we took `your-awesome-componen
   create test/client/components/your-awesome-component2.spec.jsx
   create test/client/components/helpers/intl-enzyme-test-helper.js
   ...
+
 ```
 
 This will generate a new package and also update the demo-app. Don't get panic if you saw conflicts, the `demo-app/src/client/components/home.jsx` and `demo-app/package.json` expected to be overwritten during the update.
@@ -168,6 +169,5 @@ RenderFriend.propTypes = {
 };
 
 export default RenderFriend;
-
 
 ```

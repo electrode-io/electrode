@@ -10,7 +10,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { IntlProvider } from "react-intl";
 
-import {YourAwesomeComponent} from "your-awesome-component";
+import { YourAwesomeComponent } from "your-awesome-component";
 
 const locale = "en";
 
