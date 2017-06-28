@@ -6,7 +6,7 @@ Let's also add some style elements using [CSS modules](https://github.com/css-mo
 
 `<your-awesome-component>/packages/<componentName>/src/styles/<your-awesome-component>.css`:
 
-```
+```css
 
 body {
   font-family: sans-serif;
@@ -129,7 +129,7 @@ a, a:hover, a:active, a:visited {
 
 Create a file named: `<your-awesome-component>/packages/<componentName>/src/styles/guest-list.css`. Copy the code from below into this file:
 
-```
+```css
 
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 label {
@@ -188,7 +188,7 @@ input[type=checkbox]:checked+label:before {
 
 Create a file named: `<your-awesome-component>/packages/<componentName>/src/styles/render-friend.css`. Copy the code from below into this file:
 
-```
+```css
 
 @keyframes shake {
   from {
