@@ -57,11 +57,12 @@ module.exports = generators.Base.extend({
       required: false,
       desc: "Content to insert in the README.md file"
     });
-    //Flag to check if the OSS generator is being called as a subgenerator
-    this.isExtended = this.options.isExtended || false;
+
     this.isDemoApp = this.options.isDemoApp || false;
     //data should be passed to the generator using props
     this.props = this.options.props || {};
+    //Flag to check if the OSS generator is being called as a subgenerator
+    this.isExtended = this.props.isExtended || false;
   },
 
   initializing: function() {
@@ -332,6 +333,10 @@ module.exports = generators.Base.extend({
       this.fs.copyTpl(this.templatePath(f), this.destinationPath(f), { isSingleQuote });
     });
 
+    if (this.isExtended) {
+      this.fs.delete(this.destinationPath("config/default.js"));
+    }
+
     //copy .eslintc into the client directory
     if (isSingleQuote) {
       this.template("src/client/.eslintrc", this.destinationPath("src/client/.eslintrc"));
@@ -479,7 +484,7 @@ module.exports = generators.Base.extend({
       );
     }
 
-    if (!this.fs.exists(this.destinationPath("config/default.js"))) {
+    if (!this.fs.exists(this.destinationPath("config/default.js")) && !this.isExtended) {
       this.composeWith(
         "electrode:config",
         {
