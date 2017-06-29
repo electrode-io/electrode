@@ -9,11 +9,12 @@ const HTTP_REDIRECT = 302;
 
 const registerRoutes = (server, options, next) => {
   ReactWebapp.setupOptions(options)
-    .then((registerOptions) => {
+    .then(registerOptions => {
       _.each(registerOptions.paths, (v, path) => {
         assert(v.content, `You must define content for the webapp plugin path ${path}`);
         const routeHandler = ReactWebapp.makeRouteHandler(
-          registerOptions, ReactWebapp.resolveContent(v.content)
+          registerOptions,
+          ReactWebapp.resolveContent(v.content)
         );
 
         server.route({
@@ -21,20 +22,20 @@ const registerRoutes = (server, options, next) => {
           path,
           config: v.config || {},
           handler: (request, reply) => {
-            const handleStatus = (data) => {
+            const handleStatus = data => {
               const status = data.status;
               if (status === HTTP_REDIRECT) {
                 reply.redirect(data.path);
               } else {
-                reply({message: "error"}).code(status);
+                reply({ message: "error" }).code(status);
               }
             };
 
-            routeHandler({mode: request.query.__mode || "", request})
-              .then((data) => {
+            routeHandler({ mode: request.query.__mode || "", request })
+              .then(data => {
                 return data.status ? handleStatus(data) : reply(data);
               })
-              .catch((err) => {
+              .catch(err => {
                 reply(err.message).code(err.status || HTTP_ERROR_500);
               });
           }
