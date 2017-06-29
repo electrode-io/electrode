@@ -1,3 +1,33 @@
+# 6/29/2017
+
+## Packages
+
+### Directly Updated
+
+-   electrode-redux-router-engine@1.4.5 `(1.4.4 => 1.4.5)`
+-   generator-electrode@3.1.1 `(3.1.0 => 3.1.1)`
+
+### Lerna Updated
+
+-   electrode-archetype-react-app@3.1.3 `(3.1.2 => 3.1.3)`
+-   electrode-archetype-react-app-dev@3.1.3 `(3.1.2 => 3.1.3)`
+-   electrode-webpack-reporter@0.3.10 `(0.3.9 => 0.3.10)`
+
+## Commits
+
+-   `packages/electrode-redux-router-engine`
+
+    -   [patch][bug] Escape **PRELOADED_STATE**. Fix for #441 ([#442](https://github.com/electrode-io/electrode/pull/442)) [commit](http://github.com/electrode-io/electrode/commit/161fb83b605f140d27a537b0e8e3e7564d0fac11)
+
+-   `packages/generator-electrode`
+
+    -   no git init for demo-app ([#445](https://github.com/electrode-io/electrode/pull/445)) [commit](http://github.com/electrode-io/electrode/commit/945b25b8b583c6340e34c2685a829ed10d246492)
+
+-   `docs`
+
+    -   gitbook: [patch] Update docs form training feedback ([#443](https://github.com/electrode-io/electrode/pull/443)) [commit](http://github.com/electrode-io/electrode/commit/cef5d8d8bb197765e497add66feac65d73a93c5c)
+    -   update readme [commit](http://github.com/electrode-io/electrode/commit/1932de00a20c3fac630cc043d0bf30c47c7b4794)
+
 # 6/26/2017
 
 ## Packages
