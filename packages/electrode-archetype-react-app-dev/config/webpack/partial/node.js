@@ -25,7 +25,7 @@ module.exports = function(options) {
       new webpack.LoaderTargetPlugin("web")
     ].concat(config.plugins);
   } else {
-    logger.info("Not disabling NodeSourcePlugin.  NODE_ENV:", process.env.NODE_ENV);
+    logger.info(`Not disabling NodeSourcePlugin.  NODE_ENV: '${process.env.NODE_ENV}'`);
   }
 
   return {};

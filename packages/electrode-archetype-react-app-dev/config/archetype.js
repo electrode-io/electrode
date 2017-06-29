@@ -8,30 +8,27 @@ const devPkg = require("../package.json");
 const devDir = Path.join(__dirname, "..");
 const devRequire = require(`../require`);
 const configDir = `${devDir}/config`;
+const xenvConfig = devRequire("xenv-config");
 
-const utils = require("electrode-archetype-react-app/lib/utils");
+const webpackConfigSpec = {
+  devHostname: { env: ["WEBPACK_HOST", "WEBPACK_DEV_HOST"], default: "localhost" },
+  devPort: { env: "WEBPACK_DEV_PORT", default: 2992 },
+  testPort: { env: "WEBPACK_TEST_PORT", default: 3001 },
+  https: { env: "WEBPACK_DEV_HTTPS", default: false },
+  enableBabelPolyfill: { env: "ENABLE_BABEL_POLYFILL", default: false },
+  enableNodeSourcePlugin: { env: "ENABLE_NODESOURCE_PLUGIN", default: false }
+};
+
+const karmaConfigSpec = {
+  browser: { env: "KARMA_BROWSER", default: "chrome" }
+};
 
 module.exports = {
   devDir,
   devPkg,
   devRequire,
-  webpack: Object.assign(
-    {},
-    {
-      devHostname: process.env.WEBPACK_HOST || process.env.WEBPACK_DEV_HOST || "localhost",
-      devPort: utils.getInt(process.env.WEBPACK_DEV_PORT, 2992),
-      testPort: utils.getInt(process.env.WEBPACK_TEST_PORT, 3001),
-      https: process.env.WEBPACK_DEV_HTTPS,
-      modulesDirectories: [],
-      enableBabelPolyfill: false
-    },
-    archetypeOptions.webpack
-  ),
-  karma: Object.assign(
-    {},
-    { browser: process.env.KARMA_BROWSER === undefined ? "chrome" : process.env.KARMA_BROWSER },
-    archetypeOptions.karma
-  ),
+  webpack: xenvConfig(webpackConfigSpec, archetypeOptions.webpack),
+  karma: xenvConfig(karmaConfigSpec, archetypeOptions.karma),
   config: Object.assign(
     {},
     {

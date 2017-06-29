@@ -1,6 +1,7 @@
 "use strict";
 
 const Path = require("path");
+const requireAt = require("require-at");
 const archetype = require("./config/archetype");
 const devRequire = archetype.devRequire;
 const xsh = devRequire("xsh");
@@ -109,6 +110,6 @@ const tasks = {
 
 module.exports = function (xclap) {
   setupPath();
-  xclap = xclap || devRequire("xclap");
+  xclap = xclap || requireAt(process.cwd())("xclap") || devRequire("xclap");
   xclap.load("electrode", tasks);
 };

@@ -109,7 +109,7 @@ Let's take a quick high level overview of our file structure and what `generator
 
     A file where you can customize any process in the Travis default build environment.
 
--   `clap.js`
+-   `xclap.js`
 
     A file that stores all your development tasks. We will explore this more in [Getting Started: Intermediate](/chapter1/Intermediate.md).
 

@@ -109,6 +109,21 @@ describe("redux-router-engine", function () {
     });
   });
 
+  it("escapes troublesome characters in the state", () => {
+    const createTestLocalStore = () => Promise.resolve(createStore((state) => state, {
+      scriptTag: "</script><script>console.log(\"Welcome to an XSS attack!\")</script>",
+      troublesomeEndings: "LineSeparator: \u2028 ParagraphSeprator: \u2029"
+    }));
+    const engine = new ReduxRouterEngine({ routes, createReduxStore: createTestLocalStore });
+    testReq.url.path = "/test";
+
+    return engine.render(testReq).then((result) => {
+      expect(result.prefetch).to.contain("window.__PRELOADED_STATE__ = " +
+      "{\"scriptTag\":\"\\u003C/script>\\u003Cscript>console.log(\\\"Welcome to an XSS attack!\\\")" +
+      "\\u003C/script>\",\"troublesomeEndings\":\"LineSeparator: \\u2028 ParagraphSeprator: \\u2029\"}");
+    });
+  });
+
   it("should redirect redirect route", () => {
     const engine = new ReduxRouterEngine({ routes, createReduxStore });
     testReq.url.path = "/test/source";

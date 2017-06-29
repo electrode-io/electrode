@@ -10,7 +10,7 @@ We generate unit test and code coverage check for failure. The app test files ar
 
 To run the test, please go to the root level of your repo (ex. your-awesome-component), and run
 
-```
+```bash
 $ npm test
 ```
 

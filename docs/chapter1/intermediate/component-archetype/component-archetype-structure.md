@@ -33,7 +33,7 @@ Below is the new structure of the Electrode React Component Archetype:
   |  |- archetype.js
   |- scripts/
   |- archetype-clap.js
-  |- clap.js
+  |- xclap.js
   |- package.json
   ...
 ```

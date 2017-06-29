@@ -3,6 +3,7 @@
 const Fs = require("fs");
 const archetype = require("./config/archetype");
 const assert = require("assert");
+const requireAt = require("require-at");
 
 assert(!archetype.noDev, "dev archetype is missing - development & build tasks not possible");
 
@@ -45,6 +46,10 @@ function setProductionEnv() {
 
 function setDevelopmentEnv() {
   process.env.NODE_ENV = "development";
+}
+
+function setWebpackHot() {
+  process.env.HMR = "true";
 }
 
 function setStaticFilesEnv() {
@@ -213,6 +218,15 @@ function inlineCriticalCSS() {
   });
 }
 
+function startAppServer(options) {
+  options = options || [];
+  const x = options.length > 0 ? ` with options: ${options.join(" ")}` : "";
+  logger.info(`Starting app server${x}`);
+  logger.info("To terminate press Ctrl+C.");
+  archetype.AppMode.setEnv(archetype.AppMode.lib.dir);
+  return exec(`node`, options, Path.join(archetype.AppMode.lib.server, "index.js"));
+}
+
 /*
  *
  * For information on how to specify a task, see:
@@ -277,6 +291,7 @@ function makeTasks() {
     ".mk-dll-dir": () => createGitIgnoreDir(Path.resolve("dll"), "Electrode dll dir"),
     ".production-env": () => setProductionEnv(),
     ".development-env": () => setDevelopmentEnv(),
+    ".webpack-hot": () => setWebpackHot(),
     ".webpack-dev": () => setWebpackDev(),
     ".static-files-env": () => setStaticFilesEnv(),
     ".optimize-stats": () => setOptimizeStats(),
@@ -462,7 +477,7 @@ Individual .babelrc files were generated for you in src/client and src/server
 
     hot: {
       desc: "Start your app with watch in hot mode with webpack-dev-server",
-      dep: [".development-env", ".clean.build", ".mk-dist-dir"],
+      dep: [".development-env", ".webpack-hot"],
       task: [".webpack-dev", ["wds.hot", "server-watch", "generate-service-worker"]]
     },
 
@@ -510,26 +525,40 @@ Individual .babelrc files were generated for you in src/client and src/server
     server: ["app-server"], // keep old server name for backward compat
 
     "app-server": {
-      desc: "Start the app server only, Must have dist by running `clap build` first.",
-      task: () => {
-        AppMode.setEnv(AppMode.lib.dir);
-        return exec(`node ${Path.join(AppMode.lib.server, "index.js")}`);
-      }
+      desc: "Start the app server only. Must run 'clap build' first.",
+      task: () => startAppServer()
     },
 
-    "server-debug": () => {
-      AppMode.setEnv(AppMode.lib.dir);
-      return exec(`node debug ${Path.join(AppMode.lib.server, "index.js")}`);
+    "server-debug": {
+      desc: "Start the app serve with 'node debug'",
+      task: () => startAppServer(["debug"])
+    },
+
+    "server-build-debug": {
+      desc: "Build and debug with devTools",
+      task: ["build", "server-devtools"]
+    },
+
+    "server-build-debug-brk": {
+      desc: "Build and debug with devTools with breakpoint starting the app",
+      task: ["build", "server-devtools-debug-brk"]
+    },
+
+    "server-devtools": {
+      desc: "Debug the app server with 'node --inspect'",
+      task: () => startAppServer(["--inspect"])
+    },
+
+    "server-devtools-debug-brk": {
+      desc: "Debug the app server with 'node --inspect --debug-brk'",
+      task: () => startAppServer(["--inspect", "--debug-brk"])
     },
 
     "server-prod": {
       dep: [".production-env", ".static-files-env"],
       desc:
-        "Start server in production mode with static files routes.  Must have dist by running `clap build`.",
-      task: () => {
-        AppMode.setEnv(AppMode.lib.dir);
-        return exec(`node ${Path.join(AppMode.lib.server, "index.js")}`);
-      }
+        "Start server in production mode with static files routes.  Must run 'clap build' first.",
+      task: () => startAppServer()
     },
 
     ".init-bundle.valid.log": () =>
@@ -709,7 +738,7 @@ Individual .babelrc files were generated for you in src/client and src/server
 module.exports = function(xclap) {
   setupPath();
   createElectrodeTmpDir();
-  xclap = xclap || devRequire("xclap");
+  xclap = xclap || requireAt(process.cwd())("xclap") || devRequire("xclap");
   process.env.FORCE_COLOR = "true"; // force color for chalk
   xclap.load("electrode", makeTasks());
 };

@@ -4,17 +4,6 @@ const Path = require("path");
 const Fs = require("fs");
 const pkg = require("../package.json");
 
-function getInt(str, def) {
-  if (str) {
-    const n = parseInt(str, 10);
-    if (n !== null && !isNaN(n)) {
-      return n;
-    }
-  }
-
-  return def;
-}
-
 function checkUserBabelRc() {
   const user = Path.resolve(".babelrc");
   if (Fs.existsSync(user)) {
@@ -34,6 +23,5 @@ function checkUserBabelRc() {
 }
 
 module.exports = {
-  getInt,
   checkUserBabelRc
 };

@@ -2,7 +2,7 @@
 
 Webpack Config is a significant part of the component archetype.  They help with compiling and bundling your React component code.  Below is the component config to use with webpack:
 
-```
+```text
 - webpack.config.coverage.js:  When running coverage test
 - webpack.config.js: When building your app for production
 - webpack.config.test.js: When running tests
@@ -20,7 +20,7 @@ We use `webpack-config-composer` to compose webpack config partials under `/part
 
 Below are the partial configs for new component archetype webpack structure:
 
-```
+```text
 |- electrode-archetype-react-component/config/webpack
 |  |- partial
 |  |  |- babel.js

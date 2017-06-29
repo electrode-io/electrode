@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-component-dev",
-  "version": "3.0.1",
+  "version": "3.0.3",
   "description": "Electrode Component (Development)",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -87,6 +87,7 @@
     "react-resolver": "^3.0.3",
     "react-router": "^2.6.1",
     "react-test-renderer": "^15.5.4",
+    "require-at": "^1.0.0",
     "rimraf": "^2.5.2",
     "sinon": "^1.15.4",
     "sinon-chai": "^2.8.0",

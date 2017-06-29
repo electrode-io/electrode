@@ -9,17 +9,17 @@
 
 ### A Platform for building Universal React/Node.js applications
 
-> Built at @WalmartLabs powering the walmart.com eCommerce site, Electrode is a platform for building universal React/Node.js applications with a standardized structure, best practices, and modern technologies baked in. Electrode focuses on performance, component reusability, and simple deployment to multiple cloud providers—so you can focus on what makes your app unique.
-
-Read the [Announcement Blog] Post.
-
-Visit our site at <http://www.electrode.io>.
-
-See the [README.md in docs](/docs/README.md) or visit our [gitbook documents].
+> Built at @WalmartLabs powering the <http://www.walmart.com> eCommerce site, Electrode is a platform for building small to large scale universal ReactJS/NodeJS applications with a standardized structure, best practices, and modern technologies baked in. Electrode focuses on performance, component reusability, and simple deployment to multiple cloud providers—so you can focus on what makes your app unique.
 
 # Getting Started
 
+-   See the [Full README.md in docs](/docs/README.md) or visit our [gitbook documents].
+
 -   [Getting Started with Electrode](https://electrode.gitbooks.io/electrode/content/chapter1/quick-start/get-started.html)
+
+-   Read the [Announcement Blog] Post.
+
+-   Visit our site at <http://www.electrode.io>.
 
 # Documentation
 
@@ -31,9 +31,17 @@ Check [gitbook] for more info about gitbook.
 
 Please see the [CONTRIBUTING guide](/CONTRIBUTING.md)
 
-Built with :heart: by [Team Electrode] @WalmartLabs.
+# Support and Acknowledgement
 
-[team electrode]: https://github.com/orgs/electrode-io/people
+We'd like to thank our employer @WalmartLabs because we can work on the development of Electrode platform and associated modules as Open Sourced Software for the needs of our internal teams and projects.  We love the public community and the support we get, and we address your requests as much as we could, even on our off hours.  We are always excited to get feedbacks, bug reports, and PRs.  Even if you just show us your support and encouragement, or help us promote Electrode, and we love to make Electrode work better for everyone.  Thank you.
+
+# License
+
+Copyright 2016 WalmartLabs
+
+Licensed under the [Apache License, Version 2.0].
+
+[apache license, version 2.0]: https://www.apache.org/licenses/LICENSE-2.0
 
 [announcement blog]: https://medium.com/walmartlabs/introducing-electrode-an-open-source-release-from-walmartlabs-14b836135319#.pwbddxg1z
 
@@ -57,4 +65,4 @@ Built with :heart: by [Team Electrode] @WalmartLabs.
 
 [gitbook]: https://www.gitbook.com/
 
-[gitbook documents]: https://electrode.gitbooks.io/electrode/content/overview/what-is-electrode.html
+[gitbook documents]: https://docs.electrode.io/overview/what-is-electrode.html

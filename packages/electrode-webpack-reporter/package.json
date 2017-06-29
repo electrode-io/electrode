@@ -1,6 +1,6 @@
 {
   "name": "electrode-webpack-reporter",
-  "version": "0.3.8",
+  "version": "0.3.10",
   "description": "A HTML based reporter for webpack dev server",
   "main": "lib/webpack-reporter.js",
   "scripts": {
@@ -24,7 +24,7 @@
     "electrode-archetype-react-app-dev": "../electrode-archetype-react-app-dev",
     "electrode-electrify-react-component": "^4.4.13",
     "electrode-react-webapp": "../electrode-react-webapp",
-    "electrode-redux-router-engine": "^1.4.3",
+    "electrode-redux-router-engine": "^1.4.5",
     "electrode-server": "^1.1.1",
     "electrode-static-paths": "^1.0.0",
     "material-design-icons": "^3.0.1",

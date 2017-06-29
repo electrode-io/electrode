@@ -1,6 +1,6 @@
 {
   "name": "electrode-redux-router-engine",
-  "version": "1.4.3",
+  "version": "1.4.5",
   "description": "Handle async data for React Server Side Rendering using Redux and Router",
   "main": "lib/redux-router-engine.js",
   "scripts": {
@@ -46,5 +46,20 @@
   "peerDependencies": {
     "react": "^15.3.1 || ^0.14.8",
     "react-dom": "^15.3.1 || ^0.14.8"
+  },
+  "nyc": {
+    "all": true,
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "exclude": [
+      "coverage",
+      "*clap.js",
+      "gulpfile.js",
+      "dist",
+      "test"
+    ]
   }
 }

@@ -45,13 +45,17 @@ module.exports = function() {
     "?modules&localIdentName=[name]__[local]___[hash:base64:5]&-autoprefixer";
   const cssQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}`;
   const cssStylusQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}!${stylusLoader}`;
+  const hmr = process.env.HMR === "true";
 
   // By default, this archetype assumes you are using CSS-Modules + CSS-Next
+  const extractLoader = hmr
+    ? `${styleLoader}!${cssQuery}`
+    : ExtractTextPlugin.extract({ fallback: styleLoader, use: cssQuery, publicPath: "" });
   const rules = [
     {
       _name: "extract-css",
       test: /\.css$/,
-      loader: ExtractTextPlugin.extract({ fallback: styleLoader, use: cssQuery, publicPath: "" })
+      loader: extractLoader
     }
   ];
 
@@ -65,7 +69,9 @@ module.exports = function() {
     rules.push({
       _name: "extract-stylus",
       test: /\.styl$/,
-      use: ExtractTextPlugin.extract({ fallback: styleLoader, use: stylusQuery, publicPath: "" })
+      use: hmr
+        ? `${styleLoader}!${stylusQuery}`
+        : ExtractTextPlugin.extract({ fallback: styleLoader, use: stylusQuery, publicPath: "" })
     });
   }
 
@@ -88,7 +94,7 @@ module.exports = function() {
     module: { rules },
     plugins: [
       new ExtractTextPlugin({ filename: "[name].style.[hash].css" }),
-      new OptimizeCssAssetsPlugin(),
+      process.env.NODE_ENV === "production" && new OptimizeCssAssetsPlugin(),
 
       /*
        preserve: default: false. Keep the original unsplit file as well.
@@ -122,6 +128,6 @@ module.exports = function() {
           }
         }
       })
-    ]
+    ].filter(x => !!x)
   };
 };

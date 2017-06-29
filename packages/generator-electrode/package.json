@@ -1,6 +1,6 @@
 {
   "name": "generator-electrode",
-  "version": "3.0.2",
+  "version": "3.1.1",
   "description": "Generate Electrode React App",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -60,5 +60,20 @@
   "engines": {
     "node": ">= 4 <= 8",
     "npm": ">= 3 <= 5"
+  },
+  "nyc": {
+    "all": true,
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "exclude": [
+      "coverage",
+      "*clap.js",
+      "gulpfile.js",
+      "dist",
+      "test"
+    ]
   }
 }

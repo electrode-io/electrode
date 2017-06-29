@@ -7,6 +7,7 @@ var path = require("path");
 var extend = _.merge;
 var parseAuthor = require("parse-author");
 var optionOrPrompt = require("yeoman-option-or-prompt");
+var nodeFS = require("fs");
 
 var ReactComponentGenerator = yeoman.Base.extend({
   constructor: function() {
@@ -16,6 +17,20 @@ var ReactComponentGenerator = yeoman.Base.extend({
     this.optionOrPrompt = optionOrPrompt;
   },
   initializing: function() {
+    //check if the command is being run from within an existing app
+    if (this.fs.exists(this.destinationPath("package.json"))) {
+      var appPkg = this.fs.readJSON(this.destinationPath("package.json"));
+      if (
+        !_.isEmpty(appPkg.dependencies) &&
+        _.includes(Object.keys(appPkg.dependencies), "electrode-archetype-react-app")
+      ) {
+        this.env.error(
+          "Please do not run this command from within an application." +
+            "\nComponent structure should be generated in its own folder."
+        );
+      }
+    }
+
     this.isAddon = this.options.isAddon || false;
     this.demoAppName = this.options.demoAppName;
     this.pkg = this.fs.readJSON(this.destinationPath("package.json"), {});
@@ -161,7 +176,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
       if (this.quoteType === "'") {
         this.template("packages/component/eslintrc", this.rootPath + ".eslintrc");
       }
-      this.template("packages/component/_clap.js", this.rootPath + "clap.js");
+      this.template("packages/component/_xclap.js", this.rootPath + "xclap.js");
       this.template("packages/component/_package.json", this.rootPath + "package.json");
       this.template("packages/component/_readme.md", this.rootPath + "README.md");
     },
@@ -298,14 +313,22 @@ var ReactComponentGenerator = yeoman.Base.extend({
       this.appName = _.isEmpty(this.demoAppName) ? this.originalDemoAppName : this.demoAppName;
       this.log(
         "\n" +
-        chalk.green.underline("Your new Electrode component is ready!") +
-        "\n" +
-        "Your component is in " + this.packageName + "/packages" +
-        " and your demo app is " + this.packageName + "/" + this.appName +
-        "\n" +
-        "\nType 'cd " + this.packageName + "/" + this.appName +
-        "' then 'clap dev' to run the development build for the demo app." +
-        "\n"
+          chalk.green.underline("Your new Electrode component is ready!") +
+          "\n" +
+          "Your component is in " +
+          this.packageName +
+          "/packages" +
+          " and your demo app is " +
+          this.packageName +
+          "/" +
+          this.appName +
+          "\n" +
+          "\nType 'cd " +
+          this.packageName +
+          "/" +
+          this.appName +
+          "' then 'clap dev' to run the development build for the demo app." +
+          "\n"
       );
     }
   }
