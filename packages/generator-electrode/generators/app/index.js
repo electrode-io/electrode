@@ -427,20 +427,22 @@ module.exports = generators.Base.extend({
         local: require.resolve("../editorconfig")
       }
     );
-
-    this.composeWith(
-      "electrode:git",
-      {
-        options: {
-          name: this.props.name,
-          githubAccount: this.props.githubAccount,
-          githubUrl: this.props.githubUrl
+    if (!this.isDemoApp) {
+      this.composeWith(
+        "electrode:git",
+        {
+          options: {
+            name: this.props.name,
+            githubAccount: this.props.githubAccount,
+            githubUrl: this.props.githubUrl
+          }
+        },
+        {
+          local: require.resolve("../git")
         }
-      },
-      {
-        local: require.resolve("../git")
-      }
-    );
+      );
+    }
+
     if (this.options.license && !this.pkg.license) {
       this.composeWith(
         "license",
