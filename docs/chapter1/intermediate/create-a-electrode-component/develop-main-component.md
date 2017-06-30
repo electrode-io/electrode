@@ -6,8 +6,8 @@ Replace the code in `<your-component>/packages/<componentName>/src/components/<y
 
 ```js
 
-import React, { Component, PropTypes } from "react";
-
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 import styles from "../../src/styles/your-component.css";
 import RenderFriend from "./render-friend";
 import GuestList from "./guest-list";

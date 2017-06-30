@@ -74,6 +74,7 @@ Create a file called `<your-component>/packages/<componentName>/src/components/g
 
 import React from "react";
 
+import PropTypes from "prop-types";
 import styles from "../../src/styles/guest-list.css";
 
 const GuestList = ({ invitees, toggleGuest }) => {
@@ -103,8 +104,8 @@ const GuestList = ({ invitees, toggleGuest }) => {
 };
 
 GuestList.propTypes = {
-  invitees: React.PropTypes.array,
-  toggleGuest: React.PropTypes.func
+  invitees: PropTypes.array,
+  toggleGuest: PropTypes.func
 };
 
 export default GuestList;
