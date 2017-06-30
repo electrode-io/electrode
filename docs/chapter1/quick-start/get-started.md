@@ -4,52 +4,57 @@
 >
 > -   **Latest **[**Node LTS binary**](https://nodejs.org/en/) **(at least v4.2 required, >= 6 recommended), tip: use **[**nvm**](https://github.com/creationix/nvm) **to manage your nodejs versions. **
 >
-> -   [**npm v3**](https://github.com/npm/npm/releases/tag/v3.0.0) **- Install the latest **[**npm**](https://www.npmjs.com/) **version **`npm install -g npm`
+> -   [**npm v3**](https://github.com/npm/npm/releases/tag/v3.0.0) **- If you are using Node 4, then install the latest **[**npm**](https://www.npmjs.com/) **version **`npm install -g npm`
 >
 > please checkout [requirements docs](/overview/requirements.md) for detailed setup instructions.
 
 ## Quick Guide
 
-Are you ready to build your first Electrode App?
-
-Please make sure to have all the [environment requirements](/overview/requirements.md) ready & setup before proceeding to the next step.
-
-First, install [Yeoman](http://yeoman.io/) and the [Electrode Generator](https://github.com/electrode-io/electrode#yeoman-generator).
-
 ```bash
-$ npm install -g yo xclap-cli generator-electrode
-
-** NOTE: You may need sudo depending on your machine permissions. **
-```
-
-Make a new directory for your awesome app, the generate your new project:
-
-```bash
-$ mkdir electrode-app-dir
-$ cd electrode-app-dir
+$ npm install -g yo generator-electrode xclap-cli
 $ yo electrode
 ```
 
-Fill out the Electrode App generator with your information, take `your-awesome-app` as an example of your Application Name:
+Fill out information for you app.  You can press enter for all the defaults, except specifying a name for you app.
 
-![](http://www.electrode.io/img/generator-application.png)
+For example:
 
-Run one simple command to start the server. Presto!
+![](/images/generator-app-quick-start.png)
+
+After the app's been created and `npm install` completed, you can start the app in dev mode:
 
 ```bash
-$ cd your-awesome-app
+$ cd electrode-app
 $ clap dev
 ```
 
+When it's ready, you should see something like this in your terminal:
+
+![Hello Electrode](/images/dev-started.png)
+
 Now open [localhost:3000](http://localhost:3000/) in your browser to access the app. Hello Electrode!
 
-To view all the clap tasks available type `clap`. To build your app's client bundle for production use.
+![Hello Electrode](/images/hello-electrode.png)
+
+Go ahead and play around with the app.  View the page source to see the Server Side Rendered HTML.  Refresh the page to see the SSR content load immediately before React starts running.
+
+## Further Explorations
+
+To view all the development tasks available type `clap`.
+
+To start in hot mode:
+
+```bash
+$ clap hot
+```
+
+To build your app for production deployment:
 
 ```bash
 $ clap build
 ```
 
-followed by
+To start your app in production mode:
 
 ```bash
 $ npm run prod
