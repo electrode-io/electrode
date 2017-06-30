@@ -196,7 +196,7 @@ function makeRouteHandler(routeOptions, userContent) {
       return `${manifestLink}${cssLink}${scriptsFromHelmet}`;
     };
 
-    const makeBodyBundles = (helmet) => {
+    const makeBodyBundles = () => {
       const js = bundleJs();
       const css = bundleCss();
       const cssLink = css && criticalCSS
