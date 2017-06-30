@@ -28,7 +28,6 @@ const registerRoutes = (app, options, next) => {
             method = "ALL";
           }
           app[method.toLowerCase()](path, (request, response) => {
-            //eslint-disable-line
             const handleStatus = data => {
               const status = data.status;
               if (status === HTTP_REDIRECT) {

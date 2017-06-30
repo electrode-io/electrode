@@ -5,6 +5,7 @@ const Promise = require("bluebird");
 const fs = require("fs");
 const Path = require("path");
 const Helmet = require("react-helmet").Helmet;
+const groupScripts = require("./group-scripts");
 
 const CONTENT_MARKER = "{{SSR_CONTENT}}";
 const HEADER_BUNDLE_MARKER = "{{WEBAPP_HEADER_BUNDLES}}";
@@ -178,26 +179,40 @@ function makeRouteHandler(routeOptions, userContent) {
           });
     };
 
+    const htmlifyScripts = scripts => {
+      return scripts
+        .map(
+          x =>
+            typeof x === "string"
+              ? `<script>${x}</script>\n`
+              : x.map(n => `<script src="${n.src}"></script>`).join("\n")
+        )
+        .join("\n");
+    };
+
     const makeHeaderBundles = helmet => {
       const manifest = bundleManifest();
-      const manifestLink = manifest ? `<link rel="manifest" href="${manifest}" />` : "";
+      const manifestLink = manifest ? `<link rel="manifest" href="${manifest}" />\n` : "";
       const css = bundleCss();
-      const cssLink = css && !criticalCSS
-        ? `<link rel="stylesheet" href="${css}" />`
-        : "";
+      const cssLink = css && !criticalCSS ? `<link rel="stylesheet" href="${css}" />` : "";
       const scriptsFromHelmet = ["link", "style", "script", "noscript"]
-          .map((tagName) => helmet[tagName].toString()).join("");
+        .map(tagName => helmet[tagName].toString())
+        .join("");
 
-      return `${manifestLink}${cssLink}${scriptsFromHelmet}`;
+      const htmlScripts = htmlifyScripts(groupScripts(routeOptions.unbundledJS.enterHead).scripts);
+      return `${manifestLink}${cssLink}${htmlScripts}\n${scriptsFromHelmet}`;
     };
 
     const makeBodyBundles = () => {
       const js = bundleJs();
-      const css = bundleCss();
-      const cssLink = css && criticalCSS ? `<link rel="stylesheet" href="${css}" />` : "";
-      const jsLink = js ? `<script src="${js}"></script>` : "";
+      const jsLink = js ? { src: js } : "";
 
-      return `${cssLink}${jsLink}`;
+      const ins = routeOptions.unbundledJS.preBundle
+        .concat([jsLink])
+        .concat(routeOptions.unbundledJS.postBundle);
+      const htmlScripts = htmlifyScripts(groupScripts(ins).scripts);
+
+      return `${htmlScripts}`;
     };
 
     const emptyTitleRegex = /<title[^>]*><\/title>/;
@@ -221,7 +236,7 @@ function makeRouteHandler(routeOptions, userContent) {
           case HEADER_BUNDLE_MARKER:
             return makeHeaderBundles(helmet);
           case BODY_BUNDLE_MARKER:
-            return makeBodyBundles(helmet);
+            return makeBodyBundles();
           case PREFETCH_MARKER:
             return `<script>${content.prefetch}</script>`;
           case META_TAGS_MARKER:
@@ -257,6 +272,11 @@ const setupOptions = options => {
       port: process.env.WEBPACK_DEV_PORT || "2992",
       https: Boolean(process.env.WEBPACK_DEV_HTTPS)
     },
+    unbundledJS: {
+      enterHead: [],
+      preBundle: [],
+      postBundle: []
+    },
     paths: {},
     stats: "dist/server/stats.json",
     iconStats: "dist/server/iconstats.json",
@@ -269,7 +289,7 @@ const setupOptions = options => {
   const chunkSelector = resolveChunkSelector(pluginOptions);
   const devProtocol = process.env.WEBPACK_DEV_HTTPS ? "https://" : "http://";
   const devBundleBase = `${devProtocol}${pluginOptions.devServer.host}:${pluginOptions.devServer
-    .port}/js/`; // eslint-disable-line max-len
+    .port}/js/`;
   const statsPath = getStatsPath(pluginOptions.stats, pluginOptions.buildArtifacts);
 
   return Promise.try(() => loadAssetsFromStats(statsPath)).then(assets => {
@@ -287,7 +307,7 @@ const resolveContent = content => {
   if (!_.isString(content) && !_.isFunction(content) && content.module) {
     const module = content.module.startsWith(".")
       ? Path.join(process.cwd(), content.module)
-      : content.module; // eslint-disable-line
+      : content.module;
     return require(module); // eslint-disable-line
   }
 

@@ -54,5 +54,16 @@
     "superagent": "^1.6.1",
     "uglify-js": "^2.6.2",
     "xclap": "^0.2.0"
+  },
+  "nyc": {
+    "all": true,
+    "check-coverage": true,
+    "statements": 94.02,
+    "branches": 76.11,
+    "functions": 97.96,
+    "lines": 93.82,
+    "cache": true,
+    "reporter": ["lcov", "text", "text-summary"],
+    "exclude": ["coverage", "*clap.js", "gulpfile.js", "dist", "test", "lib/express", "lib/koa"]
   }
 }

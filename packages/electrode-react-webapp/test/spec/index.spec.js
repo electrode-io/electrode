@@ -184,10 +184,10 @@ describe("Test electrode-react-webapp", () => {
         .then(res => {
           expect(res.statusCode).to.equal(200);
           expect(res.result).to.contain(
-            '<script src="http://awesome-cdn.com/multi/bar.bundle.f07a873ce87fc904a6a5.js"'
+            `<script src="http://awesome-cdn.com/multi/bar.bundle.f07a873ce87fc904a6a5.js"`
           );
           expect(res.result).to.contain(
-            '<link rel="stylesheet" href="http://awesome-cdn.com/multi/bar.style.f07a873ce87fc904a6a5.css"'
+            `<link rel="stylesheet" href="http://awesome-cdn.com/multi/bar.style.f07a873ce87fc904a6a5.css"`
           );
           stopServer(server);
         })
@@ -349,6 +349,34 @@ describe("Test electrode-react-webapp", () => {
           expect(res.result).to.contain(
             '<script src="http://awesome-cdn.com/myapp/bundle.f07a873ce87fc904a6a5.js">'
           );
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
+  it("should inject from unbundledJS enterHead", () => {
+    configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
+    configOptions.stats = "test/data/stats-test-one-bundle.json";
+
+    config.plugins["./lib/hapi/index"].options.unbundledJS = {
+      enterHead: [`console.log("test-unbundledJS-enterHead")`, { src: "test-enter-head.js" }]
+    };
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .then(res => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.result).to.contain(
+            '<script src="http://awesome-cdn.com/myapp/bundle.f07a873ce87fc904a6a5.js">'
+          );
+          expect(res.result).to.contain("test-unbundledJS-enterHead");
           stopServer(server);
         })
         .catch(err => {
