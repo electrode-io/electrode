@@ -2,7 +2,7 @@
 
 After you have finished developing your components, its time for us to demo them in `demo-app`. You do not need to re-install the components if they get updated, all the components are automatically linked to `demo-app`. (Required by `generator-electrode@3.0.0` above)
 
-Go to `<your-awesome-component>/demo-app/src/client/components/home.jsx` file. Copy, paste and save the code below into this file and replace your component and package name with your own:
+Go to `<your-component>/demo-app/src/client/components/home.jsx` file. Copy, paste and save the code below into this file and replace your component and package name with your own:
 
 ```js
 
@@ -10,7 +10,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { IntlProvider } from "react-intl";
 
-import { YourAwesomeComponent } from "your-awesome-component";
+import { YourAwesomeComponent } from "your-component";
 
 const locale = "en";
 

@@ -2,13 +2,13 @@
 
 #### Develop main high-level component
 
-Replace the code in `<your-awesome-component>/packages/<componentName>/src/components/<your-awesome-component>.jsx` with the code below. Change all references from the literal `your-awesome-component or YourAwesomeComponent` to your actual component name:
+Replace the code in `<your-component>/packages/<componentName>/src/components/<your-component>.jsx` with the code below. Change all references from the literal `your-component or YourAwesomeComponent` to your actual component name:
 
 ```js
 
 import React, { Component, PropTypes } from "react";
 
-import styles from "../../src/styles/your-awesome-component.css";
+import styles from "../../src/styles/your-component.css";
 import RenderFriend from "./render-friend";
 import GuestList from "./guest-list";
 
@@ -94,11 +94,11 @@ YourAwesomeComponent.defaultProps = {
 
 ```
 
-Last edit! In `<your-awesome-component>/src/index.js` add the three lines below:
+Last edit! In `<your-component>/src/index.js` add the three lines below:
 
 ```js
 
-export { default as YourAwesomeComponent } from "./components/your-awesome-component";
+export { default as YourAwesomeComponent } from "./components/your-component";
 export { default as RenderFriend } from "./components/render-friend";
 export { default as GuestList } from "./components/guest-list";
 
