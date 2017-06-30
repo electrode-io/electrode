@@ -190,23 +190,21 @@ function makeRouteHandler(routeOptions, userContent) {
       const cssLink = css && !criticalCSS
         ? `<link rel="stylesheet" href="${css}" />`
         : "";
-      const scriptsFromHelmet = ["link", "style"]
+      const scriptsFromHelmet = ["link", "style", "script", "noscript"]
           .map((tagName) => helmet[tagName].toString()).join("");
 
       return `${manifestLink}${cssLink}${scriptsFromHelmet}`;
     };
 
-    const makeBodyBundles = (helmet) => {
+    const makeBodyBundles = () => {
       const js = bundleJs();
       const css = bundleCss();
       const cssLink = css && criticalCSS
         ? `<link rel="stylesheet" href="${css}" />`
         : "";
       const jsLink = js ? `<script src="${js}"></script>` : "";
-      const scriptsFromHelmet = ["script", "noscript"]
-          .map((tagName) => helmet[tagName].toString()).join("");
 
-      return `${cssLink}${jsLink}${scriptsFromHelmet}`;
+      return `${cssLink}${jsLink}`;
     };
 
     const emptyTitleRegex = /<title[^>]*><\/title>/;
