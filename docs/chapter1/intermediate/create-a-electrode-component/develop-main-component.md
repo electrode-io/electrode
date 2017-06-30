@@ -2,7 +2,7 @@
 
 #### Develop main high-level component
 
-Replace the code in `<your-component>/packages/<componentName>/src/components/<your-component>.jsx` with the code below. Change all references from the literal `your-component or YourAwesomeComponent` to your actual component name:
+Replace the code in `<your-component>/packages/<componentName>/src/components/<your-component>.jsx` with the code below. Change all references from the literal `your-component or YourComponent` to your actual component name:
 
 ```js
 
@@ -12,7 +12,7 @@ import styles from "../../src/styles/your-component.css";
 import RenderFriend from "./render-friend";
 import GuestList from "./guest-list";
 
-export default class YourAwesomeComponent extends Component {
+export default class YourComponent extends Component {
 
   constructor(props) {
     super(props);
@@ -73,9 +73,9 @@ export default class YourAwesomeComponent extends Component {
   }
 }
 
-YourAwesomeComponent.displayName = "YourAwesomeComponent";
+YourComponent.displayName = "YourComponent";
 
-YourAwesomeComponent.propTypes = {
+YourComponent.propTypes = {
   ourFriends: PropTypes.array,
   message: PropTypes.func,
   invitees: PropTypes.array,
@@ -83,7 +83,7 @@ YourAwesomeComponent.propTypes = {
   toggleGuest: PropTypes.func
 };
 
-YourAwesomeComponent.defaultProps = {
+YourComponent.defaultProps = {
   ourFriends: [],
   message: () => {
     return `<p>Let's party! Un-comment the all the commented-out lines in the
@@ -98,7 +98,7 @@ Last edit! In `<your-component>/src/index.js` add the three lines below:
 
 ```js
 
-export { default as YourAwesomeComponent } from "./components/your-component";
+export { default as YourComponent } from "./components/your-component";
 export { default as RenderFriend } from "./components/render-friend";
 export { default as GuestList } from "./components/guest-list";
 
