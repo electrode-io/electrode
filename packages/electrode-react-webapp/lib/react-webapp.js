@@ -5,6 +5,7 @@ const Promise = require("bluebird");
 const fs = require("fs");
 const Path = require("path");
 const Helmet = require("react-helmet").Helmet;
+const groupScripts = require("./group-scripts");
 
 const CONTENT_MARKER = "{{SSR_CONTENT}}";
 const HEADER_BUNDLE_MARKER = "{{WEBAPP_HEADER_BUNDLES}}";
@@ -26,7 +27,7 @@ const HTTP_ERROR_500 = 500;
  */
 function resolveChunkSelector(options) {
   if (options.bundleChunkSelector) {
-    return require(Path.join(process.cwd(), options.bundleChunkSelector));  // eslint-disable-line
+    return require(Path.join(process.cwd(), options.bundleChunkSelector)); // eslint-disable-line
   }
 
   return () => ({
@@ -46,15 +47,15 @@ function resolveChunkSelector(options) {
 function loadAssetsFromStats(statsPath) {
   return Promise.resolve(Path.resolve(statsPath))
     .then(require)
-    .then((stats) => {
+    .then(stats => {
       const assets = {};
-      const manifestAsset = _.find(stats.assets, (asset) => {
+      const manifestAsset = _.find(stats.assets, asset => {
         return asset.name.endsWith("manifest.json");
       });
-      const jsAssets = stats.assets.filter((asset) => {
+      const jsAssets = stats.assets.filter(asset => {
         return asset.name.endsWith(".js");
       });
-      const cssAssets = stats.assets.filter((asset) => {
+      const cssAssets = stats.assets.filter(asset => {
         return asset.name.endsWith(".css");
       });
 
@@ -123,7 +124,7 @@ function makeRouteHandler(routeOptions, userContent) {
 
   /* Create a route handler */
   /* eslint max-statements: [2, 35] */
-  return (options) => {
+  return options => {
     const mode = options.mode;
     const renderJs = RENDER_JS && mode !== "nojs";
     let renderSs = RENDER_SS;
@@ -136,30 +137,24 @@ function makeRouteHandler(routeOptions, userContent) {
     }
 
     const chunkNames = chunkSelector(options.request);
-    const devCSSBundle = chunkNames.css ?
-      `${devBundleBase}${chunkNames.css}.style.css` :
-      `${devBundleBase}style.css`;
-    const devJSBundle = chunkNames.js ?
-      `${devBundleBase}${chunkNames.js}.bundle.dev.js` :
-      `${devBundleBase}bundle.dev.js`;
-    const jsChunk = _.find(
-      assets.js,
-      (asset) => _.includes(asset.chunkNames, chunkNames.js)
-    );
-    const cssChunk = _.find(
-      assets.css,
-      (asset) => _.includes(asset.chunkNames, chunkNames.css)
-    );
+    const devCSSBundle = chunkNames.css
+      ? `${devBundleBase}${chunkNames.css}.style.css`
+      : `${devBundleBase}style.css`;
+    const devJSBundle = chunkNames.js
+      ? `${devBundleBase}${chunkNames.js}.bundle.dev.js`
+      : `${devBundleBase}bundle.dev.js`;
+    const jsChunk = _.find(assets.js, asset => _.includes(asset.chunkNames, chunkNames.js));
+    const cssChunk = _.find(assets.css, asset => _.includes(asset.chunkNames, chunkNames.css));
 
     const bundleCss = () => {
-      return WEBPACK_DEV ? devCSSBundle : cssChunk && `${prodBundleBase}${cssChunk.name}` || "";
+      return WEBPACK_DEV ? devCSSBundle : (cssChunk && `${prodBundleBase}${cssChunk.name}`) || "";
     };
 
     const bundleJs = () => {
       if (!renderJs) {
         return "";
       }
-      return WEBPACK_DEV ? devJSBundle : jsChunk && `${prodBundleBase}${jsChunk.name}` || "";
+      return WEBPACK_DEV ? devJSBundle : (jsChunk && `${prodBundleBase}${jsChunk.name}`) || "";
     };
 
     const bundleManifest = () => {
@@ -167,92 +162,105 @@ function makeRouteHandler(routeOptions, userContent) {
         return "";
       }
 
-      return WEBPACK_DEV ? `${devBundleBase}${assets.manifest}` :
-        `${prodBundleBase}${assets.manifest}`;
+      return WEBPACK_DEV
+        ? `${devBundleBase}${assets.manifest}`
+        : `${prodBundleBase}${assets.manifest}`;
     };
 
-    const callUserContent = (content) => {
+    const callUserContent = content => {
       const x = content(options.request);
-      return !x.catch ? x : x.catch((err) => {
-        return Promise.reject({
-          status: err.status || HTTP_ERROR_500,
-          html: err.message || err.toString()
-        });
-      });
+      return !x.catch
+        ? x
+        : x.catch(err => {
+            return Promise.reject({
+              status: err.status || HTTP_ERROR_500,
+              html: err.message || err.toString()
+            });
+          });
     };
 
-    const makeHeaderBundles = (helmet) => {
-      const manifest = bundleManifest();
-      const manifestLink = manifest
-        ? `<link rel="manifest" href="${manifest}" />`
-        : "";
-      const css = bundleCss();
-      const cssLink = css && !criticalCSS
-        ? `<link rel="stylesheet" href="${css}" />`
-        : "";
-      const scriptsFromHelmet = ["link", "style", "script", "noscript"]
-          .map((tagName) => helmet[tagName].toString()).join("");
+    const htmlifyScripts = scripts => {
+      return scripts
+        .map(
+          x =>
+            typeof x === "string"
+              ? `<script>${x}</script>\n`
+              : x.map(n => `<script src="${n.src}"></script>`).join("\n")
+        )
+        .join("\n");
+    };
 
-      return `${manifestLink}${cssLink}${scriptsFromHelmet}`;
+    const makeHeaderBundles = helmet => {
+      const manifest = bundleManifest();
+      const manifestLink = manifest ? `<link rel="manifest" href="${manifest}" />\n` : "";
+      const css = bundleCss();
+      const cssLink = css && !criticalCSS ? `<link rel="stylesheet" href="${css}" />` : "";
+      const scriptsFromHelmet = ["link", "style", "script", "noscript"]
+        .map(tagName => helmet[tagName].toString())
+        .join("");
+
+      const htmlScripts = htmlifyScripts(groupScripts(routeOptions.unbundledJS.enterHead).scripts);
+      return `${manifestLink}${cssLink}${htmlScripts}\n${scriptsFromHelmet}`;
     };
 
     const makeBodyBundles = () => {
       const js = bundleJs();
-      const css = bundleCss();
-      const cssLink = css && criticalCSS
-        ? `<link rel="stylesheet" href="${css}" />`
-        : "";
-      const jsLink = js ? `<script src="${js}"></script>` : "";
+      const jsLink = js ? { src: js } : "";
 
-      return `${cssLink}${jsLink}`;
+      const ins = routeOptions.unbundledJS.preBundle
+        .concat([jsLink])
+        .concat(routeOptions.unbundledJS.postBundle);
+      const htmlScripts = htmlifyScripts(groupScripts(ins).scripts);
+
+      return `${htmlScripts}`;
     };
 
     const emptyTitleRegex = /<title[^>]*><\/title>/;
 
-    const makeTitle = (helmet) => {
+    const makeTitle = helmet => {
       const helmetTitleScript = helmet.title.toString();
       const helmetTitleEmpty = helmetTitleScript.match(emptyTitleRegex);
 
       return helmetTitleEmpty ? `<title>${routeOptions.pageTitle}</title>` : helmetTitleScript;
     };
 
-    const renderPage = (content) => {
+    const renderPage = content => {
       const helmet = Helmet.renderStatic();
 
-      return html.replace(/{{[A-Z_]*}}/g, (m) => {
+      return html.replace(/{{[A-Z_]*}}/g, m => {
         switch (m) {
-        case CONTENT_MARKER:
-          return content.html || "";
-        case TITLE_MARKER:
-          return makeTitle(helmet);
-        case HEADER_BUNDLE_MARKER:
-          return makeHeaderBundles(helmet);
-        case BODY_BUNDLE_MARKER:
-          return makeBodyBundles(helmet);
-        case PREFETCH_MARKER:
-          return `<script>${content.prefetch}</script>`;
-        case META_TAGS_MARKER:
-          return helmet.meta.toString() + iconStats;
-        case CRITICAL_CSS_MARKER:
-          return criticalCSS;
-        default:
-          return `Unknown marker ${m}`;
+          case CONTENT_MARKER:
+            return content.html || "";
+          case TITLE_MARKER:
+            return makeTitle(helmet);
+          case HEADER_BUNDLE_MARKER:
+            return makeHeaderBundles(helmet);
+          case BODY_BUNDLE_MARKER:
+            return makeBodyBundles();
+          case PREFETCH_MARKER:
+            return `<script>${content.prefetch}</script>`;
+          case META_TAGS_MARKER:
+            return helmet.meta.toString() + iconStats;
+          case CRITICAL_CSS_MARKER:
+            return criticalCSS;
+          default:
+            return `Unknown marker ${m}`;
         }
       });
     };
 
-    const renderSSRContent = (content) => {
-      const p = _.isFunction(content) ?
-        callUserContent(content) :
-        Promise.resolve(_.isObject(content) ? content : {html: content});
-      return p.then((c) => renderPage(c));
+    const renderSSRContent = content => {
+      const p = _.isFunction(content)
+        ? callUserContent(content)
+        : Promise.resolve(_.isObject(content) ? content : { html: content });
+      return p.then(c => renderPage(c));
     };
 
     return renderSSRContent(renderSs ? userContent : "");
   };
 }
 
-const setupOptions = (options) => {
+const setupOptions = options => {
   const pluginOptionsDefaults = {
     pageTitle: "Untitled Electrode Web Application",
     webpackDev: process.env.WEBPACK_DEV === "true",
@@ -263,6 +271,11 @@ const setupOptions = (options) => {
       host: process.env.WEBPACK_HOST || "127.0.0.1",
       port: process.env.WEBPACK_DEV_PORT || "2992",
       https: Boolean(process.env.WEBPACK_DEV_HTTPS)
+    },
+    unbundledJS: {
+      enterHead: [],
+      preBundle: [],
+      postBundle: []
     },
     paths: {},
     stats: "dist/server/stats.json",
@@ -275,24 +288,26 @@ const setupOptions = (options) => {
   const pluginOptions = _.defaultsDeep({}, options, pluginOptionsDefaults);
   const chunkSelector = resolveChunkSelector(pluginOptions);
   const devProtocol = process.env.WEBPACK_DEV_HTTPS ? "https://" : "http://";
-  const devBundleBase = `${devProtocol}${pluginOptions.devServer.host}:${pluginOptions.devServer.port}/js/`; // eslint-disable-line max-len
+  const devBundleBase = `${devProtocol}${pluginOptions.devServer.host}:${pluginOptions.devServer
+    .port}/js/`;
   const statsPath = getStatsPath(pluginOptions.stats, pluginOptions.buildArtifacts);
 
-  return Promise.try(() => loadAssetsFromStats(statsPath))
-    .then((assets) => {
-      pluginOptions.__internals = {
-        assets,
-        chunkSelector,
-        devBundleBase
-      };
+  return Promise.try(() => loadAssetsFromStats(statsPath)).then(assets => {
+    pluginOptions.__internals = {
+      assets,
+      chunkSelector,
+      devBundleBase
+    };
 
-      return pluginOptions;
-    });
+    return pluginOptions;
+  });
 };
 
-const resolveContent = (content) => {
+const resolveContent = content => {
   if (!_.isString(content) && !_.isFunction(content) && content.module) {
-    const module = content.module.startsWith(".") ? Path.join(process.cwd(), content.module) : content.module; // eslint-disable-line
+    const module = content.module.startsWith(".")
+      ? Path.join(process.cwd(), content.module)
+      : content.module;
     return require(module); // eslint-disable-line
   }
 

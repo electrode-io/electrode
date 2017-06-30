@@ -13,7 +13,7 @@ const DEFAULT_BUNDLE = {
   js: "home"
 };
 
-module.exports = (request) => {
+module.exports = request => {
   if (request.path.endsWith("/foo")) {
     return FOO_BUNDLE;
   } else if (request.path.endsWith("/bar")) {
