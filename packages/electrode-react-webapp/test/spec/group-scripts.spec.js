@@ -9,7 +9,7 @@ const data = [
   { src: 2 },
   "d",
   "e",
-  "f",
+  "f;",
   "g",
   { src: 3 },
   "h",

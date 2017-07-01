@@ -108,20 +108,60 @@ What you can do with the options:
 
 ### Content details
 
-The content you specify for your path can either be a string or a promise returning function.
+The content you specify for your path is the entry to your React application when doing Server Side Rendering. 
 
-If it's a string, it's treated as a straight React template to be rendered.
+It can be a string, a function, or an object.
 
-If it's a function, the function should return a promise that resolves an object:
+#### `string`
+
+If it's a string, it's treated as a straight React JSX template to be rendered.
+
+#### `function`
+
+If it's a function, the function will be called with the web server's `request` object, and it should return a promise that resolves an object:
 
 ```js
-function myContent() {
+function myContent(req) {
   return Promise.resolve({
     status: 200,
     html: "<h1>Hello React!</h1>",
     prefetch: ""
   });
 }
+```
+
+In an Electrode app, the module `electrode-redux-router-engine` and its `render` method is used to invoke the React component that's been specified for the route and the `renderToString` output is returned as the `html`.
+
+#### `object`
+
+If it's an object, it can specify a `module` field which is the name of a module that will be `require`ed.  The module should export either a string or a function as specified above.
+
+### Disabling SSR
+
+If you don't want any Server Side Rendering at all, you can set the option `serverSideRendering` to `false`, and you can skip setting `content`.  This will make the server to **not** even load your React app.
+
+For example:
+
+```js
+const config = {
+  plugins: {
+    "electrode-react-webapp": {
+      options: {
+        pageTitle: "My Awesome React WebApp",
+        paths: {
+          "/{args*}": {
+            view: "index"
+        },
+        unbundledJS: {
+          enterHead: [
+            {src: "http://cdn.com/js/lib.js"}
+          ]
+        },
+        serverSideRendering: false
+      }
+    }
+  }
+};
 ```
 
 [npm-image]: https://badge.fury.io/js/electrode-react-webapp.svg
