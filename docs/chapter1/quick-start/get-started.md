@@ -64,67 +64,30 @@ $ npm run prod
 
 ## Project Structure
 
-Let's take a quick high level overview of our file structure and what `generator-electrode` gives you out the box. Read through our [What's Inside section](/chapter1/quick-start/whats-inside.md) for a more detailed description.
+Here is a basic top level view of the application's structure:
 
--   `src/client/`
+```text
+electrode-app
+├── package.json
+├── LICENSE
+├── README.md
+├── config
+├── src
+│   ├── client
+│   └── server
+├── test
+│   ├── client
+│   └── server
+└── xclap.js
+```
 
-    Contains your client side code and our favs, React, Redux + CSS modules.
+-   `config` - This directory contains the configuration for your application.
+-   `src/client` - Contains your React application
+-   `src/server` - Contains your NodeJS server application with SSR support.
+-   `test` - Contains unit test for your application
+-   `xclap.js` - entry to Electrode's archetype tasks
 
-    -   `app.jsx`
-
-        The entry point for the client. It contains powerful Electrode modules that we will leverage as we build out functionality.
-
-    -   `routes.jsx`
-
-        The shared routes between client and server are defined here for use with react-router.
-
-    -   `components/`
-
-        This is the folder for your React components. We love React and how it helps us to manage User Interface complexity. Read more in the Explore section.
-
-    -   `styles/`
-
-        This is the folder for your CSS files. We will use CSS Modules: a CSS file in which all class names and animation names are scoped locally by default.
-
--   `src/server/`
-
-    Contains your server-side code. Electrode-Server gives you a powerful plugin capable of SSR out the box. Learn more in the [What's Inside section](/chapter1/quick-start/whats-inside.md).
-
--   `config/`
-
-    Your environment specific configuration files go here and are managed by the versatile [electrode-confippet](http://www.electrode.io/docs/confippet.html) module, including a preset config that you can customize and extend.
-
--   `node_modules/`
-
-    Other Javascript files contained in modules that we will use in this application, including Electrode modules that create your out-the-box Universal app. This folder is managed directly by`npm`.
-
--   `.babelrc`
-
-    Where we extend our app babel configuration to allow us to use the presets and any additional babel settings.
-
--   `.gitignore`
-
-    A file that tell git what files (or patterns) to ignore when you commit.
-
--   `.ismorphic-loader-config.json`
-
-    A webpack loader, plugin and library to make NodeJS `require` work with complex files like images when we are doing server-side rendering.
-
--   `.travis.yml`
-
-    A file where you can customize any process in the Travis default build environment.
-
--   `xclap.js`
-
-    A file that stores all your development tasks. We will explore this more in [Getting Started: Intermediate](/chapter1/Intermediate.md).
-
--   `package.json`
-
-    Contains the metadata for `your-awesome-app`  and a list of your dependencies to install when running `npm install`.
-
--   `README.md`
-
-    Info you want users to know about your app (installation instructions, licensing, contributors, etc.).
+The application generated included a few demo components to show you how to use Redux, CSS Modules, and React JSX.  Feel free to play with them and remove or replace them when you are ready to add your application.
 
 * * *
 
