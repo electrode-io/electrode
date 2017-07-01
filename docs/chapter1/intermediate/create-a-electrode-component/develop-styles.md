@@ -4,7 +4,7 @@
 
 Let's also add some style elements using [CSS modules](https://github.com/css-modules/css-modules) to create a dynamic application. Use the code below to replace what is in
 
-`<your-awesome-component>/packages/<componentName>/src/styles/<your-awesome-component>.css`:
+`<your-component>/packages/<componentName>/src/styles/<your-component>.css`:
 
 ```css
 
@@ -127,7 +127,7 @@ a, a:hover, a:active, a:visited {
 
 ```
 
-Create a file named: `<your-awesome-component>/packages/<componentName>/src/styles/guest-list.css`. Copy the code from below into this file:
+Create a file named: `<your-component>/packages/<componentName>/src/styles/guest-list.css`. Copy the code from below into this file:
 
 ```css
 
@@ -186,7 +186,7 @@ input[type=checkbox]:checked+label:before {
 
 ```
 
-Create a file named: `<your-awesome-component>/packages/<componentName>/src/styles/render-friend.css`. Copy the code from below into this file:
+Create a file named: `<your-component>/packages/<componentName>/src/styles/render-friend.css`. Copy the code from below into this file:
 
 ```css
 

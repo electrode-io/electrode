@@ -6,7 +6,7 @@ Are you ready to build your first Electrode Component?
 
 ## Installation
 
-First, install [Yeoman](http://yeoman.io/) and [xclap-cli] if you haven't yet. Install  [generator-electrode](https://github.com/electrode-io/electrode/tree/master/packages/generator-electrode) using npm (we assume you have pre-installed node.js (> 4.2.x required)).
+First, install [Yeoman](http://yeoman.io/) and [xclap-cli](https://www.npmjs.com/package/xclap-cli) if you haven't yet. Install  [generator-electrode](https://github.com/electrode-io/electrode/tree/master/packages/generator-electrode) using npm (we assume you have pre-installed node.js (> 4.2.x required)).
 
 ```bash
 $ npm install -g yo xclap-cli generator-electrode
@@ -17,8 +17,8 @@ $ npm install -g yo xclap-cli generator-electrode
 Then create a completely new folder and run the generator:
 
 ```bash
-$ mkdir your-awesome-component-folder
-$ cd your-awesome-component-folder
+$ mkdir your-component-folder
+$ cd your-component-folder
 $ yo electrode:component
 ```
 
@@ -29,7 +29,7 @@ Welcome to the Electrode Component Generator
 
 We're going to set up a new Electrode component, ready for development with
 [xclap], webpack, demo, electrode component archetype, and live-reload
-? What is your Package/GitHub project name? (e.g., 'wysiwyg-component') your-awesome-component
+? What is your Package/GitHub project name? (e.g., 'wysiwyg-component') your-component
 ? What is the ClassName for your component?
 ? What will be the npm package name?
 ? What will be the GitHub organization username (e.g., 'walmartlabs')?
@@ -43,6 +43,7 @@ We're going to set up a new Electrode component, ready for development with
     create README.md
     create lerna.json
     create packages/wysiwyg-component/.babelrc
+  ...
 ```
 
 After the installation finished, your new Electrode component is ready!
@@ -52,7 +53,7 @@ After the installation finished, your new Electrode component is ready!
 Preview your component by using the demo-app. This is an electrode app which uses your newly created component:
 
 ```bash
-$ cd <your-awesome-component>/demo-app
+$ cd <your-component>/demo-app
 $ clap dev
 ```
 

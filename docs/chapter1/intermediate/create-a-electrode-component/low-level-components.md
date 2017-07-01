@@ -9,7 +9,7 @@ $ cd packages
 $ yo electrode:component-add
 ```
 
-Fill out the prompts again with your information, we took `your-awesome-component2` as a new component name and you should see something like below:
+Fill out the prompts again with your information, we took `your-component2` as a new component name and you should see something like below:
 
 ```bash
   _-----_
@@ -22,9 +22,9 @@ Fill out the prompts again with your information, we took `your-awesome-componen
   __'.___.'__
  ´   `  |° ´ Y `
 
-  ? Component Name your-awesome-component2
-  ? What is the ClassName for your component? your-awesome-component2
-  ? What will be the npm package name? your-awesome-component2
+  ? Component Name your-component2
+  ? What is the ClassName for your component? your-component2
+  ? What will be the npm package name? your-component2
   ? What will be the GitHub organization username (e.g., 'walmartlabs')?
   ? What is your name? (for copyright notice, etc.)
   ? What is your GitHub Username?
@@ -51,14 +51,14 @@ Fill out the prompts again with your information, we took `your-awesome-componen
   create clap.js
   create package.json
   create README.md
-  create src/components/your-awesome-component2.jsx
-  create src/styles/your-awesome-component2.css
+  create src/components/your-component2.jsx
+  create src/styles/your-component2.css
   create src/lang/default-messages.js
   create src/lang/en.json
   create src/lang/tenants/electrodeio/default-messages.js
   create src/index.js
   create test/client/.eslintrc
-  create test/client/components/your-awesome-component2.spec.jsx
+  create test/client/components/your-component2.spec.jsx
   create test/client/components/helpers/intl-enzyme-test-helper.js
   ...
 
@@ -68,12 +68,13 @@ This will generate a new package and also update the demo-app. Don't get panic i
 
 #### Develop the new generated component
 
-Create a file called `<your-awesome-component>/packages/<componentName>/src/components/guest-list.jsx`. Copy the code from below into this file:
+Create a file called `<your-component>/packages/<componentName>/src/components/guest-list.jsx`. Copy the code from below into this file:
 
 ```js
 
 import React from "react";
 
+import PropTypes from "prop-types";
 import styles from "../../src/styles/guest-list.css";
 
 const GuestList = ({ invitees, toggleGuest }) => {
@@ -103,20 +104,20 @@ const GuestList = ({ invitees, toggleGuest }) => {
 };
 
 GuestList.propTypes = {
-  invitees: React.PropTypes.array,
-  toggleGuest: React.PropTypes.func
+  invitees: PropTypes.array,
+  toggleGuest: PropTypes.func
 };
 
 export default GuestList;
 
 ```
 
-Create another file called `<your-awesome-component>/packages/<componentName>/src/components/render-friend.jsx`. Copy the code from below into this file. Don't worry—we'll cover the helper and css modules in the next section.
+Create another file called `<your-component>/packages/<componentName>/src/components/render-friend.jsx`. Copy the code from below into this file. Don't worry—we'll cover the helper and css modules in the next section.
 
 ```js
 
 import React from "react";
-
+import PropTypes from "prop-types";
 import styles from "../../src/styles/render-friend.css";
 import style from "../helpers/graph-styles";
 
@@ -164,8 +165,9 @@ const RenderFriend = ({ friend, styleObj, className }) => {
 };
 
 RenderFriend.propTypes = {
-  friend: React.PropTypes.object,
-  styleObj: React.PropTypes.object
+  friend: PropTypes.object,
+  styleObj: PropTypes.object,
+  className: PropTypes.string
 };
 
 export default RenderFriend;
