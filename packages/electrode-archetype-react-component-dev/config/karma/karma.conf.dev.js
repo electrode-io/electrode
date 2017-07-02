@@ -9,10 +9,8 @@
  * server during the test run.
  */
 module.exports = function (config) {
-  config.set({
-    frameworks: ["mocha", "phantomjs-shim"],
+  const base = {
     reporters: ["spec"],
-    browsers: ["PhantomJS"],
     basePath: process.cwd(), // repository root.
     files: [
       // Test bundle (must be created via `npm run dev|hot|server-test`)
@@ -26,5 +24,16 @@ module.exports = function (config) {
         ui: "bdd"
       }
     }
-  });
+  };
+
+  if (browser === "chrome") {
+    base.browsers = ["ChromeHeadless"];
+    base.frameworks = ["mocha"];
+    console.log("Using Chrome Headless to run Karma test");
+  } else {
+    base.browsers = ["PhantomJS"];
+    base.frameworks = ["mocha", "phantomjs-shim"];
+  }
+
+  config.set(base);
 };
