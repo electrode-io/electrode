@@ -4,13 +4,13 @@
 
 Sometimes it makes sense to do the heavy lifting of your application in one or more separate modules that are imported. For example, let's make a helper module to handle different types of graphs. Remember that this helper was imported into the app in the last section via:
 
-```
+```js
 import style from "../helpers/graph-styles";
 ```
 
-In `src`, create a folder named `helpers` with a file named `graph-styles.js` inside \(`<your-awesome-component>/packages/<componentName>/src/helpers/graph-styles.js`\). Copy the code from below into this file:
+In `src`, create a folder named `helpers` with a file named `graph-styles.js` inside \(`<your-component>/packages/<componentName>/src/helpers/graph-styles.js`\). Copy the code from below into this file:
 
-```
+```js
 
 const PARENT = { divisor: 2 };
 const CHILD = { divisor: 4, rotateBack: -1 };
@@ -29,7 +29,7 @@ export default(type, size, rotateVal) => {
     left: `50%`,
     transform: `translate(0em)`
   };
-  switch(type) {
+  switch (type) {
     case "single":
       {
         const singleNode = {
@@ -37,7 +37,7 @@ export default(type, size, rotateVal) => {
           position: `relative`,
           margin: `${nodeSize / SINGLE.marginDivisor}em`
         };
-        ["width", "height"].map((prop) => singleNode[prop] = parentOrSingle[prop]);
+        ["width", "height"].map((prop) => singleNode[prop] = parentOrSingle[prop]); // eslint-disable-line
         return singleNode;
       }
     case "child":

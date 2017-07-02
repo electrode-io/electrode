@@ -110,20 +110,20 @@ module.exports = generators.Base.extend({
           name: "name",
           message: "Component Name",
           when: !this.props.name,
-          default: path.basename(process.cwd())
+          default: "wysiwyg-component"
         },
         {
           type: "input",
           name: "componentName",
           message: "What is the ClassName for your component?",
-          default: this.props.componentName || path.basename(process.cwd()),
+          default: this.props.name,
           when: !this.props.componentName
         }
       ];
       return this.prompt(prompts).then(props => {
         this.props = extend(this.props, props);
         this.packageName = this.props.name;
-        this.componentName = _.kebabCase(_.deburr(this.props.componentName))
+        this.componentName = _.kebabCase(_.deburr(this.props.componentName || this.props.name))
           .replace(/^\s+|\s+$/g, "")
           .replace(/(^|[-_ ])+(.)/g, function(match, first, second) {
             return second.toUpperCase();

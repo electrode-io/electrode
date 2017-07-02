@@ -1,3 +1,55 @@
+# 6/30/2017
+
+## Packages
+
+-   electrode-react-webapp@1.7.0 `(1.6.3 => 1.7.0)`
+-   generator-electrode@3.1.2 `(3.1.1 => 3.1.2)`
+
+## Commits
+
+-   `packages/electrode-react-webapp`
+
+    -   [patch] Move react-helmet scripts to head to avoid double load ([#423](https://github.com/electrode-io/electrode/pull/423)) [commit](http://github.com/electrode-io/electrode/commit/0a3bb8068cedae9de162ae0863a30722a966d4c5)
+    -   [minor] add unbundledJS option ([#448](https://github.com/electrode-io/electrode/pull/448)) [commit](http://github.com/electrode-io/electrode/commit/f6286342e96b4383d0104dbca3448d3396cee0dd)
+
+-   `packages/generator-electrode`
+
+    -   do not write default.js when extended ([#447](https://github.com/electrode-io/electrode/pull/447)) [commit](http://github.com/electrode-io/electrode/commit/a2e995745825a29a3280d5e26ee597a7845aa4e2)
+
+-   `docs`
+
+    -   [chore]: update docs quick guide [commit](http://github.com/electrode-io/electrode/commit/5db747ff12bc0f2b3c2dea1eb9475634799608fc)
+
+# 6/29/2017
+
+## Packages
+
+### Directly Updated
+
+-   electrode-redux-router-engine@1.4.5 `(1.4.4 => 1.4.5)`
+-   generator-electrode@3.1.1 `(3.1.0 => 3.1.1)`
+
+### Lerna Updated
+
+-   electrode-archetype-react-app@3.1.3 `(3.1.2 => 3.1.3)`
+-   electrode-archetype-react-app-dev@3.1.3 `(3.1.2 => 3.1.3)`
+-   electrode-webpack-reporter@0.3.10 `(0.3.9 => 0.3.10)`
+
+## Commits
+
+-   `packages/electrode-redux-router-engine`
+
+    -   [patch][bug] Escape **PRELOADED_STATE**. Fix for #441 ([#442](https://github.com/electrode-io/electrode/pull/442)) [commit](http://github.com/electrode-io/electrode/commit/161fb83b605f140d27a537b0e8e3e7564d0fac11)
+
+-   `packages/generator-electrode`
+
+    -   no git init for demo-app ([#445](https://github.com/electrode-io/electrode/pull/445)) [commit](http://github.com/electrode-io/electrode/commit/945b25b8b583c6340e34c2685a829ed10d246492)
+
+-   `docs`
+
+    -   gitbook: [patch] Update docs form training feedback ([#443](https://github.com/electrode-io/electrode/pull/443)) [commit](http://github.com/electrode-io/electrode/commit/cef5d8d8bb197765e497add66feac65d73a93c5c)
+    -   update readme [commit](http://github.com/electrode-io/electrode/commit/1932de00a20c3fac630cc043d0bf30c47c7b4794)
+
 # 6/26/2017
 
 ## Packages

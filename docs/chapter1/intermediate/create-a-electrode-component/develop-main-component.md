@@ -2,17 +2,17 @@
 
 #### Develop main high-level component
 
-Replace the code in `<your-awesome-component>/packages/<componentName>/src/components/<your-awesome-component>.jsx` with the code below. Change all references from the literal `your-awesome-component or YourAwesomeComponent` to your actual component name:
+Replace the code in `<your-component>/packages/<componentName>/src/components/<your-component>.jsx` with the code below. Change all references from the literal `your-component or YourComponent` to your actual component name:
 
-```
+```js
 
-import React, { Component, PropTypes } from "react";
-
-import styles from "../../src/styles/my-component.css";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import styles from "../../src/styles/your-component.css";
 import RenderFriend from "./render-friend";
 import GuestList from "./guest-list";
 
-export default class myComponent extends Component {
+export default class YourComponent extends Component {
 
   constructor(props) {
     super(props);
@@ -73,9 +73,9 @@ export default class myComponent extends Component {
   }
 }
 
-myComponent.displayName = "myComponent";
+YourComponent.displayName = "YourComponent";
 
-myComponent.propTypes = {
+YourComponent.propTypes = {
   ourFriends: PropTypes.array,
   message: PropTypes.func,
   invitees: PropTypes.array,
@@ -83,7 +83,7 @@ myComponent.propTypes = {
   toggleGuest: PropTypes.func
 };
 
-myComponent.defaultProps = {
+YourComponent.defaultProps = {
   ourFriends: [],
   message: () => {
     return `<p>Let's party! Un-comment the all the commented-out lines in the
@@ -94,11 +94,11 @@ myComponent.defaultProps = {
 
 ```
 
-Last edit! In `<your-awesome-component>/src/index.js` add the three lines below:
+Last edit! In `<your-component>/src/index.js` add the three lines below:
 
-```
+```js
 
-export { default as YourAwesomeComponent } from "./components/my-component";
+export { default as YourComponent } from "./components/your-component";
 export { default as RenderFriend } from "./components/render-friend";
 export { default as GuestList } from "./components/guest-list";
 
