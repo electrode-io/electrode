@@ -1,5 +1,7 @@
 "use strict";
 
+const browserSettings = require("./browser-settings");
+
 /*
  * Karma Configuration: "dev" version.
  *
@@ -26,14 +28,7 @@ module.exports = function (config) {
     }
   };
 
-  if (browser === "chrome") {
-    base.browsers = ["ChromeHeadless"];
-    base.frameworks = ["mocha"];
-    console.log("Using Chrome Headless to run Karma test");
-  } else {
-    base.browsers = ["PhantomJS"];
-    base.frameworks = ["mocha", "phantomjs-shim"];
-  }
+  browserSettings(base);
 
   config.set(base);
 };

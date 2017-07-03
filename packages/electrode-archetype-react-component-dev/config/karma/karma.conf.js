@@ -8,14 +8,13 @@ var MAIN_PATH = require.resolve(
   "electrode-archetype-react-component-dev/config/karma/entry.js"
 );
 
-const archetype = require("electrode-archetype-react-component/config/archetype");
+const browserSettings = require("./browser-settings");
 
 var PREPROCESSORS = {};
 
 PREPROCESSORS[MAIN_PATH] = ["webpack"];
 
 module.exports = function(config) {
-  const browser = archetype.karma.browser.toLowerCase();
   const base = {
     basePath: process.cwd(),
     files: [MAIN_PATH],
@@ -54,14 +53,7 @@ module.exports = function(config) {
     singleRun: true
   };
 
-  if (browser === "chrome") {
-    base.browsers = ["ChromeHeadless"];
-    base.frameworks = ["mocha", "intl-shim"];
-    console.log("Using Chrome Headless to run Karma test");
-  } else {
-    base.browsers = ["PhantomJS"];
-    base.frameworks = ["mocha", "phantomjs-shim", "intl-shim"];
-  }
+  browserSettings(base);
 
   config.set(base);
 };
