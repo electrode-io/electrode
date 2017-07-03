@@ -24,8 +24,8 @@ const reactWebapp = server.register({
     pageTitle: "My Awesome React WebApp",
     paths: {
       "/{args*}": {
-        view: "index",
         content: "<h1>Hello React!</h1>"
+      }
     }
   }
 });
@@ -43,8 +43,8 @@ const config = {
         pageTitle: "My Awesome React WebApp",
         paths: {
           "/{args*}": {
-            view: "index",
             content: "<h1>Hello React!</h1>"
+          }
         },
         unbundledJS: {
           enterHead: [
@@ -89,14 +89,9 @@ What you can do with the options:
 -   `webpackDev` `(Boolean)` whether to use webpack-dev-server's URLs for retrieving CSS and JS bundles.
 -   `serverSideRendering` `(Boolean)` Toggle server-side rendering.
 -   `htmlFile` `(String)` Absolute or relative path to the application root html file.
-     It must contains the following placeholders:
-    -   `{{PAGE_TITLE}}` page title.
-    -   `{{WEBAPP_BUNDLES}}` injected `<script>` and `<link>` tags to load bundled JavaScript and Css
-    -   `{{PREFETCH_BUNDLES}}` `<script>` tag containing code that will contains prefetched JavaScript code
-    -   `{{SSR_CONTENT}}` injected content rendered on server side
 -   `paths` `(Object)` An object of key/value pairs specifying paths within your application with their view and (optionally) initial content for server-side render
     -   _path_ `(Object)`
-        -   `view` `(String)` Name of the view to be used for this path **required**
+        -   `htmlFile` `(String)` Name of the view file to be used for this path **optional**
         -   `content` Content to be rendered by the server when server-side rendering is used _optional_ [see details](#content-details)
 -   `unbundledJS` (Object) Specify JavaScript files to be loaded at an available extension point in the index template
     -   `enterHead` (Array) Array of script objects (`{ src: "path to file" }`) to be inserted as `<script>` tags in the document `head` before anything else. To load scripts asynchronously use `{ src: "...", async: true }` or `{ src: "...", defer: true }`
@@ -106,15 +101,40 @@ What you can do with the options:
     -   `port` `(String)` The port that webpack-dev-server runs on
 -   `prodBundleBase` `(String)` Base path to locate the JavaScript, CSS and manifest bundles. Defaults to "/js/". Should end with "/".
 
+### `htmlFile` view details
+
+The top level options can specify an **optional** value `htmlFile`.
+
+Also each _path_ can specify the same option to override the top level one.
+
+This option specifies the view template for rendering your path's HTML output.
+
+-   If it's `undefined`, then the built-in `index.html` view template is used.
+
+-   If it's a string, then it must point to a valid view template file.
+    -   If it's not an absolute path, then `process.cwd()` is prepended.
+
+You can see this module's [build-in index.html](./lib/index.html) for details on how to create your own view template.
+
+It should basically be a valid HTML file, with the following special token to be replaced by dynamically generated strings:
+
+-   `{{META_TAGS}}` - Helmet meta tags.
+-   `{{PAGE_TITLE}}` - The page's title.
+-   `{{CRITICAL_CSS}}` - Critical CSS bundle.
+-   `{{PREFETCH_BUNDLES}}` - The Redux store prefetch data bundle.
+-   `{{WEBAPP_HEADER_BUNDLES}}` - The CSS bundle for your React app
+-   `{{SSR_CONTENT}}` - The server side rendered content.
+-   `{{WEBAPP_BODY_BUNDLES}}` - The JS bundle for your React app.
+
 ### Content details
 
-The content you specify for your path is the entry to your React application when doing Server Side Rendering. 
+The content you specify for your path is the entry to your React application when doing Server Side Rendering.  Ultimately, a `string` should be acquired from the content and will replace the `{{SSR_CONTENT}}` marker in the view.
 
 It can be a string, a function, or an object.
 
 #### `string`
 
-If it's a string, it's treated as a straight React JSX template to be rendered.
+If it's a string, it's treated as a straight plain HTML to be inserted as the `{{SSR_CONTENT}}`.
 
 #### `function`
 
@@ -149,8 +169,7 @@ const config = {
       options: {
         pageTitle: "My Awesome React WebApp",
         paths: {
-          "/{args*}": {
-            view: "index"
+          "/{args*}": {}
         },
         unbundledJS: {
           enterHead: [
