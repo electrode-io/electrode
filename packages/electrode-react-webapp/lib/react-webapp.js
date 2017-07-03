@@ -25,11 +25,13 @@ const getIconStats = utils.getIconStats;
 const getCriticalCSS = utils.getCriticalCSS;
 const getStatsPath = utils.getStatsPath;
 
+const resolvePath = path => (!Path.isAbsolute(path) ? Path.resolve(path) : path);
+
 function makeRouteHandler(routeOptions, userContent) {
   const WEBPACK_DEV = routeOptions.webpackDev;
   const RENDER_JS = routeOptions.renderJS;
   const RENDER_SS = routeOptions.serverSideRendering;
-  const html = fs.readFileSync(routeOptions.htmlFile).toString();
+  const html = fs.readFileSync(resolvePath(routeOptions.htmlFile)).toString();
   const assets = routeOptions.__internals.assets;
   const devBundleBase = routeOptions.__internals.devBundleBase;
   const prodBundleBase = routeOptions.prodBundleBase;

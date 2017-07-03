@@ -5,6 +5,7 @@
 const Promise = require("bluebird");
 const assign = require("object-assign");
 const electrodeServer = require("electrode-server");
+const Path = require("path");
 
 describe("Test electrode-react-webapp", () => {
   let config;
@@ -377,6 +378,53 @@ describe("Test electrode-react-webapp", () => {
             '<script src="http://awesome-cdn.com/myapp/bundle.f07a873ce87fc904a6a5.js">'
           );
           expect(res.result).to.contain("test-unbundledJS-enterHead");
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
+  it("should use top level htmlFile", () => {
+    configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
+    configOptions.stats = "test/data/stats-test-one-bundle.json";
+    configOptions.htmlFile = "test/data/index-1.html";
+
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .then(res => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.result).to.contain(`<div>test html-1</div>`);
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
+  it("should use route level htmlFile", () => {
+    configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
+    configOptions.stats = "test/data/stats-test-one-bundle.json";
+    configOptions.htmlFile = "test/data/index-1.html";
+    configOptions.paths["/{args*}"].htmlFile = Path.resolve("test/data/index-2.html");
+
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .then(res => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.result).to.contain(`<div>test html-2</div>`);
           stopServer(server);
         })
         .catch(err => {
