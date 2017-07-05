@@ -1,16 +1,16 @@
 # What is Electrode?
 
-> Electrode is a platform for building large scale universal React web applications with a standardized structure that follows best practices and has modern technologies baked in. Electrode focuses on performance, component reusability, and simple deployment to multiple cloud providers—so you can focus on what makes your app unique.
+> Electrode is a platform for building large scale Universal React web applications with a standardized structure that follows best practices and has modern technologies baked in. Electrode focuses on performance, component reusability, and simple deployment to multiple cloud providers—so you can focus on what makes your app unique.
 
 ## Core: Quick, Easy, and Scale
 
-Electrode Core allows you to start building a large scale universal React/Node.js application in minutes, with support for server side rendering, easy deployment, and sacling up to teams with hundred of developers.
+Electrode Core allows you to start building a large scale Universal React/Node.js application in minutes, with support for server side rendering, easy deployment, and sacling up to teams with hundred of developers.
 
 The heart of the platform is the [Electrode Archetype System](/chapter1/quick-start/what-are-archetypes.md), which allows for a standardized configuration, structure and workflow throughout the entire application. By enforcing a sensible structure and consistency for components, modules and the entire app, Electrode’s Archetype system helps you build scalable applications you can trust while ensuring streamlined development and deployment.
 
 Electrode comes with two major archetypes to support large scale React web application development.
 
--   **[Electrode Application Archetype]** comes with everything to help you build an universal React application and support for production deployments.
+-   **[Electrode Application Archetype]** comes with everything to help you build a Universal React application and support for production deployments.
 
 -   **[Electrode Component Archetype]** comes with everything to support building and sharing reusable React components across teams with hundreds of developers.
 
@@ -20,14 +20,19 @@ Electrode comes with two major archetypes to support large scale React web appli
 
 ### Electrode Core
 
-You get the following features when building your React application with the Electrode Platform:
+When building your React application with the Electrode Platform, you get an out of the box app with defaults that make sense for the most typical use case, but if you need it, you have all of the following features ready to use with an option.
 
--   Everything you need to build an Universal React application with ES6 and JSX.
+-   Everything you need to build a Universal React application with ES6 and JSX.
 -   Prime support for building and sharing reusable React components.
 -   Styling with CSS Module using [PostCSS].
 -   Writing and running Unit Test with [Mocha], [Karma], and [PhantomJS] or [Chrome Headless]
 -   Highly optimized Server Side Rendering for your React App
+-   Build a Progressive Web App out of box
+-   Ready to deploy to Heroku in production mode
+-   Switch to use [Inferno] instead of [React] with a simple flag.
+-   Hot Module Reload support while developing app or components.
 -   Using images as module in your React code.
+-   Internalization support.
 -   Manage application config base on `NODE_ENV` and customizable ENV you choose.
 -   Stateless Cross Site Request Forgery (CSRF) protection.
 -   NodeJS web servers using Hapi, Express, or Koa.
@@ -83,6 +88,7 @@ The Electrode Platform also has tools that can be consumed by existing applicati
 -   [Mocha]
 -   [Enzyme]
 -   [Yeoman]
+-   [Inferno]
 
 [electrode-docgen]: https://github.com/electrode-io/electrode-docgen
 
@@ -129,3 +135,5 @@ The Electrode Platform also has tools that can be consumed by existing applicati
 [electrode component archetype]: https://github.com/electrode-io/electrode/tree/master/packages/electrode-archetype-react-component
 
 [electrode application archetype]: https://github.com/electrode-io/electrode/tree/master/packages/electrode-archetype-react-app
+
+[inferno]: https://infernojs.org/
