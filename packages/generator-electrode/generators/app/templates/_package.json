@@ -44,7 +44,6 @@
     "lodash": "^4.10.1"
   },
   "devDependencies": {
-    "electrode-archetype-react-app-dev": "^3.0.0",
-    "xclap": "^0.2.0"
+    "electrode-archetype-react-app-dev": "^3.0.0"
   }
 }
