@@ -22,7 +22,9 @@ const registerRoutes = (server, options, next) => {
           return "";
         };
 
-        const routeHandler = ReactWebapp.makeRouteHandler(registerOptions, resolveContent());
+        const routeOptions = _.defaults({ htmlFile: v.htmlFile }, registerOptions);
+
+        const routeHandler = ReactWebapp.makeRouteHandler(routeOptions, resolveContent());
 
         server.route({
           method: v.method || "GET",

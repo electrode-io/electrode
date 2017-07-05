@@ -7,15 +7,17 @@
 [![Gitter](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/electrode-io/electrode)
 [![Build Status][travis-image]][travis-url] [![devDependencies Status][daviddm-image]][daviddm-url]
 
-### A Platform for building Universal React/Node.js applications
+### Building large scale universal React Web Applications
 
-> Built at @WalmartLabs powering the <http://www.walmart.com> eCommerce site, Electrode is a platform for building small to large scale universal ReactJS/NodeJS applications with a standardized structure, best practices, and modern technologies baked in. Electrode focuses on performance, component reusability, and simple deployment to multiple cloud providers—so you can focus on what makes your app unique.
+> Built at @WalmartLabs powering the <http://www.walmart.com> eCommerce site, Electrode is a platform for building small to large scale universal ReactJS/NodeJS web applications with a standardized structure, best practices, and modern technologies baked in. Electrode focuses on performance, component reusability, and simple deployment to multiple cloud providers—so you can focus on what makes your app unique.
 
 # Getting Started
 
 -   [Getting Started with Electrode](https://electrode.gitbooks.io/electrode/content/chapter1/quick-start/get-started.html)
 
 -   Visit our site at <http://www.electrode.io>.
+
+-   See [What is Electrode] for more details on features and technologies supported.
 
 ## Contributing
 
@@ -110,3 +112,5 @@ Licensed under the [Apache License, Version 2.0].
 [submitting a pr]: https://github.com/electrode-io/electrode/pulls
 
 [reporting an issue]: https://github.com/electrode-io/electrode/issues
+
+[what is electrode]: https://docs.electrode.io/overview/what-is-electrode.html

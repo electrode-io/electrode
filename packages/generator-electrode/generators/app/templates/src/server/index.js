@@ -1,5 +1,7 @@
 "use strict";
 
+/* eslint-disable global-require */
+
 process.on("SIGINT", () => {
   process.exit(0);
 });
@@ -7,7 +9,7 @@ process.on("SIGINT", () => {
 const electrodeConfippet = require("electrode-confippet");
 const support = require("electrode-archetype-react-app/support");
 
-/* eslint-disable global-require <% if (isHapi) { %>*/
+//<% if (isHapi) { %>
 const staticPathsDecor = require("electrode-static-paths");
 const startServer = config => require("electrode-server")(config, [staticPathsDecor()]);
 //<% } else if (isExpress) { %>
