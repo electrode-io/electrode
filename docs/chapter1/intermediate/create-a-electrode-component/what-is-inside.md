@@ -14,6 +14,11 @@ Here is the layout of packages/<componentName>:
         ├── README.md
         ├── xclap.js
         ├── package.json
+        ├── demo
+        │   ├── examples
+        │   │   └── test-component.example
+        │   ├── demo.css
+        │   ├── demo.jsx
         ├── src
         │   ├── components
         │   │   └── test-component.jsx
