@@ -8,6 +8,7 @@ var extend = _.merge;
 var parseAuthor = require("parse-author");
 var optionOrPrompt = require("yeoman-option-or-prompt");
 var nodeFS = require("fs");
+var demoHelperPath = require.resolve("electrode-demo-helper");
 
 var ReactComponentGenerator = yeoman.Base.extend({
   constructor: function() {
@@ -181,6 +182,15 @@ var ReactComponentGenerator = yeoman.Base.extend({
       this.template("packages/component/_readme.md", this.rootPath + "README.md");
     },
     component: function() {
+      let getDemoFilePath = function(filepath) {
+        try {
+          let demoFilePath = path.resolve(demoHelperPath, "..", filepath);
+          return demoFilePath;
+        } catch (e) {
+          console.log(e);
+        }
+      };
+
       this.template(
         "packages/component/src/components/_component.jsx",
         this.rootPath + "src/components/" + this.projectName + ".jsx"
@@ -188,6 +198,17 @@ var ReactComponentGenerator = yeoman.Base.extend({
       this.template(
         "packages/component/src/styles/_component.css",
         this.rootPath + "src/styles/" + this.projectName + ".css"
+      );
+
+      // demo folder files
+      this.template(
+        "packages/component/demo/examples/_component.example",
+        this.rootPath + "demo/examples/" + this.projectName + ".example"
+      );
+      this.fs.copyTpl(
+        this.templatePath(getDemoFilePath("demo")),
+        this.destinationPath((this.isAddon ? "../" : "packages/") + this.projectName + "/demo"),
+        {packageName: this.projectName}
       );
 
       // l10n language templates
