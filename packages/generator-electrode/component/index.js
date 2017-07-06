@@ -8,7 +8,7 @@ var extend = _.merge;
 var parseAuthor = require("parse-author");
 var optionOrPrompt = require("yeoman-option-or-prompt");
 var nodeFS = require("fs");
-var demoHelperPath = require.resolve("electrode-demo-helper");
+var demoHelperPath = path.join(require.resolve("electrode-demo-helper"), "..");
 
 var ReactComponentGenerator = yeoman.Base.extend({
   constructor: function() {
@@ -197,7 +197,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
         this.rootPath + "demo/examples/" + this.projectName + ".example"
       );
       this.fs.copyTpl(
-        this.templatePath(path.resolve(demoHelperPath, "../demo")),
+        this.templatePath(path.resolve(demoHelperPath, "demo")),
         this.destinationPath((this.isAddon ? "../" : "packages/") + this.projectName + "/demo"),
         {packageName: this.projectName}
       );
