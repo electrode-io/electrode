@@ -17,8 +17,6 @@ $ npm install -g yo xclap-cli generator-electrode
 Then create a completely new folder and run the generator:
 
 ```bash
-$ mkdir your-component-folder
-$ cd your-component-folder
 $ yo electrode:component
 ```
 
