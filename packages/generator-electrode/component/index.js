@@ -182,15 +182,6 @@ var ReactComponentGenerator = yeoman.Base.extend({
       this.template("packages/component/_readme.md", this.rootPath + "README.md");
     },
     component: function() {
-      let getDemoFilePath = function(filepath) {
-        try {
-          let demoFilePath = path.resolve(demoHelperPath, "..", filepath);
-          return demoFilePath;
-        } catch (e) {
-          console.log(e);
-        }
-      };
-
       this.template(
         "packages/component/src/components/_component.jsx",
         this.rootPath + "src/components/" + this.projectName + ".jsx"
@@ -206,7 +197,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
         this.rootPath + "demo/examples/" + this.projectName + ".example"
       );
       this.fs.copyTpl(
-        this.templatePath(getDemoFilePath("demo")),
+        this.templatePath(path.resolve(demoHelperPath, "../demo")),
         this.destinationPath((this.isAddon ? "../" : "packages/") + this.projectName + "/demo"),
         {packageName: this.projectName}
       );
