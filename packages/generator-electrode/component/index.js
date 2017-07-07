@@ -201,6 +201,11 @@ var ReactComponentGenerator = yeoman.Base.extend({
         this.destinationPath((this.isAddon ? "../" : "packages/") + this.projectName + "/demo"),
         {packageName: this.projectName}
       );
+      this.fs.copyTpl(
+        this.templatePath(path.resolve(demoHelperPath, "components.md")),
+        this.destinationPath((this.isAddon ? "../" : "packages/") + this.projectName + "/components.md"),
+        {packageName: this.projectName}
+      );
 
       // l10n language templates
       this.template(
