@@ -1,3 +1,16 @@
+# 7/8/2017
+
+## Packages
+
+-   electrode-archetype-react-app@3.1.5 `(3.1.4 => 3.1.5)`
+-   electrode-archetype-react-app-dev@3.1.5 `(3.1.4 => 3.1.5)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [patch] fix typo for karma browsers ([#466](https://github.com/electrode-io/electrode/pull/466)) [commit](http://github.com/electrode-io/electrode/commit/564e4c39446764d0c7ea74ae4503964447726c6e)
+
 # 7/7/2017
 
 ## Packages
