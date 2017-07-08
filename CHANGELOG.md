@@ -1,3 +1,51 @@
+# 7/7/2017
+
+## Packages
+
+-   electrode-archetype-react-app@3.1.4 `(3.1.3 => 3.1.4)`
+-   electrode-archetype-react-app-dev@3.1.4 `(3.1.3 => 3.1.4)`
+-   electrode-react-webapp@1.7.1 `(1.7.0 => 1.7.1)`
+-   generator-electrode@3.2.0 `(3.1.2 => 3.2.0)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [patch] back to isparta-loader due to issue with new loader ([#464](https://github.com/electrode-io/electrode/pull/464)) [commit](http://github.com/electrode-io/electrode/commit/972907fa50c0e4b61ababbef786145436afa04f5)
+
+-   `packages/electrode-react-webapp`
+
+    -   [patch] fix resolving user's htmlFile view. ([#454](https://github.com/electrode-io/electrode/pull/454)) [commit](http://github.com/electrode-io/electrode/commit/36b6305935498728225468d8da746e905bf36f0f)
+    -   [patch] fix and document SSR content resolving ([#450](https://github.com/electrode-io/electrode/pull/450)) [commit](http://github.com/electrode-io/electrode/commit/6e0526caef2a300b4164089dbf4fedc38b8dccbd)
+
+-   `packages/generator-electrode`
+
+    -   add components.md to component generator ([#463](https://github.com/electrode-io/electrode/pull/463)) [commit](http://github.com/electrode-io/electrode/commit/0ad4944eb540bbf6a270348ff34e72af906a0e86)
+    -   Update  in a clearer way ([#462](https://github.com/electrode-io/electrode/pull/462)) [commit](http://github.com/electrode-io/electrode/commit/c1d0b786935d7ad63fb527f0cebd37568a4d4886)
+    -   [minor][chore] Update component generator ([#460](https://github.com/electrode-io/electrode/pull/460)) [commit](http://github.com/electrode-io/electrode/commit/31862649f920cfcbac315d8e3cc58879b6da0094)
+    -   [patch] no xclap in dev dep ([#459](https://github.com/electrode-io/electrode/pull/459)) [commit](http://github.com/electrode-io/electrode/commit/21bffaa5e664f8f090db5cce144429bd18026ab0)
+    -   [patch] fix dangling comment in generated app ([#458](https://github.com/electrode-io/electrode/pull/458)) [commit](http://github.com/electrode-io/electrode/commit/c42e8c28dcac1bb7f58269d2f6609a9df50ae498)
+
+-   `samples/universal-react-node`
+
+    -   [patch] test issue with isparta-loader and its replacement ([#465](https://github.com/electrode-io/electrode/pull/465)) [commit](http://github.com/electrode-io/electrode/commit/119079f0d3535fea9861fd184b54310535e1cdb8)
+
+-   `docs`
+
+    -   Update docs for latest electrode component ([#461](https://github.com/electrode-io/electrode/pull/461)) [commit](http://github.com/electrode-io/electrode/commit/ad0fe79d5aa1451c9eb7dc4c4436b31a9ee13009)
+    -   [chore] add more features to docs [commit](http://github.com/electrode-io/electrode/commit/96fc5f26835a52373fe4deb37548d41da654ac3c)
+    -   [chore] update what is Electrode doc ([#457](https://github.com/electrode-io/electrode/pull/457)) [commit](http://github.com/electrode-io/electrode/commit/79a02213cd5556bdf8e0e01d607f16f6e453b4ae)
+    -   [chore] update docs getting started [commit](http://github.com/electrode-io/electrode/commit/dcef48abb2a0477ebbd5d1aed957d0f77981a96c)
+    -   gitbook: [patch][bug] Update docs ([#449](https://github.com/electrode-io/electrode/pull/449)) [commit](http://github.com/electrode-io/electrode/commit/188c57ef2dc7b3a35aa44a81e86260804cef2dff)
+
+-   `tools`
+
+    -   fix update-changelog script [commit](http://github.com/electrode-io/electrode/commit/061391e355d5266b9e85cc480c6c3ddcfdd91101)
+
+-   `MISC`
+
+    -   It's 2017 ([#451](https://github.com/electrode-io/electrode/pull/451)) [commit](http://github.com/electrode-io/electrode/commit/417e097dda838222815883989802d8faf5241508)
+
 # 6/30/2017
 
 ## Packages
