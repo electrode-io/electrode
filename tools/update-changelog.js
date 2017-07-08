@@ -40,12 +40,16 @@ const checkGitClean = () => {
 const processLernaUpdated = output => {
   // search for last commit that's Publish using lerna
   const lernaInfo = output.stderr.split("\n");
-  const tagSig = "Comparing with tag";
+  const tagSig = "Comparing with";
   let tagIndex;
-  const tagLine = lernaInfo.find(x => {
+  let tagLine = lernaInfo.find(x => {
     tagIndex = x.indexOf(tagSig);
     return tagIndex >= 0;
-  });
+  }).trim();
+
+  if (tagLine.endsWith(".")) {
+    tagLine = tagLine.substr(0, tagLine.length - 1);
+  }
 
   assert(tagLine, "Can't find last publish tag from lerna");
   const tag = tagLine.substr(tagIndex + tagSig.length).trim();
