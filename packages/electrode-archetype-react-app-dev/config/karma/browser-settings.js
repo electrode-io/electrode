@@ -11,7 +11,7 @@ module.exports = function(settings) {
     logger.info("Using Chrome Headless to run Karma test");
   } else if (browser === "phantomjs") {
     settings.frameworks.push("phantomjs-shim");
-    settings.browser = ["PhantomJS"];
+    settings.browsers = ["PhantomJS"];
 
     logger.warn(
       "Using PhantomJS to run Karma test. It's been deprecated and may be removed in the future."
