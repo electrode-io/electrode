@@ -1,6 +1,6 @@
 {
   "name": "electrode-react-webapp",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "Hapi plugin that provides a default React web app template",
   "scripts": {
     "lint": "clap lint",
@@ -16,7 +16,11 @@
   "bugs": {
     "url": "https://github.com/electrode-io/electrode/issues"
   },
-  "keywords": ["electrode", "node", "webserver"],
+  "keywords": [
+    "electrode",
+    "node",
+    "webserver"
+  ],
   "contributors": [
     {
       "name": "Joel Chen",
@@ -63,7 +67,19 @@
     "functions": 98,
     "lines": 94.85,
     "cache": true,
-    "reporter": ["lcov", "text", "text-summary"],
-    "exclude": ["coverage", "*clap.js", "gulpfile.js", "dist", "test", "lib/express", "lib/koa"]
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "exclude": [
+      "coverage",
+      "*clap.js",
+      "gulpfile.js",
+      "dist",
+      "test",
+      "lib/express",
+      "lib/koa"
+    ]
   }
 }
