@@ -19,6 +19,8 @@ HomeWrapper.propTypes = {
 /* eslint-disable max-len */
 export class Home extends React.Component {
   render() {
+    // force the use of spread operator for testing
+    const data = { logo: "Electrode Logo", electrodeLogo, ...this.props.data };
     return (
       <div>
         <Notifications />
@@ -29,7 +31,7 @@ export class Home extends React.Component {
         }}>
           <a href="https://github.com/electrode-io"> <img style={{
             width: "100%"
-          }} alt="Electrode Logo" src={electrodeLogo} />
+          }} alt={data.logo} src={data.electrodeLogo} />
           </a>
         </div>
         <h2>Demonstration Components</h2>
