@@ -7,20 +7,19 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { toggleCheck, incNumber, decNumber } from "../actions";
-import custom from "../styles/custom.css";
 
 const DemoPureStates = props => {
   const { checked, value, dispatch } = props;
   return (
     <div>
-      <h6 className={custom["docs-header"]}>Demo Managing States in Pure Functional Component</h6>
+      <h6 className="docs-header">Demo Managing States in Pure Functional Component</h6>
       <label
         style={{ display: "inline-block", textAlign: "center" }}
         onChange={() => dispatch(toggleCheck())}
         checked={checked}
       >
         <input type="checkbox" checked={checked} />
-        <span className={custom["label-body"]}> checkbox </span>
+        <span className="label-body"> checkbox </span>
       </label>
       <div style={{ width: "10rem", display: "inline-block", textAlign: "center" }}>
         {checked ? "checked" : "unchecked"}

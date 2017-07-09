@@ -10,6 +10,7 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./reducers";
 //
+import "./styles/index.styl";
 
 //
 // Add the client app start up code to a function as window.webappStart.
