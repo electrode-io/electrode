@@ -45,7 +45,12 @@ module.exports = function() {
     "?modules&localIdentName=[name]__[local]___[hash:base64:5]&-autoprefixer";
   const cssQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}`;
   const cssStylusQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}!${stylusLoader}`;
-  const hmr = process.env.HMR === "true";
+  //
+  // Removing ExtratTextPlugin cause stylus to fail
+  // Disable it for now until figure out why and the fix.
+  //
+  // const hmr = process.env.HMR === "true";
+  const hmr = false;
 
   // By default, this archetype assumes you are using CSS-Modules + CSS-Next
   const extractLoader = hmr
