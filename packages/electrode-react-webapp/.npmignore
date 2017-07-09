@@ -147,3 +147,5 @@ minified/
 /.eslintignore
 /.babelrc
 /test
+/.nyc_output
+
