@@ -16,7 +16,8 @@ const webpackConfigSpec = {
   testPort: { env: "WEBPACK_TEST_PORT", default: 3001 },
   https: { env: "WEBPACK_DEV_HTTPS", default: false },
   enableBabelPolyfill: { env: "ENABLE_BABEL_POLYFILL", default: false },
-  enableNodeSourcePlugin: { env: "ENABLE_NODESOURCE_PLUGIN", default: false }
+  enableNodeSourcePlugin: { env: "ENABLE_NODESOURCE_PLUGIN", default: false },
+  woffFontInlineLimit: { env: "WOFF_FONT_INLINE_LIMIT", default: 1000 }
 };
 
 const karmaConfigSpec = {

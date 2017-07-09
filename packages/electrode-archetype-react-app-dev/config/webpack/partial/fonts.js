@@ -3,6 +3,7 @@
 const urlLoader = require.resolve("url-loader");
 const fileLoader = require.resolve("file-loader");
 const isomorphicLoader = require.resolve("isomorphic-loader");
+const archetype = require("electrode-archetype-react-app/config/archetype");
 
 module.exports = function() {
   return {
@@ -15,7 +16,7 @@ module.exports = function() {
             {
               loader: urlLoader,
               options: {
-                limit: 10000,
+                limit: archetype.webpack.woffFontInlineLimit,
                 mimetype: "application/font-woff"
               }
             },
