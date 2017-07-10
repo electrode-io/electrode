@@ -1,3 +1,27 @@
+# 7/10/2017
+
+## Packages
+
+-   electrode-archetype-react-app@3.1.6 `(3.1.5 => 3.1.6)`
+-   electrode-archetype-react-app-dev@3.1.6 `(3.1.5 => 3.1.6)`
+-   electrode-react-webapp@1.7.2 `(1.7.1 => 1.7.2)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [patch] add config for woff font inline limit ([#470](https://github.com/electrode-io/electrode/pull/470)) [commit](http://github.com/electrode-io/electrode/commit/a00c22c3da8915e716d195f27ef9420a70da2acc)
+    -   [patch] make stylus work in hot mode again ([#469](https://github.com/electrode-io/electrode/pull/469)) [commit](http://github.com/electrode-io/electrode/commit/2cf792a454450928240d1700fa44f57f20f272c9)
+
+-   `packages/electrode-react-webapp`
+
+    -   [chore] add .nyc_output to .npmignore ([#468](https://github.com/electrode-io/electrode/pull/468)) [commit](http://github.com/electrode-io/electrode/commit/79dd9a915b90c247ba7556d62ade8cbcdcb0a72e)
+
+-   `samples/stylus-sample`
+
+    -   change styles to stylus [commit](http://github.com/electrode-io/electrode/commit/a14d68c231119e3f3cd6493eb295eb6567019792)
+    -   initial commit for new stylus-sample [commit](http://github.com/electrode-io/electrode/commit/d6a9d7b0534f083c02fb61c3364c09a3c24189a8)
+
 # 7/8/2017
 
 ## Packages
