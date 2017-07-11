@@ -51,117 +51,120 @@ module.exports = class extends Generator {
       var info = parseAuthor(this.pkg.author);
       this.props.developerName = info.name;
     }
+
     this.props.quoteType = this.quotes;
+  }
+  
+  _askFor() {
+    if (this.pkg.name || this.options.name) {
+      this.props.name = this.pkg.name || _.kebabCase(this.options.name);
+    }
+
+    if (this.options.componentName) {
+      this.props.componentName = this.options.componentName;
+    }
+
+    var prompts = [
+      {
+        type: "input",
+        name: "projectName",
+        message: "What is your Package/GitHub project name? (e.g., 'wysiwyg-component')",
+        default: "wysiwyg-component",
+        when: !this.props.name
+      },
+      {
+        type: "input",
+        name: "packageName",
+        message: "What is the ClassName for your component?",
+        default: this.props.componentName || this.props.projectName,
+        when: !this.props.componentName
+      },
+      {
+        type: "input",
+        name: "packageName",
+        message: "What will be the npm package name?",
+        default: this.props.packageName
+      },
+      {
+        type: "input",
+        name: "packageGitHubOrg",
+        message: "What will be the GitHub organization username (e.g., 'walmartlabs')?",
+        default: this.props.packageGitHubOrg
+      },
+      {
+        type: "input",
+        name: "developerName",
+        message: "What is your name? (for copyright notice, etc.)",
+        default: this.props.developerName
+      },
+      {
+        type: "input",
+        name: "ghUser",
+        message: "What is your GitHub Username?",
+        default: this.props.developerName
+      },
+      {
+        type: "list",
+        name: "quoteType",
+        message: "Use double quotes or single quotes?",
+        choices: ['"', "'"],
+        default: '"',
+        when: !this.props.quoteType
+      },
+      {
+        type: "input",
+        name: "ghRepo",
+        message: "What is the name of the GitHub repo where this will be published?",
+        default: this.packageName
+      },
+      {
+        type: "confirm",
+        name: "createDirectory",
+        message: "Would you like to create a new directory for your project?",
+        default: true
+      }
+    ];
+
+    return this.optionOrPrompt(prompts).then(props => {
+      this.props = extend(this.props, props);
+      this.projectName = this.props.projectName.split(" ").map(_.toLower).join("");
+      this.packageName = this.props.projectName.split(" ").map(_.toLower).join("");
+      this.developerName = this.props.developerName;
+      this.quoteType = this.props.quoteType;
+      this.ghUser = this.props.ghUser;
+      this.ghRepo = this.props.ghRepo;
+      this.packageGitHubOrg = this.props.packageGitHubOrg;
+      this.createDirectory = this.props.createDirectory;
+      this.componentName = _.kebabCase(_.deburr(this.props.projectName))
+        .replace(/^\s+|\s+$/g, "")
+        .replace(/(^|[-_ ])+(.)/g, function(match, first, second) {
+          return second.toUpperCase();
+        });
+      this.currentYear = new Date().getFullYear();
+      if (this.props.createDirectory) {
+        var newRoot = this.destinationPath() + "/" + this.packageName;
+        this.destinationRoot(newRoot);
+      }
+      this.rootPath = this.isAddon ? "" : "packages/" + this.projectName + "/";
+    });
   }
 
   prompting() {
-    greeting: {
-      if (!this.isAddon) {
-        this.log(
+    if (!this.isAddon) {
+      this.log(
+        "\n" +
+          chalk.bold.underline("Welcome to the Electrode Component Generator") +
           "\n" +
-            chalk.bold.underline("Welcome to the Electrode Component Generator") +
-            "\n" +
-            "\nWe're going to set up a new " +
-            chalk.bold("Electrode") +
-            " component, ready for development with" +
-            "\n" +
-            chalk.bold("react, webpack, demo, electrode component archetype, and live-reload")
-        );
-      }
+          "\nWe're going to set up a new " +
+          chalk.bold("Electrode") +
+          " component, ready for development with" +
+          "\n" +
+          chalk.bold("react, webpack, demo, electrode component archetype, and live-reload")
+      );
     }
 
-    askFor: {
-      if (this.pkg.name || this.options.name) {
-        this.props.name = this.pkg.name || _.kebabCase(this.options.name);
-      }
-      if (this.options.componentName) {
-        this.props.componentName = this.options.componentName;
-      }
-
-      var prompts = [
-        {
-          type: "input",
-          name: "projectName",
-          message: "What is your Package/GitHub project name? (e.g., 'wysiwyg-component')",
-          default: "wysiwyg-component",
-          when: !this.props.name
-        },
-        {
-          type: "input",
-          name: "packageName",
-          message: "What is the ClassName for your component?",
-          default: this.props.componentName || this.props.projectName,
-          when: !this.props.componentName
-        },
-        {
-          type: "input",
-          name: "packageName",
-          message: "What will be the npm package name?",
-          default: this.props.packageName
-        },
-        {
-          type: "input",
-          name: "packageGitHubOrg",
-          message: "What will be the GitHub organization username (e.g., 'walmartlabs')?",
-          default: this.props.packageGitHubOrg
-        },
-        {
-          type: "input",
-          name: "developerName",
-          message: "What is your name? (for copyright notice, etc.)",
-          default: this.props.developerName
-        },
-        {
-          type: "input",
-          name: "ghUser",
-          message: "What is your GitHub Username?",
-          default: this.props.developerName
-        },
-        {
-          type: "list",
-          name: "quoteType",
-          message: "Use double quotes or single quotes?",
-          choices: ['"', "'"],
-          default: '"',
-          when: !this.props.quoteType
-        },
-        {
-          type: "input",
-          name: "ghRepo",
-          message: "What is the name of the GitHub repo where this will be published?",
-          default: this.packageName
-        },
-        {
-          type: "confirm",
-          name: "createDirectory",
-          message: "Would you like to create a new directory for your project?",
-          default: true
-        }
-      ];
-      return this.optionOrPrompt(prompts).then(props => {
-        this.props = extend(this.props, props);
-        this.projectName = this.props.projectName.split(" ").map(_.toLower).join("");
-        this.packageName = this.props.projectName.split(" ").map(_.toLower).join("");
-        this.developerName = this.props.developerName;
-        this.quoteType = this.props.quoteType;
-        this.ghUser = this.props.ghUser;
-        this.ghRepo = this.props.ghRepo;
-        this.packageGitHubOrg = this.props.packageGitHubOrg;
-        this.createDirectory = this.props.createDirectory;
-        this.componentName = _.kebabCase(_.deburr(this.props.projectName))
-          .replace(/^\s+|\s+$/g, "")
-          .replace(/(^|[-_ ])+(.)/g, function(match, first, second) {
-            return second.toUpperCase();
-          });
-        this.currentYear = new Date().getFullYear();
-        if (this.props.createDirectory) {
-          var newRoot = this.destinationPath() + "/" + this.packageName;
-          this.destinationRoot(newRoot);
-        }
-        this.rootPath = this.isAddon ? "" : "packages/" + this.projectName + "/";
-      });
-    }
-  },
+    return this._askFor();
+  }
 
   writing() {
     lernaStructure: {
@@ -285,12 +288,8 @@ module.exports = class extends Generator {
         this.oldRoot = this.destinationRoot();
         var newRoot = this.destinationPath() + "/" + this.originalDemoAppName;
         this.destinationRoot(newRoot);
-        
-        this.composeWith('electrode:app', {
-          options
-        }, {
-          local: require.resolve('../generators/app')
-        });
+
+        this.composeWith(require.resolve('../generators/app'), options);
       }
     }
   }

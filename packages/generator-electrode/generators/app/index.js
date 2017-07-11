@@ -100,148 +100,147 @@ module.exports = class extends Generator {
     }, this.props);
   }
 
+  _askFor() {
+    if (this.pkg.name || this.options.name) {
+      this.props.name = this.pkg.name || _.kebabCase(this.options.name);
+    }
+
+    var prompts = [
+      {
+        type: "input",
+        name: "name",
+        message: "Application Name",
+        when: !this.props.name,
+        default: path.basename(process.cwd())
+      },
+      {
+        type: "input",
+        name: "description",
+        message: "Description",
+        when: !this.props.description
+      },
+      {
+        type: "input",
+        name: "homepage",
+        message: "Project homepage url",
+        when: !this.props.homepage
+      },
+      {
+        type: "list",
+        name: "serverType",
+        message: "Which framework for the server?",
+        when: !this.props.serverType,
+        choices: [HapiJS, ExpressJS, KoaJS],
+        default: HapiJS
+      },
+      {
+        type: "input",
+        name: "authorName",
+        message: "Author's Name",
+        when: !this.props.authorName,
+        default: this.user.git.name(),
+        store: true
+      },
+      {
+        type: "input",
+        name: "authorEmail",
+        message: "Author's Email",
+        when: !this.props.authorEmail,
+        default: this.user.git.email(),
+        store: true
+      },
+      {
+        type: "input",
+        name: "authorUrl",
+        message: "Author's Homepage",
+        when: !this.props.authorUrl,
+        store: true
+      },
+      {
+        type: "input",
+        name: "keywords",
+        message: "Package keywords (comma to split)",
+        when: _.isEmpty(this.pkg.keywords) && _.isEmpty(this.props.keywords),
+        filter: function(words) {
+          return words.split(/\s*,\s*/g).filter(x => x);
+        }
+      },
+      {
+        type: "confirm",
+        name: "pwa",
+        message: "Would you like to make a Progressive Web App?",
+        when: !this.props.pwa,
+        default: false
+      },
+      {
+        type: "confirm",
+        name: "autoSsr",
+        message: "Support disabling server side rendering based on high load?",
+        when: !this.props.autoSsr,
+        default: false
+      },
+      {
+        type: "list",
+        name: "quoteType",
+        message: "Use double quotes or single quotes?",
+        choices: ['"', "'"],
+        when: !this.props.quoteType,
+        default: '"'
+      },
+      {
+        type: "confirm",
+        name: "createDirectory",
+        message: "Would you like to create a new directory for your project?",
+        when: !this.props.createDirectory,
+        default: true
+      },
+      {
+        type: "confirm",
+        name: "yarn",
+        message: "Would you like to yarn install packages?",
+        when: !this.props.yarn,
+        default: false
+      }
+    ];
+
+    return this.prompt(prompts).then(props => {
+      this.props = extend(this.props, props);
+
+      if (this.props.createDirectory) {
+        var newRoot = this.destinationPath() + "/" + _.kebabCase(_.deburr(this.props.name));
+        this.destinationRoot(newRoot);
+      }
+      // Saving to storage after the correct destination root is set
+      this.config.set('serverType', this.props.serverType);
+    });
+  }
+
+  _askForGithubAccount() {
+    if (this.props.githubAccount || this.options.githubAccount) {
+      this.props.githubAccount = this.options.githubAccount;
+      return Promise.resolve();
+    }
+
+    return githubUsername(this.props.authorEmail)
+    .then(username => username, () => '')
+    .then(username => {
+      return this.prompt({
+        name: 'githubAccount',
+        message: 'GitHub username or organization',
+        default: username
+      }).then(prompt => {
+        this.props.githubAccount = prompt.githubAccount;
+      });
+    });
+  }
+
   prompting() {
-    greeting: {
-      if (!this.isDemoApp) {
-        this.log(yosay("Welcome to the phenomenal " + chalk.red("Electrode App") + " generator!"));
-      }
+    if (!this.isDemoApp) {
+      this.log(yosay("Welcome to the phenomenal " + chalk.red("Electrode App") + " generator!"));
     }
 
-    askFor: {
-      if (this.pkg.name || this.options.name) {
-        this.props.name = this.pkg.name || _.kebabCase(this.options.name);
-      }
-
-      var prompts = [
-        {
-          type: "input",
-          name: "name",
-          message: "Application Name",
-          when: !this.props.name,
-          default: path.basename(process.cwd())
-        },
-        {
-          type: "input",
-          name: "description",
-          message: "Description",
-          when: !this.props.description
-        },
-        {
-          type: "input",
-          name: "homepage",
-          message: "Project homepage url",
-          when: !this.props.homepage
-        },
-        {
-          type: "list",
-          name: "serverType",
-          message: "Which framework for the server?",
-          when: !this.props.serverType,
-          choices: [HapiJS, ExpressJS, KoaJS],
-          default: HapiJS
-        },
-        {
-          type: "input",
-          name: "authorName",
-          message: "Author's Name",
-          when: !this.props.authorName,
-          default: this.user.git.name(),
-          store: true
-        },
-        {
-          type: "input",
-          name: "authorEmail",
-          message: "Author's Email",
-          when: !this.props.authorEmail,
-          default: this.user.git.email(),
-          store: true
-        },
-        {
-          type: "input",
-          name: "authorUrl",
-          message: "Author's Homepage",
-          when: !this.props.authorUrl,
-          store: true
-        },
-        {
-          type: "input",
-          name: "keywords",
-          message: "Package keywords (comma to split)",
-          when: _.isEmpty(this.pkg.keywords) && _.isEmpty(this.props.keywords),
-          filter: function(words) {
-            return words.split(/\s*,\s*/g).filter(x => x);
-          }
-        },
-        {
-          type: "confirm",
-          name: "pwa",
-          message: "Would you like to make a Progressive Web App?",
-          when: this.props.pwa === undefined,
-          default: false
-        },
-        {
-          type: "confirm",
-          name: "autoSsr",
-          message: "Support disabling server side rendering based on high load?",
-          when: this.props.autoSsr === undefined,
-          default: false
-        },
-        {
-          type: "list",
-          name: "quoteType",
-          message: "Use double quotes or single quotes?",
-          choices: ['"', "'"],
-          when: !this.props.quoteType,
-          default: '"'
-        },
-        {
-          type: "confirm",
-          name: "createDirectory",
-          message: "Would you like to create a new directory for your project?",
-          when: this.props.createDirectory === undefined,
-          default: true
-        },
-        {
-          type: "confirm",
-          name: "yarn",
-          message: "Would you like to yarn install packages?",
-          when: this.props.yarn === undefined,
-          default: false
-        }
-      ];
-
-      return this.prompt(prompts).then(props => {
-        this.props = extend(this.props, props);
-        if (this.props.createDirectory) {
-          var newRoot = this.destinationPath() + "/" + _.kebabCase(_.deburr(this.props.name));
-          this.destinationRoot(newRoot);
-        }
-        // Saving to storage after the correct destination root is set
-        this.config.set('serverType', this.props.serverType);
-      });
-    }
-
-    askForGithubAccount: {
-      if (this.props.githubAccount || this.options.githubAccount) {
-        this.props.githubAccount = this.options.githubAccount;
-        return;
-      }
-      var done = this.async();
-
-      githubUsername(this.props.authorEmail, (err, username) => {
-        if (err) {
-          username = username || "";
-        }
-        this.prompt({
-          name: "githubAccount",
-          message: "GitHub username or organization",
-          default: username
-        }).then(prompt => {
-          this.props.githubAccount = prompt.githubAccount;
-          done();
-        });
-      });
-    }
+    return this._askFor()
+      .then(this._askForGithubAccount.bind(this));
   }
 
   writing() {
@@ -392,7 +391,7 @@ module.exports = class extends Generator {
 
     // Copy files from the demoHelper if this is the demo-app
     if (this.isDemoApp) {
-      //copy archetype webpack config extension
+      // Copy archetype webpack config extension
       this.fs.copy(
         this.templatePath(getDemoFilePath("archetype")),
         this.destinationPath("archetype"),
@@ -422,66 +421,52 @@ module.exports = class extends Generator {
 
   default() {
     if (this.options.travis) {
-      this.composeWith('travis', {}, {
-        local: require.resolve('generator-travis')
-      });
+      this.composeWith(require.resolve('generator-travis/generators/app'), {});
     }
 
-    this.composeWith('electrode:editorconfig', {}, {
-      local: require.resolve('../editorconfig')
-    });
+    this.composeWith(require.resolve('../editorconfig'));
 
     if (!this.isDemoApp) {
-      this.composeWith('electrode:git', {
+      this.composeWith(require.resolve('../git'), {
         name: this.props.name,
         githubAccount: this.props.githubAccount,
         githubUrl: this.props.githubUrl
-      }, {
-        local: require.resolve('../git')
       });
     }
 
     if (this.options.license && !this.pkg.license) {
-      this.composeWith('license', {
+      this.composeWith(require.resolve('generator-license'), {
         name: this.props.authorName,
         email: this.props.authorEmail,
         website: this.props.authorUrl,
         license: this.props.license || ""
-      }, {
-        local: require.resolve('generator-license')
       });
     }
 
     if (!this.fs.exists(this.destinationPath('README.md'))) {
-      this.composeWith('electrode:readme', {
+      this.composeWith(require.resolve('../readme'), {
         name: this.props.name,
         description: this.props.description,
         githubAccount: this.props.githubAccount,
         authorName: this.props.authorName,
         authorUrl: this.props.authorUrl,
         content: this.options.readme
-      }, {
-        local: require.resolve('../readme')
       });
     }
 
     if (!this.fs.exists(this.destinationPath('config/default.js')) && !this.isExtended) {
-      this.composeWith('electrode:config', {
+      this.composeWith(require.resolve('../config'), {
         name: this.props.name,
         pwa: this.props.pwa,
         serverType: this.props.serverType,
         isAutoSsr: this.props.autoSsr
-      }, {
-        local: require.resolve('../config')
       });
     }
 
     if (!this.fs.exists(this.destinationPath('server/plugins/webapp'))) {
-      this.composeWith('electrode:webapp', {
+      this.composeWith(require.resolve('../webapp'), {
         pwa: this.props.pwa,
         isAutoSsr: this.props.autoSsr
-      }, {
-        local: require.resolve('../webapp')
       });
     }
   }
