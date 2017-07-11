@@ -2,7 +2,7 @@
 
 var _ = require("lodash");
 var chalk = require("chalk");
-var yeoman = require("yeoman-generator");
+var Generator = require("yeoman-generator");
 var path = require("path");
 var extend = _.merge;
 var parseAuthor = require("parse-author");
@@ -10,14 +10,16 @@ var optionOrPrompt = require("yeoman-option-or-prompt");
 var nodeFS = require("fs");
 var demoHelperPath = path.join(require.resolve("electrode-demo-helper"), "..");
 
-var ReactComponentGenerator = yeoman.Base.extend({
-  constructor: function() {
-    yeoman.Base.apply(this, arguments);
+module.exports = class extends Generator {
+  constructor(args, options) {
+    super(args, options);
+
     this.quotes = this.options.quotes;
     this.githubUrl = this.options.githubUrl || "https://github.com";
     this.optionOrPrompt = optionOrPrompt;
-  },
-  initializing: function() {
+  }
+
+  initializing() {
     //check if the command is being run from within an existing app
     if (this.fs.exists(this.destinationPath("package.json"))) {
       var appPkg = this.fs.readJSON(this.destinationPath("package.json"));
@@ -50,9 +52,10 @@ var ReactComponentGenerator = yeoman.Base.extend({
       this.props.developerName = info.name;
     }
     this.props.quoteType = this.quotes;
-  },
-  prompting: {
-    greeting: function() {
+  }
+
+  prompting() {
+    greeting: {
       if (!this.isAddon) {
         this.log(
           "\n" +
@@ -65,8 +68,9 @@ var ReactComponentGenerator = yeoman.Base.extend({
             chalk.bold("react, webpack, demo, electrode component archetype, and live-reload")
         );
       }
-    },
-    askFor: function() {
+    }
+
+    askFor: {
       if (this.pkg.name || this.options.name) {
         this.props.name = this.pkg.name || _.kebabCase(this.options.name);
       }
@@ -159,17 +163,18 @@ var ReactComponentGenerator = yeoman.Base.extend({
     }
   },
 
-  writing: {
-    lernaStructure: function() {
-      // copy lerna and top level templates
+  writing() {
+    lernaStructure: {
+      // Copy lerna and top level templates
       if (!this.isAddon) {
         this.copy("gitignore", ".gitignore");
         this.template("_package.json", "package.json");
         this.template("_readme.md", "README.md");
         this.template("lerna.json", "lerna.json");
       }
-    },
-    project: function() {
+    }
+
+    project: {
       this.copy("packages/component/babelrc", this.rootPath + ".babelrc");
       this.copy("packages/component/gitignore", this.rootPath + ".gitignore");
       this.copy("packages/component/npmignore", this.rootPath + ".npmignore");
@@ -180,66 +185,80 @@ var ReactComponentGenerator = yeoman.Base.extend({
       this.template("packages/component/_xclap.js", this.rootPath + "xclap.js");
       this.template("packages/component/_package.json", this.rootPath + "package.json");
       this.template("packages/component/_readme.md", this.rootPath + "README.md");
-    },
-    component: function() {
+    }
+
+    component: {
       this.template(
         "packages/component/src/components/_component.jsx",
         this.rootPath + "src/components/" + this.projectName + ".jsx"
       );
+
       this.template(
         "packages/component/src/styles/_component.css",
         this.rootPath + "src/styles/" + this.projectName + ".css"
       );
 
-      // demo folder files
       this.template(
         "packages/component/demo/examples/_component.example",
         this.rootPath + "demo/examples/" + this.projectName + ".example"
       );
+
       this.fs.copyTpl(
         this.templatePath(path.resolve(demoHelperPath, "demo")),
         this.destinationPath((this.isAddon ? "../" : "packages/") + this.projectName + "/demo"),
         {packageName: this.projectName}
       );
+
       this.fs.copyTpl(
         this.templatePath(path.resolve(demoHelperPath, "components.md")),
         this.destinationPath((this.isAddon ? "../" : "packages/") + this.projectName + "/components.md"),
         {packageName: this.projectName}
       );
 
-      // l10n language templates
       this.template(
         "packages/component/src/lang/_DefaultMessages.js",
         this.rootPath + "src/lang/default-messages.js"
       );
-      this.template("packages/component/src/lang/_en.json", this.rootPath + "src/lang/en.json");
+      
+      this.template(
+        "packages/component/src/lang/_en.json",
+        this.rootPath + "src/lang/en.json"
+      );
+
       this.template(
         "packages/component/src/lang/tenants/electrodeio/_defaultMessages.js",
         this.rootPath + "src/lang/tenants/electrodeio/default-messages.js"
       );
 
-      this.template("packages/component/src/_Component.js", this.rootPath + "src/index.js");
-    },
-    test: function() {
+      this.template(
+        "packages/component/src/_Component.js",
+        this.rootPath + "src/index.js"
+      );
+    }
+
+    test: {
       this.template(
         "packages/component/test/client/eslintrc",
         this.rootPath + "test/client/.eslintrc"
       );
+
       this.template(
         "packages/component/test/client/components/_component.spec.jsx",
         this.rootPath + "test/client/components/" + this.projectName + ".spec.jsx"
       );
+
       this.copy(
         "packages/component/test/client/components/helpers/_intlEnzymeTestHelper.js",
         this.rootPath + "test/client/components/helpers/intl-enzyme-test-helper.js"
       );
-    },
+    }
 
-    demoApp: function() {
-      //Do not generate the demo app if called from the add on generator
+    demoApp: {
+      // Do not generate the demo app if called from the add on generator
       this.originalDemoAppName = "demo-app";
+
       if (!this.isAddon) {
-        //custom props to pass to the App Generator
+        // Custom props to pass to the App Generator
         this.props.description = this.description || "The demo App";
         this.props.createDirectory = false;
         this.props.packageName = this.packageName;
@@ -262,22 +281,21 @@ var ReactComponentGenerator = yeoman.Base.extend({
           props: this.props
         };
 
-        //change the destinationRoot for generating the demo app
+        // Change the destinationRoot for generating the demo app
         this.oldRoot = this.destinationRoot();
         var newRoot = this.destinationPath() + "/" + this.originalDemoAppName;
         this.destinationRoot(newRoot);
-        this.composeWith(
-          "electrode:app",
-          { options },
-          {
-            local: require.resolve("../generators/app")
-          }
-        );
+        
+        this.composeWith('electrode:app', {
+          options
+        }, {
+          local: require.resolve('../generators/app')
+        });
       }
     }
-  },
+  }
 
-  install: function() {
+  install() {
     //git init and npmi for lerna lernaStructure
     if (!this.isAddon) {
       //reset the path to the actual root
@@ -311,9 +329,9 @@ var ReactComponentGenerator = yeoman.Base.extend({
     this.spawnCommandSync("npm", ["install"], {
       cwd: this.destinationPath()
     });
-  },
+  }
 
-  end: function() {
+  end() {
     if (this.quoteType === "'") {
       this.spawnCommandSync("node_modules/.bin/eslint", [
         "--fix",
@@ -349,6 +367,4 @@ var ReactComponentGenerator = yeoman.Base.extend({
       );
     }
   }
-});
-
-module.exports = ReactComponentGenerator;
+};
