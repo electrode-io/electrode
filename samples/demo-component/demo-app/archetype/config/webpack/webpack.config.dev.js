@@ -1,4 +1,3 @@
-console.log("oops");
 const Path = require("path");
 
 const repoPackagesDir = Path.join(__dirname, "../../../../packages");
