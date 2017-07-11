@@ -2,7 +2,7 @@
 
 /* eslint-disable arrow-parens */
 
-var generators = require("yeoman-generator");
+var Generator = require("yeoman-generator");
 var chalk = require("chalk");
 var yosay = require("yosay");
 var path = require("path");
@@ -25,15 +25,16 @@ var demoHelperPath = require.resolve("electrode-demo-helper");
 * modify the demo-app component home.jsx to import the new packages/component and use class in the div
 */
 
-module.exports = generators.Base.extend({
-  constructor: function() {
-    generators.Base.apply(this, arguments);
+module.exports = class extends Generator {
+  constructor(args, options) {
+    super(args, options);
+
     this.packageName = this.options.packageName || "demo-app";
     this.developerName = this.options.developerName || "demoDeveloper";
     this.className = this.options.className;
-  },
+  }
 
-  initializing: function() {
+  initializing() {
     let appPkgPath = "";
     let homeComponentPath = "";
     this.demoAppName = "";
@@ -96,14 +97,14 @@ module.exports = generators.Base.extend({
     // check for missing
     checkError();
     this.props = this.options.props || {};
-  },
+  }
 
-  prompting: {
-    greeting: function() {
+  prompting() {
+    greeting: {
       this.log(yosay("Welcome to the " + chalk.red("Electrode Add Component") + " generator!"));
-    },
+    }
 
-    askFor: function() {
+    askFor: {
       var prompts = [
         {
           type: "input",
@@ -120,6 +121,7 @@ module.exports = generators.Base.extend({
           when: !this.props.componentName
         }
       ];
+
       return this.prompt(prompts).then(props => {
         this.props = extend(this.props, props);
         this.packageName = this.props.name;
@@ -130,9 +132,9 @@ module.exports = generators.Base.extend({
           });
       });
     }
-  },
+  }
 
-  default: function() {
+  default() {
     let options = {
       isAddon: true,
       name: this.packageName,
@@ -140,6 +142,7 @@ module.exports = generators.Base.extend({
       demoAppName: this.demoAppName,
       quotes: this.props.quotes
     };
+
     this.composeWith(
       "electrode:component",
       { options },
@@ -147,8 +150,9 @@ module.exports = generators.Base.extend({
         local: require.resolve("../component")
       }
     );
-  },
-  writing: function() {
+  }
+
+  writing() {
     let getDemoFilePath = function(filepath) {
       try {
         let demoFilePath = path.resolve(demoHelperPath, "..", filepath);
@@ -204,9 +208,9 @@ module.exports = generators.Base.extend({
       this.destinationPath(path.join("..", "..", "demo-app", "archetype")),
       { components: directories }
     );
-  },
+  }
 
-  end: function() {
+  end() {
     this.log(
       "\n" +
         chalk.green.underline("Your new Electrode component is ready!") +
@@ -222,4 +226,4 @@ module.exports = generators.Base.extend({
         "\n"
     );
   }
-});
+};
