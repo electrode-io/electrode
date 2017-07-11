@@ -18,7 +18,7 @@ describe("electrode:app", function() {
     });
 
     mockery.registerMock("github-username", function() {
-      return "unicornUser";
+      return Promise.resolve(true);
     });
 
     mockery.registerMock(require.resolve("generator-license/app"), helpers.createDummyGenerator());

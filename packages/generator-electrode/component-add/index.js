@@ -176,12 +176,14 @@ module.exports = class extends Generator {
     let rx = "import {" + this.componentName + '} from "' + this.packageName + '";';
     let rxTag = "<" + this.componentName + " />";
     homeArray.unshift(rx);
+
     // Get the first closing div, home shoud have one closing div.
     let splitPoint = homeArray.findIndex((value, index, array) => {
       if (value.match("</div>")) {
         return index;
       }
     });
+
     // Insert the new class before the div
     // Splice the array into 2, before closing div and after
     let topHalf = homeArray.splice(0, splitPoint);

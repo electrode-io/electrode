@@ -20,7 +20,7 @@ module.exports = class extends Generator {
   }
 
   initializing() {
-    //check if the command is being run from within an existing app
+    // Check if the command is being run from within an existing app
     if (this.fs.exists(this.destinationPath("package.json"))) {
       var appPkg = this.fs.readJSON(this.destinationPath("package.json"));
       if (
@@ -122,6 +122,13 @@ module.exports = class extends Generator {
         name: "createDirectory",
         message: "Would you like to create a new directory for your project?",
         default: true
+      },
+      {
+        type: "confirm",
+        name: "yarn",
+        message: "Would you like to yarn install packages?",
+        when: !this.props.yarn,
+        default: false
       }
     ];
 
@@ -295,21 +302,27 @@ module.exports = class extends Generator {
   }
 
   install() {
-    //git init and npmi for lerna lernaStructure
+    // Git init and npmi for lerna lernaStructure
     if (!this.isAddon) {
-      //reset the path to the actual root
+      // Reset the path to the actual root
       this.destinationRoot(this.oldRoot);
       this.destinationRoot();
 
       this.spawnCommandSync("git", ["init"], {
         cwd: this.destinationPath()
       });
-      this.spawnCommandSync("npm", ["install"], {
-        cwd: this.destinationPath()
-      });
+      if (this.props.yarn) {
+        this.spawnCommandSync("yarn", ["install"], {
+          cwd: this.destinationPath()
+        });
+      } else {
+        this.spawnCommandSync("npm", ["install"], {
+          cwd: this.destinationPath()
+        });
+      }
     }
 
-    //install the dependencies for the package
+    // Install the dependencies for the package
     let packageDirectory = this.isAddon
       ? this.destinationPath()
       : this.destinationPath() + "/" + this.rootPath;

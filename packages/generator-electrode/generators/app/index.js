@@ -222,16 +222,16 @@ module.exports = class extends Generator {
     }
 
     return githubUsername(this.props.authorEmail)
-    .then(username => username, () => '')
-    .then(username => {
-      return this.prompt({
-        name: 'githubAccount',
-        message: 'GitHub username or organization',
-        default: username
-      }).then(prompt => {
-        this.props.githubAccount = prompt.githubAccount;
+      .then(username => username, () => '')
+      .then(username => {
+        return this.prompt({
+          name: 'githubAccount',
+          message: 'GitHub username or organization',
+          default: username
+        }).then(prompt => {
+          this.props.githubAccount = prompt.githubAccount;
+        });
       });
-    });
   }
 
   prompting() {
@@ -344,7 +344,10 @@ module.exports = class extends Generator {
 
     //copy .eslintc into the client directory
     if (isSingleQuote) {
-      this.template("src/client/.eslintrc", this.destinationPath("src/client/.eslintrc"));
+      this.fs.copy(
+        this.templatePath("src/client/.eslintrc"),
+        this.destinationPath("src/client/.eslintrc")
+      );
     }
 
     // Special handling for the server file
