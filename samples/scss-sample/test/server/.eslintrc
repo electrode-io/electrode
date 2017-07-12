@@ -1,0 +1,5 @@
+---
+extends:
+  - "../../node_modules/electrode-archetype-react-app-dev/config/eslint/.eslintrc-mocha-test-es6"
+
+

@@ -1,4 +1,5 @@
 "use strict";
+
 const Fs = require("fs");
 const optionalRequire = require("optional-require")(require);
 const Path = require("path");
@@ -9,6 +10,7 @@ const context = Path.resolve(AppMode.src.client);
 const polyfill = archetype.webpack.enableBabelPolyfill;
 
 const logger = require("electrode-archetype-react-app/lib/logger");
+const glob = require("glob");
 
 /*
  * Allow an application to opt in for *multiple* entry points and consequently for
@@ -22,17 +24,31 @@ const logger = require("electrode-archetype-react-app/lib/logger");
 function appEntry() {
   const entryPath = Path.join(context, "entry.config.js");
 
-  const entry = optionalRequire(entryPath, {
+  const presetEntry = optionalRequire(entryPath, {
     notFound: () =>
       logger.info(
         `Entry point configuration ${entryPath} is not found, using default entry point...`
       )
   });
 
-  return entry || (Fs.existsSync(Path.join(context, "app.js")) ? "./app.js" : "./app.jsx");
+  const entry =
+    presetEntry ||
+    (Fs.existsSync(Path.join(context, "app.js")) ? "./app.js" : "./app.jsx");
+
+  const scssExists = glob.sync(Path.resolve(AppMode.src.client, "**", "*.scss")).length > 0;
+
+  if (polyfill) {
+    return {
+      main: scssExists
+      ? [ "babel-polyfill", "./styles/main.scss", entry ]
+      : [ "babel-polyfill", entry ]
+    };
+  } else {
+    return scssExists ? ["./styles/main.scss", entry] : entry;
+  }
 }
 
 module.exports = {
   context,
-  entry: polyfill ? { main: ["babel-polyfill", appEntry()] } : appEntry()
+  entry: appEntry()
 };
