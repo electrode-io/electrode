@@ -19,8 +19,8 @@
 -   [Further Develop](chapter1/further-develop.md)
     -   [Electrode App](chapter1/further-develop-app.md)
         -   [Build Component](/chapter1/further-develop-app/build-component.md)
-        -   [Deploy Your App](/chapter1/further-develop-app/deploy-your-app.md)
         -   [What's Inside](/chapter1/further-develop-app/whats-inside.md)
+        -   [Deploy Your App](/chapter1/further-develop-app/deploy-your-app.md)
 
     -   [Electrode Component](chapter1/further-develop-component.md)
         -   [Low-Level Components](chapter1/further-develop-component/low-level-components.md)

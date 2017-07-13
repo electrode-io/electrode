@@ -1,8 +1,6 @@
 # Build Component
 
-Get ready to focus on writing your React components. From here, you can develop further based on the generated the electrode app.
-
-Let's make a visual library for our present stack and exciting technologies! Copy the code below and paste it into
+From here, you can develop further based on the generated the electrode app. Let's make a visual library for our present stack and exciting technologies! Copy the code below and paste it into
 
 `<electrode-app>/src/client/components/home.jsx`:
 
@@ -82,7 +80,7 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
 ```
 
-Let's finish the UI by adding styles. Create a new file `<electrode-app>/src/client/styles/home.css` and add the code below:
+Finish the UI by adding styles. Create a new file `<electrode-app>/src/client/styles/home.css` and add the code below:
 
 ```css
 h1 {
@@ -125,6 +123,4 @@ Navigate to [https://localhost:3000](https://localhost:3000]/).
 
 **The page should resemble the following screenshot:**
 
-![](http://i.imgur.com/nwEl64l.png)
-
-Now let's jump to our next step, where we will deploy Your Awesome App to [Heroku](/chapter1/quick-start/deploy-your-app.md).
+![](/images/further-develop-app.png)
