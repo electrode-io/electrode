@@ -1,12 +1,4 @@
-# Get Started
-
-> **Electrode Environment Setup Requirements:**
->
-> -   **Latest **[**Node LTS binary**](https://nodejs.org/en/) **(at least v4.2 required, >= 6 recommended), tip: use **[**nvm**](https://github.com/creationix/nvm) **to manage your nodejs versions. **
->
-> -   [**npm v3**](https://github.com/npm/npm/releases/tag/v3.0.0) **- If you are using Node 4, then install the latest **[**npm**](https://www.npmjs.com/) **version **`npm install -g npm`
->
-> please checkout [requirements docs](/overview/requirements.md) for detailed setup instructions.
+# Get Started With Electrode App
 
 ## Quick Guide
 
@@ -88,7 +80,3 @@ electrode-app
 -   `xclap.js` - entry to Electrode's archetype tasks
 
 The application generated included a few demo components to show you how to use Redux, CSS Modules, and React JSX.  Feel free to play with them and remove or replace them when you are ready to add your application.
-
-* * *
-
-Let's continue to build by modifying our component and deploying in [Quick Start: Build Component.](/chapter1/quick-start/build-component.md)

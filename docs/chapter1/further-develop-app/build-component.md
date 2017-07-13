@@ -1,10 +1,8 @@
 # Build Component
 
-#### Here at WalmartLabs we love to build!
+Get ready to focus on writing your React components. From here, you can develop further based on the generated the electrode app.
 
-After generated the electrode app, you are ready to focus on writing your React components.
-
-We'll need a place to keep all of the resources we learned in the [Get Started](/chapter1/quick-start/get-started.md) section. Let's make a visual library for our present stack and exciting technologies! Copy the code below and paste it into
+Let's make a visual library for our present stack and exciting technologies! Copy the code below and paste it into
 
 `<electrode-app>/src/client/components/home.jsx`:
 
