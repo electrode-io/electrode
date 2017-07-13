@@ -6,6 +6,7 @@ const fs = require("fs");
 const Path = require("path");
 const Helmet = require("react-helmet").Helmet;
 const groupScripts = require("./group-scripts");
+const stringReplaceAsync = require("string-replace-async");
 
 const CONTENT_MARKER = "{{SSR_CONTENT}}";
 const HEADER_BUNDLE_MARKER = "{{WEBAPP_HEADER_BUNDLES}}";
@@ -38,6 +39,7 @@ function makeRouteHandler(routeOptions, userContent) {
   const chunkSelector = routeOptions.__internals.chunkSelector;
   const iconStats = getIconStats(routeOptions.iconStats);
   const criticalCSS = getCriticalCSS(routeOptions.criticalCSS);
+  const replaceMarkerCallback = routeOptions.replaceMarkerCallback;
 
   /* Create a route handler */
   /* eslint max-statements: [2, 35] */
@@ -144,24 +146,42 @@ function makeRouteHandler(routeOptions, userContent) {
     const renderPage = content => {
       const helmet = Helmet.renderStatic();
 
-      return html.replace(/{{[A-Z_]*}}/g, m => {
+      const replaceMarker = (key, defaultValue) => {
+        if (_.isFunction(replaceMarkerCallback)) {
+          const value = replaceMarkerCallback(_.trim(key, "{}"), defaultValue);
+          // If the replaceMarker callback returned a promise resolve it to get the value
+          if (utils.isPromise(value)) {
+            return value.then(result => {
+              if (!result) return defaultValue;
+              return result;
+            });
+          } else {
+            // If the replaceMarker callback returned anything else, just resolve that value
+            // directly. If the value is falsy then fallback to the defaultValue.
+            return Promise.resolve(value || defaultValue);
+          }
+        }
+        return Promise.resolve(defaultValue);
+      };
+
+      return stringReplaceAsync(html, /{{[A-Z_]*}}/g, m => {
         switch (m) {
           case CONTENT_MARKER:
-            return content.html || "";
+            return replaceMarker(CONTENT_MARKER, content.html || "");
           case TITLE_MARKER:
-            return makeTitle(helmet);
+            return replaceMarker(TITLE_MARKER, makeTitle(helmet));
           case HEADER_BUNDLE_MARKER:
-            return makeHeaderBundles(helmet);
+            return replaceMarker(HEADER_BUNDLE_MARKER, makeHeaderBundles(helmet));
           case BODY_BUNDLE_MARKER:
-            return makeBodyBundles();
+            return replaceMarker(BODY_BUNDLE_MARKER, makeBodyBundles());
           case PREFETCH_MARKER:
-            return `<script>${content.prefetch}</script>`;
+            return replaceMarker(PREFETCH_MARKER, `<script>${content.prefetch}</script>`);
           case META_TAGS_MARKER:
-            return helmet.meta.toString() + iconStats;
+            return replaceMarker(META_TAGS_MARKER, helmet.meta.toString() + iconStats);
           case CRITICAL_CSS_MARKER:
-            return criticalCSS;
+            return replaceMarker(CRITICAL_CSS_MARKER, criticalCSS);
           default:
-            return `Unknown marker ${m}`;
+            return Promise.resolve(`Unknown marker ${m}`);
         }
       });
     };

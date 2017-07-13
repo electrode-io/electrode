@@ -43,7 +43,8 @@
     "koa-router": "^5.4.0",
     "lodash": "^4.0.0",
     "react": "^15.3.1 || ^0.14.8",
-    "react-helmet": "^5.0.3"
+    "react-helmet": "^5.0.3",
+    "string-replace-async": "^1.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.1.1",
