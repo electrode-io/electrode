@@ -37,17 +37,13 @@ describe("react-webapp", function() {
       const replaceMarker = (markerKey, defaultValue) => {
         switch (markerKey) {
           case "SSR_CONTENT":
-            // Can return a promise the resolves to the replacement value.
-            return Promise.resolve(ssrContent);
+            return ssrContent;
           case "PAGE_TITLE":
             // Returning a falsy value causes the defaultValue to be used
             return false;
           case "META_TAGS":
             // It's also possible to utilize the defaultValue in the replacement value
             return `${defaultValue}${customMeta}`;
-          case "CRITICAL_CSS":
-            // If the promise resolves to a falsy value then the defaultValue is used
-            return Promise.resolve(null);
           default:
             return defaultValue;
         }

@@ -6,7 +6,6 @@ const fs = require("fs");
 const Path = require("path");
 const Helmet = require("react-helmet").Helmet;
 const groupScripts = require("./group-scripts");
-const stringReplaceAsync = require("string-replace-async");
 
 const CONTENT_MARKER = "{{SSR_CONTENT}}";
 const HEADER_BUNDLE_MARKER = "{{WEBAPP_HEADER_BUNDLES}}";
@@ -149,22 +148,16 @@ function makeRouteHandler(routeOptions, userContent) {
       const replaceMarker = (key, defaultValue) => {
         if (_.isFunction(replaceMarkerCallback)) {
           const value = replaceMarkerCallback(_.trim(key, "{}"), defaultValue);
-          // If the replaceMarker callback returned a promise resolve it to get the value
-          if (utils.isPromise(value)) {
-            return value.then(result => {
-              if (!result) return defaultValue;
-              return result;
-            });
-          } else {
-            // If the replaceMarker callback returned anything else, just resolve that value
-            // directly. If the value is falsy then fallback to the defaultValue.
-            return Promise.resolve(value || defaultValue);
+
+          if (!value) {
+            return defaultValue;
           }
+          return value;
         }
-        return Promise.resolve(defaultValue);
+        return defaultValue;
       };
 
-      return stringReplaceAsync(html, /{{[A-Z_]*}}/g, m => {
+      return html.replace(/{{[A-Z_]*}}/g, m => {
         switch (m) {
           case CONTENT_MARKER:
             return replaceMarker(CONTENT_MARKER, content.html || "");
@@ -181,7 +174,7 @@ function makeRouteHandler(routeOptions, userContent) {
           case CRITICAL_CSS_MARKER:
             return replaceMarker(CRITICAL_CSS_MARKER, criticalCSS);
           default:
-            return Promise.resolve(`Unknown marker ${m}`);
+            return `Unknown marker ${m}`;
         }
       });
     };
