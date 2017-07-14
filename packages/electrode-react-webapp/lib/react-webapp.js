@@ -4,7 +4,6 @@ const _ = require("lodash");
 const Promise = require("bluebird");
 const fs = require("fs");
 const Path = require("path");
-const Helmet = require("react-helmet").Helmet;
 const groupScripts = require("./group-scripts");
 const processCustomToken = require("./custom-tokens");
 
@@ -109,17 +108,13 @@ function makeRouteHandler(routeOptions, userContent) {
         .join("\n");
     };
 
-    const makeHeaderBundles = helmet => {
+    const makeHeaderBundles = () => {
       const manifest = bundleManifest();
       const manifestLink = manifest ? `<link rel="manifest" href="${manifest}" />\n` : "";
       const css = bundleCss();
       const cssLink = css && !criticalCSS ? `<link rel="stylesheet" href="${css}" />` : "";
-      const scriptsFromHelmet = ["link", "style", "script", "noscript"]
-        .map(tagName => helmet[tagName].toString())
-        .join("");
-
       const htmlScripts = htmlifyScripts(groupScripts(routeOptions.unbundledJS.enterHead).scripts);
-      return `${manifestLink}${cssLink}${htmlScripts}\n${scriptsFromHelmet}`;
+      return `${manifestLink}${cssLink}${htmlScripts}`;
     };
 
     const makeBodyBundles = () => {
@@ -134,18 +129,7 @@ function makeRouteHandler(routeOptions, userContent) {
       return `${htmlScripts}`;
     };
 
-    const emptyTitleRegex = /<title[^>]*><\/title>/;
-
-    const makeTitle = helmet => {
-      const helmetTitleScript = helmet.title.toString();
-      const helmetTitleEmpty = helmetTitleScript.match(emptyTitleRegex);
-
-      return helmetTitleEmpty ? `<title>${routeOptions.pageTitle}</title>` : helmetTitleScript;
-    };
-
     const renderPage = content => {
-      const helmet = Helmet.renderStatic();
-
       const renderContext = {
         request: options.request,
         routeOptions,
@@ -180,9 +164,12 @@ function makeRouteHandler(routeOptions, userContent) {
           case CONTENT_MARKER:
             return replaceBuiltInToken(CONTENT_MARKER, () => content.html || "");
           case TITLE_MARKER:
-            return replaceBuiltInToken(TITLE_MARKER, () => makeTitle(helmet));
+            return replaceBuiltInToken(
+              TITLE_MARKER,
+              () => `<title>${routeOptions.pageTitle}</title>`
+            );
           case HEADER_BUNDLE_MARKER:
-            return replaceBuiltInToken(HEADER_BUNDLE_MARKER, () => makeHeaderBundles(helmet));
+            return replaceBuiltInToken(HEADER_BUNDLE_MARKER, () => makeHeaderBundles());
           case BODY_BUNDLE_MARKER:
             return replaceBuiltInToken(BODY_BUNDLE_MARKER, () => makeBodyBundles());
           case PREFETCH_MARKER:
@@ -191,7 +178,7 @@ function makeRouteHandler(routeOptions, userContent) {
               () => `<script>${content.prefetch}</script>`
             );
           case META_TAGS_MARKER:
-            return replaceBuiltInToken(META_TAGS_MARKER, () => helmet.meta.toString() + iconStats);
+            return replaceBuiltInToken(META_TAGS_MARKER, () => iconStats);
           case CRITICAL_CSS_MARKER:
             return replaceBuiltInToken(CRITICAL_CSS_MARKER, () => criticalCSS);
           default:

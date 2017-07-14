@@ -16,11 +16,7 @@
   "bugs": {
     "url": "https://github.com/electrode-io/electrode/issues"
   },
-  "keywords": [
-    "electrode",
-    "node",
-    "webserver"
-  ],
+  "keywords": ["electrode", "node", "webserver"],
   "contributors": [
     {
       "name": "Joel Chen",
@@ -44,7 +40,6 @@
     "lodash": "^4.0.0",
     "optional-require": "^1.0.0",
     "react": "^15.3.1 || ^0.14.8",
-    "react-helmet": "^5.0.3",
     "require-at": "^1.0.0"
   },
   "devDependencies": {
@@ -69,19 +64,7 @@
     "functions": 98,
     "lines": 94.85,
     "cache": true,
-    "reporter": [
-      "lcov",
-      "text",
-      "text-summary"
-    ],
-    "exclude": [
-      "coverage",
-      "*clap.js",
-      "gulpfile.js",
-      "dist",
-      "test",
-      "lib/express",
-      "lib/koa"
-    ]
+    "reporter": ["lcov", "text", "text-summary"],
+    "exclude": ["coverage", "*clap.js", "gulpfile.js", "dist", "test", "lib/express", "lib/koa"]
   }
 }

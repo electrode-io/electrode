@@ -71,9 +71,6 @@ describe("react-webapp", function() {
           expect(html).to.contain(`<meta charset="UTF-8">`);
           // The custom meta tag should have been appended to the ones from the iconStats file
           expect(html).to.contain(`<link rel="icon" href="/js/favicon-32x32.png">${customMeta}`);
-
-          // Because the replaceMarker returned a promise that resolved to null the default
-          // value was used
           expect(html).to.contain(
             `<style>${fs.readFileSync(Path.resolve("./test/data/critical.css"))}</style>`
           );
