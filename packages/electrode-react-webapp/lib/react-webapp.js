@@ -6,6 +6,7 @@ const fs = require("fs");
 const Path = require("path");
 const Helmet = require("react-helmet").Helmet;
 const groupScripts = require("./group-scripts");
+const processCustomToken = require("./custom-tokens");
 
 const CONTENT_MARKER = "{{SSR_CONTENT}}";
 const HEADER_BUNDLE_MARKER = "{{WEBAPP_HEADER_BUNDLES}}";
@@ -38,7 +39,7 @@ function makeRouteHandler(routeOptions, userContent) {
   const chunkSelector = routeOptions.__internals.chunkSelector;
   const iconStats = getIconStats(routeOptions.iconStats);
   const criticalCSS = getCriticalCSS(routeOptions.criticalCSS);
-  const replaceMarkerCallback = routeOptions.replaceMarkerCallback;
+  const replaceTokenCallback = routeOptions.replaceToken;
 
   /* Create a route handler */
   /* eslint max-statements: [2, 35] */
@@ -145,37 +146,65 @@ function makeRouteHandler(routeOptions, userContent) {
     const renderPage = content => {
       const helmet = Helmet.renderStatic();
 
-      const replaceMarker = (key, defaultValue) => {
-        if (_.isFunction(replaceMarkerCallback)) {
-          const value = replaceMarkerCallback(_.trim(key, "{}"), defaultValue);
-
-          if (!value) {
-            return defaultValue;
-          }
-          return value;
-        }
-        return defaultValue;
+      const renderContext = {
+        request: options.request,
+        routeOptions,
+        options,
+        content
       };
 
-      return html.replace(/{{[A-Z_]*}}/g, m => {
-        switch (m) {
-          case CONTENT_MARKER:
-            return replaceMarker(CONTENT_MARKER, content.html || "");
-          case TITLE_MARKER:
-            return replaceMarker(TITLE_MARKER, makeTitle(helmet));
-          case HEADER_BUNDLE_MARKER:
-            return replaceMarker(HEADER_BUNDLE_MARKER, makeHeaderBundles(helmet));
-          case BODY_BUNDLE_MARKER:
-            return replaceMarker(BODY_BUNDLE_MARKER, makeBodyBundles());
-          case PREFETCH_MARKER:
-            return replaceMarker(PREFETCH_MARKER, `<script>${content.prefetch}</script>`);
-          case META_TAGS_MARKER:
-            return replaceMarker(META_TAGS_MARKER, helmet.meta.toString() + iconStats);
-          case CRITICAL_CSS_MARKER:
-            return replaceMarker(CRITICAL_CSS_MARKER, criticalCSS);
-          default:
-            return `Unknown marker ${m}`;
+      const replaceBuiltInToken = (token, getDefaultValue) => {
+        // Create a closure that caches the evaluated default value. That way
+        // subsequent invocations of getDefaultValue() don't repeat any
+        // potential intensive operations.
+        if (_.isFunction(replaceTokenCallback)) {
+          let evaluatedDefault;
+
+          const value = replaceTokenCallback(
+            utils.stripTokenDelimiters(token),
+            renderContext,
+            () => {
+              if (evaluatedDefault) return evaluatedDefault;
+              evaluatedDefault = getDefaultValue();
+              return evaluatedDefault;
+            }
+          );
+
+          return value || "";
         }
+        return getDefaultValue();
+      };
+
+      const processBuiltInToken = token => {
+        switch (token) {
+          case CONTENT_MARKER:
+            return replaceBuiltInToken(CONTENT_MARKER, () => content.html || "");
+          case TITLE_MARKER:
+            return replaceBuiltInToken(TITLE_MARKER, () => makeTitle(helmet));
+          case HEADER_BUNDLE_MARKER:
+            return replaceBuiltInToken(HEADER_BUNDLE_MARKER, () => makeHeaderBundles(helmet));
+          case BODY_BUNDLE_MARKER:
+            return replaceBuiltInToken(BODY_BUNDLE_MARKER, () => makeBodyBundles());
+          case PREFETCH_MARKER:
+            return replaceBuiltInToken(
+              PREFETCH_MARKER,
+              () => `<script>${content.prefetch}</script>`
+            );
+          case META_TAGS_MARKER:
+            return replaceBuiltInToken(META_TAGS_MARKER, () => helmet.meta.toString() + iconStats);
+          case CRITICAL_CSS_MARKER:
+            return replaceBuiltInToken(CRITICAL_CSS_MARKER, () => criticalCSS);
+          default:
+            return `Unknown token ${token}`;
+        }
+      };
+
+      return html.replace(/{{[A-Z_~\.\/-]*}}/gi, token => {
+        if (token.startsWith("{{~")) {
+          return processCustomToken(token, renderContext);
+        }
+
+        return processBuiltInToken(token);
       });
     };
 

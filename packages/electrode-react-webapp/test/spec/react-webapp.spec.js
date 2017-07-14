@@ -29,29 +29,28 @@ describe("react-webapp", function() {
   });
 
   describe("makeRouteHandler", function() {
-    it("should call replaceMarker callback", () => {
+    it("should invoke replaceToken for built-in tokens", () => {
       const ssrContent = "hey this is the content";
       const testTitle = "Test Electrode Web Application";
       const customMeta = `<meta name="x-custom" value="foo"/>`;
 
-      const replaceMarker = (markerKey, defaultValue) => {
-        switch (markerKey) {
+      const replaceToken = (token, context, getDefault) => {
+        switch (token) {
           case "SSR_CONTENT":
             return ssrContent;
           case "PAGE_TITLE":
-            // Returning a falsy value causes the defaultValue to be used
-            return false;
+            return `<title>${testTitle}</title>`;
           case "META_TAGS":
             // It's also possible to utilize the defaultValue in the replacement value
-            return `${defaultValue}${customMeta}`;
+            return `${getDefault()}${customMeta}`;
           default:
-            return defaultValue;
+            return getDefault();
         }
       };
 
       return reactWebapp
         .setupOptions({
-          pageTitle: testTitle,
+          pageTitle: "should get overidden",
           iconStats: "./test/data/icon-stats-test-pwa.json",
           criticalCSS: "./test/data/critical.css"
         })
@@ -59,7 +58,7 @@ describe("react-webapp", function() {
           const handler = reactWebapp.makeRouteHandler(
             Object.assign(options, {
               htmlFile: "./test/data/index-1.html",
-              replaceMarkerCallback: replaceMarker
+              replaceToken
             })
           );
 
@@ -77,6 +76,27 @@ describe("react-webapp", function() {
           // value was used
           expect(html).to.contain(
             `<style>${fs.readFileSync(Path.resolve("./test/data/critical.css"))}</style>`
+          );
+        });
+    });
+
+    it("should replace custom tokens", () => {
+      return reactWebapp
+        .setupOptions()
+        .then(options => {
+          const handler = reactWebapp.makeRouteHandler(
+            Object.assign(options, {
+              htmlFile: "./test/data/custom-tokens.html"
+            })
+          );
+
+          return handler({});
+        })
+        .then(html => {
+          expect(html).to.contain(`<div class="custom-1">custom replacement string</div>`);
+          expect(html).to.contain(`<div class="custom-2">custom replacement with process</div>`);
+          expect(html).to.contain(
+            `<div class="custom-3">{{~./test/data/custom-token-setup-process}}</div>`
           );
         });
     });

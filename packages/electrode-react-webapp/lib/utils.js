@@ -5,6 +5,8 @@ const Promise = require("bluebird");
 const fs = require("fs");
 const Path = require("path");
 
+/* eslint-disable no-magic-numbers */
+
 /**
  * Tries to import bundle chunk selector function if the corresponding option is set in the
  * webapp plugin configuration. The function takes a `request` object as an argument and
@@ -98,12 +100,9 @@ function getStatsPath(statsFilePath, buildArtifactsPath) {
     : statsFilePath;
 }
 
-function isPromise(obj) {
-  return (
-    !!obj &&
-    (typeof obj === "object" || typeof obj === "function") &&
-    typeof obj.then === "function"
-  );
+// Strip the {{}} delimiters off the token
+function stripTokenDelimiters(token) {
+  return _.trimEnd(_.trimStart(token, ["{", "~"]), ["}"]);
 }
 
 module.exports = {
@@ -112,5 +111,5 @@ module.exports = {
   getIconStats,
   getCriticalCSS,
   getStatsPath,
-  isPromise
+  stripTokenDelimiters
 };
