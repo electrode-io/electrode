@@ -35,5 +35,10 @@ module.exports = (req) => {
     app.routesEngine = new ReduxRouterEngine({routes, createReduxStore});
   }
 
-  return app.routesEngine.render(req);
+  return Promise.resolve(app.routesEngine.render(req))
+    .then(content => {
+      // Add custom markers here to `content.markers`. 
+      // Example: content.markers['BODY_ADDITIONS'] = renderAdditions({store: content.store})
+      return content;
+    });
 };

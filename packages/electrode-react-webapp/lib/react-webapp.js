@@ -161,6 +161,9 @@ function makeRouteHandler(routeOptions, userContent) {
           case CRITICAL_CSS_MARKER:
             return criticalCSS;
           default:
+            if (content.markers && content.markers[m] !== undefined) {
+              return content;
+            }
             return `Unknown marker ${m}`;
         }
       });
