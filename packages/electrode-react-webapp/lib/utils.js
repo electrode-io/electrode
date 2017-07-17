@@ -61,28 +61,35 @@ function loadAssetsFromStats(statsPath) {
     .catch(() => ({}));
 }
 
-function getIconStats(iconStatsPath) {
-  let iconStats;
-  try {
-    iconStats = fs.readFileSync(Path.resolve(iconStatsPath)).toString();
-    iconStats = JSON.parse(iconStats);
-  } catch (err) {
-    return "";
-  }
-  if (iconStats && iconStats.html) {
-    return iconStats.html.join("");
-  }
-  return iconStats;
+function readFileSafe(filePath) {
+  return new Promise(resolve => {
+    fs.readFile(Path.resolve(filePath), (err, data) => {
+      if (err) return resolve("");
+      return resolve(data.toString());
+    });
+  });
 }
 
-function getCriticalCSS(path) {
-  const criticalCSSPath = Path.resolve(process.cwd(), path);
-  try {
-    const criticalCSS = fs.readFileSync(criticalCSSPath).toString();
-    return `<style>${criticalCSS}</style>`;
-  } catch (err) {
-    return "";
-  }
+function getIconStats(iconStatsPath) {
+  let iconStats;
+
+  return readFileSafe(iconStatsPath).then(contents => {
+    try {
+      iconStats = JSON.parse(contents);
+    } catch (err) {
+      return "";
+    }
+    if (iconStats && iconStats.html) {
+      return iconStats.html.join("");
+    }
+    return iconStats;
+  });
+}
+
+function getCriticalCSS(filePath) {
+  return readFileSafe(filePath).then(criticalCSS => {
+    return criticalCSS.length ? `<style>${criticalCSS}</style>` : "";
+  });
 }
 
 /**
@@ -105,11 +112,20 @@ function stripTokenDelimiters(token) {
   return _.trimEnd(_.trimStart(token, ["{", "~"]), ["}"]);
 }
 
+function isPromise(obj) {
+  return (
+    !!obj &&
+    (typeof obj === "object" || typeof obj === "function") &&
+    typeof obj.then === "function"
+  );
+}
+
 module.exports = {
   resolveChunkSelector,
   loadAssetsFromStats,
   getIconStats,
   getCriticalCSS,
   getStatsPath,
-  stripTokenDelimiters
+  stripTokenDelimiters,
+  isPromise
 };

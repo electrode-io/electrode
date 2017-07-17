@@ -2,6 +2,7 @@
 
 /* eslint-disable no-magic-numbers, no-console */
 
+const _ = require("lodash");
 const requireAt = require("require-at");
 const optionalRequire = require("optional-require")(requireAt(process.cwd()));
 const utils = require("./utils");
@@ -31,21 +32,21 @@ module.exports = (token, renderContext) => {
       fail: e => failLoadTokenModule(mPath, e),
       notFound: () => notFoundLoadTokenModule(mPath)
     });
+
     viewTokenModules[token] = tokenMod;
-    if (typeof tokenMod === "object") {
-      if (tokenMod.setup) {
-        tokenMod.setup(renderContext, token);
-      }
-    } else {
-      tokenMod = {
-        process: tokenMod
-      };
+  }
+
+  let replacePromise;
+  if (_.isFunction(tokenMod)) {
+    replacePromise = tokenMod(renderContext, token);
+    if (!utils.isPromise(replacePromise)) {
+      return Promise.reject(
+        new Error(`The function exported by ${token} does not return a Promise.`)
+      );
     }
+  } else {
+    replacePromise = Promise.resolve((tokenMod || "").toString());
   }
 
-  if (typeof tokenMod.process === "string") {
-    return tokenMod.process;
-  }
-
-  return tokenMod.process(renderContext, token);
+  return replacePromise.then(value => value || "");
 };

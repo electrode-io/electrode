@@ -5,7 +5,10 @@ const Promise = require("bluebird");
 const fs = require("fs");
 const Path = require("path");
 const groupScripts = require("./group-scripts");
+const stringReplaceAsync = require("string-replace-async");
 const processCustomToken = require("./custom-tokens");
+
+const TOKEN_REGEX = /{{[A-Z_~\.\/-]*}}/gi;
 
 const CONTENT_MARKER = "{{SSR_CONTENT}}";
 const HEADER_BUNDLE_MARKER = "{{WEBAPP_HEADER_BUNDLES}}";
@@ -21,8 +24,6 @@ const utils = require("./utils");
 
 const resolveChunkSelector = utils.resolveChunkSelector;
 const loadAssetsFromStats = utils.loadAssetsFromStats;
-const getIconStats = utils.getIconStats;
-const getCriticalCSS = utils.getCriticalCSS;
 const getStatsPath = utils.getStatsPath;
 
 const resolvePath = path => (!Path.isAbsolute(path) ? Path.resolve(path) : path);
@@ -36,8 +37,6 @@ function makeRouteHandler(routeOptions, userContent) {
   const devBundleBase = routeOptions.__internals.devBundleBase;
   const prodBundleBase = routeOptions.prodBundleBase;
   const chunkSelector = routeOptions.__internals.chunkSelector;
-  const iconStats = getIconStats(routeOptions.iconStats);
-  const criticalCSS = getCriticalCSS(routeOptions.criticalCSS);
   const replaceTokenCallback = routeOptions.replaceToken;
 
   /* Create a route handler */
@@ -112,9 +111,13 @@ function makeRouteHandler(routeOptions, userContent) {
       const manifest = bundleManifest();
       const manifestLink = manifest ? `<link rel="manifest" href="${manifest}" />\n` : "";
       const css = bundleCss();
-      const cssLink = css && !criticalCSS ? `<link rel="stylesheet" href="${css}" />` : "";
-      const htmlScripts = htmlifyScripts(groupScripts(routeOptions.unbundledJS.enterHead).scripts);
-      return `${manifestLink}${cssLink}${htmlScripts}`;
+      return utils.getCriticalCSS(routeOptions.criticalCSS).then(criticalCSS => {
+        const cssLink = css && !criticalCSS ? `<link rel="stylesheet" href="${css}" />` : "";
+        const htmlScripts = htmlifyScripts(
+          groupScripts(routeOptions.unbundledJS.enterHead).scripts
+        );
+        return `${manifestLink}${cssLink}${htmlScripts}`;
+      });
     };
 
     const makeBodyBundles = () => {
@@ -138,55 +141,60 @@ function makeRouteHandler(routeOptions, userContent) {
       };
 
       const replaceBuiltInToken = (token, getDefaultValue) => {
-        // Create a closure that caches the evaluated default value. That way
-        // subsequent invocations of getDefaultValue() don't repeat any
-        // potential intensive operations.
+        let replacePromise;
+        // The replaceTokenCallback is expected to return a Promise that
+        // resolves to the replacement string
         if (_.isFunction(replaceTokenCallback)) {
-          let evaluatedDefault;
-
-          const value = replaceTokenCallback(
+          const replacement = replaceTokenCallback(
             utils.stripTokenDelimiters(token),
             renderContext,
-            () => {
-              if (evaluatedDefault) return evaluatedDefault;
-              evaluatedDefault = getDefaultValue();
-              return evaluatedDefault;
-            }
+            getDefaultValue
           );
-
-          return value || "";
+          if (utils.isPromise(replacement)) {
+            replacePromise = replacement;
+          } else if (_.isString(replacement)) {
+            replacePromise = Promise.resolve(replacement);
+          } else {
+            replacePromise = getDefaultValue();
+          }
+        } else {
+          replacePromise = getDefaultValue();
         }
-        return getDefaultValue();
+        return replacePromise.then(value => value || "");
       };
 
       const processBuiltInToken = token => {
         switch (token) {
           case CONTENT_MARKER:
-            return replaceBuiltInToken(CONTENT_MARKER, () => content.html || "");
+            return replaceBuiltInToken(CONTENT_MARKER, () => Promise.resolve(content.html || ""));
           case TITLE_MARKER:
-            return replaceBuiltInToken(
-              TITLE_MARKER,
-              () => `<title>${routeOptions.pageTitle}</title>`
+            return replaceBuiltInToken(TITLE_MARKER, () =>
+              Promise.resolve(`<title>${routeOptions.pageTitle}</title>`)
             );
           case HEADER_BUNDLE_MARKER:
-            return replaceBuiltInToken(HEADER_BUNDLE_MARKER, () => makeHeaderBundles());
+            return replaceBuiltInToken(HEADER_BUNDLE_MARKER, makeHeaderBundles);
           case BODY_BUNDLE_MARKER:
-            return replaceBuiltInToken(BODY_BUNDLE_MARKER, () => makeBodyBundles());
+            return replaceBuiltInToken(BODY_BUNDLE_MARKER, () =>
+              Promise.resolve(makeBodyBundles())
+            );
           case PREFETCH_MARKER:
-            return replaceBuiltInToken(
-              PREFETCH_MARKER,
-              () => `<script>${content.prefetch}</script>`
+            return replaceBuiltInToken(PREFETCH_MARKER, () =>
+              Promise.resolve(`<script>${content.prefetch}</script>`)
             );
           case META_TAGS_MARKER:
-            return replaceBuiltInToken(META_TAGS_MARKER, () => iconStats);
+            return replaceBuiltInToken(META_TAGS_MARKER, () =>
+              utils.getIconStats(routeOptions.iconStats)
+            );
           case CRITICAL_CSS_MARKER:
-            return replaceBuiltInToken(CRITICAL_CSS_MARKER, () => criticalCSS);
+            return replaceBuiltInToken(CRITICAL_CSS_MARKER, () =>
+              utils.getCriticalCSS(routeOptions.criticalCSS)
+            );
           default:
             return `Unknown token ${token}`;
         }
       };
 
-      return html.replace(/{{[A-Z_~\.\/-]*}}/gi, token => {
+      return stringReplaceAsync(html, TOKEN_REGEX, token => {
         if (token.startsWith("{{~")) {
           return processCustomToken(token, renderContext);
         }

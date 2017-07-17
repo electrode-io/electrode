@@ -39,10 +39,10 @@ describe("react-webapp", function() {
           case "SSR_CONTENT":
             return ssrContent;
           case "PAGE_TITLE":
-            return `<title>${testTitle}</title>`;
+            return Promise.resolve(`<title>${testTitle}</title>`);
           case "META_TAGS":
             // It's also possible to utilize the defaultValue in the replacement value
-            return `${getDefault()}${customMeta}`;
+            return getDefault().then(value => `${value}${customMeta}`);
           default:
             return getDefault();
         }
@@ -91,10 +91,7 @@ describe("react-webapp", function() {
         })
         .then(html => {
           expect(html).to.contain(`<div class="custom-1">custom replacement string</div>`);
-          expect(html).to.contain(`<div class="custom-2">custom replacement with process</div>`);
-          expect(html).to.contain(
-            `<div class="custom-3">{{~./test/data/custom-token-setup-process}}</div>`
-          );
+          expect(html).to.contain(`<div class="custom-2">custom replacement with promise</div>`);
         });
     });
   });
