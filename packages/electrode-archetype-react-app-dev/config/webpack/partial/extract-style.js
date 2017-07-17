@@ -82,7 +82,7 @@ module.exports = function() {
     });
   }
 
-  if(scssExists) {
+  if (scssExists) {
     rules.push({
       _name: "extract-scss",
       test: /\.(sass|scss)$/,
