@@ -33,12 +33,11 @@ const AppMode = archetype.AppMode;
  * case 5: *cssModuleStylusSupport* config is true => Use both Stylus and CSS Modules
  */
 
-const cssNextExists = glob.sync(Path.resolve(AppMode.src.client, "**", "*.css")).length > 0;
 const stylusExists = glob.sync(Path.resolve(AppMode.src.client, "**", "*.styl")).length > 0;
 const scssExists = glob.sync(Path.resolve(AppMode.src.client, "**", "*.scss")).length > 0;
 
 // By default, this archetype assumes you are using SCSS
-const cssModuleSupport = !scssExists && !stylusExists && cssNextExists;
+const cssModuleSupport = !stylusExists && scssExists;
 
 module.exports = function() {
   const cssModuleStylusSupport = archetype.webpack.cssModuleStylusSupport;
@@ -82,27 +81,23 @@ module.exports = function() {
     });
   }
 
-  if (scssExists) {
-    rules.push({
-      _name: "extract-scss",
-      test: /\.(sass|scss)$/,
-      loader: ExtractTextPlugin.extract({
-        fallback: styleLoader,
-        loader: `${cssLoader}!${sassLoader}`
-      })
-    });
-  } else if (cssModuleSupport) {
+  if (cssModuleSupport) {
     rules.push({
       _name: "postcss",
       test: /\.scss$/,
-      use: [
-        {
-          loader: postcssLoader,
-          options: {
-            browsers: ["last 2 versions", "ie >= 9", "> 5%"]
-          }
-        }
-      ]
+      loader: ExtractTextPlugin.extract({
+        fallback: styleLoader,
+        use: [
+          cssLoader,
+          {
+            loader: postcssLoader,
+            options: {
+              browsers: ["last 2 versions", "ie >= 9", "> 5%"]
+            }
+          },
+          sassLoader
+        ]
+      })
     });
   }
 
