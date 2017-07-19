@@ -104,7 +104,7 @@ function makeRouteHandler(routeOptions, userContent) {
           x =>
             typeof x === "string"
               ? `<script${paddedNonce}>${x}</script>\n`
-              : x.map(n => `<script src="${n.src}">xxx</script>`).join("\n")
+              : x.map(n => `<script src="${n.src}"></script>`).join("\n")
         )
         .join("\n");
     };
