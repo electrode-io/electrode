@@ -100,7 +100,7 @@ What you can do with the options:
     -   `host` `(String)` The host that webpack-dev-server runs on
     -   `port` `(String)` The port that webpack-dev-server runs on
 -   `prodBundleBase` `(String)` Base path to locate the JavaScript, CSS and manifest bundles. Defaults to "/js/". Should end with "/".
--   `cspNoncePropPath` `(String)` The path from the request object to a CSP nonce value. This nonce, if present, will be included on any `script` elements that contain scripts (e.g. any SSR preloaded state). For example, if you have a hapi plugin that puts a nonce value at `request.plugins.myCspGenerator.nonce` you would set `cspNonceProp` to `plugins.myCspGenerator.nonce`. If this property is undefined, or if the value at that location is undefined, no nonce will be added to the script elements.
+-  `cspNonceValue` `(Function|Object|undefined)` Used to retrieve a CSP nonce value. If this is a function it will be passed the request and the nonce type (`'script'` or `'style'`), and must return the corresponding nonce. If this is an object, it may have properties `script`, `style` or both, and the value for each should be the path from the request object to the nonce value (For example, if you have a hapi plugin that puts a nonce value at `request.plugins.myCspGenerator.nonce` you might set `cspNonceValue` to `{ script: 'plugins.myCspGenerator.nonce' }`).  The nonce, if present, will be included on any `script` or `style` elements that directly contain scripts or style (e.g. any SSR preloaded state). If this property is undefined, or if the value at that location is undefined, no nonce will be added.
 
 ### `htmlFile` view details
 

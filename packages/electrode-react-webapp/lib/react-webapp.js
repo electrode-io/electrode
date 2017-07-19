@@ -37,7 +37,6 @@ function makeRouteHandler(routeOptions, userContent) {
   const prodBundleBase = routeOptions.prodBundleBase;
   const chunkSelector = routeOptions.__internals.chunkSelector;
   const iconStats = getIconStats(routeOptions.iconStats);
-  const criticalCSS = getCriticalCSS(routeOptions.criticalCSS);
 
   /* Create a route handler */
   /* eslint max-statements: [2, 35] */
@@ -53,6 +52,18 @@ function makeRouteHandler(routeOptions, userContent) {
       }
     }
 
+    let cspScriptNonce;
+    let cspStyleNonce;
+    if (typeof routeOptions.cspNonceValue === "function") {
+      cspScriptNonce = routeOptions.cspNonceValue(options.request, "script");
+      cspStyleNonce = routeOptions.cspNonceValue(options.request, "style");
+    } else {
+      const nonceObject = routeOptions.cspNonceValue || {};
+      cspScriptNonce = _.get(options.request, nonceObject.script, undefined);
+      cspStyleNonce = _.get(options.request, nonceObject.style, undefined);
+    }
+    const criticalCSS = getCriticalCSS(routeOptions.criticalCSS, cspStyleNonce);
+
     const chunkNames = chunkSelector(options.request);
     const devCSSBundle = chunkNames.css
       ? `${devBundleBase}${chunkNames.css}.style.css`
@@ -62,8 +73,7 @@ function makeRouteHandler(routeOptions, userContent) {
       : `${devBundleBase}bundle.dev.js`;
     const jsChunk = _.find(assets.js, asset => _.includes(asset.chunkNames, chunkNames.js));
     const cssChunk = _.find(assets.css, asset => _.includes(asset.chunkNames, chunkNames.css));
-    const cspNonce = _.get(options.request, routeOptions.cspNoncePropPath, undefined);
-    const paddedNonce = cspNonce ? ` nonce="${cspNonce}"` : "";
+    const paddedNonce = cspScriptNonce ? ` nonce="${cspScriptNonce}"` : "";
 
     const bundleCss = () => {
       return WEBPACK_DEV ? devCSSBundle : (cssChunk && `${prodBundleBase}${cssChunk.name}`) || "";
@@ -202,7 +212,7 @@ const setupOptions = options => {
     criticalCSS: "dist/js/critical.css",
     buildArtifacts: ".build",
     prodBundleBase: "/js/",
-    cspNoncePropPath: undefined
+    cspNonceValue: undefined
   };
 
   const pluginOptions = _.defaultsDeep({}, options, pluginOptionsDefaults);
