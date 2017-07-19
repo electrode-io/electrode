@@ -433,4 +433,70 @@ describe("Test electrode-react-webapp", () => {
         });
     });
   });
+
+  it("should add a nonce value, if configuration specifies a path and a value is present", () => {
+    configOptions.cspNoncePropPath = "plugins.cspPlugin.nonceValue";
+    function cspPlugin(server, options, next) {
+      server.ext('onRequest', (request, reply) => {
+          request.plugins.cspPlugin = {
+            nonceValue: '==ABCD'
+          };
+          return reply.continue();
+      });
+      next();
+    }
+    cspPlugin.attributes = {
+      name: 'cspPlugin'
+    };
+
+    return electrodeServer(config).then(server => {
+      // Add a trivial csp generator for testing purposes.
+      server.register(cspPlugin);
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .then(res => {
+          expect(res.result).to.contain("<script nonce=\"==ABCD\">console.log('Hello');</script>");
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
+  it("should not add a nonce value, if configuration specifies a path and no value present", () => {
+    configOptions.cspNoncePropPath = "plugins.cspPlugin.nonceValue";
+    function cspPlugin(server, options, next) {
+      server.ext('onRequest', (request, reply) => {
+          request.plugins.cspPlugin = {};
+          return reply.continue();
+      });
+      next();
+    }
+    cspPlugin.attributes = {
+      name: 'cspPlugin'
+    };
+
+    return electrodeServer(config).then(server => {
+      // Add a trivial csp generator for testing purposes.
+      server.register(cspPlugin);
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .then(res => {
+          expect(res.result).to.contain("<script>console.log('Hello');</script>");
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
 });

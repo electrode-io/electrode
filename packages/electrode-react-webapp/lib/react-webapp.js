@@ -62,6 +62,8 @@ function makeRouteHandler(routeOptions, userContent) {
       : `${devBundleBase}bundle.dev.js`;
     const jsChunk = _.find(assets.js, asset => _.includes(asset.chunkNames, chunkNames.js));
     const cssChunk = _.find(assets.css, asset => _.includes(asset.chunkNames, chunkNames.css));
+    const cspNonce = _.get(options.request, routeOptions.cspNoncePropPath, undefined);
+    const paddedNonce = cspNonce ? ` nonce="${cspNonce}"` : "";
 
     const bundleCss = () => {
       return WEBPACK_DEV ? devCSSBundle : (cssChunk && `${prodBundleBase}${cssChunk.name}`) || "";
@@ -101,8 +103,8 @@ function makeRouteHandler(routeOptions, userContent) {
         .map(
           x =>
             typeof x === "string"
-              ? `<script>${x}</script>\n`
-              : x.map(n => `<script src="${n.src}"></script>`).join("\n")
+              ? `<script${paddedNonce}>${x}</script>\n`
+              : x.map(n => `<script src="${n.src}">xxx</script>`).join("\n")
         )
         .join("\n");
     };
@@ -155,7 +157,7 @@ function makeRouteHandler(routeOptions, userContent) {
           case BODY_BUNDLE_MARKER:
             return makeBodyBundles();
           case PREFETCH_MARKER:
-            return `<script>${content.prefetch}</script>`;
+            return `<script${paddedNonce}>${content.prefetch}</script>`;
           case META_TAGS_MARKER:
             return helmet.meta.toString() + iconStats;
           case CRITICAL_CSS_MARKER:
@@ -199,7 +201,8 @@ const setupOptions = options => {
     iconStats: "dist/server/iconstats.json",
     criticalCSS: "dist/js/critical.css",
     buildArtifacts: ".build",
-    prodBundleBase: "/js/"
+    prodBundleBase: "/js/",
+    cspNoncePropPath: undefined
   };
 
   const pluginOptions = _.defaultsDeep({}, options, pluginOptionsDefaults);

@@ -100,6 +100,7 @@ What you can do with the options:
     -   `host` `(String)` The host that webpack-dev-server runs on
     -   `port` `(String)` The port that webpack-dev-server runs on
 -   `prodBundleBase` `(String)` Base path to locate the JavaScript, CSS and manifest bundles. Defaults to "/js/". Should end with "/".
+-   `cspNoncePropPath` `(String)` The path from the request object to a CSP nonce value. This nonce, if present, will be included on any `script` elements that contain scripts (e.g. any SSR preloaded state). For example, if you have a hapi plugin that puts a nonce value at `request.plugins.myCspGenerator.nonce` you would set `cspNonceProp` to `plugins.myCspGenerator.nonce`. If this property is undefined, or if the value at that location is undefined, no nonce will be added to the script elements.
 
 ### `htmlFile` view details
 
