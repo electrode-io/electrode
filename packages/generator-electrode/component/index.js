@@ -187,8 +187,20 @@ var ReactComponentGenerator = yeoman.Base.extend({
         this.rootPath + "src/components/" + this.projectName + ".jsx"
       );
       this.template(
+        "packages/component/src/components/_accordion.jsx",
+        this.rootPath + "src/components/accordion.jsx"
+      );
+      this.template(
         "packages/component/src/styles/_component.css",
         this.rootPath + "src/styles/" + this.projectName + ".css"
+      );
+      this.template(
+        "packages/component/src/styles/_accordion.css",
+        this.rootPath + "src/styles/accordion.css"
+      );
+      this.template(
+        "packages/component/src/styles/_raleway.css",
+        this.rootPath + "src/styles/raleway.css"
       );
 
       // demo folder files
