@@ -9,9 +9,9 @@ module.exports = function() {
         {
           _name: "isparta-loader",
           loader: iiLoader,
-          test: /(test|client)\/.*\.jsx?$/,
+          test: /client\/.*\.jsx?$/,
           enforce: "pre",
-          exclude: /(node_modules|\bclient\/vendor\b)/
+          exclude: /(node_modules|\btest\/|\bclient\/vendor\b)/
         }
       ]
     }
