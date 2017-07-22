@@ -88,7 +88,7 @@ module.exports = function () {
       plugins: [
         new ExtractTextPlugin(config.__wmlMultiBundle
           ? "[name].style.[hash].css"
-          : "style.[hash].css"),
+          : "style.[hash].css", { allChunks: true }),
 
         /*
         preserve: default: false. Keep the original unsplit file as well.
