@@ -117,7 +117,11 @@ class ReduxRouterEngine {
 
     return this._getReduxStoreInitializer(route, options).call(this, req, match)
       .then((store) => {
-        const r = { prefetch: stringifyPreloadedState(store.getState()) };
+        const r = {
+          prefetch: stringifyPreloadedState(store.getState()),
+          store,
+          markers: {}
+        };
         const x = this._renderToString(req, store, match, withIds);
         if (x.then !== undefined) { // a Promise?
           return x.then((html) => {
