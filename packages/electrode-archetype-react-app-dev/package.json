@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-app-dev",
-  "version": "1.10.1",
+  "version": "1.10.2",
   "description": "Electrode NodeJS/React Application Archetype (Development)",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -110,7 +110,6 @@
     "webpack-partial": "^1.1.2",
     "webpack-stats-plugin": "^0.1.1"
   },
-  "devDependencies": {},
   "engines": {
     "node": "^4.4.6 || ^6.2.1",
     "npm": "^3.5.3"
