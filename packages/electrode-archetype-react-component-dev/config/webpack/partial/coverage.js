@@ -1,6 +1,6 @@
 "use strict";
 
-var ispartaLoader = require.resolve("isparta-loader");
+var ispartaLoader = require.resolve("../loaders/isparta-loader");
 
 module.exports = function() {
   return {
