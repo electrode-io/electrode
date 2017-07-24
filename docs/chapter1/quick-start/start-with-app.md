@@ -58,7 +58,7 @@ $ npm run prod
 
 Here is a basic top level view of the application's structure:
 
-```text
+```markdown
 electrode-app
 ├── package.json
 ├── LICENSE

@@ -11,7 +11,7 @@ Fill out information for you component. You can press enter for all the defaults
 
 For example:
 
-```text
+```markdown
 $ yo electrode:component
 
 Welcome to the Electrode Component Generator
@@ -96,7 +96,7 @@ Your component source code is in `packages/<componentName>/src` and test code is
 
 Here is the layout of packages/<componentName>:
 
-```text
+```markdown
 └── packages
     └── <componentName>
         ├── README.md
@@ -133,7 +133,7 @@ Here is the layout of packages/<componentName>:
 
 Here is the layout of demo-app:
 
-```text
+```markdown
 ├── demo-app
 │   ├── LICENSE
 │   ├── README.md
