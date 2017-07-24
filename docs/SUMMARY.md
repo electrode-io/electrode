@@ -9,27 +9,22 @@
     -   [Requirements](overview/requirements.md)
 
 ### Quick Start
+-   [Start With Electrode App](/chapter1/quick-start/start-with-app.md)
+-   [Start With Electrode Component](/chapter1/quick-start/start-with-component.md)
 
--   [Quick Start](chapter1/quick-start.md)
-    -   [Start With Electrode App](/chapter1/quick-start/start-with-app.md)
-    -   [Start With Electrode Component](/chapter1/quick-start/start-with-component.md)
+-   [Electrode App](chapter1/quick-start/further-develop-app.md)
+    -   [Build Component](/chapter1/further-develop-app/build-component.md)
+    -   [What's Inside](/chapter1/further-develop-app/whats-inside.md)
+    -   [Deploy Your App](/chapter1/further-develop-app/deploy-your-app.md)
 
-### Further Develop
-
--   [Further Develop](chapter1/further-develop.md)
-    -   [Electrode App](chapter1/further-develop-app.md)
-        -   [Build Component](/chapter1/further-develop-app/build-component.md)
-        -   [What's Inside](/chapter1/further-develop-app/whats-inside.md)
-        -   [Deploy Your App](/chapter1/further-develop-app/deploy-your-app.md)
-
-    -   [Electrode Component](chapter1/further-develop-component.md)
-        -   [Low-Level Components](/chapter1/further-develop-component/low-level-components.md)
-        -   [Component Helpers](/chapter1/further-develop-component/component-helpers.md)
-        -   [Develop Styles](/chapter1/further-develop-component/develop-styles.md)
-        -   [Develop Main Component](chapter1/further-develop-component/develop-main-component.md)
-        -   [Add Components to Demo App](/chapter1/further-develop-component/add-to-demo-app.md)
-        -   [Build and Demo](/chapter1/further-develop-component/build-and-demo.md)
-        -   [Test Components](/chapter1/further-develop-component/test-components.md)
+-   [Electrode Component](chapter1/quick-start/further-develop-component.md)
+    -   [Low-Level Components](/chapter1/further-develop-component/low-level-components.md)
+    -   [Component Helpers](/chapter1/further-develop-component/component-helpers.md)
+    -   [Develop Styles](/chapter1/further-develop-component/develop-styles.md)
+    -   [Develop Main Component](chapter1/further-develop-component/develop-main-component.md)
+    -   [Add Components to Demo App](/chapter1/further-develop-component/add-to-demo-app.md)
+    -   [Build and Demo](/chapter1/further-develop-component/build-and-demo.md)
+    -   [Test Components](/chapter1/further-develop-component/test-components.md)
 
 ### Intermediate
 

@@ -2,38 +2,17 @@
 
 ## Quick Guide
 
+If you have not done so yet, please check [Requirements](/overview/requirements.md) for setting up your development environment. Use the following instructions as a guide for creating your Electrode component.
+
 ```bash
-$ npm install -g yo generator-electrode xclap-cli
 $ yo electrode:component
 ```
 
-Fill out information for you component. You can press enter for all the defaults, except specifying a name for you component.
+Fill out the information for your component. You can press enter for all the defaults, except for specifying a name for your component.
 
 For example:
 
-```markdown
-$ yo electrode:component
-
-Welcome to the Electrode Component Generator
-
-We're going to set up a new Electrode component, ready for development with
-[xclap], webpack, demo, electrode component archetype, and live-reload
-? What is your Package/GitHub project name? (e.g., 'wysiwyg-component') your-component
-? What is the ClassName for your component?
-? What will be the npm package name?
-? What will be the GitHub organization username (e.g., 'walmartlabs')?
-? What is your name? (for copyright notice, etc.)
-? What is your GitHub Username?
-? Use double quotes or single quotes? "
-? What is the name of the GitHub repo where this will be published?
-? Would you like to create a new directory for your project? Yes
-    create .gitignore
-    create package.json
-    create README.md
-    create lerna.json
-    create packages/wysiwyg-component/.babelrc
-  ...
-```
+![Hello Electrode Component](/images/component-dev-started.png)
 
 After the installation finished, your new Electrode component is ready!
 
@@ -90,81 +69,36 @@ Now open [localhost:3000](http://localhost:3000/) in your browser to access the 
 
 The new electrode component is applied by Lerna structure, which can help manage multiple repos within your packages directory.
 
-## Packages
-
-Your component source code is in `packages/<componentName>/src` and test code is in `packages/<componentName>/test`. You can use JSX and ES6 syntax freely in your component source; it will be transpiled to lib with Babel before being published to npm so that your users will simply be able to include it.
-
-Here is the layout of packages/<componentName>:
-
 ```markdown
-└── packages
-    └── <componentName>
-        ├── README.md
-        ├── xclap.js
-        ├── package.json
-        ├── demo
-        │   ├── examples
-        │   │   └── test-component.example
-        │   ├── demo.css
-        │   ├── demo.jsx
-        ├── src
-        │   ├── components
-        │   │   └── test-component.jsx
-        │   ├── index.js
-        │   ├── lang
-        │   │   ├── default-messages.js
-        │   │   ├── en.json
-        │   │   └── tenants
-        │   │       └── electrodeio
-        │   │           └── default-messages.js
-        │   └── styles
-        │       └── test-component.css
-        └── test
-            └── client
-                └── components
-                    ├── helpers
-                    │   └── intl-enzyme-test-helper.js
-                    └── test-component.spec.jsx
+electrode-component
+    ├── demo-app
+    │   ├── LICENSE
+    │   ├── README.md
+    │   ├── config
+    │   ├── xclap.js
+    │   ├── src
+    │   │   ├── client
+    │   │   └── server
+    │   └── test
+    │       ├── client
+    │       └── server
+    └── packages
+        └── <componentName>
+            ├── README.md
+            ├── xclap.js
+            ├── package.json
+            ├── demo
+            ├── src
+            │   ├── components
+            │   ├── index.js
+            │   ├── lang
+            │   └── styles
+            └── test
+                └── client
 ```
 
-## Demo Application
-
-`demo-app` is a full stack Electrode Application, which used for developing and testing your `packages/<component>`. You need to import your `packages/<component>` to demo-app, explore and personalize this web application there.
-
-Here is the layout of demo-app:
-
-```markdown
-├── demo-app
-│   ├── LICENSE
-│   ├── README.md
-│   ├── config
-│   │   ├── default.js
-│   │   ├── development.json
-│   │   ├── production.js
-│   │   └── production.json
-│   ├── xclap.js
-│   ├── package.json
-│   ├── src
-│   │   ├── client
-│   │   │   ├── actions
-│   │   │   │   └── index.jsx
-│   │   │   ├── app.jsx
-│   │   │   ├── components
-│   │   │   │   └── home.jsx
-│   │   │   ├── images
-│   │   │   │   └── electrode.png
-│   │   │   ├── reducers
-│   │   │   │   └── index.jsx
-│   │   │   ├── routes.jsx
-│   │   │   └── styles
-│   │   │       └── base.css
-│   │   └── server
-│   │       ├── index.js
-│   │       └── views
-│   │           └── index-view.jsx
-│   └── test
-│       ├── client
-│       │   └── components
-│       │       └── home.spec.jsx
-│       └── server
-```
+- `demo-app` - This directory is a full stack Electrode Application, which used for developing and testing your `packages/<componentName>`. You need to import your `packages/<componentName>` to demo-app, explore and personalize this web application there.
+- `packages/<componentName>/xclap.js` - Entry to Electrode archetype tasks
+- `packages/<componentName>/demo` - Contains examples for how to demo your component
+- `packages/<componentName>/src` - Contains your component source code
+- `packages/<componentName>/test` - Contains unit tests for your component

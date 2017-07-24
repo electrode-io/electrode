@@ -2,12 +2,13 @@
 
 ## Quick Guide
 
+If you have not done so yet, please check [Requirements](/overview/requirements.md) for setting up your development environment. Use the following instructions as a guide for creating your Electrode app.
+
 ```bash
-$ npm install -g yo generator-electrode xclap-cli
 $ yo electrode
 ```
 
-Fill out information for you app.  You can press enter for all the defaults, except specifying a name for you app.
+Fill out the information for your app. You can press enter for all the defaults, except for specifying a name for your app.
 
 For example:
 
