@@ -433,4 +433,153 @@ describe("Test electrode-react-webapp", () => {
         });
     });
   });
+
+  it("should add a nonce value, if configuration specifies a path and a value is present", () => {
+    configOptions.cspNonceValue = { script: "plugins.cspPlugin.nonceValue" };
+    function cspPlugin(server, options, next) {
+      server.ext('onRequest', (request, reply) => {
+          request.plugins.cspPlugin = {
+            nonceValue: '==ABCD'
+          };
+          return reply.continue();
+      });
+      next();
+    }
+    cspPlugin.attributes = {
+      name: 'cspPlugin'
+    };
+
+    return electrodeServer(config).then(server => {
+      // Add a trivial csp generator for testing purposes.
+      server.register(cspPlugin);
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .then(res => {
+          expect(res.result).to.contain("<script nonce=\"==ABCD\">console.log('Hello');</script>");
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
+  it("should add a nonce value as provided by a function in the config", () => {
+    configOptions.cspNonceValue = function (request, type) {
+      return `==${type}`;
+    };
+
+    return electrodeServer(config).then(server => {
+       return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .then(res => {
+          expect(res.result).to.contain("<script nonce=\"==script\">console.log('Hello');</script>");
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
+  it("should not add a nonce value, if configuration specifies a path and no value present", () => {
+    configOptions.cspNonceValue = { script: "plugins.cspPlugin.nonceValue" };
+    function cspPlugin(server, options, next) {
+      server.ext('onRequest', (request, reply) => {
+          request.plugins.cspPlugin = {};
+          return reply.continue();
+      });
+      next();
+    }
+    cspPlugin.attributes = {
+      name: 'cspPlugin'
+    };
+
+    return electrodeServer(config).then(server => {
+      // Add a trivial csp generator for testing purposes.
+      server.register(cspPlugin);
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .then(res => {
+          expect(res.result).to.contain("<script>console.log('Hello');</script>");
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
+  it("should inject critical css with a nonce value when provided", () => {
+    configOptions.criticalCSS = "test/data/critical.css";
+    configOptions.cspNonceValue = { style: "plugins.cspPlugin.nonceValue" };
+    function cspPlugin(server, options, next) {
+      server.ext('onRequest', (request, reply) => {
+          request.plugins.cspPlugin = {
+            nonceValue: '==ABCD'
+          };
+          return reply.continue();
+      });
+      next();
+    }
+    cspPlugin.attributes = {
+      name: 'cspPlugin'
+    };
+
+    return electrodeServer(config).then(server => {
+      // Add a trivial csp generator for testing purposes.
+      server.register(cspPlugin);
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .then(res => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.result).to.contain("<style nonce=\"==ABCD\">body {color: green;}\n</style>");
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
+  it("should inject critical css with a nonce value provided by a function", () => {
+    configOptions.criticalCSS = "test/data/critical.css";
+    configOptions.cspNonceValue = function (request, type) {
+      return `==${type}`;
+    };
+
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .then(res => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.result).to.contain("<style nonce=\"==style\">body {color: green;}\n</style>");
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
 });
