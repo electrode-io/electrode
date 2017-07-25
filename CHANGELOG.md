@@ -1,3 +1,54 @@
+# 7/25/2017
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-react-app@3.1.7 `(3.1.6 => 3.1.7)`
+-   electrode-archetype-react-app-dev@3.1.7 `(3.1.6 => 3.1.7)`
+-   electrode-archetype-react-component@3.0.4 `(3.0.3 => 3.0.4)`
+-   electrode-archetype-react-component-dev@3.0.4 `(3.0.3 => 3.0.4)`
+-   electrode-react-webapp@1.8.0 `(1.7.2 => 1.8.0)`
+-   electrode-redux-router-engine@1.4.6 `(1.4.5 => 1.4.6)`
+
+### Lerna Updated
+
+-   electrode-webpack-reporter@0.3.11 `(0.3.10 => 0.3.11)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   lock to wds@2.5.1 ([#496](https://github.com/electrode-io/electrode/pull/496)) [commit](http://github.com/electrode-io/electrode/commit/abcc399d5f3a83fde9950810289b8ae6ec3f9149)
+    -   Fix the inclusion of test/ directory as part of code coverage reporting ([#487](https://github.com/electrode-io/electrode/pull/487)) [commit](http://github.com/electrode-io/electrode/commit/18c101ac730dafb7005ffdc5a4dc3578c27c0a15)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   lock to wds@2.5.1 ([#497](https://github.com/electrode-io/electrode/pull/497)) [commit](http://github.com/electrode-io/electrode/commit/a1728b2bbe14fe06ef2186ceba6b04fed4e63970)
+    -   fix deprecate warnings ([#472](https://github.com/electrode-io/electrode/pull/472)) [commit](http://github.com/electrode-io/electrode/commit/bbdad5ee55df62079c5a20ab50fc023179a8cb04)
+
+-   `packages/electrode-react-webapp`
+
+    -   [minor][feat] Allow inline scripts to be marked with a nonce for CSP protection ([#486](https://github.com/electrode-io/electrode/pull/486)) [commit](http://github.com/electrode-io/electrode/commit/08f3f6ff6ad1e95f23407f708a4ea1829c3a9356)
+
+-   `packages/electrode-redux-router-engine`
+
+    -   [patch][bug] state should be preloaded after renderToString. ([#481](https://github.com/electrode-io/electrode/pull/481)) [commit](http://github.com/electrode-io/electrode/commit/2a7e39704edd175b274766f12dc8d1c0814aa0bc)
+
+-   `samples/demo-component`
+
+    -   fix deprecate warnings ([#472](https://github.com/electrode-io/electrode/pull/472)) [commit](http://github.com/electrode-io/electrode/commit/bbdad5ee55df62079c5a20ab50fc023179a8cb04)
+
+-   `.vscode`
+
+    -   removed vscode plugin settings ([#476](https://github.com/electrode-io/electrode/pull/476)) [commit](http://github.com/electrode-io/electrode/commit/b5b2a84e23bb9790cd8d726179f5bd3d94fcce5f)
+
+-   `docs`
+
+    -   [docs] Fix broken Add Routes link ([#488](https://github.com/electrode-io/electrode/pull/488)) [commit](http://github.com/electrode-io/electrode/commit/24ea88f9911d0cc369a2d526b793361d614dc04b)
+    -   Spell mistake - Sacling -> Scaling ([#482](https://github.com/electrode-io/electrode/pull/482)) [commit](http://github.com/electrode-io/electrode/commit/ee21eb4dc8e1d079e84eab82daa7c087f251c92c)
+    -   [patch] Update official gitbook docs ([#477](https://github.com/electrode-io/electrode/pull/477)) [commit](http://github.com/electrode-io/electrode/commit/465b02cc9f74ffe9bd662dbc99fdc80329f67d21)
+
 # 7/10/2017
 
 ## Packages
@@ -103,7 +154,7 @@
 
 -   `docs`
 
-    -   [chore]: update docs quick guide [commit](http://github.com/electrode-io/electrode/commit/5db747ff12bc0f2b3c2dea1eb9475634799608fc)
+    -   [chore]&#x3A; update docs quick guide [commit](http://github.com/electrode-io/electrode/commit/5db747ff12bc0f2b3c2dea1eb9475634799608fc)
 
 # 6/29/2017
 

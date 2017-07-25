@@ -9,19 +9,29 @@
     -   [Requirements](overview/requirements.md)
 
 ### Quick Start
+-   [Start With Electrode App](/chapter1/quick-start/start-with-app.md)
+-   [Start With Electrode Component](/chapter1/quick-start/start-with-component.md)
 
--   [Quick Start](chapter1/quick-start.md)
-    -   [Get Started](chapter1/quick-start/get-started.md)
-    -   [Build Component](chapter1/quick-start/build-component.md)
-    -   [Deploy Your App](chapter1/quick-start/deploy-your-app.md)
-    -   [What's Inside](chapter1/quick-start/whats-inside.md)
-    -   [What are Archetypes](chapter1/quick-start/what-are-archetypes.md)
+-   [Electrode App](chapter1/quick-start/further-develop-app.md)
+    -   [Build Component](/chapter1/further-develop-app/build-component.md)
+    -   [What's Inside](/chapter1/further-develop-app/whats-inside.md)
+    -   [Deploy Your App](/chapter1/further-develop-app/deploy-your-app.md)
+
+-   [Electrode Component](chapter1/quick-start/further-develop-component.md)
+    -   [Low-Level Components](/chapter1/further-develop-component/low-level-components.md)
+    -   [Component Helpers](/chapter1/further-develop-component/component-helpers.md)
+    -   [Develop Styles](/chapter1/further-develop-component/develop-styles.md)
+    -   [Develop Main Component](chapter1/further-develop-component/develop-main-component.md)
+    -   [Add Components to Demo App](/chapter1/further-develop-component/add-to-demo-app.md)
+    -   [Build and Demo](/chapter1/further-develop-component/build-and-demo.md)
+    -   [Test Components](/chapter1/further-develop-component/test-components.md)
 
 ### Intermediate
 
 -   [Intermediate](chapter1/Intermediate.md)
 -   [Application Archetype](/chapter1/intermediate/app-archetype/README.md)
 
+    -   [What are Archetypes](/chapter1/intermediate/app-archetype/what-are-archetypes.md)
     -   [Eslint Config](/chapter1/intermediate/app-archetype/eslint.md)
     -   [Webpack Config](/chapter1/intermediate/app-archetype/webpack-config.md)
     -   [Environment Variables](/chapter1/intermediate/app-archetype/env-vars.md)
@@ -30,18 +40,6 @@
 
     -   [Structure](/chapter1/intermediate/component-archetype/component-archetype-structure.md)
     -   [Webpack Config](/chapter1/intermediate/component-archetype/webpack-config.md)
-
--   [Create an Electrode Component](chapter1/intermediate/create-a-electrode-component.md)
-
-    -   [Component Generator Setup](/chapter1/intermediate/create-a-electrode-component/component-generator-setup.md)
-    -   [What's Inside](/chapter1/intermediate/create-a-electrode-component/what-is-inside.md)
-    -   [Low-Level Components](chapter1/intermediate/create-a-electrode-component/low-level-components.md)
-    -   [Component Helpers](chapter1/intermediate/create-a-electrode-component/component-helpers.md)
-    -   [Develop Styles](chapter1/intermediate/create-a-electrode-component/develop-styles.md)
-    -   [Develop Main Component](chapter1/intermediate/create-a-electrode-component/develop-main-component.md)
-    -   [Add Components to Demo App](chapter1/intermediate/create-a-electrode-component/add-to-demo-app.md)
-    -   [Build and Demo](chapter1/intermediate/create-a-electrode-component/build-and-demo.md)
-    -   [Test Components](chapter1/intermediate/create-a-electrode-component/test-components.md)
 
 -   [Build a Server Plugin](chapter1/intermediate/build-a-server-plugin.md)
 -   [React App Routes](chapter1/intermediate/react-routes/react-routes.md)

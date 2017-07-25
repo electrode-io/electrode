@@ -2,8 +2,6 @@
 
 Except for generating electrode application, Electrode also provides developers with generators that generate an electrode component. The Open source generator generator-electrode contains a component generator `yo electrode:component` and a generator specifically for adding more components to an existing repo `yo electrode:component-add`.
 
-* [Component Generator Setup](/chapter1/intermediate/create-a-electrode-component/component-generator-setup.md)
-* [What's Inside](/chapter1/intermediate/create-a-electrode-component/what-is-inside.md)
 * [Low-Level Components](/chapter1/intermediate/create-a-electrode-component/low-level-components.md)
 * [Component Helpers](/chapter1/intermediate/create-a-electrode-component/component-helpers.md)
 * [Develop Styles](/chapter1/intermediate/create-a-electrode-component/develop-styles.md)
