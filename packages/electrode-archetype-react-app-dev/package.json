@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-app-dev",
-  "version": "3.1.6",
+  "version": "3.1.7",
   "description": "Electrode NodeJS/React Application Archetype (Development)",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -49,7 +49,7 @@
     "electrode-bundle-analyzer": "^1.0.0",
     "electrode-cdn-file-loader": "^1.0.0",
     "electrode-electrify": "^1.0.0",
-    "electrode-webpack-reporter": "^0.3.10",
+    "electrode-webpack-reporter": "^0.3.11",
     "eslint": "^3.9.1",
     "eslint-config-walmart": "^1.1.0",
     "eslint-plugin-filenames": "^1.1.0",
