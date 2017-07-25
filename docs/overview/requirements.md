@@ -1,6 +1,6 @@
 # Requirements
 
-First, let's quickly check your development environment. You will need to have the following set up to generate and deploy your awesome Electrode app in under five minutes:
+First, let's quickly check your development environment. You will need to have the following set up to generate and deploy your Electrode app|component in under five minutes:
 
 ## For Development On Your Local machine
 
@@ -9,11 +9,15 @@ First, let's quickly check your development environment. You will need to have t
 2.  Install latest (v3) of [npm](https://www.npmjs.com/) with `npm install -g npm`.
     -   Note: NodeJS v6.x already comes with npm@3 by default.
     -   **Electrode requires npm version >= 3**
-3.  Install [xclap] with `npm install -g xclap-cli`.
-4.  The text editor of your choice downloaded with CLI tools installed.
+3.  Install [yo] with `npm install -g yo`.
+4.  Install [generator-electrode] with `npm install -g generator-electrode`.
+5.  Install [xclap] with `npm install -g xclap-cli`.
+6.  The text editor of your choice downloaded with CLI tools installed.
 
 > **We write NodeJS code with ES6 features that NodeJS >= 4.2 supports.**
 >
+> yo is a generic scaffolding system allowing the creation of any kind of app.
+> generator-electrode is a generator for Universal React App with NodeJS backend or a React component with useful clap tasks for development, building and publishing.
 > xclap is a Javascript build tool that lets us automate tasks.
 
 ## For Online Deployments
