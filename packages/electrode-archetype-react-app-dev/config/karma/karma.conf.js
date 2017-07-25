@@ -4,7 +4,7 @@ const Path = require("path");
 
 const webpackCfg = require("../webpack/webpack.config.test");
 
-const MAIN_PATH = require.resolve("./entry.js");
+const MAIN_PATH = webpackCfg.entry;
 
 const PREPROCESSORS = {};
 
