@@ -6,7 +6,7 @@ Meanwhile, in the [new electrode components](/chapter1/intermediate/create-a-ele
 
 Below is the new structure of the Electrode React Component Archetype:
 
-```text
+```markdown
 - electrode-archetype-react-component
   |- config/
   |  |- babel
