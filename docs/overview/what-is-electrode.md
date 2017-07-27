@@ -4,7 +4,7 @@
 
 ## Core: Quick, Easy, and Scale
 
-Electrode Core allows you to start building a large scale Universal React/Node.js application in minutes, with support for server side rendering, easy deployment, and sacling up to teams with hundred of developers.
+Electrode Core allows you to start building a large scale Universal React/Node.js application in minutes, with support for server side rendering, easy deployment, and scaling up to teams with hundred of developers.
 
 The heart of the platform is the [Electrode Archetype System](/chapter1/quick-start/what-are-archetypes.md), which allows for a standardized configuration, structure and workflow throughout the entire application. By enforcing a sensible structure and consistency for components, modules and the entire app, Electrode’s Archetype system helps you build scalable applications you can trust while ensuring streamlined development and deployment.
 

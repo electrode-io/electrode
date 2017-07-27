@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { IntlProvider } from "react-intl";
 
 import { DemoComponent } from "demo-component";
-import electrodePng from "../images/electrode.png";
 
 const locale = "en";
 

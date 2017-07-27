@@ -280,4 +280,21 @@ describe("redux-router-engine", function () {
     });
     return test().then(() => test());
   });
+
+  it("should have state preloaded after rendering", () => {
+    const req = {
+      path: "/test-redux",
+      method: "get",
+      log: () => {
+      },
+      app: {},
+      url: {}
+    };
+
+    const engine = new ReduxRouterEngine({ routes, createReduxStore, routesHandlerPath: Path.join(__dirname, "..") });
+
+    return engine.render(req).then((result) => {
+      expect(result.prefetch).include("1");
+    });
+  });
 });

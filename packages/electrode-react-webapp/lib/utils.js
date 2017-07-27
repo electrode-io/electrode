@@ -86,10 +86,16 @@ function getIconStats(iconStatsPath) {
   });
 }
 
-function getCriticalCSS(filePath) {
-  return readFileSafe(filePath).then(criticalCSS => {
-    return criticalCSS.length ? `<style>${criticalCSS}</style>` : "";
-  });
+function getCriticalCSS(path, nonceValue) {
+  const paddedNonce = nonceValue ? ` nonce="${nonceValue}"` : "";
+
+  const criticalCSSPath = Path.resolve(process.cwd(), path);
+  try {
+    const criticalCSS = fs.readFileSync(criticalCSSPath).toString();
+    return `<style${paddedNonce}>${criticalCSS}</style>`;
+  } catch (err) {
+    return "";
+  }
 }
 
 /**
