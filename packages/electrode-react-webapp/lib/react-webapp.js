@@ -4,11 +4,8 @@ const _ = require("lodash");
 const Promise = require("bluebird");
 const fs = require("fs");
 const Path = require("path");
+const Helmet = require("react-helmet").Helmet;
 const groupScripts = require("./group-scripts");
-const stringReplaceAsync = require("string-replace-async");
-const processCustomToken = require("./custom-tokens");
-
-const TOKEN_REGEX = /{{[A-Z_~\.\/-]*}}/gi;
 
 const CONTENT_MARKER = "{{SSR_CONTENT}}";
 const HEADER_BUNDLE_MARKER = "{{WEBAPP_HEADER_BUNDLES}}";
@@ -24,6 +21,8 @@ const utils = require("./utils");
 
 const resolveChunkSelector = utils.resolveChunkSelector;
 const loadAssetsFromStats = utils.loadAssetsFromStats;
+const getIconStats = utils.getIconStats;
+const getCriticalCSS = utils.getCriticalCSS;
 const getStatsPath = utils.getStatsPath;
 
 const resolvePath = path => (!Path.isAbsolute(path) ? Path.resolve(path) : path);
@@ -37,7 +36,7 @@ function makeRouteHandler(routeOptions, userContent) {
   const devBundleBase = routeOptions.__internals.devBundleBase;
   const prodBundleBase = routeOptions.prodBundleBase;
   const chunkSelector = routeOptions.__internals.chunkSelector;
-  const replaceTokenCallback = routeOptions.replaceToken;
+  const iconStats = getIconStats(routeOptions.iconStats);
 
   /* Create a route handler */
   /* eslint max-statements: [2, 35] */
@@ -53,6 +52,18 @@ function makeRouteHandler(routeOptions, userContent) {
       }
     }
 
+    let cspScriptNonce;
+    let cspStyleNonce;
+    if (typeof routeOptions.cspNonceValue === "function") {
+      cspScriptNonce = routeOptions.cspNonceValue(options.request, "script");
+      cspStyleNonce = routeOptions.cspNonceValue(options.request, "style");
+    } else {
+      const nonceObject = routeOptions.cspNonceValue || {};
+      cspScriptNonce = _.get(options.request, nonceObject.script, undefined);
+      cspStyleNonce = _.get(options.request, nonceObject.style, undefined);
+    }
+    const criticalCSS = getCriticalCSS(routeOptions.criticalCSS, cspStyleNonce);
+
     const chunkNames = chunkSelector(options.request);
     const devCSSBundle = chunkNames.css
       ? `${devBundleBase}${chunkNames.css}.style.css`
@@ -62,6 +73,7 @@ function makeRouteHandler(routeOptions, userContent) {
       : `${devBundleBase}bundle.dev.js`;
     const jsChunk = _.find(assets.js, asset => _.includes(asset.chunkNames, chunkNames.js));
     const cssChunk = _.find(assets.css, asset => _.includes(asset.chunkNames, chunkNames.css));
+    const paddedNonce = cspScriptNonce ? ` nonce="${cspScriptNonce}"` : "";
 
     const bundleCss = () => {
       return WEBPACK_DEV ? devCSSBundle : (cssChunk && `${prodBundleBase}${cssChunk.name}`) || "";
@@ -101,23 +113,23 @@ function makeRouteHandler(routeOptions, userContent) {
         .map(
           x =>
             typeof x === "string"
-              ? `<script>${x}</script>\n`
+              ? `<script${paddedNonce}>${x}</script>\n`
               : x.map(n => `<script src="${n.src}"></script>`).join("\n")
         )
         .join("\n");
     };
 
-    const makeHeaderBundles = () => {
+    const makeHeaderBundles = helmet => {
       const manifest = bundleManifest();
       const manifestLink = manifest ? `<link rel="manifest" href="${manifest}" />\n` : "";
       const css = bundleCss();
-      return utils.getCriticalCSS(routeOptions.criticalCSS).then(criticalCSS => {
-        const cssLink = css && !criticalCSS ? `<link rel="stylesheet" href="${css}" />` : "";
-        const htmlScripts = htmlifyScripts(
-          groupScripts(routeOptions.unbundledJS.enterHead).scripts
-        );
-        return `${manifestLink}${cssLink}${htmlScripts}`;
-      });
+      const cssLink = css && !criticalCSS ? `<link rel="stylesheet" href="${css}" />` : "";
+      const scriptsFromHelmet = ["link", "style", "script", "noscript"]
+        .map(tagName => helmet[tagName].toString())
+        .join("");
+
+      const htmlScripts = htmlifyScripts(groupScripts(routeOptions.unbundledJS.enterHead).scripts);
+      return `${manifestLink}${cssLink}${htmlScripts}\n${scriptsFromHelmet}`;
     };
 
     const makeBodyBundles = () => {
@@ -132,74 +144,37 @@ function makeRouteHandler(routeOptions, userContent) {
       return `${htmlScripts}`;
     };
 
+    const emptyTitleRegex = /<title[^>]*><\/title>/;
+
+    const makeTitle = helmet => {
+      const helmetTitleScript = helmet.title.toString();
+      const helmetTitleEmpty = helmetTitleScript.match(emptyTitleRegex);
+
+      return helmetTitleEmpty ? `<title>${routeOptions.pageTitle}</title>` : helmetTitleScript;
+    };
+
     const renderPage = content => {
-      const renderContext = {
-        request: options.request,
-        routeOptions,
-        options,
-        content
-      };
+      const helmet = Helmet.renderStatic();
 
-      const replaceBuiltInToken = (token, getDefaultValue) => {
-        let replacePromise;
-        // The replaceTokenCallback is expected to return a Promise that
-        // resolves to the replacement string
-        if (_.isFunction(replaceTokenCallback)) {
-          const replacement = replaceTokenCallback(
-            utils.stripTokenDelimiters(token),
-            renderContext,
-            getDefaultValue
-          );
-          if (utils.isPromise(replacement)) {
-            replacePromise = replacement;
-          } else if (_.isString(replacement)) {
-            replacePromise = Promise.resolve(replacement);
-          } else {
-            replacePromise = getDefaultValue();
-          }
-        } else {
-          replacePromise = getDefaultValue();
-        }
-        return replacePromise.then(value => value || "");
-      };
-
-      const processBuiltInToken = token => {
-        switch (token) {
+      return html.replace(/{{[A-Z_]*}}/g, m => {
+        switch (m) {
           case CONTENT_MARKER:
-            return replaceBuiltInToken(CONTENT_MARKER, () => Promise.resolve(content.html || ""));
+            return content.html || "";
           case TITLE_MARKER:
-            return replaceBuiltInToken(TITLE_MARKER, () =>
-              Promise.resolve(`<title>${routeOptions.pageTitle}</title>`)
-            );
+            return makeTitle(helmet);
           case HEADER_BUNDLE_MARKER:
-            return replaceBuiltInToken(HEADER_BUNDLE_MARKER, makeHeaderBundles);
+            return makeHeaderBundles(helmet);
           case BODY_BUNDLE_MARKER:
-            return replaceBuiltInToken(BODY_BUNDLE_MARKER, () =>
-              Promise.resolve(makeBodyBundles())
-            );
+            return makeBodyBundles();
           case PREFETCH_MARKER:
-            return replaceBuiltInToken(PREFETCH_MARKER, () =>
-              Promise.resolve(`<script>${content.prefetch}</script>`)
-            );
+            return `<script${paddedNonce}>${content.prefetch}</script>`;
           case META_TAGS_MARKER:
-            return replaceBuiltInToken(META_TAGS_MARKER, () =>
-              utils.getIconStats(routeOptions.iconStats)
-            );
+            return helmet.meta.toString() + iconStats;
           case CRITICAL_CSS_MARKER:
-            return replaceBuiltInToken(CRITICAL_CSS_MARKER, () =>
-              utils.getCriticalCSS(routeOptions.criticalCSS)
-            );
+            return criticalCSS;
           default:
-            return `Unknown token ${token}`;
+            return `Unknown marker ${m}`;
         }
-      };
-
-      return stringReplaceAsync(html, TOKEN_REGEX, token => {
-        if (token.startsWith("{{~")) {
-          return processCustomToken(token, renderContext);
-        }
-
-        return processBuiltInToken(token);
       });
     };
 
@@ -236,7 +211,8 @@ const setupOptions = options => {
     iconStats: "dist/server/iconstats.json",
     criticalCSS: "dist/js/critical.css",
     buildArtifacts: ".build",
-    prodBundleBase: "/js/"
+    prodBundleBase: "/js/",
+    cspNonceValue: undefined
   };
 
   const pluginOptions = _.defaultsDeep({}, options, pluginOptionsDefaults);

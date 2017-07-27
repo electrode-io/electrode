@@ -5,8 +5,6 @@ const Promise = require("bluebird");
 const fs = require("fs");
 const Path = require("path");
 
-/* eslint-disable no-magic-numbers */
-
 /**
  * Tries to import bundle chunk selector function if the corresponding option is set in the
  * webapp plugin configuration. The function takes a `request` object as an argument and
@@ -61,35 +59,30 @@ function loadAssetsFromStats(statsPath) {
     .catch(() => ({}));
 }
 
-function readFileSafe(filePath) {
-  return new Promise(resolve => {
-    fs.readFile(Path.resolve(filePath), (err, data) => {
-      if (err) return resolve("");
-      return resolve(data.toString());
-    });
-  });
-}
-
 function getIconStats(iconStatsPath) {
   let iconStats;
-
-  return readFileSafe(iconStatsPath).then(contents => {
-    try {
-      iconStats = JSON.parse(contents);
-    } catch (err) {
-      return "";
-    }
-    if (iconStats && iconStats.html) {
-      return iconStats.html.join("");
-    }
-    return iconStats;
-  });
+  try {
+    iconStats = fs.readFileSync(Path.resolve(iconStatsPath)).toString();
+    iconStats = JSON.parse(iconStats);
+  } catch (err) {
+    return "";
+  }
+  if (iconStats && iconStats.html) {
+    return iconStats.html.join("");
+  }
+  return iconStats;
 }
 
-function getCriticalCSS(filePath) {
-  return readFileSafe(filePath).then(criticalCSS => {
-    return criticalCSS.length ? `<style>${criticalCSS}</style>` : "";
-  });
+function getCriticalCSS(path, nonceValue) {
+  const paddedNonce = nonceValue ? ` nonce="${nonceValue}"` : "";
+
+  const criticalCSSPath = Path.resolve(process.cwd(), path);
+  try {
+    const criticalCSS = fs.readFileSync(criticalCSSPath).toString();
+    return `<style${paddedNonce}>${criticalCSS}</style>`;
+  } catch (err) {
+    return "";
+  }
 }
 
 /**
@@ -107,25 +100,10 @@ function getStatsPath(statsFilePath, buildArtifactsPath) {
     : statsFilePath;
 }
 
-// Strip the {{}} delimiters off the token
-function stripTokenDelimiters(token) {
-  return _.trimEnd(_.trimStart(token, ["{", "~"]), ["}"]);
-}
-
-function isPromise(obj) {
-  return (
-    !!obj &&
-    (typeof obj === "object" || typeof obj === "function") &&
-    typeof obj.then === "function"
-  );
-}
-
 module.exports = {
   resolveChunkSelector,
   loadAssetsFromStats,
   getIconStats,
   getCriticalCSS,
-  getStatsPath,
-  stripTokenDelimiters,
-  isPromise
+  getStatsPath
 };
