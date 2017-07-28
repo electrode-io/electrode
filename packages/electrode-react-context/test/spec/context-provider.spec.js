@@ -1,3 +1,5 @@
+"use strict";
+
 const React = require("react");
 const PropTypes = require("prop-types");
 const ReactDOMServer = require("react-dom/server");
