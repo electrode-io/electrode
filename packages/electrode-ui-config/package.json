@@ -1,0 +1,39 @@
+{
+  "name": "electrode-ui-config",
+  "version": "4.0.1",
+  "description": "Isomorphic UI config",
+  "main": "lib/index.js",
+  "browser": "lib/csindex.js",
+  "scripts": {
+    "test": "clap check",
+    "format": "prettier --write --print-width 100 *.js `find . -type d -d 1 -exec echo '{}/**/*.js' \\; | egrep -v '(/node_modules/|/dist/|/coverage/)'`"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electrode-io/electrode.git"
+  },
+  "keywords": [],
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "electrode-archetype-njs-module-dev": "^2.2.0"
+  },
+  "dependencies": {
+    "bluebird": "^2.11.0",
+    "lodash": "^4.13.1"
+  },
+  "nyc": {
+    "all": true,
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "exclude": [
+      "coverage",
+      "*clap.js",
+      "gulpfile.js",
+      "dist",
+      "test"
+    ]
+  }
+}
