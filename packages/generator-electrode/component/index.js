@@ -177,40 +177,41 @@ module.exports = class extends Generator {
     lernaStructure: {
       // Copy lerna and top level templates
       if (!this.isAddon) {
-        this.copy("gitignore", ".gitignore");
-        this.template("_package.json", "package.json");
-        this.template("_readme.md", "README.md");
-        this.template("lerna.json", "lerna.json");
+        this.fs.copy(this.templatePath("gitignore"), this.destinationPath(".gitignore"));
+        this.fs.copy(this.templatePath("_package.json"), this.destinationPath("package.json"));
+        this.fs.copy(this.templatePath("_readme.md"), this.destinationPath("README.md"));
+        this.fs.copy(this.templatePath("lerna.json"), this.destinationPath("lerna.json"));
       }
     }
 
     project: {
-      this.copy("packages/component/babelrc", this.rootPath + ".babelrc");
-      this.copy("packages/component/gitignore", this.rootPath + ".gitignore");
-      this.copy("packages/component/npmignore", this.rootPath + ".npmignore");
-      this.copy("packages/component/editorconfig", this.rootPath + ".editorconfig");
+      this.fs.copy(this.templatePath("packages/component/babelrc"), this.destinationPath(".babelrc"));
+      this.fs.copy(this.templatePath("packages/component/gitignore"), this.destinationPath(".gitignore"));
+      this.fs.copy(this.templatePath("packages/component/npmignore"), this.destinationPath(".npmignore"));
+      this.fs.copy(this.templatePath("packages/component/editorconfig"), this.destinationPath(".editorconfig"));
+      this.fs.copy(this.templatePath("packages/component/_xclap.js"), this.destinationPath("xclap.js"));
+      this.fs.copy(this.templatePath("packages/component/_package.json"), this.destinationPath("package.json"));
+      this.fs.copy(this.templatePath("packages/component/_readme.md"), this.destinationPath("README.md"));
+
       if (this.quoteType === "'") {
-        this.template("packages/component/eslintrc", this.rootPath + ".eslintrc");
+        this.fs.copy(this.templatePath("packages/component/eslintrc"), this.destinationPath(".eslintrc"));
       }
-      this.template("packages/component/_xclap.js", this.rootPath + "xclap.js");
-      this.template("packages/component/_package.json", this.rootPath + "package.json");
-      this.template("packages/component/_readme.md", this.rootPath + "README.md");
     }
 
     component: {
-      this.template(
-        "packages/component/src/components/_component.jsx",
-        this.rootPath + "src/components/" + this.projectName + ".jsx"
+      this.fs.copy(
+        this.templatePath("packages/component/src/components/_component.jsx"),
+        this.destinationPath(this.rootPath + "src/components/" + this.projectName + ".jsx")
       );
 
-      this.template(
-        "packages/component/src/styles/_component.css",
-        this.rootPath + "src/styles/" + this.projectName + ".css"
+      this.fs.copy(
+        this.templatePath("packages/component/src/styles/_component.css"),
+        this.destinationPath(this.rootPath + "src/styles/" + this.projectName + ".css")
       );
 
-      this.template(
-        "packages/component/demo/examples/_component.example",
-        this.rootPath + "demo/examples/" + this.projectName + ".example"
+      this.fs.copy(
+        this.templatePath("packages/component/demo/examples/_component.example"),
+        this.destinationPath(this.rootPath + "demo/examples/" + this.projectName + ".example")
       );
 
       this.fs.copyTpl(
@@ -225,41 +226,41 @@ module.exports = class extends Generator {
         {packageName: this.projectName}
       );
 
-      this.template(
-        "packages/component/src/lang/_DefaultMessages.js",
-        this.rootPath + "src/lang/default-messages.js"
-      );
-      
-      this.template(
-        "packages/component/src/lang/_en.json",
-        this.rootPath + "src/lang/en.json"
+      this.fs.copy(
+        this.templatePath("packages/component/src/lang/_DefaultMessages.js"),
+        this.destinationPath(this.rootPath + "src/lang/default-messages.js")
       );
 
-      this.template(
-        "packages/component/src/lang/tenants/electrodeio/_defaultMessages.js",
-        this.rootPath + "src/lang/tenants/electrodeio/default-messages.js"
+      this.fs.copy(
+        this.templatePath("packages/component/src/lang/_en.json"),
+        this.destinationPath(this.rootPath + "src/lang/en.json")
       );
 
-      this.template(
-        "packages/component/src/_Component.js",
-        this.rootPath + "src/index.js"
+      this.fs.copy(
+        this.templatePath("packages/component/src/lang/tenants/electrodeio/_defaultMessages.js"),
+        this.destinationPath(this.rootPath + "src/lang/tenants/electrodeio/default-messages.js")
+      );
+
+      this.fs.copy(
+        this.templatePath("packages/component/src/_Component.js"),
+        this.destinationPath(this.rootPath + "src/index.js")
       );
     }
 
     test: {
-      this.template(
-        "packages/component/test/client/eslintrc",
-        this.rootPath + "test/client/.eslintrc"
+      this.fs.copy(
+        this.templatePath("packages/component/test/client/eslintrc"),
+        this.destinationPath(this.rootPath + "test/client/.eslintrc")
       );
 
-      this.template(
-        "packages/component/test/client/components/_component.spec.jsx",
-        this.rootPath + "test/client/components/" + this.projectName + ".spec.jsx"
+      this.fs.copy(
+        this.templatePath("packages/component/test/client/components/_component.spec.jsx"),
+        this.destinationPath(this.rootPath + "test/client/components/" + this.projectName + ".spec.jsx")
       );
 
-      this.copy(
-        "packages/component/test/client/components/helpers/_intlEnzymeTestHelper.js",
-        this.rootPath + "test/client/components/helpers/intl-enzyme-test-helper.js"
+      this.fs.copy(
+        this.templatePath("packages/component/test/client/components/helpers/_intlEnzymeTestHelper.js"),
+        this.destinationPath(this.rootPath + "test/client/components/helpers/intl-enzyme-test-helper.js")
       );
     }
 
