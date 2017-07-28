@@ -1,6 +1,6 @@
 {
   "name": "electrode-ui-logger",
-  "version": "4.0.0",
+  "version": "1.0.0",
   "description": "Electrode Logging Utility for UI code",
   "main": "./lib/index.js",
   "browser": "./lib/csindex.js",
@@ -9,27 +9,38 @@
     "test": "test"
   },
   "scripts": {
-    "test": "xclap check",
-    "coverage": "builder run check",
-    "prepublish": "builder run check"
+    "test": "clap check",
+    "format": "prettier --write --print-width 100 *.js `find . -type d -d 1 -exec echo '{}/**/*.js' \\; | egrep -v '(/node_modules/|/dist/|/coverage/)'`"
   },
   "repository": {
     "type": "git",
-    "url": "git@gecgithub01.walmart.com:electrode/electrode-ui-logger.git"
+    "url": "https://github.com/electrode-io/electrode.git"
   },
-  "license": "UNLICENSED",
+  "keywords": [],
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "electrode-archetype-njs-module-dev": "^2.2.0"
+  },
   "dependencies": {
-    "@walmart/electrode-fetch": "^6.0.0",
-    "@walmart/electrode-logging": "^3.1.5",
+    "electrode-ui-config": "^1.0.0",
     "json-stringify-safe": "^5.0.1",
     "lodash.keys": "^4.2.0",
-    "lodash.omit": "^4.5.0"
+    "lodash.omit": "^4.5.0",
+    "whatwg-fetch": "^2.0.3"
   },
-  "devDependencies": {
-    "@walmart/electrode-archetype-hapi-plugin-dev": "^2.0.0",
-    "babel-loader": "^7.1.0",
-    "bluebird": "^2.10.2",
-    "builder": "^3.1.0",
-    "webpack": "^3.0.0"
+  "nyc": {
+    "all": true,
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "exclude": [
+      "coverage",
+      "*clap.js",
+      "gulpfile.js",
+      "dist",
+      "test"
+    ]
   }
 }

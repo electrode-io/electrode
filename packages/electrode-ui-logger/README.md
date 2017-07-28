@@ -2,13 +2,7 @@
 
 Log well and prosper. Happy Logging!
 
-Lead Maintainer: [Andy Pham](https://gecgithub01.walmart.com/apham)
-
 This is a logger for UI code with an Electrode server as backend support.
-
-It requires the [electrode-logging] module and the API from [electrode-log-consumer] to work.
-
-If you are using [electrode-server], then the [electrode-logging] and the [electrode-log-consumer] API should've been setup in your backend automatically.
 
 When your UI code is running on the browser, the logger will save up your logs and send them to the log API `{basePath}/api/logger` every **10** seconds.
 
@@ -17,7 +11,7 @@ When your UI code is running on the server for SSR, the logger will call `reques
 # Install
 
 ```bash
-$ npm install @walmart/electrode-ui-logger --save
+$ npm install electrode-ui-logger --save
 ```
 
 # Logger usage
@@ -25,7 +19,7 @@ $ npm install @walmart/electrode-ui-logger --save
 The logging interface provides a simple api for generating developer logs.
 
 ```js
-import logger from "@walmart/electrode-ui-logger";
+import logger from "electrode-ui-logger";
 
 logger.log(tags, data, options);
 
@@ -79,7 +73,3 @@ These are the API aliases for different log levels:
   * `logger.debug(data, options)`
   * `logger.trace(data, options)`
   
-
-[electrode-server]: https://gecgithub01.walmart.com/electrode/electrode-server
-[electrode-logging]: https://gecgithub01.walmart.com/electrode/electrode-logging
-[electrode-log-consumer]: https://gecgithub01.walmart.com/electrode/electrode-log-consumer

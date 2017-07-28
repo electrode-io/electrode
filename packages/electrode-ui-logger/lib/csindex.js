@@ -6,16 +6,22 @@
 /* eslint-disable */
 
 var stringify = require('json-stringify-safe');
-var Config = require("@walmart/electrode-ui-config");
-var fetch = require("@walmart/electrode-fetch").fetch;
 var safeEventBuilder = require("./safe-event-builder");
 var Log = require("./logger");
 
+// Require the fetch polyfill
+require("whatwg-fetch");
+
 Log._stream = [];
-Log.fetch = fetch;
+Log.fetch = window.fetch;
+Log.config = require("electrode-ui-config");
 
 Log.setFetch = function (_fetch) {
   Log.fetch = _fetch;
+};
+
+Log.setConfig = function (_config) {
+  Log.config = _config;
 };
 
 Log._flush = function () {
@@ -33,7 +39,7 @@ Log._flush = function () {
 
     Log._stream = [];
 
-    return Log.fetch(Config.fullApiPath("/logger"), payload);
+    return Log.fetch(Log.config.fullApiPath("/logger"), payload);
   }
 };
 
