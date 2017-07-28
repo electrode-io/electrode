@@ -4,17 +4,32 @@ describe("client-side logger", function () {
   let fetchUrl;
   let fetchPayload;
   let Log;
+  let Config;
 
   function mockFetch(url, payload) {
     fetchUrl = url;
     fetchPayload = payload;
   }
 
+  before(function() {
+    global.window = {
+      _wml: {
+        config: {
+          ui: {}
+        }
+      }
+    };
+
+    Config = require("electrode-ui-config/lib/csindex");
+  });
+
   beforeEach(function () {
     delete require.cache[require.resolve("../../lib/csindex")];
+
     Log = require("../../lib/csindex");
     Log.setLogInterval(200);
     Log.setFetch(mockFetch);
+    Log.setConfig(Config);
   });
 
   afterEach(function () {
