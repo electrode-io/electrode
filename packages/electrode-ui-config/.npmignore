@@ -221,6 +221,9 @@ atlassian-ide-plugin.xml
 com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
-/clap.js
+/xclap.js
 /.npmignore
 .nyc_output
+/test
+/.eslintrc
+
