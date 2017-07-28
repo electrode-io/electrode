@@ -18,6 +18,12 @@
   },
   "keywords": [],
   "license": "Apache-2.0",
+  "maintainers": [
+    {
+      "name": "jchip",
+      "email": "joel123@gmail.com"
+    }
+  ],
   "devDependencies": {
     "electrode-archetype-njs-module-dev": "^2.2.0"
   },
