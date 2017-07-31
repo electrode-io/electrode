@@ -15,10 +15,15 @@ var demoHelperPath = require.resolve("electrode-demo-helper");
 const ExpressJS = "ExpressJS";
 const HapiJS = "HapiJS";
 const KoaJS = "KoaJS";
+const pkg = require("../../package.json");
 
 module.exports = generators.Base.extend({
   constructor: function() {
     generators.Base.apply(this, arguments);
+
+    this.log(chalk.green("Yeoman Electrode App generator version"), pkg.version);
+    this.log("Loaded from", chalk.magenta(path.dirname(require.resolve("../../package.json"))));
+
     this.option("travis", {
       type: Boolean,
       required: false,
