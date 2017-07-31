@@ -7,6 +7,7 @@
     -   [What is Electrode](overview/what-is-electrode.md)
     -   [Why Use Electrode](overview/why-use-electrode.md)
     -   [Requirements](overview/requirements.md)
+    -   [What are Archetypes](/overview/what-are-archetypes.md)
 
 ### Quick Start
 -   [Start With Electrode App](/chapter1/quick-start/start-with-app.md)
@@ -31,7 +32,6 @@
 -   [Intermediate](chapter1/Intermediate.md)
 -   [Application Archetype](/chapter1/intermediate/app-archetype/README.md)
 
-    -   [What are Archetypes](/chapter1/intermediate/app-archetype/what-are-archetypes.md)
     -   [Eslint Config](/chapter1/intermediate/app-archetype/eslint.md)
     -   [Webpack Config](/chapter1/intermediate/app-archetype/webpack-config.md)
     -   [Environment Variables](/chapter1/intermediate/app-archetype/env-vars.md)
