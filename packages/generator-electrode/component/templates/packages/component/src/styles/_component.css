@@ -1,14 +1,17 @@
-:root {
-  --black: #000;
-  --white: #fff;
+@value grey: #8C8B8B;
+
+.container {
+  font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0 auto;
+  text-align: center;
+  width: 50%;
 }
 
-.baseStyle {
-  background-color: var(--black);
-  color: var(--white);
+.container hr {
+  border-top: 1px solid grey;
+  margin: 50px 0;
 }
 
-.someStyle {
-  composes: baseStyle;
-  font-size: 18px;
+.container h4 {
+  text-align: left;
 }
