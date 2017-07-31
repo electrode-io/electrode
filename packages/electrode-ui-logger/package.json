@@ -28,7 +28,6 @@
     "electrode-archetype-njs-module-dev": "^2.2.0"
   },
   "dependencies": {
-    "electrode-ui-config": "^1.0.0",
     "json-stringify-safe": "^5.0.1",
     "lodash.keys": "^4.2.0",
     "lodash.omit": "^4.5.0",

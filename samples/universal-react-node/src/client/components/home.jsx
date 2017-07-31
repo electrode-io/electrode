@@ -52,6 +52,7 @@ export class Home extends React.Component {
           <li><a href="/push-notifications">Push Notifications Example</a></li>
           <li><a href="/todo-app">Todo List Example</a></li>
           <li><a href="/record-store">MongoDB Example</a></li>
+          <li><a href="/app-context">App Context Example (Logging, Cookies, Config)</a></li>
         </ul>
         <p>{this.props.data}</p>
       </div>

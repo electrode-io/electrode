@@ -40,6 +40,7 @@
     "bluebird": "^3",
     "hoek": "^3.0.1",
     "in-publish": "^2.0.0",
+    "json-stringify-safe": "^5.0.1",
     "koa-router": "^5.4.0",
     "lodash": "^4.0.0",
     "react": "^15.3.1 || ^0.14.8",

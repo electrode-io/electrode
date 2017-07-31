@@ -12,7 +12,7 @@ const _config = {
 };
 
 Object.defineProperty(_config, "_server", {
-  set: (value) => {
+  set: function(value) {
     _config.server = value;
     const config = value.app && value.app.config || {};
     const mergedConfig = defaultsDeep({}, config.ssrUi, config.ui);
@@ -21,7 +21,7 @@ Object.defineProperty(_config, "_server", {
 });
 
 Object.defineProperty(_config, "ccm", {
-  get: () => {
+  get: function() {
     throw new Error("Getter property deprecated. Invoke uiConfig.getCcm(request) instead");
   }
 });

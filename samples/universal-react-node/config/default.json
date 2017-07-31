@@ -6,6 +6,9 @@
         "expiresIn": 60
       }
     },
+    "electrode-ui-config": {
+      "module": "electrode-ui-config/hapi-plugin"
+    },
     "./server/plugins/csrf": {
       "module": "./{{env.APP_SRC_DIR}}server/plugins/csrf"
     },
@@ -34,5 +37,9 @@
         }
       }
     }
+  },
+  "ui": {
+    "uiSetting1": "foo",
+    "uiSetting2": "bar"
   }
 }

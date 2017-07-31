@@ -13,23 +13,34 @@ var Log = require("./logger");
 require("whatwg-fetch");
 
 Log._stream = [];
-Log.fetch = window.fetch;
-Log.config = require("electrode-ui-config");
 
 Log.setFetch = function (_fetch) {
   Log.fetch = _fetch;
 };
 
-Log.setConfig = function (_config) {
-  Log.config = _config;
-};
+function join(paths) {
+  var x = paths.filter(function (x) {
+    return x
+  }).join("/");
+
+  if (paths[0] === "/" && x === "/") { // returning "" for [ "/", "", "", ... ]
+    return "";
+  }
+
+  return x.match(/^\/+$/) ? // avoid returning "" for [ "/", "/", ... ]
+    "/"
+    : x.replace(/\/+/g, "/").replace(/\/$/, ""); // remove multiple /'s and trailing /
+}
+
+var ui = window._app.config;
+var loggerUrl = join([ui.basePath || "", ui.apiPath || "/api", "/logger"]);
 
 Log._flush = function () {
   if (Log._stream.length > 0) {
     var payload = {
       credentials: "include",
-      disableAnalytics: true,
       method: "POST",
+      protocol: location.protocol,
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json"
@@ -38,8 +49,7 @@ Log._flush = function () {
     };
 
     Log._stream = [];
-
-    return Log.fetch(Log.config.fullApiPath("/logger"), payload);
+    return (Log.fetch || fetch)(loggerUrl, payload);
   }
 };
 

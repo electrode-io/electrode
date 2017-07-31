@@ -2,7 +2,7 @@ import ReduxRouterEngine from "electrode-redux-router-engine";
 import React from "react";
 import fs from "fs";
 import path from "path";
-import {routes} from "../../client/routes";
+import {createRoutes} from "../../client/routes";
 import Promise from "bluebird";
 import {createStore} from "redux";
 import rootReducer from "../../client/reducers";
@@ -65,7 +65,10 @@ function createReduxStore(req, match) {
 module.exports = (req) => {
   const app = req.server && req.server.app || req.app;
   if (!app.routesEngine) {
-    app.routesEngine = new ReduxRouterEngine({routes, createReduxStore});
+    app.routesEngine = new ReduxRouterEngine({
+      routes: createRoutes(req),
+      createReduxStore
+    });
   }
 
   return app.routesEngine.render(req);
