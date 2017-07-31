@@ -35,7 +35,9 @@ A webserver will be started on localhost:3000. Your new component will be used i
 
 ## Further: Adding More Components to the Packages
 
-If you want to add more components to your project, go to `packages` directory and run `yo electrode:component-add` within the packages directory. You can skip this section if you do not need extra components.
+> Note: You can skip this section if you do not need extra components.
+
+If you want to add more components to your project, go to `packages` directory and run `yo electrode:component-add` within the packages directory.
 
 ```bash
 $ cd packages
@@ -47,6 +49,8 @@ Follow the prompts as above, for example:
 ![](/images/generator-component-add.png)
 
 This will generate a new package and also update the demo-app. Don't get panic if you saw conflicts, the `demo-app/src/client/components/home.jsx` and `demo-app/package.json` expected to be overwritten during the update.
+
+> Note: If you have installed `yo` at version 2.0.0 or higher, you can specify the `a` option for `overwrite this and all others`, or you need to specify the `y` option for `overwrite` each time.
 
 After finished installation, you can preview the multi-components by using demo-app again.
 
