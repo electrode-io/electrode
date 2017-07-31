@@ -16,15 +16,7 @@ npm install -g yo generator-electrode xclap-cli
 
 ### Globally Installed NodeJS
 
-IMPORTANT: If you install NodeJS globally on your system, then please make sure you only use that version. [yeoman] appears to always lookup generators from your system folders so very strange things will happen if you try to use another version of NodeJS through nvm but also have a [generator-electrode] installed in your system folders.
-
-Basically, bad things happen if you mix NodeJS installations with [nvm] and the system installer. Our recommendation is to either:
-
--   Do not install a copy of NodeJS on your system and only use nvm to manage NodeJS.
-
-or 
-
--   Only use your NodeJS installed globally on your system.
+IMPORTANT: If you install NodeJS globally on your system, then please make sure you re-install `yo` if it's already exist in your Node installation.  A bug in `yo` was causing it to always load generators from your system folders.  The fix was released on 7-31-2017.
 
 ### Keep generator-electrode Up to date
 
