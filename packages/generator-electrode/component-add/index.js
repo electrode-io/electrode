@@ -104,26 +104,13 @@ module.exports = generators.Base.extend({
     },
 
     askFor: function() {
-      function randomComponentName() {
-        var charSet = "abcdefghijklmnopqrstuvwxyz";
-        var randomString = "";
-
-        // Generate 7-digit random component name
-        for (var i = 0; i < 7; i++) {
-            var randomPoz = Math.floor(Math.random() * charSet.length);
-            randomString += charSet.substring(randomPoz,randomPoz + 1);
-        }
-
-        return randomString + "-component";
-      };
-
       var prompts = [
         {
           type: "input",
           name: "name",
           message: "Component Name",
           when: !this.props.name,
-          default: randomComponentName()
+          default: "untitled" + Math.floor(Math.random() * 1000)
         },
         {
           type: "input",
