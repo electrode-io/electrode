@@ -14,6 +14,11 @@ describe("Test electrode-react-webapp", () => {
 
   const getConfig = () => {
     return {
+      connections: {
+        default: {
+          port: 0
+        }
+      },
       plugins: {
         "./lib/hapi/index": {
           options: {
