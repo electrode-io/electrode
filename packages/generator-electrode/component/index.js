@@ -10,9 +10,15 @@ var optionOrPrompt = require("yeoman-option-or-prompt");
 var nodeFS = require("fs");
 var demoHelperPath = path.join(require.resolve("electrode-demo-helper"), "..");
 
+const pkg = require("../package.json");
+
 var ReactComponentGenerator = yeoman.Base.extend({
   constructor: function() {
     yeoman.Base.apply(this, arguments);
+
+    this.log(chalk.green("Yeoman Electrode Component generator version"), pkg.version);
+    this.log("Loaded from", chalk.magenta(path.dirname(require.resolve("../package.json"))));
+
     this.quotes = this.options.quotes;
     this.githubUrl = this.options.githubUrl || "https://github.com";
     this.optionOrPrompt = optionOrPrompt;
