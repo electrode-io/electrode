@@ -110,7 +110,7 @@ module.exports = generators.Base.extend({
           name: "name",
           message: "Component Name",
           when: !this.props.name,
-          default: "untitled" + Math.floor(Math.random() * 1000)
+          default: "untitled" + Math.floor(Math.random() * 1000) + "-component"
         },
         {
           type: "input",
