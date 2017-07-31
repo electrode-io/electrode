@@ -33,6 +33,7 @@
     "above-the-fold-only-server-render": "^1.0.2",
     "bluebird": "^3.4.6",
     "electrode-archetype-react-app": "../../packages/electrode-archetype-react-app",
+    "electrode-cookies": "../../packages/electrode-cookies",
     "electrode-csrf-jwt": "^1.0.0",
     "electrode-react-context": "../../packages/electrode-react-context",
     "electrode-react-ssr-caching": "^0.1.3",

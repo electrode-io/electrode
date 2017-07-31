@@ -133,9 +133,12 @@ function makeRouteHandler(routeOptions, userContent) {
       const uiConfig = options.request.server.settings.app.config.ui;
 
       // Ensure window._app is defined and set the config property
-      let configScript = "<script>if (!window._app) window._app = {}; " +
-        "window._app.config={ui:" + stringify(uiConfig) + "};</script>";
-      
+      const configScript =
+        "<script>if (!window._app) window._app = {}; " +
+        "window._app.config={ui:" +
+        stringify(uiConfig) +
+        "};</script>";
+
       const htmlScripts = htmlifyScripts(groupScripts(routeOptions.unbundledJS.enterHead).scripts);
       return `${manifestLink}${cssLink}${configScript}${htmlScripts}\n${scriptsFromHelmet}`;
     };

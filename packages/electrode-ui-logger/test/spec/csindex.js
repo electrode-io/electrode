@@ -4,7 +4,6 @@ describe("client-side logger", function () {
   let fetchUrl;
   let fetchPayload;
   let Log;
-  let Config;
 
   function mockFetch(url, payload) {
     fetchUrl = url;
@@ -13,14 +12,12 @@ describe("client-side logger", function () {
 
   before(function() {
     global.window = {
-      _wml: {
+      _app: {
         config: {
           ui: {}
         }
       }
     };
-
-    Config = require("electrode-ui-config/lib/csindex");
   });
 
   beforeEach(function () {
@@ -29,7 +26,6 @@ describe("client-side logger", function () {
     Log = require("../../lib/csindex");
     Log.setLogInterval(200);
     Log.setFetch(mockFetch);
-    Log.setConfig(Config);
   });
 
   afterEach(function () {
@@ -56,7 +52,6 @@ describe("client-side logger", function () {
     expect(fetchPayload).to.deep.equal(
       {
         "credentials": "include",
-        "disableAnalytics": true,
         "method": "POST",
         "headers": {
           "Accept": "application/json",
@@ -82,7 +77,6 @@ describe("client-side logger", function () {
       expect(fetchPayload).to.deep.equal(
         {
           "credentials": "include",
-          "disableAnalytics": true,
           "method": "POST",
           "headers": {
             "Accept": "application/json",

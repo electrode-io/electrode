@@ -40,7 +40,6 @@ Log._flush = function () {
     var payload = {
       credentials: "include",
       method: "POST",
-      protocol: location.protocol,
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json"
