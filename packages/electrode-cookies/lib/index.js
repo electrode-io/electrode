@@ -1,16 +1,19 @@
 "use strict";
-
+/* eslint-disable prefer-arrow-callback */
 const safeGet = require("lodash/get");
 const reduce = require("lodash/reduce");
 const assert = require("assert");
 
 const replacers = { "(": "%28", ")": "%29" };
 
-const encodeKey = key =>
-  key.replace(/[^#$&+\^`|]/g, encodeURIComponent).replace(/[\(\)]/g, m => replacers[m]);
+const encodeKey = function(key) {
+  key.replace(/[^#$&+\^`|]/g, encodeURIComponent).replace(/[\(\)]/g, function(m) {
+    return replacers[m];
+  });
+};
 
 const cookies = {
-  get: (key, options) => {
+  get: function(key, options) {
     options = options || {};
     assert(options.request, "The request option is not set");
 
@@ -22,7 +25,7 @@ const cookies = {
       try {
         return reduce(
           options.request.state,
-          (result, value, k) => {
+          function(result, value, k) {
             if (k.indexOf(substring) > NOT_FOUND) {
               result[k] =
                 options.skipEncoding === true || value === undefined
@@ -46,7 +49,7 @@ const cookies = {
     }
   },
 
-  set: (key, value, options) => {
+  set: function(key, value, options) {
     options = options || {};
     assert(options.request, "The request option is not set");
 
@@ -81,7 +84,7 @@ const cookies = {
     request.app.replyStates[key] = { value, options: setOptions };
   },
 
-  expire: (key, options) => {
+  expire: function(key, options) {
     options = options || {};
     options.expires = 0;
     cookies.set(key, "x", options);
