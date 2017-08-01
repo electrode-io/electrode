@@ -47,6 +47,7 @@
     -   [Component for a route](chapter1/intermediate/react-routes/route-component.md)
     -   [Route action on server side](chapter1/intermediate/react-routes/server-actions.md)
 -   [Server Config](chapter1/intermediate/server-config.md)
+-   [Customize Config](/chapter1/intermediate/customize-config.md)
 -   [More Deployments](chapter1/intermediate/more-deployments.md)
     -   [Docker](chapter1/intermediate/more-deployments/docker.md)
     -   [Kubernetes](chapter1/intermediate/more-deployments/kubernetes.md)

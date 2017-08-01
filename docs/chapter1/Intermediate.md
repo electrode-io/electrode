@@ -6,6 +6,7 @@
 -   [Build a Server Plugin](/chapter1/intermediate/build-a-server-plugin.md)
 -   [Add Routes](/chapter1/intermediate/add-routes.md)
 -   [Server Config](/chapter1/intermediate/server-config.md)
+-   [Customize Config](/chapter1/intermediate/customize-config.md)
 -   [More Deployments](/chapter1/intermediate/more-deployments.md)
 -   [Build with material-ui](/chapter1/intermediate/build-with-material-ui.md)
 -   [Build a Progressive Web App](/chapter1/intermediate/build-a-progressive-web-app.md)
