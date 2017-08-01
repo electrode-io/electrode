@@ -2,7 +2,7 @@
 
 First, let's quickly check your development environment. You will need to have the following set up to generate and deploy your Electrode app|component in under five minutes:
 
-## For Development On Your Local machine
+## For Development On Your Local Machine
 
 1.  Install the latest [NodeJS LTS binary](https://nodejs.org/) in your machine. (at least v4.2 required, >= 6 recommended).
 
@@ -18,7 +18,7 @@ npm install -g yo generator-electrode xclap-cli
 
 IMPORTANT: If you install NodeJS globally on your system, then please make sure you re-install `yo` if it's already exist in your Node installation.  A bug in `yo` was causing it to always load generators from your system folders.  The fix was released on 7-31-2017.
 
-### Keep generator-electrode Up to date
+### Keep `generator-electrode` Up To Date
 
 We release new version of [generator-electrode] when we add new features.  So make sure you check the versions and update it periodically with the command:
 
@@ -26,7 +26,7 @@ We release new version of [generator-electrode] when we add new features.  So ma
 npm install -g generator-electrode
 ```
 
-### npm Verion 3
+### NPM Verion 3
 
 **Electrode requires npm version >= 3**
 
@@ -35,6 +35,14 @@ NodeJS v6.x already comes with npm@3 by default, but if you are using NodeJS 4 f
 ```bash
 npm install -g npm@3
 ```
+
+### Headless Chrome
+
+Headless chrome brings all modern web platform features provided by Chromium and the Blink rendering engine to the command line. It is a great tool for automated testing and server environments where you don't need a visible UI shell.
+
+In the Electrode Archetype App and Component, we are using Chrome Headless as the default option for automated testing. Please go to your Chrome browser, update Google Chrome if you see the option, and relaunch.
+
+> Note: Headless mode is available on Mac and Linux in Chrome 59. Windows support is coming in Chrome 60. To check what version of Chrome you have, open chrome://version.
 
 ## For Online Deployments
 
