@@ -1,0 +1,39 @@
+@value blue: #1EAEDB;
+@value black: #000000;
+@value white: #FFFFFF;
+
+section .active {
+  display: inherit;
+}
+
+section .inactive {
+  display: none;
+}
+
+section {
+  background-color: white;
+  border: 1px solid blue;
+  border-radius: 5px;
+  border-top-color: blue;
+  color: black;
+  text-align: left;
+  word-wrap: break-word;
+}
+
+section a {
+  color: blue;
+  display: inline-block;
+  padding: 10px;
+}
+
+section a:hover {
+  color: blue;
+  cursor: pointer;
+}
+
+section p {
+  background-color: blue;
+  color: white;
+  margin-bottom: 0px;
+  padding: 10px;
+}

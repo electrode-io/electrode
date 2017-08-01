@@ -13,7 +13,8 @@
     "nuke-packages": "rm -rf packages/*/node_modules packages/*/coverage",
     "nuke-samples": "rm -rf samples/*/node_modules samples/*/coverage samples/*/dist samples/*/.isomorphic-loader-config.json samples/*/.etmp",
     "test-reporter": "if lerna updated | grep electrode-webpack-reporter; then cd packages/electrode-webpack-reporter && npm install && npm test; fi",
-    "update-changelog": "node tools/update-changelog.js"
+    "update-changelog": "node tools/update-changelog.js",
+    "gitbook-serve": "gitbook serve --no-watch --no-live"
   },
   "devDependencies": {
     "bluebird": "^3.5.0",

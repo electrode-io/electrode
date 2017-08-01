@@ -10,9 +10,14 @@ var optionOrPrompt = require("yeoman-option-or-prompt");
 var nodeFS = require("fs");
 var demoHelperPath = path.join(require.resolve("electrode-demo-helper"), "..");
 
+const pkg = require("../package.json");
+
 module.exports = class extends Generator {
   constructor(args, options) {
     super(args, options);
+
+    this.log(chalk.green("Yeoman Electrode Component generator version"), pkg.version);
+    this.log("Loaded from", chalk.magenta(path.dirname(require.resolve("../package.json"))));
 
     this.quotes = this.options.quotes;
     this.githubUrl = this.options.githubUrl || "https://github.com";
@@ -54,7 +59,7 @@ module.exports = class extends Generator {
 
     this.props.quoteType = this.quotes;
   }
-  
+
   _askFor() {
     if (this.pkg.name || this.options.name) {
       this.props.name = this.pkg.name || _.kebabCase(this.options.name);
@@ -185,16 +190,40 @@ module.exports = class extends Generator {
     }
 
     project: {
-      this.fs.copy(this.templatePath("packages/component/babelrc"), this.destinationPath(".babelrc"));
-      this.fs.copy(this.templatePath("packages/component/gitignore"), this.destinationPath(".gitignore"));
-      this.fs.copy(this.templatePath("packages/component/npmignore"), this.destinationPath(".npmignore"));
-      this.fs.copy(this.templatePath("packages/component/editorconfig"), this.destinationPath(".editorconfig"));
-      this.fs.copy(this.templatePath("packages/component/_xclap.js"), this.destinationPath("xclap.js"));
-      this.fs.copy(this.templatePath("packages/component/_package.json"), this.destinationPath("package.json"));
-      this.fs.copy(this.templatePath("packages/component/_readme.md"), this.destinationPath("README.md"));
+      this.fs.copy(
+        this.templatePath("packages/component/babelrc"),
+        this.destinationPath(".babelrc")
+      );
+      this.fs.copy(
+        this.templatePath("packages/component/gitignore"),
+        this.destinationPath(".gitignore")
+      );
+      this.fs.copy(
+        this.templatePath("packages/component/npmignore"),
+        this.destinationPath(".npmignore")
+      );
+      this.fs.copy(
+        this.templatePath("packages/component/editorconfig"),
+        this.destinationPath(".editorconfig")
+      );
+      this.fs.copy(
+        this.templatePath("packages/component/_xclap.js"),
+        this.destinationPath("xclap.js")
+      );
+      this.fs.copy(
+        this.templatePath("packages/component/_package.json"),
+        this.destinationPath("package.json")
+      );
+      this.fs.copy(
+        this.templatePath("packages/component/_readme.md"),
+        this.destinationPath("README.md")
+      );
 
       if (this.quoteType === "'") {
-        this.fs.copy(this.templatePath("packages/component/eslintrc"), this.destinationPath(".eslintrc"));
+        this.fs.copy(
+          this.templatePath("packages/component/eslintrc"),
+          this.destinationPath(".eslintrc")
+        );
       }
     }
 
@@ -203,10 +232,21 @@ module.exports = class extends Generator {
         this.templatePath("packages/component/src/components/_component.jsx"),
         this.destinationPath(this.rootPath + "src/components/" + this.projectName + ".jsx")
       );
-
+      this.fs.copy(
+        this.templatePath("packages/component/src/components/_accordion.jsx"),
+        this.destinationPath(this.rootPath + "src/components/accordion.jsx")
+      );
       this.fs.copy(
         this.templatePath("packages/component/src/styles/_component.css"),
         this.destinationPath(this.rootPath + "src/styles/" + this.projectName + ".css")
+      );
+      this.fs.copy(
+        this.templatePath("packages/component/src/styles/_accordion.css"),
+        this.destinationPath(this.rootPath + "src/styles/accordion.css")
+      );
+      this.fs.copy(
+        this.templatePath("packages/component/src/styles/_raleway.css"),
+        this.destinationPath(this.rootPath + "src/styles/raleway.css")
       );
 
       this.fs.copy(
@@ -217,13 +257,15 @@ module.exports = class extends Generator {
       this.fs.copyTpl(
         this.templatePath(path.resolve(demoHelperPath, "demo")),
         this.destinationPath((this.isAddon ? "../" : "packages/") + this.projectName + "/demo"),
-        {packageName: this.projectName}
+        { packageName: this.projectName }
       );
 
       this.fs.copyTpl(
         this.templatePath(path.resolve(demoHelperPath, "components.md")),
-        this.destinationPath((this.isAddon ? "../" : "packages/") + this.projectName + "/components.md"),
-        {packageName: this.projectName}
+        this.destinationPath(
+          (this.isAddon ? "../" : "packages/") + this.projectName + "/components.md"
+        ),
+        { packageName: this.projectName }
       );
 
       this.fs.copy(
@@ -255,12 +297,18 @@ module.exports = class extends Generator {
 
       this.fs.copy(
         this.templatePath("packages/component/test/client/components/_component.spec.jsx"),
-        this.destinationPath(this.rootPath + "test/client/components/" + this.projectName + ".spec.jsx")
+        this.destinationPath(
+          this.rootPath + "test/client/components/" + this.projectName + ".spec.jsx"
+        )
       );
 
       this.fs.copy(
-        this.templatePath("packages/component/test/client/components/helpers/_intlEnzymeTestHelper.js"),
-        this.destinationPath(this.rootPath + "test/client/components/helpers/intl-enzyme-test-helper.js")
+        this.templatePath(
+          "packages/component/test/client/components/helpers/_intlEnzymeTestHelper.js"
+        ),
+        this.destinationPath(
+          this.rootPath + "test/client/components/helpers/intl-enzyme-test-helper.js"
+        )
       );
     }
 
@@ -297,7 +345,7 @@ module.exports = class extends Generator {
         var newRoot = this.destinationPath() + "/" + this.originalDemoAppName;
         this.destinationRoot(newRoot);
 
-        this.composeWith(require.resolve('../generators/app'), options);
+        this.composeWith(require.resolve("../generators/app"), options);
       }
     }
   }

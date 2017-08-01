@@ -2,11 +2,11 @@
 
 /* eslint-disable arrow-parens */
 
-var Generator = require('yeoman-generator');
-var chalk = require('chalk');
-var yosay = require('yosay');
-var path = require('path');
-var _ = require('lodash');
+var Generator = require("yeoman-generator");
+var chalk = require("chalk");
+var yosay = require("yosay");
+var path = require("path");
+var _ = require("lodash");
 var extend = _.merge;
 var parseAuthor = require("parse-author");
 var githubUsername = require("github-username");
@@ -15,12 +15,16 @@ var demoHelperPath = require.resolve("electrode-demo-helper");
 const ExpressJS = "ExpressJS";
 const HapiJS = "HapiJS";
 const KoaJS = "KoaJS";
+const pkg = require("../../package.json");
 
 module.exports = class extends Generator {
   constructor(args, options) {
     super(args, options);
 
-    this.option('travis', {
+    this.log(chalk.green("Yeoman Electrode App generator version"), pkg.version);
+    this.log("Loaded from", chalk.magenta(path.dirname(require.resolve("../../package.json"))));
+
+    this.option("travis", {
       type: Boolean,
       required: false,
       defaults: true,
@@ -68,7 +72,7 @@ module.exports = class extends Generator {
   }
 
   initializing() {
-    this.pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
+    this.pkg = this.fs.readJSON(this.destinationPath("package.json"), {});
 
     if (this.pkg.keywords) {
       this.pkg.keywords = this.pkg.keywords.filter(x => x);
@@ -92,12 +96,15 @@ module.exports = class extends Generator {
       this.props.authorUrl = info.url;
     }
     // Pre set the default props from the information we have at this point
-    this.props = extend({
-      name: this.pkg.name,
-      description: this.pkg.description,
-      version: this.pkg.version,
-      homepage: this.pkg.homepage
-    }, this.props);
+    this.props = extend(
+      {
+        name: this.pkg.name,
+        description: this.pkg.description,
+        version: this.pkg.version,
+        homepage: this.pkg.homepage
+      },
+      this.props
+    );
   }
 
   _askFor() {
@@ -211,7 +218,7 @@ module.exports = class extends Generator {
         this.destinationRoot(newRoot);
       }
       // Saving to storage after the correct destination root is set
-      this.config.set('serverType', this.props.serverType);
+      this.config.set("serverType", this.props.serverType);
     });
   }
 
@@ -222,11 +229,11 @@ module.exports = class extends Generator {
     }
 
     return githubUsername(this.props.authorEmail)
-      .then(username => username, () => '')
+      .then(username => username, () => "")
       .then(username => {
         return this.prompt({
-          name: 'githubAccount',
-          message: 'GitHub username or organization',
+          name: "githubAccount",
+          message: "GitHub username or organization",
           default: username
         }).then(prompt => {
           this.props.githubAccount = prompt.githubAccount;
@@ -239,13 +246,12 @@ module.exports = class extends Generator {
       this.log(yosay("Welcome to the phenomenal " + chalk.red("Electrode App") + " generator!"));
     }
 
-    return this._askFor()
-      .then(this._askForGithubAccount.bind(this));
+    return this._askFor().then(this._askForGithubAccount.bind(this));
   }
 
   writing() {
-    const isHapi = this.config.get('serverType') === HapiJS;
-    const isExpress = this.config.get('serverType') === ExpressJS;
+    const isHapi = this.config.get("serverType") === HapiJS;
+    const isExpress = this.config.get("serverType") === ExpressJS;
     const isPWA = this.props.pwa;
     const isAutoSSR = this.props.autoSsr;
     const isSingleQuote = this.props.quoteType === "'";
@@ -424,13 +430,13 @@ module.exports = class extends Generator {
 
   default() {
     if (this.options.travis) {
-      this.composeWith(require.resolve('generator-travis/generators/app'), {});
+      this.composeWith(require.resolve("generator-travis/generators/app"), {});
     }
 
-    this.composeWith(require.resolve('../editorconfig'));
+    this.composeWith(require.resolve("../editorconfig"));
 
     if (!this.isDemoApp) {
-      this.composeWith(require.resolve('../git'), {
+      this.composeWith(require.resolve("../git"), {
         name: this.props.name,
         githubAccount: this.props.githubAccount,
         githubUrl: this.props.githubUrl
@@ -438,7 +444,7 @@ module.exports = class extends Generator {
     }
 
     if (this.options.license && !this.pkg.license) {
-      this.composeWith(require.resolve('generator-license'), {
+      this.composeWith(require.resolve("generator-license"), {
         name: this.props.authorName,
         email: this.props.authorEmail,
         website: this.props.authorUrl,
@@ -446,8 +452,8 @@ module.exports = class extends Generator {
       });
     }
 
-    if (!this.fs.exists(this.destinationPath('README.md'))) {
-      this.composeWith(require.resolve('../readme'), {
+    if (!this.fs.exists(this.destinationPath("README.md"))) {
+      this.composeWith(require.resolve("../readme"), {
         name: this.props.name,
         description: this.props.description,
         githubAccount: this.props.githubAccount,
@@ -457,8 +463,8 @@ module.exports = class extends Generator {
       });
     }
 
-    if (!this.fs.exists(this.destinationPath('config/default.js')) && !this.isExtended) {
-      this.composeWith(require.resolve('../config'), {
+    if (!this.fs.exists(this.destinationPath("config/default.js")) && !this.isExtended) {
+      this.composeWith(require.resolve("../config"), {
         name: this.props.name,
         pwa: this.props.pwa,
         serverType: this.props.serverType,
@@ -466,8 +472,8 @@ module.exports = class extends Generator {
       });
     }
 
-    if (!this.fs.exists(this.destinationPath('server/plugins/webapp'))) {
-      this.composeWith(require.resolve('../webapp'), {
+    if (!this.fs.exists(this.destinationPath("server/plugins/webapp"))) {
+      this.composeWith(require.resolve("../webapp"), {
         pwa: this.props.pwa,
         isAutoSsr: this.props.autoSsr
       });

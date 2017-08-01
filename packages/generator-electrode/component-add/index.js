@@ -19,8 +19,8 @@ var demoHelperPath = require.resolve("electrode-demo-helper");
 * so check if cwd ends in packages. also that there is a demo-app folder present
 * demo app folder path should be at the same level as packages.
 * then check if 'demo-app/package.json' and 'demo-app/src/client/components/home.jsx' exist.
-* The folder structure is now sufficiently verified. 
-* generate the component in the cwd and npmi 
+* The folder structure is now sufficiently verified.
+* generate the component in the cwd and npmi
 * modify the demo-app package to add new package.
 * modify the demo-app component home.jsx to import the new packages/component and use class in the div
 */
@@ -104,7 +104,7 @@ module.exports = class extends Generator {
         name: "name",
         message: "Component Name",
         when: !this.props.name,
-        default: "wysiwyg-component"
+        default: "untitled" + Math.floor(Math.random() * 1000) + "-component"
       },
       {
         type: "input",
@@ -141,7 +141,7 @@ module.exports = class extends Generator {
       quotes: this.props.quotes
     };
 
-    this.composeWith(require.resolve('../component'), options);
+    this.composeWith(require.resolve("../component"), options);
   }
 
   writing() {
