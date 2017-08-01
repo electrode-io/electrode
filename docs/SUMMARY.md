@@ -35,6 +35,7 @@
     -   [Eslint Config](/chapter1/intermediate/app-archetype/eslint.md)
     -   [Webpack Config](/chapter1/intermediate/app-archetype/webpack-config.md)
     -   [Environment Variables](/chapter1/intermediate/app-archetype/env-vars.md)
+    -   [Customize Config](/chapter1/intermediate/app-archetype/customize-config.md)
 
 -   [Component Archetype](chapter1/intermediate/component-archetype/README.md)
 
@@ -47,7 +48,6 @@
     -   [Component for a route](chapter1/intermediate/react-routes/route-component.md)
     -   [Route action on server side](chapter1/intermediate/react-routes/server-actions.md)
 -   [Server Config](chapter1/intermediate/server-config.md)
--   [Customize Config](/chapter1/intermediate/customize-config.md)
 -   [More Deployments](chapter1/intermediate/more-deployments.md)
     -   [Docker](chapter1/intermediate/more-deployments/docker.md)
     -   [Kubernetes](chapter1/intermediate/more-deployments/kubernetes.md)
