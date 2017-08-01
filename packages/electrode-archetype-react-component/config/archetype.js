@@ -13,5 +13,8 @@ module.exports = {
     devPort: 2992,
     testPort: 3001,
     modulesDirectories: ["node_modules"]
+  },
+  karma: {
+    browser: process.env.KARMA_BROWSER === undefined ? "chrome" : process.env.KARMA_BROWSER
   }
 };
