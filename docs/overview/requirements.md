@@ -26,7 +26,7 @@ We release new version of [generator-electrode] when we add new features.  So ma
 npm install -g generator-electrode
 ```
 
-### NPM Verion 3
+### npm Verion 3
 
 **Electrode requires npm version >= 3**
 

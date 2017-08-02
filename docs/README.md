@@ -13,7 +13,7 @@
 
 # Getting Started
 
--   [Getting Started with Electrode](https://electrode.gitbooks.io/electrode/content/chapter1/quick-start/get-started.html)
+-   [Getting Started with Electrode]
 
 -   Visit our site at <http://www.electrode.io>.
 
@@ -29,17 +29,17 @@ The [Electrode main repo] uses [Lerna] to manage multiple related packages that 
 
 ## App Archetype
 
-[electrode-archetype-react-app] is a pair of complementing NPM modules that provides for common patterns across all app projects so that each app project can standardize on common development behavior and patterns. Its essentially pre-made patterns for build scripts.  It also requires a companion module [electrode-archetype-react-app-dev] that's meant for your app's `devDependencies`.
+[electrode-archetype-react-app] is a pair of complementing npm modules that provides for common patterns across all app projects so that each app project can standardize on common development behavior and patterns. Its essentially pre-made patterns for build scripts.  It also requires a companion module [electrode-archetype-react-app-dev] that's meant for your app's `devDependencies`.
 
 ## Component Archetype
 
-[electrode-archetype-react-component] is a pair of comlementing NPM modules that makes developing reusable React components as easy as possible with all the latest tools and technologies configured for you.
+[electrode-archetype-react-component] is a pair of complementing npm modules that makes developing reusable React components as easy as possible with all the latest tools and technologies configured for you.
 
 ## Yeoman Generator
 
-The Yeoman [generator-electrode] NPM module allows you to quickly create an Universal React App or Component with support from the archetypes, and server in Node with Hapi or Express.
+The Yeoman [generator-electrode] npm module allows you to quickly create an Universal React App or Component with support from the archetypes, and server in Node with Hapi or Express.
 
-You can learn how to use them [here](https://docs.electrode.io/chapter1/quick-start/get-started.html).
+You can learn how to use them [here](https://docs.electrode.io/chapter1/quick-start/start-with-app.html).
 
 # Sample Applications
 
@@ -114,3 +114,5 @@ Licensed under the [Apache License, Version 2.0].
 [reporting an issue]: https://github.com/electrode-io/electrode/issues
 
 [what is electrode]: https://docs.electrode.io/overview/what-is-electrode.html
+
+[Getting Started With Electrode]: https://docs.electrode.io/overview/what-is-electrode.html

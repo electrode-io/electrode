@@ -22,11 +22,25 @@ Either way, the archetype has the following config to use with webpack:
 
 To override the webpack config, you can create a webpack config with the same filename as above, either in your app's root directory, or under the directory `archetype/config/webpack`.
 
+For example, you can extended or overriding webpack config by:
+
+```
+const BellOnBundlerErrorPlugin = require('bell-on-bundler-error-plugin');
+
+const config = {
+  plugins: [
+    new BellOnBundlerErrorPlugin()
+  ]
+};
+
+module.exports = config;
+```
+
 ### Provide A Config
 
 Your file can just export a plain JSON to be merged into the archetype's config.
 
-For example, to add an alias for an module in `webpack.config.js`, add a file `archetype/config/webpack/webpack.config.js`:
+For example, to add an alias for a module in `webpack.config.js`, add a file `archetype/config/webpack/webpack.config.js`:
 
 ```js
 module.exports = {
