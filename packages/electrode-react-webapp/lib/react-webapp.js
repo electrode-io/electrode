@@ -99,7 +99,7 @@ function makeRouteHandler(routeOptions, userContent) {
     const callUserContent = content => {
       const x = content(options.request);
       return !x.catch
-        ? x
+        ? Promise.resolve(x)
         : x.catch(err => {
             return Promise.reject({
               status: err.status || HTTP_ERROR_500,
