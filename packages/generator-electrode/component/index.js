@@ -1,13 +1,12 @@
 "use strict";
 
+var Generator = require("yeoman-generator");
 var _ = require("lodash");
 var chalk = require("chalk");
-var Generator = require("yeoman-generator");
 var path = require("path");
 var extend = _.merge;
 var parseAuthor = require("parse-author");
 var optionOrPrompt = require("yeoman-option-or-prompt");
-var nodeFS = require("fs");
 var demoHelperPath = path.join(require.resolve("electrode-demo-helper"), "..");
 
 const pkg = require("../package.json");
@@ -182,10 +181,17 @@ module.exports = class extends Generator {
     lernaStructure: {
       // Copy lerna and top level templates
       if (!this.isAddon) {
-        this.fs.copy(this.templatePath("gitignore"), this.destinationPath(".gitignore"));
-        this.fs.copy(this.templatePath("_package.json"), this.destinationPath("package.json"));
-        this.fs.copy(this.templatePath("_readme.md"), this.destinationPath("README.md"));
-        this.fs.copy(this.templatePath("lerna.json"), this.destinationPath("lerna.json"));
+        this.fs.copyTpl(this.templatePath("gitignore"), this.destinationPath(".gitignore"));
+        this.fs.copyTpl(this.templatePath("_package.json"), this.destinationPath("package.json"), {
+          projectName: this.projectName,
+          developerName: this.developerName,
+          githubUrl: this.githubUrl,
+          ghUser: this.ghUser,
+          packageGitHubOrg: this.packageGitHubOrg,
+          ghRepo: this.ghRepo
+        });
+        this.fs.copyTpl(this.templatePath("_readme.md"), this.destinationPath("README.md"));
+        this.fs.copyTpl(this.templatePath("lerna.json"), this.destinationPath("lerna.json"));
       }
     }
 
@@ -228,7 +234,7 @@ module.exports = class extends Generator {
     }
 
     component: {
-      this.fs.copy(
+      this.fs.copyTpl(
         this.templatePath("packages/component/src/components/_component.jsx"),
         this.destinationPath(this.rootPath + "src/components/" + this.projectName + ".jsx")
       );
@@ -249,7 +255,7 @@ module.exports = class extends Generator {
         this.destinationPath(this.rootPath + "src/styles/raleway.css")
       );
 
-      this.fs.copy(
+      this.fs.copyTpl(
         this.templatePath("packages/component/demo/examples/_component.example"),
         this.destinationPath(this.rootPath + "demo/examples/" + this.projectName + ".example")
       );
