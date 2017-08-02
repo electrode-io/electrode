@@ -32,10 +32,10 @@
 -   [Intermediate](chapter1/Intermediate.md)
 -   [Application Archetype](/chapter1/intermediate/app-archetype/README.md)
 
+    -   [Customize Config](/chapter1/intermediate/app-archetype/customize-config.md)
     -   [Eslint Config](/chapter1/intermediate/app-archetype/eslint.md)
     -   [Webpack Config](/chapter1/intermediate/app-archetype/webpack-config.md)
     -   [Environment Variables](/chapter1/intermediate/app-archetype/env-vars.md)
-    -   [Customize Config](/chapter1/intermediate/app-archetype/customize-config.md)
 
 -   [Component Archetype](chapter1/intermediate/component-archetype/README.md)
 
