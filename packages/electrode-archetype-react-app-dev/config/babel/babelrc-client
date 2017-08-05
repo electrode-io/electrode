@@ -48,7 +48,8 @@
     ],
     "transform-node-env-inline",
     "lodash",
-    "transform-runtime"
+    "transform-runtime",
+    "dynamic-import-webpack"
   ],
   "env": {
     "production": {
