@@ -411,6 +411,7 @@ Individual .babelrc files were generated for you in src/client and src/server
       dep: [".clean.lib:client", ".mk.lib.client.dir", ".build.client.babelrc"],
       task: mkCmd(
         `babel`,
+        `--plugins remove-webpack`,
         `--source-maps=inline --copy-files --out-dir ${AppMode.lib.client}`,
         `${AppMode.src.client}`
       )
@@ -572,7 +573,7 @@ Individual .babelrc files were generated for you in src/client and src/server
           .map(n => `--watch ${n}`)
           .join(" ");
         AppMode.setEnv(AppMode.src.dir);
-        const node = AppMode.isSrc ? `babel-node` : "node";
+        const node = AppMode.isSrc ? `babel-node --plugins remove-webpack` : "node";
         const serverIndex = Path.join(AppMode.src.server, "index.js");
         return exec(
           `nodemon`,
