@@ -19,6 +19,7 @@
     "npm": ">= 3 <= 5"
   },
   "scripts": {
+    "build": "clap build",
     "prestart": "clap build",
     "start": "if test \"$NODE_ENV\" = \"production\"; then npm run prod; else clap dev; fi",
     "test": "clap check",
