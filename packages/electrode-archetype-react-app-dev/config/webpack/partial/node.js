@@ -24,9 +24,14 @@ module.exports = function(options) {
       new FunctionModulePlugin(output),
       new webpack.LoaderTargetPlugin("web")
     ].concat(config.plugins);
+    return {
+      resolve: {
+        aliasFields: ["browser"],
+        mainFields: ["browser", "module", "main"]
+      }
+    };
   } else {
     logger.info(`Not disabling NodeSourcePlugin.  NODE_ENV: '${process.env.NODE_ENV}'`);
+    return {};
   }
-
-  return {};
 };
