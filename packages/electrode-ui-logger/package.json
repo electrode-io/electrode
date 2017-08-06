@@ -1,6 +1,6 @@
 {
   "name": "electrode-ui-logger",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Electrode Logging Utility for UI code",
   "main": "./lib/index.js",
   "browser": "./lib/csindex.js",
