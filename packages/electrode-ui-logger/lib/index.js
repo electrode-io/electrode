@@ -3,8 +3,8 @@
 const Log = require("./logger");
 
 const fail = {
-  log: (tags, data) => {
-    console.error(`Failed to send logs: ${tags} ${data}.`); // eslint-disable-line
+  log: function(tags, data) {
+    console.error("Failed to send logs: " + tags + data + "."); // eslint-disable-line
   }
 };
 

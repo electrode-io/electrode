@@ -1,6 +1,6 @@
 import React from "react";
 import {render} from "react-dom";
-import {routes} from "./routes";
+import { createRoutes } from "./routes";
 import {Router, browserHistory} from "react-router";
 import {createStore, compose, applyMiddleware} from "redux";
 import {Provider} from "react-redux";
@@ -27,7 +27,7 @@ window.webappStart = () => {
   render(
       <Provider store={store}>
         <div>
-          <Router history={browserHistory}>{routes}</Router>
+          <Router history={browserHistory}>{createRoutes()}</Router>
           <DevTools />
         </div>
       </Provider>,

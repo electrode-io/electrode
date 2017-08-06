@@ -6,7 +6,7 @@ const expect = chai.expect;
 describe("clientUiConfig", function () {
   it("should provide ui config for client", function () {
     global.window = {
-      _wml: {
+      _app: {
         config: {
           ui: {
             basePath: "/test"

@@ -1,5 +1,6 @@
 "use strict";
 
+const stringify = require("json-stringify-safe");
 const _ = require("lodash");
 const Promise = require("bluebird");
 const fs = require("fs");
@@ -128,8 +129,18 @@ function makeRouteHandler(routeOptions, userContent) {
         .map(tagName => helmet[tagName].toString())
         .join("");
 
+      // This seems like a convoluted way to get at the config
+      const uiConfig = options.request.server.settings.app.config.ui;
+
+      // Ensure window._app is defined and set the config property
+      const configScript =
+        "<script>if (!window._app) window._app = {}; " +
+        "window._app.config={ui:" +
+        stringify(uiConfig) +
+        "};</script>";
+
       const htmlScripts = htmlifyScripts(groupScripts(routeOptions.unbundledJS.enterHead).scripts);
-      return `${manifestLink}${cssLink}${htmlScripts}\n${scriptsFromHelmet}`;
+      return `${manifestLink}${cssLink}${configScript}${htmlScripts}\n${scriptsFromHelmet}`;
     };
 
     const makeBodyBundles = () => {
