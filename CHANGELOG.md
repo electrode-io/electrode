@@ -1,3 +1,77 @@
+# 8/5/2017
+
+## Packages
+
+-   electrode-archetype-react-app@3.1.8 `(3.1.7 => 3.1.8)`
+-   electrode-archetype-react-app-dev@3.1.8 `(3.1.7 => 3.1.8)`
+-   electrode-archetype-react-component@3.1.0 `(3.0.4 => 3.1.0)`
+-   electrode-archetype-react-component-dev@3.1.0 `(3.0.4 => 3.1.0)`
+-   electrode-cookies@1.0.0 `(0.1.0 => 1.0.0)`
+-   electrode-react-context@1.0.0 `(0.1.0 => 1.0.0)`
+-   electrode-react-webapp@1.8.1 `(1.8.0 => 1.8.1)`
+-   electrode-ui-config@1.0.1 `(1.0.0 => 1.0.1)`
+-   electrode-ui-logger@1.0.0 `(0.1.0 => 1.0.0)`
+-   generator-electrode@3.3.0 `(3.2.0 => 3.3.0)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [patch] apply default web config ([#523](https://github.com/electrode-io/electrode/pull/523)) [commit](http://github.com/electrode-io/electrode/commit/a1adefa2c51e810fd3895f2ef5c97180c8b8f89d)
+    -   [patch] update sw-precache plugin ([#505](https://github.com/electrode-io/electrode/pull/505)) [commit](http://github.com/electrode-io/electrode/commit/02da615ee17c7769163e61a5e18a2590e3fd595f)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   [minor] Add chrome headless to component archetype ([#516](https://github.com/electrode-io/electrode/pull/516)) [commit](http://github.com/electrode-io/electrode/commit/7de0490c2cddf9b1ecb1641b3c8d1fe2e6f763f4)
+
+-   `packages/electrode-cookies`
+
+    -   Open-sourcing electrode-cookies [commit](http://github.com/electrode-io/electrode/commit/d91855200d68e70d4e72de868e9c872c7fcc179b)
+    -   [major] prep version [commit](http://github.com/electrode-io/electrode/commit/10868b30db3b4615bfaddf29863f723423294612)
+
+-   `packages/electrode-react-context`
+
+    -   Add "use strict" to address travis CI failure [commit](http://github.com/electrode-io/electrode/commit/6b9b6bee34f63d2b22ea415e17b01c6122ec13d9)
+    -   Open sourcing electrode-react-context [commit](http://github.com/electrode-io/electrode/commit/aff6a8f06e405135710b3bf64899798e8e839dc2)
+    -   [major] prep version [commit](http://github.com/electrode-io/electrode/commit/10868b30db3b4615bfaddf29863f723423294612)
+
+-   `packages/electrode-react-webapp`
+
+    -   [patch][bug] should always return promise object. ([#519](https://github.com/electrode-io/electrode/pull/519)) [commit](http://github.com/electrode-io/electrode/commit/a747804dcc6c9bebc85a89ff3b28b5396286d422)
+    -   [chore] use random port for tests ([#514](https://github.com/electrode-io/electrode/pull/514)) [commit](http://github.com/electrode-io/electrode/commit/4f4b67602d0a222ca01ca163bd6315b420602b3d)
+    -   Move {{PREFETCH_BUDNLES}} marker after {{SSR_CONTENT}} ([#480](https://github.com/electrode-io/electrode/pull/480)) [commit](http://github.com/electrode-io/electrode/commit/daa37796c5b247c75418d9cba64b40476a75ee29)
+
+-   `packages/electrode-ui-config`
+
+    -   [chore] prep electrode-ui-config@1 to publish [commit](http://github.com/electrode-io/electrode/commit/aabd71265a96b42aa73ee068ac419e71b62f9f09)
+    -   Open-sourcing electrode-ui-config ([#500](https://github.com/electrode-io/electrode/pull/500)) [commit](http://github.com/electrode-io/electrode/commit/8e994ec9f1eb081bad3f6050de57be7c741996f5)
+
+-   `packages/electrode-ui-logger`
+
+    -   Add maintainer info to package.json [commit](http://github.com/electrode-io/electrode/commit/62363934f8f0109942a0b1eea9cfcff8fa8e5e3e)
+    -   Open sourcing electrode-ui-logger [commit](http://github.com/electrode-io/electrode/commit/3be5e8a022d60dc5ca778ba91394532cdbbf8059)
+    -   Starting on open-sourcing electrode-ui-logger [commit](http://github.com/electrode-io/electrode/commit/47df22529685dd46cac01c7171a87e402df7a8d8)
+    -   [major] prep version [commit](http://github.com/electrode-io/electrode/commit/10868b30db3b4615bfaddf29863f723423294612)
+
+-   `packages/generator-electrode`
+
+    -   add build script ([#522](https://github.com/electrode-io/electrode/pull/522)) [commit](http://github.com/electrode-io/electrode/commit/2b4da435f1846669bd74f9e9f0d9e5f99c84c955)
+    -   [minor][feat] update component generator UI & using random name for component-add ([#507](https://github.com/electrode-io/electrode/pull/507)) [commit](http://github.com/electrode-io/electrode/commit/be952385a6cce55835fa5c22e6f2acde2b3aabe6)
+    -   [patch] show generator version and location ([#509](https://github.com/electrode-io/electrode/pull/509)) [commit](http://github.com/electrode-io/electrode/commit/18ec00214b06d8be9023f3439dbb27ac7118f02a)
+
+-   `docs`
+
+    -   [patch] Add a doc on customizing app ([#518](https://github.com/electrode-io/electrode/pull/518)) [commit](http://github.com/electrode-io/electrode/commit/ceda239939ff11fce4bb52920be9cf1a69155d20)
+    -   Update headless chrome set up doc ([#517](https://github.com/electrode-io/electrode/pull/517)) [commit](http://github.com/electrode-io/electrode/commit/febd37f22a5255b1e2e61602aa4928a4a50e1377)
+    -   update component add gerator docs ([#512](https://github.com/electrode-io/electrode/pull/512)) [commit](http://github.com/electrode-io/electrode/commit/f4955ecdcaaf9ecfcd089e06615e53169f3661dd)
+    -   [docs] update requirements ([#513](https://github.com/electrode-io/electrode/pull/513)) [commit](http://github.com/electrode-io/electrode/commit/29fd8c02ac74db2cc248ae68a8a0a839bfec4336)
+    -   [docs] move what's archetype to overview ([#511](https://github.com/electrode-io/electrode/pull/511)) [commit](http://github.com/electrode-io/electrode/commit/7a60f489f80131a73f76eb82dd377a01cf650097)
+    -   [docs] update requirements [commit](http://github.com/electrode-io/electrode/commit/5f6907c5f1e88436e7fea033761a799262fc6868)
+
+-   `MISC`
+
+    -   [chore] add issue template [commit](http://github.com/electrode-io/electrode/commit/f2ac6ef8ee6422c6fb06d7034d62dcb49a795c8c)
+
 # 7/25/2017
 
 ## Packages
