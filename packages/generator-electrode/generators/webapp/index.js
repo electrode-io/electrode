@@ -1,9 +1,10 @@
 'use strict';
-var generators = require('yeoman-generator');
 
-module.exports = generators.Base.extend({
-  constructor: function () {
-    generators.Base.apply(this, arguments);
+var Generator = require('yeoman-generator');
+
+module.exports = class extends Generator {
+  constructor(args, options) {
+    super(args, options);
 
     this.option('generateInto', {
       type: String,
@@ -17,12 +18,12 @@ module.exports = generators.Base.extend({
       required: true,
       desc: 'Progressive Web App'
     });
-  },
+  }
 
-  writing: function () {
+  writing() {
     const isHapi = this.config.get('serverType') === 'hapijs';
 
-    this.fs.copyTpl(
+    this.fs.copy(
       this.templatePath('src/server'),
       this.destinationPath(this.options.generateInto, 'src/server'),
       {
@@ -54,4 +55,4 @@ module.exports = generators.Base.extend({
       );
     }
   }
-});
+};

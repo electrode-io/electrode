@@ -1,10 +1,11 @@
 'use strict';
-var _ = require('lodash');
-var generators = require('yeoman-generator');
 
-module.exports = generators.Base.extend({
-  constructor: function () {
-    generators.Base.apply(this, arguments);
+var Generator = require('yeoman-generator');
+var _ = require('lodash');
+
+module.exports = class extends Generator {
+  constructor(args, options) {
+    super(args, options);
 
     this.option('name', {
       type: String,
@@ -21,18 +22,20 @@ module.exports = generators.Base.extend({
     this.option('serverType', {
       type: String,
       required: true,
-      desc: 'Server Type can be hapijs or express'
+      desc: 'Server Type can be hapijs, express or koajs'
     });
+
     this.option('autoSsr', {
       type: String,
       required: true,
       desc: 'Automatically disable server side rendering'
     });
-  },
+  }
 
-  writing: function () {
+  writing() {
     let routeMatch = (this.options.serverType === 'HapiJS') ? "/{args*}" : "*";
-    //do not overwrite if file already exists
+
+    // Do not overwrite if file already exists
     if (!this.fs.exists(this.destinationPath('config/default.js'))) {
       this.fs.copyTpl(
         this.templatePath('default.js'),
@@ -55,4 +58,4 @@ module.exports = generators.Base.extend({
       );
     }
   }
-});
+};
