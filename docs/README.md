@@ -115,4 +115,4 @@ Licensed under the [Apache License, Version 2.0].
 
 [what is electrode]: https://docs.electrode.io/overview/what-is-electrode.html
 
-[Getting Started With Electrode]: https://docs.electrode.io/overview/what-is-electrode.html
+[Getting Started With Electrode]: https://docs.electrode.io/chapter1/quick-start/start-with-app.html
