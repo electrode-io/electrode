@@ -1,5 +1,4 @@
 import React from "react";
-import { FormattedMessage } from "react-intl";
 
 import styles from "../../src/styles/<%= projectName %>.css";
 import "../../src/styles/raleway.css";
@@ -9,13 +8,19 @@ export default class <%= componentName %> extends React.Component {
   render() {
     const data = {
       definition: "> Archetype",
-      definitionDetails: "Electrode Component Archetype helps developers to quickly build react components.",
+      definitionDetails:
+        "Electrode Component Archetype helps developers to quickly build react components.",
       structure: "> Structure",
-      structureDetails: "We demo components through <repo>/demo-app where import components from <repo>/packages/<componentName>.",
+      structureDetails:
+        "We demo components through <repo>/demo-app where import components" +
+        " from <repo>/packages/<componentName>.",
       benefit: "> Benefit",
-      benefitDetails: "With the new mono-repo structure, you can have multiple smaller components that complement each other in one repo.",
+      benefitDetails:
+        "With the new mono-repo structure, you can have multiple smaller components" +
+        " that complement each other in one repo.",
       others: "> More Info",
-      othersDetails: "https://docs.electrode.io/chapter1/intermediate/component-archetype/"
+      othersDetails:
+        "https://docs.electrode.io/chapter1/intermediate/component-archetype/"
     };
 
     return (
