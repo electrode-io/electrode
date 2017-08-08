@@ -2,25 +2,27 @@
 
 This "component archetype" provides for common patterns across all component projects so that each component project can standardize on common development behavior and patterns. Its essentially pre-made patterns for build scripts.
 
-#### What made this new component archetype different?
+#### How do I start with my own component?
 
-The new electrode component is applied by Lerna structure, which can help manage multiple repos within your `packages` directory.
+You should start your component by using our Yeoman `generator-electrode`. Check our Electrode getting started guide [here](https://docs.electrode.io/chapter1/quick-start/start-with-component.html).
 
-`demo-app` folder is a full stack Electrode application, which used for developing and testing your components. You need to import your `packages/<componentName>` to demo-app, explore and personalize this web application there.
+#### What's inside Electrode component?
 
-`packages` folder is where your packages located at. Inside, `demo` folder contains examples for how to demo your components, `src`|`test` folder contains your component `source|test` code, and `xclap.js` is the entry to Electrode archetype tasks.
+The electrode component is applied by Lerna structure, which can help manage multiple repos within your `packages` directory.
+
+`demo-app` directory is a full stack Electrode application, which used for developing and testing your components. You need to import your `packages/<componentName>` to demo-app, explore and personalize this web application there.
+
+`packages` directory is where your packages located at. Inside, `demo` folder contains examples for how to demo your components, `src`|`test` folder contains your component `source|test` code, and `xclap.js` is the entry to Electrode archetype tasks.
 
 #### How do I start developing in my component project after installing?
 
-Since `demo-app` is a full stack Electrode Application, which used for developing and testing your `packages/component`, to run|demo your packages, please make sure you are in `demo-app` folder.
+> NOTE: `demo-app` directory is used for developing and testing your components, to demo your packages, please make sure you are under `demo-app` folder.
 
 ```bash
 # This runs both the node server and webpack (in hot mode)
-$ cd demo-app
 $ clap hot
 
 # Also try `dev` mode when running off battery power and you wish to maximize battery life.
-$ cd demo-app
 $ clap dev
 ```
 
@@ -42,7 +44,7 @@ $ clap check
 $ clap test-dev
 ```
 
-#### Where can I find a sample of Electrode component?
+#### Where can I find the sample of Electrode component?
 
 Please check out the Electrode component demo [here](https://github.com/electrode-io/electrode/tree/master/samples/demo-component).
 
