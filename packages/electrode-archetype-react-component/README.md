@@ -8,35 +8,10 @@ Have a question? Check the [FAQ](./FAQ.md)
 
 ## Installation
 
-> NOTE: Generally you don't need to install these modules directly. You should start your component by using our Yeoman generator-electrode or check our Electrode [Get Started With Electrode Component](https://docs.electrode.io/chapter1/quick-start/start-with-component.html) guide.
+You are suppose to start your Electrode component by using our Yeoman generator-electrode.
 
-However, if you are manually creating your component:
-
-###### Install the two complementary modules
-
-```
-$ npm install --save electrode-archetype-react-component
-$ npm install --save-dev electrode-archetype-react-component-dev
-```
-
-###### Add a `xclap.js` to your project
-
-The `xclap.js` needs to extend
-[the archetype's clap tasks](/arhcetype-clap.js) in order to apply the shared tasks on your new/existing electrode component. Add this following lines of code to the newly created `xclap.js`
-
-```js
-"use strict";
-
-const xclap = require("xclap");
-
-const tasks = {
-  "prepublish": ["npm:prepublish"],
-  "preversion": ["check-cov"]
-}
-xclap.load("myprj", tasks);
-
-require("electrode-archetype-react-component")(xclap);
-```
+Electrode team offers a detailed getting started with Electrode Component tutorial.
+If you want to check out more on our Electrode component, please use the instructions [here](https://docs.electrode.io/chapter1/quick-start/start-with-component.html) as a guide.
 
 ## Usage
 
@@ -47,17 +22,23 @@ To see the tasks, simply run:
 $ clap
 ```
 
-To invoke a task, for example, the dev task, go to your demo-app and run:
+To demo your `packages/components`, for example, the dev task, go to your `demo-app` directory and run:
 
 ```bash
-$ cd demo-app
 $ clap dev
 ```
 
-## Get Started With Electrode Component
+To test your components, go to your root directory and run:
 
-Electrode team offers a detailed getting started with Electrode Component tutorial.
-If you want to check out more on our Electrode component, please use the instructions [here](https://docs.electrode.io/chapter1/quick-start/start-with-component.html) as a guide.
+```bash
+$ npm run test
+```
+
+To test a single component, go to your specific 'packages/component' directory and run:
+
+```bash
+$ clap check
+```
 
 ## Managing Dependencies
 
