@@ -8,10 +8,10 @@ export default class Accordion extends React.Component {
     this.state = {
       active: false
     };
-    this.toggle = this.toggle.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
   }
 
-  toggle() {
+  handleToggle() {
     this.setState({
       active: !this.state.active
     });
@@ -22,7 +22,7 @@ export default class Accordion extends React.Component {
 
     return (
       <section>
-        <a onClick={this.toggle}>
+        <a onClick={this.handleToggle}>
           {this.props.summary}
         </a>
         <p className={stateStyle}>
