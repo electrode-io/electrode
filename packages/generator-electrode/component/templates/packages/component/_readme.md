@@ -9,7 +9,7 @@ Live demo: [<%= ghUser %>.github.io/<%= packageName %>](http://<%= ghUser %>.git
 
 To build the package locally, please go to the root level and run:
 
-```
+```bash
 $ npm install
 $ npm run bootstrap
 ```
