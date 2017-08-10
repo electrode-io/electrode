@@ -7,22 +7,28 @@ __COMPONENT DESCRIPTION GOES HERE__
 
 Live demo: [<%= ghUser %>.github.io/<%= packageName %>](http://<%= ghUser %>.github.io/<%= packageName %>/)
 
-To build the package locally, run:
-
-```bash
-$ npm install
+To build the package locally, please go to the root level and run:
 
 ```
+$ npm install
+$ npm run bootstrap
+```
 
-To run the package demo locally, run the `demo-app` :
+To test the package locally, please run:
 
 ```bash
-$ npm install
+$ clap check
+```
+
+To preview the package demo locally by using `demo-app`:
+
+```bash
+$ cd ../../demo-app
 $ clap dev
 
 ```
 
-Then open [`localhost:8000`](http://localhost:8000) in a browser.
+Then open [`localhost:3000`](http://localhost:3000) in a browser.
 
 
 ## Installation
