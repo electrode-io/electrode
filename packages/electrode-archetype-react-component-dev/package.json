@@ -96,7 +96,7 @@
     "stylus": "^0.54.5",
     "stylus-relative-loader": "^3.0.0",
     "url-loader": "^0.5.6",
-    "webpack": "^2.3.1",
+    "webpack": "^3.0.0",
     "webpack-config-composer": "^1.0.2",
     "webpack-dev-server": "2.5.1",
     "xclap": "^0.2.0",
