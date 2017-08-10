@@ -2,6 +2,18 @@
 
 ## Packages
 
+-   generator-electrode@3.3.2 `(3.3.1 => 3.3.2)`
+
+## Commits
+
+-   `packages/generator-electrode`
+
+    -   [patch] fix component README [commit](http://github.com/electrode-io/electrode/commit/7cf6c21f52806f1eea084e794a697783b098d9af)
+
+# 8/10/2017
+
+## Packages
+
 -   electrode-archetype-react-app@3.2.0 `(3.1.8 => 3.2.0)`
 -   electrode-archetype-react-app-dev@3.2.0 `(3.1.8 => 3.2.0)`
 -   electrode-archetype-react-component@3.2.0 `(3.1.0 => 3.2.0)`
