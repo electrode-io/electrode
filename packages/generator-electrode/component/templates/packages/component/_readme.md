@@ -1,10 +1,10 @@
-# &lt;%= projectName %>
+# <%= projectName %>
 
 **COMPONENT DESCRIPTION GOES HERE**
 
 ## Demo & Examples
 
-Live demo: [&lt;%= ghUser %>.github.io/&lt;%= packageName %>]\(&lt;http&#x3A;//&lt;%= ghUser %>.github.io/&lt;%= packageName %>/>)
+Live demo: [<%= ghUser %>.github.io/<%= packageName %>](http://<%= ghUser %>.github.io/<%= packageName %>/)
 
 To develop and see this component in action, please check the [README](../../README.md) at the top level of this repo for instructions.
 
@@ -16,7 +16,7 @@ $ clap check
 
 ## Installation
 
-The easiest way to use &lt;%= packageName %> is to install it from NPM and include it in your own React build process.
+The easiest way to use <%= packageName %> is to install it from NPM and include it in your own React build process.
 
 ```bash
 $ npm install <%= packageName %> --save
@@ -50,4 +50,7 @@ var <%= componentName %> = require('<%= packageName %>');
 
 **PUT LICENSE HERE**
 
-Copyright (c) &lt;%= currentYear %> &lt;%= developerName %>.
+Copyright (c) <%= currentYear %> <%= developerName %>.
+
+
+[Electrode]: https://docs.electrode.io/overview/what-is-electrode.html

@@ -1,6 +1,6 @@
-# &lt;%= projectName %>-component
+# <%= projectName %>-component
 
-Welcome to the top level of the repo for React component &lt;%= projectName %>.
+Welcome to the top level of the repo for React component <%= projectName %>.
 
 This is designed to be a lerna repo with the following two directories:
 
