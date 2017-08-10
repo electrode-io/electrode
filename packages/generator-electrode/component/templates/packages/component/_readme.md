@@ -1,50 +1,32 @@
-# <%= projectName %>
+# &lt;%= projectName %>
 
-__COMPONENT DESCRIPTION GOES HERE__
-
+**COMPONENT DESCRIPTION GOES HERE**
 
 ## Demo & Examples
 
-Live demo: [<%= ghUser %>.github.io/<%= packageName %>](http://<%= ghUser %>.github.io/<%= packageName %>/)
+Live demo: [&lt;%= ghUser %>.github.io/&lt;%= packageName %>]\(&lt;http&#x3A;//&lt;%= ghUser %>.github.io/&lt;%= packageName %>/>)
 
-To build the package locally, please go to the root level and run:
+To develop and see this component in action, please check the [README](../../README.md) at the top level of this repo for instructions.
 
-```bash
-$ npm install
-$ npm run bootstrap
-```
-
-To test the package locally, please run:
+If you want to run test for this component locally, please run:
 
 ```bash
 $ clap check
 ```
 
-To preview the package demo locally by using `demo-app`:
-
-```bash
-$ cd ../../demo-app
-$ clap dev
-
-```
-
-Then open [`localhost:3000`](http://localhost:3000) in a browser.
-
-
 ## Installation
 
-The easiest way to use <%= packageName %> is to install it from NPM and include it in your own React build process (using [Browserify](http://browserify.org), [Webpack](http://webpack.github.io/), etc).
-
-You can also use the standalone build by including `dist/<%= packageName %>.js` in your page. If you use this, make sure you have already included React, and it is available as a global variable.
+The easiest way to use &lt;%= packageName %> is to install it from NPM and include it in your own React build process.
 
 ```bash
 $ npm install <%= packageName %> --save
 ```
 
+This component is designed to work with React application built with [Electrode]. 
 
 ## Usage
 
-__EXPLAIN USAGE HERE__
+**EXPLAIN USAGE HERE**
 
 ```js
 var <%= componentName %> = require('<%= packageName %>');
@@ -54,19 +36,18 @@ var <%= componentName %> = require('<%= packageName %>');
 
 ### Properties
 
-* __DOCUMENT PROPERTIES HERE__
+-   **DOCUMENT PROPERTIES HERE**
 
 ### Notes
 
-__ADDITIONAL USAGE NOTES__
-
+**ADDITIONAL USAGE NOTES**
 
 ## Development (`src`, `lib` and the build process)
 
-**NOTE:** The source code for the component is in `src`. A transpiled CommonJS version (generated with Babel) is available in `lib` for use with node.js, browserify and webpack. A UMD bundle is also built to `dist`, which can be included without the need for any build system.
+**NOTE:** The source code for the component is in `src`. A transpiled CommonJS version (generated with Babel) is available in `lib` for use with node.js and webpack. A UMD bundle is also built to `dist`, which can be included without the need for any build system.
 
 ## License
 
-__PUT LICENSE HERE__
+**PUT LICENSE HERE**
 
-Copyright (c) <%= currentYear %> <%= developerName %>.
+Copyright (c) &lt;%= currentYear %> &lt;%= developerName %>.
