@@ -19,10 +19,17 @@ function infernoReactAlias() {
 module.exports = {
   resolve: {
     alias: infernoReactAlias(),
-    modules: [(AppMode.isSrc && Path.resolve(AppMode.src.dir)) || null, process.cwd()]
+    // Add a resolver plugin that looks up in the archetype first.
+    // Note that webpack will use this first before trying its default
+    // plugins and the modules paths specified below
+    plugins: [new ModuleResolver("module", undefined, "resolve")],
+    modules: [
+      (AppMode.isSrc && Path.resolve(AppMode.src.dir)) || null,
+      process.cwd(),
+      "node_modules"
+    ]
       .concat(archetype.webpack.modulesDirectories)
       .filter(_.identity),
-    plugins: [new ModuleResolver("module", undefined, "resolve")],
     extensions: [".js", ".jsx", ".json"]
   }
 };
