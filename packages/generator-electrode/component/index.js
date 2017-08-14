@@ -8,7 +8,6 @@ var extend = _.merge;
 var parseAuthor = require("parse-author");
 var optionOrPrompt = require("yeoman-option-or-prompt");
 var nodeFS = require("fs");
-var demoHelperPath = path.join(require.resolve("electrode-demo-helper"), "..");
 
 const pkg = require("../package.json");
 
@@ -16,21 +15,22 @@ var ReactComponentGenerator = yeoman.Base.extend({
   constructor: function() {
     yeoman.Base.apply(this, arguments);
 
-    this.log(chalk.green("Yeoman Electrode Component generator version"), pkg.version);
-    this.log("Loaded from", chalk.magenta(path.dirname(require.resolve("../package.json"))));
+    this.isAddon = this.options.isAddon || false;
+    if (!this.isAddon) {
+      this.log(chalk.green("Yeoman Electrode Component generator version"), pkg.version);
+      this.log("Loaded from", chalk.magenta(path.dirname(require.resolve("../package.json"))));
+    }
 
     this.quotes = this.options.quotes;
     this.githubUrl = this.options.githubUrl || "https://github.com";
     this.optionOrPrompt = optionOrPrompt;
   },
+
   initializing: function() {
     //check if the command is being run from within an existing app
     if (this.fs.exists(this.destinationPath("package.json"))) {
       var appPkg = this.fs.readJSON(this.destinationPath("package.json"));
-      if (
-        !_.isEmpty(appPkg.dependencies) &&
-        _.includes(Object.keys(appPkg.dependencies), "electrode-archetype-react-app")
-      ) {
+      if (appPkg.dependencies && appPkg.dependencies["electrode-archetype-react-app"]) {
         this.env.error(
           "Please do not run this command from within an application." +
             "\nComponent structure should be generated in its own folder."
@@ -38,7 +38,6 @@ var ReactComponentGenerator = yeoman.Base.extend({
       }
     }
 
-    this.isAddon = this.options.isAddon || false;
     this.demoAppName = this.options.demoAppName;
     this.pkg = this.fs.readJSON(this.destinationPath("package.json"), {});
 
@@ -84,8 +83,8 @@ var ReactComponentGenerator = yeoman.Base.extend({
         {
           type: "input",
           name: "projectName",
-          message: "What is your Package/GitHub project name? (e.g., 'wysiwyg-component')",
-          default: "wysiwyg-component",
+          message: "What is your Package/GitHub project name?",
+          default: "electrode-component",
           when: !this.props.name
         },
         {
@@ -204,25 +203,23 @@ var ReactComponentGenerator = yeoman.Base.extend({
         "packages/component/src/styles/_accordion.css",
         this.rootPath + "src/styles/accordion.css"
       );
-      this.template(
-        "packages/component/src/styles/_raleway.css",
-        this.rootPath + "src/styles/raleway.css"
-      );
 
       // demo folder files
       this.template(
-        "packages/component/demo/examples/_component.example",
+        "packages/component/demo-examples/_component.example",
         this.rootPath + "demo/examples/" + this.projectName + ".example"
       );
       this.fs.copyTpl(
-        this.templatePath(path.resolve(demoHelperPath, "demo")),
+        this.templatePath("packages/component/demo/"),
         this.destinationPath((this.isAddon ? "../" : "packages/") + this.projectName + "/demo"),
-        {packageName: this.projectName}
+        { packageName: this.projectName }
       );
       this.fs.copyTpl(
-        this.templatePath(path.resolve(demoHelperPath, "components.md")),
-        this.destinationPath((this.isAddon ? "../" : "packages/") + this.projectName + "/components.md"),
-        {packageName: this.projectName}
+        this.templatePath("packages/component/_components.md"),
+        this.destinationPath(
+          (this.isAddon ? "../" : "packages/") + this.projectName + "/components.md"
+        ),
+        { packageName: this.projectName }
       );
 
       // l10n language templates
@@ -290,6 +287,34 @@ var ReactComponentGenerator = yeoman.Base.extend({
           {
             local: require.resolve("../generators/app")
           }
+        );
+
+        const packageName = this.packageName;
+        const className = this.props.className;
+
+        this.fs.copyTpl(
+          this.templatePath("demo-app/archetype"),
+          this.destinationPath("archetype"),
+          { components: [packageName] }
+        );
+
+        //copy home file
+        this.fs.copyTpl(
+          this.templatePath("demo-app/src/client/components/home.jsx"),
+          this.destinationPath("src/client/components/home.jsx"),
+          { className, packageName, pwa: false }
+        );
+
+        //copy reducer file
+        this.fs.copyTpl(
+          this.templatePath("demo-app/src/client/reducers/index.js"),
+          this.destinationPath("src/client/reducers/index.jsx")
+        );
+
+        //copy actions file
+        this.fs.copyTpl(
+          this.templatePath("demo-app/src/client/actions/index.js"),
+          this.destinationPath("src/client/actions/index.jsx")
         );
       }
     }

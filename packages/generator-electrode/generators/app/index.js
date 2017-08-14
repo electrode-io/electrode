@@ -10,7 +10,6 @@ var _ = require("lodash");
 var extend = _.merge;
 var parseAuthor = require("parse-author");
 var githubUsername = require("github-username");
-var demoHelperPath = require.resolve("electrode-demo-helper");
 
 const ExpressJS = "ExpressJS";
 const HapiJS = "HapiJS";
@@ -21,8 +20,12 @@ module.exports = generators.Base.extend({
   constructor: function() {
     generators.Base.apply(this, arguments);
 
-    this.log(chalk.green("Yeoman Electrode App generator version"), pkg.version);
-    this.log("Loaded from", chalk.magenta(path.dirname(require.resolve("../../package.json"))));
+    this.isDemoApp = this.options.isDemoApp || false;
+
+    if (!this.isDemoApp) {
+      this.log(chalk.green("Yeoman Electrode App generator version"), pkg.version);
+      this.log("Loaded from", chalk.magenta(path.dirname(require.resolve("../../package.json"))));
+    }
 
     this.option("travis", {
       type: Boolean,
@@ -63,7 +66,6 @@ module.exports = generators.Base.extend({
       desc: "Content to insert in the README.md file"
     });
 
-    this.isDemoApp = this.options.isDemoApp || false;
     //data should be passed to the generator using props
     this.props = this.options.props || {};
     //Flag to check if the OSS generator is being called as a subgenerator
@@ -252,15 +254,6 @@ module.exports = generators.Base.extend({
     const className = this.props.className;
     const packageName = this.props.packageName;
 
-    let getDemoFilePath = function(filepath) {
-      try {
-        let demoFilePath = path.resolve(demoHelperPath, "..", filepath);
-        return demoFilePath;
-      } catch (e) {
-        console.log(e);
-      }
-    };
-
     let ignoreArray = [];
     if (isHapi) {
       ignoreArray.push("**/src/server/express-server.js");
@@ -388,35 +381,6 @@ module.exports = generators.Base.extend({
     });
 
     this.fs.copy(this.templatePath("src/client/images"), this.destinationPath("src/client/images"));
-
-    //copy files from the demoHelper if this is the demo-app
-    if (this.isDemoApp) {
-      //copy archetype webpack config extension
-      this.fs.copyTpl(
-        this.templatePath(getDemoFilePath("archetype")),
-        this.destinationPath("archetype"),
-        { components: [packageName] }
-      );
-
-      //copy home file
-      this.fs.copyTpl(
-        this.templatePath(getDemoFilePath("src/client/components/Home.jsx")),
-        this.destinationPath("src/client/components/home.jsx"),
-        { className, packageName, pwa: isPWA }
-      );
-
-      //copy reducer file
-      this.fs.copyTpl(
-        this.templatePath(getDemoFilePath("src/client/reducers/index.js")),
-        this.destinationPath("src/client/reducers/index.jsx")
-      );
-
-      //copy actions file
-      this.fs.copyTpl(
-        this.templatePath(getDemoFilePath("src/client/actions/index.js")),
-        this.destinationPath("src/client/actions/index.jsx")
-      );
-    }
   },
 
   default: function() {

@@ -1,6 +1,14 @@
+// This is a bundled demo
+// you should remove this to work on
+// your own component.
+
 import React from "react";
 import propTypes from "prop-types";
-import styles from "../../src/styles/accordion.css";
+
+// remember to also remove the bundled demo CSS files
+// from ../styles
+
+import styles from "../styles/accordion.css";
 
 export default class Accordion extends React.Component {
   constructor() {
@@ -21,7 +29,7 @@ export default class Accordion extends React.Component {
     const stateStyle = this.state.active ? styles.active : styles.inactive;
 
     return (
-      <section>
+      <section className={styles.accordion}>
         <a onClick={this.handleToggle}>
           {this.props.summary}
         </a>
