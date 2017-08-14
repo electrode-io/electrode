@@ -1,6 +1,6 @@
 {
   "name": "<%= projectName %>",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "<%= projectName %>-component",
   "author": {
     "name": "<%= developerName %>",
@@ -16,12 +16,14 @@
   "homepage": "<%= githubUrl %>/<%= packageGitHubOrg %>/<%= ghRepo %>",
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "test": "lerna run test"
+    "test": "lerna run test",
+    "publish": "lerna publish"
   },
   "dependency": {},
   "devDependencies": {
     "lerna": "^2.0.0-rc.5",
     "lodash": "^4.10.1",
     "xclap": "^0.2.0"
-  }
+  },
+  "private": true
 }

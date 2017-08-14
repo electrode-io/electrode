@@ -1,4 +1,4 @@
-# <%= projectName %>-component
+# <%= projectName %>
 
 Welcome to the top level of the repo for React component <%= projectName %>.
 
@@ -32,3 +32,25 @@ clap dev
 ```
 
 Then open your browser to `http://localhost:3000`
+
+# publishing
+
+To publish your components, make sure you are at the top level directory and use `learn publish`.
+
+You have to run it from `node_modules` directly, or you can use the `npm` `publish` script provided.
+
+For example:
+
+```bash
+node_modules/.bin/lerna publish
+```
+
+OR:
+
+```bash
+npm run publish
+```
+
+The component package versions are all locked as one.  The version is stored inside the file `lerna.json`.
+
+Initial verion is started at `0.0.1` for you.  You can instruct lerna to publish major or minor to start at `1.0.0` or `0.1.0`.
