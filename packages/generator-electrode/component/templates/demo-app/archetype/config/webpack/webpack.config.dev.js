@@ -1,0 +1,1 @@
+require("./component-alias.config");
