@@ -65,7 +65,7 @@ const tasks = {
       "build-lib:clean-tmp"
     ]
   },
-  "babel-src-step": `babel src -d lib`,
+  "babel-src-step": `babel -D src -d lib`,
   "build-lib:clean-tmp": () => $$.rm("-rf", "./tmp"),
   "build-lib:copy-flow": `node ${archetype.devPath}/scripts/copy-as-flow-declaration.js`,
   "build-lib:flatten-l10n": `node ${archetype.devPath}/scripts/l10n/flatten-messages.js`,
