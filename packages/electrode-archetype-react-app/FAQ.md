@@ -121,5 +121,5 @@ Using `AboveTheFoldOnlyServerRender` you can avoid caching of certain components
 ```
 
 AboveTheFoldOnlyServerRender [example](https://github.com/docs-code-examples-electrode-io/electrode-progressive-beer/blob/master/client/components/home.jsx#L69-L83)
-Sample [config.js](https://github.com/electrode-io/electrode-boilerplate-universal-react-node/blob/master/config/sw-config.js)
+Sample [config.js](https://github.com/electrode-io/electrode/blob/master/samples/universal-react-node/config/sw-config.js)
 More on [PWA](https://developers.google.com/web/progressive-web-apps/)
