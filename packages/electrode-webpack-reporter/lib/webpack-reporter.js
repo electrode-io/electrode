@@ -114,7 +114,7 @@ class WebpackReporter extends EventEmitter {
       warnings: statsUtils.getWarningsHtml(stats),
       errors: statsUtils.getErrorsHtml(stats),
       legacy: statsUtils.jsonToHtml(stats, true),
-      modules: stats.chunks[0].modules
+      modules: stats.chunks && stats.chunks[0].modules
     };
     res.json(data);
   }
