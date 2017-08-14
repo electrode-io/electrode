@@ -1,3 +1,43 @@
+# 8/14/2017
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-react-app@3.2.1 `(3.2.0 => 3.2.1)`
+-   electrode-archetype-react-component@3.2.1 `(3.2.0 => 3.2.1)`
+-   electrode-archetype-react-component-dev@3.2.1 `(3.2.0 => 3.2.1)`
+-   electrode-webpack-reporter@0.3.12 `(0.3.11 => 0.3.12)`
+-   generator-electrode@3.3.3 `(3.3.2 => 3.3.3)`
+
+### Lerna Updated
+
+-   electrode-archetype-react-app-dev@3.2.1 `(3.2.0 => 3.2.1)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [patch][chore] Update Readme component archetype ([#528](https://github.com/electrode-io/electrode/pull/528)) [commit](http://github.com/electrode-io/electrode/commit/f81feec3194b13de85f901bc1421ab75ab8d61e1)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   [patch] babel src to lib should copy files ([#542](https://github.com/electrode-io/electrode/pull/542)) [commit](http://github.com/electrode-io/electrode/commit/be20b4142340e62e8c9e3c2ac05f03884e815891)
+    -   [chore] format code ([#541](https://github.com/electrode-io/electrode/pull/541)) [commit](http://github.com/electrode-io/electrode/commit/8334262d3e3f5f47a323bde8046068f6e23d6af7)
+    -   [patch][chore] Update Readme component archetype ([#528](https://github.com/electrode-io/electrode/pull/528)) [commit](http://github.com/electrode-io/electrode/commit/f81feec3194b13de85f901bc1421ab75ab8d61e1)
+
+-   `packages/electrode-webpack-reporter`
+
+    -   [patch] make sure chunks is valid ([#544](https://github.com/electrode-io/electrode/pull/544)) [commit](http://github.com/electrode-io/electrode/commit/4a11c7c08cb6290c95eab4b3d5bc19cc1020dc2e)
+
+-   `packages/generator-electrode`
+
+    -   [patch] update component bundled demos ([#543](https://github.com/electrode-io/electrode/pull/543)) [commit](http://github.com/electrode-io/electrode/commit/bb2af69fa02e83b59d46c26fe8410a3b2b53f435)
+
+-   `MISC`
+
+    -   [chore] consolidate changelog [commit](http://github.com/electrode-io/electrode/commit/82763d93ebd00fff8baad5977cb23a03b6810568)
+
 # 8/10/2017
 
 ## Packages
