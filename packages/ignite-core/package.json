@@ -1,7 +1,7 @@
 {
   "name": "ignite-core",
   "version": "1.0.0",
-  "description": "A bootstrap tool for installing, updating, and assiting development with Electrode platform.",
+  "description": "A bootstrap tool for installing, updating, and assisting development with Electrode platform.",
   "main": "ignite.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -27,10 +27,29 @@
   "dependencies": {
     "chalk": "^2.0.1",
     "opn": "^5.1.0",
-    "xsh": "^0.3.0"
+    "xsh": "^0.3.0",
+    "yargs": "^8.0.2"
+  },
+  "devDependencies": {
+    "electrode-archetype-njs-module-dev": "^2.2.0"
   },
   "bugs": {
     "url": "https://github.com/electrode-io/electrode/issues"
   },
-  "homepage": "http://www.electrode.io"
+  "homepage": "http://www.electrode.io",
+  "nyc": {
+    "all": true,
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "exclude": [
+      "coverage",
+      "*clap.js",
+      "gulpfile.js",
+      "dist",
+      "test"
+    ]
+  }
 }

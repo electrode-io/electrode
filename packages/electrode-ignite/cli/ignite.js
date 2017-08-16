@@ -4,67 +4,87 @@ const chalk = require("chalk");
 const xsh = require("xsh");
 
 const igniteCore = require("ignite-core");
+const errorHandler = require("ignite-core/lib/error-handler");
+const logger = require("ignite-core/lib/logger");
+const semverComp = require("ignite-core/lib/semver-comp");
+
 const pkg = require("../package.json");
-const logger = require("../lib/logger");
-const errorHandler = require("../lib/error-handler");
+
 let startTime;
 
+const igniteOutdated = function(latestVersion) {
+  logger.log(
+    chalk.yellow(
+      `You are currently in electrode-ignite@${pkg.version}.` +
+        ` The latest version is ${latestVersion}.`
+    )
+  );
+  logger.log(chalk.yellow("Please hold, trying to update."));
+
+  /* Auto update electrode-ignite version */
+  return xsh
+    .exec(true, `npm install -g electrode-ignite@${latestVersion}`)
+    .then(function() {
+      logger.log(
+        chalk.yellow(
+          `electrode-ignite updated to ${latestVersion},` +
+            ` exiting, please run your command again.`
+        )
+      );
+      return process.exit(0);
+    })
+    .catch(err =>
+      errorHandler(
+        err,
+        `Since it may not be safe for a module to update itself while running,` +
+          ` please run the update command manually after electrode-ignite exits.` +
+          ` The command is: npm install -g electrode-ignite@${latestVersion}`
+      )
+    );
+};
+
+const igniteUpToDate = function(task) {
+  logger.log(
+    chalk.green("You've aleady installed the latest electrode-ignite.")
+  );
+
+  /* Start ignite-core */
+  igniteCore("oss", task);
+};
+
 function checkElectrodeIgnite() {
-  xsh
+  return xsh
     .exec(true, "npm show electrode-ignite version")
     .then(function(latestVersion) {
-      var latestVersion = latestVersion.stdout.slice(0, -1);
+      latestVersion = latestVersion.stdout.slice(0, -1);
 
-      if (latestVersion > pkg.version) {
-        /* Case 1: electrode-ignite version outdated */
-        logger.log(
-          chalk.yellow(`Latest version is ${latestVersion} - trying to update.`)
-        );
-        xsh
-          .exec(true, `npm install -g electrode-ignite@${latestVersion}`)
-          .then(function() {
-            /* Auto update electrode-ignite version */
-            logger.log(
-              chalk.yellow(
-                `electrode-ignite updated to ${latestVersion}, exiting, please run your command again.`
-              )
-            );
-            return process.exit(0);
-          })
-          .catch(err =>
-            errorHandler(
-              err,
-              "Since it may not be safe for a module to update itself while running, " +
-                "please run the update command manually after electrode-ignite exits." +
-                `\nThe command is: npm install -g electrode-ignite@${latestVersion}`
-            )
-          );
-      } else if (latestVersion === pkg.version) {
+      /* Case 1: electrode-ignite version outdated */
+      if (semverComp(latestVersion, pkg.version) > 0) {
+        igniteOutdated(latestVersion);
+
         /* Case 2: electrode-ignite latest version */
-        logger.log(
-          chalk.green("You've aleady installed the latest electrode-ignite.\n")
-        );
+      } else if (semverComp(latestVersion, pkg.version) === 0) {
+        igniteUpToDate(process.argv[2]);
 
-        /* ignite-core */
-        igniteCore("oss", process.argv[2]);
-      } else {
         /* Case 3: Invalid electrode-ignite version */
+      } else {
         errorHandler(
-          "Failed at: Invalid electrode-ignite version. Please verify your package.json."
+          "Invalid electrode-ignite version. Please report this to Electrode core team."
         );
       }
     })
     .catch(err =>
       errorHandler(
         err,
-        "Please make sure you've installed electrode-ignite globally."
+        `Invalid electrode-ignite in the npm registry.` +
+          ` Please report this to Electrode core team.`
       )
     );
 }
 
 function ignite() {
   logger.log(chalk.green(`Welcome to electrode-ignite version ${pkg.version}`));
-  logger.log(chalk.green("Checking latest version available on npm..."));
+  logger.log(chalk.green("Checking latest version available on npm ..."));
 
   if (!startTime || new Date().getTime() - startTime > 24 * 3600) {
     startTime = undefined;

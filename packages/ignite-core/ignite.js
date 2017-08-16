@@ -5,6 +5,9 @@ const taskLoader = require("./lib/task-loader");
 const errorHandler = require("./lib/error-handler");
 const logger = require("./lib/logger");
 const chalk = require("chalk");
+const usage = require("./lib/usage");
+const taskOptions = require("./lib/task-options");
+const Yargs = require("yargs");
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -12,20 +15,22 @@ const rl = readline.createInterface({
   terminal: false
 });
 
+Yargs.usage(usage, taskOptions).help().argv;
+
 function igniteCore(type, task) {
   if (!task) {
     let option;
     console.log(
-      "---------------------------------------------------------\n" +
-        " * * * * * * * Electrode Ignite Menu * * * * * * * * * * \n" +
-        "---------------------------------------------------------\n" +
-        "[1] Install tools for Electrode development (install)\n" +
-        "[2] Check your NodeJS and npm environment (check-nodejs)\n" +
-        "[3] Generate an Electrode application (generate-app)\n" +
-        "[4] Generate an Electrode component (generate-component)\n" +
-        "[5] Add a component to your existing component repo (add-component)\n" +
-        "[6] Electrode official documenations (docs)\n" +
-        "---------------------------------------------------------\n"
+      `---------------------------------------------------------\n` +
+        `* * * * * * * Electrode Ignite Menu * * * * * * * * * * \n` +
+        `---------------------------------------------------------\n` +
+        `[1] Install tools for Electrode development\n` +
+        `[2] Check your NodeJS and npm environment\n` +
+        `[3] Generate an Electrode application\n` +
+        `[4] Generate an Electrode component\n` +
+        `[5] Add a component to your existing component repo\n` +
+        `[6] Electrode official documenations\n` +
+        `---------------------------------------------------------\n`
     );
     rl.question("Please select your option: ", answer => {
       option = answer;
@@ -52,7 +57,10 @@ function igniteCore(type, task) {
   } else if (task === "docs") {
     taskLoader("6", type);
   } else {
-    errorHandler("Please provide a valid task name.");
+    errorHandler(
+      `The task name "${Yargs.argv._}" you've provided appears to be invalid.\n` +
+      `Please use "ignite --help" to check all the available tasks.`
+    );
   }
 }
 

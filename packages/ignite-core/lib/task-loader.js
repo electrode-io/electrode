@@ -1,7 +1,5 @@
 "use strict";
 
-const xsh = require("xsh");
-const pkg = require("../package.json");
 const installationTaskExec = require("../tasks/installation");
 const checkNode = require("../tasks/check-node");
 const generator = require("../tasks/generator");
@@ -18,24 +16,29 @@ function taskLoader(option, type) {
 
   switch (option) {
     case "1":
+      // eslint-disable-next-line no-console
       console.log("Checking your Electrode environment...\n");
       installationTaskExec();
       break;
     case "2":
+      // eslint-disable-next-line no-console
       console.log("Checking your NodeJS and npm environment...\n");
       checkNode();
       break;
     case "3":
+      // eslint-disable-next-line no-unused-expressions
       type === "oss"
         ? generator(type, generatorApp)
         : generator(type, wmlgeneratorApp);
       break;
     case "4":
+      // eslint-disable-next-line no-unused-expressions
       type === "oss"
         ? generator(type, generatorComponent)
         : generator(type, wmlgeneratorComponent);
       break;
     case "5":
+      // eslint-disable-next-line no-unused-expressions
       type === "oss"
         ? generator(type, generatorComponentAdd)
         : generator(type, wmlgeneratorComponentAdd);

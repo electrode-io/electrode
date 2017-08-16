@@ -1,7 +1,7 @@
 {
   "name": "electrode-ignite",
   "version": "1.0.0",
-  "description": "A bootstrap tool for installing, updating, and assiting development with OSS Electrode platform.",
+  "description": "The CLI tool for development with OSS Electrode React/NodeJS Platform.",
   "main": "bin/ignite.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -31,11 +31,29 @@
     "url": "https://github.com/electrode-io/electrode/issues"
   },
   "dependencies": {
-    "ignite-core": "^1.0.0",
     "chalk": "^2.0.1",
+    "generator-electrode": "^3.2.0",
+    "ignite-core": "^1.0.0",
     "xsh": "^0.3.0",
-    "yo": "^2.0.0",
-    "generator-electrode": "^3.2.0"
+    "yo": "^2.0.0"
   },
-  "homepage": "http://www.electrode.io"
+  "homepage": "http://www.electrode.io",
+  "devDependencies": {
+    "electrode-archetype-njs-module-dev": "^2.2.0"
+  },
+  "nyc": {
+    "all": true,
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "exclude": [
+      "coverage",
+      "*clap.js",
+      "gulpfile.js",
+      "dist",
+      "test"
+    ]
+  }
 }

@@ -5,6 +5,7 @@ const xsh = require("xsh");
 const logger = require("../lib/logger");
 const chalk = require("chalk");
 const errorHandler = require("../lib/error-handler");
+const semverComp = require("../lib/semver-comp");
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -56,20 +57,6 @@ const checkXClapCLILatestVersion = function() {
   });
 };
 
-const cmp = function(a, b) {
-  var pa = a.split(".");
-  var pb = b.split(".");
-  for (var i = 0; i < 3; i++) {
-    var na = Number(pa[i]);
-    var nb = Number(pb[i]);
-    if (na > nb) return 1;
-    if (nb > na) return -1;
-    if (!isNaN(na) && isNaN(nb)) return 1;
-    if (isNaN(na) && !isNaN(nb)) return -1;
-  }
-  return 0;
-};
-
 const Installation = function() {
   checkXClapCLI().then(function(version) {
     if (!version) {
@@ -77,23 +64,23 @@ const Installation = function() {
       console.log(
         `Electrode Ignite is about to install the following modules globally:\n- xclap-cli\n`
       );
-      installXClapCLI();
+      return installXClapCLI();
     } else {
-      checkXClapCLILatestVersion().then(function(latestversion) {
+      return checkXClapCLILatestVersion().then(function(latestversion) {
         /* Case 2: xclap-cli already got the latest version */
-        if (cmp(version, latestversion) === 0) {
+        if (semverComp(version, latestversion) === 0) {
           logger.log(
             chalk.green(
               `Congratulations, you've already installed the latest xclap-cli@${latestversion} globally.`
             )
           );
           rl.close();
-        } else if (cmp(version, latestversion) < 0) {
+        } else if (semverComp(version, latestversion) < 0) {
           /* Case 3: xclap-cli version is out-dated */
           console.log(
             `Electrode Ignite is about to update the following modules globally:\n- xclap-cli (from version ${version} to version ${latestversion})`
           );
-          installXClapCLI();
+          return installXClapCLI();
         } else {
           errorHandler("Error when fetching Electrode packages");
         }

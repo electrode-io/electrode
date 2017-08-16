@@ -2,15 +2,20 @@
 
 const chalk = require("chalk");
 const MSEC_IN_SECOND = 1000;
-const MSEC_IN_MINUTE = 60 * MSEC_IN_SECOND;
+const SEC_IN_MIN = 60;
+const DECIMAL_POINTS = 2;
+const MSEC_IN_MINUTE = SEC_IN_MIN * MSEC_IN_SECOND;
+const DIGIT = 10;
 
 const pad2 = x => {
-  return (x < 10 ? "0" : "") + x;
+  return (x < DIGIT ? "0" : "") + x;
 };
 
 const timestamp = () => {
   const d = new Date();
-  const ts = `${pad2(d.getHours())}:${pad2(d.getMinutes())}:${pad2(d.getSeconds())}`;
+  const ts = `${pad2(d.getHours())}:${pad2(d.getMinutes())}:${pad2(
+    d.getSeconds()
+  )}`;
   return ts;
 };
 
@@ -22,10 +27,10 @@ module.exports = {
   formatElapse: elapse => {
     if (elapse >= MSEC_IN_MINUTE) {
       const min = elapse / MSEC_IN_MINUTE;
-      return `${min.toFixed(2)} min`;
+      return `${min.toFixed(DECIMAL_POINTS)} min`;
     } else if (elapse >= MSEC_IN_SECOND) {
       const sec = elapse / MSEC_IN_SECOND;
-      return `${sec.toFixed(2)} sec`;
+      return `${sec.toFixed(DECIMAL_POINTS)} sec`;
     } else {
       return `${elapse} ms`;
     }
@@ -36,7 +41,9 @@ module.exports = {
       return;
     }
     process.stdout.write(
-      `${chalk.magenta("[")}${chalk.gray(timestamp())}${chalk.magenta("]")} ${msg}\n`
+      `${chalk.magenta("[")}${chalk.gray(timestamp())}${chalk.magenta(
+        "]"
+      )} ${msg}\n`
     );
   }
 };
