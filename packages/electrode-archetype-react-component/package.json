@@ -19,7 +19,7 @@
   "main": "archetype-clap.js",
   "scripts": {},
   "devDependencies": {
-    "eslint": "^3.18.0",
+    "eslint": "^4.4.1",
     "eslint-config-walmart": "^1.1.0",
     "eslint-plugin-filenames": "^1.1.0",
     "opener": "^1.4.1",
