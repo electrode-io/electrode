@@ -2,16 +2,15 @@
 
 const checkNode = require("../tasks/check-node");
 const errorHandler = require("../lib/error-handler");
-const xsh = require("xsh");
-const { spawn } = require("child_process");
 const Path = require("path");
+const { spawn } = require("child_process");
+const xsh = require("xsh");
 
 const Generator = function(type, generator) {
-  checkNode()
+  return checkNode()
     .then(function(nodeCheckPassed) {
       if (nodeCheckPassed) {
         let yoPath = "";
-        let generatorPath = "";
         let child = "";
 
         if(process.platform.startsWith("win")) {

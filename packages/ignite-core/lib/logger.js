@@ -1,6 +1,7 @@
 "use strict";
 
 const chalk = require("chalk");
+
 const MSEC_IN_SECOND = 1000;
 const SEC_IN_MIN = 60;
 const DECIMAL_POINTS = 2;

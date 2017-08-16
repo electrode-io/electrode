@@ -54,8 +54,8 @@ You'll see the list of options that you can specify as a task, as below:
 
 ![alt text](./images/ignite-help.png)
 
-Built with :heart: by [Team Electrode](https://github.com/orgs/electrode-io/people) @WalmartLabs.
-
 ## License
 
 Apache-2.0 © WalmartLabs
+
+Built with :heart: by [Team Electrode](https://github.com/orgs/electrode-io/people) @WalmartLabs.

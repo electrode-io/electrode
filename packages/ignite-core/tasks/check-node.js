@@ -1,10 +1,10 @@
 "use strict";
 
-const xsh = require("xsh");
-const logger = require("../lib/logger");
 const chalk = require("chalk");
 const errorHandler = require("../lib/error-handler");
+const logger = require("../lib/logger");
 const readline = require("readline");
+const xsh = require("xsh");
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -18,6 +18,7 @@ const checkNode = function() {
       .exec(true, "node -v")
       .then(function(nodeVersion) {
         nodeVersion = nodeVersion.stdout.slice(0, -1);
+
         return xsh
           .exec(true, "npm -v")
           .then(function(npmVersion) {

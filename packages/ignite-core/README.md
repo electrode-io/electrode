@@ -10,10 +10,12 @@ $ npm install -g ignite-core
 
 ## Usage
 
-`ignite-core` is a core module for supporting `electrode-ignite` and `wml-electrode-ignite`. The main usage for it is to help developers to install, update, and develop with Electrode platform. Generally you don't need to install this module directly, and please start the `ignite` tool by using [electrode-ignite](https://github.com/electrode-io/electrode/tree/master/packages/electrode-ignite).
+`ignite-core` is a core module for supporting `electrode-ignite` and `wml-electrode-ignite`. The main usage for it is to help developers to install, update, and develop with Electrode platform.
 
-Built with :heart: by [Team Electrode](https://github.com/orgs/electrode-io/people) @WalmartLabs.
+Generally you don't need to install this module directly, and please start the `ignite` tool by using [electrode-ignite](https://github.com/electrode-io/electrode/tree/master/packages/electrode-ignite).
 
 ## License
 
 Apache-2.0 © WalmartLabs
+
+Built with :heart: by [Team Electrode](https://github.com/orgs/electrode-io/people) @WalmartLabs.

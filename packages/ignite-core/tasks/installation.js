@@ -58,7 +58,7 @@ const checkXClapCLILatestVersion = function() {
 };
 
 const Installation = function() {
-  checkXClapCLI().then(function(version) {
+  return checkXClapCLI().then(function(version) {
     if (!version) {
       /* Case 1: xclap-cli does not installed globally */
       console.log(

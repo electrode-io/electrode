@@ -1,7 +1,7 @@
 "use strict";
 
-const logger = require("./logger");
 const chalk = require("chalk");
+const logger = require("./logger");
 
 const errorHandler = function(err, message) {
   if (message) {

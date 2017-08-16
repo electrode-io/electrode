@@ -5,6 +5,15 @@ const opn = require("opn");
 const logger = require("../lib/logger");
 const chalk = require("chalk");
 
+const printSucessLogs = function() {
+  logger.log(
+    chalk.green(
+      "You've successfully opened the oss gitbook. Please checkout your browser."
+    )
+  );
+  return process.exit(0);
+};
+
 const electrodeDocs = function(type) {
   var gitbookURL = "";
   if (type === "oss") {
@@ -16,14 +25,9 @@ const electrodeDocs = function(type) {
   }
 
   if (process.platform.startsWith("win")) {
-    opn(gitbookURL)
+    return opn(gitbookURL)
       .then(function() {
-        logger.log(
-          chalk.green(
-            "You've successfully opened the oss gitbook. Please checkout your browser."
-          )
-        );
-        return process.exit(0);
+        printSucessLogs();
       })
       .catch(function(e) {
         errorHandler("Failed at open a new browser on windows", e);
@@ -31,12 +35,7 @@ const electrodeDocs = function(type) {
   } else {
     try {
       opn(gitbookURL);
-      logger.log(
-        chalk.green(
-          "You've successfully opened the oss gitbook. Please checkout your browser."
-        )
-      );
-      return process.exit(0);
+      printSucessLogs();
     } catch (e) {
       errorHandler("Failed at open a new browser on windows", e);
     }
