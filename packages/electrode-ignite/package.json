@@ -4,7 +4,7 @@
   "description": "The CLI tool for development with OSS Electrode React/NodeJS Platform.",
   "main": "bin/ignite.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "clap test"
   },
   "bin": {
     "ignite": "bin/ignite.js"
@@ -33,14 +33,16 @@
   "dependencies": {
     "chalk": "^2.0.1",
     "generator-electrode": "^3.2.0",
-    "ignite-core": "^1.0.0",
+    "ignite-core": "../ignite-core",
     "xsh": "^0.3.0",
     "yo": "^2.0.0"
   },
   "homepage": "http://www.electrode.io",
   "devDependencies": {
+    "assert": "^1.4.1",
     "electrode-archetype-njs-module-dev": "^2.2.0",
-    "mockery": "^1.7.0"
+    "rewire": "^2.5.2",
+    "sinon": "^3.2.1"
   },
   "nyc": {
     "all": true,

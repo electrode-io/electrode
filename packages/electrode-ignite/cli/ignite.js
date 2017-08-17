@@ -49,7 +49,7 @@ const igniteUpToDate = function(task) {
   );
 
   /* Start ignite-core */
-  igniteCore("oss", task);
+  return igniteCore("oss", task);
 };
 
 function checkElectrodeIgnite() {
@@ -88,10 +88,10 @@ function ignite() {
 
   if (!startTime || new Date().getTime() - startTime > 24 * 3600) {
     startTime = undefined;
-    checkElectrodeIgnite();
+    return checkElectrodeIgnite();
   } else {
     /* ignite-core */
-    igniteCore("oss", process.argv[2]);
+    return igniteCore("oss", process.argv[2]);
   }
 }
 

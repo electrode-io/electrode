@@ -4,7 +4,7 @@
   "description": "A bootstrap tool for installing, updating, and assisting development with Electrode platform.",
   "main": "ignite.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "clap test"
   },
   "repository": {
     "type": "git",
