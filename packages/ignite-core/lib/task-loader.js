@@ -1,12 +1,11 @@
 "use strict";
 
-
 const chalk = require("chalk");
 const checkNode = require("../tasks/check-node");
 const docs = require("../tasks/docs");
 const generator = require("../tasks/generator");
 const installationTaskExec = require("../tasks/installation");
-const logger = require("./lib/logger");
+const logger = require("./logger");
 
 function taskLoader(option, type) {
   switch (option) {

@@ -4,15 +4,7 @@ A bootstrap tool for installing, updating, and assisting development with Electr
 
 ## Installation
 
-```
-$ npm install -g ignite-core
-```
-
-## Usage
-
-`ignite-core` is a core module for supporting `electrode-ignite` and `wml-electrode-ignite`. The main usage for it is to help developers to install, update, and develop with Electrode platform.
-
-Generally you don't need to install this module directly, and please start the `ignite` tool by using [electrode-ignite](https://github.com/electrode-io/electrode/tree/master/packages/electrode-ignite).
+`ignite-core` is a core module for `electrode-ignite` CLI tools. Generally you don't need to install this module directly, and if you want to check out the CLI tool for development with OSS Electrode Platform, please read the electrode-ignite Installation [here](https://github.com/electrode-io/electrode/blob/master/packages/electrode-ignite/README.md#installation)
 
 ## License
 
