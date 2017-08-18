@@ -37,24 +37,4 @@ describe("ignite-core:task-loader", function() {
       chalk.green("Checking your NodeJS and npm environment...")
     );
   });
-
-  // it("Option#6 open docs in a browser", function() {
-  //   this.originalPlatform = Object.getOwnPropertyDescriptor(
-  //     process,
-  //     "platform"
-  //   );
-  //   Object.defineProperty(process, "platform", {
-  //     value: "mac"
-  //   });
-  //
-  //   taskLoader("6", "oss");
-  //
-  //   sinon.assert.callCount(loggerStub, 1);
-  //   assert.equal(
-  //     loggerStub.getCalls()[0].args.toString(),
-  //     chalk.green(
-  //       "You've successfully opened the oss gitbook. Please checkout your browser."
-  //     )
-  //   );
-  // });
 });

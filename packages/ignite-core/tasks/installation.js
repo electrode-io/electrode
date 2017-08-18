@@ -34,7 +34,7 @@ const installXClapCLI = function() {
 const checkXClapCLI = function() {
   return new Promise((resolve, reject) => {
     return xsh
-      .exec(true, `npm ls -g -j --depth=0 xclap-cli`)
+      .exec(true, "npm ls -g -j --depth=0 xclap-cli")
       .then(function(ret) {
         resolve(JSON.parse(ret.stdout).dependencies["xclap-cli"].version);
       })

@@ -22,8 +22,12 @@ describe("ignite-core: check-node.spec.js", function() {
     xshStub
       .withArgs(true, "npm -v")
       .returns(Promise.resolve({ stdout: "3.10.0\n" }));
-    xshStub.withArgs(true, "which node").returns(Promise.resolve({ stdout: "node path\n" }));
-    xshStub.withArgs(true, "where node").returns(Promise.resolve({ stdout: "windows node path\n" }));
+    xshStub
+      .withArgs(true, "which node")
+      .returns(Promise.resolve({ stdout: "node path\n" }));
+    xshStub
+      .withArgs(true, "where node")
+      .returns(Promise.resolve({ stdout: "windows node path\n" }));
   });
 
   afterEach(function() {
