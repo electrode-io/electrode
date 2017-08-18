@@ -3,7 +3,7 @@
 const checkNode = require("../tasks/check-node");
 const errorHandler = require("../lib/error-handler");
 const Path = require("path");
-const { spawn } = require("child_process");
+const spawn = require("child_process").spawn;
 const xsh = require("xsh");
 
 const Generator = function(type, generator) {
