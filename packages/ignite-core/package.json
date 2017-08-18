@@ -31,7 +31,8 @@
     "yargs": "^8.0.2"
   },
   "devDependencies": {
-    "electrode-archetype-njs-module-dev": "^2.2.0"
+    "electrode-archetype-njs-module-dev": "^2.2.0",
+    "rewire": "^2.5.2"
   },
   "bugs": {
     "url": "https://github.com/electrode-io/electrode/issues"
