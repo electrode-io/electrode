@@ -12,7 +12,7 @@ const rl = readline.createInterface({
   terminal: false
 });
 
-const checkNode = function() {
+const checkNode = function(type, igniteCore) {
   return new Promise((resolve, reject) => {
     return xsh
       .exec(true, "node -v")
@@ -38,6 +38,12 @@ const checkNode = function() {
                   chalk.green(`Your Node binary path is: ${nodePath}`)
                 );
                 rl.close();
+
+                if(type && igniteCore) {
+                  logger.log(chalk.green("Please choose your next task:"));
+                  igniteCore(type);
+                };
+
                 resolve(true);
               })
               .catch(err =>

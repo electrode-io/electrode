@@ -43,9 +43,9 @@ const igniteOutdated = function(latestVersion) {
     );
 };
 
-const igniteUpToDate = function(task) {
+const igniteUpToDate = function(task, version) {
   logger.log(
-    chalk.green("You've aleady installed the latest electrode-ignite.")
+    chalk.green(`You've aleady installed the latest electrode-ignite@${version}.`)
   );
 
   /* Start ignite-core */
@@ -64,12 +64,12 @@ function checkElectrodeIgnite() {
 
         /* Case 2: electrode-ignite latest version */
       } else if (semverComp(latestVersion, pkg.version) === 0) {
-        igniteUpToDate(process.argv[2]);
+        igniteUpToDate(process.argv[2], latestVersion);
 
         /* Case 3: Invalid electrode-ignite version */
       } else {
         errorHandler(
-          "Invalid electrode-ignite version. Please report this to Electrode core team."
+          `Invalid electrode-ignite version@${pkg.version}. Please report this to Electrode core team.`
         );
       }
     })

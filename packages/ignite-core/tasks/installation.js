@@ -6,6 +6,7 @@ const logger = require("../lib/logger");
 const chalk = require("chalk");
 const errorHandler = require("../lib/error-handler");
 const semverComp = require("../lib/semver-comp");
+const igniteCore = require("../ignite");
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -13,7 +14,7 @@ const rl = readline.createInterface({
   terminal: false
 });
 
-const installXClapCLI = function() {
+const installXClapCLI = function(type, igniteCore) {
   rl.question("Proceed? (y/n) ", answer => {
     if (answer.toLowerCase() === "y") {
       return xsh
@@ -22,7 +23,11 @@ const installXClapCLI = function() {
           logger.log(
             chalk.green("You've successfully installed the latest xclap-cli.")
           );
-          rl.close();
+
+          if (type && igniteCore) {
+            logger.log(chalk.green("Please choose your next task:"));
+            igniteCore(type);
+          }
         })
         .catch(err =>
           errorHandler(err, "Failed at: Installing the latest xclap-cli.")
@@ -57,14 +62,14 @@ const checkXClapCLILatestVersion = function() {
   });
 };
 
-const Installation = function() {
+const Installation = function(type, igniteCore) {
   return checkXClapCLI().then(function(version) {
     if (!version) {
       /* Case 1: xclap-cli does not installed globally */
       console.log(
         `Electrode Ignite is about to install the following modules globally:\n- xclap-cli\n`
       );
-      return installXClapCLI();
+      return installXClapCLI(type, igniteCore);
     } else {
       return checkXClapCLILatestVersion().then(function(latestversion) {
         /* Case 2: xclap-cli already got the latest version */
@@ -74,13 +79,17 @@ const Installation = function() {
               `Congratulations, you've already installed the latest xclap-cli@${latestversion} globally.`
             )
           );
-          rl.close();
+
+          if (type && igniteCore) {
+            logger.log(chalk.green("Please choose your next task:"));
+            igniteCore(type);
+          }
         } else if (semverComp(version, latestversion) < 0) {
           /* Case 3: xclap-cli version is out-dated */
           console.log(
             `Electrode Ignite is about to update the following modules globally:\n- xclap-cli (from version ${version} to version ${latestversion})`
           );
-          return installXClapCLI();
+          return installXClapCLI(type, igniteCore);
         } else {
           errorHandler("Error when fetching Electrode packages");
         }

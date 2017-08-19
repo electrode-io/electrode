@@ -5,16 +5,20 @@ const opn = require("opn");
 const logger = require("../lib/logger");
 const chalk = require("chalk");
 
-const printSucessLogs = function() {
+const printSucessLogs = function(type, igniteCore) {
   logger.log(
     chalk.green(
       "You've successfully opened the oss gitbook. Please checkout your browser."
     )
   );
-  return process.exit(0);
+
+  if (type && igniteCore) {
+    logger.log(chalk.green("Please choose your next task:"));
+    igniteCore(type);
+  }
 };
 
-const electrodeDocs = function(type) {
+const electrodeDocs = function(type, igniteCore) {
   var gitbookURL = "";
   if (type === "oss") {
     gitbookURL = "https://docs.electrode.io/";
@@ -27,7 +31,7 @@ const electrodeDocs = function(type) {
   if (process.platform.startsWith("win")) {
     return opn(gitbookURL)
       .then(function() {
-        printSucessLogs();
+        printSucessLogs(type, igniteCore);
       })
       .catch(function(e) {
         errorHandler("Failed at open a new browser on windows", e);
@@ -35,7 +39,7 @@ const electrodeDocs = function(type) {
   } else {
     try {
       opn(gitbookURL);
-      printSucessLogs();
+      printSucessLogs(type, igniteCore);
     } catch (e) {
       errorHandler("Failed at open a new browser on windows", e);
     }

@@ -7,15 +7,15 @@ const generator = require("../tasks/generator");
 const installationTaskExec = require("../tasks/installation");
 const logger = require("./logger");
 
-function taskLoader(option, type) {
+function taskLoader(option, type, igniteCore) {
   switch (option) {
     case "1":
       logger.log(chalk.green("Checking your Electrode environment..."));
-      installationTaskExec();
+      installationTaskExec(type, igniteCore);
       break;
     case "2":
       logger.log(chalk.green("Checking your NodeJS and npm environment..."));
-      checkNode();
+      checkNode(type, igniteCore);
       break;
     case "3":
       // eslint-disable-next-line no-unused-expressions
@@ -36,8 +36,11 @@ function taskLoader(option, type) {
         : generator(type, "@walmart/wml-electrode:component-add");
       break;
     case "6":
-      docs(type);
+      docs(type, igniteCore);
       break;
+    case "7":
+      logger.log(chalk.green("You've successfully exit Electrode Ignite."));
+      return process.exit(0);
   }
 }
 
