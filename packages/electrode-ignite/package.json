@@ -1,6 +1,6 @@
 {
   "name": "electrode-ignite",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "The CLI tool for development with OSS Electrode React/NodeJS Platform.",
   "main": "bin/ignite.js",
   "scripts": {
@@ -33,7 +33,7 @@
   "dependencies": {
     "chalk": "^2.0.1",
     "generator-electrode": "^3.2.0",
-    "ignite-core": "../ignite-core",
+    "ignite-core": "^0.1.0",
     "xsh": "^0.3.0",
     "yo": "^2.0.0"
   },

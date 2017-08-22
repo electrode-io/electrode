@@ -30,6 +30,8 @@ const Generator = function(type, generator) {
         child.on("error", err =>
           errorHandler(err, `Failed at: Running ${generator} generator.`)
         );
+
+        return ;
       }
     })
     .catch(err => errorHandler(err, "Failed at: checking node env."));

@@ -5,34 +5,38 @@ const assert = require("assert");
 const rewire = require("rewire");
 
 const electrodeIgnite = rewire("../../cli/ignite");
-const pkg = require("../../package.json");
 const logger = require("ignite-core/lib/logger");
 const chalk = require("chalk");
 
 describe("electrode-ignite", function() {
-  const pkgVersion = pkg.version;
+  let loggerStub = "";
 
-  it("when electrode-ignite is outdated, it should auto update.", function(done) {
-    const loggerStub = sinon.stub(logger, "log");
-    pkg.version = "0.0.1";
+  beforeEach(function() {
+    loggerStub = sinon.stub(logger, "log");
+  });
 
-    electrodeIgnite().then(function() {
-      sinon.assert.callCount(loggerStub, 4);
-      assert.equal(
-        loggerStub.getCalls()[3].args.toString(),
-        chalk.yellow("Please hold, trying to update.")
-      );
+  afterEach(function() {
+    loggerStub.restore();
+  });
 
-      pkg.version = pkgVersion;
-      loggerStub.restore();
-      done();
+  it("when electrode-ignite is outdated, it should auto update.", function() {
+    const igniteOutdated = electrodeIgnite.__get__("igniteOutdated");
 
-    });
+    igniteOutdated("1.0.0");
+
+    sinon.assert.callCount(loggerStub, 2);
+    assert.equal(
+      loggerStub.getCalls()[0].args.toString(),
+      chalk.yellow("You are currently in electrode-ignite@0.1.1. The latest version is 1.0.0.")
+    );
+    assert.equal(
+      loggerStub.getCalls()[1].args.toString(),
+      chalk.yellow("Please hold, trying to update.")
+    );
   });
 
   it("when electrode-ignite is up-to-date, it should prompt proper messages.", function() {
     const igniteUpToDate = electrodeIgnite.__get__("igniteUpToDate");
-    const loggerStub = sinon.stub(logger, "log");
 
     igniteUpToDate("install", "0.1.0");
 
