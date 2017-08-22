@@ -34,12 +34,12 @@ describe("electrode-ignite", function() {
     const igniteUpToDate = electrodeIgnite.__get__("igniteUpToDate");
     const loggerStub = sinon.stub(logger, "log");
 
-    igniteUpToDate("install");
+    igniteUpToDate("install", "0.1.0");
 
     sinon.assert.callCount(loggerStub, 2);
     assert.equal(
       loggerStub.getCalls()[0].args.toString(),
-      chalk.green("You've aleady installed the latest electrode-ignite.")
+      chalk.green("You've aleady installed the latest electrode-ignite@0.1.0.")
     );
   });
 });

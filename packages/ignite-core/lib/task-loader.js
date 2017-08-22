@@ -40,8 +40,9 @@ function taskLoader(option, type, igniteCore) {
       break;
     case "7":
       logger.log(chalk.green("You've successfully exit Electrode Ignite."));
-      return process.exit(0);
+      return process.exit(0); // eslint-disable-line no-process-exit
   }
+  return true;
 }
 
 module.exports = taskLoader;

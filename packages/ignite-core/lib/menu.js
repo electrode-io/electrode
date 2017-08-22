@@ -32,11 +32,11 @@ const igniteMenu = function(type, igniteCore) {
 
   const footer = `---------------------------------------------------------\n`;
 
-  console.log(chalk.cyan(banner));
-  options.forEach(function(e) {
-    console.log(chalk.cyan(e));
+  console.log(chalk.cyan(banner)); // eslint-disable-line no-console
+  options.forEach((e) => {
+    console.log(chalk.cyan(e));  // eslint-disable-line no-console
   });
-  console.log(chalk.cyan(footer));
+  console.log(chalk.cyan(footer));  // eslint-disable-line no-console
 
   rl.question(chalk.cyan("Please select your option: "), answer => {
     option = answer;

@@ -11,16 +11,13 @@ const docs = rewire("../../tasks/docs");
 
 describe("ignite-core:docs", function() {
   let loggerStub = "";
-  let exitStub = "";
 
   beforeEach(function() {
     loggerStub = sinon.stub(logger, "log");
-    exitStub = sinon.stub(process, "exit");
   });
 
   afterEach(function() {
     loggerStub.restore();
-    exitStub.restore();
   });
 
   it("Print success logs", function() {
@@ -33,6 +30,5 @@ describe("ignite-core:docs", function() {
         "You've successfully opened the oss gitbook. Please checkout your browser."
       )
     );
-    sinon.assert.calledOnce(exitStub);
   });
 });
