@@ -21,8 +21,8 @@ describe("react-webapp", function() {
   describe("setupOptions", function() {
     it("should enable https if ENV is set", () => {
       process.env.WEBPACK_DEV_HTTPS = "true";
-      const x = reactWebapp.setupOptions({});
-      return x.then(opt => expect(opt.__internals.devBundleBase).to.match(/^https:/));
+      const opt = reactWebapp.setupOptions({});
+      expect(opt.__internals.devBundleBase).to.match(/^https:/);
     });
   });
 });

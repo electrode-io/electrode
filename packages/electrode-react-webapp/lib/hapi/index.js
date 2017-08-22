@@ -1,65 +1,72 @@
 "use strict";
 
+/* eslint-disable no-magic-numbers */
+
 const _ = require("lodash");
 const assert = require("assert");
 const ReactWebapp = require("../react-webapp");
 
-const HTTP_ERROR_500 = 500;
 const HTTP_REDIRECT = 302;
 
-const registerRoutes = (server, options, next) => {
-  ReactWebapp.setupOptions(options)
-    .then(registerOptions => {
-      _.each(registerOptions.paths, (v, path) => {
-        const resolveContent = () => {
-          if (registerOptions.serverSideRendering !== false) {
-            assert(
-              v.content !== undefined,
-              `You must define content for the webapp plugin path ${path}`
-            );
-            return ReactWebapp.resolveContent(v.content);
-          }
-          return "";
-        };
-
-        const routeOptions = _.defaults({ htmlFile: v.htmlFile }, registerOptions);
-
-        const routeHandler = ReactWebapp.makeRouteHandler(routeOptions, resolveContent());
-
-        server.route({
-          method: v.method || "GET",
-          path,
-          config: v.config || {},
-          handler: (request, reply) => {
-            const handleStatus = data => {
-              const status = data.status;
-              if (status === HTTP_REDIRECT) {
-                reply.redirect(data.path);
-              } else {
-                reply({ message: "error" }).code(status);
-              }
-            };
-
-            routeHandler({ mode: request.query.__mode || "", request })
-              .then(data => {
-                return data.status ? handleStatus(data) : reply(data);
-              })
-              .catch(err => {
-                reply(err.message).code(err.status || HTTP_ERROR_500);
-              });
-          }
-        });
-      });
+const handleRoute = (request, reply, handler) => {
+  return handler({ mode: request.query.__mode || "", request })
+    .then(data => {
+      const status = data.status;
+      if (status === undefined) {
+        reply(data);
+      } else if (status === HTTP_REDIRECT) {
+        reply.redirect(data.path);
+      } else if (status >= 200 && status < 300) {
+        reply(data.html !== undefined ? data.html : data);
+      } else {
+        reply(data).code(status);
+      }
     })
-    .then(() => next())
-    .catch(next);
+    .catch(err => {
+      reply(err.html).code(err.status);
+    });
 };
 
-registerRoutes.attributes = {
+const registerRoutes = (server, options) => {
+  const registerOptions = ReactWebapp.setupOptions(options);
+  _.each(registerOptions.paths, (pathData, path) => {
+    const resolveContent = () => {
+      if (registerOptions.serverSideRendering !== false) {
+        assert(
+          pathData.content !== undefined,
+          `You must define content for the webapp plugin path ${path}`
+        );
+        return ReactWebapp.resolveContent(pathData.content);
+      }
+      return { status: 200, html: "" };
+    };
+
+    const routeOptions = ReactWebapp.setupPathOptions(registerOptions, path);
+    const routeHandler = ReactWebapp.makeRouteHandler(routeOptions, resolveContent());
+
+    server.route({
+      method: pathData.method || "GET",
+      path,
+      config: pathData.config || {},
+      handler: (req, reply) => handleRoute(req, reply, routeHandler)
+    });
+  });
+};
+
+const registerRoutesPlugin = (server, options, next) => {
+  try {
+    registerRoutes(server, options);
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+};
+
+registerRoutesPlugin.attributes = {
   pkg: {
     name: "webapp",
     version: "1.0.0"
   }
 };
 
-module.exports = registerRoutes;
+module.exports = registerRoutesPlugin;
