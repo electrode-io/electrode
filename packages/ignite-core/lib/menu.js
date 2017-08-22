@@ -52,7 +52,7 @@ const igniteMenu = function(type, igniteCore) {
       break;
     }
 
-    taskLoader(option, type, igniteCore);
+    return taskLoader(option, type, igniteCore);
   });
 };
 

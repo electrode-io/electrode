@@ -9,6 +9,10 @@ const chalk = require("chalk");
 
 const docs = rewire("../../tasks/docs");
 
+function foo() {
+  return;
+}
+
 describe("ignite-core:docs", function() {
   let loggerStub = "";
 
@@ -28,6 +32,24 @@ describe("ignite-core:docs", function() {
       loggerStub.getCalls()[0].args.toString(),
       chalk.green(
         "You've successfully opened the oss gitbook. Please checkout your browser."
+      )
+    );
+  });
+
+  it("Print success logs and return back to menu", function() {
+    const printSucessLogs = docs.__get__("printSucessLogs");
+    printSucessLogs("oss", foo);
+    sinon.assert.callCount(loggerStub, 2);
+    assert.equal(
+      loggerStub.getCalls()[0].args.toString(),
+      chalk.green(
+        "You've successfully opened the oss gitbook. Please checkout your browser."
+      )
+    );
+    assert.equal(
+      loggerStub.getCalls()[1].args.toString(),
+      chalk.green(
+        "Please choose your next task:"
       )
     );
   });

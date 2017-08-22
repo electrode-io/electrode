@@ -33,19 +33,19 @@ Yargs.command(
 
 const igniteCore = function(type, task) {
   if (!task) {
-    igniteMenu(type, igniteCore);
+    return igniteMenu(type, igniteCore);
   } else if (task === "install") {
-    taskLoader("1", type, igniteCore);
+    return taskLoader("1", type, igniteCore);
   } else if (task === "check-nodejs") {
-    taskLoader("2", type, igniteCore);
+    return taskLoader("2", type, igniteCore);
   } else if (task === "generate-app") {
-    taskLoader("3", type);
+    return taskLoader("3", type);
   } else if (task === "generate-component") {
-    taskLoader("4", type);
+    return taskLoader("4", type);
   } else if (task === "add-component") {
-    taskLoader("5", type);
+    return taskLoader("5", type);
   } else if (task === "docs") {
-    taskLoader("6", type, igniteCore);
+    return taskLoader("6", type, igniteCore);
   } else {
     errorHandler(
       `The task name "${Yargs.argv._}" you've provided appears to be invalid.\n` +

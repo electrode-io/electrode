@@ -15,7 +15,7 @@ const rl = readline.createInterface({
 });
 
 const installXClapCLI = function(type, igniteCore) {
-  rl.question("Proceed? (y/n) ", answer => {
+  return rl.question("Proceed? (y/n) ", answer => {
     if (answer.toLowerCase() === "y") {
       return xsh
         .exec("npm install -g xclap-cli")
@@ -26,8 +26,10 @@ const installXClapCLI = function(type, igniteCore) {
 
           if (type && igniteCore) {
             logger.log(chalk.green("Please choose your next task:"));
-            igniteCore(type);
+            return igniteCore(type);
           }
+
+          return ;
         })
         .catch(err =>
           errorHandler(err, "Failed at: Installing the latest xclap-cli.")
@@ -82,8 +84,9 @@ const Installation = function(type, igniteCore) {
 
           if (type && igniteCore) {
             logger.log(chalk.green("Please choose your next task:"));
-            igniteCore(type);
+            return igniteCore(type);
           }
+          return ;
         } else if (semverComp(version, latestversion) < 0) {
           /* Case 3: xclap-cli version is out-dated */
           console.log(

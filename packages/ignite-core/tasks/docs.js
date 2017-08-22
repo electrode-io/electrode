@@ -14,7 +14,7 @@ const printSucessLogs = function(type, igniteCore) {
 
   if (type && igniteCore) {
     logger.log(chalk.green("Please choose your next task:"));
-    igniteCore(type);
+    return igniteCore(type);
   }
 };
 
@@ -31,7 +31,7 @@ const electrodeDocs = function(type, igniteCore) {
   if (process.platform.startsWith("win")) {
     return opn(gitbookURL)
       .then(function() {
-        printSucessLogs(type, igniteCore);
+        return printSucessLogs(type, igniteCore);
       })
       .catch(function(e) {
         errorHandler("Failed at open a new browser on windows", e);
@@ -39,7 +39,7 @@ const electrodeDocs = function(type, igniteCore) {
   } else {
     try {
       opn(gitbookURL);
-      printSucessLogs(type, igniteCore);
+      return printSucessLogs(type, igniteCore);
     } catch (e) {
       errorHandler("Failed at open a new browser on windows", e);
     }

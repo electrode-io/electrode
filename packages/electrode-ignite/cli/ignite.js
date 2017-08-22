@@ -60,11 +60,11 @@ function checkElectrodeIgnite() {
 
       /* Case 1: electrode-ignite version outdated */
       if (semverComp(latestVersion, pkg.version) > 0) {
-        igniteOutdated(latestVersion);
+        return igniteOutdated(latestVersion);
 
         /* Case 2: electrode-ignite latest version */
       } else if (semverComp(latestVersion, pkg.version) === 0) {
-        igniteUpToDate(process.argv[2], latestVersion);
+        return igniteUpToDate(process.argv[2], latestVersion);
 
         /* Case 3: Invalid electrode-ignite version */
       } else {
