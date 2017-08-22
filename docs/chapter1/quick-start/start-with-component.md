@@ -1,11 +1,23 @@
 # Get Started With Electrode Component
 
+> Note: If you have not done so yet, please check [Requirements](/overview/requirements.md) for setting up your development environment.
+
 ## Quick Guide
 
-If you have not done so yet, please check [Requirements](/overview/requirements.md) for setting up your development environment. Use the following instructions as a guide for creating your Electrode component.
+There are two ways to start your component:
+
+- Ignite Menu
 
 ```bash
-$ yo electrode:component
+$ ignite
+```
+
+And specify option `4` for `Generate an Electrode component`.
+
+- Ignite Single task
+
+```bash
+$ ignite generate-component
 ```
 
 Fill out the information for your component. You can press enter for all the defaults, except for specifying a name for your component.
@@ -37,11 +49,21 @@ A webserver will be started on localhost:3000. Your new component will be used i
 
 > Note: You can skip this section if you do not need extra components.
 
-If you want to add more components to your project, go to `packages` directory and run `yo electrode:component-add` within the packages directory.
+There are two ways to add more components to your project: invoke ignite menu or specifying the task name.
+Please make sure you are under `packages` directory before you run the commands below:
+
+- Ignite Menu
 
 ```bash
-$ cd packages
-$ yo electrode:component-add
+$ ignite
+```
+
+And specify option `5` for `Add a component to your existing component repo`.
+
+- Ignite Single task
+
+```bash
+$ ignite add-component
 ```
 
 Follow the prompts as above, for example:
