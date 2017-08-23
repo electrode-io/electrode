@@ -6,6 +6,9 @@ const readline = require("readline");
 const taskLoader = require("./task-loader");
 const logger = require("./logger");
 
+const STARNUM = 8;
+const EVEN = 2;
+
 const igniteMenu = function(type, igniteCore) {
   let option;
 
@@ -15,30 +18,52 @@ const igniteMenu = function(type, igniteCore) {
     terminal: false
   });
 
-  const banner =
-    `---------------------------------------------------------\n` +
-    `* * * * * * * Electrode Ignite Menu * * * * * * * * * * \n` +
-    `---------------------------------------------------------`;
+  const banner = function() {
+    let ret = "";
+    for (let i = 0; i < STARNUM; i++) {
+      if (i % EVEN === 0) {
+        ret += chalk.magenta("* ");
+      } else {
+        ret += chalk.green("* ");
+      }
+    }
+    ret += chalk.blueBright("Electrode Ignite Menu");
+    for (let i = 0; i < STARNUM; i++) {
+      if (i % EVEN === 0) {
+        ret += chalk.green(" *");
+      } else {
+        ret += chalk.magenta(" *");
+      }
+    }
+    return `  ${ret}  `;
+  };
+
+  const dashedLines = `---------------------------------------------------------`;
 
   const options = [
-    `Install tools for Electrode development`,
-    `Check your NodeJS and npm environment`,
-    `Generate an Electrode application`,
-    `Generate an Electrode component`,
-    `Add a component to your existing component repo`,
-    `Electrode official documenations`,
-    `Exit`
+    `[1] \u2668 Install tools for Electrode development`,
+    `[2] \u2611 Check your NodeJS and npm environment`,
+    `[3] \u2661 Generate an Electrode application`,
+    `[4] \u2606 Generate an Electrode component`,
+    `[5] \u272A Add a component to your existing component repo`,
+    `[6] \u263A Electrode official documenations`,
+    `[7] \u261E Exit`
   ];
 
-  const footer = `---------------------------------------------------------\n`;
+  console.log(chalk.blueBright(dashedLines)); // eslint-disable-line no-console
+  console.log(banner()); // eslint-disable-line no-console
+  console.log(chalk.blueBright(dashedLines)); // eslint-disable-line no-console
 
-  console.log(chalk.cyan(banner)); // eslint-disable-line no-console
   options.forEach((e, i) => {
-    console.log(`[${chalk.red(i + 1)}] ${chalk.cyan(e)}`); // eslint-disable-line no-console
+    if (i % EVEN === 0) {
+      console.log(`${chalk.magenta(e)}`); // eslint-disable-line no-console
+    } else {
+      console.log(`${chalk.green(e)}`); // eslint-disable-line no-console
+    }
   });
-  console.log(chalk.cyan(footer)); // eslint-disable-line no-console
+  console.log(chalk.blueBright(dashedLines)); // eslint-disable-line no-console
 
-  rl.question(chalk.cyan("Please select your option: "), answer => {
+  rl.question("Please select your option: ", answer => {
     option = answer;
 
     // Invalid Electrode Option will re-trigger the menu
