@@ -21,22 +21,22 @@ const igniteMenu = function(type, igniteCore) {
     `---------------------------------------------------------`;
 
   const options = [
-    `[1] Install tools for Electrode development`,
-    `[2] Check your NodeJS and npm environment`,
-    `[3] Generate an Electrode application`,
-    `[4] Generate an Electrode component`,
-    `[5] Add a component to your existing component repo`,
-    `[6] Electrode official documenations`,
-    `[7] Exit`
+    `Install tools for Electrode development`,
+    `Check your NodeJS and npm environment`,
+    `Generate an Electrode application`,
+    `Generate an Electrode component`,
+    `Add a component to your existing component repo`,
+    `Electrode official documenations`,
+    `Exit`
   ];
 
   const footer = `---------------------------------------------------------\n`;
 
   console.log(chalk.cyan(banner)); // eslint-disable-line no-console
-  options.forEach((e) => {
-    console.log(chalk.cyan(e));  // eslint-disable-line no-console
+  options.forEach((e, i) => {
+    console.log(`[${chalk.red(i + 1)}] ${chalk.cyan(e)}`); // eslint-disable-line no-console
   });
-  console.log(chalk.cyan(footer));  // eslint-disable-line no-console
+  console.log(chalk.cyan(footer)); // eslint-disable-line no-console
 
   rl.question(chalk.cyan("Please select your option: "), answer => {
     option = answer;

@@ -7,6 +7,7 @@ const rewire = require("rewire");
 const electrodeIgnite = rewire("../../cli/ignite");
 const logger = require("ignite-core/lib/logger");
 const chalk = require("chalk");
+const pkg = require("../../package.json");
 
 describe("electrode-ignite", function() {
   let loggerStub = "";
@@ -27,7 +28,7 @@ describe("electrode-ignite", function() {
     sinon.assert.callCount(loggerStub, 2);
     assert.equal(
       loggerStub.getCalls()[0].args.toString(),
-      chalk.yellow("You are currently in electrode-ignite@0.1.1. The latest version is 1.0.0.")
+      chalk.yellow(`You are currently in electrode-ignite@${pkg.version}. The latest version is 1.0.0.`)
     );
     assert.equal(
       loggerStub.getCalls()[1].args.toString(),
