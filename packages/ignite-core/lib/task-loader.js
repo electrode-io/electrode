@@ -21,19 +21,19 @@ function taskLoader(option, type, igniteCore) {
       // eslint-disable-next-line no-unused-expressions
       type === "oss"
         ? generator(type, "electrode")
-        : generator(type, "@walmart/wml-electrode");
+        : generator(type, "@walmart/electrode");
       break;
     case "4":
       // eslint-disable-next-line no-unused-expressions
       type === "oss"
         ? generator(type, "electrode:component")
-        : generator(type, "@walmart/wml-electrode:component");
+        : generator(type, "@walmart/electrode:component");
       break;
     case "5":
       // eslint-disable-next-line no-unused-expressions
       type === "oss"
         ? generator(type, "electrode:component-add")
-        : generator(type, "@walmart/wml-electrode:component-add");
+        : generator(type, "@walmart/electrode:component-add");
       break;
     case "6":
       docs(type, igniteCore);
