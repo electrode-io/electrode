@@ -41,7 +41,6 @@
   "devDependencies": {
     "assert": "^1.4.1",
     "electrode-archetype-njs-module-dev": "^2.2.0",
-    "rewire": "^2.5.2",
     "sinon": "^3.2.1"
   },
   "nyc": {

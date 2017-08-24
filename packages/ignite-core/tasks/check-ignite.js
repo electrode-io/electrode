@@ -2,6 +2,8 @@
 
 const xsh = require("xsh");
 const chalk = require("chalk");
+const fs = require("fs");
+const path = require("path");
 
 const logger = require("../lib/logger");
 const semverComp = require("../lib/semver-comp");
@@ -11,6 +13,7 @@ const CLISpinner = require("cli-spinner").Spinner;
 const spinner = new CLISpinner(chalk.green("%s"));
 spinner.setSpinnerString("|/-\\");
 
+const CHECK_INTERVAL = 24 * 3600;
 let igniteName = "";
 
 const igniteUpToDate = function(type, task, version, igniteCore) {
@@ -21,7 +24,7 @@ const igniteUpToDate = function(type, task, version, igniteCore) {
   );
 
   /* Start ignite-core */
-  return;
+  return igniteCore(type, task);
 };
 
 const igniteOutdated = function(latestVersion) {
@@ -66,45 +69,87 @@ const checkInstalledIgnite = function() {
     });
 };
 
+/*
+  check electrode-ignite once daily
+  timestamp saved in directory /tmp/ignite-timestamp.txt
+*/
+const isIgniteNeedsCheck = function() {
+  const timeStampPath = "/tmp/ignite-timestamp.txt";
+  if (!fs.existsSync(timeStampPath)) {
+    fs.writeFile(timeStampPath, new Date().getTime(), { flag: "wx" }, function(err) {
+      if(err) {
+        errorHandler(err, `Saving timestamp to directory ${timeStampPath}.`);
+      }
+    });
+    return true;
+  } else {
+    fs.readFile(timeStampPath, function(err, data) {
+      if (err) {
+        errorHandler(err, `Reading timestamp from directory ${timeStampPath}.`);
+      }
+
+      if (new Date().getTime() - data.toString() > CHECK_INTERVAL) {
+        fs.truncate(timeStampPath, 0, function() {
+          fs.writeFile(timeStampPath, new Date().getTime(), { flag: "w" }, function(err) {
+            if (err) {
+              errorHandler(err, `Saving new timestamp to directory ${timeStampPath}.`);
+            }
+          });
+        });
+
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
+};
+
 const checkIgnite = function(type, igniteCore) {
   igniteName = type === "oss" ? "electrode-ignite" : "wml-electrode-ignite";
 
-  spinner.start();
-  return checkInstalledIgnite().then(function(version) {
-    return xsh
-      .exec(true, `npm show ${igniteName} version`)
-      .then(function(latestVersion) {
-        latestVersion = latestVersion.stdout.slice(0, -1);
-        const versionComp = semverComp(latestVersion, version);
+  if(isIgniteNeedsCheck()) {
+    logger.log(chalk.green("Checking latest version available on npm ..."));
+    spinner.start();
+    return checkInstalledIgnite().then(function(version) {
+      return xsh
+        .exec(true, `npm show ${igniteName} version`)
+        .then(function(latestVersion) {
+          latestVersion = latestVersion.stdout.slice(0, -1);
+          const versionComp = semverComp(latestVersion, version);
 
-        /* Case 1: electrode-ignite version outdated */
-        if (versionComp > 0) {
-          igniteOutdated(latestVersion);
-          spinner.stop();
-          return;
+          /* Case 1: electrode-ignite version outdated */
+          if (versionComp > 0) {
+            igniteOutdated(latestVersion);
+            spinner.stop();
+            return;
 
-          /* Case 2: electrode-ignite latest version */
-        } else if (versionComp === 0) {
-          igniteUpToDate(type, process.argv[2], latestVersion, igniteCore);
-          spinner.stop();
-          return;
+            /* Case 2: electrode-ignite latest version */
+          } else if (versionComp === 0) {
+            igniteUpToDate(type, process.argv[2], latestVersion, igniteCore);
+            spinner.stop();
+            return;
 
-          /* Case 3: Invalid electrode-ignite version */
-        } else {
-          spinner.stop();
+            /* Case 3: Invalid electrode-ignite version */
+          } else {
+            spinner.stop();
+            errorHandler(
+              `Invalid ${igniteName} version@${version}. Please report this to Electrode core team.`
+            );
+          }
+        })
+        .catch(err =>
           errorHandler(
-            `Invalid ${igniteName} version@${version}. Please report this to Electrode core team.`
-          );
-        }
-      })
-      .catch(err =>
-        errorHandler(
-          err,
-          `Invalid ${igniteName} in the npm registry.` +
-            ` Please report this to Electrode core team.`
-        )
-      );
-  });
+            err,
+            `Invalid ${igniteName} in the npm registry.` +
+              ` Please report this to Electrode core team.`
+          )
+        );
+    });
+  } else {
+    logger.log(chalk.cyan("Your electrode-ignite is up-to-date."));
+    return igniteCore(type);
+  }
 };
 
 module.exports = checkIgnite;

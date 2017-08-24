@@ -52,6 +52,7 @@ function taskLoader(option, type, igniteCore) { // eslint-disable-line complexit
       docs(type, igniteCore);
       break;
     case "7":
+      spinner.stop();
       logger.log(chalk.green("Checking for electrode-ignite update..."));
       checkIgnite(type, igniteCore);
       break;
