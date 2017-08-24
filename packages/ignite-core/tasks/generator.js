@@ -6,22 +6,21 @@ const Path = require("path");
 const spawn = require("child_process").spawn;
 const xsh = require("xsh");
 
-const Generator = function(type, generator) {
-  return checkNode()
+const Generator = function(type, generator, igniteCore, spinner) {
+  return checkNode(type, igniteCore, spinner)
     .then(function(nodeCheckPassed) {
+      spinner.start();
       if (nodeCheckPassed) {
         let yoPath = "";
         let child = "";
 
-        if(process.platform.startsWith("win")) {
-          yoPath = Path.join(__dirname, '..', '..', '.bin', 'yo.cmd');
-          yoPath = yoPath.replace(/\//g, "\\");
-          generator = generator.replace(/\//g,"\\");
+        if (process.platform === "win32") {
+          yoPath = Path.join(__dirname, "..", "..", ".bin", "yo.cmd");
           child = spawn("cmd", ["/c", `${yoPath} ${generator}`], {
             stdio: "inherit"
           });
         } else {
-          yoPath = Path.join(__dirname, '..', '..', '.bin', 'yo');
+          yoPath = Path.join(__dirname, "..", "..", ".bin", "yo");
           child = spawn(yoPath, [generator], {
             stdio: "inherit"
           });
@@ -30,8 +29,8 @@ const Generator = function(type, generator) {
         child.on("error", err =>
           errorHandler(err, `Failed at: Running ${generator} generator.`)
         );
-
-        return ;
+        spinner.stop();
+        return true;
       }
     })
     .catch(err => errorHandler(err, "Failed at: checking node env."));

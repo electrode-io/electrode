@@ -6,8 +6,10 @@ const readline = require("readline");
 const taskLoader = require("./task-loader");
 const logger = require("./logger");
 
-const STARNUM = 8;
+const STARNUM = 6;
 const EVEN = 2;
+
+/* eslint-disable no-console */
 
 const igniteMenu = function(type, igniteCore) {
   let option;
@@ -18,24 +20,24 @@ const igniteMenu = function(type, igniteCore) {
     terminal: false
   });
 
-  const banner = function() {
+  function generateStars() {
     let ret = "";
     for (let i = 0; i < STARNUM; i++) {
       if (i % EVEN === 0) {
-        ret += chalk.magenta("* ");
+        ret += chalk.green(" * ");
       } else {
-        ret += chalk.green("* ");
+        ret += chalk.magenta(" * ");
       }
     }
+    return ret;
+  }
+
+  const banner = function() {
+    let ret = "";
+    ret += generateStars();
     ret += chalk.blueBright("Electrode Ignite Menu");
-    for (let i = 0; i < STARNUM; i++) {
-      if (i % EVEN === 0) {
-        ret += chalk.green(" *");
-      } else {
-        ret += chalk.magenta(" *");
-      }
-    }
-    return `  ${ret}  `;
+    ret += generateStars();
+    return ret;
   };
 
   const dashedLines = `---------------------------------------------------------`;
@@ -50,35 +52,36 @@ const igniteMenu = function(type, igniteCore) {
     `[7] \u261E Exit`
   ];
 
-  console.log(chalk.blueBright(dashedLines)); // eslint-disable-line no-console
-  console.log(banner()); // eslint-disable-line no-console
-  console.log(chalk.blueBright(dashedLines)); // eslint-disable-line no-console
+  console.log(chalk.blueBright(dashedLines));
+  console.log(banner());
+  console.log(chalk.blueBright(dashedLines));
 
   options.forEach((e, i) => {
     if (i % EVEN === 0) {
-      console.log(`${chalk.magenta(e)}`); // eslint-disable-line no-console
+      console.log(`${chalk.magenta(e)}`);
     } else {
-      console.log(`${chalk.green(e)}`); // eslint-disable-line no-console
+      console.log(`${chalk.green(e)}`);
     }
   });
-  console.log(chalk.blueBright(dashedLines)); // eslint-disable-line no-console
+  console.log(chalk.blueBright(dashedLines));
 
   rl.question("Please select your option: ", answer => {
     option = answer;
 
     // Invalid Electrode Option will re-trigger the menu
-    while (option < 1 || option > options.length || isNaN(option)) {
+    if (option < 1 || option > options.length || isNaN(option)) {
       logger.log(
         chalk.red(
           `Please provide a valid option between 1 to ${options.length}.`
         )
       );
       igniteCore(type);
-      break;
     }
 
     return taskLoader(option, type, igniteCore);
   });
 };
+
+/* eslint-enable */
 
 module.exports = igniteMenu;

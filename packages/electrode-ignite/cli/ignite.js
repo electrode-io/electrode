@@ -7,8 +7,11 @@ const igniteCore = require("ignite-core");
 const errorHandler = require("ignite-core/lib/error-handler");
 const logger = require("ignite-core/lib/logger");
 const semverComp = require("ignite-core/lib/semver-comp");
-
 const pkg = require("../package.json");
+
+const CLISpinner = require("cli-spinner").Spinner;
+const spinner = new CLISpinner(chalk.green("%s"));
+spinner.setSpinnerString("|/-\\");
 
 let startTime;
 
@@ -45,7 +48,9 @@ const igniteOutdated = function(latestVersion) {
 
 const igniteUpToDate = function(task, version) {
   logger.log(
-    chalk.green(`You've aleady installed the latest electrode-ignite@${version}.`)
+    chalk.green(
+      `You've aleady installed the latest electrode-ignite@${version}.`
+    )
   );
 
   /* Start ignite-core */
@@ -53,6 +58,7 @@ const igniteUpToDate = function(task, version) {
 };
 
 function checkElectrodeIgnite() {
+  spinner.start();
   return xsh
     .exec(true, "npm show electrode-ignite version")
     .then(function(latestVersion) {
@@ -60,14 +66,19 @@ function checkElectrodeIgnite() {
 
       /* Case 1: electrode-ignite version outdated */
       if (semverComp(latestVersion, pkg.version) > 0) {
-        return igniteOutdated(latestVersion);
+        igniteOutdated(latestVersion);
+        spinner.stop();
+        return;
 
         /* Case 2: electrode-ignite latest version */
       } else if (semverComp(latestVersion, pkg.version) === 0) {
-        return igniteUpToDate(process.argv[2], latestVersion);
+        igniteUpToDate(process.argv[2], latestVersion);
+        spinner.stop();
+        return;
 
         /* Case 3: Invalid electrode-ignite version */
       } else {
+        spinner.stop();
         errorHandler(
           `Invalid electrode-ignite version@${pkg.version}. Please report this to Electrode core team.`
         );
@@ -88,10 +99,12 @@ function ignite() {
 
   if (!startTime || new Date().getTime() - startTime > 24 * 3600) {
     startTime = undefined;
-    return checkElectrodeIgnite();
+    checkElectrodeIgnite();
+    return;
   } else {
     /* ignite-core */
-    return igniteCore("oss", process.argv[2]);
+    igniteCore("oss", process.argv[2]);
+    return;
   }
 }
 

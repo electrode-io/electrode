@@ -32,25 +32,33 @@ Yargs.command(
   .help().argv;
 
 const igniteCore = function(type, task) {
-  if (!task) {
-    return igniteMenu(type, igniteCore);
-  } else if (task === "install") {
-    return taskLoader("1", type, igniteCore);
-  } else if (task === "check-nodejs") {
-    return taskLoader("2", type, igniteCore);
-  } else if (task === "generate-app") {
-    return taskLoader("3", type);
-  } else if (task === "generate-component") {
-    return taskLoader("4", type);
-  } else if (task === "add-component") {
-    return taskLoader("5", type);
-  } else if (task === "docs") {
-    return taskLoader("6", type, igniteCore);
-  } else {
-    errorHandler(
-      `The task name "${Yargs.argv._}" you've provided appears to be invalid.\n` +
-        `Please use "ignite --help" to check all the available tasks.`
-    );
+  switch (task) {
+    case undefined:
+      igniteMenu(type, igniteCore);
+      break;
+    case "install":
+      taskLoader("1", type, igniteCore);
+      break;
+    case "check-nodejs":
+      taskLoader("2", type, igniteCore);
+      break;
+    case "generate-app":
+      taskLoader("3", type, igniteCore);
+      break;
+    case "generate-component":
+      taskLoader("4", type, igniteCore);
+      break;
+    case "add-component":
+      taskLoader("5", type);
+      break;
+    case "docs":
+      taskLoader("6", type, igniteCore);
+      break;
+    default:
+      errorHandler(
+        `The task name "${Yargs.argv._}" you've provided appears to be invalid.\n` +
+          `Please use "ignite --help" to check all the available tasks.`
+      );
   }
 };
 

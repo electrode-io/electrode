@@ -7,9 +7,16 @@ const logger = require("../../lib/logger");
 const chalk = require("chalk");
 const xsh = require("xsh");
 
+const CLISpinner = require("cli-spinner").Spinner;
+const spinner = new CLISpinner(chalk.green("%s"));
+
 const checkNode = require("../../tasks/check-node");
 
-describe("ignite-core: check-node.spec.js", function() {
+function foo() {
+  return;
+}
+
+describe.only("ignite-core: check-node.spec.js", function() {
   let xshStub = "";
   let loggerStub = "";
 
@@ -17,17 +24,8 @@ describe("ignite-core: check-node.spec.js", function() {
     loggerStub = sinon.stub(logger, "log");
     xshStub = sinon.stub(xsh, "exec");
     xshStub
-      .withArgs(true, "node -v")
-      .returns(Promise.resolve({ stdout: "6.10.3\n" }));
-    xshStub
       .withArgs(true, "npm -v")
       .returns(Promise.resolve({ stdout: "3.10.0\n" }));
-    xshStub
-      .withArgs(true, "which node")
-      .returns(Promise.resolve({ stdout: "node path\n" }));
-    xshStub
-      .withArgs(true, "where node")
-      .returns(Promise.resolve({ stdout: "windows node path\n" }));
   });
 
   afterEach(function() {
@@ -40,26 +38,36 @@ describe("ignite-core: check-node.spec.js", function() {
       process,
       "platform"
     );
+    const originalVersion = Object.getOwnPropertyDescriptor(process, "version");
+    const originalPath = Object.getOwnPropertyDescriptor(process, "execPath");
     Object.defineProperty(process, "platform", {
       value: "mac"
     });
+    Object.defineProperty(process, "version", {
+      value: "v6.10.3"
+    });
+    Object.defineProperty(process, "execPath", {
+      value: "/test/path"
+    });
 
-    checkNode().then(function() {
-      sinon.assert.callCount(loggerStub, 3);
+    checkNode("oss", foo, spinner).then(function() {
+      sinon.assert.callCount(loggerStub, 6);
       assert.equal(
         loggerStub.getCalls()[0].args.toString(),
-        chalk.green("Your Node version is: 6.10.3")
+        chalk.cyan("Your Node version is: 6.10.3")
       );
       assert.equal(
         loggerStub.getCalls()[1].args.toString(),
-        chalk.green("Your npm version is: 3.10.0")
+        chalk.cyan("Your npm version is: 3.10.0")
       );
       assert.equal(
         loggerStub.getCalls()[2].args.toString(),
-        chalk.green("Your Node binary path is: node path")
+        chalk.cyan("Your Node binary path is: /test/path")
       );
 
       Object.defineProperty(process, "platform", originalPlatform);
+      Object.defineProperty(process, "version", originalVersion);
+      Object.defineProperty(process, "execPath", originalPath);
       done();
     });
   });
@@ -69,26 +77,36 @@ describe("ignite-core: check-node.spec.js", function() {
       process,
       "platform"
     );
+    const originalVersion = Object.getOwnPropertyDescriptor(process, "version");
+    const originalPath = Object.getOwnPropertyDescriptor(process, "execPath");
     Object.defineProperty(process, "platform", {
       value: "win32"
     });
+    Object.defineProperty(process, "version", {
+      value: "v6.10.3"
+    });
+    Object.defineProperty(process, "execPath", {
+      value: "/test/path"
+    });
 
-    checkNode().then(function() {
-      sinon.assert.callCount(loggerStub, 3);
+    checkNode("oss", foo, spinner).then(function() {
+      sinon.assert.callCount(loggerStub, 6);
       assert.equal(
         loggerStub.getCalls()[0].args.toString(),
-        chalk.green("Your Node version is: 6.10.3")
+        chalk.cyan("Your Node version is: 6.10.3")
       );
       assert.equal(
         loggerStub.getCalls()[1].args.toString(),
-        chalk.green("Your npm version is: 3.10.0")
+        chalk.cyan("Your npm version is: 3.10.0")
       );
       assert.equal(
         loggerStub.getCalls()[2].args.toString(),
-        chalk.green("Your Node binary path is: windows node path")
+        chalk.cyan("Your Node binary path is: /test/path")
       );
 
       Object.defineProperty(process, "platform", originalPlatform);
+      Object.defineProperty(process, "version", originalVersion);
+      Object.defineProperty(process, "execPath", originalPath);
       done();
     });
   });

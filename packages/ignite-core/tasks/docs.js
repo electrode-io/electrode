@@ -28,7 +28,7 @@ const electrodeDocs = function(type, igniteCore) {
     errorHandler("Please provide a valid type");
   }
 
-  if (process.platform.startsWith("win")) {
+  if (process.platform === "win32") {
     return opn(gitbookURL)
       .then(function() {
         return printSucessLogs(type, igniteCore);
