@@ -37,6 +37,7 @@ const igniteOutdated = function(latestVersion) {
   logger.log(chalk.cyan("Please hold, trying to update."));
 
   /* Auto update electrode-ignite version */
+  spinner.start();
   return xsh
     .exec(true, `npm install -g ${igniteName}@${latestVersion}`)
     .then(function() {
@@ -46,6 +47,7 @@ const igniteOutdated = function(latestVersion) {
             ` exiting, please run your command again.`
         )
       );
+      spinner.stop();
       return process.exit(0);
     })
     .catch(err =>
