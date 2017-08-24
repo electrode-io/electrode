@@ -21,12 +21,12 @@ class RenderContext {
     this._nextCb = () => this._next();
   }
 
-  _handleResult(id, res) {
+  handleResult(id, res, cb) {
     // it's a promise, wait for it and call next
     if (res && res.then) {
-      res.then(this._nextCb).catch(err => {
+      res.then(cb).catch(err => {
         console.log(`token process for ${id} failed`, err); // eslint-disable-line
-        this._next();
+        cb();
       });
       return;
     }
@@ -37,7 +37,7 @@ class RenderContext {
     }
 
     // ignore other return value types
-    this._next();
+    cb();
   }
 
   _getTokenHandler(id) {
@@ -67,12 +67,12 @@ class RenderContext {
       if (handler.length > 1) {
         handler(this, this._nextCb);
       } else {
-        this._handleResult(tk.id, handler(this));
+        this.handleResult(tk.id, handler(this), this._nextCb);
       }
     } else if (tk.wantsNext === true) {
       tk.process(this, this._nextCb);
     } else {
-      this._handleResult(tk.id, tk.process(this));
+      this.handleResult(tk.id, tk.process(this), this._nextCb);
     }
   }
 

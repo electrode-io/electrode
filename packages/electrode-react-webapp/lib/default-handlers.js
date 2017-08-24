@@ -16,8 +16,8 @@ module.exports = function setup(options) {
   const assets = routeData.assets;
   const devBundleBase = routeData.devBundleBase;
   const prodBundleBase = routeData.prodBundleBase;
-  const emptyTitleRegex = /<title[^>]*><\/title>/;
   const iconStats = routeData.iconStats;
+  const criticalCSS = routeData.criticalCSS;
 
   const bundleManifest = () => {
     if (!assets.manifest) {
@@ -38,12 +38,12 @@ module.exports = function setup(options) {
       : (data.jsChunk && `${prodBundleBase}${data.jsChunk.name}`) || "";
   };
 
-  const htmlifyScripts = (scripts, paddedNonce) => {
+  const htmlifyScripts = (scripts, scriptNonce) => {
     return scripts
       .map(
         x =>
           typeof x === "string"
-            ? `<script${paddedNonce}>${x}</script>\n`
+            ? `<script${scriptNonce}>${x}</script>\n`
             : x.map(n => `<script src="${n.src}"></script>`).join("\n")
       )
       .join("\n");
@@ -54,12 +54,8 @@ module.exports = function setup(options) {
       return context.content.html || "";
     },
 
-    [TITLE_MARKER]: context => {
-      const helmet = context.$.data.helmet;
-      const helmetTitleScript = helmet.title.toString();
-      const helmetTitleEmpty = helmetTitleScript.match(emptyTitleRegex);
-
-      return helmetTitleEmpty ? `<title>${routeOptions.pageTitle}</title>` : helmetTitleScript;
+    [TITLE_MARKER]: () => {
+      return `<title>${routeOptions.pageTitle}</title>`;
     },
 
     [HEADER_BUNDLE_MARKER]: context => {
@@ -70,12 +66,13 @@ module.exports = function setup(options) {
         ? data.devCSSBundle
         : (data.cssChunk && `${prodBundleBase}${data.cssChunk.name}`) || "";
       const cssLink = css && !data.criticalCSS ? `<link rel="stylesheet" href="${css}" />` : "";
-      const scriptsFromHelmet = ["link", "style", "script", "noscript"]
-        .map(tagName => data.helmet[tagName].toString())
-        .join("");
 
-      const htmlScripts = htmlifyScripts(groupScripts(routeOptions.unbundledJS.enterHead).scripts);
-      return `${manifestLink}${cssLink}${htmlScripts}\n${scriptsFromHelmet}`;
+      const htmlScripts = htmlifyScripts(
+        groupScripts(routeOptions.unbundledJS.enterHead).scripts,
+        context.$.data.scriptNonce
+      );
+
+      return `${manifestLink}${cssLink}${htmlScripts}`;
     },
 
     [BODY_BUNDLE_MARKER]: context => {
@@ -93,16 +90,21 @@ module.exports = function setup(options) {
     [PREFETCH_MARKER]: context => {
       return !context.content.prefetch
         ? ""
-        : `<script${context.$.data.paddedNonce}>${context.content.prefetch}</script>`;
+        : `<script${context.$.data.scriptNonce}>${context.content.prefetch}</script>`;
     },
 
-    [META_TAGS_MARKER]: context => {
-      const x = context.$.data.helmet.meta.toString() + iconStats;
-      return x;
+    [META_TAGS_MARKER]: () => {
+      return iconStats;
     },
 
     [CRITICAL_CSS_MARKER]: context => {
-      return context.$.data.criticalCSS;
-    }
+      return criticalCSS ? `<style${context.$.data.styleNonce}>${criticalCSS}</style>` : "";
+    },
+
+    INITIALIZE: () => undefined,
+    HEAD_CLOSED: () => undefined,
+    AFTER_SSR_CONTENT: () => undefined,
+    BODY_CLOSED: () => undefined,
+    HTML_CLOSED: () => undefined
   };
 };

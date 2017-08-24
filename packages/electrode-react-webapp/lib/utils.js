@@ -75,13 +75,12 @@ function getIconStats(iconStatsPath) {
   return iconStats;
 }
 
-function getCriticalCSS(path, nonceValue) {
-  const paddedNonce = nonceValue ? ` nonce="${nonceValue}"` : "";
-
+function getCriticalCSS(path) {
   const criticalCSSPath = Path.resolve(process.cwd(), path);
+
   try {
     const criticalCSS = fs.readFileSync(criticalCSSPath).toString();
-    return `<style${paddedNonce}>${criticalCSS}</style>`;
+    return criticalCSS;
   } catch (err) {
     return "";
   }

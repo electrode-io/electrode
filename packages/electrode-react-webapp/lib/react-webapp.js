@@ -4,7 +4,6 @@ const _ = require("lodash");
 const Promise = require("bluebird");
 const fs = require("fs");
 const Path = require("path");
-const Helmet = require("react-helmet").Helmet;
 const RenderContext = require("./render-context");
 const parseTemplate = require("./parse-template");
 const customToken = require("./custom-token");
@@ -38,6 +37,7 @@ function makeRouteHandler(routeOptions, userContent) {
   const chunkSelector = routeOptions.__internals.chunkSelector;
   const iconStats = getIconStats(routeOptions.iconStats);
   const htmlTokens = parseTemplate(html);
+  const criticalCSS = getCriticalCSS(routeOptions.criticalCSS);
 
   const routeData = {
     WEBPACK_DEV,
@@ -49,6 +49,7 @@ function makeRouteHandler(routeOptions, userContent) {
     prodBundleBase,
     chunkSelector,
     iconStats,
+    criticalCSS,
     htmlTokens
   };
 
@@ -90,16 +91,16 @@ function makeRouteHandler(routeOptions, userContent) {
 
       let cspScriptNonce;
       let cspStyleNonce;
-      if (typeof routeOptions.cspNonceValue === "function") {
-        cspScriptNonce = routeOptions.cspNonceValue(request, "script");
-        cspStyleNonce = routeOptions.cspNonceValue(request, "style");
-      } else {
-        const nonceObject = routeOptions.cspNonceValue || {};
-        cspScriptNonce = _.get(request, nonceObject.script, undefined);
-        cspStyleNonce = _.get(request, nonceObject.style, undefined);
+      if (routeOptions.cspNonceValue !== undefined) {
+        const nonceObject = routeOptions.cspNonceValue;
+        if (typeof nonceObject === "function") {
+          cspScriptNonce = nonceObject(request, "script");
+          cspStyleNonce = nonceObject(request, "style");
+        } else {
+          cspScriptNonce = _.get(request, nonceObject.script, undefined);
+          cspStyleNonce = _.get(request, nonceObject.style, undefined);
+        }
       }
-
-      const criticalCSS = getCriticalCSS(routeOptions.criticalCSS, cspStyleNonce);
 
       const chunkNames = chunkSelector(request);
       const devCSSBundle = chunkNames.css
@@ -110,9 +111,9 @@ function makeRouteHandler(routeOptions, userContent) {
         : `${devBundleBase}bundle.dev.js`;
       const jsChunk = _.find(assets.js, asset => _.includes(asset.chunkNames, chunkNames.js));
       const cssChunk = _.find(assets.css, asset => _.includes(asset.chunkNames, chunkNames.css));
-      const paddedNonce = cspScriptNonce ? ` nonce="${cspScriptNonce}"` : "";
+      const scriptNonce = cspScriptNonce ? ` nonce="${cspScriptNonce}"` : "";
+      const styleNonce = cspStyleNonce ? ` nonce="${cspStyleNonce}"` : "";
 
-      const helmet = Helmet.renderStatic();
       const renderJs = RENDER_JS && mode !== "nojs";
 
       const context = new RenderContext({
@@ -124,9 +125,8 @@ function makeRouteHandler(routeOptions, userContent) {
           mode,
           renderJs,
           renderSs,
-          helmet,
-          paddedNonce,
-          criticalCSS,
+          scriptNonce,
+          styleNonce,
           chunkNames,
           devCSSBundle,
           devJSBundle,

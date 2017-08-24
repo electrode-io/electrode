@@ -7,6 +7,9 @@ const assign = require("object-assign");
 const electrodeServer = require("electrode-server");
 const Path = require("path");
 const registerPlugin = require("../../lib/hapi");
+const ReactDOMServer = require("react-dom/server");
+const React = require("react");
+const Helmet = require("react-helmet").Helmet;
 
 describe("hapi electrode-react-webapp", () => {
   let config;
@@ -69,6 +72,33 @@ describe("hapi electrode-react-webapp", () => {
       }
     );
     expect(error).to.be.ok;
+  });
+
+  it("should successfully render with enterHead scripts", () => {
+    configOptions.unbundledJS = {
+      enterHead: ["test-static-markup script", { src: "blah-123" }]
+    };
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .then(res => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.result).to.contain(`<script>test-static-markup script;</script>`);
+          expect(res.result).to.contain(`<script src="blah-123"></script>`);
+          expect(res.result).to.contain("<title>Electrode App</title>");
+          expect(res.result).to.contain("<div>Hello Electrode</div>");
+          expect(res.result).to.contain("<script>console.log('Hello');</script>");
+          expect(res.result).to.not.contain("Unknown marker");
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
   });
 
   it("should successfully render to static markup", () => {
@@ -820,5 +850,63 @@ describe("hapi electrode-react-webapp", () => {
       .finally(() => {
         delete process.env.WEBPACK_DEV;
       });
+  });
+
+  it("should allow support react-helmet with custom token handler", () => {
+    configOptions.unbundledJS = {
+      enterHead: ["test-1 script"]
+    };
+    assign(paths, {
+      tokenHandler: "./test/fixtures/react-helmet-handler",
+      content: () => {
+        return {
+          status: 200,
+          prefetch: "test-react-helmet",
+          html: ReactDOMServer.renderToString(
+            React.createElement(
+              "div",
+              null,
+              "hello",
+              React.createElement(
+                Helmet,
+                null,
+                React.createElement("title", null, "Helmet Title 1"),
+                React.createElement("meta", { name: "description", content: "Helmet application" })
+              ),
+              React.createElement(
+                "div",
+                null,
+                React.createElement(
+                  Helmet,
+                  null,
+                  React.createElement("title", null, "Nested Title"),
+                  React.createElement("meta", { name: "description", content: "Nested component" })
+                )
+              )
+            )
+          )
+        };
+      }
+    });
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .then(res => {
+          expect(res.result).includes(
+            `<meta data-react-helmet="true" name="description" content="Nested component"/>` +
+              `<title data-react-helmet="true">Nested Title</title><script>test-1 script;</script>`
+          );
+          expect(res.result).includes(`<script>test-1 script;</script>
+<!--scripts from helmet--></head>`);
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
   });
 });

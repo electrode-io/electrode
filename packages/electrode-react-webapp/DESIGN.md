@@ -24,13 +24,18 @@ Within the HTML file, special tokens can be specified with `<!--%{token}-->`.
 
 These are tokens that are automatically processed internally:
 
--   `SSR_CONTENT`
--   `WEBAPP_HEADER_BUNDLES`
--   `WEBAPP_BODY_BUNDLES`
--   `PAGE_TITLE`
--   `PREFETCH_BUNDLES`
+-   `INITIALIZE`
 -   `META_TAGS`
+-   `PAGE_TITLE`
 -   `CRITICAL_CSS`
+-   `WEBAPP_HEADER_BUNDLES`
+-   `HEAD_CLOSED`
+-   `SSR_CONTENT`
+-   `AFTER_SSR_CONTENT`
+-   `PREFETCH_BUNDLES`
+-   `WEBAPP_BODY_BUNDLES`
+-   `BODY_CLOSED`
+-   `HTML_CLOSED`
 
 A builtin token handler is used to process these.
 
@@ -147,7 +152,6 @@ It contains the following:
 -   mode - Render Mode (nojs, noss, datass)
 -   renderJs - Render JS bundle
 -   renderSs - Do SSR
--   helmet - react-helmet instance
 -   paddedNonce - nonce for script tags
 -   criticalCSS - critical css
 -   chunkNames - webpack asset chunks

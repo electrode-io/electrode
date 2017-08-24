@@ -2,7 +2,6 @@
 
 const Benchmark = require("benchmark");
 const ReactWebapp = require("../lib/react-webapp");
-const Promise = require("bluebird");
 const Path = require("path");
 
 function test1() {
@@ -20,7 +19,7 @@ function test1() {
   const request = {};
 
   function render(deferred) {
-    Promise.all([handler({ request }), handler({ request }), handler({ request })]).then(() => {
+    handler({ request }).then(() => {
       deferred.resolve();
     });
   }
