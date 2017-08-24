@@ -19,7 +19,7 @@ function backToMenu(type, igniteCore) {
     logger.log(chalk.green("Please choose your next task:"));
     return igniteCore(type);
   }
-  return;
+  return process.exit(0);
 }
 
 const installXClapCLI = function(type, igniteCore, spinner) {
@@ -31,12 +31,12 @@ const installXClapCLI = function(type, igniteCore, spinner) {
         .then(function() {
           spinner.stop();
           logger.log(
-            chalk.cyan("You've successfully installed the latest xclap-cli.")
+            chalk.cyan(`You've successfully installed the latest xclap-cli.`)
           );
           backToMenu(type, igniteCore);
         })
         .catch(err =>
-          errorHandler(err, "Failed at: Installing the latest xclap-cli.")
+          errorHandler(err, ``)
         );
     } else {
       logger.log(chalk.cyan("You've cancelled the xclap-cli installation."));
@@ -51,8 +51,8 @@ const checkXClapCLI = function() {
     .then(function(ret) {
       return JSON.parse(ret.stdout).dependencies["xclap-cli"].version;
     })
-    .catch(function(err) {
-      errorHandler(err, "Error when fetching local installed xclap-cli.");
+    .catch(function() {
+      return null;
     });
 };
 
@@ -62,9 +62,9 @@ const checkXClapCLILatestVersion = function() {
     .then(function(version) {
       return version.stdout.slice(0, -1);
     })
-    .catch(err =>
-      errorHandler(err, "Failed at showing the latest xclap-cli version.")
-    );
+    .catch(function() {
+      return null;
+    })
 };
 
 const Installation = function(type, igniteCore, spinner) {

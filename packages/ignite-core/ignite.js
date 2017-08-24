@@ -41,25 +41,25 @@ const igniteCore = function(type, task) {
       igniteMenu(type, igniteCore);
       break;
     case "install":
-      taskLoader("1", type, igniteCore);
+      taskLoader("1", type);
       break;
     case "check-nodejs":
-      taskLoader("2", type, igniteCore);
+      taskLoader("2", type);
       break;
     case "generate-app":
-      taskLoader("3", type, igniteCore);
+      taskLoader("3", type);
       break;
     case "generate-component":
-      taskLoader("4", type, igniteCore);
+      taskLoader("4", type);
       break;
     case "add-component":
       taskLoader("5", type);
       break;
     case "docs":
-      taskLoader("6", type, igniteCore);
+      taskLoader("6", type);
       break;
     case "check-ignite":
-      taskLoader("7", type, igniteCore);
+      taskLoader("7", type);
       break;
     default:
       errorHandler(
@@ -67,6 +67,7 @@ const igniteCore = function(type, task) {
           `Please use "ignite --help" to check all the available tasks.`
       );
   }
+  return true;
 };
 
 module.exports = igniteCore;

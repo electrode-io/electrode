@@ -8,7 +8,7 @@ const logger = require("ignite-core/lib/logger");
 const chalk = require("chalk");
 const pkg = require("../../package.json");
 
-describe("electrode-ignite", function() {
+describe.skip("electrode-ignite", function() {
   let loggerStub = "";
 
   beforeEach(function() {

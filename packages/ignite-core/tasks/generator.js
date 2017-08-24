@@ -7,7 +7,7 @@ const spawn = require("child_process").spawn;
 const xsh = require("xsh");
 
 const Generator = function(type, generator, igniteCore, spinner) {
-  return checkNode(type, igniteCore, spinner)
+  return checkNode(type, null, spinner)
     .then(function(nodeCheckPassed) {
       spinner.start();
       if (nodeCheckPassed) {

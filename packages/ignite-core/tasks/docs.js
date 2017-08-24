@@ -16,6 +16,7 @@ const printSucessLogs = function(type, igniteCore) {
     logger.log(chalk.green("Please choose your next task:"));
     return igniteCore(type);
   }
+  return process.exit(0);
 };
 
 const electrodeDocs = function(type, igniteCore) {
