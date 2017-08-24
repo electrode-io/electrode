@@ -13,7 +13,7 @@ const CLISpinner = require("cli-spinner").Spinner;
 const spinner = new CLISpinner(chalk.green("%s"));
 spinner.setSpinnerString("|/-\\");
 
-const CHECK_INTERVAL = 24 * 3600;
+const CHECK_INTERVAL = 1000 * 24 * 3600;
 let igniteName = "";
 
 const igniteUpToDate = function(type, task, version, igniteCore) {

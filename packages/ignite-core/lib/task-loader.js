@@ -5,6 +5,7 @@ const checkNode = require("../tasks/check-node");
 const docs = require("../tasks/docs");
 const generator = require("../tasks/generator");
 const installationTaskExec = require("../tasks/installation");
+const checkIgnite = require("../tasks/check-ignite");
 const logger = require("./logger");
 
 const CLISpinner = require("cli-spinner").Spinner;
@@ -49,7 +50,9 @@ function taskLoader(option, type, igniteCore) { // eslint-disable-line complexit
       break;
     case "7":
       spinner.stop();
-      return process.exit(0); // eslint-disable-line no-process-exit
+      logger.log(chalk.green("Checking for electrode-ignite update..."));
+      checkIgnite(type, igniteCore);
+      break;
     case "8":
       logger.log(chalk.green("You've successfully exit Electrode Ignite."));
       return process.exit(0); // eslint-disable-line no-process-exit
