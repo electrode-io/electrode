@@ -5,17 +5,17 @@ const checkNode = require("../tasks/check-node");
 const docs = require("../tasks/docs");
 const generator = require("../tasks/generator");
 const installationTaskExec = require("../tasks/installation");
+const checkIgnite = require("../tasks/check-ignite");
 const logger = require("./logger");
 
 const CLISpinner = require("cli-spinner").Spinner;
 const spinner = new CLISpinner(chalk.green("%s"));
 spinner.setSpinnerString("|/-\\");
 
-function taskLoader(option, type, igniteCore) {
+function taskLoader(option, type, igniteCore) { // eslint-disable-line complexity
   switch (option) {
     case "1":
       logger.log(chalk.green("Checking your Electrode environment..."));
-
       installationTaskExec(type, igniteCore, spinner);
       break;
     case "2":
@@ -41,12 +41,21 @@ function taskLoader(option, type, igniteCore) {
       // eslint-disable-next-line no-unused-expressions
       type === "oss"
         ? generator(type, "electrode:component-add", igniteCore, spinner)
-        : generator(type, "@walmart/electrode:component-add", igniteCore, spinner);
+        : generator(
+            type,
+            "@walmart/electrode:component-add",
+            igniteCore,
+            spinner
+          );
       break;
     case "6":
       docs(type, igniteCore);
       break;
     case "7":
+      logger.log(chalk.green("Checking for electrode-ignite update..."));
+      checkIgnite(type, igniteCore);
+      break;
+    case "8":
       logger.log(chalk.green("You've successfully exit Electrode Ignite."));
       return process.exit(0); // eslint-disable-line no-process-exit
   }

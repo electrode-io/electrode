@@ -28,6 +28,10 @@ Yargs.command(
     chalk.cyan("add-component"),
     chalk.cyan("Add a component to your existing component repo")
   )
+  .command(
+    chalk.cyan("check-ignite"),
+    chalk.cyan("Check for electrode-ignite update")
+  )
   .command(chalk.cyan("docs"), chalk.cyan("Electrode official documenations"))
   .help().argv;
 
@@ -53,6 +57,9 @@ const igniteCore = function(type, task) {
       break;
     case "docs":
       taskLoader("6", type, igniteCore);
+      break;
+    case "check-ignite":
+      taskLoader("7", type, igniteCore);
       break;
     default:
       errorHandler(

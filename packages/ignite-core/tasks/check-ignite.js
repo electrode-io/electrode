@@ -1,0 +1,110 @@
+"use strict";
+
+const xsh = require("xsh");
+const chalk = require("chalk");
+
+const logger = require("../lib/logger");
+const semverComp = require("../lib/semver-comp");
+const errorHandler = require("../lib/error-handler");
+
+const CLISpinner = require("cli-spinner").Spinner;
+const spinner = new CLISpinner(chalk.green("%s"));
+spinner.setSpinnerString("|/-\\");
+
+let igniteName = "";
+
+const igniteUpToDate = function(type, task, version, igniteCore) {
+  logger.log(
+    chalk.cyan(
+      `Congratulations! You've aleady installed the latest ${igniteName}@${version}.`
+    )
+  );
+
+  /* Start ignite-core */
+  return;
+};
+
+const igniteOutdated = function(latestVersion) {
+  logger.log(
+    chalk.cyan(
+      `You are currently in ${igniteName}@${version}.` +
+        ` The latest version is ${latestVersion}.`
+    )
+  );
+  logger.log(chalk.cyan("Please hold, trying to update."));
+
+  /* Auto update electrode-ignite version */
+  return xsh
+    .exec(true, `npm install -g ${igniteName}@${latestVersion}`)
+    .then(function() {
+      logger.log(
+        chalk.cyan(
+          `${igniteName} updated to ${latestVersion},` +
+            ` exiting, please run your command again.`
+        )
+      );
+      return process.exit(0);
+    })
+    .catch(err =>
+      errorHandler(
+        err,
+        `Since it may not be safe for a module to update itself while running,` +
+          ` please run the update command manually after ${igniteName} exits.` +
+          ` The command is: npm install -g ${igniteName}@${latestVersion}`
+      )
+    );
+};
+
+const checkInstalledIgnite = function() {
+  return xsh
+    .exec(true, `npm ls -g -j --depth=0 ${igniteName}`)
+    .then(function(ret) {
+      return JSON.parse(ret.stdout).dependencies[igniteName].version;
+    })
+    .catch(function(err) {
+      errorHandler(err, `Error when fetching local installed ${igniteName}.`);
+    });
+};
+
+const checkIgnite = function(type, igniteCore) {
+  igniteName = type === "oss" ? "electrode-ignite" : "wml-electrode-ignite";
+
+  spinner.start();
+  return checkInstalledIgnite().then(function(version) {
+    return xsh
+      .exec(true, `npm show ${igniteName} version`)
+      .then(function(latestVersion) {
+        latestVersion = latestVersion.stdout.slice(0, -1);
+        const versionComp = semverComp(latestVersion, version);
+
+        /* Case 1: electrode-ignite version outdated */
+        if (versionComp > 0) {
+          igniteOutdated(latestVersion);
+          spinner.stop();
+          return;
+
+          /* Case 2: electrode-ignite latest version */
+        } else if (versionComp === 0) {
+          igniteUpToDate(type, process.argv[2], latestVersion, igniteCore);
+          spinner.stop();
+          return;
+
+          /* Case 3: Invalid electrode-ignite version */
+        } else {
+          spinner.stop();
+          errorHandler(
+            `Invalid ${igniteName} version@${version}. Please report this to Electrode core team.`
+          );
+        }
+      })
+      .catch(err =>
+        errorHandler(
+          err,
+          `Invalid ${igniteName} in the npm registry.` +
+            ` Please report this to Electrode core team.`
+        )
+      );
+  });
+};
+
+module.exports = checkIgnite;

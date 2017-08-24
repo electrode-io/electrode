@@ -46,29 +46,25 @@ const installXClapCLI = function(type, igniteCore, spinner) {
 };
 
 const checkXClapCLI = function() {
-  return new Promise((resolve, reject) => {
-    return xsh
-      .exec(true, "npm ls -g -j --depth=0 xclap-cli")
-      .then(function(ret) {
-        resolve(JSON.parse(ret.stdout).dependencies["xclap-cli"].version);
-      })
-      .catch(function() {
-        resolve();
-      });
-  });
+  return xsh
+    .exec(true, "npm ls -g -j --depth=0 xclap-cli")
+    .then(function(ret) {
+      return JSON.parse(ret.stdout).dependencies["xclap-cli"].version;
+    })
+    .catch(function(err) {
+      errorHandler(err, "Error when fetching local installed xclap-cli.");
+    });
 };
 
 const checkXClapCLILatestVersion = function() {
-  return new Promise((resolve, reject) => {
-    return xsh
-      .exec(true, "npm show xclap-cli version")
-      .then(function(version) {
-        resolve(version.stdout.slice(0, -1));
-      })
-      .catch(err =>
-        errorHandler(err, "Failed at showing the latest xclap-cli version.")
-      );
-  });
+  return xsh
+    .exec(true, "npm show xclap-cli version")
+    .then(function(version) {
+      return version.stdout.slice(0, -1);
+    })
+    .catch(err =>
+      errorHandler(err, "Failed at showing the latest xclap-cli version.")
+    );
 };
 
 const Installation = function(type, igniteCore, spinner) {
