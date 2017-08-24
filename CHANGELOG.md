@@ -1,3 +1,25 @@
+# 8/24/2017
+
+## Packages
+
+-   electrode-archetype-react-app@3.2.2 `(3.2.1 => 3.2.2)`
+-   electrode-archetype-react-app-dev@3.2.2 `(3.2.1 => 3.2.2)`
+-   generator-electrode@3.3.4 `(3.3.3 => 3.3.4)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [patch] update penthouse to avoid npm pulling from github.com ([#554](https://github.com/electrode-io/electrode/pull/554)) [commit](http://github.com/electrode-io/electrode/commit/4fe91fc732fe83950727419420c250403edda9e2)
+
+-   `packages/generator-electrode`
+
+    -   [chore] update docs on publishing components ([#546](https://github.com/electrode-io/electrode/pull/546)) [commit](http://github.com/electrode-io/electrode/commit/ebf67c737b1da2158fdb9cea6730dcdeb4664678)
+
+-   `MISC`
+
+    -   [chore] remove node 4 from CI [commit](http://github.com/electrode-io/electrode/commit/d80b2c44022c3c05952469cce9cd2a514cbbb37c)
+
 # 8/14/2017
 
 ## Packages
