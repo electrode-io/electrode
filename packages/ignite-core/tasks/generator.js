@@ -1,15 +1,17 @@
 "use strict";
 
-const checkNode = require("../tasks/check-node");
-const errorHandler = require("../lib/error-handler");
 const Path = require("path");
 const spawn = require("child_process").spawn;
 const xsh = require("xsh");
 
-const Generator = function(type, generator, igniteCore, spinner) {
+const checkNode = require("../tasks/check-node");
+const errorHandler = require("../lib/error-handler");
+
+const Generator = (type, generator, igniteCore, spinner) => {
   return checkNode(type, null, spinner)
-    .then(function(nodeCheckPassed) {
+    .then((nodeCheckPassed) => {
       spinner.start();
+
       if (nodeCheckPassed) {
         let yoPath = "";
         let child = "";
@@ -29,8 +31,8 @@ const Generator = function(type, generator, igniteCore, spinner) {
         child.on("error", err =>
           errorHandler(err, `Failed at: Running ${generator} generator.`)
         );
+
         spinner.stop();
-        return true;
       }
     })
     .catch(err => errorHandler(err, "Failed at: checking node env."));

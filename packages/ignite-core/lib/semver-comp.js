@@ -2,7 +2,7 @@
 
 const DIGIT = 3;
 
-const semverComp = function(a, b) {
+const semverComp = (a, b) => {
   const pa = a.split(".");
   const pb = b.split(".");
   for (let i = 0; i < DIGIT; i++) {

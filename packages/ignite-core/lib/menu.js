@@ -6,13 +6,13 @@ const readline = require("readline");
 const taskLoader = require("./task-loader");
 const logger = require("./logger");
 
-const STARNUM = 6;
 const EVEN = 2;
+const STARNUM = 6;
 
 /* eslint-disable no-console */
-
-const igniteMenu = function(type, igniteCore) {
-  const igniteName = type === "oss" ? "Electrode Ignite" : "WML Electrode Ignite";
+const igniteMenu = (type, igniteCore) => {
+  const igniteName =
+    type === "oss" ? "Electrode Ignite" : "WML Electrode Ignite";
   let option;
 
   const rl = readline.createInterface({
@@ -80,7 +80,7 @@ const igniteMenu = function(type, igniteCore) {
       igniteCore(type);
     }
 
-    return taskLoader(option, type, igniteCore);
+    taskLoader(option, type, igniteCore);
   });
 };
 

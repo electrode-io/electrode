@@ -16,7 +16,7 @@ function foo() {
   return;
 }
 
-describe.only("ignite-core: check-node.spec.js", function() {
+describe.skip("ignite-core: check-node.spec.js", function() {
   let xshStub = "";
   let loggerStub = "";
 

@@ -1,10 +1,12 @@
 "use strict";
 
 const chalk = require("chalk");
-const errorHandler = require("../lib/error-handler");
-const logger = require("../lib/logger");
 const readline = require("readline");
 const xsh = require("xsh");
+
+const backToMenu = require("../lib/back-to-menu");
+const errorHandler = require("../lib/error-handler");
+const logger = require("../lib/logger");
 const semverComp = require("../lib/semver-comp");
 
 const rl = readline.createInterface({
@@ -13,17 +15,17 @@ const rl = readline.createInterface({
   terminal: false
 });
 
-const checkNode = function(type, igniteCore, spinner) {
+const checkNode = (type, igniteCore, spinner) => {
   spinner.start();
 
   return xsh
     .exec(true, "npm -v")
-    .then(function(npmVersion) {
+    .then(npmVersion => {
       const nodeVersion = process.version.slice(1);
       npmVersion = npmVersion.stdout.slice(0, -1);
       const nodePath = process.execPath;
-      const nodeVer6Ret = semverComp(nodeVersion, "6.0.0");
-      const npmVer3Ret = semverComp(npmVersion, "3.0.0");
+      const nodeVerRet = semverComp(nodeVersion, "6.0.0");
+      const npmVerRet = semverComp(npmVersion, "3.0.0");
 
       spinner.stop();
 
@@ -31,7 +33,7 @@ const checkNode = function(type, igniteCore, spinner) {
       logger.log(chalk.cyan(`Your npm version is: ${npmVersion}`));
       logger.log(chalk.cyan(`Your Node binary path is: ${nodePath}`));
 
-      if (nodeVer6Ret >= 0) {
+      if (nodeVerRet >= 0) {
         logger.log(
           chalk.yellow(
             `You are using Node version ${nodeVersion}. Electrode should work for you.`
@@ -45,7 +47,7 @@ const checkNode = function(type, igniteCore, spinner) {
         );
       }
 
-      if (npmVer3Ret >= 0) {
+      if (npmVerRet >= 0) {
         logger.log(
           chalk.yellow(
             `You are using npm version ${npmVersion}. Electrode should work for you.`

@@ -1,25 +1,23 @@
 "use strict";
 
-const errorHandler = require("../lib/error-handler");
-const opn = require("opn");
-const logger = require("../lib/logger");
 const chalk = require("chalk");
+const opn = require("opn");
 
-const printSucessLogs = function(type, igniteCore) {
+const backToMenu = require("../lib/back-to-menu");
+const errorHandler = require("../lib/error-handler");
+const logger = require("../lib/logger");
+
+const printSucessLogs = (type, igniteCore) => {
   logger.log(
     chalk.green(
       "You've successfully opened the oss gitbook. Please checkout your browser."
     )
   );
 
-  if (type && igniteCore) {
-    logger.log(chalk.green("Please choose your next task:"));
-    return igniteCore(type);
-  }
-  return process.exit(0);
+  return backToMenu(type, igniteCore, true);
 };
 
-const electrodeDocs = function(type, igniteCore) {
+const electrodeDocs = (type, igniteCore) => {
   var gitbookURL = "";
   if (type === "oss") {
     gitbookURL = "https://docs.electrode.io/";
@@ -31,10 +29,10 @@ const electrodeDocs = function(type, igniteCore) {
 
   if (process.platform === "win32") {
     return opn(gitbookURL)
-      .then(function() {
+      .then(() => {
         return printSucessLogs(type, igniteCore);
       })
-      .catch(function(e) {
+      .catch(e => {
         errorHandler("Failed at open a new browser on windows", e);
       });
   } else {

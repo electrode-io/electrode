@@ -1,12 +1,14 @@
 "use strict";
 
+const chalk = require("chalk");
 const readline = require("readline");
 const xsh = require("xsh");
-const logger = require("../lib/logger");
-const chalk = require("chalk");
+
+const backToMenu = require("../lib/back-to-menu");
 const errorHandler = require("../lib/error-handler");
-const semverComp = require("../lib/semver-comp");
 const igniteCore = require("../ignite");
+const logger = require("../lib/logger");
+const semverComp = require("../lib/semver-comp");
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -14,38 +16,35 @@ const rl = readline.createInterface({
   terminal: false
 });
 
-function backToMenu(type, igniteCore) {
-  if (type && igniteCore) {
-    logger.log(chalk.green("Please choose your next task:"));
-    return igniteCore(type);
-  }
-  return process.exit(0);
-}
-
-const installXClapCLI = function(type, igniteCore, spinner) {
+const installXClapCLI = (type, igniteCore, spinner) => {
   return rl.question("Proceed? (y/n) ", answer => {
     if (answer.toLowerCase() === "y") {
       spinner.start();
       return xsh
         .exec("npm install -g xclap-cli")
-        .then(function() {
+        .then(ver => {
+          const verStdout = ver.stdout;
+          const verStart =
+            verStdout.indexOf("xclap-cli@") + "xclap-cli@".length;
+          const verEnd = verStdout.indexOf("\n", verStart);
+          const latestVersion = verStdout.substring(verStart, verEnd).trim();
+
           spinner.stop();
+
           logger.log(
-            chalk.cyan(`You've successfully installed the latest xclap-cli.`)
+            chalk.cyan(`You've successfully installed the latest xclap-cli@${latestVersion}.`)
           );
-          backToMenu(type, igniteCore);
+          return backToMenu(type, igniteCore, true);
         })
-        .catch(err =>
-          errorHandler(err, ``)
-        );
+        .catch(err => errorHandler(err, `Install xclap-cli globally.`));
     } else {
       logger.log(chalk.cyan("You've cancelled the xclap-cli installation."));
-      backToMenu(type, igniteCore);
+      return backToMenu(type, igniteCore, true);
     }
   });
 };
 
-const checkXClapCLI = function() {
+const checkLocalXClapCLI = function() {
   return xsh
     .exec(true, "npm ls -g -j --depth=0 xclap-cli")
     .then(function(ret) {
@@ -64,14 +63,12 @@ const checkXClapCLILatestVersion = function() {
     })
     .catch(function() {
       return null;
-    })
+    });
 };
 
-const Installation = function(type, igniteCore, spinner) {
-  const igniteName = type === "oss" ? "Electrode Ignite" : "WML Electrode Ignite";
-
+const Installation = function(type, igniteCore, spinner, igniteName) {
   spinner.start();
-  return checkXClapCLI().then(function(version) {
+  return checkLocalXClapCLI().then(function(version) {
     if (!version) {
       /* Case 1: xclap-cli does not installed globally */
       spinner.stop();
@@ -92,7 +89,7 @@ const Installation = function(type, igniteCore, spinner) {
               `Congratulations, you've already installed the latest xclap-cli@${latestversion} globally.`
             )
           );
-          backToMenu(type, igniteCore);
+          return backToMenu(type, igniteCore, true);
         } else if (verRet < 0) {
           /* Case 3: xclap-cli version is out-dated */
           spinner.stop();

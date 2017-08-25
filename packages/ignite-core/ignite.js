@@ -1,41 +1,17 @@
 "use strict";
 
-const Yargs = require("yargs");
 const chalk = require("chalk");
+const Yargs = require("yargs");
 
-const taskLoader = require("./lib/task-loader");
 const errorHandler = require("./lib/error-handler");
-const usage = require("./lib/usage");
 const igniteMenu = require("./lib/menu");
+const taskLoader = require("./lib/task-loader");
+const usage = require("./lib/usage");
+const yargsHelp = require("./lib/yargs-help");
 
-Yargs.command(
-  chalk.cyan("install"),
-  chalk.cyan("Install tools for Electrode development")
-)
-  .command(
-    chalk.cyan("check-nodejs"),
-    chalk.cyan("Check your NodeJS and npm environment")
-  )
-  .command(
-    chalk.cyan("generate-app"),
-    chalk.cyan("Generate an Electrode application")
-  )
-  .command(
-    chalk.cyan("generate-component"),
-    chalk.cyan("Generate an Electrode component")
-  )
-  .command(
-    chalk.cyan("add-component"),
-    chalk.cyan("Add a component to your existing component repo")
-  )
-  .command(
-    chalk.cyan("check-ignite"),
-    chalk.cyan("Check for electrode-ignite update")
-  )
-  .command(chalk.cyan("docs"), chalk.cyan("Electrode official documenations"))
-  .help().argv;
+yargsHelp();
 
-const igniteCore = function(type, task) {
+const igniteCore = (type, task) => {
   switch (task) {
     case undefined:
       igniteMenu(type, igniteCore);
@@ -63,11 +39,10 @@ const igniteCore = function(type, task) {
       break;
     default:
       errorHandler(
-        `The task name "${Yargs.argv._}" you've provided appears to be invalid.\n` +
+        `The task name "${chalk.redBright(Yargs.argv._)}" you've provided appears to be invalid.\n` +
           `Please use "ignite --help" to check all the available tasks.`
       );
   }
-  return true;
 };
 
 module.exports = igniteCore;

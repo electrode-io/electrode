@@ -1,22 +1,25 @@
 "use strict";
 
 const chalk = require("chalk");
+
+const checkIgnite = require("../tasks/check-ignite");
 const checkNode = require("../tasks/check-node");
 const docs = require("../tasks/docs");
 const generator = require("../tasks/generator");
 const installationTaskExec = require("../tasks/installation");
-const checkIgnite = require("../tasks/check-ignite");
 const logger = require("./logger");
 
 const CLISpinner = require("cli-spinner").Spinner;
 const spinner = new CLISpinner(chalk.green("%s"));
 spinner.setSpinnerString("|/-\\");
 
-function taskLoader(option, type, igniteCore) { // eslint-disable-line complexity
+function taskLoader(option, type, igniteCore) { // eslint-disable-line
+  const igniteName = type === "oss" ? "electrode-ignite" : "wml-electrode-ignite";
+
   switch (option) {
     case "1":
       logger.log(chalk.green("Checking your Electrode environment..."));
-      installationTaskExec(type, igniteCore, spinner);
+      installationTaskExec(type, igniteCore, spinner, igniteName);
       break;
     case "2":
       logger.log(chalk.green("Checking your NodeJS and npm environment..."));
@@ -50,15 +53,13 @@ function taskLoader(option, type, igniteCore) { // eslint-disable-line complexit
       break;
     case "7":
       spinner.stop();
-      const igniteName = type === "oss" ? "electrode-ignite" : "wml-electrode-ignite";
       logger.log(chalk.green(`Checking for ${igniteName} update...`));
-      checkIgnite(type, igniteCore);
+      checkIgnite(type, igniteCore, igniteName);
       break;
     case "8":
       logger.log(chalk.green("You've successfully exit Electrode Ignite."));
       return process.exit(0); // eslint-disable-line no-process-exit
   }
-  return true;
 }
 
 module.exports = taskLoader;

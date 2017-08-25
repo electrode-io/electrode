@@ -1,72 +1,90 @@
 "use strict";
 
-const xsh = require("xsh");
 const chalk = require("chalk");
 const fs = require("fs");
 const path = require("path");
+const readline = require("readline");
+const xsh = require("xsh");
 
+const backToMenu = require("../lib/back-to-menu");
+const checkTimestamp = require("../lib/check-timestamp");
+const errorHandler = require("../lib/error-handler");
 const logger = require("../lib/logger");
 const semverComp = require("../lib/semver-comp");
-const errorHandler = require("../lib/error-handler");
 
 const CLISpinner = require("cli-spinner").Spinner;
 const spinner = new CLISpinner(chalk.green("%s"));
 spinner.setSpinnerString("|/-\\");
 
-const CHECK_INTERVAL = 1000 * 24 * 3600;
-let igniteName = "";
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+  terminal: false
+});
 
-const igniteUpToDate = function(type, task, version, igniteCore) {
+const igniteUpToDate = (type, task, version, igniteCore, igniteName) => {
   logger.log(
     chalk.cyan(
       `Congratulations! You've aleady installed the latest ${igniteName}@${version}.`
     )
   );
-
-  /* Start ignite-core */
-  return igniteCore(type, task);
+  igniteCore(type, task);
+  return;
 };
 
-const igniteOutdated = function(latestVersion) {
+const igniteOutdated = (
+  type,
+  task,
+  latestVersion,
+  version,
+  igniteCore,
+  igniteName
+) => {
   logger.log(
     chalk.cyan(
       `You are currently in ${igniteName}@${version}.` +
         ` The latest version is ${latestVersion}.`
     )
   );
-  logger.log(chalk.cyan("Please hold, trying to update."));
 
-  /* Auto update electrode-ignite version */
-  spinner.start();
-  return xsh
-    .exec(true, `npm install -g ${igniteName}@${latestVersion}`)
-    .then(function() {
+  return rl.question("Proceed? (y/n) ", answer => {
+    if (answer.toLowerCase() === "y") {
+      logger.log(chalk.cyan("Please hold, trying to update."));
+      spinner.start();
+
+      return xsh
+        .exec(true, `npm install -g ${igniteName}@${latestVersion}`)
+        .then(() => {
+          logger.log(chalk.cyan(`${igniteName} updated to ${latestVersion},`));
+          logger.log(chalk.cyan("Exiting..., please run your command again."));
+          spinner.stop();
+
+          return process.exit(0);
+        })
+        .catch(err =>
+          errorHandler(
+            err,
+            `Since it may not be safe for a module to update itself while running,` +
+              ` please run the update command manually after ${igniteName} exits.` +
+              ` The command is: npm install -g ${igniteName}@${latestVersion}`
+          )
+        );
+    } else {
       logger.log(
-        chalk.cyan(
-          `${igniteName} updated to ${latestVersion},` +
-            ` exiting, please run your command again.`
-        )
+        chalk.cyan("You've cancelled the latest electrode-ignite installation.")
       );
-      spinner.stop();
-      return process.exit(0);
-    })
-    .catch(err =>
-      errorHandler(
-        err,
-        `Since it may not be safe for a module to update itself while running,` +
-          ` please run the update command manually after ${igniteName} exits.` +
-          ` The command is: npm install -g ${igniteName}@${latestVersion}`
-      )
-    );
+      return backToMenu(type, igniteCore, true);
+    }
+  });
 };
 
-const checkInstalledIgnite = function() {
+const checkInstalledIgnite = igniteName => {
   return xsh
     .exec(true, `npm ls -g -j --depth=0 ${igniteName}`)
-    .then(function(ret) {
+    .then(ret => {
       return JSON.parse(ret.stdout).dependencies[igniteName].version;
     })
-    .catch(function(err) {
+    .catch(err => {
       errorHandler(err, `Error when fetching local installed ${igniteName}.`);
     });
 };
@@ -75,82 +93,45 @@ const checkInstalledIgnite = function() {
   check electrode-ignite once daily
   timestamp saved in directory /tmp/ignite-timestamp.txt
 */
-const igniteDailyCheck = function() {
-  return new Promise((resolve, reject) => {
-    const timeStampPath = "/tmp/ignite-timestamp.txt";
-    if (!fs.existsSync(timeStampPath)) {
-      fs.writeFile(
-        timeStampPath,
-        new Date().getTime(),
-        { flag: "wx" },
-        function(err) {
-          if (err) {
-            errorHandler(
-              err,
-              `Saving timestamp to directory ${timeStampPath}.`
-            );
-          }
-        }
-      );
-      resolve(true);
-    } else {
-      fs.readFile(timeStampPath, function(err, data) {
-        if (err) {
-          errorHandler(
-            err,
-            `Reading timestamp from directory ${timeStampPath}.`
-          );
-        }
-
-        if (new Date().getTime() - data.toString() > CHECK_INTERVAL) {
-          fs.truncate(timeStampPath, 0, function() {
-            fs.writeFile(
-              timeStampPath,
-              new Date().getTime(),
-              { flag: "w" },
-              function(err) {
-                if (err) {
-                  errorHandler(
-                    err,
-                    `Saving new timestamp to directory ${timeStampPath}.`
-                  );
-                }
-              }
-            );
-          });
-
-          resolve(true);
-        } else {
-          resolve(false);
-        }
-      });
-    }
-  });
+const igniteDailyCheck = () => {
+  return Promise.resolve(checkTimestamp());
 };
 
-const checkIgnite = function(type, igniteCore) {
-  igniteName = type === "oss" ? "electrode-ignite" : "wml-electrode-ignite";
-
-  return igniteDailyCheck().then(function(passed) {
-    if (passed) {
+const checkIgnite = (type, igniteCore, igniteName) => {
+  return igniteDailyCheck().then(needsCheck => {
+    if (needsCheck) {
       logger.log(chalk.green("Checking latest version available on npm ..."));
       spinner.start();
-      return checkInstalledIgnite().then(function(version) {
+
+      return checkInstalledIgnite(igniteName).then(version => {
         return xsh
           .exec(true, `npm show ${igniteName} version`)
-          .then(function(latestVersion) {
+          .then(latestVersion => {
             latestVersion = latestVersion.stdout.slice(0, -1);
             const versionComp = semverComp(latestVersion, version);
 
             /* Case 1: electrode-ignite version outdated */
             if (versionComp > 0) {
-              igniteOutdated(latestVersion);
+              igniteOutdated(
+                type,
+                process.argv[2],
+                latestVersion,
+                version,
+                igniteCore,
+                igniteName
+              );
               spinner.stop();
               return;
 
               /* Case 2: electrode-ignite latest version */
             } else if (versionComp === 0) {
-              igniteUpToDate(type, process.argv[2], latestVersion, igniteCore);
+              igniteUpToDate(
+                type,
+                process.argv[2],
+                latestVersion,
+                igniteCore,
+                igniteName
+              );
               spinner.stop();
               return;
 
@@ -172,10 +153,7 @@ const checkIgnite = function(type, igniteCore) {
       });
     } else {
       logger.log(chalk.cyan(`Your ${igniteName} is up-to-date.`));
-      if (type && igniteCore) {
-        return igniteCore(type, process.argv[2]);
-      }
-      return process.exit(0);
+      return backToMenu(type, igniteCore);
     }
   });
 };

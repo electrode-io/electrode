@@ -3,7 +3,7 @@
 const chalk = require("chalk");
 const logger = require("./logger");
 
-const errorHandler = function(err, message) {
+const errorHandler = (err, message) => {
   if (message) {
     logger.log(chalk.red(`Failed at: ${message}`));
   }
