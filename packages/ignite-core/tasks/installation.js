@@ -16,7 +16,7 @@ const rl = readline.createInterface({
   terminal: false
 });
 
-const installXClapCLI = (type, igniteCore, spinner) => {
+const installXClapCLI = (type, igniteCore, spinner, showHint) => {
   return rl.question("Proceed? (y/n) ", answer => {
     if (answer.toLowerCase() === "y") {
       spinner.start();
@@ -34,12 +34,12 @@ const installXClapCLI = (type, igniteCore, spinner) => {
           logger.log(
             chalk.cyan(`You've successfully installed the latest xclap-cli@${latestVersion}.`)
           );
-          return backToMenu(type, igniteCore, true);
+          return backToMenu(type, igniteCore, showHint);
         })
         .catch(err => errorHandler(err, `Install xclap-cli globally.`));
     } else {
       logger.log(chalk.cyan("You've cancelled the xclap-cli installation."));
-      return backToMenu(type, igniteCore, true);
+      return backToMenu(type, igniteCore, showHint);
     }
   });
 };
@@ -66,7 +66,7 @@ const checkXClapCLILatestVersion = function() {
     });
 };
 
-const Installation = function(type, igniteCore, spinner, igniteName) {
+const Installation = function(type, igniteCore, spinner, igniteName, showHint) {
   spinner.start();
   return checkLocalXClapCLI().then(function(version) {
     if (!version) {
@@ -77,7 +77,7 @@ const Installation = function(type, igniteCore, spinner, igniteName) {
           `${igniteName} is about to install the following modules globally:\n- xclap-cli\n`
         )
       );
-      return installXClapCLI(type, igniteCore, spinner);
+      return installXClapCLI(type, igniteCore, spinner, showHint);
     } else {
       return checkXClapCLILatestVersion().then(function(latestversion) {
         /* Case 2: xclap-cli already got the latest version */
@@ -89,7 +89,7 @@ const Installation = function(type, igniteCore, spinner, igniteName) {
               `Congratulations, you've already installed the latest xclap-cli@${latestversion} globally.`
             )
           );
-          return backToMenu(type, igniteCore, true);
+          return backToMenu(type, igniteCore, showHint);
         } else if (verRet < 0) {
           /* Case 3: xclap-cli version is out-dated */
           spinner.stop();
@@ -98,7 +98,7 @@ const Installation = function(type, igniteCore, spinner, igniteName) {
               `${igniteName} is about to update the following modules globally:\n- xclap-cli (from version ${version} to version ${latestversion})`
             )
           );
-          return installXClapCLI(type, igniteCore, spinner);
+          return installXClapCLI(type, igniteCore, spinner, showHint);
         } else {
           spinner.stop();
           errorHandler("Error when fetching Electrode packages");

@@ -80,7 +80,7 @@ const igniteMenu = (type, igniteCore) => {
       igniteCore(type);
     }
 
-    taskLoader(option, type, igniteCore);
+    taskLoader(option, type, igniteCore, true);
   });
 };
 

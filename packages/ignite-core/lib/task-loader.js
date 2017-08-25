@@ -13,17 +13,17 @@ const CLISpinner = require("cli-spinner").Spinner;
 const spinner = new CLISpinner(chalk.green("%s"));
 spinner.setSpinnerString("|/-\\");
 
-function taskLoader(option, type, igniteCore) { // eslint-disable-line
+function taskLoader(option, type, igniteCore, showHint) { // eslint-disable-line
   const igniteName = type === "oss" ? "electrode-ignite" : "wml-electrode-ignite";
 
   switch (option) {
     case "1":
       logger.log(chalk.green("Checking your Electrode environment..."));
-      installationTaskExec(type, igniteCore, spinner, igniteName);
+      installationTaskExec(type, igniteCore, spinner, igniteName, showHint);
       break;
     case "2":
       logger.log(chalk.green("Checking your NodeJS and npm environment..."));
-      checkNode(type, igniteCore, spinner);
+      checkNode(type, igniteCore, spinner, showHint);
       break;
     case "3":
       // eslint-disable-next-line no-unused-expressions
@@ -49,12 +49,12 @@ function taskLoader(option, type, igniteCore) { // eslint-disable-line
           );
       break;
     case "6":
-      docs(type, igniteCore);
+      docs(type, igniteCore, showHint);
       break;
     case "7":
       spinner.stop();
       logger.log(chalk.green(`Checking for ${igniteName} update...`));
-      checkIgnite(type, igniteCore, igniteName);
+      checkIgnite(type, igniteCore, igniteName, showHint);
       break;
     case "8":
       logger.log(chalk.green("You've successfully exit Electrode Ignite."));

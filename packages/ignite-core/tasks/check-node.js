@@ -4,7 +4,6 @@ const chalk = require("chalk");
 const readline = require("readline");
 const xsh = require("xsh");
 
-const backToMenu = require("../lib/back-to-menu");
 const errorHandler = require("../lib/error-handler");
 const logger = require("../lib/logger");
 const semverComp = require("../lib/semver-comp");

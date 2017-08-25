@@ -38,7 +38,8 @@ const igniteOutdated = (
   latestVersion,
   version,
   igniteCore,
-  igniteName
+  igniteName,
+  showHint
 ) => {
   logger.log(
     chalk.cyan(
@@ -73,7 +74,7 @@ const igniteOutdated = (
       logger.log(
         chalk.cyan("You've cancelled the latest electrode-ignite installation.")
       );
-      return backToMenu(type, igniteCore, true);
+      return backToMenu(type, igniteCore, showHint);
     }
   });
 };
@@ -97,7 +98,7 @@ const igniteDailyCheck = () => {
   return Promise.resolve(checkTimestamp());
 };
 
-const checkIgnite = (type, igniteCore, igniteName) => {
+const checkIgnite = (type, igniteCore, igniteName, showHint) => {
   return igniteDailyCheck().then(needsCheck => {
     if (needsCheck) {
       logger.log(chalk.green("Checking latest version available on npm ..."));
@@ -118,7 +119,8 @@ const checkIgnite = (type, igniteCore, igniteName) => {
                 latestVersion,
                 version,
                 igniteCore,
-                igniteName
+                igniteName,
+                showHint
               );
               spinner.stop();
               return;
