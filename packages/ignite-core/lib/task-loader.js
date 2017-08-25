@@ -50,7 +50,8 @@ function taskLoader(option, type, igniteCore) { // eslint-disable-line complexit
       break;
     case "7":
       spinner.stop();
-      logger.log(chalk.green("Checking for electrode-ignite update..."));
+      const igniteName = type === "oss" ? "electrode-ignite" : "wml-electrode-ignite";
+      logger.log(chalk.green(`Checking for ${igniteName} update...`));
       checkIgnite(type, igniteCore);
       break;
     case "8":

@@ -171,7 +171,7 @@ const checkIgnite = function(type, igniteCore) {
           );
       });
     } else {
-      logger.log(chalk.cyan("Your electrode-ignite is up-to-date."));
+      logger.log(chalk.cyan(`Your ${igniteName} is up-to-date.`));
       if (type && igniteCore) {
         return igniteCore(type, process.argv[2]);
       }

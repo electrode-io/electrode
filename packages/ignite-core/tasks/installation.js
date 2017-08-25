@@ -68,6 +68,8 @@ const checkXClapCLILatestVersion = function() {
 };
 
 const Installation = function(type, igniteCore, spinner) {
+  const igniteName = type === "oss" ? "Electrode Ignite" : "WML Electrode Ignite";
+
   spinner.start();
   return checkXClapCLI().then(function(version) {
     if (!version) {
@@ -75,7 +77,7 @@ const Installation = function(type, igniteCore, spinner) {
       spinner.stop();
       console.log(
         chalk.cyan(
-          `Electrode Ignite is about to install the following modules globally:\n- xclap-cli\n`
+          `${igniteName} is about to install the following modules globally:\n- xclap-cli\n`
         )
       );
       return installXClapCLI(type, igniteCore, spinner);
@@ -96,7 +98,7 @@ const Installation = function(type, igniteCore, spinner) {
           spinner.stop();
           console.log(
             chalk.cyan(
-              `Electrode Ignite is about to update the following modules globally:\n- xclap-cli (from version ${version} to version ${latestversion})`
+              `${igniteName} is about to update the following modules globally:\n- xclap-cli (from version ${version} to version ${latestversion})`
             )
           );
           return installXClapCLI(type, igniteCore, spinner);

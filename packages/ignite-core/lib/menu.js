@@ -12,6 +12,7 @@ const EVEN = 2;
 /* eslint-disable no-console */
 
 const igniteMenu = function(type, igniteCore) {
+  const igniteName = type === "oss" ? "Electrode Ignite" : "WML Electrode Ignite";
   let option;
 
   const rl = readline.createInterface({
@@ -49,7 +50,7 @@ const igniteMenu = function(type, igniteCore) {
     `[4] \u2606 Generate an Electrode component`,
     `[5] \u272A Add a component to your existing component repo`,
     `[6] \u263A Electrode official documenations`,
-    `[7] \u2603 Check for electrode-ignite update`,
+    `[7] \u2603 Check for ${igniteName} update`,
     `[8] \u261E Exit`
   ];
 
