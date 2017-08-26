@@ -60,11 +60,13 @@ const checkNode = (type, igniteCore, spinner) => {
         );
       }
 
-      rl.close();
-
       if (type && igniteCore) {
         logger.log(chalk.green("Please choose your next task:"));
         igniteCore(type);
+      }
+
+      if (!igniteCore) {
+        rl.close();
       }
 
       return true;

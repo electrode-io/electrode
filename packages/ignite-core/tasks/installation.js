@@ -10,13 +10,13 @@ const igniteCore = require("../ignite");
 const logger = require("../lib/logger");
 const semverComp = require("../lib/semver-comp");
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  terminal: false
-});
-
 const installXClapCLI = (type, igniteCore, spinner, showHint) => {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+    terminal: false
+  });
+
   return rl.question("Proceed? (y/n) ", answer => {
     if (answer.toLowerCase() === "y") {
       spinner.start();
