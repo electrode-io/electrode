@@ -2,6 +2,7 @@
 
 const chalk = require("chalk");
 const Yargs = require("yargs");
+const readline = require("readline");
 
 const errorHandler = require("./lib/error-handler");
 const igniteMenu = require("./lib/menu");
@@ -9,12 +10,18 @@ const taskLoader = require("./lib/task-loader");
 const usage = require("./lib/usage");
 const yargsHelp = require("./lib/yargs-help");
 
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+  terminal: false
+});
+
 yargsHelp();
 
 const igniteCore = (type, task) => {
   switch (task) {
     case undefined:
-      igniteMenu(type, igniteCore);
+      igniteMenu(type, igniteCore, rl);
       break;
     case "install":
       taskLoader("1", type);
@@ -39,7 +46,9 @@ const igniteCore = (type, task) => {
       break;
     default:
       errorHandler(
-        `The task name "${chalk.redBright(Yargs.argv._)}" you've provided appears to be invalid.\n` +
+        `The task name "${chalk.redBright(
+          Yargs.argv._
+        )}" you've provided appears to be invalid.\n` +
           `Please use "ignite --help" to check all the available tasks.`
       );
   }

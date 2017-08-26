@@ -1,7 +1,6 @@
 "use strict";
 
 const chalk = require("chalk");
-const readline = require("readline");
 
 const taskLoader = require("./task-loader");
 const logger = require("./logger");
@@ -10,16 +9,10 @@ const EVEN = 2;
 const STARNUM = 6;
 
 /* eslint-disable no-console */
-const igniteMenu = (type, igniteCore) => {
+const igniteMenu = (type, igniteCore, rl) => {
   const igniteName =
     type === "oss" ? "Electrode Ignite" : "WML Electrode Ignite";
   let option;
-
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-    terminal: false
-  });
 
   function generateStars() {
     let ret = "";
