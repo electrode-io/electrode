@@ -7,7 +7,8 @@ const readline = require("readline");
 const xsh = require("xsh");
 
 const backToMenu = require("../lib/back-to-menu");
-const checkTimestamp = require("../lib/check-timestamp");
+const checkTimestamp = require("../lib/check-timestamp").checkTimestamp;
+const resetTimeStamp = require("../lib/check-timestamp").resetTimeStamp;
 const errorHandler = require("../lib/error-handler");
 const logger = require("../lib/logger");
 const semverComp = require("../lib/semver-comp");
@@ -15,12 +16,6 @@ const semverComp = require("../lib/semver-comp");
 const CLISpinner = require("cli-spinner").Spinner;
 const spinner = new CLISpinner(chalk.green("%s"));
 spinner.setSpinnerString("|/-\\");
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  terminal: false
-});
 
 const igniteUpToDate = (type, task, version, igniteCore, igniteName) => {
   logger.log(
@@ -41,10 +36,15 @@ const igniteOutdated = (
   igniteName,
   showHint
 ) => {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+    terminal: false
+  });
+
   logger.log(
     chalk.cyan(
-      `You are currently in ${igniteName}@${version}.` +
-        ` The latest version is ${latestVersion}.`
+      `${igniteName} is about to update the following modules globally:\n- electrode-ignite (from version ${version} to version ${latestVersion})`
     )
   );
 
@@ -72,8 +72,11 @@ const igniteOutdated = (
         );
     } else {
       logger.log(
-        chalk.cyan("You've cancelled the latest electrode-ignite installation.")
+        chalk.cyan(
+          `You've cancelled the electrode-ignite@${latestVersion} installation.`
+        )
       );
+      resetTimeStamp(0);
       return backToMenu(type, igniteCore, showHint);
     }
   });
@@ -92,7 +95,7 @@ const checkInstalledIgnite = igniteName => {
 
 /*
   check electrode-ignite once daily
-  timestamp saved in directory /tmp/ignite-timestamp.txt
+  timestamp saved in file "timestamp-wml|oss.txt
 */
 const igniteDailyCheck = () => {
   return Promise.resolve(checkTimestamp());

@@ -1,6 +1,7 @@
 "use strict";
 
 const fs = require("fs");
+const Path = require("path");
 const errorHandler = require("../lib/error-handler");
 
 const MILISECONDS = 1000;
@@ -8,9 +9,24 @@ const HOURS = 24;
 const SECONDS = 3600;
 const CHECK_INTERVAL = MILISECONDS * HOURS * SECONDS;
 
-const checkTimestamp = () => {
-  const timeStampPath = "/tmp/ignite-timestampe.txt";
+const fileName =
+  process.platform === "win32" ? "timestamp-wml.txt" : "timestamp-oss.txt";
+const timeStampPath = Path.resolve(__dirname, "..", fileName);
 
+const resetTimeStamp = time => {
+  fs.truncate(timeStampPath, 0, () => {
+    fs.writeFileSync(timeStampPath, time, { flag: "w" }, error => {
+      if (error) {
+        errorHandler(
+          error,
+          `Saving new timestamp to directory ${timeStampPath}.`
+        );
+      }
+    });
+  });
+};
+
+const checkTimestamp = () => {
   if (!fs.existsSync(timeStampPath)) {
     fs.writeFileSync(
       timeStampPath,
@@ -25,22 +41,9 @@ const checkTimestamp = () => {
     return true;
   } else {
     const data = fs.readFileSync(timeStampPath);
-    if (new Date().getTime() - data.toString() > CHECK_INTERVAL) {
-      fs.truncate(timeStampPath, 0, () => {
-        fs.writeFileSync(
-          timeStampPath,
-          new Date().getTime(),
-          { flag: "w" },
-          error => {
-            if (error) {
-              errorHandler(
-                error,
-                `Saving new timestamp to directory ${timeStampPath}.`
-              );
-            }
-          }
-        );
-      });
+    const curTime = new Date().getTime();
+    if (curTime - data.toString() > CHECK_INTERVAL) {
+      resetTimeStamp(curTime);
       return true;
     } else {
       return false;
@@ -48,4 +51,7 @@ const checkTimestamp = () => {
   }
 };
 
-module.exports = checkTimestamp;
+module.exports = {
+  checkTimestamp: checkTimestamp,
+  resetTimeStamp: resetTimeStamp
+};
