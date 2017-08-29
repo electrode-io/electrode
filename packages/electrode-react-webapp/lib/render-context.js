@@ -1,16 +1,17 @@
 "use strict";
 
-/* eslint-disable no-magic-numbers */
+/* eslint-disable no-magic-numbers, max-statements */
 
 const RenderOutput = require("./render-output");
 const Promise = require("bluebird");
+const _ = require("lodash");
 
 class RenderContext {
   constructor($) {
     this.$ = $;
     this.output = new RenderOutput(this);
-    this.tokenHandler = $.routeData.tokenHandler;
-    this.userTokenHandler = $.routeData.userTokenHandler;
+    this.tokenHandlers = $.routeData.tokenHandlers;
+    this.tokenHandler = _.last(this.tokenHandlers);
     this.content = $.content;
     this._tokens = $.routeData.htmlTokens;
     this._tokenIndex = 0;
@@ -40,15 +41,6 @@ class RenderContext {
     cb();
   }
 
-  _getTokenHandler(id) {
-    if (this.userTokenHandler) {
-      const x = this.userTokenHandler[id];
-      if (x) return x;
-    }
-
-    return this.tokenHandler[id];
-  }
-
   _next() {
     const tokens = this._tokens;
     if (this._tokenIndex >= tokens.length) {
@@ -63,7 +55,11 @@ class RenderContext {
       this.output.add(tk.str);
       this._next();
     } else if (tk.isModule === false) {
-      const handler = this._getTokenHandler(tk.id);
+      let handler;
+      let i;
+      for (i = 0; i < this.tokenHandlers.length && !handler; i++) {
+        handler = this.tokenHandlers[i][tk.id];
+      }
       if (handler.length > 1) {
         handler(this, this._nextCb);
       } else {

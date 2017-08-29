@@ -55,15 +55,10 @@ function makeRouteHandler(routeOptions, userContent) {
 
   const loadHandlerOptions = { routeOptions, routeData };
 
-  if (routeOptions.tokenHandler) {
-    routeData.userTokenHandler = loadTokenHandler(routeOptions.tokenHandler, loadHandlerOptions);
-  }
-
-  routeData.tokenHandler = loadTokenHandler(
-    Path.join(__dirname, "default-handlers.js"),
-    loadHandlerOptions
-  );
-
+  const tokenHandlers = [].concat(routeOptions.tokenHandler || []);
+  tokenHandlers.push(Path.join(__dirname, "default-handlers.js"));
+  routeData.tokenHandlers = tokenHandlers.map(h => loadTokenHandler(h, loadHandlerOptions));
+  routeData.tokenHandler = _.last(routeData.tokenHandlers);
   customToken.loadAll(htmlTokens, loadHandlerOptions);
 
   /* Create a route handler */

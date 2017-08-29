@@ -19,9 +19,11 @@ describe("render-context", function() {
     const context = new RenderContext({
       routeData: {
         htmlTokens: tokens,
-        tokenHandler: {
-          "internal-test": () => `\nbuilt-in for internal-test`
-        }
+        tokenHandlers: [
+          {
+            "internal-test": () => `\nbuilt-in for internal-test`
+          }
+        ]
       }
     });
     const expected = `
