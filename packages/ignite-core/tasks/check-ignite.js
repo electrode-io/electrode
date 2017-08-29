@@ -8,7 +8,7 @@ const xsh = require("xsh");
 
 const backToMenu = require("../lib/back-to-menu");
 const checkTimestamp = require("../lib/check-timestamp").checkTimestamp;
-const resetTimeStamp = require("../lib/check-timestamp").resetTimeStamp;
+const setTimeStamp = require("../lib/check-timestamp").setTimeStamp;
 const errorHandler = require("../lib/error-handler");
 const logger = require("../lib/logger");
 const semverComp = require("../lib/semver-comp");
@@ -23,6 +23,7 @@ const igniteUpToDate = (type, task, version, igniteCore, igniteName) => {
       `Congratulations! You've aleady installed the latest ${igniteName}@${version}.`
     )
   );
+  setTimeStamp(new Date().getTime());
   igniteCore(type, task);
   return;
 };
@@ -42,6 +43,8 @@ const igniteOutdated = (
     terminal: false
   });
 
+  setTimeStamp(0);
+
   logger.log(
     chalk.cyan(
       `${igniteName} is about to update the following modules globally:\n- electrode-ignite (from version ${version} to version ${latestVersion})`
@@ -58,6 +61,7 @@ const igniteOutdated = (
         .then(() => {
           logger.log(chalk.cyan(`${igniteName} updated to ${latestVersion},`));
           logger.log(chalk.cyan("Exiting..., please run your command again."));
+          setTimeStamp(new Date().getTime());
           spinner.stop();
 
           return process.exit(0);
@@ -70,14 +74,25 @@ const igniteOutdated = (
               ` The command is: npm install -g ${igniteName}@${latestVersion}`
           )
         );
-    } else {
+    } else if (answer.toLowerCase() === "n") {
       logger.log(
         chalk.cyan(
           `You've cancelled the electrode-ignite@${latestVersion} installation.`
         )
       );
-      resetTimeStamp(0);
       return backToMenu(type, igniteCore, showHint);
+    } else {
+      logger.log(chalk.cyan("Please provide 'y' or 'n'."));
+      rl.close();
+      return igniteOutdated(
+        type,
+        task,
+        latestVersion,
+        version,
+        igniteCore,
+        igniteName,
+        showHint
+      );
     }
   });
 };

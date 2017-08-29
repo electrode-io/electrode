@@ -37,9 +37,13 @@ const installXClapCLI = (type, igniteCore, spinner, showHint) => {
           return backToMenu(type, igniteCore, showHint);
         })
         .catch(err => errorHandler(err, `Install xclap-cli globally.`));
-    } else {
+    } else if(answer.toLowerCase() === "n") {
       logger.log(chalk.cyan("You've cancelled the xclap-cli installation."));
       return backToMenu(type, igniteCore, showHint);
+    } else {
+      logger.log(chalk.cyan("Please provide 'y' or 'n'."));
+      rl.close();
+      return installXClapCLI(type, igniteCore, spinner, showHint);
     }
   });
 };

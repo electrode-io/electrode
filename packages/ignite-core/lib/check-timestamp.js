@@ -13,7 +13,7 @@ const fileName =
   process.platform === "win32" ? "timestamp-wml.txt" : "timestamp-oss.txt";
 const timeStampPath = Path.resolve(__dirname, "..", fileName);
 
-const resetTimeStamp = time => {
+const setTimeStamp = time => {
   fs.truncate(timeStampPath, 0, () => {
     fs.writeFileSync(timeStampPath, time, { flag: "w" }, error => {
       if (error) {
@@ -28,22 +28,16 @@ const resetTimeStamp = time => {
 
 const checkTimestamp = () => {
   if (!fs.existsSync(timeStampPath)) {
-    fs.writeFileSync(
-      timeStampPath,
-      new Date().getTime(),
-      { flag: "wx" },
-      err => {
-        if (err) {
-          errorHandler(err, `Saving timestamp to directory ${timeStampPath}.`);
-        }
+    fs.writeFileSync(timeStampPath, 0, { flag: "wx" }, err => {
+      if (err) {
+        errorHandler(err, `Saving timestamp to directory ${timeStampPath}.`);
       }
-    );
+    });
     return true;
   } else {
     const data = fs.readFileSync(timeStampPath);
     const curTime = new Date().getTime();
     if (curTime - data.toString() > CHECK_INTERVAL) {
-      resetTimeStamp(curTime);
       return true;
     } else {
       return false;
@@ -53,5 +47,5 @@ const checkTimestamp = () => {
 
 module.exports = {
   checkTimestamp: checkTimestamp,
-  resetTimeStamp: resetTimeStamp
+  setTimeStamp: setTimeStamp
 };
