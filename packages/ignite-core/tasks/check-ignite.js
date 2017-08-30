@@ -43,8 +43,6 @@ const igniteOutdated = (
     terminal: false
   });
 
-  setTimeStamp(0);
-
   logger.log(
     chalk.cyan(
       `${igniteName} is about to update the following modules globally:\n- electrode-ignite (from version ${version} to version ${latestVersion})`
@@ -80,9 +78,11 @@ const igniteOutdated = (
           `You've cancelled the electrode-ignite@${latestVersion} installation.`
         )
       );
+      setTimeStamp(0);
       return backToMenu(type, igniteCore, showHint);
     } else {
       logger.log(chalk.cyan("Please provide 'y' or 'n'."));
+      setTimeStamp(0);
       rl.close();
       return igniteOutdated(
         type,

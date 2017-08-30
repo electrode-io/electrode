@@ -9,24 +9,32 @@ const fileName =
 const timeStampPath = Path.resolve(__dirname, "..", fileName);
 
 const setTimeStamp = time => {
-  fs.truncate(timeStampPath, 0, () => {
-    fs.writeFileSync(timeStampPath, time, { flag: "w" }, error => {
-      if (error) {
-        errorHandler(
-          error,
-          `Saving new timestamp to directory ${timeStampPath}.`
-        );
+  if (!fs.existsSync(timeStampPath)) {
+    fs.writeFileSync(timeStampPath, time, { flag: "wx" }, err => {
+      if (err) {
+        errorHandler(err, `Saving timestamp to directory ${timeStampPath}.`);
       }
     });
-  });
+  } else {
+    fs.truncate(timeStampPath, 0, () => {
+      fs.writeFileSync(timeStampPath, time, { flag: "w" }, error => {
+        if (error) {
+          errorHandler(
+            error,
+            `Saving new timestamp to directory ${timeStampPath}.`
+          );
+        }
+      });
+    });
+  }
 };
 
 const checkTimestamp = () => {
   if (!fs.existsSync(timeStampPath)) {
     return true;
   } else {
-    const data = fs.readFileSync(timeStampPath);
-    if (new Date().toDateString() !== data.toString()) {
+    const data = fs.readFileSync(timeStampPath).toString().trim();
+    if (new Date().toDateString() !== data) {
       return true;
     } else {
       return false;
