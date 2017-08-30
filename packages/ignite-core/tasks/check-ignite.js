@@ -23,7 +23,7 @@ const igniteUpToDate = (type, task, version, igniteCore, igniteName) => {
       `Congratulations! You've aleady installed the latest ${igniteName}@${version}.`
     )
   );
-  setTimeStamp(new Date().getTime());
+  setTimeStamp(new Date().toDateString());
   igniteCore(type, task);
   return;
 };
@@ -59,9 +59,9 @@ const igniteOutdated = (
       return xsh
         .exec(true, `npm install -g ${igniteName}@${latestVersion}`)
         .then(() => {
+          setTimeStamp(new Date().toDateString());
           logger.log(chalk.cyan(`${igniteName} updated to ${latestVersion},`));
           logger.log(chalk.cyan("Exiting..., please run your command again."));
-          setTimeStamp(new Date().getTime());
           spinner.stop();
 
           return process.exit(0);
