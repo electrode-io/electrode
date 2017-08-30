@@ -1,12 +1,12 @@
 "use strict";
 
-/* eslint-disable */
-
 const assert = require("assert");
 const Token = require("./token");
 
 const tokenOpenTag = "<!--%{";
 const tokenCloseTag = "}-->";
+
+/* eslint-disable max-statements, no-constant-condition */
 
 function parseTemplate(template) {
   const tokens = [];

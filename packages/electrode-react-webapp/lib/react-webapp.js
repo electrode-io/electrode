@@ -8,6 +8,7 @@ const RenderContext = require("./render-context");
 const parseTemplate = require("./parse-template");
 const customToken = require("./custom-token");
 const loadHandler = require("./load-handler");
+const Renderer = require("./renderer");
 
 const HTTP_ERROR_500 = 500;
 
@@ -60,6 +61,11 @@ function makeRouteHandler(routeOptions, userContent) {
   routeData.tokenHandlers = tokenHandlers.map(h => loadTokenHandler(h, loadHandlerOptions));
   routeData.tokenHandler = _.last(routeData.tokenHandlers);
   customToken.loadAll(htmlTokens, loadHandlerOptions);
+
+  const renderer = new Renderer({
+    htmlTokens,
+    tokenHandlers: routeData.tokenHandlers
+  });
 
   /* Create a route handler */
   /* eslint max-statements: [2, 35] */
@@ -131,7 +137,7 @@ function makeRouteHandler(routeOptions, userContent) {
         user: {}
       });
 
-      return context.render();
+      return renderer.render(context);
     };
 
     if (typeof userContent === "function") {
