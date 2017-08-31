@@ -53,7 +53,10 @@
   "env": {
     "production": {
       "plugins": [
-        "babel-plugin-transform-react-constant-elements"
+        "babel-plugin-transform-react-constant-elements",
+        ["transform-react-remove-prop-types", {
+           "removeImport": true
+        }]
       ]
     }
   }
