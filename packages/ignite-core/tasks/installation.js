@@ -10,6 +10,27 @@ const igniteCore = require("../ignite");
 const logger = require("../lib/logger");
 const semverComp = require("../lib/semver-comp");
 
+const installLatestXClapCLI = (spinner, type, igniteCore, showHint) => {
+  spinner.start();
+  return xsh
+    .exec("npm install -g xclap-cli")
+    .then(ver => {
+      const verStdout = ver.stdout;
+      const verStart =
+        verStdout.indexOf("xclap-cli@") + "xclap-cli@".length;
+      const verEnd = verStdout.indexOf("\n", verStart);
+      const latestVersion = verStdout.substring(verStart, verEnd).trim();
+
+      spinner.stop();
+
+      logger.log(
+        chalk.cyan(`You've successfully installed the latest xclap-cli@${latestVersion}.`)
+      );
+      return backToMenu(type, igniteCore, showHint);
+    })
+    .catch(err => errorHandler(err, `Install xclap-cli globally.`));
+};
+
 const installXClapCLI = (type, igniteCore, spinner, showHint) => {
   const rl = readline.createInterface({
     input: process.stdin,
@@ -19,24 +40,7 @@ const installXClapCLI = (type, igniteCore, spinner, showHint) => {
 
   return rl.question("Proceed? (y/n) ", answer => {
     if (answer.toLowerCase() === "y") {
-      spinner.start();
-      return xsh
-        .exec("npm install -g xclap-cli")
-        .then(ver => {
-          const verStdout = ver.stdout;
-          const verStart =
-            verStdout.indexOf("xclap-cli@") + "xclap-cli@".length;
-          const verEnd = verStdout.indexOf("\n", verStart);
-          const latestVersion = verStdout.substring(verStart, verEnd).trim();
-
-          spinner.stop();
-
-          logger.log(
-            chalk.cyan(`You've successfully installed the latest xclap-cli@${latestVersion}.`)
-          );
-          return backToMenu(type, igniteCore, showHint);
-        })
-        .catch(err => errorHandler(err, `Install xclap-cli globally.`));
+      return installLatestXClapCLI(spinner, type, igniteCore, showHint);
     } else if(answer.toLowerCase() === "n") {
       logger.log(chalk.cyan("You've cancelled the xclap-cli installation."));
       return backToMenu(type, igniteCore, showHint);

@@ -14,51 +14,62 @@ const rl = readline.createInterface({
   terminal: false
 });
 
+const printNodeCheckLog = () => {
+  const nodeVersion = process.version.slice(1);
+  const nodeVerRet = semverComp(nodeVersion, "6.0.0");
+  logger.log(chalk.cyan(`Your Node version is: ${nodeVersion}`));
+
+  if (nodeVerRet >= 0) {
+    logger.log(
+      chalk.yellow(
+        `You are using Node version ${nodeVersion}. Electrode should work for you.\n`
+      )
+    );
+  } else {
+    logger.log(
+      chalk.yellow(
+        `Your Node version is: ${nodeVersion}. We recommend use Node LTS version 6.\n`
+      )
+    );
+  }
+};
+
+const printnpmCheckLog = (npmVersion) => {
+  npmVersion = npmVersion.stdout.slice(0, -1);
+  const npmVerRet = semverComp(npmVersion, "3.0.0");
+  logger.log(chalk.cyan(`Your npm version is: ${npmVersion}`));
+
+  if (npmVerRet >= 0) {
+    logger.log(
+      chalk.yellow(
+        `You are using npm version ${npmVersion}. Electrode should work for you.\n`
+      )
+    );
+  } else {
+    logger.log(
+      chalk.yellow(
+        `Your npm version is: ${npmVersion}. Electrode requires npm version 3 and up.\n`
+      )
+    );
+  }
+};
+
+const printNodePath = () => {
+  const nodePath = process.execPath;
+  logger.log(chalk.cyan(`Your Node binary path is: ${nodePath}\n`));
+};
+
 const checkNode = (type, igniteCore, spinner) => {
   spinner.start();
 
   return xsh
     .exec(true, "npm -v")
     .then(npmVersion => {
-      const nodeVersion = process.version.slice(1);
-      npmVersion = npmVersion.stdout.slice(0, -1);
-      const nodePath = process.execPath;
-      const nodeVerRet = semverComp(nodeVersion, "6.0.0");
-      const npmVerRet = semverComp(npmVersion, "3.0.0");
+      printNodeCheckLog();
+      printnpmCheckLog(npmVersion);
+      printNodePath();
 
       spinner.stop();
-
-      logger.log(chalk.cyan(`Your Node version is: ${nodeVersion}`));
-      logger.log(chalk.cyan(`Your npm version is: ${npmVersion}`));
-      logger.log(chalk.cyan(`Your Node binary path is: ${nodePath}`));
-
-      if (nodeVerRet >= 0) {
-        logger.log(
-          chalk.yellow(
-            `You are using Node version ${nodeVersion}. Electrode should work for you.`
-          )
-        );
-      } else {
-        logger.log(
-          chalk.yellow(
-            `Your Node version is: ${nodeVersion}. We recommend use Node LTS version 6.`
-          )
-        );
-      }
-
-      if (npmVerRet >= 0) {
-        logger.log(
-          chalk.yellow(
-            `You are using npm version ${npmVersion}. Electrode should work for you.`
-          )
-        );
-      } else {
-        logger.log(
-          chalk.yellow(
-            `Your npm version is: ${npmVersion}. Electrode requires npm version 3 and up.`
-          )
-        );
-      }
 
       if (type && igniteCore) {
         logger.log(chalk.green("Please choose your next task:"));
@@ -68,7 +79,6 @@ const checkNode = (type, igniteCore, spinner) => {
       if (!igniteCore) {
         rl.close();
       }
-
       return true;
     })
     .catch(err => errorHandler(err, "Failed at: checking node env."));

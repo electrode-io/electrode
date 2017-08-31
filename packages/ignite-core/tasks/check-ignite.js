@@ -23,76 +23,88 @@ const igniteUpToDate = (type, task, version, igniteCore, igniteName) => {
       `Congratulations! You've aleady installed the latest ${igniteName}@${version}.`
     )
   );
-  setTimeStamp(new Date().toDateString());
+  setTimeStamp({
+    time: new Date().toDateString(),
+    version: version,
+    latestVersion: version
+  });
   igniteCore(type, task);
   return;
 };
 
-const igniteOutdated = (
-  type,
-  task,
-  latestVersion,
-  version,
-  igniteCore,
-  igniteName,
-  showHint
-) => {
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-    terminal: false
-  });
+const installLatestIgnite = (igniteName, latestVersion) => {
+  logger.log(chalk.cyan("Please hold, trying to update."));
+  spinner.start();
 
+  return xsh
+    .exec(true, `npm install -g ${igniteName}@${latestVersion}`)
+    .then(() => {
+      setTimeStamp({
+        time: new Date().toDateString(),
+        version: latestVersion,
+        latestVersion: latestVersion
+      });
+      logger.log(chalk.cyan(`${igniteName} updated to ${latestVersion},`));
+      logger.log(chalk.cyan("Exiting..., please run your command again."));
+      spinner.stop();
+      return process.exit(0);
+    })
+    .catch(err =>
+      errorHandler(
+        err,
+        `Since it may not be safe for a module to update itself while running,` +
+          ` please run the update command manually after ${igniteName} exits.` +
+          ` The command is: npm install -g ${igniteName}@${latestVersion}`
+      )
+    );
+};
+
+const cancelLatestIgnite = (version, latestVersion, type, igniteCore, showHint) => {
+  logger.log(
+    chalk.cyan(
+      `You've cancelled the electrode-ignite@${latestVersion} installation.`
+    )
+  );
+  setTimeStamp({
+    time: new Date().toDateString(),
+    version: version,
+    latestVersion: latestVersion
+  });
+  return backToMenu(type, igniteCore, showHint);
+};
+
+const invalidProceedOption = (type, task, latestVersion, version, igniteCore, igniteName, showHint, rl) => {
+  logger.log(chalk.cyan("Please provide 'y' or 'n'."));
+  setTimeStamp({
+    time: new Date().toDateString(),
+    version: version,
+    latestVersion: latestVersion
+  });
+  rl.close();
+
+  return igniteOutdated(type, task, latestVersion, version, igniteCore, igniteName, showHint);
+};
+
+const igniteOutdated = (type, task, latestVersion, version, igniteCore, igniteName, showHint) => {
   logger.log(
     chalk.cyan(
       `${igniteName} is about to update the following modules globally:\n- electrode-ignite (from version ${version} to version ${latestVersion})`
     )
   );
 
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+    terminal: false
+  });
+
   return rl.question("Proceed? (y/n) ", answer => {
     if (answer.toLowerCase() === "y") {
-      logger.log(chalk.cyan("Please hold, trying to update."));
-      spinner.start();
-
-      return xsh
-        .exec(true, `npm install -g ${igniteName}@${latestVersion}`)
-        .then(() => {
-          setTimeStamp(new Date().toDateString());
-          logger.log(chalk.cyan(`${igniteName} updated to ${latestVersion},`));
-          logger.log(chalk.cyan("Exiting..., please run your command again."));
-          spinner.stop();
-
-          return process.exit(0);
-        })
-        .catch(err =>
-          errorHandler(
-            err,
-            `Since it may not be safe for a module to update itself while running,` +
-              ` please run the update command manually after ${igniteName} exits.` +
-              ` The command is: npm install -g ${igniteName}@${latestVersion}`
-          )
-        );
+      return installLatestIgnite(igniteName, latestVersion);
     } else if (answer.toLowerCase() === "n") {
-      logger.log(
-        chalk.cyan(
-          `You've cancelled the electrode-ignite@${latestVersion} installation.`
-        )
-      );
-      setTimeStamp(0);
-      return backToMenu(type, igniteCore, showHint);
+      return cancelLatestIgnite(version, latestVersion, type, igniteCore, showHint);
     } else {
-      logger.log(chalk.cyan("Please provide 'y' or 'n'."));
-      setTimeStamp(0);
-      rl.close();
-      return igniteOutdated(
-        type,
-        task,
-        latestVersion,
-        version,
-        igniteCore,
-        igniteName,
-        showHint
-      );
+      return invalidProceedOption(type, task, latestVersion, version, igniteCore, igniteName, showHint, rl);
     }
   });
 };
@@ -108,6 +120,42 @@ const checkInstalledIgnite = igniteName => {
     });
 };
 
+const checkIgniteVersion = (type, igniteName, version, igniteCore, showHint) => {
+  return xsh
+    .exec(true, `npm show ${igniteName} version`)
+    .then(latestVersion => {
+      latestVersion = latestVersion.stdout.slice(0, -1);
+      const versionComp = semverComp(latestVersion, version);
+
+      /* Case 1: electrode-ignite version outdated */
+      if (versionComp > 0) {
+        igniteOutdated(type, process.argv[2], latestVersion, version, igniteCore, igniteName, showHint);
+        spinner.stop();
+        return;
+
+        /* Case 2: electrode-ignite latest version */
+      } else if (versionComp === 0) {
+        igniteUpToDate(type, process.argv[2], latestVersion, igniteCore, igniteName);
+        spinner.stop();
+        return;
+
+        /* Case 3: Invalid electrode-ignite version */
+      } else {
+        spinner.stop();
+        errorHandler(
+          `Invalid ${igniteName} version@${version}. Please report this to Electrode core team.`
+        );
+      }
+    })
+    .catch(err =>
+      errorHandler(
+        err,
+        `Invalid ${igniteName} in the npm registry.` +
+          ` Please report this to Electrode core team.`
+      )
+    );
+};
+
 /*
   check electrode-ignite once daily
   timestamp saved in file "timestamp-wml|oss.txt
@@ -117,63 +165,20 @@ const igniteDailyCheck = () => {
 };
 
 const checkIgnite = (type, igniteCore, igniteName, showHint) => {
-  return igniteDailyCheck().then(needsCheck => {
-    if (needsCheck) {
+  return igniteDailyCheck().then(checkRet => {
+    if (checkRet === "check") {
       logger.log(chalk.green("Checking latest version available on npm ..."));
       spinner.start();
-
       return checkInstalledIgnite(igniteName).then(version => {
-        return xsh
-          .exec(true, `npm show ${igniteName} version`)
-          .then(latestVersion => {
-            latestVersion = latestVersion.stdout.slice(0, -1);
-            const versionComp = semverComp(latestVersion, version);
-
-            /* Case 1: electrode-ignite version outdated */
-            if (versionComp > 0) {
-              igniteOutdated(
-                type,
-                process.argv[2],
-                latestVersion,
-                version,
-                igniteCore,
-                igniteName,
-                showHint
-              );
-              spinner.stop();
-              return;
-
-              /* Case 2: electrode-ignite latest version */
-            } else if (versionComp === 0) {
-              igniteUpToDate(
-                type,
-                process.argv[2],
-                latestVersion,
-                igniteCore,
-                igniteName
-              );
-              spinner.stop();
-              return;
-
-              /* Case 3: Invalid electrode-ignite version */
-            } else {
-              spinner.stop();
-              errorHandler(
-                `Invalid ${igniteName} version@${version}. Please report this to Electrode core team.`
-              );
-            }
-          })
-          .catch(err =>
-            errorHandler(
-              err,
-              `Invalid ${igniteName} in the npm registry.` +
-                ` Please report this to Electrode core team.`
-            )
-          );
+        return checkIgniteVersion(type, igniteName, version, igniteCore, showHint);
       });
     } else {
-      logger.log(chalk.cyan(`Your ${igniteName} is up-to-date.`));
-      return backToMenu(type, igniteCore);
+      if(checkRet.version === checkRet.latestVersion) {
+        logger.log(chalk.cyan(`Your ${igniteName} is up-to-date.`));
+        return backToMenu(type, igniteCore);
+      } else {
+        return igniteOutdated(type, process.argv[2], checkRet.latestVersion, checkRet.version, igniteCore, igniteName, showHint);
+      }
     }
   });
 };

@@ -17,16 +17,7 @@ const printSucessLogs = (type, igniteCore, showHint) => {
   return backToMenu(type, igniteCore, showHint);
 };
 
-const electrodeDocs = (type, igniteCore, showHint) => {
-  var gitbookURL = "";
-  if (type === "oss") {
-    gitbookURL = "https://docs.electrode.io/";
-  } else if (type === "wml") {
-    gitbookURL = "http://gitbook.qa.walmart.com/books/electrode-dev-guide/";
-  } else {
-    errorHandler("Please provide a valid type");
-  }
-
+const openDocs = (gitbookURL, type, igniteCore, showHint) => {
   if (process.platform === "win32") {
     return opn(gitbookURL)
       .then(() => {
@@ -43,6 +34,19 @@ const electrodeDocs = (type, igniteCore, showHint) => {
       errorHandler("Failed at open a new browser on windows", e);
     }
   }
+};
+
+const electrodeDocs = (type, igniteCore, showHint) => {
+  var gitbookURL = "";
+  if (type === "oss") {
+    gitbookURL = "https://docs.electrode.io/";
+  } else if (type === "wml") {
+    gitbookURL = "http://gitbook.qa.walmart.com/books/electrode-dev-guide/";
+  } else {
+    errorHandler("Please provide a valid type");
+  }
+
+  return openDocs(gitbookURL, type, igniteCore, showHint);
 };
 
 module.exports = electrodeDocs;
