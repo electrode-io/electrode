@@ -54,7 +54,7 @@ function taskLoader(option, type, igniteCore, showHint) { // eslint-disable-line
     case "7":
       spinner.stop();
       logger.log(chalk.green(`Checking for ${igniteName} update...`));
-      checkIgnite(type, igniteCore, igniteName, showHint);
+      checkIgnite(type, igniteCore, igniteName, showHint, true);
       break;
     case "8":
       logger.log(chalk.green("You've successfully exit Electrode Ignite."));

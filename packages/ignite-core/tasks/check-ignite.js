@@ -28,8 +28,13 @@ const igniteUpToDate = (type, task, version, igniteCore, igniteName) => {
     version: version,
     latestVersion: version
   });
-  igniteCore(type, task);
-  return;
+
+  if (!igniteCore || process.argv[2] === "check-ignite") {
+    return process.exit(0);
+  } else {
+    igniteCore(type, task);
+    return;
+  }
 };
 
 const installLatestIgnite = (igniteName, latestVersion) => {
@@ -70,7 +75,12 @@ const cancelLatestIgnite = (version, latestVersion, type, igniteCore, showHint) 
     version: version,
     latestVersion: latestVersion
   });
-  return backToMenu(type, igniteCore, showHint);
+
+  if (!igniteCore || process.argv[2] === "check-ignite") {
+    return process.exit(0);
+  } else {
+    return backToMenu(type, igniteCore, showHint);
+  }
 };
 
 const invalidProceedOption = (type, task, latestVersion, version, igniteCore, igniteName, showHint, rl) => {

@@ -9,7 +9,11 @@ const pkg = require("../package.json");
 
 function ignite() {
   logger.log(chalk.green(`Welcome to electrode-ignite version ${pkg.version}`));
-  return checkElectrodeIgnite("oss", igniteCore, "electrode-ignite");
+  if(process.argv[2] === "check-ignite") {
+    return checkElectrodeIgnite("oss", igniteCore, "electrode-ignite", false, true);
+  } else {
+    return checkElectrodeIgnite("oss", igniteCore, "electrode-ignite");
+  }
 }
 
 module.exports = ignite;
