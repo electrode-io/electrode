@@ -1,6 +1,6 @@
 {
   "name": "ignite-core",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "A bootstrap tool for installing, updating, and assisting development with Electrode platform.",
   "main": "ignite.js",
   "scripts": {

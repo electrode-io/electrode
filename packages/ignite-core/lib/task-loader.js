@@ -14,7 +14,7 @@ const spinner = new CLISpinner(chalk.green("%s"));
 spinner.setSpinnerString("|/-\\");
 
 function taskLoader(option, type, igniteCore, showHint) { // eslint-disable-line
-  const igniteName = type === "oss" ? "electrode-ignite" : "wml-electrode-ignite";
+  const igniteName = type === "oss" ? "electrode-ignite" : "@walmart/electrode-ignite";
 
   switch (option) {
     case "1":
