@@ -164,23 +164,31 @@ const igniteDailyCheck = () => {
   return Promise.resolve(checkTimestamp());
 };
 
-const checkIgnite = (type, igniteCore, igniteName, showHint) => {
-  return igniteDailyCheck().then(checkRet => {
-    if (checkRet === "check") {
-      logger.log(chalk.green("Checking latest version available on npm ..."));
-      spinner.start();
-      return checkInstalledIgnite(igniteName).then(version => {
-        return checkIgniteVersion(type, igniteName, version, igniteCore, showHint);
-      });
-    } else {
-      if(checkRet.version === checkRet.latestVersion) {
-        logger.log(chalk.cyan(`Your ${igniteName} is up-to-date.`));
-        return backToMenu(type, igniteCore);
-      } else {
-        return igniteOutdated(type, process.argv[2], checkRet.latestVersion, checkRet.version, igniteCore, igniteName, showHint);
-      }
-    }
+const checkIgniteRegistry = (type, igniteCore, igniteName, showHint) => {
+  logger.log(chalk.green("Checking latest version available on npm ..."));
+  spinner.start();
+  return checkInstalledIgnite(igniteName).then(version => {
+    return checkIgniteVersion(type, igniteName, version, igniteCore, showHint);
   });
+};
+
+const checkIgnite = (type, igniteCore, igniteName, showHint, manual) => {
+  if(manual) {
+    return checkIgniteRegistry(type, igniteCore, igniteName, showHint);
+  } else {
+    return igniteDailyCheck().then(checkRet => {
+      if (checkRet === "check") {
+        return checkIgniteRegistry(type, igniteCore, igniteName, showHint)
+      } else {
+        if(checkRet.version === checkRet.latestVersion) {
+          logger.log(chalk.cyan(`Your ${igniteName} is up-to-date.`));
+          return backToMenu(type, igniteCore);
+        } else {
+          return igniteOutdated(type, process.argv[2], checkRet.latestVersion, checkRet.version, igniteCore, igniteName, showHint);
+        }
+      }
+    });
+  }
 };
 
 module.exports = checkIgnite;
