@@ -45,10 +45,14 @@ describe("ignite-core:task-loader", function() {
   it("Option#7 exit the app", function() {
     taskLoader("7", "oss", foo);
 
-    sinon.assert.callCount(loggerStub, 1);
+    sinon.assert.callCount(loggerStub, 2);
     assert.equal(
       loggerStub.getCalls()[0].args.toString(),
-      chalk.green("You've successfully exit Electrode Ignite.")
+      chalk.green("Checking for electrode-ignite update...")
+    );
+    assert.equal(
+      loggerStub.getCalls()[1].args.toString(),
+      chalk.green("Checking latest version available on npm ...")
     );
   });
 });

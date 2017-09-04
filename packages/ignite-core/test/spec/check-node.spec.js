@@ -16,7 +16,7 @@ function foo() {
   return;
 }
 
-describe.skip("ignite-core: check-node.spec.js", function() {
+describe("Check Node Env", function() {
   let xshStub = "";
   let loggerStub = "";
 
@@ -58,11 +58,23 @@ describe.skip("ignite-core: check-node.spec.js", function() {
       );
       assert.equal(
         loggerStub.getCalls()[1].args.toString(),
-        chalk.cyan("Your npm version is: 3.10.0")
+        chalk.yellow(
+          `You are using Node version 6.10.3. Electrode should work for you.\n`
+        )
       );
       assert.equal(
         loggerStub.getCalls()[2].args.toString(),
-        chalk.cyan("Your Node binary path is: /test/path")
+        chalk.cyan(`Your npm version is: 3.10.0`)
+      );
+      assert.equal(
+        loggerStub.getCalls()[3].args.toString(),
+        chalk.yellow(
+          `You are using npm version 3.10.0. Electrode should work for you.\n`
+        )
+      );
+      assert.equal(
+        loggerStub.getCalls()[4].args.toString(),
+        chalk.cyan(`Your Node binary path is: /test/path\n`)
       );
 
       Object.defineProperty(process, "platform", originalPlatform);
@@ -72,7 +84,7 @@ describe.skip("ignite-core: check-node.spec.js", function() {
     });
   });
 
-  it("check node environment on window", function(done) {
+  it("check node environment on windows", function(done) {
     const originalPlatform = Object.getOwnPropertyDescriptor(
       process,
       "platform"
@@ -97,11 +109,23 @@ describe.skip("ignite-core: check-node.spec.js", function() {
       );
       assert.equal(
         loggerStub.getCalls()[1].args.toString(),
-        chalk.cyan("Your npm version is: 3.10.0")
+        chalk.yellow(
+          `You are using Node version 6.10.3. Electrode should work for you.\n`
+        )
       );
       assert.equal(
         loggerStub.getCalls()[2].args.toString(),
-        chalk.cyan("Your Node binary path is: /test/path")
+        chalk.cyan(`Your npm version is: 3.10.0`)
+      );
+      assert.equal(
+        loggerStub.getCalls()[3].args.toString(),
+        chalk.yellow(
+          `You are using npm version 3.10.0. Electrode should work for you.\n`
+        )
+      );
+      assert.equal(
+        loggerStub.getCalls()[4].args.toString(),
+        chalk.cyan(`Your Node binary path is: /test/path\n`)
       );
 
       Object.defineProperty(process, "platform", originalPlatform);

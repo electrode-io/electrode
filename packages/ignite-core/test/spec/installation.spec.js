@@ -24,8 +24,8 @@ describe("inite-core:installation", function() {
   });
 
   it("check xclap-cli dependency", function(done) {
-    const checkXClapCLI = installation.__get__("checkXClapCLI");
-    checkXClapCLI().then(function() {
+    const checkLocalXClapCLI = installation.__get__("checkLocalXClapCLI");
+    checkLocalXClapCLI().then(function() {
       sinon.assert.callCount(xshStub, 1);
       assert.equal(
         xshStub.getCalls()[0].args.toString(),
