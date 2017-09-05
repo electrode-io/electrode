@@ -14,7 +14,7 @@ function foo() {
   return;
 }
 
-describe("Back to menu", () => {
+describe("ignite-core: back to menu", () => {
   let loggerStub;
   let processStub;
 

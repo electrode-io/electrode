@@ -17,7 +17,7 @@ const CLISpinner = require("cli-spinner").Spinner;
 const spinner = new CLISpinner(chalk.green("%s"));
 spinner.setSpinnerString("|/-\\");
 
-const igniteUpToDate = (type, task, version, igniteCore, igniteName) => {
+function igniteUpToDate(type, task, version, igniteCore, igniteName) {
   logger.log(
     chalk.cyan(
       `Congratulations! You've aleady installed the latest ${igniteName}@${version}.`
@@ -37,7 +37,7 @@ const igniteUpToDate = (type, task, version, igniteCore, igniteName) => {
   }
 };
 
-const installLatestIgnite = (igniteName, latestVersion) => {
+function installLatestIgnite(igniteName, latestVersion) {
   logger.log(chalk.cyan("Please hold, trying to update."));
   spinner.start();
 
@@ -49,7 +49,7 @@ const installLatestIgnite = (igniteName, latestVersion) => {
         version: latestVersion,
         latestVersion: latestVersion
       });
-      logger.log(chalk.cyan(`${igniteName} updated to ${latestVersion},`));
+      logger.log(chalk.cyan(`${igniteName} updated to ${latestVersion}.`));
       logger.log(chalk.cyan("Exiting..., please run your command again."));
       spinner.stop();
       return process.exit(0);
@@ -64,7 +64,7 @@ const installLatestIgnite = (igniteName, latestVersion) => {
     );
 };
 
-const cancelLatestIgnite = (version, latestVersion, type, igniteCore, showHint) => {
+function cancelLatestIgnite(version, latestVersion, type, igniteCore, showHint) {
   logger.log(
     chalk.cyan(
       `You've cancelled the electrode-ignite@${latestVersion} installation.`
@@ -83,7 +83,7 @@ const cancelLatestIgnite = (version, latestVersion, type, igniteCore, showHint) 
   }
 };
 
-const invalidProceedOption = (type, task, latestVersion, version, igniteCore, igniteName, showHint, rl) => {
+function invalidProceedOption(type, task, latestVersion, version, igniteCore, igniteName, showHint, rl) {
   logger.log(chalk.cyan("Please provide 'y' or 'n'."));
   setTimeStamp({
     time: new Date().toDateString(),
@@ -95,7 +95,7 @@ const invalidProceedOption = (type, task, latestVersion, version, igniteCore, ig
   return igniteOutdated(type, task, latestVersion, version, igniteCore, igniteName, showHint);
 };
 
-const igniteOutdated = (type, task, latestVersion, version, igniteCore, igniteName, showHint) => {
+function igniteOutdated(type, task, latestVersion, version, igniteCore, igniteName, showHint) {
   logger.log(
     chalk.cyan(
       `${igniteName} is about to update the following modules globally:\n- electrode-ignite (from version ${version} to version ${latestVersion})`
@@ -119,7 +119,7 @@ const igniteOutdated = (type, task, latestVersion, version, igniteCore, igniteNa
   });
 };
 
-const checkInstalledIgnite = igniteName => {
+function checkInstalledIgnite(igniteName) {
   return xsh
     .exec(true, `npm ls -g -j --depth=0 ${igniteName}`)
     .then(ret => {
@@ -130,7 +130,7 @@ const checkInstalledIgnite = igniteName => {
     });
 };
 
-const checkIgniteVersion = (type, igniteName, version, igniteCore, showHint) => {
+function checkIgniteVersion(type, igniteName, version, igniteCore, showHint) {
   return xsh
     .exec(true, `npm show ${igniteName} version`)
     .then(latestVersion => {
@@ -170,11 +170,11 @@ const checkIgniteVersion = (type, igniteName, version, igniteCore, showHint) => 
   check electrode-ignite once daily
   timestamp saved in file "timestamp-wml|oss.txt
 */
-const igniteDailyCheck = () => {
+function igniteDailyCheck() {
   return Promise.resolve(checkTimestamp());
 };
 
-const checkIgniteRegistry = (type, igniteCore, igniteName, showHint) => {
+function checkIgniteRegistry(type, igniteCore, igniteName, showHint) {
   logger.log(chalk.green("Checking latest version available on npm ..."));
   spinner.start();
   return checkInstalledIgnite(igniteName).then(version => {
@@ -182,7 +182,7 @@ const checkIgniteRegistry = (type, igniteCore, igniteName, showHint) => {
   });
 };
 
-const checkIgnite = (type, igniteCore, igniteName, showHint, manual) => {
+function checkIgnite(type, igniteCore, igniteName, showHint, manual) {
   if(manual) {
     return checkIgniteRegistry(type, igniteCore, igniteName, showHint);
   } else {

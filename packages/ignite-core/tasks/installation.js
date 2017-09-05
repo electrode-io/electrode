@@ -10,7 +10,7 @@ const igniteCore = require("../ignite");
 const logger = require("../lib/logger");
 const semverComp = require("../lib/semver-comp");
 
-const installLatestXClapCLI = (spinner, type, igniteCore, showHint) => {
+function installLatestXClapCLI(spinner, type, igniteCore, showHint) {
   spinner.start();
   return xsh
     .exec("npm install -g xclap-cli")
@@ -31,7 +31,7 @@ const installLatestXClapCLI = (spinner, type, igniteCore, showHint) => {
     .catch(err => errorHandler(err, `Install xclap-cli globally.`));
 };
 
-const installXClapCLI = (type, igniteCore, spinner, showHint) => {
+function installXClapCLI(type, igniteCore, spinner, showHint) {
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
@@ -52,7 +52,7 @@ const installXClapCLI = (type, igniteCore, spinner, showHint) => {
   });
 };
 
-const checkLocalXClapCLI = function() {
+function checkLocalXClapCLI() {
   return xsh
     .exec(true, "npm ls -g -j --depth=0 xclap-cli")
     .then(function(ret) {
@@ -63,7 +63,7 @@ const checkLocalXClapCLI = function() {
     });
 };
 
-const checkXClapCLILatestVersion = function() {
+function checkXClapCLILatestVersion() {
   return xsh
     .exec(true, "npm show xclap-cli version")
     .then(function(version) {
@@ -74,7 +74,7 @@ const checkXClapCLILatestVersion = function() {
     });
 };
 
-const Installation = function(type, igniteCore, spinner, igniteName, showHint) {
+function Installation(type, igniteCore, spinner, igniteName, showHint) {
   spinner.start();
   return checkLocalXClapCLI().then(function(version) {
     if (!version) {

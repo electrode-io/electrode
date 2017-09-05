@@ -4,7 +4,7 @@ const testModule = require("../../../lib/logger");
 const xstdout = require("xstdout");
 const expect = require("chai").expect;
 
-describe("logger", function() {
+describe("ignite-core: logger", function() {
   it("should log to stdout", () => {
     const intercept = xstdout.intercept(true);
     testModule.log("test");

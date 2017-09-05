@@ -7,7 +7,7 @@ const backToMenu = require("../lib/back-to-menu");
 const errorHandler = require("../lib/error-handler");
 const logger = require("../lib/logger");
 
-const printSucessLogs = (type, igniteCore, showHint) => {
+function printSucessLogs(type, igniteCore, showHint) {
   logger.log(
     chalk.green(
       "You've successfully opened the oss gitbook. Please checkout your browser."
@@ -17,7 +17,7 @@ const printSucessLogs = (type, igniteCore, showHint) => {
   return backToMenu(type, igniteCore, showHint);
 };
 
-const openDocs = (gitbookURL, type, igniteCore, showHint) => {
+function openDocs(gitbookURL, type, igniteCore, showHint) {
   if (process.platform === "win32") {
     return opn(gitbookURL)
       .then(() => {
@@ -37,7 +37,7 @@ const openDocs = (gitbookURL, type, igniteCore, showHint) => {
 };
 
 const electrodeDocs = (type, igniteCore, showHint) => {
-  var gitbookURL = "";
+  let gitbookURL = "";
   if (type === "oss") {
     gitbookURL = "https://docs.electrode.io/";
   } else if (type === "wml") {

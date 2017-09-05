@@ -16,7 +16,7 @@ function foo() {
   return;
 }
 
-describe("Check Node Env", function() {
+describe("ignite-core: check node env", function() {
   let xshStub = "";
   let loggerStub = "";
 

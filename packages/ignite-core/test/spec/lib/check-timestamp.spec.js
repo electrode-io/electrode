@@ -8,7 +8,7 @@ const fs = require("fs");
 const sinon = require("sinon");
 const assert = require("assert");
 
-describe("Check Timestamp", () => {
+describe("ignite-core: check Timestamp", () => {
   let writeFileSyncStub = "";
   let existsSyncStub = "";
   let readFileSyncStub = "";
