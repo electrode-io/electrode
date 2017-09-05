@@ -1,6 +1,6 @@
 "use strict";
 
-const testModule = require("../../lib/check-timestamp");
+const testModule = require("../../../lib/check-timestamp");
 const checkTimestamp = testModule.checkTimestamp;
 const setTimeStamp = testModule.setTimeStamp;
 

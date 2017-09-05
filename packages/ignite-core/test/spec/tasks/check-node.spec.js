@@ -3,14 +3,14 @@
 const sinon = require("sinon");
 const assert = require("assert");
 
-const logger = require("../../lib/logger");
+const logger = require("../../../lib/logger");
 const chalk = require("chalk");
 const xsh = require("xsh");
 
 const CLISpinner = require("cli-spinner").Spinner;
 const spinner = new CLISpinner(chalk.green("%s"));
 
-const checkNode = require("../../tasks/check-node");
+const checkNode = require("../../../tasks/check-node");
 
 function foo() {
   return;

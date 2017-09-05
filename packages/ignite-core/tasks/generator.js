@@ -28,14 +28,14 @@ const Generator = (type, generator, igniteCore, spinner) => {
           });
         }
 
-        child.on("error", err =>
-          errorHandler(err, `Failed at: Running ${generator} generator.`)
-        );
+        child.on("error", (err) => {
+          errorHandler(err, `Running ${generator} generator.`)
+        });
 
         spinner.stop();
       }
     })
-    .catch(err => errorHandler(err, "Failed at: checking node env."));
+    .catch(err => errorHandler(err, "Checking node env."));
 };
 
 module.exports = Generator;

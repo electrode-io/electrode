@@ -1,6 +1,6 @@
 "use strict";
 
-const testModule = require("../../lib/logger");
+const testModule = require("../../../lib/logger");
 const xstdout = require("xstdout");
 const expect = require("chai").expect;
 

@@ -1,7 +1,7 @@
 "use strict";
 
 const assert = require("assert");
-const semverComp = require("../../lib/semver-comp");
+const semverComp = require("../../../lib/semver-comp");
 
 describe("ignite-core: semver-comp", function() {
   it("when version a < version b", function() {

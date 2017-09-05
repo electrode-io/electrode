@@ -9,32 +9,48 @@ const EVEN = 2;
 const STARNUM = 6;
 
 /* eslint-disable no-console */
+
+function generateStars() {
+  let ret = "";
+  for (let i = 0; i < STARNUM; i++) {
+    if (i % EVEN === 0) {
+      ret += chalk.green(" * ");
+    } else {
+      ret += chalk.magenta(" * ");
+    }
+  }
+  return ret;
+}
+
+function createMenuBanner() {
+  let ret = "";
+  ret += generateStars();
+  ret += chalk.blueBright("Electrode Ignite Menu");
+  ret += generateStars();
+  return ret;
+}
+
+function createMenu(options) {
+  const dashedLines = `---------------------------------------------------------`;
+
+  console.log(chalk.blueBright(dashedLines));
+  console.log(createMenuBanner());
+  console.log(chalk.blueBright(dashedLines));
+
+  options.forEach((e, i) => {
+    if (i % EVEN === 0) {
+      console.log(`${chalk.magenta(e)}`);
+    } else {
+      console.log(`${chalk.green(e)}`);
+    }
+  });
+  console.log(chalk.blueBright(dashedLines));
+}
+
 const igniteMenu = (type, igniteCore, rl) => {
-  const igniteName =
-    type === "oss" ? "Electrode Ignite" : "WML Electrode Ignite";
   let option;
 
-  function generateStars() {
-    let ret = "";
-    for (let i = 0; i < STARNUM; i++) {
-      if (i % EVEN === 0) {
-        ret += chalk.green(" * ");
-      } else {
-        ret += chalk.magenta(" * ");
-      }
-    }
-    return ret;
-  }
-
-  const banner = function() {
-    let ret = "";
-    ret += generateStars();
-    ret += chalk.blueBright("Electrode Ignite Menu");
-    ret += generateStars();
-    return ret;
-  };
-
-  const dashedLines = `---------------------------------------------------------`;
+  const igniteName = type === "oss" ? "Electrode Ignite" : "WML Electrode Ignite";
 
   const options = [
     `[1] \u2668 Install tools for Electrode development`,
@@ -47,18 +63,7 @@ const igniteMenu = (type, igniteCore, rl) => {
     `[8] \u261E Exit`
   ];
 
-  console.log(chalk.blueBright(dashedLines));
-  console.log(banner());
-  console.log(chalk.blueBright(dashedLines));
-
-  options.forEach((e, i) => {
-    if (i % EVEN === 0) {
-      console.log(`${chalk.magenta(e)}`);
-    } else {
-      console.log(`${chalk.green(e)}`);
-    }
-  });
-  console.log(chalk.blueBright(dashedLines));
+  createMenu(options);
 
   rl.question("Please select your option: ", answer => {
     option = answer;

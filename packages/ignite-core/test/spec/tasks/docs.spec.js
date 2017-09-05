@@ -4,10 +4,10 @@ const sinon = require("sinon");
 const assert = require("assert");
 const rewire = require("rewire");
 
-const logger = require("../../lib/logger");
+const logger = require("../../../lib/logger");
 const chalk = require("chalk");
 
-const docs = rewire("../../tasks/docs");
+const docs = rewire("../../../tasks/docs");
 const printSucessLogs = docs.__get__("printSucessLogs");
 
 function foo() {

@@ -4,8 +4,8 @@ const sinon = require("sinon");
 const chalk = require("chalk");
 const assert = require("assert");
 
-const errorHandler = require("../../lib/error-handler");
-const logger = require("../../lib/logger");
+const errorHandler = require("../../../lib/error-handler");
+const logger = require("../../../lib/logger");
 
 describe("ignite-core:error-hander", function() {
   let loggerStub = "";

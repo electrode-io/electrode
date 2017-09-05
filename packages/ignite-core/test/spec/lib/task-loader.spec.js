@@ -4,8 +4,8 @@ const sinon = require("sinon");
 const chalk = require("chalk");
 const assert = require("assert");
 
-const taskLoader = require("../../lib/task-loader");
-const logger = require("../../lib/logger");
+const taskLoader = require("../../../lib/task-loader");
+const logger = require("../../../lib/logger");
 
 function foo() {
   return;
@@ -49,10 +49,6 @@ describe("ignite-core:task-loader", function() {
     assert.equal(
       loggerStub.getCalls()[0].args.toString(),
       chalk.green("Checking for electrode-ignite update...")
-    );
-    assert.equal(
-      loggerStub.getCalls()[1].args.toString(),
-      chalk.green("Checking latest version available on npm ...")
     );
   });
 });

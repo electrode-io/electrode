@@ -4,8 +4,8 @@ const chalk = require("chalk");
 const sinon = require("sinon");
 const assert = require("assert");
 
-const testModule = require("../../lib/back-to-menu");
-const logger = require("../../lib/logger");
+const testModule = require("../../../lib/back-to-menu");
+const logger = require("../../../lib/logger");
 
 function foo() {
   logger.log(
