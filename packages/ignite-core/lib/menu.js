@@ -47,10 +47,11 @@ function createMenu(options) {
   console.log(chalk.blueBright(dashedLines));
 }
 
-const igniteMenu = (type, igniteCore, rl) => {
+function igniteMenu(type, igniteCore, rl) {
   let option;
 
-  const igniteName = type === "oss" ? "Electrode Ignite" : "WML Electrode Ignite";
+  const igniteName =
+    type === "oss" ? "Electrode Ignite" : "WML Electrode Ignite";
 
   const options = [
     `[1] \u2668 Install tools for Electrode development`,
@@ -80,7 +81,7 @@ const igniteMenu = (type, igniteCore, rl) => {
 
     taskLoader(option, type, igniteCore, true);
   });
-};
+}
 
 /* eslint-enable */
 

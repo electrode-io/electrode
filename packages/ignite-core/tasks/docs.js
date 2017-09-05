@@ -36,7 +36,7 @@ function openDocs(gitbookURL, type, igniteCore, showHint) {
   }
 };
 
-const electrodeDocs = (type, igniteCore, showHint) => {
+function electrodeDocs(type, igniteCore, showHint) {
   let gitbookURL = "";
   if (type === "oss") {
     gitbookURL = "https://docs.electrode.io/";

@@ -14,7 +14,7 @@ const rl = readline.createInterface({
   terminal: false
 });
 
-const printNodeCheckLog = () => {
+function printNodeCheckLog() {
   const nodeVersion = process.version.slice(1);
   const nodeVerRet = semverComp(nodeVersion, "6.0.0");
   logger.log(chalk.cyan(`Your Node version is: ${nodeVersion}`));
@@ -32,9 +32,9 @@ const printNodeCheckLog = () => {
       )
     );
   }
-};
+}
 
-const printnpmCheckLog = (npmVersion) => {
+function printnpmCheckLog(npmVersion) {
   npmVersion = npmVersion.stdout.slice(0, -1);
   const npmVerRet = semverComp(npmVersion, "3.0.0");
   logger.log(chalk.cyan(`Your npm version is: ${npmVersion}`));
@@ -52,14 +52,14 @@ const printnpmCheckLog = (npmVersion) => {
       )
     );
   }
-};
+}
 
-const printNodePath = () => {
+function printNodePath() {
   const nodePath = process.execPath;
   logger.log(chalk.cyan(`Your Node binary path is: ${nodePath}\n`));
-};
+}
 
-const checkNode = (type, igniteCore, spinner) => {
+function checkNode(type, igniteCore, spinner) {
   spinner.start();
 
   return xsh
@@ -82,6 +82,6 @@ const checkNode = (type, igniteCore, spinner) => {
       return true;
     })
     .catch(err => errorHandler(err, "Failed at: checking node env."));
-};
+}
 
 module.exports = checkNode;

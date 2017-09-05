@@ -2,7 +2,7 @@
 
 const DIGIT = 3;
 
-const semverComp = (a, b) => {
+function semverComp(a, b) {
   const pa = a.split(".");
   const pb = b.split(".");
   for (let i = 0; i < DIGIT; i++) {
@@ -14,6 +14,6 @@ const semverComp = (a, b) => {
     if (isNaN(na) && !isNaN(nb)) return -1;
   }
   return 0;
-};
+}
 
 module.exports = semverComp;

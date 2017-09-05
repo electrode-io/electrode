@@ -8,7 +8,7 @@ const fileName =
   process.platform === "win32" ? "timestamp-wml.txt" : "timestamp-oss.txt";
 const timeStampPath = Path.resolve(__dirname, "..", fileName);
 
-const setTimeStamp = time => {
+function setTimeStamp(time) {
   fs.writeFileSync(
     timeStampPath,
     JSON.stringify(time, null, 2), // eslint-disable-line no-magic-numbers
@@ -19,9 +19,9 @@ const setTimeStamp = time => {
       }
     }
   );
-};
+}
 
-const checkTimestamp = () => {
+function checkTimestamp() {
   if (!fs.existsSync(timeStampPath)) {
     return "check";
   } else {
@@ -35,7 +35,7 @@ const checkTimestamp = () => {
       };
     }
   }
-};
+}
 
 module.exports = {
   checkTimestamp: checkTimestamp,

@@ -5,7 +5,7 @@ const logger = require("../lib/logger");
 
 const ARGV = 2;
 
-const backToMenu = function(type, igniteCore, showHint) {
+function backToMenu(type, igniteCore, showHint) {
   if (showHint) {
     logger.log(
       chalk.green("Return to the main menu. Please choose your next task:")
@@ -18,6 +18,6 @@ const backToMenu = function(type, igniteCore, showHint) {
   } else {
     return process.exit(0); // eslint-disable-line
   }
-};
+}
 
 module.exports = backToMenu;

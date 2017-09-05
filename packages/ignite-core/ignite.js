@@ -18,7 +18,7 @@ const rl = readline.createInterface({
 
 yargsHelp();
 
-const igniteCore = (type, task) => {
+function igniteCore(type, task) {
   switch (task) {
     case undefined:
       igniteMenu(type, igniteCore, rl);
