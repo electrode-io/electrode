@@ -11,7 +11,7 @@ function foo() {
   return;
 }
 
-describe("ignite-core:task-loader", function() {
+describe.skip("ignite-core:task-loader", function() {
   let loggerStub = "";
   let processStub = "";
 

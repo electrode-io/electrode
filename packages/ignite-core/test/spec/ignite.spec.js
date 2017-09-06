@@ -8,7 +8,7 @@ const readline = require("readline");
 const logger = require("../../lib/logger");
 const testModule = require("../../ignite");
 
-describe("ignite-core: ignite", function() {
+describe.skip("ignite-core: ignite", function() {
   let loggerStub;
   let processStub;
   let readlineInterface = "";

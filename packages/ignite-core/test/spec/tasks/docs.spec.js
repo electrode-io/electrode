@@ -100,8 +100,8 @@ describe("ignite-core:docs", function() {
     );
   });
 
-  it("show error message for unknow type", function() {
-    docs("unknow", null, false);
+  it("show error message for unknown type", function() {
+    docs("unknown", null, false);
     assert.equal(
       loggerStub.getCalls()[0].args.toString(),
       chalk.red(
