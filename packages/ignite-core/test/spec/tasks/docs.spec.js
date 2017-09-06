@@ -39,7 +39,7 @@ describe("ignite-core:docs", function() {
     );
   });
 
-  it("Print success logs and return back to menu", function() {
+  it("Print success logs and return back to menu for oss", function() {
     const printSucessLogs = docs.__get__("printSucessLogs");
     printSucessLogs("oss", foo, false);
     assert.equal(
@@ -88,5 +88,25 @@ describe("ignite-core:docs", function() {
       Object.defineProperty(process, "platform", originalPlatform);
       done();
     });
+  });
+
+  it("open wml gitbook", function() {
+    docs("wml", null, false);
+    assert.equal(
+      loggerStub.getCalls()[0].args.toString(),
+      chalk.green(
+        "You've successfully opened the oss gitbook. Please checkout your browser."
+      )
+    );
+  });
+
+  it("show error message for unknow type", function() {
+    docs("unknow", null, false);
+    assert.equal(
+      loggerStub.getCalls()[0].args.toString(),
+      chalk.red(
+        "Please provide a valid type"
+      )
+    );
   });
 });

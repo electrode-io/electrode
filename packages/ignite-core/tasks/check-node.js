@@ -81,7 +81,9 @@ function checkNode(type, igniteCore, spinner) {
       }
       return true;
     })
-    .catch(err => errorHandler(err, "Failed at: checking node env."));
+    .catch(err => {
+      errorHandler(err, "Checking node env.")
+    });
 }
 
 module.exports = checkNode;
