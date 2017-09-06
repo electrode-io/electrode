@@ -28,6 +28,12 @@ describe("ignite-core: check-ignite", function() {
     existsSyncStub = sinon.stub(fs, "existsSync");
     readFileSyncStub = sinon.stub(fs, "readFileSync");
 
+    xshStub.withArgs(true, "npm show electrode-ignite version").returns(
+      Promise.resolve({
+        stdout: "0.1.0\n"
+      })
+    );
+
     xshStub.withArgs(true, "npm ls -g -j --depth=0 electrode-ignite").returns(
       Promise.resolve({
         stdout: JSON.stringify({
@@ -174,11 +180,6 @@ describe("ignite-core: check-ignite", function() {
         time: 0,
         version: "0.1.0",
         latestVersion: "0.1.0"
-      })
-    );
-    xshStub.withArgs(true, "npm show electrode-ignite version").returns(
-      Promise.resolve({
-        stdout: "0.1.0\n"
       })
     );
     checkIgnite("oss", null, "electrode-ignite", false, false).then(function() {
