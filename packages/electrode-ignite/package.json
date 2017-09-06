@@ -1,6 +1,6 @@
 {
   "name": "electrode-ignite",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "The CLI tool for development with OSS Electrode React/NodeJS Platform.",
   "main": "bin/ignite.js",
   "scripts": {
@@ -40,7 +40,7 @@
   "homepage": "http://www.electrode.io",
   "devDependencies": {
     "assert": "^1.4.1",
-    "electrode-archetype-njs-module-dev": "^2.2.0",
+    "electrode-archetype-njs-module-dev": "^2.3.0",
     "sinon": "^3.2.1"
   },
   "nyc": {
