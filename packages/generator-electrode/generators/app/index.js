@@ -19,7 +19,7 @@ const pkg = require("../../package.json");
 module.exports = class extends Generator {
   constructor(args, options) {
     super(args, options);
-
+    
     this.isDemoApp = this.options.isDemoApp || false;
 
     if (!this.isDemoApp) {
@@ -147,23 +147,20 @@ _askFor() {
         name: "authorName",
         message: "Author's Name",
         when: !this.props.authorName,
-        default: this.user.git.name(),
-        store: true
+        default: this.user.git.name()
       },
       {
         type: "input",
         name: "authorEmail",
         message: "Author's Email",
         when: !this.props.authorEmail,
-        default: this.user.git.email(),
-        store: true
+        default: this.user.git.email()
       },
       {
         type: "input",
         name: "authorUrl",
         message: "Author's Homepage",
-        when: !this.props.authorUrl,
-        store: true
+        when: !this.props.authorUrl
       },
       {
         type: "input",
