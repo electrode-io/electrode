@@ -25,7 +25,6 @@ function igniteUpToDate(type, task, version, igniteCore, igniteName) {
   );
   setTimeStamp({
     time: new Date().toDateString(),
-    version: version,
     latestVersion: version
   });
 
@@ -35,7 +34,7 @@ function igniteUpToDate(type, task, version, igniteCore, igniteName) {
     igniteCore(type, task);
     return;
   }
-};
+}
 
 function installLatestIgnite(igniteName, latestVersion) {
   logger.log(chalk.cyan("Please hold, trying to update."));
@@ -46,7 +45,6 @@ function installLatestIgnite(igniteName, latestVersion) {
     .then(() => {
       setTimeStamp({
         time: new Date().toDateString(),
-        version: latestVersion,
         latestVersion: latestVersion
       });
       logger.log(chalk.cyan(`${igniteName} updated to ${latestVersion}.`));
@@ -62,9 +60,15 @@ function installLatestIgnite(igniteName, latestVersion) {
           ` The command is: npm install -g ${igniteName}@${latestVersion}`
       )
     );
-};
+}
 
-function cancelLatestIgnite(version, latestVersion, type, igniteCore, showHint) {
+function cancelLatestIgnite(
+  version,
+  latestVersion,
+  type,
+  igniteCore,
+  showHint
+) {
   logger.log(
     chalk.cyan(
       `You've cancelled the electrode-ignite@${latestVersion} installation.`
@@ -72,7 +76,6 @@ function cancelLatestIgnite(version, latestVersion, type, igniteCore, showHint) 
   );
   setTimeStamp({
     time: new Date().toDateString(),
-    version: version,
     latestVersion: latestVersion
   });
 
@@ -81,21 +84,45 @@ function cancelLatestIgnite(version, latestVersion, type, igniteCore, showHint) 
   } else {
     return backToMenu(type, igniteCore, showHint);
   }
-};
+}
 
-function invalidProceedOption(type, task, latestVersion, version, igniteCore, igniteName, showHint, rl) {
+function invalidProceedOption(
+  type,
+  task,
+  latestVersion,
+  version,
+  igniteCore,
+  igniteName,
+  showHint,
+  rl
+) {
   logger.log(chalk.cyan("Please provide 'y' or 'n'."));
   setTimeStamp({
     time: new Date().toDateString(),
-    version: version,
     latestVersion: latestVersion
   });
   rl.close();
 
-  return igniteOutdated(type, task, latestVersion, version, igniteCore, igniteName, showHint);
-};
+  return igniteOutdated(
+    type,
+    task,
+    latestVersion,
+    version,
+    igniteCore,
+    igniteName,
+    showHint
+  );
+}
 
-function igniteOutdated(type, task, latestVersion, version, igniteCore, igniteName, showHint) {
+function igniteOutdated(
+  type,
+  task,
+  latestVersion,
+  version,
+  igniteCore,
+  igniteName,
+  showHint
+) {
   logger.log(
     chalk.cyan(
       `${igniteName} is about to update the following modules globally:\n- electrode-ignite (from version ${version} to version ${latestVersion})`
@@ -112,12 +139,27 @@ function igniteOutdated(type, task, latestVersion, version, igniteCore, igniteNa
     if (answer.toLowerCase() === "y") {
       return installLatestIgnite(igniteName, latestVersion);
     } else if (answer.toLowerCase() === "n") {
-      return cancelLatestIgnite(version, latestVersion, type, igniteCore, showHint);
+      return cancelLatestIgnite(
+        version,
+        latestVersion,
+        type,
+        igniteCore,
+        showHint
+      );
     } else {
-      return invalidProceedOption(type, task, latestVersion, version, igniteCore, igniteName, showHint, rl);
+      return invalidProceedOption(
+        type,
+        task,
+        latestVersion,
+        version,
+        igniteCore,
+        igniteName,
+        showHint,
+        rl
+      );
     }
   });
-};
+}
 
 function checkInstalledIgnite(igniteName) {
   return xsh
@@ -128,7 +170,7 @@ function checkInstalledIgnite(igniteName) {
     .catch(err => {
       errorHandler(err, `Error when fetching local installed ${igniteName}.`);
     });
-};
+}
 
 function checkIgniteVersion(type, igniteName, version, igniteCore, showHint) {
   return xsh
@@ -139,13 +181,27 @@ function checkIgniteVersion(type, igniteName, version, igniteCore, showHint) {
 
       /* Case 1: electrode-ignite version outdated */
       if (versionComp > 0) {
-        igniteOutdated(type, process.argv[2], latestVersion, version, igniteCore, igniteName, showHint);
+        igniteOutdated(
+          type,
+          process.argv[2],
+          latestVersion,
+          version,
+          igniteCore,
+          igniteName,
+          showHint
+        );
         spinner.stop();
         return;
 
         /* Case 2: electrode-ignite latest version */
       } else if (versionComp === 0) {
-        igniteUpToDate(type, process.argv[2], latestVersion, igniteCore, igniteName);
+        igniteUpToDate(
+          type,
+          process.argv[2],
+          latestVersion,
+          igniteCore,
+          igniteName
+        );
         spinner.stop();
         return;
 
@@ -164,7 +220,7 @@ function checkIgniteVersion(type, igniteName, version, igniteCore, showHint) {
           ` Please report this to Electrode core team.`
       )
     );
-};
+}
 
 /*
   check electrode-ignite once daily
@@ -172,33 +228,54 @@ function checkIgniteVersion(type, igniteName, version, igniteCore, showHint) {
 */
 function igniteDailyCheck() {
   return Promise.resolve(checkTimestamp());
-};
+}
 
-function checkIgniteRegistry(type, igniteCore, igniteName, showHint) {
+function checkIgniteRegistry(type, igniteCore, igniteName, showHint, version) {
   logger.log(chalk.green("Checking latest version available on npm ..."));
   spinner.start();
   return checkInstalledIgnite(igniteName).then(version => {
     return checkIgniteVersion(type, igniteName, version, igniteCore, showHint);
   });
-};
+}
 
-function checkIgnite(type, igniteCore, igniteName, showHint, manual) {
-  if(manual) {
-    return checkIgniteRegistry(type, igniteCore, igniteName, showHint);
+function checkIgnite(type, igniteCore, igniteName, showHint, manual, version) {
+  if (manual) {
+    return checkIgniteRegistry(type, igniteCore, igniteName, showHint, version);
   } else {
     return igniteDailyCheck().then(checkRet => {
       if (checkRet === "check") {
-        return checkIgniteRegistry(type, igniteCore, igniteName, showHint)
+        return checkIgniteRegistry(
+          type,
+          igniteCore,
+          igniteName,
+          showHint,
+          version
+        );
       } else {
-        if(checkRet.version === checkRet.latestVersion) {
+        if (semverComp(version, checkRet.latestVersion) === 0) {
           logger.log(chalk.cyan(`Your ${igniteName} is up-to-date.`));
           return backToMenu(type, igniteCore);
+        } else if (version < checkRet.latestVersion) {
+          return igniteOutdated(
+            type,
+            process.argv[2],
+            checkRet.latestVersion,
+            version,
+            igniteCore,
+            igniteName,
+            showHint
+          );
         } else {
-          return igniteOutdated(type, process.argv[2], checkRet.latestVersion, checkRet.version, igniteCore, igniteName, showHint);
+          logger.log(
+            chalk.red(
+              `Your ${igniteName} version is invalid. The latest version is ${checkRet.latestVersion}. Please verify your package.json.`
+            )
+          );
+          return process.exit(0);
         }
       }
     });
   }
-};
+}
 
 module.exports = checkIgnite;

@@ -48,7 +48,8 @@ describe("ignite-core: check Timestamp", () => {
     existsSyncStub.returns(true);
     readFileSyncStub.returns(
       JSON.stringify({
-        time: 0
+        time: 0,
+        latestVersion: "1.0.0"
       })
     );
     assert.equal(checkTimestamp(), "check");
@@ -59,11 +60,9 @@ describe("ignite-core: check Timestamp", () => {
     readFileSyncStub.returns(
       JSON.stringify({
         time: new Date().toDateString(),
-        version: "0.1.0",
         latestVersion: "1.0.0"
       })
     );
-    assert.equal(checkTimestamp().version, "0.1.0");
     assert.equal(checkTimestamp().latestVersion, "1.0.0");
   });
 

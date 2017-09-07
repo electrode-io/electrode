@@ -8,12 +8,18 @@ const checkElectrodeIgnite = require("ignite-core/tasks/check-ignite");
 const pkg = require("../package.json");
 
 function ignite() {
+  const isCheckIgnite = process.argv[2] === "check-ignite";
+
   logger.log(chalk.green(`Welcome to electrode-ignite version ${pkg.version}`));
-  if(process.argv[2] === "check-ignite") {
-    return checkElectrodeIgnite("oss", igniteCore, "electrode-ignite", false, true);
-  } else {
-    return checkElectrodeIgnite("oss", igniteCore, "electrode-ignite");
-  }
+
+  return checkElectrodeIgnite(
+    "oss",
+    igniteCore,
+    "electrode-ignite",
+    !isCheckIgnite,
+    isCheckIgnite,
+    pkg.version
+  );
 }
 
 module.exports = ignite;

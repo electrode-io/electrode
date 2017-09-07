@@ -30,7 +30,6 @@ function checkTimestamp() {
       return "check";
     } else {
       return {
-        version: data.version.toString().trim(),
         latestVersion: data.latestVersion.toString().trim()
       };
     }
