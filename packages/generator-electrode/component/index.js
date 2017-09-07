@@ -11,7 +11,7 @@ var nodeFS = require("fs");
 
 const pkg = require("../package.json");
 
-var ReactComponentGenerator = class extends Generator {
+module.exports = class extends Generator {
   constructor(args, options) {
     super(args, options);
 
@@ -176,13 +176,27 @@ var ReactComponentGenerator = class extends Generator {
   }
 
   writing() {
-    lernaStructure {
+    lernaStructure: {
       // copy lerna and top level templates
       if (!this.isAddon) {
-        this.copy("gitignore", ".gitignore");
-        this.template("_package.json", "package.json");
-        this.template("_readme.md", "README.md");
-        this.template("lerna.json", "lerna.json");
+        this.fs.copyTpl(
+          this.templatePath("gitignore"), 
+          this.destinationPath(".gitignore"));
+
+        this.fs.copyTpl(this.templatePath("_package.json"), this.destinationPath("package.json"), {
+          projectName: this.projectName,
+          developerName: this.developerName,
+          githubUrl: this.githubUrl,
+          ghUser: this.ghUser,
+          packageGitHubOrg: this.packageGitHubOrg,
+          ghRepo: this.ghRepo
+        });
+
+        this.fs.copyTpl(this.templatePath("_readme.md"), this.destinationPath("README.md"), {
+          projectName: this.projectName
+        });
+        
+        this.fs.copyTpl(this.templatePath("lerna.json"), this.destinationPath("lerna.json"));
       }
     }
 
@@ -211,9 +225,19 @@ var ReactComponentGenerator = class extends Generator {
         this.templatePath("packages/component/_package.json"),
         this.destinationPath("package.json")
       );
-      this.fs.copy(
+      this.fs.copyTpl(
         this.templatePath("packages/component/_readme.md"),
-        this.destinationPath("README.md")
+        this.destinationPath("README.md"),{
+          projectName: this.projectName,
+          packageName: this.projectName,
+          componentName: this.componentName,
+          developerName: this.developerName,
+          githubUrl: this.githubUrl,
+          ghUser: this.ghUser,
+          packageGitHubOrg: this.packageGitHubOrg,
+          ghRepo: this.ghRepo,
+          currentYear: this.currentYear
+        }
       );
       if (this.quoteType === "'") {
         this.fs.copy(
@@ -226,7 +250,10 @@ var ReactComponentGenerator = class extends Generator {
     component: {
       this.fs.copyTpl(
         this.templatePath("packages/component/src/components/_component.jsx"),
-        this.destinationPath(this.rootPath + "src/components/" + this.projectName + ".jsx")
+        this.destinationPath(this.rootPath + "src/components/" + this.projectName + ".jsx"),{
+          componentName: this.componentName,
+          projectName: this.projectName
+        }
       );
       this.fs.copy(
         this.templatePath("packages/component/src/components/_accordion.jsx"),
@@ -243,8 +270,10 @@ var ReactComponentGenerator = class extends Generator {
 
       // demo folder files
       this.fs.copyTpl(
-        this.templatePath("packages/component/demo/examples/_component.example"),
-        this.destinationPath(this.rootPath + "demo/examples/" + this.projectName + ".example")
+        this.templatePath("packages/component/demo-examples/_component.example"),
+        this.destinationPath(this.rootPath + "demo/examples/" + this.projectName + ".example"),{
+          componentName: this.componentName
+        }
       );
 
       this.fs.copyTpl(
@@ -262,38 +291,52 @@ var ReactComponentGenerator = class extends Generator {
       );
 
       // l10n language templates
-      this.fs.copy(
+      this.fs.copyTpl(
         this.templatePath("packages/component/src/lang/_DefaultMessages.js"),
-        this.destinationPath(this.rootPath + "src/lang/default-messages.js")
+        this.destinationPath(this.rootPath + "src/lang/default-messages.js"),{
+          componentName: this.componentName
+        }
       );
 
-      this.fs.copy(
+      this.fs.copyTpl(
         this.templatePath("packages/component/src/lang/_en.json"),
-        this.destinationPath(this.rootPath + "src/lang/en.json")
+        this.destinationPath(this.rootPath + "src/lang/en.json"),{
+          componentName: this.componentName
+        }
       );
 
-      this.fs.copy(
+      this.fs.copyTpl(
         this.templatePath("packages/component/src/lang/tenants/electrodeio/_defaultMessages.js"),
-        this.destinationPath(this.rootPath + "src/lang/tenants/electrodeio/default-messages.js")
+        this.destinationPath(this.rootPath + "src/lang/tenants/electrodeio/default-messages.js"),{
+          componentName: this.componentName
+        }
       );
 
-      this.fs.copy(
+      this.fs.copyTpl(
         this.templatePath("packages/component/src/_Component.js"),
-        this.destinationPath(this.rootPath + "src/index.js")
+        this.destinationPath(this.rootPath + "src/index.js"),{
+          componentName: this.componentName,
+          projectName: this.projectName
+        }
       );
     }
 
     test: {
-      this.fs.copy(
+      this.fs.copyTpl(
         this.templatePath("packages/component/test/client/eslintrc"),
-        this.destinationPath(this.rootPath + "test/client/.eslintrc")
+        this.destinationPath(this.rootPath + "test/client/.eslintrc"),{
+          quoteType: this.quoteType
+        }
       );
 
-      this.fs.copy(
+      this.fs.copyTpl(
         this.templatePath("packages/component/test/client/components/_component.spec.jsx"),
         this.destinationPath(
           this.rootPath + "test/client/components/" + this.projectName + ".spec.jsx"
-        )
+        ),{
+          componentName: this.componentName,
+          projectName: this.projectName
+        }
       );
 
       this.fs.copy(
