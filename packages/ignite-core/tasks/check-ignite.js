@@ -255,7 +255,7 @@ function checkIgnite(type, igniteCore, igniteName, showHint, manual, version) {
         if (semverComp(version, checkRet.latestVersion) === 0) {
           logger.log(chalk.cyan(`Your ${igniteName} is up-to-date.`));
           return backToMenu(type, igniteCore);
-        } else if (version < checkRet.latestVersion) {
+        } else if (semverComp(version, checkRet.latestVersion) < 0) {
           return igniteOutdated(
             type,
             process.argv[2],
