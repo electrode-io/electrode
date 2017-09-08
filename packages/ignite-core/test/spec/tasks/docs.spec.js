@@ -7,6 +7,10 @@ const rewire = require("rewire");
 const logger = require("../../../lib/logger");
 const chalk = require("chalk");
 
+const mockSpawn = require("mock-spawn");
+const mySpawn = mockSpawn();
+require("child_process").spawn = mySpawn;
+
 const docs = rewire("../../../tasks/docs");
 
 function foo() {

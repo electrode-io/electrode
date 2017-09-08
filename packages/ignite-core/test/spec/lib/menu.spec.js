@@ -9,11 +9,16 @@ const readline = require("readline");
 const logger = require("../../../lib/logger");
 const testModule = rewire("../../../lib/menu");
 
+const mock = require("mock-require");
+mock("../../../tasks/installation", "../utils/utils");
+mock("../../../tasks/check-node", "../utils/utils");
+mock("../../../tasks/check-ignite", "../utils/utils");
+
 function foo() {
   return;
 }
 
-describe.skip("ignite-core: menu", function() {
+describe("ignite-core: menu", function() {
   let loggerStub;
   let processStub;
   let sandbox;

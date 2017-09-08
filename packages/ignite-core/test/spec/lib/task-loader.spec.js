@@ -7,11 +7,16 @@ const assert = require("assert");
 const taskLoader = require("../../../lib/task-loader");
 const logger = require("../../../lib/logger");
 
+const mock = require("mock-require");
+mock("../../tasks/installation", "./utils/utils");
+mock("../../tasks/check-node", "./utils/utils");
+mock("../../tasks/check-ignite", "./utils/utils");
+
 function foo() {
   return;
 }
 
-describe.skip("ignite-core:task-loader", function() {
+describe("ignite-core:task-loader", function() {
   let loggerStub = "";
   let processStub = "";
 
@@ -45,30 +50,6 @@ describe.skip("ignite-core:task-loader", function() {
     );
   });
 
-  it("Option#3 generate app", function() {
-    taskLoader("3", "oss", foo);
-    assert.equal(
-      loggerStub.getCalls().length,
-      0
-    );
-  });
-
-  it("Option#4 generate component", function() {
-    taskLoader("4", "oss", foo);
-    assert.equal(
-      loggerStub.getCalls().length,
-      0
-    );
-  });
-
-  it("Option#5 add component", function() {
-    taskLoader("5", "oss", foo);
-    assert.equal(
-      loggerStub.getCalls().length,
-      0
-    );
-  });
-
   it("Option#6 open docs", function() {
     taskLoader("6", "oss", foo);
     assert.equal(
@@ -80,7 +61,7 @@ describe.skip("ignite-core:task-loader", function() {
   it("Option#7 electrode-ignite", function() {
     taskLoader("7", "oss", foo);
 
-    sinon.assert.callCount(loggerStub, 2);
+    sinon.assert.callCount(loggerStub, 1);
     assert.equal(
       loggerStub.getCalls()[0].args.toString(),
       chalk.green("Checking for electrode-ignite update...")

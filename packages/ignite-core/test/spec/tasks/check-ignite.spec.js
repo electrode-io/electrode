@@ -14,7 +14,7 @@ function foo() {
   return;
 }
 
-describe("ignite-core: check-ignite", function() {
+describe.skip("ignite-core: check-ignite", function() {
   let loggerStub;
   let existsSyncStub;
   let readFileSyncStub;

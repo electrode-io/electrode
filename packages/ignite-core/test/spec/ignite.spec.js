@@ -4,11 +4,16 @@ const chalk = require("chalk");
 const sinon = require("sinon");
 const assert = require("assert");
 const readline = require("readline");
-
 const logger = require("../../lib/logger");
+
+const mock = require("mock-require");
+mock("../../tasks/installation", "./utils/utils");
+mock("../../tasks/check-node", "./utils/utils");
+mock("../../tasks/check-ignite", "./utils/utils");
+
 const testModule = require("../../ignite");
 
-describe.skip("ignite-core: ignite", function() {
+describe("ignite-core: ignite", function() {
   let loggerStub;
   let processStub;
   let readlineInterface = "";
@@ -33,7 +38,7 @@ describe.skip("ignite-core: ignite", function() {
     readlineInterface.close.restore();
   });
 
-  it("task install", function() {
+  it("task: install", function() {
     testModule("oss", "install");
     assert.equal(
       loggerStub.getCalls()[0].args.toString(),
@@ -41,7 +46,7 @@ describe.skip("ignite-core: ignite", function() {
     );
   });
 
-  it("task install", function() {
+  it("task: check-nodejs", function() {
     testModule("oss", "check-nodejs");
     assert.equal(
       loggerStub.getCalls()[0].args.toString(),
@@ -49,15 +54,17 @@ describe.skip("ignite-core: ignite", function() {
     );
   });
 
-  it("task docs", function() {
+  it("task: docs", function() {
     testModule("oss", "docs");
     assert.equal(
       loggerStub.getCalls()[0].args.toString(),
-      chalk.green("You've successfully opened the oss gitbook. Please checkout your browser.")
+      chalk.green(
+        "You've successfully opened the oss gitbook. Please checkout your browser."
+      )
     );
   });
 
-  it("task check-ignite", function() {
+  it("task: check-ignite", function() {
     testModule("oss", "check-ignite");
     assert.equal(
       loggerStub.getCalls()[0].args.toString(),
@@ -65,11 +72,13 @@ describe.skip("ignite-core: ignite", function() {
     );
   });
 
-  it("task others", function() {
+  it("task: others", function() {
     testModule("oss", "others");
     assert.equal(
       loggerStub.getCalls()[0].args.toString(),
-      chalk.red("The task name \"\" you've provided appears to be invalid.\nPlease use \"ignite --help\" to check all the available tasks.")
+      chalk.red(
+        `The task name "" you\'ve provided appears to be invalid.\nPlease use "ignite --help" to check all the available tasks.`
+      )
     );
   });
 });

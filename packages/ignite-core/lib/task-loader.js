@@ -6,7 +6,7 @@ const checkIgnite = require("../tasks/check-ignite");
 const checkNode = require("../tasks/check-node");
 const docs = require("../tasks/docs");
 const generator = require("../tasks/generator");
-const installationTaskExec = require("../tasks/installation");
+const installation = require("../tasks/installation");
 const logger = require("./logger");
 
 const CLISpinner = require("cli-spinner").Spinner;
@@ -19,7 +19,7 @@ function taskLoader(option, type, igniteCore, showHint) { // eslint-disable-line
   switch (option) {
     case "1":
       logger.log(chalk.green("Checking your Electrode environment..."));
-      installationTaskExec(type, igniteCore, spinner, igniteName, showHint);
+      installation(type, igniteCore, spinner, igniteName, showHint);
       break;
     case "2":
       logger.log(chalk.green("Checking your NodeJS and npm environment..."));
