@@ -4,6 +4,8 @@ const _ = require("lodash");
 const assert = require("assert");
 const ReactWebapp = require("../react-webapp");
 
+const HTTP_OK = 200;
+const HTTP_NOT_FOUND = 404;
 const HTTP_ERROR_500 = 500;
 const HTTP_REDIRECT = 302;
 
@@ -33,10 +35,17 @@ const registerRoutes = (server, options, next) => {
           handler: (request, reply) => {
             const handleStatus = data => {
               const status = data.status;
-              if (status === HTTP_REDIRECT) {
-                reply.redirect(data.path);
-              } else {
-                reply({ message: "error" }).code(status);
+
+              // Handle Different Status Codes differently
+              switch (status) {
+                case HTTP_OK:
+                  return reply(data.content);
+                case HTTP_NOT_FOUND:
+                  return reply(data.content).code(HTTP_NOT_FOUND);
+                case HTTP_REDIRECT:
+                  return reply.redirect(data.path);
+                default:
+                  return reply({ message: "error" }).code(status);
               }
             };
 

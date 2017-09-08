@@ -6,6 +6,8 @@ const assert = require("assert");
 const ReactWebapp = require("../react-webapp");
 const koaRouter = require("koa-router")();
 
+const HTTP_OK = 200;
+const HTTP_NOT_FOUND = 404;
 const HTTP_REDIRECT = 302;
 
 const registerRoutes = (app, options, next) => {
@@ -34,12 +36,29 @@ const registerRoutes = (app, options, next) => {
               this.body = data; //eslint-disable-line
             };
 
+            // Respond with explicitly set status
+            const respondWithStatus = (data) => {
+              this.status = data.status; //eslint-disable-line
+              this.body = data.content; //eslint-disable-line
+            };
+
             const handleStatus = data => {
               const status = data.status;
-              if (status === HTTP_REDIRECT) {
-                this.redirect(data.path); //eslint-disable-line
-              } else {
-                respond({ message: "error" });
+
+              // Handle Different Status Codes differently
+              switch (status) {
+                case HTTP_OK:
+                  respond(data.content);
+                  break;
+                case HTTP_NOT_FOUND:
+                  respondWithStatus(data);
+                  break;
+                case HTTP_REDIRECT:
+                  this.redirect(data.path); //eslint-disable-line
+                  break;
+                default:
+                  respond({ message: "error" });
+                  break;
               }
             };
 
