@@ -8,17 +8,23 @@ const fileName =
   process.platform === "win32" ? "timestamp-wml.txt" : "timestamp-oss.txt";
 const timeStampPath = Path.resolve(__dirname, "..", fileName);
 
-function setTimeStamp(time) {
-  fs.writeFileSync(
-    timeStampPath,
-    JSON.stringify(time, null, 2), // eslint-disable-line no-magic-numbers
-    { flag: "w" },
-    err => {
-      if (err) {
-        errorHandler(err, `Saving timestamp to directory ${timeStampPath}.`);
+function setTimeStamp(obj) {
+  if (/^\d{1,2}\.\d{1,2}\.\d{1,2}$/.test(obj.latestVersion)) {
+    fs.writeFileSync(
+      timeStampPath,
+      JSON.stringify(obj, null, 2), // eslint-disable-line no-magic-numbers
+      { flag: "w" },
+      err => {
+        if (err) {
+          errorHandler(err, `Saving timestamp to directory ${timeStampPath}.`);
+        }
       }
-    }
-  );
+    );
+  } else {
+    errorHandler(
+      `Saving an invalid latest version@${obj.latestVersion} to directory ${timeStampPath}.`
+    );
+  }
 }
 
 function checkTimestamp() {
@@ -26,11 +32,20 @@ function checkTimestamp() {
     return "check";
   } else {
     const data = JSON.parse(fs.readFileSync(timeStampPath, "utf8"));
-    if (new Date().toDateString() !== data.time.toString().trim()) {
+    const time = data.time.toString().trim();
+    const latestVersion = data.latestVersion.toString().trim();
+
+    if (!/^\d{1,2}\.\d{1,2}\.\d{1,2}$/.test(latestVersion)) {
+      errorHandler(
+        `Saving an invalid latest version@${latestVersion} to directory ${timeStampPath}.`
+      );
+    }
+
+    if (new Date().toDateString() !== time) {
       return "check";
     } else {
       return {
-        latestVersion: data.latestVersion.toString().trim()
+        latestVersion: latestVersion
       };
     }
   }

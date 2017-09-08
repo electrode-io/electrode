@@ -67,7 +67,10 @@ describe("ignite-core: check Timestamp", () => {
   });
 
   it("set timestamp", () => {
-    setTimeStamp(0);
+    setTimeStamp({
+      time: 0,
+      latestVersion: "0.0.1"
+    });
     sinon.assert.callCount(writeFileSyncStub, 1);
   });
 
@@ -76,7 +79,10 @@ describe("ignite-core: check Timestamp", () => {
       process.platform === "win32" ? "timestamp-wml.txt" : "timestamp-oss.txt";
     const timeStampPath = Path.resolve(__dirname, "..", "..", "..", fileName);
     writeFileSyncStub.yields(new Error());
-    setTimeStamp(0);
+    setTimeStamp({
+      time: 0,
+      latestVersion: "0.0.1"
+    });
     sinon.assert.callCount(writeFileSyncStub, 1);
     assert.equal(
       loggerStub.getCalls()[0].args.toString(),
