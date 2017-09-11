@@ -18,6 +18,8 @@ module.exports = request => {
     return FOO_BUNDLE;
   } else if (request.path.endsWith("/bar")) {
     return BAR_BUNDLE;
+  } else if (request.path.endsWith("/empty")) {
+    return {};
   }
 
   return DEFAULT_BUNDLE;
