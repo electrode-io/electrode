@@ -155,8 +155,7 @@ function makeRouteHandler(routeOptions, userContent) {
 
     const renderPage = content => {
       const helmet = Helmet.renderStatic();
-
-      return html.replace(/{{[A-Z_]*}}/g, m => {
+      const contentReplaced = html.replace(/{{[A-Z_]*}}/g, m => {
         switch (m) {
           case CONTENT_MARKER:
             return content.html || "";
@@ -176,6 +175,17 @@ function makeRouteHandler(routeOptions, userContent) {
             return `Unknown marker ${m}`;
         }
       });
+
+      /**
+       * If the response sent from the ssr redux render,
+       * changes the status code (e.g.: from 200 to 404),
+       * this information, should still be preserved for
+       * the node server to set status headers correctly
+       */
+      return {
+        status: content.status,
+        content: contentReplaced
+      };
     };
 
     const renderSSRContent = content => {

@@ -2,10 +2,8 @@
 
 const _ = require("lodash");
 const assert = require("assert");
+const HttpStatus = require("http-status-codes");
 const ReactWebapp = require("../react-webapp");
-
-const HTTP_ERROR_500 = 500;
-const HTTP_REDIRECT = 302;
 
 const registerRoutes = (app, options, next) => {
   ReactWebapp.setupOptions(options)
@@ -30,11 +28,42 @@ const registerRoutes = (app, options, next) => {
           app[method.toLowerCase()](path, (request, response) => {
             const handleStatus = data => {
               const status = data.status;
-              if (status === HTTP_REDIRECT) {
-                response.redirect(data.path);
-              } else {
-                response.send({ message: "error" }).code(status);
+
+              // All statuses where we just want to send the status to the client
+              const sendBodyStatuses = [
+                HttpStatus.OK,
+                HttpStatus.NOT_FOUND,
+                HttpStatus.GONE
+              ];
+
+              // All statuses where we want to redirect the client
+              const redirectStatuses = [
+                HttpStatus.MOVED_PERMANENTLY,
+                HttpStatus.MOVED_TEMPORARILY,
+                HttpStatus.TEMPORARY_REDIRECT
+              ];
+
+              // All the statuses where we want to send specific error messages
+              const errorStatuses = [
+                HttpStatus.BAD_REQUEST,
+                HttpStatus.UNAUTHORIZED,
+                HttpStatus.FORBIDDEN,
+                HttpStatus.INTERNAL_SERVER_ERROR,
+                HttpStatus.NOT_IMPLEMENTED,
+                HttpStatus.SERVICE_UNAVAILABLE
+              ];
+
+              // Handle Different Status Codes differently
+              if (sendBodyStatuses.find(sendBodyStatus => sendBodyStatus === status)) {
+                return response.status(status).send(data.content);
+              } else if (redirectStatuses.find(redirectStatus => redirectStatus === status)) {
+                return response.redirect(status, data.path);
+              } else if (errorStatuses.find(errorStatus => errorStatus === status)) {
+                return response.status(status).send({ message: HttpStatus.getStatusText(status) });
               }
+
+              // Default Error Handling
+              return response.send({ message: "error" }).code(status);
             };
 
             return routeHandler({ mode: request.query.__mode || "", request })
@@ -42,7 +71,7 @@ const registerRoutes = (app, options, next) => {
                 return data.status ? handleStatus(data) : response.send(data);
               })
               .catch(err => {
-                response.send(err.html).code(err.status || HTTP_ERROR_500);
+                response.send(err.html).code(err.status || HttpStatus.INTERNAL_SERVER_ERROR);
               });
           });
         });
