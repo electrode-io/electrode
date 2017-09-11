@@ -67,10 +67,12 @@ function igniteMenu(type, igniteCore, rl) {
   createMenu(options);
 
   rl.question("Please select your option: ", answer => {
-    option = answer;
+    option = answer.trim();
 
     // Invalid Electrode Option will re-trigger the menu
-    if (option < 1 || option > options.length || isNaN(option)) {
+    if (!isNaN(option) && option >= 1 && option <= options.length) {
+      taskLoader(option, type, igniteCore, true);
+    } else {
       logger.log(
         chalk.red(
           `Please provide a valid option between 1 to ${options.length}.`
@@ -78,8 +80,6 @@ function igniteMenu(type, igniteCore, rl) {
       );
       igniteCore(type);
     }
-
-    taskLoader(option, type, igniteCore, true);
   });
 }
 
