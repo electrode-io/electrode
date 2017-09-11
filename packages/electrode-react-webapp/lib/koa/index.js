@@ -4,11 +4,8 @@
 const _ = require("lodash");
 const assert = require("assert");
 const ReactWebapp = require("../react-webapp");
+const HttpStatus = require("http-status-codes");
 const koaRouter = require("koa-router")();
-
-const HTTP_OK = 200;
-const HTTP_NOT_FOUND = 404;
-const HTTP_REDIRECT = 302;
 
 const registerRoutes = (app, options, next) => {
   ReactWebapp.setupOptions(options)
@@ -45,20 +42,44 @@ const registerRoutes = (app, options, next) => {
             const handleStatus = data => {
               const status = data.status;
 
+              // All statuses where we just want to send the status to the client
+              const sendBodyStatuses = [
+                HttpStatus.NOT_FOUND,
+                HttpStatus.GONE
+              ];
+
+              // All statuses where we want to redirect the client
+              const redirectStatuses = [
+                HttpStatus.MOVED_PERMANENTLY,
+                HttpStatus.MOVED_TEMPORARILY,
+                HttpStatus.TEMPORARY_REDIRECT
+              ];
+
+              // All the statuses where we want to send specific error messages
+              const errorStatuses = [
+                HttpStatus.BAD_REQUEST,
+                HttpStatus.UNAUTHORIZED,
+                HttpStatus.FORBIDDEN,
+                HttpStatus.INTERNAL_SERVER_ERROR,
+                HttpStatus.NOT_IMPLEMENTED,
+                HttpStatus.SERVICE_UNAVAILABLE
+              ];
+
               // Handle Different Status Codes differently
-              switch (status) {
-                case HTTP_OK:
-                  respond(data.content);
-                  break;
-                case HTTP_NOT_FOUND:
-                  respondWithStatus(data);
-                  break;
-                case HTTP_REDIRECT:
-                  this.redirect(data.path); //eslint-disable-line
-                  break;
-                default:
-                  respond({ message: "error" });
-                  break;
+              if (status === HttpStatus.OK) {
+                respond(data.content);
+              } else if (sendBodyStatuses.find(sendBodyStatus => sendBodyStatus === status)) {
+                respondWithStatus(data);
+              } else if (redirectStatuses.find(redirectStatus => redirectStatus === status)) {
+                this.redirect(data.path); //eslint-disable-line
+              } else if (errorStatuses.find(errorStatus => errorStatus === status)) {
+                respondWithStatus({
+                  status: status,
+                  content: HttpStatus.getStatusText(status)
+                });
+              } else {
+                // Default Error Handling
+                respond({ message: "error" });
               }
             };
 
@@ -71,7 +92,7 @@ const registerRoutes = (app, options, next) => {
                 }
               })
               .catch(err => {
-                respond(err.html); //.code(err.status || HTTP_ERROR_500);
+                respond(err.html); //.code(err.status || HttpStatus.INTERNAL_SERVER_ERROR);
               });
           }); //end get
         });
