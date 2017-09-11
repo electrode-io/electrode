@@ -1,3 +1,18 @@
+# 9/11/2017
+
+## Packages
+
+-   electrode-react-webapp@2.0.0 `(1.8.1 => 2.0.0)`
+
+## Commits
+
+-   `packages/electrode-react-webapp`
+
+    -   pre process renderring steps to improv performance [commit](http://github.com/electrode-io/electrode/commit/c724d24d283e053374b6d9aa034b82d8e2fe5a22)
+    -   allow specifying array of token handlers [commit](http://github.com/electrode-io/electrode/commit/c36ece1a7096b9399fbee9cef1dddcd6c78d9404)
+    -   [major] remove react-helmet [commit](http://github.com/electrode-io/electrode/commit/4c5a4a75c96ce31ce49eb0c0d05e2945c9184f39)
+    -   [major] rewrite react-webapp [commit](http://github.com/electrode-io/electrode/commit/fbbf85cac18178873a228ffa08f7e072400e4cc9)
+
 # 8/24/2017
 
 ## Packages
