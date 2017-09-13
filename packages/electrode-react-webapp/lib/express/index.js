@@ -25,7 +25,7 @@ const handleRoute = (request, response, handler) => {
     .catch(err => response.status(err.status).send(err.message));
 };
 
-const registerRoutes = (app, options, next) => {
+const registerRoutes = (app, options, next = () => {}) => {
   const registerOptions = ReactWebapp.setupOptions(options);
 
   _.each(registerOptions.paths, (v, path) => {
