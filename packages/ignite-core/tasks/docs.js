@@ -24,14 +24,14 @@ function openDocs(gitbookURL, type, igniteCore, showHint) {
         return printSucessLogs(type, igniteCore, showHint);
       })
       .catch(e => {
-        errorHandler("Failed at open a new browser on windows", e);
+        return errorHandler("Failed at open a new browser on windows", e);
       });
   } else {
     try {
       opn(gitbookURL);
       return printSucessLogs(type, igniteCore, showHint);
     } catch (e) {
-      errorHandler("Failed at open a new browser on windows", e);
+      return errorHandler("Failed at open a new browser on windows", e);
     }
   }
 };
@@ -45,7 +45,6 @@ function electrodeDocs(type, igniteCore, showHint) {
   } else {
     errorHandler("Please provide a valid type");
   }
-
   return openDocs(gitbookURL, type, igniteCore, showHint);
 };
 

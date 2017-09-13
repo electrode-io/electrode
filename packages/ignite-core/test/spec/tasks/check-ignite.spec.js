@@ -6,6 +6,7 @@ const sinon = require("sinon");
 const assert = require("assert");
 const chalk = require("chalk");
 const fs = require("fs");
+const readline = require("readline");
 
 const logger = require("../../../lib/logger");
 const checkIgnite = rewire("../../../tasks/check-ignite");
@@ -14,12 +15,14 @@ function foo() {
   return;
 }
 
-describe.skip("ignite-core: check-ignite", function() {
+describe("ignite-core: check-ignite", function() {
   let loggerStub;
   let existsSyncStub;
   let readFileSyncStub;
   let xshStub;
   let processStub;
+  let writeFileSyncStub;
+  let readlineInterface = "";
 
   beforeEach(function() {
     loggerStub = sinon.stub(logger, "log");
@@ -27,6 +30,15 @@ describe.skip("ignite-core: check-ignite", function() {
     xshStub = sinon.stub(xsh, "exec");
     existsSyncStub = sinon.stub(fs, "existsSync");
     readFileSyncStub = sinon.stub(fs, "readFileSync");
+    writeFileSyncStub = sinon.stub(fs, "writeFileSync");
+
+    readlineInterface = {
+      question: () => {},
+      close: () => {}
+    };
+    sinon.stub(readlineInterface, "question");
+    sinon.stub(readlineInterface, "close");
+    sinon.stub(readline, "createInterface").returns(readlineInterface);
 
     xshStub.withArgs(true, "npm show electrode-ignite version").returns(
       Promise.resolve({
@@ -53,6 +65,10 @@ describe.skip("ignite-core: check-ignite", function() {
     existsSyncStub.restore();
     processStub.restore();
     readFileSyncStub.restore();
+    writeFileSyncStub.restore();
+    readline.createInterface.restore();
+    readlineInterface.question.restore();
+    readlineInterface.close.restore();
   });
 
   it("igniteUpToDate", function() {
@@ -127,23 +143,30 @@ describe.skip("ignite-core: check-ignite", function() {
     );
   });
 
-  it.skip("checkIgnite: manual check", function() {
-    checkIgnite("oss", null, "electrode-ignite", "100.0.0", false, true);
+  it("checkIgnite: manual check", function() {
+    checkIgnite("oss", null, "electrode-ignite", false, true, "1.0.0");
     assert.equal(
       loggerStub.getCalls()[0].args.toString(),
       chalk.green("Checking latest version available on npm ...")
     );
   });
 
-  it.skip("checkIgnite: already get the latest verion", function(done) {
+  it("checkIgnite: already get the latest verion", function(done) {
     existsSyncStub.returns(true);
     readFileSyncStub.returns(
       JSON.stringify({
         time: new Date().toDateString(),
-        latestVersion: "0.1.0"
+        latestVersion: "1.0.0"
       })
     );
-    checkIgnite("oss", null, "electrode-ignite", "100.0.0", false, false).then(function() {
+    checkIgnite(
+      "oss",
+      null,
+      "electrode-ignite",
+      false,
+      false,
+      "1.0.0"
+    ).then(function() {
       assert.equal(
         loggerStub.getCalls()[0].args.toString(),
         chalk.cyan("Your electrode-ignite is up-to-date.")
@@ -152,19 +175,27 @@ describe.skip("ignite-core: check-ignite", function() {
     });
   });
 
-  it.skip("checkIgnite: out-of-date electrode-ignite", function(done) {
+  it("checkIgnite: out-of-date electrode-ignite", function(done) {
     existsSyncStub.returns(true);
     readFileSyncStub.returns(
       JSON.stringify({
         time: new Date().toDateString(),
-        latestVersion: "0.1.0"
+        latestVersion: "1.0.0"
       })
     );
-    checkIgnite("oss", null, "electrode-ignite", "100.0.0", false, false).then(function() {
+    checkIgnite(
+      "oss",
+      null,
+      "electrode-ignite",
+      false,
+      false,
+      "0.1.0"
+    ).then(function() {
       assert.equal(
         loggerStub.getCalls()[0].args.toString(),
         chalk.cyan(
-          "electrode-ignite is about to update the following modules globally:\n- electrode-ignite (from version 0.0.1 to version 0.1.0)"
+          `electrode-ignite is about to update the following modules globally:\n` +
+            `- electrode-ignite (from version 0.1.0 to version 1.0.0)`
         )
       );
       done();
@@ -179,7 +210,14 @@ describe.skip("ignite-core: check-ignite", function() {
         latestVersion: "1.0.0"
       })
     );
-    checkIgnite("oss", null, "electrode-ignite", "1.0.0", false, false).then(function() {
+    checkIgnite(
+      "oss",
+      null,
+      "electrode-ignite",
+      false,
+      false,
+      "1.0.0"
+    ).then(function() {
       assert.equal(
         loggerStub.getCalls()[0].args.toString(),
         chalk.green("Checking latest version available on npm ...")
