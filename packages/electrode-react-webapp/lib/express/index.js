@@ -34,7 +34,7 @@ const handleRoute = (request, response, handler) => {
     .catch(err => response.status(err.status).send(err.message));
 };
 
-const registerRoutes = (app, options) => {
+const registerRoutes = (app, options, next = () => {}) => {
   const registerOptions = ReactWebapp.setupOptions(options);
 
   _.each(registerOptions.paths, (v, path) => {
@@ -67,6 +67,9 @@ const registerRoutes = (app, options) => {
       app[method.toLowerCase()](path, (req, res) => handleRoute(req, res, routeHandler));
     });
   });
+
+  // resolve promise
+  next();
 };
 
 module.exports = registerRoutes;
