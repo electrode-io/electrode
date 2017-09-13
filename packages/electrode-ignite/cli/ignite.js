@@ -11,7 +11,6 @@ function ignite() {
   if(/^\d{1,2}\.\d{1,2}\.\d{1,2}$/.test(pkg.version)) {
     const isCheckIgnite = process.argv[2] === "check-ignite";
     logger.log(chalk.green(`Welcome to electrode-ignite version ${pkg.version}`));
-
     return checkElectrodeIgnite(
       "oss",
       igniteCore,

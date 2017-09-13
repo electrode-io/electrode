@@ -2,27 +2,40 @@
 
 const sinon = require("sinon");
 const assert = require("assert");
+const xsh = require("xsh");
 
 const electrodeIgnite = require("../../cli/ignite");
 const logger = require("ignite-core/lib/logger");
 const chalk = require("chalk");
 const pkg = require("../../package.json");
 
-const mock = require("mock-require");
-mock("ignite-core/tasks/check-ignite", "./utils/utils");
-
-describe.skip("electrode-ignite", function() {
+describe("electrode-ignite", function() {
   let loggerStub = "";
   let processStub = "";
+  let xshStub = "";
 
   beforeEach(function() {
     loggerStub = sinon.stub(logger, "log");
     processStub = sinon.stub(process, "exit");
+    xshStub = sinon.stub(xsh, "exec").returns(Promise.resolve(pkg.version));
   });
 
   afterEach(function() {
     loggerStub.restore();
     processStub.restore();
+    xshStub.restore();
+  });
+
+  it("Exit if electrode-ignite version is invalid", () => {
+    const originalVersion = pkg.version;
+    pkg.version = "fake version";
+    electrodeIgnite();
+    assert.equal(
+      loggerStub.getCalls()[0].args.toString(),
+      chalk.red("Your electrode-ignite version@fake version is invalid.")
+    );
+    sinon.assert.calledOnce(processStub);
+    pkg.version = originalVersion;
   });
 
   it("Print welcome message for non-check-ignite tasks", function() {
