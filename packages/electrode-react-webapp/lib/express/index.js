@@ -18,10 +18,17 @@ const handleRoute = (request, response, handler) => {
         HttpStatus.GONE
       ];
 
+      const redirectStatuses = [
+        HttpStatus.MOVED_PERMANENTLY,
+        HttpStatus.MOVED_TEMPORARILY,
+        HttpStatus.PERMANENT_REDIRECT,
+        HttpStatus.TEMPORARY_REDIRECT
+      ];
+
       if (status === undefined) {
         response.send(data);
-      } else if (status === HttpStatus.MOVED_TEMPORARILY) {
-        response.redirect(data.path);
+      } else if (redirectStatuses.find(redirectStatus => redirectStatus === status)) {
+        response.redirect(status, data.path);
       } else if (notFoundStatuses.find(notFoundStatus => notFoundStatus === status)) {
         response.status(status)
           .send(data.html !== undefined ? data.html : HttpStatus.getStatusText(status));
