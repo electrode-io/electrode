@@ -80,7 +80,7 @@
     "mocha": "^2.3.3",
     "nodemon": "^1.8.1",
     "optional-require": "^1.0.0",
-    "penthouse": "^0.10.3",
+    "penthouse": "^1.0.0",
     "phantomjs-prebuilt": "^2.1.13",
     "postcss-cssnext": "^2.7.0",
     "postcss-import": "^8.1.2",
