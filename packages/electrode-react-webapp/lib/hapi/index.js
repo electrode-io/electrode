@@ -19,7 +19,7 @@ const handleRoute = (request, reply, handler) => {
       } else if (status >= 200 && status < 300) {
         reply(data.html !== undefined ? data.html : data);
       } else {
-        reply(data).code(status);
+        reply(data.html !== undefined ? data.html : data).code(status);
       }
     })
     .catch(err => {
