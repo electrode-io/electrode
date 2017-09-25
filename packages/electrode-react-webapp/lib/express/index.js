@@ -13,9 +13,10 @@ const handleRoute = (request, response, handler) => {
       const status = data.status;
 
       // Not Found Status Codes
-      const notFoundStatuses = [
+      const displayHtmlStatuses = [
         HttpStatus.NOT_FOUND,
-        HttpStatus.GONE
+        HttpStatus.GONE,
+        HttpStatus.SERVICE_UNAVAILABLE
       ];
 
       const redirectStatuses = [
@@ -29,7 +30,7 @@ const handleRoute = (request, response, handler) => {
         response.send(data);
       } else if (redirectStatuses.find(redirectStatus => redirectStatus === status)) {
         response.redirect(status, data.path);
-      } else if (notFoundStatuses.find(notFoundStatus => notFoundStatus === status)) {
+      } else if (displayHtmlStatuses.find(displayHtmlStatus => displayHtmlStatus === status)) {
         response.status(status)
           .send(data.html !== undefined ? data.html : HttpStatus.getStatusText(status));
       } else if (status >= 200 && status < 300) {
