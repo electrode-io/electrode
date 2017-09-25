@@ -5,17 +5,35 @@
 const _ = require("lodash");
 const assert = require("assert");
 const ReactWebapp = require("../react-webapp");
-
-const HTTP_REDIRECT = 302;
+const HttpStatus = require("http-status-codes");
 
 const handleRoute = (request, reply, handler) => {
   return handler({ mode: request.query.__mode || "", request })
     .then(data => {
       const status = data.status;
+
+      // Status codes where we might want to keep custom html
+      const displayHtmlStatuses = [
+        HttpStatus.NOT_FOUND,
+        HttpStatus.GONE,
+        HttpStatus.SERVICE_UNAVAILABLE
+      ];
+
+      // Status codes where we want to redirect the user
+      const redirectStatuses = [
+        HttpStatus.MOVED_PERMANENTLY,
+        HttpStatus.MOVED_TEMPORARILY,
+        HttpStatus.PERMANENT_REDIRECT,
+        HttpStatus.TEMPORARY_REDIRECT
+      ];
+
       if (status === undefined) {
         reply(data);
-      } else if (status === HTTP_REDIRECT) {
+      } else if (redirectStatuses.find(redirectStatus => redirectStatus === status)) {
         reply.redirect(data.path);
+      } else if (displayHtmlStatuses.find(displayHtmlStatus => displayHtmlStatus === status)) {
+        reply(data.html !== undefined ? data.html : data)
+          .code(status);
       } else if (status >= 200 && status < 300) {
         reply(data.html !== undefined ? data.html : data);
       } else {

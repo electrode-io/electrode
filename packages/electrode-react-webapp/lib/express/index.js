@@ -12,13 +12,14 @@ const handleRoute = (request, response, handler) => {
     .then(data => {
       const status = data.status;
 
-      // Not Found Status Codes
+      // Status codes where we might want to keep custom html
       const displayHtmlStatuses = [
         HttpStatus.NOT_FOUND,
         HttpStatus.GONE,
         HttpStatus.SERVICE_UNAVAILABLE
       ];
 
+      // Status codes where we want to redirect the user
       const redirectStatuses = [
         HttpStatus.MOVED_PERMANENTLY,
         HttpStatus.MOVED_TEMPORARILY,
@@ -32,7 +33,7 @@ const handleRoute = (request, response, handler) => {
         response.redirect(status, data.path);
       } else if (displayHtmlStatuses.find(displayHtmlStatus => displayHtmlStatus === status)) {
         response.status(status)
-          .send(data.html !== undefined ? data.html : HttpStatus.getStatusText(status));
+          .send(data.html !== undefined ? data.html : data);
       } else if (status >= 200 && status < 300) {
         response.send(data.html !== undefined ? data.html : data);
       } else {

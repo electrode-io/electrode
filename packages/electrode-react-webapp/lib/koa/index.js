@@ -19,17 +19,26 @@ function handleRoute(handler) {
     .then(data => {
       const status = data.status;
 
-      // Not Found Status Codes
-      const notFoundStatuses = [
+      // Status codes where we might want to keep custom html
+      const displayHtmlStatuses = [
         HttpStatus.NOT_FOUND,
-        HttpStatus.GONE
+        HttpStatus.GONE,
+        HttpStatus.SERVICE_UNAVAILABLE
+      ];
+
+      // Status codes where we want to redirect the user
+      const redirectStatuses = [
+        HttpStatus.MOVED_PERMANENTLY,
+        HttpStatus.MOVED_TEMPORARILY,
+        HttpStatus.PERMANENT_REDIRECT,
+        HttpStatus.TEMPORARY_REDIRECT
       ];
 
       if (status === undefined) {
         respond(200, data);
-      } else if (status === HttpStatus.MOVED_TEMPORARILY) {
+      } else if (redirectStatuses.find(redirectStatus => redirectStatus === status)) {
         this.redirect(data.path);
-      } else if (notFoundStatuses.find(notFoundStatus => notFoundStatus === status)) {
+      } else if (displayHtmlStatuses.find(displayHtmlStatus => displayHtmlStatus === status)) {
         respond(status, data.html !== undefined ? data.html : data);
       } else if (status >= 200 && status < 300) {
         respond(status, data.html !== undefined ? data.html : data);
