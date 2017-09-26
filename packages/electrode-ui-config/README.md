@@ -1,12 +1,10 @@
 # electrode-ui-config
 
-Makes the `ui` section from your app config and the filtered CCM settings available to your UI code. It works isomorphically.
+Makes the `ui` section from your app config available to your UI code. It works isomorphically.
 
 ## Install
 
-```
-npm install electrode-ui-config --save
-```
+    npm install electrode-ui-config --save
 
 ## Usage
 
@@ -28,20 +26,6 @@ export default class MyComponent extends React.Component {
 }
 ```
 
-To access the filtered CCM from, use `electrode-ui-config.ccm`.
-
-For example.
-
-```js
-import Config from "electrode-ui-config";
-
-export default class MyComponent extends React.Component {
-  render() {
-    const ccmSetting = Config.ccm.someConfig["setting-key-1"];
-  }
-}
-```
-
 ## Utilities
 
 This module provides the following utilities:
@@ -54,12 +38,12 @@ It will join `config.ui.basePath` with `path` to make a full UI route path.
 
 Params
 
-  - `path` - the path to join with basePath
+-   `path` - the path to join with basePath
 
 Returns
 
-  - A full UI route path with basePath.
-  - if `path` is empty, then `basePath` is returned.
+-   A full UI route path with basePath.
+-   if `path` is empty, then `basePath` is returned.
 
 ### fullApiPath
 
@@ -70,11 +54,11 @@ Joins `config.ui.basePath`, `config.ui.apiPath` and `path` to make a full API ro
 
 Params
 
-  - `path` - the path to join with basePath and apiPath
+-   `path` - the path to join with basePath and apiPath
 
 Returns
 
-  - A full API route path. If `path` is empty, then `/<basePath>/<apiPath>` is returned.
+-   A full API route path. If `path` is empty, then `/<basePath>/<apiPath>` is returned.
 
 ## How it works
 
@@ -107,9 +91,10 @@ Sample:
 ```
 
 [electrode-server]: https://github.com/electrode-io/electrode-server
-[electrode-react-webapp]: https://github.com/electrode-io/electrode/tree/master/packages/electrode-react-webapp
-[electrode server configuration]: https://github.com/electrode-io/electrode-server#configuration
 
+[electrode-react-webapp]: https://github.com/electrode-io/electrode/tree/master/packages/electrode-react-webapp
+
+[electrode server configuration]: https://github.com/electrode-io/electrode-server#configuration
 
 ## Server side render specific config
 

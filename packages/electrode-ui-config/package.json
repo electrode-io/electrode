@@ -3,10 +3,31 @@
   "version": "1.0.1",
   "description": "Isomorphic UI config",
   "main": "lib/index.js",
-  "browser": "lib/csindex.js",
+  "browser": "dist/csindex.js",
+  "xclap": {
+    "npm": true,
+    "tasks": {
+      "check": [
+        [
+          "pkg/lint",
+          "compile"
+        ],
+        "electrode/check"
+      ],
+      "lint": [
+        [
+          "lint-src",
+          "electrode/lint"
+        ]
+      ]
+    }
+  },
   "scripts": {
-    "test": "clap check",
-    "format": "prettier --write --print-width 100 *.js `find . -type d -d 1 -exec echo '{}/**/*.js' \\; | egrep -v '(/node_modules/|/dist/|/coverage/)'`"
+    "prepublish": "clap pkg/check",
+    "test": "clap pkg/check",
+    "coverage": "clap pkg/check",
+    "lint-src": "eslint src --color",
+    "compile": "babel --presets=es2015 src -d dist --source-maps"
   },
   "repository": {
     "type": "git",
@@ -15,6 +36,9 @@
   "keywords": [],
   "license": "Apache-2.0",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "bluebird": "^2.11.0",
     "electrode-archetype-njs-module-dev": "^2.2.0"
   },
   "dependencies": {
@@ -23,6 +47,12 @@
   },
   "nyc": {
     "all": true,
+    "check-coverage": true,
+    "statements": 100,
+    "branches": 100,
+    "functions": 100,
+    "lines": 100,
+    "cache": true,
     "reporter": [
       "lcov",
       "text",
@@ -32,7 +62,7 @@
       "coverage",
       "*clap.js",
       "gulpfile.js",
-      "dist",
+      "src",
       "test"
     ]
   }
