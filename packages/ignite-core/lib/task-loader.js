@@ -13,8 +13,9 @@ const CLISpinner = require("cli-spinner").Spinner;
 const spinner = new CLISpinner(chalk.green("%s"));
 spinner.setSpinnerString("|/-\\");
 
+/* eslint-disable max-params, complexity, consistent-return, no-process-exit */
+
 function taskLoader(option, type, igniteCore, showHint) {
-  // eslint-disable-line
   const igniteName = type === "oss" ? "electrode-ignite" : "@walmart/electrode-ignite";
 
   switch (option) {
@@ -54,7 +55,8 @@ function taskLoader(option, type, igniteCore, showHint) {
       break;
     case "8":
       logger.log(chalk.green("You've successfully exit Electrode Ignite."));
-      return process.exit(0); // eslint-disable-line no-process-exit
+      process.exit(0);
+      break;
   }
 }
 
