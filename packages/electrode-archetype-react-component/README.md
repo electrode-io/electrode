@@ -47,7 +47,7 @@ The archetypes are split into two parts: `<archetype>` and `<archetype>-dev`. Bo
 ## Check the archetype configs:
 
 If you are enhancing / refactoring this archetype and have locally checked it out,
-please see [`CONTRIBUTING.md`](./CONTRIBUTING.md) for our guidelines.
+please see [`DEVELOPMENT.md`](./DEVELOPMENT.md) for our guidelines.
 
 The main check we provide for the archetype itself is:
 
