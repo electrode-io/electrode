@@ -10,8 +10,10 @@
     -   [What are Archetypes](/overview/what-are-archetypes.md)
 
 ### Quick Start
--   [Start With Electrode App](/chapter1/quick-start/start-with-app.md)
--   [Start With Electrode Component](/chapter1/quick-start/start-with-component.md)
+-   [Get Start With Electrode](/chapter1/quick-start/start-with-electrode.md)
+    -   [What is Electrode Ignite](/chapter1/quick-start/what-is-electrode-ignite.md)
+    -   [Start With Electrode App](/chapter1/quick-start/start-with-app.md)
+    -   [Start With Electrode Component](/chapter1/quick-start/start-with-component.md)
 
 -   [Electrode App](chapter1/quick-start/further-develop-app.md)
     -   [Build Component](/chapter1/further-develop-app/build-component.md)
