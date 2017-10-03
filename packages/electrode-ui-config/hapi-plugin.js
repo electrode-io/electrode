@@ -1,9 +1,13 @@
 "use strict";
 
-const uiConfig = require("./lib/index");
+const uiConfig = require("./lib");
 
+//
+// On the server we need to acquire the config from the server object
+// For Electrode Server, the config is in server.app.config
+//
 function uiConfigRegister(server, options, next) {
-  uiConfig._server = server;
+  uiConfig.config = (server.app && server.app.config) || {};
 
   next();
 }
