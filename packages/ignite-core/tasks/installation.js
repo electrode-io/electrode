@@ -16,8 +16,7 @@ function installLatestXClapCLI(spinner, type, igniteCore, showHint) {
     .exec("npm install -g xclap-cli")
     .then(ver => {
       const verStdout = ver.stdout;
-      const verStart =
-        verStdout.indexOf("xclap-cli@") + "xclap-cli@".length;
+      const verStart = verStdout.indexOf("xclap-cli@") + "xclap-cli@".length;
       const verEnd = verStdout.indexOf("\n", verStart);
       const latestVersion = verStdout.substring(verStart, verEnd).trim();
 
@@ -29,7 +28,7 @@ function installLatestXClapCLI(spinner, type, igniteCore, showHint) {
       return backToMenu(type, igniteCore, showHint);
     })
     .catch(err => errorHandler(err, `Install xclap-cli globally.`));
-};
+}
 
 function installXClapCLI(type, igniteCore, spinner, showHint) {
   const rl = readline.createInterface({
@@ -41,7 +40,7 @@ function installXClapCLI(type, igniteCore, spinner, showHint) {
   return rl.question("Proceed? (y/n) ", answer => {
     if (answer.toLowerCase() === "y") {
       return installLatestXClapCLI(spinner, type, igniteCore, showHint);
-    } else if(answer.toLowerCase() === "n") {
+    } else if (answer.toLowerCase() === "n") {
       logger.log(chalk.cyan("You've cancelled the xclap-cli installation."));
       return backToMenu(type, igniteCore, showHint);
     } else {
@@ -50,7 +49,7 @@ function installXClapCLI(type, igniteCore, spinner, showHint) {
       return installXClapCLI(type, igniteCore, spinner, showHint);
     }
   });
-};
+}
 
 function checkLocalXClapCLI() {
   return xsh
@@ -61,7 +60,7 @@ function checkLocalXClapCLI() {
     .catch(function() {
       return null;
     });
-};
+}
 
 function checkXClapCLILatestVersion() {
   return xsh
@@ -72,7 +71,7 @@ function checkXClapCLILatestVersion() {
     .catch(function() {
       return null;
     });
-};
+}
 
 function Installation(type, igniteCore, spinner, igniteName, showHint) {
   spinner.start();
@@ -114,6 +113,6 @@ function Installation(type, igniteCore, spinner, igniteName, showHint) {
       });
     }
   });
-};
+}
 
 module.exports = Installation;

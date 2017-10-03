@@ -76,9 +76,7 @@ describe("ignite-core: check-ignite", function() {
     igniteUpToDate("oss", "installation", "0.1.0", null, "electrode-ignite");
     assert.equal(
       loggerStub.getCalls()[0].args.toString(),
-      chalk.cyan(
-        "Congratulations! You've aleady installed the latest electrode-ignite@0.1.0."
-      )
+      chalk.cyan("Congratulations! You've aleady installed the latest electrode-ignite@0.1.0.")
     );
   });
 
@@ -125,18 +123,9 @@ describe("ignite-core: check-ignite", function() {
 
   it("invalidProceedOption", function() {
     const invalidProceedOption = checkIgnite.__get__("invalidProceedOption");
-    invalidProceedOption(
-      "oss",
-      "installation",
-      "0.1.0",
-      "0.1.0",
-      null,
-      "electrode-ignite",
-      false,
-      {
-        close: foo
-      }
-    );
+    invalidProceedOption("oss", "installation", "0.1.0", "0.1.0", null, "electrode-ignite", false, {
+      close: foo
+    });
     assert.equal(
       loggerStub.getCalls()[0].args.toString(),
       chalk.cyan("Please provide 'y' or 'n'.")
@@ -159,14 +148,7 @@ describe("ignite-core: check-ignite", function() {
         latestVersion: "1.0.0"
       })
     );
-    checkIgnite(
-      "oss",
-      null,
-      "electrode-ignite",
-      false,
-      false,
-      "1.0.0"
-    ).then(function() {
+    checkIgnite("oss", null, "electrode-ignite", false, false, "1.0.0").then(function() {
       assert.equal(
         loggerStub.getCalls()[0].args.toString(),
         chalk.cyan("Your electrode-ignite is up-to-date.")
@@ -183,14 +165,7 @@ describe("ignite-core: check-ignite", function() {
         latestVersion: "1.0.0"
       })
     );
-    checkIgnite(
-      "oss",
-      null,
-      "electrode-ignite",
-      false,
-      false,
-      "0.1.0"
-    ).then(function() {
+    checkIgnite("oss", null, "electrode-ignite", false, false, "0.1.0").then(function() {
       assert.equal(
         loggerStub.getCalls()[0].args.toString(),
         chalk.cyan(
@@ -210,14 +185,7 @@ describe("ignite-core: check-ignite", function() {
         latestVersion: "1.0.0"
       })
     );
-    checkIgnite(
-      "oss",
-      null,
-      "electrode-ignite",
-      false,
-      false,
-      "1.0.0"
-    ).then(function() {
+    checkIgnite("oss", null, "electrode-ignite", false, false, "1.0.0").then(function() {
       assert.equal(
         loggerStub.getCalls()[0].args.toString(),
         chalk.green("Checking latest version available on npm ...")
@@ -233,18 +201,10 @@ describe("ignite-core: check-ignite", function() {
         stdout: "0.1.0\n"
       })
     );
-    checkIgniteVersion(
-      "oss",
-      "electrode-ignite",
-      "0.1.0",
-      null,
-      false
-    ).then(function() {
+    checkIgniteVersion("oss", "electrode-ignite", "0.1.0", null, false).then(function() {
       assert.equal(
         loggerStub.getCalls()[0].args.toString(),
-        chalk.cyan(
-          "Congratulations! You've aleady installed the latest electrode-ignite@0.1.0."
-        )
+        chalk.cyan("Congratulations! You've aleady installed the latest electrode-ignite@0.1.0.")
       );
       done();
     });
@@ -257,13 +217,7 @@ describe("ignite-core: check-ignite", function() {
         stdout: "1.0.0\n"
       })
     );
-    checkIgniteVersion(
-      "oss",
-      "electrode-ignite",
-      "0.1.0",
-      null,
-      false
-    ).then(function() {
+    checkIgniteVersion("oss", "electrode-ignite", "0.1.0", null, false).then(function() {
       assert(loggerStub.calledOnce);
       done();
     });
@@ -276,13 +230,7 @@ describe("ignite-core: check-ignite", function() {
         stdout: "0.1.0\n"
       })
     );
-    checkIgniteVersion(
-      "oss",
-      "electrode-ignite",
-      "1.0.0",
-      null,
-      false
-    ).then(function() {
+    checkIgniteVersion("oss", "electrode-ignite", "1.0.0", null, false).then(function() {
       assert(loggerStub.calledOnce);
       done();
     });
@@ -290,15 +238,11 @@ describe("ignite-core: check-ignite", function() {
 
   it("checkInstalledIgnite: error", function(done) {
     const checkInstalledIgnite = checkIgnite.__get__("checkInstalledIgnite");
-    xshStub
-      .withArgs(true, "npm ls -g -j --depth=0 electrode-ignite")
-      .returns(Promise.reject());
+    xshStub.withArgs(true, "npm ls -g -j --depth=0 electrode-ignite").returns(Promise.reject());
     checkInstalledIgnite("electrode-ignite").then(function() {
       assert.equal(
         loggerStub.getCalls()[0].args.toString(),
-        chalk.red(
-          "Failed at: Error when fetching local installed electrode-ignite."
-        )
+        chalk.red("Failed at: Error when fetching local installed electrode-ignite.")
       );
       done();
     });
@@ -306,16 +250,8 @@ describe("ignite-core: check-ignite", function() {
 
   it("checkIgniteVersion: error", function(done) {
     const checkIgniteVersion = checkIgnite.__get__("checkIgniteVersion");
-    xshStub
-      .withArgs(true, "npm show electrode-ignite version")
-      .returns(Promise.reject());
-    checkIgniteVersion(
-      "oss",
-      "electrode-ignite",
-      "0.1.0",
-      null,
-      false
-    ).then(function() {
+    xshStub.withArgs(true, "npm show electrode-ignite version").returns(Promise.reject());
+    checkIgniteVersion("oss", "electrode-ignite", "0.1.0", null, false).then(function() {
       assert.equal(
         loggerStub.getCalls()[0].args.toString(),
         chalk.red(

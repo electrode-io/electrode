@@ -9,13 +9,11 @@ const logger = require("../lib/logger");
 
 function printSucessLogs(type, igniteCore, showHint) {
   logger.log(
-    chalk.green(
-      "You've successfully opened the oss gitbook. Please checkout your browser."
-    )
+    chalk.green("You've successfully opened the oss gitbook. Please checkout your browser.")
   );
 
   return backToMenu(type, igniteCore, showHint);
-};
+}
 
 function openDocs(gitbookURL, type, igniteCore, showHint) {
   if (process.platform === "win32") {
@@ -34,7 +32,7 @@ function openDocs(gitbookURL, type, igniteCore, showHint) {
       return errorHandler("Failed at open a new browser on windows", e);
     }
   }
-};
+}
 
 function electrodeDocs(type, igniteCore, showHint) {
   let gitbookURL = "";
@@ -46,6 +44,6 @@ function electrodeDocs(type, igniteCore, showHint) {
     errorHandler("Please provide a valid type");
   }
   return openDocs(gitbookURL, type, igniteCore, showHint);
-};
+}
 
 module.exports = electrodeDocs;

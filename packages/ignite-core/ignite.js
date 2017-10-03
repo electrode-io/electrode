@@ -52,6 +52,6 @@ function igniteCore(type, task) {
           `Please use "ignite --help" to check all the available tasks.`
       );
   }
-};
+}
 
 module.exports = igniteCore;

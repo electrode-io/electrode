@@ -21,15 +21,11 @@ function printNodeCheckLog() {
 
   if (nodeVerRet >= 0) {
     logger.log(
-      chalk.yellow(
-        `You are using Node version ${nodeVersion}. Electrode should work for you.\n`
-      )
+      chalk.yellow(`You are using Node version ${nodeVersion}. Electrode should work for you.\n`)
     );
   } else {
     logger.log(
-      chalk.yellow(
-        `Your Node version is: ${nodeVersion}. We recommend use Node LTS version 6.\n`
-      )
+      chalk.yellow(`Your Node version is: ${nodeVersion}. We recommend use Node LTS version 6.\n`)
     );
   }
 }
@@ -41,15 +37,11 @@ function printnpmCheckLog(npmVersion) {
 
   if (npmVerRet >= 0) {
     logger.log(
-      chalk.yellow(
-        `You are using npm version ${npmVersion}. Electrode should work for you.\n`
-      )
+      chalk.yellow(`You are using npm version ${npmVersion}. Electrode should work for you.\n`)
     );
   } else {
     logger.log(
-      chalk.yellow(
-        `Your npm version is: ${npmVersion}. Electrode requires npm version 3 and up.\n`
-      )
+      chalk.yellow(`Your npm version is: ${npmVersion}. Electrode requires npm version 3 and up.\n`)
     );
   }
 }
@@ -82,7 +74,7 @@ function checkNode(type, igniteCore, spinner) {
       return true;
     })
     .catch(err => {
-      errorHandler(err, "Checking node env.")
+      errorHandler(err, "Checking node env.");
     });
 }
 

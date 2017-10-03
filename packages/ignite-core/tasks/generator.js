@@ -9,7 +9,7 @@ const errorHandler = require("../lib/error-handler");
 
 const Generator = (type, generator, igniteCore, spinner) => {
   return checkNode(type, null, spinner)
-    .then((nodeCheckPassed) => {
+    .then(nodeCheckPassed => {
       spinner.start();
 
       if (nodeCheckPassed) {
@@ -28,8 +28,8 @@ const Generator = (type, generator, igniteCore, spinner) => {
           });
         }
 
-        child.on("error", (err) => {
-          errorHandler(err, `Running ${generator} generator.`)
+        child.on("error", err => {
+          errorHandler(err, `Running ${generator} generator.`);
         });
 
         spinner.stop();

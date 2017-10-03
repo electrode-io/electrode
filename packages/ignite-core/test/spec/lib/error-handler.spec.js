@@ -33,10 +33,7 @@ describe("ignite-core:error-hander", function() {
     errorHandler("error", "message");
 
     sinon.assert.callCount(loggerStub, 2);
-    assert.equal(
-      loggerStub.getCalls()[0].args.toString(),
-      chalk.red("Failed at: message")
-    );
+    assert.equal(loggerStub.getCalls()[0].args.toString(), chalk.red("Failed at: message"));
     assert.equal(loggerStub.getCalls()[1].args.toString(), chalk.red("error"));
     sinon.assert.calledOnce(exitStub);
   });

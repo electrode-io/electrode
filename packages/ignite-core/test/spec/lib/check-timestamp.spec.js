@@ -75,8 +75,7 @@ describe("ignite-core: check Timestamp", () => {
   });
 
   it("error when set timestamp", () => {
-    const fileName =
-      process.platform === "win32" ? "timestamp-wml.txt" : "timestamp-oss.txt";
+    const fileName = process.platform === "win32" ? "timestamp-wml.txt" : "timestamp-oss.txt";
     const timeStampPath = Path.resolve(__dirname, "..", "..", "..", fileName);
     writeFileSyncStub.yields(new Error());
     setTimeStamp({
@@ -86,9 +85,7 @@ describe("ignite-core: check Timestamp", () => {
     sinon.assert.callCount(writeFileSyncStub, 1);
     assert.equal(
       loggerStub.getCalls()[0].args.toString(),
-      chalk.red(
-        `Failed at: Saving timestamp to directory ${timeStampPath}.`
-      )
+      chalk.red(`Failed at: Saving timestamp to directory ${timeStampPath}.`)
     );
   });
 });

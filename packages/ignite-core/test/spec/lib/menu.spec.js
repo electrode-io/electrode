@@ -42,9 +42,9 @@ describe("ignite-core: menu", function() {
     const generateStars = testModule.__get__("generateStars");
     assert.equal(
       generateStars(),
-      `${chalk.green(" * ")}${chalk.magenta(" * ")}${chalk.green(
+      `${chalk.green(" * ")}${chalk.magenta(" * ")}${chalk.green(" * ")}${chalk.magenta(
         " * "
-      )}${chalk.magenta(" * ")}${chalk.green(" * ")}${chalk.magenta(" * ")}`
+      )}${chalk.green(" * ")}${chalk.magenta(" * ")}`
     );
   });
 
@@ -52,13 +52,11 @@ describe("ignite-core: menu", function() {
     const createMenuBanner = testModule.__get__("createMenuBanner");
     assert.equal(
       createMenuBanner(),
-      `${chalk.green(" * ")}${chalk.magenta(" * ")}${chalk.green(
+      `${chalk.green(" * ")}${chalk.magenta(" * ")}${chalk.green(" * ")}${chalk.magenta(
         " * "
-      )}${chalk.magenta(" * ")}${chalk.green(" * ")}${chalk.magenta(
-        " * "
-      )}${chalk.blueBright("Electrode Ignite Menu")}${chalk.green(
-        " * "
-      )}${chalk.magenta(" * ")}${chalk.green(" * ")}${chalk.magenta(
+      )}${chalk.green(" * ")}${chalk.magenta(" * ")}${chalk.blueBright(
+        "Electrode Ignite Menu"
+      )}${chalk.green(" * ")}${chalk.magenta(" * ")}${chalk.green(" * ")}${chalk.magenta(
         " * "
       )}${chalk.green(" * ")}${chalk.magenta(" * ")}`
     );
@@ -81,9 +79,7 @@ describe("ignite-core: menu", function() {
     };
     sandbox.stub(readline, "createInterface", rl);
     testModule("oss", foo, rl());
-    loggerStub.calledWith(
-      chalk.green("Checking your Electrode environment...")
-    );
+    loggerStub.calledWith(chalk.green("Checking your Electrode environment..."));
   });
 
   it("igniteMenu on invalid task", function() {
@@ -97,8 +93,6 @@ describe("ignite-core: menu", function() {
     };
     sandbox.stub(readline, "createInterface", rl);
     testModule("oss", foo, rl());
-    loggerStub.calledWith(
-      chalk.red("Please provide a valid option between 1 to 8.")
-    );
+    loggerStub.calledWith(chalk.red("Please provide a valid option between 1 to 8."));
   });
 });

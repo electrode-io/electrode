@@ -4,8 +4,7 @@ const fs = require("fs");
 const Path = require("path");
 const errorHandler = require("../lib/error-handler");
 
-const fileName =
-  process.platform === "win32" ? "timestamp-wml.txt" : "timestamp-oss.txt";
+const fileName = process.platform === "win32" ? "timestamp-wml.txt" : "timestamp-oss.txt";
 const timeStampPath = Path.resolve(__dirname, "..", fileName);
 
 function setTimeStamp(obj) {

@@ -52,10 +52,7 @@ describe("ignite-core:task-loader", function() {
 
   it("Option#6 open docs", function() {
     taskLoader("6", "oss", foo);
-    assert.equal(
-      loggerStub.getCalls().length,
-      1
-    );
+    assert.equal(loggerStub.getCalls().length, 1);
   });
 
   it("Option#7 electrode-ignite", function() {

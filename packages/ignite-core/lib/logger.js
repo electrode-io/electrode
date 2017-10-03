@@ -14,9 +14,7 @@ const pad2 = x => {
 
 const timestamp = () => {
   const d = new Date();
-  const ts = `${pad2(d.getHours())}:${pad2(d.getMinutes())}:${pad2(
-    d.getSeconds()
-  )}`;
+  const ts = `${pad2(d.getHours())}:${pad2(d.getMinutes())}:${pad2(d.getSeconds())}`;
   return ts;
 };
 
@@ -42,9 +40,7 @@ module.exports = {
       return;
     }
     process.stdout.write(
-      `${chalk.magenta("[")}${chalk.gray(timestamp())}${chalk.magenta(
-        "]"
-      )} ${msg}\n`
+      `${chalk.magenta("[")}${chalk.gray(timestamp())}${chalk.magenta("]")} ${msg}\n`
     );
   }
 };

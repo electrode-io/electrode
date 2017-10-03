@@ -13,7 +13,8 @@ const CLISpinner = require("cli-spinner").Spinner;
 const spinner = new CLISpinner(chalk.green("%s"));
 spinner.setSpinnerString("|/-\\");
 
-function taskLoader(option, type, igniteCore, showHint) { // eslint-disable-line
+function taskLoader(option, type, igniteCore, showHint) {
+  // eslint-disable-line
   const igniteName = type === "oss" ? "electrode-ignite" : "@walmart/electrode-ignite";
 
   switch (option) {
@@ -41,12 +42,7 @@ function taskLoader(option, type, igniteCore, showHint) { // eslint-disable-line
       // eslint-disable-next-line no-unused-expressions
       type === "oss"
         ? generator(type, "electrode:component-add", igniteCore, spinner)
-        : generator(
-            type,
-            "@walmart/electrode:component-add",
-            igniteCore,
-            spinner
-          );
+        : generator(type, "@walmart/electrode:component-add", igniteCore, spinner);
       break;
     case "6":
       docs(type, igniteCore, showHint);

@@ -50,8 +50,7 @@ function createMenu(options) {
 function igniteMenu(type, igniteCore, rl) {
   let option;
 
-  const igniteName =
-    type === "oss" ? "Electrode Ignite" : "WML Electrode Ignite";
+  const igniteName = type === "oss" ? "Electrode Ignite" : "WML Electrode Ignite";
 
   const options = [
     `[1] \u2668 Install tools for Electrode development`,
@@ -73,11 +72,7 @@ function igniteMenu(type, igniteCore, rl) {
     if (!isNaN(option) && option >= 1 && option <= options.length) {
       taskLoader(option, type, igniteCore, true);
     } else {
-      logger.log(
-        chalk.red(
-          `Please provide a valid option between 1 to ${options.length}.`
-        )
-      );
+      logger.log(chalk.red(`Please provide a valid option between 1 to ${options.length}.`));
       igniteCore(type);
     }
   });

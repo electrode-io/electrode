@@ -47,9 +47,7 @@ describe("ignite-core: check node env", function() {
   });
 
   it("checkNode: igniteCore is null", function(done) {
-    xshStub
-      .withArgs(true, "npm -v")
-      .returns(Promise.resolve({ stdout: "3.10.0\n" }));
+    xshStub.withArgs(true, "npm -v").returns(Promise.resolve({ stdout: "3.10.0\n" }));
     const readlineInterface = {
       question: () => {},
       close: () => {}
@@ -65,9 +63,7 @@ describe("ignite-core: check node env", function() {
   });
 
   it("printNodeCheckLog", function() {
-    xshStub
-      .withArgs(true, "npm -v")
-      .returns(Promise.resolve({ stdout: "3.10.0\n" }));
+    xshStub.withArgs(true, "npm -v").returns(Promise.resolve({ stdout: "3.10.0\n" }));
     const originalVersion = Object.getOwnPropertyDescriptor(process, "version");
     Object.defineProperty(process, "version", {
       value: "v5.0.0"
@@ -80,17 +76,13 @@ describe("ignite-core: check node env", function() {
     );
     assert.equal(
       loggerStub.getCalls()[1].args.toString(),
-      chalk.yellow(
-        "Your Node version is: 5.0.0. We recommend use Node LTS version 6.\n"
-      )
+      chalk.yellow("Your Node version is: 5.0.0. We recommend use Node LTS version 6.\n")
     );
     Object.defineProperty(process, "version", originalVersion);
   });
 
   it("printnpmCheckLog", function() {
-    xshStub
-      .withArgs(true, "npm -v")
-      .returns(Promise.resolve({ stdout: "3.10.0\n" }));
+    xshStub.withArgs(true, "npm -v").returns(Promise.resolve({ stdout: "3.10.0\n" }));
     const printnpmCheckLog = checkNode.__get__("printnpmCheckLog");
     printnpmCheckLog({
       stdout: "2.0.0\n"
@@ -101,20 +93,13 @@ describe("ignite-core: check node env", function() {
     );
     assert.equal(
       loggerStub.getCalls()[1].args.toString(),
-      chalk.yellow(
-        "Your npm version is: 2.0.0. Electrode requires npm version 3 and up.\n"
-      )
+      chalk.yellow("Your npm version is: 2.0.0. Electrode requires npm version 3 and up.\n")
     );
   });
 
   it("check node environment on mac", function(done) {
-    xshStub
-      .withArgs(true, "npm -v")
-      .returns(Promise.resolve({ stdout: "3.10.0\n" }));
-    const originalPlatform = Object.getOwnPropertyDescriptor(
-      process,
-      "platform"
-    );
+    xshStub.withArgs(true, "npm -v").returns(Promise.resolve({ stdout: "3.10.0\n" }));
+    const originalPlatform = Object.getOwnPropertyDescriptor(process, "platform");
     const originalVersion = Object.getOwnPropertyDescriptor(process, "version");
     const originalPath = Object.getOwnPropertyDescriptor(process, "execPath");
     Object.defineProperty(process, "platform", {
@@ -135,9 +120,7 @@ describe("ignite-core: check node env", function() {
       );
       assert.equal(
         loggerStub.getCalls()[1].args.toString(),
-        chalk.yellow(
-          `You are using Node version 6.10.3. Electrode should work for you.\n`
-        )
+        chalk.yellow(`You are using Node version 6.10.3. Electrode should work for you.\n`)
       );
       assert.equal(
         loggerStub.getCalls()[2].args.toString(),
@@ -145,9 +128,7 @@ describe("ignite-core: check node env", function() {
       );
       assert.equal(
         loggerStub.getCalls()[3].args.toString(),
-        chalk.yellow(
-          `You are using npm version 3.10.0. Electrode should work for you.\n`
-        )
+        chalk.yellow(`You are using npm version 3.10.0. Electrode should work for you.\n`)
       );
       assert.equal(
         loggerStub.getCalls()[4].args.toString(),
@@ -162,13 +143,8 @@ describe("ignite-core: check node env", function() {
   });
 
   it("check node environment on windows", function(done) {
-    xshStub
-      .withArgs(true, "npm -v")
-      .returns(Promise.resolve({ stdout: "3.10.0\n" }));
-    const originalPlatform = Object.getOwnPropertyDescriptor(
-      process,
-      "platform"
-    );
+    xshStub.withArgs(true, "npm -v").returns(Promise.resolve({ stdout: "3.10.0\n" }));
+    const originalPlatform = Object.getOwnPropertyDescriptor(process, "platform");
     const originalVersion = Object.getOwnPropertyDescriptor(process, "version");
     const originalPath = Object.getOwnPropertyDescriptor(process, "execPath");
     Object.defineProperty(process, "platform", {
@@ -189,9 +165,7 @@ describe("ignite-core: check node env", function() {
       );
       assert.equal(
         loggerStub.getCalls()[1].args.toString(),
-        chalk.yellow(
-          `You are using Node version 6.10.3. Electrode should work for you.\n`
-        )
+        chalk.yellow(`You are using Node version 6.10.3. Electrode should work for you.\n`)
       );
       assert.equal(
         loggerStub.getCalls()[2].args.toString(),
@@ -199,9 +173,7 @@ describe("ignite-core: check node env", function() {
       );
       assert.equal(
         loggerStub.getCalls()[3].args.toString(),
-        chalk.yellow(
-          `You are using npm version 3.10.0. Electrode should work for you.\n`
-        )
+        chalk.yellow(`You are using npm version 3.10.0. Electrode should work for you.\n`)
       );
       assert.equal(
         loggerStub.getCalls()[4].args.toString(),

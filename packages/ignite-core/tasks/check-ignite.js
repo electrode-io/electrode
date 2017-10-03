@@ -19,9 +19,7 @@ spinner.setSpinnerString("|/-\\");
 
 function igniteUpToDate(type, task, version, igniteCore, igniteName) {
   logger.log(
-    chalk.cyan(
-      `Congratulations! You've aleady installed the latest ${igniteName}@${version}.`
-    )
+    chalk.cyan(`Congratulations! You've aleady installed the latest ${igniteName}@${version}.`)
   );
   setTimeStamp({
     time: new Date().toDateString(),
@@ -62,18 +60,8 @@ function installLatestIgnite(igniteName, latestVersion) {
     );
 }
 
-function cancelLatestIgnite(
-  version,
-  latestVersion,
-  type,
-  igniteCore,
-  showHint
-) {
-  logger.log(
-    chalk.cyan(
-      `You've cancelled the electrode-ignite@${latestVersion} installation.`
-    )
-  );
+function cancelLatestIgnite(version, latestVersion, type, igniteCore, showHint) {
+  logger.log(chalk.cyan(`You've cancelled the electrode-ignite@${latestVersion} installation.`));
   setTimeStamp({
     time: new Date().toDateString(),
     latestVersion: latestVersion
@@ -103,26 +91,10 @@ function invalidProceedOption(
   });
   rl.close();
 
-  return igniteOutdated(
-    type,
-    task,
-    latestVersion,
-    version,
-    igniteCore,
-    igniteName,
-    showHint
-  );
+  return igniteOutdated(type, task, latestVersion, version, igniteCore, igniteName, showHint);
 }
 
-function igniteOutdated(
-  type,
-  task,
-  latestVersion,
-  version,
-  igniteCore,
-  igniteName,
-  showHint
-) {
+function igniteOutdated(type, task, latestVersion, version, igniteCore, igniteName, showHint) {
   logger.log(
     chalk.cyan(
       `${igniteName} is about to update the following modules globally:\n- electrode-ignite (from version ${version} to version ${latestVersion})`
@@ -139,13 +111,7 @@ function igniteOutdated(
     if (answer.toLowerCase() === "y") {
       return installLatestIgnite(igniteName, latestVersion);
     } else if (answer.toLowerCase() === "n") {
-      return cancelLatestIgnite(
-        version,
-        latestVersion,
-        type,
-        igniteCore,
-        showHint
-      );
+      return cancelLatestIgnite(version, latestVersion, type, igniteCore, showHint);
     } else {
       return invalidProceedOption(
         type,
@@ -195,13 +161,7 @@ function checkIgniteVersion(type, igniteName, version, igniteCore, showHint) {
 
         /* Case 2: electrode-ignite latest version */
       } else if (versionComp === 0) {
-        igniteUpToDate(
-          type,
-          process.argv[2],
-          latestVersion,
-          igniteCore,
-          igniteName
-        );
+        igniteUpToDate(type, process.argv[2], latestVersion, igniteCore, igniteName);
         spinner.stop();
         return;
 
@@ -216,8 +176,7 @@ function checkIgniteVersion(type, igniteName, version, igniteCore, showHint) {
     .catch(err =>
       errorHandler(
         err,
-        `Invalid ${igniteName} in the npm registry.` +
-          ` Please report this to Electrode core team.`
+        `Invalid ${igniteName} in the npm registry.` + ` Please report this to Electrode core team.`
       )
     );
 }
@@ -244,13 +203,7 @@ function checkIgnite(type, igniteCore, igniteName, showHint, manual, version) {
   } else {
     return igniteDailyCheck().then(checkRet => {
       if (checkRet === "check") {
-        return checkIgniteRegistry(
-          type,
-          igniteCore,
-          igniteName,
-          showHint,
-          version
-        );
+        return checkIgniteRegistry(type, igniteCore, igniteName, showHint, version);
       } else {
         if (semverComp(version, checkRet.latestVersion) === 0) {
           logger.log(chalk.cyan(`Your ${igniteName} is up-to-date.`));

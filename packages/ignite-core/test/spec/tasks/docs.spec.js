@@ -37,9 +37,7 @@ describe("ignite-core:docs", function() {
     sinon.assert.callCount(loggerStub, 1);
     assert.equal(
       loggerStub.getCalls()[0].args.toString(),
-      chalk.green(
-        "You've successfully opened the oss gitbook. Please checkout your browser."
-      )
+      chalk.green("You've successfully opened the oss gitbook. Please checkout your browser.")
     );
   });
 
@@ -48,46 +46,34 @@ describe("ignite-core:docs", function() {
     printSucessLogs("oss", foo, false);
     assert.equal(
       loggerStub.getCalls()[0].args.toString(),
-      chalk.green(
-        "You've successfully opened the oss gitbook. Please checkout your browser."
-      )
+      chalk.green("You've successfully opened the oss gitbook. Please checkout your browser.")
     );
   });
 
   it("openDocs on mac platform", function() {
     const openDocs = docs.__get__("openDocs");
-    const originalPlatform = Object.getOwnPropertyDescriptor(
-      process,
-      "platform"
-    );
+    const originalPlatform = Object.getOwnPropertyDescriptor(process, "platform");
     Object.defineProperty(process, "platform", {
       value: "mac"
     });
     openDocs("git-book-url", "oss", null, false);
     assert.equal(
       loggerStub.getCalls()[0].args.toString(),
-      chalk.green(
-        "You've successfully opened the oss gitbook. Please checkout your browser."
-      )
+      chalk.green("You've successfully opened the oss gitbook. Please checkout your browser.")
     );
     Object.defineProperty(process, "platform", originalPlatform);
   });
 
   it("openDocs on windows platform", function(done) {
     const openDocs = docs.__get__("openDocs");
-    const originalPlatform = Object.getOwnPropertyDescriptor(
-      process,
-      "platform"
-    );
+    const originalPlatform = Object.getOwnPropertyDescriptor(process, "platform");
     Object.defineProperty(process, "platform", {
       value: "win32"
     });
     openDocs("git-book-url", "oss", null, false).then(function() {
       assert.equal(
         loggerStub.getCalls()[0].args.toString(),
-        chalk.green(
-          "You've successfully opened the oss gitbook. Please checkout your browser."
-        )
+        chalk.green("You've successfully opened the oss gitbook. Please checkout your browser.")
       );
       Object.defineProperty(process, "platform", originalPlatform);
       done();
@@ -98,9 +84,7 @@ describe("ignite-core:docs", function() {
     docs("wml", null, false);
     assert.equal(
       loggerStub.getCalls()[0].args.toString(),
-      chalk.green(
-        "You've successfully opened the oss gitbook. Please checkout your browser."
-      )
+      chalk.green("You've successfully opened the oss gitbook. Please checkout your browser.")
     );
   });
 
@@ -108,9 +92,7 @@ describe("ignite-core:docs", function() {
     docs("unknown", null, false);
     assert.equal(
       loggerStub.getCalls()[0].args.toString(),
-      chalk.red(
-        "Please provide a valid type"
-      )
+      chalk.red("Please provide a valid type")
     );
   });
 });
