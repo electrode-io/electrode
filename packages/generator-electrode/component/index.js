@@ -2,7 +2,7 @@
 
 var _ = require("lodash");
 var chalk = require("chalk");
-var yeoman = require("yeoman-generator");
+var Generator = require("yeoman-generator");
 var path = require("path");
 var extend = _.merge;
 var parseAuthor = require("parse-author");
@@ -11,9 +11,9 @@ var nodeFS = require("fs");
 
 const pkg = require("../package.json");
 
-var ReactComponentGenerator = yeoman.Base.extend({
-  constructor: function() {
-    yeoman.Base.apply(this, arguments);
+module.exports = class extends Generator {
+  constructor(args, options) {
+    super(args, options);
 
     this.isAddon = this.options.isAddon || false;
     if (!this.isAddon) {
@@ -24,9 +24,9 @@ var ReactComponentGenerator = yeoman.Base.extend({
     this.quotes = this.options.quotes;
     this.githubUrl = this.options.githubUrl || "https://github.com";
     this.optionOrPrompt = optionOrPrompt;
-  },
+  }
 
-  initializing: function() {
+  initializing() {
     //check if the command is being run from within an existing app
     if (this.fs.exists(this.destinationPath("package.json"))) {
       var appPkg = this.fs.readJSON(this.destinationPath("package.json"));
@@ -55,165 +55,233 @@ var ReactComponentGenerator = yeoman.Base.extend({
       this.props.developerName = info.name;
     }
     this.props.quoteType = this.quotes;
-  },
-  prompting: {
-    greeting: function() {
-      if (!this.isAddon) {
-        this.log(
-          "\n" +
-            chalk.bold.underline("Welcome to the Electrode Component Generator") +
-            "\n" +
-            "\nWe're going to set up a new " +
-            chalk.bold("Electrode") +
-            " component, ready for development with" +
-            "\n" +
-            chalk.bold("react, webpack, demo, electrode component archetype, and live-reload")
-        );
-      }
-    },
-    askFor: function() {
-      if (this.pkg.name || this.options.name) {
-        this.props.name = this.pkg.name || _.kebabCase(this.options.name);
-      }
-      if (this.options.componentName) {
-        this.props.componentName = this.options.componentName;
-      }
+  }
 
-      var prompts = [
-        {
-          type: "input",
-          name: "projectName",
-          message: "What is your Package/GitHub project name?",
-          default: "electrode-component",
-          when: !this.props.name
-        },
-        {
-          type: "input",
-          name: "packageName",
-          message: "What is the ClassName for your component?",
-          default: this.props.componentName || this.props.projectName,
-          when: !this.props.componentName
-        },
-        {
-          type: "input",
-          name: "packageName",
-          message: "What will be the npm package name?",
-          default: this.props.packageName
-        },
-        {
-          type: "input",
-          name: "packageGitHubOrg",
-          message: "What will be the GitHub organization username (e.g., 'walmartlabs')?",
-          default: this.props.packageGitHubOrg
-        },
-        {
-          type: "input",
-          name: "developerName",
-          message: "What is your name? (for copyright notice, etc.)",
-          default: this.props.developerName
-        },
-        {
-          type: "input",
-          name: "ghUser",
-          message: "What is your GitHub Username?",
-          default: this.props.developerName
-        },
-        {
-          type: "list",
-          name: "quoteType",
-          message: "Use double quotes or single quotes?",
-          choices: ['"', "'"],
-          default: '"',
-          when: !this.props.quoteType
-        },
-        {
-          type: "input",
-          name: "ghRepo",
-          message: "What is the name of the GitHub repo where this will be published?",
-          default: this.packageName
-        },
-        {
-          type: "confirm",
-          name: "createDirectory",
-          message: "Would you like to create a new directory for your project?",
-          default: true
-        }
-      ];
-      return this.optionOrPrompt(prompts).then(props => {
-        this.props = extend(this.props, props);
-        this.projectName = this.props.projectName.split(" ").map(_.toLower).join("");
-        this.packageName = this.props.projectName.split(" ").map(_.toLower).join("");
-        this.developerName = this.props.developerName;
-        this.quoteType = this.props.quoteType;
-        this.ghUser = this.props.ghUser;
-        this.ghRepo = this.props.ghRepo;
-        this.packageGitHubOrg = this.props.packageGitHubOrg;
-        this.createDirectory = this.props.createDirectory;
-        this.componentName = _.kebabCase(_.deburr(this.props.projectName))
-          .replace(/^\s+|\s+$/g, "")
-          .replace(/(^|[-_ ])+(.)/g, function(match, first, second) {
-            return second.toUpperCase();
-          });
-        this.currentYear = new Date().getFullYear();
-        if (this.props.createDirectory) {
-          var newRoot = this.destinationPath() + "/" + this.packageName;
-          this.destinationRoot(newRoot);
-        }
-        this.rootPath = this.isAddon ? "" : "packages/" + this.projectName + "/";
-      });
+  _askFor() {
+    if (this.pkg.name || this.options.name) {
+      this.props.name = this.pkg.name || _.kebabCase(this.options.name);
     }
-  },
 
-  writing: {
-    lernaStructure: function() {
+    if (this.options.componentName) {
+      this.props.componentName = this.options.componentName;
+    }
+
+    var prompts = [
+      {
+        type: "input",
+        name: "projectName",
+        message: "What is your Package/GitHub project name? (e.g., 'wysiwyg-component')",
+        default: "wysiwyg-component",
+        when: !this.props.name
+      },
+      {
+        type: "input",
+        name: "packageName",
+        message: "What is the ClassName for your component?",
+        default: this.props.componentName || this.props.projectName,
+        when: !this.props.componentName
+      },
+      {
+        type: "input",
+        name: "packageName",
+        message: "What will be the npm package name?",
+        default: this.props.packageName
+      },
+      {
+        type: "input",
+        name: "packageGitHubOrg",
+        message: "What will be the GitHub organization username (e.g., 'walmartlabs')?",
+        default: this.props.packageGitHubOrg
+      },
+      {
+        type: "input",
+        name: "developerName",
+        message: "What is your name? (for copyright notice, etc.)",
+        default: this.props.developerName
+      },
+      {
+        type: "input",
+        name: "ghUser",
+        message: "What is your GitHub Username?",
+        default: this.props.developerName
+      },
+      {
+        type: "list",
+        name: "quoteType",
+        message: "Use double quotes or single quotes?",
+        choices: ['"', "'"],
+        default: '"',
+        when: !this.props.quoteType
+      },
+      {
+        type: "input",
+        name: "ghRepo",
+        message: "What is the name of the GitHub repo where this will be published?",
+        default: this.packageName
+      },
+      {
+        type: "confirm",
+        name: "createDirectory",
+        message: "Would you like to create a new directory for your project?",
+        default: true
+      },
+      {
+        type: "confirm",
+        name: "yarn",
+        message: "Would you like to yarn install packages?",
+        when: !this.props.yarn,
+        default: false
+      }
+    ];
+
+    return this.optionOrPrompt(prompts).then(props => {
+      this.props = extend(this.props, props);
+      this.projectName = this.props.projectName.split(" ").map(_.toLower).join("");
+      this.packageName = this.props.projectName.split(" ").map(_.toLower).join("");
+      this.developerName = this.props.developerName;
+      this.quoteType = this.props.quoteType;
+      this.ghUser = this.props.ghUser;
+      this.ghRepo = this.props.ghRepo;
+      this.packageGitHubOrg = this.props.packageGitHubOrg;
+      this.createDirectory = this.props.createDirectory;
+      this.componentName = _.kebabCase(_.deburr(this.props.projectName))
+        .replace(/^\s+|\s+$/g, "")
+        .replace(/(^|[-_ ])+(.)/g, function(match, first, second) {
+          return second.toUpperCase();
+        });
+      this.currentYear = new Date().getFullYear();
+      if (this.props.createDirectory) {
+        var newRoot = this.destinationPath() + "/" + this.packageName;
+        this.destinationRoot(newRoot);
+      }
+      this.rootPath = this.isAddon ? "" : "packages/" + this.projectName + "/";
+    });
+  }
+
+  prompting() {
+    if (!this.isAddon) {
+      this.log(
+        "\n" +
+          chalk.bold.underline("Welcome to the Electrode Component Generator") +
+          "\n" +
+          "\nWe're going to set up a new " +
+          chalk.bold("Electrode") +
+          " component, ready for development with" +
+          "\n" +
+          chalk.bold("react, webpack, demo, electrode component archetype, and live-reload")
+      );
+    }
+
+    return this._askFor();
+  }
+
+  writing() {
+    lernaStructure: {
       // copy lerna and top level templates
       if (!this.isAddon) {
-        this.copy("gitignore", ".gitignore");
-        this.template("_package.json", "package.json");
-        this.template("_readme.md", "README.md");
-        this.template("lerna.json", "lerna.json");
+        this.fs.copyTpl(
+          this.templatePath("gitignore"), 
+          this.destinationPath(".gitignore"));
+
+        this.fs.copyTpl(this.templatePath("_package.json"), this.destinationPath("package.json"), {
+          projectName: this.projectName,
+          developerName: this.developerName,
+          githubUrl: this.githubUrl,
+          ghUser: this.ghUser,
+          packageGitHubOrg: this.packageGitHubOrg,
+          ghRepo: this.ghRepo
+        });
+
+        this.fs.copyTpl(this.templatePath("_readme.md"), this.destinationPath("README.md"), {
+          projectName: this.projectName
+        });
+        
+        this.fs.copyTpl(this.templatePath("lerna.json"), this.destinationPath("lerna.json"));
       }
-    },
-    project: function() {
-      this.copy("packages/component/babelrc", this.rootPath + ".babelrc");
-      this.copy("packages/component/gitignore", this.rootPath + ".gitignore");
-      this.copy("packages/component/npmignore", this.rootPath + ".npmignore");
-      this.copy("packages/component/editorconfig", this.rootPath + ".editorconfig");
+    }
+
+    project: {
+      this.fs.copy(
+        this.templatePath("packages/component/babelrc"),
+        this.destinationPath(".babelrc")
+      );
+      this.fs.copy(
+        this.templatePath("packages/component/gitignore"),
+        this.destinationPath(".gitignore")
+      );
+      this.fs.copy(
+        this.templatePath("packages/component/npmignore"),
+        this.destinationPath(".npmignore")
+      );
+      this.fs.copy(
+        this.templatePath("packages/component/editorconfig"),
+        this.destinationPath(".editorconfig")
+      );
+      this.fs.copy(
+        this.templatePath("packages/component/_xclap.js"),
+        this.destinationPath("xclap.js")
+      );
+      this.fs.copy(
+        this.templatePath("packages/component/_package.json"),
+        this.destinationPath("package.json")
+      );
+      this.fs.copyTpl(
+        this.templatePath("packages/component/_readme.md"),
+        this.destinationPath("README.md"),{
+          projectName: this.projectName,
+          packageName: this.projectName,
+          componentName: this.componentName,
+          developerName: this.developerName,
+          githubUrl: this.githubUrl,
+          ghUser: this.ghUser,
+          packageGitHubOrg: this.packageGitHubOrg,
+          ghRepo: this.ghRepo,
+          currentYear: this.currentYear
+        }
+      );
       if (this.quoteType === "'") {
-        this.template("packages/component/eslintrc", this.rootPath + ".eslintrc");
+        this.fs.copy(
+          this.templatePath("packages/component/eslintrc"),
+          this.destinationPath(".eslintrc")
+        );
       }
-      this.template("packages/component/_xclap.js", this.rootPath + "xclap.js");
-      this.template("packages/component/_package.json", this.rootPath + "package.json");
-      this.template("packages/component/_readme.md", this.rootPath + "README.md");
-    },
-    component: function() {
-      this.template(
-        "packages/component/src/components/_component.jsx",
-        this.rootPath + "src/components/" + this.projectName + ".jsx"
+    }
+
+    component: {
+      this.fs.copyTpl(
+        this.templatePath("packages/component/src/components/_component.jsx"),
+        this.destinationPath(this.rootPath + "src/components/" + this.projectName + ".jsx"),{
+          componentName: this.componentName,
+          projectName: this.projectName
+        }
       );
-      this.template(
-        "packages/component/src/components/_accordion.jsx",
-        this.rootPath + "src/components/accordion.jsx"
+      this.fs.copy(
+        this.templatePath("packages/component/src/components/_accordion.jsx"),
+        this.destinationPath(this.rootPath + "src/components/accordion.jsx")
       );
-      this.template(
-        "packages/component/src/styles/_component.css",
-        this.rootPath + "src/styles/" + this.projectName + ".css"
+      this.fs.copy(
+        this.templatePath("packages/component/src/styles/_component.css"),
+        this.destinationPath(this.rootPath + "src/styles/" + this.projectName + ".css")
       );
-      this.template(
-        "packages/component/src/styles/_accordion.css",
-        this.rootPath + "src/styles/accordion.css"
+      this.fs.copy(
+        this.templatePath("packages/component/src/styles/_accordion.css"),
+        this.destinationPath(this.rootPath + "src/styles/accordion.css")
       );
 
       // demo folder files
-      this.template(
-        "packages/component/demo-examples/_component.example",
-        this.rootPath + "demo/examples/" + this.projectName + ".example"
+      this.fs.copyTpl(
+        this.templatePath("packages/component/demo-examples/_component.example"),
+        this.destinationPath(this.rootPath + "demo/examples/" + this.projectName + ".example"),{
+          componentName: this.componentName
+        }
       );
+
       this.fs.copyTpl(
         this.templatePath("packages/component/demo/"),
         this.destinationPath((this.isAddon ? "../" : "packages/") + this.projectName + "/demo"),
         { packageName: this.projectName }
       );
+
       this.fs.copyTpl(
         this.templatePath("packages/component/_components.md"),
         this.destinationPath(
@@ -223,34 +291,65 @@ var ReactComponentGenerator = yeoman.Base.extend({
       );
 
       // l10n language templates
-      this.template(
-        "packages/component/src/lang/_DefaultMessages.js",
-        this.rootPath + "src/lang/default-messages.js"
-      );
-      this.template("packages/component/src/lang/_en.json", this.rootPath + "src/lang/en.json");
-      this.template(
-        "packages/component/src/lang/tenants/electrodeio/_defaultMessages.js",
-        this.rootPath + "src/lang/tenants/electrodeio/default-messages.js"
+      this.fs.copyTpl(
+        this.templatePath("packages/component/src/lang/_DefaultMessages.js"),
+        this.destinationPath(this.rootPath + "src/lang/default-messages.js"),{
+          componentName: this.componentName
+        }
       );
 
-      this.template("packages/component/src/_Component.js", this.rootPath + "src/index.js");
-    },
-    test: function() {
-      this.template(
-        "packages/component/test/client/eslintrc",
-        this.rootPath + "test/client/.eslintrc"
+      this.fs.copyTpl(
+        this.templatePath("packages/component/src/lang/_en.json"),
+        this.destinationPath(this.rootPath + "src/lang/en.json"),{
+          componentName: this.componentName
+        }
       );
-      this.template(
-        "packages/component/test/client/components/_component.spec.jsx",
-        this.rootPath + "test/client/components/" + this.projectName + ".spec.jsx"
-      );
-      this.copy(
-        "packages/component/test/client/components/helpers/_intlEnzymeTestHelper.js",
-        this.rootPath + "test/client/components/helpers/intl-enzyme-test-helper.js"
-      );
-    },
 
-    demoApp: function() {
+      this.fs.copyTpl(
+        this.templatePath("packages/component/src/lang/tenants/electrodeio/_defaultMessages.js"),
+        this.destinationPath(this.rootPath + "src/lang/tenants/electrodeio/default-messages.js"),{
+          componentName: this.componentName
+        }
+      );
+
+      this.fs.copyTpl(
+        this.templatePath("packages/component/src/_Component.js"),
+        this.destinationPath(this.rootPath + "src/index.js"),{
+          componentName: this.componentName,
+          projectName: this.projectName
+        }
+      );
+    }
+
+    test: {
+      this.fs.copyTpl(
+        this.templatePath("packages/component/test/client/eslintrc"),
+        this.destinationPath(this.rootPath + "test/client/.eslintrc"),{
+          quoteType: this.quoteType
+        }
+      );
+
+      this.fs.copyTpl(
+        this.templatePath("packages/component/test/client/components/_component.spec.jsx"),
+        this.destinationPath(
+          this.rootPath + "test/client/components/" + this.projectName + ".spec.jsx"
+        ),{
+          componentName: this.componentName,
+          projectName: this.projectName
+        }
+      );
+
+      this.fs.copy(
+        this.templatePath(
+          "packages/component/test/client/components/helpers/_intlEnzymeTestHelper.js"
+        ),
+        this.destinationPath(
+          this.rootPath + "test/client/components/helpers/intl-enzyme-test-helper.js"
+        )
+      );
+    }
+
+    demoApp: {
       //Do not generate the demo app if called from the add on generator
       this.originalDemoAppName = "demo-app";
       if (!this.isAddon) {
@@ -281,13 +380,7 @@ var ReactComponentGenerator = yeoman.Base.extend({
         this.oldRoot = this.destinationRoot();
         var newRoot = this.destinationPath() + "/" + this.originalDemoAppName;
         this.destinationRoot(newRoot);
-        this.composeWith(
-          "electrode:app",
-          { options },
-          {
-            local: require.resolve("../generators/app")
-          }
-        );
+        this.composeWith(require.resolve("../generators/app"), options);
 
         const packageName = this.packageName;
         const className = this.props.className;
@@ -318,9 +411,9 @@ var ReactComponentGenerator = yeoman.Base.extend({
         );
       }
     }
-  },
+  }
 
-  install: function() {
+  install() {
     //git init and npmi for lerna lernaStructure
     if (!this.isAddon) {
       //reset the path to the actual root
@@ -330,9 +423,15 @@ var ReactComponentGenerator = yeoman.Base.extend({
       this.spawnCommandSync("git", ["init"], {
         cwd: this.destinationPath()
       });
-      this.spawnCommandSync("npm", ["install"], {
-        cwd: this.destinationPath()
-      });
+      if (this.props.yarn) {
+        this.spawnCommandSync("yarn", ["install"], {
+          cwd: this.destinationPath()
+        });
+      } else {
+        this.spawnCommandSync("npm", ["install"], {
+          cwd: this.destinationPath()
+        });
+      }
     }
 
     //install the dependencies for the package
@@ -342,21 +441,33 @@ var ReactComponentGenerator = yeoman.Base.extend({
 
     this.destinationRoot(packageDirectory);
 
-    this.spawnCommandSync("npm", ["install"], {
-      cwd: this.destinationPath()
-    });
+    if (this.props.yarn) {
+        this.spawnCommandSync("yarn", ["install"], {
+          cwd: this.destinationPath()
+        });
+      } else {
+        this.spawnCommandSync("npm", ["install"], {
+          cwd: this.destinationPath()
+        });
+      }
 
     //install demo-app dependencies
     let demoDirectory = this.isAddon
       ? this.destinationPath("../../" + this.originalDemoAppName)
       : this.oldRoot + "/" + this.originalDemoAppName;
     this.destinationRoot(demoDirectory);
-    this.spawnCommandSync("npm", ["install"], {
-      cwd: this.destinationPath()
-    });
-  },
+    if (this.props.yarn) {
+        this.spawnCommandSync("yarn", ["install"], {
+          cwd: this.destinationPath()
+        });
+      } else {
+        this.spawnCommandSync("npm", ["install"], {
+          cwd: this.destinationPath()
+        });
+      }
+  }
 
-  end: function() {
+  end() {
     if (this.quoteType === "'") {
       this.spawnCommandSync("node_modules/.bin/eslint", [
         "--fix",
@@ -392,6 +503,4 @@ var ReactComponentGenerator = yeoman.Base.extend({
       );
     }
   }
-});
-
-module.exports = ReactComponentGenerator;
+};
