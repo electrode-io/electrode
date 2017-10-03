@@ -6,7 +6,6 @@
  * To start your own app, please replace or remove these files:
  *
  * - this file (home.jsx)
- * - demo-code-splitting.jsx
  * - demo-buttons.jsx
  * - demo-pure-states.jsx
  * - demo-states.jsx
@@ -16,8 +15,6 @@
  */
 
 import React from "react";
-import PropTypes from "prop-types";
-import { Link } from "react-router";
 import "../styles/normalize.css";
 import "../styles/raleway.css";
 import skeleton from "../styles/skeleton.css";
@@ -30,48 +27,28 @@ import { DemoButtons } from "./demo-buttons";
 import Notifications from "react-notify-toast";
 /*<% } %>*/
 
-const Home = props => {
-  const {children} = props;
+export default () =>
+  <div className={custom.container}>
+    {/*<% if (pwa) { %>*/}
+    <Notifications />
+    {/*<% } %>*/}
 
-  return (
-    <div className={custom.container}>
-      {/*<% if (pwa) { %>*/}
-        <Notifications />
-      {/*<% } %>*/}
+    <section className={custom.header}>
+      <h2 className={skeleton.title}>
+        Hello from {" "}
+        <a href="https://github.com/electrode-io">{"Electrode"} <img src={electrodePng} /></a>
+      </h2>
+    </section>
 
-      <section className={custom.header}>
-        <h2 className={skeleton.title}>
-          Hello from {" "}
-          <a href="https://github.com/electrode-io">{"Electrode"} <img
-            src={electrodePng}/></a>
-        </h2>
-      </section>
-
-      <div className={custom["docs-section"]}>
-        <DemoStates/>
-      </div>
-
-      <div className={custom["docs-section"]}>
-        <DemoPureStates/>
-      </div>
-
-      <div className={custom["docs-section"]}>
-        <DemoButtons/>
-      </div>
-
-      <div className={custom["docs-section"]}>
-        <h6 className={custom["docs-header"]}>
-          Demo Code Splitting <Link to="/splitting">Load Here</Link>
-        </h6>
-
-        {children}
-      </div>
+    <div className={custom["docs-section"]}>
+      <DemoStates />
     </div>
-  );
-};
 
-Home.propTypes = {
-  children: PropTypes.node
-};
+    <div className={custom["docs-section"]}>
+      <DemoPureStates />
+    </div>
 
-export default Home;
+    <div className={custom["docs-section"]}>
+      <DemoButtons />
+    </div>
+  </div>;

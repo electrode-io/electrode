@@ -410,7 +410,7 @@ Individual .babelrc files were generated for you in src/client and src/server
       desc: false,
       dep: [".clean.lib:client", ".mk.lib.client.dir", ".build.client.babelrc"],
       task: mkCmd(
-        `babel --plugins dynamic-import-node`,
+        `babel`,
         `--source-maps=inline --copy-files --out-dir ${AppMode.lib.client}`,
         `${AppMode.src.client}`
       )
@@ -572,7 +572,7 @@ Individual .babelrc files were generated for you in src/client and src/server
           .map(n => `--watch ${n}`)
           .join(" ");
         AppMode.setEnv(AppMode.src.dir);
-        const node = AppMode.isSrc ? `babel-node --plugins dynamic-import-node` : "node";
+        const node = AppMode.isSrc ? `babel-node` : "node";
         const serverIndex = Path.join(AppMode.src.server, "index.js");
         return exec(
           `nodemon`,
