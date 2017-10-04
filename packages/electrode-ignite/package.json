@@ -34,13 +34,14 @@
     "chalk": "^2.0.1",
     "generator-electrode": "^3.2.0",
     "ignite-core": "^0.1.0",
+    "opn": "^5.1.0",
     "yo": "^2.0.0"
   },
   "homepage": "http://www.electrode.io",
   "devDependencies": {
-    "assert": "^1.4.1",
     "electrode-archetype-njs-module-dev": "^2.3.0",
-    "sinon": "^3.2.1"
+    "mock-require": "^2.0.2",
+    "sinon": "^2.0.0"
   },
   "nyc": {
     "all": true,
@@ -54,7 +55,9 @@
       "*clap.js",
       "gulpfile.js",
       "dist",
-      "test"
+      "test",
+      "bin",
+      "cli"
     ]
   }
 }
