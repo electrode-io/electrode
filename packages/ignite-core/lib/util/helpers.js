@@ -84,5 +84,18 @@ module.exports = Object.assign(Lib, {
     logger.log(chalk.red(`npm install failed, output from ${chalk.cyan("stderr")}:`));
     const stderr = _.get(err, "output.stderr", "").replace(/ERR!/g, chalk.red("ERR!"));
     console.log(stderr);
+  },
+
+  showManualInstallMsg: function(err, data) {
+    const globally = data.isGlobal ? " globally" : "";
+    const flags = data.isGlobal ? "-g" : "";
+    const dispName = chalk.green(data.name);
+    const dispVer = chalk.magenta(data.version);
+
+    logger.log(`Unable to install ${dispName}@${dispVer}${globally}.  See above for npm output.`);
+    logger.log(`Error: ${chalk.red(err.message)}`);
+    (data.msgs || []).forEach(m => logger.log(m));
+    logger.log("Please install it manually.  The command is:");
+    logger.log(chalk.magenta(`npm install ${flags} ${data.name}@${data.version}`));
   }
 });

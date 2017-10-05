@@ -25,8 +25,6 @@ npm ERR!     C:\Users\test\dev\npm-debug.log
 
 */
 
-"use strict";
-
 const { showNpmErr } = require("../../../lib/util/helpers");
 const expect = require("chai").expect;
 const chalk = require("chalk");
