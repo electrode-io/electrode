@@ -11,17 +11,15 @@ const Lib = {};
 module.exports = Object.assign(Lib, {
   platform: {
     win32: function win32(name) {
-      const yoPath = Path.join(__dirname, "..", "..", ".bin", "yo.cmd");
+      const yoPath = Path.join(__dirname, "..", "node_modules", ".bin", "yo.cmd");
+
       return childProcess.spawn("cmd", ["/c", `${yoPath} ${name}`], {
         stdio: "inherit"
       });
     },
 
     posix: function posix(name) {
-      const yoPath = [
-        Path.join(__dirname, "..", "node_modules", ".bin", "yo"),
-        Path.join(__dirname, "..", "..", ".bin", "yo")
-      ].find(x => Fs.existsSync(x));
+      const yoPath = Path.join(__dirname, "..", "node_modules", ".bin", "yo");
 
       return childProcess.spawn(yoPath, [name], {
         stdio: "inherit"
