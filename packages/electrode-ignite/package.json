@@ -1,6 +1,6 @@
 {
   "name": "electrode-ignite",
-  "version": "0.1.8",
+  "version": "0.1.10",
   "description": "The CLI tool for development with OSS Electrode React/NodeJS Platform.",
   "main": "bin/ignite.js",
   "scripts": {
@@ -31,6 +31,7 @@
     "url": "https://github.com/electrode-io/electrode/issues"
   },
   "dependencies": {
+    "bluebird": "^3.5.1",
     "chalk": "^2.0.1",
     "generator-electrode": "^3.2.0",
     "ignite-core": "^0.1.0",

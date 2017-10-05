@@ -136,3 +136,10 @@ node_modules
 .node_repl_history
 
 .tmp
+
+.npmignore
+xclap.js
+.nyc_output
+/test
+latest_check_electrode-ignite.json
+

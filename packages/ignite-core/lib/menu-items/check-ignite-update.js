@@ -16,7 +16,7 @@ module.exports = function(name) {
   const dispName = chalk.green(name);
   const spinner = helpers.makeSpinner(`checking latest version of ${dispName}`);
 
-  function execute() {
+  function execute(options) {
     executed = true;
     spinner.start();
     return Promise.all([checkModule.globalInstalled(name), checkModule.latest(name)])
@@ -28,7 +28,11 @@ module.exports = function(name) {
         if (checkModule.isNewVersion(versions[0], versions[1])) {
           const msg = `Update ${dispName} from version ${iversion} to ${version}`;
           return helpers.yesNoPrompt(msg).then(yes => {
-            return yes && helpers.installNpm(name, versions[1], true);
+            if (!yes) return undefined;
+            return helpers.installNpm(name, versions[1], true).then(() => {
+              logger.log(`Please restart ${dispName} for the new version.`);
+              options.menu.emit("exit");
+            });
           });
         } else {
           logger.log(`Your version ${version} of ${dispName} is already the latest.`, "\n");
