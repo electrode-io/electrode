@@ -25,19 +25,30 @@ module.exports = function(name) {
         spinner.stop();
         const iversion = chalk.magenta(versions[0]);
         const version = chalk.magenta(versions[1]);
-        if (checkModule.isNewVersion(versions[0], versions[1])) {
-          const msg = `Update ${dispName} from version ${iversion} to ${version}`;
-          return helpers.yesNoPrompt(msg).then(yes => {
-            if (!yes) return undefined;
-            return helpers.installNpm(name, versions[1], true).then(() => {
-              logger.log(`Please restart ${dispName} for the new version.`);
-              options.menu.emit("exit");
-            });
-          });
-        } else {
-          logger.log(`Your version ${version} of ${dispName} is already the latest.`, "\n");
+        if (!checkModule.isNewVersion(versions[0], versions[1])) {
+          return logger.log(`Your version ${version} of ${dispName} is already the latest.`, "\n");
         }
-        return undefined;
+        const msg = `Update ${dispName} from version ${iversion} to ${version}`;
+        return helpers.yesNoPrompt(msg).then(yes => {
+          if (!yes) return undefined;
+          return helpers
+            .npmInstall(name, versions[1], true)
+            .then(() => {
+              logger.log(`Please restart ${dispName} for the new version.`);
+            })
+            .catch(err => {
+              logger.log(
+                `Unable to install ${dispName}@${version} globally.  See above for npm output.`
+              );
+              logger.log(`Error: ${chalk.red(err.message)}`);
+              logger.log(
+                "This may be due to your system not allowing it to be updated while it's running."
+              );
+              logger.log("Please install it manually.  The command is:");
+              logger.log(chalk.magenta(`npm install -g ${name}@${version}`));
+            })
+            .finally(() => options.menu.emit("exit"));
+        });
       })
       .finally(() => spinner.stop());
   }

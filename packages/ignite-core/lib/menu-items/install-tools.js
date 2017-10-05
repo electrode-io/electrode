@@ -20,7 +20,7 @@ module.exports = function() {
         const newV = chalk.magenta(v[1]);
         if (checkModule.isNewVersion(v[0], v[1])) {
           return helpers.yesNoPrompt(`Update ${name} to version ${newV}`).then(yes => {
-            return yes && helpers.installNpm(mod, v[1], true);
+            return yes && helpers.npmInstall(mod, v[1], true);
           });
         } else {
           return logger.log(

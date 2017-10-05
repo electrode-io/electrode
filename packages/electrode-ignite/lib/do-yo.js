@@ -4,7 +4,6 @@ const Path = require("path");
 const childProcess = require("child_process");
 const { logger } = require("ignite-core");
 const _ = require("lodash");
-const Fs = require("fs");
 
 const Lib = {};
 

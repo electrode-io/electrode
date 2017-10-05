@@ -43,12 +43,12 @@ describe("menu-item check-ignite-update", function() {
       expect(n).to.equal(name);
       return latestVersion;
     });
-    stubs.installNpmStub = sinon.stub(helpers, "installNpm").returns(Promise.resolve());
+    stubs.npmInstallStub = sinon.stub(helpers, "npmInstall").returns(Promise.resolve());
     stubs.restore = () => {
       stubs.globalInstalledStub.restore();
       stubs.latestOnceDailyStub.restore();
       stubs.latestStub.restore();
-      stubs.installNpmStub.restore();
+      stubs.npmInstallStub.restore();
     };
     return stubs;
   };
@@ -135,7 +135,7 @@ describe("menu-item check-ignite-update", function() {
         .then(() => {
           stubs.restore();
           yesNoStub.restore();
-          expect(stubs.installNpmStub.args).to.deep.equal([["electrode-ignite", "1.0.1", true]]);
+          expect(stubs.npmInstallStub.args).to.deep.equal([["electrode-ignite", "1.0.1", true]]);
           expect(yesNoStub.question).to.equal(
             "Update electrode-ignite from version 1.0.0 to 1.0.1"
           );
