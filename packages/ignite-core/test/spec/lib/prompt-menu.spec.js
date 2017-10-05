@@ -11,18 +11,25 @@ const chalk = require("chalk");
 chalk.enabled = false;
 
 describe("prompt-menu", function() {
-  let answers;
   let rlStub;
   let closed;
+  let prompted;
+  let answers;
   const rl = {
-    question: (q, cb) => {
-      const x = answers.pop();
-      setTimeout(() => cb(x), 1);
-    },
-    close: () => closed++
+    on: (evt, cb) => (rl[evt] = cb),
+    prompt: () => prompted++,
+    close: () => closed++,
+    emit: (evt, data) => rl[evt](data)
   };
 
+  function fakeWaitInput() {
+    expect(answers).to.be.not.empty;
+    this._waitInput();
+    this.rl.emit("line", answers.pop());
+  }
+
   beforeEach(() => {
+    prompted = 0;
     closed = 0;
     rlStub = sinon.stub(readline, "createInterface").callsFake(() => rl);
   });
@@ -37,18 +44,43 @@ describe("prompt-menu", function() {
     expect(pm._exitCb).to.equal(process.exit);
   });
 
-  it("should listen to events done, skip_prompt, prompt", () => {
-    let prompted;
+  it("should listen to events done, skip_prompt, refresh_prompt", () => {
+    let refreshed;
     const pm = new PromptMenu({});
-    pm.prompt = () => (prompted = true);
+    pm.refreshPrompt = () => (refreshed = true);
     expect(Boolean(pm._exit)).to.equal(false);
     pm.emit("done");
     expect(pm._exit).to.equal(true);
     expect(Boolean(pm._skipPrompt)).to.equal(false);
     pm.emit("skip_prompt");
     expect(pm._skipPrompt).to.equal(true);
-    pm.emit("prompt");
-    expect(prompted).to.equal(true);
+    pm.emit("refresh_prompt");
+    expect(refreshed).to.equal(true);
+  });
+
+  it("refreshPrompt should call rl.prompt if it exist", () => {
+    let called = false;
+    const pm = new PromptMenu({});
+    pm._idle = true;
+    pm.rl = { prompt: () => (called = true) };
+    pm.refreshPrompt();
+    expect(called).to.equal(true);
+  });
+
+  it("refreshPrompt should not call rl.prompt if it doesn't exist", () => {
+    const pm = new PromptMenu({});
+    pm.refreshPrompt();
+  });
+
+  it("refreshPrompt should not call rl.prompt if not idle", () => {
+    const pm = new PromptMenu({});
+    pm._idle = false;
+    pm.rl = {
+      prompt: () => {
+        throw new Error("call not expected");
+      }
+    };
+    pm.emit("refresh_prompt");
   });
 
   it("runMenuItem should emit pre and post execute events", () => {
@@ -114,7 +146,6 @@ describe("prompt-menu", function() {
       execute: _.noop
     });
     mi2.on("pre_show", options => options.menu.emit("skip_prompt"));
-    answers = ["X", "1", "2", ""];
     const pm = new PromptMenu({
       title: "menu title",
       menu: [mi1, mi2],
@@ -170,6 +201,7 @@ describe("prompt-menu", function() {
       "You choose!1"
     ];
     answers = ["X", "1", "2", ""];
+    let waitInputStub = false;
     const pm = new PromptMenu({
       title: "menu title",
       menu: [mi1, mi2],
@@ -177,11 +209,14 @@ describe("prompt-menu", function() {
         out.push(Array.prototype.slice.apply(arguments).join("!"));
       },
       exitCb: () => {
+        waitInputStub.restore();
         expect(exited).to.equal(true);
         expect(out).to.deep.equal(expectOut);
         done();
       }
     });
+    pm._waitInput = pm.waitInput;
+    waitInputStub = sinon.stub(pm, "waitInput").callsFake(fakeWaitInput);
     pm._idle = true;
     pm.emit("refresh");
   });

@@ -16,24 +16,38 @@ module.exports = function(name) {
   const dispName = chalk.green(name);
   const spinner = helpers.makeSpinner(`checking latest version of ${dispName}`);
 
-  function execute() {
+  function execute(options) {
     executed = true;
     spinner.start();
     return Promise.all([checkModule.globalInstalled(name), checkModule.latest(name)])
-      .then(v => {
-        versions = v;
+      .then(ver => {
+        versions = ver;
         spinner.stop();
-        const iversion = chalk.magenta(versions[0]);
-        const version = chalk.magenta(versions[1]);
-        if (checkModule.isNewVersion(versions[0], versions[1])) {
-          const msg = `Update ${dispName} from version ${iversion} to ${version}`;
-          return helpers.yesNoPrompt(msg).then(yes => {
-            return yes && helpers.installNpm(name, versions[1], true);
-          });
-        } else {
-          logger.log(`Your version ${version} of ${dispName} is already the latest.`, "\n");
+        const iversion = chalk.magenta(ver[0]);
+        const version = chalk.magenta(ver[1]);
+        if (!checkModule.isNewVersion(ver[0], ver[1])) {
+          return logger.log(`Your version ${version} of ${dispName} is already the latest.`, "\n");
         }
-        return undefined;
+        const msg = `Update ${dispName} from version ${iversion} to ${version}`;
+        return helpers.yesNoPrompt(msg).then(yes => {
+          if (!yes) return undefined;
+          return helpers
+            .npmInstall(name, ver[1], true)
+            .then(() => {
+              logger.log(`Please restart ${dispName} for the new version.`);
+            })
+            .catch(err => {
+              const m =
+                "This may be due to your system not allowing it to be updated while it's running.";
+              helpers.showManualInstallMsg(err, {
+                name,
+                version: ver[1],
+                isGlobal: true,
+                msgs: [chalk.yellow(m)]
+              });
+            })
+            .finally(() => options.menu.emit("exit"));
+        });
       })
       .finally(() => spinner.stop());
   }
@@ -58,7 +72,7 @@ module.exports = function(name) {
               `Pick option ${mi.index} to update.`,
             "\n"
           );
-          options.menu.emit("prompt");
+          options.menu.emit("refresh_prompt");
         }
       });
     }, 1);

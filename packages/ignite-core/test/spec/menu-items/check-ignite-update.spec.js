@@ -7,6 +7,7 @@ const helpers = require("../../../lib/util/helpers");
 const expect = require("chai").expect;
 const sinon = require("sinon");
 const _ = require("lodash");
+const Promise = require("bluebird");
 const chalk = require("chalk");
 chalk.enabled = false;
 
@@ -42,12 +43,12 @@ describe("menu-item check-ignite-update", function() {
       expect(n).to.equal(name);
       return latestVersion;
     });
-    stubs.installNpmStub = sinon.stub(helpers, "installNpm");
+    stubs.npmInstallStub = sinon.stub(helpers, "npmInstall").returns(Promise.resolve());
     stubs.restore = () => {
       stubs.globalInstalledStub.restore();
       stubs.latestOnceDailyStub.restore();
       stubs.latestStub.restore();
-      stubs.installNpmStub.restore();
+      stubs.npmInstallStub.restore();
     };
     return stubs;
   };
@@ -122,14 +123,24 @@ describe("menu-item check-ignite-update", function() {
     it("should prompt user to update if version is older than latest", () => {
       const stubs = makeStubs(undefined, "1.0.0", "1.0.1");
       const yesNoStub = makeYesNoStub(true);
+      let event;
       logs = [];
       const mi = checkIgniteUpdate();
-      return mi.execute().then(() => {
-        stubs.restore();
-        yesNoStub.restore();
-        expect(stubs.installNpmStub.args).to.deep.equal([["electrode-ignite", "1.0.1", true]]);
-        expect(yesNoStub.question).to.equal("Update electrode-ignite from version 1.0.0 to 1.0.1");
-      });
+      return mi
+        .execute({
+          menu: {
+            emit: evt => (event = evt)
+          }
+        })
+        .then(() => {
+          stubs.restore();
+          yesNoStub.restore();
+          expect(stubs.npmInstallStub.args).to.deep.equal([["electrode-ignite", "1.0.1", true]]);
+          expect(yesNoStub.question).to.equal(
+            "Update electrode-ignite from version 1.0.0 to 1.0.1"
+          );
+          expect(event).to.equal("exit");
+        });
     });
 
     it("should not update if user answer no", () => {

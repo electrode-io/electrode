@@ -47,9 +47,7 @@ class PromptMenu extends EventEmitter {
       this._skipPrompt = true;
     });
 
-    this.on("prompt", () => {
-      this.prompt();
-    });
+    this.on("refresh_prompt", () => this.refreshPrompt());
   }
 
   getRL() {
@@ -58,7 +56,8 @@ class PromptMenu extends EventEmitter {
     }
     this.rl = readline.createInterface({
       input: process.stdin,
-      output: process.stdout
+      output: process.stdout,
+      prompt: "Please select your option: "
     });
     return this.rl;
   }
@@ -70,8 +69,14 @@ class PromptMenu extends EventEmitter {
     }
   }
 
-  prompt() {
-    this.getRL().question("Please select your option: ", answer => {
+  refreshPrompt() {
+    if (this.rl && this._idle) this.rl.prompt(true);
+  }
+
+  waitInput() {
+    const rl = this.getRL();
+    rl.prompt();
+    rl.on("line", answer => {
       this._output("You choose", answer);
       this.closeRL();
       const choice = parseInt(answer);
@@ -108,7 +113,7 @@ class PromptMenu extends EventEmitter {
 
     this._idle = true;
 
-    this.prompt();
+    this.waitInput();
 
     _.each(this._menu, mi => {
       mi.emit("post_show", { menu: this });

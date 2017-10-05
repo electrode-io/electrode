@@ -20,7 +20,7 @@ module.exports = Object.assign(Lib, {
   globalInstalled: function(name) {
     return xsh
       .exec(true, `npm ls -g -j -loglevel silent --depth=0 ${name}`)
-      .then(ret => JSON.parse(ret.stdout).dependencies[name].version)
+      .then(ret => _.get(JSON.parse(ret.stdout), ["dependencies", name, "version"], "-"))
       .catch(err => {
         const out = _.get(err, "output.stdout", "").trim();
         if (out === "{}") return "0.0.0";

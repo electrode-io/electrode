@@ -1,6 +1,6 @@
 "use strict";
 
-const installNpm = require("../../../lib/util/helpers").installNpm;
+const npmInstall = require("../../../lib/util/helpers").npmInstall;
 const expect = require("chai").expect;
 
 // TODO: add more tests
@@ -8,6 +8,6 @@ const expect = require("chai").expect;
 describe("make-spinner", function() {
   it("should install globally if flag is true", () => {
     // TODO
-    expect(installNpm).to.exist;
+    expect(npmInstall).to.exist;
   });
 });

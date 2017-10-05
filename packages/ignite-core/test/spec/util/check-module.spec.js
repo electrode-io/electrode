@@ -12,7 +12,9 @@ describe("check-module", function() {
   this.timeout(10000);
   describe("globalInstalled", function() {
     it("should find version of npm", () => {
-      return checkModule.globalInstalled("npm").then(version => {
+      // can't determine npm version with npm ls on windows
+      const name = process.platform === "win32" ? "" : "npm";
+      return checkModule.globalInstalled(name).then(version => {
         expect(version).to.be.not.empty;
         expect(version).to.not.equal("0.0.0");
       });
