@@ -77,12 +77,14 @@ class PromptMenu extends EventEmitter {
     const rl = this.getRL();
     rl.prompt();
     rl.on("line", answer => {
-      this._output("You choose", answer);
       this.closeRL();
+      answer = answer.trim();
       const choice = parseInt(answer);
       if (choice >= 1 && choice <= this._menu.length) {
+        this._output("You chose", answer);
         this.runMenuItem(this._menu[choice - 1]);
       } else {
+        logger.log(`Invalid input ${answer}.  Please pick from 1 to ${this._menu.length}`);
         this.show();
       }
     });
@@ -152,14 +154,22 @@ class PromptMenu extends EventEmitter {
       ? helpers.makeSpinner(item.spinnerTitle)
       : { start: _.noop, stop: _.noop };
 
+    const show = () => {
+      if (!this._exit && !this._clap) {
+        this.show();
+      }
+    };
+
     spinner.start();
     item.emit("pre_execute");
     return Promise.try(() => item.execute({ menu: this }))
       .then(() => {
         spinner.stop();
         item.emit("post_execute");
-        if (!this._exit && !this._clap) {
-          this.show();
+        if (item.noPause) {
+          show();
+        } else if (!this._clap) {
+          helpers.pausePrompt().then(show);
         }
       })
       .finally(() => spinner.stop());

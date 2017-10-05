@@ -85,7 +85,7 @@ describe("prompt-menu", function() {
 
   it("runMenuItem should emit pre and post execute events", () => {
     const pm = new PromptMenu({});
-    const mi = new MenuItem({ execute: _.noop });
+    const mi = new MenuItem({ execute: _.noop, noPause: true });
     let pre;
     let post;
     mi.on("pre_execute", () => {
@@ -117,7 +117,7 @@ describe("prompt-menu", function() {
       };
     });
     const pm = new PromptMenu({});
-    const mi = new MenuItem({ execute: _.noop, spinnerTitle: "test spinner" });
+    const mi = new MenuItem({ execute: _.noop, spinnerTitle: "test spinner", noPause: true });
     pm.show = () => {
       makeSpinnerStub.restore();
       expect(start).to.equal(1);
@@ -139,11 +139,13 @@ describe("prompt-menu", function() {
     const mi1 = new MenuItem({
       icon: "@",
       menuText: "item 1",
-      execute: _.noop
+      execute: _.noop,
+      noPause: true
     });
     const mi2 = new MenuItem({
       menuText: "item 2",
-      execute: _.noop
+      execute: _.noop,
+      noPause: true
     });
     mi2.on("pre_show", options => options.menu.emit("skip_prompt"));
     const pm = new PromptMenu({
@@ -167,13 +169,15 @@ describe("prompt-menu", function() {
         exited = true;
         options.menu.emit("exit");
         return Promise.resolve().delay(150);
-      }
+      },
+      noPause: true
     });
     const mi2 = new MenuItem({
       menuText: "item 2",
       execute: options => {
         options.menu.emit("refresh");
-      }
+      },
+      noPause: true
     });
 
     const expectOut = [
@@ -184,21 +188,20 @@ describe("prompt-menu", function() {
       "[1] @ item 1",
       "[2]  item 2",
       "---------------------------------------------------------",
-      "You choose!",
       "---------------------------------------------------------",
       "menu title",
       "---------------------------------------------------------",
       "[1] @ item 1",
       "[2]  item 2",
       "---------------------------------------------------------",
-      "You choose!2",
+      "You chose!2",
       "---------------------------------------------------------",
       "menu title",
       "---------------------------------------------------------",
       "[1] @ item 1",
       "[2]  item 2",
       "---------------------------------------------------------",
-      "You choose!1"
+      "You chose!1"
     ];
     answers = ["X", "1", "2", ""];
     let waitInputStub = false;
@@ -227,11 +230,13 @@ describe("prompt-menu", function() {
       cliCmd: "mi1",
       icon: "@",
       menuText: "item 1",
-      execute: () => (executed = true)
+      execute: () => (executed = true),
+      noPause: true
     });
     const mi2 = new MenuItem({
       menuText: "item 2",
-      execute: _.noop
+      execute: _.noop,
+      noPause: true
     });
     const pm = new PromptMenu({
       title: "menu title",

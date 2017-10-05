@@ -40,6 +40,19 @@ module.exports = Object.assign(Lib, {
     });
   },
 
+  pausePrompt: function() {
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout
+    });
+    return new Promise(resolve => {
+      rl.question("Press enter to continue ...", () => {
+        rl.close();
+        resolve();
+      });
+    });
+  },
+
   npmInstall: function npmInstall(name, version, isGlobal) {
     const globally = isGlobal ? " globally" : "";
     const flags = isGlobal ? "-g" : "";

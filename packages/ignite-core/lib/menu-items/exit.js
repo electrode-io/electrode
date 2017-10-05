@@ -12,6 +12,7 @@ module.exports = function() {
   return new MenuItem({
     icon: "\u261E",
     menuText: "Exit",
+    noPause: true,
     execute
   });
 };
