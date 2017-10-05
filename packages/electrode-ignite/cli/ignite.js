@@ -1,7 +1,9 @@
 "use strict";
 
-const { PromptMenu } = require("ignite-core");
+const { PromptMenu, logger } = require("ignite-core");
 const Path = require("path");
+const Pkg = require("../package.json");
+const chalk = require("chalk");
 
 const menuFiles = [
   "check-node-npm",
@@ -19,13 +21,15 @@ const menu = menuFiles.map(m => {
   return require(m)();
 });
 
+const title = `Electrode Ignite ${chalk.magenta(Pkg.version)}`;
 const promptMenu = new PromptMenu({
-  title: "Electrode Ignite",
+  title,
   menu
 });
 
 if (process.argv.length <= 2) {
   promptMenu.show();
 } else {
+  logger.log(title);
   promptMenu.clap();
 }
