@@ -40,9 +40,8 @@
   },
   "homepage": "http://www.electrode.io",
   "devDependencies": {
-    "electrode-archetype-njs-module-dev": "^2.3.0",
-    "mock-require": "^2.0.2",
-    "sinon": "^2.0.0"
+    "electrode-archetype-njs-module-dev": "^3.0.0",
+    "mock-require": "^2.0.2"
   },
   "nyc": {
     "all": true,
