@@ -8,6 +8,8 @@ const helpers = require("../util/helpers");
 const chalk = require("chalk");
 const logger = require("../util/logger");
 
+/* eslint-disable no-invalid-this */
+
 module.exports = function(name) {
   let versions;
   let executed = false;
@@ -46,7 +48,10 @@ module.exports = function(name) {
                 msgs: [chalk.yellow(m)]
               });
             })
-            .finally(() => options.menu.emit("exit"));
+            .finally(() => {
+              this.noPause = true;
+              options.menu.emit("exit");
+            });
         });
       })
       .finally(() => spinner.stop());
