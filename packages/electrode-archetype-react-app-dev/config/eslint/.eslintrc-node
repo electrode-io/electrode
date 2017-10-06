@@ -10,3 +10,4 @@ rules:
   "strict": ["off", "global"]
   "no-process-exit": ["off"]
   "func-style": ["off"]
+  "no-multi-spaces": "off"
