@@ -8,7 +8,7 @@ If you have not done so yet, please check [Requirements](/overview/requirements.
 
 ## Usage
 
-You can use [electrode-ignite] with an interactive menu by running just the command `ignite`, or you can run it with the command name directly.
+You can use [electrode-ignite] with an interactive menu by running `ignite`, or you can run it with the command name directly.
 
 To see a list of the commands available, run `ignite --help`
 
@@ -26,15 +26,21 @@ The Ignite Menu will show as below:
 
 #### Single Ignite Task
 
-Electrode Ignite can also invoke a single ignite task by specifying the task name.
+Electrode Ignite can also be invoked with a single command by specifying the name.
 
-For example, to install the tools for Electrode development:
+For example, to check your NodeJS and npm version for Electrode development:
 
 ```bash
-$ ignite install
+$ ignite check-nodejs
 ```
 
-You can check the list of tasks by:
+To generate a new Electrode React App:
+
+```bash
+$ ignite generate-app
+```
+
+You can check the list of command by:
 
 ```bash
 $ ignite --help
@@ -46,7 +52,6 @@ And the help on usage will show as below:
 
 ## Available Ignite Tasks
 
--   `install` - Install tools for Electrode development
 -   `check-nodejs` - Check your NodeJS and npm environment
 -   `generate-app` - Generate an Electrode application
 -   `generate-component` - Generate an Electrode component
