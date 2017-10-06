@@ -5,16 +5,14 @@ const xsh = require("xsh");
 const shell = xsh.$;
 const exec = xsh.exec;
 const fs = require("fs");
-const path = require("path");
+const Path = require("path");
 const yoTest = require("yeoman-test");
 const _ = require("lodash");
 
-if (!process.env.PACKAGES_DIR) {
-  process.env.PACKAGES_DIR = path.resolve("packages");
-}
+const packagesDir = Path.join(__dirname, "packages");
 
 const pullLocalPackages = dir => {
-  dir = path.resolve(dir);
+  dir = Path.isAbsolute(dir) ? dir : Path.join(__dirname, dir);
   const localPkgs = [
     "electrode-archetype-react-app",
     "electrode-react-webapp",
@@ -22,19 +20,19 @@ const pullLocalPackages = dir => {
     "electrode-auto-ssr"
   ];
   const localDevPkgs = ["electrode-archetype-react-app-dev"];
-  const localPackagesDir = path.relative(dir, process.env.PACKAGES_DIR);
+  const localPackagesDir = Path.relative(dir, packagesDir);
 
   const updateToLocalPkgs = (pkgSection, pkgs) => {
     if (pkgSection) {
       pkgs.forEach(pkg => {
         if (pkgSection[pkg]) {
-          pkgSection[pkg] = path.join(localPackagesDir, pkg);
+          pkgSection[pkg] = Path.join(localPackagesDir, pkg);
         }
       });
     }
   };
 
-  const appPkgFile = path.join(dir, "package.json");
+  const appPkgFile = Path.join(dir, "package.json");
   const appPkgData = fs.readFileSync(appPkgFile).toString();
   const appPkg = JSON.parse(appPkgData);
   updateToLocalPkgs(appPkg["dependencies"], localPkgs);
@@ -48,29 +46,23 @@ const runAppTest = (dir, forceLocal) => {
   const appPkgData =
     (forceLocal || process.env.BUILD_TEST || process.env.CI) && pullLocalPackages(dir);
 
-  shell.pushd(dir);
-
   const restore = () => {
-    shell.popd();
     if (appPkgData) {
-      const appPkgFile = path.resolve(dir, "package.json");
+      const appPkgFile = Path.join(dir, "package.json");
       fs.writeFileSync(appPkgFile, appPkgData);
     }
   };
 
-  return exec(`npm i`).then(() => exec(`npm test`)).then(restore).catch(err => {
-    restore();
-    throw err;
-  });
+  return exec({ cwd: dir }, `npm i`).then(() => exec({ cwd: dir }, `npm test`));
 };
 
 const testGenerator = (testDir, clean, prompts) => {
-  const yoApp = path.join(process.env.PACKAGES_DIR, "generator-electrode/generators/app/index.js");
+  const yoApp = Path.join(packagesDir, "generator-electrode/generators/app/index.js");
   const defaultPrompts = {
     name: "test-app",
     description: "test test",
     homepage: "http://test",
-    serverType: "ExpressJS",
+    serverType: "HapiJS",
     authorName: "John Smith",
     authorEmail: "john@smith.com",
     authorUrl: "http://www.test.com",
@@ -89,7 +81,9 @@ const testGenerator = (testDir, clean, prompts) => {
       "skip-install": true
     })
     .withPrompts(prompts)
-    .then(() => runAppTest(path.join(testDir, "test-app"), true));
+    .then(() => {
+      return runAppTest(Path.join(testDir, "test-app"), true);
+    });
 };
 
 xclap.load({
@@ -97,17 +91,21 @@ xclap.load({
     desc: "Run CI test",
     task: () => {
       process.env.BUILD_TEST = "true";
+      const tasks = ["test-boilerplate"];
       let updated;
       return exec("lerna updated")
         .then(output => {
-          updated = output.stdout.split("\n").filter(x => x.startsWith("- ")).map(x => x.substr(2));
-        })
-        .then(() => {
+          updated = output.stdout
+            .split("\n")
+            .filter(x => x.startsWith("- "))
+            .map(x => x.substr(2));
+
           if (updated.indexOf("generator-electrode") >= 0) {
-            return "test-generator";
+            return tasks.concat("test-generator");
           }
+
+          return tasks;
         })
-        .then(() => "test-boilerplate")
         .catch(err => {
           if (err.output.stderr.indexOf("No packages need updating") < 0) {
             throw err;
@@ -118,14 +116,16 @@ xclap.load({
 
   "test-boilerplate": {
     desc: "Run tests for the boilerplage app universal-react-node",
-    task: () => runAppTest(path.resolve("samples/universal-react-node"))
+    task: () => {
+      return runAppTest(Path.join(__dirname, "samples/universal-react-node"));
+    }
   },
 
   "samples-local": {
     desc: "modify all samples to pull electrode packages from local",
     task: () => {
       ["electrode-demo-index", "universal-material-ui", "universal-react-node"].forEach(a => {
-        pullLocalPackages(path.resolve("samples", a));
+        pullLocalPackages(Path.join(__dirname, "samples", a));
       });
     }
   },
@@ -133,13 +133,13 @@ xclap.load({
   "test-generator": {
     desc: "Run tests for the yeoman generators",
     task: () => {
-      const testDir = path.resolve("tmp");
-      return testGenerator(testDir, true, { serverType: "ExpressJS" })
+      const testDir = Path.join(__dirname, "tmp");
+      return testGenerator(testDir, true, { serverType: "HapiJS" })
         .then(() => {
           const appFiles = ["package.json", "client", "config", "server", "test"];
-          shell.rm("-rf", appFiles.map(x => path.join(testDir, "test-app", x)));
+          shell.rm("-rf", appFiles.map(x => Path.join(testDir, "test-app", x)));
         })
-        .then(() => testGenerator(testDir, false, { serverType: "HapiJS" }));
+        .then(() => testGenerator(testDir, false, { serverType: "ExpressJS" }));
     }
   }
 });

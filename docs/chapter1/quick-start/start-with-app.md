@@ -1,11 +1,23 @@
 # Get Started With Electrode App
 
+> Note: If you have not done so yet, please check [Requirements](/overview/requirements.md) for setting up your development environment.
+
 ## Quick Guide
 
-If you have not done so yet, please check [Requirements](/overview/requirements.md) for setting up your development environment. Use the following instructions as a guide for creating your Electrode app.
+There are two ways to start your app:
+
+-   Ignite Menu
 
 ```bash
-$ yo electrode
+$ ignite
+```
+
+And choose the option for `Generate an Electrode application`.
+
+-   Ignite Single task
+
+```bash
+$ ignite generate-app
 ```
 
 Fill out the information for your app. You can press enter for all the defaults, except for specifying a name for your app.

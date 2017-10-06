@@ -1,9 +1,9 @@
 'use strict';
-var generators = require('yeoman-generator');
+var Generator = require('yeoman-generator');
 
-module.exports = generators.Base.extend({
-  constructor: function () {
-    generators.Base.apply(this, arguments);
+module.exports = class extends Generator {
+  constructor(args, options) {
+    super(args, options);
 
     this.option('generateInto', {
       type: String,
@@ -17,29 +17,11 @@ module.exports = generators.Base.extend({
       required: true,
       desc: 'Progressive Web App'
     });
-  },
+  }
 
-  writing: function () {
+  writing() {
     const isHapi = this.config.get('serverType') === 'hapijs';
-
-    this.fs.copyTpl(
-      this.templatePath('src/server'),
-      this.destinationPath(this.options.generateInto, 'src/server'),
-      {
-        isHapi,
-        pwa: this.options.pwa
-      },
-      {},
-      {
-        globOptions: {
-          ignore: [
-            isHapi ? '**/server/plugins/webapp/express-middleware.js' : '**/server/plugins/webapp/hapi-plugin.js',
-            '**/server/plugins/pwa.js', '**/server/views/index-view.js'
-          ]
-        }
-      }
-    );
-
+    
     if (!this.fs.exists(this.destinationPath('src/server/views/index-view.jsx'))) {
       this.fs.copy(
         this.templatePath('src/server/views/index-view.js'),
@@ -54,4 +36,4 @@ module.exports = generators.Base.extend({
       );
     }
   }
-});
+};

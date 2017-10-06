@@ -9,8 +9,6 @@ module.exports = (_opts) => {
 
     if (request.server.load.eventLoopDelay >= THRESHOLD_EVENTLOOP_DELAY_MS) {
       request.app.disableSSR = true;
-
-      return reply.continue();
     }
     return reply.continue();
   };
