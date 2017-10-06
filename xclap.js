@@ -62,7 +62,7 @@ const testGenerator = (testDir, clean, prompts) => {
     name: "test-app",
     description: "test test",
     homepage: "http://test",
-    serverType: "ExpressJS",
+    serverType: "HapiJS",
     authorName: "John Smith",
     authorEmail: "john@smith.com",
     authorUrl: "http://www.test.com",
@@ -134,12 +134,12 @@ xclap.load({
     desc: "Run tests for the yeoman generators",
     task: () => {
       const testDir = Path.join(__dirname, "tmp");
-      return testGenerator(testDir, true, { serverType: "ExpressJS" })
+      return testGenerator(testDir, true, { serverType: "HapiJS" })
         .then(() => {
           const appFiles = ["package.json", "client", "config", "server", "test"];
           shell.rm("-rf", appFiles.map(x => Path.join(testDir, "test-app", x)));
         })
-        .then(() => testGenerator(testDir, false, { serverType: "HapiJS" }));
+        .then(() => testGenerator(testDir, false, { serverType: "ExpressJS" }));
     }
   }
 });
