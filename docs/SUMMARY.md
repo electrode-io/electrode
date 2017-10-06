@@ -14,8 +14,8 @@
 -   [Get Start With Electrode](/chapter1/quick-start/start-with-electrode.md)
 
     -   [Start With Electrode Ignite](/chapter1/quick-start/start-with-ignite.md)
-    -   [Start With Electrode App](/chapter1/quick-start/start-with-app.md)
-    -   [Start With Electrode Component](/chapter1/quick-start/start-with-component.md)
+    -   [Create an Electrode App](/chapter1/quick-start/start-with-app.md)
+    -   [Create an Electrode Component](/chapter1/quick-start/start-with-component.md)
 
 -   [Electrode App](chapter1/quick-start/further-develop-app.md)
 
