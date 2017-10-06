@@ -14,3 +14,5 @@ rules:
   "max-len": ["error", 100, 2, {ignorePattern: "^\\s*(?:it|describe)\\(.*"}]
   "max-statements": "off"
   "max-nested-callbacks": "off"
+  "react/jsx-wrap-multilines": "warn"
+  "no-multi-spaces": "off"
