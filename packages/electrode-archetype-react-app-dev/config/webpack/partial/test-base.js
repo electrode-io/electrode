@@ -14,7 +14,17 @@ module.exports = {
     noParse: [new RegExp(Path.normalize("node_modules/sinon/").replace(/\\/g, "\\\\"))]
   },
   devServer: {
-    stats: "errors-only" // only show errors
+    stats: "errors-only", // only show errors
+    /*
+     * Karma browsers and webpack are running on different ports, which introduces
+     * CORS issue.
+     * The following code allows karma launched browsers to access webpack
+     * bundle in `test-watch` and `test-watch-all` modes.
+     */
+    disableHostCheck: true,
+    headers: {
+      "Access-Control-Allow-Origin": "*"
+    }
   },
   // Enzyme depends jsdom and cheerio being global to render their DOM.
   externals: {

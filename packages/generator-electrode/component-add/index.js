@@ -2,7 +2,7 @@
 
 /* eslint-disable arrow-parens */
 
-var generators = require("yeoman-generator");
+var Generator = require("yeoman-generator");
 var chalk = require("chalk");
 var yosay = require("yosay");
 var path = require("path");
@@ -26,9 +26,9 @@ const pkg = require("../package.json");
 * modify the demo-app component home.jsx to import the new packages/component and use class in the div
 */
 
-module.exports = generators.Base.extend({
-  constructor: function() {
-    generators.Base.apply(this, arguments);
+module.exports = class extends Generator {
+  constructor(args, options) {
+    super(args, options);
 
     this.log(chalk.green("Yeoman Electrode ComponentAdd generator version"), pkg.version);
     this.log("Loaded from", chalk.magenta(path.dirname(require.resolve("../package.json"))));
@@ -36,9 +36,9 @@ module.exports = generators.Base.extend({
     this.packageName = this.options.packageName || "demo-app";
     this.developerName = this.options.developerName || "demoDeveloper";
     this.className = this.options.className;
-  },
+  }
 
-  initializing: function() {
+  initializing() {
     let appPkgPath = "";
     let homeComponentPath = "";
     this.demoAppName = "";
@@ -98,43 +98,44 @@ module.exports = generators.Base.extend({
     // check for missing
     checkError();
     this.props = this.options.props || {};
-  },
+  }
 
-  prompting: {
-    greeting: function() {
-      this.log(yosay("Welcome to the " + chalk.red("Electrode Add Component") + " generator!"));
-    },
+  _askFor() {
+    var prompts = [
+      {
+        type: "input",
+        name: "name",
+        message: "Component Name",
+        when: !this.props.name,
+        default: "untitled" + Math.floor(Math.random() * 1000) + "-component"
+      },
+      {
+        type: "input",
+        name: "componentName",
+        message: "What is the ClassName for your component?",
+        default: this.props.name,
+        when: !this.props.componentName
+      }
+    ];
 
-    askFor: function() {
-      var prompts = [
-        {
-          type: "input",
-          name: "name",
-          message: "Component Name",
-          when: !this.props.name,
-          default: "untitled" + Math.floor(Math.random() * 1000) + "-component"
-        },
-        {
-          type: "input",
-          name: "componentName",
-          message: "What is the ClassName for your component?",
-          default: this.props.name,
-          when: !this.props.componentName
-        }
-      ];
-      return this.prompt(prompts).then(props => {
-        this.props = extend(this.props, props);
-        this.packageName = this.props.name;
-        this.componentName = _.kebabCase(_.deburr(this.props.componentName || this.props.name))
-          .replace(/^\s+|\s+$/g, "")
-          .replace(/(^|[-_ ])+(.)/g, function(match, first, second) {
-            return second.toUpperCase();
-          });
-      });
-    }
-  },
+    return this.prompt(prompts).then(props => {
+      this.props = extend(this.props, props);
+      this.packageName = this.props.name;
+      this.componentName = _.kebabCase(_.deburr(this.props.componentName || this.props.name))
+        .replace(/^\s+|\s+$/g, "")
+        .replace(/(^|[-_ ])+(.)/g, function(match, first, second) {
+          return second.toUpperCase();
+        });
+    });
+  }
 
-  default: function() {
+  prompting() {
+    this.log(yosay("Welcome to the " + chalk.red("Electrode Add Component") + " generator!"));
+
+    return this._askFor();
+  }
+
+  default() {
     const options = {
       isAddon: true,
       name: this.packageName,
@@ -142,15 +143,10 @@ module.exports = generators.Base.extend({
       demoAppName: this.demoAppName,
       quotes: this.props.quotes
     };
-    this.composeWith(
-      "electrode:component",
-      { options },
-      {
-        local: require.resolve("../component")
-      }
-    );
-  },
-  writing: function() {
+
+    this.composeWith(require.resolve("../component"), options);
+  }
+  writing() {
     // overwrite the Demo App package.json
     const existingPkg = this.fs.readJSON(
       this.destinationPath(path.join("..", "..", this.demoAppName, "package.json"))
@@ -161,9 +157,9 @@ module.exports = generators.Base.extend({
       this.destinationPath(path.join("..", "..", this.demoAppName, "package.json")),
       existingPkg
     );
-  },
+  }
 
-  end: function() {
+  end() {
     this.log(`
 ${chalk.green.underline("Your new Electrode component is ready!")}
 
@@ -181,4 +177,4 @@ And finally type:
 clap dev
 `);
   }
-});
+};

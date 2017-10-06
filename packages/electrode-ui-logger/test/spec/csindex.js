@@ -20,7 +20,7 @@ describe("client-side logger", function () {
       }
     };
 
-    Config = require("electrode-ui-config/lib/csindex");
+    Config = require("electrode-ui-config/dist/csindex");
   });
 
   beforeEach(function () {

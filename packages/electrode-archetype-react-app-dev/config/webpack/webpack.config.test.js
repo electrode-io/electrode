@@ -10,7 +10,8 @@ const Path = require("path");
 function makeConfig() {
   const testProfile = {
     partials: {
-      "_sourcemaps-inline": { order: 10100 }
+      "_sourcemaps-inline": { order: 10100 },
+      "_simple-progress": {order: 10300}
     }
   };
 

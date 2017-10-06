@@ -6,3 +6,5 @@ globals:
 rules:
   "complexity": "off"
   "max-len": "off"
+  "react/jsx-wrap-multilines": "warn"
+  "no-multi-spaces": "off"

@@ -1,13 +1,13 @@
 "use strict";
 
 process.env.NODE_CONFIG_DIR = "test/config/default";
-const uiConfig = require("../../lib/ui-config");
+const uiConfig = require("../../dist/ui-config");
 
 const chai = require("chai");
 const expect = chai.expect;
 
-describe("uiConfig", function () {
-  it("should create fullPath w/o trailing / for empty basePath", function () {
+describe("uiConfig", function() {
+  it("should create fullPath w/o trailing / for empty basePath", function() {
     // [ basePath, path ]
     // [ "", undefined ] => ""
     // [ "", "" ] => ""
@@ -19,7 +19,7 @@ describe("uiConfig", function () {
     // [ "", "/abc5/bar" ] => "/abc5/bar"
     // [ "", "abc6/bar" ] => "abc6/bar"
 
-    const config = uiConfig({ui: {basePath: ""}});
+    const config = uiConfig({ ui: { basePath: "" } });
     expect(config.fullPath()).to.equal("");
     expect(config.fullPath("")).to.equal("");
     expect(config.fullPath("/")).to.equal("/");
@@ -31,7 +31,7 @@ describe("uiConfig", function () {
     expect(config.fullPath("abc6/bar")).to.equal("abc6/bar");
   });
 
-  it("should create fullPath w/o trailing / for basePath /", function () {
+  it("should create fullPath w/o trailing / for basePath /", function() {
     // [ basePath, path ]
     // [ "/", undefined ] => ""
     // [ "/", "" ] => ""
@@ -43,7 +43,7 @@ describe("uiConfig", function () {
     // [ "/", "/abc5/bar" ] => "/abc5/bar"
     // [ "/", "abc6/bar" ] => "/abc6/bar"
 
-    const config = uiConfig({ui: {basePath: "/"}});
+    const config = uiConfig({ ui: { basePath: "/" } });
     expect(config.fullPath()).to.equal("");
     expect(config.fullPath("")).to.equal("");
     expect(config.fullPath("/")).to.equal("/");
@@ -55,7 +55,7 @@ describe("uiConfig", function () {
     expect(config.fullPath("abc6/bar")).to.equal("/abc6/bar");
   });
 
-  it("should create fullPath w/o trailing / for basePath /test", function () {
+  it("should create fullPath w/o trailing / for basePath /test", function() {
     // [ basePath, path ]
     // [ "/test/", undefined ] => "/test"
     // [ "/test/", "" ] => "/test"
@@ -67,7 +67,7 @@ describe("uiConfig", function () {
     // [ "/test/", "/abc5/bar" ] => "/test/abc5/bar"
     // [ "/test/", "abc6/bar" ] => "/test/abc6/bar"
 
-    const config = uiConfig({ui: {basePath: "/test"}});
+    const config = uiConfig({ ui: { basePath: "/test" } });
     expect(config.fullPath()).to.equal("/test");
     expect(config.fullPath("")).to.equal("/test");
     expect(config.fullPath("/")).to.equal("/test");
@@ -79,7 +79,7 @@ describe("uiConfig", function () {
     expect(config.fullPath("abc6/bar")).to.equal("/test/abc6/bar");
   });
 
-  it("should create fullPath w/o trailing / for basePath /test/", function () {
+  it("should create fullPath w/o trailing / for basePath /test/", function() {
     // [ basePath, path ]
     // [ "/test/", undefined ] => "/test"
     // [ "/test/", "" ] => "/test"
@@ -91,7 +91,7 @@ describe("uiConfig", function () {
     // [ "/test/", "/abc5/bar" ] => "/test/abc5/bar"
     // [ "/test/", "abc6/bar" ] => "/test/abc6/bar"
 
-    const config = uiConfig({ui: {basePath: "/test/"}});
+    const config = uiConfig({ ui: { basePath: "/test/" } });
     expect(config.fullPath()).to.equal("/test");
     expect(config.fullPath("")).to.equal("/test");
     expect(config.fullPath("/")).to.equal("/test");
@@ -103,8 +103,8 @@ describe("uiConfig", function () {
     expect(config.fullPath("abc6/bar")).to.equal("/test/abc6/bar");
   });
 
-  it("should remove trailing / from fullApiPath to create fullApiPath", function () {
-    const config = uiConfig({ui: {basePath: "/test/", apiPath: "/testApi"}});
+  it("should remove trailing / from fullApiPath to create fullApiPath", function() {
+    const config = uiConfig({ ui: { basePath: "/test/", apiPath: "/testApi" } });
 
     expect(config.fullApiPath()).to.equal("/test/testApi");
     expect(config.fullApiPath("")).to.equal("/test/testApi");
@@ -115,12 +115,10 @@ describe("uiConfig", function () {
     expect(config.fullApiPath("abc/")).to.equal("/test/testApi/abc");
     expect(config.fullApiPath("/abc/bar")).to.equal("/test/testApi/abc/bar");
     expect(config.fullApiPath("abc/bar")).to.equal("/test/testApi/abc/bar");
-
   });
 
-
-  it("should handle missing apiPath", function () {
-    const config = uiConfig({ui: {basePath: "/"}});
+  it("should handle missing apiPath", function() {
+    const config = uiConfig({ ui: { basePath: "/" } });
 
     expect(config.fullApiPath()).to.equal("/api");
     expect(config.fullApiPath("")).to.equal("/api");
@@ -131,10 +129,9 @@ describe("uiConfig", function () {
     expect(config.fullApiPath("abc/")).to.equal("/api/abc");
     expect(config.fullApiPath("/abc/bar")).to.equal("/api/abc/bar");
     expect(config.fullApiPath("abc/bar")).to.equal("/api/abc/bar");
-
   });
 
-  it("should guard against empty config", function () {
+  it("should guard against empty config", function() {
     expect(uiConfig, undefined).to.not.throw();
   });
 });

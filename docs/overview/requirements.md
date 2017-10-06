@@ -6,27 +6,20 @@ First, let's quickly check your development environment. You will need to have t
 
 1.  Install the latest [NodeJS LTS binary](https://nodejs.org/) in your machine. (at least v4.2 required, >= 6 recommended).
 
-    -   We recommend a tool like [nvm](https://github.com/creationix/nvm#install-script) for managing NodeJS installations, but see [info here](#globally-installed-nodejs) for cautionary notes.
+    -   We recommend a tool like [nvm](https://github.com/creationix/nvm#install-script) for managing NodeJS installations.
 
-2.  Install [yo], [generator-electrode], and [xclap-cli] globally:
+2.  Install [electrode-ignite] that helps bootstrapping your development with Electrode.
 
-```bash
-npm install -g yo generator-electrode xclap-cli
-```
+    ```bash
+    npm install -g electrode-ignite
+    ```
 
-### Globally Installed NodeJS
+    -   You can Run the tool with just `ignite` and get an interactive menu or you can run it with command line arguments.
+    -   Two examples of command line arguments:
+        -   `ignite check-nodejs` - To verify your NodeJS and npm versions.
+        -   `ignite generate-app` - To generate a new Electrode React app.
 
-IMPORTANT: If you install NodeJS globally on your system, then please make sure you re-install `yo` if it's already exist in your Node installation.  A bug in `yo` was causing it to always load generators from your system folders.  The fix was released on 7-31-2017.
-
-### Keep `generator-electrode` Up To Date
-
-We release new version of [generator-electrode] when we add new features.  So make sure you check the versions and update it periodically with the command:
-
-```bash
-npm install -g generator-electrode
-```
-
-### npm Verion 3
+#### npm Verion 3
 
 **Electrode requires npm version >= 3**
 
@@ -36,7 +29,9 @@ NodeJS v6.x already comes with npm@3 by default, but if you are using NodeJS 4 f
 npm install -g npm@3
 ```
 
-### Headless Chrome
+> Run `ignite check-nodejs` to verify.
+
+#### Headless Chrome
 
 Headless chrome brings all modern web platform features provided by Chromium and the Blink rendering engine to the command line. It is a great tool for automated testing and server environments where you don't need a visible UI shell.
 
@@ -58,3 +53,5 @@ Ready? Let's [build](/chapter1/quick-start/build-component.md).
 [xclap-cli]: https://www.npmjs.com/package/xclap-cli
 
 [generator-electrode]: https://www.npmjs.com/package/generator-electrode
+
+[electrode-ignite]: https://www.npmjs.com/package/electrode-ignite

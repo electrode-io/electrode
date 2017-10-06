@@ -14,3 +14,4 @@ rules:
   "max-statements": "off"
   "max-nested-callbacks": "off"
   "prefer-arrow-callback": "off"
+  "no-multi-spaces": "off"
