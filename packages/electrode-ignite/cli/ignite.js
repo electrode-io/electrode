@@ -7,7 +7,7 @@ const chalk = require("chalk");
 
 const menuFiles = [
   "check-node-npm",
-  "install-tools",
+  // "install-tools",
   "./generator-app",
   "./generator-component",
   "./add-component",
