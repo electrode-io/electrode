@@ -2,3 +2,4 @@
 --reporter spec
 --recursive
 --ui bdd
+--compilers js:babel-core/register
