@@ -6,17 +6,18 @@ First, let's quickly check your development environment. You will need to have t
 
 1.  Install the latest [NodeJS LTS binary](https://nodejs.org/) in your machine. (at least v4.2 required, >= 6 recommended).
 
--   We recommend a tool like [nvm](https://github.com/creationix/nvm#install-script) for managing NodeJS installations, but see [info here](#globally-installed-nodejs) for cautionary notes.
+    -   We recommend a tool like [nvm](https://github.com/creationix/nvm#install-script) for managing NodeJS installations.
 
 2.  Install [electrode-ignite] that helps bootstrapping your development with Electrode.
 
-```bash
-$ npm install -g electrode-ignite
-```
+    ```bash
+    npm install -g electrode-ignite
+    ```
 
--   You can Run the tool with just `ignite` and get an interactive menu or you can run with command line arguments.
--   To verify your NodeJS and npm versions, run `ignite check-nodejs`
--   To generate a new Electrode React app, run `ignite generate-app`
+    -   You can Run the tool with just `ignite` and get an interactive menu or you can run it with command line arguments.
+    -   Two examples of command line arguments:
+        -   `ignite check-nodejs` - To verify your NodeJS and npm versions.
+        -   `ignite generate-app` - To generate a new Electrode React app.
 
 #### npm Verion 3
 
