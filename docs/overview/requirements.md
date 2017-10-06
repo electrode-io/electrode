@@ -4,28 +4,20 @@ First, let's quickly check your development environment. You will need to have t
 
 ## For Development On Your Local Machine
 
-1.  Install [Electrode Ignite](https://github.com/electrode-io/electrode/tree/master/packages/electrode-ignite) in your machine to check the Electrode environment.
+1.  Install the latest [NodeJS LTS binary](https://nodejs.org/) in your machine. (at least v4.2 required, >= 6 recommended).
 
-    > Note: Electrode Ignite is a CLI tool for development with OSS Electrode React/NodeJS Platform.
+-   We recommend a tool like [nvm](https://github.com/creationix/nvm#install-script) for managing NodeJS installations, but see [info here](#globally-installed-nodejs) for cautionary notes.
+-   You can use [electrode-ignite] to check your NodeJS and npm environment.
 
-    ```bash
-    $ npm install -g electrode-ignite
-    $ ignite install
-    ```
+2.  Install [electrode-ignite] to help with bootstrapping your development with Electrode.
 
+```bash
+$ npm install -g electrode-ignite
+```
 
-2.  Install the latest [NodeJS LTS binary](https://nodejs.org/) in your machine. (at least v4.2 required, >= 6 recommended).
-
-    -   We recommend a tool like [nvm](https://github.com/creationix/nvm#install-script) for managing NodeJS installations, but see [info here](#globally-installed-nodejs) for cautionary notes.
-    -   Developers can use [Electrode Ignite](https://github.com/electrode-io/electrode/tree/master/packages/electrode-ignite) to check your NodeJS and npm environment.
-
-    ```bash
-    $ ignite check-nodejs
-    ```
-
-#### Globally Installed NodeJS
-
-IMPORTANT: If you install NodeJS globally on your system, then please make sure you re-install `yo` if it's already exist in your Node installation.  A bug in `yo` was causing it to always load generators from your system folders.  The fix was released on 7-31-2017.
+-   You can Run the tool with just `ignite` and get an interactive menu or you can run with command line arguments.
+-   For example, to install the tools for Electrode, run \`ignite install
+-   To verify your NodeJS and npm versions, run `ignite check-nodejs`
 
 #### npm Verion 3
 
@@ -36,6 +28,8 @@ NodeJS v6.x already comes with npm@3 by default, but if you are using NodeJS 4 f
 ```bash
 npm install -g npm@3
 ```
+
+> Run `ignite check-nodejs` to verify.
 
 #### Headless Chrome
 
@@ -60,4 +54,4 @@ Ready? Let's [build](/chapter1/quick-start/build-component.md).
 
 [generator-electrode]: https://www.npmjs.com/package/generator-electrode
 
-[electrode-ignite]: [https://github.com/electrode-io/electrode/tree/master/packages/electrode-ignite]
+[electrode-ignite]: https://www.npmjs.com/package/electrode-ignite

@@ -6,15 +6,15 @@
 
 There are two ways to start your app:
 
-- Ignite Menu
+-   Ignite Menu
 
 ```bash
 $ ignite
 ```
 
-And specify option `3` for `Generate an Electrode application`.
+And choose the option for `Generate an Electrode application`.
 
-- Ignite Single task
+-   Ignite Single task
 
 ```bash
 $ ignite generate-app

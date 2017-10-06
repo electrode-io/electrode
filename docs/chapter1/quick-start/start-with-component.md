@@ -6,15 +6,15 @@
 
 There are two ways to start your component:
 
-- Ignite Menu
+-   Ignite Menu
 
 ```bash
 $ ignite
 ```
 
-And specify option `4` for `Generate an Electrode component`.
+And choose the option for `Generate an Electrode component`.
 
-- Ignite Single task
+-   Ignite Single task
 
 ```bash
 $ ignite generate-component
@@ -52,7 +52,7 @@ A webserver will be started on localhost:3000. Your new component will be used i
 There are two ways to add more components to your project: invoke ignite menu or specifying the task name.
 Please make sure you are under `packages` directory before you run the commands below:
 
-- Ignite Menu
+-   Ignite Menu
 
 ```bash
 $ ignite
@@ -60,7 +60,7 @@ $ ignite
 
 And specify option `5` for `Add a component to your existing component repo`.
 
-- Ignite Single task
+-   Ignite Single task
 
 ```bash
 $ ignite add-component
@@ -123,8 +123,8 @@ electrode-component
                 └── client
 ```
 
-- `demo-app` - This directory is a full stack Electrode Application, which used for developing and testing your `packages/<componentName>`. You need to import your `packages/<componentName>` to demo-app, explore and personalize this web application there.
-- `packages/<componentName>/xclap.js` - Entry to Electrode archetype tasks
-- `packages/<componentName>/demo` - Contains examples for how to demo your component
-- `packages/<componentName>/src` - Contains your component source code
-- `packages/<componentName>/test` - Contains unit tests for your component
+-   `demo-app` - This directory is a full stack Electrode Application, which used for developing and testing your `packages/<componentName>`. You need to import your `packages/<componentName>` to demo-app, explore and personalize this web application there.
+-   `packages/<componentName>/xclap.js` - Entry to Electrode archetype tasks
+-   `packages/<componentName>/demo` - Contains examples for how to demo your component
+-   `packages/<componentName>/src` - Contains your component source code
+-   `packages/<componentName>/test` - Contains unit tests for your component
