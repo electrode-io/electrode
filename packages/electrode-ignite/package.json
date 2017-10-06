@@ -1,6 +1,6 @@
 {
   "name": "electrode-ignite",
-  "version": "0.1.25",
+  "version": "0.1.27",
   "description": "The CLI tool for development with OSS Electrode React/NodeJS Platform.",
   "main": "bin/ignite.js",
   "scripts": {
@@ -61,6 +61,12 @@
       "test",
       "bin",
       "cli"
-    ]
+    ],
+    "check-coverage": true,
+    "statements": 100,
+    "branches": 100,
+    "functions": 100,
+    "lines": 100,
+    "cache": true
   }
 }

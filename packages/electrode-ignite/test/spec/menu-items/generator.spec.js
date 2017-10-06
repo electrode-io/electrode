@@ -28,6 +28,28 @@ describe("menu-item generator", function() {
       });
   });
 
+  it("should not prompt user and run generator in clap mode", () => {
+    const runStub = sinon.stub(doYo, "run");
+    const yesNoStub = sinon.stub(helpers, "yesNoPrompt").returns(Promise.resolve(true));
+    expect(generatorItem).to.exist;
+    const mi = generatorItem("test", {
+      menuText: "test item"
+    });
+    return mi
+      .execute({
+        menu: {
+          _clap: true,
+          emit: evt => expect(evt).to.equal("done")
+        }
+      })
+      .finally(() => {
+        runStub.restore();
+        yesNoStub.restore();
+        expect(yesNoStub.callCount).to.equal(0);
+        expect(runStub.calledOnce).to.be.true;
+      });
+  });
+
   it("should not run generator if user answered no", () => {
     const runStub = sinon.stub(doYo, "run");
 
