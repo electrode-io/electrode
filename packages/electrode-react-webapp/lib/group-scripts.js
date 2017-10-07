@@ -33,7 +33,8 @@ module.exports = function groupScripts(data) {
     update(!!x.src);
 
     return acc;
-  }, { src: false, scripts: [] });
+  },
+  { src: false, scripts: [] });
 
   joinScripts(output);
 

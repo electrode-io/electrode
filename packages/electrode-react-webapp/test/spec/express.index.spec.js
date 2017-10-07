@@ -142,7 +142,7 @@ describe("express electrode-react-webapp", function() {
 
   it("should return 404 and html, if custom html is provided", () => {
     const server = startServer(webappOptions());
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       const port = server.address().port;
       return request(
         `http://localhost:${port}/status?status=404&html=NotFoundHTML&render=0`
@@ -157,7 +157,7 @@ describe("express electrode-react-webapp", function() {
 
   it("should return 410 and html, if custom html is provided", () => {
     const server = startServer(webappOptions());
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       const port = server.address().port;
       return request(
         `http://localhost:${port}/status?status=410&html=GoneHTML&render=0`
@@ -172,7 +172,7 @@ describe("express electrode-react-webapp", function() {
 
   it("should return 503 and html, if custom html is provided", () => {
     const server = startServer(webappOptions());
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       const port = server.address().port;
       return request(
         `http://localhost:${port}/status?status=503&html=ServerErrorHTML&render=0`
@@ -217,10 +217,12 @@ describe("express electrode-react-webapp", function() {
     const server = startServer(webappOptions());
     return new Promise(resolve => {
       const port = server.address().port;
-      return request(`http://localhost:${port}/redirect`).redirects(0).end((err, resp) => {
-        expect(resp.text).includes("/redirect2");
-        return server.close(() => resolve());
-      });
+      return request(`http://localhost:${port}/redirect`)
+        .redirects(0)
+        .end((err, resp) => {
+          expect(resp.text).includes("/redirect2");
+          return server.close(() => resolve());
+        });
     });
   });
 
@@ -281,12 +283,15 @@ describe("express electrode-react-webapp", function() {
     const server = startServer(webappOptions());
     return new Promise((resolve, reject) => {
       const port = server.address().port;
-      return request.post(`http://localhost:${port}/all`).send({}).end((err, resp) => {
-        if (err) return reject(err);
-        expect(resp.text).includes("Test All");
-        expect(resp.text).includes("console.log('Hello all');");
-        return server.close(() => resolve());
-      });
+      return request
+        .post(`http://localhost:${port}/all`)
+        .send({})
+        .end((err, resp) => {
+          if (err) return reject(err);
+          expect(resp.text).includes("Test All");
+          expect(resp.text).includes("console.log('Hello all');");
+          return server.close(() => resolve());
+        });
     });
   });
 

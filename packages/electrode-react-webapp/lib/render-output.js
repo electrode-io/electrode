@@ -2,7 +2,7 @@
 
 const assert = require("assert");
 const Promise = require("bluebird");
-const HttpStatus = require("http-status-codes");
+const HttpStatusCodes = require("http-status-codes");
 
 class Output {
   constructor() {
@@ -138,9 +138,9 @@ class RenderOutput {
     return promise;
   }
 
-  _getResolveResult () {
-    const {content} = this._context;
-    if (content && content.status !== HttpStatus.OK) {
+  _getResolveResult() {
+    const { content } = this._context;
+    if (content && content.status !== HttpStatusCodes.OK) {
       return {
         status: this._context.content.status,
         html: this._result
@@ -149,7 +149,6 @@ class RenderOutput {
 
     return this._result;
   }
-
 
   _finish() {
     if (this._resolve) {
