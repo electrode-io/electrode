@@ -807,6 +807,57 @@ describe("hapi electrode-react-webapp", () => {
     });
   });
 
+  it("should return 404 and html, if custom html is provided", () => {
+    assign(paths, {
+      content: {
+        status: 404,
+        html: "html content"
+      }
+    });
+
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/?__mode=noss"
+        })
+        .then(res => {
+          expect(res.statusCode).to.equal(404);
+          expect(res.result).to.contain("<div class=\"js-content\">html content</div>");
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
+  it("should not fail on not handled status codes", () => {
+    assign(paths, {
+      content: {
+        status: 501,
+        message: "not implemented"
+      }
+    });
+
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/?__mode=noss"
+        })
+        .then(res => {
+          expect(res.statusCode).to.equal(501);
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
   it("should handle option serverSideRendering false", () => {
     configOptions.serverSideRendering = false;
     return electrodeServer(config).then(server => {

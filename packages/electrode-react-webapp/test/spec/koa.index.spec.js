@@ -140,6 +140,31 @@ describe("koa electrode-react-webapp", function() {
     });
   });
 
+  it("should return 404 and html, if custom html is provided", () => {
+    const server = startServer(webappOptions());
+    return new Promise(resolve => {
+      const port = server.address().port;
+      return request(`http://localhost:${port}/status?status=404&html=NotFoundHTML&render=0`).end((err, resp) => {
+        expect(err).to.be.ok;
+        expect(resp.status).to.equal(404);
+        expect(resp.text).to.equal("NotFoundHTML");
+        server.close(() => resolve());
+      });
+    });
+  });
+
+  it("should not fail on 404 if no html is provided", () => {
+    const server = startServer(webappOptions());
+    return new Promise(resolve => {
+      const port = server.address().port;
+      return request(`http://localhost:${port}/status?status=404&data=test&render=0`).end((err, resp) => {
+        expect(err).to.be.ok;
+        expect(resp.status).to.equal(404);
+        server.close(() => resolve());
+      });
+    });
+  });
+
   it("should return 200 and html with render false", () => {
     const server = startServer(webappOptions());
     return new Promise((resolve, reject) => {

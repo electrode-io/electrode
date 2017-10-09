@@ -170,6 +170,20 @@ describe("express electrode-react-webapp", function() {
     });
   });
 
+  it("should not fail on 404 if no html is provided", () => {
+    const server = startServer(webappOptions());
+    return new Promise(resolve => {
+      const port = server.address().port;
+      return request(
+        `http://localhost:${port}/status?status=404&data=test&render=0`
+      ).end((err, resp) => {
+        expect(err).to.be.ok;
+        expect(resp.status).to.equal(404);
+        server.close(() => resolve());
+      });
+    });
+  });
+
   it("should return 503 and html, if custom html is provided", () => {
     const server = startServer(webappOptions());
     return new Promise(resolve => {
