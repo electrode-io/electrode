@@ -53,6 +53,7 @@ describe("express electrode-react-webapp", function() {
             if (req.query.render !== undefined) {
               render = Boolean(+req.query.render);
             }
+
             return {
               status: +req.query.status,
               html,
@@ -139,6 +140,65 @@ describe("express electrode-react-webapp", function() {
     });
   });
 
+  it("should return 404 and html, if custom html is provided", () => {
+    const server = startServer(webappOptions());
+    return new Promise(resolve => {
+      const port = server.address().port;
+      return request(
+        `http://localhost:${port}/status?status=404&html=NotFoundHTML&render=0`
+      ).end((err, resp) => {
+        expect(err).to.be.ok;
+        expect(resp.status).to.equal(404);
+        expect(resp.text).to.equal("NotFoundHTML");
+        server.close(() => resolve());
+      });
+    });
+  });
+
+  it("should return 410 and html, if custom html is provided", () => {
+    const server = startServer(webappOptions());
+    return new Promise(resolve => {
+      const port = server.address().port;
+      return request(
+        `http://localhost:${port}/status?status=410&html=GoneHTML&render=0`
+      ).end((err, resp) => {
+        expect(err).to.be.ok;
+        expect(resp.status).to.equal(410);
+        expect(resp.text).to.equal("GoneHTML");
+        server.close(() => resolve());
+      });
+    });
+  });
+
+  it("should not fail on 404 if no html is provided", () => {
+    const server = startServer(webappOptions());
+    return new Promise(resolve => {
+      const port = server.address().port;
+      return request(
+        `http://localhost:${port}/status?status=404&data=test&render=0`
+      ).end((err, resp) => {
+        expect(err).to.be.ok;
+        expect(resp.status).to.equal(404);
+        server.close(() => resolve());
+      });
+    });
+  });
+
+  it("should return 503 and html, if custom html is provided", () => {
+    const server = startServer(webappOptions());
+    return new Promise(resolve => {
+      const port = server.address().port;
+      return request(
+        `http://localhost:${port}/status?status=503&html=ServerErrorHTML&render=0`
+      ).end((err, resp) => {
+        expect(err).to.be.ok;
+        expect(resp.status).to.equal(503);
+        expect(resp.text).to.equal("ServerErrorHTML");
+        server.close(() => resolve());
+      });
+    });
+  });
+
   it("should return 200 and html with render false", () => {
     const server = startServer(webappOptions());
     return new Promise((resolve, reject) => {
@@ -171,10 +231,12 @@ describe("express electrode-react-webapp", function() {
     const server = startServer(webappOptions());
     return new Promise(resolve => {
       const port = server.address().port;
-      return request(`http://localhost:${port}/redirect`).redirects(0).end((err, resp) => {
-        expect(resp.text).includes("/redirect2");
-        return server.close(() => resolve());
-      });
+      return request(`http://localhost:${port}/redirect`)
+        .redirects(0)
+        .end((err, resp) => {
+          expect(resp.text).includes("/redirect2");
+          return server.close(() => resolve());
+        });
     });
   });
 
@@ -235,12 +297,15 @@ describe("express electrode-react-webapp", function() {
     const server = startServer(webappOptions());
     return new Promise((resolve, reject) => {
       const port = server.address().port;
-      return request.post(`http://localhost:${port}/all`).send({}).end((err, resp) => {
-        if (err) return reject(err);
-        expect(resp.text).includes("Test All");
-        expect(resp.text).includes("console.log('Hello all');");
-        return server.close(() => resolve());
-      });
+      return request
+        .post(`http://localhost:${port}/all`)
+        .send({})
+        .end((err, resp) => {
+          if (err) return reject(err);
+          expect(resp.text).includes("Test All");
+          expect(resp.text).includes("console.log('Hello all');");
+          return server.close(() => resolve());
+        });
     });
   });
 
