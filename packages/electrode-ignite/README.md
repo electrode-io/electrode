@@ -35,7 +35,7 @@ Select the option by inputting a valid number, and press enter to get your task 
 An ignite task can be invoked with the command `ignite`:
 
 ```bash
-$ ignite task1
+$ ignite [task name]
 ```
 
 For example,
