@@ -262,16 +262,17 @@ const showPublishInfo = collated => {
     "publish command: node_modules/.bin/lerna publish",
     (collated.forcePackages || []).map(p => `--force-publish ${p}`).join(" ")
   );
-  const generatorNeedUpdate = collated.realPackages.find(p => {
+  const majorBumps = collated.realPackages.filter(p => {
     const pkg = collated.packages[mapPkg(p)];
-    return (
-      p.startsWith("electrode-archetype-react") &&
-      pkg.newVersion.split(".")[0] > pkg.version.split(".")[0]
-    );
+    return pkg.newVersion.split(".")[0] > pkg.version.split(".")[0];
   });
-  if (generatorNeedUpdate) {
+  const majorArchetypes = majorBumps.filter(p => p.startsWith("electrode-archetype-react"));
+  if (majorArchetypes.length > 0) {
     console.log(
-      "One of the archetype modules had a major bump, make sure generator-electrode is updated before publishing."
+      `\nThese archetypes had major bumps:\n\n${majorArchetypes.join("\n")}`,
+      "\n\nBefore publishing, make sure:",
+      "\n\n- generator-electrode is updated",
+      "\n- The -dev archetype's peer dep is updated\n"
     );
   }
 };
