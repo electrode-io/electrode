@@ -130,6 +130,9 @@ const collateCommitsPackages = commits => {
     collated.lernaPackages = commits.updated.packages.filter(
       r => collated.realPackages.indexOf(r) < 0
     );
+    collated.forcePackages = collated.realPackages.filter(
+      r => commits.updated.packages.indexOf(r) < 0
+    )
     return collated;
   });
 };
@@ -243,6 +246,21 @@ const updateChangelog = collated => {
   Fs.writeFileSync(changeLogFile, `${updateText}${changeLog}`);
 };
 
+const showPublishInfo = collated => {
+  console.log("publish command: node_modules/.bin/lerna publish", 
+    (collated.forcePackages || []).map(p => `--force-publish ${p}`).join(" "));
+  const generatorNeedUpdate = collated.realPackages.find( p => {
+    const pkg = collated.packages[mapPkg(p)];
+    return p.startsWith("electrode-archetype-react") && 
+      pkg.newVersion.split(".")[0] > pkg.version.split(".")[0];
+  });
+  if (generatorNeedUpdate) {
+    console.log(
+      "One of the archetype modules had a major bump, make sure generator-electrode is updated before publishing."
+    );
+  }
+};
+
 const commitChangeLogFile = clean => {
   console.log("Change log updated.");
   if (!gitClean) {
@@ -267,5 +285,6 @@ xsh
   .then(collateCommitsPackages)
   .then(determinePackageVersions)
   .tap(checkGitClean)
-  .then(updateChangelog)
+  .tap(updateChangelog)
+  .then(showPublishInfo)
   .then(commitChangeLogFile);
