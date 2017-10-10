@@ -120,8 +120,8 @@
     "xsh": "^0.4.2"
   },
   "optionalDependencies": {
-    "electrode-archetype-opt-inferno": "^0.1.0",
-    "electrode-archetype-opt-react": "^0.1.0"
+    "electrode-archetype-opt-inferno": "^0.2.0",
+    "electrode-archetype-opt-react": "^0.2.0"
   },
   "devDependencies": {
     "electrode-archetype-react-app": "../electrode-archetype-react-app",
