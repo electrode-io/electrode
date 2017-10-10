@@ -4,6 +4,25 @@
 
 ### Directly Updated
 
+-   generator-electrode@3.4.1 `(3.4.0 => 3.4.1)`
+
+### Lerna Updated
+
+-   electrode-ignite@1.0.1 `(1.0.0 => 1.0.1)`
+
+## Commits
+
+-   `packages/generator-electrode`
+
+    -   update generated app's dep [commit](http://github.com/electrode-io/electrode/commit/603ced06ed91893622fbe6ba3cae715ec1e25d9b)
+    -   update generated component's dep [commit](http://github.com/electrode-io/electrode/commit/cd0e4d7fa157d7c3429b1231a697327dd4fff812)
+
+# 10/10/2017
+
+## Packages
+
+### Directly Updated
+
 -   electrode-archetype-opt-inferno@0.2.0 `(0.1.1 => 0.2.0)`
 -   electrode-archetype-opt-react@0.2.0 `(0.1.1 => 0.2.0)`
 -   electrode-archetype-react-app@4.0.0 `(3.2.2 => 4.0.0)`
