@@ -34,7 +34,10 @@ const mapPkg = n => {
 };
 
 const checkGitClean = () => {
-  return xsh.exec(`git diff --quiet`).then(() => (gitClean = true)).catch(() => (gitClean = false));
+  return xsh
+    .exec(`git diff --quiet`)
+    .then(() => (gitClean = true))
+    .catch(() => (gitClean = false));
 };
 
 const processLernaUpdated = output => {
@@ -42,10 +45,12 @@ const processLernaUpdated = output => {
   const lernaInfo = output.stderr.split("\n");
   const tagSig = "Comparing with";
   let tagIndex;
-  let tagLine = lernaInfo.find(x => {
-    tagIndex = x.indexOf(tagSig);
-    return tagIndex >= 0;
-  }).trim();
+  let tagLine = lernaInfo
+    .find(x => {
+      tagIndex = x.indexOf(tagSig);
+      return tagIndex >= 0;
+    })
+    .trim();
 
   if (tagLine.endsWith(".")) {
     tagLine = tagLine.substr(0, tagLine.length - 1);
@@ -53,7 +58,10 @@ const processLernaUpdated = output => {
 
   assert(tagLine, "Can't find last publish tag from lerna");
   const tag = tagLine.substr(tagIndex + tagSig.length).trim();
-  const packages = output.stdout.split("\n").filter(x => x.trim().length > 0).map(x => x.substr(2));
+  const packages = output.stdout
+    .split("\n")
+    .filter(x => x.trim().length > 0)
+    .map(x => x.substr(2));
   return { tag, packages };
 };
 
@@ -132,7 +140,7 @@ const collateCommitsPackages = commits => {
     );
     collated.forcePackages = collated.realPackages.filter(
       r => commits.updated.packages.indexOf(r) < 0
-    )
+    );
     return collated;
   });
 };
@@ -213,7 +221,10 @@ const updateChangelog = collated => {
       const pkg = items[p];
       if (pkg.msgs.length === 0) return;
       output.push("-   `" + prefix + p + "`\n\n");
-      pkg.msgs.slice().reverse().forEach(emitCommitMsg);
+      pkg.msgs
+        .slice()
+        .reverse()
+        .forEach(emitCommitMsg);
       output.push("\n");
     });
   };
@@ -247,12 +258,16 @@ const updateChangelog = collated => {
 };
 
 const showPublishInfo = collated => {
-  console.log("publish command: node_modules/.bin/lerna publish", 
-    (collated.forcePackages || []).map(p => `--force-publish ${p}`).join(" "));
-  const generatorNeedUpdate = collated.realPackages.find( p => {
+  console.log(
+    "publish command: node_modules/.bin/lerna publish",
+    (collated.forcePackages || []).map(p => `--force-publish ${p}`).join(" ")
+  );
+  const generatorNeedUpdate = collated.realPackages.find(p => {
     const pkg = collated.packages[mapPkg(p)];
-    return p.startsWith("electrode-archetype-react") && 
-      pkg.newVersion.split(".")[0] > pkg.version.split(".")[0];
+    return (
+      p.startsWith("electrode-archetype-react") &&
+      pkg.newVersion.split(".")[0] > pkg.version.split(".")[0]
+    );
   });
   if (generatorNeedUpdate) {
     console.log(
