@@ -34,7 +34,12 @@ module.exports = Object.assign(Lib, {
     const npmRegFlag = Lib.npmRegistryFlag(npmReg);
     return xsh
       .exec(true, `npm ${npmRegFlag} show -loglevel silent ${name} version`)
-      .then(ret => ret.stdout.trim());
+      .then(ret => ret.stdout.trim())
+      .catch(err => {
+        const out = _.get(err, "output.stdout", "").trim();
+        if (out === "{}") return "0.0.0";
+        throw err;
+      });
   },
 
   npmRegistryFlag: function(reg) {

@@ -20,16 +20,17 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "classnames": "^2.2.5",
-    "electrode-archetype-react-app": "../electrode-archetype-react-app",
-    "electrode-archetype-react-app-dev": "../electrode-archetype-react-app-dev",
+    "electrode-archetype-react-app": "^4.0.6",
+    "electrode-archetype-react-app-dev": "^4.0.6",
     "electrode-electrify-react-component": "^4.4.13",
-    "electrode-react-webapp": "../electrode-react-webapp",
+    "electrode-react-webapp": "^2.1.0",
     "electrode-redux-router-engine": "^1.5.0",
     "electrode-server": "^1.1.1",
     "electrode-static-paths": "^1.0.0",
     "material-design-icons": "^3.0.1",
     "material-ui": "^0.17.0",
-    "react-tap-event-plugin": "^2.0.1",
+    "react-tap-event-plugin": "^3.0.1",
+    "react-test-renderer": "^16.1.1",
     "xclap": "^0.2.0"
   },
   "dependencies": {
