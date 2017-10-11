@@ -123,9 +123,10 @@ module.exports = function(options) {
   if (cacheConfig.importScripts) {
     const importScripts = cacheConfig.importScripts;
 
-    cacheConfig.importScripts = process.env.WEBPACK_DEV === "true"
-      ? importScripts.map(getDevelopmentPath)
-      : importScripts.map(getHashedPath);
+    cacheConfig.importScripts =
+      process.env.WEBPACK_DEV === "true"
+        ? importScripts.map(getDevelopmentPath)
+        : importScripts.map(getHashedPath);
 
     entry = createEntryConfigFromScripts(importScripts, options.currentConfig.entry);
 

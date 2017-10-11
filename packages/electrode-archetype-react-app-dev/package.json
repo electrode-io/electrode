@@ -20,7 +20,7 @@
     "electrode-archetype-react-app": "^4.0.0"
   },
   "dependencies": {
-    "autoprefixer-stylus": "^0.9.1",
+    "autoprefixer-stylus": "^0.14.0",
     "babel-cli": "^6.4.5",
     "babel-core": "^6.4.0",
     "babel-eslint": "^7.0.0",
@@ -45,7 +45,7 @@
     "chai-shallowly": "^0.9.10",
     "clean-css": "^3.4.21",
     "convert-source-map": "^1.5.0",
-    "css-loader": "^0.26.1",
+    "css-loader": "^0.28.7",
     "css-split-webpack-plugin": "^0.2.0",
     "electrode-bundle-analyzer": "^1.0.0",
     "electrode-cdn-file-loader": "^1.0.0",

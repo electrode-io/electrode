@@ -695,7 +695,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     "generate-service-worker": {
       desc:
         "Generate Service Worker using the options provided in the app/config/sw-precache-config.json " +
-          "file for prod/dev/hot mode",
+        "file for prod/dev/hot mode",
       task: () => generateServiceWorker()
     },
     "optimize-stats": {

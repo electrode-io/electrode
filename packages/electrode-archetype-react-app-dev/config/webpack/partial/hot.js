@@ -21,9 +21,10 @@ const getMultiBundleEntry = function(entries) {
 
 module.exports = function(options) {
   const config = options.currentConfig;
-  const entry = typeof config.entry === "object"
-    ? getMultiBundleEntry(config.entry)
-    : getDefaultEntry(config.entry);
+  const entry =
+    typeof config.entry === "object"
+      ? getMultiBundleEntry(config.entry)
+      : getDefaultEntry(config.entry);
 
   return {
     devtool: "eval",
