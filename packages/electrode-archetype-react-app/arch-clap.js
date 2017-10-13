@@ -653,7 +653,7 @@ Individual .babelrc files were generated for you in src/client and src/server
       if (shell.test("-d", "test/server")) {
         AppMode.setEnv(AppMode.src.dir);
         return exec(
-          `istanbul cover node_modules/mocha/bin/_mocha`,
+          `istanbul cover --include-all-sources --root src/server --report text --report lcov node_modules/mocha/bin/_mocha`,
           `-- -c --opts ${config.mocha}/mocha.opts test/server`
         );
       }
