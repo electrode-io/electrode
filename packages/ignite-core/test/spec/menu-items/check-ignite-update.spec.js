@@ -31,24 +31,26 @@ describe("menu-item check-ignite-update", function() {
   const makeStubs = (name, globalVersion, latestVersion) => {
     name = name || "electrode-ignite";
     const stubs = {};
-    stubs.globalInstalledStub = sinon.stub(checkModule, "globalInstalled").callsFake(n => {
-      expect(n).to.equal(name);
-      return globalVersion;
-    });
-    stubs.latestOnceDailyStub = sinon.stub(checkModule, "latestOnceDaily").callsFake(n => {
-      expect(n).to.equal(name);
-      return latestVersion;
-    });
+    stubs.globalInstalledStub = sinon
+      .stub(checkModule, "globalInstalled")
+      .callsFake(n => {
+        expect(n).to.equal(name);
+        return globalVersion;
+      });
+    stubs.latestOnceDailyStub = sinon
+      .stub(checkModule, "latestOnceDaily")
+      .callsFake(n => {
+        expect(n).to.equal(name);
+        return latestVersion;
+      });
     stubs.latestStub = sinon.stub(checkModule, "latest").callsFake(n => {
       expect(n).to.equal(name);
       return latestVersion;
     });
-    stubs.npmInstallStub = sinon.stub(helpers, "npmInstall").returns(Promise.resolve());
     stubs.restore = () => {
       stubs.globalInstalledStub.restore();
       stubs.latestOnceDailyStub.restore();
       stubs.latestStub.restore();
-      stubs.npmInstallStub.restore();
     };
     return stubs;
   };
@@ -63,6 +65,39 @@ describe("menu-item check-ignite-update", function() {
     return stubs;
   };
 
+  const makeNpmInstallStub = resolve => {
+    const stubs = {};
+    const npmInstallStub = (stubs.npmInstallStub = sinon.stub(
+      helpers,
+      "npmInstall"
+    ));
+    if (resolve) {
+      stubs.npmInstallStub = npmInstallStub.returns(Promise.resolve());
+    } else {
+      stubs.npmInstallStub = npmInstallStub.callsFake(() => {
+        const error = new Error("blah");
+        error.output = { stdout: "{}\n" };
+        return Promise.reject(error);
+      });
+    }
+    stubs.restore = () => {
+      stubs.npmInstallStub.restore();
+    };
+    return stubs;
+  };
+
+  const makeshowManualInstallMsgStub = () => {
+    const stubs = {};
+    stubs.showManualInstallMsgStub = sinon.stub(
+      helpers,
+      "showManualInstallMsg"
+    );
+    stubs.restore = () => {
+      stubs.showManualInstallMsgStub.restore();
+    };
+    return stubs;
+  };
+
   it("should create menu item", () => {
     const mi = checkIgniteUpdate("test-module");
     expect(mi.emit).to.exist;
@@ -73,6 +108,7 @@ describe("menu-item check-ignite-update", function() {
 
   it("should prompt user to update if latest is newer", done => {
     const stubs = makeStubs("test-module", "1.0.0", "1.0.1");
+    const npmInstallStub = makeNpmInstallStub(true);
     logs = [];
     const mi = checkIgniteUpdate("test-module");
     mi.index = 999;
@@ -80,6 +116,7 @@ describe("menu-item check-ignite-update", function() {
       menu: {
         emit: () => {
           stubs.restore();
+          npmInstallStub.restore();
           expect(logs[0]).includes("Newer version 1.0.1 of test-module found.");
           expect(logs[0]).includes("Pick option 999 to update");
           done();
@@ -90,6 +127,7 @@ describe("menu-item check-ignite-update", function() {
 
   it("should do nothing if latest is not newer", done => {
     const stubs = makeStubs("test-module", "1.0.2", "1.0.1");
+    const npmInstallStub = makeNpmInstallStub(true);
     let event;
     logs = [];
     const mi = checkIgniteUpdate("test-module");
@@ -99,6 +137,7 @@ describe("menu-item check-ignite-update", function() {
 
     setTimeout(() => {
       stubs.restore();
+      npmInstallStub.restore();
       expect(event).to.equal(undefined);
       expect(logs).to.deep.equal([]);
       done();
@@ -108,6 +147,7 @@ describe("menu-item check-ignite-update", function() {
   describe("execute", function() {
     it("should let user know if version is already latest", () => {
       const stubs = makeStubs("test-module", "1.0.1", "1.0.1");
+      const npmInstallStub = makeNpmInstallStub(true);
       logs = [];
       const mi = checkIgniteUpdate("test-module");
       return mi
@@ -117,11 +157,13 @@ describe("menu-item check-ignite-update", function() {
         })
         .finally(() => {
           stubs.restore();
+          npmInstallStub.restore();
         });
     });
 
     it("should prompt user to update if version is older than latest", () => {
       const stubs = makeStubs(undefined, "1.0.0", "1.0.1");
+      const npmInstallStub = makeNpmInstallStub(true);
       const yesNoStub = makeYesNoStub(true);
       let event;
       logs = [];
@@ -135,7 +177,10 @@ describe("menu-item check-ignite-update", function() {
         .then(() => {
           stubs.restore();
           yesNoStub.restore();
-          expect(stubs.npmInstallStub.args).to.deep.equal([["electrode-ignite", "1.0.1", true]]);
+          npmInstallStub.restore();
+          expect(npmInstallStub.npmInstallStub.args).to.deep.equal([
+            ["electrode-ignite", "1.0.1", true]
+          ]);
           expect(yesNoStub.question).to.equal(
             "Update electrode-ignite from version 1.0.0 to 1.0.1"
           );
@@ -145,6 +190,7 @@ describe("menu-item check-ignite-update", function() {
 
     it("should not update if user answer no", () => {
       const stubs = makeStubs(undefined, "1.0.0", "1.0.1");
+      const npmInstallStub = makeNpmInstallStub(true);
       const yesNoStub = makeYesNoStub(false);
       logs = [];
       const mi = checkIgniteUpdate();
@@ -159,6 +205,32 @@ describe("menu-item check-ignite-update", function() {
         .finally(() => {
           stubs.restore();
           yesNoStub.restore();
+          npmInstallStub.restore();
+        });
+    });
+
+    it("should show manual install message if the system doesn't support", () => {
+      let event;
+      const stubs = makeStubs(undefined, "1.0.0", "1.0.1");
+      const npmInstallStub = makeNpmInstallStub(false);
+      const yesNoStub = makeYesNoStub(true);
+      const manualInstallStub = makeshowManualInstallMsgStub();
+      const mi = checkIgniteUpdate();
+      return mi
+        .execute({
+          menu: {
+            emit: evt => (event = evt)
+          }
+        })
+        .then(() => {
+          expect(manualInstallStub.showManualInstallMsgStub).to.be.calledOnce;
+          expect(event).to.equal("exit");
+        })
+        .finally(() => {
+          stubs.restore();
+          npmInstallStub.restore();
+          yesNoStub.restore();
+          manualInstallStub.restore();
         });
     });
   });

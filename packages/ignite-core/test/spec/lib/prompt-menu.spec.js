@@ -127,6 +127,18 @@ describe("prompt-menu", function() {
     return pm.runMenuItem(mi);
   });
 
+  it("runMenuItem should pause prompt before it shows", () => {
+    const pausePromptStub = sinon.stub(helpers, "pausePrompt").resolves(_.noop);
+    const pm = new PromptMenu({});
+    const mi = new MenuItem({ execute: _.noop, noPause: false});
+    pm._clap = false;
+    pm.show = () => {
+      expect(pausePromptStub).to.have.been.called;
+      pausePromptStub.restore();
+    };
+    return pm.runMenuItem(mi);
+  });
+
   it("should close existing RL", () => {
     const pm = new PromptMenu({});
     pm.rl = rl;
