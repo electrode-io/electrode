@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-opt-inferno",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Electrode NodeJS/React Optional Archetype - inferno",
   "main": "index.js",
   "homepage": "http://www.electrode.io",
@@ -16,8 +16,7 @@
     "preinstall": "node optional-check.js"
   },
   "dependencies": {
-    "inferno": "^1.3.1",
-    "inferno-compat": "^1.3.1"
-  },
-  "devDependencies": {}
+    "inferno": "^3.0.0",
+    "inferno-compat": "^3.0.0"
+  }
 }

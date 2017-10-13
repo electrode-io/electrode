@@ -6,8 +6,7 @@
 const _ = require("lodash");
 const assert = require("assert");
 const ReactWebapp = require("../react-webapp");
-
-const HTTP_REDIRECT = 302;
+const HttpStatus = require("../http-status");
 
 function handleRoute(handler) {
   const request = this.request;
@@ -19,10 +18,13 @@ function handleRoute(handler) {
   return handler({ mode: request.query.__mode || "", request })
     .then(data => {
       const status = data.status;
+
       if (status === undefined) {
         respond(200, data);
-      } else if (status === HTTP_REDIRECT) {
+      } else if (HttpStatus.redirect[status]) {
         this.redirect(data.path);
+      } else if (HttpStatus.displayHtml[status]) {
+        respond(status, data.html !== undefined ? data.html : data);
       } else if (status >= 200 && status < 300) {
         respond(status, data.html !== undefined ? data.html : data);
       } else {

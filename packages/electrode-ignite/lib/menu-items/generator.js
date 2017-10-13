@@ -2,10 +2,15 @@
 
 const { MenuItem, helpers, logger } = require("ignite-core");
 const doYo = require("../do-yo");
+const Promise = require("bluebird");
 
 module.exports = function(name, itemOptions) {
   function execute(options) {
-    return helpers.yesNoPrompt(itemOptions.menuText).then(yes => {
+    const promise = options.menu._clap
+      ? Promise.resolve(true)
+      : helpers.yesNoPrompt(itemOptions.menuText);
+
+    return promise.then(yes => {
       if (yes) {
         options.menu.emit("done");
         logger.log(`Loading generator ${name} ...`);

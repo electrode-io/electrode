@@ -5,17 +5,19 @@
 const _ = require("lodash");
 const assert = require("assert");
 const ReactWebapp = require("../react-webapp");
-
-const HTTP_REDIRECT = 302;
+const HttpStatus = require("../http-status");
 
 const handleRoute = (request, reply, handler) => {
   return handler({ mode: request.query.__mode || "", request })
     .then(data => {
       const status = data.status;
+
       if (status === undefined) {
         reply(data);
-      } else if (status === HTTP_REDIRECT) {
+      } else if (HttpStatus.redirect[status]) {
         reply.redirect(data.path);
+      } else if (HttpStatus.displayHtml[status]) {
+        reply(data.html !== undefined ? data.html : data).code(status);
       } else if (status >= 200 && status < 300) {
         reply(data.html !== undefined ? data.html : data);
       } else {
