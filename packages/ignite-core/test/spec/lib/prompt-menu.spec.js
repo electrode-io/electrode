@@ -86,16 +86,11 @@ describe("prompt-menu", function() {
   it("runMenuItem should emit pre and post execute events", () => {
     const pm = new PromptMenu({});
     const mi = new MenuItem({ execute: _.noop, noPause: true });
-    let pre;
     let post;
-    mi.on("pre_execute", () => {
-      pre = true;
-    });
     mi.on("post_execute", () => {
       post = true;
     });
     pm.show = () => {
-      expect(pre).to.equal(true);
       expect(post).to.equal(true);
     };
 

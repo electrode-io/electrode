@@ -163,7 +163,6 @@ class PromptMenu extends EventEmitter {
     };
 
     spinner.start();
-    item.emit("pre_execute");
     return Promise.try(() => item.execute({ menu: this }))
       .then(() => {
         spinner.stop();
