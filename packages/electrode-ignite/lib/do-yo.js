@@ -6,11 +6,13 @@ const { logger } = require("ignite-core");
 const _ = require("lodash");
 
 const Lib = {};
+let baseYoPath = "";
 
 module.exports = Object.assign(Lib, {
   platform: {
     win32: function win32(name) {
-      const yoPath = Path.join(__dirname, "..", "node_modules", ".bin", "yo.cmd");
+      baseYoPath = baseYoPath || __dirname;
+      const yoPath = Path.join(baseYoPath, "..", "node_modules", ".bin", "yo.cmd");
 
       return childProcess.spawn("cmd", ["/c", `${yoPath} ${name}`], {
         stdio: "inherit"
@@ -18,7 +20,8 @@ module.exports = Object.assign(Lib, {
     },
 
     posix: function posix(name) {
-      const yoPath = Path.join(__dirname, "..", "node_modules", ".bin", "yo");
+      baseYoPath = baseYoPath || __dirname;
+      const yoPath = Path.join(baseYoPath, "..", "node_modules", ".bin", "yo");
 
       return childProcess.spawn(yoPath, [name], {
         stdio: "inherit"
@@ -33,5 +36,18 @@ module.exports = Object.assign(Lib, {
     child.on("error", err => {
       logger.log(`Running ${name} generator failed: ${err.stack}.`);
     });
+
+    /*
+    * Platform: Windows
+    * Scenario: Avoid the hanging case when child process exits on its own by any reason.
+    */
+    child.on("exit", code => {
+      logger.log(`Generator: ${name} exited on its own. Error code: ${code}.`);
+      return process.exit(code); //eslint-disable-line no-process-exit
+    });
+  },
+
+  setBaseYoPath: function setBaseYoPath(path) {
+    baseYoPath = path;
   }
 });
