@@ -167,10 +167,13 @@ class PromptMenu extends EventEmitter {
       .then(() => {
         spinner.stop();
         item.emit("post_execute");
-        if (item.noPause) {
-          show();
-        } else if (!this._clap) {
-          helpers.pausePrompt().then(show);
+        // don't show menu in clap mode
+        if (!this._clap) {
+          if (item.noPause) {
+            show();
+          } else {
+            helpers.pausePrompt().then(show);
+          }
         }
       })
       .finally(() => spinner.stop());

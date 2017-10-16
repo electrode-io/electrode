@@ -125,7 +125,7 @@ describe("prompt-menu", function() {
   it("runMenuItem should pause prompt before it shows", () => {
     const pausePromptStub = sinon.stub(helpers, "pausePrompt").resolves(_.noop);
     const pm = new PromptMenu({});
-    const mi = new MenuItem({ execute: _.noop, noPause: false});
+    const mi = new MenuItem({ execute: _.noop, noPause: false });
     pm._clap = false;
     pm.show = () => {
       expect(pausePromptStub).to.have.been.called;
