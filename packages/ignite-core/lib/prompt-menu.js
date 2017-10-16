@@ -135,6 +135,7 @@ class PromptMenu extends EventEmitter {
           desc: menuText,
           aliases: mi.cliAliases,
           handler: () => {
+            logger.log(this._title);
             logger.log(`Running ${menuText}`);
             return this.runMenuItem(mi);
           }
@@ -142,6 +143,7 @@ class PromptMenu extends EventEmitter {
       },
       Yargs
     )
+      .strict()
       .help()
       .usage(`Usage: ${this._progName} <command>`)
       .parse(argv);
