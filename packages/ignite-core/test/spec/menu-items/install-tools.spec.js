@@ -28,12 +28,10 @@ describe("menu-item install-tools", function() {
   const makeStubs = (name, globalVersion, latestVersion) => {
     name = name || "xclap-cli";
     const stubs = {};
-    stubs.globalInstalledStub = sinon
-      .stub(checkModule, "globalInstalled")
-      .callsFake(n => {
-        expect(n).to.equal(name);
-        return globalVersion;
-      });
+    stubs.globalInstalledStub = sinon.stub(checkModule, "globalInstalled").callsFake(n => {
+      expect(n).to.equal(name);
+      return globalVersion;
+    });
     stubs.latestStub = sinon.stub(checkModule, "latest").callsFake(n => {
       expect(n).to.equal(name);
       return latestVersion;
@@ -57,10 +55,7 @@ describe("menu-item install-tools", function() {
 
   const makeNpmInstallStub = resolve => {
     const stubs = {};
-    const npmInstallStub = (stubs.npmInstallStub = sinon.stub(
-      helpers,
-      "npmInstall"
-    ));
+    const npmInstallStub = (stubs.npmInstallStub = sinon.stub(helpers, "npmInstall"));
     if (resolve) {
       stubs.npmInstallStub = npmInstallStub.returns(Promise.resolve());
     } else {
@@ -78,10 +73,7 @@ describe("menu-item install-tools", function() {
 
   const makeshowManualInstallMsgStub = () => {
     const stubs = {};
-    stubs.showManualInstallMsgStub = sinon.stub(
-      helpers,
-      "showManualInstallMsg"
-    );
+    stubs.showManualInstallMsgStub = sinon.stub(helpers, "showManualInstallMsg");
     stubs.restore = () => {
       stubs.showManualInstallMsgStub.restore();
     };
@@ -105,12 +97,8 @@ describe("menu-item install-tools", function() {
       .execute()
       .then(() => {
         expect(logs).to.deep.equal([]);
-        expect(yesNoStub.question).to.equal(
-          "Update xclap-cli to version 1.0.1"
-        );
-        expect(npmInstallStub.npmInstallStub.args).to.deep.equal([
-          ["xclap-cli", "1.0.1", true]
-        ]);
+        expect(yesNoStub.question).to.equal("Update xclap-cli to version 1.0.1");
+        expect(npmInstallStub.npmInstallStub.args).to.deep.equal([["xclap-cli", "1.0.1", true]]);
       })
       .finally(() => {
         stubs.restore();
@@ -148,9 +136,7 @@ describe("menu-item install-tools", function() {
       .execute()
       .then(() => {
         expect(logs).to.deep.equal([]);
-        expect(yesNoStub.question).to.equal(
-          "Update xclap-cli to version 1.0.1"
-        );
+        expect(yesNoStub.question).to.equal("Update xclap-cli to version 1.0.1");
       })
       .finally(() => {
         stubs.restore();
@@ -187,9 +173,7 @@ describe("menu-item install-tools", function() {
     setTimeout(() => {
       stubs.restore();
       expect(event).to.equal(true);
-      expect(logs[0]).includes(
-        "You don\'t have xclap-cli installed.  Pick option 1 to install it."
-      );
+      expect(logs[0]).includes("You don't have xclap-cli installed.  Pick option 1 to install it.");
       done();
     }, 30);
   });
@@ -226,6 +210,23 @@ describe("menu-item install-tools", function() {
     setTimeout(() => {
       stubs.restore();
       expect(event).to.equal(undefined);
+      done();
+    }, 30);
+  });
+
+  it("should only check for update once", done => {
+    let event = 0;
+    const stubs = makeStubs("xclap-cli", "1.0.0", "1.0.1");
+    const mi = installToolsItem();
+    const options = {
+      menu: { emit: () => event++ }
+    };
+    mi.emit("pre_show", options);
+    mi.emit("pre_show", options);
+
+    setTimeout(() => {
+      stubs.restore();
+      expect(event).to.equal(1);
       done();
     }, 30);
   });
