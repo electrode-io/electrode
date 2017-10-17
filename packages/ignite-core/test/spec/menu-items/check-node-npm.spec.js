@@ -5,6 +5,7 @@ const sinon = require("sinon");
 const checkEnv = require("../../../lib/util/check-env");
 const checkNodeNpmItem = require("../../../lib/menu-items/check-node-npm");
 const logger = require("../../../lib/util/logger");
+const Promise = require("bluebird");
 
 describe("menu-item check-node-npm", function() {
   it("should create menu item", () => {
@@ -14,22 +15,28 @@ describe("menu-item check-node-npm", function() {
     expect(mi.execute).to.exist;
   });
 
-  it("should check node and npm environment", done => {
+  it("should check node and npm environment", () => {
     const nodeStub = sinon.stub(checkEnv, "node");
     const npmStub = sinon.stub(checkEnv, "npm");
     const loggerStub = sinon.stub(logger, "log");
+    const getNpmVersionStub = sinon
+      .stub(checkEnv, "getNpmVersion")
+      .returns(Promise.resolve("3.0.0"));
 
     const mi = checkNodeNpmItem();
-    mi.emit("post_execute");
+    return mi.execute().then(() => {
+      mi.emit("post_execute");
 
-    setTimeout(() => {
-      nodeStub.restore();
-      npmStub.restore();
-      loggerStub.restore();
-      expect(nodeStub).to.have.been.calledOnce;
-      expect(npmStub).to.have.been.calledOnce;
-      expect(loggerStub).to.have.been.calledOnce;
-      done();
-    }, 30);
+      return Promise.delay(30).then(() => {
+        nodeStub.restore();
+        npmStub.restore();
+        loggerStub.restore();
+        getNpmVersionStub.restore();
+        expect(nodeStub).to.have.been.calledOnce;
+        expect(npmStub).to.have.been.calledOnce;
+        expect(npmStub.args).to.deep.equal([["3.0.0"]]);
+        expect(loggerStub).to.have.been.calledOnce;
+      });
+    });
   });
 });

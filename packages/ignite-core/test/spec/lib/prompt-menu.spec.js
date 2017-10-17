@@ -86,16 +86,11 @@ describe("prompt-menu", function() {
   it("runMenuItem should emit pre and post execute events", () => {
     const pm = new PromptMenu({});
     const mi = new MenuItem({ execute: _.noop, noPause: true });
-    let pre;
     let post;
-    mi.on("pre_execute", () => {
-      pre = true;
-    });
     mi.on("post_execute", () => {
       post = true;
     });
     pm.show = () => {
-      expect(pre).to.equal(true);
       expect(post).to.equal(true);
     };
 
@@ -130,7 +125,7 @@ describe("prompt-menu", function() {
   it("runMenuItem should pause prompt before it shows", () => {
     const pausePromptStub = sinon.stub(helpers, "pausePrompt").resolves(_.noop);
     const pm = new PromptMenu({});
-    const mi = new MenuItem({ execute: _.noop, noPause: false});
+    const mi = new MenuItem({ execute: _.noop, noPause: false });
     pm._clap = false;
     pm.show = () => {
       expect(pausePromptStub).to.have.been.called;
