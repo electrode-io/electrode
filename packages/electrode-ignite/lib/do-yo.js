@@ -38,8 +38,7 @@ module.exports = Object.assign(Lib, {
     });
 
     /*
-    * Platform: Windows
-    * Scenario: Avoid the hanging case when child process exits on its own by any reason.
+    * Avoid the hanging case when child process exits on its own by any reason.
     */
     child.on("exit", code => {
       logger.log(`Generator: ${name} exited on its own. Error code: ${code}.`);
