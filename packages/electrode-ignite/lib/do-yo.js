@@ -12,7 +12,13 @@ module.exports = Object.assign(Lib, {
   platform: {
     win32: function win32(name) {
       baseYoPath = baseYoPath || __dirname;
-      const yoPath = Path.join(baseYoPath, "..", "node_modules", ".bin", "yo.cmd");
+      const yoPath = Path.join(
+        baseYoPath,
+        "..",
+        "node_modules",
+        ".bin",
+        "yo.cmd"
+      );
 
       return childProcess.spawn("cmd", ["/c", `${yoPath} ${name}`], {
         stdio: "inherit"
@@ -30,7 +36,11 @@ module.exports = Object.assign(Lib, {
   },
 
   run: function run(name, platform) {
-    const platformRun = _.get(Lib, ["platform", platform || process.platform], Lib.platform.posix);
+    const platformRun = _.get(
+      Lib,
+      ["platform", platform || process.platform],
+      Lib.platform.posix
+    );
     const child = platformRun(name);
 
     child.on("error", err => {
@@ -40,8 +50,10 @@ module.exports = Object.assign(Lib, {
     /*
     * Avoid the hanging case when child process exits on its own by any reason.
     */
-    child.on("exit", code => {
-      logger.log(`Generator: ${name} exited on its own. Error code: ${code}.`);
+    child.on("exit", (code, signal) => {
+      logger.log(
+        `Generator: ${name} terminated. Child process exited with code ${code}, signal ${signal}.`
+      );
       return process.exit(code); //eslint-disable-line no-process-exit
     });
   },

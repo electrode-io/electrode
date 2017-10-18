@@ -5,12 +5,11 @@ const Promise = require("bluebird");
 const opn = require("opn");
 const chalk = require("chalk");
 
-module.exports = function(link) {
+module.exports = function(link, docType) {
   function execute() {
-    const defaultLink = "https://docs.electrode.io";
-    link = link || defaultLink;
+    link = link || "https://docs.electrode.io";
+    docType = docType || "Open Source";
     return Promise.try(() => opn(link, { wait: false })).then(() => {
-      const docType = link === defaultLink ? "Open Source" : "Internal";
       logger.log(
         chalk.green(
           `Electrode ${docType} docs opened in your browser, please check.`

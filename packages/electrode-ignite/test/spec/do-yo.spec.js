@@ -16,9 +16,9 @@ describe("do-yo", function() {
     doYo.run("test", platform);
     child.emit("error", new Error("test"));
     expect(logs[0]).includes("Running test generator failed: Error: test");
-    child.emit("exit", 1);
+    child.emit("exit", 1, "test-signal");
     expect(logs[1]).includes(
-      "Generator: test exited on its own. Error code: 1."
+      "Generator: test terminated. Child process exited with code 1, signal test-signal."
     );
     spawnStub.restore();
     logStub.restore();

@@ -44,7 +44,7 @@ describe("menu-item electrode-oss-doc", function() {
 
   it("should open wml doc", () => {
     logs = [];
-    const mi = docItem("http://gitbook.qa.walmart.com/books/electrode-dev-guide/");
+    const mi = docItem("http://gitbook.qa.walmart.com/books/electrode-dev-guide/", "Internal");
     expect(mi.cliCmd).to.equal("docs");
     expect(mi.menuText).to.equal("Electrode official documenations");
     return mi.execute().then(() => {
