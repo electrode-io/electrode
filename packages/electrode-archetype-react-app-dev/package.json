@@ -41,6 +41,7 @@
     "babel-preset-es2015-node": "^6.1.1",
     "babel-preset-react": "^6.3.13",
     "chai": "^4.0.0",
+    "chai-as-promised": "^7.1.1",
     "chai-shallowly": "^0.9.10",
     "clean-css": "^3.4.21",
     "convert-source-map": "^1.5.0",
