@@ -36,7 +36,7 @@ describe("menu-item electrode-oss-doc", function() {
     logs = [];
     const mi = docItem();
     expect(mi.cliCmd).to.equal("docs");
-    expect(mi.menuText).to.equal("Electrode official documenations");
+    expect(mi.menuText).to.equal("Electrode Open Source official documenation");
     return mi.execute().then(() => {
       expect(logs[0]).to.equal("Electrode Open Source docs opened in your browser, please check.");
     });
@@ -44,11 +44,11 @@ describe("menu-item electrode-oss-doc", function() {
 
   it("should open wml doc", () => {
     logs = [];
-    const mi = docItem("http://gitbook.qa.walmart.com/books/electrode-dev-guide/", "Internal");
+    const mi = docItem("http://gitbook.qa.walmart.com/books/electrode-dev-guide/", "WML Internal");
     expect(mi.cliCmd).to.equal("docs");
-    expect(mi.menuText).to.equal("Electrode official documenations");
+    expect(mi.menuText).to.equal("Electrode WML Internal official documenation");
     return mi.execute().then(() => {
-      expect(logs[0]).to.equal("Electrode Internal docs opened in your browser, please check.");
+      expect(logs[0]).to.equal("Electrode WML Internal docs opened in your browser, please check.");
     });
   });
 });

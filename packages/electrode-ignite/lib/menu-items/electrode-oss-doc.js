@@ -6,9 +6,10 @@ const opn = require("opn");
 const chalk = require("chalk");
 
 module.exports = function(link, docType) {
+  link = link || "https://docs.electrode.io";
+  docType = docType || "Open Source";
+
   function execute() {
-    link = link || "https://docs.electrode.io";
-    docType = docType || "Open Source";
     return Promise.try(() => opn(link, { wait: false })).then(() => {
       logger.log(
         chalk.green(
@@ -21,7 +22,7 @@ module.exports = function(link, docType) {
   return new MenuItem({
     cliCmd: "docs",
     icon: "\u263A",
-    menuText: "Electrode official documenations",
+    menuText: `Electrode ${docType} official documenation`,
     execute
   });
 };
