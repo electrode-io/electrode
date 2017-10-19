@@ -12,11 +12,17 @@ describe("do-yo", function() {
     const spawnStub = sinon.stub(childProcess, "spawn").callsFake(spawn);
     const logs = [];
     const logStub = sinon.stub(logger, "log").callsFake(msg => logs.push(msg));
+    const processExitStub = sinon.stub(process, "exit");
     doYo.run("test", platform);
     child.emit("error", new Error("test"));
     expect(logs[0]).includes("Running test generator failed: Error: test");
+    child.emit("exit", 1, "test-signal");
+    expect(logs[1]).includes(
+      "Generator: test terminated. Child process exited with code 1, signal test-signal."
+    );
     spawnStub.restore();
     logStub.restore();
+    processExitStub.restore();
   };
 
   it("should run spawn with local copy of yo on nix", () => {
