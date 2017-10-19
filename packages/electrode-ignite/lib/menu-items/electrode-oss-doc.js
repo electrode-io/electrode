@@ -5,9 +5,10 @@ const Promise = require("bluebird");
 const opn = require("opn");
 const chalk = require("chalk");
 
-module.exports = function(link, docType) {
+module.exports = function(link, docType, cliCmd) {
   link = link || "https://docs.electrode.io";
   docType = docType || "Open Source";
+  cliCmd = cliCmd || "docs";
 
   function execute() {
     return Promise.try(() => opn(link, { wait: false })).then(() => {
@@ -20,7 +21,7 @@ module.exports = function(link, docType) {
   }
 
   return new MenuItem({
-    cliCmd: "docs",
+    cliCmd,
     icon: "\u263A",
     menuText: `Electrode ${docType} official documenation`,
     execute
