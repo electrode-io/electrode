@@ -437,57 +437,36 @@ module.exports = class extends Generator {
   }
 
   install() {
-    //git init and npmi for lerna lernaStructure
+    const yarnOrNpm = this.props.yarn ? "yarn" : "npm";
+    let locations = [
+      this.destinationPath(),
+      path.join(this.destinationPath(), "..", "..", this.originalDemoAppName)
+    ];
+
     if (!this.isAddon) {
-      //reset the path to the actual root
-      this.destinationRoot(this.oldRoot);
-      this.destinationRoot();
-
+      //git init and npmi for lerna lernaStructure
       this.spawnCommandSync("git", ["init"], {
-        cwd: this.destinationPath()
+        cwd: this.destinationPath(this.oldRoot)
       });
-      if (this.props.yarn) {
-        this.spawnCommandSync("yarn", ["install"], {
-          cwd: this.destinationPath()
-        });
-      } else {
-        this.spawnCommandSync("npm", ["install"], {
-          cwd: this.destinationPath()
-        });
-      }
+      locations = [
+        this.destinationPath(this.oldRoot),
+        path.join(this.oldRoot, "/", this.rootPath),
+        this.destinationPath(path.join(this.oldRoot, "/", this.originalDemoAppName))
+      ];
     }
 
-    //install the dependencies for the package
-    let packageDirectory = this.isAddon
-      ? this.destinationPath()
-      : this.destinationPath() + "/" + this.rootPath;
-
-    this.destinationRoot(packageDirectory);
-
-    if (this.props.yarn) {
-      this.spawnCommandSync("yarn", ["install"], {
-        cwd: this.destinationPath()
-      });
-    } else {
-      this.spawnCommandSync("npm", ["install"], {
-        cwd: this.destinationPath()
-      });
-    }
-
-    //install demo-app dependencies
-    let demoDirectory = this.isAddon
-      ? this.destinationPath("../../" + this.originalDemoAppName)
-      : this.oldRoot + "/" + this.originalDemoAppName;
-    this.destinationRoot(demoDirectory);
-    if (this.props.yarn) {
-      this.spawnCommandSync("yarn", ["install"], {
-        cwd: this.destinationPath()
-      });
-    } else {
-      this.spawnCommandSync("npm", ["install"], {
-        cwd: this.destinationPath()
-      });
-    }
+    let res = locations.reduce(
+      (previousValue, currentValue, currentIndex, array) => {
+        if (previousValue.signal != "SIGINT" && previousValue.status === 0) {
+          return this.spawnCommandSync(yarnOrNpm, ["install"], {
+            cwd: currentValue
+          });
+        } else {
+          return previousValue;
+        }
+      },
+      { status: 0 }
+    );
   }
 
   end() {
