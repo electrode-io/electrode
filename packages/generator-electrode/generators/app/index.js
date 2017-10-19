@@ -19,7 +19,7 @@ const pkg = require("../../package.json");
 module.exports = class extends Generator {
   constructor(args, options) {
     super(args, options);
-    
+
     this.isDemoApp = this.options.isDemoApp || false;
 
     if (!this.isDemoApp) {
@@ -70,7 +70,6 @@ module.exports = class extends Generator {
     this.isExtended = this.options.isExtended || false;
     //Data should be passed to the generator using props
     this.props = this.options.props || {};
-    
   }
 
   initializing() {
@@ -109,7 +108,7 @@ module.exports = class extends Generator {
     );
   }
 
-_askFor() {
+  _askFor() {
     if (this.pkg.name || this.options.name) {
       this.props.name = this.pkg.name || _.kebabCase(this.options.name);
     }
@@ -175,14 +174,14 @@ _askFor() {
         type: "confirm",
         name: "pwa",
         message: "Would you like to make a Progressive Web App?",
-        when: !this.props.pwa,
+        when: this.props.pwa === undefined,
         default: false
       },
       {
         type: "confirm",
         name: "autoSsr",
         message: "Support disabling server side rendering based on high load?",
-        when: !this.props.autoSsr,
+        when: this.props.autoSsr === undefined,
         default: false
       },
       {
@@ -197,14 +196,14 @@ _askFor() {
         type: "confirm",
         name: "createDirectory",
         message: "Would you like to create a new directory for your project?",
-        when: !this.props.createDirectory,
+        when: this.props.createDirectory === undefined,
         default: true
       },
       {
         type: "confirm",
         name: "yarn",
         message: "Would you like to yarn install packages?",
-        when: !this.props.yarn,
+        when: this.props.yarn === undefined,
         default: false
       }
     ];
@@ -340,7 +339,7 @@ _askFor() {
     //copy .eslintc into the client directory
     if (isSingleQuote) {
       this.fs.copy(
-        this.templatePath("src/client/.eslintrc"), 
+        this.templatePath("src/client/.eslintrc"),
         this.destinationPath("src/client/.eslintrc")
       );
     }
@@ -446,7 +445,7 @@ _askFor() {
       if (this.props.yarn) {
         this.yarnInstall();
       } else {
-          this.installDependencies({
+        this.installDependencies({
           bower: false
         });
       }
