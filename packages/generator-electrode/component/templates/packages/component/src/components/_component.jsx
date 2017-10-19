@@ -26,7 +26,7 @@ export default class <%= componentName %> extends React.Component {
 
 <%= componentName %>.displayName = "<%= componentName %>";
 
-<%= componentName %>.propTypes = { 
+<%= componentName %>.propTypes = {
   data: propTypes.array
 };
 
