@@ -135,6 +135,7 @@ class PromptMenu extends EventEmitter {
           desc: menuText,
           aliases: mi.cliAliases,
           handler: () => {
+            logger.log(this._title);
             logger.log(`Running ${menuText}`);
             return this.runMenuItem(mi);
           }
@@ -142,6 +143,7 @@ class PromptMenu extends EventEmitter {
       },
       Yargs
     )
+      .strict()
       .help()
       .usage(`Usage: ${this._progName} <command>`)
       .parse(argv);
@@ -161,15 +163,17 @@ class PromptMenu extends EventEmitter {
     };
 
     spinner.start();
-    item.emit("pre_execute");
     return Promise.try(() => item.execute({ menu: this }))
       .then(() => {
         spinner.stop();
         item.emit("post_execute");
-        if (item.noPause) {
-          show();
-        } else if (!this._clap) {
-          helpers.pausePrompt().then(show);
+        // don't show menu in clap mode
+        if (!this._clap) {
+          if (item.noPause) {
+            show();
+          } else {
+            helpers.pausePrompt().then(show);
+          }
         }
       })
       .finally(() => spinner.stop());

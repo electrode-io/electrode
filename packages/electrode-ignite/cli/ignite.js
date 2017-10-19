@@ -30,6 +30,5 @@ const promptMenu = new PromptMenu({
 if (process.argv.length <= 2) {
   promptMenu.show();
 } else {
-  logger.log(title);
   promptMenu.clap();
 }

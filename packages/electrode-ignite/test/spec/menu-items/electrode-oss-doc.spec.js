@@ -9,31 +9,46 @@ const sinon = require("sinon");
 describe("menu-item electrode-oss-doc", function() {
   let docItem;
   let opn;
+  let logs;
+  let logStub;
 
   beforeEach(() => {
     delete require.cache[require.resolve("opn")];
     mockRequire("opn", (url, opts) => opn(url, opts));
     docItem = require("../../../lib/menu-items/electrode-oss-doc");
+    logStub = sinon.stub(logger, "log").callsFake(msg => logs.push(msg));
   });
 
   afterEach(() => {
     mockRequire.stopAll();
+    logStub.restore();
   });
 
   it("should be ok", () => {
-    const logs = [];
-    const logStub = sinon.stub(logger, "log").callsFake(msg => logs.push(msg));
     opn = (url, opts) => {
       expect(url).to.exist;
       expect(opts.wait).to.equal(false);
     };
     expect(docItem).to.exist;
+  });
+
+  it("should open oss doc", () => {
+    logs = [];
     const mi = docItem();
     expect(mi.cliCmd).to.equal("docs");
     expect(mi.menuText).to.equal("Electrode official documenations");
     return mi.execute().then(() => {
-      logStub.restore();
-      expect(logs[0]).to.equal("Electrode docs opened in your browser, please check.");
+      expect(logs[0]).to.equal("Electrode Open Source docs opened in your browser, please check.");
+    });
+  });
+
+  it("should open wml doc", () => {
+    logs = [];
+    const mi = docItem("http://gitbook.qa.walmart.com/books/electrode-dev-guide/", "Internal");
+    expect(mi.cliCmd).to.equal("docs");
+    expect(mi.menuText).to.equal("Electrode official documenations");
+    return mi.execute().then(() => {
+      expect(logs[0]).to.equal("Electrode Internal docs opened in your browser, please check.");
     });
   });
 });
