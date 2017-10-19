@@ -1,3 +1,45 @@
+# 10/18/2017
+
+## Packages
+
+-   electrode-ignite@1.1.0 `(1.0.1 => 1.1.0)`
+-   generator-electrode@3.4.2 `(3.4.1 => 3.4.2)`
+-   ignite-core@1.0.1 `(1.0.0 => 1.0.1)`
+
+## Commits
+
+-   `packages/electrode-ignite`
+
+    -   [patch] commit missing file [commit](http://github.com/electrode-io/electrode/commit/377524cf53ae2ef193fb88d87ccb59421ce61e89)
+    -   [patch] fix argument parsing ([#613](https://github.com/electrode-io/electrode/pull/613)) [commit](http://github.com/electrode-io/electrode/commit/54d85eaf81f9cbb28072c2ae8b4a486c75c515fa)
+    -   [minor] Changes for wml electrode-ignite ([#615](https://github.com/electrode-io/electrode/pull/615)) [commit](http://github.com/electrode-io/electrode/commit/679c0593f4cbc54b65b46e25ab9a01a27749b0ee)
+
+-   `packages/generator-electrode`
+
+    -   Fix component generator ([#616](https://github.com/electrode-io/electrode/pull/616)) [commit](http://github.com/electrode-io/electrode/commit/93aae0ec8c5bea0d57902aa0d780e0dc20b90bef)
+
+-   `packages/ignite-core`
+
+    -   remove unused pre_execute event and update tests ([#614](https://github.com/electrode-io/electrode/pull/614)) [commit](http://github.com/electrode-io/electrode/commit/3b7be797ad564c0db1c413c3caa81d9213c33a1e)
+    -   [patch] fix argument parsing ([#613](https://github.com/electrode-io/electrode/pull/613)) [commit](http://github.com/electrode-io/electrode/commit/54d85eaf81f9cbb28072c2ae8b4a486c75c515fa)
+    -   Update ignite-core unit test ([#611](https://github.com/electrode-io/electrode/pull/611)) [commit](http://github.com/electrode-io/electrode/commit/39b8471f0480dc526f8cb23fa0f16ec91b7cdbf5)
+
+-   `samples/stylus-sample`
+
+    -   [minor][bug] unable to launch sample program. ([#609](https://github.com/electrode-io/electrode/pull/609)) [commit](http://github.com/electrode-io/electrode/commit/b57ee79325e91b4ada4afefdb5cb7365700c68ed)
+
+-   `samples/universal-material-ui`
+
+    -   [minor][bug] unable to launch sample program. ([#609](https://github.com/electrode-io/electrode/pull/609)) [commit](http://github.com/electrode-io/electrode/commit/b57ee79325e91b4ada4afefdb5cb7365700c68ed)
+
+-   `samples/universal-react-node`
+
+    -   [minor][bug] unable to launch sample program. ([#609](https://github.com/electrode-io/electrode/pull/609)) [commit](http://github.com/electrode-io/electrode/commit/b57ee79325e91b4ada4afefdb5cb7365700c68ed)
+
+-   `MISC`
+
+    -   [chore] remove bin from gitignore [commit](http://github.com/electrode-io/electrode/commit/f17e989f3870271d20953df038125376dc5689ee)
+
 # 10/10/2017
 
 ## Packages

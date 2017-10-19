@@ -129,15 +129,21 @@ module.exports = class extends Generator {
         type: "confirm",
         name: "yarn",
         message: "Would you like to yarn install packages?",
-        when: !this.props.yarn,
+        when: this.props.yarn === undefined,
         default: false
       }
     ];
 
     return this.optionOrPrompt(prompts).then(props => {
       this.props = extend(this.props, props);
-      this.projectName = this.props.projectName.split(" ").map(_.toLower).join("");
-      this.packageName = this.props.projectName.split(" ").map(_.toLower).join("");
+      this.projectName = this.props.projectName
+        .split(" ")
+        .map(_.toLower)
+        .join("");
+      this.packageName = this.props.projectName
+        .split(" ")
+        .map(_.toLower)
+        .join("");
       this.developerName = this.props.developerName;
       this.quoteType = this.props.quoteType;
       this.ghUser = this.props.ghUser;
@@ -179,11 +185,10 @@ module.exports = class extends Generator {
     lernaStructure: {
       // copy lerna and top level templates
       if (!this.isAddon) {
-        this.fs.copyTpl(
-          this.templatePath("gitignore"), 
-          this.destinationPath(".gitignore"));
+        this.fs.copyTpl(this.templatePath("gitignore"), this.destinationPath(".gitignore"));
 
         this.fs.copyTpl(this.templatePath("_package.json"), this.destinationPath("package.json"), {
+          packageName: this.packageName,
           projectName: this.projectName,
           developerName: this.developerName,
           githubUrl: this.githubUrl,
@@ -195,39 +200,52 @@ module.exports = class extends Generator {
         this.fs.copyTpl(this.templatePath("_readme.md"), this.destinationPath("README.md"), {
           projectName: this.projectName
         });
-        
+
         this.fs.copyTpl(this.templatePath("lerna.json"), this.destinationPath("lerna.json"));
       }
     }
 
-    project: {
+    component: {
       this.fs.copy(
         this.templatePath("packages/component/babelrc"),
-        this.destinationPath(".babelrc")
+        this.destinationPath(this.rootPath + ".babelrc")
       );
       this.fs.copy(
         this.templatePath("packages/component/gitignore"),
-        this.destinationPath(".gitignore")
+        this.destinationPath(this.rootPath + ".gitignore")
       );
       this.fs.copy(
         this.templatePath("packages/component/npmignore"),
-        this.destinationPath(".npmignore")
+        this.destinationPath(this.rootPath + ".npmignore")
       );
       this.fs.copy(
         this.templatePath("packages/component/editorconfig"),
-        this.destinationPath(".editorconfig")
+        this.destinationPath(this.rootPath + ".editorconfig")
       );
-      this.fs.copy(
+      this.fs.copyTpl(
         this.templatePath("packages/component/_xclap.js"),
-        this.destinationPath("xclap.js")
+        this.destinationPath(this.rootPath + "xclap.js"),
+        { quoteType: this.quoteType }
       );
-      this.fs.copy(
+      this.fs.copyTpl(
         this.templatePath("packages/component/_package.json"),
-        this.destinationPath("package.json")
+        this.destinationPath(this.rootPath + "package.json"),
+        {
+          projectName: this.projectName,
+          packageName: this.projectName,
+          componentName: this.componentName,
+          developerName: this.developerName,
+          githubUrl: this.githubUrl,
+          ghUser: this.ghUser,
+          packageGitHubOrg: this.packageGitHubOrg,
+          ghRepo: this.ghRepo,
+          currentYear: this.currentYear
+        }
       );
       this.fs.copyTpl(
         this.templatePath("packages/component/_readme.md"),
-        this.destinationPath("README.md"),{
+        this.destinationPath(this.rootPath + "README.md"),
+        {
           projectName: this.projectName,
           packageName: this.projectName,
           componentName: this.componentName,
@@ -245,12 +263,10 @@ module.exports = class extends Generator {
           this.destinationPath(".eslintrc")
         );
       }
-    }
-
-    component: {
       this.fs.copyTpl(
         this.templatePath("packages/component/src/components/_component.jsx"),
-        this.destinationPath(this.rootPath + "src/components/" + this.projectName + ".jsx"),{
+        this.destinationPath(this.rootPath + "src/components/" + this.projectName + ".jsx"),
+        {
           componentName: this.componentName,
           projectName: this.projectName
         }
@@ -271,7 +287,8 @@ module.exports = class extends Generator {
       // demo folder files
       this.fs.copyTpl(
         this.templatePath("packages/component/demo-examples/_component.example"),
-        this.destinationPath(this.rootPath + "demo/examples/" + this.projectName + ".example"),{
+        this.destinationPath(this.rootPath + "demo/examples/" + this.projectName + ".example"),
+        {
           componentName: this.componentName
         }
       );
@@ -293,28 +310,32 @@ module.exports = class extends Generator {
       // l10n language templates
       this.fs.copyTpl(
         this.templatePath("packages/component/src/lang/_DefaultMessages.js"),
-        this.destinationPath(this.rootPath + "src/lang/default-messages.js"),{
+        this.destinationPath(this.rootPath + "src/lang/default-messages.js"),
+        {
           componentName: this.componentName
         }
       );
 
       this.fs.copyTpl(
         this.templatePath("packages/component/src/lang/_en.json"),
-        this.destinationPath(this.rootPath + "src/lang/en.json"),{
+        this.destinationPath(this.rootPath + "src/lang/en.json"),
+        {
           componentName: this.componentName
         }
       );
 
       this.fs.copyTpl(
         this.templatePath("packages/component/src/lang/tenants/electrodeio/_defaultMessages.js"),
-        this.destinationPath(this.rootPath + "src/lang/tenants/electrodeio/default-messages.js"),{
+        this.destinationPath(this.rootPath + "src/lang/tenants/electrodeio/default-messages.js"),
+        {
           componentName: this.componentName
         }
       );
 
       this.fs.copyTpl(
         this.templatePath("packages/component/src/_Component.js"),
-        this.destinationPath(this.rootPath + "src/index.js"),{
+        this.destinationPath(this.rootPath + "src/index.js"),
+        {
           componentName: this.componentName,
           projectName: this.projectName
         }
@@ -324,7 +345,8 @@ module.exports = class extends Generator {
     test: {
       this.fs.copyTpl(
         this.templatePath("packages/component/test/client/eslintrc"),
-        this.destinationPath(this.rootPath + "test/client/.eslintrc"),{
+        this.destinationPath(this.rootPath + "test/client/.eslintrc"),
+        {
           quoteType: this.quoteType
         }
       );
@@ -333,7 +355,8 @@ module.exports = class extends Generator {
         this.templatePath("packages/component/test/client/components/_component.spec.jsx"),
         this.destinationPath(
           this.rootPath + "test/client/components/" + this.projectName + ".spec.jsx"
-        ),{
+        ),
+        {
           componentName: this.componentName,
           projectName: this.projectName
         }
@@ -442,14 +465,14 @@ module.exports = class extends Generator {
     this.destinationRoot(packageDirectory);
 
     if (this.props.yarn) {
-        this.spawnCommandSync("yarn", ["install"], {
-          cwd: this.destinationPath()
-        });
-      } else {
-        this.spawnCommandSync("npm", ["install"], {
-          cwd: this.destinationPath()
-        });
-      }
+      this.spawnCommandSync("yarn", ["install"], {
+        cwd: this.destinationPath()
+      });
+    } else {
+      this.spawnCommandSync("npm", ["install"], {
+        cwd: this.destinationPath()
+      });
+    }
 
     //install demo-app dependencies
     let demoDirectory = this.isAddon
@@ -457,14 +480,14 @@ module.exports = class extends Generator {
       : this.oldRoot + "/" + this.originalDemoAppName;
     this.destinationRoot(demoDirectory);
     if (this.props.yarn) {
-        this.spawnCommandSync("yarn", ["install"], {
-          cwd: this.destinationPath()
-        });
-      } else {
-        this.spawnCommandSync("npm", ["install"], {
-          cwd: this.destinationPath()
-        });
-      }
+      this.spawnCommandSync("yarn", ["install"], {
+        cwd: this.destinationPath()
+      });
+    } else {
+      this.spawnCommandSync("npm", ["install"], {
+        cwd: this.destinationPath()
+      });
+    }
   }
 
   end() {
