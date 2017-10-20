@@ -53,23 +53,25 @@ module.exports = Object.assign(Lib, {
     });
   },
 
-  npmInstall: function npmInstall(name, version, isGlobal) {
+  /* eslint-disable max-params */
+  npmInstall: function npmInstall(name, version, isGlobal, npmReg) {
     const globally = isGlobal ? " globally" : "";
     const flags = isGlobal ? "-g" : "";
+    const npmRegFlag = checkModule.npmRegistryFlag(npmReg);
 
     const colorize = (m, v) => `${chalk.green(m)}@${chalk.magenta(v)}`;
 
     const spinner = Lib.makeSpinner(`Installing ${colorize(name, version)}${globally}`);
     spinner.start();
     return xsh
-      .exec(true, `npm install ${flags} ${name}@${version}`)
+      .exec(true, `npm ${npmRegFlag} install ${flags} ${name}@${version}`)
       .catch(err => {
         Lib.showNpmErr(err);
         throw err;
       })
       .then(() => {
         return checkModule
-          .latest(name)
+          .latest(name, npmReg)
           .then(v => {
             spinner.stop();
             logger.log(

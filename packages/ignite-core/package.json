@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "electrode-archetype-njs-module-dev": "^3.0.0",
+    "electrode-server": "^1.2.2",
     "xstdout": "^0.1.1"
   },
   "bugs": {

@@ -7,6 +7,7 @@ const sinon = require("sinon");
 const Promise = require("bluebird");
 const Fs = require("fs");
 const Path = require("path");
+const electrodeServer = require("electrode-server");
 
 describe("check-module", function() {
   this.timeout(10000);
@@ -61,6 +62,29 @@ describe("check-module", function() {
         expect(version).to.be.not.empty;
         expect(version).to.not.equal("0.0.0");
       });
+    });
+
+    it("should find version of npm with passed in reg", () => {
+      return checkModule.latest("npm", "https://registry.npmjs.org").then(version => {
+        expect(version).to.be.not.empty;
+        expect(version).to.not.equal("0.0.0");
+      });
+    });
+
+    it("should fail to find version of npm with bad passed in reg", () => {
+      let error;
+
+      return electrodeServer({ connections: { default: { port: 0 } } })
+        .then(server => {
+          return checkModule
+            .latest("npm", `http://localhost:${server.info.port}`)
+            .catch(err => (error = err))
+            .finally(() => new Promise(resolve => server.stop(resolve)));
+        })
+        .then(() => {
+          expect(error).to.exist;
+          expect(error.code).to.equal(1);
+        });
     });
   });
 
@@ -157,6 +181,19 @@ describe("check-module", function() {
 
     it("should return false if version is the older", () => {
       expect(checkModule.isNewVersion("1.0.0", "0.9.9")).to.equal(false);
+    });
+  });
+
+  describe("npmRegistryFlag", function() {
+    it("should return right flag if reg is passed", () => {
+      expect(checkModule.npmRegistryFlag("http://npme.walmart.com")).to.equal(
+        "-registry=http://npme.walmart.com"
+      );
+    });
+
+    it(`should return "" if no reg is passed`, () => {
+      expect(checkModule.npmRegistryFlag()).to.equal("");
+      expect(checkModule.npmRegistryFlag("")).to.equal("");
     });
   });
 });
