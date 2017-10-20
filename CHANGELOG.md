@@ -1,3 +1,35 @@
+# 10/20/2017
+
+## Packages
+
+-   electrode-archetype-react-app@4.0.5 `(4.0.4 => 4.0.5)`
+-   electrode-archetype-react-app-dev@4.0.5 `(4.0.4 => 4.0.5)`
+-   electrode-ignite@1.2.0 `(1.1.0 => 1.2.0)`
+-   generator-electrode@3.4.3 `(3.4.2 => 3.4.3)`
+-   ignite-core@1.1.0 `(1.0.1 => 1.1.0)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [patch] Chai as promised ([#618](https://github.com/electrode-io/electrode/pull/618)) [commit](http://github.com/electrode-io/electrode/commit/2d1af7ae95664f979fb2758cd5049d4f655839ed)
+
+-   `packages/electrode-ignite`
+
+    -   [minor] More updates for electrode-ignite ([#619](https://github.com/electrode-io/electrode/pull/619)) [commit](http://github.com/electrode-io/electrode/commit/af1ef695357992f340335f8cdc43fd2257e62c28)
+
+-   `packages/generator-electrode`
+
+    -   [patch][bug] Component Generator refactor install function, exit immediately. ([#620](https://github.com/electrode-io/electrode/pull/620)) [commit](http://github.com/electrode-io/electrode/commit/8b3313b164c850bd5b4f5900bf1f2bb5b4b157e5)
+
+-   `packages/ignite-core`
+
+    -   [minor] support optional npm registry ([#621](https://github.com/electrode-io/electrode/pull/621)) [commit](http://github.com/electrode-io/electrode/commit/40bb1243f91e33a8659f530ce7800780e8d39325)
+
+-   `tools`
+
+    -   include packages updated by mapping [commit](http://github.com/electrode-io/electrode/commit/448c33ebae2540f8afd023db64db49ab25640c99)
+
 # 10/18/2017
 
 ## Packages
