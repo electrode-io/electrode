@@ -30,11 +30,17 @@ module.exports = Object.assign(Lib, {
   //
   // check latest version of a module available on npm registry
   //
-  latest: function(name) {
+  latest: function(name, npmReg) {
+    const npmRegFlag = Lib.npmRegistryFlag(npmReg);
     return xsh
-      .exec(true, `npm show -loglevel silent ${name} version`)
+      .exec(true, `npm ${npmRegFlag} show -loglevel silent ${name} version`)
       .then(ret => ret.stdout.trim());
   },
+
+  npmRegistryFlag: function(reg) {
+    return reg ? `-registry=${reg}` : "";
+  },
+
   //
   // check if Date b is a new date compare to Date a
   //
@@ -58,7 +64,7 @@ module.exports = Object.assign(Lib, {
   //
   // check latest verion of a module on npm registry only once a day
   //
-  latestOnceDaily: function(name, path) {
+  latestOnceDaily: function(name, path, npmReg) {
     path = path || Path.join(__dirname, `../..`);
     const filename = Path.join(path, `latest_check_${name}.json`);
     return readFile(filename)
@@ -71,7 +77,7 @@ module.exports = Object.assign(Lib, {
       })
       .then(x => {
         if (Lib.isNewDate(new Date(x.timestamp), new Date())) {
-          return Lib.latest(name).then(version => {
+          return Lib.latest(name, npmReg).then(version => {
             const toSave = {
               timestamp: Date.now(),
               version
