@@ -455,9 +455,9 @@ module.exports = class extends Generator {
       ];
     }
 
-    let res = locations.reduce(
-      (previousValue, currentValue, currentIndex, array) => {
-        if (previousValue.signal != "SIGINT" && previousValue.status === 0) {
+    locations.reduce(
+      (previousValue, currentValue) => {
+        if (!previousValue.signal && previousValue.status === 0) {
           return this.spawnCommandSync(yarnOrNpm, ["install"], {
             cwd: currentValue
           });
