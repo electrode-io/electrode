@@ -66,10 +66,10 @@ module.exports = class extends Generator {
       desc: "Content to insert in the README.md file"
     });
 
-    //Flag to check if the OSS generator is being called as a subgenerator
-    this.isExtended = this.options.isExtended || false;
     //Data should be passed to the generator using props
     this.props = this.options.props || {};
+    //Flag to check if the OSS generator is being called as a subgenerator
+    this.isExtended = this.props.isExtended || false;
   }
 
   initializing() {
