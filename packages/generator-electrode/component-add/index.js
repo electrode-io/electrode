@@ -141,7 +141,8 @@ module.exports = class extends Generator {
       name: this.packageName,
       componentName: this.componentName,
       demoAppName: this.demoAppName,
-      quotes: this.props.quotes
+      quotes: this.props.quotes,
+      yarn: this.props.yarn
     };
 
     this.composeWith(require.resolve("../component"), options);
