@@ -1,3 +1,32 @@
+# 10/31/2017
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-react-app@4.0.6 `(4.0.5 => 4.0.6)`
+-   electrode-archetype-react-app-dev@4.0.6 `(4.0.5 => 4.0.6)`
+-   generator-electrode@3.4.4 `(3.4.3 => 3.4.4)`
+-   ignite-core@1.1.1 `(1.1.0 => 1.1.1)`
+
+### Lerna Updated
+
+-   electrode-ignite@1.2.1 `(1.2.0 => 1.2.1)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   Removed compilers with require ([#625](https://github.com/electrode-io/electrode/pull/625)) [commit](http://github.com/electrode-io/electrode/commit/4dddbf025b844aa682e41dd5c2bdc7d9bcc79a9d)
+
+-   `packages/generator-electrode`
+
+    -   Read incoming props if extended ([#622](https://github.com/electrode-io/electrode/pull/622)) [commit](http://github.com/electrode-io/electrode/commit/9b5bafa276fea80281f7b559ab0e893b7a70aff2)
+
+-   `packages/ignite-core`
+
+    -   [fix] pass npmReg to latestOnceDaily ([#626](https://github.com/electrode-io/electrode/pull/626)) [commit](http://github.com/electrode-io/electrode/commit/4f03e480cbbe136dfa796c1c34b599bbcef858a0)
+
 # 10/20/2017
 
 ## Packages
