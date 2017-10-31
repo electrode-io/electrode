@@ -20,6 +20,10 @@ describe("do-yo", function() {
     expect(logs[1]).includes(
       "Generator: test terminated. Child process exited with code 1, signal test-signal."
     );
+    child.emit("exit", 0, "success-signal");
+    expect(logs[2]).includes(
+      "Generator: test exited without any errors."
+    );
     spawnStub.restore();
     logStub.restore();
     processExitStub.restore();
