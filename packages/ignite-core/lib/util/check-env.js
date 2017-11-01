@@ -23,7 +23,7 @@ module.exports = Object.assign(Lib, {
   npm: function npm(version) {
     /*
      * Note:
-     * Currently electrode-ignite facing an incorrect installation issue under npm v5.4.x
+     * electrode-ignite is facing an incorrect installation issue under npm v5.4.x
      */
     let message = "";
     if (semverCompare(version, "5.4.0") >= 0 && semverCompare(version, "5.5.0") < 0) {
