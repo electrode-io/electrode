@@ -68,7 +68,7 @@ module.exports = function(name, npmReg) {
     setTimeout(() => {
       Promise.all([
         checkModule.globalInstalled(name),
-        checkModule.latestOnceDaily(name)
+        checkModule.latestOnceDaily(name, null, npmReg)
       ]).then(v => {
         versions = v;
         if (!executed && checkModule.isNewVersion(versions[0], versions[1])) {
