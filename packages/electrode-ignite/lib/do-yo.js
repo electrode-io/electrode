@@ -51,7 +51,7 @@ module.exports = Object.assign(Lib, {
     /*
     * Avoid the hanging case when child process exits on its own by any reason.
     */
-    child.on("exit", (code, signal) => {
+    child.on("exit", (code) => {
       if (code === 0) {
         logger.log(
           chalk.green(
@@ -61,8 +61,8 @@ module.exports = Object.assign(Lib, {
       } else {
         logger.log(
           chalk.red(
-            `Generator: ${name} terminated. Child process exited with code ${code}, `
-            + `signal ${signal}.`
+            `Generator: ${name} failed with exit code ${code}.`
+            + ` This could mean that it didn't generate your app properly. Please double check.`
           )
         );
       }
