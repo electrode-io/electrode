@@ -22,12 +22,13 @@ function removeCwd(s) {
 
 const optionalRequire = require("optional-require")(require);
 const reporterStats = optionalRequire("../dist/server/stats.json");
+const defaultSocketPort = process.env.WEBPACK_REPORTER_SOCKET_PORT || 5000;
 
 class WebpackReporter extends EventEmitter {
   constructor(options) {
     super();
 
-    this.options = _.defaults({}, options, { socketPort: 5000 });
+    this.options = _.defaults({}, options, { socketPort: defaultSocketPort });
 
     if (reporterStats) {
       //
