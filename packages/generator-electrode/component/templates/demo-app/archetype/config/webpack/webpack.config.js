@@ -1,1 +1,1 @@
-require("./component-alias.config");
+module.exports = require("./component-alias.config");
