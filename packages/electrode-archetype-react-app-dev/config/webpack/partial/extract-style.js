@@ -99,7 +99,11 @@ module.exports = function() {
     module: { rules },
     plugins: [
       new ExtractTextPlugin({ filename: "[name].style.[hash].css" }),
-      process.env.NODE_ENV === "production" && new OptimizeCssAssetsPlugin(),
+      process.env.NODE_ENV === "production" && new OptimizeCssAssetsPlugin({
+        cssProcessorOptions: {
+          safe: true
+        }
+      }),
 
       /*
        preserve: default: false. Keep the original unsplit file as well.
