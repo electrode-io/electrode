@@ -4,6 +4,7 @@ const Path = require("path");
 const childProcess = require("child_process");
 const { logger } = require("ignite-core");
 const _ = require("lodash");
+const chalk = require("chalk");
 
 const Lib = {};
 let baseYoPath = "";
@@ -50,10 +51,21 @@ module.exports = Object.assign(Lib, {
     /*
     * Avoid the hanging case when child process exits on its own by any reason.
     */
-    child.on("exit", (code, signal) => {
-      logger.log(
-        `Generator: ${name} terminated. Child process exited with code ${code}, signal ${signal}.`
-      );
+    child.on("exit", (code) => {
+      if (code === 0) {
+        logger.log(
+          chalk.green(
+            `Generator: ${name} exited without any errors.`
+          )
+        );
+      } else {
+        logger.log(
+          chalk.red(
+            `Generator: ${name} failed with exit code ${code}.`
+            + ` This could mean that it didn't generate your app properly. Please double check.`
+          )
+        );
+      }
       return process.exit(code); //eslint-disable-line no-process-exit
     });
   },
