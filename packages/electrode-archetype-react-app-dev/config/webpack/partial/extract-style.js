@@ -100,13 +100,12 @@ module.exports = function() {
     plugins: [
       new ExtractTextPlugin({ filename: "[name].style.[hash].css" }),
       process.env.NODE_ENV === "production" && new OptimizeCssAssetsPlugin(),
-
       /*
        preserve: default: false. Keep the original unsplit file as well.
        Sometimes this is desirable if you want to target a specific browser (IE)
        with the split files and then serve the unsplit ones to everyone else.
        */
-      new CSSSplitPlugin({ size: 4000, imports: true, preserve: true }),
+      new CSSSplitPlugin({ size: 4000, imports: true, preserve: true, compilerPhase: "emit" }),
       new webpack.LoaderOptionsPlugin({
         options: {
           context: Path.resolve(process.cwd(), "src"),
