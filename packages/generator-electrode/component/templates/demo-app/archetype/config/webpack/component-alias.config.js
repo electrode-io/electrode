@@ -10,15 +10,15 @@ const components = Fs.readdirSync(repoPackagesDir);
 
 const config = {
   resolve: {
-    alias: {}
-  },
-  modules: []
+    alias: {},
+    modules: []
+  }
 };
 
 components.forEach(name => {
   config.resolve.alias[name] = Path.join(repoPackagesDir, name, "src");
-  config.modules.push(Path.join(repoPackagesDir, name));
-  config.modules.push(Path.join(repoPackagesDir, name, "node_modules"));
+  config.resolve.modules.push(Path.join(repoPackagesDir, name));
+  config.resolve.modules.push(Path.join(repoPackagesDir, name, "node_modules"));
 });
 
 module.exports = config;
