@@ -27,7 +27,7 @@ class WebpackReporter extends EventEmitter {
   constructor(options) {
     super();
 
-    this.options = _.defaults( {}, options, {socketPort: 5000});
+    this.options = _.defaults({}, options, { socketPort: 5000 });
 
     if (reporterStats) {
       //
@@ -37,12 +37,16 @@ class WebpackReporter extends EventEmitter {
       //
       const distJs = Path.join(__dirname, "../dist/js", reporterStats.assetsByChunkName.main[0]);
       const distCss = Path.join(__dirname, "../dist/js", reporterStats.assetsByChunkName.main[1]);
-      this._reporterHtml = fs.readFileSync(Path.resolve(Path.join(__dirname, "reporter.html"))).toString()
+      this._reporterHtml = fs
+        .readFileSync(Path.resolve(Path.join(__dirname, "reporter.html")))
+        .toString()
         .replace("{{CSS}}", removeCwd(distCss))
         .replace("{{JS}}", removeCwd(distJs))
-        .replace(/{{SOCKET_PORT}}/g, this.options.socketPort)
+        .replace(/{{SOCKET_PORT}}/g, this.options.socketPort);
     } else if (!this.options.skipReportRoutes) {
-      throw new Error("webpack-reporter unable to setup routes - check dist has server/stat.json or run build");
+      throw new Error(
+        "webpack-reporter unable to setup routes - check dist has server/stat.json or run build"
+      );
     }
 
     this._socketIO = null;
@@ -61,13 +65,15 @@ class WebpackReporter extends EventEmitter {
       const opt = reporterOptions.options;
       const error = stats.hasErrors() ? chalk.red(" ERRORS") : "";
       const warning = stats.hasWarnings() ? chalk.yellow(" WARNINGS") : "";
-      const but = (error || warning) && chalk.yellow(" but has") || "";
+      const but = ((error || warning) && chalk.yellow(" but has")) || "";
       console.log(`webpack bundle is now VALID${but}${error}${warning}`);
       if (this._socketIO) {
         this._socketIO.emit("hmr");
       } else {
-        console.log(chalk.magenta(`webpack report is served from`),
-          chalk.cyan(`http://${opt.host}:${opt.port}/reporter`));
+        console.log(
+          chalk.magenta(`webpack report is served from`),
+          chalk.cyan(`http://${opt.host}:${opt.port}/reporter`)
+        );
       }
     } else {
       console.log("webpack bundle is now INVALID");
@@ -84,7 +90,7 @@ class WebpackReporter extends EventEmitter {
 
     if (!this.options.skipSocket) {
       const io = SocketIO(this.options.socketPort);
-      io.on("connection", (socket) => {
+      io.on("connection", socket => {
         this._socketIO = socket;
       });
     }
@@ -114,7 +120,7 @@ class WebpackReporter extends EventEmitter {
       warnings: statsUtils.getWarningsHtml(stats),
       errors: statsUtils.getErrorsHtml(stats),
       legacy: statsUtils.jsonToHtml(stats, true),
-      modules: stats.chunks[0].modules
+      modules: stats.chunks && stats.chunks[0].modules
     };
     res.json(data);
   }

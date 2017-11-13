@@ -18,6 +18,7 @@ const Promise = require("bluebird");
 const semver = require("semver");
 xsh.Promise = Promise;
 xsh.envPath.addToFront(Path.join(__dirname, "../node_modules/.bin"));
+const _ = require("lodash");
 
 const changeLogFile = Path.resolve("CHANGELOG.md");
 const changeLog = Fs.readFileSync(changeLogFile).toString();
@@ -29,12 +30,26 @@ const packageMapping = {
   "electrode-archetype-react-component-dev": "electrode-archetype-react-component[-dev]"
 };
 
+const reverseMapping = Object.assign.apply(
+  undefined,
+  _(packageMapping)
+    .values()
+    .uniq()
+    .map(mapped => {
+      return { [mapped]: _.keys(_.pickBy(packageMapping, v => v === mapped)) };
+    })
+    .value()
+);
+
 const mapPkg = n => {
   return packageMapping[n] || n;
 };
 
 const checkGitClean = () => {
-  return xsh.exec(`git diff --quiet`).then(() => (gitClean = true)).catch(() => (gitClean = false));
+  return xsh
+    .exec(`git diff --quiet`)
+    .then(() => (gitClean = true))
+    .catch(() => (gitClean = false));
 };
 
 const processLernaUpdated = output => {
@@ -42,10 +57,12 @@ const processLernaUpdated = output => {
   const lernaInfo = output.stderr.split("\n");
   const tagSig = "Comparing with";
   let tagIndex;
-  let tagLine = lernaInfo.find(x => {
-    tagIndex = x.indexOf(tagSig);
-    return tagIndex >= 0;
-  }).trim();
+  let tagLine = lernaInfo
+    .find(x => {
+      tagIndex = x.indexOf(tagSig);
+      return tagIndex >= 0;
+    })
+    .trim();
 
   if (tagLine.endsWith(".")) {
     tagLine = tagLine.substr(0, tagLine.length - 1);
@@ -53,7 +70,10 @@ const processLernaUpdated = output => {
 
   assert(tagLine, "Can't find last publish tag from lerna");
   const tag = tagLine.substr(tagIndex + tagSig.length).trim();
-  const packages = output.stdout.split("\n").filter(x => x.trim().length > 0).map(x => x.substr(2));
+  const packages = output.stdout
+    .split("\n")
+    .filter(x => x.trim().length > 0)
+    .map(x => x.substr(2));
   return { tag, packages };
 };
 
@@ -129,6 +149,18 @@ const collateCommitsPackages = commits => {
   ).then(() => {
     collated.lernaPackages = commits.updated.packages.filter(
       r => collated.realPackages.indexOf(r) < 0
+    );
+    const updateByMap = _(collated.realPackages)
+      .map(p => packageMapping[p])
+      .filter()
+      .map(p => {
+        return reverseMapping[p] || undefined;
+      })
+      .flatMap()
+      .value();
+    collated.realPackages = _.uniq(collated.realPackages.concat(updateByMap));
+    collated.forcePackages = collated.realPackages.filter(
+      r => commits.updated.packages.indexOf(r) < 0
     );
     return collated;
   });
@@ -210,7 +242,10 @@ const updateChangelog = collated => {
       const pkg = items[p];
       if (pkg.msgs.length === 0) return;
       output.push("-   `" + prefix + p + "`\n\n");
-      pkg.msgs.slice().reverse().forEach(emitCommitMsg);
+      pkg.msgs
+        .slice()
+        .reverse()
+        .forEach(emitCommitMsg);
       output.push("\n");
     });
   };
@@ -243,6 +278,26 @@ const updateChangelog = collated => {
   Fs.writeFileSync(changeLogFile, `${updateText}${changeLog}`);
 };
 
+const showPublishInfo = collated => {
+  console.log(
+    "publish command: node_modules/.bin/lerna publish",
+    (collated.forcePackages || []).map(p => `--force-publish ${p}`).join(" ")
+  );
+  const majorBumps = collated.realPackages.filter(p => {
+    const pkg = collated.packages[mapPkg(p)];
+    return pkg.newVersion.split(".")[0] > pkg.version.split(".")[0];
+  });
+  const majorArchetypes = majorBumps.filter(p => p.startsWith("electrode-archetype-react"));
+  if (majorArchetypes.length > 0) {
+    console.log(
+      `\nThese archetypes had major bumps:\n\n${majorArchetypes.join("\n")}`,
+      "\n\nBefore publishing, make sure:",
+      "\n\n- generator-electrode is updated",
+      "\n- The -dev archetype's peer dep is updated\n"
+    );
+  }
+};
+
 const commitChangeLogFile = clean => {
   console.log("Change log updated.");
   if (!gitClean) {
@@ -267,5 +322,6 @@ xsh
   .then(collateCommitsPackages)
   .then(determinePackageVersions)
   .tap(checkGitClean)
-  .then(updateChangelog)
+  .tap(updateChangelog)
+  .then(showPublishInfo)
   .then(commitChangeLogFile);

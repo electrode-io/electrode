@@ -1,7 +1,8 @@
 "use strict";
 
+/* eslint-disable no-magic-numbers, no-console */
+
 const _ = require("lodash");
-const Promise = require("bluebird");
 const fs = require("fs");
 const Path = require("path");
 
@@ -15,7 +16,7 @@ const Path = require("path");
  */
 function resolveChunkSelector(options) {
   if (options.bundleChunkSelector) {
-    return require(Path.join(process.cwd(), options.bundleChunkSelector)); // eslint-disable-line
+    return require(Path.resolve(options.bundleChunkSelector)); // eslint-disable-line
   }
 
   return () => ({
@@ -33,30 +34,31 @@ function resolveChunkSelector(options) {
  * @returns {Promise.<Object>} an object containing an array of file names
  */
 function loadAssetsFromStats(statsPath) {
-  return Promise.resolve(Path.resolve(statsPath))
-    .then(require)
-    .then(stats => {
-      const assets = {};
-      const manifestAsset = _.find(stats.assets, asset => {
-        return asset.name.endsWith("manifest.json");
-      });
-      const jsAssets = stats.assets.filter(asset => {
-        return asset.name.endsWith(".js");
-      });
-      const cssAssets = stats.assets.filter(asset => {
-        return asset.name.endsWith(".css");
-      });
+  let stats;
+  try {
+    stats = JSON.parse(fs.readFileSync(Path.resolve(statsPath)).toString());
+  } catch (err) {
+    return {};
+  }
+  const assets = {};
+  const manifestAsset = _.find(stats.assets, asset => {
+    return asset.name.endsWith("manifest.json");
+  });
+  const jsAssets = stats.assets.filter(asset => {
+    return asset.name.endsWith(".js");
+  });
+  const cssAssets = stats.assets.filter(asset => {
+    return asset.name.endsWith(".css");
+  });
 
-      if (manifestAsset) {
-        assets.manifest = manifestAsset.name;
-      }
+  if (manifestAsset) {
+    assets.manifest = manifestAsset.name;
+  }
 
-      assets.js = jsAssets;
-      assets.css = cssAssets;
+  assets.js = jsAssets;
+  assets.css = cssAssets;
 
-      return assets;
-    })
-    .catch(() => ({}));
+  return assets;
 }
 
 function getIconStats(iconStatsPath) {
@@ -75,9 +77,10 @@ function getIconStats(iconStatsPath) {
 
 function getCriticalCSS(path) {
   const criticalCSSPath = Path.resolve(process.cwd(), path);
+
   try {
     const criticalCSS = fs.readFileSync(criticalCSSPath).toString();
-    return `<style>${criticalCSS}</style>`;
+    return criticalCSS;
   } catch (err) {
     return "";
   }
@@ -94,7 +97,7 @@ function getCriticalCSS(path) {
  */
 function getStatsPath(statsFilePath, buildArtifactsPath) {
   return process.env.WEBPACK_DEV === "true"
-    ? Path.resolve(process.cwd(), buildArtifactsPath, "stats.json")
+    ? Path.resolve(buildArtifactsPath, "stats.json")
     : statsFilePath;
 }
 

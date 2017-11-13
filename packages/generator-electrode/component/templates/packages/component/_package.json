@@ -1,6 +1,6 @@
 {
   "name": "<%= packageName %>",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "<%= projectName %>",
   "main": "lib/index.js",
   "author": {
@@ -17,8 +17,8 @@
   "homepage": "https://github.com/<%= packageGitHubOrg %>/<%= ghRepo %>",
   "dependencies": {},
   "devDependencies": {
-    "electrode-archetype-react-component": "^3.0.0",
-    "electrode-archetype-react-component-dev": "^3.0.0"
+    "electrode-archetype-react-component": "^4.0.0",
+    "electrode-archetype-react-component-dev": "^4.0.0"
   },
   "engines": {
     "node": ">= 4",

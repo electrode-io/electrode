@@ -2,8 +2,11 @@
 
 [![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url] [![devDependency Status][daviddm-dev-image]][daviddm-dev-url] [![npm downloads][npm-downloads-image]][npm-downloads-url]
 
-This is a Hapi plugin that register a default route for your Webapp to return
-a bootstrapping React application.  With support for webpack dev server integrations.
+This module helps render and serve your Electrode React application's `index.html`.  It will handle doing server side rendering and embedding all the necessary JS and CSS bundles for your application.
+
+All the defaults are configured out of the box, but your index page is extensible.  You can specify your own index template file with the `htmlFile` option.
+
+See [design](./DESIGN.md) for details on how the template can be extended.
 
 ## Installing
 
@@ -100,6 +103,7 @@ What you can do with the options:
     -   `host` `(String)` The host that webpack-dev-server runs on
     -   `port` `(String)` The port that webpack-dev-server runs on
 -   `prodBundleBase` `(String)` Base path to locate the JavaScript, CSS and manifest bundles. Defaults to "/js/". Should end with "/".
+-   `cspNonceValue` `(Function|Object|undefined)` Used to retrieve a CSP nonce value. If this is a function it will be passed the request and the nonce type (`'script'` or `'style'`), and must return the corresponding nonce. If this is an object, it may have properties `script`, `style` or both, and the value for each should be the path from the request object to the nonce value (For example, if you have a hapi plugin that puts a nonce value at `request.plugins.myCspGenerator.nonce` you might set `cspNonceValue` to `{ script: 'plugins.myCspGenerator.nonce' }`).  The nonce, if present, will be included on any `script` or `style` elements that directly contain scripts or style (e.g. any SSR preloaded state). If this property is undefined, or if the value at that location is undefined, no nonce will be added.
 
 ### `htmlFile` view details
 
@@ -116,25 +120,17 @@ This option specifies the view template for rendering your path's HTML output.
 
 You can see this module's [build-in index.html](./lib/index.html) for details on how to create your own view template.
 
-It should basically be a valid HTML file, with the following special token to be replaced by dynamically generated strings:
-
--   `{{META_TAGS}}` - Helmet meta tags.
--   `{{PAGE_TITLE}}` - The page's title.
--   `{{CRITICAL_CSS}}` - Critical CSS bundle.
--   `{{PREFETCH_BUNDLES}}` - The Redux store prefetch data bundle.
--   `{{WEBAPP_HEADER_BUNDLES}}` - The CSS bundle for your React app
--   `{{SSR_CONTENT}}` - The server side rendered content.
--   `{{WEBAPP_BODY_BUNDLES}}` - The JS bundle for your React app.
+See [design doc](./DESIGN.md) for details on extending the template.
 
 ### Content details
 
-The content you specify for your path is the entry to your React application when doing Server Side Rendering.  Ultimately, a `string` should be acquired from the content and will replace the `{{SSR_CONTENT}}` marker in the view.
+The content you specify for your path is the entry to your React application when doing Server Side Rendering.  Ultimately, a `string` should be acquired from the content and will replace the `SSR_CONTENT` marker in the view.
 
 It can be a string, a function, or an object.
 
 #### `string`
 
-If it's a string, it's treated as a straight plain HTML to be inserted as the `{{SSR_CONTENT}}`.
+If it's a string, it's treated as a straight plain HTML to be inserted as the `SSR_CONTENT`.
 
 #### `function`
 

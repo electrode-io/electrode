@@ -1,6 +1,5 @@
 language: node_js
 node_js:
-  - v4
   - v6
   - v8
 dist: trusty # needs Ubuntu Trusty

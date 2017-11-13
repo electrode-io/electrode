@@ -4,179 +4,57 @@
 
 Electrode flavored react component archetype.
 
-## Creating A New Component
+Have a question? Check the [FAQ](./FAQ.md)
 
-First, install [yeoman](http://yeoman.io/) to help quickly create an empty component:
+## Installation
 
-```bash
-$ npm install -g yo
-```
+You are suppose to start your Electrode component by using our Yeoman generator-electrode.
 
-Now, `yo` can scaffold the project for you.
+Electrode team offers a detailed getting started with Electrode Component tutorial.
+If you want to check out more on our Electrode component, please use the instructions [here](https://docs.electrode.io/chapter1/quick-start/start-with-component.html) as a guide.
 
-```bash
-$ yo electrode-component
-```
+## Usage
 
-You should see something similar to the below session:
+The primary interface to the archetype is a list of tasks you can invoke with clap to do your bidding.
+To see the tasks, simply run:
 
 ```bash
-$ yo electrode-component
-
-Welcome to the Electrode Component generator
-
-Were going to set up a new Electrode Component, ready for development with
-react, webpack, demo, electrode component archetype, live-reload
-
-? What is your Package/GitHub project name? (e.g., 'wysiwyg-component') product-card
-? What is the ClassName for your component? ProductCard
-? What will be the npm package name? product-card
-? What will be the GitHub organization username (e.g., 'walmartlabs')? electrodeio
-? What is your name? (for copyright notice, etc.) arpan nanavati
-? What is your GitHub Username? ananavati
-? What is the name of the GitHub repo this will be published at? product-card
-? Would you like to create a new directory for your project? Yes
-
-
-   create .babelrc
-   create .gitignore
-   create .npmignore
-   create .editorconfig
-   create xclap.js
-   create package.json
-   create README.md
-   create src/components/product-card.jsx
-   create src/styles/product-card.styl
-   create src/index.js
-   create test/client/.eslintrc
-   create test/client/components/product-card.spec.jsx
-
-Your new Electrode Component is ready and your component is in '/src'.
+$ clap
 ```
 
-## Configuring an existing project / manual setup
-
-If you prefer to create your component manually or if you have an existing component that you want to migrate to using this archetype, follow the instructions below:
-
-###### run the following in your project
+To demo your `packages/components`, for example, the dev task, go to your `demo-app` directory and run:
 
 ```bash
-$ npm install --save-dev electrode-archetype-react-component electrode-archetype-react-component-dev
+$ clap dev
 ```
 
-###### Add a `.babelrc` to your project
+To test your components, go to your root directory and run:
 
-The `.babelrc` needs to extend
-[the archetype's babel configuration](config/babel/.babelrc) in order to apply the presents (ES2015, React) and the plugins like i18n. If your project needs additional Babel settings (like using stage 0 features) you can add them to this file. See the [Babel docs](https://babeljs.io/docs/usage/babelrc/) for more information.
-
-```json
-{
-  "extends": "./node_modules/electrode-archetype-react-component/config/babel/.babelrc"
-}
+```bash
+$ npm run test
 ```
 
-###### Add a `xclap.js` to your project
+To test a single component, go to your specific 'packages/component' directory and run:
 
-The `xclap.js` needs to extend
-[the archetype's clap tasks](/arhcetype-clap.js) in order to apply the shared tasks on your new/existing electrode component. Add this following lines of code to the newly created `xclap.js`
-
-```js
-"use strict";
-
-const xclap = require("xclap");
-
-const tasks = {
-  "prepublish": ["npm:prepublish"],
-  "preversion": ["check-cov"]
-}
-xclap.load("myprj", tasks);
-
-require("electrode-archetype-react-component")(xclap);
+```bash
+$ clap check
 ```
 
 ## Managing Dependencies
 
 The archetypes are split into two parts: `<archetype>` and `<archetype>-dev`. Both archetypes need to be in each component and should be included in the `package.json`'s `devDependencies`.
 
-* * *
-
-## Project Structure
-
-This archetype assumes an architecture as follows:
-
-```text
-archetype
-  config.js
-src
-  components/
-    *.jsx
-  styles/
-    *.css
-  index.js
-test
-  client/
-    spec/
-      components/
-        *.jsx?
-      *.jsx?
-    main.js
-    test.html
-.babelrc
-package.json
-```
-
-## CSS Modules + CSS next
-
-By default, this archetype assumes you are using CSS-Modules + CSS-Next, you need
-to opt-in to stylus support by adding a `*.styl` to your _project's_ `demo/demo.styl` & `src/styles/*.styl`.
-You can use stylus and CSS-Modules together by enabling setting the 'cssModuleStylusSupport' option in
-`archetype/config.js` to `true`.
-
-Import css files in your components and reference class names via the exported object `src/components/your-component.js`:
-
-```javascript
-import React from "react";
-
-import styles from "../styles/your-component.css";
-
-class YourComponent extends React.Component {
-  render() {
-    return (
-      <div className={styles.someStyle}>Hello Modules!</div>
-    );
-  }
-}
-```
-
-Add following styling to `src/styles/your-component.css`
-
-```css
-:root {
-  --black: #000;
-  --white: #fff;
-}
-
-.baseStyle {
-  background-color: var(--black);
-  color: var(--white);
-}
-
-.someStyle {
-  composes: baseStyle;
-  font-size: 18px;
-}
-```
-
 ## Check the archetype configs:
 
 If you are enhancing / refactoring this archetype and have locally checked it out,
-please see [`CONTRIBUTING.md`](./CONTRIBUTING.md) for our guidelines.
+please see [`DEVELOPMENT.md`](./DEVELOPMENT.md) for our guidelines.
 
 The main check we provide for the archetype itself is:
 
 ```sh
 $ clap archetype:check
 ```
+
 
 Built with :heart: by [Team Electrode](https://github.com/orgs/electrode-io/people) @WalmartLabs.
 

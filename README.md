@@ -15,7 +15,7 @@
 
 -   See the [Full README.md in docs](/docs/README.md) or visit our [gitbook documents].
 
--   [Getting Started with Electrode](https://electrode.gitbooks.io/electrode/content/chapter1/quick-start/get-started.html)
+-   [Getting Started with Electrode]
 
 -   Read the [Announcement Blog] Post.
 
@@ -70,3 +70,5 @@ Licensed under the [Apache License, Version 2.0].
 [gitbook documents]: https://docs.electrode.io/overview/what-is-electrode.html
 
 [what is electrode]: https://docs.electrode.io/overview/what-is-electrode.html
+
+[Getting Started with Electrode]: https://docs.electrode.io/chapter1/quick-start/start-with-app.html

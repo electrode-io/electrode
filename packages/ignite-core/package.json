@@ -1,0 +1,64 @@
+{
+  "name": "ignite-core",
+  "version": "1.1.1",
+  "description": "A bootstrap tool for installing, updating, and assisting development with Electrode platform.",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "clap test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electrode-io/electrode.git"
+  },
+  "author": {
+    "name": "Sheng Di",
+    "email": "sdi@walmartlabs.com",
+    "url": "https://github.com/didi0613"
+  },
+  "keywords": [
+    "npm",
+    "scripts",
+    "ignite",
+    "javascript",
+    "tool",
+    "electrode"
+  ],
+  "license": "Apache-2.0",
+  "dependencies": {
+    "chalk": "^2.0.1",
+    "cli-spinner": "^0.2.6",
+    "semver-compare": "^1.0.0",
+    "xsh": "^0.3.0",
+    "yargs": "^9.0.1"
+  },
+  "devDependencies": {
+    "electrode-archetype-njs-module-dev": "^3.0.0",
+    "electrode-server": "^1.2.2",
+    "xstdout": "^0.1.1"
+  },
+  "bugs": {
+    "url": "https://github.com/electrode-io/electrode/issues"
+  },
+  "homepage": "http://www.electrode.io",
+  "nyc": {
+    "all": true,
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "exclude": [
+      "coverage",
+      "*clap.js",
+      "gulpfile.js",
+      "dist",
+      "test"
+    ],
+    "check-coverage": true,
+    "statements": 100,
+    "branches": 100,
+    "functions": 100,
+    "lines": 100,
+    "cache": true
+  }
+}

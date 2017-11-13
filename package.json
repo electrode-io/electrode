@@ -1,17 +1,8 @@
 {
   "name": "electrode",
   "version": "1.0.0",
-  "private": true,
   "description": "Electrode Platform for NodeJS/React Universal Application",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/electrode-io/electrode.git"
-  },
-  "bugs": {
-    "url": "https://github.com/electrode-io/electrode/issues"
-  },
   "homepage": "http://www.electrode.io",
-  "license": "Apache-2.0",
   "scripts": {
     "test": "lerna bootstrap --ignore=electrode-webpack-reporter && lerna run test --ignore=electrode-webpack-reporter && npm run test-reporter && clap build-test",
     "test-generator": "clap test-generator",
@@ -22,7 +13,8 @@
     "nuke-packages": "rm -rf packages/*/node_modules packages/*/coverage",
     "nuke-samples": "rm -rf samples/*/node_modules samples/*/coverage samples/*/dist samples/*/.isomorphic-loader-config.json samples/*/.etmp",
     "test-reporter": "if lerna updated | grep electrode-webpack-reporter; then cd packages/electrode-webpack-reporter && npm install && npm test; fi",
-    "update-changelog": "node tools/update-changelog.js"
+    "update-changelog": "node tools/update-changelog.js",
+    "gitbook-serve": "gitbook serve --no-watch --no-live"
   },
   "devDependencies": {
     "bluebird": "^3.5.0",
@@ -30,11 +22,20 @@
     "lodash": "^4.17.2",
     "semver": "^5.3.0",
     "xclap": "^0.2.0",
-    "xsh": "^0.3.2",
+    "xsh": "^0.4.0",
     "yeoman-test": "^1.6.0"
+  },
+  "bugs": {
+    "url": "https://github.com/electrode-io/electrode/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electrode-io/electrode.git"
   },
   "engines": {
     "node": ">= 4 <= 8",
     "npm": ">= 3 <= 5"
-  }
+  },
+  "private": true,
+  "license": "Apache-2.0"
 }

@@ -3,5 +3,5 @@
   "packages": [
     "packages/*"
   ],
-  "version": "locked"
+  "version": "0.0.1"
 }

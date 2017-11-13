@@ -3,5 +3,5 @@
 const Path = require("path");
 
 module.exports = {
-  entry: Path.join(process.cwd(), "src/index.js")
+  entry: Path.join(process.cwd(), "src")
 };

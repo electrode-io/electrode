@@ -1,5 +1,7 @@
 "use strict";
 
+const browserSettings = require("./browser-settings");
+
 /*
  * Karma Configuration: "dev" version.
  *
@@ -9,10 +11,8 @@
  * server during the test run.
  */
 module.exports = function (config) {
-  config.set({
-    frameworks: ["mocha", "phantomjs-shim"],
+  const base = {
     reporters: ["spec"],
-    browsers: ["PhantomJS"],
     basePath: process.cwd(), // repository root.
     files: [
       // Test bundle (must be created via `npm run dev|hot|server-test`)
@@ -26,5 +26,9 @@ module.exports = function (config) {
         ui: "bdd"
       }
     }
-  });
+  };
+
+  browserSettings(base);
+
+  config.set(base);
 };

@@ -4,16 +4,11 @@ const _ = require("lodash");
 const Promise = require("bluebird");
 const fs = require("fs");
 const Path = require("path");
-const Helmet = require("react-helmet").Helmet;
-const groupScripts = require("./group-scripts");
-
-const CONTENT_MARKER = "{{SSR_CONTENT}}";
-const HEADER_BUNDLE_MARKER = "{{WEBAPP_HEADER_BUNDLES}}";
-const BODY_BUNDLE_MARKER = "{{WEBAPP_BODY_BUNDLES}}";
-const TITLE_MARKER = "{{PAGE_TITLE}}";
-const PREFETCH_MARKER = "{{PREFETCH_BUNDLES}}";
-const META_TAGS_MARKER = "{{META_TAGS}}";
-const CRITICAL_CSS_MARKER = "{{CRITICAL_CSS}}";
+const RenderContext = require("./render-context");
+const parseTemplate = require("./parse-template");
+const customToken = require("./custom-token");
+const loadHandler = require("./load-handler");
+const Renderer = require("./renderer");
 
 const HTTP_ERROR_500 = 500;
 
@@ -27,6 +22,11 @@ const getStatsPath = utils.getStatsPath;
 
 const resolvePath = path => (!Path.isAbsolute(path) ? Path.resolve(path) : path);
 
+function loadTokenHandler(path, options) {
+  const mod = loadHandler(path);
+  return mod(options);
+}
+
 function makeRouteHandler(routeOptions, userContent) {
   const WEBPACK_DEV = routeOptions.webpackDev;
   const RENDER_JS = routeOptions.renderJS;
@@ -37,143 +37,131 @@ function makeRouteHandler(routeOptions, userContent) {
   const prodBundleBase = routeOptions.prodBundleBase;
   const chunkSelector = routeOptions.__internals.chunkSelector;
   const iconStats = getIconStats(routeOptions.iconStats);
+  const htmlTokens = parseTemplate(html);
   const criticalCSS = getCriticalCSS(routeOptions.criticalCSS);
+
+  const routeData = {
+    WEBPACK_DEV,
+    RENDER_JS,
+    RENDER_SS,
+    html,
+    assets,
+    devBundleBase,
+    prodBundleBase,
+    chunkSelector,
+    iconStats,
+    criticalCSS,
+    htmlTokens
+  };
+
+  const loadHandlerOptions = { routeOptions, routeData };
+
+  const tokenHandlers = [].concat(routeOptions.tokenHandler || []);
+  tokenHandlers.push(Path.join(__dirname, "default-handlers.js"));
+  routeData.tokenHandlers = tokenHandlers.map(h => loadTokenHandler(h, loadHandlerOptions));
+  routeData.tokenHandler = _.last(routeData.tokenHandlers);
+  customToken.loadAll(htmlTokens, loadHandlerOptions);
+
+  const renderer = new Renderer({
+    htmlTokens,
+    tokenHandlers: routeData.tokenHandlers
+  });
 
   /* Create a route handler */
   /* eslint max-statements: [2, 35] */
   return options => {
+    const request = options.request;
     const mode = options.mode;
-    const renderJs = RENDER_JS && mode !== "nojs";
     let renderSs = RENDER_SS;
     if (renderSs) {
       if (mode === "noss") {
         renderSs = false;
-      } else if (mode === "datass" && options.request.app) {
-        options.request.app.disableSSR = true;
+      } else if (mode === "datass" && request.app) {
+        // signal user content callback to populate prefetch data only and skips actual SSR
+        request.app.ssrPrefetchOnly = true;
       }
     }
 
-    const chunkNames = chunkSelector(options.request);
-    const devCSSBundle = chunkNames.css
-      ? `${devBundleBase}${chunkNames.css}.style.css`
-      : `${devBundleBase}style.css`;
-    const devJSBundle = chunkNames.js
-      ? `${devBundleBase}${chunkNames.js}.bundle.dev.js`
-      : `${devBundleBase}bundle.dev.js`;
-    const jsChunk = _.find(assets.js, asset => _.includes(asset.chunkNames, chunkNames.js));
-    const cssChunk = _.find(assets.css, asset => _.includes(asset.chunkNames, chunkNames.css));
-
-    const bundleCss = () => {
-      return WEBPACK_DEV ? devCSSBundle : (cssChunk && `${prodBundleBase}${cssChunk.name}`) || "";
-    };
-
-    const bundleJs = () => {
-      if (!renderJs) {
-        return "";
-      }
-      return WEBPACK_DEV ? devJSBundle : (jsChunk && `${prodBundleBase}${jsChunk.name}`) || "";
-    };
-
-    const bundleManifest = () => {
-      if (!assets.manifest) {
-        return "";
-      }
-
-      return WEBPACK_DEV
-        ? `${devBundleBase}${assets.manifest}`
-        : `${prodBundleBase}${assets.manifest}`;
-    };
-
-    const callUserContent = content => {
-      const x = content(options.request);
-      return !x.catch
-        ? x
-        : x.catch(err => {
-            return Promise.reject({
-              status: err.status || HTTP_ERROR_500,
-              html: err.message || err.toString()
-            });
-          });
-    };
-
-    const htmlifyScripts = scripts => {
-      return scripts
-        .map(
-          x =>
-            typeof x === "string"
-              ? `<script>${x}</script>\n`
-              : x.map(n => `<script src="${n.src}"></script>`).join("\n")
-        )
-        .join("\n");
-    };
-
-    const makeHeaderBundles = helmet => {
-      const manifest = bundleManifest();
-      const manifestLink = manifest ? `<link rel="manifest" href="${manifest}" />\n` : "";
-      const css = bundleCss();
-      const cssLink = css && !criticalCSS ? `<link rel="stylesheet" href="${css}" />` : "";
-      const scriptsFromHelmet = ["link", "style", "script", "noscript"]
-        .map(tagName => helmet[tagName].toString())
-        .join("");
-
-      const htmlScripts = htmlifyScripts(groupScripts(routeOptions.unbundledJS.enterHead).scripts);
-      return `${manifestLink}${cssLink}${htmlScripts}\n${scriptsFromHelmet}`;
-    };
-
-    const makeBodyBundles = () => {
-      const js = bundleJs();
-      const jsLink = js ? { src: js } : "";
-
-      const ins = routeOptions.unbundledJS.preBundle
-        .concat([jsLink])
-        .concat(routeOptions.unbundledJS.postBundle);
-      const htmlScripts = htmlifyScripts(groupScripts(ins).scripts);
-
-      return `${htmlScripts}`;
-    };
-
-    const emptyTitleRegex = /<title[^>]*><\/title>/;
-
-    const makeTitle = helmet => {
-      const helmetTitleScript = helmet.title.toString();
-      const helmetTitleEmpty = helmetTitleScript.match(emptyTitleRegex);
-
-      return helmetTitleEmpty ? `<title>${routeOptions.pageTitle}</title>` : helmetTitleScript;
-    };
-
     const renderPage = content => {
-      const helmet = Helmet.renderStatic();
+      // allow content to specifically turn off rendering index with render
+      // flag set to false
+      // content.html must be defined to render index
+      if (content.render === false || content.html === undefined) {
+        return Promise.resolve(content);
+      }
 
-      return html.replace(/{{[A-Z_]*}}/g, m => {
-        switch (m) {
-          case CONTENT_MARKER:
-            return content.html || "";
-          case TITLE_MARKER:
-            return makeTitle(helmet);
-          case HEADER_BUNDLE_MARKER:
-            return makeHeaderBundles(helmet);
-          case BODY_BUNDLE_MARKER:
-            return makeBodyBundles();
-          case PREFETCH_MARKER:
-            return `<script>${content.prefetch}</script>`;
-          case META_TAGS_MARKER:
-            return helmet.meta.toString() + iconStats;
-          case CRITICAL_CSS_MARKER:
-            return criticalCSS;
-          default:
-            return `Unknown marker ${m}`;
+      let cspScriptNonce;
+      let cspStyleNonce;
+      if (routeOptions.cspNonceValue !== undefined) {
+        const nonceObject = routeOptions.cspNonceValue;
+        if (typeof nonceObject === "function") {
+          cspScriptNonce = nonceObject(request, "script");
+          cspStyleNonce = nonceObject(request, "style");
+        } else {
+          cspScriptNonce = _.get(request, nonceObject.script, undefined);
+          cspStyleNonce = _.get(request, nonceObject.style, undefined);
         }
+      }
+
+      const chunkNames = chunkSelector(request);
+      const devCSSBundle = chunkNames.css
+        ? `${devBundleBase}${chunkNames.css}.style.css`
+        : `${devBundleBase}style.css`;
+      const devJSBundle = chunkNames.js
+        ? `${devBundleBase}${chunkNames.js}.bundle.dev.js`
+        : `${devBundleBase}bundle.dev.js`;
+      const jsChunk = _.find(assets.js, asset => _.includes(asset.chunkNames, chunkNames.js));
+      const cssChunk = _.find(assets.css, asset => _.includes(asset.chunkNames, chunkNames.css));
+      const scriptNonce = cspScriptNonce ? ` nonce="${cspScriptNonce}"` : "";
+      const styleNonce = cspStyleNonce ? ` nonce="${cspStyleNonce}"` : "";
+
+      const renderJs = RENDER_JS && mode !== "nojs";
+
+      const context = new RenderContext({
+        request,
+        routeOptions,
+        routeData,
+        content,
+        data: {
+          mode,
+          renderJs,
+          renderSs,
+          scriptNonce,
+          styleNonce,
+          chunkNames,
+          devCSSBundle,
+          devJSBundle,
+          jsChunk,
+          cssChunk
+        },
+        user: {}
       });
+
+      return renderer.render(context);
     };
 
-    const renderSSRContent = content => {
-      const p = _.isFunction(content)
-        ? callUserContent(content)
-        : Promise.resolve(_.isObject(content) ? content : { html: content });
-      return p.then(c => renderPage(c));
-    };
+    if (typeof userContent === "function") {
+      if (renderSs) {
+        // invoke user content as a function, which could return any content
+        // as static html or generated from react's renderToString
+        const x = userContent(request);
+        if (x.then) {
+          return x.then(renderPage).catch(err => {
+            if (!err.status) err.status = HTTP_ERROR_500;
+            throw err;
+          });
+        }
+        return renderPage(x);
+      } else {
+        userContent = "";
+      }
+    }
 
-    return renderSSRContent(renderSs ? userContent : "");
+    if (typeof userContent === "string") {
+      userContent = { status: 200, html: userContent };
+    }
+
+    return renderPage(userContent);
   };
 }
 
@@ -199,7 +187,8 @@ const setupOptions = options => {
     iconStats: "dist/server/iconstats.json",
     criticalCSS: "dist/js/critical.css",
     buildArtifacts: ".build",
-    prodBundleBase: "/js/"
+    prodBundleBase: "/js/",
+    cspNonceValue: undefined
   };
 
   const pluginOptions = _.defaultsDeep({}, options, pluginOptionsDefaults);
@@ -209,15 +198,22 @@ const setupOptions = options => {
     .port}/js/`;
   const statsPath = getStatsPath(pluginOptions.stats, pluginOptions.buildArtifacts);
 
-  return Promise.try(() => loadAssetsFromStats(statsPath)).then(assets => {
-    pluginOptions.__internals = {
-      assets,
-      chunkSelector,
-      devBundleBase
-    };
+  const assets = loadAssetsFromStats(statsPath);
+  pluginOptions.__internals = {
+    assets,
+    chunkSelector,
+    devBundleBase
+  };
 
-    return pluginOptions;
-  });
+  return pluginOptions;
+};
+
+const setupPathOptions = (routeOptions, path) => {
+  const options = routeOptions.paths[path];
+  return _.defaults(
+    { htmlFile: options.htmlFile, tokenHandler: options.tokenHandler },
+    routeOptions
+  );
 };
 
 const resolveContent = (content, xrequire) => {
@@ -234,6 +230,7 @@ const resolveContent = (content, xrequire) => {
 
 module.exports = {
   setupOptions,
+  setupPathOptions,
   makeRouteHandler,
   resolveContent
 };

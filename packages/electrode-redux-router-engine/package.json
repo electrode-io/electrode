@@ -1,6 +1,6 @@
 {
   "name": "electrode-redux-router-engine",
-  "version": "1.4.5",
+  "version": "1.5.0",
   "description": "Handle async data for React Server Side Rendering using Redux and Router",
   "main": "lib/redux-router-engine.js",
   "scripts": {
@@ -44,8 +44,8 @@
     "redux": "^3.6.0"
   },
   "peerDependencies": {
-    "react": "^15.3.1 || ^0.14.8",
-    "react-dom": "^15.3.1 || ^0.14.8"
+    "react": "^16.0.0 || ^15.3.1 || ^0.14.8",
+    "react-dom": "^16.0.0 || ^15.3.1 || ^0.14.8"
   },
   "nyc": {
     "all": true,

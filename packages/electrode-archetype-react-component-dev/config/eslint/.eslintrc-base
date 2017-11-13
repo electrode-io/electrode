@@ -1,3 +1,6 @@
 ---
 extends:
   - "eslint-config-walmart/configurations/es6.js"
+rules:
+  "react/jsx-wrap-multilines": "warn"
+  "no-multi-spaces": "off"
