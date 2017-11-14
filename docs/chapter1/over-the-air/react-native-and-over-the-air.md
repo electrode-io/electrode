@@ -130,7 +130,7 @@ The configurations are loaded via electrode-confippet, more details [here](https
 }
 ```
 
-OTA uses [bell](http://https//github.com/hapijs/bell) for oAuth you can look there for more configuration options.
+OTA uses [bell](http://github.com/hapijs/bell) for oAuth you can look there for more configuration options.
 
 ### Running OTA
 
