@@ -58,7 +58,11 @@ module.exports = function(config) {
     reporters: ["spec", "coverage"],
     browserNoActivityTimeout: 60000,
     coverageReporter: {
-      reporters: [{ type: "json", file: "coverage.json" }, { type: "lcov" }, { type: "text" }],
+      reporters: [
+        { type: "json", subdir: ".", file: "coverage.json" },
+        { type: "lcov", subdir: "." },
+        { type: "text", subdir: "." }
+      ],
       dir: Path.resolve("coverage", "client")
     },
     captureTimeout: 100000,

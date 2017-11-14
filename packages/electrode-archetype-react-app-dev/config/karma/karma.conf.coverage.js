@@ -16,7 +16,11 @@ module.exports = function(config) {
     reporters: ["spec", "coverage"],
     webpack: webpackCovCfg,
     coverageReporter: {
-      reporters: [{ type: "json", file: "coverage.json" }, { type: "lcov" }, { type: "text" }],
+      reporters: [
+        { type: "json", subdir: ".", file: "coverage.json" },
+        { type: "lcov", subdir: "." },
+        { type: "text", subdir: "." }
+      ],
       dir: Path.resolve("coverage", "client")
     }
   };
