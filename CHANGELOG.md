@@ -1,3 +1,31 @@
+# 11/14/2017
+
+## Packages
+
+-   electrode-archetype-react-app@4.0.7 `(4.0.6 => 4.0.7)`
+-   electrode-archetype-react-app-dev@4.0.7 `(4.0.6 => 4.0.7)`
+-   electrode-ignite@1.2.2 `(1.2.1 => 1.2.2)`
+-   generator-electrode@3.4.5 `(3.4.4 => 3.4.5)`
+-   ignite-core@1.1.2 `(1.1.1 => 1.1.2)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [bug] set compilerPhase to emit to make sure css split happens after optimization ([#631](https://github.com/electrode-io/electrode/pull/631)) [commit](http://github.com/electrode-io/electrode/commit/92a43f95a451da6459cc59652411c8cf9ec63ca0)
+
+-   `packages/electrode-ignite`
+
+    -   [patch] Update a more reasonable message for generator child process exit. ([#627](https://github.com/electrode-io/electrode/pull/627)) [commit](http://github.com/electrode-io/electrode/commit/3253a751f929d854eaca2638fd7a6b46e49593bb)
+
+-   `packages/generator-electrode`
+
+    -   export custom config ([#630](https://github.com/electrode-io/electrode/pull/630)) [commit](http://github.com/electrode-io/electrode/commit/b1f9e5b4f301b150402c5ba935dfa21f7baf777f)
+
+-   `packages/ignite-core`
+
+    -   [patch] Add a proper hint message for case: npm v5.4.x ([#624](https://github.com/electrode-io/electrode/pull/624)) [commit](http://github.com/electrode-io/electrode/commit/5fc1886da5153f904c68bfbadadf07933713af06)
+
 # 10/31/2017
 
 ## Packages
