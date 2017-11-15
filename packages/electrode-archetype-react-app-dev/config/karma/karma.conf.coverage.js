@@ -13,7 +13,7 @@ const Path = require("path");
 module.exports = function(config) {
   karmaConf(config);
   const settings = {
-    reporters: ["spec", "coverage"],
+    reporters: ["spec", "sonarqubeUnit", "coverage"],
     webpack: webpackCovCfg,
     coverageReporter: {
       reporters: [
@@ -21,6 +21,13 @@ module.exports = function(config) {
         { type: "lcov", subdir: "." },
         { type: "text", subdir: "." }
       ],
+      sonarQubeUnitReporter: {
+        sonarQubeVersion: "LATEST",
+        outputFile: "gunit.xml",
+        outputDir: path.resolve("coverage", "client"),
+        overrideTestDescription: true,
+        useBrowserName: false
+      },
       dir: Path.resolve("coverage", "client")
     }
   };
