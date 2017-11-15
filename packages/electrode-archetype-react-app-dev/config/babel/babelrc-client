@@ -1,6 +1,6 @@
 {
   "presets": [
-    "es2015-loose",
+    ["env", { "loose": true }],
     "react"
   ],
   "plugins": [
