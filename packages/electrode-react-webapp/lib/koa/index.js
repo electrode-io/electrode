@@ -28,7 +28,7 @@ function handleRoute(handler) {
       } else if (status >= 200 && status < 300) {
         respond(status, data.html !== undefined ? data.html : data);
       } else {
-        respond(status, data);
+        respond(status, data.html !== undefined ? data.html : data);
       }
     })
     .catch(err => {

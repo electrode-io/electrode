@@ -137,7 +137,12 @@ function makeRouteHandler(routeOptions, userContent) {
         user: {}
       });
 
-      return renderer.render(context);
+      // return promise with status/html object if "status" was supplied
+      // from electrode-redux-router-engine
+      return renderer.render(context)
+        .then(renderedHtml => content.status !== undefined
+          ? { status: content.status, html: renderedHtml }
+          : renderedHtml);
     };
 
     if (typeof userContent === "function") {

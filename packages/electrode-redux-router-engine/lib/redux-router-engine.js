@@ -11,6 +11,10 @@ const ReactRouter = require("react-router");
 const Provider = require("react-redux").Provider;
 const Path = require("path");
 
+const HTTP_REDIRECT = 302;
+const HTTP_OK = 200;
+const HTTP_NOT_FOUND = 404;
+const HTTP_SERVER_ERROR = 500;
 const BAD_CHARS_REGEXP = /[<\u2028\u2029]/g;
 const REPLACEMENTS_FOR_BAD_CHARS = {
   "<": "\\u003C",
@@ -55,39 +59,42 @@ class ReduxRouterEngine {
     this._handlers = {};
   }
 
-  render(req, options) {
+  render(req, options = {}) {
     const location = req.path || (req.url && req.url.path);
 
     return this._matchRoute({ routes: this.options.routes, location })
       .then((match) => {
         if (match.redirectLocation) {
           return {
-            status: 302,
+            status: HTTP_REDIRECT,
             path: `${match.redirectLocation.pathname}${match.redirectLocation.search}`
           };
         }
 
         if (!match.renderProps) {
           return {
-            status: 404,
+            status: HTTP_NOT_FOUND,
             message: `redux-router-engine: Path ${location} not found`
           };
         }
         const routes = match.renderProps.routes;
         const route = routes[routes.length - 1];
         const methods = route.methods || "get";
+        const status = (options.notFoundRoute && options.notFoundRoute === route.path)
+          ? HTTP_NOT_FOUND
+          : HTTP_OK;
 
         if (methods.toLowerCase().indexOf(req.method.toLowerCase()) < 0) {
           throw new Error(
             `redux-router-engine: ${location} doesn't allow request method ${req.method}`);
         }
 
-        return this._handleRender(req, match, route, options || {});
+        return this._handleRender(req, match, route, status, options || {});
       })
       .catch((err) => {
         this.options.logError.call(this, req, err);
         return {
-          status: err.status || 500, // eslint-disable-line
+          status: err.status || HTTP_SERVER_ERROR,
           message: err.message,
           path: err.path,
           _err: err
@@ -110,7 +117,7 @@ class ReduxRouterEngine {
     });
   }
 
-  _handleRender(req, match, route, options) {
+  _handleRender(req, match, route, status, options) {
     const withIds = options.withIds !== undefined ? options.withIds : this.options.withIds;
     const stringifyPreloadedState =
       options.stringifyPreloadedState || this.options.stringifyPreloadedState;
@@ -121,13 +128,13 @@ class ReduxRouterEngine {
         const x = this._renderToString(req, store, match, withIds);
         if (x.then !== undefined) { // a Promise?
           return x.then((html) => {
-            r.status = 200;
+            r.status = status;
             r.html = html;
             r.prefetch = stringifyPreloadedState(store.getState());
             return r;
           });
         } else {
-          r.status = 200;
+          r.status = status;
           r.html = x;
           r.prefetch = stringifyPreloadedState(store.getState());
           return r;
