@@ -21,14 +21,14 @@ module.exports = function(config) {
         { type: "lcov", subdir: "." },
         { type: "text", subdir: "." }
       ],
-      sonarQubeUnitReporter: {
-        sonarQubeVersion: "LATEST",
-        outputFile: "gunit.xml",
-        outputDir: path.resolve("coverage", "client"),
-        overrideTestDescription: true,
-        useBrowserName: false
-      },
       dir: Path.resolve("coverage", "client")
+    },
+    sonarQubeUnitReporter: {
+      sonarQubeVersion: "5.x",
+      outputFile: "gunit.xml",
+      outputDir: Path.resolve("coverage", "client"),
+      overrideTestDescription: true,
+      useBrowserName: false
     }
   };
 

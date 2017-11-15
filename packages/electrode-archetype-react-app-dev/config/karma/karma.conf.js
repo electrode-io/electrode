@@ -67,9 +67,9 @@ module.exports = function(config) {
       dir: Path.resolve("coverage", "client")
     },
     sonarQubeUnitReporter: {
-      sonarQubeVersion: "LATEST",
+      sonarQubeVersion: "5.x",
       outputFile: "gunit.xml",
-      outputDir: path.resolve("coverage", "client"),
+      outputDir: Path.resolve("coverage", "client"),
       overrideTestDescription: true,
       useBrowserName: false
     },
