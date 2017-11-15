@@ -76,6 +76,7 @@
     "karma-phantomjs-launcher": "^1.0.2",
     "karma-phantomjs-shim": "^1.4.0",
     "karma-safari-launcher": "^1.0.0",
+    "karma-sonarqube-unit-reporter": "0.0.14",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "0.0.26",
     "karma-webpack": "^2.0.2",
