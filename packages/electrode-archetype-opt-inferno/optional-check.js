@@ -13,29 +13,33 @@ function findAppDir() {
 }
 
 const appDir = findAppDir();
+const myPkg = require("./package.json");
 
 if (cwd === appDir) {
   try {
-    const myPkg = require("./package.json");
     const appPkg = require(Path.join(appDir, "package.json"));
     if (myPkg.name === appPkg.name) {
       process.exit(0);
     }
-  } catch (e) {
-  }
+  } catch (e) {}
 }
+
+const name = myPkg.name;
+const myTag = "inferno";
 
 try {
   const config = require(Path.join(appDir, "archetype/config"));
   const lib = config && config.options && config.options.reactLib;
-  if (lib === "inferno") {
-    console.log(`electrode-archetype-opt-inferno: archetype config set reactLib to ${lib} - installing`);
+  if (lib === myTag) {
+    console.log(`${name}: archetype config set reactLib to ${lib} - installing`);
     process.exit(0);
   } else {
-    console.log(`electrode-archetype-opt-inferno: archetype config set reactLib to ${lib} - skipping install`);
+    console.log(
+      `${name}: archetype config set reactLib to ${lib} - skipping install because it's not ${myTag}`
+    );
   }
 } catch (e) {
-  console.log("electrode-archetype-opt-inferno: no archetype config found - skipping install");
+  console.log(`${name}: no archetype config found - skipping install`);
 }
 
 process.exit(1);
