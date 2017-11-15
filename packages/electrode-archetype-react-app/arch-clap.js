@@ -301,7 +301,7 @@ function makeTasks() {
       desc: AppMode.isSrc
         ? `Build your app's ${AppMode.src.dir} directory into ${AppMode.lib.dir} for production`
         : "Build your app's client bundle",
-      task: ["build-dist", ".build-lib", "ss-prod-react", ".check.top.level.babelrc"]
+      task: ["build-dist", ".build-lib", ".check.top.level.babelrc"]
     },
 
     //
@@ -695,7 +695,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     "generate-service-worker": {
       desc:
         "Generate Service Worker using the options provided in the app/config/sw-precache-config.json " +
-          "file for prod/dev/hot mode",
+        "file for prod/dev/hot mode",
       task: () => generateServiceWorker()
     },
     "optimize-stats": {
