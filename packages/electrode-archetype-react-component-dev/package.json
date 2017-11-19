@@ -40,7 +40,7 @@
     "electrode-docgen": "^1.0.0",
     "enzyme": "^2.3.0",
     "eslint": "^4.4.1",
-    "eslint-config-walmart": "^1.1.0",
+    "eslint-config-walmart": "^2.0.0",
     "eslint-plugin-filenames": "^1.1.0",
     "eslint-plugin-react": "^7.4.0",
     "file-loader": "^0.8.4",
