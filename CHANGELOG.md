@@ -1,3 +1,47 @@
+# 11/20/2017
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-opt-inferno@0.2.1 `(0.2.0 => 0.2.1)`
+-   electrode-archetype-react-app@4.1.0 `(4.0.7 => 4.1.0)`
+-   electrode-archetype-react-app-dev@4.1.0 `(4.0.7 => 4.1.0)`
+-   electrode-archetype-react-component@4.0.1 `(4.0.0 => 4.0.1)`
+-   electrode-archetype-react-component-dev@4.0.1 `(4.0.0 => 4.0.1)`
+-   generator-electrode@3.4.6 `(3.4.5 => 3.4.6)`
+
+### Lerna Updated
+
+-   electrode-ignite@1.2.3 `(1.2.2 => 1.2.3)`
+
+## Commits
+
+-   `packages/electrode-archetype-opt-inferno`
+
+    -   [patch] more info in log output ([#637](https://github.com/electrode-io/electrode/pull/637)) [commit](http://github.com/electrode-io/electrode/commit/f8e0e4b80da5ce8083e7a0a8833133c5150f91c0)
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   Reports code coverage on server side tests ([#612](https://github.com/electrode-io/electrode/pull/612)) [commit](http://github.com/electrode-io/electrode/commit/82b51968ccce719fc8116e9fb7349d7be5c87e96)
+    -   enable defer based on latest css-split-webpack-plugin ([#636](https://github.com/electrode-io/electrode/pull/636)) [commit](http://github.com/electrode-io/electrode/commit/b84e4cb1d0766ebedf5d82602f0afc93df7a421a)
+    -   [minor] Add sonarQubeUnitReporter to Karma test coverage output ([#639](https://github.com/electrode-io/electrode/pull/639)) [commit](http://github.com/electrode-io/electrode/commit/084dd42792b04472a31bb06cdb833dd965d27e91)
+    -   write karma coverage report to common dir ([#634](https://github.com/electrode-io/electrode/pull/634)) [commit](http://github.com/electrode-io/electrode/commit/e5b4b909dd5acfc01e9fc9066f00cacaae0eab9f)
+    -   [minor] update to use babel-preset-env ([#641](https://github.com/electrode-io/electrode/pull/641)) [commit](http://github.com/electrode-io/electrode/commit/eabe92b7945745f99cc9222a19d63f7d158e5000)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   Few fixes for new electrode component ([#642](https://github.com/electrode-io/electrode/pull/642)) [commit](http://github.com/electrode-io/electrode/commit/d94553058ecc68992a33aaadcdd13e3a4268e8bf)
+
+-   `packages/generator-electrode`
+
+    -   Few fixes for new electrode component ([#642](https://github.com/electrode-io/electrode/pull/642)) [commit](http://github.com/electrode-io/electrode/commit/d94553058ecc68992a33aaadcdd13e3a4268e8bf)
+    -   [patch] update react-notify-toast ([#638](https://github.com/electrode-io/electrode/pull/638)) [commit](http://github.com/electrode-io/electrode/commit/37fb8577f39f22e692dd336c3897e367cf491ef3)
+
+-   `docs`
+
+    -   Fix link to hapijs/bell [commit](http://github.com/electrode-io/electrode/commit/40f2d41ae6b4fe90d8fb1ac9b51aa6a0ad0312da)
+
 # 11/14/2017
 
 ## Packages
