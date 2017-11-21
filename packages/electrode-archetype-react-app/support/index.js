@@ -2,9 +2,7 @@
 
 const optionalRequire = require("optional-require")(require);
 const optimizeModulesForProduction = require("./optimize-modules-for-production");
-const babelRegister = optionalRequire("babel-register");
 const isomorphicExtendRequire = require("isomorphic-loader/lib/extend-require");
-const babelPolyfill = require("babel-polyfill");
 const archetype = require("../config/archetype");
 const AppMode = archetype.AppMode;
 const Path = require("path");
@@ -20,7 +18,6 @@ const support = {
     require("css-modules-require-hook")(options);
   },
   require: require("../require"),
-  babelRegister,
   isomorphicExtendRequire: () => {
     return isomorphicExtendRequire({
       processAssets: assets => {
@@ -39,7 +36,6 @@ const support = {
       }
     });
   },
-  babelPolyfill,
   optimizeModulesForProduction
 };
 
@@ -79,7 +75,8 @@ support.load = function(options, callback) {
   }
 
   if (br) {
-    if (!support.babelRegister) {
+    const babelRegister = optionalRequire("babel-register");
+    if (!babelRegister) {
       console.log(
         "To use babel-register mode, you need to install the babel-register and support modules."
       );
@@ -94,13 +91,15 @@ support.load = function(options, callback) {
     );
 
     logger.info(
-      `Loading babel-register for runtime transpilation files (extensions: ${regOptions.extensions}).`
+      `Loading babel-register for runtime transpilation files (extensions: ${
+        regOptions.extensions
+      }).`
     );
     logger.info(`The transpilation only occurs the first time you load a file.`);
-    support.babelRegister(regOptions);
+    babelRegister(regOptions);
   }
 
-  if (options.optimizeModulesForProduction !== false) {
+  if (options.optimizeModulesForProduction === true) {
     const opts = options.optimizeModulesForProduction;
 
     support.optimizeModulesForProduction(typeof opts === "object" && opts);

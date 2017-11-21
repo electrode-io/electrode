@@ -40,7 +40,7 @@
     "babel-preset-react": "^6.3.13",
     "chai": "^4.0.0",
     "chai-as-promised": "^7.1.1",
-    "chai-shallowly": "^0.9.10",
+    "chai-shallowly": "^1.0.0",
     "clean-css": "^3.4.21",
     "convert-source-map": "^1.5.0",
     "css-loader": "^0.26.1",
@@ -49,6 +49,7 @@
     "electrode-cdn-file-loader": "^1.0.0",
     "electrode-electrify": "^1.0.0",
     "electrode-webpack-reporter": "^0.3.13",
+    "enzyme-adapter-react-16": "^1.1.0",
     "eslint": "^4.8.0",
     "eslint-config-walmart": "^1.1.0",
     "eslint-plugin-filenames": "^1.1.0",
@@ -93,10 +94,9 @@
     "postcss-loader": "^0.11.1",
     "prop-types": "^15.5.6",
     "raw-loader": "^0.5.1",
-    "react-addons-test-utils": "^15.3.0",
     "react-hot-loader": "^1.2.8",
     "react-intl": "^2.1.0",
-    "react-test-renderer": "^15.5.4",
+    "react-test-renderer": "^16.1.1",
     "require-at": "^1.0.0",
     "rimraf": "^2.4.0",
     "sinon": "^4.0.0",
@@ -128,7 +128,7 @@
     "prettier": "^1.4.4"
   },
   "engines": {
-    "node": ">= 4 <= 8",
+    "node": ">= 6 <= 8",
     "npm": ">= 3 <= 5"
   }
 }
