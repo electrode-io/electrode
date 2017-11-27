@@ -43,9 +43,7 @@
     "koa-static": "^2.0.0", <% } if (isPWA) { %>
     "react-notify-toast": "^0.4.0",<% } if (isAutoSSR) {%>
     "electrode-auto-ssr": "^1.0.0", <% } %>
-    "lodash": "^4.10.1",
-    "react": "^15.0.0",
-    "react-dom": "^15.0.0"
+    "lodash": "^4.10.1"
   },
   "devDependencies": {
     "electrode-archetype-react-app-dev": "^4.0.0"
