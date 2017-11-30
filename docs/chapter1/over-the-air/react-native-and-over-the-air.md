@@ -87,7 +87,7 @@ The configurations are loaded via electrode-confippet, more details [here](https
         },
         //This allows for other fileservice mechanisms to be plugged in.  Currently the files are stored
         // in the cassandra db, but the could be stored in anything really, including the filesystem.
-        "electrode-ota-server-fileservice":{
+        "electrode-ota-server-fileservice-upload":{
               "options": {
                 //this needs to be the url of your acquistion server.  It can be the same as your current
                 // management server.  
