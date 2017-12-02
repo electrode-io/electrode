@@ -85,6 +85,7 @@ module.exports = function(options) {
       background: "#FFFFFF",
       logo: "images/electrode.png",
       title: "Electrode",
+      //eslint-disable-next-line camelcase
       short_name: "Electrode",
       statsFilename: "../server/iconstats.json"
     },
@@ -151,8 +152,11 @@ module.exports = function(options) {
       }
     }),
     new AddManifestFieldsPlugin({
+      //eslint-disable-next-line camelcase
       gcm_sender_id: manifestConfig.gcm_sender_id,
+      //eslint-disable-next-line camelcase
       short_name: manifestConfig.short_name,
+      //eslint-disable-next-line camelcase
       theme_color: manifestConfig.theme_color
     }),
     new SWPrecacheWebpackPlugin(cacheConfig)
