@@ -14,8 +14,6 @@
   "scripts": {
     "test:dev": "clap test-frontend",
     "test": "clap check-cov && clap cov-frontend",
-    "demo": "clap server-dev",
-    "hot": "clap server-hot",
     "build": "npm run generate && clap build-lib",
     "generate": "npm run generate-metadata && npm run generate-documentation",
     "generate-metadata": "electrode-docgen --package ./package.json --src ./src --metadata components.json",
@@ -38,11 +36,10 @@
   ],
   "license": "Apache-2.0",
   "dependencies": {
-    "component-playground": "^1.3.1",
+    "electrode-archetype-react-component": "^5.0.0",
     "object-assign": "^4.1.0"
   },
   "devDependencies": {
-    "electrode-archetype-react-component": "../../packages/electrode-archetype-react-component",
-    "electrode-archetype-react-component-dev": "../../packages/electrode-archetype-react-component-dev"
+    "electrode-archetype-react-component-dev": "^5.0.0"
   }
 }
