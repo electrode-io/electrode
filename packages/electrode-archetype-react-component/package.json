@@ -27,8 +27,11 @@
     "package-json-validator": "^0.6.1",
     "xclap": "^0.2.0"
   },
+  "optionalDependencies": {
+    "electrode-archetype-opt-react": "^0.2.0"
+  },
   "engines": {
-    "node": ">= 4 <= 8",
+    "node": ">= 6 <= 8",
     "npm": ">= 3 <= 5"
   }
 }

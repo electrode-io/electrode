@@ -11,6 +11,11 @@
 var chai = require("chai");
 var sinonChai = require("sinon-chai");
 var chaiShallowly = require("chai-shallowly");
+var Enzyme = require("enzyme");
+var Adapter = require("enzyme-adapter-react-16");
+
+Enzyme.configure({ adapter: new Adapter() });
+
 /*
  * We need a global sinon to maintain compatibility
  * with existing test suites. However, this will be
