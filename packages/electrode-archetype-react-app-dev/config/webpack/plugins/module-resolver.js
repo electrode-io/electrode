@@ -16,31 +16,70 @@ module.exports = class ModuleResolver {
     this.target = target;
   }
 
+  isModuleRequest(request) {
+    //
+    // If request is not an absolute/relative path then it's requiring a
+    // nodejs module.
+    //
+    if (Path.isAbsolute(request)) return false;
+
+    if (request === "." || request === "..") {
+      return false;
+    }
+
+    if (request.startsWith("../") || request.startsWith("./")) {
+      return false;
+    }
+
+    if (Path.sep !== "/") {
+      return !request.startsWith("." + Path.sep) || !request.startsWith(".." + Path.sep);
+    }
+
+    return true;
+  }
+
   apply(resolver) {
     const archetypeDir = Path.join(__dirname, "..", "..", "..");
+
     resolver.plugin(this.source, (req, callback) => {
-      let atPath = req.path;
       //
-      // if require is NOT originated from a dir within node_modules, then
+      // Let webpack's internal resolver deal with requiring non-modules
+      //
+      if (!this.isModuleRequest(req.request)) return callback();
+
+      //
+      // If require is NOT originated from a dir within node_modules, then
       // call require.resolve from within the archetype's directory
       // to make sure the instance the archetype depends on is resolved.
       //
-      if (atPath.indexOf(this.path) < 0) {
-        atPath = archetypeDir;
-      }
-      const resolved = optionalRequire.resolve(requireAt(atPath), req.request, false);
-      if (!resolved) {
-        return callback();
-      }
+      const atPath = req.path.indexOf(this.path) < 0 ? archetypeDir : req.path;
 
+      //
+      // If request is requiring for a module, then first try to resolve the
+      // module's real path by looking for its package.json, and then use that
+      // with request converted to a relative path without the module name part.
+      //
       const splits = req.request.split("/");
-      const nameIdx = resolved.lastIndexOf(`${Path.sep}${splits[0]}${Path.sep}`);
-      const path = resolved.substr(0, nameIdx);
+      const nameX = splits[0].startsWith("@") ? 2 : 1; // check for scoped module
+      const name = splits.slice(0, nameX).join("/");
+      //
+      // All modules must have package.json
+      //
+      const resolved = optionalRequire.resolve(
+        requireAt(atPath),
+        Path.join(name, "package.json"),
+        false
+      );
+
+      if (!resolved) return callback();
+
+      splits.splice(0, nameX, ".");
 
       const obj = Object.assign({}, req, {
-        path,
-        request: `./${req.request}`
+        path: Path.dirname(resolved),
+        request: splits.join("/")
       });
+
       return resolver.doResolve(
         this.target,
         obj,
