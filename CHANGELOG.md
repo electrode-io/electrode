@@ -1,3 +1,53 @@
+# 12/26/2017
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-opt-react@1.0.0 `(0.2.0 => 1.0.0)`
+-   electrode-archetype-react-app@5.0.0 `(4.1.0 => 5.0.0)`
+-   electrode-archetype-react-app-dev@5.0.0 `(4.1.0 => 5.0.0)`
+-   electrode-archetype-react-component@5.0.0 `(4.0.1 => 5.0.0)`
+-   electrode-archetype-react-component-dev@5.0.0 `(4.0.1 => 5.0.0)`
+-   generator-electrode@3.5.0 `(3.4.6 => 3.5.0)`
+
+### Lerna Updated
+
+-   electrode-ignite@1.2.4 `(1.2.3 => 1.2.4)`
+
+## Commits
+
+-   `packages/electrode-archetype-opt-react`
+
+    -   [major] move to react 16 exclusively ([#635](https://github.com/electrode-io/electrode/pull/635)) [commit](http://github.com/electrode-io/electrode/commit/bf47f097ab6bc2b0c9b3c8ccc86214907377d8bb)
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [patch] fix module resolver by looking up package.json ([#656](https://github.com/electrode-io/electrode/pull/656)) [commit](http://github.com/electrode-io/electrode/commit/ebc2ef6bf76817e1b862c988292f05a46e329010)
+    -   [major] move to react 16 exclusively ([#635](https://github.com/electrode-io/electrode/pull/635)) [commit](http://github.com/electrode-io/electrode/commit/bf47f097ab6bc2b0c9b3c8ccc86214907377d8bb)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   [major] move to react 16 exclusively ([#655](https://github.com/electrode-io/electrode/pull/655)) [commit](http://github.com/electrode-io/electrode/commit/ee738fc8aa2ef92ecd53457fe4df3251ef42cba0)
+
+-   `packages/generator-electrode`
+
+    -   [minor] stop lock to react 15 in generated app ([#640](https://github.com/electrode-io/electrode/pull/640)) [commit](http://github.com/electrode-io/electrode/commit/14ef9d9c95673725d9e51be61c3be5690f8a5798)
+    -   disable cors in default & prod, enable in dev ([#657](https://github.com/electrode-io/electrode/pull/657)) [commit](http://github.com/electrode-io/electrode/commit/462f3e4906a601f09f9f4e29440f57e23e89a5a9)
+
+-   `samples/demo-component`
+
+    -   disable cors in default & prod, enable in dev ([#657](https://github.com/electrode-io/electrode/pull/657)) [commit](http://github.com/electrode-io/electrode/commit/462f3e4906a601f09f9f4e29440f57e23e89a5a9)
+
+-   `samples/stylus-sample`
+
+    -   disable cors in default & prod, enable in dev ([#657](https://github.com/electrode-io/electrode/pull/657)) [commit](http://github.com/electrode-io/electrode/commit/462f3e4906a601f09f9f4e29440f57e23e89a5a9)
+
+-   `docs`
+
+    -   Fix documentation link ([#650](https://github.com/electrode-io/electrode/pull/650)) [commit](http://github.com/electrode-io/electrode/commit/4bdb175314a5292aa81f5190a22564ea4273a906)
+    -   Update react-native-and-over-the-air.md [commit](http://github.com/electrode-io/electrode/commit/08bbc00a989f0fc488d7cb4ecd0947a752d77c44)
+
 # 11/20/2017
 
 ## Packages
