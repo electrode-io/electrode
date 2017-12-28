@@ -10,7 +10,8 @@ const Path = require("path");
 const electrodeServer = require("electrode-server");
 
 describe("check-module", function() {
-  this.timeout(10000);
+  this.timeout(30000);
+
   describe("globalInstalled", function() {
     it("should find version of npm", () => {
       // can't determine npm version with npm ls on windows
