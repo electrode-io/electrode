@@ -103,7 +103,7 @@ describe("npmInstall", function() {
       .then(() => {
         expect(error).to.exist;
         expect(error.code).to.equal(1);
-        expect(error.output.stderr).includes(`'npm' is not in the npm registry.`);
+        expect(error.output.stderr).includes(`npm ERR! 404 Not Found`);
       });
   });
 });
