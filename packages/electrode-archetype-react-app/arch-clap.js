@@ -108,7 +108,7 @@ function removeLogFiles() {
  */
 
 function lint(options) {
-  const ext = options.ext ? `--ext ${options.ext}` : "";
+  const ext = options.ext ? ` --ext ${options.ext}` : "";
 
   const checkCustom = t => {
     const f = ["", ".json", ".yml", ".yaml", ".js"].find(e => {
@@ -131,19 +131,13 @@ function lint(options) {
     { custom: [], archetype: [] }
   );
 
-  let promise;
+  const commands = [
+    grouped.custom.length > 0 && `~$eslint${ext} ${grouped.custom.join(" ")}`,
+    grouped.archetype.length > 0 &&
+      `~$eslint${ext} --no-eslintrc -c ${options.config} ${grouped.archetype.join(" ")}`
+  ];
 
-  if (grouped.custom.length > 0) {
-    const cmd = `eslint ${ext} ${grouped.custom.join(" ")}`;
-    promise = exec(cmd);
-  }
-
-  if (grouped.archetype.length > 0) {
-    const cmd = `eslint ${ext} --no-eslintrc -c ${options.config} ${grouped.archetype.join(" ")}`;
-    promise = promise ? promise.then(() => exec(cmd)) : exec(cmd);
-  }
-
-  return promise;
+  return Promise.resolve(commands.filter(x => x));
 }
 
 /*
