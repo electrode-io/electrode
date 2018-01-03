@@ -10,4 +10,4 @@ notifications:
     - XChen@walmartlabs.com
 before_install:
   - if [[ `npm -v` != 3* ]]; then npm i -g npm@3; npm --version; fi
-  - npm install -g xclap-cli
+  - npm install -g xclap-cli fyn
