@@ -4,7 +4,7 @@
   "description": "Electrode Platform for NodeJS/React Universal Application",
   "homepage": "http://www.electrode.io",
   "scripts": {
-    "test": "lerna bootstrap --ignore=electrode-webpack-reporter && lerna run test --ignore=electrode-webpack-reporter && npm run test-reporter && clap build-test",
+    "test": "npm run bootstrap && lerna run test --ignore=electrode-webpack-reporter && npm run test-reporter && clap build-test",
     "test-generator": "clap test-generator",
     "test-boilerplate": "clap test-boilerplate",
     "bootstrap": "lerna bootstrap --ignore=electrode-webpack-reporter",
@@ -21,7 +21,7 @@
     "lerna": "^2.0.0",
     "lodash": "^4.17.2",
     "semver": "^5.3.0",
-    "xclap": "^0.2.0",
+    "xclap": "^0.2.18",
     "xsh": "^0.4.0",
     "yeoman-test": "^1.6.0"
   },
