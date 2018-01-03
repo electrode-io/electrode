@@ -572,12 +572,13 @@ Individual .babelrc files were generated for you in src/client and src/server
           .map(n => `--watch ${n}`)
           .join(" ");
         AppMode.setEnv(AppMode.src.dir);
-        const node = AppMode.isSrc ? `babel-node` : "node";
-        const serverIndex = Path.join(AppMode.src.server, "index.js");
+        const nodeRunApp = AppMode.isSrc
+          ? `node ${archetype.dir}/support/babel-run ${AppMode.src.server}`
+          : `node ${AppMode.src.server}`;
         return exec(
           `nodemon`,
           `--delay 1 -C --ext js,jsx,json,yaml ${watches}`,
-          `--exec ${node} ${serverIndex}`
+          `--exec ${nodeRunApp}`
         );
       }
     },
