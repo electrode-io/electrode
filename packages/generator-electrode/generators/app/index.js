@@ -89,7 +89,8 @@ module.exports = class extends Generator {
         : this.fs.exists(this.destinationPath("src/server/koa-server.js")) ? KoaJS : HapiJS;
       this.props.pwa = this.fs.exists(this.destinationPath("client/sw-registration.js"));
       this.props.autoSsr = this.fs.exists(this.destinationPath("server/plugins/autossr.js"));
-      this.props.quoteType = this.fs.exists(this.destinationPath(".eslintrc")) ? "'" : '"';
+      this.props.quoteType =
+        _.get(pkg, "eslintConfig.rules.quotes", []).indexOf("single") >= 0 ? "'" : '"';
     } else if (_.isString(this.pkg.author)) {
       var info = parseAuthor(this.pkg.author);
       this.props.authorName = info.name;
@@ -274,7 +275,8 @@ module.exports = class extends Generator {
       isHapi,
       isExpress,
       isPWA,
-      isAutoSSR
+      isAutoSSR,
+      isSingleQuote
     });
 
     var defaultPkg = this.fs.readJSON(this.destinationPath(_pkg));
@@ -327,21 +329,19 @@ module.exports = class extends Generator {
     this.fs.writeJSON(this.destinationPath("package.json"), pkg);
 
     const rootConfigsToCopy = ["xclap.js", "config", "test"];
-    if (isSingleQuote) rootConfigsToCopy.push(".eslintrc");
+    rootConfigsToCopy.push(".eslintrc.js");
     rootConfigsToCopy.forEach(f => {
-      this.fs.copyTpl(this.templatePath(f), this.destinationPath(f), { isSingleQuote });
+      this.fs.copyTpl(
+        this.templatePath(f),
+        this.destinationPath(f),
+        { isSingleQuote },
+        {},
+        { globOptions: { dot: true } }
+      );
     });
 
     if (this.isExtended) {
       this.fs.delete(this.destinationPath("config/default.js"));
-    }
-
-    //copy .eslintc into the client directory
-    if (isSingleQuote) {
-      this.fs.copy(
-        this.templatePath("src/client/.eslintrc"),
-        this.destinationPath("src/client/.eslintrc")
-      );
     }
 
     //special handling for the server file
@@ -352,6 +352,7 @@ module.exports = class extends Generator {
       {},
       {
         globOptions: {
+          dot: true,
           ignore: ignoreArray
         }
       }
@@ -365,25 +366,20 @@ module.exports = class extends Generator {
       {
         // copy options
         globOptions: {
+          dot: true,
           // Images are damaged by the template compiler
-          ignore: [
-            "**/client/images/**",
-            (!isPWA && "**/client/sw-registration.js") || "",
-            (this.isDemoApp && "**/client/components/**") || "",
-            (this.isDemoApp && "**/client/actions/**") || "",
-            (this.isDemoApp && "**/client/reducers/**") || ""
-          ]
+          ignore: ["**/client/images/**", !isPWA && "**/client/sw-registration.js"]
+            .concat(
+              this.isDemoApp && [
+                "**/client/components/**",
+                "**/client/actions/**",
+                "**/client/reducers/**"
+              ]
+            )
+            .filter(x => x)
         }
       }
     );
-
-    ["src/client", "src/server", "test/client", "test/server"].forEach(d => {
-      this.fs.move(this.destinationPath(d + "/babelrc"), this.destinationPath(d + "/.babelrc"));
-    });
-
-    ["test/client", "test/server"].forEach(d => {
-      this.fs.move(this.destinationPath(d + "/eslintrc"), this.destinationPath(d + "/.eslintrc"));
-    });
 
     this.fs.copy(this.templatePath("src/client/images"), this.destinationPath("src/client/images"));
   }
@@ -453,17 +449,6 @@ module.exports = class extends Generator {
   }
 
   end() {
-    if (this.props.quoteType === "'") {
-      this.spawnCommandSync("node_modules/.bin/eslint", [
-        "--fix",
-        "src",
-        "test",
-        "config",
-        "--ext",
-        ".js,.jsx"
-      ]);
-    }
-
     if (!this.isDemoApp) {
       var chdir = this.props.createDirectory
         ? "'cd " + _.kebabCase(_.deburr(this.props.name)) + "' then "
