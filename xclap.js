@@ -53,7 +53,10 @@ const runAppTest = (dir, forceLocal) => {
     }
   };
 
-  return exec({ cwd: dir }, `npm i`).then(() => exec({ cwd: dir }, `npm test`));
+  return exec(
+    { cwd: dir },
+    `eval "$(fyn bash)" && fyn -q v i && node_modules/.bin/clap ?fix-generator-eslint`
+  ).then(() => exec({ cwd: dir }, `eval "$(fyn bash)" && npm test`));
 };
 
 const testGenerator = (testDir, clean, prompts) => {
