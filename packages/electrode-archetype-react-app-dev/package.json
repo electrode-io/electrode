@@ -49,6 +49,7 @@
     "electrode-cdn-file-loader": "^1.0.0",
     "electrode-electrify": "^1.0.0",
     "electrode-webpack-reporter": "^0.3.13",
+    "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.1.0",
     "eslint": "^4.8.0",
     "eslint-config-walmart": "^1.1.0",

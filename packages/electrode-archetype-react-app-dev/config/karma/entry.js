@@ -15,6 +15,15 @@ require("babel-polyfill");
 var chai = require("chai");
 var sinonChai = require("sinon-chai");
 var chaiShallowly = require("chai-shallowly");
+
+/**
+ * Install enzyme along with an Adapter corresponding to React 16
+ * Configure enzyme to use the adapter using the top level configure(...) API
+ */
+var enzyme = require("enzyme");
+var Adapter = require("enzyme-adapter-react-16");
+enzyme.configure({ adapter: new Adapter() });
+
 /*
  * We need a global sinon to maintain compatibility
  * with existing test suites. However, this will be
