@@ -22,19 +22,18 @@
     "classnames": "^2.2.5",
     "electrode-archetype-react-app": "../electrode-archetype-react-app",
     "electrode-archetype-react-app-dev": "../electrode-archetype-react-app-dev",
-    "electrode-electrify-react-component": "^4.4.13",
     "electrode-react-webapp": "../electrode-react-webapp",
     "electrode-redux-router-engine": "^1.5.0",
-    "electrode-server": "^1.1.1",
-    "electrode-static-paths": "^1.0.0",
+    "electrode-server": "^1.3.0",
+    "electrode-static-paths": "^1.1.0",
     "material-design-icons": "^3.0.1",
-    "material-ui": "^0.17.0",
-    "react-tap-event-plugin": "^2.0.1",
+    "material-ui": "^0.20.0",
+    "react-tap-event-plugin": "^3.0.2",
     "xclap": "^0.2.0"
   },
   "dependencies": {
     "ansi-to-html": "^0.6.0",
-    "chalk": "^1.1.3",
+    "chalk": "^2.3.0",
     "optional-require": "^1.0.0",
     "socket.io": "^1.7.3"
   }
