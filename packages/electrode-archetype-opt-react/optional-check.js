@@ -2,7 +2,7 @@
 
 const Path = require("path");
 
-const cwd = process.cwd();
+const cwd = process.env.PWD || process.cwd();
 
 function findAppDir() {
   if (cwd.indexOf("node_modules") > 0) {
