@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {AboveTheFoldOnlyServerRender} from "above-the-fold-only-server-render";
 import {connect} from "react-redux";
 import smileyPng from "../images/718smiley.png";
 import peaceSmileyPng from "../images/peace-smiley.png";
@@ -54,27 +55,29 @@ export class AboveFold extends React.Component {
           :
           (<div>In the page source you should SEE the HTML for the wrapped component after this.</div>)
         }
-        <div style={{
-          marginLeft: "auto",
-          marginRight: "auto",
-          marginTop: "10px",
-          color: "red",
-          border: "2px solid",
-          width: "98%",
-          height: "400px",
-          padding: "5pt"
-        }}>
-          <p>This content block is wrapped inside the <span>AboveTheFoldOnlyServerRender</span> component, with the
-            <span> skip</span> prop set to <span>{`${this.props.skip}`}</span>.</p>
-          {this.props.skip ?
-            <div><p>It will not be rendered on the server side, but you should see it in the browser.</p>
-              <p>To verify, check the page source to see this not being part of the SSR content.</p></div>
-            :
-            <div><p>It is also rendered on the server side since skip is <span>{`${this.props.skip}`}</span></p>
-              <p>To verify, check the page source to see this being part of the SSR content.</p></div>
-          }
-          <img src={peaceSmileyPng}/>
-        </div>
+        <AboveTheFoldOnlyServerRender skip={this.props.skip}>
+          <div style={{
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: "10px",
+            color: "red",
+            border: "2px solid",
+            width: "98%",
+            height: "400px",
+            padding: "5pt"
+          }}>
+            <p>This content block is wrapped inside the <span>AboveTheFoldOnlyServerRender</span> component, with the
+              <span> skip</span> prop set to <span>{`${this.props.skip}`}</span>.</p>
+            {this.props.skip ?
+              <div><p>It will not be rendered on the server side, but you should see it in the browser.</p>
+                <p>To verify, check the page source to see this not being part of the SSR content.</p></div>
+              :
+              <div><p>It is also rendered on the server side since skip is <span>{`${this.props.skip}`}</span></p>
+                <p>To verify, check the page source to see this being part of the SSR content.</p></div>
+            }
+            <img src={peaceSmileyPng}/>
+          </div>
+        </AboveTheFoldOnlyServerRender>
       </div>
     );
   }
