@@ -40,17 +40,12 @@
     "es6-promise": "^4.0.5",
     "isomorphic-fetch": "^2.2.1",
     "mongojs": "^2.4.0",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
     "react-notify-toast": "^0.4.0",
-    "react-router": "^3.0.0",
     "uuid": "^3.0.1"
   },
   "devDependencies": {
     "electrode-archetype-react-app-dev": "../../packages/electrode-archetype-react-app-dev",
     "redux-devtools": "^3.3.1",
-    "react-redux": "^5.0.0",
-    "redux": "^3.5.2",
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-devtools-log-monitor": "^1.0.11"
   }
