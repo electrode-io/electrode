@@ -12,7 +12,7 @@ require("babel-register");
 const createStore = require("redux").createStore;
 
 const routes = require("../routes.jsx").default;
-const badRoutes = require("../bad-routes.jsx").default;
+const stringRoutes = require("../string-routes.jsx").default;
 const errorRoutes = require("../error-routes.jsx").default;
 const RedirectRoute = require("../error-routes.jsx").RedirectRoute;
 const getIndexRoutes = require("../get-index-routes.jsx").default;
@@ -134,16 +134,15 @@ describe("redux-router-engine", function () {
     });
   });
 
-  it("should return 500 for invalid component", () => {
+  it("should return 200 since React 16 supports for returning strings as components", () => {
     const intercept = xstdout.intercept(true);
-    const engine = new ReduxRouterEngine({ routes: badRoutes, createReduxStore });
+    const engine = new ReduxRouterEngine({ routes: stringRoutes, createReduxStore });
     testReq.url.path = "/test";
 
     return engine.render(testReq).then((result) => {
       intercept.restore();
-      expect(result.status).to.equal(500);
-      expect(result._err.message)
-        .to.contain("Page.render(): A valid React element (or null) must be returned");
+      expect(result.status).to.equal(200);
+      expect(result.html).to.equal("Page");
     });
   });
 
@@ -172,21 +171,21 @@ describe("redux-router-engine", function () {
     });
   });
 
-  it("should populate react-id when requested", () => {
+  it("should populate react-root when requested", () => {
     const engine = new ReduxRouterEngine({ routes, createReduxStore, withIds: true });
     testReq.url.path = "/test";
 
     return engine.render(testReq).then((result) => {
-      expect(result.html).to.contain("data-reactid");
+      expect(result.html).to.contain("data-reactroot");
     });
   });
 
-  it("should not populate react-id by default", () => {
+  it("should not populate react-root by default", () => {
     const engine = new ReduxRouterEngine({ routes, createReduxStore });
     testReq.url.path = "/test";
 
     return engine.render(testReq).then((result) => {
-      expect(result.html).to.not.contain("data-reactid");
+      expect(result.html).to.not.contain("data-reactroot");
     });
   });
 
@@ -205,7 +204,7 @@ describe("redux-router-engine", function () {
         expect(result.prefetch).to.equal(`window.__TEST_STATE__`);
         expect(result.html).to.equal("test");
         return new ReduxRouterEngine({
-          routes: badRoutes,
+          routes: stringRoutes,
           createReduxStore,
           logError: (req, err) => {
             error = err;
@@ -213,8 +212,8 @@ describe("redux-router-engine", function () {
         }).render(testReq);
       })
       .then((result) => {
-        expect(result.status).to.equal(500);
-        expect(error).to.not.equal(undefined);
+        expect(result.status).to.equal(200);
+        expect(error).to.equal(undefined);
       });
   });
 
@@ -223,7 +222,7 @@ describe("redux-router-engine", function () {
     testReq.url.path = "/test";
 
     return engine.render(testReq, { withIds: false }).then((result) => {
-      expect(result.html).to.not.contain("data-reactid");
+      expect(result.html).to.not.contain("data-reactroot");
     });
   });
 

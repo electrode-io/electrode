@@ -31,8 +31,8 @@
     "babel-preset-stage-0": "^6.0.15",
     "babel-register": "^6.5.2",
     "electrode-archetype-njs-module-dev": "^2.1.0",
-    "react": "^15.3.1 || ^0.14.8",
-    "react-dom": "^15.3.1 || ^0.14.8",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "xstdout": "^0.1.1"
   },
   "dependencies": {
@@ -40,12 +40,12 @@
     "history": "^4.2.0",
     "optional-require": "^1.0.0",
     "react-redux": "^4.4.5 || ^5.x.x",
-    "react-router": "^3.0.0 || ^2.8.0",
+    "react-router": "^3.0.0",
     "redux": "^3.6.0"
   },
   "peerDependencies": {
-    "react": "^16.0.0 || ^15.3.1 || ^0.14.8",
-    "react-dom": "^16.0.0 || ^15.3.1 || ^0.14.8"
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
   },
   "nyc": {
     "all": true,
