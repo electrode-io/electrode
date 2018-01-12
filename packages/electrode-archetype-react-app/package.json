@@ -23,7 +23,7 @@
   },
   "optionalDependencies": {
     "electrode-archetype-opt-inferno": "^0.2.0",
-    "electrode-archetype-opt-react": "^0.2.0"
+    "electrode-archetype-opt-react": "^1.0.0"
   },
   "devDependencies": {
     "electrode-archetype-njs-module-dev": "^2.0.0",
