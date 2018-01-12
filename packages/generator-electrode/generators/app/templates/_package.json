@@ -31,9 +31,9 @@
   },
   "dependencies": {
     "bluebird": "^3.4.6",
-    "electrode-archetype-react-app": "^4.0.0",
+    "electrode-archetype-react-app": "^5.0.0",
     "electrode-confippet": "^1.0.0",
-    "electrode-react-webapp": "^2.1.0",
+    "electrode-react-webapp": "^3.0.0",
     "electrode-redux-router-engine": "^1.5.0",<% if (isHapi) { %>
     "electrode-server": "^1.0.0",
     "electrode-static-paths": "^1.0.0",<% } else if(isExpress) { %>
@@ -47,7 +47,7 @@
     "lodash": "^4.10.1"
   },
   "devDependencies": {
-    "electrode-archetype-react-app-dev": "^4.0.0"
+    "electrode-archetype-react-app-dev": "^5.0.0"
   }<% if (isSingleQuote) { %>,
   "eslintConfig": {
     "rules": {
