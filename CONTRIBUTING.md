@@ -6,12 +6,12 @@ There are [few guidelines](#contributing-guidelines) that we request contributor
 
 ## Getting Started
 
-This repo uses [Lerna] as a top level setup.
+This repo uses [Lerna] as a top level setup and [fyn] to manage Node Modules.
 
--   Install the `clap` command globally if you don't want to invoke from `node_modules/.bin`.
+-   Install these CLI tools globally: [xclap-cli] and [fyn]
 
 ```bash
-$ npm install -g xclap-cli
+$ npm install -g xclap-cli fyn
 ```
 
 -   Fork and clone the repo at <https://github.com/electrode-io/electrode.git>
@@ -56,7 +56,7 @@ We love PRs and appreciate any help you can offer.  Please follow the guidelines
 
 #### Styling
 
-We've now switched to use [prettier] to format all our code.  
+We've now switched to use [prettier] to format all our code.
 
 Our [prettier] settings are: `--print-width 100`
 
@@ -127,3 +127,7 @@ Here is the documentation on a [gitbook] structure: <https://toolchain.gitbook.c
 [lerna]: https://lernajs.io/
 
 [gitbook]: https://www.gitbook.com
+
+[xclap-cli]: https://www.npmjs.com/package/xclap-cli
+
+[fyn]: https://www.npmjs.com/package/fyn
