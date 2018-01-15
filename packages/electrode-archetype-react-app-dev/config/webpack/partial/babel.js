@@ -7,8 +7,8 @@ const _ = require("lodash");
 const logger = require("electrode-archetype-react-app/lib/logger");
 
 module.exports = function(options) {
-  if(options.HotModuleReload) {
-    require('react-hot-loader/patch');
+  if (options.HotModuleReload) {
+    require("react-hot-loader/patch");
   }
 
   const clientVendor = Path.join(AppMode.src.client, "vendor/");
