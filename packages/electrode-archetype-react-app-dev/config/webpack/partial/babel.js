@@ -7,6 +7,10 @@ const _ = require("lodash");
 const logger = require("electrode-archetype-react-app/lib/logger");
 
 module.exports = function(options) {
+  if (options.HotModuleReload) {
+    require("react-hot-loader/patch");
+  }
+
   const clientVendor = Path.join(AppMode.src.client, "vendor/");
   const babelExclude = x => {
     if (x.indexOf("/node_modules") >= 0) return true;
@@ -19,7 +23,6 @@ module.exports = function(options) {
     test: /\.jsx?$/,
     exclude: babelExclude,
     use: [
-      options.HotModuleReload && "react-hot-loader",
       {
         loader: "babel-loader",
         options: options.babel
