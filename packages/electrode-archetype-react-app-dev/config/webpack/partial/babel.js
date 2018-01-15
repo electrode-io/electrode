@@ -23,7 +23,6 @@ module.exports = function(options) {
     test: /\.jsx?$/,
     exclude: babelExclude,
     use: [
-      options.HotModuleReload && "react-hot-loader",
       {
         loader: "babel-loader",
         options: options.babel
