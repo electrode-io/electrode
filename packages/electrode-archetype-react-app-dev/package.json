@@ -112,7 +112,7 @@
     "web-app-manifest-loader": "^0.1.1",
     "webpack": "^3.6.0",
     "webpack-config-composer": "^1.0.2",
-    "webpack-dev-server": "2.5.1",
+    "webpack-dev-server": "^2.5.1",
     "webpack-disk-plugin": "0.0.2",
     "webpack-stats-plugin": "^0.1.1",
     "winston": "^2.3.1",
