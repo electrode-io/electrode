@@ -7,7 +7,7 @@ class NavBar extends React.Component {
   constructor(props) {
     super(props);
 
-    switch(window.location.pathname) {
+    switch (window.location.pathname) {
       case RoutePaths.LEGACY:
         this.state = {mode: "legacy"};
         break;
