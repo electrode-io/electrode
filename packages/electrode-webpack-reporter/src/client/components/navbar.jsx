@@ -13,6 +13,7 @@ class NavBar extends React.Component {
         break;
       default:
         this.state = {mode: "report"};
+        break;
     }
   }
 
