@@ -1,11 +1,20 @@
 import React from "react";
 import styles from "../styles/base.css";
 import {Link} from "react-router";
+import RoutePaths from "../../../lib/route-paths";
 
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {mode: "report"};
+
+    switch (window.location.pathname) {
+      case RoutePaths.LEGACY:
+        this.state = {mode: "legacy"};
+        break;
+      default:
+        this.state = {mode: "report"};
+        break;
+    }
   }
 
   createNavBarItem(item) {
