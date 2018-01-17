@@ -44,7 +44,7 @@ In the Electrode Archetype App and Component, we are using Chrome Headless as th
 -   A [Heroku](https://signup.heroku.com/dc) account + [CLI tools](https://devcenter.heroku.com/articles/heroku-command-line).
 -   A [Github](https://github.com/) account.
 
-Ready? Let's [build](/chapter1/quick-start/build-component.md).
+Ready? Let's [build](/chapter1/quick-start/build-app.md).
 
 [yo]: http://yeoman.io/
 

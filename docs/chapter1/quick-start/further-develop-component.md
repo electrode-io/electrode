@@ -1,4 +1,4 @@
-# Develop Electrode Component
+# Further Develop Electrode Component
 
 *   [Low-Level Components](/chapter1/further-develop-component/low-level-components.md)
 *   [Component Helpers](/chapter1/further-develop-component/component-helpers.md)

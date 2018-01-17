@@ -93,3 +93,5 @@ electrode-app
 -   `xclap.js` - entry to Electrode's archetype tasks
 
 The application generated included a few demo components to show you how to use Redux, CSS Modules, and React JSX.  Feel free to play with them and remove or replace them when you are ready to add your application.
+
+For continuing build React components for your Electrode Application, please continue [here.](/chapter1/quick-start/further-develop-app.md)
