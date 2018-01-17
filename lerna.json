@@ -5,5 +5,8 @@
     "ignore": [
       "*.md"
     ]
+  },
+  "fynpo": {
+    "ignore": [ "electrode-webpack-reporter" ]
   }
 }
