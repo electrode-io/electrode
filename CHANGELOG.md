@@ -1,3 +1,52 @@
+# 1/18/2018
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-react-app@5.0.3 `(5.0.2 => 5.0.3)`
+-   electrode-archetype-react-app-dev@5.0.3 `(5.0.2 => 5.0.3)`
+-   electrode-archetype-react-component@5.0.1 `(5.0.0 => 5.0.1)`
+-   electrode-archetype-react-component-dev@5.0.1 `(5.0.0 => 5.0.1)`
+-   electrode-webpack-reporter@0.4.1 `(0.4.0 => 0.4.1)`
+-   generator-electrode@4.0.1 `(4.0.0 => 4.0.1)`
+
+### Lerna Updated
+
+-   electrode-ignite@2.0.1 `(2.0.0 => 2.0.1)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [patch] update component generator ([#681](https://github.com/electrode-io/electrode/pull/681)) [commit](http://github.com/electrode-io/electrode/commit/b7a708ac24bd1207a183b085fe59803e485b935e)
+    -   [patch] resolve react/lib/ReactMount issue for hot reload ([#679](https://github.com/electrode-io/electrode/pull/679)) [commit](http://github.com/electrode-io/electrode/commit/d73327ff61f3246409515584b7f036f2c2eaed7f)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   [patch] update component generator ([#681](https://github.com/electrode-io/electrode/pull/681)) [commit](http://github.com/electrode-io/electrode/commit/b7a708ac24bd1207a183b085fe59803e485b935e)
+
+-   `packages/electrode-webpack-reporter`
+
+    -   [patch]Webpack reporter fixes ([#682](https://github.com/electrode-io/electrode/pull/682)) [commit](http://github.com/electrode-io/electrode/commit/18408635cd3d15ba426fd199ffd464c528ae1d84)
+
+-   `packages/generator-electrode`
+
+    -   [patch] update component generator ([#681](https://github.com/electrode-io/electrode/pull/681)) [commit](http://github.com/electrode-io/electrode/commit/b7a708ac24bd1207a183b085fe59803e485b935e)
+
+-   `docs`
+
+    -   [patch] Gitbook content updates: build react components for app ([#684](https://github.com/electrode-io/electrode/pull/684)) [commit](http://github.com/electrode-io/electrode/commit/84ce1c5531b9cee492c82ad8dd621737c03285c9)
+
+-   `tools`
+
+    -   remove files no longer needed ([#685](https://github.com/electrode-io/electrode/pull/685)) [commit](http://github.com/electrode-io/electrode/commit/5accb7b5be68998482f204494c51c70938210a33)
+    -   use fyn to bootstrap packages ([#677](https://github.com/electrode-io/electrode/pull/677)) [commit](http://github.com/electrode-io/electrode/commit/d2349378e6c2f10dc8a9aa4ecd40900a63532590)
+
+-   `MISC`
+
+    -   extract fyn bootstrap tools for lerna to its own module fynpo ([#683](https://github.com/electrode-io/electrode/pull/683)) [commit](http://github.com/electrode-io/electrode/commit/fc6fda836c499a60bccc9a7698591ba0bed7c10d)
+
 # 1/12/2018
 
 ## Packages
