@@ -128,3 +128,5 @@ electrode-component
 -   `packages/<componentName>/demo` - Contains examples for how to demo your component
 -   `packages/<componentName>/src` - Contains your component source code
 -   `packages/<componentName>/test` - Contains unit tests for your component
+
+For further developing your Electrode components, please refer [here.](/chapter1/quick-start/further-develop-component.md)

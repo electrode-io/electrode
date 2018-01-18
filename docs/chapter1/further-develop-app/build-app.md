@@ -1,4 +1,4 @@
-# Build Component
+# Build Electrode Application
 
 From here, you can develop further based on the generated the electrode app. Let's make a visual library for our present stack and exciting technologies! Copy the code below and paste it into
 
