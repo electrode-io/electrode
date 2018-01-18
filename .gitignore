@@ -515,3 +515,7 @@ _book
 
 .nyc_output
 .vscode
+fyn-lock.yaml
+package-lock.json
+yarn.lock
+
