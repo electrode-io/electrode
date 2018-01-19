@@ -5,7 +5,7 @@
   "main": "lib/webpack-reporter.js",
   "scripts": {
     "test": "clap check",
-    "prepublish": "clap build"
+    "prepare": "clap build"
   },
   "repository": {
     "type": "git",
