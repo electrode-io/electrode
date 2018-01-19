@@ -42,18 +42,16 @@
   },
   "dependencies": {
     "bluebird": "^3.4.6",
-    "electrode-archetype-react-app": "../../../packages/electrode-archetype-react-app",
-    "electrode-confippet": "^1.0.0",
-    "electrode-react-webapp": "^1.1.0",
-    "electrode-redux-router-engine": "^1.2.2",
+    "electrode-archetype-react-app": "^5.0.0",
+    "electrode-confippet": "^1.5.0",
+    "electrode-react-webapp": "^2.1.0",
+    "electrode-redux-router-engine": "^1.5.0",
     "electrode-server": "^1.0.0",
     "electrode-static-paths": "^1.0.0",
     "lodash": "^4.10.1"
   },
   "devDependencies": {
-    "electrode-archetype-react-app-dev": "../../../packages/electrode-archetype-react-app-dev",
-    "json-stringify-safe": "^5.0.1",
-    "safe-json-stringify": "^1.0.4"
+    "electrode-archetype-react-app-dev": "^5.0.0"
   },
   "private": true
 }

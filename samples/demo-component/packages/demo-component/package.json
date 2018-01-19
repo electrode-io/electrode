@@ -16,12 +16,11 @@
   },
   "homepage": "https://github.com/electrode-io/electrode",
   "dependencies": {
-    "material-ui": "^0.18.3",
-    "react-tap-event-plugin": "^2.0.1"
+    "material-ui": "^0.20.0"
   },
   "devDependencies": {
-    "electrode-archetype-react-component": "../../../../packages/electrode-archetype-react-component",
-    "electrode-archetype-react-component-dev": "../../../../packages/electrode-archetype-react-component-dev",
+    "electrode-archetype-react-component": "^5.0.0",
+    "electrode-archetype-react-component-dev": "^5.0.0",
     "xclap": "^0.2.0"
   },
   "engines": {
