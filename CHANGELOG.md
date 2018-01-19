@@ -176,4 +176,4 @@
     -   remove Node 6 from CI [commit](http://github.com/electrode-io/electrode/commit/dae7d71eb0b51dc086d12971594c49b97b9989b3)
     -   Update changelog [commit](http://github.com/electrode-io/electrode/commit/af634527039c397ac16dad12fcb2d558689af3ce)
 
-# [02/14/2017 - 11/20/2017](./2017.md)
+# [02/14/2017 - 11/20/2017](./xchangelog//2017.md)
