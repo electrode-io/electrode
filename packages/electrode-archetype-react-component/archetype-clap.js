@@ -97,15 +97,21 @@ const tasks = {
   "cov-frontend-95": () => checkFrontendCov("95"),
 
   lint: ["lint-react-src", "lint-react-test", "lint-scripts"],
+
   "lint-react-src": mkCmd(
     `eslint --ext .js,.jsx`,
     `-c ${archetype.devPath}/config/eslint/.eslintrc-react src --color`
   ),
+
   "lint-react-test": mkCmd(
     `eslint --ext .js,.jsx`,
     `-c ${archetype.devPath}/config/eslint/.eslintrc-react-test test/client --color`
   ),
-  "lint-scripts": `eslint --ext .js -c ${archetype.devPath}/config/eslint/.eslintrc-base scripts --color`,
+
+  "lint-scripts": mkCmd(
+    `eslint --ext .js`,
+    `-c ${archetype.devPath}/config/eslint/.eslintrc-base scripts --color`
+  ),
 
   "npm:prepublish": ["build-lib", "build-dist-min"],
 
@@ -120,9 +126,18 @@ const tasks = {
   "test-watch": ["test-frontend-dev-watch"],
   "concurrent-test-watch": ["hot", "test-frontend-dev-watch"],
   "test-frontend": `karma start ${archetype.devPath}/config/karma/karma.conf.js --colors`,
-  "test-frontend-ci": `karma start --browsers PhantomJS,Firefox ${archetype.devPath}/config/karma/karma.conf.coverage.js --colors`,
-  "test-frontend-cov": `karma start ${archetype.devPath}/config/karma/karma.conf.coverage.js --colors`,
-  "test-frontend-dev": `karma start ${archetype.devPath}/config/karma/karma.conf.dev.js --colors`,
+  "test-frontend-ci": mkCmd(
+    `karma start --browsers PhantomJS,Firefox`,
+    `${archetype.devPath}/config/karma/karma.conf.coverage.js --colors`
+  ),
+  "test-frontend-cov": mkCmd(
+    `karma start`,
+    `${archetype.devPath}/config/karma/karma.conf.coverage.js --colors`
+  ),
+  "test-frontend-dev": mkCmd(
+    `karma start`,
+    `${archetype.devPath}/config/karma/karma.conf.dev.js --colors`
+  ),
   "test-frontend-dev-watch": mkCmd(
     `karma start ${archetype.devPath}/config/karma/karma.conf.watch.js`,
     ` --colors --browsers Chrome --no-single-run --auto-watch`
