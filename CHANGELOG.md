@@ -1,3 +1,38 @@
+# 1/19/2018
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-react-component@5.0.2 `(5.0.1 => 5.0.2)`
+-   electrode-archetype-react-component-dev@5.0.2 `(5.0.1 => 5.0.2)`
+-   electrode-webpack-reporter@0.4.2 `(0.4.1 => 0.4.2)`
+-   generator-electrode@4.0.2 `(4.0.1 => 4.0.2)`
+
+### Lerna Updated
+
+-   electrode-archetype-react-app@5.0.4 `(5.0.3 => 5.0.4)`
+-   electrode-archetype-react-app-dev@5.0.4 `(5.0.3 => 5.0.4)`
+-   electrode-ignite@2.0.2 `(2.0.1 => 2.0.2)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   [patch] fix missed optionalDep update by lerna ([#689](https://github.com/electrode-io/electrode/pull/689)) [commit](http://github.com/electrode-io/electrode/commit/bae5f1fb1b08b9133803c8270d823733ec5bdfd1)
+
+-   `packages/electrode-webpack-reporter`
+
+    -   prepublish -> prepare ([#687](https://github.com/electrode-io/electrode/pull/687)) [commit](http://github.com/electrode-io/electrode/commit/9f2c9eccaf84a3a7c924e2544182b417408b3f84)
+
+-   `packages/generator-electrode`
+
+    -   [patch] fix eslint error in demo-app of generated component ([#688](https://github.com/electrode-io/electrode/pull/688)) [commit](http://github.com/electrode-io/electrode/commit/9f9c9c402b8c38f9f97be38b55020f6e35d4d8a3)
+
+-   `MISC`
+
+    -   ignore lock files ([#686](https://github.com/electrode-io/electrode/pull/686)) [commit](http://github.com/electrode-io/electrode/commit/08dc9b161820ea18d658026d02f3e1f4ebacd4cc)
+
 # 1/18/2018
 
 ## Packages
