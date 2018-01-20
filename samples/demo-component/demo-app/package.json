@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "bluebird": "^3.4.6",
-    "electrode-archetype-react-app": "^5.0.0",
+    "electrode-archetype-react-app": "../../../packages/electrode-archetype-react-app",
     "electrode-confippet": "^1.5.0",
     "electrode-react-webapp": "^2.1.0",
     "electrode-redux-router-engine": "^1.5.0",
@@ -51,7 +51,7 @@
     "lodash": "^4.10.1"
   },
   "devDependencies": {
-    "electrode-archetype-react-app-dev": "^5.0.0"
+    "electrode-archetype-react-app-dev": "../../../packages/electrode-archetype-react-app-dev"
   },
   "private": true
 }

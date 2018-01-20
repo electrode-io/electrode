@@ -6,8 +6,8 @@ module.exports = {
   resolve: {
     alias: {
       "demo-component": Path.join(repoPackagesDir, "demo-component/src"),
-      "react": Path.resolve(__dirname, "../../../node_modules", "react"),
-      "react-dom": Path.resolve(__dirname, "../../../node_modules", "react-dom")
+      "react": Path.dirname(require.resolve("react/package.json")),
+      "react-dom": Path.dirname(require.resolve("react-dom/package.json"))
     },
     modules: [
       Path.join(repoPackagesDir, "demo-component"),

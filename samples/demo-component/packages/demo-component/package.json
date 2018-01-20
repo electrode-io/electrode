@@ -19,8 +19,8 @@
     "material-ui": "^0.20.0"
   },
   "devDependencies": {
-    "electrode-archetype-react-component": "^5.0.0",
-    "electrode-archetype-react-component-dev": "^5.0.0",
+    "electrode-archetype-react-component": "../../../../packages/electrode-archetype-react-component",
+    "electrode-archetype-react-component-dev": "../../../../packages/electrode-archetype-react-component-dev",
     "xclap": "^0.2.0"
   },
   "engines": {
