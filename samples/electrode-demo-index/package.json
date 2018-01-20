@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "electrode-archetype-react-component": "../../packages/electrode-archetype-react-component",
-    "electrode-archetype-react-component-dev": "../../packages/electrode-archetype-react-component-dev"
+    "electrode-archetype-react-component-dev": "../../packages/electrode-archetype-react-component-dev",
+    "webpack": "^3"
   }
 }
