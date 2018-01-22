@@ -16,8 +16,7 @@
   },
   "homepage": "https://github.com/electrode-io/electrode",
   "dependencies": {
-    "material-ui": "^0.18.3",
-    "react-tap-event-plugin": "^2.0.1"
+    "material-ui": "^0.20.0"
   },
   "devDependencies": {
     "electrode-archetype-react-component": "../../../../packages/electrode-archetype-react-component",

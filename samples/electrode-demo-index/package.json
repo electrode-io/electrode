@@ -24,7 +24,7 @@
     "electrode",
     "demo"
   ],
-  "author": [
+  "contributors": [
     {
       "name": "Dave Stevens",
       "email": "dstevens@walmartlabs.com"
@@ -36,10 +36,10 @@
   ],
   "license": "Apache-2.0",
   "dependencies": {
-    "electrode-archetype-react-component": "^5.0.0",
+    "electrode-archetype-react-component": "../../packages/electrode-archetype-react-component",
     "object-assign": "^4.1.0"
   },
   "devDependencies": {
-    "electrode-archetype-react-component-dev": "^5.0.0"
+    "electrode-archetype-react-component-dev": "../../packages/electrode-archetype-react-component-dev"
   }
 }
