@@ -1,0 +1,53 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  align-items: center;
+  color: black;
+  display: flex;
+  font: 20px sans-serif;
+  justify-content: center;
+}
+
+.scss-demo {
+  width: 50%;
+  margin: 0 auto;
+
+  .banner {
+    text-align: center;
+
+    img {
+      width: 150px;
+      height: 100%;
+    }
+
+    p {
+      text-align: left;
+    }
+
+    a {
+      text-decoration: none;
+      color: #ffc120;
+    }
+  }
+
+  .calc {
+    background: #0074b8;
+    border-radius: 5px;
+    padding: .1em;
+    text-align: center;
+
+    button {
+      border-radius: 5px;
+      border: none;
+      box-shadow: none;
+      cursor: pointer;
+      font-size: 120%;
+      margin: 0 .2em 1em;
+      min-width: 2em;
+      padding: 0.5em;
+    }
+  }
+}

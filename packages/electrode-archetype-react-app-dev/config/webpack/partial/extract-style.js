@@ -16,6 +16,7 @@ const cssLoader = require.resolve("css-loader");
 const styleLoader = require.resolve("style-loader");
 const stylusLoader = require.resolve("stylus-relative-loader");
 const postcssLoader = require.resolve("postcss-loader");
+const sassLoader = require.resolve("sass-loader");
 
 const AppMode = archetype.AppMode;
 
@@ -32,11 +33,11 @@ const AppMode = archetype.AppMode;
  * case 5: *cssModuleStylusSupport* config is true => Use both Stylus and CSS Modules
  */
 
-const cssNextExists = glob.sync(Path.resolve(AppMode.src.client, "**", "*.css")).length > 0;
 const stylusExists = glob.sync(Path.resolve(AppMode.src.client, "**", "*.styl")).length > 0;
+const scssExists = glob.sync(Path.resolve(AppMode.src.client, "**", "*.scss")).length > 0;
 
-// By default, this archetype assumes you are using CSS-Modules + CSS-Next
-const cssModuleSupport = !stylusExists && cssNextExists;
+// By default, this archetype assumes you are using SCSS
+const cssModuleSupport = !stylusExists && scssExists;
 
 module.exports = function() {
   const cssModuleStylusSupport = archetype.webpack.cssModuleStylusSupport;
@@ -84,14 +85,19 @@ module.exports = function() {
     rules.push({
       _name: "postcss",
       test: /\.scss$/,
-      use: [
-        {
-          loader: "postcss-loader",
-          options: {
-            browsers: ["last 2 versions", "ie >= 9", "> 5%"]
-          }
-        }
-      ]
+      loader: ExtractTextPlugin.extract({
+        fallback: styleLoader,
+        use: [
+          cssLoader,
+          {
+            loader: postcssLoader,
+            options: {
+              browsers: ["last 2 versions", "ie >= 9", "> 5%"]
+            }
+          },
+          sassLoader
+        ]
+      })
     });
   }
 
