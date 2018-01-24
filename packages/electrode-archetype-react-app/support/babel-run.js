@@ -25,6 +25,9 @@ try {
 
   // fallback to default action that loads babel-register and then requires
   // src/server, under which there should be an index.js file.
-  require("babel-register")({ only: x => x.startsWith(cwd) && !x.startsWith(cwdNM) });
+  require("babel-register")({ only: x => {
+    x = Path.normalize(x);
+    return x.startsWith(cwd) && !x.startsWith(cwdNM);
+  }});
   require(Path.resolve(serverDir));
 }
