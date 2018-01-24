@@ -19,6 +19,8 @@ function infernoReactAlias() {
 module.exports = {
   resolve: {
     alias: infernoReactAlias(),
+    // https://webpack.js.org/configuration/resolve/#resolve-symlinks
+    symlinks: !archetype.webpack.preserveSymlinks,
     // Add a resolver plugin that looks up in the archetype first.
     // Note that webpack will use this first before trying its default
     // plugins and the modules paths specified below
