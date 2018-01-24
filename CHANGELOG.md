@@ -1,3 +1,43 @@
+# 1/23/2018
+
+## Packages
+
+-   electrode-archetype-react-app@5.0.5 `(5.0.4 => 5.0.5)`
+-   electrode-archetype-react-app-dev@5.0.5 `(5.0.4 => 5.0.5)`
+-   electrode-archetype-react-component@5.0.3 `(5.0.2 => 5.0.3)`
+-   electrode-archetype-react-component-dev@5.0.3 `(5.0.2 => 5.0.3)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   fix babel-run on windows ([#697](https://github.com/electrode-io/electrode/pull/697)) [commit](http://github.com/electrode-io/electrode/commit/0e7211cbf21a71714a5b8ad4d867b91744e154f7)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   [chore] reformat some commands ([#692](https://github.com/electrode-io/electrode/pull/692)) [commit](http://github.com/electrode-io/electrode/commit/b5cfa08357262f4eb14c709e67e12af02f07bc14)
+
+-   `samples/demo-component`
+
+    -   use fynpo to bootstrap packages [commit](http://github.com/electrode-io/electrode/commit/15c003741a636d885d089fe7589842d01a7b50c9)
+    -   add node_modules to webpack [commit](http://github.com/electrode-io/electrode/commit/daca25b47b1a276172503f494090094a92d27eb0)
+    -   fix babelrc [commit](http://github.com/electrode-io/electrode/commit/992363135c166f2cd863bfae16bd390925689714)
+    -   point to local archetype [commit](http://github.com/electrode-io/electrode/commit/09f05bcc213aab88c1849b56aa41e687b8b6ba07)
+    -   update webpack alias [commit](http://github.com/electrode-io/electrode/commit/5791a2519e19707fc97738af869da5e520e1f511)
+    -   point to local archetype + update webpack alias [commit](http://github.com/electrode-io/electrode/commit/b4d39a1cb912c04a79cd102bb76a55ab854579e1)
+    -   add react-dom to webpack-alias [commit](http://github.com/electrode-io/electrode/commit/e8047caa29de1a7b213dfe29ab9889260d0ee6f8)
+    -   update sample demo component [commit](http://github.com/electrode-io/electrode/commit/9bdfefdc5b4b5876f67e246080e34ed6eb8a9ad9)
+
+-   `samples/electrode-demo-index`
+
+    -   Remove demo from electrode-demo-index ([#696](https://github.com/electrode-io/electrode/pull/696)) [commit](http://github.com/electrode-io/electrode/commit/7c133be879c5dba9212416870d0c89585c660e3d)
+    -   fix babelrc and webpack dep ([#695](https://github.com/electrode-io/electrode/pull/695)) [commit](http://github.com/electrode-io/electrode/commit/9faaa7020b4d0396abec1b5a64693911a3c7ea5a)
+    -   [major] update component-playground to v3 ([#693](https://github.com/electrode-io/electrode/pull/693)) [commit](http://github.com/electrode-io/electrode/commit/e70662be1f3e5ef65241eaf3f2d67a15617f0a7e)
+
+-   `xchangelog`
+
+    -   [chore] archive older change logs ([#690](https://github.com/electrode-io/electrode/pull/690)) [commit](http://github.com/electrode-io/electrode/commit/c5bbc4bac08fcc8313f7956ef877fdededea4d79)
+
 # 1/19/2018
 
 ## Packages
