@@ -36,10 +36,15 @@
   ],
   "license": "Apache-2.0",
   "dependencies": {
-    "electrode-archetype-react-component": "../../packages/electrode-archetype-react-component",
     "object-assign": "^4.1.0"
   },
   "devDependencies": {
+    "electrode-archetype-react-component": "../../packages/electrode-archetype-react-component",
     "electrode-archetype-react-component-dev": "../../packages/electrode-archetype-react-component-dev"
+  },
+  "peerDependencies": {
+    "component-playground": "*",
+    "electrode-archetype-react-component": ">=4",
+    "electrode-archetype-react-component-dev": ">=4"
   }
 }
