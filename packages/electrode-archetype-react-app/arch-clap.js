@@ -581,6 +581,7 @@ Individual .babelrc files were generated for you in src/client and src/server
       desc: "Start webpack-dev-server in dev mode",
       task: mkCmd(
         "webpack-dev-server",
+        `--watch --watch-aggregate-timeout 2000`,
         `--config ${config.webpack}/webpack.config.dev.js`,
         `--progress --colors`,
         `--port ${archetype.webpack.devPort}`,
