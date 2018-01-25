@@ -19,7 +19,7 @@ const webpackConfigSpec = {
   enableBabelPolyfill: { env: "ENABLE_BABEL_POLYFILL", default: false },
   enableNodeSourcePlugin: { env: "ENABLE_NODESOURCE_PLUGIN", default: false },
   woffFontInlineLimit: { env: "WOFF_FONT_INLINE_LIMIT", default: 1000 },
-  preserveSymlinks: { env: "WEBPACK_PRESERVE_SYMLINKS", default: false }
+  preserveSymlinks: { env: ["WEBPACK_PRESERVE_SYMLINKS", "NODE_PRESERVE_SYMLINKS"], default: false }
 };
 
 const karmaConfigSpec = {

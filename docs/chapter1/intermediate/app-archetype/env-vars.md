@@ -47,3 +47,7 @@ Some of the app archetype's features can be controlled by envrionment variables.
 * `WEBPACK_PRESERVE_SYMLINKS` - If `true`, then preserve symlink paths in resolve modules.
 
   * Default is `false`
+
+  * If this is not defined, then the env [`NODE_PRESERVE_SYMLINKS`] will be considered.
+
+[`node_preserve_symlinks`]: https://nodejs.org/docs/latest-v8.x/api/cli.html#cli_node_preserve_symlinks_1
