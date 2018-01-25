@@ -58,14 +58,16 @@ const tasks = {
   "build-lib": {
     dep: ["~production-env"],
     task: [
-      "clean-lib",
+      ".prep-tmp-lib",
       "babel-src-step",
+      "clean-lib",
+      ".tmp-to-lib",
       "build-lib:flatten-l10n",
       "build-lib:copy-flow",
       "build-lib:clean-tmp"
     ]
   },
-  "babel-src-step": `babel -D src -d lib`,
+  "babel-src-step": `babel -D src -d .tmplib`,
   "build-lib:clean-tmp": () => $$.rm("-rf", "./tmp"),
   "build-lib:copy-flow": `node ${archetype.devPath}/scripts/copy-as-flow-declaration.js`,
   "build-lib:flatten-l10n": `node ${archetype.devPath}/scripts/l10n/flatten-messages.js`,
@@ -85,6 +87,8 @@ const tasks = {
   "check-dep": `ecd -f package.json --cf ${archetype.devPath}/config/dependencies/check.json -w`,
   "check-dev": ["lint", "test-dev"],
 
+  ".prep-tmp-lib": () => $$.rm("-rf", ".tmplib"),
+  ".tmp-to-lib": () => $$.mv(".tmplib", "lib"),
   clean: ["clean-lib", "clean-dist"],
   "clean-dist": () => $$.rm("-rf", "dist"),
   "clean-lib": () => $$.rm("-rf", "lib"),
