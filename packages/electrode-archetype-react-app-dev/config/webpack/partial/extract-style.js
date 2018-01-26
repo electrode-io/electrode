@@ -16,82 +16,124 @@ const cssLoader = require.resolve("css-loader");
 const styleLoader = require.resolve("style-loader");
 const stylusLoader = require.resolve("stylus-relative-loader");
 const postcssLoader = require.resolve("postcss-loader");
+const sassLoader = require.resolve("sass-loader");
 
+/*
+ * initial value
+ * *only* *.css, cssModuleSupport default value: true
+ * *only* *.styl|*.scss, cssModuleSupport default value: false
+ *
+ * cssModuleSupport: false
+ * case 1: *only* *.css => normal CSS
+ * case 2: *only* *.styl exists => Stylus
+ * case 3: *only* *.scss exists => SASS
+ *
+ * cssModulesSupport: true
+ * case 1: *only* *.css => CSS-Modules + CSS-Next
+ * case 2: *only* *.styl => normal CSS => CSS-Modules + CSS-Next
+ * case 3: *only* *.scss => normal CSS => CSS-Modules + CSS-Next
+ */
+
+let cssModuleSupport = archetype.webpack.cssModuleSupport;
+const cssModuleStylusSupport = archetype.webpack.cssModuleStylusSupport;
 const AppMode = archetype.AppMode;
 
-/**
- * [cssModuleSupport By default, this archetype assumes you are using CSS-Modules + CSS-Next]
- *
- * Stylus is also supported for which the following cases can occur.
- *
- * case 1: *only* *.css exists => CSS-Modules + CSS-Next
- * case 2: *only* *.styl exists => stylus
- * case 3: *both* *.css & *.styl exists => CSS-Modules + CSS-Next takes priority
- *          with a warning message
- * case 4: *none* *.css & *.styl exists => CSS-Modules + CSS-Next takes priority
- * case 5: *cssModuleStylusSupport* config is true => Use both Stylus and CSS Modules
- */
+const cssLoaderOptions =
+  "?modules&localIdentName=[name]__[local]___[hash:base64:5]&-autoprefixer";
+const cssQuery = `${cssLoader}!${postcssLoader}`;
+const stylusQuery = `${cssLoader}?-autoprefixer!${stylusLoader}`;
+const scssQuery = `${cssQuery}!${sassLoader}`;
+const cssModuleQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}`;
+const cssStylusQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}!${stylusLoader}`;
+const cssScssQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}!${sassLoader}`;
+
+const rules = [];
 
 const cssNextExists = glob.sync(Path.resolve(AppMode.src.client, "**", "*.css")).length > 0;
 const stylusExists = glob.sync(Path.resolve(AppMode.src.client, "**", "*.styl")).length > 0;
+const scssExists = glob.sync(Path.resolve(AppMode.src.client, "**", "*.scss")).length > 0;
 
-// By default, this archetype assumes you are using CSS-Modules + CSS-Next
-const cssModuleSupport = !stylusExists && cssNextExists;
+cssModuleSupport = cssModuleSupport || (cssNextExists && !stylusExists && !scssExists);
 
 module.exports = function() {
-  const cssModuleStylusSupport = archetype.webpack.cssModuleStylusSupport;
-  const stylusQuery = `${cssLoader}?-autoprefixer!${stylusLoader}`;
-  const cssLoaderOptions =
-    "?modules&localIdentName=[name]__[local]___[hash:base64:5]&-autoprefixer";
-  const cssQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}`;
-  const cssStylusQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}!${stylusLoader}`;
-  //
-  // Removing ExtratTextPlugin cause stylus to fail
-  // Disable it for now until figure out why and the fix.
-  //
-  // const hmr = process.env.HMR === "true";
-  const hmr = false;
+  if (cssModuleSupport) {
+    // cssModuleSupport: true, CSS-Modules + CSS-Next
+    rules.push(
+      {
+        _name: "extract-css-modules",
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract({
+          fallback: styleLoader,
+          use: cssModuleQuery,
+          publicPath: ""
+        })
+      },
+      {
+        _name: "extract-css-scss",
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: styleLoader,
+          use: cssScssQuery,
+          publicPath: ""
+        })
+      },
+      {
+        _name: "extract-css-stylus",
+        test: /\.styl$/,
+        use: ExtractTextPlugin.extract({
+          fallback: styleLoader,
+          use: cssStylusQuery,
+          publicPath: ""
+        })
+      }
+    );
+  } else {
+    // cssModuleSupport: false, normal CSS, Stylus and SCSS
+    rules.push(
+      {
+        _name: "extract-css",
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract({
+          fallback: styleLoader,
+          use: cssQuery,
+          publicPath: ""
+        })
+      },
+      {
+        _name: "extract-scss",
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: styleLoader,
+          use: scssQuery,
+          publicPath: ""
+        })
+      },
+      {
+        _name: "extract-stylus",
+        test: /\.styl$/,
+        use: ExtractTextPlugin.extract({
+          fallback: styleLoader,
+          use: stylusQuery,
+          publicPath: ""
+        })
+      }
+    );
+  }
 
-  // By default, this archetype assumes you are using CSS-Modules + CSS-Next
-  const extractLoader = hmr
-    ? `${styleLoader}!${cssQuery}`
-    : ExtractTextPlugin.extract({ fallback: styleLoader, use: cssQuery, publicPath: "" });
-  const rules = [
-    {
-      _name: "extract-css",
-      test: /\.css$/,
-      loader: extractLoader
-    }
-  ];
-
+  /*
+  *** cssModuleStylusSupport flag is about to deprecate. ***
+  * If you want to enable stylus with CSS-Modules + CSS-Next,
+  * Please use stylus as your style and enable cssModuleSupport flag instead.
+  */
   if (cssModuleStylusSupport) {
     rules.push({
       _name: "extract-css-stylus",
       test: /\.styl$/,
-      use: ExtractTextPlugin.extract({ fallback: styleLoader, use: cssStylusQuery, publicPath: "" })
-    });
-  } else if (!cssModuleSupport) {
-    rules.push({
-      _name: "extract-stylus",
-      test: /\.styl$/,
-      use: hmr
-        ? `${styleLoader}!${stylusQuery}`
-        : ExtractTextPlugin.extract({ fallback: styleLoader, use: stylusQuery, publicPath: "" })
-    });
-  }
-
-  if (cssModuleSupport) {
-    rules.push({
-      _name: "postcss",
-      test: /\.scss$/,
-      use: [
-        {
-          loader: "postcss-loader",
-          options: {
-            browsers: ["last 2 versions", "ie >= 9", "> 5%"]
-          }
-        }
-      ]
+      use: ExtractTextPlugin.extract({
+        fallback: styleLoader,
+        use: cssStylusQuery,
+        publicPath: ""
+      })
     });
   }
 
