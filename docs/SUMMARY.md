@@ -41,6 +41,7 @@
     -   [Eslint Config](/chapter1/intermediate/app-archetype/eslint.md)
     -   [Webpack Config](/chapter1/intermediate/app-archetype/webpack-config.md)
     -   [Environment Variables](/chapter1/intermediate/app-archetype/env-vars.md)
+    -   [Extract Styles](/chapter1/intermediate/app-archetype/extract-styles.md)
 
 -   [Component Archetype](chapter1/intermediate/component-archetype/README.md)
 
