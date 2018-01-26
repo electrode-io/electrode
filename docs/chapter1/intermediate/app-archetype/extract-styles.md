@@ -1,17 +1,18 @@
 # Extract Styles
 
-Application Archetype contains multiple choices of different styles, such as pure CSS, [CSS-Modules + CSS-Next](https://github.com/css-modules/css-modules), [Stylus](http://stylus-lang.com/docs/css-style.html) and [SCSS](http://sass-lang.com/). To make your app work with the specified style, you'll need a setup before start.
+Application Archetype supports multiple styles, such as pure CSS, [CSS-Modules + CSS-Next](https://github.com/css-modules/css-modules), [Stylus](http://stylus-lang.com/docs/css-style.html) and [SCSS](http://sass-lang.com/). Use the following flags to choose your desired styles.
 
-## Style Related Flags
+## Flags
 
-> Note: You can check [Customize Config](/chapter1/intermediate/app-archetype/customize-config.md) for customizing flags.
+> Note: You can check the customizing configs [here](/chapter1/intermediate/app-archetype/customize-config.md#extending-webpack-configurations).
 
-- `cssModuleSupport`: A flag to enbale css-modules + css-next support. (Default: true)
-- `cssModulesStylusSupport`: A flag to enable stylus support for CSS modules. (Default: false)
+- `cssModuleSupport`: A flag to enable `css-modules + css-next` support. (Default: true)
+- `cssModulesStylusSupport`: A flag to enable `stylus` support with CSS modules. (Default: false)
+<span style="color:red">**[Deprecated Warning] This is not a recommended set up.**</span>
 
-## Supported Styles
+## Style Use Cases
 
-- To use plain CSS, include `*.css` only to your styles folder and set `cssModuleSupport` to false.
-- To use CSS-Modules + CSS-Next, include `*.css` only to your styles folder and set `cssModuleSupport` to true.
-- To use Stylus, just include `*.styl` only to your styles folder
-- To use SCSS, just include `*.scss` only to your styles folder
+- To use plain CSS, include `*.css` to your styles folder and set `cssModuleSupport` to false.
+- To use CSS-Modules + CSS-Next, include `*.css` to your styles folder and set `cssModuleSupport` to true.
+- To use Stylus, include `*.styl` to your styles folder.
+- To use SCSS, include `*.scss` to your styles folder.
