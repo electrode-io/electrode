@@ -75,7 +75,7 @@ We have more separate Electrode Sample Apps at <https://github.com/electrode-sam
 
 # Support and Acknowledgement
 
-We'd like to thank our employer @WalmartLabs because we can work on the development of Electrode platform and associated modules as Open Sourced Software for the needs of our internal teams and projects.  We love the public community and the support we get, and we address your requests as much as we could, even on our off hours.  We are always excited to get feedbacks, bug reports, and PRs.  Even if you just show us your support and encouragements, or help us promote Electrode, and we love to make Electrode work better for everyone.  Thank you.
+We'd like to thank our employer @WalmartLabs because we can work on the development of Electrode platform and associated modules as Open Sourced Software for the needs of our internal teams and projects.  We love the public community and the support we get, and we address your requests as much as we can, even on our off hours.  We are always excited to get feedbacks, bug reports, and PRs.  Even if you just show us your support and encouragements, or help us promote Electrode, and we love to make Electrode work better for everyone.  Thank you.
 
 # License
 
