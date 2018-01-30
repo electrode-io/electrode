@@ -19,10 +19,6 @@ const postcssLoader = require.resolve("postcss-loader");
 const sassLoader = require.resolve("sass-loader");
 
 /*
- * initial value
- * *only* *.css, cssModuleSupport default value: true
- * *only* *.styl|*.scss, cssModuleSupport default value: false
- *
  * cssModuleSupport: false
  * case 1: *only* *.css => normal CSS
  * case 2: *only* *.styl exists => Stylus
@@ -49,11 +45,21 @@ const cssScssQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}!${sassLoa
 
 const rules = [];
 
-const cssNextExists = glob.sync(Path.resolve(AppMode.src.client, "**", "*.css")).length > 0;
+const cssExists = glob.sync(Path.resolve(AppMode.src.client, "**", "*.css")).length > 0;
 const stylusExists = glob.sync(Path.resolve(AppMode.src.client, "**", "*.styl")).length > 0;
 const scssExists = glob.sync(Path.resolve(AppMode.src.client, "**", "*.scss")).length > 0;
 
-cssModuleSupport = cssModuleSupport || (cssNextExists && !stylusExists && !scssExists);
+/*
+ * cssModuleSupport default to undefined
+ *
+ * when cssModuleSupport not specified:
+ * *only* *.css, cssModuleSupport sets to true
+ * *only* *.styl, cssModuleSupport sets to false
+ * *only* *.scss, cssModuleSupport sets to false
+ */
+if (cssModuleSupport === undefined) {
+  cssModuleSupport = cssExists && !stylusExists && !scssExists;
+}
 
 module.exports = function() {
   if (cssModuleSupport) {
