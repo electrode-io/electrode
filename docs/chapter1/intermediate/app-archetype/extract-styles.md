@@ -4,15 +4,18 @@ Application Archetype supports multiple styles, such as pure CSS, [CSS-Modules +
 
 ## Flags
 
-> Note: You can check the customizing configs [here](/chapter1/intermediate/app-archetype/customize-config.md#extending-webpack-configurations).
+> Note: You can check how to customize the configs [here](/chapter1/intermediate/app-archetype/customize-config.md#extending-webpack-configurations).
 
-- `cssModuleSupport`: A flag to enable `css-modules + css-next` support. (Default: true)
-- `cssModulesStylusSupport`: A flag to enable `stylus` support with CSS modules. (Default: false)
-<span style="color:red">**[Deprecated Warning] This is not a recommended set up.**</span>
+- `cssModuleSupport`: A flag to enable `css-modules + css-next` support.
+- <span style="color:red">**[Deprecated Warning] This is not a recommended set up.**</span> `cssModulesStylusSupport`: A flag to enable `stylus` support with CSS modules. (Default: false)
 
 ## Style Use Cases
 
-- To use plain CSS, include `*.css` to your styles folder and set `cssModuleSupport` to false.
-- To use CSS-Modules + CSS-Next, include `*.css` to your styles folder and set `cssModuleSupport` to true.
+- To use pure CSS, include `*.css` to your styles folder and set `cssModuleSupport` to false.
+- To use CSS-Modules + CSS-Next, include `*.css` to your styles folder.
+
 - To use Stylus, include `*.styl` to your styles folder.
+- To use Stylus along with CSS-Modules + CSS-Next, include `*.styl` to your styles folder and set `cssModuleSupport` to true.
+
 - To use SCSS, include `*.scss` to your styles folder.
+- To use SCSS along with CSS-Modules + CSS-Next, include `*.scss` to your styles folder and set `cssModuleSupport` to true.
