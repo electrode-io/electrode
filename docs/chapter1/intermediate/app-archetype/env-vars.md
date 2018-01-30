@@ -28,7 +28,7 @@ Some of the app archetype's features can be controlled by envrionment variables.
 
   * Default is `false`
 
-* `CSS_MODULE_SUPPORT` - if `false`, then disable `CSS-Modules` and `CSS-Next` support, and load as pure `CSS`.
+* `CSS_MODULE_SUPPORT` - If `false`, then disable `CSS-Modules` and `CSS-Next` support, and load as pure `CSS`. If `true`, then enable `CSS-Modules` and `CSS-Next` support, and load as `CSS-Modules + CSS-Next`.
 
   * Default is `undefined`
 
