@@ -1,8 +1,8 @@
-# Server Config
+# Server Configuration
 
-### Server Config and Confippet
+### Server Configuration and Confippet
 
-Out of the box we're given [Confippet](https://github.com/electrode-io/electrode-confippet), a versatile utility for managing your NodeJS application configuration. Its goal is customization and extensibility, but it offers a preset config out of the box inside **Your Awesome (Electrode) App**:
+[Confippet](https://github.com/electrode-io/electrode-confippet) is a versatile utility for managing your NodeJS application configuration. Confippet provides customization and extensibility, but it also offers a preset configuration out-of-the-box. **Your Awesome (Electrode) App** includes the following three JSON files:
 
     config
         ├── default.json
@@ -11,7 +11,7 @@ Out of the box we're given [Confippet](https://github.com/electrode-io/electrode
 
 We'll need to extend our default.json to include our `friends` plugin and module `./src/server/plugins/friends`.
 
-Navigate to `<your-awesome-app>/config/development.json`. Copy, paste and save `friends` plugin:
+Navigate to `<your-awesome-app>/config/development.json`. Copy, paste, and save the `friends` plugin:
 
     {
       "plugins": {
@@ -21,7 +21,7 @@ Navigate to `<your-awesome-app>/config/development.json`. Copy, paste and save `
       }
     }
 
-You can learn more about Confippet and ways to extend your config in our Advanced Electrode App with the [Confippet](https://github.com/electrode-io/electrode-confippet) stand alone module.
+You can learn more about Confippet and ways to extend your configuration in our Advanced Electrode App with the [Confippet](https://github.com/electrode-io/electrode-confippet) stand alone module.
 
 We should update our app test to reflect the changes we have made. Navigate to `<your-awesome-app>/test/client/components/home.spec.jsx`. Override the existing code by copying and pasting the code below:
 

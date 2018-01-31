@@ -1,14 +1,18 @@
 # Server Side Data Hydration
 
-Server side rendering consists of two steps: creating the initial redux store data and calling `ReactDOM.renderToString` with that data. Server side data hydration refers the redux initial store data that was used for `ReactDom.renderToString` being passed to the browser so react can use the same data to bootstrap rendering on the client side. This helps the client side avoid making additional calls to the server to retrieve data for rendering.
+Server side rendering consists of two steps:
+1. Create the initial redux store data.
+2. Call `ReactDOM.renderToString` with that data.  
 
-### Server Side Rendering modes
+Server side data hydration sends the redux initial store data (that was used for `ReactDom.renderToString`) to the browser so React can use the same data to bootstrap rendering on the client side. This helps the client side avoid making additional calls to the server to retrieve data for rendering.
+
+### Server Side Rendering Modes
 
 Although Electrode provides server side rendering by default, it provides modes where it can be turned off by passing an argument as a part of the URI.
 
-#### 1. No Server Side Rendering\(noss\):
+#### 1. No Server Side Rendering \(noss\):
 
-This mode completely disables any rendering of html and server side data hydration. A typical use of this mode would be when the server load is high.
+This mode completely disables any rendering of HTML and server side data hydration. A typical use of this mode would be when the server load is high.
 
 ```
 https://localhost:3000?__mode=noss
@@ -24,11 +28,11 @@ https://localhost:3000?__mode=datass
 
 ### Testing
 
-To verify that the mode is working correctly and server side rendering is turned off, once you open the app in your browser, view page source and check if the div `(.js-content)` is empty. If you used the `datass` mode, then you should still be able to see the initialized redux store.
+To verify that the mode is working correctly and server side rendering is turned off, once you open the app in your browser, view the page source and check if the div tag `(.js-content)` is empty. If you used the `datass` mode, then you should still be able to see the initialized redux store.
 
 ### Auto Server Side Data Hydration
 
-As much as Electrode believes in the benefits of server side rendering, it is also aware of its side effects. Electrode is constantly monitoring the performance of your app and will turn of server side rendering if app performance is degrading. The following files in your server are responsible for this optimization and can be customized based on the needs of your application:
+Electrode constantly monitors the performance of your app and turns off server-side rendering if app performance is degrading. The following files in your server are responsible for this optimization and can be customized based on the needs of your application:
 
 ```
 server/conditions/
@@ -54,13 +58,10 @@ DEFAULT_LONG_RESPONSE_AMOUNT = 6;
 DEFAULT_DISABLE_EXPIRY_MINS = 2;
 ```
 
-The response time is monitored per request. A response that takes over 5seconds is considered a long response. The app then notes this and checks to see if we have hit the `DEFAULT_LONG_RESPONSE_AMOUNT`. If we have, then server side rendering is disabled for `DEFAULT_DISABLE_EXPIRY_MINS`  minutes. Once the expiry time is reached, we check to see if we are no longer getting long responses and then enable server side rendering again.
+The response time is monitored per request. A response that takes over 5 seconds is considered a long response. The app then notes this and checks to see if we have hit the `DEFAULT_LONG_RESPONSE_AMOUNT`. If we have, then server side rendering is disabled for `DEFAULT_DISABLE_EXPIRY_MINS`  minutes. Once the expiration time is reached, we check to see if we are no longer getting long responses and then enable server-side rendering again.
 
 #### server-load.js
 
-We are simply measuring the event loop delay here compare it against the threshold `DEFAULT_EVENTLOOP_DELAY_MS = 40`. If found to be higher we disable server side rendering. [Here](http://2014.jsconf.eu/speakers/philip-roberts-what-the-heck-is-the-event-loop-anyway.html) is a good talk on learning about event loops.
+We are simply measuring the event loop delay and comparing it against the threshold `DEFAULT_EVENTLOOP_DELAY_MS = 40`. If found to be higher, we disable server-side rendering. For more information, check out this article on [event loops](http://2014.jsconf.eu/speakers/philip-roberts-what-the-heck-is-the-event-loop-anyway.html).
 
-> NOTE: While generating an Electrode app using the Electrode generator via the `yo electrode` command, you will need to answer "Yes" to `Disable server side rendering based on high load?` in order to enable the above functionality.
-
-
-
+> NOTE: While generating an Electrode app using the Electrode generator using the `yo electrode` command, you will need to answer "Yes" to `Disable server side rendering based on high load?` in order to enable the above functionality.

@@ -1,15 +1,15 @@
-# Webpack Config
+# Webpack Configurations
 
-Webpack Config is a significant part of the app archetype.  They help with compiling and bundling your React app code.  Webpack is a very sophisticated and complex software and while we provided sensible defaults, we make it possible for you to tinker with your own.
+Webpack configurations are a significant part of the app archetype.  They help with compiling and bundling your React app code.  Webpack is a very sophisticated and complex software and while we provided sensible defaults, we make it possible for you to customize your own.
 
-The webpack configs in the app archetype are separated into partials and compose into a single config using [webpack-config-composer] that's passed to webpack.
+The webpack configurations in the app archetype are separated into partials and compose into a single configuration using [webpack-config-composer] that's passed to webpack.
 
-There are two ways to override the app archetype's webpack config.
+There are two ways to override the app archetype's webpack configuration.
 
-1.  Provide a single webpack config that gets merged into the app archetype's final composed config
-2.  Take the [webpack-config-composer] from the app archetype and compose the final config yourself.
+1.  Provide a single webpack configuration that gets merged into the app archetype's final composed configuration
+2.  Take the [webpack-config-composer] from the app archetype and compose the final configuration yourself.
 
-Either way, the archetype has the following config to use with webpack:
+Either way, the archetype has the following configuration to use with webpack:
 
 -   `webpack.config.js` - When building your app for production
 -   `webpack.config.dev.js` - When running your app in development mode
@@ -20,9 +20,9 @@ Either way, the archetype has the following config to use with webpack:
 
 ## Overriding
 
-To override the webpack config, you can create a webpack config with the same filename as above, either in your app's root directory, or under the directory `archetype/config/webpack`.
+To override the webpack configuration, you can create a webpack configuration with the same filename as above, either in your app's root directory, or under the directory `archetype/config/webpack`.
 
-For example, you can extended or overriding webpack config by:
+For example, you can extended or overriding webpack configuration by:
 
 ```
 const BellOnBundlerErrorPlugin = require('bell-on-bundler-error-plugin');
@@ -36,9 +36,9 @@ const config = {
 module.exports = config;
 ```
 
-### Provide A Config
+### Provide A Configuration
 
-Your file can just export a plain JSON to be merged into the archetype's config.
+Your file can export a plain JSON format file that can be merged into the archetype's configuration.
 
 For example, to add an alias for a module in `webpack.config.js`, add a file `archetype/config/webpack/webpack.config.js`:
 
@@ -52,38 +52,38 @@ module.exports = {
 }
 ```
 
-> Note that this will only affect `webpack.config.js`.  To override other webpack config in the archetype, you need to add another file with the corresponding name.
+> Note that this will only affect `webpack.config.js`.  To override other webpack configuration in the archetype, you need to add another file with the corresponding name.
 
 ### Control The Composer
 
-If you want to have more control of how the final webpack config is composed, your file should export a function that will receive the composer from the app archetype.
+If you want to have more control of how the final webpack configuration is composed, your file should export a function that will receive the composer from the app archetype.
 
 The function should take three parameters: `composer`, `options`, `compose_func`.
 
 -   `composer` - The [webpack-config-composer] instance that the app archetype has setup.  It contains all the webpack partials and composer profiles from the app archetype.
--   `options` - The options for the app archetype's webpack config composition.
+-   `options` - The options for the app archetype's webpack configuration composition.
 -   `compose_func` - The function that the app archetype would've used to compose the final config.  If you like, you can call this after you've made some updates to the `composer`.
 
-This approach hands you the most direct control of composing the final webpack config using [webpack-config-composer].  The `composer` instance your function received has all the webpack partials from the archetype, and the profiles that would've contributed to the final config.
+This approach hands you the most direct control of composing the final webpack configuration using [webpack-config-composer].  The `composer` instance your function received has all the webpack partials from the archetype, and the profiles that would've contributed to the final config.
 
 #### `options`
 
 The options object contains all the information that the archetype used to create the composer instance.  It contains the following:
 
 -   `profiles` - The profiles that's added to the composer
--   `profileNames` - Names of the profiles to use to compose the final config
--   `configFilename` - Name of the webpack config file.  ie: `webpack.config.js`
--   `keepCustomProps` - Flag to indicate whether to keep the custom props in the final config.
+-   `profileNames` - Names of the profiles to use to compose the final configuration
+-   `configFilename` - Name of the webpack configuration file.  ie: `webpack.config.js`
+-   `keepCustomProps` - Flag to indicate whether to keep the custom props in the final configuration.
 
 #### Examples
 
-Below are two examples showing `webpack.config.js`, to be placed in `archetype/config/webpack/webpack.config.js`:
+Below are two examples showing `webpack.config.js`, that is placed in `archetype/config/webpack/webpack.config.js`:
 
 ##### Merging
 
-Lodash's merge method doesn't concat arrays, but you can provide a customizer to change that.  
+Lodash's merge method doesn't concatenate arrays, but you can provide a customizer to make the change.  
 
-This example shows a function that merge a config into the archetype config with aspect of the merging customized.
+This example shows a function that merges a configuration into the archetype configuration.
 
 ```js
 const _ = require("lodash");
@@ -103,7 +103,7 @@ module.exports = function (composer, options, compose) {
 
 ##### Custom Composing
 
-This example completely removes the `_extract-style` partial from the composer and add a custom partial for handling styles.
+This example completely removes the `_extract-style` partial from the composer and adds a custom partial for handling styles.
 
 ```js
 module.exports = function( composer, options, compose ) {
@@ -133,9 +133,9 @@ The app archetype's partials can be found under `electrode-archetype-react-app-d
 
 There is always a `_base` profile.
 
-Each webpack config will add another profile named according to the file.
+Each webpack configuration adds another profile named according to the file.
 
-For example, `webpack.config.hot.js` would add a profile `_hot`.
+For example, `webpack.config.hot.js` adds a profile `_hot`.
 
 The file `webpack.config.js` adds a profile named `_production`.
 

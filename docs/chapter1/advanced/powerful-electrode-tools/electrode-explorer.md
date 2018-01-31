@@ -18,27 +18,27 @@
 
 ## Overview
 
-This is a central place where you can view
+This is a central place where you can view the following resources.
 
--   demos of all the components under the organizations you specified
--   documentation of your components
--   dependencies your components have (dependencies)
--   other components/applications that depend on your components (usages)
+-   Demos of all the components under the organizations you specified
+-   Documentation of your components
+-   Dependencies your components have (dependencies)
+-   Additional components and applications that depend on your components (usages)
 
 There are two ways the components can update dynamically:
 
 1.  Add GitHub hooks to send POST requests to `/api/update/{org}/{repoName}` when a new tag is created
 2.  Enable `./server/poll` plugin to set up cron job that sends the POST requests every day
 
-It's recommended to use Method #1 to see updates in near real time.
+To see updates in near real time, use Method #1.
 
-After the server receives the POST request, it will fetch the `package.json`file under `{yourGithubUrl}/{org}/{repoName}`, update [data/orgs.json](https://github.com/electrode-io/electrode-explorer/blob/master/data/orgs.json) and `data/{org}/{repoName}.json`files. If there is a newer version, it will try to download the new component through npm ([scripts/install-module.sh](https://github.com/electrode-io/electrode-explorer/blob/master/scripts/install-module.sh)) after a waiting period, babel transpile, and webpack the demo module ([scripts/post-install-module.sh](https://github.com/electrode-io/electrode-explorer/blob/master/scripts/post-install-module.sh)).
+After the server receives the POST request, it  fetches the `package.json` file under `{yourGithubUrl}/{org}/{repoName}`, and updates [data/orgs.json](https://github.com/electrode-io/electrode-explorer/blob/master/data/orgs.json) and `data/{org}/{repoName}.json`files. If there is a newer version, it will try to download the new component using npm ([scripts/install-module.sh](https://github.com/electrode-io/electrode-explorer/blob/master/scripts/install-module.sh)) after a waiting period, babel transpile, and webpack the demo module ([scripts/post-install-module.sh](https://github.com/electrode-io/electrode-explorer/blob/master/scripts/post-install-module.sh)).
 
-To make the server update immediately or force an update, add a url parameter to the POST request,`/api/update/{org}/{repoName}?updateNow=1`.
+To make the server update immediately or force an update, add a URL parameter to the POST request,`/api/update/{org}/{repoName}?updateNow=1`.
 
-This post processing script works well with all electrode components (meaning components using our [archetype](https://github.com/electrode-io/electrode-archetype-react-component)). If you have non-electrode components, you can modify your [scripts/post-install-module.sh](https://github.com/electrode-io/electrode-explorer/blob/master/scripts/post-install-module.sh) to babel transpile and bundle your demo files.
+This post processing script works well with all electrode components. These are components that use our [archetype](https://github.com/electrode-io/electrode-archetype-react-component). If you have non-electrode components, you can modify your [scripts/post-install-module.sh](https://github.com/electrode-io/electrode-explorer/blob/master/scripts/post-install-module.sh) to babel transpile and bundle your demo files.
 
-## Config
+## Configuration Example
 
 ```js
 // config/default.json
@@ -84,33 +84,33 @@ This post processing script works well with all electrode components (meaning co
 }
 ```
 
-## Start server
+## Start the server
 
-First install dependencies
+1. Install the dependencies.
 
 ```bash
 $ npm install
 ```
 
-Export github access token or set it as an environment variable
+2. Export the Github access token or set it as an environment variable.
 
 ```bash
 export GHACCESS_TOKEN=YOUR_GITHUB_TOKEN
 ```
 
-For development mode
+For development mode, use the following command:
 
 ```bash
 $ clap dev
 ```
 
-or
+Or you can enter the following command:
 
 ```bash
 GHACCESS_TOKEN=YOUR_GITHUB_TOKEN clap dev
 ```
 
-For production mode
+For production mode, use the following commands:
 
 ```bash
 $ clap build
@@ -122,7 +122,7 @@ and
 NODE_ENV=production node .
 ```
 
-or
+Or you can enter the following command:
 
 ```bash
 GHACCESS_TOKEN=YOUR_GITHUB_TOKEN NODE_ENV=production node .
@@ -136,4 +136,4 @@ Since this is an Electrode application, it can be deployed the same way as any o
 
 ## Learn more
 
-Wish to learn more? Check our [wiki](https://github.com/electrode-io/electrode-explorer/wiki) page!
+Want to learn more? Check out our [wiki](https://github.com/electrode-io/electrode-explorer/wiki) page!

@@ -1,6 +1,6 @@
 # Build a Progressive Web App
 
-"A Progressive Web App (PWA) uses modern web capabilities to deliver an app-like user experience." – [Progressive Web Apps](https://developers.google.com/web/progressive-web-apps/)
+[Progressive Web Apps (PWA) ](https://developers.google.com/web/progressive-web-apps/) use modern web capabilities to deliver an app-like user experience.
 
 PWAs are incredibly powerful and provide functionalities like offline first, push notifications, background sync, GPU rendering, 60FPS scrolling and add to home screen for a native-like app experience.
 
@@ -8,23 +8,23 @@ PWAs are based on [Service Workers](https://developers.google.com/web/fundamenta
 
 ## Benefits of using Electrode PWA
 
-### Low friction of distribution
+### Low distribution friction
 
-If your progressive web app is online, it's already accessible for Chrome on Android (and other mobile). Your customers won't have to download an "app" from the App Store. 65.5% of US smartphone users don't download any new apps each month. PWAs eliminate the need to go to the app store, search for the app, click Install, wait for the download, then open the app. Each of these steps loses 20% of potential users.
+If your PWA is online, it's already accessible for Chrome on Android (and other mobile devices). Your customers don't have to download an app from the App Store. 65.5% of US smartphone users don't download any new apps each month. PWAs eliminate the need to go to the app store, search for the app, click Install, wait for the download, then open the app. Each of these steps loses 20% of potential users.
 
-From a developer's point of view, you don't need to rely on the Play Store to publish your app! Push new changes to your web app, and the service worker will take care of updating the app shell.
+From a developer's point of view, you don't need to rely on the Play Store to publish your app! Push new changes to your web app, and the service worker takes care of updating the app shell.
 
 ### Frictionless shopping experience
 
-For example: for an e-commerce business, PWA offers our customers a more frictionless shopping experience that allows shoppers to search, buy, and checkout quickly without downloading the native app. Furthermore, it allows you to bring app-like experiences to mobile websites, including personalization and targeted offers.
+For an e-commerce business, PWA offers customers a frictionless shopping experience that allows shoppers to search, buy, and checkout quickly without downloading the native app. Furthermore, it allows you to bring app-like experiences to mobile websites, including personalization and targeted offers.
 
 ### Faster mobile experience
 
-Web Apps built with Electrode + PWA will be significantly faster. Also, these websites enable an offline mode, allowing customers to continue browsing in areas with poor wireless reception (for example, on public transit). Given the fact that faster websites have higher conversion rates, websites built with PWA could result in increased revenue.
+Web Apps built with Electrode + PWA will be significantly faster. Also, these websites enable an offline mode, allowing customers to continue browsing in areas with poor wireless reception—for example, on public transit. Given the fact that faster websites have higher conversion rates, websites built with PWA could result in increased revenue.
 
 ### Personalized push notifications
 
-Electrode Push notifications can be used to interact effectively with mobile customers, as these notifications are native to the mobile device and can be personal and timely. Similar notifications can be sent to desktop websites too.
+Electrode push notifications can be used to interact effectively with mobile customers, as these notifications are native to the mobile device and can be personal and timely. Similar notifications can be sent to desktop websites too.
 
 ## Getting Started
 
@@ -43,14 +43,17 @@ _Follow Prerequisites and skip to _[_Push Notifications_](/chapter1/intermediate
 
 ### Prerequisites
 
-We need certain API keys for push notifications. To generate these values, visit
+We need certain API keys for push notifications. To generate these values, visit [Firebase](https://console.firebase.google.com/):
 
-1.  [Firebase](https://console.firebase.google.com/) and create a new project. Click on the settings icon and open `Project settings`. Navigate to the `CLOUD MESSAGING` tab and note down your `Server key` and the `Sender ID`.
+1. Create a new project.
+2. Click on the settings icon
+3. Open `Project settings`.
+4. Navigate to the `CLOUD MESSAGING` tab and note down your `Server key` and the `Sender ID`.
 2.  In the `client/images` directory, add the [logo 192x192](https://github.com/electrode-io/electrode/blob/d4142ee0c938cbf973a429ee8467052aa4e1c9be/samples/universal-react-node/client/images/logo-192x192.png) and [logo 72x72](https://github.com/electrode-io/electrode/blob/d4142ee0c938cbf973a429ee8467052aa4e1c9be/samples/universal-react-node/client/images/logo-72x72.png) icon images. We'll use these logos for the `Add to Homescreen` banner and push notifications.
 
 ### Generating a Service Worker
 
-Generating a service worker in an electrode app is as simple as adding a config file. Navigate to`<your-awesome-app>/config`and create a new`sw-config.js`:
+Generating a service worker in an electrode app is as simple as adding a configuration file. Navigate to`<your-awesome-app>/config`and create a new`sw-config.js`:
 
 ```js
 module.exports = {
@@ -72,7 +75,7 @@ module.exports = {
 };
 ```
 
-This will generate a `sw.js` in the `dist` folder when you build the app.
+When you build the app, an `sw.js` file is created in the `dist` folder.
 
 ### Registering the Service Worker
 
@@ -166,7 +169,7 @@ require.ensure(["./sw-registration"], (require) => {
 }, "sw-registration");
 ```
 
-We achieved a couple of things here:
+Let's recap since we completed a couple of tasks:
 
 1.  "Offline First" with the cache property.
 
@@ -450,7 +453,7 @@ module.exports = {
 };
 ```
 
-Rebuild your app and run the server with
+Rebuild your app and run the server using the following commands:
 
 ```bash
 $ clap pwa
@@ -458,6 +461,6 @@ $ clap pwa
 
 With all the code in place, we are ready to see push notifications in action.
 
-Navigate to `http://localhost:3000`. Accept the permission for subscribing and you will see a curl command rendered on the page. You can either run the curl command from terminal to see the push notification or fill out the form and click on the `Send` button to trigger it!
+Navigate to `http://localhost:3000`. Accept the permission for subscribing and you will see a curl command rendered on the page. You can either run the curl command from a terminal window to see the push notification or fill out the form and click on the `Send` button to trigger it!
 
-For more Electrode PWA code examples checkout [electrode-pwa-examples](https://github.com/electrode-samples/electrode-pwa-examples/tree/master/examples) repo.
+For more Electrode PWA code examples checkout the [electrode-pwa-examples](https://github.com/electrode-samples/electrode-pwa-examples/tree/master/examples) repository.

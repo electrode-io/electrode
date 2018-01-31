@@ -6,12 +6,12 @@
 
 #### How to run tests
 
-We generate unit test and code coverage check for failure. The app test files are located at `demo-app/test/` folder, and component test files are located at `packages/<componentName>/test/` folder which you can add on more unit tests for each new method or feature in the future.
+We generate unit test and code coverage check for failure. The app test files are located in the `demo-app/test/` directory, and component test files are located in the  `packages/<componentName>/test/` directory—and you can add additional unit tests for each new method or feature in the future.
 
-To run the test, please go to the root level of your repo (ex. your-component), and run
+To run the test, go to the root level of your repository (ex. your-component), and run the following commands.
 
 ```bash
 $ npm test
 ```
 
-This will run `lerna bootstrap && lerna run test` behind, which goes into every `packages/` folder and run `npm test` for each component.
+This will run `lerna bootstrap && lerna run test` in the background. The process goes into every `packages/` directory and runs the `npm test` for each component.

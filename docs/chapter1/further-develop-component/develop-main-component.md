@@ -1,8 +1,9 @@
 # Develop Main Component
 
-#### Develop main high-level component
+#### Develop the main high-level component
 
-Replace the code in `<your-component>/packages/<componentName>/src/components/<your-component>.jsx` with the code below. Change all references from the literal `your-component or YourComponent` to your actual component name:
+Replace the code in following file:  
+ `<your-component>/packages/<componentName>/src/components/<your-component>.jsx` with the code below. Change all references from `your-component or YourComponent` to your actual component name:
 
 ```js
 
@@ -94,7 +95,7 @@ YourComponent.defaultProps = {
 
 ```
 
-Last edit! In `<your-component>/src/index.js` add the three lines below:
+Last edit! In the  `<your-component>/src/index.js` file, add the three lines below:
 
 ```js
 

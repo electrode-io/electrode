@@ -2,13 +2,13 @@
 
 ## Develop helpers for the components
 
-Sometimes it makes sense to do the heavy lifting of your application in one or more separate modules that are imported. For example, let's make a helper module to handle different types of graphs. Remember that this helper was imported into the app in the last section via:
+Sometimes it makes sense to import a module to do the heavy lifting of your application. For example, let's make a helper module to handle different types of graphs. Remember that this helper was imported into the app in the last section using:
 
 ```js
 import style from "../helpers/graph-styles";
 ```
 
-In `src`, create a folder named `helpers` with a file named `graph-styles.js` inside \(`<your-component>/packages/<componentName>/src/helpers/graph-styles.js`\). Copy the code from below into this file:
+In the `src` directory, create a folder named `helpers` with a file named `graph-styles.js` inside the directory: \(`<your-component>/packages/<componentName>/src/helpers/graph-styles.js`\). Copy and paste the code from below into this file:
 
 ```js
 

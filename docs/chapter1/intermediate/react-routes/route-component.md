@@ -1,6 +1,6 @@
-# Creating Component For Your Route
+# Creating Components For Your Route
 
-After you tell [react-router] in the file `src/client/routes.jsx` what React Component to redirect matching routes, you have to create the actual component itself.
+You must create the actual component itself after specifying the [react-router] in the file `src/client/routes.jsx`--what React component to redirect matching routes to.
 
 ## Example
 
