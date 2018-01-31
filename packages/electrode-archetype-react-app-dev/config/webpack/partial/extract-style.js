@@ -62,69 +62,35 @@ if (cssModuleSupport === undefined) {
 }
 
 module.exports = function() {
-  if (cssModuleSupport) {
-    // cssModuleSupport: true, CSS-Modules + CSS-Next
-    rules.push(
-      {
-        _name: "extract-css-modules",
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: styleLoader,
-          use: cssModuleQuery,
-          publicPath: ""
-        })
-      },
-      {
-        _name: "extract-css-scss",
-        test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: styleLoader,
-          use: cssScssQuery,
-          publicPath: ""
-        })
-      },
-      {
-        _name: "extract-css-stylus",
-        test: /\.styl$/,
-        use: ExtractTextPlugin.extract({
-          fallback: styleLoader,
-          use: cssStylusQuery,
-          publicPath: ""
-        })
-      }
-    );
-  } else {
-    // cssModuleSupport: false, normal CSS, Stylus and SCSS
-    rules.push(
-      {
-        _name: "extract-css",
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: styleLoader,
-          use: cssQuery,
-          publicPath: ""
-        })
-      },
-      {
-        _name: "extract-scss",
-        test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: styleLoader,
-          use: scssQuery,
-          publicPath: ""
-        })
-      },
-      {
-        _name: "extract-stylus",
-        test: /\.styl$/,
-        use: ExtractTextPlugin.extract({
-          fallback: styleLoader,
-          use: stylusQuery,
-          publicPath: ""
-        })
-      }
-    );
-  }
+  rules.push(
+    {
+      _name: `extract-css${cssModuleSupport ? "-modules" : ""}`,
+      test: /\.css$/,
+      loader: ExtractTextPlugin.extract({
+        fallback: styleLoader,
+        use: cssModuleSupport ? cssModuleQuery : cssQuery,
+        publicPath: ""
+      })
+    },
+    {
+      _name: `extract${cssModuleSupport ? "-css" : ""}-scss`,
+      test: /\.scss$/,
+      use: ExtractTextPlugin.extract({
+        fallback: styleLoader,
+        use: cssModuleSupport ? cssScssQuery : scssQuery,
+        publicPath: ""
+      })
+    },
+    {
+      _name: `extract${cssModuleSupport ? "-css" : ""}-stylus`,
+      test: /\.styl$/,
+      use: ExtractTextPlugin.extract({
+        fallback: styleLoader,
+        use: cssModuleSupport ? cssStylusQuery : stylusQuery,
+        publicPath: ""
+      })
+    }
+  );
 
   /*
   *** cssModuleStylusSupport flag is about to deprecate. ***
