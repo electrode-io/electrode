@@ -1,10 +1,10 @@
-# Get Started With Electrode Component
+# Getting Started With Electrode Components
 
-> Note: If you have not done so yet, please check [Requirements](/overview/requirements.md) for setting up your development environment.
+>Before proceeding, be sure to verify the [Requirements](/overview/requirements.md) for setting up your development environment.
 
 ## Quick Guide
 
-There are two ways to start your component:
+You can start your component using the Ignite Menu or using the Ignite Single task.
 
 -   Ignite Menu
 
@@ -20,37 +20,37 @@ And choose the option for `Generate an Electrode component`.
 $ ignite generate-component
 ```
 
-Fill out the information for your component. You can press enter for all the defaults, except for specifying a name for your component.
+Fill out the information for your component. You can press enter to select all the defaults, except for specifying a name for your component.
 
 For example:
 
 ![Hello Electrode Component](/images/component-dev-started.png)
 
-After the installation finished, your new Electrode component is ready!
+After the installation is complete, your new Electrode component is ready!
 
 ## Example and Preview
 
-Preview your component by using the demo-app. This is an electrode app which uses your newly created component:
+Preview your component using the demo-app. This is an Electrode app that uses your newly created component.
 
 ```bash
 $ cd <your-component>/demo-app
 $ clap dev
 ```
 
-When it's ready, you should see something like this in your terminal:
+When the component starts, you should see the status in your terminal:
 
 ![Electrode Component Sample](/images/dev-started.png)
 
-A webserver will be started on localhost:3000. Your new component will be used in `demo-app/src/client/components/home.jsx`. Now open [localhost:3000](http://localhost:3000/) in your browser to access the component.
+A webserver will start on localhost:3000. Your new component will be used in `demo-app/src/client/components/home.jsx`. Now, open [localhost:3000](http://localhost:3000/) in your browser to access the component.
 
 ![Electrode Component Sample](/images/edit-me.png)
 
-## Further: Adding More Components to the Packages
+## Adding More Components to the Packages
 
-> Note: You can skip this section if you do not need extra components.
+> You can skip this section if you do not need extra components.
 
-There are two ways to add more components to your project: invoke ignite menu or specifying the task name.
-Please make sure you are under `packages` directory before you run the commands below:
+There are two ways to add more components to your project. You can use the Ignite menu or specify the task name.
+>Make sure you are under the `packages` directory before you run the following commands.
 
 -   Ignite Menu
 
@@ -58,7 +58,7 @@ Please make sure you are under `packages` directory before you run the commands 
 $ ignite
 ```
 
-And specify option `5` for `Add a component to your existing component repo`.
+Specify option `5` for `Add a component to your existing component repo`.
 
 -   Ignite Single task
 
@@ -66,26 +66,25 @@ And specify option `5` for `Add a component to your existing component repo`.
 $ ignite add-component
 ```
 
-Follow the prompts as above, for example:
+Follow the prompts as above. For example:
 
 ![](/images/generator-component-add.png)
 
-This will generate a new package and also update the demo-app. Don't get panic if you saw conflicts, the `demo-app/src/client/components/home.jsx` and `demo-app/package.json` expected to be overwritten during the update.
+A new package will be generated and the demo-app is updated. Don't worry if you see any conflicts, the `demo-app/src/client/components/home.jsx` and `demo-app/package.json` are expected to be overwritten during the update.
 
-> Note: If you have installed `yo` at version 2.0.0 or higher, you can specify the `a` option for `overwrite this and all others`, or you need to specify the `y` option for `overwrite` each time.
+> If you installed `yo` at version 2.0.0 or higher, you can specify the `a` option to `overwrite this and all others`, or you need to specify the `y` option to `overwrite` each time.
 
-After finished installation, you can preview the multi-components by using demo-app again.
+The the installation is complete, you can preview the multi-components by using the demo-app again.
 
 ```bash
 $ cd ../../demo-app/
 $ clap dev
 ```
-
-And you should see something like this in your terminal:
+The terminal window will display the status:
 
 ![Electrode Component Add Sample](/images/dev-started.png)
 
-Now open [localhost:3000](http://localhost:3000/) in your browser to access the component.
+Open [localhost:3000](http://localhost:3000/) in your browser to access the component.
 
 ![Electrode Component Add Sample](/images/edit-me2.png)
 
@@ -93,7 +92,7 @@ Now open [localhost:3000](http://localhost:3000/) in your browser to access the 
 
 ## Project Structure
 
-The new electrode component is applied by Lerna structure, which can help manage multiple repos within your packages directory.
+The new Electrode component is applied. The Lerna structure can help manage multiple repositories within your packages directory.
 
 ```markdown
 electrode-component
@@ -123,10 +122,10 @@ electrode-component
                 └── client
 ```
 
--   `demo-app` - This directory is a full stack Electrode Application, which used for developing and testing your `packages/<componentName>`. You need to import your `packages/<componentName>` to demo-app, explore and personalize this web application there.
--   `packages/<componentName>/xclap.js` - Entry to Electrode archetype tasks
--   `packages/<componentName>/demo` - Contains examples for how to demo your component
--   `packages/<componentName>/src` - Contains your component source code
--   `packages/<componentName>/test` - Contains unit tests for your component
+-   `demo-app` - Directory for Electrode Application—used for developing and testing your `packages/<componentName>`. You need to import your `packages/<componentName>` to demo-app, explore and personalize this web application there.
+-   `packages/<componentName>/xclap.js` - Electrode archetype tasks.
+-   `packages/<componentName>/demo` - Examples for how to demo your component.
+-   `packages/<componentName>/src` - Component source code.
+-   `packages/<componentName>/test` - Unit tests for your component.
 
-For further developing your Electrode components, please refer [here.](/chapter1/quick-start/further-develop-component.md)
+To continue developing components, see [Developing Electrode Components.](/chapter1/quick-start/further-develop-component.md)

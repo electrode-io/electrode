@@ -1,10 +1,10 @@
-# Get Started With Electrode App
+# Getting Started With Your Electrode App
 
-> Note: If you have not done so yet, please check [Requirements](/overview/requirements.md) for setting up your development environment.
+>Before proceeding, be sure to verify the [Requirements](/overview/requirements.md) for setting up your development environment.
 
 ## Quick Guide
 
-There are two ways to start your app:
+You can start your app using the Ignite Menu or using the Ignite Single task.
 
 -   Ignite Menu
 
@@ -12,7 +12,7 @@ There are two ways to start your app:
 $ ignite
 ```
 
-And choose the option for `Generate an Electrode application`.
+Choose the option for `Generate an Electrode application`.
 
 -   Ignite Single task
 
@@ -20,40 +20,41 @@ And choose the option for `Generate an Electrode application`.
 $ ignite generate-app
 ```
 
-Fill out the information for your app. You can press enter for all the defaults, except for specifying a name for your app.
+Fill out the information for your app. You can press enter to select all the defaults, except for specifying a name for your app.
 
 For example:
 
 ![](/images/generator-app-quick-start.png)
 
-After the app's been created and `npm install` completed, you can start the app in dev mode:
+After the app is created and the `npm install` is completed, you can start the app in dev mode:
 
 ```bash
 $ cd electrode-app
 $ clap dev
 ```
 
-When it's ready, you should see something like this in your terminal:
+When the app starts, you should see the status in your terminal:
 
 ![Hello Electrode](/images/dev-started.png)
 
-Now open [localhost:3000](http://localhost:3000/) in your browser to access the app. Hello Electrode!
+Now open [localhost:3000](http://localhost:3000/) in your browser to access the app Hello Electrode!
 
 ![Hello Electrode](/images/hello-electrode.png)
 
 Go ahead and play around with the app.  View the page source to see the Server Side Rendered HTML.  Refresh the page to see the SSR content load immediately before React starts running.
 
-## Further Explorations
+## Additional Commands
 
-To view all the development tasks available type `clap`.
+To view all the development tasks available enter the following:  
+ `clap`.
 
-To start in hot mode:
+To start in hot mode, enter the following command:
 
 ```bash
 $ clap hot
 ```
 
-To build your app for production deployment:
+To build your app for a production deployment:
 
 ```bash
 $ clap build
@@ -69,7 +70,7 @@ $ npm run prod
 
 ## Project Structure
 
-Here is a basic top level view of the application's structure:
+A basic top-level view of the application's structure is shown below.
 
 ```markdown
 electrode-app
@@ -86,12 +87,12 @@ electrode-app
 └── xclap.js
 ```
 
--   `config` - This directory contains the configuration for your application.
--   `src/client` - Contains your React application
+-   `config` - Contains the configuration for your application.
+-   `src/client` - Contains your React application.
 -   `src/server` - Contains your NodeJS server application with SSR support.
--   `test` - Contains unit test for your application
--   `xclap.js` - entry to Electrode's archetype tasks
+-   `test` - Contains the unit test for your application.
+-   `xclap.js` - Entry to the Electrode archetype tasks.
 
-The application generated included a few demo components to show you how to use Redux, CSS Modules, and React JSX.  Feel free to play with them and remove or replace them when you are ready to add your application.
+The generated application included a few demo components to show you how to use Redux, CSS Modules, and React JSX.  Feel free to play with them and remove or replace them when you are ready to add your application.
 
-For continuing build React components for your Electrode Application, please continue [here.](/chapter1/quick-start/further-develop-app.md)
+To continue to build React components for your Electrode Application, see [Developing Your Electrode App.](/chapter1/quick-start/further-develop-app.md)
