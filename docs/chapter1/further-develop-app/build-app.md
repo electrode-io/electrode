@@ -1,6 +1,6 @@
 # Build Electrode Application
 
-From here, you can develop further based on the generated the electrode app. Let's make a visual library for our present stack and exciting technologies! Copy the code below and paste it into
+You can continue your app development based on the generated Electrode app. Let's make a visual library for our present stack and exciting technologies! Copy the code example below and paste it into the following file:
 
 `<electrode-app>/src/client/components/home.jsx`:
 
@@ -119,7 +119,7 @@ $ clap dev
 
 Navigate to [https://localhost:3000](https://localhost:3000]/).
 
-> If you are already running your app in dev mode, then your changes should've been updated automatically and you can just refresh your browser to see the changes.
+> If you are already running your app in dev mode, then your changes should update automatically and you can just refresh your browser to see the changes.
 
 **The page should resemble the following screenshot:**
 
