@@ -31,6 +31,9 @@ Some of the app archetype's features can be controlled by environment variables.
 
   * Default is `false`
 
+* `CSS_MODULE_SUPPORT` - If `false`, then disable `CSS-Modules` and `CSS-Next` support, and load as pure `CSS`. If `true`, then enable `CSS-Modules` and `CSS-Next` support, and load as `CSS-Modules + CSS-Next`.
+
+  * Default is `undefined`
 
 * `CSS_MODULE_STYLUS_SUPPORT` - if `true`, then enable `stylus` support for CSS modules.
 
