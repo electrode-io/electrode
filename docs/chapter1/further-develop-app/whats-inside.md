@@ -6,9 +6,9 @@ Let's go through the most important files to understand the structure of your ne
 
 > &lt;electrode-app&gt;/src/client/components/home.jsx
 
-This is the home React component for your app. [React](https://facebook.github.io/react/index.html) is a JavaScript library for building user interfaces. A simplified way to look at React is that it can be used as the _View_ in a _Model-View-Controller_ application. It was created by Facebook and is being actively developed.
+This is the home React component for your app. [React](https://facebook.github.io/react/index.html) is a JavaScript library for building user interfaces. A simplified way to look at React is that it can be used as the _View_ in a _Model-View-Controller_ application. It was created and is actively developed by Facebook.
 
-Building with React lets developers create a modular and reusable component architecture. We can then reuse the business logic in existing _models_ and _controllers_ because React components encapsulate only the _view_ layer. The components you write are self-contained, which aids developers in quickly determining what a component does directly by reading the source. Finally, it is ideally suited to Universal JavaScript \(previously called Isomorphic JavaScript\), the practice of sharing code between the server and the client.
+Building with React lets developers create a modular and reusable component architecture. You can then reuse the business logic in existing _models_ and _controllers_ because React components encapsulate only the _view_ layer. The components you write are self-contained, which aids developers in quickly determining what a component does directly by reading the source. Finally, it is ideally suited to Universal JavaScript \(previously called Isomorphic JavaScript\), the practice of sharing code between the server and the client.
 
 > &lt;electrode-app&gt;/src/client/styles/base.css
 
@@ -70,7 +70,7 @@ config
     └── production.json
 ```
 
-We use this to keep environment-specific configurations manageable. Once you have your configuration files setup accordingly, you can simply pass the config object to electrode server.
+We use this to keep environment-specific configurations manageable. Once you have your configuration files setup accordingly, you can simply pass the configuration object to electrode server.
 
 > &lt;electrode-app&gt;/src/server
 
@@ -118,7 +118,7 @@ All of your content will be served as an HTML string and placed in this unassumi
 <div class="js-content">{{SSR_CONTENT}}</div>
 ```
 
-This includes React components and Redux. To achieve this, the Electrode team has created another powerful module to optimize performance for an out-of-the-box Universal app: [Electrode-Redux-Router-Engine](https://github.com/electrode-io/electrode-redux-router-engine), which takes React routes and requests and returns HTML to be rendered by `electrode-react-webapp`. We have found this to be the [best tool](https://github.com/electrode-io/electrode-redux-router-engine) for dealing with asynchronous redux actions.
+This includes React components and Redux. To achieve this, the Electrode team created another powerful module to optimize performance for an out-of-the-box Universal app: [Electrode-Redux-Router-Engine](https://github.com/electrode-io/electrode-redux-router-engine), which takes React routes and requests and returns HTML to be rendered by `electrode-react-webapp`. We have found this to be the [best tool](https://github.com/electrode-io/electrode-redux-router-engine) for dealing with asynchronous redux actions.
 
 > &lt;electrode-app&gt;/src/client/.babelrc
 
@@ -126,4 +126,4 @@ This is where we extend our `electrode-archetype-react-app` [Babel](https://babe
 
 > &lt;electrode-app&gt;/.isomorphic-loader-config.json
 
-This [powerful tool](https://github.com/electrode-io/isomorphic-loader) makes NodeJS `require` work with files such as images for server-side rendering. It contains three pieces: a Webpack loader, Webpack plugin, and a library for your NodeJS app.
+This [powerful tool](https://github.com/electrode-io/isomorphic-loader) makes NodeJS `require` work with files such as images for server-side rendering. It contains three elements: a Webpack loader, Webpack plugin, and a library for your NodeJS app.

@@ -21,7 +21,7 @@
   },
   "dependency": {},
   "devDependencies": {
-    "lerna": "^2.0.0-rc.5",
+    "lerna": "^2.8.0",
     "lodash": "^4.10.1",
     "xclap": "^0.2.0"
   },

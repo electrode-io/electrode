@@ -1,8 +1,8 @@
 # Develop Styles
 
-## Develop styles using css modules
+## Develop styles using CSS modules
 
-Let's also add some style elements using [CSS modules](https://github.com/css-modules/css-modules) to create a dynamic application. Use the code below to replace what is in
+Let's also add some style elements using [CSS modules](https://github.com/css-modules/css-modules) to create a dynamic application. Use the code below to update the .css file:
 
 `<your-component>/packages/<componentName>/src/styles/<your-component>.css`:
 

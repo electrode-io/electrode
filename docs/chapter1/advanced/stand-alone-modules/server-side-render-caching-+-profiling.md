@@ -1,8 +1,10 @@
 # Server Side Render Caching + Profiling
 
-Optimize React SSR with profiling and component caching. The [electrode-react-ssr-caching](https://github.com/electrode-io/electrode-react-ssr-caching) module supports profiling React Server Side Rendering time to enable component caching to help you speed up Server Side Rendering of your components.
+Use the The electrode-react-ssr-caching module to optimize React SSR with profiling and component caching.  
 
-[electrode-react-ssr-caching](https://github.com/electrode-io/electrode-react-ssr-caching) module can be used as a\_standalone\_module and is\_agnostic\_to your web-server framework. In this tutorial we will demonstrate how to use this module in Electrode, Express.js and Hapi.js applications.
+The [electrode-react-ssr-caching](https://github.com/electrode-io/electrode-react-ssr-caching) module supports profiling React Server Side Rendering time to enable component caching to help you speed up Server Side Rendering of your components.
+
+This module is a stand-alone module and can be configured to work in any [Electrode](#stateless-validation-electrode), [Express](#stateless-validation-express), or [Hapi](#stateless-validation-hapi) application.
 
 ## Module: [electrode-react-ssr-caching](https://github.com/electrode-io/electrode-react-ssr-caching)
 
@@ -114,7 +116,7 @@ This strategy is not very flexible. You need a cache entry for each component in
 
 The`template`caching strategy is more complex but flexible.
 
-The idea is akin to generating logic-less handlebars templates from your React components and then use string replace to process the template with different props.
+The idea is similar to generating logic-less handlebars templates from your React components and then use string replace to process the template with different props.
 
 If you have this component:
 
@@ -132,7 +134,7 @@ And you render it with props:
 const props = { name: "Bob", message: "How're you?" }
 ```
 
-You get back HTML string:
+The following HTML string is returned:
 
 ```
 <div>Hello, <span>Bob</span>.  <span>How&#x27;re you?</span></div>
@@ -144,19 +146,19 @@ Now if you replace values in props with tokens, and you remember that `@0@` refe
 const tokenProps = { name: "@0@", message: "@1@" }
 ```
 
-You get back HTML string that could be akin to a handlebars template:
+An HTML string is returned. This could be similar to a handlebars template:
 
 ```
 <div>Hello, <span>@0@</span>.  <span>@1@</span></div>
 ```
 
-We cache this template html using the tokenized props as cache key. When we need to render the same component with a different props later, we can just lookup the template from cache and use string replace to apply the values:
+We cache this template HTML using the tokenized props as a cache key. When we need to render the same component with different properties later, we can just locate the template in the cache and use the string to replace and apply the values:
 
 ```
 cachedTemplateHtml.replace( /@0@/g, props.name ).replace( /@1@/g, props.message );
 ```
 
-That's the gist of the template strategy. Of course there are many small details such as handling the encoding of special characters, preserving props that can't be tokenized, avoiding tokenizing non-string props, or preserving`data-reactid` and `data-react-checksum`.
+That's the idea of the template strategy. Of course there are small details such as handling the encoding of special characters, preserving properties that can't be tokenized, avoiding tokenizing non-string properties, or preserving`data-reactid` and `data-react-checksum`.
 
 To specify a component to be cached with the `template` strategy:
 
@@ -207,7 +209,7 @@ Enable cache debugging according to flag.
 
 ### [`setCachingConfig(config)`](http://www.electrode.io/docs/server_side_render_cache.html#setcachingconfigconfig)
 
-Set caching config to`config`.
+Set the caching configuration to`config`.
 
 ### [`stripUrlProtocol(flag)`](http://www.electrode.io/docs/server_side_render_cache.html#stripurlprotocolflag)
 
@@ -226,7 +228,7 @@ Set whether the `template` strategy should hash the cache key and use that inste
 
 * `flag`
 
-* * `undefined` or `true` - use a hash value of the cache key 
+* * `undefined` or `true` - use a hash value of the cache key
   * `false`- don't use a hash valueo f the cache key
 * `hashFn`- optional, a custom callback to generate the hash from the cache key, which is passed in as a string
   * i.e.`function customHashFn(key) { return hash(key); }`
@@ -248,4 +250,3 @@ Get total number of cache entries
 ### [`cacheHitReport()`](http://www.electrode.io/docs/server_side_render_cache.html#cachehitreport)
 
 Print out cache entries and number of hits each one has.
-

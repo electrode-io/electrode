@@ -1,4 +1,4 @@
-# Summary
+# Contents
 
 ### Introduction
 
@@ -11,19 +11,19 @@
 
 ### Quick Start
 
--   [Get Start With Electrode](/chapter1/quick-start/start-with-electrode.md)
+-   [Getting Started With Electrode](/chapter1/quick-start/start-with-electrode.md)
 
     -   [Start With Electrode Ignite](/chapter1/quick-start/start-with-ignite.md)
     -   [Create an Electrode App](/chapter1/quick-start/start-with-app.md)
     -   [Create an Electrode Component](/chapter1/quick-start/start-with-component.md)
 
--   [Further Develop Electrode App](chapter1/quick-start/further-develop-app.md)
+-   [Developing Your Electrode App](chapter1/quick-start/further-develop-app.md)
 
     -   [Build Your App](/chapter1/further-develop-app/build-app.md)
     -   [What's Inside](/chapter1/further-develop-app/whats-inside.md)
     -   [Deploy Your App](/chapter1/further-develop-app/deploy-your-app.md)
 
--   [Further Develop Electrode Component](chapter1/quick-start/further-develop-component.md)
+-   [Developing Electrode Components](chapter1/quick-start/further-develop-component.md)
     -   [Low-Level Components](/chapter1/further-develop-component/low-level-components.md)
     -   [Component Helpers](/chapter1/further-develop-component/component-helpers.md)
     -   [Develop Styles](/chapter1/further-develop-component/develop-styles.md)

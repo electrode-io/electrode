@@ -2,7 +2,7 @@
 
 ### Deploy with Docker
 
-Docker is a new container-based technology designed to make applications easier to create, deploy and run. It's an increasingly popular way to accelerate development and share content. To get started, sign up for [Docker](https://cloud.docker.com/), download [Docker for your machine](https://www.docker.com/products/docker) and read over the corresponding system requirements. Docker is available for all major operating systems. See the corresponding "Get Started Tutorial" for your OS version on the Docker product page.
+Docker is a new container-based technology designed to make applications easier to create, deploy and run. It's an increasingly popular way to accelerate development and share content. To get started, sign up for [Docker](https://cloud.docker.com/), download [Docker for your machine](https://www.docker.com/products/docker) and read through the corresponding System Requirements. Docker is available for all major operating systems. See the corresponding "Get Started Tutorial" for your OS version on the Docker product page.
 
 Let's check the versions of `Docker Engine`, `Compose` and `Machine` by running the commands below:
 
@@ -20,7 +20,7 @@ Verify your installation by running the Docker version of "Hello World":
 $ docker run hello-world
 ```
 
-To show all the containers on the system, run the command below:
+To show all the containers on the system, run the following command:
 
 ```
 $ docker ps -a
@@ -86,7 +86,7 @@ $ docker run -d -p 3000:3000 docker-awesome-container
 
 Open `localhost:3000` in your browser to see your app.
 
-Your container id will print in the terminal, or you can run the command below to see your containers:
+Your container ID will print in the terminal, or you can run the command below to see your containers:
 
 ```
 $ docker ps
@@ -104,11 +104,12 @@ Log into Docker Hub from the command line. The format is below. Enter your passw
 $ docker login --username=yourhubusername --email=youremail@company.com
 ```
 
-Run the `push` command below to push your image to your new repo:
+Run the `push` command to push your image to your new repository:
 
 ```
 $ docker push your-username/docker-awesome-container
 ```
 
-You have successfully pushed your new image to the Docker Cloud repository! From here, you can use the [User Guide](https://docs.docker.com/engine/userguide/intro/) to run your own containers and build Docker images.
+You have successfully pushed your new image to the Docker Cloud repository!
 
+See the [User Guide](https://docs.docker.com/engine/userguide/intro/) to run your own containers and build Docker images.

@@ -2,7 +2,7 @@
 
 #### Deploy with Google's Kubernetes
 
-[Kubernetes](http://kubernetes.io/docs/user-guide/kubectl-overview/) is an open-source system for automating deployment, scaling, and management of containerized applications. It was developed by Google to handle the ops demand for an organization of that scale and the flexibility to run an infrastructure at any size.
+[Kubernetes](http://kubernetes.io/docs/user-guide/kubectl-overview/) is an open-source system for automating deployment, scaling, and management of containerized applications. It was developed by Google to handle the ops demand for an enterprise organization with the flexibility to run an infrastructure at any size.
 
 To start, make sure you already have a [Google Account](https://accounts.google.com/SignUp). Sign in to the [Google Cloud Platform](https://console.cloud.google.com/home/dashboard?project=gentle-waters-127300&pli=1) and also sign up for a free trial on [Google Container Registry](https://cloud.google.com/container-registry/) and create a new project. Remember your project ID and use it on your command line:
 

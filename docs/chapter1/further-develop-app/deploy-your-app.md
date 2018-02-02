@@ -1,6 +1,8 @@
 # Deploy Your App
 
-We're almost finished with our Electrode app further development. The final step is to deploy `electrode-app` and share it with your fellow developers using [Heroku](https://devcenter.heroku.com/categories/deployment). We have listed the steps below, but feel free to learn more about Heroku [here](https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction). These instructions assume you have a GitHub account. Navigate to your GitHub and create a new empty repo 'Electrode-App'. Hit the `clone electrode-repo` and follow the steps below in order:
+We're almost finished with our Electrode app development. The final step is to deploy `electrode-app` and share it with your fellow developers using [Heroku](https://devcenter.heroku.com/categories/deployment). We have listed the steps below, but feel free to learn more about [Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction). These instructions assume you have a GitHub account.  
+
+Login to your GitHub account repository and create a new empty repository called 'Electrode-App'. Click `clone electrode-repo` and follow the steps below.
 
 ```bash
 $ git init
@@ -10,7 +12,7 @@ $ git remote add origin https://github.com/your-Github-name/electrode-app.git
 $ git push -u origin master
 ```
 
-Navigate to the [Heroku site](https://signup.heroku.com/dc) and set up a free account. This will help streamline our deployment process (we will do this several times).
+Navigate to the [Heroku site](https://signup.heroku.com/dc) and set up a free account. This will help streamline our deployment process. Note: We will do this several times.
 
 Next, let's quickly deploy `electrode-app` from the command line. Click [here](https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up) to download and install the Heroku CLI for your machine.
 
@@ -97,13 +99,13 @@ $ git add .
 $ git commit -m "Updates package.json with node version"
 ```
 
-Create an app on Heroku (which prepares Heroku to receive your source code). This will also create a git remote called `heroku` and generate a random name:
+Create an app on Heroku (which prepares Heroku to receive your source code). This also creates a Git remote repository called `heroku` with a  generated random name:
 
 ```bash
 $ heroku create
 ```
 
-Alternatively, you can also create an app that will generate a your app's name (if it is available):
+Alternatively, you can also create an app that is generated with your app's name (if it is available):
 
 ```bash
 $ heroku create electrode-app
@@ -115,7 +117,7 @@ Use the command below to set a configuration so that Heroku installs Electrode-A
 $ heroku config:set NPM_CONFIG_PRODUCTION=false
 ```
 
-Use the command below to set a configuration for [production.js](https://github.com/electrode-io/electrode/blob/148a4f4a2e8d78443eb3bdc1cf62f4d74bf49755/packages/generator-electrode/generators/app/templates/config/production.js#L11), only set this if you intend to serve static files with a CDN.
+If you intend to serve static files with a CDN, use the command below to set a configuration for [production.js](https://github.com/electrode-io/electrode/blob/148a4f4a2e8d78443eb3bdc1cf62f4d74bf49755/packages/generator-electrode/generators/app/templates/config/production.js#L11).
 
 ```bash
 $ heroku config:set STATIC_FILES_OFF=true
@@ -133,4 +135,4 @@ Visit the app at the generated URL by using this command:
 $ heroku open
 ```
 
-And...you did it! Click [here](https://first-electrode-example-app.herokuapp.com/) for our deployed Heroku version. We will build even more in our [Getting Started: Intermediate](/chapter1/Intermediate.md) and cover complex topics like routing, server plugins and other powerful deployment software.
+And...you did it! Click [here](https://first-electrode-example-app.herokuapp.com/) for our deployed Heroku version. We will build even more in our [Getting Started: Intermediate](/chapter1/Intermediate.md) and cover complex topics like routing, server plugins, and other powerful deployment software.
