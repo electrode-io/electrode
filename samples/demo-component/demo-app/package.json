@@ -48,7 +48,8 @@
     "electrode-redux-router-engine": "../../../packages/electrode-redux-router-engine",
     "electrode-server": "^1.0.0",
     "electrode-static-paths": "^1.0.0",
-    "lodash": "^4.10.1"
+    "lodash": "^4.10.1",
+    "demo-component": "../packages/demo-component"
   },
   "devDependencies": {
     "electrode-archetype-react-app-dev": "../../../packages/electrode-archetype-react-app-dev"
