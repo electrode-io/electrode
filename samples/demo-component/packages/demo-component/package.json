@@ -16,7 +16,8 @@
   },
   "homepage": "https://github.com/electrode-io/electrode",
   "dependencies": {
-    "material-ui": "^0.20.0"
+    "material-ui": "^0.20.0",
+    "electrode-demo-index": "^2.0.0"
   },
   "devDependencies": {
     "electrode-archetype-react-component": "../../../../packages/electrode-archetype-react-component",

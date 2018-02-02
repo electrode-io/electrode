@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { IntlProvider } from "react-intl";
 
-import { DemoComponent } from "demo-component";
+import DemoComponent from "demo-component";
 
 const locale = "en";
 
