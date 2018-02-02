@@ -1,5 +1,6 @@
 "use strict";
 
+const ModuleResolver = require("../plugins/module-resolver");
 const Path = require("path");
 const archetypeNodeModules = Path.join(
   // A normal `require.resolve` looks at `package.json:main`. We instead want
@@ -12,12 +13,8 @@ const archetypeDevNodeModules = Path.join(__dirname, "../../", "node_modules");
 
 module.exports = {
   resolve: {
-    modules: [
-      archetypeNodeModules,
-      archetypeDevNodeModules,
-      "node_modules",
-      process.cwd()
-    ],
+    plugins: [new ModuleResolver("module", undefined, "resolve")],
+    modules: [archetypeNodeModules, archetypeDevNodeModules, "node_modules", process.cwd()],
     extensions: [".js", ".jsx"]
   }
-}
+};
