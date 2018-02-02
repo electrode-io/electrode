@@ -58,3 +58,6 @@ Procfile
 .project
 karma*
 karma.*
+fyn-lock.yaml
+.babelrc
+components.*
