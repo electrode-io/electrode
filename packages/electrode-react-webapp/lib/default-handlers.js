@@ -67,11 +67,9 @@ module.exports = function setup(options) {
       if (WEBPACK_DEV) {
         if (Array.isArray(data.devCSSBundle)) css.push(...data.devCSSBundle);
         else if (data.devCSSBundle) css.push(data.devCSSBundle);
-      }
-      else if (Array.isArray(data.cssChunk)) {
+      } else if (Array.isArray(data.cssChunk)) {
         css.push(...data.cssChunk);
-      }
-      else if (data.cssChunk) css.push(data.cssChunk);
+      } else if (data.cssChunk) css.push(data.cssChunk);
 
       const cssLink = css.reduce((acc, file) => {
         acc += `<link rel="stylesheet" href="${
