@@ -75,7 +75,7 @@ module.exports = function setup(options) {
             : prodBundleBase + file.name
         }" />`;
         return acc;
-      }, '');
+      }, "");
 
       const htmlScripts = htmlifyScripts(
         groupScripts(routeOptions.unbundledJS.enterHead).scripts,
