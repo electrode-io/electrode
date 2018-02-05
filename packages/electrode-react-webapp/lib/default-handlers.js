@@ -63,9 +63,19 @@ module.exports = function setup(options) {
       const manifest = bundleManifest();
       const manifestLink = manifest ? `<link rel="manifest" href="${manifest}" />\n` : "";
       const css = WEBPACK_DEV
-        ? data.devCSSBundle
-        : (data.cssChunk && `${prodBundleBase}${data.cssChunk.name}`) || "";
-      const cssLink = css && !data.criticalCSS ? `<link rel="stylesheet" href="${css}" />` : "";
+        ? (!Array.isArray(data.devCSSBundle) && [data.devCSSBundle]) || data.devCSSBundle
+        : data.cssChunk
+          ? (!Array.isArray(data.cssChunk) && [data.cssChunk]) || data.cssChunk
+          : [""];
+
+      const cssLink = css.reduce((acc, file) => {
+        acc += `<link rel="stylesheet" href="${
+          WEBPACK_DEV
+            ? file
+            : prodBundleBase + file.name
+        }" />`;
+        return acc;
+      }, '');
 
       const htmlScripts = htmlifyScripts(
         groupScripts(routeOptions.unbundledJS.enterHead).scripts,

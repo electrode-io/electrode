@@ -104,14 +104,31 @@ function makeRouteHandler(routeOptions, userContent) {
       }
 
       const chunkNames = chunkSelector(request);
-      const devCSSBundle = chunkNames.css
-        ? `${devBundleBase}${chunkNames.css}.style.css`
-        : `${devBundleBase}style.css`;
-      const devJSBundle = chunkNames.js
-        ? `${devBundleBase}${chunkNames.js}.bundle.dev.js`
-        : `${devBundleBase}bundle.dev.js`;
-      const jsChunk = _.find(assets.js, asset => _.includes(asset.chunkNames, chunkNames.js));
-      const cssChunk = _.find(assets.css, asset => _.includes(asset.chunkNames, chunkNames.css));
+
+      let devCSSBundle;
+      if (chunkNames.css) {
+        const cssChunks = Array.isArray(chunkNames.css)
+          ? chunkNames.css
+          : [ chunkNames.css ];
+        devCSSBundle = _.map(
+          cssChunks,
+          (chunkName) => `${devBundleBase}${chunkName}.style.css`
+        );
+      } else devCSSBundle = [`${devBundleBase}style.css`];
+
+      let devJSBundle;
+      if (chunkNames.js) {
+        const jsChunks = Array.isArray(chunkNames.js)
+          ? chunkNames.js
+          : [ chunkNames.js ];
+        devJSBundle = _.map(
+          jsChunks,
+          (chunkName) => `${devBundleBase}${chunkName}.bundle.dev.js`
+        );
+      } else devJSBundle = [`${devBundleBase}bundle.dev.js`];
+
+      const jsChunk = assets.js;
+      const cssChunk = assets.css;
       const scriptNonce = cspScriptNonce ? ` nonce="${cspScriptNonce}"` : "";
       const styleNonce = cspStyleNonce ? ` nonce="${cspStyleNonce}"` : "";
 
