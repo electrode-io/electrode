@@ -5,7 +5,7 @@ const repoPackagesDir = Path.join(__dirname, "../../../../packages");
 module.exports = {
   resolve: {
     alias: {
-    "react": Path.dirname(require.resolve("react/package.json")),
+      "react": Path.dirname(require.resolve("react/package.json")),
       "react-dom": Path.dirname(require.resolve("react-dom/package.json"))
     },
     modules: [
