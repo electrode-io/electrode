@@ -116,18 +116,10 @@ function makeRouteHandler(routeOptions, userContent) {
         );
       } else devCSSBundle = [`${devBundleBase}style.css`];
 
-      let devJSBundle;
-      if (chunkNames.js) {
-        const jsChunks = Array.isArray(chunkNames.js)
-          ? chunkNames.js
-          : [ chunkNames.js ];
-        devJSBundle = _.map(
-          jsChunks,
-          (chunkName) => `${devBundleBase}${chunkName}.bundle.dev.js`
-        );
-      } else devJSBundle = [`${devBundleBase}bundle.dev.js`];
-
-      const jsChunk = assets.js;
+      const devJSBundle = chunkNames.js
+        ? `${devBundleBase}${chunkNames.js}.bundle.dev.js`
+        : `${devBundleBase}bundle.dev.js`;
+      const jsChunk = _.find(assets.js, asset => _.includes(asset.chunkNames, chunkNames.js));
       const cssChunk = assets.css;
       const scriptNonce = cspScriptNonce ? ` nonce="${cspScriptNonce}"` : "";
       const styleNonce = cspStyleNonce ? ` nonce="${cspStyleNonce}"` : "";
