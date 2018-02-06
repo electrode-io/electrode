@@ -16,10 +16,8 @@ const sassLoader = require.resolve("sass-loader");
 const demoAppPath = Path.resolve(process.cwd(), "..", "..", "demo-app");
 const archetypeAppPath = Path.resolve(
   demoAppPath,
-  "node_modules",
-  "electrode-archetype-react-app",
-  "config",
-  "archetype"
+  "archetype",
+  "config"
 );
 const archetypeAppWebpack = require(archetypeAppPath).webpack;
 let cssModuleSupport = archetypeAppWebpack.cssModuleSupport;
