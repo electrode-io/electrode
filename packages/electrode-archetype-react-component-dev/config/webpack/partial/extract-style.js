@@ -5,83 +5,125 @@ const glob = require("glob");
 
 const atImport = require("postcss-import");
 const cssnext = require("postcss-cssnext");
+const webpack = require("webpack");
+
 const styleLoader = require.resolve("style-loader");
 const cssLoader = require.resolve("css-loader");
 const postcssLoader = require.resolve("postcss-loader");
 const stylusLoader = require.resolve("stylus-relative-loader");
-const webpack = require("webpack");
+const sassLoader = require.resolve("sass-loader");
 
-const optionalRequire = require("optional-require")(require);
-const configPath = Path.resolve("archetype", "config.js");
-const config = optionalRequire(configPath);
-const cssModuleStylusSupport = config && config.cssModuleStylusSupport;
+const demoAppPath = Path.resolve(process.cwd(), "..", "..", "demo-app");
+const archetypeAppPath = Path.resolve(
+  demoAppPath,
+  "archetype",
+  "config"
+);
+const archetypeAppWebpack = require(archetypeAppPath).webpack;
+let cssModuleSupport = archetypeAppWebpack.cssModuleSupport;
+const cssModuleStylusSupport = archetypeAppWebpack.cssModuleStylusSupport;
 
-/**
- * [cssModuleSupport By default, this archetype assumes you are using CSS-Modules + CSS-Next]
+/*
+ * cssModuleSupport: false
+ * case 1: *only* *.css => normal CSS
+ * case 2: *only* *.styl exists => Stylus
+ * case 3: *only* *.scss exists => SASS
  *
- * Stylus is also supported for which the following cases can occur.
- *
- * case 1: *only* demo.css exists => CSS-Modules + CSS-Next
- * case 2: *only* demo.styl exists => stylus
- * case 3: *both* demo.css & demo.styl exists => CSS-Modules + CSS-Next takes priority
- *          with a warning message
- * case 4: *none* demo.css & demo.styl exists => CSS-Modules + CSS-Next takes priority
- * case 5: *cssModuleStylusSupport
+ * cssModulesSupport: true
+ * case 1: *only* *.css => CSS-Modules + CSS-Next
+ * case 2: *only* *.styl => normal CSS => CSS-Modules + CSS-Next
+ * case 3: *only* *.scss => normal CSS => CSS-Modules + CSS-Next
  */
 
-const cssNextExists = glob.sync(Path.join(process.cwd() + "/demo/*.css")).length > 0;
-const stylusExists = glob.sync(Path.join(process.cwd() + "/demo/*.styl")).length > 0;
+const cssLoaderOptions =
+  "?modules&localIdentName=[name]__[local]___[hash:base64:5]&-autoprefixer";
+const cssQuery = `${cssLoader}!${postcssLoader}`;
+const stylusQuery = `${cssLoader}?-autoprefixer!${stylusLoader}`;
+const scssQuery = `${cssQuery}!${sassLoader}`;
+const cssModuleQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}`;
+const cssStylusQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}!${stylusLoader}`;
+const cssScssQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}!${sassLoader}`;
 
-// By default, this archetype assumes you are using CSS-Modules + CSS-Next
-let cssModuleSupport = "?modules!" + postcssLoader;
+const cssExists =
+  glob.sync(Path.resolve(process.cwd(), "src/styles", "*.css")).length > 0;
+const stylusExists =
+  glob.sync(Path.resolve(process.cwd(), "src/styles", "*.styl")).length > 0;
+const scssExists =
+  glob.sync(Path.resolve(process.cwd(), "src/styles", "*.scss")).length > 0;
 
-if (stylusExists && !cssNextExists) {
-  cssModuleSupport = "";
-} else if (stylusExists && cssNextExists) {
-  /* eslint-disable no-console */
-  console.log(`**** you have demo.css & demo.styl please delete *.styl
-    and upgrade to using *.css for CSS-Modules + CSS-Next support ****`);
-  /* eslint-enable no-console */
+const rules = [];
+
+/*
+ * cssModuleSupport default to undefined
+ *
+ * when cssModuleSupport not specified:
+ * *only* *.css, cssModuleSupport sets to true
+ * *only* *.styl, cssModuleSupport sets to false
+ * *only* *.scss, cssModuleSupport sets to false
+ */
+if (cssModuleSupport === undefined) {
+  cssModuleSupport = cssExists && !stylusExists && !scssExists;
 }
 
 module.exports = function() {
-  const loaders = [{
-    test: /\.css$/,
-    /* eslint-disable prefer-template */
-    loader: styleLoader + "!" + cssLoader + cssModuleSupport
-    /* eslint-enable prefer-template */
-  }];
+  rules.push(
+    {
+      test: /\.css$/,
+      use: cssModuleSupport ? cssModuleQuery : cssQuery
+    },
+    {
+     test: /\.scss$/,
+     use: cssModuleSupport ? cssScssQuery : scssQuery
+    },
+    {
+      test: /\.styl$/,
+      use: cssModuleSupport ? cssStylusQuery : stylusQuery
+    }
+  );
 
+  /*
+  *** cssModuleStylusSupport flag is about to deprecate. ***
+  * If you want to enable stylus with CSS-Modules + CSS-Next,
+  * Please use stylus as your style and enable cssModuleSupport flag instead.
+  */
   if (cssModuleStylusSupport) {
-    loaders.push({
+    rules.push({
       test: /\.styl$/,
-      /* eslint-disable prefer-template */
-      loader: styleLoader + "!" + cssLoader + "?modules!" + stylusLoader
-      /* eslint-enable prefer-template */
-    });
-  } else {
-    loaders.push({
-      test: /\.styl$/,
-      /* eslint-disable prefer-template */
-      loader: styleLoader + "!" + cssLoader + "!" + stylusLoader
-      /* eslint-enable prefer-template */
+      use: cssStylusQuery
     });
   }
 
   return {
-    module: {
-      rules: loaders
-    },
+    module: { rules },
     plugins: [
       new webpack.LoaderOptionsPlugin({
         options: {
+          postcss: () => {
+            return cssModuleSupport
+              ? [
+                  atImport,
+                  cssnext({
+                    browsers: ["last 2 versions", "ie >= 9", "> 5%"]
+                  })
+                ]
+              : [];
+          },
           stylus: {
+            use: () => {
+              return !cssModuleSupport
+                ? [
+                    autoprefixer({
+                      browsers: ["last 2 versions", "ie >= 9", "> 5%"]
+                    })
+                  ]
+                : [];
+            },
             define: {
               $tenant: process.env.ELECTRODE_TENANT || "walmart"
             }
           }
         }
       })
-    ]
-  }
+    ].filter(x => !!x)
+  };
 };
