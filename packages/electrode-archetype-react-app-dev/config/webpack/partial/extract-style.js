@@ -24,7 +24,7 @@ const sassLoader = require.resolve("sass-loader");
  * case 2: *only* *.styl exists => Stylus
  * case 3: *only* *.scss exists => SASS
  *
- * cssModulesSupport: true
+ * cssModuleSupport: true
  * case 1: *only* *.css => CSS-Modules + CSS-Next
  * case 2: *only* *.styl => normal CSS => CSS-Modules + CSS-Next
  * case 3: *only* *.scss => normal CSS => CSS-Modules + CSS-Next
