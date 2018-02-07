@@ -47,6 +47,7 @@
 
     -   [Structure](/chapter1/intermediate/component-archetype/component-archetype-structure.md)
     -   [Webpack Config](/chapter1/intermediate/component-archetype/webpack-config.md)
+    -   [Extract Styles](/chapter1/intermediate/component-archetype/extract-styles.md)
 
 -   [Build a Server Plugin](chapter1/intermediate/build-a-server-plugin.md)
 -   [React App Routes](chapter1/intermediate/react-routes/react-routes.md)
