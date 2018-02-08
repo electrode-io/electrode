@@ -120,7 +120,11 @@ function makeRouteHandler(routeOptions, userContent) {
         ? `${devBundleBase}${chunkNames.js}.bundle.dev.js`
         : `${devBundleBase}bundle.dev.js`;
       const jsChunk = _.find(assets.js, asset => _.includes(asset.chunkNames, chunkNames.js));
-      const cssChunk = assets.css;
+      const cssChunk = _.filter(assets.css,
+        asset => _.some(asset.chunkNames,
+          assetChunkName => _.includes(chunkNames.css, assetChunkName)
+        )
+      );
       const scriptNonce = cspScriptNonce ? ` nonce="${cspScriptNonce}"` : "";
       const styleNonce = cspStyleNonce ? ` nonce="${cspStyleNonce}"` : "";
 
