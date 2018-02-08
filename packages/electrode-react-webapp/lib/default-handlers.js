@@ -62,14 +62,11 @@ module.exports = function setup(options) {
       const data = context.$.data;
       const manifest = bundleManifest();
       const manifestLink = manifest ? `<link rel="manifest" href="${manifest}" />\n` : "";
-      const css = [];
+      let css = [];
 
-      if (WEBPACK_DEV) {
-        if (Array.isArray(data.devCSSBundle)) css.push(...data.devCSSBundle);
-        else if (data.devCSSBundle) css.push(data.devCSSBundle);
-      } else if (Array.isArray(data.cssChunk)) {
-        css.push(...data.cssChunk);
-      } else if (data.cssChunk) css.push(data.cssChunk);
+      if (data.criticalCSS); // leave css as empty array (reduce will turn it into an empty string)
+      else if (WEBPACK_DEV) css = css.concat(data.devCSSBundle);
+      else css = css.concat(data.cssChunk);
 
       const cssLink = css.reduce((acc, file) => {
         acc += `<link rel="stylesheet" href="${
