@@ -9,6 +9,7 @@ notifications:
   email:
     - XChen@walmartlabs.com
 install: eval `fyn bash` && fyn --pg none install
-script: eval `fyn bash` && npm test
+script: eval `fyn bash` &&
+       npm test
 before_install:
   - npm install -g xclap-cli fyn
