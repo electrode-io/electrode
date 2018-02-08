@@ -9,6 +9,9 @@ notifications:
   email:
     - XChen@walmartlabs.com
 install: eval `fyn bash` && fyn --pg none install
-script: eval `fyn bash` && npm test
+script: eval `fyn bash` &&
+       npm test && 
+       curl -O https://raw.githubusercontent.com/danvk/travis-weigh-in/master/weigh_in.py && 
+       python weigh_in.py dist/script-to-track.min.js
 before_install:
   - npm install -g xclap-cli fyn
