@@ -13,10 +13,7 @@ const DEFAULT_BUNDLE = {
   js: "home"
 };
 const MULTI_BUNDLE = {
-  css: [
-    "foo",
-    "bar"
-  ],
+  css: ["foo", "bar"],
   js: "home"
 };
 

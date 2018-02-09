@@ -67,12 +67,8 @@ module.exports = function setup(options) {
         : Array.prototype.concat(data.cssChunk);
 
       const cssLink = css.reduce((acc, file) => {
-        acc += `<link rel="stylesheet" href="${
-          WEBPACK_DEV
-            ? file
-            : prodBundleBase + file.name
-        }" />`;
-        return acc;
+        file = WEBPACK_DEV ? file : prodBundleBase + file.name;
+        return `${acc}<link rel="stylesheet" href="${file}" />`;
       }, "");
 
       const htmlScripts = htmlifyScripts(
