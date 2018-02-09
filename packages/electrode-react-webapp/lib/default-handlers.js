@@ -62,11 +62,9 @@ module.exports = function setup(options) {
       const data = context.$.data;
       const manifest = bundleManifest();
       const manifestLink = manifest ? `<link rel="manifest" href="${manifest}" />\n` : "";
-      let css = [];
-
-      if (data.criticalCSS); // leave css as empty array (reduce will turn it into an empty string)
-      else if (WEBPACK_DEV) css = css.concat(data.devCSSBundle);
-      else css = css.concat(data.cssChunk);
+      const css = WEBPACK_DEV
+        ? Array.prototype.concat(data.devCSSBundle)
+        : Array.prototype.concat(data.cssChunk);
 
       const cssLink = css.reduce((acc, file) => {
         acc += `<link rel="stylesheet" href="${
