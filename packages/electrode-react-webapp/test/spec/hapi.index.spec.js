@@ -265,7 +265,7 @@ describe("hapi electrode-react-webapp", () => {
           expect(res.statusCode).to.equal(200);
             expect(res.result).to.contain("http://127.0.0.1:2992/js/foo.style.css");
             expect(res.result).to.contain("http://127.0.0.1:2992/js/bar.style.css");
-            expect(res.result).to.contain("http://127.0.0.1:2992/js/bundle.dev.js");
+            expect(res.result).to.contain("http://127.0.0.1:2992/js/home.bundle.dev.js");
           stopServer(server);
         })
         .catch(err => {
