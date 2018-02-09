@@ -104,14 +104,27 @@ function makeRouteHandler(routeOptions, userContent) {
       }
 
       const chunkNames = chunkSelector(request);
-      const devCSSBundle = chunkNames.css
-        ? `${devBundleBase}${chunkNames.css}.style.css`
-        : `${devBundleBase}style.css`;
+
+      let devCSSBundle;
+      if (chunkNames.css) {
+        const cssChunks = Array.isArray(chunkNames.css)
+          ? chunkNames.css
+          : [ chunkNames.css ];
+        devCSSBundle = _.map(
+          cssChunks,
+          (chunkName) => `${devBundleBase}${chunkName}.style.css`
+        );
+      } else devCSSBundle = [`${devBundleBase}style.css`];
+
       const devJSBundle = chunkNames.js
         ? `${devBundleBase}${chunkNames.js}.bundle.dev.js`
         : `${devBundleBase}bundle.dev.js`;
       const jsChunk = _.find(assets.js, asset => _.includes(asset.chunkNames, chunkNames.js));
-      const cssChunk = _.find(assets.css, asset => _.includes(asset.chunkNames, chunkNames.css));
+      const cssChunk = _.filter(assets.css,
+        asset => _.some(asset.chunkNames,
+          assetChunkName => _.includes(chunkNames.css, assetChunkName)
+        )
+      );
       const scriptNonce = cspScriptNonce ? ` nonce="${cspScriptNonce}"` : "";
       const styleNonce = cspStyleNonce ? ` nonce="${cspStyleNonce}"` : "";
 

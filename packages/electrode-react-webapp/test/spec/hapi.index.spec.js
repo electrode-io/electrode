@@ -226,6 +226,55 @@ describe("hapi electrode-react-webapp", () => {
     });
   });
 
+  it("should handle multiple entry points - multi-chunk", () => {
+    configOptions.bundleChunkSelector = "test/data/chunk-selector.js";
+    configOptions.stats = "test/data/stats-test-multibundle.json";
+
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/multi-chunk"
+        })
+        .then(res => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.result).to.contain("foo.style.f07a873ce87fc904a6a5.css");
+          expect(res.result).to.contain("bar.style.f07a873ce87fc904a6a5.css");
+          expect(res.result).to.contain("home.bundle.f07a873ce87fc904a6a5.js");
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
+  it("should handle multiple entry points - @dev multi-chunk", () => {
+    configOptions.bundleChunkSelector = "test/data/chunk-selector.js";
+    configOptions.stats = "test/data/stats-test-multibundle.json";
+
+    process.env.WEBPACK_DEV = "true";
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/multi-chunk"
+        })
+        .then(res => {
+          expect(res.statusCode).to.equal(200);
+            expect(res.result).to.contain("http://127.0.0.1:2992/js/foo.style.css");
+            expect(res.result).to.contain("http://127.0.0.1:2992/js/bar.style.css");
+            expect(res.result).to.contain("http://127.0.0.1:2992/js/home.bundle.dev.js");
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
   it("should handle multiple entry points - @dev @empty", () => {
     configOptions.bundleChunkSelector = "test/data/chunk-selector.js";
     configOptions.stats = "test/data/stats-test-multibundle.json";
