@@ -94,6 +94,7 @@ xclap.load({
     desc: "Run CI test",
     task: () => {
       process.env.BUILD_TEST = "true";
+      process.env.NODE_PRESERVE_SYMLINKS = "1";
       const tasks = ["test-boilerplate"];
       let updated;
       return exec("lerna updated")
