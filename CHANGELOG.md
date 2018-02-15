@@ -1,3 +1,61 @@
+# 2/15/2018
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-react-app@5.1.0 `(5.0.5 => 5.1.0)`
+-   electrode-archetype-react-app-dev@5.1.0 `(5.0.5 => 5.1.0)`
+-   electrode-archetype-react-component@5.1.0 `(5.0.3 => 5.1.0)`
+-   electrode-archetype-react-component-dev@5.1.0 `(5.0.3 => 5.1.0)`
+-   electrode-react-webapp@2.2.0 `(2.1.1 => 2.2.0)`
+-   generator-electrode@4.0.3 `(4.0.2 => 4.0.3)`
+
+### Lerna Updated
+
+-   electrode-ignite@2.0.3 `(2.0.2 => 2.0.3)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [patch] set webpack preserve symlinks for loader resolver ([#725](https://github.com/electrode-io/electrode/pull/725)) [commit](http://github.com/electrode-io/electrode/commit/d2ad8a56d74f23ffe7e489700fb79584117cc0dc)
+    -   minor typo fix ([#716](https://github.com/electrode-io/electrode/pull/716)) [commit](http://github.com/electrode-io/electrode/commit/d0b7ee5f08b4c5c468cdf25d390032d4f3a472f0)
+    -   [minor] Update archetype app styles ([#703](https://github.com/electrode-io/electrode/pull/703)) [commit](http://github.com/electrode-io/electrode/commit/397e5dbf4e4d7fe2ffa6127d9a2fb8cc45090feb)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   resolve warnings ([#724](https://github.com/electrode-io/electrode/pull/724)) [commit](http://github.com/electrode-io/electrode/commit/2fd076e42a6f614232d3610249754dac6ecee554)
+    -   [minor] add customize lint feature ([#721](https://github.com/electrode-io/electrode/pull/721)) [commit](http://github.com/electrode-io/electrode/commit/20a0d10e6fb8ab3d8fe3dda2fcf3a09a96c5f75c)
+    -   [minor] component archetype extract styles ([#713](https://github.com/electrode-io/electrode/pull/713)) [commit](http://github.com/electrode-io/electrode/commit/edfd24bf63e8b3f678272972adef3e38ba36ff01)
+    -   resolve check dependencies error ([#714](https://github.com/electrode-io/electrode/pull/714)) [commit](http://github.com/electrode-io/electrode/commit/1b97aa78398dcd083cc547f240d9337b62229736)
+    -   add webpack module resolver plugin to component archetype ([#710](https://github.com/electrode-io/electrode/pull/710)) [commit](http://github.com/electrode-io/electrode/commit/5191abda5063b2da3f310148b7c558fba6d2db33)
+
+-   `packages/electrode-react-webapp`
+
+    -   [chore] prettier format [commit](http://github.com/electrode-io/electrode/commit/3a2cd39c514239af112a816b38946bebe171c5e5)
+    -   Support webpack chunks (css) ([#715](https://github.com/electrode-io/electrode/pull/715)) [commit](http://github.com/electrode-io/electrode/commit/689af787abbb6f0867ef0cbf1d9358025c01b778)
+    -   [minor] mark for minor release [commit](http://github.com/electrode-io/electrode/commit/50938185406e2bc30f80f8e3c50b8edffb53aab0)
+
+-   `packages/generator-electrode`
+
+    -   Update lerna version ([#705](https://github.com/electrode-io/electrode/pull/705)) [commit](http://github.com/electrode-io/electrode/commit/8c8ecf9c1bd41b4de3430e69ddc18bbd69178caa)
+
+-   `samples/demo-component`
+
+    -   [minor] Use fyn and remove webpack demo-component alias ([#718](https://github.com/electrode-io/electrode/pull/718)) [commit](http://github.com/electrode-io/electrode/commit/e61ea31e5ae002f932c573e9c2c264892937cae5)
+    -   update cssModuleStylesSupport Flag ([#717](https://github.com/electrode-io/electrode/pull/717)) [commit](http://github.com/electrode-io/electrode/commit/bdc6f69e1302a0d8856e617d38ba4837c5c8ee35)
+    -   Consumes component from demo folder ([#712](https://github.com/electrode-io/electrode/pull/712)) [commit](http://github.com/electrode-io/electrode/commit/32a5fb7498c4f405e17500179d2ddda196b7f13e)
+
+-   `docs`
+
+    -   update component gitbooks ([#720](https://github.com/electrode-io/electrode/pull/720)) [commit](http://github.com/electrode-io/electrode/commit/2f35b14cb18eef9d4202b13115b04998d1e2f70f)
+    -   [gitbook] update gitbook for archetype styles ([#704](https://github.com/electrode-io/electrode/pull/704)) [commit](http://github.com/electrode-io/electrode/commit/a1dd7e16405883417f61e4b9e53d4b64eb85d57b)
+
+-   `MISC`
+
+    -   [chore] update CI [commit](http://github.com/electrode-io/electrode/commit/1a218919b7c8006c88e64fa9460a98b9fade2cff)
+
 # 1/23/2018
 
 ## Packages
