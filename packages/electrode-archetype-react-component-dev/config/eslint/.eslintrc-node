@@ -1,6 +1,0 @@
----
-extends:
-  - "eslint-config-walmart/configurations/es5-node"
-rules:
-  "react/jsx-wrap-multilines": "warn"
-  "no-multi-spaces": "off"
