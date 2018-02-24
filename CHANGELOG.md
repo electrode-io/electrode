@@ -1,3 +1,16 @@
+# 2/24/2018
+
+## Packages
+
+-   electrode-archetype-react-component@4.0.2 `(4.0.1 => 4.0.2)`
+-   electrode-archetype-react-component-dev@4.0.2 `(4.0.1 => 4.0.2)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   add customize eslint to v4 ([#729](https://github.com/electrode-io/electrode/pull/729)) [commit](http://github.com/electrode-io/electrode/commit/8d6c7dc23e0433ad5eaa0f52d3f80290a8ff8002)
+
 # 11/20/2017
 
 ## Packages
