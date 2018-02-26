@@ -1,3 +1,16 @@
+# 2/26/2018
+
+## Packages
+
+-   electrode-archetype-react-app@5.1.1 `(5.1.0 => 5.1.1)`
+-   electrode-archetype-react-app-dev@5.1.1 `(5.1.0 => 5.1.1)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   add extension log to nodemon watch list ([#732](https://github.com/electrode-io/electrode/pull/732)) [commit](http://github.com/electrode-io/electrode/commit/75589124e67a4fa6f507df63c254f224ae44022f)
+
 # 2/15/2018
 
 ## Packages
