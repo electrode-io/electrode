@@ -571,7 +571,7 @@ Individual .babelrc files were generated for you in src/client and src/server
           : `node ${AppMode.src.server}`;
         return exec(
           `nodemon`,
-          `--delay 1 -C --ext js,jsx,json,yaml ${watches}`,
+          `--delay 1 -C --ext js,jsx,json,yaml,log ${watches}`,
           `--exec ${nodeRunApp}`
         );
       }
