@@ -17,12 +17,7 @@ const sassLoader = require.resolve("sass-loader");
 const demoAppPath = Path.resolve(process.cwd(), "..", "..", "demo-app");
 const archetypeAppPath = Path.resolve(demoAppPath, "archetype", "config");
 
-const archetypeApp = optionalRequire(archetypeAppPath) || {
-  webpack: {
-    cssModulesSupport: undefined,
-    cssModuleStylusSupport: undefined
-  }
-};
+const archetypeApp = optionalRequire(archetypeAppPath) || { webpack: {} };
 const archetypeAppWebpack = archetypeApp.webpack;
 let cssModuleSupport = archetypeAppWebpack.cssModuleSupport;
 const cssModuleStylusSupport = archetypeAppWebpack.cssModuleStylusSupport;
