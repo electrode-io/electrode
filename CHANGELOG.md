@@ -1,3 +1,16 @@
+# 3/6/2018
+
+## Packages
+
+-   electrode-archetype-react-app@4.1.1 `(4.1.0 => 4.1.1)`
+-   electrode-archetype-react-app-dev@4.1.1 `(4.1.0 => 4.1.1)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   add autoprefixer for ie10 ([#743](https://github.com/electrode-io/electrode/pull/743)) [commit](http://github.com/electrode-io/electrode/commit/b19192ad9454f470ac06975f25497b0c0eb6838e)
+
 # 2/24/2018
 
 ## Packages
