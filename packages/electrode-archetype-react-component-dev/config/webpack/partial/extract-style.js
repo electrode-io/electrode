@@ -2,6 +2,7 @@
 
 const Path = require("path");
 const glob = require("glob");
+const optionalRequire = require("optional-require")(require);
 
 const atImport = require("postcss-import");
 const cssnext = require("postcss-cssnext");
@@ -14,12 +15,10 @@ const stylusLoader = require.resolve("stylus-relative-loader");
 const sassLoader = require.resolve("sass-loader");
 
 const demoAppPath = Path.resolve(process.cwd(), "..", "..", "demo-app");
-const archetypeAppPath = Path.resolve(
-  demoAppPath,
-  "archetype",
-  "config"
-);
-const archetypeAppWebpack = require(archetypeAppPath).webpack;
+const archetypeAppPath = Path.resolve(demoAppPath, "archetype", "config");
+
+const archetypeApp = optionalRequire(archetypeAppPath) || { webpack: {} };
+const archetypeAppWebpack = archetypeApp.webpack;
 let cssModuleSupport = archetypeAppWebpack.cssModuleSupport;
 const cssModuleStylusSupport = archetypeAppWebpack.cssModuleStylusSupport;
 
@@ -72,8 +71,8 @@ module.exports = function() {
       use: cssModuleSupport ? cssModuleQuery : cssQuery
     },
     {
-     test: /\.scss$/,
-     use: cssModuleSupport ? cssScssQuery : scssQuery
+      test: /\.scss$/,
+      use: cssModuleSupport ? cssScssQuery : scssQuery
     },
     {
       test: /\.styl$/,
