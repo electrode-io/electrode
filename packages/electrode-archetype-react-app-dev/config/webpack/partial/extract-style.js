@@ -139,15 +139,12 @@ module.exports = function() {
               : [];
           },
           stylus: {
-            use: () => {
-              return !cssModuleSupport
-                ? [
-                    autoprefixer({
-                      browsers: ["last 2 versions", "ie >= 9", "> 5%"]
-                    })
-                  ]
-                : [];
-            }
+            use: !cssModuleSupport ? [
+                autoprefixer({
+                  browsers: ["last 2 versions", "ie >= 9", "> 5%"]
+                })
+              ]
+            : []
           }
         }
       })
