@@ -7,6 +7,9 @@ A demo Electrode Component based on the latest Component Archetype.
 If you haven't yet, please install `fyn` to your global:
 ```
 npm install -g fyn
+```
+> Note: if your `fyn` version is < 1.47, you may need to run below:
+```
 eval `fyn bash`
 ```
 
