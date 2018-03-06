@@ -36,13 +36,11 @@
   ],
   "license": "Apache-2.0",
   "dependencies": {
+    "component-playground": "^3.0.0",
     "object-assign": "^4.1.0"
   },
   "devDependencies": {
     "electrode-archetype-react-component": "^5",
     "electrode-archetype-react-component-dev": "^5"
-  },
-  "peerDependencies": {
-    "component-playground": "*"
   }
 }
