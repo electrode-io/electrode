@@ -13,7 +13,7 @@ module.exports = function(options) {
 
   const clientVendor = Path.join(AppMode.src.client, "vendor/");
   const babelExclude = x => {
-    if (x.indexOf("/node_modules") >= 0) return true;
+    if (x.indexOf("node_modules") >= 0) return true;
     if (x.indexOf(clientVendor) >= 0) return true;
     return false;
   };
