@@ -25,7 +25,9 @@ export const warningsErrorsStyles = () => {
     error: {
       marginBottom: 10,
       marginTop: 10,
-      display: "inline-block"
+      marginRight: 90,
+      display: "inline-block",
+      whiteSpace: "normal"
     },
     expandCodeButton: {
       display: "block",
