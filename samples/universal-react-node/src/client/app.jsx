@@ -10,6 +10,9 @@ import rootReducer from "./reducers";
 import DevTools from "./devtools";
 import updateStorage from "./middleware";
 
+import { I18nextProvider } from "react-i18next";
+import i18n from "electrode-archetype-react-app/i18next";
+
 require.ensure(["./sw-registration"], (require) => {
   require("./sw-registration")(notify);
 }, "sw-registration");
@@ -25,12 +28,15 @@ window.webappStart = () => {
   const initialState = window.__PRELOADED_STATE__;
   const store = createStore(rootReducer, initialState, enhancer);
   render(
+    <I18nextProvider i18n={ i18n }>
       <Provider store={store}>
         <div>
           <Router history={browserHistory}>{routes}</Router>
           <DevTools />
         </div>
-      </Provider>,
+       
+      </Provider>
+      </I18nextProvider>,
     document.querySelector(".js-content")
   );
 };
