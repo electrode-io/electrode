@@ -7,6 +7,5 @@
     "SSR Caching Template Type Example": "SSR缓存模板类型示例",
     "Push Notifications Example": "推送通知范例",
     "Todo List Example": "待办事项列表范例",
-    "MongoDB Example": "MongoDB范例",
-    "This data is obtained from Redux store": "这些数据来自Redux store"
+    "MongoDB Example": "MongoDB范例"
 }
