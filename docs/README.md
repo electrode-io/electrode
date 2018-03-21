@@ -13,7 +13,7 @@
 
 ## Getting Started
 
--   To jump right in and create an app with the Electrode App Generator, see [Getting Started With Electrode](/chapter1/quick-start/start-with-electrode.md).
+-   To jump right in and create an app with the Electrode App Generator, see [Getting Started With Electrode](https://docs.electrode.io/chapter1/quick-start/start-with-electrode.md).
 
 -   For all the information you need about Electrode (and Electrode Native!), visit <http://www.electrode.io>.
 
