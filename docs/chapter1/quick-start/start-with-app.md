@@ -2,10 +2,10 @@
 
 >Before proceeding, be sure to verify the [Requirements](/overview/requirements.md) for setting up your development environment.
 
-**Note: For windows, make sure your path does not contain any spaces**
+**Note: Make sure the directory you will work from does not contain any spaces in the path.**
 Bad
 ```bash
-c:/work space/electrode >
+c:/work\ space/electrode >
 ```
 Ok
 ```bash
