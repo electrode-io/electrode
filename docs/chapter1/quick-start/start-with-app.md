@@ -2,6 +2,16 @@
 
 >Before proceeding, be sure to verify the [Requirements](/overview/requirements.md) for setting up your development environment.
 
+**Note: Make sure the directory you will work from does not contain any spaces in the path.**
+Bad
+```bash
+c:/work\ space/electrode >
+```
+Ok
+```bash
+c:/work_space/electrode >
+```
+
 ## Quick Guide
 
 You can start your app using the Ignite Menu or using the Ignite Single task.
