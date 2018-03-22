@@ -1,11 +1,11 @@
 /*
  * Looks at each commit that is not a "Merge pull request", figure out
  * the packages it modified and group the commit messages by package.
- * 
+ *
  * Then check for [major], [minor], [patch] in the commit message, and
- * automatically generate the new package tag name with the would be 
+ * automatically generate the new package tag name with the would be
  * updated version.
- * 
+ *
  * Write all these to the file CHANGELOG.md.
  *
  */
