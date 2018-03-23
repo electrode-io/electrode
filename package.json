@@ -7,7 +7,7 @@
     "test": "eval `fyn bash` && npm run bootstrap && NODE_PRESERVE_SYMLINKS=1 lerna run test --ignore=electrode-webpack-reporter && npm run test-reporter && clap build-test",
     "test-generator": "eval `fyn bash` && NODE_PRESERVE_SYMLINKS=1 clap test-generator",
     "test-boilerplate": "eval `fyn bash` && NODE_PRESERVE_SYMLINKS=1 clap test-boilerplate",
-    "bootstrap": "eval `fyn bash` && fynpo",
+    "bootstrap": "fynpo",
     "clean": "npm run nuke && npm run nuke-packages && npm run nuke-samples",
     "nuke": "rm -rf node_modules tmp lerna-debug.log npm-debug.log",
     "nuke-packages": "rm -rf packages/*/node_modules packages/*/coverage",
