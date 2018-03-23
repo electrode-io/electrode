@@ -67,7 +67,8 @@ module.exports = class ModuleResolver {
       //
       const resolved = optionalRequire.resolve(
         requireAt(atPath),
-        Path.join(name, "package.json"),
+        // ensure require request paths are POSIX
+        Path.posix.join(name, "package.json"),
         false
       );
 
