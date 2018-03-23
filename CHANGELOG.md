@@ -1,3 +1,61 @@
+# 3/23/2018
+
+## Packages
+
+-   electrode-archetype-react-app@5.1.2 `(5.1.1 => 5.1.2)`
+-   electrode-archetype-react-app-dev@5.1.2 `(5.1.1 => 5.1.2)`
+-   electrode-archetype-react-component@5.1.1 `(5.1.0 => 5.1.1)`
+-   electrode-archetype-react-component-dev@5.1.1 `(5.1.0 => 5.1.1)`
+-   electrode-react-webapp@2.2.1 `(2.2.0 => 2.2.1)`
+-   electrode-webpack-reporter@0.4.3 `(0.4.2 => 0.4.3)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   fix for windows ([#760](https://github.com/electrode-io/electrode/pull/760)) [commit](http://github.com/electrode-io/electrode/commit/e77b81ea557003700dc0d28b391c05f1688845b3)
+    -   enable cors to debug unit tests ([#723](https://github.com/electrode-io/electrode/pull/723)) [commit](http://github.com/electrode-io/electrode/commit/9631384fb4e06e98fb21b2722397b76d0607879c)
+    -   0x20 ([#757](https://github.com/electrode-io/electrode/pull/757)) [commit](http://github.com/electrode-io/electrode/commit/d1b170a5894a0064b3fb6fc78c2e6dded4a2a1e7)
+    -   [patch][bug] fixes bug causing node_modules to not be excluded from babel on windows ([#736](https://github.com/electrode-io/electrode/pull/736)) [commit](http://github.com/electrode-io/electrode/commit/ac588441e9ad9f8c72bb082890bcaa34be812546)
+    -   fix auto-prefixer in archetype app ([#744](https://github.com/electrode-io/electrode/pull/744)) [commit](http://github.com/electrode-io/electrode/commit/aa39e09c1d641bd22de343e9eec7e351680575e4)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   [patch] optionalRequire archetype/config folder for component archetype ([#733](https://github.com/electrode-io/electrode/pull/733)) [commit](http://github.com/electrode-io/electrode/commit/74298d228dba47f374734aec36f5b40ea3c6c077)
+    -   fix auto-prefixer in archetype component ([#745](https://github.com/electrode-io/electrode/pull/745)) [commit](http://github.com/electrode-io/electrode/commit/72c4afe17c757a1379f2e41618530ed273d3fab3)
+
+-   `packages/electrode-react-webapp`
+
+    -   prepublishOnly [commit](http://github.com/electrode-io/electrode/commit/b6035fd571a73ca0d5d8aec8d4755d8cf50a3ec3)
+
+-   `packages/electrode-webpack-reporter`
+
+    -   Webpack reporter text overflow issue ([#731](https://github.com/electrode-io/electrode/pull/731)) [commit](http://github.com/electrode-io/electrode/commit/5e959b17957b9ab6d31b2e8745e995348f9c9c3d)
+    -   fix error message display due to broken code check ([#761](https://github.com/electrode-io/electrode/pull/761)) [commit](http://github.com/electrode-io/electrode/commit/723f3d4b0aa2fb537b2f5960f192286be0b7cb50)
+
+-   `samples/demo-component`
+
+    -   [patch] Fix sample demo-component demo-app tests ([#734](https://github.com/electrode-io/electrode/pull/734)) [commit](http://github.com/electrode-io/electrode/commit/262921336d378c810f109ecb356c99d81a38ed31)
+
+-   `samples/electrode-demo-index`
+
+    -   add demo-component as dependency ([#728](https://github.com/electrode-io/electrode/pull/728)) [commit](http://github.com/electrode-io/electrode/commit/e6f9ff08320ee3122dc4eaccf4d069efeb577269)
+
+-   `docs`
+
+    -   Fix link ([#755](https://github.com/electrode-io/electrode/pull/755)) [commit](http://github.com/electrode-io/electrode/commit/d490c2b4b3ddf3fbb995b3d38814a8a912ff0d29)
+    -   spaces ([#756](https://github.com/electrode-io/electrode/pull/756)) [commit](http://github.com/electrode-io/electrode/commit/c4a3fc122b3b43ece7fcce53c306fbf4204783b4)
+
+-   `tools`
+
+    -   0x20 ([#757](https://github.com/electrode-io/electrode/pull/757)) [commit](http://github.com/electrode-io/electrode/commit/d1b170a5894a0064b3fb6fc78c2e6dded4a2a1e7)
+
+-   `MISC`
+
+    -   let fynpo take care of fyn setup [commit](http://github.com/electrode-io/electrode/commit/80a8d70ffb5c04eb415f23e03c49ac03fee81a3a)
+    -   handle windows [commit](http://github.com/electrode-io/electrode/commit/c9e4a6bb41e6f961464e8668935dca0db2ad5989)
+    -   Update license year to 2016-present ([#735](https://github.com/electrode-io/electrode/pull/735)) [commit](http://github.com/electrode-io/electrode/commit/9a00267f35f87b8a24d453c00160b6f5642dce6c)
+
 # 2/26/2018
 
 ## Packages
