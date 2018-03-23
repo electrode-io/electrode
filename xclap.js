@@ -9,6 +9,7 @@ const Path = require("path");
 const yoTest = require("yeoman-test");
 const _ = require("lodash");
 
+const isWin32 = process.platform.startsWith("win32");
 const packagesDir = Path.join(__dirname, "packages");
 
 const pullLocalPackages = dir => {
@@ -53,10 +54,12 @@ const runAppTest = (dir, forceLocal) => {
     }
   };
 
+  const fynSetup = isWin32 ? "fyn win --quiet && fynwin" : `eval "$(fyn bash)"`;
+  const localClap = Path.join("node_modules", ".bin", "clap");
   return exec(
     { cwd: dir },
-    `eval "$(fyn bash)" && fyn --pg simple -q v i && node_modules/.bin/clap ?fix-generator-eslint`
-  ).then(() => exec({ cwd: dir }, `eval "$(fyn bash)" && npm test`));
+    `${fynSetup} && fyn --pg simple -q v i && ${localClap} ?fix-generator-eslint`
+  ).then(() => exec({ cwd: dir }, `${fynSetup} && npm test`));
 };
 
 const testGenerator = (testDir, clean, prompts) => {
