@@ -576,6 +576,7 @@ Individual .babelrc files were generated for you in src/client and src/server
         const serverIndex = Path.join(AppMode.src.server, "index.js");
         return exec(
           `nodemon`,
+          `--inspect`,
           `--delay 1 -C --ext js,jsx,json,yaml ${watches}`,
           `--exec ${node} ${serverIndex}`
         );
