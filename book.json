@@ -1,6 +1,6 @@
 {
   "root": "./docs",
-  "gitbook": "3.2.2",
+  "gitbook": "3.2.3",
   "title": "Electrode Developer's Guide",
   "description": "Electrode Platform Developer's Guide",
   "plugins": [

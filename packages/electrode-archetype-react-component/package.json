@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-component",
-  "version": "4.0.0",
+  "version": "5.1.1",
   "description": "Archetype - Electrode Component",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -27,8 +27,11 @@
     "package-json-validator": "^0.6.1",
     "xclap": "^0.2.0"
   },
+  "optionalDependencies": {
+    "electrode-archetype-opt-react": "^1.0.0"
+  },
   "engines": {
-    "node": ">= 4 <= 8",
+    "node": ">= 6 <= 8",
     "npm": ">= 3 <= 5"
   }
 }

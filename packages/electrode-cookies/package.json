@@ -1,6 +1,6 @@
 {
   "name": "electrode-cookies",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Electrode ISO cookies lib",
   "main": "lib/index.js",
   "browser": "lib/csindex.js",

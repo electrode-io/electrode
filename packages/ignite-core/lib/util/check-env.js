@@ -21,10 +21,21 @@ module.exports = Object.assign(Lib, {
   },
 
   npm: function npm(version) {
-    const message =
-      semverCompare(version, "3.0.0") >= 0
-        ? `Electrode should work for you.`
-        : `Electrode requires npm version 3 and up.`;
+    /*
+     * Note:
+     * electrode-ignite is facing an incorrect installation issue under npm v5.4.x
+     */
+    let message = "";
+    if (semverCompare(version, "5.4.0") >= 0 && semverCompare(version, "5.5.0") < 0) {
+      message = `Electrode should work for you.` +
+        ` Note: Please avoid npm version v5.4.x,` +
+        ` it may cause an incorrect installation while using electrode ignite.`;
+    } else {
+      message =
+        semverCompare(version, "3.0.0") >= 0
+          ? `Electrode should work for you.`
+          : `Electrode requires npm version 3 and up.`;
+    }
     logger.log(chalk.yellow(`You are using npm version ${version}. ${message}`));
   }
 });

@@ -14,7 +14,9 @@ module.exports = {
 
 If nothing is set, then default is to use `react`.
 
-The other lib that's planned for support is [inferno](https://github.com/infernojs/inferno).
+The other lib that is supported:
+
+-   [inferno](https://github.com/infernojs/inferno).
 
 Note that since many other modules could depend on the original React lib so even if an app choose to use inferno, the `react` modules could still be installed.
 
@@ -29,7 +31,7 @@ In `package.json`:
 ```js
 {
   "optionalDependencies": {
-    "electrode-archetype-opt-react": "^0.1.0"
+    "electrode-archetype-opt-react": "^1.0.0"
   }
 }
 ```

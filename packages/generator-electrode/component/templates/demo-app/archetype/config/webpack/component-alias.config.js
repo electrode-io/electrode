@@ -10,15 +10,16 @@ const components = Fs.readdirSync(repoPackagesDir);
 
 const config = {
   resolve: {
-    alias: {}
-  },
-  modules: []
+    alias: {},
+    modules: []
+  }
 };
 
-components.forEach(name => {
-  config.resolve.alias[name] = Path.join(repoPackagesDir, name, "src");
-  config.modules.push(Path.join(repoPackagesDir, name));
-  config.modules.push(Path.join(repoPackagesDir, name, "node_modules"));
+components.forEach(folderName => {
+  const packageName = require(Path.join(repoPackagesDir, folderName, "package.json")).name;
+  config.resolve.alias[packageName] = Path.join(repoPackagesDir, folderName, "src");
+  config.resolve.modules.push(Path.join(repoPackagesDir, folderName));
+  config.resolve.modules.push(Path.join(repoPackagesDir, folderName, "node_modules"));
 });
 
 module.exports = config;

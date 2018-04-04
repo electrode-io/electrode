@@ -39,7 +39,7 @@ module.exports = {
       "address": process.env.HOST_IP || "0.0.0.0",
       "port": portFromEnv(),
       "routes": {
-        "cors": true
+        "cors": false
       },
       "state": {
         "ignoreErrors":true

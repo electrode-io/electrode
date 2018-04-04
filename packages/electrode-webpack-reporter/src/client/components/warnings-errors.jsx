@@ -42,10 +42,11 @@ class WarningsErrors extends React.Component {
           </h2>
         </div>
 
-        {this.props.errors.map((e) => {
-          const errorHasExpandableCode = e.indexOf(")") > 0;
-          const errorTitle = errorHasExpandableCode ? e.slice(0, e.indexOf(")") + 1) : e;
-          if (errorHasExpandableCode) {
+        {this.props.errors.map((errStr) => {
+          const codeIdx = errStr.indexOf("<span");
+          const hasCode = codeIdx > 0;
+          const errorTitle = hasCode ? errStr.slice(0, codeIdx) : errStr;
+          if (hasCode) {
             return (<div>
                 <Card>
                   <CardHeader
@@ -66,7 +67,7 @@ class WarningsErrors extends React.Component {
                       expander={true} />
                   </CardHeader>
                   <CardText expandable={true} style={{backgroundColor: "black"}}>
-                    <pre dangerouslySetInnerHTML={{__html: e.slice(e.indexOf("<span"), e.length)}}/>
+                    <pre dangerouslySetInnerHTML={{__html: errStr.slice(codeIdx, errStr.length)}}/>
                   </CardText>
                 </Card>
               </div>);

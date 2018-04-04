@@ -1,6 +1,6 @@
 # Redux Router Engine
 
-Electrode Redux Router Engine is a tool that handles async data for React Server Side Rendering using [react-router], Redux, and the [Redux Server Rendering] pattern.
+The Electrode Redux Router Engine is a tool that handles asynchronous data for React Server Side Rendering using [react-router], Redux, and the [Redux Server Rendering] pattern.
 
 ## Module: [electrode-redux-router-engine]
 

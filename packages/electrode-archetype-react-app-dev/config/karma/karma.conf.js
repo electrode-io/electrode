@@ -30,6 +30,7 @@ module.exports = function(config) {
       "karma-phantomjs-shim",
       "karma-phantomjs-launcher",
       "karma-safari-launcher",
+      "karma-sonarqube-unit-reporter",
       "karma-sourcemap-loader",
       "karma-spec-reporter",
       "karma-webpack"
@@ -55,11 +56,22 @@ module.exports = function(config) {
     logLevel: config.LOG_INFO,
     colors: true,
     autoWatch: false,
-    reporters: ["spec", "coverage"],
+    reporters: ["spec", "sonarqubeUnit", "coverage"],
     browserNoActivityTimeout: 60000,
     coverageReporter: {
-      reporters: [{ type: "json", file: "coverage.json" }, { type: "lcov" }, { type: "text" }],
+      reporters: [
+        { type: "json", subdir: ".", file: "coverage.json" },
+        { type: "lcov", subdir: "." },
+        { type: "text", subdir: "." }
+      ],
       dir: Path.resolve("coverage", "client")
+    },
+    sonarQubeUnitReporter: {
+      sonarQubeVersion: "5.x",
+      outputFile: "gunit.xml",
+      outputDir: Path.resolve("coverage", "client"),
+      overrideTestDescription: true,
+      useBrowserName: false
     },
     captureTimeout: 100000,
     singleRun: true

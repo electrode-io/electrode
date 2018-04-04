@@ -1,8 +1,8 @@
-# Server Config
+# Server Configuration
 
-### Server Config and Confippet
+### Server Configuration and Confippet
 
-Out of the box we're given [Confippet](https://github.com/electrode-io/electrode-confippet), a versatile utility for managing your NodeJS application configuration. Its goal is customization and extensibility, but it offers a preset config out of the box inside **Your Awesome (Electrode) App**:
+[Confippet](https://github.com/electrode-io/electrode-confippet) is a versatile utility for managing your NodeJS application configuration. Confippet provides customization and extensibility, but it also offers a preset configuration out-of-the-box. **Your Awesome (Electrode) App** includes the following three JSON files:
 
     config
         ├── default.json
@@ -11,7 +11,7 @@ Out of the box we're given [Confippet](https://github.com/electrode-io/electrode
 
 We'll need to extend our default.json to include our `friends` plugin and module `./src/server/plugins/friends`.
 
-Navigate to `<your-awesome-app>/config/development.json`. Copy, paste and save `friends` plugin:
+Navigate to `<your-awesome-app>/config/development.json`. Copy, paste, and save the `friends` plugin:
 
     {
       "plugins": {
@@ -21,7 +21,7 @@ Navigate to `<your-awesome-app>/config/development.json`. Copy, paste and save `
       }
     }
 
-You can learn more about Confippet and ways to extend your config in our Advanced Electrode App with the [Confippet](https://github.com/electrode-io/electrode-confippet) stand alone module.
+You can learn more about Confippet and ways to extend your configuration in our Advanced Electrode App with the [Confippet](https://github.com/electrode-io/electrode-confippet) stand alone module.
 
 We should update our app test to reflect the changes we have made. Navigate to `<your-awesome-app>/test/client/components/home.spec.jsx`. Override the existing code by copying and pasting the code below:
 
@@ -79,6 +79,6 @@ When all of our guests are invited to the House Party, our CSS modules kick in a
 
 Feel free to add your own personal touch and build out your Resource List House Party. You can compare your work to our [Heroku deployed example app](https://electrode-example-app.herokuapp.com/).
 
-When you're ready, you can deploy Your Awesome App to [Heroku](https://devcenter.heroku.com/categories/deployment) by following the previous steps in our [Getting Started: Build More](/chapter1/quick-start/build-component.md) section. If you choose this step, make sure you set all of the Heroku configurations, including the one for our [GitHub Api](/chapter1/intermediate/build-a-server-plugin.md).
+When you're ready, you can deploy Your Awesome App to [Heroku](https://devcenter.heroku.com/categories/deployment) by following the previous steps in our [Getting Started: Build More](/chapter1/quick-start/build-app.md) section. If you choose this step, make sure you set all of the Heroku configurations, including the one for our [GitHub Api](/chapter1/intermediate/build-a-server-plugin.md).
 
 You can also navigate to [Intermediate: More Deployments](/chapter1/intermediate/more-deployments.md) to learn how to deploy with [Docker](/chapter1/intermediate/more-deployments/docker.md) and [Kubernetes](/chapter1/intermediate/more-deployments/kubernetes.md).

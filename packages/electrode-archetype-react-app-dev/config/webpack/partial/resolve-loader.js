@@ -7,6 +7,7 @@ const archetype = require("electrode-archetype-react-app/config/archetype");
 
 module.exports = {
   resolveLoader: {
+    symlinks: !archetype.webpack.preserveSymlinks,
     modules: [Path.resolve("lib"), process.cwd()]
       .concat(archetype.webpack.loaderDirectories)
       .filter(_.identity),

@@ -87,6 +87,7 @@ class WebpackReporter extends EventEmitter {
     }
     app.get(RoutePaths.DATA, this._data.bind(this));
     app.get(RoutePaths.STATS, this._stats.bind(this));
+    app.get(`${RoutePaths.BASE}/*`, this._webReport.bind(this));
 
     if (!this.options.skipSocket) {
       const io = SocketIO(this.options.socketPort);

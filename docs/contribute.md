@@ -1,19 +1,20 @@
-# Contribute
+# Contribute!
 
-If you are interested in helping out, here are the list of open [Issues](http://www.electrode.io/docs/contribute.html#issues) on the Electrode repos below and a running list of [Features](http://www.electrode.io/docs/contribute.html#features)
+If you are interested in contributing, check out the list of open [Issues](http://www.electrode.io/docs/contribute.html#issues) and [Features](http://www.electrode.io/docs/contribute.html#features).
 
-for contributors. Make an impact: Help to maintain Electrode and make it even greater.
+We encourage your contributions to the Electrode open source project! Make an impact! Help maintain Electrode and make it even greater.
 
-### Fix Issues
+### Open Issues
 
 ---
 
 [electrode](https://github.com/electrode-io/electrode)
 
-* [232](https://github.com/electrode-io/electrode/issues/232) Boilerplate not running in Production mode, test fails
-* [135](https://github.com/electrode-io/electrode/issues/135) \[HMR\] css are not updated in hot mode
+* [232](https://github.com/electrode-io/electrode/issues/232) The boilerplate is not running in Production mode and the test fails.
+* [135](https://github.com/electrode-io/electrode/issues/135) \[HMR\] The CSS files are not updated in hot mode.
 
-### Help With Features
+### Features
+The following is a list of features that you can contribute to.
 
 ---
 

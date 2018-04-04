@@ -2,26 +2,52 @@
  * Client tests
  */
 import React from "react";
-import { shallow } from "enzyme";
+import { mount } from "enzyme";
 
 import ElectrodeDemoIndex from "src/index";
 
 describe("index", () => {
+  let container;
+  let component;
+
+  beforeEach(() => {
+    container = document.createElement("div");
+  });
+
+  afterEach(() => {
+    component.unmount();
+  });
+
   it("should render into the document", () => {
-    const component = shallow(React.createElement(ElectrodeDemoIndex));
+    component = mount(<ElectrodeDemoIndex />, container);
     expect(component).to.not.be.null;
   });
 
-  it("should throw a warning when calling _setDemoContext", () => {
-    class Demo extends ElectrodeDemoIndex {
-      componentDidMount() {
-        this._setDemoContext({libraryScope: {}, components: []});
-      }
-    }
+  it("should render component-documentation", () => {
+    component = mount(<ElectrodeDemoIndex scope={{}} />, container);
+    expect(component.html()).to.equal(
+      "<div class=\"component-documentation\"></div>"
+    );
+  });
 
-    // TODO: fix this dummy test to check for console warning
-    // https://gecgithub01.walmart.com/electrode/demo-index/issues/10
-    const component = shallow(React.createElement(Demo));
-    expect(component).to.not.be.null;
+  it("should render component-documentation with components", () => {
+    component = mount(
+      <ElectrodeDemoIndex
+        components={[
+          {
+            title: "electrode-demo-index",
+            examples: {
+              map: () => {}
+            }
+          }
+        ]}
+      />,
+      container
+    );
+    expect(component.html()).to.equal(
+      "<div class=\"component-documentation\"><div>" +
+        "<h3 id=\"electrode-demo-index\">" +
+        "electrode-demo-index</h3></div></div>"
+    );
   });
 });

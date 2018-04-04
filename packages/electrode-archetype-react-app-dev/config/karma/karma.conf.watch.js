@@ -13,6 +13,7 @@ const Path = require("path");
 module.exports = function(config) {
   dev(config);
   const settings = {
+    crossOriginAttribute: false,
     files: [
       // Test bundle (must be created via `npm run dev|hot|server-test`)
       "http://127.0.0.1:3001/assets/bundle.js"

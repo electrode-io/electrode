@@ -10,7 +10,7 @@ const logger = require("../util/logger");
 
 /* eslint-disable no-invalid-this */
 
-module.exports = function(name) {
+module.exports = function(name, npmReg) {
   let versions;
   let executed = false;
   name = name || "electrode-ignite";
@@ -21,7 +21,7 @@ module.exports = function(name) {
   function execute(options) {
     executed = true;
     spinner.start();
-    return Promise.all([checkModule.globalInstalled(name), checkModule.latest(name)])
+    return Promise.all([checkModule.globalInstalled(name), checkModule.latest(name, npmReg)])
       .then(ver => {
         versions = ver;
         spinner.stop();
@@ -34,7 +34,7 @@ module.exports = function(name) {
         return helpers.yesNoPrompt(msg).then(yes => {
           if (!yes) return undefined;
           return helpers
-            .npmInstall(name, ver[1], true)
+            .npmInstall(name, ver[1], true, npmReg)
             .then(() => {
               logger.log(`Please restart ${dispName} for the new version.`);
             })
@@ -68,7 +68,7 @@ module.exports = function(name) {
     setTimeout(() => {
       Promise.all([
         checkModule.globalInstalled(name),
-        checkModule.latestOnceDaily(name)
+        checkModule.latestOnceDaily(name, null, npmReg)
       ]).then(v => {
         versions = v;
         if (!executed && checkModule.isNewVersion(versions[0], versions[1])) {

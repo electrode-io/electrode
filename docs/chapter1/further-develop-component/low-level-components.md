@@ -1,8 +1,12 @@
 # Low-Level Components
 
-#### Develop the new generated component
+#### Develop the new generated components
 
-From here, you can develop further based on the generated the electrode component. Let's make a visual library for our present stack and exciting technologies! Create a file called `<your-component>/packages/<componentName>/src/components/guest-list.jsx`. Copy the code from below into this file:
+Now you can continue building the generated Electrode component. Let's make a visual library for our present stack and exciting technologies!  
+
+Create a file titled guest-list.jsx in the following location: `<your-component>/packages/<componentName>/src/components/guest-list.jsx`.  
+
+Copy and paste the code from below into this new file:
 
 ```js
 
@@ -46,7 +50,7 @@ export default GuestList;
 
 ```
 
-Create another file called `<your-component>/packages/<componentName>/src/components/render-friend.jsx`. Copy the code from below into this file. Don't worry—we'll cover the helper and css modules in the next section.
+Create another file called `<your-component>/packages/<componentName>/src/components/render-friend.jsx`. Copy and paste the code from below into this file. Don't worry—we'll cover the helper and CSS modules in the next section.
 
 ```js
 

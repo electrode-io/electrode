@@ -8,7 +8,10 @@
 
 ### Prerequisites
 
-Make sure you have installed NodeJS >= 4.x and npm >= 3.x, and [xclap-cli].
+Make sure the following is installed:  
+* NodeJS 4.x or later  
+* npm 3.x or later  
+* [xclap-cli]
 
 ```bash
 $ node -v
@@ -20,27 +23,21 @@ $ npm install -g xclap-cli
 
 ### Check it out
 
-To try out this ready made sample app, use git to clone the repo:
-
+To try out this existing sample app:
+1. Clone the Git repository.
 ```bash
 $ git clone https://github.com/electrode-io/electrode.git
 $ cd electrode/samples/universal-material-ui
 $ npm install
 $ clap dev
 ```
+2. Use a browser to navigate to `http://localhost:3000` and view the sample app with material-ui components.
 
-Now navigate your browser to `http://localhost:3000` to see the sample app with material-ui components.
-
-## About
-
-This app was created with the following steps.
-
-### Generate an Electrode App
+### To Generate the Sample Electrode App
 
 The first part of the process is to generate an Electrode Universal App using the [Yeoman](http://yeoman.io/) generator. Follow the steps below:
 
-1.  First, generate the Electrode Universal App with the following commands:
-
+1.  Generate the Electrode Universal App:
 ```bash
 $ npm install -g yo generator-electrode
 $ mkdir react-sample-material-ui
@@ -50,15 +47,15 @@ $ yo electrode
 ```
 
 1.  Run `clap dev` in the newly generated app
-2.  Navigate to `http://localhost:3000` to make sure the app is working.
+2.  Navigate to `http://localhost:3000` to verify that the app is working.
 
 ### Add material-ui
 
-The second part of the process is to add material-ui dependencies. Follow the steps below:
+The second part of the process is to add material-ui dependencies.
 
-1.  Stop the app and install material-ui dependencies: `$ npm install material-ui react-tap-event-plugin --save`
+1.  Stop the app and install the material-ui dependencies: `$ npm install material-ui react-tap-event-plugin --save`
 
-2.  Restart `clap dev` and reload browser to make sure things are still working.
+2.  Restart `clap dev` and reload the browser to verify the app is still working.
 
 3.  Add material-ui's required font, _Roboto_, to `server/plugins/webapp/index.html`
 
@@ -66,11 +63,11 @@ The second part of the process is to add material-ui dependencies. Follow the st
 
 5.  Test your material-ui component by adding a [RaisedButton](http://www.material-ui.com/#/components/raised-button) to `client/components/home.jsx`
 
-6.  Watch [webpack-dev-server](https://webpack.github.io/docs/webpack-dev-server.html) update your bundle and refresh your browser to see the changes.
+6.  Watch the [webpack-dev-server](https://webpack.github.io/docs/webpack-dev-server.html) update your bundle and refresh your browser to see the changes.
 
 7.  Add `global.navigator.userAgent` to `server/index.js`, as required by material-ui for [Server Rendering](http://www.material-ui.com/#/get-started/server-rendering).
 
-8.  Watch [webpack-dev-server](https://webpack.github.io/docs/webpack-dev-server.html) update your bundle and refresh your browser to see the changes.
+8.  Watch the [webpack-dev-server](https://webpack.github.io/docs/webpack-dev-server.html) update your bundle and refresh your browser to see the changes.
 
 ### Add material-ui Examples
 
@@ -78,7 +75,7 @@ Now we are ready to add some of the [material-ui examples](http://www.material-u
 
 #### Enable tapping
 
-First we have to add the resolution for an [issue in material-ui](https://github.com/callemall/material-ui/issues/4670).
+First, add the resolution for an [issue in material-ui](https://github.com/callemall/material-ui/issues/4670).
 
 Add the following code to `client/app.jsx`
 

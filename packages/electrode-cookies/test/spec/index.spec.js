@@ -131,7 +131,7 @@ describe("cookies", function() {
           expect(c, `No cookie found with name "${data.name}"`).to.exist;
           if (data.hasOwnProperty("maxAge")) {
             const expires = data.maxAge > 0 ? response.body.now + data.maxAge * 1000 : 0;
-            expect(c.expires.toGMTString()).to.equal(new Date(expires).toGMTString());
+            expect(Math.abs(c.expires.getTime() - expires) < 5, "Cookie expires should match");
             delete c.expires;
           }
           expect(

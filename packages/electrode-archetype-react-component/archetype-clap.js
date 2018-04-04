@@ -9,6 +9,7 @@ const $$ = xsh.$;
 const exec = xsh.exec;
 const mkCmd = xsh.mkCmd;
 const chalk = devRequire("chalk");
+const Fs = require("fs");
 
 if (process.argv[1].indexOf("gulp") >= 0) {
   const cmd = chalk.magenta(`clap ${process.argv.slice(2).join(" ")}`);
@@ -43,6 +44,50 @@ function checkFrontendCov(minimum) {
   );
 }
 
+/*
+ *  There are multiple eslint config for different groups of code
+ *
+ *   - eslintrc-base for scripts (React Code)
+ *   - eslintrc-react for directories client and templates (React Code)
+ *   - eslintrc-react-test for test/client (React test code)
+ *
+ *  If the directory contains a .eslintrc then it's used instead
+ *
+ */
+
+function lint(options) {
+  const ext = options.ext ? ` --ext ${options.ext}` : "";
+
+  const checkCustom = t => {
+    const f = ["", ".json", ".yml", ".yaml", ".js"].find(e => {
+      const x = Path.resolve(Path.join(t, `.eslintrc${e}`));
+      return Fs.existsSync(x);
+    });
+    return f !== undefined;
+  };
+
+  //
+  // group target directories into custom and archetype
+  // custom - .eslintrc file exist
+  // archetype - no .eslintrc, use config from archetype
+  //
+  const grouped = options.targets.reduce(
+    (a, t) => {
+      (checkCustom(t) ? a.custom : a.archetype).push(t);
+      return a;
+    },
+    { custom: [], archetype: [] }
+  );
+
+  const commands = [
+    grouped.custom.length > 0 && `~$eslint${ext} ${grouped.custom.join(" ")}`,
+    grouped.archetype.length > 0 &&
+      `~$eslint${ext} -c ${options.config} ${grouped.archetype.join(" ")}`
+  ];
+
+  return Promise.resolve(commands.filter(x => x));
+}
+
 const tasks = {
   // env setup common tasks
   "~production-env": () => setProductionEnv(),
@@ -58,14 +103,16 @@ const tasks = {
   "build-lib": {
     dep: ["~production-env"],
     task: [
-      "clean-lib",
+      ".prep-tmp-lib",
       "babel-src-step",
+      "clean-lib",
+      ".tmp-to-lib",
       "build-lib:flatten-l10n",
       "build-lib:copy-flow",
       "build-lib:clean-tmp"
     ]
   },
-  "babel-src-step": `babel -D src -d lib`,
+  "babel-src-step": `babel -D src -d .tmplib`,
   "build-lib:clean-tmp": () => $$.rm("-rf", "./tmp"),
   "build-lib:copy-flow": `node ${archetype.devPath}/scripts/copy-as-flow-declaration.js`,
   "build-lib:flatten-l10n": `node ${archetype.devPath}/scripts/l10n/flatten-messages.js`,
@@ -85,6 +132,8 @@ const tasks = {
   "check-dep": `ecd -f package.json --cf ${archetype.devPath}/config/dependencies/check.json -w`,
   "check-dev": ["lint", "test-dev"],
 
+  ".prep-tmp-lib": () => $$.rm("-rf", ".tmplib"),
+  ".tmp-to-lib": () => $$.mv(".tmplib", "lib"),
   clean: ["clean-lib", "clean-dist"],
   "clean-dist": () => $$.rm("-rf", "dist"),
   "clean-lib": () => $$.rm("-rf", "lib"),
@@ -97,15 +146,36 @@ const tasks = {
   "cov-frontend-95": () => checkFrontendCov("95"),
 
   lint: ["lint-react-src", "lint-react-test", "lint-scripts"],
-  "lint-react-src": mkCmd(
-    `eslint --ext .js,.jsx`,
-    `-c ${archetype.devPath}/config/eslint/.eslintrc-react src --color`
-  ),
-  "lint-react-test": mkCmd(
-    `eslint --ext .js,.jsx`,
-    `-c ${archetype.devPath}/config/eslint/.eslintrc-react-test test/client --color`
-  ),
-  "lint-scripts": `eslint --ext .js -c ${archetype.devPath}/config/eslint/.eslintrc-base scripts --color`,
+
+  "lint-react-src": {
+    desc: "Run eslint on client code in directories client and templates",
+    task: () =>
+      lint({
+        ext: ".js,.jsx",
+        config: `${archetype.devPath}/config/eslint/.eslintrc-react`,
+        targets: ["src"]
+      })
+  },
+
+  "lint-react-test": {
+    desc: "Run eslint in directories test/client and templates",
+    task: () =>
+      lint({
+        ext: ".js,.jsx",
+        config: `${archetype.devPath}/config/eslint/.eslintrc-react-test`,
+        targets: ["test/client"]
+      })
+  },
+
+  "lint-scripts": {
+    desc: "Run eslint in directories scripts",
+    task: () =>
+      lint({
+        ext: ".js",
+        config: `${archetype.devPath}/config/eslint/.eslintrc-base`,
+        targets: ["scripts"]
+      })
+  },
 
   "npm:prepublish": ["build-lib", "build-dist-min"],
 
@@ -120,9 +190,18 @@ const tasks = {
   "test-watch": ["test-frontend-dev-watch"],
   "concurrent-test-watch": ["hot", "test-frontend-dev-watch"],
   "test-frontend": `karma start ${archetype.devPath}/config/karma/karma.conf.js --colors`,
-  "test-frontend-ci": `karma start --browsers PhantomJS,Firefox ${archetype.devPath}/config/karma/karma.conf.coverage.js --colors`,
-  "test-frontend-cov": `karma start ${archetype.devPath}/config/karma/karma.conf.coverage.js --colors`,
-  "test-frontend-dev": `karma start ${archetype.devPath}/config/karma/karma.conf.dev.js --colors`,
+  "test-frontend-ci": mkCmd(
+    `karma start --browsers PhantomJS,Firefox`,
+    `${archetype.devPath}/config/karma/karma.conf.coverage.js --colors`
+  ),
+  "test-frontend-cov": mkCmd(
+    `karma start`,
+    `${archetype.devPath}/config/karma/karma.conf.coverage.js --colors`
+  ),
+  "test-frontend-dev": mkCmd(
+    `karma start`,
+    `${archetype.devPath}/config/karma/karma.conf.dev.js --colors`
+  ),
   "test-frontend-dev-watch": mkCmd(
     `karma start ${archetype.devPath}/config/karma/karma.conf.watch.js`,
     ` --colors --browsers Chrome --no-single-run --auto-watch`

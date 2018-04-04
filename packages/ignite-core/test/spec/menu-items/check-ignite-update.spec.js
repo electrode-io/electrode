@@ -31,18 +31,14 @@ describe("menu-item check-ignite-update", function() {
   const makeStubs = (name, globalVersion, latestVersion) => {
     name = name || "electrode-ignite";
     const stubs = {};
-    stubs.globalInstalledStub = sinon
-      .stub(checkModule, "globalInstalled")
-      .callsFake(n => {
-        expect(n).to.equal(name);
-        return globalVersion;
-      });
-    stubs.latestOnceDailyStub = sinon
-      .stub(checkModule, "latestOnceDaily")
-      .callsFake(n => {
-        expect(n).to.equal(name);
-        return latestVersion;
-      });
+    stubs.globalInstalledStub = sinon.stub(checkModule, "globalInstalled").callsFake(n => {
+      expect(n).to.equal(name);
+      return globalVersion;
+    });
+    stubs.latestOnceDailyStub = sinon.stub(checkModule, "latestOnceDaily").callsFake(n => {
+      expect(n).to.equal(name);
+      return latestVersion;
+    });
     stubs.latestStub = sinon.stub(checkModule, "latest").callsFake(n => {
       expect(n).to.equal(name);
       return latestVersion;
@@ -67,10 +63,7 @@ describe("menu-item check-ignite-update", function() {
 
   const makeNpmInstallStub = resolve => {
     const stubs = {};
-    const npmInstallStub = (stubs.npmInstallStub = sinon.stub(
-      helpers,
-      "npmInstall"
-    ));
+    const npmInstallStub = (stubs.npmInstallStub = sinon.stub(helpers, "npmInstall"));
     if (resolve) {
       stubs.npmInstallStub = npmInstallStub.returns(Promise.resolve());
     } else {
@@ -88,10 +81,7 @@ describe("menu-item check-ignite-update", function() {
 
   const makeshowManualInstallMsgStub = () => {
     const stubs = {};
-    stubs.showManualInstallMsgStub = sinon.stub(
-      helpers,
-      "showManualInstallMsg"
-    );
+    stubs.showManualInstallMsgStub = sinon.stub(helpers, "showManualInstallMsg");
     stubs.restore = () => {
       stubs.showManualInstallMsgStub.restore();
     };
@@ -179,7 +169,7 @@ describe("menu-item check-ignite-update", function() {
           yesNoStub.restore();
           npmInstallStub.restore();
           expect(npmInstallStub.npmInstallStub.args).to.deep.equal([
-            ["electrode-ignite", "1.0.1", true]
+            ["electrode-ignite", "1.0.1", true, undefined]
           ]);
           expect(yesNoStub.question).to.equal(
             "Update electrode-ignite from version 1.0.0 to 1.0.1"

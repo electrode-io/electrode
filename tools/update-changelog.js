@@ -1,11 +1,11 @@
 /*
  * Looks at each commit that is not a "Merge pull request", figure out
  * the packages it modified and group the commit messages by package.
- * 
+ *
  * Then check for [major], [minor], [patch] in the commit message, and
- * automatically generate the new package tag name with the would be 
+ * automatically generate the new package tag name with the would be
  * updated version.
- * 
+ *
  * Write all these to the file CHANGELOG.md.
  *
  */
@@ -18,6 +18,7 @@ const Promise = require("bluebird");
 const semver = require("semver");
 xsh.Promise = Promise;
 xsh.envPath.addToFront(Path.join(__dirname, "../node_modules/.bin"));
+const _ = require("lodash");
 
 const changeLogFile = Path.resolve("CHANGELOG.md");
 const changeLog = Fs.readFileSync(changeLogFile).toString();
@@ -28,6 +29,17 @@ const packageMapping = {
   "electrode-archetype-react-component": "electrode-archetype-react-component[-dev]",
   "electrode-archetype-react-component-dev": "electrode-archetype-react-component[-dev]"
 };
+
+const reverseMapping = Object.assign.apply(
+  undefined,
+  _(packageMapping)
+    .values()
+    .uniq()
+    .map(mapped => {
+      return { [mapped]: _.keys(_.pickBy(packageMapping, v => v === mapped)) };
+    })
+    .value()
+);
 
 const mapPkg = n => {
   return packageMapping[n] || n;
@@ -138,6 +150,15 @@ const collateCommitsPackages = commits => {
     collated.lernaPackages = commits.updated.packages.filter(
       r => collated.realPackages.indexOf(r) < 0
     );
+    const updateByMap = _(collated.realPackages)
+      .map(p => packageMapping[p])
+      .filter()
+      .map(p => {
+        return reverseMapping[p] || undefined;
+      })
+      .flatMap()
+      .value();
+    collated.realPackages = _.uniq(collated.realPackages.concat(updateByMap));
     collated.forcePackages = collated.realPackages.filter(
       r => commits.updated.packages.indexOf(r) < 0
     );

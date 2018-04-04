@@ -7,17 +7,22 @@ const _ = require("lodash");
 const logger = require("electrode-archetype-react-app/lib/logger");
 
 module.exports = function(options) {
-  // regex \b for word boundaries
-  const babelExcludeRegex = new RegExp(
-    `(node_modules|\\b${Path.join(AppMode.src.client, "vendor")}\\b)`
-  );
+  if (options.HotModuleReload) {
+    require("react-hot-loader/patch");
+  }
+
+  const clientVendor = Path.join(AppMode.src.client, "vendor/");
+  const babelExclude = x => {
+    if (x.indexOf("node_modules") >= 0) return true;
+    if (x.indexOf(clientVendor) >= 0) return true;
+    return false;
+  };
 
   const babelLoader = {
     _name: "babel",
     test: /\.jsx?$/,
-    exclude: babelExcludeRegex,
+    exclude: babelExclude,
     use: [
-      options.HotModuleReload && "react-hot-loader",
       {
         loader: "babel-loader",
         options: options.babel

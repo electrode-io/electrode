@@ -1,4 +1,4 @@
-# Summary
+# Contents
 
 ### Introduction
 
@@ -11,19 +11,19 @@
 
 ### Quick Start
 
--   [Get Start With Electrode](/chapter1/quick-start/start-with-electrode.md)
+-   [Getting Started With Electrode](/chapter1/quick-start/start-with-electrode.md)
 
     -   [Start With Electrode Ignite](/chapter1/quick-start/start-with-ignite.md)
     -   [Create an Electrode App](/chapter1/quick-start/start-with-app.md)
     -   [Create an Electrode Component](/chapter1/quick-start/start-with-component.md)
 
--   [Electrode App](chapter1/quick-start/further-develop-app.md)
+-   [Developing Your Electrode App](chapter1/quick-start/further-develop-app.md)
 
-    -   [Build Component](/chapter1/further-develop-app/build-component.md)
+    -   [Build Your App](/chapter1/further-develop-app/build-app.md)
     -   [What's Inside](/chapter1/further-develop-app/whats-inside.md)
     -   [Deploy Your App](/chapter1/further-develop-app/deploy-your-app.md)
 
--   [Electrode Component](chapter1/quick-start/further-develop-component.md)
+-   [Developing Electrode Components](chapter1/quick-start/further-develop-component.md)
     -   [Low-Level Components](/chapter1/further-develop-component/low-level-components.md)
     -   [Component Helpers](/chapter1/further-develop-component/component-helpers.md)
     -   [Develop Styles](/chapter1/further-develop-component/develop-styles.md)
@@ -41,11 +41,13 @@
     -   [Eslint Config](/chapter1/intermediate/app-archetype/eslint.md)
     -   [Webpack Config](/chapter1/intermediate/app-archetype/webpack-config.md)
     -   [Environment Variables](/chapter1/intermediate/app-archetype/env-vars.md)
+    -   [Extract Styles](/chapter1/intermediate/app-archetype/extract-styles.md)
 
 -   [Component Archetype](chapter1/intermediate/component-archetype/README.md)
 
     -   [Structure](/chapter1/intermediate/component-archetype/component-archetype-structure.md)
     -   [Webpack Config](/chapter1/intermediate/component-archetype/webpack-config.md)
+    -   [Extract Styles](/chapter1/intermediate/component-archetype/extract-styles.md)
 
 -   [Build a Server Plugin](chapter1/intermediate/build-a-server-plugin.md)
 -   [React App Routes](chapter1/intermediate/react-routes/react-routes.md)

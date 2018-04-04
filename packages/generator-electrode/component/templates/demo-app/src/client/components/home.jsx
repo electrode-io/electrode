@@ -14,7 +14,7 @@ export class Home extends React.Component {
   render() {
     //
     // this is data for the bundled demo
-    // please remove it when working on your 
+    // please remove it when working on your
     // own component
     //
     const data = [

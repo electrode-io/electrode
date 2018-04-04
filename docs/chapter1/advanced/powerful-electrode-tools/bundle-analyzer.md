@@ -1,12 +1,12 @@
 # Bundle Analyzer
 
-A [webpack](https://webpack.github.io/) bundle analyzer that gives you a detail list of all the files that went into your deduped and minified bundle JS file.
+You can install a [webpack](https://webpack.github.io/) bundle analyzer that gives you a detail list of all the files that went into your deduped and minified bundle JS file.
 
 ## Installation
 
-Bundle Analyzer lives on [npm](https://www.npmjs.com/package/electrode-bundle-), so if you haven't already, make sure you have [node](http://nodejs.org/) installed on your machine first.
+The Bundle Analyzer lives on [npm](https://www.npmjs.com/package/electrode-bundle-), so if you haven't already, make sure you have [node](http://nodejs.org/) installed on your machine first.
 
-Installing should then be as easy as:
+You can easily install the Bundle Analyzer by issuing the following sudo command.
 
 ```
 $ sudo npm install -g electrode-bundle-analyzer
@@ -36,7 +36,7 @@ Bundle Analyzer looks for the webpack module ID comment that normally looks some
 /***/ function(module, exports, __webpack_require__) {
 ```
 
-You can find more information about it in the Bundle Analyzer [readme](https://github.com/electrode-io/electrode-bundle-analyzer#generating-the-necessary-data) file.
+You can find more information about it in the Bundle Analyzer [Readme](https://github.com/electrode-io/electrode-bundle-analyzer#generating-the-necessary-data) file.
 
 ## Command-Line Interface
 
@@ -52,11 +52,11 @@ Options:
   -h, --help     Show help                                             [boolean]
 ```
 
-When you install Bundle Analyzer globally, `analyze-bundle`command-line tool is made available as the quickest means of checking out your bundle.
+When you install Bundle Analyzer globally, the  `analyze-bundle` command-line tool is available as the quickest means of checking out your bundle.
 
-If you don't specify an output directory, a default one `.etmp` will be created and a `.gitignore` file is also added there to avoid git picking it up.
+If you don't specify an output directory, a default directory named `.etmp` will be created and a `.gitignore` file is also added in the directory to avoid Git picking it up.
 
-Two files will be written to the output directory:
+The following two files will be written to the output directory:
 
 * `bundle.analyze.json`
 * `bundle.analyze.tsv`
@@ -74,8 +74,4 @@ Module ID       Full Path       Identity Path   Size (bytes)
 4       ./~/react/lib/ReactChildren.js  ~/react/lib/ReactChildren.js    1344
 ```
 
-You can view an example [`bundle.analyze.tsv`](https://docs.google.com/spreadsheets/d/1IomT2fYCKEwVY0CO-0jImc7CBj_uAmgy70Egsm4CnVE/edit?usp=sharing&rm=minimal) output using the [Electrode Boilerplate](https://github.com/electrode-io/electrode/tree/d4142ee0c938cbf973a429ee8467052aa4e1c9be/samples/universal-react-node#electrode-bundle-analyzer) code.
-
-  
-
-
+You can view an example [`bundle.analyze.tsv`](https://docs.google.com/spreadsheets/d/1IomT2fYCKEwVY0CO-0jImc7CBj_uAmgy70Egsm4CnVE/edit?usp=sharing&rm=minimal) output file using the [Electrode Boilerplate](https://github.com/electrode-io/electrode/tree/d4142ee0c938cbf973a429ee8467052aa4e1c9be/samples/universal-react-node#electrode-bundle-analyzer) code.

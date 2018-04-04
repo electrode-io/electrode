@@ -9,6 +9,7 @@ const Path = require("path");
 const yoTest = require("yeoman-test");
 const _ = require("lodash");
 
+const isWin32 = process.platform.startsWith("win32");
 const packagesDir = Path.join(__dirname, "packages");
 
 const pullLocalPackages = dir => {
@@ -53,7 +54,12 @@ const runAppTest = (dir, forceLocal) => {
     }
   };
 
-  return exec({ cwd: dir }, `npm i`).then(() => exec({ cwd: dir }, `npm test`));
+  const fynSetup = isWin32 ? "fyn win --quiet && fynwin" : `eval "$(fyn bash)"`;
+  const localClap = Path.join("node_modules", ".bin", "clap");
+  return exec(
+    { cwd: dir },
+    `${fynSetup} && fyn --pg simple -q v i && ${localClap} ?fix-generator-eslint`
+  ).then(() => exec({ cwd: dir }, `${fynSetup} && npm test`));
 };
 
 const testGenerator = (testDir, clean, prompts) => {
@@ -91,6 +97,7 @@ xclap.load({
     desc: "Run CI test",
     task: () => {
       process.env.BUILD_TEST = "true";
+      process.env.NODE_PRESERVE_SYMLINKS = "1";
       const tasks = ["test-boilerplate"];
       let updated;
       return exec("lerna updated")

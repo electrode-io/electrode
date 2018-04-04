@@ -16,9 +16,13 @@ describe("do-yo", function() {
     doYo.run("test", platform);
     child.emit("error", new Error("test"));
     expect(logs[0]).includes("Running test generator failed: Error: test");
-    child.emit("exit", 1, "test-signal");
+    child.emit("exit", 1);
     expect(logs[1]).includes(
-      "Generator: test terminated. Child process exited with code 1, signal test-signal."
+      "Generator: test failed with exit code 1. This could mean that it didn't generate your app properly. Please double check."
+    );
+    child.emit("exit", 0);
+    expect(logs[2]).includes(
+      "Generator: test exited without any errors."
     );
     spawnStub.restore();
     logStub.restore();

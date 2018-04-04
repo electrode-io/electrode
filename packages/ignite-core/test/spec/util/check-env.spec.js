@@ -31,7 +31,9 @@ describe("check-env", function() {
     it("electrode should not work for node < 6.0.0.", () => {
       logs = [];
       checkEnv.node("5.0.0");
-      expect(logs[0]).includes("You are using Node version 5.0.0. We recommend use Node LTS version 6.");
+      expect(logs[0]).includes(
+        "You are using Node version 5.0.0. We recommend use Node LTS version 6."
+      );
     });
   });
 
@@ -51,10 +53,18 @@ describe("check-env", function() {
       expect(logs[0]).includes("You are using npm version 3.0.0. Electrode should work for you.");
     });
 
+    it("should prompt a hint message with npm version v5.4.x", () => {
+      logs = [];
+      checkEnv.npm("5.4.2");
+      expect(logs[0]).includes("Note: Please avoid npm version v5.4.x, it may cause an incorrect installation while using electrode ignite.");
+    });
+
     it("electrode should not work for node < 3.0.0.", () => {
       logs = [];
       checkEnv.npm("2.0.0");
-      expect(logs[0]).includes("You are using npm version 2.0.0. Electrode requires npm version 3 and up.");
+      expect(logs[0]).includes(
+        "You are using npm version 2.0.0. Electrode requires npm version 3 and up."
+      );
     });
   });
 });

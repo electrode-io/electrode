@@ -1,4 +1,4 @@
-# Further Reading
+# Additional Resources
 
 #### Universal Javascript
 
@@ -59,6 +59,3 @@
 * [Babel Docs](https://babeljs.io/docs/learn-es2015/)- The Babel docs, guides, and blog are very user friendly.
 
 * [A Quick Tour Of ES6 \(Or, The Bits You’ll Actually Use\)](http://jamesknelson.com/es6-the-bits-youll-actually-use/)- Highlights the commonly used parts of the ES6 syntax.
-
-
-
