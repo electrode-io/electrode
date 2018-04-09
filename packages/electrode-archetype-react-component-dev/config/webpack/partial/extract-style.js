@@ -7,6 +7,7 @@ const optionalRequire = require("optional-require")(require);
 const atImport = require("postcss-import");
 const cssnext = require("postcss-cssnext");
 const webpack = require("webpack");
+const autoprefixer = require("autoprefixer-stylus");
 
 const styleLoader = require.resolve("style-loader");
 const cssLoader = require.resolve("css-loader");
@@ -36,7 +37,7 @@ const cssModuleStylusSupport = archetypeAppWebpack.cssModuleStylusSupport;
 
 const cssLoaderOptions =
   "?modules&localIdentName=[name]__[local]___[hash:base64:5]&-autoprefixer";
-const cssQuery = `${cssLoader}!${postcssLoader}`;
+const cssQuery = `${styleLoader}!${cssLoader}!${postcssLoader}`;
 const stylusQuery = `${cssLoader}?-autoprefixer!${stylusLoader}`;
 const scssQuery = `${cssQuery}!${sassLoader}`;
 const cssModuleQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}`;
@@ -68,15 +69,15 @@ module.exports = function() {
   rules.push(
     {
       test: /\.css$/,
-      use: cssModuleSupport ? cssModuleQuery : cssQuery
+      loader: cssModuleSupport ? cssModuleQuery : cssQuery
     },
     {
       test: /\.scss$/,
-      use: cssModuleSupport ? cssScssQuery : scssQuery
+      loader: cssModuleSupport ? cssScssQuery : scssQuery
     },
     {
       test: /\.styl$/,
-      use: cssModuleSupport ? cssStylusQuery : stylusQuery
+      loader: cssModuleSupport ? cssStylusQuery : stylusQuery
     }
   );
 
@@ -88,7 +89,7 @@ module.exports = function() {
   if (cssModuleStylusSupport) {
     rules.push({
       test: /\.styl$/,
-      use: cssStylusQuery
+      loader: cssStylusQuery
     });
   }
 
