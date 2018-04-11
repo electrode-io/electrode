@@ -592,6 +592,7 @@ Individual .babelrc files were generated for you in src/client and src/server
           : `node ${AppMode.src.server}`;
         return mkCmd(
           `~$nodemon`,
+          `--inspect`,
           `--delay 1 -C --ext js,jsx,json,yaml,log ${watches}`,
           `--exec ${nodeRunApp}`
         );
