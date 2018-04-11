@@ -1,5 +1,7 @@
 "use strict";
 
+/* eslint-disable object-shorthand */
+
 const Fs = require("fs");
 const archetype = require("./config/archetype");
 const assert = require("assert");
@@ -35,6 +37,10 @@ const logger = require("./lib/logger");
 
 function quote(str) {
   return str.startsWith(`"`) ? str : `"${str}"`;
+}
+
+function taskArgs(argv) {
+  return (argv && argv.length > 1 && argv.slice(1)) || [];
 }
 
 function webpackConfig(file) {
@@ -486,10 +492,17 @@ Individual .babelrc files were generated for you in src/client and src/server
     "cov-frontend-95": () => checkFrontendCov("95"),
 
     debug: ["build-dev-static", "server-debug"],
+    devbrk: ["dev --inspect-brk"],
     dev: {
       desc: "Start your app with watch in development mode with webpack-dev-server",
       dep: [".remove-log-files", ".development-env", ".clean.build", ".mk-dist-dir"],
-      task: [".webpack-dev", ["wds.dev", "server-watch", "generate-service-worker"]]
+      task: function() {
+        const args = taskArgs(this.argv);
+        return [
+          ".webpack-dev",
+          ["wds.dev", `server-watch ${args.join(" ")}`, "generate-service-worker"]
+        ];
+      }
     },
 
     "dev-static": {
@@ -497,10 +510,17 @@ Individual .babelrc files were generated for you in src/client and src/server
       task: ["build-dev-static", "app-server"]
     },
 
+    hotbrk: ["hot --inspect-brk"],
     hot: {
       desc: "Start your app with watch in hot mode with webpack-dev-server",
       dep: [".development-env", ".webpack-hot"],
-      task: [".webpack-dev", ["wds.hot", "server-watch", "generate-service-worker"]]
+      task: function() {
+        const args = taskArgs(this.argv);
+        return [
+          ".webpack-dev",
+          ["wds.hot", `server-watch ${args.join(" ")}`, "generate-service-worker"]
+        ];
+      }
     },
 
     lint: [["lint-client", "lint-client-test", "lint-server", "lint-server-test"]],
@@ -589,7 +609,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     "server-watch": {
       dep: [".init-bundle.valid.log"],
       desc: "Start app's node server in watch mode with nodemon",
-      task: () => {
+      task: function() {
         const watches = [Path.join(eTmpDir, "bundle.valid.log"), AppMode.src.server, "config"]
           .map(n => `--watch ${n}`)
           .join(" ");
@@ -599,7 +619,7 @@ Individual .babelrc files were generated for you in src/client and src/server
           : `node ${AppMode.src.server}`;
         return mkCmd(
           `~$nodemon`,
-          `--inspect`,
+          taskArgs(this.argv).join(" "),
           `--delay 1 -C --ext js,jsx,json,yaml,log ${watches}`,
           `--exec ${nodeRunApp}`
         );
