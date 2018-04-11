@@ -1,5 +1,7 @@
 "use strict";
 
+/* eslint-disable object-shorthand */
+
 const Fs = require("fs");
 const archetype = require("./config/archetype");
 const assert = require("assert");
@@ -35,6 +37,10 @@ const logger = require("./lib/logger");
 
 function quote(str) {
   return str.startsWith(`"`) ? str : `"${str}"`;
+}
+
+function taskArgs(argv) {
+  return (argv && argv.length > 1 && argv.slice(1)) || [];
 }
 
 function webpackConfig(file) {
@@ -108,11 +114,11 @@ function createElectrodeTmpDir() {
 function removeLogFiles() {
   try {
     Fs.unlinkSync(Path.resolve("archetype-exceptions.log"));
-  } catch (e) { } // eslint-disable-line
+  } catch (e) {} // eslint-disable-line
 
   try {
     Fs.unlinkSync(Path.resolve("archetype-debug.log"));
-  } catch (e) { } // eslint-disable-line
+  } catch (e) {} // eslint-disable-line
 }
 
 /*
@@ -154,7 +160,7 @@ function lint(options) {
   const commands = [
     grouped.custom.length > 0 && `~$eslint${ext} ${grouped.custom.join(" ")}`,
     grouped.archetype.length > 0 &&
-    `~$eslint${ext} --no-eslintrc -c ${options.config} ${grouped.archetype.join(" ")}`
+      `~$eslint${ext} --no-eslintrc -c ${options.config} ${grouped.archetype.join(" ")}`
   ];
 
   return Promise.resolve(commands.filter(x => x));
@@ -326,7 +332,8 @@ function makeTasks() {
       setProductionEnv();
       return exec(
         `webpack`,
-        `--config`, quote(webpackConfig("webpack.config.browsercoverage.js")),
+        `--config`,
+        quote(webpackConfig("webpack.config.browsercoverage.js")),
         `--colors`
       );
     },
@@ -357,7 +364,11 @@ function makeTasks() {
 
     "build-dist-dev-static": {
       desc: false,
-      task: mkCmd(`webpack --config`, quote(webpackConfig("webpack.config.dev.static.js")), `--colors`)
+      task: mkCmd(
+        `webpack --config`,
+        quote(webpackConfig("webpack.config.dev.static.js")),
+        `--colors`
+      )
     },
 
     ".ss-prod-react": () => optimizeModuleForProd("react"),
@@ -370,7 +381,9 @@ function makeTasks() {
       );
     },
     "ss-prod-react": {
-      desc: `Make optimized copy of react&react-dom for server side in dir ${archetype.prodModulesDir}`,
+      desc: `Make optimized copy of react&react-dom for server side in dir ${
+        archetype.prodModulesDir
+      }`,
       dep: [".ss-clean.prod-react", ".mk-prod-dir"],
       task: [[".ss-prod-react", ".ss-prod-react-dom"]]
     },
@@ -479,10 +492,17 @@ Individual .babelrc files were generated for you in src/client and src/server
     "cov-frontend-95": () => checkFrontendCov("95"),
 
     debug: ["build-dev-static", "server-debug"],
+    devbrk: ["dev --inspect-brk"],
     dev: {
       desc: "Start your app with watch in development mode with webpack-dev-server",
       dep: [".remove-log-files", ".development-env", ".clean.build", ".mk-dist-dir"],
-      task: [".webpack-dev", ["wds.dev", "server-watch", "generate-service-worker"]]
+      task: function() {
+        const args = taskArgs(this.argv);
+        return [
+          ".webpack-dev",
+          ["wds.dev", `server-watch ${args.join(" ")}`, "generate-service-worker"]
+        ];
+      }
     },
 
     "dev-static": {
@@ -490,10 +510,17 @@ Individual .babelrc files were generated for you in src/client and src/server
       task: ["build-dev-static", "app-server"]
     },
 
+    hotbrk: ["hot --inspect-brk"],
     hot: {
       desc: "Start your app with watch in hot mode with webpack-dev-server",
       dep: [".development-env", ".webpack-hot"],
-      task: [".webpack-dev", ["wds.hot", "server-watch", "generate-service-worker"]]
+      task: function() {
+        const args = taskArgs(this.argv);
+        return [
+          ".webpack-dev",
+          ["wds.hot", `server-watch ${args.join(" ")}`, "generate-service-worker"]
+        ];
+      }
     },
 
     lint: [["lint-client", "lint-client-test", "lint-server", "lint-server-test"]],
@@ -582,7 +609,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     "server-watch": {
       dep: [".init-bundle.valid.log"],
       desc: "Start app's node server in watch mode with nodemon",
-      task: () => {
+      task: function() {
         const watches = [Path.join(eTmpDir, "bundle.valid.log"), AppMode.src.server, "config"]
           .map(n => `--watch ${n}`)
           .join(" ");
@@ -592,7 +619,7 @@ Individual .babelrc files were generated for you in src/client and src/server
           : `node ${AppMode.src.server}`;
         return mkCmd(
           `~$nodemon`,
-          `--inspect`,
+          taskArgs(this.argv).join(" "),
           `--delay 1 -C --ext js,jsx,json,yaml,log ${watches}`,
           `--exec ${nodeRunApp}`
         );
@@ -604,7 +631,8 @@ Individual .babelrc files were generated for you in src/client and src/server
       task: mkCmd(
         "webpack-dev-server",
         `--watch --watch-aggregate-timeout 2000`,
-        `--config`, quote(webpackConfig("webpack.config.dev.js")),
+        `--config`,
+        quote(webpackConfig("webpack.config.dev.js")),
         `--progress --colors`,
         `--port ${archetype.webpack.devPort}`,
         `--host ${archetype.webpack.devHostname}`
@@ -615,7 +643,8 @@ Individual .babelrc files were generated for you in src/client and src/server
       desc: "Start webpack-dev-server with Hot Module Reload",
       task: mkCmd(
         "webpack-dev-server",
-        `--config`, quote(webpackConfig("webpack.config.hot.js")),
+        `--config`,
+        quote(webpackConfig("webpack.config.hot.js")),
         `--hot --progress --colors --inline`,
         `--port ${archetype.webpack.devPort}`,
         `--host ${archetype.webpack.devHostname}`
@@ -626,7 +655,8 @@ Individual .babelrc files were generated for you in src/client and src/server
       desc: "Start webpack-dev-server in test mode",
       task: mkCmd(
         "webpack-dev-server",
-        `--config`, quote(webpackConfig("webpack.config.test.js")),
+        `--config`,
+        quote(webpackConfig("webpack.config.test.js")),
         `--progress --colors`,
         `--port ${archetype.webpack.testPort}`,
         `--host ${archetype.webpack.devHostname}`
@@ -652,9 +682,17 @@ Individual .babelrc files were generated for you in src/client and src/server
 
     "test-frontend": mkCmd(`karma start`, quote(karmaConfig("karma.conf.js")), `--colors`),
 
-    "test-frontend-ci": mkCmd(`karma start`, quote(karmaConfig("karma.conf.coverage.js")), `--colors`),
+    "test-frontend-ci": mkCmd(
+      `karma start`,
+      quote(karmaConfig("karma.conf.coverage.js")),
+      `--colors`
+    ),
 
-    "test-frontend-cov": mkCmd(`karma start`, quote(karmaConfig("karma.conf.coverage.js")), `--colors`),
+    "test-frontend-cov": mkCmd(
+      `karma start`,
+      quote(karmaConfig("karma.conf.coverage.js")),
+      `--colors`
+    ),
 
     "test-frontend-dev": () =>
       exec(`pgrep -fl "webpack-dev-server.*${archetype.webpack.testPort}"`)
@@ -673,7 +711,9 @@ Individual .babelrc files were generated for you in src/client and src/server
         return mkCmd(
           `~$istanbul cover --include-all-sources --root src/server`,
           `--report text --report lcov node_modules/mocha/bin/_mocha`,
-          `-- -c --opts`, quote(mochaConfig("mocha.opts")), `test/server`
+          `-- -c --opts`,
+          quote(mochaConfig("mocha.opts")),
+          `test/server`
         );
       }
       return undefined;
@@ -705,7 +745,11 @@ Individual .babelrc files were generated for you in src/client and src/server
     "build-fp-stats": {
       desc:
         "Build static bundle with stats.json containing fullPaths to inspect the bundle on electrode-electrify",
-      task: mkCmd(`webpack --config`, quote(webpackConfig("webpack.config.stats.electrify.js")), `--colors`)
+      task: mkCmd(
+        `webpack --config`,
+        quote(webpackConfig("webpack.config.stats.electrify.js")),
+        `--colors`
+      )
     },
     "critical-css": {
       desc: "Start server and run penthouse to output critical CSS",
@@ -745,7 +789,8 @@ Individual .babelrc files were generated for you in src/client and src/server
     tasks = Object.assign(tasks, {
       "build-dist-dll": {
         dep: [".mk-dll-dir", ".mk-dist-dir", ".production-env"],
-        task: () => exec(`webpack --config`, quote(webpackConfig("webpack.config.dll.js")), `--colors`)
+        task: () =>
+          exec(`webpack --config`, quote(webpackConfig("webpack.config.dll.js")), `--colors`)
       },
       "copy-dll": () => shell.cp("-r", "dll/*", "dist")
     });
@@ -754,7 +799,7 @@ Individual .babelrc files were generated for you in src/client and src/server
   return tasks;
 }
 
-module.exports = function (xclap) {
+module.exports = function(xclap) {
   setupPath();
   createElectrodeTmpDir();
   xclap = xclap || requireAt(process.cwd())("xclap") || devRequire("xclap");
