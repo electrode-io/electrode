@@ -31,7 +31,7 @@
     "electrode-archetype-opt-react": "^1.0.0"
   },
   "engines": {
-    "node": ">= 6 <= 8",
-    "npm": ">= 3 <= 5"
+    "node": ">= 6",
+    "npm": ">= 3"
   }
 }

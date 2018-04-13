@@ -29,8 +29,8 @@
     "url": "https://github.com/demo-app"
   },
   "engines": {
-    "node": "^4.x.x || ^6.x.x || ^7.x.x",
-    "npm": ">= 3.x.x"
+    "node": ">= 6",
+    "npm": ">= 3"
   },
   "scripts": {
     "prestart": "clap build",

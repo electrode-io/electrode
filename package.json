@@ -34,8 +34,8 @@
     "url": "https://github.com/electrode-io/electrode.git"
   },
   "engines": {
-    "node": ">= 4 <= 8",
-    "npm": ">= 3 <= 5"
+    "node": ">= 6",
+    "npm": ">= 3"
   },
   "private": true,
   "license": "Apache-2.0"

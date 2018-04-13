@@ -16,8 +16,8 @@
   "repository": {},
   "license": "ISC",
   "engines": {
-    "node": ">= 4 <= 8",
-    "npm": ">= 3 <= 5"
+    "node": ">= 6",
+    "npm": ">= 3"
   },
   "scripts": {
     "build": "clap build",
