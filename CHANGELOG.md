@@ -1,3 +1,58 @@
+# 4/24/2018
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-react-app@5.1.3 `(5.1.2 => 5.1.3)`
+-   electrode-archetype-react-app-dev@5.1.3 `(5.1.2 => 5.1.3)`
+-   electrode-archetype-react-component@5.1.2 `(5.1.1 => 5.1.2)`
+-   electrode-archetype-react-component-dev@5.1.2 `(5.1.1 => 5.1.2)`
+-   generator-electrode@4.0.4 `(4.0.3 => 4.0.4)`
+-   webpack-config-composer@1.0.3 `(1.0.2 => 1.0.3)`
+
+### Lerna Updated
+
+-   electrode-ignite@2.0.4 `(2.0.3 => 2.0.4)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   update all engines spec in prep for Node 4 deprecating ([#770](https://github.com/electrode-io/electrode/pull/770)) [commit](http://github.com/electrode-io/electrode/commit/8cf50bb4d050df7fecef220269195acd96b36af5)
+    -   support user server main exporting a function [commit](http://github.com/electrode-io/electrode/commit/8bdb1899632c67e0a970db4dd37efafbd6164752)
+    -   add devbrk and hotbrk tasks [commit](http://github.com/electrode-io/electrode/commit/837a87c5e1b65e493205b24df23a2df0981815a3)
+    -   prettier format [commit](http://github.com/electrode-io/electrode/commit/fd83ebec2fda24b46e39e1b81dac9d862ff5b037)
+    -   Add --inspect flag to clap server-watch ([#765](https://github.com/electrode-io/electrode/pull/765)) [commit](http://github.com/electrode-io/electrode/commit/aa63d2a7b21385bbce2e13f9e36e53e3fe596fbf)
+    -   update isomorphic-loader to v2 ([#772](https://github.com/electrode-io/electrode/pull/772)) [commit](http://github.com/electrode-io/electrode/commit/3db8e8b7f1b56bf569c8642da3cb0a748a30bb3b)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   update all engines spec in prep for Node 4 deprecating ([#770](https://github.com/electrode-io/electrode/pull/770)) [commit](http://github.com/electrode-io/electrode/commit/8cf50bb4d050df7fecef220269195acd96b36af5)
+    -   Electrode archetype component autoprefix & pure css loader fixes ([#767](https://github.com/electrode-io/electrode/pull/767)) [commit](http://github.com/electrode-io/electrode/commit/23bbc36815f48f499e3a639d6f14b89371a0bb29)
+    -   [patch] v5 react/wrap multilines ([#763](https://github.com/electrode-io/electrode/pull/763)) [commit](http://github.com/electrode-io/electrode/commit/28fe609e3a4d4c097065e90642a6f51e868e1c2d)
+
+-   `packages/generator-electrode`
+
+    -   update all engines spec in prep for Node 4 deprecating ([#770](https://github.com/electrode-io/electrode/pull/770)) [commit](http://github.com/electrode-io/electrode/commit/8cf50bb4d050df7fecef220269195acd96b36af5)
+    -   generate app with sample to show electrode server startup events [commit](http://github.com/electrode-io/electrode/commit/38b39ce2d276629d70cfa4d08f8c4c33f2d9b7cd)
+
+-   `packages/webpack-config-composer`
+
+    -   update all engines spec in prep for Node 4 deprecating ([#770](https://github.com/electrode-io/electrode/pull/770)) [commit](http://github.com/electrode-io/electrode/commit/8cf50bb4d050df7fecef220269195acd96b36af5)
+
+-   `samples/demo-component`
+
+    -   update all engines spec in prep for Node 4 deprecating ([#770](https://github.com/electrode-io/electrode/pull/770)) [commit](http://github.com/electrode-io/electrode/commit/8cf50bb4d050df7fecef220269195acd96b36af5)
+
+-   `samples/stylus-sample`
+
+    -   update all engines spec in prep for Node 4 deprecating ([#770](https://github.com/electrode-io/electrode/pull/770)) [commit](http://github.com/electrode-io/electrode/commit/8cf50bb4d050df7fecef220269195acd96b36af5)
+
+-   `docs`
+
+    -   [patch] fix docs getting started link ([#764](https://github.com/electrode-io/electrode/pull/764)) [commit](http://github.com/electrode-io/electrode/commit/2051135cb7ed09489f5f11f3a7a59f44d9e8a452)
+
 # 3/23/2018
 
 ## Packages
