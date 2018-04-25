@@ -38,11 +38,11 @@ const cssModuleStylusSupport = archetypeAppWebpack.cssModuleStylusSupport;
 const cssLoaderOptions =
   "?modules&localIdentName=[name]__[local]___[hash:base64:5]&-autoprefixer";
 const cssQuery = `${styleLoader}!${cssLoader}!${postcssLoader}`;
-const stylusQuery = `${cssLoader}?-autoprefixer!${stylusLoader}`;
+const stylusQuery = `${styleLoader}!${cssLoader}?-autoprefixer!${stylusLoader}`;
 const scssQuery = `${cssQuery}!${sassLoader}`;
-const cssModuleQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}`;
-const cssStylusQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}!${stylusLoader}`;
-const cssScssQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}!${sassLoader}`;
+const cssModuleQuery = `${styleLoader}!${cssLoader}${cssLoaderOptions}!${postcssLoader}`;
+const cssStylusQuery = `${cssModuleQuery}!${stylusLoader}`;
+const cssScssQuery = `${cssModuleQuery}!${sassLoader}`;
 
 const cssExists =
   glob.sync(Path.resolve(process.cwd(), "src/styles", "*.css")).length > 0;
