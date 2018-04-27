@@ -41,7 +41,8 @@ module.exports = {
       istanbul: `${configDir}/istanbul`,
       karma: `${configDir}/karma`,
       mocha: `${configDir}/mocha`,
-      webpack: `${configDir}/webpack`
+      webpack: `${configDir}/webpack`,
+      jest: `${configDir}/jest`
     },
     archetypeOptions.configPaths
   )
