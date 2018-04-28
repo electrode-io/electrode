@@ -763,7 +763,11 @@ Individual .babelrc files were generated for you in src/client and src/server
     },
     "optimize-stats": {
       desc: "Generate a list of all files that went into production bundle JS (results in .etmp)",
-      task: `analyze-bundle -b dist/js/bundle.*.js -s dist/server/stats.json`
+      task: () => {
+        const stats = JSON.parse(Fs.readFileSync("dist/server/stats.json"));
+        const bundle = stats.assetsByChunkName.main.find(x => x.endsWith(".js"));
+        return `~$analyze-bundle -b dist/js/${bundle} -s dist/server/stats.json`;
+      }
     },
     pwa: {
       desc: "PWA must have dist by running `clap build` first and then start the app server only.",
