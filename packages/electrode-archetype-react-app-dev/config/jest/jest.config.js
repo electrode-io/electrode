@@ -8,8 +8,8 @@ const devPkgPath = Path.join(
   "electrode-archetype-react-app-dev"
 );
 const jestPath = Path.join(devPkgPath, "config", "jest");
-const fileMock = Path.join(jestPath, "__mocks__", "fileMock.js");
-const frameworkMock = Path.join(jestPath, "__mocks__", "frameworkMock.js");
+const fileMock = Path.join(jestPath, "__mocks__", "file-mock.js");
+const frameworkMock = Path.join(jestPath, "__mocks__", "framework-mock.js");
 
 const archetypeOptions = optionalRequire(Path.resolve("archetype", "config"), {
   default: {}
