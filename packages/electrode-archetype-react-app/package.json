@@ -17,6 +17,7 @@
     "format": "prettier --write --print-width 100 *.{js,jsx} `find . -type d -d 1 -exec echo '{}/**/*.{js,jsx}' \\; | egrep -v '(/node_modules/|/dist/|/coverage/)'`"
   },
   "dependencies": {
+    "babel-runtime": "^6.26.0",
     "css-modules-require-hook": "^4.0.2",
     "isomorphic-loader": "^2.0.0",
     "optional-require": "^1.0.0"
