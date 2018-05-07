@@ -39,7 +39,7 @@ We'd like to thank our employer @WalmartLabs because we can work on the developm
 
 # License
 
-Copyright 2018 WalmartLabs
+Copyright (c) 2016-present, WalmartLabs
 
 Licensed under the [Apache License, Version 2.0].
 
