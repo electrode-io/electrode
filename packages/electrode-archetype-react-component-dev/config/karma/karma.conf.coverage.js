@@ -7,19 +7,18 @@
  */
 var webpackCovCfg = require("../webpack/webpack.config.coverage");
 var baseConf = require("./karma.conf");
+const loadUserConfig = require("./load-user-conf");
 
-module.exports = function (config) {
-  baseConf(config);
+module.exports = function(config) {
+  baseConf(config, true);
   config.set({
     reporters: ["spec", "coverage"],
     webpack: webpackCovCfg,
     coverageReporter: {
-      reporters: [
-        { type: "json", file: "coverage.json" },
-        { type: "lcov" },
-        { type: "text" }
-      ],
+      reporters: [{ type: "json", file: "coverage.json" }, { type: "lcov" }, { type: "text" }],
       dir: "coverage/client"
     }
   });
+
+  loadUserConfig(config, "coverage");
 };

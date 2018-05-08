@@ -4,17 +4,17 @@ var path = require("path");
 
 var webpackCfg = require("../webpack/webpack.config.test");
 
-var MAIN_PATH = require.resolve(
-  "electrode-archetype-react-component-dev/config/karma/entry.js"
-);
+var MAIN_PATH = require.resolve("electrode-archetype-react-component-dev/config/karma/entry.js");
 
 const browserSettings = require("./browser-settings");
+
+const loadUserConfig = require("./load-user-conf");
 
 var PREPROCESSORS = {};
 
 PREPROCESSORS[MAIN_PATH] = ["webpack"];
 
-module.exports = function(config) {
+module.exports = function(config, skipUser) {
   const base = {
     basePath: process.cwd(),
     files: [MAIN_PATH],
@@ -42,11 +42,7 @@ module.exports = function(config) {
     reporters: ["spec", "coverage"],
     browserNoActivityTimeout: 60000,
     coverageReporter: {
-      reporters: [
-        { type: "json", file: "coverage.json" },
-        { type: "lcov" },
-        { type: "text" }
-      ],
+      reporters: [{ type: "json", file: "coverage.json" }, { type: "lcov" }, { type: "text" }],
       dir: path.join(process.cwd(), "coverage/client")
     },
     captureTimeout: 100000,
@@ -56,4 +52,8 @@ module.exports = function(config) {
   browserSettings(base);
 
   config.set(base);
+
+  if (!skipUser) {
+    loadUserConfig(config);
+  }
 };

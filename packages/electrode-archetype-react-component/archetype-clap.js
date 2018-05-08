@@ -185,7 +185,7 @@ const tasks = {
   "test-watch": ["test-frontend-dev-watch"],
   "concurrent-test-watch": ["hot", "test-frontend-dev-watch"],
   "test-frontend": `karma start ${archetype.devPath}/config/karma/karma.conf.js --colors`,
-  "test-frontend-ci": `karma start --browsers PhantomJS,Firefox ${archetype.devPath}/config/karma/karma.conf.coverage.js --colors`,
+  "test-frontend-ci": `karma start ${archetype.devPath}/config/karma/karma.conf.coverage.js --colors`,
   "test-frontend-cov": `karma start ${archetype.devPath}/config/karma/karma.conf.coverage.js --colors`,
   "test-frontend-dev": `karma start ${archetype.devPath}/config/karma/karma.conf.dev.js --colors`,
   "test-frontend-dev-watch": mkCmd(
