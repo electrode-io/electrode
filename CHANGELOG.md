@@ -1,3 +1,17 @@
+# 5/8/2018
+
+## Packages
+
+-   electrode-archetype-react-component@4.0.3 `(4.0.2 => 4.0.3)`
+-   electrode-archetype-react-component-dev@4.0.3 `(4.0.2 => 4.0.3)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   turn off the deprecated rul react/wrap-multilines in v4 ([#762](https://github.com/electrode-io/electrode/pull/762)) [commit](http://github.com/electrode-io/electrode/commit/0d3f9020ab6567c6ecbc4ea145258a01d79f4a8f)
+    -   load user karma config ([#782](https://github.com/electrode-io/electrode/pull/782)) [commit](http://github.com/electrode-io/electrode/commit/e3909823be4745d0c61802f162a019a536da8c76)
+
 # 3/6/2018
 
 ## Packages
