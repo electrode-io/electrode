@@ -1,6 +1,7 @@
 "use strict";
 
 const browserSettings = require("./browser-settings");
+const loadUserConfig = require("./load-user-conf");
 
 /*
  * Karma Configuration: "dev" version.
@@ -10,7 +11,7 @@ const browserSettings = require("./browser-settings");
  * then the alternate `karma.conf.js` file will _also_ run the webpack dev
  * server during the test run.
  */
-module.exports = function (config) {
+module.exports = function(config, skipUser) {
   const base = {
     reporters: ["spec"],
     basePath: process.cwd(), // repository root.
@@ -31,4 +32,8 @@ module.exports = function (config) {
   browserSettings(base);
 
   config.set(base);
+
+  if (!skipUser) {
+    loadUserConfig(config, "dev");
+  }
 };
