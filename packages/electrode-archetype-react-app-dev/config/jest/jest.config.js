@@ -1,7 +1,7 @@
 const Path = require("path");
 const optionalRequire = require("optional-require")(require);
 
-const rootDir = Path.join(Path.resolve("node_modules"), "..");
+const rootDir = process.cwd();
 const devPkgPath = Path.join(
   rootDir,
   "node_modules",
