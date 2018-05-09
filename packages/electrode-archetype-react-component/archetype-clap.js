@@ -10,6 +10,7 @@ const exec = xsh.exec;
 const mkCmd = xsh.mkCmd;
 const chalk = devRequire("chalk");
 const Fs = require("fs");
+const glob = require("glob");
 
 if (process.argv[1].indexOf("gulp") >= 0) {
   const cmd = chalk.magenta(`clap ${process.argv.slice(2).join(" ")}`);
@@ -185,7 +186,7 @@ const tasks = {
   ),
 
   "test-ci": ["test-frontend-ci"],
-  "test-cov": ["test-frontend-cov"],
+  "test-cov": ["karma-test-frontend-cov", "jest-test-frontend-cov"],
   "test-dev": ["test-frontend-dev"],
   "test-watch": ["test-frontend-dev-watch"],
   "concurrent-test-watch": ["hot", "test-frontend-dev-watch"],
@@ -194,10 +195,28 @@ const tasks = {
     `karma start --browsers PhantomJS,Firefox`,
     `${archetype.devPath}/config/karma/karma.conf.coverage.js --colors`
   ),
-  "test-frontend-cov": mkCmd(
-    `karma start`,
-    `${archetype.devPath}/config/karma/karma.conf.coverage.js --colors`
-  ),
+  "karma-test-frontend-cov": () => {
+    if ($$.test("-d", "test")) {
+      console.log("\nRunning Karma unit tests:\n");
+      return mkCmd(
+        `~$karma start`,
+        `${archetype.devPath}/config/karma/karma.conf.coverage.js --colors`
+      );
+    }
+    return undefined;
+  },
+  "jest-test-frontend-cov": () => {
+    const srcJestFiles = glob.sync(`${process.cwd()}/src/**/\*.{test,spec}.{js,jsx}`);
+
+    if ($$.test("-d", "_test_") || srcJestFiles.length > 0) {
+      console.info("\nRunning jest unit tests:\n");
+      return mkCmd(
+        `~$jest`,
+        `--config ${archetype.devPath}/config/jest/jest.config.js`
+      )
+    }
+    return undefined;
+  },
   "test-frontend-dev": mkCmd(
     `karma start`,
     `${archetype.devPath}/config/karma/karma.conf.dev.js --colors`
