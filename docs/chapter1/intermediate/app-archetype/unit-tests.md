@@ -8,7 +8,7 @@ App Archetype supports Karma as its Javascript test runner with the Mocha testin
 
 ### Run your karma tests
 
-To run your karma unit tests, simply place your tests in the `test` folder. And run `npm run start`.
+To run your karma unit tests, simply place your tests in the `test` folder. And run `npm run test`.
 
 ## Jest
 

@@ -8,7 +8,7 @@ Component Archetype supports Karma as its Javascript test runner with the Mocha 
 
 ### Run your karma tests
 
-To run your karma unit tests, simply place your component tests inside `packages/[component]/test` folder. And run `npm run start`.
+To run your karma unit tests, simply place your component tests inside `packages/[component]/test` folder. And run `npm run test`.
 
 ## Jest
 
