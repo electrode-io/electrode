@@ -7,3 +7,4 @@ Let's go through the most important sections to understand the new Component Arc
 -   [Structure](/chapter1/intermediate/component-archetype/component-archetype-structure.md)
 -   [Webpack Config](/chapter1/intermediate/component-archetype/webpack-config.md)
 -   [Extract Styles](/chapter1/intermediate/component-archetype/extract-styles.md)
+-   [Unit Tests](/chapter1/intermediate/component-archetype/unit-tests.md)
