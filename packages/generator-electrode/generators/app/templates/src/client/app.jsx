@@ -3,7 +3,7 @@
 //
 
 import React from "react";
-import { render } from "react-dom";
+import { render, hydrate } from "react-dom";
 import { routes } from "./routes";
 import { Router, browserHistory } from "react-router";
 import { createStore } from "redux";
@@ -29,11 +29,14 @@ require.ensure(
 
 window.webappStart = () => {
   const initialState = window.__PRELOADED_STATE__;
+  const jsContent = document.querySelector(".js-content");
+  const reactStart = (initialState && jsContent.innerHTML) ? hydrate : render;
+
   const store = createStore(rootReducer, initialState);
-  render(
+  reactStart(
     <Provider store={store}>
       <Router history={browserHistory}>{routes}</Router>
     </Provider>,
-    document.querySelector(".js-content")
+    jsContent
   );
 };
