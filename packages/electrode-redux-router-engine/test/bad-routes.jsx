@@ -3,13 +3,11 @@ import { Route, IndexRoute } from "react-router";
 
 class Home extends React.Component {
   render () {
-    return "Home";
   }
 }
 
 class Page extends React.Component {
   render () {
-    return "Page";
   }
 }
 

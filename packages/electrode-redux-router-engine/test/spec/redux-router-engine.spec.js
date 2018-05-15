@@ -143,7 +143,7 @@ describe("redux-router-engine", function () {
       intercept.restore();
       expect(result.status).to.equal(500);
       expect(result._err.message)
-        .to.contain("Page.render(): A valid React element (or null) must be returned");
+        .to.contain("Nothing was returned from render");
     });
   });
 
@@ -177,7 +177,7 @@ describe("redux-router-engine", function () {
     testReq.url.path = "/test";
 
     return engine.render(testReq).then((result) => {
-      expect(result.html).to.contain("data-reactid");
+      expect(result.html).to.contain("data-reactroot");
     });
   });
 
@@ -186,7 +186,7 @@ describe("redux-router-engine", function () {
     testReq.url.path = "/test";
 
     return engine.render(testReq).then((result) => {
-      expect(result.html).to.not.contain("data-reactid");
+      expect(result.html).to.not.contain("data-reactroot");
     });
   });
 
@@ -223,7 +223,7 @@ describe("redux-router-engine", function () {
     testReq.url.path = "/test";
 
     return engine.render(testReq, { withIds: false }).then((result) => {
-      expect(result.html).to.not.contain("data-reactid");
+      expect(result.html).to.not.contain("data-reactroot");
     });
   });
 
