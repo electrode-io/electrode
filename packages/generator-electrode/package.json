@@ -45,7 +45,7 @@
     "xclap": "^0.2.0",
     "xclap-cli": "^0.1.1",
     "yeoman-assert": "^3.0.0",
-    "yeoman-test": "^1.6.0"
+    "yeoman-test": "1.7.0"
   },
   "eslintConfig": {
     "env": {
