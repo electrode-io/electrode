@@ -1,3 +1,51 @@
+# 5/17/2018
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-react-app@5.1.4 `(5.1.3 => 5.1.4)`
+-   electrode-archetype-react-app-dev@5.1.4 `(5.1.3 => 5.1.4)`
+-   electrode-archetype-react-component@5.1.3 `(5.1.2 => 5.1.3)`
+-   electrode-archetype-react-component-dev@5.1.3 `(5.1.2 => 5.1.3)`
+-   electrode-redux-router-engine@1.5.1 `(1.5.0 => 1.5.1)`
+-   generator-electrode@4.0.5 `(4.0.4 => 4.0.5)`
+
+### Lerna Updated
+
+-   electrode-archetype-react-app-dev@5.1.4 `(5.1.3 => 5.1.4)`
+-   electrode-ignite@2.0.5 `(2.0.4 => 2.0.5)`
+-   electrode-webpack-reporter@0.4.4 `(0.4.3 => 0.4.4)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   add babel-runtime to production dep ([#779](https://github.com/electrode-io/electrode/pull/779)) [commit](http://github.com/electrode-io/electrode/commit/3331a9ce189bf52305a25621d2447a01a1ba886c)
+    -   fix optimize-stats task ([#774](https://github.com/electrode-io/electrode/pull/774)) [commit](http://github.com/electrode-io/electrode/commit/2b5c7096f89915330924d55b99002fdd12bfeaf0)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   component archetype style loader fixes ([#773](https://github.com/electrode-io/electrode/pull/773)) [commit](http://github.com/electrode-io/electrode/commit/3d427feb83820b194a026b2c642efca1326a4259)
+
+-   `packages/electrode-redux-router-engine`
+
+    -   using `ReactDOM.hydrate` to bootstrap SSR content ([#787](https://github.com/electrode-io/electrode/pull/787)) [commit](http://github.com/electrode-io/electrode/commit/27bb19b7eb64511dde951a0649fa23830b67534e)
+
+-   `packages/generator-electrode`
+
+    -   component demo-app webpack config allow importing from `packages/.../lib` ([#784](https://github.com/electrode-io/electrode/pull/784)) [commit](http://github.com/electrode-io/electrode/commit/d13afeddb19d2ba0a1a0182ca88d92faefbf0013)
+    -   using `ReactDOM.hydrate` to bootstrap SSR content ([#787](https://github.com/electrode-io/electrode/pull/787)) [commit](http://github.com/electrode-io/electrode/commit/27bb19b7eb64511dde951a0649fa23830b67534e)
+
+-   `samples/universal-react-node`
+
+    -   using `ReactDOM.hydrate` to bootstrap SSR content ([#787](https://github.com/electrode-io/electrode/pull/787)) [commit](http://github.com/electrode-io/electrode/commit/27bb19b7eb64511dde951a0649fa23830b67534e)
+
+-   `MISC`
+
+    -   update copyright message ([#778](https://github.com/electrode-io/electrode/pull/778)) [commit](http://github.com/electrode-io/electrode/commit/1ecbf836a6be79418189ce759379404206898e63)
+    -   Update copyright year ([#777](https://github.com/electrode-io/electrode/pull/777)) [commit](http://github.com/electrode-io/electrode/commit/5b39dec2dc4f5630d51917fad43dc9bab51baced)
+
 # 4/24/2018
 
 ## Packages
