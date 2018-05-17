@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-app-dev",
-  "version": "5.1.3",
+  "version": "5.1.4",
   "description": "Electrode NodeJS/React Application Archetype (Development)",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -48,7 +48,7 @@
     "electrode-bundle-analyzer": "^1.0.0",
     "electrode-cdn-file-loader": "^1.0.0",
     "electrode-electrify": "^1.0.0",
-    "electrode-webpack-reporter": "^0.4.3",
+    "electrode-webpack-reporter": "^0.4.4",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.1.0",
     "eslint": "^4.8.0",

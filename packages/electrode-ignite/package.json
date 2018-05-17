@@ -1,6 +1,6 @@
 {
   "name": "electrode-ignite",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "The CLI tool for development with OSS Electrode React/NodeJS Platform.",
   "main": "bin/ignite.js",
   "scripts": {
@@ -39,7 +39,7 @@
   "dependencies": {
     "bluebird": "^3.5.1",
     "chalk": "^2.0.1",
-    "generator-electrode": "^4.0.4",
+    "generator-electrode": "^4.0.5",
     "ignite-core": "^1.1.3",
     "opn": "^5.1.0",
     "xclap-cli": "^0.1.3",
