@@ -42,7 +42,7 @@
     "koa-router": "^5.4.0",
     "koa-send": "^3.2.0",
     "koa-static": "^2.0.0", <% } if (isPWA) { %>
-    "react-notify-toast": "^0.4.0",<% } if (isAutoSSR) {%>
+    "react-notify-toast": "^0.4.1",<% } if (isAutoSSR) {%>
     "electrode-auto-ssr": "^1.0.0", <% } %>
     "lodash": "^4.10.1"
   },

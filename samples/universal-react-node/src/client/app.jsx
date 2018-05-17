@@ -1,5 +1,5 @@
 import React from "react";
-import {render} from "react-dom";
+import {render, hydrate} from "react-dom";
 import {routes} from "./routes";
 import {Router, browserHistory} from "react-router";
 import {createStore, compose, applyMiddleware} from "redux";
@@ -23,14 +23,17 @@ const enhancer = compose(
 
 window.webappStart = () => {
   const initialState = window.__PRELOADED_STATE__;
+  const jsContent = document.querySelector(".js-content");
+
   const store = createStore(rootReducer, initialState, enhancer);
-  render(
+  const reactStart = (initialState && jsContent.innerHTML) ? hydrate : render;
+  reactStart(
       <Provider store={store}>
         <div>
           <Router history={browserHistory}>{routes}</Router>
           <DevTools />
         </div>
       </Provider>,
-    document.querySelector(".js-content")
+    jsContent
   );
 };

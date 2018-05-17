@@ -40,7 +40,7 @@
     "es6-promise": "^4.0.5",
     "isomorphic-fetch": "^2.2.1",
     "mongojs": "^2.4.0",
-    "react-notify-toast": "^0.4.0",
+    "react-notify-toast": "^0.4.1",
     "uuid": "^3.0.1"
   },
   "devDependencies": {
