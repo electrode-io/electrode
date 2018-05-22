@@ -35,7 +35,6 @@
     "config": "^1.19.0",
     "css-loader": "^0.28.9",
     "electrode-check-dependencies": "^1.0.2",
-    "electrode-demo-index": "^1.0.0",
     "electrode-docgen": "^1.0.0",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.1.0",
