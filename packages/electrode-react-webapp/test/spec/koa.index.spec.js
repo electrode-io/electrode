@@ -121,7 +121,7 @@ describe("koa electrode-react-webapp", function() {
       const port = server.address().port;
       return request(`http://localhost:${port}/func?__mode=noss`).end((err, resp) => {
         if (err) return reject(err);
-        expect(resp.text).includes(`<div class="js-content"></div>`);
+        expect(resp.text).includes(`<div class="js-content"><!-- noss mode --></div>`);
         return server.close(() => resolve());
       });
     });
@@ -144,12 +144,14 @@ describe("koa electrode-react-webapp", function() {
     const server = startServer(webappOptions());
     return new Promise(resolve => {
       const port = server.address().port;
-      return request(`http://localhost:${port}/status?status=404&html=NotFoundHTML&render=0`).end((err, resp) => {
-        expect(err).to.be.ok;
-        expect(resp.status).to.equal(404);
-        expect(resp.text).to.equal("NotFoundHTML");
-        server.close(() => resolve());
-      });
+      return request(`http://localhost:${port}/status?status=404&html=NotFoundHTML&render=0`).end(
+        (err, resp) => {
+          expect(err).to.be.ok;
+          expect(resp.status).to.equal(404);
+          expect(resp.text).to.equal("NotFoundHTML");
+          server.close(() => resolve());
+        }
+      );
     });
   });
 
@@ -157,11 +159,13 @@ describe("koa electrode-react-webapp", function() {
     const server = startServer(webappOptions());
     return new Promise(resolve => {
       const port = server.address().port;
-      return request(`http://localhost:${port}/status?status=404&data=test&render=0`).end((err, resp) => {
-        expect(err).to.be.ok;
-        expect(resp.status).to.equal(404);
-        server.close(() => resolve());
-      });
+      return request(`http://localhost:${port}/status?status=404&data=test&render=0`).end(
+        (err, resp) => {
+          expect(err).to.be.ok;
+          expect(resp.status).to.equal(404);
+          server.close(() => resolve());
+        }
+      );
     });
   });
 
@@ -169,14 +173,14 @@ describe("koa electrode-react-webapp", function() {
     const server = startServer(webappOptions());
     return new Promise((resolve, reject) => {
       const port = server.address().port;
-      return request(
-        `http://localhost:${port}/status?status=200&html=HelloTestHTML&render=0`
-      ).end((err, resp) => {
-        if (err) reject(err);
-        expect(resp.status).to.equal(200);
-        expect(resp.text).to.equal("HelloTestHTML");
-        server.close(() => resolve());
-      });
+      return request(`http://localhost:${port}/status?status=200&html=HelloTestHTML&render=0`).end(
+        (err, resp) => {
+          if (err) reject(err);
+          expect(resp.status).to.equal(200);
+          expect(resp.text).to.equal("HelloTestHTML");
+          server.close(() => resolve());
+        }
+      );
     });
   });
 
@@ -210,13 +214,13 @@ describe("koa electrode-react-webapp", function() {
     const server = startServer(webappOptions());
     return new Promise(resolve => {
       const port = server.address().port;
-      return request(
-        `http://localhost:${port}/status?status=401&message=HelloTest401`
-      ).end((err, resp) => {
-        expect(resp.status).to.equal(401);
-        expect(resp.body.message).to.equal("HelloTest401");
-        server.close(() => resolve());
-      });
+      return request(`http://localhost:${port}/status?status=401&message=HelloTest401`).end(
+        (err, resp) => {
+          expect(resp.status).to.equal(401);
+          expect(resp.body.message).to.equal("HelloTest401");
+          server.close(() => resolve());
+        }
+      );
     });
   });
 
@@ -224,13 +228,13 @@ describe("koa electrode-react-webapp", function() {
     const server = startServer(webappOptions());
     return new Promise(resolve => {
       const port = server.address().port;
-      return request(
-        `http://localhost:${port}/status?status=200&message=HelloTest200`
-      ).end((err, resp) => {
-        expect(resp.status).to.equal(200);
-        expect(resp.body.message).to.equal("HelloTest200");
-        server.close(() => resolve());
-      });
+      return request(`http://localhost:${port}/status?status=200&message=HelloTest200`).end(
+        (err, resp) => {
+          expect(resp.status).to.equal(200);
+          expect(resp.body.message).to.equal("HelloTest200");
+          server.close(() => resolve());
+        }
+      );
     });
   });
 
@@ -240,8 +244,12 @@ describe("koa electrode-react-webapp", function() {
       const port = server.address().port;
       return request(`http://localhost:${port}/string`).end((err, resp) => {
         if (err) reject(err);
-        expect(resp.text).includes("<!DOCTYPE html>");
-        expect(resp.text).includes(">test content as a string</div>");
+        try {
+          expect(resp.text).includes("<!DOCTYPE html>");
+          expect(resp.text).includes(">test content as a string</div>");
+        } catch (err2) {
+          reject(err2);
+        }
         server.close(() => resolve());
       });
     });

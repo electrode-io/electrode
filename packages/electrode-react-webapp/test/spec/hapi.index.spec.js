@@ -39,6 +39,9 @@ describe("hapi electrode-react-webapp", () => {
             }
           }
         }
+      },
+      electrode: {
+        logLevel: "none"
       }
     };
   };
@@ -536,6 +539,210 @@ describe("hapi electrode-react-webapp", () => {
           expect(res.statusCode).to.equal(200);
           expect(res.result).includes(`<title>user-handler-title</title>`);
           expect(res.result).includes(`</script><div>user-promise-token</div><script`);
+          expect(res.result).includes(
+            `<div>test html-1</div><div>user-spot-1;user-spot-2;user-spot-3</div><div class="js-content">` // eslint-disable-line
+          );
+          expect(res.result).includes(
+            `</script><div>from custom-1</div><div>user-token-1</div><div>user-token-2</div><noscript>` // eslint-disable-line
+          );
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
+  it("should handle if content function throws", () => {
+    assign(paths, {
+      content: () => {
+        const err = new Error("test content throw");
+        err.html = "test content throw html with status";
+        err.status = 401;
+        return Promise.reject(err);
+      }
+    });
+
+    configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
+    configOptions.stats = "test/data/stats-test-one-bundle.json";
+    configOptions.htmlFile = "test/data/index-1.html";
+    Object.assign(paths, {
+      tokenHandler: "./test/fixtures/token-handler"
+    });
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .then(res => {
+          expect(res.statusCode).to.equal(401);
+          expect(res.result).to.equal("test content throw html with status");
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
+  it("should handle if content function throws generic error", () => {
+    assign(paths, {
+      content: () => {
+        const err = new Error("test content throw");
+        return Promise.reject(err);
+      }
+    });
+
+    configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
+    configOptions.stats = "test/data/stats-test-one-bundle.json";
+    configOptions.htmlFile = "test/data/index-1.html";
+    Object.assign(paths, {
+      tokenHandler: "./test/fixtures/token-handler"
+    });
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .then(res => {
+          expect(res.statusCode).to.equal(500);
+          expect(res.result).to.equal("test content throw");
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
+  it("should pass options with mode as datass from request to content function", () => {
+    let ssrPrefetchOnly;
+    assign(paths, {
+      content: request => {
+        ssrPrefetchOnly = request.app.ssrPrefetchOnly;
+        const mode = ssrPrefetchOnly && "datass";
+        return Promise.resolve({
+          status: 200,
+          html: "no-ss",
+          prefetch: `prefetch-mode: ${mode}`
+        });
+      }
+    });
+
+    configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
+    configOptions.stats = "test/data/stats-test-one-bundle.json";
+    configOptions.htmlFile = "test/data/index-1.html";
+    Object.assign(paths, {
+      tokenHandler: "./test/fixtures/token-handler"
+    });
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/?__mode=datass"
+        })
+        .then(res => {
+          expect(ssrPrefetchOnly).to.equal(true);
+          expect(res.statusCode).to.equal(200);
+          expect(res.result).includes("no-ss");
+          expect(res.result).includes("prefetch-mode: datass");
+          expect(res.result).includes(`<title>user-handler-title</title>`);
+          expect(res.result).includes(`</script><div>user-promise-token</div><script`);
+          expect(res.result).includes(
+            `<div>test html-1</div><div>user-spot-1;user-spot-2;user-spot-3</div><div class="js-content">` // eslint-disable-line
+          );
+          expect(res.result).includes(
+            `</script><div>from custom-1</div><div>user-token-1</div><div>user-token-2</div><noscript>` // eslint-disable-line
+          );
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
+  it("should pass datass mode from routeOptions to content function", () => {
+    configOptions.serverSideRendering = "datass";
+    let ssrPrefetchOnly;
+    assign(paths, {
+      content: request => {
+        ssrPrefetchOnly = request.app.ssrPrefetchOnly;
+        const mode = ssrPrefetchOnly && "datass";
+        return Promise.resolve({
+          status: 200,
+          html: "no-ss",
+          prefetch: `prefetch-mode: ${mode}`
+        });
+      }
+    });
+
+    configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
+    configOptions.stats = "test/data/stats-test-one-bundle.json";
+    configOptions.htmlFile = "test/data/index-1.html";
+    Object.assign(paths, {
+      tokenHandler: "./test/fixtures/token-handler"
+    });
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .then(res => {
+          expect(ssrPrefetchOnly).to.equal(true);
+          expect(res.statusCode).to.equal(200);
+          expect(res.result).includes("no-ss");
+          expect(res.result).includes("prefetch-mode: datass");
+          expect(res.result).includes(`<title>user-handler-title</title>`);
+          expect(res.result).includes(`</script><div>user-promise-token</div><script`);
+          expect(res.result).includes(
+            `<div>test html-1</div><div>user-spot-1;user-spot-2;user-spot-3</div><div class="js-content">` // eslint-disable-line
+          );
+          expect(res.result).includes(
+            `</script><div>from custom-1</div><div>user-token-1</div><div>user-token-2</div><noscript>` // eslint-disable-line
+          );
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
+  it("should handle mode as noss from request", () => {
+    let contentCalled = false;
+    assign(paths, {
+      content: () => {
+        contentCalled = true;
+      }
+    });
+
+    configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
+    configOptions.stats = "test/data/stats-test-one-bundle.json";
+    configOptions.htmlFile = "test/data/index-1.html";
+    Object.assign(paths, {
+      tokenHandler: "./test/fixtures/token-handler"
+    });
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/?__mode=noss"
+        })
+        .then(res => {
+          expect(contentCalled, "content should not have been called").to.equal(false);
+          expect(res.statusCode).to.equal(200);
+          expect(res.result).includes(`<title>user-handler-title</title>`);
+          expect(res.result).includes(`<!-- noss mode -->`);
+          expect(res.result).includes(`</div><div>user-promise-token</div><script`);
           expect(res.result).includes(
             `<div>test html-1</div><div>user-spot-1;user-spot-2;user-spot-3</div><div class="js-content">` // eslint-disable-line
           );

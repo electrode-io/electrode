@@ -16,6 +16,7 @@ class Token {
     this.wantsNext = undefined;
   }
 
+  // if token is a module, then load it
   load(options) {
     if (!this.isModule) return;
 
@@ -33,6 +34,8 @@ class Token {
       `custom token ${this.id} module doesn't have process method`
     );
 
+    // if process function takes more than one params, then it should take a
+    // next callback so it can do async work, and call next after that's done.
     this.wantsNext = this.custom.process.length > 1;
   }
 
