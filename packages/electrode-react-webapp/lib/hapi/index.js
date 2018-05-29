@@ -71,4 +71,9 @@ registerRoutesPlugin.attributes = {
   }
 };
 
-module.exports = registerRoutesPlugin;
+// registerRoutesPlugin.registerRoutes = registerRoutes;
+
+module.exports = {
+  register: registerRoutesPlugin,
+  registerRoutes
+};

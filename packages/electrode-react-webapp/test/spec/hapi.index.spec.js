@@ -6,7 +6,7 @@ const Promise = require("bluebird");
 const assign = require("object-assign");
 const electrodeServer = require("electrode-server");
 const Path = require("path");
-const registerPlugin = require("../../lib/hapi");
+const webapp = require("../..");
 const ReactDOMServer = require("react-dom/server");
 const React = require("react");
 const Helmet = require("react-helmet").Helmet;
@@ -58,7 +58,7 @@ describe("hapi electrode-react-webapp", () => {
 
   it("should fail if registering plugin throws", () => {
     let error;
-    registerPlugin(
+    webapp.register(
       {},
       {
         paths: {

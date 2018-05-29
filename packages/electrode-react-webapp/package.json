@@ -2,6 +2,7 @@
   "name": "electrode-react-webapp",
   "version": "2.2.1",
   "description": "Hapi plugin that provides a default React web app template",
+  "main": "index.js",
   "scripts": {
     "lint": "clap lint",
     "test": "npm run lint && clap check",

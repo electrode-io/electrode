@@ -2,7 +2,7 @@
 
 const Promise = require("bluebird");
 const express = require("express");
-const registerRoutes = require("../../lib/express");
+const webapp = require("../..");
 const request = require("superagent");
 const expect = require("chai").expect;
 
@@ -85,7 +85,7 @@ describe("express electrode-react-webapp", function() {
   };
   const startServer = options => {
     const app = express();
-    registerRoutes(app, options);
+    webapp.middleware(app, options);
     return app.listen(0);
   };
 
@@ -144,14 +144,14 @@ describe("express electrode-react-webapp", function() {
     const server = startServer(webappOptions());
     return new Promise(resolve => {
       const port = server.address().port;
-      return request(
-        `http://localhost:${port}/status?status=404&html=NotFoundHTML&render=0`
-      ).end((err, resp) => {
-        expect(err).to.be.ok;
-        expect(resp.status).to.equal(404);
-        expect(resp.text).to.equal("NotFoundHTML");
-        server.close(() => resolve());
-      });
+      return request(`http://localhost:${port}/status?status=404&html=NotFoundHTML&render=0`).end(
+        (err, resp) => {
+          expect(err).to.be.ok;
+          expect(resp.status).to.equal(404);
+          expect(resp.text).to.equal("NotFoundHTML");
+          server.close(() => resolve());
+        }
+      );
     });
   });
 
@@ -159,14 +159,14 @@ describe("express electrode-react-webapp", function() {
     const server = startServer(webappOptions());
     return new Promise(resolve => {
       const port = server.address().port;
-      return request(
-        `http://localhost:${port}/status?status=410&html=GoneHTML&render=0`
-      ).end((err, resp) => {
-        expect(err).to.be.ok;
-        expect(resp.status).to.equal(410);
-        expect(resp.text).to.equal("GoneHTML");
-        server.close(() => resolve());
-      });
+      return request(`http://localhost:${port}/status?status=410&html=GoneHTML&render=0`).end(
+        (err, resp) => {
+          expect(err).to.be.ok;
+          expect(resp.status).to.equal(410);
+          expect(resp.text).to.equal("GoneHTML");
+          server.close(() => resolve());
+        }
+      );
     });
   });
 
@@ -174,13 +174,13 @@ describe("express electrode-react-webapp", function() {
     const server = startServer(webappOptions());
     return new Promise(resolve => {
       const port = server.address().port;
-      return request(
-        `http://localhost:${port}/status?status=404&data=test&render=0`
-      ).end((err, resp) => {
-        expect(err).to.be.ok;
-        expect(resp.status).to.equal(404);
-        server.close(() => resolve());
-      });
+      return request(`http://localhost:${port}/status?status=404&data=test&render=0`).end(
+        (err, resp) => {
+          expect(err).to.be.ok;
+          expect(resp.status).to.equal(404);
+          server.close(() => resolve());
+        }
+      );
     });
   });
 
@@ -203,14 +203,14 @@ describe("express electrode-react-webapp", function() {
     const server = startServer(webappOptions());
     return new Promise((resolve, reject) => {
       const port = server.address().port;
-      return request(
-        `http://localhost:${port}/status?status=200&html=HelloTestHTML&render=0`
-      ).end((err, resp) => {
-        if (err) reject(err);
-        expect(resp.status).to.equal(200);
-        expect(resp.text).to.equal("HelloTestHTML");
-        server.close(() => resolve());
-      });
+      return request(`http://localhost:${port}/status?status=200&html=HelloTestHTML&render=0`).end(
+        (err, resp) => {
+          if (err) reject(err);
+          expect(resp.status).to.equal(200);
+          expect(resp.text).to.equal("HelloTestHTML");
+          server.close(() => resolve());
+        }
+      );
     });
   });
 
@@ -244,13 +244,13 @@ describe("express electrode-react-webapp", function() {
     const server = startServer(webappOptions());
     return new Promise(resolve => {
       const port = server.address().port;
-      return request(
-        `http://localhost:${port}/status?status=401&message=HelloTest401`
-      ).end((err, resp) => {
-        expect(resp.status).to.equal(401);
-        expect(resp.body.message).to.equal("HelloTest401");
-        server.close(() => resolve());
-      });
+      return request(`http://localhost:${port}/status?status=401&message=HelloTest401`).end(
+        (err, resp) => {
+          expect(resp.status).to.equal(401);
+          expect(resp.body.message).to.equal("HelloTest401");
+          server.close(() => resolve());
+        }
+      );
     });
   });
 
@@ -258,13 +258,13 @@ describe("express electrode-react-webapp", function() {
     const server = startServer(webappOptions());
     return new Promise(resolve => {
       const port = server.address().port;
-      return request(
-        `http://localhost:${port}/status?status=200&message=HelloTest200`
-      ).end((err, resp) => {
-        expect(resp.status).to.equal(200);
-        expect(resp.body.message).to.equal("HelloTest200");
-        server.close(() => resolve());
-      });
+      return request(`http://localhost:${port}/status?status=200&message=HelloTest200`).end(
+        (err, resp) => {
+          expect(resp.status).to.equal(200);
+          expect(resp.body.message).to.equal("HelloTest200");
+          server.close(() => resolve());
+        }
+      );
     });
   });
 
@@ -326,7 +326,7 @@ describe("express electrode-react-webapp", function() {
   it("should set ssrPrefetchOnly for datass mode", () => {
     const options = webappOptions();
     const app = express();
-    registerRoutes(app, options);
+    webapp.middleware(app, options);
     app.use((req, res, next) => {
       req.app = {};
       next();
