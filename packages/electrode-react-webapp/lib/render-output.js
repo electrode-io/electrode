@@ -2,7 +2,6 @@
 
 const assert = require("assert");
 const Promise = require("bluebird");
-const HttpStatusCodes = require("http-status-codes");
 
 class Output {
   constructor() {
@@ -92,9 +91,8 @@ class RenderOutput {
   constructor(context) {
     this._output = new MainOutput();
     this._flushQ = [];
-    this._context = context || {};
+    this._context = context || { transform: x => x };
     this._result = ""; // will hold final result if context doesn't have send
-    this._send = this._context.send ? x => this._context.send(x) : x => (this._result += x);
   }
 
   // add data to the end of the output
@@ -138,21 +136,9 @@ class RenderOutput {
     return promise;
   }
 
-  _getResolveResult() {
-    const { content } = this._context;
-    if (content && content.status !== HttpStatusCodes.OK) {
-      return {
-        status: this._context.content.status,
-        html: this._result
-      };
-    }
-
-    return this._result;
-  }
-
   _finish() {
     if (this._resolve) {
-      this._resolve(this._getResolveResult());
+      this._resolve(this._context.transform(this._result, this));
     }
     this._resolve = this._reject = undefined;
   }
@@ -166,7 +152,12 @@ class RenderOutput {
     const output = this._flushQ[0];
     if (!output._hasPending()) {
       this._flushQ.shift();
-      this._send(output.stringify());
+      const x = output.stringify();
+      if (this._context.send) {
+        this._context.send(x);
+      } else {
+        this._result += x;
+      }
       this._checkFlushQ();
     }
   }

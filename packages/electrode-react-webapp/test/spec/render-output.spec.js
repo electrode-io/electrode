@@ -22,6 +22,7 @@ describe("render-output", function() {
     const context = {
       send: x => (text = x)
     };
+
     const ro = new RenderOutput(context);
     ro.add("hello world");
     ro.add("foo bar");

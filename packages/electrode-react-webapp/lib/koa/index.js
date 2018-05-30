@@ -8,14 +8,14 @@ const assert = require("assert");
 const ReactWebapp = require("../react-webapp");
 const HttpStatus = require("../http-status");
 
-function handleRoute(handler) {
+function DefaultHandleRoute(handler, content) {
   const request = this.request;
   const respond = (status, data) => {
     this.status = status;
     this.body = data;
   };
 
-  return handler({ mode: request.query.__mode || "", request })
+  return handler({ content, mode: request.query.__mode || "", request })
     .then(data => {
       const status = data.status;
 
@@ -53,8 +53,9 @@ const registerRoutes = (router, options) => {
     };
 
     const routeOptions = _.defaults({ htmlFile: v.htmlFile }, registerOptions);
-
-    const routeHandler = ReactWebapp.makeRouteHandler(routeOptions, resolveContent());
+    const routeHandler = ReactWebapp.makeRouteHandler(routeOptions);
+    const handleRoute = options.handleRoute || DefaultHandleRoute;
+    const content = resolveContent();
 
     let methods = v.method || ["GET"];
     if (!Array.isArray(methods)) {
@@ -68,7 +69,7 @@ const registerRoutes = (router, options) => {
 
       /*eslint max-nested-callbacks: [0, 4]*/
       router(method.toLowerCase(), path, function() {
-        return handleRoute.call(this, routeHandler);
+        return handleRoute.call(this, routeHandler, content);
       }); //end get
     });
   });

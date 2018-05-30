@@ -9,17 +9,18 @@ function test1() {
     htmlFile: Path.join(__dirname, "data/perf-1.html"),
     tokenHandler: "./test/fixtures/perf-1-handler"
   });
-  const handler = ReactWebapp.makeRouteHandler(options, () => {
+  const content = () => {
     return {
       status: 200,
       html: "<div>testing</div>",
       prefetch: "window._data = {};"
     };
-  });
+  };
+  const handler = ReactWebapp.makeRouteHandler(options);
   const request = {};
 
   function render(deferred) {
-    handler({ request }).then(() => {
+    handler({ request, content }).then(() => {
       deferred.resolve();
     });
   }
@@ -31,7 +32,7 @@ function test1() {
       fn: render
     })
     .on("complete", function() {
-      console.log(this[0].times);
+      console.log(this[0].times, 1 / this[0].times.period);
     })
     .run();
 }

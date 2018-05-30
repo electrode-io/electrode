@@ -2,7 +2,7 @@
 
 const Promise = require("bluebird");
 const express = require("express");
-const webapp = require("../..");
+const registerRoutes = require("../../lib/express");
 const request = require("superagent");
 const expect = require("chai").expect;
 
@@ -85,7 +85,7 @@ describe("express electrode-react-webapp", function() {
   };
   const startServer = options => {
     const app = express();
-    webapp.middleware(app, options);
+    registerRoutes(app, options);
     return app.listen(0);
   };
 
@@ -95,8 +95,12 @@ describe("express electrode-react-webapp", function() {
       const port = server.address().port;
       return request(`http://localhost:${port}`).end((err, resp) => {
         if (err) return reject(err);
-        expect(resp.text).includes("<div>Hello Electrode</div>");
-        expect(resp.text).includes("console.log('Hello');");
+        try {
+          expect(resp.text).includes("<div>Hello Electrode</div>");
+          expect(resp.text).includes("console.log('Hello');");
+        } catch (err2) {
+          reject(err2);
+        }
         return server.close(() => resolve());
       });
     });
@@ -121,7 +125,7 @@ describe("express electrode-react-webapp", function() {
       const port = server.address().port;
       return request(`http://localhost:${port}/func?__mode=noss`).end((err, resp) => {
         if (err) return reject(err);
-        expect(resp.text).includes(`<div class="js-content"></div>`);
+        expect(resp.text).includes(`<div class="js-content"><!-- noss mode --></div>`);
         return server.close(() => resolve());
       });
     });
@@ -326,7 +330,7 @@ describe("express electrode-react-webapp", function() {
   it("should set ssrPrefetchOnly for datass mode", () => {
     const options = webappOptions();
     const app = express();
-    webapp.middleware(app, options);
+    registerRoutes(app, options);
     app.use((req, res, next) => {
       req.app = {};
       next();

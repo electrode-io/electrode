@@ -76,7 +76,7 @@ function getIconStats(iconStatsPath) {
 }
 
 function getCriticalCSS(path) {
-  const criticalCSSPath = Path.resolve(process.cwd(), path);
+  const criticalCSSPath = Path.resolve(process.cwd(), path || "");
 
   try {
     const criticalCSS = fs.readFileSync(criticalCSSPath).toString();
@@ -101,10 +101,13 @@ function getStatsPath(statsFilePath, buildArtifactsPath) {
     : statsFilePath;
 }
 
+const resolvePath = path => (!Path.isAbsolute(path) ? Path.resolve(path) : path);
+
 module.exports = {
   resolveChunkSelector,
   loadAssetsFromStats,
   getIconStats,
   getCriticalCSS,
-  getStatsPath
+  getStatsPath,
+  resolvePath
 };

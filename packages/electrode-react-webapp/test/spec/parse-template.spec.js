@@ -1,14 +1,17 @@
 "use strict";
 
-const parseTemplate = require("../../lib/parse-template");
+const AsyncTemplate = require("../../lib/async-template");
 const Fs = require("fs");
 const Path = require("path");
 const expect = require("chai").expect;
 
-describe("parse-template", function() {
+describe("AsyncTemplate._parseTemplate", function() {
   it("should parse template into tokens", () => {
-    const template = Fs.readFileSync(Path.join(__dirname, "../data/template1.html")).toString();
-    const tokens = parseTemplate(template);
+    const htmlFile = Path.join(__dirname, "../data/template1.html");
+    const asyncTemplate = new AsyncTemplate({
+      htmlFile,
+      tokenHandlers: "./test/fixtures/token-handler"
+    });
     const expected = [
       { str: "<html>\n\n<head>" },
       { id: "ssr content", isModule: false, pos: 17, custom: undefined, wantsNext: undefined },
@@ -39,12 +42,17 @@ describe("parse-template", function() {
       { id: "#critical css", isModule: true, pos: 228, custom: undefined, wantsNext: undefined },
       { str: "</head>\n\n</html>" }
     ];
-    expect(tokens).to.deep.equal(expected);
+    const template = Fs.readFileSync(htmlFile).toString();
+    expect(asyncTemplate._parseTemplate(template)).to.deep.equal(expected);
   });
 
   it("should parse template with token at end", () => {
-    const template = Fs.readFileSync(Path.join(__dirname, "../data/template2.html")).toString();
-    const tokens = parseTemplate(template);
+    const htmlFile = Path.join(__dirname, "../data/template2.html");
+    const asyncTemplate = new AsyncTemplate({
+      htmlFile,
+      tokenHandlers: "./test/fixtures/token-handler"
+    });
+
     const expected = [
       { str: "<html>\n\n<head>" },
       { id: "ssr content", isModule: false, pos: 17, custom: undefined, wantsNext: undefined },
@@ -75,6 +83,7 @@ describe("parse-template", function() {
       { str: "</head>\n\n</html>" },
       { id: "page title", isModule: false, pos: 246, custom: undefined, wantsNext: undefined }
     ];
-    expect(tokens).to.deep.equal(expected);
+    const template = Fs.readFileSync(htmlFile).toString();
+    expect(asyncTemplate._parseTemplate(template)).to.deep.equal(expected);
   });
 });

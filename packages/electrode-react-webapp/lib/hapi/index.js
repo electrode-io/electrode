@@ -1,14 +1,19 @@
 "use strict";
 
-/* eslint-disable no-magic-numbers */
+/* eslint-disable no-magic-numbers, max-params */
 
 const _ = require("lodash");
 const assert = require("assert");
 const ReactWebapp = require("../react-webapp");
 const HttpStatus = require("../http-status");
 
-const handleRoute = (request, reply, handler) => {
-  return handler({ mode: request.query.__mode || "", request })
+const DefaultHandleRoute = (request, reply, handler, content) => {
+  return handler({
+    content,
+    mode: request.query.__mode || "",
+    template: request.indexPageTemplate,
+    request
+  })
     .then(data => {
       const status = data.status;
 
@@ -25,7 +30,7 @@ const handleRoute = (request, reply, handler) => {
       }
     })
     .catch(err => {
-      reply(err.html).code(err.status);
+      reply(err.html || err.message).code(err.status);
     });
 };
 
@@ -44,13 +49,15 @@ const registerRoutes = (server, options) => {
     };
 
     const routeOptions = ReactWebapp.setupPathOptions(registerOptions, path);
-    const routeHandler = ReactWebapp.makeRouteHandler(routeOptions, resolveContent());
+    const routeHandler = ReactWebapp.makeRouteHandler(routeOptions);
+    const handleRoute = options.handleRoute || DefaultHandleRoute;
+    const content = resolveContent();
 
     server.route({
       method: pathData.method || "GET",
       path,
       config: pathData.config || {},
-      handler: (req, reply) => handleRoute(req, reply, routeHandler)
+      handler: (req, reply) => handleRoute(req, reply, routeHandler, content)
     });
   });
 };
