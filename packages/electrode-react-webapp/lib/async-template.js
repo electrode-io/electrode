@@ -9,6 +9,7 @@ const loadHandler = require("./load-handler");
 const Renderer = require("./renderer");
 const { resolvePath } = require("./utils");
 const Token = require("./token");
+const stringArray = require("string-array");
 
 const tokenOpenTag = "<!--%{";
 const tokenCloseTag = "}-->";
@@ -25,6 +26,10 @@ class AsyncTemplate {
       htmlTokens: this._tokens,
       tokenHandlers: this._tokenHandlers
     });
+  }
+
+  get tokens() {
+    return this._tokens;
   }
 
   get handlersMap() {
@@ -71,10 +76,27 @@ class AsyncTemplate {
           `electrode-react-webapp: ${filepath}: Can't find token close tag at position ${pos}`
         );
 
-        const id = template.substring(pos + tokenOpenTag.length, ex).trim();
-        assert(id, `electrode-react-webapp: ${filepath}: Empty token at position ${pos}`);
+        let remain = template
+          .substring(pos + tokenOpenTag.length, ex)
+          .trim()
+          .split("\n")
+          .map(x => x.trim())
+          .filter(x => x)
+          .join(" ");
 
-        tokens.push(new Token(id, pos));
+        const token = remain.split(" ", 1)[0];
+        assert(token, `electrode-react-webapp: ${filepath}: Empty token at position ${pos}`);
+        remain = remain.substring(token.length).trim();
+
+        let props;
+        try {
+          props = this._parseTokenProps(remain);
+        } catch (e) {
+          const x = `at position ${pos} has malformed prop '${remain}': ${e.message}`;
+          assert(false, `electrode-react-webapp: ${filepath}: token ${token} ${x}.`);
+        }
+
+        tokens.push(new Token(token, pos, props));
         pt = ex + tokenCloseTag.length;
       } else {
         const str = template.substring(pt).trim();
@@ -84,6 +106,19 @@ class AsyncTemplate {
     }
 
     return tokens;
+  }
+
+  _parseTokenProps(str) {
+    const props = {};
+    while (str) {
+      const r = stringArray.parse(str);
+      const m = r.prefix.match(/([^=]+)=/);
+      assert(m && m[1], "name must be 'name='");
+      props[m[1]] = r.array;
+      str = r.remain.trim();
+    }
+
+    return props;
   }
 
   _initializeTemplate(filename) {

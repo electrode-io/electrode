@@ -8,12 +8,13 @@ const loadHandler = require("./load-handler");
 const viewTokenModules = {};
 
 class Token {
-  constructor(id, pos) {
+  constructor(id, pos, props) {
     this.id = id;
     this.isModule = id.startsWith("#");
     this.pos = pos;
     this.custom = undefined;
     this.wantsNext = undefined;
+    this.props = props || {};
   }
 
   // if token is a module, then load it
