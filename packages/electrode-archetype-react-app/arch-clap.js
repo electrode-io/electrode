@@ -3,16 +3,16 @@
 /* eslint-disable object-shorthand */
 
 const Fs = require("fs");
-const archetype = require("./config/archetype");
+const Path = require("path");
 const assert = require("assert");
 const requireAt = require("require-at");
-const glob = require("glob");
+const archetype = require("./config/archetype");
 
 assert(!archetype.noDev, "dev archetype is missing - development & build tasks not possible");
 
-const Path = require("path");
 const devRequire = archetype.devRequire;
 
+const glob = devRequire("glob");
 const chalk = devRequire("chalk");
 
 if (process.argv[1].indexOf("gulp") >= 0) {
