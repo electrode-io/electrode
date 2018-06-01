@@ -10,7 +10,7 @@ const exec = xsh.exec;
 const mkCmd = xsh.mkCmd;
 const chalk = devRequire("chalk");
 const Fs = require("fs");
-const glob = require("glob");
+const glob = devRequire("glob");
 
 if (process.argv[1].indexOf("gulp") >= 0) {
   const cmd = chalk.magenta(`clap ${process.argv.slice(2).join(" ")}`);
@@ -210,10 +210,7 @@ const tasks = {
 
     if ($$.test("-d", "_test_") || srcJestFiles.length > 0) {
       console.info("\nRunning jest unit tests:\n");
-      return mkCmd(
-        `~$jest`,
-        `--config ${archetype.devPath}/config/jest/jest.config.js`
-      )
+      return mkCmd(`~$jest`, `--config ${archetype.devPath}/config/jest/jest.config.js`);
     }
     return undefined;
   },

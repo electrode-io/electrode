@@ -2,11 +2,7 @@ const Path = require("path");
 const optionalRequire = require("optional-require")(require);
 
 const rootDir = process.cwd();
-const devPkgPath = Path.join(
-  rootDir,
-  "node_modules",
-  "electrode-archetype-react-component-dev"
-);
+const devPkgPath = Path.join(__dirname, "../..");
 const jestPath = Path.join(devPkgPath, "config", "jest");
 const fileMock = Path.join(jestPath, "__mocks__", "file-mock.js");
 const frameworkMock = Path.join(jestPath, "__mocks__", "framework-mock.js");
@@ -27,8 +23,4 @@ const jestDefaultConfig = {
   modulePathIgnorePatterns: ["<rootDir>/test", "<rootDir>/lib"]
 };
 
-module.exports = Object.assign(
-  {},
-  jestDefaultConfig,
-  archetypeOptions.jest
-);
+module.exports = Object.assign({}, jestDefaultConfig, archetypeOptions.jest);
