@@ -52,6 +52,9 @@
     "transform-runtime"
   ],
   "env": {
+    "test": {
+      "plugins": ["dynamic-import-node"]
+    },
     "production": {
       "plugins": [
         "babel-plugin-transform-react-constant-elements",

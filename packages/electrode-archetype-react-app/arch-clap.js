@@ -6,6 +6,7 @@ const Fs = require("fs");
 const archetype = require("./config/archetype");
 const assert = require("assert");
 const requireAt = require("require-at");
+const glob = require("glob");
 
 assert(!archetype.noDev, "dev archetype is missing - development & build tasks not possible");
 
@@ -670,7 +671,8 @@ Individual .babelrc files were generated for you in src/client and src/server
     "test-cov": [
       ".build.test.client.babelrc",
       ".build.test.server.babelrc",
-      "test-frontend-cov",
+      "karma-test-frontend-cov",
+      "jest-test-frontend-cov",
       "test-server-cov"
     ],
     "test-dev": ["test-frontend-dev", "test-server-dev"],
@@ -688,11 +690,28 @@ Individual .babelrc files were generated for you in src/client and src/server
       `--colors`
     ),
 
-    "test-frontend-cov": mkCmd(
-      `karma start`,
-      quote(karmaConfig("karma.conf.coverage.js")),
-      `--colors`
-    ),
+    "karma-test-frontend-cov": () => {
+      if (shell.test("-d", "test")) {
+        logger.info("\nRunning Karma unit tests:\n");
+        return mkCmd(
+          `~$karma start`,
+          quote(karmaConfig("karma.conf.coverage.js")),
+          `--colors`
+        )
+      }
+      return undefined;
+    },
+    "jest-test-frontend-cov": () => {
+      const srcJestFiles = glob.sync(`${Path.resolve(AppMode.src.dir)}/**/\*.{test,spec}.{js,jsx}`);
+
+      if (shell.test("-d", "_test_") || srcJestFiles.length > 0) {
+        logger.info("\nRunning jest unit tests:\n");
+        return mkCmd(
+          `~$jest`,
+          `--config ${archetype.config.jest}/jest.config.js`
+        )
+      }
+    },
 
     "test-frontend-dev": () =>
       exec(`pgrep -fl "webpack-dev-server.*${archetype.webpack.testPort}"`)
