@@ -693,23 +693,17 @@ Individual .babelrc files were generated for you in src/client and src/server
     "karma-test-frontend-cov": () => {
       if (shell.test("-d", "test")) {
         logger.info("\nRunning Karma unit tests:\n");
-        return mkCmd(
-          `~$karma start`,
-          quote(karmaConfig("karma.conf.coverage.js")),
-          `--colors`
-        )
+        return mkCmd(`~$karma start`, quote(karmaConfig("karma.conf.coverage.js")), `--colors`);
       }
       return undefined;
     },
+
     "jest-test-frontend-cov": () => {
       const srcJestFiles = glob.sync(`${Path.resolve(AppMode.src.dir)}/**/\*.{test,spec}.{js,jsx}`);
 
       if (shell.test("-d", "_test_") || srcJestFiles.length > 0) {
-        logger.info("\nRunning jest unit tests:\n");
-        return mkCmd(
-          `~$jest`,
-          `--config ${archetype.config.jest}/jest.config.js`
-        )
+        logger.info("Running jest unit tests");
+        return mkCmd(`~$jest`, `--config ${archetype.config.jest}/jest.config.js`);
       }
     },
 
