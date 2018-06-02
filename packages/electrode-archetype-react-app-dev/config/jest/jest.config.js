@@ -2,9 +2,8 @@ const Path = require("path");
 const optionalRequire = require("optional-require")(require);
 
 const rootDir = process.cwd();
-const devPkgPath = Path.join(__dirname, "../..");
 
-const jestPath = Path.join(devPkgPath, "config", "jest");
+const jestPath = __dirname;
 const fileMock = Path.join(jestPath, "__mocks__", "file-mock.js");
 const frameworkMock = Path.join(jestPath, "__mocks__", "framework-mock.js");
 
@@ -14,6 +13,7 @@ const archetypeOptions = optionalRequire(Path.resolve("archetype", "config"), {
 
 const jestDefaultConfig = {
   rootDir,
+  resolver: Path.join(__dirname, "jest.node-resolver.js"),
   moduleFileExtensions: ["js", "jsx"],
   moduleDirectories: ["node_modules", "src"],
   moduleNameMapper: {
@@ -24,8 +24,4 @@ const jestDefaultConfig = {
   modulePathIgnorePatterns: ["<rootDir>/test"]
 };
 
-module.exports = Object.assign(
-  {},
-  jestDefaultConfig,
-  archetypeOptions.jest
-);
+module.exports = Object.assign({}, jestDefaultConfig, archetypeOptions.jest);
