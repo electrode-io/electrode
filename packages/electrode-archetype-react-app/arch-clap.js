@@ -256,6 +256,11 @@ function startAppServer(options) {
  *
  */
 
+// quick tips name naming and invoking tasks:
+// - task name without . or - are primary tasks
+// - task name starts with . are hidden in help output
+// - when invoking tasks in [], starting name with ? means optional (ie: won't fail if task not found)
+
 function makeTasks() {
   const checkFrontendCov = minimum => {
     if (typeof minimum === "string") {
@@ -671,10 +676,10 @@ Individual .babelrc files were generated for you in src/client and src/server
     "test-cov": [
       ".build.test.client.babelrc",
       ".build.test.server.babelrc",
-      "karma-test-frontend-cov",
-      "jest-test-frontend-cov",
+      "?.karma.test-frontend-cov",
+      ".jest.test-frontend-cov",
       "test-server-cov"
-    ],
+    ].filter(x => x),
     "test-dev": ["test-frontend-dev", "test-server-dev"],
 
     "test-watch": () =>
@@ -682,41 +687,22 @@ Individual .babelrc files were generated for you in src/client and src/server
         .then(() => `test-frontend-dev-watch`)
         .catch(() => `test-watch-all`),
 
-    "test-frontend": mkCmd(`karma start`, quote(karmaConfig("karma.conf.js")), `--colors`),
+    "test-frontend": ["?.karma.test-frontend"],
+    "test-frontend-ci": ["?.karma.test-frontend-ci"],
 
-    "test-frontend-ci": mkCmd(
-      `karma start`,
-      quote(karmaConfig("karma.conf.coverage.js")),
-      `--colors`
-    ),
-
-    "karma-test-frontend-cov": () => {
-      if (shell.test("-d", "test")) {
-        logger.info("\nRunning Karma unit tests:\n");
-        return mkCmd(`~$karma start`, quote(karmaConfig("karma.conf.coverage.js")), `--colors`);
-      }
-      return undefined;
-    },
-
-    "jest-test-frontend-cov": () => {
+    ".jest.test-frontend-cov": () => {
       const srcJestFiles = glob.sync(`${Path.resolve(AppMode.src.dir)}/**/\*.{test,spec}.{js,jsx}`);
 
       if (shell.test("-d", "_test_") || srcJestFiles.length > 0) {
         logger.info("Running jest unit tests");
         return mkCmd(`~$jest`, `--config ${archetype.config.jest}/jest.config.js`);
       }
+      return undefined;
     },
 
-    "test-frontend-dev": () =>
-      exec(`pgrep -fl "webpack-dev-server.*${archetype.webpack.testPort}"`)
-        .then(() => exec(`karma start`, quote(karmaConfig("karma.conf.dev.js")), `--colors`))
-        .catch(() => `test-frontend`),
+    "test-frontend-dev": ["?.karma.test-frontend-dev"],
 
-    "test-frontend-dev-watch": mkCmd(
-      `karma start`,
-      quote(karmaConfig("karma.conf.watch.js")),
-      `--colors --browsers Chrome --no-single-run --auto-watch`
-    ),
+    "test-frontend-dev-watch": ["?.karma.test-frontend-dev-watch"],
 
     "test-server-cov": () => {
       if (shell.test("-d", "test/server")) {
@@ -803,7 +789,7 @@ Individual .babelrc files were generated for you in src/client and src/server
   }
 
   if (Fs.existsSync(Path.resolve(AppMode.src.client, "dll.config.js"))) {
-    tasks = Object.assign(tasks, {
+    Object.assign(tasks, {
       "build-dist-dll": {
         dep: [".mk-dll-dir", ".mk-dist-dir", ".production-env"],
         task: () =>
@@ -811,6 +797,39 @@ Individual .babelrc files were generated for you in src/client and src/server
       },
       "copy-dll": () => shell.cp("-r", "dll/*", "dist")
     });
+  }
+
+  if (archetype.options.karma !== false) {
+    Object.assign(tasks, {
+      ".karma.test-frontend": mkCmd(`karma start`, quote(karmaConfig("karma.conf.js")), `--colors`),
+
+      ".karma.test-frontend-ci": mkCmd(
+        `karma start`,
+        quote(karmaConfig("karma.conf.coverage.js")),
+        `--colors`
+      ),
+
+      ".karma.test-frontend-cov": () => {
+        if (shell.test("-d", "test")) {
+          logger.info("\nRunning Karma unit tests:\n");
+          return mkCmd(`~$karma start`, quote(karmaConfig("karma.conf.coverage.js")), `--colors`);
+        }
+        return undefined;
+      },
+
+      ".karma.test-frontend-dev": () =>
+        exec(`pgrep -fl "webpack-dev-server.*${archetype.webpack.testPort}"`)
+          .then(() => exec(`karma start`, quote(karmaConfig("karma.conf.dev.js")), `--colors`))
+          .catch(() => `test-frontend`),
+
+      ".karma.test-frontend-dev-watch": mkCmd(
+        `karma start`,
+        quote(karmaConfig("karma.conf.watch.js")),
+        `--colors --browsers Chrome --no-single-run --auto-watch`
+      )
+    });
+  } else {
+    logger.info("Disabling karma test tasks since archetype config options.karma === false");
   }
 
   return tasks;
