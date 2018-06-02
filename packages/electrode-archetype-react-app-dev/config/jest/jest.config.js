@@ -2,9 +2,8 @@ const Path = require("path");
 const optionalRequire = require("optional-require")(require);
 
 const rootDir = process.cwd();
-const devPkgPath = Path.join(__dirname, "../..");
 
-const jestPath = Path.join(devPkgPath, "config", "jest");
+const jestPath = __dirname;
 const fileMock = Path.join(jestPath, "__mocks__", "file-mock.js");
 const frameworkMock = Path.join(jestPath, "__mocks__", "framework-mock.js");
 
