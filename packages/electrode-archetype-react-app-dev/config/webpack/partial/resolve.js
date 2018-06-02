@@ -3,7 +3,7 @@
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const AppMode = archetype.AppMode;
 const Path = require("path");
-const ModuleResolver = require("../plugins/module-resolver");
+const ModuleResolver = require("electrode-node-resolver/lib/webpack-plugin");
 const _ = require("lodash");
 
 function infernoReactAlias() {
@@ -24,7 +24,7 @@ module.exports = {
     // Add a resolver plugin that looks up in the archetype first.
     // Note that webpack will use this first before trying its default
     // plugins and the modules paths specified below
-    plugins: [new ModuleResolver("module", undefined, "resolve")],
+    plugins: [new ModuleResolver("module", "resolve", archetype.devDir, undefined)],
     modules: [
       (AppMode.isSrc && Path.resolve(AppMode.src.dir)) || null,
       process.cwd(),

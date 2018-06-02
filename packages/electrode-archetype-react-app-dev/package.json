@@ -50,6 +50,7 @@
     "electrode-bundle-analyzer": "^1.0.0",
     "electrode-cdn-file-loader": "^1.0.0",
     "electrode-electrify": "^1.0.0",
+    "electrode-node-resolver": "../electrode-node-resolver",
     "electrode-webpack-reporter": "^0.4.4",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.1.0",
