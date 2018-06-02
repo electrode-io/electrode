@@ -5,7 +5,8 @@ You can continue your app development based on the generated Electrode app. Let'
 `<electrode-app>/src/client/components/home.jsx`:
 
 ```js
-import React, {PropTypes} from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {toggleCheck, incNumber, decNumber} from "../actions";
 import "../styles/home.css";
