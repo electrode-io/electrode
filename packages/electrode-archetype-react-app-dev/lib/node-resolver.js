@@ -29,6 +29,7 @@ function isModuleRequest(request) {
 }
 
 function resolve(req, atPath) {
+  // can only resolve modules under node_modules
   if (!isModuleRequest(req)) return undefined;
 
   const splits = req.split("/");

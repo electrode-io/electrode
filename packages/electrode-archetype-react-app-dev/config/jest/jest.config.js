@@ -14,6 +14,7 @@ const archetypeOptions = optionalRequire(Path.resolve("archetype", "config"), {
 
 const jestDefaultConfig = {
   rootDir,
+  resolver: Path.join(__dirname, "jest.node-resolver.js"),
   moduleFileExtensions: ["js", "jsx"],
   moduleDirectories: ["node_modules", "src"],
   moduleNameMapper: {
@@ -24,8 +25,4 @@ const jestDefaultConfig = {
   modulePathIgnorePatterns: ["<rootDir>/test"]
 };
 
-module.exports = Object.assign(
-  {},
-  jestDefaultConfig,
-  archetypeOptions.jest
-);
+module.exports = Object.assign({}, jestDefaultConfig, archetypeOptions.jest);
