@@ -1,13 +1,12 @@
 "use strict";
 
-var Path = require("path");
+const Path = require("path");
+const devPath = Path.join(__dirname, "..");
 
 module.exports = {
-  devRequire: require("electrode-archetype-react-component-dev/require"),
-  // A normal `require.resolve` looks at `package.json:main`. We instead want
-  // just the _directory_ of the module. So use heuristic of finding dir of
-  // package.json which **must** exist at a predictable location.
-  devPath: Path.dirname(require.resolve("electrode-archetype-react-component-dev/package.json")),
+  devDir: devPath,
+  devPath,
+  devRequire: require("../require"),
   webpack: {
     devHostname: "localhost",
     devPort: 2992,

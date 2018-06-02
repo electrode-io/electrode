@@ -12,6 +12,9 @@
   },
   "license": "Apache-2.0",
   "scripts": {},
+  "peerDependencies": {
+    "electrode-archetype-react-component": "^5.0.0"
+  },
   "dependencies": {
     "autoprefixer-stylus": "0.13.0",
     "babel-cli": "^6.6.5",
@@ -37,6 +40,7 @@
     "config": "^1.19.0",
     "css-loader": "^0.28.9",
     "electrode-check-dependencies": "^1.0.2",
+    "electrode-node-resolver": "../electrode-node-resolver",
     "electrode-docgen": "^1.0.0",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.1.0",
@@ -101,6 +105,14 @@
     "webpack-dev-server": "^2.7.1",
     "xclap": "^0.2.0",
     "xsh": "^0.3.2"
+  },
+  "optionalDependencies": {
+    "electrode-archetype-opt-inferno": "^0.2.0",
+    "electrode-archetype-opt-react": "^1.0.0"
+  },
+  "devDependencies": {
+    "electrode-archetype-react-component": "../electrode-archetype-react-component",
+    "prettier": "^1.4.4"
   },
   "engines": {
     "node": ">= 6",

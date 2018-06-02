@@ -28,6 +28,7 @@
     "xclap": "^0.2.0"
   },
   "optionalDependencies": {
+    "electrode-archetype-opt-inferno": "^0.2.0",
     "electrode-archetype-opt-react": "^1.0.0"
   },
   "engines": {
