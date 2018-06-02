@@ -2,7 +2,7 @@
 
 const Path = require("path");
 const optionalRequire = require("optional-require")(require);
-const archetypeOptions = optionalRequire(Path.resolve("archetype", "config"), { default: {} });
+const userConfig = Object.assign({}, optionalRequire(Path.resolve("archetype/config")));
 
 const devPkg = require("../package.json");
 const devDir = Path.join(__dirname, "..");
@@ -31,8 +31,9 @@ module.exports = {
   devDir,
   devPkg,
   devRequire,
-  webpack: xenvConfig(webpackConfigSpec, archetypeOptions.webpack),
-  karma: xenvConfig(karmaConfigSpec, archetypeOptions.karma),
+  webpack: xenvConfig(webpackConfigSpec, userConfig.webpack),
+  karma: xenvConfig(karmaConfigSpec, userConfig.karma),
+  jest: Object.assign({}, userConfig.jest),
   config: Object.assign(
     {},
     {
@@ -44,6 +45,6 @@ module.exports = {
       webpack: `${configDir}/webpack`,
       jest: `${configDir}/jest`
     },
-    archetypeOptions.configPaths
+    userConfig.configPaths
   )
 };

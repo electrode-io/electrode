@@ -1,0 +1,35 @@
+{
+  "name": "electrode-node-resolver",
+  "version": "1.0.0",
+  "description": "Offers Node module resolvers for tools",
+  "homepage": "http://www.electrode.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electrode-io/electrode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/electrode-io/electrode/issues"
+  },
+  "author": {
+    "name": "Joel Chen",
+    "email": "xchen@walmartlabs.com"
+  },
+  "files": [
+    "lib"
+  ],
+  "license": "Apache-2.0",
+  "scripts": {
+    "test": "",
+    "format": "prettier --write --print-width 100 *.{js,jsx} `find . -type d -d 1 -exec echo '{}/**/*.{js,jsx}' \\; | egrep -v '(/node_modules/|/dist/|/coverage/)'`"
+  },
+  "dependencies": {
+    "require-at": "^1.0.0"
+  },
+  "devDependencies": {
+    "prettier": "^1.4.4"
+  },
+  "engines": {
+    "node": ">= 8",
+    "npm": ">= 5"
+  }
+}

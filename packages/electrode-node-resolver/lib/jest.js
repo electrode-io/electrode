@@ -4,7 +4,7 @@
 
 const Path = require("path");
 const requireAt = require("require-at");
-const nodeResolver = require("../../lib/node-resolver");
+const nodeResolver = require("./node-resolver");
 
 /*
 const path = "expect";
