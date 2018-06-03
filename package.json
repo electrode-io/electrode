@@ -4,17 +4,17 @@
   "description": "Electrode Platform for NodeJS/React Universal Application",
   "homepage": "http://www.electrode.io",
   "scripts": {
-    "test": "eval `fyn bash` && npm run bootstrap && NODE_PRESERVE_SYMLINKS=1 lerna run test --ignore=electrode-webpack-reporter && npm run test-reporter && clap build-test",
-    "test-generator": "eval `fyn bash` && NODE_PRESERVE_SYMLINKS=1 clap test-generator",
-    "test-boilerplate": "eval `fyn bash` && NODE_PRESERVE_SYMLINKS=1 clap test-boilerplate",
+    "test": "clap test",
+    "test-generator": "clap test-generator",
+    "test-boilerplate": "clap test-boilerplate",
     "bootstrap": "fynpo",
     "clean": "npm run nuke && npm run nuke-packages && npm run nuke-samples",
     "nuke": "rm -rf node_modules tmp lerna-debug.log npm-debug.log",
     "nuke-packages": "rm -rf packages/*/node_modules packages/*/coverage",
     "nuke-samples": "rm -rf samples/*/node_modules samples/*/coverage samples/*/dist samples/*/.isomorphic-loader-config.json samples/*/.etmp",
-    "test-reporter": "eval `fyn bash` && if lerna updated | grep electrode-webpack-reporter; then cd packages/electrode-webpack-reporter && fyn --pg none install && NODE_PRESERVE_SYMLINKS=1 npm test; fi",
-    "update-changelog": "eval `fyn bash` && node tools/update-changelog.js",
-    "gitbook-serve": "eval `fyn bash` && gitbook serve --no-watch --no-live"
+    "test-reporter": "clap test-reporter",
+    "update-changelog": "clap update-changelog",
+    "gitbook-serve": "clap gitbook-serve"
   },
   "devDependencies": {
     "bluebird": "^3.5.0",

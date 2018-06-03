@@ -92,7 +92,45 @@ const testGenerator = (testDir, clean, prompts) => {
     });
 };
 
+let fynSetup = false;
+let saveCwd = process.cwd();
+
 xclap.load({
+  ".fyn-setup": () => {
+    if (fynSetup) return undefined;
+    fynSetup = true;
+    return exec(true, "fyn json").then(r => {
+      process.env.NODE_PRESERVE_SYMLINKS = 1;
+      const fynEnv = JSON.parse(r.stdout);
+      if (fynEnv.error) {
+        console.log(".fyn-setup:", fynEnv.error);
+      } else {
+        process.env.NODE_OPTIONS = fynEnv.NODE_OPTIONS;
+        console.log("NODE_OPTIONS set to", fynEnv.NODE_OPTIONS);
+      }
+    });
+  },
+  ".lerna.test": "~$lerna run test --ignore=electrode-webpack-reporter",
+  "test-reporter": [".fyn-setup", ".test-reporter"],
+  ".test-reporter": {
+    task: () => {
+      return exec(true, "lerna updated").then(r => {
+        if (r.stdout.indexOf("electrode-webpack-reporter") >= 0) {
+          shell.cd("packages/electrode-webpack-reporter");
+          return [".", "~$fyn --pg none install", "~$npm test"];
+        }
+      });
+    },
+    finally: () => {
+      shell.cd(saveCwd);
+    }
+  },
+  bootstrap: "~$fynpo",
+  test: [".fyn-setup", "bootstrap", ".lerna.test", "test-reporter", "build-test"],
+  "test-generator": [".fyn-setup", ".test-generator"],
+  "test-boilerplate": [".fyn-setup", ".test-boilerplate"],
+  "update-changelog": [".fyn-setup", "~$node tools/update-changelog.js"],
+  "gitbook-serve": [".fyn-setup", "~$gitbook serve --no-watch --no-live"],
   "build-test": {
     desc: "Run CI test",
     task: () => {
@@ -121,7 +159,7 @@ xclap.load({
     }
   },
 
-  "test-boilerplate": {
+  ".test-boilerplate": {
     desc: "Run tests for the boilerplage app universal-react-node",
     task: () => {
       return runAppTest(Path.join(__dirname, "samples/universal-react-node"));
@@ -137,7 +175,7 @@ xclap.load({
     }
   },
 
-  "test-generator": {
+  ".test-generator": {
     desc: "Run tests for the yeoman generators",
     task: () => {
       const testDir = Path.join(__dirname, "tmp");
