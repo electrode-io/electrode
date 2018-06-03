@@ -54,12 +54,10 @@ const runAppTest = (dir, forceLocal) => {
     }
   };
 
-  const fynSetup = isWin32 ? "fyn win --quiet && fynwin" : `eval "$(fyn bash)"`;
   const localClap = Path.join("node_modules", ".bin", "clap");
-  return exec(
-    { cwd: dir },
-    `${fynSetup} && fyn --pg simple -q v i && ${localClap} ?fix-generator-eslint`
-  ).then(() => exec({ cwd: dir }, `${fynSetup} && npm test`));
+  return exec({ cwd: dir }, `fyn --pg simple -q v i && ${localClap} ?fix-generator-eslint`).then(
+    () => exec({ cwd: dir }, `${fynSetup} && npm test`)
+  );
 };
 
 const testGenerator = (testDir, clean, prompts) => {
