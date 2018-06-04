@@ -8,6 +8,7 @@ const ModuleResolver = require("electrode-node-resolver/lib/webpack-plugin");
 
 module.exports = {
   resolve: {
+    symlinks: !archetype.webpack.preserveSymlinks,
     plugins: [new ModuleResolver("module", "resolve", archetype.devDir, undefined)],
     modules: [archetypeNodeModules, archetypeDevNodeModules, "node_modules", process.cwd()],
     extensions: [".js", ".jsx"]
