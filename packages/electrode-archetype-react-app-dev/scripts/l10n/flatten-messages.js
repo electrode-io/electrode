@@ -1,3 +1,5 @@
+"use strict";
+
 const _ = require("lodash");
 const Promise = require("bluebird");
 const fs = Promise.promisifyAll(require("fs-extra"));
@@ -46,12 +48,23 @@ function getAllDefaultMessages(messageFilesPathPattern) {
 
 const writeRawMessages = _.partial(writeFileAsJSON, RAW_MESSAGES_DIR, RAW_MESSAGES_NAME);
 
-Promise.all([getAllDefaultMessages(MESSAGES_PATTERN), fs.ensureDirAsync(RAW_MESSAGES_DIR)])
-  .then(_.first)
-  .then(writeRawMessages)
-  .then(() => {
-    process.exit(0);
-  })
-  .catch(() => {
-    process.exit(1);
-  });
+const isMain = require.main === module;
+
+function flattenMessagesL10n() {
+  return Promise.all([getAllDefaultMessages(MESSAGES_PATTERN), fs.ensureDirAsync(RAW_MESSAGES_DIR)])
+    .then(_.first)
+    .then(writeRawMessages)
+    .then(() => {
+      if (isMain) process.exit(0);
+    })
+    .catch(err => {
+      console.log("flatten messages failed", err);
+      if (isMain) process.exit(1);
+    });
+}
+
+module.exports = flattenMessagesL10n;
+
+if (isMain) {
+  flattenMessagesL10n();
+}

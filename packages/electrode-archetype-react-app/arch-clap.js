@@ -24,6 +24,10 @@ if (process.argv[1].indexOf("gulp") >= 0) {
   process.exit(1);
 }
 
+const mergeIsomorphicAssets = require(`${archetype.devDir}/scripts/merge-isomorphic-assets.js`);
+const flattenMessagesL10n = require(`${archetype.devDir}/scripts/l10n/flatten-messages.js`);
+const mapIsomorphicCdn = require(`${archetype.devDir}/scripts/map-isomorphic-cdn.js`);
+
 const config = archetype.config;
 const mkdirp = devRequire("mkdirp");
 const xsh = devRequire("xsh");
@@ -408,16 +412,9 @@ function makeTasks() {
       task: () => shell.rm("-rf", "./tmp")
     },
 
-    "build-dist:flatten-l10n": {
-      desc: false,
-      task: `node ${archetype.devDir}/scripts/l10n/flatten-messages.js`
-    },
+    "build-dist:flatten-l10n": flattenMessagesL10n,
 
-    "build-dist:merge-isomorphic-assets": {
-      desc: false,
-      task: `node ${archetype.devDir}/scripts/merge-isomorphic-assets.js`
-    },
-
+    "build-dist:merge-isomorphic-assets": mergeIsomorphicAssets,
     ".build-lib": () => undefined,
 
     ".check.top.level.babelrc": () => {
@@ -568,7 +565,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     },
 
     "npm:test": ["check"],
-    "npm:release": `node ${quote(Path.join(archetype.devDir, `scripts/map-isomorphic-cdn.js`))}`,
+    "npm:release": mapIsomorphicCdn,
 
     server: ["app-server"], // keep old server name for backward compat
 

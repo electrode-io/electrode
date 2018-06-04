@@ -1,3 +1,5 @@
+"use strict";
+
 var archDevRequire = require("electrode-archetype-react-component-dev/require");
 var _ = archDevRequire("lodash");
 var Promise = archDevRequire("bluebird");
@@ -16,8 +18,11 @@ var RAW_MESSAGES_NAME = "raw-messages.json";
  * @return  {Promise}  A promise that resolves when the file has been written
  */
 var writeFileAsJSON = function writeFileAsJSON(filePath, name, contents) {
-  return Promise.try(function () { return JSON.stringify(contents, null, 2); })
-    .then(function (result) { return fs.writeFileAsync(filePath + name, result); });
+  return Promise.try(function() {
+    return JSON.stringify(contents, null, 2);
+  }).then(function(result) {
+    return fs.writeFileAsync(filePath + name, result);
+  });
 };
 
 /**
@@ -25,8 +30,7 @@ var writeFileAsJSON = function writeFileAsJSON(filePath, name, contents) {
  * @return  {Promise}  A promise that resolves to a POJO with the file's contents
  */
 var readFileAsJSON = function readFileAsJSON(filePath) {
-  return fs.readFileAsync(filePath, "utf8")
-    .then(JSON.parse);
+  return fs.readFileAsync(filePath, "utf8").then(JSON.parse);
 };
 
 /**
@@ -39,19 +43,34 @@ var readFileAsJSON = function readFileAsJSON(filePath) {
 var getAllDefaultMessages = function getAllDefaultMessages(messageFilesPathPattern) {
   return getFilePaths(messageFilesPathPattern)
     .map(readFileAsJSON)
-    .reduce(function (previousValue, defaultMessageDescriptors) {
-      defaultMessageDescriptors.forEach(function (descriptor) { previousValue[descriptor.id] = descriptor; });
+    .reduce(function(previousValue, defaultMessageDescriptors) {
+      defaultMessageDescriptors.forEach(function(descriptor) {
+        previousValue[descriptor.id] = descriptor;
+      });
       return previousValue;
     }, {});
 };
 
 var writeRawMessages = _.partial(writeFileAsJSON, RAW_MESSAGES_DIR, RAW_MESSAGES_NAME);
 
-Promise.all([
-  getAllDefaultMessages(MESSAGES_PATTERN),
-  fs.ensureDirAsync(RAW_MESSAGES_DIR)
-])
-  .then(_.first)
-  .then(writeRawMessages)
-  .then(function () { process.exit(0); })
-  .catch(function () { process.exit(1); });
+const isMain = require.main === module;
+
+function flattenMessagesL10n() {
+  return Promise.all([getAllDefaultMessages(MESSAGES_PATTERN), fs.ensureDirAsync(RAW_MESSAGES_DIR)])
+    .then(_.first)
+    .then(writeRawMessages)
+    .then(function() {
+      if (isMain) process.exit(0);
+    })
+    .catch(function(err) {
+      console.log("flatten messages failed", err);
+
+      if (isMain) process.exit(1);
+    });
+}
+
+module.exports = flattenMessagesL10n;
+
+if (isMain) {
+  flattenMessagesL10n();
+}
