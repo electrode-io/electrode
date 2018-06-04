@@ -41,7 +41,7 @@
     "css-loader": "^0.28.9",
     "electrode-check-dependencies": "^1.0.2",
     "electrode-docgen": "^1.0.0",
-    "electrode-node-resolver": "../electrode-node-resolver",
+    "electrode-node-resolver": "^1.0.0",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.1.0",
     "eslint": "^4.8.0",
@@ -95,7 +95,7 @@
   },
   "optionalDependencies": {
     "electrode-archetype-opt-inferno": "^0.2.0",
-    "electrode-archetype-opt-karma": "../electrode-archetype-opt-karma",
+    "electrode-archetype-opt-karma": "^1.0.0",
     "electrode-archetype-opt-react": "^1.0.0"
   },
   "devDependencies": {

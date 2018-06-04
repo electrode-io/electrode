@@ -1,3 +1,92 @@
+# 6/4/2018
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-opt-karma@1.0.0 `(0.0.1 => 1.0.0)`
+-   electrode-archetype-react-app@5.2.0 `(5.1.4 => 5.2.0)`
+-   electrode-archetype-react-app-dev@5.2.0 `(5.1.4 => 5.2.0)`
+-   electrode-archetype-react-component@5.2.0 `(5.1.3 => 5.2.0)`
+-   electrode-archetype-react-component-dev@5.2.0 `(5.1.3 => 5.2.0)`
+-   electrode-node-resolver@1.0.0 `(0.0.1 => 1.0.0)`
+-   electrode-react-webapp@2.3.0 `(2.2.1 => 2.3.0)`
+-   generator-electrode@4.0.6 `(4.0.5 => 4.0.6)`
+
+### Lerna Updated
+
+-   electrode-ignite@2.0.6 `(2.0.5 => 2.0.6)`
+
+## Commits
+
+-   `packages/electrode-archetype-opt-karma`
+
+    -   make karma optional [commit](http://github.com/electrode-io/electrode/commit/2a716a39f2ed7d7fa61d7f2ff3b216446a26bb61)
+    -   [major] prep for release [commit](http://github.com/electrode-io/electrode/commit/104fe037c72e3f548b1cab361f9b720eab16f2a7)
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   get user jest config from archetype ([#799](https://github.com/electrode-io/electrode/pull/799)) [commit](http://github.com/electrode-io/electrode/commit/160458367faac203601eaf507e4edc6b7e32bb8f)
+    -   fix node not honoring NODE_PRESERVE_SYMLINKS [commit](http://github.com/electrode-io/electrode/commit/7628ad9f1103d5da3121b637c7de319cb507403a)
+    -   set cache directory for babel-loader [commit](http://github.com/electrode-io/electrode/commit/7f7fc07426cdd920e920a27c58cee18711ca5fc8)
+    -   make karma optional [commit](http://github.com/electrode-io/electrode/commit/2a716a39f2ed7d7fa61d7f2ff3b216446a26bb61)
+    -   put module resolvers into module electrode-node-resolver [commit](http://github.com/electrode-io/electrode/commit/e2cbb7a032ecf5ff82e92ef5a0b5f57464ae67ac)
+    -   simplify directory setup [commit](http://github.com/electrode-io/electrode/commit/4a06f3adc88bd29c4fbe40d12d71677ac0989578)
+    -   add node resolver for jest [commit](http://github.com/electrode-io/electrode/commit/5f05cae89163311739a7f6470e758a2ea16701dd)
+    -   extract node resolver to common module in lib [commit](http://github.com/electrode-io/electrode/commit/36611f1a585ead0831e546356a73f8d8930fc4f2)
+    -   clean logs [commit](http://github.com/electrode-io/electrode/commit/ce5b35d539ff256fec3f96f371190b73b1a50e0b)
+    -   fix glob require from dev [commit](http://github.com/electrode-io/electrode/commit/f98a7bf58eadc1dbcf0a6f93dc3834df56629088)
+    -   [minor] Jest support ([#775](https://github.com/electrode-io/electrode/pull/775)) [commit](http://github.com/electrode-io/electrode/commit/2c8e15f8f47cec5629f3022442b07454132c661c)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   allow karma dependencies to be turned off ([#800](https://github.com/electrode-io/electrode/pull/800)) [commit](http://github.com/electrode-io/electrode/commit/1810528ccb354d5be1197ce313837a78378f6f29)
+    -   get user jest config from archetype ([#799](https://github.com/electrode-io/electrode/pull/799)) [commit](http://github.com/electrode-io/electrode/commit/160458367faac203601eaf507e4edc6b7e32bb8f)
+    -   fix node not honoring NODE_PRESERVE_SYMLINKS [commit](http://github.com/electrode-io/electrode/commit/7628ad9f1103d5da3121b637c7de319cb507403a)
+    -   set webpack preserve symlinks [commit](http://github.com/electrode-io/electrode/commit/7f003688e66e17449d903c58ede383d82ce48eae)
+    -   use node resolver module and add opt dependencies [commit](http://github.com/electrode-io/electrode/commit/5c03d634a5f5f6bb01a599918a1b41fa7bb01aaa)
+    -   simplify directory setup [commit](http://github.com/electrode-io/electrode/commit/4a06f3adc88bd29c4fbe40d12d71677ac0989578)
+    -   fix rootDir and glob require [commit](http://github.com/electrode-io/electrode/commit/4def1a23e2e5c837a784a3d6520e4c34d1b661cf)
+    -   [minor] Jest test component support ([#783](https://github.com/electrode-io/electrode/pull/783)) [commit](http://github.com/electrode-io/electrode/commit/febdd49559df425dae142951e4e83f54eaa8bea6)
+    -   removing deprectated electrode-demo-index which has dependency on react 15 ([#790](https://github.com/electrode-io/electrode/pull/790)) [commit](http://github.com/electrode-io/electrode/commit/0b42a787fe96ed407785979e3ab34193df47fa5f)
+
+-   `packages/electrode-node-resolver`
+
+    -   put module resolvers into module electrode-node-resolver [commit](http://github.com/electrode-io/electrode/commit/e2cbb7a032ecf5ff82e92ef5a0b5f57464ae67ac)
+    -   [major] prep for release [commit](http://github.com/electrode-io/electrode/commit/104fe037c72e3f548b1cab361f9b720eab16f2a7)
+
+-   `packages/electrode-react-webapp`
+
+    -   [minor] support properties for tokens ([#795](https://github.com/electrode-io/electrode/pull/795)) [commit](http://github.com/electrode-io/electrode/commit/b770c92e8c4f55fe9b8272bd550736a20d308bc0)
+    -   refactor to separate async template engine from react webapp handlers ([#793](https://github.com/electrode-io/electrode/pull/793)) [commit](http://github.com/electrode-io/electrode/commit/fc72839e210cfad5c4ca5a66aaa7a7e8842579ba)
+    -   export a main for package.json ([#788](https://github.com/electrode-io/electrode/pull/788)) [commit](http://github.com/electrode-io/electrode/commit/1261f2d6351958722fd8ff558ded3b261572653b)
+
+-   `packages/generator-electrode`
+
+    -   fix bad behaving down stream deps [commit](http://github.com/electrode-io/electrode/commit/8019ec1e413645d0f0770830a98167e59429e4db)
+
+-   `samples/demo-component`
+
+    -   use node resolver module and add opt dependencies [commit](http://github.com/electrode-io/electrode/commit/5c03d634a5f5f6bb01a599918a1b41fa7bb01aaa)
+
+-   `samples/universal-react-node`
+
+    -   refactor test [commit](http://github.com/electrode-io/electrode/commit/f7ba5e112f5be8a1cef865618c23fe8430198d1a)
+    -   add jest test to sample app ([#776](https://github.com/electrode-io/electrode/pull/776)) [commit](http://github.com/electrode-io/electrode/commit/8ec79a08bbb090c39320816de2fd11f7848692f2)
+    -   test: after changes - all pass [commit](http://github.com/electrode-io/electrode/commit/990f7903411ffdd28abde253cfadafef77075e58)
+
+-   `docs`
+
+    -   fix: Prop Types import from react to prop-types [commit](http://github.com/electrode-io/electrode/commit/d61941c4213cd77f9bfb2cae6a1ce1463a48da1d)
+
+-   `MISC`
+
+    -   update contributing guide [commit](http://github.com/electrode-io/electrode/commit/cd18f622caa669e7fb1194995204f3b5584af46e)
+    -   remove unused code [commit](http://github.com/electrode-io/electrode/commit/1be212c103012fcec07df38073e6332be653bfaf)
+    -   remove extra fyn setup no longer needed [commit](http://github.com/electrode-io/electrode/commit/cb4e814b0bf8b5928e8f5b53e4d02980da548480)
+    -   add demo-component to build-test [commit](http://github.com/electrode-io/electrode/commit/63412e00e9497b772bf05f0656a7186e39cc2fb8)
+    -   windows compat for build scripts [commit](http://github.com/electrode-io/electrode/commit/fcbba50fd63f6d8d7ef9c78fd58fc7a5cd691efc)
+
 # 5/17/2018
 
 ## Packages
