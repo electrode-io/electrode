@@ -8,30 +8,49 @@ There are [few guidelines](#contributing-guidelines) that we request contributor
 
 This repo uses [Lerna] as a top level setup and [fyn] to manage Node Modules.
 
-* Install these CLI tools globally: [xclap-cli] and [fyn]
+- Install these CLI tools globally: [xclap-cli] and [fyn]
 
 ```bash
 $ npm install -g xclap-cli fyn
 ```
 
-* Fork and clone the repo at <https://github.com/electrode-io/electrode.git>
+- Fork and clone the repo at <https://github.com/electrode-io/electrode.git>
 
 ```bash
 $ git clone https://github.com/<your-github-id>/electrode.git
 $ cd electrode
 ```
 
-* Quick Test
+- Quick Test
 
-Run at the top level:
+Because many of our modules depend on each other, to make local development easier, we use [fyn] to install packages when doing development.
+
+For [fyn]'s enhanced local dev workflow, the following two setups are needed.
 
 ```bash
 $ eval `fyn bash`
+$ export NODE_PRESERVE_SYMLINKS=1
+```
+
+For Windows:
+
+```text
+fyn win && fynwin
+set NODE_PRESERVE_SYMLINKS 1
+```
+
+Our build scripts automatically does it, but it's a good idea to set them up anyways.
+
+So to prep your local repo for development, run at the top level:
+
+```bash
+$ eval `fyn bash`
+$ export NODE_PRESERVE_SYMLINKS=1
 $ fyn
 $ npm run bootstrap
 ```
 
-* Now you can go to the `samples` folder and try the `universal-react-node` sample app, develop and test your changes over there.
+- Now you can go to the `samples` folder and try the `universal-react-node` sample app, develop and test your changes over there.
 
 ```bash
 $ cd samples/universal-react-node
@@ -69,12 +88,12 @@ Since we use independent lerna mode, to help keep the changelog clear, please fo
 
 `[<semver>][feat|bug|chore] <message>`
 
-* `<semver>` can be:
-  * `major` - `maj` or `major`
-  * `minor` - `min` or `minor`
-  * `patch` - `pat` or `patch`
-* Only include `[feat|bug|chore]` if it's applicable.
-* Please format your PR's title with the same format.
+- `<semver>` can be:
+  - `major` - `maj` or `major`
+  - `minor` - `min` or `minor`
+  - `patch` - `pat` or `patch`
+- Only include `[feat|bug|chore]` if it's applicable.
+- Please format your PR's title with the same format.
 
 > **_Please do everything you can to keep commits for a PR to a single package in `packages`._**
 
@@ -92,24 +111,24 @@ We love to hear about your experience using Electrode and bug reports. Electrode
 
 When you submit a bug report, please include the following information:
 
-* NodeJS/npm versions by doing `nodev -v` and `npm -v`
-* Your OS and version
-* Electrode package versions
-* Any errors output
-* If possible, sample code and steps on how to reproduce the bug
+- NodeJS/npm versions by doing `nodev -v` and `npm -v`
+- Your OS and version
+- Electrode package versions
+- Any errors output
+- If possible, sample code and steps on how to reproduce the bug
 
 ## Updating Docs
 
 This repo has a [gitbook] documentation under `docs`. To review the docs as a gitbook locally:
 
-* Install [gitbook-cli] and the plugins for our docs
+- Install [gitbook-cli] and the plugins for our docs
 
 ```bash
 $ npm install gitbook-cli -g
 $ gitbook install
 ```
 
-* Serve the book locally
+- Serve the book locally
 
 ```bash
 $ gitbook serve --no-watch --no-live
@@ -127,3 +146,7 @@ Here is the documentation on a [gitbook] structure: <https://toolchain.gitbook.c
 [gitbook]: https://www.gitbook.com
 [xclap-cli]: https://www.npmjs.com/package/xclap-cli
 [fyn]: https://www.npmjs.com/package/fyn
+
+```
+
+```
