@@ -25,7 +25,10 @@ module.exports = function(options) {
     use: [
       {
         loader: "babel-loader",
-        options: options.babel
+        options: Object.assign(
+          { cacheDirectory: Path.resolve(".etmp/babel-loader") },
+          options.babel
+        )
       }
     ].filter(_.identity)
   };
