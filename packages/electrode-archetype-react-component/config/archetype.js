@@ -1,13 +1,13 @@
 "use strict";
 
-var Path = require("path");
+const Path = require("path");
+const optionalRequire = require("optional-require")(require);
+const pkg = require("../package.json");
+const dir = Path.join(__dirname, "..");
 
 module.exports = {
-  devRequire: require("electrode-archetype-react-component-dev/require"),
-  // A normal `require.resolve` looks at `package.json:main`. We instead want
-  // just the _directory_ of the module. So use heuristic of finding dir of
-  // package.json which **must** exist at a predictable location.
-  devPath: Path.dirname(require.resolve("electrode-archetype-react-component-dev/package.json")),
+  dir,
+  pkg,
   webpack: {
     devHostname: "localhost",
     devPort: 2992,
@@ -16,5 +16,32 @@ module.exports = {
   },
   karma: {
     browser: process.env.KARMA_BROWSER === undefined ? "chrome" : process.env.KARMA_BROWSER
-  }
+  },
+  addArchetypeConfig: config => Object.assign(module.exports, config)
 };
+
+function checkTopDevArchetype() {
+  const devArchName = "electrode-archetype-react-component-dev";
+  const topPkg = require(Path.resolve("package.json"));
+  // in case this is being used for test/dev in the -dev archetype
+  if (topPkg.name === devArchName) {
+    return optionalRequire(Path.resolve("config/archetype"));
+  } else {
+    return optionalRequire(`${devArchName}/config/archetype`);
+  }
+}
+
+//
+// Try to set dev settings, if the dev archetype is available.
+// It may have been removed for production deployment.
+//
+function loadDev() {
+  const devArchetype = checkTopDevArchetype();
+  if (devArchetype) {
+    module.exports.addArchetypeConfig(devArchetype);
+  } else {
+    module.exports.noDev = true;
+  }
+}
+
+loadDev();

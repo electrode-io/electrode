@@ -1,17 +1,26 @@
 "use strict";
 
-var Path = require("path");
+const Path = require("path");
+const optionalRequire = require("optional-require")(require);
+const userConfig = Object.assign({}, optionalRequire(Path.resolve("archetype/config")));
+
+const devPkg = require("../package.json");
+const devDir = Path.join(__dirname, "..");
+const devRequire = require(`../require`);
+const configDir = `${devDir}/config`;
+
+const xenvConfig = devRequire("xenv-config");
+
+const webpackConfigSpec = {
+  devHostname: { env: ["WEBPACK_HOST", "WEBPACK_DEV_HOST"], default: "localhost" },
+  devPort: { env: "WEBPACK_DEV_PORT", default: 2992 },
+  testPort: { env: "WEBPACK_TEST_PORT", default: 3001 },
+  preserveSymlinks: { env: ["WEBPACK_PRESERVE_SYMLINKS", "NODE_PRESERVE_SYMLINKS"], default: false }
+};
 
 module.exports = {
-  devRequire: require("electrode-archetype-react-component-dev/require"),
-  // A normal `require.resolve` looks at `package.json:main`. We instead want
-  // just the _directory_ of the module. So use heuristic of finding dir of
-  // package.json which **must** exist at a predictable location.
-  devPath: Path.dirname(require.resolve("electrode-archetype-react-component-dev/package.json")),
-  webpack: {
-    devHostname: "localhost",
-    devPort: 2992,
-    testPort: 3001,
-    modulesDirectories: ["node_modules"]
-  }
+  devDir,
+  devPath: devDir,
+  devRequire: require("../require"),
+  webpack: xenvConfig(webpackConfigSpec, userConfig.webpack)
 };

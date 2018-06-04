@@ -12,6 +12,8 @@ const chalk = devRequire("chalk");
 const Fs = require("fs");
 const glob = devRequire("glob");
 
+const flattenMessagesL10n = require(`${archetype.devPath}/scripts/l10n/flatten-messages.js`);
+
 if (process.argv[1].indexOf("gulp") >= 0) {
   const cmd = chalk.magenta(`clap ${process.argv.slice(2).join(" ")}`);
   console.log(`\nPlease use ${chalk.magenta("clap")} to run archetype commands.`);
@@ -109,14 +111,16 @@ const tasks = {
       "clean-lib",
       ".tmp-to-lib",
       "build-lib:flatten-l10n",
-      "build-lib:copy-flow",
+      // TODO: fix the badly written and messy copy-as-flow-declaration.js so it can
+      // deterministically await async complete (and exit if isMain).
+      // "build-lib:copy-flow",
       "build-lib:clean-tmp"
     ]
   },
   "babel-src-step": `babel -D src -d .tmplib`,
   "build-lib:clean-tmp": () => $$.rm("-rf", "./tmp"),
-  "build-lib:copy-flow": `node ${archetype.devPath}/scripts/copy-as-flow-declaration.js`,
-  "build-lib:flatten-l10n": `node ${archetype.devPath}/scripts/l10n/flatten-messages.js`,
+  "build-lib:copy-flow": `node -r ${archetype.devPath}/scripts/copy-as-flow-declaration.js`,
+  "build-lib:flatten-l10n": flattenMessagesL10n,
 
   "archetype:check": [
     "archetype:test-dev-pkg",

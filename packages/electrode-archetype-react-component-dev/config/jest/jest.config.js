@@ -3,16 +3,16 @@ const optionalRequire = require("optional-require")(require);
 
 const rootDir = process.cwd();
 
-const jestPath = __dirname;
-const fileMock = Path.join(jestPath, "__mocks__", "file-mock.js");
-const frameworkMock = Path.join(jestPath, "__mocks__", "framework-mock.js");
+const fileMock = Path.join(__dirname, "__mocks__", "file-mock.js");
+const frameworkMock = Path.join(__dirname, "__mocks__", "framework-mock.js");
 
-const archetypeOptions = optionalRequire(Path.resolve("archetype", "config"), {
+const userConfig = optionalRequire(Path.resolve("archetype", "config"), {
   default: {}
 });
 
 const jestDefaultConfig = {
   rootDir,
+  resolver: require.resolve("electrode-node-resolver/lib/jest"),
   moduleFileExtensions: ["js", "jsx"],
   moduleDirectories: ["node_modules", "src"],
   moduleNameMapper: {
@@ -23,4 +23,4 @@ const jestDefaultConfig = {
   modulePathIgnorePatterns: ["<rootDir>/test", "<rootDir>/lib"]
 };
 
-module.exports = Object.assign({}, jestDefaultConfig, archetypeOptions.jest);
+module.exports = Object.assign({}, jestDefaultConfig, userConfig.jest);

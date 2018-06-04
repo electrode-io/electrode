@@ -54,12 +54,10 @@ const runAppTest = (dir, forceLocal) => {
     }
   };
 
-  const fynSetup = isWin32 ? "fyn win --quiet && fynwin" : `eval "$(fyn bash)"`;
   const localClap = Path.join("node_modules", ".bin", "clap");
-  return exec(
-    { cwd: dir },
-    `${fynSetup} && fyn --pg simple -q v i && ${localClap} ?fix-generator-eslint`
-  ).then(() => exec({ cwd: dir }, `${fynSetup} && npm test`));
+  return exec({ cwd: dir }, `fyn --pg simple -q v i && ${localClap} ?fix-generator-eslint`).then(
+    () => exec({ cwd: dir }, `${fynSetup} && npm test`)
+  );
 };
 
 const testGenerator = (testDir, clean, prompts) => {
@@ -93,7 +91,6 @@ const testGenerator = (testDir, clean, prompts) => {
 };
 
 let fynSetup = false;
-let saveCwd = process.cwd();
 
 xclap.load({
   ".fyn-setup": () => {
@@ -116,18 +113,18 @@ xclap.load({
     task: () => {
       return exec(true, "lerna updated").then(r => {
         if (r.stdout.indexOf("electrode-webpack-reporter") >= 0) {
-          shell.cd("packages/electrode-webpack-reporter");
-          return [".", "~$fyn --pg none install", "~$npm test"];
+          return `~$cd packages/electrode-webpack-reporter && fyn --pg none install && npm test`;
         }
       });
-    },
-    finally: () => {
-      shell.cd(saveCwd);
     }
   },
   bootstrap: "~$fynpo",
   test: [".fyn-setup", "bootstrap", ".lerna.test", "test-reporter", "build-test"],
   "test-generator": [".fyn-setup", ".test-generator"],
+  "test-demo-component": [
+    ".fyn-setup",
+    `~$cd samples/demo-component && fyn --pg none install && npm test`
+  ],
   "test-boilerplate": [".fyn-setup", ".test-boilerplate"],
   "update-changelog": [".fyn-setup", "~$node tools/update-changelog.js"],
   "gitbook-serve": [".fyn-setup", "~$gitbook serve --no-watch --no-live"],
@@ -146,7 +143,11 @@ xclap.load({
             .map(x => x.substr(2));
 
           if (updated.indexOf("generator-electrode") >= 0) {
-            return tasks.concat("test-generator");
+            tasks.push("test-generator");
+          }
+
+          if (updated.indexOf("electrode-archetype-react-component") >= 0) {
+            tasks.push("test-demo-component");
           }
 
           return tasks;
