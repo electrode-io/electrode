@@ -113,7 +113,6 @@ xclap.load({
     task: () => {
       return exec(true, "lerna updated").then(r => {
         if (r.stdout.indexOf("electrode-webpack-reporter") >= 0) {
-          const chdir = () => shell.cd("packages/electrode-webpack-reporter");
           return `~$cd packages/electrode-webpack-reporter && fyn --pg none install && npm test`;
         }
       });
