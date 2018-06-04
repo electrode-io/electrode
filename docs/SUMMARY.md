@@ -42,12 +42,14 @@
     -   [Webpack Config](/chapter1/intermediate/app-archetype/webpack-config.md)
     -   [Environment Variables](/chapter1/intermediate/app-archetype/env-vars.md)
     -   [Extract Styles](/chapter1/intermediate/app-archetype/extract-styles.md)
+    -   [Unit Tests](/chapter1/intermediate/app-archetype/unit-tests.md)
 
 -   [Component Archetype](chapter1/intermediate/component-archetype/README.md)
 
     -   [Structure](/chapter1/intermediate/component-archetype/component-archetype-structure.md)
     -   [Webpack Config](/chapter1/intermediate/component-archetype/webpack-config.md)
     -   [Extract Styles](/chapter1/intermediate/component-archetype/extract-styles.md)
+    -   [Unit Tests](/chapter1/intermediate/component-archetype/unit-tests.md)
 
 -   [Build a Server Plugin](chapter1/intermediate/build-a-server-plugin.md)
 -   [React App Routes](chapter1/intermediate/react-routes/react-routes.md)
