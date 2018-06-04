@@ -1,6 +1,6 @@
 {
   "name": "electrode-node-resolver",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Offers Node module resolvers for tools",
   "homepage": "http://www.electrode.io",
   "repository": {
