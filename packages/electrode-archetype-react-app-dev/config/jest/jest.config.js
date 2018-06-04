@@ -1,14 +1,12 @@
+"use strict";
+
 const Path = require("path");
-const optionalRequire = require("optional-require")(require);
-
-const rootDir = process.cwd();
-
 const fileMock = Path.join(__dirname, "__mocks__", "file-mock.js");
 const frameworkMock = Path.join(__dirname, "__mocks__", "framework-mock.js");
 
-const userConfig = optionalRequire(Path.resolve("archetype", "config"), {
-  default: {}
-});
+const archetype = require("electrode-archetype-react-app/config/archetype");
+
+const rootDir = process.cwd();
 
 const jestDefaultConfig = {
   rootDir,
@@ -23,4 +21,4 @@ const jestDefaultConfig = {
   modulePathIgnorePatterns: ["<rootDir>/test"]
 };
 
-module.exports = Object.assign({}, jestDefaultConfig, userConfig.jest);
+module.exports = Object.assign({}, jestDefaultConfig, archetype.jest);
