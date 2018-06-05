@@ -14,6 +14,7 @@ const webpackConfigSpec = {
   devHostname: { env: ["WEBPACK_HOST", "WEBPACK_DEV_HOST"], default: "localhost" },
   devPort: { env: "WEBPACK_DEV_PORT", default: 2992 },
   testPort: { env: "WEBPACK_TEST_PORT", default: 3001 },
+  reporterSocketPort: { env: "WEBPACK_REPORTER_SOCKET_PORT", default: 5000 },
   https: { env: "WEBPACK_DEV_HTTPS", default: false },
   cssModuleSupport: { env: "CSS_MODULE_SUPPORT", default: undefined },
   cssModuleStylusSupport: { env: "CSS_MODULE_STYLUS_SUPPORT", default: false },
