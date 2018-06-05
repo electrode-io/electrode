@@ -107,7 +107,18 @@ class WebpackReporter extends EventEmitter {
 
   _data(req, res) {
     const jsonData = () => {
-      return this._reporterOptions.stats.toJson({}, true);
+      return this._reporterOptions.stats.toJson({
+        hash: true,
+        version: true,
+        time: true,
+        publicPath: true,
+        assetsByChunkName: true,
+        assets: true,
+        errors: true,
+        warnings: true,
+        modules: true,
+        chunks: true,
+      }, true);
     };
 
     const stats = jsonData();
