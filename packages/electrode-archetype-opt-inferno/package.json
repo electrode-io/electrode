@@ -11,6 +11,9 @@
   "bugs": {
     "url": "https://github.com/electrode-io/electrode/issues"
   },
+  "files": [
+    "optional-check.js"
+  ],
   "license": "Apache-2.0",
   "scripts": {
     "preinstall": "node optional-check.js"

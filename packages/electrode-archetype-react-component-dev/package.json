@@ -15,6 +15,11 @@
   "peerDependencies": {
     "electrode-archetype-react-component": "^5.0.0"
   },
+  "files": [
+    "config",
+    "scripts",
+    "require.js"
+  ],
   "dependencies": {
     "autoprefixer-stylus": "0.13.0",
     "babel-cli": "^6.6.5",

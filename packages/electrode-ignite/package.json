@@ -31,6 +31,11 @@
   "bugs": {
     "url": "https://github.com/electrode-io/electrode/issues"
   },
+  "files": [
+    "bin",
+    "cli",
+    "lib"
+  ],
   "devDependencies": {
     "electrode-archetype-njs-module-dev": "^3.0.0",
     "mock-require": "^2.0.2",

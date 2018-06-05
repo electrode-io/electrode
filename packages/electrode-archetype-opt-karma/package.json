@@ -15,6 +15,9 @@
   "scripts": {
     "preinstall": "node optional-check.js"
   },
+  "files": [
+    "optional-check.js"
+  ],
   "dependencies": {
     "karma": "^1.7.1",
     "karma-chrome-launcher": "^2.1.1",

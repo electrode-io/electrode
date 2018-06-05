@@ -24,6 +24,9 @@
       "email": "joel123@gmail.com"
     }
   ],
+  "files": [
+    "lib"
+  ],
   "devDependencies": {
     "electrode-archetype-njs-module-dev": "^2.2.0"
   },

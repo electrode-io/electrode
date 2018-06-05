@@ -16,6 +16,14 @@
     "test": "clap check",
     "format": "prettier --write --print-width 100 *.{js,jsx} `find . -type d -d 1 -exec echo '{}/**/*.{js,jsx}' \\; | egrep -v '(/node_modules/|/dist/|/coverage/)'`"
   },
+  "files": [
+    "config",
+    "lib",
+    "support",
+    "arch-clap.js",
+    "require.js",
+    "supports.js"
+  ],
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "css-modules-require-hook": "^4.0.2",
