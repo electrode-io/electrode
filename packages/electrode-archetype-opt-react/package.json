@@ -15,6 +15,9 @@
   "scripts": {
     "preinstall": "node optional-check.js"
   },
+  "files": [
+    "optional-check.js"
+  ],
   "dependencies": {
     "react": "^16.0.0",
     "react-dom": "^16.0.0"

@@ -18,6 +18,11 @@
   ],
   "author": "Joel Chen <xchen@walmartlabs.com>",
   "license": "Apache-2.0",
+  "files": [
+    "config",
+    "dist",
+    "lib"
+  ],
   "devDependencies": {
     "classnames": "^2.2.5",
     "electrode-archetype-react-app": "../electrode-archetype-react-app",

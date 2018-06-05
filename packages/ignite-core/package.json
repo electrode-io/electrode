@@ -24,6 +24,9 @@
     "electrode"
   ],
   "license": "Apache-2.0",
+  "files": [
+    "lib"
+  ],
   "dependencies": {
     "chalk": "^2.0.1",
     "cli-spinner": "^0.2.6",

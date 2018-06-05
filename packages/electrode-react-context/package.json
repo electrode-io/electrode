@@ -17,6 +17,9 @@
     "url": "https://github.com/electrode-io/electrode.git"
   },
   "license": "Apache-2.0",
+  "files": [
+    "lib"
+  ],
   "peerDependencies": {
     "react": "^15.0.0 || ^0.14.0",
     "react-dom": "^15.0.0 || ^0.14.0"
