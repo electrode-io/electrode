@@ -10,9 +10,21 @@ App Archetype supports Karma as its Javascript test runner with the Mocha testin
 
 To run your karma unit tests, simply place your tests in the `test` folder. And run `npm run test`.
 
+### Disabling Karma
+
+If you prefer [Jest](#jest) only for writing your unit tests, then you can explicitly turn off Karma support and skip installing the dependencies required. To do that, create a file `archetype/config/index.js`, and add the following code to it:
+
+```js
+module.exports = {
+  options: {
+    karma: false
+  }
+};
+```
+
 ## Jest
 
-The App Archetype also takes Jest as its delightful javascript testing option. It has a built-in Jest configuration, and you can also extend it from your app level. Jest parallelizes test runs across workers to maximize performance. 
+The App Archetype also takes Jest as its delightful javascript testing option. It has a built-in Jest configuration, and you can also extend it from your app level. Jest parallelizes test runs across workers to maximize performance.
 
 ### Run your jest tests
 
@@ -22,10 +34,10 @@ To run your jest unit tests, simply place your tests in the `__test__` folder, o
 
 The App Archetype also takes customized Jest config from your app level. To do that, create a file `archetype/config/index.js`, and put the contents below:
 
-```
+```js
 module.exports = {
-    jest: {
-        // sepcify your jest config here
-    }
+  jest: {
+    // sepcify your jest config here
+  }
 };
 ```
