@@ -1,10 +1,18 @@
 # Getting Started with Electrode Ignite
 
-Electrode is a platform that involves many elements and environments.  To ensure you have everything working together, an npm module called [electrode-ignite] is available with a CLI command that's the single entry point to help you start development with the Electrode platform.
+Electrode is a platform that involves many elements and environments. To ensure you have everything working together, an npm module called [electrode-ignite] is available with a CLI command that's the single entry point to help you start development with the Electrode platform.
+
+## Reminder for Walmart Developers
+
+If you are a developers working for Walmart and you are looking to develop your web application using Electrode, then please be aware that the Open Source Electrode doesn't contain anything for WML proprietary requirements.
+
+We have WML internal generators and ignite that will create applications specifically for running in WML infrastructure. Please keep that in mind when you are ready to start your WML internal application.
+
+You can still use all the open source resource to learn and test since internal application also use most of the open source Electrode modules.
 
 ## Installation
 
->Before proceeding, be sure to verify the [Requirements](/overview/requirements.md) for setting up your development environment.
+> Before proceeding, be sure to verify the [Requirements](/overview/requirements.md) for setting up your development environment.
 
 ## Usage
 
@@ -52,12 +60,12 @@ For example:
 
 ## Available Ignite Tasks
 
--   `check-nodejs` - Check your NodeJS and npm environment.
--   `generate-app` - Generate an Electrode application.
--   `generate-component` - Generate an Electrode component.
--   `add-component` - Add a component to your existing component repo.
--   `docs` - Electrode official documentation.
--   `help` - Show help on usage.
+- `check-nodejs` - Check your NodeJS and npm environment.
+- `generate-app` - Generate an Electrode application.
+- `generate-component` - Generate an Electrode component.
+- `add-component` - Add a component to your existing component repo.
+- `docs` - Electrode official documentation.
+- `help` - Show help on usage.
 
 Let's get started with Electrode App and Electrode Component by using Electrode Ignite in the next few sections.
 
