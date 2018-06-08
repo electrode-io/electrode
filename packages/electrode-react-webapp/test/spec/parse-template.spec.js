@@ -161,7 +161,11 @@ describe("AsyncTemplate._parseTemplate", function() {
         pos: 17,
         props: {
           attr: ["1", "2", "3"],
-          args: ["a", "b", "c"]
+          args: ["a", "b", "c"],
+          empty: "",
+          foo: "bar a [b] c",
+          hello: "world",
+          test: true
         },
         custom: undefined,
         wantsNext: undefined
@@ -169,7 +173,7 @@ describe("AsyncTemplate._parseTemplate", function() {
       {
         id: "prefetch-bundles",
         isModule: false,
-        pos: 83,
+        pos: 148,
         props: {},
         custom: undefined,
         wantsNext: undefined
@@ -180,7 +184,7 @@ describe("AsyncTemplate._parseTemplate", function() {
       {
         id: "meta-tags",
         isModule: false,
-        pos: 167,
+        pos: 232,
         props: {},
         custom: undefined,
         wantsNext: undefined
@@ -192,9 +196,20 @@ describe("AsyncTemplate._parseTemplate", function() {
       {
         id: "page-title",
         isModule: false,
-        pos: 204,
+        pos: 269,
         props: {},
         custom: undefined,
+        wantsNext: undefined
+      },
+      {
+        custom: undefined,
+        id: "json-prop",
+        isModule: false,
+        pos: 294,
+        props: {
+          foo: "bar",
+          test: [1, 2, 3]
+        },
         wantsNext: undefined
       }
     ];
@@ -210,7 +225,7 @@ describe("AsyncTemplate._parseTemplate", function() {
           tokenHandlers: "./test/fixtures/token-handler"
         })
     ).to.throw(
-      "token prefetch-bundles at position 83 has malformed prop 'bad-prop': array missing [."
+      "token prefetch-bundles at position 83 has malformed prop 'bad-prop': name must be name="
     );
   });
 
@@ -223,7 +238,18 @@ describe("AsyncTemplate._parseTemplate", function() {
           tokenHandlers: "./test/fixtures/token-handler"
         })
     ).to.throw(
-      "token ssr-content at position 17 has malformed prop 'attr[1,2,3]': name must be 'name='."
+      "token ssr-content at position 17 has malformed prop 'attr[1,2,3]': name must be name="
     );
+  });
+
+  it("should throw for token with value that has mismatching '", () => {
+    const htmlFile = Path.join(__dirname, "../data/template6.html");
+    expect(
+      () =>
+        new AsyncTemplate({
+          htmlFile,
+          tokenHandlers: "./test/fixtures/token-handler"
+        })
+    ).to.throw("has malformed prop 'foo='bar': mismatch quote '");
   });
 });

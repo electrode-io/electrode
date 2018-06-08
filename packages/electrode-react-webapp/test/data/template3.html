@@ -5,6 +5,10 @@
     ssr-content
     attr=[1,2,3]
     args=[a,b,c]
+    foo='bar a [b] c'
+    hello="world"
+    empty=
+    test=true
   }-->
   <!--%{
     prefetch-bundles
@@ -18,4 +22,11 @@
 </html>
 <!--%{
   page-title
+}-->
+<!--%{
+  json-prop
+  {
+    "foo": "bar",
+    "test": [1,2,3]
+  }
 }-->
