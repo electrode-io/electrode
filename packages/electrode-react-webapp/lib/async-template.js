@@ -1,6 +1,6 @@
 "use strict";
 
-/* eslint-disable max-statements, no-constant-condition */
+/* eslint-disable max-statements, no-constant-condition, no-magic-numbers */
 
 const assert = require("assert");
 const Fs = require("fs");
@@ -93,7 +93,7 @@ class AsyncTemplate {
           props = this._parseTokenProps(remain);
         } catch (e) {
           const x = `at position ${pos} has malformed prop '${remain}': ${e.message}`;
-          assert(false, `electrode-react-webapp: ${filepath}: token ${token} ${x}.`);
+          assert(false, `electrode-react-webapp: ${filepath}: token ${token} ${x}`);
         }
 
         tokens.push(new Token(token, pos, props));
@@ -109,13 +109,40 @@ class AsyncTemplate {
   }
 
   _parseTokenProps(str) {
+    // check if it's JSON object by looking for "{"
+    if (str[0] === "{") {
+      return JSON.parse(str);
+    }
+
     const props = {};
+
     while (str) {
-      const r = stringArray.parse(str);
-      const m = r.prefix.match(/([^=]+)=/);
-      assert(m && m[1], "name must be 'name='");
-      props[m[1]] = r.array;
-      str = r.remain.trim();
+      const m1 = str.match(/([\w]+)=(.)/);
+      assert(m1 && m1[1], "name must be name=Val");
+      const name = m1[1];
+
+      if (m1[2] === `[`) {
+        // treat as name=[str1, str2]
+        str = str.substring(m1[0].length - 1);
+        const r = stringArray.parse(str, true);
+        props[name] = r.array;
+        str = r.remain.trim();
+      } else if (m1[2] === `'` || m1[2] === `"`) {
+        str = str.substring(m1[0].length);
+        const m2 = str.match(new RegExp(`([^${m1[2]}]+)${m1[2]}`));
+        assert(m2, `mismatch quote ${m1[2]}`);
+        props[name] = m2[1];
+        str = str.substring(m2[0].length).trim();
+      } else if (m1[2] === " ") {
+        // empty
+        props[name] = "";
+        str = str.substring(m1[0].length).trim();
+      } else {
+        str = str.substring(m1[0].length - 1);
+        const m2 = str.match(/([^ ]*)/); // matching name=Prop
+        props[name] = JSON.parse(m2[1]);
+        str = str.substring(m2[0].length).trim();
+      }
     }
 
     return props;
