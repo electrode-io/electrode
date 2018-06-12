@@ -1,5 +1,11 @@
 "use strict";
 
+/*
+ * Use PhantomJS to run your Karma Unit tests.  Default is "chrome" (Chrome Headless)
+ */
+
+process.env.KARMA_BROWSER = "phantomjs";
+
 /**
  * There is a full range of clap tasks defined in the above archetype
  * but below is a concise list of most often used clap tasks at the
