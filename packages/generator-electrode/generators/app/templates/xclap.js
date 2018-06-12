@@ -14,7 +14,7 @@ process.env.SERVER_ES6 = true;
  * Use PhantomJS to run your Karma Unit tests.  Default is "chrome" (Chrome Headless)
  */
 
-// process.env.KARMA_BROWSER = "phantomjs";
+process.env.KARMA_BROWSER = "phantomjs";
 
 /*
  * Turn off using electrode-webpack-reporter to show visual report of your webpack
