@@ -3,8 +3,15 @@ extends:
   - "./.eslintrc-react"
 globals:
   document: false
+plugins: [
+  "flowtype"
+]
 rules:
   "complexity": "off"
   "max-len": "off"
   "react/jsx-wrap-multilines": "warn"
   "no-multi-spaces": "off"
+
+  "flowtype/define-flow-type": "warn"
+  "flowtype/use-flow-type": "warn"
+  "flowtype/require-valid-file-annotation": "error"
