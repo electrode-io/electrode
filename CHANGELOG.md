@@ -1,3 +1,100 @@
+# 6/14/2018
+
+## Packages
+
+-   electrode-archetype-opt-inferno@0.2.3 `(0.2.2 => 0.2.3)`
+-   electrode-archetype-opt-karma@1.0.1 `(1.0.0 => 1.0.1)`
+-   electrode-archetype-opt-react@1.0.1 `(1.0.0 => 1.0.1)`
+-   electrode-archetype-react-app@5.2.1 `(5.2.0 => 5.2.1)`
+-   electrode-archetype-react-app-dev@5.2.1 `(5.2.0 => 5.2.1)`
+-   electrode-archetype-react-component@5.2.1 `(5.2.0 => 5.2.1)`
+-   electrode-archetype-react-component-dev@5.2.1 `(5.2.0 => 5.2.1)`
+-   electrode-cookies@1.0.2 `(1.0.1 => 1.0.2)`
+-   electrode-ignite@2.0.7 `(2.0.6 => 2.0.7)`
+-   electrode-react-context@1.0.1 `(1.0.0 => 1.0.1)`
+-   electrode-react-webapp@2.3.1 `(2.3.0 => 2.3.1)`
+-   electrode-redux-router-engine@1.5.2 `(1.5.1 => 1.5.2)`
+-   electrode-ui-config@1.1.1 `(1.1.0 => 1.1.1)`
+-   electrode-ui-logger@1.1.1 `(1.1.0 => 1.1.1)`
+-   electrode-webpack-reporter@0.4.5 `(0.4.4 => 0.4.5)`
+-   generator-electrode@4.0.7 `(4.0.6 => 4.0.7)`
+-   ignite-core@1.1.4 `(1.1.3 => 1.1.4)`
+-   webpack-config-composer@1.0.4 `(1.0.3 => 1.0.4)`
+
+## Commits
+
+-   `packages/electrode-archetype-opt-inferno`
+
+    -   [chore] replace .npmignore with files in package.json ([#801](https://github.com/electrode-io/electrode/pull/801)) [commit](http://github.com/electrode-io/electrode/commit/44e75f1d8e7d83c2e0d15a780e9dc553ada60fb4)
+
+-   `packages/electrode-archetype-opt-karma`
+
+    -   [chore] replace .npmignore with files in package.json ([#801](https://github.com/electrode-io/electrode/pull/801)) [commit](http://github.com/electrode-io/electrode/commit/44e75f1d8e7d83c2e0d15a780e9dc553ada60fb4)
+
+-   `packages/electrode-archetype-opt-react`
+
+    -   [chore] replace .npmignore with files in package.json ([#801](https://github.com/electrode-io/electrode/pull/801)) [commit](http://github.com/electrode-io/electrode/commit/44e75f1d8e7d83c2e0d15a780e9dc553ada60fb4)
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   Default reporter socket port from env ([#628](https://github.com/electrode-io/electrode/pull/628)) [commit](http://github.com/electrode-io/electrode/commit/fb2171b5ea03534d5e7d767bde66097ab28f89b9)
+    -   [chore] replace .npmignore with files in package.json ([#801](https://github.com/electrode-io/electrode/pull/801)) [commit](http://github.com/electrode-io/electrode/commit/44e75f1d8e7d83c2e0d15a780e9dc553ada60fb4)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   [chore] replace .npmignore with files in package.json ([#801](https://github.com/electrode-io/electrode/pull/801)) [commit](http://github.com/electrode-io/electrode/commit/44e75f1d8e7d83c2e0d15a780e9dc553ada60fb4)
+
+-   `packages/electrode-cookies`
+
+    -   [chore] replace .npmignore with files in package.json ([#801](https://github.com/electrode-io/electrode/pull/801)) [commit](http://github.com/electrode-io/electrode/commit/44e75f1d8e7d83c2e0d15a780e9dc553ada60fb4)
+
+-   `packages/electrode-ignite`
+
+    -   [chore] replace .npmignore with files in package.json ([#801](https://github.com/electrode-io/electrode/pull/801)) [commit](http://github.com/electrode-io/electrode/commit/44e75f1d8e7d83c2e0d15a780e9dc553ada60fb4)
+
+-   `packages/electrode-react-context`
+
+    -   [chore] replace .npmignore with files in package.json ([#801](https://github.com/electrode-io/electrode/pull/801)) [commit](http://github.com/electrode-io/electrode/commit/44e75f1d8e7d83c2e0d15a780e9dc553ada60fb4)
+
+-   `packages/electrode-react-webapp`
+
+    -   support JSON and string for token props ([#805](https://github.com/electrode-io/electrode/pull/805)) [commit](http://github.com/electrode-io/electrode/commit/07b457c95ab2727a70615cfb33b86700d293af88)
+    -   [chore] replace .npmignore with files in package.json ([#801](https://github.com/electrode-io/electrode/pull/801)) [commit](http://github.com/electrode-io/electrode/commit/44e75f1d8e7d83c2e0d15a780e9dc553ada60fb4)
+
+-   `packages/electrode-redux-router-engine`
+
+    -   [chore] replace .npmignore with files in package.json ([#801](https://github.com/electrode-io/electrode/pull/801)) [commit](http://github.com/electrode-io/electrode/commit/44e75f1d8e7d83c2e0d15a780e9dc553ada60fb4)
+    -   update redux to support v4 ([#807](https://github.com/electrode-io/electrode/pull/807)) [commit](http://github.com/electrode-io/electrode/commit/433fd4bfe8bf0c1e5efdc63a68778b6cdbdcc66c)
+
+-   `packages/electrode-ui-config`
+
+    -   [chore] replace .npmignore with files in package.json ([#801](https://github.com/electrode-io/electrode/pull/801)) [commit](http://github.com/electrode-io/electrode/commit/44e75f1d8e7d83c2e0d15a780e9dc553ada60fb4)
+
+-   `packages/electrode-ui-logger`
+
+    -   [chore] replace .npmignore with files in package.json ([#801](https://github.com/electrode-io/electrode/pull/801)) [commit](http://github.com/electrode-io/electrode/commit/44e75f1d8e7d83c2e0d15a780e9dc553ada60fb4)
+
+-   `packages/electrode-webpack-reporter`
+
+    -   [chore] replace .npmignore with files in package.json ([#801](https://github.com/electrode-io/electrode/pull/801)) [commit](http://github.com/electrode-io/electrode/commit/44e75f1d8e7d83c2e0d15a780e9dc553ada60fb4)
+
+-   `packages/generator-electrode`
+
+    -   [chore] replace .npmignore with files in package.json ([#801](https://github.com/electrode-io/electrode/pull/801)) [commit](http://github.com/electrode-io/electrode/commit/44e75f1d8e7d83c2e0d15a780e9dc553ada60fb4)
+
+-   `packages/ignite-core`
+
+    -   [chore] replace .npmignore with files in package.json ([#801](https://github.com/electrode-io/electrode/pull/801)) [commit](http://github.com/electrode-io/electrode/commit/44e75f1d8e7d83c2e0d15a780e9dc553ada60fb4)
+
+-   `packages/webpack-config-composer`
+
+    -   [chore] replace .npmignore with files in package.json ([#801](https://github.com/electrode-io/electrode/pull/801)) [commit](http://github.com/electrode-io/electrode/commit/44e75f1d8e7d83c2e0d15a780e9dc553ada60fb4)
+
+-   `docs`
+
+    -   update gitbook docs for setup and unit test ([#802](https://github.com/electrode-io/electrode/pull/802)) [commit](http://github.com/electrode-io/electrode/commit/63467d55eb1cd7d7916eff5b7b0c2c64e4a5beea)
+    -   jest docs for component & app archetype ([#785](https://github.com/electrode-io/electrode/pull/785)) [commit](http://github.com/electrode-io/electrode/commit/24c716a9b20e6b5deea56713c75525e0dcfa3adc)
+
 # 6/4/2018
 
 ## Packages
