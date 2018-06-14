@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-component",
-  "version": "5.2.0",
+  "version": "5.2.1",
   "description": "Archetype - Electrode Component",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -33,8 +33,8 @@
     "xclap": "^0.2.0"
   },
   "optionalDependencies": {
-    "electrode-archetype-opt-inferno": "^0.2.0",
-    "electrode-archetype-opt-react": "^1.0.0"
+    "electrode-archetype-opt-inferno": "^0.2.3",
+    "electrode-archetype-opt-react": "^1.0.1"
   },
   "engines": {
     "node": ">= 6",

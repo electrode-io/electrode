@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-app-dev",
-  "version": "5.2.0",
+  "version": "5.2.1",
   "description": "Electrode NodeJS/React Application Archetype (Development)",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -56,7 +56,7 @@
     "electrode-cdn-file-loader": "^1.0.0",
     "electrode-electrify": "^1.0.0",
     "electrode-node-resolver": "^1.0.0",
-    "electrode-webpack-reporter": "^0.4.4",
+    "electrode-webpack-reporter": "^0.4.5",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.1.0",
     "eslint": "^4.8.0",
@@ -107,7 +107,7 @@
     "url-loader": "^0.6.2",
     "web-app-manifest-loader": "^0.1.1",
     "webpack": "^3.6.0",
-    "webpack-config-composer": "^1.0.3",
+    "webpack-config-composer": "^1.0.4",
     "webpack-dev-server": "^2.5.1",
     "webpack-disk-plugin": "0.0.2",
     "webpack-stats-plugin": "^0.1.1",
@@ -117,9 +117,9 @@
     "xsh": "^0.4.2"
   },
   "optionalDependencies": {
-    "electrode-archetype-opt-inferno": "^0.2.0",
-    "electrode-archetype-opt-karma": "^1.0.0",
-    "electrode-archetype-opt-react": "^1.0.0"
+    "electrode-archetype-opt-inferno": "^0.2.3",
+    "electrode-archetype-opt-karma": "^1.0.1",
+    "electrode-archetype-opt-react": "^1.0.1"
   },
   "devDependencies": {
     "electrode-archetype-react-app": "../electrode-archetype-react-app",

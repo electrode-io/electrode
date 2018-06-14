@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-component-dev",
-  "version": "5.2.0",
+  "version": "5.2.1",
   "description": "Electrode Component (Development)",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -92,16 +92,16 @@
     "stylus-relative-loader": "^3.4.0",
     "url-loader": "^0.6.2",
     "webpack": "^3.0.0",
-    "webpack-config-composer": "^1.0.3",
+    "webpack-config-composer": "^1.0.4",
     "webpack-dev-server": "^2.7.1",
     "xclap": "^0.2.0",
     "xenv-config": "^1.2.1",
     "xsh": "^0.3.2"
   },
   "optionalDependencies": {
-    "electrode-archetype-opt-inferno": "^0.2.0",
-    "electrode-archetype-opt-karma": "^1.0.0",
-    "electrode-archetype-opt-react": "^1.0.0"
+    "electrode-archetype-opt-inferno": "^0.2.3",
+    "electrode-archetype-opt-karma": "^1.0.1",
+    "electrode-archetype-opt-react": "^1.0.1"
   },
   "devDependencies": {
     "electrode-archetype-react-component": "../electrode-archetype-react-component",

@@ -1,6 +1,6 @@
 {
   "name": "electrode-ui-config",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Isomorphic UI config",
   "main": "lib/index.js",
   "browser": "dist/csindex.js",

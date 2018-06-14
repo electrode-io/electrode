@@ -1,6 +1,6 @@
 {
   "name": "electrode-react-context",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React HoC for providing app in the global context",
   "main": "lib/context-provider.js",
   "scripts": {
