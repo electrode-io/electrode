@@ -68,6 +68,8 @@ class AsyncTemplate {
       const pos = template.indexOf(tokenOpenTag, pt);
       if (pos >= pt) {
         const str = template.substring(pt, pos).trim();
+        // if there are text between a close tag and an open tag, then consider
+        // that as plain HTML string
         if (str) tokens.push({ str });
 
         const ex = template.indexOf(tokenCloseTag, pos);
@@ -81,7 +83,8 @@ class AsyncTemplate {
           .trim()
           .split("\n")
           .map(x => x.trim())
-          .filter(x => x)
+          // remove empty and comment lines that start with "//"
+          .filter(x => x && !x.startsWith("//"))
           .join(" ");
 
         const token = remain.split(" ", 1)[0];
