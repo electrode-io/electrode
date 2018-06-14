@@ -1,3 +1,5 @@
+// @flow
+
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
@@ -10,7 +12,7 @@ let AddTodo = ({dispatch}) => {
     <div>
       <form onSubmit={(e) => {
         e.preventDefault();
-        if (!input.value.trim()) {
+        if (!input || !input.value.trim()) {
           return;
         }
         dispatch(addTodo(input.value));
