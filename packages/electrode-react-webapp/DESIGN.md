@@ -10,15 +10,80 @@ The design of the rendering flow took the following into consideration.
 
 - Allow tokens to be async so it can call services etc to produce the data.
 
-- Allow token proccessor to open a spot in the output for update later. A flush will wait for open spots to close.
+- Allow token proccessor to open a spot in the output for update later. A flush will wait for open spots to close. This enables concurrently processing tokens that can send text to fixed spots in the output doc.
 
 ## Tokens
 
-Within the HTML file, special tokens can be specified with `<!--%{token}-->`.
+- Within the HTML file, special tokens can be specified with `<!--%{token}-->`.
 
-- Where `token` is the string referring to a token or name of a processor module.
+  - Where `token` is the string referring to a token or name of a processor module.
 
-- To specify a processor module, start the token with `#`. ie: `<!--%{#module_name}-->`, where `module_name` specifies a name for a [Custom Processor Module](#custom-processor-module). The module will be loaded with `require`. If the `module_name` starts with `.`, then the module is loaded from CWD. For example, `<!--${#./lib/custom}-->` will load the module `./lib/custom` from under CWD.
+  - To specify a processor module, start the token with `#`. ie: `<!--%{#module_name}-->`, where `module_name` specifies a name for a [Custom Processor Module](#custom-processor-module). The module will be loaded with `require`. If the `module_name` starts with `.`, then the module is loaded from CWD. For example, `<!--${#./lib/custom}-->` will load the module `./lib/custom` from under CWD.
+
+  - Tokens can also be multi lines.
+
+  - Comments can be added as lines that starts with `//`.
+
+  - Comments must be in their own lines only.
+
+For example:
+
+```html
+<!--{
+  // my custom token
+  custom-token-name
+}-->
+```
+
+### Token Props
+
+- You can specify Key Value Pair props for your tokens in the form of `name=value`
+
+  - ie: `<!--%{my-token prop1="test" prop2=false prop3=[a, b, c]}-->`
+
+  - String prop value must be string enclode in `"` or `'`.
+
+  - Values started with `[` will be parsed with [string-array](https://www.npmjs.com/package/string-array)
+
+  - Any other values will be parsed with `JSON.parse`, so only `false`, `true`, numbers, `null`, or a stringified JSON that has absolutely no space.
+
+- If you want, you can specify a single JSON object following the token in anyway you like to act as the props object.
+
+For example:
+
+```html
+<!--{ token-with-json
+  {
+    "foo": "bar",
+    "hello": [ "world" ],
+    "test": [ 1, 2, 3, 4 ]
+  }
+}-->
+```
+
+### `_call` Props
+
+If your token loads a custom processor module, then you can use a `_call` prop to specify the name of a function from that module to call.
+
+For example:
+
+```html
+<!--{#./my-token-module _call="setup1" }-->
+```
+
+You can also use a [string-array](https://www.npmjs.com/package/string-array) to have additional strings params passed to the function.
+
+For example:
+
+```html
+<!--{#./my-token-module _call=[setup1, [param1, param2]] }-->
+```
+
+This will call the function `setup1(context, options, a, b)` from your module like this:
+
+```js
+tokenModule.setup1(context, options, "param1", "param2");
+```
 
 ## Predefined Tokens and Handler
 
