@@ -3,6 +3,7 @@
 const AsyncTemplate = require("../../lib/async-template");
 const Path = require("path");
 const expect = require("chai").expect;
+const _ = require("lodash");
 
 describe("AsyncTemplate._parseTemplate", function() {
   it("should parse template into tokens", () => {
@@ -211,8 +212,23 @@ describe("AsyncTemplate._parseTemplate", function() {
           test: [1, 2, 3]
         },
         wantsNext: undefined
+      },
+      {
+        _modCall: ["setup"],
+        custom: {
+          name: "custom-call"
+        },
+        id: "#./test/fixtures/custom-call",
+        isModule: true,
+        pos: 364,
+        props: {
+          _call: "setup"
+        },
+        wantsNext: false
       }
     ];
+    expect(typeof _.last(asyncTemplate.tokens).custom.process).to.equal("function");
+    delete _.last(asyncTemplate.tokens).custom.process;
     expect(asyncTemplate.tokens).to.deep.equal(expected);
   });
 

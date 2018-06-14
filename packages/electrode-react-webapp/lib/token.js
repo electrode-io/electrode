@@ -15,6 +15,9 @@ class Token {
     this.custom = undefined;
     this.wantsNext = undefined;
     this.props = props || {};
+    if (this.props._call) {
+      this._modCall = [].concat(this.props._call);
+    }
   }
 
   // if token is a module, then load it
@@ -29,7 +32,18 @@ class Token {
       viewTokenModules[this.id] = tokenMod;
     }
 
-    this.custom = tokenMod(options || {}); // call setup function to get an instance
+    if (this._modCall) {
+      // call setup function to get an instance
+      const params = [options || {}, this].concat(this._modCall[1] || []);
+      assert(
+        tokenMod[this._modCall[0]],
+        `electrode-react-webapp: _call of token ${this.id} - '${this._modCall[0]}' not found`
+      );
+      this.custom = tokenMod[this._modCall[0]].apply(undefined, params);
+    } else {
+      this.custom = tokenMod(options || {}, this);
+    }
+
     assert(
       this.custom && this.custom.process,
       `custom token ${this.id} module doesn't have process method`

@@ -14,6 +14,14 @@ describe("token", function() {
     expect(tk.custom).to.equal(undefined);
   });
 
+  it("should invoke _call of a module", () => {
+    const tk = new Token("#./test/fixtures/custom-call", 0, { _call: "setup" });
+    expect(tk.id).to.equal("#./test/fixtures/custom-call");
+    expect(tk.isModule).to.equal(true);
+    tk.load();
+    expect(tk.process()).to.equal("_call");
+  });
+
   it("should create token as custom", () => {
     const tk = new Token("#./test/fixtures/custom-count");
     expect(tk.id).to.equal("#./test/fixtures/custom-count");
