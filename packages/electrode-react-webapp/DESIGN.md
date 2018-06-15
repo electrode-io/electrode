@@ -22,7 +22,7 @@ The design of the rendering flow took the following into consideration.
 
   - Tokens can also be multi lines.
 
-  - Comments can be added as lines that starts with `//`.
+  - Comments can be added as lines that start with `//`.
 
   - Comments must be in their own lines only.
 
@@ -41,7 +41,7 @@ For example:
 
   - ie: `<!--%{my-token prop1="test" prop2=false prop3=[a, b, c]}-->`
 
-  - String prop value must be string enclode in `"` or `'`.
+  - String prop value must be string enclosed in `"` or `'`.
 
   - Values started with `[` will be parsed with [string-array](https://www.npmjs.com/package/string-array)
 
@@ -79,11 +79,13 @@ For example:
 <!--{#./my-token-module _call=[setup1, [param1, param2]] }-->
 ```
 
-This will call the function `setup1(context, options, a, b)` from your module like this:
+This will call the function `setup1(options, tokenInstance, a, b)` from your module like this:
 
 ```js
-tokenModule.setup1(context, options, "param1", "param2");
+tokenModule.setup1(options, tokenObj, "param1", "param2");
 ```
+
+Where `tokenObj` is the your token's instance object.
 
 ## Predefined Tokens and Handler
 
@@ -120,34 +122,52 @@ You can register a token handler for each route. The token handler should export
 For example:
 
 ```js
-module.exports = function setup(options) {
+module.exports = function setup(options, tokenObj) {
   return {
     SSR_CONTENT: (context, [next]) => {}
   };
 };
 ```
 
-`options` will contain the following:
+- `options` will contain the following:
 
-- `routeOptions` - original options passed in
-- `routeData` - global data for the route
+  - `routeOptions` - original options passed in
+  - `routeData` - global data for the route
+
+- `tokenObj` is the instance object for your token.
 
 ### Custom Processor Module
 
-The custom processor module should export an initialize function as below:
+- The custom processor module should export an initialize function as below:
 
 ```js
-module.exports = function setup(options) {
+module.exports = function setup(options, tokenObj) {
   return {
     process: function(context, [next]) {}
   };
 };
 ```
 
-`options` will contain the following:
+- You can also export an object with multiple setup functions and use the `_call` prop to call specific ones:
 
-- `routeOptions` - original options passed in
-- `routeData` - global data for the route
+```js
+function setup1(options, tokenObj) {
+  return {
+    process: function(context, [next]) {}
+  };
+}
+
+function setup2(options, tokenObj) {
+  return {
+    process: function(context, [next]) {}
+  };
+}
+
+module.exports = {
+  setup1,
+  setup2
+};
+```
 
 ### The Process Function
 
