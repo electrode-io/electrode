@@ -6,7 +6,7 @@ The design of the rendering flow took the following into consideration.
 
 - A simple token base template rendering
 
-- The HTML output to be a stream and allow any token to trigger a flush at any time.
+- The document output to be a stream and allow any token to trigger a flush at any time.
 
 - Allow tokens to be async so it can call services etc to produce the data.
 
@@ -14,7 +14,7 @@ The design of the rendering flow took the following into consideration.
 
 ## Tokens
 
-- Within the HTML file, special tokens can be specified with `<!--%{token}-->`.
+- Within your template file, special tokens can be specified with `<!--%{token}-->`.
 
   - Where `token` is the string referring to a token or name of a processor module.
 
@@ -41,13 +41,13 @@ For example:
 
   - ie: `<!--%{my-token prop1="test" prop2=false prop3=[a, b, c]}-->`
 
-  - String prop value must be string enclosed in `"` or `'`.
+  - String prop values must be enclosed in `"` or `'`.
 
   - Values started with `[` will be parsed with [string-array](https://www.npmjs.com/package/string-array)
 
-  - Any other values will be parsed with `JSON.parse`, so only `false`, `true`, numbers, `null`, or a stringified JSON that has absolutely no space.
+  - Any other values will be parsed with `JSON.parse`, so only `false`, `true`, numbers, `null`, or a stringified JSON that has absolutely no spaces anywhere.
 
-- If you want, you can specify a single JSON object following the token in anyway you like to act as the props object.
+- If you want, you can specify a single JSON object following the token to act as the props object.
 
 For example:
 
@@ -61,9 +61,14 @@ For example:
 }-->
 ```
 
-### `_call` Props
+### Internal Props
 
-If your token loads a custom processor module, then you can use a `_call` prop to specify the name of a function from that module to call.
+Some props with leading `_` may be used to control the template engine. These are supported:
+
+- `_call="function_name"` - Tells the template engine what function from a token module to call.
+
+  - Expect your token loads a custom processor module that instead of exporting a setup funtion, exports an object with setup functions.
+  - The `_call` prop specifies the name of a function from that module to call.
 
 For example:
 
@@ -86,6 +91,8 @@ tokenModule.setup1(options, tokenObj, "param1", "param2");
 ```
 
 Where `tokenObj` is the your token's instance object.
+
+Your token's `props` object is accesible through `tokenObj.props`.
 
 ## Predefined Tokens and Handler
 
@@ -117,14 +124,15 @@ There are two ways to provide your own processor for tokens.
 
 ### Handler
 
-You can register a token handler for each route. The token handler should export a function `setup` that returns an object with a process function for each token it can handle.
+You can register a token handler for each route. The token handler should export a function `setup` that returns an object with the names of your custom tokens each associated with its own handler function.
 
-For example:
+For example, you can replace the predefined `SSR_CONTENT` token with your own handler, and define a new token `MY_NEW_TOKEN`.
 
 ```js
 module.exports = function setup(options, tokenObj) {
   return {
-    SSR_CONTENT: (context, [next]) => {}
+    SSR_CONTENT: (context, [next]) => {},
+    MY_NEW_TOKEN: context => `hello from MY_NEW_TOKEN`
   };
 };
 ```
@@ -135,6 +143,8 @@ module.exports = function setup(options, tokenObj) {
   - `routeData` - global data for the route
 
 - `tokenObj` is the instance object for your token.
+
+  - Your token's `props` object is accesible through `tokenObj.props`.
 
 ### Custom Processor Module
 
@@ -167,6 +177,16 @@ module.exports = {
   setup1,
   setup2
 };
+```
+
+And you can load the same module but call different setup function with the `_call` prop.
+
+```html
+Calling setup1 of lib/my-handlers.js
+<!--%{#./lib/my-handlers _call="setup1"}-->
+
+Calling setup2 of lib/my-handlers.js
+<!--%{#./lib/my-handlers _call="setup2"}-->
 ```
 
 ### The Process Function
@@ -212,6 +232,30 @@ Spot object has the follow methods:
 - `content` - the content from your route
 
 > You may store your data in `context.$` but future updates could conflict with your data.
+
+### Concurrent Token
+
+Note that a token handler that takes `next` or returns Promise is only async, but not concurrent. Meaning the renderer will still wait for it to finish before continuing to the next token.
+
+If you want the renderer to continue while your token generates output concurrently, you have to reserve a spot with `context.output.reserve()` and use `process.nextTick` to invoke another async function.
+
+For example:
+
+```js
+module.exports = function setup(options) {
+  return {
+    process: (context, token) => {
+      const spot = context.output.reserve();
+      const concurrentProc = async () => {
+        const myData = await getMyData();
+        spot.add(myData.stringify());
+        spot.close();
+      };
+      process.nextTick(concurrentProc);
+    }
+  };
+};
+```
 
 #### routeData
 
