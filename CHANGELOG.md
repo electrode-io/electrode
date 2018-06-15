@@ -1,3 +1,17 @@
+# 6/15/2018
+
+## Packages
+
+-   electrode-react-webapp@2.4.0 `(2.3.1 => 2.4.0)`
+
+## Commits
+
+-   `packages/electrode-react-webapp`
+
+    -   update DESIGN doc with new token features ([#810](https://github.com/electrode-io/electrode/pull/810)) [commit](http://github.com/electrode-io/electrode/commit/248f4da60dc47c3a5e6b1d62f90328f759524b6b)
+    -   support comments and _call prop for tokens ([#809](https://github.com/electrode-io/electrode/pull/809)) [commit](http://github.com/electrode-io/electrode/commit/f651b2f025ec1e2c2319ce1b3b014d1a33bfc029)
+    -   [minor] add note about accessing props and concurrent token ([#811](https://github.com/electrode-io/electrode/pull/811)) [commit](http://github.com/electrode-io/electrode/commit/4adc6b576c053810fb5d671e7b6c80eee175d3a3)
+
 # 6/14/2018
 
 ## Packages
