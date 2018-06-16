@@ -10,6 +10,7 @@ const ReactDomServer = optionalRequire("react-dom/server");
 const ReactRouter = require("react-router");
 const Provider = require("react-redux").Provider;
 const Path = require("path");
+const UnsupportedMethodError = require("./errors/unsupported-method-error.js");
 
 const BAD_CHARS_REGEXP = /[<\u2028\u2029]/g;
 const REPLACEMENTS_FOR_BAD_CHARS = {
@@ -78,7 +79,7 @@ class ReduxRouterEngine {
         const methods = route.methods || "get";
 
         if (methods.toLowerCase().indexOf(req.method.toLowerCase()) < 0) {
-          throw new Error(
+          throw new UnsupportedMethodError(
             `redux-router-engine: ${location} doesn't allow request method ${req.method}`);
         }
 
