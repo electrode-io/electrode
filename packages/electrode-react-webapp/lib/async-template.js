@@ -11,8 +11,16 @@ const { resolvePath } = require("./utils");
 const Token = require("./token");
 const stringArray = require("string-array");
 
-const tokenOpenTag = "<!--%{";
-const tokenCloseTag = "}-->";
+const tokenTags = {
+  "<!--%{": "}-->", // for tokens in html
+  "/*--%{": "}--*/" // for tokens in script and style
+};
+
+const tokenOpenTagRegex = new RegExp(
+  Object.keys(tokenTags)
+    .map(x => `(${x.replace(/([\*\/])/g, "\\$1")})`)
+    .join("|")
+);
 
 class AsyncTemplate {
   constructor(options) {
@@ -65,13 +73,16 @@ class AsyncTemplate {
     const tokens = [];
     let pt = 0;
     while (true) {
-      const pos = template.indexOf(tokenOpenTag, pt);
-      if (pos >= pt) {
+      const mx = template.substr(pt).match(tokenOpenTagRegex);
+      if (mx) {
+        const pos = mx.index + pt;
         const str = template.substring(pt, pos).trim();
         // if there are text between a close tag and an open tag, then consider
         // that as plain HTML string
         if (str) tokens.push({ str });
 
+        const tokenOpenTag = mx[0];
+        const tokenCloseTag = tokenTags[tokenOpenTag];
         const ex = template.indexOf(tokenCloseTag, pos);
         assert(
           ex > pos,
