@@ -1,14 +1,14 @@
 # Flow
 
-`Flow` is a static type checker for Javascript and widely used by frontend developers nowadays. It helps us to code faster, smarter, bigger and more confidently. Since Electrode has already got Babel in place, we need to set up `Flow` with babel: using babel to compile the code and integrate `Flow` into Electrode app.
+[`Flow`](https://flow.org/en/) is a static type checker for Javascript and widely used by frontend developers nowadays. It helps us to code faster, smarter, bigger and more confidently. Since Electrode has already got Babel in place, we need to set up `Flow` with babel: using babel to compile the code and integrate `Flow` into Electrode app.
 
 ### Flow with babel
 
-Electrode app archetype adds `babel-preset-flow`, which contains `babel-plugin-transform-flow-strip-types` plugin for stripping `Flow` types away so that the program runs. It also adds `flow-bin` to run `Flow` and check if the type is valid.
+Electrode app archetype adds [`babel-preset-flow`](https://babeljs.io/docs/en/babel-preset-flow/), which contains [`babel-plugin-transform-flow-strip-types`](https://babeljs.io/docs/en/babel-plugin-transform-flow-strip-types/) plugin for stripping `Flow` types away so that the program runs. It also adds [`flow-bin`](https://github.com/flowtype/flow-bin) to run `Flow` and check if the type is valid.
 
 ### Flow with eslint
 
-Electrode app archetype uses `eslint-plugin-flowtype` plugin as the linting rules for ESLint `Flow` type. The rules are enabled via the `.eslintrc` files located in the `electrode-archetype-react-app-dev` config folder.
+Electrode app archetype uses [`eslint-plugin-flowtype`](https://github.com/gajus/eslint-plugin-flowtype) plugin as the linting rules for ESLint `Flow` type. The rules are enabled via the `.eslintrc-react*` files located in the `electrode-archetype-react-app-dev` config folder.
 
 ### Flow with Electrode app
 
@@ -31,7 +31,7 @@ Checkout [here](https://flow.org/en/docs/config/) for more information.
 
 ##### - prepare the code
 
-`Flow` will onlu be checked when user has flow code. To mark the flow files, you can place `// @flow` or `/* @flow */` before any code in Javascript files.
+`Flow` will only be checked when user has flow code. To mark the flow files, you can place `// @flow` or `/* @flow */` before any code in Javascript files.
 
 This flag is in the form of a normal JavaScript comment annotated with @flow. The Flow background process gathers all the files with this flag and uses the type information available from all of these files to ensure consistency and error free programming.
 
@@ -42,3 +42,8 @@ If you wants to run the Flow Background Process, you can start the process that 
 To stop the background process, run flow stop.
 
 You can also type flow to accomplish the same effect as status is the default flag to the flow binary. At any point that you want to check for errors, just run `flow`.
+
+### References
+
+- [Use Flow with Babel](https://medium.freecodecamp.org/using-flow-with-babel-c04fdca8d14d)
+- [Flow installation](https://flow.org/en/docs/install/)
