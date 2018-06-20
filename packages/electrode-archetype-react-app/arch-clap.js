@@ -87,8 +87,20 @@ function setStaticFilesEnv() {
   process.env.STATIC_FILES = "true";
 }
 
+const defaultListenPort = 3000;
+
+const portFromEnv = () => {
+  const x = parseInt(process.env.PORT, 10);
+  /* istanbul ignore next */
+  return x !== null && !isNaN(x) ? x : defaultListenPort;
+};
+
 function setWebpackDev() {
   process.env.WEBPACK_DEV = "true";
+  if (archetype.webpack.devMiddleware) {
+    process.env.WEBPACK_DEV_MIDDLEWARE = "true";
+    process.env.WEBPACK_DEV_PORT = portFromEnv();
+  }
 }
 
 function setOptimizeStats() {
@@ -501,9 +513,14 @@ Individual .babelrc files were generated for you in src/client and src/server
       dep: [".remove-log-files", ".development-env", ".clean.build", ".mk-dist-dir"],
       task: function() {
         const args = taskArgs(this.argv);
+
         return [
           ".webpack-dev",
-          ["wds.dev", `server-watch ${args.join(" ")}`, "generate-service-worker"]
+          [
+            archetype.webpack.devMiddleware ? "" : "wds.dev",
+            `server-watch ${args.join(" ")}`,
+            "generate-service-worker"
+          ].filter(x => x)
         ];
       }
     },
@@ -613,17 +630,24 @@ Individual .babelrc files were generated for you in src/client and src/server
       dep: [".init-bundle.valid.log"],
       desc: "Start app's node server in watch mode with nodemon",
       task: function() {
-        const watches = [Path.join(eTmpDir, "bundle.valid.log"), AppMode.src.server, "config"]
+        const watches = [
+          archetype.webpack.devMiddleware ? "" : Path.join(eTmpDir, "bundle.valid.log"),
+          AppMode.src.server,
+          "config"
+        ]
+          .filter(x => x)
           .map(n => `--watch ${n}`)
           .join(" ");
         AppMode.setEnv(AppMode.src.dir);
         const nodeRunApp = AppMode.isSrc
           ? `node ${quote(Path.join(archetype.dir, "support/babel-run"))} ${AppMode.src.server}`
           : `node ${AppMode.src.server}`;
+
         return mkCmd(
           `~$nodemon`,
           taskArgs(this.argv).join(" "),
-          `--delay 1 -C --ext js,jsx,json,yaml,log ${watches}`,
+          archetype.webpack.devMiddleware ? "" : "-C",
+          `--delay 1 --ext js,jsx,json,yaml,log ${watches}`,
           `--exec ${nodeRunApp}`
         );
       }

@@ -6,6 +6,11 @@
  * MIT Licensed
  */
 
+ /* eslint-disable */
+
+// support custom fs
+// Existing PR https://github.com/expressjs/serve-index/pull/67/files
+
 'use strict';
 
 /**
@@ -97,6 +102,7 @@ function serveIndex(root, options) {
   var stylesheet = opts.stylesheet || defaultStylesheet;
   var template = opts.template || defaultTemplate;
   var view = opts.view || 'tiles';
+  var filesystem = opts.fs || fs;
 
   return function (req, res, next) {
     if (req.method !== 'GET' && req.method !== 'HEAD') {
@@ -130,7 +136,7 @@ function serveIndex(root, options) {
 
     // check if we have a directory
     debug('stat "%s"', path);
-    fs.stat(path, function(err, stat){
+    filesystem.stat(path, function(err, stat){
       if (err && err.code === 'ENOENT') {
         return next();
       }
@@ -146,7 +152,7 @@ function serveIndex(root, options) {
 
       // fetch files
       debug('readdir "%s"', path);
-      fs.readdir(path, function(err, files){
+      filesystem.readdir(path, function(err, files){
         if (err) return next(err);
         if (!hidden) files = removeHidden(files);
         if (filter) files = files.filter(function(filename, index, list) {
@@ -160,7 +166,7 @@ function serveIndex(root, options) {
 
         // not acceptable
         if (!type) return next(createError(406));
-        serveIndex[mediaType[type]](req, res, files, next, originalDir, showUp, icons, path, view, template, stylesheet);
+        serveIndex[mediaType[type]](req, res, files, next, originalDir, showUp, icons, path, view, template, stylesheet, filesystem);
       });
     });
   };
@@ -170,7 +176,7 @@ function serveIndex(root, options) {
  * Respond with text/html.
  */
 
-serveIndex.html = function _html(req, res, files, next, dir, showUp, icons, path, view, template, stylesheet) {
+serveIndex.html = function _html(req, res, files, next, dir, showUp, icons, path, view, template, stylesheet, filesystem) {
   var render = typeof template !== 'function'
     ? createHtmlRender(template)
     : template
@@ -180,7 +186,7 @@ serveIndex.html = function _html(req, res, files, next, dir, showUp, icons, path
   }
 
   // stat all files
-  stat(path, files, function (err, stats) {
+  statFiles(path, files, filesystem, function (err, stats) {
     if (err) return next(err);
 
     // combine the stats into the file list
@@ -237,7 +243,7 @@ serveIndex.plain = function _plain(req, res, files) {
 
 function createHtmlFileList(files, dir, useIcons, view) {
   var html = '<ul id="files" class="view-' + escapeHtml(view) + '">'
-    + (view == 'details' ? (
+    + (view === 'details' ? (
       '<li class="header">'
       + '<span class="name">Name</span>'
       + '<span class="size">Size</span>'
@@ -269,7 +275,7 @@ function createHtmlFileList(files, dir, useIcons, view) {
 
     path.push(encodeURIComponent(file.name));
 
-    var date = file.stat && file.name !== '..'
+    var date = file.stat && file.stat.mtime && file.name !== '..'
       ? file.stat.mtime.toLocaleDateString() + ' ' + file.stat.mtime.toLocaleTimeString()
       : '';
     var size = file.stat && !isDir
@@ -485,7 +491,7 @@ function normalizeSlashes(path) {
 
 function removeHidden(files) {
   return files.filter(function(file){
-    return '.' != file[0];
+    return file[0] !== '.'
   });
 }
 
@@ -511,14 +517,14 @@ function send (res, type, body) {
  * in same order.
  */
 
-function stat(dir, files, cb) {
+function statFiles(dir, files, filesystem, cb) {
   var batch = new Batch();
 
   batch.concurrency(10);
 
   files.forEach(function(file){
     batch.push(function(done){
-      fs.stat(join(dir, file), function(err, stat){
+      filesystem.stat(join(dir, file), function(err, stat){
         if (err && err.code !== 'ENOENT') return done(err);
 
         // pass ENOENT as null stat, not error
@@ -540,6 +546,7 @@ var icons = {
   'folder': 'folder.png',
 
   // generic mime type icons
+  'font': 'font.png',
   'image': 'image.png',
   'text': 'page_white_text.png',
   'video': 'film.png',
@@ -550,7 +557,6 @@ var icons = {
   '+zip': 'box.png',
 
   // specific mime type icons
-  'application/font-woff': 'font.png',
   'application/javascript': 'page_white_code_red.png',
   'application/json': 'page_white_code.png',
   'application/msword': 'page_white_word.png',
@@ -564,7 +570,6 @@ var icons = {
   'application/vnd.oasis.opendocument.text': 'page_white_word.png',
   'application/x-7z-compressed': 'box.png',
   'application/x-sh': 'application_xp_terminal.png',
-  'application/x-font-ttf': 'font.png',
   'application/x-msaccess': 'page_white_database.png',
   'application/x-shockwave-flash': 'page_white_flash.png',
   'application/x-sql': 'page_white_database.png',
@@ -618,7 +623,6 @@ var icons = {
   '.map': 'map.png',
   '.msi': 'box.png',
   '.mv4': 'film.png',
-  '.otf': 'font.png',
   '.pdb': 'page_white_database.png',
   '.php': 'page_white_php.png',
   '.pl': 'page_white_code.png',
