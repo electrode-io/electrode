@@ -55,7 +55,7 @@ const registerRoutes = (router, options) => {
     const routeOptions = _.defaults({ htmlFile: v.htmlFile }, registerOptions);
     const routeHandler = ReactWebapp.makeRouteHandler(routeOptions);
     const handleRoute = options.handleRoute || DefaultHandleRoute;
-    const content = resolveContent();
+    let content;
 
     let methods = v.method || ["GET"];
     if (!Array.isArray(methods)) {
@@ -69,7 +69,7 @@ const registerRoutes = (router, options) => {
 
       /*eslint max-nested-callbacks: [0, 4]*/
       router(method.toLowerCase(), path, function() {
-        return handleRoute.call(this, routeHandler, content);
+        return handleRoute.call(this, routeHandler, content || (content = resolveContent()));
       }); //end get
     });
   });

@@ -47,7 +47,7 @@ const registerRoutes = (app, options, next = () => {}) => {
     const routeOptions = _.defaults({ htmlFile: v.htmlFile }, registerOptions);
     const routeHandler = ReactWebapp.makeRouteHandler(routeOptions);
     const handleRoute = options.handleRoute || DefaultHandleRoute;
-    const content = resolveContent();
+    let content;
 
     /*eslint max-nested-callbacks: [0, 4]*/
     let methods = v.method || ["GET"];
@@ -58,7 +58,9 @@ const registerRoutes = (app, options, next = () => {}) => {
       if (method === "*") {
         method = "ALL";
       }
-      app[method.toLowerCase()](path, (req, res) => handleRoute(req, res, routeHandler, content));
+      app[method.toLowerCase()](path, (req, res) =>
+        handleRoute(req, res, routeHandler, content || (content = resolveContent()))
+      );
     });
   });
 
