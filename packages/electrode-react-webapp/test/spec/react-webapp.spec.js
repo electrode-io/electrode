@@ -2,6 +2,7 @@
 
 const Path = require("path");
 const reactWebapp = require("../../lib/react-webapp");
+const xstdout = require("xstdout");
 
 describe("react-webapp", function() {
   describe("resolveContent", function() {
@@ -10,6 +11,13 @@ describe("react-webapp", function() {
       expect(reactWebapp.resolveContent({ module: f })).to.equal("hello");
     });
 
+    it("should log error if resolving content fail", () => {
+      const intercept = xstdout.intercept(true);
+      const f = "./test/data/bad-content.js";
+      expect(reactWebapp.resolveContent({ module: f })).includes("test/data/bad-content.js failed");
+      intercept.restore();
+      expect(intercept.stderr.join("")).includes("Error: Cannot find module 'foo-blah'");
+    });
     it("should require module", () => {
       let mod;
       const fooRequire = x => (mod = x);
