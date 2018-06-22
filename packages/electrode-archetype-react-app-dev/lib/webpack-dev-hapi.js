@@ -1,11 +1,14 @@
 "use strict";
 
-/* eslint-disable max-statements, max-params, prefer-template */
+/* eslint-disable max-statements, max-params, prefer-template, complexity */
 
 const Path = require("path");
 const Fs = require("fs");
+const Url = require("url");
 const Webpack = require("webpack");
+const opn = require("opn");
 const webpackDevMiddleware = require("webpack-dev-middleware");
+const webpackHotMiddleware = require("webpack-hot-middleware");
 const isomorphicExtendRequire = require("isomorphic-loader/lib/extend-require");
 const serveIndex = require("../serve-index");
 const finalhandler = require("finalhandler");
@@ -27,6 +30,25 @@ function register(server, options, next) {
   const archetypeWebpackConfig = Path.join(archetype.config.webpack, "webpack.config.dev.js");
 
   const config = require(archetypeWebpackConfig);
+
+  const webpackHotOptions = _.merge(
+    {
+      log: false,
+      // this is webpack-hot-middleware's default
+      path: "/__webpack_hmr",
+      heartbeat: 2000
+    },
+    options.hot
+  );
+
+  const encodeHmrPath = encodeURIComponent(webpackHotOptions.path);
+
+  config.entry = [`webpack-hot-middleware/client?path=${encodeHmrPath}`].concat(config.entry);
+
+  config.plugins = [
+    new Webpack.HotModuleReplacementPlugin(),
+    new Webpack.NoEmitOnErrorsPlugin()
+  ].concat(config.plugins);
 
   const compiler = new Webpack(config);
 
@@ -62,13 +84,14 @@ function register(server, options, next) {
 
   const userReporter = webpackDevOptions.reporter;
   let defaultReporter; // eslint-disable-line
-  webpackDevOptions.reporter = reporterOptions => defaultReporter(reporterOptions);
+  webpackDevOptions.reporter = (a, b) => defaultReporter(a, b);
 
   // in case load assets failed and didn't setup extend require properly
   isomorphicExtendRequire._instance.interceptLoad();
   isomorphicExtendRequire.deactivate();
 
   const devMiddleware = webpackDevMiddleware(compiler, webpackDevOptions);
+  const hotMiddleware = webpackHotMiddleware(compiler, webpackHotOptions);
   const publicPath = webpackDevOptions.publicPath || "/";
   const listAssetPath = Path.posix.join(publicPath, "/");
 
@@ -78,7 +101,7 @@ function register(server, options, next) {
     fs: devMiddleware.fileSystem
   });
   const cwdIndex = serveIndex(process.cwd(), { icons: true, hidden: true });
-  const devBaseUrl = Path.posix.join(options.devBaseUrl || "/_electrode_dev_", "/");
+  const devBaseUrl = Path.posix.join(options.devBaseUrl || "/__electrode_dev", "/");
   const cwdBaseUrl = Path.posix.join(devBaseUrl, "cwd");
   const cwdContextBaseUrl = Path.posix.join(devBaseUrl, "memfs");
   const reporterUrl = Path.posix.join(devBaseUrl, "reporter");
@@ -99,15 +122,32 @@ function register(server, options, next) {
   };
 
   let lastReporterOptions;
+  let returnReporter;
 
-  defaultReporter = reporterOptions => {
+  defaultReporter = (middlewareOptions, reporterOptions) => {
     if (reporterOptions.state) {
       const stats = reporterOptions.stats;
       const error = stats.hasErrors() ? chalk.red(" ERRORS") : "";
       const warning = stats.hasWarnings() ? chalk.yellow(" WARNINGS") : "";
       const but = ((error || warning) && chalk.yellow(" but has")) || "";
       console.log(`webpack bundle is now ${chalk.green("VALID")}${but}${error}${warning}`);
-      // TODO: if first time (lastReporterOptions === undefined) and there's error, then opn to reporter
+      if (lastReporterOptions === undefined) {
+        const urlObj = {
+          hostname: process.env.HOST || "localhost",
+          protocol: server.info.protocol,
+          port: server.info.port
+        };
+        const urlStr = Url.format(urlObj);
+        if (error || warning) {
+          returnReporter = true;
+          const x = chalk.cyan.underline(Path.posix.join(urlStr, reporterUrl));
+          console.log(`${x} - View status and errors/warnings from your browser`);
+        }
+        setTimeout(() => opn(urlStr), 500);
+      } else {
+        // keep returning reporter until a first success compile
+        returnReporter = returnReporter ? Boolean(error || warning) : false;
+      }
 
       transferIsomorphicAssets(devMiddleware.fileSystem, err => {
         // reload assets to activate
@@ -127,7 +167,7 @@ function register(server, options, next) {
       console.log(`webpack bundle is now ${chalk.magenta("INVALID")}`);
       lastReporterOptions = false;
     }
-    if (userReporter) userReporter(reporterOptions);
+    if (userReporter) userReporter(middlewareOptions, reporterOptions);
   };
 
   server.ext({
@@ -139,7 +179,13 @@ function register(server, options, next) {
           .header("Content-Type", "text/html");
       };
 
-      if (!lastReporterOptions) {
+      const { req, res } = request.raw;
+
+      const isHmrRequest =
+        req.url === webpackHotOptions.path ||
+        (req.url.startsWith(publicPath) && req.url.indexOf(".hot-update.") >= 0);
+
+      if (!lastReporterOptions && !isHmrRequest) {
         return sendHtml(
           `<html><body><div style="margin-top: 50px; padding: 20px; border-radius: 10px; border: 2px solid red;">
 <h2>Waiting for webpack dev middleware to finish compiling</h2>
@@ -147,8 +193,6 @@ function register(server, options, next) {
 doReload(1); </script></body></html>`
         );
       }
-
-      const { req, res } = request.raw;
 
       const serveStatic = (baseUrl, fileSystem, indexServer, errorHandler) => {
         req.originalUrl = req.url; // this is what express saves to, else serve-index nukes
@@ -179,17 +223,24 @@ doReload(1); </script></body></html>`
       };
 
       const serveReporter = reporterOptions => {
-        const jsonData = reporterOptions.stats.toJson({}, true);
+        const stats = reporterOptions.stats;
+        const jsonData = stats.toJson({}, true);
         const html = statsUtils.jsonToHtml(jsonData, true);
-        return sendHtml(
-          `<html><body>
+        const jumpToError =
+          html.indexOf(`a name="error"`) > 0 || html.indexOf(`a name="warning"`) > 0
+            ? `<script>(function(){var t = document.getElementById("anchor_warning") ||
+document.getElementById("anchor_error");if (t) t.scrollIntoView();})();</script>`
+            : "";
+        return sendHtml(`<html><body>
 <div style="border-radius: 10px; background: black; color: gray; padding: 10px;">
-<pre style="white-space: pre-wrap;">${html}</pre></div></body></html>
-`
-        );
+<pre style="white-space: pre-wrap;">${html}</pre></div>
+${jumpToError}</body></html>
+`);
       };
 
-      if (req.url === publicPath || req.url === listAssetPath) {
+      if (isHmrRequest) {
+        // do nothing and continue to webpack dev middleware
+      } else if (req.url === publicPath || req.url === listAssetPath) {
         const outputPath = devMiddleware.getFilenameFromUrl(publicPath);
         const filesystem = devMiddleware.fileSystem;
 
@@ -224,7 +275,7 @@ doReload(1); </script></body></html>`
 </div></body></html>`
           );
         });
-      } else if (req.url.startsWith(reporterUrl) || lastReporterOptions.stats.hasErrors()) {
+      } else if (req.url.startsWith(reporterUrl) || returnReporter) {
         return serveReporter(lastReporterOptions);
       }
 
@@ -236,6 +287,29 @@ doReload(1); </script></body></html>`
           reply.continue();
         }
       });
+    }
+  });
+
+  server.ext({
+    type: "onRequest",
+    method: (request, reply) => {
+      const { req, res } = request.raw;
+
+      try {
+        return hotMiddleware(req, res, err => {
+          if (err) {
+            console.error("webpack hot middleware error", err);
+            reply(err);
+          } else {
+            reply.continue();
+          }
+        });
+      } catch (err) {
+        console.error("caught webpack hot middleware exception", err);
+        reply(err);
+      }
+
+      return undefined;
     }
   });
 
