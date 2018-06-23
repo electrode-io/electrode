@@ -29,19 +29,33 @@ include the specified library definitions when type checking your code.
 
 Checkout [here](https://flow.org/en/docs/config/) for more information.
 
-##### - prepare the code
+##### - Integrate existing App with Flow
+
+- prepare the code
+
+Please be sure your `electrode-archetype-react-app*` version is `5.3.0` or later.
+
+To initialize the `Flow`, you can run `clap initflow`. This will generate a default `.flowconfig` file to configure `Flow` for your app.
 
 `Flow` will only be checked when user has flow code. To mark the flow files, you can place `// @flow` or `/* @flow */` before any code in Javascript files.
 
 This flag is in the form of a normal JavaScript comment annotated with @flow. The Flow background process gathers all the files with this flag and uses the type information available from all of these files to ensure consistency and error free programming.
 
-##### - check the code
+- check the code
 
 If you wants to run the Flow Background Process, you can start the process that allows Flow to check your code incrementally and with great speed by `flow status`.
 
 To stop the background process, run flow stop.
 
 You can also type flow to accomplish the same effect as status is the default flag to the flow binary. At any point that you want to check for errors, just run `flow`.
+
+- flow FAQs
+
+You may experience similar issues when integrating with flow, please check [here](/chapter1/intermediate/app-archetype/flow-faq.md) for solutions.
+
+##### - Gnerate a new App with Flow
+
+-
 
 ### References
 

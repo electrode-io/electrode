@@ -44,6 +44,7 @@
   - [Extract Styles](/chapter1/intermediate/app-archetype/extract-styles.md)
   - [Unit Tests](/chapter1/intermediate/app-archetype/unit-tests.md)
   - [Flow](/chapter1/intermediate/app-archetype/flow.md)
+  - [Flow FAQ](/chapter1/intermediate/app-archetype/flow-faq.md)
 
 - [Component Archetype](chapter1/intermediate/component-archetype/flow.md)
 
