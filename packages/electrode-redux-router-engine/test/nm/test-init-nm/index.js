@@ -6,8 +6,8 @@ module.exports = async function(options) {
     reducer: {
       [name]: x => x || []
     },
-    initialState: await Promise.resolve({
-      [name]: ["test-init"]
-    })
+    initialState: {
+      [name]: ["test-init-nm"]
+    }
   };
 };
