@@ -1,20 +1,20 @@
 # Flow
 
-[`Flow`](https://flow.org/en/) is a static type checker for Javascript and widely used by frontend developers nowadays. It helps us to code faster, smarter, bigger and more confidently. Since Electrode has already got Babel in place, we need to set up `Flow` with babel: using babel to compile the code and integrate `Flow` into Electrode app.
+[`Flow`](https://flow.org/en/) is a static type checker for Javascript and widely used by front-end developers nowadays. It helps us to code faster, smarter and more confidently. Since Electrode has already got Babel in place, we need to set up `Flow` with babel: use babel to compile the code and integrate `Flow` into Electrode application.
 
 ### Flow with babel
 
-Electrode app archetype adds [`babel-preset-flow`](https://babeljs.io/docs/en/babel-preset-flow/), which contains [`babel-plugin-transform-flow-strip-types`](https://babeljs.io/docs/en/babel-plugin-transform-flow-strip-types/) plugin for stripping `Flow` types away so that the program runs. It also adds [`flow-bin`](https://github.com/flowtype/flow-bin) to run `Flow` and check if the type is valid.
+The Electrode app archetype adds [`babel-preset-flow`](https://babeljs.io/docs/en/babel-preset-flow/), which contains a [`babel-plugin-transform-flow-strip-types`](https://babeljs.io/docs/en/babel-plugin-transform-flow-strip-types/) plugin for stripping `Flow` types away so that the program can run. It also adds [`flow-bin`](https://github.com/flowtype/flow-bin) to run `Flow` and check if the type is valid.
 
 ### Flow with eslint
 
-Electrode app archetype uses [`eslint-plugin-flowtype`](https://github.com/gajus/eslint-plugin-flowtype) plugin as the linting rules for ESLint `Flow` type. The rules are enabled via the `.eslintrc-react*` files located in the `electrode-archetype-react-app-dev` config folder.
+The Electrode app archetype uses the [`eslint-plugin-flowtype`](https://github.com/gajus/eslint-plugin-flowtype) plugin as the linting rules for ESLint `Flow` type. The rules are enabled via the `.eslintrc-react*` files located in the `electrode-archetype-react-app-dev` configuration folder.
 
 ### Flow with Electrode app
 
 ##### - configuration
 
-When we initiate `Flow` in our app, it creates `.flowconfig` file at your the root level of your application. The `.flowconfig` file contains several sections:
+When we initiate `Flow` in our app, it creates `.flowconfig` file at the root level of your application. The `.flowconfig` file contains several sections:
 
 ```
 [ignore]
@@ -33,29 +33,41 @@ Checkout [here](https://flow.org/en/docs/config/) for more information.
 
 - prepare the code
 
-Please be sure your `electrode-archetype-react-app*` version is `5.3.0` or later.
+  Please be sure your `electrode-archetype-react-app*` version is `5.3.0` or later.
 
-To initialize the `Flow`, you can run `clap initflow`. This will generate a default `.flowconfig` file to configure `Flow` for your app.
+  To initialize the `Flow`, you can run `clap initflow`. This will generate a default `.flowconfig` file to configure `Flow` for your app.
 
-`Flow` will only be checked when user has flow code. To mark the flow files, you can place `// @flow` or `/* @flow */` before any code in Javascript files.
+  `Flow` will only be checked when the user has flow code. To mark the flow files, you can place `// @flow` or `/* @flow */` before any code in the Javascript files.
 
-This flag is in the form of a normal JavaScript comment annotated with @flow. The Flow background process gathers all the files with this flag and uses the type information available from all of these files to ensure consistency and error free programming.
+  This flag is in the form of a normal JavaScript comment annotated with @flow. The Flow background process gathers all the files with this flag and uses the type information available from all of these files to ensure consistency and error free programming.
 
 - check the code
 
-If you wants to run the Flow Background Process, you can start the process that allows Flow to check your code incrementally and with great speed by `flow status`.
+  If you want to run the Flow Background Process, you can start the process that allows `Flow` to check your code incrementally and with great speed by `flow status`.
 
-To stop the background process, run flow stop.
+  To stop the background process, run `flow stop`.
 
-You can also type flow to accomplish the same effect as status is the default flag to the flow binary. At any point that you want to check for errors, just run `flow`.
+  You can also type flow to accomplish the same effect as status is the default flag to the flow binary. At any point that you want to check for errors, just run `flow`.
 
 - flow FAQs
 
-You may experience similar issues when integrating with flow, please check [here](/chapter1/intermediate/app-archetype/flow-faq.md) for solutions.
+  You may experience similar issues when integrating with `Flow`, please check [here](/chapter1/intermediate/app-archetype/flow-faq.md) for solutions.
 
 ##### - Gnerate a new App with Flow
 
--
+A new Electrode React App can be generated by running with `electrode-ignite`:
+
+```
+ignite generate-app
+```
+
+To enable `Flow`, you can reply `yes` to the following question:
+
+```
+Would you like to generate .flowconfig for flow usage?
+```
+
+To know more about `electrode-ignite`, please read [here.](/chapter1/quick-start/start-with-ignite.md)
 
 ### References
 
