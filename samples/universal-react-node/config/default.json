@@ -6,19 +6,19 @@
         "expiresIn": 60
       }
     },
-    "./server/plugins/csrf": {
+    "csrf": {
       "module": "./{{env.APP_SRC_DIR}}server/plugins/csrf"
     },
-    "./server/plugins/pwa": {
+    "pwa": {
       "module": "./{{env.APP_SRC_DIR}}server/plugins/pwa"
     },
-    "./server/plugins/autossr": {
+    "autossr": {
       "module": "./{{env.APP_SRC_DIR}}server/plugins/autossr"
     },
-    "./server/plugins/updateStorage": {
+    "updateStorage": {
       "module": "./{{env.APP_SRC_DIR}}server/plugins/update-storage"
     },
-    "./server/plugins/records": {
+    "records": {
       "module": "./{{env.APP_SRC_DIR}}server/plugins/records"
     },
     "webapp": {

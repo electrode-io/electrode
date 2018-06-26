@@ -1,5 +1,9 @@
 // @flow
 
+//
+// react router 3 routes, no longer use, keeping for reference
+//
+
 import React from "react";
 import { Route, IndexRoute } from "react-router";
 import Home from "./components/home";
