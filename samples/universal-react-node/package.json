@@ -38,6 +38,8 @@
     "electrode-server": "^1.0.0",
     "electrode-static-paths": "^1.0.0",
     "es6-promise": "^4.0.5",
+    "good": "^7",
+    "good-console": "^7.1.0",
     "isomorphic-fetch": "^2.2.1",
     "mongojs": "^2.4.0",
     "react-notify-toast": "^0.4.1",
