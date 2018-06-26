@@ -51,13 +51,14 @@ const registerRoutes = (server, options) => {
     const routeOptions = ReactWebapp.setupPathOptions(registerOptions, path);
     const routeHandler = ReactWebapp.makeRouteHandler(routeOptions);
     const handleRoute = options.handleRoute || DefaultHandleRoute;
-    const content = resolveContent();
+    let content;
 
     server.route({
       method: pathData.method || "GET",
       path,
       config: pathData.config || {},
-      handler: (req, reply) => handleRoute(req, reply, routeHandler, content)
+      handler: (req, reply) =>
+        handleRoute(req, reply, routeHandler, content || (content = resolveContent()))
     });
   });
 };

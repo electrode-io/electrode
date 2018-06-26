@@ -9,7 +9,8 @@
     "-highlight",
     "github",
     "anchorjs",
-    "add-path-to-parent"
+    "add-path-to-parent",
+    "versions"
   ],
   "pluginsConfig": {
     "edit-link": {
@@ -18,6 +19,10 @@
     },
     "github": {
       "url": "https://github.com/electrode-io/electrode"
+    },
+    "versions": {
+      "gitbookConfigURL": "https://raw.githubusercontent.com/electrode-io/electrode/master/book.json",
+      "type": "branches"
     }
   }
 }

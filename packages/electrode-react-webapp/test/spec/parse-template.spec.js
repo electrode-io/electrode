@@ -180,12 +180,23 @@ describe("AsyncTemplate._parseTemplate", function() {
         wantsNext: undefined
       },
       {
-        str: `<script>\n    console.log("test")\n  </script>`
+        str: `<script>\n    console.log("test")`
+      },
+      {
+        id: "blah",
+        isModule: false,
+        pos: 222,
+        props: {},
+        custom: undefined,
+        wantsNext: undefined
+      },
+      {
+        str: "</script>"
       },
       {
         id: "meta-tags",
         isModule: false,
-        pos: 232,
+        pos: 264,
         props: {},
         custom: undefined,
         wantsNext: undefined
@@ -197,7 +208,7 @@ describe("AsyncTemplate._parseTemplate", function() {
       {
         id: "page-title",
         isModule: false,
-        pos: 269,
+        pos: 301,
         props: {},
         custom: undefined,
         wantsNext: undefined
@@ -206,7 +217,7 @@ describe("AsyncTemplate._parseTemplate", function() {
         custom: undefined,
         id: "json-prop",
         isModule: false,
-        pos: 294,
+        pos: 326,
         props: {
           foo: "bar",
           test: [1, 2, 3]
@@ -220,7 +231,7 @@ describe("AsyncTemplate._parseTemplate", function() {
         },
         id: "#./test/fixtures/custom-call",
         isModule: true,
-        pos: 364,
+        pos: 396,
         props: {
           _call: "setup"
         },
