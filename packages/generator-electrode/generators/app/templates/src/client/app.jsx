@@ -5,19 +5,19 @@
 import React from "react";
 import { render, hydrate } from "react-dom";
 import { routes } from "./routes";
-import { Router, browserHistory } from "react-router";
+import { BrowserRouter } from "react-router-dom";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./reducers";
+import { renderRoutes } from "react-router-config";
+
 //<% if (pwa) { %>
 import { notify } from "react-notify-toast";
-//<% } %>
 
 //
 // Add the client app start up code to a function as window.webappStart.
 // The webapp's full HTML will check and call it once the js-content
 // DOM is created.
-//<% if (pwa) { %>
 require.ensure(
   ["./sw-registration"],
   require => {
@@ -30,12 +30,12 @@ require.ensure(
 window.webappStart = () => {
   const initialState = window.__PRELOADED_STATE__;
   const jsContent = document.querySelector(".js-content");
-  const reactStart = (initialState && jsContent.innerHTML) ? hydrate : render;
+  const reactStart = initialState && jsContent.innerHTML ? hydrate : render;
 
   const store = createStore(rootReducer, initialState);
   reactStart(
     <Provider store={store}>
-      <Router history={browserHistory}>{routes}</Router>
+      <BrowserRouter>{renderRoutes(routes)}</BrowserRouter>
     </Provider>,
     jsContent
   );

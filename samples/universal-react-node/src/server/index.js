@@ -9,12 +9,10 @@ const electrodeConfippet = require("electrode-confippet");
 const electrodeServer = require("electrode-server");
 const staticPathsDecor = require("electrode-static-paths");
 
-require.extensions[".css"] = () => {
-  return;
-};
-
-support.load({
-  cssModuleHook: true
-}).then(() => {
-  return electrodeServer(electrodeConfippet.config, [staticPathsDecor()]);
-});
+support
+  .load({
+    cssModuleHook: true
+  })
+  .then(() => {
+    return electrodeServer(electrodeConfippet.config, [staticPathsDecor()]);
+  });

@@ -14,30 +14,24 @@ $ npm install -save electrode-redux-router-engine
 
 This module is a part of the [Electrode Platform].
 
-See documentation [here](https://electrode.gitbooks.io/electrode/content/chapter1/advanced/stand-alone-modules/redux-router-engine.html) for details on usage of APIs and options.
+See documentation [here](https://docs.electrode.io/advanced/stand-alone-modules/redux-router-engine) for details on usage of APIs and options.
 
-Built with :heart: by [Team Electrode](https://github.com/orgs/electrode-io/people) @WalmartLabs.
+## License
 
+Copyright (c) 2016-present, WalmartLabs
+
+Licensed under the [Apache License, Version 2.0].
+
+[apache license, version 2.0]: https://www.apache.org/licenses/LICENSE-2.0
 [electrode platform]: http://www.electrode.io/
-
 [redux async actions]: http://redux.js.org/docs/advanced/AsyncActions.html
-
 [redux server rendering]: http://redux.js.org/docs/recipes/ServerRendering.html
-
 [react-router]: https://github.com/reactjs/react-router
-
 [npm-image]: https://badge.fury.io/js/electrode-redux-router-engine.svg
-
 [npm-url]: https://npmjs.org/package/electrode-redux-router-engine
-
 [daviddm-image]: https://david-dm.org/electrode-io/electrode/status.svg?path=packages/electrode-redux-router-engine
-
 [daviddm-url]: https://david-dm.org/electrode-io/electrode?path=packages/electrode-redux-router-engine
-
 [daviddm-dev-image]: https://david-dm.org/electrode-io/electrode/dev-status.svg?path=packages/electrode-redux-router-engine
-
 [daviddm-dev-url]: https://david-dm.org/electrode-io/electrode?path=packages/electrode-redux-router-engine?type-dev
-
 [npm-downloads-image]: https://img.shields.io/npm/dm/electrode-redux-router-engine.svg
-
 [npm-downloads-url]: https://www.npmjs.com/package/electrode-redux-router-engine

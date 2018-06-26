@@ -1,14 +1,19 @@
-/* eslint-disable */
-const createStore = require("redux").createStore;
+"use strict";
 
-module.exports = function (req, match) {
-    const reducer = (state, action) => {
+module.exports = options => {
+  const name = options.route.name;
+  return {
+    reducer: {
+      [name]: (state, action) => {
         if (action.type === "INC_NUMBER") {
-            return state + 1;
+          return state + 1;
         }
 
-        return 0;
+        return state || 0;
+      }
+    },
+    initialState: {
+      [name]: 51
     }
-    const initialState = 0;
-    return Promise.resolve(createStore(reducer, initialState));
+  };
 };
