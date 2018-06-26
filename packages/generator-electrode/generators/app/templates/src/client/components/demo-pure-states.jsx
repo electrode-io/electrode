@@ -27,9 +27,7 @@ const DemoPureStates = props => {
       </div>
       <div>
         <button onClick={() => dispatch(decNumber())}>&#8810;</button>
-        <div style={{ width: "6rem", display: "inline-block", textAlign: "center" }}>
-          {value}
-        </div>
+        <div style={{ width: "6rem", display: "inline-block", textAlign: "center" }}>{value}</div>
         <button onClick={() => dispatch(incNumber())}>&#8811;</button>
       </div>
     </div>
@@ -49,4 +47,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, dispatch => ({ dispatch }))(DemoPureStates);
+export default connect(
+  mapStateToProps,
+  dispatch => ({ dispatch })
+)(DemoPureStates);

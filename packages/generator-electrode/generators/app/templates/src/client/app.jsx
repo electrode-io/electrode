@@ -30,7 +30,7 @@ require.ensure(
 window.webappStart = () => {
   const initialState = window.__PRELOADED_STATE__;
   const jsContent = document.querySelector(".js-content");
-  const reactStart = (initialState && jsContent.innerHTML) ? hydrate : render;
+  const reactStart = initialState && jsContent.innerHTML ? hydrate : render;
 
   const store = createStore(rootReducer, initialState);
   reactStart(

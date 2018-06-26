@@ -27,7 +27,7 @@ import { DemoButtons } from "./demo-buttons";
 import Notifications from "react-notify-toast";
 /*<% } %>*/
 
-export default () =>
+export default () => (
   <div className={custom.container}>
     {/*<% if (pwa) { %>*/}
     <Notifications />
@@ -35,8 +35,10 @@ export default () =>
 
     <section className={custom.header}>
       <h2 className={skeleton.title}>
-        Hello from {" "}
-        <a href="https://github.com/electrode-io">{"Electrode"} <img src={electrodePng} /></a>
+        Hello from
+        <a href="https://github.com/electrode-io">
+          {"Electrode"} <img src={electrodePng} />
+        </a>
       </h2>
     </section>
 
@@ -51,4 +53,5 @@ export default () =>
     <div className={custom["docs-section"]}>
       <DemoButtons />
     </div>
-  </div>;
+  </div>
+);
