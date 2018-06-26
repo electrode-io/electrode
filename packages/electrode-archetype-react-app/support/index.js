@@ -34,6 +34,12 @@ const support = {
 
         return assets;
       }
+    }).catch(err => {
+      if (archetype.webpack.devMiddleware) {
+        isomorphicExtendRequire._instance.interceptLoad();
+      } else {
+        throw err;
+      }
     });
   },
   optimizeModulesForProduction

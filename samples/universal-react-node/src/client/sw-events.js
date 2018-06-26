@@ -1,3 +1,5 @@
+// @flow
+
 /* eslint-env serviceworker */
 
 // This file contains all the user defined service worker related events

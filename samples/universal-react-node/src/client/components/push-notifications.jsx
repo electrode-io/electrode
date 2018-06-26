@@ -1,11 +1,23 @@
+// @flow
+
 /* eslint-disable react/no-did-mount-set-state */
 /* global navigator */
-import React from "react";
+import React, { Component } from "react";
 import icon from "../images/logo-192x192.png";
 import badge from "../images/logo-72x72.png";
 
-export default class PushNotifications extends React.Component {
-
+export default class PushNotifications extends Component<
+  {},
+  {
+    supported: boolean,
+    error: any,
+    loading: boolean,
+    subscribed: boolean,
+    subscription: any,
+    title: string,
+    body: string
+  }
+> {
   constructor() {
     super();
     this.state = {
@@ -22,45 +34,48 @@ export default class PushNotifications extends React.Component {
       title: "",
       body: ""
     };
-    this.handleSendNotification = this.handleSendNotification.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubscribe = this.handleSubscribe.bind(this);
+    (this: any).handleSendNotification = this.handleSendNotification.bind(this);
+    (this: any).handleInputChange = this.handleInputChange.bind(this);
+    (this: any).handleSubscribe = this.handleSubscribe.bind(this);
   }
 
   componentDidMount() {
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.ready.then((registration) => {
-        // Check for any existing subscriptions
-        registration.pushManager.getSubscription().then((subscription) => {
-          // No current subscription, let the user subscribe
-          if (!subscription) {
-            this.setState({
-              loading: false,
-              subscribed: false,
-              supported: true
+    if (navigator.serviceWorker) {
+      navigator.serviceWorker.ready
+        .then(registration => {
+          // Check for any existing subscriptions
+          registration.pushManager
+            .getSubscription()
+            .then(subscription => {
+              // No current subscription, let the user subscribe
+              if (!subscription) {
+                this.setState({
+                  loading: false,
+                  subscribed: false,
+                  supported: true
+                });
+              } else {
+                this.setState({
+                  subscription,
+                  subscribed: true,
+                  loading: false,
+                  supported: true
+                });
+              }
+            })
+            .catch(error => {
+              this.setState({
+                loading: false,
+                error
+              });
             });
-          } else {
-            this.setState({
-              subscription,
-              subscribed: true,
-              loading: false,
-              supported: true
-            });
-          }
         })
-        .catch((error) => {
+        .catch(error => {
           this.setState({
             loading: false,
             error
           });
         });
-      })
-      .catch((error) => {
-        this.setState({
-          loading: false,
-          error
-        });
-      });
     } else {
       // ServiceWorkers are not supported, let the user know.
       this.setState({
@@ -71,21 +86,24 @@ export default class PushNotifications extends React.Component {
   }
 
   handleSubscribe() {
-    navigator.serviceWorker.ready.then((registration) => {
-      registration.pushManager.subscribe({ userVisibleOnly: true })
-        .then((subscription) => {
-          this.setState({
-            subscription,
-            subscribed: true
+    if (navigator.serviceWorker) {
+      navigator.serviceWorker.ready.then(registration => {
+        registration.pushManager
+          .subscribe({ userVisibleOnly: true })
+          .then(subscription => {
+            this.setState({
+              subscription,
+              subscribed: true
+            });
+          })
+          .catch(error => {
+            this.setState({ error });
           });
-        })
-        .catch((error) => {
-          this.setState({ error });
-        });
-    });
+      });
+    }
   }
 
-  handleInputChange(event) {
+  handleInputChange(event: InputEvent) {
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -94,19 +112,15 @@ export default class PushNotifications extends React.Component {
   handleSendNotification() {
     const { title, body } = this.state;
     const options = { body, icon, badge };
-    navigator.serviceWorker.ready.then((registration) => {
-      registration.showNotification(title, options);
-    });
+    if (navigator.serviceWorker) {
+      navigator.serviceWorker.ready.then(registration => {
+        registration.showNotification(title, options);
+      });
+    }
   }
 
   render() {
-    const {
-      error,
-      loading,
-      supported,
-      subscribed,
-      subscription
-    } = this.state;
+    const { error, loading, supported, subscribed, subscription } = this.state;
 
     if (!loading && !supported) {
       return (
@@ -120,17 +134,13 @@ export default class PushNotifications extends React.Component {
           Woops! Looks like there was an error:
           <span style={{ fontFamily: "monospace", color: "red" }}>
             {error.name}: {error.message}
-            </span>
+          </span>
         </div>
       );
     }
 
     if (loading) {
-      return (
-        <div>
-          Checking push notification subscription status...
-        </div>
-      );
+      return <div>Checking push notification subscription status...</div>;
     }
 
     if (!subscribed) {
@@ -154,34 +164,18 @@ export default class PushNotifications extends React.Component {
     return (
       <div>
         <h2>Push Notifications with Service Workers</h2>
-
         Use the form below to define the parameters for a push notification.
         Click the send button to trigger the notification itself.
-
         <label htmlFor="title">Title</label>
-        <input
-          onChange={this.handleInputChange}
-          name="title"
-        />
-
+        <input onChange={this.handleInputChange} name="title" />
         <label htmlFor="body">Body</label>
-        <input
-          onChange={this.handleInputChange}
-          name="body"
-        />
-
-        <br/>
+        <input onChange={this.handleInputChange} name="body" />
+        <br />
         <button onClick={this.handleSendNotification}>Send</button>
-
         <h3>Subscription Endpoint</h3>
-        <code>
-          {this.state.subscription.endpoint}
-        </code>
-
+        <code>{this.state.subscription.endpoint}</code>
         <h3>Curl Command</h3>
-        <code>
-          {curlCommand}
-        </code>
+        <code>{curlCommand}</code>
       </div>
     );
   }

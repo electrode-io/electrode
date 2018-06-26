@@ -1,7 +1,8 @@
 {
   "presets": [
     ["env", { "loose": true }],
-    "react"
+    "react",
+    "flow"
   ],
   "plugins": [
     "react-hot-loader/babel",
@@ -49,7 +50,8 @@
     ],
     "transform-node-env-inline",
     "lodash",
-    "transform-runtime"
+    "transform-runtime",
+    "transform-flow-strip-types"
   ],
   "env": {
     "test": {

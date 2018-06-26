@@ -23,8 +23,14 @@ module.exports = class extends Generator {
     this.isDemoApp = this.options.isDemoApp || false;
 
     if (!this.isDemoApp) {
-      this.log(chalk.green("Yeoman Electrode App generator version"), pkg.version);
-      this.log("Loaded from", chalk.magenta(path.dirname(require.resolve("../../package.json"))));
+      this.log(
+        chalk.green("Yeoman Electrode App generator version"),
+        pkg.version
+      );
+      this.log(
+        "Loaded from",
+        chalk.magenta(path.dirname(require.resolve("../../package.json")))
+      );
     }
 
     this.option("travis", {
@@ -84,13 +90,23 @@ module.exports = class extends Generator {
       this.props.authorEmail = this.pkg.author.email;
       this.props.authorUrl = this.pkg.author.url;
       this.props.createDirectory = false;
-      this.props.serverType = this.fs.exists(this.destinationPath("src/server/express-server.js"))
+      this.props.serverType = this.fs.exists(
+        this.destinationPath("src/server/express-server.js")
+      )
         ? ExpressJS
-        : this.fs.exists(this.destinationPath("src/server/koa-server.js")) ? KoaJS : HapiJS;
-      this.props.pwa = this.fs.exists(this.destinationPath("client/sw-registration.js"));
-      this.props.autoSsr = this.fs.exists(this.destinationPath("server/plugins/autossr.js"));
+        : this.fs.exists(this.destinationPath("src/server/koa-server.js"))
+          ? KoaJS
+          : HapiJS;
+      this.props.pwa = this.fs.exists(
+        this.destinationPath("client/sw-registration.js")
+      );
+      this.props.autoSsr = this.fs.exists(
+        this.destinationPath("server/plugins/autossr.js")
+      );
       this.props.quoteType =
-        _.get(pkg, "eslintConfig.rules.quotes", []).indexOf("single") >= 0 ? "'" : '"';
+        _.get(pkg, "eslintConfig.rules.quotes", []).indexOf("single") >= 0
+          ? "'"
+          : '"';
     } else if (_.isString(this.pkg.author)) {
       var info = parseAuthor(this.pkg.author);
       this.props.authorName = info.name;
@@ -202,6 +218,13 @@ module.exports = class extends Generator {
       },
       {
         type: "confirm",
+        name: "flow",
+        message: "Would you like to generate .flowconfig for flow usage?",
+        when: this.props.flow === undefined,
+        default: false
+      },
+      {
+        type: "confirm",
         name: "yarn",
         message: "Would you like to yarn install packages?",
         when: this.props.yarn === undefined,
@@ -213,7 +236,8 @@ module.exports = class extends Generator {
       this.props = extend(this.props, props);
 
       if (this.props.createDirectory) {
-        var newRoot = this.destinationPath() + "/" + _.kebabCase(_.deburr(this.props.name));
+        var newRoot =
+          this.destinationPath() + "/" + _.kebabCase(_.deburr(this.props.name));
         this.destinationRoot(newRoot);
       }
       // Saving to storage after the correct destination root is set
@@ -242,7 +266,13 @@ module.exports = class extends Generator {
 
   prompting() {
     if (!this.isDemoApp) {
-      this.log(yosay("Welcome to the phenomenal " + chalk.red("Electrode App") + " generator!"));
+      this.log(
+        yosay(
+          "Welcome to the phenomenal " +
+            chalk.red("Electrode App") +
+            " generator!"
+        )
+      );
     }
     return this._askFor().then(this._askForGithubAccount.bind(this));
   }
@@ -282,9 +312,11 @@ module.exports = class extends Generator {
     var defaultPkg = this.fs.readJSON(this.destinationPath(_pkg));
     this.fs.delete(this.destinationPath(_pkg));
 
-    ["name", "version", "description", "homepage", "main", "license"].forEach(x => {
-      currentPkg[x] = currentPkg[x] || undefined;
-    });
+    ["name", "version", "description", "homepage", "main", "license"].forEach(
+      x => {
+        currentPkg[x] = currentPkg[x] || undefined;
+      }
+    );
 
     var packageContents = {
       name: _.kebabCase(this.props.name),
@@ -312,7 +344,9 @@ module.exports = class extends Generator {
 
     // Combine the keywords
     if (this.props.keywords) {
-      pkg.keywords = _.uniq(this.props.keywords.concat(pkg.keywords)).filter(x => x);
+      pkg.keywords = _
+        .uniq(this.props.keywords.concat(pkg.keywords))
+        .filter(x => x);
     }
 
     const sortDep = dep => {
@@ -321,14 +355,20 @@ module.exports = class extends Generator {
       }
     };
 
-    ["dependencies", "devDependencies", "peerDependencies", "optionalDependencies"].forEach(
-      sortDep
-    );
+    [
+      "dependencies",
+      "devDependencies",
+      "peerDependencies",
+      "optionalDependencies"
+    ].forEach(sortDep);
 
     // Let's extend package.json so we're not overwriting user previous fields
     this.fs.writeJSON(this.destinationPath("package.json"), pkg);
 
     const rootConfigsToCopy = ["xclap.js", "config", "test"];
+    if (this.props.flow) {
+      rootConfigsToCopy.push(".flowconfig");
+    }
     rootConfigsToCopy.push(".eslintrc.js");
     rootConfigsToCopy.forEach(f => {
       this.fs.copyTpl(
@@ -368,7 +408,10 @@ module.exports = class extends Generator {
         globOptions: {
           dot: true,
           // Images are damaged by the template compiler
-          ignore: ["**/client/images/**", !isPWA && "**/client/sw-registration.js"]
+          ignore: [
+            "**/client/images/**",
+            !isPWA && "**/client/sw-registration.js"
+          ]
             .concat(
               this.isDemoApp && [
                 "**/client/components/**",
@@ -381,7 +424,10 @@ module.exports = class extends Generator {
       }
     );
 
-    this.fs.copy(this.templatePath("src/client/images"), this.destinationPath("src/client/images"));
+    this.fs.copy(
+      this.templatePath("src/client/images"),
+      this.destinationPath("src/client/images")
+    );
   }
 
   default() {
@@ -419,7 +465,10 @@ module.exports = class extends Generator {
       });
     }
 
-    if (!this.fs.exists(this.destinationPath("config/default.js")) && !this.isExtended) {
+    if (
+      !this.fs.exists(this.destinationPath("config/default.js")) &&
+      !this.isExtended
+    ) {
       this.composeWith(require.resolve("../config"), {
         name: this.props.name,
         pwa: this.props.pwa,

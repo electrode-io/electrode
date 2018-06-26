@@ -1,14 +1,23 @@
-import React from "react";
+// @flow
+
+import * as React from "react";
 import PropTypes from "prop-types";
 
-const Link = ({ active, children, onClick }) => {
+type LinkType = {
+  onClick: () => void,
+  active: boolean,
+  children: React.Node
+};
+
+const Link = ({ onClick, active, children }: LinkType) => {
   if (active) {
     return <span>{children}</span>;
   }
 
   return (
-    <a href="#"
-      onClick={(e) => {
+    <a
+      href="#"
+      onClick={e => {
         e.preventDefault();
         onClick();
       }}

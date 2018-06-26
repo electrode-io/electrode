@@ -5,6 +5,9 @@ globals:
   window: false
   document: false
   ReactElement: false
+plugins: [
+  "flowtype"
+]
 rules:
   "react/jsx-boolean-value": "off"
   "react/jsx-closing-bracket-location": "off"
@@ -13,3 +16,7 @@ rules:
   "react/wrap-multilines": "off"
   "react/jsx-wrap-multilines": "warn"
   "no-multi-spaces": "off"
+
+  "flowtype/define-flow-type": "warn"
+  "flowtype/use-flow-type": "warn"
+  "flowtype/require-valid-file-annotation": "error"

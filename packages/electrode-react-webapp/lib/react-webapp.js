@@ -86,7 +86,13 @@ const resolveContent = (content, xrequire) => {
       ? Path.join(process.cwd(), content.module)
       : content.module;
     xrequire = xrequire || require;
-    return xrequire(module);
+    try {
+      return xrequire(module);
+    } catch (err) {
+      const msg = `electrode-react-webapp: load SSR content ${module} failed`;
+      console.error(msg, err); // eslint-disable-line
+      return msg;
+    }
   }
 
   return content;
