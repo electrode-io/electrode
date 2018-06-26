@@ -20,7 +20,7 @@ const electrodeServer = require("electrode-server");
 function setupElectrodeServerEvents(emitter) {
   emitter.on("config-composed", (data, next) => next());
   emitter.on("server-created", (data, next) => next());
-  emitter.on("connection-set", (data, next) => next());
+  emitter.on("connections-set", (data, next) => next());
   emitter.on("plugins-sorted", (data, next) => next());
   emitter.on("plugins-registered", (data, next) => next());
   emitter.on("server-started", (data, next) => next());
