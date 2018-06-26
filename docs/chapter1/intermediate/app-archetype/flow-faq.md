@@ -1,29 +1,33 @@
-# Flow type checker frequent ask
+# Flow FAQs
 
-Below are the issues that frequently being ask, you can update them if you see any similar issue:
+The following is a list of Frequently Asked Questions you may encounter when integrating with Flow. We put questions together to solve them in a more scalable way.
 
-### - Cannot assign this.handlerFunction.bind(...) to this.handlerFunction because property handlerFunction is not writable.
+### How to add type to handlerFunction?
+
+Issue Description:
+
+Cannot assign this.handlerFunction.bind(...) to this.handlerFunction because property handlerFunction is not writable.
+
+Resolution:
 
 Update `this.handlerFunction = this.handlerFunction.bind(this);`
 
 to `(this:any).handlerFunction = this.handlerFunction.bind(this);`
 
-### - How to use EventTarget?
+### How to add type to EventTarget?
 
-Declare type by
-
-```
+```javascript
 declare type ElementEventTemplate<E> = {
-   target: E
- } & Event;
+  target: E
+} & Event;
 
 declare type InputEvent = ElementEventTemplate<HTMLInputElement>;
 ```
 
-### - How to add Type for function callbacks
+### How to add type to function callbacks?
 
-```
+```javascript
 function method(callback: (error: Error | null, value: string | null) => void) {
- // ...
+  // ...
 }
 ```
