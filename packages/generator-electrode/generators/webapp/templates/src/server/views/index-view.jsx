@@ -3,21 +3,8 @@
 //
 
 import ReduxRouterEngine from "electrode-redux-router-engine";
-import {routes} from "../../client/routes";
-import {createStore} from "redux";
+import { routes } from "../../client/routes";
 import rootReducer from "../../client/reducers";
-
-const Promise = require("bluebird");
-
-function createReduxStore(req, match) { // eslint-disable-line
-  const initialState = {
-    checkBox: {checked: false},
-    number: {value: 999}
-  };
-
-  const store = createStore(rootReducer, initialState);
-  return Promise.resolve(store);
-}
 
 //
 // This function is exported as the content for the webapp plugin.
@@ -29,10 +16,10 @@ function createReduxStore(req, match) { // eslint-disable-line
 //
 //
 
-module.exports = (req) => {
-  const app = req.server && req.server.app || req.app;
+module.exports = req => {
+  const app = (req.server && req.server.app) || req.app;
   if (!app.routesEngine) {
-    app.routesEngine = new ReduxRouterEngine({routes, createReduxStore});
+    app.routesEngine = new ReduxRouterEngine({ routes });
   }
 
   return app.routesEngine.render(req);
