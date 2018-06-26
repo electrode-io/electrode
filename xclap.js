@@ -57,14 +57,15 @@ const runAppTest = (dir, forceLocal) => {
 
   const localClap = Path.join("node_modules", ".bin", "clap");
   return exec({ cwd: dir }, `fyn --pg simple -q v i && ${localClap} ?fix-generator-eslint`).then(
-    () => exec({ cwd: dir }, `${fynSetup} && npm test`)
+    () => exec({ cwd: dir }, `npm test`)
   );
 };
 
-const testGenerator = (testDir, clean, prompts) => {
+const testGenerator = (testDir, name, clean, prompts) => {
+  name = name || "test-app";
   const yoApp = Path.join(packagesDir, "generator-electrode/generators/app/index.js");
   const defaultPrompts = {
-    name: "test-app",
+    name,
     description: "test test",
     homepage: "http://test",
     serverType: "HapiJS",
@@ -87,7 +88,7 @@ const testGenerator = (testDir, clean, prompts) => {
     })
     .withPrompts(prompts)
     .then(() => {
-      return runAppTest(Path.join(testDir, "test-app"), true);
+      return runAppTest(Path.join(testDir, name), true);
     });
 };
 
@@ -128,7 +129,7 @@ xclap.load({
   },
   bootstrap: "~$fynpo",
   test: [".fyn-setup", "bootstrap", ".lerna.test", "test-reporter", "build-test"],
-  "test-generator": [".fyn-setup", ".test-generator"],
+  "test-generator": [".fyn-setup", ".test-generator --hapi"],
   "test-demo-component": [
     ".fyn-setup",
     `~$cd samples/demo-component && fyn --pg none install && npm test`
@@ -186,14 +187,12 @@ xclap.load({
 
   ".test-generator": {
     desc: "Run tests for the yeoman generators",
-    task: () => {
+    task: function() {
+      const hapiOnly = this.argv.indexOf("--hapi") >= 0;
       const testDir = Path.join(__dirname, "tmp");
-      return testGenerator(testDir, true, { serverType: "HapiJS" })
-        .then(() => {
-          const appFiles = ["package.json", "client", "config", "server", "test"];
-          shell.rm("-rf", appFiles.map(x => Path.join(testDir, "test-app", x)));
-        })
-        .then(() => testGenerator(testDir, false, { serverType: "ExpressJS" }));
+      return testGenerator(testDir, "hapi-app", true, { serverType: "HapiJS" }).then(
+        () => hapiOnly || testGenerator(testDir, "express-app", false, { serverType: "ExpressJS" })
+      );
     }
   }
 });
