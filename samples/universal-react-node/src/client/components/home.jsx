@@ -1,10 +1,20 @@
-import React from "react";
+// @flow
+
+import React, {Component} from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import electrodeLogo from "../images/electrode.svg";
 import Notifications from "react-notify-toast";
 
-class HomeWrapper extends React.Component {
+type WrapperProps = {
+  data: string
+}
+
+type Props = {
+  data: string
+}
+
+class HomeWrapper extends Component<WrapperProps> {
   render() {
     return (
       <Home data={this.props.data} />
@@ -17,10 +27,10 @@ HomeWrapper.propTypes = {
 };
 
 /* eslint-disable max-len */
-export class Home extends React.Component {
+export class Home extends Component<Props> {
   render() {
-    // force the use of spread operator for testing
-    const data = { logo: "Electrode Logo", electrodeLogo, ...this.props.data };
+    const data = { logo: "Electrode Logo", electrodeLogo};
+
     return (
       <div>
         <Notifications />

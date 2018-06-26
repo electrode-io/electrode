@@ -1,10 +1,12 @@
+// @flow
+
 const newTodo = (id, text, completed) => {
   return {
     id, text, completed
   };
 };
 
-export default (state = [], action) => {
+export default (state: Array<Object> = [], action: Object) => {
   const todos = state;
   switch (action.type) {
   case "ADD_TODO":
@@ -15,7 +17,7 @@ export default (state = [], action) => {
   case "TOGGLE_TODO": {
     const x = todos.findIndex((t) => t.id === action.id);
     if (x >= 0) {
-      const toggled = todos.slice();
+      const toggled: Array<Object> = todos.slice();
       const o = toggled[x];
       toggled[x] = newTodo(o.id, o.text, !o.completed);
       return toggled;

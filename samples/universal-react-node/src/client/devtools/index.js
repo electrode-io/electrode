@@ -1,3 +1,4 @@
+// @flow
 
 //  Note: This is need to prevent the production bundle js from being bloated
 //  with excess stuff from Devtools.

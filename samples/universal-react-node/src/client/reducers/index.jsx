@@ -1,7 +1,9 @@
+// @flow
+
 import todos from "./todos";
 import visibilityFilter from "./visibility-filter";
 
-export default function rootReducer(state = {}, action) {
+export default function rootReducer(state: Object = {}, action: Object) {
   return {
     skip: state.skip,   // ATF rendering skip below the fold for SSR
     count: state.count, // SSR component caching demo

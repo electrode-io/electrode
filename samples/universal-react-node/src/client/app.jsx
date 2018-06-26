@@ -1,3 +1,4 @@
+// @flow
 import React from "react";
 import {render, hydrate} from "react-dom";
 import {routes} from "./routes";
@@ -23,7 +24,7 @@ const enhancer = compose(
 
 window.webappStart = () => {
   const initialState = window.__PRELOADED_STATE__;
-  const jsContent = document.querySelector(".js-content");
+  const jsContent: any = document.querySelector(".js-content");
 
   const store = createStore(rootReducer, initialState, enhancer);
   const reactStart = (initialState && jsContent.innerHTML) ? hydrate : render;

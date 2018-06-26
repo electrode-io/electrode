@@ -26,7 +26,7 @@
     "build": "clap build",
     "start": "clap server",
     "hot": "clap hot",
-    "test": "clap build && clap check",
+    "test": "flow && clap build && clap check",
     "coverage": "clap check"
   },
   "dependencies": {
