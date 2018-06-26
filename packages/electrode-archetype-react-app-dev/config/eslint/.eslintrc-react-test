@@ -9,6 +9,9 @@ globals:
   # https://gecgithub01.walmart.com/electrode/electrode-archetype-react-component/issues/10
   sinon: false
   Element: false
+plugins: [
+  "flowtype"
+]
 rules:
   "no-unused-expressions": "off" # for `chai.expect`
   "max-len": ["error", 100, 2, {ignorePattern: "^\\s*(?:it|describe)\\(.*"}]
@@ -16,3 +19,7 @@ rules:
   "max-nested-callbacks": "off"
   "react/jsx-wrap-multilines": "warn"
   "no-multi-spaces": "off"
+
+  "flowtype/define-flow-type": "warn"
+  "flowtype/use-flow-type": "warn"
+  "flowtype/require-valid-file-annotation": "error"

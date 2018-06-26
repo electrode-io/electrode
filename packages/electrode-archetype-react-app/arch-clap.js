@@ -792,6 +792,12 @@ Individual .babelrc files were generated for you in src/client and src/server
     pwa: {
       desc: "PWA must have dist by running `clap build` first and then start the app server only.",
       task: ["build", "server"]
+    },
+    "initflow": {
+      desc: "Initiate Flow for type checker",
+      task: mkCmd(
+        `flow init`
+      )
     }
   };
 
