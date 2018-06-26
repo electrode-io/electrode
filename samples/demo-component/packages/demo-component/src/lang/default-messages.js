@@ -1,6 +1,8 @@
+// @flow
+
 import { defineMessages } from "react-intl";
 
-const $tenant = process.env.ELECTRODE_TENANT;
+const $tenant: any = process.env.ELECTRODE_TENANT;
 let tenantMessages;
 
 try {

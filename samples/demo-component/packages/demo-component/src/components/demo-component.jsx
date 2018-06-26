@@ -1,3 +1,5 @@
+// @flow
+
 import React from "react";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import AppBarExampleIconMenu from "./AppBarExampleIconMenu";
@@ -6,7 +8,11 @@ import CardExampleWithAvatar from "./CardExampleWithAvatar";
 
 import styles from "../../src/styles/demo-component.css"; // eslint-disable-line
 
-export default class DemoComponent extends React.Component {
+type Props = {};
+
+type State = {};
+
+export default class DemoComponent extends React.Component<Props, State> {
   render() {
     return (
       <MuiThemeProvider>
@@ -23,5 +29,3 @@ export default class DemoComponent extends React.Component {
 DemoComponent.displayName = "DemoComponent";
 
 DemoComponent.propTypes = {};
-
-DemoComponent.defaultProps = {};

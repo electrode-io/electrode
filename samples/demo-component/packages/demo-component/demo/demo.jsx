@@ -1,3 +1,5 @@
+// @flow
+
 import React from "react";
 import { addLocaleData, IntlProvider } from "react-intl";
 import * as libraryScope from "../src/index";
