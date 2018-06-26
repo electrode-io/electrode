@@ -218,6 +218,10 @@ function makeTasks(hostDir) {
         return mkCmd(`~$jest`, `--config ${archetype.devPath}/config/jest/jest.config.js`);
       }
       return undefined;
+    },
+    initflow: {
+      desc: "Initiate Flow for type checker",
+      task: mkCmd(`flow init`)
     }
   };
 

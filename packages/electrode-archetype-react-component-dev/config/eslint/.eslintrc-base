@@ -1,7 +1,13 @@
 ---
 extends:
   - "eslint-config-walmart/configurations/es6.js"
+plugins: [
+  "flowtype"
+]
 rules:
   "react/wrap-multilines": "off"
   "react/jsx-wrap-multilines": "warn"
   "no-multi-spaces": "off"
+  "flowtype/define-flow-type": "warn"
+  "flowtype/use-flow-type": "warn"
+  "flowtype/require-valid-file-annotation": "error"

@@ -1,7 +1,8 @@
 {
   "presets": [
     ["env", { "loose": true }],
-    "react"
+    "react",
+    "flow"
   ],
   "plugins": [
     "babel-plugin-transform-object-rest-spread",
@@ -10,7 +11,8 @@
       "enforceDescriptions": true
     }],
     "lodash",
-    "transform-runtime"
+    "transform-runtime",
+    "transform-flow-strip-types"
   ],
   "env": {
     "test": {
