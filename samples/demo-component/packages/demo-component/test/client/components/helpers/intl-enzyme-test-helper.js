@@ -24,22 +24,16 @@ const nodeWithIntlProp = node => {
 };
 
 const shallowWithIntl = node => {
-  return shallow(
-    nodeWithIntlProp(node),
-    {
-      context: {intl}
-    }
-  );
+  return shallow(nodeWithIntlProp(node), {
+    context: { intl }
+  });
 };
 
 const mountWithIntl = node => {
-  return mount(
-    nodeWithIntlProp(node),
-    {
-      context: {intl},
-      childContextTypes: { intl: intlShape }
-    }
-  );
+  return mount(nodeWithIntlProp(node), {
+    context: { intl },
+    childContextTypes: { intl: intlShape }
+  });
 };
 
 export { nodeWithIntlProp, shallowWithIntl, mountWithIntl };

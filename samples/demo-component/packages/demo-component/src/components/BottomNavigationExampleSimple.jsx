@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Component } from "react";
 import FontIcon from "material-ui/FontIcon";
 import { BottomNavigation, BottomNavigationItem } from "material-ui/BottomNavigation";
@@ -8,6 +10,12 @@ const recentsIcon = <FontIcon className="material-icons">restore</FontIcon>;
 const favoritesIcon = <FontIcon className="material-icons">favorite</FontIcon>;
 const nearbyIcon = <IconLocationOn />;
 
+type Props = {};
+
+type State = {
+  selectedIndex: number
+};
+
 /* eslint-disable no-magic-numbers */
 
 /**
@@ -15,7 +23,7 @@ const nearbyIcon = <IconLocationOn />;
  * provided. The selected `BottomNavigationItem` is determined by application
  * state (for instance, by the URL).
  */
-class BottomNavigationExampleSimple extends Component {
+class BottomNavigationExampleSimple extends Component<Props, State> {
   constructor() {
     super();
     this.state = {
@@ -23,7 +31,7 @@ class BottomNavigationExampleSimple extends Component {
     };
   }
 
-  select(index) {
+  select(index: number) {
     return this.setState({ selectedIndex: index });
   }
 

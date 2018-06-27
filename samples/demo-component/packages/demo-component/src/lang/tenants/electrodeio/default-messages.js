@@ -1,4 +1,6 @@
-import {defineMessages} from "react-intl";
+// @flow
+
+import { defineMessages } from "react-intl";
 
 const messages = defineMessages({
   editMe: {
