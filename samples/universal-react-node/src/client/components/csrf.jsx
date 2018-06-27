@@ -74,34 +74,26 @@ export class CSRF extends Component<{}, { testResult: string }> {
         <h1>Electrode CSRF-JWT Demo</h1>
         <p>
           This component demonstrates usage of the
-          <a href="https://github.com/electrode-io/electrode-csrf-jwt">
-            {" "}
-            electrode-csrf-jwt{" "}
-          </a>
-          module. Two endpoints are declared in{" "}
-          <code>server/plugins/demo.js</code>:
+          <a href="https://github.com/electrode-io/electrode-csrf-jwt"> electrode-csrf-jwt </a>
+          module. Two endpoints are declared in <code>server/plugins/demo.js</code>:
         </p>
         <ul>
           <li>
-            a GET endpoint, <code>/1</code>, to which the module automatically
-            adds a csrf token header
+            a GET endpoint, <code>/1</code>, to which the module automatically adds a csrf token
+            header
           </li>
           <li>
-            a POST endpoint, <code>/2</code>, to which the module automatically
-            ensures the presence of a valid token in the request headers
+            a POST endpoint, <code>/2</code>, to which the module automatically ensures the presence
+            of a valid token in the request headers
           </li>
         </ul>
-        <p>
-          Two simple tests via AJAX (JavaScript must be enabled) are
-          demonstrated below:
-        </p>
+        <p>Two simple tests via AJAX (JavaScript must be enabled) are demonstrated below:</p>
         <ul>
           <li>
             <a href="#" onClick={this.handleTestValid}>
               Test Valid POST
             </a>{" "}
-            using a token retrieved from <code>/1</code> first (should succeed
-            with a 200 status)
+            using a token retrieved from <code>/1</code> first (should succeed with a 200 status)
           </li>
           <li>
             <a href="#" onClick={this.handleTestInvalid}>

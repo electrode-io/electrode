@@ -12,9 +12,7 @@ type ToDoList = {
 const TodoList = ({ todos, onTodoClick }: ToDoList) => {
   return (
     <ul>
-      {todos.map(todo => (
-        <Todo key={todo.id} {...todo} onClick={() => onTodoClick(todo.id)} />
-      ))}
+      {todos.map(todo => <Todo key={todo.id} {...todo} onClick={() => onTodoClick(todo.id)} />)}
     </ul>
   );
 };

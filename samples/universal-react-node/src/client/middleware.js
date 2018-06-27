@@ -4,9 +4,7 @@ const HTTP_BAD_REQUEST = 400;
 const HTTP_OK = 200;
 let token;
 
-const updateStorage = (store: Object) => (next: (value: string) => void) => (
-  action: string
-) => {
+const updateStorage = (store: Object) => (next: (value: string) => void) => (action: string) => {
   const result = next(action);
   const completeState = store.getState();
   fetch("/1", { credentials: "same-origin" })

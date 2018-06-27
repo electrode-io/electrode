@@ -8,10 +8,7 @@ let token;
 
 type TypeRecordForm = {};
 
-class RecordForm extends Component<
-  TypeRecordForm,
-  { name: string, artist: string }
-> {
+class RecordForm extends Component<TypeRecordForm, { name: string, artist: string }> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -78,19 +75,11 @@ class RecordForm extends Component<
         <form onSubmit={this.handleSubmit}>
           <label>
             Name:
-            <input
-              type="text"
-              value={this.state.name}
-              onChange={this.handleNameChange}
-            />
+            <input type="text" value={this.state.name} onChange={this.handleNameChange} />
           </label>
           <label>
             Artist:
-            <input
-              type="text"
-              value={this.state.artist}
-              onChange={this.handleArtistChange}
-            />
+            <input type="text" value={this.state.artist} onChange={this.handleArtistChange} />
           </label>
           <input type="submit" value="Submit" />
         </form>

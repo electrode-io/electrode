@@ -32,14 +32,8 @@ module.exports = (notify: (value: Object) => void) => {
                 // new content is available, or the current service worker
                 // is up to date (?)
                 // TODO: Figure out why this is the case
-                if (
-                  navigator.serviceWorker &&
-                  navigator.serviceWorker.controller
-                ) {
-                  notify.show(
-                    "New or updated content is available, refresh!",
-                    "warning"
-                  );
+                if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+                  notify.show("New or updated content is available, refresh!", "warning");
                 } else {
                   notify.show("Content is now available offline!", "success");
                 }

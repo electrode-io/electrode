@@ -123,9 +123,7 @@ export default class PushNotifications extends Component<
     const { error, loading, supported, subscribed, subscription } = this.state;
 
     if (!loading && !supported) {
-      return (
-        <div>Sorry, service workers are not supported in this browser.</div>
-      );
+      return <div>Sorry, service workers are not supported in this browser.</div>;
     }
 
     if (error) {
@@ -164,8 +162,8 @@ export default class PushNotifications extends Component<
     return (
       <div>
         <h2>Push Notifications with Service Workers</h2>
-        Use the form below to define the parameters for a push notification.
-        Click the send button to trigger the notification itself.
+        Use the form below to define the parameters for a push notification. Click the send button
+        to trigger the notification itself.
         <label htmlFor="title">Title</label>
         <input onChange={this.handleInputChange} name="title" />
         <label htmlFor="body">Body</label>
