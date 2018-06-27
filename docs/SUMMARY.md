@@ -43,8 +43,6 @@
   - [Environment Variables](/chapter1/intermediate/app-archetype/env-vars.md)
   - [Extract Styles](/chapter1/intermediate/app-archetype/extract-styles.md)
   - [Unit Tests](/chapter1/intermediate/app-archetype/unit-tests.md)
-  - [Flow](/chapter1/intermediate/app-archetype/flow.md)
-  - [Flow FAQ](/chapter1/intermediate/app-archetype/flow-faq.md)
 
 - [Component Archetype](chapter1/intermediate/component-archetype/flow.md)
 
@@ -53,6 +51,8 @@
   - [Extract Styles](/chapter1/intermediate/component-archetype/extract-styles.md)
   - [Unit Tests](/chapter1/intermediate/component-archetype/unit-tests.md)
 
+- [Flow](/chapter1/intermediate/flow.md)
+- [Flow FAQ](/chapter1/intermediate/flow-faq.md)
 - [Build a Server Plugin](chapter1/intermediate/build-a-server-plugin.md)
 - [React App Routes](chapter1/intermediate/react-routes/react-routes.md)
   - [Add your routes](chapter1/intermediate/react-routes/add-routes.md)

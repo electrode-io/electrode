@@ -4,7 +4,7 @@ The Electrode Component Archetype helps developers quickly build React component
 
 Let's go through the most important sections to understand the new Component Archetype together and we will cover how to generate Electrode components by using the latest Electrode generators in the [Create an Electrode Component](/chapter1/intermediate/create-a-electrode-component.md) section.
 
--   [Structure](/chapter1/intermediate/component-archetype/component-archetype-structure.md)
--   [Webpack Config](/chapter1/intermediate/component-archetype/webpack-config.md)
--   [Extract Styles](/chapter1/intermediate/component-archetype/extract-styles.md)
--   [Unit Tests](/chapter1/intermediate/component-archetype/unit-tests.md)
+- [Structure](/chapter1/intermediate/component-archetype/component-archetype-structure.md)
+- [Webpack Config](/chapter1/intermediate/component-archetype/webpack-config.md)
+- [Extract Styles](/chapter1/intermediate/component-archetype/extract-styles.md)
+- [Unit Tests](/chapter1/intermediate/component-archetype/unit-tests.md)
