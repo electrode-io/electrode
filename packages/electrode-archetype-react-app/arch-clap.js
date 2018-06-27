@@ -510,7 +510,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     devbrk: ["dev --inspect-brk"],
     dev: {
       desc: "Start your app with watch in development mode with webpack-dev-server",
-      dep: [".remove-log-files", ".development-env", ".clean.build", ".mk-dist-dir"],
+      dep: [".remove-log-files", ".development-env"],
       task: function() {
         const args = taskArgs(this.argv);
 
@@ -793,11 +793,9 @@ Individual .babelrc files were generated for you in src/client and src/server
       desc: "PWA must have dist by running `clap build` first and then start the app server only.",
       task: ["build", "server"]
     },
-    "initflow": {
+    initflow: {
       desc: "Initiate Flow for type checker",
-      task: mkCmd(
-        `flow init`
-      )
+      task: mkCmd(`flow init`)
     }
   };
 
