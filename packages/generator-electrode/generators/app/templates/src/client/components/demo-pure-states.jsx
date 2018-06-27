@@ -19,7 +19,7 @@ const DemoPureStates = props => {
         onChange={() => dispatch(toggleCheck())}
         checked={checked}
       >
-        <input type="checkbox" checked={checked} />
+        <input type="checkbox" checked={checked} onChange={() => null} />
         <span className={custom["label-body"]}> checkbox </span>
       </label>
       <div style={{ width: "10rem", display: "inline-block", textAlign: "center" }}>

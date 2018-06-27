@@ -55,7 +55,8 @@ function getWarningsHtml(stats) {
 // A quick HTML output adapted from original Stat.jsonToString
 //
 /* eslint-disable */
-function jsonToHtml(obj, useColors) {
+function jsonToHtml(obj, useColors, anchors) {
+  anchors = anchors || {};
   const buf = [];
 
   const normal = str => buf.push(str);
@@ -91,6 +92,12 @@ function jsonToHtml(obj, useColors) {
   };
 
   const newline = () => buf.push("\n");
+  const anchor = name => {
+    if (!anchors.hasOwnProperty(name)) {
+      anchors[name] = true;
+      buf.push(`<a name="${name}" id="anchor_${name}" />`);
+    }
+  };
 
   const table = (array, formats, align, splitter) => {
     const rows = array.length;
@@ -410,6 +417,7 @@ function jsonToHtml(obj, useColors) {
   // Display warnings
   //
   if (obj._showWarnings && obj.warnings) {
+    anchor("warning");
     obj.warnings.forEach(warning => {
       newline();
       yellow("WARNING in " + warning);
@@ -421,6 +429,7 @@ function jsonToHtml(obj, useColors) {
   // Display errors
   //
   if (obj._showErrors && obj.errors) {
+    anchor("error");
     const convert = new AnsiConvert();
     obj.errors.forEach(error => {
       newline();
@@ -443,7 +452,7 @@ function jsonToHtml(obj, useColors) {
       }
       newline();
       buf.push("    ");
-      buf.push(this.jsonToHtml(child, useColors).replace(/\n/g, "\n    "));
+      buf.push(this.jsonToHtml(child, useColors, anchors).replace(/\n/g, "\n    "));
       newline();
     });
   }

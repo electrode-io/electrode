@@ -35,9 +35,10 @@ export default () => (
 
     <section className={custom.header}>
       <h2 className={skeleton.title}>
-        Hello from
+        Hello from{" "}
         <a href="https://github.com/electrode-io">
-          {"Electrode"} <img src={electrodePng} />
+          {"Electrode"}
+          <img src={electrodePng} />
         </a>
       </h2>
     </section>

@@ -20,6 +20,10 @@ const webappPlugin = () => {
 
 module.exports = {
   plugins: {
+    "webpack-dev": {
+      module: "electrode-archetype-react-app-dev/lib/webpack-dev-hapi",
+      enable: process.env.WEBPACK_DEV_MIDDLEWARE === "true"
+    },
     inert: {
       enable: true
     },

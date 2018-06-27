@@ -12,6 +12,8 @@ import rootReducer from "./reducers";
 import { renderRoutes } from "react-router-config";
 
 //<% if (pwa) { %>
+// PWA registration
+//
 import { notify } from "react-notify-toast";
 
 //
@@ -27,16 +29,46 @@ require.ensure(
 );
 //<% } %>
 
-window.webappStart = () => {
-  const initialState = window.__PRELOADED_STATE__;
-  const jsContent = document.querySelector(".js-content");
-  const reactStart = initialState && jsContent.innerHTML ? hydrate : render;
-
+//
+// Redux configure store with Hot Module Reload
+//
+const configureStore = initialState => {
   const store = createStore(rootReducer, initialState);
+
+  if (module.hot) {
+    module.hot.accept("./reducers", () => {
+      const nextRootReducer = require("./reducers");
+      store.replaceReducer(nextRootReducer);
+    });
+  }
+
+  return store;
+};
+
+const store = configureStore(window.__PRELOADED_STATE__);
+
+const start = App => {
+  const jsContent = document.querySelector(".js-content");
+  const reactStart = window.__PRELOADED_STATE__ && jsContent.innerHTML ? hydrate : render;
+
   reactStart(
     <Provider store={store}>
-      <BrowserRouter>{renderRoutes(routes)}</BrowserRouter>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>,
     jsContent
   );
 };
+
+window.webappStart = () => start(() => renderRoutes(routes));
+
+//
+// Hot Module Reload setup
+//
+if (module.hot) {
+  module.hot.accept("./routes", () => {
+    const r = require("./routes");
+    start(() => renderRoutes(r.routes));
+  });
+}
