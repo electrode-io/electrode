@@ -26,18 +26,19 @@ function setupElectrodeServerEvents(emitter) {
   emitter.on("server-started", (data, next) => next());
   emitter.on("complete", (data, next) => next());
 }
+//<% } %>
 
 const startServer = config => {
+  //<% if (isHapi) { %>
   const decor = staticPathsDecor();
   if (!config.listener) config.listener = setupElectrodeServerEvents;
   return electrodeServer(config, [decor]);
+  //<% } else if (isExpress) { %>
+  return require("./express-server")(config);
+  //<% } else { %>
+  return require("./koa-server")(config);
+  //<% } %>
 };
-
-//<% } else if (isExpress) { %>
-const startServer = config => require("./express-server")(config);
-//<% } else { %>
-const startServer = config => require("./koa-server")(config);
-//<% } %>
 
 module.exports = () =>
   support.load().then(() => {

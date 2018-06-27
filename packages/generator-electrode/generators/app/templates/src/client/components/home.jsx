@@ -23,9 +23,9 @@ import electrodePng from "../images/electrode.png";
 import DemoStates from "./demo-states";
 import DemoPureStates from "./demo-pure-states";
 import { DemoButtons } from "./demo-buttons";
-/*<% if (pwa) { %>*/
+//<% if (pwa) { %>
 import Notifications from "react-notify-toast";
-/*<% } %>*/
+//<% } %>
 
 export default () => (
   <div className={custom.container}>

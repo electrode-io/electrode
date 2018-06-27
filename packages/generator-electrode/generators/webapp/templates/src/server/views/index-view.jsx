@@ -4,7 +4,6 @@
 
 import ReduxRouterEngine from "electrode-redux-router-engine";
 import { routes } from "../../client/routes";
-import rootReducer from "../../client/reducers";
 
 //
 // This function is exported as the content for the webapp plugin.

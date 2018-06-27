@@ -1,11 +1,13 @@
 module.exports = {
   cache: {
     cacheId: "<%= projectName %>",
-    runtimeCaching: [{
-      handler: "fastest",
-      urlPattern: "\/$"
-    }],
-    staticFileGlobs: ['dist/**/*']
+    runtimeCaching: [
+      {
+        handler: "fastest",
+        urlPattern: "/$"
+      }
+    ],
+    staticFileGlobs: ["dist/**/*"]
   },
   manifest: {
     background: "#FFFFFF",
