@@ -46,6 +46,7 @@ process.env.SERVER_ES6 = true;
 
 require("electrode-archetype-react-app")();
 
+//<% if (isSingleQuote) { %>
 //
 // When single quote option is selected, this will use eslint to fix
 // generated files from double to single quote after npm install.
@@ -60,11 +61,12 @@ xclap.load("user", {
   "fix-generator-eslint": {
     task: () => {
       const pkg = require("./package.json");
-      if (pkg.scripts.install === "clap fix-generator-eslint") {
-        pkg.scripts.install = "echo OK";
+      if (pkg.scripts.install === "clap ?fix-generator-eslint") {
+        delete pkg.scripts.install;
         Fs.writeFileSync(Path.resolve("package.json"), JSON.stringify(pkg, null, 2));
         return "~$eslint --fix config src test --ext .js,.jsx";
       }
     }
   }
 });
+//<% } %>

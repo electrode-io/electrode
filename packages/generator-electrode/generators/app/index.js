@@ -2,14 +2,14 @@
 
 /* eslint-disable arrow-parens */
 
-var Generator = require("yeoman-generator");
-var chalk = require("chalk");
-var yosay = require("yosay");
-var path = require("path");
-var _ = require("lodash");
-var extend = _.merge;
-var parseAuthor = require("parse-author");
-var githubUsername = require("github-username");
+const Generator = require("yeoman-generator");
+const chalk = require("chalk");
+const yosay = require("yosay");
+const path = require("path");
+const _ = require("lodash");
+const extend = _.merge;
+const parseAuthor = require("parse-author");
+const githubUsername = require("github-username");
 
 const ExpressJS = "ExpressJS";
 const HapiJS = "HapiJS";
@@ -86,9 +86,7 @@ module.exports = class extends Generator {
       this.props.createDirectory = false;
       this.props.serverType = this.fs.exists(this.destinationPath("src/server/express-server.js"))
         ? ExpressJS
-        : this.fs.exists(this.destinationPath("src/server/koa-server.js"))
-          ? KoaJS
-          : HapiJS;
+        : this.fs.exists(this.destinationPath("src/server/koa-server.js")) ? KoaJS : HapiJS;
       this.props.pwa = this.fs.exists(this.destinationPath("client/sw-registration.js"));
       this.props.autoSsr = this.fs.exists(this.destinationPath("server/plugins/autossr.js"));
       this.props.quoteType =
@@ -275,12 +273,10 @@ module.exports = class extends Generator {
       ignoreArray.push("**/src/server/express-server.js");
     }
 
-    // Re-read the content at this point because a composed generator might modify it.
-    var currentPkg = this.fs.readJSON(this.destinationPath("package.json"), {});
+    // process default _package.js template
+    const _pkgJs = "_package.js";
 
-    const _pkg = "_package.json";
-
-    this.fs.copyTpl(this.templatePath(_pkg), this.destinationPath(_pkg), {
+    this.fs.copyTpl(this.templatePath(_pkgJs), this.destinationPath(_pkgJs), {
       isHapi,
       isExpress,
       isPWA,
@@ -288,14 +284,22 @@ module.exports = class extends Generator {
       isSingleQuote
     });
 
-    var defaultPkg = this.fs.readJSON(this.destinationPath(_pkg));
-    this.fs.delete(this.destinationPath(_pkg));
+    const jsPkg = this.fs.read(this.destinationPath(_pkgJs)).toString();
 
+    const defaultPkg = Function(`"use strict";` + jsPkg)();
+    this.fs.delete(this.destinationPath(_pkgJs));
+
+    // Re-read the content at this point because a composed generator might modify it.
+    const currentPkg = this.fs.readJSON(this.destinationPath("package.json"), {});
+
+    // delete certain empty fields in existing package.json
     ["name", "version", "description", "homepage", "main", "license"].forEach(x => {
-      currentPkg[x] = currentPkg[x] || undefined;
+      if (currentPkg.hasOwnProperty(x) && !currentPkg[x]) {
+        delete currentPkg[x];
+      }
     });
 
-    var packageContents = {
+    const packageContents = {
       name: _.kebabCase(this.props.name),
       version: "0.0.1",
       description: this.props.description,
@@ -309,15 +313,16 @@ module.exports = class extends Generator {
       main: path.posix.join("lib", this.options.projectRoot, "index.js"),
       keywords: []
     };
+
     if (this.isDemoApp) {
       packageContents.dependencies = {};
       packageContents.dependencies[this.props.packageName] =
         "../packages/" + this.props.packageName;
     }
 
-    var updatePkg = _.defaultsDeep(currentPkg, packageContents);
+    const updatePkg = _.defaultsDeep(currentPkg, packageContents);
 
-    var pkg = extend({}, defaultPkg, updatePkg);
+    const pkg = extend({}, defaultPkg, updatePkg);
 
     // Combine the keywords
     if (this.props.keywords) {
@@ -462,7 +467,7 @@ module.exports = class extends Generator {
 
   end() {
     if (!this.isDemoApp) {
-      var chdir = this.props.createDirectory
+      const chdir = this.props.createDirectory
         ? "'cd " + _.kebabCase(_.deburr(this.props.name)) + "' then "
         : "";
       this.log(

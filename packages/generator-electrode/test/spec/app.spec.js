@@ -80,7 +80,7 @@ describe("electrode:app", function() {
 
     it("creates and fills the pageTitle field in config/default.js", function() {
       assert.file("./config/default.js");
-      assert.fileContent("./config/default.js", `"pageTitle": "generator-electrode"`);
+      assert.fileContent("./config/default.js", `pageTitle: "generator-electrode"`);
     });
   });
 });
