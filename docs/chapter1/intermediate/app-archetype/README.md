@@ -8,4 +8,3 @@ The application archetype is a pair of npm modules that provide common patterns 
 - [Environment Variables](/chapter1/intermediate/app-archetype/env-vars.md)
 - [Extract Styles](/chapter1/intermediate/app-archetype/extract-styles.md)
 - [Unit Tests](/chapter1/intermediate/app-archetype/unit-tests.md)
-- [Flow](/chapter1/intermediate/app-archetype/flow.md)
