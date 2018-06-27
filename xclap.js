@@ -75,20 +75,22 @@ const testGenerator = (testDir, name, clean, prompts) => {
     keywords: ["test", "electrode"],
     pwa: true,
     autoSsr: true,
-    createDirectory: true,
+    createDirectory: false,
     githubAccount: "test",
     license: "Apache-2.0"
   };
   prompts = _.extend({}, defaultPrompts, prompts || {});
 
+  const testAppDir = Path.join(testDir, name);
+
   const yoRun = yoTest.run(yoApp);
-  return (clean ? yoRun.inDir(testDir) : yoRun.cd(testDir))
+  return (clean ? yoRun.inDir(testAppDir) : yoRun.cd(testAppDir))
     .withOptions({
       "skip-install": true
     })
     .withPrompts(prompts)
     .then(() => {
-      return runAppTest(Path.join(testDir, name), true);
+      return runAppTest(testAppDir, true);
     });
 };
 
