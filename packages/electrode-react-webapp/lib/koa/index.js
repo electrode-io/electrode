@@ -49,7 +49,7 @@ const registerRoutes = (router, options) => {
         );
         return ReactWebapp.resolveContent(v.content);
       }
-      return { status: 200, html: "" };
+      return { content: { status: 200, html: "" } };
     };
 
     const routeOptions = _.defaults({ htmlFile: v.htmlFile }, registerOptions);
@@ -69,7 +69,8 @@ const registerRoutes = (router, options) => {
 
       /*eslint max-nested-callbacks: [0, 4]*/
       router(method.toLowerCase(), path, function() {
-        return handleRoute.call(this, routeHandler, content || (content = resolveContent()));
+        if (!content) content = resolveContent();
+        return handleRoute.call(this, routeHandler, content.content);
       }); //end get
     });
   });

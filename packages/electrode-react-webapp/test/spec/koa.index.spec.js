@@ -91,15 +91,23 @@ describe("koa electrode-react-webapp", function() {
 
   it("should render to static markup", () => {
     const server = startServer(webappOptions());
-    return new Promise((resolve, reject) => {
-      const port = server.address().port;
-      return request(`http://localhost:${port}`).end((err, resp) => {
-        if (err) return reject(err);
-        expect(resp.text).includes("<div>Hello Electrode</div>");
-        expect(resp.text).includes("console.log('Hello');");
-        return server.close(() => resolve());
+    const makeRequest = () => {
+      return new Promise((resolve, reject) => {
+        const port = server.address().port;
+        return request(`http://localhost:${port}`).end((err, resp) => {
+          if (err) return reject(err);
+          expect(resp.text).includes("<div>Hello Electrode</div>");
+          expect(resp.text).includes("console.log('Hello');");
+          return resolve();
+        });
       });
-    });
+    };
+
+    return makeRequest()
+      .then(() => makeRequest())
+      .then(() => {
+        return new Promise(resolve => server.close(resolve));
+      });
   });
 
   it("should render to static markup @func_content", () => {
