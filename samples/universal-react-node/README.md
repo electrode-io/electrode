@@ -3,66 +3,66 @@
 [![Dependency Status][daviddm-image]][daviddm-url] [![devDependency Status][daviddm-dev-image]][daviddm-dev-url]
 
 ## Features
+
 [Electrode Boilerplate](https://github.com/electrode-io/electrode#boilerplate-universal-react-node) comes fully loaded with the best technologies available:
 
-*  <a href="https://facebook.github.io/react/index.html" target="_blank">React</a> - an awesome JavaScript library for building user interfaces, created by Facebook.
+- <a href="https://facebook.github.io/react/index.html" target="_blank">React</a> - an awesome JavaScript library for building user interfaces, created by Facebook.
 
-*  <a href="http://redux.js.org/docs/basics/UsageWithReact.html" target="_blank">Redux</a> - a predictable state container for JavaScript apps.
+- <a href="http://redux.js.org/docs/basics/UsageWithReact.html" target="_blank">Redux</a> - a predictable state container for JavaScript apps.
 
-*  <a href="https://github.com/ReactTraining/react-router/tree/master/docs" target="_blank">React Router</a> - a powerful routing library built on top of React.
+- <a href="https://github.com/ReactTraining/react-router/tree/master/docs" target="_blank">React Router</a> - a powerful routing library built on top of React.
 
-* <a href="https://github.com/css-modules/css-modules" target="_blank">CSS Modules</a> - a CSS file in which all class names and animation names are scoped locally by default. Fixes the problem of the global scope in CSS.
+- <a href="https://github.com/css-modules/css-modules" target="_blank">CSS Modules</a> - a CSS file in which all class names and animation names are scoped locally by default. Fixes the problem of the global scope in CSS.
 
-*  <a href="https://medium.com/@mjackson/universal-javascript-4761051b7ae9#.xjxr5yj5z" target="_blank">Universal rendering</a>
+- <a href="https://medium.com/@mjackson/universal-javascript-4761051b7ae9#.xjxr5yj5z" target="_blank">Universal rendering</a>
 
-*  <a href="https://webpack.github.io/docs/motivation.html" target="_blank">Webpack</a> - a powerful module bundler.
+- <a href="https://webpack.github.io/docs/motivation.html" target="_blank">Webpack</a> - a powerful module bundler.
 
-* [Offline-first](https://github.com/electrode-io/electrode/tree/master/samples/universal-react-node#progressive-web-app-pwa-features-supported-by-the-electrode-framework)
-The next frontier in performant progressive web apps: availability without a network connection from the instant your users load the app.
+- [Offline-first](https://github.com/electrode-io/electrode/tree/master/samples/universal-react-node#progressive-web-app-pwa-features-supported-by-the-electrode-framework)
+  The next frontier in performant progressive web apps: availability without a network connection from the instant your users load the app.
 
-*  <a href="https://github.com/jchip/isomorphic-loader" target="_blank">Webpack Isomorphic Loader</a> - a powerful tool that makes NodeJS `require` understand files such as images for SSR.
+- <a href="https://github.com/jchip/isomorphic-loader" target="_blank">Webpack Isomorphic Loader</a> - a powerful tool that makes NodeJS `require` understand files such as images for SSR.
 
-*  <a href="https://babeljs.io/" target="_blank">Babel</a> - a utility to transpile ES6 + 7.
+- <a href="https://babeljs.io/" target="_blank">Babel</a> - a utility to transpile ES6 + 7.
 
-*  <a href="http://eslint.org/" target="_blank">ESLint</a> - a pluggable linting utility for Javascript.
+- <a href="http://eslint.org/" target="_blank">ESLint</a> - a pluggable linting utility for Javascript.
 
-*  <a href="https://mochajs.org/" target="_blank">Mocha</a> - a feature-rich Javascript testing framework.
+- <a href="https://mochajs.org/" target="_blank">Mocha</a> - a feature-rich Javascript testing framework.
 
-*  <a href="https://github.com/airbnb/enzyme" target="_blank">Enzyme</a> - a Javascript testing utility for React, created by airbnb.
+- <a href="https://github.com/airbnb/enzyme" target="_blank">Enzyme</a> - a Javascript testing utility for React, created by airbnb.
 
-*  <a href="https://travis-ci.org/" target="_blank">TravisCI</a> - a continuous integration service to build and test software projects.
+- <a href="https://travis-ci.org/" target="_blank">TravisCI</a> - a continuous integration service to build and test software projects.
 
-*  <a href="http://yeoman.io/" target="_blank">Yeoman</a> - a Scaffolding tool for modern webapps.
+- <a href="http://yeoman.io/" target="_blank">Yeoman</a> - a Scaffolding tool for modern webapps.
 
-*  <a href="https://www.npmjs.com/package/history" target="_blank">History</a> - a Javascript library for managing session history.
+- <a href="https://www.npmjs.com/package/history" target="_blank">History</a> - a Javascript library for managing session history.
 
-*  <a href="http://bluebirdjs.com/docs/why-promises.html" target="_blank">Bluebird</a> - a great Javascript promise library.
+- <a href="http://bluebirdjs.com/docs/why-promises.html" target="_blank">Bluebird</a> - a great Javascript promise library.
 
-*  [Electrode Confippet](https://github.com/electrode-io/electrode-confippet) - a versatile and flexible utility for managing configurations of Node.js applications.
+- [Electrode Confippet](https://github.com/electrode-io/electrode-confippet) - a versatile and flexible utility for managing configurations of Node.js applications.
 
-*  [Electrode JWT CSRF](https://github.com/electrode-io/electrode-csrf-jwt) - a module to enable stateless Cross-Site Request Forgery (CSRF) protection with JWT.
+- [Electrode JWT CSRF](https://github.com/electrode-io/electrode-csrf-jwt) - a module to enable stateless Cross-Site Request Forgery (CSRF) protection with JWT.
 
-*  [Electrode-Redux-Router-Engine](https://github.com/electrode-io/electrode-redux-router-engine) - an Electrode routing and rendering engine using react-router and redux.
+- [Electrode-Redux-Router-Engine](https://github.com/electrode-io/electrode-redux-router-engine) - an Electrode routing and rendering engine using react-router and redux.
 
-*  [Component Caching](https://github.com/electrode-io/electrode-react-ssr-caching) - an optimizer to improve React Server Side Rendering speed
+- [Component Caching](https://github.com/electrode-io/electrode-react-ssr-caching) - an optimizer to improve React Server Side Rendering speed
 
-*  [Electrode-Server](https://github.com/electrode-io/electrode-server) - a configurable web server using Hapi.js on top of Node.js.
+- [Electrode-Server](https://github.com/electrode-io/electrode-server) - a configurable web server using Hapi.js on top of Node.js.
 
-*  [Electrify](https://github.com/electrode-io/electrify) - a tool for analyzing the module tree of webpack projects.
+- [Electrify](https://github.com/electrode-io/electrify) - a tool for analyzing the module tree of webpack projects.
 
-*  [Electrode-Docgen](https://github.com/electrode-io/electrode-docgen) - a custom metadata extractor for the Electrode framework, automates component documentation.
-mentation.
-
-
+- [Electrode-Docgen](https://github.com/electrode-io/electrode-docgen) - a custom metadata extractor for the Electrode framework, automates component documentation.
+  mentation.
 
 This repo is a sample Electrode app with the following Electrode modules:
-  - [Electrode Confippet](https://github.com/electrode-io/electrode-confippet)
-  - [Electrode Electrify](https://github.com/electrode-io/electrify)
-  - [Electrode CSRF JWT](https://github.com/electrode-io/electrode-csrf-jwt)
-  - [Electrode Redux Router Engine](https://github.com/electrode-io/electrode-redux-router-engine)
-  - [Electrode React SSR Caching](https://github.com/electrode-io/electrode-react-ssr-caching)
-  - [Above The Fold Only Server Render](https://github.com/electrode-io/above-the-fold-only-server-render)
-  - [Electrode Bundle Analyzer](https://github.com/electrode-io/electrode-bundle-analyzer)
+
+- [Electrode Confippet](https://github.com/electrode-io/electrode-confippet)
+- [Electrode Electrify](https://github.com/electrode-io/electrify)
+- [Electrode CSRF JWT](https://github.com/electrode-io/electrode-csrf-jwt)
+- [Electrode Redux Router Engine](https://github.com/electrode-io/electrode-redux-router-engine)
+- [Electrode React SSR Caching](https://github.com/electrode-io/electrode-react-ssr-caching)
+- [Above The Fold Only Server Render](https://github.com/electrode-io/above-the-fold-only-server-render)
+- [Electrode Bundle Analyzer](https://github.com/electrode-io/electrode-bundle-analyzer)
 
 ## Install
 
@@ -70,7 +70,10 @@ This repo is a sample Electrode app with the following Electrode modules:
 git clone https://github.com/electrode-io/electrode.git
 cd electrode-boilerplate-universal-react-node
 npm install
+npm run flow-typed-install
 ```
+
+> Note: [`flow-typed`](https://github.com/flowtype/flow-typed) is a central repository for Flow library definitions. By default, Flow will ignore the 3rd-party libraries which were not written with Flow and leave them untyped. The `flow-typed` repo is a collection of high-quality library definitions which allow you to describe the interface of a module or library separate from the implementation of that module/library.
 
 ## Run
 
@@ -97,18 +100,22 @@ $ clap server-prod
 $ clap build
 $ clap server
 ```
+
 Service worker currently does not work with webpack dev server. You need to build first and then run the server.
 
 ## Instructions for boostrapping/Scaffolding new electrode application
+
 You can bootstrap a new electrode web application from scratch by doing:
 
 ```bash
 npm install -g yo generator-electrode xclap-cli
 yo electrode
 ```
+
 This will set up an Electrode webapplication which will have 2 of the above 6 modules. The two modules that are available by default are:
-  - [Electrode Confippet](https://github.com/electrode-io/electrode-confippet)
-  - [Electrode Javascript Bundle Viewer](https://github.com/electrode-io/electrify)
+
+- [Electrode Confippet](https://github.com/electrode-io/electrode-confippet)
+- [Electrode Javascript Bundle Viewer](https://github.com/electrode-io/electrify)
 
 ## Multiple Entry Points
 
@@ -139,7 +146,7 @@ const CHUNKS = {
   }
 };
 
-const getChunks = (path) => {
+const getChunks = path => {
   if (path.endsWith("/about")) {
     return CHUNKS.ABOUT;
   }
@@ -147,7 +154,7 @@ const getChunks = (path) => {
   return CHUNKS.HOME;
 };
 
-module.exports = (request) => {
+module.exports = request => {
   return getChunks(request.path);
 };
 ```
@@ -175,27 +182,38 @@ module.exports = (request) => {
 }
 ```
 
-## Progressive Web App (PWA) features supported by the Electrode framework  
-#### 1. Offline first  
-  Offline first lets your app run without a network connection. At the same time it provides a great performance boost for repeat visit to your web site.
-  This is done with a service worker and by pre-caching your static assets as well as runtime caching of dynamic server routes and external resources.  
-  [Learn More](https://github.com/electrode-io/electrode-archetype-react-app/blob/master/README.md#2-cache)  
-#### 2. Add To Homescreen  
-  After visiting your website, users will get a prompt (if the user has visited your site at least twice, with at least five minutes between visits.) to add your application to their homescreen (web or [mobile](https://developers.google.com/web/updates/2015/03/increasing-engagement-with-app-install-banners-in-chrome-for-android)). Combined with offline caching, this means your web app can be used exactly like a native application.  
-  [Learn More](https://github.com/electrode-io/electrode-archetype-react-app/blob/master/README.md#1-manifest)  
-#### 3. Push Notifications  
-  Web push notifications allow users to opt-in to timely updates from sites they love and allow you to effectively re-engage them with customized, relevant content.  
-  We will learn about Push Notifications in the next couple of sections.
+## Progressive Web App (PWA) features supported by the Electrode framework
+
+#### 1. Offline first
+
+Offline first lets your app run without a network connection. At the same time it provides a great performance boost for repeat visit to your web site.
+This is done with a service worker and by pre-caching your static assets as well as runtime caching of dynamic server routes and external resources.  
+ [Learn More](https://github.com/electrode-io/electrode-archetype-react-app/blob/master/README.md#2-cache)
+
+#### 2. Add To Homescreen
+
+After visiting your website, users will get a prompt (if the user has visited your site at least twice, with at least five minutes between visits.) to add your application to their homescreen (web or [mobile](https://developers.google.com/web/updates/2015/03/increasing-engagement-with-app-install-banners-in-chrome-for-android)). Combined with offline caching, this means your web app can be used exactly like a native application.  
+ [Learn More](https://github.com/electrode-io/electrode-archetype-react-app/blob/master/README.md#1-manifest)
+
+#### 3. Push Notifications
+
+Web push notifications allow users to opt-in to timely updates from sites they love and allow you to effectively re-engage them with customized, relevant content.  
+ We will learn about Push Notifications in the next couple of sections.
 
 ## Instructions for setting up Push Notifications
+
 ### Web push is only supported on: Google Chrome 42+ (Desktop & Android)
+
 The [Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API) requires a registered service worker so it can send notifications in the background when the web application isn't running. So we need to register our service worker first.  
 Check out [this guideline](https://github.com/electrode-io/electrode-archetype-react-app/blob/master/README.md#how-do-i-generate-a-manifestjson-and-a-service-worker-file) to generate a service worker in an electrode app.  
 Also, check out the [Adding Push Notifications to a Web App](https://developers.google.com/web/fundamentals/getting-started/codelabs/push-notifications/) Codelab provided by Google for an in-depth guide on how push notifications and service workers work together.
 
-Next we need to add a `push` event to this existing service worker for sending notifications to the client from a push server:  
-#### 1. Creating a new file service worker file to listen to push events  
-In order to respond to push notifications events received from a remote server we need to listen for the `push` event on the active service worker. Since our service worker file is generated automatically we need to use the `importScripts` API, which lets us execute additional scripts in the context of the service worker.  
+Next we need to add a `push` event to this existing service worker for sending notifications to the client from a push server:
+
+#### 1. Creating a new file service worker file to listen to push events
+
+In order to respond to push notifications events received from a remote server we need to listen for the `push` event on the active service worker. Since our service worker file is generated automatically we need to use the `importScripts` API, which lets us execute additional scripts in the context of the service worker.
+
 ```
 self.addEventListener("push", (event) => {
   const title = "It worked!";
@@ -207,9 +225,11 @@ self.addEventListener("push", (event) => {
   );
 });
 ```
+
 [Sample file](https://github.com/electrode-io/electrode/blob/master/samples/universal-react-node/client/sw-events.js)
 
-#### 2. Include this file in your webpack bundle by referencing it in `sw-config.js`  
+#### 2. Include this file in your webpack bundle by referencing it in `sw-config.js`
+
 ```
 module.exports = {
   cache: {
@@ -217,9 +237,11 @@ module.exports = {
     }
 }
 ```
+
 [Sample file](https://github.com/electrode-io/electrode/blob/master/samples/universal-react-node/config/sw-config.js)
 
-#### 3. Register this service worker with the `push` event  
+#### 3. Register this service worker with the `push` event
+
 ```
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("sw.js", { scope: "./" })
@@ -228,22 +250,27 @@ if ("serviceWorker" in navigator) {
   }
 }
 ```
+
 [Sample file](https://github.com/electrode-io/electrode/blob/master/samples/universal-react-node/client/sw-registration.js)
 
 The service worker is ready to accept `push` from the server. On receiving the push, it will provide the `notification` to the browser.
 
-#### 4. Setting up your API_KEY and GCM_SENDER_ID  
+#### 4. Setting up your API_KEY and GCM_SENDER_ID
+
 We will be needing the API_KEY and GCM_ENDPOINT to send the messages from the server.  
 To generate these values, visit [Firebase](https://console.firebase.google.com) and create a new project.  
 Click on the setting icons and open `Project settings`.  
 Navigate to the `CLOUD MESSAGING` tab to view your `Server key or Legacy Server key` (API_KEY) and the `Sender ID`.  
-You need to update your `manifest` in `sw-config.js` to update the [gcm_sender_id](https://github.com/electrode-io/electrode/blob/master/samples/universal-react-node/config/sw-config.js#L18).  
+You need to update your `manifest` in `sw-config.js` to update the [gcm_sender_id](https://github.com/electrode-io/electrode/blob/master/samples/universal-react-node/config/sw-config.js#L18).
 
-## Instructions for sending a push notification  
-Now that we have our service worker up and running, we can send a `push` with the following steps:  
+## Instructions for sending a push notification
 
-#### 1. Requesting Permission and Subscribing Users  
+Now that we have our service worker up and running, we can send a `push` with the following steps:
+
+#### 1. Requesting Permission and Subscribing Users
+
 The code for requesting permission and subscribing users in done in your app's code, rather than the service worker code.
+
 ```
 navigator.serviceWorker.ready.then((registration) => {
   // Ask for user permission and subscribe
@@ -257,14 +284,17 @@ navigator.serviceWorker.ready.then((registration) => {
     });
 });
 ```
-[Sample subscription](https://github.com/electrode-io/electrode/blob/master/samples/universal-react-node/client/components/push-notifications.jsx#L73-L86)  
+
+[Sample subscription](https://github.com/electrode-io/electrode/blob/master/samples/universal-react-node/client/components/push-notifications.jsx#L73-L86)
 
 Typically, after the user subscribes, we send the subscription information to the server and the server uses the `subscriptionId` to trigger a notification.
 
-#### 2. Sending Messages  
-Sending message is as easy as executing a curl command. The curl command contains the `subscriptionId`, `API_KEY` (Your cloud messaging API key from [firebase](https://console.firebase.google.com)) and GCM_ENDPOINT (https://android.googleapis.com/gcm/send).  
+#### 2. Sending Messages
+
+Sending message is as easy as executing a curl command. The curl command contains the `subscriptionId`, `API_KEY` (Your cloud messaging API key from [firebase](https://console.firebase.google.com)) and GCM_ENDPOINT (https://android.googleapis.com/gcm/send).
 
 Alternatively, you can also send notifications from the service worker:
+
 ```
 sendNotification() {
    const title = 'This Notification'
@@ -275,6 +305,7 @@ sendNotification() {
    });
  }
 ```
+
 [Sample](https://github.com/electrode-io/electrode/blob/master/samples/universal-react-node/client/components/push-notifications.jsx#L94-L100)
 
 `navigator.serviceWorker.ready` is a Promise that will resolve once a service worker is registered, and it returns a reference to the active [ServiceWorkerRegistration](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration). The showNotification() method of the ServiceWorkerRegistration interface creates a notification and returns a Promise that resolves to a [NotificationEvent](https://developer.mozilla.org/en-US/docs/Web/API/NotificationEvent).
@@ -283,7 +314,7 @@ sendNotification() {
 
 ## Instructions about standalone modules
 
-### <a name="electrode-confippet"></a>Electrode Confippet ###
+### <a name="electrode-confippet"></a>Electrode Confippet
 
 - [Confippet](https://github.com/electrode-io/electrode-confippet) is a versatile utility for managing your NodeJS application configuration. Its goal is customization and extensibility, but offers a preset config out of the box.
 
@@ -382,9 +413,11 @@ $ clap server-prod
 ---
 
 ### <a name="csrf-jwt"></a>Electrode CSRF-JWT
+
 [CSRF-JWT](https://github.com/electrode-io/electrode-csrf-jwt) is an Electrode plugin that allows you to authenticate HTTP requests using JWT in your Electrode applications.
 
 #### Install
+
 - Add the `electrode-csrf-jwt` component:
 
 ```bash
@@ -410,20 +443,19 @@ That's it! CSRF protection will be automatically enabled for endpoints added to 
 
 In addition to the above steps, the following modifications were made in order to demonstrate functionality:
 
-* A plugin with two endpoints was added as `server/plugins/csrf.js` and registered via `config/default.json`
-* AJAX testing logic was added to `client/components/csrf.jsx`
+- A plugin with two endpoints was added as `server/plugins/csrf.js` and registered via `config/default.json`
+- AJAX testing logic was added to `client/components/csrf.jsx`
 
 ---
 
-### <a name="electrode-electrify"></a>Electrode Electrify ###
+### <a name="electrode-electrify"></a>Electrode Electrify
 
 An Electrode Javascript bundle viewer aptly named [Electrify](https://github.com/electrode-io/electrify), this is a stunning visual tool that helps for analyzing the module tree of Webpack based projects. It's especially handy for catching large and/or duplicate modules which might be either bloating up your bundle or slowing down the build/install process.
 
-#### Integration points in your app ####
+#### Integration points in your app
 
 - Use [electrode-archetype-react-app](https://github.com/electrode-io/electrode-archetype-react-app) which is already integrated with [electrify](https://github.com/electrode-io/electrify) and part of [electrode-boilerplate-universal-react-node](https://github.com/electrode-io/electrode-boilerplate-universal-react-node), all you have to do is run **clap electrify** after installing [electrode-archetype-react-app](https://github.com/electrode-io/electrode-archetype-react-app) in your app.
-- [Electrify](https://github.com/electrode-io/electrify) dependency `sudo npm install -g electrode-electrify
-` and npm task runner integration.
+- [Electrify](https://github.com/electrode-io/electrify) dependency `sudo npm install -g electrode-electrify` and npm task runner integration.
 - [Electrify](https://github.com/electrode-io/electrify) command line interface (CLI) `electrify <path-to-stats.json> --open`.
 
 `Electrode-boilerplate-universal-react-node` & [electrode-scaffolder](https://github.com/electrode-io/generator-electrode) internally use `electrode-archetype-react-app` hence `clap electrify` on your terminal will start the bundle viewer in the browser.
@@ -434,16 +466,17 @@ Head over to the Electrify [repository](https://github.com/electrode-io/electrif
 
 ---
 
-### <a name="electrode-react-ssr-caching"></a>Electrode React SSR Caching ###
+### <a name="electrode-react-ssr-caching"></a>Electrode React SSR Caching
 
 [Electrode-react-ssr-caching](https://github.com/electrode-io/electrode-react-ssr-caching) module supports profiling React Server Side Rendering time and component caching to help you speed up SSR.
 
 It supports 2 types of caching:
 
-* Simple - Component Props become the cache key. This is useful for use cases like Header and Footer, where the number of variations of props data is minimal which will make sure the cache size stays small.
-* Template - Components Props are first tokenized and then the generated template html is cached. The idea is akin to generating logic-less handlebars template from your React components and then use string replace to process the template with different props. This is useful for use cases like displaying Product information in a Carousel where you have millions of products in the repository and only cache one templatized html and then do a string replace to generate the final html
+- Simple - Component Props become the cache key. This is useful for use cases like Header and Footer, where the number of variations of props data is minimal which will make sure the cache size stays small.
+- Template - Components Props are first tokenized and then the generated template html is cached. The idea is akin to generating logic-less handlebars template from your React components and then use string replace to process the template with different props. This is useful for use cases like displaying Product information in a Carousel where you have millions of products in the repository and only cache one templatized html and then do a string replace to generate the final html
 
 #### Install
+
 ```bash
 $ npm install --save electrode-react-ssr-caching
 ```
@@ -454,32 +487,32 @@ $ npm install --save electrode-react-ssr-caching
 
 - SSR caching of components only works in PRODUCTION mode, since the props(which are read only) are mutated for caching purposes and mutating of props is not allowed in development mode by react.
 
-- Make sure the `electrode-react-ssr-caching` module is imported first followed by the imports of react and react-dom module. SSR caching will not work if the ordering is changed since caching module has to have a chance to patch react's code first. Also if you are importing `electrode-react-ssr-caching`, `react`  and `react-dom` in the same file , make sure you are using all `require` or all `import`. Found that SSR caching was NOT working if, `electrode-react-ssr-caching` is `require`d first and then `react` and `react-dom` is imported.
+- Make sure the `electrode-react-ssr-caching` module is imported first followed by the imports of react and react-dom module. SSR caching will not work if the ordering is changed since caching module has to have a chance to patch react's code first. Also if you are importing `electrode-react-ssr-caching`, `react` and `react-dom` in the same file , make sure you are using all `require` or all `import`. Found that SSR caching was NOT working if, `electrode-react-ssr-caching` is `require`d first and then `react` and `react-dom` is imported.
 
 ---
 
 To demonstrate functionality, we have added:
 
-* `client/components/SSRCachingSimpleType.jsx` for Simple strategy.
-* `client/components/SSRCachingTemplateType.jsx` for Template strategy.
-* To enable caching using `electrode-react-ssr-caching`, we need to do the below configuration:
+- `client/components/SSRCachingSimpleType.jsx` for Simple strategy.
+- `client/components/SSRCachingTemplateType.jsx` for Template strategy.
+- To enable caching using `electrode-react-ssr-caching`, we need to do the below configuration:
 
 ```javascript
-  const cacheConfig = {
-    components: {
-      SSRCachingTemplateType: {
-        strategy: "template",
-        enable: true
-      },
-      SSRCachingSimpleType: {
-        strategy: "simple",
-        enable: true
-      }
+const cacheConfig = {
+  components: {
+    SSRCachingTemplateType: {
+      strategy: "template",
+      enable: true
+    },
+    SSRCachingSimpleType: {
+      strategy: "simple",
+      enable: true
     }
-  };
+  }
+};
 
-  SSRCaching.enableCaching();
-  SSRCaching.setCachingConfig(cacheConfig);
+SSRCaching.enableCaching();
+SSRCaching.setCachingConfig(cacheConfig);
 ```
 
 The above configuration is done in `server/index.js`.
@@ -488,11 +521,12 @@ To read more, go to [electrode-react-ssr-caching](https://github.com/electrode-i
 
 ---
 
-### <a name="redux-router-engine"></a>Electrode Redux Router Engine ###
+### <a name="redux-router-engine"></a>Electrode Redux Router Engine
 
 [Redux Router Engine](https://github.com/electrode-io/electrode-redux-router-engine) handles async data for React Server Side Rendering using [react-router], Redux, and the [Redux Server Rendering] pattern.
 
 #### Install
+
 ```bash
 $ npm install --save electrode-redux-router-engine
 ```
@@ -505,15 +539,14 @@ In this demo, the redux-router has been configured to work with the `server/view
 function createReduxStore(req, match) {
   const store = storeInitializer(req);
   return Promise.all([
-      // DO ASYNC THUNK ACTIONS HERE : store.dispatch(boostrapApp())
-      Promise.resolve({})
-    ]).then(() => {
-      return store;
+    // DO ASYNC THUNK ACTIONS HERE : store.dispatch(boostrapApp())
+    Promise.resolve({})
+  ]).then(() => {
+    return store;
   });
 }
 
-module.exports = (req) => {
-
+module.exports = req => {
   if (!req.server.app.routesEngine) {
     req.server.app.routesEngine = new ReduxRouterEngine({ routes, createReduxStore });
   }
@@ -552,14 +585,14 @@ The best way to demo this existing component is actually going to be in your `no
 Navigate to `<your-electrode-app>/node_modules/above-the-fold-only-server-render/lib/components/above-the-fold-only-server-render.js` line 29:
 
 ```javascript
-  var SHOW_TIMEOUT = 50;
+var SHOW_TIMEOUT = 50;
 ```
 
 When we use this module at [WalmartLabs](www.walmartlabs.com), it's all about optimization. You are going to change line 29 to slow down the SHOW_TIMEOUT so you can see the component wrapper in action:
 Change this to:
 
 ```javascript
-  var SHOW_TIMEOUT = 3000;
+var SHOW_TIMEOUT = 3000;
 ```
 
 Run the commands below and test it out in your app:
@@ -571,77 +604,80 @@ Run the commands below and test it out in your app:
 The code in the `<h3>` tags that are above and below the `<AboveTheFoldOnlyServerRender skip={true}> </AboveTheFoldOnlyServerRender>` will render first:
 
 ```javascript
-  import React from "react";
-  import {AboveTheFoldOnlyServerRender} from "above-the-fold-only-server-render";
+import React from "react";
+import { AboveTheFoldOnlyServerRender } from "above-the-fold-only-server-render";
 
-  export class AboveFold extends React.Component {
-
-    render() {
-      return (
-        <div>
-          <h3>Above-the-fold-only-server-render: Increase Your Performance</h3>
-          <AboveTheFoldOnlyServerRender skip={true}>
-              <div className="renderMessage" style={{color: "blue"}}>
-                <p>This will skip server rendering if the 'AboveTheFoldOnlyServerRender'
-                  lines are present, or uncommented out.</p>
-                <p>This will be rendered on the server and visible if the 'AboveTheFoldOnlyServerRender'
-                  lines are commented out.</p>
-                <p>Try manually toggling this component to see it in action</p>
-                <p>
-                  <a href="https://github.com/electrode-io/above-the-fold-only-server-render"
-                    target="_blank">Read more about this module and see our live demo
-                  </a>
-                </p>
-              </div>
-          </AboveTheFoldOnlyServerRender>
-          <h3>This is below the 'Above the fold closing tag'</h3>
-        </div>
-      );
-    }
+export class AboveFold extends React.Component {
+  render() {
+    return (
+      <div>
+        <h3>Above-the-fold-only-server-render: Increase Your Performance</h3>
+        <AboveTheFoldOnlyServerRender skip={true}>
+          <div className="renderMessage" style={{ color: "blue" }}>
+            <p>
+              This will skip server rendering if the 'AboveTheFoldOnlyServerRender' lines are
+              present, or uncommented out.
+            </p>
+            <p>
+              This will be rendered on the server and visible if the 'AboveTheFoldOnlyServerRender'
+              lines are commented out.
+            </p>
+            <p>Try manually toggling this component to see it in action</p>
+            <p>
+              <a
+                href="https://github.com/electrode-io/above-the-fold-only-server-render"
+                target="_blank"
+              >
+                Read more about this module and see our live demo
+              </a>
+            </p>
+          </div>
+        </AboveTheFoldOnlyServerRender>
+        <h3>This is below the 'Above the fold closing tag'</h3>
+      </div>
+    );
   }
+}
 ```
 
 You can also skip server side rendering by `setting context in your app and passing a contextKey prop`. Here is an example:
 
 ```js
+import PropTypes from "prop-types";
 
-  import PropTypes from "prop-types";
+const YourComponent = () => {
+  return (
+    <AboveTheFoldOnlyServerRender contextKey="aboveTheFoldOnlyServerRender.SomeComponent">
+      <div>This will not be server side rendered based on the context.</div>
+    </AboveTheFoldOnlyServerRender>
+  );
+};
 
-  const YourComponent = () => {
-      return (
-        <AboveTheFoldOnlyServerRender contextKey="aboveTheFoldOnlyServerRender.SomeComponent">
-          <div>This will not be server side rendered based on the context.</div>
-        </AboveTheFoldOnlyServerRender>
-      );
-  };
-
-  class YourApp extends React.Component {
-    getChildContext() {
-      return {
-        aboveTheFoldOnlyServerRender: {
-          YourComponent: true
-        }
-      };
-    }
-
-    render() {
-      return (
-        <YourComponent />
-      );
-    }
+class YourApp extends React.Component {
+  getChildContext() {
+    return {
+      aboveTheFoldOnlyServerRender: {
+        YourComponent: true
+      }
+    };
   }
 
-  YourApp.childContextTypes = {
-    aboveTheFoldOnlyServerRender: PropTypes.shape({
-      AnotherComponent: PropTypes.bool
-    })
-  };
+  render() {
+    return <YourComponent />;
+  }
+}
+
+YourApp.childContextTypes = {
+  aboveTheFoldOnlyServerRender: PropTypes.shape({
+    AnotherComponent: PropTypes.bool
+  })
+};
 ```
 
-To learn more about this essential stand alone module  visit the `above-the-fold-only-server-render` [Github repo](https://github.com/electrode-io/above-the-fold-only-server-render).
+To learn more about this essential stand alone module visit the `above-the-fold-only-server-render` [Github repo](https://github.com/electrode-io/above-the-fold-only-server-render).
 
+### <a name="electrode-bundle-analyzer"></a>Electrode Bundle Analyzer
 
-### <a name="electrode-bundle-analyzer"></a>Electrode Bundle Analyzer ###
 [Bundle Analyzer](https://github.com/electrode-io/electrode-bundle-analyzer) is a [webpack](https://webpack.github.io) tool that gives you a detail list of all the files that went into your deduped and minified bundle JS file.
 
 ## Install
@@ -664,9 +700,9 @@ Bundle Analyzer looks for the webpack module ID comment that normally looks some
 
 You can find more information about it in the Bundle Analyzer [readme](https://github.com/electrode-io/electrode-bundle-analyzer#generating-the-necessary-data) file.
 
-## Command-Line Interface ##
+## Command-Line Interface
 
-``` bash
+```bash
 Usage: analyze-bundle --bundle [bundle.js] --stats [stats.json] --dir
 [output_dir] --rewrite
 
@@ -676,18 +712,17 @@ Options:
   -r, --rewrite  rewrite the bundle file with module ID comments removed
   -d, --dir      directory to write the analyze results       [default: ".etmp"]
   -h, --help     Show help                                             [boolean]
-
 ```
 
 When you install Bundle Analyzer globally, `analyze-bundle` command-line tool is made
 available as the quickest means of checking out your bundle.
 
-If you don't specify an output directory, a default one `.etmp` will be created and a `.gitignore `file is also added there to avoid git picking it up.
+If you don't specify an output directory, a default one `.etmp` will be created and a `.gitignore`file is also added there to avoid git picking it up.
 
 Two files will be written to the output directory:
 
-  - `bundle.analyze.json`
-  - `bundle.analyze.tsv`
+- `bundle.analyze.json`
+- `bundle.analyze.tsv`
 
 The `tsv` file is a Tab Separated Values text file that you can easily import into a spreadsheet for viewing.
 
@@ -705,6 +740,7 @@ Module ID       Full Path       Identity Path   Size (bytes)
 You can view an example [`bundle.analyze.tsv`](https://docs.google.com/spreadsheets/d/1IomT2fYCKEwVY0CO-0jImc7CBj_uAmgy70Egsm4CnVE/edit?usp=sharing&rm=minimal) output using the [Electrode Boilerplate](https://github.com/electrode-io/electrode-boilerplate-universal-react-node#electrode-bundle-analyzer) code.
 
 ## Run
+
 The Electrode Boilerplate's webpack config is already preconfigured to work with Bundle Analyzer, we just need to set the `OPTIMIZE_STATS=true` environment variable to generate the appropriate webpack build output:
 
 ```bash
@@ -718,5 +754,5 @@ Built with :heart: by [Team Electrode](https://github.com/orgs/electrode-io/peop
 
 [daviddm-image]: https://david-dm.org/electrode-io/electrode/status.svg?path=samples/universal-react-node
 [daviddm-url]: https://david-dm.org/electrode-io/electrode?path=samples/universal-react-node
-[daviddm-dev-image]:https://david-dm.org/electrode-io/electrode/dev-status.svg?path=samples/universal-react-node
-[daviddm-dev-url]:https://david-dm.org/electrode-io/electrode?path=samples/universal-react-nodeM?type-dev
+[daviddm-dev-image]: https://david-dm.org/electrode-io/electrode/dev-status.svg?path=samples/universal-react-node
+[daviddm-dev-url]: https://david-dm.org/electrode-io/electrode?path=samples/universal-react-nodeM?type-dev

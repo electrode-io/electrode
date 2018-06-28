@@ -27,7 +27,8 @@
     "start": "clap server",
     "hot": "clap hot",
     "test": "flow && clap build && clap check",
-    "coverage": "clap check"
+    "coverage": "clap check",
+    "flow-typed-install": "clap flow-typed-install"
   },
   "dependencies": {
     "bluebird": "^3.4.6",
