@@ -1,7 +1,6 @@
 # Electrode Demo Component
 
-__COMPONENT DESCRIPTION GOES HERE__
-
+**COMPONENT DESCRIPTION GOES HERE**
 
 ## Demo & Examples
 
@@ -11,19 +10,19 @@ To build the package locally, run:
 
 ```
 npm install
-
+npm run flow-typed-install
 ```
 
-To run the package demo locally, run the `demo-app` :
+> Note: [`flow-typed`](https://github.com/flowtype/flow-typed) is a central repository for Flow library definitions. By default, Flow will ignore the 3rd-party libraries which were not written with Flow and leave them untyped. The `flow-typed` repo is a collection of high-quality library definitions which allow you to describe the interface of a module or library separate from the implementation of that module/library.
+
+> To run the package demo locally, run the `demo-app` :
 
 ```
 npm install
 clap dev
-
 ```
 
 Then open [`localhost:8000`](http://localhost:8000) in a browser.
-
 
 ## Installation
 
@@ -35,10 +34,9 @@ You can also use the standalone build by including `dist/demo-component.js` in y
 npm install demo-component --save
 ```
 
-
 ## Usage
 
-__EXPLAIN USAGE HERE__
+**EXPLAIN USAGE HERE**
 
 ```
 var DemoComponent = require('demo-component');
@@ -48,12 +46,11 @@ var DemoComponent = require('demo-component');
 
 ### Properties
 
-* __DOCUMENT PROPERTIES HERE__
+- **DOCUMENT PROPERTIES HERE**
 
 ### Notes
 
-__ADDITIONAL USAGE NOTES__
-
+**ADDITIONAL USAGE NOTES**
 
 ## Development (`src`, `lib` and the build process)
 
@@ -61,6 +58,6 @@ __ADDITIONAL USAGE NOTES__
 
 ## License
 
-__PUT LICENSE HERE__
+**PUT LICENSE HERE**
 
 Copyright (c) 2017 electrode.
