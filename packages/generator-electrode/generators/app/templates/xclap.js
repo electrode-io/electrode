@@ -9,10 +9,22 @@ process.env.SERVER_ES6 = true;
  * This will run webpack dev server as part of your app server.
  */
 
-// process.env.WEBPACK_DEV_MIDDLEWARE = true;
+process.env.WEBPACK_DEV_MIDDLEWARE = true;
 
 /*
  * Enable webpack's NodeSourcePlugin to simulate NodeJS libs in browser
+ *
+ * This basically adds a bunch of extra JavaScript to the browser to simulate
+ * some NodeJS modules like `process`, `console`, `Buffer`, and `global`.
+ *
+ * Docs here:
+ * https://github.com/webpack/docs/wiki/internal-webpack-plugins#nodenodesourcepluginoptions
+ *
+ * Note that the extra JavaScript could be substantial and adds more than 100K
+ * of minified JS to your browser bundle.
+ *
+ * But if you see Errors like "Uncaught ReferenceError: global is not defined", then
+ * the quick fix is to uncomment the line below.
  */
 
 // process.env.ENABLE_NODESOURCE_PLUGIN = true;
@@ -22,6 +34,11 @@ process.env.SERVER_ES6 = true;
  */
 
 // process.env.KARMA_BROWSER = "phantomjs";
+
+/******************************************************************************
+ * Begin webpack-dev-server only settings.                                    *
+ * These do not apply if WEBPACK_DEV_MIDDLEWARE is enabled                    *
+ ******************************************************************************/
 
 /*
  * Turn off using electrode-webpack-reporter to show visual report of your webpack
@@ -43,6 +60,10 @@ process.env.SERVER_ES6 = true;
  */
 
 // process.env.WEBPACK_DEV_HTTPS = true;
+
+/******************************************************************************
+ * End webpack-dev-server only settings.                                      *
+ ******************************************************************************/
 
 require("electrode-archetype-react-app")();
 

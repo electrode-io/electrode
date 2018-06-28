@@ -15,11 +15,12 @@ import { routes } from "../../client/routes";
 //
 //
 
+let routesEngine;
+
 module.exports = req => {
-  const app = (req.server && req.server.app) || req.app;
-  if (!app.routesEngine) {
-    app.routesEngine = new ReduxRouterEngine({ routes });
+  if (!routesEngine) {
+    routesEngine = new ReduxRouterEngine({ routes });
   }
 
-  return app.routesEngine.render(req);
+  return routesEngine.render(req);
 };
