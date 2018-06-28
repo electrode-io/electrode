@@ -798,7 +798,7 @@ Individual .babelrc files were generated for you in src/client and src/server
       task: mkCmd(`flow init`)
     },
     "flow-typed-install": {
-      desc: "A central repository for Flow library definitions",
+      desc: "Install flow 3rd-party interface library definitions from flow-typed repo.",
       task: mkCmd(`flow-typed install --packageDir ${archetype.devDir}`)
     }
   };
