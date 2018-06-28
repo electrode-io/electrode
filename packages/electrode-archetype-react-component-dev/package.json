@@ -57,6 +57,7 @@
     "eslint-plugin-react": "^7.4.0",
     "file-loader": "^0.8.4",
     "flow-bin": "^0.74.0",
+    "flow-typed": "^2.4.0",
     "fs-extra": "^0.26.4",
     "glob": "^7.0.6",
     "history": "^1.13.1",
