@@ -1,3 +1,97 @@
+# 6/28/2018
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-react-app@5.3.0 `(5.2.1 => 5.3.0)`
+-   electrode-archetype-react-app-dev@5.3.0 `(5.2.1 => 5.3.0)`
+-   electrode-archetype-react-component@5.3.0 `(5.2.1 => 5.3.0)`
+-   electrode-archetype-react-component-dev@5.3.0 `(5.2.1 => 5.3.0)`
+-   electrode-ignite@2.1.0 `(2.0.7 => 2.1.0)`
+-   electrode-react-webapp@2.5.0 `(2.4.0 => 2.5.0)`
+-   electrode-redux-router-engine@2.0.0 `(1.5.2 => 2.0.0)`
+-   generator-electrode@4.1.0 `(4.0.7 => 4.1.0)`
+
+### Lerna Updated
+
+-   electrode-webpack-reporter@0.4.6 `(0.4.5 => 0.4.6)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [minor] add flow-typed for flow library definitions ([#836](https://github.com/electrode-io/electrode/pull/836)) [commit](http://github.com/electrode-io/electrode/commit/fbb066a14c3e9c1a5d5c661f7f99d4c31b31eff5)
+    -   [minor] support SSR hot module reload ([#840](https://github.com/electrode-io/electrode/pull/840)) [commit](http://github.com/electrode-io/electrode/commit/e084aee07abc74a72781e819c3e43846b1b7394e)
+    -   always show reporter url on warning/errors [commit](http://github.com/electrode-io/electrode/commit/a8f77bc0baa6e4909512d566314ed0b8eaa9cbf3)
+    -   avoid cleaning dist for dev build ([#833](https://github.com/electrode-io/electrode/pull/833)) [commit](http://github.com/electrode-io/electrode/commit/c87d77fea06f0067c7b1fbe8a9fe4d4f7a78261a)
+    -   add hot middleware to webpack hapi plugin ([#829](https://github.com/electrode-io/electrode/pull/829)) [commit](http://github.com/electrode-io/electrode/commit/b278f7f5fdcd7c43d442719c58390e1f8fb0d7e3)
+    -   [minor] Electrode archetype flow support ([#814](https://github.com/electrode-io/electrode/pull/814)) [commit](http://github.com/electrode-io/electrode/commit/9f5ab90eadd9fe9453a731cc776b6e12b8aef998)
+    -   hapi plugin to use webpack-dev-middleware [commit](http://github.com/electrode-io/electrode/commit/4b9554b8baeb017281a5da3d10a6cd7b90ba6480)
+    -   add serve-index locally for mods [commit](http://github.com/electrode-io/electrode/commit/a84766737c2d2c705f659379ba2e83d6a13f2f6f)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   [minor] add flow-typed to archetype component ([#838](https://github.com/electrode-io/electrode/pull/838)) [commit](http://github.com/electrode-io/electrode/commit/c99b7625fe4ec2435c0f163a6651f6d32c9b1f21)
+    -   [minor] component arch flow support ([#823](https://github.com/electrode-io/electrode/pull/823)) [commit](http://github.com/electrode-io/electrode/commit/68164c9175e1225a491c4346b790173820a73fef)
+
+-   `packages/electrode-ignite`
+
+    -   [minor] update to new generator-electrode [commit](http://github.com/electrode-io/electrode/commit/36b599fc542c9dc60e73d323bd66d43230296cfa)
+
+-   `packages/electrode-react-webapp`
+
+    -   [minor] refresh content module for webpack dev mode ([#835](https://github.com/electrode-io/electrode/pull/835)) [commit](http://github.com/electrode-io/electrode/commit/3a7e8259fff7ec4e952f0dd43192eac13bfa4124)
+    -   better SSR content loading by defering and logging error ([#817](https://github.com/electrode-io/electrode/pull/817)) [commit](http://github.com/electrode-io/electrode/commit/04fb81a8f2fd73d011109bc50687560957e7b0e0)
+    -   support tokens in script and style tags ([#813](https://github.com/electrode-io/electrode/pull/813)) [commit](http://github.com/electrode-io/electrode/commit/48dc4598668f2bf24430c0c71d7c50f49d295fef)
+
+-   `packages/electrode-redux-router-engine`
+
+    -   [major] update redux router engine to react router 4 [commit](http://github.com/electrode-io/electrode/commit/de76db23b29342345cb4e600dc2cee8ba802f00a)
+
+-   `packages/generator-electrode`
+
+    -   [minor] support SSR hot module reload ([#840](https://github.com/electrode-io/electrode/pull/840)) [commit](http://github.com/electrode-io/electrode/commit/e084aee07abc74a72781e819c3e43846b1b7394e)
+    -   fix HMR reducer replacement [commit](http://github.com/electrode-io/electrode/commit/c6e648ad1da065c8d26c06fe92a7f813328647d3)
+    -   use span to avoid inconsistent spaces ([#832](https://github.com/electrode-io/electrode/pull/832)) [commit](http://github.com/electrode-io/electrode/commit/0eaba292daf4c7b8db8a771038a0eb44f1c85cec)
+    -   add hot middleware to webpack hapi plugin ([#829](https://github.com/electrode-io/electrode/pull/829)) [commit](http://github.com/electrode-io/electrode/commit/b278f7f5fdcd7c43d442719c58390e1f8fb0d7e3)
+    -   make sure all template tokens are syntatically legal ([#827](https://github.com/electrode-io/electrode/pull/827)) [commit](http://github.com/electrode-io/electrode/commit/d24e34b10ecb8ad87714f530cffdc217008f4fb6)
+    -   [minor] Update component generator ([#824](https://github.com/electrode-io/electrode/pull/824)) [commit](http://github.com/electrode-io/electrode/commit/6dcbce98d29a340f9ec66eff9da2de6817e2af1b)
+    -   reformat archetype app flow support ([#826](https://github.com/electrode-io/electrode/pull/826)) [commit](http://github.com/electrode-io/electrode/commit/8c87c63d1acab7055916d9d98315a7c4c8b9f8e7)
+    -   [minor] update generator to use react-router-4 [commit](http://github.com/electrode-io/electrode/commit/c38a22138c8be7ff1886482d4e354e56dd7c5fee)
+    -   [chore] format code [commit](http://github.com/electrode-io/electrode/commit/27ddd052bf6e082e2525ac436dbf1daac10b0746)
+    -   fix typo of electrode-server event name ([#821](https://github.com/electrode-io/electrode/pull/821)) [commit](http://github.com/electrode-io/electrode/commit/072b918a8a614c78dbb294a0486e822d40480a69)
+    -   generate flowconfig if user want to use flow ([#819](https://github.com/electrode-io/electrode/pull/819)) [commit](http://github.com/electrode-io/electrode/commit/2a9eb951bd0cd9cb338871144ba2620b613e0872)
+    -   hapi plugin to use webpack-dev-middleware [commit](http://github.com/electrode-io/electrode/commit/4b9554b8baeb017281a5da3d10a6cd7b90ba6480)
+
+-   `samples/demo-component`
+
+    -   add flow to demo component ([#822](https://github.com/electrode-io/electrode/pull/822)) [commit](http://github.com/electrode-io/electrode/commit/d4617df6a0d01902c574d2a12b1dd9a236f3418f)
+
+-   `samples/universal-react-node`
+
+    -   update readme & scripts [commit](http://github.com/electrode-io/electrode/commit/e20718a471e50057a1094b67741d7d13e61c2bbc)
+    -   add flow-typed to example app for Flow library definitions [commit](http://github.com/electrode-io/electrode/commit/03a615a49241191560bc732c0baed599b70fcb86)
+    -   reformat archetype app flow support ([#826](https://github.com/electrode-io/electrode/pull/826)) [commit](http://github.com/electrode-io/electrode/commit/8c87c63d1acab7055916d9d98315a7c4c8b9f8e7)
+    -   add hapi good logger to sample [commit](http://github.com/electrode-io/electrode/commit/2cc382a0569079e8afba9f7babd9e5ceab9d3612)
+    -   update sample to react router 4 [commit](http://github.com/electrode-io/electrode/commit/8182e720335570b2b86da95db63e90519fe11409)
+    -   Add and fix the type checked by flow for examples ([#815](https://github.com/electrode-io/electrode/pull/815)) [commit](http://github.com/electrode-io/electrode/commit/4afa9a427049c64f0f8683306b3eacd489796178)
+
+-   `docs`
+
+    -   add flow docs for component ([#831](https://github.com/electrode-io/electrode/pull/831)) [commit](http://github.com/electrode-io/electrode/commit/ae6344dd9f1fb927e46df83ec3088914c954ba16)
+    -   [docs] add app archetype flow docs ([#816](https://github.com/electrode-io/electrode/pull/816)) [commit](http://github.com/electrode-io/electrode/commit/fdd358f5fe0b692f71203a30ca5ec956cde11e8e)
+    -   update redux router engine doc [commit](http://github.com/electrode-io/electrode/commit/995395941eca40c4c4dcf6f3af4ba30ebc6a5b9e)
+    -   [major] update redux router engine to react router 4 [commit](http://github.com/electrode-io/electrode/commit/de76db23b29342345cb4e600dc2cee8ba802f00a)
+    -   hapi plugin to use webpack-dev-middleware [commit](http://github.com/electrode-io/electrode/commit/4b9554b8baeb017281a5da3d10a6cd7b90ba6480)
+
+-   `MISC`
+
+    -   [doc] add gitbook versioning by branches [commit](http://github.com/electrode-io/electrode/commit/d354e82c58207b50e4941a8ce4ccea35327cca50)
+    -   preserve other files under tmp dir when testing generator ([#830](https://github.com/electrode-io/electrode/pull/830)) [commit](http://github.com/electrode-io/electrode/commit/df06d7f0d4a12a7ad13b35816e5d17532c7864d3)
+    -   test generate hapi app only [commit](http://github.com/electrode-io/electrode/commit/827610a1410524954357ff92fbdb8b250357051c)
+    -   [chore] fix CI build [commit](http://github.com/electrode-io/electrode/commit/15bc60f335865a6dc2aee8e64074339e70b83f18)
+
 # 6/15/2018
 
 ## Packages
