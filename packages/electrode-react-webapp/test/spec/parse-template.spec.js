@@ -4,14 +4,17 @@ const AsyncTemplate = require("../../lib/async-template");
 const Path = require("path");
 const expect = require("chai").expect;
 const _ = require("lodash");
+const xstdout = require("xstdout");
 
 describe("AsyncTemplate._parseTemplate", function() {
   it("should parse template into tokens", () => {
     const htmlFile = Path.join(__dirname, "../data/template1.html");
+    const intercept = xstdout.intercept(true);
     const asyncTemplate = new AsyncTemplate({
       htmlFile,
       tokenHandlers: "./test/fixtures/token-handler"
     });
+    intercept.restore();
     const expected = [
       { str: "<html>\n\n<head>" },
       {
@@ -84,11 +87,12 @@ describe("AsyncTemplate._parseTemplate", function() {
 
   it("should parse template with token at end", () => {
     const htmlFile = Path.join(__dirname, "../data/template2.html");
+    const intercept = xstdout.intercept(true);
     const asyncTemplate = new AsyncTemplate({
       htmlFile,
       tokenHandlers: "./test/fixtures/token-handler"
     });
-
+    intercept.restore();
     const expected = [
       { str: "<html>\n\n<head>" },
       {
@@ -147,11 +151,15 @@ describe("AsyncTemplate._parseTemplate", function() {
 
   it("should parse template multi line tokens with props", () => {
     const htmlFile = Path.join(__dirname, "../data/template3.html");
+
+    const intercept = xstdout.intercept(true);
+
     const asyncTemplate = new AsyncTemplate({
       htmlFile,
       tokenHandlers: "./test/fixtures/token-handler"
     });
 
+    intercept.restore();
     const expected = [
       {
         str: "<html>\n\n<head>"

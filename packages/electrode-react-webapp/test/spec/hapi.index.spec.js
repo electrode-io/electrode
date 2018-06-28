@@ -2,6 +2,7 @@
 
 /* eslint-disable quotes */
 
+const Fs = require("fs");
 const Promise = require("bluebird");
 const assign = require("object-assign");
 const electrodeServer = require("electrode-server");
@@ -106,19 +107,24 @@ describe("hapi electrode-react-webapp", () => {
 
   it("should successfully render to static markup", () => {
     return electrodeServer(config).then(server => {
-      return server
-        .inject({
-          method: "GET",
-          url: "/"
-        })
-        .then(res => {
-          expect(res.statusCode).to.equal(200);
-          expect(res.result).to.contain("<title>Electrode App</title>");
-          expect(res.result).to.contain("<div>Hello Electrode</div>");
-          expect(res.result).to.contain("<script>console.log('Hello');</script>");
-          expect(res.result).to.not.contain("Unknown marker");
-          stopServer(server);
-        })
+      const makeRequest = () => {
+        return server
+          .inject({
+            method: "GET",
+            url: "/"
+          })
+          .then(res => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.result).to.contain("<title>Electrode App</title>");
+            expect(res.result).to.contain("<div>Hello Electrode</div>");
+            expect(res.result).to.contain("<script>console.log('Hello');</script>");
+            expect(res.result).to.not.contain("Unknown marker");
+          });
+      };
+
+      return makeRequest()
+        .then(() => makeRequest())
+        .then(() => stopServer(server))
         .catch(err => {
           stopServer(server);
           throw err;
@@ -762,7 +768,7 @@ describe("hapi electrode-react-webapp", () => {
     configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
     configOptions.stats = "test/data/stats-test-one-bundle.json";
     configOptions.htmlFile = "test/data/index-1.html";
-    configOptions.paths["/{args*}"].htmlFile = Path.resolve("test/data/index-2.html");
+    paths.htmlFile = Path.resolve("test/data/index-2.html");
 
     return electrodeServer(config).then(server => {
       return server
@@ -1214,6 +1220,168 @@ describe("hapi electrode-react-webapp", () => {
           stopServer(server);
           throw err;
         });
+    });
+  });
+
+  describe("with webpackDev", function() {
+    it("should skip if webpack dev is not valid", () => {
+      return electrodeServer(config).then(server => {
+        server.ext({
+          type: "onRequest",
+          method: (request, reply) => {
+            request.app.webpackDev = { valid: false };
+            reply.continue();
+          }
+        });
+        const makeRequest = () => {
+          return server.inject({ method: "GET", url: "/" }).then(res => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.result).to.contain("<title>Electrode App</title>");
+            expect(res.result).to.contain("<!-- Webpack still compiling -->");
+          });
+        };
+
+        return makeRequest()
+          .then(() => stopServer(server))
+          .catch(err => {
+            stopServer(server);
+            throw err;
+          });
+      });
+    });
+
+    it("should skip if webpack compile has errors", () => {
+      return electrodeServer(config).then(server => {
+        server.ext({
+          type: "onRequest",
+          method: (request, reply) => {
+            request.app.webpackDev = { valid: true, hasErrors: true };
+            reply.continue();
+          }
+        });
+        const makeRequest = () => {
+          return server.inject({ method: "GET", url: "/" }).then(res => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.result).to.contain("<title>Electrode App</title>");
+            expect(res.result).to.contain("<!-- Webpack compile has errors -->");
+          });
+        };
+
+        return makeRequest()
+          .then(() => stopServer(server))
+          .catch(err => {
+            stopServer(server);
+            throw err;
+          });
+      });
+    });
+
+    it("should successfully render to static markup", () => {
+      return electrodeServer(config).then(server => {
+        const compileTime = Date.now();
+        server.ext({
+          type: "onRequest",
+          method: (request, reply) => {
+            request.app.webpackDev = { valid: true, hasErrors: false, compileTime };
+            reply.continue();
+          }
+        });
+        const makeRequest = () => {
+          return server
+            .inject({
+              method: "GET",
+              url: "/"
+            })
+            .then(res => {
+              expect(res.statusCode).to.equal(200);
+              expect(res.result).to.contain("<title>Electrode App</title>");
+              expect(res.result).to.contain("<div>Hello Electrode</div>");
+              expect(res.result).to.contain("<script>console.log('Hello');</script>");
+              expect(res.result).to.not.contain("Unknown marker");
+            });
+        };
+
+        return makeRequest()
+          .then(() => makeRequest())
+          .then(() => stopServer(server))
+          .catch(err => {
+            stopServer(server);
+            throw err;
+          });
+      });
+    });
+
+    it("should refresh content module", () => {
+      paths.content = {
+        module: "./test/data/test-content"
+      };
+
+      return electrodeServer(config).then(server => {
+        let compileTime = Date.now();
+
+        const testContent1 = {
+          status: 200,
+          html: "<div>Test1 Electrode</div>",
+          prefetch: "console.log('test1');"
+        };
+
+        const testContent2 = {
+          status: 200,
+          html: "<div>Test2 Electrode</div>",
+          prefetch: "console.log('test2');"
+        };
+
+        server.ext({
+          type: "onRequest",
+          method: (request, reply) => {
+            request.app.webpackDev = { valid: true, hasErrors: false, compileTime };
+            reply.continue();
+          }
+        });
+        const makeRequest = () => {
+          return server.inject({
+            method: "GET",
+            url: "/"
+          });
+        };
+
+        const updateTestContent = obj => {
+          Fs.writeFileSync(
+            Path.resolve("test/data/test-content.js"),
+            `module.exports = ${JSON.stringify(obj, null, 2)};\n`
+          );
+        };
+
+        updateTestContent(testContent1);
+
+        return Promise.try(makeRequest)
+          .then(res => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.result).to.contain("<title>Electrode App</title>");
+            expect(res.result).to.contain("<div>Test1 Electrode</div>");
+            expect(res.result).to.contain("<script>console.log('test1');</script>");
+            expect(res.result).to.not.contain("Unknown marker");
+            updateTestContent(testContent2);
+            compileTime = Date.now();
+          })
+          .then(() => makeRequest())
+          .then(res => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.result).to.contain("<title>Electrode App</title>");
+            expect(res.result).to.contain("<div>Test2 Electrode</div>");
+            expect(res.result).to.contain("<script>console.log('test2');</script>");
+            expect(res.result).to.not.contain("Unknown marker");
+            updateTestContent(testContent2);
+          })
+          .then(() => stopServer(server))
+          .catch(err => {
+            stopServer(server);
+            throw err;
+          })
+          .finally(() => {
+            updateTestContent(testContent1);
+          });
+      });
     });
   });
 });

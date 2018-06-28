@@ -45,7 +45,7 @@ const registerRoutes = (server, options) => {
         );
         return ReactWebapp.resolveContent(pathData.content);
       }
-      return { status: 200, html: "" };
+      return { content: { status: 200, html: "" } };
     };
 
     const routeOptions = ReactWebapp.setupPathOptions(registerOptions, path);
@@ -57,8 +57,25 @@ const registerRoutes = (server, options) => {
       method: pathData.method || "GET",
       path,
       config: pathData.config || {},
-      handler: (req, reply) =>
-        handleRoute(req, reply, routeHandler, content || (content = resolveContent()))
+      handler: (req, reply) => {
+        if (req.app.webpackDev) {
+          const wpd = req.app.webpackDev;
+          if (!wpd.valid) {
+            content = ReactWebapp.resolveContent("<!-- Webpack still compiling -->");
+          } else if (wpd.hasErrors) {
+            content = ReactWebapp.resolveContent("<!-- Webpack compile has errors -->");
+          } else if (!content || content.resolveTime < wpd.compileTime) {
+            if (content && content.fullPath) {
+              delete content.xrequire.cache[content.fullPath];
+            }
+            content = resolveContent();
+          }
+        } else if (!content) {
+          content = resolveContent();
+        }
+
+        handleRoute(req, reply, routeHandler, content.content);
+      }
     });
   });
 };

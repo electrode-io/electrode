@@ -81,21 +81,37 @@ const setupPathOptions = (routeOptions, path) => {
 };
 
 const resolveContent = (content, xrequire) => {
+  const resolveTime = Date.now();
+
   if (!_.isString(content) && !_.isFunction(content) && content.module) {
-    const module = content.module.startsWith(".")
-      ? Path.join(process.cwd(), content.module)
-      : content.module;
+    const mod = content.module.startsWith(".") ? Path.resolve(content.module) : content.module;
+
     xrequire = xrequire || require;
+
     try {
-      return xrequire(module);
-    } catch (err) {
-      const msg = `electrode-react-webapp: load SSR content ${module} failed`;
-      console.error(msg, err); // eslint-disable-line
-      return msg;
+      return {
+        fullPath: xrequire.resolve(mod),
+        xrequire,
+        resolveTime,
+        content: xrequire(mod)
+      };
+    } catch (error) {
+      const msg = `electrode-react-webapp: load SSR content ${mod} failed - ${error.message}`;
+      console.error(msg, "\n", error); // eslint-disable-line
+      return {
+        fullPath: null,
+        error,
+        resolveTime,
+        content: msg
+      };
     }
   }
 
-  return content;
+  return {
+    fullPath: null,
+    resolveTime,
+    content
+  };
 };
 
 module.exports = {

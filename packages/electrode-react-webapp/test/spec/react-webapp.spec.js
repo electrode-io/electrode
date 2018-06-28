@@ -8,21 +8,26 @@ describe("react-webapp", function() {
   describe("resolveContent", function() {
     it("should require module with relative path", () => {
       const f = "./test/data/foo.js";
-      expect(reactWebapp.resolveContent({ module: f })).to.equal("hello");
+      expect(reactWebapp.resolveContent({ module: f }).content).to.equal("hello");
     });
 
     it("should log error if resolving content fail", () => {
       const intercept = xstdout.intercept(true);
       const f = "./test/data/bad-content.js";
-      expect(reactWebapp.resolveContent({ module: f })).includes("test/data/bad-content.js failed");
+      const content = reactWebapp.resolveContent({ module: f });
       intercept.restore();
+      expect(content.content).includes("test/data/bad-content.js failed");
       expect(intercept.stderr.join("")).includes("Error: Cannot find module 'foo-blah'");
     });
+
     it("should require module", () => {
       let mod;
       const fooRequire = x => (mod = x);
+      fooRequire.resolve = x => x;
       const f = "test";
-      expect(reactWebapp.resolveContent({ module: f }, fooRequire)).to.equal(f);
+      const content = reactWebapp.resolveContent({ module: f }, fooRequire);
+      expect(content.content).to.equal(f);
+      expect(content.fullPath).to.equal(f);
       expect(mod).to.equal(f);
     });
   });
@@ -31,6 +36,7 @@ describe("react-webapp", function() {
     it("should not add default handler if it's already included in options", () => {
       const htmlFile = Path.resolve("test/fixtures/test-render-context.html");
       const defaultReactHandler = Path.join(__dirname, "../../lib/react/token-handlers");
+      const intercept = xstdout.intercept(true);
       return reactWebapp
         .makeRouteHandler({
           htmlFile,
@@ -53,6 +59,7 @@ describe("react-webapp", function() {
           __internals: { assets: {}, chunkSelector: () => ({}) }
         })({ request: {}, content: { status: 200, html: "" } })
         .then(result => {
+          intercept.restore();
           const expected = `
 from wants next module
 from async ok module
@@ -65,6 +72,10 @@ not found
 from string only module
 from async ok module`;
           expect(result).to.equal(expected);
+        })
+        .catch(err => {
+          intercept.restore();
+          throw err;
         });
     });
   });

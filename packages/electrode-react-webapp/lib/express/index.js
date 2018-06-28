@@ -41,7 +41,7 @@ const registerRoutes = (app, options, next = () => {}) => {
         );
         return ReactWebapp.resolveContent(v.content);
       }
-      return { status: 200, html: "" };
+      return { content: { status: 200, html: "" } };
     };
 
     const routeOptions = _.defaults({ htmlFile: v.htmlFile }, registerOptions);
@@ -58,9 +58,10 @@ const registerRoutes = (app, options, next = () => {}) => {
       if (method === "*") {
         method = "ALL";
       }
-      app[method.toLowerCase()](path, (req, res) =>
-        handleRoute(req, res, routeHandler, content || (content = resolveContent()))
-      );
+      app[method.toLowerCase()](path, (req, res) => {
+        if (!content) content = resolveContent();
+        handleRoute(req, res, routeHandler, content.content);
+      });
     });
   });
 
