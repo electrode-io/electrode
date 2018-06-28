@@ -512,6 +512,9 @@ Individual .babelrc files were generated for you in src/client and src/server
       desc: "Start your app with watch in development mode with webpack-dev-server",
       dep: [".remove-log-files", ".development-env"],
       task: function() {
+        if (!Fs.existsSync(".isomorphic-loader-config.json")) {
+          Fs.writeFileSync(".isomorphic-loader-config.json", JSON.stringify({}));
+        }
         const args = taskArgs(this.argv);
 
         return [
@@ -630,11 +633,11 @@ Individual .babelrc files were generated for you in src/client and src/server
       dep: [".init-bundle.valid.log"],
       desc: "Start app's node server in watch mode with nodemon",
       task: function() {
-        const watches = [
-          archetype.webpack.devMiddleware ? "" : Path.join(eTmpDir, "bundle.valid.log"),
-          AppMode.src.server,
-          "config"
-        ]
+        const watches = (archetype.webpack.devMiddleware
+          ? []
+          : [Path.join(eTmpDir, "bundle.valid.log"), AppMode.src.server]
+        )
+          .concat("config")
           .filter(x => x)
           .map(n => `--watch ${n}`)
           .join(" ");

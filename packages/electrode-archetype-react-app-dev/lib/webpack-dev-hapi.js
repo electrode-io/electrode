@@ -18,6 +18,7 @@ const chalk = require("chalk");
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const _ = require("lodash");
 const statsUtils = require("./stats-utils");
+const statsMapper = require("./stats-mapper");
 
 function register(server, options, next) {
   if (!archetype.webpack.devMiddleware) {
@@ -121,7 +122,13 @@ function register(server, options, next) {
     }
   };
 
-  let lastReporterOptions;
+  const webpackDev = {
+    lastReporterOptions: undefined,
+    hasErrors: false,
+    valid: false,
+    compileTime: 0
+  };
+
   let returnReporter;
 
   defaultReporter = (middlewareOptions, reporterOptions) => {
@@ -132,6 +139,10 @@ function register(server, options, next) {
       const notOk = Boolean(error || warning);
       const but = (notOk && chalk.yellow(" but has")) || "";
       console.log(`webpack bundle is now ${chalk.green("VALID")}${but}${error}${warning}`);
+
+      webpackDev.valid = true;
+      webpackDev.hasErrors = stats.hasErrors();
+      webpackDev.compileTime = Date.now();
 
       const baseUrl = () =>
         Url.format({
@@ -145,12 +156,25 @@ function register(server, options, next) {
         console.log(`${x} - View status and errors/warnings from your browser`);
       }
 
-      if (lastReporterOptions === undefined) {
+      if (webpackDev.lastReporterOptions === undefined) {
         returnReporter = notOk;
         setTimeout(() => opn(baseUrl()), 750);
       } else {
         // keep returning reporter until a first success compile
         returnReporter = returnReporter ? notOk : false;
+      }
+
+      if (!webpackDev.hasErrors) {
+        const bundles = statsMapper.getBundles(reporterOptions.stats);
+        bundles.forEach(b => {
+          b.modules.forEach(m => {
+            if (m.indexOf("node_modules") >= 0) return;
+            if (m.indexOf("(webpack)") >= 0) return;
+            if (m.startsWith("multi ")) return;
+            const moduleFullPath = Path.resolve(m);
+            delete require.cache[moduleFullPath];
+          });
+        });
       }
 
       transferIsomorphicAssets(devMiddleware.fileSystem, err => {
@@ -160,16 +184,17 @@ function register(server, options, next) {
             if (err) {
               console.error("reload isomorphic assets failed", err2);
             }
-            lastReporterOptions = reporterOptions;
+            webpackDev.lastReporterOptions = reporterOptions;
           });
         } else {
-          lastReporterOptions = reporterOptions;
+          webpackDev.lastReporterOptions = reporterOptions;
         }
       });
     } else {
       isomorphicExtendRequire.deactivate();
       console.log(`webpack bundle is now ${chalk.magenta("INVALID")}`);
-      lastReporterOptions = false;
+      webpackDev.valid = false;
+      webpackDev.lastReporterOptions = false;
     }
     if (userReporter) userReporter(middlewareOptions, reporterOptions);
   };
@@ -189,13 +214,12 @@ function register(server, options, next) {
         req.url === webpackHotOptions.path ||
         (req.url.startsWith(publicPath) && req.url.indexOf(".hot-update.") >= 0);
 
-      if (!lastReporterOptions && !isHmrRequest) {
-        return sendHtml(
-          `<html><body><div style="margin-top: 50px; padding: 20px; border-radius: 10px; border: 2px solid red;">
+      if (!webpackDev.lastReporterOptions && !isHmrRequest) {
+        return sendHtml(`<html><body>
+<div style="margin-top: 50px; padding: 20px; border-radius: 10px; border: 2px solid red;">
 <h2>Waiting for webpack dev middleware to finish compiling</h2>
 </div><script>function doReload(x){ if (!x) location.reload(); setTimeout(doReload, 1000); }
-doReload(1); </script></body></html>`
-        );
+doReload(1); </script></body></html>`);
       }
 
       const serveStatic = (baseUrl, fileSystem, indexServer, errorHandler) => {
@@ -280,8 +304,10 @@ ${jumpToError}</body></html>
           );
         });
       } else if (req.url.startsWith(reporterUrl) || returnReporter) {
-        return serveReporter(lastReporterOptions);
+        return serveReporter(webpackDev.lastReporterOptions);
       }
+
+      request.app.webpackDev = webpackDev;
 
       return devMiddleware(req, res, err => {
         if (err) {
