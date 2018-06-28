@@ -70,6 +70,7 @@
     "file-loader": "^0.11.1",
     "finalhandler": "^1.1.1",
     "flow-bin": "^0.74.0",
+    "flow-typed": "^2.4.0",
     "fs-extra": "^0.26.5",
     "glob": "^7.0.6",
     "identity-obj-proxy": "^3.0.0",
