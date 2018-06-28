@@ -129,24 +129,28 @@ function register(server, options, next) {
       const stats = reporterOptions.stats;
       const error = stats.hasErrors() ? chalk.red(" ERRORS") : "";
       const warning = stats.hasWarnings() ? chalk.yellow(" WARNINGS") : "";
-      const but = ((error || warning) && chalk.yellow(" but has")) || "";
+      const notOk = Boolean(error || warning);
+      const but = (notOk && chalk.yellow(" but has")) || "";
       console.log(`webpack bundle is now ${chalk.green("VALID")}${but}${error}${warning}`);
-      if (lastReporterOptions === undefined) {
-        const urlObj = {
+
+      const baseUrl = () =>
+        Url.format({
           hostname: process.env.HOST || "localhost",
           protocol: server.info.protocol,
           port: server.info.port
-        };
-        const urlStr = Url.format(urlObj);
-        if (error || warning) {
-          returnReporter = true;
-          const x = chalk.cyan.underline(Path.posix.join(urlStr, reporterUrl));
-          console.log(`${x} - View status and errors/warnings from your browser`);
-        }
-        setTimeout(() => opn(urlStr), 500);
+        });
+
+      if (notOk) {
+        const x = chalk.cyan.underline(Path.posix.join(baseUrl(), reporterUrl));
+        console.log(`${x} - View status and errors/warnings from your browser`);
+      }
+
+      if (lastReporterOptions === undefined) {
+        returnReporter = notOk;
+        setTimeout(() => opn(baseUrl()), 750);
       } else {
         // keep returning reporter until a first success compile
-        returnReporter = returnReporter ? Boolean(error || warning) : false;
+        returnReporter = returnReporter ? notOk : false;
       }
 
       transferIsomorphicAssets(devMiddleware.fileSystem, err => {
