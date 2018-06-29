@@ -86,7 +86,9 @@ module.exports = class extends Generator {
       this.props.createDirectory = false;
       this.props.serverType = this.fs.exists(this.destinationPath("src/server/express-server.js"))
         ? ExpressJS
-        : this.fs.exists(this.destinationPath("src/server/koa-server.js")) ? KoaJS : HapiJS;
+        : this.fs.exists(this.destinationPath("src/server/koa-server.js"))
+          ? KoaJS
+          : HapiJS;
       this.props.pwa = this.fs.exists(this.destinationPath("client/sw-registration.js"));
       this.props.autoSsr = this.fs.exists(this.destinationPath("server/plugins/autossr.js"));
       this.props.quoteType =
@@ -205,13 +207,6 @@ module.exports = class extends Generator {
         name: "flow",
         message: "Would you like to generate .flowconfig for flow usage?",
         when: this.props.flow === undefined,
-        default: false
-      },
-      {
-        type: "confirm",
-        name: "yarn",
-        message: "Would you like to yarn install packages?",
-        when: this.props.yarn === undefined,
         default: false
       }
     ];
@@ -455,13 +450,9 @@ module.exports = class extends Generator {
 
   install() {
     if (!this.isExtended && !this.isDemoApp) {
-      if (this.props.yarn) {
-        this.yarnInstall();
-      } else {
-        this.installDependencies({
-          bower: false
-        });
-      }
+      this.installDependencies({
+        bower: false
+      });
     }
   }
 

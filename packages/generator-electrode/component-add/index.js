@@ -121,7 +121,8 @@ module.exports = class extends Generator {
     return this.prompt(prompts).then(props => {
       this.props = extend(this.props, props);
       this.packageName = this.props.name;
-      this.componentName = _.kebabCase(_.deburr(this.props.componentName || this.props.name))
+      this.componentName = _
+        .kebabCase(_.deburr(this.props.componentName || this.props.name))
         .replace(/^\s+|\s+$/g, "")
         .replace(/(^|[-_ ])+(.)/g, function(match, first, second) {
           return second.toUpperCase();
@@ -141,8 +142,7 @@ module.exports = class extends Generator {
       name: this.packageName,
       componentName: this.componentName,
       demoAppName: this.demoAppName,
-      quotes: this.props.quotes,
-      yarn: this.props.yarn
+      quotes: this.props.quotes
     };
 
     this.composeWith(require.resolve("../component"), options);

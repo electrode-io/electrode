@@ -131,13 +131,6 @@ module.exports = class extends Generator {
         message: "Would you like to generate .flowconfig for flow usage?",
         when: this.props.flow === undefined,
         default: false
-      },
-      {
-        type: "confirm",
-        name: "yarn",
-        message: "Would you like to yarn install packages?",
-        when: this.props.yarn === undefined,
-        default: false
       }
     ];
 
@@ -452,7 +445,6 @@ module.exports = class extends Generator {
   }
 
   install() {
-    const yarnOrNpm = this.props.yarn ? "yarn" : "npm";
     let locations = [
       this.destinationPath(),
       path.join(this.destinationPath(), "..", "..", this.originalDemoAppName)
@@ -473,7 +465,7 @@ module.exports = class extends Generator {
     locations.reduce(
       (previousValue, currentValue) => {
         if (!previousValue.signal && previousValue.status === 0) {
-          return this.spawnCommandSync(yarnOrNpm, ["install"], {
+          return this.spawnCommandSync("npm", ["install"], {
             cwd: currentValue
           });
         } else {
