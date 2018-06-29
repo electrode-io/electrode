@@ -125,15 +125,11 @@ function makeTasks(hostDir) {
         "clean-lib",
         ".tmp-to-lib",
         "build-lib:flatten-l10n",
-        // TODO: fix the badly written and messy copy-as-flow-declaration.js so it can
-        // deterministically await async complete (and exit if isMain).
-        // "build-lib:copy-flow",
         "build-lib:clean-tmp"
       ]
     },
     "babel-src-step": `babel -D src -d .tmplib`,
     "build-lib:clean-tmp": () => $$.rm("-rf", "./tmp"),
-    "build-lib:copy-flow": `node -r ${archetype.devPath}/scripts/copy-as-flow-declaration.js`,
     "build-lib:flatten-l10n": flattenMessagesL10n,
 
     "archetype:check": [
