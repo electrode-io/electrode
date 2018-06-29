@@ -510,7 +510,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     devbrk: ["dev --inspect-brk"],
     dev: {
       desc: "Start your app with watch in development mode with webpack-dev-server",
-      dep: [".remove-log-files", ".development-env"],
+      dep: [".remove-log-files", ".development-env", ".mk-dist-dir"],
       task: function() {
         if (!Fs.existsSync(".isomorphic-loader-config.json")) {
           Fs.writeFileSync(".isomorphic-loader-config.json", JSON.stringify({}));

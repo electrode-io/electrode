@@ -101,6 +101,7 @@ function register(server, options, next) {
     hidden: true,
     fs: devMiddleware.fileSystem
   });
+
   const cwdIndex = serveIndex(process.cwd(), { icons: true, hidden: true });
   const devBaseUrl = Path.posix.join(options.devBaseUrl || "/__electrode_dev", "/");
   const cwdBaseUrl = Path.posix.join(devBaseUrl, "cwd");
@@ -151,52 +152,53 @@ function register(server, options, next) {
           port: server.info.port
         });
 
-      if (notOk) {
-        const x = chalk.cyan.underline(Path.posix.join(baseUrl(), reporterUrl));
-        console.log(`${x} - View status and errors/warnings from your browser`);
-      }
+      const update = () => {
+        if (notOk) {
+          const x = chalk.cyan.underline(Path.posix.join(baseUrl(), reporterUrl));
+          console.log(`${x} - View status and errors/warnings from your browser`);
+        }
 
-      if (webpackDev.lastReporterOptions === undefined) {
-        returnReporter = notOk;
-        setTimeout(() => opn(baseUrl()), 750);
-      } else {
-        // keep returning reporter until a first success compile
-        returnReporter = returnReporter ? notOk : false;
-      }
+        if (webpackDev.lastReporterOptions === undefined) {
+          returnReporter = notOk;
+          setTimeout(() => opn(baseUrl()), 750);
+        } else {
+          // keep returning reporter until a first success compile
+          returnReporter = returnReporter ? notOk : false;
+        }
 
-      if (!webpackDev.hasErrors) {
-        const bundles = statsMapper.getBundles(reporterOptions.stats);
-        bundles.forEach(b => {
-          b.modules.forEach(m => {
-            if (m.indexOf("node_modules") >= 0) return;
-            if (m.indexOf("(webpack)") >= 0) return;
-            if (m.startsWith("multi ")) return;
-            const moduleFullPath = Path.resolve(m);
-            delete require.cache[moduleFullPath];
+        if (!webpackDev.hasErrors) {
+          const bundles = statsMapper.getBundles(reporterOptions.stats);
+          bundles.forEach(b => {
+            b.modules.forEach(m => {
+              if (m.indexOf("node_modules") >= 0) return;
+              if (m.indexOf("(webpack)") >= 0) return;
+              if (m.startsWith("multi ")) return;
+              const moduleFullPath = Path.resolve(m);
+              delete require.cache[moduleFullPath];
+            });
           });
-        });
-      }
+        }
+
+        if (userReporter) userReporter(middlewareOptions, reporterOptions);
+        webpackDev.lastReporterOptions = reporterOptions;
+      };
 
       transferIsomorphicAssets(devMiddleware.fileSystem, err => {
         // reload assets to activate
-        if (!err) {
-          isomorphicExtendRequire.loadAssets(err2 => {
-            if (err) {
-              console.error("reload isomorphic assets failed", err2);
-            }
-            webpackDev.lastReporterOptions = reporterOptions;
-          });
-        } else {
-          webpackDev.lastReporterOptions = reporterOptions;
-        }
+        if (err) return update();
+
+        return isomorphicExtendRequire.loadAssets(err2 => {
+          if (err) console.error("reload isomorphic assets failed", err2);
+          update();
+        });
       });
     } else {
       isomorphicExtendRequire.deactivate();
       console.log(`webpack bundle is now ${chalk.magenta("INVALID")}`);
       webpackDev.valid = false;
       webpackDev.lastReporterOptions = false;
+      if (userReporter) userReporter(middlewareOptions, reporterOptions);
     }
-    if (userReporter) userReporter(middlewareOptions, reporterOptions);
   };
 
   server.ext({
