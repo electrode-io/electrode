@@ -4,6 +4,30 @@
 
 ### Directly Updated
 
+-   electrode-archetype-react-app@5.3.1 `(5.3.0 => 5.3.1)`
+-   electrode-archetype-react-app-dev@5.3.1 `(5.3.0 => 5.3.1)`
+-   generator-electrode@4.1.1 `(4.1.0 => 4.1.1)`
+
+### Lerna Updated
+
+-   electrode-ignite@2.1.1 `(2.1.0 => 2.1.1)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [chore] update npm publish files [commit](http://github.com/electrode-io/electrode/commit/7330f1d76241de688a39934b02da9fb6da7af3c9)
+
+-   `packages/generator-electrode`
+
+    -   remove yarn [commit](http://github.com/electrode-io/electrode/commit/dbbc30b652ea92345158160fe9e1225fd5bdbf1a)
+
+# 6/28/2018
+
+## Packages
+
+### Directly Updated
+
 -   electrode-archetype-react-app@5.3.0 `(5.2.1 => 5.3.0)`
 -   electrode-archetype-react-app-dev@5.3.0 `(5.2.1 => 5.3.0)`
 -   electrode-archetype-react-component@5.3.0 `(5.2.1 => 5.3.0)`
