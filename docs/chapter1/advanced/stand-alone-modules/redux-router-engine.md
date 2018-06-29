@@ -226,12 +226,14 @@ import ReduxRouterEngine from "electrode-redux-router-engine";
 import { routes } from "../client/routes";
 import CreateReduxStore from "./createReduxStore";
 
+let routesEngine;
+
 module.exports = req => {
-  if (!req.server.app.routesEngine) {
-    req.server.app.routesEngine = new ReduxRouterEngine({ routes });
+  if (!routesEngine) {
+    routesEngine = new ReduxRouterEngine({ routes });
   }
 
-  return req.server.app.routesEngine.render(req);
+  return routesEngine.render(req);
 };
 ```
 
