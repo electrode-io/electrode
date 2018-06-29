@@ -19,6 +19,7 @@
   "files": [
     "config",
     "lib",
+    "serve-index",
     "scripts",
     "require.js"
   ],
