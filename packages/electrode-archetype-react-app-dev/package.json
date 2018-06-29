@@ -18,6 +18,7 @@
   },
   "files": [
     "config",
+    "lib",
     "scripts",
     "require.js"
   ],
