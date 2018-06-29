@@ -2,6 +2,19 @@
 
 ## Packages
 
+-   electrode-archetype-react-app@5.3.2 `(5.3.1 => 5.3.2)`
+-   electrode-archetype-react-app-dev@5.3.2 `(5.3.1 => 5.3.2)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   more npm files [commit](http://github.com/electrode-io/electrode/commit/3e479aeaaf88abe0ca53b0dd7b5a7ccfa0570493)
+
+# 6/28/2018
+
+## Packages
+
 ### Directly Updated
 
 -   electrode-archetype-react-app@5.3.1 `(5.3.0 => 5.3.1)`
