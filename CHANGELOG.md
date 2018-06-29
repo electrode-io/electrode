@@ -1,3 +1,28 @@
+# 6/29/2018
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-react-app@5.3.3 `(5.3.2 => 5.3.3)`
+-   electrode-archetype-react-app-dev@5.3.3 `(5.3.2 => 5.3.3)`
+-   generator-electrode@4.1.2 `(4.1.1 => 4.1.2)`
+
+### Lerna Updated
+
+-   electrode-ignite@2.1.2 `(2.1.1 => 2.1.2)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   fix isomorphic loading after webpack compile ([#844](https://github.com/electrode-io/electrode/pull/844)) [commit](http://github.com/electrode-io/electrode/commit/5ea94a27141e806c0dfd86d29ec2e3f9a3c5528c)
+
+-   `packages/generator-electrode`
+
+    -   webpack-dev-hapi plugin depends on WEBPACK_DEV also ([#842](https://github.com/electrode-io/electrode/pull/842)) [commit](http://github.com/electrode-io/electrode/commit/ed21799efd48af9a1eeec9173de12a3363aa7f16)
+    -   fix isomorphic loading after webpack compile ([#844](https://github.com/electrode-io/electrode/pull/844)) [commit](http://github.com/electrode-io/electrode/commit/5ea94a27141e806c0dfd86d29ec2e3f9a3c5528c)
+
 # 6/28/2018
 
 ## Packages
