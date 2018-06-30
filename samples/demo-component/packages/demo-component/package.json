@@ -31,7 +31,8 @@
   "scripts": {
     "prepublish": "clap prepublish",
     "start": "clap demo",
-    "test": "flow && clap check"
+    "test": "flow && clap check",
+    "flow-typed-install": "clap flow-typed-install"
   },
   "keywords": [
     "react",
