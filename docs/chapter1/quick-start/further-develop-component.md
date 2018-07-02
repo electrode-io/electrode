@@ -1,9 +1,9 @@
 # Developing Electrode Components
 
-*   [Low-Level Components](/chapter1/further-develop-component/low-level-components.md)
-*   [Component Helpers](/chapter1/further-develop-component/component-helpers.md)
-*   [Develop Styles](/chapter1/further-develop-component/develop-styles.md)
-*   [Develop the Main Component](/chapter1/further-develop-component/develop-main-component.md)
-*   [Add Components to the Demo App](/chapter1/further-develop-component/add-to-demo-app.md)
-*   [Build and Demo](/chapter1/further-develop-component/build-and-demo.md)
-*   [Test Components](/chapter1/further-develop-component/test-components.md)
+*   [Low-Level Components](../further-develop-component/low-level-components.md)
+*   [Component Helpers](../further-develop-component/component-helpers.md)
+*   [Develop Styles](../further-develop-component/develop-styles.md)
+*   [Develop the Main Component](../further-develop-component/develop-main-component.md)
+*   [Add Components to the Demo App](../further-develop-component/add-to-demo-app.md)
+*   [Build and Demo](../further-develop-component/build-and-demo.md)
+*   [Test Components](../further-develop-component/test-components.md)
