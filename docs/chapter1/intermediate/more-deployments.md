@@ -5,6 +5,6 @@ Deploying in an efficient, organized, and seamless way is the key to success.
 
 We have assembled a few more best-in-class software deployment options with tutorials in this section:
 
-* [Docker](/chapter1/intermediate/more-deployments/docker.md), a new container based technology that is designed to make applications easier to [create, deploy and run](https://cloud.docker.com/).
+* [Docker](./more-deployments/docker.md), a new container based technology that is designed to make applications easier to [create, deploy and run](https://cloud.docker.com/).
 
-* [Google Kubernetes](/chapter1/intermediate/more-deployments/kubernetes.md), "an open-source system for automating deployment, scaling, and management of [containerized applications](http://kubernetes.io/)."
+* [Google Kubernetes](./more-deployments/kubernetes.md), "an open-source system for automating deployment, scaling, and management of [containerized applications](http://kubernetes.io/)."
