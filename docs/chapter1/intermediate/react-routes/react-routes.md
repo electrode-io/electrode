@@ -9,8 +9,8 @@ The Electrode platform, by default, is setup to use [react-router] to handle rou
 
 You will also need to define your routes in a common location.
 
--   [Add your routes](/chapter1/intermediate/react-routes/add-routes.md)
--   [Component for a route](/chapter1/intermediate/react-routes/route-component.md)
--   [Route action on server side](/chapter1/intermediate/react-routes/server-actions.md)
+-   [Add your routes](add-routes.md)
+-   [Component for a route](route-component.md)
+-   [Route action on server side](server-actions.md)
 
 [react-router]: https://www.npmjs.com/package/react-router
