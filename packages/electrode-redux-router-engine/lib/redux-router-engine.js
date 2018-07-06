@@ -76,15 +76,6 @@ class ReduxRouterEngine {
         };
       }
 
-      // TODO: support redirect
-      // const redirect = match.find(x => x.redirect);
-      // if (redirect) {
-      //   return {
-      //     status: 302,
-      //     path: `${redirect.redirect}`
-      //   };
-      // }
-
       const methods = match[0].methods || "get";
 
       if (methods.toLowerCase().indexOf(req.method.toLowerCase()) < 0) {
@@ -179,27 +170,36 @@ class ReduxRouterEngine {
       store = createStore(reducer, initialState);
     }
 
-    let html = this._renderToString(req, location, store, match, withIds);
+    const routeContext = {};
+
+    let html = this._renderToString(req, location, store, routeContext, match, withIds);
     if (html.then !== undefined) {
       // a Promise?
       html = await html;
     }
 
-    return { status: 200, html, prefetch: stringifyPreloadedState(store.getState()) };
+    if (this.options.componentRedirect && routeContext.action === "REPLACE") {
+      return { status: 302, html, path: routeContext.url, store };
+    } else {
+      return { status: 200, html, prefetch: stringifyPreloadedState(store.getState()) };
+    }
   }
 
-  _renderToString(req, location, store, match, withIds) {
+  _renderToString(req, location, store, routeContext, match, withIds) {
     if (req.app && req.app.disableSSR) {
       return "<!-- SSR disabled by request -->";
     } else {
       assert(React, `${pkg.name}: can't do SSR because react not found`);
       assert(ReactDomServer, `${pkg.name}: can't do SSR because react-dom not found`);
-      const context = {};
       return (withIds ? ReactDomServer.renderToString : ReactDomServer.renderToStaticMarkup)(
         React.createElement(
           Provider,
           { store },
-          React.createElement(StaticRouter, { location, context }, this._routesComponent)
+          React.createElement(
+            StaticRouter,
+            { location, context: routeContext },
+            this._routesComponent
+          )
         )
       );
     }

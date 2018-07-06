@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import { renderRoutes } from "react-router-config";
 import { renderFlatRoutes } from "./render-flat-routes";
 
@@ -26,6 +26,17 @@ class Page extends React.Component {
 class Test extends React.Component {
   render() {
     return <div>Test</div>;
+  }
+}
+
+class TestRedirect extends React.Component {
+  render() {
+    return (
+      <div>
+        <Test />
+        <Redirect to="/redirect-target" />
+      </div>
+    );
   }
 }
 
@@ -132,8 +143,8 @@ const routes = [
         component: ConnectedTestRedux
       },
       {
-        path: "/test/redirect",
-        redirect: "/test/target"
+        path: "/test/component-redirect",
+        component: TestRedirect
       },
       {
         path: "/test/init-not-found",
