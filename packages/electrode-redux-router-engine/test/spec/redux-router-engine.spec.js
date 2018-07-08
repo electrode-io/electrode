@@ -140,16 +140,16 @@ describe("redux-router-engine", function() {
     });
   });
 
-  // TODO: support redirect route
-  // it.skip("should redirect redirect route", () => {
-  //   const engine = new ReduxRouterEngine({ routes });
-  //   testReq.url.path = "/test/redirect";
+  it("should return 302 for router Redirect component", () => {
+    const engine = new ReduxRouterEngine({ routes, componentRedirect: true });
+    testReq.url.path = "/test/component-redirect";
 
-  //   return engine.render(testReq).then(result => {
-  //     expect(result.status).to.equal(302);
-  //     expect(result.path).to.equal("/test/target");
-  //   });
-  // });
+    return engine.render(testReq).then(result => {
+      expect(result.status).to.equal(302);
+      expect(result.html).to.equal("<div>Page<div><div>Test</div></div></div>");
+      expect(result.path).to.equal("/redirect-target");
+    });
+  });
 
   it("should return 500 for invalid component", () => {
     const intercept = xstdout.intercept(true);
@@ -171,19 +171,6 @@ describe("redux-router-engine", function() {
     return engine.render(testReq).then(result => {
       intercept.restore();
       expect(result.status).to.equal(404);
-      expect(result._err).to.be.ok;
-    });
-  });
-
-  it.skip("should return 302 and redirect path if component throws related error", () => {
-    const intercept = xstdout.intercept(true);
-    const engine = new ReduxRouterEngine({ routes });
-    testReq.url.path = "/redirect";
-
-    return engine.render(testReq).then(result => {
-      intercept.restore();
-      expect(result.status).to.equal(302);
-      expect(result.path).to.equal("/new/location");
       expect(result._err).to.be.ok;
     });
   });
