@@ -6,7 +6,9 @@ import { renderFlatRoutes } from "./render-flat-routes";
 
 class Home extends React.Component {
   render() {
-    return <div>Home</div>;
+    const { search } = this.props.location;
+    const query = search ? ` - Query: ${search}` : "";
+    return <div>Home{query}</div>;
   }
 }
 
