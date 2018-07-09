@@ -4,6 +4,7 @@
 
 const Path = require("path");
 const assert = require("assert");
+const Url = require("url");
 const optionalRequire = require("optional-require")(require);
 const React = optionalRequire("react");
 const ReactDomServer = optionalRequire("react-dom/server");
@@ -63,8 +64,8 @@ class ReduxRouterEngine {
     this._routesComponent = renderRoutes(this._routes);
   }
 
-  async render(req, options) {
-    const location = req.path || (req.url && req.url.path);
+  async render(req, options = {}) {
+    const location = options.location || req.url || Url.parse(req.path);
 
     try {
       const match = this._matchRoute(req, this._routes, location);
@@ -72,23 +73,23 @@ class ReduxRouterEngine {
       if (match.length === 0) {
         return {
           status: 404,
-          message: `${pkg.name}: Path ${location} not found`
+          message: `${pkg.name}: Path ${location.path} not found`
         };
       }
 
       const methods = match[0].methods || "get";
 
       if (methods.toLowerCase().indexOf(req.method.toLowerCase()) < 0) {
-        throw new Error(`${pkg.name}: ${location} doesn't allow request method ${req.method}`);
+        throw new Error(`${pkg.name}: ${location.path} doesn't allow request method ${req.method}`);
       }
 
-      return await this._handleRender(req, location, match, options || {});
+      return await this._handleRender(req, location, match, options);
     } catch (err) {
       this.options.logError.call(this, req, err);
       return {
         status: err.status || 500, // eslint-disable-line
         message: err.message,
-        path: err.path || location,
+        path: err.path || location.path,
         _err: err
       };
     }
@@ -96,7 +97,7 @@ class ReduxRouterEngine {
 
   //
   _matchRoute(req, routes, location) {
-    return matchRoutes(routes, location);
+    return matchRoutes(routes, location.pathname);
   }
 
   async _handleRender(req, location, match, options) {

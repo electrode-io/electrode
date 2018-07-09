@@ -3,6 +3,7 @@
 const Path = require("path");
 const ReduxRouterEngine = require("../..");
 const xstdout = require("xstdout");
+const Url = require("url");
 
 const expect = require("chai").expect;
 
@@ -17,14 +18,13 @@ describe("redux-router-engine", function() {
     testReq = {
       method: "get",
       log: () => {},
-      app: {},
-      url: {}
+      app: {}
     };
   });
 
   it("should return 404 for unknown index route", () => {
     const engine = new ReduxRouterEngine({ routes });
-    testReq.url.path = "/oop/blah";
+    testReq.url = Url.parse("/oop/blah");
 
     return engine.render(testReq).then(result => {
       expect(result.status).to.equal(404);
@@ -34,7 +34,7 @@ describe("redux-router-engine", function() {
   it("should return string error", () => {
     const intercept = xstdout.intercept(true);
     const engine = new ReduxRouterEngine({ routes });
-    testReq.url.path = "/test/init-not-found";
+    testReq.url = Url.parse("/test/init-not-found");
 
     return engine.render(testReq).then(result => {
       intercept.restore();
@@ -46,7 +46,7 @@ describe("redux-router-engine", function() {
   it("should return Error error", () => {
     const intercept = xstdout.intercept(true);
     const engine = new ReduxRouterEngine({ routes, routesHandlerPath: Path.join(__dirname, "..") });
-    testReq.url.path = "/throw-error";
+    testReq.url = Url.parse("/throw-error");
 
     return engine.render(testReq).then(result => {
       intercept.restore();
@@ -61,7 +61,7 @@ describe("redux-router-engine", function() {
       routes,
       renderToString: () => Promise.resolve(testHtml)
     });
-    testReq.url.path = "/test";
+    testReq.url = Url.parse("/test");
 
     return engine.render(testReq).then(result => {
       expect(result.html).to.equal(testHtml);
@@ -70,7 +70,7 @@ describe("redux-router-engine", function() {
 
   it("should resolve index route", () => {
     const engine = new ReduxRouterEngine({ routes, routesHandlerPath: "test" });
-    testReq.url.path = "/test";
+    testReq.url = Url.parse("/test");
 
     return engine.render(testReq).then(result => {
       expect(result.status).to.equal(200);
@@ -79,9 +79,31 @@ describe("redux-router-engine", function() {
     });
   });
 
+  it("should parse req.path if req.url is missing", () => {
+    const engine = new ReduxRouterEngine({ routes, routesHandlerPath: "test" });
+    testReq.path = "/test?foo=bar";
+
+    return engine.render(testReq).then(result => {
+      expect(result.status).to.equal(200);
+      expect(result.html).to.equal("<div>Page<div>Home - Query: ?foo=bar</div></div>");
+      expect(result.prefetch).to.equal("window.__PRELOADED_STATE__ = {};");
+    });
+  });
+
+  it("should use options.location", () => {
+    const engine = new ReduxRouterEngine({ routes, routesHandlerPath: "test" });
+    testReq.url = Url.parse("/test?foo=bar");
+
+    return engine.render(testReq, { location: Url.parse("/test?a=1") }).then(result => {
+      expect(result.status).to.equal(200);
+      expect(result.html).to.equal("<div>Page<div>Home - Query: ?a=1</div></div>");
+      expect(result.prefetch).to.equal("window.__PRELOADED_STATE__ = {};");
+    });
+  });
+
   it("should load init without leading . from node_modules", () => {
     const engine = new ReduxRouterEngine({ routes, routesHandlerPath: "test" });
-    testReq.url.path = "/test-init-nm";
+    testReq.url = Url.parse("/test-init-nm");
 
     return engine.render(testReq).then(result => {
       expect(result.status).to.equal(200);
@@ -95,7 +117,7 @@ describe("redux-router-engine", function() {
       routes: Path.resolve(__dirname, "../routes"),
       routesHandlerPath: "./test"
     });
-    testReq.url.path = "/top-reducer/init";
+    testReq.url = Url.parse("/top-reducer/init");
 
     return engine.render(testReq).then(result => {
       expect(result.status).to.equal(200);
@@ -108,7 +130,7 @@ describe("redux-router-engine", function() {
 
   it("should take routes as name of module", () => {
     const engine = new ReduxRouterEngine({ routes: "./test/routes" });
-    testReq.url.path = "/test";
+    testReq.url = Url.parse("/test");
 
     return engine.render(testReq).then(result => {
       expect(result.status).to.equal(200);
@@ -119,7 +141,7 @@ describe("redux-router-engine", function() {
 
   it("should resolve skip SSR if disabled", () => {
     const engine = new ReduxRouterEngine({ routes });
-    testReq.url.path = "/test";
+    testReq.url = Url.parse("/test");
     testReq.app.disableSSR = true;
 
     return engine.render(testReq).then(result => {
@@ -129,7 +151,7 @@ describe("redux-router-engine", function() {
 
   it("escapes troublesome characters in the state", () => {
     const engine = new ReduxRouterEngine({ routes, routesHandlerPath: Path.join(__dirname, "..") });
-    testReq.url.path = "/escape-chars";
+    testReq.url = Url.parse("/escape-chars");
 
     return engine.render(testReq).then(result => {
       expect(result.prefetch).to.contain(
@@ -142,7 +164,7 @@ describe("redux-router-engine", function() {
 
   it("should return 302 for router Redirect component", () => {
     const engine = new ReduxRouterEngine({ routes, componentRedirect: true });
-    testReq.url.path = "/test/component-redirect";
+    testReq.url = Url.parse("/test/component-redirect");
 
     return engine.render(testReq).then(result => {
       expect(result.status).to.equal(302);
@@ -154,7 +176,7 @@ describe("redux-router-engine", function() {
   it("should return 500 for invalid component", () => {
     const intercept = xstdout.intercept(true);
     const engine = new ReduxRouterEngine({ routes });
-    testReq.url.path = "/invalid-component";
+    testReq.url = Url.parse("/invalid-component");
 
     return engine.render(testReq).then(result => {
       intercept.restore();
@@ -166,7 +188,7 @@ describe("redux-router-engine", function() {
   it("should return 404 if component throws 404", () => {
     const intercept = xstdout.intercept(true);
     const engine = new ReduxRouterEngine({ routes });
-    testReq.url.path = "/error-component";
+    testReq.url = Url.parse("/error-component");
 
     return engine.render(testReq).then(result => {
       intercept.restore();
@@ -177,7 +199,7 @@ describe("redux-router-engine", function() {
 
   it("should populate react-id when requested", () => {
     const engine = new ReduxRouterEngine({ routes, withIds: true });
-    testReq.url.path = "/test";
+    testReq.url = Url.parse("/test");
 
     return engine.render(testReq).then(result => {
       expect(result.html).to.contain("data-reactroot");
@@ -186,7 +208,7 @@ describe("redux-router-engine", function() {
 
   it("should not populate react-id by default", () => {
     const engine = new ReduxRouterEngine({ routes });
-    testReq.url.path = "/test";
+    testReq.url = Url.parse("/test");
 
     return engine.render(testReq).then(result => {
       expect(result.html).to.not.contain("data-reactroot");
@@ -199,7 +221,7 @@ describe("redux-router-engine", function() {
       stringifyPreloadedState: () => `window.__TEST_STATE__`,
       renderToString: () => "test"
     });
-    testReq.url.path = "/test";
+    testReq.url = Url.parse("/test");
 
     return engine.render(testReq).then(result => {
       expect(result.prefetch).to.equal(`window.__TEST_STATE__`);
@@ -208,7 +230,7 @@ describe("redux-router-engine", function() {
 
   it("should use optional logError", () => {
     let error;
-    testReq.url.path = "/test/init-not-found";
+    testReq.url = Url.parse("/test/init-not-found");
 
     return new ReduxRouterEngine({
       routes,
@@ -225,7 +247,7 @@ describe("redux-router-engine", function() {
 
   it("render options should override constructor options", () => {
     const engine = new ReduxRouterEngine({ routes, withIds: true });
-    testReq.url.path = "/test";
+    testReq.url = Url.parse("/test");
 
     return engine.render(testReq, { withIds: false }).then(result => {
       expect(result.html).to.not.contain("data-reactroot");
@@ -239,7 +261,7 @@ describe("redux-router-engine", function() {
       method: "post",
       log: () => {},
       app: {},
-      url: {}
+      url: Url.parse("/post-only")
     };
 
     const engine = new ReduxRouterEngine({ routes });
@@ -257,7 +279,7 @@ describe("redux-router-engine", function() {
       method: "get",
       log: () => {},
       app: {},
-      url: {}
+      url: Url.parse("/test/init")
     };
 
     const engine = new ReduxRouterEngine({
@@ -277,7 +299,7 @@ describe("redux-router-engine", function() {
       method: "get",
       log: () => {},
       app: {},
-      url: {}
+      url: Url.parse("/top-wait/init")
     };
 
     const engine = new ReduxRouterEngine({
@@ -309,7 +331,7 @@ describe("redux-router-engine", function() {
       method: "get",
       log: () => {},
       app: {},
-      url: {}
+      url: Url.parse("/test-init2")
     };
 
     const engine = new ReduxRouterEngine({
@@ -329,7 +351,7 @@ describe("redux-router-engine", function() {
       method: "get",
       log: () => {},
       app: {},
-      url: {}
+      url: Url.parse("/test/redux")
     };
 
     const engine = new ReduxRouterEngine({
