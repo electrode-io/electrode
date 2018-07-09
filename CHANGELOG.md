@@ -1,3 +1,51 @@
+# 7/9/2018
+
+- fix [852](https://github.com/electrode-io/electrode/issues/852) - properly pass URL query to route components
+- Support router `<Redirect>` components
+- Fix links in docs
+
+## Packages
+
+### Directly Updated
+
+-   electrode-redux-router-engine@2.1.0 `(2.0.0 => 2.1.0)`
+-   electrode-webpack-reporter@0.4.7 `(0.4.6 => 0.4.7)`
+
+### Lerna Updated
+
+-   electrode-archetype-react-app@5.3.4 `(5.3.3 => 5.3.4)`
+-   electrode-archetype-react-app-dev@5.3.4 `(5.3.3 => 5.3.4)`
+
+## Commits
+
+-   `packages/electrode-redux-router-engine`
+
+    -   support router Redirect component ([#853](https://github.com/electrode-io/electrode/pull/853)) [commit](http://github.com/electrode-io/electrode/commit/20a5934ecd85ec5dd43b4c093836a31c3afb2d6c)
+    -   [minor] pass location with query string to routes ([#854](https://github.com/electrode-io/electrode/pull/854)) [commit](http://github.com/electrode-io/electrode/commit/33b26889ae906addc91cd5ae66fdc0c429788b77)
+
+-   `packages/electrode-webpack-reporter`
+
+    -   fix webpack reporter text overflow issue ([#846](https://github.com/electrode-io/electrode/pull/846)) [commit](http://github.com/electrode-io/electrode/commit/d73270a8d62afd18e661a389b08526f52c38f709)
+
+-   `docs`
+
+    -   Update powerful-electrode-tools.md [commit](http://github.com/electrode-io/electrode/commit/9f41afcc61e3ca03a3909b486bea23d2821be432)
+    -   Update contributing.md [commit](http://github.com/electrode-io/electrode/commit/fe7522969507c85a8d57aeda4d697dc2cb059072)
+    -   Update resources.md [commit](http://github.com/electrode-io/electrode/commit/c9277b630e2b3b7b85962fb95a857fd0c1af92af)
+    -   Update stand-alone-modules.md [commit](http://github.com/electrode-io/electrode/commit/7622983b4647b681130c11d4f2197e6d1910d055)
+    -   Update more-deployments.md [commit](http://github.com/electrode-io/electrode/commit/3c5baf743237a724947e4dc52655dc02c215ed18)
+    -   Update react-routes.md [commit](http://github.com/electrode-io/electrode/commit/05a149a00b61f1524d5148c55ec32f68613f13c1)
+    -   Update overview.md ([#850](https://github.com/electrode-io/electrode/pull/850)) [commit](http://github.com/electrode-io/electrode/commit/85b6eec3e2669293b7f2f4a22813008971e77eab)
+    -   Update Intermediate.md ([#851](https://github.com/electrode-io/electrode/pull/851)) [commit](http://github.com/electrode-io/electrode/commit/d86e95f5412f73319c2fb0de23ca5efd34ecf875)
+    -   Update further-develop-app.md ([#849](https://github.com/electrode-io/electrode/pull/849)) [commit](http://github.com/electrode-io/electrode/commit/08b8be16ea21b81721d4b1ddc7b1da605e8332b0)
+    -   Update start-with-electrode.md [commit](http://github.com/electrode-io/electrode/commit/c18c9b61aec9d7d4f1b0485290956ed792279df8)
+    -   Update README.md [commit](http://github.com/electrode-io/electrode/commit/9980f25a8a4853332630db5a3e8bb94a8bb257ad)
+    -   Update further-develop-component.md [commit](http://github.com/electrode-io/electrode/commit/fe521d4990cd487ec51c20c1dd35a207d965733c)
+    -   Update over-the-air.md [commit](http://github.com/electrode-io/electrode/commit/ec193608bebb9d2244e540a386a53fb3326f8fe2)
+    -   Update over-the-air.md [commit](http://github.com/electrode-io/electrode/commit/b95ae9e3eb474576218bbf42f0d0aa74c59deb35)
+    -   Update over-the-air.md [commit](http://github.com/electrode-io/electrode/commit/672d409e658304edf444e1a8432ea764448bbb1e)
+    -   update code sample in redux router engine doc ([#845](https://github.com/electrode-io/electrode/pull/845)) [commit](http://github.com/electrode-io/electrode/commit/b8a0aa99662d3e841ffe4bcca707770449aa7f58)
+
 # 6/29/2018
 
 ## Packages
