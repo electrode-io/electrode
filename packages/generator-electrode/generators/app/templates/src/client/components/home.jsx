@@ -34,7 +34,7 @@ export default () => (
     {/*<% } %>*/}
 
     <section className={custom.header}>
-      <h2 className={skeleton.title}>
+      <h2>
         <span>Hello from </span>
         <a href="https://github.com/electrode-io">
           {"Electrode"}
