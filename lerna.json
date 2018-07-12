@@ -8,5 +8,6 @@
   },
   "fynpo": {
     "ignore": [ "electrode-webpack-reporter" ]
-  }
+  },
+  "packages": [ "packages/electrode-redux-router-engine" ]
 }
