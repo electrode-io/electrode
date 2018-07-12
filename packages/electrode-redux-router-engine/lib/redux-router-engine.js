@@ -38,7 +38,7 @@ class ReduxRouterEngine {
 
     if (!this.options.logError) {
       this.options.logError = (req, err) =>
-        console.log("Electrode ReduxRouterEngine Error:", err); //eslint-disable-line
+        console.error("Electrode ReduxRouterEngine Error:", err && err.stack); //eslint-disable-line
     }
 
     if (this.options.renderToString) {
@@ -85,9 +85,15 @@ class ReduxRouterEngine {
         return this._handleRender(req, match, route, options || {});
       })
       .catch((err) => {
-        this.options.logError.call(this, req, err);
+        let status = err.status;
+
+        if (status === undefined) {
+          status = 500; // eslint-disable-line
+          this.options.logError.call(this, req, err);
+        }
+
         return {
-          status: err.status || 500, // eslint-disable-line
+          status,
           message: err.message,
           path: err.path,
           _err: err
