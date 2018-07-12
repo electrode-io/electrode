@@ -1,3 +1,15 @@
+# 7/12/2018
+
+## Packages
+
+-   electrode-redux-router-engine@1.5.3 `(1.5.2 => 1.5.3)`
+
+## Commits
+
+-   `packages/electrode-redux-router-engine`
+
+    -   do not log error if it's for redirect ([#857](https://github.com/electrode-io/electrode/pull/857)) [commit](http://github.com/electrode-io/electrode/commit/ed3688552cda22d4636a6a245abf1305bff71474)
+
 # 6/15/2018
 
 ## Packages
