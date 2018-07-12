@@ -19,16 +19,19 @@ import electrodePng from "../images/electrode.png";
 import DemoStates from "./demo-states";
 import DemoPureStates from "./demo-pure-states";
 import { DemoButtons } from "./demo-buttons";
+
 /**/
 
-export default () =>
+export default () => (
   <div className="container">
     {/**/}
 
     <section className="header">
-      <h2 className="title">
-        Hello from {" "}
-        <a href="https://github.com/electrode-io">{"Electrode"} <img src={electrodePng} /></a>
+      <h2>
+        Hello from{" "}
+        <a href="https://github.com/electrode-io">
+          {"Electrode"} <img src={electrodePng} />
+        </a>
       </h2>
     </section>
 
@@ -43,4 +46,5 @@ export default () =>
     <div className="docs-section">
       <DemoButtons />
     </div>
-  </div>;
+  </div>
+);

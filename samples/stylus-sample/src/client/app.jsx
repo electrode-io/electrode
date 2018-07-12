@@ -3,28 +3,57 @@
 //
 
 import React from "react";
-import { render } from "react-dom";
+import { render, hydrate } from "react-dom";
 import { routes } from "./routes";
-import { Router, browserHistory } from "react-router";
+import { BrowserRouter } from "react-router-dom";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./reducers";
-//
+import { renderRoutes } from "react-router-config";
 import "./styles/index.styl";
-
-//
-// Add the client app start up code to a function as window.webappStart.
-// The webapp's full HTML will check and call it once the js-content
-// DOM is created.
+import "milligram-stylus";
 //
 
-window.webappStart = () => {
-  const initialState = window.__PRELOADED_STATE__;
+//
+// Redux configure store with Hot Module Reload
+//
+const configureStore = initialState => {
   const store = createStore(rootReducer, initialState);
-  render(
+
+  if (module.hot) {
+    module.hot.accept("./reducers", () => {
+      const nextRootReducer = require("./reducers").default;
+      store.replaceReducer(nextRootReducer);
+    });
+  }
+
+  return store;
+};
+
+const store = configureStore(window.__PRELOADED_STATE__);
+
+const start = App => {
+  const jsContent = document.querySelector(".js-content");
+  const reactStart = window.__PRELOADED_STATE__ && jsContent.innerHTML ? hydrate : render;
+
+  reactStart(
     <Provider store={store}>
-      <Router history={browserHistory}>{routes}</Router>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>,
-    document.querySelector(".js-content")
+    jsContent
   );
 };
+
+window.webappStart = () => start(() => renderRoutes(routes));
+
+//
+// Hot Module Reload setup
+//
+if (module.hot) {
+  module.hot.accept("./routes", () => {
+    const r = require("./routes");
+    start(() => renderRoutes(r.routes));
+  });
+}
