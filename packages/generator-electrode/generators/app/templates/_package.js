@@ -26,7 +26,7 @@ return {
   },
   dependencies: {
     bluebird: "^3.4.6",
-    "electrode-archetype-react-app": "^5.0.0",
+    "electrode-archetype-react-app": "^5.3.4",
     "electrode-confippet": "^1.0.0",
     "electrode-react-webapp": "^2.1.0",
     "electrode-redux-router-engine": "^2.0.0", //<% if (isHapi) { %>
@@ -44,7 +44,7 @@ return {
     "react-router-dom": "^4.3.1"
   },
   devDependencies: {
-    "electrode-archetype-react-app-dev": "^5.0.0"
+    "electrode-archetype-react-app-dev": "^5.3.4"
   }, //<% if (isSingleQuote) { %>
   eslintConfig: {
     rules: {
