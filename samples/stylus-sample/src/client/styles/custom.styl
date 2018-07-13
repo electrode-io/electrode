@@ -1,60 +1,54 @@
-.container {
-  max-width: 800px;
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-}
-.header {
-  margin-top: 6rem;
-  text-align: center;
-}
-.docs-header {
-  text-transform: uppercase;
-  font-size: 1.4rem;
-  letter-spacing: .2rem;
-  font-weight: 600;
-}
-.docs-section {
-  border-top: 1px solid #eee;
-  padding: 4rem 0;
-  margin-bottom: 0;
-}
-.docs-example .row, .docs-example.row, .docs-example {
-  margin-bottom: 0;
-}
+.container
+    max-width 800px
+    width 80%
+    margin-left auto
+    margin-right auto
+
+.header
+    margin-top 6rem
+    text-align center
+
+.docs-header
+    text-transform uppercase
+    font-size 1.4rem
+    letter-spacing .2rem
+    font-weight 600
+
+.docs-section
+    border-top 1px solid #eee
+    padding 4rem 0
+    margin-bottom 0
+
+.docs-example .row, .docs-example.row, .docs-example
+    margin-bottom 0
+
 .docs-example h1,
 .docs-example h2,
 .docs-example h3,
 .docs-example h4,
 .docs-example h5,
-.docs-example h6 {
-  margin-bottom: 1rem;
-}
-.heading-font-size {
-  font-size: 1.2rem;
-  color: #999;
-  letter-spacing: normal;
-}
+.docs-example h6
+    margin-bottom 1rem
 
-/* Larger than phone */
-@media (min-width: 550px) {
-  .header {
-    margin-top: 18rem;
-  }
+.docs-example a,
+.docs-example button,
+.docs-example input
+    margin 0 1% 1% 0
 
-  .docs-section {
-    padding: 6rem 0;
-  }
-}
+.heading-font-size
+    font-size 1.2rem
+    color #999
+    letter-spacing normal
 
-/* Larger than tablet */
-@media (min-width: 750px) {
-  /* Re-overiding the width 100% declaration to match size of % based container */
-  .container {
-    width: 80%;
-  }
-}
+@media (min-width: 550px)
+    .header
+        margin-top 18rem
+    .docs-section
+        padding 6rem 0
 
-img {
-  vertical-align: text-bottom;
-}
+@media (min-width: 750px)
+    .container
+        width 80%
+
+img
+    vertical-align text-bottom
