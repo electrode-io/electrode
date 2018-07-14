@@ -11,7 +11,7 @@
 .docs-header {
   text-transform: uppercase;
   font-size: 1.4rem;
-  letter-spacing: .2rem;
+  letter-spacing: 0.2rem;
   font-weight: 600;
 }
 .docs-section {
@@ -19,7 +19,9 @@
   padding: 4rem 0;
   margin-bottom: 0;
 }
-.docs-example .row, .docs-example.row, .docs-example {
+.docs-example .row,
+.docs-example.row,
+.docs-example {
   margin-bottom: 0;
 }
 .docs-example h1,
@@ -61,5 +63,22 @@ img {
 
 .demoAppContainer h2 {
   margin: 50px 0;
+  text-align: center;
+}
+
+.checkbox-label {
+  display: inline-block;
+  text-align: center;
+}
+
+.checkbox-label-width10rem {
+  width: 10rem;
+  display: inline-block;
+  text-align: center;
+}
+
+.checkbox-label-width6rem {
+  width: 6rem;
+  display: inline-block;
   text-align: center;
 }

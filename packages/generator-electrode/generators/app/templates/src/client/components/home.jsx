@@ -15,9 +15,7 @@
  */
 
 import React from "react";
-import "../styles/normalize.css";
 import "../styles/raleway.css";
-import skeleton from "../styles/skeleton.css";
 import custom from "../styles/custom.css";
 import electrodePng from "../images/electrode.png";
 import DemoStates from "./demo-states";
@@ -34,7 +32,7 @@ export default () => (
     {/*<% } %>*/}
 
     <section className={custom.header}>
-      <h2 className={skeleton.title}>
+      <h2>
         <span>Hello from </span>
         <a href="https://github.com/electrode-io">
           {"Electrode"}

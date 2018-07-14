@@ -15,19 +15,17 @@ const DemoPureStates = props => {
     <div>
       <h6 className={custom["docs-header"]}>Demo Managing States in Pure Functional Component</h6>
       <label
-        style={{ display: "inline-block", textAlign: "center" }}
+        className={custom["checkbox-label"]}
         onChange={() => dispatch(toggleCheck())}
         checked={checked}
       >
         <input type="checkbox" checked={checked} onChange={() => null} />
-        <span className={custom["label-body"]}> checkbox </span>
+        <span> checkbox </span>
       </label>
-      <div style={{ width: "10rem", display: "inline-block", textAlign: "center" }}>
-        {checked ? "checked" : "unchecked"}
-      </div>
+      <div className={custom["checkbox-label-width10rem"]}>{checked ? "checked" : "unchecked"}</div>
       <div>
         <button onClick={() => dispatch(decNumber())}>&#8810;</button>
-        <div style={{ width: "6rem", display: "inline-block", textAlign: "center" }}>{value}</div>
+        <div className={custom["checkbox-label-width6rem"]}>{value}</div>
         <button onClick={() => dispatch(incNumber())}>&#8811;</button>
       </div>
     </div>
