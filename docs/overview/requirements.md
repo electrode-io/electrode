@@ -1,39 +1,33 @@
 # Requirements
 
-The requirements for setting up your development environment and your online deployments are described in the following sections.  
+The requirements for setting up your development environment and your online deployments are described in the following sections.
 
 ### For Development On Your Local Machine
 To generate and deploy your Electrode app and Electrode components, be sure your development environment includes the following requirements.
 
 Install the following:
 
-1.  [NodeJS LTS binary](https://nodejs.org/) version 4.2 or later (version 6 or later is recommended)
+1.  [NodeJS LTS binary](https://nodejs.org/) version 8 or later
 
-    -   We recommend a tool such as [nvm](https://github.com/creationix/nvm#install-script) for managing NodeJS installations.  
+    -   We use `async/await` directly so Node 8 or later is required.
 
-2.  [electrode-ignite]
+    -   We recommend a tool such as [nvm](https://github.com/creationix/nvm#install-script) for managing NodeJS installations.
+
+2.  [electrode-ignite] and [xclap-cli]
     -   Electrode Ignite helps to bootstrap your development with Electrode.
+    -   xclap-cli adds the global task runner command `clap`
 
-    ```bash
-    npm install -g electrode-ignite
-    ```
+```bash
+npm install -g electrode-ignite xclap-cli
+```
 
     -   You can Run the tool with just `ignite` and get an interactive menu or you can run it with command line arguments.
+
     -   Two examples of command line arguments:
         -   `ignite check-nodejs` - To verify your NodeJS and npm versions.
         -   `ignite generate-app` - To generate a new Electrode React app.
 
-#### npm
-
-* npm version 3 or later.
-
-    -   NodeJS v6.x already comes with npm@3 by default, but if you are using NodeJS 4, make sure you install npm@3 using the following command:
-
-```bash
-npm install -g npm@3
-```
-
-> Run `ignite check-nodejs` to verify.
+    -  Run `ignite check-nodejs` to verify.
 
 #### Headless Chrome
 
@@ -50,7 +44,7 @@ In your Chrome browser, update Google Chrome if you see the option, and relaunch
 -   A [Heroku](https://signup.heroku.com/dc) account + [CLI tools](https://devcenter.heroku.com/articles/heroku-command-line).
 -   A [GitHub](https://github.com/) account.
 
-Ready? Let's [build an Electrode app](/chapter1/quick-start/build-app.md).
+Ready? Let's [build an Electrode app](../chapter1/quick-start/start-with-app.md).
 
 [yo]: http://yeoman.io/
 
