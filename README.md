@@ -11,13 +11,15 @@
 
 > Built at @WalmartLabs powering the <http://www.walmart.com> eCommerce site, Electrode is a platform for building small to large scale universal ReactJS/NodeJS web applications with a standardized structure, best practices, and modern technologies baked in. Electrode focuses on performance, component reusability, and simple deployment to multiple cloud providers—so you can focus on what makes your app unique.
 
+**It takes 5 minutes and a single command to get your own Universal React app to customize:**
+
+![Hello from Electrode][hello-electrode]
+
 # Getting Started
 
 -   See the [Full README.md in docs](/docs/README.md) or visit our [gitbook documents].
 
 -   [Getting Started with Electrode]
-
--   Read the [Announcement Blog] Post.
 
 -   Visit our site at <http://www.electrode.io>.
 
@@ -31,7 +33,9 @@ Check [gitbook] for more info about gitbook.
 
 # Contributing
 
-Please see the [CONTRIBUTING guide](/CONTRIBUTING.md)
+Do you find Electrode useful?  Please send us your encouragement with a github star.
+
+Did you find an issue?  Would you like to help with the project?  Please see the [CONTRIBUTING guide](/CONTRIBUTING.md).
 
 # Support and Acknowledgement
 
@@ -72,3 +76,5 @@ Licensed under the [Apache License, Version 2.0].
 [what is electrode]: https://docs.electrode.io/overview/what-is-electrode.html
 
 [Getting Started with Electrode]: https://docs.electrode.io/chapter1/quick-start/start-with-app.html
+
+[hello-electrode]: ./tools/hello-electrode.png
