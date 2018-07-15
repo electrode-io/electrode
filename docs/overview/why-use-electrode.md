@@ -30,9 +30,9 @@ To solve these problems, we created the Electrode platform. Electrode consists o
 
 **Electrode Core** provides a set of modules that get you started with a simple, consistent structure that follows modern best practices. When you're ready to take your app into production, Electrode automatically deploys to your favorite cloud provider.
 
-**Electrode Modules** improve performance, efficiency, and security by adding features like [above the fold rendering](/chapter1/advanced/stand-alone-modules/above-the-fold-rendering.md), [configuration management](/chapter1/advanced/stand-alone-modules/confippet.md), and [cross-site request forgery protection](/chapter1/advanced/stand-alone-modules/stateless-csrf-validation.md). These modules can even be used with your existing React/Node.js application—so there's no need to migrate to Electrode Core.
+**Electrode Modules** improve performance, efficiency, and security by adding features like [above the fold rendering](../chapter1/advanced/stand-alone-modules/above-the-fold-rendering.md), [configuration management](../chapter1/advanced/stand-alone-modules/confippet.md), and [stateless cross-site request forgery protection](../chapter1/advanced/stand-alone-modules/stateless-csrf-validation.md). These modules can even be used with your existing React/Node.js application—so there's no need to migrate to Electrode Core.
 
-**Electrode Tools** help [organize](/chapter1/advanced/powerful-electrode-tools/electrode-explorer.md) reusable components and [optimize large JavaScript bundles](/chapter1/advanced/powerful-electrode-tools/electrify.md). Like the modules, our tools can be used with any React/Node.js app.
+**Electrode Tools** help [organize](../chapter1/advanced/powerful-electrode-tools/electrode-explorer.md) reusable components and [optimize large JavaScript bundles](../chapter1/advanced/powerful-electrode-tools/electrify.md). Like the modules, our tools can be used with any React/Node.js app.
 
 ### Future Investment
 
@@ -42,4 +42,4 @@ We're committed to open source, which means our investment is your investment.
 
 ### Take a Look
 
-So let's go! Check out the developer environment [requirements](/overview/requirements.md), dive into [Electrode's features in detail](/overview/what-is-electrode.md), or use our [Getting Started: Quick Guide](/chapter1.md) to start building Electrode apps now.
+So let's go! Check out the developer environment [requirements](./requirements.md), dive into [Electrode's features in detail](./what-is-electrode.md), or use our [Getting Started: Quick Guide](../chapter1/quick-start/start-with-app.md) to start building Electrode apps now.
