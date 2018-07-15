@@ -1,6 +1,6 @@
 # Getting Started With Electrode Components
 
->Before proceeding, be sure to verify the [Requirements](/overview/requirements.md) for setting up your development environment.
+>Before proceeding, be sure to verify the [Requirements](../../overview/requirements.md) for setting up your development environment.
 
 ## Quick Guide
 
@@ -24,7 +24,7 @@ Fill out the information for your component. You can press enter to select all t
 
 For example:
 
-![Hello Electrode Component](/images/component-dev-started.png)
+![Hello Electrode Component](../../images/component-dev-started.png)
 
 After the installation is complete, your new Electrode component is ready!
 
@@ -39,11 +39,11 @@ $ clap dev
 
 When the component starts, you should see the status in your terminal:
 
-![Electrode Component Sample](/images/dev-started.png)
+![Electrode Component Sample](../../images/dev-started.png)
 
 A webserver will start on localhost:3000. Your new component will be used in `demo-app/src/client/components/home.jsx`. Now, open [localhost:3000](http://localhost:3000/) in your browser to access the component.
 
-![Electrode Component Sample](/images/edit-me.png)
+![Electrode Component Sample](../../images/edit-me.png)
 
 ## Adding More Components to the Packages
 
@@ -68,7 +68,7 @@ $ ignite add-component
 
 Follow the prompts as above. For example:
 
-![](/images/generator-component-add.png)
+![](../../images/generator-component-add.png)
 
 A new package will be generated and the demo-app is updated. Don't worry if you see any conflicts, the `demo-app/src/client/components/home.jsx` and `demo-app/package.json` are expected to be overwritten during the update.
 
@@ -82,11 +82,11 @@ $ clap dev
 ```
 The terminal window will display the status:
 
-![Electrode Component Add Sample](/images/dev-started.png)
+![Electrode Component Add Sample](../../images/dev-started.png)
 
 Open [localhost:3000](http://localhost:3000/) in your browser to access the component.
 
-![Electrode Component Add Sample](/images/edit-me2.png)
+![Electrode Component Add Sample](../../images/edit-me2.png)
 
 * * *
 
@@ -128,4 +128,4 @@ electrode-component
 -   `packages/<componentName>/src` - Component source code.
 -   `packages/<componentName>/test` - Unit tests for your component.
 
-To continue developing components, see [Developing Electrode Components.](/chapter1/quick-start/further-develop-component.md)
+To continue developing components, see [Developing Electrode Components.](../chapter1/quick-start/further-develop-component.md)
