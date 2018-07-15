@@ -14,9 +14,9 @@ module.exports = Object.assign(Lib, {
 
   node: function node(version) {
     const message =
-      semverCompare(version, "6.0.0") >= 0
+      semverCompare(version, "8.0.0") >= 0
         ? `Electrode should work for you.`
-        : `We recommend use Node LTS version 6.`;
+        : `Electrode uses async/await and requires Node LTS version 8 or later.`;
     logger.log(chalk.yellow(`You are using Node version ${version}. ${message}`), "\n");
   },
 
@@ -26,15 +26,10 @@ module.exports = Object.assign(Lib, {
      * electrode-ignite is facing an incorrect installation issue under npm v5.4.x
      */
     let message = "";
-    if (semverCompare(version, "5.4.0") >= 0 && semverCompare(version, "5.5.0") < 0) {
-      message = `Electrode should work for you.` +
-        ` Note: Please avoid npm version v5.4.x,` +
-        ` it may cause an incorrect installation while using electrode ignite.`;
+    if (semverCompare(version, "5.6.0") >= 0) {
+      message = `Electrode should work for you.`;
     } else {
-      message =
-        semverCompare(version, "3.0.0") >= 0
-          ? `Electrode should work for you.`
-          : `Electrode requires npm version 3 and up.`;
+      message = `Electrode requires npm version 5.6.0 or later.`;
     }
     logger.log(chalk.yellow(`You are using npm version ${version}. ${message}`));
   }

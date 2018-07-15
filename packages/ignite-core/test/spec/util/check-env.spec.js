@@ -22,17 +22,17 @@ describe("check-env", function() {
       logStub.restore();
     });
 
-    it("electrode should work for node >= 6.0.0.", () => {
+    it("electrode should work for node >= 8.0.0.", () => {
       logs = [];
-      checkEnv.node("6.0.0");
-      expect(logs[0]).includes("You are using Node version 6.0.0. Electrode should work for you.");
+      checkEnv.node("8.0.0");
+      expect(logs[0]).includes("You are using Node version 8.0.0. Electrode should work for you.");
     });
 
-    it("electrode should not work for node < 6.0.0.", () => {
+    it("electrode should not work for node < 8.0.0.", () => {
       logs = [];
-      checkEnv.node("5.0.0");
+      checkEnv.node("6.0.0");
       expect(logs[0]).includes(
-        "You are using Node version 5.0.0. We recommend use Node LTS version 6."
+        "You are using Node version 6.0.0. Electrode uses async/await and requires Node LTS version 8 or later."
       );
     });
   });
@@ -47,23 +47,17 @@ describe("check-env", function() {
       logStub.restore();
     });
 
-    it("electrode should work for npm >= 3.0.0.", () => {
+    it("electrode should work for npm >= 5.6.0.", () => {
       logs = [];
-      checkEnv.npm("3.0.0");
-      expect(logs[0]).includes("You are using npm version 3.0.0. Electrode should work for you.");
+      checkEnv.npm("5.6.0");
+      expect(logs[0]).includes("You are using npm version 5.6.0. Electrode should work for you.");
     });
 
-    it("should prompt a hint message with npm version v5.4.x", () => {
+    it("electrode should not work for npm < 5.6.0.", () => {
       logs = [];
-      checkEnv.npm("5.4.2");
-      expect(logs[0]).includes("Note: Please avoid npm version v5.4.x, it may cause an incorrect installation while using electrode ignite.");
-    });
-
-    it("electrode should not work for node < 3.0.0.", () => {
-      logs = [];
-      checkEnv.npm("2.0.0");
+      checkEnv.npm("5.0.0");
       expect(logs[0]).includes(
-        "You are using npm version 2.0.0. Electrode requires npm version 3 and up."
+        "You are using npm version 5.0.0. Electrode requires npm version 5.6.0 or later."
       );
     });
   });
