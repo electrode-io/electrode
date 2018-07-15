@@ -4,7 +4,7 @@ Electrode is a platform that involves many elements and environments.  To ensure
 
 ## Installation
 
->Before proceeding, be sure to verify the [Requirements](/overview/requirements.md) for setting up your development environment.
+>Before proceeding, be sure to verify the [Requirements](../../overview/requirements.md) for setting up your development environment.
 
 ## Usage
 
@@ -22,7 +22,7 @@ $ ignite
 
 The Ignite Menu is shown below:
 
-![Electrode Ignite Menu](/images/ignite-menu.png)
+![Electrode Ignite Menu](../../images/ignite-menu.png)
 
 #### Single Ignite Task
 
@@ -48,7 +48,7 @@ $ ignite --help
 
 For example:
 
-![Electrode Ignite Help](/images/ignite-help.png)
+![Electrode Ignite Help](../../images/ignite-help.png)
 
 ## Available Ignite Tasks
 
