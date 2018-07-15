@@ -41,7 +41,8 @@ return {
     "electrode-auto-ssr": "^1.0.0", //<% } %>
     lodash: "^4.17.10",
     "react-router-config": "^1.0.0-beta.4",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^4.3.1",
+    milligram: "^1.3.0"
   },
   devDependencies: {
     "electrode-archetype-react-app-dev": "^5.3.4"

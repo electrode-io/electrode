@@ -1,6 +1,6 @@
 /*
  * This is a demo component the Eletrode app generator included
- * to show using Skeleton CSS lib (named base.css) and Redux
+ * to show using Milligram CSS lib and Redux
  * store for display HTML elements and managing states.
  *
  * To start your own app, please replace or remove these files:
