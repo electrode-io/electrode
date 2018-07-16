@@ -32,6 +32,11 @@
 .docs-example h6 {
   margin-bottom: 1rem;
 }
+.docs-example a,
+.docs-example button,
+.docs-example input {
+  margin-right: 1rem;
+}
 .heading-font-size {
   font-size: 1.2rem;
   color: #999;
