@@ -7,6 +7,8 @@ const Promise = require("bluebird");
 const assign = require("object-assign");
 const electrodeServer = require("electrode-server");
 const Path = require("path");
+require("babel-register");
+
 const webapp = require("../..");
 const ReactDOMServer = require("react-dom/server");
 const React = require("react");
@@ -30,6 +32,11 @@ describe("hapi electrode-react-webapp", () => {
           options: {
             pageTitle: "Electrode App",
             paths: {
+              "/test/component-redirect": {
+                content: {
+                  module: Path.join(__dirname, "../router-engine/content.jsx")
+                }
+              },
               "/{args*}": {
                 content: {
                   status: 200,
@@ -153,6 +160,22 @@ describe("hapi electrode-react-webapp", () => {
           expect(res.result).to.contain("<title>Electrode App</title>");
           expect(res.result).to.contain("<div>Hello Electrode</div>");
           expect(res.result).to.contain("<script>console.log('Hello');</script>");
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
+  it("should successfully return 302 redirect", () => {
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({ method: "GET", url: "/test/component-redirect" })
+        .then(res => {
+          expect(res.statusCode).to.equal(302);
+          expect(res.headers.location).to.equal("/redirect-target");
           stopServer(server);
         })
         .catch(err => {
