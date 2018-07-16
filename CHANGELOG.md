@@ -1,3 +1,66 @@
+# 7/16/2018
+
+-   fix 302 redirect from router engine
+-   fix docs broken links
+-   clean up generator sample app CSS
+-   update minimum node version to 8
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-react-component@5.3.1 `(5.3.0 => 5.3.1)`
+-   electrode-archetype-react-component-dev@5.3.1 `(5.3.0 => 5.3.1)`
+-   electrode-react-webapp@2.5.1 `(2.5.0 => 2.5.1)`
+-   electrode-redux-router-engine@2.1.1 `(2.1.0 => 2.1.1)`
+-   generator-electrode@4.1.3 `(4.1.2 => 4.1.3)`
+-   ignite-core@1.1.5 `(1.1.4 => 1.1.5)`
+
+### Lerna Updated
+
+-   electrode-ignite@2.1.3 `(2.1.2 => 2.1.3)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   small typo ([#855](https://github.com/electrode-io/electrode/pull/855)) [commit](http://github.com/electrode-io/electrode/commit/29f0cd4c13412b64226d938c0b4f015348e57829)
+
+-   `packages/electrode-react-webapp`
+
+    -   fix 302 redirect from router engine ([#863](https://github.com/electrode-io/electrode/pull/863)) [commit](http://github.com/electrode-io/electrode/commit/45e9bca33efa84e40466fde9f0565b10d7442c12)
+    -   [chore] minor code reformat [commit](http://github.com/electrode-io/electrode/commit/197509d3cb8493c563cc612d8825f14c3043cf1e)
+
+-   `packages/electrode-redux-router-engine`
+
+    -   [chore] trigger a publish to make v2 latest on npm [commit](http://github.com/electrode-io/electrode/commit/a8d285b9e6ca2b933ab8398add9dc75a79cd95c1)
+
+-   `packages/generator-electrode`
+
+    -   [patch] Clean up app generator unused css class names & take inline styles out ([#856](https://github.com/electrode-io/electrode/pull/856)) [commit](http://github.com/electrode-io/electrode/commit/a218547e77d188b91e89c328228b275c88ac2b88)
+    -   update dep for generated app ([#859](https://github.com/electrode-io/electrode/pull/859)) [commit](http://github.com/electrode-io/electrode/commit/279a7d258e53917261abc7a3599d063e62f3e5af)
+
+-   `packages/ignite-core`
+
+    -   update require node/npm to 8.0.0 and 5.6.0 [commit](http://github.com/electrode-io/electrode/commit/85148470cae1959ab88b3af7ef372dfb3b041b3c)
+
+-   `samples/stylus-sample`
+
+    -   fix stylus example ([#858](https://github.com/electrode-io/electrode/pull/858)) [commit](http://github.com/electrode-io/electrode/commit/aeb6e8c850e5a64914d2d087f32dcc1b0e7d4a37)
+
+-   `docs`
+
+    -   update docs for redux router engine on redirect [commit](http://github.com/electrode-io/electrode/commit/5ed5b51788c5d107edbce5a8fe37a2a21f641551)
+    -   fix links in doc why-use-electrode.md [commit](http://github.com/electrode-io/electrode/commit/5baec72e6fe388258e8d9b169a6a2366a19087b8)
+    -   fix links in start-with-component docs [commit](http://github.com/electrode-io/electrode/commit/f3867a22c47fb18ca463899d3a98d61ac35070a0)
+    -   update start-with-ignite docs [commit](http://github.com/electrode-io/electrode/commit/8e652fc6a057478ab421ad52120cd2ad8ee0e551)
+    -   fix requirements doc [commit](http://github.com/electrode-io/electrode/commit/f3dd3c0515f69a1106a3a974a41fbe21eac44f9f)
+    -   fix links in docs [commit](http://github.com/electrode-io/electrode/commit/7e6e840f53dc90ddf4293c8c502fac67df4a902d)
+
+-   `tools`
+
+    -   update README [commit](http://github.com/electrode-io/electrode/commit/9ed2b91e0bd1f69f3fc774ed85eb96c3960578f2)
+
 # 7/9/2018
 
 - fix [852](https://github.com/electrode-io/electrode/issues/852) - properly pass URL query to route components
