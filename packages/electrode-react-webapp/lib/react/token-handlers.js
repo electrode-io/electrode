@@ -62,9 +62,13 @@ module.exports = function setup(handlerContext /* , asyncTemplate */) {
     if (!data.renderJs) {
       return "";
     }
-    return WEBPACK_DEV
-      ? data.devJSBundle
-      : (data.jsChunk && `${prodBundleBase}${data.jsChunk.name}`) || "";
+    if (WEBPACK_DEV) {
+      return data.devJSBundle;
+    } else if (data.jsChunk) {
+      return `${prodBundleBase}${data.jsChunk.name}`;
+    } else {
+      return "";
+    }
   };
 
   const htmlifyScripts = (scripts, scriptNonce) => {
