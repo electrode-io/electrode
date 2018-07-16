@@ -83,6 +83,8 @@ module.exports = function setup(handlerContext /* , asyncTemplate */) {
     if (content && content.status !== HttpStatusCodes.OK) {
       return {
         status: content.status,
+        path: content.path,
+        store: content.store,
         html: result
       };
     }
