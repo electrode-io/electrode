@@ -23,6 +23,7 @@ The Electrode Redux Router Engine is a tool that handles asynchronous data for R
 - [Redux Router Engine](#redux-router-engine-1)
   - [Electrode](#electrode)
   - [Hapi/Express](#hapiexpress)
+- [Redirect](#redirect)
 - [APIs](#apis)
   - [`constructor(options)`](#constructoroptions)
   - [`async render(req, options)`](#async-renderreq-options)
@@ -270,6 +271,20 @@ function handler(req, reply) {
 }
 ```
 
+## Redirect
+
+Route redirects work very differently for client side vs server side.
+
+On the server, a HTTP 302 with a `location` header is returned to instruct the browser to do a redirect.
+
+On the client, it's handled by React Router with the browser location APIs.
+
+This engine currently has a limited support for server 302 redirect through React Router's [Redirect Component](https://reacttraining.com/react-router/web/api/Redirect).
+
+This behavior is disabled by default. If you enable it and one of your component has a `Redirect` in its code, the server side rendering will detect that and return a HTTP 302 to the browser.
+
+See `options.componentRedirect` flag in the contructor API on how to enable the behavior.
+
 ## APIs
 
 ReduxRouterEngine has the following class methods:
@@ -280,6 +295,7 @@ Where options could contain the following fields:
 
 - `routes` - **required** The [react-router-config] routes
   - This can also be a string that refer to the module that contains the routes definition.
+- `componentRedirect` - **optional** boolean to enable the server side component redirect behavior.
 - `withIds` - **optional** boolean to indicate whether to render with react-dataids.
 - `stringifyPreloadedState` **optional** callback to stringify `store.getState()` for sending to browser as redux initial state
 - `logError` - **optional** callback to log any error
