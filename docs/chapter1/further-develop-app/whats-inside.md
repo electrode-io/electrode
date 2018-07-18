@@ -61,7 +61,7 @@ We will be sharing our routes between server and client, so obviously we only wa
 
 > &lt;electrode-app&gt;/config
 
-In this folder we are leveraging one of our most important stand alone modules: [Electrode-Confippet](/chapter1/advanced/stand-alone-modules/confippet.md). Confippet is a versatile utility for managing your NodeJS application configuration. Its goal is customization and extensibility while offering a [preset configuration](https://github.com/electrode-io/electrode-confippet) out of the box.
+In this folder we are leveraging one of our most important stand alone modules: [Electrode-Confippet](../advanced/stand-alone-modules/confippet.md). Confippet is a versatile utility for managing your NodeJS application configuration. Its goal is customization and extensibility while offering a [preset configuration](https://github.com/electrode-io/electrode-confippet) out of the box.
 
 ```
 config
