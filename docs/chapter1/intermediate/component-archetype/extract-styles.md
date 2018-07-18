@@ -22,7 +22,8 @@ packages
 - `packages/[component]/src/styles`: stores the style styles for the component.
 
 ## Flags
-Electrode component uses `demo-app` to demo the `packages/[component]`. It uses the flag from `demo-app`. To check out the available flags for your desired styles, please refer [here.](/chapter1/intermediate/app-archetype/extract-styles.md)
+
+Electrode component uses `demo-app` to demo the `packages/[component]`. It uses the flag from `demo-app`. To check out the available flags for your desired styles, please refer [here.](../app-archetype/extract-styles.md)
 
 ## Style Default Cases
 

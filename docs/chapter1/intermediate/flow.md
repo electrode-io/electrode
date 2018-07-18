@@ -89,11 +89,11 @@ To enable `Flow`, you can reply `yes` to the prompt question when generating an 
 Would you like to generate .flowconfig for flow usage?
 ```
 
-This will generate a default `.flowconfig` file for your app/component. To know more about `electrode-ignite`, please read [here.](/chapter1/quick-start/start-with-ignite.md)
+This will generate a default `.flowconfig` file for your app/component. To know more about `electrode-ignite`, please read [here.](../quick-start/start-with-ignite.md)
 
 ## Flow FAQs
 
-You may experience similar issues when integrating with `Flow`, please check [here](/chapter1/intermediate/flow-faq.md) for solutions.
+You may experience similar issues when integrating with `Flow`, please check [here](./flow-faq.md) for solutions.
 
 ## References
 
