@@ -66,6 +66,10 @@
 - [Build a Progressive Web App](chapter1/intermediate/build-a-progressive-web-app.md)
 - [Server Side Data Hydration](chapter1/intermediate/server-side-data-hydration.md)
 
+### Guides
+
+- [Migrating from React Router v3 to v4](guides/rr3-to-rr4.md)
+
 ### Advanced
 
 - [Advanced](chapter1/advanced.md)
