@@ -1,12 +1,12 @@
 # Getting Started With Electrode Components
 
->Before proceeding, be sure to verify the [Requirements](../../overview/requirements.md) for setting up your development environment.
+> Before proceeding, be sure to verify the [Requirements](../../overview/requirements.md) for setting up your development environment.
 
 ## Quick Guide
 
 You can start your component using the Ignite Menu or using the Ignite Single task.
 
--   Ignite Menu
+- Ignite Menu
 
 ```bash
 $ ignite
@@ -14,7 +14,7 @@ $ ignite
 
 And choose the option for `Generate an Electrode component`.
 
--   Ignite Single task
+- Ignite Single task
 
 ```bash
 $ ignite generate-component
@@ -50,9 +50,10 @@ A webserver will start on localhost:3000. Your new component will be used in `de
 > You can skip this section if you do not need extra components.
 
 There are two ways to add more components to your project. You can use the Ignite menu or specify the task name.
->Make sure you are under the `packages` directory before you run the following commands.
 
--   Ignite Menu
+> Make sure you are under the `packages` directory before you run the following commands.
+
+- Ignite Menu
 
 ```bash
 $ ignite
@@ -60,7 +61,7 @@ $ ignite
 
 Specify option `5` for `Add a component to your existing component repo`.
 
--   Ignite Single task
+- Ignite Single task
 
 ```bash
 $ ignite add-component
@@ -80,6 +81,7 @@ The the installation is complete, you can preview the multi-components by using 
 $ cd ../../demo-app/
 $ clap dev
 ```
+
 The terminal window will display the status:
 
 ![Electrode Component Add Sample](../../images/dev-started.png)
@@ -88,13 +90,13 @@ Open [localhost:3000](http://localhost:3000/) in your browser to access the comp
 
 ![Electrode Component Add Sample](../../images/edit-me2.png)
 
-* * *
+---
 
 ## Project Structure
 
 The new Electrode component is applied. The Lerna structure can help manage multiple repositories within your packages directory.
 
-```markdown
+```
 electrode-component
     ├── demo-app
     │   ├── LICENSE
@@ -122,10 +124,10 @@ electrode-component
                 └── client
 ```
 
--   `demo-app` - Directory for Electrode Application—used for developing and testing your `packages/<componentName>`. You need to import your `packages/<componentName>` to demo-app, explore and personalize this web application there.
--   `packages/<componentName>/xclap.js` - Electrode archetype tasks.
--   `packages/<componentName>/demo` - Examples for how to demo your component.
--   `packages/<componentName>/src` - Component source code.
--   `packages/<componentName>/test` - Unit tests for your component.
+- `demo-app` - Directory for Electrode Application—used for developing and testing your `packages/<componentName>`. You need to import your `packages/<componentName>` to demo-app, explore and personalize this web application there.
+- `packages/<componentName>/xclap.js` - Electrode archetype tasks.
+- `packages/<componentName>/demo` - Examples for how to demo your component.
+- `packages/<componentName>/src` - Component source code.
+- `packages/<componentName>/test` - Unit tests for your component.
 
-To continue developing components, see [Developing Electrode Components.](../chapter1/quick-start/further-develop-component.md)
+To continue developing components, see [Developing Electrode Components.](../further-develop-component/low-level-components.md)

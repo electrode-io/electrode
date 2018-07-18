@@ -102,4 +102,4 @@ electrode-app
 
 The generated application included a few demo components to show you how to use Redux, CSS Modules, and React JSX. Feel free to play with them and remove or replace them when you are ready to add your application.
 
-To continue to build React components for your Electrode Application, see [Developing Your Electrode App.](./further-develop-app.md)
+To continue to build React components for your Electrode Application, see [Developing Your Electrode App.](../further-develop-app/build-app.md)
