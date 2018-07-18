@@ -51,14 +51,48 @@
     "transform-node-env-inline",
     "lodash",
     "transform-runtime",
-    "transform-flow-strip-types"
+    "transform-flow-strip-types",
   ],
   "env": {
     "test": {
       "plugins": ["dynamic-import-node"]
     },
+    "development": {
+       "plugins": [
+         ["babel-plugin-react-css-modules", {
+          "context": "./src",
+          "generateScopedName": "[name]__[local]___[hash:base64:5]",
+          "filetypes": {
+            ".scss": {
+              "syntax": "postcss-scss",
+              "plugins": [
+                "postcss-nested"
+              ]
+            },
+            ".styl": {
+              "syntax": "sugarss"
+            }
+          }
+        }]
+       ]
+    },
     "production": {
       "plugins": [
+        ["babel-plugin-react-css-modules", {
+          "context": "./src",
+          "generateScopedName": "[hash:base64:5]",
+          "filetypes": {
+            ".scss": {
+              "syntax": "postcss-scss",
+              "plugins": [
+                "postcss-nested"
+              ]
+            },
+            ".styl": {
+              "syntax": "sugarss"
+            }
+          }
+        }],
         "babel-plugin-transform-react-constant-elements",
         ["transform-react-remove-prop-types", {
            "removeImport": true
