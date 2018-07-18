@@ -1,6 +1,6 @@
 # Deploy Your App
 
-We're almost finished with our Electrode app development. The final step is to deploy `electrode-app` and share it with your fellow developers using [Heroku](https://devcenter.heroku.com/categories/deployment). We have listed the steps below, but feel free to learn more about [Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction). These instructions assume you have a GitHub account.  
+We're almost finished with our Electrode app development. The final step is to deploy `electrode-app` and share it with your fellow developers using [Heroku](https://devcenter.heroku.com/categories/deployment). We have listed the steps below, but feel free to learn more about [Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction). These instructions assume you have a GitHub account.
 
 Login to your GitHub account repository and create a new empty repository called 'Electrode-App'. Click `clone electrode-repo` and follow the steps below.
 
@@ -99,7 +99,7 @@ $ git add .
 $ git commit -m "Updates package.json with node version"
 ```
 
-Create an app on Heroku (which prepares Heroku to receive your source code). This also creates a Git remote repository called `heroku` with a  generated random name:
+Create an app on Heroku (which prepares Heroku to receive your source code). This also creates a Git remote repository called `heroku` with a generated random name:
 
 ```bash
 $ heroku create
@@ -135,4 +135,4 @@ Visit the app at the generated URL by using this command:
 $ heroku open
 ```
 
-And...you did it! Click [here](https://first-electrode-example-app.herokuapp.com/) for our deployed Heroku version. We will build even more in our [Getting Started: Intermediate](/chapter1/Intermediate.md) and cover complex topics like routing, server plugins, and other powerful deployment software.
+And...you did it! Click [here](https://first-electrode-example-app.herokuapp.com/) for our deployed Heroku version. We will build even more in our [Getting Started: Intermediate](../Intermediate.md) and cover complex topics like routing, server plugins, and other powerful deployment software.
