@@ -2,23 +2,18 @@
 
 ## Requirements
 
-> Before proceeding, be sure to verify the [Requirements](../../overview/requirements.md) for setting up your development environment.
+Before proceeding, be sure to verify the [Requirements](../../overview/requirements.md) for setting up your development environment.
 
-**Note: Make sure the directory you will work from does not contain any spaces in the path.**
-Bad
-```bash
-c:/work\ space/electrode >
-```
-Ok
-```bash
-c:/work_space/electrode >
-```
+> Note: Make sure the directory you will work from does not contain any spaces in the path.
+
+Bad: `c:\work space\electrode`
+Good: `c:\work_space\electrode`
 
 ## Quick Guide
 
 You can start your app using the Ignite Menu or using the Ignite Single task.
 
--   Ignite Menu
+- Ignite Menu
 
 ```bash
 $ ignite
@@ -26,7 +21,7 @@ $ ignite
 
 Choose the option for `Generate an Electrode application`.
 
--   Ignite Single task
+- Ignite Single task
 
 ```bash
 $ ignite generate-app
@@ -53,12 +48,12 @@ Now open [localhost:3000](http://localhost:3000/) in your browser to access the 
 
 ![Hello Electrode](../../images/hello-electrode.png)
 
-Go ahead and play around with the app.  View the page source to see the Server Side Rendered HTML.  Refresh the page to see the SSR content load immediately before React starts running.
+Go ahead and play around with the app. View the page source to see the Server Side Rendered HTML. Refresh the page to see the SSR content load immediately before React starts running.
 
 ## Additional Commands
 
 To view all the development tasks available enter the following:
- `clap`.
+`clap`.
 
 To start in hot mode, enter the following command:
 
@@ -78,7 +73,7 @@ To start your app in production mode:
 $ npm run prod
 ```
 
-* * *
+---
 
 ## Project Structure
 
@@ -99,12 +94,12 @@ electrode-app
 └── xclap.js
 ```
 
--   `config` - Contains the configuration for your application.
--   `src/client` - Contains your React application.
--   `src/server` - Contains your NodeJS server application with SSR support.
--   `test` - Contains the unit test for your application.
--   `xclap.js` - Entry to the Electrode archetype tasks.
+- `config` - Contains the configuration for your application.
+- `src/client` - Contains your React application.
+- `src/server` - Contains your NodeJS server application with SSR support.
+- `test` - Contains the unit test for your application.
+- `xclap.js` - Entry to the Electrode archetype tasks.
 
-The generated application included a few demo components to show you how to use Redux, CSS Modules, and React JSX.  Feel free to play with them and remove or replace them when you are ready to add your application.
+The generated application included a few demo components to show you how to use Redux, CSS Modules, and React JSX. Feel free to play with them and remove or replace them when you are ready to add your application.
 
-To continue to build React components for your Electrode Application, see [Developing Your Electrode App.](../quick-start/further-develop-app.md)
+To continue to build React components for your Electrode Application, see [Developing Your Electrode App.](./further-develop-app.md)
