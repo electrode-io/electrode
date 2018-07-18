@@ -26,12 +26,12 @@ import Notifications from "react-notify-toast";
 //<% } %>
 
 export default () => (
-  <div className={custom.container}>
+  <div styleName={"custom.container"}>
     {/*<% if (pwa) { %>*/}
     <Notifications />
     {/*<% } %>*/}
 
-    <section className={custom.header}>
+    <section styleName={"custom.header"}>
       <h2>
         <span>Hello from </span>
         <a href="https://github.com/electrode-io">
@@ -41,15 +41,15 @@ export default () => (
       </h2>
     </section>
 
-    <div className={custom["docs-section"]}>
+    <div styleName={"custom.docs-section"}>
       <DemoStates />
     </div>
 
-    <div className={custom["docs-section"]}>
+    <div styleName={"custom.docs-section"}>
       <DemoPureStates />
     </div>
 
-    <div className={custom["docs-section"]}>
+    <div styleName={"custom.docs-section"}>
       <DemoButtons />
     </div>
   </div>
