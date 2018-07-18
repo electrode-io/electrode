@@ -36,7 +36,7 @@ const setupOptions = options => {
     serverSideRendering: true,
     htmlFile: Path.join(__dirname, "index.html"),
     devServer: {
-      host: process.env.WEBPACK_HOST || "127.0.0.1",
+      host: process.env.WEBPACK_DEV_HOST || process.env.WEBPACK_HOST || "127.0.0.1",
       port: process.env.WEBPACK_DEV_PORT || "2992",
       https: Boolean(process.env.WEBPACK_DEV_HTTPS)
     },
