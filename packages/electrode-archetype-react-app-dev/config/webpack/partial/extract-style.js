@@ -34,8 +34,9 @@ let cssModuleSupport = archetype.webpack.cssModuleSupport;
 const cssModuleStylusSupport = archetype.webpack.cssModuleStylusSupport;
 const AppMode = archetype.AppMode;
 
+const localIdentName = `${process.env.NODE_ENV === "production" ? "" : "[name]__[local]___"}[hash:base64:5]`;
 const cssLoaderOptions =
-  "?modules&localIdentName=[name]__[local]___[hash:base64:5]&-autoprefixer";
+  `?modules&localIdentName=${localIdentName}&-autoprefixer`;
 const cssQuery = `${cssLoader}!${postcssLoader}`;
 const stylusQuery = `${cssLoader}?-autoprefixer!${stylusLoader}`;
 const scssQuery = `${cssQuery}!${sassLoader}`;
