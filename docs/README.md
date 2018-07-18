@@ -47,7 +47,7 @@ The [Electrode main repo] uses [Lerna] to manage multiple related packages that 
 Electrode Ignite allows you to quickly create a Universal React App or Component with support from the archetypes, and server in Node with Hapi or Express.
 
 For information on how to use the modules,
-check out [Get Started With Electrode App](chapter1/quick-start/start-with-app.html).
+check out [Get Started With Electrode App](./chapter1/quick-start/start-with-app.html).
 
 ## Sample Applications
 
@@ -112,6 +112,6 @@ Licensed under the [Apache License, Version 2.0].
 [contributing guide]: https://github.com/electrode-io/electrode/blob/master/CONTRIBUTING.md
 [submitting a pr]: https://github.com/electrode-io/electrode/pulls
 [reporting an issue]: https://github.com/electrode-io/electrode/issues
-[what is electrode]: /overview/what-is-electrode.md
+[what is electrode]: ./overview/what-is-electrode.md
 [getting started with electrode]: https://docs.electrode.io/chapter1/quick-start/start-with-app.html
 [hello-electrode]: images/hello-electrode.png
