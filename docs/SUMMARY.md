@@ -47,9 +47,8 @@
 
 ### Guides
 
-- General Guides
+- General
   - [Server Config](chapter1/intermediate/server-config.md)
-  - [Migrating from React Router v3 to v4](guides/rr3-to-rr4.md)
   - [Build with material-ui](chapter1/intermediate/build-with-material-ui.md)
   - [Build a Progressive Web App](chapter1/intermediate/build-a-progressive-web-app.md)
   - [Build a Server Plugin](chapter1/intermediate/build-a-server-plugin.md)
@@ -57,6 +56,9 @@
   - [Deploy with Docker](chapter1/intermediate/more-deployments/docker.md)
   - [Deploy with Kubernetes](chapter1/intermediate/more-deployments/kubernetes.md)
   - [Electrode Boilerplate Sample](chapter1/advanced/you-can-view-an-example-bundleanalyzetsv-output-using-the-electrode-boilerplate-code.md)
+- Migration
+  - [Migrating from React Router v3 to v4](guides/rr3-to-rr4.md)
+  - [Migrating to webpack dev middleware](guides/webpack-dev-middleware.md)
 
 ### Other
 
