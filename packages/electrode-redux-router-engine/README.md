@@ -14,7 +14,7 @@ $ npm install -save electrode-redux-router-engine
 
 This module is a part of the [Electrode Platform].
 
-See documentation [here](https://docs.electrode.io/advanced/stand-alone-modules/redux-router-engine) for details on usage of APIs and options.
+See documentation [here](https://docs.electrode.io/other/stand-alone-modules/redux-router-engine) for details on usage of APIs and options.
 
 ## License
 
@@ -35,4 +35,3 @@ Licensed under the [Apache License, Version 2.0].
 [daviddm-dev-url]: https://david-dm.org/electrode-io/electrode?path=packages/electrode-redux-router-engine?type-dev
 [npm-downloads-image]: https://img.shields.io/npm/dm/electrode-redux-router-engine.svg
 [npm-downloads-url]: https://www.npmjs.com/package/electrode-redux-router-engine
-
