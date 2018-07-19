@@ -65,7 +65,8 @@ const routes = [
       },
       {
         path: "/above-the-fold",
-        component: AboveFold
+        component: AboveFold,
+        init: true
       }
     ]
   }

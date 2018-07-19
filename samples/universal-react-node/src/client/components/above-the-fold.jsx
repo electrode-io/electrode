@@ -2,27 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import { AboveTheFoldOnlyServerRender } from "above-the-fold-only-server-render";
 import { connect } from "react-redux";
-import queryString from "query-string";
 import smileyPng from "../images/718smiley.png";
 import peaceSmileyPng from "../images/peace-smiley.png";
 
 /* eslint-disable max-len */
 
-class AboveFoldWrapper extends React.Component {
-  render() {
-    return <AboveFold skip={JSON.parse(queryString.parse(this.props.location.search).skip)} />;
-  }
-}
-
-AboveFoldWrapper.propTypes = {
-  skip: PropTypes.bool
-};
-
-class AboveFold extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
+export class AboveFold extends React.Component {
   render() {
     return (
       <div>
@@ -141,8 +126,6 @@ AboveFold.propTypes = {
   skip: PropTypes.bool
 };
 
-const mapStateToProps = state => ({
-  skip: state.skip
-});
-
-export default connect(mapStateToProps)(AboveFoldWrapper);
+export default connect(state => {
+  return { skip: state.skip };
+})(AboveFold);

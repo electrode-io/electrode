@@ -44,7 +44,6 @@
     "good-console": "^7.1.0",
     "isomorphic-fetch": "^2.2.1",
     "mongojs": "^2.4.0",
-    "query-string": "^6.1.0",
     "react-notify-toast": "^0.4.1",
     "react-router-config": "^1.0.0-beta.4",
     "react-router-dom": "^4.3.1",
