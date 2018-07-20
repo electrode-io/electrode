@@ -48,6 +48,7 @@
 ### Guides
 
 - General
+  - [Developing and debugging](guides/dev-and-debug.md)
   - [Server Config](chapter1/intermediate/server-config.md)
   - [Build with material-ui](chapter1/intermediate/build-with-material-ui.md)
   - [Build a Progressive Web App](chapter1/intermediate/build-a-progressive-web-app.md)
