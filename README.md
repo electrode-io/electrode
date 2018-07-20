@@ -35,7 +35,7 @@ Check [gitbook] for more info about gitbook.
 
 Do you find Electrode useful? Please send us your encouragement with a github star.
 
-Did you find an issue? Would you like to help with the project? Please See our [contributing guide] for instructions on [submitting a PR] or [reporting an issue].
+Did you find an issue? Would you like to help with the project? Please see our [contributing guide] for instructions on [submitting a PR] or [reporting an issue].
 
 # Support and Acknowledgement
 
@@ -65,3 +65,4 @@ Licensed under the [Apache License, Version 2.0].
 [hello-electrode]: docs/images/hello-electrode.png
 [submitting a pr]: https://github.com/electrode-io/electrode/pulls
 [reporting an issue]: https://github.com/electrode-io/electrode/issues
+[contributing guide]: CONTRIBUTING.md
