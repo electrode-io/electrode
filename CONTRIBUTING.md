@@ -8,13 +8,15 @@ There are [few guidelines](#contributing-guidelines) that we request contributor
 
 This repo uses [Lerna] as a top level setup and [fyn] to manage Node Modules.
 
-- Install these CLI tools globally: [xclap-cli] and [fyn]
+### Setup
+
+Install these CLI tools globally: [xclap-cli] and [fyn]
 
 ```bash
 $ npm install -g xclap-cli fyn
 ```
 
-- Fork and clone the repo at <https://github.com/electrode-io/electrode.git> and bootstrap all the packages.
+Fork and clone the repo at <https://github.com/electrode-io/electrode.git> and bootstrap all the packages.
 
 ```bash
 $ git clone https://github.com/<your-github-id>/electrode.git
@@ -23,9 +25,11 @@ $ npm install
 $ npm run bootstrap
 ```
 
-- Quick Test
+### Quick Test
 
 Because many of our modules depend on each other, to make local development easier, we use [fyn] to install packages when doing development.
+
+#### Setup fyn
 
 For [fyn]'s enhanced local dev workflow, the following two setups are needed.
 
@@ -43,7 +47,9 @@ set NODE_PRESERVE_SYMLINKS 1
 
 Our build scripts automatically does it, but it's a good idea to set them up anyways.
 
-- Now you can go to the `samples` folder and try the `universal-react-node` sample app, develop and test your changes over there.
+#### Try a sample
+
+Now you can go to the `samples` folder and try the `universal-react-node` sample app, develop and test your changes over there.
 
 ```bash
 $ eval `fyn bash`
@@ -57,11 +63,18 @@ After running above, you should see a similar text as `Hapi.js server running at
 
 And when you open the browser at `http://localhost:3000`, you should see a large Electrode icon with a few demonstration components.
 
-You can also run in `hot` mode. However, `hot` mode is still experimental and there may be issues.
+#### Test with generator
+
+You can quickly use the generator to create an app in `tmp/hapi-app` for testing.
 
 ```bash
-$ clap hot
+$ clap gen-hapi-app
+$ cd tmp/hapi-app
+$ fyn
+$ clap dev
 ```
+
+This sample app is using [fyn] to directly linked to the modules under the `packages` directory. Changes made there will be reflected in the app immediately. This is the typical testing and developing flow we use.
 
 ## Contributing Guidelines
 

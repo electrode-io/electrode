@@ -61,7 +61,7 @@ const runAppTest = (dir, forceLocal) => {
   );
 };
 
-const testGenerator = (testDir, name, clean, prompts) => {
+const testGenerator = (testDir, name, clean, runTest, prompts) => {
   name = name || "test-app";
   const yoApp = Path.join(packagesDir, "generator-electrode/generators/app/index.js");
   const defaultPrompts = {
@@ -90,7 +90,7 @@ const testGenerator = (testDir, name, clean, prompts) => {
     })
     .withPrompts(prompts)
     .then(() => {
-      return runAppTest(testAppDir, true);
+      return runTest ? runAppTest(testAppDir, true) : pullLocalPackages(testAppDir);
     });
 };
 
@@ -132,6 +132,7 @@ xclap.load({
   bootstrap: "~$fynpo",
   test: [".fyn-setup", "bootstrap", ".lerna.test", "test-reporter", "build-test"],
   "test-generator": [".fyn-setup", ".test-generator --hapi"],
+  "gen-hapi-app": [".fyn-setup", ".test-generator --hapi --no-test"],
   "test-demo-component": [
     ".fyn-setup",
     `~$cd samples/demo-component && fyn --pg none install && npm test`
@@ -191,9 +192,12 @@ xclap.load({
     desc: "Run tests for the yeoman generators",
     task: function() {
       const hapiOnly = this.argv.indexOf("--hapi") >= 0;
+      const runTest = this.argv.indexOf("--no-test") < 0;
       const testDir = Path.join(__dirname, "tmp");
-      return testGenerator(testDir, "hapi-app", true, { serverType: "HapiJS" }).then(
-        () => hapiOnly || testGenerator(testDir, "express-app", false, { serverType: "ExpressJS" })
+      return testGenerator(testDir, "hapi-app", true, runTest, { serverType: "HapiJS" }).then(
+        () =>
+          hapiOnly ||
+          testGenerator(testDir, "express-app", false, runTest, { serverType: "ExpressJS" })
       );
     }
   }
