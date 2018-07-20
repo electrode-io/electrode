@@ -2,7 +2,7 @@ export default function(options) {
   return {
     reducer: {},
     initialState: {
-      skip: options.req.query.skip === "true"
+      skip: options.req.url.query.skip === "true"
     }
   };
 }
