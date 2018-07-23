@@ -32,10 +32,13 @@ const sassLoader = require.resolve("sass-loader");
 
 let cssModuleSupport = archetype.webpack.cssModuleSupport;
 const cssModuleStylusSupport = archetype.webpack.cssModuleStylusSupport;
+const enableShortenCSSNames = archetype.webpack.enableShortenCSSNames;
 const AppMode = archetype.AppMode;
 
-const cssLoaderOptions =
-  "?modules&localIdentName=[name]__[local]___[hash:base64:5]&-autoprefixer";
+const enableShortHash = process.env.NODE_ENV === "production" && enableShortenCSSNames;
+const localIdentName = `${enableShortHash ? "" : "[name]__[local]___"}[hash:base64:5]`;
+const cssLoaderOptions = `?modules&localIdentName=${localIdentName}&-autoprefixer`;
+
 const cssQuery = `${cssLoader}!${postcssLoader}`;
 const stylusQuery = `${cssLoader}?-autoprefixer!${stylusLoader}`;
 const scssQuery = `${cssQuery}!${sassLoader}`;
@@ -139,12 +142,13 @@ module.exports = function() {
               : [];
           },
           stylus: {
-            use: !cssModuleSupport ? [
-                autoprefixer({
-                  browsers: ["last 2 versions", "ie >= 9", "> 5%"]
-                })
-              ]
-            : []
+            use: !cssModuleSupport
+              ? [
+                  autoprefixer({
+                    browsers: ["last 2 versions", "ie >= 9", "> 5%"]
+                  })
+                ]
+              : []
           }
         }
       })
