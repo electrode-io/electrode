@@ -12,6 +12,12 @@ process.env.SERVER_ES6 = true;
 process.env.WEBPACK_DEV_MIDDLEWARE = true;
 
 /*
+ * Tell Electrode app archetype that you want to shorten css names under production env
+ */
+
+process.env.ENABLE_SHORTEN_CSS_NAMES = true;
+
+/*
  * Enable webpack's NodeSourcePlugin to simulate NodeJS libs in browser
  *
  * This basically adds a bunch of extra JavaScript to the browser to simulate
