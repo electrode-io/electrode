@@ -1,6 +1,6 @@
 import React from "react";
-import custom from "../styles/custom.css";
-import milligram from "milligram/dist/milligram.css";
+import custom from "../styles/custom.css"; // eslint-disable-line no-unused-vars
+import milligram from "milligram/dist/milligram.css"; // eslint-disable-line no-unused-vars
 
 /*
  * Demostrates a simple pure functional component
