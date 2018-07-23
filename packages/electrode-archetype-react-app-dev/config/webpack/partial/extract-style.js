@@ -32,9 +32,10 @@ const sassLoader = require.resolve("sass-loader");
 
 let cssModuleSupport = archetype.webpack.cssModuleSupport;
 const cssModuleStylusSupport = archetype.webpack.cssModuleStylusSupport;
+const enableShortenCSSNames = archetype.webpack.enableShortenCSSNames;
 const AppMode = archetype.AppMode;
 
-const enableShortHash = process.env.NODE_ENV === "production" && archetype.enableShortenCSSNames;
+const enableShortHash = process.env.NODE_ENV === "production" && enableShortenCSSNames;
 const localIdentName = `${enableShortHash ? "" : "[name]__[local]___"}[hash:base64:5]`;
 const cssLoaderOptions = `?modules&localIdentName=${localIdentName}&-autoprefixer`;
 

@@ -8,7 +8,7 @@ const utils = require("../lib/utils");
 const makeAppMode = require("../lib/app-mode");
 const userConfig = Object.assign(
   {
-    options: { reactLib: "react", karma: true, enableShortenCSSNames: false }
+    options: { reactLib: "react", karma: true }
   },
   optionalRequire(Path.resolve("archetype/config"))
 );
@@ -22,8 +22,7 @@ module.exports = {
   eTmpDir: constants.ETMP_DIR,
   prodModulesDir: Path.join(constants.PROD_DIR, "modules"),
   checkUserBabelRc: utils.checkUserBabelRc,
-  addArchetypeConfig: config => Object.assign(module.exports, config),
-  enableShortenCSSNames: userConfig.options.enableShortenCSSNames
+  addArchetypeConfig: config => Object.assign(module.exports, config)
 };
 
 function checkTopDevArchetype() {
