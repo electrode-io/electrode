@@ -2,7 +2,7 @@
 
 Webpack configurations are a significant part of the component archetype. They help with compiling and bundling your React component code. Below is the component configuration used with webpack:
 
-```markdown
+```
 - webpack.config.coverage.js: When running coverage test
 - webpack.config.js: When building your app for production
 - webpack.config.test.js: When running tests
@@ -20,17 +20,17 @@ We use `webpack-config-composer` to compose webpack configuration partials in th
 
 Below are the partial configurations for a new component archetype webpack structure:
 
-```markdown
+```
 |- electrode-archetype-react-component/config/webpack
-| |- partial
-| | |- babel.js
-| | |- define.js
-| | |- fonts.js
-| | |- images.js
-| | |- json.js
-| | |- optimize.js
-| | |- sourcemaps.js
-| | |- styles.js
+|  |- partial
+|  |  |- babel.js
+|  |  |- define.js
+|  |  |- fonts.js
+|  |  |- images.js
+|  |  |- json.js
+|  |  |- optimize.js
+|  |  |- sourcemaps.js
+|  |  |- styles.js
 ```
 
 ---

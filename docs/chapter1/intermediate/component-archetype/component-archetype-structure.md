@@ -6,31 +6,31 @@ At the same time, in the [new electrode components](../create-a-electrode-compon
 
 The new structure of the Electrode React Component Archetype is shown below.
 
-```markdown
+```
 - electrode-archetype-react-component
   |- config/
-  | |- babel
-  | |- browser_test
-  | |- dependencies
-  | |- eslint
-  | |- istanbul
-  | |- karma
-  | |- stylint
-  | |- webpack
-  | |- partial
-  | |- babel.js
-  | |- define.js
-  | |- fonts.js
-  | |- images.js
-  | |- json.js
-  | |- optimize.js
-  | |- sourcemaps.js
-  | |- styles.js
-  | |- webpack.config.coverage.js
-  | |- webpack.config.dev.js
-  | |- webpack.config.js
-  | |- webpack.config.test.js
-  | |- archetype.js
+  |  |- babel
+  |  |- browser_test
+  |  |- dependencies
+  |  |- eslint
+  |  |- istanbul
+  |  |- karma
+  |  |- stylint
+  |  |- webpack
+  |    |- partial
+  |      |- babel.js
+  |      |- define.js
+  |      |- fonts.js
+  |      |- images.js
+  |      |- json.js
+  |      |- optimize.js
+  |      |- sourcemaps.js
+  |      |- styles.js
+  |    |- webpack.config.coverage.js
+  |    |- webpack.config.dev.js
+  |    |- webpack.config.js
+  |    |- webpack.config.test.js
+  |  |- archetype.js
   |- scripts/
   |- archetype-clap.js
   |- xclap.js
