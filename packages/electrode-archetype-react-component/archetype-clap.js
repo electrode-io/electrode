@@ -13,6 +13,7 @@ const Fs = require("fs");
 const glob = devRequire("glob");
 
 const flattenMessagesL10n = require(`${archetype.devPath}/scripts/l10n/flatten-messages.js`);
+const copyAsFlowDeclaration = require(`${archetype.devPath}/scripts/copy-as-flow-declaration.js`);
 
 if (process.argv[1].indexOf("gulp") >= 0) {
   const cmd = chalk.magenta(`clap ${process.argv.slice(2).join(" ")}`);
@@ -125,15 +126,13 @@ function makeTasks(hostDir) {
         "clean-lib",
         ".tmp-to-lib",
         "build-lib:flatten-l10n",
-        // TODO: fix the badly written and messy copy-as-flow-declaration.js so it can
-        // deterministically await async complete (and exit if isMain).
-        // "build-lib:copy-flow",
+        "build-lib:copy-flow",
         "build-lib:clean-tmp"
       ]
     },
     "babel-src-step": `babel -D src -d .tmplib`,
     "build-lib:clean-tmp": () => $$.rm("-rf", "./tmp"),
-    "build-lib:copy-flow": `node -r ${archetype.devPath}/scripts/copy-as-flow-declaration.js`,
+    "build-lib:copy-flow": copyAsFlowDeclaration,
     "build-lib:flatten-l10n": flattenMessagesL10n,
 
     "archetype:check": [
