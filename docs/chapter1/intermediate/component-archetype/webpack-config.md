@@ -1,16 +1,16 @@
 # Webpack configuration
 
-Webpack configurations are a significant part of the component archetype.  They help with compiling and bundling your React component code.  Below is the component configuration used with webpack:
+Webpack configurations are a significant part of the component archetype. They help with compiling and bundling your React component code. Below is the component configuration used with webpack:
 
-```markdown
-- webpack.config.coverage.js:  When running coverage test
+```
+- webpack.config.coverage.js: When running coverage test
 - webpack.config.js: When building your app for production
 - webpack.config.test.js: When running tests
 ```
 
 ## Migrate to Webpack v2
 
-In order to keep pace with the latest trend, our new component archetype also finished migration from webpack v1 to webpack v2. Webpack 2 offers better performance, improved bundling, and a much nicer experience when configuring it. For information about migrating to webpack v2, see the   [webpack migration documentation](https://webpack.js.org/guides/migrating/).
+In order to keep pace with the latest trend, our new component archetype also finished migration from webpack v1 to webpack v2. Webpack 2 offers better performance, improved bundling, and a much nicer experience when configuring it. For information about migrating to webpack v2, see the [webpack migration documentation](https://webpack.js.org/migrate/3/).
 
 ## Webpack-config-composer
 
@@ -20,7 +20,7 @@ We use `webpack-config-composer` to compose webpack configuration partials in th
 
 Below are the partial configurations for a new component archetype webpack structure:
 
-```markdown
+```
 |- electrode-archetype-react-component/config/webpack
 |  |- partial
 |  |  |- babel.js
@@ -31,9 +31,8 @@ Below are the partial configurations for a new component archetype webpack struc
 |  |  |- optimize.js
 |  |  |- sourcemaps.js
 |  |  |- styles.js
-
 ```
 
 ---
 
-After understanding the new Component Archetype Structure, it's time to generate Electrode components by using the latest Electrode generators. With `generator-electrode`, we can create dynamic and performant Lerna-structured Electrode components. Let's explore and personalize this in our next section, [Create an Electrode Component.](/chapter1/intermediate/create-a-electrode-component.md)
+After understanding the new Component Archetype Structure, it's time to generate Electrode components by using the latest Electrode generators. With `generator-electrode`, we can create dynamic and performant Lerna-structured Electrode components. Let's explore and personalize this in our next section, [Create an Electrode Component.](../create-a-electrode-component.md)
