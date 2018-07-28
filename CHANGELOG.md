@@ -1,3 +1,82 @@
+# 7/27/2018
+
+- New feature - support CSS module `styleName` tag to enable shorten class name in production mode.
+- Fix for https://github.com/facebook/jest/issues/6766
+- Fix above the fold demo in universal-react-node sample
+- Fix WEBPACK_DEV_HOST check in electrode-react-webapp
+- Fix broken links in docs
+- Add migration guide to docs for React Router v3 to v4
+- Add migration guide to docs for webpack dev middleware
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-react-app@5.4.0 `(5.3.4 => 5.4.0)`
+-   electrode-archetype-react-app-dev@5.4.0 `(5.3.4 => 5.4.0)`
+-   electrode-archetype-react-component@5.3.2 `(5.3.1 => 5.3.2)`
+-   electrode-archetype-react-component-dev@5.3.2 `(5.3.1 => 5.3.2)`
+-   electrode-react-webapp@2.5.2 `(2.5.1 => 2.5.2)`
+-   electrode-redux-router-engine@2.1.2 `(2.1.1 => 2.1.2)`
+-   generator-electrode@4.2.0 `(4.1.3 => 4.2.0)`
+
+### Lerna Updated
+
+-   electrode-ignite@2.1.4 `(2.1.3 => 2.1.4)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [minor] shorten css names ([#876](https://github.com/electrode-io/electrode/pull/876)) [commit](http://github.com/electrode-io/electrode/commit/58eaec44f0e7eeb0a89ff9d6cbe90005afc39b9b)
+    -   add testURL to jest config [commit](http://github.com/electrode-io/electrode/commit/b72dff34e98236034ed4a9b98988672a75944307)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   rewrite copy as flow ([#879](https://github.com/electrode-io/electrode/pull/879)) [commit](http://github.com/electrode-io/electrode/commit/6012a2acf6f4da37f30fb31ced1badb87a6651ab)
+
+-   `packages/electrode-react-webapp`
+
+    -   pass token instance to handler func ([#880](https://github.com/electrode-io/electrode/pull/880)) [commit](http://github.com/electrode-io/electrode/commit/bbbe2401eefc60592789079ac24965d4382b5794)
+    -   [patch] check WEBPACK_DEV_HOST ([#868](https://github.com/electrode-io/electrode/pull/868)) [commit](http://github.com/electrode-io/electrode/commit/c62b12c0c54e7fb553749194057773f1306a6192)
+
+-   `packages/electrode-redux-router-engine`
+
+    -   update full doc link in redux router engine README ([#871](https://github.com/electrode-io/electrode/pull/871)) [commit](http://github.com/electrode-io/electrode/commit/7d445be75a8fa5c6a1a46116fec5958424e5611a)
+
+-   `packages/generator-electrode`
+
+    -   [minor] Enable shorten css names for generators ([#878](https://github.com/electrode-io/electrode/pull/878)) [commit](http://github.com/electrode-io/electrode/commit/47acd2dc4e7a67ca0e5bb8b9cb84631457564aeb)
+    -   use milligram to replace skeleton ([#861](https://github.com/electrode-io/electrode/pull/861)) [commit](http://github.com/electrode-io/electrode/commit/eaf008f9e6480bf5b2421a36f19874e55a58dc87)
+
+-   `samples/universal-react-node`
+
+    -   [patch] Fix above the fold path inside universal-react-node sample ([#867](https://github.com/electrode-io/electrode/pull/867)) [commit](http://github.com/electrode-io/electrode/commit/514cb95589e5dd0dd6a5458fc70cf2928eb924b4)
+
+-   `docs`
+
+    -   [patch] fix links inside electrode component docs ([#877](https://github.com/electrode-io/electrode/pull/877)) [commit](http://github.com/electrode-io/electrode/commit/35ab702a08c291455acdee1d49a99c06e603f3ce)
+    -   add guide to develop and debugging with webpack middleware ([#875](https://github.com/electrode-io/electrode/pull/875)) [commit](http://github.com/electrode-io/electrode/commit/a99b5b3dcf994c3fc5cee05db59763882c333d8e)
+    -   Fix links in intermediate app archetype section ([#873](https://github.com/electrode-io/electrode/pull/873)) [commit](http://github.com/electrode-io/electrode/commit/a03179feb032b81986904ca0e61912face302f0d)
+    -   add webpack dev middleware migration guide ([#872](https://github.com/electrode-io/electrode/pull/872)) [commit](http://github.com/electrode-io/electrode/commit/cebed81c0c81b309076f954f37ee54068ab6ceb2)
+    -   Update customize-config.md [commit](http://github.com/electrode-io/electrode/commit/5195d1e1bbbe27f7a1954ea46cd675041377d112)
+    -   fix links for electrode application ([#870](https://github.com/electrode-io/electrode/pull/870)) [commit](http://github.com/electrode-io/electrode/commit/cc9fb514135a4fa6c837c785bde32608b0b764c1)
+    -   [patch] fix links for overview and readme section ([#869](https://github.com/electrode-io/electrode/pull/869)) [commit](http://github.com/electrode-io/electrode/commit/f045dfbc595d80aeffb17b96e191041af64d3305)
+    -   [docs] update further develop links [commit](http://github.com/electrode-io/electrode/commit/f9ed0c2d533948564628079eba395131f8066732)
+    -   [docs] update readme [commit](http://github.com/electrode-io/electrode/commit/1639cf9005ba8d2079358b743e726115d4bef9a8)
+    -   [docs] update summary [commit](http://github.com/electrode-io/electrode/commit/b9157d7e6ff20b9596bbc64920978e9a5ad39b94)
+    -   [docs] add react router 3 to 4 migration guide [commit](http://github.com/electrode-io/electrode/commit/057d3c9819e25dca9a72082b692837a6f1a9466d)
+
+-   `tools`
+
+    -   [docs] update readme [commit](http://github.com/electrode-io/electrode/commit/1639cf9005ba8d2079358b743e726115d4bef9a8)
+    -   update electrode app screen shot ([#864](https://github.com/electrode-io/electrode/pull/864)) [commit](http://github.com/electrode-io/electrode/commit/f95214f652e19014920531adf854c2de392f5c09)
+
+-   `MISC`
+
+    -   update contributing guide [commit](http://github.com/electrode-io/electrode/commit/99cb973ca49343adfcc83ee25c1a50f4d0447182)
+    -   fix link in README [commit](http://github.com/electrode-io/electrode/commit/f22c3fb1af983ef833c1d84d6c39d741bba12950)
+
 # 7/16/2018
 
 -   fix 302 redirect from router engine
