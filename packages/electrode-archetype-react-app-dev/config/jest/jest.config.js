@@ -18,7 +18,8 @@ const jestDefaultConfig = {
     "\\.(css|less)$": "identity-obj-proxy"
   },
   setupTestFrameworkScriptFile: frameworkMock,
-  modulePathIgnorePatterns: ["<rootDir>/test"]
+  modulePathIgnorePatterns: ["<rootDir>/test"],
+  testURL: "http://localhost/"
 };
 
 module.exports = Object.assign({}, jestDefaultConfig, archetype.jest);
