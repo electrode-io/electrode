@@ -37,12 +37,13 @@ class Renderer {
 
         // token function takes more than one argument, so pass in a callback for async
         if (tkFunc.length > 1) {
-          return xt => tkFunc(xt.context, () => this._next(xt));
+          return xt => tkFunc.call(tk, xt.context, () => this._next(xt));
         }
 
         // token function is sync or returns Promise, so pass its return value
         // to context.handleTokenResult
-        return xt => xt.context.handleTokenResult(tk.id, tkFunc(xt.context), () => this._next(xt));
+        return xt =>
+          xt.context.handleTokenResult(tk.id, tkFunc.call(tk, xt.context), () => this._next(xt));
       }
 
       // token is a module and its process function wants a next callback
