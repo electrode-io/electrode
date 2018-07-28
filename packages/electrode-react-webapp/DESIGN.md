@@ -16,15 +16,14 @@ The design of the rendering flow took the following into consideration.
 
 - Within your template file, special tokens can be specified with `<!--%{token}-->`.
 
-  - Where `token` is the string referring to a token or name of a processor module.
+  - **token**: Where `token` is the string referring to a token or name of a processor module.
 
-  - To specify a processor module, start the token with `#`. ie: `<!--%{#module_name}-->`, where `module_name` specifies a name for a [Custom Processor Module](#custom-processor-module). The module will be loaded with `require`. If the `module_name` starts with `.`, then the module is loaded from CWD. For example, `<!--${#./lib/custom}-->` will load the module `./lib/custom` from under CWD.
+  - **module**: To specify a processor module, start the token with `#`. ie: `<!--%{#module_name}-->`, where `module_name` specifies a name for a [Custom Processor Module](#custom-processor-module). The module will be loaded with `require`. If the `module_name` starts with `.`, then the module is loaded from CWD. For example, `<!--${#./lib/custom}-->` will load the module `./lib/custom` from under CWD.
 
   - Tokens can also be multi lines.
 
-  - Comments can be added as lines that start with `//`.
-
-  - Comments must be in their own lines only.
+  - **Comments** can be added as lines that start with `//`.
+    - must be in their own lines only.
 
 For example:
 
@@ -34,6 +33,14 @@ For example:
   custom-token-name
 }-->
 ```
+
+### Invoking token handler/process functions
+
+The **token** has either a handler function or a module with a process function.
+
+The function are invoked with the token object instance as `this`.
+
+So for example, to access the [Token props](#token-props) you can access `this.props` which is an object with props specified in the template.
 
 ### Token Props
 
