@@ -625,6 +625,7 @@ describe("hapi electrode-react-webapp", () => {
       }
     });
 
+    configOptions.replyErrorStack = false;
     configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
     configOptions.stats = "test/data/stats-test-one-bundle.json";
     configOptions.htmlFile = "test/data/index-1.html";
@@ -640,6 +641,39 @@ describe("hapi electrode-react-webapp", () => {
         .then(res => {
           expect(res.statusCode).to.equal(500);
           expect(res.result).to.equal("test content throw");
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
+  it("should reply with error stack if option is not false", () => {
+    assign(paths, {
+      content: () => {
+        const err = new Error("test content throw");
+        return Promise.reject(err);
+      }
+    });
+
+    // configOptions.replyErrorStack = false;
+    configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
+    configOptions.stats = "test/data/stats-test-one-bundle.json";
+    configOptions.htmlFile = "test/data/index-1.html";
+    Object.assign(paths, {
+      tokenHandler: "./test/fixtures/token-handler"
+    });
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .then(res => {
+          expect(res.statusCode).to.equal(500);
+          expect(res.result).contains("electrode-react-webapp/test/spec/hapi.index.spec.js");
           stopServer(server);
         })
         .catch(err => {
