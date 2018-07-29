@@ -63,11 +63,11 @@ const setupOptions = options => {
   const statsPath = getStatsPath(pluginOptions.stats, pluginOptions.buildArtifacts);
 
   const assets = loadAssetsFromStats(statsPath);
-  pluginOptions.__internals = {
+  pluginOptions.__internals = _.defaultsDeep({}, pluginOptions.__internals, {
     assets,
     chunkSelector,
     devBundleBase
-  };
+  });
 
   return pluginOptions;
 };
