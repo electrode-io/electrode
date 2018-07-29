@@ -245,9 +245,7 @@ module.exports = function setup(handlerContext /* , asyncTemplate */) {
         : `<script${context.user.scriptNonce}>${context.user.content.prefetch}</script>`;
     },
 
-    [META_TAGS_MARKER]: () => {
-      return iconStats;
-    },
+    [META_TAGS_MARKER]: iconStats,
 
     [CRITICAL_CSS_MARKER]: context => {
       return criticalCSS ? `<style${context.user.styleNonce}>${criticalCSS}</style>` : "";

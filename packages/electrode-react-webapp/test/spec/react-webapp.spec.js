@@ -51,7 +51,8 @@ describe("react-webapp", function() {
               },
               tokens: {
                 "internal-test": () => "\ninternal-test",
-                "test-not-found": () => "\nnot found"
+                "test-not-found": () => "\nnot found",
+                "non-func-token": ""
               }
             },
             defaultReactHandler

@@ -35,6 +35,14 @@ class Renderer {
 
         const tkFunc = handler.tokens[tk.id];
 
+        // not a function, just add it to output
+        if (typeof tkFunc !== "function") {
+          return xt => {
+            xt.context.output.add(tkFunc);
+            this._next(xt);
+          };
+        }
+
         // token function takes more than one argument, so pass in a callback for async
         if (tkFunc.length > 1) {
           return xt => tkFunc.call(tk, xt.context, () => this._next(xt));
