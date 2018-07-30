@@ -57,7 +57,7 @@
     "test": {
       "plugins": ["dynamic-import-node"]
     },
-    "development": {
+    "css-module-dev": {
       "plugins": [
         ["babel-plugin-react-css-modules", {
           "context": "./src",
@@ -76,7 +76,7 @@
         }]
       ]
     },
-    "production": {
+    "css-module-prod" : {
       "plugins": [
         "babel-plugin-transform-react-constant-elements",
         ["transform-react-remove-prop-types", {
@@ -96,6 +96,14 @@
               "syntax": "sugarss"
             }
           }
+        }]
+      ]
+    },
+    "production": {
+      "plugins": [
+        "babel-plugin-transform-react-constant-elements",
+        ["transform-react-remove-prop-types", {
+           "removeImport": true
         }]
       ]
     }

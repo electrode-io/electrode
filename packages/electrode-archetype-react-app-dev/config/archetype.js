@@ -9,6 +9,7 @@ const devDir = Path.join(__dirname, "..");
 const devRequire = require(`../require`);
 const configDir = `${devDir}/config`;
 const xenvConfig = devRequire("xenv-config");
+const detectCSSModule = require("./webpack/util/detect-css-module");
 
 const webpackConfigSpec = {
   devHostname: { env: ["WEBPACK_HOST", "WEBPACK_DEV_HOST"], default: "localhost" },
@@ -17,7 +18,7 @@ const webpackConfigSpec = {
   reporterSocketPort: { env: "WEBPACK_REPORTER_SOCKET_PORT", default: 5000 },
   https: { env: "WEBPACK_DEV_HTTPS", default: false },
   devMiddleware: { env: "WEBPACK_DEV_MIDDLEWARE", default: false },
-  cssModuleSupport: { env: "CSS_MODULE_SUPPORT", default: undefined },
+  cssModuleSupport: { env: "CSS_MODULE_SUPPORT", type: "boolean", default: detectCSSModule() },
   cssModuleStylusSupport: { env: "CSS_MODULE_STYLUS_SUPPORT", default: false },
   enableBabelPolyfill: { env: "ENABLE_BABEL_POLYFILL", default: false },
   enableNodeSourcePlugin: { env: "ENABLE_NODESOURCE_PLUGIN", default: false },
