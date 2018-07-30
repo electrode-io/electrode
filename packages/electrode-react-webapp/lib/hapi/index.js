@@ -7,7 +7,7 @@ const assert = require("assert");
 const ReactWebapp = require("../react-webapp");
 const HttpStatus = require("../http-status");
 
-const DefaultHandleRoute = (request, reply, handler, content) => {
+const DefaultHandleRoute = (request, reply, handler, content, routeOptions) => {
   return handler({
     content,
     mode: request.query.__mode || "",
@@ -30,7 +30,9 @@ const DefaultHandleRoute = (request, reply, handler, content) => {
       }
     })
     .catch(err => {
-      reply(err.html || err.message).code(err.status);
+      reply(err.html || (routeOptions.replyErrorStack !== false && err.stack) || err.message).code(
+        err.status
+      );
     });
 };
 
@@ -74,7 +76,7 @@ const registerRoutes = (server, options) => {
           content = resolveContent();
         }
 
-        handleRoute(req, reply, routeHandler, content.content);
+        handleRoute(req, reply, routeHandler, content.content, routeOptions);
       }
     });
   });
