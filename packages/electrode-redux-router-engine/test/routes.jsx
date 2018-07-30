@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter, Redirect, Link } from "react-router-dom";
 import { renderRoutes } from "react-router-config";
 import { renderFlatRoutes } from "./render-flat-routes";
 
@@ -28,6 +28,12 @@ class Page extends React.Component {
 class Test extends React.Component {
   render() {
     return <div>Test</div>;
+  }
+}
+
+class TestBasename extends React.Component {
+  render() {
+    return <Link to="/to-target">Test</Link>;
   }
 }
 
@@ -131,6 +137,12 @@ const routes = [
         path: "/test",
         exact: true,
         component: Home
+      },
+      {
+        // Default, equivalent of RR3's IndexRoute
+        path: "/test/basename",
+        exact: true,
+        component: TestBasename
       },
       {
         path: "/test/init",

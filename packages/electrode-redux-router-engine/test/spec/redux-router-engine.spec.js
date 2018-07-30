@@ -206,6 +206,26 @@ describe("redux-router-engine", function() {
     });
   });
 
+  it("should render Link with no basename", () => {
+    const engine = new ReduxRouterEngine({ routes });
+    testReq.url = Url.parse("/test/basename");
+
+    return engine.render(testReq).then(result => {
+      expect(result.status).to.equal(200);
+      expect(result.html).to.equal("<div>Page<a href=\"/to-target\">Test</a></div>");
+    });
+  });
+
+  it("should render Link with basename", () => {
+    const engine = new ReduxRouterEngine({ routes, basename: "/my-base" });
+    testReq.url = Url.parse("/test/basename");
+
+    return engine.render(testReq).then(result => {
+      expect(result.status).to.equal(200);
+      expect(result.html).to.equal("<div>Page<a href=\"/my-base/to-target\">Test</a></div>");
+    });
+  });
+
   it("should not populate react-id by default", () => {
     const engine = new ReduxRouterEngine({ routes });
     testReq.url = Url.parse("/test");
