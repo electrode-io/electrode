@@ -9,6 +9,18 @@ const devDir = Path.join(__dirname, "..");
 const devRequire = require(`../require`);
 const configDir = `${devDir}/config`;
 const xenvConfig = devRequire("xenv-config");
+const detectCSSModule = require(`${configDir}/webpack/util/detect-css-module`);
+
+const cssModuleSupport = () => {
+  return (userConfig.webpack && userConfig.webpack.cssModuleSupport) || detectCSSModule();
+};
+const enableShortenCSSNames = () => {
+  if (cssModuleSupport()) {
+    return true;
+  } else {
+    return userConfig.webpack.enableShortenCSSNames;
+  }
+};
 
 const webpackConfigSpec = {
   devHostname: { env: ["WEBPACK_HOST", "WEBPACK_DEV_HOST"], default: "localhost" },
@@ -17,7 +29,7 @@ const webpackConfigSpec = {
   reporterSocketPort: { env: "WEBPACK_REPORTER_SOCKET_PORT", default: 5000 },
   https: { env: "WEBPACK_DEV_HTTPS", default: false },
   devMiddleware: { env: "WEBPACK_DEV_MIDDLEWARE", default: false },
-  cssModuleSupport: { env: "CSS_MODULE_SUPPORT", default: undefined },
+  cssModuleSupport: { env: "CSS_MODULE_SUPPORT", default: cssModuleSupport },
   cssModuleStylusSupport: { env: "CSS_MODULE_STYLUS_SUPPORT", default: false },
   enableBabelPolyfill: { env: "ENABLE_BABEL_POLYFILL", default: false },
   enableNodeSourcePlugin: { env: "ENABLE_NODESOURCE_PLUGIN", default: false },
@@ -26,7 +38,7 @@ const webpackConfigSpec = {
     env: ["WEBPACK_PRESERVE_SYMLINKS", "NODE_PRESERVE_SYMLINKS"],
     default: false
   },
-  enableShortenCSSNames: { env: "ENABLE_SHORTEN_CSS_NAMES", default: false }
+  enableShortenCSSNames: { env: "ENABLE_SHORTEN_CSS_NAMES", default: enableShortenCSSNames }
 };
 
 const karmaConfigSpec = {
