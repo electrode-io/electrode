@@ -28,7 +28,8 @@ describe("render-context", function() {
           internalHandler = context.getTokenHandler("internal-test-handler");
         },
         tokens: {
-          "internal-test": () => `\nbuilt-in for internal-test`
+          "internal-test": () => `\nbuilt-in for internal-test`,
+          "non-func-token": "\ntest non-func token"
         }
       }
     });
@@ -39,6 +40,7 @@ from async ok module
 from async error module
 from string only module
 built-in for internal-test
+test non-func token
 from async error module
 from wants next module<!-- unhandled token test-not-found -->
 from string only module
