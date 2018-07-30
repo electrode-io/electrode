@@ -57,11 +57,30 @@
     "test": {
       "plugins": ["dynamic-import-node"]
     },
-    "development": {
+    "css-module-dev": {
       "plugins": [
         ["babel-plugin-react-css-modules", {
           "context": "./src",
           "generateScopedName": "[name]__[local]___[hash:base64:5]",
+          "filetypes": {
+            ".scss": {
+              "syntax": "postcss-scss",
+              "plugins": [
+                "postcss-nested"
+              ]
+            },
+            ".styl": {
+              "syntax": "sugarss"
+            }
+          }
+        }]
+      ]
+    },
+    "css-module-prod" : {
+      "plugins": [
+        ["babel-plugin-react-css-modules", {
+          "context": "./src",
+          "generateScopedName": "[hash:base64:5]",
           "filetypes": {
             ".scss": {
               "syntax": "postcss-scss",
@@ -81,21 +100,6 @@
         "babel-plugin-transform-react-constant-elements",
         ["transform-react-remove-prop-types", {
            "removeImport": true
-        }],
-        ["babel-plugin-react-css-modules", {
-          "context": "./src",
-          "generateScopedName": "[hash:base64:5]",
-          "filetypes": {
-            ".scss": {
-              "syntax": "postcss-scss",
-              "plugins": [
-                "postcss-nested"
-              ]
-            },
-            ".styl": {
-              "syntax": "sugarss"
-            }
-          }
         }]
       ]
     }
