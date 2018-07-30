@@ -56,9 +56,9 @@ const runAppTest = (dir, forceLocal) => {
   };
 
   const localClap = Path.join("node_modules", ".bin", "clap");
-  return exec({ cwd: dir }, `fyn --pg simple -q v i && ${localClap} ?fix-generator-eslint`).then(
-    () => exec({ cwd: dir }, `npm test`)
-  );
+  return exec({ cwd: dir }, `fyn --pg simple -q v i && ${localClap} ?fix-generator-eslint`)
+    .then(() => exec({ cwd: dir }, `npm test`))
+    .then(() => exec({ cwd: dir }, `${localClap} build`));
 };
 
 const testGenerator = (testDir, name, clean, runTest, prompts) => {
@@ -138,6 +138,7 @@ xclap.load({
     `~$cd samples/demo-component && fyn --pg none install && npm test`
   ],
   "test-boilerplate": [".fyn-setup", ".test-boilerplate"],
+  "test-stylus-sample": [".fyn-setup", ".test-stylus-sample"],
   "update-changelog": [".fyn-setup", "~$node tools/update-changelog.js"],
   "gitbook-serve": [".fyn-setup", "~$gitbook serve --no-watch --no-live"],
   "build-test": {
@@ -145,7 +146,7 @@ xclap.load({
     task: () => {
       process.env.BUILD_TEST = "true";
       process.env.NODE_PRESERVE_SYMLINKS = "1";
-      const tasks = ["test-boilerplate"];
+      const tasks = ["test-boilerplate", "test-stylus-sample"];
       let updated;
       return exec("lerna updated")
         .then(output => {
@@ -179,10 +180,22 @@ xclap.load({
     }
   },
 
+  ".test-stylus-sample": {
+    desc: "Run tests for the boilerplage app stylus-sample",
+    task: () => {
+      return runAppTest(Path.join(__dirname, "samples/stylus-sample"));
+    }
+  },
+
   "samples-local": {
     desc: "modify all samples to pull electrode packages from local",
     task: () => {
-      ["electrode-demo-index", "universal-material-ui", "universal-react-node"].forEach(a => {
+      [
+        "electrode-demo-index",
+        "stylus-sample",
+        "universal-material-ui",
+        "universal-react-node"
+      ].forEach(a => {
         pullLocalPackages(Path.join(__dirname, "samples", a));
       });
     }
