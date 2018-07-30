@@ -36,6 +36,8 @@ class ReduxRouterEngine {
 
     this.options.withIds = !!options.withIds;
 
+    this.options.basename = options.basename || "";
+
     if (!options.stringifyPreloadedState) {
       this.options.stringifyPreloadedState = state =>
         `window.__PRELOADED_STATE__ = ${escapeBadChars(JSON.stringify(state))};`;
@@ -198,7 +200,7 @@ class ReduxRouterEngine {
           { store },
           React.createElement(
             StaticRouter,
-            { location, context: routeContext },
+            { location, context: routeContext, basename: this.options.basename },
             this._routesComponent
           )
         )
