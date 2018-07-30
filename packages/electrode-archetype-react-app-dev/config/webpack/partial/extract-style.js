@@ -29,6 +29,7 @@ const sassLoader = require.resolve("sass-loader");
  * case 3: *only* *.scss => normal CSS => CSS-Modules + CSS-Next
  */
 
+const cssModuleSupport = archetype.webpack.cssModuleSupport;
 const cssModuleStylusSupport = archetype.webpack.cssModuleStylusSupport;
 const enableShortenCSSNames = archetype.webpack.enableShortenCSSNames;
 
@@ -42,10 +43,6 @@ const scssQuery = `${cssQuery}!${sassLoader}`;
 const cssModuleQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}`;
 const cssStylusQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}!${stylusLoader}`;
 const cssScssQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}!${sassLoader}`;
-
-const cssModuleSupport = require("../util/detect-css-module");
-
-console.log("xxxxxxxxxx", cssModuleSupport);
 
 const rules = [];
 
