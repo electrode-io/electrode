@@ -12,14 +12,14 @@ const electrodeServer = require("electrode-server");
 describe("check-module", function() {
   this.timeout(10000);
   describe("globalInstalled", function() {
-    it("should find version of npm", () => {
+    it("should find version of globally installed npm", () => {
       // can't determine npm version with npm ls on windows
       const name = process.platform === "win32" ? "" : "npm";
       return checkModule.globalInstalled(name).then(version => {
         expect(version).to.be.not.empty;
         expect(version).to.not.equal("0.0.0");
       });
-    });
+    }).timeout(20000);
 
     it("should handle error with {} output", () => {
       const exec = sinon.stub(xsh, "exec").callsFake(() => {
@@ -57,12 +57,12 @@ describe("check-module", function() {
   });
 
   describe("latest", function() {
-    it("should find version of npm", () => {
+    it("should find version of latest npm on registry", () => {
       return checkModule.latest("npm").then(version => {
         expect(version).to.be.not.empty;
         expect(version).to.not.equal("0.0.0");
       });
-    });
+    }).timeout(20000);
 
     it("should find version of npm with passed in reg", () => {
       return checkModule.latest("npm", "https://registry.npmjs.org").then(version => {
