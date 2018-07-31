@@ -1,3 +1,37 @@
+# 7/31/2018
+
+- Fix issue with new CSS module styleName change breaking normal stylus
+- Add basename support for SSR links with React Router v4
+- Minor updates for electrode-react-webapp
+
+## Packages
+
+-   electrode-archetype-react-app@5.4.1 `(5.4.0 => 5.4.1)`
+-   electrode-archetype-react-app-dev@5.4.1 `(5.4.0 => 5.4.1)`
+-   electrode-react-webapp@2.5.3 `(2.5.2 => 2.5.3)`
+-   electrode-redux-router-engine@2.1.3 `(2.1.2 => 2.1.3)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   fix archetype stylus issue ([#887](https://github.com/electrode-io/electrode/pull/887)) [commit](http://github.com/electrode-io/electrode/commit/ef1515c46a1306efb25d43792658cf24ad386b7f)
+    -   [chore] add stylus-sample to CI ([#884](https://github.com/electrode-io/electrode/pull/884)) [commit](http://github.com/electrode-io/electrode/commit/fdd2914b4285b3c45881c15ec4a46d53632d1936)
+
+-   `packages/electrode-react-webapp`
+
+    -   support tokens that are not a function ([#883](https://github.com/electrode-io/electrode/pull/883)) [commit](http://github.com/electrode-io/electrode/commit/839c83896e73ad7bf19e7ecbf670f73a5b381f2b)
+    -   default to reply with error stack ([#882](https://github.com/electrode-io/electrode/pull/882)) [commit](http://github.com/electrode-io/electrode/commit/c3cca427da97470358307233052c64ac1c70d58b)
+    -   avoid overriding options.__internals ([#881](https://github.com/electrode-io/electrode/pull/881)) [commit](http://github.com/electrode-io/electrode/commit/dc3adc2dd5c14651d2581cc9b47bf4ad035f06b8)
+
+-   `packages/electrode-redux-router-engine`
+
+    -   add basename support for SSR Links ([#885](https://github.com/electrode-io/electrode/pull/885)) [commit](http://github.com/electrode-io/electrode/commit/295b11d2afb4accee8ee85a4069aa5701596b8e3)
+
+-   `samples/stylus-sample`
+
+    -   [chore] add stylus-sample to CI ([#884](https://github.com/electrode-io/electrode/pull/884)) [commit](http://github.com/electrode-io/electrode/commit/fdd2914b4285b3c45881c15ec4a46d53632d1936)
+
 # 7/27/2018
 
 - New feature - support CSS module `styleName` tag to enable shorten class name in production mode.
