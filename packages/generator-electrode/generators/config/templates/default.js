@@ -47,7 +47,7 @@ module.exports = {
     }, //<% if (pwa) { %>
     "server/plugins/pwa": {
       module: "./{{env.APP_SRC_DIR}}/server/plugins/pwa"
-    }, //<% } if (isAutoSsr) { %>
+    }, //<% } if (isAutoSSR) { %>
     "electrode-auto-ssr": {}, //<% } %>
     webapp: {
       module: webappPlugin(),
