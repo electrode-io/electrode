@@ -12,15 +12,21 @@ module.exports = class extends Generator {
       desc: "Relocate the location of the generated files."
     });
 
-    this.option("pwa", {
+    this.option("serverType", {
       type: String,
+      required: true,
+      desc: "Server Type can be HapiJS or express"
+    });
+
+    this.option("pwa", {
+      type: Boolean,
       required: true,
       desc: "Progressive Web App"
     });
   }
 
   writing() {
-    const isHapi = this.config.get("serverType") === "hapijs";
+    const isHapi = this.config.get("serverType") === "HapiJS";
 
     if (!this.fs.exists(this.destinationPath("src/server/views/index-view.jsx"))) {
       this.fs.copy(

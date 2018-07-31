@@ -404,47 +404,42 @@ module.exports = class extends Generator {
     this.composeWith(require.resolve("../editorconfig"));
 
     if (!this.isDemoApp) {
-      this.composeWith(require.resolve("../git"), {
-        name: this.props.name,
-        githubAccount: this.props.githubAccount,
-        githubUrl: this.props.githubUrl
-      });
+      this.composeWith(
+        require.resolve("../git"),
+        _.pick(this.props, ["name", "githubAccount", "githubUrl"])
+      );
     }
 
     if (this.options.license && !this.pkg.license) {
-      this.composeWith(require.resolve("generator-license"), {
-        name: this.props.authorName,
-        email: this.props.authorEmail,
-        website: this.props.authorUrl,
-        license: this.props.license || ""
-      });
+      this.composeWith(
+        require.resolve("generator-license"),
+        _.pick(this.props, ["name", "email", "website", "license"])
+      );
     }
 
     if (!this.fs.exists(this.destinationPath("README.md"))) {
-      this.composeWith(require.resolve("../readme"), {
-        name: this.props.name,
-        description: this.props.description,
-        githubAccount: this.props.githubAccount,
-        authorName: this.props.authorName,
-        authorUrl: this.props.authorUrl,
-        content: this.options.readme
-      });
+      this.composeWith(
+        require.resolve("../readme"),
+        _.pick(this.props, [
+          "name",
+          "description",
+          "githubAccount",
+          "authorName",
+          "authorUrl",
+          "content"
+        ])
+      );
     }
 
     if (!this.fs.exists(this.destinationPath("config/default.js")) && !this.isExtended) {
-      this.composeWith(require.resolve("../config"), {
-        name: this.props.name,
-        pwa: this.props.pwa,
-        serverType: this.props.serverType,
-        isAutoSsr: this.props.autoSsr
-      });
+      this.composeWith(
+        require.resolve("../config"),
+        _.pick(this.props, ["name", "pwa", "serverType", "autoSsr"])
+      );
     }
 
     if (!this.fs.exists(this.destinationPath("server/plugins/webapp"))) {
-      this.composeWith(require.resolve("../webapp"), {
-        pwa: this.props.pwa,
-        isAutoSsr: this.props.autoSsr
-      });
+      this.composeWith(require.resolve("../webapp"), _.pick(this.props, ["pwa", "serverType"]));
     }
   }
 
