@@ -17,6 +17,7 @@
       "type": "node",
       "request": "launch",
       "name": "electrode-react-webapp Mocha Tests",
+      "cwd": "${workspaceFolder}/packages/electrode-react-webapp",
       "program": "${workspaceFolder}/packages/electrode-react-webapp/node_modules/mocha/bin/_mocha",
       "args": [
         "-u",
