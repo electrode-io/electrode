@@ -111,9 +111,9 @@ module.exports = function setup(handlerContext /* , asyncTemplate */) {
     }
 
     const prepareContext = content => {
-      // if (content.render === false || content.html === undefined) {
-      //   return context.skipRender(content);
-      // }
+      if (content.render === false || content.html === undefined) {
+        return context.voidStop(content);
+      }
 
       let cspScriptNonce;
       let cspStyleNonce;
@@ -168,7 +168,7 @@ module.exports = function setup(handlerContext /* , asyncTemplate */) {
         cssChunk
       };
 
-      return context;
+      return undefined;
     };
 
     let userContent = options.content;
@@ -196,7 +196,9 @@ module.exports = function setup(handlerContext /* , asyncTemplate */) {
       userContent = { status: 200, html: userContent };
     }
 
-    return prepareContext(userContent);
+    prepareContext(userContent);
+
+    return "";
   };
 
   const tokenHandlers = {
@@ -251,16 +253,16 @@ module.exports = function setup(handlerContext /* , asyncTemplate */) {
       return criticalCSS ? `<style${context.user.styleNonce}>${criticalCSS}</style>` : "";
     },
 
-    INITIALIZE: () => undefined,
-    HEAD_CLOSED: () => undefined,
-    AFTER_SSR_CONTENT: () => undefined,
-    BODY_CLOSED: () => undefined,
-    HTML_CLOSED: () => undefined
+    INITIALIZE: beforeRender,
+    HEAD_INITIALIZE: _.noop,
+    HEAD_CLOSED: _.noop,
+    AFTER_SSR_CONTENT: _.noop,
+    BODY_CLOSED: _.noop,
+    HTML_CLOSED: _.noop
   };
 
   return {
     name: "electrode-react-token-handlers",
-    beforeRender,
     routeOptions,
     routeData,
     tokens: tokenHandlers

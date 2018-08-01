@@ -29,7 +29,9 @@ function makeRouteHandler(routeOptions) {
     routeOptions
   });
 
-  return options => asyncTemplate.render(options);
+  return options => {
+    return asyncTemplate.render(options);
+  };
 }
 
 const setupOptions = options => {

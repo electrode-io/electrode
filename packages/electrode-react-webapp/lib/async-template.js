@@ -57,7 +57,7 @@ class AsyncTemplate {
       await r.afterRender(context);
     }
 
-    return result;
+    return context.isVoidStop ? context.voidResult : result;
   }
 
   /*

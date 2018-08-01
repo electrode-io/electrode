@@ -9,6 +9,7 @@ const electrodeServer = require("electrode-server");
 const Path = require("path");
 require("babel-register");
 
+const { expect } = require("chai");
 const webapp = require("../..");
 const ReactDOMServer = require("react-dom/server");
 const React = require("react");
@@ -21,6 +22,9 @@ describe("hapi electrode-react-webapp", () => {
 
   const getConfig = () => {
     return {
+      server: {
+        useDomains: false
+      },
       connections: {
         default: {
           port: 0
@@ -607,7 +611,7 @@ describe("hapi electrode-react-webapp", () => {
         })
         .then(res => {
           expect(res.statusCode).to.equal(401);
-          expect(res.result).to.equal("test content throw html with status");
+          expect(res.result).contains("test content throw html with status");
           stopServer(server);
         })
         .catch(err => {
@@ -640,7 +644,7 @@ describe("hapi electrode-react-webapp", () => {
         })
         .then(res => {
           expect(res.statusCode).to.equal(500);
-          expect(res.result).to.equal("test content throw");
+          expect(res.result).contains("test content throw");
           stopServer(server);
         })
         .catch(err => {
@@ -673,7 +677,34 @@ describe("hapi electrode-react-webapp", () => {
         })
         .then(res => {
           expect(res.statusCode).to.equal(500);
-          expect(res.result).contains("electrode-react-webapp/test/spec/hapi.index.spec.js");
+          expect(res.result).contains("/test/spec/hapi.index.spec.js");
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
+  it("should handle non-render errors", () => {
+    assign(paths, {
+      content: () => ""
+    });
+
+    Object.assign(paths, {
+      tokenHandler: "./test/fixtures/non-render-error"
+    });
+
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .then(res => {
+          expect(res.statusCode).to.equal(500);
+          expect(res.result).contains("error from test/fixtures/non-render-error");
           stopServer(server);
         })
         .catch(err => {
@@ -1100,7 +1131,7 @@ describe("hapi electrode-react-webapp", () => {
     });
   });
 
-  it("should non 200 status", () => {
+  it("should handle non 200 status from content", () => {
     assign(paths, {
       content: {
         status: 404,

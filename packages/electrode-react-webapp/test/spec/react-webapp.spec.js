@@ -36,32 +36,83 @@ describe("react-webapp", function() {
     it("should not add default handler if it's already included in options", () => {
       const htmlFile = Path.resolve("test/fixtures/test-render-context.html");
       const defaultReactHandler = Path.join(__dirname, "../../lib/react/token-handlers");
-      const intercept = xstdout.intercept(true);
-      return reactWebapp
-        .makeRouteHandler({
-          htmlFile,
-          tokenHandlers: [
-            {
-              name: "internal-test-handler",
-              beforeRender: context => {
-                expect(context.user).to.equal(false);
-              },
-              afterRender: context => {
-                expect(context.user).to.not.equal(false);
-              },
-              tokens: {
-                "internal-test": () => "\ninternal-test",
-                "test-not-found": () => "\nnot found",
-                "non-func-token": ""
-              }
+      const intercept = xstdout.intercept(false);
+      const handleRoute = reactWebapp.makeRouteHandler({
+        htmlFile,
+        tokenHandlers: [
+          {
+            name: "internal-test-handler",
+            beforeRender: context => {
+              expect(context.user).to.equal(false);
+              context.handleError = () => {};
             },
-            defaultReactHandler
-          ],
-          __internals: { assets: {}, chunkSelector: () => ({}) }
-        })({ request: {}, content: { status: 200, html: "" } })
+            afterRender: context => {
+              expect(context.user, "should have context.user").to.not.equal(false);
+            },
+            tokens: {
+              "internal-test": () => "\ninternal-test",
+              "test-not-found": () => "\nnot found",
+              "non-func-token": ""
+            }
+          },
+          defaultReactHandler
+        ],
+        __internals: { assets: {}, chunkSelector: () => ({}) }
+      });
+
+      const promise = handleRoute({ request: {}, content: { status: 200, html: "" } });
+
+      return promise
         .then(result => {
           intercept.restore();
           const expected = `
+from wants next module
+from async ok module
+from async error module
+from string only module
+internal-test
+from async error module
+from wants next module
+not found
+from string only module
+from async ok module`;
+          expect(result).to.equal(expected);
+        })
+        .catch(err => {
+          intercept.restore();
+          throw err;
+        });
+    });
+
+    it("should not add default handler replaceTokenHandlers is true", () => {
+      const htmlFile = Path.resolve("test/fixtures/test-render-context.html");
+      const intercept = xstdout.intercept(false);
+      const handleRoute = reactWebapp.makeRouteHandler({
+        htmlFile,
+        replaceTokenHandlers: true,
+        tokenHandlers: [
+          {
+            name: "internal-test-handler",
+            beforeRender: context => {
+              expect(context.user).to.equal(false);
+              context.handleError = () => {};
+            },
+            tokens: {
+              "internal-test": () => "\ninternal-test",
+              "test-not-found": () => "\nnot found",
+              "non-func-token": ""
+            }
+          }
+        ],
+        __internals: { assets: {}, chunkSelector: () => ({}) }
+      });
+
+      const promise = handleRoute({ request: {}, content: { status: 200, html: "" } });
+
+      return promise
+        .then(result => {
+          intercept.restore();
+          const expected = `<!-- unhandled token INITIALIZE -->
 from wants next module
 from async ok module
 from async error module

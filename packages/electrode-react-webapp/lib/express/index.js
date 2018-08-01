@@ -6,13 +6,16 @@ const _ = require("lodash");
 const assert = require("assert");
 const ReactWebapp = require("../react-webapp");
 const HttpStatus = require("../http-status");
+const { htmlifyError } = require("../utils");
 
-const DefaultHandleRoute = (request, response, handler, content) => {
+const DefaultHandleRoute = (request, response, handler, content, routeOptions) => {
   return handler({ content, mode: request.query.__mode || "", request })
     .then(data => {
       const status = data.status;
 
-      if (status === undefined) {
+      if (data instanceof Error) {
+        throw data;
+      } else if (status === undefined) {
         response.send(data);
       } else if (HttpStatus.redirect[status]) {
         response.redirect(status, data.path);
@@ -24,7 +27,9 @@ const DefaultHandleRoute = (request, response, handler, content) => {
         response.status(status).send(data);
       }
     })
-    .catch(err => response.status(err.status).send(err.message));
+    .catch(err => {
+      response.status(err.status || 500).send(htmlifyError(err, routeOptions.replyErrorStack));
+    });
 };
 
 const registerRoutes = (app, options, next = () => {}) => {
@@ -60,7 +65,7 @@ const registerRoutes = (app, options, next = () => {}) => {
       }
       app[method.toLowerCase()](path, (req, res) => {
         if (!content) content = resolveContent();
-        handleRoute(req, res, routeHandler, content.content);
+        handleRoute(req, res, routeHandler, content.content, routeOptions);
       });
     });
   });

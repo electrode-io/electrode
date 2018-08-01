@@ -9,6 +9,7 @@ class RenderContext {
     this.output = new RenderOutput(this);
     this.asyncTemplate = asyncTemplate;
     this._handlersMap = asyncTemplate.handlersMap;
+    this.handleError = err => !this.stop && this.voidStop(err);
     this.transform = x => x;
     this._stop = 0;
   }
@@ -53,16 +54,28 @@ class RenderContext {
   }
 
   fullStop() {
-    this.stop(RenderContext.FULL_STOP);
+    this._stop = RenderContext.FULL_STOP;
   }
 
-  softStop() {
-    this.stop(RenderContext.SOFT_STOP);
+  get isFullStop() {
+    return this._stop === RenderContext.FULL_STOP;
   }
 
   voidStop(result) {
-    this.stop(RenderContext.VOID_STOP);
-    this.result = result;
+    this._stop = RenderContext.VOID_STOP;
+    this.voidResult = result;
+  }
+
+  get isVoidStop() {
+    return this._stop === RenderContext.VOID_STOP;
+  }
+
+  softStop() {
+    this._stop = RenderContext.SOFT_STOP;
+  }
+
+  get isSoftStop() {
+    return this._stop === RenderContext.SOFT_STOP;
   }
 
   // helper to take the result of a token handler and process the returned result
@@ -74,10 +87,7 @@ class RenderContext {
   handleTokenResult(id, res, cb) {
     // it's a promise, wait for it before invoking callback
     if (res && res.then) {
-      return res.then(cb).catch(err => {
-        console.log(`token process for ${id} failed`, err); // eslint-disable-line
-        cb();
-      });
+      return res.then(r => cb(null, r)).catch(cb);
     } else {
       // it's a string, add to output
       if (typeof res === "string") {

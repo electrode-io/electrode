@@ -1,5 +1,6 @@
 "use strict";
 
+const Path = require("path");
 const Promise = require("bluebird");
 const express = require("express");
 const registerRoutes = require("../../lib/express");
@@ -38,9 +39,13 @@ describe("express electrode-react-webapp", function() {
         "/fail": {
           content: req => {
             const status = req.query.status;
+            const html = req.query.html;
             const x = new Error(`test fail ${status}`);
             if (status) {
               x.status = +status;
+            }
+            if (html) {
+              x.html = html;
             }
             return Promise.reject(x);
           }
@@ -137,14 +142,15 @@ describe("express electrode-react-webapp", function() {
     });
   });
 
-  it("should return non 200 errors", () => {
+  it("should return Error with status and html", () => {
     const server = startServer(webappOptions());
     return new Promise(resolve => {
       const port = server.address().port;
-      return request(`http://localhost:${port}/fail?status=404`).end(err => {
+      return request(`http://localhost:${port}/fail?status=404&html=html-foo-bar`).end(err => {
         expect(err).to.be.ok;
         expect(err.status).to.equal(404);
-        expect(err.response.text).to.equal("test fail 404");
+        expect(err.response.text).contains("html-foo-bar");
+        expect(err.response.text).contains("test fail 404");
         server.close(() => resolve());
       });
     });
@@ -224,6 +230,41 @@ describe("express electrode-react-webapp", function() {
     });
   });
 
+  it("should handle and return 500 on non-render errors", () => {
+    const options = webappOptions();
+    options.tokenHandlers = Path.join(__dirname, "../fixtures/non-render-error");
+    const server = startServer(options);
+    return new Promise(resolve => {
+      const port = server.address().port;
+      return request(`http://localhost:${port}/`).end(err => {
+        expect(err).to.be.ok;
+        expect(err.status).to.equal(500);
+        expect(err.response.text).contains("error from test/fixtures/non-render-error");
+        server.close(() => resolve());
+      });
+    });
+  });
+
+  it("should handle replyErrorStack being false", () => {
+    const options = webappOptions();
+    options.tokenHandlers = Path.join(__dirname, "../fixtures/non-render-error");
+    options.replyErrorStack = false;
+    const server = startServer(options);
+    return new Promise(resolve => {
+      const port = server.address().port;
+      return request(`http://localhost:${port}/`).end(err => {
+        expect(err).to.be.ok;
+        expect(err.status).to.equal(500);
+        expect(err.response.text).contains("error from test/fixtures/non-render-error");
+        // should contain no stack
+        expect(err.response.text).to.not.contains(
+          "packages/electrode-react-webapp/test/fixtures/non-render-error.js"
+        );
+        server.close(() => resolve());
+      });
+    });
+  });
+
   it("should return 500 on errors", () => {
     const server = startServer(webappOptions());
     return new Promise(resolve => {
@@ -231,7 +272,7 @@ describe("express electrode-react-webapp", function() {
       return request(`http://localhost:${port}/fail`).end(err => {
         expect(err).to.be.ok;
         expect(err.status).to.equal(500);
-        expect(err.response.text).to.equal("test fail undefined");
+        expect(err.response.text).contains("test fail undefined");
         server.close(() => resolve());
       });
     });

@@ -6,6 +6,7 @@ const _ = require("lodash");
 const assert = require("assert");
 const ReactWebapp = require("../react-webapp");
 const HttpStatus = require("../http-status");
+const { htmlifyError } = require("../utils");
 
 const DefaultHandleRoute = (request, reply, handler, content, routeOptions) => {
   return handler({
@@ -17,7 +18,9 @@ const DefaultHandleRoute = (request, reply, handler, content, routeOptions) => {
     .then(data => {
       const status = data.status;
 
-      if (status === undefined) {
+      if (data instanceof Error) {
+        throw data;
+      } else if (status === undefined) {
         reply(data);
       } else if (HttpStatus.redirect[status]) {
         reply.redirect(data.path);
@@ -30,9 +33,7 @@ const DefaultHandleRoute = (request, reply, handler, content, routeOptions) => {
       }
     })
     .catch(err => {
-      reply(err.html || (routeOptions.replyErrorStack !== false && err.stack) || err.message).code(
-        err.status
-      );
+      reply(htmlifyError(err, routeOptions.replyErrorStack)).code(err.status || 500);
     });
 };
 

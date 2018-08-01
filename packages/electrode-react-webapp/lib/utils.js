@@ -101,6 +101,27 @@ function getStatsPath(statsFilePath, buildArtifactsPath) {
     : statsFilePath;
 }
 
+function htmlifyError(err, withStack) {
+  const html = err.html ? `<div>${err.html}</div>\n` : "";
+  const errMsg = () => {
+    if (withStack !== false && err.stack) {
+      if (process.env.NODE_ENV !== "production") {
+        const rgx = new RegExp(process.cwd(), "g");
+        return err.stack.replace(rgx, "CWD");
+      } else {
+        return `- Not sending Error stack for production\n\nMessage: ${err.message}`;
+      }
+    } else {
+      return err.message;
+    }
+  };
+  return `<html><head><title>OOPS</title></head><body>
+${html}
+<pre>
+${errMsg()}
+</pre></body></html>`;
+}
+
 const resolvePath = path => (!Path.isAbsolute(path) ? Path.resolve(path) : path);
 
 module.exports = {
@@ -109,5 +130,6 @@ module.exports = {
   getIconStats,
   getCriticalCSS,
   getStatsPath,
-  resolvePath
+  resolvePath,
+  htmlifyError
 };

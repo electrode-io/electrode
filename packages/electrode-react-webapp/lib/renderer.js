@@ -3,7 +3,6 @@
 /* eslint-disable max-statements */
 
 const Promise = require("bluebird");
-const { VOID_STOP, FULL_STOP, SOFT_STOP } = require("./render-context");
 
 class Renderer {
   constructor(options) {
@@ -15,7 +14,7 @@ class Renderer {
       if (tk.str !== undefined) {
         return xt => {
           xt.context.output.add(tk.str);
-          this._next(xt);
+          this._next(null, xt);
         };
       }
 
@@ -27,10 +26,10 @@ class Renderer {
         // no handler has function for token
         if (!handler) {
           const msg = `electrode-react-webapp: no handler found for token id ${tk.id}`;
-          console.log(msg); // eslint-disable-line
+          console.error(msg); // eslint-disable-line
           return xt => {
             xt.context.output.add(`<!-- unhandled token ${tk.id} -->`);
-            this._next(xt);
+            this._next(null, xt);
           };
         }
 
@@ -40,50 +39,59 @@ class Renderer {
         if (typeof tkFunc !== "function") {
           return xt => {
             xt.context.output.add(tkFunc);
-            this._next(xt);
+            this._next(null, xt);
           };
         }
 
         // token function takes more than one argument, so pass in a callback for async
         if (tkFunc.length > 1) {
-          return xt => tkFunc.call(tk, xt.context, () => this._next(xt));
+          return xt => tkFunc.call(tk, xt.context, err => this._next(err, xt));
         }
 
         // token function is sync or returns Promise, so pass its return value
         // to context.handleTokenResult
         return xt =>
-          xt.context.handleTokenResult(tk.id, tkFunc.call(tk, xt.context), () => this._next(xt));
+          xt.context.handleTokenResult(tk.id, tkFunc.call(tk, xt.context), err =>
+            this._next(err, xt)
+          );
       }
 
       // token is a module and its process function wants a next callback
       if (tk.wantsNext === true) {
-        return xt => tk.process(xt.context, () => this._next(xt));
+        return xt => tk.process(xt.context, err => this._next(err, xt));
       }
 
       // token is a module and its process function is sync so pass its
       // return value to context.handleTokenResult
       return xt =>
-        xt.context.handleTokenResult(tk.id, tk.process(xt.context), () => this._next(xt));
+        xt.context.handleTokenResult(tk.id, tk.process(xt.context), err => this._next(err, xt));
     };
 
-    this.renderSteps = options.htmlTokens.map(makeStep);
+    this.renderSteps = options.htmlTokens.map(tk => ({ tk, exec: makeStep(tk) }));
   }
 
   render(context) {
     return new Promise((resolve, reject) =>
-      this._next({ context, _tokenIndex: 0, resolve, reject })
+      this._next(null, { context, _tokenIndex: 0, resolve, reject })
     );
   }
 
-  _next(xt) {
-    const stop = xt.context.stop;
+  _next(err, xt) {
+    if (err) {
+      // debugger; // eslint-disable-line
+      xt.context.handleError(err);
+    }
 
-    if (stop === VOID_STOP || stop === FULL_STOP || xt._tokenIndex >= this.renderSteps.length) {
+    if (
+      xt.context.isFullStop ||
+      xt.context.isVoidStop ||
+      xt._tokenIndex >= this.renderSteps.length
+    ) {
       return xt.resolve(xt.context.output.close());
-    } else if (stop === SOFT_STOP) {
-      return false; // TODO: support soft stop
     } else {
-      return this.renderSteps[xt._tokenIndex++](xt);
+      // TODO: support soft stop
+      const step = this.renderSteps[xt._tokenIndex++];
+      return step.exec(xt);
     }
   }
 }
