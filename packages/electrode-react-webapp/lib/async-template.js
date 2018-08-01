@@ -51,7 +51,7 @@ class AsyncTemplate {
       await r.beforeRender(context);
     }
 
-    const result = context.skip ? context.result : await this._renderer.render(context);
+    const result = await this._renderer.render(context);
 
     for (const r of this._afterRenders) {
       await r.afterRender(context);

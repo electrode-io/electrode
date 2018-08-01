@@ -3,6 +3,7 @@
 /* eslint-disable max-statements */
 
 const Promise = require("bluebird");
+const { VOID_STOP, FULL_STOP, SOFT_STOP } = require("./render-context");
 
 class Renderer {
   constructor(options) {
@@ -75,9 +76,15 @@ class Renderer {
   }
 
   _next(xt) {
-    return xt._tokenIndex >= this.renderSteps.length
-      ? xt.resolve(xt.context.output.close())
-      : this.renderSteps[xt._tokenIndex++](xt);
+    const stop = xt.context.stop;
+
+    if (stop === VOID_STOP || stop === FULL_STOP || xt._tokenIndex >= this.renderSteps.length) {
+      return xt.resolve(xt.context.output.close());
+    } else if (stop === SOFT_STOP) {
+      return false; // TODO: support soft stop
+    } else {
+      return this.renderSteps[xt._tokenIndex++](xt);
+    }
   }
 }
 

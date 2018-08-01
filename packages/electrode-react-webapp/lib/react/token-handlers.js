@@ -111,9 +111,9 @@ module.exports = function setup(handlerContext /* , asyncTemplate */) {
     }
 
     const prepareContext = content => {
-      if (content.render === false || content.html === undefined) {
-        return context.skipRender(content);
-      }
+      // if (content.render === false || content.html === undefined) {
+      //   return context.skipRender(content);
+      // }
 
       let cspScriptNonce;
       let cspStyleNonce;

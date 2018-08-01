@@ -10,6 +10,7 @@ class RenderContext {
     this.asyncTemplate = asyncTemplate;
     this._handlersMap = asyncTemplate.handlersMap;
     this.transform = x => x;
+    this._stop = 0;
   }
 
   // return a token handler by name
@@ -34,11 +35,33 @@ class RenderContext {
     this.transform = result => transform(result, this);
   }
 
-  // before render starts, call this with any predetermined result
-  // to use as the output rather than doing actual render for it
-  // Basically no rendering will occur.
-  skipRender(result) {
-    this.skip = true;
+  get stop() {
+    return this._stop;
+  }
+
+  //
+  // set this any time to fully stop and close rendering
+  // stop modes:
+  // 1 - only process string tokens
+  // 2 - fully stop immediately, no more token processing
+  // 3 - completely void any render output and stop immediately,
+  //     replace output with result.  This only works if output
+  //     is buffered and not streaming out immediately.
+  //
+  set stop(f) {
+    this._stop = f;
+  }
+
+  fullStop() {
+    this.stop(RenderContext.FULL_STOP);
+  }
+
+  softStop() {
+    this.stop(RenderContext.SOFT_STOP);
+  }
+
+  voidStop(result) {
+    this.stop(RenderContext.VOID_STOP);
     this.result = result;
   }
 
@@ -66,5 +89,9 @@ class RenderContext {
     }
   }
 }
+
+RenderContext.VOID_STOP = 3;
+RenderContext.FULL_STOP = 2;
+RenderContext.SOFT_STOP = 1;
 
 module.exports = RenderContext;
