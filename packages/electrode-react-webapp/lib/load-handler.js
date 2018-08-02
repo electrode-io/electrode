@@ -2,8 +2,9 @@
 
 /* eslint-disable no-magic-numbers, no-console */
 
+const Path = require("path");
 const requireAt = require("require-at");
-const optionalRequire = require("optional-require")(requireAt(process.cwd()));
+const optionalRequire = require("optional-require");
 
 const failLoadTokenModule = (m, e) => {
   console.error(
@@ -19,8 +20,8 @@ const notFoundLoadTokenModule = m => {
   return () => ({ process: () => `\ntoken process module ${m} not found\n` });
 };
 
-module.exports = path => {
-  return optionalRequire(path, {
+module.exports = (path, tmplDir) => {
+  return optionalRequire(requireAt(Path.resolve(tmplDir || "")))(path, {
     fail: e => failLoadTokenModule(path, e),
     notFound: () => notFoundLoadTokenModule(path)
   });

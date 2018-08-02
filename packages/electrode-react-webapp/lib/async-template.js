@@ -10,6 +10,10 @@ const Renderer = require("./renderer");
 const { resolvePath } = require("./utils");
 const Token = require("./token");
 const stringArray = require("string-array");
+const Path = require("path");
+const slash = require("slash");
+
+const { TEMPLATE_DIR } = require("./symbols");
 
 const tokenTags = {
   "<!--%{": "}-->", // for tokens in html
@@ -72,6 +76,8 @@ class AsyncTemplate {
   _parseTemplate(template, filepath) {
     const tokens = [];
     let pt = 0;
+    const templateDir = slash(Path.dirname(filepath));
+
     while (true) {
       const mx = template.substr(pt).match(tokenOpenTagRegex);
       if (mx) {
@@ -109,6 +115,7 @@ class AsyncTemplate {
           const x = `at position ${pos} has malformed prop '${remain}': ${e.message}`;
           assert(false, `electrode-react-webapp: ${filepath}: token ${token} ${x}`);
         }
+        props[TEMPLATE_DIR] = templateDir;
 
         tokens.push(new Token(token, pos, props));
         pt = ex + tokenCloseTag.length;

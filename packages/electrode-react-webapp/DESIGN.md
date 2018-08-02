@@ -1,5 +1,23 @@
 # Design of the index.html rendering flow
 
+## Table of Contents
+
+- [Considerations](#considerations)
+- [Tokens](#tokens)
+  - [Token Example](#token-example)
+  - [Invoking token handler/process functions](#invoking-token-handlerprocess-functions)
+  - [Token Props](#token-props)
+  - [Internal Props](#internal-props)
+- [Predefined Tokens and Handler](#predefined-tokens-and-handler)
+- [Custom Processing](#custom-processing)
+  - [Handler](#handler)
+  - [Custom Processor Module](#custom-processor-module)
+  - [The Process Function](#the-process-function)
+  - [`context`](#context)
+  - [Concurrent Token](#concurrent-token)
+    - [routeData](#routedata)
+    - [data](#data)
+
 ## Considerations
 
 The design of the rendering flow took the following into consideration.
@@ -14,24 +32,46 @@ The design of the rendering flow took the following into consideration.
 
 ## Tokens
 
-- Within your template file, special tokens can be specified with `<!--%{token}-->`.
+**Token is the basic building block on how your `index` page will be built. Following are details about how they work and the types of tokens.**
 
-  - **token**: Where `token` is the string referring to a token or name of a processor module.
+- **Syntax** Within your template file, special tokens can be specified with `<!--%{token}-->`, or `/*--%{token}--*/`
 
-  - **module**: To specify a processor module, start the token with `#`. ie: `<!--%{#module_name}-->`, where `module_name` specifies a name for a [Custom Processor Module](#custom-processor-module). The module will be loaded with `require`. If the `module_name` starts with `.`, then the module is loaded from CWD. For example, `<!--${#./lib/custom}-->` will load the module `./lib/custom` from under CWD.
+  - Where `token` is the string referring to a token or name of a processor module.
 
   - Tokens can also be multi lines.
 
   - **Comments** can be added as lines that start with `//`.
+
     - must be in their own lines only.
 
-For example:
+  - **Props** Just like HTML tags, [props](#token-props) can be specified for a token.
+
+- **Token Module**: To specify a processor module, start the token with `#`. ie: `<!--%{#module_name}-->`, where `module_name` specifies a name for a [Custom Processor Module](#custom-processor-module).
+
+  - The module will be loaded with `require`. If the `module_name` starts with `.`, then the module is required from where the template file is. For example, `<!--${#./lib/custom}-->` will load the module `./lib/custom` relative to the dir the template is located.
+
+### Token Example
 
 ```html
-<!--{
+<!--%{A_SIMPLE_TOKEN}-->
+<!--%{
   // my custom token
   custom-token-name
+  attribute1="foo"
 }-->
+<!--%{
+  // load a processor module with relative path
+  #./processors/bar
+}-->
+<!--%{
+  // load a processor module from a package in node_modules
+  #my-awesome-package/lib/processors/bar
+  array-attribute=[hello, world]
+}-->
+<div prop="/*--%{SOME_TOKEN}--*/">blah</div>
+<script>
+  /*--%{TOKEN_IN_JAVASCRIPT}--*/
+</script>
 ```
 
 ### Invoking token handler/process functions
