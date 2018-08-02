@@ -1,6 +1,6 @@
 "use strict";
 
-/* eslint-disable no-magic-numbers, max-params */
+/* eslint-disable no-magic-numbers, max-params, max-statements */
 
 const _ = require("lodash");
 const assert = require("assert");
@@ -15,22 +15,35 @@ const DefaultHandleRoute = (request, reply, handler, content, routeOptions) => {
     template: request.indexPageTemplate,
     request
   })
-    .then(data => {
-      const status = data.status;
+    .then(context => {
+      const data = context.result;
 
       if (data instanceof Error) {
         throw data;
-      } else if (status === undefined) {
-        reply(data);
-      } else if (HttpStatus.redirect[status]) {
-        reply.redirect(data.path);
-      } else if (HttpStatus.displayHtml[status]) {
-        reply(data.html !== undefined ? data.html : data).code(status);
-      } else if (status >= 200 && status < 300) {
-        reply(data.html !== undefined ? data.html : data);
-      } else {
-        reply(data).code(status);
       }
+
+      let respond;
+      let status = data.status;
+
+      if (status === undefined) {
+        status = 200;
+        respond = reply(data);
+      } else if (HttpStatus.redirect[status]) {
+        respond = reply.redirect(data.path);
+        return respond;
+      } else if (HttpStatus.displayHtml[status] || (status >= 200 && status < 300)) {
+        respond = reply(data.html !== undefined ? data.html : data);
+      } else {
+        respond = reply(data);
+      }
+
+      const response = context.user && context.user.response;
+
+      if (response) {
+        Object.assign(respond.headers, response.headers);
+      }
+
+      return respond.code(status);
     })
     .catch(err => {
       reply(htmlifyError(err, routeOptions.replyErrorStack)).code(err.status || 500);

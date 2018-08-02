@@ -63,7 +63,7 @@ from string only module
 from async ok module`;
     const intercept = xstdout.intercept(false);
     return Promise.try(() => asyncTemplate.render({}))
-      .then(result => {
+      .then(context => {
         intercept.restore();
         expect(
           internalHandler.name,
@@ -74,7 +74,7 @@ from async ok module`;
           "error from test/fixtures/async-error",
           "error from test/fixtures/async-error"
         ]);
-        expect(result).to.equal("");
+        expect(context.result).to.equal("");
         expect(receivedResult).to.equal(expected);
       })
       .catch(err => {

@@ -63,7 +63,7 @@ describe("react-webapp", function() {
       const promise = handleRoute({ request: {}, content: { status: 200, html: "" } });
 
       return promise
-        .then(result => {
+        .then(context => {
           intercept.restore();
           const expected = `
 from wants next module
@@ -76,7 +76,7 @@ from wants next module
 not found
 from string only module
 from async ok module`;
-          expect(result).to.equal(expected);
+          expect(context.result).to.equal(expected);
         })
         .catch(err => {
           intercept.restore();
@@ -110,7 +110,7 @@ from async ok module`;
       const promise = handleRoute({ request: {}, content: { status: 200, html: "" } });
 
       return promise
-        .then(result => {
+        .then(context => {
           intercept.restore();
           const expected = `<!-- unhandled token INITIALIZE -->
 from wants next module
@@ -123,7 +123,7 @@ from wants next module
 not found
 from string only module
 from async ok module`;
-          expect(result).to.equal(expected);
+          expect(context.result).to.equal(expected);
         })
         .catch(err => {
           intercept.restore();

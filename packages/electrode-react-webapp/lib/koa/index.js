@@ -17,12 +17,16 @@ function DefaultHandleRoute(handler, content, routeOptions) {
   };
 
   return handler({ content, mode: request.query.__mode || "", request })
-    .then(data => {
-      const status = data.status;
+    .then(context => {
+      const data = context.result;
 
       if (data instanceof Error) {
         throw data;
-      } else if (status === undefined) {
+      }
+
+      const status = data.status;
+
+      if (status === undefined) {
         respond(200, data);
       } else if (HttpStatus.redirect[status]) {
         this.redirect(data.path);

@@ -153,6 +153,9 @@ module.exports = function setup(handlerContext /* , asyncTemplate */) {
       context.setOutputTransform(transformOutput);
       context.user = {
         request: options.request,
+        response: {
+          headers: {}
+        },
         routeOptions,
         routeData,
         content,

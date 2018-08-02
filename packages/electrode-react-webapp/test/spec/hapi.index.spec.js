@@ -555,7 +555,7 @@ describe("hapi electrode-react-webapp", () => {
     });
   });
 
-  it("should use top level htmlFile", () => {
+  it("should use top level htmlFile and return response headers", () => {
     configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
     configOptions.stats = "test/data/stats-test-one-bundle.json";
     configOptions.htmlFile = "test/data/index-1.html";
@@ -569,7 +569,6 @@ describe("hapi electrode-react-webapp", () => {
           url: "/"
         })
         .then(res => {
-          expect(res.statusCode).to.equal(200);
           expect(res.result).includes(`<title>user-handler-title</title>`);
           expect(res.result).includes(`</script><div>user-promise-token</div><script`);
           expect(res.result).includes(
@@ -578,6 +577,8 @@ describe("hapi electrode-react-webapp", () => {
           expect(res.result).includes(
             `</script><div>from custom-1</div><div>user-token-1</div><div>user-token-2</div><noscript>` // eslint-disable-line
           );
+          expect(res.headers["x-foo-bar"]).to.equal("hello-world");
+          expect(res.statusCode).to.equal(200);
           stopServer(server);
         })
         .catch(err => {

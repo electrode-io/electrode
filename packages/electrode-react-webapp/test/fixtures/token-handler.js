@@ -34,6 +34,12 @@ module.exports = () => {
       });
     },
 
+    "user-header-token": context => {
+      context.user.response.headers = {
+        "x-foo-bar": "hello-world"
+      };
+    },
+
     PAGE_TITLE: () => {
       return "<title>user-handler-title</title>";
     }

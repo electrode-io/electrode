@@ -10,12 +10,16 @@ const { htmlifyError } = require("../utils");
 
 const DefaultHandleRoute = (request, response, handler, content, routeOptions) => {
   return handler({ content, mode: request.query.__mode || "", request })
-    .then(data => {
-      const status = data.status;
+    .then(context => {
+      const data = context.result;
 
       if (data instanceof Error) {
         throw data;
-      } else if (status === undefined) {
+      }
+
+      const status = data.status;
+
+      if (status === undefined) {
         response.send(data);
       } else if (HttpStatus.redirect[status]) {
         response.redirect(status, data.path);
