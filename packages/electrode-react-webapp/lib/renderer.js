@@ -35,6 +35,10 @@ class Renderer {
 
         const tkFunc = handler.tokens[tk.id];
 
+        if (tkFunc === null) {
+          return null;
+        }
+
         // not a function, just add it to output
         if (typeof tkFunc !== "function") {
           return xt => {
@@ -67,7 +71,9 @@ class Renderer {
         xt.context.handleTokenResult(tk.id, tk.process(xt.context), err => this._next(err, xt));
     };
 
-    this.renderSteps = options.htmlTokens.map(tk => ({ tk, exec: makeStep(tk) }));
+    this.renderSteps = options.htmlTokens
+      .map(tk => ({ tk, exec: makeStep(tk) }))
+      .filter(x => x.exec);
   }
 
   render(context) {

@@ -96,7 +96,7 @@ module.exports = function setup(handlerContext /* , asyncTemplate */) {
     return result;
   };
 
-  const beforeRender = async context => {
+  const INITIALIZE = async context => {
     const options = context.options;
     const request = options.request;
     const mode = options.mode;
@@ -253,12 +253,12 @@ module.exports = function setup(handlerContext /* , asyncTemplate */) {
       return criticalCSS ? `<style${context.user.styleNonce}>${criticalCSS}</style>` : "";
     },
 
-    INITIALIZE: beforeRender,
-    HEAD_INITIALIZE: _.noop,
-    HEAD_CLOSED: _.noop,
-    AFTER_SSR_CONTENT: _.noop,
-    BODY_CLOSED: _.noop,
-    HTML_CLOSED: _.noop
+    INITIALIZE,
+    HEAD_INITIALIZE: null,
+    HEAD_CLOSED: null,
+    AFTER_SSR_CONTENT: null,
+    BODY_CLOSED: null,
+    HTML_CLOSED: null
   };
 
   return {
