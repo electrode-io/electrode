@@ -61,7 +61,12 @@ const registerRoutes = (server, options) => {
         );
         return ReactWebapp.resolveContent(pathData.content);
       }
-      return { content: { status: 200, html: "" } };
+      return {
+        content: {
+          status: 200,
+          html: "<!-- SSR disabled by options.serverSideRendring -->"
+        }
+      };
     };
 
     const routeOptions = ReactWebapp.setupPathOptions(registerOptions, path);
