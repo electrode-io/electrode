@@ -1,6 +1,6 @@
 "use strict";
 
-/* eslint-disable  max-statements, max-params, prefer-spread, global-require, complexity */
+/* eslint-disable  max-statements, prefer-spread, global-require, complexity */
 
 const Path = require("path");
 const assert = require("assert");
@@ -66,32 +66,52 @@ class ReduxRouterEngine {
     this._routesComponent = renderRoutes(this._routes);
   }
 
-  async render(req, options = {}) {
+  startMatch(req, options = {}) {
     const location = options.location || req.url || Url.parse(req.path);
 
+    options = Object.assign({}, options, { req, location });
+
+    options.match = this._matchRoute(req, this._routes, location);
+
+    return options;
+  }
+
+  checkMatch(options) {
+    const location = options.location;
+    const match = options.match;
+
+    if (match.length === 0) {
+      return {
+        status: 404,
+        message: `${pkg.name}: Path ${location.path} not found`
+      };
+    }
+
+    const methods = match[0].methods || "get";
+
+    if (methods.toLowerCase().indexOf(options.req.method.toLowerCase()) < 0) {
+      throw new Error(
+        `${pkg.name}: ${location.path} doesn't allow request method ${options.req.method}`
+      );
+    }
+
+    return undefined;
+  }
+
+  async render(req, options) {
     try {
-      const match = this._matchRoute(req, this._routes, location);
+      options = this.startMatch(req, options);
+      const earlyOut = this.checkMatch(options);
+      if (earlyOut) return earlyOut;
+      await this.prepReduxStore(options);
 
-      if (match.length === 0) {
-        return {
-          status: 404,
-          message: `${pkg.name}: Path ${location.path} not found`
-        };
-      }
-
-      const methods = match[0].methods || "get";
-
-      if (methods.toLowerCase().indexOf(req.method.toLowerCase()) < 0) {
-        throw new Error(`${pkg.name}: ${location.path} doesn't allow request method ${req.method}`);
-      }
-
-      return await this._handleRender(req, location, match, options);
+      return await this._handleRender(options);
     } catch (err) {
       this.options.logError.call(this, req, err);
       return {
         status: err.status || 500, // eslint-disable-line
         message: err.message,
-        path: err.path || location.path,
+        path: err.path || options.location.path,
         _err: err
       };
     }
@@ -102,20 +122,31 @@ class ReduxRouterEngine {
     return matchRoutes(routes, location.pathname);
   }
 
-  async _handleRender(req, location, match, options) {
-    const withIds = options.withIds !== undefined ? options.withIds : this.options.withIds;
-    const stringifyPreloadedState =
-      options.stringifyPreloadedState || this.options.stringifyPreloadedState;
+  async prepReduxStore(options) {
+    options.withIds = options.withIds !== undefined ? options.withIds : this.options.withIds;
 
     const inits = [];
+
+    const match = options.match;
 
     for (let ri = 1; ri < match.length; ri++) {
       const route = match[ri].route;
       const init = this._getRouteInit(route);
-      if (init) inits.push(init({ req, location, match, route, inits }));
+      if (init) {
+        inits.push(
+          init({
+            req: options.req,
+            location: options.location,
+            match: options.match,
+            route,
+            inits
+          })
+        );
+      }
     }
 
     let awaited = false;
+
     const awaitInits = async () => {
       if (awaited) return;
       awaited = true;
@@ -126,7 +157,14 @@ class ReduxRouterEngine {
 
     let topInit = this._getRouteInit(match[0].route);
     if (topInit) {
-      topInit = topInit({ req, location, match, route: match[0].route, inits, awaitInits });
+      topInit = topInit({
+        req: options.req,
+        location: options.location,
+        match,
+        route: match[0].route,
+        inits,
+        awaitInits
+      });
     }
 
     if (topInit.then) {
@@ -134,10 +172,9 @@ class ReduxRouterEngine {
       topInit = await topInit;
     }
 
-    let store;
     if (topInit.store) {
       // top route provided a ready made store, just use it
-      store = topInit.store;
+      options.store = topInit.store;
     } else {
       if (!awaited) await awaitInits();
 
@@ -170,25 +207,32 @@ class ReduxRouterEngine {
         reducer = x => x;
       }
 
-      store = createStore(reducer, initialState);
+      options.store = createStore(reducer, initialState);
     }
 
-    const routeContext = {};
+    return options.store;
+  }
 
-    let html = this._renderToString(req, location, store, routeContext, match, withIds);
+  async _handleRender(options) {
+    const routeContext = (options.routeContext = {});
+    const stringifyPreloadedState =
+      options.stringifyPreloadedState || this.options.stringifyPreloadedState;
+
+    let html = this._renderToString(options);
+
     if (html.then !== undefined) {
       // a Promise?
       html = await html;
     }
 
     if (this.options.componentRedirect && routeContext.action === "REPLACE") {
-      return { status: 302, html, path: routeContext.url, store };
+      return { status: 302, html, path: routeContext.url, store: options.store };
     } else {
-      return { status: 200, html, prefetch: stringifyPreloadedState(store.getState()) };
+      return { status: 200, html, prefetch: stringifyPreloadedState(options.store.getState()) };
     }
   }
 
-  _renderToString(req, location, store, routeContext, match, withIds) {
+  _renderToString({ req, location, store, routeContext, withIds }) {
     if (req.app && req.app.disableSSR) {
       return "<!-- SSR disabled by request -->";
     } else {

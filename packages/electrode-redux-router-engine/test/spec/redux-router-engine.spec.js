@@ -212,7 +212,7 @@ describe("redux-router-engine", function() {
 
     return engine.render(testReq).then(result => {
       expect(result.status).to.equal(200);
-      expect(result.html).to.equal("<div>Page<a href=\"/to-target\">Test</a></div>");
+      expect(result.html).to.equal(`<div>Page<a href="/to-target">Test</a></div>`);
     });
   });
 
@@ -222,7 +222,7 @@ describe("redux-router-engine", function() {
 
     return engine.render(testReq).then(result => {
       expect(result.status).to.equal(200);
-      expect(result.html).to.equal("<div>Page<a href=\"/my-base/to-target\">Test</a></div>");
+      expect(result.html).to.equal(`<div>Page<a href="/my-base/to-target">Test</a></div>`);
     });
   });
 
