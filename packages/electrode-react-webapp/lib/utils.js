@@ -187,6 +187,20 @@ function getCspNonce(request, cspNonceValue) {
 
 const resolvePath = path => (!Path.isAbsolute(path) ? Path.resolve(path) : path);
 
+function responseForError(request, routeOptions, err) {
+  return {
+    status: err.status || 500,
+    html: htmlifyError(err, routeOptions.replyErrorStack)
+  };
+}
+
+function responseForBadStatus(request, routeOptions, data) {
+  return {
+    status: data.status,
+    html: data
+  };
+}
+
 module.exports = {
   resolveChunkSelector,
   loadAssetsFromStats,
@@ -199,5 +213,7 @@ module.exports = {
   getDevJsBundle,
   getProdBundles,
   processRenderSsMode,
-  getCspNonce
+  getCspNonce,
+  responseForError,
+  responseForBadStatus
 };

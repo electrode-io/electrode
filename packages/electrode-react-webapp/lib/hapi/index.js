@@ -6,7 +6,7 @@ const _ = require("lodash");
 const assert = require("assert");
 const ReactWebapp = require("../react-webapp");
 const HttpStatus = require("../http-status");
-const { htmlifyError } = require("../utils");
+const { responseForError, responseForBadStatus } = require("../utils");
 
 const DefaultHandleRoute = (request, reply, handler, content, routeOptions) => {
   return handler({
@@ -34,7 +34,9 @@ const DefaultHandleRoute = (request, reply, handler, content, routeOptions) => {
       } else if (HttpStatus.displayHtml[status] || (status >= 200 && status < 300)) {
         respond = reply(data.html !== undefined ? data.html : data);
       } else {
-        respond = reply(data);
+        const output = routeOptions.responseForBadStatus(request, routeOptions, data);
+        status = output.status;
+        respond = reply(output.html);
       }
 
       const response = context.user && context.user.response;
@@ -46,12 +48,15 @@ const DefaultHandleRoute = (request, reply, handler, content, routeOptions) => {
       return respond.code(status);
     })
     .catch(err => {
-      reply(htmlifyError(err, routeOptions.replyErrorStack)).code(err.status || 500);
+      const output = routeOptions.responseForError(request, routeOptions, err);
+
+      reply(output.html).code(output.status);
     });
 };
 
 const registerRoutes = (server, options) => {
   const registerOptions = ReactWebapp.setupOptions(options);
+
   _.each(registerOptions.paths, (pathData, path) => {
     const resolveContent = () => {
       if (registerOptions.serverSideRendering !== false) {
@@ -61,6 +66,7 @@ const registerRoutes = (server, options) => {
         );
         return ReactWebapp.resolveContent(pathData.content);
       }
+
       return {
         content: {
           status: 200,
@@ -72,6 +78,7 @@ const registerRoutes = (server, options) => {
     const routeOptions = ReactWebapp.setupPathOptions(registerOptions, path);
     const routeHandler = ReactWebapp.makeRouteHandler(routeOptions);
     const handleRoute = options.handleRoute || DefaultHandleRoute;
+    _.defaults(routeOptions, { responseForError, responseForBadStatus });
     let content;
 
     server.route({

@@ -7,7 +7,7 @@ const _ = require("lodash");
 const assert = require("assert");
 const ReactWebapp = require("../react-webapp");
 const HttpStatus = require("../http-status");
-const { htmlifyError } = require("../utils");
+const { responseForError, responseForBadStatus } = require("../utils");
 
 function DefaultHandleRoute(handler, content, routeOptions) {
   const request = this.request;
@@ -35,11 +35,13 @@ function DefaultHandleRoute(handler, content, routeOptions) {
       } else if (status >= 200 && status < 300) {
         respond(status, data.html !== undefined ? data.html : data);
       } else {
-        respond(status, data);
+        const output = routeOptions.responseForBadStatus(request, routeOptions, data);
+        respond(output.status, output.html);
       }
     })
     .catch(err => {
-      respond(err.status || 500, htmlifyError(err, routeOptions.replyErrorStack));
+      const output = routeOptions.responseForError(request, routeOptions, err);
+      respond(output.status, output.html);
     });
 }
 
@@ -62,6 +64,7 @@ const registerRoutes = (router, options) => {
     const routeOptions = _.defaults({ htmlFile: v.htmlFile }, registerOptions);
     const routeHandler = ReactWebapp.makeRouteHandler(routeOptions);
     const handleRoute = options.handleRoute || DefaultHandleRoute;
+    _.defaults(routeOptions, { responseForError, responseForBadStatus });
     let content;
 
     let methods = v.method || ["GET"];
