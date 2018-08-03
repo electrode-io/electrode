@@ -1105,7 +1105,33 @@ describe("hapi electrode-react-webapp", () => {
     });
   });
 
-  it("should return 200 and html with render false", () => {
+  it("should handle 200 status @noss @has-html", () => {
+    assign(paths, {
+      content: {
+        status: 200,
+        html: "test has html"
+      }
+    });
+
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/?__mode=noss"
+        })
+        .then(res => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.result).contains(`<!DOCTYPE html>\n\n<html lang="en">`);
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
+  it("should return 200 and direct html with render false", () => {
     assign(paths, {
       content: {
         status: 200,
@@ -1132,7 +1158,7 @@ describe("hapi electrode-react-webapp", () => {
     });
   });
 
-  it("should handle non 200 status from content", () => {
+  it("should handle content non 200 status noss mode", () => {
     assign(paths, {
       content: {
         status: 404,

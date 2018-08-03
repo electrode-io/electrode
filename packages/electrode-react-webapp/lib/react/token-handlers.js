@@ -2,16 +2,19 @@
 
 /* eslint-disable max-statements, max-depth */
 
-const _ = require("lodash");
 const groupScripts = require("../group-scripts");
-const HttpStatusCodes = require("http-status-codes");
 
-const HTTP_ERROR_500 = 500;
+const {
+  getIconStats,
+  getCriticalCSS,
+  getDevCssBundle,
+  getDevJsBundle,
+  getProdBundles,
+  processRenderSsMode,
+  getCspNonce
+} = require("../utils");
 
-const utils = require("../utils");
-
-const getIconStats = utils.getIconStats;
-const getCriticalCSS = utils.getCriticalCSS;
+const { getContent, transformOutput, htmlifyScripts } = require("./content");
 
 const CONTENT_MARKER = "SSR_CONTENT";
 const HEADER_BUNDLE_MARKER = "WEBAPP_HEADER_BUNDLES";
@@ -71,137 +74,51 @@ module.exports = function setup(handlerContext /* , asyncTemplate */) {
     }
   };
 
-  const htmlifyScripts = (scripts, scriptNonce) => {
-    return scripts
-      .map(
-        x =>
-          typeof x === "string"
-            ? `<script${scriptNonce}>${x}</script>\n`
-            : x.map(n => `<script src="${n.src}"></script>`).join("\n")
-      )
-      .join("\n");
-  };
-
-  const transformOutput = (result, context) => {
-    const content = context.user.content;
-    if (content && content.status !== HttpStatusCodes.OK) {
-      return {
-        status: content.status,
-        path: content.path,
-        store: content.store,
-        html: result
-      };
-    }
-
-    return result;
-  };
-
   const INITIALIZE = async context => {
     const options = context.options;
     const request = options.request;
     const mode = options.mode;
-    let renderSs = RENDER_SS;
-    if (renderSs) {
-      if (mode === "noss") {
-        renderSs = false;
-      } else if (renderSs === "datass" || mode === "datass") {
-        // signal user content callback to populate prefetch data only and skips actual SSR
-        _.set(request, ["app", "ssrPrefetchOnly"], true);
-      }
+    const renderSs = processRenderSsMode(request, RENDER_SS, mode);
+
+    const content = await getContent(renderSs, options, context);
+
+    if (content.render === false || content.html === undefined) {
+      return context.voidStop(content);
     }
 
-    const prepareContext = content => {
-      if (content.render === false || content.html === undefined) {
-        return context.voidStop(content);
-      }
+    const chunkNames = chunkSelector(request);
 
-      let cspScriptNonce;
-      let cspStyleNonce;
-      if (routeOptions.cspNonceValue !== undefined) {
-        const nonceObject = routeOptions.cspNonceValue;
-        if (typeof nonceObject === "function") {
-          cspScriptNonce = nonceObject(request, "script");
-          cspStyleNonce = nonceObject(request, "style");
-        } else {
-          cspScriptNonce = _.get(request, nonceObject.script, undefined);
-          cspStyleNonce = _.get(request, nonceObject.style, undefined);
-        }
-      }
+    const devCSSBundle = getDevCssBundle(chunkNames, routeData);
+    const devJSBundle = getDevJsBundle(chunkNames, routeData);
 
-      const chunkNames = chunkSelector(request);
+    const { jsChunk, cssChunk } = getProdBundles(chunkNames, routeData);
+    const { scriptNonce, styleNonce } = getCspNonce(request, routeOptions.cspNonceValue);
 
-      let devCSSBundle;
-      if (chunkNames.css) {
-        const cssChunks = Array.isArray(chunkNames.css) ? chunkNames.css : [chunkNames.css];
-        devCSSBundle = _.map(cssChunks, chunkName => `${devBundleBase}${chunkName}.style.css`);
-      } else {
-        devCSSBundle = [`${devBundleBase}style.css`];
-      }
+    const renderJs = RENDER_JS && mode !== "nojs";
 
-      const devJSBundle = chunkNames.js
-        ? `${devBundleBase}${chunkNames.js}.bundle.dev.js`
-        : `${devBundleBase}bundle.dev.js`;
-      const jsChunk = _.find(assets.js, asset => _.includes(asset.chunkNames, chunkNames.js));
-      const cssChunk = _.filter(assets.css, asset =>
-        _.some(asset.chunkNames, assetChunkName => _.includes(chunkNames.css, assetChunkName))
-      );
-      const scriptNonce = cspScriptNonce ? ` nonce="${cspScriptNonce}"` : "";
-      const styleNonce = cspStyleNonce ? ` nonce="${cspStyleNonce}"` : "";
+    context.setOutputTransform(transformOutput);
 
-      const renderJs = RENDER_JS && mode !== "nojs";
-
-      context.setOutputTransform(transformOutput);
-      context.user = {
-        request: options.request,
-        response: {
-          headers: {}
-        },
-        routeOptions,
-        routeData,
-        content,
-        mode,
-        renderJs,
-        renderSs,
-        scriptNonce,
-        styleNonce,
-        chunkNames,
-        devCSSBundle,
-        devJSBundle,
-        jsChunk,
-        cssChunk
-      };
-
-      return undefined;
+    context.user = {
+      request: options.request,
+      response: {
+        headers: {}
+      },
+      routeOptions,
+      routeData,
+      content,
+      mode,
+      renderJs,
+      renderSs,
+      scriptNonce,
+      styleNonce,
+      chunkNames,
+      devCSSBundle,
+      devJSBundle,
+      jsChunk,
+      cssChunk
     };
 
-    let userContent = options.content;
-
-    // prepare user content for container of SSR output
-
-    if (typeof userContent === "function") {
-      if (renderSs) {
-        // invoke user content as a function, which could return any content
-        // as static html or generated from react's renderToString
-        userContent = userContent(options.request, options, context);
-        if (userContent.then) {
-          try {
-            // user function needs to generate the content async, so wait for it.
-            return prepareContext(await userContent);
-          } catch (err) {
-            if (!err.status) err.status = HTTP_ERROR_500;
-            throw err;
-          }
-        }
-      } else {
-        userContent = { status: 200, html: "<!-- noss mode -->" };
-      }
-    } else if (typeof userContent === "string") {
-      userContent = { status: 200, html: userContent };
-    }
-
-    prepareContext(userContent);
-
-    return "";
+    return context;
   };
 
   const tokenHandlers = {

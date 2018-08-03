@@ -67,4 +67,104 @@ describe("utils", function() {
       expect(r).to.not.contains("/test/spec/utils.spec.js");
     });
   });
+
+  describe("getCspNonce", () => {
+    it("should get no CSP nonce if option is not defined", () => {
+      const nonce = utils.getCspNonce(
+        {
+          app: {
+            scriptCsp: "csp-script",
+            styleCsp: "csp-style"
+          }
+        },
+        null
+      );
+      expect(nonce).to.deep.equal({
+        scriptNonce: ``,
+        styleNonce: ``
+      });
+    });
+
+    it("should call function with request to get CSP nonce", () => {
+      const nonce = utils.getCspNonce({}, (request, tag) => {
+        if (tag === "script") return "csp-script";
+        if (tag === "style") return "csp-style";
+        return "";
+      });
+      expect(nonce).to.deep.equal({
+        scriptNonce: ` nonce="csp-script"`,
+        styleNonce: ` nonce="csp-style"`
+      });
+    });
+
+    it("should get CSP nonce from request base on option path", () => {
+      const nonce = utils.getCspNonce(
+        {
+          app: {
+            scriptCsp: "csp-script",
+            styleCsp: "csp-style"
+          }
+        },
+        {
+          script: "app.scriptCsp",
+          style: "app.styleCsp"
+        }
+      );
+      expect(nonce).to.deep.equal({
+        scriptNonce: ` nonce="csp-script"`,
+        styleNonce: ` nonce="csp-style"`
+      });
+    });
+
+    it("should get no CSP nonce if no value can be retrieved", () => {
+      const nonce = utils.getCspNonce(
+        {
+          app: {}
+        },
+        {
+          script: "app.scriptCsp",
+          style: "app.styleCsp"
+        }
+      );
+      expect(nonce).to.deep.equal({
+        scriptNonce: ``,
+        styleNonce: ``
+      });
+    });
+  });
+
+  describe("getCriticalCSS", () => {
+    it("should return empty string if loading failed", () => {
+      const x = utils.getCriticalCSS("blah");
+      expect(x).to.equal("");
+    });
+
+    it("should load CSS from a file", () => {
+      const x = utils.getCriticalCSS("test/data/critical.css");
+      expect(x).to.equal(`body {color: green;}
+`);
+    });
+  });
+
+  describe("processRenderSsMode", () => {
+    it("should return false for renderSs option being false", () => {
+      expect(utils.processRenderSsMode({}, false, "")).to.equal(false);
+    });
+
+    it("should return false for renderSs mode being noss", () => {
+      expect(utils.processRenderSsMode({}, true, "noss")).to.equal(false);
+    });
+
+    it("should return datass for renderSs and set ssrPrefetchOnly flat in request", () => {
+      const request = {};
+      expect(utils.processRenderSsMode(request, "datass", "")).to.equal("datass");
+      expect(request.app.ssrPrefetchOnly).to.equal(true);
+    });
+
+    it("should return datass for mode and set ssrPrefetchOnly flat in request", () => {
+      const request = {};
+      expect(utils.processRenderSsMode(request, true, "datass")).to.equal("datass");
+      expect(request.app.ssrPrefetchOnly).to.equal(true);
+    });
+  });
 });

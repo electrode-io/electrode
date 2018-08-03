@@ -11,7 +11,6 @@ const { resolvePath } = require("./utils");
 const Token = require("./token");
 const stringArray = require("string-array");
 const Path = require("path");
-const slash = require("slash");
 
 const { TEMPLATE_DIR } = require("./symbols");
 
@@ -78,7 +77,7 @@ class AsyncTemplate {
   _parseTemplate(template, filepath) {
     const tokens = [];
     let pt = 0;
-    const templateDir = slash(Path.dirname(filepath));
+    const templateDir = Path.dirname(filepath);
 
     while (true) {
       const mx = template.substr(pt).match(tokenOpenTagRegex);
