@@ -33,22 +33,22 @@ $ npm install --save electrode-confippet
 
 ## Usage
 
-* [Getting Started](http://www.electrode.io/docs/confippet.html#getting-started)
-* [configuration Composition](http://www.electrode.io/docs/confippet.html#config-composition)
-* [Environment Variables](http://www.electrode.io/docs/confippet.html#environment-variables)
-* [Using Templates](http://www.electrode.io/docs/confippet.html#using-templates)
-* [Usage in Node Modules](http://www.electrode.io/docs/confippet.html#usage-in-node-modules)
-* [Customization](http://www.electrode.io/docs/confippet.html#customization)
+* [Getting Started](https://docs.electrode.io/other/stand-alone-modules/confippet#getting-started)
+* [configuration Composition](https://docs.electrode.io/other/stand-alone-modules/confippet#config-composition)
+* [Environment Variables](https://docs.electrode.io/other/stand-alone-modules/confippet#environment-variables)
+* [Using Templates](https://docs.electrode.io/other/stand-alone-modules/confippet#using-templates)
+* [Usage in Node Modules](https://docs.electrode.io/other/stand-alone-modules/confippet#usage-in-node-modules)
+* [Customization](https://docs.electrode.io/other/stand-alone-modules/confippet#customization)
 
 ### Getting Started
 
-Confippet can be integrated seamlessly into any existing [Express](http://www.electrode.io/docs/confippet.html#express-setup), [Hapi](http://www.electrode.io/docs/confippet.html#hapi-setup) or [Electrode](http://www.electrode.io/docs/confippet.html#electrode-setup) application.
+Confippet can be integrated seamlessly into any existing [Express](https://docs.electrode.io/other/stand-alone-modules/confippet#express-setup), [Hapi](https://docs.electrode.io/other/stand-alone-modules/confippet#hapi-setup) or [Electrode](https://docs.electrode.io/other/stand-alone-modules/confippet#electrode-setup) application.
 
 For example, let's say that in our application we need to access a database that is running locally in our development environment but is running on a specific hostname in our production environment. We would like to be able to get the correct hostname in our code based on the current environment. Confippet can help us with this. Follow the setup instructions for this example depending on your app's framework:
 
-* [Electrode](http://www.electrode.io/docs/confippet.html#electrode-setup)
-* [Express](http://www.electrode.io/docs/confippet.html#express-setup)
-* [Hapi](http://www.electrode.io/docs/confippet.html#hapi-setup)
+* [Electrode](https://docs.electrode.io/other/stand-alone-modules/confippet#electrode-setup)
+* [Express](https://docs.electrode.io/other/stand-alone-modules/confippet#express-setup)
+* [Hapi](https://docs.electrode.io/other/stand-alone-modules/confippet#hapi-setup)
 
 #### _**Electrode Setup**_
 
