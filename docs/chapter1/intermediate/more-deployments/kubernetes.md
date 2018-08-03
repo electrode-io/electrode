@@ -16,7 +16,7 @@ Install the [Google Cloud SDK](https://cloud.google.com/sdk/). Next, run the fol
 $ gcloud components install kubectl
 ```
 
-We will use your [Docker image](/chapter1/intermediate/more-deployments/docker.md) from the "Deploy with Docker" section. Navigate to the docker `app` folder and update the Dockerfile to the following:
+We will use your [Docker image](./docker.md) from the "Deploy with Docker" section. Navigate to the docker `app` folder and update the Dockerfile to the following:
 
 ```bash
 FROM node:4.5

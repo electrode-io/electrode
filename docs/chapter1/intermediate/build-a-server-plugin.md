@@ -16,7 +16,7 @@ $ npm install github
 
 At their core, plugins are a simple `register object` that has the signature `function (server, options, next)`. Read more about building plugins from scratch in the [Hapi documentation](http://hapijs.com/tutorials/plugins).
 
-Navigate to the  `<your-awesome-app>/src/server/plugins`  folder. Make a folder called `friends`, `cd` into your new `friends` folder, and create an empty `index.js`  file:
+Navigate to the `<your-awesome-app>/src/server/plugins` folder. Make a folder called `friends`, `cd` into your new `friends` folder, and create an empty `index.js` file:
 
 ```
 $ touch index.js
@@ -105,7 +105,7 @@ exports.register.attributes = {
 
 If you plan on building out Your Awesome App even further, you'll need to \[generate a GitHub Api oAuth token\] to remove the preset limit for API requests. We have already added the code to accept and use the token in our Hapi server plugin above `const AUTH_TOKEN = process.env.token`.
 
-Set a new [personal access token](http://www.electrode.io/docs/) \(you may be prompted to login to your GitHub account if you haven't already\), create your`token description` in the form given, and for `Select scopes` simply check `public repo`. Then hit the green `Generate token` button.
+Set a new [personal access token](https://docs.electrode.io/) \(you may be prompted to login to your GitHub account if you haven't already\), create your`token description` in the form given, and for `Select scopes` simply check `public repo`. Then hit the green `Generate token` button.
 
 You will be redirected to the next page to retrieve your token. Keep your token private and secure; do not copy and paste it directly into your app. Instead, set your token as a Node [environment variable](https://nodejs.org/api/process.html#process_process_env). Copy and save this token in a secure place; we will use it several times. Use this token in your command line as follows:
 

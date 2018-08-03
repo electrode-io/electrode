@@ -39,17 +39,17 @@ $ yo electrode
 # ... answer rest of the questions and wait for app to be generated ...
 ```
 
-_Follow Prerequisites and skip to _[_Push Notifications_](/chapter1/intermediate/build-a-progressive-web-app.md)
+_Follow Prerequisites and skip to _[_Push Notifications_](./build-a-progressive-web-app.md)
 
 ### Prerequisites
 
 We need certain API keys for push notifications. To generate these values, visit [Firebase](https://console.firebase.google.com/):
 
-1. Create a new project.
-2. Click on the settings icon
-3. Open `Project settings`.
-4. Navigate to the `CLOUD MESSAGING` tab and note down your `Server key` and the `Sender ID`.
-2.  In the `client/images` directory, add the [logo 192x192](https://github.com/electrode-io/electrode/blob/d4142ee0c938cbf973a429ee8467052aa4e1c9be/samples/universal-react-node/client/images/logo-192x192.png) and [logo 72x72](https://github.com/electrode-io/electrode/blob/d4142ee0c938cbf973a429ee8467052aa4e1c9be/samples/universal-react-node/client/images/logo-72x72.png) icon images. We'll use these logos for the `Add to Homescreen` banner and push notifications.
+1.  Create a new project.
+2.  Click on the settings icon
+3.  Open `Project settings`.
+4.  Navigate to the `CLOUD MESSAGING` tab and note down your `Server key` and the `Sender ID`.
+5.  In the `client/images` directory, add the [logo 192x192](https://github.com/electrode-io/electrode/blob/d4142ee0c938cbf973a429ee8467052aa4e1c9be/samples/universal-react-node/client/images/logo-192x192.png) and [logo 72x72](https://github.com/electrode-io/electrode/blob/d4142ee0c938cbf973a429ee8467052aa4e1c9be/samples/universal-react-node/client/images/logo-72x72.png) icon images. We'll use these logos for the `Add to Homescreen` banner and push notifications.
 
 ### Generating a Service Worker
 
@@ -59,11 +59,13 @@ Generating a service worker in an electrode app is as simple as adding a configu
 module.exports = {
   cache: {
     cacheId: "<your-awesome-app>",
-    runtimeCaching: [{
-      handler: "fastest",
-      urlPattern: /\/$/
-    }],
-    staticFileGlobs: ['dist/**/*']
+    runtimeCaching: [
+      {
+        handler: "fastest",
+        urlPattern: /\/$/
+      }
+    ],
+    staticFileGlobs: ["dist/**/*"]
   },
   manifest: {
     title: "<your-awesome-app>",
@@ -83,7 +85,7 @@ We need to create a server plugin to access`dist/sw.js`. Create a file called `s
 
 ```js
 "use strict";
-exports.register = function (server, options, next) {
+exports.register = function(server, options, next) {
   server.route({
     method: "GET",
     path: "/sw.js",
@@ -113,48 +115,49 @@ module.exports = () => {
   }
   // Feature check if service workers are supported.
   if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("sw.js", { scope: "./" })
+    navigator.serviceWorker
+      .register("sw.js", { scope: "./" })
       // Service worker registration was successful
-      .then((registration) => {
+      .then(registration => {
         // The updatefound event is dispatched when the installing
         // worker changes. This new worker will potentially become
         // the active worker if the install process completes.
-        registration.onupdatefound = function () {
+        registration.onupdatefound = function() {
           const installingWorker = registration.installing;
           // Listen for state changes on the installing worker so
           // we know when it has completed.
-          installingWorker.onstatechange = function () {
+          installingWorker.onstatechange = function() {
             switch (installingWorker.state) {
-            case "installing":
-              console.log("Installing a new service worker...");
-              break;
-            case "installed":
-              console.log(navigator.serviceWorker.controller);
-              // We check the active controller which tells us if
-              // new content is available, or the current service worker
-              // is up to date (?)
-              // TODO: Figure out why this is the case
-              if (navigator.serviceWorker.controller) {
-                console.log("New or updated content is available, refresh!");
-              } else {
-                console.log("Content is now available offline!");
-              }
-              break;
-            case "activating":
-              console.log("Activating a service worker...");
-              break;
-            case "activated":
-              console.log("Successfully activated service worker.");
-              break;
-            case "redundant":
-              console.log("Service worker has become redundant");
-              break;
+              case "installing":
+                console.log("Installing a new service worker...");
+                break;
+              case "installed":
+                console.log(navigator.serviceWorker.controller);
+                // We check the active controller which tells us if
+                // new content is available, or the current service worker
+                // is up to date (?)
+                // TODO: Figure out why this is the case
+                if (navigator.serviceWorker.controller) {
+                  console.log("New or updated content is available, refresh!");
+                } else {
+                  console.log("Content is now available offline!");
+                }
+                break;
+              case "activating":
+                console.log("Activating a service worker...");
+                break;
+              case "activated":
+                console.log("Successfully activated service worker.");
+                break;
+              case "redundant":
+                console.log("Service worker has become redundant");
+                break;
             }
           };
         };
       })
       // Service worker registration failed
-      .catch((err) => {
+      .catch(err => {
         console.log("Service worker registration failed: ", err);
       });
   }
@@ -164,9 +167,13 @@ module.exports = () => {
 Import it in `client/app.jsx`:
 
 ```js
-require.ensure(["./sw-registration"], (require) => {
-  require("./sw-registration")();
-}, "sw-registration");
+require.ensure(
+  ["./sw-registration"],
+  require => {
+    require("./sw-registration")();
+  },
+  "sw-registration"
+);
 ```
 
 Let's recap since we completed a couple of tasks:
@@ -205,7 +212,7 @@ The [Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API) requir
 import icon from "./images/logo-192x192.png";
 import badge from "./images/logo-72x72.png";
 
-self.addEventListener("push", (event) => {
+self.addEventListener("push", event => {
   const title = "It worked!";
   const options = {
     body: "Great job sending that push notification!",
@@ -213,9 +220,7 @@ self.addEventListener("push", (event) => {
     icon,
     badge
   };
-  event.waitUntil(
-    self.registration.showNotification(title, options)
-  );
+  event.waitUntil(self.registration.showNotification(title, options));
 });
 ```
 
@@ -226,9 +231,9 @@ Now we need to add this file to our Webpack bundle by referencing it in the `cac
 ```js
 module.exports = {
   cache: {
-    importScripts: ['./sw-events.js']
+    importScripts: ["./sw-events.js"]
   }
-}
+};
 ```
 
 Now we have a registered service worker installed, activated and ready to accept `push` from the server. But before we can `push` we need to `request permissions` from the user and `subscribe` them to the notifications.
@@ -436,12 +441,14 @@ We also need to update `sw-config.js` with the `sender_id`, so the final `sw-con
 module.exports = {
   cache: {
     cacheId: "electrode",
-    runtimeCaching: [{
-      handler: "fastest",
-      urlPattern: "\/$"
-    }],
-    staticFileGlobs: ['dist/**/*'],
-    importScripts: ['./sw-events.js']
+    runtimeCaching: [
+      {
+        handler: "fastest",
+        urlPattern: "/$"
+      }
+    ],
+    staticFileGlobs: ["dist/**/*"],
+    importScripts: ["./sw-events.js"]
   },
   manifest: {
     title: "Electrode Progressive App",
