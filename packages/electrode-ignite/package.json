@@ -73,5 +73,11 @@
     "functions": 100,
     "lines": 100,
     "cache": true
+  },
+  "fyn": {
+    "dependencies": {
+      "generator-electrode": "../generator-electrode",
+      "ignite-core": "../ignite-core"
+    }
   }
 }

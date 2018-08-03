@@ -143,5 +143,19 @@
   "engines": {
     "node": ">= 6",
     "npm": ">= 3"
+  },
+  "fyn": {
+    "dependencies": {
+      "electrode-node-resolver": "../electrode-node-resolver",
+      "webpack-config-composer": "../webpack-config-composer"
+    },
+    "devDependencies": {
+      "electrode-archetype-react-app": "../electrode-archetype-react-app"
+    },
+    "optionalDependencies": {
+      "electrode-archetype-opt-inferno": "../electrode-archetype-opt-inferno",
+      "electrode-archetype-opt-karma": "../electrode-archetype-opt-karma",
+      "electrode-archetype-opt-react": "../electrode-archetype-opt-react"
+    }
   }
 }

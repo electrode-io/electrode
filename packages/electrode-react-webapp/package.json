@@ -93,5 +93,10 @@
       "dist",
       "test"
     ]
+  },
+  "fyn": {
+    "devDependencies": {
+      "electrode-redux-router-engine": "../electrode-redux-router-engine"
+    }
   }
 }
