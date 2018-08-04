@@ -1,6 +1,6 @@
 "use strict";
 
-/* eslint-disable max-statements, no-constant-condition, no-magic-numbers */
+/* eslint-disable max-params, max-statements, no-constant-condition, no-magic-numbers */
 
 const assert = require("assert");
 const Fs = require("fs");
@@ -31,12 +31,17 @@ class AsyncTemplate {
     this._tokenHandlers = [];
     this._handlersMap = {};
     this._initializeTemplate(options.htmlFile);
-    this._initializeTokenHandlers([].concat(options.tokenHandlers).filter(x => x));
-    this._applyTokenLoad();
-    this._renderer = new Renderer({
-      htmlTokens: this._tokens,
-      tokenHandlers: this._tokenHandlers
-    });
+    this._initializeTokenHandlers([].concat(this._options.tokenHandlers).filter(x => x));
+  }
+
+  initializeRenderer(reset) {
+    if (reset || !this._renderer) {
+      this._applyTokenLoad();
+      this._renderer = new Renderer({
+        htmlTokens: this._tokens,
+        tokenHandlers: this._tokenHandlers
+      });
+    }
   }
 
   get tokens() {
@@ -65,13 +70,158 @@ class AsyncTemplate {
     return context;
   }
 
+  _findTokenIndex(id, str, index, instance = 0, msg = "AsyncTemplate._findTokenIndex") {
+    let found;
+
+    if (id) {
+      found = this.findTokensById(id, instance + 1);
+    } else if (str) {
+      found = this.findTokensByStr(str, instance + 1);
+    } else if (!Number.isInteger(index)) {
+      throw new Error(`${msg}: invalid id, str, and index`);
+    } else if (index < 0 || index >= this._tokens.length) {
+      throw new Error(`${msg}: index ${index} is out of range.`);
+    } else {
+      return index;
+    }
+
+    if (found.length === 0) return false;
+
+    return found[instance].index;
+  }
+
+  //
+  // add tokens at first|last   position of the tokens,
+  // or add tokens before|after token at {id}[instance] or {index}
+  //               ^^^ {insert}
+  // - Note that item indexes will change after add
+  //
+  // returns:
+  //   - number of tokens removed
+  //   - false if nothing was removed
+  // throws:
+  //   - if id and index are invalid
+  //   - if {insert} is invalid
+  //
+  addTokens({ insert = "after", id, index, str, instance = 0, tokens }) {
+    const create = tk => {
+      return new Token(
+        tk.token,
+        -1,
+        typeof tk.props === "string" ? this._parseTokenProps(tk.props) : tk.props
+      );
+    };
+
+    if (insert === "first") {
+      this._tokens.unshift(...tokens.map(create));
+      return 0;
+    }
+
+    if (insert === "last") {
+      const x = this._tokens.length;
+      this._tokens.push(...tokens.map(create));
+      return x;
+    }
+
+    index = this._findTokenIndex(id, str, index, instance, "AsyncTemplate.addTokens");
+    if (index === false) return false;
+
+    if (insert === "before") {
+      this._tokens.splice(index, 0, ...tokens.map(create));
+      return index;
+    }
+
+    if (insert === "after") {
+      index++;
+      this._tokens.splice(index, 0, ...tokens.map(create));
+      return index;
+    }
+
+    throw new Error(
+      `AsyncTemplate.addTokens: insert "${insert}" is not valid, must be first|before|after|last`
+    );
+  }
+
+  //
+  // remove {count} tokens before|after token at {id}[instance] or {index}
+  //                       ^^^ {remove}
+  // - if removeSelf is true then the token at {id}[instance] or {index} is included for removal
+  // returns:
+  //   - array of tokens removed
+  // throws:
+  //   - if id and index are invalid
+  //   - if {remove} is invalid
+  //
+  removeTokens({ remove = "after", removeSelf = true, id, str, index, instance = 0, count = 1 }) {
+    assert(count > 0, `AsyncTemplate.removeTokens: count ${count} must be > 0`);
+
+    index = this._findTokenIndex(id, str, index, instance, "AsyncTemplate.removeTokens");
+    if (index === false) return false;
+
+    const offset = removeSelf ? 0 : 1;
+
+    if (remove === "before") {
+      let newIndex = index + 1 - count - offset;
+      if (newIndex < 0) {
+        newIndex = 0;
+        count = index + 1 - offset;
+      }
+      return this._tokens.splice(newIndex, count);
+    } else if (remove === "after") {
+      return this._tokens.splice(index + offset, count);
+    } else {
+      throw new Error(`AsyncTemplate.removeTokens: remove "${remove}" must be before|after`);
+    }
+  }
+
+  findTokensById(id, count = Infinity) {
+    if (!Number.isInteger(count)) count = this._tokens.length;
+
+    const found = [];
+
+    for (let index = 0; index < this._tokens.length && found.length < count; index++) {
+      const token = this._tokens[index];
+      if (token.id === id) {
+        found.push({ index, token });
+      }
+    }
+
+    return found;
+  }
+
+  findTokensByStr(matcher, count = Infinity) {
+    if (!Number.isInteger(count)) count = this._tokens.length;
+
+    const found = [];
+
+    let match;
+
+    if (typeof matcher === "string") {
+      match = str => str.indexOf(matcher) >= 0;
+    } else if (matcher && matcher.constructor.name === "RegExp") {
+      match = str => str.match(matcher);
+    } else {
+      throw new Error("AsyncTemplate.findTokensByStr: matcher must be a string or RegExp");
+    }
+
+    for (let index = 0; index < this._tokens.length && found.length < count; index++) {
+      const token = this._tokens[index];
+      if (token.hasOwnProperty("str") && match(token.str)) {
+        found.push({ index, token });
+      }
+    }
+
+    return found;
+  }
+
   /*
-   break up the template into a list of literal strings and the tokens between them
-   - each item is of the form:
-
-   { str: "literal string" }
-
-   or a Token object
+   * break up the template into a list of literal strings and the tokens between them
+   *
+   *  - each item is of the form:
+   *
+   *    { str: "literal string" }
+   *
+   * or a Token object
    */
 
   _parseTemplate(template, filepath) {

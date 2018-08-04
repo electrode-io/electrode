@@ -22,14 +22,19 @@ describe("token", function() {
     expect(tk.process()).to.equal("_call");
   });
 
-  it("should create token as custom", () => {
-    const tk = new Token("#./test/fixtures/custom-count");
-    expect(tk.id).to.equal("#./test/fixtures/custom-count");
-    expect(tk.isModule).to.equal(true);
-    tk.load();
-    expect(tk.process()).to.equal("1");
-    tk.load();
-    expect(tk.process()).to.equal("2");
+  it("should create token as custom and call setup only once for each token", () => {
+    const tk1 = new Token("#./test/fixtures/custom-count");
+    expect(tk1.id).to.equal("#./test/fixtures/custom-count");
+    expect(tk1.isModule).to.equal(true);
+    tk1.load();
+    expect(tk1.process()).to.equal("1");
+    tk1.load(); // test re-entry
+    expect(tk1.process()).to.equal("1");
+    const tk2 = new Token("#./test/fixtures/custom-count");
+    expect(tk2.id).to.equal("#./test/fixtures/custom-count");
+    expect(tk2.isModule).to.equal(true);
+    tk2.load();
+    expect(tk2.process()).to.equal("2");
   });
 
   it("should handle custom module not found", () => {

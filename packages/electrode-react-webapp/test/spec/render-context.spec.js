@@ -49,6 +49,7 @@ describe("render-context", function() {
         }
       }
     });
+    asyncTemplate.initializeRenderer();
 
     const expected = `
 from wants next module

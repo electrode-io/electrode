@@ -167,4 +167,58 @@ describe("utils", function() {
       expect(request.app.ssrPrefetchOnly).to.equal(true);
     });
   });
+
+  describe("invokeTemplateProcessor", () => {
+    it("should execute templateProcessor function directly", () => {
+      let resA;
+      let resB;
+      const templateProcessor = (a, b) => {
+        resA = a;
+        resB = b;
+      };
+
+      const asyncTemplate = {};
+      const options = { templateProcessor };
+
+      utils.invokeTemplateProcessor(asyncTemplate, options);
+      expect(resA).to.equal(asyncTemplate);
+      expect(resB).to.equal(options);
+    });
+
+    it("should throw if templateProcessor is not a function", () => {
+      const asyncTemplate = {};
+      const options = { templateProcessor: true };
+
+      expect(() => utils.invokeTemplateProcessor(asyncTemplate, options)).to.throw(
+        "is not a function"
+      );
+    });
+
+    it("should load function exported from module", () => {
+      const asyncTemplate = {};
+      const options = { templateProcessor: "./test/fixtures/template-processor-1" };
+
+      expect(utils.invokeTemplateProcessor(asyncTemplate, options)).to.equal(
+        "template-processor-1"
+      );
+    });
+
+    it("should load defined function exported from module", () => {
+      const asyncTemplate = {};
+      const options = { templateProcessor: "./test/fixtures/template-processor-2" };
+
+      expect(utils.invokeTemplateProcessor(asyncTemplate, options)).to.equal(
+        "template-processor-2"
+      );
+    });
+
+    it("should throw if module doesn't export usable function", () => {
+      const asyncTemplate = {};
+      const options = { templateProcessor: "./test/fixtures/template-processor-3" };
+
+      expect(() => utils.invokeTemplateProcessor(asyncTemplate, options)).to.throw(
+        "doesn't export a usable function"
+      );
+    });
+  });
 });

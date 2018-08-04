@@ -23,7 +23,7 @@ class Token {
 
   // if token is a module, then load it
   load(options) {
-    if (!this.isModule) return;
+    if (!this.isModule || this.custom) return;
 
     let tokenMod = viewTokenModules[this.id];
 

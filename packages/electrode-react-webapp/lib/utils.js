@@ -5,6 +5,8 @@
 const _ = require("lodash");
 const fs = require("fs");
 const Path = require("path");
+const requireAt = require("require-at");
+const assert = require("assert");
 
 /**
  * Tries to import bundle chunk selector function if the corresponding option is set in the
@@ -201,6 +203,34 @@ function responseForBadStatus(request, routeOptions, data) {
   };
 }
 
+function loadFuncFromModule(modulePath, exportFuncName, requireAtDir) {
+  const mod = requireAt(requireAtDir || process.cwd())(modulePath);
+  const exportFunc = (exportFuncName && mod[exportFuncName]) || mod;
+  assert(
+    typeof exportFunc === "function",
+    `loadFuncFromModule ${modulePath} doesn't export a usable function`
+  );
+  return exportFunc;
+}
+
+function invokeTemplateProcessor(asyncTemplate, routeOptions) {
+  const tp = routeOptions.templateProcessor;
+
+  if (tp) {
+    let tpFunc;
+    if (typeof tp === "string") {
+      tpFunc = loadFuncFromModule(tp, "templateProcessor");
+    } else {
+      tpFunc = tp;
+      assert(typeof tpFunc === "function", `templateProcessor is not a function`);
+    }
+
+    return tpFunc(asyncTemplate, routeOptions);
+  }
+
+  return undefined;
+}
+
 module.exports = {
   resolveChunkSelector,
   loadAssetsFromStats,
@@ -215,5 +245,7 @@ module.exports = {
   processRenderSsMode,
   getCspNonce,
   responseForError,
-  responseForBadStatus
+  responseForBadStatus,
+  loadFuncFromModule,
+  invokeTemplateProcessor
 };
