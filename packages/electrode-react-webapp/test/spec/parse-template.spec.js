@@ -6,10 +6,21 @@ const expect = require("chai").expect;
 const _ = require("lodash");
 const xstdout = require("xstdout");
 
+const silentIntercept = true;
+
 describe("AsyncTemplate._parseTemplate", function() {
+  let intercept;
+
+  afterEach(() => {
+    if (intercept) {
+      intercept.restore();
+    }
+    intercept = undefined;
+  });
+
   it("should parse template into tokens", () => {
     const htmlFile = Path.join(__dirname, "../data/template1.html");
-    const intercept = xstdout.intercept(true);
+    intercept = xstdout.intercept(silentIntercept);
     const asyncTemplate = new AsyncTemplate({
       htmlFile,
       tokenHandlers: "./test/fixtures/token-handler"
@@ -87,7 +98,7 @@ describe("AsyncTemplate._parseTemplate", function() {
 
   it("should parse template with token at end", () => {
     const htmlFile = Path.join(__dirname, "../data/template2.html");
-    const intercept = xstdout.intercept(true);
+    intercept = xstdout.intercept(silentIntercept);
     const asyncTemplate = new AsyncTemplate({
       htmlFile,
       tokenHandlers: "./test/fixtures/token-handler"
@@ -152,7 +163,7 @@ describe("AsyncTemplate._parseTemplate", function() {
   it("should parse template multi line tokens with props", () => {
     const htmlFile = Path.join(__dirname, "../data/template3.html");
 
-    const intercept = xstdout.intercept(true);
+    intercept = xstdout.intercept(silentIntercept);
 
     const asyncTemplate = new AsyncTemplate({
       htmlFile,
@@ -237,7 +248,7 @@ describe("AsyncTemplate._parseTemplate", function() {
         custom: {
           name: "custom-call"
         },
-        id: "#./test/fixtures/custom-call",
+        id: "#../fixtures/custom-call",
         isModule: true,
         pos: 396,
         props: {

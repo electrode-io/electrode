@@ -9,7 +9,7 @@ module.exports = handlerContext => {
   const iconStats = handlerContext.routeData.iconStats;
 
   return {
-    INITIALIZE: context => {
+    HEAD_INITIALIZE: context => {
       context.user.helmet = Helmet.renderStatic();
     },
 

@@ -6,10 +6,17 @@ const _ = require("lodash");
 const assert = require("assert");
 const ReactWebapp = require("../react-webapp");
 const HttpStatus = require("../http-status");
+const { responseForError, responseForBadStatus } = require("../utils");
 
-const DefaultHandleRoute = (request, response, handler, content) => {
+const DefaultHandleRoute = (request, response, handler, content, routeOptions) => {
   return handler({ content, mode: request.query.__mode || "", request })
-    .then(data => {
+    .then(context => {
+      const data = context.result;
+
+      if (data instanceof Error) {
+        throw data;
+      }
+
       const status = data.status;
 
       if (status === undefined) {
@@ -21,10 +28,14 @@ const DefaultHandleRoute = (request, response, handler, content) => {
       } else if (status >= 200 && status < 300) {
         response.send(data.html !== undefined ? data.html : data);
       } else {
-        response.status(status).send(data);
+        const output = routeOptions.responseForBadStatus(request, routeOptions, data);
+        response.status(output.status).send(output.html);
       }
     })
-    .catch(err => response.status(err.status).send(err.message));
+    .catch(err => {
+      const output = routeOptions.responseForError(request, routeOptions, err);
+      response.status(output.status).send(output.html);
+    });
 };
 
 const registerRoutes = (app, options, next = () => {}) => {
@@ -47,6 +58,7 @@ const registerRoutes = (app, options, next = () => {}) => {
     const routeOptions = _.defaults({ htmlFile: v.htmlFile }, registerOptions);
     const routeHandler = ReactWebapp.makeRouteHandler(routeOptions);
     const handleRoute = options.handleRoute || DefaultHandleRoute;
+    _.defaults(routeOptions, { responseForError, responseForBadStatus });
     let content;
 
     /*eslint max-nested-callbacks: [0, 4]*/
@@ -60,7 +72,7 @@ const registerRoutes = (app, options, next = () => {}) => {
       }
       app[method.toLowerCase()](path, (req, res) => {
         if (!content) content = resolveContent();
-        handleRoute(req, res, routeHandler, content.content);
+        handleRoute(req, res, routeHandler, content.content, routeOptions);
       });
     });
   });

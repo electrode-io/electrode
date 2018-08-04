@@ -101,7 +101,105 @@ function getStatsPath(statsFilePath, buildArtifactsPath) {
     : statsFilePath;
 }
 
+function htmlifyError(err, withStack) {
+  const html = err.html ? `<div>${err.html}</div>\n` : "";
+  const errMsg = () => {
+    if (withStack !== false && err.stack) {
+      if (process.env.NODE_ENV !== "production") {
+        const rgx = new RegExp(process.cwd(), "g");
+        return err.stack.replace(rgx, "CWD");
+      } else {
+        return `- Not sending Error stack for production\n\nMessage: ${err.message}`;
+      }
+    } else {
+      return err.message;
+    }
+  };
+  return `<html><head><title>OOPS</title></head><body>
+${html}
+<pre>
+${errMsg()}
+</pre></body></html>`;
+}
+
+function getDevCssBundle(chunkNames, routeData) {
+  const devBundleBase = routeData.devBundleBase;
+  if (chunkNames.css) {
+    const cssChunks = Array.isArray(chunkNames.css) ? chunkNames.css : [chunkNames.css];
+    return _.map(cssChunks, chunkName => `${devBundleBase}${chunkName}.style.css`);
+  } else {
+    return [`${devBundleBase}style.css`];
+  }
+}
+
+function getDevJsBundle(chunkNames, routeData) {
+  const devBundleBase = routeData.devBundleBase;
+
+  return chunkNames.js
+    ? `${devBundleBase}${chunkNames.js}.bundle.dev.js`
+    : `${devBundleBase}bundle.dev.js`;
+}
+
+function getProdBundles(chunkNames, routeData) {
+  const assets = routeData.assets;
+
+  return {
+    jsChunk: _.find(assets.js, asset => _.includes(asset.chunkNames, chunkNames.js)),
+
+    cssChunk: _.filter(assets.css, asset =>
+      _.some(asset.chunkNames, assetChunkName => _.includes(chunkNames.css, assetChunkName))
+    )
+  };
+}
+
+function processRenderSsMode(request, renderSs, mode) {
+  if (renderSs) {
+    if (mode === "noss") {
+      return false;
+    } else if (renderSs === "datass" || mode === "datass") {
+      renderSs = "datass";
+      // signal user content callback to populate prefetch data only and skips actual SSR
+      _.set(request, ["app", "ssrPrefetchOnly"], true);
+    }
+  }
+
+  return renderSs;
+}
+
+function getCspNonce(request, cspNonceValue) {
+  let scriptNonce = "";
+  let styleNonce = "";
+
+  if (cspNonceValue) {
+    if (typeof cspNonceValue === "function") {
+      scriptNonce = cspNonceValue(request, "script");
+      styleNonce = cspNonceValue(request, "style");
+    } else {
+      scriptNonce = _.get(request, cspNonceValue.script);
+      styleNonce = _.get(request, cspNonceValue.style);
+    }
+    scriptNonce = scriptNonce ? ` nonce="${scriptNonce}"` : "";
+    styleNonce = styleNonce ? ` nonce="${styleNonce}"` : "";
+  }
+
+  return { scriptNonce, styleNonce };
+}
+
 const resolvePath = path => (!Path.isAbsolute(path) ? Path.resolve(path) : path);
+
+function responseForError(request, routeOptions, err) {
+  return {
+    status: err.status || 500,
+    html: htmlifyError(err, routeOptions.replyErrorStack)
+  };
+}
+
+function responseForBadStatus(request, routeOptions, data) {
+  return {
+    status: data.status,
+    html: data
+  };
+}
 
 module.exports = {
   resolveChunkSelector,
@@ -109,5 +207,13 @@ module.exports = {
   getIconStats,
   getCriticalCSS,
   getStatsPath,
-  resolvePath
+  resolvePath,
+  htmlifyError,
+  getDevCssBundle,
+  getDevJsBundle,
+  getProdBundles,
+  processRenderSsMode,
+  getCspNonce,
+  responseForError,
+  responseForBadStatus
 };

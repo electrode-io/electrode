@@ -9,6 +9,7 @@ const electrodeServer = require("electrode-server");
 const Path = require("path");
 require("babel-register");
 
+const { expect } = require("chai");
 const webapp = require("../..");
 const ReactDOMServer = require("react-dom/server");
 const React = require("react");
@@ -21,6 +22,9 @@ describe("hapi electrode-react-webapp", () => {
 
   const getConfig = () => {
     return {
+      server: {
+        useDomains: false
+      },
       connections: {
         default: {
           port: 0
@@ -551,7 +555,7 @@ describe("hapi electrode-react-webapp", () => {
     });
   });
 
-  it("should use top level htmlFile", () => {
+  it("should use top level htmlFile and return response headers", () => {
     configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
     configOptions.stats = "test/data/stats-test-one-bundle.json";
     configOptions.htmlFile = "test/data/index-1.html";
@@ -565,7 +569,6 @@ describe("hapi electrode-react-webapp", () => {
           url: "/"
         })
         .then(res => {
-          expect(res.statusCode).to.equal(200);
           expect(res.result).includes(`<title>user-handler-title</title>`);
           expect(res.result).includes(`</script><div>user-promise-token</div><script`);
           expect(res.result).includes(
@@ -574,6 +577,8 @@ describe("hapi electrode-react-webapp", () => {
           expect(res.result).includes(
             `</script><div>from custom-1</div><div>user-token-1</div><div>user-token-2</div><noscript>` // eslint-disable-line
           );
+          expect(res.headers["x-foo-bar"]).to.equal("hello-world");
+          expect(res.statusCode).to.equal(200);
           stopServer(server);
         })
         .catch(err => {
@@ -607,7 +612,7 @@ describe("hapi electrode-react-webapp", () => {
         })
         .then(res => {
           expect(res.statusCode).to.equal(401);
-          expect(res.result).to.equal("test content throw html with status");
+          expect(res.result).contains("test content throw html with status");
           stopServer(server);
         })
         .catch(err => {
@@ -640,7 +645,7 @@ describe("hapi electrode-react-webapp", () => {
         })
         .then(res => {
           expect(res.statusCode).to.equal(500);
-          expect(res.result).to.equal("test content throw");
+          expect(res.result).contains("test content throw");
           stopServer(server);
         })
         .catch(err => {
@@ -673,7 +678,34 @@ describe("hapi electrode-react-webapp", () => {
         })
         .then(res => {
           expect(res.statusCode).to.equal(500);
-          expect(res.result).contains("electrode-react-webapp/test/spec/hapi.index.spec.js");
+          expect(res.result).contains("/test/spec/hapi.index.spec.js");
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
+  it("should handle non-render errors", () => {
+    assign(paths, {
+      content: () => ""
+    });
+
+    Object.assign(paths, {
+      tokenHandler: "./test/fixtures/non-render-error"
+    });
+
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .then(res => {
+          expect(res.statusCode).to.equal(500);
+          expect(res.result).contains("error from test/fixtures/non-render-error");
           stopServer(server);
         })
         .catch(err => {
@@ -1073,7 +1105,33 @@ describe("hapi electrode-react-webapp", () => {
     });
   });
 
-  it("should return 200 and html with render false", () => {
+  it("should handle 200 status @noss @has-html", () => {
+    assign(paths, {
+      content: {
+        status: 200,
+        html: "test has html"
+      }
+    });
+
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/?__mode=noss"
+        })
+        .then(res => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.result).contains(`<!DOCTYPE html>\n\n<html lang="en">`);
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
+  it("should return 200 and direct html with render false", () => {
     assign(paths, {
       content: {
         status: 200,
@@ -1100,7 +1158,7 @@ describe("hapi electrode-react-webapp", () => {
     });
   });
 
-  it("should non 200 status", () => {
+  it("should handle content non 200 status noss mode", () => {
     assign(paths, {
       content: {
         status: 404,

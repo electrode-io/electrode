@@ -4,6 +4,7 @@
 
 const assert = require("assert");
 const loadHandler = require("./load-handler");
+const { TEMPLATE_DIR } = require("./symbols");
 
 const viewTokenModules = {};
 
@@ -28,7 +29,7 @@ class Token {
 
     if (tokenMod === undefined) {
       const mPath = this.id.substr(1); // remove the leading #
-      tokenMod = loadHandler(mPath);
+      tokenMod = loadHandler(mPath, this.props[TEMPLATE_DIR]);
       viewTokenModules[this.id] = tokenMod;
     }
 

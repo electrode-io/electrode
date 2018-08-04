@@ -1,3 +1,4 @@
+<!--%{INITIALIZE}-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,6 +9,7 @@
   <!--%{PAGE_TITLE}-->
   <!--%{CRITICAL_CSS}-->
   <!--%{WEBAPP_HEADER_BUNDLES}-->
+  <!--%{ user-header-token }-->
 </head>
 
 <body>
@@ -23,7 +25,7 @@
   <script>
     if (window.webappStart) webappStart();
   </script>
-  <!--%{#./test/fixtures/custom-1}-->
+  <!--%{#../fixtures/custom-1}-->
   <!--%{user-token-1}-->
   <!--%{user-token-2}-->
   <noscript>

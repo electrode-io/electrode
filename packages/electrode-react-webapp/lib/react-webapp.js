@@ -12,12 +12,16 @@ const getStatsPath = utils.getStatsPath;
 
 function makeRouteHandler(routeOptions) {
   const userTokenHandlers = [].concat(routeOptions.tokenHandler, routeOptions.tokenHandlers);
-  const reactTokenHandlers = Path.join(__dirname, "react/token-handlers");
 
-  const tokenHandlers =
-    userTokenHandlers.indexOf(reactTokenHandlers) < 0
-      ? [reactTokenHandlers].concat(userTokenHandlers)
-      : userTokenHandlers;
+  let tokenHandlers = userTokenHandlers;
+
+  if (!routeOptions.replaceTokenHandlers) {
+    const reactTokenHandlers = Path.join(__dirname, "react/token-handlers");
+    tokenHandlers =
+      userTokenHandlers.indexOf(reactTokenHandlers) < 0
+        ? [reactTokenHandlers].concat(userTokenHandlers)
+        : userTokenHandlers;
+  }
 
   const asyncTemplate = new AsyncTemplate({
     htmlFile: routeOptions.htmlFile,
@@ -25,7 +29,9 @@ function makeRouteHandler(routeOptions) {
     routeOptions
   });
 
-  return options => asyncTemplate.render(options);
+  return options => {
+    return asyncTemplate.render(options);
+  };
 }
 
 const setupOptions = options => {
