@@ -2,13 +2,7 @@
 
 const { executeSteps, executeRenderSteps } = require("./render-execute");
 
-const {
-  STEP_CALLBACK,
-  STEP_MAYBE_ASYNC,
-  STEP_STR_TOKEN,
-  STEP_NO_HANDLER,
-  STEP_LITERAL_HANDLER
-} = executeSteps;
+const { STEP_HANDLER, STEP_STR_TOKEN, STEP_NO_HANDLER, STEP_LITERAL_HANDLER } = executeSteps;
 
 class Renderer {
   constructor(options) {
@@ -39,13 +33,7 @@ class Renderer {
 
       tk.setHandler(tkFunc);
 
-      const code =
-        tkFunc.length > 1 // token function takes more than one argument, so it takes callback
-          ? STEP_CALLBACK
-          : // token function is sync or returns Promise
-            STEP_MAYBE_ASYNC;
-
-      return { tk, code };
+      return { tk, code: STEP_HANDLER };
     };
 
     const makeStep = tk => {
@@ -57,13 +45,7 @@ class Renderer {
       // token is not pointing to a module, so lookup from token handlers
       if (!tk.isModule) return makeHandlerStep(tk);
 
-      const code =
-        tk.wantsNext === true // module's process function wants a next callback
-          ? STEP_CALLBACK
-          : // module's process function is sync or returns Promise
-            STEP_MAYBE_ASYNC;
-
-      return { tk, code };
+      return { tk, code: STEP_HANDLER };
     };
 
     this.renderSteps = options.htmlTokens.map(makeStep).filter(x => x);
