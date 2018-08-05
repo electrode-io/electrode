@@ -85,7 +85,11 @@ const setupOptions = options => {
 const setupPathOptions = (routeOptions, path) => {
   const options = routeOptions.paths[path];
   return _.defaults(
-    { htmlFile: options.htmlFile, tokenHandler: options.tokenHandler },
+    {
+      htmlFile: options.htmlFile,
+      tokenHandler: options.tokenHandler,
+      tokenHandlers: options.tokenHandlers
+    },
     routeOptions
   );
 };

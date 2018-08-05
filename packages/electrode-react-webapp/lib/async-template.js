@@ -10,6 +10,7 @@ const Renderer = require("./renderer");
 const { resolvePath } = require("./utils");
 const Token = require("./token");
 const stringArray = require("string-array");
+const _ = require("lodash");
 const Path = require("path");
 
 const { TEMPLATE_DIR } = require("./symbols");
@@ -28,14 +29,24 @@ const tokenOpenTagRegex = new RegExp(
 class AsyncTemplate {
   constructor(options) {
     this._options = options;
-    this._tokenHandlers = [];
+    this._tokenHandlers = [].concat(this._options.tokenHandlers).filter(x => x);
     this._handlersMap = {};
+    // the same context that gets passed to each token handler's setup function
+    this._handlerContext = _.merge(
+      {
+        user: {
+          // set routeOptions in user also for consistency
+          routeOptions: options.routeOptions
+        }
+      },
+      options
+    );
     this._initializeTemplate(options.htmlFile);
-    this._initializeTokenHandlers([].concat(this._options.tokenHandlers).filter(x => x));
   }
 
   initializeRenderer(reset) {
     if (reset || !this._renderer) {
+      this._initializeTokenHandlers(this._tokenHandlers);
       this._applyTokenLoad();
       this._renderer = new Renderer({
         htmlTokens: this._tokens,
@@ -328,7 +339,7 @@ class AsyncTemplate {
 
   _loadTokenHandler(path) {
     const mod = loadHandler(path);
-    return mod(this._options, this);
+    return mod(this._handlerContext, this);
   }
 
   _applyTokenLoad() {

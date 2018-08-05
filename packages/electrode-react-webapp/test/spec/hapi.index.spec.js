@@ -7,8 +7,8 @@ const Promise = require("bluebird");
 const assign = require("object-assign");
 const electrodeServer = require("electrode-server");
 const Path = require("path");
+const xstdout = require("xstdout");
 require("babel-register");
-
 const { expect } = require("chai");
 const webapp = require("../..");
 const ReactDOMServer = require("react-dom/server");
@@ -18,7 +18,7 @@ const Helmet = require("react-helmet").Helmet;
 describe("hapi electrode-react-webapp", () => {
   let config;
   let configOptions;
-  let paths;
+  let mainRoutePathOptions;
 
   const getConfig = () => {
     return {
@@ -58,10 +58,19 @@ describe("hapi electrode-react-webapp", () => {
     };
   };
 
+  let stdoutIntercept;
+
   beforeEach(() => {
     config = getConfig();
     configOptions = config.plugins["react-webapp"].options;
-    paths = configOptions.paths["/{args*}"];
+    mainRoutePathOptions = configOptions.paths["/{args*}"];
+  });
+
+  afterEach(() => {
+    if (stdoutIntercept) {
+      stdoutIntercept.restore();
+      stdoutIntercept = undefined;
+    }
   });
 
   const stopServer = server =>
@@ -144,7 +153,7 @@ describe("hapi electrode-react-webapp", () => {
   });
 
   it("should successfully render to static markup with content as a function", () => {
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: () =>
         Promise.resolve({
           status: 200,
@@ -190,7 +199,7 @@ describe("hapi electrode-react-webapp", () => {
   });
 
   it("should return error", () => {
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: () =>
         Promise.reject({
           status: 500,
@@ -559,7 +568,7 @@ describe("hapi electrode-react-webapp", () => {
     configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
     configOptions.stats = "test/data/stats-test-one-bundle.json";
     configOptions.htmlFile = "test/data/index-1.html";
-    Object.assign(paths, {
+    Object.assign(mainRoutePathOptions, {
       tokenHandler: "./test/fixtures/token-handler"
     });
     return electrodeServer(config).then(server => {
@@ -589,7 +598,7 @@ describe("hapi electrode-react-webapp", () => {
   });
 
   it("should handle if content function throws", () => {
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: () => {
         const err = new Error("test content throw");
         err.html = "test content throw html with status";
@@ -601,7 +610,7 @@ describe("hapi electrode-react-webapp", () => {
     configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
     configOptions.stats = "test/data/stats-test-one-bundle.json";
     configOptions.htmlFile = "test/data/index-1.html";
-    Object.assign(paths, {
+    Object.assign(mainRoutePathOptions, {
       tokenHandler: "./test/fixtures/token-handler"
     });
     return electrodeServer(config).then(server => {
@@ -623,7 +632,7 @@ describe("hapi electrode-react-webapp", () => {
   });
 
   it("should handle if content function throws generic error", () => {
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: () => {
         const err = new Error("test content throw");
         return Promise.reject(err);
@@ -634,7 +643,7 @@ describe("hapi electrode-react-webapp", () => {
     configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
     configOptions.stats = "test/data/stats-test-one-bundle.json";
     configOptions.htmlFile = "test/data/index-1.html";
-    Object.assign(paths, {
+    Object.assign(mainRoutePathOptions, {
       tokenHandler: "./test/fixtures/token-handler"
     });
     return electrodeServer(config).then(server => {
@@ -656,7 +665,7 @@ describe("hapi electrode-react-webapp", () => {
   });
 
   it("should reply with error stack if option is not false", () => {
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: () => {
         const err = new Error("test content throw");
         return Promise.reject(err);
@@ -667,7 +676,7 @@ describe("hapi electrode-react-webapp", () => {
     configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
     configOptions.stats = "test/data/stats-test-one-bundle.json";
     configOptions.htmlFile = "test/data/index-1.html";
-    Object.assign(paths, {
+    Object.assign(mainRoutePathOptions, {
       tokenHandler: "./test/fixtures/token-handler"
     });
     return electrodeServer(config).then(server => {
@@ -689,11 +698,11 @@ describe("hapi electrode-react-webapp", () => {
   });
 
   it("should handle non-render errors", () => {
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: () => ""
     });
 
-    Object.assign(paths, {
+    Object.assign(mainRoutePathOptions, {
       tokenHandler: "./test/fixtures/non-render-error"
     });
 
@@ -717,7 +726,7 @@ describe("hapi electrode-react-webapp", () => {
 
   it("should pass options with mode as datass from request to content function", () => {
     let ssrPrefetchOnly;
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: request => {
         ssrPrefetchOnly = request.app.ssrPrefetchOnly;
         const mode = ssrPrefetchOnly && "datass";
@@ -732,7 +741,7 @@ describe("hapi electrode-react-webapp", () => {
     configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
     configOptions.stats = "test/data/stats-test-one-bundle.json";
     configOptions.htmlFile = "test/data/index-1.html";
-    Object.assign(paths, {
+    Object.assign(mainRoutePathOptions, {
       tokenHandler: "./test/fixtures/token-handler"
     });
     return electrodeServer(config).then(server => {
@@ -766,7 +775,7 @@ describe("hapi electrode-react-webapp", () => {
   it("should pass datass mode from routeOptions to content function", () => {
     configOptions.serverSideRendering = "datass";
     let ssrPrefetchOnly;
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: request => {
         ssrPrefetchOnly = request.app.ssrPrefetchOnly;
         const mode = ssrPrefetchOnly && "datass";
@@ -781,7 +790,7 @@ describe("hapi electrode-react-webapp", () => {
     configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
     configOptions.stats = "test/data/stats-test-one-bundle.json";
     configOptions.htmlFile = "test/data/index-1.html";
-    Object.assign(paths, {
+    Object.assign(mainRoutePathOptions, {
       tokenHandler: "./test/fixtures/token-handler"
     });
     return electrodeServer(config).then(server => {
@@ -814,7 +823,7 @@ describe("hapi electrode-react-webapp", () => {
 
   it("should handle mode as noss from request", () => {
     let contentCalled = false;
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: () => {
         contentCalled = true;
       }
@@ -823,7 +832,7 @@ describe("hapi electrode-react-webapp", () => {
     configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
     configOptions.stats = "test/data/stats-test-one-bundle.json";
     configOptions.htmlFile = "test/data/index-1.html";
-    Object.assign(paths, {
+    Object.assign(mainRoutePathOptions, {
       tokenHandler: "./test/fixtures/token-handler"
     });
     return electrodeServer(config).then(server => {
@@ -857,7 +866,7 @@ describe("hapi electrode-react-webapp", () => {
     configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
     configOptions.stats = "test/data/stats-test-one-bundle.json";
     configOptions.htmlFile = "test/data/index-1.html";
-    paths.htmlFile = Path.resolve("test/data/index-2.html");
+    mainRoutePathOptions.htmlFile = Path.resolve("test/data/index-2.html");
 
     return electrodeServer(config).then(server => {
       return server
@@ -1028,7 +1037,7 @@ describe("hapi electrode-react-webapp", () => {
   });
 
   it("should handle 302 redirect", () => {
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: {
         status: 302,
         path: "/redirect2"
@@ -1054,7 +1063,7 @@ describe("hapi electrode-react-webapp", () => {
   });
 
   it("should handle 200 status @noss", () => {
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: {
         status: 200,
         message: "status 200 noss"
@@ -1080,7 +1089,7 @@ describe("hapi electrode-react-webapp", () => {
   });
 
   it("should handle 200 status @noss @no-html", () => {
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: {
         status: 200,
         message: "status 200 noss"
@@ -1106,7 +1115,7 @@ describe("hapi electrode-react-webapp", () => {
   });
 
   it("should handle 200 status @noss @has-html", () => {
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: {
         status: 200,
         html: "test has html"
@@ -1132,7 +1141,7 @@ describe("hapi electrode-react-webapp", () => {
   });
 
   it("should return 200 and direct html with render false", () => {
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: {
         status: 200,
         html: "<div>html</div>",
@@ -1159,7 +1168,7 @@ describe("hapi electrode-react-webapp", () => {
   });
 
   it("should handle content non 200 status noss mode", () => {
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: {
         status: 404,
         message: "status 404 noss"
@@ -1185,7 +1194,7 @@ describe("hapi electrode-react-webapp", () => {
   });
 
   it("should return 404 and html, if custom html is provided", () => {
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: {
         status: 404,
         html: "html content"
@@ -1211,7 +1220,7 @@ describe("hapi electrode-react-webapp", () => {
   });
 
   it("should not fail on not handled status codes", () => {
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: {
         status: 501,
         message: "not implemented"
@@ -1284,7 +1293,15 @@ describe("hapi electrode-react-webapp", () => {
     configOptions.unbundledJS = {
       enterHead: ["test-1 script"]
     };
-    assign(paths, {
+    configOptions.templateProcessor = asyncTemplate => {
+      const x = asyncTemplate.addTokens({
+        insert: "after",
+        id: "WEBAPP_HEADER_BUNDLES",
+        tokens: [{ token: "REACT_HELMET_SCRIPTS" }]
+      });
+      expect(x).to.be.above(0);
+    };
+    assign(mainRoutePathOptions, {
       tokenHandler: "./test/fixtures/react-helmet-handler",
       content: () => {
         return {
@@ -1316,7 +1333,15 @@ describe("hapi electrode-react-webapp", () => {
         };
       }
     });
+    stdoutIntercept = xstdout.intercept(true);
     return electrodeServer(config).then(server => {
+      stdoutIntercept.restore();
+      // since there are two paths and the react-helment-handler is only register for the
+      // main path route, expect the other route's registration to cause a error message
+      // to the stderr.
+      expect(stdoutIntercept.stderr[0]).contains(
+        "electrode-react-webapp: no handler found for token id REACT_HELMET_SCRIPTS"
+      );
       return server
         .inject({
           method: "GET",
@@ -1427,7 +1452,7 @@ describe("hapi electrode-react-webapp", () => {
     });
 
     it("should refresh content module", () => {
-      paths.content = {
+      mainRoutePathOptions.content = {
         module: "./test/data/test-content"
       };
 

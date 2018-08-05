@@ -5,8 +5,8 @@ const Helmet = require("react-helmet").Helmet;
 const emptyTitleRegex = /<title[^>]*><\/title>/;
 
 module.exports = handlerContext => {
-  const routeOptions = handlerContext.routeOptions;
-  const iconStats = handlerContext.routeData.iconStats;
+  const routeOptions = handlerContext.user.routeOptions;
+  const iconStats = handlerContext.user.routeData.iconStats;
 
   return {
     HEAD_INITIALIZE: context => {
@@ -21,18 +21,11 @@ module.exports = handlerContext => {
       return helmetTitleEmpty ? `<title>${routeOptions.pageTitle}</title>` : helmetTitleScript;
     },
 
-    WEBAPP_HEADER_BUNDLES: (context, next) => {
-      context.handleTokenResult(
-        "WEBAPP_HEADER_BUNDLES",
-        context.getTokens("electrode-react-token-handlers").WEBAPP_HEADER_BUNDLES(context), // eslint-disable-line
-        () => {
-          const scriptsFromHelmet = ["link", "style", "script", "noscript"]
-            .map(tagName => context.user.helmet[tagName].toString())
-            .join("");
-          context.output.add(`<!--scripts from helmet-->${scriptsFromHelmet}`);
-          next();
-        }
-      );
+    REACT_HELMET_SCRIPTS: context => {
+      const scriptsFromHelmet = ["link", "style", "script", "noscript"]
+        .map(tagName => context.user.helmet[tagName].toString())
+        .join("");
+      return `<!--scripts from helmet-->${scriptsFromHelmet}`;
     },
 
     META_TAGS: context => {
