@@ -3,6 +3,7 @@
 const Token = require("../../lib/token");
 const expect = require("chai").expect;
 const xstdout = require("xstdout");
+const { TOKEN_HANDLER } = require("../../lib/symbols");
 
 describe("token", function() {
   it("should create token as internal", () => {
@@ -19,7 +20,7 @@ describe("token", function() {
     expect(tk.id).to.equal("#./test/fixtures/custom-call");
     expect(tk.isModule).to.equal(true);
     tk.load();
-    expect(tk.process()).to.equal("_call");
+    expect(tk[TOKEN_HANDLER]()).to.equal("_call");
   });
 
   it("should create token as custom and call setup only once for each token", () => {
@@ -27,14 +28,14 @@ describe("token", function() {
     expect(tk1.id).to.equal("#./test/fixtures/custom-count");
     expect(tk1.isModule).to.equal(true);
     tk1.load();
-    expect(tk1.process()).to.equal("1");
+    expect(tk1[TOKEN_HANDLER]()).to.equal("1");
     tk1.load(); // test re-entry
-    expect(tk1.process()).to.equal("1");
+    expect(tk1[TOKEN_HANDLER]()).to.equal("1");
     const tk2 = new Token("#./test/fixtures/custom-count");
     expect(tk2.id).to.equal("#./test/fixtures/custom-count");
     expect(tk2.isModule).to.equal(true);
     tk2.load();
-    expect(tk2.process()).to.equal("2");
+    expect(tk2[TOKEN_HANDLER]()).to.equal("2");
   });
 
   it("should handle custom module not found", () => {
@@ -44,7 +45,9 @@ describe("token", function() {
     const intercept = xstdout.intercept(true);
     tk.load();
     intercept.restore();
-    expect(tk.process()).to.equal("\ntoken process module ./test/fixtures/not-found not found\n");
+    expect(tk[TOKEN_HANDLER]()).to.equal(
+      "\ntoken process module ./test/fixtures/not-found not found\n"
+    );
   });
 
   it("should handle custom module load failure", () => {
@@ -54,7 +57,7 @@ describe("token", function() {
     const intercept = xstdout.intercept(true);
     tk.load();
     intercept.restore();
-    expect(tk.process()).to.equal(
+    expect(tk[TOKEN_HANDLER]()).to.equal(
       "\ntoken process module ./test/fixtures/custom-fail failed to load\n"
     );
   });

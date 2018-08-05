@@ -4,7 +4,7 @@
 
 const assert = require("assert");
 const loadHandler = require("./load-handler");
-const { TEMPLATE_DIR } = require("./symbols");
+const { TEMPLATE_DIR, TOKEN_HANDLER } = require("./symbols");
 
 const viewTokenModules = {};
 
@@ -19,6 +19,7 @@ class Token {
     if (this.props._call) {
       this._modCall = [].concat(this.props._call);
     }
+    this[TOKEN_HANDLER] = null;
   }
 
   // if token is a module, then load it
@@ -53,12 +54,11 @@ class Token {
     // if process function takes more than one params, then it should take a
     // next callback so it can do async work, and call next after that's done.
     this.wantsNext = this.custom.process.length > 1;
+    this.setHandler(this.custom.process);
   }
 
-  process(context, next) {
-    assert(this.isModule, "Only token module can process");
-    assert(this.custom, "Custom token is not loaded yet");
-    return this.custom.process(context, next);
+  setHandler(func) {
+    this[TOKEN_HANDLER] = func;
   }
 }
 
