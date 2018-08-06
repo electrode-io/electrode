@@ -1,104 +1,76 @@
 "use strict";
 
-/* eslint-disable max-statements */
+const { executeSteps, executeRenderSteps } = require("./render-execute");
 
-const Promise = require("bluebird");
+const {
+  STEP_CALLBACK,
+  STEP_MAYBE_ASYNC,
+  STEP_STR_TOKEN,
+  STEP_NO_HANDLER,
+  STEP_LITERAL_HANDLER
+} = executeSteps;
 
 class Renderer {
   constructor(options) {
     // the last handler wins if it contains a token
     const tokenHandlers = options.tokenHandlers.reverse();
 
-    const makeStep = tk => {
-      // token is a literal string, just add it to output
-      if (tk.str !== undefined) {
-        return xt => {
-          xt.context.output.add(tk.str);
-          this._next(null, xt);
-        };
+    const makeHandlerStep = tk => {
+      // look for first handler that has a token function for tk.id
+      const handler = tokenHandlers.find(h => h.tokens.hasOwnProperty(tk.id));
+
+      // no handler has function for token
+      if (!handler) {
+        const msg = `electrode-react-webapp: no handler found for token id ${tk.id}`;
+        console.error(msg); // eslint-disable-line
+        return { tk, code: STEP_NO_HANDLER };
       }
 
-      // token is not pointing to a module, so use it as an id to lookup from token handlers
-      if (!tk.isModule) {
-        // look for first handler that has a token function for tk.id
-        const handler = tokenHandlers.find(h => h.tokens.hasOwnProperty(tk.id));
+      const tkFunc = handler.tokens[tk.id];
 
-        // no handler has function for token
-        if (!handler) {
-          const msg = `electrode-react-webapp: no handler found for token id ${tk.id}`;
-          console.error(msg); // eslint-disable-line
-          return xt => {
-            xt.context.output.add(`<!-- unhandled token ${tk.id} -->`);
-            this._next(null, xt);
-          };
-        }
+      if (tkFunc === null) {
+        return null;
+      }
 
-        const tkFunc = handler.tokens[tk.id];
-
-        if (tkFunc === null) {
-          return null;
-        }
-
+      if (typeof tkFunc !== "function") {
         // not a function, just add it to output
-        if (typeof tkFunc !== "function") {
-          return xt => {
-            xt.context.output.add(tkFunc);
-            this._next(null, xt);
-          };
-        }
-
-        // token function takes more than one argument, so pass in a callback for async
-        if (tkFunc.length > 1) {
-          return xt => tkFunc.call(tk, xt.context, err => this._next(err, xt));
-        }
-
-        // token function is sync or returns Promise, so pass its return value
-        // to context.handleTokenResult
-        return xt =>
-          xt.context.handleTokenResult(tk.id, tkFunc.call(tk, xt.context), err =>
-            this._next(err, xt)
-          );
+        return { tk, code: STEP_LITERAL_HANDLER, data: tkFunc };
       }
 
-      // token is a module and its process function wants a next callback
-      if (tk.wantsNext === true) {
-        return xt => tk.process(xt.context, err => this._next(err, xt));
-      }
+      tk.setHandler(tkFunc);
 
-      // token is a module and its process function is sync so pass its
-      // return value to context.handleTokenResult
-      return xt =>
-        xt.context.handleTokenResult(tk.id, tk.process(xt.context), err => this._next(err, xt));
+      const code =
+        tkFunc.length > 1 // token function takes more than one argument, so it takes callback
+          ? STEP_CALLBACK
+          : // token function is sync or returns Promise
+            STEP_MAYBE_ASYNC;
+
+      return { tk, code };
     };
 
-    this.renderSteps = options.htmlTokens
-      .map(tk => ({ tk, exec: makeStep(tk) }))
-      .filter(x => x.exec);
+    const makeStep = tk => {
+      // token is a literal string, just add it to output
+      if (tk.hasOwnProperty("str")) {
+        return { tk, code: STEP_STR_TOKEN };
+      }
+
+      // token is not pointing to a module, so lookup from token handlers
+      if (!tk.isModule) return makeHandlerStep(tk);
+
+      const code =
+        tk.wantsNext === true // module's process function wants a next callback
+          ? STEP_CALLBACK
+          : // module's process function is sync or returns Promise
+            STEP_MAYBE_ASYNC;
+
+      return { tk, code };
+    };
+
+    this.renderSteps = options.htmlTokens.map(makeStep).filter(x => x);
   }
 
   render(context) {
-    return new Promise((resolve, reject) =>
-      this._next(null, { context, _tokenIndex: 0, resolve, reject })
-    );
-  }
-
-  _next(err, xt) {
-    if (err) {
-      // debugger; // eslint-disable-line
-      xt.context.handleError(err);
-    }
-
-    if (
-      xt.context.isFullStop ||
-      xt.context.isVoidStop ||
-      xt._tokenIndex >= this.renderSteps.length
-    ) {
-      return xt.resolve(xt.context.output.close());
-    } else {
-      // TODO: support soft stop
-      const step = this.renderSteps[xt._tokenIndex++];
-      return step.exec(xt);
-    }
+    return executeRenderSteps(this.renderSteps, context);
   }
 }
 
