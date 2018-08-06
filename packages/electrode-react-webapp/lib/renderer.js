@@ -45,6 +45,8 @@ class Renderer {
       // token is not pointing to a module, so lookup from token handlers
       if (!tk.isModule) return makeHandlerStep(tk);
 
+      if (tk.custom === null) return null;
+
       return { tk, code: STEP_HANDLER };
     };
 

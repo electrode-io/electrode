@@ -61,4 +61,13 @@ describe("token", function() {
       "\ntoken process module ./test/fixtures/custom-fail failed to load\n"
     );
   });
+
+  it("should handle custom module returning null", () => {
+    const tk = new Token("#./test/fixtures/custom-null");
+    expect(tk.id).to.equal("#./test/fixtures/custom-null");
+    expect(tk.isModule).to.equal(true);
+    expect(tk.custom).to.equal(undefined);
+    tk.load();
+    expect(tk.custom).to.equal(null);
+  });
 });
