@@ -24,8 +24,8 @@ const PREFETCH_MARKER = "PREFETCH_BUNDLES";
 const META_TAGS_MARKER = "META_TAGS";
 const CRITICAL_CSS_MARKER = "CRITICAL_CSS";
 
-module.exports = function setup(handlerContext /* , asyncTemplate */) {
-  const routeOptions = handlerContext.routeOptions;
+module.exports = function setup(handlerContext /*, asyncTemplate*/) {
+  const routeOptions = handlerContext.user.routeOptions;
 
   const WEBPACK_DEV = routeOptions.webpackDev;
   const RENDER_JS = routeOptions.renderJS;
@@ -49,7 +49,7 @@ module.exports = function setup(handlerContext /* , asyncTemplate */) {
     criticalCSS
   };
 
-  handlerContext.routeData = routeData;
+  handlerContext.user.routeData = routeData;
 
   const bundleManifest = () => {
     if (!assets.manifest) {
