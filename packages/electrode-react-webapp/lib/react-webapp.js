@@ -4,11 +4,12 @@ const _ = require("lodash");
 const Path = require("path");
 const AsyncTemplate = require("./async-template");
 
-const utils = require("./utils");
-
-const resolveChunkSelector = utils.resolveChunkSelector;
-const loadAssetsFromStats = utils.loadAssetsFromStats;
-const getStatsPath = utils.getStatsPath;
+const {
+  resolveChunkSelector,
+  loadAssetsFromStats,
+  getStatsPath,
+  invokeTemplateProcessor
+} = require("./utils");
 
 function makeRouteHandler(routeOptions) {
   const userTokenHandlers = [].concat(routeOptions.tokenHandler, routeOptions.tokenHandlers);
@@ -28,6 +29,9 @@ function makeRouteHandler(routeOptions) {
     tokenHandlers: tokenHandlers.filter(x => x),
     routeOptions
   });
+
+  invokeTemplateProcessor(asyncTemplate, routeOptions);
+  asyncTemplate.initializeRenderer();
 
   return options => {
     return asyncTemplate.render(options);
