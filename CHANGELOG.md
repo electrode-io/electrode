@@ -1,3 +1,100 @@
+# 8/6/2018
+
+- Major (v2 to v3) update to electrode-react-webapp
+  - Now allow token to do initialization (this breaks existing INITIALIZE token)
+  - Allow token to control render flow by stopping it (breaks existing token handlers)
+  - Drop support for callbacks for token handler.  Only return Promise now.
+  - `require` token processor module relative to directory where template file is
+  - Add `templateProcessor` option to allow programatically add/remove tokens.
+  - And other clean ups and refactors
+- Update all packages to use fyn section in package.json to persist local dep
+- Fix PWA option in generator-electrode that was always copying PWA files
+- Minor links fixes in docs
+
+## Packages
+
+-   electrode-archetype-react-app@5.4.2 `(5.4.1 => 5.4.2)`
+-   electrode-archetype-react-app-dev@5.4.2 `(5.4.1 => 5.4.2)`
+-   electrode-archetype-react-component@5.3.3 `(5.3.2 => 5.3.3)`
+-   electrode-archetype-react-component-dev@5.3.3 `(5.3.2 => 5.3.3)`
+-   electrode-ignite@2.1.5 `(2.1.4 => 2.1.5)`
+-   electrode-react-webapp@3.0.0 `(2.5.3 => 3.0.0)`
+-   electrode-redux-router-engine@2.1.4 `(2.1.3 => 2.1.4)`
+-   electrode-ui-logger@1.1.2 `(1.1.1 => 1.1.2)`
+-   generator-electrode@4.2.1 `(4.2.0 => 4.2.1)`
+-   ignite-core@1.1.6 `(1.1.5 => 1.1.6)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   persist local deps in fyn section [commit](http://github.com/electrode-io/electrode/commit/9a9cff758a04c518531678c6b432b5471fd3d35c)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   persist local deps in fyn section [commit](http://github.com/electrode-io/electrode/commit/9a9cff758a04c518531678c6b432b5471fd3d35c)
+
+-   `packages/electrode-ignite`
+
+    -   persist local deps in fyn section [commit](http://github.com/electrode-io/electrode/commit/9a9cff758a04c518531678c6b432b5471fd3d35c)
+
+-   `packages/electrode-react-webapp`
+
+    -   allow token module to return null to remove itself ([#900](https://github.com/electrode-io/electrode/pull/900)) [commit](http://github.com/electrode-io/electrode/commit/0f37c552e4445e93d43f78ea8966c70f99b7f7a0)
+    -   [major] remove callback support for token process/handler function ([#899](https://github.com/electrode-io/electrode/pull/899)) [commit](http://github.com/electrode-io/electrode/commit/19840449710377780f1f9c08cdf950a7affff941)
+    -   add integration test for templateProcessor ([#898](https://github.com/electrode-io/electrode/pull/898)) [commit](http://github.com/electrode-io/electrode/commit/546edaf787576c6ea303788b6d4e7e80c1a75e29)
+    -   extract and consolidate rendering steps execution ([#897](https://github.com/electrode-io/electrode/pull/897)) [commit](http://github.com/electrode-io/electrode/commit/1e6b771fd76c5f8877baa3bf3c372db97c157308)
+    -   add templateProcessor option ([#896](https://github.com/electrode-io/electrode/pull/896)) [commit](http://github.com/electrode-io/electrode/commit/0bd5a196f7882bfbe8bb213ced50a49131d80304)
+    -   fix perf-1.html template [commit](http://github.com/electrode-io/electrode/commit/fe21baf8503a3ceeb99c53ac9e5ec7710b40a3eb)
+    -   add response callback for error and bad status [commit](http://github.com/electrode-io/electrode/commit/54652fb408f77a71d7167565af3c18b9bc571ac3)
+    -   refactor functions out of handler file [commit](http://github.com/electrode-io/electrode/commit/82495cb1fb0b3ee7a50039af329bab20796a588c)
+    -   persist local deps in fyn section [commit](http://github.com/electrode-io/electrode/commit/9a9cff758a04c518531678c6b432b5471fd3d35c)
+    -   set message to indicate SSR disabled by option [commit](http://github.com/electrode-io/electrode/commit/6d53d097ffbcbf2b868bde92eebc839e7905b8f9)
+    -   [major] return context to handle route [commit](http://github.com/electrode-io/electrode/commit/4a8151f9a85602e7a0e3f44232517d330e0bbafe)
+    -   avoid executing tokens that are null [commit](http://github.com/electrode-io/electrode/commit/528ddafeef658d24e37d6d29cf557bd3f00dd7fc)
+    -   require processor token from where template file is [commit](http://github.com/electrode-io/electrode/commit/138605ea3f9daca2f2d71980b06efa043b079e85)
+    -   [major] support context initialize with token [commit](http://github.com/electrode-io/electrode/commit/48b3cca85f6c729addf0e7191b28ac34a3a4b716)
+    -   support stopping mid render [commit](http://github.com/electrode-io/electrode/commit/e1d890a00277926ff6c2f162c03ab1dc79460838)
+    -   use spread operator ([#901](https://github.com/electrode-io/electrode/pull/901)) [commit](http://github.com/electrode-io/electrode/commit/ac75fc236631bc67473894d23e63d7ab1f2a9244)
+
+-   `packages/electrode-redux-router-engine`
+
+    -   separate SSR render steps ([#890](https://github.com/electrode-io/electrode/pull/890)) [commit](http://github.com/electrode-io/electrode/commit/c0a947dcbae23858f53a885064c9c3c5a4584cce)
+
+-   `packages/electrode-ui-logger`
+
+    -   persist local deps in fyn section [commit](http://github.com/electrode-io/electrode/commit/9a9cff758a04c518531678c6b432b5471fd3d35c)
+
+-   `packages/generator-electrode`
+
+    -   fix generator options passing inconsistency [commit](http://github.com/electrode-io/electrode/commit/16c8b3117f1c63c614a94cb650d88f8bd69dde78)
+    -   format code [commit](http://github.com/electrode-io/electrode/commit/f313773c7198a3eb776205e13bc73b8b1ea98ea0)
+
+-   `packages/ignite-core`
+
+    -   update test timeout [commit](http://github.com/electrode-io/electrode/commit/f605faa537d0e62718d6faea6ad5c433d8414613)
+
+-   `samples/demo-component`
+
+    -   lock babel/runtime to fix build failure [commit](http://github.com/electrode-io/electrode/commit/37c91f44a818fd512916523e8de258e7e9a32056)
+
+-   `.vscode`
+
+    -   add electrode-redux-router-engine test debugging to vscode config [commit](http://github.com/electrode-io/electrode/commit/55c6eec2e5e30cabd8b635de81d4cdae62bd7492)
+    -   set cwd for vscode debug launch setting [commit](http://github.com/electrode-io/electrode/commit/70ecf380b989bc6aa1d9b653149a0f4bb982258a)
+    -   add .vscode debug config [commit](http://github.com/electrode-io/electrode/commit/de2d47ef6510037c83dd01989aa3d5917caa5115)
+
+-   `docs`
+
+    -   fix links for contribute and faq ([#895](https://github.com/electrode-io/electrode/pull/895)) [commit](http://github.com/electrode-io/electrode/commit/3661b8f49693b6d2f3f67e93afdb05fac4eb5a47)
+    -   fix-powerful-electrode-tools-docs-links ([#894](https://github.com/electrode-io/electrode/pull/894)) [commit](http://github.com/electrode-io/electrode/commit/cee56fb04c95c787281772a0c5cb08342b5e084f)
+    -   fix lins inside stand alone modules ([#893](https://github.com/electrode-io/electrode/pull/893)) [commit](http://github.com/electrode-io/electrode/commit/3cf574cbcef1b4fcbffccf84a76c34751fa5cb57)
+    -   fix general section ([#892](https://github.com/electrode-io/electrode/pull/892)) [commit](http://github.com/electrode-io/electrode/commit/505495fb5ba06f9c1dfc033c713603c67dc156b6)
+
+-   `MISC`
+
+    -   fix broken yeoman-test [commit](http://github.com/electrode-io/electrode/commit/77ad661421594bc7b700bcfe585f64283cc14556)
+
 # 7/31/2018
 
 - Fix issue with new CSS module styleName change breaking normal stylus
