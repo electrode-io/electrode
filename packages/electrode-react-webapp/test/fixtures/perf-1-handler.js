@@ -6,9 +6,8 @@ module.exports = () => {
       return "<div>user-token-1</div>";
     },
 
-    "user-token-2": (context, next) => {
+    "user-token-2": context => {
       context.output.add("<div>user-token-2</div>");
-      next();
     },
 
     "user-spot-token": context => {

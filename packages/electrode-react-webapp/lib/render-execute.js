@@ -5,20 +5,13 @@ const Promise = require("bluebird");
 const { TOKEN_HANDLER } = require("./symbols");
 
 const executeSteps = {
-  STEP_CALLBACK: 0,
-  STEP_MAYBE_ASYNC: 1,
-  STEP_STR_TOKEN: 2,
-  STEP_NO_HANDLER: 3,
-  STEP_LITERAL_HANDLER: 4
+  STEP_HANDLER: 0,
+  STEP_STR_TOKEN: 1,
+  STEP_NO_HANDLER: 2,
+  STEP_LITERAL_HANDLER: 3
 };
 
-const {
-  STEP_CALLBACK,
-  STEP_MAYBE_ASYNC,
-  STEP_STR_TOKEN,
-  STEP_NO_HANDLER,
-  STEP_LITERAL_HANDLER
-} = executeSteps;
+const { STEP_HANDLER, STEP_STR_TOKEN, STEP_NO_HANDLER, STEP_LITERAL_HANDLER } = executeSteps;
 
 function renderNext(err, xt) {
   const { renderSteps, context } = xt;
@@ -28,17 +21,16 @@ function renderNext(err, xt) {
   }
 
   if (context.isFullStop || context.isVoidStop || xt.stepIndex >= renderSteps.length) {
-    xt.next = undefined;
     return xt.resolve(context.output.close());
   } else {
     // TODO: support soft stop
     const step = renderSteps[xt.stepIndex++];
     const tk = step.tk;
     switch (step.code) {
-      case STEP_CALLBACK:
-        return tk[TOKEN_HANDLER](context, xt.next);
-      case STEP_MAYBE_ASYNC:
-        return context.handleTokenResult(tk.id, tk[TOKEN_HANDLER](context), xt.next);
+      case STEP_HANDLER:
+        return context.handleTokenResult(tk.id, tk[TOKEN_HANDLER](context, tk), e =>
+          renderNext(e, xt)
+        );
       case STEP_STR_TOKEN:
         context.output.add(tk.str);
         break;
@@ -49,15 +41,14 @@ function renderNext(err, xt) {
         context.output.add(step.data);
         break;
     }
-    return xt.next();
+    return renderNext(null, xt);
   }
 }
 
 function executeRenderSteps(renderSteps, context) {
   return new Promise(resolve => {
     const xt = { stepIndex: 0, renderSteps, context, resolve };
-    xt.next = err => renderNext(err, xt);
-    xt.next();
+    renderNext(null, xt);
   });
 }
 
