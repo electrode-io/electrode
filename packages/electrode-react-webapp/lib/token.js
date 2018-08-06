@@ -24,7 +24,7 @@ class Token {
 
   // if token is a module, then load it
   load(options) {
-    if (!this.isModule || this.custom) return;
+    if (!this.isModule || this.custom !== undefined) return;
 
     let tokenMod = viewTokenModules[this.id];
 
@@ -45,6 +45,8 @@ class Token {
     } else {
       this.custom = tokenMod(options || {}, this);
     }
+
+    if (this.custom === null) return;
 
     assert(
       this.custom && this.custom.process,
