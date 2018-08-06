@@ -41,7 +41,7 @@ class Token {
         tokenMod[this._modCall[0]],
         `electrode-react-webapp: _call of token ${this.id} - '${this._modCall[0]}' not found`
       );
-      this.custom = tokenMod[this._modCall[0]].apply(undefined, params);
+      this.custom = tokenMod[this._modCall[0]](...params);
     } else {
       this.custom = tokenMod(options || {}, this);
     }
