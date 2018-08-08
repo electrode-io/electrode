@@ -152,6 +152,60 @@ describe("hapi electrode-react-webapp", () => {
     });
   });
 
+  it("should successfully render to static markup with insert IDs", () => {
+    configOptions.insertTokenIds = true;
+    configOptions.templateProcessor = asyncTemplate => {
+      asyncTemplate.addTokens({
+        insert: "before",
+        id: "PAGE_TITLE",
+        tokens: [
+          { token: "#./test/fixtures/custom-null" },
+          { token: "#./test/fixtures/custom-1" },
+          { token: "#./test/fixtures/custom-call", props: { _call: "setup", _noInsertId: true } }
+        ]
+      });
+    };
+    return electrodeServer(config).then(server => {
+      const makeRequest = () => {
+        return server
+          .inject({
+            method: "GET",
+            url: "/"
+          })
+          .then(res => {
+            expect(res.statusCode).to.equal(200);
+            const result = res.result;
+            expect(result).to.contain("<title>Electrode App</title>");
+            expect(result).to.contain("<div>Hello Electrode</div>");
+            expect(result).to.contain("<script>console.log('Hello');</script>");
+            expect(result).to.not.contain("Unknown marker");
+            expect(result).contains("<!-- INITIALIZE -->");
+            expect(result).contains("<!-- $~INITIALIZE~$ -->");
+            expect(result).contains("<!-- PAGE_TITLE -->");
+            expect(result).contains("<!-- $~PAGE_TITLE~$ -->");
+            expect(result).contains("<!-- #./test/fixtures/custom-1 -->");
+            expect(result).contains("<!-- $~#./test/fixtures/custom-1~$ -->");
+            expect(result).contains("_call process from custom-call token fixture");
+            expect(result).not.contains("<!-- #./test/fixtures/custom-call -->");
+            expect(result).contains(
+              "<!-- HEAD_INITIALIZE removed due to its handler set to null -->"
+            );
+            expect(result).contains(
+              "<!-- #./test/fixtures/custom-null removed due to its process return null -->"
+            );
+          });
+      };
+
+      return makeRequest()
+        .then(() => makeRequest())
+        .then(() => stopServer(server))
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
   it("should successfully render to static markup with content as a function", () => {
     assign(mainRoutePathOptions, {
       content: () =>

@@ -20,7 +20,7 @@ describe("token", function() {
     expect(tk.id).to.equal("#./test/fixtures/custom-call");
     expect(tk.isModule).to.equal(true);
     tk.load();
-    expect(tk[TOKEN_HANDLER]()).to.equal("_call");
+    expect(tk[TOKEN_HANDLER]()).to.equal("_call process from custom-call token fixture");
   });
 
   it("should create token as custom and call setup only once for each token", () => {

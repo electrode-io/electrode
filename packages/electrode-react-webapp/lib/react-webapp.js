@@ -27,6 +27,7 @@ function makeRouteHandler(routeOptions) {
   const asyncTemplate = new AsyncTemplate({
     htmlFile: routeOptions.htmlFile,
     tokenHandlers: tokenHandlers.filter(x => x),
+    insertTokenIds: routeOptions.insertTokenIds,
     routeOptions
   });
 

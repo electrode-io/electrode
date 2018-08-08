@@ -4,7 +4,7 @@ function setup() {
   return {
     name: "custom-call",
     process: function() {
-      return `_call`;
+      return `_call process from custom-call token fixture`;
     }
   };
 }
