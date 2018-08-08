@@ -1,5 +1,6 @@
 "use strict";
 
+/* eslint-disable complexity */
 const Promise = require("bluebird");
 
 const { TOKEN_HANDLER } = require("./symbols");
@@ -20,17 +21,28 @@ function renderNext(err, xt) {
     context.handleError(err);
   }
 
+  const insertTokenId = tk => {
+    context.output.add(`<!-- ${tk.id} -->\n`);
+  };
+
+  const insertTokenIdEnd = tk => {
+    context.output.add(`<!-- $~${tk.id}~$ -->\n`);
+  };
+
   if (context.isFullStop || context.isVoidStop || xt.stepIndex >= renderSteps.length) {
     return xt.resolve(context.output.close());
   } else {
     // TODO: support soft stop
     const step = renderSteps[xt.stepIndex++];
     const tk = step.tk;
+    const withId = step.insertTokenId;
     switch (step.code) {
       case STEP_HANDLER:
-        return context.handleTokenResult(tk.id, tk[TOKEN_HANDLER](context, tk), e =>
-          renderNext(e, xt)
-        );
+        if (withId) insertTokenId(tk);
+        return context.handleTokenResult(tk.id, tk[TOKEN_HANDLER](context, tk), e => {
+          if (withId) insertTokenIdEnd(tk);
+          renderNext(e, xt);
+        });
       case STEP_STR_TOKEN:
         context.output.add(tk.str);
         break;
@@ -38,7 +50,9 @@ function renderNext(err, xt) {
         context.output.add(`<!-- unhandled token ${tk.id} -->`);
         break;
       case STEP_LITERAL_HANDLER:
+        if (withId) insertTokenId(tk);
         context.output.add(step.data);
+        if (withId) insertTokenIdEnd(tk);
         break;
     }
     return renderNext(null, xt);

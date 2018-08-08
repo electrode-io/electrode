@@ -6,8 +6,18 @@ const { STEP_HANDLER, STEP_STR_TOKEN, STEP_NO_HANDLER, STEP_LITERAL_HANDLER } = 
 
 class Renderer {
   constructor(options) {
+    const insertTokenIds = Boolean(options.insertTokenIds);
     // the last handler wins if it contains a token
     const tokenHandlers = options.tokenHandlers.reverse();
+
+    const makeNullRemovedStep = (tk, cause) => {
+      return {
+        tk,
+        insertTokenId: false,
+        code: STEP_LITERAL_HANDLER,
+        data: `<!-- ${tk.id} removed due to its ${cause} -->\n`
+      };
+    };
 
     const makeHandlerStep = tk => {
       // look for first handler that has a token function for tk.id
@@ -23,17 +33,24 @@ class Renderer {
       const tkFunc = handler.tokens[tk.id];
 
       if (tkFunc === null) {
+        if (insertTokenIds) return makeNullRemovedStep(tk, "handler set to null");
+
         return null;
       }
 
       if (typeof tkFunc !== "function") {
         // not a function, just add it to output
-        return { tk, code: STEP_LITERAL_HANDLER, data: tkFunc };
+        return {
+          tk,
+          code: STEP_LITERAL_HANDLER,
+          insertTokenId: insertTokenIds && !tk.props._noInsertId,
+          data: tkFunc
+        };
       }
 
       tk.setHandler(tkFunc);
 
-      return { tk, code: STEP_HANDLER };
+      return { tk, code: STEP_HANDLER, insertTokenId: insertTokenIds && !tk.props._noInsertId };
     };
 
     const makeStep = tk => {
@@ -45,9 +62,16 @@ class Renderer {
       // token is not pointing to a module, so lookup from token handlers
       if (!tk.isModule) return makeHandlerStep(tk);
 
-      if (tk.custom === null) return null;
+      if (tk.custom === null) {
+        if (insertTokenIds) return makeNullRemovedStep(tk, "process return null");
+        return null;
+      }
 
-      return { tk, code: STEP_HANDLER };
+      return {
+        tk,
+        code: STEP_HANDLER,
+        insertTokenId: options.insertTokenIds && !tk.props._noInsertId
+      };
     };
 
     this.renderSteps = options.htmlTokens.map(makeStep).filter(x => x);

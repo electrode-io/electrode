@@ -49,6 +49,7 @@ class AsyncTemplate {
       this._initializeTokenHandlers(this._tokenHandlers);
       this._applyTokenLoad();
       this._renderer = new Renderer({
+        insertTokenIds: this._options.insertTokenIds,
         htmlTokens: this._tokens,
         tokenHandlers: this._tokenHandlers
       });
