@@ -24,21 +24,22 @@ const pullLocalPackages = dir => {
   const localDevPkgs = ["electrode-archetype-react-app-dev"];
   const localPackagesDir = Path.relative(dir, packagesDir);
 
-  const updateToLocalPkgs = (pkgSection, pkgs) => {
-    if (pkgSection) {
+  const appPkgFile = Path.join(dir, "package.json");
+  const appPkgData = fs.readFileSync(appPkgFile).toString();
+  const appPkg = JSON.parse(appPkgData);
+
+  const updateToLocalPkgs = (section, pkgs) => {
+    if (appPkg[section]) {
       pkgs.forEach(pkg => {
-        if (pkgSection[pkg]) {
-          pkgSection[pkg] = Path.join(localPackagesDir, pkg);
+        if (appPkg[section][pkg]) {
+          _.set(appPkg, ["fyn", section, pkg], Path.join(localPackagesDir, pkg));
         }
       });
     }
   };
 
-  const appPkgFile = Path.join(dir, "package.json");
-  const appPkgData = fs.readFileSync(appPkgFile).toString();
-  const appPkg = JSON.parse(appPkgData);
-  updateToLocalPkgs(appPkg["dependencies"], localPkgs);
-  updateToLocalPkgs(appPkg["devDependencies"], localDevPkgs);
+  updateToLocalPkgs("dependencies", localPkgs);
+  updateToLocalPkgs("devDependencies", localDevPkgs);
   fs.writeFileSync(appPkgFile, `${JSON.stringify(appPkg, null, 2)}\n`);
 
   return appPkgData;
@@ -94,26 +95,9 @@ const testGenerator = (testDir, name, clean, runTest, prompts) => {
     });
 };
 
-let fynSetup = false;
-
 xclap.load({
-  ".fyn-setup": () => {
-    if (fynSetup) return undefined;
-    fynSetup = true;
-    return exec(true, "fyn json").then(r => {
-      process.env.NODE_PRESERVE_SYMLINKS = 1;
-      const fynEnv = JSON.parse(r.stdout);
-      if (fynEnv.error) {
-        console.log(".fyn-setup:", fynEnv.error);
-      } else {
-        process.env.NODE_OPTIONS = fynEnv.NODE_OPTIONS;
-        console.log("NODE_OPTIONS set to", fynEnv.NODE_OPTIONS);
-      }
-    });
-  },
   ".lerna.test": "~$lerna run test --ignore=electrode-webpack-reporter",
-  "test-reporter": [".fyn-setup", ".test-reporter"],
-  ".test-reporter": {
+  "test-reporter": {
     task: () => {
       return exec(true, "lerna updated")
         .then(r => {
@@ -130,17 +114,14 @@ xclap.load({
     }
   },
   bootstrap: "~$fynpo",
-  test: [".fyn-setup", "bootstrap", ".lerna.test", "test-reporter", "build-test"],
-  "test-generator": [".fyn-setup", ".test-generator --hapi"],
-  "gen-hapi-app": [".fyn-setup", ".test-generator --hapi --no-test"],
-  "test-demo-component": [
-    ".fyn-setup",
-    `~$cd samples/demo-component && fyn --pg none install && npm test`
-  ],
-  "test-boilerplate": [".fyn-setup", ".test-boilerplate"],
-  "test-stylus-sample": [".fyn-setup", ".test-stylus-sample"],
-  "update-changelog": [".fyn-setup", "~$node tools/update-changelog.js"],
-  "gitbook-serve": [".fyn-setup", "~$gitbook serve --no-watch --no-live"],
+  test: ["bootstrap", ".lerna.test", "test-reporter", "build-test"],
+  "test-generator": [".test-generator --hapi"],
+  "gen-hapi-app": [".test-generator --hapi --no-test"],
+  "test-demo-component": [`~$cd samples/demo-component && fyn --pg none install && npm test`],
+  "test-boilerplate": [".test-boilerplate"],
+  "test-stylus-sample": [".test-stylus-sample"],
+  "update-changelog": ["~$node tools/update-changelog.js"],
+  "gitbook-serve": ["~$gitbook serve --no-watch --no-live"],
   "build-test": {
     desc: "Run CI test",
     task: () => {
