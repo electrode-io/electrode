@@ -4,6 +4,7 @@ import Home from "client/components/home";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "client/reducers";
+import { BrowserRouter } from "react-router-dom";
 
 describe("Home", () => {
   let component;
@@ -25,7 +26,14 @@ describe("Home", () => {
 
     const store = createStore(rootReducer, initialState);
 
-    component = ReactDOM.render(<Provider store={store}><Home /></Provider>, container);
+    component = ReactDOM.render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <Home />
+        </BrowserRouter>
+      </Provider>,
+      container
+    );
 
     expect(component).to.not.be.false;
   });

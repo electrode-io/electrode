@@ -15,42 +15,65 @@
  */
 
 import React from "react";
+import { connect } from "react-redux";
 import "../styles/raleway.css";
 import custom from "../styles/custom.css"; // eslint-disable-line no-unused-vars
 import electrodePng from "../images/electrode.png";
 import DemoStates from "./demo-states";
 import DemoPureStates from "./demo-pure-states";
 import { DemoButtons } from "./demo-buttons";
+import { Nav } from "./nav";
 //<% if (pwa) { %>
 import Notifications from "react-notify-toast";
 //<% } %>
 
-export default () => (
-  <div styleName={"custom.container"}>
-    {/*<% if (pwa) { %>*/}
-    <Notifications />
-    {/*<% } %>*/}
+class Home extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-    <section styleName={"custom.header"}>
-      <h2>
-        <span>Hello from </span>
-        <a href="https://github.com/electrode-io">
-          {"Electrode"}
-          <img src={electrodePng} />
-        </a>
-      </h2>
-    </section>
+  render() {
+    return (
+      <div styleName={"custom.container"}>
+        <Nav {...this.props} />
 
-    <div styleName={"custom.docs-section"}>
-      <DemoStates />
-    </div>
+        {/*<% if (pwa) { %>*/}
+        <Notifications />
+        {/*<% } %>*/}
 
-    <div styleName={"custom.docs-section"}>
-      <DemoPureStates />
-    </div>
+        <section styleName={"custom.header"}>
+          <h2>
+            <span>Hello from </span>
+            <a href="https://github.com/electrode-io">
+              {"Electrode"}
+              <img src={electrodePng} />
+            </a>
+          </h2>
+        </section>
 
-    <div styleName={"custom.docs-section"}>
-      <DemoButtons />
-    </div>
-  </div>
-);
+        <div styleName={"custom.docs-section"}>
+          <DemoStates />
+        </div>
+
+        <div styleName={"custom.docs-section"}>
+          <DemoPureStates />
+        </div>
+
+        <div styleName={"custom.docs-section"}>
+          <DemoButtons />
+        </div>
+      </div>
+    );
+  }
+}
+
+Home.propTypes = {};
+
+const mapStateToProps = () => {
+  return {};
+};
+
+export default connect(
+  mapStateToProps,
+  dispatch => ({ dispatch })
+)(Home);
