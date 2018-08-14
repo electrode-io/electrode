@@ -361,8 +361,10 @@ function makeTasks() {
     },
     ".set.babel.env": () => {
       const webpackConfig = archetype.webpack;
-      if(webpackConfig.cssModuleSupport && webpackConfig.enableShortenCSSNames) {
-        process.env.BABEL_ENV = (process.env.NODE_ENV === "production") ? "css-module-prod" : "css-module-dev";
+      if (webpackConfig.cssModuleSupport && webpackConfig.enableShortenCSSNames) {
+        process.env.BABEL_ENV =
+          process.env.NODE_ENV === "production" ? "css-module-prod" : "css-module-dev";
+        logger.info("BABEL_ENV set to", process.env.BABEL_ENV);
       }
     },
     "build-browser-coverage": {
@@ -381,6 +383,7 @@ function makeTasks() {
     },
 
     "build-dist": [
+      ".production-env",
       ".set.babel.env",
       ".clean.build",
       "build-dist-dll",
@@ -832,7 +835,8 @@ Individual .babelrc files were generated for you in src/client and src/server
     Object.assign(tasks, {
       "build-dist-dll": {
         dep: [".mk-dll-dir", ".mk-dist-dir", ".production-env"],
-        task: () => exec(`webpack --config`, quote(webpackConfig("webpack.config.dll.js")), `--colors`)
+        task: () =>
+          exec(`webpack --config`, quote(webpackConfig("webpack.config.dll.js")), `--colors`)
       },
       "copy-dll": () => shell.cp("-r", "dll/*", "dist")
     });
