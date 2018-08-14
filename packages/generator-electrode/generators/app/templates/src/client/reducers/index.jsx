@@ -24,7 +24,39 @@ const number = (store, action) => {
   return store || { value: 0 };
 };
 
+const username = (store, action) => {
+  if (action.type === "INPUT_NAME") {
+    return {
+      value: action.value
+    };
+  }
+
+  return store || { value: "" };
+};
+
+const textarea = (store, action) => {
+  if (action.type === "INPUT_TEXT_AREA") {
+    return {
+      value: action.value
+    };
+  }
+
+  return store || { value: "" };
+};
+
+const selectedOption = (store, action) => {
+  if (action.type === "SELECT_OPTION") {
+    return {
+      value: action.value
+    };
+  }
+  return store || { value: "0-13" };
+};
+
 export default combineReducers({
   checkBox,
-  number
+  number,
+  username,
+  textarea,
+  selectedOption
 });
