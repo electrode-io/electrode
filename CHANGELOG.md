@@ -1,3 +1,43 @@
+# 8/16/2018
+
+- minor fixes
+- sample app includes demo for multiple routes with nav bar using React Router 4
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-react-app@5.4.3 `(5.4.2 => 5.4.3)`
+-   electrode-archetype-react-app-dev@5.4.3 `(5.4.2 => 5.4.3)`
+-   electrode-react-webapp@3.0.1 `(3.0.0 => 3.0.1)`
+-   generator-electrode@4.2.2 `(4.2.1 => 4.2.2)`
+
+### Lerna Updated
+
+-   electrode-ignite@2.1.6 `(2.1.5 => 2.1.6)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   fix css module production build ([#906](https://github.com/electrode-io/electrode/pull/906)) [commit](http://github.com/electrode-io/electrode/commit/0df1d79da7501c40ce5a5bcdd8a1f20fa031238c)
+
+-   `packages/electrode-react-webapp`
+
+    -   support insert token ids to output for debugging ([#902](https://github.com/electrode-io/electrode/pull/902)) [commit](http://github.com/electrode-io/electrode/commit/0be1eda7eb0b966173ebcbbd05f957153ea9a62f)
+
+-   `packages/generator-electrode`
+
+    -   update generator with a new navigation ([#907](https://github.com/electrode-io/electrode/pull/907)) [commit](http://github.com/electrode-io/electrode/commit/cbda3fccbd2fb92bd901ef77376ae4d85b846e72)
+
+-   `samples/stylus-sample`
+
+    -   fyn extra setup is no longer required ([#903](https://github.com/electrode-io/electrode/pull/903)) [commit](http://github.com/electrode-io/electrode/commit/f8b273be1e8c0586dfb4eaabb99df95d6ed5b161)
+
+-   `samples/universal-react-node`
+
+    -   fyn extra setup is no longer required ([#903](https://github.com/electrode-io/electrode/pull/903)) [commit](http://github.com/electrode-io/electrode/commit/f8b273be1e8c0586dfb4eaabb99df95d6ed5b161)
+
 # 8/6/2018
 
 - Major (v2 to v3) update to electrode-react-webapp
