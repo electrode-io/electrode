@@ -20,6 +20,19 @@ const webappPlugin = () => {
 
 module.exports = {
   plugins: {
+    good: {
+      module: "good",
+      options: {
+        reporters: {
+          myConsoleReporter: [
+            {
+              module: "good-console"
+            },
+            "stdout"
+          ]
+        }
+      }
+    },
     "webpack-dev": {
       module: "electrode-archetype-react-app-dev/lib/webpack-dev-hapi",
       enable: process.env.WEBPACK_DEV_MIDDLEWARE === "true" && process.env.WEBPACK_DEV === "true",
