@@ -13,15 +13,9 @@ module.exports = Object.assign(Lib, {
   platform: {
     win32: function win32(name) {
       baseYoPath = baseYoPath || __dirname;
-      const yoPath = Path.join(
-        baseYoPath.replace(/ /g, "^ "),
-        "..",
-        "node_modules",
-        ".bin",
-        "yo.cmd"
-      );
+      const yoPath = Path.join(baseYoPath, "..", "node_modules", ".bin", "yo.cmd");
 
-      return childProcess.spawn("cmd", ["/c", `${yoPath} ${name}`], {
+      return childProcess.spawn("cmd", ["/c", yoPath, name], {
         stdio: "inherit"
       });
     },
