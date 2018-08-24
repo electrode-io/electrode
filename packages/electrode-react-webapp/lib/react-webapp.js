@@ -84,20 +84,57 @@ const setupOptions = options => {
 };
 
 const setupPathOptions = (routeOptions, path) => {
-  const options = routeOptions.paths[path];
-  return _.defaults(
+  const pathData = _.get(routeOptions, ["paths", path], {});
+  const pathOptions = pathData.options;
+  return _.defaultsDeep(
     {
-      htmlFile: options.htmlFile,
-      tokenHandler: options.tokenHandler,
-      tokenHandlers: options.tokenHandlers
+      htmlFile: pathData.htmlFile,
+      tokenHandler: pathData.tokenHandler,
+      tokenHandlers: pathData.tokenHandlers
     },
+    pathOptions,
     routeOptions
   );
 };
 
-const resolveContent = (content, xrequire) => {
+//
+// The route path can supply:
+//
+// - a literal string
+// - a function
+// - an object
+//
+// If it's an object:
+//   -- if it doesn't contain content, then it's assume to be the content.
+//
+// If it contains content, then it can contain:
+//
+// - method: HTTP method for the route
+// - config: route config (applicable for framework like Hapi)
+// - content: second level field to define content
+//
+// content can be:
+//
+// - a literal string
+// - a function
+// - an object
+//
+// If content is an object, it can contain module, a path to the JS module to require
+// to load the content.
+//
+const resolveContent = (pathData, xrequire) => {
   const resolveTime = Date.now();
 
+  let content = pathData;
+
+  // If it's an object, see if contains content field
+  if (_.isObject(pathData) && pathData.hasOwnProperty("content")) {
+    content = pathData.content;
+  }
+
+  if (!content) return null;
+
+  // content has module field, require it.
   if (!_.isString(content) && !_.isFunction(content) && content.module) {
     const mod = content.module.startsWith(".") ? Path.resolve(content.module) : content.module;
 

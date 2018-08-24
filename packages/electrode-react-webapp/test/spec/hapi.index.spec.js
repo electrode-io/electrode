@@ -1116,6 +1116,60 @@ describe("hapi electrode-react-webapp", () => {
     });
   });
 
+  it("should fail if content is null", () => {
+    assign(mainRoutePathOptions, {
+      content: null
+    });
+
+    let error;
+
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .catch(err => {
+          error = err;
+        })
+        .then(() => {
+          stopServer(server);
+          expect(error).to.exist;
+          expect(error.code).to.equal("ERR_ASSERTION");
+          expect(error.message).to.equal(
+            `You must define content for the webapp plugin path /{args*}`
+          );
+        });
+    });
+  });
+
+  it("should handle unexpected errors", () => {
+    const content = {
+      html: "<div>Hello Electrode</div>",
+      prefetch: "console.log('Hello');"
+    };
+    Object.defineProperty(content, "status", {
+      get: () => {
+        throw new Error("unexpected error");
+      }
+    });
+
+    assign(mainRoutePathOptions, { content: () => Promise.resolve(content) });
+
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .then(res => {
+          stopServer(server);
+          expect(res.statusCode).to.equal(500);
+          expect(res.result).contains("unexpected error");
+        });
+    });
+  });
+
   it("should handle 200 status @noss", () => {
     assign(mainRoutePathOptions, {
       content: {
