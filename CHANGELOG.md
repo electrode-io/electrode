@@ -1,3 +1,48 @@
+# 8/24/2018
+
+- electrode-archetype-react-app: Upgrade to jest v23
+- electrode-ignite: fix handling space in path for windows
+- electrode-react-webapp: minor updates
+- electrode-redux-router-engine: fix check for methods prop in route definition
+- generator-electrode: add Hapi good logger to generated app
+
+## Packages
+
+-   electrode-archetype-react-app@5.4.4 `(5.4.3 => 5.4.4)`
+-   electrode-archetype-react-app-dev@5.4.4 `(5.4.3 => 5.4.4)`
+-   electrode-ignite@2.1.7 `(2.1.6 => 2.1.7)`
+-   electrode-react-webapp@3.0.2 `(3.0.1 => 3.0.2)`
+-   electrode-redux-router-engine@2.1.5 `(2.1.4 => 2.1.5)`
+-   generator-electrode@4.2.3 `(4.2.2 => 4.2.3)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   upgrade to jest v23 ([#911](https://github.com/electrode-io/electrode/pull/911)) [commit](http://github.com/electrode-io/electrode/commit/d2136ba9a4a91cc115602c24ac9e3f178f32dd44)
+
+-   `packages/electrode-ignite`
+
+    -   [patch] fix ignite generator invoking to support windows user dir with space ([#910](https://github.com/electrode-io/electrode/pull/910)) [commit](http://github.com/electrode-io/electrode/commit/fec1a1846648a1e4809c273f561e8a83fcdae92c)
+
+-   `packages/electrode-react-webapp`
+
+    -   apply path specific options to routeOptions [commit](http://github.com/electrode-io/electrode/commit/9f705c460cda9535ba317cbea049a5588ed4e74e)
+    -   catch error when transforming output [commit](http://github.com/electrode-io/electrode/commit/2491f75e1d7dddd5bf6c5de2e4b96d5049f49fe8)
+    -   clarify content spec for paths [commit](http://github.com/electrode-io/electrode/commit/9528ab6eb9f02142a5abf52cfde81f2556f2805a)
+
+-   `packages/electrode-redux-router-engine`
+
+    -   [patch] [bug] Fix methods prop in route definition not being respected ([#915](https://github.com/electrode-io/electrode/pull/915)) [commit](http://github.com/electrode-io/electrode/commit/e8ca6d403195413c5c09b5b951149b597bf27439)
+
+-   `packages/generator-electrode`
+
+    -   Add Hapi good/good-console logger to the generator Hapi app ([#909](https://github.com/electrode-io/electrode/pull/909)) [commit](http://github.com/electrode-io/electrode/commit/fa3d7a52b3632a8d4757e71c0b6e1a370eca3795)
+
+-   `MISC`
+
+    -   update fynpo [commit](http://github.com/electrode-io/electrode/commit/40f44a1308d32734d92ba58e5601e181f8a857c6)
+
 # 8/16/2018
 
 - minor fixes
