@@ -10,6 +10,7 @@ const _ = require("lodash");
 const extend = _.merge;
 const parseAuthor = require("parse-author");
 const githubUsername = require("github-username");
+const Fs = require("fs");
 
 const ExpressJS = "ExpressJS";
 const HapiJS = "HapiJS";
@@ -111,6 +112,10 @@ module.exports = class extends Generator {
     );
   }
 
+  _isCwdEmpty() {
+    return Fs.readdirSync(process.cwd()).length < 1;
+  }
+
   _askFor() {
     if (this.pkg.name || this.options.name) {
       this.props.name = this.pkg.name || _.kebabCase(this.options.name);
@@ -200,7 +205,7 @@ module.exports = class extends Generator {
         name: "createDirectory",
         message: "Would you like to create a new directory for your project?",
         when: this.props.createDirectory === undefined,
-        default: true
+        default: this._isCwdEmpty() ? false : true
       },
       {
         type: "confirm",
