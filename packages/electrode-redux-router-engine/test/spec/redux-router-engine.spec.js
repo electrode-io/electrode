@@ -277,11 +277,11 @@ describe("redux-router-engine", function() {
   it("should return 500 for method not allowed", () => {
     const intercept = xstdout.intercept(true);
     const req = {
-      path: "/post-only",
+      path: "/not-post",
       method: "post",
       log: () => {},
       app: {},
-      url: Url.parse("/post-only")
+      url: Url.parse("/not-post")
     };
 
     const engine = new ReduxRouterEngine({ routes });
@@ -290,6 +290,24 @@ describe("redux-router-engine", function() {
       intercept.restore();
       expect(result.status).to.equal(500);
       expect(result.message).to.include(`doesn't allow request method post`);
+    });
+  });
+
+  it("should return 200 for allowed method", () => {
+    const intercept = xstdout.intercept(true);
+    const req = {
+      path: "/head-only",
+      method: "head",
+      log: () => {},
+      app: {},
+      url: Url.parse("/head-only")
+    };
+
+    const engine = new ReduxRouterEngine({ routes });
+
+    return engine.render(req).then(result => {
+      intercept.restore();
+      expect(result.status).to.equal(200);
     });
   });
 

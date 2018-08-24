@@ -87,7 +87,7 @@ class ReduxRouterEngine {
       };
     }
 
-    const methods = match[0].methods || "get";
+    const methods = match[0].route.methods || "get";
 
     if (methods.toLowerCase().indexOf(options.req.method.toLowerCase()) < 0) {
       throw new Error(
