@@ -29,12 +29,20 @@ module.exports = class extends Generator {
       required: true,
       desc: "Automatically disable server side rendering"
     });
+
+    this.option("_extended", {
+      type: Boolean,
+      required: true,
+      default: false
+    });
   }
 
   writing() {
-    let routeMatch = this.options.serverType === "HapiJS" ? "/{args*}" : "*";
-    //do not overwrite if file already exists
-    if (!this.fs.exists(this.destinationPath("config/default.js"))) {
+    const extended = this.options._extended;
+    // if another top level generator extended parent, then don't copy config/default.js
+    // do not overwrite if file already exists
+    if (!extended && !this.fs.exists(this.destinationPath("config/default.js"))) {
+      const routeMatch = this.options.serverType === "HapiJS" ? "/{args*}" : "*";
       this.fs.copyTpl(this.templatePath("default.js"), this.destinationPath("config/default.js"), {
         projectName: this.options.name,
         routeValue: routeMatch,
@@ -44,7 +52,8 @@ module.exports = class extends Generator {
       });
     }
 
-    if (this.options.pwa) {
+    // copying pwa config/sw-config even if parent has been extended
+    if (this.options.pwa && !this.fs.exists(this.destinationPath("config/sw-config.js"))) {
       this.fs.copyTpl(
         this.templatePath("sw-config.js"),
         this.destinationPath("config/sw-config.js"),
