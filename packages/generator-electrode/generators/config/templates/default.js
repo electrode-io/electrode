@@ -66,6 +66,7 @@ module.exports = {
       module: webappPlugin(),
       options: {
         pageTitle: "<%= projectName %>",
+        insertTokenIds: false, // Set true to get tokens in index.html for debugging
         paths: {
           "<%= routeValue %>": {
             content: {
