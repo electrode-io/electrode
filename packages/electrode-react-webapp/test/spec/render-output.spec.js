@@ -118,4 +118,13 @@ describe("render-output", function() {
       );
     });
   });
+
+  it("should rethrow if no _reject is available in _finish", () => {
+    const ro = new RenderOutput();
+    ro._reject = undefined;
+    ro._resolve = () => {
+      throw new Error("test error");
+    };
+    expect(() => ro._finish()).to.throw("test error");
+  });
 });

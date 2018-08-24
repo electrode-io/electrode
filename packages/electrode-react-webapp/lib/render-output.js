@@ -137,9 +137,18 @@ class RenderOutput {
   }
 
   _finish() {
-    if (this._resolve) {
-      this._resolve(this._context.transform(this._result, this));
+    try {
+      if (this._resolve) {
+        this._resolve(this._context.transform(this._result, this));
+      }
+    } catch (error) {
+      if (this._reject) {
+        this._reject(error);
+      } else {
+        throw error;
+      }
     }
+
     this._resolve = this._reject = undefined;
   }
 
