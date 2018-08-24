@@ -436,12 +436,9 @@ module.exports = class extends Generator {
       );
     }
 
-    if (!this.fs.exists(this.destinationPath("config/default.js")) && !this.isExtended) {
-      this.composeWith(
-        require.resolve("../config"),
-        _.pick(this.props, ["name", "pwa", "serverType", "autoSsr"])
-      );
-    }
+    const configProps = _.pick(this.props, ["name", "pwa", "serverType", "autoSsr"]);
+    configProps._extended = this.isExtended;
+    this.composeWith(require.resolve("../config"), configProps);
 
     if (!this.fs.exists(this.destinationPath("server/plugins/webapp"))) {
       this.composeWith(require.resolve("../webapp"), _.pick(this.props, ["pwa", "serverType"]));
