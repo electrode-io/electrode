@@ -60,11 +60,9 @@ const registerRoutes = (server, options) => {
   _.each(registerOptions.paths, (pathData, path) => {
     const resolveContent = () => {
       if (registerOptions.serverSideRendering !== false) {
-        assert(
-          pathData.content !== undefined,
-          `You must define content for the webapp plugin path ${path}`
-        );
-        return ReactWebapp.resolveContent(pathData.content);
+        const x = ReactWebapp.resolveContent(pathData);
+        assert(x, `You must define content for the webapp plugin path ${path}`);
+        return x;
       }
 
       return {

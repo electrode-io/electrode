@@ -1116,6 +1116,33 @@ describe("hapi electrode-react-webapp", () => {
     });
   });
 
+  it("should fail if content is null", () => {
+    assign(mainRoutePathOptions, {
+      content: null
+    });
+
+    let error;
+
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .catch(err => {
+          error = err;
+        })
+        .then(() => {
+          stopServer(server);
+          expect(error).to.exist;
+          expect(error.code).to.equal("ERR_ASSERTION");
+          expect(error.message).to.equal(
+            `You must define content for the webapp plugin path /{args*}`
+          );
+        });
+    });
+  });
+
   it("should handle 200 status @noss", () => {
     assign(mainRoutePathOptions, {
       content: {
