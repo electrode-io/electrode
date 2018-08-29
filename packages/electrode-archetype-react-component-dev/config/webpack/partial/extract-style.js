@@ -13,15 +13,17 @@ const styleLoader = require.resolve("style-loader");
 const cssLoader = require.resolve("css-loader");
 const postcssLoader = require.resolve("postcss-loader");
 const stylusLoader = require.resolve("stylus-relative-loader");
-const sassLoader = require.resolve("sass-loader");
 
 const demoAppPath = Path.resolve(process.cwd(), "..", "..", "demo-app");
 const archetypeAppPath = Path.resolve(demoAppPath, "archetype", "config");
 
-const archetypeApp = optionalRequire(archetypeAppPath) || { webpack: {} };
+const archetypeApp = optionalRequire(archetypeAppPath) || { webpack: {}, options: {} };
 const archetypeAppWebpack = archetypeApp.webpack;
 let cssModuleSupport = archetypeAppWebpack.cssModuleSupport;
 const cssModuleStylusSupport = archetypeAppWebpack.cssModuleStylusSupport;
+
+const sassSupport = archetypeApp.options && archetypeApp.options.sass;
+const sassLoader = sassSupport === false ? "" : require.resolve("sass-loader");
 
 /*
  * cssModuleSupport: false
@@ -35,8 +37,7 @@ const cssModuleStylusSupport = archetypeAppWebpack.cssModuleStylusSupport;
  * case 3: *only* *.scss => normal CSS => CSS-Modules + CSS-Next
  */
 
-const cssLoaderOptions =
-  "?modules&localIdentName=[name]__[local]___[hash:base64:5]&-autoprefixer";
+const cssLoaderOptions = "?modules&localIdentName=[name]__[local]___[hash:base64:5]&-autoprefixer";
 const cssQuery = `${styleLoader}!${cssLoader}!${postcssLoader}`;
 const stylusQuery = `${styleLoader}!${cssLoader}?-autoprefixer!${stylusLoader}`;
 const scssQuery = `${cssQuery}!${sassLoader}`;
@@ -44,12 +45,9 @@ const cssModuleQuery = `${styleLoader}!${cssLoader}${cssLoaderOptions}!${postcss
 const cssStylusQuery = `${cssModuleQuery}!${stylusLoader}`;
 const cssScssQuery = `${cssModuleQuery}!${sassLoader}`;
 
-const cssExists =
-  glob.sync(Path.resolve(process.cwd(), "src/styles", "*.css")).length > 0;
-const stylusExists =
-  glob.sync(Path.resolve(process.cwd(), "src/styles", "*.styl")).length > 0;
-const scssExists =
-  glob.sync(Path.resolve(process.cwd(), "src/styles", "*.scss")).length > 0;
+const cssExists = glob.sync(Path.resolve(process.cwd(), "src/styles", "*.css")).length > 0;
+const stylusExists = glob.sync(Path.resolve(process.cwd(), "src/styles", "*.styl")).length > 0;
+const scssExists = glob.sync(Path.resolve(process.cwd(), "src/styles", "*.scss")).length > 0;
 
 const rules = [];
 
@@ -109,12 +107,13 @@ module.exports = function() {
               : [];
           },
           stylus: {
-            use: !cssModuleSupport ? [
-                autoprefixer({
-                  browsers: ["last 2 versions", "ie >= 9", "> 5%"]
-                })
-              ]
-            : [],
+            use: !cssModuleSupport
+              ? [
+                  autoprefixer({
+                    browsers: ["last 2 versions", "ie >= 9", "> 5%"]
+                  })
+                ]
+              : [],
             define: {
               $tenant: process.env.ELECTRODE_TENANT || "walmart"
             }
