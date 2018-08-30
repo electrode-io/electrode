@@ -15,7 +15,9 @@ const cssLoader = require.resolve("css-loader");
 const styleLoader = require.resolve("style-loader");
 const stylusLoader = require.resolve("stylus-relative-loader");
 const postcssLoader = require.resolve("postcss-loader");
-const sassLoader = require.resolve("sass-loader");
+
+const sassSupport = archetype.options && archetype.options.sass;
+const sassLoader = sassSupport === false ? "" : require.resolve("sass-loader");
 
 /*
  * cssModuleSupport: false

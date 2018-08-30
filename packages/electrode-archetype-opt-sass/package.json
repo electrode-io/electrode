@@ -1,0 +1,25 @@
+{
+  "name": "electrode-archetype-opt-sass",
+  "version": "1.0.0",
+  "description": "Electrode NodeJS/React Optional Archetype SASS",
+  "main": "index.js",
+  "homepage": "http://www.electrode.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electrode-io/electrode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/electrode-io/electrode/issues"
+  },
+  "files": [
+    "optional-check.js"
+  ],
+  "license": "Apache-2.0",
+  "scripts": {
+    "preinstall": "node optional-check.js"
+  },
+  "dependencies": {
+    "node-sass": "^4.9.3",
+    "sass-loader": "^6.0.6"
+  }
+}

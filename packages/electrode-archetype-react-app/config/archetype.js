@@ -8,7 +8,7 @@ const utils = require("../lib/utils");
 const makeAppMode = require("../lib/app-mode");
 const userConfig = Object.assign(
   {
-    options: { reactLib: "react", karma: true }
+    options: { reactLib: "react", karma: true, sass: true }
   },
   optionalRequire(Path.resolve("archetype/config"))
 );

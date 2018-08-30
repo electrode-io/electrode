@@ -72,7 +72,6 @@
     "lodash": "^4.5.0",
     "lodash-webpack-plugin": "^0.11.2",
     "mocha": "^4.0.0",
-    "node-sass": "^4.7.2",
     "nodemon": "^1.8.1",
     "optional-require": "^1.0.0",
     "postcss-cssnext": "^2.7.0",
@@ -87,7 +86,6 @@
     "react-test-renderer": "^16.0.0",
     "require-at": "^1.0.0",
     "rimraf": "^2.5.2",
-    "sass-loader": "^6.0.6",
     "sinon": "^4.0.0",
     "sinon-chai": "^2.14.0",
     "style-loader": "^0.20.1",
@@ -105,7 +103,8 @@
   "optionalDependencies": {
     "electrode-archetype-opt-inferno": "^0.2.3",
     "electrode-archetype-opt-karma": "^1.0.1",
-    "electrode-archetype-opt-react": "^1.0.1"
+    "electrode-archetype-opt-react": "^1.0.1",
+    "electrode-archetype-opt-sass": "^1.0.0"
   },
   "devDependencies": {
     "electrode-archetype-react-component": "../electrode-archetype-react-component",
@@ -126,7 +125,8 @@
     "optionalDependencies": {
       "electrode-archetype-opt-inferno": "../electrode-archetype-opt-inferno",
       "electrode-archetype-opt-karma": "../electrode-archetype-opt-karma",
-      "electrode-archetype-opt-react": "../electrode-archetype-opt-react"
+      "electrode-archetype-opt-react": "../electrode-archetype-opt-react",
+      "electrode-archetype-opt-sass": "../electrode-archetype-opt-sass"
     }
   }
 }

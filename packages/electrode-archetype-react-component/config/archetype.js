@@ -33,7 +33,7 @@ if (process.cwd() !== hostDir) {
 
 const userConfig = Object.assign(
   {
-    options: { karma: true }
+    options: { karma: true, sass: true }
   },
   optionalRequire(Path.join(hostDir, "archetype/config"))
 );
