@@ -9,6 +9,7 @@ const Path = require("path");
 
 const tildaSep = "/~/";
 const nmSep = "/node_modules/";
+const NUMBER_TWO = 2;
 
 // match @namespace/packageName/file
 const atModRegex = new RegExp(`([^/]+/[^/]+)/(.+)`);
@@ -53,7 +54,7 @@ class ModuleProcessor {
       return {
         name: match[1],
         parents: pkgs,
-        file: match[2]
+        file: match[NUMBER_TWO]
       };
     } else {
       return {

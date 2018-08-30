@@ -1,7 +1,7 @@
 "use strict";
 
-/* eslint-disable max-statements, max-params, prefer-template, complexity */
-
+/* eslint-disable no-console, no-magic-numbers, max-statements */
+/* eslint-disable max-params, prefer-template, complexity */
 const Path = require("path");
 const Fs = require("fs");
 const Url = require("url");
@@ -19,6 +19,8 @@ const archetype = require("electrode-archetype-react-app/config/archetype");
 const _ = require("lodash");
 const statsUtils = require("./stats-utils");
 const statsMapper = require("./stats-mapper");
+const archetypeWebpackConfig = Path.join(archetype.config.webpack, "webpack.config.dev.js");
+const config = require(archetypeWebpackConfig);
 
 function register(server, options, next) {
   if (!archetype.webpack.devMiddleware) {
@@ -27,10 +29,6 @@ function register(server, options, next) {
     );
     return next();
   }
-
-  const archetypeWebpackConfig = Path.join(archetype.config.webpack, "webpack.config.dev.js");
-
-  const config = require(archetypeWebpackConfig);
 
   const webpackHotOptions = _.merge(
     {
@@ -298,11 +296,12 @@ ${jumpToError}</body></html>
       } else if (req.url.startsWith(cwdContextBaseUrl)) {
         return serveStatic(cwdContextBaseUrl, devMiddleware.fileSystem, cwdMemIndex, err => {
           return sendHtml(
-            `<html><body><div style="margin-top: 50px; padding: 20px; border-radius: 10px; border: 2px solid red;">
-<h2>Error reading webpack mem fs</h2>
-<div style="color: red;">${err.message}</div>
-<h3>check <a href="${reporterUrl}">reporter</a> to see if there're any errors.</h3>
-</div></body></html>`
+            `<html><body>
+            <div style="margin-top:50px;padding:20px;border-radius:10px;border:2px solid red;">
+            <h2>Error reading webpack mem fs</h2>
+            <div style="color: red;">${err.message}</div>
+            <h3>check <a href="${reporterUrl}">reporter</a> to see if there're any errors.</h3>
+            </div></body></html>`
           );
         });
       } else if (req.url.startsWith(reporterUrl) || returnReporter) {
