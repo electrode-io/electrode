@@ -31,7 +31,7 @@ try {
   const lib = config && config.options && config.options.sass;
   if (lib === false) {
     console.log(
-      `${name}: archetype config set sass to false - skipping install because it's not being used.`
+      `${name}: archetype config set sass to false - skipping install because it's not true.`
     );
     process.exit(1);
   }
