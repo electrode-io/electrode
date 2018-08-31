@@ -1,3 +1,56 @@
+# 8/30/2018
+
+electrode-archetype-react-app:
+- make node-sass optional so if you don't use it you can skip the dependencies
+- update optimize css to not touch zindex by default
+
+electrode-archetype-react-component:
+- make node-sass optional so if you don't use it you can skip the dependencies
+
+generator-electrode:
+- allow extended generator to get pwa config
+- only default create new dir to true if cwd is not empty
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-opt-sass@1.0.1 `(1.0.0 => 1.0.1)`
+-   electrode-archetype-react-app@5.4.5 `(5.4.4 => 5.4.5)`
+-   electrode-archetype-react-app-dev@5.4.5 `(5.4.4 => 5.4.5)`
+-   electrode-archetype-react-component@5.3.4 `(5.3.3 => 5.3.4)`
+-   electrode-archetype-react-component-dev@5.3.4 `(5.3.3 => 5.3.4)`
+-   generator-electrode@4.2.4 `(4.2.3 => 4.2.4)`
+
+### Lerna Updated
+
+-   electrode-ignite@2.1.8 `(2.1.7 => 2.1.8)`
+
+## Commits
+
+-   `packages/electrode-archetype-opt-sass`
+
+    -   make node-sass optional ([#920](https://github.com/electrode-io/electrode/pull/920)) [commit](http://github.com/electrode-io/electrode/commit/4e8f6a291d38715cc97c6be37b321b99b4aa5aca)
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   update optimize css to not touch zindex by default ([#922](https://github.com/electrode-io/electrode/pull/922)) [commit](http://github.com/electrode-io/electrode/commit/5feff5d205982c0761b8ad4ba84212b98b9465a6)
+    -   make node-sass optional ([#920](https://github.com/electrode-io/electrode/pull/920)) [commit](http://github.com/electrode-io/electrode/commit/4e8f6a291d38715cc97c6be37b321b99b4aa5aca)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   make node-sass optional ([#920](https://github.com/electrode-io/electrode/pull/920)) [commit](http://github.com/electrode-io/electrode/commit/4e8f6a291d38715cc97c6be37b321b99b4aa5aca)
+
+-   `packages/generator-electrode`
+
+    -   allow extended generator to get pwa config ([#918](https://github.com/electrode-io/electrode/pull/918)) [commit](http://github.com/electrode-io/electrode/commit/8eff2471e3f1521f54fe66ffdde793cdce180ea0)
+    -   only default create new dir to true if cwd is not empty ([#917](https://github.com/electrode-io/electrode/pull/917)) [commit](http://github.com/electrode-io/electrode/commit/f46238ef9a6630a1355be6951f95d662c316247a)
+    -   add insertTokenIds to sample ([#916](https://github.com/electrode-io/electrode/pull/916)) [commit](http://github.com/electrode-io/electrode/commit/0baad2a86063f31bb36abb384dad8badb565ed6a)
+
+-   `MISC`
+
+    -   [chore] update fynpo version [commit](http://github.com/electrode-io/electrode/commit/bf260244394382018209b417e4ec1f3c692c3d52)
+
 # 8/24/2018
 
 - electrode-archetype-react-app: Upgrade to jest v23
