@@ -3,6 +3,7 @@
 const Path = require("path");
 const optionalRequire = require("optional-require")(require);
 const archetypeOptions = optionalRequire(Path.resolve("archetype", "config"), { default: {} });
+const _ = require("lodash");
 
 const devPkg = require("../package.json");
 const devDir = Path.join(__dirname, "..");
@@ -25,7 +26,7 @@ const karmaConfigSpec = {
   browser: { env: "KARMA_BROWSER", default: "chrome" }
 };
 
-module.exports = {
+const config = {
   devDir,
   devPkg,
   devRequire,
@@ -44,3 +45,9 @@ module.exports = {
     archetypeOptions.configPaths
   )
 };
+
+module.exports = config;
+
+// pick any options that are not simple ENV based
+// TODO: update xenv-config to support JSON
+_.defaultsDeep(config, _.pick(archetypeOptions, ["webpack", "karma", "jest"]));
