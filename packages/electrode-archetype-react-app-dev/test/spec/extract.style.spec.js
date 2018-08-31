@@ -69,5 +69,23 @@ describe("electrode-archetype-react-app-dev extract-styles", () => {
       expect(webpackLoaderOptions.postcss()).to.be.an("array").that.is.empty;
       expect(webpackLoaderOptions.stylus.use).to.be.an("array").that.is.not.empty;
     });
+
+    it("Should disable sass loader if sassSupport is false", () => {
+      archetype.options = {
+        sass: false
+      };
+      archetype.webpack.cssModuleSupport = false;
+      const moduleConfig = require(moduleName)().module;
+      expect(moduleConfig.rules[1].use[4].loader).to.not.include("sass-loader");
+    });
+
+    it("Should enable sass loader if sassSupport is true", () => {
+      archetype.options = {
+        sass: true
+      };
+      archetype.webpack.cssModuleSupport = false;
+      const moduleConfig = require(moduleName)().module;
+      expect(moduleConfig.rules[1].use[4].loader).to.include("sass-loader");
+    });
   });
 });
