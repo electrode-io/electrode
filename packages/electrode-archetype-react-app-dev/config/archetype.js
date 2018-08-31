@@ -3,7 +3,7 @@
 const Path = require("path");
 const optionalRequire = require("optional-require")(require);
 const userConfig = Object.assign({}, optionalRequire(Path.resolve("archetype/config")));
-const _ = require("lodash");
+const { merge } = require("lodash");
 
 const devPkg = require("../package.json");
 const devDir = Path.join(__dirname, "..");
@@ -11,6 +11,12 @@ const devRequire = require(`../require`);
 const configDir = `${devDir}/config`;
 const xenvConfig = devRequire("xenv-config");
 const detectCSSModule = require("./webpack/util/detect-css-module");
+
+const defaultOptimizeCssOptions = {
+  cssProcessorOptions: {
+    zindex: false
+  }
+};
 
 const webpackConfigSpec = {
   devHostname: { env: ["WEBPACK_HOST", "WEBPACK_DEV_HOST"], default: "localhost" },
@@ -28,7 +34,12 @@ const webpackConfigSpec = {
     env: ["WEBPACK_PRESERVE_SYMLINKS", "NODE_PRESERVE_SYMLINKS"],
     default: false
   },
-  enableShortenCSSNames: { env: "ENABLE_SHORTEN_CSS_NAMES", default: false }
+  enableShortenCSSNames: { env: "ENABLE_SHORTEN_CSS_NAMES", default: false },
+  optimizeCssOptions: {
+    env: "OPTIMIZE_CSS_OPTIONS",
+    type: "json",
+    default: defaultOptimizeCssOptions
+  }
 };
 
 const karmaConfigSpec = {
@@ -39,8 +50,8 @@ const config = {
   devDir,
   devPkg,
   devRequire,
-  webpack: xenvConfig(webpackConfigSpec, userConfig.webpack),
-  karma: xenvConfig(karmaConfigSpec, userConfig.karma),
+  webpack: xenvConfig(webpackConfigSpec, userConfig.webpack, { merge }),
+  karma: xenvConfig(karmaConfigSpec, userConfig.karma, { merge }),
   jest: Object.assign({}, userConfig.jest),
   config: Object.assign(
     {},
@@ -58,7 +69,3 @@ const config = {
 };
 
 module.exports = config;
-
-// pick any options that are not simple ENV based
-// TODO: update xenv-config to support JSON
-_.defaultsDeep(config, _.pick(userConfig, ["webpack", "karma", "jest"]));

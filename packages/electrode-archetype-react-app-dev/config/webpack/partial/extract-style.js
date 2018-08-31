@@ -3,7 +3,6 @@
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const Path = require("path");
 const webpack = require("webpack");
-const _ = require("lodash");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const CSSSplitPlugin = require("css-split-webpack-plugin").default;
@@ -97,18 +96,12 @@ module.exports = function() {
     });
   }
 
-  const optimizeCssOptions = () =>
-    _.defaultsDeep({}, archetype.webpack.optimizeCssOptions, {
-      cssProcessorOptions: {
-        zindex: false
-      }
-    });
-
   return {
     module: { rules },
     plugins: [
       new ExtractTextPlugin({ filename: "[name].style.[hash].css" }),
-      process.env.NODE_ENV === "production" && new OptimizeCssAssetsPlugin(optimizeCssOptions()),
+      process.env.NODE_ENV === "production" &&
+        new OptimizeCssAssetsPlugin(archetype.webpack.optimizeCssOptions),
       /*
        preserve: default: false. Keep the original unsplit file as well.
        Sometimes this is desirable if you want to target a specific browser (IE)
