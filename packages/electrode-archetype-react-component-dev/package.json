@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-component-dev",
-  "version": "5.3.3",
+  "version": "5.3.4",
   "description": "Electrode Component (Development)",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -104,7 +104,7 @@
     "electrode-archetype-opt-inferno": "^0.2.3",
     "electrode-archetype-opt-karma": "^1.0.1",
     "electrode-archetype-opt-react": "^1.0.1",
-    "electrode-archetype-opt-sass": "^1.0.0"
+    "electrode-archetype-opt-sass": "^1.0.1"
   },
   "devDependencies": {
     "electrode-archetype-react-component": "../electrode-archetype-react-component",

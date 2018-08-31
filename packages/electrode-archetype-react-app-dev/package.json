@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-app-dev",
-  "version": "5.4.4",
+  "version": "5.4.5",
   "description": "Electrode NodeJS/React Application Archetype (Development)",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -133,7 +133,7 @@
     "electrode-archetype-opt-inferno": "^0.2.3",
     "electrode-archetype-opt-karma": "^1.0.1",
     "electrode-archetype-opt-react": "^1.0.1",
-    "electrode-archetype-opt-sass": "^1.0.0"
+    "electrode-archetype-opt-sass": "^1.0.1"
   },
   "devDependencies": {
     "electrode-archetype-react-app": "../electrode-archetype-react-app",
