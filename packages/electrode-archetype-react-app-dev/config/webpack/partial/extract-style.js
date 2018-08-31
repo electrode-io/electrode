@@ -3,6 +3,7 @@
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const Path = require("path");
 const webpack = require("webpack");
+const _ = require("lodash");
 const glob = require("glob");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
@@ -95,11 +96,18 @@ module.exports = function() {
     });
   }
 
+  const optimizeCssOptions = () =>
+    _.defaultsDeep({}, archetype.webpack.optimizeCssOptions, {
+      cssProcessorOptions: {
+        zindex: false
+      }
+    });
+
   return {
     module: { rules },
     plugins: [
       new ExtractTextPlugin({ filename: "[name].style.[hash].css" }),
-      process.env.NODE_ENV === "production" && new OptimizeCssAssetsPlugin(),
+      process.env.NODE_ENV === "production" && new OptimizeCssAssetsPlugin(optimizeCssOptions()),
       /*
        preserve: default: false. Keep the original unsplit file as well.
        Sometimes this is desirable if you want to target a specific browser (IE)
@@ -125,12 +133,13 @@ module.exports = function() {
               : [];
           },
           stylus: {
-            use: !cssModuleSupport ? [
-                autoprefixer({
-                  browsers: ["last 2 versions", "ie >= 9", "> 5%"]
-                })
-              ]
-            : []
+            use: !cssModuleSupport
+              ? [
+                  autoprefixer({
+                    browsers: ["last 2 versions", "ie >= 9", "> 5%"]
+                  })
+                ]
+              : []
           }
         }
       })
