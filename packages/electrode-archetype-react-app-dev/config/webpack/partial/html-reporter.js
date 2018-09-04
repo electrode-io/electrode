@@ -6,7 +6,7 @@ const WebpackReporter = require("electrode-webpack-reporter");
 
 module.exports = function(options) {
   if (!process.env.HTML_WEBPACK_REPORTER_OFF) {
-    const reporter = new WebpackReporter({socketPort: archetype.webpack.reporterSocketPort});
+    const reporter = new WebpackReporter({ socketPort: archetype.webpack.reporterSocketPort });
 
     reporter.apply(options.currentConfig);
     reporter.on("report", reporterOptions => {
