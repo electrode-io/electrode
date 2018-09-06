@@ -23,7 +23,7 @@
     }
   },
   "scripts": {
-    "prepublish": "clap pkg/check",
+    "prepare": "clap pkg/check",
     "test": "clap pkg/check",
     "coverage": "clap pkg/check",
     "lint-src": "eslint src --color",
