@@ -799,7 +799,7 @@ Individual .babelrc files were generated for you in src/client and src/server
       desc: "Generate a list of all files that went into production bundle JS (results in .etmp)",
       task: () => {
         const stats = JSON.parse(Fs.readFileSync("dist/server/stats.json"));
-        const entry = Object.keys(tats.assetsByChunkName).pop()
+        const entry = Object.keys(stats.assetsByChunkName).pop();
         const bundle = stats.assetsByChunkName[entry].find(x => x.endsWith(".js"));
         return `~$analyze-bundle -b dist/js/${bundle} -s dist/server/stats.json`;
       }
