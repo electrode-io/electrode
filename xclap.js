@@ -32,7 +32,11 @@ const pullLocalPackages = dir => {
     if (appPkg[section]) {
       pkgs.forEach(pkg => {
         if (appPkg[section][pkg]) {
-          _.set(appPkg, ["fyn", section, pkg], Path.join(localPackagesDir, pkg));
+          _.set(
+            appPkg,
+            ["fyn", section, pkg],
+            Path.join(localPackagesDir, pkg).replace(/\\/g, "/")
+          );
         }
       });
     }
