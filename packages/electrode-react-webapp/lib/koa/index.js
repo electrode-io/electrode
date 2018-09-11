@@ -49,7 +49,6 @@ const registerRoutes = (router, options) => {
   const registerOptions = ReactWebapp.setupOptions(options);
 
   _.each(registerOptions.paths, (v, path) => {
-    assert(v.content, `You must define content for the webapp plugin path ${path}`);
     const resolveContent = () => {
       if (registerOptions.serverSideRendering !== false) {
         assert(
