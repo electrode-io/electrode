@@ -61,10 +61,7 @@ const registerRoutes = (server, options) => {
     const resolveContent = () => {
       if (registerOptions.serverSideRendering !== false) {
         const x = ReactWebapp.resolveContent(pathData);
-        assert(
-          x || typeof x === "string",
-          `You must define content for the webapp plugin path ${path}`
-        );
+        assert(x, `You must define content for the webapp plugin path ${path}`);
         return x;
       }
 

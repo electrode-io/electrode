@@ -1116,6 +1116,26 @@ describe("hapi electrode-react-webapp", () => {
     });
   });
 
+  it(`should allow content to be ""`, () => {
+    assign(mainRoutePathOptions, {
+      content: ""
+    });
+
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .then(resp => {
+          expect(resp.result).contains(`<div class="js-content"></div>`);
+        })
+        .finally(() => {
+          stopServer(server);
+        });
+    });
+  });
+
   it("should fail if content is null", () => {
     assign(mainRoutePathOptions, {
       content: null

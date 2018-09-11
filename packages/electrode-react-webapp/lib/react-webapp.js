@@ -132,7 +132,7 @@ const resolveContent = (pathData, xrequire) => {
     content = pathData.content;
   }
 
-  if (!content) return null;
+  if (!content && !_.isString(content)) return null;
 
   // content has module field, require it.
   if (!_.isString(content) && !_.isFunction(content) && content.module) {
