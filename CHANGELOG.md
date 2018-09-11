@@ -1,3 +1,15 @@
+# 9/11/2018
+
+## Packages
+
+-   electrode-react-webapp@3.0.4 `(3.0.3 => 3.0.4)`
+
+## Commits
+
+-   `packages/electrode-react-webapp`
+
+    -   really fix content check [commit](http://github.com/electrode-io/electrode/commit/d9b6d6ee09b55e86860ce69067fe3c0a1fe4bade)
+
 # 9/10/2018
 
 - some minor fixes and updates
