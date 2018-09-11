@@ -19,7 +19,7 @@
   "devDependencies": {
     "bluebird": "^3.5.0",
     "fynpo": "^0.1.12",
-    "lerna": "^2.0.0",
+    "lerna": "^3.3.0",
     "lodash": "^4.17.10",
     "semver": "^5.3.0",
     "xclap": "^0.2.18",
