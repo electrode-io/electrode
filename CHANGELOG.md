@@ -1,3 +1,46 @@
+# 9/10/2018
+
+- some minor fixes and updates
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-react-app@5.4.6 `(5.4.5 => 5.4.6)`
+-   electrode-archetype-react-app-dev@5.4.6 `(5.4.5 => 5.4.6)`
+-   electrode-react-webapp@3.0.3 `(3.0.2 => 3.0.3)`
+-   electrode-ui-config@1.1.2 `(1.1.1 => 1.1.2)`
+
+### Lerna Updated
+
+-   electrode-ui-logger@1.1.3 `(1.1.2 => 1.1.3)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   Typo ([#927](https://github.com/electrode-io/electrode/pull/927)) [commit](http://github.com/electrode-io/electrode/commit/59913b48de4483689fa5061c7a227b589e85373a)
+    -   Use the first entry for bundle analzying instead of the hardcoded `main` one ([#926](https://github.com/electrode-io/electrode/pull/926)) [commit](http://github.com/electrode-io/electrode/commit/edda3a8b4e981c032f4e95547fb4b784754208f5)
+    -   prettier format JS [commit](http://github.com/electrode-io/electrode/commit/49571a51e721b457e558b5ad59b154c5ad1a9a0d)
+    -   update dependencies [commit](http://github.com/electrode-io/electrode/commit/7764f502cb6aca6430ec4affc8c8cca6a29fcd93)
+    -   undo careless mistakes [commit](http://github.com/electrode-io/electrode/commit/5ed3209e75ac2674dd5338da7bc88755884ed796)
+    -   update xenv-config to 1.3.0 with json type support ([#924](https://github.com/electrode-io/electrode/pull/924)) [commit](http://github.com/electrode-io/electrode/commit/03399ddceb103b7b9c0b60bc057c78c258b84e45)
+    -   add unit tests for optional sass ([#925](https://github.com/electrode-io/electrode/pull/925)) [commit](http://github.com/electrode-io/electrode/commit/b88efd5558ed851d9937faae7d7ffba27634498d)
+    -   add unit tests for extract-styles.js ([#921](https://github.com/electrode-io/electrode/pull/921)) [commit](http://github.com/electrode-io/electrode/commit/808eed6bc0feac40aebcbfcbea474f7fd9e03f59)
+
+-   `packages/electrode-react-webapp`
+
+    -   fix content check ([#928](https://github.com/electrode-io/electrode/pull/928)) [commit](http://github.com/electrode-io/electrode/commit/f3f60b4ebe6a20483847ccb07e9532aac6b2110a)
+
+-   `packages/electrode-ui-config`
+
+    -   [chore] rename deprecated npm script [commit](http://github.com/electrode-io/electrode/commit/4a12db9db775dd5075e1e12d53ad434c3dcc984e)
+
+-   `MISC`
+
+    -   [chore] build use / for local dep path [commit](http://github.com/electrode-io/electrode/commit/4b3acc21728a4c8c85b382e038a80a6096e50bd0)
+    -   [chore] fynpo@0.1.12 [commit](http://github.com/electrode-io/electrode/commit/44d8749bda6860c8918605ff9798a3369fdb8492)
+
 # 8/30/2018
 
 electrode-archetype-react-app:
