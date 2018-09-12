@@ -4,7 +4,7 @@
   "description": "Handle async data for React Server Side Rendering using Redux and Router",
   "main": "lib/redux-router-engine.js",
   "scripts": {
-    "test": "clap test",
+    "test": "echo debugging ci start; clap test; echo debugging ci end",
     "lint": "clap lint",
     "coverage": "clap check"
   },

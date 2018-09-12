@@ -24,7 +24,7 @@
   },
   "scripts": {
     "prepare": "clap pkg/check",
-    "test": "clap pkg/check",
+    "test": "echo debugging ci start; clap pkg/check; echo debugging ci end",
     "coverage": "clap pkg/check",
     "lint-src": "eslint src --color",
     "compile": "babel --presets=es2015 src -d dist --source-maps"

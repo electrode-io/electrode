@@ -4,7 +4,7 @@
   "description": "Electrode Platform for NodeJS/React Universal Application",
   "homepage": "http://www.electrode.io",
   "scripts": {
-    "test": "clap test",
+    "test": "fynpo && lerna run test --ignore=electrode-webpack-reporter",
     "test-generator": "clap test-generator",
     "test-boilerplate": "clap test-boilerplate",
     "bootstrap": "fynpo",
