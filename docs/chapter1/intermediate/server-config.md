@@ -64,10 +64,10 @@ Let's check it out! We'll run through our steps to test, run the app and view it
     $ clap check
     $ token='your-token-here' clap hot
 
-Navigate to  `localhost:3000`. Check it out! This is the `Index route` which renders our `Home component` using Server Side Rendering:
+Navigate to `localhost:3000`. Check it out! This is the `Index route` which renders our `Home component` using Server Side Rendering:
 
 ![](http://www.electrode.io/img/app-home-view.png)  
-When you click the  `Click Here to Make it a Party`  link, Your Awesome App routes to the `/invite`  route, which renders the guest list component.
+When you click the `Click Here to Make it a Party` link, Your Awesome App routes to the `/invite` route, which renders the guest list component.
 
 ![](http://www.electrode.io/img/app-guest-list-view.png)
 
@@ -79,6 +79,6 @@ When all of our guests are invited to the House Party, our CSS modules kick in a
 
 Feel free to add your own personal touch and build out your Resource List House Party. You can compare your work to our [Heroku deployed example app](https://electrode-example-app.herokuapp.com/).
 
-When you're ready, you can deploy Your Awesome App to [Heroku](https://devcenter.heroku.com/categories/deployment) by following the previous steps in our [Getting Started: Build More](/chapter1/quick-start/build-app.md) section. If you choose this step, make sure you set all of the Heroku configurations, including the one for our [GitHub Api](/chapter1/intermediate/build-a-server-plugin.md).
+When you're ready, you can deploy Your Awesome App to [Heroku](https://devcenter.heroku.com/categories/deployment) by following the previous steps in our [Getting Started: Build More](../quick-start/build-app.md) section. If you choose this step, make sure you set all of the Heroku configurations, including the one for our [GitHub Api](./build-a-server-plugin.md).
 
-You can also navigate to [Intermediate: More Deployments](/chapter1/intermediate/more-deployments.md) to learn how to deploy with [Docker](/chapter1/intermediate/more-deployments/docker.md) and [Kubernetes](/chapter1/intermediate/more-deployments/kubernetes.md).
+You can also navigate to [Intermediate: More Deployments](./more-deployments.md) to learn how to deploy with [Docker](./more-deployments/docker.md) and [Kubernetes](./more-deployments/kubernetes.md).

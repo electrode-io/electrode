@@ -9,7 +9,7 @@
     "xclap": "^0.2.0"
   },
   "scripts": {
-    "test": "clap test"
+    "test": "echo debugging ci start; clap test; echo debugging ci end"
   },
   "repository": {
     "type": "git",

@@ -30,7 +30,11 @@ function generateConfig(options) {
   }
 
   const keepCustomProps = options.keepCustomProps;
-  const compose = () => composer.compose({ keepCustomProps }, options.profileNames);
+  const compose = () =>
+    composer.compose(
+      { keepCustomProps },
+      options.profileNames
+    );
 
   let config;
 

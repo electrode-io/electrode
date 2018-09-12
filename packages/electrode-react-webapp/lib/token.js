@@ -4,6 +4,7 @@
 
 const assert = require("assert");
 const loadHandler = require("./load-handler");
+const { TEMPLATE_DIR, TOKEN_HANDLER } = require("./symbols");
 
 const viewTokenModules = {};
 
@@ -18,17 +19,18 @@ class Token {
     if (this.props._call) {
       this._modCall = [].concat(this.props._call);
     }
+    this[TOKEN_HANDLER] = null;
   }
 
   // if token is a module, then load it
   load(options) {
-    if (!this.isModule) return;
+    if (!this.isModule || this.custom !== undefined) return;
 
     let tokenMod = viewTokenModules[this.id];
 
     if (tokenMod === undefined) {
       const mPath = this.id.substr(1); // remove the leading #
-      tokenMod = loadHandler(mPath);
+      tokenMod = loadHandler(mPath, this.props[TEMPLATE_DIR]);
       viewTokenModules[this.id] = tokenMod;
     }
 
@@ -39,10 +41,12 @@ class Token {
         tokenMod[this._modCall[0]],
         `electrode-react-webapp: _call of token ${this.id} - '${this._modCall[0]}' not found`
       );
-      this.custom = tokenMod[this._modCall[0]].apply(undefined, params);
+      this.custom = tokenMod[this._modCall[0]](...params);
     } else {
       this.custom = tokenMod(options || {}, this);
     }
+
+    if (this.custom === null) return;
 
     assert(
       this.custom && this.custom.process,
@@ -52,12 +56,11 @@ class Token {
     // if process function takes more than one params, then it should take a
     // next callback so it can do async work, and call next after that's done.
     this.wantsNext = this.custom.process.length > 1;
+    this.setHandler(context => this.custom.process(context, this));
   }
 
-  process(context, next) {
-    assert(this.isModule, "Only token module can process");
-    assert(this.custom, "Custom token is not loaded yet");
-    return this.custom.process(context, next);
+  setHandler(func) {
+    this[TOKEN_HANDLER] = func;
   }
 }
 

@@ -20,6 +20,19 @@ const webappPlugin = () => {
 
 module.exports = {
   plugins: {
+    good: {
+      module: "good",
+      options: {
+        reporters: {
+          myConsoleReporter: [
+            {
+              module: "good-console"
+            },
+            "stdout"
+          ]
+        }
+      }
+    },
     "webpack-dev": {
       module: "electrode-archetype-react-app-dev/lib/webpack-dev-hapi",
       enable: process.env.WEBPACK_DEV_MIDDLEWARE === "true" && process.env.WEBPACK_DEV === "true",
@@ -47,12 +60,13 @@ module.exports = {
     }, //<% if (pwa) { %>
     "server/plugins/pwa": {
       module: "./{{env.APP_SRC_DIR}}/server/plugins/pwa"
-    }, //<% } if (isAutoSsr) { %>
+    }, //<% } if (isAutoSSR) { %>
     "electrode-auto-ssr": {}, //<% } %>
     webapp: {
       module: webappPlugin(),
       options: {
         pageTitle: "<%= projectName %>",
+        insertTokenIds: false, // Set true to get tokens in index.html for debugging
         paths: {
           "<%= routeValue %>": {
             content: {

@@ -13,15 +13,9 @@ module.exports = Object.assign(Lib, {
   platform: {
     win32: function win32(name) {
       baseYoPath = baseYoPath || __dirname;
-      const yoPath = Path.join(
-        baseYoPath,
-        "..",
-        "node_modules",
-        ".bin",
-        "yo.cmd"
-      );
+      const yoPath = Path.join(baseYoPath, "..", "node_modules", ".bin", "yo.cmd");
 
-      return childProcess.spawn("cmd", ["/c", `${yoPath} ${name}`], {
+      return childProcess.spawn("cmd", ["/c", yoPath, name], {
         stdio: "inherit"
       });
     },
@@ -37,11 +31,7 @@ module.exports = Object.assign(Lib, {
   },
 
   run: function run(name, platform) {
-    const platformRun = _.get(
-      Lib,
-      ["platform", platform || process.platform],
-      Lib.platform.posix
-    );
+    const platformRun = _.get(Lib, ["platform", platform || process.platform], Lib.platform.posix);
     const child = platformRun(name);
 
     child.on("error", err => {
@@ -51,18 +41,14 @@ module.exports = Object.assign(Lib, {
     /*
     * Avoid the hanging case when child process exits on its own by any reason.
     */
-    child.on("exit", (code) => {
+    child.on("exit", code => {
       if (code === 0) {
-        logger.log(
-          chalk.green(
-            `Generator: ${name} exited without any errors.`
-          )
-        );
+        logger.log(chalk.green(`Generator: ${name} exited without any errors.`));
       } else {
         logger.log(
           chalk.red(
-            `Generator: ${name} failed with exit code ${code}.`
-            + ` This could mean that it didn't generate your app properly. Please double check.`
+            `Generator: ${name} failed with exit code ${code}.` +
+              ` This could mean that it didn't generate your app properly. Please double check.`
           )
         );
       }

@@ -6,7 +6,7 @@ This module helps render and serve your Electrode React application's `index.htm
 
 All the defaults are configured out of the box, but your index page is extensible. You can specify your own index template file with the `htmlFile` option.
 
-See [design](./DESIGN.md) for details on how the template can be extended.
+See [design](/packages/electrode-react-webapp/DESIGN.md) for details on how the template can be extended.
 
 ## Installing
 

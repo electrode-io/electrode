@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-app",
-  "version": "5.4.0",
+  "version": "5.4.6",
   "description": "Electrode NodeJS/React Universal Application Archetype",
   "main": "arch-clap.js",
   "homepage": "http://www.electrode.io",
@@ -13,7 +13,7 @@
   },
   "license": "Apache-2.0",
   "scripts": {
-    "test": "clap check",
+    "test": "echo debugging ci start; clap check; echo debugging ci end",
     "format": "prettier --write --print-width 100 *.{js,jsx} `find . -type d -d 1 -exec echo '{}/**/*.{js,jsx}' \\; | egrep -v '(/node_modules/|/dist/|/coverage/)'`"
   },
   "files": [
@@ -35,8 +35,8 @@
     "electrode-archetype-opt-react": "^1.0.1"
   },
   "devDependencies": {
-    "electrode-archetype-njs-module-dev": "^2.0.0",
-    "prettier": "^1.4.4",
+    "electrode-archetype-njs-module-dev": "^3.0.0",
+    "prettier": "^1.14.2",
     "winston": "^2.3.1"
   },
   "engines": {
@@ -57,5 +57,11 @@
       "dist",
       "test"
     ]
+  },
+  "fyn": {
+    "optionalDependencies": {
+      "electrode-archetype-opt-inferno": "../electrode-archetype-opt-inferno",
+      "electrode-archetype-opt-react": "../electrode-archetype-opt-react"
+    }
   }
 }

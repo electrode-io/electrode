@@ -2,9 +2,8 @@
 
 module.exports = () => {
   return {
-    process: function(context, next) {
+    process: function(context) {
       context.output.add("\nfrom wants next module");
-      setTimeout(next, 0);
     }
   };
 };

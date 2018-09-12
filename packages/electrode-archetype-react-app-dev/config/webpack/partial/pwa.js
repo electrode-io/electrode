@@ -117,15 +117,16 @@ module.exports = function(options) {
    * If importScripts exists in the cache config we need to overwrite
    * the entry config and output config so we get an entry point for each
    * script with unique names.
-    */
+   */
   let entry = options.currentConfig.entry;
   let output = {};
   if (cacheConfig.importScripts) {
     const importScripts = cacheConfig.importScripts;
 
-    cacheConfig.importScripts = process.env.WEBPACK_DEV === "true"
-      ? importScripts.map(getDevelopmentPath)
-      : importScripts.map(getHashedPath);
+    cacheConfig.importScripts =
+      process.env.WEBPACK_DEV === "true"
+        ? importScripts.map(getDevelopmentPath)
+        : importScripts.map(getHashedPath);
 
     entry = createEntryConfigFromScripts(importScripts, options.currentConfig.entry);
 

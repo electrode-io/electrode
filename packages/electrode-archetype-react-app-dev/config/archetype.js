@@ -3,12 +3,20 @@
 const Path = require("path");
 const optionalRequire = require("optional-require")(require);
 const userConfig = Object.assign({}, optionalRequire(Path.resolve("archetype/config")));
+const { merge } = require("lodash");
 
 const devPkg = require("../package.json");
 const devDir = Path.join(__dirname, "..");
 const devRequire = require(`../require`);
 const configDir = `${devDir}/config`;
 const xenvConfig = devRequire("xenv-config");
+const detectCSSModule = require("./webpack/util/detect-css-module");
+
+const defaultOptimizeCssOptions = {
+  cssProcessorOptions: {
+    zindex: false
+  }
+};
 
 const webpackConfigSpec = {
   devHostname: { env: ["WEBPACK_HOST", "WEBPACK_DEV_HOST"], default: "localhost" },
@@ -17,7 +25,7 @@ const webpackConfigSpec = {
   reporterSocketPort: { env: "WEBPACK_REPORTER_SOCKET_PORT", default: 5000 },
   https: { env: "WEBPACK_DEV_HTTPS", default: false },
   devMiddleware: { env: "WEBPACK_DEV_MIDDLEWARE", default: false },
-  cssModuleSupport: { env: "CSS_MODULE_SUPPORT", default: undefined },
+  cssModuleSupport: { env: "CSS_MODULE_SUPPORT", type: "truthy", default: detectCSSModule },
   cssModuleStylusSupport: { env: "CSS_MODULE_STYLUS_SUPPORT", default: false },
   enableBabelPolyfill: { env: "ENABLE_BABEL_POLYFILL", default: false },
   enableNodeSourcePlugin: { env: "ENABLE_NODESOURCE_PLUGIN", default: false },
@@ -26,19 +34,24 @@ const webpackConfigSpec = {
     env: ["WEBPACK_PRESERVE_SYMLINKS", "NODE_PRESERVE_SYMLINKS"],
     default: false
   },
-  enableShortenCSSNames: { env: "ENABLE_SHORTEN_CSS_NAMES", default: false }
+  enableShortenCSSNames: { env: "ENABLE_SHORTEN_CSS_NAMES", default: false },
+  optimizeCssOptions: {
+    env: "OPTIMIZE_CSS_OPTIONS",
+    type: "json",
+    default: defaultOptimizeCssOptions
+  }
 };
 
 const karmaConfigSpec = {
   browser: { env: "KARMA_BROWSER", default: "chrome" }
 };
 
-module.exports = {
+const config = {
   devDir,
   devPkg,
   devRequire,
-  webpack: xenvConfig(webpackConfigSpec, userConfig.webpack),
-  karma: xenvConfig(karmaConfigSpec, userConfig.karma),
+  webpack: xenvConfig(webpackConfigSpec, userConfig.webpack, { merge }),
+  karma: xenvConfig(karmaConfigSpec, userConfig.karma, { merge }),
   jest: Object.assign({}, userConfig.jest),
   config: Object.assign(
     {},
@@ -54,3 +67,5 @@ module.exports = {
     userConfig.configPaths
   )
 };
+
+module.exports = config;

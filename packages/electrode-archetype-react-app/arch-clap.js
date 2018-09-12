@@ -359,6 +359,14 @@ function makeTasks() {
         `--colors`
       );
     },
+    ".set.babel.env": () => {
+      const webpackConfig = archetype.webpack;
+      if (webpackConfig.cssModuleSupport && webpackConfig.enableShortenCSSNames) {
+        process.env.BABEL_ENV =
+          process.env.NODE_ENV === "production" ? "css-module-prod" : "css-module-dev";
+        logger.info("BABEL_ENV set to", process.env.BABEL_ENV);
+      }
+    },
     "build-browser-coverage": {
       desc: "Build browser coverage",
       task: [
@@ -375,6 +383,8 @@ function makeTasks() {
     },
 
     "build-dist": [
+      ".production-env",
+      ".set.babel.env",
       ".clean.build",
       "build-dist-dll",
       "build-dist-min",
@@ -518,6 +528,7 @@ Individual .babelrc files were generated for you in src/client and src/server
         const args = taskArgs(this.argv);
 
         return [
+          ".set.babel.env",
           ".webpack-dev",
           [
             archetype.webpack.devMiddleware ? "" : "wds.dev",
@@ -788,7 +799,8 @@ Individual .babelrc files were generated for you in src/client and src/server
       desc: "Generate a list of all files that went into production bundle JS (results in .etmp)",
       task: () => {
         const stats = JSON.parse(Fs.readFileSync("dist/server/stats.json"));
-        const bundle = stats.assetsByChunkName.main.find(x => x.endsWith(".js"));
+        const entry = Object.keys(stats.assetsByChunkName).pop();
+        const bundle = stats.assetsByChunkName[entry].find(x => x.endsWith(".js"));
         return `~$analyze-bundle -b dist/js/${bundle} -s dist/server/stats.json`;
       }
     },

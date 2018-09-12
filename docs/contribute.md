@@ -38,4 +38,4 @@ The following is a list of features that you can contribute to.
 * [244](https://github.com/electrode-io/electrode/issues/244) upgrade react-hot-loader to version 3.x
 * [219](https://github.com/electrode-io/electrode/issues/219) Can we have an Electrode + Parse Server\(express.js\) sample project with SSR
 
-[See All](https://github.com/repos/electrode-io/electrode/issues%7B/number%7D)
+[See All](https://github.com/electrode-io/electrode/issues)

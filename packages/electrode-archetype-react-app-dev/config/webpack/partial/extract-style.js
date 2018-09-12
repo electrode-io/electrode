@@ -3,7 +3,6 @@
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const Path = require("path");
 const webpack = require("webpack");
-const glob = require("glob");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const CSSSplitPlugin = require("css-split-webpack-plugin").default;
@@ -16,7 +15,9 @@ const cssLoader = require.resolve("css-loader");
 const styleLoader = require.resolve("style-loader");
 const stylusLoader = require.resolve("stylus-relative-loader");
 const postcssLoader = require.resolve("postcss-loader");
-const sassLoader = require.resolve("sass-loader");
+
+const sassSupport = archetype.options && archetype.options.sass;
+const sassLoader = sassSupport === false ? "" : require.resolve("sass-loader");
 
 /*
  * cssModuleSupport: false
@@ -30,10 +31,9 @@ const sassLoader = require.resolve("sass-loader");
  * case 3: *only* *.scss => normal CSS => CSS-Modules + CSS-Next
  */
 
-let cssModuleSupport = archetype.webpack.cssModuleSupport;
+const cssModuleSupport = archetype.webpack.cssModuleSupport;
 const cssModuleStylusSupport = archetype.webpack.cssModuleStylusSupport;
 const enableShortenCSSNames = archetype.webpack.enableShortenCSSNames;
-const AppMode = archetype.AppMode;
 
 const enableShortHash = process.env.NODE_ENV === "production" && enableShortenCSSNames;
 const localIdentName = `${enableShortHash ? "" : "[name]__[local]___"}[hash:base64:5]`;
@@ -47,22 +47,6 @@ const cssStylusQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}!${stylu
 const cssScssQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}!${sassLoader}`;
 
 const rules = [];
-
-const cssExists = glob.sync(Path.resolve(AppMode.src.client, "**", "*.css")).length > 0;
-const stylusExists = glob.sync(Path.resolve(AppMode.src.client, "**", "*.styl")).length > 0;
-const scssExists = glob.sync(Path.resolve(AppMode.src.client, "**", "*.scss")).length > 0;
-
-/*
- * cssModuleSupport default to undefined
- *
- * when cssModuleSupport not specified:
- * *only* *.css, cssModuleSupport sets to true
- * *only* *.styl, cssModuleSupport sets to false
- * *only* *.scss, cssModuleSupport sets to false
- */
-if (cssModuleSupport === undefined) {
-  cssModuleSupport = cssExists && !stylusExists && !scssExists;
-}
 
 module.exports = function() {
   rules.push(
@@ -116,7 +100,8 @@ module.exports = function() {
     module: { rules },
     plugins: [
       new ExtractTextPlugin({ filename: "[name].style.[hash].css" }),
-      process.env.NODE_ENV === "production" && new OptimizeCssAssetsPlugin(),
+      process.env.NODE_ENV === "production" &&
+        new OptimizeCssAssetsPlugin(archetype.webpack.optimizeCssOptions),
       /*
        preserve: default: false. Keep the original unsplit file as well.
        Sometimes this is desirable if you want to target a specific browser (IE)

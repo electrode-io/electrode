@@ -1,75 +1,84 @@
 "use strict";
 
-/* eslint-disable max-statements */
+const { executeSteps, executeRenderSteps } = require("./render-execute");
 
-const Promise = require("bluebird");
+const { STEP_HANDLER, STEP_STR_TOKEN, STEP_NO_HANDLER, STEP_LITERAL_HANDLER } = executeSteps;
 
 class Renderer {
   constructor(options) {
+    const insertTokenIds = Boolean(options.insertTokenIds);
     // the last handler wins if it contains a token
     const tokenHandlers = options.tokenHandlers.reverse();
 
-    const makeStep = tk => {
-      // token is a literal string, just add it to output
-      if (tk.str !== undefined) {
-        return xt => {
-          xt.context.output.add(tk.str);
-          this._next(xt);
+    const makeNullRemovedStep = (tk, cause) => {
+      return {
+        tk,
+        insertTokenId: false,
+        code: STEP_LITERAL_HANDLER,
+        data: `<!-- ${tk.id} removed due to its ${cause} -->\n`
+      };
+    };
+
+    const makeHandlerStep = tk => {
+      // look for first handler that has a token function for tk.id
+      const handler = tokenHandlers.find(h => h.tokens.hasOwnProperty(tk.id));
+
+      // no handler has function for token
+      if (!handler) {
+        const msg = `electrode-react-webapp: no handler found for token id ${tk.id}`;
+        console.error(msg); // eslint-disable-line
+        return { tk, code: STEP_NO_HANDLER };
+      }
+
+      const tkFunc = handler.tokens[tk.id];
+
+      if (tkFunc === null) {
+        if (insertTokenIds) return makeNullRemovedStep(tk, "handler set to null");
+
+        return null;
+      }
+
+      if (typeof tkFunc !== "function") {
+        // not a function, just add it to output
+        return {
+          tk,
+          code: STEP_LITERAL_HANDLER,
+          insertTokenId: insertTokenIds && !tk.props._noInsertId,
+          data: tkFunc
         };
       }
 
-      // token is not pointing to a module, so use it as an id to lookup from token handlers
-      if (!tk.isModule) {
-        // look for first handler that has a token function for tk.id
-        const handler = tokenHandlers.find(h => h.tokens.hasOwnProperty(tk.id));
+      tk.setHandler(tkFunc);
 
-        // no handler has function for token
-        if (!handler) {
-          const msg = `electrode-react-webapp: no handler found for token id ${tk.id}`;
-          console.log(msg); // eslint-disable-line
-          return xt => {
-            xt.context.output.add(`<!-- unhandled token ${tk.id} -->`);
-            this._next(xt);
-          };
-        }
-
-        const tkFunc = handler.tokens[tk.id];
-
-        // token function takes more than one argument, so pass in a callback for async
-        if (tkFunc.length > 1) {
-          return xt => tkFunc.call(tk, xt.context, () => this._next(xt));
-        }
-
-        // token function is sync or returns Promise, so pass its return value
-        // to context.handleTokenResult
-        return xt =>
-          xt.context.handleTokenResult(tk.id, tkFunc.call(tk, xt.context), () => this._next(xt));
-      }
-
-      // token is a module and its process function wants a next callback
-      if (tk.wantsNext === true) {
-        return xt => tk.process(xt.context, () => this._next(xt));
-      }
-
-      // token is a module and its process function is sync so pass its
-      // return value to context.handleTokenResult
-      return xt =>
-        xt.context.handleTokenResult(tk.id, tk.process(xt.context), () => this._next(xt));
+      return { tk, code: STEP_HANDLER, insertTokenId: insertTokenIds && !tk.props._noInsertId };
     };
 
-    this.renderSteps = options.htmlTokens.map(makeStep);
+    const makeStep = tk => {
+      // token is a literal string, just add it to output
+      if (tk.hasOwnProperty("str")) {
+        return { tk, code: STEP_STR_TOKEN };
+      }
+
+      // token is not pointing to a module, so lookup from token handlers
+      if (!tk.isModule) return makeHandlerStep(tk);
+
+      if (tk.custom === null) {
+        if (insertTokenIds) return makeNullRemovedStep(tk, "process return null");
+        return null;
+      }
+
+      return {
+        tk,
+        code: STEP_HANDLER,
+        insertTokenId: options.insertTokenIds && !tk.props._noInsertId
+      };
+    };
+
+    this.renderSteps = options.htmlTokens.map(makeStep).filter(x => x);
   }
 
   render(context) {
-    return new Promise((resolve, reject) =>
-      this._next({ context, _tokenIndex: 0, resolve, reject })
-    );
-  }
-
-  _next(xt) {
-    return xt._tokenIndex >= this.renderSteps.length
-      ? xt.resolve(xt.context.output.close())
-      : this.renderSteps[xt._tokenIndex++](xt);
+    return executeRenderSteps(this.renderSteps, context);
   }
 }
 

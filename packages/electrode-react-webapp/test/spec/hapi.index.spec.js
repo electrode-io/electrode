@@ -7,8 +7,9 @@ const Promise = require("bluebird");
 const assign = require("object-assign");
 const electrodeServer = require("electrode-server");
 const Path = require("path");
+const xstdout = require("xstdout");
 require("babel-register");
-
+const { expect } = require("chai");
 const webapp = require("../..");
 const ReactDOMServer = require("react-dom/server");
 const React = require("react");
@@ -17,10 +18,13 @@ const Helmet = require("react-helmet").Helmet;
 describe("hapi electrode-react-webapp", () => {
   let config;
   let configOptions;
-  let paths;
+  let mainRoutePathOptions;
 
   const getConfig = () => {
     return {
+      server: {
+        useDomains: false
+      },
       connections: {
         default: {
           port: 0
@@ -54,10 +58,19 @@ describe("hapi electrode-react-webapp", () => {
     };
   };
 
+  let stdoutIntercept;
+
   beforeEach(() => {
     config = getConfig();
     configOptions = config.plugins["react-webapp"].options;
-    paths = configOptions.paths["/{args*}"];
+    mainRoutePathOptions = configOptions.paths["/{args*}"];
+  });
+
+  afterEach(() => {
+    if (stdoutIntercept) {
+      stdoutIntercept.restore();
+      stdoutIntercept = undefined;
+    }
   });
 
   const stopServer = server =>
@@ -139,8 +152,62 @@ describe("hapi electrode-react-webapp", () => {
     });
   });
 
+  it("should successfully render to static markup with insert IDs", () => {
+    configOptions.insertTokenIds = true;
+    configOptions.templateProcessor = asyncTemplate => {
+      asyncTemplate.addTokens({
+        insert: "before",
+        id: "PAGE_TITLE",
+        tokens: [
+          { token: "#./test/fixtures/custom-null" },
+          { token: "#./test/fixtures/custom-1" },
+          { token: "#./test/fixtures/custom-call", props: { _call: "setup", _noInsertId: true } }
+        ]
+      });
+    };
+    return electrodeServer(config).then(server => {
+      const makeRequest = () => {
+        return server
+          .inject({
+            method: "GET",
+            url: "/"
+          })
+          .then(res => {
+            expect(res.statusCode).to.equal(200);
+            const result = res.result;
+            expect(result).to.contain("<title>Electrode App</title>");
+            expect(result).to.contain("<div>Hello Electrode</div>");
+            expect(result).to.contain("<script>console.log('Hello');</script>");
+            expect(result).to.not.contain("Unknown marker");
+            expect(result).contains("<!-- INITIALIZE -->");
+            expect(result).contains("<!-- $~INITIALIZE~$ -->");
+            expect(result).contains("<!-- PAGE_TITLE -->");
+            expect(result).contains("<!-- $~PAGE_TITLE~$ -->");
+            expect(result).contains("<!-- #./test/fixtures/custom-1 -->");
+            expect(result).contains("<!-- $~#./test/fixtures/custom-1~$ -->");
+            expect(result).contains("_call process from custom-call token fixture");
+            expect(result).not.contains("<!-- #./test/fixtures/custom-call -->");
+            expect(result).contains(
+              "<!-- HEAD_INITIALIZE removed due to its handler set to null -->"
+            );
+            expect(result).contains(
+              "<!-- #./test/fixtures/custom-null removed due to its process return null -->"
+            );
+          });
+      };
+
+      return makeRequest()
+        .then(() => makeRequest())
+        .then(() => stopServer(server))
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
   it("should successfully render to static markup with content as a function", () => {
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: () =>
         Promise.resolve({
           status: 200,
@@ -186,7 +253,7 @@ describe("hapi electrode-react-webapp", () => {
   });
 
   it("should return error", () => {
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: () =>
         Promise.reject({
           status: 500,
@@ -551,11 +618,11 @@ describe("hapi electrode-react-webapp", () => {
     });
   });
 
-  it("should use top level htmlFile", () => {
+  it("should use top level htmlFile and return response headers", () => {
     configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
     configOptions.stats = "test/data/stats-test-one-bundle.json";
     configOptions.htmlFile = "test/data/index-1.html";
-    Object.assign(paths, {
+    Object.assign(mainRoutePathOptions, {
       tokenHandler: "./test/fixtures/token-handler"
     });
     return electrodeServer(config).then(server => {
@@ -565,7 +632,6 @@ describe("hapi electrode-react-webapp", () => {
           url: "/"
         })
         .then(res => {
-          expect(res.statusCode).to.equal(200);
           expect(res.result).includes(`<title>user-handler-title</title>`);
           expect(res.result).includes(`</script><div>user-promise-token</div><script`);
           expect(res.result).includes(
@@ -574,6 +640,8 @@ describe("hapi electrode-react-webapp", () => {
           expect(res.result).includes(
             `</script><div>from custom-1</div><div>user-token-1</div><div>user-token-2</div><noscript>` // eslint-disable-line
           );
+          expect(res.headers["x-foo-bar"]).to.equal("hello-world");
+          expect(res.statusCode).to.equal(200);
           stopServer(server);
         })
         .catch(err => {
@@ -584,7 +652,7 @@ describe("hapi electrode-react-webapp", () => {
   });
 
   it("should handle if content function throws", () => {
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: () => {
         const err = new Error("test content throw");
         err.html = "test content throw html with status";
@@ -596,7 +664,7 @@ describe("hapi electrode-react-webapp", () => {
     configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
     configOptions.stats = "test/data/stats-test-one-bundle.json";
     configOptions.htmlFile = "test/data/index-1.html";
-    Object.assign(paths, {
+    Object.assign(mainRoutePathOptions, {
       tokenHandler: "./test/fixtures/token-handler"
     });
     return electrodeServer(config).then(server => {
@@ -607,7 +675,7 @@ describe("hapi electrode-react-webapp", () => {
         })
         .then(res => {
           expect(res.statusCode).to.equal(401);
-          expect(res.result).to.equal("test content throw html with status");
+          expect(res.result).contains("test content throw html with status");
           stopServer(server);
         })
         .catch(err => {
@@ -618,17 +686,18 @@ describe("hapi electrode-react-webapp", () => {
   });
 
   it("should handle if content function throws generic error", () => {
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: () => {
         const err = new Error("test content throw");
         return Promise.reject(err);
       }
     });
 
+    configOptions.replyErrorStack = false;
     configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
     configOptions.stats = "test/data/stats-test-one-bundle.json";
     configOptions.htmlFile = "test/data/index-1.html";
-    Object.assign(paths, {
+    Object.assign(mainRoutePathOptions, {
       tokenHandler: "./test/fixtures/token-handler"
     });
     return electrodeServer(config).then(server => {
@@ -639,7 +708,67 @@ describe("hapi electrode-react-webapp", () => {
         })
         .then(res => {
           expect(res.statusCode).to.equal(500);
-          expect(res.result).to.equal("test content throw");
+          expect(res.result).contains("test content throw");
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
+  it("should reply with error stack if option is not false", () => {
+    assign(mainRoutePathOptions, {
+      content: () => {
+        const err = new Error("test content throw");
+        return Promise.reject(err);
+      }
+    });
+
+    // configOptions.replyErrorStack = false;
+    configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
+    configOptions.stats = "test/data/stats-test-one-bundle.json";
+    configOptions.htmlFile = "test/data/index-1.html";
+    Object.assign(mainRoutePathOptions, {
+      tokenHandler: "./test/fixtures/token-handler"
+    });
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .then(res => {
+          expect(res.statusCode).to.equal(500);
+          expect(res.result).contains("/test/spec/hapi.index.spec.js");
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
+  it("should handle non-render errors", () => {
+    assign(mainRoutePathOptions, {
+      content: () => ""
+    });
+
+    Object.assign(mainRoutePathOptions, {
+      tokenHandler: "./test/fixtures/non-render-error"
+    });
+
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .then(res => {
+          expect(res.statusCode).to.equal(500);
+          expect(res.result).contains("error from test/fixtures/non-render-error");
           stopServer(server);
         })
         .catch(err => {
@@ -651,7 +780,7 @@ describe("hapi electrode-react-webapp", () => {
 
   it("should pass options with mode as datass from request to content function", () => {
     let ssrPrefetchOnly;
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: request => {
         ssrPrefetchOnly = request.app.ssrPrefetchOnly;
         const mode = ssrPrefetchOnly && "datass";
@@ -666,7 +795,7 @@ describe("hapi electrode-react-webapp", () => {
     configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
     configOptions.stats = "test/data/stats-test-one-bundle.json";
     configOptions.htmlFile = "test/data/index-1.html";
-    Object.assign(paths, {
+    Object.assign(mainRoutePathOptions, {
       tokenHandler: "./test/fixtures/token-handler"
     });
     return electrodeServer(config).then(server => {
@@ -700,7 +829,7 @@ describe("hapi electrode-react-webapp", () => {
   it("should pass datass mode from routeOptions to content function", () => {
     configOptions.serverSideRendering = "datass";
     let ssrPrefetchOnly;
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: request => {
         ssrPrefetchOnly = request.app.ssrPrefetchOnly;
         const mode = ssrPrefetchOnly && "datass";
@@ -715,7 +844,7 @@ describe("hapi electrode-react-webapp", () => {
     configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
     configOptions.stats = "test/data/stats-test-one-bundle.json";
     configOptions.htmlFile = "test/data/index-1.html";
-    Object.assign(paths, {
+    Object.assign(mainRoutePathOptions, {
       tokenHandler: "./test/fixtures/token-handler"
     });
     return electrodeServer(config).then(server => {
@@ -748,7 +877,7 @@ describe("hapi electrode-react-webapp", () => {
 
   it("should handle mode as noss from request", () => {
     let contentCalled = false;
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: () => {
         contentCalled = true;
       }
@@ -757,7 +886,7 @@ describe("hapi electrode-react-webapp", () => {
     configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
     configOptions.stats = "test/data/stats-test-one-bundle.json";
     configOptions.htmlFile = "test/data/index-1.html";
-    Object.assign(paths, {
+    Object.assign(mainRoutePathOptions, {
       tokenHandler: "./test/fixtures/token-handler"
     });
     return electrodeServer(config).then(server => {
@@ -791,7 +920,7 @@ describe("hapi electrode-react-webapp", () => {
     configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
     configOptions.stats = "test/data/stats-test-one-bundle.json";
     configOptions.htmlFile = "test/data/index-1.html";
-    paths.htmlFile = Path.resolve("test/data/index-2.html");
+    mainRoutePathOptions.htmlFile = Path.resolve("test/data/index-2.html");
 
     return electrodeServer(config).then(server => {
       return server
@@ -962,7 +1091,7 @@ describe("hapi electrode-react-webapp", () => {
   });
 
   it("should handle 302 redirect", () => {
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: {
         status: 302,
         path: "/redirect2"
@@ -987,8 +1116,82 @@ describe("hapi electrode-react-webapp", () => {
     });
   });
 
+  it(`should allow content to be ""`, () => {
+    assign(mainRoutePathOptions, {
+      content: ""
+    });
+
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .then(resp => {
+          expect(resp.result).contains(`<div class="js-content"></div>`);
+        })
+        .finally(() => {
+          stopServer(server);
+        });
+    });
+  });
+
+  it("should fail if content is null", () => {
+    assign(mainRoutePathOptions, {
+      content: null
+    });
+
+    let error;
+
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .catch(err => {
+          error = err;
+        })
+        .then(() => {
+          stopServer(server);
+          expect(error).to.exist;
+          expect(error.code).to.equal("ERR_ASSERTION");
+          expect(error.message).to.equal(
+            `You must define content for the webapp plugin path /{args*}`
+          );
+        });
+    });
+  });
+
+  it("should handle unexpected errors", () => {
+    const content = {
+      html: "<div>Hello Electrode</div>",
+      prefetch: "console.log('Hello');"
+    };
+    Object.defineProperty(content, "status", {
+      get: () => {
+        throw new Error("unexpected error");
+      }
+    });
+
+    assign(mainRoutePathOptions, { content: () => Promise.resolve(content) });
+
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .then(res => {
+          stopServer(server);
+          expect(res.statusCode).to.equal(500);
+          expect(res.result).contains("unexpected error");
+        });
+    });
+  });
+
   it("should handle 200 status @noss", () => {
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: {
         status: 200,
         message: "status 200 noss"
@@ -1014,7 +1217,7 @@ describe("hapi electrode-react-webapp", () => {
   });
 
   it("should handle 200 status @noss @no-html", () => {
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: {
         status: 200,
         message: "status 200 noss"
@@ -1039,8 +1242,34 @@ describe("hapi electrode-react-webapp", () => {
     });
   });
 
-  it("should return 200 and html with render false", () => {
-    assign(paths, {
+  it("should handle 200 status @noss @has-html", () => {
+    assign(mainRoutePathOptions, {
+      content: {
+        status: 200,
+        html: "test has html"
+      }
+    });
+
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/?__mode=noss"
+        })
+        .then(res => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.result).contains(`<!DOCTYPE html>\n\n<html lang="en">`);
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
+  it("should return 200 and direct html with render false", () => {
+    assign(mainRoutePathOptions, {
       content: {
         status: 200,
         html: "<div>html</div>",
@@ -1066,8 +1295,8 @@ describe("hapi electrode-react-webapp", () => {
     });
   });
 
-  it("should non 200 status", () => {
-    assign(paths, {
+  it("should handle content non 200 status noss mode", () => {
+    assign(mainRoutePathOptions, {
       content: {
         status: 404,
         message: "status 404 noss"
@@ -1093,7 +1322,7 @@ describe("hapi electrode-react-webapp", () => {
   });
 
   it("should return 404 and html, if custom html is provided", () => {
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: {
         status: 404,
         html: "html content"
@@ -1119,7 +1348,7 @@ describe("hapi electrode-react-webapp", () => {
   });
 
   it("should not fail on not handled status codes", () => {
-    assign(paths, {
+    assign(mainRoutePathOptions, {
       content: {
         status: 501,
         message: "not implemented"
@@ -1192,7 +1421,15 @@ describe("hapi electrode-react-webapp", () => {
     configOptions.unbundledJS = {
       enterHead: ["test-1 script"]
     };
-    assign(paths, {
+    configOptions.templateProcessor = asyncTemplate => {
+      const x = asyncTemplate.addTokens({
+        insert: "after",
+        id: "WEBAPP_HEADER_BUNDLES",
+        tokens: [{ token: "REACT_HELMET_SCRIPTS" }]
+      });
+      expect(x).to.be.above(0);
+    };
+    assign(mainRoutePathOptions, {
       tokenHandler: "./test/fixtures/react-helmet-handler",
       content: () => {
         return {
@@ -1224,7 +1461,15 @@ describe("hapi electrode-react-webapp", () => {
         };
       }
     });
+    stdoutIntercept = xstdout.intercept(true);
     return electrodeServer(config).then(server => {
+      stdoutIntercept.restore();
+      // since there are two paths and the react-helment-handler is only register for the
+      // main path route, expect the other route's registration to cause a error message
+      // to the stderr.
+      expect(stdoutIntercept.stderr[0]).contains(
+        "electrode-react-webapp: no handler found for token id REACT_HELMET_SCRIPTS"
+      );
       return server
         .inject({
           method: "GET",
@@ -1335,7 +1580,7 @@ describe("hapi electrode-react-webapp", () => {
     });
 
     it("should refresh content module", () => {
-      paths.content = {
+      mainRoutePathOptions.content = {
         module: "./test/data/test-content"
       };
 

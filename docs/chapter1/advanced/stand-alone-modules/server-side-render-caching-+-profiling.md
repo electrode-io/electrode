@@ -184,21 +184,21 @@ const cacheConfig = {
 
 # API
 
-### [`enableProfiling(flag)`](http://www.electrode.io/docs/server_side_render_cache.html#enableprofilingflag)
+### [`enableProfiling(flag)`](https://docs.electrode.io/other/stand-alone-modules/server-side-render-caching-+-profiling#enableprofiling-flag)
 
 Enable profiling according to flag
 
 * `undefined`or `true`- enable profiling
 * `false`- disable profiling
 
-### [`enableCaching(flag)`](http://www.electrode.io/docs/server_side_render_cache.html#enablecachingflag)
+### [`enableCaching(flag)`](https://docs.electrode.io/other/stand-alone-modules/server-side-render-caching-+-profiling#enablecaching-flag)
 
 Enable cache according to flag
 
 * `undefined` or `true`- enable caching
 * `false`- disable caching
 
-### [`enableCachingDebug(flag)`](http://www.electrode.io/docs/server_side_render_cache.html#enablecachingdebugflag)
+### [`enableCachingDebug(flag)`](https://docs.electrode.io/other/stand-alone-modules/server-side-render-caching-+-profiling#enablecachingdebug-flag)
 
 Enable cache debugging according to flag.
 
@@ -207,11 +207,11 @@ Enable cache debugging according to flag.
 * `undefined` or `true`- enable cache debugging
 * `false`- disable cache debugging
 
-### [`setCachingConfig(config)`](http://www.electrode.io/docs/server_side_render_cache.html#setcachingconfigconfig)
+### [`setCachingConfig(config)`](https://docs.electrode.io/other/stand-alone-modules/server-side-render-caching-+-profiling#setcachingconfig-config)
 
 Set the caching configuration to`config`.
 
-### [`stripUrlProtocol(flag)`](http://www.electrode.io/docs/server_side_render_cache.html#stripurlprotocolflag)
+### [`stripUrlProtocol(flag)`](https://docs.electrode.io/other/stand-alone-modules/server-side-render-caching-+-profiling#stripurlprotocol-flag)
 
 Remove`http:`or`https:`from prop values that are URLs according to flag.
 
@@ -220,7 +220,7 @@ Remove`http:`or`https:`from prop values that are URLs according to flag.
 * `undefined`or `true`- strip URL protocol
 * `false`- don't strip
 
-### [`shouldHashKeys(flag, [hashFn])`](http://www.electrode.io/docs/server_side_render_cache.html#shouldhashkeysflaghashfn)
+### [`shouldHashKeys(flag, [hashFn])`](https://docs.electrode.io/other/stand-alone-modules/server-side-render-caching-+-profiling#shouldhashkeys-flag-hashfn)
 
 Set whether the `template` strategy should hash the cache key and use that instead.
 
@@ -235,18 +235,18 @@ Set whether the `template` strategy should hash the cache key and use that inste
 
 If no `hashFn` is provided, then [farmhash](https://github.com/google/farmhash) is used if it's available, otherwise hashing is turned off.
 
-### [`clearProfileData()`](http://www.electrode.io/docs/server_side_render_cache.html#clearprofiledata)
+### [`clearProfileData()`](https://docs.electrode.io/other/stand-alone-modules/server-side-render-caching-+-profiling#clearprofiledata)
 
 Clear profiling data
 
-### [`clearCache()`](http://www.electrode.io/docs/server_side_render_cache.html#clearcache)
+### [`clearCache()`](https://docs.electrode.io/other/stand-alone-modules/server-side-render-caching-+-profiling#clearcache)
 
 Clear caching data
 
-### [`cacheEntries()`](http://www.electrode.io/docs/server_side_render_cache.html#cacheentries)
+### [`cacheEntries()`](https://docs.electrode.io/other/stand-alone-modules/server-side-render-caching-+-profiling#cacheentries)
 
 Get total number of cache entries
 
-### [`cacheHitReport()`](http://www.electrode.io/docs/server_side_render_cache.html#cachehitreport)
+### [`cacheHitReport()`](https://docs.electrode.io/other/stand-alone-modules/server-side-render-caching-+-profiling#cachehitreport)
 
 Print out cache entries and number of hits each one has.

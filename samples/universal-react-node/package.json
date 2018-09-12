@@ -54,5 +54,15 @@
     "redux-devtools": "^3.3.1",
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-devtools-log-monitor": "^1.0.11"
+  },
+  "fyn": {
+    "dependencies": {
+      "electrode-archetype-react-app": "../../packages/electrode-archetype-react-app",
+      "electrode-react-webapp": "../../packages/electrode-react-webapp",
+      "electrode-redux-router-engine": "../../packages/electrode-redux-router-engine"
+    },
+    "devDependencies": {
+      "electrode-archetype-react-app-dev": "../../packages/electrode-archetype-react-app-dev"
+    }
   }
 }

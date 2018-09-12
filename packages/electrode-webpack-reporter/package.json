@@ -4,7 +4,7 @@
   "description": "A HTML based reporter for webpack dev server",
   "main": "lib/webpack-reporter.js",
   "scripts": {
-    "test": "clap check",
+    "test": "echo debugging ci start; clap check; echo debugging ci end",
     "prepare": "clap build"
   },
   "repository": {

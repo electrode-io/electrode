@@ -66,7 +66,7 @@ Other configuration properties are optional and follow the [same usage as jsonwe
 
 ### Electrode {#stateless-validation-electrode}
 
-All server configurations in [Electrode apps](/overview/what-is-electrode.md) are handled by the versatile [confippet](/chapter1/advanced/stand-alone-modules/confippet.md) module. The Stateless CSRF JWT Validation module can be easily configured by adding the following property to `config/default.json`:
+All server configurations in [Electrode apps](../../../what-is-electrode.md) are handled by the versatile [confippet](./confippet.md) module. The Stateless CSRF JWT Validation module can be easily configured by adding the following property to `config/default.json`:
 
 ```
 {

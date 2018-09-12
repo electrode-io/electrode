@@ -9,7 +9,9 @@ class RenderContext {
     this.output = new RenderOutput(this);
     this.asyncTemplate = asyncTemplate;
     this._handlersMap = asyncTemplate.handlersMap;
+    this.handleError = err => !this.stop && this.voidStop(err);
     this.transform = x => x;
+    this._stop = 0;
   }
 
   // return a token handler by name
@@ -34,12 +36,46 @@ class RenderContext {
     this.transform = result => transform(result, this);
   }
 
-  // before render starts, call this with any predetermined result
-  // to use as the output rather than doing actual render for it
-  // Basically no rendering will occur.
-  skipRender(result) {
-    this.skip = true;
-    this.result = result;
+  get stop() {
+    return this._stop;
+  }
+
+  //
+  // set this any time to fully stop and close rendering
+  // stop modes:
+  // 1 - only process string tokens
+  // 2 - fully stop immediately, no more token processing
+  // 3 - completely void any render output and stop immediately,
+  //     replace output with result.  This only works if output
+  //     is buffered and not streaming out immediately.
+  //
+  set stop(f) {
+    this._stop = f;
+  }
+
+  fullStop() {
+    this._stop = RenderContext.FULL_STOP;
+  }
+
+  get isFullStop() {
+    return this._stop === RenderContext.FULL_STOP;
+  }
+
+  voidStop(result) {
+    this._stop = RenderContext.VOID_STOP;
+    this.voidResult = result;
+  }
+
+  get isVoidStop() {
+    return this._stop === RenderContext.VOID_STOP;
+  }
+
+  softStop() {
+    this._stop = RenderContext.SOFT_STOP;
+  }
+
+  get isSoftStop() {
+    return this._stop === RenderContext.SOFT_STOP;
   }
 
   // helper to take the result of a token handler and process the returned result
@@ -51,10 +87,7 @@ class RenderContext {
   handleTokenResult(id, res, cb) {
     // it's a promise, wait for it before invoking callback
     if (res && res.then) {
-      return res.then(cb).catch(err => {
-        console.log(`token process for ${id} failed`, err); // eslint-disable-line
-        cb();
-      });
+      return res.then(r => cb(null, r)).catch(cb);
     } else {
       // it's a string, add to output
       if (typeof res === "string") {
@@ -66,5 +99,9 @@ class RenderContext {
     }
   }
 }
+
+RenderContext.VOID_STOP = 3;
+RenderContext.FULL_STOP = 2;
+RenderContext.SOFT_STOP = 1;
 
 module.exports = RenderContext;

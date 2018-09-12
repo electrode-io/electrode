@@ -4,7 +4,7 @@
   "description": "Electrode Platform for NodeJS/React Universal Application",
   "homepage": "http://www.electrode.io",
   "scripts": {
-    "test": "clap test",
+    "test": "fynpo && lerna run test --ignore=electrode-webpack-reporter",
     "test-generator": "clap test-generator",
     "test-boilerplate": "clap test-boilerplate",
     "bootstrap": "fynpo",
@@ -18,13 +18,13 @@
   },
   "devDependencies": {
     "bluebird": "^3.5.0",
-    "fynpo": "^0.1.0",
-    "lerna": "^2.0.0",
+    "fynpo": "^0.1.12",
+    "lerna": "^3.3.0",
     "lodash": "^4.17.10",
     "semver": "^5.3.0",
     "xclap": "^0.2.18",
     "xsh": "^0.4.0",
-    "yeoman-test": "^1.6.0"
+    "yeoman-test": "1.8.0"
   },
   "bugs": {
     "url": "https://github.com/electrode-io/electrode/issues"

@@ -8,10 +8,11 @@
 
 ### Prerequisites
 
-Make sure the following is installed:  
-* NodeJS 4.x or later  
-* npm 3.x or later  
-* [xclap-cli]
+Make sure the following is installed:
+
+- NodeJS 4.x or later
+- npm 3.x or later
+- [xclap-cli]
 
 ```bash
 $ node -v
@@ -24,20 +25,24 @@ $ npm install -g xclap-cli
 ### Check it out
 
 To try out this existing sample app:
-1. Clone the Git repository.
+
+1.  Clone the Git repository.
+
 ```bash
 $ git clone https://github.com/electrode-io/electrode.git
 $ cd electrode/samples/universal-material-ui
 $ npm install
 $ clap dev
 ```
-2. Use a browser to navigate to `http://localhost:3000` and view the sample app with material-ui components.
+
+2.  Use a browser to navigate to `http://localhost:3000` and view the sample app with material-ui components.
 
 ### To Generate the Sample Electrode App
 
 The first part of the process is to generate an Electrode Universal App using the [Yeoman](http://yeoman.io/) generator. Follow the steps below:
 
 1.  Generate the Electrode Universal App:
+
 ```bash
 $ npm install -g yo generator-electrode
 $ mkdir react-sample-material-ui
@@ -79,13 +84,11 @@ First, add the resolution for an [issue in material-ui](https://github.com/calle
 
 Add the following code to `client/app.jsx`
 
-
 ```js
 import injectTapEventPlugin from "react-tap-event-plugin";
 
 window.webappStart = () => {
   injectTapEventPlugin(); // https://github.com/callemall/material-ui/issues/4670
-
 };
 ```
 
@@ -110,14 +113,14 @@ Next, add the [BottomNavigation example](http://www.material-ui.com/#/components
 
 #### Card example
 
-In this section we add the[Card example](http://www.material-ui.com/#/components/card).
+In this section we add the [Card example](http://www.material-ui.com/#/components/card).
 
 1.  Copy the source from the Card example into `client/components/CardExampleWithAvatar.jsx`
-2.  Import the component in `client/components/home.jsx` and add it to `render` after the `AppBarExampleIconMenu`  component.
+2.  Import the component in `client/components/home.jsx` and add it to `render` after the `AppBarExampleIconMenu` component.
 3.  Watch [webpack-dev-server](https://webpack.github.io/docs/webpack-dev-server.html) update your bundle and refresh your browser to see the changes.
 4.  You should see Card show up, but with broken images.
 
-> You can replace the image URLs with full URLs by adding `http://www.material-ui.com/`  to them to fix the broken images, but we will explore isomorphic images next.
+> You can replace the image URLs with full URLs by adding `http://www.material-ui.com/` to them to fix the broken images, but we will explore isomorphic images next.
 
 #### Isomorphic Images
 
@@ -126,9 +129,9 @@ Electrode core comes with isomorphic images support built in using[isomorphic-lo
 Create a directory called
 
 1.  `client/images`and copy the following images there:
-    -   `http://www.material-ui.com/images/nature-600-337.jpg`
-    -   `http://www.material-ui.com/images/jsa-128.jpg`(Or your own favorite 128x128 Avatar image)
-        -   In my sample, I use `jchip-128.jpg`as my avatar.
+    - `http://www.material-ui.com/images/nature-600-337.jpg`
+    - `http://www.material-ui.com/images/jsa-128.jpg`(Or your own favorite 128x128 Avatar image)
+      - In my sample, I use `jchip-128.jpg`as my avatar.
 2.  In`client/components/CardExampleWithAvatar.jsx`, import the images:
 
         import natureJpg from "../images/nature-600-337.jpg";

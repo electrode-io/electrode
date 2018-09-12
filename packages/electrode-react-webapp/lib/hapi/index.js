@@ -1,56 +1,82 @@
 "use strict";
 
-/* eslint-disable no-magic-numbers, max-params */
+/* eslint-disable no-magic-numbers, max-params, max-statements */
 
 const _ = require("lodash");
 const assert = require("assert");
 const ReactWebapp = require("../react-webapp");
 const HttpStatus = require("../http-status");
+const { responseForError, responseForBadStatus } = require("../utils");
 
-const DefaultHandleRoute = (request, reply, handler, content) => {
+const DefaultHandleRoute = (request, reply, handler, content, routeOptions) => {
   return handler({
     content,
     mode: request.query.__mode || "",
     template: request.indexPageTemplate,
     request
   })
-    .then(data => {
-      const status = data.status;
+    .then(context => {
+      const data = context.result;
+
+      if (data instanceof Error) {
+        throw data;
+      }
+
+      let respond;
+      let status = data.status;
 
       if (status === undefined) {
-        reply(data);
+        status = 200;
+        respond = reply(data);
       } else if (HttpStatus.redirect[status]) {
-        reply.redirect(data.path);
-      } else if (HttpStatus.displayHtml[status]) {
-        reply(data.html !== undefined ? data.html : data).code(status);
-      } else if (status >= 200 && status < 300) {
-        reply(data.html !== undefined ? data.html : data);
+        respond = reply.redirect(data.path);
+        return respond;
+      } else if (HttpStatus.displayHtml[status] || (status >= 200 && status < 300)) {
+        respond = reply(data.html !== undefined ? data.html : data);
       } else {
-        reply(data).code(status);
+        const output = routeOptions.responseForBadStatus(request, routeOptions, data);
+        status = output.status;
+        respond = reply(output.html);
       }
+
+      const response = context.user && context.user.response;
+
+      if (response) {
+        Object.assign(respond.headers, response.headers);
+      }
+
+      return respond.code(status);
     })
     .catch(err => {
-      reply(err.html || err.message).code(err.status);
+      const output = routeOptions.responseForError(request, routeOptions, err);
+
+      reply(output.html).code(output.status);
     });
 };
 
 const registerRoutes = (server, options) => {
   const registerOptions = ReactWebapp.setupOptions(options);
+
   _.each(registerOptions.paths, (pathData, path) => {
     const resolveContent = () => {
       if (registerOptions.serverSideRendering !== false) {
-        assert(
-          pathData.content !== undefined,
-          `You must define content for the webapp plugin path ${path}`
-        );
-        return ReactWebapp.resolveContent(pathData.content);
+        const x = ReactWebapp.resolveContent(pathData);
+        assert(x, `You must define content for the webapp plugin path ${path}`);
+        return x;
       }
-      return { content: { status: 200, html: "" } };
+
+      return {
+        content: {
+          status: 200,
+          html: "<!-- SSR disabled by options.serverSideRendring -->"
+        }
+      };
     };
 
     const routeOptions = ReactWebapp.setupPathOptions(registerOptions, path);
     const routeHandler = ReactWebapp.makeRouteHandler(routeOptions);
     const handleRoute = options.handleRoute || DefaultHandleRoute;
+    _.defaults(routeOptions, { responseForError, responseForBadStatus });
     let content;
 
     server.route({
@@ -74,7 +100,7 @@ const registerRoutes = (server, options) => {
           content = resolveContent();
         }
 
-        handleRoute(req, reply, routeHandler, content.content);
+        handleRoute(req, reply, routeHandler, content.content, routeOptions);
       }
     });
   });

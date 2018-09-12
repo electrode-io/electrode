@@ -1,56 +1,62 @@
-'use strict';
-var _ = require('lodash');
-var Generator = require('yeoman-generator');
+"use strict";
+var _ = require("lodash");
+var Generator = require("yeoman-generator");
 
 module.exports = class extends Generator {
   constructor(args, options) {
     super(args, options);
 
-    this.option('name', {
+    this.option("name", {
       type: String,
       required: true,
-      desc: 'Project name'
+      desc: "Project name"
     });
 
-    this.option('pwa', {
-      type: String,
+    this.option("pwa", {
+      type: Boolean,
       required: true,
-      desc: 'Progressive Web App'
+      desc: "Progressive Web App"
     });
 
-    this.option('serverType', {
+    this.option("serverType", {
       type: String,
       required: true,
-      desc: 'Server Type can be hapijs or express'
+      desc: "Server Type can be HapiJS or express"
     });
-    this.option('autoSsr', {
-      type: String,
+
+    this.option("autoSsr", {
+      type: Boolean,
       required: true,
-      desc: 'Automatically disable server side rendering'
+      desc: "Automatically disable server side rendering"
+    });
+
+    this.option("_extended", {
+      type: Boolean,
+      required: true,
+      default: false
     });
   }
 
   writing() {
-    let routeMatch = (this.options.serverType === 'HapiJS') ? "/{args*}" : "*";
-    //do not overwrite if file already exists
-    if (!this.fs.exists(this.destinationPath('config/default.js'))) {
-      this.fs.copyTpl(
-        this.templatePath('default.js'),
-        this.destinationPath('config/default.js'),
-        {
-          projectName: this.options.name,
-          routeValue: routeMatch,
-          pwa: this.options.pwa,
-          serverType: this.options.serverType,
-          isAutoSsr: this.options.autoSsr
-        }
-      );
+    const extended = this.options._extended;
+    // if another top level generator extended parent, then don't copy config/default.js
+    // do not overwrite if file already exists
+    if (!extended && !this.fs.exists(this.destinationPath("config/default.js"))) {
+      const routeMatch = this.options.serverType === "HapiJS" ? "/{args*}" : "*";
+      this.fs.copyTpl(this.templatePath("default.js"), this.destinationPath("config/default.js"), {
+        projectName: this.options.name,
+        routeValue: routeMatch,
+        pwa: this.options.pwa,
+        serverType: this.options.serverType,
+        isAutoSSR: this.options.autoSsr
+      });
     }
 
-    if (this.options.pwa) {
+    // copying pwa config/sw-config even if parent has been extended
+    if (this.options.pwa && !this.fs.exists(this.destinationPath("config/sw-config.js"))) {
       this.fs.copyTpl(
-        this.templatePath('sw-config.js'),
-        this.destinationPath('config/sw-config.js'),
+        this.templatePath("sw-config.js"),
+        this.destinationPath("config/sw-config.js"),
         { projectName: this.options.name }
       );
     }

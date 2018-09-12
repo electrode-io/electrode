@@ -225,8 +225,12 @@ const routes = [
     ]
   },
   {
-    path: "/post-only",
-    method: "post"
+    path: "/not-post",
+  },
+  {
+    path: "/head-only",
+    methods: "head",
+    component: Test
   },
   {
     path: "/invalid-component",

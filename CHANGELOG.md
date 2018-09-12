@@ -1,3 +1,327 @@
+# 9/11/2018
+
+## Packages
+
+-   electrode-react-webapp@3.0.4 `(3.0.3 => 3.0.4)`
+
+## Commits
+
+-   `packages/electrode-react-webapp`
+
+    -   really fix content check [commit](http://github.com/electrode-io/electrode/commit/d9b6d6ee09b55e86860ce69067fe3c0a1fe4bade)
+
+# 9/10/2018
+
+- some minor fixes and updates
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-react-app@5.4.6 `(5.4.5 => 5.4.6)`
+-   electrode-archetype-react-app-dev@5.4.6 `(5.4.5 => 5.4.6)`
+-   electrode-react-webapp@3.0.3 `(3.0.2 => 3.0.3)`
+-   electrode-ui-config@1.1.2 `(1.1.1 => 1.1.2)`
+
+### Lerna Updated
+
+-   electrode-ui-logger@1.1.3 `(1.1.2 => 1.1.3)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   Typo ([#927](https://github.com/electrode-io/electrode/pull/927)) [commit](http://github.com/electrode-io/electrode/commit/59913b48de4483689fa5061c7a227b589e85373a)
+    -   Use the first entry for bundle analzying instead of the hardcoded `main` one ([#926](https://github.com/electrode-io/electrode/pull/926)) [commit](http://github.com/electrode-io/electrode/commit/edda3a8b4e981c032f4e95547fb4b784754208f5)
+    -   prettier format JS [commit](http://github.com/electrode-io/electrode/commit/49571a51e721b457e558b5ad59b154c5ad1a9a0d)
+    -   update dependencies [commit](http://github.com/electrode-io/electrode/commit/7764f502cb6aca6430ec4affc8c8cca6a29fcd93)
+    -   undo careless mistakes [commit](http://github.com/electrode-io/electrode/commit/5ed3209e75ac2674dd5338da7bc88755884ed796)
+    -   update xenv-config to 1.3.0 with json type support ([#924](https://github.com/electrode-io/electrode/pull/924)) [commit](http://github.com/electrode-io/electrode/commit/03399ddceb103b7b9c0b60bc057c78c258b84e45)
+    -   add unit tests for optional sass ([#925](https://github.com/electrode-io/electrode/pull/925)) [commit](http://github.com/electrode-io/electrode/commit/b88efd5558ed851d9937faae7d7ffba27634498d)
+    -   add unit tests for extract-styles.js ([#921](https://github.com/electrode-io/electrode/pull/921)) [commit](http://github.com/electrode-io/electrode/commit/808eed6bc0feac40aebcbfcbea474f7fd9e03f59)
+
+-   `packages/electrode-react-webapp`
+
+    -   fix content check ([#928](https://github.com/electrode-io/electrode/pull/928)) [commit](http://github.com/electrode-io/electrode/commit/f3f60b4ebe6a20483847ccb07e9532aac6b2110a)
+
+-   `packages/electrode-ui-config`
+
+    -   [chore] rename deprecated npm script [commit](http://github.com/electrode-io/electrode/commit/4a12db9db775dd5075e1e12d53ad434c3dcc984e)
+
+-   `MISC`
+
+    -   [chore] build use / for local dep path [commit](http://github.com/electrode-io/electrode/commit/4b3acc21728a4c8c85b382e038a80a6096e50bd0)
+    -   [chore] fynpo@0.1.12 [commit](http://github.com/electrode-io/electrode/commit/44d8749bda6860c8918605ff9798a3369fdb8492)
+
+# 8/30/2018
+
+electrode-archetype-react-app:
+- make node-sass optional so if you don't use it you can skip the dependencies
+- update optimize css to not touch zindex by default
+
+electrode-archetype-react-component:
+- make node-sass optional so if you don't use it you can skip the dependencies
+
+generator-electrode:
+- allow extended generator to get pwa config
+- only default create new dir to true if cwd is not empty
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-opt-sass@1.0.1 `(1.0.0 => 1.0.1)`
+-   electrode-archetype-react-app@5.4.5 `(5.4.4 => 5.4.5)`
+-   electrode-archetype-react-app-dev@5.4.5 `(5.4.4 => 5.4.5)`
+-   electrode-archetype-react-component@5.3.4 `(5.3.3 => 5.3.4)`
+-   electrode-archetype-react-component-dev@5.3.4 `(5.3.3 => 5.3.4)`
+-   generator-electrode@4.2.4 `(4.2.3 => 4.2.4)`
+
+### Lerna Updated
+
+-   electrode-ignite@2.1.8 `(2.1.7 => 2.1.8)`
+
+## Commits
+
+-   `packages/electrode-archetype-opt-sass`
+
+    -   make node-sass optional ([#920](https://github.com/electrode-io/electrode/pull/920)) [commit](http://github.com/electrode-io/electrode/commit/4e8f6a291d38715cc97c6be37b321b99b4aa5aca)
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   update optimize css to not touch zindex by default ([#922](https://github.com/electrode-io/electrode/pull/922)) [commit](http://github.com/electrode-io/electrode/commit/5feff5d205982c0761b8ad4ba84212b98b9465a6)
+    -   make node-sass optional ([#920](https://github.com/electrode-io/electrode/pull/920)) [commit](http://github.com/electrode-io/electrode/commit/4e8f6a291d38715cc97c6be37b321b99b4aa5aca)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   make node-sass optional ([#920](https://github.com/electrode-io/electrode/pull/920)) [commit](http://github.com/electrode-io/electrode/commit/4e8f6a291d38715cc97c6be37b321b99b4aa5aca)
+
+-   `packages/generator-electrode`
+
+    -   allow extended generator to get pwa config ([#918](https://github.com/electrode-io/electrode/pull/918)) [commit](http://github.com/electrode-io/electrode/commit/8eff2471e3f1521f54fe66ffdde793cdce180ea0)
+    -   only default create new dir to true if cwd is not empty ([#917](https://github.com/electrode-io/electrode/pull/917)) [commit](http://github.com/electrode-io/electrode/commit/f46238ef9a6630a1355be6951f95d662c316247a)
+    -   add insertTokenIds to sample ([#916](https://github.com/electrode-io/electrode/pull/916)) [commit](http://github.com/electrode-io/electrode/commit/0baad2a86063f31bb36abb384dad8badb565ed6a)
+
+-   `MISC`
+
+    -   [chore] update fynpo version [commit](http://github.com/electrode-io/electrode/commit/bf260244394382018209b417e4ec1f3c692c3d52)
+
+# 8/24/2018
+
+- electrode-archetype-react-app: Upgrade to jest v23
+- electrode-ignite: fix handling space in path for windows
+- electrode-react-webapp: minor updates
+- electrode-redux-router-engine: fix check for methods prop in route definition
+- generator-electrode: add Hapi good logger to generated app
+
+## Packages
+
+-   electrode-archetype-react-app@5.4.4 `(5.4.3 => 5.4.4)`
+-   electrode-archetype-react-app-dev@5.4.4 `(5.4.3 => 5.4.4)`
+-   electrode-ignite@2.1.7 `(2.1.6 => 2.1.7)`
+-   electrode-react-webapp@3.0.2 `(3.0.1 => 3.0.2)`
+-   electrode-redux-router-engine@2.1.5 `(2.1.4 => 2.1.5)`
+-   generator-electrode@4.2.3 `(4.2.2 => 4.2.3)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   upgrade to jest v23 ([#911](https://github.com/electrode-io/electrode/pull/911)) [commit](http://github.com/electrode-io/electrode/commit/d2136ba9a4a91cc115602c24ac9e3f178f32dd44)
+
+-   `packages/electrode-ignite`
+
+    -   [patch] fix ignite generator invoking to support windows user dir with space ([#910](https://github.com/electrode-io/electrode/pull/910)) [commit](http://github.com/electrode-io/electrode/commit/fec1a1846648a1e4809c273f561e8a83fcdae92c)
+
+-   `packages/electrode-react-webapp`
+
+    -   apply path specific options to routeOptions [commit](http://github.com/electrode-io/electrode/commit/9f705c460cda9535ba317cbea049a5588ed4e74e)
+    -   catch error when transforming output [commit](http://github.com/electrode-io/electrode/commit/2491f75e1d7dddd5bf6c5de2e4b96d5049f49fe8)
+    -   clarify content spec for paths [commit](http://github.com/electrode-io/electrode/commit/9528ab6eb9f02142a5abf52cfde81f2556f2805a)
+
+-   `packages/electrode-redux-router-engine`
+
+    -   [patch] [bug] Fix methods prop in route definition not being respected ([#915](https://github.com/electrode-io/electrode/pull/915)) [commit](http://github.com/electrode-io/electrode/commit/e8ca6d403195413c5c09b5b951149b597bf27439)
+
+-   `packages/generator-electrode`
+
+    -   Add Hapi good/good-console logger to the generator Hapi app ([#909](https://github.com/electrode-io/electrode/pull/909)) [commit](http://github.com/electrode-io/electrode/commit/fa3d7a52b3632a8d4757e71c0b6e1a370eca3795)
+
+-   `MISC`
+
+    -   update fynpo [commit](http://github.com/electrode-io/electrode/commit/40f44a1308d32734d92ba58e5601e181f8a857c6)
+
+# 8/16/2018
+
+- minor fixes
+- sample app includes demo for multiple routes with nav bar using React Router 4
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-react-app@5.4.3 `(5.4.2 => 5.4.3)`
+-   electrode-archetype-react-app-dev@5.4.3 `(5.4.2 => 5.4.3)`
+-   electrode-react-webapp@3.0.1 `(3.0.0 => 3.0.1)`
+-   generator-electrode@4.2.2 `(4.2.1 => 4.2.2)`
+
+### Lerna Updated
+
+-   electrode-ignite@2.1.6 `(2.1.5 => 2.1.6)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   fix css module production build ([#906](https://github.com/electrode-io/electrode/pull/906)) [commit](http://github.com/electrode-io/electrode/commit/0df1d79da7501c40ce5a5bcdd8a1f20fa031238c)
+
+-   `packages/electrode-react-webapp`
+
+    -   support insert token ids to output for debugging ([#902](https://github.com/electrode-io/electrode/pull/902)) [commit](http://github.com/electrode-io/electrode/commit/0be1eda7eb0b966173ebcbbd05f957153ea9a62f)
+
+-   `packages/generator-electrode`
+
+    -   update generator with a new navigation ([#907](https://github.com/electrode-io/electrode/pull/907)) [commit](http://github.com/electrode-io/electrode/commit/cbda3fccbd2fb92bd901ef77376ae4d85b846e72)
+
+-   `samples/stylus-sample`
+
+    -   fyn extra setup is no longer required ([#903](https://github.com/electrode-io/electrode/pull/903)) [commit](http://github.com/electrode-io/electrode/commit/f8b273be1e8c0586dfb4eaabb99df95d6ed5b161)
+
+-   `samples/universal-react-node`
+
+    -   fyn extra setup is no longer required ([#903](https://github.com/electrode-io/electrode/pull/903)) [commit](http://github.com/electrode-io/electrode/commit/f8b273be1e8c0586dfb4eaabb99df95d6ed5b161)
+
+# 8/6/2018
+
+- Major (v2 to v3) update to electrode-react-webapp
+  - Now allow token to do initialization (this breaks existing INITIALIZE token)
+  - Allow token to control render flow by stopping it (breaks existing token handlers)
+  - Drop support for callbacks for token handler.  Only return Promise now.
+  - `require` token processor module relative to directory where template file is
+  - Add `templateProcessor` option to allow programatically add/remove tokens.
+  - And other clean ups and refactors
+- Update all packages to use fyn section in package.json to persist local dep
+- Fix PWA option in generator-electrode that was always copying PWA files
+- Minor links fixes in docs
+
+## Packages
+
+-   electrode-archetype-react-app@5.4.2 `(5.4.1 => 5.4.2)`
+-   electrode-archetype-react-app-dev@5.4.2 `(5.4.1 => 5.4.2)`
+-   electrode-archetype-react-component@5.3.3 `(5.3.2 => 5.3.3)`
+-   electrode-archetype-react-component-dev@5.3.3 `(5.3.2 => 5.3.3)`
+-   electrode-ignite@2.1.5 `(2.1.4 => 2.1.5)`
+-   electrode-react-webapp@3.0.0 `(2.5.3 => 3.0.0)`
+-   electrode-redux-router-engine@2.1.4 `(2.1.3 => 2.1.4)`
+-   electrode-ui-logger@1.1.2 `(1.1.1 => 1.1.2)`
+-   generator-electrode@4.2.1 `(4.2.0 => 4.2.1)`
+-   ignite-core@1.1.6 `(1.1.5 => 1.1.6)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   persist local deps in fyn section [commit](http://github.com/electrode-io/electrode/commit/9a9cff758a04c518531678c6b432b5471fd3d35c)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   persist local deps in fyn section [commit](http://github.com/electrode-io/electrode/commit/9a9cff758a04c518531678c6b432b5471fd3d35c)
+
+-   `packages/electrode-ignite`
+
+    -   persist local deps in fyn section [commit](http://github.com/electrode-io/electrode/commit/9a9cff758a04c518531678c6b432b5471fd3d35c)
+
+-   `packages/electrode-react-webapp`
+
+    -   allow token module to return null to remove itself ([#900](https://github.com/electrode-io/electrode/pull/900)) [commit](http://github.com/electrode-io/electrode/commit/0f37c552e4445e93d43f78ea8966c70f99b7f7a0)
+    -   [major] remove callback support for token process/handler function ([#899](https://github.com/electrode-io/electrode/pull/899)) [commit](http://github.com/electrode-io/electrode/commit/19840449710377780f1f9c08cdf950a7affff941)
+    -   add integration test for templateProcessor ([#898](https://github.com/electrode-io/electrode/pull/898)) [commit](http://github.com/electrode-io/electrode/commit/546edaf787576c6ea303788b6d4e7e80c1a75e29)
+    -   extract and consolidate rendering steps execution ([#897](https://github.com/electrode-io/electrode/pull/897)) [commit](http://github.com/electrode-io/electrode/commit/1e6b771fd76c5f8877baa3bf3c372db97c157308)
+    -   add templateProcessor option ([#896](https://github.com/electrode-io/electrode/pull/896)) [commit](http://github.com/electrode-io/electrode/commit/0bd5a196f7882bfbe8bb213ced50a49131d80304)
+    -   fix perf-1.html template [commit](http://github.com/electrode-io/electrode/commit/fe21baf8503a3ceeb99c53ac9e5ec7710b40a3eb)
+    -   add response callback for error and bad status [commit](http://github.com/electrode-io/electrode/commit/54652fb408f77a71d7167565af3c18b9bc571ac3)
+    -   refactor functions out of handler file [commit](http://github.com/electrode-io/electrode/commit/82495cb1fb0b3ee7a50039af329bab20796a588c)
+    -   persist local deps in fyn section [commit](http://github.com/electrode-io/electrode/commit/9a9cff758a04c518531678c6b432b5471fd3d35c)
+    -   set message to indicate SSR disabled by option [commit](http://github.com/electrode-io/electrode/commit/6d53d097ffbcbf2b868bde92eebc839e7905b8f9)
+    -   [major] return context to handle route [commit](http://github.com/electrode-io/electrode/commit/4a8151f9a85602e7a0e3f44232517d330e0bbafe)
+    -   avoid executing tokens that are null [commit](http://github.com/electrode-io/electrode/commit/528ddafeef658d24e37d6d29cf557bd3f00dd7fc)
+    -   require processor token from where template file is [commit](http://github.com/electrode-io/electrode/commit/138605ea3f9daca2f2d71980b06efa043b079e85)
+    -   [major] support context initialize with token [commit](http://github.com/electrode-io/electrode/commit/48b3cca85f6c729addf0e7191b28ac34a3a4b716)
+    -   support stopping mid render [commit](http://github.com/electrode-io/electrode/commit/e1d890a00277926ff6c2f162c03ab1dc79460838)
+    -   use spread operator ([#901](https://github.com/electrode-io/electrode/pull/901)) [commit](http://github.com/electrode-io/electrode/commit/ac75fc236631bc67473894d23e63d7ab1f2a9244)
+
+-   `packages/electrode-redux-router-engine`
+
+    -   separate SSR render steps ([#890](https://github.com/electrode-io/electrode/pull/890)) [commit](http://github.com/electrode-io/electrode/commit/c0a947dcbae23858f53a885064c9c3c5a4584cce)
+
+-   `packages/electrode-ui-logger`
+
+    -   persist local deps in fyn section [commit](http://github.com/electrode-io/electrode/commit/9a9cff758a04c518531678c6b432b5471fd3d35c)
+
+-   `packages/generator-electrode`
+
+    -   fix generator options passing inconsistency [commit](http://github.com/electrode-io/electrode/commit/16c8b3117f1c63c614a94cb650d88f8bd69dde78)
+    -   format code [commit](http://github.com/electrode-io/electrode/commit/f313773c7198a3eb776205e13bc73b8b1ea98ea0)
+
+-   `packages/ignite-core`
+
+    -   update test timeout [commit](http://github.com/electrode-io/electrode/commit/f605faa537d0e62718d6faea6ad5c433d8414613)
+
+-   `samples/demo-component`
+
+    -   lock babel/runtime to fix build failure [commit](http://github.com/electrode-io/electrode/commit/37c91f44a818fd512916523e8de258e7e9a32056)
+
+-   `.vscode`
+
+    -   add electrode-redux-router-engine test debugging to vscode config [commit](http://github.com/electrode-io/electrode/commit/55c6eec2e5e30cabd8b635de81d4cdae62bd7492)
+    -   set cwd for vscode debug launch setting [commit](http://github.com/electrode-io/electrode/commit/70ecf380b989bc6aa1d9b653149a0f4bb982258a)
+    -   add .vscode debug config [commit](http://github.com/electrode-io/electrode/commit/de2d47ef6510037c83dd01989aa3d5917caa5115)
+
+-   `docs`
+
+    -   fix links for contribute and faq ([#895](https://github.com/electrode-io/electrode/pull/895)) [commit](http://github.com/electrode-io/electrode/commit/3661b8f49693b6d2f3f67e93afdb05fac4eb5a47)
+    -   fix-powerful-electrode-tools-docs-links ([#894](https://github.com/electrode-io/electrode/pull/894)) [commit](http://github.com/electrode-io/electrode/commit/cee56fb04c95c787281772a0c5cb08342b5e084f)
+    -   fix lins inside stand alone modules ([#893](https://github.com/electrode-io/electrode/pull/893)) [commit](http://github.com/electrode-io/electrode/commit/3cf574cbcef1b4fcbffccf84a76c34751fa5cb57)
+    -   fix general section ([#892](https://github.com/electrode-io/electrode/pull/892)) [commit](http://github.com/electrode-io/electrode/commit/505495fb5ba06f9c1dfc033c713603c67dc156b6)
+
+-   `MISC`
+
+    -   fix broken yeoman-test [commit](http://github.com/electrode-io/electrode/commit/77ad661421594bc7b700bcfe585f64283cc14556)
+
+# 7/31/2018
+
+- Fix issue with new CSS module styleName change breaking normal stylus
+- Add basename support for SSR links with React Router v4
+- Minor updates for electrode-react-webapp
+
+## Packages
+
+-   electrode-archetype-react-app@5.4.1 `(5.4.0 => 5.4.1)`
+-   electrode-archetype-react-app-dev@5.4.1 `(5.4.0 => 5.4.1)`
+-   electrode-react-webapp@2.5.3 `(2.5.2 => 2.5.3)`
+-   electrode-redux-router-engine@2.1.3 `(2.1.2 => 2.1.3)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   fix archetype stylus issue ([#887](https://github.com/electrode-io/electrode/pull/887)) [commit](http://github.com/electrode-io/electrode/commit/ef1515c46a1306efb25d43792658cf24ad386b7f)
+    -   [chore] add stylus-sample to CI ([#884](https://github.com/electrode-io/electrode/pull/884)) [commit](http://github.com/electrode-io/electrode/commit/fdd2914b4285b3c45881c15ec4a46d53632d1936)
+
+-   `packages/electrode-react-webapp`
+
+    -   support tokens that are not a function ([#883](https://github.com/electrode-io/electrode/pull/883)) [commit](http://github.com/electrode-io/electrode/commit/839c83896e73ad7bf19e7ecbf670f73a5b381f2b)
+    -   default to reply with error stack ([#882](https://github.com/electrode-io/electrode/pull/882)) [commit](http://github.com/electrode-io/electrode/commit/c3cca427da97470358307233052c64ac1c70d58b)
+    -   avoid overriding options.__internals ([#881](https://github.com/electrode-io/electrode/pull/881)) [commit](http://github.com/electrode-io/electrode/commit/dc3adc2dd5c14651d2581cc9b47bf4ad035f06b8)
+
+-   `packages/electrode-redux-router-engine`
+
+    -   add basename support for SSR Links ([#885](https://github.com/electrode-io/electrode/pull/885)) [commit](http://github.com/electrode-io/electrode/commit/295b11d2afb4accee8ee85a4069aa5701596b8e3)
+
+-   `samples/stylus-sample`
+
+    -   [chore] add stylus-sample to CI ([#884](https://github.com/electrode-io/electrode/pull/884)) [commit](http://github.com/electrode-io/electrode/commit/fdd2914b4285b3c45881c15ec4a46d53632d1936)
+
 # 7/27/2018
 
 - New feature - support CSS module `styleName` tag to enable shorten class name in production mode.

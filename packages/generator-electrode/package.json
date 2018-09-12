@@ -1,6 +1,6 @@
 {
   "name": "generator-electrode",
-  "version": "4.2.0",
+  "version": "4.2.4",
   "description": "Generate Electrode React App",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -53,7 +53,7 @@
     }
   },
   "scripts": {
-    "test": "clap check"
+    "test": "echo debugging ci start; clap check; echo debugging ci end"
   },
   "license": "Apache-2.0",
   "engines": {

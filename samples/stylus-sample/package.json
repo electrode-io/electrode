@@ -48,5 +48,15 @@
   },
   "devDependencies": {
     "electrode-archetype-react-app-dev": "../../packages/electrode-archetype-react-app-dev"
+  },
+  "fyn": {
+    "dependencies": {
+      "electrode-archetype-react-app": "../../packages/electrode-archetype-react-app",
+      "electrode-react-webapp": "../../packages/electrode-react-webapp",
+      "electrode-redux-router-engine": "../../packages/electrode-redux-router-engine"
+    },
+    "devDependencies": {
+      "electrode-archetype-react-app-dev": "../../packages/electrode-archetype-react-app-dev"
+    }
   }
 }

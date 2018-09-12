@@ -10,6 +10,7 @@ const _ = require("lodash");
 const extend = _.merge;
 const parseAuthor = require("parse-author");
 const githubUsername = require("github-username");
+const Fs = require("fs");
 
 const ExpressJS = "ExpressJS";
 const HapiJS = "HapiJS";
@@ -111,6 +112,10 @@ module.exports = class extends Generator {
     );
   }
 
+  _isCwdEmpty() {
+    return Fs.readdirSync(process.cwd()).length < 1;
+  }
+
   _askFor() {
     if (this.pkg.name || this.options.name) {
       this.props.name = this.pkg.name || _.kebabCase(this.options.name);
@@ -200,7 +205,7 @@ module.exports = class extends Generator {
         name: "createDirectory",
         message: "Would you like to create a new directory for your project?",
         when: this.props.createDirectory === undefined,
-        default: true
+        default: this._isCwdEmpty() ? false : true
       },
       {
         type: "confirm",
@@ -404,47 +409,39 @@ module.exports = class extends Generator {
     this.composeWith(require.resolve("../editorconfig"));
 
     if (!this.isDemoApp) {
-      this.composeWith(require.resolve("../git"), {
-        name: this.props.name,
-        githubAccount: this.props.githubAccount,
-        githubUrl: this.props.githubUrl
-      });
+      this.composeWith(
+        require.resolve("../git"),
+        _.pick(this.props, ["name", "githubAccount", "githubUrl"])
+      );
     }
 
     if (this.options.license && !this.pkg.license) {
-      this.composeWith(require.resolve("generator-license"), {
-        name: this.props.authorName,
-        email: this.props.authorEmail,
-        website: this.props.authorUrl,
-        license: this.props.license || ""
-      });
+      this.composeWith(
+        require.resolve("generator-license"),
+        _.pick(this.props, ["name", "email", "website", "license"])
+      );
     }
 
     if (!this.fs.exists(this.destinationPath("README.md"))) {
-      this.composeWith(require.resolve("../readme"), {
-        name: this.props.name,
-        description: this.props.description,
-        githubAccount: this.props.githubAccount,
-        authorName: this.props.authorName,
-        authorUrl: this.props.authorUrl,
-        content: this.options.readme
-      });
+      this.composeWith(
+        require.resolve("../readme"),
+        _.pick(this.props, [
+          "name",
+          "description",
+          "githubAccount",
+          "authorName",
+          "authorUrl",
+          "content"
+        ])
+      );
     }
 
-    if (!this.fs.exists(this.destinationPath("config/default.js")) && !this.isExtended) {
-      this.composeWith(require.resolve("../config"), {
-        name: this.props.name,
-        pwa: this.props.pwa,
-        serverType: this.props.serverType,
-        isAutoSsr: this.props.autoSsr
-      });
-    }
+    const configProps = _.pick(this.props, ["name", "pwa", "serverType", "autoSsr"]);
+    configProps._extended = this.isExtended;
+    this.composeWith(require.resolve("../config"), configProps);
 
     if (!this.fs.exists(this.destinationPath("server/plugins/webapp"))) {
-      this.composeWith(require.resolve("../webapp"), {
-        pwa: this.props.pwa,
-        isAutoSsr: this.props.autoSsr
-      });
+      this.composeWith(require.resolve("../webapp"), _.pick(this.props, ["pwa", "serverType"]));
     }
   }
 
