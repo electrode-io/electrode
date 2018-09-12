@@ -218,7 +218,7 @@ describe("redux-router-engine", function() {
 
   it("should render Link with basename", () => {
     const engine = new ReduxRouterEngine({ routes, basename: "/my-base" });
-    testReq.url = Url.parse("/test/basename");
+    testReq.url = Url.parse("/my-base/test/basename");
 
     return engine.render(testReq).then(result => {
       expect(result.status).to.equal(200);
