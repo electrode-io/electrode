@@ -17,7 +17,9 @@
   },
   "license": "Apache-2.0",
   "main": "archetype-clap.js",
-  "scripts": {},
+  "scripts": {
+    "test": "echo debugging ci"
+  },
   "files": [
     "config",
     "archetype-clap.js",
