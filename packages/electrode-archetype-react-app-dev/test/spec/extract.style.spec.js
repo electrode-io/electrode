@@ -2,7 +2,8 @@ const expect = require("chai").expect;
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const moduleName = "../../config/webpack/partial/extract-style";
 
-describe("electrode-archetype-react-app-dev extract-styles", () => {
+describe("electrode-archetype-react-app-dev extract-styles", function() {
+  this.timeout(10000);
   afterEach(() => {
     delete require.cache[require.resolve(moduleName)];
   });

@@ -100,7 +100,7 @@ const testGenerator = (testDir, name, clean, runTest, prompts) => {
 };
 
 xclap.load({
-  ".lerna.test": "~$lerna run test --ignore=electrode-webpack-reporter",
+  ".lerna.test": "~$lerna run --stream test --ignore=electrode-webpack-reporter",
   "test-reporter": {
     task: () => {
       return exec(true, "lerna updated")

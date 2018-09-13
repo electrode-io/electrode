@@ -1122,11 +1122,12 @@ describe("hapi electrode-react-webapp", () => {
     });
 
     return electrodeServer(config).then(server => {
-      return server
-        .inject({
+      return Promise.resolve(
+        server.inject({
           method: "GET",
           url: "/"
         })
+      )
         .then(resp => {
           expect(resp.result).contains(`<div class="js-content"></div>`);
         })
