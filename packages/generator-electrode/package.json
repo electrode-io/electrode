@@ -53,7 +53,7 @@
     }
   },
   "scripts": {
-    "test": "clap check"
+    "test": "echo debugging ci start; clap check; echo debugging ci end"
   },
   "license": "Apache-2.0",
   "engines": {

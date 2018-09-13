@@ -11,7 +11,9 @@
     "url": "https://github.com/electrode-io/electrode/issues"
   },
   "license": "Apache-2.0",
-  "scripts": {},
+  "scripts": {
+    "test": "echo debugging ci"
+  },
   "peerDependencies": {
     "electrode-archetype-react-component": "^5.0.0"
   },
