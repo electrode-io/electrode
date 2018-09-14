@@ -1,3 +1,38 @@
+# 9/13/2018
+
+- minor fixes for electrode-react-webapp and electrode-redux-router-engine
+
+## Packages
+
+-   electrode-archetype-react-app@5.4.7 `(5.4.6 => 5.4.7)`
+-   electrode-archetype-react-app-dev@5.4.7 `(5.4.6 => 5.4.7)`
+-   electrode-react-webapp@3.0.5 `(3.0.4 => 3.0.5)`
+-   electrode-redux-router-engine@2.1.6 `(2.1.5 => 2.1.6)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   update optimize-stats for multiple entries [commit](http://github.com/electrode-io/electrode/commit/26ed7d0463cdfa0946e0e869dcedd22f3c4f282a)
+    -   fix failing CI [commit](http://github.com/electrode-io/electrode/commit/8b7d1c1078aca2e89b1154e1f278227098db3981)
+
+-   `packages/electrode-react-webapp`
+
+    -   fix scriptNonce for body bundle ([#934](https://github.com/electrode-io/electrode/pull/934)) [commit](http://github.com/electrode-io/electrode/commit/862b59d7b45bfae2cf097eee5577714658897720)
+    -   [patch] handle text based scripts ([#929](https://github.com/electrode-io/electrode/pull/929)) [commit](http://github.com/electrode-io/electrode/commit/74afb2ddf33b3c9b5ceeb8604b5aec8e79cbd6e4)
+    -   fix token handlers merging ([#932](https://github.com/electrode-io/electrode/pull/932)) [commit](http://github.com/electrode-io/electrode/commit/a6221f4dca43df6df1e028eb29fd17d3689405d2)
+    -   fix failing CI [commit](http://github.com/electrode-io/electrode/commit/8b7d1c1078aca2e89b1154e1f278227098db3981)
+
+-   `packages/electrode-redux-router-engine`
+
+    -   refactor base path name ([#933](https://github.com/electrode-io/electrode/pull/933)) [commit](http://github.com/electrode-io/electrode/commit/9d41447a1771c81cc6407239b893f853bdf0055f)
+    -   update _matchRoute to suuport match with basename [commit](http://github.com/electrode-io/electrode/commit/22a517b065896bd470162cde8b8f72814ba20c58)
+
+-   `MISC`
+
+    -   [chore] update lerna@3.3.0 [commit](http://github.com/electrode-io/electrode/commit/6cbccfdfc68f53f7a198c3071f44f6bbba61b773)
+    -   back to lerna@2 [commit](http://github.com/electrode-io/electrode/commit/cb5cc208c5fc526c48f71050dea9f44ea1cbdeb4)
+
 # 9/11/2018
 
 ## Packages
