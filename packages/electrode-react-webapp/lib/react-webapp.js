@@ -89,8 +89,8 @@ const setupPathOptions = (routeOptions, path) => {
   return _.defaultsDeep(
     {
       htmlFile: pathData.htmlFile,
-      tokenHandler: pathData.tokenHandler,
-      tokenHandlers: pathData.tokenHandlers
+      tokenHandler: [].concat(routeOptions.tokenHandler, pathData.tokenHandler),
+      tokenHandlers: [].concat(routeOptions.tokenHandlers, pathData.tokenHandlers)
     },
     pathOptions,
     routeOptions
