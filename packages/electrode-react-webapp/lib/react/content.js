@@ -51,7 +51,7 @@ const htmlifyScripts = (scripts, scriptNonce) => {
     .map(
       x =>
         typeof x === "string"
-          ? `<script${scriptNonce}>${x}</script>\n`
+          ? `<script${scriptNonce || ""}>${x}</script>\n`
           : x.map(n => `<script src="${n.src}"></script>`).join("\n")
     )
     .join("\n");
