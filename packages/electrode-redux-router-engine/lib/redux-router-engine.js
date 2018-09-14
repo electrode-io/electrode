@@ -119,15 +119,17 @@ class ReduxRouterEngine {
 
   //
   _matchRoute(req, routes, location) {
-    const regex = new RegExp("^" + this.options.basename, "i");
     let pathname = location.pathname;
-    if (this.options.basename !== "" && !regex.test(pathname)) {
-      // route has a basename, but path doesn't start with basename
-      return [];
+
+    if (this.options.basename) {
+      if (!pathname.startsWith(this.options.basename)) {
+        // route has a basename, but path doesn't start with basename
+        return [];
+      } else {
+        pathname = pathname.replace(this.options.basename, "");
+      }
     }
-    if (this.options.basename !== "" && regex.test(pathname)) {
-      pathname = pathname.replace(regex, "");
-    }
+
     return matchRoutes(routes, pathname);
   }
 

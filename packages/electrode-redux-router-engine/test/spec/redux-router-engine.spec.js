@@ -206,6 +206,15 @@ describe("redux-router-engine", function() {
     });
   });
 
+  it("should fail if path doesn't start with basename", () => {
+    const engine = new ReduxRouterEngine({ routes, basename: "/my-base" });
+    testReq.url = Url.parse("/wrong-base/test/basename");
+
+    return engine.render(testReq).then(result => {
+      expect(result.status).to.equal(404);
+    });
+  });
+
   it("should render Link with no basename", () => {
     const engine = new ReduxRouterEngine({ routes });
     testReq.url = Url.parse("/test/basename");
