@@ -156,7 +156,7 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
         jsLink,
         routeOptions.unbundledJS.postBundle
       );
-      const htmlScripts = htmlifyScripts(groupScripts(ins).scripts);
+      const htmlScripts = htmlifyScripts(groupScripts(ins).scripts, context.user.scriptNonce);
 
       return `${htmlScripts}`;
     },
