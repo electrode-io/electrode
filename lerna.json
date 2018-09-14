@@ -1,5 +1,5 @@
 {
-  "lerna": "3.3.0",
+  "lerna": "2.11.0",
   "version": "independent",
   "command.publish.config": {
     "ignore": [
