@@ -77,7 +77,8 @@ describe("electrode-archetype-react-app-dev extract-styles", function() {
       };
       archetype.webpack.cssModuleSupport = false;
       const moduleConfig = require(moduleName)().module;
-      expect(moduleConfig.rules[1].use[4].loader).to.not.include("sass-loader");
+      const hasSass = moduleConfig.rules[1].use.find(x => x.loader.indexOf("sass-loader") > 0);
+      expect(hasSass).to.not.exist;
     });
 
     it("Should enable sass loader if sassSupport is true", () => {
