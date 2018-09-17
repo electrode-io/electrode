@@ -16,8 +16,13 @@ const styleLoader = require.resolve("style-loader");
 const stylusLoader = require.resolve("stylus-relative-loader");
 const postcssLoader = require.resolve("postcss-loader");
 
-const sassSupport = archetype.options && archetype.options.sass;
-const sassLoader = sassSupport === false ? "" : require.resolve("sass-loader");
+const getSassLoader = () => {
+  if (archetype.options.sass) {
+    const sassLoader = require.resolve("sass-loader");
+    return `!${sassLoader}`;
+  }
+  return "";
+};
 
 /*
  * cssModuleSupport: false
@@ -41,10 +46,10 @@ const cssLoaderOptions = `?modules&localIdentName=${localIdentName}&-autoprefixe
 
 const cssQuery = `${cssLoader}!${postcssLoader}`;
 const stylusQuery = `${cssLoader}?-autoprefixer!${stylusLoader}`;
-const scssQuery = `${cssQuery}!${sassLoader}`;
+const scssQuery = `${cssQuery}${getSassLoader()}`;
 const cssModuleQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}`;
 const cssStylusQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}!${stylusLoader}`;
-const cssScssQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}!${sassLoader}`;
+const cssScssQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}${getSassLoader()}`;
 
 const rules = [];
 
