@@ -1,3 +1,23 @@
+# 9/17/2018
+
+- fix optional node-sass
+
+## Packages
+
+-   electrode-archetype-opt-sass@1.0.2 `(1.0.1 => 1.0.2)`
+-   electrode-archetype-react-app@5.4.8 `(5.4.7 => 5.4.8)`
+-   electrode-archetype-react-app-dev@5.4.8 `(5.4.7 => 5.4.8)`
+
+## Commits
+
+-   `packages/electrode-archetype-opt-sass`
+
+    -   fix optional node-sass ([#935](https://github.com/electrode-io/electrode/pull/935)) [commit](http://github.com/electrode-io/electrode/commit/7266665566a9c8cc94fd94793812ed21644fc92f)
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   fix optional node-sass ([#935](https://github.com/electrode-io/electrode/pull/935)) [commit](http://github.com/electrode-io/electrode/commit/7266665566a9c8cc94fd94793812ed21644fc92f)
+
 # 9/13/2018
 
 - minor fixes for electrode-react-webapp and electrode-redux-router-engine
