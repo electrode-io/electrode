@@ -83,12 +83,14 @@ const setupOptions = options => {
   return pluginOptions;
 };
 
+const pathSpecificOptions = ["htmlFile", "responseForBadStatus", "responseForError"];
+
 const setupPathOptions = (routeOptions, path) => {
   const pathData = _.get(routeOptions, ["paths", path], {});
   const pathOptions = pathData.options;
   return _.defaultsDeep(
+    _.pick(pathData, pathSpecificOptions),
     {
-      htmlFile: pathData.htmlFile,
       tokenHandler: [].concat(routeOptions.tokenHandler, pathData.tokenHandler),
       tokenHandlers: [].concat(routeOptions.tokenHandlers, pathData.tokenHandlers)
     },
