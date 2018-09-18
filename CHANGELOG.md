@@ -1,3 +1,15 @@
+# 9/18/2018
+
+## Packages
+
+-   electrode-react-webapp@3.0.6 `(3.0.5 => 3.0.6)`
+
+## Commits
+
+-   `packages/electrode-react-webapp`
+
+    -   allow disabling responseForBadStatus ([#936](https://github.com/electrode-io/electrode/pull/936)) [commit](http://github.com/electrode-io/electrode/commit/68244d08e4418790db5485e8ca95a2fa148362d0)
+
 # 9/17/2018
 
 - fix optional node-sass
