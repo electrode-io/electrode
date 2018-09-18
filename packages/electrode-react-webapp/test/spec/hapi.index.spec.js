@@ -252,7 +252,7 @@ describe("hapi electrode-react-webapp", () => {
     });
   });
 
-  it("should return error", () => {
+  it("should return 500 if content rejects with error", () => {
     assign(mainRoutePathOptions, {
       content: () =>
         Promise.reject({
@@ -1352,7 +1352,36 @@ describe("hapi electrode-react-webapp", () => {
     assign(mainRoutePathOptions, {
       content: {
         status: 501,
+        html: "custom 501 HTML message",
         message: "not implemented"
+      }
+    });
+
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/?__mode=noss"
+        })
+        .then(res => {
+          expect(res.statusCode).to.equal(501);
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
+  it("should render if content has html despite non 200 status", () => {
+    assign(mainRoutePathOptions, {
+      options: {
+        responseForBadStatus: null
+      },
+      content: {
+        status: 501,
+        html: null
       }
     });
 

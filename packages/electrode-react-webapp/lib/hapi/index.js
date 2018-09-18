@@ -1,6 +1,6 @@
 "use strict";
 
-/* eslint-disable no-magic-numbers, max-params, max-statements */
+/* eslint-disable no-magic-numbers, max-params, max-statements, complexity */
 
 const _ = require("lodash");
 const assert = require("assert");
@@ -33,10 +33,15 @@ const DefaultHandleRoute = (request, reply, handler, content, routeOptions) => {
         return respond;
       } else if (HttpStatus.displayHtml[status] || (status >= 200 && status < 300)) {
         respond = reply(data.html !== undefined ? data.html : data);
-      } else {
+      } else if (routeOptions.responseForBadStatus) {
         const output = routeOptions.responseForBadStatus(request, routeOptions, data);
         status = output.status;
         respond = reply(output.html);
+      } else {
+        // should not reach here w/o html because user returned content
+        // would have to return a literal string that has no `.status`
+        // and html being undefined to be able to skip all the cases above
+        respond = reply(data.html);
       }
 
       const response = context.user && context.user.response;
