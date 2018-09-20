@@ -1,3 +1,16 @@
+# 9/20/2018
+
+## Packages
+
+-   electrode-archetype-react-app@5.4.9 `(5.4.8 => 5.4.9)`
+-   electrode-archetype-react-app-dev@5.4.9 `(5.4.8 => 5.4.9)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   account for object entry ([#937](https://github.com/electrode-io/electrode/pull/937)) [commit](http://github.com/electrode-io/electrode/commit/3903c74899bf47853d989252ff439bcf8691ea71)
+
 # 9/18/2018
 
 ## Packages
