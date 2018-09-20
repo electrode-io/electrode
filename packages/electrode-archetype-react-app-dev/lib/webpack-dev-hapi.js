@@ -43,7 +43,14 @@ function register(server, options, next) {
 
   const encodeHmrPath = encodeURIComponent(webpackHotOptions.path);
 
-  config.entry = [`webpack-hot-middleware/client?path=${encodeHmrPath}`].concat(config.entry);
+  const hmrClient = [`webpack-hot-middleware/client?path=${encodeHmrPath}`];
+  if (typeof config.entry === "object") {
+    Object.keys(config.entry).forEach(k => {
+      config.entry[k] = hmrClient.concat(config.entry[k]);
+    });
+  } else {
+    config.entry = hmrClient.concat(config.entry);
+  }
 
   config.plugins = [
     new Webpack.HotModuleReplacementPlugin(),
