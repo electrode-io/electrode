@@ -60,7 +60,7 @@
     "benchmark": "^2.1.4",
     "electrode-archetype-njs-module-dev": "^3.0.0",
     "electrode-redux-router-engine": "../electrode-redux-router-engine",
-    "electrode-server": "^1.0.1",
+    "electrode-server": "^2.0.0",
     "express": "^4.15.4",
     "koa": "^2.3.0",
     "koa-router": "^5.4.0",
