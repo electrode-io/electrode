@@ -4,6 +4,7 @@ const deleteCustomProps = require("./delete-custom-props");
 const _ = require("lodash");
 const assert = require("assert");
 const Partial = require("./partial");
+const Profile = require("./profile");
 const { getConcatMethod } = require("./concat-method");
 
 class WebpackConfigComposer {
@@ -24,39 +25,42 @@ class WebpackConfigComposer {
     profiles = Array.isArray(profiles) ? profiles : Array.prototype.slice.call(arguments);
 
     profiles.forEach(a => {
-      Object.keys(a).forEach(k => this.addProfile(k, a[k]));
+      Object.keys(a).forEach(k => this.addProfile(k, a[k].partials));
     });
   }
 
-  addProfile(name, profile) {
-    assert(!this.profiles.hasOwnProperty(name), `Profile ${name} already exist.`);
+  addProfile(name, partials) {
+    assert(!this.getProfile(name), `Profile ${name} already exist.`);
 
-    if (typeof profile !== "object") {
+    let profile;
+
+    if (typeof partials !== "object") {
+      // take argument as list of partial names
       const partialNames = Array.prototype.slice.call(arguments, 1);
-      profile = { partials: {} };
+      profile = new Profile(name);
       partialNames.forEach(pn => {
         profile.partials[pn] = {};
       });
-    } else if (!profile.partials) {
-      profile.partials = {};
+    } else {
+      profile = new Profile(name, partials);
     }
 
     this.profiles[name] = profile;
 
-    return this;
+    return profile;
   }
 
   addPartialToProfile(partialName, profileName, config, partialOptions) {
-    if (!this.profiles.hasOwnProperty(profileName)) {
-      this.addProfile(profileName, {});
+    let profile = this.getProfile(profileName);
+    if (!profile) {
+      profile = this.addProfile(profileName, {});
     }
-    this.addPartial(partialName, config);
-    partialOptions = partialOptions || {};
     assert(
-      !this.profiles[profileName].partials.hasOwnProperty(partialName),
+      !profile.getPartial(partialName),
       `Partial ${partialName} already exist in profile ${profileName}`
     );
-    this.profiles[profileName].partials[partialName] = partialOptions;
+    this.addPartial(partialName, config);
+    profile.setPartial(partialName, partialOptions);
   }
 
   addPartials(partials) {
@@ -98,19 +102,18 @@ class WebpackConfigComposer {
       profile = Array.prototype.slice.call(arguments, 1);
     }
 
-    const name = profile.join("-");
-
-    profile = profile.map(p => {
+    let profPartials = profile.map(p => {
       if (_.isString(p)) {
-        assert(this.profiles.hasOwnProperty(p), `Profile ${p} doesn't exist in the composer`);
-        return this.profiles[p];
+        const prof = this.getProfile(p);
+        assert(prof, `Profile ${p} doesn't exist in the composer`);
+        return prof.partials;
       }
-      return p;
+
+      return p.partials || {};
     });
 
-    profile.unshift({});
-    profile = _.merge.apply(null, profile);
-    profile.name = name;
+    profPartials.unshift({});
+    profPartials = _.merge.apply(null, profPartials);
 
     const num = x => {
       return _.isString(x) ? parseInt(x, 10) : x;
@@ -120,10 +123,10 @@ class WebpackConfigComposer {
       return isNaN(x) ? Infinity : x;
     };
 
-    const isEnable = p => profile.partials[p].enable !== false;
+    const isEnable = p => profPartials[p].enable !== false;
 
-    const partialOrder = p => checkNaN(num(profile.partials[p].order));
-    const sortedKeys = _(Object.keys(profile.partials))
+    const partialOrder = p => checkNaN(num(profPartials[p].order));
+    const sortedKeys = _(Object.keys(profPartials))
       .filter(isEnable)
       .sortBy(partialOrder)
       .value();
@@ -133,12 +136,10 @@ class WebpackConfigComposer {
     const concat = getConcatMethod(options.concatArray);
 
     sortedKeys.forEach(partialName => {
-      assert(
-        this.partials.hasOwnProperty(partialName),
-        `Partial ${partialName} doesn't exist or has not been added`
-      );
-      const partial = this.partials[partialName];
-      const composeOptions = Object.assign({}, profile.partials[partialName].options, {
+      const partial = this.getPartial(partialName);
+      assert(partial, `Partial ${partialName} doesn't exist or has not been added`);
+
+      const composeOptions = Object.assign({}, profPartials[partialName].options, {
         currentConfig
       });
 

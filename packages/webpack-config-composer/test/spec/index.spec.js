@@ -67,7 +67,8 @@ describe("composer", function() {
       { keepCustomProps: true },
       {
         partials: { test: {} }
-      }
+      },
+      {} // test empty profile
     );
     expect(config._test).to.equal("hello");
   });
@@ -205,6 +206,64 @@ describe("composer", function() {
       const composer = new WebpackConfigComposer();
       composer.addProfiles([{ a: { partials: {} }, b: { partials: {} } }]);
       expect(composer.profiles).to.have.keys("a", "b");
+    });
+  });
+
+  describe("addProfile", function() {
+    it("should take list of partial names for new profile", () => {
+      const composer = new WebpackConfigComposer();
+      composer.addProfile("test", "a", "b", "c");
+      const prof = composer.getProfile("test");
+      expect(prof.partials).to.deep.equal({
+        a: {},
+        b: {},
+        c: {}
+      });
+    });
+
+    it("should add profile with an object of partials", () => {
+      const composer = new WebpackConfigComposer();
+      composer.addProfile("test", {
+        a: {},
+        b: {},
+        c: {}
+      });
+      const prof = composer.getProfile("test");
+      expect(prof.partials).to.deep.equal({
+        a: {},
+        b: {},
+        c: {}
+      });
+    });
+  });
+
+  describe("addPartialToProfile", function() {
+    it("should create profile if it doesn't exist", () => {
+      const composer = new WebpackConfigComposer();
+      composer.addPartialToProfile("user", "test", { plugins: [] });
+      const user = composer.getPartial("user");
+      expect(user).to.exist;
+      expect(user.config).to.deep.equal({ plugins: [] });
+      expect(user.options).to.deep.equal({});
+      expect(composer.getProfile("test")).to.exist;
+    });
+
+    it("should add the partial", () => {
+      const composer = new WebpackConfigComposer();
+      composer.addPartialToProfile("user", "test", { plugins: [] });
+      const user = composer.getPartial("user");
+      expect(user).to.exist;
+      expect(user.config).to.deep.equal({ plugins: [] });
+      expect(user.options).to.deep.equal({});
+    });
+
+    it("should use existing profile", () => {
+      const composer = new WebpackConfigComposer();
+      composer.addProfile("test", "foo");
+      composer.addPartialToProfile("user", "test", { plugins: [] });
+      const prof = composer.getProfile("test");
+      expect(prof).to.exist;
+      expect(prof.getPartial("foo")).to.deep.equal({});
     });
   });
 
