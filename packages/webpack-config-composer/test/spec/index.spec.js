@@ -18,6 +18,7 @@ describe("composer", function() {
           }
         }
       },
+
       profiles: {
         b: {
           partials: {
@@ -29,6 +30,7 @@ describe("composer", function() {
             }
           }
         },
+
         a: {
           partials: {
             foo: {
@@ -40,6 +42,8 @@ describe("composer", function() {
     });
     composer.addPartials(fooPartial, barPartial);
     expect(composer.profiles).to.have.keys("a", "b");
+    expect(composer.getProfile("a")).to.exist;
+    expect(composer.getPartial("test")).to.exist;
     const config = composer.compose(
       {},
       "a",
@@ -205,23 +209,31 @@ describe("composer", function() {
   });
 
   describe("addPartials", function() {
-    it("should add new partial", () => {
+    it("should add new partial as class intance", () => {
       const composer = new WebpackConfigComposer();
       composer.addPartials(fooPartial);
-      expect(composer.partials.foo).to.deep.equal(fooPartial.foo);
+      const foo = composer.getPartial("foo");
+      expect(foo.config).to.deep.equal(fooPartial.foo.config);
+      // test class set/get methods
+      foo.config = {};
+      expect(foo.config).to.deep.equal({});
+      expect(foo.options).to.deep.equal({});
+      foo.options = { a: 1 };
+      expect(foo.options).to.deep.equal({ a: 1 });
     });
 
     it("should add new partials as an array", () => {
       const composer = new WebpackConfigComposer();
       composer.addPartials([fooPartial, barPartial]);
-      expect(composer.partials.foo).to.deep.equal(fooPartial.foo);
-      expect(composer.partials.bar).to.deep.equal(barPartial.bar);
+      expect(composer.getPartial("foo").config).to.deep.equal(fooPartial.foo.config);
+      expect(composer.getPartial("bar").config).to.deep.equal(barPartial.bar.config);
     });
 
     it("should merge into existing partial", () => {
       const composer = new WebpackConfigComposer({
         partials: [fooPartial, barPartial]
       });
+
       composer.addPartials({
         foo: {
           config: {
@@ -248,6 +260,7 @@ describe("composer", function() {
       const composer = new WebpackConfigComposer({
         partials: [fooPartial, barPartial]
       });
+
       composer.addPartials({
         foo: {
           config: {
@@ -257,16 +270,19 @@ describe("composer", function() {
             method: "replace",
             concatArray: "no"
           }
-        },
-        bar: {
-          config: {
-            plugins: ["barTest"]
-          },
-          addOptions: {
-            concatArray: "head"
-          }
         }
       });
+
+      composer.addPartial(
+        "bar",
+        {
+          plugins: ["barTest"]
+        },
+        {
+          concatArray: "head"
+        }
+      );
+
       expect(composer.partials.foo.config.plugins.length).to.equal(1);
       expect(composer.partials.foo.config.plugins[0]).to.equal("fooTest");
       expect(composer.partials.bar.config.plugins[0]).to.equal("barTest");
