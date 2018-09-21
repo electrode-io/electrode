@@ -7,19 +7,18 @@ const _ = require("lodash");
 const assert = require("assert");
 
 const concatArrayMerge = {
-  "head": headConcatArrayMerge,
-  "tail": tailConcatArrayMerge,
-  "no": undefined
+  head: headConcatArrayMerge,
+  tail: tailConcatArrayMerge,
+  no: undefined
 };
 
 const getConcatMethod = (method, fallback) => {
   return concatArrayMerge.hasOwnProperty(method)
     ? concatArrayMerge[method]
-    : (fallback || concatArrayMerge.tail);
+    : fallback || concatArrayMerge.tail;
 };
 
 class WebpackConfigComposer {
-
   constructor(options) {
     options = options || {};
     this.profiles = {};
@@ -35,8 +34,8 @@ class WebpackConfigComposer {
 
   addProfiles(profiles) {
     profiles = Array.isArray(profiles) ? profiles : Array.prototype.slice.call(arguments);
-    profiles.forEach((a) => {
-      Object.keys(a).forEach((k) => {
+    profiles.forEach(a => {
+      Object.keys(a).forEach(k => {
         assert(!this.profiles.hasOwnProperty(k), `Profile ${k} already exist.`);
         this.profiles[k] = a[k];
       });
@@ -45,15 +44,19 @@ class WebpackConfigComposer {
 
   addPartials(partials) {
     partials = Array.isArray(partials) ? partials : Array.prototype.slice.call(arguments);
-    partials.forEach((a) => {
-      Object.keys(a).forEach((k) => {
+    partials.forEach(a => {
+      Object.keys(a).forEach(k => {
         const x = a[k];
         const opt = x.addOptions || {};
         const p = _.omit(x, "addOptions");
         if (opt.method === "replace") {
           this.partials[k] = p;
         } else {
-          _.mergeWith(this.partials, { [k]: _.omit(x, "addOptions") }, getConcatMethod(opt.concatArray));
+          _.mergeWith(
+            this.partials,
+            { [k]: _.omit(x, "addOptions") },
+            getConcatMethod(opt.concatArray)
+          );
         }
       });
     });
@@ -65,7 +68,7 @@ class WebpackConfigComposer {
     }
 
     const name = profile.join("-");
-    profile = profile.map((p) => {
+    profile = profile.map(p => {
       if (_.isString(p)) {
         assert(this.profiles.hasOwnProperty(p), `Profile ${p} doesn't exist in the composer`);
         return this.profiles[p];
@@ -76,24 +79,30 @@ class WebpackConfigComposer {
     profile = _.merge.apply(null, profile);
     profile.name = name;
 
-    const num = (x) => {
+    const num = x => {
       return _.isString(x) ? parseInt(x, 10) : x;
     };
-    const checkNaN = (x) => {
+    const checkNaN = x => {
       return isNaN(x) ? Infinity : x;
     };
-    const isEnable = (p) => profile.partials[p].enable !== false;
+    const isEnable = p => profile.partials[p].enable !== false;
 
-    const partialOrder = (p) => checkNaN(num(profile.partials[p].order));
-    const sortedKeys = _(Object.keys(profile.partials)).filter(isEnable).sortBy(partialOrder).value();
+    const partialOrder = p => checkNaN(num(profile.partials[p].order));
+    const sortedKeys = _(Object.keys(profile.partials))
+      .filter(isEnable)
+      .sortBy(partialOrder)
+      .value();
 
     const currentConfig = options.currentConfig || {};
 
     const concat = getConcatMethod(options.concatArray);
 
-    sortedKeys.forEach((partialName) => {
+    sortedKeys.forEach(partialName => {
       let ret;
-      assert(this.partials.hasOwnProperty(partialName), `Partial ${partialName} doesn't exist or has not been added`);
+      assert(
+        this.partials.hasOwnProperty(partialName),
+        `Partial ${partialName} doesn't exist or has not been added`
+      );
       const partial = this.partials[partialName];
       if (typeof partial.config === "object") {
         ret = partial.config;
@@ -114,7 +123,7 @@ class WebpackConfigComposer {
     });
 
     if (!options.skipNamePlugins && currentConfig.plugins) {
-      currentConfig.plugins = currentConfig.plugins.map((x) => {
+      currentConfig.plugins = currentConfig.plugins.map(x => {
         x.__name = x.constructor.name;
         return x;
       });

@@ -8,7 +8,7 @@ const loaderPartial = require("../fixtures/partial/loader");
 const _ = require("lodash");
 const FooPlugin = require("../fixtures/plugins/foo-plugin");
 
-describe("composer", function () {
+describe("composer", function() {
   it("should accept partials and generate config", () => {
     const composer = new WebpackConfigComposer({
       partials: {
@@ -21,17 +21,17 @@ describe("composer", function () {
       profiles: {
         b: {
           partials: {
-            "bar": {
+            bar: {
               order: 200
             },
-            "test": {
+            test: {
               order: 300
             }
           }
         },
         a: {
           partials: {
-            "foo": {
+            foo: {
               order: "100"
             }
           }
@@ -40,7 +40,11 @@ describe("composer", function () {
     });
     composer.addPartials(fooPartial, barPartial);
     expect(composer.profiles).to.have.keys("a", "b");
-    const config = composer.compose({}, "a", "b");
+    const config = composer.compose(
+      {},
+      "a",
+      "b"
+    );
     expect(config.testFoo).to.equal("test");
   });
 
@@ -55,9 +59,12 @@ describe("composer", function () {
         }
       }
     });
-    const config = composer.compose({ keepCustomProps: true }, {
-      partials: { test: {} }
-    });
+    const config = composer.compose(
+      { keepCustomProps: true },
+      {
+        partials: { test: {} }
+      }
+    );
     expect(config._test).to.equal("hello");
   });
 
@@ -72,59 +79,68 @@ describe("composer", function () {
         }
       }
     });
-    const config = composer.compose({ currentConfig: { hello: "world" } }, {
-      partials: { test: {} }
-    });
+    const config = composer.compose(
+      { currentConfig: { hello: "world" } },
+      {
+        partials: { test: {} }
+      }
+    );
     expect(config.hello).to.equal("world");
   });
 
   it("instance should have deleteCustomProps", () => {
     const composer = new WebpackConfigComposer();
-    expect(composer.deleteCustomProps({
-      _name: "test",
-      hello: "world"
-    })).to.deep.equal({ hello: "world" });
-  })
+    expect(
+      composer.deleteCustomProps({
+        _name: "test",
+        hello: "world"
+      })
+    ).to.deep.equal({ hello: "world" });
+  });
 
   it("should skip adding __name to plugins", () => {
     const composer = new WebpackConfigComposer();
     composer.addPartials({
-      "foo": {
+      foo: {
         config: {
-          plugins: [
-            new FooPlugin()
-          ]
+          plugins: [new FooPlugin()]
         }
       }
     });
-    const config = composer.compose({ skipNamePlugins: true }, {
-      partials: {
-        "foo": {}
+    const config = composer.compose(
+      { skipNamePlugins: true },
+      {
+        partials: {
+          foo: {}
+        }
       }
-    });
+    );
     expect(config.plugins[0].__name).to.equal(undefined);
   });
 
   it("should call a partial config if it's a function", () => {
     const composer = new WebpackConfigComposer();
     composer.addPartials(fooPartial, loaderPartial);
-    const config = composer.compose({}, [
-      {
-        partials: {
-          "foo": {
-            order: "100"
+    const config = composer.compose(
+      {},
+      [
+        {
+          partials: {
+            foo: {
+              order: "100"
+            }
+          }
+        },
+        {
+          partials: {
+            loader: {},
+            badButDisabled: {
+              enable: false
+            }
           }
         }
-      },
-      {
-        partials: {
-          "loader": {},
-          "badButDisabled": {
-            enable: false
-          }
-        }
-      }
-    ]);
+      ]
+    );
     expect(config.module.rules[0]).to.equal("loader-rule1");
   });
 
@@ -135,7 +151,10 @@ describe("composer", function () {
         config: () => require("../fixtures/partial/loader").loader.config
       }
     });
-    const config = composer.compose({}, { partials: { "loader": {} } });
+    const config = composer.compose(
+      {},
+      { partials: { loader: {} } }
+    );
     expect(config.module.rules[0]).to.equal("loader-rule1");
   });
 
@@ -146,24 +165,32 @@ describe("composer", function () {
         config: true
       }
     });
-    expect(() => composer.compose({}, { partials: { "test": {} } })).to.throw();
+    expect(() =>
+      composer.compose(
+        {},
+        { partials: { test: {} } }
+      )
+    ).to.throw();
   });
 
   it("should allow a config function to apply the config by returning nothing", () => {
     const composer = new WebpackConfigComposer();
     composer.addPartials(fooPartial, {
       loader: {
-        config: (options) => {
+        config: options => {
           const config = require("../fixtures/partial/loader").loader.config(options);
           _.merge(options.currentConfig, config);
         }
       }
     });
-    const config = composer.compose({}, { partials: { "loader": {} } });
+    const config = composer.compose(
+      {},
+      { partials: { loader: {} } }
+    );
     expect(config.module.rules[0]).to.equal("loader-rule1");
   });
 
-  describe("addProfiles", function () {
+  describe("addProfiles", function() {
     it("should accept multiple profiles", () => {
       const composer = new WebpackConfigComposer();
       composer.addProfiles({ a: { partials: {} }, b: { partials: {} } });
@@ -177,7 +204,7 @@ describe("composer", function () {
     });
   });
 
-  describe("addPartials", function () {
+  describe("addPartials", function() {
     it("should add new partial", () => {
       const composer = new WebpackConfigComposer();
       composer.addPartials(fooPartial);
@@ -198,9 +225,7 @@ describe("composer", function () {
       composer.addPartials({
         foo: {
           config: {
-            plugins: [
-              "fooTest"
-            ]
+            plugins: ["fooTest"]
           },
           addOptions: {
             concatArray: "tail"
@@ -208,9 +233,7 @@ describe("composer", function () {
         },
         bar: {
           config: {
-            plugins: [
-              "barTest"
-            ]
+            plugins: ["barTest"]
           },
           addOptions: {
             concatArray: "head"
@@ -221,7 +244,6 @@ describe("composer", function () {
       expect(composer.partials.bar.config.plugins[0]).to.equal("barTest");
     });
 
-
     it("should repalce existing partial", () => {
       const composer = new WebpackConfigComposer({
         partials: [fooPartial, barPartial]
@@ -229,9 +251,7 @@ describe("composer", function () {
       composer.addPartials({
         foo: {
           config: {
-            plugins: [
-              "fooTest"
-            ]
+            plugins: ["fooTest"]
           },
           addOptions: {
             method: "replace",
@@ -240,9 +260,7 @@ describe("composer", function () {
         },
         bar: {
           config: {
-            plugins: [
-              "barTest"
-            ]
+            plugins: ["barTest"]
           },
           addOptions: {
             concatArray: "head"
