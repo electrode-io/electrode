@@ -12,6 +12,7 @@ const logger = require("electrode-archetype-react-app/lib/logger");
 function generateConfig(options) {
   const composer = new WebpackConfigComposer();
   composer.addProfiles(options.profiles);
+  composer.addProfile("user", {});
   composer.addPartials(partialConfigs.partials);
 
   let customConfig;
@@ -30,11 +31,12 @@ function generateConfig(options) {
   }
 
   const keepCustomProps = options.keepCustomProps;
-  const compose = () =>
-    composer.compose(
+  const compose = () => {
+    return composer.compose(
       { keepCustomProps },
-      options.profileNames
+      options.profileNames.concat("user")
     );
+  };
 
   let config;
 
@@ -42,11 +44,11 @@ function generateConfig(options) {
     if (_.isFunction(customConfig)) {
       config = customConfig(composer, options, compose);
     } else {
-      config = _.merge(compose(), customConfig);
+      composer.addPartialToProfile("custom", "user", customConfig);
     }
-  } else {
-    config = compose();
   }
+
+  if (!config) config = compose();
 
   logger.verbose("Final Webpack config", JSON.stringify(config, null, 2));
 
