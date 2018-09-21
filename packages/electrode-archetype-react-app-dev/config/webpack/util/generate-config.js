@@ -10,6 +10,7 @@ const logger = require("electrode-archetype-react-app/lib/logger");
 
 /* eslint-disable max-statements */
 function generateConfig(options) {
+  options = Object.assign({ profileNames: [] }, options);
   const composer = new WebpackConfigComposer();
   composer.addProfiles(options.profiles);
   composer.addProfile("user", {});
@@ -30,11 +31,15 @@ function generateConfig(options) {
     logger.info(`No custom webpack config ${options.configFilename} found in dirs ${dirs}`);
   }
 
+  if (options.profileNames.indexOf("user") < 0) {
+    options.profileNames.push("user");
+  }
+
   const keepCustomProps = options.keepCustomProps;
   const compose = () => {
     return composer.compose(
       { keepCustomProps },
-      options.profileNames.concat("user")
+      options.profileNames
     );
   };
 
