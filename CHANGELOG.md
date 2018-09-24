@@ -1,3 +1,37 @@
+# 9/24/2018
+
+- `packages/electrode-archetype-react-app[-dev]` - make it easier to extend webpack config
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-react-app@5.4.10 `(5.4.9 => 5.4.10)`
+-   electrode-archetype-react-app-dev@5.4.10 `(5.4.9 => 5.4.10)`
+-   webpack-config-composer@1.1.0 `(1.0.4 => 1.1.0)`
+
+### Lerna Updated
+
+-   electrode-archetype-react-component@5.3.5 `(5.3.4 => 5.3.5)`
+-   electrode-archetype-react-component-dev@5.3.5 `(5.3.4 => 5.3.5)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   add user's custom config as part of the composer [commit](http://github.com/electrode-io/electrode/commit/9a3496dec1188d56be4b9ca2847deafdd46da6c7)
+    -   ensure profileNames has user for custom function ([#940](https://github.com/electrode-io/electrode/pull/940)) [commit](http://github.com/electrode-io/electrode/commit/cfc81b18d5ab8120f072bc5aa9fe15321426268a)
+
+-   `packages/webpack-config-composer`
+
+    -   add a Profile class [commit](http://github.com/electrode-io/electrode/commit/8c7b4a2039e73aa6693c77eef4c4e8c088cea3d9)
+    -   [minor] new addPartial, addProfile, addPartialToProfile APIs [commit](http://github.com/electrode-io/electrode/commit/cf05c52ddae4430da319d1f0df2dd93e5b117ec6)
+    -   format code [commit](http://github.com/electrode-io/electrode/commit/71d03dd2cfd46e0a980326449b648db82203bb55)
+
+-   `docs`
+
+    -   update doc on customizing webpack config [commit](http://github.com/electrode-io/electrode/commit/1c3e83939b02537fd3b7042ac40d892f02fd665d)
+
 # 9/20/2018
 
 ## Packages
