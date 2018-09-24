@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-app-dev",
-  "version": "5.4.9",
+  "version": "5.4.10",
   "description": "Electrode NodeJS/React Application Archetype (Development)",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -118,7 +118,7 @@
     "url-loader": "^0.6.2",
     "web-app-manifest-loader": "^0.1.1",
     "webpack": "^3.6.0",
-    "webpack-config-composer": "^1.0.4",
+    "webpack-config-composer": "^1.1.0",
     "webpack-dev-middleware": "^2.0.0",
     "webpack-dev-server": "^2.5.1",
     "webpack-disk-plugin": "0.0.2",

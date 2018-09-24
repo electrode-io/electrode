@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-component-dev",
-  "version": "5.3.4",
+  "version": "5.3.5",
   "description": "Electrode Component (Development)",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -94,7 +94,7 @@
     "stylus-relative-loader": "^3.4.0",
     "url-loader": "^0.6.2",
     "webpack": "^3.0.0",
-    "webpack-config-composer": "^1.0.4",
+    "webpack-config-composer": "^1.1.0",
     "webpack-dev-server": "^2.7.1",
     "xclap": "^0.2.0",
     "xenv-config": "^1.2.1",
