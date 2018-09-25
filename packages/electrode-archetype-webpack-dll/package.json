@@ -1,0 +1,39 @@
+{
+  "name": "electrode-archetype-webpack-dll",
+  "version": "0.0.1",
+  "description": "Electrode Archetype to build webpack DLLs",
+  "main": "arch-clap-tasks.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "Joel Chen <xchen@walmartlabs.com>",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "electrode-archetype-njs-module-dev": "^3.0.0",
+    "electrode-archetype-webpack-dll-dev": "../electrode-archetype-webpack-dll-dev",
+    "xsh": "^0.4.4"
+  },
+  "dependencies": {
+    "optional-require": "^1.0.0"
+  },
+  "nyc": {
+    "all": true,
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "exclude": [
+      "coverage",
+      "*clap.js",
+      "gulpfile.js",
+      "dist",
+      "test"
+    ],
+    "check-coverage": true,
+    "statements": 66,
+    "branches": 57,
+    "functions": 45,
+    "lines": 66,
+    "cache": true
+  }
+}
