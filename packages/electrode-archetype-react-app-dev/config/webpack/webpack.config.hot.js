@@ -13,7 +13,6 @@ function makeConfig() {
       _dev_mode: { order: 10000 },
       _define: { order: 10100 },
       _dev: { order: 10200 },
-      "_html-reporter": { order: 10300 }, // must be after _dev to override devServer
       _hot: { order: 10400 },
       _babel: {
         options: {
