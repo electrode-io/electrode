@@ -41,7 +41,9 @@ const orders = [
   "_html-reporter",
   "_simple-progress",
   "_sourcemaps-inline",
-  "_node"
+  "_node",
+  "_dev_mode",
+  "_prod_mode"
 ];
 
 const files = Fs.readdirSync(__dirname)
