@@ -7,6 +7,7 @@ const generateConfig = require("./util/generate-config");
 function makeConfig() {
   const dllProfile = {
     partials: {
+      _production_mode: { order: 10000 },
       "_dll-entry": { order: 10100 },
       "_dll-output": { order: 10200 },
       _dll: { order: 10300 },
