@@ -57,10 +57,10 @@ function register(server, options, next) {
     new Webpack.NoEmitOnErrorsPlugin()
   ].concat(config.plugins);
 
-  const compiler = new Webpack(config);
+  const compiler = Webpack(config);
 
   if (options.progress !== false) {
-    compiler.apply(new Webpack.ProgressPlugin({ profile: options.progressProfile }));
+    new Webpack.ProgressPlugin({ profile: options.progressProfile }).apply(compiler); 
   }
 
   const webpackDevOptions = _.merge(
