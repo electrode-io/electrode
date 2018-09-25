@@ -7,6 +7,7 @@ const Path = require("path");
 function makeConfig() {
   const productionProfile = {
     partials: {
+      _prod_mode: { order: 10000 },
       "_dll-reference": { order: 10100 },
       _uglify: { order: 10200 },
       _locales: { order: 10300 },
