@@ -76,10 +76,10 @@ class WebpackConfigComposer {
   _addPartial(name, data, addOpt) {
     const exist = this.partials[name];
 
-    if (!exist || addOpt.method === "replace") {
+    if (!exist || _.get(addOpt, "method") === "replace") {
       this.partials[name] = new Partial(name, data);
     } else {
-      exist.merge(data, addOpt.concatArray);
+      exist.merge(data, _.get(addOpt, "concatArray"));
     }
 
     return this;
