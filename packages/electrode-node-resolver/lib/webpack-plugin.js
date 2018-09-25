@@ -31,9 +31,8 @@ module.exports = class ModuleResolver {
   }
 
   apply(resolver) {
-    const archetypeDir = Path.join(__dirname, "..", "..", "..");
-
-    resolver.plugin(this.source, (req, callback) => {
+    resolver.getHook(this.source).tapAsync("NodeResolver", (req, resolveContext, callback) => {
+      const target = resolver.ensureHook(this.target);
       //
       // If require is NOT originated from a dir within node_modules, then
       // call require.resolve from within the archetype's directory
@@ -51,11 +50,11 @@ module.exports = class ModuleResolver {
       const obj = Object.assign({}, req, result);
 
       return resolver.doResolve(
-        this.target,
+        target,
         obj,
         `looking for modules in ${obj.path}`,
-        callback,
-        true
+        resolveContext,
+        callback
       );
     });
   }
