@@ -38,7 +38,6 @@ const orders = [
   "_dll-reference",
   "_dll",
   "_hot",
-  "_html-reporter",
   "_simple-progress",
   "_sourcemaps-inline",
   "_node",
