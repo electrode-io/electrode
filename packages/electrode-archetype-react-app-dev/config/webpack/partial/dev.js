@@ -7,7 +7,7 @@ const webpackDevReporter = require("../util/webpack-dev-reporter");
 
 const devProtocol = archetype.webpack.https ? "https://" : "http://";
 
-module.exports = function() {
+module.exports = function () {
   const devServerConfig = {
     reporter: webpackDevReporter,
     https: Boolean(archetype.webpack.https)
@@ -18,7 +18,7 @@ module.exports = function() {
     devServerConfig.headers = {
       "Access-Control-Allow-Origin": `${devProtocol}${archetype.webpack.devHostname}:${
         archetype.webpack.devPort
-      }`
+        }`
     };
   } else {
     devServerConfig.disableHostCheck = true;
@@ -34,7 +34,7 @@ module.exports = function() {
       filename: "[name].bundle.dev.js"
     },
     plugins: [
-      new webpack.SourceMapDevToolPlugin("[file].map"),
+      new webpack.SourceMapDevToolPlugin({ filename: "[file].map" }),
       new ExtractTextPlugin({ filename: "[name].style.css" }),
       new webpack.NoEmitOnErrorsPlugin()
     ]
