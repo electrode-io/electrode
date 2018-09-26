@@ -51,11 +51,12 @@ function register(server, options, next) {
   } else {
     config.entry = hmrClient.concat(config.entry);
   }
-
+  
   config.plugins = [
-    new Webpack.HotModuleReplacementPlugin(),
-    new Webpack.NoEmitOnErrorsPlugin()
+    new Webpack.HotModuleReplacementPlugin()
   ].concat(config.plugins);
+
+  config.optimization = Object.assign({}, config.optimization, {noEmitOnErrors: true});
 
   const compiler = Webpack(config);
 

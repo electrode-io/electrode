@@ -35,9 +35,11 @@ module.exports = function () {
     },
     plugins: [
       new webpack.SourceMapDevToolPlugin({ filename: "[file].map" }),
-      new ExtractTextPlugin({ filename: "[name].style.css" }),
-      new webpack.NoEmitOnErrorsPlugin()
-    ]
+      new ExtractTextPlugin({ filename: "[name].style.css" })
+    ],
+    optimization: {
+      noEmitOnErrors: true
+    }
   };
 
   return config;
