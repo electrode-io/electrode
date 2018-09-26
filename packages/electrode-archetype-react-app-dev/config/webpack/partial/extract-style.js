@@ -62,9 +62,9 @@ const cssModuleQuery = {
 
 /*
  * postcss Loader
- * 
+ *
  * Note:
- * - webpack requires an identifier (ident) in options 
+ * - webpack requires an identifier (ident) in options
  * when {Function}/require is used (Complex Options).
  */
 const postcssQuery = {

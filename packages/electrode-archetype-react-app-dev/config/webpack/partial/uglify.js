@@ -1,6 +1,6 @@
 "use strict";
 
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = function() {
   // Allow env var to disable minifcation for inspectpack usage.
@@ -22,9 +22,9 @@ module.exports = function() {
     uglifyOpts.comments = /^\**!|^ [0-9]+ $|@preserve|@license/;
   }
 
-  return { 
+  return {
     optimization: {
       minimizer: [new UglifyJsPlugin(uglifyOpts)]
-    } 
+    }
   };
 };
