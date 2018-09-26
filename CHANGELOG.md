@@ -1,3 +1,17 @@
+# 9/26/2018
+
+## Packages
+
+### Directly Updated
+
+-   webpack-config-composer@1.1.1 `(1.1.0 => 1.1.1)`
+
+## Commits
+
+-   `packages/webpack-config-composer`
+
+    -   [bug] safe access addopt ([#955](https://github.com/electrode-io/electrode/pull/955)) [commit](http://github.com/electrode-io/electrode/commit/9f9cbbe3ce2386259a3d389e15892bbd5ab7d681)
+
 # 9/24/2018
 
 - `packages/electrode-archetype-react-app[-dev]` - make it easier to extend webpack config
