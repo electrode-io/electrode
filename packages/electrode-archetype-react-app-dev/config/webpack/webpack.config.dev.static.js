@@ -9,9 +9,9 @@ const Path = require("path");
 function makeConfig() {
   const devProfile = {
     partials: {
-      _dev_mode: { order: 10000 },
+      "_dev-mode": { order: 10000 },
       _define: { order: 10100 },
-      _dev: { order: 10200 },
+      _dev: { order: 10200 }
     }
   };
 
