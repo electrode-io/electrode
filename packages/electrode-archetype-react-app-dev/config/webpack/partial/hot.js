@@ -4,9 +4,6 @@ const archetype = require("electrode-archetype-react-app/config/archetype");
 
 const getDefaultEntry = function(entry) {
   return [
-    `webpack-dev-server/client?http://${archetype.webpack.devHostname}:${
-      archetype.webpack.devPort
-    }`,
     "webpack/hot/only-dev-server",
     entry
   ];
