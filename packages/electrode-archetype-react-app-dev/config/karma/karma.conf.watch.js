@@ -15,7 +15,7 @@ module.exports = function(config) {
   const settings = {
     crossOriginAttribute: false,
     files: [
-      // Test bundle (must be created via `npm run dev|hot|server-test`)
+      // Test bundle (must be created via `npm run dev|server-test`)
       "http://127.0.0.1:3001/assets/bundle.js"
       // Watch these files but do not add them to the bundle.
     ].concat(
