@@ -56,7 +56,6 @@
     "clean-css": "^3.4.21",
     "convert-source-map": "^1.5.0",
     "css-loader": "^1.0.0",
-    "css-split-webpack-plugin": "^0.2.0",
     "electrode-bundle-analyzer": "^1.0.0",
     "electrode-cdn-file-loader": "^1.0.0",
     "electrode-electrify": "^1.0.0",
