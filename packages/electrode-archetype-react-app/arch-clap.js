@@ -79,10 +79,6 @@ function setDevelopmentEnv() {
   process.env.NODE_ENV = "development";
 }
 
-function setWebpackHot() {
-  process.env.HMR = "true";
-}
-
 function setStaticFilesEnv() {
   process.env.STATIC_FILES = "true";
 }
@@ -334,7 +330,6 @@ function makeTasks() {
     ".mk-dll-dir": () => createGitIgnoreDir(Path.resolve("dll"), "Electrode dll dir"),
     ".production-env": () => setProductionEnv(),
     ".development-env": () => setDevelopmentEnv(),
-    ".webpack-hot": () => setWebpackHot(),
     ".webpack-dev": () => setWebpackDev(),
     ".static-files-env": () => setStaticFilesEnv(),
     ".optimize-stats": () => setOptimizeStats(),
@@ -544,19 +539,6 @@ Individual .babelrc files were generated for you in src/client and src/server
       task: ["build-dev-static", "app-server"]
     },
 
-    hotbrk: ["hot --inspect-brk"],
-    hot: {
-      desc: "Start your app with watch in hot mode with webpack-dev-server",
-      dep: [".development-env", ".webpack-hot"],
-      task: function() {
-        const args = taskArgs(this.argv);
-        return [
-          ".webpack-dev",
-          ["wds.hot", `server-watch ${args.join(" ")}`, "generate-service-worker"]
-        ];
-      }
-    },
-
     lint: [["lint-client", "lint-client-test", "lint-server", "lint-server-test"]],
     "lint-client": {
       desc: "Run eslint on client code in directories client and templates",
@@ -680,18 +662,6 @@ Individual .babelrc files were generated for you in src/client and src/server
       )
     },
 
-    "wds.hot": {
-      desc: "Start webpack-dev-server with Hot Module Reload",
-      task: mkCmd(
-        "webpack-dev-server",
-        `--config`,
-        quote(webpackConfig("webpack.config.hot.js")),
-        `--hot --progress --colors --inline`,
-        `--port ${archetype.webpack.devPort}`,
-        `--host ${archetype.webpack.devHostname}`
-      )
-    },
-
     "wds.test": {
       desc: "Start webpack-dev-server in test mode",
       task: mkCmd(
@@ -792,7 +762,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     "generate-service-worker": {
       desc:
         "Generate Service Worker using the options provided in the app/config/sw-precache-config.json " +
-        "file for prod/dev/hot mode",
+        "file for prod/dev mode",
       task: () => generateServiceWorker()
     },
     "optimize-stats": {

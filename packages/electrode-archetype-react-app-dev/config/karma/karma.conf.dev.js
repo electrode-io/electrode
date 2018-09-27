@@ -18,7 +18,7 @@ module.exports = function(config) {
     reporters: ["spec"],
     basePath: process.cwd(), // repository root.
     files: [
-      // Test bundle (must be created via `npm run dev|hot|server-test`)
+      // Test bundle (must be created via `npm run dev|server-test`)
       "http://127.0.0.1:3001/assets/bundle.js"
     ],
     port: 9999,

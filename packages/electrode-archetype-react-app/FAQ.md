@@ -5,16 +5,10 @@ This "app archetype" provides for common patterns across all app projects so tha
 #### How do I start developing in my application project after installing?
 
 ```bash
-# This runs both the node server and webpack (in hot mode)
-$ clap hot
 
-# Also try `dev` mode when running off battery power and you wish to maximize battery life.
+# `dev` mode when running off battery power and you wish to maximize battery life.
 $ clap dev
 ```
-
-#### What is `hot mode`?
-
-`Hot mode` enables Hot module reloading(HMR), it is where webpack transpiles your javascript and css code and continues to watch for any changes, and, builds and loads only the code that has changed on disk. It allows you to develop without re-loading your browser page as the changes will be automagically piped in.
 
 #### How do I run my application tests?
 
@@ -58,7 +52,6 @@ Run either of the below commands before opening the link.
 ```
 clap server-test
 clap dev # (OR) (which includes `server-test`)
-clap hot # (OR) (which includes `server-test`)
 ```
 This will serve the static assets for test.html
 
