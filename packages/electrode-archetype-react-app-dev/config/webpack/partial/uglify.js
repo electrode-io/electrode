@@ -10,6 +10,7 @@ module.exports = function() {
 
   const uglifyOpts = {
     sourceMap: true,
+    parallel: true,
     uglifyOptions: {
       compress: {
         warnings: false
