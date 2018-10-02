@@ -39,6 +39,11 @@ const webpackConfigSpec = {
     env: "OPTIMIZE_CSS_OPTIONS",
     type: "json",
     default: defaultOptimizeCssOptions
+  },
+  loadDlls: {
+    env: "ELECTRODE_LOAD_DLLS",
+    type: "json",
+    default: {}
   }
 };
 

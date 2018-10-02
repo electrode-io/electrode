@@ -36,6 +36,7 @@ const orders = [
   "_dll-entry",
   "_dll-output",
   "_dll-reference",
+  "_dll-load",
   "_dll",
   "_hot",
   "_html-reporter",
