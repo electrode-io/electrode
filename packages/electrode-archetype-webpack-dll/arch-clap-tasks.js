@@ -13,6 +13,7 @@ const _ = devRequire("lodash");
 const xsh = devRequire("xsh");
 const mkdirp = devRequire("mkdirp");
 const requireAt = devRequire("require-at");
+const { saveModuleVersions } = devRequire("./lib/save-module-versions");
 
 const config = archetype.config;
 const shell = xsh.$;
@@ -57,9 +58,9 @@ function makeTasks() {
       process.env.NODE_ENV = "production";
     },
 
-    "webpack-dev-build": [".set-dev-env", "webpack-build"],
+    "webpack-dev-build": [".set-dev-env", "webpack-build", ".save-versions"],
 
-    "webpack-prod-build": [".set-prod-env", "webpack-build"],
+    "webpack-prod-build": [".set-prod-env", "webpack-build", ".save-versions"],
 
     "webpack-build": mkCmd(
       "~$webpack",
@@ -70,6 +71,8 @@ function makeTasks() {
 
     ".clean-pack-tmp": () => shell.rm("-rf", ".pack-tmp"),
     ".mk-pack-tmp": () => shell.mkdir(".pack-tmp"),
+
+    ".save-versions": saveModuleVersions,
 
     "npm:prepack": {
       dep: [".clean-pack-tmp", ".mk-pack-tmp"],
