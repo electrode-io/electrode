@@ -360,8 +360,8 @@ function makeTasks() {
       );
     },
     ".set.babel.env": () => {
-      const webpackConfig = archetype.webpack;
-      if (webpackConfig.cssModuleSupport && webpackConfig.enableShortenCSSNames) {
+      const x = archetype.webpack;
+      if (x.cssModuleSupport && x.enableShortenCSSNames) {
         process.env.BABEL_ENV =
           process.env.NODE_ENV === "production" ? "css-module-prod" : "css-module-dev";
         logger.info("BABEL_ENV set to", process.env.BABEL_ENV);
@@ -800,7 +800,7 @@ Individual .babelrc files were generated for you in src/client and src/server
       task: () => {
         const stats = JSON.parse(Fs.readFileSync("dist/server/stats.json"));
 
-        for (let chunk in stats.assetsByChunkName) {
+        for (const chunk in stats.assetsByChunkName) {
           if (!chunk.includes("styles")) {
             const bundle = stats.assetsByChunkName[chunk].find(
               x => x.endsWith(".js") && x.includes("bundle")
