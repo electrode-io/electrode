@@ -1,5 +1,7 @@
 "use strict";
 
+/* eslint-disable max-statements */
+
 //
 // Check config archetype.webpack.loadDlls
 //
@@ -23,6 +25,7 @@ const DonePlugin = require("../plugins/done-plugin");
 const logger = require("electrode-archetype-react-app/lib/logger");
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const mkdirp = archetype.devRequire("mkdirp");
+const { devServerBaseUrl } = require("../util/webpack-dev-url");
 
 const loadJson = (name, defaultVal) => {
   try {
@@ -86,7 +89,7 @@ const verifyVersions = info => {
         `has different ${major}versions for`,
         modName,
         versions[modName],
-        "yours: ",
+        "yours:",
         pkg.version
       );
     } else {
@@ -103,7 +106,37 @@ const verifyVersions = info => {
   });
 };
 
-module.exports = function() {
+const setupWebpackDevServer = (config, dllAssets) => {
+  const assets = {};
+
+  const baseUrl = devServerBaseUrl(archetype.webpack);
+
+  Object.keys(dllAssets).forEach(modName => {
+    const cleanModName = modName.replace(/[@\/]/g, "_");
+    assets[cleanModName] = Object.assign({ origName: modName }, dllAssets[modName]);
+    const cdnMapping = dllAssets[modName].cdnMapping;
+    Object.keys(dllAssets[modName]).forEach(dll => {
+      if (dll === "cdnMapping") return;
+      const bundle = dllAssets[modName][dll].assets.find(n => n.endsWith(".js"));
+      cdnMapping[bundle] = `${baseUrl}/electrode-dll/${cleanModName}/${bundle}`;
+    });
+  });
+
+  config = config.devServer || config;
+  const setup = config.setup;
+  config.setup = app => {
+    logger.info("Setting up DLL assets routes for webpack dev server");
+    if (setup) setup(app);
+    app.get(`/electrode-dll/:moduleName/:bundleName`, (req, res) => {
+      const mod = assets[req.params.moduleName];
+      const bundle = require.resolve(`${mod.origName}/dist/${req.params.bundleName}`);
+      const bundleStr = Fs.readFileSync(bundle).toString();
+      res.type("js").send(bundleStr);
+    });
+  };
+};
+
+module.exports = function(options) {
   const loadDlls = archetype.webpack.loadDlls;
 
   const dllMods = Object.keys(loadDlls).filter(x => loadDlls[x] && loadDlls[x].enable !== false);
@@ -135,6 +168,11 @@ module.exports = function() {
     return a;
   }, {});
 
+  // dev mode?
+  if (process.env.WEBPACK_DEV === "true" && !archetype.webpack.devMiddleware) {
+    setupWebpackDevServer(options.currentConfig, dllAssets);
+  }
+
   const saveDllAssets = () => {
     mkdirp.sync(Path.resolve("dist"));
     Fs.writeFileSync(
@@ -144,15 +182,13 @@ module.exports = function() {
   };
 
   return {
-    plugins: []
-      .concat(
-        dllInfo.map(info => {
-          return new webpack.DllReferencePlugin({
-            context: process.cwd(),
-            manifest: loadJson(info.manifest)
-          });
-        })
-      )
+    plugins: dllInfo
+      .map(info => {
+        return new webpack.DllReferencePlugin({
+          context: process.cwd(),
+          manifest: loadJson(info.manifest)
+        });
+      })
       .concat(new DonePlugin(saveDllAssets))
   };
 };
