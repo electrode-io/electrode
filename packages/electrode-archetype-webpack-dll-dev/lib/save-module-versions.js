@@ -13,24 +13,30 @@ function saveModuleVersions() {
   const entries = Object.keys(entry);
   const tag = context.tag;
 
+  const searchPkg = p => {
+    do {
+      const up = Path.dirname(p);
+      if (up === p) return {};
+      try {
+        return require(Path.resolve(up, "package.json"));
+      } catch (e) {
+        //
+      }
+      p = up;
+    } while (true);
+    return {};
+  };
+
   const saveVersionsOf = manifest => {
     const versions = {};
     const name = manifest.name;
     const modules = Object.keys(manifest.content).sort();
     modules.forEach(md => {
-      const parts = md.split("/");
-      const nmIx = parts.indexOf("node_modules");
-      let nmName = "";
-      if (nmIx >= 0) {
-        nmName = parts[nmIx + 1];
-        if (nmName.startsWith("@")) {
-          nmName += parts[nmIx + 2];
-        }
-      }
+      const nmIx = md.indexOf("node_modules/");
+      const pkg = nmIx >= 0 ? searchPkg(md) : {};
 
-      if (nmName && !versions[nmName]) {
-        const pkg = require(`${nmName}/package.json`);
-        versions[nmName] = pkg.version;
+      if (pkg.name && !versions[pkg.name]) {
+        versions[pkg.name] = pkg.version;
       }
     });
 
