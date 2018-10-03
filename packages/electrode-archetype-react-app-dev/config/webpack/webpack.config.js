@@ -11,10 +11,9 @@ function makeConfig() {
       "_dll-reference": { order: 10100 },
       _uglify: { order: 10200 },
       _locales: { order: 10300 },
-      _define: { order: 10400 },
-      "_sourcemaps-remote": { order: 10500 },
-      _fail: { order: 10600 },
-      "_simple-progress": { order: 10700 }
+      "_sourcemaps-remote": { order: 10400 },
+      _fail: { order: 10500 },
+      "_simple-progress": { order: 10600 }
     }
   };
 
