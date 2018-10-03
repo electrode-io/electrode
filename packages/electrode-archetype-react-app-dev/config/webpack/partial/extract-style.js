@@ -173,6 +173,7 @@ module.exports = function() {
         defer: true
       }),
       new webpack.LoaderOptionsPlugin({
+        minimize: true,
         options: {
           context: Path.resolve("src")
         }
