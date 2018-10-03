@@ -19,8 +19,19 @@ const Fs = require("fs");
 const Path = require("path");
 const _ = require("lodash");
 const webpack = require("webpack");
+const DonePlugin = require("../plugins/done-plugin");
 const logger = require("electrode-archetype-react-app/lib/logger");
 const archetype = require("electrode-archetype-react-app/config/archetype");
+const mkdirp = archetype.devRequire("mkdirp");
+
+const loadJson = (name, defaultVal) => {
+  try {
+    return JSON.parse(Fs.readFileSync(name));
+  } catch (err) {
+    if (defaultVal !== undefined) return defaultVal;
+    throw err;
+  }
+};
 
 const findDllManifests = name => {
   try {
@@ -35,7 +46,9 @@ const findDllManifests = name => {
         name: n,
         moduleName: name,
         manifest: Path.join(moduleDir, "dist", `dll_${n}-manifest${dev}.json`),
-        versions: Path.join(moduleDir, "dist", `dll_${n}-versions${dev}.json`)
+        versions: Path.join(moduleDir, "dist", `dll_${n}-versions${dev}.json`),
+        cdnMapping: Path.join(moduleDir, "dist", "cdn-mapping.json"),
+        assets: stats.assetsByChunkName[n]
       };
     });
     return dllInfo;
@@ -90,10 +103,6 @@ const verifyVersions = info => {
   });
 };
 
-const loadDllManifest = name => {
-  return JSON.parse(Fs.readFileSync(name));
-};
-
 module.exports = function() {
   const loadDlls = archetype.webpack.loadDlls;
 
@@ -114,12 +123,36 @@ module.exports = function() {
 
   dllInfo.forEach(verifyVersions);
 
+  const tag = process.env.NODE_ENV === "production" ? "" : ".dev";
+
+  const dllAssets = dllInfo.reduce((a, x) => {
+    if (!a[x.moduleName]) {
+      a[x.moduleName] = {
+        cdnMapping: loadJson(x.cdnMapping, {})
+      };
+    }
+    a[x.moduleName][x.name] = { assets: x.assets };
+    return a;
+  }, {});
+
+  const saveDllAssets = () => {
+    mkdirp.sync(Path.resolve("dist"));
+    Fs.writeFileSync(
+      Path.resolve(`dist/electrode-dll-assets${tag}.json`),
+      `${JSON.stringify(dllAssets, null, 2)}\n`
+    );
+  };
+
   return {
-    plugins: dllInfo.map(info => {
-      return new webpack.DllReferencePlugin({
-        context: process.cwd(),
-        manifest: loadDllManifest(info.manifest)
-      });
-    })
+    plugins: []
+      .concat(
+        dllInfo.map(info => {
+          return new webpack.DllReferencePlugin({
+            context: process.cwd(),
+            manifest: loadJson(info.manifest)
+          });
+        })
+      )
+      .concat(new DonePlugin(saveDllAssets))
   };
 };
