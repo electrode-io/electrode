@@ -14,11 +14,18 @@ const {
   getCspNonce
 } = require("../utils");
 
-const { getContent, transformOutput, htmlifyScripts } = require("./content");
+const {
+  getContent,
+  transformOutput,
+  htmlifyScripts,
+  loadElectrodeDllAssets,
+  makeElectrodeDllScripts
+} = require("./content");
 
 const CONTENT_MARKER = "SSR_CONTENT";
 const HEADER_BUNDLE_MARKER = "WEBAPP_HEADER_BUNDLES";
 const BODY_BUNDLE_MARKER = "WEBAPP_BODY_BUNDLES";
+const DLL_BUNDLE_MARKER = "WEBAPP_DLL_BUNDLES";
 const TITLE_MARKER = "PAGE_TITLE";
 const PREFETCH_MARKER = "PREFETCH_BUNDLES";
 const META_TAGS_MARKER = "META_TAGS";
@@ -159,6 +166,21 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
       const htmlScripts = htmlifyScripts(groupScripts(ins).scripts, context.user.scriptNonce);
 
       return `${htmlScripts}`;
+    },
+
+    [DLL_BUNDLE_MARKER]: context => {
+      if (WEBPACK_DEV) {
+        return makeElectrodeDllScripts(loadElectrodeDllAssets(context.user.routeOptions));
+      }
+
+      if (context.user.routeData.dllAssetScripts === undefined) {
+        context.user.routeData.dllAssetScripts = makeElectrodeDllScripts(
+          loadElectrodeDllAssets(context.user.routeOptions),
+          context.user.scriptNonce
+        );
+      }
+
+      return context.user.routeData.dllAssetScripts;
     },
 
     [PREFETCH_MARKER]: context => {

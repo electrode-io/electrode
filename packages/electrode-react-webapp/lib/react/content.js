@@ -1,4 +1,7 @@
 "use strict";
+
+const Fs = require("fs");
+const Path = require("path");
 const HttpStatusCodes = require("http-status-codes");
 
 const HTTP_ERROR_500 = 500;
@@ -57,8 +60,34 @@ const htmlifyScripts = (scripts, scriptNonce) => {
     .join("\n");
 };
 
+const loadElectrodeDllAssets = routeOptions => {
+  const tag = process.env.NODE_ENV === "production" ? "" : ".dev";
+  try {
+    const file = Path.resolve(
+      routeOptions.electrodeDllAssetsPath || `dist/electrode-dll-assets${tag}.json`
+    );
+    return JSON.parse(Fs.readFileSync(file));
+  } catch (err) {
+    return {};
+  }
+};
+
+const makeElectrodeDllScripts = (dllAssets, nonce) => {
+  const scripts = [];
+  for (const modName in dllAssets) {
+    const cdnMapping = dllAssets[modName].cdnMapping;
+    for (const bundle in cdnMapping) {
+      scripts.push({ src: cdnMapping[bundle] });
+    }
+  }
+
+  return htmlifyScripts([scripts], nonce);
+};
+
 module.exports = {
   getContent,
   transformOutput,
-  htmlifyScripts
+  htmlifyScripts,
+  loadElectrodeDllAssets,
+  makeElectrodeDllScripts
 };
