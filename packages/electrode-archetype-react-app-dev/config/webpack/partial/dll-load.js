@@ -144,15 +144,13 @@ module.exports = function() {
   };
 
   return {
-    plugins: []
-      .concat(
-        dllInfo.map(info => {
-          return new webpack.DllReferencePlugin({
-            context: process.cwd(),
-            manifest: loadJson(info.manifest)
-          });
-        })
-      )
+    plugins: dllInfo
+      .map(info => {
+        return new webpack.DllReferencePlugin({
+          context: process.cwd(),
+          manifest: loadJson(info.manifest)
+        });
+      })
       .concat(new DonePlugin(saveDllAssets))
   };
 };
