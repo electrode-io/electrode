@@ -27,6 +27,7 @@ module.exports = function() {
 
   return {
     optimization: {
+      nodeEnv: "production",
       minimizer: [new UglifyJsPlugin(uglifyOpts)]
     }
   };
