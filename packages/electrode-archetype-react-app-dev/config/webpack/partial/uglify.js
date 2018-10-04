@@ -13,7 +13,9 @@ module.exports = function() {
     parallel: true,
     uglifyOptions: {
       compress: {
-        warnings: false
+        warnings: false,
+        unused: true,
+        dead_code: true
       }
     }
   };
