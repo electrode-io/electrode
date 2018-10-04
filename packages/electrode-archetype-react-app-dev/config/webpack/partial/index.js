@@ -28,7 +28,6 @@ const orders = [
   "_stats",
   "_uglify",
   "_locales",
-  "_define",
   "_sourcemaps-remote",
   "_fail",
   "_coverage",
