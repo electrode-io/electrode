@@ -3,7 +3,8 @@
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const AppMode = archetype.AppMode;
 const Path = require("path");
-const _ = require("lodash");
+const identity = require("lodash/identity");
+const assign = require("lodash/assign");
 
 module.exports = function(options) {
   const clientVendor = Path.join(AppMode.src.client, "vendor/");
@@ -25,12 +26,12 @@ module.exports = function(options) {
           options.babel
         )
       }
-    ].filter(_.identity)
+    ].filter(identity)
   };
 
   return {
     module: {
-      rules: [_.assign({}, babelLoader, archetype.webpack.extendBabelLoader)]
+      rules: [assign({}, babelLoader, archetype.webpack.extendBabelLoader)]
     }
   };
 };
