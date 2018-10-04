@@ -38,6 +38,7 @@ module.exports = function () {
       new ExtractTextPlugin({ filename: "[name].style.css" })
     ],
     optimization: {
+      concatenateModules: true,
       noEmitOnErrors: true
     }
   };
