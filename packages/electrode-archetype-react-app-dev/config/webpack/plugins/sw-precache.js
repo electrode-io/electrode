@@ -19,7 +19,7 @@ var _swPrecache = require("sw-precache");
 
 var _swPrecache2 = _interopRequireDefault(_swPrecache);
 
-var _uglifyEs = require('uglify-es');
+var _uglifyEs = require("uglify-es");
 
 var _uglifyEs2 = _interopRequireDefault(_uglifyEs);
 
