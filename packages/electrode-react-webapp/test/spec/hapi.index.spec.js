@@ -19,6 +19,7 @@ describe("hapi electrode-react-webapp", () => {
   let config;
   let configOptions;
   let mainRoutePathOptions;
+  let testServer;
 
   const getConfig = () => {
     return {
@@ -60,6 +61,14 @@ describe("hapi electrode-react-webapp", () => {
 
   let stdoutIntercept;
 
+  const stopServer = server => {
+    return new Promise((resolve, reject) =>
+      server.stop(stopErr => {
+        return stopErr ? reject(stopErr) : resolve();
+      })
+    );
+  };
+
   beforeEach(() => {
     config = getConfig();
     configOptions = config.plugins["react-webapp"].options;
@@ -71,14 +80,15 @@ describe("hapi electrode-react-webapp", () => {
       stdoutIntercept.restore();
       stdoutIntercept = undefined;
     }
-  });
 
-  const stopServer = server =>
-    new Promise((resolve, reject) =>
-      server.stop(stopErr => {
-        return stopErr ? reject(stopErr) : resolve();
-      })
-    );
+    if (testServer) {
+      return stopServer(testServer).then(() => {
+        testServer = undefined;
+      });
+    }
+
+    return Promise.resolve();
+  });
 
   it("should fail if registering plugin throws", () => {
     let error;
@@ -102,8 +112,9 @@ describe("hapi electrode-react-webapp", () => {
     configOptions.unbundledJS = {
       enterHead: ["test-static-markup script", { src: "blah-123" }]
     };
-    return electrodeServer(config).then(server => {
-      return server
+
+    const verify = () => {
+      return testServer
         .inject({
           method: "GET",
           url: "/"
@@ -116,12 +127,11 @@ describe("hapi electrode-react-webapp", () => {
           expect(res.result).to.contain("<div>Hello Electrode</div>");
           expect(res.result).to.contain("<script>console.log('Hello');</script>");
           expect(res.result).to.not.contain("Unknown marker");
-          stopServer(server);
-        })
-        .catch(err => {
-          stopServer(server);
-          throw err;
         });
+    };
+    return electrodeServer(config).then(server => {
+      testServer = server;
+      return verify().then(verify);
     });
   });
 
