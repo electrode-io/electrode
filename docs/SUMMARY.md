@@ -60,6 +60,7 @@
 - Migration
   - [Migrating from React Router v3 to v4](guides/rr3-to-rr4.md)
   - [Migrating to webpack dev middleware](guides/webpack-dev-middleware.md)
+  - [Migrating to webpack 4](guides/webpack4.md)
 
 ### Other
 
