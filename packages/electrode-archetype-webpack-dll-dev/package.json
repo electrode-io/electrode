@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-webpack-dll-dev",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Electrode Archetype to build webpack DLLs",
   "main": "index.js",
   "scripts": {
