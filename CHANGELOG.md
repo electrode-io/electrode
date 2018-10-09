@@ -1,3 +1,50 @@
+# 10/9/2018
+
+- electrode-archetype-webpack-dll: Initial Release. Support common webpack DLL for apps.
+- electrode-archetype-react-app: Support loading common webpack DLL modules.
+- electrode-react-webapp, electrode-webpack-reporter: Support loading common webpack DLL bundles.
+
+## Packages
+
+-   electrode-archetype-react-app@5.4.11 `(5.4.10 => 5.4.11)`
+-   electrode-archetype-react-app-dev@5.4.11 `(5.4.10 => 5.4.11)`
+-   electrode-archetype-webpack-dll@1.0.0 `(0.1.0 => 1.0.0)`
+-   electrode-archetype-webpack-dll-dev@1.0.0 `(0.1.0 => 1.0.0)`
+-   electrode-react-webapp@3.0.7 `(3.0.6 => 3.0.7)`
+-   electrode-webpack-reporter@0.4.8 `(0.4.7 => 0.4.8)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   add DLL loading support for webpack dev middleware ([#984](https://github.com/electrode-io/electrode/pull/984)) [commit](http://github.com/electrode-io/electrode/commit/1ab45c30431396a6682874121578a3e40550a97a)
+    -    serve DLL assets from webpack dev server ([#975](https://github.com/electrode-io/electrode/pull/975)) [commit](http://github.com/electrode-io/electrode/commit/ad5c6095745c8887d3ea4747591b0352374e2d7a)
+    -   save electrode DLL assets to dist ([#974](https://github.com/electrode-io/electrode/pull/974)) [commit](http://github.com/electrode-io/electrode/commit/0a722d42286e1224c3b44cffc0a7bf8a5275a544)
+    -   verify installed modules against what's packed in DLL ([#973](https://github.com/electrode-io/electrode/pull/973)) [commit](http://github.com/electrode-io/electrode/commit/c0294922a09d8dc20f01206119fc249bdc89f939)
+    -   add support to load electrode DLL modules [commit](http://github.com/electrode-io/electrode/commit/565d9dd012a6462777ae7898635546e01a01d5d6)
+
+-   `packages/electrode-archetype-webpack-dll[-dev]`
+
+    -   [major] preparing for initial release [commit](http://github.com/electrode-io/electrode/commit/a4f885469fb877820c9ada483180d45c9e413fa8)
+    -   add README for DLL archetype ([#983](https://github.com/electrode-io/electrode/pull/983)) [commit](http://github.com/electrode-io/electrode/commit/645b8fd45633392a5a3d1c4133281a2483594d56)
+    -   verify installed modules against what's packed in DLL ([#973](https://github.com/electrode-io/electrode/pull/973)) [commit](http://github.com/electrode-io/electrode/commit/c0294922a09d8dc20f01206119fc249bdc89f939)
+    -   save versions of modules packed into DLL [commit](http://github.com/electrode-io/electrode/commit/021deff52e1059efce0c27369555d1968f49f03a)
+    -   first commit webpack dll archetype -dev [commit](http://github.com/electrode-io/electrode/commit/56e25356885194fa7b3d71d10b7881c6b911a917)
+    -   first commit of new webpack dll archetype [commit](http://github.com/electrode-io/electrode/commit/600690f3468217fc844e4f24d844e613d03e8eab)
+    -   prepare for npm publish [commit](http://github.com/electrode-io/electrode/commit/4f2e9e71c50c8e63edc85ea94696a0ef44625cc6)
+
+-   `packages/electrode-react-webapp`
+
+    -   add token to serve electrode DLL assets ([#976](https://github.com/electrode-io/electrode/pull/976)) [commit](http://github.com/electrode-io/electrode/commit/9c99d1c7bb3c8e81fdba7f67abe1e52babcd284a)
+
+-   `packages/electrode-webpack-reporter`
+
+    -    serve DLL assets from webpack dev server ([#975](https://github.com/electrode-io/electrode/pull/975)) [commit](http://github.com/electrode-io/electrode/commit/ad5c6095745c8887d3ea4747591b0352374e2d7a)
+
+-   `tools`
+
+    -   add dll archetype to release changelog [commit](http://github.com/electrode-io/electrode/commit/424dd36e15c37402fc4cd7b109865cb333e7d87d)
+
 # 9/26/2018
 
 ## Packages
