@@ -5,6 +5,10 @@
   "main": "arch-clap-tasks.js",
   "scripts": {},
   "keywords": [],
+  "files": [
+    "config",
+    "arch-clap-tasks.js"
+  ],
   "author": "Joel Chen <xchen@walmartlabs.com>",
   "license": "Apache-2.0",
   "devDependencies": {

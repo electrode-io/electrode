@@ -7,6 +7,11 @@
     "test": "echo $npm_config_cache"
   },
   "keywords": [],
+  "files": [
+    "config",
+    "lib",
+    "require.js"
+  ],
   "author": "Joel Chen <xchen@walmartlabs.com>",
   "license": "Apache-2.0",
   "dependencies": {
