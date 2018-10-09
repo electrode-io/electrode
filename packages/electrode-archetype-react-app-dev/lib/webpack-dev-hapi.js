@@ -113,6 +113,7 @@ function register(server, options, next) {
   const cwdBaseUrl = Path.posix.join(devBaseUrl, "cwd");
   const cwdContextBaseUrl = Path.posix.join(devBaseUrl, "memfs");
   const reporterUrl = Path.posix.join(devBaseUrl, "reporter");
+  const dllDevUrl = Path.posix.join(devBaseUrl, "dll");
 
   const loadIsomorphicConfig = () => {
     return JSON.parse(Fs.readFileSync(Path.resolve(".isomorphic-loader-config.json")));
@@ -314,6 +315,18 @@ ${jumpToError}</body></html>
         });
       } else if (req.url.startsWith(reporterUrl) || returnReporter) {
         return serveReporter(webpackDev.lastReporterOptions);
+      } else if (req.url.startsWith(dllDevUrl)) {
+        // App is requesting for Electrode DLL JS bundle
+        // extract DLL module and bundle name
+        const dllParts = req.url
+          .substr(dllDevUrl.length + 1)
+          .split("/")
+          .filter(x => x);
+        // module name is first
+        const modName = decodeURIComponent(dllParts[0]);
+        // bundle name is second
+        const bundle = require.resolve(`${modName}/dist/${dllParts[1]}`);
+        return reply.file(bundle);
       }
 
       request.app.webpackDev = webpackDev;

@@ -106,30 +106,39 @@ const verifyVersions = info => {
   });
 };
 
-const setupWebpackDevServer = (config, dllAssets) => {
-  const assets = {};
+const electrodeDllDevBasePath = "__electrode_dev/dll";
 
+const updateDllAssetsForDev = dllAssets => {
   const baseUrl = devServerBaseUrl(archetype.webpack);
 
   Object.keys(dllAssets).forEach(modName => {
-    const cleanModName = modName.replace(/[@\/]/g, "_");
-    assets[cleanModName] = Object.assign({ origName: modName }, dllAssets[modName]);
+    const encModName = encodeURIComponent(modName);
     const cdnMapping = dllAssets[modName].cdnMapping;
     Object.keys(dllAssets[modName]).forEach(dll => {
       if (dll === "cdnMapping") return;
       const bundle = dllAssets[modName][dll].assets.find(n => n.endsWith(".js"));
-      cdnMapping[bundle] = `${baseUrl}/electrode-dll/${cleanModName}/${bundle}`;
+      cdnMapping[bundle] = `${baseUrl}/${electrodeDllDevBasePath}/${encModName}/${bundle}`;
     });
   });
+};
 
+//
+// If using webpack-dev-server, then setup routes on the dev-server to listen
+// at `electrodeDllDevBasePath` and serve up DLL js bundles.
+// This updates the CDN mapping in `dllAssets`, which gets saved to
+// `dist/electrode-dll-assets.dev.json`
+//
+
+const setupWebpackDevServer = config => {
   config = config.devServer || config;
   const setup = config.setup;
   config.setup = app => {
     logger.info("Setting up DLL assets routes for webpack dev server");
     if (setup) setup(app);
-    app.get(`/electrode-dll/:moduleName/:bundleName`, (req, res) => {
-      const mod = assets[req.params.moduleName];
-      const bundle = require.resolve(`${mod.origName}/dist/${req.params.bundleName}`);
+    app.get(`/${electrodeDllDevBasePath}/:moduleName/:bundleName`, (req, res) => {
+      const modName = decodeURIComponent(req.params.moduleName);
+      const bundle = require.resolve(`${modName}/dist/${req.params.bundleName}`);
+      // TODO: cache read content
       const bundleStr = Fs.readFileSync(bundle).toString();
       res.type("js").send(bundleStr);
     });
@@ -169,8 +178,11 @@ module.exports = function(options) {
   }, {});
 
   // dev mode?
-  if (process.env.WEBPACK_DEV === "true" && !archetype.webpack.devMiddleware) {
-    setupWebpackDevServer(options.currentConfig, dllAssets);
+  if (process.env.WEBPACK_DEV === "true") {
+    updateDllAssetsForDev(dllAssets);
+    if (!archetype.webpack.devMiddleware) {
+      setupWebpackDevServer(options.currentConfig, dllAssets);
+    }
   }
 
   const saveDllAssets = () => {
