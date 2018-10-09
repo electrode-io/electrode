@@ -27,7 +27,9 @@ const packageMapping = {
   "electrode-archetype-react-app": "electrode-archetype-react-app[-dev]",
   "electrode-archetype-react-app-dev": "electrode-archetype-react-app[-dev]",
   "electrode-archetype-react-component": "electrode-archetype-react-component[-dev]",
-  "electrode-archetype-react-component-dev": "electrode-archetype-react-component[-dev]"
+  "electrode-archetype-react-component-dev": "electrode-archetype-react-component[-dev]",
+  "electrode-archetype-webpack-dll": "electrode-archetype-webpack-dll[-dev]",
+  "electrode-archetype-webpack-dll-dev": "electrode-archetype-webpack-dll[-dev]"
 };
 
 const reverseMapping = Object.assign.apply(
