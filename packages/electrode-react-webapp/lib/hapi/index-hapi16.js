@@ -1,6 +1,6 @@
 "use strict";
-
 /* eslint-disable no-magic-numbers, max-params, max-statements, complexity */
+/* istanbul ignore file */
 
 const _ = require("lodash");
 const assert = require("assert");
@@ -8,7 +8,7 @@ const ReactWebapp = require("../react-webapp");
 const HttpStatus = require("../http-status");
 const { responseForError, responseForBadStatus } = require("../utils");
 
-const DefaultHandleRoute = (request, h, handler, content, routeOptions) => {
+const DefaultHandleRoute = (request, reply, handler, content, routeOptions) => {
   return handler({
     content,
     mode: request.query.__mode || "",
@@ -27,21 +27,21 @@ const DefaultHandleRoute = (request, h, handler, content, routeOptions) => {
 
       if (status === undefined) {
         status = 200;
-        respond = h.response(data);
+        respond = reply(data);
       } else if (HttpStatus.redirect[status]) {
-        respond = h.redirect(data.path);
+        respond = reply.redirect(data.path);
         return respond;
       } else if (HttpStatus.displayHtml[status] || (status >= 200 && status < 300)) {
-        respond = h.response(data.html !== undefined ? data.html : data);
+        respond = reply(data.html !== undefined ? data.html : data);
       } else if (routeOptions.responseForBadStatus) {
         const output = routeOptions.responseForBadStatus(request, routeOptions, data);
         status = output.status;
-        respond = h.response(output.html);
+        respond = reply(output.html);
       } else {
         // should not reach here w/o html because user returned content
         // would have to return a literal string that has no `.status`
         // and html being undefined to be able to skip all the cases above
-        respond = h.response(data.html);
+        respond = reply(data.html);
       }
 
       const response = context.user && context.user.response;
@@ -55,7 +55,7 @@ const DefaultHandleRoute = (request, h, handler, content, routeOptions) => {
     .catch(err => {
       const output = routeOptions.responseForError(request, routeOptions, err);
 
-      return h.response(output.html).code(output.status);
+      reply(output.html).code(output.status);
     });
 };
 
@@ -88,7 +88,7 @@ const registerRoutes = (server, options) => {
       method: pathData.method || "GET",
       path,
       config: pathData.config || {},
-      handler: (req, h) => {
+      handler: (req, reply) => {
         if (req.app.webpackDev) {
           const wpd = req.app.webpackDev;
           if (!wpd.valid) {
@@ -105,17 +105,31 @@ const registerRoutes = (server, options) => {
           content = resolveContent();
         }
 
-        return handleRoute(req, h, routeHandler, content.content, routeOptions);
+        handleRoute(req, reply, routeHandler, content.content, routeOptions);
       }
     });
   });
 };
 
-module.exports = {
-  register: registerRoutes,
+const registerRoutesPlugin = (server, options, next) => {
+  try {
+    registerRoutes(server, options);
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+};
+
+registerRoutesPlugin.attributes = {
   pkg: {
     name: "webapp",
     version: "1.0.0"
-  },
+  }
+};
+
+// registerRoutesPlugin.registerRoutes = registerRoutes;
+
+module.exports = {
+  register: registerRoutesPlugin,
   registerRoutes
 };
