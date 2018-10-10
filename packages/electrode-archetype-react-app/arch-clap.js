@@ -399,7 +399,8 @@ function makeTasks() {
       task: mkCmd(
         `webpack --config`,
         quote(webpackConfig("webpack.config.dev.static.js")),
-        `--colors`
+        `--colors`,
+        `--display-error-details`
       )
     },
 
@@ -426,7 +427,7 @@ function makeTasks() {
     "build-dist-min": {
       dep: [".production-env"],
       desc: false,
-      task: mkCmd(`webpack --config`, quote(webpackConfig("webpack.config.js")), `--colors`)
+      task: mkCmd(`webpack --config`, quote(webpackConfig("webpack.config.js")), `--colors`, `--display-error-details`)
     },
 
     "build-dist:clean-tmp": {
@@ -782,7 +783,8 @@ Individual .babelrc files were generated for you in src/client and src/server
       task: mkCmd(
         `webpack --config`,
         quote(webpackConfig("webpack.config.stats.electrify.js")),
-        `--colors`
+        `--colors`,
+        `--display-error-details`
       )
     },
     "critical-css": {
@@ -851,7 +853,7 @@ Individual .babelrc files were generated for you in src/client and src/server
       "build-dist-dll": {
         dep: [".mk-dll-dir", ".mk-dist-dir", ".production-env"],
         task: () =>
-          exec(`webpack --config`, quote(webpackConfig("webpack.config.dll.js")), `--colors`)
+          exec(`webpack --config`, quote(webpackConfig("webpack.config.dll.js")), `--colors`, `--display-error-details`)
       },
       "copy-dll": () => shell.cp("-r", "dll/*", "dist")
     });
