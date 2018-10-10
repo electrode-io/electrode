@@ -37,7 +37,10 @@ const rules = [];
  * css Loader
  */
 const cssQuery = {
-  loader: cssLoader
+  loader: cssLoader,
+  options: {
+    minimize: true
+  }
 };
 
 /*
@@ -67,16 +70,17 @@ const cssModuleQuery = {
  * - webpack requires an identifier (ident) in options
  * when {Function}/require is used (Complex Options).
  */
+const browserslist = ["last 2 versions", "ie >= 9", "> 5%"];
 const postcssQuery = {
   loader: postcssLoader,
   options: {
     ident: "postcss",
     plugins: loader => [
       autoprefixer({
-        browsers: ["last 2 versions", "ie >= 9", "> 5%"]
+        browsers: browserslist
       }),
       atImport({ root: loader.resourcePath }),
-      postcssPresetEnv({ browsers: ["last 2 versions", "ie >= 9", "> 5%"] })
+      postcssPresetEnv({ browsers: browserslist })
     ]
   }
 };
