@@ -13,16 +13,16 @@ function saveModuleVersions() {
   const entries = Object.keys(entry);
   const tag = context.tag;
 
-  const searchPkg = p => {
+  const searchPkgTop = p => {
     do {
       const up = Path.dirname(p);
       if (up === p) return {};
-      try {
-        return require(Path.resolve(up, "package.json"));
-      } catch (e) {
-        //
-      }
       p = up;
+      try {
+        return { path: p, pkg: require(Path.resolve(p, "package.json")) };
+      } catch (e) {
+        // continue searching
+      }
     } while (true);
     return {};
   };
@@ -32,11 +32,18 @@ function saveModuleVersions() {
     const name = manifest.name;
     const modules = Object.keys(manifest.content).sort();
     modules.forEach(md => {
-      const nmIx = md.indexOf("node_modules/");
-      const pkg = nmIx >= 0 ? searchPkg(md) : {};
+      const nm = "node_modules";
+      const nmIx = md.indexOf(`${nm}/`);
+      const top = nmIx >= 0 ? searchPkgTop(md) : {};
+      const pkg = top.pkg;
 
-      if (pkg.name && !versions[pkg.name]) {
-        versions[pkg.name] = pkg.version;
+      if (!pkg || !pkg.name) return;
+
+      const parts = top.path.split("/");
+      const dirName = parts.slice(parts.indexOf("node_modules") + 1).join("/");
+
+      if (!versions[dirName]) {
+        versions[dirName] = { name: pkg.name, version: pkg.version };
       }
     });
 
