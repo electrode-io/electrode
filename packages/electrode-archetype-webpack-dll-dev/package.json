@@ -27,11 +27,6 @@
     "xclap": "^0.2.4",
     "xsh": "^0.4.4"
   },
-  "fyn": {
-    "dependencies": {
-      "webpack-config-composer": "../webpack-config-composer"
-    }
-  },
   "devDependencies": {
     "electrode-archetype-njs-module-dev": "^3.0.0"
   },

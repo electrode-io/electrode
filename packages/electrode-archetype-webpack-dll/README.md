@@ -63,3 +63,6 @@ Add these to `package.json`:
 ```
 
 - Where `my-cdn-publish-task` should upload the production JS bundle to your CDN server and create a file `cdn-assets.json` that map the bundle filename to the CDN URL.
+
+[npm]: https://www.npmjs.com/
+[webpack]: https://www.npmjs.com/package/webpack
