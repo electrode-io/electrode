@@ -1,3 +1,23 @@
+# 10/11/2018
+
+## Packages
+
+-   electrode-archetype-react-app@5.4.12 `(5.4.11 => 5.4.12)`
+-   electrode-archetype-react-app-dev@5.4.12 `(5.4.11 => 5.4.12)`
+-   electrode-archetype-webpack-dll@1.0.1 `(1.0.0 => 1.0.1)`
+-   electrode-archetype-webpack-dll-dev@1.0.1 `(1.0.0 => 1.0.1)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   more sophisticated DLL library version check ([#990](https://github.com/electrode-io/electrode/pull/990)) [commit](http://github.com/electrode-io/electrode/commit/dbfec38dce25d9bfb120491467960d53ea1d70cd)
+    -   show a more detailed breakdown of why an error occurs ([#986](https://github.com/electrode-io/electrode/pull/986)) [commit](http://github.com/electrode-io/electrode/commit/ddfe8cc0a38a49b7335a76128b22565f315ccdd6)
+
+-   `packages/electrode-archetype-webpack-dll[-dev]`
+
+    -   more sophisticated DLL library version check ([#990](https://github.com/electrode-io/electrode/pull/990)) [commit](http://github.com/electrode-io/electrode/commit/dbfec38dce25d9bfb120491467960d53ea1d70cd)
+
 # 10/9/2018
 
 - electrode-archetype-webpack-dll: Initial Release. Support common webpack DLL for apps.
