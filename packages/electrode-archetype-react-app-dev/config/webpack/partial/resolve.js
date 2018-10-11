@@ -4,7 +4,7 @@ const archetype = require("electrode-archetype-react-app/config/archetype");
 const AppMode = archetype.AppMode;
 const Path = require("path");
 const ModuleResolver = require("electrode-node-resolver/lib/webpack-plugin");
-const identity= require("lodash/identity");
+const identity = require("lodash/identity");
 
 function infernoReactAlias() {
   return AppMode.reactLib === "inferno"

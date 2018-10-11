@@ -1,6 +1,6 @@
 "use strict";
 
-const identity= require("lodash/identity");
+const identity = require("lodash/identity");
 const Path = require("path");
 const ModuleResolver = require("electrode-node-resolver/lib/webpack-plugin");
 const archetype = require("electrode-archetype-react-app/config/archetype");
