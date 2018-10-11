@@ -1,3 +1,72 @@
+# 10/11/2018
+
+- electrode-archetype-react-app: Major - webpack 4 upgrade
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-react-app@6.0.0 `(5.4.11 => 6.0.0)`
+-   electrode-archetype-react-app-dev@6.0.0 `(5.4.11 => 6.0.0)`
+-   electrode-archetype-webpack-dll@1.1.0 `(1.0.0 => 1.1.0)`
+-   electrode-archetype-webpack-dll-dev@1.1.0 `(1.0.0 => 1.1.0)`
+-   electrode-node-resolver@2.0.0 `(1.0.0 => 2.0.0)`
+
+### Lerna Updated
+
+-   electrode-archetype-react-component@5.3.6 `(5.3.5 => 5.3.6)`
+-   electrode-archetype-react-component-dev@5.3.6 `(5.3.5 => 5.3.6)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [major] update peer dev [commit](http://github.com/electrode-io/electrode/commit/3ac27b09dcf2e7e0203d272780e3fbfec56092e7)
+    -   [chore] fix lint errors [commit](http://github.com/electrode-io/electrode/commit/ebd191f83bb92a2e5b5862247a615536dd0aca1d)
+    -   more sophisticated DLL library version check ([#990](https://github.com/electrode-io/electrode/pull/990)) [commit](http://github.com/electrode-io/electrode/commit/81ce9fde9f414773432ac2fdd6261b676455a402)
+    -   show a more detailed breakdown of why an error occurs ([#986](https://github.com/electrode-io/electrode/pull/986)) [commit](http://github.com/electrode-io/electrode/commit/d52c73a83dd19ff1c4b78f7fe32a41de0ca612ad)
+    -   remove debug option since its deprecated as of webpack3 ([#987](https://github.com/electrode-io/electrode/pull/987)) [commit](http://github.com/electrode-io/electrode/commit/bdac77dd617ea83aa35eaf61956d99cd5262d105)
+    -   enable minimize for css loader ([#988](https://github.com/electrode-io/electrode/pull/988)) [commit](http://github.com/electrode-io/electrode/commit/0c28f437877b9ffc4a3f14909e2fa8cc79c9eb56)
+    -   fix missing uglify-es bug ([#981](https://github.com/electrode-io/electrode/pull/981)) [commit](http://github.com/electrode-io/electrode/commit/09ae2bc311576e389214e3f8ede43f2652e1ee63)
+    -   Remove definePlugin and get webpack 4 built in nodeEnv to replace ([#977](https://github.com/electrode-io/electrode/pull/977)) [commit](http://github.com/electrode-io/electrode/commit/a3e6bc3fed05a2755075bef7ef35ca65fcb7d1ae)
+    -   Decrease bundle size, load lodash methods needed only ([#978](https://github.com/electrode-io/electrode/pull/978)) [commit](http://github.com/electrode-io/electrode/commit/d6fbd884021c6dc7f77396ad7612345e947c782b)
+    -   decrease frontend size ([#979](https://github.com/electrode-io/electrode/pull/979)) [commit](http://github.com/electrode-io/electrode/commit/86323790ddeaac91a8adeabdbbefa78406fe593c)
+    -   Use multi-process parallel running to improve the build speed. ([#970](https://github.com/electrode-io/electrode/pull/970)) [commit](http://github.com/electrode-io/electrode/commit/e708dd1bda1226cf4205312f7ecc0e413b42efda)
+    -   update css-split-webpack-plugin ([#966](https://github.com/electrode-io/electrode/pull/966)) [commit](http://github.com/electrode-io/electrode/commit/a7df5a045fd3e95880d30c8d18149ccfac65d955)
+    -   Update css-split-webpack-plugin ([#964](https://github.com/electrode-io/electrode/pull/964)) [commit](http://github.com/electrode-io/electrode/commit/fc85755e9a2c9beb77d4f9011a08c373b605b3f1)
+    -   remove hot mode ([#963](https://github.com/electrode-io/electrode/pull/963)) [commit](http://github.com/electrode-io/electrode/commit/0543811f4f3c7fe5ce9c8e43397ef007fb718cb2)
+    -   [major] Webpack4: remove webpack dev server ([#962](https://github.com/electrode-io/electrode/pull/962)) [commit](http://github.com/electrode-io/electrode/commit/e6c16b203df51dae51104eb132917ce6d4b664d1)
+    -   Other fixes for webpack4 ([#958](https://github.com/electrode-io/electrode/pull/958)) [commit](http://github.com/electrode-io/electrode/commit/cc941243d3cc378f838a82fb4e4bc52dedc1d31d)
+    -   webpack 4 pwa ([#960](https://github.com/electrode-io/electrode/pull/960)) [commit](http://github.com/electrode-io/electrode/commit/d01fdc2466c20d1c7ed2c73c79a3b7021bb2a0fc)
+    -   webpack 4 noEmitOnErrors update ([#959](https://github.com/electrode-io/electrode/pull/959)) [commit](http://github.com/electrode-io/electrode/commit/c7342ec92e44695216405461d49eedcd251ab7e8)
+    -   remove html-reporter ([#957](https://github.com/electrode-io/electrode/pull/957)) [commit](http://github.com/electrode-io/electrode/commit/42a02a05a8f4f78efc92a6756100823ea0f89819)
+    -   [major] webpack4: webpack4 dev/prod mode ([#954](https://github.com/electrode-io/electrode/pull/954)) [commit](http://github.com/electrode-io/electrode/commit/c94efc39f33f412bea6edb3c59d18b3ea159767e)
+    -   update ProgressPlugin to webpack4 ([#952](https://github.com/electrode-io/electrode/pull/952)) [commit](http://github.com/electrode-io/electrode/commit/32bd6ed3661c1f6c12ac68e060aadcc90f833d91)
+    -   update SourceMapDevToolPlugin ([#951](https://github.com/electrode-io/electrode/pull/951)) [commit](http://github.com/electrode-io/electrode/commit/2b4424f7832b76e8d9aa9ed9b7eb425c637f4a5c)
+    -   update uglifyjs plugin and its related sw-precache plugin for webpack4 ([#950](https://github.com/electrode-io/electrode/pull/950)) [commit](http://github.com/electrode-io/electrode/commit/06b4e376292bbd1fb1f9b2d04364bc9a7ca1d897)
+    -   webpack 4 dependencies update ([#947](https://github.com/electrode-io/electrode/pull/947)) [commit](http://github.com/electrode-io/electrode/commit/c8ab8da5ee695feb1cd798d817787501d8d161cb)
+    -    [major] webpack 4: update extract styles to compatible with webpack 4 ([#949](https://github.com/electrode-io/electrode/pull/949)) [commit](http://github.com/electrode-io/electrode/commit/25d24546603d38cde3a734075bd7e1bf8556f739)
+    -   update FaviconsWebpackPlugin to compatible with webpack 4 ([#946](https://github.com/electrode-io/electrode/pull/946)) [commit](http://github.com/electrode-io/electrode/commit/20ba8428c1bd291a80a1deb3ec7c109b3110671f)
+    -   [major] webpack 4: update FailPlugin to compatible with webpack 4 ([#944](https://github.com/electrode-io/electrode/pull/944)) [commit](http://github.com/electrode-io/electrode/commit/76476ab9325eb4a0e9273232883a7110c4e8cc24)
+
+-   `packages/electrode-archetype-webpack-dll[-dev]`
+
+    -   [minor][chore] mark for minor bump [commit](http://github.com/electrode-io/electrode/commit/c12909f57797e78404f0a3b8107403bc54ca16db)
+    -   more sophisticated DLL library version check ([#990](https://github.com/electrode-io/electrode/pull/990)) [commit](http://github.com/electrode-io/electrode/commit/81ce9fde9f414773432ac2fdd6261b676455a402)
+
+-   `packages/electrode-node-resolver`
+
+    -   update node-server-webpack-plugin ([#953](https://github.com/electrode-io/electrode/pull/953)) [commit](http://github.com/electrode-io/electrode/commit/2459501ca530551f88f8569aa44a0bda11103996)
+    -   [major] mark for major bump [commit](http://github.com/electrode-io/electrode/commit/2bd4bed434bde787eea9af3fb0c8968ebfdcf3d7)
+
+-   `samples/universal-react-node`
+
+    -   [major] webpack4: update universal react app sample to work with webpack4 ([#965](https://github.com/electrode-io/electrode/pull/965)) [commit](http://github.com/electrode-io/electrode/commit/52be216a6019eb6be77bf902c360a0fe01bf49f1)
+
+-   `docs`
+
+    -   webpack 4: docs ([#982](https://github.com/electrode-io/electrode/pull/982)) [commit](http://github.com/electrode-io/electrode/commit/68c80fe34e7f8d7792e9471d31acf221072eeac4)
+
 # 10/9/2018
 
 - electrode-archetype-webpack-dll: Initial Release. Support common webpack DLL for apps.
