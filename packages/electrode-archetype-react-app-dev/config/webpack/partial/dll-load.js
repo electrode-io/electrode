@@ -26,6 +26,7 @@ const logger = require("electrode-archetype-react-app/lib/logger");
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const mkdirp = archetype.devRequire("mkdirp");
 const { devServerBaseUrl } = require("../util/webpack-dev-url");
+const requireAt = require("require-at");
 
 const loadJson = (name, defaultVal) => {
   try {
@@ -63,23 +64,27 @@ const findDllManifests = name => {
 
 const verifyVersions = info => {
   const versions = JSON.parse(Fs.readFileSync(info.versions));
-  Object.keys(versions).forEach(modName => {
+  Object.keys(versions).forEach(pkgDir => {
+    const pkgInfo = versions[pkgDir];
+    const modName = pkgInfo.name;
+    const pkgNmDir = Path.posix.join("node_modules", pkgDir);
     let pkg;
     try {
-      pkg = require(Path.join(modName, "package.json"));
+      pkg = requireAt(Path.resolve(pkgNmDir), "./package.json");
     } catch (err) {
       logger.info(
         "Electrode DLL module",
         info.moduleName,
         "- You don't have module",
         modName,
-        "installed.  Skipping it."
+        `installed at ${pkgNmDir}. Skipping it.`
       );
       return;
     }
-    if (pkg.version !== versions[modName]) {
+    const versionInDll = pkgInfo.version;
+    if (pkg.version !== versionInDll) {
       const aParts = pkg.version.split(".");
-      const dParts = versions[modName].split(".");
+      const dParts = versionInDll.split(".");
       const major = aParts[0] !== dParts[0] ? "major " : "";
       logger.error(
         "Electrode DLL module",
@@ -88,7 +93,9 @@ const verifyVersions = info => {
         info.name,
         `has different ${major}versions for`,
         modName,
-        versions[modName],
+        "installed at",
+        pkgNmDir,
+        versionInDll,
         "yours:",
         pkg.version
       );
@@ -100,6 +107,8 @@ const verifyVersions = info => {
         info.name,
         `has matched versions for`,
         modName,
+        "installed at",
+        pkgNmDir,
         pkg.version
       );
     }
