@@ -8,21 +8,13 @@ const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const CSSSplitPlugin = require("css-split-webpack-plugin").default;
 
 const atImport = require("postcss-import");
-const cssnext = require("postcss-cssnext");
+const postcssPresetEnv = require("postcss-preset-env");
 
-const autoprefixer = require("autoprefixer-stylus");
+const autoprefixer = require("autoprefixer");
 const cssLoader = require.resolve("css-loader");
 const styleLoader = require.resolve("style-loader");
 const stylusLoader = require.resolve("stylus-relative-loader");
 const postcssLoader = require.resolve("postcss-loader");
-
-const getSassLoader = () => {
-  if (archetype.options.sass) {
-    const sassLoader = require.resolve("sass-loader");
-    return `!${sassLoader}`;
-  }
-  return "";
-};
 
 /*
  * cssModuleSupport: false
@@ -38,38 +30,102 @@ const getSassLoader = () => {
 
 const cssModuleSupport = archetype.webpack.cssModuleSupport;
 const cssModuleStylusSupport = archetype.webpack.cssModuleStylusSupport;
-const enableShortenCSSNames = archetype.webpack.enableShortenCSSNames;
-
-const enableShortHash = process.env.NODE_ENV === "production" && enableShortenCSSNames;
-const localIdentName = `${enableShortHash ? "" : "[name]__[local]___"}[hash:base64:5]`;
-const cssLoaderOptions = `?modules&localIdentName=${localIdentName}&-autoprefixer`;
-
-const cssQuery = `${cssLoader}!${postcssLoader}`;
-const stylusQuery = `${cssLoader}?-autoprefixer!${stylusLoader}`;
-const scssQuery = `${cssQuery}${getSassLoader()}`;
-const cssModuleQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}`;
-const cssStylusQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}!${stylusLoader}`;
-const cssScssQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}${getSassLoader()}`;
 
 const rules = [];
+
+/*
+ * css Loader
+ */
+const cssQuery = {
+  loader: cssLoader,
+  options: {
+    minimize: true
+  }
+};
+
+/*
+ * css-modules Loader
+ */
+const getCSSModuleOptions = () => {
+  const enableShortenCSSNames = archetype.webpack.enableShortenCSSNames;
+  const enableShortHash = process.env.NODE_ENV === "production" && enableShortenCSSNames;
+  const localIdentName = `${enableShortHash ? "" : "[name]__[local]___"}[hash:base64:5]`;
+
+  return {
+    context: Path.resolve("src"),
+    modules: true,
+    localIdentName
+  };
+};
+
+const cssModuleQuery = {
+  loader: cssLoader,
+  options: getCSSModuleOptions()
+};
+
+/*
+ * postcss Loader
+ *
+ * Note:
+ * - webpack requires an identifier (ident) in options
+ * when {Function}/require is used (Complex Options).
+ */
+const browserslist = ["last 2 versions", "ie >= 9", "> 5%"];
+const postcssQuery = {
+  loader: postcssLoader,
+  options: {
+    ident: "postcss",
+    plugins: loader => [
+      autoprefixer({
+        browsers: browserslist
+      }),
+      atImport({ root: loader.resourcePath }),
+      postcssPresetEnv({ browsers: browserslist })
+    ]
+  }
+};
+
+/*
+ * sass Loader
+ */
+const getSassLoader = () => {
+  if (archetype.options.sass) {
+    const sassLoader = require.resolve("sass-loader");
+    return sassLoader;
+  }
+  return "";
+};
+
+const sassQuery = {
+  loader: getSassLoader()
+};
+
+/*
+ * stylus Loader
+ */
+const stylusQuery = {
+  loader: stylusLoader
+};
 
 module.exports = function() {
   rules.push(
     {
       _name: `extract-css${cssModuleSupport ? "-modules" : ""}`,
       test: /\.css$/,
-      loader: ExtractTextPlugin.extract({
+      use: ExtractTextPlugin.extract({
         fallback: styleLoader,
-        use: cssModuleSupport ? cssModuleQuery : cssQuery,
+        use: cssModuleSupport ? [cssModuleQuery, postcssQuery] : [cssQuery, postcssQuery],
         publicPath: ""
       })
     },
     {
       _name: `extract${cssModuleSupport ? "-css" : ""}-scss`,
-      test: /\.scss$/,
+      test: /\.(scss|sass)$/,
       use: ExtractTextPlugin.extract({
         fallback: styleLoader,
-        use: cssModuleSupport ? cssScssQuery : scssQuery,
+        use: cssModuleSupport
+          ? [cssModuleQuery, postcssQuery, sassQuery]
+          : [cssQuery, postcssQuery, sassQuery],
         publicPath: ""
       })
     },
@@ -78,7 +134,9 @@ module.exports = function() {
       test: /\.styl$/,
       use: ExtractTextPlugin.extract({
         fallback: styleLoader,
-        use: cssModuleSupport ? cssStylusQuery : stylusQuery,
+        use: cssModuleSupport
+          ? [cssModuleQuery, postcssQuery, stylusQuery]
+          : [cssQuery, postcssQuery, stylusQuery],
         publicPath: ""
       })
     }
@@ -95,7 +153,7 @@ module.exports = function() {
       test: /\.styl$/,
       use: ExtractTextPlugin.extract({
         fallback: styleLoader,
-        use: cssStylusQuery,
+        use: [cssModuleQuery, postcssQuery, stylusQuery],
         publicPath: ""
       })
     });
@@ -119,27 +177,9 @@ module.exports = function() {
         defer: true
       }),
       new webpack.LoaderOptionsPlugin({
+        minimize: true,
         options: {
-          context: Path.resolve(process.cwd(), "src"),
-          postcss: () => {
-            return cssModuleSupport
-              ? [
-                  atImport,
-                  cssnext({
-                    browsers: ["last 2 versions", "ie >= 9", "> 5%"]
-                  })
-                ]
-              : [];
-          },
-          stylus: {
-            use: !cssModuleSupport
-              ? [
-                  autoprefixer({
-                    browsers: ["last 2 versions", "ie >= 9", "> 5%"]
-                  })
-                ]
-              : []
-          }
+          context: Path.resolve("src")
         }
       })
     ].filter(x => !!x)

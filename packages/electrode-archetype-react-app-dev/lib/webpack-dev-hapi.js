@@ -5,7 +5,7 @@
 const Path = require("path");
 const Fs = require("fs");
 const Url = require("url");
-const Webpack = require("webpack");
+const webpack = require("webpack");
 const opn = require("opn");
 const webpackDevMiddleware = require("webpack-dev-middleware");
 const webpackHotMiddleware = require("webpack-hot-middleware");
@@ -53,14 +53,15 @@ function register(server, options, next) {
   }
 
   config.plugins = [
-    new Webpack.HotModuleReplacementPlugin(),
-    new Webpack.NoEmitOnErrorsPlugin()
+    new webpack.HotModuleReplacementPlugin()
   ].concat(config.plugins);
 
-  const compiler = new Webpack(config);
+  config.optimization = Object.assign({}, config.optimization, {noEmitOnErrors: true});
+
+  const compiler = webpack(config);
 
   if (options.progress !== false) {
-    compiler.apply(new Webpack.ProgressPlugin({ profile: options.progressProfile }));
+    new webpack.ProgressPlugin({ profile: options.progressProfile }).apply(compiler);
   }
 
   const webpackDevOptions = _.merge(

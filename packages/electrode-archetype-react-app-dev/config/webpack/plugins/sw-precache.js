@@ -19,9 +19,9 @@ var _swPrecache = require("sw-precache");
 
 var _swPrecache2 = _interopRequireDefault(_swPrecache);
 
-var _uglifyJs = require("uglify-js");
+var _uglifyEs = require("uglify-es");
 
-var _uglifyJs2 = _interopRequireDefault(_uglifyJs);
+var _uglifyEs2 = _interopRequireDefault(_uglifyEs);
 
 var _util = require("util");
 

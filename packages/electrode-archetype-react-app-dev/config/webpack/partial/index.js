@@ -28,7 +28,6 @@ const orders = [
   "_stats",
   "_uglify",
   "_locales",
-  "_define",
   "_sourcemaps-remote",
   "_fail",
   "_coverage",
@@ -38,11 +37,11 @@ const orders = [
   "_dll-reference",
   "_dll-load",
   "_dll",
-  "_hot",
-  "_html-reporter",
   "_simple-progress",
   "_sourcemaps-inline",
-  "_node"
+  "_node",
+  "_dev-mode",
+  "_prod-mode"
 ];
 
 const files = Fs.readdirSync(__dirname)

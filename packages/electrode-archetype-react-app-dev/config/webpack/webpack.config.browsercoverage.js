@@ -9,11 +9,11 @@ const Path = require("path");
 function makeConfig() {
   const browserCoverageProfile = {
     partials: {
+      "_dev-mode": { order: 10000 },
       _uglify: { order: 10100 },
       _locales: { order: 10200 },
-      _define: { order: 10300 },
-      _coverage: { order: 10400 },
-      "_sourcemaps-inline": { order: 10500 }
+      _coverage: { order: 10300 },
+      "_sourcemaps-inline": { order: 10400 }
     }
   };
 

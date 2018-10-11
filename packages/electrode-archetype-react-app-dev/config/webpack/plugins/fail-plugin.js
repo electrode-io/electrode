@@ -12,16 +12,16 @@ module.exports = class FailPlugin {
   }
 
   apply(compiler) {
-    compiler.plugin("run", (runCompiler, callback) => {
+    compiler.hooks.run.tapAsync("FailPlugin", (runCompiler, callback) => {
       this.isWatch = false;
       callback.call(runCompiler);
     });
 
-    compiler.plugin("fail", () => {
+    compiler.hooks.failed.tap("FailPlugin", () => {
       this.fail();
     });
 
-    compiler.plugin("done", stats => {
+    compiler.hooks.done.tap("FailPlugin", stats => {
       const errors = stats.compilation.errors;
       if (errors && errors.length) {
         this.fail();

@@ -19,7 +19,7 @@
 
 const Fs = require("fs");
 const Path = require("path");
-const _ = require("lodash");
+const isEmpty = require("lodash/isEmpty");
 const webpack = require("webpack");
 const DonePlugin = require("../plugins/done-plugin");
 const logger = require("electrode-archetype-react-app/lib/logger");
@@ -150,13 +150,13 @@ module.exports = function(options) {
 
   const dllMods = Object.keys(loadDlls).filter(x => loadDlls[x] && loadDlls[x].enable !== false);
 
-  if (_.isEmpty(dllMods)) return {};
+  if (isEmpty(dllMods)) return {};
 
   logger.info("Electrode DLL modules to be loaded", dllMods.join(" "));
 
   const dllInfo = dllMods.reduce((mani, modName) => mani.concat(findDllManifests(modName)), []);
 
-  if (_.isEmpty(dllInfo)) {
+  if (isEmpty(dllInfo)) {
     logger.warn("Electrode DLL found no manifests to load");
     return {};
   }
