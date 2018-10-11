@@ -10,6 +10,7 @@ const nodeResolver = require("./node-resolver");
  * to make sure if there are multiple versions of a module, the one the archetype
  * depends on will be used.
  */
+// updated for webpack 4
 module.exports = class ModuleResolver {
   /*
    * source - webpack's plugin source
