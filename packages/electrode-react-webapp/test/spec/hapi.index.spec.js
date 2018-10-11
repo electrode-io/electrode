@@ -23,9 +23,6 @@ describe("hapi electrode-react-webapp", () => {
 
   const getConfig = () => {
     return {
-      server: {
-        useDomains: false
-      },
       connections: {
         default: {
           port: 0
@@ -61,13 +58,7 @@ describe("hapi electrode-react-webapp", () => {
 
   let stdoutIntercept;
 
-  const stopServer = server => {
-    return new Promise((resolve, reject) =>
-      server.stop(stopErr => {
-        return stopErr ? reject(stopErr) : resolve();
-      })
-    );
-  };
+  const stopServer = server => server.stop();
 
   beforeEach(() => {
     config = getConfig();
@@ -92,19 +83,20 @@ describe("hapi electrode-react-webapp", () => {
 
   it("should fail if registering plugin throws", () => {
     let error;
-    webapp.register(
-      {},
-      {
-        paths: {
-          error: {
-            content: { module: "bad-module" }
+    try {
+      webapp.register(
+        {},
+        {
+          paths: {
+            error: {
+              content: { module: "bad-module" }
+            }
           }
         }
-      },
-      err => {
-        error = err;
-      }
-    );
+      );
+    } catch (err) {
+      error = err;
+    }
     expect(error).to.be.ok;
   });
 
@@ -952,22 +944,22 @@ describe("hapi electrode-react-webapp", () => {
 
   it("should add a nonce value, if configuration specifies a path and a value is present", () => {
     configOptions.cspNonceValue = { script: "plugins.cspPlugin.nonceValue" };
-    function cspPlugin(server, options, next) {
-      server.ext("onRequest", (request, reply) => {
+    function cspPlugin(server) {
+      server.ext("onRequest", (request, h) => {
         request.plugins.cspPlugin = {
           nonceValue: "==ABCD"
         };
-        return reply.continue();
+        return h.continue;
       });
-      next();
     }
-    cspPlugin.attributes = {
+    const plg = {
+      register: cspPlugin,
       name: "cspPlugin"
     };
 
     return electrodeServer(config).then(server => {
       // Add a trivial csp generator for testing purposes.
-      server.register(cspPlugin);
+      server.register(plg);
       return server
         .inject({
           method: "GET",
@@ -1010,20 +1002,20 @@ describe("hapi electrode-react-webapp", () => {
 
   it("should not add a nonce value, if configuration specifies a path and no value present", () => {
     configOptions.cspNonceValue = { script: "plugins.cspPlugin.nonceValue" };
-    function cspPlugin(server, options, next) {
-      server.ext("onRequest", (request, reply) => {
+    function cspPlugin(server) {
+      server.ext("onRequest", (request, h) => {
         request.plugins.cspPlugin = {};
-        return reply.continue();
+        return h.continue;
       });
-      next();
     }
-    cspPlugin.attributes = {
+    const plg = {
+      register: cspPlugin,
       name: "cspPlugin"
     };
 
     return electrodeServer(config).then(server => {
       // Add a trivial csp generator for testing purposes.
-      server.register(cspPlugin);
+      server.register(plg);
       return server
         .inject({
           method: "GET",
@@ -1043,22 +1035,22 @@ describe("hapi electrode-react-webapp", () => {
   it("should inject critical css with a nonce value when provided", () => {
     configOptions.criticalCSS = "test/data/critical.css";
     configOptions.cspNonceValue = { style: "plugins.cspPlugin.nonceValue" };
-    function cspPlugin(server, options, next) {
-      server.ext("onRequest", (request, reply) => {
+    function cspPlugin(server) {
+      server.ext("onRequest", (request, h) => {
         request.plugins.cspPlugin = {
           nonceValue: "==ABCD"
         };
-        return reply.continue();
+        return h.continue;
       });
-      next();
     }
-    cspPlugin.attributes = {
+    const plg = {
+      register: cspPlugin,
       name: "cspPlugin"
     };
 
     return electrodeServer(config).then(server => {
       // Add a trivial csp generator for testing purposes.
-      server.register(cspPlugin);
+      server.register(plg);
       return server
         .inject({
           method: "GET",
@@ -1152,24 +1144,15 @@ describe("hapi electrode-react-webapp", () => {
       content: null
     });
 
-    let error;
-
     return electrodeServer(config).then(server => {
       return server
         .inject({
           method: "GET",
           url: "/"
         })
-        .catch(err => {
-          error = err;
-        })
-        .then(() => {
+        .then(res => {
           stopServer(server);
-          expect(error).to.exist;
-          expect(error.code).to.equal("ERR_ASSERTION");
-          expect(error.message).to.equal(
-            `You must define content for the webapp plugin path /{args*}`
-          );
+          expect(res.statusCode).equal(500);
         });
     });
   });
@@ -1536,9 +1519,9 @@ describe("hapi electrode-react-webapp", () => {
       return electrodeServer(config).then(server => {
         server.ext({
           type: "onRequest",
-          method: (request, reply) => {
+          method: (request, h) => {
             request.app.webpackDev = { valid: false };
-            reply.continue();
+            return h.continue;
           }
         });
         const makeRequest = () => {
@@ -1562,9 +1545,9 @@ describe("hapi electrode-react-webapp", () => {
       return electrodeServer(config).then(server => {
         server.ext({
           type: "onRequest",
-          method: (request, reply) => {
+          method: (request, h) => {
             request.app.webpackDev = { valid: true, hasErrors: true };
-            reply.continue();
+            return h.continue;
           }
         });
         const makeRequest = () => {
@@ -1589,9 +1572,9 @@ describe("hapi electrode-react-webapp", () => {
         const compileTime = Date.now();
         server.ext({
           type: "onRequest",
-          method: (request, reply) => {
+          method: (request, h) => {
             request.app.webpackDev = { valid: true, hasErrors: false, compileTime };
-            reply.continue();
+            return h.continue;
           }
         });
         const makeRequest = () => {
@@ -1641,9 +1624,9 @@ describe("hapi electrode-react-webapp", () => {
 
         server.ext({
           type: "onRequest",
-          method: (request, reply) => {
+          method: (request, h) => {
             request.app.webpackDev = { valid: true, hasErrors: false, compileTime };
-            reply.continue();
+            return h.continue;
           }
         });
         const makeRequest = () => {
