@@ -24,7 +24,7 @@
     "require.js"
   ],
   "peerDependencies": {
-    "electrode-archetype-react-app": "^5.0.0"
+    "electrode-archetype-react-app": "^6.0.0"
   },
   "dependencies": {
     "autoprefixer": "^9.1.5",
