@@ -1,3 +1,17 @@
+# 10/12/2018
+
+- electrode-react-webapp: remove display html by status.  let `responseForBadStatus` option handle this.
+
+## Packages
+
+-   electrode-react-webapp@3.0.8 `(3.0.7 => 3.0.8)`
+
+## Commits
+
+-   `packages/electrode-react-webapp`
+
+    -   remove display html by status ([#991](https://github.com/electrode-io/electrode/pull/991)) [commit](http://github.com/electrode-io/electrode/commit/3596a540e02565509fe8f2ecc825651f6bdc68d1)
+
 # 10/11/2018
 
 - electrode-archetype-react-app: Major - webpack 4 upgrade
