@@ -8,6 +8,8 @@ const ReactWebapp = require("../react-webapp");
 const HttpStatus = require("../http-status");
 const { responseForError, responseForBadStatus } = require("../utils");
 
+const getDataHtml = data => (data.html !== undefined ? data.html : data);
+
 const DefaultHandleRoute = (request, response, handler, content, routeOptions) => {
   return handler({ content, mode: request.query.__mode || "", request })
     .then(context => {
@@ -23,13 +25,13 @@ const DefaultHandleRoute = (request, response, handler, content, routeOptions) =
         response.send(data);
       } else if (HttpStatus.redirect[status]) {
         response.redirect(status, data.path);
-      } else if (HttpStatus.displayHtml[status]) {
-        response.status(status).send(data.html !== undefined ? data.html : data);
       } else if (status >= 200 && status < 300) {
-        response.send(data.html !== undefined ? data.html : data);
-      } else {
+        response.send(getDataHtml(data));
+      } else if (routeOptions.responseForBadStatus) {
         const output = routeOptions.responseForBadStatus(request, routeOptions, data);
         response.status(output.status).send(output.html);
+      } else {
+        response.status(status).send(getDataHtml(data));
       }
     })
     .catch(err => {

@@ -9,6 +9,8 @@ const ReactWebapp = require("../react-webapp");
 const HttpStatus = require("../http-status");
 const { responseForError, responseForBadStatus } = require("../utils");
 
+const getDataHtml = data => (data.html !== undefined ? data.html : data);
+
 function DefaultHandleRoute(handler, content, routeOptions) {
   const request = this.request;
   const respond = (status, data) => {
@@ -30,13 +32,13 @@ function DefaultHandleRoute(handler, content, routeOptions) {
         respond(200, data);
       } else if (HttpStatus.redirect[status]) {
         this.redirect(data.path);
-      } else if (HttpStatus.displayHtml[status]) {
-        respond(status, data.html !== undefined ? data.html : data);
       } else if (status >= 200 && status < 300) {
-        respond(status, data.html !== undefined ? data.html : data);
-      } else {
+        respond(status, getDataHtml(data));
+      } else if (routeOptions.responseForBadStatus) {
         const output = routeOptions.responseForBadStatus(request, routeOptions, data);
         respond(output.status, output.html);
+      } else {
+        respond(status, getDataHtml(data));
       }
     })
     .catch(err => {

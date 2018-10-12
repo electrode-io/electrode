@@ -1334,6 +1334,7 @@ describe("hapi electrode-react-webapp", () => {
 
   it("should return 404 and html, if custom html is provided", () => {
     assign(mainRoutePathOptions, {
+      responseForBadStatus: null,
       content: {
         status: 404,
         html: "html content"
