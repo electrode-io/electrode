@@ -199,7 +199,7 @@ function responseForError(request, routeOptions, err) {
 function responseForBadStatus(request, routeOptions, data) {
   return {
     status: data.status,
-    html: data
+    html: (data && data.html) || data
   };
 }
 
