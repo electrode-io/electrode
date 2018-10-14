@@ -12,6 +12,7 @@ const Token = require("./token");
 const stringArray = require("string-array");
 const _ = require("lodash");
 const Path = require("path");
+const Promise = require("bluebird");
 
 const { TEMPLATE_DIR } = require("./symbols");
 
@@ -64,22 +65,18 @@ class AsyncTemplate {
     return this._handlersMap;
   }
 
-  async render(options) {
+  render(options) {
     const context = new RenderContext(options, this);
 
-    for (const r of this._beforeRenders) {
-      await r.beforeRender(context);
-    }
+    return Promise.each(this._beforeRenders, r => r.beforeRender(context))
+      .then(() => this._renderer.render(context))
+      .then(result => {
+        return Promise.each(this._afterRenders, r => r.afterRender(context)).then(() => {
+          context.result = context.isVoidStop ? context.voidResult : result;
 
-    const result = await this._renderer.render(context);
-
-    for (const r of this._afterRenders) {
-      await r.afterRender(context);
-    }
-
-    context.result = context.isVoidStop ? context.voidResult : result;
-
-    return context;
+          return context;
+        });
+      });
   }
 
   _findTokenIndex(id, str, index, instance = 0, msg = "AsyncTemplate._findTokenIndex") {
