@@ -1,3 +1,17 @@
+# 10/15/2018
+
+-   electrode-react-webapp: don't use async/await to avoid compatibility problems
+
+## Packages
+
+-   electrode-react-webapp@3.0.9 `(3.0.8 => 3.0.9)`
+
+## Commits
+
+-   `packages/electrode-react-webapp`
+
+    -   [patch] don't use async/await to avoid compatibility problems ([#993](https://github.com/electrode-io/electrode/pull/993)) [commit](http://github.com/electrode-io/electrode/commit/59a1570075afacb9b924a78f485ca664a5a14dd6)
+
 # 10/12/2018
 
 - electrode-react-webapp: remove display html by status.  let `responseForBadStatus` option handle this.
