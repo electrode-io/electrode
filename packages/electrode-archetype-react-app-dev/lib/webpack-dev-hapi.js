@@ -20,6 +20,24 @@ const _ = require("lodash");
 const statsUtils = require("./stats-utils");
 const statsMapper = require("./stats-mapper");
 
+//
+// skip webpack-dev-middleware if
+//
+// - http header FORCE_WEBPACK_DEV_MIDDLEWARE is not "true"
+// AND
+// - request is from https://github.com/hapijs/shot
+// - or if http header SKIP_WEBPACK_DEV_MIDDLEWARE is set to true
+//
+// Param: req is the Node HTTP raw request (framework agnostic)
+//
+const skipWebpackDevMiddleware = req => {
+  const h = req.headers || {};
+  return (
+    h.FORCE_WEBPACK_DEV_MIDDLEWARE !== "true" &&
+    (h["user-agent"] === "shot" || h.SKIP_WEBPACK_DEV_MIDDLEWARE === "true")
+  );
+};
+
 function register(server, options, next) {
   if (!archetype.webpack.devMiddleware) {
     console.error(
@@ -223,6 +241,10 @@ function register(server, options, next) {
       const isHmrRequest =
         req.url === webpackHotOptions.path ||
         (req.url.startsWith(publicPath) && req.url.indexOf(".hot-update.") >= 0);
+
+      if (skipWebpackDevMiddleware(req)) {
+        return reply.continue();
+      }
 
       if (!webpackDev.lastReporterOptions && !isHmrRequest) {
         return sendHtml(`<html><body>
