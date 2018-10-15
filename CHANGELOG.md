@@ -1,3 +1,18 @@
+# 10/15/2018
+
+-   electrode-archetype-react-app: support skipping webpack dev middleware in dev mode
+
+## Packages
+
+-   electrode-archetype-react-app@5.4.13 `(5.4.12 => 5.4.13)`
+-   electrode-archetype-react-app-dev@5.4.13 `(5.4.12 => 5.4.13)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   support skipping webpack dev middleware in dev mode ([#994](https://github.com/electrode-io/electrode/pull/994)) [commit](http://github.com/electrode-io/electrode/commit/29d4805f1ea998858cdc287774801e9840f387d3)
+
 # 10/11/2018
 
 ## Packages
