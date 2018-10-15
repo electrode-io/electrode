@@ -42,7 +42,8 @@ describe("electrode-archetype-react-app-dev extract-styles", function() {
       archetype.webpack.cssModuleSupport = true;
       archetype.webpack.enableShortenCSSNames = true;
       const moduleConfig = require(moduleName)().module;
-      expect(moduleConfig.rules[0].loader[2].loader).to.include("[hash:base64:5]");
+      expect(moduleConfig.rules[0].use[2].options.localIdentName).to.equal("[hash:base64:5]");
+      expect(moduleConfig.rules[0].use[3].options.ident).to.equal("postcss");
       delete process.env.NODE_ENV;
     });
 
@@ -50,27 +51,12 @@ describe("electrode-archetype-react-app-dev extract-styles", function() {
       archetype.webpack.cssModuleSupport = false;
       archetype.webpack.enableShortenCSSNames = true;
       const moduleConfig = require(moduleName)().module;
-      expect(moduleConfig.rules[0].loader[2].loader).to.not.include("[hash:base64:5]");
+      expect(moduleConfig.rules[0].use[2].options.localIdentName).to.be.undefined;
+      expect(moduleConfig.rules[0].use[3].options.ident).to.equal("postcss");
     });
   });
 
   describe("webpack config rules loader", () => {
-    it("Should enable cssnext if cssModuleSupport is true", () => {
-      archetype.webpack.cssModuleSupport = true;
-      const moduleConfig = require(moduleName)().plugins;
-      const webpackLoaderOptions = moduleConfig[2].options.options;
-      expect(webpackLoaderOptions.postcss()).to.be.an("array").that.is.not.empty;
-      expect(webpackLoaderOptions.stylus.use).to.be.an("array").that.is.empty;
-    });
-
-    it("Should enable stylus autoprefixer if cssModuleSupport is false", () => {
-      archetype.webpack.cssModuleSupport = false;
-      const moduleConfig = require(moduleName)().plugins;
-      const webpackLoaderOptions = moduleConfig[2].options.options;
-      expect(webpackLoaderOptions.postcss()).to.be.an("array").that.is.empty;
-      expect(webpackLoaderOptions.stylus.use).to.be.an("array").that.is.not.empty;
-    });
-
     it("Should disable sass loader if sassSupport is false", () => {
       archetype.options = {
         sass: false
