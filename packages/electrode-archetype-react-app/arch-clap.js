@@ -422,7 +422,12 @@ function makeTasks() {
     "build-dist-min": {
       dep: [".production-env"],
       desc: false,
-      task: mkCmd(`webpack --config`, quote(webpackConfig("webpack.config.js")), `--colors`, `--display-error-details`)
+      task: mkCmd(
+        `webpack --config`,
+        quote(webpackConfig("webpack.config.js")),
+        `--colors`,
+        `--display-error-details`
+      )
     },
 
     "build-dist:clean-tmp": {
@@ -737,26 +742,6 @@ Individual .babelrc files were generated for you in src/client and src/server
       desc: "Build your app's client bundle for production and run bundle analyzer",
       task: ["build-dist", "optimize-stats"]
     },
-    "run-electrify-cli": {
-      desc: false,
-      task: `electrify dist/server/stats.json -O`
-    },
-    electrify: [
-      ".clean.dist",
-      "build-webpack-stats-with-fullpath",
-      "build-dist:clean-tmp",
-      "run-electrify-cli"
-    ],
-    "build-fp-stats": {
-      desc:
-        "Build static bundle with stats.json containing fullPaths to inspect the bundle on electrode-electrify",
-      task: mkCmd(
-        `webpack --config`,
-        quote(webpackConfig("webpack.config.stats.electrify.js")),
-        `--colors`,
-        `--display-error-details`
-      )
-    },
     "critical-css": {
       desc: "Start server and run penthouse to output critical CSS",
       task: inlineCriticalCSS
@@ -823,7 +808,12 @@ Individual .babelrc files were generated for you in src/client and src/server
       "build-dist-dll": {
         dep: [".mk-dll-dir", ".mk-dist-dir", ".production-env"],
         task: () =>
-          exec(`webpack --config`, quote(webpackConfig("webpack.config.dll.js")), `--colors`, `--display-error-details`)
+          exec(
+            `webpack --config`,
+            quote(webpackConfig("webpack.config.dll.js")),
+            `--colors`,
+            `--display-error-details`
+          )
       },
       "copy-dll": () => shell.cp("-r", "dll/*", "dist")
     });
