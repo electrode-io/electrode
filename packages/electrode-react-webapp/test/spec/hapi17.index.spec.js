@@ -14,6 +14,7 @@ const webapp = require("../../lib/hapi/index17");
 const ReactDOMServer = require("react-dom/server");
 const React = require("react");
 const Helmet = require("react-helmet").Helmet;
+const sinon = require("sinon");
 
 const getConfig = () => {
   return {
@@ -51,11 +52,20 @@ const getConfig = () => {
 };
 
 describe("hapi index", () => {
+  let sandbox;
+
+  before(() => {
+    sandbox = sinon.sandbox.create();
+  });
+  afterEach(() => {
+    sandbox.restore();
+  });
+
   it("with hapi 16", () => {
     delete require.cache[require.resolve("../../lib/hapi")];
     delete require.cache[require.resolve("../..")];
     const compat = require("electrode-hapi-compat");
-    compat._testSetHapi17(false);
+    sandbox.stub(compat, "isHapi17").returns(false);
     const req = require("../..");
     expect(req.register).a("function");
     expect(req.register.attributes.pkg.name).eql("webapp");
@@ -65,7 +75,7 @@ describe("hapi index", () => {
     delete require.cache[require.resolve("../../lib/hapi")];
     delete require.cache[require.resolve("../..")];
     const compat = require("electrode-hapi-compat");
-    compat._testSetHapi17(true);
+    sandbox.stub(compat, "isHapi17").returns(true);
     const req = require("../..");
     expect(req.register).eq(webapp.register);
     expect(req.pkg).eq(webapp.pkg);
@@ -81,14 +91,16 @@ describe("hapi 17 electrode-react-webapp", () => {
   let compat;
 
   let stdoutIntercept;
+  let sandbox;
 
   const stopServer = server => server.stop();
 
   beforeEach(() => {
+    sandbox = sinon.sandbox.create();
     delete require.cache[require.resolve("../../lib/hapi")];
     delete require.cache[require.resolve("../..")];
     compat = require("electrode-hapi-compat");
-    compat._testSetHapi17(true);
+    sandbox.stub(compat, "isHapi17").returns(true);
 
     config = getConfig();
     configOptions = config.plugins["react-webapp"].options;
@@ -96,7 +108,7 @@ describe("hapi 17 electrode-react-webapp", () => {
   });
 
   afterEach(() => {
-    compat._testSetHapi17(false);
+    sandbox.restore();
 
     if (stdoutIntercept) {
       stdoutIntercept.restore();
@@ -1236,6 +1248,8 @@ describe("hapi 17 electrode-react-webapp", () => {
           url: "/"
         })
         .then(res => {
+          // eslint-ignore-next-line
+          console.log(res);
           expect(res.statusCode).to.equal(200);
           expect(res.result.message).to.equal("status 200 noss");
           stopServer(server);
