@@ -12,3 +12,4 @@ install: fyn --pg none install
 script: npm test
 before_install:
   - npm install -g xclap-cli fyn
+  - fyn --version
