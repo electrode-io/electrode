@@ -466,14 +466,14 @@ Individual .babelrc files were generated for you in src/client and src/server
       task: mkCmd(
         `babel`,
         `--source-maps=inline --copy-files --out-dir ${AppMode.lib.client}`,
-          `${AppMode.src.client}`,
+        `${AppMode.src.client}`,
         `--ignore`,
-          [
-            `"${AppMode.src.client}/**/*.spec.js"`,
-            `"${AppMode.src.client}/**/*.spec.jsx"`,
-            `"${AppMode.src.client}/**/*.test.js"`,
-            `"${AppMode.src.client}/**/*.test.jsx"`,
-          ].join(',')
+        [
+          `"${AppMode.src.client}/**/*.spec.js"`,
+          `"${AppMode.src.client}/**/*.spec.jsx"`,
+          `"${AppMode.src.client}/**/*.test.js"`,
+          `"${AppMode.src.client}/**/*.test.jsx"`
+        ].join(",")
       )
     },
 
@@ -494,13 +494,13 @@ Individual .babelrc files were generated for you in src/client and src/server
         `babel`,
         `--source-maps=inline --copy-files --out-dir ${AppMode.lib.server}`,
         `${AppMode.src.server}`,
-          `--ignore`,
-          [
-              `"${AppMode.src.client}/**/*.spec.js"`,
-              `"${AppMode.src.client}/**/*.spec.jsx"`,
-              `"${AppMode.src.client}/**/*.test.js"`,
-              `"${AppMode.src.client}/**/*.test.jsx"`,
-          ].join(',')
+        `--ignore`,
+        [
+          `"${AppMode.src.client}/**/*.spec.js"`,
+          `"${AppMode.src.client}/**/*.spec.jsx"`,
+          `"${AppMode.src.client}/**/*.test.js"`,
+          `"${AppMode.src.client}/**/*.test.jsx"`
+        ].join(",")
       )
     },
 
