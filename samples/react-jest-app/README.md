@@ -35,16 +35,35 @@ $ npm run test
 
 ### Check your lib
 
-This project was partially created as a test for a pull request to ensure test/spec files were not ending up 
+The common way to test with jest is to embed the tests next to
+the source of the component they are testing. 
+
+This project was partially created as a test for a pull request 
+to ensure test/spec files were not ending up 
 in the `/lib` directory on build.  As such, a couple of helper scripts were added.
 
 ```sh
+$ cd samples/react-jest-app
 $ npm run nuke-lib
 $ npm run build
 $ npm run check-test-in-lib
 ```
 
 This should output a PASS or FAIL depending on if it finds a spec file in the `/lib` directory.
+
+### Check your electrode changes
+
+If you're making changes to electrode itself,
+you can use this sample app to check if your react client tests 
+are ending up in your `/lib` directory.
+
+```sh
+$ cd samples/react-jest-app
+$ fyn
+$ npm run nuke-lib
+$ npm run build
+$ npm run check-test-in-lib
+```
 
 ## License
 
