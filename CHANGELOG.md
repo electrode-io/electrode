@@ -1,3 +1,22 @@
+# 10/17/2018
+
+-   electrode-archetype-react-app: fixes test files are copied to lib from src 
+
+## Packages
+
+-   electrode-archetype-react-app@5.4.14 `(5.4.13 => 5.4.14)`
+-   electrode-archetype-react-app-dev@5.4.14 `(5.4.13 => 5.4.14)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [patch][bug] fixes CEECORE-449 test files are copied to lib from src ([#998](https://github.com/electrode-io/electrode/pull/998)) [commit](http://github.com/electrode-io/electrode/commit/02164e0747937455d142e6f336eb091316b6355f)
+
+-   `samples/react-jest-app`
+
+    -   [patch][bug] fixes CEECORE-449 test files are copied to lib from src ([#998](https://github.com/electrode-io/electrode/pull/998)) [commit](http://github.com/electrode-io/electrode/commit/02164e0747937455d142e6f336eb091316b6355f)
+
 # 10/15/2018
 
 -   electrode-archetype-react-app: support skipping webpack dev middleware in dev mode
