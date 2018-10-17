@@ -8,6 +8,8 @@ const ReactWebapp = require("../react-webapp");
 const HttpStatus = require("../http-status");
 const { responseForError, responseForBadStatus } = require("../utils");
 
+const getDataHtml = data => (data.html !== undefined ? data.html : data);
+
 const DefaultHandleRoute = (request, h, handler, content, routeOptions) => {
   return handler({
     content,
@@ -25,18 +27,14 @@ const DefaultHandleRoute = (request, h, handler, content, routeOptions) => {
       let respond;
       let status = data.status;
 
-      // eslint-disable-next-line
-      console.log(HttpStatus);
-      // eslint-disable-next-line
-      console.log(HttpStatus.displayHtml);
       if (status === undefined) {
         status = 200;
         respond = h.response(data);
       } else if (HttpStatus.redirect[status]) {
         respond = h.redirect(data.path);
         return respond;
-      } else if (HttpStatus.displayHtml[status] || (status >= 200 && status < 300)) {
-        respond = h.response(data.html !== undefined ? data.html : data);
+      } else if (status >= 200 && status < 300) {
+        respond = h.response(getDataHtml(data));
       } else if (routeOptions.responseForBadStatus) {
         const output = routeOptions.responseForBadStatus(request, routeOptions, data);
         status = output.status;
@@ -45,7 +43,7 @@ const DefaultHandleRoute = (request, h, handler, content, routeOptions) => {
         // should not reach here w/o html because user returned content
         // would have to return a literal string that has no `.status`
         // and html being undefined to be able to skip all the cases above
-        respond = h.response(data.html);
+        respond = h.response(getDataHtml(data));
       }
 
       const response = context.user && context.user.response;

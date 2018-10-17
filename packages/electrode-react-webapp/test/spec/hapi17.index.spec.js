@@ -1248,8 +1248,6 @@ describe("hapi 17 electrode-react-webapp", () => {
           url: "/"
         })
         .then(res => {
-          // eslint-ignore-next-line
-          console.log(res);
           expect(res.statusCode).to.equal(200);
           expect(res.result.message).to.equal("status 200 noss");
           stopServer(server);
@@ -1368,6 +1366,7 @@ describe("hapi 17 electrode-react-webapp", () => {
 
   it("should return 404 and html, if custom html is provided", () => {
     assign(mainRoutePathOptions, {
+      responseForBadStatus: null,
       content: {
         status: 404,
         html: "html content"
