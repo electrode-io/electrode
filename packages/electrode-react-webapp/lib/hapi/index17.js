@@ -25,6 +25,10 @@ const DefaultHandleRoute = (request, h, handler, content, routeOptions) => {
       let respond;
       let status = data.status;
 
+      // eslint-disable-next-line
+      console.log(HttpStatus);
+      // eslint-disable-next-line
+      console.log(HttpStatus.displayHtml);
       if (status === undefined) {
         status = 200;
         respond = h.response(data);
