@@ -136,6 +136,18 @@ Here is the documentation on a [gitbook] structure: <https://toolchain.gitbook.c
 > Without the `--no-watch --no-live` options it becomes unusably slow on my machine.\
 > If things don't work, then remove `~/.gitbook` and run `gitbook install` or `gitbook fetch` to let it reset itself.
 
+## Releasing
+
+The versioning of modules in the this repo are all automatically controlled by the commit message.
+
+It's important that commits are isolated for the package they affected only and contains the version tags `[major]`, `[minor]`, or `[patch]`. `[patch]` is the default if tag is not found in commit message.
+
+To release, there are three steps:
+
+1. Use `clap update-changelog` to detect packages that changed and their version bumps.
+2. Run `npx fynpo prepare` to look at `CHANGELOG.md` and update dependencies and versions.
+3. Publish the packages that `fynpo prepare` shown that has updates.
+
 [gitbook-cli]: https://www.npmjs.com/package/gitbook-cli
 [prettier]: https://www.npmjs.com/package/prettier
 [lerna]: https://lernajs.io/
