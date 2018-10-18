@@ -1,3 +1,15 @@
+# 10/18/2018
+
+## Packages
+
+-   electrode-react-webapp@3.1.1 `(3.1.0 => 3.1.1)`
+
+## Commits
+
+-   `packages/electrode-react-webapp`
+
+    -   [patch] don't add <script> to prefetch if it already has it ([#1002](https://github.com/electrode-io/electrode/pull/1002)) [commit](http://github.com/electrode-io/electrode/commit/cd6fa531a8db6537fda91e0c6e728947182cb9df)
+
 # 10/17/2018
 
 -   electrode-react-webapp: Add support for hapi 17
