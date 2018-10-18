@@ -15,7 +15,7 @@
   },
   "homepage": "https://github.com/electrode-io/electrode",
   "scripts": {
-    "bootstrap": "eval `fyn bash` && fynpo",
+    "bootstrap": "fynpo",
     "test": "npm run bootstrap && lerna run test"
   },
   "dependency": {},
