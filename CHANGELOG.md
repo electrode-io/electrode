@@ -1,3 +1,22 @@
+# 10/18/2018
+
+-   electrode-archetype-react-app: load electrode DLL for karma tests
+
+## Packages
+
+-   electrode-archetype-react-app@5.4.16 `(5.4.15 => 5.4.16)`
+-   electrode-archetype-react-app-dev@5.4.16 `(5.4.15 => 5.4.16)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   load electrode DLL for karma tests ([#1003](https://github.com/electrode-io/electrode/pull/1003)) [commit](http://github.com/electrode-io/electrode/commit/4007b1c53927f071531ece72e9f36fcda887dc42)
+
+-   `samples/demo-component`
+
+    -   [chore] ci updates [commit](http://github.com/electrode-io/electrode/commit/f8ca45e8e7df00df5ebd7e4850a9ecab74f25465)
+
 # 10/17/2018
 
 -   electrode-archetype-react-app: fix DLL assets update in dev mode 
