@@ -16,13 +16,7 @@
   ],
   "main": "server/index.js",
   "keywords": [
-    "e",
-    "l",
-    "c",
-    "t",
-    "r",
-    "o",
-    "d"
+    "electrode"
   ],
   "repository": {
     "type": "git",
