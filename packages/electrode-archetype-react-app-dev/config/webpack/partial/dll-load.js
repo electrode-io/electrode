@@ -37,11 +37,13 @@ const loadJson = (name, defaultVal) => {
   }
 };
 
+const getEnvTag = () => (process.env.NODE_ENV === "production" ? "" : ".dev");
+
 const findDllManifests = name => {
   try {
     const modulePath = require.resolve(Path.join(name, "package.json"));
     const moduleDir = Path.dirname(modulePath);
-    const dev = process.env.NODE_ENV === "production" ? "" : ".dev";
+    const dev = getEnvTag();
     const statsFile = Path.join(moduleDir, "dist", `stats${dev}.json`);
     const stats = JSON.parse(Fs.readFileSync(statsFile));
     const dllNames = Object.keys(stats.assetsByChunkName);
@@ -120,12 +122,14 @@ const electrodeDllDevBasePath = "__electrode_dev/dll";
 const updateDllAssetsForDev = dllAssets => {
   const baseUrl = devServerBaseUrl(archetype.webpack);
 
+  const tag = getEnvTag();
+
   Object.keys(dllAssets).forEach(modName => {
     const encModName = encodeURIComponent(modName);
-    const cdnMapping = dllAssets[modName].cdnMapping;
+    const cdnMapping = (dllAssets[modName].cdnMapping = {});
     Object.keys(dllAssets[modName]).forEach(dll => {
       if (dll === "cdnMapping") return;
-      const bundle = dllAssets[modName][dll].assets.find(n => n.endsWith(".js"));
+      const bundle = dllAssets[modName][dll].assets.find(n => n.endsWith(`${tag}.js`));
       cdnMapping[bundle] = `${baseUrl}/${electrodeDllDevBasePath}/${encModName}/${bundle}`;
     });
   });
@@ -174,7 +178,7 @@ module.exports = function(options) {
 
   dllInfo.forEach(verifyVersions);
 
-  const tag = process.env.NODE_ENV === "production" ? "" : ".dev";
+  const tag = getEnvTag();
 
   const dllAssets = dllInfo.reduce((a, x) => {
     if (!a[x.moduleName]) {
