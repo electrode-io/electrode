@@ -24,7 +24,7 @@ module.exports = {
 
 ## Jest
 
-The App Archetype also takes Jest as its delightful javascript testing option. It has a built-in Jest configuration, and you can also extend it from your app level. Jest parallelizes test runs across workers to maximize performance.
+The App Archetype also takes Jest as its delightful javascript testing option. It has a built-in Jest configuration, and you can also extend it from your app level. Jest parallelizes test runs across workers and runs slowest tests first to maximize performance.
 
 ### Run your jest tests
 
@@ -37,7 +37,7 @@ The App Archetype also takes customized Jest config from your app level. To do t
 ```js
 module.exports = {
   jest: {
-    // sepcify your jest config here
+    // specify your jest config here
   }
 };
 ```
