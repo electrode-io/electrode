@@ -14,11 +14,15 @@ const browserSettings = require("./browser-settings");
 
 PREPROCESSORS[MAIN_PATH] = ["webpack", "sourcemap"];
 
+const loadElectrodeDll = require("./util/load-electrode-dll");
+
+const DLL_PATHS = loadElectrodeDll().map(x => require.resolve(x));
+
 module.exports = function(config) {
   const settings = {
     basePath: process.cwd(),
     frameworks: ["mocha", "intl-shim"],
-    files: [MAIN_PATH],
+    files: DLL_PATHS.concat(MAIN_PATH),
     plugins: [
       "karma-chrome-launcher",
       "karma-coverage",
