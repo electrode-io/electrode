@@ -1,3 +1,40 @@
+# 10/17/2018
+
+-   electrode-react-webapp: Add support for hapi 17
+
+## Packages
+
+-   electrode-archetype-react-app@6.0.1 `(6.0.0 => 6.0.1)`
+-   electrode-archetype-react-app-dev@6.0.1 `(6.0.0 => 6.0.1)`
+-   electrode-react-webapp@3.1.0 `(3.0.9 => 3.1.0)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [chore] fix linting errors [commit](http://github.com/electrode-io/electrode/commit/d92fa7e658438882b0bb8912db62baea47efb597)
+    -   [patch][bug] fixes CEECORE-449 test files are copied to lib from src ([#998](https://github.com/electrode-io/electrode/pull/998)) [commit](http://github.com/electrode-io/electrode/commit/7730f7852e21d4b45a7d2023087ae0f71de7a1c3)
+    -   drop electrify tasks in prep for source-map-explorer (v6 release) ([#996](https://github.com/electrode-io/electrode/pull/996)) [commit](http://github.com/electrode-io/electrode/commit/001b7190640743af1225e04d76026535fc952f1c)
+    -   support skipping webpack dev middleware in dev mode ([#994](https://github.com/electrode-io/electrode/pull/994)) [commit](http://github.com/electrode-io/electrode/commit/c027bc981def90e5fcf2687960ce968f7566a065)
+    -   Fix tests ([#995](https://github.com/electrode-io/electrode/pull/995)) [commit](http://github.com/electrode-io/electrode/commit/83825405c68c3ff01c1680f3e6813637f6adf1e0)
+    -   fix DLL assets update in dev mode ([#1001](https://github.com/electrode-io/electrode/pull/1001)) [commit](http://github.com/electrode-io/electrode/commit/ca43c8a141dd930a8700a8f02251f13fad7167e8)
+
+-   `packages/electrode-react-webapp`
+
+    -   Add support for hapi 17 ([#992](https://github.com/electrode-io/electrode/pull/992)) [commit](http://github.com/electrode-io/electrode/commit/10c773ff97f985513a092adaa1e3a39fd3a42efa)
+
+-   `samples/react-jest-app`
+
+    -   [patch][bug] fixes CEECORE-449 test files are copied to lib from src ([#998](https://github.com/electrode-io/electrode/pull/998)) [commit](http://github.com/electrode-io/electrode/commit/7730f7852e21d4b45a7d2023087ae0f71de7a1c3)
+
+-   `docs`
+
+    -   Update unit-tests.md ([#1000](https://github.com/electrode-io/electrode/pull/1000)) [commit](http://github.com/electrode-io/electrode/commit/b27f5cd6f39685124d1064b2331f93e37e2c1459)
+
+-   `MISC`
+
+    -   [chore] add releasing doc [commit](http://github.com/electrode-io/electrode/commit/1d515401424cc738808701305bf704df9625aeff)
+
 # 10/15/2018
 
 -   electrode-react-webapp: don't use async/await to avoid compatibility problems
