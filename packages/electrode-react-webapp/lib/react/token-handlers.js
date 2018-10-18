@@ -22,6 +22,8 @@ const {
   makeElectrodeDllScripts
 } = require("./content");
 
+const prefetchBundles = require("./handlers/prefetch-bundles");
+
 const CONTENT_MARKER = "SSR_CONTENT";
 const HEADER_BUNDLE_MARKER = "WEBAPP_HEADER_BUNDLES";
 const BODY_BUNDLE_MARKER = "WEBAPP_BODY_BUNDLES";
@@ -183,11 +185,7 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
       return context.user.routeData.dllAssetScripts;
     },
 
-    [PREFETCH_MARKER]: context => {
-      return !context.user.content.prefetch
-        ? ""
-        : `<script${context.user.scriptNonce}>${context.user.content.prefetch}</script>`;
-    },
+    [PREFETCH_MARKER]: prefetchBundles,
 
     [META_TAGS_MARKER]: iconStats,
 
