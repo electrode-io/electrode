@@ -1,5 +1,26 @@
 # 10/17/2018
 
+-   electrode-archetype-react-app: fix DLL assets update in dev mode 
+
+## Packages
+
+-   electrode-archetype-react-app@5.4.15 `(5.4.14 => 5.4.15)`
+-   electrode-archetype-react-app-dev@5.4.15 `(5.4.14 => 5.4.15)`
+-   electrode-archetype-react-component@5.3.7 `(5.3.5 => 5.3.7)`
+-   electrode-archetype-react-component-dev@5.3.7 `(5.3.5 => 5.3.7)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   fix DLL assets update in dev mode ([#1001](https://github.com/electrode-io/electrode/pull/1001)) [commit](http://github.com/electrode-io/electrode/commit/703cbb0a545fd187cfd5db81c91b1274f6f6fbf3)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   [chore] republish with node-resolver at v1 [commit](http://github.com/electrode-io/electrode/commit/ca45d9abf06f8f1215ec817b89bc3b7512fe6d58)
+
+# 10/17/2018
+
 -   electrode-archetype-react-app: fixes test files are copied to lib from src 
 
 ## Packages
