@@ -8,16 +8,6 @@ const portFromEnv = () => {
   return x !== null && !isNaN(x) ? x : defaultListenPort;
 };
 
-const webappPlugin = () => {
-  //<% if (serverType==="HapiJS") { %>
-  return "electrode-react-webapp/lib/hapi";
-  //<% } else if (serverType==="ExpressJS") { %>
-  return "electrode-react-webapp/lib/express";
-  //<% } else { %>
-  return "electrode-react-webapp/lib/koa";
-  //<% } %>
-};
-
 module.exports = {
   plugins: {
     good: {
@@ -63,10 +53,10 @@ module.exports = {
     }, //<% } if (isAutoSSR) { %>
     "electrode-auto-ssr": {}, //<% } %>
     webapp: {
-      module: webappPlugin(),
+      module: "electrode-react-webapp/lib/hapi",
       options: {
         pageTitle: "<%= projectName %>",
-        insertTokenIds: false, // Set true to get tokens in index.html for debugging
+        insertTokenIds: false,
         paths: {
           "<%= routeValue %>": {
             content: {

@@ -281,7 +281,8 @@ module.exports = class extends Generator {
       isExpress,
       isPWA,
       isAutoSSR,
-      isSingleQuote
+      isSingleQuote,
+      projectName: this.props.name
     });
 
     const jsPkg = this.fs.read(this.destinationPath(_pkgJs)).toString();
@@ -342,15 +343,18 @@ module.exports = class extends Generator {
     // Let's extend package.json so we're not overwriting user previous fields
     this.fs.writeJSON(this.destinationPath("package.json"), pkg);
 
-    const rootConfigsToCopy = ["xclap.js", "config", "test"];
+    const configSrcDir = this.props.serverType.toLowerCase();
+
+    const rootConfigsToCopy = [["xclap.js"], [`config/${configSrcDir}`, "config"], ["test"]];
+
     if (this.props.flow) {
-      rootConfigsToCopy.push(".flowconfig");
+      rootConfigsToCopy.push([".flowconfig"]);
     }
-    rootConfigsToCopy.push(".eslintrc.js");
+    rootConfigsToCopy.push([".eslintrc.js"]);
     rootConfigsToCopy.forEach(f => {
       this.fs.copyTpl(
-        this.templatePath(f),
-        this.destinationPath(f),
+        this.templatePath(f[0]),
+        this.destinationPath(f[1] || f[0]),
         { isSingleQuote },
         {},
         { globOptions: { dot: true } }
