@@ -5,36 +5,28 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const _ = require("lodash");
-const defaultConfig = require("electrode-confippet").config;
-const Confippet = require("electrode-confippet");
-
-const loadConfigs = function(userConfig) {
-  //use confippet to merge user config and default config
-  if (_.get(userConfig, "plugins.electrodeStaticPaths.enable")) {
-    userConfig.plugins.electrodeStaticPaths.enable = false;
-  }
-
-  return Confippet.util.merge(defaultConfig, userConfig);
-};
 
 const setStaticPaths = function() {
-  app.use(
-    express.static(
-      path.join(
-        __dirname,
-        "../..",
-        defaultConfig.$("plugins.electrodeStaticPaths.options.pathPrefix")
-      )
-    )
-  );
+  app.use(express.static(path.join(__dirname, "../../dist")));
 };
 
-const setRouteHandler = () =>
+const setDevMiddleware = config => {
+  try {
+    const devSetup = require("electrode-archetype-react-app-dev/lib/webpack-dev-express");
+    devSetup(app, "http", config.port);
+  } catch (err) {
+    if (process.env.NODE_ENV !== "production") {
+      console.log("setup dev middleware failed", err);
+    }
+  }
+};
+
+const setRouteHandler = config =>
   new Promise((resolve, reject) => {
     const webapp = p => (p.startsWith(".") ? path.resolve(p) : p);
-    const registerRoutes = require(webapp(defaultConfig.$("plugins.webapp.module"))); //eslint-disable-line
+    const registerRoutes = require(webapp(config.webapp.module)); //eslint-disable-line
 
-    return registerRoutes(app, defaultConfig.$("plugins.webapp.options"), err => {
+    return registerRoutes(app, config.webapp.options, err => {
       if (err) {
         console.error(err); //eslint-disable-line
         reject(err);
@@ -44,14 +36,14 @@ const setRouteHandler = () =>
     });
   });
 
-const startServer = () =>
+const startServer = config =>
   new Promise((resolve, reject) => {
-    app.listen(defaultConfig.$("connections.default.port"), err => {
+    app.listen(config.port, err => {
       if (err) {
         reject(err);
       } else {
         //eslint-disable-next-line
-        console.log(`App listening on port: ${defaultConfig.$("connections.default.port")}`);
+        console.log(`\nApp listening on port: ${config.port}`);
         resolve();
       }
     });
@@ -59,10 +51,10 @@ const startServer = () =>
 
 module.exports = function electrodeServer(userConfig, callback) {
   const promise = Promise.resolve(userConfig)
-    .then(loadConfigs)
-    .then(setStaticPaths)
-    .then(setRouteHandler)
-    .then(startServer);
+    .tap(setDevMiddleware)
+    .tap(setStaticPaths)
+    .tap(setRouteHandler)
+    .tap(startServer);
 
   return callback ? promise.nodeify(callback) : promise;
 };

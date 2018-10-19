@@ -5,5 +5,10 @@
         "cors": true
       }
     }
+  },
+  "webapp": {
+    "options": {
+      "insertTokenIds": true
+    }
   }
 }
