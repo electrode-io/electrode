@@ -1,5 +1,7 @@
 "use strict";
 
+/* eslint-disable no-console, no-magic-numbers */
+
 const Url = require("url");
 const Boom = require("boom");
 const mime = require("mime");
