@@ -1,3 +1,31 @@
+# 10/19/2018
+
+- fix express app
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-react-app@5.4.17 `(5.4.16 => 5.4.17)`
+-   electrode-archetype-react-app-dev@5.4.17 `(5.4.16 => 5.4.17)`
+-   generator-electrode@4.2.5 `(4.2.4 => 4.2.5)`
+
+### Lerna Updated
+
+-   electrode-ignite@2.1.9 `(2.1.8 => 2.1.9)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   add express dev middleware ([#1007](https://github.com/electrode-io/electrode/pull/1007)) [commit](http://github.com/electrode-io/electrode/commit/231bfa629a8871521f7aea0f0b639676e24033ee)
+    -   extract framework agnostic webpack dev code ([#1004](https://github.com/electrode-io/electrode/pull/1004)) [commit](http://github.com/electrode-io/electrode/commit/9aed31827a25f5fbe2370001bc1efcfbeae2cb95)
+    -   fix DLL loading for karma ([#1010](https://github.com/electrode-io/electrode/pull/1010)) [commit](http://github.com/electrode-io/electrode/commit/171dfc0d574562e4bcfe314108804995be1cb5f3)
+
+-   `packages/generator-electrode`
+
+    -   update express server for app generator ([#1008](https://github.com/electrode-io/electrode/pull/1008)) [commit](http://github.com/electrode-io/electrode/commit/502d5c262a1832e28bb015e179b8214a82abce84)
+
 # 10/18/2018
 
 -   electrode-archetype-react-app: load electrode DLL for karma tests
@@ -19,7 +47,7 @@
 
 # 10/17/2018
 
--   electrode-archetype-react-app: fix DLL assets update in dev mode 
+-   electrode-archetype-react-app: fix DLL assets update in dev mode
 
 ## Packages
 
@@ -40,7 +68,7 @@
 
 # 10/17/2018
 
--   electrode-archetype-react-app: fixes test files are copied to lib from src 
+-   electrode-archetype-react-app: fixes test files are copied to lib from src
 
 ## Packages
 
