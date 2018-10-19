@@ -4,6 +4,9 @@ const moduleName = "../../config/webpack/partial/extract-style";
 
 describe("electrode-archetype-react-app-dev extract-styles", function() {
   this.timeout(10000);
+
+  archetype.options.sass = true;
+
   afterEach(() => {
     delete require.cache[require.resolve(moduleName)];
   });

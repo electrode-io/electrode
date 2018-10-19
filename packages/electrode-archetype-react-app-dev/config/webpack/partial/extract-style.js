@@ -108,17 +108,18 @@ const stylusQuery = {
 };
 
 module.exports = function() {
-  rules.push(
-    {
-      _name: `extract-css${cssModuleSupport ? "-modules" : ""}`,
-      test: /\.css$/,
-      use: ExtractTextPlugin.extract({
-        fallback: styleLoader,
-        use: cssModuleSupport ? [cssModuleQuery, postcssQuery] : [cssQuery, postcssQuery],
-        publicPath: ""
-      })
-    },
-    {
+  rules.push({
+    _name: `extract-css${cssModuleSupport ? "-modules" : ""}`,
+    test: /\.css$/,
+    use: ExtractTextPlugin.extract({
+      fallback: styleLoader,
+      use: cssModuleSupport ? [cssModuleQuery, postcssQuery] : [cssQuery, postcssQuery],
+      publicPath: ""
+    })
+  });
+
+  if (archetype.options.sass) {
+    rules.push({
       _name: `extract${cssModuleSupport ? "-css" : ""}-scss`,
       test: /\.(scss|sass)$/,
       use: ExtractTextPlugin.extract({
@@ -128,19 +129,20 @@ module.exports = function() {
           : [cssQuery, postcssQuery, sassQuery],
         publicPath: ""
       })
-    },
-    {
-      _name: `extract${cssModuleSupport ? "-css" : ""}-stylus`,
-      test: /\.styl$/,
-      use: ExtractTextPlugin.extract({
-        fallback: styleLoader,
-        use: cssModuleSupport
-          ? [cssModuleQuery, postcssQuery, stylusQuery]
-          : [cssQuery, postcssQuery, stylusQuery],
-        publicPath: ""
-      })
-    }
-  );
+    });
+  }
+
+  rules.push({
+    _name: `extract${cssModuleSupport ? "-css" : ""}-stylus`,
+    test: /\.styl$/,
+    use: ExtractTextPlugin.extract({
+      fallback: styleLoader,
+      use: cssModuleSupport
+        ? [cssModuleQuery, postcssQuery, stylusQuery]
+        : [cssQuery, postcssQuery, stylusQuery],
+      publicPath: ""
+    })
+  });
 
   /*
   *** cssModuleStylusSupport flag is about to deprecate. ***
