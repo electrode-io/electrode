@@ -67,7 +67,7 @@ class ReduxRouterEngine {
   }
 
   startMatch(req, options = {}) {
-    const location = options.location || req.url || Url.parse(req.path);
+    const location = options.location || Url.parse(req.url || req.path);
 
     options = Object.assign({}, options, { req, location });
 
