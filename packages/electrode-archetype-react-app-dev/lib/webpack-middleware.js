@@ -4,7 +4,7 @@
 /* eslint-disable max-params, prefer-template, complexity, global-require */
 const Path = require("path");
 const Fs = require("fs");
-const Webpack = require("webpack");
+const webpack = require("webpack");
 const opn = require("opn");
 const webpackDevMiddleware = require("webpack-dev-middleware");
 const webpackHotMiddleware = require("webpack-hot-middleware");
@@ -71,14 +71,14 @@ class Middleware {
     }
 
     config.plugins = [
-      new Webpack.HotModuleReplacementPlugin(),
-      new Webpack.NoEmitOnErrorsPlugin()
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoEmitOnErrorsPlugin()
     ].concat(config.plugins);
 
-    const compiler = new Webpack(config);
+    const compiler = webpack(config);
 
     if (options.progress !== false) {
-      compiler.apply(new Webpack.ProgressPlugin({ profile: options.progressProfile }));
+      compiler.apply(new webpack.ProgressPlugin({ profile: options.progressProfile }));
     }
 
     const webpackDevOptions = _.merge(
