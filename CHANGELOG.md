@@ -1,3 +1,47 @@
+# 10/22/2018
+
+-   electrode-archetype-react-app: bring in updates from v5
+-   electrode-redux-router-engine: fix request url/path matching
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-react-app@6.0.2 `(6.0.1 => 6.0.2)`
+-   electrode-archetype-react-app-dev@6.0.2 `(6.0.1 => 6.0.2)`
+-   electrode-redux-router-engine@2.1.7 `(2.1.6 => 2.1.7)`
+
+### Lerna Updated
+
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   fix DLL loading for karma ([#1010](https://github.com/electrode-io/electrode/pull/1010)) [commit](http://github.com/electrode-io/electrode/commit/94f174fe5b87c4a040cb79fd319d06b5db9a2d8c)
+    -   fix dev middleware for webpack 4 ([#1009](https://github.com/electrode-io/electrode/pull/1009)) [commit](http://github.com/electrode-io/electrode/commit/d422346d53cd868a03253811d5260989b4a8a5e8)
+    -   for v6: default sass to false ([#1005](https://github.com/electrode-io/electrode/pull/1005)) [commit](http://github.com/electrode-io/electrode/commit/0c8993e85cc44276ca5b003c938c8a8eb441a2f7)
+    -   extract framework agnostic webpack dev code ([#1004](https://github.com/electrode-io/electrode/pull/1004)) [commit](http://github.com/electrode-io/electrode/commit/292759a25e5866362c60c140b4e8005a6b5ab5c6)
+    -   load electrode DLL for karma tests ([#1003](https://github.com/electrode-io/electrode/pull/1003)) [commit](http://github.com/electrode-io/electrode/commit/cd0cb3400f918c4f80bcd5c04b7f731a162b85ee)
+    -   fix load dll assets ([#1011](https://github.com/electrode-io/electrode/pull/1011)) [commit](http://github.com/electrode-io/electrode/commit/de64de15091f68f9306cd2dcd4c406d246f1544b)
+
+-   `packages/electrode-redux-router-engine`
+
+    -   fix request url/path matching ([#1006](https://github.com/electrode-io/electrode/pull/1006)) [commit](http://github.com/electrode-io/electrode/commit/96284c62c99f6f7ad25391d9887faab0d3588398)
+
+-   `packages/generator-electrode`
+
+    -   update express server for app generator ([#1008](https://github.com/electrode-io/electrode/pull/1008)) [commit](http://github.com/electrode-io/electrode/commit/5bb7d02bf527c01606f6fea7510c4023788e04d2)
+
+-   `samples/demo-component`
+
+    -   [chore] fix keywords in package.json [commit](http://github.com/electrode-io/electrode/commit/9763bc53c8f76dbc6220e4094230c96caa0965e5)
+    -   fyn setup no longer required [commit](http://github.com/electrode-io/electrode/commit/b4c698fb2e28e2ea49cef1d244e8c3cc011b5960)
+
+-   `samples/stylus-sample`
+
+    -   for v6: default sass to false ([#1005](https://github.com/electrode-io/electrode/pull/1005)) [commit](http://github.com/electrode-io/electrode/commit/0c8993e85cc44276ca5b003c938c8a8eb441a2f7)
+
 # 10/18/2018
 
 ## Packages
