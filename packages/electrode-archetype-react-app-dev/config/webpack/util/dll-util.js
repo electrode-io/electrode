@@ -165,30 +165,31 @@ module.exports = {
 
     const dllMods = Object.keys(loadDlls).filter(x => loadDlls[x] && loadDlls[x].enable !== false);
 
-    if (_.isEmpty(dllMods)) return { info: [] };
+    let dllInfo = [];
+    let dllAssets = {};
 
-    logger.info("Electrode DLL modules to be loaded", dllMods.join(" "));
+    if (!_.isEmpty(dllMods)) {
+      logger.info("Electrode DLL modules to be loaded", dllMods.join(" "));
 
-    const dllInfo = dllMods.reduce((mani, modName) => mani.concat(findDllManifests(modName)), []);
+      dllInfo = dllMods.reduce((mani, modName) => mani.concat(findDllManifests(modName)), []);
 
-    if (_.isEmpty(dllInfo)) {
-      logger.warn("Electrode DLL found no manifests to load");
-      return { info: [] };
-    }
+      if (_.isEmpty(dllInfo)) {
+        logger.warn("Electrode DLL found no manifests to load");
+      } else {
+        logger.verbose("Electrode DLL manifests", dllInfo.map(x => x.manifest).join(", "));
+        dllInfo.forEach(verifyVersions);
 
-    logger.verbose("Electrode DLL manifests", dllInfo.map(x => x.manifest).join(", "));
-
-    dllInfo.forEach(verifyVersions);
-
-    const dllAssets = dllInfo.reduce((a, x) => {
-      if (!a[x.moduleName]) {
-        a[x.moduleName] = {
-          cdnMapping: loadJson(x.cdnMapping, {})
-        };
+        dllAssets = dllInfo.reduce((a, x) => {
+          if (!a[x.moduleName]) {
+            a[x.moduleName] = {
+              cdnMapping: loadJson(x.cdnMapping, {})
+            };
+          }
+          a[x.moduleName][x.name] = { assets: x.assets };
+          return a;
+        }, {});
       }
-      a[x.moduleName][x.name] = { assets: x.assets };
-      return a;
-    }, {});
+    }
 
     return { info: dllInfo, assets: dllAssets };
   },
