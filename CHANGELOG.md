@@ -1,3 +1,18 @@
+# 10/22/2018
+
+-   electrode-archetype-react-app: fix load dll assets 
+
+## Packages
+
+-   electrode-archetype-react-app@5.4.18 `(5.4.17 => 5.4.18)`
+-   electrode-archetype-react-app-dev@5.4.18 `(5.4.17 => 5.4.18)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   fix load dll assets ([#1011](https://github.com/electrode-io/electrode/pull/1011)) [commit](http://github.com/electrode-io/electrode/commit/ca58c46b6f7b8f6c3eb94475ea7ae0207223ab2a)
+
 # 10/19/2018
 
 - fix express app
