@@ -13,7 +13,8 @@
   },
   "license": "Apache-2.0",
   "scripts": {
-    "preinstall": "node optional-check.js"
+    "preinstall": "node optional-check.js",
+    "prepare": "cp node_modules/opt-archetype-check/optional-check.js ."
   },
   "files": [
     "optional-check.js"
@@ -35,5 +36,13 @@
     "karma-spec-reporter": "0.0.26",
     "karma-webpack": "^2.0.2",
     "phantomjs-prebuilt": "^2.1.13"
+  },
+  "devDependencies": {
+    "opt-archetype-check": "../opt-archetype-check"
+  },
+  "electrodeOptArchetype": {
+    "optionalTagName": "karma",
+    "expectTag": true,
+    "defaultInstall": true
   }
 }
