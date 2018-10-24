@@ -60,7 +60,7 @@ In addition to the archetypes and the generators, Electrode includes a fleet of 
 - [Electrode Confippet](https://github.com/electrode-io/electrode-confippet)
 - [Electrode Electrify](https://github.com/electrode-io/electrify)
 - [Electrode CSRF JWT](https://github.com/electrode-io/electrode-csrf-jwt)
-- [Electrode Redux Router Engine](https://github.com/electrode-io/electrode-redux-router-engine)
+- [Electrode Redux Router Engine](https://github.com/electrode-io/electrode/tree/master/packages/electrode-redux-router-engine)
 - [Electrode React SSR Caching](https://github.com/electrode-io/electrode-react-ssr-caching)
 - [Above The Fold Only Server Render](https://github.com/electrode-io/above-the-fold-only-server-render)
 - [Electrode Bundle Analyzer](https://github.com/electrode-io/electrode-bundle-analyzer)
