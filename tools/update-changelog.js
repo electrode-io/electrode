@@ -75,7 +75,7 @@ const processLernaUpdated = output => {
   const packages = output.stdout
     .split("\n")
     .filter(x => x.trim().length > 0)
-    .map(x => x.substr(2));
+    .map(x => x.substr(2).split(" ")[0]);
   return { tag, packages };
 };
 
@@ -191,6 +191,7 @@ const determinePackageVersions = collated => {
     packages[mappedName].version = Pkg.version;
     const newVersion = semver.inc(Pkg.version, types[updateType]);
     packages[mappedName].newVersion = newVersion;
+    packages[mappedName].originalPkg = Pkg;
   };
 
   return Promise.map(collated.realPackages, name => findVersion(name, collated.packages))
@@ -215,6 +216,7 @@ const updateChangelog = collated => {
   }
   const emitPackageMsg = (p, packages) => {
     const pkg = packages[mapPkg(p)];
+    if (pkg.originalPkg.private) return;
     output.push(
       `-   ${p}@${pkg.newVersion} ` + "`" + `(${pkg.version} => ${pkg.newVersion})` + "`\n"
     );
