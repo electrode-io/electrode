@@ -1,6 +1,35 @@
 "use strict";
 
 const Path = require("path");
+const Fs = require("fs");
+const assert = require("assert");
+
+function lookupAppDirByInitCwd() {
+  let lookupDir = process.env.INIT_CWD;
+
+  if (!lookupDir) return undefined;
+
+  let upDir;
+  let count = 0;
+
+  while (count < 100) {
+    const pkgFile = Path.join(lookupDir, "package.json");
+
+    try {
+      require(pkgFile);
+      return lookupDir;
+    } catch (err) {
+      //
+    }
+
+    const upDir = Path.join(lookupDir, "..");
+    if (upDir === lookupDir) return undefined;
+    lookupDir = upDir;
+    count++;
+  }
+
+  return undefined;
+}
 
 const cwd = process.env.PWD || process.cwd();
 
@@ -12,7 +41,7 @@ function findAppDir() {
   return cwd;
 }
 
-const appDir = findAppDir();
+const appDir = lookupAppDirByInitCwd() || findAppDir();
 const myPkg = require("./package.json");
 
 if (cwd === appDir) {
@@ -21,21 +50,47 @@ if (cwd === appDir) {
     if (myPkg.name === appPkg.name) {
       process.exit(0);
     }
-  } catch (e) {}
+  } catch (e) {
+    //
+  }
 }
 
 const name = myPkg.name;
-const myTag = "react";
+
+const optParams = myPkg.electrodeOptArchetype || {};
+
+assert(
+  optParams.hasOwnProperty("optionalTagName"),
+  "opt archetype ${name}: package.json missing electrodeOptArchetype.optionalTagName"
+);
+assert(
+  optParams.hasOwnProperty("expectTag"),
+  "opt archetype ${name}: package.json missing electrodeOptArchetype.expectTag"
+);
+
+const optionalTagName = optParams.optionalTagName;
+const expectTag = optParams.expectTag;
+const defaultInstall = Boolean(optParams.defaultInstall);
 
 try {
   const config = require(Path.join(appDir, "archetype/config"));
-  const lib = config && config.options && config.options.reactLib;
-  if (lib && lib !== myTag) {
-    console.log(
-      `${name}: archetype config set reactLib to ${lib} - skipping install because it's not ${myTag}`
-    );
-    process.exit(1);
+  const userConfig = config && config.options && config.options[optionalTagName];
+  if (!userConfig && defaultInstall === true) {
+    process.exit(0);
   }
-} catch (e) {}
+  if (userConfig === expectTag) {
+    console.log(`${name}: archetype config set ${optionalTagName} to ${userConfig} - installing`);
+    process.exit(0);
+  } else {
+    console.log(
+      `${name}: archetype config set ${optionalTagName} to ${userConfig} - skipping install because it's not ${expectTag}`
+    );
+  }
+} catch (e) {
+  if (defaultInstall === true) {
+    process.exit(0);
+  }
+  console.log(`${name}: no archetype config found - skipping install`);
+}
 
-process.exit(0);
+process.exit(1);
