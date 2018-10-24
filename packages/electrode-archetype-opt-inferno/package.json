@@ -16,10 +16,18 @@
   ],
   "license": "Apache-2.0",
   "scripts": {
-    "preinstall": "node optional-check.js"
+    "preinstall": "node optional-check.js",
+    "prepare": "cp node_modules/opt-archetype-check/optional-check.js ."
   },
   "dependencies": {
     "inferno": "^3.0.0",
     "inferno-compat": "^3.0.0"
+  },
+  "devDependencies": {
+    "opt-archetype-check": "../opt-archetype-check"
+  },
+  "electrodeOptArchetype": {
+    "optionalTagName": "reactLib",
+    "expectTag": "inferno"
   }
 }
