@@ -8,7 +8,9 @@ const assert = require("assert");
 const requireAt = require("require-at");
 const archetype = require("./config/archetype");
 
-assert(!archetype.noDev, "dev archetype is missing - development & build tasks not possible");
+require.resolve(`${archetype.devArchetypeName}/package.json`);
+
+const warnYarn = require("./lib/warn-yarn");
 
 const devRequire = archetype.devRequire;
 
@@ -427,7 +429,12 @@ function makeTasks() {
     "build-dist-min": {
       dep: [".production-env"],
       desc: false,
-      task: mkCmd(`webpack --config`, quote(webpackConfig("webpack.config.js")), `--colors`, `--display-error-details`)
+      task: mkCmd(
+        `webpack --config`,
+        quote(webpackConfig("webpack.config.js")),
+        `--colors`,
+        `--display-error-details`
+      )
     },
 
     "build-dist:clean-tmp": {
@@ -466,14 +473,14 @@ Individual .babelrc files were generated for you in src/client and src/server
       task: mkCmd(
         `babel`,
         `--source-maps=inline --copy-files --out-dir ${AppMode.lib.client}`,
-          `${AppMode.src.client}`,
+        `${AppMode.src.client}`,
         `--ignore`,
-          [
-            `"${AppMode.src.client}/**/*.spec.js"`,
-            `"${AppMode.src.client}/**/*.spec.jsx"`,
-            `"${AppMode.src.client}/**/*.test.js"`,
-            `"${AppMode.src.client}/**/*.test.jsx"`,
-          ].join(',')
+        [
+          `"${AppMode.src.client}/**/*.spec.js"`,
+          `"${AppMode.src.client}/**/*.spec.jsx"`,
+          `"${AppMode.src.client}/**/*.test.js"`,
+          `"${AppMode.src.client}/**/*.test.jsx"`
+        ].join(",")
       )
     },
 
@@ -494,13 +501,13 @@ Individual .babelrc files were generated for you in src/client and src/server
         `babel`,
         `--source-maps=inline --copy-files --out-dir ${AppMode.lib.server}`,
         `${AppMode.src.server}`,
-          `--ignore`,
-          [
-              `"${AppMode.src.client}/**/*.spec.js"`,
-              `"${AppMode.src.client}/**/*.spec.jsx"`,
-              `"${AppMode.src.client}/**/*.test.js"`,
-              `"${AppMode.src.client}/**/*.test.jsx"`,
-          ].join(',')
+        `--ignore`,
+        [
+          `"${AppMode.src.client}/**/*.spec.js"`,
+          `"${AppMode.src.client}/**/*.spec.jsx"`,
+          `"${AppMode.src.client}/**/*.test.js"`,
+          `"${AppMode.src.client}/**/*.test.jsx"`
+        ].join(",")
       )
     },
 
@@ -867,7 +874,12 @@ Individual .babelrc files were generated for you in src/client and src/server
       "build-dist-dll": {
         dep: [".mk-dll-dir", ".mk-dist-dir", ".production-env"],
         task: () =>
-          exec(`webpack --config`, quote(webpackConfig("webpack.config.dll.js")), `--colors`, `--display-error-details`)
+          exec(
+            `webpack --config`,
+            quote(webpackConfig("webpack.config.dll.js")),
+            `--colors`,
+            `--display-error-details`
+          )
       },
       "copy-dll": () => shell.cp("-r", "dll/*", "dist")
     });
@@ -915,4 +927,5 @@ module.exports = function(xclap) {
   xclap = xclap || requireAt(process.cwd())("xclap") || devRequire("xclap");
   process.env.FORCE_COLOR = "true"; // force color for chalk
   xclap.load("electrode", makeTasks());
+  warnYarn();
 };
