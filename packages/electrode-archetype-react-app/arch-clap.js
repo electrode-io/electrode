@@ -8,7 +8,9 @@ const assert = require("assert");
 const requireAt = require("require-at");
 const archetype = require("./config/archetype");
 
-assert(!archetype.noDev, "dev archetype is missing - development & build tasks not possible");
+require.resolve(`${archetype.devArchetypeName}/package.json`);
+
+const warnYarn = require("./lib/warn-yarn");
 
 const devRequire = archetype.devRequire;
 
@@ -875,4 +877,5 @@ module.exports = function(xclap) {
   xclap = xclap || requireAt(process.cwd())("xclap") || devRequire("xclap");
   process.env.FORCE_COLOR = "true"; // force color for chalk
   xclap.load("electrode", makeTasks());
+  warnYarn();
 };
