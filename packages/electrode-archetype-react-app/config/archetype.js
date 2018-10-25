@@ -22,11 +22,12 @@ module.exports = {
   eTmpDir: constants.ETMP_DIR,
   prodModulesDir: Path.join(constants.PROD_DIR, "modules"),
   checkUserBabelRc: utils.checkUserBabelRc,
-  addArchetypeConfig: config => Object.assign(module.exports, config)
+  addArchetypeConfig: config => Object.assign(module.exports, config),
+  devArchetypeName: "electrode-archetype-react-app-dev"
 };
 
 function checkTopDevArchetype() {
-  const devArchName = "electrode-archetype-react-app-dev";
+  const devArchName = module.exports.devArchetypeName;
   const topPkg = require(Path.resolve("package.json"));
   // in case this is being used for test/dev in the -dev archetype
   if (topPkg.name === devArchName) {
