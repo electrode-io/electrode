@@ -6,17 +6,15 @@ const Url = require("url");
 const Boom = require("boom");
 const mime = require("mime");
 const archetype = require("electrode-archetype-react-app/config/archetype");
-const { universalHapiPlugin } = require("electrode-hapi-compat");
-const hapi17Plugin = require("./webpack-dev-hapi17");
 
 const Middleware = require("./webpack-middleware");
 
-function register(server, options, next) {
+function register(server) {
   if (!archetype.webpack.devMiddleware) {
     console.error(
       "webpack-dev-hapi plugin was loaded but WEBPACK_DEV_MIDDLEWARE is not true. Skipping."
     );
-    return next();
+    return;
   }
 
   const middleware = new Middleware({
@@ -33,27 +31,28 @@ function register(server, options, next) {
 
   server.ext({
     type: "onRequest",
-    method: (request, reply) => {
+    method: (request, h) => {
       const { req, res } = request.raw;
 
       const procResult = middleware.process(req, res, {
-        skip: () => reply.continue(), // skip middleware and continue request cycle
+        skip: () => h.continue, // skip middleware and continue request cycle
         replyHtml: html => {
-          reply(`<!DOCTYPE html>${html}`)
+          return h
+            .response(`<!DOCTYPE html>${html}`)
             .code(200)
             .header("Content-Type", "text/html");
         },
-        replyNotFound: () => reply(Boom.notFound),
-        replyError: err => reply(err),
+        replyNotFound: () => h.response(Boom.notFound),
+        replyError: err => h.response(err),
         replyStaticData: data => {
           const type = mime.lookup(req.url);
-          const resp = reply.response(data).code(200);
+          const resp = h.response(data).code(200);
           if (type) {
             const charset = mime.charsets.lookup(type);
             resp.header("Content-Type", type + (charset ? `; charset=${charset}` : ""));
           }
         },
-        replyFile: name => reply.file(name)
+        replyFile: name => h.file(name)
       });
 
       if (procResult !== middleware.canContinue) {
@@ -65,9 +64,9 @@ function register(server, options, next) {
       return middleware.devMiddleware(req, res, err => {
         if (err) {
           console.error("webpack dev middleware error", err);
-          reply(err);
+          return h.response(err);
         } else {
-          reply.continue();
+          return h.continue;
         }
       });
     }
@@ -75,37 +74,26 @@ function register(server, options, next) {
 
   server.ext({
     type: "onRequest",
-    method: (request, reply) => {
+    method: (request, h) => {
       const { req, res } = request.raw;
 
       try {
         return middleware.hotMiddleware(req, res, err => {
           if (err) {
             console.error("webpack hot middleware error", err);
-            reply(err);
+            return h.response(err);
           } else {
-            reply.continue();
+            return h.continue;
           }
         });
       } catch (err) {
         console.error("caught webpack hot middleware exception", err);
-        reply(err);
+        return h.response(err);
       }
-
-      return undefined;
     }
   });
 
-  return next();
+  return;
 }
 
-const registers = {
-  hapi16: register,
-  hapi17: hapi17Plugin
-};
-const pkg = {
-  name: "electrode-webpack-dev-hapi",
-  version: "1.0.0"
-};
-
-module.exports = universalHapiPlugin(registers, pkg);
+module.exports = register;
