@@ -14,6 +14,7 @@ const { matchRoutes, renderRoutes } = require("react-router-config");
 const { combineReducers, createStore } = require("redux");
 const pkg = require("../package.json");
 const util = require("./util");
+const ServerContext = require("./server-context");
 
 const BAD_CHARS_REGEXP = /[<\u2028\u2029]/g;
 const REPLACEMENTS_FOR_BAD_CHARS = {
@@ -251,12 +252,19 @@ class ReduxRouterEngine {
       assert(ReactDomServer, `${pkg.name}: can't do SSR because react-dom not found`);
       return (withIds ? ReactDomServer.renderToString : ReactDomServer.renderToStaticMarkup)(
         React.createElement(
-          Provider,
-          { store },
+          // server side context to provide request
+          ServerContext,
+          { request: req },
+          // redux provider
           React.createElement(
-            StaticRouter,
-            { location, context: routeContext, basename: this.options.basename },
-            this._routesComponent
+            Provider,
+            { store },
+            // user route component
+            React.createElement(
+              StaticRouter,
+              { location, context: routeContext, basename: this.options.basename },
+              this._routesComponent
+            )
           )
         )
       );
