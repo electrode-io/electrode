@@ -65,7 +65,9 @@ module.exports = {
           }
         }
       }
-    }
+    }, //<% if (cookiesModule) { %>
+    "<%= cookiesModule %>/hapi-plugin": {}
+    // <% } %>
   },
   connections: {
     default: {

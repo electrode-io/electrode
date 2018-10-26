@@ -35,6 +35,12 @@ module.exports = class extends Generator {
       required: true,
       default: false
     });
+
+    this.option("cookiesModule", {
+      type: String,
+      required: false,
+      desc: "electrode-cookies module name"
+    });
   }
 
   writing() {
@@ -53,7 +59,8 @@ module.exports = class extends Generator {
         routeValue: routeMatch,
         pwa: this.options.pwa,
         serverType: this.options.serverType,
-        isAutoSSR: this.options.autoSsr
+        isAutoSSR: this.options.autoSsr,
+        cookiesModule: this.options.cookiesModule
       });
     }
 
