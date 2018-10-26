@@ -17,10 +17,10 @@
  */
 
 import React from "react";
-import custom from "../styles/custom.css"; // eslint-disable-line no-unused
+import custom from "../styles/custom.css"; // eslint-disable-line no-unused-vars
 import Cookies from "<%= cookiesModule %>";
 import PropTypes from "prop-types";
-import milligram from "milligram/dist/milligram.css"; // eslint-disable-line no-unused
+import milligram from "milligram/dist/milligram.css"; // eslint-disable-line no-unused-vars
 
 const COOKIE_NAME = "democookie";
 
