@@ -23,6 +23,11 @@ import DemoStates from "./demo-states";
 import DemoPureStates from "./demo-pure-states";
 import { DemoButtons } from "./demo-buttons";
 import { Nav } from "./nav";
+
+//<% if (cookiesModule) { %>
+import DemoCookies from "./demo-cookies";
+//<% } %>
+
 //<% if (pwa) { %>
 import Notifications from "react-notify-toast";
 //<% } %>
@@ -58,6 +63,12 @@ class Home extends React.Component {
         <div styleName={"custom.docs-section"}>
           <DemoPureStates />
         </div>
+
+        {/*<% if (cookiesModule) { %> */}
+        <div styleName={"custom.docs-section"}>
+          <DemoCookies />
+        </div>
+        {/*<% } %>*/}
 
         <div styleName={"custom.docs-section"}>
           <DemoButtons />

@@ -67,6 +67,20 @@ module.exports = class extends Generator {
       desc: "Content to insert in the README.md file"
     });
 
+    this.option("cookiesModule", {
+      type: String,
+      required: false,
+      default: "electrode-cookies",
+      desc: "Universal cookies module name"
+    });
+
+    this.option("cookiesModuleSemver", {
+      type: String,
+      required: false,
+      default: "^1.0.0",
+      desc: "Universal cookies module name"
+    });
+
     //Data should be passed to the generator using props
     this.props = this.options.props || {};
     //Flag to check if the OSS generator is being called as a subgenerator
@@ -110,6 +124,13 @@ module.exports = class extends Generator {
       },
       this.props
     );
+  }
+
+  _cookiesModule() {
+    if (this.config.get("serverType") === HapiJS) {
+      return this.options.cookiesModule;
+    }
+    return undefined;
   }
 
   _isCwdEmpty() {
@@ -262,6 +283,8 @@ module.exports = class extends Generator {
     const isSingleQuote = this.props.quoteType === "'";
     const className = this.props.className;
     const packageName = this.props.packageName;
+    const cookiesModule = this._cookiesModule();
+    const cookiesModuleSemver = this.options.cookiesModuleSemver;
 
     let ignoreArray = [];
     if (isHapi) {
@@ -282,7 +305,9 @@ module.exports = class extends Generator {
       isPWA,
       isAutoSSR,
       isSingleQuote,
-      projectName: this.props.name
+      projectName: this.props.name,
+      cookiesModule,
+      cookiesModuleSemver
     });
 
     const jsPkg = this.fs.read(this.destinationPath(_pkgJs)).toString();
@@ -382,7 +407,7 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath("src/client"),
       this.destinationPath("src/client"),
-      { pwa: isPWA },
+      { pwa: isPWA, cookiesModule },
       {}, // template options
       {
         // copy options
@@ -442,6 +467,7 @@ module.exports = class extends Generator {
 
     const configProps = _.pick(this.props, ["name", "pwa", "serverType", "autoSsr"]);
     configProps._extended = this.isExtended;
+    configProps.cookiesModule = this._cookiesModule();
     this.composeWith(require.resolve("../config"), configProps);
 
     if (!this.fs.exists(this.destinationPath("server/plugins/webapp"))) {
