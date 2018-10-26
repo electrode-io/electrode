@@ -17,7 +17,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import "../styles/raleway.css";
-import custom from "../styles/custom.css"; // eslint-disable-line no-unused
+import custom from "../styles/custom.css"; // eslint-disable-line no-unused-vars
 import electrodePng from "../images/electrode.png";
 import DemoStates from "./demo-states";
 import DemoPureStates from "./demo-pure-states";
