@@ -17,6 +17,24 @@ const _ = require("lodash");
 const statsUtils = require("./stats-utils");
 const statsMapper = require("./stats-mapper");
 
+function urlJoin() {
+  if (arguments.length < 1) return undefined;
+
+  const base = arguments[0];
+
+  if (!base) return undefined;
+
+  const ix = base.indexOf("://");
+  let saved = "";
+
+  if (ix > 0) {
+    arguments[0] = base.substr(ix + 3);
+    saved = base.substring(0, ix + 3);
+  }
+
+  return saved + Path.posix.join.apply(null, arguments);
+}
+
 //
 // skip webpack-dev-middleware if
 //
@@ -118,7 +136,7 @@ class Middleware {
     this.devMiddleware = webpackDevMiddleware(compiler, webpackDevOptions);
     this.hotMiddleware = webpackHotMiddleware(compiler, webpackHotOptions);
     this.publicPath = webpackDevOptions.publicPath || "/";
-    this.listAssetPath = Path.posix.join(this.publicPath, "/");
+    this.listAssetPath = urlJoin(this.publicPath, "/");
 
     this.cwdMemIndex = serveIndex(process.cwd(), {
       icons: true,
@@ -127,11 +145,11 @@ class Middleware {
     });
 
     this.cwdIndex = serveIndex(process.cwd(), { icons: true, hidden: true });
-    this.devBaseUrl = Path.posix.join(options.devBaseUrl || "/__electrode_dev", "/");
-    this.cwdBaseUrl = Path.posix.join(this.devBaseUrl, "cwd");
-    this.cwdContextBaseUrl = Path.posix.join(this.devBaseUrl, "memfs");
-    this.reporterUrl = Path.posix.join(this.devBaseUrl, "reporter");
-    this.dllDevUrl = Path.posix.join(this.devBaseUrl, "dll");
+    this.devBaseUrl = urlJoin(options.devBaseUrl || "/__electrode_dev", "/");
+    this.cwdBaseUrl = urlJoin(this.devBaseUrl, "cwd");
+    this.cwdContextBaseUrl = urlJoin(this.devBaseUrl, "memfs");
+    this.reporterUrl = urlJoin(this.devBaseUrl, "reporter");
+    this.dllDevUrl = urlJoin(this.devBaseUrl, "dll");
 
     const loadIsomorphicConfig = () => {
       return JSON.parse(Fs.readFileSync(Path.resolve(".isomorphic-loader-config.json")));
@@ -174,7 +192,7 @@ class Middleware {
 
         const update = () => {
           if (notOk) {
-            const x = chalk.cyan.underline(Path.posix.join(baseUrl(), this.reporterUrl));
+            const x = chalk.cyan.underline(urlJoin(baseUrl(), this.reporterUrl));
             console.log(`${x} - View status and errors/warnings from your browser`);
           }
 
