@@ -60,6 +60,7 @@
     "electrode-bundle-analyzer": "^1.0.0",
     "electrode-cdn-file-loader": "^1.0.0",
     "electrode-node-resolver": "^2.0.0",
+    "electrode-hapi-compat": "^1.0.0",
     "electrode-webpack-reporter": "^0.4.8",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.1.0",
