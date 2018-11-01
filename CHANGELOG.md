@@ -1,3 +1,44 @@
+# 11/1/2018
+
+- electrode-archetype-react-app: support for hapi 17
+- electrode-redux-router-engine: add request to react legacy context for SSR
+- generator-electrode: generate app demo universal get/set cookies
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-react-app@5.4.19 `(5.4.18 => 5.4.19)`
+-   electrode-archetype-react-app-dev@5.4.19 `(5.4.18 => 5.4.19)`
+-   electrode-cookies@1.0.3 `(1.0.2 => 1.0.3)`
+-   electrode-redux-router-engine@2.1.7 `(2.1.6 => 2.1.7)`
+-   generator-electrode@4.2.6 `(4.2.5 => 4.2.6)`
+
+### Lerna Updated
+
+-   electrode-ignite@2.1.10 `(2.1.9 => 2.1.10)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   fix url join [commit](http://github.com/electrode-io/electrode/commit/54cdad05b407f660bea19a0cca289be49bccdce1)
+    -   better errors and warnings ([#1017](https://github.com/electrode-io/electrode/pull/1017)) [commit](http://github.com/electrode-io/electrode/commit/a6ae1478fbd91f0e5d9655d2652190263edef67b)
+    -   Update for hapi 17 ([#1020](https://github.com/electrode-io/electrode/pull/1020)) [commit](http://github.com/electrode-io/electrode/commit/dab7edb573905842586d9f2400db9c7d066be596)
+
+-   `packages/electrode-cookies`
+
+    -   fix publish files config [commit](http://github.com/electrode-io/electrode/commit/2ea5c6e8a17b3f9a1ec540b38c3d671bf045e883)
+
+-   `packages/electrode-redux-router-engine`
+
+    -   add request to React legacy context for server ([#1018](https://github.com/electrode-io/electrode/pull/1018)) [commit](http://github.com/electrode-io/electrode/commit/13dae69a90a5c63fa45de6c2fb94068929ddeb6f)
+
+-   `packages/generator-electrode`
+
+    -   fix lint errors [commit](http://github.com/electrode-io/electrode/commit/66fa7b00addf27e6ff2a7a51e698d289b5cac506)
+    -   generate app demo universal get/set cookies [commit](http://github.com/electrode-io/electrode/commit/bba26cb91948c05d5df06272992b8be5fcd7351f)
+
 # 10/22/2018
 
 -   electrode-archetype-react-app: fix load dll assets 
