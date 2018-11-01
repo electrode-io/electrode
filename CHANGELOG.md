@@ -1,3 +1,79 @@
+# 11/1/2018
+
+- electrode-archetype-react-app: update for hapi 17
+- electrode-ignite: major bump for v6 beta
+- generator-electrode: major bump for v6 beta
+
+## Packages
+
+-   electrode-archetype-opt-inferno@0.2.4 `(0.2.3 => 0.2.4)`
+-   electrode-archetype-opt-karma@1.0.2 `(1.0.1 => 1.0.2)`
+-   electrode-archetype-opt-react@1.0.2 `(1.0.1 => 1.0.2)`
+-   electrode-archetype-opt-sass@1.0.3 `(1.0.2 => 1.0.3)`
+-   electrode-archetype-react-app@6.0.3 `(6.0.2 => 6.0.3)`
+-   electrode-archetype-react-app-dev@6.0.3 `(6.0.2 => 6.0.3)`
+-   electrode-ignite@3.0.0 `(2.1.8 => 3.0.0)`
+-   generator-electrode@5.0.0 `(4.2.4 => 5.0.0)`
+
+## Commits
+
+-   `packages/electrode-archetype-opt-inferno`
+
+    -   get optional-check.js from common location [commit](http://github.com/electrode-io/electrode/commit/98e5eade92a94fd12e1fcd302c1a3f5f4d254fb5)
+
+-   `packages/electrode-archetype-opt-karma`
+
+    -   opt-karma get optional-check.js from common location [commit](http://github.com/electrode-io/electrode/commit/34a118836be3d3a73f438a6296fa68e6b651e43e)
+
+-   `packages/electrode-archetype-opt-react`
+
+    -   opt-react get optional-check.js from common location [commit](http://github.com/electrode-io/electrode/commit/e2c79f1b7daea0989b6df6374e9ccdba4aa738b1)
+
+-   `packages/electrode-archetype-opt-sass`
+
+    -   opt-sass get optional-check.js from common location [commit](http://github.com/electrode-io/electrode/commit/622cbd3012a8f677afc507ebdc5963360360f090)
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   fix url join [commit](http://github.com/electrode-io/electrode/commit/d1a2d3ceefc2ab60bc7d674504ac9fe231ed6d04)
+    -   better errors and warnings ([#1017](https://github.com/electrode-io/electrode/pull/1017)) [commit](http://github.com/electrode-io/electrode/commit/d23b944d7168b35b65e49af563ea55b009239d76)
+    -   Update for hapi 17 ([#1020](https://github.com/electrode-io/electrode/pull/1020)) [commit](http://github.com/electrode-io/electrode/commit/97a697a44620a6061bdaf0771e212c2b578b38e7)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   temporary mark component archetype as private to prevent publishing ([#1016](https://github.com/electrode-io/electrode/pull/1016)) [commit](http://github.com/electrode-io/electrode/commit/b00f3cc11187a08cf822f607bcd678fea4a27585)
+
+-   `packages/electrode-cookies`
+
+    -   fix publish files config [commit](http://github.com/electrode-io/electrode/commit/c123e6b2123e4134fb6c3e22df33326323ebebc6)
+
+-   `packages/electrode-ignite`
+
+    -   [major] touch to update for v6 ([#1014](https://github.com/electrode-io/electrode/pull/1014)) [commit](http://github.com/electrode-io/electrode/commit/32aa0109f94953e07796d333aa0c299c5b8423e1)
+
+-   `packages/electrode-redux-router-engine`
+
+    -   add request to React legacy context for server ([#1018](https://github.com/electrode-io/electrode/pull/1018)) [commit](http://github.com/electrode-io/electrode/commit/9cf648f25e0127c44b82ec881fe9aba048509d43)
+    -   temporary disable publishing [commit](http://github.com/electrode-io/electrode/commit/3c68b433b22ce442cfef5e268df8b26a1f0fc2ec)
+
+-   `packages/generator-electrode`
+
+    -   generate app demo universal get/set cookies [commit](http://github.com/electrode-io/electrode/commit/2f8c23e0fe253af507d2c292afa4cf77192991ef)
+    -   [major] touch to update for v6 ([#1014](https://github.com/electrode-io/electrode/pull/1014)) [commit](http://github.com/electrode-io/electrode/commit/32aa0109f94953e07796d333aa0c299c5b8423e1)
+    -   fix lint errors [commit](http://github.com/electrode-io/electrode/commit/0d59ce823e3632dee9b379e3dfd47fd157b6735d)
+
+-   `packages/opt-archetype-check`
+
+    -   keep opt archetype check JS in a common place [commit](http://github.com/electrode-io/electrode/commit/685dd2ff33049ce6c7c351cae1ef9e7b22c14879)
+
+-   `docs`
+
+    -   Update README.md ([#1013](https://github.com/electrode-io/electrode/pull/1013)) [commit](http://github.com/electrode-io/electrode/commit/37b8c53268aaed1992a0c90a0e6e9111b7904229)
+
+-   `tools`
+
+    -   handle private package [commit](http://github.com/electrode-io/electrode/commit/62d830caebbcccb0c6bcc642291f3402a102567b)
+
 # 10/22/2018
 
 -   electrode-archetype-react-app: bring in updates from v5
