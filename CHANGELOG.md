@@ -1,5 +1,17 @@
 # 11/1/2018
 
+## Packages
+
+-   electrode-redux-router-engine@2.1.8 `(2.1.7 => 2.1.8)`
+
+## Commits
+
+-   `packages/electrode-redux-router-engine`
+
+    -   trigger version bump [commit](http://github.com/electrode-io/electrode/commit/1005f2b4e2e35222d5ab561ac6c989fd783f0aed)
+
+# 11/1/2018
+
 - electrode-archetype-react-app: support for hapi 17
 - electrode-redux-router-engine: add request to react legacy context for SSR
 - generator-electrode: generate app demo universal get/set cookies
