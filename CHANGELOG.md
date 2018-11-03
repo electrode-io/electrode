@@ -1,3 +1,18 @@
+# 11/2/2018
+
+-   electrode-archetype-react-component: build components with ES6 module syntax intact 
+
+## Packages
+
+-   electrode-archetype-react-component@5.3.8 `(5.3.7 => 5.3.8)`
+-   electrode-archetype-react-component-dev@5.3.8 `(5.3.7 => 5.3.8)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   build components with ES6 module syntax intact ([#1022](https://github.com/electrode-io/electrode/pull/1022)) [commit](http://github.com/electrode-io/electrode/commit/134e769dfa7d8815d5eb9ac6136872d0c405e283)
+
 # 11/1/2018
 
 ## Packages
