@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-opt-inferno",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Electrode NodeJS/React Optional Archetype - inferno",
   "main": "index.js",
   "homepage": "http://www.electrode.io",
