@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Home from "./components/home";
+//<% if (!isDemoApp) { %>
 import Demo1 from "./components/demo1";
 import Demo2 from "./components/demo2";
+//<% } %>
 import { withRouter } from "react-router-dom";
 import { renderRoutes } from "react-router-config";
 
@@ -31,6 +33,7 @@ const routes = [
         exact: true,
         component: Home
       },
+      //<% if (!isDemoApp) { %>
       {
         path: "/demo1",
         exact: true,
@@ -41,6 +44,7 @@ const routes = [
         exact: true,
         component: Demo2
       }
+      //<% } %>
     ]
   }
 ];

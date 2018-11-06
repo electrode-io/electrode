@@ -407,7 +407,7 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath("src/client"),
       this.destinationPath("src/client"),
-      { pwa: isPWA, cookiesModule },
+      { pwa: isPWA, cookiesModule, isDemoApp: this.isDemoApp },
       {}, // template options
       {
         // copy options
