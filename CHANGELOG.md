@@ -1,3 +1,36 @@
+# 11/5/2018
+
+- `electrode-archetype-opt-*`: fix optional-check when flag is falsy
+
+## Packages
+
+-   electrode-archetype-opt-inferno@0.2.5 `(0.2.4 => 0.2.5)`
+-   electrode-archetype-opt-karma@1.0.3 `(1.0.2 => 1.0.3)`
+-   electrode-archetype-opt-react@1.0.3 `(1.0.2 => 1.0.3)`
+-   electrode-archetype-opt-sass@1.0.4 `(1.0.3 => 1.0.4)`
+
+## Commits
+
+-   `packages/electrode-archetype-opt-inferno`
+
+    -   fix optional-check when flag is falsy ([#1023](https://github.com/electrode-io/electrode/pull/1023)) [commit](http://github.com/electrode-io/electrode/commit/a9d373fc866dc006cd574c247408b4f5485a624c)
+
+-   `packages/electrode-archetype-opt-karma`
+
+    -   fix optional-check when flag is falsy ([#1023](https://github.com/electrode-io/electrode/pull/1023)) [commit](http://github.com/electrode-io/electrode/commit/a9d373fc866dc006cd574c247408b4f5485a624c)
+
+-   `packages/electrode-archetype-opt-react`
+
+    -   fix optional-check when flag is falsy ([#1023](https://github.com/electrode-io/electrode/pull/1023)) [commit](http://github.com/electrode-io/electrode/commit/a9d373fc866dc006cd574c247408b4f5485a624c)
+
+-   `packages/electrode-archetype-opt-sass`
+
+    -   fix optional-check when flag is falsy ([#1023](https://github.com/electrode-io/electrode/pull/1023)) [commit](http://github.com/electrode-io/electrode/commit/a9d373fc866dc006cd574c247408b4f5485a624c)
+
+-   `packages/opt-archetype-check`
+
+    -   fix optional-check when flag is falsy ([#1023](https://github.com/electrode-io/electrode/pull/1023)) [commit](http://github.com/electrode-io/electrode/commit/a9d373fc866dc006cd574c247408b4f5485a624c)
+
 # 11/1/2018
 
 - electrode-archetype-react-app: update for hapi 17
