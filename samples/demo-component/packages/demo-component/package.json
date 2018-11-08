@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Electrode Demo Component",
   "main": "lib/index.js",
+  "browser": "esm/index.js",
   "author": {
     "name": "Joel Chen",
     "url": "https://github.com/jchip"
@@ -36,7 +37,7 @@
     "npm": ">= 5"
   },
   "scripts": {
-    "prepublish": "clap prepublish",
+    "prepare": "clap prepublish",
     "start": "clap demo",
     "test": "flow && clap check"
   },

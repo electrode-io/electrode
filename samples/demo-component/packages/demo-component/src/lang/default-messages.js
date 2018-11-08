@@ -2,7 +2,7 @@
 
 import { defineMessages } from "react-intl";
 
-const $tenant: any = process.env.ELECTRODE_TENANT;
+const $tenant: any = "electrodeio";
 let tenantMessages;
 
 try {
