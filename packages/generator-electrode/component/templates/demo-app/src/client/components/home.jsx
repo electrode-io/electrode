@@ -4,7 +4,6 @@ import { IntlProvider } from "react-intl";
 
 import {<%= className %>} from "<%= packageName %>";
 import "../styles/raleway.css";
-import "../styles/skeleton.css";
 import custom from "../styles/custom.css";
 import electrodePng from "../images/electrode.png";
 

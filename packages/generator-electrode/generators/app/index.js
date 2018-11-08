@@ -102,8 +102,8 @@ module.exports = class extends Generator {
       this.props.serverType = this.fs.exists(this.destinationPath("src/server/express-server.js"))
         ? ExpressJS
         : this.fs.exists(this.destinationPath("src/server/koa-server.js"))
-          ? KoaJS
-          : HapiJS;
+        ? KoaJS
+        : HapiJS;
       this.props.pwa = this.fs.exists(this.destinationPath("client/sw-registration.js"));
       this.props.autoSsr = this.fs.exists(this.destinationPath("server/plugins/autossr.js"));
       this.props.quoteType =
@@ -407,7 +407,7 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath("src/client"),
       this.destinationPath("src/client"),
-      { pwa: isPWA, cookiesModule },
+      { pwa: isPWA, cookiesModule, isDemoApp: this.isDemoApp },
       {}, // template options
       {
         // copy options
