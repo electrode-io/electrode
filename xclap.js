@@ -103,18 +103,18 @@ xclap.load({
   ".lerna.test": "~$lerna run --stream test --ignore=electrode-webpack-reporter",
   "test-reporter": {
     task: () => {
-      return exec(true, "lerna updated")
-        .then(r => {
-          if (r.stdout.indexOf("electrode-webpack-reporter") >= 0) {
-            return `~$cd packages/electrode-webpack-reporter && fyn --pg none install && npm test`;
-          }
-        })
-        .catch(err => {
-          assert(
-            err.output.stderr.indexOf("lerna info No packages need updating") > 0,
-            ".test-reporter: lerna updated failed without 'No packages need updating' message"
-          );
-        });
+      // return exec(true, "lerna updated")
+      //   .then(r => {
+      //     if (r.stdout.indexOf("electrode-webpack-reporter") >= 0) {
+      //       return `~$cd packages/electrode-webpack-reporter && fyn --pg none install && npm test`;
+      //     }
+      //   })
+      //   .catch(err => {
+      //     assert(
+      //       err.output.stderr.indexOf("lerna info No packages need updating") > 0,
+      //       ".test-reporter: lerna updated failed without 'No packages need updating' message"
+      //     );
+      //   });
     }
   },
   bootstrap: "~$fynpo",
