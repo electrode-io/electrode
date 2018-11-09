@@ -1,12 +1,14 @@
 "use strict";
 
 const Path = require("path");
+const glob = require("glob");
 const optionalRequire = require("optional-require")(require);
 
 const atImport = require("postcss-import");
 const webpack = require("webpack");
-const autoprefixer = require("autoprefixer-stylus");
+const autoprefixer = require("autoprefixer");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const postcssPresetEnv = require("postcss-preset-env");
 
 const styleLoader = require.resolve("style-loader");
 const cssLoader = require.resolve("css-loader");
@@ -17,11 +19,8 @@ const demoAppPath = Path.resolve(process.cwd(), "..", "..", "demo-app");
 const archetypeAppPath = Path.resolve(demoAppPath, "archetype", "config");
 
 const archetypeApp = optionalRequire(archetypeAppPath) || { webpack: {}, options: {} };
-
-console.log("xxxxxxxxx", optionalRequire(archetypeAppPath));
-
 const archetypeAppWebpack = archetypeApp.webpack;
-const cssModuleSupport = archetypeAppWebpack.cssModuleSupport;
+let cssModuleSupport = archetypeAppWebpack.cssModuleSupport;
 const cssModuleStylusSupport = archetypeAppWebpack.cssModuleStylusSupport;
 
 /*
@@ -35,6 +34,10 @@ const cssModuleStylusSupport = archetypeAppWebpack.cssModuleStylusSupport;
  * case 2: *only* *.styl => normal CSS => CSS-Modules + CSS-Next
  * case 3: *only* *.scss => normal CSS => CSS-Modules + CSS-Next
  */
+
+const cssExists = glob.sync(Path.resolve(process.cwd(), "src/styles", "*.css")).length > 0;
+const stylusExists = glob.sync(Path.resolve(process.cwd(), "src/styles", "*.styl")).length > 0;
+const scssExists = glob.sync(Path.resolve(process.cwd(), "src/styles", "*.scss")).length > 0;
 
 const rules = [];
 
@@ -68,14 +71,6 @@ const cssModuleQuery = {
   options: getCSSModuleOptions()
 };
 
-/*
- * postcss Loader
- *
- * Note:
- * - webpack requires an identifier (ident) in options
- * when {Function}/require is used (Complex Options).
- */
-const browserslist = ["last 2 versions", "ie >= 9", "> 5%"];
 const postcssQuery = {
   loader: postcssLoader,
   options: {
@@ -94,7 +89,6 @@ const postcssQuery = {
  * sass Loader
  */
 const getSassLoader = () => {
-  console.log("xxxxxxxxxxxxxx", archetypeApp);
   if (archetypeApp.options.sass) {
     const sassLoader = require.resolve("sass-loader");
     return sassLoader;
@@ -113,20 +107,31 @@ const stylusQuery = {
   loader: stylusLoader
 };
 
-module.exports = function() {
-  rules.push({
-    _name: `extract-css${cssModuleSupport ? "-modules" : ""}`,
-    test: /\.css$/,
-    use: ExtractTextPlugin.extract({
-      fallback: styleLoader,
-      use: cssModuleSupport ? [cssModuleQuery, postcssQuery] : [cssQuery, postcssQuery],
-      publicPath: ""
-    })
-  });
+/*
+ * cssModuleSupport default to undefined
+ *
+ * when cssModuleSupport not specified:
+ * *only* *.css, cssModuleSupport sets to true
+ * *only* *.styl, cssModuleSupport sets to false
+ * *only* *.scss, cssModuleSupport sets to false
+ */
+if (cssModuleSupport === undefined) {
+  cssModuleSupport = cssExists && !stylusExists && !scssExists;
+}
 
-  if (archetypeApp.options.sass) {
-    rules.push({
-      _name: `extract${cssModuleSupport ? "-css" : ""}-scss`,
+module.exports = function() {
+  rules.push(
+    {
+      _name: `extract-css${cssModuleSupport ? "-modules" : ""}`,
+      test: /\.css$/,
+      use: ExtractTextPlugin.extract({
+        fallback: styleLoader,
+        use: cssModuleSupport ? [cssModuleQuery, postcssQuery] : [cssQuery, postcssQuery],
+        publicPath: ""
+      })
+    },
+    {
+      _name: `extract-scss${cssModuleSupport ? "-modules" : ""}`,
       test: /\.(scss|sass)$/,
       use: ExtractTextPlugin.extract({
         fallback: styleLoader,
@@ -135,41 +140,40 @@ module.exports = function() {
           : [cssQuery, postcssQuery, sassQuery],
         publicPath: ""
       })
-    });
-  }
-
-  rules.push({
-    _name: `extract${cssModuleSupport ? "-css" : ""}-stylus`,
-    test: /\.styl$/,
-    use: ExtractTextPlugin.extract({
-      fallback: styleLoader,
-      use: cssModuleSupport
-        ? [cssModuleQuery, postcssQuery, stylusQuery]
-        : [cssQuery, postcssQuery, stylusQuery],
-      publicPath: ""
-    })
-  });
+    },
+    {
+      _name: `extract${cssModuleSupport ? "-css" : ""}-stylus`,
+      test: /\.styl$/,
+      use: ExtractTextPlugin.extract({
+        fallback: styleLoader,
+        use: cssModuleSupport
+          ? [cssModuleQuery, postcssQuery, stylusQuery]
+          : [cssQuery, postcssQuery, stylusQuery],
+        publicPath: ""
+      })
+    }
+  );
 
   /*
-  *** cssModuleStylusSupport flag is about to deprecate. ***
-  * If you want to enable stylus with CSS-Modules + CSS-Next,
-  * Please use stylus as your style and enable cssModuleSupport flag instead.
-  */
- if (cssModuleStylusSupport) {
-  rules.push({
-    _name: "extract-css-stylus",
-    test: /\.styl$/,
-    use: ExtractTextPlugin.extract({
-      fallback: styleLoader,
-      use: [cssModuleQuery, postcssQuery, stylusQuery],
-      publicPath: ""
-    })
-  });
-}
+   *** cssModuleStylusSupport flag is about to deprecate. ***
+   * If you want to enable stylus with CSS-Modules + CSS-Next,
+   * Please use stylus as your style and enable cssModuleSupport flag instead.
+   */
+  if (cssModuleStylusSupport) {
+    rules.push({
+      test: /\.styl$/,
+      use: ExtractTextPlugin.extract({
+        fallback: styleLoader,
+        use: [cssModuleQuery, postcssQuery, stylusQuery],
+        publicPath: ""
+      })
+    });
+  }
 
   return {
     module: { rules },
     plugins: [
+      new ExtractTextPlugin({ filename: "[name].style.[hash].css" }),
       new webpack.LoaderOptionsPlugin({
         minimize: true,
         options: {
