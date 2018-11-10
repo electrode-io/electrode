@@ -71,6 +71,8 @@ const cssModuleQuery = {
   options: getCSSModuleOptions()
 };
 
+const browserslist = ["last 2 versions", "ie >= 9", "> 5%"];
+
 const postcssQuery = {
   loader: postcssLoader,
   options: {
