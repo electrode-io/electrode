@@ -75,7 +75,6 @@
     "mocha": "^4.0.0",
     "nodemon": "^1.8.1",
     "optional-require": "^1.0.0",
-    "postcss-cssnext": "^2.7.0",
     "postcss-import": "^9.1.0",
     "postcss-loader": "^3.0.0",
     "postcss-preset-env": "^5.3.0",
