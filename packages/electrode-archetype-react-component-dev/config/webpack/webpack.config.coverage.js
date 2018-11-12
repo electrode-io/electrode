@@ -20,9 +20,9 @@ function makeConfig() {
   const options = {
     profiles: {
       "_test-base": testBaseProfile,
-      "_coverage": coverageProfile
+      _coverage: coverageProfile
     },
-    profileNames: ["_test-base"],
+    profileNames: ["_test-base", "_coverage"],
     configFilename: Path.basename(__filename)
   };
 

@@ -90,16 +90,8 @@ const postcssQuery = {
 /*
  * sass Loader
  */
-const getSassLoader = () => {
-  if (archetypeApp.options.sass) {
-    const sassLoader = require.resolve("sass-loader");
-    return sassLoader;
-  }
-  return "";
-};
-
 const sassQuery = {
-  loader: getSassLoader()
+  loader: require.resolve("sass-loader")
 };
 
 /*
