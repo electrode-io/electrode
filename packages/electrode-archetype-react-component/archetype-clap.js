@@ -206,7 +206,7 @@ function makeTasks(hostDir) {
     "test-cov": ["?.karma.test-frontend-cov", ".jest.test-frontend-cov"],
     "test-dev": ["?.karma.test-frontend-dev"],
     "test-watch": ["?.karma.test-frontend-dev-watch"],
-    "concurrent-test-watch": ["hot", "?.karma.test-frontend-dev-watch"],
+    "concurrent-test-watch": ["?.karma.test-frontend-dev-watch"],
     "test-frontend": ["?.karma.test-frontend"],
     // TODO: need more jest equivalent tasks compare to karma
     ".jest.test-frontend-cov": () => {

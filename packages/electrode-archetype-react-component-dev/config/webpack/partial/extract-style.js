@@ -5,9 +5,10 @@ const glob = require("glob");
 const optionalRequire = require("optional-require")(require);
 
 const atImport = require("postcss-import");
-const cssnext = require("postcss-cssnext");
 const webpack = require("webpack");
-const autoprefixer = require("autoprefixer-stylus");
+const autoprefixer = require("autoprefixer");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const postcssPresetEnv = require("postcss-preset-env");
 
 const styleLoader = require.resolve("style-loader");
 const cssLoader = require.resolve("css-loader");
@@ -22,9 +23,6 @@ const archetypeAppWebpack = archetypeApp.webpack;
 let cssModuleSupport = archetypeAppWebpack.cssModuleSupport;
 const cssModuleStylusSupport = archetypeAppWebpack.cssModuleStylusSupport;
 
-const sassSupport = archetypeApp.options && archetypeApp.options.sass;
-const sassLoader = sassSupport === false ? "" : require.resolve("sass-loader");
-
 /*
  * cssModuleSupport: false
  * case 1: *only* *.css => normal CSS
@@ -37,19 +35,71 @@ const sassLoader = sassSupport === false ? "" : require.resolve("sass-loader");
  * case 3: *only* *.scss => normal CSS => CSS-Modules + CSS-Next
  */
 
-const cssLoaderOptions = "?modules&localIdentName=[name]__[local]___[hash:base64:5]&-autoprefixer";
-const cssQuery = `${styleLoader}!${cssLoader}!${postcssLoader}`;
-const stylusQuery = `${styleLoader}!${cssLoader}?-autoprefixer!${stylusLoader}`;
-const scssQuery = `${cssQuery}!${sassLoader}`;
-const cssModuleQuery = `${styleLoader}!${cssLoader}${cssLoaderOptions}!${postcssLoader}`;
-const cssStylusQuery = `${cssModuleQuery}!${stylusLoader}`;
-const cssScssQuery = `${cssModuleQuery}!${sassLoader}`;
-
 const cssExists = glob.sync(Path.resolve(process.cwd(), "src/styles", "*.css")).length > 0;
 const stylusExists = glob.sync(Path.resolve(process.cwd(), "src/styles", "*.styl")).length > 0;
 const scssExists = glob.sync(Path.resolve(process.cwd(), "src/styles", "*.scss")).length > 0;
 
 const rules = [];
+
+/*
+ * css Loader
+ */
+const cssQuery = {
+  loader: cssLoader,
+  options: {
+    minimize: true
+  }
+};
+
+/*
+ * css-modules Loader
+ */
+const getCSSModuleOptions = () => {
+  const enableShortenCSSNames = archetypeAppWebpack.enableShortenCSSNames;
+  const enableShortHash = process.env.NODE_ENV === "production" && enableShortenCSSNames;
+  const localIdentName = `${enableShortHash ? "" : "[name]__[local]___"}[hash:base64:5]`;
+
+  return {
+    context: Path.resolve("src"),
+    modules: true,
+    localIdentName
+  };
+};
+
+const cssModuleQuery = {
+  loader: cssLoader,
+  options: getCSSModuleOptions()
+};
+
+const browserslist = ["last 2 versions", "ie >= 9", "> 5%"];
+
+const postcssQuery = {
+  loader: postcssLoader,
+  options: {
+    ident: "postcss",
+    plugins: loader => [
+      autoprefixer({
+        browsers: browserslist
+      }),
+      atImport({ root: loader.resourcePath }),
+      postcssPresetEnv({ browsers: browserslist })
+    ]
+  }
+};
+
+/*
+ * sass Loader
+ */
+const sassQuery = {
+  loader: require.resolve("sass-loader")
+};
+
+/*
+ * stylus Loader
+ */
+const stylusQuery = {
+  loader: stylusLoader
+};
 
 /*
  * cssModuleSupport default to undefined
@@ -66,58 +116,62 @@ if (cssModuleSupport === undefined) {
 module.exports = function() {
   rules.push(
     {
+      _name: `extract-css${cssModuleSupport ? "-modules" : ""}`,
       test: /\.css$/,
-      loader: cssModuleSupport ? cssModuleQuery : cssQuery
+      use: ExtractTextPlugin.extract({
+        fallback: styleLoader,
+        use: cssModuleSupport ? [cssModuleQuery, postcssQuery] : [cssQuery, postcssQuery],
+        publicPath: ""
+      })
     },
     {
-      test: /\.scss$/,
-      loader: cssModuleSupport ? cssScssQuery : scssQuery
+      _name: `extract-scss${cssModuleSupport ? "-modules" : ""}`,
+      test: /\.(scss|sass)$/,
+      use: ExtractTextPlugin.extract({
+        fallback: styleLoader,
+        use: cssModuleSupport
+          ? [cssModuleQuery, postcssQuery, sassQuery]
+          : [cssQuery, postcssQuery, sassQuery],
+        publicPath: ""
+      })
     },
     {
+      _name: `extract${cssModuleSupport ? "-css" : ""}-stylus`,
       test: /\.styl$/,
-      loader: cssModuleSupport ? cssStylusQuery : stylusQuery
+      use: ExtractTextPlugin.extract({
+        fallback: styleLoader,
+        use: cssModuleSupport
+          ? [cssModuleQuery, postcssQuery, stylusQuery]
+          : [cssQuery, postcssQuery, stylusQuery],
+        publicPath: ""
+      })
     }
   );
 
   /*
-  *** cssModuleStylusSupport flag is about to deprecate. ***
-  * If you want to enable stylus with CSS-Modules + CSS-Next,
-  * Please use stylus as your style and enable cssModuleSupport flag instead.
-  */
+   *** cssModuleStylusSupport flag is about to deprecate. ***
+   * If you want to enable stylus with CSS-Modules + CSS-Next,
+   * Please use stylus as your style and enable cssModuleSupport flag instead.
+   */
   if (cssModuleStylusSupport) {
     rules.push({
       test: /\.styl$/,
-      loader: cssStylusQuery
+      use: ExtractTextPlugin.extract({
+        fallback: styleLoader,
+        use: [cssModuleQuery, postcssQuery, stylusQuery],
+        publicPath: ""
+      })
     });
   }
 
   return {
     module: { rules },
     plugins: [
+      new ExtractTextPlugin({ filename: "[name].style.[hash].css" }),
       new webpack.LoaderOptionsPlugin({
+        minimize: true,
         options: {
-          postcss: () => {
-            return cssModuleSupport
-              ? [
-                  atImport,
-                  cssnext({
-                    browsers: ["last 2 versions", "ie >= 9", "> 5%"]
-                  })
-                ]
-              : [];
-          },
-          stylus: {
-            use: !cssModuleSupport
-              ? [
-                  autoprefixer({
-                    browsers: ["last 2 versions", "ie >= 9", "> 5%"]
-                  })
-                ]
-              : [],
-            define: {
-              $tenant: process.env.ELECTRODE_TENANT || "walmart"
-            }
-          }
+          context: Path.resolve("src")
         }
       })
     ].filter(x => !!x)

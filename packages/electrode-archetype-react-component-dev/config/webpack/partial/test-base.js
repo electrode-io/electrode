@@ -24,6 +24,7 @@ module.exports = {
   cache: true,
   devtool: "source-map",
   module: prodCfg.module,
+  plugins: prodCfg.plugins,
   externals: {
     jsdom: "window",
     cheerio: "window",

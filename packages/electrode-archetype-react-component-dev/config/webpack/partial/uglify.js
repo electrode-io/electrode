@@ -2,17 +2,28 @@
 
 const optimize = require("webpack").optimize;
 const LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = function() {
+  const uglifyOpts = {
+    sourceMap: true,
+    parallel: true,
+    uglifyOptions: {
+      compress: {
+        warnings: false,
+        unused: true,
+        dead_code: true
+      }
+    }
+  };
+
   return {
+    optimization: {
+      nodeEnv: "production",
+      minimizer: [new UglifyJsPlugin(uglifyOpts)]
+    },
     plugins: [
-      new LodashModuleReplacementPlugin(),
-      new optimize.UglifyJsPlugin({
-        sourceMap: true,
-        compress: {
-          warnings: false
-        }
-      })
+      new LodashModuleReplacementPlugin()
     ]
   };
 };

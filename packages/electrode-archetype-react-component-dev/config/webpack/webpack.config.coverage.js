@@ -10,7 +10,8 @@ var Path = require("path");
 function makeConfig() {
   const coverageProfile = {
     partials: {
-      "_coverage": {
+      _dev_mode: { order: 10000 },
+      _coverage: {
         order: 10100
       }
     }
@@ -19,13 +20,13 @@ function makeConfig() {
   const options = {
     profiles: {
       "_test-base": testBaseProfile,
-      "_coverage": coverageProfile
+      _coverage: coverageProfile
     },
     profileNames: ["_test-base", "_coverage"],
     configFilename: Path.basename(__filename)
   };
 
   return generateConfig(options);
-};
+}
 
 module.exports = makeConfig();

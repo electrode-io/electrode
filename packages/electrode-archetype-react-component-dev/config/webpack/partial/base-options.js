@@ -1,14 +1,10 @@
 "use strict";
 
-const webpack = require("webpack");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-module.exports = function () {
+module.exports = function() {
   return {
     cache: true,
-    plugins: [
-      new webpack.LoaderOptionsPlugin({
-        debug: false
-      })
-    ]
+    plugins: [new ExtractTextPlugin({ filename: "[name].style.css" })]
   };
 };
