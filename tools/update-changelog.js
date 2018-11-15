@@ -189,7 +189,7 @@ const determinePackageVersions = collated => {
       return a;
     }, 0);
     packages[mappedName].version = Pkg.version;
-    const verParts = pkg.version.split("-");
+    const verParts = Pkg.version.split("-");
     verParts[0] = semver.inc(verParts[0], types[updateType]);
     packages[mappedName].newVersion = verParts.join("-");
     packages[mappedName].originalPkg = Pkg;
