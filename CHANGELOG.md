@@ -1,5 +1,25 @@
 # 11/15/2018
 
+- electrode-archetype-react-app: trigger publish for beta tag
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-react-app@6.0.4-beta `(6.0.3 => 6.0.4-beta)`
+-   electrode-archetype-react-app-dev@6.0.4-beta `(6.0.3 => 6.0.4-beta)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   trigger publish for beta tag [commit](http://github.com/electrode-io/electrode/commit/77d3ee6695da40c607970ff6d18975b976006f50)
+
+# 11/15/2018
+
+- electrode-react-webapp: allow spaces and backtick in template tokens
+- electrode-archetype-react-component: webpack4: component archetype
+
 ## Packages
 
 -   electrode-archetype-react-component@6.0.0-beta `(5.3.6 => 6.0.0-beta)`
