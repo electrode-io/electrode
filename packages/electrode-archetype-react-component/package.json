@@ -45,6 +45,5 @@
       "electrode-archetype-opt-inferno": "../electrode-archetype-opt-inferno",
       "electrode-archetype-opt-react": "../electrode-archetype-opt-react"
     }
-  },
-  "private": true
+  }
 }

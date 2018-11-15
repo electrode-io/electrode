@@ -131,6 +131,5 @@
       "electrode-archetype-opt-react": "../electrode-archetype-opt-react",
       "electrode-archetype-opt-sass": "../electrode-archetype-opt-sass"
     }
-  },
-  "private": true
+  }
 }
