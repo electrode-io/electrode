@@ -11,6 +11,7 @@ const devRequire = require(`../require`);
 const configDir = `${devDir}/config`;
 const xenvConfig = devRequire("xenv-config");
 const detectCSSModule = require("./webpack/util/detect-css-module");
+const _ = require("lodash");
 
 const defaultOptimizeCssOptions = {
   cssProcessorOptions: {
@@ -51,6 +52,10 @@ const karmaConfigSpec = {
   browser: { env: "KARMA_BROWSER", default: "chrome" }
 };
 
+const topConfigSpec = {
+  devOpenBrowser: { env: "ELECTRODE_DEV_OPEN_BROWSER", default: false }
+};
+
 const config = {
   devDir,
   devPkg,
@@ -73,4 +78,7 @@ const config = {
   )
 };
 
-module.exports = config;
+module.exports = Object.assign(
+  config,
+  xenvConfig(topConfigSpec, _.pick(userConfig, Object.keys(topConfigSpec)), { merge })
+);
