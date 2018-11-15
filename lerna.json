@@ -2,11 +2,24 @@
   "lerna": "2.11.0",
   "version": "independent",
   "command.publish.config": {
-    "ignore": [
-      "*.md"
-    ]
+    "ignore": ["*.md"]
   },
   "fynpo": {
-    "ignore": [ "electrode-webpack-reporter" ]
+    "ignore": ["electrode-webpack-reporter"],
+    "publishConfig": {
+      "tags": {
+        "beta": {
+          "packages": {
+            "electrode-archetype-react-app": true,
+            "electrode-archetype-react-app-dev": true,
+            "electrode-archetype-react-component": true,
+            "electrode-archetype-react-component-dev": true,
+            "electrode-ignite": true,
+            "generator-electrode": true
+          },
+          "addToVersion": true
+        }
+      }
+    }
   }
 }
