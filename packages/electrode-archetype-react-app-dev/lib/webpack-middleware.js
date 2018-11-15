@@ -35,6 +35,42 @@ function urlJoin() {
   return saved + Path.posix.join.apply(null, arguments);
 }
 
+function openUrl(url) {
+  const flag = archetype.devOpenBrowser;
+  const doOpen = () => {
+    return setTimeout(() => opn(url), 750);
+  };
+
+  const showOpen = () => {
+    console.info(`Your app is now ready at ${chalk.green(url)}`);
+  };
+
+  if (flag === false) return showOpen();
+  if (flag === true) return doOpen();
+
+  const filename = Path.join(archetype.eTmpDir, "open-browser.json");
+  let openTimestamp;
+  const now = Date.now();
+  try {
+    openTimestamp = JSON.parse(Fs.readFileSync(filename));
+  } catch (e) {
+    openTimestamp = { time: 0 };
+  }
+
+  try {
+    const diff = now - openTimestamp.time;
+    if (diff > 10 * 60 * 1000) {
+      openTimestamp.time = now;
+      Fs.writeFileSync(filename, JSON.stringify(openTimestamp, null, 2));
+      return doOpen();
+    }
+  } catch (e) {
+    //
+  }
+
+  return showOpen();
+}
+
 //
 // skip webpack-dev-middleware if
 //
@@ -198,7 +234,7 @@ class Middleware {
 
           if (this.webpackDev.lastReporterOptions === undefined) {
             this.returnReporter = notOk;
-            setTimeout(() => opn(baseUrl()), 750);
+            openUrl(baseUrl());
           } else {
             // keep returning reporter until a first success compile
             this.returnReporter = this.returnReporter ? notOk : false;
