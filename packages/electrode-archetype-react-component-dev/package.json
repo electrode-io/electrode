@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-component-dev",
-  "version": "5.3.6",
+  "version": "6.0.0-beta",
   "description": "Electrode Component (Development)",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -131,5 +131,8 @@
       "electrode-archetype-opt-react": "../electrode-archetype-opt-react",
       "electrode-archetype-opt-sass": "../electrode-archetype-opt-sass"
     }
+  },
+  "publishConfig": {
+    "tag": "beta"
   }
 }
