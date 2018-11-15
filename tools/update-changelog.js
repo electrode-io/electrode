@@ -189,8 +189,9 @@ const determinePackageVersions = collated => {
       return a;
     }, 0);
     packages[mappedName].version = Pkg.version;
-    const newVersion = semver.inc(Pkg.version, types[updateType]);
-    packages[mappedName].newVersion = newVersion;
+    const verParts = pkg.version.split("-");
+    verParts[0] = semver.inc(verParts[0], types[updateType]);
+    packages[mappedName].newVersion = verParts.join("-");
     packages[mappedName].originalPkg = Pkg;
   };
 
@@ -205,6 +206,25 @@ const determinePackageVersions = collated => {
     .then(() => collated);
 };
 
+const lernaRc = require("../lerna.json");
+
+const getTaggedVersion = pkg => {
+  const fynpoTags = _.get(lernaRc, "fynpo.publishConfig.tags");
+  if (fynpoTags) {
+    for (const tag in fynpoTags) {
+      const tagInfo = fynpoTags[tag];
+      const enabled = _.get(tagInfo, ["packages", pkg.originalPkg.name]);
+      if (enabled) {
+        if (tag !== "latest" && tagInfo.addToVersion && !pkg.newVersion.endsWith(`-${tag}`)) {
+          return pkg.newVersion + `-${tag}`;
+        }
+      }
+    }
+  }
+
+  return pkg.newVersion;
+};
+
 const updateChangelog = collated => {
   const emittedCommits = {};
   const d = new Date();
@@ -216,10 +236,9 @@ const updateChangelog = collated => {
   }
   const emitPackageMsg = (p, packages) => {
     const pkg = packages[mapPkg(p)];
+    const newVer = getTaggedVersion(pkg);
     if (pkg.originalPkg.private) return;
-    output.push(
-      `-   ${p}@${pkg.newVersion} ` + "`" + `(${pkg.version} => ${pkg.newVersion})` + "`\n"
-    );
+    output.push(`-   ${p}@${newVer} ` + "`" + `(${pkg.version} => ${newVer})` + "`\n");
   };
   collated.realPackages.sort().forEach(p => emitPackageMsg(p, collated.packages));
   if (lernaUpdated) {
