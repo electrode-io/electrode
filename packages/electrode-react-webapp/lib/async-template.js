@@ -17,13 +17,21 @@ const Promise = require("bluebird");
 const { TEMPLATE_DIR } = require("./symbols");
 
 const tokenTags = {
-  "<!--%{": "}-->", // for tokens in html
-  "/*--%{": "}--*/" // for tokens in script and style
+  "<!--%{": {
+    // for tokens in html
+    open: "<!--[ \n]*%{",
+    close: new RegExp("}[ \\n]*-->")
+  },
+  "/*--%{": {
+    // for tokens in script and style
+    open: "\\/\\*--[ \n]*%{",
+    close: new RegExp("}--\\*/")
+  }
 };
 
 const tokenOpenTagRegex = new RegExp(
   Object.keys(tokenTags)
-    .map(x => `(${x.replace(/([\*\/])/g, "\\$1")})`)
+    .map(x => `(${tokenTags[x].open})`)
     .join("|")
 );
 
@@ -235,28 +243,43 @@ class AsyncTemplate {
 
   _parseTemplate(template, filepath) {
     const tokens = [];
-    let pt = 0;
     const templateDir = Path.dirname(filepath);
 
+    let pos = 0;
+
+    const parseFail = msg => {
+      const lineCount = [].concat(template.substring(0, pos).match(/\n/g)).length + 1;
+      const lastNLIx = template.lastIndexOf("\n", pos);
+      const lineCol = pos - lastNLIx;
+      msg = msg.replace(/\n/g, "\\n");
+      const pfx = `electrode-react-webapp: ${filepath}: at line ${lineCount} col ${lineCol}`;
+      throw new Error(`${pfx} - ${msg}`);
+    };
+
+    let subTmpl = template;
     while (true) {
-      const mx = template.substr(pt).match(tokenOpenTagRegex);
-      if (mx) {
-        const pos = mx.index + pt;
-        const str = template.substring(pt, pos).trim();
-        // if there are text between a close tag and an open tag, then consider
-        // that as plain HTML string
-        if (str) tokens.push({ str });
+      const openMatch = subTmpl.match(tokenOpenTagRegex);
+      if (openMatch) {
+        pos += openMatch.index;
 
-        const tokenOpenTag = mx[0];
-        const tokenCloseTag = tokenTags[tokenOpenTag];
-        const ex = template.indexOf(tokenCloseTag, pos);
-        assert(
-          ex > pos,
-          `electrode-react-webapp: ${filepath}: Can't find token close tag at position ${pos}`
-        );
+        if (openMatch.index > 0) {
+          const str = subTmpl.substring(0, openMatch.index).trim();
+          // if there are text between a close tag and an open tag, then consider
+          // that as plain HTML string
+          if (str) tokens.push({ str });
+        }
 
-        let remain = template
-          .substring(pos + tokenOpenTag.length, ex)
+        const tokenOpenTag = openMatch[0].replace(/[ \n]/g, "");
+        const tokenCloseTag = tokenTags[tokenOpenTag].close;
+        subTmpl = subTmpl.substring(openMatch.index + openMatch[0].length);
+        const closeMatch = subTmpl.match(tokenCloseTag);
+
+        if (!closeMatch) {
+          parseFail(`Can't find token close tag for '${openMatch[0]}'`);
+        }
+
+        const tokenBody = subTmpl
+          .substring(0, closeMatch.index)
           .trim()
           .split("\n")
           .map(x => x.trim())
@@ -264,23 +287,27 @@ class AsyncTemplate {
           .filter(x => x && !x.startsWith("//"))
           .join(" ");
 
-        const token = remain.split(" ", 1)[0];
-        assert(token, `electrode-react-webapp: ${filepath}: Empty token at position ${pos}`);
-        remain = remain.substring(token.length).trim();
+        const consumedCount = closeMatch.index + closeMatch[0].length;
+        subTmpl = subTmpl.substring(consumedCount);
 
-        let props;
-        try {
-          props = this._parseTokenProps(remain);
-        } catch (e) {
-          const x = `at position ${pos} has malformed prop '${remain}': ${e.message}`;
-          assert(false, `electrode-react-webapp: ${filepath}: token ${token} ${x}`);
+        const token = tokenBody.split(" ", 1)[0];
+        if (!token) {
+          parseFail(`empty token body`);
         }
-        props[TEMPLATE_DIR] = templateDir;
 
-        tokens.push(new Token(token, pos, props));
-        pt = ex + tokenCloseTag.length;
+        const tokenProps = tokenBody.substring(token.length).trim();
+
+        try {
+          const props = this._parseTokenProps(tokenProps);
+          props[TEMPLATE_DIR] = templateDir;
+
+          tokens.push(new Token(token, pos, props));
+          pos += openMatch[0].length + consumedCount;
+        } catch (e) {
+          parseFail(`'${tokenBody}' has malformed prop: ${e.message};`);
+        }
       } else {
-        const str = template.substring(pt).trim();
+        const str = subTmpl.trim();
         if (str) tokens.push({ str });
         break;
       }
@@ -308,7 +335,7 @@ class AsyncTemplate {
         const r = stringArray.parse(str, true);
         props[name] = r.array;
         str = r.remain.trim();
-      } else if (m1[2] === `'` || m1[2] === `"`) {
+      } else if (m1[2] === `'` || m1[2] === `"` || m1[2] === "`") {
         str = str.substring(m1[0].length);
         const m2 = str.match(new RegExp(`([^${m1[2]}]+)${m1[2]}`));
         assert(m2, `mismatch quote ${m1[2]}`);
