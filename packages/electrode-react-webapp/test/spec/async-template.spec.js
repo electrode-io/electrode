@@ -258,13 +258,41 @@ describe("async-template", function() {
         wantsNext: undefined
       },
       {
+        custom: undefined,
+        id: "space-tags",
+        isModule: false,
+        pos: 396,
+        props: {},
+        wantsNext: undefined
+      },
+      {
+        custom: undefined,
+        id: "new-line-tags",
+        isModule: false,
+        pos: 421,
+        props: {},
+        wantsNext: undefined
+      },
+      {
+        custom: undefined,
+        id: "space-newline-tag",
+        isModule: false,
+        pos: 456,
+        props: {
+          attr1: "hello",
+          attr2: "world",
+          attr3: "foo"
+        },
+        wantsNext: undefined
+      },
+      {
         _modCall: ["setup"],
         custom: {
           name: "custom-call"
         },
         id: "#../fixtures/custom-call",
         isModule: true,
-        pos: 396,
+        pos: 536,
         props: {
           _call: "setup"
         },
@@ -285,7 +313,7 @@ describe("async-template", function() {
           tokenHandlers: "./test/fixtures/token-handler"
         })
     ).to.throw(
-      "token prefetch-bundles at position 83 has malformed prop 'bad-prop': name must be name="
+      `at line 9 col 3 - 'prefetch-bundles bad-prop' has malformed prop: name must be name=Val;`
     );
   });
 
@@ -298,8 +326,30 @@ describe("async-template", function() {
           tokenHandlers: "./test/fixtures/token-handler"
         })
     ).to.throw(
-      "token ssr-content at position 17 has malformed prop 'attr[1,2,3]': name must be name="
+      `at line 4 col 3 - 'ssr-content attr[1,2,3]' has malformed prop: name must be name=Val;`
     );
+  });
+
+  it("should throw for token empty body", () => {
+    const htmlFile = Path.join(__dirname, "../data/template7.html");
+    expect(
+      () =>
+        new AsyncTemplate({
+          htmlFile,
+          tokenHandlers: "./test/fixtures/token-handler"
+        })
+    ).to.throw(`at line 3 col 5 - empty token body`);
+  });
+
+  it("should throw for token missing close tag", () => {
+    const htmlFile = Path.join(__dirname, "../data/template8.html");
+    expect(
+      () =>
+        new AsyncTemplate({
+          htmlFile,
+          tokenHandlers: "./test/fixtures/token-handler"
+        })
+    ).to.throw(`at line 3 col 5 - Can't find token close tag for '<!--\\n      %{'`);
   });
 
   it("should throw for token with value that has mismatching '", () => {
@@ -310,7 +360,7 @@ describe("async-template", function() {
           htmlFile,
           tokenHandlers: "./test/fixtures/token-handler"
         })
-    ).to.throw("has malformed prop 'foo='bar': mismatch quote '");
+    ).to.throw(`at line 4 col 3 - 'ssr-content foo='bar' has malformed prop: mismatch quote ';`);
   });
 
   describe("addTokens", function() {
