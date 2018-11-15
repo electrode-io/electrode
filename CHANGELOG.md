@@ -1,3 +1,36 @@
+# 11/15/2018
+
+## Packages
+
+-   electrode-archetype-react-component@6.0.0-beta `(5.3.6 => 6.0.0-beta)`
+-   electrode-archetype-react-component-dev@6.0.0-beta `(5.3.6 => 6.0.0-beta)`
+-   electrode-react-webapp@3.2.0 `(3.1.1 => 3.2.0)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   re-enable component archetype publishing [commit](http://github.com/electrode-io/electrode/commit/4b8a440f07e3f009760b1bff0f72b717b5f13cce)
+    -   deprecate warning ([#1031](https://github.com/electrode-io/electrode/pull/1031)) [commit](http://github.com/electrode-io/electrode/commit/a2785d5dafe0fc46a60101b4d6d9123a3a80642f)
+    -   [major] webpack4: component archetype ([#1030](https://github.com/electrode-io/electrode/pull/1030)) [commit](http://github.com/electrode-io/electrode/commit/5027bfb4da43db9c87de42a94208dab6d97b6f05)
+
+-   `packages/electrode-react-webapp`
+
+    -   [minor] allow spaces and backtick in template tokens ([#1032](https://github.com/electrode-io/electrode/pull/1032)) [commit](http://github.com/electrode-io/electrode/commit/d9a4ce126ec06d3e53c2ab76d4090264a2c26e33)
+
+-   `samples/demo-component`
+
+    -   [major] webpack4: component archetype ([#1030](https://github.com/electrode-io/electrode/pull/1030)) [commit](http://github.com/electrode-io/electrode/commit/5027bfb4da43db9c87de42a94208dab6d97b6f05)
+
+-   `tools`
+
+    -   add npm tags from lerna.json to versions [commit](http://github.com/electrode-io/electrode/commit/dcc69a1ba55d73aa946c5c92ef84c031af0daa01)
+    -   fix typo [commit](http://github.com/electrode-io/electrode/commit/0dbf8c4c42f13d4781c7ebbadae861f8afb3fdf2)
+
+-   `MISC`
+
+    -   add beta tags for packages [commit](http://github.com/electrode-io/electrode/commit/75fd59b679a7aac95ca9c67503182f1c3e36440d)
+
 # 11/5/2018
 
 - `electrode-archetype-opt-*`: fix optional-check when flag is falsy
