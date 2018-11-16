@@ -1,3 +1,42 @@
+# 11/15/2018
+
+- electrode-archetype-react-app: lock version to resolve upstream issue for babel-plugin-transform-react-remove-prop-types
+- generator-electrode: Fix extra demo 1 & 2 for component generator
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-react-app@5.4.20 `(5.4.19 => 5.4.20)`
+-   electrode-archetype-react-app-dev@5.4.20 `(5.4.19 => 5.4.20)`
+-   generator-electrode@4.2.7 `(4.2.6 => 4.2.7)`
+
+### Lerna Updated
+
+-   electrode-ignite@2.1.11 `(2.1.10 => 2.1.11)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   lock version to resolve upstream issue ([#1035](https://github.com/electrode-io/electrode/pull/1035)) [commit](http://github.com/electrode-io/electrode/commit/f1d698cfea31b31d462f94ca21664998d75e49f9)
+
+-   `packages/generator-electrode`
+
+    -   [patch] Fix extra demo 1 & 2 for component generator ([#1027](https://github.com/electrode-io/electrode/pull/1027)) [commit](http://github.com/electrode-io/electrode/commit/810dd254abd2897d6bd39130f7da76a862d72645)
+
+-   `samples/demo-component`
+
+    -   update demo-component to support ES6 modules [commit](http://github.com/electrode-io/electrode/commit/cb583da900ff779817d35e0441a2c5e5c5dc9c1a)
+
+-   `samples/demo-tree-shaking`
+
+    -   add sample app to demo webpack tree shaking using components [commit](http://github.com/electrode-io/electrode/commit/0c97fc43ce7895bd05621ab941a815cbcd628edf)
+
+-   `MISC`
+
+    -   [chore] disable test-reporter task that's failing PR CIs [commit](http://github.com/electrode-io/electrode/commit/24e669cacd9c0ef77f8c1f57f23ac56ae16402b5)
+
 # 11/2/2018
 
 -   electrode-archetype-react-component: build components with ES6 module syntax intact 
