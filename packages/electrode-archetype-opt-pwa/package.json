@@ -1,0 +1,39 @@
+{
+  "name": "electrode-archetype-opt-pwa",
+  "version": "0.0.1",
+  "description": "Electrode PWA Module Optional Archetype",
+  "main": "index.js",
+  "homepage": "http://www.electrode.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electrode-io/electrode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/electrode-io/electrode/issues"
+  },
+  "license": "Apache-2.0",
+  "scripts": {
+    "preinstall": "node optional-check.js"
+  },
+  "files": [
+    "plugins",
+    "optional-check.js"
+  ],
+  "dependencies": {
+    "favicons-webpack-plugin": "^0.0.9",
+    "favicons": "^4.8.3",
+    "sw-precache-webpack-plugin": "^0.11.5",
+    "sw-precache": "^5.0.0",
+    "sw-toolbox": "^3.4.0",
+    "web-app-manifest-loader": "^0.1.1",
+    "webpack-disk-plugin": "0.0.2"
+  },
+  "devDependencies": {
+    "opt-archetype-check": "../opt-archetype-check"
+  },
+  "electrodeOptArchetype": {
+    "optionalTagName": "pwa",
+    "expectTag": true,
+    "defaultInstall": true
+  }
+}
