@@ -17,6 +17,7 @@
     "prepare": "cp node_modules/opt-archetype-check/optional-check.js ."
   },
   "files": [
+    "lib",
     "optional-check.js"
   ],
   "dependencies": {
