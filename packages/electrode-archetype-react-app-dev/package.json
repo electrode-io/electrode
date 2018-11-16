@@ -19,7 +19,6 @@
   "files": [
     "config",
     "lib",
-    "serve-index",
     "scripts",
     "require.js"
   ],
@@ -115,6 +114,7 @@
     "sw-precache": "^5.0.0",
     "sw-precache-webpack-plugin": "^0.11.5",
     "sw-toolbox": "^3.4.0",
+    "serve-index-fs": "^1.9.1",
     "uglify-es": "^3.3.9",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "url-loader": "^0.6.2",
