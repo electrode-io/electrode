@@ -4,7 +4,7 @@ const cleanup = require("jsdom-global")();
 const mockReq = require("mock-require");
 const expect = require("chai").expect;
 
-describe("csindex", () => {
+describe("csindex", function() {
   this.timeout(10000);
   let csIndex;
   beforeEach(() => {
