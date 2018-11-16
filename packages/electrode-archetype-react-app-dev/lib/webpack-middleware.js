@@ -247,6 +247,9 @@ class Middleware {
                 if (m.indexOf("node_modules") >= 0) return;
                 if (m.indexOf("(webpack)") >= 0) return;
                 if (m.startsWith("multi ")) return;
+                // webpack4 output like "./routes.jsx + 9 modules"
+                const plusIx = m.indexOf(" + ");
+                if (plusIx > 0) m = m.substring(0, plusIx);
                 const moduleFullPath = Path.resolve(m);
                 delete require.cache[moduleFullPath];
               });
