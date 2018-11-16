@@ -5,6 +5,7 @@ const mockReq = require("mock-require");
 const expect = require("chai").expect;
 
 describe("csindex", () => {
+  this.timeout(10000);
   let csIndex;
   beforeEach(() => {
     mockReq.reRequire("../../cookies-js");
