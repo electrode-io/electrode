@@ -1,16 +1,22 @@
 "use strict";
 
-var ispartaLoader = require.resolve("../loaders/isparta-loader");
-
 module.exports = function() {
-  return {
-    module: {
-      rules: [{
-        test: /src\/.*\.jsx?$/,
-        enforce: "pre",
-        exclude: /(test|node_modules)\//,
-        loader: ispartaLoader
-      }]
-    }
-  };
+  try {
+    const ispartaLoader = require.resolve("electrode-archetype-opt-karma/loaders/isparta-loader");
+
+    return {
+      module: {
+        rules: [
+          {
+            test: /src\/.*\.jsx?$/,
+            enforce: "pre",
+            exclude: /(test|node_modules)\//,
+            loader: ispartaLoader
+          }
+        ]
+      }
+    };
+  } catch (e) {
+    return {};
+  }
 };
