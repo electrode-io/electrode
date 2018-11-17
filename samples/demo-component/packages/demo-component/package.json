@@ -21,13 +21,19 @@
     "electrode-demo-index": "^2.0.0"
   },
   "devDependencies": {
-    "electrode-archetype-react-component": "../../../../packages/electrode-archetype-react-component",
-    "electrode-archetype-react-component-dev": "../../../../packages/electrode-archetype-react-component-dev",
-    "xclap": "^0.2.0"
+    "electrode-archetype-react-component": "^6.0.0",
+    "electrode-archetype-react-component-dev": "^6.0.0",
+    "xclap": "^0.2.24"
+  },
+  "fyn": {
+    "devDependencies": {
+      "electrode-archetype-react-component": "../../../../packages/electrode-archetype-react-component",
+      "electrode-archetype-react-component-dev": "../../../../packages/electrode-archetype-react-component-dev"
+    }
   },
   "engines": {
-    "node": ">= 6",
-    "npm": ">= 3"
+    "node": ">= 8",
+    "npm": ">= 5"
   },
   "scripts": {
     "prepublish": "clap prepublish",
