@@ -33,8 +33,8 @@ In the package.json file, add the following code so that the server, by default,
 
 ```
 "scripts":{
-  "start":"NODE_ENV=production node node_modules/.bin/electrode-ota-server",
-    "development":"NODE_ENV=development node node_modules/.bin/electrode-ota-server"
+  "start":"NODE_ENV=production node node_modules/electrode-ota-server",
+  "development":"NODE_ENV=development node node_modules/electrode-ota-server"
 
 }
 ```
@@ -102,7 +102,7 @@ The configurations are loaded using electrode-confippet. For additional informat
         "electrode-ota-server-auth": {
             "options": {
                 "strategy": {
-                    //Authentication Strategy.  The OTA uses [bell](http://https://github.com/hapijs/bell) for
+                    //Authentication Strategy.  The OTA uses [bell](http://github.com/hapijs/bell) for
                     //OAuth.  You can see the vendors and options there.  We test with github oAuth.
 
                     "github-oauth": {
