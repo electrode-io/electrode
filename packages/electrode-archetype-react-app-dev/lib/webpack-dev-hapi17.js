@@ -56,7 +56,7 @@ function register(server) {
       });
 
       if (procResult !== middleware.canContinue) {
-        return undefined;
+        return h.continue;
       }
 
       request.app.webpackDev = middleware.webpackDev;
