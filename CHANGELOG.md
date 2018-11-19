@@ -1,3 +1,16 @@
+# 11/19/2018
+
+## Packages
+
+-   electrode-archetype-react-app@5.4.21 `(5.4.20 => 5.4.21)`
+-   electrode-archetype-react-app-dev@5.4.21 `(5.4.20 => 5.4.21)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   lock bad downstream dep [commit](http://github.com/electrode-io/electrode/commit/74f4c08ab867c8ae53d9cd2075e29b0ee767c939)
+
 # 11/15/2018
 
 - electrode-archetype-react-app: lock version to resolve upstream issue for babel-plugin-transform-react-remove-prop-types
