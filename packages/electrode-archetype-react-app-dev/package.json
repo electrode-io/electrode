@@ -37,7 +37,7 @@
     "babel-plugin-i18n-id-hashing": "^2.1.0",
     "babel-plugin-lodash": "^3.1.3",
     "babel-plugin-minify-dead-code-elimination": "^0.1.7",
-    "babel-plugin-react-css-modules": "^3.4.2",
+    "babel-plugin-react-css-modules": "3.4.2",
     "babel-plugin-react-intl": "^2.1.2",
     "babel-plugin-transform-node-env-inline": "^0.1.1",
     "babel-plugin-transform-object-rest-spread": "^6.3.13",
