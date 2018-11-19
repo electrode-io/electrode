@@ -69,8 +69,6 @@
     "eslint-plugin-flowtype": "^2.49.3",
     "eslint-plugin-react": "^7.4.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
-    "favicons": "^4.8.3",
-    "favicons-webpack-plugin": "^0.0.9",
     "file-loader": "^2.0.0",
     "finalhandler": "^1.1.1",
     "flow-bin": "^0.74.0",
@@ -103,7 +101,7 @@
     "raw-loader": "^0.5.1",
     "react-intl": "^2.1.0",
     "react-test-renderer": "^16.1.1",
-    "require-at": "^1.0.0",
+    "require-at": "^1.0.2",
     "rimraf": "^2.4.0",
     "sinon": "^4.0.0",
     "sinon-chai": "^2.14.0",
@@ -111,19 +109,13 @@
     "stylus": "^0.54.5",
     "stylus-relative-loader": "^3.4.0",
     "sugarss": "^1.0.1",
-    "sw-precache": "^5.0.0",
-    "sw-precache-webpack-plugin": "^0.11.5",
-    "sw-toolbox": "^3.4.0",
-    "serve-index-fs": "^1.9.1",
     "uglify-es": "^3.3.9",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "url-loader": "^0.6.2",
-    "web-app-manifest-loader": "^0.1.1",
     "webpack": "^4.19.1",
     "webpack-cli": "^3.1.1",
     "webpack-config-composer": "^1.1.0",
     "webpack-dev-middleware": "^3.2.0",
-    "webpack-disk-plugin": "0.0.2",
     "webpack-hot-middleware": "^2.22.2",
     "webpack-stats-plugin": "^0.2.1",
     "winston": "^2.3.1",
@@ -134,6 +126,7 @@
   "optionalDependencies": {
     "electrode-archetype-opt-inferno": "^0.2.4",
     "electrode-archetype-opt-karma": "^1.0.2",
+    "electrode-archetype-opt-pwa": "^1.0.0",
     "electrode-archetype-opt-react": "^1.0.2",
     "electrode-archetype-opt-sass": "^1.0.3"
   },
@@ -157,6 +150,7 @@
     "optionalDependencies": {
       "electrode-archetype-opt-inferno": "../electrode-archetype-opt-inferno",
       "electrode-archetype-opt-karma": "../electrode-archetype-opt-karma",
+      "electrode-archetype-opt-pwa": "../electrode-archetype-opt-pwa",
       "electrode-archetype-opt-react": "../electrode-archetype-opt-react",
       "electrode-archetype-opt-sass": "../electrode-archetype-opt-sass"
     }
