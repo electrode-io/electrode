@@ -2,16 +2,22 @@
 
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const Path = require("path");
+const requireAt = require("require-at");
 const AppMode = archetype.AppMode;
 
 const assign = require("lodash/assign");
 const fileLoader = require.resolve("file-loader");
-const webAppManifestLoader = require.resolve("web-app-manifest-loader");
-const SWPrecacheWebpackPlugin = require("../plugins/sw-precache");
-const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
-const AddManifestFieldsPlugin = require("../plugins/add-manifest-fields");
-const DiskPlugin = require("webpack-disk-plugin");
 const optionalRequire = require("optional-require")(require);
+//
+// load modules from within electrode-archetype-opt-pwa
+//
+const pwaRequire = requireAt(require.resolve("electrode-archetype-opt-pwa"));
+const webAppManifestLoader = pwaRequire.resolve("web-app-manifest-loader");
+const SWPrecacheWebpackPlugin = pwaRequire("./plugins/sw-precache");
+const FaviconsWebpackPlugin = pwaRequire("favicons-webpack-plugin");
+const AddManifestFieldsPlugin = pwaRequire("./plugins/add-manifest-fields");
+const DiskPlugin = pwaRequire("webpack-disk-plugin");
+//
 
 const swConfigPath = Path.resolve("config", "sw-config.js");
 const serverConfigPath = Path.resolve("config", "default.json");
