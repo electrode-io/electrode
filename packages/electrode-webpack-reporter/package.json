@@ -40,6 +40,8 @@
     "ansi-to-html": "^0.6.0",
     "chalk": "^2.3.0",
     "optional-require": "^1.0.0",
+    "react": "16.3.2",
+    "react-dom": "16.3.3",
     "socket.io": "^1.7.3"
   }
 }
