@@ -33,6 +33,8 @@
     "electrode-static-paths": "^1.1.0",
     "material-design-icons": "^3.0.1",
     "material-ui": "^0.20.0",
+    "react": "16.3.2",
+    "react-dom": "16.3.3",
     "react-tap-event-plugin": "^3.0.2",
     "xclap": "^0.2.0"
   },
@@ -40,8 +42,6 @@
     "ansi-to-html": "^0.6.0",
     "chalk": "^2.3.0",
     "optional-require": "^1.0.0",
-    "react": "16.3.2",
-    "react-dom": "16.3.3",
     "socket.io": "^1.7.3"
   }
 }
