@@ -152,15 +152,25 @@ const collateCommitsPackages = commits => {
     collated.lernaPackages = commits.updated.packages.filter(
       r => collated.realPackages.indexOf(r) < 0
     );
-    const updateByMap = _(collated.realPackages)
-      .map(p => packageMapping[p])
-      .filter()
-      .map(p => {
-        return reverseMapping[p] || undefined;
-      })
-      .flatMap()
-      .value();
-    collated.realPackages = _.uniq(collated.realPackages.concat(updateByMap));
+
+    const checkGroupMap = key => {
+      const updateByMap = _(collated[key])
+        .map(p => packageMapping[p])
+        .filter()
+        .map(p => {
+          return reverseMapping[p] || undefined;
+        })
+        .flatMap()
+        .filter(x => {
+          return collated.realPackages.indexOf(x) < 0 && collated.lernaPackages.indexOf(x) < 0;
+        })
+        .value();
+      collated[key] = _.uniq(collated[key].concat(updateByMap));
+    };
+
+    checkGroupMap("realPackages");
+    checkGroupMap("lernaPackages");
+
     collated.forcePackages = collated.realPackages.filter(
       r => commits.updated.packages.indexOf(r) < 0
     );
