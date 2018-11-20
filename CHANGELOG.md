@@ -2,6 +2,27 @@
 
 ## Packages
 
+-   electrode-archetype-react-app@5.4.22 `(5.4.21 => 5.4.22)`
+-   electrode-archetype-react-app-dev@5.4.22 `(5.4.21 => 5.4.22)`
+-   electrode-webpack-reporter@0.4.9 `(0.4.8 => 0.4.9)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   use custom serve-index-fs on npm ([#1041](https://github.com/electrode-io/electrode/pull/1041)) [commit](http://github.com/electrode-io/electrode/commit/837357f7e21ce4880d08c37d84598b599810e14d)
+    -   add flag to control auto open browser ([#1034](https://github.com/electrode-io/electrode/pull/1034)) [commit](http://github.com/electrode-io/electrode/commit/346b41d54f02da343bbd8ced5894091845acbce8)
+    -   check flag before auto opening browser ([#1033](https://github.com/electrode-io/electrode/pull/1033)) [commit](http://github.com/electrode-io/electrode/commit/1e8312f1cd3779fe103d180a76c4671d85a12d36)
+
+-   `packages/electrode-webpack-reporter`
+
+    -   [minor] update webpack reporter to handle wds 3.0.0 ([#1050](https://github.com/electrode-io/electrode/pull/1050)) [commit](http://github.com/electrode-io/electrode/commit/26d2c3dc7de87b23b00cf45dca4284279f6684cb)
+    -   lock react versions to avoid issue ([#1055](https://github.com/electrode-io/electrode/pull/1055)) [commit](http://github.com/electrode-io/electrode/commit/66ee35c829f4096ea2317d9f2be38763166affd9)
+
+# 11/19/2018
+
+## Packages
+
 -   electrode-archetype-react-app@5.4.21 `(5.4.20 => 5.4.21)`
 -   electrode-archetype-react-app-dev@5.4.21 `(5.4.20 => 5.4.21)`
 
