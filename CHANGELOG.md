@@ -1,3 +1,79 @@
+# 11/19/2018
+
+## Packages
+
+### Directly Updated
+
+-   electrode-archetype-opt-karma@1.0.4 `(1.0.3 => 1.0.4)`
+-   electrode-archetype-opt-pwa@1.0.0 `(0.0.2 => 1.0.0)`
+-   electrode-archetype-react-app@6.0.5-beta `(6.0.4-beta => 6.0.5-beta)`
+-   electrode-archetype-react-app-dev@6.0.5-beta `(6.0.4-beta => 6.0.5-beta)`
+-   electrode-archetype-react-component@6.0.1-beta `(6.0.0-beta => 6.0.1-beta)`
+-   electrode-archetype-react-component-dev@6.0.1-beta `(6.0.0-beta => 6.0.1-beta)`
+-   electrode-cookies@1.0.3 `(1.0.2 => 1.0.3)`
+-   electrode-webpack-reporter@0.5.0 `(0.4.8 => 0.5.0)`
+-   generator-electrode@5.0.1-beta `(5.0.0 => 5.0.1-beta)`
+
+### Lerna Updated
+
+-   electrode-archetype-react-app@6.0.5-beta `(6.0.4-beta => 6.0.5-beta)`
+-   electrode-archetype-react-component@6.0.1-beta `(6.0.0-beta => 6.0.1-beta)`
+-   electrode-ignite@3.0.1-beta `(3.0.0 => 3.0.1-beta)`
+
+## Commits
+
+-   `packages/electrode-archetype-opt-css-module`
+
+    -   mark yet to be used and unreleased package private [commit](http://github.com/electrode-io/electrode/commit/140516bee53ef30129db4317fbdec789fd05dc4b)
+    -   move css module dep to opt archetype ([#1044](https://github.com/electrode-io/electrode/pull/1044)) [commit](http://github.com/electrode-io/electrode/commit/dbd9ba953c6897d038394893c0ecf0665169e902)
+
+-   `packages/electrode-archetype-opt-karma`
+
+    -   update publish files [commit](http://github.com/electrode-io/electrode/commit/e627bd8955d9955d6d908ec20b3afe283b06c0ec)
+    -   add isparta as dep to opt-karma archetype ([#1038](https://github.com/electrode-io/electrode/pull/1038)) [commit](http://github.com/electrode-io/electrode/commit/74db3504668ccd1603e8bea5660fbe43efe1c4f5)
+
+-   `packages/electrode-archetype-opt-pwa`
+
+    -   move PWA dependencies to opt archetype ([#1040](https://github.com/electrode-io/electrode/pull/1040)) [commit](http://github.com/electrode-io/electrode/commit/bc4546f8588d2fc007e7f108f0c4235b74a27d1d)
+    -   [major] mark package for initial release [commit](http://github.com/electrode-io/electrode/commit/bb4317dd4dbc214f7c8f6215800bf5464b6d96fb)
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   restore webpack-dev-server and html reporter ([#1051](https://github.com/electrode-io/electrode/pull/1051)) [commit](http://github.com/electrode-io/electrode/commit/1688bfde74530ac8cec483b2c83a1b6eb71c4db7)
+    -   Should return something ([#1053](https://github.com/electrode-io/electrode/pull/1053)) [commit](http://github.com/electrode-io/electrode/commit/4e723a7d55496a106c52a6110718211878321522)
+    -   lock bad behaving downstream dep [commit](http://github.com/electrode-io/electrode/commit/c4e05f4cda978bf7adcde3e857d8e1e1bd61ded5)
+    -   use opt-pwa archetype in app archetype ([#1049](https://github.com/electrode-io/electrode/pull/1049)) [commit](http://github.com/electrode-io/electrode/commit/108d7d3a10e667f8fffd1b9efb572486a07c9b60)
+    -   get module true path by using webpack4 module identifier ([#1045](https://github.com/electrode-io/electrode/pull/1045)) [commit](http://github.com/electrode-io/electrode/commit/7c4b75550f7d1ea6e7f728c8f1fdcf326edcaa6a)
+    -   remove electrode-webpack-reporter ([#1042](https://github.com/electrode-io/electrode/pull/1042)) [commit](http://github.com/electrode-io/electrode/commit/868aacb0735a160208db5c5b166287e40322322f)
+    -   use custom serve-index-fs on npm ([#1041](https://github.com/electrode-io/electrode/pull/1041)) [commit](http://github.com/electrode-io/electrode/commit/0bdbda24cc042a522d7ca0ff9d5921fd6450fcac)
+    -   fix handling webpack 4 module output ([#1037](https://github.com/electrode-io/electrode/pull/1037)) [commit](http://github.com/electrode-io/electrode/commit/ff5eebdbc54a0c5fb36691a076eb1254eabfac60)
+    -   use isparta-loader from archetype-opt-karma [commit](http://github.com/electrode-io/electrode/commit/688968a7ecb468514a42c34cd73f75af098b4a7d)
+    -   add flag to control auto open browser ([#1034](https://github.com/electrode-io/electrode/pull/1034)) [commit](http://github.com/electrode-io/electrode/commit/c02e1ade82f9af51c90fc210147a3de7edd22dac)
+    -   check flag before auto opening browser ([#1033](https://github.com/electrode-io/electrode/pull/1033)) [commit](http://github.com/electrode-io/electrode/commit/f135d95736815e9e4f192cf67c6277ef2bf2193c)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   use isparta loader from opt-karma archetype [commit](http://github.com/electrode-io/electrode/commit/2d66b973472dd14389673a11e9906a1f454d2cdf)
+    -   sort dep [commit](http://github.com/electrode-io/electrode/commit/b10f254cd7300c39ccb4c9c195166e21afd00c14)
+
+-   `packages/electrode-cookies`
+
+    -   fix test [commit](http://github.com/electrode-io/electrode/commit/0310e983b9034d7c1450c11174301e20d42d928e)
+    -   update test timeout [commit](http://github.com/electrode-io/electrode/commit/9c71162e5b0c55724d3230af7bf2e9993bdcc09b)
+
+-   `packages/electrode-webpack-reporter`
+
+    -   lock react versions to avoid issue ([#1055](https://github.com/electrode-io/electrode/pull/1055)) [commit](http://github.com/electrode-io/electrode/commit/f157b2b4da481f81b924a7e2c1956310a9132ee9)
+    -   [minor] update webpack reporter to handle wds 3.0.0 ([#1050](https://github.com/electrode-io/electrode/pull/1050)) [commit](http://github.com/electrode-io/electrode/commit/7edb09eaecb40b231de00a6f098e94f8eace853a)
+
+-   `packages/generator-electrode`
+
+    -   fix demo app nav bar styles ([#1036](https://github.com/electrode-io/electrode/pull/1036)) [commit](http://github.com/electrode-io/electrode/commit/7c7a88fd8a9d7173eb3d2e2a2dd59539e2f3eafe)
+
+-   `samples/demo-component`
+
+    -   update sample demo-component package.json [commit](http://github.com/electrode-io/electrode/commit/596b5a26c7897291437511fba4310e8d66d7b0b3)
+
 # 11/15/2018
 
 - electrode-archetype-react-app: trigger publish for beta tag
