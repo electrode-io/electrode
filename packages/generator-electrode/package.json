@@ -1,6 +1,6 @@
 {
   "name": "generator-electrode",
-  "version": "5.0.0",
+  "version": "5.0.1-beta",
   "description": "Generate Electrode React App",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -74,5 +74,8 @@
       "dist",
       "test"
     ]
+  },
+  "publishConfig": {
+    "tag": "beta"
   }
 }
