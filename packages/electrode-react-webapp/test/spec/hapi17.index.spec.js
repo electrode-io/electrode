@@ -10,11 +10,9 @@ const Path = require("path");
 const xstdout = require("xstdout");
 require("babel-register");
 const { expect } = require("chai");
-const webapp = require("../../lib/hapi/index17");
 const ReactDOMServer = require("react-dom/server");
 const React = require("react");
 const Helmet = require("react-helmet").Helmet;
-const sinon = require("sinon");
 
 const getConfig = () => {
   return {
@@ -25,7 +23,7 @@ const getConfig = () => {
     },
     plugins: {
       "react-webapp": {
-        module: Path.join(__dirname, "../../lib/hapi/index17"),
+        module: Path.join(__dirname, "../../lib/hapi/plugin17"),
         options: {
           pageTitle: "Electrode App",
           paths: {
@@ -52,34 +50,30 @@ const getConfig = () => {
 };
 
 describe("hapi index", () => {
-  let sandbox;
-
-  before(() => {
-    sandbox = sinon.sandbox.create();
-  });
-  afterEach(() => {
-    sandbox.restore();
+  beforeEach(() => {
+    delete require.cache[require.resolve("../../lib/hapi")];
+    delete require.cache[require.resolve("../..")];
+    delete require.cache[require.resolve("../../lib/hapi/plugin16")];
+    delete require.cache[require.resolve("../../lib/hapi/plugin17")];
   });
 
   it("with hapi 16", () => {
-    delete require.cache[require.resolve("../../lib/hapi")];
-    delete require.cache[require.resolve("../..")];
     const compat = require("electrode-hapi-compat");
-    sandbox.stub(compat, "isHapi17").returns(false);
-    const req = require("../..");
-    expect(req.register).a("function");
-    expect(req.register.attributes.pkg.name).eql("webapp");
-    expect(req.pkg).undefined;
+    compat._testSetHapi17(false);
+    const webapp = require("../..");
+    expect(webapp.register).a("function");
+    expect(webapp.register.attributes.pkg.name).eql("electrode-react-webapp");
+    expect(webapp.pkg).undefined;
   });
+
   it("with hapi 17", () => {
-    delete require.cache[require.resolve("../../lib/hapi")];
-    delete require.cache[require.resolve("../..")];
     const compat = require("electrode-hapi-compat");
-    sandbox.stub(compat, "isHapi17").returns(true);
-    const req = require("../..");
-    expect(req.register).eq(webapp.register);
-    expect(req.pkg).eq(webapp.pkg);
-    expect(req.pkg.name).eql("electrode-react-webapp");
+    compat._testSetHapi17(true);
+    const hapi17 = require("../../lib/hapi/plugin17");
+    const webapp = require("../..");
+    expect(webapp.register).eq(hapi17.register);
+    expect(webapp.pkg).eq(hapi17.pkg);
+    expect(webapp.pkg.name).eql("electrode-react-webapp");
   });
 });
 
@@ -91,16 +85,14 @@ describe("hapi 17 electrode-react-webapp", () => {
   let compat;
 
   let stdoutIntercept;
-  let sandbox;
 
   const stopServer = server => server.stop();
 
   beforeEach(() => {
-    sandbox = sinon.sandbox.create();
     delete require.cache[require.resolve("../../lib/hapi")];
     delete require.cache[require.resolve("../..")];
     compat = require("electrode-hapi-compat");
-    sandbox.stub(compat, "isHapi17").returns(true);
+    compat._testSetHapi17(true);
 
     config = getConfig();
     configOptions = config.plugins["react-webapp"].options;
@@ -108,8 +100,6 @@ describe("hapi 17 electrode-react-webapp", () => {
   });
 
   afterEach(() => {
-    sandbox.restore();
-
     if (stdoutIntercept) {
       stdoutIntercept.restore();
       stdoutIntercept = undefined;
@@ -125,8 +115,9 @@ describe("hapi 17 electrode-react-webapp", () => {
   });
 
   it("should fail if registering plugin throws", done => {
+    const hapi17 = require("../../lib/hapi/plugin17");
     try {
-      webapp.register(
+      hapi17.register(
         {
           route: () => {
             throw Error("bad-module");

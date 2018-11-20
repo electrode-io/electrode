@@ -1,134 +1,17 @@
 "use strict";
 
-/* eslint-disable no-magic-numbers, max-params, max-statements, complexity */
+const { universalHapiPlugin, isHapi17 } = require("electrode-hapi-compat");
 
-const _ = require("lodash");
-const assert = require("assert");
-const ReactWebapp = require("../react-webapp");
-const HttpStatus = require("../http-status");
-const { responseForError, responseForBadStatus } = require("../utils");
+const hapi16 = require("./plugin16");
+const hapi17 = require("./plugin17");
+const pkg = require("../../package.json");
 
-const getDataHtml = data => (data.html !== undefined ? data.html : data);
+module.exports = universalHapiPlugin(
+  {
+    hapi16: hapi16.register,
+    hapi17: hapi17.register
+  },
+  pkg
+);
 
-const DefaultHandleRoute = (request, reply, handler, content, routeOptions) => {
-  return handler({
-    content,
-    mode: request.query.__mode || "",
-    template: request.indexPageTemplate,
-    request
-  })
-    .then(context => {
-      const data = context.result;
-
-      if (data instanceof Error) {
-        throw data;
-      }
-
-      let respond;
-      let status = data.status;
-
-      if (status === undefined) {
-        status = 200;
-        respond = reply(data);
-      } else if (HttpStatus.redirect[status]) {
-        respond = reply.redirect(data.path);
-        return respond;
-      } else if (status >= 200 && status < 300) {
-        respond = reply(getDataHtml(data));
-      } else if (routeOptions.responseForBadStatus) {
-        const output = routeOptions.responseForBadStatus(request, routeOptions, data);
-        status = output.status;
-        respond = reply(output.html);
-      } else {
-        respond = reply(getDataHtml(data));
-      }
-
-      const response = context.user && context.user.response;
-
-      if (response) {
-        Object.assign(respond.headers, response.headers);
-      }
-
-      return respond.code(status);
-    })
-    .catch(err => {
-      const output = routeOptions.responseForError(request, routeOptions, err);
-
-      reply(output.html).code(output.status);
-    });
-};
-
-const registerRoutes = (server, options) => {
-  const registerOptions = ReactWebapp.setupOptions(options);
-
-  _.each(registerOptions.paths, (pathData, path) => {
-    const resolveContent = () => {
-      if (registerOptions.serverSideRendering !== false) {
-        const x = ReactWebapp.resolveContent(pathData);
-        assert(x, `You must define content for the webapp plugin path ${path}`);
-        return x;
-      }
-
-      return {
-        content: {
-          status: 200,
-          html: "<!-- SSR disabled by options.serverSideRendring -->"
-        }
-      };
-    };
-
-    const routeOptions = ReactWebapp.setupPathOptions(registerOptions, path);
-    const routeHandler = ReactWebapp.makeRouteHandler(routeOptions);
-    const handleRoute = options.handleRoute || DefaultHandleRoute;
-    _.defaults(routeOptions, { responseForError, responseForBadStatus });
-    let content;
-
-    server.route({
-      method: pathData.method || "GET",
-      path,
-      config: pathData.config || {},
-      handler: (req, reply) => {
-        if (req.app.webpackDev) {
-          const wpd = req.app.webpackDev;
-          if (!wpd.valid) {
-            content = ReactWebapp.resolveContent("<!-- Webpack still compiling -->");
-          } else if (wpd.hasErrors) {
-            content = ReactWebapp.resolveContent("<!-- Webpack compile has errors -->");
-          } else if (!content || content.resolveTime < wpd.compileTime) {
-            if (content && content.fullPath) {
-              delete content.xrequire.cache[content.fullPath];
-            }
-            content = resolveContent();
-          }
-        } else if (!content) {
-          content = resolveContent();
-        }
-
-        handleRoute(req, reply, routeHandler, content.content, routeOptions);
-      }
-    });
-  });
-};
-
-const registerRoutesPlugin = (server, options, next) => {
-  try {
-    registerRoutes(server, options);
-    return next();
-  } catch (err) {
-    return next(err);
-  }
-};
-
-registerRoutesPlugin.attributes = {
-  pkg: {
-    name: "webapp",
-    version: "1.0.0"
-  }
-};
-
-// registerRoutesPlugin.registerRoutes = registerRoutes;
-
-module.exports = {
-  register: registerRoutesPlugin,
-  registerRoutes
-};
+module.exports.registerRoutes = isHapi17() ? hapi17.registerRoutes : hapi16.registerRoutes;

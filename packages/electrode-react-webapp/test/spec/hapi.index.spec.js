@@ -10,12 +10,12 @@ const Path = require("path");
 const xstdout = require("xstdout");
 require("babel-register");
 const { expect } = require("chai");
-const webapp = require("../..");
+const webapp = require("../../lib/hapi/plugin16");
 const ReactDOMServer = require("react-dom/server");
 const React = require("react");
 const Helmet = require("react-helmet").Helmet;
 
-describe("hapi electrode-react-webapp", () => {
+describe("hapi 16 electrode-react-webapp", () => {
   let config;
   let configOptions;
   let mainRoutePathOptions;
@@ -33,7 +33,7 @@ describe("hapi electrode-react-webapp", () => {
       },
       plugins: {
         "react-webapp": {
-          module: Path.join(__dirname, "../../lib/hapi"),
+          module: Path.join(__dirname, "../../lib/hapi/plugin16"),
           options: {
             pageTitle: "Electrode App",
             paths: {

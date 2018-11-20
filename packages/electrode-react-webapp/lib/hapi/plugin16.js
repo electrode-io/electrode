@@ -10,7 +10,7 @@ const { responseForError, responseForBadStatus } = require("../utils");
 
 const getDataHtml = data => (data.html !== undefined ? data.html : data);
 
-const DefaultHandleRoute = (request, h, handler, content, routeOptions) => {
+const DefaultHandleRoute = (request, reply, handler, content, routeOptions) => {
   return handler({
     content,
     mode: request.query.__mode || "",
@@ -29,21 +29,18 @@ const DefaultHandleRoute = (request, h, handler, content, routeOptions) => {
 
       if (status === undefined) {
         status = 200;
-        respond = h.response(data);
+        respond = reply(data);
       } else if (HttpStatus.redirect[status]) {
-        respond = h.redirect(data.path);
+        respond = reply.redirect(data.path);
         return respond;
       } else if (status >= 200 && status < 300) {
-        respond = h.response(getDataHtml(data));
+        respond = reply(getDataHtml(data));
       } else if (routeOptions.responseForBadStatus) {
         const output = routeOptions.responseForBadStatus(request, routeOptions, data);
         status = output.status;
-        respond = h.response(output.html);
+        respond = reply(output.html);
       } else {
-        // should not reach here w/o html because user returned content
-        // would have to return a literal string that has no `.status`
-        // and html being undefined to be able to skip all the cases above
-        respond = h.response(getDataHtml(data));
+        respond = reply(getDataHtml(data));
       }
 
       const response = context.user && context.user.response;
@@ -57,7 +54,7 @@ const DefaultHandleRoute = (request, h, handler, content, routeOptions) => {
     .catch(err => {
       const output = routeOptions.responseForError(request, routeOptions, err);
 
-      return h.response(output.html).code(output.status);
+      reply(output.html).code(output.status);
     });
 };
 
@@ -90,7 +87,7 @@ const registerRoutes = (server, options) => {
       method: pathData.method || "GET",
       path,
       config: pathData.config || {},
-      handler: (req, h) => {
+      handler: (req, reply) => {
         if (req.app.webpackDev) {
           const wpd = req.app.webpackDev;
           if (!wpd.valid) {
@@ -107,19 +104,26 @@ const registerRoutes = (server, options) => {
           content = resolveContent();
         }
 
-        return handleRoute(req, h, routeHandler, content.content, routeOptions);
+        handleRoute(req, reply, routeHandler, content.content, routeOptions);
       }
     });
   });
 };
 
-const npmPackage = require("../../package.json");
-const pkg = {
-  name: npmPackage.name,
-  version: npmPackage.version
+const register = (server, options, next) => {
+  try {
+    registerRoutes(server, options);
+    return next();
+  } catch (err) {
+    return next(err);
+  }
 };
 
+const pkg = require("../../package.json");
+
+register.attributes = { pkg };
+
 module.exports = {
-  register: registerRoutes,
-  pkg
+  register,
+  registerRoutes
 };
