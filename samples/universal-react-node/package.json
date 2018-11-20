@@ -33,10 +33,10 @@
   "dependencies": {
     "above-the-fold-only-server-render": "^1.1.0",
     "bluebird": "^3.4.6",
-    "electrode-archetype-react-app": "../../packages/electrode-archetype-react-app",
+    "electrode-archetype-react-app": "^5.4.23",
     "electrode-csrf-jwt": "^1.0.0",
-    "electrode-react-webapp": "../../packages/electrode-react-webapp",
-    "electrode-redux-router-engine": "../../packages/electrode-redux-router-engine",
+    "electrode-react-webapp": "^3.2.0",
+    "electrode-redux-router-engine": "^2.1.8",
     "electrode-server": "^1.0.0",
     "electrode-static-paths": "^1.0.0",
     "es6-promise": "^4.0.5",
@@ -47,10 +47,11 @@
     "react-notify-toast": "^0.4.1",
     "react-router-config": "^1.0.0-beta.4",
     "react-router-dom": "^4.3.1",
+    "react-vendor-dll": "../react-vendor-dll",
     "uuid": "^3.0.1"
   },
   "devDependencies": {
-    "electrode-archetype-react-app-dev": "../../packages/electrode-archetype-react-app-dev",
+    "electrode-archetype-react-app-dev": "^5.4.23",
     "redux-devtools": "^3.3.1",
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-devtools-log-monitor": "^1.0.11"
@@ -59,7 +60,8 @@
     "dependencies": {
       "electrode-archetype-react-app": "../../packages/electrode-archetype-react-app",
       "electrode-react-webapp": "../../packages/electrode-react-webapp",
-      "electrode-redux-router-engine": "../../packages/electrode-redux-router-engine"
+      "electrode-redux-router-engine": "../../packages/electrode-redux-router-engine",
+      "react-vendor-dll": "../react-vendor-dll"
     },
     "devDependencies": {
       "electrode-archetype-react-app-dev": "../../packages/electrode-archetype-react-app-dev"
