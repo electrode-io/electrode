@@ -10,6 +10,7 @@ const { universalHapiPlugin } = require("electrode-hapi-compat");
 const hapi17Plugin = require("./webpack-dev-hapi17");
 
 const Middleware = require("./webpack-middleware");
+const FakeRes = require("./fake-res");
 
 function register(server, options, next) {
   if (!archetype.webpack.devMiddleware) {
@@ -62,14 +63,28 @@ function register(server, options, next) {
 
       request.app.webpackDev = middleware.webpackDev;
 
-      return middleware.devMiddleware(req, res, err => {
-        if (err) {
+      // simulate a res to capture what the devMiddleware might send back
+      const fakeRes = new FakeRes();
+
+      return middleware
+        .devMiddleware(req, fakeRes, () => {
+          return Promise.resolve(middleware.canContinue);
+        })
+        .then(dmNext => {
+          if (dmNext === middleware.canContinue) {
+            reply.continue();
+          } else {
+            const response = reply(fakeRes._content);
+            Object.keys(fakeRes._headers).forEach(h => {
+              response.header(h, fakeRes._headers[h]);
+            });
+            response.code(fakeRes.statusCode);
+          }
+        })
+        .catch(err => {
           console.error("webpack dev middleware error", err);
           reply(err);
-        } else {
-          reply.continue();
-        }
-      });
+        });
     }
   });
 

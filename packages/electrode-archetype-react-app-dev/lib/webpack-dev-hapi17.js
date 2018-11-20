@@ -8,6 +8,7 @@ const mime = require("mime");
 const archetype = require("electrode-archetype-react-app/config/archetype");
 
 const Middleware = require("./webpack-middleware");
+const FakeRes = require("./fake-res");
 
 function register(server) {
   if (!archetype.webpack.devMiddleware) {
@@ -61,14 +62,29 @@ function register(server) {
 
       request.app.webpackDev = middleware.webpackDev;
 
-      return middleware.devMiddleware(req, res, err => {
-        if (err) {
+      // simulate a res to capture what the devMiddleware might send back
+      const fakeRes = new FakeRes();
+
+      return middleware
+        .devMiddleware(req, fakeRes, () => {
+          return Promise.resolve(middleware.canContinue);
+        })
+        .then(next => {
+          if (next === middleware.canContinue) {
+            return h.continue;
+          } else {
+            // send back result from fakeRes
+            const response = h.response(fakeRes._content).takeover();
+            Object.keys(fakeRes._headers).forEach(key => {
+              response.header(key, fakeRes._headers[key]);
+            });
+            return response.code(fakeRes.statusCode);
+          }
+        })
+        .catch(err => {
           console.error("webpack dev middleware error", err);
           return h.response(err);
-        } else {
-          return h.continue;
-        }
-      });
+        });
     }
   });
 
