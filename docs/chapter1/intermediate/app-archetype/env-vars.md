@@ -12,6 +12,7 @@ Some of the app archetype's features can be controlled by environment variables.
 
 - `INSPECTPACK_DEBUG` - If set to `true`, generates stats for used with the [inspectpack] tool.
 
+
 ## Webpack Relate Configs
 
 - `WEBPACK_DEV_MIDDLEWARE` - If set to `true`, will run webpack dev server as part of your app server in dev mode.
@@ -24,6 +25,12 @@ Some of the app archetype's features can be controlled by environment variables.
     - `/_electrode_dev_/cwd` - Directory view of your app's CWD
     - `/_electrode_dev_/memfs` - Directory view of webpack dev middleware's virual mem fs of your compiled assets.
     - `/js/` - Or your webpack `publicPath`, w/o any trailing parts will list all files under your webpack's context directory.
+
+- `ELECTRODE_DEV_OPEN_BROWSER` - When using dev middleware, `clap dev` can automatically open your app in the browser.  Use this flag to control that behavior.
+
+  - Set to `false` - completely disable auto opening in browser.
+  - Set to `true` - Always auto open.
+  - Unset - automatically open if it didn't do so within the last 10 minutes.
 
 - The following settings will apply only if `WEBPACK_DEV_MIDDLEWARE` is not `true`, meaning a separate webpack-dev-server is used for development:
 
@@ -44,6 +51,9 @@ Some of the app archetype's features can be controlled by environment variables.
   * `WEBPACK_DEV_HTTPS` - If `true`, then use `https` for webpack dev server
 
     - Default is `false`
+
+
+  * `WEBPACK_REPORTER_SOCKET_PORT` - Change Electrode's webpack HTML reporter's WebSocket port for sync up with webpack-dev-server's result.  The socket's default port is `5000`.
 
 * `CSS_MODULE_SUPPORT` - If `false`, then disable `CSS-Modules` and `CSS-Next` support, and load as pure `CSS`. If `true`, then enable `CSS-Modules` and `CSS-Next` support, and load as `CSS-Modules + CSS-Next`.
 
@@ -70,5 +80,15 @@ Some of the app archetype's features can be controlled by environment variables.
 
   - Default is `false`
   - If this is not defined, then the env [`NODE_PRESERVE_SYMLINKS`] will be considered.
+
+* `ENABLE_SHORTEN_CSS_NAMES` - When using CSS module, you can create short and cryptic CSS class names in production mode by setting this flag to `true`.
+
+## Karma Related
+
+* `KARMA_BROWSER` - Set the browser karma will use.  **Default is `chrome`**
+
+  - `chrome` - Chrome
+  - `phantomjs` - PhantomJS
+
 
 [`node_preserve_symlinks`]: https://nodejs.org/docs/latest-v8.x/api/cli.html#cli_node_preserve_symlinks_1
