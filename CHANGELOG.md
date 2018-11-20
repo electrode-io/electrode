@@ -2,6 +2,29 @@
 
 ## Packages
 
+### Directly Updated
+
+-   electrode-webpack-reporter@0.4.10 `(0.4.9 => 0.4.10)`
+
+### Lerna Updated
+
+-   electrode-archetype-react-app@5.4.23 `(5.4.22 => 5.4.23)`
+-   electrode-archetype-react-app-dev@5.4.23 `(5.4.22 => 5.4.23)`
+
+## Commits
+
+-   `packages/electrode-webpack-reporter`
+
+    -   move react dep to dev [commit](http://github.com/electrode-io/electrode/commit/d5d32b11c89a942153645c7e68948226c1c53fcc)
+
+-   `tools`
+
+    -   check groups for lerna updated packages also [commit](http://github.com/electrode-io/electrode/commit/f5d191b0ca7b3dd8d3de11f162be486e62fae60b)
+
+# 11/19/2018
+
+## Packages
+
 -   electrode-archetype-react-app@5.4.22 `(5.4.21 => 5.4.22)`
 -   electrode-archetype-react-app-dev@5.4.22 `(5.4.21 => 5.4.22)`
 -   electrode-webpack-reporter@0.4.9 `(0.4.8 => 0.4.9)`
