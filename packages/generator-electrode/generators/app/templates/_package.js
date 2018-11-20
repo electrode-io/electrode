@@ -26,23 +26,24 @@ return {
   },
   dependencies: {
     bluebird: "^3.4.6",
-    "electrode-archetype-react-app": "^5.3.4",
-    "electrode-react-webapp": "^2.1.0",
-    "electrode-confippet": "^1.0.0",
-    "electrode-redux-router-engine": "^2.0.0", //<% if (isHapi) { %>
+    "electrode-archetype-react-app": "^6.0.0",
+    "electrode-react-webapp": "^3.2.0",
+    "electrode-confippet": "^1.5.0",
+    "electrode-redux-router-engine": "^2.1.8", //<% if (isHapi) { %>
     //<% if (isAutoSSR) {%>
     "electrode-auto-ssr": "^1.0.0", //<% } %>
-    "electrode-server": "^1.0.0",
-    "electrode-static-paths": "^1.0.0",
-    good: "^7.3.0",
+    "electrode-server": "^2.2.0",
+    "electrode-static-paths": "^2.0.1",
+    inert: "^5.1.2",
+    good: "^8.1.1",
     "good-console": "^7.1.0", //<% } else if (isExpress) { %>
     express: "^4.0.0", //<% } else { %>
     koa: "^1.2.4",
     "koa-router": "^5.4.0",
     "koa-send": "^3.2.0",
     "koa-static": "^2.0.0", //<% } if (isPWA) { %>
-    "react-notify-toast": "^0.4.1", //<% } %>
-    lodash: "^4.17.10",
+    "react-notify-toast": "^0.5.0", //<% } %>
+    lodash: "^4.17.11",
     "react-router-config": "^1.0.0-beta.4",
     "react-router-dom": "^4.3.1",
     milligram: "^1.3.0",
@@ -51,7 +52,7 @@ return {
     //<% } %>
   },
   devDependencies: {
-    "electrode-archetype-react-app-dev": "^5.3.4"
+    "electrode-archetype-react-app-dev": "^6.0.0"
   }, //<% if (isSingleQuote) { %>
   eslintConfig: {
     rules: {
