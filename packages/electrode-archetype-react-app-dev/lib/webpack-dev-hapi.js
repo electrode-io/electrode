@@ -70,8 +70,8 @@ function register(server, options, next) {
         .devMiddleware(req, fakeRes, () => {
           return Promise.resolve(middleware.canContinue);
         })
-        .then(next => {
-          if (next === middleware.canContinue) {
+        .then(dmNext => {
+          if (dmNext === middleware.canContinue) {
             reply.continue();
           } else {
             const response = reply(fakeRes._content);

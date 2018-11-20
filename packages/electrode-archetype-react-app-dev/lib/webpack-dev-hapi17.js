@@ -75,8 +75,8 @@ function register(server) {
           } else {
             // send back result from fakeRes
             const response = h.response(fakeRes._content).takeover();
-            Object.keys(fakeRes._headers).forEach(h => {
-              response.header(h, fakeRes._headers[h]);
+            Object.keys(fakeRes._headers).forEach(key => {
+              response.header(key, fakeRes._headers[key]);
             });
             return response.code(fakeRes.statusCode);
           }
