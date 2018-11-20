@@ -158,8 +158,13 @@ xclap.load({
     }
   },
 
+  ".build-sample-dll": () => {
+    return runAppTest(Path.join(__dirname, "samples/react-vendor-dll"));
+  },
+
   ".test-boilerplate": {
     desc: "Run tests for the boilerplage app universal-react-node",
+    dep: [".build-sample-dll"],
     task: () => {
       return runAppTest(Path.join(__dirname, "samples/universal-react-node"));
     }
