@@ -35,5 +35,6 @@
     "optionalTagName": "cssModule",
     "expectTag": true,
     "defaultInstall": true
-  }
+  },
+  "private": true
 }
