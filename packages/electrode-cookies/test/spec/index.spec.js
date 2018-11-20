@@ -16,8 +16,9 @@ function makeConfig() {
       autoDiscovery: false
     },
     plugins: {
-      "electrode-cookies/hapi-plugin": {
-        register: require("../../hapi-plugin.js")
+      "electrode-cookies": {
+        module: "../../hapi-plugin",
+        requireFromPath: __dirname
       }
     }
   };
@@ -34,19 +35,23 @@ describe("cookies", function() {
     });
   };
 
-  afterEach(done => {
+  beforeEach(() => {
+    delete require.cache[require.resolve("../..")];
+    require("electrode-hapi-compat")._testSetHapi17(true);
+  });
+
+  afterEach(() => {
     if (currentServer) {
-      currentServer.stop(err => {
-        currentServer = undefined;
-        done(err);
-      });
-    } else {
-      done();
+      const s = currentServer;
+      currentServer = undefined;
+
+      return s.stop();
     }
+    return undefined;
   });
 
   it("should set cookie", () => {
-    const handler = (request, reply) => {
+    const handler = async request => {
       Cookies.set("test", "bar", {
         path: "/",
         expires: 0,
@@ -99,7 +104,7 @@ describe("cookies", function() {
         forceAuthEncoding: true,
         request
       });
-      reply({ test1, now: Date.now() });
+      return { test1, now: Date.now() };
     };
 
     const serverConfig = makeConfig();
@@ -122,7 +127,9 @@ describe("cookies", function() {
       })
       .then(response => {
         expect(response.body).to.have.keys(["test1", "now"]);
-        expect(response.headers["set-cookie"]).to.be.an("array").with.length(11);
+        expect(response.headers["set-cookie"])
+          .to.be.an("array")
+          .with.length(11);
 
         const cookies = CookieParser.parse(response.headers["set-cookie"]);
 
@@ -210,7 +217,7 @@ describe("cookies", function() {
   });
 
   it("should get cookie", () => {
-    const handler = (request, reply) => {
+    const handler = async (request, h) => {
       try {
         expect(Cookies.get("test", { request })).to.equal("bar");
         expect(Cookies.get("test2", { request })).to.equal("bar2");
@@ -226,9 +233,9 @@ describe("cookies", function() {
         expect(Cookies.get("com.wm.reflector", { request })).to.equal(
           "wmlspartner:abcd@lastupd:456@reflectorid:qwerty"
         );
-        reply({ now: Date.now() });
+        return { now: Date.now() };
       } catch (err) {
-        reply(err.toString()).code(500);
+        return h.response(err.toString()).code(500);
       }
     };
 
@@ -255,7 +262,7 @@ describe("cookies", function() {
   });
 
   it("should get cookie by matching substring", () => {
-    const handler = (request, reply) => {
+    const handler = async (request, h) => {
       try {
         expect(Cookies.get("te", { matchSubStr: true, request })).to.deep.equal({
           test: "bar",
@@ -280,9 +287,9 @@ describe("cookies", function() {
         expect(Cookies.get("com.wm.reflector", { request })).to.equal(
           "wmlspartner:abcd@lastupd:456@reflectorid:qwerty"
         );
-        reply({ now: Date.now() });
+        return { now: Date.now() };
       } catch (err) {
-        reply(err.toString()).code(500);
+        return h.response(err.toString()).code(500);
       }
     };
 

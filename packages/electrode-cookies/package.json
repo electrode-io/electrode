@@ -20,12 +20,13 @@
     "hapi-plugin.js"
   ],
   "dependencies": {
-    "lodash": "^4.14.1"
+    "electrode-hapi-compat": "^1.0.0",
+    "lodash": "^4.17.11"
   },
   "devDependencies": {
     "bluebird": "^2.10.2",
     "electrode-archetype-njs-module-dev": "^2.2.0",
-    "electrode-server": "^1.2.2",
+    "electrode-server": "^2.0.0",
     "eslint-config-prettier": "^2.3.0",
     "jsdom": "^9.4.2",
     "jsdom-global": "^2.0.0",
@@ -47,7 +48,8 @@
       "*clap.js",
       "gulpfile.js",
       "dist",
-      "test"
+      "test",
+      "cookies-js"
     ]
   }
 }
