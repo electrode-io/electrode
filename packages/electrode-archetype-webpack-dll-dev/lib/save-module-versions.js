@@ -6,10 +6,10 @@
 
 const Path = require("path");
 const Fs = require("fs");
-const { entry } = require(Path.resolve("."));
 const context = require("../config/webpack/util/context");
 
 function saveModuleVersions() {
+  const { entry } = require(Path.resolve("."));
   const entries = Object.keys(entry);
   const tag = context.tag;
 
