@@ -41,7 +41,8 @@ function register(server) {
           return h
             .response(`<!DOCTYPE html>${html}`)
             .code(200)
-            .header("Content-Type", "text/html");
+            .header("Content-Type", "text/html")
+            .takeover();
         },
         replyNotFound: () => h.response(Boom.notFound),
         replyError: err => h.response(err),
@@ -52,6 +53,7 @@ function register(server) {
             const charset = mime.charsets.lookup(type);
             resp.header("Content-Type", type + (charset ? `; charset=${charset}` : ""));
           }
+          return resp.takeover();
         },
         replyFile: name => h.file(name)
       });
