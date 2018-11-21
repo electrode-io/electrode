@@ -5,71 +5,95 @@
 const Fs = require("fs");
 const Promise = require("bluebird");
 const assign = require("object-assign");
-const electrodeServer = require("electrode-server");
+const electrodeServer = require("electrode-server2");
 const Path = require("path");
 const xstdout = require("xstdout");
 require("babel-register");
 const { expect } = require("chai");
-const webapp = require("../../lib/hapi/plugin16");
 const ReactDOMServer = require("react-dom/server");
 const React = require("react");
 const Helmet = require("react-helmet").Helmet;
 
-describe("hapi 16 electrode-react-webapp", () => {
-  let config;
-  let configOptions;
-  let mainRoutePathOptions;
-  let testServer;
-
-  const getConfig = () => {
-    return {
-      server: {
-        useDomains: false
-      },
-      connections: {
-        default: {
-          port: 0
-        }
-      },
-      plugins: {
-        "react-webapp": {
-          module: Path.join(__dirname, "../../lib/hapi/plugin16"),
-          options: {
-            pageTitle: "Electrode App",
-            paths: {
-              "/test/component-redirect": {
-                content: {
-                  module: Path.join(__dirname, "../router-engine/content.jsx")
-                }
-              },
-              "/{args*}": {
-                content: {
-                  status: 200,
-                  html: "<div>Hello Electrode</div>",
-                  prefetch: "console.log('Hello');"
-                }
+const getConfig = () => {
+  return {
+    connections: {
+      default: {
+        port: 0
+      }
+    },
+    plugins: {
+      "react-webapp": {
+        module: Path.join(__dirname, "../../lib/hapi/plugin17"),
+        options: {
+          pageTitle: "Electrode App",
+          paths: {
+            "/test/component-redirect": {
+              content: {
+                module: Path.join(__dirname, "../router-engine/content.jsx")
+              }
+            },
+            "/{args*}": {
+              content: {
+                status: 200,
+                html: "<div>Hello Electrode</div>",
+                prefetch: "console.log('Hello');"
               }
             }
           }
         }
-      },
-      electrode: {
-        logLevel: "none"
       }
-    };
+    },
+    electrode: {
+      logLevel: "none"
+    }
   };
+};
+
+describe("hapi index", () => {
+  beforeEach(() => {
+    delete require.cache[require.resolve("../../lib/hapi")];
+    delete require.cache[require.resolve("../..")];
+    delete require.cache[require.resolve("../../lib/hapi/plugin16")];
+    delete require.cache[require.resolve("../../lib/hapi/plugin17")];
+  });
+
+  it("with hapi 16", () => {
+    const compat = require("electrode-hapi-compat");
+    compat._testSetHapi17(false);
+    const webapp = require("../..");
+    expect(webapp.register).a("function");
+    expect(webapp.register.attributes.pkg.name).eql("electrode-react-webapp");
+    expect(webapp.pkg).undefined;
+  });
+
+  it("with hapi 17", () => {
+    const compat = require("electrode-hapi-compat");
+    compat._testSetHapi17(true);
+    const hapi17 = require("../../lib/hapi/plugin17");
+    const webapp = require("../..");
+    expect(webapp.register).eq(hapi17.register);
+    expect(webapp.pkg).eq(hapi17.pkg);
+    expect(webapp.pkg.name).eql("electrode-react-webapp");
+  });
+});
+
+describe("hapi 17 electrode-react-webapp", () => {
+  let config;
+  let configOptions;
+  let mainRoutePathOptions;
+  let testServer;
+  let compat;
 
   let stdoutIntercept;
 
-  const stopServer = server => {
-    return new Promise((resolve, reject) =>
-      server.stop(stopErr => {
-        return stopErr ? reject(stopErr) : resolve();
-      })
-    );
-  };
+  const stopServer = server => server.stop();
 
   beforeEach(() => {
+    delete require.cache[require.resolve("../../lib/hapi")];
+    delete require.cache[require.resolve("../..")];
+    compat = require("electrode-hapi-compat");
+    compat._testSetHapi17(true);
+
     config = getConfig();
     configOptions = config.plugins["react-webapp"].options;
     mainRoutePathOptions = configOptions.paths["/{args*}"];
@@ -82,7 +106,7 @@ describe("hapi 16 electrode-react-webapp", () => {
     }
 
     if (testServer) {
-      return stopServer(testServer).then(() => {
+      return testServer.stop().then(() => {
         testServer = undefined;
       });
     }
@@ -90,22 +114,27 @@ describe("hapi 16 electrode-react-webapp", () => {
     return Promise.resolve();
   });
 
-  it("should fail if registering plugin throws", () => {
-    let error;
-    webapp.register(
-      {},
-      {
-        paths: {
-          error: {
-            content: { module: "bad-module" }
+  it("should fail if registering plugin throws", done => {
+    const hapi17 = require("../../lib/hapi/plugin17");
+    try {
+      hapi17.register(
+        {
+          route: () => {
+            throw Error("bad-module");
+          }
+        },
+        {
+          paths: {
+            error: {
+              content: { module: "bad-module" }
+            }
           }
         }
-      },
-      err => {
-        error = err;
-      }
-    );
-    expect(error).to.be.ok;
+      );
+    } catch (err) {
+      expect(err).to.be.ok;
+      done();
+    }
   });
 
   it("should successfully render with enterHead scripts", () => {
@@ -751,7 +780,7 @@ describe("hapi 16 electrode-react-webapp", () => {
         })
         .then(res => {
           expect(res.statusCode).to.equal(500);
-          expect(res.result).contains("/test/spec/hapi.index.spec.js");
+          expect(res.result).contains("/test/spec/hapi17.index.spec.js");
           stopServer(server);
         })
         .catch(err => {
@@ -952,16 +981,16 @@ describe("hapi 16 electrode-react-webapp", () => {
 
   it("should add a nonce value, if configuration specifies a path and a value is present", () => {
     configOptions.cspNonceValue = { script: "plugins.cspPlugin.nonceValue" };
-    function cspPlugin(server, options, next) {
-      server.ext("onRequest", (request, reply) => {
+    function cspRegister(server) {
+      server.ext("onRequest", (request, h) => {
         request.plugins.cspPlugin = {
           nonceValue: "==ABCD"
         };
-        return reply.continue();
+        return h.continue;
       });
-      next();
     }
-    cspPlugin.attributes = {
+    const cspPlugin = {
+      register: cspRegister,
       name: "cspPlugin"
     };
 
@@ -1010,14 +1039,14 @@ describe("hapi 16 electrode-react-webapp", () => {
 
   it("should not add a nonce value, if configuration specifies a path and no value present", () => {
     configOptions.cspNonceValue = { script: "plugins.cspPlugin.nonceValue" };
-    function cspPlugin(server, options, next) {
-      server.ext("onRequest", (request, reply) => {
+    function cspRegister(server) {
+      server.ext("onRequest", (request, h) => {
         request.plugins.cspPlugin = {};
-        return reply.continue();
+        return h.continue;
       });
-      next();
     }
-    cspPlugin.attributes = {
+    const cspPlugin = {
+      register: cspRegister,
       name: "cspPlugin"
     };
 
@@ -1043,17 +1072,19 @@ describe("hapi 16 electrode-react-webapp", () => {
   it("should inject critical css with a nonce value when provided", () => {
     configOptions.criticalCSS = "test/data/critical.css";
     configOptions.cspNonceValue = { style: "plugins.cspPlugin.nonceValue" };
-    function cspPlugin(server, options, next) {
-      server.ext("onRequest", (request, reply) => {
+    function cspRegister(server) {
+      server.ext("onRequest", (request, h) => {
         request.plugins.cspPlugin = {
           nonceValue: "==ABCD"
         };
-        return reply.continue();
+        return h.continue;
       });
-      next();
     }
-    cspPlugin.attributes = {
-      name: "cspPlugin"
+    const cspPlugin = {
+      register: cspRegister,
+      pkg: {
+        name: "cspPlugin"
+      }
     };
 
     return electrodeServer(config).then(server => {
@@ -1152,24 +1183,16 @@ describe("hapi 16 electrode-react-webapp", () => {
       content: null
     });
 
-    let error;
-
     return electrodeServer(config).then(server => {
       return server
         .inject({
           method: "GET",
           url: "/"
         })
-        .catch(err => {
-          error = err;
-        })
-        .then(() => {
+        .then(response => {
           stopServer(server);
-          expect(error).to.exist;
-          expect(error.code).to.equal("ERR_ASSERTION");
-          expect(error.message).to.equal(
-            `You must define content for the webapp plugin path /{args*}`
-          );
+          expect(response.result.statusCode).eq(500);
+          expect(response.result.error).eq("Internal Server Error");
         });
     });
   });
@@ -1334,6 +1357,7 @@ describe("hapi 16 electrode-react-webapp", () => {
 
   it("should return 404 and html, if custom html is provided", () => {
     assign(mainRoutePathOptions, {
+      responseForBadStatus: null,
       content: {
         status: 404,
         html: "html content"
@@ -1536,9 +1560,9 @@ describe("hapi 16 electrode-react-webapp", () => {
       return electrodeServer(config).then(server => {
         server.ext({
           type: "onRequest",
-          method: (request, reply) => {
+          method: (request, h) => {
             request.app.webpackDev = { valid: false };
-            reply.continue();
+            return h.continue;
           }
         });
         const makeRequest = () => {
@@ -1562,9 +1586,9 @@ describe("hapi 16 electrode-react-webapp", () => {
       return electrodeServer(config).then(server => {
         server.ext({
           type: "onRequest",
-          method: (request, reply) => {
+          method: (request, h) => {
             request.app.webpackDev = { valid: true, hasErrors: true };
-            reply.continue();
+            return h.continue;
           }
         });
         const makeRequest = () => {
@@ -1589,9 +1613,9 @@ describe("hapi 16 electrode-react-webapp", () => {
         const compileTime = Date.now();
         server.ext({
           type: "onRequest",
-          method: (request, reply) => {
+          method: (request, h) => {
             request.app.webpackDev = { valid: true, hasErrors: false, compileTime };
-            reply.continue();
+            return h.continue;
           }
         });
         const makeRequest = () => {
@@ -1621,7 +1645,7 @@ describe("hapi 16 electrode-react-webapp", () => {
 
     it("should refresh content module", () => {
       mainRoutePathOptions.content = {
-        module: "./test/data/test-content"
+        module: "./test/data/test-content17"
       };
 
       return electrodeServer(config).then(server => {
@@ -1629,21 +1653,21 @@ describe("hapi 16 electrode-react-webapp", () => {
 
         const testContent1 = {
           status: 200,
-          html: "<div>Test1 Electrode</div>",
+          html: "<div>Test1 Electrode17</div>",
           prefetch: "console.log('test1');"
         };
 
         const testContent2 = {
           status: 200,
-          html: "<div>Test2 Electrode</div>",
+          html: "<div>Test2 Electrode17</div>",
           prefetch: "console.log('test2');"
         };
 
         server.ext({
           type: "onRequest",
-          method: (request, reply) => {
+          method: (request, h) => {
             request.app.webpackDev = { valid: true, hasErrors: false, compileTime };
-            reply.continue();
+            return h.continue;
           }
         });
         const makeRequest = () => {
@@ -1655,7 +1679,7 @@ describe("hapi 16 electrode-react-webapp", () => {
 
         const updateTestContent = obj => {
           Fs.writeFileSync(
-            Path.resolve("test/data/test-content.js"),
+            Path.resolve("test/data/test-content17.js"),
             `module.exports = ${JSON.stringify(obj, null, 2)};\n`
           );
         };
@@ -1666,7 +1690,7 @@ describe("hapi 16 electrode-react-webapp", () => {
           .then(res => {
             expect(res.statusCode).to.equal(200);
             expect(res.result).to.contain("<title>Electrode App</title>");
-            expect(res.result).to.contain("<div>Test1 Electrode</div>");
+            expect(res.result).to.contain("<div>Test1 Electrode17</div>");
             expect(res.result).to.contain("<script>console.log('test1');</script>");
             expect(res.result).to.not.contain("Unknown marker");
             updateTestContent(testContent2);
@@ -1676,7 +1700,7 @@ describe("hapi 16 electrode-react-webapp", () => {
           .then(res => {
             expect(res.statusCode).to.equal(200);
             expect(res.result).to.contain("<title>Electrode App</title>");
-            expect(res.result).to.contain("<div>Test2 Electrode</div>");
+            expect(res.result).to.contain("<div>Test2 Electrode17</div>");
             expect(res.result).to.contain("<script>console.log('test2');</script>");
             expect(res.result).to.not.contain("Unknown marker");
             updateTestContent(testContent2);
