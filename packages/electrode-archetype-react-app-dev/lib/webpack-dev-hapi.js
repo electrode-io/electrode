@@ -37,49 +37,52 @@ function register(server, options, next) {
     method: (request, reply) => {
       const { req, res } = request.raw;
 
-      const procResult = middleware.process(req, res, {
-        skip: () => reply.continue(), // skip middleware and continue request cycle
-        replyHtml: html => {
-          reply(`<!DOCTYPE html>${html}`)
-            .code(200)
-            .header("Content-Type", "text/html");
-        },
-        replyNotFound: () => reply(Boom.notFound),
-        replyError: err => reply(err),
-        replyStaticData: data => {
-          const type = mime.lookup(req.url);
-          const resp = reply.response(data).code(200);
-          if (type) {
-            const charset = mime.charsets.lookup(type);
-            resp.header("Content-Type", type + (charset ? `; charset=${charset}` : ""));
-          }
-        },
-        replyFile: name => reply.file(name)
-      });
-
-      if (procResult !== middleware.canContinue) {
-        return undefined;
-      }
-
-      request.app.webpackDev = middleware.webpackDev;
-
       // simulate a res to capture what the devMiddleware might send back
       const fakeRes = new FakeRes();
 
-      return middleware
-        .devMiddleware(req, fakeRes, () => {
-          return Promise.resolve(middleware.canContinue);
+      middleware
+        .process(req, fakeRes, {
+          skip: () => reply.continue(), // skip middleware and continue request cycle
+          replyHtml: html => {
+            return reply(`<!DOCTYPE html>${html}`)
+              .code(200)
+              .header("Content-Type", "text/html");
+          },
+          replyNotFound: () => reply(Boom.notFound),
+          replyError: err => reply(err),
+          replyStaticData: data => {
+            const type = mime.lookup(req.url);
+            const resp = reply.response(data).code(200);
+            if (type) {
+              const charset = mime.charsets.lookup(type);
+              return resp.header("Content-Type", type + (charset ? `; charset=${charset}` : ""));
+            }
+            return resp;
+          },
+          replyFile: name => reply.file(name)
         })
-        .then(dmNext => {
-          if (dmNext === middleware.canContinue) {
-            reply.continue();
-          } else {
-            const response = reply(fakeRes._content);
-            Object.keys(fakeRes._headers).forEach(h => {
-              response.header(h, fakeRes._headers[h]);
-            });
-            response.code(fakeRes.statusCode);
+        .then(next1 => {
+          if (fakeRes.responded) {
+            return fakeRes.hapi16Respond(reply);
           }
+
+          if (next1 !== middleware.canContinue) {
+            return next1;
+          }
+
+          request.app.webpackDev = middleware.webpackDev;
+
+          return middleware
+            .devMiddleware(req, fakeRes, () => {
+              return Promise.resolve(middleware.canContinue);
+            })
+            .then(next2 => {
+              if (next2 === middleware.canContinue) {
+                reply.continue();
+              } else {
+                fakeRes.hapi16Respond(reply);
+              }
+            });
         })
         .catch(err => {
           console.error("webpack dev middleware error", err);
