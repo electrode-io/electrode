@@ -55,6 +55,9 @@
     "test": {
       "plugins": ["babel-plugin-dynamic-import-node"]
     },
+    "karma-cov": {
+      "plugins": ["babel-plugin-istanbul"]
+    },
     "css-module-dev": {
       "plugins": [
         ["babel-plugin-react-css-modules", {
