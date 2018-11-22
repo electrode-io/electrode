@@ -14,4 +14,12 @@ module.exports = universalHapiPlugin(
   pkg
 );
 
-module.exports.registerRoutes = isHapi17() ? hapi17.registerRoutes : hapi16.registerRoutes;
+const registerRoutes = isHapi17() ? hapi17.registerRoutes : hapi16.registerRoutes;
+
+//
+// ensure extra props are not enumerable so Hapi's Joi about it
+//
+Object.defineProperty(module.exports, "registerRoutes", {
+  enumerable: false,
+  value: registerRoutes
+});
