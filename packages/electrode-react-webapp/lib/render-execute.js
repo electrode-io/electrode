@@ -30,7 +30,8 @@ function renderNext(err, xt) {
   };
 
   if (context.isFullStop || context.isVoidStop || xt.stepIndex >= renderSteps.length) {
-    return xt.resolve(context.output.close());
+    xt.resolve(context.output.close());
+    return null;
   } else {
     // TODO: support soft stop
     const step = renderSteps[xt.stepIndex++];
@@ -41,7 +42,7 @@ function renderNext(err, xt) {
         if (withId) insertTokenId(tk);
         return context.handleTokenResult(tk.id, tk[TOKEN_HANDLER](context, tk), e => {
           if (withId) insertTokenIdEnd(tk);
-          renderNext(e, xt);
+          return renderNext(e, xt);
         });
       case STEP_STR_TOKEN:
         context.output.add(tk.str);
@@ -62,7 +63,7 @@ function renderNext(err, xt) {
 function executeRenderSteps(renderSteps, context) {
   return new Promise(resolve => {
     const xt = { stepIndex: 0, renderSteps, context, resolve };
-    renderNext(null, xt);
+    return renderNext(null, xt);
   });
 }
 
