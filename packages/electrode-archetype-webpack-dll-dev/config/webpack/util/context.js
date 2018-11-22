@@ -15,3 +15,7 @@ Object.defineProperty(module.exports, "production", {
 Object.defineProperty(module.exports, "tag", {
   get: () => (production() ? "" : ".dev")
 });
+
+Object.defineProperty(module.exports, "mode", {
+  get: () => (production() ? "production" : "development")
+});
