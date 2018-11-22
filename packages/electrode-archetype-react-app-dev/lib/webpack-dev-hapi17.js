@@ -30,6 +30,8 @@ function register(server) {
 
   middleware.setup();
 
+  const hmrPath = middleware._webpackHotOptions.path;
+
   server.ext({
     type: "onRequest",
     method: (request, h) => {
@@ -103,19 +105,18 @@ function register(server) {
     method: (request, h) => {
       const { req, res } = request.raw;
 
-      try {
-        return middleware.hotMiddleware(req, res, err => {
-          if (err) {
-            console.error("webpack hot middleware error", err);
-            return h.response(err);
-          } else {
-            return h.continue;
-          }
-        });
-      } catch (err) {
-        console.error("caught webpack hot middleware exception", err);
-        return h.response(err);
+      if (req.url !== hmrPath) {
+        return h.continue;
       }
+
+      return new Promise((resolve, reject) => {
+        middleware.hotMiddleware(req, res, () => {
+          reject(new Error("Not expecting webpack hot middleware to invoke callback"));
+        });
+        // unfortunately the only way to get Hapi 17 to not do anything after a request
+        // is taken over is by returning an unresolved promise.
+        // awaits further info at https://github.com/hapijs/hapi/issues/3884
+      });
     }
   });
 
