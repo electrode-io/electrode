@@ -35,7 +35,7 @@ class FakeRes extends EventEmitter {
   }
 
   setHeader(h, v) {
-    this._headers[h] = v;
+    this._headers[h.toLowerCase()] = v;
   }
 
   send(content) {
