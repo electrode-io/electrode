@@ -10,7 +10,6 @@ const webpackDevMiddleware = require("webpack-dev-middleware");
 const webpackHotMiddleware = require("webpack-hot-middleware");
 const isomorphicExtendRequire = require("isomorphic-loader/lib/extend-require");
 const serveIndex = require("serve-index-fs");
-const finalhandler = require("finalhandler");
 const chalk = require("chalk");
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const _ = require("lodash");
@@ -285,38 +284,53 @@ class Middleware {
       (req.url.startsWith(this.publicPath) && req.url.indexOf(".hot-update.") >= 0);
 
     if (skipWebpackDevMiddleware(req)) {
-      return cycle.skip();
+      return Promise.resolve(cycle.skip());
     }
 
     if (!this.webpackDev.lastReporterOptions && !isHmrRequest) {
-      return cycle.replyHtml(`<html><body>
+      return Promise.resolve(
+        cycle.replyHtml(`<html><body>
 <div style="margin-top: 50px; padding: 20px; border-radius: 10px; border: 2px solid red;">
 <h2>Waiting for webpack dev middleware to finish compiling</h2>
 </div><script>function doReload(x){ if (!x) location.reload(); setTimeout(doReload, 1000); }
-doReload(1); </script></body></html>`);
+doReload(1); </script></body></html>`)
+      );
     }
 
-    const serveStatic = (baseUrl, fileSystem, indexServer, errorHandler) => {
+    const serveStatic = (baseUrl, fileSystem, indexServer) => {
       req.originalUrl = req.url; // this is what express saves to, else serve-index nukes
       req.url = req.url.substr(baseUrl.length) || "/";
       const fullPath = Path.join(process.cwd(), req.url);
-      return fileSystem.stat(fullPath, (err, stats) => {
-        if (err) {
-          if (errorHandler) errorHandler(err);
-          else return cycle.replyNotFound();
-        } else if (stats.isDirectory()) {
-          indexServer(req, res, finalhandler(req, res));
-        } else {
-          fileSystem.readFile(fullPath, (err2, data) => {
-            if (err2) {
-              if (errorHandler) return errorHandler(err);
-              else return cycle.replyError(err2);
-            }
-            return cycle.replyStaticData(data);
-          });
-        }
-        return undefined;
+
+      return new Promise((resolve, reject) => {
+        fileSystem.stat(fullPath, (err, stats) => {
+          if (err) {
+            return reject(err);
+          } else if (stats.isDirectory()) {
+            res.once("end", resolve);
+            return indexServer(req, res, reject);
+          } else {
+            return fileSystem.readFile(fullPath, (err2, data) => {
+              if (err2) {
+                return reject(err);
+              } else {
+                return resolve(cycle.replyStaticData(data));
+              }
+            });
+          }
+        });
       });
+    };
+
+    const sendStaticServeError = (msg, err) => {
+      return cycle.replyHtml(
+        `<html><body>
+<div style="margin-top:50px;padding:20px;border-radius:10px;border:2px solid red;">
+<h2>Error ${msg}</h2>
+<div style="color: red;">${err.message}</div>
+<h3>check <a href="${this.reporterUrl}">webpack reporter</a> to see if there're any errors.</h3>
+</div></body></html>`
+      );
     };
 
     const serveReporter = reporterOptions => {
@@ -328,16 +342,18 @@ doReload(1); </script></body></html>`);
           ? `<script>(function(){var t = document.getElementById("anchor_warning") ||
 document.getElementById("anchor_error");if (t) t.scrollIntoView();})();</script>`
           : "";
-      return cycle.replyHtml(`<html><body>
+      return Promise.resolve(
+        cycle.replyHtml(`<html><body>
 <div style="border-radius: 10px; background: black; color: gray; padding: 10px;">
 <pre style="white-space: pre-wrap;">${html}</pre></div>
 ${jumpToError}</body></html>
-`);
+`)
+      );
     };
 
     if (isHmrRequest) {
       // do nothing and continue to webpack dev middleware
-      return this.canContinue;
+      return Promise.resolve(this.canContinue);
     } else if (req.url === this.publicPath || req.url === this.listAssetPath) {
       const outputPath = this.devMiddleware.getFilenameFromUrl(this.publicPath);
       const filesystem = this.devMiddleware.fileSystem;
@@ -358,25 +374,17 @@ ${jumpToError}</body></html>
         `<html><head><meta charset="utf-8"/></head><body>\n` +
         listDirectoryHtml(this.listAssetPath, outputPath) +
         "</body></html>";
-      return cycle.replyHtml(html);
+      return Promise.resolve(cycle.replyHtml(html));
     } else if (req.url.startsWith(this.cwdBaseUrl)) {
-      return serveStatic(this.cwdBaseUrl, Fs, this.cwdIndex);
+      return serveStatic(this.cwdBaseUrl, Fs, this.cwdIndex).catch(err => {
+        return sendStaticServeError(`reading file under CWD`, err);
+      });
     } else if (req.url.startsWith(this.cwdContextBaseUrl)) {
       return serveStatic(
         this.cwdContextBaseUrl,
         this.devMiddleware.fileSystem,
-        this.cwdMemIndex,
-        err => {
-          return cycle.replyHtml(
-            `<html><body>
-<div style="margin-top:50px;padding:20px;border-radius:10px;border:2px solid red;">
-<h2>Error reading webpack mem fs</h2>
-<div style="color: red;">${err.message}</div>
-<h3>check <a href="${this.reporterUrl}">reporter</a> to see if there're any errors.</h3>
-</div></body></html>`
-          );
-        }
-      );
+        this.cwdMemIndex
+      ).catch(err => sendStaticServeError("reading webpack mem fs", err));
     } else if (req.url.startsWith(this.reporterUrl) || this.returnReporter) {
       return serveReporter(this.webpackDev.lastReporterOptions);
     } else if (req.url.startsWith(this.dllDevUrl)) {
@@ -390,10 +398,10 @@ ${jumpToError}</body></html>
       const modName = decodeURIComponent(dllParts[0]);
       // bundle name is second
       const bundle = require.resolve(`${modName}/dist/${dllParts[1]}`);
-      return cycle.replyFile(bundle);
+      return Promise.resolve(cycle.replyFile(bundle));
     }
 
-    return this.canContinue;
+    return Promise.resolve(this.canContinue);
   }
 }
 
