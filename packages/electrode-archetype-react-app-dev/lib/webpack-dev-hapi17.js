@@ -33,55 +33,63 @@ function register(server) {
   server.ext({
     type: "onRequest",
     method: (request, h) => {
-      const { req, res } = request.raw;
-
-      const procResult = middleware.process(req, res, {
-        skip: () => h.continue, // skip middleware and continue request cycle
-        replyHtml: html => {
-          return h
-            .response(`<!DOCTYPE html>${html}`)
-            .code(200)
-            .header("Content-Type", "text/html")
-            .takeover();
-        },
-        replyNotFound: () => h.response(Boom.notFound),
-        replyError: err => h.response(err),
-        replyStaticData: data => {
-          const type = mime.lookup(req.url);
-          const resp = h.response(data).code(200);
-          if (type) {
-            const charset = mime.charsets.lookup(type);
-            resp.header("Content-Type", type + (charset ? `; charset=${charset}` : ""));
-          }
-          return resp.takeover();
-        },
-        replyFile: name => h.file(name)
-      });
-
-      if (procResult !== middleware.canContinue) {
-        return h.continue;
-      }
-
-      request.app.webpackDev = middleware.webpackDev;
+      const { req } = request.raw;
 
       // simulate a res to capture what the devMiddleware might send back
       const fakeRes = new FakeRes();
 
       return middleware
-        .devMiddleware(req, fakeRes, () => {
-          return Promise.resolve(middleware.canContinue);
-        })
-        .then(next => {
-          if (next === middleware.canContinue) {
-            return h.continue;
-          } else {
-            // send back result from fakeRes
-            const response = h.response(fakeRes._content).takeover();
-            Object.keys(fakeRes._headers).forEach(key => {
-              response.header(key, fakeRes._headers[key]);
-            });
-            return response.code(fakeRes.statusCode);
+        .process(req, fakeRes, {
+          skip: () => h.continue, // skip middleware and continue request cycle
+          replyHtml: html => {
+            return h
+              .response(`<!DOCTYPE html>${html}`)
+              .code(200)
+              .header("Content-Type", "text/html")
+              .takeover();
+          },
+          replyNotFound: () => {
+            return h.response(Boom.notFound);
+          },
+          replyError: err => {
+            return h.response(err);
+          },
+          replyStaticData: data => {
+            const type = mime.lookup(req.url);
+            const resp = h.response(data).code(200);
+            if (type) {
+              const charset = mime.charsets.lookup(type);
+              resp.header("Content-Type", type + (charset ? `; charset=${charset}` : ""));
+            }
+            return resp.takeover();
+          },
+          replyFile: name => {
+            return h.file(name);
           }
+        })
+        .then(next1 => {
+          if (fakeRes.responded) {
+            return fakeRes.hapi17Respond(h);
+          }
+
+          if (next1 !== undefined && next1 !== middleware.canContinue) {
+            return next1;
+          }
+
+          request.app.webpackDev = middleware.webpackDev;
+
+          return middleware
+            .devMiddleware(req, fakeRes, () => {
+              return Promise.resolve(middleware.canContinue);
+            })
+            .then(() => {
+              if (fakeRes.responded) {
+                // send back result from fakeRes
+                return fakeRes.hapi17Respond(h);
+              }
+
+              return h.continue;
+            });
         })
         .catch(err => {
           console.error("webpack dev middleware error", err);
