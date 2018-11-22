@@ -5,6 +5,7 @@ const Path = require("path");
 const { context, tag } = require("../util/context");
 
 module.exports = {
+  mode: "development",
   plugins: [
     new webpack.DllPlugin({
       path: Path.join(context, `dll_[name]-manifest${tag}.json`),
