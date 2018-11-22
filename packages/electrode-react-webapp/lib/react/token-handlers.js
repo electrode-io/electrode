@@ -22,6 +22,8 @@ const {
   makeElectrodeDllScripts
 } = require("./content");
 
+const prefetchBundles = require("./handlers/prefetch-bundles");
+
 const CONTENT_MARKER = "SSR_CONTENT";
 const HEADER_BUNDLE_MARKER = "WEBAPP_HEADER_BUNDLES";
 const BODY_BUNDLE_MARKER = "WEBAPP_BODY_BUNDLES";
@@ -81,51 +83,51 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
     }
   };
 
-  const INITIALIZE = async context => {
+  const INITIALIZE = context => {
     const options = context.options;
     const request = options.request;
     const mode = options.mode;
     const renderSs = processRenderSsMode(request, RENDER_SS, mode);
 
-    const content = await getContent(renderSs, options, context);
+    return getContent(renderSs, options, context).then(content => {
+      if (content.render === false || content.html === undefined) {
+        return context.voidStop(content);
+      }
 
-    if (content.render === false || content.html === undefined) {
-      return context.voidStop(content);
-    }
+      const chunkNames = chunkSelector(request);
 
-    const chunkNames = chunkSelector(request);
+      const devCSSBundle = getDevCssBundle(chunkNames, routeData);
+      const devJSBundle = getDevJsBundle(chunkNames, routeData);
 
-    const devCSSBundle = getDevCssBundle(chunkNames, routeData);
-    const devJSBundle = getDevJsBundle(chunkNames, routeData);
+      const { jsChunk, cssChunk } = getProdBundles(chunkNames, routeData);
+      const { scriptNonce, styleNonce } = getCspNonce(request, routeOptions.cspNonceValue);
 
-    const { jsChunk, cssChunk } = getProdBundles(chunkNames, routeData);
-    const { scriptNonce, styleNonce } = getCspNonce(request, routeOptions.cspNonceValue);
+      const renderJs = RENDER_JS && mode !== "nojs";
 
-    const renderJs = RENDER_JS && mode !== "nojs";
+      context.setOutputTransform(transformOutput);
 
-    context.setOutputTransform(transformOutput);
+      context.user = {
+        request: options.request,
+        response: {
+          headers: {}
+        },
+        routeOptions,
+        routeData,
+        content,
+        mode,
+        renderJs,
+        renderSs,
+        scriptNonce,
+        styleNonce,
+        chunkNames,
+        devCSSBundle,
+        devJSBundle,
+        jsChunk,
+        cssChunk
+      };
 
-    context.user = {
-      request: options.request,
-      response: {
-        headers: {}
-      },
-      routeOptions,
-      routeData,
-      content,
-      mode,
-      renderJs,
-      renderSs,
-      scriptNonce,
-      styleNonce,
-      chunkNames,
-      devCSSBundle,
-      devJSBundle,
-      jsChunk,
-      cssChunk
-    };
-
-    return context;
+      return context;
+    });
   };
 
   const tokenHandlers = {
@@ -183,11 +185,7 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
       return context.user.routeData.dllAssetScripts;
     },
 
-    [PREFETCH_MARKER]: context => {
-      return !context.user.content.prefetch
-        ? ""
-        : `<script${context.user.scriptNonce}>${context.user.content.prefetch}</script>`;
-    },
+    [PREFETCH_MARKER]: prefetchBundles,
 
     [META_TAGS_MARKER]: iconStats,
 

@@ -11,9 +11,10 @@ const request = require("superagent");
 const expect = require("chai").expect;
 
 describe("koa electrode-react-webapp", function() {
-  const webappOptions = () => {
+  const webappOptions = responseForBadStatus => {
     return {
       pageTitle: "Electrode App",
+      responseForBadStatus,
       paths: {
         "/": {
           content: {
@@ -171,7 +172,7 @@ describe("koa electrode-react-webapp", function() {
   });
 
   it("should return 404 and html, if custom html is provided", () => {
-    const server = startServer(webappOptions());
+    const server = startServer(webappOptions(null));
     return new Promise(resolve => {
       const port = server.address().port;
       return request(`http://localhost:${port}/status?status=404&html=NotFoundHTML&render=0`).end(
