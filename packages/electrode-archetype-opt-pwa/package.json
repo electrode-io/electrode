@@ -20,11 +20,12 @@
     "optional-check.js"
   ],
   "dependencies": {
-    "favicons-webpack-plugin": "^0.0.9",
     "favicons": "^4.8.3",
-    "sw-precache-webpack-plugin": "^0.11.5",
+    "favicons-webpack-plugin": "^0.0.9",
     "sw-precache": "^5.0.0",
+    "sw-precache-webpack-plugin": "^0.11.5",
     "sw-toolbox": "^3.4.0",
+    "uglify-es": "^3.3.9",
     "web-app-manifest-loader": "^0.1.1",
     "webpack-disk-plugin": "0.0.2"
   },
