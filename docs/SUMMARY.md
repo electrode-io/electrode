@@ -33,6 +33,7 @@
   - [Eslint Config](/chapter1/intermediate/app-archetype/eslint.md)
   - [Webpack Config](/chapter1/intermediate/app-archetype/webpack-config.md)
   - [Environment Variables](/chapter1/intermediate/app-archetype/env-vars.md)
+  - [Consuming Webpack DLL](chapter1/intermediate/app-archetype/load-dll.md)
   - [Extract Styles](/chapter1/intermediate/app-archetype/extract-styles.md)
   - [Unit Tests](/chapter1/intermediate/app-archetype/unit-tests.md)
 - Component Archetype
@@ -41,6 +42,8 @@
   - [Webpack Config](/chapter1/intermediate/component-archetype/webpack-config.md)
   - [Extract Styles](/chapter1/intermediate/component-archetype/extract-styles.md)
   - [Unit Tests](/chapter1/intermediate/component-archetype/unit-tests.md)
+- DLL Archetype
+  - [About](chapter1/intermediate/dll-archetype/README.md)
 - Using Flow
   - [Setup and configuration](/chapter1/intermediate/flow.md)
   - [Flow FAQ](/chapter1/intermediate/flow-faq.md)
