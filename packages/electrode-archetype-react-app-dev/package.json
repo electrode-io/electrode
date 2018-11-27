@@ -87,7 +87,7 @@
     "mime": "^1.0.0",
     "mkdirp": "^0.5.1",
     "mocha": "^4.0.0",
-    "nodemon": "^1.8.1",
+    "nodemon": "^1.18.7",
     "offline-plugin": "^4.6.1",
     "opn": "^5.3.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
