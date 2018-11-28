@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-app-dev",
-  "version": "6.0.5-beta",
+  "version": "6.0.6",
   "description": "Electrode NodeJS/React Application Archetype (Development)",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -61,7 +61,7 @@
     "electrode-cdn-file-loader": "^1.0.0",
     "electrode-hapi-compat": "^1.0.0",
     "electrode-node-resolver": "^2.0.0",
-    "electrode-webpack-reporter": "^0.5.0",
+    "electrode-webpack-reporter": "^0.5.1",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.1.0",
     "eslint": "^4.8.0",
@@ -130,7 +130,7 @@
   "optionalDependencies": {
     "electrode-archetype-opt-inferno": "^0.2.4",
     "electrode-archetype-opt-karma": "^1.0.4",
-    "electrode-archetype-opt-pwa": "^1.0.0",
+    "electrode-archetype-opt-pwa": "^1.0.1",
     "electrode-archetype-opt-react": "^1.0.2",
     "electrode-archetype-opt-sass": "^1.0.3"
   },
@@ -179,8 +179,5 @@
     "functions": 100,
     "lines": 100,
     "cache": true
-  },
-  "publishConfig": {
-    "tag": "beta"
   }
 }

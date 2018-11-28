@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-app",
-  "version": "6.0.5-beta",
+  "version": "6.0.6",
   "description": "Electrode NodeJS/React Universal Application Archetype",
   "main": "arch-clap.js",
   "homepage": "http://www.electrode.io",
@@ -63,8 +63,5 @@
       "electrode-archetype-opt-inferno": "../electrode-archetype-opt-inferno",
       "electrode-archetype-opt-react": "../electrode-archetype-opt-react"
     }
-  },
-  "publishConfig": {
-    "tag": "beta"
   }
 }

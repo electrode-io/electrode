@@ -1,6 +1,6 @@
 {
   "name": "electrode-webpack-reporter",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "A HTML based reporter for webpack dev server",
   "main": "lib/webpack-reporter.js",
   "scripts": {
