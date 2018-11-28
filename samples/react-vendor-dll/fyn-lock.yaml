@@ -888,7 +888,7 @@ electrode-archetype-webpack-dll:
  1.1.0-fynlocal_h:
   top: 1
   $: local
-  _: /Users/xchen11/dev/pub/electrode/packages/electrode-archetype-webpack-dll
+  _: ../../packages/electrode-archetype-webpack-dll
   dependencies:
    optional-require: ^1.0.0
 electrode-archetype-webpack-dll-dev:
@@ -897,7 +897,7 @@ electrode-archetype-webpack-dll-dev:
  1.1.0-fynlocal_h:
   top: 1
   $: local
-  _: /Users/xchen11/dev/pub/electrode/packages/electrode-archetype-webpack-dll-dev
+  _: ../../packages/electrode-archetype-webpack-dll-dev
   dependencies:
    bluebird: ^3.5.3
    glob: ^7.1.3
