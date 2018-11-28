@@ -19,7 +19,8 @@ const pullLocalPackages = dir => {
     "electrode-archetype-react-app",
     "electrode-react-webapp",
     "electrode-redux-router-engine",
-    "electrode-auto-ssr"
+    "electrode-auto-ssr",
+    "electrode-cookies"
   ];
   const localDevPkgs = ["electrode-archetype-react-app-dev"];
   const localPackagesDir = Path.relative(dir, packagesDir);
