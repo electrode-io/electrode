@@ -1,3 +1,5 @@
+@import "normalize.css/normalize.css";
+
 body {
   font: 12px Helvetica;
 }
@@ -13,7 +15,8 @@ body {
   color: red;
 }
 
-input, label {
+input,
+label {
   margin: 2px;
   display: block;
 }
