@@ -15,6 +15,7 @@
             "electrode-archetype-react-app-dev": true,
             "electrode-archetype-react-component": true,
             "electrode-archetype-react-component-dev": true,
+            "electrode-archetype-opt-karma": true,
             "electrode-ignite": true,
             "generator-electrode": true
           },
