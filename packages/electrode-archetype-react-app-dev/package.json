@@ -41,6 +41,7 @@
     "@babel/runtime": "^7.1.5",
     "ansi-to-html": "^0.6.8",
     "autoprefixer": "^9.3.1",
+    "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
