@@ -662,7 +662,7 @@ electrode-archetype-webpack-dll:
  1.0.1-fynlocal_h:
   top: 1
   $: local
-  _: /Users/xchen11/dev/pub/electrode-5/packages/electrode-archetype-webpack-dll
+  _: ../../packages/electrode-archetype-webpack-dll
   dependencies:
    optional-require: ^1.0.0
 electrode-archetype-webpack-dll-dev:
@@ -671,7 +671,7 @@ electrode-archetype-webpack-dll-dev:
  1.0.1-fynlocal_h:
   top: 1
   $: local
-  _: /Users/xchen11/dev/pub/electrode-5/packages/electrode-archetype-webpack-dll-dev
+  _: ../../packages/electrode-archetype-webpack-dll-dev
   dependencies:
    bluebird: ^3.5.2
    glob: ^7.1.3
@@ -2832,7 +2832,7 @@ webpack-config-composer:
   ../webpack-config-composer: 1.1.1-fynlocal_h
  1.1.1-fynlocal_h:
   $: local
-  _: /Users/xchen11/dev/pub/electrode-5/packages/webpack-config-composer
+  _: ../../packages/webpack-config-composer
   dependencies:
    lodash: ^4.13.1
 webpack-sources:
