@@ -268,14 +268,6 @@
  7.1.6:
   $: sha512-dWP6LJm9nKT6ALaa+bnL247GHHMWir3vSlZ2+IHgHgktZQx0L3Uvq2uAWcuzIe+fujRsYWBW2q622C5UvGK9iQ==
   _: 'https://registry.npmjs.org/@babel/parser/-/parser-7.1.6.tgz'
-'@babel/plugin-check-constants':
- _:
-  ^7.0.0-beta.38: 7.0.0-beta.38
- 7.0.0-beta.38:
-  $: sha512-MjdGn/2sMLu0fnNFbkILut0OsegzRTeCOJ/uGHH88TwTXPzxONx2cTVJ36i3cTQXHMiIOUT3hX6HqzWM99Q6vA==
-  _: 'https://registry.npmjs.org/@babel/plugin-check-constants/-/plugin-check-constants-7.0.0-beta.38.tgz'
-  peerDependencies:
-   '@babel/core': 7.0.0-beta.38
 '@babel/plugin-proposal-async-generator-functions':
  _:
   ^7.1.0: 7.1.0
@@ -4284,7 +4276,6 @@ electrode-archetype-react-app-dev:
   dependencies:
    '@babel/cli': ^7.1.5
    '@babel/core': ^7.1.6
-   '@babel/plugin-check-constants': ^7.0.0-beta.38
    '@babel/plugin-proposal-object-rest-spread': ^7.0.0
    '@babel/plugin-transform-react-constant-elements': ^7.0.0
    '@babel/plugin-transform-react-inline-elements': ^7.0.0
