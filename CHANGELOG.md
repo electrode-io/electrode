@@ -1,3 +1,73 @@
+# 11/30/2018
+
+## Packages
+
+### Directly Updated
+
+-   `electrode-archetype-react-app@5.4.24` `(5.4.23 => 5.4.24)`
+-   `electrode-archetype-react-app-dev@5.4.24` `(5.4.23 => 5.4.24)`
+-   `electrode-archetype-webpack-dll@1.0.2` `(1.0.1 => 1.0.2)`
+-   `electrode-archetype-webpack-dll-dev@1.0.2` `(1.0.1 => 1.0.2)`
+-   `electrode-cookies@1.0.4` `(1.0.3 => 1.0.4)`
+-   `generator-electrode@4.2.8` `(4.2.7 => 4.2.8)`
+
+### Lerna Updated
+
+-   `electrode-ignite@2.1.12` `(2.1.11 => 2.1.12)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   update nodemon to 1.18.7 to drop event-stream ([#1073](https://github.com/electrode-io/electrode/pull/1073)) [commit](http://github.com/electrode-io/electrode/commit/0bdd5cbcdb5badb7dfbfffeb6f3113bb8a4a9488)
+    -   more hapi17 fix for dev middleware ([#1071](https://github.com/electrode-io/electrode/pull/1071)) [commit](http://github.com/electrode-io/electrode/commit/2f4090a836908ad2153a5893646d84b071968adb)
+    -   fix dev middleware with hapi17 ([#1069](https://github.com/electrode-io/electrode/pull/1069)) [commit](http://github.com/electrode-io/electrode/commit/f165d00a720cf718a7ceba57e4531a0861e59718)
+    -   update dev middleware to handle sending back webpack assets ([#1063](https://github.com/electrode-io/electrode/pull/1063)) [commit](http://github.com/electrode-io/electrode/commit/ad1a292d5e9c1a96e4269095d622209fa0d34d07)
+    -   fix hapi 17 response takeover ([#1065](https://github.com/electrode-io/electrode/pull/1065)) [commit](http://github.com/electrode-io/electrode/commit/91a53cd60a01b3533e848d536852f090034756c1)
+
+-   `packages/electrode-archetype-webpack-dll[-dev]`
+
+    -   avoid user entry error causing archetype load failure ([#1058](https://github.com/electrode-io/electrode/pull/1058)) [commit](http://github.com/electrode-io/electrode/commit/6fcd852b79389976ffdc7f97ccd4cb4faedec569)
+
+-   `packages/electrode-cookies`
+
+    -   update test timeout [commit](http://github.com/electrode-io/electrode/commit/b98bab3fecaa15d69711a6e0fabef24506799f9e)
+    -   update electrode-cookies for hapi16/17 ([#1062](https://github.com/electrode-io/electrode/pull/1062)) [commit](http://github.com/electrode-io/electrode/commit/c4ac10fc5d614ec1f19fe2f54eeeed6cc21ba949)
+
+-   `packages/electrode-react-webapp`
+
+    -   sync up with master but mark private [commit](http://github.com/electrode-io/electrode/commit/41adb4d6d2f76d14013fdfa3158eabc8f388ad11)
+    -   make sure function returns something ([#1068](https://github.com/electrode-io/electrode/pull/1068)) [commit](http://github.com/electrode-io/electrode/commit/e4798fe3e9e61577287f6345dddd39519caefcee)
+    -   ensure extra props are not enumerable to make Hapi Joi ([#1067](https://github.com/electrode-io/electrode/pull/1067)) [commit](http://github.com/electrode-io/electrode/commit/3b1419acd99589fbe471dd730470dae79fa00eeb)
+    -   fix hapi16/17 exports ([#1061](https://github.com/electrode-io/electrode/pull/1061)) [commit](http://github.com/electrode-io/electrode/commit/fac61cf3c5491b28efc3da2c1e13f45e43f239e0)
+
+-   `packages/generator-electrode`
+
+    -   add nice glowing effect to nav bar hover ([#1070](https://github.com/electrode-io/electrode/pull/1070)) [commit](http://github.com/electrode-io/electrode/commit/ca358e365fd67c594b400a27dc92e5304d4a5037)
+
+-   `samples/react-vendor-dll`
+
+    -   sample react dll ([#1059](https://github.com/electrode-io/electrode/pull/1059)) [commit](http://github.com/electrode-io/electrode/commit/0e4fbb4810230f26de30cc0c69688be160568f24)
+    -   update samples lockfile [commit](http://github.com/electrode-io/electrode/commit/3fe84db7c6f1246b93dc25c2c075cef70d26f06b)
+
+-   `samples/universal-react-node`
+
+    -   use dll in sample app ([#1060](https://github.com/electrode-io/electrode/pull/1060)) [commit](http://github.com/electrode-io/electrode/commit/21ad9ebef834310d9d489fe25c333708bd0ee8db)
+
+-   `docs`
+
+    -   add initial docs for DLL ([#1075](https://github.com/electrode-io/electrode/pull/1075)) [commit](http://github.com/electrode-io/electrode/commit/9d680f245708ae93e60186c801b30f465a02c20b)
+    -   update env variable configs ([#1057](https://github.com/electrode-io/electrode/pull/1057)) [commit](http://github.com/electrode-io/electrode/commit/d4601429e03c077ed830a8807012cc23b4b5224b)
+
+-   `tools`
+
+    -   sync up tools from master [commit](http://github.com/electrode-io/electrode/commit/69c90ec8cdf42330a8bff9aa9f3116eb4f3880b7)
+
+-   `MISC`
+
+    -   add electrode-cookies to local pkg list [commit](http://github.com/electrode-io/electrode/commit/4ef465a16cb5bef6a787f6360697d611c23ab77a)
+    -   build sample dll module for sample app [commit](http://github.com/electrode-io/electrode/commit/a5132f63ffe56998f6cca580fd78d0a7bd6d2822)
+
 # 11/19/2018
 
 ## Packages
