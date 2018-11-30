@@ -1,0 +1,31 @@
+{
+  "name": "karma-webpack-babel-istanbul",
+  "version": "1.0.0",
+  "description": "Karma + webpack + babel + istanbul sample",
+  "main": "index.js",
+  "scripts": {
+    "test": "karma start --single-run --browsers ChromeHeadless",
+    "test-phantom": "karma start --single-run --browsers PhantomJS"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "electrode-archetype-opt-karma": "^1.0.0",
+    "mocha": "^5.2.0",
+    "webpack": "^4.26.0"
+  },
+  "fyn": {
+    "devDependencies": {
+      "electrode-archetype-opt-karma": "../../packages/electrode-archetype-opt-karma"
+    }
+  }
+}

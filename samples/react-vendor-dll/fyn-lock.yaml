@@ -884,8 +884,8 @@ duplexify:
    stream-shift: ^1.0.0
 electrode-archetype-webpack-dll:
  _:
-  ../../packages/electrode-archetype-webpack-dll: 1.1.0-fynlocal_h
- 1.1.0-fynlocal_h:
+  ../../packages/electrode-archetype-webpack-dll: 2.0.0-fynlocal_h
+ 2.0.0-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-webpack-dll
@@ -893,8 +893,8 @@ electrode-archetype-webpack-dll:
    optional-require: ^1.0.0
 electrode-archetype-webpack-dll-dev:
  _:
-  ../../packages/electrode-archetype-webpack-dll-dev: 1.1.0-fynlocal_h
- 1.1.0-fynlocal_h:
+  ../../packages/electrode-archetype-webpack-dll-dev: 2.0.0-fynlocal_h
+ 2.0.0-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-webpack-dll-dev

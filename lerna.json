@@ -8,8 +8,8 @@
     "ignore": ["electrode-webpack-reporter"],
     "publishConfig": {
       "tags": {
-        "beta": {
-          "enabled": false,
+        "babel7.beta": {
+          "enabled": true,
           "packages": {
             "electrode-archetype-react-app": true,
             "electrode-archetype-react-app-dev": true,

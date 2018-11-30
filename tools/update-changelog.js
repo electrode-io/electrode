@@ -200,6 +200,7 @@ const determinePackageVersions = collated => {
     }, 0);
     packages[mappedName].version = Pkg.version;
     const verParts = Pkg.version.split("-");
+    packages[mappedName].versionOnly = verParts[0];
     verParts[0] = semver.inc(verParts[0], types[updateType]);
     packages[mappedName].newVersion = verParts.join("-");
     packages[mappedName].originalPkg = Pkg;
@@ -219,7 +220,8 @@ const determinePackageVersions = collated => {
 const lernaRc = require("../lerna.json");
 
 const getTaggedVersion = pkg => {
-  const newVer = pkg.newVersion.split("-")[0];
+  const verParts = pkg.newVersion.split("-");
+  const newVer = verParts[0];
 
   const fynpoTags = _.get(lernaRc, "fynpo.publishConfig.tags");
   if (fynpoTags) {
@@ -229,7 +231,15 @@ const getTaggedVersion = pkg => {
       const enabled = _.get(tagInfo, ["packages", pkg.originalPkg.name]);
       if (enabled) {
         if (tag !== "latest" && tagInfo.addToVersion) {
-          return newVer + `-${tag}`;
+          let tagNum = 1;
+          if (verParts[1]) {
+            const tagParts = verParts[1].split(".");
+            if (tagParts.length > 1) {
+              tagNum = parseInt(_.last(tagParts)) + 1;
+            }
+          }
+          tagNum = `${tagNum}`.padStart(3, "0");
+          return pkg.versionOnly + `-${tag}.${tagNum}`;
         }
       }
     }

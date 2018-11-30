@@ -81,6 +81,10 @@ function setDevelopmentEnv() {
   process.env.NODE_ENV = "development";
 }
 
+function setKarmaCovEnv() {
+  process.env.BABEL_ENV = "karma-cov";
+}
+
 function setStaticFilesEnv() {
   process.env.STATIC_FILES = "true";
 }
@@ -839,18 +843,20 @@ Individual .babelrc files were generated for you in src/client and src/server
     Object.assign(tasks, {
       ".karma.test-frontend": mkCmd(`karma start`, quote(karmaConfig("karma.conf.js")), `--colors`),
 
-      ".karma.test-frontend-ci": mkCmd(
-        `karma start`,
-        quote(karmaConfig("karma.conf.coverage.js")),
-        `--colors`
-      ),
+      ".karma.test-frontend-ci": {
+        dep: [setKarmaCovEnv],
+        task: mkCmd(`karma start`, quote(karmaConfig("karma.conf.coverage.js")), `--colors`)
+      },
 
-      ".karma.test-frontend-cov": () => {
-        if (shell.test("-d", "test")) {
-          logger.info("\nRunning Karma unit tests:\n");
-          return mkCmd(`~$karma start`, quote(karmaConfig("karma.conf.coverage.js")), `--colors`);
+      ".karma.test-frontend-cov": {
+        dep: [setKarmaCovEnv],
+        task: () => {
+          if (shell.test("-d", "test")) {
+            logger.info("\nRunning Karma unit tests:\n");
+            return mkCmd(`~$karma start`, quote(karmaConfig("karma.conf.coverage.js")), `--colors`);
+          }
+          return undefined;
         }
-        return undefined;
       },
 
       ".karma.test-frontend-dev": () =>
