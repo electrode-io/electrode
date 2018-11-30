@@ -199,10 +199,13 @@ const determinePackageVersions = collated => {
       return a;
     }, 0);
     packages[mappedName].version = Pkg.version;
-    const verParts = Pkg.version.split("-");
-    packages[mappedName].versionOnly = verParts[0];
-    verParts[0] = semver.inc(verParts[0], types[updateType]);
-    packages[mappedName].newVersion = verParts.join("-");
+    const x = semver.parse(Pkg.version);
+    packages[mappedName].versionOnly = `${x.major}.${x.minor}.${x.patch}`;
+    packages[mappedName].semver = x;
+    packages[mappedName].newVersion = semver.inc(
+      packages[mappedName].versionOnly,
+      types[updateType]
+    );
     packages[mappedName].originalPkg = Pkg;
   };
 
@@ -220,26 +223,25 @@ const determinePackageVersions = collated => {
 const lernaRc = require("../lerna.json");
 
 const getTaggedVersion = pkg => {
-  const verParts = pkg.newVersion.split("-");
-  const newVer = verParts[0];
+  const newVer = pkg.newVersion;
 
   const fynpoTags = _.get(lernaRc, "fynpo.publishConfig.tags");
   if (fynpoTags) {
     for (const tag in fynpoTags) {
+      if (!tag.match(/^[0-9A-Za-z-]+$/)) {
+        throw new Error(`tag ${tag} invalid. Only [0-9A-Za-z-] characters allowed.`);
+      }
       const tagInfo = fynpoTags[tag];
       if (tagInfo.enabled === false) continue;
       const enabled = _.get(tagInfo, ["packages", pkg.originalPkg.name]);
       if (enabled) {
         if (tag !== "latest" && tagInfo.addToVersion) {
           let tagNum = 1;
-          if (verParts[1]) {
-            const tagParts = verParts[1].split(".");
-            if (tagParts.length > 1) {
-              tagNum = parseInt(_.last(tagParts)) + 1;
-            }
+          const semv = pkg.semver;
+          if (semv.prerelease[0] && semv.prerelease[0] === tag) {
+            return semv.inc("prerelease").format();
           }
-          tagNum = `${tagNum}`.padStart(3, "0");
-          return pkg.versionOnly + `-${tag}.${tagNum}`;
+          return `${pkg.versionOnly}-${tag}.0`;
         }
       }
     }
