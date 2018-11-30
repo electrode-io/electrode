@@ -1,3 +1,49 @@
+# 11/30/2018
+
+## Packages
+
+-   `electrode-archetype-opt-karma@1.0.4-babel7-beta.0` `(1.0.4 => 1.0.4-babel7-beta.0)`
+-   `electrode-archetype-react-app@6.0.6-babel7-beta.0` `(6.0.6 => 6.0.6-babel7-beta.0)`
+-   `electrode-archetype-react-app-dev@6.0.6-babel7-beta.0` `(6.0.6 => 6.0.6-babel7-beta.0)`
+
+## Commits
+
+-   `packages/electrode-archetype-opt-karma`
+
+    -   updating karma dep with sample [commit](http://github.com/electrode-io/electrode/commit/7253649f217406eb78438cba4547992902e21154)
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   set babel env for karma cov [commit](http://github.com/electrode-io/electrode/commit/7ff054008a671b7e87677b80f09f3127529aff1f)
+    -   remove deprecated @babel/plugin-check-constants [commit](http://github.com/electrode-io/electrode/commit/5863d1d7b2efa2f6cfb20dd838089783e877cbb2)
+    -   add babel-core bridge version [commit](http://github.com/electrode-io/electrode/commit/2b958eba75f1f8b70f2d619108c26beee8e9cf65)
+    -   update karma coverage config [commit](http://github.com/electrode-io/electrode/commit/be62384574627277897a9fff4e082223aedfde99)
+    -   [v6 release] babel 7 update [commit](http://github.com/electrode-io/electrode/commit/e95702f4ebdc4713e547178fa804fd61aa7b1163)
+
+-   `samples/karma-webpack-babel-istanbul`
+
+    -   updating karma dep with sample [commit](http://github.com/electrode-io/electrode/commit/7253649f217406eb78438cba4547992902e21154)
+
+-   `samples/react-vendor-dll`
+
+    -   update lockfile for sample DLL [commit](http://github.com/electrode-io/electrode/commit/b18fde8c15d2b699958bb766cedb1e3dd545b1cd)
+
+-   `samples/universal-react-node`
+
+    -   update sample lock file [commit](http://github.com/electrode-io/electrode/commit/05ed914a3cbac83e2cffd2c2e51b405bf0ae7ab1)
+    -   add lock file for sample universal-react-node [commit](http://github.com/electrode-io/electrode/commit/eb862dd7f1ad3253269fa6dcd5209ac4cdeccbeb)
+    -   demo CSS @import from node_modules ([#1078](https://github.com/electrode-io/electrode/pull/1078)) [commit](http://github.com/electrode-io/electrode/commit/2102fe2d4c02d734d0b91a4353bcafceede66965)
+
+-   `tools`
+
+    -   increment tag number [commit](http://github.com/electrode-io/electrode/commit/c5f621d4a1c0782102dba06f4df76fe6645930af)
+    -   ensure valid prerelease tag [commit](http://github.com/electrode-io/electrode/commit/1fcfda3e7943acebe2e6c045c939b4d7dd1e7542)
+
+-   `MISC`
+
+    -   add beta tag for opt-karma [commit](http://github.com/electrode-io/electrode/commit/f868d8a20ee45d0b69b5810b613f9498a736e3cc)
+    -   prep to release babel7 beta [commit](http://github.com/electrode-io/electrode/commit/3b86c0c7db9b67f4465ace8647a75c1eb4ec6e6e)
+
 # 11/28/2018
 
 ## Electrode React App Archetype Version 6 Release
