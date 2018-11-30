@@ -75,7 +75,7 @@ const processLernaUpdated = output => {
   const packages = output.stdout
     .split("\n")
     .filter(x => x.trim().length > 0)
-    .map(x => x.substr(2));
+    .map(x => x.substr(2).split(" ")[0]);
   return { tag, packages };
 };
 
@@ -199,8 +199,10 @@ const determinePackageVersions = collated => {
       return a;
     }, 0);
     packages[mappedName].version = Pkg.version;
-    const newVersion = semver.inc(Pkg.version, types[updateType]);
-    packages[mappedName].newVersion = newVersion;
+    const verParts = Pkg.version.split("-");
+    verParts[0] = semver.inc(verParts[0], types[updateType]);
+    packages[mappedName].newVersion = verParts.join("-");
+    packages[mappedName].originalPkg = Pkg;
   };
 
   return Promise.map(collated.realPackages, name => findVersion(name, collated.packages))
@@ -214,6 +216,28 @@ const determinePackageVersions = collated => {
     .then(() => collated);
 };
 
+const lernaRc = require("../lerna.json");
+
+const getTaggedVersion = pkg => {
+  const newVer = pkg.newVersion.split("-")[0];
+
+  const fynpoTags = _.get(lernaRc, "fynpo.publishConfig.tags");
+  if (fynpoTags) {
+    for (const tag in fynpoTags) {
+      const tagInfo = fynpoTags[tag];
+      if (tagInfo.enabled === false) continue;
+      const enabled = _.get(tagInfo, ["packages", pkg.originalPkg.name]);
+      if (enabled) {
+        if (tag !== "latest" && tagInfo.addToVersion) {
+          return newVer + `-${tag}`;
+        }
+      }
+    }
+  }
+
+  return newVer;
+};
+
 const updateChangelog = collated => {
   const emittedCommits = {};
   const d = new Date();
@@ -225,9 +249,9 @@ const updateChangelog = collated => {
   }
   const emitPackageMsg = (p, packages) => {
     const pkg = packages[mapPkg(p)];
-    output.push(
-      `-   ${p}@${pkg.newVersion} ` + "`" + `(${pkg.version} => ${pkg.newVersion})` + "`\n"
-    );
+    const newVer = getTaggedVersion(pkg);
+    if (pkg.originalPkg.private) return;
+    output.push(`-   \`${p}@${newVer}\` ` + "`" + `(${pkg.version} => ${newVer})` + "`\n");
   };
   collated.realPackages.sort().forEach(p => emitPackageMsg(p, collated.packages));
   if (lernaUpdated) {
@@ -323,7 +347,7 @@ const commitChangeLogFile = clean => {
       console.log("Changelog committed");
     })
     .catch(e => {
-      console.log("Comit changelog failed", e);
+      console.log("Commit changelog failed", e);
     });
 };
 
