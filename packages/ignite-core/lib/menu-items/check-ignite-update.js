@@ -21,20 +21,20 @@ module.exports = function(name, npmReg) {
   function execute(options) {
     executed = true;
     spinner.start();
-    return Promise.all([checkModule.globalInstalled(name), checkModule.latest(name, npmReg)])
-      .then(ver => {
-        versions = ver;
+    const myVersion = require(`${name}/package.json`).version; // eslint-disable-line
+    return Promise.resolve(checkModule.latest(name, npmReg))
+      .then(latest => {
         spinner.stop();
-        const iversion = chalk.magenta(ver[0]);
-        const version = chalk.magenta(ver[1]);
-        if (!checkModule.isNewVersion(ver[0], ver[1])) {
-          return logger.log(`Your version ${version} of ${dispName} is already the latest.`, "\n");
+        const dispMy = chalk.magenta(myVersion);
+        const dispLatest = chalk.magenta(latest);
+        if (!checkModule.isNewVersion(myVersion, latest)) {
+          return logger.log(`Your version ${dispMy} of ${dispName} is already the latest.\n`);
         }
-        const msg = `Update ${dispName} from version ${iversion} to ${version}`;
+        const msg = `Update ${dispName} from version ${dispMy} to ${dispLatest}`;
         return helpers.yesNoPrompt(msg).then(yes => {
           if (!yes) return undefined;
           return helpers
-            .npmInstall(name, ver[1], true, npmReg)
+            .npmInstall(name, latest, true, npmReg)
             .then(() => {
               logger.log(`Please restart ${dispName} for the new version.`);
             })
@@ -43,7 +43,7 @@ module.exports = function(name, npmReg) {
                 "This may be due to your system not allowing it to be updated while it's running.";
               helpers.showManualInstallMsg(err, {
                 name,
-                version: ver[1],
+                version: latest[1],
                 isGlobal: true,
                 msgs: [chalk.yellow(m)]
               });
@@ -67,7 +67,7 @@ module.exports = function(name, npmReg) {
   mi.once("post_show", options => {
     setTimeout(() => {
       Promise.all([
-        checkModule.globalInstalled(name),
+        require(`${name}/package.json`).version, // eslint-disable-line
         checkModule.latestOnceDaily(name, null, npmReg)
       ]).then(v => {
         versions = v;
@@ -78,6 +78,8 @@ module.exports = function(name, npmReg) {
             "\n"
           );
           options.menu.emit("refresh_prompt");
+        } else {
+          options.menu.emit("no_op");
         }
       });
     }, 1);

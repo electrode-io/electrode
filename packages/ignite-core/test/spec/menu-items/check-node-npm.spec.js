@@ -8,6 +8,7 @@ const logger = require("../../../lib/util/logger");
 const Promise = require("bluebird");
 
 describe("menu-item check-node-npm", function() {
+  this.timeout(10000);
   it("should create menu item", () => {
     const mi = checkNodeNpmItem();
     expect(mi.emit).to.exist;
