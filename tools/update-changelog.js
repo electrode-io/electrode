@@ -250,7 +250,9 @@ const updateChangelog = collated => {
   const emitPackageMsg = (p, packages) => {
     const pkg = packages[mapPkg(p)];
     const newVer = getTaggedVersion(pkg);
-    if (pkg.originalPkg.private) return;
+    if (pkg.originalPkg.private || _.get(lernaRc, ["fynpo", "private", pkg.originalPkg.name])) {
+      return;
+    }
     output.push(`-   \`${p}@${newVer}\` ` + "`" + `(${pkg.version} => ${newVer})` + "`\n");
   };
   collated.realPackages.sort().forEach(p => emitPackageMsg(p, collated.packages));

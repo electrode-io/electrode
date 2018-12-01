@@ -6,6 +6,10 @@
   },
   "fynpo": {
     "ignore": ["electrode-webpack-reporter"],
+    "private": {
+      "ignite-core": true,
+      "electrode-cookies": true
+    },
     "publishConfig": {
       "versionTagging": {
         "electrode-ignite": true,
