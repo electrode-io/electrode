@@ -1,15 +1,14 @@
 {
-  "presets": [
-    ["env", { "loose": true }],
-    "react",
-    "flow"
-  ],
+  "presets": [["env", { "loose": true }], "react", "flow"],
   "plugins": [
     "babel-plugin-transform-object-rest-spread",
-    ["babel-plugin-react-intl", {
-      "messagesDir": "./tmp/messages/",
-      "enforceDescriptions": true
-    }],
+    [
+      "babel-plugin-react-intl",
+      {
+        "messagesDir": "./tmp/messages/",
+        "enforceDescriptions": true
+      }
+    ],
     "lodash",
     "transform-runtime",
     "transform-flow-strip-types"
@@ -21,10 +20,19 @@
     "production": {
       "plugins": [
         "babel-plugin-transform-react-constant-elements",
-        ["babel-plugin-react-intl", {
-          "messagesDir": "./tmp/messages/",
-          "enforceDescriptions": true
-        }]
+        [
+          "babel-plugin-react-intl",
+          {
+            "messagesDir": "./tmp/messages/",
+            "enforceDescriptions": true
+          }
+        ],
+        [
+          "transform-react-remove-prop-types",
+          {
+            "removeImport": true
+          }
+        ]
       ]
     }
   }
