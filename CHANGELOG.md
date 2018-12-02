@@ -44,6 +44,23 @@
     -   add beta tag for opt-karma [commit](http://github.com/electrode-io/electrode/commit/f868d8a20ee45d0b69b5810b613f9498a736e3cc)
     -   prep to release babel7 beta [commit](http://github.com/electrode-io/electrode/commit/3b86c0c7db9b67f4465ace8647a75c1eb4ec6e6e)
 
+# 11/30/2018
+
+## Packages
+
+-   `electrode-archetype-react-app@6.0.7` `(6.0.6 => 6.0.7)`
+-   `electrode-archetype-react-app-dev@6.0.7` `(6.0.6 => 6.0.7)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   remove concatenateModules ([#1081](https://github.com/electrode-io/electrode/pull/1081)) [commit](http://github.com/electrode-io/electrode/commit/86b2922c3f44589b4e5b5cbfd8b1dd46a21fdf47)
+
+-   `samples/universal-react-node`
+
+    -   demo CSS @import from node_modules ([#1078](https://github.com/electrode-io/electrode/pull/1078)) [commit](http://github.com/electrode-io/electrode/commit/2102fe2d4c02d734d0b91a4353bcafceede66965)
+
 # 11/28/2018
 
 ## Electrode React App Archetype Version 6 Release
