@@ -9,6 +9,7 @@ const helpers = require("../../../lib/util/helpers");
 const _ = require("lodash");
 
 describe("menu-item install-tools", function() {
+  this.timeout(10000);
   let logs = [];
   let logStub;
   let spinnerStub;

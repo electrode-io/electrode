@@ -1,19 +1,48 @@
 "use strict";
 
 const Path = require("path");
+const Fs = require("fs");
 const childProcess = require("child_process");
 const { logger } = require("ignite-core");
 const _ = require("lodash");
 const chalk = require("chalk");
 
 const Lib = {};
-let baseYoPath = "";
+let baseYoPath;
+
+function searchYoBin(name) {
+  let count = 0;
+  let curDir = baseYoPath;
+
+  const makeFile = dir => {
+    dir = Path.join(dir, "."); // remove trailing / or \
+    /* istanbul ignore else */
+    if (!dir.endsWith("node_modules")) {
+      dir = Path.join(dir, "node_modules");
+    }
+    return Path.join(dir, ".bin", name);
+  };
+
+  // eslint-disable-next-line
+  while (++count < 50) {
+    const yoBinFile = makeFile(curDir);
+
+    if (Fs.existsSync(yoBinFile)) {
+      return yoBinFile;
+    }
+
+    const tmp = Path.join(curDir, "..");
+    if (tmp === curDir) break;
+    curDir = tmp;
+  }
+
+  return Path.join(baseYoPath, "..", "node_modules", name);
+}
 
 module.exports = Object.assign(Lib, {
   platform: {
     win32: function win32(name) {
-      baseYoPath = baseYoPath || __dirname;
-      const yoPath = Path.join(baseYoPath, "..", "node_modules", ".bin", "yo.cmd");
+      const yoPath = searchYoBin("yo.cmd");
 
       return childProcess.spawn("cmd", ["/c", yoPath, name], {
         stdio: "inherit"
@@ -21,8 +50,7 @@ module.exports = Object.assign(Lib, {
     },
 
     posix: function posix(name) {
-      baseYoPath = baseYoPath || __dirname;
-      const yoPath = Path.join(baseYoPath, "..", "node_modules", ".bin", "yo");
+      const yoPath = searchYoBin("yo");
 
       return childProcess.spawn(yoPath, [name], {
         stdio: "inherit"
@@ -39,8 +67,8 @@ module.exports = Object.assign(Lib, {
     });
 
     /*
-    * Avoid the hanging case when child process exits on its own by any reason.
-    */
+     * Avoid the hanging case when child process exits on its own by any reason.
+     */
     child.on("exit", code => {
       if (code === 0) {
         logger.log(chalk.green(`Generator: ${name} exited without any errors.`));
@@ -57,6 +85,8 @@ module.exports = Object.assign(Lib, {
   },
 
   setBaseYoPath: function setBaseYoPath(path) {
-    baseYoPath = path;
+    baseYoPath = path || __dirname;
   }
 });
+
+module.exports.setBaseYoPath();

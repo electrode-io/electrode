@@ -21,9 +21,7 @@ describe("do-yo", function() {
       "Generator: test failed with exit code 1. This could mean that it didn't generate your app properly. Please double check."
     );
     child.emit("exit", 0);
-    expect(logs[2]).includes(
-      "Generator: test exited without any errors."
-    );
+    expect(logs[2]).includes("Generator: test exited without any errors.");
     spawnStub.restore();
     logStub.restore();
     processExitStub.restore();
