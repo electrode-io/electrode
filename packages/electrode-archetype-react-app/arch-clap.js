@@ -472,21 +472,32 @@ Individual .babelrc files were generated for you in src/client and src/server
 
     ".build.client.babelrc": () => makeBabelRc(AppMode.src.client, "babelrc-client.js"),
 
+    ".build-lib:delete-babel-ignored-files": {
+      desc: false,
+      task: () => {
+        const libDir = Path.resolve(AppMode.lib.client);
+        const ignoredFiles = glob.sync(`{*.spec.*,*.test.*}`, {
+          cwd: libDir,
+          matchBase: true
+        });
+        ignoredFiles.forEach(f => Fs.unlinkSync(Path.join(libDir, f)));
+      }
+    },
+
     "build-lib:client": {
       desc: false,
       dep: [".clean.lib:client", ".mk.lib.client.dir", ".build.client.babelrc"],
-      task: mkCmd(
-        `babel`,
-        `--source-maps=inline --copy-files --out-dir ${AppMode.lib.client}`,
-        `${AppMode.src.client}`,
-        `--ignore`,
-        [
-          `"${AppMode.src.client}/**/*.spec.js"`,
-          `"${AppMode.src.client}/**/*.spec.jsx"`,
-          `"${AppMode.src.client}/**/*.test.js"`,
-          `"${AppMode.src.client}/**/*.test.jsx"`
-        ].join(",")
-      )
+      task: [
+        mkCmd(
+          `~$babel`,
+          `--extensions [.js,.jsx]`,
+          `--source-maps=inline --copy-files --out-dir ${AppMode.lib.client}`,
+          `${AppMode.src.client}`,
+          `--ignore`,
+          [`"**/*.spec.js"`, `"**/*.spec.jsx"`, `"**/*.test.js"`, `"**/*.test.jsx"`].join(",")
+        ),
+        ".build-lib:delete-babel-ignored-files"
+      ]
     },
 
     ".clean.lib:server": () => shell.rm("-rf", AppMode.lib.server),
@@ -502,18 +513,16 @@ Individual .babelrc files were generated for you in src/client and src/server
     "build-lib:server": {
       desc: false,
       dep: [".clean.lib:server", ".mk.lib.server.dir", ".build.server.babelrc"],
-      task: mkCmd(
-        `babel`,
-        `--source-maps=inline --copy-files --out-dir ${AppMode.lib.server}`,
-        `${AppMode.src.server}`,
-        `--ignore`,
-        [
-          `"${AppMode.src.client}/**/*.spec.js"`,
-          `"${AppMode.src.client}/**/*.spec.jsx"`,
-          `"${AppMode.src.client}/**/*.test.js"`,
-          `"${AppMode.src.client}/**/*.test.jsx"`
-        ].join(",")
-      )
+      task: [
+        mkCmd(
+          `~$babel`,
+          `--source-maps=inline --copy-files --out-dir ${AppMode.lib.server}`,
+          `${AppMode.src.server}`,
+          `--ignore`,
+          [`"**/*.spec.js"`, `"**/*.spec.jsx"`, `"**/*.test.js"`, `"**/*.test.jsx"`].join(",")
+        ),
+        ".build-lib:delete-babel-ignored-files"
+      ]
     },
 
     ".build.test.client.babelrc": () => {
