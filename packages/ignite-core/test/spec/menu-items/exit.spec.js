@@ -4,6 +4,7 @@ const exitItem = require("../../../lib/menu-items/exit");
 const expect = require("chai").expect;
 
 describe("menu-item exit", function() {
+  this.timeout(10000);
   it("should create menu item", () => {
     const mi = exitItem();
     expect(mi.emit).to.exist;

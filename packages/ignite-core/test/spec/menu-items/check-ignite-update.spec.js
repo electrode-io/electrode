@@ -9,9 +9,11 @@ const sinon = require("sinon");
 const _ = require("lodash");
 const Promise = require("bluebird");
 const chalk = require("chalk");
+const mockRequire = require("mock-require");
 chalk.enabled = false;
 
 describe("menu-item check-ignite-update", function() {
+  this.timeout(10000);
   let logs = [];
   let logStub;
   let spinnerStub;
@@ -28,13 +30,11 @@ describe("menu-item check-ignite-update", function() {
     spinnerStub.restore();
   });
 
-  const makeStubs = (name, globalVersion, latestVersion) => {
+  const makeStubs = (name, installedVersion, latestVersion) => {
     name = name || "electrode-ignite";
     const stubs = {};
-    stubs.globalInstalledStub = sinon.stub(checkModule, "globalInstalled").callsFake(n => {
-      expect(n).to.equal(name);
-      return globalVersion;
-    });
+    const pkgJsonFile = `${name}/package.json`;
+    mockRequire(pkgJsonFile, { version: installedVersion });
     stubs.latestOnceDailyStub = sinon.stub(checkModule, "latestOnceDaily").callsFake(n => {
       expect(n).to.equal(name);
       return latestVersion;
@@ -44,7 +44,8 @@ describe("menu-item check-ignite-update", function() {
       return latestVersion;
     });
     stubs.restore = () => {
-      stubs.globalInstalledStub.restore();
+      delete require.cache[pkgJsonFile];
+      mockRequire.stopAll;
       stubs.latestOnceDailyStub.restore();
       stubs.latestStub.restore();
     };
@@ -118,20 +119,19 @@ describe("menu-item check-ignite-update", function() {
   it("should do nothing if latest is not newer", done => {
     const stubs = makeStubs("test-module", "1.0.2", "1.0.1");
     const npmInstallStub = makeNpmInstallStub(true);
-    let event;
     logs = [];
     const mi = checkIgniteUpdate("test-module");
     mi.emit("post_show", {
-      menu: { emit: () => (event = true) }
+      menu: {
+        emit: event => {
+          stubs.restore();
+          npmInstallStub.restore();
+          expect(event).to.equal("no_op");
+          expect(logs).to.deep.equal([]);
+          done();
+        }
+      }
     });
-
-    setTimeout(() => {
-      stubs.restore();
-      npmInstallStub.restore();
-      expect(event).to.equal(undefined);
-      expect(logs).to.deep.equal([]);
-      done();
-    }, 30);
   });
 
   describe("execute", function() {
