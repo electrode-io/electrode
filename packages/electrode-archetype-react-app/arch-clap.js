@@ -313,17 +313,25 @@ function makeTasks() {
 
   const makeBabelRc = (destDir, rcFile) => {
     destDir = Path.resolve(destDir);
-    const fn = Path.join(destDir, ".babelrc");
-    if (Fs.existsSync(destDir) && !Fs.existsSync(fn)) {
+
+    if (!Fs.existsSync(destDir)) return;
+
+    const archRc = Path.join(archetype.devPkg.name, "config", "babel", rcFile);
+
+    const oldFn = Path.join(destDir, ".babelrc");
+    const fn = Path.join(destDir, ".babelrc.js");
+
+    if (Fs.existsSync(oldFn)) {
+      const rc = JSON.parse(Fs.readFileSync(oldFn));
+      rc.extends = archRc;
+      Fs.writeFileSync(oldFn, `${JSON.stringify(rc, null, 2)}\n`);
+      logger.info(`You have old ${oldFn} - please remove it to allow .babelrc.js.`);
+    } else if (!Fs.existsSync(fn)) {
       logger.info(`Generating ${fn} for you - please commit it.`);
-      const rc = JSON.stringify(
-        {
-          extends: `${Path.join(archetype.devPkg.name, "config", "babel", rcFile)}`
-        },
-        null,
-        2
-      );
-      Fs.writeFileSync(fn, `${rc}\n`);
+      const rc = `module.exports = {
+  extends: "${archRc}"
+};\n`;
+      Fs.writeFileSync(fn, rc);
     }
   };
 
@@ -345,7 +353,7 @@ function makeTasks() {
       desc: AppMode.isSrc
         ? `Build your app's ${AppMode.src.dir} directory into ${AppMode.lib.dir} for production`
         : "Build your app's client bundle",
-      task: ["build-dist", ".build-lib", ".check.top.level.babelrc"]
+      task: [".build-lib", "build-dist", ".check.top.level.babelrc"]
     },
 
     //
@@ -360,12 +368,10 @@ function makeTasks() {
         `--colors`
       );
     },
-    ".set.babel.env": () => {
+    ".set.css-module.env": () => {
       const x = archetype.webpack;
       if (x.cssModuleSupport && x.enableShortenCSSNames) {
-        process.env.BABEL_ENV =
-          process.env.NODE_ENV === "production" ? "css-module-prod" : "css-module-dev";
-        logger.info("BABEL_ENV set to", process.env.BABEL_ENV);
+        process.env.ENABLE_CSS_MODULE = "true";
       }
     },
     "build-browser-coverage": {
@@ -385,7 +391,7 @@ function makeTasks() {
 
     "build-dist": [
       ".production-env",
-      ".set.babel.env",
+      ".set.css-module.env",
       ".clean.build",
       "build-dist-dll",
       "build-dist-min",
@@ -464,7 +470,7 @@ Individual .babelrc files were generated for you in src/client and src/server
       );
     },
 
-    ".build.client.babelrc": () => makeBabelRc(AppMode.src.client, "babelrc-client"),
+    ".build.client.babelrc": () => makeBabelRc(AppMode.src.client, "babelrc-client.js"),
 
     "build-lib:client": {
       desc: false,
@@ -491,7 +497,7 @@ Individual .babelrc files were generated for you in src/client and src/server
       );
     },
 
-    ".build.server.babelrc": () => makeBabelRc(AppMode.src.server, "babelrc-server"),
+    ".build.server.babelrc": () => makeBabelRc(AppMode.src.server, "babelrc-server.js"),
 
     "build-lib:server": {
       desc: false,
@@ -511,11 +517,11 @@ Individual .babelrc files were generated for you in src/client and src/server
     },
 
     ".build.test.client.babelrc": () => {
-      return AppMode.isSrc && makeBabelRc("test/client", "babelrc-client");
+      return AppMode.isSrc && makeBabelRc("test/client", "babelrc-client.js");
     },
 
     ".build.test.server.babelrc": () => {
-      return AppMode.isSrc && makeBabelRc("test/server", "babelrc-server");
+      return AppMode.isSrc && makeBabelRc("test/server", "babelrc-server.js");
     },
 
     check: ["lint", "test-cov"],
@@ -541,7 +547,13 @@ Individual .babelrc files were generated for you in src/client and src/server
     devbrk: ["dev --inspect-brk"],
     dev: {
       desc: "Start your app with watch in development mode with webpack-dev-server",
-      dep: [".remove-log-files", ".development-env", ".mk-dist-dir"],
+      dep: [
+        ".remove-log-files",
+        ".development-env",
+        ".mk-dist-dir",
+        ".build.client.babelrc",
+        ".build.server.babelrc"
+      ],
       task: function() {
         if (!Fs.existsSync(".isomorphic-loader-config.json")) {
           Fs.writeFileSync(".isomorphic-loader-config.json", JSON.stringify({}));
@@ -549,7 +561,7 @@ Individual .babelrc files were generated for you in src/client and src/server
         const args = taskArgs(this.argv);
 
         return [
-          ".set.babel.env",
+          ".set.css-module.env",
           ".webpack-dev",
           [
             archetype.webpack.devMiddleware ? "" : "wds.dev",
