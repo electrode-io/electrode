@@ -1,8 +1,8 @@
 "use strict";
 
-/* eslint-disable */
+/* eslint-disable no-var */
 
-require("babel-polyfill");
+require("@babel/polyfill");
 
 /**
  * Test setup for client-side tests.
