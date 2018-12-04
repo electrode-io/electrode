@@ -82,7 +82,7 @@ function setDevelopmentEnv() {
 }
 
 function setKarmaCovEnv() {
-  process.env.BABEL_ENV = "karma-cov";
+  process.env.ENABLE_KARMA_COV = "true";
 }
 
 function setStaticFilesEnv() {

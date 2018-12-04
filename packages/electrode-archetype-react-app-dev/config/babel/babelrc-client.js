@@ -1,5 +1,11 @@
 "use strict";
 
+const requireAt = require("require-at");
+
+function getPluginFrom(host, pluginName) {
+  return requireAt(require.resolve(`${host}/package.json`)).resolve(pluginName);
+}
+
 const basePlugins = [
   "@babel/plugin-transform-template-literals",
   "@babel/plugin-transform-function-name",
@@ -47,6 +53,7 @@ const basePlugins = [
 const { BABEL_ENV, NODE_ENV } = process.env;
 
 const enableCssModule = process.env.ENABLE_CSS_MODULE === "true";
+const enableKarmaCov = process.env.ENABLE_KARMA_COV === "true";
 const isProduction = (BABEL_ENV || NODE_ENV) === "production";
 const isTest = (BABEL_ENV || NODE_ENV) === "test";
 
@@ -81,7 +88,8 @@ const plugins = basePlugins.concat(
         }
       }
     ]
-  ]
+  ],
+  enableKarmaCov && [getPluginFrom("electrode-archetype-opt-karma", "babel-plugin-istanbul")]
 );
 
 module.exports = {
