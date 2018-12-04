@@ -11,9 +11,8 @@ function makeConfig() {
   const coverageProfile = {
     partials: {
       _dev_mode: { order: 10000 },
-      _coverage: {
-        order: 10100
-      }
+      _coverage: { order: 10100 },
+      "_simple-progress": { order: 10300 }
     }
   };
 

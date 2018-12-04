@@ -1,7 +1,5 @@
 "use strict";
 
-var prodCfg = require("../webpack.config");
-
 /*
  * This prevents webpack from running its
  * parsers on any sinon files. Sinon breaks
@@ -11,20 +9,14 @@ var prodCfg = require("../webpack.config");
  * https://github.com/webpack/webpack/issues/304
  * https://github.com/sinonjs/sinon/pull/600#issuecomment-162529457
  */
-/*
- * Added fix for "clap check" on Windows
- */
-if (process.platform === "win32") {
-  prodCfg.module.noParse = [/node_modules\\sinon\\/];
-} else {
-  prodCfg.module.noParse = [/node_modules\/sinon\//];
-}
+
+// match paths that contain node_modules/sinon/ or node_modules\sinon\ (win32)
+const noParse = [/node_modules[\/\\]sinon[\/\\]/];
 
 module.exports = {
   cache: true,
   devtool: "source-map",
-  module: prodCfg.module,
-  plugins: prodCfg.plugins,
+  module: { noParse },
   externals: {
     jsdom: "window",
     cheerio: "window",

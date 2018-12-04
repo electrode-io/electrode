@@ -45,11 +45,11 @@ window.mocha.setup({
 // Use webpack to include all app code _except_ the entry point so we can get
 // code coverage in the bundle, whether tested or not.
 var srcReq = require.context("src", true, /\*\*\/(!(spec|test))*\.(jsx|js)?$/);
-srcReq.keys().map(srcReq);
+srcReq.keys().forEach(srcReq);
 
 // Use webpack to infer and `require` tests automatically.
 var testsReq = require.context("test/client", true, /\.spec.jsx?$/);
-testsReq.keys().map(testsReq);
+testsReq.keys().forEach(testsReq);
 
 // Only start mocha in browser.
 if (!window.__karma__) {

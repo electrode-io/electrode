@@ -10,7 +10,7 @@ module.exports = {
   resolve: {
     symlinks: !archetype.webpack.preserveSymlinks,
     plugins: [new ModuleResolver("module", "resolve", archetype.devDir, undefined)],
-    modules: [archetypeNodeModules, archetypeDevNodeModules, "node_modules", process.cwd()],
+    modules: [archetypeNodeModules, archetypeDevNodeModules, process.cwd(), "node_modules"],
     extensions: [".js", ".jsx"]
   }
 };
