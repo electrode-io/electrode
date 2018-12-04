@@ -217,6 +217,7 @@ class Middleware {
         const warning = stats.hasWarnings() ? chalk.yellow(" WARNINGS") : "";
         const notOk = Boolean(error || warning);
         const but = (notOk && chalk.yellow(" but has")) || "";
+        const showError = Boolean(error);
         console.log(`webpack bundle is now ${chalk.green("VALID")}${but}${error}${warning}`);
 
         this.webpackDev.valid = true;
@@ -232,11 +233,11 @@ class Middleware {
           }
 
           if (this.webpackDev.lastReporterOptions === undefined) {
-            this.returnReporter = notOk;
+            this.returnReporter = showError;
             openUrl(baseUrl());
           } else {
             // keep returning reporter until a first success compile
-            this.returnReporter = this.returnReporter ? notOk : false;
+            this.returnReporter = this.returnReporter ? showError : false;
           }
 
           if (!this.webpackDev.hasErrors) {
