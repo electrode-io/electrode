@@ -92,6 +92,22 @@ function lint(options) {
   return Promise.resolve(commands.filter(x => x));
 }
 
+const makeBabelRc = () => {
+  const archRc = Path.join(archetype.devPkg.name, "config", "babel", ".babelrc.js");
+
+  const fn = Path.resolve(".babelrc");
+  let rc = {};
+
+  if (Fs.existsSync(fn)) {
+    const rc = JSON.parse(Fs.readFileSync(fn));
+  }
+
+  if (rc.extends !== archRc) {
+    rc.extends = archRc;
+    Fs.writeFileSync(fn, `${JSON.stringify(rc, null, 2)}\n`);
+  }
+};
+
 /*
  *
  * For information on how to specify a task, see:
@@ -130,7 +146,7 @@ function makeTasks(hostDir) {
         "build-lib:clean-tmp"
       ]
     },
-    "babel-src-step": `babel -D src -d .tmplib`,
+    "babel-src-step": `~$babel -D src -d .tmplib`,
     "build-lib:clean-tmp": () => $$.rm("-rf", "./tmp"),
     "build-lib:copy-flow": copyAsFlowDeclaration,
     "build-lib:flatten-l10n": flattenMessagesL10n,
@@ -265,6 +281,7 @@ function makeTasks(hostDir) {
 
 module.exports = function(xclap) {
   setupPath();
+  makeBabelRc();
   xclap = xclap || requireAt(archetype.hostDir)("xclap") || devRequire("xclap");
   xclap.load("electrode", makeTasks(archetype.hostDir));
 };
