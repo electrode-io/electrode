@@ -1,5 +1,7 @@
 "use strict";
 
+process.env.KARMA_RUN_TYPE = "coverage";
+
 /*
  * Karma Configuration: "coverage" version.
  *

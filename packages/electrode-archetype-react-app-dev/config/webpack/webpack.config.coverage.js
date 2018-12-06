@@ -10,6 +10,7 @@ const Path = require("path");
 function makeConfig() {
   const coverageProfile = {
     partials: {
+      "_dev-mode": { order: 10000 },
       _coverage: { order: 10100 },
       "_sourcemaps-inline": { order: 10200 },
       "_simple-progress": { order: 10300 }
