@@ -1,22 +1,25 @@
 "use strict";
 
 const Path = require("path");
-
-const webpackCfg = require("../webpack/webpack.config.test");
+const loadUserConfig = require("./util/load-user-config");
+const browserSettings = require("./browser-settings");
+const loadElectrodeDll = require("./util/load-electrode-dll");
 
 const MAIN_PATH = require.resolve("./entry.js");
-
 const PREPROCESSORS = {};
-
-const loadUserConfig = require("./util/load-user-config");
-
-const browserSettings = require("./browser-settings");
 
 PREPROCESSORS[MAIN_PATH] = ["webpack", "sourcemap"];
 
-const loadElectrodeDll = require("./util/load-electrode-dll");
-
 const DLL_PATHS = loadElectrodeDll().map(x => require.resolve(x));
+
+function loadWebpackConfig() {
+  if (!process.env.KARMA_RUN_TYPE) {
+    process.env.KARMA_RUN_TYPE = "base";
+    return require("../webpack/webpack.config.test");
+  }
+
+  return {};
+}
 
 module.exports = function(config) {
   const settings = {
@@ -40,7 +43,7 @@ module.exports = function(config) {
       "karma-webpack"
     ],
     preprocessors: PREPROCESSORS,
-    webpack: webpackCfg,
+    webpack: loadWebpackConfig(),
     webpackServer: {
       port: 3002, // Choose a non-conflicting port (3000 app, 3001 test dev)
       quiet: false,
