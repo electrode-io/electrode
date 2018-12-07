@@ -489,12 +489,11 @@ Individual .babelrc files were generated for you in src/client and src/server
       dep: [".clean.lib:client", ".mk.lib.client.dir", ".build.client.babelrc"],
       task: [
         mkCmd(
-          `~$babel`,
-          `--extensions [.js,.jsx]`,
-          `--source-maps=inline --copy-files --out-dir ${AppMode.lib.client}`,
-          `${AppMode.src.client}`,
-          `--ignore`,
-          [`"**/*.spec.js"`, `"**/*.spec.jsx"`, `"**/*.test.js"`, `"**/*.test.jsx"`].join(",")
+          `~$babel ${AppMode.src.client} --out-dir=${AppMode.lib.client}`,
+          `--extensions=".js,.jsx"`,
+          `--source-maps=inline --copy-files`,
+          `--verbose --ignore=` +
+            [`"**/*.spec.js"`, `"**/*.spec.jsx"`, `"**/*.test.js"`, `"**/*.test.jsx"`].join(",")
         ),
         ".build-lib:delete-babel-ignored-files"
       ]
