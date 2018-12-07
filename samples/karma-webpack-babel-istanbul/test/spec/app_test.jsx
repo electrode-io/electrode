@@ -1,5 +1,5 @@
 import React from "react";
-import App from "../../src/client/app";
+import App from "client/app";
 import { renderToString } from "react-dom/server";
 
 describe("test app", function() {

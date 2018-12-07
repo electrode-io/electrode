@@ -1,4 +1,7 @@
+"use strict";
+
 const Path = require("path");
+const webpackConfig = require("./webpack.config");
 
 module.exports = function(config) {
   const settings = {
@@ -34,27 +37,7 @@ module.exports = function(config) {
       reporters: [{ type: "html" }, { type: "lcov" }, { type: "text" }, { type: "text-summary" }]
     },
 
-    webpack: {
-      mode: "development",
-      context: Path.resolve("src/client"),
-      // webpack configuration
-      module: {
-        rules: [
-          {
-            test: /\.jsx?$/,
-            use: [
-              {
-                loader: "babel-loader"
-              }
-            ]
-          }
-        ]
-      },
-      resolve: {
-        modules: ["src", process.cwd(), "node_modules"],
-        extensions: [".js", ".jsx", ".json"]
-      }
-    },
+    webpack: webpackConfig,
     plugins: [
       "karma-chrome-launcher",
       "karma-coverage",
