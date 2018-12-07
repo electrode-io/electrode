@@ -7,19 +7,11 @@ const Path = require("path");
 function makeConfig() {
   const productionProfile = {
     partials: {
-      "_prod_mode": { order: 10000 },
-      "_uglify": {
-        order: 10100
-      },
-      "_define": {
-        order: 10200
-      },
-      "_sourcemaps-remote": {
-        order: 10300
-      },
-      "_fail": {
-        order: 10400
-      }
+      _prod_mode: { order: 10000 },
+      _uglify: { order: 10100 },
+      _define: { order: 10200 },
+      "_sourcemaps-remote": { order: 10300 },
+      _fail: { order: 10400 }
     }
   };
 
@@ -33,6 +25,6 @@ function makeConfig() {
   };
 
   return generateConfig(options);
-};
+}
 
 module.exports = makeConfig();

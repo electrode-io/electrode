@@ -22,6 +22,7 @@ module.exports = {
   devDir,
   devPath: devDir,
   devRequire: require("../require"),
+  devPkg,
   webpack: xenvConfig(webpackConfigSpec, userConfig.webpack),
   jest: Object.assign({}, userConfig.jest)
 };

@@ -19,4 +19,4 @@ const messages = defineMessages({
   }
 });
 
-module.exports = Object.assign({}, messages, tenantMessages);
+export default Object.assign({}, messages, tenantMessages);

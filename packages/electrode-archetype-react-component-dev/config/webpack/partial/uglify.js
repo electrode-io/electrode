@@ -22,8 +22,6 @@ module.exports = function() {
       nodeEnv: "production",
       minimizer: [new UglifyJsPlugin(uglifyOpts)]
     },
-    plugins: [
-      new LodashModuleReplacementPlugin()
-    ]
+    plugins: [new LodashModuleReplacementPlugin()]
   };
 };

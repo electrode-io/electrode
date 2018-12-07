@@ -10,25 +10,26 @@ const orders = [
   "_resolve",
   "_resolve-loader",
   "_test-base",
-  "_test-entry",
   "_test-output",
   "_test-resolve",
-  "_test-resolve-loader",
   "_babel",
   "_extract-style",
   "_fonts",
   "_images",
   "_uglify",
   "_define",
+  "_simple-progress",
   "_sourcemaps-remote",
   "_sourcemaps-inline",
   "_fail",
   "_coverage",
   "_dev_mode",
-  "_prod_mode",
+  "_prod_mode"
 ];
 
-const files = Fs.readdirSync(__dirname).filter((x) => x !== "index.js").map((x) => x.substr(0, x.length - 3));
+const files = Fs.readdirSync(__dirname)
+  .filter(x => x !== "index.js")
+  .map(x => x.substr(0, x.length - 3));
 
 module.exports = {
   orders,

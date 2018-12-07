@@ -4,7 +4,7 @@ const Path = require("path");
 
 module.exports = {
   output: {
-    path: Path.join(process.cwd(), "dist"),
+    path: Path.resolve("dist"),
     filename: "bundle.min.js",
     libraryTarget: "umd"
   }
