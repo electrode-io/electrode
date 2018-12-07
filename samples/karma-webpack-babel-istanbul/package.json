@@ -18,9 +18,16 @@
     "@babel/core": "^7.1.6",
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
+    "autoprefixer": "^9.3.1",
     "babel-loader": "^8.0.4",
+    "css-loader": "^1.0.0",
     "electrode-archetype-opt-karma": "^1.0.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "mocha": "^5.2.0",
+    "postcss-import": "^9.1.0",
+    "postcss-loader": "^3.0.0",
+    "postcss-preset-env": "^5.3.0",
+    "style-loader": "^0.20.1",
     "webpack": "^4.26.0"
   },
   "fyn": {
