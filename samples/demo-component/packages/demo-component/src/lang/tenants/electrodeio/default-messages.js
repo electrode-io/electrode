@@ -10,4 +10,4 @@ const messages = defineMessages({
   }
 });
 
-module.exports = messages;
+export default messages;
