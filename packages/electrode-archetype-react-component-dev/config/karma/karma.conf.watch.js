@@ -5,7 +5,7 @@
  *
  * This configuration allows live updates of code changes.
  */
-var baseConf = require("./karma.conf.dev");
+const baseConf = require("./karma.conf.dev");
 
 module.exports = function(config) {
   baseConf(config);

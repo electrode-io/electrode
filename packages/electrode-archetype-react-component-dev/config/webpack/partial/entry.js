@@ -3,5 +3,5 @@
 const Path = require("path");
 
 module.exports = {
-  entry: Path.join(process.cwd(), "src")
+  context: Path.resolve()
 };
