@@ -29,7 +29,9 @@ function appEntry() {
       )
   });
 
-  return entry || (Fs.existsSync(Path.join(context, "app.js")) ? "./app.js" : "./app.jsx");
+  const entries = ["./app.js", "./app.jsx", "./app.tsx"];
+
+  return entry || entries.find(f => Fs.existsSync(Path.join(context, f))) || "./app.jsx";
 }
 
 module.exports = {

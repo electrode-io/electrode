@@ -32,6 +32,6 @@ module.exports = {
     ]
       .concat(archetype.webpack.modulesDirectories)
       .filter(identity),
-    extensions: [".js", ".jsx", ".json"]
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".json"]
   }
 };
