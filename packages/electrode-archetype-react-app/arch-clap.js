@@ -476,7 +476,7 @@ Individual .babelrc files were generated for you in src/client and src/server
       desc: false,
       task: () => {
         const libDir = Path.resolve(AppMode.lib.client);
-        const ignoredFiles = glob.sync(`{*.spec.*,*.test.*}`, {
+        const ignoredFiles = glob.sync("{*.spec.*,*.test.*}", {
           cwd: libDir,
           matchBase: true
         });
@@ -490,7 +490,13 @@ Individual .babelrc files were generated for you in src/client and src/server
       task: [
         mkCmd(
           `~$babel ${AppMode.src.client} --out-dir=${AppMode.lib.client}`,
-          `--extensions=".js,.jsx"`,
+          `--extensions=` +
+            quote(
+              [".js", ".jsx"]
+                .concat(archetype.babelTypeScript && [".ts", ".tsx"])
+                .filter(x => x)
+                .join(",")
+            ),
           `--source-maps=inline --copy-files`,
           `--verbose --ignore=` +
             [`"**/*.spec.js"`, `"**/*.spec.jsx"`, `"**/*.test.js"`, `"**/*.test.jsx"`].join(",")

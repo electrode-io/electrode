@@ -8,6 +8,7 @@ const profile = {
     _resolve: { order: 400 },
     "_resolve-loader": { order: 500 },
     //
+    _typescript: { order: 1990 },
     _babel: { order: 2000 },
     "_extract-style": { order: 2100 },
     _fonts: { order: 2200 },

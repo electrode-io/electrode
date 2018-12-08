@@ -34,7 +34,11 @@ try {
         x = Path.normalize(x);
         return x.startsWith(cwd) && !x.startsWith(cwdNM);
       }
-    ]
+    ],
+    extensions: [".js", ".jsx"]
+      .concat(archetype.babel.enableTypeScript && [".ts", ".tsx"])
+      .filter(x => x),
+    cache: true
   });
   const fullServerDir = Path.resolve(serverDir);
   start = require(fullServerDir);
