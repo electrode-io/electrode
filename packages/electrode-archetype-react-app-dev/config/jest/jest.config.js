@@ -10,9 +10,8 @@ const archetype = require("electrode-archetype-react-app/config/archetype");
 const { enableTypeScript } = archetype.babel;
 
 // https://jestjs.io/docs/en/configuration.html#testregex-string
-const testRegex = enableTypeScript
-  ? `(/_?_tests?_?_/.*|(\\.|\/)(test|spec))\\.[jt]sx?$`
-  : undefined;
+const scrTypes = enableTypeScript ? "jt" : "j";
+const testRegex = `(/_?_tests?_?_/.*|(\\.|\/)(test|spec))\\.[${scrTypes}]sx?$`;
 
 const rootDir = process.cwd();
 
@@ -27,6 +26,7 @@ const jestDefaultConfig = {
       }
     : undefined,
   testRegex,
+  testPathIgnorePatterns: ["/node_modules/", "\\.babelrc.*"],
   moduleDirectories: ["node_modules", "src"],
   moduleNameMapper: {
     "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": fileMock,
