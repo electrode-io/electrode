@@ -44,8 +44,9 @@
   - [Unit Tests](/chapter1/intermediate/component-archetype/unit-tests.md)
 - DLL Archetype
   - [About](chapter1/intermediate/dll-archetype/README.md)
-- Using Flow
-  - [Setup and configuration](/chapter1/intermediate/flow.md)
+- Flow and TypeScript
+  - [About](chapter1/intermediate/languages/README.md)
+  - [Working with Flow](/chapter1/intermediate/flow.md)
   - [Flow FAQ](/chapter1/intermediate/flow-faq.md)
 
 ### Guides
