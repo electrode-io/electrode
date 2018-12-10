@@ -52,6 +52,15 @@ const karmaConfigSpec = {
   browser: { env: "KARMA_BROWSER", default: "chrome" }
 };
 
+const babelConfigSpec = {
+  enableTypeScript: { env: "ENABLE_BABEL_TYPESCRIPT", default: false },
+  enableFlow: { env: "ENABLE_BABEL_FLOW", default: true },
+  // require the @flow directive in source to enable FlowJS type stripping
+  flowRequireDirective: { env: "FLOW_REQUIRE_DIRECTIVE", default: false },
+  transformClassProps: { env: "BABEL_CLASS_PROPS", default: false },
+  looseClassProps: { env: "BABEL_CLASS_PROPS_LOOSE", default: true }
+};
+
 const topConfigSpec = {
   devOpenBrowser: { env: "ELECTRODE_DEV_OPEN_BROWSER", default: false }
 };
@@ -63,6 +72,7 @@ const config = {
   webpack: xenvConfig(webpackConfigSpec, userConfig.webpack, { merge }),
   karma: xenvConfig(karmaConfigSpec, userConfig.karma, { merge }),
   jest: Object.assign({}, userConfig.jest),
+  babel: xenvConfig(babelConfigSpec, userConfig.babel, { merge }),
   config: Object.assign(
     {},
     {

@@ -1,7 +1,19 @@
 "use strict";
 
 const requireAt = require("require-at");
+const archetype = require("../archetype");
 
+const {
+  enableTypeScript,
+  flowRequireDirective,
+  enableFlow,
+  transformClassProps,
+  looseClassProps
+} = archetype.babel;
+
+//
+// Resolve full path of a plugin that's the dependency of host npm package
+//
 function getPluginFrom(host, pluginName) {
   return requireAt(require.resolve(`${host}/package.json`)).resolve(pluginName);
 }
@@ -11,6 +23,15 @@ const basePlugins = [
   "@babel/plugin-transform-function-name",
   "@babel/plugin-transform-arrow-functions",
   "@babel/plugin-transform-block-scoped-functions",
+  //
+  // allow class properties. loose option compile to assignment expression instead
+  // of Object.defineProperty.
+  // Note: This must go before @babel/plugin-transform-classes
+  //
+  (enableTypeScript || transformClassProps) && [
+    "@babel/plugin-proposal-class-properties",
+    { loose: looseClassProps }
+  ],
   "@babel/plugin-transform-classes",
   "@babel/plugin-transform-object-super",
   "@babel/plugin-transform-shorthand-properties",
@@ -47,7 +68,10 @@ const basePlugins = [
   "transform-node-env-inline",
   "babel-plugin-lodash",
   "@babel/plugin-transform-runtime",
-  "@babel/plugin-transform-flow-strip-types"
+  enableFlow && [
+    "@babel/plugin-transform-flow-strip-types",
+    { requireDirective: flowRequireDirective }
+  ]
 ];
 
 const { BABEL_ENV, NODE_ENV } = process.env;
@@ -92,7 +116,13 @@ const plugins = basePlugins.concat(
   enableKarmaCov && [getPluginFrom("electrode-archetype-opt-karma", "babel-plugin-istanbul")]
 );
 
+const presets = [
+  ["@babel/preset-env", { loose: true }],
+  enableTypeScript && "@babel/preset-typescript",
+  "@babel/preset-react"
+];
+
 module.exports = {
-  presets: [["@babel/preset-env", { loose: true }], "@babel/preset-react", "@babel/preset-flow"],
+  presets: presets.filter(x => x),
   plugins: plugins.filter(x => x)
 };

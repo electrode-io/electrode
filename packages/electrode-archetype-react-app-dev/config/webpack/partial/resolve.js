@@ -16,6 +16,8 @@ function infernoReactAlias() {
     : {};
 }
 
+const { enableTypeScript } = archetype.babel;
+
 module.exports = {
   resolve: {
     alias: infernoReactAlias(),
@@ -32,6 +34,6 @@ module.exports = {
     ]
       .concat(archetype.webpack.modulesDirectories)
       .filter(identity),
-    extensions: [".js", ".jsx", ".json"]
+    extensions: [".js", ".jsx", ".json"].concat(enableTypeScript && [".ts", ".tsx"]).filter(x => x)
   }
 };

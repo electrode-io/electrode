@@ -5,6 +5,7 @@ const AppMode = archetype.AppMode;
 const Path = require("path");
 const identity = require("lodash/identity");
 const assign = require("lodash/assign");
+const babelLoader = require.resolve("babel-loader");
 
 module.exports = function(options) {
   const clientVendor = Path.join(AppMode.src.client, "vendor/");
@@ -14,13 +15,15 @@ module.exports = function(options) {
     return false;
   };
 
-  const babelLoader = {
+  const test = archetype.babel.enableTypeScript ? /\.[tj]sx?$/ : /\.jsx?$/;
+
+  const babelLoaderConfig = {
     _name: "babel",
-    test: /\.jsx?$/,
+    test,
     exclude: babelExclude,
     use: [
       {
-        loader: "babel-loader",
+        loader: babelLoader,
         options: Object.assign(
           { cacheDirectory: Path.resolve(".etmp/babel-loader") },
           options.babel
@@ -31,7 +34,7 @@ module.exports = function(options) {
 
   return {
     module: {
-      rules: [assign({}, babelLoader, archetype.webpack.extendBabelLoader)]
+      rules: [assign({}, babelLoaderConfig, archetype.webpack.extendBabelLoader)]
     }
   };
 };
