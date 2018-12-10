@@ -95,6 +95,20 @@
    '@babel/helper-hoist-variables': ^7.0.0
    '@babel/traverse': ^7.1.0
    '@babel/types': ^7.0.0
+'@babel/helper-create-class-features-plugin':
+ _:
+  ^7.2.1: 7.2.1
+ 7.2.1:
+  $: sha512-EsEP7XLFmcJHjcuFYBxYD1FkP0irC8C9fsrt2tX/jrAi/eTnFI6DOPgVFb+WREeg1GboF+Ib+nCHbGBodyAXSg==
+  _: 'https://registry.npmjs.org/@babel/helper-create-class-features-plugin/-/helper-create-class-features-plugin-7.2.1.tgz'
+  dependencies:
+   '@babel/helper-function-name': ^7.1.0
+   '@babel/helper-member-expression-to-functions': ^7.0.0
+   '@babel/helper-optimise-call-expression': ^7.0.0
+   '@babel/helper-plugin-utils': ^7.0.0
+   '@babel/helper-replace-supers': ^7.1.0
+  peerDependencies:
+   '@babel/core': ^7.0.0
 '@babel/helper-define-map':
  _:
   ^7.1.0: 7.1.0
@@ -280,6 +294,17 @@
    '@babel/plugin-syntax-async-generators': ^7.0.0
   peerDependencies:
    '@babel/core': ^7.0.0-0
+'@babel/plugin-proposal-class-properties':
+ _:
+  ^7.2.1: 7.2.1
+ 7.2.1:
+  $: sha512-/4FKFChkQ2Jgb8lBDsvFX496YTi7UWTetVgS8oJUpX1e/DlaoeEK57At27ug8Hu2zI2g8bzkJ+8k9qrHZRPGPA==
+  _: 'https://registry.npmjs.org/@babel/plugin-proposal-class-properties/-/plugin-proposal-class-properties-7.2.1.tgz'
+  dependencies:
+   '@babel/helper-create-class-features-plugin': ^7.2.1
+   '@babel/helper-plugin-utils': ^7.0.0
+  peerDependencies:
+   '@babel/core': ^7.0.0-0
 '@babel/plugin-proposal-json-strings':
  _:
   ^7.0.0: 7.0.0
@@ -337,10 +362,10 @@
    '@babel/core': ^7.0.0-0
 '@babel/plugin-syntax-flow':
  _:
-  ^7.0.0: 7.0.0
- 7.0.0:
-  $: sha512-zGcuZWiWWDa5qTZ6iAnpG0fnX/GOu49pGR5PFvkQ9GmKNaSphXQnlNXh/LG20sqWtNrx/eB6krzfEzcwvUyeFA==
-  _: 'https://registry.npmjs.org/@babel/plugin-syntax-flow/-/plugin-syntax-flow-7.0.0.tgz'
+  ^7.2.0: 7.2.0
+ 7.2.0:
+  $: sha512-r6YMuZDWLtLlu0kqIim5o/3TNRAlWb073HwT3e2nKf9I8IIvOggPrnILYPsrrKilmn/mYEMCf/Z07w3yQJF6dg==
+  _: 'https://registry.npmjs.org/@babel/plugin-syntax-flow/-/plugin-syntax-flow-7.2.0.tgz'
   dependencies:
    '@babel/helper-plugin-utils': ^7.0.0
   peerDependencies:
@@ -381,6 +406,16 @@
  7.0.0:
   $: sha512-Wc+HVvwjcq5qBg1w5RG9o9RVzmCaAg/Vp0erHCKpAYV8La6I94o4GQAmFYNmkzoMO6gzoOSulpKeSSz6mPEoZw==
   _: 'https://registry.npmjs.org/@babel/plugin-syntax-optional-catch-binding/-/plugin-syntax-optional-catch-binding-7.0.0.tgz'
+  dependencies:
+   '@babel/helper-plugin-utils': ^7.0.0
+  peerDependencies:
+   '@babel/core': ^7.0.0-0
+'@babel/plugin-syntax-typescript':
+ _:
+  ^7.0.0: 7.1.5
+ 7.1.5:
+  $: sha512-VqK5DFcS6/T8mT5CcJv1BwZLYFxkHiGZmP7Hs87F53lSToE/qfL7TpPrqFSaKyZi9w7Z/b/tmOGZZDupcJjFvw==
+  _: 'https://registry.npmjs.org/@babel/plugin-syntax-typescript/-/plugin-syntax-typescript-7.1.5.tgz'
   dependencies:
    '@babel/helper-plugin-utils': ^7.0.0
   peerDependencies:
@@ -500,13 +535,13 @@
    '@babel/core': ^7.0.0-0
 '@babel/plugin-transform-flow-strip-types':
  _:
-  ^7.0.0: 7.1.6
- 7.1.6:
-  $: sha512-0tyFAAjJmnRlr8MVJV39ASn1hv+PbdVP71hf7aAseqLfQ0o9QXk9htbMbq7/ZYXnUIp6gDw0lUUP0+PQMbbtmg==
-  _: 'https://registry.npmjs.org/@babel/plugin-transform-flow-strip-types/-/plugin-transform-flow-strip-types-7.1.6.tgz'
+  ^7.2.0: 7.2.0
+ 7.2.0:
+  $: sha512-xhQp0lyXA5vk8z1kJitdMozQYEWfo4MgC6neNXrb5euqHiTIGhj5ZWfFPkVESInQSk9WZz1bbNmIRz6zKfWGVA==
+  _: 'https://registry.npmjs.org/@babel/plugin-transform-flow-strip-types/-/plugin-transform-flow-strip-types-7.2.0.tgz'
   dependencies:
    '@babel/helper-plugin-utils': ^7.0.0
-   '@babel/plugin-syntax-flow': ^7.0.0
+   '@babel/plugin-syntax-flow': ^7.2.0
   peerDependencies:
    '@babel/core': ^7.0.0-0
 '@babel/plugin-transform-for-of':
@@ -759,6 +794,17 @@
    '@babel/helper-plugin-utils': ^7.0.0
   peerDependencies:
    '@babel/core': ^7.0.0-0
+'@babel/plugin-transform-typescript':
+ _:
+  ^7.1.0: 7.1.0
+ 7.1.0:
+  $: sha512-TOTtVeT+fekAesiCHnPz+PSkYSdOSLyLn42DI45nxg6iCdlQY6LIj/tYqpMB0y+YicoTUiYiXqF8rG6SKfhw6Q==
+  _: 'https://registry.npmjs.org/@babel/plugin-transform-typescript/-/plugin-transform-typescript-7.1.0.tgz'
+  dependencies:
+   '@babel/helper-plugin-utils': ^7.0.0
+   '@babel/plugin-syntax-typescript': ^7.0.0
+  peerDependencies:
+   '@babel/core': ^7.0.0-0
 '@babel/plugin-transform-unicode-regex':
  _:
   ^7.0.0: 7.0.0
@@ -830,17 +876,6 @@
    semver: ^5.3.0
   peerDependencies:
    '@babel/core': ^7.0.0-0
-'@babel/preset-flow':
- _:
-  ^7.0.0: 7.0.0
- 7.0.0:
-  $: sha512-bJOHrYOPqJZCkPVbG1Lot2r5OSsB+iUOaxiHdlOeB1yPWS6evswVHwvkDLZ54WTaTRIk89ds0iHmGZSnxlPejQ==
-  _: 'https://registry.npmjs.org/@babel/preset-flow/-/preset-flow-7.0.0.tgz'
-  dependencies:
-   '@babel/helper-plugin-utils': ^7.0.0
-   '@babel/plugin-transform-flow-strip-types': ^7.0.0
-  peerDependencies:
-   '@babel/core': ^7.0.0-0
 '@babel/preset-react':
  _:
   ^7.0.0: 7.0.0
@@ -853,6 +888,17 @@
    '@babel/plugin-transform-react-jsx': ^7.0.0
    '@babel/plugin-transform-react-jsx-self': ^7.0.0
    '@babel/plugin-transform-react-jsx-source': ^7.0.0
+  peerDependencies:
+   '@babel/core': ^7.0.0-0
+'@babel/preset-typescript':
+ _:
+  ^7.1.0: 7.1.0
+ 7.1.0:
+  $: sha512-LYveByuF9AOM8WrsNne5+N79k1YxjNB6gmpCQsnuSBAcV8QUeB+ZUxQzL7Rz7HksPbahymKkq2qBR+o36ggFZA==
+  _: 'https://registry.npmjs.org/@babel/preset-typescript/-/preset-typescript-7.1.0.tgz'
+  dependencies:
+   '@babel/helper-plugin-utils': ^7.0.0
+   '@babel/plugin-transform-typescript': ^7.1.0
   peerDependencies:
    '@babel/core': ^7.0.0-0
 '@babel/register':
@@ -959,6 +1005,20 @@
   _: 'https://registry.npmjs.org/@sinonjs/samsam/-/samsam-2.1.0.tgz'
   dependencies:
    array-from: ^2.1.1
+'@types/jest':
+ _:
+  ^23.3.10: 23.3.10
+ 23.3.10:
+  top: 1
+  $: sha512-DC8xTuW/6TYgvEg3HEXS7cu9OijFqprVDXXiOcdOKZCU/5PJNLZU37VVvmZHdtMiGOa8wAA/We+JzbdxFzQTRQ==
+  _: 'https://registry.npmjs.org/@types/jest/-/jest-23.3.10.tgz'
+'@types/mocha':
+ _:
+  ^5.2.5: 5.2.5
+ 5.2.5:
+  top: 1
+  $: sha512-lAVp+Kj54ui/vLUFxsJTMtWvZraZxum3w3Nwkble2dNuV5VnPA+Mi2oGX9XYJAaIvZi3tn3cbjS/qcJXRb6Bww==
+  _: 'https://registry.npmjs.org/@types/mocha/-/mocha-5.2.5.tgz'
 '@types/node':
  _:
   '*': 10.12.11
@@ -4193,8 +4253,8 @@ electrode-archetype-opt-inferno:
    inferno-compat: ^3.0.0
 electrode-archetype-opt-karma:
  _:
-  ../electrode-archetype-opt-karma: 1.0.4-fynlocal_h
- 1.0.4-fynlocal_h:
+  ../electrode-archetype-opt-karma: 1.0.4-babel7-beta.0-fynlocal_h
+ 1.0.4-babel7-beta.0-fynlocal_h:
   hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-karma
@@ -4254,8 +4314,8 @@ electrode-archetype-opt-sass:
    sass-loader: ^6.0.6
 electrode-archetype-react-app:
  _:
-  ../../packages/electrode-archetype-react-app: 6.0.6-fynlocal_h
- 6.0.6-fynlocal_h:
+  ../../packages/electrode-archetype-react-app: 6.0.6-babel7-beta.0-fynlocal_h
+ 6.0.6-babel7-beta.0-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app
@@ -4268,22 +4328,24 @@ electrode-archetype-react-app:
    electrode-archetype-opt-react: ^1.0.2
 electrode-archetype-react-app-dev:
  _:
-  ../../packages/electrode-archetype-react-app-dev: 6.0.6-fynlocal_h
- 6.0.6-fynlocal_h:
+  ../../packages/electrode-archetype-react-app-dev: 6.0.6-babel7-beta.0-fynlocal_h
+ 6.0.6-babel7-beta.0-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app-dev
   dependencies:
    '@babel/cli': ^7.1.5
    '@babel/core': ^7.1.6
+   '@babel/plugin-proposal-class-properties': ^7.2.1
    '@babel/plugin-proposal-object-rest-spread': ^7.0.0
+   '@babel/plugin-transform-flow-strip-types': ^7.2.0
    '@babel/plugin-transform-react-constant-elements': ^7.0.0
    '@babel/plugin-transform-react-inline-elements': ^7.0.0
    '@babel/plugin-transform-runtime': ^7.1.0
    '@babel/polyfill': ^7.0.0
    '@babel/preset-env': ^7.1.6
-   '@babel/preset-flow': ^7.0.0
    '@babel/preset-react': ^7.0.0
+   '@babel/preset-typescript': ^7.1.0
    '@babel/register': ^7.0.0
    '@babel/runtime': ^7.1.5
    ansi-to-html: ^0.6.8
@@ -4361,6 +4423,7 @@ electrode-archetype-react-app-dev:
    stylus: ^0.54.5
    stylus-relative-loader: ^3.4.0
    sugarss: ^1.0.1
+   typescript: ^3.2.1
    uglify-es: ^3.3.9
    uglifyjs-webpack-plugin: ^2.0.1
    url-loader: ^0.6.2
@@ -4378,7 +4441,7 @@ electrode-archetype-react-app-dev:
    xsh: ^0.4.2
   optionalDependencies:
    electrode-archetype-opt-inferno: ^0.2.4
-   electrode-archetype-opt-karma: ^1.0.4
+   electrode-archetype-opt-karma: ^1.0.4-babel7-beta.0
    electrode-archetype-opt-pwa: ^1.0.1
    electrode-archetype-opt-react: ^1.0.2
    electrode-archetype-opt-sass: ^1.0.3
@@ -13762,6 +13825,12 @@ typedarray:
  0.0.6:
   $: sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
   _: 'https://registry.npmjs.org/typedarray/-/typedarray-0.0.6.tgz'
+typescript:
+ _:
+  ^3.2.1: 3.2.1
+ 3.2.1:
+  $: sha512-jw7P2z/h6aPT4AENXDGjcfHTu5CSqzsbZc6YlUIebTyBAq8XaKp78x7VcSh30xwSCcsu5irZkYZUSFP1MrAMbg==
+  _: 'https://registry.npmjs.org/typescript/-/typescript-3.2.1.tgz'
 uglify-es:
  _:
   ^3.3.9: 3.3.10

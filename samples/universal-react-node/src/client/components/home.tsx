@@ -1,31 +1,15 @@
-// @flow
-
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import electrodeLogo from "../images/electrode.svg";
 import Notifications from "react-notify-toast";
 
-type WrapperProps = {
+type HomeProps = {
   data: string
-};
-
-type Props = {
-  data: string
-};
-
-class HomeWrapper extends Component<WrapperProps> {
-  render() {
-    return <Home data={this.props.data} />;
-  }
-}
-
-HomeWrapper.propTypes = {
-  data: PropTypes.string
 };
 
 /* eslint-disable max-len */
-export class Home extends Component<Props> {
+export class Home extends Component<HomeProps> {
+  props: HomeProps;
   render() {
     const data = { logo: "Electrode Logo", electrodeLogo };
 
@@ -88,12 +72,15 @@ export class Home extends Component<Props> {
   }
 }
 
-Home.propTypes = {
-  data: PropTypes.string
-};
-
 const mapStateToProps = state => ({
   data: state && state.data
 });
+
+class HomeWrapper extends Component<HomeProps> {
+  props: HomeProps;
+  render() {
+    return <Home data={this.props.data} />;
+  }
+}
 
 export default connect(mapStateToProps)(HomeWrapper);
