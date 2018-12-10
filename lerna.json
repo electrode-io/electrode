@@ -9,7 +9,7 @@
     "publishConfig": {
       "tags": {
         "babel7-beta": {
-          "enabled": true,
+          "enabled": false,
           "packages": {
             "electrode-archetype-react-app": true,
             "electrode-archetype-react-app-dev": true,
