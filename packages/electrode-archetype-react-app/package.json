@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-app",
-  "version": "6.0.6-babel7-beta.0",
+  "version": "6.1.0",
   "description": "Electrode NodeJS/React Universal Application Archetype",
   "main": "arch-clap.js",
   "homepage": "http://www.electrode.io",
@@ -62,8 +62,5 @@
       "electrode-archetype-opt-inferno": "../electrode-archetype-opt-inferno",
       "electrode-archetype-opt-react": "../electrode-archetype-opt-react"
     }
-  },
-  "publishConfig": {
-    "tag": "babel7-beta"
   }
 }
