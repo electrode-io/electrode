@@ -53,7 +53,7 @@ const karmaConfigSpec = {
 };
 
 const babelConfigSpec = {
-  enableTypeScript: { env: "ENABLE_BABEL_TYPESCRIPT", default: true },
+  enableTypeScript: { env: "ENABLE_BABEL_TYPESCRIPT", default: false },
   enableFlow: { env: "ENABLE_BABEL_FLOW", default: true },
   // require the @flow directive in source to enable FlowJS type stripping
   flowRequireDirective: { env: "FLOW_REQUIRE_DIRECTIVE", default: false },
