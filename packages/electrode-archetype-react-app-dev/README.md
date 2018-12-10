@@ -4,6 +4,8 @@
 
 A Walmart Labs flavored react app archetype.
 
+---
+
 [npm-image]: https://badge.fury.io/js/electrode-archetype-react-app-dev.svg
 [npm-url]: https://npmjs.org/package/electrode-archetype-react-app-dev
 [daviddm-image]: https://david-dm.org/electrode-io/electrode/status.svg?path=packages/electrode-archetype-react-app-dev

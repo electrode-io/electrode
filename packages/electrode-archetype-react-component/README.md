@@ -58,6 +58,8 @@ $ clap archetype:check
 
 Built with :heart: by [Team Electrode](https://github.com/orgs/electrode-io/people) @WalmartLabs.
 
+---
+
 [npm-image]: https://badge.fury.io/js/electrode-archetype-react-component.svg
 
 [npm-url]: https://npmjs.org/package/electrode-archetype-react-component
