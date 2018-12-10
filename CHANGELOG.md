@@ -1,3 +1,77 @@
+# 12/10/2018
+
+- `electrode-archetype-react-app`, `electrode-archetype-react-component`, `6.1.0`
+  - Update to babel 7 and add support for typescript
+  - Update Karma dependencies to align with webpack4
+  - Minor bug fixes
+
+TAG: rel-121018
+
+## Packages
+
+### Directly Updated
+
+-   `electrode-archetype-react-app@6.1.0` `(6.0.6-babel7-beta.0 => 6.1.0)`
+-   `electrode-archetype-react-app-dev@6.1.0` `(6.0.6-babel7-beta.0 => 6.1.0)`
+-   `electrode-archetype-react-component@6.1.0` `(6.0.2 => 6.1.0)`
+-   `electrode-archetype-react-component-dev@6.1.0` `(6.0.2 => 6.1.0)`
+-   `electrode-ignite@3.0.3` `(3.0.2 => 3.0.3)`
+-   `ignite-core@1.1.7` `(1.1.6 => 1.1.7)`
+
+### Lerna Updated
+
+-   `electrode-archetype-opt-karma@1.0.6` `(1.0.4-babel7-beta.0 => 1.0.6)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   support for typescript with babel ([#1100](https://github.com/electrode-io/electrode/pull/1100)) [commit](http://github.com/electrode-io/electrode/commit/ca9dfb5f85cb2fb974a4fc9106b29c24cb623a33)
+    -   fix babel compile command ([#1098](https://github.com/electrode-io/electrode/pull/1098)) [commit](http://github.com/electrode-io/electrode/commit/b0e9a00228c5620684ec8b302613c446ef5711ce)
+    -   ensure karma only load webpack config once ([#1093](https://github.com/electrode-io/electrode/pull/1093)) [commit](http://github.com/electrode-io/electrode/commit/209456ac77ca1531a4ffe70f9ab8e0c7a417fa2e)
+    -   update karma test babel polyfill ([#1092](https://github.com/electrode-io/electrode/pull/1092)) [commit](http://github.com/electrode-io/electrode/commit/413e23d27125350fba5fa91d96f39c87c112d2ca)
+    -   [patch][bug] webpack reporter should not render when no errors ([#1088](https://github.com/electrode-io/electrode/pull/1088)) [commit](http://github.com/electrode-io/electrode/commit/b753b850f8b9c0c4a15f8299a16543ff51dcee2c)
+    -   add babel-plugin-istanbul for karma cov test ([#1090](https://github.com/electrode-io/electrode/pull/1090)) [commit](http://github.com/electrode-io/electrode/commit/c630a824e6824fb9007d72178f1cbcda6771fa80)
+    -   clean extra files copied by babel for prod build ([#1089](https://github.com/electrode-io/electrode/pull/1089)) [commit](http://github.com/electrode-io/electrode/commit/ccb0806f2eaff6d68f2d570f89f97fc892ee967a)
+    -   switch to .babelrc.js ([#1085](https://github.com/electrode-io/electrode/pull/1085)) [commit](http://github.com/electrode-io/electrode/commit/847535b95772c233eee24dad91f8963b8d3e0904)
+    -   remove concatenateModules ([#1081](https://github.com/electrode-io/electrode/pull/1081)) [commit](http://github.com/electrode-io/electrode/commit/86b2922c3f44589b4e5b5cbfd8b1dd46a21fdf47)
+    -   [minor] mark for minor babel-7 release [commit](http://github.com/electrode-io/electrode/commit/031a804b899b994e63ec944fbfb30a1ccc405156)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   [ver6 release] babel7 update ([#1095](https://github.com/electrode-io/electrode/pull/1095)) [commit](http://github.com/electrode-io/electrode/commit/0e28dc4326a86497dca119b7867743b74309a5b1)
+    -   babel-plugin-transform-react-remove-prop-types ([#1082](https://github.com/electrode-io/electrode/pull/1082)) [commit](http://github.com/electrode-io/electrode/commit/93ed45486b730d5f659ef83b09756ebe600f8169)
+    -   [minor] mark for minor babel-7 release [commit](http://github.com/electrode-io/electrode/commit/031a804b899b994e63ec944fbfb30a1ccc405156)
+
+-   `packages/electrode-ignite`
+
+    -   search for yo command ([#1083](https://github.com/electrode-io/electrode/pull/1083)) [commit](http://github.com/electrode-io/electrode/commit/7f41a6d2a68af62b5b18387d8de7a9125fcf3b46)
+
+-   `packages/ignite-core`
+
+    -   check self version with require instead of looking up global ([#1084](https://github.com/electrode-io/electrode/pull/1084)) [commit](http://github.com/electrode-io/electrode/commit/feaca9fdb5874aac33f0e4bf1e4c359157e1ebe2)
+
+-   `samples/demo-component`
+
+    -   fix sample demo component lang file exports ([#1094](https://github.com/electrode-io/electrode/pull/1094)) [commit](http://github.com/electrode-io/electrode/commit/351e882ed7b5fcb41825347e39ba87db9ff02433)
+
+-   `samples/karma-webpack-babel-istanbul`
+
+    -   add css to karma sample ([#1097](https://github.com/electrode-io/electrode/pull/1097)) [commit](http://github.com/electrode-io/electrode/commit/e2fd9d485feb6a453c861dfb2fba438ad6c8164c)
+
+-   `samples/universal-react-node`
+
+    -   update sample with typescript [commit](http://github.com/electrode-io/electrode/commit/eb079f9813a3dbe5026c56684bd0d595e9569442)
+
+-   `docs`
+
+    -   add doc about typescript and flow ([#1102](https://github.com/electrode-io/electrode/pull/1102)) [commit](http://github.com/electrode-io/electrode/commit/18d4b12bb2281a9a078358551898e8130e2d2718)
+
+-   `MISC`
+
+    -   turn off beta for babel-7 [commit](http://github.com/electrode-io/electrode/commit/8377b8c8944fa656cd8adad08b0e9e573f4201d2)
+    -   Update changelog [commit](http://github.com/electrode-io/electrode/commit/07d8a9b612d57bcb671b713ae5ef4d81b0c78ba3)
+
 # 11/30/2018
 
 ## Packages
