@@ -19,7 +19,8 @@
         "electrode-archetype-react-component": true,
         "electrode-archetype-react-component-dev": true,
         "electrode-archetype-webpack-dll": true,
-        "electrode-archetype-webpack-dll-dev": true
+        "electrode-archetype-webpack-dll-dev": true,
+        "electrode-archetype-opt-karma": true
       }
     }
   }
