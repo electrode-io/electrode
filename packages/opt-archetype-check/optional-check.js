@@ -74,10 +74,15 @@ const defaultInstall = Boolean(optParams.defaultInstall);
 
 try {
   const config = require(Path.join(appDir, "archetype/config"));
-  const userConfig = config && config.options && config.options[optionalTagName];
-  if (!userConfig && defaultInstall === true) {
+
+  const options = (config && config.options) || {};
+
+  if (!options.hasOwnProperty(optionalTagName) && defaultInstall === true) {
     process.exit(0);
   }
+
+  const userConfig = options[optionalTagName];
+
   if (userConfig === expectTag) {
     console.log(`${name}: archetype config set ${optionalTagName} to ${userConfig} - installing`);
     process.exit(0);
