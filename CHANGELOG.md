@@ -1,3 +1,27 @@
+# 12/11/2018
+
+## Packages
+
+-   `electrode-archetype-opt-karma@2.0.0` `(1.0.6 => 2.0.0)`
+-   `electrode-archetype-react-app@6.1.1` `(6.1.0 => 6.1.1)`
+-   `electrode-archetype-react-app-dev@6.1.1` `(6.1.0 => 6.1.1)`
+-   `electrode-archetype-react-component@6.1.1` `(6.1.0 => 6.1.1)`
+-   `electrode-archetype-react-component-dev@6.1.1` `(6.1.0 => 6.1.1)`
+
+## Commits
+
+-   `packages/electrode-archetype-opt-karma`
+
+    -   [major] mark major bump for webpack4 [commit](http://github.com/electrode-io/electrode/commit/c9563f361bac2454d9489b8555c62da60293c27e)
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   update dep electrode-archetype-opt-karma@^2.0.0 [commit](http://github.com/electrode-io/electrode/commit/718633268cde6a69b499b30e3a5e346a4547f609)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   update dep electrode-archetype-opt-karma@^2.0.0 [commit](http://github.com/electrode-io/electrode/commit/718633268cde6a69b499b30e3a5e346a4547f609)
+
 # 12/10/2018
 
 - `electrode-archetype-react-app`, `electrode-archetype-react-component`, `6.1.0`
