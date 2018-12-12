@@ -134,7 +134,7 @@
   },
   "optionalDependencies": {
     "electrode-archetype-opt-inferno": "^0.2.4",
-    "electrode-archetype-opt-karma": "^1.0.6",
+    "electrode-archetype-opt-karma": "^2.0.0",
     "electrode-archetype-opt-pwa": "^1.0.1",
     "electrode-archetype-opt-react": "^1.0.2",
     "electrode-archetype-opt-sass": "^1.0.3"
