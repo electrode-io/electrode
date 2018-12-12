@@ -1,3 +1,40 @@
+# 12/11/2018
+
+## Packages
+
+### Directly Updated
+
+-   `electrode-archetype-opt-karma@1.0.7` `(1.0.6 => 1.0.7)`
+-   `generator-electrode@4.2.9` `(4.2.8 => 4.2.9)`
+
+### Lerna Updated
+
+-   `electrode-ignite@2.1.13` `(2.1.12 => 2.1.13)`
+
+## Commits
+
+-   `packages/electrode-archetype-opt-karma`
+
+    -   republish 1.0.4 as 1.0.7 to avoid breaking webpack3 [commit](http://github.com/electrode-io/electrode/commit/9640f0e96f07af3a0cba694fcd87018e9841edc1)
+
+-   `packages/generator-electrode`
+
+    -   fix nav styles [commit](http://github.com/electrode-io/electrode/commit/5f81ec62b973a52fec00b8a71c82eac2b269d6b2)
+
+-   `packages/opt-archetype-check`
+
+    -   fix optional-check when flag is falsy [commit](http://github.com/electrode-io/electrode/commit/79b4efaabfb4ac312ddb38200985ea0fc57d7748)
+    -   keep opt archetype check JS in a common place [commit](http://github.com/electrode-io/electrode/commit/262368d45d6488b50e391aae870e1e6186ab4b46)
+
+-   `tools`
+
+    -   mark private: ignite-core, electrode-cookies [commit](http://github.com/electrode-io/electrode/commit/97a4e9bc37094d60e38f87fe89c951af09b77495)
+
+-   `MISC`
+
+    -   set ver tag for electrode-ignite & generator-electrode [commit](http://github.com/electrode-io/electrode/commit/88ba7b33c8c3d261b717163b7ecd9fcaaa30dbeb)
+    -   add electrode-archetype-opt-karma to use ver tag [commit](http://github.com/electrode-io/electrode/commit/d436c09708fb33e3d8a55944f2818261e55e6c56)
+
 # 11/30/2018
 
 ## Packages
