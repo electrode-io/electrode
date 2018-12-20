@@ -40,6 +40,7 @@ function makeRouteHandler(routeOptions) {
 }
 
 const setupOptions = options => {
+  const https = process.env.WEBPACK_DEV_HTTPS && process.env.WEBPACK_DEV_HTTPS !== "false";
   const pluginOptionsDefaults = {
     pageTitle: "Untitled Electrode Web Application",
     webpackDev: process.env.WEBPACK_DEV === "true",
@@ -49,7 +50,7 @@ const setupOptions = options => {
     devServer: {
       host: process.env.WEBPACK_DEV_HOST || process.env.WEBPACK_HOST || "127.0.0.1",
       port: process.env.WEBPACK_DEV_PORT || "2992",
-      https: Boolean(process.env.WEBPACK_DEV_HTTPS)
+      https
     },
     unbundledJS: {
       enterHead: [],
@@ -67,7 +68,7 @@ const setupOptions = options => {
 
   const pluginOptions = _.defaultsDeep({}, options, pluginOptionsDefaults);
   const chunkSelector = resolveChunkSelector(pluginOptions);
-  const devProtocol = process.env.WEBPACK_DEV_HTTPS ? "https://" : "http://";
+  const devProtocol = https ? "https://" : "http://";
   const devBundleBase = `${devProtocol}${pluginOptions.devServer.host}:${
     pluginOptions.devServer.port
   }/js/`;

@@ -138,5 +138,11 @@ from async ok module`;
       const opt = reactWebapp.setupOptions({});
       expect(opt.__internals.devBundleBase).to.match(/^https:/);
     });
+
+    it(`should not enable https if ENV is set to "false"`, () => {
+      process.env.WEBPACK_DEV_HTTPS = "false";
+      const opt = reactWebapp.setupOptions({});
+      expect(opt.__internals.devBundleBase).not.to.match(/^https:/);
+    });
   });
 });
