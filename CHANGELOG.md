@@ -1,3 +1,21 @@
+# 1/2/2019
+
+## Packages
+
+-   `electrode-archetype-react-component@6.1.2` `(6.1.1 => 6.1.2)`
+-   `electrode-archetype-react-component-dev@6.1.2` `(6.1.1 => 6.1.2)`
+-   `electrode-react-webapp@3.2.2` `(3.2.1 => 3.2.2)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   [patch][bug] fix babelrc being overriden ([#1105](https://github.com/electrode-io/electrode/pull/1105)) [commit](http://github.com/electrode-io/electrode/commit/a13399588cb16475af4aac8786009e5f7f466b6e)
+
+-   `packages/electrode-react-webapp`
+
+    -   [patch] check for "false" on WEBPACK_DEV_HTTPS ([#1103](https://github.com/electrode-io/electrode/pull/1103)) [commit](http://github.com/electrode-io/electrode/commit/97b75f94c2bacd32cb748aed703cb59221f84a75)
+
 # 12/11/2018
 
 ## Packages
