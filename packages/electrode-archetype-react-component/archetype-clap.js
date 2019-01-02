@@ -99,7 +99,7 @@ const makeBabelRc = () => {
   let rc = {};
 
   if (Fs.existsSync(fn)) {
-    const rc = JSON.parse(Fs.readFileSync(fn));
+    rc = JSON.parse(Fs.readFileSync(fn));
   }
 
   if (rc.extends !== archRc) {
