@@ -2,11 +2,7 @@
 
 /* eslint-disable no-magic-numbers, max-params, max-statements, complexity */
 
-const _ = require("lodash");
-const assert = require("assert");
-const ReactWebapp = require("../react-webapp");
 const HttpStatus = require("../http-status");
-const { responseForError, responseForBadStatus } = require("../utils");
 
 const getDataHtml = data => (data.html !== undefined ? data.html : data);
 
@@ -61,57 +57,9 @@ const DefaultHandleRoute = (request, h, handler, content, routeOptions) => {
     });
 };
 
-const register = (server, options) => {
-  const registerOptions = ReactWebapp.setupOptions(options);
+const registerRoutes = require("./register-routes");
 
-  _.each(registerOptions.paths, (pathData, path) => {
-    const resolveContent = () => {
-      if (registerOptions.serverSideRendering !== false) {
-        const x = ReactWebapp.resolveContent(pathData);
-        assert(x, `You must define content for the webapp plugin path ${path}`);
-        return x;
-      }
-
-      return {
-        content: {
-          status: 200,
-          html: "<!-- SSR disabled by options.serverSideRendring -->"
-        }
-      };
-    };
-
-    const routeOptions = ReactWebapp.setupPathOptions(registerOptions, path);
-    const routeHandler = ReactWebapp.makeRouteHandler(routeOptions);
-    const handleRoute = options.handleRoute || DefaultHandleRoute;
-    _.defaults(routeOptions, { responseForError, responseForBadStatus });
-    let content;
-
-    server.route({
-      method: pathData.method || "GET",
-      path,
-      config: pathData.config || {},
-      handler: (req, h) => {
-        if (req.app.webpackDev) {
-          const wpd = req.app.webpackDev;
-          if (!wpd.valid) {
-            content = ReactWebapp.resolveContent("<!-- Webpack still compiling -->");
-          } else if (wpd.hasErrors) {
-            content = ReactWebapp.resolveContent("<!-- Webpack compile has errors -->");
-          } else if (!content || content.resolveTime < wpd.compileTime) {
-            if (content && content.fullPath) {
-              delete content.xrequire.cache[content.fullPath];
-            }
-            content = resolveContent();
-          }
-        } else if (!content) {
-          content = resolveContent();
-        }
-
-        return handleRoute(req, h, routeHandler, content.content, routeOptions);
-      }
-    });
-  });
-};
+const register = (server, options) => registerRoutes(server, options, DefaultHandleRoute);
 
 const pkg = require("../../package.json");
 
