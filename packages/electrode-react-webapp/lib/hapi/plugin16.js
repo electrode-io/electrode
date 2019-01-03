@@ -3,6 +3,7 @@
 /* eslint-disable no-magic-numbers, max-params, max-statements, complexity */
 
 const _ = require("lodash");
+const Path = require("path");
 const assert = require("assert");
 const ReactWebapp = require("../react-webapp");
 const HttpStatus = require("../http-status");
@@ -79,13 +80,20 @@ const registerRoutes = (server, options) => {
 
     const routeOptions = ReactWebapp.setupPathOptions(registerOptions, path);
     const routeHandler = ReactWebapp.makeRouteHandler(routeOptions);
+    routeOptions.uiConfig = Object.assign(
+      {},
+      _.get(server, "settings.app.config.ui", {}),
+      routeOptions.uiConfig
+    );
+    const basePath = routeOptions.uiConfig.basePath || "/";
+
     const handleRoute = options.handleRoute || DefaultHandleRoute;
     _.defaults(routeOptions, { responseForError, responseForBadStatus });
     let content;
 
     server.route({
       method: pathData.method || "GET",
-      path,
+      path: Path.posix.join(basePath, path),
       config: pathData.config || {},
       handler: (req, reply) => {
         if (req.app.webpackDev) {
