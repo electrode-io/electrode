@@ -1,3 +1,15 @@
+# 1/3/2019
+
+## Packages
+
+-   `electrode-react-webapp@3.2.3` `(3.2.2 => 3.2.3)`
+
+## Commits
+
+-   `packages/electrode-react-webapp`
+
+    -   [patch][bug] account for basePath from config.ui for routes ([#1106](https://github.com/electrode-io/electrode/pull/1106)) [commit](http://github.com/electrode-io/electrode/commit/3bb4e019a09bbc87191da3bc5cef944ff1357829)
+
 # 1/2/2019
 
 ## Packages
