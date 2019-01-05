@@ -39,7 +39,6 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.1.0",
     "@babel/register": "^7.0.0",
-    "@babel/runtime": "^7.1.5",
     "ansi-to-html": "^0.6.8",
     "autoprefixer": "^9.3.1",
     "babel-core": "7.0.0-bridge.0",
