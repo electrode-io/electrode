@@ -1,3 +1,16 @@
+# 1/7/2019
+
+## Packages
+
+-   `electrode-archetype-react-app@6.1.2` `(6.1.1 => 6.1.2)`
+-   `electrode-archetype-react-app-dev@6.1.2` `(6.1.1 => 6.1.2)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [patch][bug] put @babel/runtime in electrode-archetype-react-app ([#1108](https://github.com/electrode-io/electrode/pull/1108)) [commit](http://github.com/electrode-io/electrode/commit/070ed3ea7a18f8213688bbb043c99b1e003bcd6c)
+
 # 1/3/2019
 
 ## Packages
