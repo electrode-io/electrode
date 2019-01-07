@@ -25,6 +25,7 @@
     "supports.js"
   ],
   "dependencies": {
+    "@babel/runtime": "^7.1.5",
     "css-modules-require-hook": "^4.0.2",
     "isomorphic-loader": "^2.0.0",
     "optional-require": "^1.0.0"
