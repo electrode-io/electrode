@@ -35,6 +35,11 @@ function setProductionEnv() {
   process.env.NODE_ENV = "production";
 }
 
+function setBabelEnv(mode) {
+  mode = mode ? `-${mode}` : "";
+  process.env.NODE_ENV = `${process.env.NODE_ENV}${mode}`;
+}
+
 function checkFrontendCov(minimum) {
   if (typeof minimum === "string") {
     minimum += ".";
@@ -134,8 +139,12 @@ function makeTasks(hostDir) {
       desc: "Build minified dist files for production",
       task: `webpack --config ${archetype.devPath}/config/webpack/webpack.config.js --colors`
     },
+    "build-esm": {
+      dep: [".production-env", () => setBabelEnv("esm")],
+      task: [".prep-tmp-lib", "babel-src-step", "clean-esm", ".tmp-to-esm", "build-lib:clean-tmp"]
+    },
     "build-lib": {
-      dep: [".production-env"],
+      dep: [".production-env", () => setBabelEnv("")],
       task: [
         ".prep-tmp-lib",
         "babel-src-step",
@@ -173,6 +182,9 @@ function makeTasks(hostDir) {
     "clean-dist": () => $$.rm("-rf", "dist"),
     "clean-lib": () => $$.rm("-rf", "lib"),
     "clean-test-init": () => $$.rm("-rf", "test-init"),
+
+    "clean-esm": () => $$.rm("-rf", "esm"),
+    ".tmp-to-esm": () => $$.mv(".tmplib", "esm"),
 
     "cov-frontend": () => checkFrontendCov(),
     "cov-frontend-50": () => checkFrontendCov("50"),
@@ -212,7 +224,18 @@ function makeTasks(hostDir) {
         })
     },
 
-    "npm:prepublish": ["build-lib", "build-dist-min"],
+    "npm:prepublish": function() {
+      return ["electrode/prepublish " + this.argv.slice(1)];
+    },
+
+    prepublish: function() {
+      return [
+        ".",
+        this.argv.indexOf("--no-esm") < 0 && "build-esm",
+        "build-lib",
+        "build-dist-min"
+      ].filter(x => x);
+    },
 
     "server-test": mkCmd(
       `webpack-dev-server --port 3001`,
