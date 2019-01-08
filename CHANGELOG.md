@@ -1,3 +1,33 @@
+# 1/8/2019
+
+- fix for express
+
+## Packages
+
+### Directly Updated
+
+-   `electrode-archetype-react-app@6.1.4` `(6.1.3 => 6.1.4)`
+-   `electrode-archetype-react-app-dev@6.1.4` `(6.1.3 => 6.1.4)`
+-   `generator-electrode@5.0.3` `(5.0.2 => 5.0.3)`
+
+### Lerna Updated
+
+-   `electrode-ignite@3.0.4` `(3.0.3 => 3.0.4)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [patch][bug] fix webpack-dev-express middleware setup [commit](http://github.com/electrode-io/electrode/commit/f5bbd9d9c70a681b96cd5a5eafde118eb5ad0853)
+
+-   `packages/generator-electrode`
+
+    -   fix express-server linting errors [commit](http://github.com/electrode-io/electrode/commit/7ddbb3b6b6a1ba3d37f22fc7cc39beadc205658f)
+
+-   `MISC`
+
+    -   test express app generator [commit](http://github.com/electrode-io/electrode/commit/e35f18c4dd6fef951040e679b90c7ddfca8cda3c)
+
 # 1/7/2019
 
 - Add ES6 module support for component to enable webpack treeshaking
