@@ -1,5 +1,39 @@
 # 1/7/2019
 
+- Add ES6 module support for component to enable webpack treeshaking
+- Add express dev middleware for app archetype
+
+## Packages
+
+-   `electrode-archetype-react-app@6.1.3` `(6.1.2 => 6.1.3)`
+-   `electrode-archetype-react-app-dev@6.1.3` `(6.1.2 => 6.1.3)`
+-   `electrode-archetype-react-component@6.1.3` `(6.1.2 => 6.1.3)`
+-   `electrode-archetype-react-component-dev@6.1.3` `(6.1.2 => 6.1.3)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   add express dev middleware ([#1007](https://github.com/electrode-io/electrode/pull/1007)) [commit](http://github.com/electrode-io/electrode/commit/bff7946489d1b689d7d4416af5631b3121ff4b64)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   build components with ES6 module syntax intact ([#1022](https://github.com/electrode-io/electrode/pull/1022)) [commit](http://github.com/electrode-io/electrode/commit/8c2fec36fa3a97656875e8b3182b5d89d93c38d5)
+
+-   `samples/demo-component`
+
+    -   update demo-component to support ES6 modules [commit](http://github.com/electrode-io/electrode/commit/20a669a9fe4d762fd371e9ae0ce36ac2ce586562)
+
+-   `samples/demo-tree-shaking`
+
+    -   add sample app to demo webpack tree shaking using components [commit](http://github.com/electrode-io/electrode/commit/0b0a1f9fc0f9a517604594a7235960c260fdd8e0)
+
+-   `MISC`
+
+    -   changelog [commit](http://github.com/electrode-io/electrode/commit/3d4567437b7ba92cad7a832637b71a0e57f82a94)
+
+# 1/7/2019
+
 ## Packages
 
 -   `electrode-archetype-react-app@6.1.2` `(6.1.1 => 6.1.2)`
