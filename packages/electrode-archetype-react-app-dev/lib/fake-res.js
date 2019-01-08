@@ -68,6 +68,13 @@ class FakeRes extends EventEmitter {
     });
     return response.code(this._statusCode);
   }
+
+  express4Respond(res) {
+    return res
+      .set(this._headers)
+      .status(this._statusCode)
+      .send(this._content);
+  }
 }
 
 module.exports = FakeRes;

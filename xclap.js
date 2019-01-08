@@ -89,6 +89,10 @@ const testGenerator = (testDir, name, clean, runTest, prompts) => {
 
   const testAppDir = Path.join(testDir, name);
 
+  if (!clean) {
+    shell.mkdir("-p", testAppDir);
+  }
+
   const yoRun = yoTest.run(yoApp);
   return (clean ? yoRun.inDir(testAppDir) : yoRun.cd(testAppDir))
     .withOptions({
@@ -120,8 +124,9 @@ xclap.load({
   },
   bootstrap: "~$fynpo",
   test: ["bootstrap", ".lerna.test", "test-reporter", "build-test"],
-  "test-generator": [".test-generator --hapi"],
+  "test-generator": [".test-generator --all"],
   "gen-hapi-app": [".test-generator --hapi --no-test"],
+  "gen-express-app": [".test-generator --express --no-test"],
   "test-demo-component": [`~$cd samples/demo-component && fyn --pg none install && npm test`],
   "test-boilerplate": [".test-boilerplate"],
   "test-stylus-sample": [".test-stylus-sample"],
@@ -194,14 +199,22 @@ xclap.load({
 
   ".test-generator": {
     desc: "Run tests for the yeoman generators",
-    task: function() {
-      const hapiOnly = this.argv.indexOf("--hapi") >= 0;
+    task() {
+      const all = this.argv.length < 2 || this.argv.indexOf("--all") >= 0;
+      const express = all || this.argv.indexOf("--express") >= 0;
+      const hapi = all || this.argv.indexOf("--hapi") >= 0;
       const runTest = this.argv.indexOf("--no-test") < 0;
+      const clean = this.argv.indexOf("--no-clean") < 0;
       const testDir = Path.join(__dirname, "tmp");
-      return testGenerator(testDir, "hapi-app", true, runTest, { serverType: "HapiJS" }).then(
+
+      return Promise.resolve(
+        hapi && testGenerator(testDir, "hapi-app", clean, runTest, { serverType: "HapiJS" })
+      ).then(
         () =>
-          hapiOnly ||
-          testGenerator(testDir, "express-app", false, runTest, { serverType: "ExpressJS" })
+          express &&
+          testGenerator(testDir, "express-app", clean && !hapi, runTest, {
+            serverType: "ExpressJS"
+          })
       );
     }
   }
