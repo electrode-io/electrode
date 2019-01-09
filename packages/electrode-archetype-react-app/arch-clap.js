@@ -684,11 +684,7 @@ Individual .babelrc files were generated for you in src/client and src/server
       dep: [".init-bundle.valid.log"],
       desc: "Start app's node server in watch mode with nodemon",
       task: function() {
-        const watches = (archetype.webpack.devMiddleware
-          ? []
-          : [Path.join(eTmpDir, "bundle.valid.log"), AppMode.src.server]
-        )
-          .concat("config")
+        const watches = [Path.join(eTmpDir, "bundle.valid.log"), AppMode.src.server, "config"]
           .filter(x => x)
           .map(n => `--watch ${n}`)
           .join(" ");
@@ -701,7 +697,7 @@ Individual .babelrc files were generated for you in src/client and src/server
           `~$nodemon`,
           taskArgs(this.argv).join(" "),
           archetype.webpack.devMiddleware ? "" : "-C",
-          `--delay 1 --ext js,jsx,json,yaml,log ${watches}`,
+          `--delay 1 --ext js,jsx,json,yaml,log,ts,tsx ${watches}`,
           `--exec ${nodeRunApp}`
         );
       }
