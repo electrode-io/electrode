@@ -67,7 +67,8 @@
       "electrode-archetype-react-app": "../../packages/electrode-archetype-react-app",
       "electrode-auto-ssr": "../../packages/electrode-auto-ssr",
       "electrode-react-webapp": "../../packages/electrode-react-webapp",
-      "electrode-redux-router-engine": "../../packages/electrode-redux-router-engine"
+      "electrode-redux-router-engine": "../../packages/electrode-redux-router-engine",
+      "electrode-cookies": "../../packages/electrode-cookies"
     },
     "devDependencies": {
       "electrode-archetype-react-app-dev": "../../packages/electrode-archetype-react-app-dev"

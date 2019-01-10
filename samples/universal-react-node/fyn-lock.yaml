@@ -4248,13 +4248,10 @@ electrode-archetype-opt-inferno:
   optFailed: 1
   $: local
   _: ../../packages/electrode-archetype-opt-inferno
-  dependencies:
-   inferno: ^3.0.0
-   inferno-compat: ^3.0.0
 electrode-archetype-opt-karma:
  _:
-  ../electrode-archetype-opt-karma: 1.0.4-babel7-beta.0-fynlocal_h
- 1.0.4-babel7-beta.0-fynlocal_h:
+  ../electrode-archetype-opt-karma: 2.0.0-fynlocal_h
+ 2.0.0-fynlocal_h:
   hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-karma
@@ -4314,12 +4311,13 @@ electrode-archetype-opt-sass:
    sass-loader: ^6.0.6
 electrode-archetype-react-app:
  _:
-  ../../packages/electrode-archetype-react-app: 6.0.6-babel7-beta.0-fynlocal_h
- 6.0.6-babel7-beta.0-fynlocal_h:
+  ../../packages/electrode-archetype-react-app: 6.1.4-fynlocal_h
+ 6.1.4-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app
   dependencies:
+   '@babel/runtime': ^7.1.5
    css-modules-require-hook: ^4.0.2
    isomorphic-loader: ^2.0.0
    optional-require: ^1.0.0
@@ -4328,8 +4326,8 @@ electrode-archetype-react-app:
    electrode-archetype-opt-react: ^1.0.2
 electrode-archetype-react-app-dev:
  _:
-  ../../packages/electrode-archetype-react-app-dev: 6.0.6-babel7-beta.0-fynlocal_h
- 6.0.6-babel7-beta.0-fynlocal_h:
+  ../../packages/electrode-archetype-react-app-dev: 6.1.4-fynlocal_h
+ 6.1.4-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app-dev
@@ -4347,7 +4345,6 @@ electrode-archetype-react-app-dev:
    '@babel/preset-react': ^7.0.0
    '@babel/preset-typescript': ^7.1.0
    '@babel/register': ^7.0.0
-   '@babel/runtime': ^7.1.5
    ansi-to-html: ^0.6.8
    autoprefixer: ^9.3.1
    babel-core: 7.0.0-bridge.0
@@ -4441,7 +4438,7 @@ electrode-archetype-react-app-dev:
    xsh: ^0.4.2
   optionalDependencies:
    electrode-archetype-opt-inferno: ^0.2.4
-   electrode-archetype-opt-karma: ^1.0.4-babel7-beta.0
+   electrode-archetype-opt-karma: ^2.0.0
    electrode-archetype-opt-pwa: ^1.0.1
    electrode-archetype-opt-react: ^1.0.2
    electrode-archetype-opt-sass: ^1.0.3
@@ -4505,8 +4502,8 @@ electrode-node-resolver:
    require-at: ^1.0.0
 electrode-react-webapp:
  _:
-  ../../packages/electrode-react-webapp: 3.2.1-fynlocal_h
- 3.2.1-fynlocal_h:
+  ../../packages/electrode-react-webapp: 3.2.3-fynlocal_h
+ 3.2.3-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-react-webapp
