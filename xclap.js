@@ -146,15 +146,22 @@ xclap.load({
             .filter(x => x.startsWith("- "))
             .map(x => x.substr(2));
 
-          if (updated.indexOf("generator-electrode") >= 0) {
+          const updatedStr = updated.join(" ");
+
+          if (updatedStr.indexOf("generator-electrode") >= 0) {
             tasks.push("test-generator");
           }
 
-          if (updated.indexOf("electrode-archetype-react-component") >= 0) {
+          if (updatedStr.indexOf("electrode-archetype-react-component") >= 0) {
             tasks.push("test-demo-component");
+            tasks.push(".test-tree-shaking");
           }
 
-          return tasks;
+          if (updatedStr.indexOf("electrode-archetype-react-app") >= 0) {
+            tasks.push(".test-tree-shaking");
+          }
+
+          return _.uniq(tasks);
         })
         .catch(err => {
           if (err.output.stderr.indexOf("No packages need updating") < 0) {
@@ -173,6 +180,13 @@ xclap.load({
     dep: [".build-sample-dll"],
     task: () => {
       return runAppTest(Path.join(__dirname, "samples/universal-react-node"));
+    }
+  },
+
+  ".test-tree-shaking": {
+    desc: "Run tests for the demo-tree-shaking sample app",
+    task: () => {
+      return runAppTest(Path.join(__dirname, "samples/demo-tree-shaking"));
     }
   },
 

@@ -33,7 +33,8 @@
     "build": "clap build",
     "prod-start": "NODE_ENV=production clap -n -x electrode/build prod",
     "start": "if test \"$NODE_ENV\" = \"production\"; then npm run prod-start; else clap dev; fi",
-    "test": "clap check",
+    "test": "clap -n -x check electrode/build check-tree-shaking",
+    "check-tree-shaking": "grep -o DeadCardExampleToBeRemovedByTreeShaking dist/js/*.js && exit 1 || exit 0",
     "coverage": "clap check",
     "prod": "echo 'Starting standalone server in PROD mode'; NODE_ENV=production node ./lib/server/",
     "heroku-postbuild": "clap build"
