@@ -35,9 +35,12 @@ function setProductionEnv() {
   process.env.NODE_ENV = "production";
 }
 
-function setBabelEnv(mode) {
-  mode = mode ? `-${mode}` : "";
-  process.env.NODE_ENV = `${process.env.NODE_ENV}${mode}`;
+function setES6Module(flag) {
+  if (flag) {
+    process.env.ENABLE_ES6_MODULE = true;
+  } else {
+    delete process.env.ENABLE_ES6_MODULE;
+  }
 }
 
 function checkFrontendCov(minimum) {
@@ -140,11 +143,11 @@ function makeTasks(hostDir) {
       task: `webpack --config ${archetype.devPath}/config/webpack/webpack.config.js --colors`
     },
     "build-esm": {
-      dep: [".production-env", () => setBabelEnv("esm")],
+      dep: [".production-env", () => setES6Module(true)],
       task: [".prep-tmp-lib", "babel-src-step", "clean-esm", ".tmp-to-esm", "build-lib:clean-tmp"]
     },
     "build-lib": {
-      dep: [".production-env", () => setBabelEnv("")],
+      dep: [".production-env", () => setES6Module(false)],
       task: [
         ".prep-tmp-lib",
         "babel-src-step",
@@ -224,16 +227,16 @@ function makeTasks(hostDir) {
         })
     },
 
-    "npm:prepublish": function() {
-      return ["electrode/prepublish " + this.argv.slice(1)];
+    "npm:prepublish"() {
+      return ["electrode/prepublish " + this.argv.slice(1).join(" ")];
     },
 
-    prepublish: function() {
+    prepublish() {
       return [
         ".",
         this.argv.indexOf("--no-esm") < 0 && "build-esm",
         "build-lib",
-        "build-dist-min"
+        this.argv.indexOf("--no-dist-min") < 0 && "build-dist-min"
       ].filter(x => x);
     },
 
