@@ -1,3 +1,41 @@
+# 1/10/2019
+
+- fix component babel config to preserve ESM 
+
+## Packages
+
+-   `electrode-archetype-react-component@6.1.4` `(6.1.3 => 6.1.4)`
+-   `electrode-archetype-react-component-dev@6.1.4` `(6.1.3 => 6.1.4)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   [patch] allow component to be published w/o dist-min files [commit](http://github.com/electrode-io/electrode/commit/9afa43088566d48398295be25ff4e9fe503623c9)
+    -   [patch] fix component babel config to preserve ESM [commit](http://github.com/electrode-io/electrode/commit/b6b30b72f5af07192a2876680a5c004b7f526efb)
+
+-   `samples/demo-component`
+
+    -   use module field to point to ES6 module code [commit](http://github.com/electrode-io/electrode/commit/2119fb10ff4a121983ad1f388a664a1baa1afef5)
+    -   update samples auto gen files [commit](http://github.com/electrode-io/electrode/commit/aff8ead4b5a5816c3336735934650d204d4d9fe4)
+
+-   `samples/demo-tree-shaking`
+
+    -   test tree-shaking [commit](http://github.com/electrode-io/electrode/commit/ee590ca4ad9a90fb7f829f44dace05b93f5ac316)
+    -   update samples auto gen files [commit](http://github.com/electrode-io/electrode/commit/aff8ead4b5a5816c3336735934650d204d4d9fe4)
+
+-   `samples/stylus-sample`
+
+    -   update samples auto gen files [commit](http://github.com/electrode-io/electrode/commit/aff8ead4b5a5816c3336735934650d204d4d9fe4)
+
+-   `samples/universal-react-node`
+
+    -   update samples auto gen files [commit](http://github.com/electrode-io/electrode/commit/aff8ead4b5a5816c3336735934650d204d4d9fe4)
+
+-   `MISC`
+
+    -   build demo-component before test-tree-shaking [commit](http://github.com/electrode-io/electrode/commit/3d6b2a5580662e731177ec7a5769412436ccb527)
+
 # 1/8/2019
 
 - fix for express
