@@ -227,16 +227,16 @@ function makeTasks(hostDir) {
         })
     },
 
-    "npm:prepublish": function() {
-      return ["electrode/prepublish " + this.argv.slice(1)];
+    "npm:prepublish"() {
+      return ["electrode/prepublish " + this.argv.slice(1).join(" ")];
     },
 
-    prepublish: function() {
+    prepublish() {
       return [
         ".",
         this.argv.indexOf("--no-esm") < 0 && "build-esm",
         "build-lib",
-        "build-dist-min"
+        this.argv.indexOf("--no-dist-min") < 0 && "build-dist-min"
       ].filter(x => x);
     },
 
