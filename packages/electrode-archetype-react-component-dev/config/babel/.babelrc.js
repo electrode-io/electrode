@@ -18,6 +18,7 @@ const { BABEL_ENV, NODE_ENV } = process.env;
 const enableKarmaCov = process.env.ENABLE_KARMA_COV === "true";
 const isProduction = (BABEL_ENV || NODE_ENV) === "production";
 const isTest = (BABEL_ENV || NODE_ENV) === "test";
+const isES6Module = process.env.ENABLE_ES6_MODULE === "true";
 
 const plugins = basePlugins.concat(
   // test env
@@ -46,6 +47,12 @@ const plugins = basePlugins.concat(
 );
 
 module.exports = {
-  presets: [["@babel/preset-env", { loose: true }], "@babel/preset-react", "@babel/preset-flow"],
+  presets: [
+    // modules set to false means skip transforming modules and keep ES6 module syntax
+    // https://babeljs.io/docs/en/babel-preset-env#modules
+    ["@babel/preset-env", { modules: isES6Module ? false : undefined, loose: true }],
+    "@babel/preset-react",
+    "@babel/preset-flow"
+  ],
   plugins: plugins.filter(x => x)
 };
