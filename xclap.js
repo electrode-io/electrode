@@ -152,16 +152,14 @@ xclap.load({
             tasks.push("test-generator");
           }
 
-          if (updatedStr.indexOf("electrode-archetype-react-component") >= 0) {
-            tasks.push("test-demo-component");
-            tasks.push(".test-tree-shaking");
+          if (
+            updatedStr.indexOf("electrode-archetype-react-component") >= 0 ||
+            updatedStr.indexOf("electrode-archetype-react-app") >= 0
+          ) {
+            tasks.push([".", "test-demo-component", ".test-tree-shaking"]);
           }
 
-          if (updatedStr.indexOf("electrode-archetype-react-app") >= 0) {
-            tasks.push(".test-tree-shaking");
-          }
-
-          return _.uniq(tasks);
+          return tasks;
         })
         .catch(err => {
           if (err.output.stderr.indexOf("No packages need updating") < 0) {
