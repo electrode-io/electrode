@@ -38,7 +38,9 @@ Because many of our modules depend on each other, to make local development easi
 Now you can go to the `samples` folder and try the `universal-react-node` sample app, develop and test your changes over there.
 
 ```bash
-$ cd samples/universal-react-node
+$ cd samples/react-vendor-dll
+$ fyn
+$ cd ../universal-react-node
 $ fyn
 $ clap dev
 ```
