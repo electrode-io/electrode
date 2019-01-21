@@ -9,6 +9,9 @@ const portFromEnv = () => {
 };
 
 module.exports = {
+  ui: {
+    demo: "hello from ui config"
+  },
   plugins: {
     good: {
       module: "good",
@@ -39,6 +42,7 @@ module.exports = {
         }
       }
     },
+    "electrode-ui-config/hapi-plugin": {},
     inert: {
       enable: true
     },

@@ -28,6 +28,8 @@ import { Nav } from "./nav";
 import DemoCookies from "./demo-cookies";
 //<% } %>
 
+import config from "electrode-ui-config";
+
 //<% if (pwa) { %>
 import Notifications from "react-notify-toast";
 //<% } %>
@@ -69,6 +71,11 @@ class Home extends React.Component {
           <DemoCookies />
         </div>
         {/*<% } %>*/}
+
+        <div styleName={"custom.docs-section"}>
+          <h6 styleName={"custom.docs-header"}>Demo Isomorphic UI Config</h6>
+          <div>config.ui.demo: "{config.ui.demo}"</div>
+        </div>
 
         <div styleName={"custom.docs-section"}>
           <DemoButtons />
