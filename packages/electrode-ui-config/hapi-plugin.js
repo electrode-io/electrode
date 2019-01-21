@@ -1,6 +1,9 @@
 "use strict";
 
+const { universalHapiPlugin } = require("electrode-hapi-compat");
+
 const uiConfig = require("./lib");
+const pkg = require("./package.json");
 
 //
 // On the server we need to acquire the config from the server object
@@ -9,7 +12,7 @@ const uiConfig = require("./lib");
 function uiConfigRegister(server, options, next) {
   uiConfig.config = (server.app && server.app.config) || {};
 
-  next();
+  next && next();
 }
 
 uiConfigRegister.attributes = {
@@ -18,3 +21,11 @@ uiConfigRegister.attributes = {
 };
 
 module.exports = uiConfigRegister;
+
+module.exports = universalHapiPlugin(
+  {
+    hapi16: uiConfigRegister,
+    hapi17: uiConfigRegister
+  },
+  pkg
+);

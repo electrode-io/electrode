@@ -48,7 +48,8 @@
   },
   "dependencies": {
     "bluebird": "^2.11.0",
-    "lodash": "^4.13.1"
+    "electrode-hapi-compat": "^1.0.0",
+    "lodash": "^4.17.11"
   },
   "nyc": {
     "all": true,
