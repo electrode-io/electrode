@@ -684,7 +684,11 @@ Individual .babelrc files were generated for you in src/client and src/server
       dep: [".init-bundle.valid.log"],
       desc: "Start app's node server in watch mode with nodemon",
       task: function() {
-        const watches = [Path.join(eTmpDir, "bundle.valid.log"), AppMode.src.server, "config"]
+        const watches = (archetype.webpack.devMiddleware
+          ? []
+          : [Path.join(eTmpDir, "bundle.valid.log")]
+        )
+          .concat(["config", AppMode.src.server])
           .filter(x => x)
           .map(n => `--watch ${n}`)
           .join(" ");
