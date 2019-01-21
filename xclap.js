@@ -20,7 +20,8 @@ const pullLocalPackages = dir => {
     "electrode-react-webapp",
     "electrode-redux-router-engine",
     "electrode-auto-ssr",
-    "electrode-cookies"
+    "electrode-cookies",
+    "electrode-ui-config"
   ];
   const localDevPkgs = ["electrode-archetype-react-app-dev"];
   const localPackagesDir = Path.relative(dir, packagesDir);
@@ -227,7 +228,7 @@ xclap.load({
           testGenerator(testDir, "express-app", clean && !hapi, runTest, {
             serverType: "ExpressJS"
           })
-      );
+      ).then(() => undefined);
     }
   }
 });
