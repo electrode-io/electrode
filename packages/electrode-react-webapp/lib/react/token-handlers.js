@@ -32,6 +32,7 @@ const TITLE_MARKER = "PAGE_TITLE";
 const PREFETCH_MARKER = "PREFETCH_BUNDLES";
 const META_TAGS_MARKER = "META_TAGS";
 const CRITICAL_CSS_MARKER = "CRITICAL_CSS";
+const APP_CONFIG_DATA_MARKER = "APP_CONFIG_DATA";
 
 module.exports = function setup(handlerContext /*, asyncTemplate*/) {
   const routeOptions = handlerContext.user.routeOptions;
@@ -130,6 +131,8 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
     });
   };
 
+  const windowConfigKey = routeOptions.uiConfigKey || "_config";
+
   const tokenHandlers = {
     [CONTENT_MARKER]: context => {
       return context.user.content.html || "";
@@ -137,6 +140,12 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
 
     [TITLE_MARKER]: () => {
       return `<title>${routeOptions.pageTitle}</title>`;
+    },
+
+    [APP_CONFIG_DATA_MARKER]: () => {
+      return `<script>window.${windowConfigKey} = window.${windowConfigKey} || {};
+window.${windowConfigKey}.ui = ${JSON.stringify(routeOptions.uiConfig)};
+</script>`;
     },
 
     [HEADER_BUNDLE_MARKER]: context => {
