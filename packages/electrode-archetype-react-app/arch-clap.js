@@ -686,9 +686,9 @@ Individual .babelrc files were generated for you in src/client and src/server
       task: function() {
         const watches = (archetype.webpack.devMiddleware
           ? []
-          : [Path.join(eTmpDir, "bundle.valid.log"), AppMode.src.server]
+          : [Path.join(eTmpDir, "bundle.valid.log")]
         )
-          .concat("config")
+          .concat(["config", AppMode.src.server])
           .filter(x => x)
           .map(n => `--watch ${n}`)
           .join(" ");
@@ -701,7 +701,7 @@ Individual .babelrc files were generated for you in src/client and src/server
           `~$nodemon`,
           taskArgs(this.argv).join(" "),
           archetype.webpack.devMiddleware ? "" : "-C",
-          `--delay 1 --ext js,jsx,json,yaml,log ${watches}`,
+          `--delay 1 --ext js,jsx,json,yaml,log,ts,tsx ${watches}`,
           `--exec ${nodeRunApp}`
         );
       }
