@@ -28,6 +28,7 @@ return {
     bluebird: "^3.4.6",
     "electrode-archetype-react-app": "^6.0.0",
     "electrode-react-webapp": "^3.2.0",
+    "electrode-ui-config": "^1.1.2",
     "electrode-confippet": "^1.5.0",
     "electrode-redux-router-engine": "^2.1.8", //<% if (isHapi) { %>
     //<% if (isAutoSSR) {%>

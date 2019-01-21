@@ -54,11 +54,13 @@ const DefaultHandleRoute = (request, reply, handler, content, routeOptions) => {
     });
 };
 
-const registerRoutes = require("./register-routes");
+const _registerRoutes = require("./register-routes");
+
+const registerRoutes = (server, options) => _registerRoutes(server, options, DefaultHandleRoute);
 
 const register = (server, options, next) => {
   try {
-    registerRoutes(server, options, DefaultHandleRoute);
+    registerRoutes(server, options);
     return next();
   } catch (err) {
     return next(err);
@@ -71,5 +73,5 @@ register.attributes = { pkg };
 
 module.exports = {
   register,
-  registerRoutes: (server, options) => registerRoutes(server, options, DefaultHandleRoute)
+  registerRoutes
 };

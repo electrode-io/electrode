@@ -1542,9 +1542,9 @@ describe("hapi 17 electrode-react-webapp", () => {
         .then(res => {
           expect(res.result).includes(
             `<meta data-react-helmet="true" name="description" content="Nested component"/>` +
-              `<title data-react-helmet="true">Nested Title</title><script>test-1 script;</script>`
+              `<title data-react-helmet="true">Nested Title</title>`
           );
-          expect(res.result).includes(`<script>test-1 script;</script>
+          expect(res.result).includes(`window._config.ui = {};\n</script><script>test-1 script;</script>
 <!--scripts from helmet--></head>`);
           stopServer(server);
         })
