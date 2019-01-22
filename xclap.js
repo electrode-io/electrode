@@ -128,7 +128,9 @@ xclap.load({
   "test-generator": [".test-generator --all"],
   "gen-hapi-app": [".test-generator --hapi --no-test"],
   "gen-express-app": [".test-generator --express --no-test"],
-  "test-demo-component": [`~$cd samples/demo-component && fyn --pg none install && npm test`],
+  "test-demo-component": [
+    `~$cd ${Path.join(__dirname, "samples/demo-component")} && fyn --pg none install && npm test`
+  ],
   "test-boilerplate": [".test-boilerplate"],
   "test-stylus-sample": [".test-stylus-sample"],
   "update-changelog": ["~$node tools/update-changelog.js"],
@@ -222,13 +224,15 @@ xclap.load({
 
       return Promise.resolve(
         hapi && testGenerator(testDir, "hapi-app", clean, runTest, { serverType: "HapiJS" })
-      ).then(
-        () =>
-          express &&
-          testGenerator(testDir, "express-app", clean && !hapi, runTest, {
-            serverType: "ExpressJS"
-          })
-      ).then(() => undefined);
+      )
+        .then(
+          () =>
+            express &&
+            testGenerator(testDir, "express-app", clean && !hapi, runTest, {
+              serverType: "ExpressJS"
+            })
+        )
+        .then(() => undefined);
     }
   }
 });
