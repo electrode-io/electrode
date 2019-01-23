@@ -32,6 +32,8 @@ function makeAppMode(prodDir, reactLib) {
 
   reactLib = reactLib || "react";
 
+  const posixify = s => s.replace(/\\/g, "/");
+
   const envKey = "APP_SRC_DIR";
   return Object.assign(
     {
@@ -41,6 +43,7 @@ function makeAppMode(prodDir, reactLib) {
       isSrc: !!srcDir,
       setEnv: dir => {
         if (dir) {
+          dir = posixify(dir);
           if (!dir.endsWith("/")) {
             dir += "/";
           }
@@ -57,13 +60,13 @@ function makeAppMode(prodDir, reactLib) {
       },
       src: {
         dir: srcDir,
-        client: Path.join(srcDir, client),
-        server: Path.join(srcDir, server)
+        client: posixify(Path.join(srcDir, client)),
+        server: posixify(Path.join(srcDir, server))
       },
       lib: {
         dir: libDir,
-        client: Path.join(libDir, client),
-        server: Path.join(libDir, server)
+        client: posixify(Path.join(libDir, client)),
+        server: posixify(Path.join(libDir, server))
       }
     },
     saved
