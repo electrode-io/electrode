@@ -1,3 +1,60 @@
+# 1/23/2019
+
+- electrode-archetype-react-app
+  - remove uglify and use webpack 4 built-in optimization
+  - fix server watch for typescript
+  - fix css module for production build
+  - fix path separator for windows
+
+- electrode-ui-config
+  - add demo to generated sample app
+
+## Packages
+
+### Directly Updated
+
+-   `electrode-archetype-react-app@6.2.0` `(6.1.4 => 6.2.0)`
+-   `electrode-archetype-react-app-dev@6.2.0` `(6.1.4 => 6.2.0)`
+-   `electrode-react-webapp@3.3.0` `(3.2.3 => 3.3.0)`
+-   `electrode-ui-config@1.2.0` `(1.1.2 => 1.2.0)`
+-   `generator-electrode@5.1.0` `(5.0.3 => 5.1.0)`
+
+### Lerna Updated
+
+-   `electrode-ignite@3.0.5` `(3.0.4 => 3.0.5)`
+-   `electrode-ui-logger@1.1.4` `(1.1.3 => 1.1.4)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [patch][bug] ensures app mode dir always use / ([#1125](https://github.com/electrode-io/electrode/pull/1125)) [commit](http://github.com/electrode-io/electrode/commit/7108b4cb0365bb64eb292e98f708dffe5a66aadb)
+    -   fix: remove undeeded uglify partial [commit](http://github.com/electrode-io/electrode/commit/64a007016942b29548336fb2aa643e51518afa70)
+    -   [minor][bug] fix server watch when using typescript ([#1111](https://github.com/electrode-io/electrode/pull/1111)) [commit](http://github.com/electrode-io/electrode/commit/2d6e32ec6edc77cc89c08f46d5ef620d4dd4856d)
+    -   [patch][bug] set env for production build ([#1126](https://github.com/electrode-io/electrode/pull/1126)) [commit](http://github.com/electrode-io/electrode/commit/af28874dbfe3b70c890267263d142bbc651f9b3d)
+
+-   `packages/electrode-react-webapp`
+
+    -   [minor] add token to send ui config to window._config [commit](http://github.com/electrode-io/electrode/commit/14cb09a2b3b698ce2d3170179f6cdc3a2a404911)
+
+-   `packages/electrode-ui-config`
+
+    -   [minor] support hapi 17 ([#1119](https://github.com/electrode-io/electrode/pull/1119)) [commit](http://github.com/electrode-io/electrode/commit/4338d8c813f5a116d453d72645954260f05e92ad)
+
+-   `packages/generator-electrode`
+
+    -   [minor] add demo for electrode-ui-config [commit](http://github.com/electrode-io/electrode/commit/cea397d0077471e5b76f10a0717b2c26898eba8d)
+
+-   `samples/hapi-app`
+
+    -   add samples/hapi-app ([#1127](https://github.com/electrode-io/electrode/pull/1127)) [commit](http://github.com/electrode-io/electrode/commit/d1ce389c384e2382975e9fccc098462ea0c8edba)
+
+-   `MISC`
+
+    -   fix CI [commit](http://github.com/electrode-io/electrode/commit/22fd89f6c31bd4bbabb9f609b0015898043dc4db)
+    -   [ci][chore] add electrode-ui-config to local dep list [commit](http://github.com/electrode-io/electrode/commit/86ecd73af5a3a87d552990c531861306b657023d)
+    -   update CONTRIBUTING.md for sample start ([#1118](https://github.com/electrode-io/electrode/pull/1118)) [commit](http://github.com/electrode-io/electrode/commit/a33bf78a0e64df0e694be1c5fb5959d9c23cc69a)
+
 # 1/10/2019
 
 - fix component babel config to preserve ESM 
