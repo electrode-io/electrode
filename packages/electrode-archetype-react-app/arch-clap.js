@@ -363,7 +363,7 @@ function makeTasks() {
     ".optimize-stats": () => setOptimizeStats(),
     ".remove-log-files": () => removeLogFiles(),
     build: {
-      dep: [".remove-log-files"],
+      dep: [".remove-log-files", ".production-env", ".set.css-module.env"],
       desc: AppMode.isSrc
         ? `Build your app's ${AppMode.src.dir} directory into ${AppMode.lib.dir} for production`
         : "Build your app's client bundle",
