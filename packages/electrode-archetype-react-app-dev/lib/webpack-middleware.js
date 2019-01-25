@@ -10,7 +10,7 @@ const webpackDevMiddleware = require("webpack-dev-middleware");
 const webpackHotMiddleware = require("webpack-hot-middleware");
 const isomorphicExtendRequire = require("isomorphic-loader/lib/extend-require");
 const serveIndex = require("serve-index-fs");
-const chalk = require("chalk");
+const ck = require("chalker");
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const _ = require("lodash");
 const statsUtils = require("./stats-utils");
@@ -41,7 +41,7 @@ function openUrl(url) {
   };
 
   const showOpen = () => {
-    console.info(`Your app is now ready at ${chalk.green(url)}`);
+    console.info(ck`Your app is now ready at <green>${url}</>`);
   };
 
   if (flag === false) return showOpen();
@@ -180,11 +180,11 @@ class Middleware {
     });
 
     this.cwdIndex = serveIndex(process.cwd(), { icons: true, hidden: true });
-    this.devBaseUrl = urlJoin(options.devBaseUrl || "/__electrode_dev", "/");
-    this.cwdBaseUrl = urlJoin(this.devBaseUrl, "cwd");
-    this.cwdContextBaseUrl = urlJoin(this.devBaseUrl, "memfs");
-    this.reporterUrl = urlJoin(this.devBaseUrl, "reporter");
-    this.dllDevUrl = urlJoin(this.devBaseUrl, "dll");
+    this.devBaseUrl = urlJoin(options.devBaseUrl || "/__electrode_dev");
+    this.cwdBaseUrl = urlJoin(this.devBaseUrl, "/cwd");
+    this.cwdContextBaseUrl = urlJoin(this.devBaseUrl, "/memfs");
+    this.reporterUrl = urlJoin(this.devBaseUrl, "/reporter");
+    this.dllDevUrl = urlJoin(this.devBaseUrl, "/dll");
 
     const loadIsomorphicConfig = () => {
       return JSON.parse(Fs.readFileSync(Path.resolve(".isomorphic-loader-config.json")));
@@ -213,12 +213,12 @@ class Middleware {
     defaultReporter = (middlewareOptions, reporterOptions) => {
       if (reporterOptions.state) {
         const stats = reporterOptions.stats;
-        const error = stats.hasErrors() ? chalk.red(" ERRORS") : "";
-        const warning = stats.hasWarnings() ? chalk.yellow(" WARNINGS") : "";
+        const error = stats.hasErrors() ? "<red> ERRORS</>" : "";
+        const warning = stats.hasWarnings() ? "<yellow> WARNINGS</>" : "";
         const notOk = Boolean(error || warning);
-        const but = (notOk && chalk.yellow(" but has")) || "";
+        const but = (notOk && "<yellow> but has</>") || "";
         const showError = Boolean(error);
-        console.log(`webpack bundle is now ${chalk.green("VALID")}${but}${error}${warning}`);
+        console.log(ck`webpack bundle is now <green>VALID</>${but}${error}${warning}`);
 
         this.webpackDev.valid = true;
         this.webpackDev.hasErrors = stats.hasErrors();
@@ -228,8 +228,8 @@ class Middleware {
 
         const update = () => {
           if (notOk) {
-            const x = chalk.cyan.underline(urlJoin(baseUrl(), this.reporterUrl));
-            console.log(`${x} - View status and errors/warnings from your browser`);
+            console.log(ck`<cyan.underline>${urlJoin(baseUrl(), this.reporterUrl)}</> \
+- View status and errors/warnings from your browser`);
           }
 
           if (this.webpackDev.lastReporterOptions === undefined) {
@@ -271,7 +271,7 @@ class Middleware {
         });
       } else {
         isomorphicExtendRequire.deactivate();
-        console.log(`webpack bundle is now ${chalk.magenta("INVALID")}`);
+        console.log(ck`webpack bundle is now <magenta>INVALID</>`);
         this.webpackDev.valid = false;
         this.webpackDev.lastReporterOptions = false;
         if (userReporter) userReporter(middlewareOptions, reporterOptions);
@@ -371,10 +371,9 @@ ${jumpToError}</body></html>
           }, "<ul>") + "</ul>"
         );
       };
-      const html =
-        `<html><head><meta charset="utf-8"/></head><body>\n` +
-        listDirectoryHtml(this.listAssetPath, outputPath) +
-        "</body></html>";
+      const html = `<html><head><meta charset="utf-8"/></head><body>
+${listDirectoryHtml(this.listAssetPath, outputPath)}
+</body></html>`;
       return Promise.resolve(cycle.replyHtml(html));
     } else if (req.url.startsWith(this.cwdBaseUrl)) {
       return serveStatic(this.cwdBaseUrl, Fs, this.cwdIndex).catch(err => {
@@ -400,6 +399,13 @@ ${jumpToError}</body></html>
       // bundle name is second
       const bundle = require.resolve(`${modName}/dist/${dllParts[1]}`);
       return Promise.resolve(cycle.replyFile(bundle));
+    } else if (req.url === this.devBaseUrl) {
+      res.send(`<html><head><meta charset="utf-8"/></head><body>
+<h1>Electrode Development Dashboard</h1>
+<h3><a href="${this.cwdBaseUrl}">View current working directory files</a></h3>
+<h3><a href="${this.cwdContextBaseUrl}">View webpack dev memfs files</a></h3>
+</body></html>`);
+      return Promise.resolve();
     }
 
     return Promise.resolve(this.canContinue);
