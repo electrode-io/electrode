@@ -10,7 +10,7 @@ const webpackDevMiddleware = require("webpack-dev-middleware");
 const webpackHotMiddleware = require("webpack-hot-middleware");
 const isomorphicExtendRequire = require("isomorphic-loader/lib/extend-require");
 const serveIndex = require("serve-index-fs");
-const chalk = require("chalk");
+const ck = require("chalker");
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const _ = require("lodash");
 const statsUtils = require("./stats-utils");
@@ -41,7 +41,7 @@ function openUrl(url) {
   };
 
   const showOpen = () => {
-    console.info(`Your app is now ready at ${chalk.green(url)}`);
+    console.info(ck`Your app is now ready at <green>${url}</>`);
   };
 
   if (flag === false) return showOpen();
@@ -213,12 +213,12 @@ class Middleware {
     defaultReporter = (middlewareOptions, reporterOptions) => {
       if (reporterOptions.state) {
         const stats = reporterOptions.stats;
-        const error = stats.hasErrors() ? chalk.red(" ERRORS") : "";
-        const warning = stats.hasWarnings() ? chalk.yellow(" WARNINGS") : "";
+        const error = stats.hasErrors() ? "<red> ERRORS</>" : "";
+        const warning = stats.hasWarnings() ? "<yellow> WARNINGS</>" : "";
         const notOk = Boolean(error || warning);
-        const but = (notOk && chalk.yellow(" but has")) || "";
+        const but = (notOk && "<yellow> but has</>") || "";
         const showError = Boolean(error);
-        console.log(`webpack bundle is now ${chalk.green("VALID")}${but}${error}${warning}`);
+        console.log(ck`webpack bundle is now <green>VALID</>${but}${error}${warning}`);
 
         this.webpackDev.valid = true;
         this.webpackDev.hasErrors = stats.hasErrors();
@@ -228,8 +228,8 @@ class Middleware {
 
         const update = () => {
           if (notOk) {
-            const x = chalk.cyan.underline(urlJoin(baseUrl(), this.reporterUrl));
-            console.log(`${x} - View status and errors/warnings from your browser`);
+            console.log(ck`<cyan.underline>${urlJoin(baseUrl(), this.reporterUrl)}</> \
+- View status and errors/warnings from your browser`);
           }
 
           if (this.webpackDev.lastReporterOptions === undefined) {
@@ -271,7 +271,7 @@ class Middleware {
         });
       } else {
         isomorphicExtendRequire.deactivate();
-        console.log(`webpack bundle is now ${chalk.magenta("INVALID")}`);
+        console.log(ck`webpack bundle is now <magenta>INVALID</>`);
         this.webpackDev.valid = false;
         this.webpackDev.lastReporterOptions = false;
         if (userReporter) userReporter(middlewareOptions, reporterOptions);

@@ -57,6 +57,7 @@
     "chai": "^4.0.0",
     "chai-as-promised": "^7.1.1",
     "chai-shallowly": "^1.0.0",
+    "chalker": "^1.1.1",
     "clean-css": "^3.4.21",
     "convert-source-map": "^1.5.0",
     "css-loader": "^1.0.0",
