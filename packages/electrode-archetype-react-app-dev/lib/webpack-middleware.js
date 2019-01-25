@@ -180,11 +180,11 @@ class Middleware {
     });
 
     this.cwdIndex = serveIndex(process.cwd(), { icons: true, hidden: true });
-    this.devBaseUrl = urlJoin(options.devBaseUrl || "/__electrode_dev", "/");
-    this.cwdBaseUrl = urlJoin(this.devBaseUrl, "cwd");
-    this.cwdContextBaseUrl = urlJoin(this.devBaseUrl, "memfs");
-    this.reporterUrl = urlJoin(this.devBaseUrl, "reporter");
-    this.dllDevUrl = urlJoin(this.devBaseUrl, "dll");
+    this.devBaseUrl = urlJoin(options.devBaseUrl || "/__electrode_dev");
+    this.cwdBaseUrl = urlJoin(this.devBaseUrl, "/cwd");
+    this.cwdContextBaseUrl = urlJoin(this.devBaseUrl, "/memfs");
+    this.reporterUrl = urlJoin(this.devBaseUrl, "/reporter");
+    this.dllDevUrl = urlJoin(this.devBaseUrl, "/dll");
 
     const loadIsomorphicConfig = () => {
       return JSON.parse(Fs.readFileSync(Path.resolve(".isomorphic-loader-config.json")));
@@ -371,10 +371,9 @@ ${jumpToError}</body></html>
           }, "<ul>") + "</ul>"
         );
       };
-      const html =
-        `<html><head><meta charset="utf-8"/></head><body>\n` +
-        listDirectoryHtml(this.listAssetPath, outputPath) +
-        "</body></html>";
+      const html = `<html><head><meta charset="utf-8"/></head><body>
+${listDirectoryHtml(this.listAssetPath, outputPath)}
+</body></html>`;
       return Promise.resolve(cycle.replyHtml(html));
     } else if (req.url.startsWith(this.cwdBaseUrl)) {
       return serveStatic(this.cwdBaseUrl, Fs, this.cwdIndex).catch(err => {
@@ -400,6 +399,13 @@ ${jumpToError}</body></html>
       // bundle name is second
       const bundle = require.resolve(`${modName}/dist/${dllParts[1]}`);
       return Promise.resolve(cycle.replyFile(bundle));
+    } else if (req.url === this.devBaseUrl) {
+      res.send(`<html><head><meta charset="utf-8"/></head><body>
+<h1>Electrode Development Dashboard</h1>
+<h3><a href="${this.cwdBaseUrl}">View current working directory files</a></h3>
+<h3><a href="${this.cwdContextBaseUrl}">View webpack dev memfs files</a></h3>
+</body></html>`);
+      return Promise.resolve();
     }
 
     return Promise.resolve(this.canContinue);
