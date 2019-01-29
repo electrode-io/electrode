@@ -13,7 +13,7 @@ module.exports = {
   webapp: {
     module: "electrode-react-webapp/lib/koa",
     options: {
-      pageTitle: "electrode-koa-app",
+      pageTitle: "<%= projectName %>",
       insertTokenIds: false,
       paths: {
         "*": {
