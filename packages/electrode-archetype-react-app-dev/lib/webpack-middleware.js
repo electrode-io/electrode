@@ -310,7 +310,6 @@ doReload(1); </script></body></html>`)
           } else if (stats.isDirectory()) {
             res.once("end", resolve);
             return indexServer(req, res, reject);
-            // res.send("Hello World");
           } else {
             return fileSystem.readFile(fullPath, (err2, data) => {
               if (err2) {
