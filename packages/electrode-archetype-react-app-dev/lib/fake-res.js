@@ -80,7 +80,6 @@ class FakeRes extends EventEmitter {
     res.status = this._statusCode;
     res.body = this._content;
     return res;
-    // res.body = this._content;
   }
 }
 

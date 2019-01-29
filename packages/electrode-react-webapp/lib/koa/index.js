@@ -1,7 +1,6 @@
 "use strict";
 
-/* eslint-disable generator-star-spacing, no-invalid-this */
-/* eslint-disable no-magic-numbers, prefer-arrow-callback */
+/* eslint-disable no-magic-numbers, max-params */
 
 const _ = require("lodash");
 const assert = require("assert");
