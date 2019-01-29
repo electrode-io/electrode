@@ -128,6 +128,7 @@ xclap.load({
   "test-generator": [".test-generator --all"],
   "gen-hapi-app": [".test-generator --hapi --no-test"],
   "gen-express-app": [".test-generator --express --no-test"],
+  "gen-koa-app": [".test-generator --koa --no-test"],
   "test-demo-component": [
     `~$cd ${Path.join(__dirname, "samples/demo-component")} && fyn --pg none install && npm test`
   ],
@@ -218,6 +219,7 @@ xclap.load({
       const all = this.argv.length < 2 || this.argv.indexOf("--all") >= 0;
       const express = all || this.argv.indexOf("--express") >= 0;
       const hapi = all || this.argv.indexOf("--hapi") >= 0;
+      const koa = all || this.argv.indexOf("--koa") >= 0;
       const runTest = this.argv.indexOf("--no-test") < 0;
       const clean = this.argv.indexOf("--no-clean") < 0;
       const testDir = Path.join(__dirname, "tmp");
@@ -230,6 +232,13 @@ xclap.load({
             express &&
             testGenerator(testDir, "express-app", clean && !hapi, runTest, {
               serverType: "ExpressJS"
+            })
+        )
+        .then(
+          () =>
+            koa &&
+            testGenerator(testDir, "koa-app", clean && !hapi && !express, runTest, {
+              serverType: "KoaJS"
             })
         )
         .then(() => undefined);
