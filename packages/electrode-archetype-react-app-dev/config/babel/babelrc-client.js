@@ -117,7 +117,13 @@ const plugins = basePlugins.concat(
 );
 
 const presets = [
-  ["@babel/preset-env", { loose: true }],
+  //
+  // webpack 4 can handle ES modules now so turn off babel module transformation
+  // in production mode to allow tree shaking.
+  // But keep transforming modules to commonjs when not in production mode so tests
+  // can continue to stub ES modules.
+  //
+  ["@babel/preset-env", { modules: isProduction ? false : "commonjs", loose: true }],
   enableTypeScript && "@babel/preset-typescript",
   "@babel/preset-react"
 ];
