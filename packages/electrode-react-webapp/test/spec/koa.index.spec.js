@@ -86,11 +86,7 @@ describe("koa electrode-react-webapp", function() {
   const startServer = options => {
     const app = new Koa();
     const router = koaRouter();
-    registerRoutes((method, path, handler) => {
-      router[method](path, function*() {
-        yield handler.call(this);
-      });
-    }, options);
+    registerRoutes(router, options);
     app.use(router.routes());
     return app.listen(0);
   };

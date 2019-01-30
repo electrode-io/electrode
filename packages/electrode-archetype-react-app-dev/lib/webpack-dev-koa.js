@@ -80,7 +80,7 @@ function setup(app, protocol, port) {
         return next();
       });
   };
-  const e2K = (ctx, middleware, next) => Promise.promisify(middleware)(ctx.req, ctx.res).then(next);
+  const e2K = (ctx, exMid, next) => Promise.promisify(exMid)(ctx.req, ctx.res).then(next);
   app.use(devMiddleware);
   app.use(async (ctx, next) => e2K(ctx, middleware.devMiddleware, next));
   app.use(async (ctx, next) => e2K(ctx, middleware.hotMiddleware, next));

@@ -43,8 +43,7 @@ const DefaultHandleRoute = (request, response, handler, content, routeOptions) =
     });
 };
 
-const registerRoutes = (router, config, next = () => {}) => {
-  const options = config.webapp.options;
+const registerRoutes = (router, options, next = () => {}) => {
   const registerOptions = ReactWebapp.setupOptions(options);
 
   _.each(registerOptions.paths, (v, path) => {
@@ -63,7 +62,7 @@ const registerRoutes = (router, config, next = () => {}) => {
     const routeHandler = ReactWebapp.makeRouteHandler(routeOptions);
     routeOptions.uiConfig = Object.assign(
       {},
-      config.ui,
+      router.config && router.config.ui,
       routeOptions.uiConfig
     );
     const handleRoute = options.handleRoute || DefaultHandleRoute;
@@ -81,6 +80,7 @@ const registerRoutes = (router, config, next = () => {}) => {
       }
 
       /*eslint max-nested-callbacks: [0, 4]*/
+      // const fn = router[method.toLowerCase()] || router.use;
       router[method.toLowerCase()](path, async (ctx, next1) => {
         if (!content) content = resolveContent();
         await handleRoute(ctx.request, ctx.response, routeHandler, content.content, routeOptions);

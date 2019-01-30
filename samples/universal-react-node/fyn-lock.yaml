@@ -1429,6 +1429,10 @@ ansi-to-html:
 any-promise:
  _:
   ^0.1.0: 0.1.0
+  ^1.1.0: 1.3.0
+ 1.3.0:
+  $: sha1-q8av7tzqUugJzcA3au0845Y10X8=
+  _: 'https://registry.npmjs.org/any-promise/-/any-promise-1.3.0.tgz'
  0.1.0:
   $: sha1-gwtoCqflbzNFHUsEnzvYBESY7ic=
   _: 'https://registry.npmjs.org/any-promise/-/any-promise-0.1.0.tgz'
@@ -2577,7 +2581,7 @@ bytes:
   _: 'https://registry.npmjs.org/bytes/-/bytes-3.0.0.tgz'
 cacache:
  _:
-  '^11.0.2,^11.2.0': 11.3.1
+  ^11.0.2: 11.3.1
  11.3.1:
   $: sha512-2PEw4cRRDu+iQvBTTuttQifacYjLPhET+SYO/gEFMy8uhi+jlJREDAjSF5FWSdV/Aw5h18caHA7vMTw2c+wDzA==
   _: 'https://registry.npmjs.org/cacache/-/cacache-11.3.1.tgz'
@@ -4311,8 +4315,8 @@ electrode-archetype-opt-sass:
    sass-loader: ^6.0.6
 electrode-archetype-react-app:
  _:
-  ../../packages/electrode-archetype-react-app: 6.1.4-fynlocal_h
- 6.1.4-fynlocal_h:
+  ../../packages/electrode-archetype-react-app: 6.2.0-fynlocal_h
+ 6.2.0-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app
@@ -4326,8 +4330,8 @@ electrode-archetype-react-app:
    electrode-archetype-opt-react: ^1.0.2
 electrode-archetype-react-app-dev:
  _:
-  ../../packages/electrode-archetype-react-app-dev: 6.1.4-fynlocal_h
- 6.1.4-fynlocal_h:
+  ../../packages/electrode-archetype-react-app-dev: 6.2.0-fynlocal_h
+ 6.2.0-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app-dev
@@ -4421,8 +4425,6 @@ electrode-archetype-react-app-dev:
    stylus-relative-loader: ^3.4.0
    sugarss: ^1.0.1
    typescript: ^3.2.1
-   uglify-es: ^3.3.9
-   uglifyjs-webpack-plugin: ^2.0.1
    url-loader: ^0.6.2
    webpack: ^4.19.1
    webpack-cli: ^3.1.1
@@ -4502,8 +4504,8 @@ electrode-node-resolver:
    require-at: ^1.0.0
 electrode-react-webapp:
  _:
-  ../../packages/electrode-react-webapp: 3.2.3-fynlocal_h
- 3.2.3-fynlocal_h:
+  ../../packages/electrode-react-webapp: 3.3.0-fynlocal_h
+ 3.3.0-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-react-webapp
@@ -4512,6 +4514,7 @@ electrode-react-webapp:
    electrode-hapi-compat: ^1.0.0
    http-status-codes: ^1.3.0
    in-publish: ^2.0.0
+   koa-router: ^7.4.0
    lodash: ^4.17.10
    require-at: ^1.0.0
    string-array: ^1.0.0
@@ -6476,7 +6479,7 @@ http-deceiver:
   _: 'https://registry.npmjs.org/http-deceiver/-/http-deceiver-1.2.7.tgz'
 http-errors:
  _:
-  '1.6.3,~1.6.2,~1.6.3': 1.6.3
+  '1.6.3,^1.3.1,~1.6.2,~1.6.3': 1.6.3
  1.6.3:
   $: sha1-i1VoC7S+KDoLW/TqLjhYC+HZMg0=
   _: 'http://registry.npmjs.org/http-errors/-/http-errors-1.6.3.tgz'
@@ -8334,6 +8337,27 @@ kleur:
   $: sha512-77XF9iTllATmG9lSlIv0qdQ2BQ/h9t0bJllHlbvsQ0zUWfU7Yi0S8L5JXzPZgkefIiajLmBJJ4BsMJmqcf7oxQ==
   _: 'https://registry.npmjs.org/kleur/-/kleur-2.0.2.tgz'
   deprecated: 'Please upgrade to kleur@3 or migrate to ''ansi-colors'' if you prefer the old syntax. Visit <https://github.com/lukeed/kleur/releases/tag/v3.0.0\> for migration path(s).'
+koa-compose:
+ _:
+  ^3.0.0: 3.2.1
+ 3.2.1:
+  $: sha1-qFzLQLfZhtjlo0Wzoazo6rz1Tec=
+  _: 'https://registry.npmjs.org/koa-compose/-/koa-compose-3.2.1.tgz'
+  dependencies:
+   any-promise: ^1.1.0
+koa-router:
+ _:
+  ^7.4.0: 7.4.0
+ 7.4.0:
+  $: sha512-IWhaDXeAnfDBEpWS6hkGdZ1ablgr6Q6pGdXCyK38RbzuH4LkUOpPqPw+3f8l8aTDrQmBQ7xJc0bs2yV4dzcO+g==
+  _: 'https://registry.npmjs.org/koa-router/-/koa-router-7.4.0.tgz'
+  dependencies:
+   debug: ^3.1.0
+   http-errors: ^1.3.1
+   koa-compose: ^3.0.0
+   methods: ^1.0.1
+   path-to-regexp: ^1.1.1
+   urijs: ^1.19.0
 last-call-webpack-plugin:
  _:
   ^3.0.0: 3.0.0
@@ -8965,7 +8989,7 @@ merge-stream:
    readable-stream: ^2.0.1
 methods:
  _:
-  ~1.1.2: 1.1.2
+  '^1.0.1,~1.1.2': 1.1.2
  1.1.2:
   $: sha1-VSmk1nZUE07cxSZmVoNbD4Ua/O4=
   _: 'https://registry.npmjs.org/methods/-/methods-1.1.2.tgz'
@@ -10212,7 +10236,7 @@ path-parse:
 path-to-regexp:
  _:
   0.1.7: 0.1.7
-  '^1.0.1,^1.7.0': 1.7.0
+  '^1.0.1,^1.1.1,^1.7.0': 1.7.0
  1.7.0:
   $: sha1-Wf3g9DW62suhA6hOnTvGTpa5k30=
   _: 'https://registry.npmjs.org/path-to-regexp/-/path-to-regexp-1.7.0.tgz'
@@ -13839,30 +13863,13 @@ uglify-es:
    source-map: ~0.6.1
 uglify-js:
  _:
-  '^3.0.0,^3.1.4': 3.4.9
+  ^3.1.4: 3.4.9
  3.4.9:
   $: sha512-8CJsbKOtEbnJsTyv6LE6m6ZKniqMiFWmm9sRbopbkGs3gMPPfd3Fh8iIA4Ykv5MgaTbqHr4BaoGLJLZNhsrW1Q==
   _: 'https://registry.npmjs.org/uglify-js/-/uglify-js-3.4.9.tgz'
   dependencies:
    commander: ~2.17.1
    source-map: ~0.6.1
-uglifyjs-webpack-plugin:
- _:
-  ^2.0.1: 2.0.1
- 2.0.1:
-  $: sha512-1HhCHkOB6wRCcv7htcz1QRPVbWPEY074RP9vzt/X0LF4xXm9l4YGd0qja7z88abDixQlnVwBjXsTBs+Xsn/eeQ==
-  _: 'https://registry.npmjs.org/uglifyjs-webpack-plugin/-/uglifyjs-webpack-plugin-2.0.1.tgz'
-  dependencies:
-   cacache: ^11.2.0
-   find-cache-dir: ^2.0.0
-   schema-utils: ^1.0.0
-   serialize-javascript: ^1.4.0
-   source-map: ^0.6.1
-   uglify-js: ^3.0.0
-   webpack-sources: ^1.1.0
-   worker-farm: ^1.5.2
-  peerDependencies:
-   webpack: ^4.3.0
 ultron:
  _:
   1.0.x: 1.0.2
@@ -14055,7 +14062,7 @@ uri-js:
    punycode: ^2.1.0
 urijs:
  _:
-  ^1.16.1: 1.19.1
+  '^1.16.1,^1.19.0': 1.19.1
  1.19.1:
   $: sha512-xVrGVi94ueCJNrBSTjWqjvtgvl3cyOTThp2zaMaFNGp3F542TR6sM3f2o8RqZl+AwteClSVmoCyt0ka4RjQOQg==
   _: 'https://registry.npmjs.org/urijs/-/urijs-1.19.1.tgz'
