@@ -10,6 +10,9 @@ const portFromEnv = () => {
 
 module.exports = {
   port: portFromEnv() || "3000",
+  ui: {
+    demo: "hello from ui config"
+  },
   webapp: {
     module: "electrode-react-webapp/lib/express",
     options: {

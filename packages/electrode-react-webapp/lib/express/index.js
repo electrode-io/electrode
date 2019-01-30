@@ -40,7 +40,8 @@ const DefaultHandleRoute = (request, response, handler, content, routeOptions) =
     });
 };
 
-const registerRoutes = (app, options, next = () => {}) => {
+const registerRoutes = (app, config, next = () => {}) => {
+  const options = config.webapp.options;
   const registerOptions = ReactWebapp.setupOptions(options);
 
   _.each(registerOptions.paths, (v, path) => {
@@ -57,6 +58,11 @@ const registerRoutes = (app, options, next = () => {}) => {
 
     const routeOptions = _.defaults({ htmlFile: v.htmlFile }, registerOptions);
     const routeHandler = ReactWebapp.makeRouteHandler(routeOptions);
+    routeOptions.uiConfig = Object.assign(
+      {},
+      config.ui,
+      routeOptions.uiConfig
+    );
     const handleRoute = options.handleRoute || DefaultHandleRoute;
     _.defaults(routeOptions, { responseForError, responseForBadStatus });
     let content;

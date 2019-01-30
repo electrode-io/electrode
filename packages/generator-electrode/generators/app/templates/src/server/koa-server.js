@@ -6,6 +6,7 @@ const koaStatic = require("koa-static");
 const router = require("koa-router")();
 const app = new Koa();
 const path = require("path");
+const uiConfig = require("electrode-ui-config");
 
 const xrequire = require;
 
@@ -37,8 +38,11 @@ const setStaticPaths = function() {
 const setRouteHandler = config =>
   new Promise((resolve, reject) => {
     const webapp = p => (p.startsWith(".") ? path.resolve(p) : p);
+    uiConfig.ui = {
+      demo: config.ui.demo
+    }
     const registerRoutes = xrequire(webapp(config.webapp.module));
-    registerRoutes(router, config.webapp.options, err => {
+    registerRoutes(router, config, err => {
       if (err) {
         logger.error(err);
         reject(err);
