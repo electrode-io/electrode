@@ -11,7 +11,7 @@ const { responseForError, responseForBadStatus } = require("../utils");
 const getDataHtml = data => (data.html !== undefined ? data.html : data);
 
 const DefaultHandleRoute = (request, response, handler, content, routeOptions) => {
-  return handler({ content, mode: (request.query && request.query.__mode) || "", request })
+  return handler({ content, mode: request.query.__mode || "", request })
     .then(context => {
       const data = context.result;
       if (data instanceof Error) {
@@ -83,10 +83,10 @@ const registerRoutes = (router, config, next = () => {}) => {
       }
 
       /*eslint max-nested-callbacks: [0, 4]*/
-      router[method.toLowerCase()](path, async (ctx, next) => {
+      router[method.toLowerCase()](path, async (ctx, next1) => {
         if (!content) content = resolveContent();
         await handleRoute(ctx.request, ctx.response, routeHandler, content.content, routeOptions);
-        return next();
+        return next1();
       });
     });
   });
