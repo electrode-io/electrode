@@ -57,11 +57,6 @@ const registerRoutes = (app, options, next = () => {}) => {
 
     const routeOptions = _.defaults({ htmlFile: v.htmlFile }, registerOptions);
     const routeHandler = ReactWebapp.makeRouteHandler(routeOptions);
-    routeOptions.uiConfig = Object.assign(
-      {},
-      app.config && app.config.ui,
-      routeOptions.uiConfig
-    );
     const handleRoute = options.handleRoute || DefaultHandleRoute;
     _.defaults(routeOptions, { responseForError, responseForBadStatus });
     let content;

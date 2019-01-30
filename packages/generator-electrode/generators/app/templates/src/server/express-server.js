@@ -8,7 +8,6 @@ const path = require("path");
 const setStaticPaths = function() {
   app.use(express.static(path.join(__dirname, "../../dist")));
 };
-const uiConfig = require("electrode-ui-config");
 
 const xrequire = require;
 
@@ -35,11 +34,7 @@ const setDevMiddleware = config => {
 const setRouteHandler = config =>
   new Promise((resolve, reject) => {
     const webapp = p => (p.startsWith(".") ? path.resolve(p) : p);
-    uiConfig.ui = {
-      demo: config.ui.demo
-    };
     const registerRoutes = xrequire(webapp(config.webapp.module));
-    app.config = config;
     return registerRoutes(app, config.webapp.options, err => {
       if (err) {
         logger.error(err);
