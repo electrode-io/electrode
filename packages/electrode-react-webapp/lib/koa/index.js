@@ -18,22 +18,20 @@ const DefaultHandleRoute = (request, response, handler, content, routeOptions) =
         throw data;
       }
 
-      const status = data.status;
-
-      if (status === undefined) {
+      if (data.status === undefined) {
         response.status = 200;
         response.body = data;
-      } else if (HttpStatus.redirect[status]) {
+      } else if (HttpStatus.redirect[data.status]) {
         response.redirect(data.path);
-        response.status = status;
-      } else if (status >= 200 && status < 300) {
+        response.status = data.status;
+      } else if (data.status >= 200 && data.status < 300) {
         response.body = getDataHtml(data);
       } else if (routeOptions.responseForBadStatus) {
         const output = routeOptions.responseForBadStatus(request, routeOptions, data);
         response.status = output.status;
         response.body = output.html;
       } else {
-        response.status = status;
+        response.status = data.status;
         response.body = getDataHtml(data);
       }
       return response;
