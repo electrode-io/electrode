@@ -1,3 +1,20 @@
+# 1/30/2019
+
+-   [patch][fix] explicitly set babel env modules config
+
+## Packages
+
+-   `electrode-archetype-react-app@6.2.1` `(6.2.0 => 6.2.1)`
+-   `electrode-archetype-react-app-dev@6.2.1` `(6.2.0 => 6.2.1)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   add a simple dev dashboard [commit](http://github.com/electrode-io/electrode/commit/70d5b7b602c62d8d04858828bc74e2f735d80863)
+    -   [chore] use chalker to do terminal colors [commit](http://github.com/electrode-io/electrode/commit/3b3cf197a3e374f6c669168e3ac88ceddfbdb93b)
+    -   [patch][fix] explicitly set babel env modules config ([#1132](https://github.com/electrode-io/electrode/pull/1132)) [commit](http://github.com/electrode-io/electrode/commit/cdf466caaf2a4ba785ab9d0634c7a79ca5d9ff0b)
+
 # 1/23/2019
 
 - electrode-archetype-react-app
