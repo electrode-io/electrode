@@ -35,7 +35,6 @@ const setRouteHandler = config =>
   new Promise((resolve, reject) => {
     const webapp = p => (p.startsWith(".") ? path.resolve(p) : p);
     const registerRoutes = xrequire(webapp(config.webapp.module));
-
     return registerRoutes(app, config.webapp.options, err => {
       if (err) {
         logger.error(err);

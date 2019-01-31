@@ -39,10 +39,10 @@ return {
     good: "^8.1.1",
     "good-console": "^7.1.0", //<% } else if (isExpress) { %>
     express: "^4.0.0", //<% } else { %>
-    koa: "^1.2.4",
-    "koa-router": "^5.4.0",
-    "koa-send": "^3.2.0",
-    "koa-static": "^2.0.0", //<% } if (isPWA) { %>
+    koa: "^2.6.2",
+    "koa-router": "^7.4.0",
+    "koa-send": "^5.0.0",
+    "koa-static": "^5.0.0", //<% } if (isPWA) { %>
     "react-notify-toast": "^0.5.0", //<% } %>
     lodash: "^4.17.11",
     "react-router-config": "^1.0.0-beta.4",
