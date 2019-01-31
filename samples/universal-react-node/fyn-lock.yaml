@@ -2577,7 +2577,7 @@ bytes:
   _: 'https://registry.npmjs.org/bytes/-/bytes-3.0.0.tgz'
 cacache:
  _:
-  '^11.0.2,^11.2.0': 11.3.1
+  ^11.0.2: 11.3.1
  11.3.1:
   $: sha512-2PEw4cRRDu+iQvBTTuttQifacYjLPhET+SYO/gEFMy8uhi+jlJREDAjSF5FWSdV/Aw5h18caHA7vMTw2c+wDzA==
   _: 'https://registry.npmjs.org/cacache/-/cacache-11.3.1.tgz'
@@ -2784,6 +2784,14 @@ chalk:
  _:
   '^1.1.1,^1.1.3': 1.1.3
   '^2.0.0,^2.0.1,^2.1.0,^2.3.0,^2.4.1': 2.4.1
+  ^2.4.2: 2.4.2
+ 2.4.2:
+  $: sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==
+  _: 'https://registry.npmjs.org/chalk/-/chalk-2.4.2.tgz'
+  dependencies:
+   ansi-styles: ^3.2.1
+   escape-string-regexp: ^1.0.5
+   supports-color: ^5.3.0
  2.4.1:
   $: sha512-ObN6h1v2fTJSmUXoS3nMQ92LbDK9be4TV+6G+omQlGJFdcUX5heKi1LZ1YnRMIgwTLEj3E24bT6tYni50rlCfQ==
   _: 'https://registry.npmjs.org/chalk/-/chalk-2.4.1.tgz'
@@ -2800,6 +2808,14 @@ chalk:
    has-ansi: ^2.0.0
    strip-ansi: ^3.0.0
    supports-color: ^2.0.0
+chalker:
+ _:
+  ^1.1.1: 1.1.2
+ 1.1.2:
+  $: sha512-DYaS9gfTsjQz8aYBKVlqicaXgNHfp6/HqOmNXdq40C/QgXl16kJSp2USdF8l2bJGDEE9hJKQqSGQVB5UczxnTA==
+  _: 'https://registry.npmjs.org/chalker/-/chalker-1.1.2.tgz'
+  dependencies:
+   chalk: ^2.4.2
 chardet:
  _:
   ^0.4.0: 0.4.2
@@ -4311,8 +4327,8 @@ electrode-archetype-opt-sass:
    sass-loader: ^6.0.6
 electrode-archetype-react-app:
  _:
-  ../../packages/electrode-archetype-react-app: 6.1.4-fynlocal_h
- 6.1.4-fynlocal_h:
+  ../../packages/electrode-archetype-react-app: 6.2.1-fynlocal_h
+ 6.2.1-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app
@@ -4326,8 +4342,8 @@ electrode-archetype-react-app:
    electrode-archetype-opt-react: ^1.0.2
 electrode-archetype-react-app-dev:
  _:
-  ../../packages/electrode-archetype-react-app-dev: 6.1.4-fynlocal_h
- 6.1.4-fynlocal_h:
+  ../../packages/electrode-archetype-react-app-dev: 6.2.1-fynlocal_h
+ 6.2.1-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app-dev
@@ -4363,6 +4379,7 @@ electrode-archetype-react-app-dev:
    chai: ^4.0.0
    chai-as-promised: ^7.1.1
    chai-shallowly: ^1.0.0
+   chalker: ^1.1.1
    clean-css: ^3.4.21
    convert-source-map: ^1.5.0
    css-loader: ^1.0.0
@@ -4421,8 +4438,6 @@ electrode-archetype-react-app-dev:
    stylus-relative-loader: ^3.4.0
    sugarss: ^1.0.1
    typescript: ^3.2.1
-   uglify-es: ^3.3.9
-   uglifyjs-webpack-plugin: ^2.0.1
    url-loader: ^0.6.2
    webpack: ^4.19.1
    webpack-cli: ^3.1.1
@@ -4502,8 +4517,8 @@ electrode-node-resolver:
    require-at: ^1.0.0
 electrode-react-webapp:
  _:
-  ../../packages/electrode-react-webapp: 3.2.3-fynlocal_h
- 3.2.3-fynlocal_h:
+  ../../packages/electrode-react-webapp: 3.3.0-fynlocal_h
+ 3.3.0-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-react-webapp
@@ -13839,30 +13854,13 @@ uglify-es:
    source-map: ~0.6.1
 uglify-js:
  _:
-  '^3.0.0,^3.1.4': 3.4.9
+  ^3.1.4: 3.4.9
  3.4.9:
   $: sha512-8CJsbKOtEbnJsTyv6LE6m6ZKniqMiFWmm9sRbopbkGs3gMPPfd3Fh8iIA4Ykv5MgaTbqHr4BaoGLJLZNhsrW1Q==
   _: 'https://registry.npmjs.org/uglify-js/-/uglify-js-3.4.9.tgz'
   dependencies:
    commander: ~2.17.1
    source-map: ~0.6.1
-uglifyjs-webpack-plugin:
- _:
-  ^2.0.1: 2.0.1
- 2.0.1:
-  $: sha512-1HhCHkOB6wRCcv7htcz1QRPVbWPEY074RP9vzt/X0LF4xXm9l4YGd0qja7z88abDixQlnVwBjXsTBs+Xsn/eeQ==
-  _: 'https://registry.npmjs.org/uglifyjs-webpack-plugin/-/uglifyjs-webpack-plugin-2.0.1.tgz'
-  dependencies:
-   cacache: ^11.2.0
-   find-cache-dir: ^2.0.0
-   schema-utils: ^1.0.0
-   serialize-javascript: ^1.4.0
-   source-map: ^0.6.1
-   uglify-js: ^3.0.0
-   webpack-sources: ^1.1.0
-   worker-farm: ^1.5.2
-  peerDependencies:
-   webpack: ^4.3.0
 ultron:
  _:
   1.0.x: 1.0.2
