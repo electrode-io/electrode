@@ -1,3 +1,50 @@
+# 1/31/2019
+
+- fix koa app
+- fix source map issue
+- compile to commonjs in non prod mode to allow stub ES modules in test
+
+## Packages
+
+### Directly Updated
+
+-   `electrode-archetype-react-app@6.2.2` `(6.2.1 => 6.2.2)`
+-   `electrode-archetype-react-app-dev@6.2.2` `(6.2.1 => 6.2.2)`
+-   `electrode-react-webapp@3.3.1` `(3.3.0 => 3.3.1)`
+-   `generator-electrode@5.1.1` `(5.1.0 => 5.1.1)`
+
+### Lerna Updated
+
+-   `electrode-ignite@3.0.6` `(3.0.5 => 3.0.6)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [patch][fix] keep modules auto in prod mode ([#1138](https://github.com/electrode-io/electrode/pull/1138)) [commit](http://github.com/electrode-io/electrode/commit/2d73f850850c6cadff40530b859c9abe2dd75f98)
+    -   [patch][bug] fix source map issue ([#1137](https://github.com/electrode-io/electrode/pull/1137)) [commit](http://github.com/electrode-io/electrode/commit/44f04048f6d52aaa905fa2d1e358b094cefae59f)
+    -   [patch][fix] get koa app to work with latest archetype ([#1135](https://github.com/electrode-io/electrode/pull/1135)) [commit](http://github.com/electrode-io/electrode/commit/2ebd42119392064d4d33d34d0d28959c736f5038)
+
+-   `packages/electrode-react-webapp`
+
+    -   [patch] fix dep for koa-router [commit](http://github.com/electrode-io/electrode/commit/f2f24f5c815598acc09c966ba991e621b9e5b71d)
+    -   [patch][bug] fix express-app config.ui.demo issue ([#1136](https://github.com/electrode-io/electrode/pull/1136)) [commit](http://github.com/electrode-io/electrode/commit/595ffc4866f0b6b769454e01c922db9a092b21f5)
+    -   [patch][fix] get koa app to work with latest archetype ([#1135](https://github.com/electrode-io/electrode/pull/1135)) [commit](http://github.com/electrode-io/electrode/commit/2ebd42119392064d4d33d34d0d28959c736f5038)
+
+-   `packages/generator-electrode`
+
+    -   [patch][bug] fix express-app config.ui.demo issue ([#1136](https://github.com/electrode-io/electrode/pull/1136)) [commit](http://github.com/electrode-io/electrode/commit/595ffc4866f0b6b769454e01c922db9a092b21f5)
+    -   [patch][fix] get koa app to work with latest archetype ([#1135](https://github.com/electrode-io/electrode/pull/1135)) [commit](http://github.com/electrode-io/electrode/commit/2ebd42119392064d4d33d34d0d28959c736f5038)
+    -   [patch][chore] use .babelrc.js ([#1140](https://github.com/electrode-io/electrode/pull/1140)) [commit](http://github.com/electrode-io/electrode/commit/ca1d251f509f89e9cba8b2b68d05f6f8062a44e9)
+
+-   `samples/hapi-app`
+
+    -   [chore] update sample app files [commit](http://github.com/electrode-io/electrode/commit/7422008197a22e719b5eca9700a42faef16af9bc)
+
+-   `samples/universal-react-node`
+
+    -   [chore] update sample app lockfile [commit](http://github.com/electrode-io/electrode/commit/9e540f9e57a8e8d3e725006765bc777c3dfbdee6)
+
 # 1/30/2019
 
 -   [patch][fix] explicitly set babel env modules config
