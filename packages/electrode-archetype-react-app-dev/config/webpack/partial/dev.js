@@ -33,8 +33,8 @@ module.exports = function() {
       publicPath: `${devProtocol}${archetype.webpack.devHostname}:${archetype.webpack.devPort}/js/`,
       filename: "[name].bundle.dev.js"
     },
+    devtool: 'inline-source-map',
     plugins: [
-      new webpack.SourceMapDevToolPlugin({ filename: "[file].map" }),
       new ExtractTextPlugin({ filename: "[name].style.css" })
     ],
     optimization: {
