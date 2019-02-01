@@ -2,6 +2,7 @@
 
 const requireAt = require("require-at");
 const archetype = require("../archetype");
+const ck = require("chalker");
 
 const {
   enableTypeScript,
@@ -75,6 +76,17 @@ const basePlugins = [
 ];
 
 const { BABEL_ENV, NODE_ENV } = process.env;
+
+const fileId = "electrode-archetype-react-app-dev babelrc-client.js";
+
+const checkEnv = names => {
+  names = names.filter(x => !process.env.hasOwnProperty(x));
+  if (names.length > 0) {
+    console.error(ck`\n<red>ERROR: ${fileId}: env ${names.join(", ")} not defined</>`);
+  }
+};
+
+checkEnv(["ENABLE_CSS_MODULE", "ENABLE_KARMA_COV"]);
 
 const enableCssModule = process.env.ENABLE_CSS_MODULE === "true";
 const enableKarmaCov = process.env.ENABLE_KARMA_COV === "true";
