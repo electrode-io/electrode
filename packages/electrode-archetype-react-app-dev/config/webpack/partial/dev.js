@@ -8,6 +8,11 @@ const devProtocol = archetype.webpack.https ? "https://" : "http://";
 
 module.exports = function() {
   const devServerConfig = {
+    hot: archetype.webpack.enableHotModuleReload,
+    overlay: {
+      errors: true,
+      warnings: archetype.webpack.enableWarningsOverlay
+    },
     reporter: webpackDevReporter,
     https: Boolean(archetype.webpack.https)
   };
@@ -33,9 +38,7 @@ module.exports = function() {
       filename: "[name].bundle.dev.js"
     },
     devtool: "inline-source-map",
-    plugins: [
-      new ExtractTextPlugin({ filename: "[name].style.css" })
-    ],
+    plugins: [new ExtractTextPlugin({ filename: "[name].style.css" })],
     optimization: {
       noEmitOnErrors: true
     }

@@ -592,6 +592,14 @@ Individual .babelrc files were generated for you in src/client and src/server
       }
     },
 
+    hot: {
+      desc: "Start app dev with hot reload enabled",
+      task: () => {
+        archetype.webpack.enableHotModuleReload = true;
+        return "dev";
+      }
+    },
+
     "dev-static": {
       desc: "Start server in development mode with statically built files",
       task: ["build-dev-static", "app-server"]
@@ -712,6 +720,7 @@ Individual .babelrc files were generated for you in src/client and src/server
       task: mkCmd(
         "webpack-dev-server",
         `--watch --watch-aggregate-timeout 2000`,
+        archetype.webpack.enableHotModuleReload ? `--hot` : ``,
         `--config`,
         quote(webpackConfig("webpack.config.dev.js")),
         `--progress --colors`,
