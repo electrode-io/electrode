@@ -3,7 +3,6 @@
 /* eslint-disable no-magic-numbers, max-params */
 
 const _ = require("lodash");
-const assert = require("assert");
 const ReactWebapp = require("../react-webapp");
 const HttpStatus = require("../http-status");
 const { responseForError, responseForBadStatus } = require("../utils");
@@ -44,45 +43,31 @@ const registerRoutes = (app, options, next = () => {}) => {
   const registerOptions = ReactWebapp.setupOptions(options);
 
   _.each(registerOptions.paths, (v, path) => {
-    const resolveContent = () => {
-      if (registerOptions.serverSideRendering !== false) {
-        assert(
-          v.content !== undefined,
-          `You must define content for the webapp plugin path ${path}`
-        );
-        return ReactWebapp.resolveContent(v.content);
-      }
-      return { content: { status: 200, html: "" } };
-    };
-
     const routeOptions = _.defaults({ htmlFile: v.htmlFile }, registerOptions);
-    routeOptions.uiConfig = Object.assign(
-      {},
-      app.config && app.config.ui,
-      routeOptions.uiConfig
-    );
+    routeOptions.uiConfig = Object.assign({}, _.get(app, "config.ui", {}), routeOptions.uiConfig);
     const routeHandler = ReactWebapp.makeRouteHandler(routeOptions);
     const handleRoute = options.handleRoute || DefaultHandleRoute;
-    _.defaults(routeOptions, { responseForError, responseForBadStatus });
-    let content;
 
-    /*eslint max-nested-callbacks: [0, 4]*/
+    _.defaults(routeOptions, { responseForError, responseForBadStatus });
+
+    const contentResolver = ReactWebapp.getContentResolver(registerOptions, v.content, path);
+
     let methods = v.method || ["GET"];
     if (!Array.isArray(methods)) {
       methods = [methods];
     }
+
     _.each(methods, method => {
       if (method === "*") {
         method = "ALL";
       }
       app[method.toLowerCase()](path, (req, res) => {
-        if (!content) content = resolveContent();
-        handleRoute(req, res, routeHandler, content.content, routeOptions);
+        const content = contentResolver(req.app && req.app.webpackDev);
+        handleRoute(req, res, routeHandler, content, routeOptions);
       });
     });
   });
 
-  // resolve promise
   next();
 };
 
