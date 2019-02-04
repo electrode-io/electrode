@@ -1,6 +1,7 @@
 "use strict";
 
-/* eslint-disable max-len, max-statements, prefer-template */
+/* eslint-disable no-console, no-process-exit */
+/* eslint-disable no-magic-numbers, max-len, max-statements, prefer-template */
 
 const Path = require("path");
 const _ = require("lodash");

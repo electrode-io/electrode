@@ -1,5 +1,7 @@
 "use strict";
 
+/* eslint-disable global-require, no-console */
+
 const ck = require("chalker");
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const optionalRequire = require("optional-require")(require);

@@ -1,5 +1,7 @@
 "use strict";
 
+/* eslint-disable no-console, no-magic-numbers */
+
 const Path = require("path");
 const _ = require("lodash");
 const isomorphicExtendRequire = require("isomorphic-loader/lib/extend-require");
