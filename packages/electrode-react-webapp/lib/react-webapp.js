@@ -2,6 +2,7 @@
 
 const _ = require("lodash");
 const Path = require("path");
+const assert = require("assert");
 const AsyncTemplate = require("./async-template");
 
 const {
@@ -169,9 +170,49 @@ const resolveContent = (pathData, xrequire) => {
   };
 };
 
+const getContentResolver = (registerOptions, pathData, path) => {
+  let resolved;
+
+  const resolveWithDev = (webpackDev, xrequire) => {
+    if (!webpackDev.valid) {
+      resolved = resolveContent("<!-- Webpack still compiling -->");
+    } else if (webpackDev.hasErrors) {
+      resolved = resolveContent("<!-- Webpack compile has errors -->");
+    } else if (!resolved || resolved.resolveTime < webpackDev.compileTime) {
+      if (resolved && resolved.fullPath) {
+        delete resolved.xrequire.cache[resolved.fullPath];
+      }
+      resolved = resolveContent(pathData, xrequire);
+    }
+
+    return resolved.content;
+  };
+
+  return (webpackDev, xrequire) => {
+    if (webpackDev) return resolveWithDev(webpackDev, xrequire);
+
+    if (resolved) return resolved.content;
+
+    if (registerOptions.serverSideRendering !== false) {
+      resolved = resolveContent(pathData);
+      assert(resolved, `You must define content for the webapp plugin path ${path}`);
+    } else {
+      resolved = {
+        content: {
+          status: 200,
+          html: "<!-- SSR disabled by options.serverSideRendring -->"
+        }
+      };
+    }
+
+    return resolved.content;
+  };
+};
+
 module.exports = {
   setupOptions,
   setupPathOptions,
   makeRouteHandler,
-  resolveContent
+  resolveContent,
+  getContentResolver
 };
