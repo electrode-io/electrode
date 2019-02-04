@@ -2,19 +2,30 @@
 
 /* eslint-disable no-console, no-magic-numbers, max-statements */
 /* eslint-disable max-params, prefer-template, complexity, global-require */
+
 const Path = require("path");
 const Fs = require("fs");
 const webpack = require("webpack");
 const opn = require("opn");
+const hotHelpers = require("webpack-hot-middleware/helpers");
+const Url = require("url");
+
+hotHelpers.pathMatch = (url, path) => {
+  try {
+    return Url.parse(url).pathname === Url.parse(path).pathname;
+  } catch (e) {
+    return false;
+  }
+};
+
 const webpackDevMiddleware = require("webpack-dev-middleware");
 const webpackHotMiddleware = require("webpack-hot-middleware");
-const isomorphicExtendRequire = require("isomorphic-loader/lib/extend-require");
 const serveIndex = require("serve-index-fs");
 const ck = require("chalker");
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const _ = require("lodash");
-const statsUtils = require("./stats-utils");
-const statsMapper = require("./stats-mapper");
+const statsUtils = require("../stats-utils");
+const statsMapper = require("../stats-mapper");
 
 function urlJoin() {
   if (arguments.length < 1) return undefined;
@@ -100,11 +111,15 @@ class Middleware {
     const archetypeWebpackConfig = Path.join(archetype.config.webpack, "webpack.config.dev.js");
     const config = require(archetypeWebpackConfig);
 
+    const { devPort, devHostname } = archetype.webpack;
+
+    // this is webpack-hot-middleware's default
+    this._hmrPath = "/__webpack_hmr";
+
     const webpackHotOptions = _.merge(
       {
         log: false,
-        // this is webpack-hot-middleware's default
-        path: "/__webpack_hmr",
+        path: `http://${devHostname}:${devPort}${this._hmrPath}`,
         heartbeat: 2000
       },
       options.hot
@@ -138,9 +153,9 @@ class Middleware {
       {
         // https: false,
         // disableHostCheck: true,
-        // headers: {
-        //   "Access-Control-Allow-Origin": "*"
-        // },
+        headers: {
+          "Access-Control-Allow-Origin": "*"
+        },
         // port: archetype.webpack.devPort,
         // host: archetype.webpack.devHostname,
         quiet: false,
@@ -160,13 +175,8 @@ class Middleware {
       options.dev
     );
 
-    const userReporter = webpackDevOptions.reporter;
     let defaultReporter; // eslint-disable-line
     webpackDevOptions.reporter = (a, b) => defaultReporter(a, b);
-
-    // in case load assets failed and didn't setup extend require properly
-    isomorphicExtendRequire._instance.interceptLoad();
-    isomorphicExtendRequire.deactivate();
 
     this.devMiddleware = webpackDevMiddleware(compiler, webpackDevOptions);
     this.hotMiddleware = webpackHotMiddleware(compiler, webpackHotOptions);
@@ -240,7 +250,9 @@ class Middleware {
             this.returnReporter = this.returnReporter ? showError : false;
           }
 
+          const refreshModules = [];
           if (!this.webpackDev.hasErrors) {
+            const cwd = process.cwd() + "/";
             const bundles = statsMapper.getBundles(reporterOptions.stats);
             bundles.forEach(b => {
               b.modules.forEach(m => {
@@ -250,38 +262,38 @@ class Middleware {
                 // webpack4 output like "./routes.jsx + 9 modules"
                 const plusIx = m.indexOf(" + ");
                 if (plusIx > 0) m = m.substring(0, plusIx);
-                const moduleFullPath = Path.resolve(m);
-                delete require.cache[moduleFullPath];
+                refreshModules.push(m.replace(cwd, ""));
               });
             });
           }
 
-          if (userReporter) userReporter(middlewareOptions, reporterOptions);
           this.webpackDev.lastReporterOptions = reporterOptions;
+
+          process.send({
+            name: "webpack-report",
+            valid: true,
+            hasErrors: stats.hasErrors(),
+            hasWarnings: stats.hasWarnings(),
+            refreshModules
+          });
         };
 
-        transferIsomorphicAssets(this.devMiddleware.fileSystem, err => {
-          // reload assets to activate
-          if (err) return update();
-
-          return isomorphicExtendRequire.loadAssets(err2 => {
-            if (err) console.error("reload isomorphic assets failed", err2);
-            update();
-          });
-        });
+        transferIsomorphicAssets(this.devMiddleware.fileSystem, update);
       } else {
-        isomorphicExtendRequire.deactivate();
+        process.send({
+          name: "webpack-report",
+          valid: false
+        });
         console.log(ck`webpack bundle is now <magenta>INVALID</>`);
         this.webpackDev.valid = false;
         this.webpackDev.lastReporterOptions = false;
-        if (userReporter) userReporter(middlewareOptions, reporterOptions);
       }
     };
   }
 
   process(req, res, cycle) {
     const isHmrRequest =
-      req.url === this._webpackHotOptions.path ||
+      req.url === this._hmrPath ||
       (req.url.startsWith(this.publicPath) && req.url.indexOf(".hot-update.") >= 0);
 
     if (skipWebpackDevMiddleware(req)) {
