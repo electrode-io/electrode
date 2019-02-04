@@ -98,7 +98,7 @@ function register(server) {
 
   server.ext({
     type: "onRequest",
-    method: (request, h) => {
+    method: request => {
       const { req, res } = request.raw;
 
       return new Promise((resolve, reject) => {

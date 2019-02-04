@@ -2,9 +2,6 @@
 
 /* eslint-disable no-console, no-magic-numbers */
 
-const Url = require("url");
-const Boom = require("boom");
-const mime = require("mime");
 const archetype = require("electrode-archetype-react-app/config/archetype");
 
 const AppDevMiddleware = require("./app-dev-middleware");

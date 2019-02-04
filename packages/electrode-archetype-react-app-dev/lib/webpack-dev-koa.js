@@ -6,7 +6,7 @@ function setup(app) {
   middleware.setup();
   app.use(async (ctx, next) => {
     ctx.webpackDev = middleware.webpackDev;
-    await next();
+    return next();
   });
 }
 

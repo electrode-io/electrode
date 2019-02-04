@@ -1,5 +1,7 @@
 "use strict";
 
+/* eslint-disable max-len, max-statements, prefer-template */
+
 const Path = require("path");
 const _ = require("lodash");
 const boxen = require("boxen");
@@ -98,7 +100,7 @@ class AdminServer {
   async startDevServer() {
     if (this._startingWds) {
       console.log(ck`<yellow.inverse> start webpack dev server already in progress </>`);
-      return;
+      return null;
     }
     this._startingWds = true;
     const start = () => {
@@ -153,7 +155,7 @@ class AdminServer {
       console.log(
         ck`<yellow.inverse> start app server already in progress - press<magenta> K </>to kill it.</>`
       );
-      return;
+      return null;
     }
     this._startingApp = true;
     if (this._appWatcher) {

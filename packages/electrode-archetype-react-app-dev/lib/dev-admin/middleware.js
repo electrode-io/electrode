@@ -52,7 +52,7 @@ function openUrl(url) {
   };
 
   const showOpen = () => {
-    // console.info(ck`Your app is now ready at <green>${url}</>`);
+    console.info(ck`Your app is now ready at <green>${url}</>`);
   };
 
   if (flag === false) return showOpen();

@@ -17,7 +17,12 @@ class AppDevMiddleware {
 
     if (!data.valid) {
       isomorphicExtendRequire.deactivate();
-      process.send({ name: "app-ack", from: data.name, fromId: data.id, isomorphicStatus: "off" });
+      return process.send({
+        name: "app-ack",
+        from: data.name,
+        fromId: data.id,
+        isomorphicStatus: "off"
+      });
     } else {
       if (!_.isEmpty(data.refreshModules)) {
         data.refreshModules.forEach(m => {
@@ -28,7 +33,12 @@ class AppDevMiddleware {
 
       return isomorphicExtendRequire.loadAssets(err2 => {
         if (err2) console.error("reload isomorphic assets failed", err2);
-        process.send({ name: "app-ack", from: data.name, fromId: data.id, isomorphicStatus: "on" });
+        return process.send({
+          name: "app-ack",
+          from: data.name,
+          fromId: data.id,
+          isomorphicStatus: "on"
+        });
       });
     }
   }
