@@ -75,6 +75,7 @@ class FakeRes extends EventEmitter {
       .status(this._statusCode)
       .send(this._content);
   }
+
   koaRespond(res) {
     Object.entries(this._headers).forEach(([k, v]) => res.append(k, v));
     res.status = this._statusCode;

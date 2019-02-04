@@ -101,7 +101,6 @@ function setWebpackDev() {
   process.env.WEBPACK_DEV = "true";
   if (archetype.webpack.devMiddleware) {
     process.env.WEBPACK_DEV_MIDDLEWARE = "true";
-    process.env.WEBPACK_DEV_PORT = portFromEnv();
   }
 }
 
@@ -280,6 +279,9 @@ function startAppServer(options) {
 // - when invoking tasks in [], starting name with ? means optional (ie: won't fail if task not found)
 
 function makeTasks() {
+  process.env.ENABLE_CSS_MODULE = "false";
+  process.env.ENABLE_KARMA_COV = "false";
+
   const checkFrontendCov = minimum => {
     if (typeof minimum === "string") {
       minimum += ".";
@@ -566,7 +568,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     debug: ["build-dev-static", "server-debug"],
     devbrk: ["dev --inspect-brk"],
     dev: {
-      desc: "Start your app with watch in development mode with webpack-dev-server",
+      desc: "Start your app with watch in development mode",
       dep: [
         ".remove-log-files",
         ".development-env",
@@ -583,11 +585,9 @@ Individual .babelrc files were generated for you in src/client and src/server
         return [
           ".set.css-module.env",
           ".webpack-dev",
-          [
-            archetype.webpack.devMiddleware ? "" : "wds.dev",
-            `server-watch ${args.join(" ")}`,
-            "generate-service-worker"
-          ].filter(x => x)
+          archetype.webpack.devMiddleware
+            ? ["server-admin", "generate-service-worker"]
+            : ["wds.dev", `server-watch ${args.join(" ")}`, "generate-service-worker"]
         ];
       }
     },
@@ -711,6 +711,24 @@ Individual .babelrc files were generated for you in src/client and src/server
           archetype.webpack.devMiddleware ? "" : "-C",
           `--delay 1 --ext js,jsx,json,yaml,log,ts,tsx ${watches}`,
           `--exec ${nodeRunApp}`
+        );
+      }
+    },
+
+    "server-admin": {
+      desc: "Start development with admin server",
+      task: function() {
+        AppMode.setEnv(AppMode.src.dir);
+        const exec = AppMode.isSrc
+          ? quote(Path.join(archetype.dir, "support/babel-run"))
+          : AppMode.src.server;
+
+        return mkCmd(
+          `~(tty)$node ${quote(Path.join(archetype.devDir, "lib/dev-admin"))}`,
+          taskArgs(this.argv).join(" "),
+          `--exec ${exec} --ext js,jsx,json,yaml,log,ts,tsx`,
+          `--watch config ${AppMode.src.server}`,
+          AppMode.isSrc ? `-- ${AppMode.src.server}` : ""
         );
       }
     },
