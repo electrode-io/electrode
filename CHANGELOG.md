@@ -1,3 +1,25 @@
+# 2/4/2019
+
+- added development admin console - allow controlling webpack dev server and app server without shutdown everything.
+
+## Packages
+
+-   `electrode-archetype-react-app@6.3.0` `(6.2.2 => 6.3.0)`
+-   `electrode-archetype-react-app-dev@6.3.0` `(6.2.2 => 6.3.0)`
+-   `electrode-react-webapp@3.3.2` `(3.3.1 => 3.3.2)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [patch][log] log errors for missing required env vars ([#1142](https://github.com/electrode-io/electrode/pull/1142)) [commit](http://github.com/electrode-io/electrode/commit/97e6dca09fe9dfe398147f13314a44da343ce579)
+    -   [patch][fix] re-enable HMR for webpack-dev-server ([#1141](https://github.com/electrode-io/electrode/pull/1141)) [commit](http://github.com/electrode-io/electrode/commit/095277e3979f91be7ea74a9b03cea0007017d858)
+    -   [minor] dev admin server ([#1144](https://github.com/electrode-io/electrode/pull/1144)) [commit](http://github.com/electrode-io/electrode/commit/e424803ebb3695567c71ad20f6dc3bb442187c64)
+
+-   `packages/electrode-react-webapp`
+
+    -   [patch] consolidate and fix content resolve for all frameworks ([#1143](https://github.com/electrode-io/electrode/pull/1143)) [commit](http://github.com/electrode-io/electrode/commit/f47eb270d4f259fb0c224ce388456011789f59fc)
+
 # 1/31/2019
 
 - fix koa app
