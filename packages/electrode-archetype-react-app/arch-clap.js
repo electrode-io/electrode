@@ -761,7 +761,18 @@ Individual .babelrc files were generated for you in src/client and src/server
         glob.sync(`**/*.{test,spec}.{js,jsx,ts,tsx}`, {
           cwd: Path.resolve(AppMode.src.dir)
         });
-
+      const cwd = process.cwd();
+      let jestConfig;
+      try {
+        jestConfig = require(`${cwd}/archetype/config/index`);
+      } catch (err) {
+        logger.info("self-defined jest config does not exist");
+      }
+      if (jestConfig && jestConfig.jest) {
+        const { roots } = jestConfig.jest;
+        const customTests = (roots && roots.map(x => x.replace("<rootDir>", cwd))) || [];
+        srcJestFiles.push(...customTests);
+      }
       if (testDir || srcJestFiles.length > 0) {
         if (testDir) {
           makeBabelRc(Path.join(testDir, "client"), "babelrc-client.js");
@@ -771,7 +782,6 @@ Individual .babelrc files were generated for you in src/client and src/server
       }
       return undefined;
     },
-
     "test-frontend-dev": ["?.karma.test-frontend-dev"],
 
     "test-frontend-dev-watch": ["?.karma.test-frontend-dev-watch"],
