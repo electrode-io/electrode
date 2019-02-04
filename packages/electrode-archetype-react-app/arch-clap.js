@@ -763,7 +763,9 @@ Individual .babelrc files were generated for you in src/client and src/server
         });
       const { roots } = archetype.jest;
       const customTests = (roots && roots.map(x => x.replace("<rootDir>", process.cwd()))) || [];
-      srcJestFiles.push(...customTests);
+      if (srcJestFiles.push) {
+        srcJestFiles.push(...customTests);
+      }
       if (testDir || srcJestFiles.length > 0) {
         if (testDir) {
           makeBabelRc(Path.join(testDir, "client"), "babelrc-client.js");
