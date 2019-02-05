@@ -1,3 +1,36 @@
+# 2/5/2019
+
+- app archetype
+  - fix to support custom jest config
+  - fix dev admin to watch for app-setup only for app start
+
+- generator
+
+  - make ui config module an option param
+
+## Packages
+
+### Directly Updated
+
+-   `electrode-archetype-react-app@6.3.1` `(6.3.0 => 6.3.1)`
+-   `electrode-archetype-react-app-dev@6.3.1` `(6.3.0 => 6.3.1)`
+-   `generator-electrode@5.1.2` `(5.1.1 => 5.1.2)`
+
+### Lerna Updated
+
+-   `electrode-ignite@3.0.7` `(3.0.6 => 3.0.7)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [patch] read custom jest config ([#1145](https://github.com/electrode-io/electrode/pull/1145)) [commit](http://github.com/electrode-io/electrode/commit/557bda40de8e1c4d0ecb8b68482832f77148387b)
+    -   [patch] dev admin should watch for app-setup only for app start ([#1147](https://github.com/electrode-io/electrode/pull/1147)) [commit](http://github.com/electrode-io/electrode/commit/41c2e57037dd1cb3027f7ac0ba1468b0fa2ce50f)
+
+-   `packages/generator-electrode`
+
+    -   [patch] make ui config module a param ([#1146](https://github.com/electrode-io/electrode/pull/1146)) [commit](http://github.com/electrode-io/electrode/commit/95940bde0e0de2865d4928563587196d46752ffb)
+
 # 2/4/2019
 
 - added development admin console - allow controlling webpack dev server and app server without shutdown everything.
