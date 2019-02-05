@@ -28,7 +28,9 @@ import { Nav } from "./nav";
 import DemoCookies from "./demo-cookies";
 //<% } %>
 
-import config from "electrode-ui-config";
+//<% if (uiConfigModule) { %>
+import config from "<%= uiConfigModule %>";
+//<% } %>
 
 //<% if (pwa) { %>
 import Notifications from "react-notify-toast";
@@ -66,16 +68,18 @@ class Home extends React.Component {
           <DemoPureStates />
         </div>
 
-        {/*<% if (cookiesModule) { %> */}
+        {/*<% if (cookiesModule) { %>*/}
         <div styleName={"custom.docs-section"}>
           <DemoCookies />
         </div>
         {/*<% } %>*/}
 
+        {/*<% if (uiConfigModule) { %>*/}
         <div styleName={"custom.docs-section"}>
           <h6 styleName={"custom.docs-header"}>Demo Isomorphic UI Config</h6>
           <div>config.ui.demo: "{config.ui.demo}"</div>
         </div>
+        {/*<% } %>*/}
 
         <div styleName={"custom.docs-section"}>
           <DemoButtons />

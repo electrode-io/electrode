@@ -78,7 +78,21 @@ module.exports = class extends Generator {
       type: String,
       required: false,
       default: "^1.0.0",
-      desc: "Universal cookies module name"
+      desc: "Universal cookies module semver"
+    });
+
+    this.option("uiConfigModule", {
+      type: String,
+      required: false,
+      default: "electrode-ui-config",
+      desc: "Universal UI config module name"
+    });
+
+    this.option("uiConfigModuleSemver", {
+      type: String,
+      required: false,
+      default: "^1.1.2",
+      desc: "Universal UI config module semver"
     });
 
     //Data should be passed to the generator using props
@@ -287,6 +301,8 @@ module.exports = class extends Generator {
     const packageName = this.props.packageName;
     const cookiesModule = this._cookiesModule();
     const cookiesModuleSemver = this.options.cookiesModuleSemver;
+    const uiConfigModule = this.options.uiConfigModule;
+    const uiConfigModuleSemver = this.options.uiConfigModuleSemver;
 
     let ignoreArray = [];
     if (isHapi) {
@@ -309,7 +325,9 @@ module.exports = class extends Generator {
       isSingleQuote,
       projectName: this.props.name,
       cookiesModule,
-      cookiesModuleSemver
+      cookiesModuleSemver,
+      uiConfigModule,
+      uiConfigModuleSemver
     });
 
     const jsPkg = this.fs.read(this.destinationPath(_pkgJs)).toString();
@@ -409,7 +427,7 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath("src/client"),
       this.destinationPath("src/client"),
-      { pwa: isPWA, cookiesModule },
+      { pwa: isPWA, cookiesModule, uiConfigModule },
       {}, // template options
       {
         // copy options
