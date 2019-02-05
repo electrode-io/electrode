@@ -761,9 +761,9 @@ Individual .babelrc files were generated for you in src/client and src/server
           cwd: Path.resolve(AppMode.src.dir)
         }).length > 0;
       }
-      if (runJest) {
+      if (!runJest) {
         const { roots } = archetype.jest;
-        runJest = roots && roots.map(x => x.replace("<rootDir>", process.cwd()));
+        runJest = roots && roots.length > 0;
       }
       if (runJest) {
         makeBabelRc(Path.join(testDir, "client"), "babelrc-client.js");
