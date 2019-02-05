@@ -183,7 +183,6 @@ class AdminServer {
       let started = false;
 
       const markStarted = data => {
-        if (startTimeout) clearTimeout(startTimeout);
         if (started) return;
         data = data || {};
         if (data.name === "timeout") {
@@ -191,11 +190,13 @@ class AdminServer {
             ck`<orange>WARNING: Did not receive start event from app server - assuming it started.</>`
           );
         } else if (data.name !== "app-setup") {
-          console.log(ck`<red>ERROR: First event from app '${data.name}' is not 'app-setup'</>`);
+          this._appServer.once("message", markStarted);
+          return;
         } else {
           console.log(ck`<orange>app server started</>`);
         }
         started = true;
+        if (startTimeout) clearTimeout(startTimeout);
 
         setTimeout(() => {
           if (this._saveWebpackReportData && this._appServer) {
