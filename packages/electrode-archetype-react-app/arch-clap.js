@@ -782,23 +782,24 @@ Individual .babelrc files were generated for you in src/client and src/server
 
     ".jest.test-frontend-cov": () => {
       const testDir = ["_test_", "__tests__"].find(x => shell.test("-d", x));
-
-      const srcJestFiles =
-        !testDir &&
-        glob.sync(`**/*.{test,spec}.{js,jsx,ts,tsx}`, {
+      let runJest = testDir;
+      if (!runJest) {
+        runJest = glob.sync(`**/*.{test,spec}.{js,jsx,ts,tsx}`, {
           cwd: Path.resolve(AppMode.src.dir)
-        });
-
-      if (testDir || srcJestFiles.length > 0) {
-        if (testDir) {
-          makeBabelRc(Path.join(testDir, "client"), "babelrc-client.js");
-        }
+        }).length > 0;
+      }
+      if (!runJest) {
+        const { roots } = archetype.jest;
+        runJest = roots && roots.length > 0;
+      }
+      if (runJest) {
+        makeBabelRc(Path.join(testDir, "client"), "babelrc-client.js");
         logger.info("Running jest unit tests");
         return mkCmd(`~$jest`, `--config ${archetype.config.jest}/jest.config.js`);
+      } else {
+        return undefined;
       }
-      return undefined;
     },
-
     "test-frontend-dev": ["?.karma.test-frontend-dev"],
 
     "test-frontend-dev-watch": ["?.karma.test-frontend-dev-watch"],
