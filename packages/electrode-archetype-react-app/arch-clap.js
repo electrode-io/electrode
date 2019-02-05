@@ -768,7 +768,7 @@ Individual .babelrc files were generated for you in src/client and src/server
       if (runJest) {
         return mkCmd(`~$jest`, `--config ${archetype.config.jest}/jest.config.js`);
       } else {
-        return runJest;
+        return undefined;
       }
     },
     "test-frontend-dev": ["?.karma.test-frontend-dev"],
