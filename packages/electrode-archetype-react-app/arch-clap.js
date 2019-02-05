@@ -756,17 +756,16 @@ Individual .babelrc files were generated for you in src/client and src/server
     ".jest.test-frontend-cov": () => {
       let runJest;
       const testDir = ["_test_", "__tests__"].find(x => shell.test("-d", x));
-      runJest = testDir;
-      if (! runJest) {
+      if (! testDir) {
         runJest = glob.sync(`**/*.{test,spec}.{js,jsx,ts,tsx}`, {
           cwd: Path.resolve(AppMode.src.dir)
         });
       }
-      if (! runJest) {
+      if (Array.isArray(runJest) && runJest.length === 0) {
         const { roots } = archetype.jest;
         runJest = roots && roots.map(x => x.replace("<rootDir>", process.cwd()));
       }
-      if (runJest) {
+      if (testDir || (Array.isArray(runJest) && runJest.length > 0)) {
         if (testDir) {
           makeBabelRc(Path.join(testDir, "client"), "babelrc-client.js");
         }
