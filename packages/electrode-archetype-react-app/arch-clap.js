@@ -754,26 +754,22 @@ Individual .babelrc files were generated for you in src/client and src/server
     "test-frontend-ci": ["?.karma.test-frontend-ci"],
 
     ".jest.test-frontend-cov": () => {
-      const testDir = ["_test_", "__tests__"].find(x => shell.test("-d", x));
-
-      const srcJestFiles =
-        !testDir &&
-        glob.sync(`**/*.{test,spec}.{js,jsx,ts,tsx}`, {
+      let runJest;
+      runJest = ["_test_", "__tests__"].find(x => shell.test("-d", x));
+      if (! runJest) {
+        runJest = glob.sync(`**/*.{test,spec}.{js,jsx,ts,tsx}`, {
           cwd: Path.resolve(AppMode.src.dir)
         });
-      const { roots } = archetype.jest;
-      const customTests = (roots && roots.map(x => x.replace("<rootDir>", process.cwd()))) || [];
-      if (srcJestFiles.push) {
-        srcJestFiles.push(...customTests);
       }
-      if (testDir || srcJestFiles.length > 0) {
-        if (testDir) {
-          makeBabelRc(Path.join(testDir, "client"), "babelrc-client.js");
-        }
-        logger.info("Running jest unit tests");
+      if (! runJest) {
+        const { roots } = archetype.jest;
+        runJest = roots && roots.map(x => x.replace("<rootDir>", process.cwd()));
+      }
+      if (runJest) {
         return mkCmd(`~$jest`, `--config ${archetype.config.jest}/jest.config.js`);
+      } else {
+        return runJest;
       }
-      return undefined;
     },
     "test-frontend-dev": ["?.karma.test-frontend-dev"],
 
