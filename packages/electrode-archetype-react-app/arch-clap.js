@@ -754,18 +754,19 @@ Individual .babelrc files were generated for you in src/client and src/server
     "test-frontend-ci": ["?.karma.test-frontend-ci"],
 
     ".jest.test-frontend-cov": () => {
-      let runJest;
+      let runJest = false;
       const testDir = ["_test_", "__tests__"].find(x => shell.test("-d", x));
-      if (! testDir) {
+      runJest = testDir;
+      if (!runJest) {
         runJest = glob.sync(`**/*.{test,spec}.{js,jsx,ts,tsx}`, {
           cwd: Path.resolve(AppMode.src.dir)
         });
       }
-      if (Array.isArray(runJest) && runJest.length === 0) {
+      if (!runJest) {
         const { roots } = archetype.jest;
         runJest = roots && roots.map(x => x.replace("<rootDir>", process.cwd()));
       }
-      if (testDir || (Array.isArray(runJest) && runJest.length > 0)) {
+      if (runJest) {
         if (testDir) {
           makeBabelRc(Path.join(testDir, "client"), "babelrc-client.js");
         }
