@@ -26,6 +26,10 @@ const webpackConfigSpec = {
   reporterSocketPort: { env: "WEBPACK_REPORTER_SOCKET_PORT", default: 5000 },
   https: { env: "WEBPACK_DEV_HTTPS", default: false },
   devMiddleware: { env: "WEBPACK_DEV_MIDDLEWARE", default: false },
+  // in dev mode, all webpack output are saved to memory only, but some files like
+  // stats.json are needed by different uses and the stats partial saves a copy to
+  // disk.  It will use this as the path to save the file.
+  devArtifactsPath: { env: "WEBPACK_DEV_ARTIFACTS_PATH", default: ".etmp" },
   cssModuleSupport: { env: "CSS_MODULE_SUPPORT", type: "truthy", default: detectCSSModule },
   cssModuleStylusSupport: { env: "CSS_MODULE_STYLUS_SUPPORT", default: false },
   enableBabelPolyfill: { env: "ENABLE_BABEL_POLYFILL", default: false },

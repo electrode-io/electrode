@@ -16,11 +16,9 @@ const webAppManifestLoader = pwaRequire.resolve("web-app-manifest-loader");
 const SWPrecacheWebpackPlugin = pwaRequire("./plugins/sw-precache");
 const FaviconsWebpackPlugin = pwaRequire("favicons-webpack-plugin");
 const AddManifestFieldsPlugin = pwaRequire("./plugins/add-manifest-fields");
-const DiskPlugin = pwaRequire("webpack-disk-plugin");
 //
 
 const swConfigPath = Path.resolve("config", "sw-config.js");
-const serverConfigPath = Path.resolve("config", "default.json");
 const mkdirp = require("mkdirp");
 const logger = require("electrode-archetype-react-app/lib/logger");
 
@@ -76,7 +74,6 @@ function createEntryConfigFromScripts(importScripts, entry) {
 module.exports = function(options) {
   /* eslint max-statements: 0 */
   const swConfig = optionalRequire(swConfigPath, true) || {};
-  const severConfig = optionalRequire(serverConfigPath, true) || {};
 
   if (!swConfig.manifest) {
     return {};
@@ -164,30 +161,6 @@ module.exports = function(options) {
     }),
     new SWPrecacheWebpackPlugin(cacheConfig)
   ];
-
-  /**
-   * In dev we need to write the stats file to disk
-   * so we can properly read which chunk(s) need to be
-   * served. We write the stats file to our build artifacts
-   * folder, which is .etmp by default.
-   */
-  if (process.env.WEBPACK_DEV === "true") {
-    plugins.push(
-      new DiskPlugin({
-        output: {
-          path: Path.resolve(severConfig.buildArtifactsPath || ".etmp")
-        },
-        files: [
-          {
-            asset: /\/stats.json$/,
-            output: {
-              filename: "stats.json"
-            }
-          }
-        ]
-      })
-    );
-  }
 
   return {
     entry,
