@@ -1,6 +1,6 @@
 "use strict";
 
-/* eslint-disable no-console, no-process-exit */
+/* eslint-disable no-console, no-process-exit, complexity */
 /* eslint-disable no-magic-numbers, max-len, max-statements, prefer-template */
 
 const Path = require("path");
@@ -139,7 +139,7 @@ class AdminServer {
       console.log(
         ck`<yellow.inverse> Start ${name} already in progress - press<magenta> ${killKey} </>to kill it.</>`
       );
-      return null;
+      return;
     }
 
     info._starting = true;
