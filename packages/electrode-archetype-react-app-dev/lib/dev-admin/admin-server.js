@@ -20,7 +20,6 @@ class AdminServer {
     this._passThru = args._;
     this._messageId = 1;
     this._saveWebpackReportData = undefined;
-    this._firstRun = true;
     this._servers = {};
   }
 
@@ -30,6 +29,7 @@ class AdminServer {
     this.handleUserInput();
     await this.startDevServer();
     await this.startAppServer();
+    setTimeout(() => this.showConsoleMenu(), 100);
   }
 
   setupConsoleInterface() {
@@ -277,11 +277,6 @@ class AdminServer {
       setTimeout(() => {
         if (this._saveWebpackReportData && info._child) {
           info._child.send(this._saveWebpackReportData);
-        }
-
-        if (this._firstRun) {
-          this._firstRun = false;
-          setTimeout(() => this.showConsoleMenu(), 100);
         }
 
         this.watchServer(info.name);
