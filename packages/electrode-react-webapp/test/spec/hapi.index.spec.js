@@ -189,14 +189,14 @@ describe("hapi 16 electrode-react-webapp", () => {
             expect(result).to.contain("<div>Hello Electrode</div>");
             expect(result).to.contain("<script>console.log('Hello');</script>");
             expect(result).to.not.contain("Unknown marker");
-            expect(result).contains("<!-- INITIALIZE -->");
-            expect(result).contains("<!-- $~INITIALIZE~$ -->");
-            expect(result).contains("<!-- PAGE_TITLE -->");
-            expect(result).contains("<!-- $~PAGE_TITLE~$ -->");
-            expect(result).contains("<!-- #./test/fixtures/custom-1 -->");
-            expect(result).contains("<!-- $~#./test/fixtures/custom-1~$ -->");
+            expect(result).contains("<!-- BEGIN INITIALIZE props: {} -->");
+            expect(result).contains("<!-- INITIALIZE END -->");
+            expect(result).contains("<!-- BEGIN PAGE_TITLE props: {} -->");
+            expect(result).contains("<!-- PAGE_TITLE END -->");
+            expect(result).contains("<!-- BEGIN #./test/fixtures/custom-1 props: {} -->");
+            expect(result).contains("<!-- #./test/fixtures/custom-1 END -->");
             expect(result).contains("_call process from custom-call token fixture");
-            expect(result).not.contains("<!-- #./test/fixtures/custom-call -->");
+            expect(result).not.contains("<!-- BEGIN #./test/fixtures/custom-call props: {} -->");
             expect(result).contains(
               "<!-- HEAD_INITIALIZE removed due to its handler set to null -->"
             );
@@ -1521,7 +1521,8 @@ describe("hapi 16 electrode-react-webapp", () => {
             `<meta data-react-helmet="true" name="description" content="Nested component"/>` +
               `<title data-react-helmet="true">Nested Title</title>`
           );
-          expect(res.result).includes(`window._config.ui = {};\n</script><script>test-1 script;</script>
+          expect(res.result)
+            .includes(`window._config.ui = {};\n</script><script>test-1 script;</script>
 <!--scripts from helmet--></head>`);
           stopServer(server);
         })
