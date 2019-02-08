@@ -17,16 +17,15 @@ const { STEP_HANDLER, STEP_STR_TOKEN, STEP_NO_HANDLER, STEP_LITERAL_HANDLER } = 
 function renderNext(err, xt) {
   const { renderSteps, context } = xt;
   if (err) {
-    // debugger; // eslint-disable-line
     context.handleError(err);
   }
 
   const insertTokenId = tk => {
-    context.output.add(`<!-- ${tk.id} -->\n`);
+    context.output.add(`<!-- BEGIN ${tk.id} props: ${JSON.stringify(tk.props)} -->\n`);
   };
 
   const insertTokenIdEnd = tk => {
-    context.output.add(`<!-- $~${tk.id}~$ -->\n`);
+    context.output.add(`<!-- ${tk.id} END -->\n`);
   };
 
   if (context.isFullStop || context.isVoidStop || xt.stepIndex >= renderSteps.length) {
