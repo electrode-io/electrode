@@ -210,6 +210,10 @@ class AdminServer {
             resolve();
           }
         });
+
+        info._child.on("exit", () => {
+          resolve();
+        });
       });
     };
 
@@ -260,11 +264,8 @@ class AdminServer {
       if (started) return;
       data = data || {};
       if (data.name === "timeout") {
-        console.log(
-          ck`<orange>WARNING: Did not receive start event from ${
-            info.name
-          } - assuming it started.</>`
-        );
+        console.log(ck`<orange>WARNING: Did not receive start event from \
+${info.name} - assuming it started.</>`);
       } else if (data.name !== "app-setup") {
         info._child.once("message", markStarted);
         return;
@@ -290,6 +291,11 @@ class AdminServer {
         markStarted({ name: "timeout" });
       }
     };
+
+    info._child.once("exit", () => {
+      clearTimeout(startTimeout);
+      deferRes();
+    });
 
     info._child.once("message", markStarted);
 
