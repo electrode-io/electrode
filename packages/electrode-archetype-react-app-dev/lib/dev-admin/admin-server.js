@@ -41,10 +41,10 @@ class AdminServer {
     const menu = ck`              <green.inverse>   Electrode Dev Admin Console   </>
 
  <white.inverse>For your app server</>
-   <magenta>A</> - Restart <magenta>D</> - <cyan>inspect-brk</> mode <magenta>I</> - <cyan>inspect</> mode <magenta>K</> - Kill&nbsp;
+   <magenta>a</> - Restart <magenta>d</> - <cyan>inspect-brk</> mode <magenta>i</> - <cyan>inspect</> mode <magenta>k</> - Kill&nbsp;
  <white.inverse>For Electrode webpack dev server</>  ${this._wds}
-   <magenta>W</> - Restart <magenta>E</> - <cyan>inspect-brk</> mode <magenta>R</> - <cyan>inspect</> mode <magenta>X</> - Kill&nbsp;
- <magenta>M</> - Show this menu <magenta>Q</> - Shutdown`;
+   <magenta>w</> - Restart <magenta>e</> - <cyan>inspect-brk</> mode <magenta>r</> - <cyan>inspect</> mode <magenta>x</> - Kill&nbsp;
+ <magenta>m</> - Show this menu <magenta>q</> - Shutdown`;
     console.log(boxen(menu, { margin: { left: 5 } }));
   }
 
