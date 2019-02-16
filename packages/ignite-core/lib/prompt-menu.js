@@ -9,7 +9,7 @@ const _ = require("lodash");
 const EventEmitter = require("events");
 const Promise = require("bluebird");
 const helpers = require("./util/helpers");
-const Yargs = require("yargs");
+const NixClap = require("nix-clap");
 const logger = require("./util/logger");
 
 xsh.Promise = Promise;
@@ -124,28 +124,30 @@ class PromptMenu extends EventEmitter {
 
   clap(argv) {
     this._clap = true;
-    return _.reduce(
+    const commands = _.reduce(
       this._menu,
-      (yargs, mi) => {
-        if (!mi.cliCmd) return yargs;
+      (cliCmds, mi) => {
+        if (!mi.cliCmd) return cliCmds;
 
         const menuText = chalk.cyan(mi.menuText);
-        return yargs.command({
-          command: mi.cliCmd,
+        cliCmds[mi.cliCmd] = {
           desc: menuText,
           aliases: mi.cliAliases,
-          handler: () => {
+          exec: () => {
             logger.log(this._title);
             logger.log(`Running ${menuText}`);
             return this.runMenuItem(mi);
           }
-        });
+        };
+
+        return cliCmds;
       },
-      Yargs
-    )
-      .strict()
-      .help()
+      {}
+    );
+
+    return new NixClap({})
       .usage(`Usage: ${this._progName} <command>`)
+      .init(null, commands)
       .parse(argv);
   }
 
