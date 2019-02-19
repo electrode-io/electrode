@@ -16,20 +16,61 @@ module.exports = function(options) {
   };
 
   const test = archetype.babel.enableTypeScript ? /\.[tj]sx?$/ : /\.jsx?$/;
+  const oneOf = [
+    {
+      resourceQuery: /es6/,
+      use: [
+        {
+          loader: babelLoader,
+          options: Object.assign(
+            { cacheDirectory: Path.resolve(".etmp/babel-loader") },
+            options.babel,
+            {
+              presets: [
+                [
+                  "@babel/preset-env",
+                  {
+                    targets: archetype.webpack.babelEnvTargets.es6
+                  }
+                ],
+                "@babel/preset-typescript",
+                "@babel/preset-react"
+              ].filter(x => x)
+            }
+          )
+        }
+      ]
+    },
+    {
+      use: [
+        {
+          loader: babelLoader,
+          options: Object.assign(
+            { cacheDirectory: Path.resolve(".etmp/babel-loader") },
+            options.babel,
+            {
+              presets: [
+                [
+                  "@babel/preset-env",
+                  {
+                    targets: archetype.webpack.babelEnvTargets.es5
+                  }
+                ],
+                "@babel/preset-typescript",
+                "@babel/preset-react"
+              ].filter(x => x)
+            }
+          )
+        }
+      ]
+    }
+  ];
 
   const babelLoaderConfig = {
     _name: "babel",
     test,
     exclude: babelExclude,
-    use: [
-      {
-        loader: babelLoader,
-        options: Object.assign(
-          { cacheDirectory: Path.resolve(".etmp/babel-loader") },
-          options.babel
-        )
-      }
-    ].filter(identity)
+    oneOf
   };
 
   return {

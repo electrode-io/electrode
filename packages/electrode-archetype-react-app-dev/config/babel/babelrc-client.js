@@ -33,7 +33,8 @@ const basePlugins = [
     "@babel/plugin-proposal-class-properties",
     { loose: looseClassProps }
   ],
-  "@babel/plugin-transform-classes",
+  // "@babel/plugin-transform-classes",
+
   "@babel/plugin-transform-object-super",
   "@babel/plugin-transform-shorthand-properties",
   "@babel/plugin-transform-computed-properties",
@@ -128,19 +129,26 @@ const plugins = basePlugins.concat(
   enableKarmaCov && [getPluginFrom("electrode-archetype-opt-karma", "babel-plugin-istanbul")]
 );
 
-const presets = [
-  //
-  // webpack 4 can handle ES modules now so turn off babel module transformation
-  // in production mode to allow tree shaking.
-  // But keep transforming modules to commonjs when not in production mode so tests
-  // can continue to stub ES modules.
-  //
-  ["@babel/preset-env", { modules: isProduction ? "auto" : "commonjs", loose: true }],
-  enableTypeScript && "@babel/preset-typescript",
-  "@babel/preset-react"
-];
-
-module.exports = {
-  presets: presets.filter(x => x),
-  plugins: plugins.filter(x => x)
-};
+module.exports = (() => {
+  const _babelrc = {
+    env: {}
+  };
+  const { babelEnvTargets } = archetype.webpack;
+  Object.entries(babelEnvTargets).forEach(([k, v]) => {
+    _babelrc.env[k] = {
+      presets: [
+        [
+          "@babel/preset-env",
+          {
+            modules: isProduction ? "auto" : "commonjs",
+            targets: v
+          }
+        ],
+        enableTypeScript && "@babel/preset-typescript",
+        "@babel/preset-react"
+      ].filter(x => x),
+      plugins: plugins.filter(x => x)
+    }
+  });
+  return _babelrc;
+})();

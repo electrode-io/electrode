@@ -51,8 +51,22 @@ const webpackConfigSpec = {
     env: "ELECTRODE_LOAD_DLLS",
     type: "json",
     default: {}
+  },
+  babelEnvTargets: {
+    env: "BABEL_ENV_TARGETS",
+    type: "json",
+    default: {
+      es5: {},
+      es6: {
+        chrome: "65"
+      },
+      node: {
+        node: "8.11"
+      }
+    }
   }
 };
+if (!process.env.BABEL_ENV) process.env.BABEL_ENV = "es5";
 
 const karmaConfigSpec = {
   browser: { env: "KARMA_BROWSER", default: "chrome" }

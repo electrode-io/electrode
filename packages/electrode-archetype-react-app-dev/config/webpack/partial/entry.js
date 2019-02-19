@@ -33,8 +33,15 @@ function appEntry() {
 
   return entry || entries.find(f => Fs.existsSync(Path.join(context, f))) || "./app.jsx";
 }
+const entry = (() => {
+  const _appEntry = appEntry();
+  return {
+    "main": polyfill ? ["@babel/polyfill", `${_appEntry}?es5`] : `${_appEntry}?es5`,
+    "es6/main": polyfill ? ["@babel/polyfill", `${_appEntry}?es6`] : `${_appEntry}?es6`
+  };
+})();
 
 module.exports = {
   context,
-  entry: polyfill ? { main: ["@babel/polyfill", appEntry()] } : appEntry()
+  entry
 };
