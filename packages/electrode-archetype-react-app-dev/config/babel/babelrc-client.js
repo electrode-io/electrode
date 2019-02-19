@@ -129,26 +129,6 @@ const plugins = basePlugins.concat(
   enableKarmaCov && [getPluginFrom("electrode-archetype-opt-karma", "babel-plugin-istanbul")]
 );
 
-module.exports = (() => {
-  const _babelrc = {
-    env: {}
-  };
-  const { babelEnvTargets } = archetype.webpack;
-  Object.entries(babelEnvTargets).forEach(([k, v]) => {
-    _babelrc.env[k] = {
-      presets: [
-        [
-          "@babel/preset-env",
-          {
-            modules: isProduction ? "auto" : "commonjs",
-            targets: v
-          }
-        ],
-        enableTypeScript && "@babel/preset-typescript",
-        "@babel/preset-react"
-      ].filter(x => x),
-      plugins: plugins.filter(x => x)
-    }
-  });
-  return _babelrc;
-})();
+module.exports = {
+  plugins: plugins.filter(x => x)
+};

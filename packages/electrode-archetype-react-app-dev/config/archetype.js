@@ -66,7 +66,6 @@ const webpackConfigSpec = {
     }
   }
 };
-if (!process.env.BABEL_ENV) process.env.BABEL_ENV = "es5";
 
 const karmaConfigSpec = {
   browser: { env: "KARMA_BROWSER", default: "chrome" }
