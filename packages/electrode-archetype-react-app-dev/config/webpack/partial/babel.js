@@ -16,53 +16,34 @@ module.exports = function(options) {
   };
 
   const test = archetype.babel.enableTypeScript ? /\.[tj]sx?$/ : /\.jsx?$/;
+  const getOneOfRule = targets => [
+    {
+      loader: babelLoader,
+      options: Object.assign(
+        { cacheDirectory: Path.resolve(".etmp/babel-loader") },
+        options.babel,
+        {
+          presets: [
+            [
+              "@babel/preset-env",
+              {
+                targets
+              }
+            ],
+            "@babel/preset-typescript",
+            "@babel/preset-react"
+          ].filter(x => x)
+        }
+      )
+    }
+  ];
   const oneOf = [
     {
       resourceQuery: /es6/,
-      use: [
-        {
-          loader: babelLoader,
-          options: Object.assign(
-            { cacheDirectory: Path.resolve(".etmp/babel-loader") },
-            options.babel,
-            {
-              presets: [
-                [
-                  "@babel/preset-env",
-                  {
-                    targets: archetype.webpack.babelEnvTargets.es6
-                  }
-                ],
-                "@babel/preset-typescript",
-                "@babel/preset-react"
-              ].filter(x => x)
-            }
-          )
-        }
-      ]
+      use: getOneOfRule(archetype.webpack.babelEnvTargets.es6)
     },
     {
-      use: [
-        {
-          loader: babelLoader,
-          options: Object.assign(
-            { cacheDirectory: Path.resolve(".etmp/babel-loader") },
-            options.babel,
-            {
-              presets: [
-                [
-                  "@babel/preset-env",
-                  {
-                    targets: archetype.webpack.babelEnvTargets.es5
-                  }
-                ],
-                "@babel/preset-typescript",
-                "@babel/preset-react"
-              ].filter(x => x)
-            }
-          )
-        }
-      ]
+      use: getOneOfRule(archetype.webpack.babelEnvTargets.es5)
     }
   ];
 
