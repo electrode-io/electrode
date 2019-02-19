@@ -30,4 +30,3 @@ function makeConfig() {
 }
 
 module.exports = makeConfig();
-module.exports.mode = "development";
