@@ -57,7 +57,7 @@ const webpackConfigSpec = {
     type: "json",
     default: {
       default: {}, /** `default` and `node` targets object is required */
-      node: "8.11"
+      node: "6"
     }
   }
 };
