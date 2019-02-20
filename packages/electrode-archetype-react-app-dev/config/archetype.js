@@ -57,9 +57,6 @@ const webpackConfigSpec = {
     type: "json",
     default: {
       es5: {},
-      es6: {
-        chrome: "65"
-      },
       node: {
         node: "8.11"
       }

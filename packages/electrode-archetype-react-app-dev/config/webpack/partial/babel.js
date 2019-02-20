@@ -16,36 +16,42 @@ module.exports = function(options) {
   };
 
   const test = archetype.babel.enableTypeScript ? /\.[tj]sx?$/ : /\.jsx?$/;
-  const getOneOfRule = targets => [
+  const getOneOfRule = (babelEnvTargets, k) => [
     {
       loader: babelLoader,
       options: Object.assign(
         { cacheDirectory: Path.resolve(".etmp/babel-loader") },
         options.babel,
-        {
-          presets: [
-            [
-              "@babel/preset-env",
-              {
-                targets
-              }
-            ],
-            "@babel/preset-typescript",
-            "@babel/preset-react"
-          ].filter(x => x)
-        }
+        Object.assign(
+          {
+            presets: [
+              [
+                "@babel/preset-env",
+                {
+                  targets: babelEnvTargets[k]
+                }
+              ],
+              "@babel/preset-typescript",
+              "@babel/preset-react"
+            ].filter(x => x)
+          },
+          k === "es5" ? { plugins: ["@babel/plugin-transform-classes"] } : {}
+        )
       )
     }
   ];
-  const oneOf = [
-    {
-      resourceQuery: /es6/,
-      use: getOneOfRule(archetype.webpack.babelEnvTargets.es6)
-    },
-    {
-      use: getOneOfRule(archetype.webpack.babelEnvTargets.es5)
-    }
-  ];
+
+  const oneOf = (() => {
+    const { babelEnvTargets } = archetype.webpack;
+    const _oneOf = Object.keys(babelEnvTargets)
+      .filter(k => k !== "es5" && k.startsWith("es"))
+      .map(k => ({
+        resourceQuery: new RegExp(k),
+        use: getOneOfRule(babelEnvTargets, k)
+      }));
+    _oneOf.push({ use: getOneOfRule(babelEnvTargets, "es5") });
+    return _oneOf;
+  })();
 
   const babelLoaderConfig = {
     _name: "babel",

@@ -33,13 +33,15 @@ function appEntry() {
 
   return entry || entries.find(f => Fs.existsSync(Path.join(context, f))) || "./app.jsx";
 }
-const entry = (() => {
-  const _appEntry = appEntry();
-  return {
-    "main": polyfill ? ["@babel/polyfill", `${_appEntry}?es5`] : `${_appEntry}?es5`,
-    "es6/main": polyfill ? ["@babel/polyfill", `${_appEntry}?es6`] : `${_appEntry}?es6`
-  };
-})();
+const _appEntry = appEntry();
+const entry = Object.keys(archetype.webpack.babelEnvTargets).reduce((prev, k) => {
+  if (k === "es5") {
+    prev["main"] = polyfill ? ["@babel/polyfill", `${_appEntry}?es5`] : `${_appEntry}?es5`;
+  } else if (k.startsWith("es")) {
+    prev[`${k}/main`] = polyfill ? ["@babel/polyfill", `${_appEntry}?${k}`] : `${_appEntry}?${k}`
+  }
+  return prev;
+}, {});
 
 module.exports = {
   context,
