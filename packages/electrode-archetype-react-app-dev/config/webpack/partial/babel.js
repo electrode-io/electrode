@@ -21,21 +21,18 @@ module.exports = function(options) {
       options: Object.assign(
         { cacheDirectory: Path.resolve(".etmp/babel-loader") },
         options.babel,
-        Object.assign(
-          {
-            presets: [
-              [
-                "@babel/preset-env",
-                {
-                  targets: babelEnvTargets[k]
-                }
-              ],
-              "@babel/preset-typescript",
-              "@babel/preset-react"
-            ].filter(x => x)
-          },
-          k === "default" ? { plugins: ["@babel/plugin-transform-classes"] } : {}
-        )
+        {
+          presets: [
+            [
+              "@babel/preset-env",
+              {
+                targets: babelEnvTargets[k]
+              }
+            ],
+            "@babel/preset-typescript",
+            "@babel/preset-react"
+          ].filter(x => x)
+        }
       )
     }
   ];
