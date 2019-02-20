@@ -33,8 +33,6 @@ const basePlugins = [
     "@babel/plugin-proposal-class-properties",
     { loose: looseClassProps }
   ],
-  // "@babel/plugin-transform-classes",
-
   "@babel/plugin-transform-object-super",
   "@babel/plugin-transform-shorthand-properties",
   "@babel/plugin-transform-computed-properties",
