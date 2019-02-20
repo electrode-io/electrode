@@ -28,10 +28,8 @@ module.exports = function(options) {
               {
                 targets: babelEnvTargets[k]
               }
-            ],
-            "@babel/preset-typescript",
-            "@babel/preset-react"
-          ].filter(x => x)
+            ]
+          ]
         }
       )
     }
