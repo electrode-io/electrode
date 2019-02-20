@@ -36,9 +36,9 @@ function appEntry() {
 const _appEntry = appEntry();
 const entry = Object.keys(archetype.webpack.babelEnvTargets).reduce((prev, k) => {
   if (k === "es5") {
-    prev["main"] = polyfill ? ["@babel/polyfill", `${_appEntry}?es5`] : `${_appEntry}?es5`;
+    prev.main = polyfill ? ["@babel/polyfill", `${_appEntry}?es5`] : `${_appEntry}?es5`;
   } else if (k.startsWith("es")) {
-    prev[`${k}/main`] = polyfill ? ["@babel/polyfill", `${_appEntry}?${k}`] : `${_appEntry}?${k}`
+    prev[`${k}/main`] = polyfill ? ["@babel/polyfill", `${_appEntry}?${k}`] : `${_appEntry}?${k}`;
   }
   return prev;
 }, {});
