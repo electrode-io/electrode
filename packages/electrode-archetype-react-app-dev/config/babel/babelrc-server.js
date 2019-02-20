@@ -1,7 +1,7 @@
 "use strict";
 
 const archetype = require("../archetype");
-const { node: targets } = archetype.webpack.babelEnvTargets;
+const { node } = archetype.webpack.babelEnvTargets;
 
 const {
   enableTypeScript,
@@ -16,7 +16,7 @@ module.exports = {
     [
       "@babel/preset-env",
       {
-        targets
+        targets: { node }
       }
     ],
     enableTypeScript && "@babel/preset-typescript"

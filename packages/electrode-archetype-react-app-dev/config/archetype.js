@@ -56,10 +56,8 @@ const webpackConfigSpec = {
     env: "BABEL_ENV_TARGETS",
     type: "json",
     default: {
-      es5: {},
-      node: {
-        node: "8.11"
-      }
+      default: {}, /** `default` and `node` targets object is required */
+      node: "8.11"
     }
   }
 };

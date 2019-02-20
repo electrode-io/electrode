@@ -35,7 +35,7 @@ module.exports = function(options) {
               "@babel/preset-react"
             ].filter(x => x)
           },
-          k === "es5" ? { plugins: ["@babel/plugin-transform-classes"] } : {}
+          k === "default" ? { plugins: ["@babel/plugin-transform-classes"] } : {}
         )
       )
     }
@@ -44,12 +44,12 @@ module.exports = function(options) {
   const oneOf = (() => {
     const { babelEnvTargets } = archetype.webpack;
     const _oneOf = Object.keys(babelEnvTargets)
-      .filter(k => k !== "es5" && k.startsWith("es"))
+      .filter(k => k !== "default" && k !== "node")
       .map(k => ({
         resourceQuery: new RegExp(k),
         use: getOneOfRule(babelEnvTargets, k)
       }));
-    _oneOf.push({ use: getOneOfRule(babelEnvTargets, "es5") });
+    _oneOf.push({ use: getOneOfRule(babelEnvTargets, "default") });
     return _oneOf;
   })();
 
