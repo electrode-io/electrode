@@ -82,6 +82,7 @@ describe("async-template", function() {
       {
         id: "#critical-css",
         isModule: true,
+        modPath: "critical-css",
         pos: 228,
         custom: undefined,
         wantsNext: false,
@@ -290,8 +291,9 @@ describe("async-template", function() {
         custom: {
           name: "custom-call"
         },
-        id: "#../fixtures/custom-call",
+        id: `require("../fixtures/custom-call")`,
         isModule: true,
+        modPath: "../fixtures/custom-call",
         pos: 536,
         props: {
           _call: "setup"
@@ -398,6 +400,7 @@ describe("async-template", function() {
       {
         id: "#./test/fixtures/custom-call",
         isModule: true,
+        modPath: "./test/fixtures/custom-call",
         pos: -1,
         custom: { name: "custom-call" },
         wantsNext: false,

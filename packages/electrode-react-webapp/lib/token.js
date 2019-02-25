@@ -11,7 +11,19 @@ const viewTokenModules = {};
 class Token {
   constructor(id, pos, props) {
     this.id = id;
-    this.isModule = id.startsWith("#");
+
+    // match `require(path/to/module)`
+    const match = id.match(/^require\(['"]?([^'"\)]+)['"]?\)/);
+    if (match) {
+      this.modPath = match[1];
+      this.isModule = true;
+    } else if (id.startsWith("#")) {
+      this.modPath = this.id.substr(1); // remove the leading #
+      this.isModule = true;
+    } else {
+      this.isModule = false;
+    }
+
     this.pos = pos;
     this.custom = undefined;
     this.wantsNext = undefined;
@@ -29,8 +41,7 @@ class Token {
     let tokenMod = viewTokenModules[this.id];
 
     if (tokenMod === undefined) {
-      const mPath = this.id.substr(1); // remove the leading #
-      tokenMod = loadHandler(mPath, this.props[TEMPLATE_DIR]);
+      tokenMod = loadHandler(this.modPath, this.props[TEMPLATE_DIR]);
       viewTokenModules[this.id] = tokenMod;
     }
 
