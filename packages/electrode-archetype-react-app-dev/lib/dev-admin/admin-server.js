@@ -41,10 +41,10 @@ class AdminServer {
     const menu = ck`              <green.inverse>   Electrode Dev Admin Console   </>
 
  <white.inverse>For your app server</>
-   <magenta>a</> - Restart <magenta>d</> - <cyan>inspect-brk</> mode <magenta>i</> - <cyan>inspect</> mode <magenta>k</> - Kill&nbsp;
+   <magenta>A</> - Restart <magenta>D</> - <cyan>inspect-brk</> mode <magenta>I</> - <cyan>inspect</> mode <magenta>K</> - Kill&nbsp;
  <white.inverse>For Electrode webpack dev server</>  ${this._wds}
-   <magenta>w</> - Restart <magenta>e</> - <cyan>inspect-brk</> mode <magenta>r</> - <cyan>inspect</> mode <magenta>x</> - Kill&nbsp;
- <magenta>m</> - Show this menu <magenta>q</> - Shutdown`;
+   <magenta>W</> - Restart <magenta>E</> - <cyan>inspect-brk</> mode <magenta>R</> - <cyan>inspect</> mode <magenta>X</> - Kill&nbsp;
+ <magenta>M</> - Show this menu <magenta>Q</> - Shutdown`;
     console.log(boxen(menu, { margin: { left: 5 } }));
   }
 
@@ -85,7 +85,7 @@ class AdminServer {
 
   async handleUserInput() {
     const { str, key } = await this._getUserInput();
-    if (str.toLowerCase() === "q") {
+    if (str === undefined || str.toLowerCase() === "q") {
       console.log(ck`<magenta>admin server exit, shutting down servers</magenta>`);
       if (this._appWatcher) {
         this._appWatcher.close();
