@@ -85,7 +85,7 @@ class AdminServer {
 
   async handleUserInput() {
     const { str, key } = await this._getUserInput();
-    if (str === undefined || str === "q") {
+    if (str === "q") {
       console.log(ck`<magenta>admin server exit, shutting down servers</magenta>`);
       if (this._appWatcher) {
         this._appWatcher.close();
