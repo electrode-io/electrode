@@ -78,14 +78,14 @@ class AdminServer {
   async _getUserInput() {
     return new Promise(resolve => {
       process.stdin.once("keypress", (str, key) => {
-        resolve({ str, key });
+        resolve({ str: str && str.toLowerCase(), key });
       });
     });
   }
 
   async handleUserInput() {
     const { str, key } = await this._getUserInput();
-    if (str === undefined || str.toLowerCase() === "q") {
+    if (str === undefined || str === "q") {
       console.log(ck`<magenta>admin server exit, shutting down servers</magenta>`);
       if (this._appWatcher) {
         this._appWatcher.close();
@@ -93,24 +93,24 @@ class AdminServer {
       await this.kill(DEV_SERVER_NAME, "SIGINT");
       await this.kill(APP_SERVER_NAME, "SIGINT");
       process.exit();
-    } else if ((key.ctrl && key.name === "c") || str.toLowerCase() === "m") {
+    } else if ((key.ctrl && key.name === "c") || str === "m") {
       // allow user to press ctrl+c to bring up console menu
       this.showConsoleMenu();
-    } else if (str.toLowerCase() === "w") {
+    } else if (str === "w") {
       this.startDevServer();
-    } else if (str.toLowerCase() === "e") {
+    } else if (str === "e") {
       this.startDevServer("--inspect-brk");
-    } else if (str.toLowerCase() === "r") {
+    } else if (str === "r") {
       this.startDevServer("--inspect");
-    } else if (str.toLowerCase() === "x") {
+    } else if (str === "x") {
       await this.kill(DEV_SERVER_NAME, "SIGINT");
-    } else if (str.toLowerCase() === "a") {
+    } else if (str === "a") {
       this.startAppServer();
-    } else if (str.toLowerCase() === "k") {
+    } else if (str === "k") {
       await this.kill(APP_SERVER_NAME, "SIGINT");
-    } else if (str.toLowerCase() === "d") {
+    } else if (str === "d") {
       this.startAppServer("--inspect-brk");
-    } else if (str.toLowerCase() === "i") {
+    } else if (str === "i") {
       this.startAppServer("--inspect");
     }
     process.nextTick(() => this.handleUserInput());
