@@ -78,7 +78,7 @@ class AdminServer {
   async _getUserInput() {
     return new Promise(resolve => {
       process.stdin.once("keypress", (str, key) => {
-        resolve({ str, key });
+        resolve({ str: str && str.toLowerCase(), key });
       });
     });
   }
