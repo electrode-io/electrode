@@ -1377,6 +1377,12 @@ ammo:
 ansi-align:
  _:
   ^2.0.0: 2.0.0
+  ^3.0.0: 3.0.0
+ 3.0.0:
+  $: sha512-ZpClVKqXN3RGBmKibdfWzqCY4lnjEuoNzU5T0oEFpfd/z5qJHVarukridD4juLO2FXMiwUQxr9WqQtaYa8XRYw==
+  _: 'https://registry.npmjs.org/ansi-align/-/ansi-align-3.0.0.tgz'
+  dependencies:
+   string-width: ^3.0.0
  2.0.0:
   $: sha1-w2rsy6VjuJzrVW82kPCx2eNUf38=
   _: 'https://registry.npmjs.org/ansi-align/-/ansi-align-2.0.0.tgz'
@@ -1404,6 +1410,10 @@ ansi-regex:
  _:
   ^2.0.0: 2.1.1
   ^3.0.0: 3.0.0
+  ^4.0.0: 4.0.0
+ 4.0.0:
+  $: sha512-iB5Dda8t/UqpPI/IjsejXu5jOGDrzn41wJyljwPH65VCIbk6+1BzFIMJGFwTNrYXT1CrD+B4l19U7awiQ8rk7w==
+  _: 'https://registry.npmjs.org/ansi-regex/-/ansi-regex-4.0.0.tgz'
  3.0.0:
   $: sha1-7QMXwyIGT3lGbAKWa922Bas32Zg=
   _: 'https://registry.npmjs.org/ansi-regex/-/ansi-regex-3.0.0.tgz'
@@ -2337,6 +2347,18 @@ bourne:
 boxen:
  _:
   ^1.2.1: 1.3.0
+  ^2.1.0: 2.1.0
+ 2.1.0:
+  $: sha512-luq3RQOt2U5sUX+fiu+qnT+wWnHDcATLpEe63jvge6GUZO99AKbVRfp97d2jgLvq1iQa0ORzaAm4lGVG52ZSlw==
+  _: 'https://registry.npmjs.org/boxen/-/boxen-2.1.0.tgz'
+  dependencies:
+   ansi-align: ^3.0.0
+   camelcase: ^5.0.0
+   chalk: ^2.4.1
+   cli-boxes: ^1.0.0
+   string-width: ^3.0.0
+   term-size: ^1.2.0
+   widest-line: ^2.0.0
  1.3.0:
   $: sha512-TNPjfTr432qx7yOjQyaXm3dSR0MH9vXp7eT1BFSl/C51g+EFnOR9hTg1IreahGBmDNCehscshe45f+C1TBZbLw==
   _: 'https://registry.npmjs.org/boxen/-/boxen-1.3.0.tgz'
@@ -4348,8 +4370,8 @@ electrode-archetype-opt-sass:
    sass-loader: ^6.0.6
 electrode-archetype-react-app:
  _:
-  ../../packages/electrode-archetype-react-app: 6.2.1-fynlocal_h
- 6.2.1-fynlocal_h:
+  ../../packages/electrode-archetype-react-app: 6.3.2-fynlocal_h
+ 6.3.2-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app
@@ -4363,8 +4385,8 @@ electrode-archetype-react-app:
    electrode-archetype-opt-react: ^1.0.2
 electrode-archetype-react-app-dev:
  _:
-  ../../packages/electrode-archetype-react-app-dev: 6.2.1-fynlocal_h
- 6.2.1-fynlocal_h:
+  ../../packages/electrode-archetype-react-app-dev: 6.3.2-fynlocal_h
+ 6.3.2-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app-dev
@@ -4397,10 +4419,12 @@ electrode-archetype-react-app-dev:
    babel-plugin-transform-node-env-inline: ^0.4.3
    babel-plugin-transform-react-remove-prop-types: ^0.4.20
    batch: ^0.6.1
+   boxen: ^2.1.0
    chai: ^4.0.0
    chai-as-promised: ^7.1.1
    chai-shallowly: ^1.0.0
    chalker: ^1.1.1
+   chokidar: ^2.0.4
    clean-css: ^3.4.21
    convert-source-map: ^1.5.0
    css-loader: ^1.0.0
@@ -4434,6 +4458,7 @@ electrode-archetype-react-app-dev:
    mime: ^1.0.0
    mkdirp: ^0.5.1
    mocha: ^4.0.0
+   nix-clap: ^1.3.7
    nodemon: ^1.18.7
    offline-plugin: ^4.6.1
    opn: ^5.3.0
@@ -4535,8 +4560,8 @@ electrode-node-resolver:
    require-at: ^1.0.0
 electrode-react-webapp:
  _:
-  ../../packages/electrode-react-webapp: 3.3.0-fynlocal_h
- 3.3.0-fynlocal_h:
+  ../../packages/electrode-react-webapp: 3.3.3-fynlocal_h
+ 3.3.3-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-react-webapp
@@ -4635,6 +4660,12 @@ elliptic:
    inherits: ^2.0.1
    minimalistic-assert: ^1.0.0
    minimalistic-crypto-utils: ^1.0.0
+emoji-regex:
+ _:
+  ^7.0.1: 7.0.3
+ 7.0.3:
+  $: sha512-CwBLREIQ7LvYFB0WyRvwhq5N5qPhc6PMjD6bYggFlI5YyDgl+0vxq5VHbMOFqLg7hfWzmu8T5Z1QofhmTIhItA==
+  _: 'https://registry.npmjs.org/emoji-regex/-/emoji-regex-7.0.3.tgz'
 emojis-list:
  _:
   ^2.0.0: 2.1.0
@@ -9350,6 +9381,12 @@ nise:
 nix-clap:
  _:
   ^1.0.8: 1.3.6
+  ^1.3.7: 1.3.9
+ 1.3.9:
+  $: sha512-IMKuXYtgrcFQ2jIm9/I/Keehc4vdeVLE2MKEK7qbc/fqcanMHJX/jOCdVdHj9o1GxQdDH5ijW/JSd1OsffbxlA==
+  _: 'https://registry.npmjs.org/nix-clap/-/nix-clap-1.3.9.tgz'
+  dependencies:
+   strip-ansi: ^4.0.0
  1.3.6:
   $: sha512-PeCh17C4yO4HoxjSWJza2q6/BFRBI2Fj0dRnitq7E5f/2Pj8RA0A6T7BLfE2JYSmbhQk1Dlr5zycoJQ43RVYVg==
   _: 'https://registry.npmjs.org/nix-clap/-/nix-clap-1.3.6.tgz'
@@ -13061,6 +13098,14 @@ string-width:
  _:
   '^1.0.1,^1.0.2,^1.0.2 || 2': 1.0.2
   '^2.0.0,^2.1.0,^2.1.1': 2.1.1
+  ^3.0.0: 3.0.0
+ 3.0.0:
+  $: sha512-rr8CUxBbvOZDUvc5lNIJ+OC1nPVpz+Siw9VBtUjB9b6jZehZLFt0JMCZzShFHIsI8cbhm0EsNIfWJMFV3cu3Ew==
+  _: 'https://registry.npmjs.org/string-width/-/string-width-3.0.0.tgz'
+  dependencies:
+   emoji-regex: ^7.0.1
+   is-fullwidth-code-point: ^2.0.0
+   strip-ansi: ^5.0.0
  2.1.1:
   $: sha512-nOqH59deCq9SRHlxq1Aw85Jnt4w6KvLKqWVik6oA9ZklXLNIOlqg4F2yrT1MVaTjAqvVwdfeZ7w7aCvJD7ugkw==
   _: 'https://registry.npmjs.org/string-width/-/string-width-2.1.1.tgz'
@@ -13106,6 +13151,12 @@ strip-ansi:
  _:
   '^3.0.0,^3.0.1': 3.0.1
   ^4.0.0: 4.0.0
+  ^5.0.0: 5.0.0
+ 5.0.0:
+  $: sha512-Uu7gQyZI7J7gn5qLn1Np3G9vcYGTVqB+lFTytnDJv83dd8T22aGH451P3jueT2/QemInJDfxHB5Tde5OzgG1Ow==
+  _: 'https://registry.npmjs.org/strip-ansi/-/strip-ansi-5.0.0.tgz'
+  dependencies:
+   ansi-regex: ^4.0.0
  4.0.0:
   $: sha1-qEeQIusaw2iocTibY1JixQXuNo8=
   _: 'https://registry.npmjs.org/strip-ansi/-/strip-ansi-4.0.0.tgz'
