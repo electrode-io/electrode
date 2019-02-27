@@ -33,8 +33,17 @@ function appEntry() {
 
   return entry || entries.find(f => Fs.existsSync(Path.join(context, f))) || "./app.jsx";
 }
+const _appEntry = appEntry();
+const entry = Object.keys(archetype.webpack.babelEnvTargets).reduce((prev, k) => {
+  if (k === "default") {
+    prev.main = polyfill ? ["@babel/polyfill", `${_appEntry}?default`] : `${_appEntry}?default`;
+  } else if (k !== "node") {
+    prev[`${k}/main`] = polyfill ? ["@babel/polyfill", `${_appEntry}?${k}`] : `${_appEntry}?${k}`;
+  }
+  return prev;
+}, {});
 
 module.exports = {
   context,
-  entry: polyfill ? { main: ["@babel/polyfill", appEntry()] } : appEntry()
+  entry
 };

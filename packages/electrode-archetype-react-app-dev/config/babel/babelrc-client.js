@@ -33,7 +33,6 @@ const basePlugins = [
     "@babel/plugin-proposal-class-properties",
     { loose: looseClassProps }
   ],
-  "@babel/plugin-transform-classes",
   "@babel/plugin-transform-object-super",
   "@babel/plugin-transform-shorthand-properties",
   "@babel/plugin-transform-computed-properties",
@@ -127,7 +126,6 @@ const plugins = basePlugins.concat(
   ],
   enableKarmaCov && [getPluginFrom("electrode-archetype-opt-karma", "babel-plugin-istanbul")]
 );
-
 const presets = [
   //
   // webpack 4 can handle ES modules now so turn off babel module transformation
