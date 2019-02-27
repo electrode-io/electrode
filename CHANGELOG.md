@@ -1,3 +1,47 @@
+# 2/26/2019
+
+- electrode-archetype-react-app
+  - minor updates and fixes for dev admin server
+  - always save stats to disk in webpack dev mode
+- electrode-react-webapp
+  - use require to load module for token
+  - insert more informative token ids in rendered output with props
+
+## Packages
+
+### Directly Updated
+
+-   `electrode-archetype-react-app@6.3.2` `(6.3.1 => 6.3.2)`
+-   `electrode-archetype-react-app-dev@6.3.2` `(6.3.1 => 6.3.2)`
+-   `electrode-react-webapp@3.3.3` `(3.3.2 => 3.3.3)`
+-   `ignite-core@1.1.8` `(1.1.7 => 1.1.8)`
+
+### Lerna Updated
+
+-   `electrode-ignite@3.0.8` `(3.0.7 => 3.0.8)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [patch] make dev admin key input case insensitive ([#1152](https://github.com/electrode-io/electrode/pull/1152)) [commit](http://github.com/electrode-io/electrode/commit/a3ce7a341f26a0506e48b709264febd602feb022)
+    -   [patch] detect unexpect server exit before start message received [commit](http://github.com/electrode-io/electrode/commit/e33cc24750b1d97dd42491225e68c3b78211e85e)
+    -   [patch] enable same controls for webpack dev server ([#1149](https://github.com/electrode-io/electrode/pull/1149)) [commit](http://github.com/electrode-io/electrode/commit/41668f1be751c72bc4ea510982f7fec89241c2d5)
+    -   [patch] always save stats to disk in webpack dev mode ([#1148](https://github.com/electrode-io/electrode/pull/1148)) [commit](http://github.com/electrode-io/electrode/commit/8eac8c814e0109e6e04ffe26d2baf6c6e8889a95)
+
+-   `packages/electrode-react-webapp`
+
+    -   [patch] use require to load module for token ([#1156](https://github.com/electrode-io/electrode/pull/1156)) [commit](http://github.com/electrode-io/electrode/commit/c0ea998a62759fc09b7f00221abea4973b25e279)
+    -   [patch] insert more informative token ids in rendered output with props ([#1150](https://github.com/electrode-io/electrode/pull/1150)) [commit](http://github.com/electrode-io/electrode/commit/1adbe96b7d07d19995dd7685cffb5cd8bec170bf)
+
+-   `packages/ignite-core`
+
+    -   [patch] use nix-clap [commit](http://github.com/electrode-io/electrode/commit/4bd2c54c4c1a976cc9e3421dfbb0f9f2aba476ef)
+
+-   `samples/universal-react-node`
+
+    -   [chore] update lockfile for sample [commit](http://github.com/electrode-io/electrode/commit/14dd37266632965b44b1404b818019cf5956cf88)
+
 # 2/5/2019
 
 - app archetype
