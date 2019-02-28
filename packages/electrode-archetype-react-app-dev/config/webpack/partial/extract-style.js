@@ -18,14 +18,21 @@ const postcssLoader = require.resolve("postcss-loader");
 
 /*
  * cssModuleSupport: false
- * case 1: *only* *.css => normal CSS
- * case 2: *only* *.styl exists => Stylus
- * case 3: *only* *.scss exists => SASS
+ *
+ * - *.css => normal CSS
+ * - *.styl => stylus compiled to normal CSS
+ * - *.scss => SASS compiled to normal CSS
  *
  * cssModuleSupport: true
- * case 1: *only* *.css => CSS-Modules + CSS-Next
- * case 2: *only* *.styl => normal CSS => CSS-Modules + CSS-Next
- * case 3: *only* *.scss => normal CSS => CSS-Modules + CSS-Next
+ *
+ * - *.css => CSS-Modules + CSS-Next
+ * - *.styl => stylus compiled to normal CSS => CSS-Modules + CSS-Next
+ * - *.scss => SASS compiled to normal CSS => CSS-Modules + CSS-Next
+ *
+ * cssModuleSupport: undefined (default)
+ *
+ * - *only* *.css => cssModuleSupport sets to true
+ * - *no* *.css (but *.styl or *.scss) => cssModuleSupport sets to false
  */
 
 const cssModuleSupport = archetype.webpack.cssModuleSupport;

@@ -1,0 +1,76 @@
+{
+  "name": "subapp-redux",
+  "version": "0.1.0",
+  "description": "Electrode subapp redux support",
+  "browser": "browser/index.js",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "clap check",
+    "build": "clap -x -n compile minify",
+    "compile": "babel src -d browser --source-maps=inline",
+    "minify": "MINIFY=true babel src -d dist --source-maps=inline"
+  },
+  "keywords": [
+    "web",
+    "react",
+    "subapp"
+  ],
+  "author": "Joel Chen <xchen@walmartlabs.com>",
+  "license": "Apache-2.0",
+  "files": [
+    "lib",
+    "browser",
+    "dist"
+  ],
+  "dependencies": {
+    "optional-require": "^1.0.0",
+    "subapp-util": "^1.0.0",
+    "subapp-web": "^1.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "babel-preset-minify": "^0.4.3",
+    "electrode-archetype-njs-module-dev": "^3.0.0",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
+    "react-redux": "^6.0.1",
+    "redux": "^4.0.1"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*",
+    "redux": "*",
+    "react-redux": "*"
+  },
+  "nyc": {
+    "all": true,
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "exclude": [
+      "coverage",
+      "*clap.js",
+      "gulpfile.js",
+      "dist",
+      "test",
+      "browser"
+    ],
+    "check-coverage": true,
+    "statements": 50,
+    "branches": 50,
+    "functions": 50,
+    "lines": 50,
+    "cache": true
+  },
+  "fyn": {
+    "dependencies": {
+      "subapp-util": "../subapp-util",
+      "subapp-web": "../subapp-web"
+    }
+  }
+}

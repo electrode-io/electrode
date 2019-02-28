@@ -4,6 +4,7 @@ const profile = {
   partials: {
     "_base-options": { order: 100 },
     _entry: { order: 200 },
+    "_subapp-chunks": { order: 210 },
     _output: { order: 300 },
     _resolve: { order: 400 },
     "_resolve-loader": { order: 500 },

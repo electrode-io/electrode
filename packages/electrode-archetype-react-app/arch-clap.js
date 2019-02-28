@@ -14,7 +14,7 @@ const warnYarn = require("./lib/warn-yarn");
 
 const devRequire = archetype.devRequire;
 
-const glob = devRequire("glob");
+const scanDir = devRequire("filter-scan-dir");
 const chalk = devRequire("chalk");
 
 if (process.argv[1].indexOf("gulp") >= 0) {
@@ -492,26 +492,46 @@ Individual .babelrc files were generated for you in src/client and src/server
       desc: false,
       task: () => {
         const libDir = Path.resolve(AppMode.lib.client);
-        const ignoredFiles = glob.sync("{*.spec.*,*.test.*}", {
-          cwd: libDir,
-          matchBase: true
+        const ignoredFiles = scanDir.sync({
+          dir: libDir,
+          includeRoot: true,
+          filter: x => {
+            return x.indexOf(".spec.") > 0 || x.indexOf(".test.") > 0;
+          }
         });
-        ignoredFiles.forEach(f => Fs.unlinkSync(Path.join(libDir, f)));
+        ignoredFiles.forEach(f => Fs.unlinkSync(f));
       }
     },
 
     "build-lib:client": {
       desc: false,
       dep: [".clean.lib:client", ".mk.lib.client.dir", ".build.client.babelrc"],
-      task: [
-        mkCmd(
-          `~$babel ${AppMode.src.client} --out-dir=${AppMode.lib.client}`,
-          `--extensions=${babelCliExtensions}`,
-          `--source-maps=inline --copy-files`,
-          `--verbose --ignore=${babelCliIgnore}`
-        ),
-        ".build-lib:delete-babel-ignored-files"
-      ]
+      task: () => {
+        const dirs = AppMode.hasSubApps
+          ? []
+              .concat(
+                scanDir.sync({
+                  dir: AppMode.src.dir,
+                  includeDir: true,
+                  grouping: true,
+                  filterDir: x => !x.startsWith("server") && "dirs",
+                  filter: () => false
+                }).dirs
+              )
+              .filter(x => x)
+          : [AppMode.client];
+
+        return dirs.map(x =>
+          mkCmd(
+            `~$babel ${Path.posix.join(AppMode.src.dir, x)}`,
+            `--out-dir=${Path.posix.join(AppMode.lib.dir, x)}`,
+            `--extensions=${babelCliExtensions}`,
+            `--source-maps=inline --copy-files`,
+            `--verbose --ignore=${babelCliIgnore}`
+          )
+        );
+      },
+      finally: [".build-lib:delete-babel-ignored-files"]
     },
 
     ".clean.lib:server": () => shell.rm("-rf", AppMode.lib.server),
@@ -701,8 +721,9 @@ Individual .babelrc files were generated for you in src/client and src/server
           .map(n => `--watch ${n}`)
           .join(" ");
         AppMode.setEnv(AppMode.src.dir);
+        const babelRun = quote(Path.join(archetype.dir, "support/babel-run"));
         const nodeRunApp = AppMode.isSrc
-          ? `node ${quote(Path.join(archetype.dir, "support/babel-run"))} ${AppMode.src.server}`
+          ? `node ${babelRun} ${AppMode.src.server}`
           : `node ${AppMode.src.server}`;
 
         return mkCmd(
@@ -784,14 +805,19 @@ Individual .babelrc files were generated for you in src/client and src/server
       const testDir = ["_test_", "__tests__"].find(x => shell.test("-d", x));
       let runJest = testDir;
       if (!runJest) {
-        runJest = glob.sync(`**/*.{test,spec}.{js,jsx,ts,tsx}`, {
-          cwd: Path.resolve(AppMode.src.dir)
-        }).length > 0;
+        runJest =
+          scanDir.sync({
+            dir: Path.resolve(AppMode.src.dir),
+            filterExt: [".js", ".jsx", ".ts", ".tsx"],
+            filter: x => x.indexOf(".spec.") > 0 || x.indexOf(".test.") > 0
+          }).length > 0;
       }
+
       if (!runJest) {
         const { roots } = archetype.jest;
         runJest = roots && roots.length > 0;
       }
+
       if (runJest) {
         makeBabelRc(Path.join(testDir, "client"), "babelrc-client.js");
         logger.info("Running jest unit tests");

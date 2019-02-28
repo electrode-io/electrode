@@ -4349,8 +4349,8 @@ electrode-archetype-opt-sass:
    sass-loader: ^6.0.6
 electrode-archetype-react-app:
  _:
-  ../../packages/electrode-archetype-react-app: 6.3.1-fynlocal_h
- 6.3.1-fynlocal_h:
+  ../../packages/electrode-archetype-react-app: 6.3.2-fynlocal_h
+ 6.3.2-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app
@@ -4359,13 +4359,14 @@ electrode-archetype-react-app:
    css-modules-require-hook: ^4.0.2
    isomorphic-loader: ^2.0.0
    optional-require: ^1.0.0
+   subapp-util: ^1.0.0
   optionalDependencies:
    electrode-archetype-opt-inferno: ^0.2.4
    electrode-archetype-opt-react: ^1.0.2
 electrode-archetype-react-app-dev:
  _:
-  ../../packages/electrode-archetype-react-app-dev: 6.3.1-fynlocal_h
- 6.3.1-fynlocal_h:
+  ../../packages/electrode-archetype-react-app-dev: 6.3.2-fynlocal_h
+ 6.3.2-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app-dev
@@ -4422,6 +4423,7 @@ electrode-archetype-react-app-dev:
    eslint-plugin-react: ^7.4.0
    extract-text-webpack-plugin: ^4.0.0-beta.0
    file-loader: ^2.0.0
+   filter-scan-dir: ^1.0.8
    finalhandler: ^1.1.1
    flow-bin: ^0.74.0
    flow-typed: ^2.4.0
@@ -4453,6 +4455,7 @@ electrode-archetype-react-app-dev:
    raw-loader: ^0.5.1
    react-intl: ^2.1.0
    react-test-renderer: ^16.1.1
+   request: ^2.88.0
    require-at: ^1.0.2
    rimraf: ^2.4.0
    serve-index-fs: ^1.9.1
@@ -4542,8 +4545,8 @@ electrode-node-resolver:
    require-at: ^1.0.0
 electrode-react-webapp:
  _:
-  ../../packages/electrode-react-webapp: 3.3.2-fynlocal_h
- 3.3.2-fynlocal_h:
+  ../../packages/electrode-react-webapp: 3.3.3-fynlocal_h
+ 3.3.3-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-react-webapp
@@ -5555,6 +5558,12 @@ fill-range:
    randomatic: ^3.0.0
    repeat-element: ^1.1.2
    repeat-string: ^1.5.2
+filter-scan-dir:
+ _:
+  ^1.0.8: 1.0.8
+ 1.0.8:
+  $: sha512-vtCdJ9sJxFOkJ73sVfdCG2sIw5S4he/t6gat5P5PYvgVFe6JOLxrtOE7mTZRAowfouuSD91QvkdE8/wyQpX2YA==
+  _: 'https://registry.npmjs.org/filter-scan-dir/-/filter-scan-dir-1.0.8.tgz'
 finalhandler:
  _:
   1.1.0: 1.1.0
@@ -13398,6 +13407,15 @@ stylus-relative-loader:
    loader-utils: ^0.2.9
   peerDependencies:
    stylus: ^0.54.5
+subapp-util:
+ _:
+  ../subapp-util: 0.1.0-fynlocal_h
+ 0.1.0-fynlocal_h:
+  $: local
+  _: ../../packages/subapp-util
+  dependencies:
+   filter-scan-dir: ^1.0.8
+   optional-require: ^1.0.0
 subtext:
  _:
   5.x.x: 5.0.0

@@ -11,6 +11,7 @@ const assert = require("assert");
 const orders = [
   "_base-options",
   "_entry",
+  "_subapp-chunks",
   "_node",
   "_output",
   "_resolve",
