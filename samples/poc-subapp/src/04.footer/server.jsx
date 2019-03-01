@@ -1,10 +1,10 @@
 import React from "react";
-import { Component } from "./footer-app";
+import { Component } from "./subapp-footer";
 import Promise from "bluebird";
 
 module.exports = {
   initialize: () => {
-    console.log("header server initialize");
+    console.log("subapp footer server initialize");
   },
   prepare: a => {
     return Promise.delay(50 + Math.random() * 1000).return({});
