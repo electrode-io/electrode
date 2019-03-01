@@ -1,15 +1,17 @@
 "use strict";
 
 const archetype = require("../archetype");
-const { node } = archetype.webpack.babelEnvTargets;
 
 const {
   enableTypeScript,
   flowRequireDirective,
   enableFlow,
   transformClassProps,
-  looseClassProps
+  looseClassProps,
+  envTargets
 } = archetype.babel;
+
+const { node } = envTargets;
 
 module.exports = {
   presets: [

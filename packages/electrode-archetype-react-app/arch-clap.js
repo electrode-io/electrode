@@ -352,7 +352,7 @@ function makeTasks() {
       .filter(x => x)
       .join(",")
   );
-  const babelEnvTargetsArr = Object.keys(archetype.webpack.babelEnvTargets).filter(k => k !== "node");
+  const babelEnvTargetsArr = Object.keys(archetype.babel.envTargets).filter(k => k !== "node");
 
   const buildDistDirs = babelEnvTargetsArr
     .filter(name => name !== "default")
@@ -364,7 +364,7 @@ function makeTasks() {
     )} --colors --display-error-details`,
     {
       env: Object.assign({}, process.env, {
-        ENV_TARGETS: name
+        ENV_TARGET: name
       })
     }
   ]);
@@ -474,18 +474,15 @@ function makeTasks() {
     },
 
     "mv-to-dist:clean": {
-      desc: `clean and left bundle.js only`,
+      desc: `clean static resources within ${buildDistDirs}`,
       task: () => {
-        buildDistDirs.forEach(dir => {
-          const files = shell
-            .ls("-RA", dir)
-            .filter(path => !path.match(/.+\.js(on|\.map)?$/))
-            .filter(path => {
-              Fs.statSync(Path.resolve(`${dir}/${path}`)).isFile();
-              const stat = Fs.statSync(Path.resolve(`${dir}/${path}`));
-              return (stat.isDirectory() && path.includes("icons")) || stat.isFile();
-            });
-          shell.rm("-rf", ...files.map(x => `${dir}/${x}`));
+        buildDistDirs.forEach(dir => {  // clean static resources within `dist-X` built by user specified env targets, leave [.js, .js.map, .json] only
+          const removedFiles = scanDir.sync({
+            dir: Path.resolve(dir),
+            includeRoot: true,
+            filter: file => !file.match(/.+\.js(on|\.map)?$/)
+          });
+          shell.rm("-rf", ...removedFiles);
         });
         return;
       }
