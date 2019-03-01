@@ -1,6 +1,6 @@
 "use strict";
 
-/* eslint-disable no-console, no-process-exit */
+/* eslint-disable no-console, no-process-exit, max-params */
 
 const Path = require("path");
 const assert = require("assert");
@@ -19,16 +19,29 @@ function removeExt(f) {
   return ix > 0 ? f.substring(0, ix) : f;
 }
 
-function scanSubApp(name, file) {
+function scanSubApp(name, verbatimName, dir, file) {
   const subAppDir = Path.dirname(file);
-  const serverEntry = optionalRequire.resolve(Path.join(subAppDir, "server"), { default: "" });
+  const subAppFullPath = Path.resolve(dir, subAppDir);
+
+  const entries = ["server.", `server-${name}.`, `server-${verbatimName}.`].map(x =>
+    x.toLowerCase()
+  );
+
+  const serverEntry = scanDir.sync({
+    dir: subAppFullPath,
+    filterExt: [".js", ".jsx", ".ts", ".tsx"],
+    filter: x => entries.find(e => x.toLowerCase().startsWith(e)),
+    maxLevel: 0
+  })[0];
+
   const manifest = {
     subAppDir,
     type: "app",
     name,
     entry: removeExt(Path.basename(file)),
-    serverEntry: Boolean(Path.basename(serverEntry))
+    serverEntry: serverEntry ? removeExt(serverEntry) : false
   };
+
   return manifest;
 }
 
@@ -36,9 +49,13 @@ function determineName(file) {
   const dirName = Path.basename(Path.dirname(file));
   // convert dir name to mix case to use as subapp name
   // skip parts before a . to allow naming subapp dirs like 01.app1
-  return dirName
-    .substr(dirName.indexOf(".") + 1)
-    .replace(/^(.)|-(.)/g, (a, b, c) => (b ? b.toUpperCase() : c && c.toUpperCase()));
+  const verbatimName = dirName.substr(dirName.indexOf(".") + 1);
+
+  const name = verbatimName.replace(/^(.)|-(.)/g, (a, b, c) =>
+    b ? b.toUpperCase() : c && c.toUpperCase()
+  );
+
+  return { verbatimName, name };
 }
 
 /*
@@ -82,10 +99,10 @@ function scanSubAppsFromDir(srcDir, maxLevel = Infinity) {
 
   // process subapps without manifest
   const errors2 = files.map(file => {
-    const name = determineName(file);
+    const { name, verbatimName } = determineName(file);
     if (subApps[name]) return null;
     try {
-      subApps[name] = scanSubApp(name, file);
+      subApps[name] = scanSubApp(name, verbatimName, srcDir, file);
     } catch (error) {
       return error;
     }
