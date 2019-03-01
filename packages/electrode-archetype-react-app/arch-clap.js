@@ -1,13 +1,12 @@
 "use strict";
 
-/* eslint-disable object-shorthand */
+/* eslint-disable object-shorthand, max-statements */
 
 const Fs = require("fs");
 const Path = require("path");
 const assert = require("assert");
 const requireAt = require("require-at");
 const archetype = require("./config/archetype");
-const appDevArchetype = require("../electrode-archetype-react-app-dev/config/archetype");
 
 require.resolve(`${archetype.devArchetypeName}/package.json`);
 
@@ -92,7 +91,7 @@ function setStaticFilesEnv() {
 
 const defaultListenPort = 3000;
 
-const portFromEnv = () => {
+const portFromEnv = () => { // eslint-disable-line no-unused-vars
   const x = parseInt(process.env.PORT, 10);
   /* istanbul ignore next */
   return x !== null && !isNaN(x) ? x : defaultListenPort;
@@ -353,22 +352,19 @@ function makeTasks() {
       .filter(x => x)
       .join(",")
   );
-
-  const babelEnvTargetsArr = Object.entries(appDevArchetype.webpack.babelEnvTargets).filter(
-    ([k]) => k !== "node"
-  );
+  const babelEnvTargetsArr = Object.keys(archetype.webpack.babelEnvTargets).filter(k => k !== "node");
 
   const buildDistDirs = babelEnvTargetsArr
-    .filter(([name]) => name !== "default")
-    .map(([name]) => `dist-${name}`);
+    .filter(name => name !== "default")
+    .map(name => `dist-${name}`);
 
-  const buildDistMinTask = babelEnvTargetsArr.map(([name, targets]) => [
+  const buildDistMinTask = babelEnvTargetsArr.map(name => [
     `webpack --config ${quote(
       webpackConfig("webpack.config.js")
     )} --colors --display-error-details`,
     {
       env: Object.assign({}, process.env, {
-        ENV_TARGETS: JSON.stringify({ [name]: targets })
+        ENV_TARGETS: name
       })
     }
   ]);
@@ -388,7 +384,7 @@ function makeTasks() {
       desc: AppMode.isSrc
         ? `Build your app's ${AppMode.src.dir} directory into ${AppMode.lib.dir} for production`
         : "Build your app's client bundle",
-      task: [".build-lib", "build-dist", ".check.top.level.babelrc", "mv-to-dist"] // TODO: move buildDistDirs to dist after all
+      task: [".build-lib", "build-dist", ".check.top.level.babelrc", "mv-to-dist"]
     },
 
     //
@@ -474,14 +470,6 @@ function makeTasks() {
     "build-dist-min": {
       dep: [".production-env"],
       desc: false,
-      // task: mkCmd(
-      //   `webpack --config`,
-      //   quote(webpackConfig("webpack.config.js")),
-      //   `--colors`,
-      //   `--display-error-details`,
-      //   `--env.legacy=true`
-      // ),
-
       task: buildDistMinTask.map(([cmd, options]) => () => exec(cmd, options))
     },
 
