@@ -6,7 +6,7 @@ const Path = require("path");
 const assert = require("assert");
 const optionalRequire = require("optional-require")(require);
 const scanDir = require("filter-scan-dir");
-const appMode = optionalRequire(Path.resolve(".prod/.app-mode.json"));
+const appMode = optionalRequire(Path.resolve(".prod/.app-mode.json"), { default: {} });
 const xrequire = require;
 
 function es6Require(r, xreq = xrequire) {
