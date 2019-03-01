@@ -13,6 +13,7 @@ const electrodeServer = require("electrode-server");
 xsh.Promise = Promise;
 
 describe("npmInstall", function() {
+  this.timeout(10000);
   let logs = [];
   let execStub;
   let logStub;
