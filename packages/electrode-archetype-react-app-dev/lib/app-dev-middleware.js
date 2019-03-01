@@ -30,8 +30,12 @@ class AppDevMiddleware {
 
     if (!_.isEmpty(data.refreshModules)) {
       data.refreshModules.forEach(m => {
-        const moduleFullPath = require.resolve(Path.resolve(m));
-        delete require.cache[moduleFullPath];
+        try {
+          const moduleFullPath = require.resolve(Path.resolve(m));
+          delete require.cache[moduleFullPath];
+        } catch (err) {
+          //
+        }
       });
 
       refreshAllSubApps();
