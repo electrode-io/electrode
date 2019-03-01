@@ -51,6 +51,14 @@ const webpackConfigSpec = {
     env: "ELECTRODE_LOAD_DLLS",
     type: "json",
     default: {}
+  },
+  babelEnvTargets: {
+    env: "BABEL_ENV_TARGETS",
+    type: "json",
+    default: {
+      default: {}, /** `default` and `node` targets object is required */
+      node: "6"
+    }
   }
 };
 
