@@ -6,7 +6,6 @@ const Fs = require("fs");
 const Path = require("path");
 const util = require("./util");
 const subappUtil = require("subapp-util");
-const optionalRequire = require("optional-require")(require);
 
 module.exports = function setup(setupContext) {
   const distDir = process.env.NODE_ENV === "production" ? "../dist" : "../browser";
