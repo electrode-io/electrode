@@ -1,0 +1,47 @@
+{
+  "name": "subapp-util",
+  "version": "0.1.0",
+  "description": "Util for Electrode SubApp",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "clap check"
+  },
+  "keywords": [
+    "web",
+    "react",
+    "subapp"
+  ],
+  "author": "Joel Chen <xchen@walmartlabs.com>",
+  "license": "Apache-2.0",
+  "files": [
+    "lib"
+  ],
+  "dependencies": {
+    "filter-scan-dir": "^1.0.9",
+    "optional-require": "^1.0.0"
+  },
+  "devDependencies": {
+    "electrode-archetype-njs-module-dev": "^3.0.0"
+  },
+  "nyc": {
+    "all": true,
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "exclude": [
+      "coverage",
+      "*clap.js",
+      "gulpfile.js",
+      "dist",
+      "test"
+    ],
+    "check-coverage": true,
+    "statements": 0,
+    "branches": 0,
+    "functions": 0,
+    "lines": 0,
+    "cache": true
+  }
+}

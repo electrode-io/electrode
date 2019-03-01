@@ -3,6 +3,7 @@
 const Path = require("path");
 const Fs = require("fs");
 const logger = require("./logger");
+const subappUtil = require("subapp-util");
 
 function makeAppMode(prodDir, reactLib) {
   const client = "client";
@@ -12,13 +13,27 @@ function makeAppMode(prodDir, reactLib) {
   let libDir = "";
   const savedFile = Path.join(prodDir, ".app-mode.json");
 
+  const version = 1;
+
   const loadSavedAppMode = () => {
     const savedFileFP = Path.resolve(savedFile);
-    if (Fs.existsSync(Path.resolve("src", client)) || Fs.existsSync(Path.resolve("src", server))) {
+    const subApps = subappUtil.scanSubAppsFromDir("src");
+    const hasSubApps = Object.keys(subApps).length > 0;
+
+    if (
+      hasSubApps ||
+      Fs.existsSync(Path.resolve("src", client)) ||
+      Fs.existsSync(Path.resolve("src", server))
+    ) {
       srcDir = "src";
       libDir = "lib";
+      return hasSubApps ? { subApps, hasSubApps } : {};
     } else if (Fs.existsSync(savedFileFP)) {
-      return JSON.parse(Fs.readFileSync(savedFileFP));
+      const saved = JSON.parse(Fs.readFileSync(savedFileFP));
+      if (saved.version === version) {
+        return saved;
+      }
+      logger.warn(`${savedFile} version ${saved.version} not match ${version} - ignoring.`);
     }
 
     return {};
@@ -58,6 +73,8 @@ function makeAppMode(prodDir, reactLib) {
       hasEnv: () => {
         return !!process.env[envKey];
       },
+      client,
+      server,
       src: {
         dir: srcDir,
         client: posixify(Path.join(srcDir, client)),
@@ -69,7 +86,8 @@ function makeAppMode(prodDir, reactLib) {
         server: posixify(Path.join(libDir, server))
       }
     },
-    saved
+    saved,
+    { version }
   );
 }
 

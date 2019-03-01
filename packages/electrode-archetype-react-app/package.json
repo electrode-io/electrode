@@ -28,7 +28,8 @@
     "@babel/runtime": "^7.1.5",
     "css-modules-require-hook": "^4.0.2",
     "isomorphic-loader": "^2.0.0",
-    "optional-require": "^1.0.0"
+    "optional-require": "^1.0.0",
+    "subapp-util": "^1.0.0"
   },
   "optionalDependencies": {
     "electrode-archetype-opt-inferno": "^0.2.4",
@@ -59,6 +60,9 @@
     ]
   },
   "fyn": {
+    "dependencies": {
+      "subapp-util": "../subapp-util"
+    },
     "optionalDependencies": {
       "electrode-archetype-opt-inferno": "../electrode-archetype-opt-inferno",
       "electrode-archetype-opt-react": "../electrode-archetype-opt-react"

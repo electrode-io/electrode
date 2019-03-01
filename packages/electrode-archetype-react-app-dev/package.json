@@ -78,6 +78,7 @@
     "eslint-plugin-react": "^7.4.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^2.0.0",
+    "filter-scan-dir": "^1.0.9",
     "finalhandler": "^1.1.1",
     "flow-bin": "^0.74.0",
     "flow-typed": "^2.4.0",
@@ -109,6 +110,7 @@
     "raw-loader": "^0.5.1",
     "react-intl": "^2.1.0",
     "react-test-renderer": "^16.1.1",
+    "request": "^2.88.0",
     "require-at": "^1.0.2",
     "rimraf": "^2.4.0",
     "serve-index-fs": "^1.9.1",
@@ -117,6 +119,7 @@
     "style-loader": "^0.20.1",
     "stylus": "^0.54.5",
     "stylus-relative-loader": "^3.4.0",
+    "subapp-util": "^1.0.0",
     "sugarss": "^1.0.1",
     "typescript": "^3.2.1",
     "url-loader": "^0.6.2",
@@ -152,6 +155,7 @@
   "fyn": {
     "dependencies": {
       "electrode-node-resolver": "../electrode-node-resolver",
+      "subapp-util": "../subapp-util",
       "webpack-config-composer": "../webpack-config-composer"
     },
     "devDependencies": {
