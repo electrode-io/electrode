@@ -7,6 +7,7 @@ const Path = require("path");
 const assert = require("assert");
 const requireAt = require("require-at");
 const archetype = require("./config/archetype");
+const appDevArchetype = require("../electrode-archetype-react-app-dev/config/archetype");
 
 require.resolve(`${archetype.devArchetypeName}/package.json`);
 
@@ -353,6 +354,24 @@ function makeTasks() {
       .join(",")
   );
 
+  const babelEnvTargetsArr = Object.entries(appDevArchetype.webpack.babelEnvTargets).filter(
+    ([k]) => k !== "node"
+  );
+
+  const buildDistDirs = babelEnvTargetsArr
+    .filter(([name]) => name !== "default")
+    .map(([name]) => `dist-${name}`);
+
+  const buildDistMinTask = babelEnvTargetsArr.map(([name, targets]) => [
+    `webpack --config ${quote(
+      webpackConfig("webpack.config.js")
+    )} --colors --display-error-details`,
+    {
+      env: Object.assign({}, process.env, {
+        ENV_TARGETS: JSON.stringify({ [name]: targets })
+      })
+    }
+  ]);
   let tasks = {
     ".mk-prod-dir": () =>
       createGitIgnoreDir(Path.resolve(archetype.prodDir), "Electrode production dir"),
@@ -369,7 +388,7 @@ function makeTasks() {
       desc: AppMode.isSrc
         ? `Build your app's ${AppMode.src.dir} directory into ${AppMode.lib.dir} for production`
         : "Build your app's client bundle",
-      task: [".build-lib", "build-dist", ".check.top.level.babelrc"]
+      task: [".build-lib", "build-dist", ".check.top.level.babelrc", "mv-to-dist"] // TODO: move buildDistDirs to dist after all
     },
 
     //
@@ -417,6 +436,11 @@ function makeTasks() {
       "build-dist:clean-tmp"
     ],
 
+    "mv-to-dist": [
+      "mv-to-dist:clean",
+      "mv-to-dist:mv-dirs"
+    ],
+
     "build-dist-dev-static": {
       desc: false,
       task: mkCmd(
@@ -450,12 +474,43 @@ function makeTasks() {
     "build-dist-min": {
       dep: [".production-env"],
       desc: false,
-      task: mkCmd(
-        `webpack --config`,
-        quote(webpackConfig("webpack.config.js")),
-        `--colors`,
-        `--display-error-details`
-      )
+      // task: mkCmd(
+      //   `webpack --config`,
+      //   quote(webpackConfig("webpack.config.js")),
+      //   `--colors`,
+      //   `--display-error-details`,
+      //   `--env.legacy=true`
+      // ),
+
+      task: buildDistMinTask.map(([cmd, options]) => () => exec(cmd, options))
+    },
+
+    "mv-to-dist:clean": {
+      desc: `clean and left bundle.js only`,
+      task: () => {
+        buildDistDirs.forEach(dir => {
+          const files = shell
+            .ls("-RA", dir)
+            .filter(path => !path.match(/.+\.js(on|\.map)?$/))
+            .filter(path => {
+              Fs.statSync(Path.resolve(`${dir}/${path}`)).isFile();
+              const stat = Fs.statSync(Path.resolve(`${dir}/${path}`));
+              return (stat.isDirectory() && path.includes("icons")) || stat.isFile();
+            });
+          shell.rm("-rf", ...files.map(x => `${dir}/${x}`));
+        });
+        return;
+      }
+    },
+
+    "mv-to-dist:mv-dirs": {
+      desc: `move ${buildDistDirs} to dist`,
+      task: () => {
+        if (buildDistDirs.length > 0) {
+          exec(`mv`, ...buildDistDirs, `dist`);
+        }
+        return;
+      }
     },
 
     "build-dist:clean-tmp": {
@@ -784,9 +839,10 @@ Individual .babelrc files were generated for you in src/client and src/server
       const testDir = ["_test_", "__tests__"].find(x => shell.test("-d", x));
       let runJest = testDir;
       if (!runJest) {
-        runJest = glob.sync(`**/*.{test,spec}.{js,jsx,ts,tsx}`, {
-          cwd: Path.resolve(AppMode.src.dir)
-        }).length > 0;
+        runJest =
+          glob.sync(`**/*.{test,spec}.{js,jsx,ts,tsx}`, {
+            cwd: Path.resolve(AppMode.src.dir)
+          }).length > 0;
       }
       if (!runJest) {
         const { roots } = archetype.jest;

@@ -126,6 +126,11 @@ const plugins = basePlugins.concat(
   ],
   enableKarmaCov && [getPluginFrom("electrode-archetype-opt-karma", "babel-plugin-istanbul")]
 );
+
+const envTargets = process.env.ENV_TARGETS ? JSON.parse(process.env.ENV_TARGETS) : {};
+
+const targets = envTargets.default ? {} : Object.values(envTargets)[0];
+
 const presets = [
   //
   // webpack 4 can handle ES modules now so turn off babel module transformation
@@ -133,7 +138,7 @@ const presets = [
   // But keep transforming modules to commonjs when not in production mode so tests
   // can continue to stub ES modules.
   //
-  ["@babel/preset-env", { modules: isProduction ? "auto" : "commonjs", loose: true }],
+  ["@babel/preset-env", { modules: isProduction ? "auto" : "commonjs", loose: true, targets }],
   enableTypeScript && "@babel/preset-typescript",
   "@babel/preset-react"
 ];
