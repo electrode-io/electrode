@@ -4380,6 +4380,7 @@ electrode-archetype-react-app:
    css-modules-require-hook: ^4.0.2
    isomorphic-loader: ^2.0.0
    optional-require: ^1.0.0
+   subapp-util: ^1.0.0
   optionalDependencies:
    electrode-archetype-opt-inferno: ^0.2.4
    electrode-archetype-opt-react: ^1.0.2
@@ -4443,6 +4444,7 @@ electrode-archetype-react-app-dev:
    eslint-plugin-react: ^7.4.0
    extract-text-webpack-plugin: ^4.0.0-beta.0
    file-loader: ^2.0.0
+   filter-scan-dir: ^1.0.9
    finalhandler: ^1.1.1
    flow-bin: ^0.74.0
    flow-typed: ^2.4.0
@@ -4474,6 +4476,7 @@ electrode-archetype-react-app-dev:
    raw-loader: ^0.5.1
    react-intl: ^2.1.0
    react-test-renderer: ^16.1.1
+   request: ^2.88.0
    require-at: ^1.0.2
    rimraf: ^2.4.0
    serve-index-fs: ^1.9.1
@@ -4482,6 +4485,7 @@ electrode-archetype-react-app-dev:
    style-loader: ^0.20.1
    stylus: ^0.54.5
    stylus-relative-loader: ^3.4.0
+   subapp-util: ^1.0.0
    sugarss: ^1.0.1
    typescript: ^3.2.1
    url-loader: ^0.6.2
@@ -5601,6 +5605,12 @@ fill-range:
    randomatic: ^3.0.0
    repeat-element: ^1.1.2
    repeat-string: ^1.5.2
+filter-scan-dir:
+ _:
+  ^1.0.9: 1.0.9
+ 1.0.9:
+  $: sha512-EF4TvUkg+x+tPMmUmSM2aB/8WiXTYl0OAwyyt0ct9prkRlxGo1lTL9Q4fandBEY6HX0DrXFuLtAw8BdqUbCXRQ==
+  _: 'https://registry.npmjs.org/filter-scan-dir/-/filter-scan-dir-1.0.9.tgz'
 finalhandler:
  _:
   1.1.0: 1.1.0
@@ -13243,6 +13253,15 @@ stylus-relative-loader:
    loader-utils: ^0.2.9
   peerDependencies:
    stylus: ^0.54.5
+subapp-util:
+ _:
+  ../subapp-util: 0.1.0-fynlocal_h
+ 0.1.0-fynlocal_h:
+  $: local
+  _: ../../packages/subapp-util
+  dependencies:
+   filter-scan-dir: ^1.0.9
+   optional-require: ^1.0.0
 subtext:
  _:
   6.x.x: 6.0.12

@@ -1,10 +1,11 @@
 "use strict";
 
-/* eslint-disable no-console, no-magic-numbers */
+/* eslint-disable no-console, no-magic-numbers, max-statements */
 
 const Path = require("path");
 const _ = require("lodash");
 const isomorphicExtendRequire = require("isomorphic-loader/lib/extend-require");
+const { refreshAllSubApps } = require("subapp-util");
 
 class AppDevMiddleware {
   constructor() {
@@ -25,24 +26,30 @@ class AppDevMiddleware {
         fromId: data.id,
         isomorphicStatus: "off"
       });
-    } else {
-      if (!_.isEmpty(data.refreshModules)) {
-        data.refreshModules.forEach(m => {
-          const moduleFullPath = Path.resolve(m);
-          delete require.cache[moduleFullPath];
-        });
-      }
-
-      return isomorphicExtendRequire.loadAssets(err2 => {
-        if (err2) console.error("reload isomorphic assets failed", err2);
-        return process.send({
-          name: "app-ack",
-          from: data.name,
-          fromId: data.id,
-          isomorphicStatus: "on"
-        });
-      });
     }
+
+    if (!_.isEmpty(data.refreshModules)) {
+      data.refreshModules.forEach(m => {
+        try {
+          const moduleFullPath = require.resolve(Path.resolve(m));
+          delete require.cache[moduleFullPath];
+        } catch (err) {
+          //
+        }
+      });
+
+      refreshAllSubApps();
+    }
+
+    return isomorphicExtendRequire.loadAssets(err2 => {
+      if (err2) console.error("reload isomorphic assets failed", err2);
+      return process.send({
+        name: "app-ack",
+        from: data.name,
+        fromId: data.id,
+        isomorphicStatus: "on"
+      });
+    });
   }
 
   setup() {
