@@ -470,7 +470,7 @@ function makeTasks() {
     "build-dist-min": {
       dep: [".production-env"],
       desc: false,
-      task: buildDistMinTask.map(([cmd, options]) => () => exec(cmd, options))
+      task: [buildDistMinTask.map(([cmd, options]) => () => exec(cmd, options))]
     },
 
     "mv-to-dist:clean": {
