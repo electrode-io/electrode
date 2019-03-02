@@ -476,11 +476,11 @@ function makeTasks() {
     "mv-to-dist:clean": {
       desc: `clean static resources within ${buildDistDirs}`,
       task: () => {
-        buildDistDirs.forEach(dir => {  // clean static resources within `dist-X` built by user specified env targets, leave [.js, .js.map, .json] only
+        buildDistDirs.forEach(dir => {  // clean static resources within `dist-X` built by user specified env targets, leave [.js, .map, .json] only
           const removedFiles = scanDir.sync({
             dir: Path.resolve(dir),
             includeRoot: true,
-            filter: file => !file.match(/.+\.js(on|\.map)?$/)
+            ignoreExt: [".js", ".map", ".json"]
           });
           shell.rm("-rf", ...removedFiles);
         });
