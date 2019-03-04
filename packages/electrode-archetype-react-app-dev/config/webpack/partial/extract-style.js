@@ -171,7 +171,7 @@ module.exports = function() {
   return {
     module: { rules },
     plugins: [
-      new ExtractTextPlugin({ filename: "[name].style.[hash].css" }),
+      new ExtractTextPlugin({ filename: "[name].style.css" }),
       process.env.NODE_ENV === "production" &&
         new OptimizeCssAssetsPlugin(archetype.webpack.optimizeCssOptions),
       /*

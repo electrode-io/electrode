@@ -1,6 +1,6 @@
 "use strict";
 
-/* eslint-disable object-shorthand */
+/* eslint-disable object-shorthand, max-statements */
 
 const Fs = require("fs");
 const Path = require("path");
@@ -91,7 +91,7 @@ function setStaticFilesEnv() {
 
 const defaultListenPort = 3000;
 
-const portFromEnv = () => {
+const portFromEnv = () => { // eslint-disable-line no-unused-vars
   const x = parseInt(process.env.PORT, 10);
   /* istanbul ignore next */
   return x !== null && !isNaN(x) ? x : defaultListenPort;
@@ -352,7 +352,22 @@ function makeTasks() {
       .filter(x => x)
       .join(",")
   );
+  const babelEnvTargetsArr = Object.keys(archetype.babel.envTargets).filter(k => k !== "node");
 
+  const buildDistDirs = babelEnvTargetsArr
+    .filter(name => name !== "default")
+    .map(name => `dist-${name}`);
+
+  const buildDistMinTask = babelEnvTargetsArr.map(name => [
+    `webpack --config ${quote(
+      webpackConfig("webpack.config.js")
+    )} --colors --display-error-details`,
+    {
+      env: Object.assign({}, process.env, {
+        ENV_TARGET: name
+      })
+    }
+  ]);
   let tasks = {
     ".mk-prod-dir": () =>
       createGitIgnoreDir(Path.resolve(archetype.prodDir), "Electrode production dir"),
@@ -369,7 +384,7 @@ function makeTasks() {
       desc: AppMode.isSrc
         ? `Build your app's ${AppMode.src.dir} directory into ${AppMode.lib.dir} for production`
         : "Build your app's client bundle",
-      task: [".build-lib", "build-dist", ".check.top.level.babelrc"]
+      task: [".build-lib", "build-dist", ".check.top.level.babelrc", "mv-to-dist"]
     },
 
     //
@@ -417,6 +432,11 @@ function makeTasks() {
       "build-dist:clean-tmp"
     ],
 
+    "mv-to-dist": [
+      "mv-to-dist:clean",
+      "mv-to-dist:mv-dirs"
+    ],
+
     "build-dist-dev-static": {
       desc: false,
       task: mkCmd(
@@ -450,12 +470,32 @@ function makeTasks() {
     "build-dist-min": {
       dep: [".production-env"],
       desc: false,
-      task: mkCmd(
-        `webpack --config`,
-        quote(webpackConfig("webpack.config.js")),
-        `--colors`,
-        `--display-error-details`
-      )
+      task: [buildDistMinTask.map(([cmd, options]) => () => exec(cmd, options))]
+    },
+
+    "mv-to-dist:clean": {
+      desc: `clean static resources within ${buildDistDirs}`,
+      task: () => {
+        buildDistDirs.forEach(dir => {  // clean static resources within `dist-X` built by user specified env targets, leave [.js, .map, .json] only
+          const removedFiles = scanDir.sync({
+            dir: Path.resolve(dir),
+            includeRoot: true,
+            ignoreExt: [".js", ".map", ".json"]
+          });
+          shell.rm("-rf", ...removedFiles);
+        });
+        return;
+      }
+    },
+
+    "mv-to-dist:mv-dirs": {
+      desc: `move ${buildDistDirs} to dist`,
+      task: () => {
+        if (buildDistDirs.length > 0) {
+          exec(`mv`, ...buildDistDirs, `dist`);
+        }
+        return;
+      }
     },
 
     "build-dist:clean-tmp": {

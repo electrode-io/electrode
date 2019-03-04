@@ -64,7 +64,15 @@ const babelConfigSpec = {
   // require the @flow directive in source to enable FlowJS type stripping
   flowRequireDirective: { env: "FLOW_REQUIRE_DIRECTIVE", default: false },
   transformClassProps: { env: "BABEL_CLASS_PROPS", default: false },
-  looseClassProps: { env: "BABEL_CLASS_PROPS_LOOSE", default: true }
+  looseClassProps: { env: "BABEL_CLASS_PROPS_LOOSE", default: true },
+  envTargets: {
+    env: "BABEL_ENV_TARGETS",
+    type: "json",
+    default: {
+      default: {} /** `default` and `node` targets object is required */,
+      node: "6"
+    }
+  }
 };
 
 const topConfigSpec = {

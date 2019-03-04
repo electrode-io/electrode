@@ -7,17 +7,18 @@ const {
   flowRequireDirective,
   enableFlow,
   transformClassProps,
-  looseClassProps
+  looseClassProps,
+  envTargets
 } = archetype.babel;
+
+const { node } = envTargets;
 
 module.exports = {
   presets: [
     [
       "@babel/preset-env",
       {
-        targets: {
-          node: "8.11"
-        }
+        targets: { node }
       }
     ],
     enableTypeScript && "@babel/preset-typescript"

@@ -88,7 +88,6 @@ function appEntry() {
 
   // finally look for src/client/app.js or src/client/app.jsx or src/client/app.tsx
   const entries = ["./app.js", "./app.jsx", "./app.tsx"];
-  // const entry = Fs.existsSync(Path.join(context, "app.js")) ? "./app.js" : "./app.jsx";
   const entry = entries.find(f => Fs.existsSync(Path.join(context, f))) || "./app.jsx";
   logger.info(`Default to single app entry point using ${entry} under context ${context}`);
 
