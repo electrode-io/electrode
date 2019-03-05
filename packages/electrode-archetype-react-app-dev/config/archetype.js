@@ -69,7 +69,9 @@ const babelConfigSpec = {
     env: "BABEL_ENV_TARGETS",
     type: "json",
     default: {
-      default: {} /** `default` and `node` targets object is required */,
+      default: {
+        ie: "8"
+      } /** `default` and `node` targets object is required */,
       node: "6"
     }
   }
