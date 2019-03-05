@@ -1,6 +1,7 @@
 "use strict";
 
 const archetype = require("../archetype");
+const { node } = archetype.webpack.babelEnvTargets;
 
 const {
   enableTypeScript,

@@ -93,6 +93,15 @@ function appEntry() {
 
   return entry;
 }
+const _appEntry = appEntry();
+const entry = Object.keys(archetype.webpack.babelEnvTargets).reduce((prev, k) => {
+  if (k === "default") {
+    prev.main = polyfill ? ["@babel/polyfill", `${_appEntry}?default`] : `${_appEntry}?default`;
+  } else if (k !== "node") {
+    prev[`${k}/main`] = polyfill ? ["@babel/polyfill", `${_appEntry}?${k}`] : `${_appEntry}?${k}`;
+  }
+  return prev;
+}, {});
 
 const entry = polyfill ? { main: ["@babel/polyfill", appEntry()] } : appEntry();
 

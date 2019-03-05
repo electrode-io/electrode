@@ -3,7 +3,6 @@
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const AppMode = archetype.AppMode;
 const Path = require("path");
-const identity = require("lodash/identity");
 const assign = require("lodash/assign");
 const babelLoader = require.resolve("babel-loader");
 
@@ -16,20 +15,43 @@ module.exports = function(options) {
   };
 
   const test = archetype.babel.enableTypeScript ? /\.[tj]sx?$/ : /\.jsx?$/;
+  const getOneOfRule = (babelEnvTargets, k) => [
+    {
+      loader: babelLoader,
+      options: Object.assign(
+        { cacheDirectory: Path.resolve(".etmp/babel-loader") },
+        options.babel,
+        {
+          presets: [
+            [
+              "@babel/preset-env",
+              {
+                targets: babelEnvTargets[k]
+              }
+            ]
+          ]
+        }
+      )
+    }
+  ];
+
+  const oneOf = (() => {
+    const { babelEnvTargets } = archetype.webpack;
+    const _oneOf = Object.keys(babelEnvTargets)
+      .filter(k => k !== "default" && k !== "node")
+      .map(k => ({
+        resourceQuery: new RegExp(k),
+        use: getOneOfRule(babelEnvTargets, k)
+      }));
+    _oneOf.push({ use: getOneOfRule(babelEnvTargets, "default") });
+    return _oneOf;
+  })();
 
   const babelLoaderConfig = {
     _name: "babel",
     test,
     exclude: babelExclude,
-    use: [
-      {
-        loader: babelLoader,
-        options: Object.assign(
-          { cacheDirectory: Path.resolve(".etmp/babel-loader") },
-          options.babel
-        )
-      }
-    ].filter(identity)
+    oneOf
   };
 
   return {
