@@ -3,6 +3,8 @@
 /* eslint-disable max-statements, max-depth */
 
 const groupScripts = require("../group-scripts");
+const mylog = require(`${process.env.HOME}/Documents/utils/mylog.js`);
+const {FgCyan, FgYellow, Bright} = mylog.args;
 
 const {
   getIconStats,
@@ -41,6 +43,7 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
   const RENDER_JS = routeOptions.renderJS;
   const RENDER_SS = routeOptions.serverSideRendering;
   const assets = routeOptions.__internals.assets;
+  const otherAssets = routeOptions.__internals.otherAssets;
   const devBundleBase = routeOptions.__internals.devBundleBase;
   const prodBundleBase = routeOptions.prodBundleBase;
   const chunkSelector = routeOptions.__internals.chunkSelector;
@@ -52,6 +55,7 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
     RENDER_JS,
     RENDER_SS,
     assets,
+    otherAssets,
     devBundleBase,
     prodBundleBase,
     chunkSelector,
@@ -71,6 +75,22 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
       : `${prodBundleBase}${assets.manifest}`;
   };
 
+  const getBundleJsNameByHeader = data => {
+    let { name } = data.jsChunk;
+    const x_chrome = !isNaN(data.headers["x-chrome"]) && parseInt(data.headers["x-chrome"]);
+    if (x_chrome && x_chrome > 0) {
+      const { otherAssets } = data.routeData;
+      if (x_chrome >= 65) {
+        const _js = otherAssets["dist-es6"].js.find(x => x.name.startsWith("main.bundle"));
+        if (_js) name = `dist-es6/js/${_js.name}`;
+      } else if (x_chrome >= 30) {
+        const _js = otherAssets["dist-es3"].js.find(x => x.name.startsWith("main.bundle"));
+        if (_js) name = `dist-es3/js/${_js.name}`;
+      }
+    }
+    return name;
+  };
+
   const bundleJs = data => {
     if (!data.renderJs) {
       return "";
@@ -78,7 +98,9 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
     if (WEBPACK_DEV) {
       return data.devJSBundle;
     } else if (data.jsChunk) {
-      return `${prodBundleBase}${data.jsChunk.name}`;
+      const bundleJsName = getBundleJsNameByHeader(data);
+      mylog(`${prodBundleBase}${bundleJsName}`);
+      return `${prodBundleBase}${bundleJsName}`;
     } else {
       return "";
     }
@@ -167,7 +189,8 @@ window.${windowConfigKey}.ui = ${JSON.stringify(routeOptions.uiConfig)};
     },
 
     [BODY_BUNDLE_MARKER]: context => {
-      const js = bundleJs(context.user);
+      context.user.headers = context.user.request.headers;
+      const js = bundleJs(context.user); // TODO: generate the url for undle.js
       const jsLink = js ? { src: js } : "";
 
       const ins = routeOptions.unbundledJS.preBundle.concat(

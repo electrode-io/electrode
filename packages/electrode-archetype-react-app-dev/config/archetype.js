@@ -72,7 +72,7 @@ const babelConfigSpec = {
       default: {
         ie: "8"
       } /** `default` and `node` targets object is required */,
-      node: "6"
+      node: process.versions.node.split(".")[0]
     }
   }
 };
