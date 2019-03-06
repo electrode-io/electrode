@@ -3,7 +3,7 @@
 const Path = require("path");
 const { AppMode, babel } = require("electrode-archetype-react-app/config/archetype");
 const inspectpack = process.env.INSPECTPACK_DEBUG === "true";
-let { target } = babel;
+const { target } = babel;
 
 module.exports = {
   output: {
