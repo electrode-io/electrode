@@ -1,13 +1,13 @@
 "use strict";
 
 const Path = require("path");
-const { AppMode } = require("electrode-archetype-react-app/config/archetype");
+const { AppMode, babel } = require("electrode-archetype-react-app/config/archetype");
 const inspectpack = process.env.INSPECTPACK_DEBUG === "true";
-const { ENV_TARGET } = process.env;
+const { target } = babel;
 
 module.exports = {
   output: {
-    path: Path.resolve(ENV_TARGET === "default" ? "dist" : `dist-${ENV_TARGET}`, "js"),
+    path: Path.resolve(target !== "default" ? `dist-${target}` : "dist", "js"),
     pathinfo: inspectpack, // Enable path information for inspectpack
     publicPath: "/js/",
     chunkFilename: "[hash].[name].js",

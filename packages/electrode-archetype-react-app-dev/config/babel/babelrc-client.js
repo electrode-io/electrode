@@ -127,8 +127,7 @@ const plugins = basePlugins.concat(
   enableKarmaCov && [getPluginFrom("electrode-archetype-opt-karma", "babel-plugin-istanbul")]
 );
 
-const { ENV_TARGET } = process.env;
-const targets = ENV_TARGET ? archetype.babel.envTargets[ENV_TARGET] : {};
+const targets = archetype.babel.envTargets[archetype.babel.target];
 
 const presets = [
   //
