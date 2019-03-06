@@ -33,7 +33,7 @@ class FakeRes extends EventEmitter {
   get responded() {
     return this._end > 0;
   }
-  
+
   getHeader(h) {
     return this._headers[h.toLowerCase()];
   }
