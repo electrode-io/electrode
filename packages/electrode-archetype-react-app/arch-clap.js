@@ -8,6 +8,8 @@ const assert = require("assert");
 const requireAt = require("require-at");
 const archetype = require("./config/archetype");
 
+// make sure that -dev app archetype is also installed.
+// if it's not then this will fail with an error message that it's not found.
 require.resolve(`${archetype.devArchetypeName}/package.json`);
 
 const warnYarn = require("./lib/warn-yarn");
@@ -91,7 +93,7 @@ function setStaticFilesEnv() {
 
 const defaultListenPort = 3000;
 
-const portFromEnv = () => { // eslint-disable-line no-unused-vars
+const portFromEnv = () => {
   const x = parseInt(process.env.PORT, 10);
   /* istanbul ignore next */
   return x !== null && !isNaN(x) ? x : defaultListenPort;
@@ -278,7 +280,8 @@ function startAppServer(options) {
 // - task name starts with . are hidden in help output
 // - when invoking tasks in [], starting name with ? means optional (ie: won't fail if task not found)
 
-function makeTasks() {
+function makeTasks(xclap) {
+  assert(xclap.concurrent, "xclap version must be 0.2.28+");
   process.env.ENABLE_CSS_MODULE = "false";
   process.env.ENABLE_KARMA_COV = "false";
 
@@ -352,22 +355,13 @@ function makeTasks() {
       .filter(x => x)
       .join(",")
   );
+
   const babelEnvTargetsArr = Object.keys(archetype.babel.envTargets).filter(k => k !== "node");
 
   const buildDistDirs = babelEnvTargetsArr
     .filter(name => name !== "default")
     .map(name => `dist-${name}`);
 
-  const buildDistMinTask = babelEnvTargetsArr.map(name => [
-    `webpack --config ${quote(
-      webpackConfig("webpack.config.js")
-    )} --colors --display-error-details`,
-    {
-      env: Object.assign({}, process.env, {
-        ENV_TARGET: name
-      })
-    }
-  ]);
   let tasks = {
     ".mk-prod-dir": () =>
       createGitIgnoreDir(Path.resolve(archetype.prodDir), "Electrode production dir"),
@@ -432,10 +426,7 @@ function makeTasks() {
       "build-dist:clean-tmp"
     ],
 
-    "mv-to-dist": [
-      "mv-to-dist:clean",
-      "mv-to-dist:mv-dirs"
-    ],
+    "mv-to-dist": ["mv-to-dist:clean", "mv-to-dist:mv-dirs"],
 
     "build-dist-dev-static": {
       desc: false,
@@ -469,14 +460,30 @@ function makeTasks() {
 
     "build-dist-min": {
       dep: [".production-env"],
-      desc: false,
-      task: [buildDistMinTask.map(([cmd, options]) => () => exec(cmd, options))]
+      desc: "build dist for production",
+      task: xclap.concurrent(
+        babelEnvTargetsArr.map((name, index) =>
+          xclap.exec(
+            [
+              `webpack --config`,
+              quote(webpackConfig("webpack.config.js")),
+              `--colors --display-error-details`
+            ],
+            {
+              xclap: { delayRunMs: index * 2000 },
+              execOptions: { env: { ENV_TARGET: name } }
+            }
+          )
+        )
+      )
     },
 
     "mv-to-dist:clean": {
       desc: `clean static resources within ${buildDistDirs}`,
       task: () => {
-        buildDistDirs.forEach(dir => {  // clean static resources within `dist-X` built by user specified env targets, leave [.js, .map, .json] only
+        buildDistDirs.forEach(dir => {
+          // clean static resources within `dist-X` built by user specified env targets
+          // and leave [.js, .map, .json] files only
           const removedFiles = scanDir.sync({
             dir: Path.resolve(dir),
             includeRoot: true,
@@ -492,7 +499,7 @@ function makeTasks() {
       desc: `move ${buildDistDirs} to dist`,
       task: () => {
         if (buildDistDirs.length > 0) {
-          exec(`mv`, ...buildDistDirs, `dist`);
+          return exec(`mv`, ...buildDistDirs, `dist`);
         }
         return;
       }
@@ -1017,6 +1024,6 @@ module.exports = function(xclap) {
   createElectrodeTmpDir();
   xclap = xclap || requireAt(process.cwd())("xclap") || devRequire("xclap");
   process.env.FORCE_COLOR = "true"; // force color for chalk
-  xclap.load("electrode", makeTasks());
+  xclap.load("electrode", makeTasks(xclap));
   warnYarn();
 };
