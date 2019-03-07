@@ -503,6 +503,8 @@ function makeTasks(xclap) {
               dir,
               includeRoot: true,
               filter: file => /.+(\.sw-registration|-main\.bundle)\.js(\.map)?$/.test(file)
+              // the regex above matches all the sw-registration.js, sw-registration.js.map,
+              // main.bundle.js and main.bundle.js.map
             })
             .forEach(file =>
               file.endsWith(".js")

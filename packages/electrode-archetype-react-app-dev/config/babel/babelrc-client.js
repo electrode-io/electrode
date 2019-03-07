@@ -33,6 +33,7 @@ const basePlugins = [
     "@babel/plugin-proposal-class-properties",
     { loose: looseClassProps }
   ],
+  "@babel/plugin-transform-object-super",
   [
     "babel-plugin-i18n-id-hashing",
     {
