@@ -10,7 +10,7 @@ module.exports = {
     path: Path.resolve(target !== "default" ? `dist-${target}` : "dist", "js"),
     pathinfo: inspectpack, // Enable path information for inspectpack
     publicPath: "/js/",
-    chunkFilename: `${target}.[name].js`,
+    chunkFilename: `${target}.[hash].[name].js`,
     filename: `${target}-main.bundle.js`
   }
 };
