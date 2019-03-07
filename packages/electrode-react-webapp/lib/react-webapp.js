@@ -4,6 +4,16 @@ const _ = require("lodash");
 const Path = require("path");
 const assert = require("assert");
 const AsyncTemplate = require("./async-template");
+const filterScanDir = require("filter-scan-dir");
+const otherStats = filterScanDir.sync({
+  dir: Path.resolve("dist", ".."),
+  includeRoot: true,
+  filter: file => file === "stats.json"
+}).reduce((prev, x) => {
+  const k = x.split(Path.sep).find(p => p.startsWith("dist-"));
+  if (k) prev[k] = x;
+  return prev;
+}, {});
 
 const {
   resolveChunkSelector,
@@ -60,6 +70,7 @@ const setupOptions = options => {
     },
     paths: {},
     stats: "dist/server/stats.json",
+    otherStats,
     iconStats: "dist/server/iconstats.json",
     criticalCSS: "dist/js/critical.css",
     buildArtifacts: ".build",
@@ -76,8 +87,13 @@ const setupOptions = options => {
   const statsPath = getStatsPath(pluginOptions.stats, pluginOptions.buildArtifacts);
 
   const assets = loadAssetsFromStats(statsPath);
+  const otherAssets = Object.entries(pluginOptions.otherStats).reduce((prev, [k, v]) => {
+    prev[k] = loadAssetsFromStats(getStatsPath(v, pluginOptions.buildArtifacts));
+    return prev;
+  }, {});
   pluginOptions.__internals = _.defaultsDeep({}, pluginOptions.__internals, {
     assets,
+    otherAssets,
     chunkSelector,
     devBundleBase
   });

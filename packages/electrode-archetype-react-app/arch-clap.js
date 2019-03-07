@@ -432,11 +432,7 @@ function makeTasks() {
       "build-dist:clean-tmp"
     ],
 
-    "mv-to-dist": [
-      "mv-to-dist:clean",
-      "mv-to-dist:mv-dirs"
-    ],
-
+    "mv-to-dist": ["mv-to-dist:clean", "mv-to-dist:mv-dirs", "mv-to-dist:keep-targets"],
     "build-dist-dev-static": {
       desc: false,
       task: mkCmd(
@@ -491,9 +487,40 @@ function makeTasks() {
     "mv-to-dist:mv-dirs": {
       desc: `move ${buildDistDirs} to dist`,
       task: () => {
-        if (buildDistDirs.length > 0) {
-          exec(`mv`, ...buildDistDirs, `dist`);
-        }
+        buildDistDirs.forEach(dir => {
+          scanDir
+            .sync({
+              dir,
+              includeRoot: true,
+              filter: file => /.+(\.sw-registration|-main\.bundle)\.js(\.map)?$/.test(file)
+            })
+            .forEach(file =>
+              file.endsWith(".js")
+                ? exec("cp", "-r", file, "dist/js")
+                : exec("cp", "-r", file, "dist/map")
+            );
+        });
+        return;
+      }
+    },
+
+    "mv-to-dist:keep-targets": {
+      desc: `write each targets to respective isomorphic-assets.json`,
+      task: () => {
+        buildDistDirs.forEach(dir => {
+          const isomorphicPath = Path.resolve(`${dir}/isomorphic-assets.json`); // add `targets` field to `dist-X/isomorphic-assets.json`
+          if (Fs.existsSync(isomorphicPath)) {
+            Fs.readFile(isomorphicPath, {encoding: "utf8"}, (err, data) => {
+              if (err) throw err;
+              const assetsJson = JSON.parse(data);
+              const { envTargets } = archetype.babel;
+              assetsJson.targets = envTargets[dir.split("-")[1]];
+              Fs.writeFile(isomorphicPath, JSON.stringify(assetsJson, null, 2), err => {
+                if (err) throw err;
+              });
+            });
+          }
+        });
         return;
       }
     },
@@ -612,7 +639,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     "check-dev": ["lint", "test-dev"],
 
     clean: [".clean.dist", ".clean.lib", ".clean.prod", ".clean.etmp", ".clean.dll"],
-    ".clean.dist": () => shell.rm("-rf", "dist"),
+    ".clean.dist": () => shell.rm("-rf", ...shell.ls("-d", "dist*")),
     ".clean.lib": () => undefined, // to be updated below for src mode
     ".clean.prod": () => shell.rm("-rf", archetype.prodDir),
     ".clean.etmp": () => shell.rm("-rf", eTmpDir),

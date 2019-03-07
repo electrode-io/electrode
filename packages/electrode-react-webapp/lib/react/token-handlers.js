@@ -11,7 +11,8 @@ const {
   getDevJsBundle,
   getProdBundles,
   processRenderSsMode,
-  getCspNonce
+  getCspNonce,
+  getBrowserslistQuery
 } = require("../utils");
 
 const {
@@ -23,7 +24,7 @@ const {
 } = require("./content");
 
 const prefetchBundles = require("./handlers/prefetch-bundles");
-
+const { matchesUA } = require("browserslist-useragent");
 const CONTENT_MARKER = "SSR_CONTENT";
 const HEADER_BUNDLE_MARKER = "WEBAPP_HEADER_BUNDLES";
 const BODY_BUNDLE_MARKER = "WEBAPP_BODY_BUNDLES";
@@ -41,6 +42,7 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
   const RENDER_JS = routeOptions.renderJS;
   const RENDER_SS = routeOptions.serverSideRendering;
   const assets = routeOptions.__internals.assets;
+  const otherAssets = routeOptions.__internals.otherAssets;
   const devBundleBase = routeOptions.__internals.devBundleBase;
   const prodBundleBase = routeOptions.prodBundleBase;
   const chunkSelector = routeOptions.__internals.chunkSelector;
@@ -52,6 +54,7 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
     RENDER_JS,
     RENDER_SS,
     assets,
+    otherAssets,
     devBundleBase,
     prodBundleBase,
     chunkSelector,
@@ -71,6 +74,20 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
       : `${prodBundleBase}${assets.manifest}`;
   };
 
+  const getBundleJsNameByHeader = data => {
+    let { name } = data.jsChunk;
+    const { otherAssets } = data.routeData;
+    const userAgent = data.headers["user-agent"];
+    const browserslistQuery = getBrowserslistQuery(otherAssets);
+    const matched = Object.entries(browserslistQuery).find(([k, v]) => matchesUA(userAgent, { browsers: v}));
+    if (matched) {
+      const _name = matched[0];
+      const _js = otherAssets[_name].js.find(x => x.name.endsWith("main.bundle.js"));
+      if (_js) name = _js.name;
+    }
+    return name;
+  };
+
   const bundleJs = data => {
     if (!data.renderJs) {
       return "";
@@ -78,7 +95,8 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
     if (WEBPACK_DEV) {
       return data.devJSBundle;
     } else if (data.jsChunk) {
-      return `${prodBundleBase}${data.jsChunk.name}`;
+      const bundleJsName = getBundleJsNameByHeader(data);
+      return `${prodBundleBase}${bundleJsName}`;
     } else {
       return "";
     }
@@ -167,6 +185,7 @@ window.${windowConfigKey}.ui = ${JSON.stringify(routeOptions.uiConfig)};
     },
 
     [BODY_BUNDLE_MARKER]: context => {
+      context.user.headers = context.user.request.headers;
       const js = bundleJs(context.user);
       const jsLink = js ? { src: js } : "";
 
