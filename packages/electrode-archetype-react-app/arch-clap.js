@@ -617,7 +617,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     "check-dev": ["lint", "test-dev"],
 
     clean: [".clean.dist", ".clean.lib", ".clean.prod", ".clean.etmp", ".clean.dll"],
-    ".clean.dist": () => shell.rm("-rf", "dist", ...buildDistDirs), // TODO: only () => shell.rm("-rf", "dist") before
+    ".clean.dist": () => shell.rm("-rf", "dist", ...buildDistDirs),
     ".clean.lib": () => undefined, // to be updated below for src mode
     ".clean.prod": () => shell.rm("-rf", archetype.prodDir),
     ".clean.etmp": () => shell.rm("-rf", eTmpDir),
@@ -642,7 +642,7 @@ Individual .babelrc files were generated for you in src/client and src/server
         ".build.server.babelrc"
       ],
       task: function() {
-        if (!Fs.existsSync(".isomorphic-loader-config.json")) { // TODO: race conditions when `build-dist-min` run concurrently
+        if (!Fs.existsSync(".isomorphic-loader-config.json")) {
           Fs.writeFileSync(".isomorphic-loader-config.json", JSON.stringify({}));
         }
         const args = taskArgs(this.argv);

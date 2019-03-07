@@ -74,6 +74,11 @@ const babelConfigSpec = {
       } /** `default` and `node` targets object is required */,
       node: process.versions.node.split(".")[0]
     }
+  },
+  target: {
+    env: "ENV_TARGET",
+    type: "string",
+    default: "default"
   }
 };
 
