@@ -6,7 +6,7 @@ const assert = require("assert");
 const AsyncTemplate = require("./async-template");
 const filterScanDir = require("filter-scan-dir");
 const otherStats = filterScanDir.sync({
-  dir: "dist/js",
+  dir: Path.resolve("dist", ".."),
   includeRoot: true,
   filter: file => file === "stats.json"
 }).reduce((prev, x) => {
@@ -87,7 +87,7 @@ const setupOptions = options => {
   const statsPath = getStatsPath(pluginOptions.stats, pluginOptions.buildArtifacts);
 
   const assets = loadAssetsFromStats(statsPath);
-  const otherAssets = Object.entries(pluginOptions.otherStats).reduce((prev, [k, v]) => { // TODO:
+  const otherAssets = Object.entries(pluginOptions.otherStats).reduce((prev, [k, v]) => {
     prev[k] = loadAssetsFromStats(getStatsPath(v, pluginOptions.buildArtifacts));
     return prev;
   }, {});

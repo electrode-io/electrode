@@ -3,8 +3,6 @@
 /* eslint-disable max-statements, max-depth */
 
 const groupScripts = require("../group-scripts");
-const mylog = require(`${process.env.HOME}/Documents/utils/mylog.js`);
-const {FgCyan, FgYellow, Bright} = mylog.args;
 
 const {
   getIconStats,
@@ -13,7 +11,8 @@ const {
   getDevJsBundle,
   getProdBundles,
   processRenderSsMode,
-  getCspNonce
+  getCspNonce,
+  getBrowserslistQuery
 } = require("../utils");
 
 const {
@@ -25,6 +24,7 @@ const {
 } = require("./content");
 
 const prefetchBundles = require("./handlers/prefetch-bundles");
+const { matchesUA } = require("browserslist-useragent");
 
 const CONTENT_MARKER = "SSR_CONTENT";
 const HEADER_BUNDLE_MARKER = "WEBAPP_HEADER_BUNDLES";
@@ -77,16 +77,14 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
 
   const getBundleJsNameByHeader = data => {
     let { name } = data.jsChunk;
-    const x_chrome = !isNaN(data.headers["x-chrome"]) && parseInt(data.headers["x-chrome"]);
-    if (x_chrome && x_chrome > 0) {
-      const { otherAssets } = data.routeData;
-      if (x_chrome >= 65) {
-        const _js = otherAssets["dist-es6"].js.find(x => x.name.startsWith("main.bundle"));
-        if (_js) name = `dist-es6/js/${_js.name}`;
-      } else if (x_chrome >= 30) {
-        const _js = otherAssets["dist-es3"].js.find(x => x.name.startsWith("main.bundle"));
-        if (_js) name = `dist-es3/js/${_js.name}`;
-      }
+    const { otherAssets } = data.routeData;
+    const userAgent = data.headers["user-agent"];
+    const browserslistQuery = getBrowserslistQuery(otherAssets);
+    const matched = Object.entries(browserslistQuery).find(([k, v]) => matchesUA(userAgent, { browsers: v}));
+    if (matched) {
+      const _name = matched[0];
+      const _js = otherAssets[_name].js.find(x => x.name.endsWith("main.bundle.js"));
+      if (_js) name = _js.name;
     }
     return name;
   };
@@ -99,7 +97,6 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
       return data.devJSBundle;
     } else if (data.jsChunk) {
       const bundleJsName = getBundleJsNameByHeader(data);
-      mylog(`${prodBundleBase}${bundleJsName}`);
       return `${prodBundleBase}${bundleJsName}`;
     } else {
       return "";
