@@ -11,8 +11,7 @@ const {
   getDevJsBundle,
   getProdBundles,
   processRenderSsMode,
-  getCspNonce,
-  getBrowserslistQuery
+  getCspNonce
 } = require("../utils");
 
 const {
@@ -72,21 +71,6 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
     return WEBPACK_DEV
       ? `${devBundleBase}${assets.manifest}`
       : `${prodBundleBase}${assets.manifest}`;
-  };
-
-  const getBundleJsNameByHeader = data => {
-    let { name } = data.jsChunk;
-    const userAgent = data.headers["user-agent"];
-    const browserslistQuery = getBrowserslistQuery(otherAssets);
-    const matched = Object.entries(browserslistQuery).find(query =>
-      matchesUA(userAgent, { browsers: query[1] })
-    );
-    if (matched) {
-      const _name = matched[0];
-      const _js = otherAssets[_name].js.find(x => x.name.endsWith("main.bundle.js"));
-      if (_js) name = _js.name;
-    }
-    return name;
   };
 
   const getBundleJsNameByQuery = data => {
