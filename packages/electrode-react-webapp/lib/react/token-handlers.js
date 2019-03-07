@@ -89,6 +89,18 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
     return name;
   };
 
+  const getBundleJsNameByQuery = data => {
+    let { name } = data.jsChunk;
+    const { __dist } = data.query;
+    if (__dist) {
+      const _name = `dist-${__dist}`;
+      const _js =
+        otherAssets[_name] && otherAssets[_name].js.find(x => x.name.endsWith("main.bundle.js"));
+      if (_js) name = _js.name;
+    }
+    return name;
+  };
+
   const bundleJs = data => {
     if (!data.renderJs) {
       return "";
@@ -96,7 +108,7 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
     if (WEBPACK_DEV) {
       return data.devJSBundle;
     } else if (data.jsChunk) {
-      const bundleJsName = getBundleJsNameByHeader(data);
+      const bundleJsName = getBundleJsNameByQuery(data);
       return `${prodBundleBase}${bundleJsName}`;
     } else {
       return "";
@@ -187,6 +199,7 @@ window.${windowConfigKey}.ui = ${JSON.stringify(routeOptions.uiConfig)};
 
     [BODY_BUNDLE_MARKER]: context => {
       context.user.headers = context.user.request.headers;
+      context.user.query = context.user.request.query;
       const js = bundleJs(context.user);
       const jsLink = js ? { src: js } : "";
 
