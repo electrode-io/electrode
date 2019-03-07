@@ -76,10 +76,11 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
 
   const getBundleJsNameByHeader = data => {
     let { name } = data.jsChunk;
-    const { otherAssets } = data.routeData;
     const userAgent = data.headers["user-agent"];
     const browserslistQuery = getBrowserslistQuery(otherAssets);
-    const matched = Object.entries(browserslistQuery).find(([k, v]) => matchesUA(userAgent, { browsers: v}));
+    const matched = Object.entries(browserslistQuery).find(query =>
+      matchesUA(userAgent, { browsers: query[1] })
+    );
     if (matched) {
       const _name = matched[0];
       const _js = otherAssets[_name].js.find(x => x.name.endsWith("main.bundle.js"));
