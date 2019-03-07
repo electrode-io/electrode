@@ -23,7 +23,6 @@ const {
 } = require("./content");
 
 const prefetchBundles = require("./handlers/prefetch-bundles");
-const { matchesUA } = require("browserslist-useragent");
 const CONTENT_MARKER = "SSR_CONTENT";
 const HEADER_BUNDLE_MARKER = "WEBAPP_HEADER_BUNDLES";
 const BODY_BUNDLE_MARKER = "WEBAPP_BODY_BUNDLES";
