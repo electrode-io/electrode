@@ -89,6 +89,7 @@ describe("express electrode-react-webapp", function() {
       }
     };
   };
+
   const startServer = options => {
     const app = express();
     registerRoutes(app, options);

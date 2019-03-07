@@ -41,6 +41,10 @@ module.exports = () => {
 
     PAGE_TITLE: () => {
       return "<title>user-handler-title</title>";
+    },
+
+    TEST_DYNAMIC_2: () => {
+      return "RETURN_BY_TEST_DYANMIC_2";
     }
   };
 };

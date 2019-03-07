@@ -12,22 +12,31 @@ const {
   invokeTemplateProcessor
 } = require("./utils");
 
-function makeRouteHandler(routeOptions) {
-  const userTokenHandlers = [].concat(routeOptions.tokenHandler, routeOptions.tokenHandlers);
+function initializeTemplate({ htmlFile, tokenHandlers }, routeOptions) {
+  let asyncTemplate = routeOptions._templateCache[htmlFile];
+  if (asyncTemplate) {
+    return asyncTemplate;
+  }
 
-  let tokenHandlers = userTokenHandlers;
+  const userTokenHandlers = []
+    .concat(tokenHandlers, routeOptions.tokenHandler, routeOptions.tokenHandlers)
+    .filter(x => x);
 
+  let finalTokenHandlers = userTokenHandlers;
+
+  // Inject the built-in react/token-handlers if it is not in user's handlers
+  // and replaceTokenHandlers option is false
   if (!routeOptions.replaceTokenHandlers) {
     const reactTokenHandlers = Path.join(__dirname, "react/token-handlers");
-    tokenHandlers =
+    finalTokenHandlers =
       userTokenHandlers.indexOf(reactTokenHandlers) < 0
         ? [reactTokenHandlers].concat(userTokenHandlers)
         : userTokenHandlers;
   }
 
-  const asyncTemplate = new AsyncTemplate({
-    htmlFile: routeOptions.htmlFile,
-    tokenHandlers: tokenHandlers.filter(x => x),
+  asyncTemplate = new AsyncTemplate({
+    htmlFile,
+    tokenHandlers: finalTokenHandlers.filter(x => x),
     insertTokenIds: routeOptions.insertTokenIds,
     routeOptions
   });
@@ -35,7 +44,30 @@ function makeRouteHandler(routeOptions) {
   invokeTemplateProcessor(asyncTemplate, routeOptions);
   asyncTemplate.initializeRenderer();
 
+  return (routeOptions._templateCache[htmlFile] = asyncTemplate);
+}
+
+function makeRouteHandler(routeOptions) {
+  routeOptions._templateCache = {};
+  const defaultSelection = { htmlFile: routeOptions.htmlFile };
+
+  const render = (options, templateSelection) => {
+    const asyncTemplate = initializeTemplate(templateSelection || defaultSelection, routeOptions);
+    return asyncTemplate.render(options);
+  };
+
   return options => {
+    if (routeOptions.selectTemplate) {
+      const selection = routeOptions.selectTemplate(options.request, routeOptions);
+
+      if (selection && selection.then) {
+        return selection.then(x => render(options, x));
+      }
+
+      return render(options, selection);
+    }
+
+    const asyncTemplate = initializeTemplate(defaultSelection, routeOptions);
     return asyncTemplate.render(options);
   };
 }
@@ -85,7 +117,12 @@ const setupOptions = options => {
   return pluginOptions;
 };
 
-const pathSpecificOptions = ["htmlFile", "responseForBadStatus", "responseForError"];
+const pathSpecificOptions = [
+  "htmlFile",
+  "selectTemplate",
+  "responseForBadStatus",
+  "responseForError"
+];
 
 const setupPathOptions = (routeOptions, path) => {
   const pathData = _.get(routeOptions, ["paths", path], {});
