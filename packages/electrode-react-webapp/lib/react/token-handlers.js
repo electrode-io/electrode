@@ -187,7 +187,7 @@ window.${windowConfigKey}.ui = ${JSON.stringify(routeOptions.uiConfig)};
 
     [BODY_BUNDLE_MARKER]: context => {
       context.user.headers = context.user.request.headers;
-      const js = bundleJs(context.user); // TODO: generate the url for undle.js
+      const js = bundleJs(context.user);
       const jsLink = js ? { src: js } : "";
 
       const ins = routeOptions.unbundledJS.preBundle.concat(
