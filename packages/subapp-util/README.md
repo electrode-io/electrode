@@ -1,6 +1,6 @@
-# Electrode Subapp Web
+# Electrode subapp util
 
-Module with support to render and manage subapps when running in the browser
+Electrode subapp utilities
 
 ## License
 
