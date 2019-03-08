@@ -5,13 +5,16 @@ const Path = require("path");
 const assert = require("assert");
 const AsyncTemplate = require("./async-template");
 const Fs = require("fs");
-const otherStats = Fs.readdirSync(Path.resolve("dist/server"))
+const otherStats = {};
+if (Fs.existsSync("dist/server")) {
+  Fs.readdirSync("dist/server")
   .filter(x => x.endsWith("-stats.json"))
   .reduce((prev, x) => {
     const k = Path.basename(x).split("-")[0];
-    prev[k] = Path.resolve(`dist/server/${x}`);
+    prev[k] = `dist/server/${x}`;
     return prev;
-  }, {});
+  }, otherStats);
+}
 const {
   resolveChunkSelector,
   loadAssetsFromStats,
