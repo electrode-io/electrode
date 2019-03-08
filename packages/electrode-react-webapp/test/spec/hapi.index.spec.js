@@ -48,7 +48,8 @@ describe("hapi 16 electrode-react-webapp", () => {
                   html: "<div>Hello Electrode</div>",
                   prefetch: "console.log('Hello');"
                 }
-              }
+              },
+              "/react-helmet": {}
             }
           }
         }
@@ -1470,7 +1471,7 @@ describe("hapi 16 electrode-react-webapp", () => {
       });
       expect(x).to.be.above(0);
     };
-    assign(mainRoutePathOptions, {
+    assign(configOptions.paths["/react-helmet"], {
       tokenHandler: "./test/fixtures/react-helmet-handler",
       content: () => {
         return {
@@ -1503,34 +1504,44 @@ describe("hapi 16 electrode-react-webapp", () => {
       }
     });
     stdoutIntercept = xstdout.intercept(true);
-    return electrodeServer(config).then(server => {
-      stdoutIntercept.restore();
-      // since there are two paths and the react-helment-handler is only register for the
-      // main path route, expect the other route's registration to cause a error message
-      // to the stderr.
-      expect(stdoutIntercept.stderr[0]).contains(
-        "electrode-react-webapp: no handler found for token id REACT_HELMET_SCRIPTS"
-      );
-      return server
-        .inject({
-          method: "GET",
-          url: "/"
-        })
-        .then(res => {
-          expect(res.result).includes(
-            `<meta data-react-helmet="true" name="description" content="Nested component"/>` +
-              `<title data-react-helmet="true">Nested Title</title>`
+    let server;
+
+    return electrodeServer(config)
+      .then(s => (server = s))
+      .then(() => {
+        // route doesn't initialize until a request was sent
+        return server.inject({ method: "GET", url: "/" }).then(() => {
+          stdoutIntercept.restore();
+          // since there are two paths and the react-helment-handler is only register for the
+          // main path route, expect the other route's registration to cause a error message
+          // to the stderr.
+          expect(stdoutIntercept.stderr[0]).contains(
+            "electrode-react-webapp: no handler found for token id REACT_HELMET_SCRIPTS"
           );
-          expect(res.result)
-            .includes(`window._config.ui = {};\n</script><script>test-1 script;</script>
-<!--scripts from helmet--></head>`);
-          stopServer(server);
-        })
-        .catch(err => {
-          stopServer(server);
-          throw err;
         });
-    });
+      })
+      .then(() => {
+        return server
+          .inject({
+            method: "GET",
+            url: "/react-helmet"
+          })
+          .then(res => {
+            expect(res.result).includes(
+              `<meta data-react-helmet="true" name="description" content="Nested component"/>` +
+                `<title data-react-helmet="true">Nested Title</title>`
+            );
+            expect(res.result)
+              .includes(`window._config.ui = {};\n</script><script>test-1 script;</script>
+<!--scripts from helmet--></head>`);
+            stopServer(server);
+          })
+          .catch(err => {
+            stdoutIntercept.restore();
+            stopServer(server);
+            throw err;
+          });
+      });
   });
 
   describe("with webpackDev", function() {

@@ -4,7 +4,7 @@
 
 This module helps render and serve your Electrode React application's `index.html`. It will handle doing server side rendering and embedding all the necessary JS and CSS bundles for your application.
 
-All the defaults are configured out of the box, but your index page is extensible. You can specify your own index template file with the `htmlFile` option.
+All the defaults are configured out of the box, but your index page is extensible. You can specify your own index template file with the `htmlFile` or `selectTemplate` options.
 
 See [design](/packages/electrode-react-webapp/DESIGN.md) for details on how the template can be extended.
 
@@ -84,24 +84,82 @@ The current defaults are:
 
 ## Options
 
-What you can do with the options:
+| name                  | type                         | default  | description                                                |
+| --------------------- | ---------------------------- | -------- | ---------------------------------------------------------- |
+| `pageTitle`           | `String`                     |          | The value to be shown in the browser's title bar           |
+| `htmlFile`            | `String`                     | `*1`     | Absolute or relative path to the HTML template.            |
+| `selectTemplate`      | `Function`                   |          | Callback to selecte HTML template base on `request`        |
+| `serverSideRendering` | `Boolean`                    | `false`  | Toggle server side rendering.                              |
+| `webpackDev`          | `Boolean`                    | `false`  | Running with webpack-dev-server                            |
+| `paths`               | `Object`                     |          | Specify [route paths and content](#paths-and-content)      |
+| `unbundledJS`         | `Object`                     |          | [Load external JavaScript](#unbundledJS-details) into page |
+| `devServer`           | `Object`                     |          | webpack Dev Server Options                                 |
+| `prodBundleBase`      | `String`                     | `"/js/"` | Base path to the JavaScript, CSS and manifest bundles      |
+| `cspNonceValue`       | [`varies`](#csp-nonce-value) |          | Used to retrieve a CSP nonce value.                        |
 
-- `pageTitle` `(String)` The value to be shown in the browser's title bar
-- `webpackDev` `(Boolean)` whether to use webpack-dev-server's URLs for retrieving CSS and JS bundles.
-- `serverSideRendering` `(Boolean)` Toggle server-side rendering.
-- `htmlFile` `(String)` Absolute or relative path to the application root html file.
-- `paths` `(Object)` An object of key/value pairs specifying paths within your application with their view and (optionally) initial content for server-side render
-  - _path_ `(Object)`
-    - `htmlFile` `(String)` Name of the view file to be used for this path **optional**
-    - `content` Content to be rendered by the server when server-side rendering is used _optional_ [see details](#content-details)
-- `unbundledJS` (Object) Specify JavaScript files to be loaded at an available extension point in the index template
-  - `enterHead` (Array) Array of script objects (`{ src: "path to file" }`) to be inserted as `<script>` tags in the document `head` before anything else. To load scripts asynchronously use `{ src: "...", async: true }` or `{ src: "...", defer: true }`
-  - `preBundle` (Array) Array of script objects (`{ src: "path to file" }`) to be inserted as `<script>` tags in the document `body` before the application's bundled JavaScript
-- `devServer` `(Object)` Options for webpack's DevServer
+
+> `*1`: Default for `htmlFile` is to use this module's built-in [`index.html`](./lib/index.html)
+
+### Paths and Content
+
+Example:
+
+```js
+{
+  paths: {
+    "/test": {
+      // route specific options
+    }
+  }
+}
+```
+
+Route speicific options can be:
+
+| name             | type                         | description                                                       |
+| ---------------- | ---------------------------- | ----------------------------------------------------------------- |
+| `htmlFile`       | `String`                     | Absolute or relative path to the HTML template file.              |
+| `selectTemplate` | `Function`                   | Callback to selecte HTML template for the route base on `request` |
+| `content`        | [`varies`](#content-details) | [Content generator](#content-details)  for server-side rendering  |
+
+### `unbundledJS` Details
+
+Example:
+
+```js
+{
+  unbundledJS: {
+    enterHead: [],
+    preBundle: []
+  }
+}
+```
+
+- `enterHead` - Array of script entries to be inserted in `<head>` before anything else
+- `preBundle` - Array of script entries to be inserted in `<body>` before the application's bundled JavaScript
+
+The script entries can be:
+
+- object - `{ src: "path to file" }`  to insert a `<script>` that loads a file with `src`
+  - To load scripts asynchronously use `{ src: "...", async: true }` or `{ src: "...", defer: true }`
+- string - literal JavaScript to insert within `<script>` tags
+
+
+### Webpack Dev Server Options
+
   - `host` `(String)` The host that webpack-dev-server runs on
   - `port` `(String)` The port that webpack-dev-server runs on
-- `prodBundleBase` `(String)` Base path to locate the JavaScript, CSS and manifest bundles. Defaults to "/js/". Should end with "/".
-- `cspNonceValue` `(Function|Object|undefined)` Used to retrieve a CSP nonce value. If this is a function it will be passed the request and the nonce type (`'script'` or `'style'`), and must return the corresponding nonce. If this is an object, it may have properties `script`, `style` or both, and the value for each should be the path from the request object to the nonce value (For example, if you have a hapi plugin that puts a nonce value at `request.plugins.myCspGenerator.nonce` you might set `cspNonceValue` to `{ script: 'plugins.myCspGenerator.nonce' }`). The nonce, if present, will be included on any `script` or `style` elements that directly contain scripts or style (e.g. any SSR preloaded state). If this property is undefined, or if the value at that location is undefined, no nonce will be added.
+
+### CSP nonce Value
+
+The entry can be a `Function`, `Object`, or `undefined`:
+
+- `Function` - called with `(request, type)`, where `type` can be `'script'` or `'style'`
+  - It return the corresponding nonce
+- `Object` - it may have properties `script`, `style` or both, and the value for each should be the path from the request object to the nonce value
+  -  For example, if you put a nonce value at `request.plugins.myCspGenerator.nonce`, then you set `cspNonceValue` to `{ script: 'plugins.myCspGenerator.nonce' }`.
+     -  The nonce, if present, will be included on any `script` or `style` elements that directly contain scripts or style
+     -  If this property is undefined, or if the value at that location is undefined, no nonce will be added.
 
 ### `htmlFile` view details
 
@@ -149,6 +207,30 @@ In an Electrode app, the module `electrode-redux-router-engine` and its `render`
 #### `object`
 
 If it's an object, it can specify a `module` field which is the name of a module that will be `require`ed. The module should export either a string or a function as specified above.
+
+### `selectTemplate` Function
+
+You can provide a `selectTemplate` function to dynamically determine the `htmlFile` and `tokenHandlers` at run time.
+
+The function signature is:
+
+```js
+{
+  selectTemplate: (request, routeOptions) => {}
+}
+```
+
+It can return an object directly or with a Promise.
+
+```js
+{
+  htmlFile: "",
+  tokenHandlers: []
+}
+```
+
+- `htmlFile` - Path to HTML template
+- `tokenHandlers` - Array of file paths to JS modules that implement token handlers
 
 ### Disabling SSR
 
