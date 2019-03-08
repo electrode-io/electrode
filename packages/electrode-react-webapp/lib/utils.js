@@ -231,18 +231,6 @@ function invokeTemplateProcessor(asyncTemplate, routeOptions) {
   return undefined;
 }
 
-function getBrowserslistQuery(otherAssets) {
-  return Object.keys(otherAssets).reduce((prev, dir) => {
-    const isomorphicPath = Path.resolve(`${dir}/isomorphic-assets.json`);
-    if (fs.existsSync(isomorphicPath)) {
-      const content = fs.readFileSync(isomorphicPath, { encoding: "utf8" });
-      const { targets } = JSON.parse(content);
-      prev[dir] = Object.entries(targets).map(([browser, version]) => `${browser} >= ${version}`);
-    }
-    return prev;
-  }, {});
-}
-
 module.exports = {
   resolveChunkSelector,
   loadAssetsFromStats,
@@ -259,6 +247,5 @@ module.exports = {
   responseForError,
   responseForBadStatus,
   loadFuncFromModule,
-  invokeTemplateProcessor,
-  getBrowserslistQuery
+  invokeTemplateProcessor
 };

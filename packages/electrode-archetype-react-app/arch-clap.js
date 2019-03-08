@@ -502,18 +502,17 @@ function makeTasks(xclap) {
             .sync({
               dir,
               includeRoot: true,
-              filter: file =>
-                /(.+(\.sw-registration|-main\.bundle)\.js(\.map)?|\bstats\.json)$/.test(file)
+              filterExt: [".js", ".json", ".map"]
               // the regex above matches all the sw-registration.js, sw-registration.js.map,
               // main.bundle.js and main.bundle.js.map and stats.json
             })
             .forEach(file => {
               if (file.endsWith(".js")) {
-                exec("cp", "-r", file, "dist/js")
+                shell.cp("-r", file, "dist/js");
               } else if (file.endsWith(".map")) {
-                exec("cp", "-r", file, "dist/map")
+                shell.cp("-r", file, "dist/map");
               } else {
-                exec("cp", "-r", file, `dist/server/${dir.split("-")[1]}-${Path.basename(file)}`)
+                shell.cp("-r", file, `dist/server/${dir.split("-")[1]}-${Path.basename(file)}`);
               }
             });
         });
@@ -525,7 +524,7 @@ function makeTasks(xclap) {
       desc: `write each targets to respective isomorphic-assets.json`,
       task: () => {
         buildDistDirs.forEach(dir => {
-          const isomorphicPath = Path.resolve(`${dir}/isomorphic-assets.json`); // add `targets` field to `dist-X/isomorphic-assets.json`
+          const isomorphicPath = Path.resolve(dir, "isomorphic-assets.json"); // add `targets` field to `dist-X/isomorphic-assets.json`
           if (Fs.existsSync(isomorphicPath)) {
             Fs.readFile(isomorphicPath, { encoding: "utf8" }, (err, data) => {
               if (err) throw err;
