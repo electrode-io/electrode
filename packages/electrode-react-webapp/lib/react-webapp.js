@@ -4,16 +4,14 @@ const _ = require("lodash");
 const Path = require("path");
 const assert = require("assert");
 const AsyncTemplate = require("./async-template");
-const filterScanDir = require("filter-scan-dir");
-const otherStats = filterScanDir.sync({
-  dir: Path.resolve("dist", ".."),
-  includeRoot: true,
-  filter: file => file === "stats.json"
-}).reduce((prev, x) => {
-  const k = x.split(Path.sep).find(p => p.startsWith("dist-"));
-  if (k) prev[k] = x;
-  return prev;
-}, {});
+const Fs = require("fs");
+const otherStats = Fs.readdirSync(Path.resolve("dist/server"))
+  .filter(x => x.endsWith("-stats.json"))
+  .reduce((prev, x) => {
+    const k = Path.basename(x).split("-")[0];
+    prev[k] = `dist/server/${x}`;
+    return prev;
+  }, {});
 
 const {
   resolveChunkSelector,

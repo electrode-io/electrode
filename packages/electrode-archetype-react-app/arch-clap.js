@@ -502,15 +502,20 @@ function makeTasks(xclap) {
             .sync({
               dir,
               includeRoot: true,
-              filter: file => /.+(\.sw-registration|-main\.bundle)\.js(\.map)?$/.test(file)
+              filter: file =>
+                /(.+(\.sw-registration|-main\.bundle)\.js(\.map)?|\bstats\.json)$/.test(file)
               // the regex above matches all the sw-registration.js, sw-registration.js.map,
-              // main.bundle.js and main.bundle.js.map
+              // main.bundle.js and main.bundle.js.map and stats.json
             })
-            .forEach(file =>
-              file.endsWith(".js")
-                ? exec("cp", "-r", file, "dist/js")
-                : exec("cp", "-r", file, "dist/map")
-            );
+            .forEach(file => {
+              if (file.endsWith(".js")) {
+                exec("cp", "-r", file, "dist/js")
+              } else if (file.endsWith(".map")) {
+                exec("cp", "-r", file, "dist/map")
+              } else {
+                exec("cp", "-r", file, `dist/server/${dir.split("-")[1]}-${Path.basename(file)}`)
+              }
+            });
         });
         return;
       }

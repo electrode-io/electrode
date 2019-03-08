@@ -34,6 +34,24 @@ const basePlugins = [
     { loose: looseClassProps }
   ],
   "@babel/plugin-transform-object-super",
+  "@babel/plugin-transform-shorthand-properties",
+  "@babel/plugin-transform-computed-properties",
+  "@babel/plugin-transform-for-of",
+  "@babel/plugin-transform-sticky-regex",
+  "@babel/plugin-transform-unicode-regex",
+  "@babel/plugin-transform-spread",
+  "@babel/plugin-transform-parameters",
+  "@babel/plugin-transform-destructuring",
+  "@babel/plugin-transform-block-scoping",
+  "@babel/plugin-transform-typeof-symbol",
+  [
+    "@babel/plugin-transform-regenerator",
+    {
+      async: false,
+      asyncGenerators: false
+    }
+  ],
+  "@babel/plugin-proposal-object-rest-spread",
   [
     "babel-plugin-i18n-id-hashing",
     {

@@ -75,10 +75,8 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
   const getBundleJsNameByQuery = data => {
     let { name } = data.jsChunk;
     const { __dist } = data.query;
-    if (__dist) {
-      const _name = `dist-${__dist}`;
-      const _js =
-        otherAssets[_name] && otherAssets[_name].js.find(x => x.name.endsWith("main.bundle.js"));
+    if (__dist && otherAssets[__dist]) {
+      const _js = otherAssets[__dist].js.find(x => x.name.endsWith("main.bundle.js"));
       if (_js) name = _js.name;
     }
     return name;
@@ -181,7 +179,6 @@ window.${windowConfigKey}.ui = ${JSON.stringify(routeOptions.uiConfig)};
     },
 
     [BODY_BUNDLE_MARKER]: context => {
-      context.user.headers = context.user.request.headers;
       context.user.query = context.user.request.query;
       const js = bundleJs(context.user);
       const jsLink = js ? { src: js } : "";
