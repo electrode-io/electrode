@@ -84,18 +84,18 @@ The current defaults are:
 
 ## Options
 
-| name                  | type                        | default  | description                                                |
-| --------------------- | --------------------------- | -------- | ---------------------------------------------------------- |
-| `pageTitle`           | `String`                    |          | The value to be shown in the browser's title bar           |
-| `htmlFile`            | `String`                    | `*1`     | Absolute or relative path to the HTML template.            |
-| `selectTemplate`      | `Function`                  |          | Callback to selecte HTML template base on `request`        |
-| `serverSideRendering` | `Boolean`                   | `false`  | Toggle server side rendering.                              |
-| `webpackDev`          | `Boolean`                   | `false`  | Running with webpack-dev-server                            |
-| `paths`               | `Object`                    |          | Specify [route paths and content](#paths-and-content)      |
-| `unbundledJS`         | `Object`                    |          | [Load external JavaScript](#unbundledJS-details) into page |
-| `devServer`           | `Object`                    |          | webpack Dev Server Options                                 |
-| `prodBundleBase`      | `String`                    | `"/js/"` | Base path to the JavaScript, CSS and manifest bundles      |
-| `cspNonceValue`       | [`varies`](csp-nonce-value) |          | Used to retrieve a CSP nonce value.                        |
+| name                  | type                         | default  | description                                                |
+| --------------------- | ---------------------------- | -------- | ---------------------------------------------------------- |
+| `pageTitle`           | `String`                     |          | The value to be shown in the browser's title bar           |
+| `htmlFile`            | `String`                     | `*1`     | Absolute or relative path to the HTML template.            |
+| `selectTemplate`      | `Function`                   |          | Callback to selecte HTML template base on `request`        |
+| `serverSideRendering` | `Boolean`                    | `false`  | Toggle server side rendering.                              |
+| `webpackDev`          | `Boolean`                    | `false`  | Running with webpack-dev-server                            |
+| `paths`               | `Object`                     |          | Specify [route paths and content](#paths-and-content)      |
+| `unbundledJS`         | `Object`                     |          | [Load external JavaScript](#unbundledJS-details) into page |
+| `devServer`           | `Object`                     |          | webpack Dev Server Options                                 |
+| `prodBundleBase`      | `String`                     | `"/js/"` | Base path to the JavaScript, CSS and manifest bundles      |
+| `cspNonceValue`       | [`varies`](#csp-nonce-value) |          | Used to retrieve a CSP nonce value.                        |
 
 
 > `*1`: Default for `htmlFile` is to use this module's built-in [`index.html`](./lib/index.html)
