@@ -9,10 +9,9 @@ const otherStats = Fs.readdirSync(Path.resolve("dist/server"))
   .filter(x => x.endsWith("-stats.json"))
   .reduce((prev, x) => {
     const k = Path.basename(x).split("-")[0];
-    prev[k] = `dist/server/${x}`;
+    prev[k] = Path.resolve(`dist/server/${x}`);
     return prev;
   }, {});
-
 const {
   resolveChunkSelector,
   loadAssetsFromStats,
