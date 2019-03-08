@@ -11,6 +11,6 @@ module.exports = {
     pathinfo: inspectpack, // Enable path information for inspectpack
     publicPath: "/js/",
     chunkFilename: `${target}.[hash].[name].js`,
-    filename: `${target}-main.bundle.js`
+    filename: `${target}-[name].bundle.js`
   }
 };
