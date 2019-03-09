@@ -35,7 +35,6 @@ try {
     console.log(
       `${name}: skipping install because archetype/config set options.${configName} to false`
     );
-    process.exit(1);
   }
 } catch (e) {}
 
