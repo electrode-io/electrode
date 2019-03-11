@@ -40,9 +40,14 @@ const getConfig = () => {
               }
             },
             "/select": {
-              selectTemplate: request => {
+              selectTemplate: (request, routeOptions) => {
+                request.app.routeOptions = routeOptions;
                 if (request.query.template === "1") {
-                  return { htmlFile: Path.join(__dirname, "../fixtures/dynamic-index-1.html") };
+                  return {
+                    htmlFile: Path.join(__dirname, "../fixtures/dynamic-index-1.html"),
+                    cacheKey: request.query.cache_key,
+                    cacheId: request.query.cache_id
+                  };
                 } else if (request.query.template === "2") {
                   return Promise.resolve({
                     htmlFile: Path.join(__dirname, "../fixtures/dynamic-index-2.html"),
@@ -1678,9 +1683,11 @@ describe("hapi 17 electrode-react-webapp", () => {
     it("should select template 1 and render to static markup", () => {
       return electrodeServer(config).then(server => {
         const compileTime = Date.now();
+        let captureRequest;
         server.ext({
           type: "onRequest",
           method: (request, h) => {
+            captureRequest = request;
             request.app.webpackDev = { valid: true, hasErrors: false, compileTime };
             return h.continue;
           }
@@ -1693,11 +1700,96 @@ describe("hapi 17 electrode-react-webapp", () => {
               url: "/select?template=1"
             })
             .then(res => {
+              const htmlFile = Path.join(__dirname, "../fixtures/dynamic-index-1.html");
               expect(res.statusCode).to.equal(200);
               expect(res.result).to.contain("<title>Electrode App</title>");
               expect(res.result).to.contain("DYNAMIC_INDEX_1");
               expect(res.result).to.contain("<div>Hello Electrode</div>");
               expect(res.result).to.not.contain("Unknown marker");
+              expect(captureRequest.app.routeOptions._templateCache).to.have.keys(htmlFile);
+            });
+        };
+
+        return makeRequest()
+          .then(() => makeRequest())
+          .then(() => stopServer(server))
+          .catch(err => {
+            stopServer(server);
+            throw err;
+          });
+      });
+    });
+
+    it("should cache template using provided cacheKey", () => {
+      return electrodeServer(config).then(server => {
+        const compileTime = Date.now();
+        let captureRequest;
+        server.ext({
+          type: "onRequest",
+          method: (request, h) => {
+            captureRequest = request;
+            request.app.webpackDev = { valid: true, hasErrors: false, compileTime };
+            return h.continue;
+          }
+        });
+
+        const makeRequest = () => {
+          return server
+            .inject({
+              method: "GET",
+              url: "/select?template=1&cache_key=template_cache_key_test1"
+            })
+            .then(res => {
+              expect(res.statusCode).to.equal(200);
+              expect(res.result).to.contain("<title>Electrode App</title>");
+              expect(res.result).to.contain("DYNAMIC_INDEX_1");
+              expect(res.result).to.contain("<div>Hello Electrode</div>");
+              expect(res.result).to.not.contain("Unknown marker");
+              expect(captureRequest.app.routeOptions._templateCache).to.have.keys(
+                "template_cache_key_test1"
+              );
+            });
+        };
+
+        return makeRequest()
+          .then(() => makeRequest())
+          .then(() => stopServer(server))
+          .catch(err => {
+            stopServer(server);
+            throw err;
+          });
+      });
+    });
+
+    it("should cache template using provided cacheId", () => {
+      return electrodeServer(config).then(server => {
+        const compileTime = Date.now();
+        let captureRequest;
+        server.ext({
+          type: "onRequest",
+          method: (request, h) => {
+            captureRequest = request;
+            request.app.webpackDev = { valid: true, hasErrors: false, compileTime };
+            return h.continue;
+          }
+        });
+
+        const makeRequest = () => {
+          return server
+            .inject({
+              method: "GET",
+              url: "/select?template=1&cache_id=cache_id_test1"
+            })
+            .then(res => {
+              const htmlFile = Path.join(__dirname, "../fixtures/dynamic-index-1.html");
+              expect(res.statusCode).to.equal(200);
+              expect(res.result).to.contain("<title>Electrode App</title>");
+              expect(res.result).to.contain("DYNAMIC_INDEX_1");
+              expect(res.result).to.contain("<div>Hello Electrode</div>");
+              expect(res.result).to.not.contain("Unknown marker");
+              expect(captureRequest.app.routeOptions._templateCache).to.have.keys(
+                `${htmlFile}#cache_id_test1`
+              );
             });
         };
 

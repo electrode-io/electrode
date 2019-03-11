@@ -12,8 +12,9 @@ const {
   invokeTemplateProcessor
 } = require("./utils");
 
-function initializeTemplate({ htmlFile, tokenHandlers }, routeOptions) {
-  let asyncTemplate = routeOptions._templateCache[htmlFile];
+function initializeTemplate({ htmlFile, tokenHandlers, cacheId, cacheKey }, routeOptions) {
+  cacheKey = cacheKey || (cacheId && `${htmlFile}#${cacheId}`) || htmlFile;
+  let asyncTemplate = routeOptions._templateCache[cacheKey];
   if (asyncTemplate) {
     return asyncTemplate;
   }
@@ -44,7 +45,7 @@ function initializeTemplate({ htmlFile, tokenHandlers }, routeOptions) {
   invokeTemplateProcessor(asyncTemplate, routeOptions);
   asyncTemplate.initializeRenderer();
 
-  return (routeOptions._templateCache[htmlFile] = asyncTemplate);
+  return (routeOptions._templateCache[cacheKey] = asyncTemplate);
 }
 
 function makeRouteHandler(routeOptions) {
