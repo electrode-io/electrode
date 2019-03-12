@@ -12,11 +12,15 @@ const {
   invokeTemplateProcessor
 } = require("./utils");
 
-function initializeTemplate({ htmlFile, tokenHandlers, cacheId, cacheKey }, routeOptions) {
+function initializeTemplate({ htmlFile, tokenHandlers, cacheId, cacheKey, options }, routeOptions) {
   cacheKey = cacheKey || (cacheId && `${htmlFile}#${cacheId}`) || htmlFile;
   let asyncTemplate = routeOptions._templateCache[cacheKey];
   if (asyncTemplate) {
     return asyncTemplate;
+  }
+
+  if (options) {
+    routeOptions = Object.assign({}, routeOptions, options);
   }
 
   const userTokenHandlers = []
@@ -120,6 +124,7 @@ const setupOptions = options => {
 
 const pathSpecificOptions = [
   "htmlFile",
+  "pageTitle",
   "selectTemplate",
   "responseForBadStatus",
   "responseForError"
