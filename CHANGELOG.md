@@ -1,3 +1,25 @@
+# 3/12/2019
+
+- electrode-react-webapp - [feat] run time select template support
+
+## Packages
+
+### Directly Updated
+
+-   `electrode-react-webapp@3.4.0` `(3.3.3 => 3.4.0)`
+
+### Lerna Updated
+
+-   `subapp-server@1.0.1` `(1.0.0 => 1.0.1)`
+
+## Commits
+
+-   `packages/electrode-react-webapp`
+
+    -   [minor] allow user to specify template cache key ([#1172](https://github.com/electrode-io/electrode/pull/1172)) [commit](http://github.com/electrode-io/electrode/commit/6317129572370ff453d90d808961577e86d48817)
+    -   [minor] support run time selectTemplate ([#1167](https://github.com/electrode-io/electrode/pull/1167)) [commit](http://github.com/electrode-io/electrode/commit/3c54ce0e0742b39f101158d0c5cc2474cc5978ff)
+    -   [patch] selectTemplate can return options for route ([#1173](https://github.com/electrode-io/electrode/pull/1173)) [commit](http://github.com/electrode-io/electrode/commit/b8368e292eb1f82748ec814658f380c32fe2ee16)
+
 # 3/7/2019
 
 - Fix: getHeader missing for webpack-dev-middleware
