@@ -8,11 +8,11 @@ const assign = require("object-assign");
 const electrodeServer = require("electrode-server2");
 const Path = require("path");
 const xstdout = require("xstdout");
-require("babel-register");
 const { expect } = require("chai");
 const ReactDOMServer = require("react-dom/server");
 const React = require("react");
 const Helmet = require("react-helmet").Helmet;
+const { runFinally, asyncVerify } = require("run-verify");
 
 const getConfig = () => {
   return {
@@ -53,6 +53,14 @@ const getConfig = () => {
                     htmlFile: Path.join(__dirname, "../fixtures/dynamic-index-2.html"),
                     tokenHandlers: Path.join(__dirname, "../fixtures/token-handler")
                   });
+                } else if (request.query.template === "3") {
+                  return {
+                    htmlFile: Path.join(__dirname, "../fixtures/dynamic-index-1.html"),
+                    cacheId: "page_title_1",
+                    options: {
+                      pageTitle: "test page title 1"
+                    }
+                  };
                 }
                 return null; // select default
               },
@@ -110,7 +118,7 @@ describe("hapi 17 electrode-react-webapp", () => {
 
   let stdoutIntercept;
 
-  const stopServer = server => server.stop();
+  const stopServer = server => server && server.stop();
 
   beforeEach(() => {
     delete require.cache[require.resolve("../../lib/hapi")];
@@ -1801,6 +1809,64 @@ describe("hapi 17 electrode-react-webapp", () => {
             throw err;
           });
       });
+    });
+
+    it("should create new routeOptions from options selectTemplate returns", () => {
+      let captureRequest;
+      let server;
+
+      return asyncVerify(
+        () => electrodeServer(config),
+        s => {
+          server = s;
+          const compileTime = Date.now();
+          server.ext({
+            type: "onRequest",
+            method: (request, h) => {
+              captureRequest = request;
+              request.app.webpackDev = { valid: true, hasErrors: false, compileTime };
+              return h.continue;
+            }
+          });
+        },
+        () => {
+          return server
+            .inject({
+              method: "GET",
+              url: "/select?template=3"
+            })
+            .then(res => {
+              const htmlFile = Path.join(__dirname, "../fixtures/dynamic-index-1.html");
+              expect(res.statusCode).to.equal(200);
+              expect(res.result).contain(`<title>test page title 1</title>`);
+              expect(res.result).to.not.contain("<title>Electrode App</title>");
+              expect(res.result).to.contain("DYNAMIC_INDEX_1");
+              expect(res.result).to.contain("<div>Hello Electrode</div>");
+              expect(res.result).to.not.contain("Unknown marker");
+              expect(captureRequest.app.routeOptions._templateCache).to.have.keys(
+                `${htmlFile}#page_title_1`
+              );
+            });
+        },
+        () => {
+          return server
+            .inject({
+              method: "GET",
+              url: "/select"
+            })
+            .then(res => {
+              const htmlFile = Path.join(__dirname, "../../lib/index.html");
+              expect(res.statusCode).to.equal(200);
+              expect(res.result).to.not.contain(`<title>test page title 1</title>`);
+              expect(res.result).to.contain("<title>Electrode App</title>");
+              expect(res.result).to.not.contain("DYNAMIC_INDEX_1");
+              expect(res.result).to.contain("<div>Hello Electrode</div>");
+              expect(res.result).to.not.contain("Unknown marker");
+              expect(captureRequest.app.routeOptions._templateCache).to.include.all.keys(htmlFile);
+            });
+        },
+        runFinally(() => stopServer(server))
+      );
     });
 
     it("should select template 2 and render to static markup", () => {

@@ -226,6 +226,7 @@ It can return an object directly or with a Promise.
 {
   htmlFile: "",
   tokenHandlers: [],
+  options: {},
   cacheId: "",
   cacheKey: "" // mutually exclusive with cacheId
 }
@@ -235,6 +236,10 @@ It can return an object directly or with a Promise.
 - `tokenHandlers` - Array of file paths to JS modules that implement token handlers.
 - `cacheId` - If non-empty string, then it's appended to `htmlFile` to use as `cacheKey` for the template instance.
 - `cacheKey` - Provide `cacheKey` for the template instance, overrides `cacheId`.
+- `options` - Specify some options for this route with this template:
+  - `pageTitle` - change page title
+  - `responseForBadStatus` - callback to generate response if non-200 HTTP status.
+  - `responseForError` - callback to generate response in case of error.
 
 > You can access the template instance cache through `routeOptions._templateCache`
 

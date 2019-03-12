@@ -160,7 +160,7 @@ These are tokens that are automatically processed internally:
 
 A builtin token handler is used to process these.
 
-If you've registered your own [handler](#handler) for any of them, you can still access the builtin token handler as `context.$.routeData.tokenHandler`.
+If you've registered your own [handler](#handler) for any of them, you can still access the builtin token handler as `context.user.routeData.tokenHandler`.
 
 ## Custom Processing
 
@@ -269,16 +269,21 @@ Spot object has the follow methods:
 - `add(string)` - Adds `string` to the spot.
 - `close()` - Close the spot. Must be called once done else rendering will be stuck.
 
-`context.$` will contain the following:
+`context.user` will contain the following:
 
 - `request` - the server request object
 - `routeOptions` - options for the route
 - `routeData` - global data for the route
-- `data` - data specific to a single request for the route
-- `user` - an empty object that you can store your data
 - `content` - the content from your route
-
-> You may store your data in `context.$` but future updates could conflict with your data.
+- `mode` - Render Mode (nojs, noss, datass)
+- `renderJs` - Render JS bundle
+- `renderSs` - Do SSR
+- `sriptNonce` - nonce for script tags
+- `chunkNames` - webpack asset chunks
+- `devCSSBundle`
+- `devJSBundle`
+- `jsChunk`
+- `cssChunk`
 
 ### Concurrent Token
 
@@ -306,7 +311,7 @@ module.exports = function setup(options) {
 
 #### routeData
 
-The `context.$.routeData` contains the following:
+The `context.user.routeData` contains the following:
 
 - WEBPACK_DEV - true if webpack dev server running
 - RENDER_JS - render JS bundle (could be override by request)
@@ -318,20 +323,3 @@ The `context.$.routeData` contains the following:
 - chunkSelector - callback to select webpack bundle
 - iconStats - webpack icon stats
 - htmlTokens - html template parsed into tokens
-
-#### data
-
-The `context.$.data` contains data specific to the single request.
-
-It contains the following:
-
-- mode - Render Mode (nojs, noss, datass)
-- renderJs - Render JS bundle
-- renderSs - Do SSR
-- paddedNonce - nonce for script tags
-- criticalCSS - critical css
-- chunkNames - webpack asset chunks
-- devCSSBundle
-- devJSBundle
-- jsChunk
-- cssChunk
