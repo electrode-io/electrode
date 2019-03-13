@@ -20,10 +20,6 @@ function getPluginFrom(host, pluginName) {
 }
 
 const basePlugins = [
-  "@babel/plugin-transform-template-literals",
-  "@babel/plugin-transform-function-name",
-  "@babel/plugin-transform-arrow-functions",
-  "@babel/plugin-transform-block-scoped-functions",
   //
   // allow class properties. loose option compile to assignment expression instead
   // of Object.defineProperty.
@@ -33,25 +29,6 @@ const basePlugins = [
     "@babel/plugin-proposal-class-properties",
     { loose: looseClassProps }
   ],
-  "@babel/plugin-transform-object-super",
-  "@babel/plugin-transform-shorthand-properties",
-  "@babel/plugin-transform-computed-properties",
-  "@babel/plugin-transform-for-of",
-  "@babel/plugin-transform-sticky-regex",
-  "@babel/plugin-transform-unicode-regex",
-  "@babel/plugin-transform-spread",
-  "@babel/plugin-transform-parameters",
-  "@babel/plugin-transform-destructuring",
-  "@babel/plugin-transform-block-scoping",
-  "@babel/plugin-transform-typeof-symbol",
-  [
-    "@babel/plugin-transform-regenerator",
-    {
-      async: false,
-      asyncGenerators: false
-    }
-  ],
-  "@babel/plugin-proposal-object-rest-spread",
   [
     "babel-plugin-i18n-id-hashing",
     {
