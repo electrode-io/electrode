@@ -190,7 +190,8 @@ module.exports = function() {
         options: {
           context: Path.resolve("src")
         }
-      })
+      }),
+      new LoadablePlugin()
     ].filter(x => !!x)
   };
 };
