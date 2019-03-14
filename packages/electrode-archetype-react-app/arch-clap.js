@@ -451,7 +451,7 @@ function makeTasks(xclap) {
         archetype.prodModulesDir
       }`,
       dep: [".ss-clean.prod-react", ".mk-prod-dir"],
-      task: [[".ss-prod-react", ".ss-prod-react-dom"]]
+      task: xclap.concurrent(".ss-prod-react", ".ss-prod-react-dom")
     },
 
     "build-dist-dll": () => undefined,
@@ -708,7 +708,7 @@ Individual .babelrc files were generated for you in src/client and src/server
       task: ["build-dev-static", "app-server"]
     },
 
-    lint: [["lint-client", "lint-client-test", "lint-server", "lint-server-test"]],
+    lint: xclap.concurrent("lint-client", "lint-client-test", "lint-server", "lint-server-test"),
     "lint-client": {
       desc: "Run eslint on client code in directories client and templates",
       task: () =>
@@ -863,8 +863,8 @@ Individual .babelrc files were generated for you in src/client and src/server
       )
     },
 
-    "test-server": () => [["lint-server", "lint-server-test"], "test-server-cov"],
-    "test-watch-all": [["wds.test", "test-frontend-dev-watch"]],
+    "test-server": xclap.concurrent(["lint-server", "lint-server-test"], "test-server-cov"),
+    "test-watch-all": xclap.concurrent("wds.test", "test-frontend-dev-watch"),
 
     "test-ci": ["test-frontend-ci"],
     "test-cov": [
