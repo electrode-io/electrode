@@ -426,8 +426,7 @@ function makeTasks(xclap) {
       "build-dist:clean-tmp"
     ],
 
-    "mv-to-dist": ["mv-to-dist:clean", "mv-to-dist:mv-dirs"],
-
+    "mv-to-dist": ["mv-to-dist:clean", "mv-to-dist:mv-dirs", "mv-to-dist:keep-targets"],
     "build-dist-dev-static": {
       desc: false,
       task: mkCmd(
@@ -498,9 +497,46 @@ function makeTasks(xclap) {
     "mv-to-dist:mv-dirs": {
       desc: `move ${buildDistDirs} to dist`,
       task: () => {
-        if (buildDistDirs.length > 0) {
-          return exec(`mv`, ...buildDistDirs, `dist`);
-        }
+        buildDistDirs.forEach(dir => {
+          scanDir
+            .sync({
+              dir,
+              includeRoot: true,
+              filterExt: [".js", ".json", ".map"]
+              // the regex above matches all the sw-registration.js, sw-registration.js.map,
+              // main.bundle.js and main.bundle.js.map and stats.json
+            })
+            .forEach(file => {
+              if (file.endsWith(".js")) {
+                shell.cp("-r", file, "dist/js");
+              } else if (file.endsWith(".map")) {
+                shell.cp("-r", file, "dist/map");
+              } else {
+                shell.cp("-r", file, `dist/server/${dir.split("-")[1]}-${Path.basename(file)}`);
+              }
+            });
+        });
+        return;
+      }
+    },
+
+    "mv-to-dist:keep-targets": {
+      desc: `write each targets to respective isomorphic-assets.json`,
+      task: () => {
+        buildDistDirs.forEach(dir => {
+          const isomorphicPath = Path.resolve(dir, "isomorphic-assets.json"); // add `targets` field to `dist-X/isomorphic-assets.json`
+          if (Fs.existsSync(isomorphicPath)) {
+            Fs.readFile(isomorphicPath, { encoding: "utf8" }, (err, data) => {
+              if (err) throw err;
+              const assetsJson = JSON.parse(data);
+              const { envTargets } = archetype.babel;
+              assetsJson.targets = envTargets[dir.split("-")[1]];
+              Fs.writeFile(isomorphicPath, JSON.stringify(assetsJson, null, 2), err => {
+                if (err) throw err;
+              });
+            });
+          }
+        });
         return;
       }
     },
@@ -619,7 +655,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     "check-dev": ["lint", "test-dev"],
 
     clean: [".clean.dist", ".clean.lib", ".clean.prod", ".clean.etmp", ".clean.dll"],
-    ".clean.dist": () => shell.rm("-rf", "dist"),
+    ".clean.dist": () => shell.rm("-rf", "dist", ...buildDistDirs),
     ".clean.lib": () => undefined, // to be updated below for src mode
     ".clean.prod": () => shell.rm("-rf", archetype.prodDir),
     ".clean.etmp": () => shell.rm("-rf", eTmpDir),
