@@ -36,3 +36,10 @@ export const selectOption = value => {
     value
   };
 };
+
+export const setShowFakeComp = value => {
+  return {
+    type: "SHOW_FAKE_COMP",
+    value
+  };
+};

@@ -53,10 +53,20 @@ const selectedOption = (store, action) => {
   return store || { value: "0-13" };
 };
 
+const showFakeComp = (store, action) => {
+  if (action.type === "SHOW_FAKE_COMP") {
+    return {
+      value: action.value
+    };
+  }
+  return store || { value: false };
+};
+
 export default combineReducers({
   checkBox,
   number,
   username,
   textarea,
-  selectedOption
+  selectedOption,
+  showFakeComp
 });
