@@ -45,7 +45,8 @@ const webpackConfigSpec = {
     env: "ELECTRODE_LOAD_DLLS",
     type: "json",
     default: {}
-  }
+  },
+  extendBabelLoader: {}
 };
 
 const karmaConfigSpec = {
