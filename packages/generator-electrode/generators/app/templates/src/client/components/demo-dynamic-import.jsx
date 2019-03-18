@@ -7,7 +7,16 @@ import Promise from "bluebird";
 import demoStyle from "../styles/demo2.css"; // eslint-disable-line no-unused-vars
 import custom from "../styles/custom.css"; // eslint-disable-line no-unused-vars
 
-let Demo = loadable(() => import(/* webpackChunkName: "fake" */ "./demo-fake"));
+const Fallback = () => (
+  <div styleName={"custom.dynamic-demo-fallback"}>
+    <strong>Dynamic Imported Component is loading ...</strong>
+  </div>
+);
+
+let Demo = loadable(() => import(/* webpackChunkName: "fake" */ "./demo-fake"), {
+  fallback: <Fallback />
+});
+
 const timeout = 1000;
 const load = dispatch => {
   dispatch(setShowFakeComp(false));
@@ -19,12 +28,6 @@ const load = dispatch => {
     });
 };
 
-const Fallback = () => (
-  <div styleName={"custom.dynamic-demo-fallback"}>
-    <strong>Dynamic Imported Component is loading ...</strong>
-  </div>
-);
-
 const DynamicImportDemo = ({ showFakeComp, dispatch }) => {
   return (
     <div>
@@ -35,7 +38,7 @@ const DynamicImportDemo = ({ showFakeComp, dispatch }) => {
         </a>
       </h6>
       <div styleName={"custom.dynamic-demo-box"}>
-        {Demo && showFakeComp.value ? <Demo /> : <Fallback />}
+        {showFakeComp.value ? <Demo /> : <Fallback />}
       </div>
       <div>
         <button onClick={() => load(dispatch)}>Refresh Comp</button>
