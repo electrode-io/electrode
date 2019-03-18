@@ -89,5 +89,10 @@ img {
 }
 
 .dynamic-demo-box {
-  height: 3rem;
+  height: 12rem;
+  display: flex;
+}
+
+.dynamic-demo-fallback {
+  align-self: center;
 }

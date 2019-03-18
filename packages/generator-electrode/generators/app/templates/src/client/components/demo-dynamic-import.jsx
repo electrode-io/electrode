@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { setShowFakeComp } from "../actions";
 import Promise from "bluebird";
+import demoStyle from "../styles/demo2.css"; // eslint-disable-line no-unused-vars
 import custom from "../styles/custom.css"; // eslint-disable-line no-unused-vars
 
 let Demo = loadable(() => import(/* webpackChunkName: "fake" */ "./demo-fake"));
@@ -18,6 +19,12 @@ const load = dispatch => {
     });
 };
 
+const Fallback = () => (
+  <div styleName={"custom.dynamic-demo-fallback"}>
+    <strong>Dynamic Imported Component is loading ...</strong>
+  </div>
+);
+
 const DynamicImportDemo = ({ showFakeComp, dispatch }) => {
   return (
     <div>
@@ -27,12 +34,12 @@ const DynamicImportDemo = ({ showFakeComp, dispatch }) => {
           Loadable Components
         </a>
       </h6>
-      {Demo && showFakeComp.value ? (
-        <Demo />
-      ) : (
-        <div styleName={"custom.dynamic-demo-box"}>Dynamic Imported Component is loading ...</div>
-      )}
-      <button onClick={() => load(dispatch)}>Refresh Comp</button>
+      <div styleName={"custom.dynamic-demo-box"}>
+        {Demo && showFakeComp.value ? <Demo /> : <Fallback />}
+      </div>
+      <div>
+        <button onClick={() => load(dispatch)}>Refresh Comp</button>
+      </div>
     </div>
   );
 };
