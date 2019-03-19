@@ -22,6 +22,7 @@ import electrodePng from "../images/electrode.png";
 import DemoStates from "./demo-states";
 import DemoPureStates from "./demo-pure-states";
 import { DemoButtons } from "./demo-buttons";
+import DemoDynamicImport from "./demo-dynamic-import";
 import { Nav } from "./nav";
 
 //
@@ -80,6 +81,11 @@ class Home extends React.Component {
         <div styleName={"custom.docs-section"}>
           <DemoButtons />
         </div>
+
+        <div styleName={"custom.docs-section"}>
+          <DemoDynamicImport/>
+        </div>
+
       </div>
     );
   }
@@ -87,9 +93,7 @@ class Home extends React.Component {
 
 Home.propTypes = {};
 
-const mapStateToProps = () => {
-  return {};
-};
+const mapStateToProps = state => state;
 
 export default connect(
   mapStateToProps,
