@@ -4,7 +4,8 @@
   "description": "The CLI tool for development with OSS Electrode React/NodeJS Platform.",
   "main": "bin/ignite.js",
   "scripts": {
-    "test": "clap test"
+    "test": "clap test",
+    "test": "clap check"
   },
   "bin": {
     "ignite": "bin/ignite.js",

@@ -4,7 +4,8 @@
   "description": "A bootstrap tool for installing, updating, and assisting development with Electrode platform.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "clap test"
+    "test": "clap test",
+    "coverage": "clap check"
   },
   "repository": {
     "type": "git",

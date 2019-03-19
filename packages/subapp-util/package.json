@@ -4,7 +4,8 @@
   "description": "Util for Electrode SubApp",
   "main": "lib/index.js",
   "scripts": {
-    "test": "clap check"
+    "test": "clap check",
+    "coverage": "clap check"
   },
   "keywords": [
     "web",
