@@ -10,7 +10,7 @@ const portFromEnv = () => {
 
 module.exports = {
   ui: {
-    demo: "hello from ui config",
+    demo: "hello from hapi sample ui config",
     webappPrefix: "hapiSample"
   },
   plugins: {
