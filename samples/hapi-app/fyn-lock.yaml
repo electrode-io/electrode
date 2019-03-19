@@ -4370,8 +4370,8 @@ electrode-archetype-opt-sass:
    sass-loader: ^6.0.6
 electrode-archetype-react-app:
  _:
-  ../../packages/electrode-archetype-react-app: 6.3.2-fynlocal_h
- 6.3.2-fynlocal_h:
+  ../../packages/electrode-archetype-react-app: 6.4.1-fynlocal_h
+ 6.4.1-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app
@@ -4386,8 +4386,8 @@ electrode-archetype-react-app:
    electrode-archetype-opt-react: ^1.0.2
 electrode-archetype-react-app-dev:
  _:
-  ../../packages/electrode-archetype-react-app-dev: 6.3.2-fynlocal_h
- 6.3.2-fynlocal_h:
+  ../../packages/electrode-archetype-react-app-dev: 6.4.1-fynlocal_h
+ 6.4.1-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app-dev
@@ -4564,8 +4564,8 @@ electrode-node-resolver:
    require-at: ^1.0.0
 electrode-react-webapp:
  _:
-  ../../packages/electrode-react-webapp: 3.3.3-fynlocal_h
- 3.3.3-fynlocal_h:
+  ../../packages/electrode-react-webapp: 3.4.1-fynlocal_h
+ 3.4.1-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-react-webapp
@@ -13255,8 +13255,8 @@ stylus-relative-loader:
    stylus: ^0.54.5
 subapp-util:
  _:
-  ../subapp-util: 0.1.0-fynlocal_h
- 0.1.0-fynlocal_h:
+  ../subapp-util: 1.0.0-fynlocal_h
+ 1.0.0-fynlocal_h:
   $: local
   _: ../../packages/subapp-util
   dependencies:

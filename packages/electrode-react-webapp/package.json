@@ -80,10 +80,10 @@
   "nyc": {
     "all": true,
     "check-coverage": true,
-    "statements": 99,
-    "branches": 99,
-    "functions": 99,
-    "lines": 99,
+    "statements": 97,
+    "branches": 97,
+    "functions": 97,
+    "lines": 97,
     "cache": true,
     "reporter": [
       "lcov",

@@ -45,11 +45,13 @@ const configureStore = initialState => {
   return store;
 };
 
-const store = configureStore(window.__PRELOADED_STATE__);
+const initialState = window.__hapiSample_PRELOADED_STATE__;
+
+const store = configureStore(initialState);
 
 const start = App => {
   const jsContent = document.querySelector(".js-content");
-  const reactStart = window.__PRELOADED_STATE__ && jsContent.innerHTML ? hydrate : render;
+  const reactStart = initialState && jsContent.innerHTML ? hydrate : render;
 
   reactStart(
     <Provider store={store}>
@@ -61,7 +63,7 @@ const start = App => {
   );
 };
 
-window.webappStart = () => start(() => renderRoutes(routes));
+window.hapiSampleWebappStart = () => start(() => renderRoutes(routes));
 
 //
 // Hot Module Reload setup

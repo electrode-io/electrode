@@ -32,6 +32,7 @@ const PREFETCH_MARKER = "PREFETCH_BUNDLES";
 const META_TAGS_MARKER = "META_TAGS";
 const CRITICAL_CSS_MARKER = "CRITICAL_CSS";
 const APP_CONFIG_DATA_MARKER = "APP_CONFIG_DATA";
+const WEBAPP_START_SCRIPT_MARKER = "WEBAPP_START_SCRIPT";
 
 module.exports = function setup(handlerContext /*, asyncTemplate*/) {
   const routeOptions = handlerContext.user.routeOptions;
@@ -213,6 +214,14 @@ window.${windowConfigKey}.ui = ${JSON.stringify(routeOptions.uiConfig)};
 
     [CRITICAL_CSS_MARKER]: context => {
       return criticalCSS ? `<style${context.user.styleNonce}>${criticalCSS}</style>` : "";
+    },
+
+    [WEBAPP_START_SCRIPT_MARKER]: context => {
+      const { webappPrefix } = context.user.routeOptions.uiConfig;
+      const startFuncName = webappPrefix ? `${webappPrefix}WebappStart` : "webappStart";
+      return `<script>
+if (window["${startFuncName}"]) window["${startFuncName}"]();
+</script>`;
     },
 
     INITIALIZE,
