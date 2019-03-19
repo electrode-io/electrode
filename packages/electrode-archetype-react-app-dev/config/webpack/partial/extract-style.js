@@ -15,6 +15,7 @@ const cssLoader = require.resolve("css-loader");
 const styleLoader = require.resolve("style-loader");
 const stylusLoader = require.resolve("stylus-relative-loader");
 const postcssLoader = require.resolve("postcss-loader");
+const lessLoader = require.resolve("less-loader");
 
 /*
  * cssModuleSupport: false
@@ -114,6 +115,34 @@ const stylusQuery = {
   loader: stylusLoader
 };
 
+const stylusRules = {
+  _name: `extract${cssModuleSupport ? "-css" : ""}-stylus`,
+  test: /\.styl$/,
+  use: ExtractTextPlugin.extract({
+    fallback: styleLoader,
+    use: cssModuleSupport
+      ? [cssModuleQuery, postcssQuery, stylusQuery]
+      : [cssQuery, postcssQuery, stylusQuery],
+    publicPath: ""
+  })
+};
+
+const lessQuery = {
+  loader: lessLoader
+};
+
+const lessRules = {
+  _name: `extract${cssModuleSupport ? "-css" : ""}-less`,
+  test: /\.less$/,
+  use: ExtractTextPlugin.extract({
+    fallback: styleLoader,
+    use: cssModuleSupport
+      ? [cssModuleQuery, postcssQuery, lessQuery]
+      : [cssQuery, postcssQuery, lessQuery],
+    publicPath: ""
+  })
+};
+
 module.exports = function() {
   rules.push({
     _name: `extract-css${cssModuleSupport ? "-modules" : ""}`,
@@ -139,23 +168,13 @@ module.exports = function() {
     });
   }
 
-  rules.push({
-    _name: `extract${cssModuleSupport ? "-css" : ""}-stylus`,
-    test: /\.styl$/,
-    use: ExtractTextPlugin.extract({
-      fallback: styleLoader,
-      use: cssModuleSupport
-        ? [cssModuleQuery, postcssQuery, stylusQuery]
-        : [cssQuery, postcssQuery, stylusQuery],
-      publicPath: ""
-    })
-  });
+  rules.push(stylusRules);
 
   /*
-  *** cssModuleStylusSupport flag is about to deprecate. ***
-  * If you want to enable stylus with CSS-Modules + CSS-Next,
-  * Please use stylus as your style and enable cssModuleSupport flag instead.
-  */
+   *** cssModuleStylusSupport flag is about to deprecate. ***
+   * If you want to enable stylus with CSS-Modules + CSS-Next,
+   * Please use stylus as your style and enable cssModuleSupport flag instead.
+   */
   if (cssModuleStylusSupport) {
     rules.push({
       _name: "extract-css-stylus",
@@ -167,6 +186,8 @@ module.exports = function() {
       })
     });
   }
+
+  rules.push(lessRules);
 
   return {
     module: { rules },
