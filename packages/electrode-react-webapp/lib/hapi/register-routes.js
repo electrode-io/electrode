@@ -15,7 +15,7 @@ const registerRoutes = (server, options, defaultRouteHandler) => {
     const routeHandler = ReactWebapp.makeRouteHandler(routeOptions);
 
     routeOptions.uiConfig = Object.assign(
-      {},
+      { webappPrefix: "" },
       _.get(server, "settings.app.config.ui", {}),
       routeOptions.uiConfig
     );

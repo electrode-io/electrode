@@ -19,7 +19,10 @@ let routesEngine;
 
 module.exports = req => {
   if (!routesEngine) {
-    routesEngine = new ReduxRouterEngine({ routes });
+    routesEngine = new ReduxRouterEngine({
+      routes,
+      webappPrefix: req.server.app.config.ui.webappPrefix
+    });
   }
 
   return routesEngine.render(req);

@@ -10,7 +10,8 @@ const portFromEnv = () => {
 
 module.exports = {
   ui: {
-    demo: "hello from ui config"
+    demo: "hello from ui config",
+    webappPrefix: "hapiSample"
   },
   plugins: {
     good: {
@@ -70,7 +71,7 @@ module.exports = {
       }
     }, //
     "electrode-cookies/hapi-plugin": {}
-    // 
+    //
   },
   connections: {
     default: {
