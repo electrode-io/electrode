@@ -115,8 +115,32 @@ const stylusQuery = {
   loader: stylusLoader
 };
 
+const stylusRules = {
+  _name: `extract${cssModuleSupport ? "-css" : ""}-stylus`,
+  test: /\.styl$/,
+  use: ExtractTextPlugin.extract({
+    fallback: styleLoader,
+    use: cssModuleSupport
+      ? [cssModuleQuery, postcssQuery, stylusQuery]
+      : [cssQuery, postcssQuery, stylusQuery],
+    publicPath: ""
+  })
+};
+
 const lessQuery = {
   loader: lessLoader
+};
+
+const lessRules = {
+  _name: `extract${cssModuleSupport ? "-css" : ""}-less`,
+  test: /\.less$/,
+  use: ExtractTextPlugin.extract({
+    fallback: styleLoader,
+    use: cssModuleSupport
+      ? [cssModuleQuery, postcssQuery, lessQuery]
+      : [cssQuery, postcssQuery, lessQuery],
+    publicPath: ""
+  })
 };
 
 module.exports = function() {
@@ -144,29 +168,9 @@ module.exports = function() {
     });
   }
 
-  rules.push({
-    _name: `extract${cssModuleSupport ? "-css" : ""}-stylus`,
-    test: /\.styl$/,
-    use: ExtractTextPlugin.extract({
-      fallback: styleLoader,
-      use: cssModuleSupport
-        ? [cssModuleQuery, postcssQuery, stylusQuery]
-        : [cssQuery, postcssQuery, stylusQuery],
-      publicPath: ""
-    })
-  });
+  rules.push(stylusRules);
 
-  rules.push({
-    _name: `extract${cssModuleSupport ? "-css" : ""}-less`,
-    test: /\.less$/,
-    use: ExtractTextPlugin.extract({
-      fallback: styleLoader,
-      use: cssModuleSupport
-        ? [cssModuleQuery, postcssQuery, lessQuery]
-        : [cssQuery, postcssQuery, lessQuery],
-      publicPath: ""
-    })
-  });
+  rules.push(lessRules);
 
   /*
   *** cssModuleStylusSupport flag is about to deprecate. ***
