@@ -96,6 +96,9 @@ const plugins = basePlugins.concat(
           },
           ".styl": {
             syntax: "sugarss"
+          },
+          ".less": {
+            syntax: "postcss-less"
           }
         }
       }

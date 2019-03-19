@@ -15,6 +15,7 @@ const cssLoader = require.resolve("css-loader");
 const styleLoader = require.resolve("style-loader");
 const stylusLoader = require.resolve("stylus-relative-loader");
 const postcssLoader = require.resolve("postcss-loader");
+const lessLoader = require.resolve("less-loader");
 
 /*
  * cssModuleSupport: false
@@ -114,6 +115,10 @@ const stylusQuery = {
   loader: stylusLoader
 };
 
+const lessQuery = {
+  loader: lessLoader
+};
+
 module.exports = function() {
   rules.push({
     _name: `extract-css${cssModuleSupport ? "-modules" : ""}`,
@@ -151,6 +156,18 @@ module.exports = function() {
     })
   });
 
+  rules.push({
+    _name: `extract${cssModuleSupport ? "-css" : ""}-less`,
+    test: /\.less$/,
+    use: ExtractTextPlugin.extract({
+      fallback: styleLoader,
+      use: cssModuleSupport
+        ? [cssModuleQuery, postcssQuery, lessQuery]
+        : [cssQuery, postcssQuery, lessQuery],
+      publicPath: ""
+    })
+  });
+
   /*
   *** cssModuleStylusSupport flag is about to deprecate. ***
   * If you want to enable stylus with CSS-Modules + CSS-Next,
@@ -163,6 +180,16 @@ module.exports = function() {
       use: ExtractTextPlugin.extract({
         fallback: styleLoader,
         use: [cssModuleQuery, postcssQuery, stylusQuery],
+        publicPath: ""
+      })
+    });
+
+    rules.push({
+      _name: "extract-css-less",
+      test: /\.less$/,
+      use: ExtractTextPlugin.extract({
+        fallback: styleLoader,
+        use: [cssModuleQuery, postcssQuery, lessQuery],
         publicPath: ""
       })
     });
