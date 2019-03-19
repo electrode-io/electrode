@@ -146,9 +146,12 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
       return `<title>${routeOptions.pageTitle}</title>`;
     },
 
-    [APP_CONFIG_DATA_MARKER]: () => {
-      return `<script>window.${windowConfigKey} = window.${windowConfigKey} || {};
-window.${windowConfigKey}.ui = ${JSON.stringify(routeOptions.uiConfig)};
+    [APP_CONFIG_DATA_MARKER]: context => {
+      const { webappPrefix } = context.user.routeOptions.uiConfig;
+      const key = `${webappPrefix}${windowConfigKey}`;
+
+      return `<script>window.${key} = window.${key} || {};
+window.${key}.ui = ${JSON.stringify(routeOptions.uiConfig)};
 </script>`;
     },
 

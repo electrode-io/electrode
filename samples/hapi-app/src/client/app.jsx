@@ -10,6 +10,7 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./reducers";
 import { renderRoutes } from "react-router-config";
+import uiConfig from "electrode-ui-config";
 
 //
 // PWA registration
@@ -63,7 +64,10 @@ const start = App => {
   );
 };
 
-window.hapiSampleWebappStart = () => start(() => renderRoutes(routes));
+window.hapiSampleWebappStart = () => {
+  uiConfig.reload(window.hapiSample_config || {});
+  return start(() => renderRoutes(routes));
+};
 
 //
 // Hot Module Reload setup
