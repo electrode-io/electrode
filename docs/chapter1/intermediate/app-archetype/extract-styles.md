@@ -1,6 +1,6 @@
 # Extract Styles
 
-Application Archetype supports multiple styles, such as pure CSS, [CSS-Modules + CSS-Next](https://github.com/css-modules/css-modules), [Stylus](http://stylus-lang.com/docs/css-style.html) and [SCSS](http://sass-lang.com/). Use the following flags to choose your desired styles.
+Application Archetype supports multiple styles, such as pure CSS, [CSS-Modules + CSS-Next](https://github.com/css-modules/css-modules), [Stylus](http://stylus-lang.com/docs/css-style.html), [SCSS](http://sass-lang.com/) and [LESS](http://lesscss.org/). Use the following flags to choose your desired styles.
 
 ## Flags
 
