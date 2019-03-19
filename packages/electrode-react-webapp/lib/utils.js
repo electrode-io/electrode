@@ -231,6 +231,37 @@ function invokeTemplateProcessor(asyncTemplate, routeOptions) {
   return undefined;
 }
 
+function getOtherStats() {
+  const otherStats = {};
+  if (fs.existsSync("dist/server")) {
+    fs.readdirSync("dist/server")
+      .filter(x => x.endsWith("-stats.json"))
+      .reduce((prev, x) => {
+        const k = Path.basename(x).split("-")[0];
+        prev[k] = `dist/server/${x}`;
+        return prev;
+      }, otherStats);
+  }
+  return otherStats;
+}
+
+function getOtherAssets(pluginOptions) {
+  return Object.entries(pluginOptions.otherStats).reduce((prev, [k, v]) => {
+    prev[k] = loadAssetsFromStats(getStatsPath(v, pluginOptions.buildArtifacts));
+    return prev;
+  }, {});
+}
+
+function getBundleJsNameByQuery(data, otherAssets) {
+  let { name } = data.jsChunk;
+  const { __dist } = data.query;
+  if (__dist && otherAssets[__dist]) {
+    const _js = otherAssets[__dist].js.find(x => x.name.endsWith("main.bundle.js"));
+    if (_js) name = _js.name;
+  }
+  return name;
+}
+
 module.exports = {
   resolveChunkSelector,
   loadAssetsFromStats,
@@ -247,5 +278,8 @@ module.exports = {
   responseForError,
   responseForBadStatus,
   loadFuncFromModule,
-  invokeTemplateProcessor
+  invokeTemplateProcessor,
+  getOtherStats,
+  getOtherAssets,
+  getBundleJsNameByQuery
 };
