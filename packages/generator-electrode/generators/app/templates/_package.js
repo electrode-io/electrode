@@ -47,6 +47,7 @@ return {
     "koa-static": "^5.0.0", //<% } if (isPWA) { %>
     "react-notify-toast": "^0.5.0", //<% } %>
     lodash: "^4.17.11",
+    "@loadable/component": "^5.7.0",
     "react-router-config": "^1.0.0-beta.4",
     "react-router-dom": "^4.3.1",
     milligram: "^1.3.0",
