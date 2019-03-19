@@ -170,8 +170,6 @@ module.exports = function() {
 
   rules.push(stylusRules);
 
-  rules.push(lessRules);
-
   /*
   *** cssModuleStylusSupport flag is about to deprecate. ***
   * If you want to enable stylus with CSS-Modules + CSS-Next,
@@ -188,6 +186,8 @@ module.exports = function() {
       })
     });
   }
+  
+  rules.push(lessRules);
 
   return {
     module: { rules },
