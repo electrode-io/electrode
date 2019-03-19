@@ -29,5 +29,5 @@ Without specifying flags, the following are the default cases for styles:
 - To use SCSS, include `*.scss` to your styles folder. Set `cssModuleSupport` to true OR leave it undefined.
 - To use SCSS along with CSS-Modules + CSS-Next, include `*.scss` to your styles folder and set `cssModuleSupport` to true.
 
-- To use Stylus, include `*.less` to your styles folder. Set `cssModuleSupport` to true OR leave it undefined.
-- To use Stylus along with CSS-Modules + CSS-Next, include `*.less` to your styles folder and set `cssModuleSupport` to true.
+- To use LESS, include `*.less` to your styles folder. Set `cssModuleSupport` to true OR leave it undefined.
+- To use LESS along with CSS-Modules + CSS-Next, include `*.less` to your styles folder and set `cssModuleSupport` to true.
