@@ -183,16 +183,6 @@ module.exports = function() {
         publicPath: ""
       })
     });
-
-    rules.push({
-      _name: "extract-css-less",
-      test: /\.less$/,
-      use: ExtractTextPlugin.extract({
-        fallback: styleLoader,
-        use: [cssModuleQuery, postcssQuery, lessQuery],
-        publicPath: ""
-      })
-    });
   }
 
   return {
