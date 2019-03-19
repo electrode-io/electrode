@@ -14,8 +14,9 @@ Application Archetype supports multiple styles, such as pure CSS, [CSS-Modules +
 Without specifying flags, the following are the default cases for styles:
 
 - `*.css`: CSS-Modules + CSS-Next
-- `.styl`: Stylus
+- `*.styl`: Stylus
 - `*.scss`: SCSS
+- `*.less`: LESS
 
 ## Style Use Cases
 
@@ -27,3 +28,6 @@ Without specifying flags, the following are the default cases for styles:
 
 - To use SCSS, include `*.scss` to your styles folder. Set `cssModuleSupport` to true OR leave it undefined.
 - To use SCSS along with CSS-Modules + CSS-Next, include `*.scss` to your styles folder and set `cssModuleSupport` to true.
+
+- To use Stylus, include `*.less` to your styles folder. Set `cssModuleSupport` to true OR leave it undefined.
+- To use Stylus along with CSS-Modules + CSS-Next, include `*.less` to your styles folder and set `cssModuleSupport` to true.
