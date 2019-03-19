@@ -1,8 +1,10 @@
 "use strict";
 
 const expect = require("chai").expect;
+const Fs = require("fs");
 const utils = require("../../lib/utils");
 const Path = require("path");
+const sinon = require("sinon");
 
 describe("utils", function() {
   it("getIconStats should return stats w/o html as is", () => {
@@ -221,4 +223,19 @@ describe("utils", function() {
       );
     });
   });
+
+  describe("getOtherStats", () => {
+    it("should require stats file if dist/server exists", () => {
+      sinon.stub(Fs, "existsSync").callsFake(() => true);
+      sinon
+        .stub(Fs, "readdirSync")
+        .callsFake(() => [Path.resolve("es5-stats.json"), Path.resolve("es6-stats.json")]);
+      const otherStats = utils.getOtherStats();
+      const keys = Object.keys(otherStats);
+      expect(keys.includes("es5")).be.true;
+      expect(keys.includes("es6")).be.true;
+    });
+  });
+
+  describe("getOtherAssets", () => {});
 });
