@@ -171,10 +171,10 @@ module.exports = function() {
   rules.push(stylusRules);
 
   /*
-  *** cssModuleStylusSupport flag is about to deprecate. ***
-  * If you want to enable stylus with CSS-Modules + CSS-Next,
-  * Please use stylus as your style and enable cssModuleSupport flag instead.
-  */
+   *** cssModuleStylusSupport flag is about to deprecate. ***
+   * If you want to enable stylus with CSS-Modules + CSS-Next,
+   * Please use stylus as your style and enable cssModuleSupport flag instead.
+   */
   if (cssModuleStylusSupport) {
     rules.push({
       _name: "extract-css-stylus",
@@ -186,7 +186,7 @@ module.exports = function() {
       })
     });
   }
-  
+
   rules.push(lessRules);
 
   return {
