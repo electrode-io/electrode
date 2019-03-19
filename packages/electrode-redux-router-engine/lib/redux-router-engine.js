@@ -33,15 +33,17 @@ class ReduxRouterEngine {
   constructor(options) {
     assert(options.routes, "Must provide react-router routes for redux-router-engine");
 
-    this.options = options;
+    this.options = Object.assign({ webappPrefix: "", basename: "" }, options);
+    this.options.withIds = Boolean(options.withIds);
 
-    this.options.withIds = !!options.withIds;
-
-    this.options.basename = options.basename || "";
+    // generate __PRELOADED_STATE__ or __<prefix>_PRELOADED_STATE__
+    const preloadedStateName = ["_", this.options.webappPrefix, "PRELOADED_STATE__"]
+      .filter(x => x)
+      .join("_");
 
     if (!options.stringifyPreloadedState) {
       this.options.stringifyPreloadedState = state =>
-        `window.__PRELOADED_STATE__ = ${escapeBadChars(JSON.stringify(state))};`;
+        `window.${preloadedStateName} = ${escapeBadChars(JSON.stringify(state))};`;
     }
 
     if (!this.options.logError) {

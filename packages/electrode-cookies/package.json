@@ -6,6 +6,7 @@
   "browser": "lib/csindex.js",
   "scripts": {
     "test": "clap check",
+    "coverage": "clap check",
     "format": "prettier --write --print-width 100 *.js `find . -type d -d 1 -exec echo '{}/**/*.js' \\; | egrep -v '(/node_modules/|/dist/|/coverage/)'`"
   },
   "repository": {

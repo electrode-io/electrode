@@ -36,6 +36,7 @@ describe("electrode-archetype-react-app-dev extract-styles", function() {
       expect(moduleConfig.rules[1]._name).to.equal("extract-scss");
       expect(moduleConfig.rules[2]._name).to.equal("extract-stylus");
       expect(moduleConfig.rules[3]._name).to.equal("extract-css-stylus");
+      expect(moduleConfig.rules[4]._name).to.equal("extract-less");
     });
   });
 

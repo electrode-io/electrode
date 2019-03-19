@@ -20,6 +20,7 @@ function getPluginFrom(host, pluginName) {
 }
 
 const basePlugins = [
+  "@babel/plugin-syntax-dynamic-import",
   //
   // allow class properties. loose option compile to assignment expression instead
   // of Object.defineProperty.
@@ -96,6 +97,9 @@ const plugins = basePlugins.concat(
           },
           ".styl": {
             syntax: "sugarss"
+          },
+          ".less": {
+            syntax: "postcss-less"
           }
         }
       }

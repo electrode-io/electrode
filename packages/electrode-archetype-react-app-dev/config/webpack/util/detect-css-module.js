@@ -9,6 +9,7 @@ function detectCSSModule() {
   const cssExists = glob.sync(Path.resolve(AppMode.src.client, "**", "*.css")).length > 0;
   const stylusExists = glob.sync(Path.resolve(AppMode.src.client, "**", "*.styl")).length > 0;
   const scssExists = glob.sync(Path.resolve(AppMode.src.client, "**", "*.scss")).length > 0;
+  const lessExists = glob.sync(Path.resolve(AppMode.src.client, "**", "*.less")).length > 0;
 
   /*
  * cssModuleSupport default to undefined
@@ -19,7 +20,7 @@ function detectCSSModule() {
  * *only* *.scss, cssModuleSupport sets to false
  */
 
-  return cssExists && !stylusExists && !scssExists;
+  return cssExists && !stylusExists && !scssExists && !lessExists;
 }
 
 module.exports = detectCSSModule;

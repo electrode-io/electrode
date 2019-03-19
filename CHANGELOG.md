@@ -1,3 +1,35 @@
+# 3/18/2019
+
+- server side bundle selection for different babel targets
+
+## Packages
+
+### Directly Updated
+
+-   `electrode-archetype-react-app@6.4.1` `(6.4.0 => 6.4.1)`
+-   `electrode-archetype-react-app-dev@6.4.1` `(6.4.0 => 6.4.1)`
+-   `electrode-react-webapp@3.4.1` `(3.4.0 => 3.4.1)`
+
+### Lerna Updated
+
+-   `subapp-server@1.0.2` `(1.0.1 => 1.0.2)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [chore] use xclap.concurrent to make concurrent tasks ([#1175](https://github.com/electrode-io/electrode/pull/1175)) [commit](http://github.com/electrode-io/electrode/commit/b1eb3b6ebaabf94c618a50228bb220578798d19e)
+    -   server side bundle selection for different targets ([#1166](https://github.com/electrode-io/electrode/pull/1166)) [commit](http://github.com/electrode-io/electrode/commit/2eac014736f462a030917cc1a26575aefc48bcd3)
+    -   [patch] remove transform plugins already in @babel/preset-env ([#1174](https://github.com/electrode-io/electrode/pull/1174)) [commit](http://github.com/electrode-io/electrode/commit/5688e8f81710c2d2de2fb34bce37beabb9eb54c6)
+
+-   `packages/electrode-react-webapp`
+
+    -   server side bundle selection for different targets ([#1166](https://github.com/electrode-io/electrode/pull/1166)) [commit](http://github.com/electrode-io/electrode/commit/2eac014736f462a030917cc1a26575aefc48bcd3)
+
+-   `samples/universal-react-node`
+
+    -   [chore] update sample lockfile [commit](http://github.com/electrode-io/electrode/commit/fb4e55f680740f25f911914976ec58d51d5e5a56)
+
 # 3/12/2019
 
 - electrode-react-webapp - [feat] run time select template support

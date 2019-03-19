@@ -1424,7 +1424,7 @@ describe("hapi 16 electrode-react-webapp", () => {
         })
         .then(res => {
           expect(res.result).includes("<!DOCTYPE html>");
-          expect(res.result).includes("webappStart();");
+          expect(res.result).includes(`window["webappStart"]();`);
           stopServer(server);
         })
         .catch(err => {
@@ -1532,7 +1532,7 @@ describe("hapi 16 electrode-react-webapp", () => {
                 `<title data-react-helmet="true">Nested Title</title>`
             );
             expect(res.result)
-              .includes(`window._config.ui = {};\n</script><script>test-1 script;</script>
+              .includes(`window._config.ui = {"webappPrefix":""};\n</script><script>test-1 script;</script>
 <!--scripts from helmet--></head>`);
             stopServer(server);
           })

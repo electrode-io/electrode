@@ -53,7 +53,8 @@
     }
   },
   "scripts": {
-    "test": "clap check"
+    "test": "clap check",
+    "coverage": "clap check"
   },
   "license": "Apache-2.0",
   "engines": {

@@ -8,7 +8,8 @@ export default function initTop() {
       number: { value: 999 },
       username: { value: "" },
       textarea: { value: "" },
-      selectedOption: { value: "0-13" }
+      selectedOption: { value: "0-13" },
+      showFakeComp: { value: true }
     }
   };
 }

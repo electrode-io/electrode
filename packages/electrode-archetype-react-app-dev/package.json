@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-app-dev",
-  "version": "6.4.0",
+  "version": "6.4.1",
   "description": "Electrode NodeJS/React Application Archetype (Development)",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -13,6 +13,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "test": "npm run lint && clap test",
+    "coverage": "npm run lint && clap check",
     "lint": "eslint \"**/**/*.js\"",
     "format": "prettier --write --print-width 100 *.{js,jsx} `find . -type d -d 1 -exec echo '{}/**/*.{js,jsx}' \\; | egrep -v '(/node_modules/|/dist/|/coverage/)'`"
   },
@@ -30,6 +31,7 @@
     "@babel/core": "^7.1.6",
     "@babel/plugin-proposal-class-properties": "^7.2.1",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-transform-flow-strip-types": "^7.2.0",
     "@babel/plugin-transform-react-constant-elements": "^7.0.0",
     "@babel/plugin-transform-react-inline-elements": "^7.0.0",
@@ -39,6 +41,7 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.1.0",
     "@babel/register": "^7.0.0",
+    "acorn": "^6.0.5",
     "ansi-to-html": "^0.6.8",
     "autoprefixer": "^9.3.1",
     "babel-core": "7.0.0-bridge.0",
@@ -89,6 +92,8 @@
     "istanbul": "^0.4.5",
     "jest": "^23.5.0",
     "jsonfile": "^2.2.2",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
     "loader-utils": "^1.1.0",
     "lodash": "^4.13.1",
     "mime": "^1.0.0",
@@ -102,6 +107,7 @@
     "optional-require": "^1.0.0",
     "penthouse": "^0.11.13",
     "postcss-import": "^9.1.0",
+    "postcss-less": "^3.1.4",
     "postcss-loader": "^3.0.0",
     "postcss-nested": "^3.0.0",
     "postcss-preset-env": "^5.3.0",
@@ -184,10 +190,10 @@
       "test"
     ],
     "check-coverage": false,
-    "statements": 100,
-    "branches": 100,
-    "functions": 100,
-    "lines": 100,
+    "statements": 0,
+    "branches": 0,
+    "functions": 0,
+    "lines": 0,
     "cache": true
   }
 }

@@ -16,6 +16,8 @@
   ],
   "license": "Apache-2.0",
   "scripts": {
+    "test": "echo OK",
+    "coverage": "echo OK",
     "preinstall": "node optional-check.js",
     "prepare": "cp node_modules/opt-archetype-check/optional-check.js ."
   },

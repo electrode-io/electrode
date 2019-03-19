@@ -106,7 +106,7 @@ const testGenerator = (testDir, name, clean, runTest, prompts) => {
 };
 
 xclap.load({
-  ".lerna.test": "~$lerna run --stream test --ignore=electrode-webpack-reporter",
+  ".lerna.coverage": "~$lerna run --stream coverage --ignore=electrode-webpack-reporter",
   "test-reporter": {
     task: () => {
       return exec(true, "lerna updated")
@@ -124,7 +124,7 @@ xclap.load({
     }
   },
   bootstrap: "~$fynpo",
-  test: ["bootstrap", ".lerna.test", "test-reporter", "build-test"],
+  test: ["bootstrap", ".lerna.coverage", "test-reporter", "build-test"],
   "test-generator": [".test-generator --all"],
   "gen-hapi-app": [".test-generator --hapi --no-test"],
   "gen-express-app": [".test-generator --express --no-test"],
