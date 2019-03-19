@@ -46,7 +46,10 @@ const webpackConfigSpec = {
     type: "json",
     default: {}
   },
-  extendBabelLoader: {}
+  extendBabelLoader: {
+    type: "json",
+    default: {}
+  }
 };
 
 const karmaConfigSpec = {
