@@ -11,7 +11,8 @@ const {
   getDevJsBundle,
   getProdBundles,
   processRenderSsMode,
-  getCspNonce
+  getCspNonce,
+  getBundleJsNameByQuery
 } = require("../utils");
 
 const {
@@ -73,16 +74,6 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
       : `${prodBundleBase}${assets.manifest}`;
   };
 
-  const getBundleJsNameByQuery = data => {
-    let { name } = data.jsChunk;
-    const { __dist } = data.query;
-    if (__dist && otherAssets[__dist]) {
-      const _js = otherAssets[__dist].js.find(x => x.name.endsWith("main.bundle.js"));
-      if (_js) name = _js.name;
-    }
-    return name;
-  };
-
   const bundleJs = data => {
     if (!data.renderJs) {
       return "";
@@ -90,7 +81,7 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
     if (WEBPACK_DEV) {
       return data.devJSBundle;
     } else if (data.jsChunk) {
-      const bundleJsName = getBundleJsNameByQuery(data);
+      const bundleJsName = getBundleJsNameByQuery(data, otherAssets);
       return `${prodBundleBase}${bundleJsName}`;
     } else {
       return "";
