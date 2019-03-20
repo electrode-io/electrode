@@ -1,3 +1,114 @@
+# 3/20/2019
+
+- electrode-react-app-archetype:
+  - support .less styles
+  - dynamic import support and demo
+  - fix cssModuleSupport flag
+  - support webappPrefix for apps
+
+## Packages
+
+### Directly Updated
+
+-   `electrode-archetype-react-app-dev@6.4.2` `(6.4.1 => 6.4.2)`
+-   `electrode-react-webapp@3.5.0` `(3.4.1 => 3.5.0)`
+-   `electrode-redux-router-engine@2.2.0` `(2.1.8 => 2.2.0)`
+-   `electrode-ui-config@1.3.0` `(1.2.0 => 1.3.0)`
+-   `generator-electrode@5.1.3` `(5.1.2 => 5.1.3)`
+
+### Lerna Updated
+
+-   `electrode-archetype-react-app@6.4.2` `(6.4.1 => 6.4.2)`
+
+## Commits
+
+-   `packages/electrode-archetype-opt-css-module`
+
+    -   [chore] CI runs coverage [commit](http://github.com/electrode-io/electrode/commit/5ad18247c8634d2da3ef09bbe884a392a58fdead)
+
+-   `packages/electrode-archetype-opt-inferno`
+
+    -   [chore] CI runs coverage [commit](http://github.com/electrode-io/electrode/commit/5ad18247c8634d2da3ef09bbe884a392a58fdead)
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   change cssModuleSupport type to boolean ([#1187](https://github.com/electrode-io/electrode/pull/1187)) [commit](http://github.com/electrode-io/electrode/commit/60c2131b18933218e7e4571222325e13c4f8650b)
+    -   add dynamic demo in templates ([#1176](https://github.com/electrode-io/electrode/pull/1176)) [commit](http://github.com/electrode-io/electrode/commit/c5f9705a42bac8e3bcdecfcd975a9fca92f686a9)
+    -   support .less style ([#1181](https://github.com/electrode-io/electrode/pull/1181)) [commit](http://github.com/electrode-io/electrode/commit/74a6d9d9317bf31a20577b6d51d73f0dc4f62afd)
+    -   [chore] CI runs coverage [commit](http://github.com/electrode-io/electrode/commit/5ad18247c8634d2da3ef09bbe884a392a58fdead)
+
+-   `packages/electrode-cookies`
+
+    -   [chore] CI runs coverage [commit](http://github.com/electrode-io/electrode/commit/5ad18247c8634d2da3ef09bbe884a392a58fdead)
+
+-   `packages/electrode-ignite`
+
+    -   [chore] CI runs coverage [commit](http://github.com/electrode-io/electrode/commit/5ad18247c8634d2da3ef09bbe884a392a58fdead)
+
+-   `packages/electrode-react-context`
+
+    -   [chore] CI runs coverage [commit](http://github.com/electrode-io/electrode/commit/5ad18247c8634d2da3ef09bbe884a392a58fdead)
+
+-   `packages/electrode-react-webapp`
+
+    -   [minor] handle webappPrefix for ui config ([#1185](https://github.com/electrode-io/electrode/pull/1185)) [commit](http://github.com/electrode-io/electrode/commit/267afb5ba673c782defc7a7c9254c4f717edbf38)
+    -   add missing test cases in electrode-react-webapp ([#1183](https://github.com/electrode-io/electrode/pull/1183)) [commit](http://github.com/electrode-io/electrode/commit/dcc5bc4cb7e22ea49a25213d5a1d621d549ecd9b)
+    -   [minor] support webappPrefix to allow multiple apps on the same page ([#1182](https://github.com/electrode-io/electrode/pull/1182)) [commit](http://github.com/electrode-io/electrode/commit/a3a087fbc690d06c13cd394c87197b034563e934)
+
+-   `packages/electrode-redux-router-engine`
+
+    -   [minor] support webappPrefix to allow multiple apps on the same page ([#1182](https://github.com/electrode-io/electrode/pull/1182)) [commit](http://github.com/electrode-io/electrode/commit/a3a087fbc690d06c13cd394c87197b034563e934)
+
+-   `packages/electrode-ui-config`
+
+    -   [minor] handle webappPrefix for ui config ([#1185](https://github.com/electrode-io/electrode/pull/1185)) [commit](http://github.com/electrode-io/electrode/commit/267afb5ba673c782defc7a7c9254c4f717edbf38)
+
+-   `packages/electrode-ui-logger`
+
+    -   [chore] CI runs coverage [commit](http://github.com/electrode-io/electrode/commit/5ad18247c8634d2da3ef09bbe884a392a58fdead)
+
+-   `packages/electrode-webpack-reporter`
+
+    -   [chore] CI runs coverage [commit](http://github.com/electrode-io/electrode/commit/5ad18247c8634d2da3ef09bbe884a392a58fdead)
+
+-   `packages/generator-electrode`
+
+    -   add dynamic demo in templates ([#1176](https://github.com/electrode-io/electrode/pull/1176)) [commit](http://github.com/electrode-io/electrode/commit/c5f9705a42bac8e3bcdecfcd975a9fca92f686a9)
+    -   [chore] CI runs coverage [commit](http://github.com/electrode-io/electrode/commit/5ad18247c8634d2da3ef09bbe884a392a58fdead)
+
+-   `packages/ignite-core`
+
+    -   [chore] CI runs coverage [commit](http://github.com/electrode-io/electrode/commit/5ad18247c8634d2da3ef09bbe884a392a58fdead)
+
+-   `packages/subapp-redux`
+
+    -   [chore] CI runs coverage [commit](http://github.com/electrode-io/electrode/commit/5ad18247c8634d2da3ef09bbe884a392a58fdead)
+
+-   `packages/subapp-server`
+
+    -   [chore] CI runs coverage [commit](http://github.com/electrode-io/electrode/commit/5ad18247c8634d2da3ef09bbe884a392a58fdead)
+
+-   `packages/subapp-util`
+
+    -   [chore] CI runs coverage [commit](http://github.com/electrode-io/electrode/commit/5ad18247c8634d2da3ef09bbe884a392a58fdead)
+
+-   `packages/subapp-web`
+
+    -   [chore] CI runs coverage [commit](http://github.com/electrode-io/electrode/commit/5ad18247c8634d2da3ef09bbe884a392a58fdead)
+
+-   `packages/webpack-config-composer`
+
+    -   [chore] CI runs coverage [commit](http://github.com/electrode-io/electrode/commit/5ad18247c8634d2da3ef09bbe884a392a58fdead)
+
+-   `samples/hapi-app`
+
+    -   [minor] handle webappPrefix for ui config ([#1185](https://github.com/electrode-io/electrode/pull/1185)) [commit](http://github.com/electrode-io/electrode/commit/267afb5ba673c782defc7a7c9254c4f717edbf38)
+    -   [minor] support webappPrefix to allow multiple apps on the same page ([#1182](https://github.com/electrode-io/electrode/pull/1182)) [commit](http://github.com/electrode-io/electrode/commit/a3a087fbc690d06c13cd394c87197b034563e934)
+
+-   `samples/universal-react-node`
+
+    -   [chore] update sample lockfile [commit](http://github.com/electrode-io/electrode/commit/c98f08f43d5e0d7dde35dd961509d80d019fb570)
+
 # 3/18/2019
 
 - server side bundle selection for different babel targets
