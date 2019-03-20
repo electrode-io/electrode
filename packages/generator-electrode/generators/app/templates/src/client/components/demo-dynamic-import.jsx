@@ -13,7 +13,7 @@ const Fallback = () => (
   </div>
 );
 
-let Demo = loadable(() => import(/* webpackChunkName: "fake" */ "./demo-fake"), {
+let Demo = loadable(() => import("./demo-fake"), {
   fallback: <Fallback />
 });
 
