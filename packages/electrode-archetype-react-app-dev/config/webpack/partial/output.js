@@ -12,7 +12,7 @@ const filename = (() => {
   if (AppMode.hasSubApps) {
     _filename = "[name].bundle.js";
   } else if (hasOtherTargets) {
-    _filename = `${target}-[name].bundle.js`;
+    _filename = `${target}.[name].bundle.js`;
   }
   return _filename;
 })();
