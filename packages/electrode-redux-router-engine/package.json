@@ -1,6 +1,6 @@
 {
   "name": "electrode-redux-router-engine",
-  "version": "2.1.7",
+  "version": "2.1.8",
   "description": "Handle async data for React Server Side Rendering using Redux and Router",
   "main": "lib/redux-router-engine.js",
   "scripts": {
@@ -76,6 +76,5 @@
   },
   "engines": {
     "node": ">=8"
-  },
-  "private": true
+  }
 }
