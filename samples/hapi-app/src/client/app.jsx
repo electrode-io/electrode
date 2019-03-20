@@ -65,9 +65,7 @@ const start = App => {
 };
 
 window.hapiSampleWebappStart = () => {
-  try {
-    uiConfig.reload(window.hapiSample_config || {});
-  } catch (e){}
+  uiConfig.reload(window.hapiSample_config || {});
   return start(() => renderRoutes(routes));
 };
 
