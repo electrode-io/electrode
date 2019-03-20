@@ -260,7 +260,7 @@ describe("utils", function() {
         jsChunk: { name: "bundle" }
       };
       const otherAssets = {
-        es6: { js: [{ name: "es6.main.bundle.js" }] }
+        es6: { js: [{ name: "es6.main.bundle.[hash].js" }] }
       };
       const es6 = utils.getBundleJsNameByQuery(
         Object.assign(data, {
