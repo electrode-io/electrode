@@ -260,7 +260,7 @@ describe("utils", function() {
         jsChunk: { name: "bundle" }
       };
       const otherAssets = {
-        es6: { js: [{ name: "es6.main.bundle.[hash].js" }] }
+        es6: { js: [{ name: "es6-main.bundle.js" }] }
       };
       const es6 = utils.getBundleJsNameByQuery(
         Object.assign(data, {
@@ -276,15 +276,6 @@ describe("utils", function() {
         otherAssets
       );
       expect(es5).to.equal(data.jsChunk.name);
-      const branch = utils.getBundleJsNameByQuery(
-        Object.assign(data, {
-          query: { __dist: "es6" }
-        }),
-        Object.assign(otherAssets, {
-          es6: { js: [{ name: "main.js" }] }
-        })
-      );
-      expect(branch).to.equal(data.jsChunk.name);
     });
   });
 });
