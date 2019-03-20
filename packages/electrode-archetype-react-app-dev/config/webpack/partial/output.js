@@ -9,7 +9,7 @@ const filename = (() => {
   if (AppMode.hasSubApps) {
     _filename = "[name].bundle.js";
   } else if (target !== "default") {
-    _filename = `${target}-[name].bundle.[hash].js`
+    _filename = `${target}-[name].bundle.[hash].js`;
   }
   return _filename;
 })();
