@@ -256,7 +256,7 @@ function getBundleJsNameByQuery(data, otherAssets) {
   let { name } = data.jsChunk;
   const { __dist } = data.query;
   if (__dist && otherAssets[__dist]) {
-    const _js = otherAssets[__dist].js.find(x => x.name.match(/main\.bundle\..+\.js$/));
+    const _js = otherAssets[__dist].js.find(x => x.name.match(/main\.bundle(\..+)?\.js$/));
     if (_js) name = _js.name;
   }
   return name;
