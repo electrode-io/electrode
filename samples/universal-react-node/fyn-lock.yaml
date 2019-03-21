@@ -4394,8 +4394,8 @@ electrode-archetype-opt-sass:
    sass-loader: ^6.0.6
 electrode-archetype-react-app:
  _:
-  ../../packages/electrode-archetype-react-app: 6.4.1-fynlocal_h
- 6.4.1-fynlocal_h:
+  ../../packages/electrode-archetype-react-app: 6.4.2-fynlocal_h
+ 6.4.2-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app
@@ -4410,8 +4410,8 @@ electrode-archetype-react-app:
    electrode-archetype-opt-react: ^1.0.2
 electrode-archetype-react-app-dev:
  _:
-  ../../packages/electrode-archetype-react-app-dev: 6.4.1-fynlocal_h
- 6.4.1-fynlocal_h:
+  ../../packages/electrode-archetype-react-app-dev: 6.4.2-fynlocal_h
+ 6.4.2-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app-dev
@@ -4596,8 +4596,8 @@ electrode-node-resolver:
    require-at: ^1.0.0
 electrode-react-webapp:
  _:
-  ../../packages/electrode-react-webapp: 3.4.1-fynlocal_h
- 3.4.1-fynlocal_h:
+  ../../packages/electrode-react-webapp: 3.5.0-fynlocal_h
+ 3.5.0-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-react-webapp
@@ -4611,8 +4611,8 @@ electrode-react-webapp:
    string-array: ^1.0.0
 electrode-redux-router-engine:
  _:
-  ../../packages/electrode-redux-router-engine: 2.1.7-fynlocal_h
- 2.1.7-fynlocal_h:
+  ../../packages/electrode-redux-router-engine: 2.2.0-fynlocal_h
+ 2.2.0-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-redux-router-engine
