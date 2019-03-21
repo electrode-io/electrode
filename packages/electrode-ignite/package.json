@@ -5,7 +5,7 @@
   "main": "bin/ignite.js",
   "scripts": {
     "test": "clap test",
-    "test": "clap check"
+    "coverage": "clap check"
   },
   "bin": {
     "ignite": "bin/ignite.js",
