@@ -13,14 +13,14 @@ const Fallback = () => (
   </div>
 );
 
-let Demo = loadable(() => import(/* webpackChunkName: "fake" */ "./demo-fake"), {
+let Demo = loadable(() => import("./demo-loadable"), {
   fallback: <Fallback />
 });
 
 const timeout = 1000;
 const load = dispatch => {
   dispatch(setShowFakeComp(false));
-  Promise.try(() => loadable(() => import("./demo-fake")))
+  Promise.try(() => loadable(() => import(/* webpackChunkName: "loadable" */ "./demo-loadable")))
     .delay(timeout)
     .then(x => (Demo = x))
     .then(() => {

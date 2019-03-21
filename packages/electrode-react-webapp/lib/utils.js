@@ -256,8 +256,7 @@ function getBundleJsNameByQuery(data, otherAssets) {
   let { name } = data.jsChunk;
   const { __dist } = data.query;
   if (__dist && otherAssets[__dist]) {
-    const _js = otherAssets[__dist].js.find(x => x.name.endsWith("main.bundle.js"));
-    if (_js) name = _js.name;
+    name = `${__dist}.main.bundle.js`;
   }
   return name;
 }

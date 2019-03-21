@@ -276,15 +276,6 @@ describe("utils", function() {
         otherAssets
       );
       expect(es5).to.equal(data.jsChunk.name);
-      const branch = utils.getBundleJsNameByQuery(
-        Object.assign(data, {
-          query: { __dist: "es6" }
-        }),
-        Object.assign(otherAssets, {
-          es6: { js: [{ name: "main.js" }] }
-        })
-      );
-      expect(branch).to.equal(data.jsChunk.name);
     });
   });
 });
