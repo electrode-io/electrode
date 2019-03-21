@@ -39,6 +39,7 @@
     "heroku-postbuild": "clap build"
   },
   "dependencies": {
+    "@loadable/component": "^5.7.0",
     "bluebird": "^3.4.6",
     "electrode-archetype-react-app": "^6.0.0",
     "electrode-confippet": "^1.5.0",

@@ -46,7 +46,7 @@
 /* Larger than phone */
 @media (min-width: 550px) {
   .header {
-    margin-top: 18rem;
+    margin-top: 9rem;
   }
 
   .docs-section {
@@ -86,4 +86,13 @@ img {
   width: 6rem;
   display: inline-block;
   text-align: center;
+}
+
+.dynamic-demo-box {
+  height: 12rem;
+  display: flex;
+}
+
+.dynamic-demo-fallback {
+  align-self: center;
 }

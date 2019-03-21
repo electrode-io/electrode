@@ -989,6 +989,17 @@
  1.4.0:
   $: sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
   _: 'https://registry.npmjs.org/@csstools/convert-colors/-/convert-colors-1.4.0.tgz'
+'@loadable/component':
+ _:
+  ^5.7.0: 5.7.0
+ 5.7.0:
+  top: 1
+  $: sha512-yHe2WrqUqw2zyS5MnHziVfhMONFe7Pd8oMO2UB/G9XxkXLZkSvFZQIpNouHNNE1Kc29asIYXnR42vMD5IjruSQ==
+  _: 'https://registry.npmjs.org/@loadable/component/-/component-5.7.0.tgz'
+  dependencies:
+   hoist-non-react-statics: ^3.3.0
+  peerDependencies:
+   react: '>=16.3.0'
 '@octokit/rest':
  _:
   ^15.2.6: 15.18.1
@@ -6554,7 +6565,7 @@ hoek:
 hoist-non-react-statics:
  _:
   '^2.5.0,^2.5.5': 2.5.5
-  ^3.1.0: 3.3.0
+  '^3.1.0,^3.3.0': 3.3.0
  3.3.0:
   $: sha512-0XsbTXxgiaCDYDIWFcwkmerZPSwywfUqYmwT4jzewKTQSWoE6FCMoUVOeBJWK3E/CrWbxRG3m5GzY4lnIwGRBA==
   _: 'https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-3.3.0.tgz'
