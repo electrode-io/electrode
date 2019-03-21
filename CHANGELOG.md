@@ -1,3 +1,40 @@
+# 3/21/2019
+
+## Packages
+
+### Directly Updated
+
+-   `electrode-archetype-react-app@6.4.3` `(6.4.2 => 6.4.3)`
+-   `electrode-archetype-react-app-dev@6.4.3` `(6.4.2 => 6.4.3)`
+-   `electrode-react-webapp@3.5.1` `(3.5.0 => 3.5.1)`
+-   `generator-electrode@5.1.4` `(5.1.3 => 5.1.4)`
+
+### Lerna Updated
+
+-   `subapp-server@1.0.3` `(1.0.2 => 1.0.3)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   keep original behavior if no extra babel targets specified ([#1188](https://github.com/electrode-io/electrode/pull/1188)) [commit](http://github.com/electrode-io/electrode/commit/2319643556ae6250ce9d3e529643d8f88d9a70c3)
+
+-   `packages/electrode-ignite`
+
+    -   [chore] update CI scripts [commit](http://github.com/electrode-io/electrode/commit/5479e3471525ce3f622f903402d9576c914627e1)
+
+-   `packages/electrode-react-webapp`
+
+    -   keep original behavior if no extra babel targets specified ([#1188](https://github.com/electrode-io/electrode/pull/1188)) [commit](http://github.com/electrode-io/electrode/commit/2319643556ae6250ce9d3e529643d8f88d9a70c3)
+
+-   `packages/generator-electrode`
+
+    -   keep original behavior if no extra babel targets specified ([#1188](https://github.com/electrode-io/electrode/pull/1188)) [commit](http://github.com/electrode-io/electrode/commit/2319643556ae6250ce9d3e529643d8f88d9a70c3)
+
+-   `samples/hapi-app`
+
+    -   update hapi-app sample with dynamic import ([#1186](https://github.com/electrode-io/electrode/pull/1186)) [commit](http://github.com/electrode-io/electrode/commit/f540d4f348af9456ac9cb3fa042d4509fc219d9c)
+
 # 3/20/2019
 
 - electrode-react-app-archetype:
