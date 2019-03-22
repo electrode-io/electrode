@@ -256,7 +256,8 @@ function getBundleJsNameByQuery(data, otherAssets) {
   let { name } = data.jsChunk;
   const { __dist } = data.query;
   if (__dist && otherAssets[__dist]) {
-    name = `${__dist}.main.bundle.js`;
+    const entryChunkName = name.split(".")[1];
+    name = `${__dist}.${entryChunkName}.bundle.js`;
   }
   return name;
 }
