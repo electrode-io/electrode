@@ -79,6 +79,13 @@ function makeRouteHandler(routeOptions) {
   };
 }
 
+const basePluginOptions = {
+  iconStats: "dist/server/iconstats.json",
+  criticalCSS: "dist/js/critical.css",
+  buildArtifacts: ".build",
+  prodBundleBase: "/js/"
+};
+
 const setupOptions = options => {
   const https = process.env.WEBPACK_DEV_HTTPS && process.env.WEBPACK_DEV_HTTPS !== "false";
   const pluginOptionsDefaults = {
@@ -100,10 +107,7 @@ const setupOptions = options => {
     paths: {},
     stats: "dist/server/stats.json",
     otherStats,
-    iconStats: "dist/server/iconstats.json",
-    criticalCSS: "dist/js/critical.css",
-    buildArtifacts: ".build",
-    prodBundleBase: "/js/",
+    ...basePluginOptions,
     cspNonceValue: undefined
   };
 
@@ -262,5 +266,6 @@ module.exports = {
   setupPathOptions,
   makeRouteHandler,
   resolveContent,
-  getContentResolver
+  getContentResolver,
+  basePluginOptions
 };
