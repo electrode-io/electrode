@@ -257,7 +257,7 @@ describe("utils", function() {
   describe("getBundleJsNameByQuery", () => {
     it("should get file name ends with main.bundle.js", () => {
       const data = {
-        jsChunk: { name: "bundle" }
+        jsChunk: { name: "default.main.bundle.js" }
       };
       const otherAssets = {
         es6: { js: [{ name: "es6.main.bundle.js" }] }
