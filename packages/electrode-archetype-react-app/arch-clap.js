@@ -574,7 +574,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     ".build-lib:delete-babel-ignored-files": {
       desc: false,
       task: () => {
-        const libDir = Path.resolve(AppMode.lib.client);
+        const libDir = Path.resolve(AppMode.lib.dir);
         const ignoredFiles = scanDir.sync({
           dir: libDir,
           includeRoot: true,
