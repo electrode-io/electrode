@@ -1,3 +1,30 @@
+# 3/26/2019
+
+- electrode-react-webapp
+  - handle multi targeted bundle selection when user defined entries
+
+## Packages
+
+### Directly Updated
+
+-   `electrode-react-webapp@3.5.2` `(3.5.1 => 3.5.2)`
+
+### Lerna Updated
+
+## Commits
+
+-   `packages/electrode-react-webapp`
+
+    -   handle multi targeted bundle selection when user defined entries ([#1191](https://github.com/electrode-io/electrode/pull/1191)) [commit](http://github.com/electrode-io/electrode/commit/525b8a6a7f966c30c4984d48ecf5a138277b5827)
+
+-   `packages/webpack-config-composer`
+
+    -   [chore] update CI scripts [commit](http://github.com/electrode-io/electrode/commit/49e54bdb768eac78ec32603a352e1d0d7e7474e9)
+
+-   `samples/universal-react-node`
+
+    -   [chore] update sample lockfile [commit](http://github.com/electrode-io/electrode/commit/5794b307d47835bc7824e5e5cf1b3330307e0b57)
+
 # 3/21/2019
 
 ## Packages
