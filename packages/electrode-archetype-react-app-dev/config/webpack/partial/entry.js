@@ -94,7 +94,23 @@ function appEntry() {
   return entry;
 }
 
-const entry = polyfill ? { main: ["@babel/polyfill", appEntry()] } : appEntry();
+const entry = (() => {
+  let _entry = appEntry();
+  if (polyfill) {
+    const babelPolyfill = "@babel/polyfill";
+    if (_.isArray(_entry)) {
+      _entry = { main: [babelPolyfill, ..._entry] };
+    } else if (_.isObject(_entry)) {
+      _entry = Object.entries(_entry).reduce((prev, [k, v]) => {
+        prev[k] = [babelPolyfill].concat(v);
+        return prev;
+      }, {});
+    } else {
+      _entry = { main: [babelPolyfill, _entry] };
+    }
+  }
+  return _entry;
+})();
 
 module.exports = {
   context,
