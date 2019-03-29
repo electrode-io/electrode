@@ -9,7 +9,8 @@ const AppMode = archetype.AppMode;
 const chalk = require("chalk");
 
 let context = Path.resolve(AppMode.src.client);
-const polyfill = archetype.webpack.enableBabelPolyfill;
+const { target } = archetype.babel;
+const polyfill = archetype.webpack.enableBabelPolyfill || target === "default";
 
 const logger = require("electrode-archetype-react-app/lib/logger");
 
