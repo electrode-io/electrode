@@ -9,8 +9,6 @@ const AppMode = archetype.AppMode;
 const chalk = require("chalk");
 
 let context = Path.resolve(AppMode.src.client);
-const { target } = archetype.babel;
-const hasMultipleTarget = Object.keys(archetype.babel.envTargets).sort().join(",") !== "default,node";
 
 const logger = require("electrode-archetype-react-app/lib/logger");
 
@@ -97,8 +95,12 @@ function appEntry() {
 
 function shouldPolyfill() {
   if (archetype.webpack.enableBabelPolyfill) {
+    const hasMultipleTarget =
+      Object.keys(archetype.babel.envTargets)
+        .sort()
+        .join(",") !== "default,node";
     if (hasMultipleTarget) {
-      return target === "default";
+      return archetype.babel.target === "default";
       // for all other targets, disable polyfill
     } else {
       return true;
