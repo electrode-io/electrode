@@ -109,7 +109,10 @@ const plugins = basePlugins.concat(
 );
 
 const targets = archetype.babel.envTargets[archetype.babel.target];
-const hasOtherTargets = Object.keys(archetype.babel.envTargets).sort().join(",") !== "default,node";
+const hasOtherTargets =
+  Object.keys(archetype.babel.envTargets)
+    .sort()
+    .join(",") !== "default,node";
 const useBuiltIns = hasOtherTargets ? "entry" : false;
 
 const presets = [
@@ -119,7 +122,10 @@ const presets = [
   // But keep transforming modules to commonjs when not in production mode so tests
   // can continue to stub ES modules.
   //
-  ["@babel/preset-env", { modules: isProduction ? "auto" : "commonjs", loose: true, targets, useBuiltIns }],
+  [
+    "@babel/preset-env",
+    { modules: isProduction ? "auto" : "commonjs", loose: true, targets, useBuiltIns, corejs: "2" }
+  ],
   enableTypeScript && "@babel/preset-typescript",
   "@babel/preset-react"
 ];
