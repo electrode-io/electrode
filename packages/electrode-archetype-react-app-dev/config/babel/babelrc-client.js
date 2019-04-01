@@ -113,7 +113,9 @@ const hasOtherTargets =
   Object.keys(archetype.babel.envTargets)
     .sort()
     .join(",") !== "default,node";
-const useBuiltIns = hasOtherTargets ? "entry" : false;
+const useBuiltIns = hasOtherTargets
+  ? { useBuiltIns: "entry", corejs: "2" }
+  : { useBuiltIns: false };
 
 const presets = [
   //
@@ -124,7 +126,7 @@ const presets = [
   //
   [
     "@babel/preset-env",
-    { modules: isProduction ? "auto" : "commonjs", loose: true, targets, useBuiltIns, corejs: "2" }
+    { modules: isProduction ? "auto" : "commonjs", loose: true, targets, ...useBuiltIns }
   ],
   enableTypeScript && "@babel/preset-typescript",
   "@babel/preset-react"
