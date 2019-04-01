@@ -6,6 +6,7 @@ const Path = require("path");
 const identity = require("lodash/identity");
 const assign = require("lodash/assign");
 const babelLoader = require.resolve("babel-loader");
+const babelConfig = require("../../babel/babelrc-client");
 
 module.exports = function(options) {
   const clientVendor = Path.join(AppMode.src.client, "vendor/");
@@ -17,6 +18,13 @@ module.exports = function(options) {
 
   const test = archetype.babel.enableTypeScript ? /\.[tj]sx?$/ : /\.jsx?$/;
 
+  let customBabelConfig = {};
+  if (archetype.babel.noBabelRc) {
+    customBabelConfig.babelrc = false;
+    customBabelConfig.plugins = babelConfig.plugins;
+    customBabelConfig.presets = babelConfig.presets;
+  }
+
   const babelLoaderConfig = {
     _name: "babel",
     test,
@@ -26,11 +34,13 @@ module.exports = function(options) {
         loader: babelLoader,
         options: Object.assign(
           { cacheDirectory: Path.resolve(".etmp/babel-loader") },
-          options.babel
+          options.babel,
+          customBabelConfig
         )
       }
     ].filter(identity)
   };
+
 
   return {
     module: {

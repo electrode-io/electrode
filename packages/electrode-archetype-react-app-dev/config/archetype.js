@@ -51,6 +51,10 @@ const webpackConfigSpec = {
     env: "ELECTRODE_LOAD_DLLS",
     type: "json",
     default: {}
+  },
+  extendBabelLoader: {
+    type: "json",
+    default: {}
   }
 };
 
@@ -80,6 +84,9 @@ const babelConfigSpec = {
     env: "ENV_TARGET",
     type: "string",
     default: "default"
+  },
+  noBabelRc: {
+    default: false
   }
 };
 
