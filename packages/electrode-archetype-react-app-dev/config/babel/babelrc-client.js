@@ -115,7 +115,7 @@ const hasOtherTargets =
     .join(",") !== "default,node";
 const useBuiltIns = hasOtherTargets
   ? { useBuiltIns: "entry", corejs: "2" }
-  : { useBuiltIns: false };
+  : {};
 
 const presets = [
   //
