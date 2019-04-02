@@ -52,6 +52,30 @@ const webpackConfigSpec = {
   }
 };
 
+const babelConfigSpec = {
+  envTargets: {
+    env: "BABEL_ENV_TARGETS",
+    type: "json",
+    default: {
+      //`default` and `node` targets object is required
+      default: {
+        ie: "8"
+      },
+      node: process.versions.node.split(".")[0]
+    }
+  },
+  target: {
+    env: "ENV_TARGET",
+    type: "string",
+    default: "default"
+  },
+  loaderOptions: {
+    env: "BABEL_LOADER_OPTIONS",
+    type: "json",
+    default: {}
+  }
+};
+
 const karmaConfigSpec = {
   browser: { env: "KARMA_BROWSER", default: "chrome" }
 };
@@ -67,6 +91,7 @@ const config = {
   webpack: xenvConfig(webpackConfigSpec, userConfig.webpack, { merge }),
   karma: xenvConfig(karmaConfigSpec, userConfig.karma, { merge }),
   jest: Object.assign({}, userConfig.jest),
+  babel: xenvConfig(babelConfigSpec, userConfig.babel, { merge }),
   config: Object.assign(
     {},
     {

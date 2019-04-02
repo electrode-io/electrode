@@ -3,8 +3,22 @@
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const AppMode = archetype.AppMode;
 const Path = require("path");
+const Fs = require("fs");
 const _ = require("lodash");
 const logger = require("electrode-archetype-react-app/lib/logger");
+
+const getBabelrcClient = () => {
+  const babelrcClient = JSON.parse(
+    Fs.readFileSync(require.resolve("electrode-archetype-react-app-dev/config/babel/babelrc-client"))
+  );
+  const { BABEL_ENV, NODE_ENV } = process.env;
+  const isProduction = (BABEL_ENV || NODE_ENV) === "production";
+  const { target, envTargets, loaderOptions } = archetype.babel;
+  const targets = envTargets[target];
+  const presetEnv = ["env", { modules: isProduction ? "auto" : "commonjs", loose: true, targets }]
+  babelrcClient.presets.unshift(presetEnv);
+  return Object.assign(babelrcClient, loaderOptions);
+};
 
 module.exports = function(options) {
   if (options.HotModuleReload) {
@@ -27,7 +41,8 @@ module.exports = function(options) {
         loader: "babel-loader",
         options: Object.assign(
           { cacheDirectory: Path.resolve(".etmp/babel-loader") },
-          options.babel
+          options.babel,
+          getBabelrcClient()
         )
       }
     ].filter(_.identity)
