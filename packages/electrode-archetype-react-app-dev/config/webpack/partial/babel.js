@@ -18,7 +18,7 @@ module.exports = function(options) {
 
   const test = archetype.babel.enableTypeScript ? /\.[tj]sx?$/ : /\.jsx?$/;
 
-  let customBabelConfig = {};
+  const customBabelConfig = {};
   if (archetype.babel.noBabelRc) {
     customBabelConfig.babelrc = false;
     customBabelConfig.plugins = babelConfig.plugins;
