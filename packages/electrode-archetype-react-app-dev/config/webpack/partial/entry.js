@@ -9,7 +9,6 @@ const AppMode = archetype.AppMode;
 const chalk = require("chalk");
 
 let context = Path.resolve(AppMode.src.client);
-const polyfill = archetype.webpack.enableBabelPolyfill;
 
 const logger = require("electrode-archetype-react-app/lib/logger");
 
@@ -94,9 +93,42 @@ function appEntry() {
   return entry;
 }
 
-const entry = polyfill ? { main: ["@babel/polyfill", appEntry()] } : appEntry();
+function shouldPolyfill() {
+  if (archetype.webpack.enableBabelPolyfill) {
+    const hasMultipleTarget =
+      Object.keys(archetype.babel.envTargets)
+        .sort()
+        .join(",") !== "default,node";
+    if (hasMultipleTarget) {
+      return archetype.babel.target === "default";
+      // for all other targets, disable polyfill
+    } else {
+      return true;
+    }
+  }
+  return false;
+}
+
+function makeEntry() {
+  let entry = appEntry();
+  const polyfill = shouldPolyfill();
+  if (polyfill) {
+    const babelPolyfill = "@babel/polyfill";
+    if (_.isArray(entry)) {
+      entry = { main: [babelPolyfill, ...entry] };
+    } else if (_.isObject(entry)) {
+      entry = Object.entries(entry).reduce((prev, [k, v]) => {
+        prev[k] = [babelPolyfill].concat(v);
+        return prev;
+      }, {});
+    } else {
+      entry = { main: [babelPolyfill, entry] };
+    }
+  }
+  return entry;
+}
 
 module.exports = {
   context,
-  entry
+  entry: makeEntry()
 };
