@@ -11,8 +11,7 @@ const {
   getDevJsBundle,
   getProdBundles,
   processRenderSsMode,
-  getCspNonce,
-  getBundleJsNameByQuery
+  getCspNonce
 } = require("../utils");
 
 const {
@@ -41,7 +40,6 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
   const RENDER_JS = routeOptions.renderJS;
   const RENDER_SS = routeOptions.serverSideRendering;
   const assets = routeOptions.__internals.assets;
-  const otherAssets = routeOptions.__internals.otherAssets;
   const devBundleBase = routeOptions.__internals.devBundleBase;
   const prodBundleBase = routeOptions.prodBundleBase;
   const chunkSelector = routeOptions.__internals.chunkSelector;
@@ -53,7 +51,6 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
     RENDER_JS,
     RENDER_SS,
     assets,
-    otherAssets,
     devBundleBase,
     prodBundleBase,
     chunkSelector,
@@ -80,8 +77,7 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
     if (WEBPACK_DEV) {
       return data.devJSBundle;
     } else if (data.jsChunk) {
-      const bundleJsName = getBundleJsNameByQuery(data, otherAssets);
-      return `${prodBundleBase}${bundleJsName}`;
+      return `${prodBundleBase}${data.jsChunk.name}`;
     } else {
       return "";
     }
@@ -162,7 +158,6 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
     },
 
     [BODY_BUNDLE_MARKER]: context => {
-      context.user.query = context.user.request.query;
       const js = bundleJs(context.user);
       const jsLink = js ? { src: js } : "";
 

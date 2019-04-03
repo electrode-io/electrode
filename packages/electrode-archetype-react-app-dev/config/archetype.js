@@ -68,11 +68,6 @@ const babelConfigSpec = {
     env: "ENV_TARGET",
     type: "string",
     default: "default"
-  },
-  loaderOptions: {
-    env: "BABEL_LOADER_OPTIONS",
-    type: "json",
-    default: {}
   }
 };
 

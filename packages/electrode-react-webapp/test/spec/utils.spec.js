@@ -3,8 +3,6 @@
 const expect = require("chai").expect;
 const utils = require("../../lib/utils");
 const Path = require("path");
-const Fs = require("fs");
-const sinon = require("sinon");
 
 describe("utils", function() {
   it("getIconStats should return stats w/o html as is", () => {
@@ -221,61 +219,6 @@ describe("utils", function() {
       expect(() => utils.invokeTemplateProcessor(asyncTemplate, options)).to.throw(
         "doesn't export a usable function"
       );
-    });
-  });
-
-  describe("getOtherStats", () => {
-    it("should require stats file if dist/server exists", () => {
-      const fakeExistsSync = sinon.stub(Fs, "existsSync").callsFake(() => true);
-      const fakeReaddirSync = sinon
-        .stub(Fs, "readdirSync")
-        .callsFake(() => [Path.resolve("es5-stats.json"), Path.resolve("es6-stats.json")]);
-      const otherStats = utils.getOtherStats();
-      fakeExistsSync.restore();
-      fakeReaddirSync.restore();
-      const keys = Object.keys(otherStats);
-      expect(keys.includes("es5")).be.true;
-      expect(keys.includes("es6")).be.true;
-    });
-  });
-
-  describe("getOtherAssets", () => {
-    it("should generate otherAssets if otherStats is not empty", () => {
-      const otherStats = {
-        es5: Path.resolve("es5-stats.json"),
-        es6: Path.resolve("es6-stats.json")
-      };
-      const buildArtifacts = ".build";
-      const pluginOptions = { otherStats, buildArtifacts };
-      const otherAssets = utils.getOtherAssets(pluginOptions, utils.loadAssetsFromStats);
-      const keys = Object.keys(otherAssets);
-      expect(keys.includes("es5")).be.true;
-      expect(keys.includes("es6")).be.true;
-    });
-  });
-
-  describe("getBundleJsNameByQuery", () => {
-    it("should get file name ends with main.bundle.js", () => {
-      const data = {
-        jsChunk: { name: "default.main.bundle.js" }
-      };
-      const otherAssets = {
-        es6: { js: [{ name: "es6.main.bundle.js" }] }
-      };
-      const es6 = utils.getBundleJsNameByQuery(
-        Object.assign(data, {
-          query: { __dist: "es6" }
-        }),
-        otherAssets
-      );
-      expect(es6).to.equal(otherAssets.es6.js[0].name);
-      const es5 = utils.getBundleJsNameByQuery(
-        Object.assign(data, {
-          query: { __dist: "es5" }
-        }),
-        otherAssets
-      );
-      expect(es5).to.equal(data.jsChunk.name);
     });
   });
 });

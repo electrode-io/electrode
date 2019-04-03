@@ -8,9 +8,7 @@ const {
   resolveChunkSelector,
   loadAssetsFromStats,
   getStatsPath,
-  invokeTemplateProcessor,
-  getOtherStats,
-  getOtherAssets
+  invokeTemplateProcessor
 } = require("./utils");
 
 function makeRouteHandler(routeOptions) {
@@ -41,8 +39,6 @@ function makeRouteHandler(routeOptions) {
   };
 }
 
-const otherStats = getOtherStats();
-
 const setupOptions = options => {
   const pluginOptionsDefaults = {
     pageTitle: "Untitled Electrode Web Application",
@@ -62,7 +58,6 @@ const setupOptions = options => {
     },
     paths: {},
     stats: "dist/server/stats.json",
-    otherStats,
     iconStats: "dist/server/iconstats.json",
     criticalCSS: "dist/js/critical.css",
     buildArtifacts: ".build",
@@ -79,10 +74,8 @@ const setupOptions = options => {
   const statsPath = getStatsPath(pluginOptions.stats, pluginOptions.buildArtifacts);
 
   const assets = loadAssetsFromStats(statsPath);
-  const otherAssets = getOtherAssets(pluginOptions);
   pluginOptions.__internals = _.defaultsDeep({}, pluginOptions.__internals, {
     assets,
-    otherAssets,
     chunkSelector,
     devBundleBase
   });
