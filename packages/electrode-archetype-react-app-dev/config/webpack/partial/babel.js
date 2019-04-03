@@ -3,21 +3,23 @@
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const AppMode = archetype.AppMode;
 const Path = require("path");
-const Fs = require("fs");
 const _ = require("lodash");
 const logger = require("electrode-archetype-react-app/lib/logger");
 
-const getBabelrcClient = () => {
-  const babelrcClient = JSON.parse(
-    Fs.readFileSync(require.resolve("electrode-archetype-react-app-dev/config/babel/babelrc-client"))
-  );
+const getPresetEnv = () => {
   const { BABEL_ENV, NODE_ENV } = process.env;
   const isProduction = (BABEL_ENV || NODE_ENV) === "production";
-  const { target, envTargets, loaderOptions } = archetype.babel;
+  const { target, envTargets } = archetype.babel;
   const targets = envTargets[target];
-  const presetEnv = ["env", { modules: isProduction ? "auto" : "commonjs", loose: true, targets }]
-  babelrcClient.presets.unshift(presetEnv);
-  return Object.assign(babelrcClient, loaderOptions);
+  const hasOtherTargets =
+    Object.keys(archetype.babel.envTargets)
+      .sort()
+      .join(",") !== "default,node";
+  const useBuiltIns = hasOtherTargets ? { useBuiltIns: "entry", corejs: "2" } : {};
+  return [
+    "env",
+    { modules: isProduction ? "auto" : "commonjs", loose: true, targets, ...useBuiltIns }
+  ];
 };
 
 module.exports = function(options) {
@@ -42,7 +44,7 @@ module.exports = function(options) {
         options: Object.assign(
           { cacheDirectory: Path.resolve(".etmp/babel-loader") },
           options.babel,
-          getBabelrcClient()
+          { presets: [getPresetEnv()] }
         )
       }
     ].filter(_.identity)
