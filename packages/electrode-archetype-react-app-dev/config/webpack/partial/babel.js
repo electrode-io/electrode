@@ -44,7 +44,8 @@ module.exports = function(options) {
         options: Object.assign(
           { cacheDirectory: Path.resolve(".etmp/babel-loader") },
           options.babel,
-          { presets: [getPresetEnv()] }
+          { presets: [getPresetEnv()] },
+          archetype.babel.loaderOptions
         )
       }
     ].filter(_.identity)
