@@ -658,8 +658,8 @@ domain-browser:
   _: 'https://registry.npmjs.org/domain-browser/-/domain-browser-1.2.0.tgz'
 electrode-archetype-webpack-dll:
  _:
-  ../../packages/electrode-archetype-webpack-dll: 1.0.1-fynlocal_h
- 1.0.1-fynlocal_h:
+  ../../packages/electrode-archetype-webpack-dll: 1.0.2-fynlocal_h
+ 1.0.2-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-webpack-dll
@@ -667,8 +667,8 @@ electrode-archetype-webpack-dll:
    optional-require: ^1.0.0
 electrode-archetype-webpack-dll-dev:
  _:
-  ../../packages/electrode-archetype-webpack-dll-dev: 1.0.1-fynlocal_h
- 1.0.1-fynlocal_h:
+  ../../packages/electrode-archetype-webpack-dll-dev: 1.0.2-fynlocal_h
+ 1.0.2-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-webpack-dll-dev

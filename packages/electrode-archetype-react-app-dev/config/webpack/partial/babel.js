@@ -7,8 +7,6 @@ const _ = require("lodash");
 const logger = require("electrode-archetype-react-app/lib/logger");
 
 const getPresetEnv = () => {
-  const { BABEL_ENV, NODE_ENV } = process.env;
-  const isProduction = (BABEL_ENV || NODE_ENV) === "production";
   const { target, envTargets } = archetype.babel;
   const targets = envTargets[target];
   const hasOtherTargets =
@@ -16,10 +14,7 @@ const getPresetEnv = () => {
       .sort()
       .join(",") !== "default,node";
   const useBuiltIns = hasOtherTargets ? { useBuiltIns: "entry", corejs: "2" } : {};
-  return [
-    "env",
-    { modules: isProduction ? "auto" : "commonjs", loose: true, targets, ...useBuiltIns }
-  ];
+  return ["env", { loose: true, targets, ...useBuiltIns }];
 };
 
 module.exports = function(options) {

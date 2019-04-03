@@ -1,5 +1,6 @@
 {
   "presets": [
+    ["env", { "loose": true }],
     "react",
     "flow"
   ],
