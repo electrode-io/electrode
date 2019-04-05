@@ -11,7 +11,7 @@ const hasMultiTargets = require("../util/detect-multi-targets");
 const getBabelrcClient = () => {
   const babelrcClient = JSON.parse(
     Fs.readFileSync(
-      require.resolve("electrode-archetype-react-app-dev/config/babel/babelrc-client-multitargets")
+      require.resolve("../../babel/babelrc-client-multitargets")
     )
   );
   const { target, envTargets } = archetype.babel;
