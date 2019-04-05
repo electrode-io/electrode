@@ -15,21 +15,13 @@ const hasMultiTargets =
 const getBabelrcClient = () => {
   const babelrcClient = JSON.parse(
     Fs.readFileSync(
-      require.resolve("electrode-archetype-react-app-dev/config/babel/babelrc-client")
+      require.resolve("electrode-archetype-react-app-dev/config/babel/babelrc-client-multitargets")
     )
   );
   const { target, envTargets } = archetype.babel;
   const { extendBabelLoader } = archetype.webpack;
   const targets = envTargets[target];
-  babelrcClient.presets = babelrcClient.presets.reduce((prev, preset) => {
-    if (preset === "env") {
-      preset = ["env", { loose: true, targets }];
-    } else if (_.isArray(preset) && preset[0] === "env") {
-      preset[1] = Object.assign({}, preset[1], { targets });
-    }
-    prev.push(preset);
-    return prev;
-  }, []);
+  babelrcClient.presets.unshift(["env", { loose: true, targets }]);
   return Object.assign(babelrcClient, { babelrc: false }, extendBabelLoader);
 };
 
