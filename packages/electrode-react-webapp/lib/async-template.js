@@ -77,7 +77,9 @@ class AsyncTemplate {
     const context = new RenderContext(options, this);
 
     return Promise.each(this._beforeRenders, r => r.beforeRender(context))
-      .then(() => this._renderer.render(context))
+      .then(() => {
+        return this._renderer.render(context);
+      })
       .then(result => {
         return Promise.each(this._afterRenders, r => r.afterRender(context)).then(() => {
           context.result = context.isVoidStop ? context.voidResult : result;

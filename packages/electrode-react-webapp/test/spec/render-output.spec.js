@@ -119,6 +119,11 @@ describe("render-output", function() {
     });
   });
 
+  it("should not munch if no items", done => {
+    const ro = new RenderOutput();
+    ro._output.sendToMunchy(null, done);
+  });
+
   it("should rethrow if no _reject is available in _finish", () => {
     const ro = new RenderOutput();
     ro._reject = undefined;

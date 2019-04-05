@@ -280,5 +280,6 @@ module.exports = {
   invokeTemplateProcessor,
   getOtherStats,
   getOtherAssets,
-  getBundleJsNameByQuery
+  getBundleJsNameByQuery,
+  isReadableStream: x => Boolean(x && x.pipe && x.on && x._readableState)
 };

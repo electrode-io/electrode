@@ -1,6 +1,8 @@
 "use strict";
 
 const RenderOutput = require("./render-output");
+const Munchy = require("munchy");
+const utils = require("./utils");
 
 class RenderContext {
   constructor(options, asyncTemplate) {
@@ -28,6 +30,10 @@ class RenderContext {
   // Note: cannot be used with setOutputTransform
   setOutputSend(send) {
     this.send = send;
+  }
+
+  setMunchyOutput(munchy) {
+    this.munchy = munchy || new Munchy();
   }
 
   // set a callback to take the output result and transform it
@@ -89,12 +95,12 @@ class RenderContext {
     if (res && res.then) {
       return res.then(r => cb(null, r)).catch(cb);
     } else {
-      // it's a string, add to output
-      if (typeof res === "string") {
+      // if it's a string, buffer, or stream, then add to output
+      if (typeof res === "string" || Buffer.isBuffer(res) || utils.isReadableStream(res)) {
         this.output.add(res);
       }
-
       // ignore other return value types
+
       return cb();
     }
   }
