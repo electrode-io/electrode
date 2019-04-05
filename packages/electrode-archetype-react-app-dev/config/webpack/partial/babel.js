@@ -7,6 +7,11 @@ const Fs = require("fs");
 const _ = require("lodash");
 const logger = require("electrode-archetype-react-app/lib/logger");
 
+const hasMultiTargets =
+  Object.keys(archetype.babel.envTargets)
+    .sort()
+    .join(",") !== "default,node";
+
 const getBabelrcClient = () => {
   const babelrcClient = JSON.parse(
     Fs.readFileSync(
@@ -14,6 +19,7 @@ const getBabelrcClient = () => {
     )
   );
   const { target, envTargets } = archetype.babel;
+  const { extendBabelLoader } = archetype.webpack;
   const targets = envTargets[target];
   babelrcClient.presets = babelrcClient.presets.reduce((prev, preset) => {
     if (preset === "env") {
@@ -24,7 +30,7 @@ const getBabelrcClient = () => {
     prev.push(preset);
     return prev;
   }, []);
-  return Object.assign(babelrcClient, { babelrc: false });
+  return Object.assign(babelrcClient, { babelrc: false }, extendBabelLoader);
 };
 
 module.exports = function(options) {
@@ -49,7 +55,7 @@ module.exports = function(options) {
         options: Object.assign(
           { cacheDirectory: Path.resolve(".etmp/babel-loader") },
           options.babel,
-          getBabelrcClient()
+          hasMultiTargets ? getBabelrcClient() : {}
         )
       }
     ].filter(_.identity)
