@@ -2,10 +2,10 @@
 
 const Path = require("path");
 const { babel } = require("electrode-archetype-react-app/config/archetype");
+const hasMultiTargets = require("../util/detect-multi-targets");
 const inspectpack = process.env.INSPECTPACK_DEBUG === "true";
-const { target, envTargets } = babel;
-const hasOtherTargets =
-  Object.keys(envTargets).sort().join(",") !== "default,node";
+const { target } = babel;
+const hasOtherTargets = hasMultiTargets();
 
 module.exports = {
   output: {
