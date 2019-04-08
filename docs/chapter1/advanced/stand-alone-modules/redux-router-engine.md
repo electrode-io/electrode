@@ -297,6 +297,7 @@ Where options could contain the following fields:
   - This can also be a string that refer to the module that contains the routes definition.
 - `componentRedirect` - **optional** boolean to enable the server side component redirect behavior.
 - `withIds` - **optional** boolean to indicate whether to render with react-dataids.
+- `streaming` - **optional** boolean to indicate whether to use render to stream APIs.
 - `stringifyPreloadedState` **optional** callback to stringify `store.getState()` for sending to browser as redux initial state
 - `logError` - **optional** callback to log any error
   - It should take `(req, err)` arguments

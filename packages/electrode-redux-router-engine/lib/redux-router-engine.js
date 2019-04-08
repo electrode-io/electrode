@@ -54,6 +54,8 @@ class ReduxRouterEngine {
       this._renderToString = this.options.renderToString;
     }
 
+    this._streaming = Boolean(options.streaming);
+
     // if options.routes is a string, then treat it as a path to the routes source for require
     if (typeof options.routes === "string") {
       const x = util.resolveModulePath(options.routes);
@@ -252,7 +254,17 @@ class ReduxRouterEngine {
     } else {
       assert(React, `${pkg.name}: can't do SSR because react not found`);
       assert(ReactDomServer, `${pkg.name}: can't do SSR because react-dom not found`);
-      return (withIds ? ReactDomServer.renderToString : ReactDomServer.renderToStaticMarkup)(
+
+      let ssrApi;
+      if (this._streaming) {
+        ssrApi = withIds
+          ? ReactDomServer.renderToNodeStream
+          : ReactDomServer.renderToStaticNodeStream;
+      } else {
+        ssrApi = withIds ? ReactDomServer.renderToString : ReactDomServer.renderToStaticMarkup;
+      }
+
+      return ssrApi(
         React.createElement(
           // server side context to provide request
           ServerContext,
