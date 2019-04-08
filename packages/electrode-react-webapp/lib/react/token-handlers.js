@@ -12,7 +12,8 @@ const {
   getProdBundles,
   processRenderSsMode,
   getCspNonce,
-  getBundleJsNameByQuery
+  getBundleJsNameByQuery,
+  isReadableStream
 } = require("../utils");
 
 const {
@@ -109,8 +110,6 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
 
       const renderJs = RENDER_JS && mode !== "nojs";
 
-      context.setOutputTransform(transformOutput);
-
       context.user = {
         request: options.request,
         response: {
@@ -130,6 +129,12 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
         jsChunk,
         cssChunk
       };
+
+      if (content.useStream || isReadableStream(content.html)) {
+        context.setMunchyOutput();
+      }
+
+      context.setOutputTransform(transformOutput);
 
       return context;
     });

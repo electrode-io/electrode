@@ -5,22 +5,22 @@ const Promise = require("bluebird");
 
 class Output {
   constructor() {
-    this.length = 0;
-    this._items = {};
+    this._items = [];
   }
 
   add(data) {
-    const x = this.length;
-    this._items[x] = data;
-    this.length++;
+    const x = this._items.length;
+    this._items.push(data);
     return x;
   }
 
+  get length() {
+    return this._items.length;
+  }
+
   stringify() {
-    let i;
     let out = "";
-    for (i = 0; i < this.length; ++i) {
-      const x = this._items[i];
+    for (const x of this._items) {
       if (typeof x === "string") {
         out += x;
       } else {
@@ -28,6 +28,15 @@ class Output {
       }
     }
     return out;
+  }
+
+  sendToMunchy(munchy, done) {
+    if (this._items.length > 0) {
+      munchy.once("munched", done);
+      munchy.munch(...this._items);
+    } else {
+      process.nextTick(done);
+    }
   }
 }
 
@@ -71,8 +80,7 @@ class MainOutput extends Output {
   }
 
   _addSpot(data) {
-    const x = this.length;
-    this.add(data);
+    const x = this.add(data);
     this._pending++;
     return x;
   }
@@ -138,6 +146,12 @@ class RenderOutput {
 
   _finish() {
     try {
+      if (this._context.munchy) {
+        // terminates munchy stream
+        this._result = this._context.munchy;
+        this._context.munchy.munch(null);
+      }
+
       if (this._resolve) {
         this._resolve(this._context.transform(this._result, this));
       }
@@ -159,15 +173,26 @@ class RenderOutput {
     }
 
     const output = this._flushQ[0];
+
     if (!output._hasPending()) {
       this._flushQ.shift();
-      const x = output.stringify();
-      if (this._context.send) {
-        this._context.send(x);
+      // handle streaming
+      // if this._context.munchy stream exist, then pipe output to it.
+
+      if (this._context.munchy) {
+        // send output to munchy stream
+        output.sendToMunchy(this._context.munchy, () => this._checkFlushQ());
       } else {
-        this._result += x;
+        const x = output.stringify();
+
+        if (this._context.send) {
+          this._context.send(x);
+        } else {
+          this._result += x;
+        }
+
+        this._checkFlushQ();
       }
-      this._checkFlushQ();
     }
   }
 }

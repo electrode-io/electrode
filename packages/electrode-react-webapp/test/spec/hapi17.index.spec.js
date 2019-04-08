@@ -13,6 +13,7 @@ const ReactDOMServer = require("react-dom/server");
 const React = require("react");
 const Helmet = require("react-helmet").Helmet;
 const { runFinally, asyncVerify } = require("run-verify");
+const Munchy = require("munchy");
 
 const getConfig = () => {
   return {
@@ -297,6 +298,74 @@ describe("hapi 17 electrode-react-webapp", () => {
           expect(res.statusCode).to.equal(200);
           expect(res.result).to.contain("<title>Electrode App</title>");
           expect(res.result).to.contain("<div>Hello Electrode</div>");
+          expect(res.result).to.contain("<script>console.log('Hello');</script>");
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
+  it("should successfully render to static markup with useStream true", () => {
+    assign(mainRoutePathOptions, {
+      content: () =>
+        Promise.resolve({
+          status: 200,
+          html: "<div>Hello Electrode from munchy</div>",
+          prefetch: "console.log('Hello');",
+          useStream: true
+        })
+    });
+
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .then(res => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.result).to.contain("<title>Electrode App</title>");
+          expect(res.result).to.contain("<div>Hello Electrode from munchy</div>");
+          expect(res.result).to.contain("<script>console.log('Hello');</script>");
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
+  it("should successfully render to static markup with content html as stream", () => {
+    const munchy = new Munchy(
+      {},
+      "<div>Hello Electrode from munchy stream</div>",
+      "<p>test 2</p>",
+      null
+    );
+    assign(mainRoutePathOptions, {
+      content: () =>
+        Promise.resolve({
+          status: 200,
+          html: munchy,
+          prefetch: "console.log('Hello');",
+          useStream: true
+        })
+    });
+
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/"
+        })
+        .then(res => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.result).to.contain("<title>Electrode App</title>");
+          expect(res.result).to.contain("<div>Hello Electrode from munchy stream</div>");
           expect(res.result).to.contain("<script>console.log('Hello');</script>");
           stopServer(server);
         })
