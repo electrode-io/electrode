@@ -1,6 +1,8 @@
 "use strict";
 
+const Uglify = require("uglifyjs-webpack-plugin");
 const optimize = require("webpack").optimize;
+const archetype = require("electrode-archetype-react-app/config/archetype");
 
 module.exports = function() {
   // Allow env var to disable minifcation for inspectpack usage.
@@ -20,5 +22,9 @@ module.exports = function() {
     uglifyOpts.comments = /^\**!|^ [0-9]+ $|@preserve|@license/;
   }
 
-  return { plugins: [new optimize.UglifyJsPlugin(uglifyOpts)] };
+  const uglifyPlugin = archetype.babel.hasMultiTargets
+    ? new Uglify({ uglifyOptions: uglifyOpts, extractComments: uglifyOpts.comments })
+    : new optimize.UglifyJsPlugin(uglifyOpts);
+
+  return { plugins: [uglifyPlugin] };
 };
