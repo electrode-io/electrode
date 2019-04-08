@@ -15,6 +15,7 @@ const warnYarn = require("./lib/warn-yarn");
 const devRequire = archetype.devRequire;
 
 const glob = devRequire("glob");
+const scanDir = devRequire("filter-scan-dir");
 const chalk = devRequire("chalk");
 
 if (process.argv[1].indexOf("gulp") >= 0) {
@@ -279,7 +280,8 @@ function startAppServer(options) {
 // - task name starts with . are hidden in help output
 // - when invoking tasks in [], starting name with ? means optional (ie: won't fail if task not found)
 
-function makeTasks() {
+function makeTasks(xclap) {
+  assert(xclap.concurrent, "xclap version must be 0.2.28+");
   const checkFrontendCov = minimum => {
     if (typeof minimum === "string") {
       minimum += ".";
@@ -329,6 +331,25 @@ function makeTasks() {
 
   const AppMode = archetype.AppMode;
 
+  const babelCliIgnore = quote(
+    [`**/*.spec.js`, `**/*.spec.jsx`]
+      .concat(archetype.babel.enableTypeScript && [`**/*.test.ts`, `**/*.test.tsx`])
+      .filter(x => x)
+      .join(",")
+  );
+
+  const babelCliExtensions = quote(
+    [".js", ".jsx"]
+      .concat(archetype.babel.enableTypeScript && [".ts", ".tsx"])
+      .filter(x => x)
+      .join(",")
+  );
+  const babelEnvTargetsArr = Object.keys(archetype.babel.envTargets).filter(k => k !== "node");
+
+  const buildDistDirs = babelEnvTargetsArr
+    .filter(name => name !== "default")
+    .map(name => `dist-${name}`);
+
   let tasks = {
     ".mk-prod-dir": () =>
       createGitIgnoreDir(Path.resolve(archetype.prodDir), "Electrode production dir"),
@@ -346,7 +367,7 @@ function makeTasks() {
       desc: AppMode.isSrc
         ? `Build your app's ${AppMode.src.dir} directory into ${AppMode.lib.dir} for production`
         : "Build your app's client bundle",
-      task: ["build-dist", ".build-lib", ".check.top.level.babelrc"]
+      task: ["build-dist", ".build-lib", ".check.top.level.babelrc", "mv-to-dist"]
     },
 
     //
@@ -396,6 +417,8 @@ function makeTasks() {
       "build-dist:clean-tmp"
     ],
 
+    "mv-to-dist": ["mv-to-dist:clean", "mv-to-dist:mv-dirs", "mv-to-dist:keep-targets"],
+
     "build-dist-dev-static": {
       desc: false,
       task: mkCmd(
@@ -428,13 +451,86 @@ function makeTasks() {
 
     "build-dist-min": {
       dep: [".production-env"],
-      desc: false,
-      task: mkCmd(
-        `webpack --config`,
-        quote(webpackConfig("webpack.config.js")),
-        `--colors`,
-        `--display-error-details`
+      desc: "build dist for production",
+      task: xclap.concurrent(
+        babelEnvTargetsArr.map((name, index) =>
+          xclap.exec(
+            [
+              `webpack --config`,
+              quote(webpackConfig("webpack.config.js")),
+              `--colors --display-error-details`
+            ],
+            {
+              xclap: { delayRunMs: index * 2000 },
+              execOptions: { env: { ENV_TARGET: name } }
+            }
+          )
+        )
       )
+    },
+
+    "mv-to-dist:clean": {
+      desc: `clean static resources within ${buildDistDirs}`,
+      task: () => {
+        buildDistDirs.forEach(dir => {
+          // clean static resources within `dist-X` built by user specified env targets
+          // and leave [.js, .map, .json] files only
+          const removedFiles = scanDir.sync({
+            dir: Path.resolve(dir),
+            includeRoot: true,
+            ignoreExt: [".js", ".map", ".json"]
+          });
+          shell.rm("-rf", ...removedFiles);
+        });
+        return;
+      }
+    },
+
+    "mv-to-dist:mv-dirs": {
+      desc: `move ${buildDistDirs} to dist`,
+      task: () => {
+        buildDistDirs.forEach(dir => {
+          scanDir
+            .sync({
+              dir,
+              includeRoot: true,
+              filterExt: [".js", ".json", ".map"]
+              // the regex above matches all the sw-registration.js, sw-registration.js.map,
+              // main.bundle.js and main.bundle.js.map and stats.json
+            })
+            .forEach(file => {
+              if (file.endsWith(".js")) {
+                shell.cp("-r", file, "dist/js");
+              } else if (file.endsWith(".map")) {
+                shell.cp("-r", file, "dist/map");
+              } else {
+                shell.cp("-r", file, `dist/server/${dir.split("-")[1]}-${Path.basename(file)}`);
+              }
+            });
+        });
+        return;
+      }
+    },
+
+    "mv-to-dist:keep-targets": {
+      desc: `write each targets to respective isomorphic-assets.json`,
+      task: () => {
+        buildDistDirs.forEach(dir => {
+          const isomorphicPath = Path.resolve(dir, "isomorphic-assets.json"); // add `targets` field to `dist-X/isomorphic-assets.json`
+          if (Fs.existsSync(isomorphicPath)) {
+            Fs.readFile(isomorphicPath, { encoding: "utf8" }, (err, data) => {
+              if (err) throw err;
+              const assetsJson = JSON.parse(data);
+              const { envTargets } = archetype.babel;
+              assetsJson.targets = envTargets[dir.split("-")[1]];
+              Fs.writeFile(isomorphicPath, JSON.stringify(assetsJson, null, 2), err => {
+                if (err) throw err;
+              });
+            });
+          }
+        });
+        return;
+      }
     },
 
     "build-dist:clean-tmp": {
@@ -470,18 +566,30 @@ Individual .babelrc files were generated for you in src/client and src/server
     "build-lib:client": {
       desc: false,
       dep: [".clean.lib:client", ".mk.lib.client.dir", ".build.client.babelrc"],
-      task: mkCmd(
-        `babel`,
-        `--source-maps=inline --copy-files --out-dir ${AppMode.lib.client}`,
-        `${AppMode.src.client}`,
-        `--ignore`,
-        [
-          `"${AppMode.src.client}/**/*.spec.js"`,
-          `"${AppMode.src.client}/**/*.spec.jsx"`,
-          `"${AppMode.src.client}/**/*.test.js"`,
-          `"${AppMode.src.client}/**/*.test.jsx"`
-        ].join(",")
-      )
+      task: () => {
+        const dirs = AppMode.hasSubApps
+          ? []
+              .concat(
+                scanDir.sync({
+                  dir: AppMode.src.dir,
+                  includeDir: true,
+                  grouping: true,
+                  filterDir: x => !x.startsWith("server") && "dirs",
+                  filter: () => false
+                }).dirs
+              )
+              .filter(x => x)
+          : [AppMode.client];
+        return dirs.map(x =>
+          mkCmd(
+            `~$babel ${Path.posix.join(AppMode.src.dir, x)}`,
+            `--out-dir=${Path.posix.join(AppMode.lib.dir, x)}`,
+            `--extensions=${babelCliExtensions}`,
+            `--source-maps=inline --copy-files`,
+            `--verbose --ignore=${babelCliIgnore}`
+          )
+        );
+      }
     },
 
     ".clean.lib:server": () => shell.rm("-rf", AppMode.lib.server),
@@ -525,7 +633,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     "check-dev": ["lint", "test-dev"],
 
     clean: [".clean.dist", ".clean.lib", ".clean.prod", ".clean.etmp", ".clean.dll"],
-    ".clean.dist": () => shell.rm("-rf", "dist"),
+    ".clean.dist": () => shell.rm("-rf", "dist", ...buildDistDirs),
     ".clean.lib": () => undefined, // to be updated below for src mode
     ".clean.prod": () => shell.rm("-rf", archetype.prodDir),
     ".clean.etmp": () => shell.rm("-rf", eTmpDir),
@@ -926,6 +1034,6 @@ module.exports = function(xclap) {
   createElectrodeTmpDir();
   xclap = xclap || requireAt(process.cwd())("xclap") || devRequire("xclap");
   process.env.FORCE_COLOR = "true"; // force color for chalk
-  xclap.load("electrode", makeTasks());
+  xclap.load("electrode", makeTasks(xclap));
   warnYarn();
 };

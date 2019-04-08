@@ -1,0 +1,93 @@
+{
+  "presets": [
+    "react",
+    "flow"
+  ],
+  "plugins": [
+    "react-hot-loader/babel",
+    "check-es2015-constants",
+    [
+      "transform-regenerator",
+      {
+        "async": false,
+        "asyncGenerators": false
+      }
+    ],
+    "babel-plugin-transform-object-rest-spread",
+    [
+      "babel-plugin-i18n-id-hashing",
+      {
+        "varsContainingMessages": [
+          "defaultMessages",
+          "translations"
+        ]
+      }
+    ],
+    [
+      "babel-plugin-react-intl",
+      {
+        "messagesDir": "./tmp/messages/",
+        "enforceDescriptions": true
+      }
+    ],
+    "transform-node-env-inline",
+    "lodash",
+    "transform-runtime",
+    "transform-flow-strip-types"
+  ],
+  "env": {
+    "test": {
+      "plugins": ["dynamic-import-node"]
+    },
+    "css-module-dev": {
+      "plugins": [
+        ["babel-plugin-react-css-modules", {
+          "context": "./src",
+          "generateScopedName": "[name]__[local]___[hash:base64:5]",
+          "filetypes": {
+            ".scss": {
+              "syntax": "postcss-scss",
+              "plugins": [
+                "postcss-nested"
+              ]
+            },
+            ".styl": {
+              "syntax": "sugarss"
+            }
+          }
+        }]
+      ]
+    },
+    "css-module-prod" : {
+      "plugins": [
+        "babel-plugin-transform-react-constant-elements",
+        ["transform-react-remove-prop-types", {
+           "removeImport": true
+        }],
+        ["babel-plugin-react-css-modules", {
+          "context": "./src",
+          "generateScopedName": "[hash:base64:5]",
+          "filetypes": {
+            ".scss": {
+              "syntax": "postcss-scss",
+              "plugins": [
+                "postcss-nested"
+              ]
+            },
+            ".styl": {
+              "syntax": "sugarss"
+            }
+          }
+        }]
+      ]
+    },
+    "production": {
+      "plugins": [
+        "babel-plugin-transform-react-constant-elements",
+        ["transform-react-remove-prop-types", {
+           "removeImport": true
+        }]
+      ]
+    }
+  }
+}

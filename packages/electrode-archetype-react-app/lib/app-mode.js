@@ -55,6 +55,8 @@ function makeAppMode(prodDir, reactLib) {
       hasEnv: () => {
         return !!process.env[envKey];
       },
+      client,
+      server,
       src: {
         dir: srcDir,
         client: Path.join(srcDir, client),
