@@ -15,7 +15,6 @@ const cssLoader = require.resolve("css-loader");
 const styleLoader = require.resolve("style-loader");
 const stylusLoader = require.resolve("stylus-relative-loader");
 const postcssLoader = require.resolve("postcss-loader");
-const hasMultiTargets = require("../util/detect-multi-targets");
 
 const getSassLoader = () => {
   if (archetype.options.sass) {
@@ -105,7 +104,7 @@ module.exports = function() {
   return {
     module: { rules },
     plugins: [
-      new ExtractTextPlugin({ filename: hasMultiTargets() ? "[name].style.css" : "[name].style.[hash].css" }),
+      new ExtractTextPlugin({ filename: archetype.babel.hasMultiTargets ? "[name].style.css" : "[name].style.[hash].css" }),
       process.env.NODE_ENV === "production" &&
         new OptimizeCssAssetsPlugin(archetype.webpack.optimizeCssOptions),
       /*

@@ -6,7 +6,6 @@ const Path = require("path");
 const Fs = require("fs");
 const _ = require("lodash");
 const logger = require("electrode-archetype-react-app/lib/logger");
-const hasMultiTargets = require("../util/detect-multi-targets");
 
 const getBabelrcClient = () => {
   const babelrcClient = JSON.parse(
@@ -43,7 +42,7 @@ module.exports = function(options) {
         options: Object.assign(
           { cacheDirectory: Path.resolve(".etmp/babel-loader") },
           options.babel,
-          hasMultiTargets() ? getBabelrcClient() : {}
+          archetype.babel.hasMultiTargets ? getBabelrcClient() : {}
         )
       }
     ].filter(_.identity)
