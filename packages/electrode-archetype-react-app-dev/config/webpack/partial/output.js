@@ -13,9 +13,9 @@ const hasOtherTargets =
 const getOutputFilename = () => {
   let filename = "[name].bundle.[hash].js";
 
-  if (archetype.AppMode.hasSubApps) {
+  if (AppMode.hasSubApps) {
     filename = "[name].bundle.js";
-  } else if (archetype.babel.hasOtherTargets) {
+  } else if (hasOtherTargets) {
     filename = `${target}.[name].bundle.js`;
   }
 

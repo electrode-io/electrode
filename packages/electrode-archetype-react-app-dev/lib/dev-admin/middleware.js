@@ -206,9 +206,9 @@ class Middleware {
 
     const waitIsoLock = cb => {
       if (Fs.existsSync(isoLockfile) || !Fs.existsSync(isoConfigFile)) {
-        setTimeout(() => waitIsoLock(cb), 50);
+        return setTimeout(() => waitIsoLock(cb), 50);
       } else {
-        cb();
+        return cb();
       }
     };
 
