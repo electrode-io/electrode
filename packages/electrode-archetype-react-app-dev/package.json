@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-app-dev",
-  "version": "5.4.24",
+  "version": "5.5.0",
   "description": "Electrode NodeJS/React Application Archetype (Development)",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -181,5 +181,8 @@
     "functions": 100,
     "lines": 100,
     "cache": true
+  },
+  "publishConfig": {
+    "tag": "ver5"
   }
 }
