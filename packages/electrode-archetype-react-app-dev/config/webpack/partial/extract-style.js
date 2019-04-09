@@ -85,10 +85,10 @@ module.exports = function() {
   );
 
   /*
-  *** cssModuleStylusSupport flag is about to deprecate. ***
-  * If you want to enable stylus with CSS-Modules + CSS-Next,
-  * Please use stylus as your style and enable cssModuleSupport flag instead.
-  */
+   *** cssModuleStylusSupport flag is about to deprecate. ***
+   * If you want to enable stylus with CSS-Modules + CSS-Next,
+   * Please use stylus as your style and enable cssModuleSupport flag instead.
+   */
   if (cssModuleStylusSupport) {
     rules.push({
       _name: "extract-css-stylus",
@@ -104,7 +104,9 @@ module.exports = function() {
   return {
     module: { rules },
     plugins: [
-      new ExtractTextPlugin({ filename: archetype.babel.hasMultiTargets ? "[name].style.css" : "[name].style.[hash].css" }),
+      new ExtractTextPlugin({
+        filename: archetype.babel.hasMultiTargets ? "[name].style.css" : "[name].style.[hash].css"
+      }),
       process.env.NODE_ENV === "production" &&
         new OptimizeCssAssetsPlugin(archetype.webpack.optimizeCssOptions),
       /*
