@@ -1,3 +1,24 @@
+# 4/9/2019
+
+- electrode-archetype-react-app: generate multiple bundles by babel env targets
+
+## Packages
+
+-   `electrode-archetype-react-app@5.5.0` `(5.4.24 => 5.5.0)`
+-   `electrode-archetype-react-app-dev@5.5.0` `(5.4.24 => 5.5.0)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [minor] generate multiple bundles by env targets for archetype@5 ([#1197](https://github.com/electrode-io/electrode/pull/1197)) [commit](http://github.com/electrode-io/electrode/commit/a5cf2e625bcd5ea575c7336131ef1d2f2a803e94)
+    -   [PATCH] define extendBabelLoader in default config ([#1180](https://github.com/electrode-io/electrode/pull/1180)) [commit](http://github.com/electrode-io/electrode/commit/be89b9c2b0837ed92b1c55c071355386eac9a852)
+    -   [chore] fix lint error [commit](http://github.com/electrode-io/electrode/commit/c1b9f0484cdeb7a94a2c70715c5397e469402b60)
+
+-   `samples/react-vendor-dll`
+
+    -   [minor] generate multiple bundles by env targets for archetype@5 ([#1197](https://github.com/electrode-io/electrode/pull/1197)) [commit](http://github.com/electrode-io/electrode/commit/a5cf2e625bcd5ea575c7336131ef1d2f2a803e94)
+
 # 12/11/2018
 
 ## Packages
