@@ -3,7 +3,6 @@
 const Uglify = require("uglifyjs-webpack-plugin");
 const optimize = require("webpack").optimize;
 const archetype = require("electrode-archetype-react-app/config/archetype");
-const { hasMultiTargets } = archetype.babel;
 
 module.exports = function() {
   // Allow env var to disable minifcation for inspectpack usage.
@@ -11,7 +10,7 @@ module.exports = function() {
     return {};
   }
 
-  const uglifyOpts = hasMultiTargets
+  const uglifyOpts = archetype.babel.hasMultiTargets
     ? {
         sourceMap: true,
         uglifyOptions: {
@@ -29,11 +28,11 @@ module.exports = function() {
 
   // preserve module ID comment in bundle output for optimizeStats
   if (process.env.OPTIMIZE_STATS === "true") {
-    const comments = hasMultiTargets ? "extractComments" : "comments";
+    const comments = archetype.babel.hasMultiTargets ? "extractComments" : "comments";
     uglifyOpts[comments] = /^\**!|^ [0-9]+ $|@preserve|@license/;
   }
 
-  const uglifyPlugin = hasMultiTargets
+  const uglifyPlugin = archetype.babel.hasMultiTargets
     ? new Uglify(uglifyOpts)
     : new optimize.UglifyJsPlugin(uglifyOpts);
 

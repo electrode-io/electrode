@@ -34,11 +34,7 @@ function appEntry() {
 
 function shouldPolyfill() {
   if (archetype.webpack.enableBabelPolyfill) {
-    const hasMultipleTarget =
-      Object.keys(archetype.babel.envTargets)
-        .sort()
-        .join(",") !== "default,node";
-    if (hasMultipleTarget) {
+    if (archetype.babel.hasMultipleTarget) {
       return archetype.babel.target === "default";
       // for all other targets, disable polyfill
     } else {
