@@ -1,3 +1,18 @@
+# 4/10/2019
+
+## Packages
+
+-   `electrode-archetype-react-app@5.5.1` `(5.5.0 => 5.5.1)`
+-   `electrode-archetype-react-app-dev@5.5.1` `(5.5.0 => 5.5.1)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   fix extendBabelLoader ([#1205](https://github.com/electrode-io/electrode/pull/1205)) [commit](http://github.com/electrode-io/electrode/commit/8212bd193ade725e11b5f56fe901984477985283)
+    -   fix entry format with enableBabelPolyfill as true for archetype@5 ([#1200](https://github.com/electrode-io/electrode/pull/1200)) [commit](http://github.com/electrode-io/electrode/commit/8c6d2ba0e760a311581ec237aa33e56858bdfc08)
+    -   add useBuiltIns in babel env ([#1207](https://github.com/electrode-io/electrode/pull/1207)) [commit](http://github.com/electrode-io/electrode/commit/18b1e56736c4eba4cdfa6aaf18248b34e5e6489d)
+
 # 4/9/2019
 
 - electrode-archetype-react-app: generate multiple bundles by babel env targets
