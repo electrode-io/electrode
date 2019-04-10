@@ -3,7 +3,6 @@
 const Path = require("path");
 const optionalRequire = require("optional-require")(require);
 const userConfig = Object.assign({}, optionalRequire(Path.resolve("archetype/config")));
-const { AppMode } = require("electrode-archetype-react-app/config/archetype");
 const { merge } = require("lodash");
 
 const devPkg = require("../package.json");
@@ -66,18 +65,9 @@ const babelConfigSpec = {
     type: "string",
     default: "default"
   },
-  extendLoaderOptions: {
+  extendLoader: {
     type: "json",
     default: {}
-  },
-  exclude: {
-    type: "function",
-    default: () => x => {
-      if (x.indexOf("node_modules") >= 0) return true;
-      const clientVendor = Path.join(AppMode.src.client, "vendor/");
-      if (x.indexOf(clientVendor) >= 0) return true;
-      return false;
-    }
   }
 };
 

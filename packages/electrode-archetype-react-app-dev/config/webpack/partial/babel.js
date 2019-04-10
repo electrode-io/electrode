@@ -6,18 +6,22 @@ const Path = require("path");
 const Fs = require("fs");
 const _ = require("lodash");
 const logger = require("electrode-archetype-react-app/lib/logger");
+const { options: babelLoaderOptions = {}, ...rest } = archetype.babel.extendLoader;
 
 const getBabelrcClient = () => {
   const babelrcClient = JSON.parse(
     Fs.readFileSync(require.resolve("../../babel/babelrc-client-multitargets"))
   );
   const { target, envTargets } = archetype.babel;
-  const { presets, plugins, ...rest } = archetype.babel.extendLoaderOptions;
+  const { presets, plugins, ...restOptions } = babelLoaderOptions;
   const targets = envTargets[target];
-  babelrcClient.presets.unshift(["env", { loose: true, targets, useBuiltIns: "entry", corejs: "2" }]);
+  babelrcClient.presets.unshift([
+    "env",
+    { loose: true, targets, useBuiltIns: "entry", corejs: "2" }
+  ]);
   babelrcClient.presets = Object.assign(babelrcClient.presets, presets);
   babelrcClient.plugins = Object.assign(babelrcClient.plugins, plugins);
-  return Object.assign(babelrcClient, { babelrc: false }, rest);
+  return Object.assign(babelrcClient, { babelrc: false }, restOptions);
 };
 
 module.exports = function(options) {
@@ -25,10 +29,17 @@ module.exports = function(options) {
     require("react-hot-loader/patch");
   }
 
+  const clientVendor = Path.join(AppMode.src.client, "vendor/");
+  const babelExclude = x => {
+    if (x.indexOf("node_modules") >= 0) return true;
+    if (x.indexOf(clientVendor) >= 0) return true;
+    return false;
+  };
+
   const babelLoader = {
     _name: "babel",
     test: /\.jsx?$/,
-    exclude: archetype.babel.exclude,
+    exclude: babelExclude,
     use: [
       {
         loader: "babel-loader",
@@ -48,7 +59,7 @@ module.exports = function(options) {
 
   return {
     module: {
-      rules: [_.assign({}, babelLoader)]
+      rules: [_.assign({}, babelLoader, archetype.babel.hasMultiTargets ? rest : {})]
     }
   };
 };
