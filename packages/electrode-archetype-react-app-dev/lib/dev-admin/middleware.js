@@ -196,8 +196,20 @@ class Middleware {
     this.reporterUrl = urlJoin(this.devBaseUrl, "/reporter");
     this.dllDevUrl = urlJoin(this.devBaseUrl, "/dll");
 
+    const ISO_LOADER_CONFIG = ".isomorphic-loader-config.json";
+    const isoLockfile = Path.resolve(`${ISO_LOADER_CONFIG}.lock`);
+    const isoConfigFile = Path.resolve(ISO_LOADER_CONFIG);
+
     const loadIsomorphicConfig = () => {
-      return JSON.parse(Fs.readFileSync(Path.resolve(".isomorphic-loader-config.json")));
+      return JSON.parse(Fs.readFileSync(isoConfigFile));
+    };
+
+    const waitIsoLock = cb => {
+      if (Fs.existsSync(isoLockfile) || !Fs.existsSync(isoConfigFile)) {
+        return setTimeout(() => waitIsoLock(cb), 50);
+      } else {
+        return cb();
+      }
     };
 
     const transferIsomorphicAssets = (fileSystem, cb) => {
@@ -278,7 +290,7 @@ class Middleware {
           });
         };
 
-        transferIsomorphicAssets(this.devMiddleware.fileSystem, update);
+        waitIsoLock(() => transferIsomorphicAssets(this.devMiddleware.fileSystem, update));
       } else {
         process.send({
           name: "webpack-report",
