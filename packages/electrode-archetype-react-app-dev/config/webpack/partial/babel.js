@@ -9,15 +9,15 @@ const logger = require("electrode-archetype-react-app/lib/logger");
 
 const getBabelrcClient = () => {
   const babelrcClient = JSON.parse(
-    Fs.readFileSync(
-      require.resolve("../../babel/babelrc-client-multitargets")
-    )
+    Fs.readFileSync(require.resolve("../../babel/babelrc-client-multitargets"))
   );
   const { target, envTargets } = archetype.babel;
-  const { extendBabelLoader } = archetype.webpack;
+  const { presets, plugins, ...rest } = archetype.webpack.extendBabelLoader;
   const targets = envTargets[target];
   babelrcClient.presets.unshift(["env", { loose: true, targets }]);
-  return Object.assign(babelrcClient, { babelrc: false }, extendBabelLoader);
+  babelrcClient.presets = Object.assign(babelrcClient.presets, presets);
+  babelrcClient.plugins = Object.assign(babelrcClient.plugins, plugins);
+  return Object.assign(babelrcClient, { babelrc: false }, rest);
 };
 
 module.exports = function(options) {
@@ -55,7 +55,7 @@ module.exports = function(options) {
 
   return {
     module: {
-      rules: [_.assign({}, babelLoader, archetype.webpack.extendBabelLoader)]
+      rules: [_.assign({}, babelLoader)]
     }
   };
 };
