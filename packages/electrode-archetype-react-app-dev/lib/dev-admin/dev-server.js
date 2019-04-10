@@ -9,6 +9,14 @@ const electrodeServer = optionalRequire("electrode-server");
 const Koa = optionalRequire("koa");
 const express = optionalRequire("express");
 
+//
+// indicate that app is running in webpack dev mode
+// also set by electrode-archetype-react-app/arch-clap.js
+//
+if (process.env.WEBPACK_DEV === undefined) {
+  process.env.WEBPACK_DEV = true;
+}
+
 process.env.WEBPACK_DEV_MIDDLEWARE = true;
 
 if (electrodeServer) {

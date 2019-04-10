@@ -23,7 +23,7 @@ const getOutputFilename = () => {
 };
 
 const getOutputPath = () => {
-  if (process.env.WEBPACK_DEV_MIDDLEWARE === "true") {
+  if (process.env.WEBPACK_DEV === "true") {
     return "/"; // simulate the behavior of webpack-dev-server, which sets output path to /
   } else {
     return Path.resolve(target !== "default" ? `dist-${target}` : "dist", "js");
