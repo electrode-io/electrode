@@ -14,7 +14,7 @@ const getBabelrcClient = () => {
   const { target, envTargets } = archetype.babel;
   const { presets, plugins, ...rest } = archetype.webpack.extendBabelLoader;
   const targets = envTargets[target];
-  babelrcClient.presets.unshift(["env", { loose: true, targets }]);
+  babelrcClient.presets.unshift(["env", { loose: true, targets, useBuiltIns: "entry", corejs: "2" }]);
   babelrcClient.presets = Object.assign(babelrcClient.presets, presets);
   babelrcClient.plugins = Object.assign(babelrcClient.plugins, plugins);
   return Object.assign(babelrcClient, { babelrc: false }, rest);
