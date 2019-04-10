@@ -12,7 +12,7 @@ const getBabelrcClient = () => {
     Fs.readFileSync(require.resolve("../../babel/babelrc-client-multitargets"))
   );
   const { target, envTargets } = archetype.babel;
-  const { presets, plugins, ...rest } = archetype.webpack.extendBabelLoader;
+  const { presets, plugins, ...rest } = archetype.babel.extendLoaderOptions;
   const targets = envTargets[target];
   babelrcClient.presets.unshift(["env", { loose: true, targets, useBuiltIns: "entry", corejs: "2" }]);
   babelrcClient.presets = Object.assign(babelrcClient.presets, presets);
@@ -25,17 +25,10 @@ module.exports = function(options) {
     require("react-hot-loader/patch");
   }
 
-  const clientVendor = Path.join(AppMode.src.client, "vendor/");
-  const babelExclude = x => {
-    if (x.indexOf("node_modules") >= 0) return true;
-    if (x.indexOf(clientVendor) >= 0) return true;
-    return false;
-  };
-
   const babelLoader = {
     _name: "babel",
     test: /\.jsx?$/,
-    exclude: babelExclude,
+    exclude: archetype.babel.exclude,
     use: [
       {
         loader: "babel-loader",

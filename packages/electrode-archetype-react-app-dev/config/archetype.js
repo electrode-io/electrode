@@ -3,6 +3,7 @@
 const Path = require("path");
 const optionalRequire = require("optional-require")(require);
 const userConfig = Object.assign({}, optionalRequire(Path.resolve("archetype/config")));
+const { AppMode } = require("electrode-archetype-react-app/config/archetype");
 const { merge } = require("lodash");
 
 const devPkg = require("../package.json");
@@ -45,10 +46,6 @@ const webpackConfigSpec = {
     env: "ELECTRODE_LOAD_DLLS",
     type: "json",
     default: {}
-  },
-  extendBabelLoader: {
-    type: "json",
-    default: {}
   }
 };
 
@@ -68,6 +65,19 @@ const babelConfigSpec = {
     env: "ENV_TARGET",
     type: "string",
     default: "default"
+  },
+  extendLoaderOptions: {
+    type: "json",
+    default: {}
+  },
+  exclude: {
+    type: "function",
+    default: () => x => {
+      if (x.indexOf("node_modules") >= 0) return true;
+      const clientVendor = Path.join(AppMode.src.client, "vendor/");
+      if (x.indexOf(clientVendor) >= 0) return true;
+      return false;
+    }
   }
 };
 
