@@ -31,11 +31,11 @@ module.exports = function(options) {
       }
     ].filter(identity)
   };
-  const { options, ...rest } = archetype.babel.extendLoader;
+  const { options: babelLoaderOptions, ...rest } = archetype.babel.extendLoader;
 
   return {
     module: {
-      rules: [assign({}, babelLoaderConfig, rest)]
+      rules: [assign({}, babelLoaderConfig, archetype.babel.hasMultiTargets? rest : {})]
     }
   };
 };
