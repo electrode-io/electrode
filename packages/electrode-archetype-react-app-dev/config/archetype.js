@@ -81,8 +81,8 @@ const babelConfigSpec = {
     type: "string",
     default: "default"
   },
+  // `extendLoader` is used to override `babel-loader` only when `hasMultiTargets=true`
   extendLoader: {
-    // use when `hasMultiTargets`
     type: "json",
     default: {}
   }
