@@ -11,7 +11,7 @@ const getOutputFilename = () => {
 
   if (AppMode.hasSubApps) {
     filename = "[name].bundle.js";
-  } else if (archetype.babel.hasMultiTargets) {
+  } else if (babel.hasMultiTargets) {
     filename = `${babel.target}.[name].bundle.js`;
   }
 
@@ -31,7 +31,7 @@ module.exports = {
     path: getOutputPath(),
     pathinfo: inspectpack, // Enable path information for inspectpack
     publicPath: "/js/",
-    chunkFilename: archetype.babel.hasMultiTargets ? `${babel.target}.[hash].[name].js` : "[hash].[name].js",
+    chunkFilename: babel.hasMultiTargets ? `${babel.target}.[hash].[name].js` : "[hash].[name].js",
     filename: getOutputFilename()
   }
 };

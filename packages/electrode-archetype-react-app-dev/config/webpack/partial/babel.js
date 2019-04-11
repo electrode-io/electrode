@@ -32,8 +32,6 @@ module.exports = function(options) {
     ].filter(identity)
   };
 
-  delete archetype.babel.extendLoader.options;
-
   return {
     module: {
       rules: [
