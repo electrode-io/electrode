@@ -82,6 +82,7 @@ const babelConfigSpec = {
     default: "default"
   },
   extendLoader: {
+    // use when `hasMultiTargets`
     type: "json",
     default: {}
   }
