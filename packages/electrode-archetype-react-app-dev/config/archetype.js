@@ -45,10 +45,6 @@ const webpackConfigSpec = {
     env: "ELECTRODE_LOAD_DLLS",
     type: "json",
     default: {}
-  },
-  extendBabelLoader: {
-    type: "json",
-    default: {}
   }
 };
 
@@ -68,6 +64,11 @@ const babelConfigSpec = {
     env: "ENV_TARGET",
     type: "string",
     default: "default"
+  },
+  // `extendLoader` is used to override `babel-loader` only when `hasMultiTargets=true`
+  extendLoader: {
+    type: "json",
+    default: {}
   }
 };
 

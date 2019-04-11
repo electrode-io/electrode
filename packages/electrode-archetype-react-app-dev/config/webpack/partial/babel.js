@@ -7,20 +7,25 @@ const Fs = require("fs");
 const _ = require("lodash");
 const logger = require("electrode-archetype-react-app/lib/logger");
 
-const getBabelrcClient = () => {
-  const babelrcClient = JSON.parse(
-    Fs.readFileSync(require.resolve("../../babel/babelrc-client-multitargets"))
-  );
-  const { target, envTargets } = archetype.babel;
-  const { presets, plugins, ...rest } = archetype.webpack.extendBabelLoader;
-  const targets = envTargets[target];
-  babelrcClient.presets.unshift(["env", { loose: true, targets, useBuiltIns: "entry", corejs: "2" }]);
-  babelrcClient.presets = Object.assign(babelrcClient.presets, presets);
-  babelrcClient.plugins = Object.assign(babelrcClient.plugins, plugins);
-  return Object.assign(babelrcClient, { babelrc: false }, rest);
-};
-
 module.exports = function(options) {
+  const { options: babelLoaderOptions = {}, ...rest } = archetype.babel.extendLoader;
+
+  const getBabelrcClient = () => {
+    const babelrcClient = JSON.parse(
+      Fs.readFileSync(require.resolve("../../babel/babelrc-client-multitargets"))
+    );
+    const { target, envTargets } = archetype.babel;
+    const { presets, plugins, ...restOptions } = babelLoaderOptions;
+    const targets = envTargets[target];
+    babelrcClient.presets.unshift([
+      "env",
+      { loose: true, targets, useBuiltIns: "entry", corejs: "2" }
+    ]);
+    babelrcClient.presets = Object.assign(babelrcClient.presets, presets);
+    babelrcClient.plugins = Object.assign(babelrcClient.plugins, plugins);
+    return Object.assign(babelrcClient, { babelrc: false }, restOptions);
+  };
+
   if (options.HotModuleReload) {
     require("react-hot-loader/patch");
   }
@@ -55,7 +60,7 @@ module.exports = function(options) {
 
   return {
     module: {
-      rules: [_.assign({}, babelLoader)]
+      rules: [_.assign({}, babelLoader, archetype.babel.hasMultiTargets ? rest : {})]
     }
   };
 };
