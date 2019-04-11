@@ -31,10 +31,11 @@ module.exports = function(options) {
       }
     ].filter(identity)
   };
+  const { options, ...rest } = archetype.babel.extendLoader;
 
   return {
     module: {
-      rules: [assign({}, babelLoaderConfig, archetype.webpack.extendBabelLoader)]
+      rules: [assign({}, babelLoaderConfig, rest)]
     }
   };
 };

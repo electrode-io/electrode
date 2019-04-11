@@ -80,6 +80,10 @@ const babelConfigSpec = {
     env: "ENV_TARGET",
     type: "string",
     default: "default"
+  },
+  extendLoader: {
+    type: "json",
+    default: {}
   }
 };
 
