@@ -140,7 +140,11 @@ class RenderOutput {
   flush() {
     if (this._output.length > 0) {
       this._flushQ.push(this._output);
-      this._output = new MainOutput();
+      if (!this._end) {
+        this._output = new MainOutput();
+      } else {
+        this._output = undefined;
+      }
     }
 
     this._checkFlushQ();
@@ -153,6 +157,7 @@ class RenderOutput {
       this._resolve = resolve;
       this._reject = reject;
     });
+    this._end = true;
     this.flush();
     return promise;
   }
@@ -181,7 +186,9 @@ class RenderOutput {
 
   _checkFlushQ() {
     if (this._flushQ.length < 1) {
-      this._finish();
+      if (this._end) {
+        this._finish();
+      }
       return;
     }
 

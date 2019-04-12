@@ -73,6 +73,7 @@
     "react-dom": "^16.0.0",
     "react-helmet": "^5.2.0",
     "run-verify": "^1.0.2",
+    "stream-to-array": "^2.3.0",
     "superagent": "^1.8.5",
     "uglify-js": "^2.6.2",
     "xclap": "^0.2.0",

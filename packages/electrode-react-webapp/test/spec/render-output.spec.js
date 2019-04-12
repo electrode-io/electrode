@@ -1,6 +1,9 @@
 "use strict";
 
 const RenderOutput = require("../../lib/render-output");
+const Munchy = require("munchy");
+const streamToArray = require("stream-to-array");
+
 const expect = require("chai").expect;
 
 describe("render-output", function() {
@@ -91,6 +94,56 @@ describe("render-output", function() {
     expect(text).to.equal(
       "hello worldfoo barspot1 123spot1 abc789after spot1baz1spot2 123456closing"
     );
+  });
+
+  it("should handle multiple buffer and stream data", done => {
+    const context = {
+      munchy: new Munchy(),
+      transform: a => a
+    };
+
+    streamToArray(context.munchy, (err, arr) => {
+      if (err) return done(err);
+      try {
+        expect(arr.map(x => x.toString())).to.deep.equal([
+          "hello world",
+          "foo bar",
+          "spot1 123",
+          "spot1 abc",
+          "spot1 a stream",
+          "789",
+          "after spot1",
+          "baz1",
+          "spot2 123",
+          "spot2 456",
+          "spot2 a buffer",
+          "closing"
+        ]);
+        return done();
+      } catch (err2) {
+        return done(err2);
+      }
+    });
+
+    const ro = new RenderOutput(context);
+    ro.add("hello world");
+    ro.add("foo bar");
+    const spot1 = ro.reserve();
+    ro.add("after spot1");
+    spot1.add("spot1 123");
+    ro.add("baz1");
+    ro.flush();
+    const spot2 = ro.reserve();
+    spot2.add("spot2 123");
+    spot2.add("spot2 456");
+    spot2.add(Buffer.from("spot2 a buffer"));
+    spot2.close();
+    spot1.add("spot1 abc");
+    spot1.add(new Munchy({}, "spot1 a stream", null));
+    spot1.add("789");
+    ro.add("closing");
+    spot1.close();
+    ro.close();
   });
 
   it("should delegate result to a promise w/o context and send", () => {
