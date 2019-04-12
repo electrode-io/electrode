@@ -1,3 +1,16 @@
+# 4/12/2019
+
+## Packages
+
+-   `electrode-archetype-react-app@5.5.2` `(5.5.1 => 5.5.2)`
+-   `electrode-archetype-react-app-dev@5.5.2` `(5.5.1 => 5.5.2)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   add extendLoader to archetype babel config ([#1208](https://github.com/electrode-io/electrode/pull/1208)) [commit](http://github.com/electrode-io/electrode/commit/8114d2f81e7b7cdee85510d65c42c48378d3bd29)
+
 # 4/10/2019
 
 ## Packages
