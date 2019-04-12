@@ -138,7 +138,7 @@ class RenderOutput {
 
   // flush data so far
   flush() {
-    if (this._output.length > 0) {
+    if (this._output && this._output.length > 0) {
       this._flushQ.push(this._output);
       if (!this._end) {
         this._output = new MainOutput();
