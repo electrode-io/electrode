@@ -173,9 +173,13 @@ async function setupSubAppHapiRoutes(server, options) {
       ? // Hapi 17 route handler
         async (request, h) => {
           try {
-            const context = await routeHandler({ content: "", mode: "", request });
+            const context = await routeHandler({
+              content: { html: "", status: 200, useStream: true },
+              mode: "",
+              request
+            });
             const data = context.result;
-            const status = context.status;
+            const status = data.status;
 
             if (status === undefined) {
               return data;
@@ -200,11 +204,12 @@ async function setupSubAppHapiRoutes(server, options) {
       : // Hapi 16 route handler
         (request, reply) => {
           return routeHandler({
-            content: "",
+            content: { html: "", status: 200, useStream: true },
             mode: "",
             request
           })
-            .then(data => {
+            .then(context => {
+              const data = context.result;
               const status = data.status;
 
               if (status === undefined) {

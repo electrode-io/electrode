@@ -30,10 +30,20 @@ class Output {
     return out;
   }
 
+  _munchItems(munchy) {
+    for (const item of this._items) {
+      if (item._munchItems) {
+        item._munchItems(munchy);
+      } else {
+        munchy.munch(item);
+      }
+    }
+  }
+
   sendToMunchy(munchy, done) {
     if (this._items.length > 0) {
       munchy.once("munched", done);
-      munchy.munch(...this._items);
+      this._munchItems(munchy);
     } else {
       process.nextTick(done);
     }
@@ -50,7 +60,10 @@ class SpotOutput extends Output {
 
   add(data) {
     assert(this._open, "SpotOutput closed");
-    assert(typeof data === "string", "Must add only string to SpotOutput");
+    assert(
+      typeof data === "string" || Buffer.isBuffer(data) || (data && data._readableState),
+      "Must add only string/buffer/stream to SpotOutput"
+    );
     return super.add(data);
   }
 
