@@ -153,13 +153,20 @@ class RenderOutput {
   // close the output and returns a promise that waits for all pending
   // spots to close and resolves with the final result
   close() {
-    const promise = new Promise((resolve, reject) => {
-      this._resolve = resolve;
-      this._reject = reject;
-    });
     this._end = true;
-    this.flush();
-    return promise;
+
+    if (this._context.munchy) {
+      this.flush();
+      // streaming
+      return this._context.transform(this._context.munchy, this);
+    } else {
+      const promise = new Promise((resolve, reject) => {
+        this._resolve = resolve;
+        this._reject = reject;
+      });
+      this.flush();
+      return promise;
+    }
   }
 
   _finish() {
