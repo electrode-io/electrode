@@ -81,7 +81,7 @@ module.exports = function setup(setupContext, token) {
 
   const clientProps = JSON.stringify(_.pick(props, ["useReactRouter"]));
 
-  const renderElement = (props, element) => {
+  const renderElement = element => {
     if (props.streaming) {
       if (props.hydrateServerData) {
         return ReactDOMServer.renderToNodeStream(element);
@@ -143,7 +143,6 @@ module.exports = function setup(setupContext, token) {
             if (props.serverSideRendering === true) {
               assert(Provider, "subapp-web: react-redux Provider not available");
               ssrContent = renderElement(
-                props,
                 React.createElement(
                   Provider,
                   { store: reduxData.store },
@@ -153,7 +152,7 @@ module.exports = function setup(setupContext, token) {
             }
           } else if (props.serverSideRendering === true) {
             try {
-              ssrContent = renderElement(props, createElement(StartComponent));
+              ssrContent = renderElement(createElement(StartComponent));
             } catch (err) {
               console.log("rendering", name, "failed", err);
             }
@@ -161,8 +160,6 @@ module.exports = function setup(setupContext, token) {
         } else {
           ssrContent = `<!-- serverSideRendering flag is ${props.serverSideRendering} -->`;
         }
-
-        let startOnLoad;
 
         outputSpot.add(`\n${comment}`);
 
