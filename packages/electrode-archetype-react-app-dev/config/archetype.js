@@ -28,6 +28,7 @@ const webpackConfigSpec = {
   devMiddleware: { env: "WEBPACK_DEV_MIDDLEWARE", default: false },
   cssModuleSupport: { env: "CSS_MODULE_SUPPORT", type: "truthy", default: detectCSSModule },
   cssModuleStylusSupport: { env: "CSS_MODULE_STYLUS_SUPPORT", default: false },
+  cssLoaderModules: {env: "CSS_LOADER_MODULES", default: false},
   enableBabelPolyfill: { env: "ENABLE_BABEL_POLYFILL", default: false },
   enableNodeSourcePlugin: { env: "ENABLE_NODESOURCE_PLUGIN", default: false },
   woffFontInlineLimit: { env: "WOFF_FONT_INLINE_LIMIT", default: 1000 },
