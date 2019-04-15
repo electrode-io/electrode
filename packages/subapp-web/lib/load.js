@@ -7,7 +7,7 @@ const Fs = require("fs");
 const Path = require("path");
 const _ = require("lodash");
 const React = require("react");
-const ReactDomServer = require("react-dom/server");
+const ReactDOMServer = require("react-dom/server");
 const optionalRequire = require("optional-require")(require);
 const request = require("request");
 const util = require("./util");
@@ -24,6 +24,7 @@ module.exports = function setup(setupContext, token) {
   // name="Header"
   // async=true
   // defer=true
+  // streaming=true
   // serverSideRendering=true
   // hydrateServerData=false
   // clientSideRendering=false
@@ -80,6 +81,22 @@ module.exports = function setup(setupContext, token) {
 
   const clientProps = JSON.stringify(_.pick(props, ["useReactRouter"]));
 
+  const renderElement = element => {
+    if (props.streaming) {
+      if (props.hydrateServerData) {
+        return ReactDOMServer.renderToNodeStream(element);
+      } else {
+        return ReactDOMServer.renderToStaticNodeStream(element);
+      }
+    }
+
+    if (props.hydrateServerData) {
+      return ReactDOMServer.renderToString(element);
+    } else {
+      return ReactDOMServer.renderToStaticMarkup(element);
+    }
+  };
+
   return {
     process: context => {
       const req = context.user.request;
@@ -125,7 +142,7 @@ module.exports = function setup(setupContext, token) {
             initialState = JSON.stringify(reduxData.initialState);
             if (props.serverSideRendering === true) {
               assert(Provider, "subapp-web: react-redux Provider not available");
-              ssrContent = ReactDomServer.renderToString(
+              ssrContent = renderElement(
                 React.createElement(
                   Provider,
                   { store: reduxData.store },
@@ -135,7 +152,7 @@ module.exports = function setup(setupContext, token) {
             }
           } else if (props.serverSideRendering === true) {
             try {
-              ssrContent = ReactDomServer.renderToString(createElement(StartComponent));
+              ssrContent = renderElement(createElement(StartComponent));
             } catch (err) {
               console.log("rendering", name, "failed", err);
             }
@@ -144,24 +161,25 @@ module.exports = function setup(setupContext, token) {
           ssrContent = `<!-- serverSideRendering flag is ${props.serverSideRendering} -->`;
         }
 
-        let startOnLoad;
+        outputSpot.add(`\n${comment}`);
 
         if (props.elementId) {
-          ssrContent = `<div id="${props.elementId}">${ssrContent}</div>`;
-          startOnLoad = `<script>startSubAppOnLoad({
+          outputSpot.add(`<div id="${props.elementId}">`);
+          outputSpot.add(ssrContent);
+          outputSpot.add(`</div><script>startSubAppOnLoad({
   name: "${name}",
   elementId: "${props.elementId}",
   serverSideRendering: ${props.serverSideRendering},
   clientProps: ${clientProps},
   initialState: ${initialState || "{}"}
-})</script>\n`;
+})</script>\n`);
         } else {
-          startOnLoad = "<!-- no elementId for starting subApp on load -->\n";
+          outputSpot.add("<!-- no elementId for starting subApp on load -->\n");
         }
 
         const script = bundleScript || (await retrieveDevServerBundle());
 
-        outputSpot.add(`\n${comment}${ssrContent}\n${startOnLoad}${script}\n`);
+        outputSpot.add(script);
 
         if (props.timestamp) {
           outputSpot.add(`<!-- time: ${Date.now()} -->`);
