@@ -343,7 +343,7 @@ function makeTasks(xclap) {
   const AppMode = archetype.AppMode;
 
   const babelCliIgnore = quote(
-    [`**/*.spec.js`, `**/*.spec.jsx`]
+    [`**/__test__`, `**/__tests__`, `**/_test_`, `**/*.spec.js`, `**/*.spec.jsx`]
       .concat(archetype.babel.enableTypeScript && [`**/*.test.ts`, `**/*.test.tsx`])
       .filter(x => x)
       .join(",")
@@ -569,7 +569,10 @@ Individual .babelrc files were generated for you in src/client and src/server
       );
     },
 
-    ".build.client.babelrc": () => makeBabelRc(AppMode.src.client, "babelrc-client.js"),
+    ".build.client.babelrc": () => {
+      makeBabelRc(AppMode.src.dir, "babelrc-client.js");
+      makeBabelRc(AppMode.src.client, "babelrc-client.js");
+    },
 
     ".build-lib:delete-babel-ignored-files": {
       desc: false,
@@ -586,6 +589,27 @@ Individual .babelrc files were generated for you in src/client and src/server
       }
     },
 
+    "build-lib:all": {
+      desc: false,
+      dep: [
+        ".clean.lib:client",
+        ".clean.lib:server",
+        ".mk.lib.client.dir",
+        ".mk.lib.server.dir",
+        ".build.client.babelrc",
+        ".build.server.babelrc"
+      ],
+      task: mkCmd(
+        `~$babel ${AppMode.src.dir}`,
+        `--out-dir=${AppMode.lib.dir}`,
+        `--extensions=${babelCliExtensions}`,
+        `--source-maps=inline --copy-files`,
+        `--verbose --ignore=${babelCliIgnore}`
+      ),
+      finally: [".build-lib:delete-babel-ignored-files"]
+    },
+
+    // TODO: to be removed
     "build-lib:client": {
       desc: false,
       dep: [".clean.lib:client", ".mk.lib.client.dir", ".build.client.babelrc"],
@@ -625,8 +649,23 @@ Individual .babelrc files were generated for you in src/client and src/server
       );
     },
 
-    ".build.server.babelrc": () => makeBabelRc(AppMode.src.server, "babelrc-server.js"),
+    ".build.server.babelrc": () => {
+      const serverDirs =
+        scanDir.sync({
+          dir: AppMode.src.dir,
+          includeDir: true,
+          includeRoot: true,
+          grouping: true,
+          filterDir: x => x.startsWith("server") && "dirs",
+          filter: () => false
+        }).dirs || [];
 
+      serverDirs.forEach(x => {
+        makeBabelRc(x, "babelrc-server.js");
+      });
+    },
+
+    // TODO: to be removed
     "build-lib:server": {
       desc: false,
       dep: [".clean.lib:server", ".mk.lib.server.dir", ".build.server.babelrc"],
@@ -885,7 +924,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     "test-frontend-ci": ["?.karma.test-frontend-ci"],
 
     ".jest.test-frontend-cov": () => {
-      const testDir = ["_test_", "__tests__"].find(x => shell.test("-d", x));
+      const testDir = ["_test_", "__test__", "__tests__"].find(x => shell.test("-d", x));
       let runJest = testDir;
       if (!runJest) {
         runJest =
@@ -996,7 +1035,7 @@ Individual .babelrc files were generated for you in src/client and src/server
       ".build-lib": {
         desc: false,
         dep: [".clean.lib", ".mk-prod-dir"],
-        task: ["build-lib:client", "build-lib:server", ".build-lib:app-mode"]
+        task: ["build-lib:all", ".build-lib:app-mode"]
       }
     });
   }
