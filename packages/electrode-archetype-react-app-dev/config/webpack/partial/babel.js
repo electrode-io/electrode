@@ -34,7 +34,13 @@ module.exports = function(options) {
 
   return {
     module: {
-      rules: [assign({}, babelLoaderConfig, archetype.webpack.extendBabelLoader)]
+      rules: [
+        assign(
+          {},
+          babelLoaderConfig,
+          archetype.babel.hasMultiTargets ? archetype.babel.extendLoader : {}
+        )
+      ]
     }
   };
 };

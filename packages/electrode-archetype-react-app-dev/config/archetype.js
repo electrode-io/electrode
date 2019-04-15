@@ -80,6 +80,11 @@ const babelConfigSpec = {
     env: "ENV_TARGET",
     type: "string",
     default: "default"
+  },
+  // `extendLoader` is used to override `babel-loader` only when `hasMultiTargets=true`
+  extendLoader: {
+    type: "json",
+    default: {}
   }
 };
 
@@ -114,3 +119,7 @@ module.exports = Object.assign(
   config,
   xenvConfig(topConfigSpec, _.pick(userConfig, Object.keys(topConfigSpec)), { merge })
 );
+module.exports.babel.hasMultiTargets =
+  Object.keys(module.exports.babel.envTargets)
+    .sort()
+    .join(",") !== "default,node";
