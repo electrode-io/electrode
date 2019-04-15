@@ -9,6 +9,14 @@ const scanDir = require("filter-scan-dir");
 const appMode = optionalRequire(Path.resolve(".prod/.app-mode.json"), { default: {} });
 const xrequire = require;
 
+let SUBAPP_MANIFEST;
+const SUBAPP_CONTAINER_SYM = Symbol.for("Electrode SubApps Container");
+
+const appSrcDir = () => {
+  const dir = process.env.APP_SRC_DIR || (process.env.NODE_ENV === "production" ? "lib" : "src");
+  return dir;
+};
+
 function es6Require(r, xreq = xrequire) {
   const mod = xreq(r);
   return mod.default || mod;
@@ -139,70 +147,74 @@ function scanSingleSubAppFromDir(subAppDir) {
 }
 
 function getSubAppContainer() {
-  const sym = Symbol.for("Electrode SubApps Container");
-
-  if (!global[sym]) {
-    global[sym] = {};
+  if (!global[SUBAPP_CONTAINER_SYM]) {
+    global[SUBAPP_CONTAINER_SYM] = {};
   }
 
-  return global[sym];
+  return global[SUBAPP_CONTAINER_SYM];
 }
+
+const subAppManifest = () => {
+  if (!SUBAPP_MANIFEST) {
+    SUBAPP_MANIFEST =
+      (process.env.NODE_ENV === "production" && appMode.subApps) || scanSubAppsFromDir(appSrcDir());
+  }
+  return SUBAPP_MANIFEST;
+};
 
 function registerSubApp(subapp) {
   const container = getSubAppContainer();
   if (container[subapp.name]) {
     console.error(`registerSubApp: subapp '${subapp.name}' already registered - replacing`);
   }
+
   container[subapp.name] = Object.assign({}, container[subapp.name], subapp);
 
   return container[subapp.name];
 }
 
-const APP_SRC_DIR = process.env.APP_SRC_DIR || "src";
-
-const SUBAPP_MANIFEST =
-  (process.env.NODE_ENV === "production" && appMode.subApps) || scanSubAppsFromDir(APP_SRC_DIR);
-
 function getAllSubAppManifest() {
-  return SUBAPP_MANIFEST;
+  return subAppManifest();
 }
 
 function loadSubAppByName(name) {
-  const manifest = SUBAPP_MANIFEST[name];
+  const manifest = subAppManifest()[name];
   const container = getSubAppContainer();
+  const subAppDir = manifest.subAppDir;
+  // load subapp's entry
+  xrequire(Path.resolve(appSrcDir(), subAppDir, manifest.entry));
+
+  // if subapp did not regiser itself then register it
   if (!container[name]) {
     registerSubApp(manifest);
   }
 
-  const subAppDir = manifest.subAppDir;
-  // load subapp's entry
-  xrequire(Path.resolve(process.env.APP_SRC_DIR || "src", subAppDir, manifest.entry));
   assert(container[name], `subapp-util: ${name} didn't load and register itself`);
   return container[name];
 }
 
 function loadSubAppServerByName(name) {
-  const manifest = SUBAPP_MANIFEST[name];
+  const manifest = subAppManifest()[name];
   const subAppDir = manifest.subAppDir;
 
   const x = manifest.serverEntry;
 
   if (x) {
-    return es6Require(Path.resolve(APP_SRC_DIR, subAppDir, x));
+    return es6Require(Path.resolve(appSrcDir(), subAppDir, x));
   }
 
   return {};
 }
 
 function refreshSubAppByName(name) {
-  const manifest = SUBAPP_MANIFEST[name];
+  const manifest = subAppManifest()[name];
   const { subAppDir } = manifest;
 
-  const entryFullPath = xrequire.resolve(Path.resolve(APP_SRC_DIR, subAppDir, manifest.entry));
+  const entryFullPath = xrequire.resolve(Path.resolve(appSrcDir(), subAppDir, manifest.entry));
   if (!xrequire.cache[entryFullPath] && manifest.serverEntry) {
     // also reload server side module
     const serverEntryFullPath = xrequire.resolve(
-      Path.resolve(APP_SRC_DIR, subAppDir, manifest.serverEntry)
+      Path.resolve(appSrcDir(), subAppDir, manifest.serverEntry)
     );
     console.log("reloading server side subapp", name, serverEntryFullPath);
     delete xrequire.cache[serverEntryFullPath];
