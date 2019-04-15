@@ -30,10 +30,20 @@ class Output {
     return out;
   }
 
+  _munchItems(munchy) {
+    for (const item of this._items) {
+      if (item._munchItems) {
+        item._munchItems(munchy);
+      } else {
+        munchy.munch(item);
+      }
+    }
+  }
+
   sendToMunchy(munchy, done) {
     if (this._items.length > 0) {
       munchy.once("munched", done);
-      munchy.munch(...this._items);
+      this._munchItems(munchy);
     } else {
       process.nextTick(done);
     }
@@ -50,7 +60,10 @@ class SpotOutput extends Output {
 
   add(data) {
     assert(this._open, "SpotOutput closed");
-    assert(typeof data === "string", "Must add only string to SpotOutput");
+    assert(
+      typeof data === "string" || Buffer.isBuffer(data) || (data && data._readableState),
+      "Must add only string/buffer/stream to SpotOutput"
+    );
     return super.add(data);
   }
 
@@ -125,9 +138,13 @@ class RenderOutput {
 
   // flush data so far
   flush() {
-    if (this._output.length > 0) {
+    if (this._output && this._output.length > 0) {
       this._flushQ.push(this._output);
-      this._output = new MainOutput();
+      if (!this._end) {
+        this._output = new MainOutput();
+      } else {
+        this._output = undefined;
+      }
     }
 
     this._checkFlushQ();
@@ -136,12 +153,20 @@ class RenderOutput {
   // close the output and returns a promise that waits for all pending
   // spots to close and resolves with the final result
   close() {
-    const promise = new Promise((resolve, reject) => {
-      this._resolve = resolve;
-      this._reject = reject;
-    });
-    this.flush();
-    return promise;
+    this._end = true;
+
+    if (this._context.munchy) {
+      this.flush();
+      // streaming
+      return this._context.transform(this._context.munchy, this);
+    } else {
+      const promise = new Promise((resolve, reject) => {
+        this._resolve = resolve;
+        this._reject = reject;
+      });
+      this.flush();
+      return promise;
+    }
   }
 
   _finish() {
@@ -168,7 +193,9 @@ class RenderOutput {
 
   _checkFlushQ() {
     if (this._flushQ.length < 1) {
-      this._finish();
+      if (this._end) {
+        this._finish();
+      }
       return;
     }
 
