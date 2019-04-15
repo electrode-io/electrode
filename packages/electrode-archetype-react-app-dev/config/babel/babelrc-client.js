@@ -109,11 +109,7 @@ const plugins = basePlugins.concat(
 );
 
 const targets = archetype.babel.envTargets[archetype.babel.target];
-const hasOtherTargets =
-  Object.keys(archetype.babel.envTargets)
-    .sort()
-    .join(",") !== "default,node";
-const useBuiltIns = hasOtherTargets
+const useBuiltIns = archetype.babel.hasMultiTargets
   ? { useBuiltIns: "entry", corejs: "2" }
   : {};
 
