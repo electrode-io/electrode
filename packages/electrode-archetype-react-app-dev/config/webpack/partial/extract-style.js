@@ -44,7 +44,7 @@ const enableShortHash = process.env.NODE_ENV === "production" && enableShortenCS
 const localIdentName = `${enableShortHash ? "" : "[name]__[local]___"}[hash:base64:5]`;
 const cssLoaderOptions = `?modules&localIdentName=${localIdentName}&-autoprefixer`;
 
-const cssQuery = `${cssLoader}!${postcssLoader}`;
+const cssQuery = `${cssLoader}${archetype.webpack.cssLoaderModules ? cssLoaderOptions : ""}!${postcssLoader}`;
 const stylusQuery = `${cssLoader}?-autoprefixer!${stylusLoader}`;
 const scssQuery = `${cssQuery}${getSassLoader()}`;
 const cssModuleQuery = `${cssLoader}${cssLoaderOptions}!${postcssLoader}`;
