@@ -14,10 +14,11 @@ module.exports = function(options) {
     const babelrcClient = JSON.parse(
       Fs.readFileSync(require.resolve("../../babel/babelrc-client-multitargets"))
     );
-    const { target, envTargets, envModule } = archetype.babel;
+    const { target, envTargets, envModules } = archetype.babel;
     const { presets, plugins, ...restOptions } = babelLoaderOptions;
     const targets = envTargets[target];
-    const modules = envModule === "false" ? false: envModule;
+    let modules = envModules.hasOwnProperty(target) ? envModules[target] : "commonjs";
+    modules = modules === "false" ? false : modules;
     babelrcClient.presets.unshift([
       "env",
       { loose: true, targets, modules, useBuiltIns: "entry", corejs: "2" }

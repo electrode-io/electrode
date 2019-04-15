@@ -65,10 +65,10 @@ const babelConfigSpec = {
     type: "string",
     default: "default"
   },
-  envModule: {
+  envModules: {
     env: "ENV_MODULE",
-    type: "string",
-    default: "commonjs"
+    type: "json",
+    default: {}
   },
   // `extendLoader` is used to override `babel-loader` only when `hasMultiTargets=true`
   extendLoader: {
