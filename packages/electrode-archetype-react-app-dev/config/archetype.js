@@ -66,7 +66,7 @@ const babelConfigSpec = {
     default: "default"
   },
   envModules: {
-    env: "ENV_MODULE",
+    env: "BABEL_ENV_MODULES",
     type: "json",
     default: {}
   },
