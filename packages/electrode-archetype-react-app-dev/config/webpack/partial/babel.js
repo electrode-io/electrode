@@ -15,7 +15,7 @@ module.exports = function(options) {
       Fs.readFileSync(require.resolve("../../babel/babelrc-client-multitargets"))
     );
     const { target, envTargets, envModules } = archetype.babel;
-    const { presets, plugins, ...restOptions } = babelLoaderOptions;
+    const { presets, plugins, disabledPlugins, ...restOptions } = babelLoaderOptions;
     const targets = envTargets[target];
     let modules = envModules.hasOwnProperty(target) ? envModules[target] : "commonjs";
     modules = modules === "false" ? false : modules;
@@ -25,6 +25,19 @@ module.exports = function(options) {
     ]);
     babelrcClient.presets = Object.assign(babelrcClient.presets, presets);
     babelrcClient.plugins = Object.assign(babelrcClient.plugins, plugins);
+    if (_.isArray(disabledPlugins)) {
+      babelrcClient.plugins = babelrcClient.plugins
+        .map(x => {
+          if (
+            (_.isString(x) && disabledPlugins.includes(x)) ||
+            (_.isArray(x) && disabledPlugins.includes(x[0]))
+          ) {
+            return null;
+          }
+          return x;
+        })
+        .filter(x => x !== null);
+    }
     return Object.assign(babelrcClient, { babelrc: false }, restOptions);
   };
 
