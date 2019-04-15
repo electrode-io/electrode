@@ -10,20 +10,7 @@ const logger = require("electrode-archetype-react-app/lib/logger");
 module.exports = function(options) {
   const { options: babelLoaderOptions = {}, ...rest } = archetype.babel.extendLoader;
 
-  const getBabelrcClient = () => {
-    const babelrcClient = JSON.parse(
-      Fs.readFileSync(require.resolve("../../babel/babelrc-client-multitargets"))
-    );
-    const { target, envTargets, envModules } = archetype.babel;
-    const { presets, plugins, disabledPlugins, ...restOptions } = babelLoaderOptions;
-    const targets = envTargets[target];
-    let modules = envModules.hasOwnProperty(target) ? envModules[target] : "commonjs";
-    modules = modules === "false" ? false : modules;
-    babelrcClient.presets.unshift([
-      "env",
-      { loose: true, targets, modules, useBuiltIns: "entry", corejs: "2" }
-    ]);
-    babelrcClient.presets = Object.assign(babelrcClient.presets, presets);
+  const setBabelrcClientPlugins = (babelrcClient, plugins, disabledPlugins) => {
     babelrcClient.plugins = Object.assign(babelrcClient.plugins, plugins);
     if (_.isArray(disabledPlugins)) {
       babelrcClient.plugins = babelrcClient.plugins
@@ -38,6 +25,23 @@ module.exports = function(options) {
         })
         .filter(x => x !== null);
     }
+  };
+
+  const getBabelrcClient = () => {
+    const babelrcClient = JSON.parse(
+      Fs.readFileSync(require.resolve("../../babel/babelrc-client-multitargets"))
+    );
+    const { target, envTargets, envModules } = archetype.babel;
+    const { presets, plugins, disabledPlugins, ...restOptions } = babelLoaderOptions;
+    const targets = envTargets[target];
+    let modules = envModules.hasOwnProperty(target) ? envModules[target] : "commonjs";
+    modules = modules === "false" ? false : modules;
+    babelrcClient.presets.unshift([
+      "env",
+      { loose: true, targets, modules, useBuiltIns: "entry", corejs: "2" }
+    ]);
+    babelrcClient.presets = Object.assign(babelrcClient.presets, presets);
+    setBabelrcClientPlugins(babelrcClient, plugins, disabledPlugins);
     return Object.assign(babelrcClient, { babelrc: false }, restOptions);
   };
 
