@@ -4401,8 +4401,8 @@ electrode-archetype-opt-sass:
    sass-loader: ^6.0.6
 electrode-archetype-react-app:
  _:
-  ../../packages/electrode-archetype-react-app: 6.4.1-fynlocal_h
- 6.4.1-fynlocal_h:
+  ../../packages/electrode-archetype-react-app: 6.4.3-fynlocal_h
+ 6.4.3-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app
@@ -4417,8 +4417,8 @@ electrode-archetype-react-app:
    electrode-archetype-opt-react: ^1.0.2
 electrode-archetype-react-app-dev:
  _:
-  ../../packages/electrode-archetype-react-app-dev: 6.4.1-fynlocal_h
- 6.4.1-fynlocal_h:
+  ../../packages/electrode-archetype-react-app-dev: 6.4.3-fynlocal_h
+ 6.4.3-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app-dev
@@ -4600,8 +4600,8 @@ electrode-node-resolver:
    require-at: ^1.0.0
 electrode-react-webapp:
  _:
-  ../../packages/electrode-react-webapp: 3.4.1-fynlocal_h
- 3.4.1-fynlocal_h:
+  ../../packages/electrode-react-webapp: 3.5.2-fynlocal_h
+ 3.5.2-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-react-webapp
@@ -4611,12 +4611,13 @@ electrode-react-webapp:
    http-status-codes: ^1.3.0
    in-publish: ^2.0.0
    lodash: ^4.17.10
+   munchy: ^1.0.6
    require-at: ^1.0.0
    string-array: ^1.0.0
 electrode-redux-router-engine:
  _:
-  ../../packages/electrode-redux-router-engine: 2.1.7-fynlocal_h
- 2.1.7-fynlocal_h:
+  ../../packages/electrode-redux-router-engine: 2.2.0-fynlocal_h
+ 2.2.0-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-redux-router-engine
@@ -4660,8 +4661,8 @@ electrode-static-paths:
    inert: '^4.0.0 || ^5.0.0'
 electrode-ui-config:
  _:
-  ../../packages/electrode-ui-config: 1.2.0-fynlocal_h
- 1.2.0-fynlocal_h:
+  ../../packages/electrode-ui-config: 1.3.0-fynlocal_h
+ 1.3.0-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-ui-config
@@ -9367,6 +9368,12 @@ multicast-dns-service-types:
  1.1.0:
   $: sha1-iZ8R2WhuXgXLkbNdXw5jt3PPyQE=
   _: 'https://registry.npmjs.org/multicast-dns-service-types/-/multicast-dns-service-types-1.1.0.tgz'
+munchy:
+ _:
+  ^1.0.6: 1.0.6
+ 1.0.6:
+  $: sha512-hoerdY9YN+ptp+tIOuccI/dTIqQP8vyrnXP9vxxHl7mOmacDVX5M4ySjMto49yq+qvnrmakvPaFUt+KcExRIMQ==
+  _: 'https://registry.npmjs.org/munchy/-/munchy-1.0.6.tgz'
 mute-stream:
  _:
   0.0.7: 0.0.7
