@@ -164,9 +164,9 @@ module.exports = function setup(setupContext, token) {
         outputSpot.add(`\n${comment}`);
 
         if (props.elementId) {
-          outputSpot.add(`<div id="${props.elementId}">`);
+          outputSpot.add(`<div id="${props.elementId}">\n`);
           outputSpot.add(ssrContent);
-          outputSpot.add(`</div><script>startSubAppOnLoad({
+          outputSpot.add(`\n</div><script>startSubAppOnLoad({
   name: "${name}",
   elementId: "${props.elementId}",
   serverSideRendering: ${props.serverSideRendering},
