@@ -5,7 +5,6 @@ const Path = require("path");
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const CSSSplitPlugin = require("css-split-webpack-plugin").default;
 
 const atImport = require("postcss-import");
 const postcssPresetEnv = require("postcss-preset-env");
@@ -195,17 +194,6 @@ module.exports = function() {
       new ExtractTextPlugin({ filename: "[name].style.css" }),
       process.env.NODE_ENV === "production" &&
         new OptimizeCssAssetsPlugin(archetype.webpack.optimizeCssOptions),
-      /*
-       preserve: default: false. Keep the original unsplit file as well.
-       Sometimes this is desirable if you want to target a specific browser (IE)
-       with the split files and then serve the unsplit ones to everyone else.
-       */
-      new CSSSplitPlugin({
-        size: 4000,
-        imports: true,
-        preserve: true,
-        defer: true
-      }),
       new webpack.LoaderOptionsPlugin({
         minimize: true,
         options: {
