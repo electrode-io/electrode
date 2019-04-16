@@ -19,7 +19,7 @@ module.exports = function(options) {
     const targets = envTargets[target];
     babelrcClient.presets.unshift([
       "env",
-      { loose: true, targets, useBuiltIns: "entry", corejs: "2" }
+      { loose: true, targets, useBuiltIns: "entry", corejs: "2", modules: false }
     ]);
     babelrcClient.presets = Object.assign(babelrcClient.presets, presets);
     babelrcClient.plugins = Object.assign(babelrcClient.plugins, plugins);
