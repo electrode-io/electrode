@@ -32,7 +32,6 @@
     ],
     "transform-node-env-inline",
     "lodash",
-    "transform-runtime",
     "transform-flow-strip-types"
   ],
   "env": {
@@ -60,7 +59,6 @@
     },
     "css-module-prod" : {
       "plugins": [
-        "babel-plugin-transform-react-constant-elements",
         ["transform-react-remove-prop-types", {
            "removeImport": true
         }],
@@ -83,7 +81,6 @@
     },
     "production": {
       "plugins": [
-        "babel-plugin-transform-react-constant-elements",
         ["transform-react-remove-prop-types", {
            "removeImport": true
         }]
