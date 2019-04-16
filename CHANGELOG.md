@@ -1,3 +1,16 @@
+# 4/15/2019
+
+## Packages
+
+-   `electrode-archetype-react-app@5.5.3` `(5.5.2 => 5.5.3)`
+-   `electrode-archetype-react-app-dev@5.5.3` `(5.5.2 => 5.5.3)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   add cssLoaderModules ([#1213](https://github.com/electrode-io/electrode/pull/1213)) [commit](http://github.com/electrode-io/electrode/commit/29000d9603fcd929df0b283f07925813725d0443)
+
 # 4/12/2019
 
 ## Packages
