@@ -56,12 +56,10 @@ describe("subapp-util", function() {
       expect(subapp.Entry).to.exist;
     });
     it("should not add subapp to subApps object if the subapp has already exist", () => {
-      stubScanDir = sinon
-        .stub(require("filter-scan-dir"), "sync")
-        .callsFake(() => ({
-          maniFiles: ["subapp-conf.js"],
-          files: ["subapp2/subapp1/subapp-entry.js"]
-        }));
+      stubScanDir = sinon.stub(require("filter-scan-dir"), "sync").callsFake(() => ({
+        maniFiles: ["subapp-conf.js"],
+        files: ["subapp2/subapp1/subapp-entry.js"]
+      }));
       stubConsoleError = sinon.stub(console, "error").callsFake(s => message.push(s));
       stubProcessExit = sinon.stub(process, "exit").callsFake(() => "do nothing");
       const path = Path.resolve("test/data/subapp1/src");
@@ -69,16 +67,16 @@ describe("subapp-util", function() {
       expect(Object.keys(subapp).length).to.equal(1);
       expect(subapp).to.have.property("Subapp1");
     });
-    it.only("should fail loading subapps if files path does not exist", () => {
-      stubScanDir = sinon
-        .stub(require("filter-scan-dir"), "sync")
-        .onCall(1)
-        .callsFake(() => {
-          throw new Error();
-        });
+    it("should fail loading subapps if files path does not exist", () => {
+      stubScanDir = sinon.stub(require("filter-scan-dir"), "sync");
+      stubScanDir.onCall(0).returns({
+        maniFiles: [],
+        files: ["Entry"]
+      });
+      stubScanDir.onCall(1).throws();
       stubConsoleError = sinon.stub(console, "error").callsFake(s => message.push(s));
       stubProcessExit = sinon.stub(process, "exit").callsFake(() => "do nothing");
-      const path = Path.resolve("test/data/subapp1/src");
+      const path = Path.resolve("test/data/subapp2/src");
       scanSubAppsFromDir(path);
       expect(message[0]).to.equal("Loading SubApps failed");
     });
