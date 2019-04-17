@@ -1,3 +1,16 @@
+# 4/16/2019
+
+## Packages
+
+-   `electrode-archetype-react-app@5.5.4` `(5.5.3 => 5.5.4)`
+-   `electrode-archetype-react-app-dev@5.5.4` `(5.5.3 => 5.5.4)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   set env modules and disable plugins when hasMultiTargets ([#1218](https://github.com/electrode-io/electrode/pull/1218)) [commit](http://github.com/electrode-io/electrode/commit/ab076be6c379f88baef432085a33a2be16f4bc48)
+
 # 4/15/2019
 
 ## Packages
