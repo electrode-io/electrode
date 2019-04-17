@@ -13,6 +13,7 @@ const {
 } = require("../../lib");
 const Path = require("path");
 const Fs = require("fs");
+const sinon = require("sinon");
 
 describe("subapp-util", function() {
   describe("es6Require", () => {
@@ -74,9 +75,13 @@ describe("subapp-util", function() {
       registeredSubapp = registerSubApp(subapp);
       expect(registeredSubapp.name).to.equal("subapp1");
     });
-    it("should fail to register a subapp that has been registered", () => {
-      const registerAgain = () => registerSubApp(registeredSubapp);
-      expect(registerAgain).to.throw;
+    it("should replace the subapp if registered again", () => {
+      let message;
+      const stubConsoleError = sinon.stub(console, "error").callsFake(s => (message = s));
+      registerSubApp(registeredSubapp);
+      expect(registeredSubapp.name).to.equal("subapp1");
+      expect(message).to.equal(`registerSubApp: subapp '${registeredSubapp.name}' already registered - replacing`);
+      stubConsoleError.restore();
     });
   });
 
@@ -126,6 +131,16 @@ describe("subapp-util", function() {
     it("should return empty object if no `serverEntry` given in subapp", () => {
       const server = loadSubAppServerByName("Entry");
       expect(server).be.empty;
+    });
+    it("should not load subapp server by name if NODE_ENV = production but lib does not exist", () => {
+      delete process.env.APP_SRC_DIR;
+      process.env.NODE_ENV = "production";
+      expect(() => loadSubAppServerByName("subapp1")).to.throw();
+      delete process.env.NODE_ENV;
+    });
+    it("should not load subapp server by name if NODE_ENV !== production and src does not exist", () => {
+      delete process.env.APP_SRC_DIR;
+      expect(() => loadSubAppServerByName("subapp1")).to.throw();
     });
   });
 
