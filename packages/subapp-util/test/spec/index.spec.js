@@ -39,6 +39,14 @@ describe("subapp-util", function() {
       const subapp = scanSubAppsFromDir(path);
       expect(subapp.subapp1).to.exist;
     });
+    it("should get subapp with name empty string if subapp info file does not have correct extension", () => {
+      stubScanDir = sinon
+        .stub(require("filter-scan-dir"), "sync")
+        .callsFake(() => ({ maniFiles: [], files: ["subapp-conf"] }));
+      const path = Path.resolve("test/data/subapp2/src");
+      const subapp = scanSubAppsFromDir(path);
+      expect(subapp).to.have.property("");
+    });
     it("should fail loading subapps if manifest file path does not exist", () => {
       stubScanDir = sinon
         .stub(require("filter-scan-dir"), "sync")
@@ -108,7 +116,7 @@ describe("subapp-util", function() {
         Object.keys(subapp)
           .sort()
           .join()
-      ).to.equal("Entry,Src,subapp1");
+      ).to.equal("Entry,Src,SubappConfs,subapp1");
     });
   });
 

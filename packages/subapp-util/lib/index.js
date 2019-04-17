@@ -41,7 +41,7 @@ function scanSubApp(name, verbatimName, dir, file) {
     filter: x => entries.find(e => x.toLowerCase().startsWith(e)),
     maxLevel: 0
   })[0];
-  console.log(Path.basename(file));
+
   const manifest = {
     subAppDir,
     type: "app",
