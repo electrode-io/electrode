@@ -50,7 +50,7 @@ describe("subapp-util", function() {
     it("should fail loading subapps if manifest file path does not exist", () => {
       stubScanDir = sinon
         .stub(require("filter-scan-dir"), "sync")
-        .callsFake(() => ({ maniFiles: ["subapp-non-exist.js"], files: [] }));
+        .callsFake(() => ({ maniFiles: ["subapp-non-exist.js"] }));
       stubConsoleError = sinon.stub(console, "error").callsFake(s => message.push(s));
       stubProcessExit = sinon.stub(process, "exit").callsFake(() => "do nothing");
       const path = Path.resolve("test/data/subapp1/src");
