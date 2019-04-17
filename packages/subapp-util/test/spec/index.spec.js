@@ -5,11 +5,11 @@ const {
   scanSingleSubAppFromDir,
   getAllSubAppManifest,
   registerSubApp,
-  getSubAppContainer
-  // loadSubAppByName,
-  // loadSubAppServerByName,
-  // refreshSubAppByName,
-  // refreshAllSubApps
+  getSubAppContainer,
+  loadSubAppByName,
+  loadSubAppServerByName,
+  refreshSubAppByName,
+  refreshAllSubApps
 } = require("../../lib");
 const Path = require("path");
 const Fs = require("fs");
@@ -98,6 +98,69 @@ describe("subapp-util", function() {
     it("should get empty object if `global[SUBAPP_CONTAINER_SYM]` does not exist", () => {
       const container = getSubAppContainer();
       expect(container).to.be.empty;
+    });
+  });
+
+  describe("loadSubAppByName", () => {
+    after(() => {
+      delete process.env.APP_SRC_DIR;
+    });
+    it("should load subapp by name", () => {
+      process.env.APP_SRC_DIR = "test/data";
+      const subapp = loadSubAppByName("subapp1");
+      expect(subapp.name).to.equal("subapp1");
+    });
+  });
+
+  describe("loadSubAppServerByName", () => {
+    before(() => {
+      process.env.APP_SRC_DIR = "test/data";
+    });
+    after(() => {
+      delete process.env.APP_SRC_DIR;
+    });
+    it("should load subapp server by name", () => {
+      const server = loadSubAppServerByName("subapp1");
+      expect(server.name).to.equal("subapp1-server");
+    });
+    it("should return empty object if no `serverEntry` given in subapp", () => {
+      const server = loadSubAppServerByName("Entry");
+      expect(server).be.empty;
+    });
+  });
+
+  describe("refreshSubAppByName", () => {
+    before(() => {
+      process.env.APP_SRC_DIR = "test/data";
+    });
+    after(() => {
+      delete process.env.APP_SRC_DIR;
+    });
+    it("should refresh subapp by name", () => {
+      const path = Path.resolve(process.env.APP_SRC_DIR, "subapp1/src/index.js");
+      delete require.cache[path];
+      refreshSubAppByName("subapp1");
+      const serverEntry = Path.resolve(process.env.APP_SRC_DIR, "subapp1/src/server.js");
+      expect(require.cache[serverEntry]).to.not.exist;
+    });
+  });
+
+  describe("refreshAllSubApps", () => {
+    const symbol = Symbol.for("Electrode SubApps Container");
+    before(() => {
+      process.env.APP_SRC_DIR = "test/data";
+      global[symbol] = { subapp1: {} };
+    });
+    after(() => {
+      delete process.env.APP_SRC_DIR;
+      delete global[symbol];
+    });
+    it("should refresh all subapps", () => {
+      const path = Path.resolve(process.env.APP_SRC_DIR, "subapp1/src/index.js");
+      delete require.cache[path];
+      refreshAllSubApps();
+      const serverEntry = Path.resolve(process.env.APP_SRC_DIR, "subapp1/src/server.js");
+      expect(require.cache[serverEntry]).to.not.exist;
     });
   });
 });
