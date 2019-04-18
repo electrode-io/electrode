@@ -278,4 +278,36 @@ describe("utils", function() {
       expect(es5).to.equal(data.jsChunk.name);
     });
   });
+
+  describe("munchyHandleStreamError", () => {
+    it("should return error with stacks", () => {
+      const output = utils.munchyHandleStreamError(new Error("blah blah"));
+      expect(output.result).contains("Error: blah blah");
+      expect(output.result).contains("test/spec/utils.spec.js:");
+      expect(output.result).contains("CWD/");
+      expect(output.remit).to.equal(false);
+    });
+
+    it("should not replace cwd shorter than 4 chars", () => {
+      const save = process.cwd();
+      process.chdir("/");
+      const output = utils.munchyHandleStreamError(new Error("blah blah"));
+      expect(output.result).contains("Error: blah blah");
+      expect(output.result).contains("test/spec/utils.spec.js:");
+      expect(output.result).not.contains("CWD/");
+      expect(output.remit).to.equal(false);
+      process.chdir(save);
+    });
+
+    it("should return error without stacks in production", () => {
+      const save = process.env.NODE_ENV;
+      process.env.NODE_ENV = "production";
+      const output = utils.munchyHandleStreamError(new Error());
+      expect(output.result).not.contains("test/spec/utils.spec.js:");
+      expect(output.remit).to.equal(false);
+      if (save) {
+        process.env.NODE_ENV = save;
+      }
+    });
+  });
 });

@@ -33,7 +33,7 @@ class RenderContext {
   }
 
   setMunchyOutput(munchy) {
-    this.munchy = munchy || new Munchy();
+    this.munchy = munchy || new Munchy({ handleStreamError: utils.munchyHandleStreamError });
   }
 
   // set a callback to take the output result and transform it

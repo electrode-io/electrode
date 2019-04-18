@@ -261,6 +261,22 @@ function getBundleJsNameByQuery(data, otherAssets) {
   return name;
 }
 
+const munchyHandleStreamError = err => {
+  let errMsg = (process.env.NODE_ENV !== "production" && err.stack) || err.message;
+
+  if (process.cwd().length > 3) {
+    errMsg = (errMsg || "").replace(new RegExp(process.cwd(), "g"), "CWD");
+  }
+
+  return {
+    result: `<!-- SSR ERROR -->
+<p><h2 style="color: red">SSR ERROR</h2><pre style="color: red">
+${errMsg}
+</pre></p>`,
+    remit: false
+  };
+};
+
 module.exports = {
   resolveChunkSelector,
   loadAssetsFromStats,
@@ -281,5 +297,6 @@ module.exports = {
   getOtherStats,
   getOtherAssets,
   getBundleJsNameByQuery,
-  isReadableStream: x => Boolean(x && x.pipe && x.on && x._readableState)
+  isReadableStream: x => Boolean(x && x.pipe && x.on && x._readableState),
+  munchyHandleStreamError
 };
