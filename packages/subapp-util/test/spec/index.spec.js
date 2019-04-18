@@ -170,6 +170,15 @@ describe("subapp-util", function() {
       const subapp = loadSubAppByName("subapp1");
       expect(subapp.name).to.equal("subapp1");
     });
+    it("should load subapp without registering if subapp has already in container", () => {
+      const symbol = Symbol.for("Electrode SubApps Container");
+      global[symbol] = { subapp1: { name: "subapp1", entry: "UNKNOWN" } };
+      process.env.APP_SRC_DIR = "test/data";
+      const subapp = loadSubAppByName("subapp1");
+      expect(subapp.name).to.equal("subapp1");
+      expect(subapp.entry).to.equal("UNKNOWN");
+      delete global[symbol];
+    });
   });
 
   describe("loadSubAppServerByName", () => {
@@ -200,18 +209,32 @@ describe("subapp-util", function() {
   });
 
   describe("refreshSubAppByName", () => {
+    let serverEntry;
+    let entryFullPath;
     before(() => {
       process.env.APP_SRC_DIR = "test/data";
+      serverEntry = Path.resolve(process.env.APP_SRC_DIR, "subapp1/src/server.js");
+      entryFullPath = Path.resolve(process.env.APP_SRC_DIR, "subapp1/src/index.js");
+      if (require.cache[serverEntry]) delete require.cache[serverEntry];
+      if (require.cache[entryFullPath]) delete require.cache[entryFullPath];
     });
     after(() => {
       delete process.env.APP_SRC_DIR;
     });
+    afterEach(() => {
+      if (require.cache[serverEntry]) delete require.cache[serverEntry];
+      if (require.cache[entryFullPath]) delete require.cache[entryFullPath];
+    });
     it("should refresh subapp by name", () => {
-      const path = Path.resolve(process.env.APP_SRC_DIR, "subapp1/src/index.js");
-      delete require.cache[path];
+      require(serverEntry);
       refreshSubAppByName("subapp1");
-      const serverEntry = Path.resolve(process.env.APP_SRC_DIR, "subapp1/src/server.js");
       expect(require.cache[serverEntry]).to.not.exist;
+    });
+    it("should not reload server side module if entryFullPath in require.cache", () => {
+      require(entryFullPath);
+      require(serverEntry);
+      refreshSubAppByName("subapp1");
+      expect(require.cache[serverEntry]).to.exist;
     });
   });
 
