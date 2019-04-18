@@ -202,6 +202,19 @@ describe("subapp-util", function() {
       expect(() => loadSubAppServerByName("subapp1")).to.throw();
       delete process.env.NODE_ENV;
     });
+    it("should not load subapp server by name if NODE_ENV = production and appMode.subApps exists but no serverEntry in it", () => {
+      process.env.NODE_ENV = "production";
+      delete process.env.APP_SRC_DIR;
+      Object.keys(require.cache).forEach(key => delete require.cache[key]);
+      const manifest = Path.resolve("test/data/.prod/.app-mode.json");
+      const fake = sinon.stub(Path, "resolve");
+      Path.resolve.withArgs(".prod/.app-mode.json").callsFake(() => manifest);
+      Path.resolve.callThrough();
+      const subapp = require("../../lib").loadSubAppServerByName("subapp1");
+      expect(subapp).be.empty;
+      delete process.env.NODE_ENV;
+      fake.restore();
+    });
     it("should not load subapp server by name if NODE_ENV !== production and src does not exist", () => {
       delete process.env.APP_SRC_DIR;
       expect(() => loadSubAppServerByName("subapp1")).to.throw();
