@@ -112,11 +112,7 @@ describe("subapp-util", function() {
       process.env.APP_SRC_DIR = "test/data";
       const subapp = getAllSubAppManifest();
       expect(subapp).to.exist;
-      expect(
-        Object.keys(subapp)
-          .sort()
-          .join()
-      ).to.equal("Entry,Src,SubappConfs,subapp1");
+      expect(Object.keys(subapp).length).to.equal(4);
     });
   });
 
