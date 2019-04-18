@@ -1,3 +1,82 @@
+# 4/18/2019
+
+- fix subapp in prod mode
+- support for React16's renderToNodeStream
+- remove css-split-plugin
+- allow sourcemap to work in local prod mode
+- babel extendLoader babel config through babel-loader instead of babelrc
+
+## Packages
+
+### Directly Updated
+
+-   `electrode-archetype-react-app@6.4.4` `(6.4.3 => 6.4.4)`
+-   `electrode-archetype-react-app-dev@6.4.4` `(6.4.3 => 6.4.4)`
+-   `electrode-react-webapp@3.6.0` `(3.5.2 => 3.6.0)`
+-   `electrode-redux-router-engine@2.3.0` `(2.2.0 => 2.3.0)`
+-   `subapp-server@1.0.4` `(1.0.3 => 1.0.4)`
+-   `subapp-util@1.0.1` `(1.0.0 => 1.0.1)`
+-   `subapp-web@1.0.1` `(1.0.0 => 1.0.1)`
+
+### Lerna Updated
+
+-   `subapp-redux@1.0.1` `(1.0.0 => 1.0.1)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   allow sourcemap to work in local prod mode ([#1216](https://github.com/electrode-io/electrode/pull/1216)) [commit](http://github.com/electrode-io/electrode/commit/dc4e1dac89e57cd56a510b8cc36d3a9c1375bd56)
+    -   remove css-split-plugin ([#1215](https://github.com/electrode-io/electrode/pull/1215)) [commit](http://github.com/electrode-io/electrode/commit/628e957fb1ac484dd0cdbac81d03fa4b21ad504e)
+    -   use all code under src and dirs starts with server as server ([#1211](https://github.com/electrode-io/electrode/pull/1211)) [commit](http://github.com/electrode-io/electrode/commit/c868210f317b933263c2f85221a729f159a2db3a)
+    -   separate hasMultiTargets & add extendLoader ([#1209](https://github.com/electrode-io/electrode/pull/1209)) [commit](http://github.com/electrode-io/electrode/commit/34382d2409e8c1386379aa466593106ee15e1136)
+    -   [patch] fix webpack entry partial context for subapps ([#1206](https://github.com/electrode-io/electrode/pull/1206)) [commit](http://github.com/electrode-io/electrode/commit/b24debb6c985204586fbfb4a58826ce94bf0b92d)
+    -   [patch] fix webpack dev detection and loading iso loader config ([#1204](https://github.com/electrode-io/electrode/pull/1204)) [commit](http://github.com/electrode-io/electrode/commit/248ba799d3b13ce2c2357cee5db31175f13437d2)
+    -   skip dev middleware for production with express and koa ([#1199](https://github.com/electrode-io/electrode/pull/1199)) [commit](http://github.com/electrode-io/electrode/commit/191f1f1ecb9532bceeadb2e05f658f2eb2e12176)
+    -   Add useBuiltIns for @babel/preset-env ([#1195](https://github.com/electrode-io/electrode/pull/1195)) [commit](http://github.com/electrode-io/electrode/commit/04b5395cae88b97da78cfc8aa0d71da1093002d8)
+    -   [patch] handle @babel/polyfill in entry for multi target's default ([#1194](https://github.com/electrode-io/electrode/pull/1194)) [commit](http://github.com/electrode-io/electrode/commit/178a3ed76d49746edcdefe7f8ee02a52908d2756)
+    -   babel ignore test files under entire src ([#1192](https://github.com/electrode-io/electrode/pull/1192)) [commit](http://github.com/electrode-io/electrode/commit/de33e170c5a0a52c044130a9224cfa33b1cfc1f6)
+
+-   `packages/electrode-react-webapp`
+
+    -   handle SSR stream errors ([#1221](https://github.com/electrode-io/electrode/pull/1221)) [commit](http://github.com/electrode-io/electrode/commit/bfefe2675a73704f59b51faf06fe88ae252043c3)
+    -   allow renderToNodeStream for subapp ([#1210](https://github.com/electrode-io/electrode/pull/1210)) [commit](http://github.com/electrode-io/electrode/commit/cbe0da0474f1b6bf1ef807507f6d1cfa71d92dfa)
+    -   [minor] allow content to specify use streams for generating output ([#1201](https://github.com/electrode-io/electrode/pull/1201)) [commit](http://github.com/electrode-io/electrode/commit/690dec1295234c038575cc2b189af873d96fa2d3)
+
+-   `packages/electrode-redux-router-engine`
+
+    -   [minor] support using render to stream APIs for SSR ([#1202](https://github.com/electrode-io/electrode/pull/1202)) [commit](http://github.com/electrode-io/electrode/commit/965e70f75ec59866f65657dbeca126bcd0407ecc)
+
+-   `packages/subapp-server`
+
+    -   allow renderToNodeStream for subapp ([#1210](https://github.com/electrode-io/electrode/pull/1210)) [commit](http://github.com/electrode-io/electrode/commit/cbe0da0474f1b6bf1ef807507f6d1cfa71d92dfa)
+
+-   `packages/subapp-util`
+
+    -   fix subapp in prod mode ([#1212](https://github.com/electrode-io/electrode/pull/1212)) [commit](http://github.com/electrode-io/electrode/commit/6829049401d23bfd15acd26582cd25717569f5d0)
+    -   add subapp-util test ([#1222](https://github.com/electrode-io/electrode/pull/1222)) [commit](http://github.com/electrode-io/electrode/commit/6a407805fb4b516a8c155ef58a56392f5c4dde0e)
+
+-   `packages/subapp-web`
+
+    -   fix get vendor bundles for prod mode ([#1219](https://github.com/electrode-io/electrode/pull/1219)) [commit](http://github.com/electrode-io/electrode/commit/092160187842375d163c099399cda8686175ea01)
+    -   allow renderToNodeStream for subapp ([#1210](https://github.com/electrode-io/electrode/pull/1210)) [commit](http://github.com/electrode-io/electrode/commit/cbe0da0474f1b6bf1ef807507f6d1cfa71d92dfa)
+
+-   `samples/hapi-app`
+
+    -   update samples lock and auto gen files [commit](http://github.com/electrode-io/electrode/commit/b689c165b1434718db01f00e1d830e4350d34984)
+    -   update sample lockfile [commit](http://github.com/electrode-io/electrode/commit/41caa73c31679cdaa3d2ef4528fd34cf24577269)
+
+-   `samples/poc-subapp`
+
+    -   update samples lock and auto gen files [commit](http://github.com/electrode-io/electrode/commit/b689c165b1434718db01f00e1d830e4350d34984)
+    -   allow renderToNodeStream for subapp ([#1210](https://github.com/electrode-io/electrode/pull/1210)) [commit](http://github.com/electrode-io/electrode/commit/cbe0da0474f1b6bf1ef807507f6d1cfa71d92dfa)
+
+-   `docs`
+
+    -   [minor] support using render to stream APIs for SSR ([#1202](https://github.com/electrode-io/electrode/pull/1202)) [commit](http://github.com/electrode-io/electrode/commit/965e70f75ec59866f65657dbeca126bcd0407ecc)
+    -   Fix broken image URLs ([#1203](https://github.com/electrode-io/electrode/pull/1203)) [commit](http://github.com/electrode-io/electrode/commit/42821703df38bdc32d4a2163ae412b1c3eb1fb2a)
+    -   update doc of extract-style part ([#1184](https://github.com/electrode-io/electrode/pull/1184)) [commit](http://github.com/electrode-io/electrode/commit/5a0aa5e73e31226554e7276cbfd5f0c653a87aa9)
+
 # 3/26/2019
 
 - electrode-react-webapp
