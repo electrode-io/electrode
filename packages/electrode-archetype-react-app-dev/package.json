@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-app-dev",
-  "version": "6.4.3",
+  "version": "6.4.4",
   "description": "Electrode NodeJS/React Application Archetype (Development)",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -124,7 +124,7 @@
     "style-loader": "^0.20.1",
     "stylus": "^0.54.5",
     "stylus-relative-loader": "^3.4.0",
-    "subapp-util": "^1.0.0",
+    "subapp-util": "^1.0.1",
     "sugarss": "^1.0.1",
     "typescript": "^3.2.1",
     "url-loader": "^0.6.2",
