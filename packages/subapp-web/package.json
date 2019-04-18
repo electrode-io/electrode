@@ -1,6 +1,6 @@
 {
   "name": "subapp-web",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Electrode subapp web support",
   "browser": "browser/index.js",
   "main": "lib/index.js",
@@ -29,7 +29,7 @@
     "lodash": "^4.17.10",
     "optional-require": "^1.0.0",
     "request": "^2.88.0",
-    "subapp-util": "^1.0.0"
+    "subapp-util": "^1.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
