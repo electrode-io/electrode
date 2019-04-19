@@ -2,15 +2,33 @@ import React from "react";
 import { Component, default as subApp } from "./bottom";
 import { StaticRouter } from "react-router-dom";
 import Promise from "bluebird";
+import Fs from "fs";
+
+let filterImages;
 
 export default {
   initialize: () => {
-    console.log("bottom subapp server initialize");
+    if (!filterImages) {
+      const natureImages = JSON.parse(Fs.readFileSync("static/nature-images.json"));
+      filterImages = natureImages.value.map(x => {
+        return {
+          contentUrl: x.contentUrl,
+          featured: x.featured,
+          thumbnail: x.thumbnail,
+          thumbnailUrl: x.thumbnailUrl,
+          name: x.name
+        };
+      });
+    }
   },
   prepare: (request, context) => {
-    return Promise.delay(50 + Math.random() * 1000).return({
-      initialState: {},
-      store: subApp.reduxCreateStore()
+    const initialState = {
+      imagesData: filterImages
+    };
+    const store = subApp.reduxCreateStore(initialState);
+    return Promise.delay(50 + Math.random() * 500).return({
+      initialState,
+      store
     });
   },
   StartComponent: props => {

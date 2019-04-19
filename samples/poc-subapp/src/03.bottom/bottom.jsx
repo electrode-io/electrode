@@ -4,23 +4,28 @@ import { withRouter } from "react-router";
 import { Router, Route, Switch } from "react-router-dom";
 import { createStore } from "redux";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import Large from "../components/large";
+// import AdvGridList from "../components/adv-grid";
 
-const MoreProducts = () => {
+const MoreProducts = props => {
   return (
-    <div className="jumbotron jumbotron-fluid">
-      <div className="container">
-        <h1 className="display-4">More Products</h1>
-        <p className="lead">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-          sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-          est laborum.
-        </p>
-      </div>
+    <div className="container">
+      <h1 className="display-4">More Products</h1>
+      <Large breadth={14} depth={5} {...props} />
+      <p className="lead">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
     </div>
   );
+};
+
+MoreProducts.propTypes = {
+  imagesData: PropTypes.array.isRequired
 };
 
 const MoreDeals = () => {
@@ -44,8 +49,8 @@ const MoreDeals = () => {
 const Bottom = props => {
   return (
     <Switch>
-      <Route path="/products" component={MoreProducts} {...props} />
-      <Route path="/deals" component={MoreDeals} {...props} />
+      <Route path="/products" component={() => <MoreProducts {...props} imagesData={[]} />} />
+      <Route path="/deals" component={MoreDeals} />
     </Switch>
   );
 };
@@ -70,8 +75,8 @@ const subApp = {
       </Router>
     );
   },
-  reduxCreateStore: () => {
-    return createStore(s => s, {});
+  reduxCreateStore: initialState => {
+    return createStore(s => s, initialState);
   }
 };
 

@@ -4345,8 +4345,8 @@ electrode-archetype-opt-sass:
    sass-loader: ^6.0.6
 electrode-archetype-react-app:
  _:
-  ../../packages/electrode-archetype-react-app: 6.4.3-fynlocal_h
- 6.4.3-fynlocal_h:
+  ../../packages/electrode-archetype-react-app: 6.4.4-fynlocal_h
+ 6.4.4-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app
@@ -4355,14 +4355,14 @@ electrode-archetype-react-app:
    css-modules-require-hook: ^4.0.2
    isomorphic-loader: ^2.0.0
    optional-require: ^1.0.0
-   subapp-util: ^1.0.0
+   subapp-util: ^1.0.1
   optionalDependencies:
    electrode-archetype-opt-inferno: ^0.2.4
    electrode-archetype-opt-react: ^1.0.2
 electrode-archetype-react-app-dev:
  _:
-  ../../packages/electrode-archetype-react-app-dev: 6.4.3-fynlocal_h
- 6.4.3-fynlocal_h:
+  ../../packages/electrode-archetype-react-app-dev: 6.4.4-fynlocal_h
+ 6.4.4-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app-dev
@@ -4464,7 +4464,7 @@ electrode-archetype-react-app-dev:
    style-loader: ^0.20.1
    stylus: ^0.54.5
    stylus-relative-loader: ^3.4.0
-   subapp-util: ^1.0.0
+   subapp-util: ^1.0.1
    sugarss: ^1.0.1
    typescript: ^3.2.1
    url-loader: ^0.6.2
@@ -4533,8 +4533,8 @@ electrode-node-resolver:
    require-at: ^1.0.0
 electrode-react-webapp:
  _:
-  ../electrode-react-webapp: 3.5.2-fynlocal_h
- 3.5.2-fynlocal_h:
+  ../electrode-react-webapp: 3.6.0-fynlocal_h
+ 3.6.0-fynlocal_h:
   $: local
   _: ../../packages/electrode-react-webapp
   dependencies:
@@ -4543,7 +4543,7 @@ electrode-react-webapp:
    http-status-codes: ^1.3.0
    in-publish: ^2.0.0
    lodash: ^4.17.10
-   munchy: ^1.0.6
+   munchy: ^1.0.7
    require-at: ^1.0.0
    string-array: ^1.0.0
 electrode-server:
@@ -9197,10 +9197,10 @@ multicast-dns-service-types:
   _: 'https://registry.npmjs.org/multicast-dns-service-types/-/multicast-dns-service-types-1.1.0.tgz'
 munchy:
  _:
-  ^1.0.6: 1.0.6
- 1.0.6:
-  $: sha512-hoerdY9YN+ptp+tIOuccI/dTIqQP8vyrnXP9vxxHl7mOmacDVX5M4ySjMto49yq+qvnrmakvPaFUt+KcExRIMQ==
-  _: 'https://registry.npmjs.org/munchy/-/munchy-1.0.6.tgz'
+  ^1.0.7: 1.0.7
+ 1.0.7:
+  $: sha512-Evw3XK/wSwHdw2WVQ+aP/1OGD52+zCm9Lc9OdiERTyNnZBgc9GR6VNSj+87X8foHP9LxpRjW98nE8k6/WlLsxA==
+  _: 'https://registry.npmjs.org/munchy/-/munchy-1.0.7.tgz'
 mute-stream:
  _:
   0.0.7: 0.0.7
@@ -13145,15 +13145,15 @@ stylus-relative-loader:
    stylus: ^0.54.5
 subapp-redux:
  _:
-  ../../packages/subapp-redux: 1.0.0-fynlocal_h
- 1.0.0-fynlocal_h:
+  ../../packages/subapp-redux: 1.0.1-fynlocal_h
+ 1.0.1-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-redux
   dependencies:
    optional-require: ^1.0.0
-   subapp-util: ^1.0.0
-   subapp-web: ^1.0.0
+   subapp-util: ^1.0.1
+   subapp-web: ^1.0.1
   peerDependencies:
    react: '*'
    react-dom: '*'
@@ -13161,26 +13161,26 @@ subapp-redux:
    react-redux: '*'
 subapp-server:
  _:
-  ../../packages/subapp-server: 1.0.3-fynlocal_h
- 1.0.3-fynlocal_h:
+  ../../packages/subapp-server: 1.0.4-fynlocal_h
+ 1.0.4-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-server
   dependencies:
    boom: ^7.2.0
    electrode-hapi-compat: ^1.0.0
-   electrode-react-webapp: ^3.5.1
+   electrode-react-webapp: ^3.6.0
    filter-scan-dir: ^1.0.9
    http-status-codes: ^1.3.0
    optional-require: ^1.0.0
-   subapp-util: ^1.0.0
+   subapp-util: ^1.0.1
    xaa: ^1.0.0
   peerDependencies:
    hapi: '>= 14 <= 17'
 subapp-util:
  _:
-  '../../packages/subapp-util,../subapp-util': 1.0.0-fynlocal_h
- 1.0.0-fynlocal_h:
+  '../../packages/subapp-util,../subapp-util': 1.0.1-fynlocal_h
+ 1.0.1-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-util
@@ -13189,8 +13189,8 @@ subapp-util:
    optional-require: ^1.0.0
 subapp-web:
  _:
-  '../../packages/subapp-web,../subapp-web': 1.0.0-fynlocal_h
- 1.0.0-fynlocal_h:
+  '../../packages/subapp-web,../subapp-web': 1.0.1-fynlocal_h
+ 1.0.1-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-web
@@ -13200,7 +13200,7 @@ subapp-web:
    lodash: ^4.17.10
    optional-require: ^1.0.0
    request: ^2.88.0
-   subapp-util: ^1.0.0
+   subapp-util: ^1.0.1
   peerDependencies:
    react: '*'
    react-dom: '*'
