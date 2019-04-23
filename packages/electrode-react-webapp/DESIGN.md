@@ -2,21 +2,20 @@
 
 ## Table of Contents
 
-- [Considerations](#considerations)
-- [Tokens](#tokens)
-  - [Token Example](#token-example)
-  - [Invoking token handler/process functions](#invoking-token-handlerprocess-functions)
-  - [Token Props](#token-props)
-  - [Internal Props](#internal-props)
-- [Predefined Tokens and Handler](#predefined-tokens-and-handler)
-- [Custom Processing](#custom-processing)
-  - [Handler](#handler)
-  - [Custom Processor Module](#custom-processor-module)
-  - [The Process Function](#the-process-function)
-  - [`context`](#context)
-  - [Concurrent Token](#concurrent-token)
-    - [routeData](#routedata)
-    - [data](#data)
+* [Considerations](#considerations)
+* [Tokens](#tokens)
+  + [Token Example](#token-example)
+  + [Invoking token handler/process functions](#invoking-token-handlerprocess-functions)
+  + [Token Props](#token-props)
+  + [Internal Props](#internal-props)
+* [Predefined Tokens and Handler](#predefined-tokens-and-handler)
+* [Custom Processing](#custom-processing)
+  + [Handler](#handler)
+  + [Custom Processor Module](#custom-processor-module)
+  + [The Process Function](#the-process-function)
+  + [`context`](#context)
+  + [Concurrent Token and Async Output](#concurrent-token-and-async-output)
+  + [routeData](#routedata)
 
 ## Considerations
 
@@ -285,13 +284,17 @@ Spot object has the follow methods:
 - `jsChunk`
 - `cssChunk`
 
-### Concurrent Token
+### Concurrent Token and Async Output
 
 Note that a token handler that takes `next` or returns Promise is only async, but not concurrent. Meaning the renderer will still wait for it to finish before continuing to the next token.
 
-If you want the renderer to continue while your token generates output concurrently, you have to reserve a spot with `context.output.reserve()` and use `process.nextTick` to invoke another async function.
+If you want the renderer to continue while your token generates output concurrently, you have two options:
 
-For example:
+1. Reserve a spot with `context.output.reserve()` and use `process.nextTick` to invoke another async function.
+
+2. Return a [node.js stream] for your output.
+
+For example, reserving a spot:
 
 ```js
 module.exports = function setup(options) {
@@ -309,7 +312,7 @@ module.exports = function setup(options) {
 };
 ```
 
-#### routeData
+### routeData
 
 The `context.user.routeData` contains the following:
 
@@ -323,3 +326,5 @@ The `context.user.routeData` contains the following:
 - chunkSelector - callback to select webpack bundle
 - iconStats - webpack icon stats
 - htmlTokens - html template parsed into tokens
+
+[node.js stream]: https://nodejs.org/docs/latest-v10.x/api/stream.html#stream_stream
