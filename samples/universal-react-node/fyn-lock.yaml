@@ -3380,9 +3380,14 @@ copy-descriptor:
 core-js:
  _:
   '^2.2.0,^2.4.0,^2.5.0,^2.5.7': 2.6.5
+  ^3.0.1: 3.0.1
+ 3.0.1:
+  top: 1
+  $: sha512-sco40rF+2KlE0ROMvydjkrVMMG1vYilP2ALoRXcYR4obqbYIuV3Bg+51GEDW+HF8n7NRA+iaA4qD0nD9lo9mew==
+  _: 'http://npme.walmart.com/core-js/-/core-js-3.0.1.tgz'
  2.6.5:
   $: sha512-klh/kDpwX8hryYL14M9w/xei6vrv6sE8gTHDG7/T/+SEovB/G4ejwcfE/CBzO6Edsu+OETZMZ3wcX/EjUkrl5A==
-  _: 'https://registry.npmjs.org/core-js/-/core-js-2.6.5.tgz'
+  _: 'http://npme.walmart.com/core-js/-/core-js-2.6.5.tgz'
 core-util-is:
  _:
   '1.0.2,~1.0.0': 1.0.2
@@ -3664,18 +3669,6 @@ css-selector-tokenizer:
    cssesc: ^0.1.0
    fastparse: ^1.1.1
    regexpu-core: ^1.0.0
-css-split-webpack-plugin:
- _:
-  ^0.2.6: 0.2.6
- 0.2.6:
-  $: sha512-N5x0VdcU0zIh1aYnjjH/2Ijz06yQCeIAl3lvTup2bMlQriSTzq1REUMYDiT9m35RN0emS6m9zdFLvCx6ODhabQ==
-  _: 'https://registry.npmjs.org/css-split-webpack-plugin/-/css-split-webpack-plugin-0.2.6.tgz'
-  dependencies:
-   loader-utils: ^1.1.0
-   postcss: ^6.0.14
-   webpack-sources: ^1.0.2
-  peerDependencies:
-   webpack: '>=1'
 css-tree:
  _:
   1.0.0-alpha.28: 1.0.0-alpha.28
@@ -4394,8 +4387,8 @@ electrode-archetype-opt-sass:
    sass-loader: ^6.0.6
 electrode-archetype-react-app:
  _:
-  ../../packages/electrode-archetype-react-app: 6.4.2-fynlocal_h
- 6.4.2-fynlocal_h:
+  ../../packages/electrode-archetype-react-app: 6.4.4-fynlocal_h
+ 6.4.4-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app
@@ -4404,14 +4397,14 @@ electrode-archetype-react-app:
    css-modules-require-hook: ^4.0.2
    isomorphic-loader: ^2.0.0
    optional-require: ^1.0.0
-   subapp-util: ^1.0.0
+   subapp-util: ^1.0.1
   optionalDependencies:
    electrode-archetype-opt-inferno: ^0.2.4
    electrode-archetype-opt-react: ^1.0.2
 electrode-archetype-react-app-dev:
  _:
-  ../../packages/electrode-archetype-react-app-dev: 6.4.2-fynlocal_h
- 6.4.2-fynlocal_h:
+  ../../packages/electrode-archetype-react-app-dev: 6.4.4-fynlocal_h
+ 6.4.4-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app-dev
@@ -4455,7 +4448,6 @@ electrode-archetype-react-app-dev:
    clean-css: ^3.4.21
    convert-source-map: ^1.5.0
    css-loader: ^1.0.0
-   css-split-webpack-plugin: ^0.2.6
    electrode-bundle-analyzer: ^1.0.0
    electrode-cdn-file-loader: ^1.0.0
    electrode-hapi-compat: ^1.0.0
@@ -4514,7 +4506,7 @@ electrode-archetype-react-app-dev:
    style-loader: ^0.20.1
    stylus: ^0.54.5
    stylus-relative-loader: ^3.4.0
-   subapp-util: ^1.0.0
+   subapp-util: ^1.0.1
    sugarss: ^1.0.1
    typescript: ^3.2.1
    url-loader: ^0.6.2
@@ -4596,8 +4588,8 @@ electrode-node-resolver:
    require-at: ^1.0.0
 electrode-react-webapp:
  _:
-  ../../packages/electrode-react-webapp: 3.5.0-fynlocal_h
- 3.5.0-fynlocal_h:
+  ../../packages/electrode-react-webapp: 3.6.0-fynlocal_h
+ 3.6.0-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-react-webapp
@@ -4607,12 +4599,13 @@ electrode-react-webapp:
    http-status-codes: ^1.3.0
    in-publish: ^2.0.0
    lodash: ^4.17.10
+   munchy: ^1.0.7
    require-at: ^1.0.0
    string-array: ^1.0.0
 electrode-redux-router-engine:
  _:
-  ../../packages/electrode-redux-router-engine: 2.2.0-fynlocal_h
- 2.2.0-fynlocal_h:
+  ../../packages/electrode-redux-router-engine: 2.3.0-fynlocal_h
+ 2.3.0-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-redux-router-engine
@@ -9479,6 +9472,12 @@ multicast-dns-service-types:
  1.1.0:
   $: sha1-iZ8R2WhuXgXLkbNdXw5jt3PPyQE=
   _: 'https://registry.npmjs.org/multicast-dns-service-types/-/multicast-dns-service-types-1.1.0.tgz'
+munchy:
+ _:
+  ^1.0.7: 1.0.7
+ 1.0.7:
+  $: sha512-Evw3XK/wSwHdw2WVQ+aP/1OGD52+zCm9Lc9OdiERTyNnZBgc9GR6VNSj+87X8foHP9LxpRjW98nE8k6/WlLsxA==
+  _: 'http://npme.walmart.com/munchy/-/munchy-1.0.7.tgz'
 mute-stream:
  _:
   0.0.7: 0.0.7
@@ -12166,15 +12165,20 @@ regenerator-runtime:
   ^0.10.5: 0.10.5
   ^0.11.0: 0.11.1
   ^0.12.0: 0.12.1
+  ^0.13.2: 0.13.2
+ 0.13.2:
+  top: 1
+  $: sha512-S/TQAZJO+D3m9xeN1WTI8dLKBBiRgXBlTJvbWjCThHWZj9EvHK70Ff50/tYj2J/fvBY6JtFVwRuazHN2E7M9BA==
+  _: 'http://npme.walmart.com/regenerator-runtime/-/regenerator-runtime-0.13.2.tgz'
  0.12.1:
   $: sha512-odxIc1/vDlo4iZcfXqRYFj0vpXFNoGdKMAUieAlFYO6m/nl5e9KR/beGf41z4a1FI+aQgtjhuaSlDxQ0hmkrHg==
-  _: 'https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.12.1.tgz'
+  _: 'http://npme.walmart.com/regenerator-runtime/-/regenerator-runtime-0.12.1.tgz'
  0.11.1:
   $: sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg==
-  _: 'https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz'
+  _: 'http://npme.walmart.com/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz'
  0.10.5:
   $: sha1-M2w+/BIgrc7dosn6tntaeVWjNlg=
-  _: 'https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.10.5.tgz'
+  _: 'http://npme.walmart.com/regenerator-runtime/-/regenerator-runtime-0.10.5.tgz'
 regenerator-transform:
  _:
   ^0.13.4: 0.13.4
@@ -13616,8 +13620,8 @@ stylus-relative-loader:
    stylus: ^0.54.5
 subapp-util:
  _:
-  ../subapp-util: 1.0.0-fynlocal_h
- 1.0.0-fynlocal_h:
+  ../subapp-util: 1.0.1-fynlocal_h
+ 1.0.1-fynlocal_h:
   $: local
   _: ../../packages/subapp-util
   dependencies:
@@ -14733,7 +14737,7 @@ webpack-log:
    uuid: ^3.3.2
 webpack-sources:
  _:
-  '^1.0.2,^1.1.0,^1.3.0': 1.3.0
+  '^1.1.0,^1.3.0': 1.3.0
  1.3.0:
   $: sha512-OiVgSrbGu7NEnEvQJJgdSFPl2qWKkWq5lHMhgiToIiN9w34EBnjYzSYs+VbL5KoYiLNtFFa7BZIKxRED3I32pA==
   _: 'https://registry.npmjs.org/webpack-sources/-/webpack-sources-1.3.0.tgz'
