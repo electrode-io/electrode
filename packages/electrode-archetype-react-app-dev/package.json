@@ -65,6 +65,7 @@
     "chokidar": "^2.0.4",
     "clean-css": "^3.4.21",
     "convert-source-map": "^1.5.0",
+    "core-js": "^3.0.1",
     "css-loader": "^1.0.0",
     "electrode-bundle-analyzer": "^1.0.0",
     "electrode-cdn-file-loader": "^1.0.0",

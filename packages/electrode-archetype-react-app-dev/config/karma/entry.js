@@ -2,7 +2,8 @@
 
 /* eslint-disable no-var */
 
-require("@babel/polyfill");
+require("core-js/stable");
+require("regenerator-runtime/runtime");
 
 /**
  * Test setup for client-side tests.
