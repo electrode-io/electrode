@@ -48,6 +48,8 @@ return {
     "react-notify-toast": "^0.5.0", //<% } %>
     lodash: "^4.17.11",
     "@loadable/component": "^5.7.0",
+    "core-js": "^3.0.1",
+    "regenerator-runtime": "^0.13.2",
     "react-router-config": "^1.0.0-beta.4",
     "react-router-dom": "^4.3.1",
     milligram: "^1.3.0",
