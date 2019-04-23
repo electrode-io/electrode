@@ -110,7 +110,7 @@ const plugins = basePlugins.concat(
 
 const targets = archetype.babel.envTargets[archetype.babel.target];
 const useBuiltIns = archetype.babel.hasMultiTargets
-  ? { useBuiltIns: "entry", corejs: "2" }
+  ? { useBuiltIns: "entry", corejs: "3" }
   : {};
 
 const presets = [
