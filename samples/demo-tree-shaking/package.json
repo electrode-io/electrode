@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "bluebird": "^3.4.6",
+    "core-js": "^3.0.1",
     "demo-component": "../demo-component/packages/demo-component",
     "electrode-archetype-react-app": "^5.3.4",
     "electrode-auto-ssr": "^1.0.0",
