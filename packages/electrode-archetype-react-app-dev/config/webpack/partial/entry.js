@@ -119,7 +119,7 @@ function makeEntryPartial() {
     const polyfill = shouldPolyfill();
 
     if (polyfill) {
-      const coreJs = "core-js/stable";
+      const coreJs = "core-js";
       const runtime = "regenerator-runtime/runtime";
       if (_.isArray(entry)) {
         entry = { main: [coreJs, runtime, ...entry] };

@@ -2,7 +2,7 @@
 
 /* eslint-disable no-var */
 
-require("core-js/stable");
+require("core-js");
 require("regenerator-runtime/runtime");
 
 /**
