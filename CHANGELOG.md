@@ -1,3 +1,51 @@
+# 4/25/2019
+
+- [dep] use core-js and regenerator-runtime to replace deprecated @babel/polyfill
+- [fix] Bypass webpackDev resolve if SSR off
+
+## Packages
+
+### Directly Updated
+
+-   `electrode-archetype-react-app@6.4.5` `(6.4.4 => 6.4.5)`
+-   `electrode-archetype-react-app-dev@6.4.5` `(6.4.4 => 6.4.5)`
+-   `electrode-react-webapp@3.6.1` `(3.6.0 => 3.6.1)`
+
+### Lerna Updated
+
+-   `subapp-server@1.0.5` `(1.0.4 => 1.0.5)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   use core-js and regenerator-runtime to replace deprecated @babel/polyfill ([#1227](https://github.com/electrode-io/electrode/pull/1227)) [commit](http://github.com/electrode-io/electrode/commit/8fa5a5bd5f5b88c9ac2d04e2c1823b7df645287d)
+
+-   `packages/electrode-react-webapp`
+
+    -   Bypass webpackDev resolve if SSR off ([#1228](https://github.com/electrode-io/electrode/pull/1228)) [commit](http://github.com/electrode-io/electrode/commit/fb3a82b58e7dfcbc31a2db1ff8b2981ac15ac587)
+    -   update react-webapp doc ([#1225](https://github.com/electrode-io/electrode/pull/1225)) [commit](http://github.com/electrode-io/electrode/commit/aa9df7afa04b82d0eac5125e8c3744dd2d94b3ad)
+
+-   `samples/hapi-app`
+
+    -   [chore] update hapi-app sample lockfile [commit](http://github.com/electrode-io/electrode/commit/f93fc54f6a1c9d03b5fdd02aa2162f4dd397ed1c)
+
+-   `samples/poc-subapp`
+
+    -   subapp sample: add large component for SSR perf test ([#1223](https://github.com/electrode-io/electrode/pull/1223)) [commit](http://github.com/electrode-io/electrode/commit/62c7f9e8078b1c199d71db5a88af278d1bb7f851)
+
+-   `samples/react-vendor-dll`
+
+    -   [chore] update samples lockfile [commit](http://github.com/electrode-io/electrode/commit/343ed72bffb0122e82d63514a4bbe08c99ceeb3c)
+
+-   `samples/universal-react-node`
+
+    -   [chore] update samples lockfile [commit](http://github.com/electrode-io/electrode/commit/343ed72bffb0122e82d63514a4bbe08c99ceeb3c)
+
+-   `xchangelog`
+
+    -   [chore] archive 2018 changelogs [commit](http://github.com/electrode-io/electrode/commit/218fedf3b567c3d2ab00c1e09ff1d50a660f2afa)
+
 # 4/18/2019
 
 - fix subapp in prod mode
