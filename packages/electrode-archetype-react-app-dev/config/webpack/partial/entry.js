@@ -119,16 +119,17 @@ function makeEntryPartial() {
     const polyfill = shouldPolyfill();
 
     if (polyfill) {
-      const babelPolyfill = "@babel/polyfill";
+      const coreJs = "core-js";
+      const runtime = "regenerator-runtime/runtime";
       if (_.isArray(entry)) {
-        entry = { main: [babelPolyfill, ...entry] };
+        entry = { main: [coreJs, runtime, ...entry] };
       } else if (_.isObject(entry)) {
         entry = Object.entries(entry).reduce((prev, [k, v]) => {
-          prev[k] = [babelPolyfill].concat(v);
+          prev[k] = [coreJs, runtime].concat(v);
           return prev;
         }, {});
       } else {
-        entry = { main: [babelPolyfill, entry] };
+        entry = { main: [coreJs, runtime, entry] };
       }
     }
 
