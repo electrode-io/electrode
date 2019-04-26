@@ -191,7 +191,9 @@ module.exports = function() {
   return {
     module: { rules },
     plugins: [
-      new ExtractTextPlugin({ filename: "[name].style.css" }),
+      new ExtractTextPlugin({
+        filename: archetype.babel.hasMultiTargets ? "[name].style.css" : "[name].style.[hash].css"
+      }),
       process.env.NODE_ENV === "production" &&
         new OptimizeCssAssetsPlugin(archetype.webpack.optimizeCssOptions),
       new webpack.LoaderOptionsPlugin({
