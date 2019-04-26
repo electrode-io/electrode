@@ -58,7 +58,7 @@ const karmaConfigSpec = {
   browser: { env: "KARMA_BROWSER", default: "chrome" }
 };
 
-const babelConfigSpec = {
+const babelConfigSpec = { // TODO:
   enableTypeScript: { env: "ENABLE_BABEL_TYPESCRIPT", default: false },
   enableFlow: { env: "ENABLE_BABEL_FLOW", default: true },
   // require the @flow directive in source to enable FlowJS type stripping
