@@ -51,6 +51,10 @@ const webpackConfigSpec = {
     env: "ELECTRODE_LOAD_DLLS",
     type: "json",
     default: {}
+  },
+  minify: {
+    env: "WEBPACK_MINIFY",
+    default: true
   }
 };
 

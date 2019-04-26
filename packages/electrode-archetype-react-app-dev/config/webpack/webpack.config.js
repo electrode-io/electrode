@@ -3,11 +3,13 @@
 const baseProfile = require("./profile.base");
 const generateConfig = require("./util/generate-config");
 const Path = require("path");
+const archetype = require("electrode-archetype-react-app/config/archetype");
 
 function makeConfig() {
+  const mode = `_${archetype.webpack.minify ? "prod" : "dev"}-mode`;
   const productionProfile = {
     partials: {
-      "_prod-mode": { order: 10000 },
+      [mode]: { order: 10000 },
       "_dll-reference": { order: 10100 },
       _uglify: { order: 10200 },
       _locales: { order: 10300 },
