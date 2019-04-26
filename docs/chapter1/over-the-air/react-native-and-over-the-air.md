@@ -7,15 +7,20 @@ Electrode Over the Air \(OTA\) is a Microsoft™ Code Push compatible server tha
 ### Prerequisites
 
 * [Node v6 or greater](https://nodejs.org/en/download/current/)
-* [Apache Cassandra](http://cassandra.apache.org/)
+* [Apache Cassandra](http://cassandra.apache.org/) or [MariaDB](https://mariadb.org/)
 * [Apache Cassandra Getting Started Documentation](http://cassandra.apache.org/doc/latest/getting_started/index.html)
 * [GitHub Account](http://github.com/) \(if using GitHub as auth provider\)
 
 ### Running Cassandra
 
-Befor running Cassandra, we recommend that you research basic information about running and configuring Cassandra.
+Before choosing Cassandra, we recommend that you research basic information about running and configuring Cassandra.
 
 `sh $ curl http://apache.mirrors.hoobly.com/cassandra/3.9/apache-cassandra-3.9-bin.tar.gz | tar -xvzf - $ cd apache-cassandra-3.9/ $ ./bin/cassandra`
+
+### Running MariaDB
+
+If you choose MariaDB as your datastore, follow the installation instructions from the MariaDB website.  
+
 
 ### Installation
 
@@ -135,7 +140,46 @@ The configurations are loaded using electrode-confippet. For additional informat
 }
 ```
 
-OTA uses [bell](http://github.com/hapijs/bell) for oAuth you can look there for more configuration options.
+OTA uses [bell](http://github.com/hapijs/bell) for oAuth you can look there for more configuration options.  
+More information at [OTA site](https://github.com/electrode-io/electrode-ota-server)
+
+### Using MariaDB instead of Cassandra
+
+Cassandra is the default, but it can be replaced with MariaDB.  
+
+First, install the MariaDB modulie
+```sh
+$ npm install --save electrode-ota-server-dao-mariadb
+```
+
+In your `config/*.json` files, disable `electrode-ota-server-dao-cassandra`, and use `electrode-ota-server-dao-mariadb`
+```
+{
+    "electrode-ota-server-dao-cassandra": {
+        enable: false
+    },
+    "electrode-ota-server-dao-plugin": {
+        module: "electrode-ota-server-dao-mariadb",
+        priority: 4,
+        options: {
+            poolConfigs: [
+            {
+                host: "127.0.0.1",
+                port: 3306,
+                dialect: "mysql",
+                database: "electrode_ota",
+                user: "ota",
+                password: "*****"
+            }
+            ]
+        }
+    }
+}
+```
+
+Instructions for creating the database can be found under [OTA MariaDB Schema](https://github.com/electrode-io/electrode-ota-server/tree/master/electrode-ota-mariadb-schema).  
+You can use Docker, liquidbase, or run the sql files under `/electrode-ota-db/tables` directly.
+
 
 ### Running OTA
 
@@ -149,7 +193,7 @@ To use the server, make the following modifications to your client \(iOS/Android
 
 ### Using the Command Line
 
-If want to manage your OTA Server using the CLI, follow these steps. Or you can use the Electrode OTA Desktop to do the same thing.
+If you want to manage your OTA Server using the CLI, follow these steps. Or you can use the Electrode OTA Desktop to do the same thing.
 
 #### Installing the code-push-cli
 
@@ -160,12 +204,16 @@ If want to manage your OTA Server using the CLI, follow these steps. Or you can 
 #### Register
 
 You can only register once per GitHub account. So the first time each user would need to issue the following command:  
- `sh $ code-push register https://<%=your_ota_server%>`
+ ```sh
+$ code-push register https://<%=your_ota_server%>
+```
 
 #### Login
 
 After registering, if you need to log back in or if your acccess-key is lost or expired, you can log back in using the following command:  
- `sh $ code-push login https://<%=your_ota_server%>`
+```sh
+$ code-push login https://<%=your_ota_server%>
+```
 
 #### Server Token
 
@@ -179,19 +227,17 @@ $ code-push app add <%=YourAppName%>
 
 Should result in something like
 
-`sh Successfully added the "YourAppName" app, along with the following default deployments:`
+```sh
+Successfully added the "YourAppName" app, along with the following default deployments:
 
-`┌────────────┬───────────────────────────────────────┐ │ Name │ Deployment Key │`
-
-`├────────────┼───────────────────────────────────────┤ │ Production │`
-
-`4ANCANCASDASDKASASDASDASDASDASDASDAS- │`
-
-`├────────────┼───────────────────────────────────────┤ │ Staging │`
-
-`ASDASDASDASDASDASDASDASDASDASDASDASD- │`
-
-`└────────────┴───────────────────────────────────────┘`
+┌────────────┬───────────────────────────────────────┐
+│ Name       │ Deployment Key                        │
+├────────────┼───────────────────────────────────────┤ 
+│ Production │ 4ANCANCASDASDKASASDASDASDASDASDASDAS- │
+├────────────┼───────────────────────────────────────┤ 
+│ Staging    │ ASDASDASDASDASDASDASDASDASDASDASDASD- │
+└────────────┴───────────────────────────────────────┘
+```
 
 These are your deployment keys. You will need them in the next step.
 
@@ -264,4 +310,10 @@ If you need to share responsibility you can add a collaborator. However, they wi
 
 ### New Key
 
-If you loose a token key, or want one for you CI server you can manage them here.![](http://www.electrode.io/img/electrode-ota/AddKey.png)![](http://www.electrode.io/img/electrode-ota/NewKey.png)
+If you lose a token key, or want one for your CI server you can manage them here.![](http://www.electrode.io/img/electrode-ota/AddKey.png)![](http://www.electrode.io/img/electrode-ota/NewKey.png)
+
+
+## References
+* [OTA Server Github](https://github.com/electrode-io/electrode-ota-server)
+* [OTA Desktop Github](https://github.com/electrode-io/electrode-ota-desktop)
+* [Electrode Confippet Github](https://github.com/electrode-io/electrode-confippet)
