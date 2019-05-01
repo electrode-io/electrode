@@ -33,7 +33,7 @@ module.exports = {
         // webpack dev middleware options
         dev: {
           // user reporter that's called by the archetype's reporter
-          reporter: reporterOptions => {
+          reporter: (/*reporterOptions*/) => {
             // For example, you can start app server with `clap devbrk` and attach
             // to it with chrome://inspect, and then enable this debugger statement
             // so chrome stop here every time webpack middleware finish compiling
