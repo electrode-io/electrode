@@ -237,7 +237,9 @@ const getContentResolver = (registerOptions, pathData, path) => {
   };
 
   return (webpackDev, xrequire) => {
-    if (webpackDev) return resolveWithDev(webpackDev, xrequire);
+    if (webpackDev && registerOptions.serverSideRendering !== false) {
+      return resolveWithDev(webpackDev, xrequire);
+    }
 
     if (resolved) return resolved.content;
 

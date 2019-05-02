@@ -1,0 +1,9 @@
+{
+  "subApps": {
+    "subapp1": {
+      "name": "subapp1",
+      "subAppDir": "subapp1/src",
+      "entry": "index.js"
+    }
+  }
+}
