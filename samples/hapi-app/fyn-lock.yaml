@@ -4635,7 +4635,7 @@ electrode-server:
    require-at: ^1.0.1
 electrode-static-paths:
  _:
-  2.0.3: 2.0.3
+  ^2.0.1: 2.0.3
  2.0.3:
   top: 1
   $: sha512-G3pDqLvj8D/Zvwu+H0oPS1xsczwXL2UD9Srwc6PCz+ZYJfksmSHxs9ZW8QjAjFsSYi0v8zdEsCarqzzy8YAKuA==
