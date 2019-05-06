@@ -9,8 +9,8 @@ module.exports = function() {
     sourceMap: true,
     parallel: true,
     uglifyOptions: {
+      warnings: false,
       compress: {
-        warnings: false,
         unused: true,
         dead_code: true
       }
