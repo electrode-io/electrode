@@ -34,8 +34,7 @@
       "request": "launch",
       "name": "electrode-redux-router-engine Mocha Tests",
       "cwd": "${workspaceFolder}/packages/electrode-redux-router-engine",
-      "program":
-        "${workspaceFolder}/packages/electrode-redux-router-engine/node_modules/mocha/bin/_mocha",
+      "program": "${workspaceFolder}/packages/electrode-redux-router-engine/node_modules/mocha/bin/_mocha",
       "args": [
         "-u",
         "tdd",
