@@ -57,14 +57,14 @@ describe("check-module", function() {
   });
 
   describe("latest", function() {
-    it("should find version of latest npm on registry", () => {
+    it.skip("should find version of latest npm on registry", () => {
       return checkModule.latest("npm").then(version => {
         expect(version).to.be.not.empty;
         expect(version).to.not.equal("0.0.0");
       });
     }).timeout(20000);
 
-    it("should find version of npm with passed in reg", () => {
+    it.skip("should find version of npm with passed in reg", () => {
       return checkModule.latest("npm", "https://registry.npmjs.org").then(version => {
         expect(version).to.be.not.empty;
         expect(version).to.not.equal("0.0.0");
