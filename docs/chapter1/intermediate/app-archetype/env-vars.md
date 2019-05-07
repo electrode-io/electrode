@@ -12,7 +12,7 @@ Some of the app archetype's features can be controlled by environment variables.
 
 - `INSPECTPACK_DEBUG` - If set to `true`, generates stats for used with the [inspectpack] tool.
 
-## Webpack Relate Configs
+## Webpack Related Configs
 
 - `WEBPACK_DEV_MIDDLEWARE` - If set to `true`, will run webpack dev server as part of your app server in dev mode.
 
@@ -97,7 +97,11 @@ Some of the app archetype's features can be controlled by environment variables.
 
   - Default is `{}`
 
-## Webpack Relate Configs
+* `WEBPACK_MINIFY` - If `true`, webpack in `development` mode to minify code
+
+  - Default is `true`
+
+## Babel Related Configs
 
 - `ENABLE_BABEL_TYPESCRIPT` - If `true`, enable typescript support
 
