@@ -10,6 +10,7 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./reducers";
 import { renderRoutes } from "react-router-config";
+import { loadableReady } from "@loadable/component";
 
 //<% if (pwa) { %>
 // PWA registration
@@ -51,13 +52,15 @@ const start = App => {
   const jsContent = document.querySelector(".js-content");
   const reactStart = window.__PRELOADED_STATE__ && jsContent.innerHTML ? hydrate : render;
 
-  reactStart(
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>,
-    jsContent
+  loadableReady(() =>
+    reactStart(
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>,
+      jsContent
+    )
   );
 };
 

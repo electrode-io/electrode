@@ -19,4 +19,9 @@ describe("util", function() {
   it("resolveModulePath should not resolve paths w/o leading .", () => {
     expect(util.resolveModulePath("test")).to.equal("test");
   });
+
+  it("getExtractor should get chunk extractor if stats file exists", () => {
+    const extractor = util.getExtractor(Path.resolve("./test/loadable-stats.json"));
+    expect(Object.keys(extractor).length > 1);
+  });
 });

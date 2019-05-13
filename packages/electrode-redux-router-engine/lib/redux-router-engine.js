@@ -15,6 +15,7 @@ const { combineReducers, createStore } = require("redux");
 const pkg = require("../package.json");
 const util = require("./util");
 const ServerContext = require("./server-context");
+const extractor = util.getExtractor(Path.resolve("./dist/js/loadable-stats.json"));
 
 const BAD_CHARS_REGEXP = /[<\u2028\u2029]/g;
 const REPLACEMENTS_FOR_BAD_CHARS = {
@@ -265,19 +266,21 @@ class ReduxRouterEngine {
       }
 
       return ssrApi(
-        React.createElement(
-          // server side context to provide request
-          ServerContext,
-          { request: req },
-          // redux provider
+        extractor.collectChunks(
           React.createElement(
-            Provider,
-            { store },
-            // user route component
+            // server side context to provide request
+            ServerContext,
+            { request: req },
+            // redux provider
             React.createElement(
-              StaticRouter,
-              { location, context: routeContext, basename: this.options.basename },
-              this._routesComponent
+              Provider,
+              { store },
+              // user route component
+              React.createElement(
+                StaticRouter,
+                { location, context: routeContext, basename: this.options.basename },
+                this._routesComponent
+              )
             )
           )
         )
