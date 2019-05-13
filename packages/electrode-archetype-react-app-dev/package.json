@@ -115,6 +115,7 @@
     "sugarss": "^1.0.1",
     "sw-precache": "^5.0.0",
     "sw-toolbox": "^3.4.0",
+    "terser-webpack-plugin-legacy": "^1.2.3",
     "uglify-js": "^3.0.26",
     "uglifyjs-webpack-plugin": "^1.2.2",
     "url-loader": "^0.6.2",

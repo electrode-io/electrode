@@ -1,40 +1,25 @@
-"use strict";
+const TerserPlugin = require("terser-webpack-plugin-legacy");
 
-const Uglify = require("uglifyjs-webpack-plugin");
-const optimize = require("webpack").optimize;
-const archetype = require("electrode-archetype-react-app/config/archetype");
+const isProduction = process.env.NODE_ENV === "production";
+
+const plugins = [];
 
 module.exports = function() {
-  // Allow env var to disable minifcation for inspectpack usage.
-  if (process.env.INSPECTPACK_DEBUG === "true" || !archetype.webpack.minify) {
-    return {};
+
+  if (isProduction) {
+    return {
+      plugins: [
+        ...plugins,
+        new TerserPlugin({
+          test: /\.js(\?.*)?$/i,
+          extractComments: /^\**!|^ [0-9]+ $|@preserve|@license/
+        })
+      ]
+    };
+  } else {
+    
+    return {
+      plugins: [...plugins]
+    };
   }
-
-  const uglifyOpts = archetype.babel.hasMultiTargets
-    ? {
-        sourceMap: true,
-        uglifyOptions: {
-          compress: {
-            warnings: false
-          }
-        }
-      }
-    : {
-        sourceMap: true,
-        compress: {
-          warnings: false
-        }
-      };
-
-  // preserve module ID comment in bundle output for optimizeStats
-  if (process.env.OPTIMIZE_STATS === "true") {
-    const comments = archetype.babel.hasMultiTargets ? "extractComments" : "comments";
-    uglifyOpts[comments] = /^\**!|^ [0-9]+ $|@preserve|@license/;
-  }
-
-  const uglifyPlugin = archetype.babel.hasMultiTargets
-    ? new Uglify(uglifyOpts)
-    : new optimize.UglifyJsPlugin(uglifyOpts);
-
-  return { plugins: [uglifyPlugin] };
 };
