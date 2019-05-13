@@ -108,11 +108,6 @@ module.exports = function() {
       }),
       process.env.NODE_ENV === "production" &&
         new OptimizeCssAssetsPlugin(archetype.webpack.optimizeCssOptions),
-      /*
-       preserve: default: false. Keep the original unsplit file as well.
-       Sometimes this is desirable if you want to target a specific browser (IE)
-       with the split files and then serve the unsplit ones to everyone else.
-       */
       new webpack.LoaderOptionsPlugin({
         options: {
           context: Path.resolve(process.cwd(), "src"),
