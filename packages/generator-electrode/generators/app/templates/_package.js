@@ -57,7 +57,7 @@ return {
     //<% } %>
   },
   devDependencies: {
-    "@loadable/component": "^5.7.0",
+    "@loadable/babel-plugin": "^5.10.0",
     "@loadable/webpack-plugin": "^5.7.1",
     "electrode-archetype-react-app-dev": "^6.0.0"
   }, //<% if (isSingleQuote) { %>
