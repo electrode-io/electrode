@@ -61,9 +61,9 @@ const Template = () => (
         <Require _id="subapp-web/lib/init" />
         <Token _id="CRITICAL_CSS" />
         <style>
-          <Literal memoize={false} file={`${__dirname}/style.css`} />
+          <Literal _memoize={false} file={`${__dirname}/style.css`} />
           <Literal file={`test/data/style2.css`} />
-          <Literal memoize={false} file={`bad-file`} />
+          <Literal _memoize={false} file={`bad-file`} />
           <Literal
             // should be memoized
             file={`test/data/style2.css`}

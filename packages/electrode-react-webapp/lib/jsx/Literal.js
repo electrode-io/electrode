@@ -29,7 +29,7 @@ function Literal(props, context, scope) {
       }
     }
 
-    if (props.memoize !== false) {
+    if (props._memoize !== false) {
       MEMOIZE[fp] = data;
     }
   } else {
