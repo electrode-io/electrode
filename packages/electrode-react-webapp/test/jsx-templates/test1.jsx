@@ -38,7 +38,7 @@ function AsyncComponent(props, context, scope) {
     setTimeout(() => {
       scope.output.add(`${props.indent}async component ${props.key}\n`);
       resolve();
-    }, 5);
+    }, props.delay);
   });
 }
 
@@ -72,11 +72,13 @@ const Template = () => (
           // test missing file prop
           />
         </style>
-        <AsyncComponent key="1" indent="=">
-          test nested async components 1
-          <AsyncComponent key="2" indent="==">
-            <div>test nested async components 2</div>
-          </AsyncComponent>
+        <AsyncComponent key="1" indent="=" delay={50}>
+          <div id="asyncComponent1">
+            test nested async components 1
+            <AsyncComponent key="2" indent="==" delay={10}>
+              <div id="asyncComponent2">test nested async components 2</div>
+            </AsyncComponent>
+          </div>
         </AsyncComponent>
       </head>
       <body>

@@ -99,11 +99,12 @@ token process module subapp-web/lib/init not found
 <h1>Literal props missing file</h1>
 </style>
 =async component 1
-test nested async components 1
+<div id="asyncComponent1">test nested async components 1
 ==async component 2
-<div>test nested async components 2
+<div id="asyncComponent2">test nested async components 2
 </div>
 
+</div>
 
 </head>
 <body><div>from test component1
