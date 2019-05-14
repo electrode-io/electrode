@@ -1,9 +1,12 @@
 "use strict";
 
+/* eslint-disable max-statements, global-require */
+
 const _ = require("lodash");
 const Path = require("path");
 const assert = require("assert");
 const AsyncTemplate = require("./async-template");
+const { JsxRenderer } = require("./jsx");
 const { getOtherStats, getOtherAssets } = require("./utils");
 
 const otherStats = getOtherStats();
@@ -14,8 +17,13 @@ const {
   invokeTemplateProcessor
 } = require("./utils");
 
-function initializeTemplate({ htmlFile, tokenHandlers, cacheId, cacheKey, options }, routeOptions) {
-  cacheKey = cacheKey || (cacheId && `${htmlFile}#${cacheId}`) || htmlFile;
+function initializeTemplate(
+  { htmlFile, templateFile, tokenHandlers, cacheId, cacheKey, options },
+  routeOptions
+) {
+  const tmplFile = templateFile || htmlFile;
+  cacheKey = cacheKey || (cacheId && `${tmplFile}#${cacheId}`) || tmplFile;
+
   let asyncTemplate = routeOptions._templateCache[cacheKey];
   if (asyncTemplate) {
     return asyncTemplate;
@@ -41,22 +49,46 @@ function initializeTemplate({ htmlFile, tokenHandlers, cacheId, cacheKey, option
         : userTokenHandlers;
   }
 
-  asyncTemplate = new AsyncTemplate({
-    htmlFile,
-    tokenHandlers: finalTokenHandlers.filter(x => x),
-    insertTokenIds: routeOptions.insertTokenIds,
-    routeOptions
-  });
+  if (!templateFile) {
+    asyncTemplate = new AsyncTemplate({
+      htmlFile,
+      tokenHandlers: finalTokenHandlers.filter(x => x),
+      insertTokenIds: routeOptions.insertTokenIds,
+      routeOptions
+    });
 
-  invokeTemplateProcessor(asyncTemplate, routeOptions);
-  asyncTemplate.initializeRenderer();
+    invokeTemplateProcessor(asyncTemplate, routeOptions);
+    asyncTemplate.initializeRenderer();
+  } else {
+    const templateFullPath = require.resolve(tmplFile);
+    const template = require(tmplFile);
+    asyncTemplate = new JsxRenderer({
+      templateFullPath: Path.dirname(templateFullPath),
+      template: _.get(template, "default", template),
+      tokenHandlers: finalTokenHandlers.filter(x => x),
+      insertTokenIds: routeOptions.insertTokenIds,
+      routeOptions
+    });
+    asyncTemplate.initializeRenderer();
+  }
 
   return (routeOptions._templateCache[cacheKey] = asyncTemplate);
 }
 
 function makeRouteHandler(routeOptions) {
   routeOptions._templateCache = {};
-  const defaultSelection = { htmlFile: routeOptions.htmlFile };
+  let defaultSelection;
+
+  if (routeOptions.templateFile) {
+    defaultSelection = {
+      templateFile:
+        typeof routeOptions.templateFile === "string"
+          ? Path.resolve(routeOptions.templateFile)
+          : Path.join(__dirname, "../template/index")
+    };
+  } else {
+    defaultSelection = { htmlFile: routeOptions.htmlFile };
+  }
 
   const render = (options, templateSelection) => {
     const asyncTemplate = initializeTemplate(templateSelection || defaultSelection, routeOptions);
@@ -110,9 +142,8 @@ const setupOptions = options => {
   const pluginOptions = _.defaultsDeep({}, options, pluginOptionsDefaults);
   const chunkSelector = resolveChunkSelector(pluginOptions);
   const devProtocol = https ? "https://" : "http://";
-  const devBundleBase = `${devProtocol}${pluginOptions.devServer.host}:${
-    pluginOptions.devServer.port
-  }/js/`;
+  const devBundleBase = `${devProtocol}${pluginOptions.devServer.host}:\
+${pluginOptions.devServer.port}/js/`;
   const statsPath = getStatsPath(pluginOptions.stats, pluginOptions.buildArtifacts);
 
   const assets = loadAssetsFromStats(statsPath);
@@ -129,6 +160,8 @@ const setupOptions = options => {
 
 const pathSpecificOptions = [
   "htmlFile",
+  "templateFile",
+  "insertTokenIds",
   "pageTitle",
   "selectTemplate",
   "responseForBadStatus",
