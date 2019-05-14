@@ -14,7 +14,7 @@ function createElement(type, props, ...children) {
     props = {};
   }
 
-  const x = {
+  const element = {
     type,
     children,
     props
@@ -23,16 +23,16 @@ function createElement(type, props, ...children) {
   const literal = typeof type === "string";
 
   if (literal) {
-    x.tag = type.toLowerCase();
+    element.tag = type.toLowerCase();
   } else if (type.prototype && type.prototype.isComponent) {
-    x.Construct = type;
+    element.Construct = type;
   }
 
   if (!literal && type.memoize && props._memoize !== false) {
-    x.memoize = type.memoize(props, children);
+    element.memoize = type.memoize(props, children);
   }
 
-  return x;
+  return element;
 }
 
 module.exports = {
