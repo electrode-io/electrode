@@ -1,14 +1,13 @@
 {
   "presets": [
     [
-      "env",
+      "@babel/preset-env",
       {
         "targets": {
           "node": "8"
         }
       }
     ],
-    "stage-0",
-    "react"
+    "@babel/preset-react"
   ]
 }

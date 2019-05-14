@@ -8,7 +8,7 @@ const assign = require("object-assign");
 const electrodeServer = require("electrode-server");
 const Path = require("path");
 const xstdout = require("xstdout");
-require("babel-register");
+require("@babel/register");
 const { expect } = require("chai");
 const webapp = require("../../lib/hapi/plugin16");
 const ReactDOMServer = require("react-dom/server");
