@@ -1,0 +1,4 @@
+{
+  "outputFilePrefix": "icons-123/",
+  "html": ["icons-123.png", "icons-123/manifest.json", "icons-123/manifest.webapp"]
+}
