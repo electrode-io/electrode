@@ -43,7 +43,7 @@ class JsxRenderer {
     return this._options.insertTokenIds;
   }
 
-  get tempalteFullPath() {
+  get templateFullPath() {
     return this._options.templateFullPath;
   }
 
@@ -204,7 +204,7 @@ class JsxRenderer {
 
     const id = forRequire ? `require(${element.props._id})` : element.props._id;
 
-    tokenInst = new Token(id, 0, element.props, this.tempalteFullPath);
+    tokenInst = new Token(id, 0, element.props, this.templateFullPath);
     this._tokens[element.props._id] = tokenInst;
 
     this._applyTokenLoad(element, tokenInst);
