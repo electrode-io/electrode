@@ -3,6 +3,7 @@
 const Path = require("path");
 const { JsxRenderer, Component, IndexPage } = require("../../../lib/jsx");
 const Template = require("../../jsx-templates/test1").default;
+const Template2 = require("../../jsx-templates/test2").default;
 
 describe("Component", function() {
   it("should have isComponent and render method", () => {
@@ -146,6 +147,22 @@ token process module subapp-web/lib/load not found
     return promise.then(context => {
       verify(context);
       return renderer.render({}).then(verify);
+    });
+  });
+
+  it("should handle failure in nesting async components", () => {
+    const renderer = new JsxRenderer({
+      insertTokenIds: true,
+      templateFullPath: Path.dirname(require.resolve("../../jsx-templates/test2")),
+      template: Template2,
+      tokenHandlers: "./test/fixtures/token-handler"
+    });
+
+    renderer.initializeRenderer();
+
+    const promise = renderer.render({});
+    return promise.then(context => {
+      expect(context.result.message).equal("test async component fail");
     });
   });
 });
