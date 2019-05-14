@@ -1,14 +1,6 @@
 /* @jsx createElement */
 
-import {
-  render,
-  IndexPage,
-  createElement,
-  Token,
-  Require,
-  Literal,
-  Component
-} from "../../lib/jsx";
+import { IndexPage, createElement, Token, Require, Literal, Component } from "../../lib/jsx";
 import { reject } from "any-promise";
 
 const getBogelFontUrl = () => {
