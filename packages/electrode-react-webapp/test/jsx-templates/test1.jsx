@@ -64,6 +64,7 @@ const Template = () => (
           // test missing file prop
           />
         </style>
+        <script id="test-script" src="http://localhost/test.js" defer />
         <AsyncComponent key="1" indent="=" delay={50}>
           <div id="asyncComponent1">
             test nested async components 1
