@@ -1,3 +1,21 @@
+# 5/15/2019
+
+## Packages
+
+-   `electrode-archetype-react-app@5.5.6` `(5.5.5 => 5.5.6)`
+-   `electrode-archetype-react-app-dev@5.5.6` `(5.5.5 => 5.5.6)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   add partial/terser ([#1246](https://github.com/electrode-io/electrode/pull/1246)) [commit](http://github.com/electrode-io/electrode/commit/75d766e8ac225c8f866074b9ef869ec9c7a4fd0c)
+    -   update archetype v5 doc for env var ([#1239](https://github.com/electrode-io/electrode/pull/1239)) [commit](http://github.com/electrode-io/electrode/commit/9fa085322ec3553e52a02c6cb68de7de66b74f25)
+
+-   `docs`
+
+    -   update archetype v5 doc for env var ([#1239](https://github.com/electrode-io/electrode/pull/1239)) [commit](http://github.com/electrode-io/electrode/commit/9fa085322ec3553e52a02c6cb68de7de66b74f25)
+
 # 4/16/2019
 
 ## Packages
