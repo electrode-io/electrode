@@ -23,16 +23,6 @@ describe("IndexPage", function() {
 });
 
 describe("Jsx Renderer", function() {
-  it("getTokenHandler should return undefined if no token handler", () => {
-    const renderer = new JsxRenderer({
-      insertTokenIds: true,
-      templateFullPath: Path.dirname(require.resolve("../../jsx-templates/test1")),
-      template: Template,
-      tokenHandlers: "./test/fixtures/token-handler"
-    });
-    expect(renderer.getTokenHandler({ props: { _id: "blah" } })).to.equal(undefined);
-  });
-
   it("getTokenInst should return undefined if no token instance", () => {
     const renderer = new JsxRenderer({
       insertTokenIds: true,

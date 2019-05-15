@@ -9,6 +9,7 @@ const RenderContext = require("../render-context");
 const { omittedCloseTags, expandProps } = require("./utils");
 const Token = require("../token");
 const Promise = require("bluebird");
+const { TOKEN_HANDLER } = require("../symbols");
 
 const createDefer = () => {
   const defer = {};
@@ -195,7 +196,7 @@ class JsxRenderer {
   _applyTokenLoad(element, inst) {
     inst.load(this._options, this);
 
-    if (inst.handler) return;
+    if (inst[TOKEN_HANDLER]) return;
 
     const handler = this._handlersLookup.find(h => h.tokens.hasOwnProperty(inst.id));
     if (!handler) return;
