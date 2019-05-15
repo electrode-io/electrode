@@ -13,7 +13,8 @@ function makeConfig() {
       _define: { order: 10400 },
       "_sourcemaps-remote": { order: 10500 },
       _fail: { order: 10600 },
-      "_simple-progress": { order: 10700 }
+      "_simple-progress": { order: 10700 },
+      _terser: { order: 10800 }
     }
   };
 

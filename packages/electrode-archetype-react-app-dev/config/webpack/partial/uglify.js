@@ -3,14 +3,15 @@
 const Uglify = require("uglifyjs-webpack-plugin");
 const optimize = require("webpack").optimize;
 const archetype = require("electrode-archetype-react-app/config/archetype");
-const terser = require("./terser");
 
 module.exports = function() {
   // Allow env var to disable minifcation for inspectpack usage.
-  if (process.env.INSPECTPACK_DEBUG === "true" || !archetype.webpack.minify) {
+  if (
+    process.env.INSPECTPACK_DEBUG === "true" ||
+    !archetype.webpack.minify ||
+    archetype.webpack.minifier !== "uglify"
+  ) {
     return {};
-  } else if (archetype.webpack.minifier === "terser") {
-    return terser();
   }
 
   const uglifyOpts = archetype.babel.hasMultiTargets
