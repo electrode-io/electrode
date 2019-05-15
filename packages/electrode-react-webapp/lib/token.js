@@ -1,6 +1,6 @@
 "use strict";
 
-/* eslint-disable no-magic-numbers, no-console */
+/* eslint-disable no-magic-numbers, no-console, max-params, max-statements */
 
 const assert = require("assert");
 const loadHandler = require("./load-handler");
@@ -9,7 +9,7 @@ const { TEMPLATE_DIR, TOKEN_HANDLER } = require("./symbols");
 const viewTokenModules = {};
 
 class Token {
-  constructor(id, pos, props) {
+  constructor(id, pos, props, templateDir) {
     this.id = id;
 
     // match `require(path/to/module)`
@@ -32,6 +32,7 @@ class Token {
       this._modCall = [].concat(this.props._call);
     }
     this[TOKEN_HANDLER] = null;
+    this[TEMPLATE_DIR] = this.props[TEMPLATE_DIR] || templateDir || process.cwd();
   }
 
   // if token is a module, then load it
@@ -41,7 +42,7 @@ class Token {
     let tokenMod = viewTokenModules[this.id];
 
     if (tokenMod === undefined) {
-      tokenMod = loadHandler(this.modPath, this.props[TEMPLATE_DIR]);
+      tokenMod = loadHandler(this.modPath, this[TEMPLATE_DIR]);
       viewTokenModules[this.id] = tokenMod;
     }
 

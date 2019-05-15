@@ -5,10 +5,19 @@
   "main": "index.js",
   "scripts": {
     "lint": "clap lint",
+    "pre-test": "clap compile",
+    "prepare": "clap compile",
     "test": "clap test",
     "coverage": "clap check",
     "prepublishOnly": "clap check",
     "format": "prettier --write --print-width 100 *.{js,jsx} `find . -type d -d 1 -exec echo '{}/**/*.{js,jsx}' \\; | egrep -v '(/node_modules/|/dist/|/coverage/)'`"
+  },
+  "xclap": {
+    "tasks": {
+      "compile": "babel src-template -D -d template",
+      "test-only": "~[compile, electrode/test-only]",
+      "check": "~[compile, electrode/check]"
+    }
   },
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -40,6 +49,7 @@
   "license": "Apache-2.0",
   "files": [
     "lib",
+    "template",
     "index.js"
   ],
   "dependencies": {
@@ -53,6 +63,7 @@
     "string-array": "^1.0.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
@@ -80,10 +91,10 @@
   "nyc": {
     "all": true,
     "check-coverage": true,
-    "statements": 99,
-    "branches": 99,
-    "functions": 99,
-    "lines": 99,
+    "statements": 100,
+    "branches": 100,
+    "functions": 100,
+    "lines": 100,
     "cache": true,
     "reporter": [
       "lcov",
@@ -95,7 +106,15 @@
       "*clap.js",
       "gulpfile.js",
       "dist",
-      "test"
+      "test",
+      "src-template",
+      "electrode-server2"
+    ],
+    "extension": [
+      ".jsx"
+    ],
+    "require": [
+      "@babel/register"
     ]
   },
   "fyn": {

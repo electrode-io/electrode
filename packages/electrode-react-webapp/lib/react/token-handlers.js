@@ -217,6 +217,7 @@ window.${key}.ui = ${JSON.stringify(routeOptions.uiConfig)};
 
     [WEBAPP_START_SCRIPT_MARKER]: context => {
       const { webappPrefix } = context.user.routeOptions.uiConfig;
+      /* istanbul ignore next */
       const startFuncName = webappPrefix ? `${webappPrefix}WebappStart` : "webappStart";
       return `<script>
 if (window["${startFuncName}"]) window["${startFuncName}"]();
