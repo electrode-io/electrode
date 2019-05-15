@@ -6,7 +6,11 @@ const archetype = require("electrode-archetype-react-app/config/archetype");
 
 module.exports = function() {
   // Allow env var to disable minifcation for inspectpack usage.
-  if (process.env.INSPECTPACK_DEBUG === "true" || !archetype.webpack.minify) {
+  if (
+    process.env.INSPECTPACK_DEBUG === "true" ||
+    !archetype.webpack.minify ||
+    archetype.webpack.minifier !== "uglify"
+  ) {
     return {};
   }
 

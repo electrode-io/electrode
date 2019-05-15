@@ -26,6 +26,7 @@ const orders = [
   "_isomorphic",
   "_pwa",
   "_stats",
+  "_terser",
   "_uglify",
   "_locales",
   "_define",

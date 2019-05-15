@@ -9,6 +9,7 @@ function makeConfig() {
     partials: {
       "_dll-reference": { order: 10100 },
       _uglify: { order: 10200 },
+      _terser: { order: 10200 },
       _locales: { order: 10300 },
       _define: { order: 10400 },
       "_sourcemaps-remote": { order: 10500 },
