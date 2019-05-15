@@ -54,6 +54,7 @@ const webpackConfigSpec = {
   minifier: {
     env: "WEBPACK_MINIFIER",
     type: "string",
+    // minifier is `uglify` or `terser`
     default: "uglify"
   }
 };
