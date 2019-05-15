@@ -49,6 +49,7 @@
   "license": "Apache-2.0",
   "files": [
     "lib",
+    "template",
     "index.js"
   ],
   "dependencies": {

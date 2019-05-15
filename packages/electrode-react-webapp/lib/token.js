@@ -35,10 +35,6 @@ class Token {
     this[TEMPLATE_DIR] = this.props[TEMPLATE_DIR] || templateDir || process.cwd();
   }
 
-  get handler() {
-    return this[TOKEN_HANDLER];
-  }
-
   // if token is a module, then load it
   load(options) {
     if (!this.isModule || this.custom !== undefined) return;

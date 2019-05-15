@@ -64,6 +64,10 @@ class JsxRenderer {
               return context;
             });
           });
+      })
+      .catch(err => {
+        context.result = err;
+        return context;
       });
   }
 
@@ -223,11 +227,6 @@ class JsxRenderer {
 
   getTokenInst(element) {
     return this._tokens[element.props._id];
-  }
-
-  getTokenHandler(element) {
-    const tokenInst = this._tokens[element.props._id];
-    return tokenInst && tokenInst.handler;
   }
 
   _initializeTokenHandlers(filenames) {

@@ -2,6 +2,8 @@
 
 /* eslint-disable max-params */
 
+const { TOKEN_HANDLER } = require("../symbols");
+
 const _ = require("lodash");
 
 function processToken(props, context, scope, forRequire = false) {
@@ -13,9 +15,7 @@ function processToken(props, context, scope, forRequire = false) {
     return scope.output.add(scope.element.memoize);
   }
 
-  const handler = renderer.getTokenHandler(scope.element);
-
-  if (handler === null) {
+  if (tokenInst[TOKEN_HANDLER] === null) {
     if (renderer.insertTokenIds) {
       return `<!-- ${tokenInst.id} removed due to its handler set to null -->`;
     }
@@ -28,7 +28,7 @@ function processToken(props, context, scope, forRequire = false) {
     );
   }
 
-  const r = handler(context, tokenInst);
+  const r = tokenInst[TOKEN_HANDLER](context, tokenInst);
   return context.handleTokenResult(tokenInst.id, r, err => {
     if (props._insertTokenIds !== false && renderer.insertTokenIds) {
       scope.output.add(`<!-- ${tokenInst.id} END -->`);
