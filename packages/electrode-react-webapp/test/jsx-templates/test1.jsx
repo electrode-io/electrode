@@ -29,9 +29,18 @@ function AsyncComponent(props, context, scope) {
   return new Promise(resolve => {
     setTimeout(() => {
       scope.output.add(`${props.indent}async component ${props.key}\n`);
-      resolve();
+      resolve(<div>async component children: {props.children}</div>);
     }, props.delay);
   });
+}
+
+function ChildrenNesting(props) {
+  return (
+    <div>
+      component nesting children
+      {props.children}
+    </div>
+  );
 }
 
 const Template = () => (
@@ -65,14 +74,14 @@ const Template = () => (
           />
         </style>
         <script id="test-script" src="http://localhost/test.js" defer />
-        <AsyncComponent key="1" indent="=" delay={50}>
-          <div id="asyncComponent1">
-            test nested async components 1
-            <AsyncComponent key="2" indent="==" delay={10}>
-              <div id="asyncComponent2">test nested async components 2</div>
-            </AsyncComponent>
-          </div>
-        </AsyncComponent>
+        <ChildrenNesting>
+          <AsyncComponent key="1" indent="=" delay={50}>
+            <div id="asyncComponent1">test nested async components 1</div>
+          </AsyncComponent>
+          <AsyncComponent key="2" indent="==" delay={10}>
+            <div id="asyncComponent2">test nested async components 2</div>
+          </AsyncComponent>
+        </ChildrenNesting>
       </head>
       <body>
         <TestComponent1 test1="hello" />

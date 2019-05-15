@@ -1,14 +1,17 @@
 "use strict";
 
-function expandProps(props) {
+function expandProps(props, context) {
   let s = "";
-  for (const key in props) {
-    let v = props[key];
-    if (typeof v === "function") {
-      v = v();
-    }
 
-    s = `${s} ${key}="${v}"`;
+  for (const key in props) {
+    if (key !== "children") {
+      let v = props[key];
+      if (typeof v === "function") {
+        v = v(context);
+      }
+
+      s = `${s} ${key}="${v}"`;
+    }
   }
   return s;
 }

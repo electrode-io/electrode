@@ -123,22 +123,31 @@ class JsxRenderer {
 
     const handleElementResult = rendered => {
       if (!rendered) {
-        return handleElementChildren();
+        return handleClose();
       }
 
       if (typeof rendered === "string") {
         context.output.add(rendered);
-        return handleElementChildren();
+        return handleClose();
       } else if (rendered.then) {
-        return rendered.then(handleElementChildren).catch(err => {
-          context.handleError(err);
-        });
+        return rendered
+          .then(asyncRendered => {
+            return this._render(asyncRendered, context);
+          })
+          .then(handleClose)
+          .catch(err => {
+            context.handleError(err);
+          });
       } else {
         const promise = this._render(rendered, context);
         if (promise) {
-          return promise.then(handleElementChildren);
+          return promise
+            .then(asyncRendered => {
+              return this._render(asyncRendered, context);
+            })
+            .then(handleClose);
         } else {
-          return handleElementChildren();
+          return handleClose();
         }
       }
     };
@@ -148,9 +157,9 @@ class JsxRenderer {
     } else if (element.tag) {
       if (!omittedCloseTags[element.tag]) {
         close = `</${element.tag}>`;
-        context.output.add(`<${element.tag}${expandProps(element.props)}>`);
+        context.output.add(`<${element.tag}${expandProps(element.props, context)}>`);
       } else {
-        context.output.add(`<${element.tag}${expandProps(element.props)}/>`);
+        context.output.add(`<${element.tag}${expandProps(element.props, context)}/>`);
       }
     } else if (!element.type) {
       return handleElementResult(

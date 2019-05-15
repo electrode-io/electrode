@@ -10,8 +10,14 @@ const JsxRenderer = require("./JsxRenderer");
 function createElement(type, props, ...children) {
   children = children.length > 0 ? children : undefined;
 
+  if (children) {
+    children = children.reduce((a, c) => a.concat(c), []);
+  }
+
   if (!props) {
-    props = {};
+    props = { children };
+  } else {
+    props = Object.assign({ children }, props);
   }
 
   const element = {
