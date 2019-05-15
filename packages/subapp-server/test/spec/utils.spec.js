@@ -6,9 +6,12 @@ const {
   getIconStats,
   getCriticalCSS,
   getStatsPath,
-  resolvePath
+  resolvePath,
+  setupSubAppHapiRoutes
 } = require("../../lib/utils");
 const Path = require("path");
+const Hapi = require("hapi");
+const sinon = require("sinon");
 
 describe("subapp-server", () => {
   describe("resolveChunkSelector", () => {
@@ -106,6 +109,45 @@ describe("subapp-server", () => {
 
     it("should return path if it is absolute path", () => {
       expect("/a/b").to.equal(resolvePath("/a/b"));
+    });
+  });
+
+  describe("setupSubAppHapiRoutes", () => {
+    const stubWithArgs = (lib, method, argsFakeCallPairs) => {
+      const stubbed = sinon.stub(lib, method);
+      argsFakeCallPairs.forEach(([args, fakeCall]) =>
+        lib[method].withArgs(...args).callsFake(fakeCall)
+      );
+      lib[method].callThrough();
+      return stubbed;
+    };
+
+    it("should setup subapp routes with `htmlFile` specified in options", () => {
+      const server = new Hapi.Server();
+      server.connection({ port: 80 });
+      const serverRoutesPath = Path.resolve("./test/data/server-routes");
+      const stubPathResolve = stubWithArgs(Path, "resolve", [
+        [["src", "server-routes"], () => serverRoutesPath],
+        [["lib", "server-routes"], () => serverRoutesPath]
+      ]);
+      setupSubAppHapiRoutes(server, {
+        htmlFile: "index.html"
+      });
+      stubPathResolve.restore();
+    });
+
+    it("should setup subapp routes with `favicon=false` in options", () => {
+      const server = new Hapi.Server();
+      server.connection({ port: 80 });
+      const serverRoutesPath = Path.resolve("./test/data/server-routes/file1");
+      const stubPathResolve = stubWithArgs(Path, "resolve", [
+        [["src", "server-routes"], () => serverRoutesPath],
+        [["lib", "server-routes"], () => serverRoutesPath]
+      ]);
+      setupSubAppHapiRoutes(server, {
+        favicon: false
+      });
+      stubPathResolve.restore();
     });
   });
 });
