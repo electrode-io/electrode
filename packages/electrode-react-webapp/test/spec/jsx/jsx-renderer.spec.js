@@ -1,7 +1,7 @@
 "use strict";
 
 const Path = require("path");
-const { JsxRenderer, Component, IndexPage } = require("../../../lib/jsx");
+const { JsxRenderer, Component, IndexPage } = require("../../..").jsx;
 const Template = require("../../jsx-templates/test1").default;
 const Template2 = require("../../jsx-templates/test2").default;
 
