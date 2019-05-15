@@ -4,5 +4,6 @@ module.exports = {
   path: "/file2",
   methods: ["get"],
   setup: () => {},
-  initialize: () => {}
+  initialize: () => {},
+  htmlFile: "file2.html"
 };

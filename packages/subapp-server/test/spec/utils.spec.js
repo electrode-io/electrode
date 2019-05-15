@@ -12,6 +12,8 @@ const {
 const Path = require("path");
 const Hapi = require("hapi");
 const sinon = require("sinon");
+// const Promise = require("bluebird");
+// const request = Promise.promisify(require("request"));
 
 describe("subapp-server", () => {
   describe("resolveChunkSelector", () => {
@@ -113,6 +115,8 @@ describe("subapp-server", () => {
   });
 
   describe("setupSubAppHapiRoutes", () => {
+    let server;
+    let stubPathResolve;
     const stubWithArgs = (lib, method, argsFakeCallPairs) => {
       const stubbed = sinon.stub(lib, method);
       argsFakeCallPairs.forEach(([args, fakeCall]) =>
@@ -122,32 +126,68 @@ describe("subapp-server", () => {
       return stubbed;
     };
 
-    it("should setup subapp routes with `htmlFile` specified in options", () => {
-      const server = new Hapi.Server();
-      server.connection({ port: 80 });
+    const getStubResolve1 = () => {
       const serverRoutesPath = Path.resolve("./test/data/server-routes");
-      const stubPathResolve = stubWithArgs(Path, "resolve", [
+      return stubWithArgs(Path, "resolve", [
         [["src", "server-routes"], () => serverRoutesPath],
         [["lib", "server-routes"], () => serverRoutesPath]
       ]);
-      setupSubAppHapiRoutes(server, {
-        htmlFile: "index.html"
-      });
-      stubPathResolve.restore();
+    };
+
+    const getStubResolve2 = () => {
+      const serverRoutesPath = Path.resolve("./test/data/server-routes/file1");
+      return stubWithArgs(Path, "resolve", [
+        [["src", "server-routes"], () => serverRoutesPath],
+        [["lib", "server-routes"], () => serverRoutesPath]
+      ]);
+    };
+
+    beforeEach(() => {
+      server = new Hapi.Server();
+      server.connection({ port: 8081 });
     });
 
-    it("should setup subapp routes with `favicon=false` in options", () => {
-      const server = new Hapi.Server();
-      server.connection({ port: 80 });
-      const serverRoutesPath = Path.resolve("./test/data/server-routes/file1");
-      const stubPathResolve = stubWithArgs(Path, "resolve", [
-        [["src", "server-routes"], () => serverRoutesPath],
-        [["lib", "server-routes"], () => serverRoutesPath]
-      ]);
-      setupSubAppHapiRoutes(server, {
+    afterEach(() => {
+      server.stop();
+      if (stubPathResolve) stubPathResolve.restore();
+    });
+
+    it("should setup subapp routes with `htmlFile` specified in options", async () => {
+      stubPathResolve = getStubResolve1();
+      await setupSubAppHapiRoutes(server, {
+        htmlFile: "index.html"
+      });
+      await server.start();
+      const { result } = await server.inject({
+        method: "GET",
+        url: "/file1"
+      });
+      expect(result).to.equal("<body><h1>hello world</h1></body>");
+    });
+
+    it.only("TBD", async () => {
+      stubPathResolve = getStubResolve1();
+      await setupSubAppHapiRoutes(server, {});
+      await server.start();
+      const res = await server.inject({
+        method: "GET",
+        url: "/file2"
+      });
+      console.log(res);
+      expect(res.result).to.equal("<html>file2.html</html>");
+    });
+
+    it("should setup subapp routes with `favicon=false` in options", async () => {
+      stubPathResolve = getStubResolve2();
+      await setupSubAppHapiRoutes(server, {
         favicon: false
       });
-      stubPathResolve.restore();
+      await server.start();
+      const { result } = await server.inject({
+        method: "GET",
+        url: "/file1"
+      });
+      expect(result).to.equal("<body><h1>hello world</h1></body>");
     });
   });
 });
