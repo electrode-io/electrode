@@ -144,6 +144,14 @@ describe("subapp-server", () => {
       ]);
     };
 
+    const getStubResolve3 = () => {
+      const serverRoutesPath = Path.resolve("./test/data/file3");
+      return stubWithArgs(Path, "resolve", [
+        [["src", "server-routes"], () => serverRoutesPath],
+        [["lib", "server-routes"], () => serverRoutesPath]
+      ]);
+    };
+
     beforeEach(() => {
       server = new Hapi.Server();
       server.connection({ port: 8081 });
@@ -156,9 +164,11 @@ describe("subapp-server", () => {
     });
 
     it("should setup subapp routes with `htmlFile` specified in options", async () => {
+      process.env.NODE_ENV = "production";
       stubPathResolve = getStubResolve1();
       await setupSubAppHapiRoutes(server, {
-        htmlFile: "index.html"
+        htmlFile: "index.html",
+        devServer: { https: true }
       });
       await server.start();
       const { result } = await server.inject({
@@ -166,28 +176,7 @@ describe("subapp-server", () => {
         url: "/file1"
       });
       expect(result).to.equal("<body><h1>hello world</h1></body>");
-    });
-
-    it.only("TBD", async () => {
-      stubPathResolve = getStubResolve1();
-      stubRouteHandler = sinon
-        .stub(ReactWebapp, "makeRouteHandler")
-        .callsFake(() => async () => {
-          return {
-            result: {
-              status: 301,
-              path: "/file1"
-            }
-          };
-        });
-      await setupSubAppHapiRoutes(server, {});
-      await server.start();
-      const res = await server.inject({
-        method: "GET",
-        url: "/file2"
-      });
-      console.log(res.result);
-      // expect(res.result).to.equal("<html>file2.html</html>");
+      delete process.env.NODE_ENV;
     });
 
     it("should setup subapp routes with `favicon=false` in options", async () => {
@@ -201,6 +190,224 @@ describe("subapp-server", () => {
         url: "/file1"
       });
       expect(result).to.equal("<body><h1>hello world</h1></body>");
+    });
+
+    it("should let the server redirect if status code = 301", async () => {
+      stubPathResolve = getStubResolve1();
+      stubRouteHandler = sinon.stub(ReactWebapp, "makeRouteHandler").callsFake(() => async () => {
+        return {
+          result: {
+            status: 301,
+            path: "/file1"
+          }
+        };
+      });
+      await setupSubAppHapiRoutes(server, {});
+      await server.start();
+      const { result } = await server.inject({
+        method: "GET",
+        url: "/file2"
+      });
+      expect(result).to.equal(null);
+    });
+
+    it("should let the server reply html if status code = 404", async () => {
+      stubPathResolve = getStubResolve1();
+      stubRouteHandler = sinon.stub(ReactWebapp, "makeRouteHandler").callsFake(() => async () => {
+        return {
+          result: {
+            status: 404,
+            path: "/file1",
+            html: "<h1>Not Found</h1>"
+          }
+        };
+      });
+      await setupSubAppHapiRoutes(server, {});
+      await server.start();
+      const { result, statusCode } = await server.inject({
+        method: "GET",
+        url: "/file2"
+      });
+      expect(result).to.equal("<h1>Not Found</h1>");
+      expect(statusCode).to.equal(404);
+    });
+
+    it("should let the server reply data object if status code = 404 and no html set", async () => {
+      stubPathResolve = getStubResolve1();
+      stubRouteHandler = sinon.stub(ReactWebapp, "makeRouteHandler").callsFake(() => async () => {
+        return {
+          result: {
+            status: 404,
+            path: "/file1"
+          }
+        };
+      });
+      await setupSubAppHapiRoutes(server, {});
+      await server.start();
+      const { result, statusCode } = await server.inject({
+        method: "GET",
+        url: "/file2"
+      });
+      expect(result.path).to.equal("/file1");
+      expect(statusCode).to.equal(404);
+    });
+
+    it("should let the server reply html if status code = 200", async () => {
+      stubPathResolve = getStubResolve1();
+      stubRouteHandler = sinon.stub(ReactWebapp, "makeRouteHandler").callsFake(() => async () => {
+        return {
+          result: {
+            status: 200,
+            path: "/file1",
+            html: "<h1>hello</h1>"
+          }
+        };
+      });
+      await setupSubAppHapiRoutes(server, {});
+      await server.start();
+      const { result, statusCode } = await server.inject({
+        method: "GET",
+        url: "/file2"
+      });
+      expect(result).to.equal("<h1>hello</h1>");
+      expect(statusCode).to.equal(200);
+    });
+
+    it("should let the server reply data object if status code = 200 and no html set", async () => {
+      stubPathResolve = getStubResolve1();
+      stubRouteHandler = sinon.stub(ReactWebapp, "makeRouteHandler").callsFake(() => async () => {
+        return {
+          result: {
+            status: 200,
+            path: "/file1"
+          }
+        };
+      });
+      await setupSubAppHapiRoutes(server, {});
+      await server.start();
+      const { result, statusCode } = await server.inject({
+        method: "GET",
+        url: "/file2"
+      });
+      expect(result.path).to.equal("/file1");
+      expect(statusCode).to.equal(200);
+    });
+
+    it("should let the server reply data object if status code is 505", async () => {
+      stubPathResolve = getStubResolve1();
+      stubRouteHandler = sinon.stub(ReactWebapp, "makeRouteHandler").callsFake(() => async () => {
+        return {
+          result: {
+            status: 505,
+            path: "/file1",
+            html: "<h1>hello</h1>"
+          }
+        };
+      });
+      await setupSubAppHapiRoutes(server, {});
+      await server.start();
+      const { result } = await server.inject({
+        method: "GET",
+        url: "/file2"
+      });
+      expect(result.path).to.equal("/file1");
+      expect(result.status).to.equal(505);
+    });
+
+    it("should let the server reply error stack if routeHandler throw an error", async () => {
+      stubPathResolve = getStubResolve1();
+      stubRouteHandler = sinon.stub(ReactWebapp, "makeRouteHandler").callsFake(() => async () => {
+        throw new Error();
+      });
+      const logs = [];
+      const stubConsoleError = sinon.stub(console, "error").callsFake(c => logs.push(c));
+      await setupSubAppHapiRoutes(server, {});
+      await server.start();
+      await server.inject({
+        method: "GET",
+        url: "/file2"
+      });
+      expect(logs[0]).to.equal("Route file2 failed:");
+      stubConsoleError.restore();
+      process.env.NODE_ENV = "production";
+      const { result } = await server.inject({
+        method: "GET",
+        url: "/file2"
+      });
+      expect(result.statusCode).to.equal(500);
+      delete process.env.NODE_ENV;
+    });
+
+    it("should throw error if route.htmlFile not defined", async () => {
+      stubPathResolve = getStubResolve3();
+      try {
+        await setupSubAppHapiRoutes(server, {});
+      } catch (e) {
+        expect(e.code).to.equal("ERR_ASSERTION");
+      }
+    });
+
+    it("should let server reply favicon if icon retrieved", async () => {
+      stubPathResolve = getStubResolve1();
+      await setupSubAppHapiRoutes(server, {});
+      await server.start();
+      const { statusCode } = await server.inject({
+        method: "GET",
+        url: "/favicon.ico"
+      });
+      expect(statusCode).to.equal(200);
+    });
+
+    it("should let server reply 404 if icon not retrieved", async () => {
+      stubPathResolve = getStubResolve2();
+      await setupSubAppHapiRoutes(server, {});
+      await server.start();
+      const { statusCode } = await server.inject({
+        method: "GET",
+        url: "/favicon.ico"
+      });
+      expect(statusCode).to.equal(404);
+    });
+
+    describe("with hapi 17", () => {
+      let stubIsHapi17;
+
+      before(() => {
+        Object.keys(require.cache).forEach(key => delete require.cache[key]);
+        stubIsHapi17 = sinon
+          .stub(require("electrode-hapi-compat"), "isHapi17")
+          .callsFake(() => true);
+      });
+
+      after(() => {
+        if (stubIsHapi17) stubIsHapi17.restore();
+      });
+
+      it("TBD", () => {
+        console.log(require("electrode-hapi-compat").isHapi17());
+      });
+
+      it("should let server reply favicon if icon retrieved", async () => {
+        stubPathResolve = getStubResolve1();
+        await setupSubAppHapiRoutes(server, {});
+        await server.start();
+        const { statusCode } = await server.inject({
+          method: "GET",
+          url: "/favicon.ico"
+        });
+        expect(statusCode).to.equal(200);
+      });
+
+      it("should let server reply 404 if icon not retrieved", async () => {
+        stubPathResolve = getStubResolve2();
+        await setupSubAppHapiRoutes(server, {});
+        await server.start();
+        const { statusCode } = await server.inject({
+          method: "GET",
+          url: "/favicon.ico"
+        });
+        expect(statusCode).to.equal(404);
+      });
     });
   });
 });
