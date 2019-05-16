@@ -3,6 +3,8 @@
 const Path = require("path");
 const Fs = require("fs");
 const { ChunkExtractor } = require("@loadable/server");
+const Promise = require("bluebird");
+const request = Promise.promisify(require("request"));
 
 module.exports = {
   es6Default: m => {
@@ -18,5 +20,24 @@ module.exports = {
       ? new ChunkExtractor({ statsFile })
       : {
           collectChunks: app => app
-        }
+        },
+  getExtractor1: async statsFile => {
+    let extractor = {
+      collectChunks: app => app
+    };
+    if (process.env.NODE_ENV === "development") {
+      let stats, code;
+      try {
+        const { response, body } = await request("http://localhost:2992/js/loadable-stats.json");  // TODO: ECONREFUSED 
+        stats = JSON.parse(body);
+        code = response.statusCode;
+      } catch (e) {
+        console.error(e);
+      }
+      if (code === 200) extractor = new ChunkExtractor({ stats });
+    } else if (Fs.existsSync(statsFile)) {
+      extractor = new ChunkExtractor({ statsFile });
+    }
+    return extractor;
+  }
 };

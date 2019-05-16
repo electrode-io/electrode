@@ -44,14 +44,15 @@
     "xstdout": "^0.1.1"
   },
   "dependencies": {
+    "@loadable/component": "^5.7.0",
+    "@loadable/server": "^5.9.0",
     "optional-require": "^1.0.0",
     "react-redux": "^4.4.5 || ^5.x.x",
     "react-router": "^4.3.1",
     "react-router-config": "^1.0.0-beta.4",
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.0 || ^3.6.0",
-    "@loadable/component": "^5.7.0",
-    "@loadable/server": "^5.9.0"
+    "request": "^2.88.0"
   },
   "peerDependencies": {
     "react": "^16.0.0 || ^15.3.1 || ^0.14.8",
