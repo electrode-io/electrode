@@ -12,6 +12,7 @@ const {
 const Path = require("path");
 const Hapi = require("hapi");
 const sinon = require("sinon");
+const { ReactWebapp } = require("electrode-react-webapp");
 // const Promise = require("bluebird");
 // const request = Promise.promisify(require("request"));
 
@@ -117,6 +118,7 @@ describe("subapp-server", () => {
   describe("setupSubAppHapiRoutes", () => {
     let server;
     let stubPathResolve;
+    let stubRouteHandler;
     const stubWithArgs = (lib, method, argsFakeCallPairs) => {
       const stubbed = sinon.stub(lib, method);
       argsFakeCallPairs.forEach(([args, fakeCall]) =>
@@ -150,6 +152,7 @@ describe("subapp-server", () => {
     afterEach(() => {
       server.stop();
       if (stubPathResolve) stubPathResolve.restore();
+      if (stubRouteHandler) stubRouteHandler.restore();
     });
 
     it("should setup subapp routes with `htmlFile` specified in options", async () => {
@@ -167,14 +170,24 @@ describe("subapp-server", () => {
 
     it.only("TBD", async () => {
       stubPathResolve = getStubResolve1();
+      stubRouteHandler = sinon
+        .stub(ReactWebapp, "makeRouteHandler")
+        .callsFake(() => async () => {
+          return {
+            result: {
+              status: 301,
+              path: "/file1"
+            }
+          };
+        });
       await setupSubAppHapiRoutes(server, {});
       await server.start();
       const res = await server.inject({
         method: "GET",
         url: "/file2"
       });
-      console.log(res);
-      expect(res.result).to.equal("<html>file2.html</html>");
+      console.log(res.result);
+      // expect(res.result).to.equal("<html>file2.html</html>");
     });
 
     it("should setup subapp routes with `favicon=false` in options", async () => {

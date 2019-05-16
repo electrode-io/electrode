@@ -298,6 +298,7 @@ async function setupSubAppHapiRoutes(server, options) {
         }
       : // Hapi 16 route handler
         (request, reply) => {
+          console.log(routeHandler.toString());
           return routeHandler({
             content: { html: "", status: 200, useStream: true },
             mode: "",
@@ -306,10 +307,11 @@ async function setupSubAppHapiRoutes(server, options) {
             .then(context => {
               const data = context.result;
               const status = data.status;
-
+              console.log(data);
               if (status === undefined) {
                 reply(data);
               } else if (HttpStatus.redirect[status]) {
+                console.log("I am here");
                 reply.redirect(data.path);
               } else if (HttpStatus.displayHtml[status]) {
                 reply(data.html !== undefined ? data.html : data).code(status);
