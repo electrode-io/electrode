@@ -82,6 +82,14 @@ function setDevelopmentEnv() {
   process.env.NODE_ENV = "development";
 }
 
+function setDevelopmentTarget(args) {
+  const idx = args.findIndex(arg => arg.startsWith("--target"));
+  if (idx >= 0) {
+    const [arg] = args.splice(idx, 1);
+    process.env.ENV_TARGET = arg.substr("--target=".length);
+  }
+}
+
 function setWebpackHot() {
   process.env.HMR = "true";
 }
@@ -656,7 +664,7 @@ Individual .babelrc files were generated for you in src/client and src/server
           Fs.writeFileSync(".isomorphic-loader-config.json", JSON.stringify({}));
         }
         const args = taskArgs(this.argv);
-
+        setDevelopmentTarget(args);
         return [
           ".set.babel.env",
           ".webpack-dev",
