@@ -46,8 +46,8 @@ describe("electrode-archetype-react-app-dev extract-styles", function() {
       archetype.webpack.cssModuleSupport = true;
       archetype.webpack.enableShortenCSSNames = true;
       const moduleConfig = require(moduleName)().module;
-      expect(moduleConfig.rules[0].use[2].options.localIdentName).to.equal("[hash:base64:5]");
-      expect(moduleConfig.rules[0].use[3].options.ident).to.equal("postcss");
+      expect(moduleConfig.rules[0].use[1].options.localIdentName).to.equal("[hash:base64:5]");
+      expect(moduleConfig.rules[0].use[2].options.ident).to.equal("postcss");
       delete process.env.NODE_ENV;
     });
 
@@ -55,8 +55,8 @@ describe("electrode-archetype-react-app-dev extract-styles", function() {
       archetype.webpack.cssModuleSupport = false;
       archetype.webpack.enableShortenCSSNames = true;
       const moduleConfig = require(moduleName)().module;
-      expect(moduleConfig.rules[0].use[2].options.localIdentName).to.be.undefined;
-      expect(moduleConfig.rules[0].use[3].options.ident).to.equal("postcss");
+      expect(moduleConfig.rules[0].use[1].options.localIdentName).to.be.undefined;
+      expect(moduleConfig.rules[0].use[2].options.ident).to.equal("postcss");
     });
   });
 
@@ -77,7 +77,7 @@ describe("electrode-archetype-react-app-dev extract-styles", function() {
       };
       archetype.webpack.cssModuleSupport = false;
       const moduleConfig = require(moduleName)().module;
-      expect(moduleConfig.rules[1].use[4].loader).to.include("sass-loader");
+      expect(moduleConfig.rules[1].use[3].loader).to.include("sass-loader");
     });
   });
 });
