@@ -76,8 +76,8 @@ describe("subapp-server", () => {
 
   describe("getCriticalCSS", () => {
     it("should get criticalCss", () => {
-      const criticalCss = getCriticalCSS("./test/data/critical-css.json");
-      expect(JSON.parse(criticalCss).name).to.equal("critical-css");
+      const criticalCss = getCriticalCSS("./test/data/critical.css");
+      expect(criticalCss).to.include("h1");
     });
 
     it("should return empty string if criticalCss file does not exist", () => {
