@@ -14,8 +14,6 @@ const Path = require("path");
 const Hapi = require("hapi");
 const sinon = require("sinon");
 const { ReactWebapp } = require("electrode-react-webapp");
-// const Promise = require("bluebird");
-// const request = Promise.promisify(require("request"));
 
 describe("subapp-server", () => {
   describe("resolveChunkSelector", () => {
@@ -369,58 +367,6 @@ describe("subapp-server", () => {
       });
       expect(statusCode).to.equal(404);
     });
-
-    // describe("with hapi 17", () => {
-    //   let stubIsHapi17;
-    //   let setup;
-
-    //   before(() => {
-    //     Object.keys(require.cache).forEach(key => delete require.cache[key]);
-    //     stubIsHapi17 = sinon
-    //       .stub(require("electrode-hapi-compat"), "isHapi17")
-    //       .callsFake(() => true);
-    //     setup = require("../../lib/utils").setupSubAppHapiRoutes;
-    //   });
-
-    //   after(() => {
-    //     if (stubIsHapi17) stubIsHapi17.restore();
-    //   });
-
-    //   beforeEach(() => {
-    //     server = new Hapi.Server();
-    //     server.connection({ port: 8081 });
-    //   });
-
-    //   afterEach(() => {
-    //     server.stop();
-    //     if (stubPathResolve) stubPathResolve.restore();
-    //     if (stubRouteHandler) stubRouteHandler.restore();
-    //   });
-
-    //   it("should let server reply favicon if icon retrieved", async () => {
-    //     stubPathResolve = getStubResolve1();
-    //     await setup(server, {});
-    //     await server.start();
-    //     server.inject({
-    //       method: "GET",
-    //       url: "/favicon.ico"
-    //     });
-    //     expect(1).to.equal(1);
-    //     // expect(statusCode).to.equal(200);
-    //   });
-
-    //   // it("should let server reply 404 if icon not retrieved", async (done) => {
-    //   //   stubPathResolve = getStubResolve2();
-    //   //   await setup(server, {});
-    //   //   await server.start();
-    //   //   const { statusCode } = await server.inject({
-    //   //     method: "GET",
-    //   //     url: "/favicon.ico"
-    //   //   });
-    //   //   expect(statusCode).to.equal(404);
-    //   //   done();
-    //   // });
-    // });
   });
 
   describe("legacyPlugin", () => {
