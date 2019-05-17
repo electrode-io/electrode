@@ -11,7 +11,6 @@ const postcssPresetEnv = require("postcss-preset-env");
 
 const autoprefixer = require("autoprefixer");
 const cssLoader = require.resolve("css-loader");
-const styleLoader = require.resolve("style-loader");
 const stylusLoader = require.resolve("stylus-relative-loader");
 const postcssLoader = require.resolve("postcss-loader");
 const lessLoader = require.resolve("less-loader");
