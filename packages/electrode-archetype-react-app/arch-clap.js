@@ -83,10 +83,12 @@ function setDevelopmentEnv() {
 }
 
 function setDevelopmentTarget(args) {
-  const idx = args.findIndex(arg => arg.startsWith("--target"));
-  if (idx >= 0) {
-    const [arg] = args.splice(idx, 1);
-    process.env.ENV_TARGET = arg.substr("--target=".length);
+  if (archetype.babel.target === "default") {
+    const idx = args.findIndex(arg => arg.startsWith("--target"));
+    if (idx >= 0) {
+      const [arg] = args.splice(idx, 1);
+      process.env.ENV_TARGET = arg.substr("--target=".length);
+    }
   }
 }
 
@@ -357,6 +359,10 @@ function makeTasks(xclap) {
   const buildDistDirs = babelEnvTargetsArr
     .filter(name => name !== "default")
     .map(name => `dist-${name}`);
+
+  const setEnvTarget = target => {
+    process.env.ENV_TARGET = target;
+  };
 
   let tasks = {
     ".mk-prod-dir": () =>
@@ -654,6 +660,8 @@ Individual .babelrc files were generated for you in src/client and src/server
     "cov-frontend-85": () => checkFrontendCov("85"),
     "cov-frontend-95": () => checkFrontendCov("95"),
 
+    "dev-target-es6": () => setEnvTarget("es6"),
+
     debug: ["build-dev-static", "server-debug"],
     devbrk: ["dev --inspect-brk"],
     dev: {
@@ -675,6 +683,12 @@ Individual .babelrc files were generated for you in src/client and src/server
           ].filter(x => x)
         ];
       }
+    },
+
+    "dev-es6": {
+      desc:
+        "Start your app with watch in development mode with webpack-dev-server with ENV_TARGET=es6",
+      task: ["dev-target-es6", "dev"]
     },
 
     "dev-static": {
