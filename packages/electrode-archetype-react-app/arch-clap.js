@@ -82,6 +82,16 @@ function setDevelopmentEnv() {
   process.env.NODE_ENV = "development";
 }
 
+function setDevelopmentTarget(args) {
+  if (archetype.babel.target === "default") {
+    const idx = args.findIndex(arg => arg.startsWith("--target"));
+    if (idx >= 0) {
+      const [arg] = args.splice(idx, 1);
+      process.env.ENV_TARGET = arg.substr("--target=".length);
+    }
+  }
+}
+
 function setWebpackHot() {
   process.env.HMR = "true";
 }
@@ -349,6 +359,10 @@ function makeTasks(xclap) {
   const buildDistDirs = babelEnvTargetsArr
     .filter(name => name !== "default")
     .map(name => `dist-${name}`);
+
+  const setEnvTarget = target => {
+    process.env.ENV_TARGET = target;
+  };
 
   let tasks = {
     ".mk-prod-dir": () =>
@@ -656,7 +670,7 @@ Individual .babelrc files were generated for you in src/client and src/server
           Fs.writeFileSync(".isomorphic-loader-config.json", JSON.stringify({}));
         }
         const args = taskArgs(this.argv);
-
+        setDevelopmentTarget(args);
         return [
           ".set.babel.env",
           ".webpack-dev",
@@ -667,6 +681,12 @@ Individual .babelrc files were generated for you in src/client and src/server
           ].filter(x => x)
         ];
       }
+    },
+
+    "dev-es6": {
+      desc:
+        "Start your app with watch in development mode with webpack-dev-server with ENV_TARGET=es6",
+      task: ["dev --target=es6"]
     },
 
     "dev-static": {
