@@ -660,8 +660,6 @@ Individual .babelrc files were generated for you in src/client and src/server
     "cov-frontend-85": () => checkFrontendCov("85"),
     "cov-frontend-95": () => checkFrontendCov("95"),
 
-    "dev-target-es6": () => setEnvTarget("es6"),
-
     debug: ["build-dev-static", "server-debug"],
     devbrk: ["dev --inspect-brk"],
     dev: {
@@ -688,7 +686,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     "dev-es6": {
       desc:
         "Start your app with watch in development mode with webpack-dev-server with ENV_TARGET=es6",
-      task: ["dev-target-es6", "dev"]
+      task: ["dev --target=es6"]
     },
 
     "dev-static": {

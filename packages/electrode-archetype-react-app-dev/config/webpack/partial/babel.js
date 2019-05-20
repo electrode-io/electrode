@@ -11,7 +11,6 @@ module.exports = function(options) {
   const { options: babelLoaderOptions = {}, ...rest } = archetype.babel.extendLoader;
   const isProduction =
     process.env.BABEL_ENV === "production" || process.env.NODE_ENV === "production";
-  const isDevelopment = process.env.NODE_ENV === "development";
   const getBabelrcClient = () => {
     const babelrcClient = JSON.parse(
       Fs.readFileSync(require.resolve("../../babel/babelrc-client-multitargets"))
@@ -26,7 +25,7 @@ module.exports = function(options) {
         targets,
         useBuiltIns: "entry",
         corejs: "2",
-        modules: isProduction || (isDevelopment && target !== "default") ? false : "commonjs"
+        modules: isProduction ? false : "commonjs"
       }
     ]);
     babelrcClient.presets = babelrcClient.presets.concat(presets);
