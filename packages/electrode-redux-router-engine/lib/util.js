@@ -25,7 +25,7 @@ module.exports = {
         const { body } = await request("http://127.0.0.1:2992/js/loadable-stats.json");
         stats = JSON.parse(body);
       } catch (e) {
-        console.error(e);
+        console.error(e); // eslint-disable-line no-console
       }
       if (stats) extractor = new ChunkExtractor({ stats });
     } else if (Fs.existsSync(statsFile)) {
