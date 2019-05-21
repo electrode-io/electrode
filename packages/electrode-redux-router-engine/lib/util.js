@@ -15,26 +15,19 @@ module.exports = {
 
     return p.startsWith(".") ? Path.resolve(baseDir || "", p) : p;
   },
-  getExtractor: statsFile =>
-    Fs.existsSync(statsFile)
-      ? new ChunkExtractor({ statsFile })
-      : {
-          collectChunks: app => app
-        },
-  getExtractor1: async statsFile => {
+  getExtractor: async statsFile => {
     let extractor = {
       collectChunks: app => app
     };
     if (process.env.NODE_ENV === "development") {
-      let stats, code;
+      let stats;
       try {
-        const { response, body } = await request("http://localhost:2992/js/loadable-stats.json");  // TODO: ECONREFUSED 
+        const { body } = await request("http://127.0.0.1:2992/js/loadable-stats.json");
         stats = JSON.parse(body);
-        code = response.statusCode;
       } catch (e) {
         console.error(e);
       }
-      if (code === 200) extractor = new ChunkExtractor({ stats });
+      if (stats) extractor = new ChunkExtractor({ stats });
     } else if (Fs.existsSync(statsFile)) {
       extractor = new ChunkExtractor({ statsFile });
     }

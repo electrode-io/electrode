@@ -15,7 +15,6 @@ const { combineReducers, createStore } = require("redux");
 const pkg = require("../package.json");
 const util = require("./util");
 const ServerContext = require("./server-context");
-const extractor = util.getExtractor(Path.resolve("./dist/js/loadable-stats.json")); // TODO: Problem: dev mode does not exists such a path
 
 const BAD_CHARS_REGEXP = /[<\u2028\u2029]/g;
 const REPLACEMENTS_FOR_BAD_CHARS = {
@@ -264,9 +263,9 @@ class ReduxRouterEngine {
       } else {
         ssrApi = withIds ? ReactDomServer.renderToString : ReactDomServer.renderToStaticMarkup;
       }
-      const extractor1 = await util.getExtractor1(Path.resolve("./dist/js/loadable-stats.json"));
+      const extractor = await util.getExtractor(Path.resolve("./dist/js/loadable-stats.json"));
       return ssrApi(
-        extractor1.collectChunks(
+        extractor.collectChunks(
           React.createElement(
             // server side context to provide request
             ServerContext,
