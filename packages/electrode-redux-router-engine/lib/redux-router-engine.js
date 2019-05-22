@@ -248,7 +248,7 @@ class ReduxRouterEngine {
     }
   }
 
-  async _renderToString({ req, location, store, routeContext, withIds }) {
+  _renderToString({ req, location, store, routeContext, withIds }) {
     if (req.app && req.app.disableSSR) {
       return "<!-- SSR disabled by request -->";
     } else {
@@ -263,7 +263,7 @@ class ReduxRouterEngine {
       } else {
         ssrApi = withIds ? ReactDomServer.renderToString : ReactDomServer.renderToStaticMarkup;
       }
-      const extractor = await util.getExtractor(Path.resolve("./dist/js/loadable-stats.json"));
+      const extractor = util.getExtractor();
       return ssrApi(
         extractor.collectChunks(
           React.createElement(

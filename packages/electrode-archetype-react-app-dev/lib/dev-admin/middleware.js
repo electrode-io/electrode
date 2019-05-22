@@ -26,6 +26,9 @@ const archetype = require("electrode-archetype-react-app/config/archetype");
 const _ = require("lodash");
 const statsUtils = require("../stats-utils");
 const statsMapper = require("../stats-mapper");
+const devRequire = archetype.devRequire;
+const xsh = devRequire("xsh");
+const shell = xsh.$;
 
 function urlJoin() {
   if (arguments.length < 1) return undefined;
@@ -197,6 +200,7 @@ class Middleware {
     this.dllDevUrl = urlJoin(this.devBaseUrl, "/dll");
 
     const ISO_LOADER_CONFIG = ".isomorphic-loader-config.json";
+    const LOADABLE_STATS = "loadable-stats.json";
     const isoLockfile = Path.resolve(`${ISO_LOADER_CONFIG}.lock`);
     const isoConfigFile = Path.resolve(ISO_LOADER_CONFIG);
 
@@ -214,6 +218,15 @@ class Middleware {
 
     const transferIsomorphicAssets = (fileSystem, cb) => {
       const isoConfig = loadIsomorphicConfig();
+      const loadableStats = `/${LOADABLE_STATS}`;
+
+      if (fileSystem.existsSync(loadableStats)) {
+        const source = fileSystem.readFileSync(loadableStats);
+        const dir = Path.resolve("./dist/js");
+        if (!Fs.existsSync(dir)) shell.mkdir("-p", dir);
+        Fs.writeFile(`${dir}${loadableStats}`, source, cb);
+      }
+
       if (isoConfig.assetsFile) {
         const assetsFile = Path.resolve(isoConfig.assetsFile);
         const source = fileSystem.readFileSync(assetsFile);
