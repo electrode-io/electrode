@@ -1,3 +1,27 @@
+# 5/22/2019
+
+-   migrate `extract-text-webpack-plugin` to `mini-css-extract-plugin` 
+
+## Packages
+
+-   `electrode-archetype-react-app@6.4.7` `(6.4.6 => 6.4.7)`
+-   `electrode-archetype-react-app-dev@6.4.7` `(6.4.6 => 6.4.7)`
+-   `subapp-server@1.0.7` `(1.0.6 => 1.0.7)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   migrate `extract-text-webpack-plugin` to `mini-css-extract-plugin` ([#1247](https://github.com/electrode-io/electrode/pull/1247)) [commit](http://github.com/electrode-io/electrode/commit/e8e75ccaa100fa99533951b35ebfb2ff99b9d377)
+
+-   `packages/subapp-server`
+
+    -   add tests for package subapp-server ([#1248](https://github.com/electrode-io/electrode/pull/1248)) [commit](http://github.com/electrode-io/electrode/commit/34e026e3d43c2b865e16995d592e54c0f3213a5b)
+
+-   `samples/universal-react-node`
+
+    -   [chore] update generated lockfile for samples [commit](http://github.com/electrode-io/electrode/commit/747f39a66a96ca5b2ea26b1f0a37b8bd13e596b7)
+
 # 5/15/2019
 
 - add flag to turn off JS minify in production build
