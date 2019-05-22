@@ -27,12 +27,15 @@ module.exports = function() {
         {
           _name: "font-file",
           test: /\.(eot|ttf)(\?\S*)?$/i,
-          use: [{
-            loader: fileLoader,
-            options: {
-              publicPath: "/js/"
-            }
-          }, isomorphicLoader]
+          use: [
+            {
+              loader: fileLoader,
+              options: {
+                publicPath: "/js/"
+              }
+            },
+            isomorphicLoader
+          ]
         }
       ]
     }
