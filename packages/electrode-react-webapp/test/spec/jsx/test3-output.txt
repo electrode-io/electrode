@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<div>nesting children
+<div>component1
+a
+
+</div>
+
+<div>component1
+b
+
+</div>
+
+<div>component1
++a
+
+<div>inside component1
+</div>
+</div>
+
+</div>
+
+<div>async component
+x
+ children:
+<div>component1
+x1
+
+</div>
+
+<div>nesting children
+<div>component1
+m
+
+</div>
+
+<div>component1
+n
+
+</div>
+
+<div>component1
++a
+
+<div>inside component1
+</div>
+</div>
+
+</div>
+
+<div>component1
+x2
+
+</div>
+
+</div>

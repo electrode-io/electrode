@@ -3,7 +3,7 @@
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const Path = require("path");
 const webpack = require("webpack");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 const atImport = require("postcss-import");
@@ -11,7 +11,6 @@ const postcssPresetEnv = require("postcss-preset-env");
 
 const autoprefixer = require("autoprefixer");
 const cssLoader = require.resolve("css-loader");
-const styleLoader = require.resolve("style-loader");
 const stylusLoader = require.resolve("stylus-relative-loader");
 const postcssLoader = require.resolve("postcss-loader");
 const lessLoader = require.resolve("less-loader");
@@ -117,13 +116,12 @@ const stylusQuery = {
 const stylusRules = {
   _name: `extract${cssModuleSupport ? "-css" : ""}-stylus`,
   test: /\.styl$/,
-  use: ExtractTextPlugin.extract({
-    fallback: styleLoader,
-    use: cssModuleSupport
+  use: [
+    { loader: MiniCssExtractPlugin.loader, options: { publicPath: "" } },
+    ...(cssModuleSupport
       ? [cssModuleQuery, postcssQuery, stylusQuery]
-      : [cssQuery, postcssQuery, stylusQuery],
-    publicPath: ""
-  })
+      : [cssQuery, postcssQuery, stylusQuery])
+  ]
 };
 
 const lessQuery = {
@@ -133,37 +131,34 @@ const lessQuery = {
 const lessRules = {
   _name: `extract${cssModuleSupport ? "-css" : ""}-less`,
   test: /\.less$/,
-  use: ExtractTextPlugin.extract({
-    fallback: styleLoader,
-    use: cssModuleSupport
+  use: [
+    { loader: MiniCssExtractPlugin.loader, options: { publicPath: "" } },
+    ...(cssModuleSupport
       ? [cssModuleQuery, postcssQuery, lessQuery]
-      : [cssQuery, postcssQuery, lessQuery],
-    publicPath: ""
-  })
+      : [cssQuery, postcssQuery, lessQuery])
+  ]
 };
 
 module.exports = function() {
   rules.push({
     _name: `extract-css${cssModuleSupport ? "-modules" : ""}`,
     test: /\.css$/,
-    use: ExtractTextPlugin.extract({
-      fallback: styleLoader,
-      use: cssModuleSupport ? [cssModuleQuery, postcssQuery] : [cssQuery, postcssQuery],
-      publicPath: ""
-    })
+    use: [
+      { loader: MiniCssExtractPlugin.loader, options: { publicPath: "" } },
+      ...(cssModuleSupport ? [cssModuleQuery, postcssQuery] : [cssQuery, postcssQuery])
+    ]
   });
 
   if (archetype.options.sass) {
     rules.push({
       _name: `extract${cssModuleSupport ? "-css" : ""}-scss`,
       test: /\.(scss|sass)$/,
-      use: ExtractTextPlugin.extract({
-        fallback: styleLoader,
-        use: cssModuleSupport
+      use: [
+        { loader: MiniCssExtractPlugin.loader, options: { publicPath: "" } },
+        ...(cssModuleSupport
           ? [cssModuleQuery, postcssQuery, sassQuery]
-          : [cssQuery, postcssQuery, sassQuery],
-        publicPath: ""
-      })
+          : [cssQuery, postcssQuery, sassQuery])
+      ]
     });
   }
 
@@ -178,11 +173,12 @@ module.exports = function() {
     rules.push({
       _name: "extract-css-stylus",
       test: /\.styl$/,
-      use: ExtractTextPlugin.extract({
-        fallback: styleLoader,
-        use: [cssModuleQuery, postcssQuery, stylusQuery],
-        publicPath: ""
-      })
+      use: [
+        { loader: MiniCssExtractPlugin.loader, options: { publicPath: "" } },
+        cssModuleQuery,
+        postcssQuery,
+        stylusQuery
+      ]
     });
   }
 
@@ -191,7 +187,7 @@ module.exports = function() {
   return {
     module: { rules },
     plugins: [
-      new ExtractTextPlugin({
+      new MiniCssExtractPlugin({
         filename: archetype.babel.hasMultiTargets ? "[name].style.css" : "[name].style.[hash].css"
       }),
       process.env.NODE_ENV === "production" &&

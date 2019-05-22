@@ -1638,8 +1638,8 @@ describe("hapi 17 electrode-react-webapp", () => {
           })
           .then(() => {
             stdoutIntercept.restore();
-            // since there are two paths and the react-helment-handler is only register for the
-            // main path route, expect the other route's registration to cause a error message
+            // since there are two paths and the react-helmet-handler is only register for the
+            // /react-helmet route, expect the other route's registration to cause a error message
             // to the stderr.
             expect(stdoutIntercept.stderr[0]).contains(
               "electrode-react-webapp: no handler found for token id REACT_HELMET_SCRIPTS"

@@ -11,5 +11,6 @@ module.exports = {
   middleware, // for express
   hapiRegisterRoutes: hapiPlugin.registerRoutes,
   ReactWebapp,
-  AsyncTemplate
+  AsyncTemplate,
+  jsx: require("./lib/jsx")
 };

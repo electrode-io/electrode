@@ -29,7 +29,8 @@ function renderNext(err, xt) {
   };
 
   if (context.isFullStop || context.isVoidStop || xt.stepIndex >= renderSteps.length) {
-    xt.resolve(context.output.close());
+    const r = context.output.close();
+    xt.resolve(r);
     return null;
   } else {
     // TODO: support soft stop

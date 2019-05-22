@@ -1,3 +1,97 @@
+# 5/22/2019
+
+-   migrate `extract-text-webpack-plugin` to `mini-css-extract-plugin` 
+
+## Packages
+
+-   `electrode-archetype-react-app@6.4.7` `(6.4.6 => 6.4.7)`
+-   `electrode-archetype-react-app-dev@6.4.7` `(6.4.6 => 6.4.7)`
+-   `subapp-server@1.0.7` `(1.0.6 => 1.0.7)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   migrate `extract-text-webpack-plugin` to `mini-css-extract-plugin` ([#1247](https://github.com/electrode-io/electrode/pull/1247)) [commit](http://github.com/electrode-io/electrode/commit/e8e75ccaa100fa99533951b35ebfb2ff99b9d377)
+
+-   `packages/subapp-server`
+
+    -   add tests for package subapp-server ([#1248](https://github.com/electrode-io/electrode/pull/1248)) [commit](http://github.com/electrode-io/electrode/commit/34e026e3d43c2b865e16995d592e54c0f3213a5b)
+
+-   `samples/universal-react-node`
+
+    -   [chore] update generated lockfile for samples [commit](http://github.com/electrode-io/electrode/commit/747f39a66a96ca5b2ea26b1f0a37b8bd13e596b7)
+
+# 5/15/2019
+
+- add flag to turn off JS minify in production build
+- support index HTML template wirtten in JSX
+- fix #1189 - eslint error in generated app
+- fix uglifyJs issue
+- fix stylesheet has in name when transpiling for a single env target
+- update OTA docs
+
+## Packages
+
+### Directly Updated
+
+-   `electrode-archetype-react-app@6.4.6` `(6.4.5 => 6.4.6)`
+-   `electrode-archetype-react-app-dev@6.4.6` `(6.4.5 => 6.4.6)`
+-   `electrode-archetype-react-component@6.1.5` `(6.1.4 => 6.1.5)`
+-   `electrode-archetype-react-component-dev@6.1.5` `(6.1.4 => 6.1.5)`
+-   `electrode-react-webapp@3.7.0` `(3.6.1 => 3.7.0)`
+-   `generator-electrode@5.1.5` `(5.1.4 => 5.1.5)`
+-   `ignite-core@1.1.9` `(1.1.8 => 1.1.9)`
+
+### Lerna Updated
+
+-   `electrode-ignite@3.0.9` `(3.0.8 => 3.0.9)`
+-   `subapp-server@1.0.6` `(1.0.5 => 1.0.6)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   add minify flag to archetype v6 ([#1232](https://github.com/electrode-io/electrode/pull/1232)) [commit](http://github.com/electrode-io/electrode/commit/407afa1454602d5a42399fcc5688c83b91015d4e)
+    -   fix stylesheet hash in name when single target ([#1231](https://github.com/electrode-io/electrode/pull/1231)) [commit](http://github.com/electrode-io/electrode/commit/d6eaa5bd42fb855f346394e91ebd6aad88b05b60)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   fix uglifyJs issue [commit](http://github.com/electrode-io/electrode/commit/78e45bde2912c95b6f77d76c85b181e0dda527cd)
+
+-   `packages/electrode-react-webapp`
+
+    -   [minor][feat] support template written in JSX ([#1244](https://github.com/electrode-io/electrode/pull/1244)) [commit](http://github.com/electrode-io/electrode/commit/1b5b35df5966ca1545e7c1ddfea71937eed20cae)
+    -   update to babel 7 for transpiling test code ([#1243](https://github.com/electrode-io/electrode/pull/1243)) [commit](http://github.com/electrode-io/electrode/commit/11435873f7e68b91d027f6c038c61ddbaadc8a0f)
+
+-   `packages/generator-electrode`
+
+    -   commented reporterOptions in default.js ([#1237](https://github.com/electrode-io/electrode/pull/1237)) [commit](http://github.com/electrode-io/electrode/commit/cbc734fdcdd91026f3bb9b7896d33ec2d5f9428f)
+
+-   `packages/ignite-core`
+
+    -   skip tests that keep time out due to network [commit](http://github.com/electrode-io/electrode/commit/71852f91be4d4559634988f54f0fd1934ad5a482)
+
+-   `samples/demo-tree-shaking`
+
+    -   [chore] update samples generated files [commit](http://github.com/electrode-io/electrode/commit/f1c080f5e6b5bc336a08319de875511c0d14966c)
+
+-   `samples/stylus-sample`
+
+    -   [chore] update samples generated files [commit](http://github.com/electrode-io/electrode/commit/f1c080f5e6b5bc336a08319de875511c0d14966c)
+
+-   `samples/universal-react-node`
+
+    -   [chore] update samples generated files [commit](http://github.com/electrode-io/electrode/commit/f1c080f5e6b5bc336a08319de875511c0d14966c)
+
+-   `.vscode`
+
+    -   commented reporterOptions in default.js ([#1237](https://github.com/electrode-io/electrode/pull/1237)) [commit](http://github.com/electrode-io/electrode/commit/cbc734fdcdd91026f3bb9b7896d33ec2d5f9428f)
+
+-   `docs`
+
+    -   Update OTA documentation ([#1234](https://github.com/electrode-io/electrode/pull/1234)) [commit](http://github.com/electrode-io/electrode/commit/fc9f9f530db6c4902655a46f3478f141964d4788)
+
 # 4/25/2019
 
 - [dep] use core-js and regenerator-runtime to replace deprecated @babel/polyfill
