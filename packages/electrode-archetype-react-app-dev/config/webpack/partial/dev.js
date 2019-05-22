@@ -1,6 +1,6 @@
 "use strict";
 
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const webpackDevReporter = require("../util/webpack-dev-reporter");
 
@@ -38,7 +38,7 @@ module.exports = function() {
       filename: "[name].bundle.dev.js"
     },
     devtool: "inline-source-map",
-    plugins: [new ExtractTextPlugin({ filename: "[name].style.css" })],
+    plugins: [new MiniCssExtractPlugin({ filename: "[name].style.css" })],
     optimization: {
       noEmitOnErrors: true
     }
