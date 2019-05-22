@@ -1,3 +1,18 @@
+# 5/22/2019
+
+- new `clap dev-es6` task for running with babel targetting ES6
+
+## Packages
+
+-   `electrode-archetype-react-app@5.5.7` `(5.5.6 => 5.5.7)`
+-   `electrode-archetype-react-app-dev@5.5.7` `(5.5.6 => 5.5.7)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   allow running dev mode with different babel env target ([#1249](https://github.com/electrode-io/electrode/pull/1249)) [commit](http://github.com/electrode-io/electrode/commit/051b1468470118ff6c2d50d84b397a2d28d1afbb)
+
 # 5/15/2019
 
 ## Packages
