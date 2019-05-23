@@ -12,7 +12,7 @@ const staticPathsDecor = require("electrode-static-paths");
 
 // test JSX syntax properly handled by babel
 import React from "react";
-const testTemplate = <div>hello, world</div>; // eslint-ignore-line
+const testTemplate = <div>hello, world</div>; // eslint-disable-line
 
 support
   .load({
