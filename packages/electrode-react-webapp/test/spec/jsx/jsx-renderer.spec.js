@@ -7,9 +7,11 @@
 const Path = require("path");
 const Fs = require("fs");
 const { JsxRenderer, Component, IndexPage, createElement } = require("../../..").jsx;
-const Template = require("../../jsx-templates/test1").default;
-const Template2 = require("../../jsx-templates/test2").default;
-const Template3 = require("../../jsx-templates/test3").default;
+import Template from "../../jsx-templates/test1";
+import Template2 from "../../jsx-templates/test2";
+import Template3 from "../../jsx-templates/test3";
+
+import Template4 from "../../jsx-templates/test4";
 
 describe("Component", function() {
   it("should have isComponent and render method", () => {
@@ -188,6 +190,22 @@ describe("Jsx Renderer", function() {
     const promise = renderer.render({});
     return promise.then(context => {
       expect(context.result.message).equal("test async component fail");
+    });
+  });
+
+  it("should have unique Token instances for multiple tokens with same _id", () => {
+    const renderer = new JsxRenderer({
+      templateFullPath: Path.dirname(require.resolve("../../jsx-templates/test4")),
+      template: Template4,
+      tokenHandlers: "./test/fixtures/token-handler"
+    });
+
+    renderer.initializeRenderer();
+
+    const promise = renderer.render({});
+    return promise.then(context => {
+      const r = context.output._result.split("\n").join("_");
+      expect(r).contains("require1_require2_require3");
     });
   });
 

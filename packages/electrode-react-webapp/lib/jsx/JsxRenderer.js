@@ -211,17 +211,26 @@ class JsxRenderer {
     }
   }
 
-  setupTokenInst(element, forRequire) {
-    let tokenInst = this._tokens[element.props._id];
+  setupTokenInst(element, scope, forRequire) {
+    let tokenInst;
+    let memId;
 
-    if (tokenInst) {
-      return tokenInst;
+    if (scope.depth < 1) {
+      memId = `${element.props._id}_${element.id}`;
+      tokenInst = this._tokens[memId];
+
+      if (tokenInst) {
+        return tokenInst;
+      }
     }
 
     const id = forRequire ? `require(${element.props._id})` : element.props._id;
 
     tokenInst = new Token(id, 0, element.props, this.templateFullPath);
-    this._tokens[element.props._id] = tokenInst;
+
+    if (memId) {
+      this._tokens[memId] = tokenInst;
+    }
 
     this._applyTokenLoad(element, tokenInst);
 
