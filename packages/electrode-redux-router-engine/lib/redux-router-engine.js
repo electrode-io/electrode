@@ -69,6 +69,7 @@ class ReduxRouterEngine {
       : Path.resolve(process.env.APP_SRC_DIR || "", "server/routes");
 
     this._routesComponent = renderRoutes(this._routes);
+    this._extractor = util.createdStatExtractor();
   }
 
   startMatch(req, options = {}) {
@@ -263,9 +264,14 @@ class ReduxRouterEngine {
       } else {
         ssrApi = withIds ? ReactDomServer.renderToString : ReactDomServer.renderToStaticMarkup;
       }
-      const extractor = util.getExtractor();
+
+      this._extractor =
+        this._extractor && process.env.NODE_ENV === "production"
+          ? this._extractor
+          : util.createdStatExtractor();
+
       return ssrApi(
-        extractor.collectChunks(
+        this._extractor.collectChunks(
           React.createElement(
             // server side context to provide request
             ServerContext,

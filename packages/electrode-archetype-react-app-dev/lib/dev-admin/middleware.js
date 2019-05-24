@@ -224,7 +224,9 @@ class Middleware {
         const source = fileSystem.readFileSync(loadableStats);
         const dir = Path.resolve("./dist/js");
         if (!Fs.existsSync(dir)) shell.mkdir("-p", dir);
-        Fs.writeFile(`${dir}${loadableStats}`, source, cb);
+        Fs.writeFile(`${dir}${loadableStats}`, source, err => {
+          if (err) throw err;
+        });
       }
 
       if (isoConfig.assetsFile) {

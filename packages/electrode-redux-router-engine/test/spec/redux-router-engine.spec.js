@@ -22,6 +22,10 @@ describe("redux-router-engine", function() {
     };
   });
 
+  afterEach(() => {
+    delete process.env.NODE_ENV;
+  });
+
   it("should return 404 for unknown index route", () => {
     const engine = new ReduxRouterEngine({ routes });
     testReq.url = Url.parse("/oop/blah");
@@ -393,6 +397,7 @@ describe("redux-router-engine", function() {
   });
 
   it("should have state preloaded after rendering", () => {
+    process.env.NODE_ENV = "production";
     const req = {
       path: "/test/redux",
       method: "get",
