@@ -28,6 +28,7 @@ function escapeBadChars(sourceString) {
 }
 
 const ROUTE_HANDLER = Symbol("route handler");
+const isProduction = () => process.env.NODE_ENV === "production";
 
 class ReduxRouterEngine {
   constructor(options) {
@@ -69,7 +70,10 @@ class ReduxRouterEngine {
       : Path.resolve(process.env.APP_SRC_DIR || "", "server/routes");
 
     this._routesComponent = renderRoutes(this._routes);
-    this._extractor = util.createdStatExtractor();
+
+    if (isProduction()) {
+      this._extractor = util.createdStatExtractor();
+    }
   }
 
   startMatch(req, options = {}) {
@@ -266,9 +270,7 @@ class ReduxRouterEngine {
       }
 
       this._extractor =
-        this._extractor && process.env.NODE_ENV === "production"
-          ? this._extractor
-          : util.createdStatExtractor();
+        this._extractor && isProduction() ? this._extractor : util.createdStatExtractor();
 
       return ssrApi(
         this._extractor.collectChunks(

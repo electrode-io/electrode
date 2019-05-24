@@ -216,7 +216,7 @@ class Middleware {
       }
     };
 
-    const transferIsomorphicAssets = (fileSystem, cb) => {
+    const transferMemFsFiles = (fileSystem, cb) => {
       const isoConfig = loadIsomorphicConfig();
       const loadableStats = `/${LOADABLE_STATS}`;
 
@@ -224,18 +224,16 @@ class Middleware {
         const source = fileSystem.readFileSync(loadableStats);
         const dir = Path.resolve("./dist/js");
         if (!Fs.existsSync(dir)) shell.mkdir("-p", dir);
-        Fs.writeFile(`${dir}${loadableStats}`, source, err => {
-          if (err) throw err;
-        });
+        Fs.writeFileSync(`${dir}${loadableStats}`, source);
       }
 
       if (isoConfig.assetsFile) {
         const assetsFile = Path.resolve(isoConfig.assetsFile);
         const source = fileSystem.readFileSync(assetsFile);
-        Fs.writeFile(assetsFile, source, cb);
-      } else {
-        process.nextTick(() => cb(true));
+        Fs.writeFileSync(assetsFile, source);
       }
+
+      process.nextTick(() => cb(true));
     };
 
     this.webpackDev = {
@@ -305,7 +303,7 @@ class Middleware {
           });
         };
 
-        waitIsoLock(() => transferIsomorphicAssets(this.devMiddleware.fileSystem, update));
+        waitIsoLock(() => transferMemFsFiles(this.devMiddleware.fileSystem, update));
       } else {
         process.send({
           name: "webpack-report",
