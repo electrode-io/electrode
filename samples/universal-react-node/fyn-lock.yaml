@@ -4922,10 +4922,10 @@ electrode-archetype-opt-sass:
    node-sass: ^4.9.3
    sass-loader: ^6.0.6
 electrode-archetype-react-app:
- _latest: 6.4.6-fynlocal_h
+ _latest: 6.4.7-fynlocal_h
  _:
-  ../../packages/electrode-archetype-react-app: 6.4.6-fynlocal_h
- 6.4.6-fynlocal_h:
+  ../../packages/electrode-archetype-react-app: 6.4.7-fynlocal_h
+ 6.4.7-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app
@@ -4939,10 +4939,10 @@ electrode-archetype-react-app:
    electrode-archetype-opt-inferno: ^0.2.4
    electrode-archetype-opt-react: ^1.0.2
 electrode-archetype-react-app-dev:
- _latest: 6.4.6-fynlocal_h
+ _latest: 6.4.7-fynlocal_h
  _:
-  ../../packages/electrode-archetype-react-app-dev: 6.4.6-fynlocal_h
- 6.4.6-fynlocal_h:
+  ../../packages/electrode-archetype-react-app-dev: 6.4.7-fynlocal_h
+ 6.4.7-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app-dev

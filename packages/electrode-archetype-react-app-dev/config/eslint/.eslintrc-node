@@ -1,6 +1,7 @@
 ---
 extends:
   - "walmart/configurations/es6-node"
+  - plugin:react/recommended
 parserOptions:
   # this is not in the Walmart default configuration, for fairly good reason:
   # V8 (and thus Node) does not support ES6 import syntax. Server-side code

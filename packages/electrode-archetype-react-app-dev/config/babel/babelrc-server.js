@@ -21,7 +21,8 @@ module.exports = {
         targets: { node }
       }
     ],
-    enableTypeScript && "@babel/preset-typescript"
+    enableTypeScript && "@babel/preset-typescript",
+    "@babel/preset-react"
   ].filter(x => x),
   plugins: [
     enableFlow && [

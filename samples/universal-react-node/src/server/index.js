@@ -5,9 +5,14 @@ process.on("SIGINT", () => {
 });
 
 const support = require("electrode-archetype-react-app/support");
-const electrodeConfippet = require("electrode-confippet");
+// test import syntax properly handled by babel
+import electrodeConfippet from "electrode-confippet";
 const electrodeServer = require("electrode-server");
 const staticPathsDecor = require("electrode-static-paths");
+
+// test JSX syntax properly handled by babel
+import React from "react";
+const testTemplate = <div>hello, world</div>; // eslint-disable-line
 
 support
   .load({
