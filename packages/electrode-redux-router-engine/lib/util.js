@@ -3,7 +3,6 @@
 const Path = require("path");
 const Fs = require("fs");
 const { ChunkExtractor } = require("@loadable/server");
-const statsFile = Path.resolve("./dist/js/loadable-stats.json");
 
 module.exports = {
   es6Default: m => {
@@ -14,10 +13,12 @@ module.exports = {
 
     return p.startsWith(".") ? Path.resolve(baseDir || "", p) : p;
   },
-  createdStatExtractor: () =>
-    Fs.existsSync(statsFile)
+  createdStatExtractor: isProd => {
+    const statsFile = Path.resolve(`./dist/${isProd ? "js" : "server"}/loadable-stats.json`);
+    return Fs.existsSync(statsFile)
       ? new ChunkExtractor({ statsFile })
       : {
           collectChunks: app => app
-        }
+        };
+  }
 };

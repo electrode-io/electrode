@@ -73,7 +73,7 @@ class ReduxRouterEngine {
     this._isProd = options.production !== undefined ? options.production : IS_PROD;
 
     if (this._isProd) {
-      this._extractor = util.createdStatExtractor();
+      this._extractor = util.createdStatExtractor(this._isProd);
     }
   }
 
@@ -271,7 +271,7 @@ class ReduxRouterEngine {
       }
 
       this._extractor =
-        this._extractor && this._isProd ? this._extractor : util.createdStatExtractor();
+        this._extractor && this._isProd ? this._extractor : util.createdStatExtractor(this._isProd);
 
       return ssrApi(
         this._extractor.collectChunks(

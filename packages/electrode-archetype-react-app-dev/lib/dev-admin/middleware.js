@@ -222,7 +222,7 @@ class Middleware {
 
       if (fileSystem.existsSync(loadableStats)) {
         const source = fileSystem.readFileSync(loadableStats);
-        const dir = Path.resolve("./dist/js");
+        const dir = Path.resolve("./dist/server");
         if (!Fs.existsSync(dir)) shell.mkdir("-p", dir);
         Fs.writeFileSync(`${dir}${loadableStats}`, source);
       }
