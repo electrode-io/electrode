@@ -117,6 +117,16 @@ function getStatsPath(statsFilePath, buildArtifactsPath) {
 
 const resolvePath = path => (!Path.isAbsolute(path) ? Path.resolve(path) : path);
 
+const updateFullTemplate = (baseDir, options) => {
+  const templateOpt = ["templateFile", "htmlFile"].find(x => options[x]);
+
+  if (templateOpt) {
+    options[templateOpt] = Path.resolve(baseDir, options[templateOpt]);
+  }
+
+  return templateOpt;
+};
+
 async function setupSubAppHapiRoutes(server, options) {
   const srcDir = process.env.APP_SRC_DIR || (process.env.NODE_ENV === "production" ? "lib" : "src");
   const routesDir = Path.resolve(srcDir, "server-routes");
@@ -153,9 +163,7 @@ async function setupSubAppHapiRoutes(server, options) {
     optionalRequire(Path.join(routesDir, "options"), { default: {} })
   );
 
-  if (options.htmlFile) {
-    options.htmlFile = Path.resolve(routesDir, options.htmlFile);
-  }
+  updateFullTemplate(routesDir, options);
 
   //
   // Generate routes: load the route.js file for each route
@@ -246,14 +254,15 @@ async function setupSubAppHapiRoutes(server, options) {
     const routeOptions = Object.assign(
       {},
       options,
-      _.pick(route, ["pageTitle", "bundleChunkSelector"])
+      _.pick(route, ["pageTitle", "bundleChunkSelector", "htmlFile", "templateFile"])
     );
 
-    if (route.htmlFile) {
-      routeOptions.htmlFile = Path.resolve(r.dir, route.htmlFile);
-    }
+    updateFullTemplate(r.dir, routeOptions);
 
-    assert(routeOptions.htmlFile, `subapp-server: route ${r.name} must define htmlFile`);
+    assert(
+      routeOptions.templateFile || routeOptions.htmlFile,
+      `subapp-server: route ${r.name} must define templateFile or htmlFile`
+    );
 
     const chunkSelector = resolveChunkSelector(routeOptions);
 
