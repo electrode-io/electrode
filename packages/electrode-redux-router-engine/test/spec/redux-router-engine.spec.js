@@ -22,10 +22,6 @@ describe("redux-router-engine", function() {
     };
   });
 
-  afterEach(() => {
-    delete process.env.NODE_ENV;
-  });
-
   it("should return 404 for unknown index route", () => {
     const engine = new ReduxRouterEngine({ routes });
     testReq.url = Url.parse("/oop/blah");
@@ -179,9 +175,8 @@ describe("redux-router-engine", function() {
 
   it("should return 500 for invalid component", () => {
     const intercept = xstdout.intercept(true);
-    const engine = new ReduxRouterEngine({ routes });
+    const engine = new ReduxRouterEngine({ routes, production: true });
     testReq.url = Url.parse("/invalid-component");
-
     return engine.render(testReq).then(result => {
       intercept.restore();
       expect(result.status).to.equal(500);
