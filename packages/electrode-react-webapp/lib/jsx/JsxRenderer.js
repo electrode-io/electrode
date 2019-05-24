@@ -1,6 +1,6 @@
 "use strict";
 
-/* eslint-disable max-statements, prefer-template, complexity */
+/* eslint-disable max-statements, max-params, prefer-template, complexity */
 
 const assert = require("assert");
 const _ = require("lodash");
@@ -53,7 +53,7 @@ class JsxRenderer {
     const context = new RenderContext(options, this);
 
     return Promise.each(this._beforeRenders, r => r.beforeRender(context))
-      .then(() => this._render(this._template, context, defer))
+      .then(() => this._render(this._template, context, 0, defer))
       .then(() => {
         return defer.promise
           .then(() => context.output.close())
@@ -72,7 +72,7 @@ class JsxRenderer {
       });
   }
 
-  _render(element, context, defer) {
+  _render(element, context, depth, defer) {
     /* istanbul ignore next */
     const done = () => defer && defer.resolve();
 
@@ -111,7 +111,7 @@ class JsxRenderer {
           return handleClose();
         } else {
           const child = element.children[ix++];
-          const promise = this._render(child, context);
+          const promise = this._render(child, context, depth);
 
           if (promise) {
             return promise.then(nextChild);
@@ -137,18 +137,18 @@ class JsxRenderer {
       } else if (rendered.then) {
         return rendered
           .then(asyncRendered => {
-            return this._render(asyncRendered, context);
+            return this._render(asyncRendered, context, depth + 1);
           })
           .then(handleClose)
           .catch(err => {
             context.handleError(err);
           });
       } else {
-        const promise = this._render(rendered, context);
+        const promise = this._render(rendered, context, depth + 1);
         if (promise) {
           return promise
             .then(asyncRendered => {
-              return this._render(asyncRendered, context);
+              return this._render(asyncRendered, context, depth + 1);
             })
             .then(handleClose);
         } else {
@@ -168,13 +168,15 @@ class JsxRenderer {
       }
     } else if (!element.type) {
       return handleElementResult(
-        element(element.props, context, { element, output: context.output })
+        element(element.props, context, { element, depth, output: context.output })
       );
     } else if (element.Construct) {
       const inst = new element.Construct(element.props, context);
-      return handleElementResult(inst.render(element.props, context));
+      return handleElementResult(
+        inst.render(element.props, context, { depth, output: context.output })
+      );
     } else {
-      const r = element.type(element.props, context, { element, output: context.output });
+      const r = element.type(element.props, context, { element, depth, output: context.output });
       return handleElementResult(r);
     }
 
@@ -194,7 +196,7 @@ class JsxRenderer {
   }
 
   _applyTokenLoad(element, inst) {
-    inst.load(this._options, this);
+    inst.load(this._options);
 
     if (inst[TOKEN_HANDLER]) return;
 
@@ -209,17 +211,26 @@ class JsxRenderer {
     }
   }
 
-  setupTokenInst(element, forRequire) {
-    let tokenInst = this._tokens[element.props._id];
+  setupTokenInst(element, scope, forRequire) {
+    let tokenInst;
+    let memId;
 
-    if (tokenInst) {
-      return tokenInst;
+    if (scope.depth < 1) {
+      memId = `${element.props._id}_${element.id}`;
+      tokenInst = this._tokens[memId];
+
+      if (tokenInst) {
+        return tokenInst;
+      }
     }
 
     const id = forRequire ? `require(${element.props._id})` : element.props._id;
 
     tokenInst = new Token(id, 0, element.props, this.templateFullPath);
-    this._tokens[element.props._id] = tokenInst;
+
+    if (memId) {
+      this._tokens[memId] = tokenInst;
+    }
 
     this._applyTokenLoad(element, tokenInst);
 

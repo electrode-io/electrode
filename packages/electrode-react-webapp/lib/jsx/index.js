@@ -7,6 +7,8 @@ const Require = require("./Require");
 const Literal = require("./Literal");
 const JsxRenderer = require("./JsxRenderer");
 
+let ELEMENT_ID = 0;
+
 function createElement(type, props, ...children) {
   children = children.length > 0 ? children : undefined;
 
@@ -21,6 +23,7 @@ function createElement(type, props, ...children) {
   }
 
   const element = {
+    id: ELEMENT_ID++,
     type,
     children,
     props

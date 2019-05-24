@@ -9,7 +9,7 @@ const _ = require("lodash");
 function processToken(props, context, scope, forRequire = false) {
   const renderer = context.asyncTemplate;
 
-  const tokenInst = renderer.setupTokenInst(scope.element, forRequire);
+  const tokenInst = renderer.setupTokenInst(scope.element, scope, forRequire);
 
   if (scope.element.memoize) {
     return scope.output.add(scope.element.memoize);
