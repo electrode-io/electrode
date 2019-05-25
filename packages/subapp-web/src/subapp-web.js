@@ -53,7 +53,7 @@ function loadSubAppBundles(names, done) {
     window._lload(`${ba.basePath}${bundle}`, {
       callback: err => {
         if (err) {
-          console.log(`load bundle ${name} failed`, err);
+          console.error(`load bundle ${name} failed`, err);
         } else {
           console.log(`loaded bundle for ${name} - ${bundle}`);
           wsa._bundles[name] = true;
