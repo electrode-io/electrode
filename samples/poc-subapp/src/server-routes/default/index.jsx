@@ -1,12 +1,6 @@
 /* @jsx createElement */
 
-const {
-  IndexPage,
-  createElement,
-  Token,
-  Require,
-  Literal
-} = require("electrode-react-webapp/lib/jsx");
+import { IndexPage, createElement, Token, Require, Literal } from "subapp-server/template";
 
 const Template = (
   <IndexPage DOCTYPE="html">
