@@ -15,7 +15,8 @@
   "author": "Joel Chen <xchen@walmartlabs.com>",
   "license": "Apache-2.0",
   "files": [
-    "lib"
+    "lib",
+    "template.js"
   ],
   "dependencies": {
     "boom": "^7.2.0",

@@ -29,8 +29,16 @@ module.exports = function setup(setupContext) {
       .join("\n");
   }
 
+  const jsBundleByChunkName = Object.entries(routeData.assets.byChunkName).reduce(
+    (a, [name, bundle]) => {
+      a[name] = Array.isArray(bundle) ? bundle.find(x => x.endsWith(".js")) : bundle;
+      return a;
+    },
+    {}
+  );
+
   const bundleAssets = {
-    byChunkName: routeData.assets.byChunkName,
+    byChunkName: jsBundleByChunkName,
     basePath: bundleBase
   };
   const webSubAppJs = `\n<script id="bundleAssets" type="application/json">
