@@ -35,7 +35,6 @@ module.exports = function setup(setupContext, token) {
   const name = props.name;
   const routeData = setupContext.routeOptions.__internals;
   const bundleAsset = util.getSubAppBundle(name, routeData.assets);
-  const bundleJs = bundleAsset.name;
   const async = props.async ? " async" : "";
   const defer = props.defer ? " defer" : "";
   const bundleBase = util.getBundleBase(setupContext.routeOptions);
@@ -43,7 +42,7 @@ module.exports = function setup(setupContext, token) {
 
   const retrieveDevServerBundle = async () => {
     return new Promise((resolve, reject) => {
-      request(`${bundleBase}${bundleJs}`, (err, resp, body) => {
+      request(`${bundleBase}${bundleAsset.name}`, (err, resp, body) => {
         if (err) {
           reject(err);
         } else {
@@ -56,13 +55,21 @@ module.exports = function setup(setupContext, token) {
   let bundleScript;
   const webpackDev = process.env.WEBPACK_DEV === "true";
 
+  const cdnJsBundles = util.getCdnJsBundles(
+    routeData.assets.byChunkName,
+    setupContext.routeOptions
+  );
+
   if (props.inlineScript === "always" || (props.inlineScript === true && !webpackDev)) {
     if (!webpackDev) {
-      const src = Fs.readFileSync(Path.resolve("dist/js", bundleJs)).toString();
+      const src = Fs.readFileSync(Path.resolve("dist/js", bundleAsset.name)).toString();
       bundleScript = `<script>${src}</script>`;
     }
   } else {
-    bundleScript = `<script src="${bundleBase}${bundleJs}"${async}${defer}></script>`;
+    bundleScript = bundleAsset.chunkNames
+      .map(x => cdnJsBundles[x] && `<script src="${cdnJsBundles[x]}"${async}${defer}></script>`)
+      .filter(x => x)
+      .join("");
   }
 
   let SubApp;
