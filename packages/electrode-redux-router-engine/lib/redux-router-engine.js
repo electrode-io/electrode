@@ -69,6 +69,7 @@ class ReduxRouterEngine {
       : Path.resolve(process.env.APP_SRC_DIR || "", "server/routes");
 
     this._routesComponent = renderRoutes(this._routes);
+    this._envTargets = util.getEnvTargets();
   }
 
   startMatch(req, options = {}) {
@@ -264,7 +265,7 @@ class ReduxRouterEngine {
         ssrApi = withIds ? ReactDomServer.renderToString : ReactDomServer.renderToStaticMarkup;
       }
 
-      const target = util.getTargetByQuery(req.query);
+      const target = util.getTargetByQuery(req.query, this._envTargets);
       this._extractor = util.createdStatExtractor(target);
 
       return ssrApi(

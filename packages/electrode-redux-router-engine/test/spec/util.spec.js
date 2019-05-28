@@ -35,14 +35,20 @@ describe("util", function() {
   });
 
   it("getTargetByQuery should get default target from request query string", () => {
-    const target = util.getTargetByQuery({});
+    const target = util.getTargetByQuery({}, ["default"]);
     expect(target).to.equal("default");
   });
 
   it("getTargetByQuery should get target if query __dist refer to existing target bundle", () => {
-    const stubbed = sinon.stub(require("fs"), "existsSync", () => true);
-    const target = util.getTargetByQuery({__dist: "es6"});
+    const target = util.getTargetByQuery({ __dist: "es6" }, ["default", "es6"]);
     expect(target).to.equal("es6");
+  });
+
+  it("getEnvTargets should get an array of all babel env targets", () => {
+    const stubbed = sinon.stub(require("fs"), "readdirSync", () => ["dist", "dist-es6", "a", "b"]);
+    expect(util.getEnvTargets())
+      .to.include("default")
+      .to.include("es6");
     stubbed.restore();
   });
 });

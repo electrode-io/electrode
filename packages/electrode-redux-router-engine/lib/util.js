@@ -22,12 +22,16 @@ module.exports = {
           collectChunks: app => app
         };
   },
-  getTargetByQuery: query => {
+  getTargetByQuery: (query, envTargets) => {
     const __dist = query && query.__dist;
-    let target = "default";
-    if (__dist && Fs.existsSync(Path.resolve(`dist-${__dist}`))) {
-      target = __dist;
-    }
-    return target;
-  }
+    return envTargets.includes(__dist) ? __dist : "default";
+  },
+  getEnvTargets: () =>
+    Fs.readdirSync(Path.resolve("./")).reduce(
+      (targets, v) => {
+        if (v.startsWith("dist-")) targets.push(v.substring("dist-".length));
+        return targets;
+      },
+      ["default"]
+    )
 };
