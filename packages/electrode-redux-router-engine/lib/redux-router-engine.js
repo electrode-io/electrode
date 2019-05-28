@@ -28,7 +28,6 @@ function escapeBadChars(sourceString) {
 }
 
 const ROUTE_HANDLER = Symbol("route handler");
-const IS_PROD = process.env.NODE_ENV === "production";
 
 class ReduxRouterEngine {
   constructor(options) {
@@ -70,11 +69,6 @@ class ReduxRouterEngine {
       : Path.resolve(process.env.APP_SRC_DIR || "", "server/routes");
 
     this._routesComponent = renderRoutes(this._routes);
-    this._isProd = options.production !== undefined ? options.production : IS_PROD;
-
-    if (this._isProd) {
-      this._extractor = util.createdStatExtractor(this._isProd);
-    }
   }
 
   startMatch(req, options = {}) {
@@ -270,9 +264,8 @@ class ReduxRouterEngine {
         ssrApi = withIds ? ReactDomServer.renderToString : ReactDomServer.renderToStaticMarkup;
       }
 
-      if (!this._isProd) {
-        this._extractor = util.createdStatExtractor();
-      }
+      const target = util.getTargetByQuery(req.query);
+      this._extractor = util.createdStatExtractor(target);
 
       return ssrApi(
         this._extractor.collectChunks(
