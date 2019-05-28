@@ -423,8 +423,7 @@ function makeTasks(xclap) {
       "build-dist:flatten-l10n",
       "build-dist:merge-isomorphic-assets",
       "copy-dll",
-      "build-dist:clean-tmp",
-      "mv-to-server"
+      "build-dist:clean-tmp"
     ],
 
     "mv-to-dist": ["mv-to-dist:clean", "mv-to-dist:mv-dirs", "mv-to-dist:keep-targets"],
@@ -476,13 +475,6 @@ function makeTasks(xclap) {
           )
         )
       )
-    },
-
-    "mv-to-server": {
-      desc: "move the default loadable-stats.json to dist/server",
-      task: () => {
-        shell.mv(Path.resolve("dist/js/loadable-stats.json"), Path.resolve("dist/server/"));
-      }
     },
 
     "mv-to-dist:clean": {
