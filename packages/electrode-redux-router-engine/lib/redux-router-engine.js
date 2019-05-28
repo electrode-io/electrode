@@ -270,8 +270,9 @@ class ReduxRouterEngine {
         ssrApi = withIds ? ReactDomServer.renderToString : ReactDomServer.renderToStaticMarkup;
       }
 
-      this._extractor =
-        this._extractor && this._isProd ? this._extractor : util.createdStatExtractor(this._isProd);
+      if (!this._isProd) {
+        this._extractor = util.createdStatExtractor();
+      }
 
       return ssrApi(
         this._extractor.collectChunks(
