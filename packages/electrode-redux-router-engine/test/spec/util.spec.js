@@ -27,12 +27,22 @@ describe("util", function() {
   });
 
   it("createdStatExtractor should get chunk extractor if stats file exists", () => {
-    const stubExists = sinon.stub(require("fs"), "existsSync", () => true);
-    const path = Path.resolve("./test/loadable-stats.json");
-    const stubResolve = sinon.stub(Path, "resolve", () => path);
+    const path = Path.resolve("test/loadable-stats.json");
+    const stubbed = sinon.stub(Path, "resolve", () => path);
     const extractor = util.createdStatExtractor();
     expect(Object.keys(extractor).length > 1);
-    stubExists.restore();
-    stubResolve.restore();
+    stubbed.restore();
+  });
+
+  it("getTargetByQuery should get default target from request query string", () => {
+    const target = util.getTargetByQuery({});
+    expect(target).to.equal("default");
+  });
+
+  it("getTargetByQuery should get target if query __dist refer to existing target bundle", () => {
+    const stubbed = sinon.stub(require("fs"), "existsSync", () => true);
+    const target = util.getTargetByQuery({__dist: "es6"});
+    expect(target).to.equal("es6");
+    stubbed.restore();
   });
 });

@@ -23,7 +23,7 @@ module.exports = {
         };
   },
   getTargetByQuery: query => {
-    const { __dist } = query;
+    const __dist = query && query.__dist;
     let target = "default";
     if (__dist && Fs.existsSync(Path.resolve(`dist-${__dist}`))) {
       target = __dist;
