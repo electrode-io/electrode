@@ -144,7 +144,7 @@ module.exports = function() {
     _name: `extract-css${cssModuleSupport ? "-modules" : ""}`,
     test: /\.css$/,
     use: [
-      { loader: MiniCssExtractPlugin.loader, options: { publicPath: "" } },
+      { loader: MiniCssExtractPlugin.loader, options: { publicPath: "/js/" } },
       ...(cssModuleSupport ? [cssModuleQuery, postcssQuery] : [cssQuery, postcssQuery])
     ]
   });
