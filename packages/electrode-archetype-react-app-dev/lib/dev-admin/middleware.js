@@ -218,13 +218,12 @@ class Middleware {
 
     const transferMemFsFiles = (fileSystem, cb) => {
       const isoConfig = loadIsomorphicConfig();
-      const loadableStats = `/${LOADABLE_STATS}`;
-
+      const loadableStats = `/server/${LOADABLE_STATS}`;
       if (fileSystem.existsSync(loadableStats)) {
         const source = fileSystem.readFileSync(loadableStats);
         const dir = Path.resolve("./dist/server");
         if (!Fs.existsSync(dir)) shell.mkdir("-p", dir);
-        Fs.writeFileSync(`${dir}${loadableStats}`, source);
+        Fs.writeFileSync(`${dir}/${LOADABLE_STATS}`, source);
       }
 
       if (isoConfig.assetsFile) {
