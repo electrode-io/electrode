@@ -22,6 +22,7 @@ const orders = [
   "_test-resolve",
   "_babel",
   "_extract-style",
+  "_loadable",
   "_fonts",
   "_images",
   "_isomorphic",

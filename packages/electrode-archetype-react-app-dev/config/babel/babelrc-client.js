@@ -49,7 +49,8 @@ const basePlugins = [
   enableFlow && [
     "@babel/plugin-transform-flow-strip-types",
     { requireDirective: flowRequireDirective }
-  ]
+  ],
+  "@loadable/babel-plugin"
 ];
 
 const { BABEL_ENV, NODE_ENV } = process.env;

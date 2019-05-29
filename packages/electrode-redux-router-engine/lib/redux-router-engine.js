@@ -69,6 +69,7 @@ class ReduxRouterEngine {
       : Path.resolve(process.env.APP_SRC_DIR || "", "server/routes");
 
     this._routesComponent = renderRoutes(this._routes);
+    this._envTargets = util.getEnvTargets();
   }
 
   startMatch(req, options = {}) {
@@ -264,20 +265,25 @@ class ReduxRouterEngine {
         ssrApi = withIds ? ReactDomServer.renderToString : ReactDomServer.renderToStaticMarkup;
       }
 
+      const target = util.getTargetByQuery(req.query, this._envTargets);
+      this._extractor = util.createdStatExtractor(target);
+
       return ssrApi(
-        React.createElement(
-          // server side context to provide request
-          ServerContext,
-          { request: req },
-          // redux provider
+        this._extractor.collectChunks(
           React.createElement(
-            Provider,
-            { store },
-            // user route component
+            // server side context to provide request
+            ServerContext,
+            { request: req },
+            // redux provider
             React.createElement(
-              StaticRouter,
-              { location, context: routeContext, basename: this.options.basename },
-              this._routesComponent
+              Provider,
+              { store },
+              // user route component
+              React.createElement(
+                StaticRouter,
+                { location, context: routeContext, basename: this.options.basename },
+                this._routesComponent
+              )
             )
           )
         )
