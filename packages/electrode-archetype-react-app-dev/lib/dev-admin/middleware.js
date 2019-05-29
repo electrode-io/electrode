@@ -186,7 +186,9 @@ class Middleware {
     this.publicPath = webpackDevOptions.publicPath || "/";
     this.listAssetPath = urlJoin(this.publicPath, "/");
 
-    this.cwdMemIndex = serveIndex(process.cwd(), {
+    // webpack dev middleware's memfs root is where the actual output from webpack
+    this.memFsCwd = this.devMiddleware.fileSystem.existsSync(process.cwd()) ? process.cwd() : "/";
+    this.cwdMemIndex = serveIndex(this.memFsCwd, {
       icons: true,
       hidden: true,
       fs: this.devMiddleware.fileSystem
@@ -218,12 +220,12 @@ class Middleware {
 
     const transferMemFsFiles = (fileSystem, cb) => {
       const isoConfig = loadIsomorphicConfig();
-      const loadableStats = `/server/${LOADABLE_STATS}`;
+      const loadableStats = Path.join(this.memFsCwd, `server/${LOADABLE_STATS}`);
       if (fileSystem.existsSync(loadableStats)) {
         const source = fileSystem.readFileSync(loadableStats);
         const dir = Path.resolve("./dist/server");
         if (!Fs.existsSync(dir)) shell.mkdir("-p", dir);
-        Fs.writeFileSync(`${dir}/${LOADABLE_STATS}`, source);
+        Fs.writeFileSync(Path.join(dir, LOADABLE_STATS), source);
       }
 
       if (isoConfig.assetsFile) {
@@ -334,10 +336,10 @@ doReload(1); </script></body></html>`)
       );
     }
 
-    const serveStatic = (baseUrl, fileSystem, indexServer) => {
+    const serveStatic = (baseUrl, fileSystem, indexServer, cwd) => {
       req.originalUrl = req.url; // this is what express saves to, else serve-index nukes
       req.url = req.url.substr(baseUrl.length) || "/";
-      const fullPath = Path.join(process.cwd(), req.url);
+      const fullPath = Path.join(cwd || process.cwd(), req.url);
 
       return new Promise((resolve, reject) => {
         fileSystem.stat(fullPath, (err, stats) => {
@@ -419,7 +421,8 @@ ${listDirectoryHtml(this.listAssetPath, outputPath)}
       return serveStatic(
         this.cwdContextBaseUrl,
         this.devMiddleware.fileSystem,
-        this.cwdMemIndex
+        this.cwdMemIndex,
+        this.memFsCwd
       ).catch(err => sendStaticServeError("reading webpack mem fs", err));
     } else if (req.url.startsWith(this.reporterUrl) || this.returnReporter) {
       return serveReporter(this.webpackDev.lastReporterOptions);
