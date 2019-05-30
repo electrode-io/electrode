@@ -81,10 +81,10 @@ support.load = function(options, callback) {
   }
 
   if (br) {
-    const babelRegister = optionalRequire("babel-register");
+    const babelRegister = optionalRequire("@babel/register");
     if (!babelRegister) {
       console.log(
-        "To use babel-register mode, you need to install the babel-register and support modules."
+        "To use @babel/register mode, you need to install the @babel/register and support modules."
       );
       console.log("Please see documentation for more details.");
       return process.exit(1);
@@ -97,7 +97,7 @@ support.load = function(options, callback) {
     );
 
     logger.info(
-      `Loading babel-register for runtime transpilation files (extensions: ${
+      `Loading @babel/register for runtime transpilation files (extensions: ${
         regOptions.extensions
       }).`
     );
