@@ -14,7 +14,7 @@ const cssLoader = require.resolve("css-loader");
 const stylusLoader = require.resolve("stylus-relative-loader");
 const postcssLoader = require.resolve("postcss-loader");
 const lessLoader = require.resolve("less-loader");
-const isDevelopment = process.env.NODE_ENV === "development";
+const isDevelopment = process.env.NODE_ENV !== "production";
 
 /*
  * cssModuleSupport: false
