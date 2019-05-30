@@ -233,7 +233,7 @@ class Middleware {
         const source = fileSystem.readFileSync(assetsFile);
         const dir = Path.resolve("./dist");
         if (!Fs.existsSync(dir)) shell.mkdir("-p", dir);
-        Fs.writeFileSync(Path.join(dir, assetsFile), source);
+        Fs.writeFileSync(Path.join(dir, isoConfig.assetsFile), source);
       }
 
       process.nextTick(() => cb(true));
