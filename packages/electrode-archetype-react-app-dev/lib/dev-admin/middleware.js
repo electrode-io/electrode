@@ -229,9 +229,11 @@ class Middleware {
       }
 
       if (isoConfig.assetsFile) {
-        const assetsFile = Path.resolve(isoConfig.assetsFile);
+        const assetsFile = Path.join(this.memFsCwd, isoConfig.assetsFile);
         const source = fileSystem.readFileSync(assetsFile);
-        Fs.writeFileSync(assetsFile, source);
+        const dir = Path.resolve("./dist");
+        if (!Fs.existsSync(dir)) shell.mkdir("-p", dir);
+        Fs.writeFileSync(Path.join(dir, isoConfig.assetsFile), source);
       }
 
       process.nextTick(() => cb(true));
