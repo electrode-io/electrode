@@ -842,18 +842,25 @@ Individual .babelrc files were generated for you in src/client and src/server
           .filter(x => x)
           .map(n => `--watch ${n}`)
           .join(" ");
+
         AppMode.setEnv(AppMode.src.dir);
-        const babelRun = quote(Path.join(archetype.dir, "support/babel-run"));
-        const nodeRunApp = AppMode.isSrc
-          ? `node ${babelRun} ${AppMode.src.server}`
-          : `node ${AppMode.src.server}`;
+
+        let nodeRunApp;
+
+        if (AppMode.isSrc) {
+          const babelRun = require.resolve(Path.join(archetype.dir, "support/babel-run"));
+          nodeRunApp = `${Path.relative(process.cwd(), babelRun)} src/server`;
+        } else {
+          const serverRun = require.resolve(Path.resolve(AppMode.src.server));
+          nodeRunApp = quote(Path.relative(process.cwd(), serverRun));
+        }
 
         return mkCmd(
           `~$nodemon`,
           taskArgs(this.argv).join(" "),
           archetype.webpack.devMiddleware ? "" : "-C",
           `--delay 1 --ext js,jsx,json,yaml,log,ts,tsx ${watches}`,
-          `--exec ${nodeRunApp}`
+          `${nodeRunApp}`
         );
       }
     },
