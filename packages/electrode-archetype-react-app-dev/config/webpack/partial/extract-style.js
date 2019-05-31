@@ -14,6 +14,7 @@ const cssLoader = require.resolve("css-loader");
 const stylusLoader = require.resolve("stylus-relative-loader");
 const postcssLoader = require.resolve("postcss-loader");
 const lessLoader = require.resolve("less-loader");
+const isDevelopment = process.env.NODE_ENV !== "production";
 
 /*
  * cssModuleSupport: false
@@ -117,7 +118,10 @@ const stylusRules = {
   _name: `extract${cssModuleSupport ? "-css" : ""}-stylus`,
   test: /\.styl$/,
   use: [
-    { loader: MiniCssExtractPlugin.loader },
+    {
+      loader: MiniCssExtractPlugin.loader,
+      options: { hmr: isDevelopment, reload: isDevelopment }
+    },
     ...(cssModuleSupport
       ? [cssModuleQuery, postcssQuery, stylusQuery]
       : [cssQuery, postcssQuery, stylusQuery])
@@ -132,7 +136,10 @@ const lessRules = {
   _name: `extract${cssModuleSupport ? "-css" : ""}-less`,
   test: /\.less$/,
   use: [
-    { loader: MiniCssExtractPlugin.loader },
+    {
+      loader: MiniCssExtractPlugin.loader,
+      options: { hmr: isDevelopment, reload: isDevelopment }
+    },
     ...(cssModuleSupport
       ? [cssModuleQuery, postcssQuery, lessQuery]
       : [cssQuery, postcssQuery, lessQuery])
@@ -144,7 +151,10 @@ module.exports = function() {
     _name: `extract-css${cssModuleSupport ? "-modules" : ""}`,
     test: /\.css$/,
     use: [
-      { loader: MiniCssExtractPlugin.loader },
+      {
+        loader: MiniCssExtractPlugin.loader,
+        options: { hmr: isDevelopment, reload: isDevelopment }
+      },
       ...(cssModuleSupport ? [cssModuleQuery, postcssQuery] : [cssQuery, postcssQuery])
     ]
   });
@@ -154,7 +164,10 @@ module.exports = function() {
       _name: `extract${cssModuleSupport ? "-css" : ""}-scss`,
       test: /\.(scss|sass)$/,
       use: [
-        { loader: MiniCssExtractPlugin.loader },
+        {
+          loader: MiniCssExtractPlugin.loader,
+          options: { hmr: isDevelopment, reload: isDevelopment }
+        },
         ...(cssModuleSupport
           ? [cssModuleQuery, postcssQuery, sassQuery]
           : [cssQuery, postcssQuery, sassQuery])
@@ -174,7 +187,10 @@ module.exports = function() {
       _name: "extract-css-stylus",
       test: /\.styl$/,
       use: [
-        { loader: MiniCssExtractPlugin.loader },
+        {
+          loader: MiniCssExtractPlugin.loader,
+          options: { hmr: isDevelopment, reload: isDevelopment }
+        },
         cssModuleQuery,
         postcssQuery,
         stylusQuery
