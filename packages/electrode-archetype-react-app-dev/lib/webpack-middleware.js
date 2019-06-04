@@ -190,7 +190,7 @@ class Middleware {
     const isoConfigFile = Path.resolve(ISO_LOADER_CONFIG);
 
     const loadIsomorphicConfig = () => {
-      return JSON.parse(Fs.readFileSync(Path.resolve(".isomorphic-loader-config.json")));
+      return JSON.parse(Fs.readFileSync(isoConfigFile));
     };
 
     const waitIsoLock = cb => {
