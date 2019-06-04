@@ -186,8 +186,19 @@ class Middleware {
     this.reporterUrl = urlJoin(this.devBaseUrl, "reporter");
     this.dllDevUrl = urlJoin(this.devBaseUrl, "dll");
 
+    const ISO_LOADER_CONFIG = ".isomorphic-loader-config.json";
+    const isoConfigFile = Path.resolve(ISO_LOADER_CONFIG);
+
     const loadIsomorphicConfig = () => {
       return JSON.parse(Fs.readFileSync(Path.resolve(".isomorphic-loader-config.json")));
+    };
+
+    const waitIsoLock = cb => {
+      if (!Fs.existsSync(isoConfigFile)) {
+        return setTimeout(() => waitIsoLock(cb), 50);
+      } else {
+        return cb();
+      }
     };
 
     const transferIsomorphicAssets = (fileSystem, cb) => {
@@ -255,16 +266,16 @@ class Middleware {
           if (userReporter) userReporter(middlewareOptions, reporterOptions);
           this.webpackDev.lastReporterOptions = reporterOptions;
         };
-
-        transferIsomorphicAssets(this.devMiddleware.fileSystem, err => {
-          // reload assets to activate
-          if (err) return update();
-
-          return isomorphicExtendRequire.loadAssets(err2 => {
-            if (err) console.error("reload isomorphic assets failed", err2);
-            update();
-          });
-        });
+        waitIsoLock(() =>
+          transferIsomorphicAssets(this.devMiddleware.fileSystem, err => {
+            // reload assets to activate
+            if (err) return update();
+            return isomorphicExtendRequire.loadAssets(err2 => {
+              if (err) console.error("reload isomorphic assets failed", err2);
+              update();
+            });
+          })
+        );
       } else {
         isomorphicExtendRequire.deactivate();
         console.log(`webpack bundle is now ${chalk.magenta("INVALID")}`);
