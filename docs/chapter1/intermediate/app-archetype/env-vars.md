@@ -4,13 +4,11 @@ Some of the app archetype's features can be controlled by environment variables.
 
 ## General Electrode Feature Configurations
 
-- `PORT` - The port number your app's `config/default.js` will read from to start up your app server to listen at.
-
-  - Default is `3000`
-
-- `OPTIMIZE_STATS` - If set to `true`, generates stats for the optimized webpack output bundle
-
-- `INSPECTPACK_DEBUG` - If set to `true`, generates stats for used with the [inspectpack] tool.
+| Variable            |                                              Description                                               | Default |
+| ------------------- | :----------------------------------------------------------------------------------------------------: | ------: |
+| `PORT`              | The port number your app's `config/default.js` will read from to start up your app server to listen at |  `3000` |
+| `OPTIMIZE_STATS`    |               If set to `true`, generates stats for the optimized webpack output bundle                |         |
+| `INSPECTPACK_DEBUG` |                 If set to `true`, generates stats for used with the [inspectpack] tool                 |         |
 
 ## Webpack Related Configs
 
@@ -100,6 +98,16 @@ Some of the app archetype's features can be controlled by environment variables.
 * `WEBPACK_MINIFY` - If `true`, webpack in `development` mode to minify code
 
   - Default is `true`
+
+| Variables                    |                                                                                                                                                                                                                                                                                                         Description                                                                                                                                                                                                                                                                                                          | Default |
+| ---------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ------: |
+| `WEBPACK_DEV_MIDDLEWARE`     | If set to `true`, will run webpack dev server as part of your app server in dev mode. <br>Will also force `WEBPACK_DEV_PORT` to your app's port which is set by `PORT` or `3000`.<br>Webpack dev server pages can be found under these routes:<br> `/_electrode_dev_/reporter` - Webpack compiled status report<br> `/_electrode_dev_/cwd` - Directory view of your app's CWD<br> `/_electrode_dev_/memfs` - Directory view of webpack dev middleware's virual mem fs of your compiled assets.<br> `/js/` - Or your webpack `publicPath`, w/o any trailing parts will list all files under your webpack's context directory. | `false` |
+| `ELECTRODE_DEV_OPEN_BROWSER` |                                                                                                                                                      When using dev middleware, `clap dev` can automatically open your app in the browser. Use this flag to control that behavior <br> Set to `false` - completely disable auto opening in browser.<br> Set to `true` - Always auto open.<br> Unset - automatically open if it didn't do so within the last 10 minutes.                                                                                                                                                      | `false` |
+| `WEBPACK_REPORTER_SOCKET_PORT` | Change Electrode's webpack HTML reporter's WebSocket port for sync up with webpack-dev-server's result | `5000` |
+|`CSS_MODULE_SUPPORT`|If `false`, then disable `CSS-Modules` and `CSS-Next` support, and load as pure `CSS`. If `true`, then enable `CSS-Modules` and `CSS-Next` support, and load as `CSS-Modules + CSS-Next`|`undefined`|
+|`CSS_MODULE_STYLUS_SUPPORT`|if `true`, then enable `stylus` support for CSS modules|`false`|
+|`ENABLE_BABEL_POLYFILL`|If `true`, loads `babel-polyfill` automatically for your bundle|`false`|
+|`ENABLE_NODESOURCE_PLUGIN`|If `true`, automatically bundles modules for compatibility with NodeJS internal modules<br>Note that enabling this will make webpack bundle more than 100K of JS to simulate a NodeJS environment|`false`|
 
 ## Babel Related Configs
 
