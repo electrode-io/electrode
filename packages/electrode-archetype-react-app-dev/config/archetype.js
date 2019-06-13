@@ -22,6 +22,16 @@ const defaultOptimizeCssOptions = {
 const webpackConfigSpec = {
   devHostname: { env: ["WEBPACK_HOST", "WEBPACK_DEV_HOST"], default: "localhost" },
   devPort: { env: "WEBPACK_DEV_PORT", default: 2992 },
+  // Using a built-in reverse proxy, the webpack dev assets are served from the
+  // same host and port as the app.  In that case, the URLs to assets are relative
+  // without protocol, host, port.
+  // However, user can simulate CDN server with the proxy and have assets URLs
+  // specifying different host/port from the app.  To do that, the following
+  // should be defined.
+  cdnProtocol: { env: ["WEBPACK_DEV_CDN_PROTOCOL"], type: "string", default: null },
+  cdnHostname: { env: ["WEBPACK_DEV_CDN_HOST"], type: "string", default: null },
+  cdnPort: { env: ["WEBPACK_DEV_CDN_PORT"], default: 0 },
+  //
   testPort: { env: "WEBPACK_TEST_PORT", default: 3001 },
   reporterSocketPort: { env: "WEBPACK_REPORTER_SOCKET_PORT", default: 5000 },
   https: { env: "WEBPACK_DEV_HTTPS", default: false },
