@@ -1,18 +1,20 @@
+# Table of Contents
+
+- [Development Setup](#development-setup)
+- [Table of Contents](#table-of-contents)
+  * [Webpack Dev Server](#webpack-dev-server)
+  * [Your application node server](#your-application-node-server)
+  * [Dev Admin Console](#dev-admin-console)
+  * [Dev Reverse Proxy](#dev-reverse-proxy)
+    + [Proxy Admin](#proxy-admin)
+    + [Update your server's port](#update-your-servers-port)
+
 # Development Setup
 
 When you run your app in dev mode with `clap dev`, Electrode starts two servers for you:
 
 - The webpack dev server
 - Your application node server
-
-# Table of Contents
-
-* [Webpack Dev Server](#webpack-dev-server)
-* [Your application node server](#your-application-node-server)
-* [Dev Admin Console](#dev-admin-console)
-* [Dev Reverse Proxy](#dev-reverse-proxy)
-  + [Proxy Admin](#proxy-admin)
-  + [Update your server's port](#update-your-servers-port)
 
 ## Webpack Dev Server
 
