@@ -56,15 +56,15 @@ To enable the reverse proxy, you have to let Electrode run your app node server 
 
 To do that, specify the env variable `APP_SERVER_PORT`.  When Electrode detects that, it assumes you want to run your development with the reverse proxy.  You also need to update your app server's startup code to get its port number from that.
 
-For example, to continue to serve your app on port ***3000***, which redirects to webpack dev server at ***2992*** and your app server at ***3001***, do this:
+For example, to continue to serve your app on port ***3000***, which redirects to webpack dev server at ***2992*** and your app server at ***3100***, do this:
 
 ```bash
-APP_SERVER_PORT=3001 clap dev
+APP_SERVER_PORT=3100 clap dev
 ```
 
 Now if you point your browser to `http://localhost:3000`, your entire app will appear to be serving from that single port.
 
-You can also run your app at the standard HTTP port ***80***:
+You can also run your app at the standard HTTP port ***80*** while continue to run your app server at ***3000***:
 
 ```bash
 PORT=80 APP_SERVER_PORT=3000 clap dev
