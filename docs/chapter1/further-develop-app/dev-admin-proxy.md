@@ -28,6 +28,8 @@ Electrode will also starts your application server from `src/server/index.js`, w
 
 The port it listens to is ***3000***, which you can change with the env variable `PORT`.
 
+If you want to use Electrode's dev reverse proxy, then you should set `APP_SERVER_PORT` to run your app server at another port, so the proxy can listens at `PORT` (`3000`) and forward to it.
+
 ## Dev Admin Console
 
 The latest Electrode runs an interactive menu that allows you to restart these two servers on demand, with the `--inspect-brk` flag if you need to attach a debugger to them.
