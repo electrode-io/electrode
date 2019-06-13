@@ -1,11 +1,11 @@
 # Table of Contents
 
 - [Development Setup](#development-setup)
-- [Table of Contents](#table-of-contents)
   * [Webpack Dev Server](#webpack-dev-server)
   * [Your application node server](#your-application-node-server)
   * [Dev Admin Console](#dev-admin-console)
   * [Dev Reverse Proxy](#dev-reverse-proxy)
+    + [Persist APP_SERVER_PORT](#persist-app_server_port)
     + [Proxy Admin](#proxy-admin)
     + [Update your server's port](#update-your-servers-port)
 
@@ -73,6 +73,14 @@ PORT=80 APP_SERVER_PORT=3000 clap dev
 You will need to provide elevated root/admin access for the proxy to listen at port ***80***.
 
 Now you can point your browser to `http://localhost` to access your entire app.
+
+### Persist APP_SERVER_PORT
+
+If you want to set `APP_SERVER_PORT` persistently and always use the reverse proxy, then you should set it in `xclap.js` with:
+
+```js
+process.env.APP_SERVER_PORT=3100;
+```
 
 ### Proxy Admin
 
