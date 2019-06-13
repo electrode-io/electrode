@@ -7,15 +7,18 @@ const Path = require("path");
 const assert = require("assert");
 const AsyncTemplate = require("./async-template");
 const { JsxRenderer } = require("./jsx");
-const { getOtherStats, getOtherAssets } = require("./utils");
 
-const otherStats = getOtherStats();
 const {
+  getOtherStats,
+  getOtherAssets,
   resolveChunkSelector,
   loadAssetsFromStats,
   getStatsPath,
-  invokeTemplateProcessor
+  invokeTemplateProcessor,
+  makeDevBundleBase
 } = require("./utils");
+
+const otherStats = getOtherStats();
 
 function initializeTemplate(
   { htmlFile, templateFile, tokenHandlers, cacheId, cacheKey, options },
@@ -113,6 +116,7 @@ function makeRouteHandler(routeOptions) {
 
 const setupOptions = options => {
   const https = process.env.WEBPACK_DEV_HTTPS && process.env.WEBPACK_DEV_HTTPS !== "false";
+
   const pluginOptionsDefaults = {
     pageTitle: "Untitled Electrode Web Application",
     webpackDev: process.env.WEBPACK_DEV === "true",
@@ -120,7 +124,8 @@ const setupOptions = options => {
     serverSideRendering: true,
     htmlFile: Path.join(__dirname, "index.html"),
     devServer: {
-      host: process.env.WEBPACK_DEV_HOST || process.env.WEBPACK_HOST || "127.0.0.1",
+      protocol: https ? "https" : "http",
+      host: process.env.WEBPACK_DEV_HOST || process.env.WEBPACK_HOST || "localhost",
       port: process.env.WEBPACK_DEV_PORT || "2992",
       https
     },
@@ -141,9 +146,7 @@ const setupOptions = options => {
 
   const pluginOptions = _.defaultsDeep({}, options, pluginOptionsDefaults);
   const chunkSelector = resolveChunkSelector(pluginOptions);
-  const devProtocol = https ? "https://" : "http://";
-  const devBundleBase = `${devProtocol}${pluginOptions.devServer.host}:\
-${pluginOptions.devServer.port}/js/`;
+  const devBundleBase = makeDevBundleBase(pluginOptions.devServer);
   const statsPath = getStatsPath(pluginOptions.stats, pluginOptions.buildArtifacts);
 
   const assets = loadAssetsFromStats(statsPath);
