@@ -15,6 +15,7 @@
 - Electrode Application
   - [Build Your App](/chapter1/further-develop-app/build-app.md)
   - [What's Inside](/chapter1/further-develop-app/whats-inside.md)
+  - [Development Admin and Proxy](/chapter1/further-develop-app/dev-admin-proxy.md)
   - [Deploy Your App](/chapter1/further-develop-app/deploy-your-app.md)
 - Electrode Components
   - [Low-Level Components](/chapter1/further-develop-component/low-level-components.md)
