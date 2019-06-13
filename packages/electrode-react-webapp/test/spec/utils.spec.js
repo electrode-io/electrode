@@ -310,4 +310,43 @@ describe("utils", function() {
       }
     });
   });
+
+  describe("makeDevBundleBase", () => {
+    beforeEach(() => {
+      delete process.env.WEBPACK_DEV_CDN_PROTOCOL;
+      delete process.env.WEBPACK_DEV_CDN_HOSTNAME;
+      delete process.env.WEBPACK_DEV_CDN_PORT;
+      delete process.env.APP_SERVER_PORT;
+    });
+
+    it("should use WEBPACK_DEV_CDN_HOSTNAME env variables", () => {
+      process.env.WEBPACK_DEV_CDN_HOSTNAME = "testhost";
+      const baseUrl = utils.makeDevBundleBase();
+      expect(baseUrl).to.equal("http://testhost/js/");
+    });
+
+    it("should use WEBPACK_DEV_CDN_PROTOCOL env variables", () => {
+      process.env.WEBPACK_DEV_CDN_PROTOCOL = "https";
+      const baseUrl = utils.makeDevBundleBase();
+      expect(baseUrl).to.equal("https://localhost/js/");
+    });
+
+    it("should use WEBPACK_DEV_CDN_PORT env variables", () => {
+      process.env.WEBPACK_DEV_CDN_PORT = "8080";
+      const baseUrl = utils.makeDevBundleBase();
+      expect(baseUrl).to.equal("http://localhost:8080/js/");
+    });
+
+    it("should ignore WEBPACK_DEV_CDN_PORT env variables if it's 80", () => {
+      process.env.WEBPACK_DEV_CDN_PORT = "80";
+      const baseUrl = utils.makeDevBundleBase();
+      expect(baseUrl).to.equal("http://localhost/js/");
+    });
+
+    it("should check process.env.APP_SERVER_PORT", () => {
+      process.env.APP_SERVER_PORT = "8080";
+      const baseUrl = utils.makeDevBundleBase();
+      expect(baseUrl).to.equal("/js/");
+    });
+  });
 });

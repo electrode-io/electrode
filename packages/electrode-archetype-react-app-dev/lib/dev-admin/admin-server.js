@@ -13,6 +13,9 @@ const { fork } = require("child_process");
 
 const APP_SERVER_NAME = "your app server";
 const DEV_SERVER_NAME = "Electrode webpack dev server";
+const PROXY_SERVER_NAME = "Electrode Dev Proxy";
+
+const DEV_PROXY_ENABLED = Boolean(process.env.APP_SERVER_PORT);
 
 class AdminServer {
   constructor(args) {
@@ -25,10 +28,16 @@ class AdminServer {
 
   async start() {
     this._wds = ck`<gray.inverse>[wds]</> `;
+    this._proxy = ck`<green.inverse>[proxy]</> `;
     this.setupConsoleInterface();
     this.handleUserInput();
     await this.startDevServer();
     await this.startAppServer();
+    if (DEV_PROXY_ENABLED) {
+      // to debug dev proxy
+      // await this.startProxyServer("--inspect-brk");
+      await this.startProxyServer();
+    }
     setTimeout(() => this.showConsoleMenu(), 100);
   }
 
@@ -38,13 +47,14 @@ class AdminServer {
   }
 
   showConsoleMenu() {
+    const proxyItem = DEV_PROXY_ENABLED ? "<magenta>P</> - Restart Dev Proxy " : "";
     const menu = ck`              <green.inverse>   Electrode Dev Admin Console   </>
 
  <white.inverse>For your app server</>
    <magenta>A</> - Restart <magenta>D</> - <cyan>inspect-brk</> mode <magenta>I</> - <cyan>inspect</> mode <magenta>K</> - Kill&nbsp;
  <white.inverse>For Electrode webpack dev server</>  ${this._wds}
    <magenta>W</> - Restart <magenta>E</> - <cyan>inspect-brk</> mode <magenta>R</> - <cyan>inspect</> mode <magenta>X</> - Kill&nbsp;
- <magenta>M</> - Show this menu <magenta>Q</> - Shutdown`;
+ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown`;
     console.log(boxen(menu, { margin: { left: 5 } }));
   }
 
@@ -61,6 +71,13 @@ class AdminServer {
         info._child = undefined;
         info._starting = false;
       });
+    }
+  }
+
+  async signal(name, sig) {
+    const info = this.getServer(name);
+    if (info._child) {
+      info._child.kill(sig);
     }
   }
 
@@ -92,6 +109,7 @@ class AdminServer {
       }
       await this.kill(DEV_SERVER_NAME, "SIGINT");
       await this.kill(APP_SERVER_NAME, "SIGINT");
+      await this.kill(PROXY_SERVER_NAME, "SIGINT");
       process.exit();
     } else if ((key.ctrl && key.name === "c") || str === "m") {
       // allow user to press ctrl+c to bring up console menu
@@ -112,6 +130,8 @@ class AdminServer {
       this.startAppServer("--inspect-brk");
     } else if (str === "i") {
       this.startAppServer("--inspect");
+    } else if (DEV_PROXY_ENABLED && str === "p") {
+      this.signal(PROXY_SERVER_NAME, "SIGHUP");
     }
     process.nextTick(() => this.handleUserInput());
   }
@@ -249,6 +269,24 @@ class AdminServer {
         });
 
         await this.waitForAppServerStart(info);
+      }
+    });
+  }
+
+  async startProxyServer(debug) {
+    await this.startServer({
+      name: PROXY_SERVER_NAME,
+      killKey: "O",
+      debug,
+      exec: Path.join(__dirname, "redbird-spawn"),
+      waitStart: async info => {
+        info._child.stdout.on("data", data => {
+          process.stdout.write(this._proxy + data);
+        });
+
+        info._child.stderr.on("data", data => {
+          process.stderr.write(this._proxy + data);
+        });
       }
     });
   }
