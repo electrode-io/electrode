@@ -5222,7 +5222,6 @@ electrode-archetype-react-app-dev:
    stylus: ^0.54.5
    stylus-relative-loader: ^3.4.0
    subapp-util: ^1.0.1
-   sudo-prompt: ^8.2.5
    sugarss: ^1.0.1
    typescript: ^3.2.1
    url-loader: ^0.6.2
@@ -15342,13 +15341,6 @@ subtext:
    pez: 4.x.x
    wreck: 14.x.x
   deprecated: 'This module has moved and is now available at @hapi/subtext. Please update your dependencies as this version is no longer maintained an may contain bugs and security issues.'
-sudo-prompt:
- _latest: 9.0.0
- _:
-  ^8.2.5: 8.2.5
- 8.2.5:
-  $: sha512-rlBo3HU/1zAJUrkY6jNxDOC9eVYliG6nS4JA8u8KAshITd07tafMc/Br7xQwCSseXwJ2iCcHCE8SNWX3q8Z+kw==
-  _: 'https://registry.npmjs.org/sudo-prompt/-/sudo-prompt-8.2.5.tgz'
 sugarss:
  _latest: 2.0.0
  _:

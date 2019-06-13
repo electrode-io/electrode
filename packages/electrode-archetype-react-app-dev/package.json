@@ -128,7 +128,6 @@
     "stylus": "^0.54.5",
     "stylus-relative-loader": "^3.4.0",
     "subapp-util": "^1.0.1",
-    "sudo-prompt": "^8.2.5",
     "sugarss": "^1.0.1",
     "typescript": "^3.2.1",
     "url-loader": "^0.6.2",
