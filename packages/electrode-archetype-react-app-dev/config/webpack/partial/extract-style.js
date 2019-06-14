@@ -84,7 +84,7 @@ const postcssQuery = {
     ident: "postcss",
     plugins: loader => [
       autoprefixer({
-        browsers: browserslist
+        overrideBrowserslist: browserslist
       }),
       atImport({ root: loader.resourcePath }),
       postcssPresetEnv({ browsers: browserslist })
