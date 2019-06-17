@@ -1,3 +1,89 @@
+# 6/17/2019
+
+- new development reverse proxy using redbird
+- fixes and dep updates
+
+## Packages
+
+### Directly Updated
+
+-   `electrode-archetype-react-app@6.5.0` `(6.4.7 => 6.5.0)`
+-   `electrode-archetype-react-app-dev@6.5.0` `(6.4.7 => 6.5.0)`
+-   `electrode-react-webapp@3.8.0` `(3.7.0 => 3.8.0)`
+-   `electrode-redux-router-engine@2.3.1` `(2.3.0 => 2.3.1)`
+-   `generator-electrode@5.1.6` `(5.1.5 => 5.1.6)`
+-   `subapp-server@1.1.0` `(1.0.7 => 1.1.0)`
+-   `subapp-web@1.0.2` `(1.0.1 => 1.0.2)`
+
+### Lerna Updated
+
+-   `electrode-ignite@3.0.10` `(3.0.9 => 3.0.10)`
+-   `subapp-redux@1.0.2` `(1.0.1 => 1.0.2)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   update mini-css-extract-plugin ([#1279](https://github.com/electrode-io/electrode/pull/1279)) [commit](http://github.com/electrode-io/electrode/commit/107beb949282430ebfc91c700be2dd5673db2a63)
+    -   update dep autoprefixer and use new option to suppress warning ([#1276](https://github.com/electrode-io/electrode/pull/1276)) [commit](http://github.com/electrode-io/electrode/commit/f0bc599c02a565caf43576bc27dab1260139c508)
+    -   [minor] development reverse proxy using redbird ([#1273](https://github.com/electrode-io/electrode/pull/1273)) [commit](http://github.com/electrode-io/electrode/commit/78908e7343e2b39acb24d0ad321f88ca7aa55273)
+    -   [dep] update isomorphic-loader to 2.1.0 ([#1267](https://github.com/electrode-io/electrode/pull/1267)) [commit](http://github.com/electrode-io/electrode/commit/cda85c7e7612a98b00fdeefcb27cd5c24598fdb5)
+    -   [bug] fix `isomorphic-assets.json` write path ([#1264](https://github.com/electrode-io/electrode/pull/1264)) [commit](http://github.com/electrode-io/electrode/commit/2c266cff730ede15b7ce834dfdb539840c0dc1f9)
+    -   [bug] use @babel/register in archetype run time support in dev mode ([#1265](https://github.com/electrode-io/electrode/pull/1265)) [commit](http://github.com/electrode-io/electrode/commit/dd072756c8a88bbda924a138660836dde372c07c)
+    -   [bug] fix nodemon starting app server in dev mode ([#1263](https://github.com/electrode-io/electrode/pull/1263)) [commit](http://github.com/electrode-io/electrode/commit/10c4bf722fe183086943b065b8bc7b5a631fb7cd)
+    -   [bug] fix styles in HMR mode ([#1262](https://github.com/electrode-io/electrode/pull/1262)) [commit](http://github.com/electrode-io/electrode/commit/e57874541fbe7f8d9e23d83dcd391e0840fe00d3)
+    -   [bug] fix publicPath issue of migration to `mini-css-extract-plugin` ([#1261](https://github.com/electrode-io/electrode/pull/1261)) [commit](http://github.com/electrode-io/electrode/commit/7f3f00b2b78929ffeec87582ec5614e5da42e0be)
+    -   [bug] fix webpack dev server memfs serving ([#1260](https://github.com/electrode-io/electrode/pull/1260)) [commit](http://github.com/electrode-io/electrode/commit/3db1d328bc8cbbb00d0538190d8482c32bdef20c)
+    -   [bug] fix loadable-stats.json path in dev mode ([#1259](https://github.com/electrode-io/electrode/pull/1259)) [commit](http://github.com/electrode-io/electrode/commit/8de7ff7cac8088f447e1a69f50863de2248a3e1c)
+    -   dynamically imported components server side rendering ([#1240](https://github.com/electrode-io/electrode/pull/1240)) [commit](http://github.com/electrode-io/electrode/commit/c15be2efcd137931abc5d6c856e827cb087bd6f6)
+    -   [minor] add preset-react to server babelrc so JSX will be transpiled ([#1251](https://github.com/electrode-io/electrode/pull/1251)) [commit](http://github.com/electrode-io/electrode/commit/e83e81244e8a6db5f6b0a6a5038ef1cd26b287cb)
+
+-   `packages/electrode-react-webapp`
+
+    -   [minor] development reverse proxy using redbird ([#1273](https://github.com/electrode-io/electrode/pull/1273)) [commit](http://github.com/electrode-io/electrode/commit/78908e7343e2b39acb24d0ad321f88ca7aa55273)
+    -   [patch] uniq instances for multiple tokens of same _id ([#1252](https://github.com/electrode-io/electrode/pull/1252)) [commit](http://github.com/electrode-io/electrode/commit/5897304008951dfe17467ccc251a0b7b1ee83b56)
+
+-   `packages/electrode-redux-router-engine`
+
+    -   dynamically imported components server side rendering ([#1240](https://github.com/electrode-io/electrode/pull/1240)) [commit](http://github.com/electrode-io/electrode/commit/c15be2efcd137931abc5d6c856e827cb087bd6f6)
+
+-   `packages/generator-electrode`
+
+    -   [patch] generate app to look at APP_SERVER_PORT ([#1275](https://github.com/electrode-io/electrode/pull/1275)) [commit](http://github.com/electrode-io/electrode/commit/d17b6612b77d08e65be17d9ae226b9faa3aa303e)
+    -   [bug] generate gitignore to ignore lock files ([#1266](https://github.com/electrode-io/electrode/pull/1266)) [commit](http://github.com/electrode-io/electrode/commit/3bae728aaf3df672b8c6a77d1079216506588c47)
+    -   dynamically imported components server side rendering ([#1240](https://github.com/electrode-io/electrode/pull/1240)) [commit](http://github.com/electrode-io/electrode/commit/c15be2efcd137931abc5d6c856e827cb087bd6f6)
+
+-   `packages/subapp-server`
+
+    -   export index page JSX template tokens in subapp-server [commit](http://github.com/electrode-io/electrode/commit/b74d7fea8a3ea86450b76711239d66a4a6d72c59)
+    -   [minor] support JSX template for subapp routes ([#1254](https://github.com/electrode-io/electrode/pull/1254)) [commit](http://github.com/electrode-io/electrode/commit/8bceec16099c4642cf196d86b4d9c3b08182bb84)
+
+-   `packages/subapp-web`
+
+    -   subapp - handle load JS bundles from CDN mapped URLs ([#1258](https://github.com/electrode-io/electrode/pull/1258)) [commit](http://github.com/electrode-io/electrode/commit/aebd9afc4e86a77876a07ba35673af0ea23d5dc1)
+    -   handle array of bundles to find JS chunk [commit](http://github.com/electrode-io/electrode/commit/2bbcb43dea0bf76d66cc4d8859afdfa180178cf6)
+
+-   `samples/hapi-app`
+
+    -   [minor] development reverse proxy using redbird ([#1273](https://github.com/electrode-io/electrode/pull/1273)) [commit](http://github.com/electrode-io/electrode/commit/78908e7343e2b39acb24d0ad321f88ca7aa55273)
+
+-   `samples/poc-subapp`
+
+    -   export index page JSX template tokens in subapp-server [commit](http://github.com/electrode-io/electrode/commit/b74d7fea8a3ea86450b76711239d66a4a6d72c59)
+    -   [minor] support JSX template for subapp routes ([#1254](https://github.com/electrode-io/electrode/pull/1254)) [commit](http://github.com/electrode-io/electrode/commit/8bceec16099c4642cf196d86b4d9c3b08182bb84)
+    -   [chore] update generated lockfile [commit](http://github.com/electrode-io/electrode/commit/c6d6eea9848093340ed77e645e69b85f60634621)
+
+-   `samples/universal-react-node`
+
+    -   [minor] add preset-react to server babelrc so JSX will be transpiled ([#1251](https://github.com/electrode-io/electrode/pull/1251)) [commit](http://github.com/electrode-io/electrode/commit/e83e81244e8a6db5f6b0a6a5038ef1cd26b287cb)
+    -   [chore] update auto gen files for samples [commit](http://github.com/electrode-io/electrode/commit/8f7972bf20e6c446c85397492e0a199c782b00f8)
+
+-   `docs`
+
+    -   [docs] create doc for dev admin and reverse proxy ([#1274](https://github.com/electrode-io/electrode/pull/1274)) [commit](http://github.com/electrode-io/electrode/commit/c57f379feb41dd2f91596622807b167d95677593)
+    -   update doc for archetype v6 env variables format ([#1270](https://github.com/electrode-io/electrode/pull/1270)) [commit](http://github.com/electrode-io/electrode/commit/e9ff3c262cdab4afe0452f3dd6d7544c05d2d16d)
+    -   [doc] update doc for archetype v6 env variables ([#1233](https://github.com/electrode-io/electrode/pull/1233)) [commit](http://github.com/electrode-io/electrode/commit/4b96c6978dae34c009f3e3e3b959763c0ff8eb79)
+
 # 5/22/2019
 
 -   migrate `extract-text-webpack-plugin` to `mini-css-extract-plugin` 
