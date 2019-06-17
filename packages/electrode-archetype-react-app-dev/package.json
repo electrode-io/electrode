@@ -89,7 +89,7 @@
     "fs-extra": "^0.26.5",
     "glob": "^7.0.6",
     "identity-obj-proxy": "^3.0.0",
-    "isomorphic-loader": "^2.0.0",
+    "isomorphic-loader": "^2.1.0",
     "istanbul": "^0.4.5",
     "jest": "^23.5.0",
     "jsonfile": "^2.2.2",
