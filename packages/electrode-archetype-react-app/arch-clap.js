@@ -986,6 +986,16 @@ Individual .babelrc files were generated for you in src/client and src/server
       desc: "Build your app's client bundle for production and run bundle analyzer",
       task: ["build-dist", "optimize-stats"]
     },
+    "build-fp-stats": {
+      desc:
+        "Build static bundle with stats.json containing fullPaths to inspect the bundle on electrode-electrify",
+      task: mkCmd(
+        `webpack --config`,
+        quote(webpackConfig("webpack.config.stats.electrify.js")),
+        `--colors`,
+        `--display-error-details`
+      )
+    },
     "critical-css": {
       desc: "Start server and run penthouse to output critical CSS",
       task: inlineCriticalCSS
