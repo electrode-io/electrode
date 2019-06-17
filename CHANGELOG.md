@@ -1,5 +1,18 @@
 # 6/17/2019
 
+## Packages
+
+-   `electrode-archetype-react-app@6.5.1` `(6.5.0 => 6.5.1)`
+-   `electrode-archetype-react-app-dev@6.5.1` `(6.5.0 => 6.5.1)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [bug] update dep in dev app archtype: isomorphic-loader ([#1280](https://github.com/electrode-io/electrode/pull/1280)) [commit](http://github.com/electrode-io/electrode/commit/ec263573807ecf3dbecacc601f0ebc8318427f06)
+
+# 6/17/2019
+
 - new development reverse proxy using redbird
 - fixes and dep updates
 
