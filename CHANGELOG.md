@@ -1,3 +1,19 @@
+# 6/19/2019
+
+- fix font paths in CSS bundle
+
+## Packages
+
+-   `electrode-archetype-react-app@6.5.2` `(6.5.1 => 6.5.2)`
+-   `electrode-archetype-react-app-dev@6.5.2` `(6.5.1 => 6.5.2)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   revert-pr1261 for style and font publicPath ([#1283](https://github.com/electrode-io/electrode/pull/1283)) [commit](http://github.com/electrode-io/electrode/commit/98611c0e24b0d6b0614c12c763849c58a6284c5a)
+    -   [fix] rm public path for font ([#1284](https://github.com/electrode-io/electrode/pull/1284)) [commit](http://github.com/electrode-io/electrode/commit/2dd5e50f56edc417b75e6aa47bd497f2472dcf88)
+
 # 6/17/2019
 
 ## Packages
