@@ -120,7 +120,7 @@ const stylusRules = {
   use: [
     {
       loader: MiniCssExtractPlugin.loader,
-      options: { hmr: isDevelopment, reload: isDevelopment }
+      options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
     },
     ...(cssModuleSupport
       ? [cssModuleQuery, postcssQuery, stylusQuery]
@@ -138,7 +138,7 @@ const lessRules = {
   use: [
     {
       loader: MiniCssExtractPlugin.loader,
-      options: { hmr: isDevelopment, reload: isDevelopment }
+      options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
     },
     ...(cssModuleSupport
       ? [cssModuleQuery, postcssQuery, lessQuery]
@@ -153,7 +153,7 @@ module.exports = function() {
     use: [
       {
         loader: MiniCssExtractPlugin.loader,
-        options: { hmr: isDevelopment, reload: isDevelopment }
+        options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
       },
       ...(cssModuleSupport ? [cssModuleQuery, postcssQuery] : [cssQuery, postcssQuery])
     ]
@@ -166,7 +166,7 @@ module.exports = function() {
       use: [
         {
           loader: MiniCssExtractPlugin.loader,
-          options: { hmr: isDevelopment, reload: isDevelopment }
+          options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
         },
         ...(cssModuleSupport
           ? [cssModuleQuery, postcssQuery, sassQuery]
@@ -189,7 +189,7 @@ module.exports = function() {
       use: [
         {
           loader: MiniCssExtractPlugin.loader,
-          options: { hmr: isDevelopment, reload: isDevelopment }
+          options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
         },
         cssModuleQuery,
         postcssQuery,
