@@ -804,7 +804,7 @@ Individual .babelrc files were generated for you in src/client and src/server
           .join(" ");
         AppMode.setEnv(AppMode.src.dir);
         const nodeRunApp = AppMode.isSrc
-          ? `node ${quote(Path.join(archetype.dir, "support/babel-run"))} ${AppMode.src.server}`
+          ? `node ${quote(Path.join(archetype.dir, "support/babel-run.js"))} ${AppMode.src.server}`
           : `node ${AppMode.src.server}`;
 
         return mkCmd(
