@@ -17,8 +17,7 @@ module.exports = function() {
               loader: urlLoader,
               options: {
                 limit: archetype.webpack.woffFontInlineLimit,
-                mimetype: "application/font-woff",
-                publicPath: "/js/"
+                mimetype: "application/font-woff"
               }
             },
             isomorphicLoader
@@ -27,7 +26,7 @@ module.exports = function() {
         {
           _name: "font-file",
           test: /\.(eot|ttf)(\?\S*)?$/i,
-          use: [{ loader: fileLoader, options: { publicPath: "/js/" } }, isomorphicLoader]
+          use: [fileLoader, isomorphicLoader]
         }
       ]
     }
