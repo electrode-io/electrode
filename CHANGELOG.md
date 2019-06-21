@@ -1,3 +1,17 @@
+# 6/21/2019
+
+## Packages
+
+-   `electrode-archetype-react-app@5.5.8` `(5.5.7 => 5.5.8)`
+-   `electrode-archetype-react-app-dev@5.5.8` `(5.5.7 => 5.5.8)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [dep] update isomorphic-loader to 2.1.0 ([#1268](https://github.com/electrode-io/electrode/pull/1268)) [commit](http://github.com/electrode-io/electrode/commit/b1c5f9207d5f5f97e062f0a3e88317f12dec885b)
+    -   Add file extension for nodemon ([#1282](https://github.com/electrode-io/electrode/pull/1282)) [commit](http://github.com/electrode-io/electrode/commit/f1fd116386e71e41b357ce15c57c89e6c8c7af7f)
+
 # 5/22/2019
 
 - new `clap dev-es6` task for running with babel targetting ES6
