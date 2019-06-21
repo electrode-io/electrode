@@ -1,3 +1,16 @@
+# 6/20/2019
+
+## Packages
+
+-   `electrode-archetype-react-app@6.5.3` `(6.5.2 => 6.5.3)`
+-   `electrode-archetype-react-app-dev@6.5.3` `(6.5.2 => 6.5.3)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [fix] use posix path for memory-fs ([#1285](https://github.com/electrode-io/electrode/pull/1285)) [commit](http://github.com/electrode-io/electrode/commit/324bca0fb84674c7c63bbbf822887b2bc1943a91)
+
 # 6/19/2019
 
 - fix font paths in CSS bundle
