@@ -184,7 +184,8 @@ class Middleware {
 
     const transferMemFsFiles = (fileSystem, cb) => {
       const isoConfig = loadIsomorphicConfig();
-      const loadableStats = Path.join(this.memFsCwd, `server/${LOADABLE_STATS}`);
+      // always operate in custom fs with posix conventions
+      const loadableStats = Path.posix.join(this.memFsCwd, `server/${LOADABLE_STATS}`);
       if (fileSystem.existsSync(loadableStats)) {
         const source = fileSystem.readFileSync(loadableStats);
         const dir = Path.resolve("./dist/server");
@@ -193,7 +194,8 @@ class Middleware {
       }
 
       if (isoConfig.assetsFile) {
-        const assetsFile = Path.join(this.memFsCwd, isoConfig.assetsFile);
+        // always operate in custom fs with posix conventions
+        const assetsFile = Path.posix.join(this.memFsCwd, isoConfig.assetsFile);
         const source = fileSystem.readFileSync(assetsFile);
         const dir = Path.resolve("./dist");
         if (!Fs.existsSync(dir)) shell.mkdir("-p", dir);
