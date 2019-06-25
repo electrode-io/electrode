@@ -38,16 +38,15 @@ function searchYoBin(name) {
 
   return Path.join(baseYoPath, "..", "node_modules", name);
 }
-function getGeneratorFullPath(name){
-  if(name.startsWith("@")){
-    const [scope, generatorName] = name.split('/');
+
+function getGeneratorFullPath(name) {
+  if (name.startsWith("@")) {
+    const [scope, generatorName] = name.split("/");
     return require.resolve(`${scope}/generator-${generatorName}`);
-  }
-  else{
+  } else {
     return require.resolve(`generator-${name}`);
   }
 }
-  
 
 module.exports = Object.assign(Lib, {
   platform: {
