@@ -21,6 +21,9 @@ process.env.WEBPACK_DEV_MIDDLEWARE = true;
 
 if (electrodeServer) {
   electrodeServer({
+    electrode: {
+      logLevel: "warn"
+    },
     connections: {
       default: {
         host: archetype.webpack.devHostname,

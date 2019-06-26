@@ -7,6 +7,9 @@ const fs = require("fs");
 const Path = require("path");
 const requireAt = require("require-at");
 const assert = require("assert");
+const Url = require("url");
+
+const HTTP_PORT = "80";
 
 /**
  * Tries to import bundle chunk selector function if the corresponding option is set in the
@@ -277,6 +280,35 @@ ${errMsg}
   };
 };
 
+const makeDevBundleBase = devServer => {
+  const cdnProtocol = process.env.WEBPACK_DEV_CDN_PROTOCOL;
+  const cdnHostname = process.env.WEBPACK_DEV_CDN_HOSTNAME;
+  const cdnPort = process.env.WEBPACK_DEV_CDN_PORT;
+
+  /*
+   * If env specified custom CDN protocol/host/port, then generate bundle
+   * URL with those.
+   */
+  if (cdnProtocol !== undefined || cdnHostname !== undefined || cdnPort !== undefined) {
+    return Url.format({
+      protocol: cdnProtocol || "http",
+      hostname: cdnHostname || "localhost",
+      // if CDN is also from standard HTTP port 80 then it's not needed in the URL
+      port: cdnPort !== HTTP_PORT ? cdnPort : "",
+      pathname: "/js/"
+    });
+  } else if (process.env.APP_SERVER_PORT) {
+    return "/js/";
+  } else {
+    return Url.format({
+      protocol: devServer.protocol,
+      hostname: devServer.host,
+      port: devServer.port,
+      pathname: "/js/"
+    });
+  }
+};
+
 module.exports = {
   resolveChunkSelector,
   loadAssetsFromStats,
@@ -298,5 +330,6 @@ module.exports = {
   getOtherAssets,
   getBundleJsNameByQuery,
   isReadableStream: x => Boolean(x && x.pipe && x.on && x._readableState),
-  munchyHandleStreamError
+  munchyHandleStreamError,
+  makeDevBundleBase
 };

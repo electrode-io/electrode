@@ -1,8 +1,11 @@
 "use strict";
 
+const Url = require("url");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const webpackDevReporter = require("../util/webpack-dev-reporter");
+
+const HTTP_PORT = 80;
 
 const devProtocol = archetype.webpack.https ? "https://" : "http://";
 
@@ -31,10 +34,42 @@ module.exports = function() {
     };
   }
 
+  //
+  // The publicPath here is for mapping assets that are collected
+  // during webpack compile through the isomorphic-loader plugin.
+  // Elsewhere in electrode-react-webapp, it detects webpack dev
+  // mode and construct the CSS/JS bundle URLs separately.
+  //
+  const makePublicPath = () => {
+    // is any of the webpack.cdn* options defined
+    const { cdnProtocol, cdnHostname, cdnPort } = archetype.webpack;
+    if (cdnProtocol !== null || cdnHostname !== null || cdnPort !== 0) {
+      return Url.format({
+        protocol: cdnProtocol || "http",
+        hostname: cdnHostname || "localhost",
+        port: cdnPort !== HTTP_PORT ? cdnPort : "",
+        pathname: "/js/"
+      });
+    } else if (process.env.APP_SERVER_PORT) {
+      // we running with a reverse proxy that join app and webpack dev
+      // under the same host and port, so use a relative path
+      return "/js/";
+    } else {
+      const { https, devHostname, devPort } = archetype.webpack;
+      // original dev assets URLs
+      return Url.format({
+        protocol: https ? "https" : "http",
+        hostname: devHostname,
+        port: devPort,
+        pathname: "/js/"
+      });
+    }
+  };
+
   const config = {
     devServer: devServerConfig,
     output: {
-      publicPath: `${devProtocol}${archetype.webpack.devHostname}:${archetype.webpack.devPort}/js/`,
+      publicPath: makePublicPath(),
       filename: "[name].bundle.dev.js"
     },
     devtool: "inline-source-map",

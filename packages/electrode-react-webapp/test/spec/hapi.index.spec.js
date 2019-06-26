@@ -372,9 +372,9 @@ describe("hapi 16 electrode-react-webapp", () => {
         })
         .then(res => {
           expect(res.statusCode).to.equal(200);
-          expect(res.result).to.contain("http://127.0.0.1:2992/js/foo.style.css");
-          expect(res.result).to.contain("http://127.0.0.1:2992/js/bar.style.css");
-          expect(res.result).to.contain("http://127.0.0.1:2992/js/home.bundle.dev.js");
+          expect(res.result).to.contain("http://localhost:2992/js/foo.style.css");
+          expect(res.result).to.contain("http://localhost:2992/js/bar.style.css");
+          expect(res.result).to.contain("http://localhost:2992/js/home.bundle.dev.js");
           stopServer(server);
         })
         .catch(err => {
@@ -398,8 +398,8 @@ describe("hapi 16 electrode-react-webapp", () => {
           })
           .then(res => {
             expect(res.statusCode).to.equal(200);
-            expect(res.result).to.contain("http://127.0.0.1:2992/js/bundle.dev.js");
-            expect(res.result).to.contain("http://127.0.0.1:2992/js/style.css");
+            expect(res.result).to.contain("http://localhost:2992/js/bundle.dev.js");
+            expect(res.result).to.contain("http://localhost:2992/js/style.css");
             stopServer(server);
           })
           .catch(err => {
@@ -497,7 +497,7 @@ describe("hapi 16 electrode-react-webapp", () => {
         .then(res => {
           expect(res.statusCode).to.equal(200);
           expect(res.result).to.contain(
-            '<link rel="manifest" href="http://127.0.0.1:2992/js/manifest.json" />'
+            '<link rel="manifest" href="http://localhost:2992/js/manifest.json" />'
           );
           stopServer(server);
         })
@@ -1444,7 +1444,7 @@ describe("hapi 16 electrode-react-webapp", () => {
           })
           .then(res => {
             expect(res.result).to.not.includes(
-              `<script src="http://127.0.0.1:2992/js/main.bundle.dev.js"></script>`
+              `<script src="http://localhost:2992/js/main.bundle.dev.js"></script>`
             );
             stopServer(server);
           })

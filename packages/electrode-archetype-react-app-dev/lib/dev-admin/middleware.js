@@ -6,7 +6,6 @@
 const Path = require("path");
 const Fs = require("fs");
 const webpack = require("webpack");
-const opn = require("opn");
 const hotHelpers = require("webpack-hot-middleware/helpers");
 const Url = require("url");
 
@@ -46,42 +45,6 @@ function urlJoin() {
   }
 
   return saved + Path.posix.join.apply(null, arguments);
-}
-
-function openUrl(url) {
-  const flag = archetype.devOpenBrowser;
-  const doOpen = () => {
-    return setTimeout(() => opn(url), 750);
-  };
-
-  const showOpen = () => {
-    console.info(ck`Your app is now ready at <green>${url}</>`);
-  };
-
-  if (flag === false) return showOpen();
-  if (flag === true) return doOpen();
-
-  const filename = Path.join(archetype.eTmpDir, "open-browser.json");
-  let openTimestamp;
-  const now = Date.now();
-  try {
-    openTimestamp = JSON.parse(Fs.readFileSync(filename));
-  } catch (e) {
-    openTimestamp = { time: 0 };
-  }
-
-  try {
-    const diff = now - openTimestamp.time;
-    if (diff > 10 * 60 * 1000) {
-      openTimestamp.time = now;
-      Fs.writeFileSync(filename, JSON.stringify(openTimestamp, null, 2));
-      return doOpen();
-    }
-  } catch (e) {
-    //
-  }
-
-  return showOpen();
 }
 
 //
@@ -196,6 +159,7 @@ class Middleware {
 
     this.cwdIndex = serveIndex(process.cwd(), { icons: true, hidden: true });
     this.devBaseUrl = urlJoin(options.devBaseUrl || "/__electrode_dev");
+    this.devBaseUrlSlash = urlJoin(this.devBaseUrl, "/");
     this.cwdBaseUrl = urlJoin(this.devBaseUrl, "/cwd");
     this.cwdContextBaseUrl = urlJoin(this.devBaseUrl, "/memfs");
     this.reporterUrl = urlJoin(this.devBaseUrl, "/reporter");
@@ -220,7 +184,8 @@ class Middleware {
 
     const transferMemFsFiles = (fileSystem, cb) => {
       const isoConfig = loadIsomorphicConfig();
-      const loadableStats = Path.join(this.memFsCwd, `server/${LOADABLE_STATS}`);
+      // always operate in custom fs with posix conventions
+      const loadableStats = Path.posix.join(this.memFsCwd, `server/${LOADABLE_STATS}`);
       if (fileSystem.existsSync(loadableStats)) {
         const source = fileSystem.readFileSync(loadableStats);
         const dir = Path.resolve("./dist/server");
@@ -229,7 +194,8 @@ class Middleware {
       }
 
       if (isoConfig.assetsFile) {
-        const assetsFile = Path.join(this.memFsCwd, isoConfig.assetsFile);
+        // always operate in custom fs with posix conventions
+        const assetsFile = Path.posix.join(this.memFsCwd, isoConfig.assetsFile);
         const source = fileSystem.readFileSync(assetsFile);
         const dir = Path.resolve("./dist");
         if (!Fs.existsSync(dir)) shell.mkdir("-p", dir);
@@ -272,7 +238,6 @@ class Middleware {
 
           if (this.webpackDev.lastReporterOptions === undefined) {
             this.returnReporter = showError;
-            openUrl(baseUrl());
           } else {
             // keep returning reporter until a first success compile
             this.returnReporter = this.returnReporter ? showError : false;
@@ -440,7 +405,7 @@ ${listDirectoryHtml(this.listAssetPath, outputPath)}
       // bundle name is second
       const bundle = require.resolve(`${modName}/dist/${dllParts[1]}`);
       return Promise.resolve(cycle.replyFile(bundle));
-    } else if (req.url === this.devBaseUrl) {
+    } else if (req.url === this.devBaseUrl || req.url === this.devBaseUrlSlash) {
       res.send(`<html><head><meta charset="utf-8"/></head><body>
 <h1>Electrode Development Dashboard</h1>
 <h3><a href="${this.cwdBaseUrl}">View current working directory files</a></h3>
