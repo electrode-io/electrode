@@ -80,7 +80,7 @@ module.exports = Object.assign(Lib, {
       } catch (error) {
         generatorFullPath = name;
       }
-      
+
       return childProcess.spawn(yoPath, [generatorFullPath], {
         stdio: "inherit"
       });
