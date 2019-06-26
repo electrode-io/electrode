@@ -50,7 +50,7 @@ describe("do-yo", function() {
     });
   });
 
-  it("should set generatoe name as generator-test", () => {
+  it("should set generator name as generator-test", () => {
     const child = new EventEmitter();
     const data = { platform: undefined, generatorName: "generator-test" };
     return testRun(data, child, (path, args) => {
@@ -60,7 +60,7 @@ describe("do-yo", function() {
     });
   });
 
-  it("should set generatoe name as @walmart/test", () => {
+  it("should set generator name as @walmart/test", () => {
     const child = new EventEmitter();
     const data = { platform: undefined, generatorName: "@walmart/test" };
     return testRun(data, child, (path, args) => {
