@@ -60,7 +60,12 @@ module.exports = Object.assign(Lib, {
   platform: {
     win32: function win32(name) {
       const yoPath = searchYoBin("yo.cmd");
-      const generatorFullPath = getGeneratorFullPath(name);
+      let generatorFullPath;
+      try {
+        generatorFullPath = getGeneratorFullPath(name);
+      } catch (error) {
+        generatorFullPath = name;
+      }
 
       return childProcess.spawn("cmd", ["/c", yoPath, generatorFullPath], {
         stdio: "inherit"
@@ -69,8 +74,13 @@ module.exports = Object.assign(Lib, {
 
     posix: function posix(name) {
       const yoPath = searchYoBin("yo");
-      const generatorFullPath = getGeneratorFullPath(name);
-
+      let generatorFullPath;
+      try {
+        generatorFullPath = getGeneratorFullPath(name);
+      } catch (error) {
+        generatorFullPath = name;
+      }
+      
       return childProcess.spawn(yoPath, [generatorFullPath], {
         stdio: "inherit"
       });
