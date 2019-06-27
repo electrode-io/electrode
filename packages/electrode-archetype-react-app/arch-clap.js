@@ -93,6 +93,7 @@ function setStaticFilesEnv() {
 
 const defaultListenPort = 3000;
 
+// eslint-disable-next-line no-unused-vars
 const portFromEnv = () => {
   const x = parseInt(process.env.PORT, 10);
   /* istanbul ignore next */
@@ -265,6 +266,35 @@ function startAppServer(options) {
   logger.info("To terminate press Ctrl+C.");
   archetype.AppMode.setEnv(archetype.AppMode.lib.dir);
   return exec(`node`, options, Path.join(archetype.AppMode.lib.server, "index.js"));
+}
+
+function generateBrowsersListRc() {
+  const destnDir = Path.resolve(archetype.AppMode.src.dir, "../");
+  if (!Fs.existsSync(destnDir)) return;
+  // retrieve the default configs
+  const archRc = Path.join(archetype.devPkg.name, "config", "browserslist", "browserslistrc.js");
+  const browserConfig = require(archRc);
+  const browserlistStr = browserConfig.list.join("\n");
+  // make sure not to override any custom props if any
+  const configRcFile = ".browserslistrc";
+  const destnRc = Path.join(destnDir, configRcFile);
+  if (Fs.existsSync(destnRc)) {
+    const existingConfig = Fs.readFileSync(destnRc, "utf8");
+    const anyCustomProps = existingConfig && existingConfig.split("\n").filter(
+      x => x && x[0] !== "#" && !browserConfig.list.includes(x)
+    );
+    if (anyCustomProps && anyCustomProps.length) {
+      logger.info(
+        `You've a custom ${configRcFile} config file already.
+        Make sure you don't want to override these props.\n${existingConfig}`
+      );
+      return;
+    }
+  }
+  // generate the config
+  const commentStr = "# Browsers that we support";
+  Fs.writeFileSync(destnRc, `${commentStr}\n${browserlistStr}\n`);
+  logger.info(`Generating ${configRcFile} for you - please commit it.`);
 }
 
 /*
@@ -524,13 +554,15 @@ function makeTasks(xclap) {
       desc: `write each targets to respective isomorphic-assets.json`,
       task: () => {
         buildDistDirs.forEach(dir => {
-          const isomorphicPath = Path.resolve(dir, "isomorphic-assets.json"); // add `targets` field to `dist-X/isomorphic-assets.json`
+          // add `targets` field to `dist-X/isomorphic-assets.json`
+          const isomorphicPath = Path.resolve(dir, "isomorphic-assets.json");
           if (Fs.existsSync(isomorphicPath)) {
             Fs.readFile(isomorphicPath, { encoding: "utf8" }, (err, data) => {
               if (err) throw err;
               const assetsJson = JSON.parse(data);
               const { envTargets } = archetype.babel;
               assetsJson.targets = envTargets[dir.split("-")[1]];
+              // eslint-disable-next-line no-shadow
               Fs.writeFile(isomorphicPath, JSON.stringify(assetsJson, null, 2), err => {
                 if (err) throw err;
               });
@@ -869,6 +901,7 @@ Individual .babelrc files were generated for you in src/client and src/server
       desc: "Start development with admin server",
       task: function() {
         AppMode.setEnv(AppMode.src.dir);
+        // eslint-disable-next-line no-shadow
         const exec = AppMode.isSrc
           ? quote(Path.join(archetype.dir, "support/babel-run"))
           : AppMode.src.server;
@@ -1030,6 +1063,10 @@ Individual .babelrc files were generated for you in src/client and src/server
     "flow-typed-install": {
       desc: "Install flow 3rd-party interface library definitions from flow-typed repo.",
       task: mkCmd(`flow-typed install --packageDir ${archetype.devDir}`)
+    },
+    "generate-browsers-listrc": {
+      desc: "Generate .browserlistrc config file, it's used by Browserlist for AutoPrefixer/PostCSS",
+      task: () => generateBrowsersListRc()
     }
   };
 
@@ -1108,4 +1145,5 @@ module.exports = function(xclap) {
   process.env.FORCE_COLOR = "true"; // force color for chalk
   xclap.load("electrode", makeTasks(xclap));
   warnYarn();
+  generateBrowsersListRc();
 };

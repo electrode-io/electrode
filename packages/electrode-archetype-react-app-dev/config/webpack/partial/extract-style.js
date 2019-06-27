@@ -77,17 +77,14 @@ const cssModuleQuery = {
  * - webpack requires an identifier (ident) in options
  * when {Function}/require is used (Complex Options).
  */
-const browserslist = ["last 2 versions", "ie >= 9", "> 5%"];
 const postcssQuery = {
   loader: postcssLoader,
   options: {
     ident: "postcss",
     plugins: loader => [
-      autoprefixer({
-        overrideBrowserslist: browserslist
-      }),
+      autoprefixer(),
       atImport({ root: loader.resourcePath }),
-      postcssPresetEnv({ browsers: browserslist })
+      postcssPresetEnv()
     ]
   }
 };
