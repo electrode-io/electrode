@@ -186,21 +186,6 @@ class Middleware {
     this.reporterUrl = urlJoin(this.devBaseUrl, "reporter");
     this.dllDevUrl = urlJoin(this.devBaseUrl, "dll");
 
-    const loadIsomorphicConfig = () => {
-      return JSON.parse(Fs.readFileSync(Path.resolve(".isomorphic-loader-config.json")));
-    };
-
-    const transferIsomorphicAssets = (fileSystem, cb) => {
-      const isoConfig = loadIsomorphicConfig();
-      if (isoConfig.assetsFile) {
-        const assetsFile = Path.resolve(isoConfig.assetsFile);
-        const source = fileSystem.readFileSync(assetsFile);
-        Fs.writeFile(assetsFile, source, cb);
-      } else {
-        process.nextTick(() => cb(true));
-      }
-    };
-
     this.webpackDev = {
       lastReporterOptions: undefined,
       hasErrors: false,
@@ -255,16 +240,7 @@ class Middleware {
           if (userReporter) userReporter(middlewareOptions, reporterOptions);
           this.webpackDev.lastReporterOptions = reporterOptions;
         };
-
-        transferIsomorphicAssets(this.devMiddleware.fileSystem, err => {
-          // reload assets to activate
-          if (err) return update();
-
-          return isomorphicExtendRequire.loadAssets(err2 => {
-            if (err) console.error("reload isomorphic assets failed", err2);
-            update();
-          });
-        });
+        update();
       } else {
         isomorphicExtendRequire.deactivate();
         console.log(`webpack bundle is now ${chalk.magenta("INVALID")}`);
