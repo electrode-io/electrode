@@ -1,3 +1,26 @@
+# 6/27/2019
+
+## Packages
+
+-   `electrode-archetype-react-app@6.5.4` `(6.5.3 => 6.5.4)`
+-   `electrode-archetype-react-app-dev@6.5.4` `(6.5.3 => 6.5.4)`
+-   `electrode-ignite@3.0.11` `(3.0.10 => 3.0.11)`
+-   `generator-electrode@5.1.7` `(5.1.6 => 5.1.7)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [bug] no need to transfer assetsFile in webpack dev mode ([#1289](https://github.com/electrode-io/electrode/pull/1289)) [commit](http://github.com/electrode-io/electrode/commit/c2fce808e7f5373684c286bfc2268338442a727f)
+
+-   `packages/electrode-ignite`
+
+    -   [bug] help yo find generator with resolved full path ([#1287](https://github.com/electrode-io/electrode/pull/1287)) [commit](http://github.com/electrode-io/electrode/commit/38ad700a4de4a9028c22a19ee11a9b45c884b385)
+
+-   `packages/generator-electrode`
+
+    -   [bug] help yo find generator with resolved full path ([#1287](https://github.com/electrode-io/electrode/pull/1287)) [commit](http://github.com/electrode-io/electrode/commit/38ad700a4de4a9028c22a19ee11a9b45c884b385)
+
 # 6/20/2019
 
 ## Packages
