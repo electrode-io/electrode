@@ -20,7 +20,7 @@
     "component",
     "component-add"
   ],
-  "main": "generators/index.js",
+  "main": "generators/app/index.js",
   "keywords": [
     "Electrode",
     "React",
