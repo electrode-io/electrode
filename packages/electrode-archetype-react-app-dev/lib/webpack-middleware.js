@@ -240,7 +240,7 @@ class Middleware {
           if (userReporter) userReporter(middlewareOptions, reporterOptions);
           this.webpackDev.lastReporterOptions = reporterOptions;
         };
-        update();
+        isomorphicExtendRequire.loadAssets(() => update());
       } else {
         isomorphicExtendRequire.deactivate();
         console.log(`webpack bundle is now ${chalk.magenta("INVALID")}`);
