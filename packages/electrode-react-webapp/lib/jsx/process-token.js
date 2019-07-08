@@ -22,7 +22,10 @@ function processToken(props, context, scope, forRequire = false) {
     return null;
   }
 
-  if (renderer.insertTokenIds) {
+  const insertTokenIds =
+    props._insertTokenIds !== false && (props._insertTokenIds || renderer.insertTokenIds);
+
+  if (insertTokenIds) {
     scope.output.add(
       `<!-- BEGIN ${tokenInst.id} props: ${JSON.stringify(_.omit(props, "_id"))} -->\n`
     );
@@ -30,7 +33,7 @@ function processToken(props, context, scope, forRequire = false) {
 
   const r = tokenInst[TOKEN_HANDLER](context, tokenInst);
   return context.handleTokenResult(tokenInst.id, r, err => {
-    if (props._insertTokenIds !== false && renderer.insertTokenIds) {
+    if (insertTokenIds) {
       scope.output.add(`<!-- ${tokenInst.id} END -->`);
     }
     // if err, then handler has caused/returned an error
