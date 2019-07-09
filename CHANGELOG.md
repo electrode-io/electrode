@@ -1,3 +1,39 @@
+# 7/9/2019
+
+## Packages
+
+-   `electrode-archetype-react-app@6.5.5` `(6.5.4 => 6.5.5)`
+-   `electrode-archetype-react-app-dev@6.5.5` `(6.5.4 => 6.5.5)`
+-   `electrode-react-webapp@3.8.1` `(3.8.0 => 3.8.1)`
+-   `subapp-server@1.1.1` `(1.1.0 => 1.1.1)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [patch] generate .browserlistrc config for the new autoprefixer ([#1288](https://github.com/electrode-io/electrode/pull/1288)) [commit](http://github.com/electrode-io/electrode/commit/0fee744f36e1438395a33766ea2162cfad9de27f)
+
+-   `packages/electrode-react-webapp`
+
+    -   allow token props to turn off insert id option ([#1294](https://github.com/electrode-io/electrode/pull/1294)) [commit](http://github.com/electrode-io/electrode/commit/647ea269011d6c900a509cbe55662555a512fd39)
+    -   set each route's path and data in its options ([#1293](https://github.com/electrode-io/electrode/pull/1293)) [commit](http://github.com/electrode-io/electrode/commit/ca141a457a0741a81b561d7424ea2419920b3ca5)
+
+-   `packages/subapp-server`
+
+    -   [bug] fix h.continue on hapi 17 ([#1291](https://github.com/electrode-io/electrode/pull/1291)) [commit](http://github.com/electrode-io/electrode/commit/e005c1b468da3362aa445caf06ed23b440b9d9ec)
+
+-   `samples/demo-tree-shaking`
+
+    -   [chore] update auto gen files for samples [commit](http://github.com/electrode-io/electrode/commit/45218d8a0af956557c1df6702dad36844da536a2)
+
+-   `samples/stylus-sample`
+
+    -   [chore] update auto gen files for samples [commit](http://github.com/electrode-io/electrode/commit/45218d8a0af956557c1df6702dad36844da536a2)
+
+-   `samples/universal-react-node`
+
+    -   [chore] update auto gen files for samples [commit](http://github.com/electrode-io/electrode/commit/45218d8a0af956557c1df6702dad36844da536a2)
+
 # 6/27/2019
 
 ## Packages
