@@ -1,6 +1,6 @@
 {
   "name": "generator-electrode",
-  "version": "5.1.6",
+  "version": "5.1.7",
   "description": "Generate Electrode React App",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -20,7 +20,7 @@
     "component",
     "component-add"
   ],
-  "main": "generators/index.js",
+  "main": "generators/app/index.js",
   "keywords": [
     "Electrode",
     "React",

@@ -39,20 +39,49 @@ function searchYoBin(name) {
   return Path.join(baseYoPath, "..", "node_modules", name);
 }
 
+function formatGeneratorName(name) {
+  if (name.startsWith("generator-")) {
+    return name;
+  } else {
+    return `generator-${name}`;
+  }
+}
+
+function getGeneratorFullPath(name) {
+  if (name.startsWith("@")) {
+    const [scope, generatorName] = name.split("/");
+    return require.resolve(`${scope}/${formatGeneratorName(generatorName)}`);
+  } else {
+    return require.resolve(formatGeneratorName(name));
+  }
+}
+
 module.exports = Object.assign(Lib, {
   platform: {
     win32: function win32(name) {
       const yoPath = searchYoBin("yo.cmd");
+      let generatorFullPath;
+      try {
+        generatorFullPath = getGeneratorFullPath(name);
+      } catch (error) {
+        generatorFullPath = name;
+      }
 
-      return childProcess.spawn("cmd", ["/c", yoPath, name], {
+      return childProcess.spawn("cmd", ["/c", yoPath, generatorFullPath], {
         stdio: "inherit"
       });
     },
 
     posix: function posix(name) {
       const yoPath = searchYoBin("yo");
+      let generatorFullPath;
+      try {
+        generatorFullPath = getGeneratorFullPath(name);
+      } catch (error) {
+        generatorFullPath = name;
+      }
 
-      return childProcess.spawn(yoPath, [name], {
+      return childProcess.spawn(yoPath, [generatorFullPath], {
         stdio: "inherit"
       });
     }

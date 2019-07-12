@@ -225,7 +225,7 @@ async function setupSubAppHapiRoutes(server, options) {
             } catch (err) {
               //
             }
-            h.continue();
+            return h.continue;
           }
         : (request, reply) => {
             try {

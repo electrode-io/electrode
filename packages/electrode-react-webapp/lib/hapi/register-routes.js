@@ -25,7 +25,8 @@ const registerRoutes = (server, options, defaultRouteHandler) => {
     const handleRoute = options.handleRoute || defaultRouteHandler;
     _.defaults(routeOptions, { responseForError, responseForBadStatus });
     const contentResolver = ReactWebapp.getContentResolver(registerOptions, pathData, path);
-
+    routeOptions.path = path;
+    routeOptions.pathData = pathData;
     server.route({
       method: pathData.method || "GET",
       path: Path.posix.join(basePath, path),

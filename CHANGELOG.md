@@ -1,3 +1,75 @@
+# 7/9/2019
+
+## Packages
+
+-   `electrode-archetype-react-app@6.5.5` `(6.5.4 => 6.5.5)`
+-   `electrode-archetype-react-app-dev@6.5.5` `(6.5.4 => 6.5.5)`
+-   `electrode-react-webapp@3.8.1` `(3.8.0 => 3.8.1)`
+-   `subapp-server@1.1.1` `(1.1.0 => 1.1.1)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [patch] generate .browserlistrc config for the new autoprefixer ([#1288](https://github.com/electrode-io/electrode/pull/1288)) [commit](http://github.com/electrode-io/electrode/commit/0fee744f36e1438395a33766ea2162cfad9de27f)
+
+-   `packages/electrode-react-webapp`
+
+    -   allow token props to turn off insert id option ([#1294](https://github.com/electrode-io/electrode/pull/1294)) [commit](http://github.com/electrode-io/electrode/commit/647ea269011d6c900a509cbe55662555a512fd39)
+    -   set each route's path and data in its options ([#1293](https://github.com/electrode-io/electrode/pull/1293)) [commit](http://github.com/electrode-io/electrode/commit/ca141a457a0741a81b561d7424ea2419920b3ca5)
+
+-   `packages/subapp-server`
+
+    -   [bug] fix h.continue on hapi 17 ([#1291](https://github.com/electrode-io/electrode/pull/1291)) [commit](http://github.com/electrode-io/electrode/commit/e005c1b468da3362aa445caf06ed23b440b9d9ec)
+
+-   `samples/demo-tree-shaking`
+
+    -   [chore] update auto gen files for samples [commit](http://github.com/electrode-io/electrode/commit/45218d8a0af956557c1df6702dad36844da536a2)
+
+-   `samples/stylus-sample`
+
+    -   [chore] update auto gen files for samples [commit](http://github.com/electrode-io/electrode/commit/45218d8a0af956557c1df6702dad36844da536a2)
+
+-   `samples/universal-react-node`
+
+    -   [chore] update auto gen files for samples [commit](http://github.com/electrode-io/electrode/commit/45218d8a0af956557c1df6702dad36844da536a2)
+
+# 6/27/2019
+
+## Packages
+
+-   `electrode-archetype-react-app@6.5.4` `(6.5.3 => 6.5.4)`
+-   `electrode-archetype-react-app-dev@6.5.4` `(6.5.3 => 6.5.4)`
+-   `electrode-ignite@3.0.11` `(3.0.10 => 3.0.11)`
+-   `generator-electrode@5.1.7` `(5.1.6 => 5.1.7)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [bug] no need to transfer assetsFile in webpack dev mode ([#1289](https://github.com/electrode-io/electrode/pull/1289)) [commit](http://github.com/electrode-io/electrode/commit/c2fce808e7f5373684c286bfc2268338442a727f)
+
+-   `packages/electrode-ignite`
+
+    -   [bug] help yo find generator with resolved full path ([#1287](https://github.com/electrode-io/electrode/pull/1287)) [commit](http://github.com/electrode-io/electrode/commit/38ad700a4de4a9028c22a19ee11a9b45c884b385)
+
+-   `packages/generator-electrode`
+
+    -   [bug] help yo find generator with resolved full path ([#1287](https://github.com/electrode-io/electrode/pull/1287)) [commit](http://github.com/electrode-io/electrode/commit/38ad700a4de4a9028c22a19ee11a9b45c884b385)
+
+# 6/20/2019
+
+## Packages
+
+-   `electrode-archetype-react-app@6.5.3` `(6.5.2 => 6.5.3)`
+-   `electrode-archetype-react-app-dev@6.5.3` `(6.5.2 => 6.5.3)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [fix] use posix path for memory-fs ([#1285](https://github.com/electrode-io/electrode/pull/1285)) [commit](http://github.com/electrode-io/electrode/commit/324bca0fb84674c7c63bbbf822887b2bc1943a91)
+
 # 6/19/2019
 
 - fix font paths in CSS bundle
