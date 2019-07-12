@@ -8,6 +8,7 @@ const Fs = require("fs");
 const webpack = require("webpack");
 const hotHelpers = require("webpack-hot-middleware/helpers");
 const Url = require("url");
+const PosixPath = require("path").posix;
 
 hotHelpers.pathMatch = (url, path) => {
   try {
@@ -28,6 +29,7 @@ const statsMapper = require("../stats-mapper");
 const devRequire = archetype.devRequire;
 const xsh = devRequire("xsh");
 const shell = xsh.$;
+const isWin32 = process.platform.startsWith("win32");
 
 function urlJoin() {
   if (arguments.length < 1) return undefined;
@@ -149,15 +151,20 @@ class Middleware {
     this.publicPath = webpackDevOptions.publicPath || "/";
     this.listAssetPath = urlJoin(this.publicPath, "/");
 
-    // webpack dev middleware's memfs root is where the actual output from webpack
     this.memFsCwd = this.devMiddleware.fileSystem.existsSync(process.cwd()) ? process.cwd() : "/";
     this.cwdMemIndex = serveIndex(this.memFsCwd, {
       icons: true,
       hidden: true,
-      fs: this.devMiddleware.fileSystem
+      fs: this.devMiddleware.fileSystem,
+      path: isWin32 ? Path.posix : null
     });
+    console.log('cwdMemIndex: ', this.cwdMemIndex);
+    debugger;
 
     this.cwdIndex = serveIndex(process.cwd(), { icons: true, hidden: true });
+    console.log('cwdIndex: ', this.cwdIndex);
+    debugger;
+
     this.devBaseUrl = urlJoin(options.devBaseUrl || "/__electrode_dev");
     this.devBaseUrlSlash = urlJoin(this.devBaseUrl, "/");
     this.cwdBaseUrl = urlJoin(this.devBaseUrl, "/cwd");
@@ -170,10 +177,11 @@ class Middleware {
     const isoLockfile = Path.resolve(`${ISO_LOADER_CONFIG}.lock`);
     const isoConfigFile = Path.resolve(ISO_LOADER_CONFIG);
 
-    const loadIsomorphicConfig = () => {
-      return JSON.parse(Fs.readFileSync(isoConfigFile));
-    };
-
+    // Must wait for isomorphic-loader to complete saving its config
+    // file before continuing and do hot reload in the app server.
+    // In webpack dev mode, isomorphic-loader use config.assets instead
+    // of loading them from config.assetsFile, so no need to transfer that
+    // from Mem FS to physical disk.
     const waitIsoLock = cb => {
       if (Fs.existsSync(isoLockfile) || !Fs.existsSync(isoConfigFile)) {
         return setTimeout(() => waitIsoLock(cb), 50);
@@ -183,7 +191,6 @@ class Middleware {
     };
 
     const transferMemFsFiles = (fileSystem, cb) => {
-      const isoConfig = loadIsomorphicConfig();
       // always operate in custom fs with posix conventions
       const loadableStats = Path.posix.join(this.memFsCwd, `server/${LOADABLE_STATS}`);
       if (fileSystem.existsSync(loadableStats)) {
@@ -191,15 +198,6 @@ class Middleware {
         const dir = Path.resolve("./dist/server");
         if (!Fs.existsSync(dir)) shell.mkdir("-p", dir);
         Fs.writeFileSync(Path.join(dir, LOADABLE_STATS), source);
-      }
-
-      if (isoConfig.assetsFile) {
-        // always operate in custom fs with posix conventions
-        const assetsFile = Path.posix.join(this.memFsCwd, isoConfig.assetsFile);
-        const source = fileSystem.readFileSync(assetsFile);
-        const dir = Path.resolve("./dist");
-        if (!Fs.existsSync(dir)) shell.mkdir("-p", dir);
-        Fs.writeFileSync(Path.join(dir, isoConfig.assetsFile), source);
       }
 
       process.nextTick(() => cb(true));
@@ -303,13 +301,20 @@ doReload(1); </script></body></html>`)
       );
     }
 
-    const serveStatic = (baseUrl, fileSystem, indexServer, cwd) => {
+    const serveStatic = (baseUrl, fileSystem, indexServer, cwd, isMemFs) => {
       req.originalUrl = req.url; // this is what express saves to, else serve-index nukes
-      req.url = req.url.substr(baseUrl.length) || "/";
-      const fullPath = Path.join(cwd || process.cwd(), req.url);
-
+      req.url = req.url.substr(baseUrl.length) || cwd;
+      const PathLib = isWin32 && isMemFs ? Path.posix : Path;
+      const fullPath = PathLib.join(cwd, req.url);
+      console.log('indexServer: ', indexServer, ' | isMemFs: ', isMemFs);
+      
       return new Promise((resolve, reject) => {
         fileSystem.stat(fullPath, (err, stats) => {
+          console.log('fullPath: ', fullPath);
+          console.log('err: ', err);
+          //console.log('stats: ', stats);
+          console.log('stats-isDir: ', stats.isDirectory());
+         // debugger
           if (err) {
             return reject(err);
           } else if (stats.isDirectory()) {
@@ -317,6 +322,9 @@ doReload(1); </script></body></html>`)
             return indexServer(req, res, reject);
           } else {
             return fileSystem.readFile(fullPath, (err2, data) => {
+              console.log('data: ', data);
+              console.log('err2: ', err2);
+              
               if (err2) {
                 return reject(err);
               } else {
@@ -385,11 +393,14 @@ ${listDirectoryHtml(this.listAssetPath, outputPath)}
         return sendStaticServeError(`reading file under CWD`, err);
       });
     } else if (req.url.startsWith(this.cwdContextBaseUrl)) {
+      //debugger;
+      const isMemFs = true;
       return serveStatic(
         this.cwdContextBaseUrl,
         this.devMiddleware.fileSystem,
         this.cwdMemIndex,
-        this.memFsCwd
+        this.memFsCwd,
+        isMemFs
       ).catch(err => sendStaticServeError("reading webpack mem fs", err));
     } else if (req.url.startsWith(this.reporterUrl) || this.returnReporter) {
       return serveReporter(this.webpackDev.lastReporterOptions);
