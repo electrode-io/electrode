@@ -8,7 +8,6 @@ const Fs = require("fs");
 const webpack = require("webpack");
 const hotHelpers = require("webpack-hot-middleware/helpers");
 const Url = require("url");
-const PosixPath = require("path").posix;
 
 hotHelpers.pathMatch = (url, path) => {
   try {
@@ -158,13 +157,8 @@ class Middleware {
       fs: this.devMiddleware.fileSystem,
       path: isWin32 ? Path.posix : null
     });
-    console.log('cwdMemIndex: ', this.cwdMemIndex);
-    debugger;
 
     this.cwdIndex = serveIndex(process.cwd(), { icons: true, hidden: true });
-    console.log('cwdIndex: ', this.cwdIndex);
-    debugger;
-
     this.devBaseUrl = urlJoin(options.devBaseUrl || "/__electrode_dev");
     this.devBaseUrlSlash = urlJoin(this.devBaseUrl, "/");
     this.cwdBaseUrl = urlJoin(this.devBaseUrl, "/cwd");
@@ -306,25 +300,16 @@ doReload(1); </script></body></html>`)
       req.url = req.url.substr(baseUrl.length) || cwd;
       const PathLib = isWin32 && isMemFs ? Path.posix : Path;
       const fullPath = PathLib.join(cwd, req.url);
-      console.log('indexServer: ', indexServer, ' | isMemFs: ', isMemFs);
       
       return new Promise((resolve, reject) => {
         fileSystem.stat(fullPath, (err, stats) => {
-          console.log('fullPath: ', fullPath);
-          console.log('err: ', err);
-          //console.log('stats: ', stats);
-          console.log('stats-isDir: ', stats.isDirectory());
-         // debugger
           if (err) {
             return reject(err);
           } else if (stats.isDirectory()) {
             res.once("end", resolve);
             return indexServer(req, res, reject);
           } else {
-            return fileSystem.readFile(fullPath, (err2, data) => {
-              console.log('data: ', data);
-              console.log('err2: ', err2);
-              
+            return fileSystem.readFile(fullPath, (err2, data) => {           
               if (err2) {
                 return reject(err);
               } else {
@@ -393,7 +378,6 @@ ${listDirectoryHtml(this.listAssetPath, outputPath)}
         return sendStaticServeError(`reading file under CWD`, err);
       });
     } else if (req.url.startsWith(this.cwdContextBaseUrl)) {
-      //debugger;
       const isMemFs = true;
       return serveStatic(
         this.cwdContextBaseUrl,
