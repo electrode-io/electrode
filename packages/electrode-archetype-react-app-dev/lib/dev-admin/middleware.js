@@ -171,6 +171,10 @@ class Middleware {
     const isoLockfile = Path.resolve(`${ISO_LOADER_CONFIG}.lock`);
     const isoConfigFile = Path.resolve(ISO_LOADER_CONFIG);
 
+    const loadIsomorphicConfig = () => {
+      return JSON.parse(Fs.readFileSync(isoConfigFile));
+    };
+  
     // Must wait for isomorphic-loader to complete saving its config
     // file before continuing and do hot reload in the app server.
     // In webpack dev mode, isomorphic-loader use config.assets instead
@@ -185,6 +189,7 @@ class Middleware {
     };
 
     const transferMemFsFiles = (fileSystem, cb) => {
+      const isoConfig = loadIsomorphicConfig();
       // always operate in custom fs with posix conventions
       const loadableStats = Path.posix.join(this.memFsCwd, `server/${LOADABLE_STATS}`);
       if (fileSystem.existsSync(loadableStats)) {
@@ -192,6 +197,15 @@ class Middleware {
         const dir = Path.resolve("./dist/server");
         if (!Fs.existsSync(dir)) shell.mkdir("-p", dir);
         Fs.writeFileSync(Path.join(dir, LOADABLE_STATS), source);
+      }
+
+      if (isoConfig.assetsFile) {
+        // always operate in custom fs with posix conventions
+        const assetsFile = Path.posix.join(this.memFsCwd, isoConfig.assetsFile);
+        const source = fileSystem.readFileSync(assetsFile);
+        const dir = Path.resolve("./dist");
+        if (!Fs.existsSync(dir)) shell.mkdir("-p", dir);
+        Fs.writeFileSync(Path.join(dir, isoConfig.assetsFile), source);
       }
 
       process.nextTick(() => cb(true));
@@ -299,7 +313,7 @@ doReload(1); </script></body></html>`)
       req.originalUrl = req.url; // this is what express saves to, else serve-index nukes
       req.url = req.url.substr(baseUrl.length) || cwd;
       const PathLib = isWin32 && isMemFs ? Path.posix : Path;
-      const fullPath = PathLib.join(cwd, req.url);
+      const fullPath = PathLib.join(cwd || process.cwd(), req.url);
       
       return new Promise((resolve, reject) => {
         fileSystem.stat(fullPath, (err, stats) => {
