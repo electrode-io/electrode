@@ -300,7 +300,7 @@ doReload(1); </script></body></html>`)
       req.url = req.url.substr(baseUrl.length) || cwd;
       const PathLib = isWin32 && isMemFs ? Path.posix : Path;
       const fullPath = PathLib.join(cwd || process.cwd(), req.url);
-      
+
       return new Promise((resolve, reject) => {
         fileSystem.stat(fullPath, (err, stats) => {
           if (err) {
@@ -309,7 +309,7 @@ doReload(1); </script></body></html>`)
             res.once("end", resolve);
             return indexServer(req, res, reject);
           } else {
-            return fileSystem.readFile(fullPath, (err2, data) => {           
+            return fileSystem.readFile(fullPath, (err2, data) => {
               if (err2) {
                 return reject(err);
               } else {
