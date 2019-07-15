@@ -28,7 +28,6 @@ const statsMapper = require("../stats-mapper");
 const devRequire = archetype.devRequire;
 const xsh = devRequire("xsh");
 const shell = xsh.$;
-const isWin32 = process.platform.startsWith("win32");
 
 function urlJoin() {
   if (arguments.length < 1) return undefined;
@@ -155,7 +154,7 @@ class Middleware {
       icons: true,
       hidden: true,
       fs: this.devMiddleware.fileSystem,
-      path: isWin32 ? Path.posix : null
+      path: Path.posix
     });
 
     this.cwdIndex = serveIndex(process.cwd(), { icons: true, hidden: true });
@@ -298,7 +297,7 @@ doReload(1); </script></body></html>`)
     const serveStatic = (baseUrl, fileSystem, indexServer, cwd, isMemFs) => {
       req.originalUrl = req.url; // this is what express saves to, else serve-index nukes
       req.url = req.url.substr(baseUrl.length) || cwd;
-      const PathLib = isWin32 && isMemFs ? Path.posix : Path;
+      const PathLib = isMemFs ? Path.posix : Path;
       const fullPath = PathLib.join(cwd || process.cwd(), req.url);
 
       return new Promise((resolve, reject) => {
