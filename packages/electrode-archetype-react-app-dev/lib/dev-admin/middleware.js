@@ -150,14 +150,14 @@ class Middleware {
     this.listAssetPath = urlJoin(this.publicPath, "/");
 
     this.memFsCwd = this.devMiddleware.fileSystem.existsSync(process.cwd()) ? process.cwd() : "/";
-    this.cwdMemIndex = serveIndex(this.memFsCwd, {
+    this.cwdMemIndex = new serveIndex(this.memFsCwd, {
       icons: true,
       hidden: true,
       fs: this.devMiddleware.fileSystem,
       path: Path.posix
     });
 
-    this.cwdIndex = serveIndex(process.cwd(), { icons: true, hidden: true });
+    this.cwdIndex = new serveIndex(process.cwd(), { icons: true, hidden: true });
     this.devBaseUrl = urlJoin(options.devBaseUrl || "/__electrode_dev");
     this.devBaseUrlSlash = urlJoin(this.devBaseUrl, "/");
     this.cwdBaseUrl = urlJoin(this.devBaseUrl, "/cwd");
@@ -294,7 +294,7 @@ doReload(1); </script></body></html>`)
       );
     }
 
-    const serveStatic = (baseUrl, fileSystem, indexServer, cwd, isMemFs) => {
+    const serveStatic = (baseUrl, fileSystem, serveIndexObj, cwd, isMemFs) => {
       req.originalUrl = req.url; // this is what express saves to, else serve-index nukes
       req.url = req.url.substr(baseUrl.length) || cwd;
       const PathLib = isMemFs ? Path.posix : Path;
@@ -306,7 +306,7 @@ doReload(1); </script></body></html>`)
             return reject(err);
           } else if (stats.isDirectory()) {
             res.once("end", resolve);
-            return indexServer(req, res, reject);
+            return serveIndexObj.indexServer(req, res, reject);
           } else {
             return fileSystem.readFile(fullPath, (err2, data) => {
               if (err2) {
