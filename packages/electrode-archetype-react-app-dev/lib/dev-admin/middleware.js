@@ -19,7 +19,7 @@ hotHelpers.pathMatch = (url, path) => {
 
 const webpackDevMiddleware = require("webpack-dev-middleware");
 const webpackHotMiddleware = require("webpack-hot-middleware");
-const serveIndex = require("serve-index-fs");
+const ServeIndex = require("serve-index-fs");
 const ck = require("chalker");
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const _ = require("lodash");
@@ -150,14 +150,14 @@ class Middleware {
     this.listAssetPath = urlJoin(this.publicPath, "/");
 
     this.memFsCwd = this.devMiddleware.fileSystem.existsSync(process.cwd()) ? process.cwd() : "/";
-    this.cwdMemIndex = new serveIndex(this.memFsCwd, {
+    this.cwdMemIndex = new ServeIndex(this.memFsCwd, {
       icons: true,
       hidden: true,
       fs: this.devMiddleware.fileSystem,
       path: Path.posix
     });
 
-    this.cwdIndex = new serveIndex(process.cwd(), { icons: true, hidden: true });
+    this.cwdIndex = new ServeIndex(process.cwd(), { icons: true, hidden: true });
     this.devBaseUrl = urlJoin(options.devBaseUrl || "/__electrode_dev");
     this.devBaseUrlSlash = urlJoin(this.devBaseUrl, "/");
     this.cwdBaseUrl = urlJoin(this.devBaseUrl, "/cwd");
