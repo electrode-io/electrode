@@ -186,6 +186,15 @@ class Middleware {
     this.reporterUrl = urlJoin(this.devBaseUrl, "reporter");
     this.dllDevUrl = urlJoin(this.devBaseUrl, "dll");
 
+    const waitIsoConfig = cb => {
+      const isoConfigFile = Path.resolve(".isomorphic-loader-config.json");
+      if (!Fs.existsSync(isoConfigFile)) {
+        return setTimeout(() => waitIsoConfig(cb), 50);
+      } else {
+        return cb();
+      }
+    };
+
     this.webpackDev = {
       lastReporterOptions: undefined,
       hasErrors: false,
@@ -240,7 +249,7 @@ class Middleware {
           if (userReporter) userReporter(middlewareOptions, reporterOptions);
           this.webpackDev.lastReporterOptions = reporterOptions;
         };
-        isomorphicExtendRequire.loadAssets(() => update());
+        waitIsoConfig(update);
       } else {
         isomorphicExtendRequire.deactivate();
         console.log(`webpack bundle is now ${chalk.magenta("INVALID")}`);
