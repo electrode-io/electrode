@@ -97,9 +97,7 @@ support.load = function(options, callback) {
     );
 
     logger.info(
-      `Loading @babel/register for runtime transpilation files (extensions: ${
-        regOptions.extensions
-      }).`
+      `Loading @babel/register for runtime transpilation files (extensions: ${regOptions.extensions}).`
     );
     logger.info(`The transpilation only occurs the first time you load a file.`);
     babelRegister(regOptions);
@@ -126,7 +124,22 @@ support.load = function(options, callback) {
   if (options.cssModuleHook !== false) {
     const opts = Object.assign(
       {
-        generateScopedName: "[name]__[local]___[hash:base64:5]"
+        generateScopedName: "[name]__[local]___[hash:base64:5]",
+        extensions: [".scss", ".styl", ".css"],
+        preprocessCss: function(css, filename) {
+          if (filename.endsWith(".styl")) {
+            return require("stylus")(css)
+              .set("filename", filename)
+              .render();
+          } else if (filename.endsWith(".scss")) {
+            return require("node-sass").renderSync({
+              css,
+              file: filename
+            }).css;
+          } else {
+            return css;
+          }
+        }
       },
       options.cssModuleHook || {}
     );
