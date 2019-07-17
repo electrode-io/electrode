@@ -125,7 +125,7 @@ support.load = function(options, callback) {
     const opts = Object.assign(
       {
         generateScopedName: "[name]__[local]___[hash:base64:5]",
-        extensions: [".scss", ".styl", ".css"],
+        extensions: [".scss", ".styl", ".less", ".css"],
         preprocessCss: function(css, filename) {
           if (filename.endsWith(".styl")) {
             return require("stylus")(css)
@@ -139,7 +139,8 @@ support.load = function(options, callback) {
           } else {
             return css;
           }
-        }
+        },
+        processorOpts: { parser: require("postcss-less").parse }
       },
       options.cssModuleHook || {}
     );
