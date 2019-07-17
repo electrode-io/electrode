@@ -144,7 +144,7 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
 
   const tokenHandlers = {
     [CONTENT_MARKER]: context => {
-      return context.user.content.html || "";
+      return context.user.content && context.user.content.html || "";
     },
 
     [TITLE_MARKER]: () => {
