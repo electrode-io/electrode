@@ -25,6 +25,6 @@ describe("clientUiConfig", function() {
     global.window = {};
     delete require.cache[require.resolve(csindex)];
     const uiConfig = require(csindex);
-    expect(uiConfig.ui).to.be.an.empty.object;
+    expect(uiConfig.ui).to.be.an("object").that.is.empty;
   });
 });
