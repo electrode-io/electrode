@@ -97,7 +97,6 @@ The current defaults are:
 | `prodBundleBase`                             | `String`                     | `"/js/"` | Base path to the JavaScript, CSS and manifest bundles      |
 | `cspNonceValue`                              | [`varies`](#csp-nonce-value) |          | Used to retrieve a CSP nonce value.                        |
 
-
 > `*1`: Default for `htmlFile` is to use this module's built-in [`index.html`](./lib/index.html)
 
 ### Paths and Content
@@ -116,11 +115,18 @@ Example:
 
 Route speicific options can be:
 
-| name             | type                         | description                                                       |
-| ---------------- | ---------------------------- | ----------------------------------------------------------------- |
-| `htmlFile`       | `String`                     | Absolute or relative path to the HTML template file.              |
-| `selectTemplate` | `Function`                   | Callback to selecte HTML template for the route base on `request` |
-| `content`        | [`varies`](#content-details) | [Content generator](#content-details)  for server-side rendering  |
+| name                   | type       | description                                                       |
+| ---------------------- | ---------- | ----------------------------------------------------------------- |
+| `htmlFile`             | `String`   | Absolute or relative path to the HTML template file.              |
+| `templateFile`         | `String`   |                                                                   |
+| `insertTokenIds`       | `Boolean`  |                                                                   |
+| `pageTitle`            | `String`   |                                                                   |
+| `selectTemplate`       | `Function` | Callback to selecte HTML template for the route base on `request` |
+| `responseForBadStatus` | `Function` |                                                                   |
+| `responseForError`     | `Function` |                                                                   |
+
+| `content` | [`varies`](#content-details) | [Content generator](#content-details) for server-side rendering |
+| `overrideOptions` | `Object` | Specify any config for the given path to override top level options |
 
 ### `unbundledJS` Details
 
@@ -140,15 +146,14 @@ Example:
 
 The script entries can be:
 
-- object - `{ src: "path to file" }`  to insert a `<script>` that loads a file with `src`
+- object - `{ src: "path to file" }` to insert a `<script>` that loads a file with `src`
   - To load scripts asynchronously use `{ src: "...", async: true }` or `{ src: "...", defer: true }`
 - string - literal JavaScript to insert within `<script>` tags
 
-
 ### Webpack Dev Server Options
 
-  - `host` `(String)` The host that webpack-dev-server runs on
-  - `port` `(String)` The port that webpack-dev-server runs on
+- `host` `(String)` The host that webpack-dev-server runs on
+- `port` `(String)` The port that webpack-dev-server runs on
 
 ### CSP nonce Value
 
@@ -157,9 +162,9 @@ The entry can be a `Function`, `Object`, or `undefined`:
 - `Function` - called with `(request, type)`, where `type` can be `'script'` or `'style'`
   - It return the corresponding nonce
 - `Object` - it may have properties `script`, `style` or both, and the value for each should be the path from the request object to the nonce value
-  -  For example, if you put a nonce value at `request.plugins.myCspGenerator.nonce`, then you set `cspNonceValue` to `{ script: 'plugins.myCspGenerator.nonce' }`.
-     -  The nonce, if present, will be included on any `script` or `style` elements that directly contain scripts or style
-     -  If this property is undefined, or if the value at that location is undefined, no nonce will be added.
+  - For example, if you put a nonce value at `request.plugins.myCspGenerator.nonce`, then you set `cspNonceValue` to `{ script: 'plugins.myCspGenerator.nonce' }`.
+    - The nonce, if present, will be included on any `script` or `style` elements that directly contain scripts or style
+    - If this property is undefined, or if the value at that location is undefined, no nonce will be added.
 
 ### `htmlFile` view details
 
@@ -216,7 +221,7 @@ The function signature is:
 
 ```js
 {
-  selectTemplate: (request, routeOptions) => {}
+  selectTemplate: (request, routeOptions) => {};
 }
 ```
 
