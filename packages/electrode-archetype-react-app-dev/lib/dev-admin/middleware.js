@@ -19,7 +19,7 @@ hotHelpers.pathMatch = (url, path) => {
 
 const webpackDevMiddleware = require("webpack-dev-middleware");
 const webpackHotMiddleware = require("webpack-hot-middleware");
-const serveIndex = require("serve-index-fs");
+const ServeIndex = require("serve-index-fs");
 const ck = require("chalker");
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const _ = require("lodash");
@@ -149,15 +149,15 @@ class Middleware {
     this.publicPath = webpackDevOptions.publicPath || "/";
     this.listAssetPath = urlJoin(this.publicPath, "/");
 
-    // webpack dev middleware's memfs root is where the actual output from webpack
     this.memFsCwd = this.devMiddleware.fileSystem.existsSync(process.cwd()) ? process.cwd() : "/";
-    this.cwdMemIndex = serveIndex(this.memFsCwd, {
+    this.cwdMemIndex = new ServeIndex(this.memFsCwd, {
       icons: true,
       hidden: true,
-      fs: this.devMiddleware.fileSystem
+      fs: this.devMiddleware.fileSystem,
+      path: Path.posix
     });
 
-    this.cwdIndex = serveIndex(process.cwd(), { icons: true, hidden: true });
+    this.cwdIndex = new ServeIndex(process.cwd(), { icons: true, hidden: true });
     this.devBaseUrl = urlJoin(options.devBaseUrl || "/__electrode_dev");
     this.devBaseUrlSlash = urlJoin(this.devBaseUrl, "/");
     this.cwdBaseUrl = urlJoin(this.devBaseUrl, "/cwd");
@@ -294,10 +294,11 @@ doReload(1); </script></body></html>`)
       );
     }
 
-    const serveStatic = (baseUrl, fileSystem, indexServer, cwd) => {
+    const serveStatic = (baseUrl, fileSystem, serveIndexObj, cwd, isMemFs) => {
       req.originalUrl = req.url; // this is what express saves to, else serve-index nukes
-      req.url = req.url.substr(baseUrl.length) || "/";
-      const fullPath = Path.join(cwd || process.cwd(), req.url);
+      req.url = req.url.substr(baseUrl.length) || cwd;
+      const PathLib = isMemFs ? Path.posix : Path;
+      const fullPath = PathLib.join(cwd || process.cwd(), req.url);
 
       return new Promise((resolve, reject) => {
         fileSystem.stat(fullPath, (err, stats) => {
@@ -305,7 +306,7 @@ doReload(1); </script></body></html>`)
             return reject(err);
           } else if (stats.isDirectory()) {
             res.once("end", resolve);
-            return indexServer(req, res, reject);
+            return serveIndexObj.indexServer(req, res, reject);
           } else {
             return fileSystem.readFile(fullPath, (err2, data) => {
               if (err2) {
@@ -376,11 +377,13 @@ ${listDirectoryHtml(this.listAssetPath, outputPath)}
         return sendStaticServeError(`reading file under CWD`, err);
       });
     } else if (req.url.startsWith(this.cwdContextBaseUrl)) {
+      const isMemFs = true;
       return serveStatic(
         this.cwdContextBaseUrl,
         this.devMiddleware.fileSystem,
         this.cwdMemIndex,
-        this.memFsCwd
+        this.memFsCwd,
+        isMemFs
       ).catch(err => sendStaticServeError("reading webpack mem fs", err));
     } else if (req.url.startsWith(this.reporterUrl) || this.returnReporter) {
       return serveReporter(this.webpackDev.lastReporterOptions);
