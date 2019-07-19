@@ -231,7 +231,7 @@ function inlineCriticalCSS() {
   const cssAsset = stats.assets.find(asset => asset.name.endsWith(".css"));
   const cssAssetPath = Path.resolve(process.cwd(), `dist/js/${cssAsset.name}`);
   const targetPath = Path.resolve(process.cwd(), "dist/js/critical.css");
-  const serverPromise = require(Path.resolve(process.cwd(), "server/index.js"));
+  const serverPromise = require(Path.resolve(process.cwd(), `${archetype.AppMode.src.server}/index.js`))();
   const penthouseOptions = {
     url,
     css: cssAssetPath,
