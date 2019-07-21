@@ -13,7 +13,7 @@
   "license": "Apache-2.0",
   "scripts": {},
   "peerDependencies": {
-    "electrode-archetype-react-component": "^5.0.0"
+    "electrode-archetype-react-component": "^6.0.0"
   },
   "files": [
     "config",
