@@ -9,7 +9,8 @@ const {
   flowRequireDirective,
   enableFlow,
   transformClassProps,
-  looseClassProps
+  looseClassProps,
+  enableDynamicImport
 } = archetype.babel;
 
 //
@@ -124,7 +125,7 @@ const presets = [
   //
   [
     "@babel/preset-env",
-    { modules: isProduction ? "auto" : "commonjs", loose: true, targets, ...useBuiltIns }
+    { modules: (isProduction || enableDynamicImport) ? "auto" : "commonjs", loose: true, targets, ...useBuiltIns }
   ],
   enableTypeScript && "@babel/preset-typescript",
   "@babel/preset-react"
