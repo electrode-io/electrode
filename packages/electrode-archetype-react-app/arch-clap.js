@@ -1025,8 +1025,8 @@ Individual .babelrc files were generated for you in src/client and src/server
         if (penthouse && CleanCSS) {
           inlineCriticalCSS();
         } else {
-          const warnning = "Please ensure `options.criticalCSS = true` in your `archetype/config.js` or `archetype/config/index.js`, then reinstall your dependencies";
-          throw new Error(`Missing Dependencies\n${warnning}`);
+          const error = "Please ensure `options.criticalCSS = true` in your `archetype/config.js` or `archetype/config/index.js`, then reinstall your dependencies";
+          throw new Error(`Missing Dependencies\n${error}`);
         }
       }
     },
