@@ -28,7 +28,7 @@
     "babel-runtime": "^6.26.0",
     "css-modules-require-hook": "^4.0.2",
     "filter-scan-dir": "^1.0.10",
-    "isomorphic-loader": "^2.1.0",
+    "isomorphic-loader": "^2.1.1",
     "optional-require": "^1.0.0"
   },
   "optionalDependencies": {
