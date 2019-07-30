@@ -250,6 +250,13 @@ module.exports = class extends Generator {
         message: "Would you like to generate .flowconfig for flow usage?",
         when: this.props.flow === undefined,
         default: false
+      },
+      {
+        type: "confirm",
+        name: "jestOpt",
+        message: "Would you like to use jest for unit tests?",
+        when: this.props.jestOpt === undefined,
+        default: true
       }
     ];
 
