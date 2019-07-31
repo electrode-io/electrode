@@ -2,7 +2,7 @@
   "name": "electrode-archetype-opt-react",
   "version": "1.0.3",
   "description": "Electrode NodeJS/React Optional Archetype - react",
-  "main": "index.js",
+  "main": "optional-check.js",
   "homepage": "http://www.electrode.io",
   "repository": {
     "type": "git",

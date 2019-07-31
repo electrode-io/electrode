@@ -6,11 +6,28 @@ const optionalRequire = require("optional-require")(require);
 const constants = require("./constants");
 const utils = require("../lib/utils");
 const makeAppMode = require("../lib/app-mode");
+const appPkg = require(Path.resolve("package.json"));
+
+function checkOptArchetypeInAppDep(dependencies) {
+  const options = Object.keys(dependencies)
+    .filter(x => x.startsWith("electrode-archetype-opt-"))
+    .reduce((acc, name) => {
+      const optPkg = require(name)();
+      if (optPkg.pass) {
+        acc[optPkg.optionalTagName] = optPkg.expectTag;
+      }
+      return acc;
+    }, {});
+
+  return { options };
+}
+
 const userConfig = Object.assign(
   {
     options: { reactLib: "react", karma: true, sass: false }
   },
-  optionalRequire(Path.resolve("archetype/config"))
+  optionalRequire(Path.resolve("archetype/config")),
+  checkOptArchetypeInAppDep(appPkg.dependencies)
 );
 
 module.exports = {
