@@ -22,19 +22,17 @@ function checkOptArchetypeInAppDep(dependencies) {
   return { options };
 }
 
-const userConfig = Object.assign(
-  {
-    options: { reactLib: "react", karma: true, sass: false }
-  },
-  optionalRequire(Path.resolve("archetype/config")),
-  checkOptArchetypeInAppDep(appPkg.dependencies)
+const userConfigOptions = Object.assign(
+  { reactLib: "react", karma: true, sass: false },
+  optionalRequire(Path.resolve("archetype/config")).options,
+  checkOptArchetypeInAppDep(appPkg.dependencies).options
 );
 
 module.exports = {
   dir: Path.resolve(__dirname, ".."),
   pkg,
-  options: userConfig.options,
-  AppMode: makeAppMode(constants.PROD_DIR, userConfig.options.reactLib),
+  options: userConfigOptions,
+  AppMode: makeAppMode(constants.PROD_DIR, userConfigOptions.reactLib),
   prodDir: constants.PROD_DIR,
   eTmpDir: constants.ETMP_DIR,
   prodModulesDir: Path.join(constants.PROD_DIR, "modules"),
