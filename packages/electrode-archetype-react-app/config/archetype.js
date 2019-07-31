@@ -24,7 +24,7 @@ function checkOptArchetypeInAppDep(dependencies) {
 
 const userConfigOptions = Object.assign(
   { reactLib: "react", karma: true, sass: false },
-  optionalRequire(Path.resolve("archetype/config")).options,
+  optionalRequire(Path.resolve("archetype/config"), { default: {} }).options,
   checkOptArchetypeInAppDep(appPkg.dependencies).options
 );
 
