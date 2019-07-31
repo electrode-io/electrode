@@ -253,9 +253,16 @@ module.exports = class extends Generator {
       },
       {
         type: "confirm",
-        name: "jestOpt",
+        name: "optCriticalCSS",
+        message: "Would you like to enable critical CSS?",
+        when: this.props.optCriticalCSS === undefined,
+        default: true
+      },
+      {
+        type: "confirm",
+        name: "optJest",
         message: "Would you like to use jest for unit tests?",
-        when: this.props.jestOpt === undefined,
+        when: this.props.optJest === undefined,
         default: true
       }
     ];
