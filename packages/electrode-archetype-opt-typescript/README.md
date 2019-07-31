@@ -7,7 +7,7 @@ The app can skip installing TypeScript dependencies by adding a file `archetype/
 ```js
 module.exports = {
   options: {
-    enableTypeScript: false
+    typescript: false
   }
 };
 ```

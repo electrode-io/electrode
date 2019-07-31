@@ -27,7 +27,7 @@
     "opt-archetype-check": "../opt-archetype-check"
   },
   "electrodeOptArchetype": {
-    "optionalTagName": "enableTypeScript",
+    "optionalTagName": "typescript",
     "expectTag": true,
     "defaultInstall": true
   }
