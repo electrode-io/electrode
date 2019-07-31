@@ -11,6 +11,7 @@ const extend = _.merge;
 const parseAuthor = require("parse-author");
 const githubUsername = require("github-username");
 const Fs = require("fs");
+const shell = require("shelljs");
 
 const ExpressJS = "ExpressJS";
 const HapiJS = "HapiJS";
@@ -256,14 +257,21 @@ module.exports = class extends Generator {
         name: "optCriticalCSS",
         message: "Would you like to enable critical CSS?",
         when: this.props.optCriticalCSS === undefined,
-        default: true
+        default: false
       },
       {
         type: "confirm",
         name: "optJest",
         message: "Would you like to use jest for unit tests?",
         when: this.props.optJest === undefined,
-        default: true
+        default: false
+      },
+      {
+        type: "confirm",
+        name: "optTypescript",
+        message: "Would you like to use typescript?",
+        when: this.props.optTypescript === undefined,
+        default: false
       }
     ];
 
@@ -462,6 +470,23 @@ module.exports = class extends Generator {
     );
 
     this.fs.copy(this.templatePath("src/client/images"), this.destinationPath("src/client/images"));
+
+    // Enable optional packages
+    shell.mkdir("-p", this.destinationPath("archetype/config"));
+
+    const getContent = props => {
+      const options = Object.entries({
+        criticalCSS: props.optCriticalCSS,
+        jest: props.optJest,
+        typescript: props.optTypescript
+      }).reduce((prev, [k, v]) => {
+        if (v) prev[k] = v;
+        return prev;
+      }, {});
+      return `module.exports = ${JSON.stringify({ options }, null, 2)}`;
+    };
+    
+    Fs.writeFileSync(this.destinationPath("archetype/config/index.js"), getContent(this.props));
   }
 
   default() {
