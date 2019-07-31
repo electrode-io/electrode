@@ -1,3 +1,25 @@
+# 7/30/2019
+
+## Packages
+
+-   `electrode-archetype-react-app@6.5.7` `(6.5.6 => 6.5.7)`
+-   `electrode-archetype-react-app-dev@6.5.7` `(6.5.6 => 6.5.7)`
+-   `electrode-archetype-react-component@6.1.6` `(6.1.5 => 6.1.6)`
+-   `electrode-archetype-react-component-dev@6.1.6` `(6.1.5 => 6.1.6)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [bug] diff configFile for isomorphic-loader webpack plugin by babel target  ([#1307](https://github.com/electrode-io/electrode/pull/1307)) [commit](http://github.com/electrode-io/electrode/commit/9bd2327c44b6dfcaac5b261e4c72d63e2e9f8351)
+    -   [feat] add `enableDynamicImport` to archetype ([#1305](https://github.com/electrode-io/electrode/pull/1305)) [commit](http://github.com/electrode-io/electrode/commit/39f77f2127acb8a9aa2c978f23bb0c9b3a8bd0da)
+    -   [bug] fix css module hook check when loading node.js support ([#1309](https://github.com/electrode-io/electrode/pull/1309)) [commit](http://github.com/electrode-io/electrode/commit/e76fed1a4240826b30f1006c0e98fcc0c158d3b0)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   dep: babel-core@7.0.0-bridge.0 ([#1304](https://github.com/electrode-io/electrode/pull/1304)) [commit](http://github.com/electrode-io/electrode/commit/23f532aadd5c8dc8f26e7e926c30921fd67c493a)
+    -   peerDep: electrode-archetype-react-component@6 ([#1302](https://github.com/electrode-io/electrode/pull/1302)) [commit](http://github.com/electrode-io/electrode/commit/da17ad494235fe32b7eff2b80f7cb4ea4e52dee7)
+
 # 7/19/2019
 
 ## Packages
