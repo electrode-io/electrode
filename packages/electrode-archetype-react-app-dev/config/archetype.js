@@ -74,6 +74,7 @@ const karmaConfigSpec = {
 
 const babelConfigSpec = {
   enableTypeScript: { env: "ENABLE_BABEL_TYPESCRIPT", default: false },
+  enableDynamicImport: { env: "ENABLE_DYNAMIC_IMPORT", default: true },
   enableFlow: { env: "ENABLE_BABEL_FLOW", default: true },
   // require the @flow directive in source to enable FlowJS type stripping
   flowRequireDirective: { env: "FLOW_REQUIRE_DIRECTIVE", default: false },
