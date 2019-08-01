@@ -122,8 +122,6 @@
     "require-at": "^1.0.2",
     "rimraf": "^2.4.0",
     "serve-index-fs": "^1.10.1",
-    "sinon": "^4.0.0",
-    "sinon-chai": "^2.14.0",
     "style-loader": "^0.20.1",
     "stylus": "^0.54.5",
     "stylus-relative-loader": "^3.4.0",
@@ -150,7 +148,8 @@
     "electrode-archetype-opt-karma": "^2.0.0",
     "electrode-archetype-opt-pwa": "^1.0.1",
     "electrode-archetype-opt-react": "^1.0.2",
-    "electrode-archetype-opt-sass": "^1.0.3"
+    "electrode-archetype-opt-sass": "^1.0.3",
+    "electrode-archetype-opt-sinon": "^1.0.0"
   },
   "devDependencies": {
     "electrode-archetype-njs-module-dev": "^3.0.0",
@@ -175,7 +174,8 @@
       "electrode-archetype-opt-karma": "../electrode-archetype-opt-karma",
       "electrode-archetype-opt-pwa": "../electrode-archetype-opt-pwa",
       "electrode-archetype-opt-react": "../electrode-archetype-opt-react",
-      "electrode-archetype-opt-sass": "../electrode-archetype-opt-sass"
+      "electrode-archetype-opt-sass": "../electrode-archetype-opt-sass",
+      "electrode-archetype-opt-sinon": "../electrode-archetype-opt-sinon"
     }
   },
   "nyc": {
