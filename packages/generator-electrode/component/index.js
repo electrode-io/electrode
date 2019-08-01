@@ -44,7 +44,7 @@ module.exports = class extends Generator {
     // Pre set the default props from the information we have at this point
     this.props = {
       packageName: this.pkg.name || this.options.name,
-      projectName: this.options.name
+      projectName: this.pkg.name || this.options.name
     };
 
     if (_.isObject(this.pkg.author)) {
