@@ -1,3 +1,50 @@
+# 7/31/2019
+
+## Packages
+
+-   `electrode-archetype-opt-inferno@0.2.7` `(0.2.6 => 0.2.7)`
+-   `electrode-archetype-opt-karma@2.0.1` `(2.0.0 => 2.0.1)`
+-   `electrode-archetype-opt-pwa@1.0.2` `(1.0.1 => 1.0.2)`
+-   `electrode-archetype-opt-react@1.0.4` `(1.0.3 => 1.0.4)`
+-   `electrode-archetype-opt-sass@1.0.5` `(1.0.4 => 1.0.5)`
+-   `electrode-archetype-react-app@6.5.8` `(6.5.7 => 6.5.8)`
+-   `electrode-archetype-react-app-dev@6.5.8` `(6.5.7 => 6.5.8)`
+
+## Commits
+
+-   `packages/electrode-archetype-opt-css-module`
+
+    -   update optional-check for all opt archetypes ([#1311](https://github.com/electrode-io/electrode/pull/1311)) [commit](http://github.com/electrode-io/electrode/commit/2e8e29559411ef9ac5295a7b29017cef8419a12b)
+
+-   `packages/electrode-archetype-opt-inferno`
+
+    -   update optional-check for all opt archetypes ([#1311](https://github.com/electrode-io/electrode/pull/1311)) [commit](http://github.com/electrode-io/electrode/commit/2e8e29559411ef9ac5295a7b29017cef8419a12b)
+
+-   `packages/electrode-archetype-opt-karma`
+
+    -   update optional-check for all opt archetypes ([#1311](https://github.com/electrode-io/electrode/pull/1311)) [commit](http://github.com/electrode-io/electrode/commit/2e8e29559411ef9ac5295a7b29017cef8419a12b)
+
+-   `packages/electrode-archetype-opt-pwa`
+
+    -   update optional-check for all opt archetypes ([#1311](https://github.com/electrode-io/electrode/pull/1311)) [commit](http://github.com/electrode-io/electrode/commit/2e8e29559411ef9ac5295a7b29017cef8419a12b)
+
+-   `packages/electrode-archetype-opt-react`
+
+    -   update optional-check for all opt archetypes ([#1311](https://github.com/electrode-io/electrode/pull/1311)) [commit](http://github.com/electrode-io/electrode/commit/2e8e29559411ef9ac5295a7b29017cef8419a12b)
+
+-   `packages/electrode-archetype-opt-sass`
+
+    -   update optional-check for all opt archetypes ([#1311](https://github.com/electrode-io/electrode/pull/1311)) [commit](http://github.com/electrode-io/electrode/commit/2e8e29559411ef9ac5295a7b29017cef8419a12b)
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [fix] default false for dynamic import [commit](http://github.com/electrode-io/electrode/commit/3dd9907d283c03cf48d9c375b32c7e0d4e75e45c)
+    -   update optional-check for all opt archetypes ([#1311](https://github.com/electrode-io/electrode/pull/1311)) [commit](http://github.com/electrode-io/electrode/commit/2e8e29559411ef9ac5295a7b29017cef8419a12b)
+
+-   `packages/opt-archetype-check`
+
+    -   opt archetype install if app has it in dependencies ([#1310](https://github.com/electrode-io/electrode/pull/1310)) [commit](http://github.com/electrode-io/electrode/commit/fba9ddb5386d6a85e649c665df935e4e1a89127b)
+
 # 7/30/2019
 
 ## Packages
