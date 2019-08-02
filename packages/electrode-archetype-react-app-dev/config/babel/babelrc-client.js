@@ -9,7 +9,8 @@ const {
   flowRequireDirective,
   enableFlow,
   transformClassProps,
-  looseClassProps
+  looseClassProps,
+  enableDynamicImport
 } = archetype.babel;
 
 //
@@ -20,7 +21,9 @@ function getPluginFrom(host, pluginName) {
 }
 
 const basePlugins = [
-  "@babel/plugin-syntax-dynamic-import",
+  ...(enableDynamicImport
+    ? ["@babel/plugin-syntax-dynamic-import", "@loadable/babel-plugin"]
+    : [false]),
   //
   // allow class properties. loose option compile to assignment expression instead
   // of Object.defineProperty.
@@ -49,8 +52,7 @@ const basePlugins = [
   enableFlow && [
     "@babel/plugin-transform-flow-strip-types",
     { requireDirective: flowRequireDirective }
-  ],
-  "@loadable/babel-plugin"
+  ]
 ];
 
 const { BABEL_ENV, NODE_ENV } = process.env;
@@ -124,7 +126,12 @@ const presets = [
   //
   [
     "@babel/preset-env",
-    { modules: isProduction ? "auto" : "commonjs", loose: true, targets, ...useBuiltIns }
+    {
+      modules: isProduction || enableDynamicImport ? "auto" : "commonjs",
+      loose: true,
+      targets,
+      ...useBuiltIns
+    }
   ],
   enableTypeScript && "@babel/preset-typescript",
   "@babel/preset-react"

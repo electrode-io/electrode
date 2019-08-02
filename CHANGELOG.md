@@ -1,3 +1,117 @@
+# 7/31/2019
+
+## Packages
+
+-   `electrode-archetype-opt-inferno@0.2.7` `(0.2.6 => 0.2.7)`
+-   `electrode-archetype-opt-karma@2.0.1` `(2.0.0 => 2.0.1)`
+-   `electrode-archetype-opt-pwa@1.0.2` `(1.0.1 => 1.0.2)`
+-   `electrode-archetype-opt-react@1.0.4` `(1.0.3 => 1.0.4)`
+-   `electrode-archetype-opt-sass@1.0.5` `(1.0.4 => 1.0.5)`
+-   `electrode-archetype-react-app@6.5.8` `(6.5.7 => 6.5.8)`
+-   `electrode-archetype-react-app-dev@6.5.8` `(6.5.7 => 6.5.8)`
+
+## Commits
+
+-   `packages/electrode-archetype-opt-css-module`
+
+    -   update optional-check for all opt archetypes ([#1311](https://github.com/electrode-io/electrode/pull/1311)) [commit](http://github.com/electrode-io/electrode/commit/2e8e29559411ef9ac5295a7b29017cef8419a12b)
+
+-   `packages/electrode-archetype-opt-inferno`
+
+    -   update optional-check for all opt archetypes ([#1311](https://github.com/electrode-io/electrode/pull/1311)) [commit](http://github.com/electrode-io/electrode/commit/2e8e29559411ef9ac5295a7b29017cef8419a12b)
+
+-   `packages/electrode-archetype-opt-karma`
+
+    -   update optional-check for all opt archetypes ([#1311](https://github.com/electrode-io/electrode/pull/1311)) [commit](http://github.com/electrode-io/electrode/commit/2e8e29559411ef9ac5295a7b29017cef8419a12b)
+
+-   `packages/electrode-archetype-opt-pwa`
+
+    -   update optional-check for all opt archetypes ([#1311](https://github.com/electrode-io/electrode/pull/1311)) [commit](http://github.com/electrode-io/electrode/commit/2e8e29559411ef9ac5295a7b29017cef8419a12b)
+
+-   `packages/electrode-archetype-opt-react`
+
+    -   update optional-check for all opt archetypes ([#1311](https://github.com/electrode-io/electrode/pull/1311)) [commit](http://github.com/electrode-io/electrode/commit/2e8e29559411ef9ac5295a7b29017cef8419a12b)
+
+-   `packages/electrode-archetype-opt-sass`
+
+    -   update optional-check for all opt archetypes ([#1311](https://github.com/electrode-io/electrode/pull/1311)) [commit](http://github.com/electrode-io/electrode/commit/2e8e29559411ef9ac5295a7b29017cef8419a12b)
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [fix] default false for dynamic import [commit](http://github.com/electrode-io/electrode/commit/3dd9907d283c03cf48d9c375b32c7e0d4e75e45c)
+    -   update optional-check for all opt archetypes ([#1311](https://github.com/electrode-io/electrode/pull/1311)) [commit](http://github.com/electrode-io/electrode/commit/2e8e29559411ef9ac5295a7b29017cef8419a12b)
+
+-   `packages/opt-archetype-check`
+
+    -   opt archetype install if app has it in dependencies ([#1310](https://github.com/electrode-io/electrode/pull/1310)) [commit](http://github.com/electrode-io/electrode/commit/fba9ddb5386d6a85e649c665df935e4e1a89127b)
+
+# 7/30/2019
+
+## Packages
+
+-   `electrode-archetype-react-app@6.5.7` `(6.5.6 => 6.5.7)`
+-   `electrode-archetype-react-app-dev@6.5.7` `(6.5.6 => 6.5.7)`
+-   `electrode-archetype-react-component@6.1.6` `(6.1.5 => 6.1.6)`
+-   `electrode-archetype-react-component-dev@6.1.6` `(6.1.5 => 6.1.6)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   [bug] diff configFile for isomorphic-loader webpack plugin by babel target  ([#1307](https://github.com/electrode-io/electrode/pull/1307)) [commit](http://github.com/electrode-io/electrode/commit/9bd2327c44b6dfcaac5b261e4c72d63e2e9f8351)
+    -   [feat] add `enableDynamicImport` to archetype ([#1305](https://github.com/electrode-io/electrode/pull/1305)) [commit](http://github.com/electrode-io/electrode/commit/39f77f2127acb8a9aa2c978f23bb0c9b3a8bd0da)
+    -   [bug] fix css module hook check when loading node.js support ([#1309](https://github.com/electrode-io/electrode/pull/1309)) [commit](http://github.com/electrode-io/electrode/commit/e76fed1a4240826b30f1006c0e98fcc0c158d3b0)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   dep: babel-core@7.0.0-bridge.0 ([#1304](https://github.com/electrode-io/electrode/pull/1304)) [commit](http://github.com/electrode-io/electrode/commit/23f532aadd5c8dc8f26e7e926c30921fd67c493a)
+    -   peerDep: electrode-archetype-react-component@6 ([#1302](https://github.com/electrode-io/electrode/pull/1302)) [commit](http://github.com/electrode-io/electrode/commit/da17ad494235fe32b7eff2b80f7cb4ea4e52dee7)
+
+# 7/19/2019
+
+## Packages
+
+### Directly Updated
+
+-   `electrode-archetype-react-app@6.5.6` `(6.5.5 => 6.5.6)`
+-   `electrode-archetype-react-app-dev@6.5.6` `(6.5.5 => 6.5.6)`
+-   `electrode-react-webapp@3.8.2` `(3.8.1 => 3.8.2)`
+-   `electrode-ui-config@1.3.1` `(1.3.0 => 1.3.1)`
+-   `subapp-redux@1.0.3` `(1.0.2 => 1.0.3)`
+-   `subapp-web@1.0.3` `(1.0.2 => 1.0.3)`
+
+### Lerna Updated
+
+-   `electrode-ui-logger@1.1.5` `(1.1.4 => 1.1.5)`
+-   `subapp-server@1.1.2` `(1.1.1 => 1.1.2)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   fix xclap task critical-css ([#1301](https://github.com/electrode-io/electrode/pull/1301)) [commit](http://github.com/electrode-io/electrode/commit/1d6585388b4dbd0138c35f419437429fad1b42e6)
+    -   dep: serve-index-fs@1.10.1 ([#1300](https://github.com/electrode-io/electrode/pull/1300)) [commit](http://github.com/electrode-io/electrode/commit/a46f73388333ae141f8c36871b0ce66c93b5a858)
+    -   dep: serve-index-fs@1.10.0 ([#1298](https://github.com/electrode-io/electrode/pull/1298)) [commit](http://github.com/electrode-io/electrode/commit/6cd4f47243ac6b6620adf840cae7c80214236d0a)
+    -   [patch] [bug] Fix broken Windows memfs page ([#1295](https://github.com/electrode-io/electrode/pull/1295)) [commit](http://github.com/electrode-io/electrode/commit/b8f7253271a185ab8668e06806b8a95908b1c522)
+    -   App Archetype import scss in SSR ([#1297](https://github.com/electrode-io/electrode/pull/1297)) [commit](http://github.com/electrode-io/electrode/commit/907ec6f3f58c24ba95212cdcb3feb28d6795a338)
+
+-   `packages/electrode-react-webapp`
+
+    -   [patch] [bug] handle when server side rendering is disabled ([#1299](https://github.com/electrode-io/electrode/pull/1299)) [commit](http://github.com/electrode-io/electrode/commit/2c103b16d0338ceed0f0dbf747a9c367b3a1a59f)
+    -   add overrideOptions for each route path ([#1296](https://github.com/electrode-io/electrode/pull/1296)) [commit](http://github.com/electrode-io/electrode/commit/e8d4b89abe3e78e6a13681f418fbbbe43469199e)
+
+-   `packages/electrode-ui-config`
+
+    -   [chore][ci] fix tests on windows [commit](http://github.com/electrode-io/electrode/commit/34c1190c350ae3078effbbeceacdd55c251d54ae)
+
+-   `packages/subapp-redux`
+
+    -   [chore] fix CI on windows [commit](http://github.com/electrode-io/electrode/commit/3a14f4a4d137403de210791ec55412e8f8292c33)
+
+-   `packages/subapp-web`
+
+    -   [chore] fix CI on windows [commit](http://github.com/electrode-io/electrode/commit/3a14f4a4d137403de210791ec55412e8f8292c33)
+
 # 7/9/2019
 
 ## Packages
