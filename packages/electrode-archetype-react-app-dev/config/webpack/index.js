@@ -15,7 +15,7 @@ function devOptions() {
         "_html-reporter": { order: 10300 } // must be after _dev to override devServer
       }
     };
-  
+
     const options = {
       profiles: {
         _base: baseProfile,
@@ -24,10 +24,10 @@ function devOptions() {
       profileNames: ["_base", "_dev"],
       configFilename: Path.basename(__filename)
     };
-  
+
     return options;
 }
-  
+
 module.exports = {
     compose: generateConfig,
     options: devOptions()
