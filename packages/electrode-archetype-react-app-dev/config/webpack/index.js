@@ -1,14 +1,34 @@
 "use strict";
 
-const Fs = require("fs");
+/**
+ * Webpack dev configuration
+ */
+const baseProfile = require("./profile.base");
+const generateConfig = require("./util/generate-config");
 const Path = require("path");
 
-function getWebpackConfig(envKey) {
-    const fileToLook = envKey && `./webpack.config.${envKey}`;
-    const isConfigReqExist = Fs.existsSync(Path.resolve(__dirname, `${fileToLook}.js`));
-    const configFile = isConfigReqExist ? fileToLook : "./webpack.config";
-    
-    return require(configFile);
+function devOptions() {
+    const devProfile = {
+      partials: {
+        "_dev-mode": { order: 10000 },
+        _dev: { order: 10100 },
+        "_html-reporter": { order: 10300 } // must be after _dev to override devServer
+      }
+    };
+  
+    const options = {
+      profiles: {
+        _base: baseProfile,
+        _dev: devProfile
+      },
+      profileNames: ["_base", "_dev"],
+      configFilename: Path.basename(__filename)
+    };
+  
+    return options;
 }
-
-module.exports = getWebpackConfig;
+  
+module.exports = {
+    compose: generateConfig,
+    options: devOptions()
+};
