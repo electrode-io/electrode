@@ -1,8 +1,8 @@
 {
   "name": "electrode-archetype-opt-pwa",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Electrode PWA Module Optional Archetype",
-  "main": "index.js",
+  "main": "optional-check.js",
   "homepage": "http://www.electrode.io",
   "repository": {
     "type": "git",

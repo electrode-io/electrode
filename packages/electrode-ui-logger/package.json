@@ -1,6 +1,6 @@
 {
   "name": "electrode-ui-logger",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Electrode Logging Utility for UI code",
   "main": "./lib/index.js",
   "browser": "./lib/csindex.js",
@@ -32,7 +32,7 @@
     "electrode-archetype-njs-module-dev": "^2.2.0"
   },
   "dependencies": {
-    "electrode-ui-config": "^1.2.0",
+    "electrode-ui-config": "^1.3.1",
     "json-stringify-safe": "^5.0.1",
     "lodash.keys": "^4.2.0",
     "lodash.omit": "^4.5.0",

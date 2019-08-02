@@ -173,6 +173,7 @@ const pathSpecificOptions = [
 
 const setupPathOptions = (routeOptions, path) => {
   const pathData = _.get(routeOptions, ["paths", path], {});
+  const pathOverride = _.get(routeOptions, ["paths", path, "overrideOptions"], {});
   const pathOptions = pathData.options;
   return _.defaultsDeep(
     _.pick(pathData, pathSpecificOptions),
@@ -181,6 +182,7 @@ const setupPathOptions = (routeOptions, path) => {
       tokenHandlers: [].concat(routeOptions.tokenHandlers, pathData.tokenHandlers)
     },
     pathOptions,
+    _.omit(pathOverride, "paths"),
     routeOptions
   );
 };

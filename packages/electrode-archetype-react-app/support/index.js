@@ -97,9 +97,7 @@ support.load = function(options, callback) {
     );
 
     logger.info(
-      `Loading @babel/register for runtime transpilation files (extensions: ${
-        regOptions.extensions
-      }).`
+      `Loading @babel/register for runtime transpilation files (extensions: ${regOptions.extensions}).`
     );
     logger.info(`The transpilation only occurs the first time you load a file.`);
     babelRegister(regOptions);
@@ -123,15 +121,33 @@ support.load = function(options, callback) {
    * https://github.com/webpack/css-loader#local-scope
    * https://github.com/css-modules/postcss-modules-scope
    */
-  if (options.cssModuleHook !== false) {
+  if (options.cssModuleHook === true) {
     const opts = Object.assign(
       {
-        generateScopedName: "[name]__[local]___[hash:base64:5]"
+        generateScopedName: "[name]__[local]___[hash:base64:5]",
+        extensions: [".scss", ".styl", ".less", ".css"],
+        preprocessCss: function(css, filename) {
+          if (filename.endsWith(".styl")) {
+            return require("stylus")(css)
+              .set("filename", filename)
+              .render();
+          } else if (filename.endsWith(".scss")) {
+            return require("node-sass").renderSync({
+              css,
+              file: filename
+            }).css;
+          } else {
+            return css;
+          }
+        },
+        processorOpts: { parser: require("postcss-less").parse }
       },
       options.cssModuleHook || {}
     );
 
     support.cssModuleHook(opts);
+  } else if (options.ignoreStyles !== false) {
+    optionalRequire("ignore-styles");
   }
 
   if (options.isomorphicExtendRequire !== false) {
