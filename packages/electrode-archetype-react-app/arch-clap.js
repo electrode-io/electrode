@@ -68,6 +68,11 @@ function eslintConfig(file) {
   return Path.join(config.eslint, file);
 }
 
+function checkForCustomWebpackConfig(defaultFile) {
+  const customFilePath = Path.join(process.cwd(), "webpack.config.js");
+  return Fs.existsSync(customFilePath) ? customFilePath : webpackConfig(defaultFile);
+}
+
 function setupPath() {
   const nmBin = Path.join("node_modules", ".bin");
   xsh.envPath.addToFront(Path.resolve(nmBin));
@@ -916,6 +921,7 @@ Individual .babelrc files were generated for you in src/client and src/server
       }
     },
 
+    /* quote(webpackConfig("webpack.config.dev.js")), */
     "wds.dev": {
       desc: "Start webpack-dev-server in dev mode",
       task: mkCmd(
@@ -923,7 +929,7 @@ Individual .babelrc files were generated for you in src/client and src/server
         `--watch --watch-aggregate-timeout 2000`,
         archetype.webpack.enableHotModuleReload ? `--hot` : ``,
         `--config`,
-        quote(webpackConfig("webpack.config.dev.js")),
+        quote(checkForCustomWebpackConfig("webpack.config.dev.js")),
         `--progress --colors`,
         `--port ${archetype.webpack.devPort}`,
         `--host ${archetype.webpack.devHostname}`
