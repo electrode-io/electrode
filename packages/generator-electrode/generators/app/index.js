@@ -331,7 +331,9 @@ module.exports = class extends Generator {
     if (!this.isDemoApp) {
       this.log(yosay("Welcome to the phenomenal " + chalk.red("Electrode App") + " generator!"));
     }
-    return this._askFor().then(this._askForGithubAccount.bind(this));
+    return this._askFor()
+      .then(this._askForGithubAccount.bind(this))
+      .then(this._askForOptionalFeatures.bind(this));
   }
 
   writing() {
@@ -491,8 +493,6 @@ module.exports = class extends Generator {
     );
 
     this.fs.copy(this.templatePath("src/client/images"), this.destinationPath("src/client/images"));
-
-    this._askForOptionalFeatures();
   }
 
   _askForOptionalFeatures() {
