@@ -2,7 +2,7 @@
   "name": "electrode-archetype-opt-css-module",
   "version": "0.0.1",
   "description": "Electrode CSS Module Optional Archetype",
-  "main": "index.js",
+  "main": "optional-check.js",
   "homepage": "http://www.electrode.io",
   "repository": {
     "type": "git",
