@@ -5,7 +5,6 @@
 require("core-js");
 require("regenerator-runtime/runtime");
 const logger = require("electrode-archetype-react-app/lib/logger");
-//var optionalRequire = require("optional-require")(require);
 
 /**
  * Test setup for client-side tests.
