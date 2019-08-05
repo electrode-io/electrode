@@ -268,6 +268,13 @@ module.exports = class extends Generator {
       },
       {
         type: "confirm",
+        name: "optMocha",
+        message: "Would you like to use mocha?",
+        when: this.props.optMocha === undefined,
+        default: false
+      },
+      {
+        type: "confirm",
         name: "optTypescript",
         message: "Would you like to use typescript?",
         when: this.props.optTypescript === undefined,
@@ -278,6 +285,13 @@ module.exports = class extends Generator {
         name: "optSinon",
         message: "Would you like to use sinon?",
         when: this.props.optSinon === undefined,
+        default: false
+      },
+      {
+        type: "confirm",
+        name: "optEslint",
+        message: "Would you like to use eslint?",
+        when: this.props.optEslint === undefined,
         default: false
       }
     ];
@@ -485,16 +499,20 @@ module.exports = class extends Generator {
     if (
       this.props.optCriticalCSS ||
       this.props.optJest ||
+      this.props.optMocha ||
       this.props.optTypescript ||
-      this.props.optSinon
+      this.props.optSinon ||
+      this.props.optEslint
     ) {
       // Enable optional packages
       shell.mkdir("-p", this.destinationPath("archetype/config"));
       const options = Object.entries({
         criticalCSS: this.props.optCriticalCSS,
         jest: this.props.optJest,
+        mocha: this.props.optMocha,
         typescript: this.props.optTypescript,
-        sinon: this.props.optSinon
+        sinon: this.props.optSinon,
+        eslint: this.props.optEslint
       }).reduce((prev, [k, v]) => {
         if (v) prev[k] = v;
         return prev;
