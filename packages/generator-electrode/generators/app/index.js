@@ -272,6 +272,13 @@ module.exports = class extends Generator {
         message: "Would you like to use typescript?",
         when: this.props.optTypescript === undefined,
         default: false
+      },
+      {
+        type: "confirm",
+        name: "optSinon",
+        message: "Would you like to use sinon?",
+        when: this.props.optSinon === undefined,
+        default: false
       }
     ];
 
@@ -471,22 +478,30 @@ module.exports = class extends Generator {
 
     this.fs.copy(this.templatePath("src/client/images"), this.destinationPath("src/client/images"));
 
-    // Enable optional packages
-    shell.mkdir("-p", this.destinationPath("archetype/config"));
+    this._askForOptionalFeatures();
+  }
 
-    const getContent = props => {
+  _askForOptionalFeatures() {
+    if (
+      this.props.optCriticalCSS ||
+      this.props.optJest ||
+      this.props.optTypescript ||
+      this.props.optSinon
+    ) {
+      // Enable optional packages
+      shell.mkdir("-p", this.destinationPath("archetype/config"));
       const options = Object.entries({
-        criticalCSS: props.optCriticalCSS,
-        jest: props.optJest,
-        typescript: props.optTypescript
+        criticalCSS: this.props.optCriticalCSS,
+        jest: this.props.optJest,
+        typescript: this.props.optTypescript,
+        sinon: this.props.optSinon
       }).reduce((prev, [k, v]) => {
         if (v) prev[k] = v;
         return prev;
       }, {});
-      return `module.exports = ${JSON.stringify({ options }, null, 2)}`;
-    };
-    
-    Fs.writeFileSync(this.destinationPath("archetype/config/index.js"), getContent(this.props));
+      const content = `module.exports = ${JSON.stringify({ options }, null, 2)}`;
+      Fs.writeFileSync(this.destinationPath("archetype/config/index.js"), content);
+    }
   }
 
   default() {
