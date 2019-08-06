@@ -68,7 +68,7 @@ const skipWebpackDevMiddleware = req => {
 function checkForCustomWebpackConfig() {
   const customFilePath = Path.join(process.cwd(), "webpack.config.js");
   const archetypeWebpackConfig = Path.join(archetype.config.webpack, "webpack.config.dev.js");
-  
+
   return Fs.existsSync(customFilePath) ? customFilePath : archetypeWebpackConfig;
 }
 
