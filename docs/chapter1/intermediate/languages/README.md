@@ -47,7 +47,17 @@ See Microsoft's [blog on typescript and babel] for more details.
 
 ### Options
 
-You can enable/disable TypeScript support with the following options:
+You can explicitly turn off TypeScript support and skip installing the dependencies required. To do that, create a file `archetype/config/index.js`, and add the following code to it:
+
+```js
+module.exports = {
+  options: {
+    typescript: false
+  }
+};
+```
+
+Also, you can enable/disable TypeScript support with the following options. Please note that if the `typescript` under `options` is set as `false`, the following settings will be ignored.
 
 - Env Variable: `export ENABLE_BABEL_TYPESCRIPT=false`
 - Config file in `archetype/config/index.js`:
