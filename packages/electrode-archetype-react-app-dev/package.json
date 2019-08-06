@@ -38,7 +38,6 @@
     "@babel/plugin-transform-runtime": "^7.1.0",
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
-    "@babel/preset-typescript": "^7.1.0",
     "@babel/register": "^7.0.0",
     "@jchip/redbird": "^1.0.0",
     "@loadable/babel-plugin": "^5.10.0",
@@ -128,7 +127,6 @@
     "subapp-util": "^1.0.1",
     "sudo-prompt": "^8.2.5",
     "sugarss": "^1.0.1",
-    "typescript": "^3.2.1",
     "url-loader": "^0.6.2",
     "webpack": "^4.19.1",
     "webpack-cli": "^3.1.1",
@@ -149,7 +147,8 @@
     "electrode-archetype-opt-pwa": "^1.0.2",
     "electrode-archetype-opt-react": "^1.0.4",
     "electrode-archetype-opt-sass": "^1.0.5",
-    "electrode-archetype-opt-jest": "^1.0.0"
+    "electrode-archetype-opt-jest": "^1.0.0",
+    "electrode-archetype-opt-typescript": "^1.0.0"
   },
   "devDependencies": {
     "electrode-archetype-njs-module-dev": "^3.0.0",
@@ -175,7 +174,8 @@
       "electrode-archetype-opt-pwa": "../electrode-archetype-opt-pwa",
       "electrode-archetype-opt-react": "../electrode-archetype-opt-react",
       "electrode-archetype-opt-sass": "../electrode-archetype-opt-sass",
-      "electrode-archetype-opt-jest": "../electrode-archetype-opt-jest"
+      "electrode-archetype-opt-jest": "../electrode-archetype-opt-jest",
+      "electrode-archetype-opt-typescript": "../electrode-archetype-opt-typescript"
     }
   },
   "nyc": {
