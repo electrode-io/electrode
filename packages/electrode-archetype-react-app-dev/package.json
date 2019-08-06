@@ -148,7 +148,8 @@
     "electrode-archetype-opt-karma": "^2.0.0",
     "electrode-archetype-opt-pwa": "^1.0.1",
     "electrode-archetype-opt-react": "^1.0.2",
-    "electrode-archetype-opt-sass": "^1.0.3"
+    "electrode-archetype-opt-sass": "^1.0.3",
+    "electrode-archetype-opt-critical-css": "^1.0.0"
   },
   "devDependencies": {
     "electrode-archetype-njs-module-dev": "^3.0.0",
