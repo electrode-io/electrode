@@ -33,7 +33,6 @@
     "autoprefixer": "^9.3.1",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
-    "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-dynamic-import-node": "^2.2.0",
     "babel-plugin-lodash": "^3.3.4",
@@ -67,7 +66,6 @@
     "husky": "^0.13.4",
     "identity-obj-proxy": "^3.0.0",
     "istanbul": "^0.4.5",
-    "jest": "^22.4.3",
     "json-loader": "^0.5.7",
     "jsonfile": "^2.2.2",
     "lint-staged": "^3.5.1",
@@ -108,7 +106,8 @@
     "electrode-archetype-opt-inferno": "^0.2.3",
     "electrode-archetype-opt-karma": "^2.0.0",
     "electrode-archetype-opt-react": "^1.0.1",
-    "electrode-archetype-opt-sass": "^1.0.3"
+    "electrode-archetype-opt-sass": "^1.0.3",
+    "electrode-archetype-opt-jest": "^1.0.0"
   },
   "devDependencies": {
     "electrode-archetype-react-component": "../electrode-archetype-react-component",
@@ -130,7 +129,8 @@
       "electrode-archetype-opt-inferno": "../electrode-archetype-opt-inferno",
       "electrode-archetype-opt-karma": "../electrode-archetype-opt-karma",
       "electrode-archetype-opt-react": "../electrode-archetype-opt-react",
-      "electrode-archetype-opt-sass": "../electrode-archetype-opt-sass"
+      "electrode-archetype-opt-sass": "../electrode-archetype-opt-sass",
+      "electrode-archetype-opt-jest": "../electrode-archetype-opt-jest"
     }
   }
 }
