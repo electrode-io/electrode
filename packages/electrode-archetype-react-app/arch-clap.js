@@ -142,6 +142,17 @@ function removeLogFiles() {
   } catch (e) {} // eslint-disable-line
 }
 
+function checkForCustomWebpackConfig(defaultFile) {
+  const customFilePath = Path.join(process.cwd(), "webpack.config.js");
+  return Fs.existsSync(customFilePath) ? customFilePath : webpackConfig(defaultFile);
+}
+
+function setWebpackDevProfile() {
+  const devProfileTasks = ["dev", "server-admin", "wds.dev"];
+  process.env.WEBPACK_DEV_PROFILE = devProfileTasks.includes(process.argv[2] || "") ? "true" : "false";
+  logger.info(`Webpack Dev Profile set to ${process.env.WEBPACK_DEV_PROFILE}`);
+}
+
 /*
  *  There are multiple eslint config for different groups of code
  *
@@ -495,7 +506,7 @@ function makeTasks(xclap) {
           xclap.exec(
             [
               `webpack --config`,
-              quote(webpackConfig("webpack.config.js")),
+              quote(checkForCustomWebpackConfig("webpack.config.js")),
               `--colors --display-error-details`
             ],
             {
@@ -923,7 +934,7 @@ Individual .babelrc files were generated for you in src/client and src/server
         `--watch --watch-aggregate-timeout 2000`,
         archetype.webpack.enableHotModuleReload ? `--hot` : ``,
         `--config`,
-        quote(webpackConfig("webpack.config.dev.js")),
+        quote(checkForCustomWebpackConfig("webpack.config.dev.js")),
         `--progress --colors`,
         `--port ${archetype.webpack.devPort}`,
         `--host ${archetype.webpack.devHostname}`
@@ -1139,6 +1150,7 @@ Individual .babelrc files were generated for you in src/client and src/server
 }
 
 module.exports = function(xclap) {
+  setWebpackDevProfile();
   setupPath();
   createElectrodeTmpDir();
   xclap = xclap || requireAt(process.cwd())("xclap") || devRequire("xclap");
