@@ -280,9 +280,9 @@ function generateBrowsersListRc() {
   const destnRc = Path.join(destnDir, configRcFile);
   if (Fs.existsSync(destnRc)) {
     const existingConfig = Fs.readFileSync(destnRc, "utf8");
-    const anyCustomProps = existingConfig && existingConfig.split("\n").filter(
-      x => x && x[0] !== "#" && !browserConfig.list.includes(x)
-    );
+    const anyCustomProps =
+      existingConfig &&
+      existingConfig.split("\n").filter(x => x && x[0] !== "#" && !browserConfig.list.includes(x));
     if (anyCustomProps && anyCustomProps.length) {
       logger.info(
         `You've a custom ${configRcFile} config file already.
@@ -477,9 +477,7 @@ function makeTasks(xclap) {
       );
     },
     "ss-prod-react": {
-      desc: `Make optimized copy of react&react-dom for server side in dir ${
-        archetype.prodModulesDir
-      }`,
+      desc: `Make optimized copy of react&react-dom for server side in dir ${archetype.prodModulesDir}`,
       dep: [".ss-clean.prod-react", ".mk-prod-dir"],
       task: xclap.concurrent(".ss-prod-react", ".ss-prod-react-dom")
     },
@@ -950,7 +948,7 @@ Individual .babelrc files were generated for you in src/client and src/server
       ".build.test.client.babelrc",
       ".build.test.server.babelrc",
       "?.karma.test-frontend-cov",
-      ".jest.test-frontend-cov",
+      "?.jest.test-frontend-cov",
       "test-server-cov"
     ].filter(x => x),
     "test-dev": ["test-frontend-dev", "test-server-dev"],
@@ -962,32 +960,6 @@ Individual .babelrc files were generated for you in src/client and src/server
 
     "test-frontend": ["?.karma.test-frontend"],
     "test-frontend-ci": ["?.karma.test-frontend-ci"],
-
-    ".jest.test-frontend-cov": () => {
-      const testDir = ["_test_", "__test__", "__tests__"].find(x => shell.test("-d", x));
-      let runJest = testDir;
-      if (!runJest) {
-        runJest =
-          scanDir.sync({
-            dir: Path.resolve(AppMode.src.dir),
-            filterExt: [".js", ".jsx", ".ts", ".tsx"],
-            filter: x => x.indexOf(".spec.") > 0 || x.indexOf(".test.") > 0
-          }).length > 0;
-      }
-
-      if (!runJest) {
-        const { roots } = archetype.jest;
-        runJest = roots && roots.length > 0;
-      }
-
-      if (runJest) {
-        makeBabelRc(Path.join(testDir, "client"), "babelrc-client.js");
-        logger.info("Running jest unit tests");
-        return mkCmd(`~$jest`, `--config ${archetype.config.jest}/jest.config.js`);
-      } else {
-        return undefined;
-      }
-    },
     "test-frontend-dev": ["?.karma.test-frontend-dev"],
 
     "test-frontend-dev-watch": ["?.karma.test-frontend-dev-watch"],
@@ -1065,7 +1037,8 @@ Individual .babelrc files were generated for you in src/client and src/server
       task: mkCmd(`flow-typed install --packageDir ${archetype.devDir}`)
     },
     "generate-browsers-listrc": {
-      desc: "Generate .browserlistrc config file, it's used by Browserlist for AutoPrefixer/PostCSS",
+      desc:
+        "Generate .browserlistrc config file, it's used by Browserlist for AutoPrefixer/PostCSS",
       task: () => generateBrowsersListRc()
     }
   };
@@ -1133,6 +1106,39 @@ Individual .babelrc files were generated for you in src/client and src/server
     });
   } else {
     logger.info("Disabling karma test tasks since archetype config options.karma === false");
+  }
+  if (archetype.options.jest !== false) {
+    Object.assign(tasks, {
+      ".jest.test-frontend-cov": () => {
+        const testDir = ["_test_", "__test__", "__tests__"].find(x => shell.test("-d", x));
+        let runJest = testDir;
+        if (!runJest) {
+          runJest =
+            scanDir.sync({
+              dir: Path.resolve(AppMode.src.dir),
+              filterExt: [".js", ".jsx", ".ts", ".tsx"],
+              filter: x => x.indexOf(".spec.") > 0 || x.indexOf(".test.") > 0
+            }).length > 0;
+        }
+
+        if (!runJest) {
+          const { roots } = archetype.jest;
+          runJest = roots && roots.length > 0;
+        }
+
+        if (runJest) {
+          if (testDir) {
+            makeBabelRc(Path.join(testDir, "client"), "babelrc-client.js");
+          }
+          logger.info("Running jest unit tests");
+          return mkCmd(`~$jest`, `--config ${archetype.config.jest}/jest.config.js`);
+        } else {
+          return undefined;
+        }
+      }
+    });
+  } else {
+    logger.info("Disabling jest test tasks since archetype config options.jest === false");
   }
 
   return tasks;

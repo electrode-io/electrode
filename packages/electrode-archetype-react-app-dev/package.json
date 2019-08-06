@@ -48,7 +48,6 @@
     "autoprefixer": "^9.6.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
-    "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-dynamic-import-node": "^2.2.0",
     "babel-plugin-i18n-id-hashing": "^2.1.0",
@@ -91,7 +90,6 @@
     "identity-obj-proxy": "^3.0.0",
     "isomorphic-loader": "^2.1.1",
     "istanbul": "^0.4.5",
-    "jest": "^23.5.0",
     "jsonfile": "^2.2.2",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
@@ -150,7 +148,8 @@
     "electrode-archetype-opt-karma": "^2.0.1",
     "electrode-archetype-opt-pwa": "^1.0.2",
     "electrode-archetype-opt-react": "^1.0.4",
-    "electrode-archetype-opt-sass": "^1.0.5"
+    "electrode-archetype-opt-sass": "^1.0.5",
+    "electrode-archetype-opt-jest": "^1.0.0"
   },
   "devDependencies": {
     "electrode-archetype-njs-module-dev": "^3.0.0",
@@ -175,7 +174,8 @@
       "electrode-archetype-opt-karma": "../electrode-archetype-opt-karma",
       "electrode-archetype-opt-pwa": "../electrode-archetype-opt-pwa",
       "electrode-archetype-opt-react": "../electrode-archetype-opt-react",
-      "electrode-archetype-opt-sass": "../electrode-archetype-opt-sass"
+      "electrode-archetype-opt-sass": "../electrode-archetype-opt-sass",
+      "electrode-archetype-opt-jest": "../electrode-archetype-opt-jest"
     }
   },
   "nyc": {
