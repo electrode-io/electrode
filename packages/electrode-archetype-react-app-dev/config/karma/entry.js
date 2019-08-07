@@ -4,6 +4,7 @@
 
 require("core-js");
 require("regenerator-runtime/runtime");
+const logger = require("electrode-archetype-react-app/lib/logger");
 
 /**
  * Test setup for client-side tests.
@@ -14,7 +15,11 @@ require("regenerator-runtime/runtime");
  */
 /*globals window:false*/
 var chai = require("chai");
-var sinonChai = require("sinon-chai");
+try {
+  var sinonChai = require("sinon-chai");
+} catch (error) {
+  logger.warn("could not load sinon-chai - archetype config sinon set to false ");
+}
 var chaiShallowly = require("chai-shallowly");
 
 /**
@@ -31,7 +36,11 @@ enzyme.configure({ adapter: new Adapter() });
  * removed in the future and is being tracked by
  * https://gecgithub01.walmart.com/electrode/electrode-archetype-react-component/issues/10
  */
-window.sinon = require("sinon");
+try {
+  window.sinon = require("sinon");
+} catch (error) {
+  logger.warn("could not load sinon - archetype config sinon set to false ");
+}
 
 // --------------------------------------------------------------------------
 // Chai / Sinon / Mocha configuration.
@@ -40,7 +49,9 @@ window.sinon = require("sinon");
 window.expect = chai.expect;
 
 // Plugins
-chai.use(sinonChai);
+if (sinonChai) {
+  chai.use(sinonChai);
+}
 chai.use(chaiShallowly);
 
 // Mocha (part of static include).
