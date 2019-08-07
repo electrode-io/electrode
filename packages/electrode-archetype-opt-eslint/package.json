@@ -1,0 +1,38 @@
+{
+  "name": "electrode-archetype-opt-eslint",
+  "version": "1.0.0",
+  "description": "Electrode NodeJS/React Optional Archetype ESLint",
+  "main": "index.js",
+  "homepage": "http://www.electrode.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electrode-io/electrode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/electrode-io/electrode/issues"
+  },
+  "files": [
+    "optional-check.js"
+  ],
+  "license": "Apache-2.0",
+  "scripts": {
+    "preinstall": "node optional-check.js",
+    "prepare": "cp node_modules/opt-archetype-check/optional-check.js ."
+  },
+  "dependencies": {
+    "eslint": "^4.8.0",
+    "babel-eslint": "^10.0.1",
+    "eslint-config-walmart": "^2.0.0",
+    "eslint-plugin-filenames": "^1.1.0",
+    "eslint-plugin-flowtype": "^2.49.3",
+    "eslint-plugin-react": "^7.4.0"
+  },
+  "devDependencies": {
+    "opt-archetype-check": "../opt-archetype-check"
+  },
+  "electrodeOptArchetype": {
+    "optionalTagName": "eslint",
+    "expectTag": true,
+    "defaultInstall": true
+  }
+} 
