@@ -1,7 +1,7 @@
 {
-  "name": "electrode-archetype-opt-sass",
-  "version": "1.0.5",
-  "description": "Electrode NodeJS/React Optional Archetype SASS",
+  "name": "electrode-archetype-opt-sinon",
+  "version": "1.0.0",
+  "description": "Electrode NodeJS/React Optional Archetype SINON",
   "main": "index.js",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -20,14 +20,14 @@
     "prepare": "cp node_modules/opt-archetype-check/optional-check.js ."
   },
   "dependencies": {
-    "node-sass": "^4.9.3",
-    "sass-loader": "^6.0.6"
+    "sinon": "^4.0.0",
+    "sinon-chai": "^2.14.0"
   },
   "devDependencies": {
     "opt-archetype-check": "../opt-archetype-check"
   },
   "electrodeOptArchetype": {
-    "optionalTagName": "sass",
+    "optionalTagName": "sinon",
     "expectTag": true,
     "defaultInstall": true
   }

@@ -1,7 +1,7 @@
 {
-  "name": "electrode-archetype-opt-sass",
-  "version": "1.0.5",
-  "description": "Electrode NodeJS/React Optional Archetype SASS",
+  "name": "electrode-archetype-opt-jest",
+  "version": "1.0.0",
+  "description": "Electrode NodeJS/React Optional Archetype JEST",
   "main": "index.js",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -20,14 +20,14 @@
     "prepare": "cp node_modules/opt-archetype-check/optional-check.js ."
   },
   "dependencies": {
-    "node-sass": "^4.9.3",
-    "sass-loader": "^6.0.6"
+    "babel-jest": "^23.6.0",
+    "jest": "^23.5.0"
   },
   "devDependencies": {
     "opt-archetype-check": "../opt-archetype-check"
   },
   "electrodeOptArchetype": {
-    "optionalTagName": "sass",
+    "optionalTagName": "jest",
     "expectTag": true,
     "defaultInstall": true
   }

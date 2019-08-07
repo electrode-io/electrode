@@ -246,21 +246,11 @@ function makeTasks(hostDir) {
     ),
 
     "test-ci": ["?.karma.test-frontend-cov"],
-    "test-cov": ["?.karma.test-frontend-cov", ".jest.test-frontend-cov"],
+    "test-cov": ["?.karma.test-frontend-cov", "?.jest.test-frontend-cov"],
     "test-dev": ["?.karma.test-frontend-dev"],
     "test-watch": ["?.karma.test-frontend-dev-watch"],
     "concurrent-test-watch": ["?.karma.test-frontend-dev-watch"],
     "test-frontend": ["?.karma.test-frontend"],
-    // TODO: need more jest equivalent tasks compare to karma
-    ".jest.test-frontend-cov": () => {
-      const srcJestFiles = glob.sync(`${hostDir}/src/**/\*.{test,spec}.{js,jsx}`);
-
-      if ($$.test("-d", "_test_") || srcJestFiles.length > 0) {
-        console.info("\nRunning jest unit tests:\n");
-        return mkCmd(`~$jest`, `--config ${archetype.devPath}/config/jest/jest.config.js`);
-      }
-      return undefined;
-    },
     initflow: {
       desc: "Initiate Flow for type checker",
       task: mkCmd(`flow init`)
@@ -299,6 +289,22 @@ function makeTasks(hostDir) {
     });
   } else {
     console.log("Disabling karma test tasks since archetype config options.karma === false");
+  }
+  if (archetype.options.jest !== false) {
+    Object.assign(tasks, {
+      // TODO: need more jest equivalent tasks compare to karma
+      ".jest.test-frontend-cov": () => {
+        const srcJestFiles = glob.sync(`${hostDir}/src/**/\*.{test,spec}.{js,jsx}`);
+
+        if ($$.test("-d", "_test_") || srcJestFiles.length > 0) {
+          console.info("\nRunning jest unit tests:\n");
+          return mkCmd(`~$jest`, `--config ${archetype.devPath}/config/jest/jest.config.js`);
+        }
+        return undefined;
+      }
+    });
+  } else {
+    console.log("Disabling jest test tasks since archetype config options.jest === false");
   }
 
   return tasks;
