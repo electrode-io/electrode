@@ -2,11 +2,7 @@
 
 const generateConfig = require("./util/generate-config");
 
-let profile = "production";
-if (process.env.WEBPACK_DEV_PROFILE === "true") {
-    profile = "development";
-}
-
+const profile = process.env.ELECTRODE_WEBPACK_PROFILE || "production";
 const options = require(`./options/${profile}`);
 
 module.exports = {

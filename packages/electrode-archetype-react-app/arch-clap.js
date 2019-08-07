@@ -149,8 +149,9 @@ function checkForCustomWebpackConfig(defaultFile) {
 
 function setWebpackDevProfile() {
   const devProfileTasks = ["dev", "server-admin", "wds.dev"];
-  process.env.WEBPACK_DEV_PROFILE = devProfileTasks.includes(process.argv[2] || "") ? "true" : "false";
-  logger.info(`Webpack Dev Profile set to ${process.env.WEBPACK_DEV_PROFILE}`);
+  const taskReq = devProfileTasks.includes(process.argv[2] || "");  
+  process.env.ELECTRODE_WEBPACK_PROFILE = taskReq ? "development" : "production";
+  logger.info(`Electrode Webpack Profile set to ${process.env.ELECTRODE_WEBPACK_PROFILE}`);
 }
 
 /*
