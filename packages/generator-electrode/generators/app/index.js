@@ -11,6 +11,7 @@ const extend = _.merge;
 const parseAuthor = require("parse-author");
 const githubUsername = require("github-username");
 const Fs = require("fs");
+const shell = require("shelljs");
 
 const ExpressJS = "ExpressJS";
 const HapiJS = "HapiJS";
@@ -250,6 +251,48 @@ module.exports = class extends Generator {
         message: "Would you like to generate .flowconfig for flow usage?",
         when: this.props.flow === undefined,
         default: false
+      },
+      {
+        type: "confirm",
+        name: "optCriticalCSS",
+        message: "Would you like to enable critical CSS?",
+        when: this.props.optCriticalCSS === undefined,
+        default: false
+      },
+      {
+        type: "confirm",
+        name: "optJest",
+        message: "Would you like to use jest for unit tests?",
+        when: this.props.optJest === undefined,
+        default: false
+      },
+      {
+        type: "confirm",
+        name: "optMocha",
+        message: "Would you like to use mocha?",
+        when: this.props.optMocha === undefined,
+        default: false
+      },
+      {
+        type: "confirm",
+        name: "optTypescript",
+        message: "Would you like to use typescript?",
+        when: this.props.optTypescript === undefined,
+        default: false
+      },
+      {
+        type: "confirm",
+        name: "optSinon",
+        message: "Would you like to use sinon?",
+        when: this.props.optSinon === undefined,
+        default: false
+      },
+      {
+        type: "confirm",
+        name: "optEslint",
+        message: "Would you like to use eslint?",
+        when: this.props.optEslint === undefined,
+        default: false
       }
     ];
 
@@ -288,7 +331,9 @@ module.exports = class extends Generator {
     if (!this.isDemoApp) {
       this.log(yosay("Welcome to the phenomenal " + chalk.red("Electrode App") + " generator!"));
     }
-    return this._askFor().then(this._askForGithubAccount.bind(this));
+    return this._askFor()
+      .then(this._askForGithubAccount.bind(this))
+      .then(this._askForOptionalFeatures.bind(this));
   }
 
   writing() {
@@ -448,6 +493,33 @@ module.exports = class extends Generator {
     );
 
     this.fs.copy(this.templatePath("src/client/images"), this.destinationPath("src/client/images"));
+  }
+
+  _askForOptionalFeatures() {
+    if (
+      this.props.optCriticalCSS ||
+      this.props.optJest ||
+      this.props.optMocha ||
+      this.props.optTypescript ||
+      this.props.optSinon ||
+      this.props.optEslint
+    ) {
+      // Enable optional packages
+      shell.mkdir("-p", this.destinationPath("archetype/config"));
+      const options = Object.entries({
+        criticalCSS: this.props.optCriticalCSS,
+        jest: this.props.optJest,
+        mocha: this.props.optMocha,
+        typescript: this.props.optTypescript,
+        sinon: this.props.optSinon,
+        eslint: this.props.optEslint
+      }).reduce((prev, [k, v]) => {
+        if (v) prev[k] = v;
+        return prev;
+      }, {});
+      const content = `module.exports = ${JSON.stringify({ options }, null, 2)}`;
+      Fs.writeFileSync(this.destinationPath("archetype/config/index.js"), content);
+    }
   }
 
   default() {
