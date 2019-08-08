@@ -32,7 +32,6 @@
     "@babel/preset-react": "^7.0.0",
     "autoprefixer": "^9.3.1",
     "babel-core": "7.0.0-bridge.0",
-    "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-dynamic-import-node": "^2.2.0",
     "babel-plugin-lodash": "^3.3.4",
