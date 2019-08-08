@@ -155,6 +155,12 @@ function removeLogFiles() {
  */
 
 function lint(options) {
+  if (archetype.options.eslint === false) {
+    const error =
+      "Please ensure `options.eslint = true` in your `archetype/config.js` or `archetype/config/index.js`, then reinstall your dependencies";
+    throw new Error(`Missing Dependencies\n${error}`);
+  }
+
   const ext = options.ext ? ` --ext ${options.ext}` : "";
 
   const checkCustom = t => {
@@ -231,7 +237,10 @@ function inlineCriticalCSS() {
   const cssAsset = stats.assets.find(asset => asset.name.endsWith(".css"));
   const cssAssetPath = Path.resolve(process.cwd(), `dist/js/${cssAsset.name}`);
   const targetPath = Path.resolve(process.cwd(), "dist/js/critical.css");
-  const serverPromise = require(Path.resolve(process.cwd(), `${archetype.AppMode.src.server}/index.js`))();
+  const serverPromise = require(Path.resolve(
+    process.cwd(),
+    `${archetype.AppMode.src.server}/index.js`
+  ))();
   const penthouseOptions = {
     url,
     css: cssAssetPath,
@@ -280,9 +289,9 @@ function generateBrowsersListRc() {
   const destnRc = Path.join(destnDir, configRcFile);
   if (Fs.existsSync(destnRc)) {
     const existingConfig = Fs.readFileSync(destnRc, "utf8");
-    const anyCustomProps = existingConfig && existingConfig.split("\n").filter(
-      x => x && x[0] !== "#" && !browserConfig.list.includes(x)
-    );
+    const anyCustomProps =
+      existingConfig &&
+      existingConfig.split("\n").filter(x => x && x[0] !== "#" && !browserConfig.list.includes(x));
     if (anyCustomProps && anyCustomProps.length) {
       logger.info(
         `You've a custom ${configRcFile} config file already.
@@ -1065,7 +1074,8 @@ Individual .babelrc files were generated for you in src/client and src/server
       task: mkCmd(`flow-typed install --packageDir ${archetype.devDir}`)
     },
     "generate-browsers-listrc": {
-      desc: "Generate .browserlistrc config file, it's used by Browserlist for AutoPrefixer/PostCSS",
+      desc:
+        "Generate .browserlistrc config file, it's used by Browserlist for AutoPrefixer/PostCSS",
       task: () => generateBrowsersListRc()
     }
   };

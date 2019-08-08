@@ -68,6 +68,12 @@ function checkFrontendCov(minimum) {
  */
 
 function lint(options) {
+  if (archetype.options.eslint === false) {
+    const error =
+      "Please ensure `options.eslint = true` in your `archetype/config.js` or `archetype/config/index.js`, then reinstall your dependencies";
+    throw new Error(`Missing Dependencies\n${error}`);
+  }
+
   const ext = options.ext ? ` --ext ${options.ext}` : "";
 
   const checkCustom = t => {

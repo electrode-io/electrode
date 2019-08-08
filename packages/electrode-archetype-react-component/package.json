@@ -24,9 +24,6 @@
     "require.js"
   ],
   "devDependencies": {
-    "eslint": "^4.4.1",
-    "eslint-config-walmart": "^1.1.0",
-    "eslint-plugin-filenames": "^1.1.0",
     "opener": "^1.4.1",
     "optional-require": "^1.0.0",
     "package-json-validator": "^0.6.1",
@@ -34,7 +31,8 @@
   },
   "optionalDependencies": {
     "electrode-archetype-opt-inferno": "^0.2.3",
-    "electrode-archetype-opt-react": "^1.0.1"
+    "electrode-archetype-opt-react": "^1.0.1",
+    "electrode-archetype-opt-eslint": "^1.0.0"
   },
   "engines": {
     "node": ">= 6",
@@ -43,7 +41,8 @@
   "fyn": {
     "optionalDependencies": {
       "electrode-archetype-opt-inferno": "../electrode-archetype-opt-inferno",
-      "electrode-archetype-opt-react": "../electrode-archetype-opt-react"
+      "electrode-archetype-opt-react": "../electrode-archetype-opt-react",
+      "electrode-archetype-opt-eslint": "../electrode-archetype-opt-eslint"
     }
   }
 }
