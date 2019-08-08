@@ -602,7 +602,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     },
 
     ".build.client.babelrc": () => {
-      makeBabelRc(archetype.dir, "babelrc-client.js", "babel.config.js");
+      makeBabelRc(Path.dirname(Path.resolve(AppMode.src.dir)), "babelrc-client.js", "babel.config.js");
       makeBabelRc(AppMode.src.client, "babelrc-client.js");
     },
 
