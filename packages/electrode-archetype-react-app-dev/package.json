@@ -63,7 +63,6 @@
     "chai-shallowly": "^1.0.0",
     "chalker": "^1.1.1",
     "chokidar": "^2.0.4",
-    "clean-css": "^3.4.21",
     "convert-source-map": "^1.5.0",
     "core-js": "^2 || ^3",
     "css-loader": "^1.0.0",
@@ -103,7 +102,6 @@
     "offline-plugin": "^4.6.1",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "optional-require": "^1.0.0",
-    "penthouse": "^0.11.13",
     "postcss-import": "^9.1.0",
     "postcss-less": "^3.1.4",
     "postcss-loader": "^3.0.0",
@@ -140,6 +138,7 @@
     "xsh": "^0.4.4"
   },
   "optionalDependencies": {
+    "electrode-archetype-opt-critical-css": "^1.0.0",
     "electrode-archetype-opt-inferno": "^0.2.7",
     "electrode-archetype-opt-karma": "^2.0.1",
     "electrode-archetype-opt-pwa": "^1.0.2",
@@ -168,6 +167,7 @@
       "electrode-archetype-react-app": "../electrode-archetype-react-app"
     },
     "optionalDependencies": {
+      "electrode-archetype-opt-critical-css": "../electrode-archetype-opt-critical-css",
       "electrode-archetype-opt-inferno": "../electrode-archetype-opt-inferno",
       "electrode-archetype-opt-karma": "../electrode-archetype-opt-karma",
       "electrode-archetype-opt-pwa": "../electrode-archetype-opt-pwa",
