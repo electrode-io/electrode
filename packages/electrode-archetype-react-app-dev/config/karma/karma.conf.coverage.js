@@ -7,10 +7,11 @@ process.env.KARMA_RUN_TYPE = "coverage";
  *
  * This configuration is the same as basic one-shot version, just with coverage.
  */
-const webpackCovCfg = require("../webpack/webpack.config.coverage");
 const karmaConf = require("./karma.conf");
 const loadUserConfig = require("./util/load-user-config");
 const Path = require("path");
+const checkForCustomWebpackConfig = require("../webpack/util/check-custom-config");
+const webpackCovCfg = require(checkForCustomWebpackConfig("../webpack/webpack.config.coverage"));
 
 module.exports = function(config) {
   karmaConf(config);

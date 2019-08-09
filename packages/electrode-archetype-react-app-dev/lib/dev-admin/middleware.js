@@ -8,6 +8,7 @@ const Fs = require("fs");
 const webpack = require("webpack");
 const hotHelpers = require("webpack-hot-middleware/helpers");
 const Url = require("url");
+const checkForCustomWebpackConfig = require("../../config/webpack/util/check-custom-config");
 
 hotHelpers.pathMatch = (url, path) => {
   try {
@@ -64,14 +65,6 @@ const skipWebpackDevMiddleware = req => {
     (h["user-agent"] === "shot" || h.SKIP_WEBPACK_DEV_MIDDLEWARE === "true")
   );
 };
-
-function checkForCustomWebpackConfig() {
-  const customFilePath = Path.join(process.cwd(), "webpack.config.js");
-  const archetypeWebpackConfig = Path.join(archetype.config.webpack, "webpack.config.dev.js");
-
-  return Fs.existsSync(customFilePath) ? customFilePath : archetypeWebpackConfig;
-}
-
 class Middleware {
   constructor(options) {
     this._options = options;
@@ -81,7 +74,8 @@ class Middleware {
   setup() {
     const options = this._options;
 
-    const config = require(checkForCustomWebpackConfig());
+    const webpackDevConfigFile = Path.join(archetype.config.webpack, "webpack.config.dev.js");
+    const config = require(checkForCustomWebpackConfig(webpackDevConfigFile));
 
     const { devPort, devHostname } = archetype.webpack;
 

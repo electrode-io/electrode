@@ -150,7 +150,6 @@ function setWebpackProfile(profile) {
 function checkForCustomWebpackConfig(defaultFile) {
   const customFilePath = Path.join(process.cwd(), "webpack.config.js");
   const webpackConfigFile = Fs.existsSync(customFilePath) ? customFilePath : webpackConfig(defaultFile);
-  logger.info(`Using Webpack Profile @ ${webpackConfigFile}`);
   return webpackConfigFile;
 }
 
@@ -1136,16 +1135,26 @@ Individual .babelrc files were generated for you in src/client and src/server
 
   if (archetype.options.karma !== false) {
     Object.assign(tasks, {
-      ".karma.test-frontend": mkCmd(`karma start`, quote(karmaConfig("karma.conf.js")), `--colors`),
+      ".karma.test-frontend": {
+        desc: false,
+        task: () => {
+          setWebpackProfile("test");
+          return mkCmd(`~$karma start`, quote(karmaConfig("karma.conf.js")), `--colors`);
+        }
+      },
 
       ".karma.test-frontend-ci": {
         dep: [setKarmaCovEnv],
-        task: mkCmd(`karma start`, quote(karmaConfig("karma.conf.coverage.js")), `--colors`)
+        task: () => {
+          setWebpackProfile("coverage");
+          return mkCmd(`~$karma start`, quote(karmaConfig("karma.conf.coverage.js")), `--colors`);
+        }
       },
 
       ".karma.test-frontend-cov": {
         dep: [setKarmaCovEnv],
         task: () => {
+          setWebpackProfile("coverage");
           if (shell.test("-d", "test")) {
             logger.info("\nRunning Karma unit tests:\n");
             return mkCmd(`~$karma start`, quote(karmaConfig("karma.conf.coverage.js")), `--colors`);
@@ -1159,14 +1168,26 @@ Individual .babelrc files were generated for you in src/client and src/server
           .then(() => exec(`karma start`, quote(karmaConfig("karma.conf.dev.js")), `--colors`))
           .catch(() => `test-frontend`),
 
-      ".karma.test-frontend-dev-watch": mkCmd(
-        `karma start`,
-        quote(karmaConfig("karma.conf.watch.js")),
-        `--colors --browsers Chrome --no-single-run --auto-watch`
-      )
+      ".karma.test-frontend-dev-watch": () => {
+          setWebpackProfile("test");
+          return mkCmd(
+          `~$karma start`,
+            quote(karmaConfig("karma.conf.watch.js")),
+            `--colors --browsers Chrome --no-single-run --auto-watch`
+          );
+      }
     });
   } else {
-    logger.info("Disabling karma test tasks since archetype config options.karma === false");
+    const karmaTasksDisabled = () => {
+      logger.info("Disabling karma test tasks since archetype config options.karma === false");
+    };
+    Object.assign(tasks, {
+      ".karma.test-frontend": karmaTasksDisabled,
+      ".karma.test-frontend-ci": karmaTasksDisabled,
+      ".karma.test-frontend-cov": karmaTasksDisabled,
+      ".karma.test-frontend-dev": karmaTasksDisabled,
+      ".karma.test-frontend-dev-watch": karmaTasksDisabled
+    });
   }
 
   return tasks;
