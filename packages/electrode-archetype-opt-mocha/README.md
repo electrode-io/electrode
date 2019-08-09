@@ -1,6 +1,6 @@
 # Electrode Archetype Option Mocha
 
-Allow [Electrode](https://github.com/electrode-io/electrode) apps to optionally choose to skip installing dependencies for jest.
+Allows [Electrode](https://github.com/electrode-io/electrode) apps to optionally choose to skip installing dependencies for mocha.
 
 The app can skip installing mocha dependencies by adding a file `archetype/config/index.js` or `archetype/config.js` and set:
 
@@ -16,7 +16,7 @@ If nothing is set, then default is to install.
 
 # Usage
 
-This module generally is included by other Electrode modules. An Electrode app don't need to install this directly.
+This module generally is included by other Electrode modules. An Electrode app doesn't need to install this directly.
 
 ## Install
 

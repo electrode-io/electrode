@@ -2124,10 +2124,10 @@ atob:
   $: sha1-lfE2KbEsOlGl0hWr3OKqnzL4B3M=
   _: 'https://registry.npmjs.org/atob/-/atob-1.1.3.tgz'
 autoprefixer:
- _latest: 9.6.0
+ _latest: 9.6.1
  _:
   ^8.6.5: 8.6.5
-  ^9.3.1: 9.6.0
+  ^9.6.0: 9.6.0
  9.6.0:
   $: sha512-kuip9YilBqhirhHEGHaBTZKXL//xxGnzvsD0FtBQa6z+A69qZD6s/BAX9VzDF1i9VKDquTJDQaPLSEhOnL6FvQ==
   _: 'https://registry.npmjs.org/autoprefixer/-/autoprefixer-9.6.0.tgz'
@@ -5023,18 +5023,29 @@ ejs:
   $: sha512-0xy4A/twfrRCnkhfk8ErDi5DqdAsAqeGxht4xkCUrsvhhbQNs7E+4jV0CN7+NKIY0aHE72+XvqtBIXzD31ZbXQ==
   _: 'https://registry.npmjs.org/ejs/-/ejs-2.6.1.tgz'
 electrode-archetype-opt-inferno:
- _latest: 0.2.6-fynlocal_h
+ _latest: 0.2.7-fynlocal_h
  _:
-  ../electrode-archetype-opt-inferno: 0.2.6-fynlocal_h
- 0.2.6-fynlocal_h:
+  ../electrode-archetype-opt-inferno: 0.2.7-fynlocal_h
+ 0.2.7-fynlocal_h:
   optFailed: 1
   $: local
   _: ../../packages/electrode-archetype-opt-inferno
-electrode-archetype-opt-karma:
- _latest: 2.0.0-fynlocal_h
+electrode-archetype-opt-jest:
+ _latest: 1.0.0-fynlocal_h
  _:
-  ../electrode-archetype-opt-karma: 2.0.0-fynlocal_h
- 2.0.0-fynlocal_h:
+  ../electrode-archetype-opt-jest: 1.0.0-fynlocal_h
+ 1.0.0-fynlocal_h:
+  hasPI: 1
+  $: local
+  _: ../../packages/electrode-archetype-opt-jest
+  dependencies:
+   babel-jest: ^23.6.0
+   jest: ^23.5.0
+electrode-archetype-opt-karma:
+ _latest: 2.0.1-fynlocal_h
+ _:
+  ../electrode-archetype-opt-karma: 2.0.1-fynlocal_h
+ 2.0.1-fynlocal_h:
   hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-karma
@@ -5056,11 +5067,21 @@ electrode-archetype-opt-karma:
    karma-spec-reporter: 0.0.32
    karma-webpack: 4.0.0-rc.3
    phantomjs-prebuilt: ^2.1.16
-electrode-archetype-opt-pwa:
- _latest: 1.0.1-fynlocal_h
+electrode-archetype-opt-mocha:
+ _latest: 1.0.0-fynlocal_h
  _:
-  ../electrode-archetype-opt-pwa: 1.0.1-fynlocal_h
- 1.0.1-fynlocal_h:
+  ../electrode-archetype-opt-mocha: 1.0.0-fynlocal_h
+ 1.0.0-fynlocal_h:
+  hasPI: 1
+  $: local
+  _: ../../packages/electrode-archetype-opt-mocha
+  dependencies:
+   mocha: ^4.0.0
+electrode-archetype-opt-pwa:
+ _latest: 1.0.2-fynlocal_h
+ _:
+  ../electrode-archetype-opt-pwa: 1.0.2-fynlocal_h
+ 1.0.2-fynlocal_h:
   hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-pwa
@@ -5074,10 +5095,10 @@ electrode-archetype-opt-pwa:
    web-app-manifest-loader: ^0.1.1
    webpack-disk-plugin: 0.0.2
 electrode-archetype-opt-react:
- _latest: 1.0.3-fynlocal_h
+ _latest: 1.0.4-fynlocal_h
  _:
-  ../electrode-archetype-opt-react: 1.0.3-fynlocal_h
- 1.0.3-fynlocal_h:
+  ../electrode-archetype-opt-react: 1.0.4-fynlocal_h
+ 1.0.4-fynlocal_h:
   hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-react
@@ -5085,38 +5106,61 @@ electrode-archetype-opt-react:
    react: ^16.0.0
    react-dom: ^16.0.0
 electrode-archetype-opt-sass:
- _latest: 1.0.4-fynlocal_h
+ _latest: 1.0.5-fynlocal_h
  _:
-  ../electrode-archetype-opt-sass: 1.0.4-fynlocal_h
- 1.0.4-fynlocal_h:
+  ../electrode-archetype-opt-sass: 1.0.5-fynlocal_h
+ 1.0.5-fynlocal_h:
   hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-sass
   dependencies:
    node-sass: ^4.9.3
    sass-loader: ^6.0.6
-electrode-archetype-react-app:
- _latest: 6.4.7-fynlocal_h
+electrode-archetype-opt-sinon:
+ _latest: 1.0.0-fynlocal_h
  _:
-  ../../packages/electrode-archetype-react-app: 6.4.7-fynlocal_h
- 6.4.7-fynlocal_h:
+  ../electrode-archetype-opt-sinon: 1.0.0-fynlocal_h
+ 1.0.0-fynlocal_h:
+  hasPI: 1
+  $: local
+  _: ../../packages/electrode-archetype-opt-sinon
+  dependencies:
+   sinon: ^4.0.0
+   sinon-chai: ^2.14.0
+electrode-archetype-opt-typescript:
+ _latest: 1.0.0-fynlocal_h
+ _:
+  ../electrode-archetype-opt-typescript: 1.0.0-fynlocal_h
+ 1.0.0-fynlocal_h:
+  hasPI: 1
+  $: local
+  _: ../../packages/electrode-archetype-opt-typescript
+  dependencies:
+   typescript: ^3.2.1
+   '@babel/preset-typescript': ^7.1.0
+electrode-archetype-react-app:
+ _latest: 6.5.8-fynlocal_h
+ _:
+  ../../packages/electrode-archetype-react-app: 6.5.8-fynlocal_h
+ 6.5.8-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app
   dependencies:
    '@babel/runtime': ^7.1.5
    css-modules-require-hook: ^4.0.2
-   isomorphic-loader: ^2.1.0
+   ignore-styles: ^5.0.1
+   isomorphic-loader: ^2.1.1
    optional-require: ^1.0.0
    subapp-util: ^1.0.1
   optionalDependencies:
-   electrode-archetype-opt-inferno: ^0.2.4
-   electrode-archetype-opt-react: ^1.0.2
+   electrode-archetype-opt-inferno: ^0.2.7
+   electrode-archetype-opt-react: ^1.0.4
 electrode-archetype-react-app-dev:
- _latest: 6.4.7-fynlocal_h
+ _latest: 6.5.8-fynlocal_h
  _:
-  ../../packages/electrode-archetype-react-app-dev: 6.4.7-fynlocal_h
- 6.4.7-fynlocal_h:
+  ../../packages/electrode-archetype-react-app-dev: 6.5.8-fynlocal_h
+ 6.5.8-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app-dev
@@ -5132,16 +5176,15 @@ electrode-archetype-react-app-dev:
    '@babel/plugin-transform-runtime': ^7.1.0
    '@babel/preset-env': ^7.1.6
    '@babel/preset-react': ^7.0.0
-   '@babel/preset-typescript': ^7.1.0
    '@babel/register': ^7.0.0
+   '@jchip/redbird': ^1.0.0
    '@loadable/babel-plugin': ^5.10.0
    '@loadable/webpack-plugin': ^5.7.1
    acorn: ^6.0.5
    ansi-to-html: ^0.6.8
-   autoprefixer: ^9.3.1
+   autoprefixer: ^9.6.0
    babel-core: 7.0.0-bridge.0
    babel-eslint: ^10.0.1
-   babel-jest: ^23.6.0
    babel-loader: ^8.0.4
    babel-plugin-dynamic-import-node: ^2.2.0
    babel-plugin-i18n-id-hashing: ^2.1.0
@@ -5182,18 +5225,16 @@ electrode-archetype-react-app-dev:
    fs-extra: ^0.26.5
    glob: ^7.0.6
    identity-obj-proxy: ^3.0.0
-   isomorphic-loader: ^2.0.0
+   isomorphic-loader: ^2.1.1
    istanbul: ^0.4.5
-   jest: ^23.5.0
    jsonfile: ^2.2.2
    less: ^3.9.0
    less-loader: ^4.1.0
    loader-utils: ^1.1.0
    lodash: ^4.13.1
    mime: ^1.0.0
-   mini-css-extract-plugin: ^0.6.0
+   mini-css-extract-plugin: ^0.7.0
    mkdirp: ^0.5.1
-   mocha: ^4.0.0
    nix-clap: ^1.3.7
    nodemon: ^1.18.7
    offline-plugin: ^4.6.1
@@ -5211,20 +5252,16 @@ electrode-archetype-react-app-dev:
    react-intl: ^2.1.0
    react-test-renderer: ^16.1.1
    regenerator-runtime: ^0.13.2
-   '@jchip/redbird': ^1.0.0
    request: ^2.88.0
    require-at: ^1.0.2
    rimraf: ^2.4.0
-   serve-index-fs: ^1.9.1
-   sinon: ^4.0.0
-   sinon-chai: ^2.14.0
+   serve-index-fs: ^1.10.1
    style-loader: ^0.20.1
    stylus: ^0.54.5
    stylus-relative-loader: ^3.4.0
    subapp-util: ^1.0.1
    sudo-prompt: ^8.2.5
    sugarss: ^1.0.1
-   typescript: ^3.2.1
    url-loader: ^0.6.2
    webpack: ^4.19.1
    webpack-cli: ^3.1.1
@@ -5239,11 +5276,15 @@ electrode-archetype-react-app-dev:
    xenv-config: ^1.3.0
    xsh: ^0.4.4
   optionalDependencies:
-   electrode-archetype-opt-inferno: ^0.2.4
-   electrode-archetype-opt-karma: ^2.0.0
-   electrode-archetype-opt-pwa: ^1.0.1
-   electrode-archetype-opt-react: ^1.0.2
-   electrode-archetype-opt-sass: ^1.0.3
+   electrode-archetype-opt-inferno: ^0.2.7
+   electrode-archetype-opt-karma: ^2.0.1
+   electrode-archetype-opt-pwa: ^1.0.2
+   electrode-archetype-opt-react: ^1.0.4
+   electrode-archetype-opt-sass: ^1.0.5
+   electrode-archetype-opt-jest: ^1.0.0
+   electrode-archetype-opt-sinon: ^1.0.0
+   electrode-archetype-opt-typescript: ^1.0.0
+   electrode-archetype-opt-mocha: ^1.0.0
   peerDependencies:
    electrode-archetype-react-app: ^6.0.0
 electrode-bundle-analyzer:
@@ -5306,10 +5347,10 @@ electrode-node-resolver:
   dependencies:
    require-at: ^1.0.0
 electrode-react-webapp:
- _latest: 3.7.0-fynlocal_h
+ _latest: 3.8.2-fynlocal_h
  _:
-  ../../packages/electrode-react-webapp: 3.7.0-fynlocal_h
- 3.7.0-fynlocal_h:
+  ../../packages/electrode-react-webapp: 3.8.2-fynlocal_h
+ 3.8.2-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-react-webapp
@@ -5323,10 +5364,10 @@ electrode-react-webapp:
    require-at: ^1.0.0
    string-array: ^1.0.0
 electrode-redux-router-engine:
- _latest: 2.3.0-fynlocal_h
+ _latest: 2.3.1-fynlocal_h
  _:
-  ../../packages/electrode-redux-router-engine: 2.3.0-fynlocal_h
- 2.3.0-fynlocal_h:
+  ../../packages/electrode-redux-router-engine: 2.3.1-fynlocal_h
+ 2.3.1-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-redux-router-engine
@@ -5373,10 +5414,10 @@ electrode-static-paths:
   peerDependencies:
    inert: '^4.0.0 || ^5.0.0'
 electrode-ui-config:
- _latest: 1.3.0-fynlocal_h
+ _latest: 1.3.1-fynlocal_h
  _:
-  ../../packages/electrode-ui-config: 1.3.0-fynlocal_h
- 1.3.0-fynlocal_h:
+  ../../packages/electrode-ui-config: 1.3.1-fynlocal_h
+ 1.3.1-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-ui-config
@@ -7746,6 +7787,13 @@ ignore-by-default:
  1.0.1:
   $: sha1-SMptcvbGo68Aqa1K5odr44ieKwk=
   _: 'https://registry.npmjs.org/ignore-by-default/-/ignore-by-default-1.0.1.tgz'
+ignore-styles:
+ _latest: 5.0.1
+ _:
+  ^5.0.1: 5.0.1
+ 5.0.1:
+  $: sha1-tJ7yJ0va/NikiAqWa/440aC/RnE=
+  _: 'https://registry.npmjs.org/ignore-styles/-/ignore-styles-5.0.1.tgz'
 image-size:
  _latest: 0.7.4
  _:
@@ -8575,12 +8623,12 @@ isobject:
   dependencies:
    isarray: 1.0.0
 isomorphic-loader:
- _latest: 2.1.0
+ _latest: 2.1.1
  _:
-  '^2.0.0,^2.1.0': 2.1.0
- 2.1.0:
-  $: sha512-jW9OQYFz1VuCXiZoXWintaJyqCepqe50/WK9MDVU4kP3edYhEkTbw4KsyXT/rEexDmGk1EImcCvxneQVOYm1tg==
-  _: 'https://registry.npmjs.org/isomorphic-loader/-/isomorphic-loader-2.1.0.tgz'
+  ^2.1.1: 2.1.1
+ 2.1.1:
+  $: sha512-rPs8mD9Vv32Ob4CU0X9HYXdQmDoUv77qRq4Kx+TLCOKZ9sj1KULLIRvERPFGCc7fz+CSRcQL07RQcUVaXk+7ug==
+  _: 'https://registry.npmjs.org/isomorphic-loader/-/isomorphic-loader-2.1.1.tgz'
   dependencies:
    deep-extend: ^0.6.0
    lockfile: ^1.0.4
@@ -10545,15 +10593,15 @@ min-document:
   dependencies:
    dom-walk: ^0.1.0
 mini-css-extract-plugin:
- _latest: 0.7.0
+ _latest: 0.8.0
  _:
-  ^0.6.0: 0.6.0
- 0.6.0:
-  $: sha512-79q5P7YGI6rdnVyIAV4NXpBQJFWdkzJxCim3Kog4078fM0piAaFlwocqbejdWtLW1cEzCexPrh6EdyFsPgVdAw==
-  _: 'https://registry.npmjs.org/mini-css-extract-plugin/-/mini-css-extract-plugin-0.6.0.tgz'
+  ^0.7.0: 0.7.0
+ 0.7.0:
+  $: sha512-RQIw6+7utTYn8DBGsf/LpRgZCJMpZt+kuawJ/fju0KiOL6nAaTBNmCJwS7HtwSCXfS47gCkmtBFS7HdsquhdxQ==
+  _: 'https://registry.npmjs.org/mini-css-extract-plugin/-/mini-css-extract-plugin-0.7.0.tgz'
   dependencies:
    loader-utils: ^1.1.0
-   normalize-url: ^2.0.1
+   normalize-url: 1.9.1
    schema-utils: ^1.0.0
    webpack-sources: ^1.1.0
   peerDependencies:
@@ -11082,7 +11130,8 @@ normalize-range:
 normalize-url:
  _latest: 4.3.0
  _:
-  '2.0.1,^2.0.1': 2.0.1
+  1.9.1: 1.9.1
+  2.0.1: 2.0.1
   ^3.0.0: 3.3.0
  3.3.0:
   $: sha512-U+JJi7duF1o+u2pynbp2zXDW2/PADgC30f0GsHZtRh+HOcXHnw137TrNlyxxRvWW5fjKd3bcLHPxofWuCjaeZg==
@@ -11094,6 +11143,14 @@ normalize-url:
    prepend-http: ^2.0.0
    query-string: ^5.0.1
    sort-keys: ^2.0.0
+ 1.9.1:
+  $: sha1-LMDWazHqIwNkWENuNiDYWVTGbDw=
+  _: 'https://registry.npmjs.org/normalize-url/-/normalize-url-1.9.1.tgz'
+  dependencies:
+   object-assign: ^4.0.1
+   prepend-http: ^1.0.0
+   query-string: ^4.1.0
+   sort-keys: ^1.0.0
 normalize.css:
  _latest: 8.0.1
  _:
@@ -12964,7 +13021,7 @@ prelude-ls:
 prepend-http:
  _latest: 3.0.1
  _:
-  ^1.0.1: 1.0.4
+  '^1.0.0,^1.0.1': 1.0.4
   ^2.0.0: 2.0.0
  2.0.0:
   $: sha1-6SQ0v6XqjBn0HN/UAddBo8gZ2Jc=
@@ -13219,14 +13276,21 @@ qs:
   $: sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
   _: 'https://registry.npmjs.org/qs/-/qs-6.5.2.tgz'
 query-string:
- _latest: 6.6.0
+ _latest: 6.8.2
  _:
+  ^4.1.0: 4.3.4
   ^5.0.1: 5.1.1
  5.1.1:
   $: sha512-gjWOsm2SoGlgLEdAGt7a6slVOk9mGiXmPFMqrEhLQ68rhQuBnpfs3+EmlvqKyxnCo9/PPlF+9MtY02S1aFg+Jw==
   _: 'https://registry.npmjs.org/query-string/-/query-string-5.1.1.tgz'
   dependencies:
    decode-uri-component: ^0.2.0
+   object-assign: ^4.1.0
+   strict-uri-encode: ^1.0.0
+ 4.3.4:
+  $: sha1-u7aTucqRXCMlFbIosaArYJBD2+s=
+  _: 'https://registry.npmjs.org/query-string/-/query-string-4.3.4.tgz'
+  dependencies:
    object-assign: ^4.1.0
    strict-uri-encode: ^1.0.0
 querystring:
@@ -14379,12 +14443,12 @@ serve-index:
    mime-types: ~2.1.17
    parseurl: ~1.3.2
 serve-index-fs:
- _latest: 1.9.1
+ _latest: 1.10.1
  _:
-  ^1.9.1: 1.9.1
- 1.9.1:
-  $: sha512-yiRLjT8WYtEvE/ycPDVKx1tzeR1vSppHc4KL4AAqOwOaB1iLiniqsBNcveMfE8DyeX5bkwDY5abnhjLe7GA10g==
-  _: 'https://registry.npmjs.org/serve-index-fs/-/serve-index-fs-1.9.1.tgz'
+  ^1.10.1: 1.10.1
+ 1.10.1:
+  $: sha512-JRb5gmypjeGvGIoTkdiw2OW5T1bG1fatzR9+X569cGK38yiF4HedEjeCteFFmwTw0wmkLVEcD6ekz1dGsS674Q==
+  _: 'https://registry.npmjs.org/serve-index-fs/-/serve-index-fs-1.10.1.tgz'
   dependencies:
    accepts: ~1.3.5
    batch: 0.6.1
@@ -14780,10 +14844,16 @@ sonic-boom:
 sort-keys:
  _latest: 3.0.0
  _:
+  ^1.0.0: 1.1.2
   ^2.0.0: 2.0.0
  2.0.0:
   $: sha1-ZYU1WEhh7JfXMNbPQYIuH1ZoQSg=
   _: 'https://registry.npmjs.org/sort-keys/-/sort-keys-2.0.0.tgz'
+  dependencies:
+   is-plain-obj: ^1.0.0
+ 1.1.2:
+  $: sha1-RBttTTRnmPG05J6JIK37oOVD+a0=
+  _: 'https://registry.npmjs.org/sort-keys/-/sort-keys-1.1.2.tgz'
   dependencies:
    is-plain-obj: ^1.0.0
 source-list-map:
