@@ -437,7 +437,7 @@ module.exports = class extends Generator {
           ignore: ["**/client/images/**", !isPWA && "**/client/sw-registration.js"]
             .concat(
               this.isDemoApp && [
-                "**/client/components/**",
+                "**/client/components/home.jsx",
                 "**/client/actions/**",
                 "**/client/reducers/**"
               ]

@@ -346,7 +346,7 @@ function makeTasks(xclap) {
     });
   };
 
-  const makeBabelRc = (destDir, rcFile) => {
+  const makeBabelRc = (destDir, rcFile, resultFile = ".babelrc.js") => {
     destDir = Path.resolve(destDir);
 
     if (!Fs.existsSync(destDir)) return;
@@ -354,13 +354,13 @@ function makeTasks(xclap) {
     const archRc = Path.join(archetype.devPkg.name, "config", "babel", rcFile);
 
     const oldFn = Path.join(destDir, ".babelrc");
-    const fn = Path.join(destDir, ".babelrc.js");
+    const fn = Path.join(destDir, resultFile);
 
     if (Fs.existsSync(oldFn)) {
       const rc = JSON.parse(Fs.readFileSync(oldFn));
       rc.extends = archRc;
       Fs.writeFileSync(oldFn, `${JSON.stringify(rc, null, 2)}\n`);
-      logger.info(`You have old ${oldFn} - please remove it to allow .babelrc.js.`);
+      logger.info(`You have old ${oldFn} - please remove it to allow ${resultFile}.`);
     } else if (!Fs.existsSync(fn)) {
       logger.info(`Generating ${fn} for you - please commit it.`);
       const rc = `module.exports = {
@@ -602,7 +602,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     },
 
     ".build.client.babelrc": () => {
-      makeBabelRc(AppMode.src.dir, "babelrc-client.js");
+      makeBabelRc(Path.dirname(Path.resolve(AppMode.src.dir)), "babelrc-client.js", "babel.config.js");
       makeBabelRc(AppMode.src.client, "babelrc-client.js");
     },
 
