@@ -96,7 +96,6 @@
     "mime": "^1.0.0",
     "mini-css-extract-plugin": "^0.7.0",
     "mkdirp": "^0.5.1",
-    "mocha": "^4.0.0",
     "nix-clap": "^1.3.7",
     "nodemon": "^1.18.7",
     "offline-plugin": "^4.6.1",
@@ -146,7 +145,8 @@
     "electrode-archetype-opt-sass": "^1.0.5",
     "electrode-archetype-opt-jest": "^1.0.0",
     "electrode-archetype-opt-sinon": "^1.0.0",
-    "electrode-archetype-opt-typescript": "^1.0.0"
+    "electrode-archetype-opt-typescript": "^1.0.0",
+    "electrode-archetype-opt-mocha": "^1.0.0"
   },
   "devDependencies": {
     "electrode-archetype-njs-module-dev": "^3.0.0",
@@ -175,7 +175,8 @@
       "electrode-archetype-opt-sass": "../electrode-archetype-opt-sass",
       "electrode-archetype-opt-jest": "../electrode-archetype-opt-jest",
       "electrode-archetype-opt-sinon": "../electrode-archetype-opt-sinon",
-      "electrode-archetype-opt-typescript": "../electrode-archetype-opt-typescript"
+      "electrode-archetype-opt-typescript": "../electrode-archetype-opt-typescript",
+      "electrode-archetype-opt-mocha": "../electrode-archetype-opt-mocha"
     }
   },
   "nyc": {

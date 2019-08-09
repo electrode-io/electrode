@@ -964,28 +964,6 @@ Individual .babelrc files were generated for you in src/client and src/server
 
     "test-frontend-dev-watch": ["?.karma.test-frontend-dev-watch"],
 
-    "test-server-cov": () => {
-      if (shell.test("-d", "test/server")) {
-        AppMode.setEnv(AppMode.src.dir);
-        return mkCmd(
-          `~$istanbul cover --include-all-sources --root src/server`,
-          `--report text --report lcov node_modules/mocha/bin/_mocha`,
-          `-- -c --opts`,
-          quote(mochaConfig("mocha.opts")),
-          `test/server`
-        );
-      }
-      return undefined;
-    },
-
-    "test-server-dev": () => {
-      if (shell.test("-d", "test/server")) {
-        AppMode.setEnv(AppMode.src.dir);
-        return mkCmd(`~$mocha -c --opts`, quote(mochaConfig("mocha.opts")), `test/server`);
-      }
-      return undefined;
-    },
-
     "build-analyze": {
       dep: [".optimize-stats"],
       desc: "Build your app's client bundle for production and run bundle analyzer",
@@ -1146,6 +1124,41 @@ Individual .babelrc files were generated for you in src/client and src/server
     });
   } else {
     logger.info("Disabling jest test tasks since archetype config options.jest === false");
+  }
+
+  if (archetype.options.mocha !== false) {
+    Object.assign(tasks, {
+      "test-server-cov": () => {
+        if (shell.test("-d", "test/server")) {
+          AppMode.setEnv(AppMode.src.dir);
+          return mkCmd(
+            `~$istanbul cover --include-all-sources --root src/server`,
+            `--report text --report lcov node_modules/mocha/bin/_mocha`,
+            `-- -c --opts`,
+            quote(mochaConfig("mocha.opts")),
+            `test/server`
+          );
+        }
+        return undefined;
+      },
+
+      "test-server-dev": () => {
+        if (shell.test("-d", "test/server")) {
+          AppMode.setEnv(AppMode.src.dir);
+          return mkCmd(`~$mocha -c --opts`, quote(mochaConfig("mocha.opts")), `test/server`);
+        }
+        return undefined;
+      }
+    });
+  } else {
+    Object.assign(tasks, {
+      "test-server-cov": () => {
+        logger.info("Disabling Mocha task 'test-server-cov', since archetype config options.mocha === false");
+      },
+      "test-server-dev": () => {
+        logger.info("Disabling Mocha task 'test-server-dev', since archetype config options.mocha === false");
+      }
+    });
   }
 
   return tasks;

@@ -71,7 +71,6 @@
     "lint-staged": "^3.5.1",
     "lodash": "^4.5.0",
     "lodash-webpack-plugin": "^0.11.2",
-    "mocha": "^4.0.0",
     "nodemon": "^1.18.7",
     "optional-require": "^1.0.0",
     "postcss-import": "^9.1.0",
@@ -106,7 +105,8 @@
     "electrode-archetype-opt-karma": "^2.0.0",
     "electrode-archetype-opt-react": "^1.0.1",
     "electrode-archetype-opt-sass": "^1.0.3",
-    "electrode-archetype-opt-sinon": "^1.0.0"
+    "electrode-archetype-opt-sinon": "^1.0.0",
+    "electrode-archetype-opt-mocha": "^1.0.0"
   },
   "devDependencies": {
     "electrode-archetype-react-component": "../electrode-archetype-react-component",
@@ -130,7 +130,8 @@
       "electrode-archetype-opt-karma": "../electrode-archetype-opt-karma",
       "electrode-archetype-opt-react": "../electrode-archetype-opt-react",
       "electrode-archetype-opt-sass": "../electrode-archetype-opt-sass",
-      "electrode-archetype-opt-sinon": "../electrode-archetype-opt-sinon"
+      "electrode-archetype-opt-sinon": "../electrode-archetype-opt-sinon",
+      "electrode-archetype-opt-mocha": "../electrode-archetype-opt-mocha"
     }
   }
 }
