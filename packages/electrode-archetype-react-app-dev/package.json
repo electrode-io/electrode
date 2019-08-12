@@ -46,7 +46,6 @@
     "ansi-to-html": "^0.6.8",
     "autoprefixer": "^9.6.0",
     "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",
     "babel-plugin-dynamic-import-node": "^2.2.0",
     "babel-plugin-i18n-id-hashing": "^2.1.0",
@@ -73,11 +72,6 @@
     "electrode-webpack-reporter": "^0.5.1",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.1.0",
-    "eslint": "^4.8.0",
-    "eslint-config-walmart": "^1.1.0",
-    "eslint-plugin-filenames": "^1.1.0",
-    "eslint-plugin-flowtype": "^2.49.3",
-    "eslint-plugin-react": "^7.4.0",
     "file-loader": "^2.0.0",
     "filter-scan-dir": "^1.0.9",
     "finalhandler": "^1.1.1",
@@ -137,6 +131,7 @@
     "xsh": "^0.4.4"
   },
   "optionalDependencies": {
+    "electrode-archetype-opt-eslint": "^1.0.0",
     "electrode-archetype-opt-critical-css": "^1.0.0",
     "electrode-archetype-opt-inferno": "^0.2.7",
     "electrode-archetype-opt-karma": "^2.0.1",
@@ -167,6 +162,7 @@
       "electrode-archetype-react-app": "../electrode-archetype-react-app"
     },
     "optionalDependencies": {
+      "electrode-archetype-opt-eslint": "../electrode-archetype-opt-eslint",
       "electrode-archetype-opt-critical-css": "../electrode-archetype-opt-critical-css",
       "electrode-archetype-opt-inferno": "../electrode-archetype-opt-inferno",
       "electrode-archetype-opt-karma": "../electrode-archetype-opt-karma",

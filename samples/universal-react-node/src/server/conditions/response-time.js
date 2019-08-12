@@ -7,7 +7,7 @@ const MS_IN_SEC = 1000;
 const SEC_IN_MIN = 60;
 
 module.exports = {
-  detector: (_opts) => {
+  detector: _opts => {
     const longResponseThreshold = _opts.longResponseThreshold ||
       DEFAULT_LONG_RESPONSE_THRESHOLD_MS;
     const longResponseAmount = _opts.longResponseAmount ||

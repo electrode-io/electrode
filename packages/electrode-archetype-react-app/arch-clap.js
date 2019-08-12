@@ -777,44 +777,6 @@ Individual .babelrc files were generated for you in src/client and src/server
       task: ["build-dev-static", "app-server"]
     },
 
-    lint: xclap.concurrent("lint-client", "lint-client-test", "lint-server", "lint-server-test"),
-    "lint-client": {
-      desc: "Run eslint on client code in directories client and templates",
-      task: () =>
-        lint({
-          ext: ".js,.jsx",
-          config: eslintConfig(".eslintrc-react"),
-          targets: [AppMode.src.client, "templates"]
-        })
-    },
-    "lint-client-test": {
-      desc: "Run eslint on client test code in directory test/client",
-      task: () =>
-        lint({
-          ext: ".js,.jsx",
-          config: eslintConfig(".eslintrc-react-test"),
-          targets: ["test/client"]
-        })
-    },
-    "lint-server": {
-      desc: "Run eslint on server code in directory server",
-      task: () =>
-        lint({
-          config: eslintConfig(".eslintrc-node"),
-          targets: [AppMode.src.server]
-        })
-    },
-    "lint-server-test": {
-      desc: "Run eslint on server test code in directories test/server and test/func",
-      task: () =>
-        lint({
-          config: process.env.SERVER_ES6
-            ? eslintConfig(".eslintrc-mocha-test-es6")
-            : eslintConfig(".eslintrc-mocha-test"),
-          targets: ["test/server", "test/func"]
-        })
-    },
-
     "npm:test": ["check"],
     "npm:release": mapIsomorphicCdn,
 
@@ -1055,6 +1017,60 @@ Individual .babelrc files were generated for you in src/client and src/server
           )
       },
       "copy-dll": () => shell.cp("-r", "dll/*", "dist")
+    });
+  }
+
+  if (archetype.options.eslint !== false) {
+    Object.assign(tasks, {
+      lint: xclap.concurrent("lint-client", "lint-client-test", "lint-server", "lint-server-test"),
+      "lint-client": {
+        desc: "Run eslint on client code in directories client and templates",
+        task: () =>
+          lint({
+            ext: ".js,.jsx",
+            config: eslintConfig(".eslintrc-react"),
+            targets: [AppMode.src.client, "templates"]
+          })
+      },
+      "lint-client-test": {
+        desc: "Run eslint on client test code in directory test/client",
+        task: () =>
+          lint({
+            ext: ".js,.jsx",
+            config: eslintConfig(".eslintrc-react-test"),
+            targets: ["test/client"]
+          })
+      },
+      "lint-server": {
+        desc: "Run eslint on server code in directory server",
+        task: () =>
+          lint({
+            config: eslintConfig(".eslintrc-node"),
+            targets: [AppMode.src.server]
+          })
+      },
+      "lint-server-test": {
+        desc: "Run eslint on server test code in directories test/server and test/func",
+        task: () =>
+          lint({
+            config: process.env.SERVER_ES6
+              ? eslintConfig(".eslintrc-mocha-test-es6")
+              : eslintConfig(".eslintrc-mocha-test"),
+            targets: ["test/server", "test/func"]
+          })
+      }
+    });
+  } else {
+    Object.assign(tasks, {
+      lint: () => {
+        logger.info("Disabling ESLint tasks since archetype config options.eslint === false");
+      },
+      "lint-server": () => {
+        logger.info("Disabling ESLint task 'lint-server' since archetype config options.eslint === false");
+      },
+      "lint-server-test": () => {
+        logger.info("Disabling ESLint task 'lint-server-test' since archetype config options.eslint === false");
+      },
     });
   }
 
