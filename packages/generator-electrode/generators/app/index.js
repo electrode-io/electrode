@@ -497,12 +497,12 @@ module.exports = class extends Generator {
 
   _askForOptionalFeatures() {
     if (
-      this.props.optCriticalCSS ||
-      this.props.optJest ||
-      this.props.optMocha ||
-      this.props.optTypescript ||
-      this.props.optSinon ||
-      this.props.optEslint
+      !this.props.optCriticalCSS ||
+      !this.props.optJest ||
+      !this.props.optMocha ||
+      !this.props.optTypescript ||
+      !this.props.optSinon ||
+      !this.props.optEslint
     ) {
       // Enable optional packages
       shell.mkdir("-p", this.destinationPath("archetype/config"));
@@ -514,7 +514,7 @@ module.exports = class extends Generator {
         sinon: this.props.optSinon,
         eslint: this.props.optEslint
       }).reduce((prev, [k, v]) => {
-        if (v) prev[k] = v;
+        if (!v) prev[k] = v;
         return prev;
       }, {});
       const content = `module.exports = ${JSON.stringify({ options }, null, 2)}`;

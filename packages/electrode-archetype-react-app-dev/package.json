@@ -62,7 +62,6 @@
     "chai-shallowly": "^1.0.0",
     "chalker": "^1.1.1",
     "chokidar": "^2.0.4",
-    "clean-css": "^3.4.21",
     "convert-source-map": "^1.5.0",
     "core-js": "^2 || ^3",
     "css-loader": "^1.0.0",
@@ -91,13 +90,11 @@
     "mime": "^1.0.0",
     "mini-css-extract-plugin": "^0.7.0",
     "mkdirp": "^0.5.1",
-    "mocha": "^4.0.0",
     "nix-clap": "^1.3.7",
     "nodemon": "^1.18.7",
     "offline-plugin": "^4.6.1",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "optional-require": "^1.0.0",
-    "penthouse": "^0.11.13",
     "postcss-import": "^9.1.0",
     "postcss-less": "^3.1.4",
     "postcss-loader": "^3.0.0",
@@ -135,6 +132,7 @@
   },
   "optionalDependencies": {
     "electrode-archetype-opt-eslint": "^1.0.0",
+    "electrode-archetype-opt-critical-css": "^1.0.0",
     "electrode-archetype-opt-inferno": "^0.2.7",
     "electrode-archetype-opt-karma": "^2.0.1",
     "electrode-archetype-opt-pwa": "^1.0.2",
@@ -142,7 +140,8 @@
     "electrode-archetype-opt-sass": "^1.0.5",
     "electrode-archetype-opt-jest": "^1.0.0",
     "electrode-archetype-opt-sinon": "^1.0.0",
-    "electrode-archetype-opt-typescript": "^1.0.0"
+    "electrode-archetype-opt-typescript": "^1.0.0",
+    "electrode-archetype-opt-mocha": "^1.0.0"
   },
   "devDependencies": {
     "electrode-archetype-njs-module-dev": "^3.0.0",
@@ -164,6 +163,7 @@
     },
     "optionalDependencies": {
       "electrode-archetype-opt-eslint": "../electrode-archetype-opt-eslint",
+      "electrode-archetype-opt-critical-css": "../electrode-archetype-opt-critical-css",
       "electrode-archetype-opt-inferno": "../electrode-archetype-opt-inferno",
       "electrode-archetype-opt-karma": "../electrode-archetype-opt-karma",
       "electrode-archetype-opt-pwa": "../electrode-archetype-opt-pwa",
@@ -171,7 +171,8 @@
       "electrode-archetype-opt-sass": "../electrode-archetype-opt-sass",
       "electrode-archetype-opt-jest": "../electrode-archetype-opt-jest",
       "electrode-archetype-opt-sinon": "../electrode-archetype-opt-sinon",
-      "electrode-archetype-opt-typescript": "../electrode-archetype-opt-typescript"
+      "electrode-archetype-opt-typescript": "../electrode-archetype-opt-typescript",
+      "electrode-archetype-opt-mocha": "../electrode-archetype-opt-mocha"
     }
   },
   "nyc": {

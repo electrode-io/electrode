@@ -1,5 +1,6 @@
 module.exports = {
-  options: {
-    eslint: false
-  }
-};
+    options: {
+      eslint: false,
+      mocha: false
+    }
+  };
