@@ -1,6 +1,7 @@
 "use strict";
 
 const Path = require("path");
+const checkForCustomWebpackConfig = require("../webpack/util/check-custom-config");
 const loadUserConfig = require("./util/load-user-config");
 const browserSettings = require("./browser-settings");
 const loadElectrodeDll = require("./util/load-electrode-dll");
@@ -15,7 +16,7 @@ const DLL_PATHS = loadElectrodeDll().map(x => require.resolve(x));
 function loadWebpackConfig() {
   if (!process.env.KARMA_RUN_TYPE) {
     process.env.KARMA_RUN_TYPE = "base";
-    return require("../webpack/webpack.config.test");
+    return require(checkForCustomWebpackConfig("../webpack/webpack.config.test"));
   }
 
   return {};

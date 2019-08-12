@@ -142,6 +142,17 @@ function removeLogFiles() {
   } catch (e) {} // eslint-disable-line
 }
 
+function setWebpackProfile(profile) {
+  process.env.ELECTRODE_WEBPACK_PROFILE = profile || "production";
+  logger.info(`Electrode Webpack Profile set to ${process.env.ELECTRODE_WEBPACK_PROFILE}`);
+}
+
+function checkForCustomWebpackConfig(defaultFile) {
+  const customFilePath = Path.join(process.cwd(), "webpack.config.js");
+  const webpackConfigFile = Fs.existsSync(customFilePath) ? customFilePath : webpackConfig(defaultFile);
+  return webpackConfigFile;
+}
+
 /*
  *  There are multiple eslint config for different groups of code
  *
@@ -416,10 +427,11 @@ function makeTasks(xclap) {
     //
     ".build-browser-coverage-1": () => {
       setProductionEnv();
+      setWebpackProfile("browsercoverage");
       return exec(
         `webpack`,
         `--config`,
-        quote(webpackConfig("webpack.config.browsercoverage.js")),
+        quote(checkForCustomWebpackConfig("webpack.config.browsercoverage.js")),
         `--colors`
       );
     },
@@ -459,12 +471,15 @@ function makeTasks(xclap) {
     "mv-to-dist": ["mv-to-dist:clean", "mv-to-dist:mv-dirs", "mv-to-dist:keep-targets"],
     "build-dist-dev-static": {
       desc: false,
-      task: mkCmd(
-        `webpack --config`,
-        quote(webpackConfig("webpack.config.dev.static.js")),
-        `--colors`,
-        `--display-error-details`
-      )
+      task: function() {
+        setWebpackProfile("static");
+        return mkCmd(
+          `~$webpack --config`,
+          quote(checkForCustomWebpackConfig("webpack.config.dev.static.js")),
+          `--colors`,
+          `--display-error-details`
+        );
+      }
     },
 
     ".ss-prod-react": () => optimizeModuleForProd("react"),
@@ -495,12 +510,12 @@ function makeTasks(xclap) {
           xclap.exec(
             [
               `webpack --config`,
-              quote(webpackConfig("webpack.config.js")),
+              quote(checkForCustomWebpackConfig("webpack.config.js")),
               `--colors --display-error-details`
             ],
             {
               xclap: { delayRunMs: index * 2000 },
-              execOptions: { env: { ENV_TARGET: name } }
+              execOptions: { env: { ELECTRODE_WEBPACK_PROFILE: "production", ENV_TARGET: name } }
             }
           )
         )
@@ -900,6 +915,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     "server-admin": {
       desc: "Start development with admin server",
       task: function() {
+        setWebpackProfile("development");
         AppMode.setEnv(AppMode.src.dir);
         // eslint-disable-next-line no-shadow
         const exec = AppMode.isSrc
@@ -918,28 +934,34 @@ Individual .babelrc files were generated for you in src/client and src/server
 
     "wds.dev": {
       desc: "Start webpack-dev-server in dev mode",
-      task: mkCmd(
-        "webpack-dev-server",
-        `--watch --watch-aggregate-timeout 2000`,
-        archetype.webpack.enableHotModuleReload ? `--hot` : ``,
-        `--config`,
-        quote(webpackConfig("webpack.config.dev.js")),
-        `--progress --colors`,
-        `--port ${archetype.webpack.devPort}`,
-        `--host ${archetype.webpack.devHostname}`
-      )
+      task: function() {
+        setWebpackProfile("development");
+        return mkCmd(
+          "~$webpack-dev-server",
+          `--watch --watch-aggregate-timeout 2000`,
+          archetype.webpack.enableHotModuleReload ? `--hot` : ``,
+          `--config`,
+          quote(checkForCustomWebpackConfig("webpack.config.dev.js")),
+          `--progress --colors`,
+          `--port ${archetype.webpack.devPort}`,
+          `--host ${archetype.webpack.devHostname}`
+        );
+      }
     },
 
     "wds.test": {
       desc: "Start webpack-dev-server in test mode",
-      task: mkCmd(
-        "webpack-dev-server",
-        `--config`,
-        quote(webpackConfig("webpack.config.test.js")),
-        `--progress --colors`,
-        `--port ${archetype.webpack.testPort}`,
-        `--host ${archetype.webpack.devHostname}`
-      )
+      task: function() {
+        setWebpackProfile("test");
+        return mkCmd(
+          "~$webpack-dev-server",
+          `--config`,
+          quote(checkForCustomWebpackConfig("webpack.config.test.js")),
+          `--progress --colors`,
+          `--port ${archetype.webpack.testPort}`,
+          `--host ${archetype.webpack.devHostname}`
+        );
+      }
     },
 
     "test-server": xclap.concurrent(["lint-server", "lint-server-test"], "test-server-cov"),
@@ -1088,13 +1110,15 @@ Individual .babelrc files were generated for you in src/client and src/server
     Object.assign(tasks, {
       "build-dist-dll": {
         dep: [".mk-dll-dir", ".mk-dist-dir", ".production-env"],
-        task: () =>
-          exec(
+        task: () => {
+          setWebpackProfile("dll");
+          return exec(
             `webpack --config`,
-            quote(webpackConfig("webpack.config.dll.js")),
+            quote(checkForCustomWebpackConfig("webpack.config.dll.js")),
             `--colors`,
             `--display-error-details`
-          )
+          );
+        }
       },
       "copy-dll": () => shell.cp("-r", "dll/*", "dist")
     });
@@ -1102,16 +1126,26 @@ Individual .babelrc files were generated for you in src/client and src/server
 
   if (archetype.options.karma !== false) {
     Object.assign(tasks, {
-      ".karma.test-frontend": mkCmd(`karma start`, quote(karmaConfig("karma.conf.js")), `--colors`),
+      ".karma.test-frontend": {
+        desc: false,
+        task: () => {
+          setWebpackProfile("test");
+          return mkCmd(`~$karma start`, quote(karmaConfig("karma.conf.js")), `--colors`);
+        }
+      },
 
       ".karma.test-frontend-ci": {
         dep: [setKarmaCovEnv],
-        task: mkCmd(`karma start`, quote(karmaConfig("karma.conf.coverage.js")), `--colors`)
+        task: () => {
+          setWebpackProfile("coverage");
+          return mkCmd(`~$karma start`, quote(karmaConfig("karma.conf.coverage.js")), `--colors`);
+        }
       },
 
       ".karma.test-frontend-cov": {
         dep: [setKarmaCovEnv],
         task: () => {
+          setWebpackProfile("coverage");
           if (shell.test("-d", "test")) {
             logger.info("\nRunning Karma unit tests:\n");
             return mkCmd(`~$karma start`, quote(karmaConfig("karma.conf.coverage.js")), `--colors`);
@@ -1125,14 +1159,26 @@ Individual .babelrc files were generated for you in src/client and src/server
           .then(() => exec(`karma start`, quote(karmaConfig("karma.conf.dev.js")), `--colors`))
           .catch(() => `test-frontend`),
 
-      ".karma.test-frontend-dev-watch": mkCmd(
-        `karma start`,
-        quote(karmaConfig("karma.conf.watch.js")),
-        `--colors --browsers Chrome --no-single-run --auto-watch`
-      )
+      ".karma.test-frontend-dev-watch": () => {
+          setWebpackProfile("test");
+          return mkCmd(
+          `~$karma start`,
+            quote(karmaConfig("karma.conf.watch.js")),
+            `--colors --browsers Chrome --no-single-run --auto-watch`
+          );
+      }
     });
   } else {
-    logger.info("Disabling karma test tasks since archetype config options.karma === false");
+    const karmaTasksDisabled = () => {
+      logger.info("Disabling karma test tasks since archetype config options.karma === false");
+    };
+    Object.assign(tasks, {
+      ".karma.test-frontend": karmaTasksDisabled,
+      ".karma.test-frontend-ci": karmaTasksDisabled,
+      ".karma.test-frontend-cov": karmaTasksDisabled,
+      ".karma.test-frontend-dev": karmaTasksDisabled,
+      ".karma.test-frontend-dev-watch": karmaTasksDisabled
+    });
   }
 
   return tasks;

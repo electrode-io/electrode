@@ -1,5 +1,6 @@
 "use strict";
 
+const Fs = require("fs");
 const xsh = require("xsh");
 const partialConfigs = require("../partial");
 const WebpackConfigComposer = require("webpack-config-composer");
@@ -7,6 +8,12 @@ const optionalRequire = require("optional-require")(require);
 const Path = require("path");
 const _ = require("lodash");
 const logger = require("electrode-archetype-react-app/lib/logger");
+
+function isWebpackDirectlyControlled() {
+  const customFilePath = Path.join(process.cwd(), "webpack.config.js");
+  logger.info(`Webpack directly controlled by the App from ${customFilePath}`);
+  return Fs.existsSync(customFilePath);
+}
 
 /* eslint-disable max-statements */
 function generateConfig(options) {
@@ -17,7 +24,7 @@ function generateConfig(options) {
   composer.addPartials(partialConfigs.partials);
 
   let customConfig;
-  const customDirs = [process.cwd(), Path.resolve("archetype/config/webpack")];
+  const customDirs = isWebpackDirectlyControlled() ? [] : [process.cwd(), Path.resolve("archetype/config/webpack")];
 
   const foundDir = customDirs.find(d => {
     customConfig = optionalRequire(Path.join(d, options.configFilename));

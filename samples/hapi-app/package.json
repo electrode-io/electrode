@@ -59,7 +59,8 @@
     "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
-    "electrode-archetype-react-app-dev": "^6.0.0"
+    "electrode-archetype-react-app-dev": "^6.0.0",
+    "webpack-hook-plugin": "1.0.7"
   },
   "fyn": {
     "dependencies": {
