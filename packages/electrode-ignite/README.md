@@ -54,6 +54,15 @@ You'll see the list of options that you can specify as a task, as below:
 
 ![alt text](./images/ignite-help.png)
 
+## Development
+
+To run in development
+
+```sh
+% npm i
+% npx ignite
+```
+
 ## License
 
 Apache-2.0 © WalmartLabs

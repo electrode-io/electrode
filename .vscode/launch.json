@@ -6,6 +6,14 @@
   "configurations": [
     {
       "type": "node",
+      "request": "launch",
+      "name": "Ignite",
+      "cwd": "${workspaceFolder}/packages/electrode-ignite",
+      "program": "${workspaceFolder}/packages/electrode-ignite/cli/ignite.js",
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "node",
       "request": "attach",
       "name": "Attach to Remote 127.0.0.1:9229",
       "address": "127.0.0.1",
