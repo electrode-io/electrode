@@ -1,13 +1,13 @@
-# Electrode Archetype Option CSS Module
+# Electrode Archetype Option postcss
 
-Allow [Electrode](https://github.com/electrode-io/electrode) apps to optionally choose to skip installing dependencies for CSS module support.
+Allow [Electrode](https://github.com/electrode-io/electrode) apps to optionally choose to skip installing dependencies for postcss and CSS module support.
 
-The app can skip installing CSS module dependencies by adding a file `archetype/config/index.js` or `archetype/config.js` and set:
+The app can skip installing postcss and CSS module dependencies by adding a file `archetype/config/index.js` or `archetype/config.js` and set:
 
 ```js
 module.exports = {
   options: {
-    cssModule: false
+    postcss: false
   }
 };
 ```
@@ -24,8 +24,8 @@ In `package.json`:
 
 ```js
 {
-  "optionalDependencies": {
-    "electrode-archetype-opt-css-module": "^1.0.0"
+  "devDependencies": {
+    "electrode-archetype-opt-postcss": "^1.0.0"
   }
 }
 ```
