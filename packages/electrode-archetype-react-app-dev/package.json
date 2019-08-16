@@ -131,17 +131,17 @@
     "xsh": "^0.4.4"
   },
   "optionalDependencies": {
-    "electrode-archetype-opt-eslint": "^1.0.0",
     "electrode-archetype-opt-critical-css": "^1.0.0",
+    "electrode-archetype-opt-eslint": "^1.0.0",
     "electrode-archetype-opt-inferno": "^0.2.7",
+    "electrode-archetype-opt-jest": "^1.0.0",
     "electrode-archetype-opt-karma": "^2.0.1",
+    "electrode-archetype-opt-mocha": "^1.0.0",
     "electrode-archetype-opt-pwa": "^1.0.2",
     "electrode-archetype-opt-react": "^1.0.4",
     "electrode-archetype-opt-sass": "^1.0.5",
-    "electrode-archetype-opt-jest": "^1.0.0",
     "electrode-archetype-opt-sinon": "^1.0.0",
-    "electrode-archetype-opt-typescript": "^1.0.0",
-    "electrode-archetype-opt-mocha": "^1.0.0"
+    "electrode-archetype-opt-typescript": "^1.0.0"
   },
   "devDependencies": {
     "electrode-archetype-njs-module-dev": "^3.0.0",
@@ -162,17 +162,17 @@
       "electrode-archetype-react-app": "../electrode-archetype-react-app"
     },
     "optionalDependencies": {
-      "electrode-archetype-opt-eslint": "../electrode-archetype-opt-eslint",
       "electrode-archetype-opt-critical-css": "../electrode-archetype-opt-critical-css",
+      "electrode-archetype-opt-eslint": "../electrode-archetype-opt-eslint",
       "electrode-archetype-opt-inferno": "../electrode-archetype-opt-inferno",
+      "electrode-archetype-opt-jest": "../electrode-archetype-opt-jest",
       "electrode-archetype-opt-karma": "../electrode-archetype-opt-karma",
+      "electrode-archetype-opt-mocha": "../electrode-archetype-opt-mocha",
       "electrode-archetype-opt-pwa": "../electrode-archetype-opt-pwa",
       "electrode-archetype-opt-react": "../electrode-archetype-opt-react",
       "electrode-archetype-opt-sass": "../electrode-archetype-opt-sass",
-      "electrode-archetype-opt-jest": "../electrode-archetype-opt-jest",
       "electrode-archetype-opt-sinon": "../electrode-archetype-opt-sinon",
-      "electrode-archetype-opt-typescript": "../electrode-archetype-opt-typescript",
-      "electrode-archetype-opt-mocha": "../electrode-archetype-opt-mocha"
+      "electrode-archetype-opt-typescript": "../electrode-archetype-opt-typescript"
     }
   },
   "nyc": {
