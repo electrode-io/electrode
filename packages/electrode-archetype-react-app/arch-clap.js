@@ -231,7 +231,10 @@ function inlineCriticalCSS() {
   const cssAsset = stats.assets.find(asset => asset.name.endsWith(".css"));
   const cssAssetPath = Path.resolve(process.cwd(), `dist/js/${cssAsset.name}`);
   const targetPath = Path.resolve(process.cwd(), "dist/js/critical.css");
-  const serverPromise = require(Path.resolve(process.cwd(), `${archetype.AppMode.src.server}/index.js`))();
+  const serverPromise = require(Path.resolve(
+    process.cwd(),
+    `${archetype.AppMode.src.server}/index.js`
+  ))();
   const penthouseOptions = {
     url,
     css: cssAssetPath,
@@ -937,7 +940,8 @@ Individual .babelrc files were generated for you in src/client and src/server
         if (penthouse && CleanCSS) {
           inlineCriticalCSS();
         } else {
-          const error = "Please ensure `options.criticalCSS = true` in your `archetype/config.js` or `archetype/config/index.js`, then reinstall your dependencies";
+          const error =
+            "Please ensure `options.criticalCSS = true` in your `archetype/config.js` or `archetype/config/index.js`, then reinstall your dependencies";
           throw new Error(`Missing Dependencies\n${error}`);
         }
       }
@@ -1066,11 +1070,15 @@ Individual .babelrc files were generated for you in src/client and src/server
         logger.info("Disabling ESLint tasks since archetype config options.eslint === false");
       },
       "lint-server": () => {
-        logger.info("Disabling ESLint task 'lint-server' since archetype config options.eslint === false");
+        logger.info(
+          "Disabling ESLint task 'lint-server' since archetype config options.eslint === false"
+        );
       },
       "lint-server-test": () => {
-        logger.info("Disabling ESLint task 'lint-server-test' since archetype config options.eslint === false");
-      },
+        logger.info(
+          "Disabling ESLint task 'lint-server-test' since archetype config options.eslint === false"
+        );
+      }
     });
   }
 
@@ -1169,10 +1177,14 @@ Individual .babelrc files were generated for you in src/client and src/server
   } else {
     Object.assign(tasks, {
       "test-server-cov": () => {
-        logger.info("Disabling Mocha task 'test-server-cov', since archetype config options.mocha === false");
+        logger.info(
+          "Disabling Mocha task 'test-server-cov', since archetype config options.mocha === false"
+        );
       },
       "test-server-dev": () => {
-        logger.info("Disabling Mocha task 'test-server-dev', since archetype config options.mocha === false");
+        logger.info(
+          "Disabling Mocha task 'test-server-dev', since archetype config options.mocha === false"
+        );
       }
     });
   }
