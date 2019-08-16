@@ -535,7 +535,7 @@ function makeTasks(xclap) {
             ],
             {
               xclap: { delayRunMs: index * 2000 },
-              execOptions: buildDistExecOptions()
+              execOptions: buildDistExecOptions(name)
             }
           )
         )
