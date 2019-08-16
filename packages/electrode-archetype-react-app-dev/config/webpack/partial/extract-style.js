@@ -1,5 +1,7 @@
 "use strict";
 
+/* eslint-disable max-statements */
+
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const Path = require("path");
 
