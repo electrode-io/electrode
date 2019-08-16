@@ -31,6 +31,7 @@ if (electrodeServer) {
       }
     },
     plugins: {
+      inert: {},
       webpackDevHapi: {
         module: "./dev-hapi.js",
         requireFromPath: __dirname
