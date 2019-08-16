@@ -226,15 +226,12 @@ function inlineCriticalCSS() {
   const PORT = process.env.PORT || 3000;
   const PATH = process.env.CRITICAL_PATH || "/";
   const url = `http://${HOST}:${PORT}${PATH}`;
-  const statsPath = Path.resolve(process.cwd(), "dist/server/stats.json");
+  const statsPath = Path.resolve("dist/server/stats.json");
   const stats = JSON.parse(Fs.readFileSync(statsPath));
   const cssAsset = stats.assets.find(asset => asset.name.endsWith(".css"));
-  const cssAssetPath = Path.resolve(process.cwd(), `dist/js/${cssAsset.name}`);
-  const targetPath = Path.resolve(process.cwd(), "dist/js/critical.css");
-  const serverPromise = require(Path.resolve(
-    process.cwd(),
-    `${archetype.AppMode.src.server}/index.js`
-  ))();
+  const cssAssetPath = Path.resolve(`dist/js/${cssAsset.name}`);
+  const targetPath = Path.resolve("dist/js/critical.css");
+  const serverPromise = require(Path.resolve(`${archetype.AppMode.src.server}/index.js`))();
   const penthouseOptions = {
     url,
     css: cssAssetPath,
