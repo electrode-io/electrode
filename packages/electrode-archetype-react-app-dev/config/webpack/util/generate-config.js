@@ -10,9 +10,15 @@ const _ = require("lodash");
 const logger = require("electrode-archetype-react-app/lib/logger");
 
 function isWebpackDirectlyControlled() {
-  const customFilePath = Path.join(process.cwd(), "webpack.config.js");
-  logger.info(`Webpack directly controlled by the App from ${customFilePath}`);
-  return Fs.existsSync(customFilePath);
+  let isDirectlyControlled = false;
+  if (process.env.USE_APP_WEBPACK_CONFIG === "true") {
+    const customFilePath = Path.join(process.cwd(), "webpack.config.js");
+    logger.info(`Webpack using App profile from ${customFilePath}`);
+    isDirectlyControlled = Fs.existsSync(customFilePath);
+  } else {
+    logger.info("Webpack using Archetype profile");
+  }
+  return isDirectlyControlled;
 }
 
 /* eslint-disable max-statements */

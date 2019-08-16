@@ -143,14 +143,32 @@ function removeLogFiles() {
 }
 
 function setWebpackProfile(profile) {
-  process.env.ELECTRODE_WEBPACK_PROFILE = profile || "production";
-  logger.info(`Electrode Webpack Profile set to ${process.env.ELECTRODE_WEBPACK_PROFILE}`);
+  if (process.env.USE_APP_WEBPACK_CONFIG === "true") {
+    process.env.ELECTRODE_WEBPACK_PROFILE = profile || "production";
+    logger.info(`Electrode Webpack Profile set to ${process.env.ELECTRODE_WEBPACK_PROFILE}`);
+  }
 }
 
 function checkForCustomWebpackConfig(defaultFile) {
   const customFilePath = Path.join(process.cwd(), "webpack.config.js");
-  const webpackConfigFile = Fs.existsSync(customFilePath) ? customFilePath : webpackConfig(defaultFile);
-  return webpackConfigFile;
+  const archetypeFilePath = webpackConfig(defaultFile);
+  const canUseAppProfile = process.env.USE_APP_WEBPACK_CONFIG === "true" && Fs.existsSync(customFilePath);
+
+  return canUseAppProfile ? customFilePath : archetypeFilePath;
+}
+
+function buildDistExecOptions(event) {
+  setWebpackProfile();
+  return { env: { ENV_TARGET: event } };
+}
+
+function webpackSetAppProfile() {
+  process.env.USE_APP_WEBPACK_CONFIG = "true";
+}
+
+function webpackSetArchetypeProfile() {
+  process.env.USE_APP_WEBPACK_CONFIG = "false";
+  process.env.ELECTRODE_WEBPACK_PROFILE = "";
 }
 
 /*
@@ -414,6 +432,8 @@ function makeTasks(xclap) {
     ".static-files-env": () => setStaticFilesEnv(),
     ".optimize-stats": () => setOptimizeStats(),
     ".remove-log-files": () => removeLogFiles(),
+    ".webpack-app-profile": () => webpackSetAppProfile(),
+    ".webpack-archetype-profile": () => webpackSetArchetypeProfile(),
     build: {
       dep: [".remove-log-files", ".production-env", ".set.css-module.env"],
       desc: AppMode.isSrc
@@ -515,7 +535,7 @@ function makeTasks(xclap) {
             ],
             {
               xclap: { delayRunMs: index * 2000 },
-              execOptions: { env: { ELECTRODE_WEBPACK_PROFILE: "production", ENV_TARGET: name } }
+              execOptions: buildDistExecOptions(name)
             }
           )
         )

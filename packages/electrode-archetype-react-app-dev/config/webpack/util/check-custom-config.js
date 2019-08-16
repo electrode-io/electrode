@@ -6,9 +6,10 @@ const archetype = require("electrode-archetype-react-app/config/archetype");
 
 function checkForCustomWebpackConfig(reqConfigFile) {
   const customFilePath = Path.join(process.cwd(), "webpack.config.js");
-  const defaultFile = reqConfigFile || Path.join(archetype.config.webpack, "webpack.config.js");
+  const archetypeFilePath = reqConfigFile || Path.join(archetype.config.webpack, "webpack.config.js");
+  const canUseAppProfile = process.env.USE_APP_WEBPACK_CONFIG === "true" && Fs.existsSync(customFilePath);
 
-  return Fs.existsSync(customFilePath) ? customFilePath : defaultFile;
+  return canUseAppProfile ? customFilePath : archetypeFilePath;
 }
 
 module.exports = checkForCustomWebpackConfig;
