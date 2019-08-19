@@ -18,6 +18,7 @@ const defaultOptimizeCssOptions = {
     zindex: false
   }
 };
+const options = (userConfig && userConfig.options) || {};
 
 const webpackConfigSpec = {
   devHostname: { env: ["WEBPACK_HOST", "WEBPACK_DEV_HOST"], default: "localhost" },
@@ -73,7 +74,7 @@ const karmaConfigSpec = {
 };
 
 const babelConfigSpec = {
-  enableTypeScript: { env: "ENABLE_BABEL_TYPESCRIPT", default: false },
+  enableTypeScript: { env: "ENABLE_BABEL_TYPESCRIPT", default: options.typescript || false },
   enableDynamicImport: { env: "ENABLE_DYNAMIC_IMPORT", default: false },
   enableFlow: { env: "ENABLE_BABEL_FLOW", default: true },
   // require the @flow directive in source to enable FlowJS type stripping
@@ -106,6 +107,12 @@ const babelConfigSpec = {
 const topConfigSpec = {
   devOpenBrowser: { env: "ELECTRODE_DEV_OPEN_BROWSER", default: false }
 };
+const typeScriptOption =
+  options.typescript === false
+    ? {
+        babel: { enableTypeScript: options.typescript }
+      }
+    : {};
 
 const config = {
   devDir,
@@ -131,7 +138,7 @@ const config = {
 };
 
 module.exports = Object.assign(
-  config,
+  _.merge(config, typeScriptOption),
   xenvConfig(topConfigSpec, _.pick(userConfig, Object.keys(topConfigSpec)), { merge })
 );
 module.exports.babel.hasMultiTargets =

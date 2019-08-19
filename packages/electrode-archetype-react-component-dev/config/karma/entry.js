@@ -9,10 +9,14 @@
  */
 /*globals window:false*/
 var chai = require("chai");
-var sinonChai = require("sinon-chai");
 var chaiShallowly = require("chai-shallowly");
 var Enzyme = require("enzyme");
 var Adapter = require("enzyme-adapter-react-16");
+try {
+  var sinonChai = require("sinon-chai");
+} catch (error) {
+  console.warn("could not load sinon-chai - archetype config sinon set to false ");
+}
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -21,7 +25,11 @@ Enzyme.configure({ adapter: new Adapter() });
  * with existing test suites. However, this will be
  * removed in the future and is being tracked by
  */
-window.sinon = require("sinon");
+try {
+  window.sinon = require("sinon");
+} catch (error) {
+  console.warn("could not load sinon - archetype config sinon set to false ");
+}
 
 // --------------------------------------------------------------------------
 // Chai / Sinon / Mocha configuration.
@@ -30,7 +38,9 @@ window.sinon = require("sinon");
 window.expect = chai.expect;
 
 // Plugins
-chai.use(sinonChai);
+if (sinonChai) {
+  chai.use(sinonChai);
+}
 chai.use(chaiShallowly);
 
 // Mocha (part of static include).

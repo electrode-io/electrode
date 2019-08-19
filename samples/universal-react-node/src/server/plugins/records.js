@@ -36,7 +36,7 @@ plugin.register = function (server, options, next) {
         if (!doc) {
           return reply("No Record Found");
         }
-        const responseString = doc.map((record) => JSON.stringify(record)).toString();
+        const responseString = doc.map(record => JSON.stringify(record)).toString();
         reply(responseString);
       });
     }
@@ -51,7 +51,7 @@ plugin.register = function (server, options, next) {
       //Create an id
       record._id = uuidV1();
 
-      db.records.save(record, (err) => { // eslint-disable-line consistent-return
+      db.records.save(record, err => { // eslint-disable-line consistent-return
         if (err) {
           console.log(err); // eslint-disable-line no-console
           return reply("Internal MongoDB error");

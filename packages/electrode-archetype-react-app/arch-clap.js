@@ -7,7 +7,7 @@ const Path = require("path");
 const assert = require("assert");
 const requireAt = require("require-at");
 const archetype = require("./config/archetype");
-
+const optionalRequire = require("optional-require")(require);
 // make sure that -dev app archetype is also installed.
 // if it's not then this will fail with an error message that it's not found.
 require.resolve(`${archetype.devArchetypeName}/package.json`);
@@ -39,8 +39,8 @@ const shell = xsh.$;
 const exec = xsh.exec;
 const mkCmd = xsh.mkCmd;
 
-const penthouse = archetype.devRequire("penthouse");
-const CleanCSS = archetype.devRequire("clean-css");
+const penthouse = optionalRequire("penthouse");
+const CleanCSS = optionalRequire("clean-css");
 
 const logger = require("./lib/logger");
 
@@ -255,12 +255,12 @@ function inlineCriticalCSS() {
   const PORT = process.env.PORT || 3000;
   const PATH = process.env.CRITICAL_PATH || "/";
   const url = `http://${HOST}:${PORT}${PATH}`;
-  const statsPath = Path.resolve(process.cwd(), "dist/server/stats.json");
+  const statsPath = Path.resolve("dist/server/stats.json");
   const stats = JSON.parse(Fs.readFileSync(statsPath));
   const cssAsset = stats.assets.find(asset => asset.name.endsWith(".css"));
-  const cssAssetPath = Path.resolve(process.cwd(), `dist/js/${cssAsset.name}`);
-  const targetPath = Path.resolve(process.cwd(), "dist/js/critical.css");
-  const serverPromise = require(Path.resolve(process.cwd(), `${archetype.AppMode.src.server}/index.js`))();
+  const cssAssetPath = Path.resolve(`dist/js/${cssAsset.name}`);
+  const targetPath = Path.resolve("dist/js/critical.css");
+  const serverPromise = require(Path.resolve(`${archetype.AppMode.src.server}/index.js`))();
   const penthouseOptions = {
     url,
     css: cssAssetPath,
@@ -309,9 +309,9 @@ function generateBrowsersListRc() {
   const destnRc = Path.join(destnDir, configRcFile);
   if (Fs.existsSync(destnRc)) {
     const existingConfig = Fs.readFileSync(destnRc, "utf8");
-    const anyCustomProps = existingConfig && existingConfig.split("\n").filter(
-      x => x && x[0] !== "#" && !browserConfig.list.includes(x)
-    );
+    const anyCustomProps =
+      existingConfig &&
+      existingConfig.split("\n").filter(x => x && x[0] !== "#" && !browserConfig.list.includes(x));
     if (anyCustomProps && anyCustomProps.length) {
       logger.info(
         `You've a custom ${configRcFile} config file already.
@@ -512,9 +512,7 @@ function makeTasks(xclap) {
       );
     },
     "ss-prod-react": {
-      desc: `Make optimized copy of react&react-dom for server side in dir ${
-        archetype.prodModulesDir
-      }`,
+      desc: `Make optimized copy of react&react-dom for server side in dir ${archetype.prodModulesDir}`,
       dep: [".ss-clean.prod-react", ".mk-prod-dir"],
       task: xclap.concurrent(".ss-prod-react", ".ss-prod-react-dom")
     },
@@ -814,44 +812,6 @@ Individual .babelrc files were generated for you in src/client and src/server
       task: ["build-dev-static", "app-server"]
     },
 
-    lint: xclap.concurrent("lint-client", "lint-client-test", "lint-server", "lint-server-test"),
-    "lint-client": {
-      desc: "Run eslint on client code in directories client and templates",
-      task: () =>
-        lint({
-          ext: ".js,.jsx",
-          config: eslintConfig(".eslintrc-react"),
-          targets: [AppMode.src.client, "templates"]
-        })
-    },
-    "lint-client-test": {
-      desc: "Run eslint on client test code in directory test/client",
-      task: () =>
-        lint({
-          ext: ".js,.jsx",
-          config: eslintConfig(".eslintrc-react-test"),
-          targets: ["test/client"]
-        })
-    },
-    "lint-server": {
-      desc: "Run eslint on server code in directory server",
-      task: () =>
-        lint({
-          config: eslintConfig(".eslintrc-node"),
-          targets: [AppMode.src.server]
-        })
-    },
-    "lint-server-test": {
-      desc: "Run eslint on server test code in directories test/server and test/func",
-      task: () =>
-        lint({
-          config: process.env.SERVER_ES6
-            ? eslintConfig(".eslintrc-mocha-test-es6")
-            : eslintConfig(".eslintrc-mocha-test"),
-          targets: ["test/server", "test/func"]
-        })
-    },
-
     "npm:test": ["check"],
     "npm:release": mapIsomorphicCdn,
 
@@ -992,7 +952,7 @@ Individual .babelrc files were generated for you in src/client and src/server
       ".build.test.client.babelrc",
       ".build.test.server.babelrc",
       "?.karma.test-frontend-cov",
-      ".jest.test-frontend-cov",
+      "?.jest.test-frontend-cov",
       "test-server-cov"
     ].filter(x => x),
     "test-dev": ["test-frontend-dev", "test-server-dev"],
@@ -1004,57 +964,9 @@ Individual .babelrc files were generated for you in src/client and src/server
 
     "test-frontend": ["?.karma.test-frontend"],
     "test-frontend-ci": ["?.karma.test-frontend-ci"],
-
-    ".jest.test-frontend-cov": () => {
-      const testDir = ["_test_", "__test__", "__tests__"].find(x => shell.test("-d", x));
-      let runJest = testDir;
-      if (!runJest) {
-        runJest =
-          scanDir.sync({
-            dir: Path.resolve(AppMode.src.dir),
-            filterExt: [".js", ".jsx", ".ts", ".tsx"],
-            filter: x => x.indexOf(".spec.") > 0 || x.indexOf(".test.") > 0
-          }).length > 0;
-      }
-
-      if (!runJest) {
-        const { roots } = archetype.jest;
-        runJest = roots && roots.length > 0;
-      }
-
-      if (runJest) {
-        makeBabelRc(Path.join(testDir, "client"), "babelrc-client.js");
-        logger.info("Running jest unit tests");
-        return mkCmd(`~$jest`, `--config ${archetype.config.jest}/jest.config.js`);
-      } else {
-        return undefined;
-      }
-    },
     "test-frontend-dev": ["?.karma.test-frontend-dev"],
 
     "test-frontend-dev-watch": ["?.karma.test-frontend-dev-watch"],
-
-    "test-server-cov": () => {
-      if (shell.test("-d", "test/server")) {
-        AppMode.setEnv(AppMode.src.dir);
-        return mkCmd(
-          `~$istanbul cover --include-all-sources --root src/server`,
-          `--report text --report lcov node_modules/mocha/bin/_mocha`,
-          `-- -c --opts`,
-          quote(mochaConfig("mocha.opts")),
-          `test/server`
-        );
-      }
-      return undefined;
-    },
-
-    "test-server-dev": () => {
-      if (shell.test("-d", "test/server")) {
-        AppMode.setEnv(AppMode.src.dir);
-        return mkCmd(`~$mocha -c --opts`, quote(mochaConfig("mocha.opts")), `test/server`);
-      }
-      return undefined;
-    },
 
     "build-analyze": {
       dep: [".optimize-stats"],
@@ -1063,7 +975,15 @@ Individual .babelrc files were generated for you in src/client and src/server
     },
     "critical-css": {
       desc: "Start server and run penthouse to output critical CSS",
-      task: inlineCriticalCSS
+      task: () => {
+        if (penthouse && CleanCSS) {
+          inlineCriticalCSS();
+        } else {
+          const error =
+            "Please ensure `options.criticalCSS = true` in your `archetype/config.js` or `archetype/config/index.js`, then reinstall your dependencies";
+          throw new Error(`Missing Dependencies\n${error}`);
+        }
+      }
     },
     "generate-service-worker": {
       desc:
@@ -1107,7 +1027,8 @@ Individual .babelrc files were generated for you in src/client and src/server
       task: mkCmd(`flow-typed install --packageDir ${archetype.devDir}`)
     },
     "generate-browsers-listrc": {
-      desc: "Generate .browserlistrc config file, it's used by Browserlist for AutoPrefixer/PostCSS",
+      desc:
+        "Generate .browserlistrc config file, it's used by Browserlist for AutoPrefixer/PostCSS",
       task: () => generateBrowsersListRc()
     }
   };
@@ -1141,6 +1062,64 @@ Individual .babelrc files were generated for you in src/client and src/server
         }
       },
       "copy-dll": () => shell.cp("-r", "dll/*", "dist")
+    });
+  }
+
+  if (archetype.options.eslint !== false) {
+    Object.assign(tasks, {
+      lint: xclap.concurrent("lint-client", "lint-client-test", "lint-server", "lint-server-test"),
+      "lint-client": {
+        desc: "Run eslint on client code in directories client and templates",
+        task: () =>
+          lint({
+            ext: ".js,.jsx",
+            config: eslintConfig(".eslintrc-react"),
+            targets: [AppMode.src.client, "templates"]
+          })
+      },
+      "lint-client-test": {
+        desc: "Run eslint on client test code in directory test/client",
+        task: () =>
+          lint({
+            ext: ".js,.jsx",
+            config: eslintConfig(".eslintrc-react-test"),
+            targets: ["test/client"]
+          })
+      },
+      "lint-server": {
+        desc: "Run eslint on server code in directory server",
+        task: () =>
+          lint({
+            config: eslintConfig(".eslintrc-node"),
+            targets: [AppMode.src.server]
+          })
+      },
+      "lint-server-test": {
+        desc: "Run eslint on server test code in directories test/server and test/func",
+        task: () =>
+          lint({
+            config: process.env.SERVER_ES6
+              ? eslintConfig(".eslintrc-mocha-test-es6")
+              : eslintConfig(".eslintrc-mocha-test"),
+            targets: ["test/server", "test/func"]
+          })
+      }
+    });
+  } else {
+    Object.assign(tasks, {
+      lint: () => {
+        logger.info("Disabling ESLint tasks since archetype config options.eslint === false");
+      },
+      "lint-server": () => {
+        logger.info(
+          "Disabling ESLint task 'lint-server' since archetype config options.eslint === false"
+        );
+      },
+      "lint-server-test": () => {
+        logger.info(
+          "Disabling ESLint task 'lint-server-test' since archetype config options.eslint === false"
+        );
+      }
     });
   }
 
@@ -1198,6 +1177,78 @@ Individual .babelrc files were generated for you in src/client and src/server
       ".karma.test-frontend-cov": karmaTasksDisabled,
       ".karma.test-frontend-dev": karmaTasksDisabled,
       ".karma.test-frontend-dev-watch": karmaTasksDisabled
+    });
+  }
+  if (archetype.options.jest !== false) {
+    Object.assign(tasks, {
+      ".jest.test-frontend-cov": () => {
+        const testDir = ["_test_", "__test__", "__tests__"].find(x => shell.test("-d", x));
+        let runJest = testDir;
+        if (!runJest) {
+          runJest =
+            scanDir.sync({
+              dir: Path.resolve(AppMode.src.dir),
+              filterExt: [".js", ".jsx", ".ts", ".tsx"],
+              filter: x => x.indexOf(".spec.") > 0 || x.indexOf(".test.") > 0
+            }).length > 0;
+        }
+
+        if (!runJest) {
+          const { roots } = archetype.jest;
+          runJest = roots && roots.length > 0;
+        }
+
+        if (runJest) {
+          if (testDir) {
+            makeBabelRc(Path.join(testDir, "client"), "babelrc-client.js");
+          }
+          logger.info("Running jest unit tests");
+          return mkCmd(`~$jest`, `--config ${archetype.config.jest}/jest.config.js`);
+        } else {
+          return undefined;
+        }
+      }
+    });
+  } else {
+    logger.info("Disabling jest test tasks since archetype config options.jest === false");
+  }
+
+  if (archetype.options.mocha !== false) {
+    Object.assign(tasks, {
+      "test-server-cov": () => {
+        if (shell.test("-d", "test/server")) {
+          AppMode.setEnv(AppMode.src.dir);
+          return mkCmd(
+            `~$istanbul cover --include-all-sources --root src/server`,
+            `--report text --report lcov node_modules/mocha/bin/_mocha`,
+            `-- -c --opts`,
+            quote(mochaConfig("mocha.opts")),
+            `test/server`
+          );
+        }
+        return undefined;
+      },
+
+      "test-server-dev": () => {
+        if (shell.test("-d", "test/server")) {
+          AppMode.setEnv(AppMode.src.dir);
+          return mkCmd(`~$mocha -c --opts`, quote(mochaConfig("mocha.opts")), `test/server`);
+        }
+        return undefined;
+      }
+    });
+  } else {
+    Object.assign(tasks, {
+      "test-server-cov": () => {
+        logger.info(
+          "Disabling Mocha task 'test-server-cov', since archetype config options.mocha === false"
+        );
+      },
+      "test-server-dev": () => {
+        logger.info(
+          "Disabling Mocha task 'test-server-dev', since archetype config options.mocha === false"
+        );
+      }
     });
   }
 

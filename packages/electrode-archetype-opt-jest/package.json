@@ -1,7 +1,7 @@
 {
-  "name": "electrode-archetype-opt-css-module",
+  "name": "electrode-archetype-opt-jest",
   "version": "0.0.1",
-  "description": "Electrode CSS Module Optional Archetype",
+  "description": "Electrode NodeJS/React Optional Archetype JEST",
   "main": "optional-check.js",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -11,31 +11,24 @@
   "bugs": {
     "url": "https://github.com/electrode-io/electrode/issues"
   },
-  "license": "Apache-2.0",
-  "scripts": {
-    "test": "echo OK",
-    "coverage": "echo OK",
-    "preinstall": "node optional-check.js",
-    "prepare": "cp node_modules/opt-archetype-check/optional-check.js ."
-  },
   "files": [
     "optional-check.js"
   ],
+  "license": "Apache-2.0",
+  "scripts": {
+    "preinstall": "node optional-check.js",
+    "prepare": "cp node_modules/opt-archetype-check/optional-check.js ."
+  },
   "dependencies": {
-    "babel-plugin-react-css-modules": "^3.4.2",
-    "postcss-import": "^9.1.0",
-    "postcss-loader": "^3.0.0",
-    "postcss-nested": "^3.0.0",
-    "postcss-preset-env": "^5.3.0",
-    "postcss-scss": "^1.0.6"
+    "babel-jest": "^23.6.0",
+    "jest": "^23.5.0"
   },
   "devDependencies": {
     "opt-archetype-check": "../opt-archetype-check"
   },
   "electrodeOptArchetype": {
-    "optionalTagName": "cssModule",
+    "optionalTagName": "jest",
     "expectTag": true,
     "defaultInstall": true
-  },
-  "private": true
+  }
 }

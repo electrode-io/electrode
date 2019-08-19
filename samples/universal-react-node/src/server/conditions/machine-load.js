@@ -26,7 +26,7 @@ const DEFAULT_LOAD_THRESHOLD = 4;
 const DEFAULT_MEM_THRESHOLD = 0.8;
 
 /* eslint no-magic-numbers: [2, {"ignore": [-1, 0, 1]}] */
-module.exports = (_opts) => {
+module.exports = _opts => {
   return function machineLoadCondition(request, reply) {
     // Check server load, disable if too high
     const numCpus = machine.numCpus();

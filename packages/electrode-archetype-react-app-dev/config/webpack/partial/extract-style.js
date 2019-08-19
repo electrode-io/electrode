@@ -1,22 +1,36 @@
 "use strict";
 
+/* eslint-disable max-statements */
+
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const Path = require("path");
+
+const { getOptArchetypeRequire } = require("../../../lib/utils");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
-const atImport = require("postcss-import");
-const postcssPresetEnv = require("postcss-preset-env");
-
 const autoprefixer = require("autoprefixer");
 const cssLoader = require.resolve("css-loader");
 const stylusLoader = require.resolve("stylus-relative-loader");
-const postcssLoader = require.resolve("postcss-loader");
 const lessLoader = require.resolve("less-loader");
-const isDevelopment = process.env.NODE_ENV !== "production";
+
+function loadPostCss() {
+  const cssModuleRequire = getOptArchetypeRequire("electrode-archetype-opt-postcss");
+  if (!cssModuleRequire) {
+    return { hasPostCss: false };
+  }
+
+  const atImport = cssModuleRequire("postcss-import");
+  const postcssPresetEnv = cssModuleRequire("postcss-preset-env");
+  const postcssLoader = cssModuleRequire.resolve("postcss-loader");
+
+  return { hasPostCss: true, atImport, postcssPresetEnv, postcssLoader };
+}
 
 /*
+ * CSS file type and support detection logic
+ *
  * cssModuleSupport: false
  *
  * - *.css => normal CSS
@@ -35,167 +49,145 @@ const isDevelopment = process.env.NODE_ENV !== "production";
  * - *no* *.css (but *.styl or *.scss) => cssModuleSupport sets to false
  */
 
-const cssModuleSupport = archetype.webpack.cssModuleSupport;
-const cssModuleStylusSupport = archetype.webpack.cssModuleStylusSupport;
-
-const rules = [];
-
-/*
- * css Loader
- */
-const cssQuery = {
-  loader: cssLoader,
-  options: {
-    minimize: true
-  }
-};
-
-/*
- * css-modules Loader
- */
-const getCSSModuleOptions = () => {
-  const enableShortenCSSNames = archetype.webpack.enableShortenCSSNames;
-  const enableShortHash = process.env.NODE_ENV === "production" && enableShortenCSSNames;
-  const localIdentName = `${enableShortHash ? "" : "[name]__[local]___"}[hash:base64:5]`;
-
-  return {
-    context: Path.resolve("src"),
-    modules: true,
-    localIdentName
-  };
-};
-
-const cssModuleQuery = {
-  loader: cssLoader,
-  options: getCSSModuleOptions()
-};
-
-/*
- * postcss Loader
- *
- * Note:
- * - webpack requires an identifier (ident) in options
- * when {Function}/require is used (Complex Options).
- */
-const postcssQuery = {
-  loader: postcssLoader,
-  options: {
-    ident: "postcss",
-    plugins: loader => [
-      autoprefixer(),
-      atImport({ root: loader.resourcePath }),
-      postcssPresetEnv()
-    ]
-  }
-};
-
-/*
- * sass Loader
- */
-const getSassLoader = () => {
-  if (archetype.options.sass) {
-    const sassLoader = require.resolve("sass-loader");
-    return sassLoader;
-  }
-  return "";
-};
-
-const sassQuery = {
-  loader: getSassLoader()
-};
-
-/*
- * stylus Loader
- */
-const stylusQuery = {
-  loader: stylusLoader
-};
-
-const stylusRules = {
-  _name: `extract${cssModuleSupport ? "-css" : ""}-stylus`,
-  test: /\.styl$/,
-  use: [
-    {
-      loader: MiniCssExtractPlugin.loader,
-      options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
-    },
-    ...(cssModuleSupport
-      ? [cssModuleQuery, postcssQuery, stylusQuery]
-      : [cssQuery, postcssQuery, stylusQuery])
-  ]
-};
-
-const lessQuery = {
-  loader: lessLoader
-};
-
-const lessRules = {
-  _name: `extract${cssModuleSupport ? "-css" : ""}-less`,
-  test: /\.less$/,
-  use: [
-    {
-      loader: MiniCssExtractPlugin.loader,
-      options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
-    },
-    ...(cssModuleSupport
-      ? [cssModuleQuery, postcssQuery, lessQuery]
-      : [cssQuery, postcssQuery, lessQuery])
-  ]
-};
-
 module.exports = function() {
+  const isProduction = process.env.NODE_ENV === "production";
+  const isDevelopment = !isProduction;
+
+  const { hasPostCss, atImport, postcssPresetEnv, postcssLoader } = loadPostCss();
+
+  const cssModuleSupport = hasPostCss && archetype.webpack.cssModuleSupport;
+  const cssModuleStylusSupport = hasPostCss && archetype.webpack.cssModuleStylusSupport;
+
+  const rules = [];
+
+  /*
+   * postcss Loader
+   *
+   * Note:
+   * - webpack requires an identifier (ident) in options
+   * when {Function}/require is used (Complex Options).
+   */
+  const getPostcssQuery = () =>
+    hasPostCss && {
+      loader: postcssLoader,
+      options: {
+        ident: "postcss",
+        plugins: loader => [
+          autoprefixer(),
+          atImport({ root: loader.resourcePath }),
+          postcssPresetEnv()
+        ]
+      }
+    };
+
+  /*
+   * css-modules Loader
+   */
+  const getCSSModuleOptions = () => {
+    const enableShortenCSSNames = archetype.webpack.enableShortenCSSNames;
+    const enableShortHash = isProduction && enableShortenCSSNames;
+    const localIdentName = `${enableShortHash ? "" : "[name]__[local]___"}[hash:base64:5]`;
+
+    return {
+      context: Path.resolve("src"),
+      modules: true,
+      localIdentName
+    };
+  };
+
+  const cssQueryUse = [
+    cssModuleSupport
+      ? { loader: cssLoader, options: getCSSModuleOptions() }
+      : { loader: cssLoader, options: { minimize: true } },
+    getPostcssQuery()
+  ].filter(x => x);
+
+  /*
+   * sass Loader
+   */
+  const getSassLoader = () => {
+    if (archetype.options.sass) {
+      const sassLoader = require.resolve("sass-loader");
+      return sassLoader;
+    }
+    return "";
+  };
+
+  const namePrefix = `extract-css${cssModuleSupport ? "-modules" : ""}`;
+
   rules.push({
-    _name: `extract-css${cssModuleSupport ? "-modules" : ""}`,
+    _name: namePrefix,
     test: /\.css$/,
     use: [
       {
         loader: MiniCssExtractPlugin.loader,
         options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
       },
-      ...(cssModuleSupport ? [cssModuleQuery, postcssQuery] : [cssQuery, postcssQuery])
+      ...cssQueryUse
     ]
   });
 
   if (archetype.options.sass) {
     rules.push({
-      _name: `extract${cssModuleSupport ? "-css" : ""}-scss`,
+      _name: `${namePrefix}-scss`,
       test: /\.(scss|sass)$/,
       use: [
         {
           loader: MiniCssExtractPlugin.loader,
           options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
         },
-        ...(cssModuleSupport
-          ? [cssModuleQuery, postcssQuery, sassQuery]
-          : [cssQuery, postcssQuery, sassQuery])
+        ...cssQueryUse.concat({ loader: getSassLoader() })
       ]
     });
   }
 
-  rules.push(stylusRules);
+  // stylus query
+  const stylusQuery = { loader: stylusLoader };
+
+  rules.push({
+    _name: `${namePrefix}-stylus`,
+    test: /\.styl$/,
+    use: [
+      {
+        loader: MiniCssExtractPlugin.loader,
+        options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
+      },
+      ...cssQueryUse.concat(stylusQuery)
+    ]
+  });
 
   /*
    *** cssModuleStylusSupport flag is about to deprecate. ***
    * If you want to enable stylus with CSS-Modules + CSS-Next,
    * Please use stylus as your style and enable cssModuleSupport flag instead.
    */
-  if (cssModuleStylusSupport) {
+  if (!cssModuleSupport && cssModuleStylusSupport && hasPostCss) {
     rules.push({
-      _name: "extract-css-stylus",
+      _name: "extract-css-stylus-modules",
       test: /\.styl$/,
       use: [
         {
           loader: MiniCssExtractPlugin.loader,
           options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
         },
-        cssModuleQuery,
-        postcssQuery,
+        { loader: cssLoader, options: getCSSModuleOptions() },
+        getPostcssQuery(),
         stylusQuery
       ]
     });
   }
 
-  rules.push(lessRules);
+  rules.push({
+    _name: `${namePrefix}-less`,
+    test: /\.less$/,
+    use: [
+      {
+        loader: MiniCssExtractPlugin.loader,
+        options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
+      },
+      ...cssQueryUse.concat({ loader: lessLoader })
+    ]
+  });
 
   return {
     module: { rules },
@@ -203,13 +195,10 @@ module.exports = function() {
       new MiniCssExtractPlugin({
         filename: archetype.babel.hasMultiTargets ? "[name].style.css" : "[name].style.[hash].css"
       }),
-      process.env.NODE_ENV === "production" &&
-        new OptimizeCssAssetsPlugin(archetype.webpack.optimizeCssOptions),
+      isProduction && new OptimizeCssAssetsPlugin(archetype.webpack.optimizeCssOptions),
       new webpack.LoaderOptionsPlugin({
         minimize: true,
-        options: {
-          context: Path.resolve("src")
-        }
+        options: { context: Path.resolve("src") }
       })
     ].filter(x => !!x)
   };

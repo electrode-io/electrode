@@ -1,0 +1,36 @@
+{
+  "name": "electrode-archetype-opt-critical-css",
+  "version": "0.0.1",
+  "description": "Electrode Critical CSS Optional Archetype",
+  "main": "optional-check.js",
+  "homepage": "http://www.electrode.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electrode-io/electrode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/electrode-io/electrode/issues"
+  },
+  "license": "Apache-2.0",
+  "scripts": {
+    "test": "echo OK",
+    "coverage": "echo OK",
+    "preinstall": "node optional-check.js",
+    "prepare": "cp node_modules/opt-archetype-check/optional-check.js ."
+  },
+  "files": [
+    "optional-check.js"
+  ],
+  "dependencies": {
+    "clean-css": "^4.2.1",
+    "penthouse": "^2.2.0"
+  },
+  "devDependencies": {
+    "opt-archetype-check": "../opt-archetype-check"
+  },
+  "electrodeOptArchetype": {
+    "optionalTagName": "criticalCSS",
+    "expectTag": true,
+    "defaultInstall": true
+  }
+}

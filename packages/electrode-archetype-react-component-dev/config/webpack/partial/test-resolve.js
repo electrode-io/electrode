@@ -2,7 +2,8 @@
 
 const Path = require("path");
 // const prodCfg = require("../webpack.config");
-const sinonPkg = require.resolve("sinon/pkg/sinon");
+const optionalRequire = require("optional-require")(require);
+const sinonPkg = optionalRequire.resolve("sinon/pkg/sinon");
 const _ = require("lodash");
 
 module.exports = function() {
@@ -18,7 +19,7 @@ module.exports = function() {
       alias: {
         // Allow root import of `src/FOO` from ROOT/src.
         src: Path.resolve("src"),
-        sinon: sinonPkg
+        sinon: sinonPkg || ""
       },
       modules: [
         process.cwd(),

@@ -14,7 +14,7 @@ plugin.register = function (server, options, next) {
       fs.writeFile(path.join(process.cwd(), "data/storage.json"),
         JSON.stringify(request.payload),
         "utf-8",
-        (err) => {
+        err => {
           if (err) {
             reply("Write Error").code(HTTP_ISE);
           } else {

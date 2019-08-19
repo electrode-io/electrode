@@ -102,7 +102,7 @@ function optionalArchetypeCheck() {
     //
     // check if app's package.json has the package in its dependencies or optionalDependencies
     //
-    const appDep = ["dependencies", "optionalDependencies"].find(
+    const appDep = ["dependencies", "devDependencies", "optionalDependencies"].find(
       x => appPkg[x] && appPkg[x].hasOwnProperty(myName)
     );
 
@@ -124,14 +124,13 @@ function optionalArchetypeCheck() {
       }
     }
 
-    if (defaultInstall === true) {
-      return done(true, `No optional flag specified for package ${myName} - default to installing`);
-    }
-
     //
     // check if app's archetype/config/index.js options specify the feature tag for
     // the package to be installed.
     //
+    if (!options.hasOwnProperty(optionalTagName) && defaultInstall === true) {
+      return done(true, `No optional flag specified for package ${myName} - default to installing`);
+    }
 
     const userConfig = options[optionalTagName];
 

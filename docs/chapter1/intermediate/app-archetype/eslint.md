@@ -1,5 +1,14 @@
 # Eslint Configuration
 
+ESLint is enabled with the following `archetype/config/index.js` configuration:
+```js
+module.exports = {
+  options: {
+    eslint: false
+  }
+};
+```
+
 The app archetype provides eslint configuration files base on [eslint-config-walmart]. The RC files can be found in the `config/eslint` directory of the module `electrode-archetype-react-app-dev`.
 
 Your application's code that serves different purposes will be limited by a specific eslint configuration:

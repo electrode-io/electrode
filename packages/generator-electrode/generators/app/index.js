@@ -11,6 +11,7 @@ const extend = _.merge;
 const parseAuthor = require("parse-author");
 const githubUsername = require("github-username");
 const Fs = require("fs");
+const shell = require("shelljs");
 
 const ExpressJS = "ExpressJS";
 const HapiJS = "HapiJS";
@@ -250,6 +251,62 @@ module.exports = class extends Generator {
         message: "Would you like to generate .flowconfig for flow usage?",
         when: this.props.flow === undefined,
         default: false
+      },
+      {
+        type: "confirm",
+        name: "optCriticalCSS",
+        message: "Would you like to enable critical CSS?",
+        when: this.props.optCriticalCSS === undefined,
+        default: true
+      },
+      {
+        type: "confirm",
+        name: "optCssModule",
+        message: "Would you like to enable support for CSS Module (requires postcss)?",
+        when: this.props.optCssModule === undefined,
+        default: true
+      },
+      {
+        type: "confirm",
+        name: "optPostCss",
+        message: "Would you like to enable postcss for processing CSS?",
+        when: this.props.optPostCss === undefined,
+        default: true
+      },
+      {
+        type: "confirm",
+        name: "optJest",
+        message: "Would you like to use jest for unit tests?",
+        when: this.props.optJest === undefined,
+        default: true
+      },
+      {
+        type: "confirm",
+        name: "optMocha",
+        message: "Would you like to use mocha?",
+        when: this.props.optMocha === undefined,
+        default: true
+      },
+      {
+        type: "confirm",
+        name: "optTypescript",
+        message: "Would you like to use typescript?",
+        when: this.props.optTypescript === undefined,
+        default: true
+      },
+      {
+        type: "confirm",
+        name: "optSinon",
+        message: "Would you like to use sinon?",
+        when: this.props.optSinon === undefined,
+        default: true
+      },
+      {
+        type: "confirm",
+        name: "optEslint",
+        message: "Would you like to use eslint?",
+        when: this.props.optEslint === undefined,
+        default: true
       }
     ];
 
@@ -288,7 +345,9 @@ module.exports = class extends Generator {
     if (!this.isDemoApp) {
       this.log(yosay("Welcome to the phenomenal " + chalk.red("Electrode App") + " generator!"));
     }
-    return this._askFor().then(this._askForGithubAccount.bind(this));
+    return this._askFor()
+      .then(this._askForGithubAccount.bind(this))
+      .then(this._askForOptionalFeatures.bind(this));
   }
 
   writing() {
@@ -448,6 +507,29 @@ module.exports = class extends Generator {
     );
 
     this.fs.copy(this.templatePath("src/client/images"), this.destinationPath("src/client/images"));
+  }
+
+  _askForOptionalFeatures() {
+    // Enable optional packages
+    shell.mkdir("-p", this.destinationPath("archetype/config"));
+    const destConfigFile = this.destinationPath("archetype/config/index.js");
+    const archetypeConfig = {
+      options: {
+        criticalCSS: this.props.optCriticalCSS,
+        jest: this.props.optJest,
+        mocha: this.props.optMocha,
+        typescript: this.props.optTypescript,
+        sinon: this.props.optSinon,
+        eslint: this.props.optEslint,
+        postcss: this.props.optPostCss
+      },
+      webpack: {
+        cssModuleSupport: this.props.optCssModule
+      }
+    };
+
+    const content = `module.exports = ${JSON.stringify(archetypeConfig, null, 2)}`;
+    Fs.writeFileSync(destConfigFile, `${content}\n`);
   }
 
   default() {
