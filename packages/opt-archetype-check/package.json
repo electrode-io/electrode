@@ -4,7 +4,7 @@
   "description": "common code for electrode optional archetype checking",
   "main": "optional-check.js",
   "scripts": {
-    "test": "exit 0"
+    "test": "node test/test1.js"
   },
   "keywords": [],
   "author": "Joel Chen <xchen@walmartlabs.com>",
