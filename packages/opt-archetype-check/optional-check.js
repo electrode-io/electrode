@@ -3,6 +3,20 @@
 const Path = require("path");
 const assert = require("assert");
 
+const isSameMajorVersion = (verA, verB) => {
+  // check for simple semver like x.x.x, ~x.x.x, or ^x.x.x only
+  let majorA = verA.match(/[\~\^]{0,1}(\d+)\.(\d+)\.(\d+)/);
+  if (majorA) {
+    majorA = majorA.slice(1, 4);
+    const majorB = verB.split(".");
+    if (majorB[0] !== majorA[0] || (majorB[0] === "0" && majorB[1] !== majorA[1])) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
 function lookupAppDirByInitCwd() {
   //
   // env INIT_CWD is set by npm to the dir where it started running.
@@ -120,6 +134,16 @@ function optionalArchetypeCheck() {
       }
 
       if (optParams.checkAppDep !== false) {
+        // Try to do a simple major version check.  If they don't match then assume user
+        // is trying install a different one, so fail this copy.
+        const appSemV = appPkg[appDep][myName];
+        if (!isSameMajorVersion(appSemV, myPkg.version)) {
+          return done(
+            false,
+            `Found '${myName}' in your package.json '${appDep}' version '${appSemV}', which is
+different from this copy's major version '${myPkg.version}' - skipping installing this copy.`
+          );
+        }
         return done(true, `Found ${myName} in your package.json ${appDep} - installing.`);
       }
     }
@@ -156,11 +180,13 @@ function optionalArchetypeCheck() {
   }
 }
 
+module.exports = optionalArchetypeCheck;
+
 if (require.main === module) {
   const r = optionalArchetypeCheck();
 
   console.log(r.message);
   process.exit(r.pass ? 0 : 1);
-} else {
-  module.exports = optionalArchetypeCheck;
 }
+
+module.exports.isSameMajorVersion = isSameMajorVersion;
