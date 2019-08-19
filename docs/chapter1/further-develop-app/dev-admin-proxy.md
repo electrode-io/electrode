@@ -99,6 +99,14 @@ const portFromEnv = () => {
   const x = parseInt(process.env.APP_SERVER_PORT || process.env.PORT, 10);
   return x !== null && !isNaN(x) ? x : defaultListenPort;
 };
+
+module.exports = {
+  connections: {
+    default: {
+      port: portFromEnv()
+    }
+  }
+};
 ```
 
 > Latest version of Electrode ignite should generate that for you already.
