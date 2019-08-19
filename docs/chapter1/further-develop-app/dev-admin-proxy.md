@@ -5,6 +5,8 @@
   * [Your application node server](#your-application-node-server)
   * [Dev Admin Console](#dev-admin-console)
   * [Dev Reverse Proxy](#dev-reverse-proxy)
+    + [Up front check list](#up-front-check-list)
+    + [Enable Reverse Proxy](#enable-reverse-proxy)
     + [Persist APP_SERVER_PORT](#persist-app_server_port)
     + [Proxy Admin](#proxy-admin)
     + [Update your server's port](#update-your-servers-port)
