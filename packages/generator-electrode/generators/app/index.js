@@ -257,42 +257,56 @@ module.exports = class extends Generator {
         name: "optCriticalCSS",
         message: "Would you like to enable critical CSS?",
         when: this.props.optCriticalCSS === undefined,
-        default: false
+        default: true
+      },
+      {
+        type: "confirm",
+        name: "optCssModule",
+        message: "Would you like to enable support for CSS Module (requires postcss)?",
+        when: this.props.optCssModule === undefined,
+        default: true
+      },
+      {
+        type: "confirm",
+        name: "optPostCss",
+        message: "Would you like to enable postcss for processing CSS?",
+        when: this.props.optPostCss === undefined,
+        default: true
       },
       {
         type: "confirm",
         name: "optJest",
         message: "Would you like to use jest for unit tests?",
         when: this.props.optJest === undefined,
-        default: false
+        default: true
       },
       {
         type: "confirm",
         name: "optMocha",
         message: "Would you like to use mocha?",
         when: this.props.optMocha === undefined,
-        default: false
+        default: true
       },
       {
         type: "confirm",
         name: "optTypescript",
         message: "Would you like to use typescript?",
         when: this.props.optTypescript === undefined,
-        default: false
+        default: true
       },
       {
         type: "confirm",
         name: "optSinon",
         message: "Would you like to use sinon?",
         when: this.props.optSinon === undefined,
-        default: false
+        default: true
       },
       {
         type: "confirm",
         name: "optEslint",
         message: "Would you like to use eslint?",
         when: this.props.optEslint === undefined,
-        default: false
+        default: true
       }
     ];
 
@@ -496,30 +510,26 @@ module.exports = class extends Generator {
   }
 
   _askForOptionalFeatures() {
-    if (
-      !this.props.optCriticalCSS ||
-      !this.props.optJest ||
-      !this.props.optMocha ||
-      !this.props.optTypescript ||
-      !this.props.optSinon ||
-      !this.props.optEslint
-    ) {
-      // Enable optional packages
-      shell.mkdir("-p", this.destinationPath("archetype/config"));
-      const options = Object.entries({
+    // Enable optional packages
+    shell.mkdir("-p", this.destinationPath("archetype/config"));
+    const destConfigFile = this.destinationPath("archetype/config/index.js");
+    const archetypeConfig = {
+      options: {
         criticalCSS: this.props.optCriticalCSS,
         jest: this.props.optJest,
         mocha: this.props.optMocha,
         typescript: this.props.optTypescript,
         sinon: this.props.optSinon,
-        eslint: this.props.optEslint
-      }).reduce((prev, [k, v]) => {
-        if (!v) prev[k] = v;
-        return prev;
-      }, {});
-      const content = `module.exports = ${JSON.stringify({ options }, null, 2)}`;
-      Fs.writeFileSync(this.destinationPath("archetype/config/index.js"), content);
-    }
+        eslint: this.props.optEslint,
+        postcss: this.props.optPostCss
+      },
+      webpack: {
+        cssModuleSupport: this.props.optCssModule
+      }
+    };
+
+    const content = `module.exports = ${JSON.stringify(archetypeConfig, null, 2)}`;
+    Fs.writeFileSync(destConfigFile, `${content}\n`);
   }
 
   default() {
