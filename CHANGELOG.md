@@ -1,3 +1,170 @@
+# 8/21/2019
+
+## Packages
+
+-   `electrode-archetype-opt-critical-css@1.0.0` `(0.0.2 => 1.0.0)`
+-   `electrode-archetype-opt-eslint@1.0.0` `(0.0.2 => 1.0.0)`
+-   `electrode-archetype-opt-inferno@0.2.8` `(0.2.7 => 0.2.8)`
+-   `electrode-archetype-opt-jest@1.0.0` `(0.0.2 => 1.0.0)`
+-   `electrode-archetype-opt-karma@2.0.2` `(2.0.1 => 2.0.2)`
+-   `electrode-archetype-opt-mocha@1.0.0` `(0.0.2 => 1.0.0)`
+-   `electrode-archetype-opt-postcss@1.0.0` `(0.0.2 => 1.0.0)`
+-   `electrode-archetype-opt-pwa@1.0.3` `(1.0.2 => 1.0.3)`
+-   `electrode-archetype-opt-react@2.0.1` `(2.0.0 => 2.0.1)`
+-   `electrode-archetype-opt-sass@1.0.6` `(1.0.5 => 1.0.6)`
+-   `electrode-archetype-opt-sinon@1.0.0` `(0.0.2 => 1.0.0)`
+-   `electrode-archetype-opt-typescript@1.0.0` `(0.0.2 => 1.0.0)`
+-   `electrode-archetype-react-app@6.5.9` `(6.5.8 => 6.5.9)`
+-   `electrode-archetype-react-app-dev@6.5.9` `(6.5.8 => 6.5.9)`
+-   `electrode-archetype-react-component@6.1.7` `(6.1.6 => 6.1.7)`
+-   `electrode-archetype-react-component-dev@6.1.7` `(6.1.6 => 6.1.7)`
+-   `electrode-ignite@3.0.12` `(3.0.11 => 3.0.12)`
+-   `generator-electrode@5.1.8` `(5.1.7 => 5.1.8)`
+
+## Commits
+
+-   `packages/electrode-archetype-opt-critical-css`
+
+    -   [major] mark new packages for first release [commit](http://github.com/electrode-io/electrode/commit/f4687ff4a59eab258e2b5d87a89773767f9c044a)
+    -   optional check skip if user dep on a diff major version ([#1330](https://github.com/electrode-io/electrode/pull/1330)) [commit](http://github.com/electrode-io/electrode/commit/5345684f2f226580363d9d4d941df7997612c2f6)
+    -   fix optional check [commit](http://github.com/electrode-io/electrode/commit/155b9b83fe7ea2e49e0b3491236e9fc3b74e2fd0)
+    -   formatting files [commit](http://github.com/electrode-io/electrode/commit/aed5bba3410f558555ae7296ee5290390a099506)
+    -   update generated code [commit](http://github.com/electrode-io/electrode/commit/f54b569b282f9f5733877229b1340f38a796b738)
+    -   [feat] make critical CSS optional archetype ([#1306](https://github.com/electrode-io/electrode/pull/1306)) [commit](http://github.com/electrode-io/electrode/commit/c6e56d016d5de3ab3d092029847baf974f3140f7)
+
+-   `packages/electrode-archetype-opt-eslint`
+
+    -   [major] mark new packages for first release [commit](http://github.com/electrode-io/electrode/commit/f4687ff4a59eab258e2b5d87a89773767f9c044a)
+    -   optional check skip if user dep on a diff major version ([#1330](https://github.com/electrode-io/electrode/pull/1330)) [commit](http://github.com/electrode-io/electrode/commit/5345684f2f226580363d9d4d941df7997612c2f6)
+    -   fix optional check [commit](http://github.com/electrode-io/electrode/commit/155b9b83fe7ea2e49e0b3491236e9fc3b74e2fd0)
+    -   formatting files [commit](http://github.com/electrode-io/electrode/commit/aed5bba3410f558555ae7296ee5290390a099506)
+    -   update generated code [commit](http://github.com/electrode-io/electrode/commit/f54b569b282f9f5733877229b1340f38a796b738)
+    -   eslint as an optional archetype ([#1322](https://github.com/electrode-io/electrode/pull/1322)) [commit](http://github.com/electrode-io/electrode/commit/205428bd47551a3f2dfd115c254acb00e16c88d7)
+
+-   `packages/electrode-archetype-opt-inferno`
+
+    -   optional check skip if user dep on a diff major version ([#1330](https://github.com/electrode-io/electrode/pull/1330)) [commit](http://github.com/electrode-io/electrode/commit/5345684f2f226580363d9d4d941df7997612c2f6)
+    -   fix optional check [commit](http://github.com/electrode-io/electrode/commit/155b9b83fe7ea2e49e0b3491236e9fc3b74e2fd0)
+
+-   `packages/electrode-archetype-opt-jest`
+
+    -   [major] mark new packages for first release [commit](http://github.com/electrode-io/electrode/commit/f4687ff4a59eab258e2b5d87a89773767f9c044a)
+    -   optional check skip if user dep on a diff major version ([#1330](https://github.com/electrode-io/electrode/pull/1330)) [commit](http://github.com/electrode-io/electrode/commit/5345684f2f226580363d9d4d941df7997612c2f6)
+    -   fix optional check [commit](http://github.com/electrode-io/electrode/commit/155b9b83fe7ea2e49e0b3491236e9fc3b74e2fd0)
+    -   formatting files [commit](http://github.com/electrode-io/electrode/commit/aed5bba3410f558555ae7296ee5290390a099506)
+    -   update generated code [commit](http://github.com/electrode-io/electrode/commit/f54b569b282f9f5733877229b1340f38a796b738)
+    -   Changes to make 'jest' an optional archetype ([#1303](https://github.com/electrode-io/electrode/pull/1303)) [commit](http://github.com/electrode-io/electrode/commit/6d7a2a34df7d0f4aa8d0a6470bc245c66060dbe2)
+
+-   `packages/electrode-archetype-opt-karma`
+
+    -   optional check skip if user dep on a diff major version ([#1330](https://github.com/electrode-io/electrode/pull/1330)) [commit](http://github.com/electrode-io/electrode/commit/5345684f2f226580363d9d4d941df7997612c2f6)
+    -   fix optional check [commit](http://github.com/electrode-io/electrode/commit/155b9b83fe7ea2e49e0b3491236e9fc3b74e2fd0)
+    -   formatting files [commit](http://github.com/electrode-io/electrode/commit/aed5bba3410f558555ae7296ee5290390a099506)
+
+-   `packages/electrode-archetype-opt-mocha`
+
+    -   [major] mark new packages for first release [commit](http://github.com/electrode-io/electrode/commit/f4687ff4a59eab258e2b5d87a89773767f9c044a)
+    -   optional check skip if user dep on a diff major version ([#1330](https://github.com/electrode-io/electrode/pull/1330)) [commit](http://github.com/electrode-io/electrode/commit/5345684f2f226580363d9d4d941df7997612c2f6)
+    -   fix optional check [commit](http://github.com/electrode-io/electrode/commit/155b9b83fe7ea2e49e0b3491236e9fc3b74e2fd0)
+    -   formatting files [commit](http://github.com/electrode-io/electrode/commit/aed5bba3410f558555ae7296ee5290390a099506)
+    -   update generated code [commit](http://github.com/electrode-io/electrode/commit/f54b569b282f9f5733877229b1340f38a796b738)
+    -   make mocha an optional archetype ([#1320](https://github.com/electrode-io/electrode/pull/1320)) [commit](http://github.com/electrode-io/electrode/commit/7116e7dbdac9c10b2c0886e4a29544405596dd60)
+
+-   `packages/electrode-archetype-opt-postcss`
+
+    -   [major] mark new packages for first release [commit](http://github.com/electrode-io/electrode/commit/f4687ff4a59eab258e2b5d87a89773767f9c044a)
+    -   optional check skip if user dep on a diff major version ([#1330](https://github.com/electrode-io/electrode/pull/1330)) [commit](http://github.com/electrode-io/electrode/commit/5345684f2f226580363d9d4d941df7997612c2f6)
+    -   rename electrode-archetype-opt-css-module [commit](http://github.com/electrode-io/electrode/commit/4bcb0ba49f20467c17e5ca4f52308815de97b188)
+
+-   `packages/electrode-archetype-opt-pwa`
+
+    -   formatting files [commit](http://github.com/electrode-io/electrode/commit/aed5bba3410f558555ae7296ee5290390a099506)
+
+-   `packages/electrode-archetype-opt-react`
+
+    -   optional check skip if user dep on a diff major version ([#1330](https://github.com/electrode-io/electrode/pull/1330)) [commit](http://github.com/electrode-io/electrode/commit/5345684f2f226580363d9d4d941df7997612c2f6)
+    -   fix optional check [commit](http://github.com/electrode-io/electrode/commit/155b9b83fe7ea2e49e0b3491236e9fc3b74e2fd0)
+
+-   `packages/electrode-archetype-opt-sass`
+
+    -   optional check skip if user dep on a diff major version ([#1330](https://github.com/electrode-io/electrode/pull/1330)) [commit](http://github.com/electrode-io/electrode/commit/5345684f2f226580363d9d4d941df7997612c2f6)
+    -   fix optional check [commit](http://github.com/electrode-io/electrode/commit/155b9b83fe7ea2e49e0b3491236e9fc3b74e2fd0)
+
+-   `packages/electrode-archetype-opt-sinon`
+
+    -   [major] mark new packages for first release [commit](http://github.com/electrode-io/electrode/commit/f4687ff4a59eab258e2b5d87a89773767f9c044a)
+    -   optional check skip if user dep on a diff major version ([#1330](https://github.com/electrode-io/electrode/pull/1330)) [commit](http://github.com/electrode-io/electrode/commit/5345684f2f226580363d9d4d941df7997612c2f6)
+    -   fix optional check [commit](http://github.com/electrode-io/electrode/commit/155b9b83fe7ea2e49e0b3491236e9fc3b74e2fd0)
+    -   formatting files [commit](http://github.com/electrode-io/electrode/commit/aed5bba3410f558555ae7296ee5290390a099506)
+    -   update generated code [commit](http://github.com/electrode-io/electrode/commit/f54b569b282f9f5733877229b1340f38a796b738)
+    -   Make 'sinon' an optional archetype ([#1315](https://github.com/electrode-io/electrode/pull/1315)) [commit](http://github.com/electrode-io/electrode/commit/53685c3906264b4e9bee5903ed53a464cb8696bd)
+
+-   `packages/electrode-archetype-opt-typescript`
+
+    -   [major] mark new packages for first release [commit](http://github.com/electrode-io/electrode/commit/f4687ff4a59eab258e2b5d87a89773767f9c044a)
+    -   optional check skip if user dep on a diff major version ([#1330](https://github.com/electrode-io/electrode/pull/1330)) [commit](http://github.com/electrode-io/electrode/commit/5345684f2f226580363d9d4d941df7997612c2f6)
+    -   fix optional check [commit](http://github.com/electrode-io/electrode/commit/155b9b83fe7ea2e49e0b3491236e9fc3b74e2fd0)
+    -   formatting files [commit](http://github.com/electrode-io/electrode/commit/aed5bba3410f558555ae7296ee5290390a099506)
+    -   update generated code [commit](http://github.com/electrode-io/electrode/commit/f54b569b282f9f5733877229b1340f38a796b738)
+    -   Making typescript an optional archetype ([#1312](https://github.com/electrode-io/electrode/pull/1312)) [commit](http://github.com/electrode-io/electrode/commit/83748fbe47dc58197600941ee33c9b47a37e5ca9)
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   add jest task and allow passing CLI flags ([#1331](https://github.com/electrode-io/electrode/pull/1331)) [commit](http://github.com/electrode-io/electrode/commit/344514758615eab1374b0d8796f1df2558ef849d)
+    -   update tests with more informative _name [commit](http://github.com/electrode-io/electrode/commit/f6a992eea08fabb756a2be70dc6aae58733397e4)
+    -   fix lint [commit](http://github.com/electrode-io/electrode/commit/fa018d9f17e745bb8b2932530166ecb0ae8fea11)
+    -   env flag  USE_APP_WEBPACK_CONFIG to opt-in direct webpack config ([#1327](https://github.com/electrode-io/electrode/pull/1327)) [commit](http://github.com/electrode-io/electrode/commit/ecd6a8abbdcdfa0158812dfdc397898e3d609a55)
+    -   add inert plugin so reply.file works ([#1325](https://github.com/electrode-io/electrode/pull/1325)) [commit](http://github.com/electrode-io/electrode/commit/08a94b51f3340901cafc433b47e2e45c2c249a73)
+    -   use path.resolve correctly [commit](http://github.com/electrode-io/electrode/commit/05f82c4dea0e2a5d3599255dab2f29e4a12245be)
+    -   format code [commit](http://github.com/electrode-io/electrode/commit/4acbb9a6a239c1083c9d5de56768a6e46daa75e4)
+    -   make postcss + css module optional archetype [commit](http://github.com/electrode-io/electrode/commit/2527fe8adda66268885efc4bacfdb0963126e667)
+    -   sort depdencies [commit](http://github.com/electrode-io/electrode/commit/bfd6b6a2f007699b5b4a69d3b22588533cd3f27b)
+    -   eslint as an optional archetype ([#1322](https://github.com/electrode-io/electrode/pull/1322)) [commit](http://github.com/electrode-io/electrode/commit/205428bd47551a3f2dfd115c254acb00e16c88d7)
+    -   support user webpack config with direct control ([#1318](https://github.com/electrode-io/electrode/pull/1318)) [commit](http://github.com/electrode-io/electrode/commit/758517ae25fbbff49e1f5583f70490d4eea9eeff)
+    -   make mocha an optional archetype ([#1320](https://github.com/electrode-io/electrode/pull/1320)) [commit](http://github.com/electrode-io/electrode/commit/7116e7dbdac9c10b2c0886e4a29544405596dd60)
+    -   [feat] make critical CSS optional archetype ([#1306](https://github.com/electrode-io/electrode/pull/1306)) [commit](http://github.com/electrode-io/electrode/commit/c6e56d016d5de3ab3d092029847baf974f3140f7)
+    -   Fix component demo app ([#1316](https://github.com/electrode-io/electrode/pull/1316)) [commit](http://github.com/electrode-io/electrode/commit/f4ef431f82ba0876cd20009f41a2b1b961c26cf0)
+    -   Make 'sinon' an optional archetype ([#1315](https://github.com/electrode-io/electrode/pull/1315)) [commit](http://github.com/electrode-io/electrode/commit/53685c3906264b4e9bee5903ed53a464cb8696bd)
+    -   Making typescript an optional archetype ([#1312](https://github.com/electrode-io/electrode/pull/1312)) [commit](http://github.com/electrode-io/electrode/commit/83748fbe47dc58197600941ee33c9b47a37e5ca9)
+    -   Changes to make 'jest' an optional archetype ([#1303](https://github.com/electrode-io/electrode/pull/1303)) [commit](http://github.com/electrode-io/electrode/commit/6d7a2a34df7d0f4aa8d0a6470bc245c66060dbe2)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   eslint as an optional archetype ([#1322](https://github.com/electrode-io/electrode/pull/1322)) [commit](http://github.com/electrode-io/electrode/commit/205428bd47551a3f2dfd115c254acb00e16c88d7)
+    -   make mocha an optional archetype ([#1320](https://github.com/electrode-io/electrode/pull/1320)) [commit](http://github.com/electrode-io/electrode/commit/7116e7dbdac9c10b2c0886e4a29544405596dd60)
+    -   Make 'sinon' an optional archetype ([#1315](https://github.com/electrode-io/electrode/pull/1315)) [commit](http://github.com/electrode-io/electrode/commit/53685c3906264b4e9bee5903ed53a464cb8696bd)
+    -   Changes to make 'jest' an optional archetype ([#1303](https://github.com/electrode-io/electrode/pull/1303)) [commit](http://github.com/electrode-io/electrode/commit/6d7a2a34df7d0f4aa8d0a6470bc245c66060dbe2)
+
+-   `packages/electrode-ignite`
+
+    -   Fix component demo app ([#1316](https://github.com/electrode-io/electrode/pull/1316)) [commit](http://github.com/electrode-io/electrode/commit/f4ef431f82ba0876cd20009f41a2b1b961c26cf0)
+
+-   `packages/generator-electrode`
+
+    -   update generating archetype config [commit](http://github.com/electrode-io/electrode/commit/7cc48bc8c9fa12d3d2becc9c278ed5f1757cdac2)
+    -   create configs for disabled optionals only ([#1323](https://github.com/electrode-io/electrode/pull/1323)) [commit](http://github.com/electrode-io/electrode/commit/834ac060c60571c83a7c46dc1d557893fb31b337)
+    -   Fix component demo app ([#1316](https://github.com/electrode-io/electrode/pull/1316)) [commit](http://github.com/electrode-io/electrode/commit/f4ef431f82ba0876cd20009f41a2b1b961c26cf0)
+    -   [feat] update app generator for optional features ([#1317](https://github.com/electrode-io/electrode/pull/1317)) [commit](http://github.com/electrode-io/electrode/commit/1784635106bd2638de611273974a77b5844724dd)
+
+-   `packages/opt-archetype-check`
+
+    -   optional check skip if user dep on a diff major version ([#1330](https://github.com/electrode-io/electrode/pull/1330)) [commit](http://github.com/electrode-io/electrode/commit/5345684f2f226580363d9d4d941df7997612c2f6)
+    -   fix optional check [commit](http://github.com/electrode-io/electrode/commit/155b9b83fe7ea2e49e0b3491236e9fc3b74e2fd0)
+
+-   `.vscode`
+
+    -   Fix component demo app ([#1316](https://github.com/electrode-io/electrode/pull/1316)) [commit](http://github.com/electrode-io/electrode/commit/f4ef431f82ba0876cd20009f41a2b1b961c26cf0)
+
+-   `docs`
+
+    -   eslint as an optional archetype ([#1322](https://github.com/electrode-io/electrode/pull/1322)) [commit](http://github.com/electrode-io/electrode/commit/205428bd47551a3f2dfd115c254acb00e16c88d7)
+    -   Making typescript an optional archetype ([#1312](https://github.com/electrode-io/electrode/pull/1312)) [commit](http://github.com/electrode-io/electrode/commit/83748fbe47dc58197600941ee33c9b47a37e5ca9)
+    -   Changes to make 'jest' an optional archetype ([#1303](https://github.com/electrode-io/electrode/pull/1303)) [commit](http://github.com/electrode-io/electrode/commit/6d7a2a34df7d0f4aa8d0a6470bc245c66060dbe2)
+
+-   `tools`
+
+    -   tool: skip packages no longer exist when updating changelog [commit](http://github.com/electrode-io/electrode/commit/0e77514381d28949f3a1548e943c4e995635be92)
+
 # 7/31/2019
 
 ## Packages
