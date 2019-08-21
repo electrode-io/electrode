@@ -132,16 +132,20 @@ const collateCommitsPackages = commits => {
             a[group][key].msgs.push({ m: commits[id], id });
             handled[group][key] = true;
           };
+
           if (parts[0] === "packages" || parts[0] === "samples") {
-            if (parts[0] === "packages" && collated.realPackages.indexOf(parts[1]) < 0) {
-              collated.realPackages.push(parts[1]);
+            if (Fs.existsSync(Path.resolve("packages", parts[1]))) {
+              if (parts[0] === "packages" && collated.realPackages.indexOf(parts[1]) < 0) {
+                collated.realPackages.push(parts[1]);
+              }
+              add(parts[0], mapPkg(parts[1]));
             }
-            add(parts[0], mapPkg(parts[1]));
           } else if (parts.length > 1) {
             add("others", parts[0]);
           } else {
             add("files", parts[0]);
           }
+
           return a;
         }, collated);
         return "";
@@ -236,7 +240,6 @@ const getTaggedVersion = pkg => {
       const enabled = _.get(tagInfo, ["packages", pkg.originalPkg.name]);
       if (enabled) {
         if (tag !== "latest" && tagInfo.addToVersion) {
-          let tagNum = 1;
           const semv = pkg.semver;
           if (semv.prerelease[0] && semv.prerelease[0] === tag) {
             return semv.inc("prerelease").format();
@@ -251,7 +254,6 @@ const getTaggedVersion = pkg => {
 };
 
 const updateChangelog = collated => {
-  const emittedCommits = {};
   const d = new Date();
   const output = [];
   const lernaUpdated = collated.lernaPackages.length > 0;
