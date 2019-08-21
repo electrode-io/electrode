@@ -152,7 +152,8 @@ function setWebpackProfile(profile) {
 function checkForCustomWebpackConfig(defaultFile) {
   const customFilePath = Path.join(process.cwd(), "webpack.config.js");
   const archetypeFilePath = webpackConfig(defaultFile);
-  const canUseAppProfile = process.env.USE_APP_WEBPACK_CONFIG === "true" && Fs.existsSync(customFilePath);
+  const canUseAppProfile =
+    process.env.USE_APP_WEBPACK_CONFIG === "true" && Fs.existsSync(customFilePath);
 
   return canUseAppProfile ? customFilePath : archetypeFilePath;
 }
@@ -635,7 +636,11 @@ Individual .babelrc files were generated for you in src/client and src/server
     },
 
     ".build.client.babelrc": () => {
-      makeBabelRc(Path.dirname(Path.resolve(AppMode.src.dir)), "babelrc-client.js", "babel.config.js");
+      makeBabelRc(
+        Path.dirname(Path.resolve(AppMode.src.dir)),
+        "babelrc-client.js",
+        "babel.config.js"
+      );
       makeBabelRc(AppMode.src.client, "babelrc-client.js");
     },
 
@@ -1159,12 +1164,12 @@ Individual .babelrc files were generated for you in src/client and src/server
           .catch(() => `test-frontend`),
 
       ".karma.test-frontend-dev-watch": () => {
-          setWebpackProfile("test");
-          return mkCmd(
+        setWebpackProfile("test");
+        return mkCmd(
           `~$karma start`,
-            quote(karmaConfig("karma.conf.watch.js")),
-            `--colors --browsers Chrome --no-single-run --auto-watch`
-          );
+          quote(karmaConfig("karma.conf.watch.js")),
+          `--colors --browsers Chrome --no-single-run --auto-watch`
+        );
       }
     });
   } else {
@@ -1181,7 +1186,13 @@ Individual .babelrc files were generated for you in src/client and src/server
   }
   if (archetype.options.jest !== false) {
     Object.assign(tasks, {
-      ".jest.test-frontend-cov": () => {
+      jest: {
+        desc: "Run jest tests (--inspect-brk to start debugger)",
+        task() {
+          return `.jest.test-frontend-cov ${this.argv.slice(1).join(" ")}`;
+        }
+      },
+      ".jest.test-frontend-cov"() {
         const testDir = ["_test_", "__test__", "__tests__"].find(x => shell.test("-d", x));
         let runJest = testDir;
         if (!runJest) {
@@ -1202,8 +1213,19 @@ Individual .babelrc files were generated for you in src/client and src/server
           if (testDir) {
             makeBabelRc(Path.join(testDir, "client"), "babelrc-client.js");
           }
+          const jestBinJs = require.resolve("jest/bin/jest");
           logger.info("Running jest unit tests");
-          return mkCmd(`~$jest`, `--config ${archetype.config.jest}/jest.config.js`);
+
+          const brk = this.argv.indexOf("--inspect-brk") >= 0 ? "--inspect-brk" : "";
+          const jestOpts = this.argv.slice(1).filter(x => x !== "--inspect-brk");
+
+          return mkCmd(
+            `~$node`,
+            brk,
+            jestBinJs,
+            jestOpts.join(" "),
+            `--config ${archetype.config.jest}/jest.config.js`
+          );
         } else {
           return undefined;
         }
