@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-opt-postcss",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Electrode postcss Optional Archetype",
   "main": "optional-check.js",
   "homepage": "http://www.electrode.io",
@@ -37,6 +37,5 @@
     "optionalTagName": "postcss",
     "expectTag": true,
     "defaultInstall": true
-  },
-  "private": true
+  }
 }

@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-opt-jest",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Electrode NodeJS/React Optional Archetype JEST",
   "main": "optional-check.js",
   "homepage": "http://www.electrode.io",
