@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-opt-typescript",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Electrode NodeJS/React Optional Archetype TYPESCRIPT",
   "main": "optional-check.js",
   "homepage": "http://www.electrode.io",
