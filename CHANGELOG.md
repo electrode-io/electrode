@@ -2,6 +2,22 @@
 
 ## Packages
 
+-   `electrode-archetype-opt-jest@24.0.1` `(24.0.0 => 24.0.1)`
+
+## Commits
+
+-   `packages/electrode-archetype-opt-jest`
+
+    -   update auto gen files [commit](http://github.com/electrode-io/electrode/commit/e9af7120b731dadbf08066f5b63eb14dcb519315)
+
+-   `packages/opt-archetype-check`
+
+    -   check user's dep even if no archetype config found ([#1335](https://github.com/electrode-io/electrode/pull/1335)) [commit](http://github.com/electrode-io/electrode/commit/d619658eb5617e4e18e8f901d327f17f3d78739a)
+
+# 8/22/2019
+
+## Packages
+
 -   `electrode-archetype-opt-jest@24.0.0` `(1.0.0 => 24.0.0)`
 
 ## Commits
