@@ -108,75 +108,71 @@ function optionalArchetypeCheck() {
   const expectTag = optParams.expectTag;
   const defaultInstall = Boolean(optParams.defaultInstall);
 
+  let appArchetypeConfig;
+
   try {
-    const config = require(Path.join(appDir, "archetype/config"));
+    appArchetypeConfig = require(Path.join(appDir, "archetype/config"));
+  } catch (err) {
+    appArchetypeConfig = false;
+  }
 
-    const options = (config && config.options) || {};
+  const options = (appArchetypeConfig && appArchetypeConfig.options) || {};
 
-    //
-    // check if app's package.json has the package in its dependencies or optionalDependencies
-    //
-    const appDep = ["dependencies", "devDependencies", "optionalDependencies"].find(
-      x => appPkg[x] && appPkg[x].hasOwnProperty(myName)
-    );
+  //
+  // check if app's package.json has the package in its dependencies or optionalDependencies
+  //
+  const appDep = ["dependencies", "devDependencies", "optionalDependencies"].find(
+    x => appPkg[x] && appPkg[x].hasOwnProperty(myName)
+  );
 
-    if (appDep) {
-      if (options.hasOwnProperty(optionalTagName)) {
-        return done(
-          false,
-          `
+  if (appDep) {
+    if (options.hasOwnProperty(optionalTagName)) {
+      return done(
+        false,
+        `
   ERROR
   ERROR: you have ${myName} in your package.json *and* ${optionalTagName} in your archetype/config options.
   ERROR: Please specify only one of those.
   ERROR
   `
+      );
+    }
+
+    if (optParams.checkAppDep !== false) {
+      // Try to do a simple major version check.  If they don't match then assume user
+      // is trying install a different one, so fail this copy.
+      const appSemV = appPkg[appDep][myName];
+      if (!isSameMajorVersion(appSemV, myPkg.version)) {
+        return done(
+          false,
+          `Found '${myName}' in your package.json '${appDep}' version '${appSemV}', which is
+different from this copy's major version '${myPkg.version}' - skipping installing this copy.`
         );
       }
-
-      if (optParams.checkAppDep !== false) {
-        // Try to do a simple major version check.  If they don't match then assume user
-        // is trying install a different one, so fail this copy.
-        const appSemV = appPkg[appDep][myName];
-        if (!isSameMajorVersion(appSemV, myPkg.version)) {
-          return done(
-            false,
-            `Found '${myName}' in your package.json '${appDep}' version '${appSemV}', which is
-different from this copy's major version '${myPkg.version}' - skipping installing this copy.`
-          );
-        }
-        return done(true, `Found ${myName} in your package.json ${appDep} - installing.`);
-      }
+      return done(true, `Found ${myName} in your package.json ${appDep} - installing.`);
     }
+  }
 
-    //
-    // check if app's archetype/config/index.js options specify the feature tag for
-    // the package to be installed.
-    //
-    if (!options.hasOwnProperty(optionalTagName) && defaultInstall === true) {
-      return done(true, `No optional flag specified for package ${myName} - default to installing`);
-    }
+  //
+  // check if app's archetype/config/index.js options specify the feature tag for
+  // the package to be installed.
+  //
+  if (!options.hasOwnProperty(optionalTagName) && defaultInstall === true) {
+    return done(true, `No optional flag specified for package ${myName} - default to installing`);
+  }
 
-    const userConfig = options[optionalTagName];
+  const userConfig = options[optionalTagName];
 
-    if (userConfig === expectTag) {
-      return done(
-        true,
-        `${myName}: archetype config set ${optionalTagName} to ${userConfig} - installing`
-      );
-    } else {
-      return done(
-        false,
-        `${myName}: archetype config set ${optionalTagName} to ${userConfig} - skipping install because it's not ${expectTag}`
-      );
-    }
-  } catch (e) {
-    if (defaultInstall === true) {
-      return done(
-        true,
-        `${myName}: exception checking for optional flag ${e.message} - default to install`
-      );
-    }
-    return done(false, `${myName}: no archetype config found - skipping install`);
+  if (userConfig === expectTag) {
+    return done(
+      true,
+      `${myName}: archetype config set ${optionalTagName} to ${userConfig} - installing`
+    );
+  } else {
+    return done(
+      false,
+      `${myName}: archetype config set ${optionalTagName} to ${userConfig} - skipping install because it's not ${expectTag}`
+    );
   }
 }
 
