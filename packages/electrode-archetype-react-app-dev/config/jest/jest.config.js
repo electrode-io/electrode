@@ -4,6 +4,11 @@ const Path = require("path");
 const _ = require("lodash");
 const fileMock = Path.join(__dirname, "__mocks__", "file-mock.js");
 const frameworkMock = Path.join(__dirname, "__mocks__", "framework-mock.js");
+const { getOptArchetypeRequire } = require("../../lib/utils");
+const optRequire = getOptArchetypeRequire("electrode-archetype-opt-jest");
+
+const jestPkg = optRequire("jest/package.json");
+const jestMajVersion = parseInt(jestPkg.version.split(".")[0], 10);
 
 const archetype = require("electrode-archetype-react-app/config/archetype");
 
@@ -32,13 +37,22 @@ const jestDefaultConfig = {
     "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": fileMock,
     "\\.(css|less)$": "identity-obj-proxy"
   },
-  setupTestFrameworkScriptFile: frameworkMock,
   modulePathIgnorePatterns: ["<rootDir>/test"],
   testURL: "http://localhost/"
 };
 
-module.exports = Object.assign(
+const jestVersionSpecificConfig = {
+  23: {
+    setupTestFrameworkScriptFile: frameworkMock
+  },
+  24: {
+    setupFilesAfterEnv: [frameworkMock]
+  }
+};
+
+module.exports = _.merge(
   {},
   _.pickBy(jestDefaultConfig, x => x !== undefined),
+  jestVersionSpecificConfig[jestMajVersion],
   archetype.jest
 );
