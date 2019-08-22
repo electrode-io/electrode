@@ -20,6 +20,7 @@
     "prepare": "cp node_modules/opt-archetype-check/optional-check.js ."
   },
   "dependencies": {
+    "@types/mocha": "5.2.7",
     "mocha": "^4.0.0"
   },
   "devDependencies": {

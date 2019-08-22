@@ -31,8 +31,6 @@
     "flow-typed-install": "clap flow-typed-install"
   },
   "dependencies": {
-    "@types/jest": "^23.3.10",
-    "@types/mocha": "^5.2.5",
     "above-the-fold-only-server-render": "^1.1.0",
     "bluebird": "^3.4.6",
     "electrode-archetype-react-app": "^5.4.23",
