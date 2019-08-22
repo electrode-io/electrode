@@ -20,8 +20,10 @@
     "prepare": "cp node_modules/opt-archetype-check/optional-check.js ."
   },
   "dependencies": {
+    "@types/jest": "^23.3.14",
     "babel-jest": "^23.6.0",
-    "jest": "^23.5.0"
+    "eslint-plugin-jest": "^21.27.2",
+    "jest": "^23.6.0"
   },
   "devDependencies": {
     "opt-archetype-check": "../opt-archetype-check"
