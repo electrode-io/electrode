@@ -6,49 +6,53 @@
 - Overview
   - [What is Electrode](overview/what-is-electrode.md)
   - [Why Use Electrode](overview/why-use-electrode.md)
-  - [Requirements](overview/requirements.md)
   - [What are Archetypes](/overview/what-are-archetypes.md)
 - Getting Started
-  - [Start With Electrode Ignite](/chapter1/quick-start/start-with-ignite.md)
-  - [Create an Electrode App](/chapter1/quick-start/start-with-app.md)
-  - [Create an Electrode Component](/chapter1/quick-start/start-with-component.md)
-- Electrode Application
-  - [Build Your App](/chapter1/further-develop-app/build-app.md)
-  - [What's Inside](/chapter1/further-develop-app/whats-inside.md)
+  - [Requirements and Setup](overview/requirements.md)
+  - [About Electrode Ignite](/chapter1/quick-start/start-with-ignite.md)
+
+### Electrode Application
+
+- [About](/chapter1/intermediate/app-archetype/README.md)
+- [Create an Electrode App](/chapter1/quick-start/start-with-app.md)
+- [Build Your App](/chapter1/further-develop-app/build-app.md)
+- [What's Inside](/chapter1/further-develop-app/whats-inside.md)
+- Developing Your App
   - [Development Admin and Proxy](/chapter1/further-develop-app/dev-admin-proxy.md)
-  - [Deploy Your App](/chapter1/further-develop-app/deploy-your-app.md)
-- Electrode Components
-  - [Low-Level Components](/chapter1/further-develop-component/low-level-components.md)
-  - [Component Helpers](/chapter1/further-develop-component/component-helpers.md)
-  - [Develop Styles](/chapter1/further-develop-component/develop-styles.md)
-  - [Develop Main Component](chapter1/further-develop-component/develop-main-component.md)
-  - [Add Components to Demo App](/chapter1/further-develop-component/add-to-demo-app.md)
-  - [Build and Demo](/chapter1/further-develop-component/build-and-demo.md)
-  - [Test Components](/chapter1/further-develop-component/test-components.md)
-
-### Intermediate
-
-- Application Archetype
-  - [About](/chapter1/intermediate/app-archetype/README.md)
+- Configurations
   - [Customize Config](/chapter1/intermediate/app-archetype/customize-config.md)
   - [Eslint Config](/chapter1/intermediate/app-archetype/eslint.md)
   - [Webpack Config](/chapter1/intermediate/app-archetype/webpack-config.md)
   - [Environment Variables](/chapter1/intermediate/app-archetype/env-vars.md)
-  - [Consuming Webpack DLL](chapter1/intermediate/app-archetype/load-dll.md)
-  - [Extract Styles](/chapter1/intermediate/app-archetype/extract-styles.md)
+- [Consuming Webpack DLL](chapter1/intermediate/app-archetype/load-dll.md)
+- [Extract Styles](/chapter1/intermediate/app-archetype/extract-styles.md)
+- Testing
   - [Unit Tests](/chapter1/intermediate/app-archetype/unit-tests.md)
-- Component Archetype
-  - [About](/chapter1/intermediate/component-archetype/README.md)
-  - [Structure](/chapter1/intermediate/component-archetype/component-archetype-structure.md)
-  - [Webpack Config](/chapter1/intermediate/component-archetype/webpack-config.md)
-  - [Extract Styles](/chapter1/intermediate/component-archetype/extract-styles.md)
-  - [Unit Tests](/chapter1/intermediate/component-archetype/unit-tests.md)
-- DLL Archetype
-  - [About](chapter1/intermediate/dll-archetype/README.md)
 - Flow and TypeScript
-  - [About](chapter1/intermediate/languages/README.md)
   - [Working with Flow](/chapter1/intermediate/flow.md)
   - [Flow FAQ](/chapter1/intermediate/flow-faq.md)
+  - [Deploy Your App](/chapter1/further-develop-app/deploy-your-app.md)
+
+### Electrode DLL
+
+- [About](chapter1/intermediate/dll-archetype/README.md)
+
+### Electrode Component
+
+- [About](/chapter1/intermediate/component-archetype/README.md)
+- [Create an Electrode Component](/chapter1/quick-start/start-with-component.md)
+- [Structure](/chapter1/intermediate/component-archetype/
+- [Low-Level Components](/chapter1/further-develop-component/low-level-components.md)
+- [Component Helpers](/chapter1/further-develop-component/component-helpers.md)
+- [Develop Styles](/chapter1/further-develop-component/develop-styles.md)
+- [Develop Main Component](chapter1/further-develop-component/develop-main-component.md)
+- [Add Components to Demo App](/chapter1/further-develop-component/add-to-demo-app.md)
+- [Build and Demo](/chapter1/further-develop-component/build-and-demo.md)
+- [Test Components](/chapter1/further-develop-component/test-components.md)
+  component-archetype-structure.md)
+- [Webpack Config](/chapter1/intermediate/component-archetype/webpack-config.md)
+- [Extract Styles](/chapter1/intermediate/component-archetype/extract-styles.md)
+- [Unit Tests](/chapter1/intermediate/component-archetype/unit-tests.md)
 
 ### Guides
 
