@@ -5,6 +5,8 @@
   * [Your application node server](#your-application-node-server)
   * [Dev Admin Console](#dev-admin-console)
   * [Dev Reverse Proxy](#dev-reverse-proxy)
+    + [Checklist to set up your reverse proxy server](#checklist-to-set-up-your-reverse-proxy-server)
+    + [Enable Reverse Proxy](#enable-reverse-proxy)
     + [Persist APP_SERVER_PORT](#persist-app_server_port)
     + [Proxy Admin](#proxy-admin)
     + [Update your server's port](#update-your-servers-port)
@@ -52,6 +54,13 @@ When your app is built and deployed to production, it will not have a webpack de
 
 To make dev mode more similar to production, Electrode offers a reverse proxy server that combines webpack dev server and your app server under a single port.
 
+### Checklist to set up your reverse proxy server
+
+1. [Enable Reverse Proxy](#enable-reverse-proxy) or [Persist APP_SERVER_PORT](#persist-app_server_port) : Specify the env variable `APP_SERVER_PORT` to run the app node server on a different port.
+2. [Update your server's port](#update-your-servers-port): Update the app server to listen on the port from `APP_SERVER_PORT`.
+
+### Enable Reverse Proxy
+
 To enable the reverse proxy, you have to let Electrode run your app node server on a different port.
 
 To do that, specify the env variable `APP_SERVER_PORT`.  When Electrode detects that, it assumes you want to run your development with the reverse proxy.  You also need to update your app server's startup code to get its port number from that.
@@ -98,6 +107,14 @@ const defaultListenPort = 3000;
 const portFromEnv = () => {
   const x = parseInt(process.env.APP_SERVER_PORT || process.env.PORT, 10);
   return x !== null && !isNaN(x) ? x : defaultListenPort;
+};
+
+module.exports = {
+  connections: {
+    default: {
+      port: portFromEnv()
+    }
+  }
 };
 ```
 
