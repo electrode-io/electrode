@@ -1,3 +1,82 @@
+# 8/23/2019
+
+## Packages
+
+-   `electrode-archetype-opt-critical-css@1.0.1` `(1.0.0 => 1.0.1)`
+-   `electrode-archetype-opt-eslint@1.0.1` `(1.0.0 => 1.0.1)`
+-   `electrode-archetype-opt-inferno@0.2.9` `(0.2.8 => 0.2.9)`
+-   `electrode-archetype-opt-jest@1.0.1` `(1.0.0 => 1.0.1)`
+-   `electrode-archetype-opt-karma@2.0.3` `(2.0.2 => 2.0.3)`
+-   `electrode-archetype-opt-mocha@1.0.1` `(1.0.0 => 1.0.1)`
+-   `electrode-archetype-opt-postcss@1.0.1` `(1.0.0 => 1.0.1)`
+-   `electrode-archetype-opt-react@2.0.2` `(2.0.1 => 2.0.2)`
+-   `electrode-archetype-opt-sass@1.0.7` `(1.0.6 => 1.0.7)`
+-   `electrode-archetype-opt-sinon@1.0.1` `(1.0.0 => 1.0.1)`
+-   `electrode-archetype-opt-typescript@1.0.1` `(1.0.0 => 1.0.1)`
+-   `electrode-archetype-react-app@6.5.10` `(6.5.9 => 6.5.10)`
+-   `electrode-archetype-react-app-dev@6.5.10` `(6.5.9 => 6.5.10)`
+
+## Commits
+
+-   `packages/electrode-archetype-opt-critical-css`
+
+    -   commit auto gen files [commit](http://github.com/electrode-io/electrode/commit/3f85b13974d6f262edd7694cb075bd47e4b79fda)
+
+-   `packages/electrode-archetype-opt-eslint`
+
+    -   commit auto gen files [commit](http://github.com/electrode-io/electrode/commit/3f85b13974d6f262edd7694cb075bd47e4b79fda)
+
+-   `packages/electrode-archetype-opt-inferno`
+
+    -   commit auto gen files [commit](http://github.com/electrode-io/electrode/commit/3f85b13974d6f262edd7694cb075bd47e4b79fda)
+
+-   `packages/electrode-archetype-opt-jest`
+
+    -   commit auto gen files [commit](http://github.com/electrode-io/electrode/commit/3f85b13974d6f262edd7694cb075bd47e4b79fda)
+    -   dep: @types/jest, eslint-plugin-jest ([#1332](https://github.com/electrode-io/electrode/pull/1332)) [commit](http://github.com/electrode-io/electrode/commit/7b235a5db660b766fb8378c932358c1631958698)
+
+-   `packages/electrode-archetype-opt-karma`
+
+    -   commit auto gen files [commit](http://github.com/electrode-io/electrode/commit/3f85b13974d6f262edd7694cb075bd47e4b79fda)
+
+-   `packages/electrode-archetype-opt-mocha`
+
+    -   commit auto gen files [commit](http://github.com/electrode-io/electrode/commit/3f85b13974d6f262edd7694cb075bd47e4b79fda)
+    -   dep: @types/mocha ([#1334](https://github.com/electrode-io/electrode/pull/1334)) [commit](http://github.com/electrode-io/electrode/commit/34099ad82952398a54e654ffa72adc9d1d44fdbe)
+
+-   `packages/electrode-archetype-opt-postcss`
+
+    -   commit auto gen files [commit](http://github.com/electrode-io/electrode/commit/3f85b13974d6f262edd7694cb075bd47e4b79fda)
+
+-   `packages/electrode-archetype-opt-react`
+
+    -   commit auto gen files [commit](http://github.com/electrode-io/electrode/commit/3f85b13974d6f262edd7694cb075bd47e4b79fda)
+
+-   `packages/electrode-archetype-opt-sass`
+
+    -   commit auto gen files [commit](http://github.com/electrode-io/electrode/commit/3f85b13974d6f262edd7694cb075bd47e4b79fda)
+
+-   `packages/electrode-archetype-opt-sinon`
+
+    -   commit auto gen files [commit](http://github.com/electrode-io/electrode/commit/3f85b13974d6f262edd7694cb075bd47e4b79fda)
+
+-   `packages/electrode-archetype-opt-typescript`
+
+    -   commit auto gen files [commit](http://github.com/electrode-io/electrode/commit/3f85b13974d6f262edd7694cb075bd47e4b79fda)
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   add proposal decorators ([#1324](https://github.com/electrode-io/electrode/pull/1324)) [commit](http://github.com/electrode-io/electrode/commit/5462aa2ddd901f31faae627afe5ba80baad37049)
+    -   handle jest config by major version ([#1333](https://github.com/electrode-io/electrode/pull/1333)) [commit](http://github.com/electrode-io/electrode/commit/f5dc57c1c85fbe62168997f38db7aed5a189e790)
+
+-   `packages/opt-archetype-check`
+
+    -   check user's dep even if no archetype config found ([#1335](https://github.com/electrode-io/electrode/pull/1335)) [commit](http://github.com/electrode-io/electrode/commit/c68148447074fb690bc1c90bfe6b9e4af71229f0)
+
+-   `docs`
+
+    -   Updated document for reverse proxy ([#1329](https://github.com/electrode-io/electrode/pull/1329)) [commit](http://github.com/electrode-io/electrode/commit/7ce42b7627ec0a082fde09bda67f62ad866362e3)
+
 # 8/21/2019
 
 ## Packages
