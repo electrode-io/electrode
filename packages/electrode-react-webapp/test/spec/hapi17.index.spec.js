@@ -758,6 +758,7 @@ describe("hapi 17 electrode-react-webapp", () => {
     });
   });
 
+
   it("should use top level htmlFile and return response headers", () => {
     configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
     configOptions.stats = "test/data/stats-test-one-bundle.json";

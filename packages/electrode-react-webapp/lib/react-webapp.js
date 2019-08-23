@@ -94,7 +94,13 @@ function makeRouteHandler(routeOptions) {
   }
 
   const render = (options, templateSelection) => {
-    const asyncTemplate = initializeTemplate(templateSelection || defaultSelection, routeOptions);
+    let selection = Object.assign({}, defaultSelection);
+    if (templateSelection && (templateSelection.htmlFile || templateSelection.templateFile)) {
+      delete selection.htmlFile;
+      delete selection.templateFile;
+    }
+    selection = Object.assign(selection, templateSelection || {});
+    const asyncTemplate = initializeTemplate(selection, routeOptions);
     return asyncTemplate.render(options);
   };
 
