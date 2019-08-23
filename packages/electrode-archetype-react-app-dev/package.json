@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-app-dev",
-  "version": "6.5.9",
+  "version": "6.5.10",
   "description": "Electrode NodeJS/React Application Archetype (Development)",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -125,18 +125,18 @@
     "xsh": "^0.4.4"
   },
   "optionalDependencies": {
-    "electrode-archetype-opt-critical-css": "^1.0.0",
-    "electrode-archetype-opt-eslint": "^1.0.0",
-    "electrode-archetype-opt-inferno": "^0.2.8",
-    "electrode-archetype-opt-jest": "^1.0.0",
-    "electrode-archetype-opt-karma": "^2.0.2",
-    "electrode-archetype-opt-mocha": "^1.0.0",
-    "electrode-archetype-opt-postcss": "^1.0.0",
+    "electrode-archetype-opt-critical-css": "^1.0.1",
+    "electrode-archetype-opt-eslint": "^1.0.1",
+    "electrode-archetype-opt-inferno": "^0.2.9",
+    "electrode-archetype-opt-jest": "^1.0.1",
+    "electrode-archetype-opt-karma": "^2.0.3",
+    "electrode-archetype-opt-mocha": "^1.0.1",
+    "electrode-archetype-opt-postcss": "^1.0.1",
     "electrode-archetype-opt-pwa": "^1.0.3",
-    "electrode-archetype-opt-react": "^2.0.1",
-    "electrode-archetype-opt-sass": "^1.0.6",
-    "electrode-archetype-opt-sinon": "^1.0.0",
-    "electrode-archetype-opt-typescript": "^1.0.0"
+    "electrode-archetype-opt-react": "^2.0.2",
+    "electrode-archetype-opt-sass": "^1.0.7",
+    "electrode-archetype-opt-sinon": "^1.0.1",
+    "electrode-archetype-opt-typescript": "^1.0.1"
   },
   "devDependencies": {
     "electrode-archetype-njs-module-dev": "^3.0.0",
