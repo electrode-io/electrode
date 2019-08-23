@@ -8,6 +8,8 @@ const {
   enableTypeScript,
   flowRequireDirective,
   enableFlow,
+  proposalDecorators,
+  legacyDecorators,
   transformClassProps,
   looseClassProps,
   enableDynamicImport
@@ -24,6 +26,12 @@ const basePlugins = [
   ...(enableDynamicImport
     ? ["@babel/plugin-syntax-dynamic-import", "@loadable/babel-plugin"]
     : [false]),
+  // allow decorators on class and method
+  // Note: This must go before @babel/plugin-proposal-class-properties
+  (enableTypeScript || proposalDecorators) && [
+    "@babel/plugin-proposal-decorators",
+    { legacy: legacyDecorators }
+  ],
   //
   // allow class properties. loose option compile to assignment expression instead
   // of Object.defineProperty.

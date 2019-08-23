@@ -79,6 +79,8 @@ const babelConfigSpec = {
   enableFlow: { env: "ENABLE_BABEL_FLOW", default: true },
   // require the @flow directive in source to enable FlowJS type stripping
   flowRequireDirective: { env: "FLOW_REQUIRE_DIRECTIVE", default: false },
+  proposalDecorators: { env: "BABEL_PROPOSAL_DECORATORS", default: false },
+  legacyDecorators: { env: "BABEL_LEGACY_DECORATORS", default: true },
   transformClassProps: { env: "BABEL_CLASS_PROPS", default: false },
   looseClassProps: { env: "BABEL_CLASS_PROPS_LOOSE", default: true },
   envTargets: {
