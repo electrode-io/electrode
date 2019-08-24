@@ -152,4 +152,36 @@ For example, `webpack.config.hot.js` adds a profile `_hot`.
 
 The file `webpack.config.js` adds a profile named `_production`.
 
+
+### Customize with your own config file
+
+To customize directly with your own config file, you need to set the environment flag `USE_APP_WEBPACK_CONFIG` to `true` or `false` based on which custom application webpack config file will be used. The default is the archetype supplied configs.
+
+Following is an example of a `webpack.config.js` config file that you would place in your application root directory.
+```js
+const { compose, env, options } = require("electrode-archetype-react-app-dev/config/webpack");
+const WebpackHookPlugin = require("webpack-hook-plugin");
+
+const wConfig = compose(options);
+if (env === "development") {
+    const webpackHook = new WebpackHookPlugin({
+        onBuildStart: ['echo "Webpack Build starts"'],
+        onBuildEnd: ['echo "Webpack Build ends"']
+    });
+
+    wConfig.plugins.push(webpackHook);
+}
+
+module.exports = wConfig;
+```
+The highlight of this direct customizing option is that you can either extend the default configs or you can create your own custom config.
+
+The `electrode-archetype-react-app-dev/config/webpack` file exports similar parameters as in [Customize Function](#customize-function).
+
+- `env` - property that passes the current environment (development/prodution/test).
+- `options` - The [options](#options) for the app archetype's webpack configuration composition.
+- `compose` - The [webpack-config-composer] instance that the app archetype has setup. It contains all the webpack partials and composer profiles from the app archetype.
+
+You can find this example in one of the [sample application](https://github.com/electrode-io/electrode/blob/master/samples/hapi-app/webpack.config.js).
+
 [webpack-config-composer]: https://www.npmjs.com/package/webpack-config-composer
