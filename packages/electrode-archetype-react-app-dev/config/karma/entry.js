@@ -4,7 +4,6 @@
 
 require("core-js");
 require("regenerator-runtime/runtime");
-const logger = require("electrode-archetype-react-app/lib/logger");
 
 /**
  * Test setup for client-side tests.
@@ -18,7 +17,7 @@ var chai = require("chai");
 try {
   var sinonChai = require("sinon-chai");
 } catch (error) {
-  logger.warn("could not load sinon-chai - archetype config sinon set to false ");
+  console.warn("could not load sinon-chai - archetype config sinon set to false ");
 }
 var chaiShallowly = require("chai-shallowly");
 
@@ -39,7 +38,7 @@ enzyme.configure({ adapter: new Adapter() });
 try {
   window.sinon = require("sinon");
 } catch (error) {
-  logger.warn("could not load sinon - archetype config sinon set to false ");
+  console.warn("could not load sinon - archetype config sinon set to false ");
 }
 
 // --------------------------------------------------------------------------
