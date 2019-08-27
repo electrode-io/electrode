@@ -41,7 +41,7 @@
 
 - [About](/chapter1/intermediate/component-archetype/README.md)
 - [Create an Electrode Component](/chapter1/quick-start/start-with-component.md)
-- [Structure](/chapter1/intermediate/component-archetype/
+- [Structure](/chapter1/intermediate/component-archetype/component-archetype-structure.md)
 - [Low-Level Components](/chapter1/further-develop-component/low-level-components.md)
 - [Component Helpers](/chapter1/further-develop-component/component-helpers.md)
 - [Develop Styles](/chapter1/further-develop-component/develop-styles.md)
@@ -49,7 +49,6 @@
 - [Add Components to Demo App](/chapter1/further-develop-component/add-to-demo-app.md)
 - [Build and Demo](/chapter1/further-develop-component/build-and-demo.md)
 - [Test Components](/chapter1/further-develop-component/test-components.md)
-  component-archetype-structure.md)
 - [Webpack Config](/chapter1/intermediate/component-archetype/webpack-config.md)
 - [Extract Styles](/chapter1/intermediate/component-archetype/extract-styles.md)
 - [Unit Tests](/chapter1/intermediate/component-archetype/unit-tests.md)
