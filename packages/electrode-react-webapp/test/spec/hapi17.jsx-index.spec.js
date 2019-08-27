@@ -62,6 +62,10 @@ const getConfig = () => {
                       pageTitle: "test page title 1"
                     }
                   };
+                } else if (request.query.template === "4") {
+                  return {
+                    tokenHandlers: Path.join(__dirname, "../fixtures/token-handler")
+                  };
                 }
                 return null; // select default
               },
@@ -712,7 +716,7 @@ describe("hapi 17 electrode-react-webapp with jsx template", () => {
     });
   });
 
-  it.skip("should use top level htmlFile and return response headers", () => {
+   it.skip("should use top level htmlFile and return response headers", () => {
     configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
     configOptions.stats = "test/data/stats-test-one-bundle.json";
     configOptions.htmlFile = "test/data/index-1.html";
@@ -1831,6 +1835,23 @@ describe("hapi 17 electrode-react-webapp with jsx template", () => {
             stopServer(server);
             throw err;
           });
+      });
+    });
+
+    it("should render with selectTemplate even if htmlFile is not specified", () => {
+      return electrodeServer(config).then(server => {
+        return server.inject({
+          method: "GET",
+          url: "/select?template=4"
+        })
+        .then(res => {
+          expect(res.statusCode).equal(200);
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
       });
     });
 

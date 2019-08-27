@@ -273,6 +273,13 @@ const config = {
 };
 ```
 
+## Development
+To run tests
+```sh
+% fyn
+% clap check
+```
+
 [npm-image]: https://badge.fury.io/js/electrode-react-webapp.svg
 [npm-url]: https://npmjs.org/package/electrode-react-webapp
 [daviddm-image]: https://david-dm.org/electrode-io/electrode/status.svg?path=packages/electrode-react-webapp
