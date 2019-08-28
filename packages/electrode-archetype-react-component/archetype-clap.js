@@ -261,7 +261,7 @@ function makeTasks(hostDir) {
     }
   };
 
-  if (archetype.options.karma !== false) {
+  if (archetype.options.karma !== false && archetype.options.mocha !== false) {
     Object.assign(tasks, {
       ".karma.test-frontend": mkCmd(
         `karma start`,
@@ -288,7 +288,7 @@ function makeTasks(hostDir) {
       )
     });
   } else {
-    console.log("Disabling karma test tasks since archetype config options.karma === false");
+    console.log("Disabling karma test tasks since archetype config options.karma === false or options.mocha === false");
   }
   if (archetype.options.jest !== false) {
     Object.assign(tasks, {
