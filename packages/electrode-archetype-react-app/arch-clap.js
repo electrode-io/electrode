@@ -1128,7 +1128,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     });
   }
 
-  if (archetype.options.karma !== false) {
+  if (archetype.options.karma !== false && archetype.options.mocha !== false) {
     Object.assign(tasks, {
       ".karma.test-frontend": {
         desc: false,
@@ -1174,7 +1174,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     });
   } else {
     const karmaTasksDisabled = () => {
-      logger.info("Disabling karma test tasks since archetype config options.karma === false");
+      logger.info("Disabling karma test tasks since archetype config options.karma === false or options.mocha === false");
     };
     Object.assign(tasks, {
       ".karma.test-frontend": karmaTasksDisabled,
