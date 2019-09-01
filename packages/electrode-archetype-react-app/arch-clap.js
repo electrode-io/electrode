@@ -636,11 +636,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     },
 
     ".build.client.babelrc": () => {
-      makeBabelRc(
-        Path.dirname(Path.resolve(AppMode.src.dir)),
-        "babelrc-client.js",
-        "babel.config.js"
-      );
+      makeBabelRc(AppMode.src.dir, "babelrc-client.js");
       makeBabelRc(AppMode.src.client, "babelrc-client.js");
     },
 
@@ -1174,7 +1170,9 @@ Individual .babelrc files were generated for you in src/client and src/server
     });
   } else {
     const karmaTasksDisabled = () => {
-      logger.info("Disabling karma test tasks since archetype config options.karma === false or options.mocha === false");
+      logger.info(
+        "Disabling karma test tasks since archetype config options.karma === false or options.mocha === false"
+      );
     };
     Object.assign(tasks, {
       ".karma.test-frontend": karmaTasksDisabled,
