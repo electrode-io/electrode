@@ -299,31 +299,22 @@ function startAppServer(options) {
 }
 
 function generateBrowsersListRc() {
-  const destnDir = Path.resolve(archetype.AppMode.src.dir, "../");
-  if (!Fs.existsSync(destnDir)) return;
-  // retrieve the default configs
-  const archRc = Path.join(archetype.devPkg.name, "config", "browserslist", "browserslistrc.js");
-  const browserConfig = require(archRc);
-  const browserlistStr = browserConfig.list.join("\n");
-  // make sure not to override any custom props if any
   const configRcFile = ".browserslistrc";
-  const destnRc = Path.join(destnDir, configRcFile);
-  if (Fs.existsSync(destnRc)) {
-    const existingConfig = Fs.readFileSync(destnRc, "utf8");
-    const anyCustomProps =
-      existingConfig &&
-      existingConfig.split("\n").filter(x => x && x[0] !== "#" && !browserConfig.list.includes(x));
-    if (anyCustomProps && anyCustomProps.length) {
-      logger.info(
-        `You've a custom ${configRcFile} config file already.
-        Make sure you don't want to override these props.\n${existingConfig}`
-      );
-      return;
-    }
+  const destRcFile = Path.resolve(configRcFile);
+
+  if (Fs.existsSync(destRcFile)) {
+    return;
   }
+
   // generate the config
-  const commentStr = "# Browsers that we support";
-  Fs.writeFileSync(destnRc, `${commentStr}\n${browserlistStr}\n`);
+  Fs.writeFileSync(
+    destRcFile,
+    `# Browsers that we support
+last 2 versions
+ie >= 11
+> 5%
+`
+  );
   logger.info(`Generating ${configRcFile} for you - please commit it.`);
 }
 
