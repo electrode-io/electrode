@@ -1,0 +1,65 @@
+{
+  "name": "poc-subapp",
+  "version": "0.0.1",
+  "description": "SubApp POC",
+  "homepage": "http://test",
+  "author": {
+    "name": "Joel Chen",
+    "email": "joel123@gmail.com",
+    "url": "https://github.com/jchip"
+  },
+  "contributors": [],
+  "files": [
+    "server",
+    "src",
+    "lib",
+    "dist"
+  ],
+  "main": "lib/server/index.js",
+  "keywords": [
+    "test",
+    "electrode"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "test/test-app"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">= 6",
+    "npm": ">= 3"
+  },
+  "scripts": {
+    "build": "clap build",
+    "prod-start": "NODE_ENV=production clap -n -x electrode/build prod",
+    "start": "if test \"$NODE_ENV\" = \"production\"; then npm run prod-start; else clap dev; fi",
+    "test": "clap check",
+    "coverage": "clap check",
+    "prod": "echo 'Starting standalone server in PROD mode'; NODE_ENV=production node ./lib/server/",
+    "heroku-postbuild": "clap build"
+  },
+  "dependencies": {
+    "electrode-archetype-react-app": "^6.3.0",
+    "electrode-confippet": "^1.5.0",
+    "electrode-server": "^2.2.2",
+    "electrode-static-paths": "^2.0.2",
+    "http-codes": "^1.0.0",
+    "inert": "^5.1.2",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "subapp-server": "../../packages/subapp-server",
+    "subapp-util": "../../packages/subapp-util",
+    "subapp-web": "../../packages/subapp-web"
+  },
+  "devDependencies": {
+    "electrode-archetype-react-app-dev": "^6.3.0"
+  },
+  "fyn": {
+    "dependencies": {
+      "electrode-archetype-react-app": "../../packages/electrode-archetype-react-app"
+    },
+    "devDependencies": {
+      "electrode-archetype-react-app-dev": "../../packages/electrode-archetype-react-app-dev"
+    }
+  }
+}

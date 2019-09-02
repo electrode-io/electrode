@@ -6,6 +6,8 @@ import { createStore } from "redux";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Large from "../components/large";
+import { reduxLoadSubApp } from "subapp-redux";
+
 // import AdvGridList from "../components/adv-grid";
 
 const MoreProducts = props => {
@@ -55,8 +57,6 @@ const Bottom = props => {
   );
 };
 
-const name = "Bottom";
-
 const Component = withRouter(
   connect(
     state => state,
@@ -64,8 +64,8 @@ const Component = withRouter(
   )(Bottom)
 );
 
-const subApp = {
-  name,
+export default reduxLoadSubApp({
+  name: "Bottom",
   useReactRouter: true,
   Component,
   StartComponent: props => {
@@ -78,6 +78,4 @@ const subApp = {
   reduxCreateStore: initialState => {
     return createStore(s => s, initialState);
   }
-};
-
-export { name, subApp as default, Component };
+});

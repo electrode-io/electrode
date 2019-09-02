@@ -1,6 +1,9 @@
 import React from "react";
 import { render, hydrate } from "react-dom";
-import createBrowserHistory from "history/createBrowserHistory";
+import { createBrowserHistory } from "history";
+import makeSubAppSpec from "./make-subapp-spec";
+
+export { default as makeSubAppSpec } from "./make-subapp-spec";
 
 export function defaultRenderStart(Component, ssr, element) {
   if (ssr) {
@@ -11,6 +14,8 @@ export function defaultRenderStart(Component, ssr, element) {
 }
 
 export function loadSubApp(info, renderStart) {
+  info = makeSubAppSpec(info);
+
   let webSubApps = window.webSubApps;
   if (!webSubApps) webSubApps = window.webSubApps = {};
 
@@ -23,9 +28,10 @@ export function loadSubApp(info, renderStart) {
     webSubApps._bundles[lname] = true;
   }
 
+  // subapp already loaded, do nothing and return the info
   if (subApp._started) {
-    console.error("SubApp", name, "already loaded");
-    return undefined;
+    // console.error("SubApp", name, "already loaded");
+    return info;
   }
 
   subApp._started = [];
@@ -76,7 +82,7 @@ export function loadSubApp(info, renderStart) {
     onLoadStart.forEach(options => setTimeout(() => subApp.start(options), 0));
   }
 
-  return undefined;
+  return info;
 }
 
 export function dynamicLoadSubApp(options) {
@@ -107,4 +113,11 @@ export function getBrowserHistory() {
   const wsa = window.webSubApps;
   if (!wsa.history) wsa.history = createBrowserHistory();
   return wsa.history;
+}
+
+export function hotReloadSubApp(info) {
+  info = info.default || info; // check for es6 module
+  const subApp = window.webSubApps[info.name];
+  subApp.info = info;
+  subApp._started.forEach(instance => setTimeout(() => subApp.start(instance), 0));
 }

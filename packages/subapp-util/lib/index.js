@@ -11,6 +11,7 @@ const xrequire = require;
 
 let SUBAPP_MANIFEST;
 const SUBAPP_CONTAINER_SYM = Symbol.for("Electrode SubApps Container");
+const MAP_BY_PATH_SYM = Symbol("subapps map by path");
 
 const appSrcDir = () => {
   const dir = process.env.APP_SRC_DIR || (process.env.NODE_ENV === "production" ? "lib" : "src");
@@ -31,6 +32,7 @@ function scanSubApp(name, verbatimName, dir, file) {
   const subAppDir = Path.dirname(file);
   const subAppFullPath = Path.resolve(dir, subAppDir);
 
+  // does subapp dir contain a file matching server.*, server-<name>.* pattern
   const entries = ["server.", `server-${name}.`, `server-${verbatimName}.`].map(x =>
     x.toLowerCase()
   );
@@ -43,6 +45,7 @@ function scanSubApp(name, verbatimName, dir, file) {
   })[0];
 
   const manifest = {
+    fullDir: subAppFullPath,
     subAppDir,
     type: "app",
     name,
@@ -82,7 +85,7 @@ function determineName(file) {
 function scanSubAppsFromDir(srcDir, maxLevel = Infinity) {
   const dir = Path.resolve(srcDir);
 
-  const subApps = {};
+  const subApps = { [MAP_BY_PATH_SYM]: {} };
   const { maniFiles = [], files = [] } = scanDir.sync({
     dir: srcDir,
     grouping: true,
@@ -110,7 +113,9 @@ function scanSubAppsFromDir(srcDir, maxLevel = Infinity) {
     const { name, verbatimName } = determineName(file);
     if (subApps[name]) return null;
     try {
-      subApps[name] = scanSubApp(name, verbatimName, srcDir, file);
+      const subapp = scanSubApp(name, verbatimName, srcDir, file);
+      subApps[name] = subapp;
+      subApps[MAP_BY_PATH_SYM][subapp.fullDir] = subapp;
     } catch (error) {
       return error;
     }
@@ -138,12 +143,15 @@ function scanSubAppsFromDir(srcDir, maxLevel = Infinity) {
 //
 function scanSingleSubAppFromDir(subAppDir) {
   const subApps = scanSubAppsFromDir(subAppDir, 0);
+  // return the first (and should be only) entry from the result
   for (const n in subApps) {
-    const manifest = subApps[n];
-    manifest.subAppDir = Path.basename(subAppDir);
-    return manifest;
+    return subApps[n];
   }
   return null;
+}
+
+function getSubAppByPathMap(subApps) {
+  return subApps[MAP_BY_PATH_SYM];
 }
 
 function getSubAppContainer() {
@@ -184,7 +192,7 @@ function loadSubAppByName(name) {
   // load subapp's entry
   xrequire(Path.resolve(appSrcDir(), subAppDir, manifest.entry));
 
-  // if subapp did not regiser itself then register it
+  // if subapp did not register itself then register it
   if (!container[name]) {
     registerSubApp(manifest);
   }
@@ -203,7 +211,11 @@ function loadSubAppServerByName(name) {
     return es6Require(Path.resolve(appSrcDir(), subAppDir, x));
   }
 
-  return {};
+  // generate a server
+  const subapp = require(Path.join(manifest.fullDir, manifest.entry));
+  return {
+    StartComponent: subapp.default.Component
+  };
 }
 
 function refreshSubAppByName(name) {
@@ -234,6 +246,7 @@ module.exports = {
   scanSingleSubAppFromDir,
   getAllSubAppManifest,
   registerSubApp,
+  getSubAppByPathMap,
   getSubAppContainer,
   loadSubAppByName,
   loadSubAppServerByName,
