@@ -11,11 +11,4 @@ const Header = () => {
   );
 };
 
-const name = "Header";
-
-const subApp = {
-  name,
-  Component: Header
-};
-
-loadSubApp(subApp);
+export default loadSubApp({ name: "Header", Component: Header });

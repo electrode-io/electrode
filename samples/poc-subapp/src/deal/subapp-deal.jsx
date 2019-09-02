@@ -5,4 +5,4 @@ const Deal = () => {
   return <div>SPECIAL DEAL - SPECIAL DEAL</div>;
 };
 
-loadSubApp({ name: "Deal", Component: Deal });
+export default loadSubApp({ name: "Deal", Component: Deal });

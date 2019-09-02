@@ -1,5 +1,5 @@
 import React from "react";
-import { Component, default as subApp } from "./bottom";
+import subApp from "./bottom";
 import { StaticRouter } from "react-router-dom";
 import Promise from "bluebird";
 import Fs from "fs";
@@ -34,7 +34,7 @@ export default {
   StartComponent: props => {
     return (
       <StaticRouter {...props}>
-        <Component />
+        <subApp.Component />
       </StaticRouter>
     );
   }

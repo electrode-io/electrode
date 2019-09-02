@@ -20,6 +20,10 @@ function makeAppMode(prodDir, reactLib) {
     const subApps = subappUtil.scanSubAppsFromDir("src");
     const hasSubApps = Object.keys(subApps).length > 0;
 
+    //
+    // app still has src directory in production mode so we know
+    // app is definitely in the src/lib dir structure setup
+    //
     if (
       hasSubApps ||
       Fs.existsSync(Path.resolve("src", client)) ||

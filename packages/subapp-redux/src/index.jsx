@@ -1,8 +1,9 @@
 import React from "react";
 import { render, hydrate } from "react-dom";
-import { createStore } from "redux";
 import { Provider } from "react-redux";
 import { loadSubApp } from "subapp-web";
+
+export { hotReloadSubApp } from "subapp-web";
 
 //
 // client side function to start a subapp with redux support
@@ -28,12 +29,6 @@ export function reduxRenderStart(options) {
   }
 
   return store;
-}
-
-export function hotReloadSubApp(info) {
-  const subApp = window.webSubApps[info.name];
-  subApp.info = info;
-  subApp._started.forEach(instance => setTimeout(() => subApp.start(instance), 0));
 }
 
 //

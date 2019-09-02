@@ -336,6 +336,19 @@
    '@babel/helper-plugin-utils': ^7.0.0
   peerDependencies:
    '@babel/core': ^7.0.0-0
+'@babel/plugin-proposal-decorators':
+ _latest: 7.4.4
+ _:
+  ^7.4.4: 7.4.4
+ 7.4.4:
+  $: sha512-z7MpQz3XC/iQJWXH9y+MaWcLPNSMY9RQSthrLzak8R8hCj0fuyNk+Dzi9kfNe/JxxlWQ2g7wkABbgWjW36MTcw==
+  _: 'http://npme.walmart.com/@babel/plugin-proposal-decorators/-/plugin-proposal-decorators-7.4.4.tgz'
+  dependencies:
+   '@babel/helper-create-class-features-plugin': ^7.4.4
+   '@babel/helper-plugin-utils': ^7.0.0
+   '@babel/plugin-syntax-decorators': ^7.2.0
+  peerDependencies:
+   '@babel/core': ^7.0.0-0
 '@babel/plugin-proposal-json-strings':
  _latest: 7.2.0
  _:
@@ -392,6 +405,17 @@
  7.2.0:
   $: sha512-1ZrIRBv2t0GSlcwVoQ6VgSLpLgiN/FVQUzt9znxo7v2Ov4jJrs8RY8tv0wvDmFN3qIdMKWrmMMW6yZ0G19MfGg==
   _: 'https://registry.npmjs.org/@babel/plugin-syntax-async-generators/-/plugin-syntax-async-generators-7.2.0.tgz'
+  dependencies:
+   '@babel/helper-plugin-utils': ^7.0.0
+  peerDependencies:
+   '@babel/core': ^7.0.0-0
+'@babel/plugin-syntax-decorators':
+ _latest: 7.2.0
+ _:
+  ^7.2.0: 7.2.0
+ 7.2.0:
+  $: sha512-38QdqVoXdHUQfTpZo3rQwqQdWtCn5tMv4uV6r2RMfTqNBuv4ZBhz79SfaQWKTVmxHjeFv/DnXVC/+agHCklYWA==
+  _: 'http://npme.walmart.com/@babel/plugin-syntax-decorators/-/plugin-syntax-decorators-7.2.0.tgz'
   dependencies:
    '@babel/helper-plugin-utils': ^7.0.0
   peerDependencies:
@@ -1282,6 +1306,13 @@
    '@types/events': '*'
    '@types/minimatch': '*'
    '@types/node': '*'
+'@types/jest':
+ _latest: 24.0.18
+ _:
+  ^23.3.14: 23.3.14
+ 23.3.14:
+  $: sha512-Q5hTcfdudEL2yOmluA1zaSyPbzWPmJ3XfSWeP3RyoYvS9hnje1ZyagrZOuQ6+1nQC1Gw+7gap3pLNL3xL6UBug==
+  _: 'http://npme.walmart.com/@types/jest/-/jest-23.3.14.tgz'
 '@types/minimatch':
  _latest: 3.0.3
  _:
@@ -1771,18 +1802,6 @@ anymatch:
   dependencies:
    micromatch: ^3.1.4
    normalize-path: ^2.1.1
-apartment:
- _latest: 1.1.1
- _:
-  ^1.1.1: 1.1.1
- 1.1.1:
-  $: sha1-/ZQGzcyodTWULxWzYKGrWkqpfiY=
-  _: 'https://registry.npmjs.org/apartment/-/apartment-1.1.1.tgz'
-  dependencies:
-   css: 2.2.1
-   get-stdin: 5.0.1
-   lodash: 3.10.1
-   minimist: 1.2.0
 append-transform:
  _latest: 1.0.0
  _:
@@ -2087,13 +2106,9 @@ atob:
  _latest: 2.1.2
  _:
   ^2.1.1: 2.1.2
-  ~1.1.0: 1.1.3
  2.1.2:
   $: sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
   _: 'https://registry.npmjs.org/atob/-/atob-2.1.2.tgz'
- 1.1.3:
-  $: sha1-lfE2KbEsOlGl0hWr3OKqnzL4B3M=
-  _: 'https://registry.npmjs.org/atob/-/atob-1.1.3.tgz'
 autoprefixer:
  _latest: 9.6.1
  _:
@@ -2862,13 +2877,6 @@ browser-resolve:
   _: 'https://registry.npmjs.org/browser-resolve/-/browser-resolve-1.11.3.tgz'
   dependencies:
    resolve: 1.1.7
-browser-stdout:
- _latest: 1.3.1
- _:
-  1.3.0: 1.3.0
- 1.3.0:
-  $: sha1-81HTKWnTL6XXpVZxVCY9korjvR8=
-  _: 'https://registry.npmjs.org/browser-stdout/-/browser-stdout-1.3.0.tgz'
 browserify-aes:
  _latest: 1.2.0
  _:
@@ -3459,13 +3467,12 @@ class-utils:
 clean-css:
  _latest: 4.2.1
  _:
-  ^3.4.21: 3.4.28
- 3.4.28:
-  $: sha1-vxlF6C/ICPVWlebd6uwBQA79A/8=
-  _: 'https://registry.npmjs.org/clean-css/-/clean-css-3.4.28.tgz'
+  ^4.2.1: 4.2.1
+ 4.2.1:
+  $: sha512-4ZxI6dy4lrY6FHzfiy1aEOXgu4LIsW2MhwG0VBKdcoGoH/XLFgaHSdLTGr4O8Be6A8r3MOphEiI8Gc1n0ecf3g==
+  _: 'http://npme.walmart.com/clean-css/-/clean-css-4.2.1.tgz'
   dependencies:
-   commander: 2.8.x
-   source-map: 0.4.x
+   source-map: ~0.6.0
 cli-boxes:
  _latest: 2.2.0
  _:
@@ -3641,8 +3648,6 @@ combined-stream:
 commander:
  _latest: 2.20.0
  _:
-  2.11.0: 2.11.0
-  2.8.x: 2.8.1
   '^2.19.0,^2.8.1,~2.20.0': 2.20.0
   ~2.13.0: 2.13.0
  2.20.0:
@@ -3651,14 +3656,6 @@ commander:
  2.13.0:
   $: sha512-MVuS359B+YzaWqjCL/c+22gfryv+mCBPHAv3zyVI2GN8EY6IRP8VwtasXn8jyyhvvq84R4ImN1OKRtcbIasjYA==
   _: 'https://registry.npmjs.org/commander/-/commander-2.13.0.tgz'
- 2.11.0:
-  $: sha512-b0553uYA5YAEGgyYIGYROzKQ7X5RAqedkfjiZxwi0kL1g3bOaBNNZfYkzt/CL0umgD5wc9Jec2FbB98CjkMRvQ==
-  _: 'https://registry.npmjs.org/commander/-/commander-2.11.0.tgz'
- 2.8.1:
-  $: sha1-Br42f+v9oMMwqh4qBy09yXYkJdQ=
-  _: 'https://registry.npmjs.org/commander/-/commander-2.8.1.tgz'
-  dependencies:
-   graceful-readlink: '>= 1.0.0'
 commondir:
  _latest: 1.0.1
  _:
@@ -4041,18 +4038,6 @@ crypto-random-string:
  1.0.0:
   $: sha1-ojD2T1aDEOFJgAmUB5DsmVRbyn4=
   _: 'https://registry.npmjs.org/crypto-random-string/-/crypto-random-string-1.0.0.tgz'
-css:
- _latest: 2.2.4
- _:
-  2.2.1: 2.2.1
- 2.2.1:
-  $: sha1-c6TIHehdtmTU7mdPfUcIXjstVdw=
-  _: 'https://registry.npmjs.org/css/-/css-2.2.1.tgz'
-  dependencies:
-   source-map: ^0.1.38
-   source-map-resolve: ^0.3.0
-   urix: ^0.1.0
-   inherits: ^2.0.1
 css-color-names:
  _latest: 1.0.1
  _:
@@ -4070,18 +4055,6 @@ css-declaration-sorter:
   dependencies:
    postcss: ^7.0.1
    timsort: ^0.3.0
-css-fork-pocketjoso:
- _latest: 2.2.1
- _:
-  ^2.2.1: 2.2.1
- 2.2.1:
-  $: sha1-ondI76ZzUfReRUmmgGRSvrQkQWI=
-  _: 'https://registry.npmjs.org/css-fork-pocketjoso/-/css-fork-pocketjoso-2.2.1.tgz'
-  dependencies:
-   source-map: ^0.1.38
-   source-map-resolve: ^0.3.0
-   urix: ^0.1.0
-   inherits: ^2.0.1
 css-loader:
  _latest: 2.1.1
  _:
@@ -4704,7 +4677,7 @@ di:
 diff:
  _latest: 4.0.1
  _:
-  '3.3.1,^3.1.0,^3.2.0': 3.3.1
+  '^3.1.0,^3.2.0': 3.3.1
  3.3.1:
   $: sha512-MKPHZDMB0o6yHyDryUOScqZibp914ksXwAMYMTHj6KO8UeKsRYNJD3oNCKjTqZon+V488P7N/HzXF8t7ZR95ww==
   _: 'https://registry.npmjs.org/diff/-/diff-3.3.1.tgz'
@@ -4930,38 +4903,51 @@ ejs:
  2.6.1:
   $: sha512-0xy4A/twfrRCnkhfk8ErDi5DqdAsAqeGxht4xkCUrsvhhbQNs7E+4jV0CN7+NKIY0aHE72+XvqtBIXzD31ZbXQ==
   _: 'https://registry.npmjs.org/ejs/-/ejs-2.6.1.tgz'
-electrode-archetype-opt-eslint:
- _latest: 1.0.0-fynlocal_h
+electrode-archetype-opt-critical-css:
+ _latest: 1.0.1-fynlocal_h
  _:
-  ../electrode-archetype-opt-eslint: 1.0.0-fynlocal_h
- 1.0.0-fynlocal_h:
+  ../electrode-archetype-opt-critical-css: 1.0.1-fynlocal_h
+ 1.0.1-fynlocal_h:
+  hasPI: 1
+  $: local
+  _: ../../packages/electrode-archetype-opt-critical-css
+  dependencies:
+   clean-css: ^4.2.1
+   penthouse: ^2.2.0
+electrode-archetype-opt-eslint:
+ _latest: 1.0.1-fynlocal_h
+ _:
+  ../electrode-archetype-opt-eslint: 1.0.1-fynlocal_h
+ 1.0.1-fynlocal_h:
   optFailed: 1
   $: local
   _: ../../packages/electrode-archetype-opt-eslint
 electrode-archetype-opt-inferno:
- _latest: 0.2.7-fynlocal_h
+ _latest: 0.2.9-fynlocal_h
  _:
-  ../electrode-archetype-opt-inferno: 0.2.7-fynlocal_h
- 0.2.7-fynlocal_h:
+  ../electrode-archetype-opt-inferno: 0.2.9-fynlocal_h
+ 0.2.9-fynlocal_h:
   optFailed: 1
   $: local
   _: ../../packages/electrode-archetype-opt-inferno
 electrode-archetype-opt-jest:
- _latest: 1.0.0-fynlocal_h
+ _latest: 1.0.1-fynlocal_h
  _:
-  ../electrode-archetype-opt-jest: 1.0.0-fynlocal_h
- 1.0.0-fynlocal_h:
+  ../electrode-archetype-opt-jest: 1.0.1-fynlocal_h
+ 1.0.1-fynlocal_h:
   hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-jest
   dependencies:
+   '@types/jest': ^23.3.14
    babel-jest: ^23.6.0
-   jest: ^23.5.0
+   eslint-plugin-jest: ^21.27.2
+   jest: ^23.6.0
 electrode-archetype-opt-karma:
- _latest: 2.0.1-fynlocal_h
+ _latest: 2.0.3-fynlocal_h
  _:
-  ../electrode-archetype-opt-karma: 2.0.1-fynlocal_h
- 2.0.1-fynlocal_h:
+  ../electrode-archetype-opt-karma: 2.0.3-fynlocal_h
+ 2.0.3-fynlocal_h:
   hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-karma
@@ -4984,20 +4970,34 @@ electrode-archetype-opt-karma:
    karma-webpack: 4.0.0-rc.3
    phantomjs-prebuilt: ^2.1.16
 electrode-archetype-opt-mocha:
- _latest: 1.0.0-fynlocal_h
+ _latest: 1.0.1-fynlocal_h
  _:
-  ../electrode-archetype-opt-mocha: 1.0.0-fynlocal_h
- 1.0.0-fynlocal_h:
-  hasPI: 1
+  ../electrode-archetype-opt-mocha: 1.0.1-fynlocal_h
+ 1.0.1-fynlocal_h:
+  optFailed: 1
   $: local
   _: ../../packages/electrode-archetype-opt-mocha
-  dependencies:
-   mocha: ^4.0.0
-electrode-archetype-opt-pwa:
- _latest: 1.0.2-fynlocal_h
+electrode-archetype-opt-postcss:
+ _latest: 1.0.1-fynlocal_h
  _:
-  ../electrode-archetype-opt-pwa: 1.0.2-fynlocal_h
- 1.0.2-fynlocal_h:
+  ../electrode-archetype-opt-postcss: 1.0.1-fynlocal_h
+ 1.0.1-fynlocal_h:
+  hasPI: 1
+  $: local
+  _: ../../packages/electrode-archetype-opt-postcss
+  dependencies:
+   babel-plugin-react-css-modules: ^3.4.2
+   postcss-import: ^9.1.0
+   postcss-less: ^3.1.4
+   postcss-loader: ^3.0.0
+   postcss-nested: ^3.0.0
+   postcss-preset-env: ^5.3.0
+   postcss-scss: ^1.0.6
+electrode-archetype-opt-pwa:
+ _latest: 1.0.3-fynlocal_h
+ _:
+  ../electrode-archetype-opt-pwa: 1.0.3-fynlocal_h
+ 1.0.3-fynlocal_h:
   hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-pwa
@@ -5011,10 +5011,10 @@ electrode-archetype-opt-pwa:
    web-app-manifest-loader: ^0.1.1
    webpack-disk-plugin: 0.0.2
 electrode-archetype-opt-react:
- _latest: 1.0.4-fynlocal_h
+ _latest: 2.0.2-fynlocal_h
  _:
-  ../electrode-archetype-opt-react: 1.0.4-fynlocal_h
- 1.0.4-fynlocal_h:
+  ../electrode-archetype-opt-react: 2.0.2-fynlocal_h
+ 2.0.2-fynlocal_h:
   hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-react
@@ -5022,10 +5022,10 @@ electrode-archetype-opt-react:
    react: ^16.0.0
    react-dom: ^16.0.0
 electrode-archetype-opt-sass:
- _latest: 1.0.5-fynlocal_h
+ _latest: 1.0.7-fynlocal_h
  _:
-  ../electrode-archetype-opt-sass: 1.0.5-fynlocal_h
- 1.0.5-fynlocal_h:
+  ../electrode-archetype-opt-sass: 1.0.7-fynlocal_h
+ 1.0.7-fynlocal_h:
   hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-sass
@@ -5033,10 +5033,10 @@ electrode-archetype-opt-sass:
    node-sass: ^4.9.3
    sass-loader: ^6.0.6
 electrode-archetype-opt-sinon:
- _latest: 1.0.0-fynlocal_h
+ _latest: 1.0.1-fynlocal_h
  _:
-  ../electrode-archetype-opt-sinon: 1.0.0-fynlocal_h
- 1.0.0-fynlocal_h:
+  ../electrode-archetype-opt-sinon: 1.0.1-fynlocal_h
+ 1.0.1-fynlocal_h:
   hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-sinon
@@ -5044,10 +5044,10 @@ electrode-archetype-opt-sinon:
    sinon: ^4.0.0
    sinon-chai: ^2.14.0
 electrode-archetype-opt-typescript:
- _latest: 1.0.0-fynlocal_h
+ _latest: 1.0.1-fynlocal_h
  _:
-  ../electrode-archetype-opt-typescript: 1.0.0-fynlocal_h
- 1.0.0-fynlocal_h:
+  ../electrode-archetype-opt-typescript: 1.0.1-fynlocal_h
+ 1.0.1-fynlocal_h:
   hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-typescript
@@ -5055,10 +5055,10 @@ electrode-archetype-opt-typescript:
    typescript: ^3.2.1
    '@babel/preset-typescript': ^7.1.0
 electrode-archetype-react-app:
- _latest: 6.5.8-fynlocal_h
+ _latest: 6.5.11-fynlocal_h
  _:
-  ../../packages/electrode-archetype-react-app: 6.5.8-fynlocal_h
- 6.5.8-fynlocal_h:
+  ../../packages/electrode-archetype-react-app: 6.5.11-fynlocal_h
+ 6.5.11-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app
@@ -5070,13 +5070,13 @@ electrode-archetype-react-app:
    optional-require: ^1.0.0
    subapp-util: ^1.0.1
   optionalDependencies:
-   electrode-archetype-opt-inferno: ^0.2.7
-   electrode-archetype-opt-react: ^1.0.4
+   electrode-archetype-opt-inferno: ^0.2.9
+   electrode-archetype-opt-react: ^2.0.2
 electrode-archetype-react-app-dev:
- _latest: 6.5.8-fynlocal_h
+ _latest: 6.5.11-fynlocal_h
  _:
-  ../../packages/electrode-archetype-react-app-dev: 6.5.8-fynlocal_h
- 6.5.8-fynlocal_h:
+  ../../packages/electrode-archetype-react-app-dev: 6.5.11-fynlocal_h
+ 6.5.11-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app-dev
@@ -5084,6 +5084,7 @@ electrode-archetype-react-app-dev:
    '@babel/cli': ^7.1.5
    '@babel/core': ^7.1.6
    '@babel/plugin-proposal-class-properties': ^7.2.1
+   '@babel/plugin-proposal-decorators': ^7.4.4
    '@babel/plugin-proposal-object-rest-spread': ^7.0.0
    '@babel/plugin-syntax-dynamic-import': ^7.2.0
    '@babel/plugin-transform-flow-strip-types': ^7.2.0
@@ -5100,13 +5101,11 @@ electrode-archetype-react-app-dev:
    ansi-to-html: ^0.6.8
    autoprefixer: ^9.6.0
    babel-core: 7.0.0-bridge.0
-   babel-eslint: ^10.0.1
    babel-loader: ^8.0.4
    babel-plugin-dynamic-import-node: ^2.2.0
    babel-plugin-i18n-id-hashing: ^2.1.0
    babel-plugin-lodash: ^3.3.4
    babel-plugin-minify-dead-code-elimination: ^0.5.0
-   babel-plugin-react-css-modules: ^3.4.2
    babel-plugin-react-intl: ^3.0.1
    babel-plugin-transform-node-env-inline: ^0.4.3
    babel-plugin-transform-react-remove-prop-types: ^0.4.20
@@ -5117,7 +5116,6 @@ electrode-archetype-react-app-dev:
    chai-shallowly: ^1.0.0
    chalker: ^1.1.1
    chokidar: ^2.0.4
-   clean-css: ^3.4.21
    convert-source-map: ^1.5.0
    core-js: '^2 || ^3'
    css-loader: ^1.0.0
@@ -5151,13 +5149,6 @@ electrode-archetype-react-app-dev:
    offline-plugin: ^4.6.1
    optimize-css-assets-webpack-plugin: ^5.0.1
    optional-require: ^1.0.0
-   penthouse: ^0.11.13
-   postcss-import: ^9.1.0
-   postcss-less: ^3.1.4
-   postcss-loader: ^3.0.0
-   postcss-nested: ^3.0.0
-   postcss-preset-env: ^5.3.0
-   postcss-scss: ^1.0.6
    prop-types: ^15.5.6
    raw-loader: ^0.5.1
    react-intl: ^2.1.0
@@ -5187,16 +5178,18 @@ electrode-archetype-react-app-dev:
    xenv-config: ^1.3.0
    xsh: ^0.4.4
   optionalDependencies:
-   electrode-archetype-opt-eslint: ^1.0.0
-   electrode-archetype-opt-inferno: ^0.2.7
-   electrode-archetype-opt-karma: ^2.0.1
-   electrode-archetype-opt-pwa: ^1.0.2
-   electrode-archetype-opt-react: ^1.0.4
-   electrode-archetype-opt-sass: ^1.0.5
-   electrode-archetype-opt-jest: ^1.0.0
-   electrode-archetype-opt-sinon: ^1.0.0
-   electrode-archetype-opt-typescript: ^1.0.0
-   electrode-archetype-opt-mocha: ^1.0.0
+   electrode-archetype-opt-critical-css: ^1.0.1
+   electrode-archetype-opt-eslint: ^1.0.1
+   electrode-archetype-opt-inferno: ^0.2.9
+   electrode-archetype-opt-jest: ^1.0.1
+   electrode-archetype-opt-karma: ^2.0.3
+   electrode-archetype-opt-mocha: ^1.0.1
+   electrode-archetype-opt-postcss: ^1.0.1
+   electrode-archetype-opt-pwa: ^1.0.3
+   electrode-archetype-opt-react: ^2.0.2
+   electrode-archetype-opt-sass: ^1.0.7
+   electrode-archetype-opt-sinon: ^1.0.1
+   electrode-archetype-opt-typescript: ^1.0.1
   peerDependencies:
    electrode-archetype-react-app: ^6.0.0
 electrode-bundle-analyzer:
@@ -5259,10 +5252,10 @@ electrode-node-resolver:
   dependencies:
    require-at: ^1.0.0
 electrode-react-webapp:
- _latest: 3.8.2-fynlocal_h
+ _latest: 3.8.3-fynlocal_h
  _:
-  ../../packages/electrode-react-webapp: 3.8.2-fynlocal_h
- 3.8.2-fynlocal_h:
+  ../../packages/electrode-react-webapp: 3.8.3-fynlocal_h
+ 3.8.3-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-react-webapp
@@ -5653,7 +5646,7 @@ escape-html:
 escape-string-regexp:
  _latest: 2.0.0
  _:
-  '1.0.5,^1.0.2,^1.0.5': 1.0.5
+  '^1.0.2,^1.0.5': 1.0.5
  1.0.5:
   $: sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
   _: 'https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz'
@@ -5682,6 +5675,15 @@ escodegen:
    optionator: ^0.8.1
   optionalDependencies:
    source-map: ~0.2.0
+eslint-plugin-jest:
+ _latest: 22.15.2
+ _:
+  ^21.27.2: 21.27.2
+ 21.27.2:
+  $: sha512-0E4OIgBJVlAmf1KfYFtZ3gYxgUzC5Eb3Jzmrc9ikI1OY+/cM8Kh72Ti7KfpeHNeD3HJNf9SmEfmvQLIz44Hrhw==
+  _: 'http://npme.walmart.com/eslint-plugin-jest/-/eslint-plugin-jest-21.27.2.tgz'
+  peerDependencies:
+   eslint: '>=3.6'
 eslint-scope:
  _latest: 4.0.3
  _:
@@ -5981,7 +5983,7 @@ extglob:
 extract-zip:
  _latest: 1.6.7
  _:
-  ^1.6.5: 1.6.7
+  '^1.6.5,^1.6.6': 1.6.7
  1.6.7:
   $: sha1-qEC0uK9kAyZMjbV/Txp0Mz74H+k=
   _: 'https://registry.npmjs.org/extract-zip/-/extract-zip-1.6.7.tgz'
@@ -6624,11 +6626,7 @@ get-func-name:
 get-stdin:
  _latest: 7.0.0
  _:
-  5.0.1: 5.0.1
   ^4.0.1: 4.0.1
- 5.0.1:
-  $: sha1-Ei4WFZHiH/TFJTAwVpPyDmOTo5g=
-  _: 'https://registry.npmjs.org/get-stdin/-/get-stdin-5.0.1.tgz'
  4.0.1:
   $: sha1-uWjGsKBDhDJJAui/Gl3zJXmkUP4=
   _: 'https://registry.npmjs.org/get-stdin/-/get-stdin-4.0.1.tgz'
@@ -6672,22 +6670,11 @@ glob:
  _latest: 7.1.4
  _:
   7.0.x: 7.0.6
-  7.1.2: 7.1.2
   ^5.0.15: 5.0.15
   '^7.0.0,^7.0.3,^7.0.6,^7.1.1,^7.1.2,^7.1.3,~7.1.1': 7.1.4
  7.1.4:
   $: sha512-hkLPepehmnKk41pUGm3sYxoFs/umurYfYJCerbXEyFIWcAzvpipAgVkBqqT9RBKMGjnq6kMuyYwha6csxbiM1A==
   _: 'https://registry.npmjs.org/glob/-/glob-7.1.4.tgz'
-  dependencies:
-   fs.realpath: ^1.0.0
-   inflight: ^1.0.4
-   inherits: '2'
-   minimatch: ^3.0.4
-   once: ^1.3.0
-   path-is-absolute: ^1.0.0
- 7.1.2:
-  $: sha512-MJTUg1kjuLeQCJ+ccE4Vpa6kKVXkPYJ2mOCQyUuKLcLQsdrMCpBPUi8qVE6+YuaJkozeA9NusTAw3hLr8Xe5EQ==
-  _: 'https://registry.npmjs.org/glob/-/glob-7.1.2.tgz'
   dependencies:
    fs.realpath: ^1.0.0
    inflight: ^1.0.4
@@ -6901,20 +6888,6 @@ graceful-fs:
  4.1.15:
   $: sha512-6uHUhOPEBgQ24HM+r6b/QwWfZq+yiFcipKFrOFiBEnWdy5sdzYoi+pJeQaPI5qOLRFqWmAXUPQNsielzdLoecA==
   _: 'https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.1.15.tgz'
-graceful-readlink:
- _latest: 1.0.1
- _:
-  '>= 1.0.0': 1.0.1
- 1.0.1:
-  $: sha1-TK+tdrxi8C+gObL5Tpo906ORpyU=
-  _: 'https://registry.npmjs.org/graceful-readlink/-/graceful-readlink-1.0.1.tgz'
-growl:
- _latest: 1.10.5
- _:
-  1.10.3: 1.10.3
- 1.10.3:
-  $: sha512-hKlsbA5Vu3xsh1Cg3J7jSmX/WaW6A5oBeqzM88oNbCRQFz+zUaXm6yxS4RVytp1scBoJzSYl4YAEOQIt6O8V1Q==
-  _: 'https://registry.npmjs.org/growl/-/growl-1.10.3.tgz'
 growly:
  _latest: 1.3.0
  _:
@@ -7041,14 +7014,10 @@ has-flag:
  _latest: 4.0.0
  _:
   ^1.0.0: 1.0.0
-  ^2.0.0: 2.0.0
   ^3.0.0: 3.0.0
  3.0.0:
   $: sha1-tdRU3CGZriJWmfNGfloH87lVuv0=
   _: 'https://registry.npmjs.org/has-flag/-/has-flag-3.0.0.tgz'
- 2.0.0:
-  $: sha1-6CB68cx7MNRGzHC3NLXovhj4jVE=
-  _: 'https://registry.npmjs.org/has-flag/-/has-flag-2.0.0.tgz'
  1.0.0:
   $: sha1-nZ55MWXOAXoA8AQYxD+UKnsdEfo=
   _: 'https://registry.npmjs.org/has-flag/-/has-flag-1.0.0.tgz'
@@ -7145,13 +7114,6 @@ hasha:
   dependencies:
    is-stream: ^1.0.1
    pinkie-promise: ^2.0.0
-he:
- _latest: 1.2.0
- _:
-  1.1.1: 1.1.1
- 1.1.1:
-  $: sha1-k0EP0hsAlzUVH4howvJx80J+I/0=
-  _: 'https://registry.npmjs.org/he/-/he-1.1.1.tgz'
 heavy:
  _latest: 6.1.2
  _:
@@ -7447,7 +7409,7 @@ https-browserify:
 https-proxy-agent:
  _latest: 2.2.1
  _:
-  ^2.2.0: 2.2.1
+  '^2.2.0,^2.2.1': 2.2.1
  2.2.1:
   $: sha512-HPCTS1LW51bcyMYbxUIOO4HEOlQ1/1qRaFWcyxvwaqUS9TY88aoEuHUY33kuAh1YhVVaDQhLZsnPd+XNARWZlQ==
   _: 'https://registry.npmjs.org/https-proxy-agent/-/https-proxy-agent-2.2.1.tgz'
@@ -8479,12 +8441,12 @@ jaro-winkler:
   $: sha1-Zyfg0LcJHiQ2+TVt6b+I+tI+U0o=
   _: 'https://registry.npmjs.org/jaro-winkler/-/jaro-winkler-0.2.8.tgz'
 jest:
- _latest: 24.8.0
+ _latest: 24.9.0
  _:
-  ^23.5.0: 23.6.0
+  ^23.6.0: 23.6.0
  23.6.0:
   $: sha512-lWzcd+HSiqeuxyhG+EnZds6iO3Y3ZEnMrfZq/OTGvF/C+Z4fPMCdhWTGSAiO2Oym9rbEXfwddHhh6jqrTF3+Lw==
-  _: 'https://registry.npmjs.org/jest/-/jest-23.6.0.tgz'
+  _: 'http://npme.walmart.com/jest/-/jest-23.6.0.tgz'
   dependencies:
    import-local: ^1.0.0
    jest-cli: ^23.6.0
@@ -8994,8 +8956,8 @@ jsdom:
 jsesc:
  _latest: 2.5.2
  _:
-  '^1.0.0,^1.3.0': 1.3.0
-  ^2.5.1: 2.5.2
+  ^1.3.0: 1.3.0
+  '^2.5.1,^2.5.2': 2.5.2
   ~0.5.0: 0.5.0
  2.5.2:
   $: sha512-OYu7XEzjkCQ3C5Ps3QIZsQfNpqoJyZZA99wd9aWd05NCtC5pWOkShK2mkL6HXQR6/Cy2lbNdPlZBpuQHXE63gA==
@@ -9650,7 +9612,7 @@ lockfile:
 lodash:
  _latest: 4.17.11
  _:
-  '3.10.1,^3.2.0,^3.5.0': 3.10.1
+  '^3.2.0,^3.5.0': 3.10.1
   '^4.0.0,^4.0.1,^4.11.1,^4.13.1,^4.15.0,^4.17.0,^4.17.10,^4.17.11,^4.17.4,^4.17.5,^4.3.0,^4.5.0,^4.6.1,~4.17.10': 4.17.11
  4.17.11:
   top: 1
@@ -10189,7 +10151,7 @@ mime:
  _latest: 2.4.3
  _:
   '1.6.0,^1.0.0,^1.3.4,^1.4.1': 1.6.0
-  '^2.3.1,^2.4.2': 2.4.3
+  '^2.0.3,^2.3.1,^2.4.2': 2.4.3
  2.4.3:
   $: sha512-QgrPRJfE+riq5TPZMcHZOtm8c6K/yYrMbKIoRfapfiGLxS8OTeIfRhUGW5LU7MlRa52KOAGCfUNruqLrIBvWZw==
   _: 'https://registry.npmjs.org/mime/-/mime-2.4.3.tgz'
@@ -10349,24 +10311,6 @@ mkdirp:
   _: 'https://registry.npmjs.org/mkdirp/-/mkdirp-0.5.1.tgz'
   dependencies:
    minimist: 0.0.8
-mocha:
- _latest: 6.1.4
- _:
-  ^4.0.0: 4.1.0
- 4.1.0:
-  $: sha512-0RVnjg1HJsXY2YFDoTNzcc1NKhYuXKRrBAG2gDygmJJA136Cs2QlRliZG1mA0ap7cuaT30mw16luAeln+4RiNA==
-  _: 'https://registry.npmjs.org/mocha/-/mocha-4.1.0.tgz'
-  dependencies:
-   browser-stdout: 1.3.0
-   commander: 2.11.0
-   debug: 3.1.0
-   diff: 3.3.1
-   escape-string-regexp: 1.0.5
-   glob: 7.1.2
-   growl: 1.10.3
-   he: 1.1.1
-   mkdirp: 0.5.1
-   supports-color: 4.4.0
 moment:
  _latest: 2.24.0
  _:
@@ -11196,7 +11140,7 @@ os-name:
 os-tmpdir:
  _latest: 2.0.0
  _:
-  '^1.0.0,^1.0.1,~1.0.1,~1.0.2': 1.0.2
+  '^1.0.0,^1.0.1,~1.0.2': 1.0.2
  1.0.2:
   $: sha1-u+Z0BseaqFxc/sdm/lc0VV36EnQ=
   _: 'https://registry.npmjs.org/os-tmpdir/-/os-tmpdir-1.0.2.tgz'
@@ -11605,19 +11549,16 @@ pend:
 penthouse:
  _latest: 2.2.0
  _:
-  ^0.11.13: 0.11.13
- 0.11.13:
-  $: sha1-RjHmAWpgd/OdC/o4Iq7rb+t1t0Q=
-  _: 'https://registry.npmjs.org/penthouse/-/penthouse-0.11.13.tgz'
+  ^2.2.0: 2.2.0
+ 2.2.0:
+  $: sha512-Mgw9GpwV2D0ZwaJjW6FaXsybaHe/LiQBb2BcX0LQm+AkzHVMp1gyuy1Z4VQfKf4G2ovGVYg5T60UoO+BArculw==
+  _: 'http://npme.walmart.com/penthouse/-/penthouse-2.2.0.tgz'
   dependencies:
-   apartment: ^1.1.1
-   css-fork-pocketjoso: ^2.2.1
    css-mediaquery: ^0.1.2
-   jsesc: ^1.0.0
-   os-tmpdir: ^1.0.1
-   phantomjs-prebuilt: ^2.1.3
-   regenerator-runtime: ^0.10.5
-   tmp: 0.0.31
+   css-tree: 1.0.0-alpha.28
+   debug: ^4.1.1
+   jsesc: ^2.5.2
+   puppeteer: 1.15.0
 performance-now:
  _latest: 2.1.0
  _:
@@ -11642,7 +11583,7 @@ pez:
 phantomjs-prebuilt:
  _latest: 2.1.16
  _:
-  '^2.1.10,^2.1.16,^2.1.3,^2.1.7': 2.1.16
+  '^2.1.10,^2.1.16,^2.1.7': 2.1.16
  2.1.16:
   hasI: 1
   $: sha1-79ISpKOWbTZHaE6ouniFSb4q7+8=
@@ -12721,6 +12662,10 @@ progress:
  _latest: 2.0.3
  _:
   ^1.1.8: 1.1.8
+  ^2.0.1: 2.0.3
+ 2.0.3:
+  $: sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==
+  _: 'http://npme.walmart.com/progress/-/progress-2.0.3.tgz'
  1.1.8:
   $: sha1-4mDHj2Fhzdmw5WzD4Khd4Xx6V74=
   _: 'https://registry.npmjs.org/progress/-/progress-1.1.8.tgz'
@@ -12791,6 +12736,13 @@ proxy-addr:
   dependencies:
    forwarded: ~0.1.2
    ipaddr.js: 1.9.0
+proxy-from-env:
+ _latest: 1.0.0
+ _:
+  ^1.0.0: 1.0.0
+ 1.0.0:
+  $: sha1-M8UDmPcOp+uW0h97gXYwpVeRx+4=
+  _: 'http://npme.walmart.com/proxy-from-env/-/proxy-from-env-1.0.0.tgz'
 prr:
  _latest: 1.0.1
  _:
@@ -12876,6 +12828,23 @@ punycode:
  1.3.2:
   $: sha1-llOgNvt8HuQjQvIyXM7v6jkmxI0=
   _: 'https://registry.npmjs.org/punycode/-/punycode-1.3.2.tgz'
+puppeteer:
+ _latest: 1.19.0
+ _:
+  1.15.0: 1.15.0
+ 1.15.0:
+  hasI: 1
+  $: sha512-D2y5kwA9SsYkNUmcBzu9WZ4V1SGHiQTmgvDZSx6sRYFsgV25IebL4V6FaHjF6MbwLK9C6f3G3pmck9qmwM8H3w==
+  _: 'http://npme.walmart.com/puppeteer/-/puppeteer-1.15.0.tgz'
+  dependencies:
+   debug: ^4.1.0
+   extract-zip: ^1.6.6
+   https-proxy-agent: ^2.2.1
+   mime: ^2.0.3
+   progress: ^2.0.1
+   proxy-from-env: ^1.0.0
+   rimraf: ^2.6.1
+   ws: ^6.1.0
 pyconf:
  _latest: 1.1.7
  _:
@@ -13354,7 +13323,6 @@ regenerate-unicode-properties:
 regenerator-runtime:
  _latest: 0.13.2
  _:
-  ^0.10.5: 0.10.5
   ^0.11.0: 0.11.1
   ^0.13.2: 0.13.2
  0.13.2:
@@ -13363,9 +13331,6 @@ regenerator-runtime:
  0.11.1:
   $: sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg==
   _: 'https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz'
- 0.10.5:
-  $: sha1-M2w+/BIgrc7dosn6tntaeVWjNlg=
-  _: 'https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.10.5.tgz'
 regenerator-transform:
  _latest: 0.14.0
  _:
@@ -13679,7 +13644,7 @@ resolve-pathname:
 resolve-url:
  _latest: 0.2.1
  _:
-  '^0.2.1,~0.2.1': 0.2.1
+  ^0.2.1: 0.2.1
  0.2.1:
   $: sha1-LGN/53yJOv0qZj/iGqkIAGjiBSo=
   _: 'https://registry.npmjs.org/resolve-url/-/resolve-url-0.2.1.tgz'
@@ -14439,8 +14404,8 @@ source-list-map:
 source-map:
  _latest: 0.7.3
  _:
-  '0.1.x,^0.1.38': 0.1.43
-  '0.4.x,^0.4.2': 0.4.4
+  0.1.x: 0.1.43
+  ^0.4.2: 0.4.4
   '^0.5.0,^0.5.1,^0.5.3,^0.5.6,^0.5.7': 0.5.7
   '^0.6.0,^0.6.1,~0.6.0,~0.6.1': 0.6.1
   ~0.2.0: 0.2.0
@@ -14468,7 +14433,6 @@ source-map:
 source-map-resolve:
  _latest: 0.5.2
  _:
-  ^0.3.0: 0.3.1
   ^0.5.0: 0.5.2
  0.5.2:
   $: sha512-MjqsvNwyz1s0k81Goz/9vRBe9SZdB09Bdw+/zYyO+3CuPk6fouTaxscHkgtE8jKvf01kVfl8riHzERQ/kefaSA==
@@ -14479,14 +14443,6 @@ source-map-resolve:
    resolve-url: ^0.2.1
    source-map-url: ^0.4.0
    urix: ^0.1.0
- 0.3.1:
-  $: sha1-YQ9hIqRFuN1RU1oqcbeD38Ekh2E=
-  _: 'https://registry.npmjs.org/source-map-resolve/-/source-map-resolve-0.3.1.tgz'
-  dependencies:
-   source-map-url: ~0.3.0
-   atob: ~1.1.0
-   urix: ~0.1.0
-   resolve-url: ~0.2.1
 source-map-support:
  _latest: 0.5.12
  _:
@@ -14507,13 +14463,9 @@ source-map-url:
  _latest: 0.4.0
  _:
   ^0.4.0: 0.4.0
-  ~0.3.0: 0.3.0
  0.4.0:
   $: sha1-PpNdfd1zYxuXZZlW1VEo6HtQhKM=
   _: 'https://registry.npmjs.org/source-map-url/-/source-map-url-0.4.0.tgz'
- 0.3.0:
-  $: sha1-fsrxO1e80J2opAxdJp2zN5nUqvk=
-  _: 'https://registry.npmjs.org/source-map-url/-/source-map-url-0.3.0.tgz'
 spdx-correct:
  _latest: 3.1.0
  _:
@@ -15004,7 +14956,6 @@ sugarss:
 supports-color:
  _latest: 6.1.0
  _:
-  4.4.0: 4.4.0
   ^2.0.0: 2.0.0
   '^3.1.0,^3.1.2,^3.2.3': 3.2.3
   '^5.1.0,^5.2.0,^5.3.0,^5.4.0,^5.5.0': 5.5.0
@@ -15019,11 +14970,6 @@ supports-color:
   _: 'https://registry.npmjs.org/supports-color/-/supports-color-5.5.0.tgz'
   dependencies:
    has-flag: ^3.0.0
- 4.4.0:
-  $: sha512-rKC3+DyXWgK0ZLKwmRsrkyHVZAjNkfzeehuFWdGGcqGDTZFH73+RH6S/RDAAxl9GusSjZSUWYLmT9N5pzXFOXQ==
-  _: 'https://registry.npmjs.org/supports-color/-/supports-color-4.4.0.tgz'
-  dependencies:
-   has-flag: ^2.0.0
  3.2.3:
   $: sha1-ZawFBLOVQXHYpklGsq48u4pfVPY=
   _: 'https://registry.npmjs.org/supports-color/-/supports-color-3.2.3.tgz'
@@ -15307,18 +15253,12 @@ tinycolor2:
 tmp:
  _latest: 0.1.0
  _:
-  0.0.31: 0.0.31
   '0.0.33,0.0.x': 0.0.33
  0.0.33:
   $: sha512-jRCJlojKnZ3addtTOjdIqoRuPEKBvNXcGYqzO6zWZX8KfKEpnGY5jfggJQ3EjKuu8D4bJRr0y+cYJFmYbImXGw==
   _: 'https://registry.npmjs.org/tmp/-/tmp-0.0.33.tgz'
   dependencies:
    os-tmpdir: ~1.0.2
- 0.0.31:
-  $: sha1-jzirlDjhcxXl29izZX6L+yd65Kc=
-  _: 'https://registry.npmjs.org/tmp/-/tmp-0.0.31.tgz'
-  dependencies:
-   os-tmpdir: ~1.0.1
 tmpl:
  _latest: 1.0.4
  _:
@@ -15786,7 +15726,7 @@ urijs:
 urix:
  _latest: 0.1.0
  _:
-  '^0.1.0,~0.1.0': 0.1.0
+  ^0.1.0: 0.1.0
  0.1.0:
   $: sha1-2pN/emLiH+wf0Y1Js1wpNQZ6bHI=
   _: 'https://registry.npmjs.org/urix/-/urix-0.1.0.tgz'
@@ -16229,6 +16169,14 @@ webpack-disk-plugin:
   dependencies:
    async: ^2.1.2
    fs-extra: ^1.0.0
+webpack-hook-plugin:
+ _latest: 1.0.7
+ _:
+  1.0.7: 1.0.7
+ 1.0.7:
+  top: 1
+  $: sha512-8GJ+LiR+0rrShCSeeFMaKONX7xMMW3H9Hszmy5IsCereZUJ5AoLhJgn5BhySQChA4Q5lZ7/9KtidDypYHQDDmA==
+  _: 'http://npme.walmart.com/webpack-hook-plugin/-/webpack-hook-plugin-1.0.7.tgz'
 webpack-hot-middleware:
  _latest: 2.25.0
  _:
@@ -16455,16 +16403,22 @@ ws:
  _latest: 7.0.0
  _:
   ^5.2.0: 5.2.2
+  ^6.1.0: 6.2.1
   ~1.1.5: 1.1.5
   ~3.3.1: 3.3.3
+ 6.2.1:
+  $: sha512-GIyAXC2cB7LjvpgMt9EKS2ldqr0MTrORaleiOno6TweZ6r3TKtoFQWay/2PceJ3RuBasOHzXNn5Lrw1X0bEjqA==
+  _: 'http://npme.walmart.com/ws/-/ws-6.2.1.tgz'
+  dependencies:
+   async-limiter: ~1.0.0
  5.2.2:
   $: sha512-jaHFD6PFv6UgoIVda6qZllptQsMlDEJkTQcybzzXDYM1XO9Y8em691FGMPmM46WGyLU4z9KMgQN+qrux/nhlHA==
-  _: 'https://registry.npmjs.org/ws/-/ws-5.2.2.tgz'
+  _: 'http://npme.walmart.com/ws/-/ws-5.2.2.tgz'
   dependencies:
    async-limiter: ~1.0.0
  3.3.3:
   $: sha512-nnWLa/NwZSt4KQJu51MYlCcSQ5g7INpOrOMt4XV8j4dqTXdmlUmSHQ8/oLC069ckre0fRsgfvsKwbTdtKLCDkA==
-  _: 'https://registry.npmjs.org/ws/-/ws-3.3.3.tgz'
+  _: 'http://npme.walmart.com/ws/-/ws-3.3.3.tgz'
   dependencies:
    async-limiter: ~1.0.0
    safe-buffer: ~5.1.0

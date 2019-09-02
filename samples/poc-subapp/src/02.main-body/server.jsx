@@ -1,8 +1,7 @@
 import React from "react";
-import { Component, default as subApp } from "./main-body";
+import subApp from "./main-body";
 import Promise from "bluebird";
 import { StaticRouter } from "react-router-dom";
-import { createStore } from "redux";
 
 module.exports = {
   prepare: async (request, context) => {
@@ -64,7 +63,7 @@ module.exports = {
   StartComponent: props => {
     return (
       <StaticRouter {...props}>
-        <Component />
+        <subApp.Component />
       </StaticRouter>
     );
   }

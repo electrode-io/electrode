@@ -1,6 +1,6 @@
 module.exports = {
   type: "app",
   name: "MainBody",
-  entry: "subapp",
+  entry: "main-body",
   serverEntry: "./server"
 };
