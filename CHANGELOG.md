@@ -1,3 +1,43 @@
+# 9/3/2019
+
+## Packages
+
+### Directly Updated
+
+-   `electrode-archetype-react-app@6.5.11` `(6.5.10 => 6.5.11)`
+-   `electrode-archetype-react-app-dev@6.5.11` `(6.5.10 => 6.5.11)`
+-   `electrode-archetype-react-component@6.1.8` `(6.1.7 => 6.1.8)`
+-   `electrode-archetype-react-component-dev@6.1.8` `(6.1.7 => 6.1.8)`
+-   `electrode-react-webapp@3.8.3` `(3.8.2 => 3.8.3)`
+
+### Lerna Updated
+
+-   `subapp-server@1.1.3` `(1.1.2 => 1.1.3)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   revert creating project wide babel config file [commit](http://github.com/electrode-io/electrode/commit/4f7979fa197497f91a393b1c814b19cc23b84e6f)
+    -   Disabling Karma tests if mocha is set as false ([#1340](https://github.com/electrode-io/electrode/pull/1340)) [commit](http://github.com/electrode-io/electrode/commit/fbf19f488cbcf7d59c0e9a82a9cb3938db41abfb)
+    -   Removed es6 code from karma setup ([#1339](https://github.com/electrode-io/electrode/pull/1339)) [commit](http://github.com/electrode-io/electrode/commit/93572a18c26b18f36985794a2a6b796f2426a529)
+    -   simplify .browserrc generation [commit](http://github.com/electrode-io/electrode/commit/ad60d3e819273765fc459cdb5576fc59dbe70e7a)
+
+-   `packages/electrode-archetype-react-component[-dev]`
+
+    -   Disabling Karma tests if mocha is set as false ([#1340](https://github.com/electrode-io/electrode/pull/1340)) [commit](http://github.com/electrode-io/electrode/commit/fbf19f488cbcf7d59c0e9a82a9cb3938db41abfb)
+
+-   `packages/electrode-react-webapp`
+
+    -   use default index template if selectTemplate didn't return one ([#1337](https://github.com/electrode-io/electrode/pull/1337)) [commit](http://github.com/electrode-io/electrode/commit/2cf8ca182286f52f736ae18fa29c403361dc6048)
+
+-   `docs`
+
+    -   Set theme jekyll-theme-minimal [commit](http://github.com/electrode-io/electrode/commit/f4874f48adc0e01908261c1aba8ab55f92c8042f)
+    -   how to customize with own config file ([#1338](https://github.com/electrode-io/electrode/pull/1338)) [commit](http://github.com/electrode-io/electrode/commit/7c1690926e652b384fc77e8b5992133c1b240b4a)
+    -   fix typo in docs [commit](http://github.com/electrode-io/electrode/commit/c0000174173d1016ce92c2a6432e790dba8464b2)
+    -   change docs outline structure ([#1336](https://github.com/electrode-io/electrode/pull/1336)) [commit](http://github.com/electrode-io/electrode/commit/36c173cc9bdeb75605d26d7408e56b4c79f4fefc)
+
 # 8/23/2019
 
 ## Packages
