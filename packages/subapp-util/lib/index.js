@@ -50,7 +50,7 @@ function scanSubApp(name, verbatimName, dir, file) {
     type: "app",
     name,
     entry: removeExt(Path.basename(file)),
-    serverEntry: serverEntry ? removeExt(serverEntry) : false
+    serverEntry: serverEntry ? removeExt(serverEntry) : undefined
   };
 
   return manifest;
@@ -100,8 +100,10 @@ function scanSubAppsFromDir(srcDir, maxLevel = Infinity) {
   // process subapps with manifest first
   const errors1 = maniFiles.map(mani => {
     try {
-      const manifest = xrequire(Path.join(dir, mani));
-      subApps[manifest.name] = Object.assign({ subAppDir: Path.dirname(mani) }, manifest);
+      const fullDir = Path.join(dir, mani);
+      const manifest = es6Require(fullDir);
+      const subapp = Object.assign({ subAppDir: Path.dirname(mani), fullDir }, manifest);
+      subApps[manifest.name] = subApps[MAP_BY_PATH_SYM][fullDir] = subapp;
       return null;
     } catch (error) {
       return error;
@@ -203,18 +205,19 @@ function loadSubAppByName(name) {
 
 function loadSubAppServerByName(name) {
   const manifest = subAppManifest()[name];
-  const subAppDir = manifest.subAppDir;
+  const { fullDir, subAppDir, serverEntry } = manifest;
 
-  const x = manifest.serverEntry;
-
-  if (x) {
-    return es6Require(Path.resolve(appSrcDir(), subAppDir, x));
+  if (serverEntry) {
+    return es6Require(Path.resolve(appSrcDir(), subAppDir, serverEntry));
+  } else if (serverEntry === false) {
+    return {};
   }
 
   // generate a server
-  const subapp = require(Path.join(manifest.fullDir, manifest.entry));
+  const subapp = es6Require(Path.join(fullDir, manifest.entry));
+
   return {
-    StartComponent: subapp.default.Component
+    StartComponent: subapp.Component
   };
 }
 

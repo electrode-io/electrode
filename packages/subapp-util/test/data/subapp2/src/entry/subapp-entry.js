@@ -1,3 +1,4 @@
 module.exports = {
-  name: "subapp2"
+  name: "subapp2",
+  Component: () => {}
 };
