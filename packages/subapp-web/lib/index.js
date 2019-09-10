@@ -4,9 +4,13 @@
 
 const { registerSubApp } = require("subapp-util");
 
+const { default: makeSubAppSpec } = require("../browser/make-subapp-spec");
+
 module.exports = {
   // isomorphic functions
-  loadSubApp: registerSubApp,
+  loadSubApp(spec) {
+    return registerSubApp(makeSubAppSpec(spec));
+  },
   // dynamic load subapp is only for client side
   dynamicLoadSubApp: () => {},
   getBrowserHistory: () => undefined,

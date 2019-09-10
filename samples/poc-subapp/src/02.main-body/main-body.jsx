@@ -1,6 +1,5 @@
 import React from "react";
 import { getBrowserHistory } from "subapp-web";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { Router, Route, Switch } from "react-router-dom";
@@ -9,6 +8,7 @@ import { Navigation } from "../components/navigation";
 import { Deals } from "../components/deals";
 import { createStore } from "redux";
 import reducers from "./reducers";
+import { reduxLoadSubApp } from "subapp-redux";
 
 const Home = () => `Home`;
 const Stores = () => `Stores`;
@@ -29,8 +29,6 @@ const MainBody = props => {
   );
 };
 
-const name = "MainBody";
-
 const mapStateToProps = state => state;
 
 const Component = withRouter(
@@ -40,8 +38,8 @@ const Component = withRouter(
   )(MainBody)
 );
 
-const subApp = {
-  name,
+export default reduxLoadSubApp({
+  name: "MainBody",
   Component,
   useReactRouter: true,
 
@@ -64,6 +62,4 @@ const subApp = {
 
     return store;
   }
-};
-
-export { name, subApp as default, Component };
+});

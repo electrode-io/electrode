@@ -4,8 +4,11 @@
   "description": "Electrode SubApp app server support",
   "main": "lib/index.js",
   "scripts": {
-    "test": "clap check",
-    "coverage": "clap check"
+    "test": "clap -n -x build check",
+    "coverage": "clap -n -x build check",
+    "build": "babel src -d resources",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "web",
@@ -16,6 +19,8 @@
   "license": "Apache-2.0",
   "files": [
     "lib",
+    "resources",
+    "src",
     "template.js"
   ],
   "dependencies": {
@@ -29,8 +34,14 @@
     "xaa": "^1.0.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.4.4",
     "electrode-archetype-njs-module-dev": "^3.0.0",
-    "hapi": "^16"
+    "hapi": "^16",
+    "run-verify": "^1.1.2"
   },
   "peerDependencies": {
     "hapi": ">= 14 <= 17"
@@ -53,7 +64,8 @@
       "*clap.js",
       "gulpfile.js",
       "dist",
-      "test"
+      "test",
+      "resources"
     ],
     "check-coverage": true,
     "statements": 0,

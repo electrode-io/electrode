@@ -10,6 +10,7 @@ const {
   setupSubAppHapiRoutes,
   legacyPlugin
 } = require("../../lib/utils");
+
 const Path = require("path");
 const Hapi = require("hapi");
 const sinon = require("sinon");
@@ -137,9 +138,26 @@ describe("subapp-server", () => {
 
     const getStubResolve2 = () => {
       const serverRoutesPath = Path.resolve("./test/data/server-routes/file1");
+      const faviconPath = Path.resolve("test/data/favicon.ico");
       return stubWithArgs(Path, "resolve", [
-        [["src", "server-routes"], () => serverRoutesPath],
-        [["lib", "server-routes"], () => serverRoutesPath]
+        [
+          ["src", "server-routes"],
+          () => {
+            return serverRoutesPath;
+          }
+        ],
+        [
+          ["lib", "server-routes"],
+          () => {
+            return serverRoutesPath;
+          }
+        ],
+        [
+          ["static/favicon.ico"],
+          () => {
+            return faviconPath;
+          }
+        ]
       ]);
     };
 
@@ -162,11 +180,11 @@ describe("subapp-server", () => {
       if (stubRouteHandler) stubRouteHandler.restore();
     });
 
-    it("should setup subapp routes with `htmlFile` specified in options", async () => {
+    it("should setup subapp routes with `templateFile` specified in options", async () => {
       process.env.NODE_ENV = "production";
       stubPathResolve = getStubResolve1();
       await setupSubAppHapiRoutes(server, {
-        htmlFile: "index.html",
+        templateFile: "index-hello.jsx",
         devServer: { https: true }
       });
       await server.start();
@@ -174,7 +192,10 @@ describe("subapp-server", () => {
         method: "GET",
         url: "/file1"
       });
-      expect(result).to.equal("<body><h1>hello world</h1></body>");
+      expect(result).to.equal(`<body><h1>hello world
+</h1>
+</body>
+`);
       delete process.env.NODE_ENV;
     });
 
@@ -186,9 +207,10 @@ describe("subapp-server", () => {
       await server.start();
       const { result } = await server.inject({
         method: "GET",
-        url: "/file1"
+        url: "/favicon.ico"
       });
-      expect(result).to.equal("<body><h1>hello world</h1></body>");
+      expect(result.statusCode).to.equal(404);
+      expect(result.error).to.equal("Not Found");
     });
 
     it("should let the server redirect if status code = 301", async () => {
@@ -347,7 +369,7 @@ describe("subapp-server", () => {
     });
 
     it("should let server reply favicon if icon retrieved", async () => {
-      stubPathResolve = getStubResolve1();
+      stubPathResolve = getStubResolve2();
       await setupSubAppHapiRoutes(server, {});
       await server.start();
       const { statusCode } = await server.inject({
@@ -358,7 +380,7 @@ describe("subapp-server", () => {
     });
 
     it("should let server reply 404 if icon not retrieved", async () => {
-      stubPathResolve = getStubResolve2();
+      stubPathResolve = getStubResolve1();
       await setupSubAppHapiRoutes(server, {});
       await server.start();
       const { statusCode } = await server.inject({

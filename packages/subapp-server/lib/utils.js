@@ -18,6 +18,7 @@ const readFile = util.promisify(Fs.readFile);
 const { isHapi17 } = require("electrode-hapi-compat");
 const xaa = require("xaa");
 const { ReactWebapp } = require("electrode-react-webapp");
+const subAppUtil = require("subapp-util");
 
 /**
  * Tries to import bundle chunk selector function if the corresponding option is set in the
@@ -118,18 +119,44 @@ function getStatsPath(statsFilePath, buildArtifactsPath) {
 const resolvePath = path => (!Path.isAbsolute(path) ? Path.resolve(path) : path);
 
 const updateFullTemplate = (baseDir, options) => {
-  const templateOpt = ["templateFile", "htmlFile"].find(x => options[x]);
-
-  if (templateOpt) {
-    options[templateOpt] = Path.resolve(baseDir, options[templateOpt]);
+  if (options.templateFile) {
+    options.templateFile = Path.resolve(baseDir, options.templateFile);
   }
-
-  return templateOpt;
 };
 
-async function setupSubAppHapiRoutes(server, options) {
-  const srcDir = process.env.APP_SRC_DIR || (process.env.NODE_ENV === "production" ? "lib" : "src");
-  const routesDir = Path.resolve(srcDir, "server-routes");
+function getDefaultRouteOptions() {
+  return {
+    pageTitle: "Untitled Electrode Web Application",
+    //
+    webpackDev: process.env.WEBPACK_DEV === "true",
+    //
+    devServer: {
+      host: process.env.WEBPACK_DEV_HOST || process.env.WEBPACK_HOST || "127.0.0.1",
+      port: process.env.WEBPACK_DEV_PORT || "2992",
+      https: Boolean(process.env.WEBPACK_DEV_HTTPS)
+    },
+    //
+    stats: "dist/server/stats.json",
+    iconStats: "dist/server/iconstats.json",
+    criticalCSS: "dist/js/critical.css",
+    buildArtifacts: ".etmp",
+    prodBundleBase: "/js/",
+    cspNonceValue: undefined,
+    templateFile: Path.join(__dirname, "..", "resources", "index-page")
+  };
+}
+
+async function searchRoutesDir(srcDir) {
+  const routesDir = [
+    Path.resolve(srcDir, "routes"),
+    Path.resolve(srcDir, "server", "routes"),
+    Path.resolve(srcDir, "server-routes")
+  ].find(x => Fs.existsSync(x));
+
+  // there's no routes, server/routes, or server-routes dir
+  if (!routesDir) {
+    return undefined;
+  }
 
   //
   // look for routes under routesDir
@@ -140,30 +167,7 @@ async function setupSubAppHapiRoutes(server, options) {
   //
   // load options for all routes from routesDir/options.js[x]
   //
-  options = Object.assign(
-    {
-      pageTitle: "Untitled Electrode Web Application",
-      //
-      webpackDev: process.env.WEBPACK_DEV === "true",
-      //
-      devServer: {
-        host: process.env.WEBPACK_DEV_HOST || process.env.WEBPACK_HOST || "127.0.0.1",
-        port: process.env.WEBPACK_DEV_PORT || "2992",
-        https: Boolean(process.env.WEBPACK_DEV_HTTPS)
-      },
-      //
-      stats: "dist/server/stats.json",
-      iconStats: "dist/server/iconstats.json",
-      criticalCSS: "dist/js/critical.css",
-      buildArtifacts: ".etmp",
-      prodBundleBase: "/js/",
-      cspNonceValue: undefined
-    },
-    options,
-    optionalRequire(Path.join(routesDir, "options"), { default: {} })
-  );
-
-  updateFullTemplate(routesDir, options);
+  const options = optionalRequire(Path.join(routesDir, "options"), { default: {} });
 
   //
   // Generate routes: load the route.js file for each route
@@ -172,6 +176,7 @@ async function setupSubAppHapiRoutes(server, options) {
     const name = Path.dirname(x.substring(routesDir.length + 1));
     const route = Object.assign({}, require(x));
     _.defaults(route, {
+      // the route dir that's named default is /
       path: name === "default" && "/",
       methods: options.methods || ["get"]
     });
@@ -185,33 +190,171 @@ async function setupSubAppHapiRoutes(server, options) {
     };
   });
 
+  return { options, dir: routesDir, routes };
+}
+
+async function handleFavIcon(server, options) {
   //
   // favicon handling, turn off by setting options.favicon to false
   //
-  if (options.favicon !== false) {
-    const icon = await xaa.try(() =>
-      readFile(Path.resolve(routesDir, options.favicon || "favicon.png"))
-    );
-
-    server.route({
-      method: "get",
-      path: "/favicon.ico",
-      handler: isHapi17()
-        ? async () => {
-            if (icon) return icon;
-            else return Boom.notFound();
-          }
-        : (request, reply) => {
-            if (icon) reply(icon);
-            else reply(Boom.notFound());
-          }
-    });
+  if (options.favicon === false) {
+    return;
   }
 
+  // look in CWD/static
+  const iconFile = Path.resolve(options.favicon || "static/favicon.ico");
+  const icon = await xaa.try(() => readFile(iconFile));
+
+  server.route({
+    method: "get",
+    path: "/favicon.ico",
+    handler: isHapi17()
+      ? async () => {
+          if (icon) return icon;
+          else return Boom.notFound();
+        }
+      : (request, reply) => {
+          if (icon) reply(icon);
+          else reply(Boom.notFound());
+        }
+  });
+}
+
+async function setupRoutesFromFile(srcDir, server, pluginOpts) {
+  // there should be a src/routes.js file with routes spec
+  const spec = require(Path.resolve(srcDir, "routes"));
+
+  const subApps = await subAppUtil.scanSubAppsFromDir(srcDir);
+  const subAppsByPath = subAppUtil.getSubAppByPathMap(subApps);
+
+  handleFavIcon(server, spec);
+
+  // routes can either be in default (es6) or routes
+  const routes = spec.default || spec.routes;
+
+  // invoke setup callback
+  for (const path in routes) {
+    if (routes[path].setup) {
+      await routes[path].setup(server);
+    }
+  }
+
+  // setup for initialize callback
+  server.ext("onPreAuth", async (request, h) => {
+    const rte = routes[request.route.path];
+    if (rte && rte.initialize) {
+      const x = await rte.initialize(request, h);
+      if (x) return x;
+    }
+    return h.continue;
+  });
+
+  const topOpts = Object.assign(
+    getDefaultRouteOptions(),
+    { dir: Path.resolve(srcDir) },
+    pluginOpts,
+    _.omit(spec, ["routes", "default"])
+  );
+
+  const statsPath = getStatsPath(topOpts.stats, topOpts.buildArtifacts);
+  const assets = loadAssetsFromStats(statsPath);
+  topOpts.devBundleBase = Url.format({
+    protocol: topOpts.devServer.https ? "https" : "http",
+    hostname: topOpts.devServer.host,
+    port: topOpts.devServer.port,
+    pathname: "/js/"
+  });
+
+  // register routes
+
+  for (const path in routes) {
+    const route = routes[path];
+
+    const routeOptions = Object.assign({}, topOpts, route);
+    updateFullTemplate(routeOptions.dir, routeOptions);
+    const chunkSelector = resolveChunkSelector(routeOptions);
+    routeOptions.__internals = { assets, chunkSelector };
+
+    // load subapps for the route
+    if (routeOptions.subApps) {
+      routeOptions.__internals.subApps = [].concat(routeOptions.subApps).map(x => {
+        let options = {};
+        if (Array.isArray(x)) {
+          options = x[1];
+          x = x[0];
+        }
+        // absolute: use as path
+        // else: assume dir under srcDir
+        // TBD: handle it being a module
+        return {
+          subapp: subAppsByPath[Path.isAbsolute(x) ? x : Path.resolve(srcDir, x)],
+          options
+        };
+      });
+    }
+
+    const routeHandler = ReactWebapp.makeRouteHandler(routeOptions);
+    const handler = async (request, h) => {
+      try {
+        const context = await routeHandler({
+          content: { html: "", status: 200, useStream: true },
+          mode: "",
+          request
+        });
+
+        const data = context.result;
+        const status = data.status;
+
+        if (status === undefined) {
+          return data;
+        } else if (HttpStatus.redirect[status]) {
+          return h.redirect(data.path);
+        } else if (HttpStatus.displayHtml[status]) {
+          return h.response(data.html !== undefined ? data.html : data).code(status);
+        } else if (status >= 200 && status < 300) {
+          return data.html !== undefined ? data.html : data;
+        } else {
+          return h.response(data).code(status);
+        }
+      } catch (err) {
+        if (process.env.NODE_ENV !== "production") {
+          console.error(`Route ${path} failed:`, err);
+          return err.stack;
+        } else {
+          return Boom.internal();
+        }
+      }
+    };
+
+    const defaultMethods = [].concat(route.methods || "get");
+    const paths = _.uniq([path].concat(route.paths).filter(x => x)).map(x => {
+      if (typeof x === "string") {
+        return { [x]: defaultMethods };
+      }
+      return x;
+    });
+
+    paths.forEach(pathObj => {
+      _.each(pathObj, (method, xpath) => {
+        server.route(Object.assign({}, route.options, { path: xpath, method, handler }));
+      });
+    });
+  }
+}
+
+async function setupRoutesFromDir(server, pluginOpts, fromDir) {
+  const { routes } = fromDir;
+  const options = Object.assign(getDefaultRouteOptions(), pluginOpts, fromDir.options);
+
+  updateFullTemplate(fromDir.dir, options);
+
   const routesWithSetup = routes.filter(x => x.route.setup);
+
   if (routesWithSetup.length > 0) {
     routesWithSetup.forEach(x => x.route.setup(server, options));
   }
+
+  await handleFavIcon(server, options);
 
   // register onRequest
   const routesWithInit = routes.filter(x => x.route.initialize);
@@ -254,15 +397,11 @@ async function setupSubAppHapiRoutes(server, options) {
     const routeOptions = Object.assign(
       {},
       options,
-      _.pick(route, ["pageTitle", "bundleChunkSelector", "htmlFile", "templateFile"])
+      _.pick(route, ["pageTitle", "bundleChunkSelector", "templateFile"])
     );
 
+    assert(routeOptions.templateFile, `subapp-server: route ${r.name} must define templateFile`);
     updateFullTemplate(r.dir, routeOptions);
-
-    assert(
-      routeOptions.templateFile || routeOptions.htmlFile,
-      `subapp-server: route ${r.name} must define templateFile or htmlFile`
-    );
 
     const chunkSelector = resolveChunkSelector(routeOptions);
 
@@ -357,6 +496,17 @@ async function setupSubAppHapiRoutes(server, options) {
       })
     );
   });
+}
+
+async function setupSubAppHapiRoutes(server, pluginOpts) {
+  const srcDir = process.env.APP_SRC_DIR || (process.env.NODE_ENV === "production" ? "lib" : "src");
+  const fromDir = await searchRoutesDir(srcDir, pluginOpts);
+  if (fromDir) {
+    return await setupRoutesFromDir(server, pluginOpts, fromDir);
+  }
+
+  // no directory based routes, then they must in a JS file
+  return await xaa.try(() => setupRoutesFromFile(srcDir, server, pluginOpts));
 }
 
 function legacyPlugin(server, options, next) {

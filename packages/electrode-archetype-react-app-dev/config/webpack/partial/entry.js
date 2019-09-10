@@ -8,6 +8,9 @@ const archetype = require("electrode-archetype-react-app/config/archetype");
 const AppMode = archetype.AppMode;
 const chalk = require("chalk");
 const logger = require("electrode-archetype-react-app/lib/logger");
+const mkdirp = require("mkdirp");
+
+const DEV_HMR_DIR = ".__dev_hmr";
 
 function makeEntryPartial() {
   const partial = {
@@ -46,6 +49,32 @@ function makeEntryPartial() {
     return entry;
   }
 
+  function genSubAppHmrEntry(hmrDir, isDev, manifest) {
+    let subAppReq = `${manifest.subAppDir}/${manifest.entry}`;
+    // subapp has built-in code to handle HMR accept
+    // or not running in webpack dev mode
+    // => do not generate HMR accept code
+    if (manifest.hmrSelfAccept || !isDev) {
+      return `./${subAppReq}`;
+    }
+
+    const hmrEntry = `hmr-${manifest.subAppDir}.js`;
+    subAppReq = `../${subAppReq}`;
+
+    Fs.writeFileSync(
+      Path.join(hmrDir, hmrEntry),
+      `"use strict";
+require("${subAppReq}");
+if (module.hot) {
+  module.hot.accept("${subAppReq}", () => {
+    require("subapp-web").hotReloadSubApp(require("${subAppReq}"));
+  });
+}
+`
+    );
+    return `./${DEV_HMR_DIR}/${hmrEntry}`;
+  }
+
   //
   // Look for src/client/<name>/subapp.js files.  If found, then assume app follows
   // the subapp architecture, and automatically generate one entry for each subapp.
@@ -60,12 +89,26 @@ function makeEntryPartial() {
       logger.info(`Found subapps: ${Object.keys(subApps).join(", ")}`);
     }
 
+    const isDev = Boolean(process.env.WEBPACK_DEV);
+    const hmrDir = Path.resolve(AppMode.src.dir, DEV_HMR_DIR);
+    const gitIgnoreFile = Path.join(hmrDir, ".gitignore");
+    if (isDev && !Fs.existsSync(gitIgnoreFile)) {
+      mkdirp.sync(hmrDir);
+      Fs.writeFileSync(
+        gitIgnoreFile,
+        `# Directory to contain Electrode default hot module loaders for subapps
+# Please ignore this
+# Please don't commit this
+*
+`
+      );
+    }
     partial.context = Path.resolve(AppMode.src.dir);
     const entry = {};
     _.each(subApps, ma => {
       const entryName = `${ma.name.toLowerCase()}`;
       const x1 = `${chalk.magenta("subapp")} ${chalk.blue(ma.name)}`;
-      entry[entryName] = `./${Path.join(ma.subAppDir, ma.entry)}`;
+      entry[entryName] = genSubAppHmrEntry(hmrDir, isDev, ma);
       logger.info(`${x1} entry ${entry[entryName]}`);
     });
 

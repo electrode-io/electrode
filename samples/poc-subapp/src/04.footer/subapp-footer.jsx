@@ -16,13 +16,4 @@ const Footer = () => {
   );
 };
 
-const name = "Footer";
-
-const subApp = {
-  name,
-  Component: Footer
-};
-
-loadSubApp(subApp);
-
-export { subApp as default, Footer as Component };
+export default loadSubApp({ name: "Footer", Component: Footer });

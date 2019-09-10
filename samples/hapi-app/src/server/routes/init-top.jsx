@@ -1,6 +1,7 @@
 import reducer from "../../client/reducers";
 
-export default function initTop() {
+export default function initTop(a, b, c) {
+  debugger;
   return {
     reducer,
     initialState: {

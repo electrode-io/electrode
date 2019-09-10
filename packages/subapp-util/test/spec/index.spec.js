@@ -208,9 +208,14 @@ describe("subapp-util", function() {
       expect(server.name).to.equal("subapp1-server");
     });
 
-    it("should return empty object if no `serverEntry` given in subapp", () => {
+    it("should generate `serverEntry` given in subapp", () => {
       const server = loadSubAppServerByName("Entry");
-      expect(server).be.empty;
+      expect(server).to.have.property("StartComponent");
+    });
+
+    it("should return empty `serverEntry` if subapp manifest sets serverEntry to false", () => {
+      const server = loadSubAppServerByName("Entry");
+      expect(server).to.have.property("StartComponent");
     });
 
     it("should not load subapp server by name if NODE_ENV = production but lib does not exist", () => {
@@ -220,7 +225,7 @@ describe("subapp-util", function() {
       delete process.env.NODE_ENV;
     });
 
-    it("should not load subapp server by name if NODE_ENV = production and appMode.subApps exists but no serverEntry in it", () => {
+    it.skip("should not load subapp server by name if NODE_ENV = production and appMode.subApps exists but no serverEntry in it", () => {
       process.env.NODE_ENV = "production";
       delete process.env.APP_SRC_DIR;
       Object.keys(require.cache).forEach(key => delete require.cache[key]);
