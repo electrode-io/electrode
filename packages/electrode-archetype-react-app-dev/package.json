@@ -164,13 +164,13 @@
       "electrode-archetype-opt-jest": "../electrode-archetype-opt-jest",
       "electrode-archetype-opt-karma": "../electrode-archetype-opt-karma",
       "electrode-archetype-opt-mocha": "../electrode-archetype-opt-mocha",
+      "electrode-archetype-opt-phantomjs": "../electrode-archetype-opt-phantomjs",
       "electrode-archetype-opt-postcss": "../electrode-archetype-opt-postcss",
       "electrode-archetype-opt-pwa": "../electrode-archetype-opt-pwa",
       "electrode-archetype-opt-react": "../electrode-archetype-opt-react",
       "electrode-archetype-opt-sass": "../electrode-archetype-opt-sass",
       "electrode-archetype-opt-sinon": "../electrode-archetype-opt-sinon",
-      "electrode-archetype-opt-typescript": "../electrode-archetype-opt-typescript",
-      "electrode-archetype-opt-phantomjs": "../electrode-archetype-opt-phantomjs"
+      "electrode-archetype-opt-typescript": "../electrode-archetype-opt-typescript"
     }
   },
   "nyc": {
