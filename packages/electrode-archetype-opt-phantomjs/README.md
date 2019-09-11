@@ -1,18 +1,18 @@
 # Electrode Archetype Option phantomjs
 
-Allow [Electrode](https://github.com/electrode-io/electrode) apps to optionally choose to install dependencies for phantomjs.
+Allow [Electrode](https://github.com/electrode-io/electrode) apps to optionally choose to skip installing dependencies for phantomjs.
 
-The app can request to install phantomjs dependencies by adding a file `archetype/config/index.js` or `archetype/config.js` and set:
+The app can skip installing phantomjs dependencies by adding a file `archetype/config/index.js` or `archetype/config.js` and set:
 
 ```js
 module.exports = {
   options: {
-    phantomjs: true
+    phantomjs: false
   }
 };
 ```
 
-If nothing is set, then default is to skip installing.
+If nothing is set, then default is to install.
 
 # Usage
 
