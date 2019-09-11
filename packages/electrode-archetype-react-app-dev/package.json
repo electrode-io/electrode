@@ -136,7 +136,8 @@
     "electrode-archetype-opt-react": "^2.0.2",
     "electrode-archetype-opt-sass": "^1.0.7",
     "electrode-archetype-opt-sinon": "^1.0.1",
-    "electrode-archetype-opt-typescript": "^1.0.1"
+    "electrode-archetype-opt-typescript": "^1.0.1",
+    "electrode-archetype-opt-phantomjs": "^1.0.0"
   },
   "devDependencies": {
     "electrode-archetype-njs-module-dev": "^3.0.0",
@@ -168,7 +169,8 @@
       "electrode-archetype-opt-react": "../electrode-archetype-opt-react",
       "electrode-archetype-opt-sass": "../electrode-archetype-opt-sass",
       "electrode-archetype-opt-sinon": "../electrode-archetype-opt-sinon",
-      "electrode-archetype-opt-typescript": "../electrode-archetype-opt-typescript"
+      "electrode-archetype-opt-typescript": "../electrode-archetype-opt-typescript",
+      "electrode-archetype-opt-phantomjs": "../electrode-archetype-opt-phantomjs"
     }
   },
   "nyc": {
