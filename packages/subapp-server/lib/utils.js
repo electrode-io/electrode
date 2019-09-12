@@ -249,12 +249,14 @@ async function setupRoutesFromFile(srcDir, server, pluginOpts) {
     return h.continue;
   });
 
-  const topOpts = Object.assign(
+  const topOpts = _.merge(
     getDefaultRouteOptions(),
     { dir: Path.resolve(srcDir) },
-    pluginOpts,
-    _.omit(spec, ["routes", "default"])
+    _.omit(spec, ["routes", "default"]),
+    pluginOpts
   );
+
+  topOpts.routes = _.merge({}, spec.routes || spec.default, topOpts.routes);
 
   const statsPath = getStatsPath(topOpts.stats, topOpts.buildArtifacts);
   const assets = loadAssetsFromStats(statsPath);
