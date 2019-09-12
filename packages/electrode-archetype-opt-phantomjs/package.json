@@ -1,0 +1,35 @@
+{
+  "name": "electrode-archetype-opt-phantomjs",
+  "version": "1.0.0",
+  "description": "Electrode NodeJS/React Optional Archetype PHANTOMJS",
+  "main": "optional-check.js",
+  "homepage": "http://www.electrode.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electrode-io/electrode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/electrode-io/electrode/issues"
+  },
+  "files": [
+    "optional-check.js"
+  ],
+  "license": "Apache-2.0",
+  "scripts": {
+    "preinstall": "node optional-check.js",
+    "prepare": "cp node_modules/opt-archetype-check/optional-check.js ."
+  },
+  "dependencies": {
+    "karma-phantomjs-launcher": "^1.0.4",
+    "karma-phantomjs-shim": "^1.5.0",
+    "phantomjs-prebuilt": "^2.1.16"
+  },
+  "devDependencies": {
+    "opt-archetype-check": "../opt-archetype-check"
+  },
+  "electrodeOptArchetype": {
+    "optionalTagName": "phantomjs",
+    "expectTag": true,
+    "defaultInstall": true
+  }
+}

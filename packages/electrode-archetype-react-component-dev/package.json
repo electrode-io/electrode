@@ -98,10 +98,11 @@
     "electrode-archetype-opt-inferno": "^0.2.8",
     "electrode-archetype-opt-jest": "^1.0.0",
     "electrode-archetype-opt-karma": "^2.0.2",
+    "electrode-archetype-opt-mocha": "^1.0.0",
+    "electrode-archetype-opt-phantomjs": "^1.0.0",
     "electrode-archetype-opt-react": "^2.0.1",
     "electrode-archetype-opt-sass": "^1.0.6",
-    "electrode-archetype-opt-sinon": "^1.0.0",
-    "electrode-archetype-opt-mocha": "^1.0.0"
+    "electrode-archetype-opt-sinon": "^1.0.0"
   },
   "devDependencies": {
     "electrode-archetype-react-component": "../electrode-archetype-react-component",
@@ -124,10 +125,11 @@
       "electrode-archetype-opt-inferno": "../electrode-archetype-opt-inferno",
       "electrode-archetype-opt-jest": "../electrode-archetype-opt-jest",
       "electrode-archetype-opt-karma": "../electrode-archetype-opt-karma",
+      "electrode-archetype-opt-mocha": "../electrode-archetype-opt-mocha",
+      "electrode-archetype-opt-phantomjs": "../electrode-archetype-opt-phantomjs",
       "electrode-archetype-opt-react": "../electrode-archetype-opt-react",
       "electrode-archetype-opt-sass": "../electrode-archetype-opt-sass",
-      "electrode-archetype-opt-sinon": "../electrode-archetype-opt-sinon",
-      "electrode-archetype-opt-mocha": "../electrode-archetype-opt-mocha"
+      "electrode-archetype-opt-sinon": "../electrode-archetype-opt-sinon"
     }
   }
 }
