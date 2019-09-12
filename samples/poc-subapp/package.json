@@ -42,7 +42,7 @@
     "bluebird": "^3.5.3",
     "electrode-archetype-react-app": "^6.3.0",
     "electrode-confippet": "^1.5.0",
-    "electrode-server": "^2.2.2",
+    "electrode-server": "^2.3.0",
     "electrode-static-paths": "^2.0.2",
     "history": "^4.7.2",
     "inert": "^5.1.2",

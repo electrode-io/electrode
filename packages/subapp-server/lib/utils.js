@@ -227,7 +227,7 @@ async function setupRoutesFromFile(srcDir, server, pluginOpts) {
   const subApps = await subAppUtil.scanSubAppsFromDir(srcDir);
   const subAppsByPath = subAppUtil.getSubAppByPathMap(subApps);
 
-  handleFavIcon(server, spec);
+  await handleFavIcon(server, spec);
 
   // routes can either be in default (es6) or routes
   const routes = spec.default || spec.routes;
