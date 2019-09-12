@@ -41,7 +41,7 @@
   "dependencies": {
     "electrode-archetype-react-app": "^6.3.0",
     "electrode-confippet": "^1.5.0",
-    "electrode-server": "^2.2.2",
+    "electrode-server": "^2.3.0",
     "electrode-static-paths": "^2.0.2",
     "http-codes": "^1.0.0",
     "inert": "^5.1.2",

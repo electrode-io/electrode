@@ -4826,12 +4826,13 @@ electrode-react-webapp:
    require-at: ^1.0.0
    string-array: ^1.0.0
 electrode-server:
+ _latest: 3.0.0
  _:
-  ^2.2.2: 2.2.2
- 2.2.2:
+  ^2.3.0: 2.3.0
+ 2.3.0:
   top: 1
-  $: sha512-voTy3SB1h7cqNoqc99jQAw6PglOO7hmGQhhGVkxnT7UWn6nadgUW90kF7YP2slZPqpOhP4MHnjukbhgqRgiOhA==
-  _: 'https://registry.npmjs.org/electrode-server/-/electrode-server-2.2.2.tgz'
+  $: sha512-oG95hbwy8IeMPjTdBv3DeACJm/XYQA12ysSTi4XAhCPaRCj8+/U1/o7DGDHyAHIgN3upkqsfTpq8B2UAZG2A7g==
+  _: 'https://registry.npmjs.org/electrode-server/-/electrode-server-2.3.0.tgz'
   dependencies:
    async-eventemitter: ^0.2.2
    bluebird: '>= 2.10.0 <= 3.x.x'
