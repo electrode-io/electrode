@@ -513,7 +513,9 @@ async function setupSubAppHapiRoutes(server, pluginOpts) {
 
 function legacyPlugin(server, options, next) {
   try {
-    setupSubAppHapiRoutes(server, options).then(() => next());
+    setupSubAppHapiRoutes(server, options)
+      .then(() => next())
+      .catch(next);
   } catch (err) {
     next(err); // eslint-disable-line
   }
