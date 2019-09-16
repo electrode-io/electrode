@@ -7,12 +7,11 @@ const {
   getCriticalCSS,
   getStatsPath,
   resolvePath,
-  setupSubAppHapiRoutes,
-  legacyPlugin
+  setupSubAppHapiRoutes
 } = require("../../lib/utils");
 
 const Path = require("path");
-const Hapi = require("hapi");
+const electrodeServer = require("electrode-server");
 const sinon = require("sinon");
 const { ReactWebapp } = require("electrode-react-webapp");
 
@@ -169,13 +168,19 @@ describe("subapp-server", () => {
       ]);
     };
 
-    beforeEach(() => {
-      server = new Hapi.Server();
-      server.connection({ port: 8081 });
+    beforeEach(async () => {
+      server = await electrodeServer({
+        connection: {
+          port: 8081
+        },
+        electrode: {
+          logLevel: "none"
+        }
+      });
     });
 
-    afterEach(() => {
-      server.stop();
+    afterEach(async () => {
+      await server.stop();
       if (stubPathResolve) stubPathResolve.restore();
       if (stubRouteHandler) stubRouteHandler.restore();
     });
@@ -225,11 +230,12 @@ describe("subapp-server", () => {
       });
       await setupSubAppHapiRoutes(server, {});
       await server.start();
-      const { result } = await server.inject({
+      const { statusCode, result } = await server.inject({
         method: "GET",
         url: "/file2"
       });
-      expect(result).to.equal(null);
+      expect(result).to.equal("");
+      expect(statusCode).to.equal(302);
     });
 
     it("should let the server reply html if status code = 404", async () => {
@@ -388,30 +394,6 @@ describe("subapp-server", () => {
         url: "/favicon.ico"
       });
       expect(statusCode).to.equal(404);
-    });
-  });
-
-  describe("legacyPlugin", () => {
-    let server;
-    let s;
-    beforeEach(() => {
-      s = "";
-      server = new Hapi.Server();
-      server.connection({ port: 8081 });
-    });
-
-    afterEach(() => {
-      server.stop();
-    });
-
-    it("should execute next function", () => {
-      const next = () => {
-        s = "finished";
-      };
-      legacyPlugin(server, {}, next);
-      setTimeout(() => {
-        expect(s).to.equal("finished");
-      }, 1000);
     });
   });
 });

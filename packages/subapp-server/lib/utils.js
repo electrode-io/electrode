@@ -15,7 +15,6 @@ const scanDir = require("filter-scan-dir");
 const Boom = require("boom");
 const HttpStatus = require("./http-status");
 const readFile = util.promisify(Fs.readFile);
-const { isHapi17 } = require("electrode-hapi-compat");
 const xaa = require("xaa");
 const { ReactWebapp } = require("electrode-react-webapp");
 const subAppUtil = require("subapp-util");
@@ -146,12 +145,15 @@ function getDefaultRouteOptions() {
   };
 }
 
-async function searchRoutesDir(srcDir) {
+async function searchRoutesDir(srcDir, pluginOpts) {
+  const { loadRoutesFrom } = pluginOpts;
+
   const routesDir = [
+    loadRoutesFrom && Path.resolve(srcDir, loadRoutesFrom),
     Path.resolve(srcDir, "routes"),
     Path.resolve(srcDir, "server", "routes"),
     Path.resolve(srcDir, "server-routes")
-  ].find(x => Fs.existsSync(x));
+  ].find(x => x && Fs.existsSync(x) && Fs.statSync(x).isDirectory());
 
   // there's no routes, server/routes, or server-routes dir
   if (!routesDir) {
@@ -208,29 +210,40 @@ async function handleFavIcon(server, options) {
   server.route({
     method: "get",
     path: "/favicon.ico",
-    handler: isHapi17()
-      ? async () => {
-          if (icon) return icon;
-          else return Boom.notFound();
-        }
-      : (request, reply) => {
-          if (icon) reply(icon);
-          else reply(Boom.notFound());
-        }
+    async handler() {
+      if (icon) return icon;
+      else return Boom.notFound();
+    }
   });
 }
 
 async function setupRoutesFromFile(srcDir, server, pluginOpts) {
   // there should be a src/routes.js file with routes spec
-  const spec = require(Path.resolve(srcDir, "routes"));
+  const { loadRoutesFrom } = pluginOpts;
+
+  const routesFile = [
+    loadRoutesFrom && Path.resolve(srcDir, loadRoutesFrom),
+    Path.resolve(srcDir, "routes")
+  ].find(x => x && optionalRequire(x));
+
+  const spec = routesFile ? require(routesFile) : {};
 
   const subApps = await subAppUtil.scanSubAppsFromDir(srcDir);
   const subAppsByPath = subAppUtil.getSubAppByPathMap(subApps);
 
-  await handleFavIcon(server, spec);
+  const topOpts = _.merge(
+    getDefaultRouteOptions(),
+    { dir: Path.resolve(srcDir) },
+    _.omit(spec, ["routes", "default"]),
+    pluginOpts
+  );
+
+  topOpts.routes = _.merge({}, spec.routes || spec.default, topOpts.routes);
+
+  await handleFavIcon(server, topOpts);
 
   // routes can either be in default (es6) or routes
-  const routes = spec.default || spec.routes;
+  const routes = topOpts.routes;
 
   // invoke setup callback
   for (const path in routes) {
@@ -248,15 +261,6 @@ async function setupRoutesFromFile(srcDir, server, pluginOpts) {
     }
     return h.continue;
   });
-
-  const topOpts = _.merge(
-    getDefaultRouteOptions(),
-    { dir: Path.resolve(srcDir) },
-    _.omit(spec, ["routes", "default"]),
-    pluginOpts
-  );
-
-  topOpts.routes = _.merge({}, spec.routes || spec.default, topOpts.routes);
 
   const statsPath = getStatsPath(topOpts.stats, topOpts.buildArtifacts);
   const assets = loadAssetsFromStats(statsPath);
@@ -346,49 +350,40 @@ async function setupRoutesFromFile(srcDir, server, pluginOpts) {
 
 async function setupRoutesFromDir(server, pluginOpts, fromDir) {
   const { routes } = fromDir;
-  const options = Object.assign(getDefaultRouteOptions(), pluginOpts, fromDir.options);
 
-  updateFullTemplate(fromDir.dir, options);
+  const topOpts = _.merge(getDefaultRouteOptions(), fromDir.options, pluginOpts);
+
+  topOpts.routes = _.merge({}, routes, topOpts.routes);
+
+  updateFullTemplate(fromDir.dir, topOpts);
 
   const routesWithSetup = routes.filter(x => x.route.setup);
 
-  if (routesWithSetup.length > 0) {
-    routesWithSetup.forEach(x => x.route.setup(server, options));
+  for (const route of routesWithSetup) {
+    await route.route.setup(server);
   }
 
-  await handleFavIcon(server, options);
+  await handleFavIcon(server, topOpts);
 
   // register onRequest
   const routesWithInit = routes.filter(x => x.route.initialize);
   if (routesWithInit.length > 0) {
-    server.ext(
-      "onRequest",
-      isHapi17()
-        ? async (request, h) => {
-            try {
-              routesWithInit.forEach(x => x.route.initialize(request));
-            } catch (err) {
-              //
-            }
-            return h.continue;
-          }
-        : (request, reply) => {
-            try {
-              routesWithInit.forEach(x => x.route.initialize(request));
-            } catch (err) {
-              //
-            }
-            reply.continue();
-          }
-    );
+    server.ext("onPreAuth", async (request, h) => {
+      const rte = routes[request.route.path];
+      if (rte && rte.initialize) {
+        const x = await rte.initialize(request, h);
+        if (x) return x;
+      }
+      return h.continue;
+    });
   }
 
-  const statsPath = getStatsPath(options.stats, options.buildArtifacts);
+  const statsPath = getStatsPath(topOpts.stats, topOpts.buildArtifacts);
   const assets = loadAssetsFromStats(statsPath);
-  options.devBundleBase = Url.format({
-    protocol: options.devServer.https ? "https" : "http",
-    hostname: options.devServer.host,
-    port: options.devServer.port,
+  topOpts.devBundleBase = Url.format({
+    protocol: topOpts.devServer.https ? "https" : "http",
+    hostname: topOpts.devServer.host,
+    port: topOpts.devServer.port,
     pathname: "/js/"
   });
 
@@ -398,7 +393,7 @@ async function setupRoutesFromDir(server, pluginOpts, fromDir) {
 
     const routeOptions = Object.assign(
       {},
-      options,
+      topOpts,
       _.pick(route, ["pageTitle", "bundleChunkSelector", "templateFile"])
     );
 
@@ -414,69 +409,36 @@ async function setupRoutesFromDir(server, pluginOpts, fromDir) {
 
     const routeHandler = ReactWebapp.makeRouteHandler(routeOptions);
 
-    const handler = isHapi17()
-      ? // Hapi 17 route handler
-        async (request, h) => {
-          try {
-            const context = await routeHandler({
-              content: { html: "", status: 200, useStream: true },
-              mode: "",
-              request
-            });
-            const data = context.result;
-            const status = data.status;
+    const handler = async (request, h) => {
+      try {
+        const context = await routeHandler({
+          content: { html: "", status: 200, useStream: true },
+          mode: "",
+          request
+        });
+        const data = context.result;
+        const status = data.status;
 
-            if (status === undefined) {
-              return data;
-            } else if (HttpStatus.redirect[status]) {
-              return h.redirect(data.path);
-            } else if (HttpStatus.displayHtml[status]) {
-              return h.response(data.html !== undefined ? data.html : data).code(status);
-            } else if (status >= 200 && status < 300) {
-              return data.html !== undefined ? data.html : data;
-            } else {
-              return h.response(data).code(status);
-            }
-          } catch (err) {
-            if (process.env.NODE_ENV !== "production") {
-              console.error(`Route ${r.name} failed:`, err);
-              return err.stack;
-            } else {
-              return Boom.internal();
-            }
-          }
+        if (status === undefined) {
+          return data;
+        } else if (HttpStatus.redirect[status]) {
+          return h.redirect(data.path);
+        } else if (HttpStatus.displayHtml[status]) {
+          return h.response(data.html !== undefined ? data.html : data).code(status);
+        } else if (status >= 200 && status < 300) {
+          return data.html !== undefined ? data.html : data;
+        } else {
+          return h.response(data).code(status);
         }
-      : // Hapi 16 route handler
-        (request, reply) => {
-          return routeHandler({
-            content: { html: "", status: 200, useStream: true },
-            mode: "",
-            request
-          })
-            .then(context => {
-              const data = context.result;
-              const status = data.status;
-              if (status === undefined) {
-                reply(data);
-              } else if (HttpStatus.redirect[status]) {
-                reply.redirect(data.path);
-              } else if (HttpStatus.displayHtml[status]) {
-                reply(data.html !== undefined ? data.html : data).code(status);
-              } else if (status >= 200 && status < 300) {
-                reply(data.html !== undefined ? data.html : data);
-              } else {
-                reply(data).code(status);
-              }
-            })
-            .catch(err => {
-              if (process.env.NODE_ENV !== "production") {
-                console.error(`Route ${r.name} failed:`, err);
-                reply(err.stack);
-              } else {
-                reply(Boom.internal());
-              }
-            });
-        };
+      } catch (err) {
+        if (process.env.NODE_ENV !== "production") {
+          console.error(`Route ${r.name} failed:`, err);
+          return err.stack;
+        } else {
+          return Boom.internal();
+        }
+      }
+    };
 
     const defaultMethods = [].concat(route.methods);
     const paths = _.uniq([].concat(route.path, route.paths).filter(x => x)).map(x => {
@@ -501,7 +463,11 @@ async function setupRoutesFromDir(server, pluginOpts, fromDir) {
 }
 
 async function setupSubAppHapiRoutes(server, pluginOpts) {
-  const srcDir = process.env.APP_SRC_DIR || (process.env.NODE_ENV === "production" ? "lib" : "src");
+  const srcDir =
+    pluginOpts.srcDir ||
+    process.env.APP_SRC_DIR ||
+    (process.env.NODE_ENV === "production" ? "lib" : "src");
+
   const fromDir = await searchRoutesDir(srcDir, pluginOpts);
   if (fromDir) {
     return await setupRoutesFromDir(server, pluginOpts, fromDir);
@@ -511,16 +477,6 @@ async function setupSubAppHapiRoutes(server, pluginOpts) {
   return await xaa.try(() => setupRoutesFromFile(srcDir, server, pluginOpts));
 }
 
-function legacyPlugin(server, options, next) {
-  try {
-    setupSubAppHapiRoutes(server, options)
-      .then(() => next())
-      .catch(next);
-  } catch (err) {
-    next(err); // eslint-disable-line
-  }
-}
-
 module.exports = {
   resolveChunkSelector,
   loadAssetsFromStats,
@@ -528,6 +484,5 @@ module.exports = {
   getCriticalCSS,
   getStatsPath,
   resolvePath,
-  setupSubAppHapiRoutes,
-  legacyPlugin
+  setupSubAppHapiRoutes
 };
