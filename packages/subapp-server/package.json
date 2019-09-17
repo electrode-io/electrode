@@ -25,7 +25,6 @@
   ],
   "dependencies": {
     "boom": "^7.2.0",
-    "electrode-hapi-compat": "^1.0.0",
     "electrode-react-webapp": "^3.8.3",
     "filter-scan-dir": "^1.0.9",
     "http-status-codes": "^1.3.0",
@@ -40,11 +39,8 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.4.4",
     "electrode-archetype-njs-module-dev": "^3.0.0",
-    "hapi": "^16",
+    "electrode-server": "^3.0.0",
     "run-verify": "^1.1.2"
-  },
-  "peerDependencies": {
-    "hapi": ">= 14 <= 17"
   },
   "fyn": {
     "dependencies": {
