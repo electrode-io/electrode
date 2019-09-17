@@ -4,7 +4,7 @@ import Promise from "bluebird";
 
 module.exports = {
   initialize: () => {
-    console.log("subapp footer server initialize");
+    // console.log("subapp footer server initialize");
   },
   prepare: a => {
     return Promise.delay(50 + Math.random() * 1000).return({});

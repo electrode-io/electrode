@@ -51,6 +51,10 @@ export default reduxLoadSubApp({
     );
   },
 
+  prepare: async () => {},
+
+  reduxReducers: "./reducers",
+
   reduxCreateStore: initialState => {
     const store = createStore(reducers, initialState);
 
