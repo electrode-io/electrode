@@ -1230,9 +1230,8 @@ Individual .babelrc files were generated for you in src/client and src/server
         if (shell.test("-d", "test/server")) {
           AppMode.setEnv(AppMode.src.dir);
           return mkCmd(
-            `~$istanbul cover --include-all-sources --root src/server`,
-            `--report text --report lcov node_modules/mocha/bin/_mocha`,
-            `-- -c --opts`,
+            `~$nyc --all --cwd src/server`,
+            `--reporter=text --reporter=lcov node_modules/mocha/bin/_mocha --opts`,
             quote(mochaConfig("mocha.opts")),
             `test/server`
           );
