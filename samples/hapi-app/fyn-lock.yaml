@@ -15300,7 +15300,7 @@ url-parse:
    querystringify: ^2.1.1
    requires-port: ^1.0.0
 url-parse-lax:
- _latest: 3.0.0
+ _latest: 4.0.0
  _:
   ^1.0.0: 1.0.0
  1.0.0:

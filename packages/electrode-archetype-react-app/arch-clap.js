@@ -1023,6 +1023,7 @@ Individual .babelrc files were generated for you in src/client and src/server
   };
 
   if (archetype.options.flow && optFlow) {
+    const flowPkgDir = Path.dirname(require.resolve("electrode-archetype-opt-flow"));
     Object.assign(tasks, {
       initflow: {
         desc: "Initiate Flow for type checker",
@@ -1030,7 +1031,7 @@ Individual .babelrc files were generated for you in src/client and src/server
       },
       "flow-typed-install": {
         desc: "Install flow 3rd-party interface library definitions from flow-typed repo.",
-        task: mkCmd(`flow-typed install --packageDir ${archetype.devDir}`)
+        task: mkCmd(`flow-typed install --packageDir ${flowPkgDir}`)
       }
     });
   }

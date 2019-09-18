@@ -3,6 +3,8 @@
 const requireAt = require("require-at");
 const archetype = require("../archetype");
 const ck = require("chalker");
+const optionalRequire = require("optional-require")(require);
+const optFlow = optionalRequire("electrode-archetype-opt-flow");
 
 const {
   enableTypeScript,
@@ -15,6 +17,7 @@ const {
   enableDynamicImport
 } = archetype.babel;
 
+const addFlowPlugin = Boolean(enableFlow && optFlow);
 //
 // Resolve full path of a plugin that's the dependency of host npm package
 //
@@ -57,7 +60,7 @@ const basePlugins = [
   "transform-node-env-inline",
   "babel-plugin-lodash",
   "@babel/plugin-transform-runtime",
-  enableFlow && [
+  addFlowPlugin && [
     "@babel/plugin-transform-flow-strip-types",
     { requireDirective: flowRequireDirective }
   ]
