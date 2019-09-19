@@ -21,7 +21,9 @@ const stylusLoader = optStylusRequire.resolve("stylus-relative-loader");
 const optSassRequire = getOptArchetypeRequire("electrode-archetype-opt-sass");
 const sassLoader = optSassRequire.resolve("sass-loader");
 
-const lessLoader = require.resolve("less-loader");
+// LESS support
+const optLessRequire = getOptArchetypeRequire("electrode-archetype-opt-less");
+const lessLoader = optLessRequire.resolve("less-loader");
 
 function loadPostCss() {
   const cssModuleRequire = getOptArchetypeRequire("electrode-archetype-opt-postcss");
@@ -178,17 +180,19 @@ module.exports = function() {
     });
   }
 
-  rules.push({
-    _name: `${namePrefix}-less`,
-    test: /\.less$/,
-    use: [
-      {
-        loader: MiniCssExtractPlugin.loader,
-        options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
-      },
-      ...cssQueryUse.concat({ loader: lessLoader })
-    ]
-  });
+  if (lessLoader) {
+    rules.push({
+      _name: `${namePrefix}-less`,
+      test: /\.less$/,
+      use: [
+        {
+          loader: MiniCssExtractPlugin.loader,
+          options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
+        },
+        ...cssQueryUse.concat({ loader: lessLoader })
+      ]
+    });
+  }
 
   return {
     module: { rules },
