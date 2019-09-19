@@ -1,0 +1,34 @@
+{
+  "name": "electrode-archetype-opt-stylus",
+  "version": "0.0.1",
+  "description": "Electrode NodeJS/React Optional Archetype Stylus",
+  "main": "optional-check.js",
+  "homepage": "http://www.electrode.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electrode-io/electrode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/electrode-io/electrode/issues"
+  },
+  "files": [
+    "optional-check.js"
+  ],
+  "license": "Apache-2.0",
+  "scripts": {
+    "preinstall": "node optional-check.js",
+    "prepare": "cp node_modules/opt-archetype-check/optional-check.js ."
+  },
+  "dependencies": {
+    "stylus": "^0.54.7",
+    "stylus-relative-loader": "^3.4.0"
+  },
+  "devDependencies": {
+    "opt-archetype-check": "../opt-archetype-check"
+  },
+  "electrodeOptArchetype": {
+    "optionalTagName": "stylus",
+    "expectTag": true,
+    "defaultInstall": true
+  }
+}

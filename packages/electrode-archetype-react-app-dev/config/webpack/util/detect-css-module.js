@@ -7,7 +7,7 @@ const AppMode = archetype.AppMode;
 const { getOptArchetypeRequire } = require("../../../lib/utils");
 
 function detectCSSModule() {
-  if (!getOptArchetypeRequire("electrode-archetype-opt-postcss")) {
+  if (getOptArchetypeRequire("electrode-archetype-opt-postcss").invalid) {
     return false;
   }
 
