@@ -16,6 +16,10 @@ const warnYarn = require("./lib/warn-yarn");
 
 const devRequire = archetype.devRequire;
 
+const devOptRequire = require("optional-require")(devRequire);
+
+const optFlow = devOptRequire("electrode-archetype-opt-flow");
+
 const scanDir = devRequire("filter-scan-dir");
 const chalk = devRequire("chalk");
 
@@ -1010,20 +1014,27 @@ Individual .babelrc files were generated for you in src/client and src/server
       desc: "PWA must have dist by running `clap build` first and then start the app server only.",
       task: ["build", "server"]
     },
-    initflow: {
-      desc: "Initiate Flow for type checker",
-      task: mkCmd(`flow init`)
-    },
-    "flow-typed-install": {
-      desc: "Install flow 3rd-party interface library definitions from flow-typed repo.",
-      task: mkCmd(`flow-typed install --packageDir ${archetype.devDir}`)
-    },
+
     "generate-browsers-listrc": {
       desc:
         "Generate .browserlistrc config file, it's used by Browserlist for AutoPrefixer/PostCSS",
       task: () => generateBrowsersListRc()
     }
   };
+
+  if (archetype.options.flow && optFlow) {
+    const flowPkgDir = Path.dirname(require.resolve("electrode-archetype-opt-flow"));
+    Object.assign(tasks, {
+      initflow: {
+        desc: "Initiate Flow for type checker",
+        task: mkCmd(`flow init`)
+      },
+      "flow-typed-install": {
+        desc: "Install flow 3rd-party interface library definitions from flow-typed repo.",
+        task: mkCmd(`flow-typed install --packageDir ${flowPkgDir}`)
+      }
+    });
+  }
 
   if (AppMode.isSrc) {
     tasks = Object.assign(tasks, {

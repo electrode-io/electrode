@@ -1,6 +1,8 @@
 "use strict";
 
 const archetype = require("../archetype");
+const optionalRequire = require("optional-require")(require);
+const optFlow = optionalRequire("electrode-archetype-opt-flow");
 
 const {
   enableTypeScript,
@@ -10,6 +12,8 @@ const {
   looseClassProps,
   envTargets
 } = archetype.babel;
+
+const addFlowPlugin = Boolean(enableFlow && optFlow);
 
 const { node } = envTargets;
 
@@ -25,7 +29,7 @@ module.exports = {
     "@babel/preset-react"
   ].filter(x => x),
   plugins: [
-    enableFlow && [
+    addFlowPlugin && [
       "@babel/plugin-transform-flow-strip-types",
       { requireDirective: flowRequireDirective }
     ],

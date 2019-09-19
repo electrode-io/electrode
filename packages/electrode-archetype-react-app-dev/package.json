@@ -33,7 +33,6 @@
     "@babel/plugin-proposal-decorators": "^7.4.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "@babel/plugin-transform-flow-strip-types": "^7.2.0",
     "@babel/plugin-transform-react-constant-elements": "^7.0.0",
     "@babel/plugin-transform-react-inline-elements": "^7.0.0",
     "@babel/plugin-transform-runtime": "^7.1.0",
@@ -75,8 +74,6 @@
     "file-loader": "^2.0.0",
     "filter-scan-dir": "^1.0.9",
     "finalhandler": "^1.1.1",
-    "flow-bin": "^0.74.0",
-    "flow-typed": "^2.4.0",
     "fs-extra": "^0.26.5",
     "glob": "^7.0.6",
     "identity-obj-proxy": "^3.0.0",
@@ -128,6 +125,7 @@
   "optionalDependencies": {
     "electrode-archetype-opt-critical-css": "^1.0.1",
     "electrode-archetype-opt-eslint": "^1.0.1",
+    "electrode-archetype-opt-flow": "^1.0.0",
     "electrode-archetype-opt-inferno": "^0.2.9",
     "electrode-archetype-opt-jest": "^1.0.1",
     "electrode-archetype-opt-karma": "^2.0.3",
@@ -161,6 +159,7 @@
     "optionalDependencies": {
       "electrode-archetype-opt-critical-css": "../electrode-archetype-opt-critical-css",
       "electrode-archetype-opt-eslint": "../electrode-archetype-opt-eslint",
+      "electrode-archetype-opt-flow": "../electrode-archetype-opt-flow",
       "electrode-archetype-opt-inferno": "../electrode-archetype-opt-inferno",
       "electrode-archetype-opt-jest": "../electrode-archetype-opt-jest",
       "electrode-archetype-opt-karma": "../electrode-archetype-opt-karma",
