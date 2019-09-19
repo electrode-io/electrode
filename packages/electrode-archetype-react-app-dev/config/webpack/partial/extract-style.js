@@ -1,6 +1,6 @@
 "use strict";
 
-/* eslint-disable max-statements */
+/* eslint-disable max-statements, complexity */
 
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const Path = require("path");
@@ -12,12 +12,20 @@ const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 const autoprefixer = require("autoprefixer");
 const cssLoader = require.resolve("css-loader");
-const stylusLoader = require.resolve("stylus-relative-loader");
+
+// Stylus support
+const optStylusRequire = getOptArchetypeRequire("electrode-archetype-opt-stylus");
+const stylusLoader = optStylusRequire.resolve("stylus-relative-loader");
+
+// SASS support
+const optSassRequire = getOptArchetypeRequire("electrode-archetype-opt-sass");
+const sassLoader = optSassRequire.resolve("sass-loader");
+
 const lessLoader = require.resolve("less-loader");
 
 function loadPostCss() {
   const cssModuleRequire = getOptArchetypeRequire("electrode-archetype-opt-postcss");
-  if (!cssModuleRequire) {
+  if (cssModuleRequire.invalid) {
     return { hasPostCss: false };
   }
 
@@ -102,17 +110,6 @@ module.exports = function() {
     getPostcssQuery()
   ].filter(x => x);
 
-  /*
-   * sass Loader
-   */
-  const getSassLoader = () => {
-    if (archetype.options.sass) {
-      const sassLoader = require.resolve("sass-loader");
-      return sassLoader;
-    }
-    return "";
-  };
-
   const namePrefix = `extract-css${cssModuleSupport ? "-modules" : ""}`;
 
   rules.push({
@@ -127,7 +124,7 @@ module.exports = function() {
     ]
   });
 
-  if (archetype.options.sass) {
+  if (archetype.options.sass && sassLoader) {
     rules.push({
       _name: `${namePrefix}-scss`,
       test: /\.(scss|sass)$/,
@@ -136,32 +133,36 @@ module.exports = function() {
           loader: MiniCssExtractPlugin.loader,
           options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
         },
-        ...cssQueryUse.concat({ loader: getSassLoader() })
+        ...cssQueryUse.concat({ loader: sassLoader })
       ]
     });
   }
 
   // stylus query
-  const stylusQuery = { loader: stylusLoader };
+  let stylusQuery;
 
-  rules.push({
-    _name: `${namePrefix}-stylus`,
-    test: /\.styl$/,
-    use: [
-      {
-        loader: MiniCssExtractPlugin.loader,
-        options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
-      },
-      ...cssQueryUse.concat(stylusQuery)
-    ]
-  });
+  if (stylusLoader) {
+    stylusQuery = { loader: stylusLoader };
+
+    rules.push({
+      _name: `${namePrefix}-stylus`,
+      test: /\.styl$/,
+      use: [
+        {
+          loader: MiniCssExtractPlugin.loader,
+          options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
+        },
+        ...cssQueryUse.concat(stylusQuery)
+      ]
+    });
+  }
 
   /*
    *** cssModuleStylusSupport flag is about to deprecate. ***
    * If you want to enable stylus with CSS-Modules + CSS-Next,
    * Please use stylus as your style and enable cssModuleSupport flag instead.
    */
-  if (!cssModuleSupport && cssModuleStylusSupport && hasPostCss) {
+  if (!cssModuleSupport && cssModuleStylusSupport && hasPostCss && stylusQuery) {
     rules.push({
       _name: "extract-css-stylus-modules",
       test: /\.styl$/,

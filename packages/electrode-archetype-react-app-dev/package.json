@@ -103,8 +103,6 @@
     "rimraf": "^2.4.0",
     "serve-index-fs": "^1.10.1",
     "style-loader": "^0.20.1",
-    "stylus": "^0.54.5",
-    "stylus-relative-loader": "^3.4.0",
     "subapp-util": "^1.0.1",
     "sudo-prompt": "^8.2.5",
     "sugarss": "^1.0.1",
@@ -125,7 +123,7 @@
   "optionalDependencies": {
     "electrode-archetype-opt-critical-css": "^1.0.1",
     "electrode-archetype-opt-eslint": "^1.0.1",
-    "electrode-archetype-opt-flow": "^1.0.0",
+    "electrode-archetype-opt-flow": "^0.0.1",
     "electrode-archetype-opt-inferno": "^0.2.9",
     "electrode-archetype-opt-jest": "^1.0.1",
     "electrode-archetype-opt-karma": "^2.0.3",
@@ -135,6 +133,7 @@
     "electrode-archetype-opt-pwa": "^1.0.3",
     "electrode-archetype-opt-react": "^2.0.2",
     "electrode-archetype-opt-sass": "^1.0.7",
+    "electrode-archetype-opt-stylus": "^0.0.1",
     "electrode-archetype-opt-sinon": "^1.0.1",
     "electrode-archetype-opt-typescript": "^1.0.1"
   },
@@ -169,6 +168,7 @@
       "electrode-archetype-opt-pwa": "../electrode-archetype-opt-pwa",
       "electrode-archetype-opt-react": "../electrode-archetype-opt-react",
       "electrode-archetype-opt-sass": "../electrode-archetype-opt-sass",
+      "electrode-archetype-opt-stylus": "../electrode-archetype-opt-stylus",
       "electrode-archetype-opt-sinon": "../electrode-archetype-opt-sinon",
       "electrode-archetype-opt-typescript": "../electrode-archetype-opt-typescript"
     }
