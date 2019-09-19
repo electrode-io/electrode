@@ -8,15 +8,6 @@ const AppMode = archetype.AppMode;
 const assign = require("lodash/assign");
 const fileLoader = require.resolve("file-loader");
 const optionalRequire = require("optional-require")(require);
-//
-// load modules from within electrode-archetype-opt-pwa
-//
-const pwaRequire = requireAt(require.resolve("electrode-archetype-opt-pwa"));
-const webAppManifestLoader = pwaRequire.resolve("web-app-manifest-loader");
-const SWPrecacheWebpackPlugin = pwaRequire("./plugins/sw-precache");
-const FaviconsWebpackPlugin = pwaRequire("favicons-webpack-plugin");
-const AddManifestFieldsPlugin = pwaRequire("./plugins/add-manifest-fields");
-//
 
 const swConfigPath = Path.resolve("config", "sw-config.js");
 const mkdirp = require("mkdirp");
@@ -73,11 +64,21 @@ function createEntryConfigFromScripts(importScripts, entry) {
 
 module.exports = function(options) {
   /* eslint max-statements: 0 */
-  const swConfig = optionalRequire(swConfigPath, true) || {};
+  const swConfig = (archetype.options.pwa && optionalRequire(swConfigPath, true)) || {};
 
   if (!swConfig.manifest) {
     return {};
   }
+
+  //
+  // load modules from within electrode-archetype-opt-pwa
+  //
+  const pwaRequire = requireAt(require.resolve("electrode-archetype-opt-pwa"));
+  const webAppManifestLoader = pwaRequire.resolve("web-app-manifest-loader");
+  const SWPrecacheWebpackPlugin = pwaRequire("./plugins/sw-precache");
+  const FaviconsWebpackPlugin = pwaRequire("favicons-webpack-plugin");
+  const AddManifestFieldsPlugin = pwaRequire("./plugins/add-manifest-fields");
+  //
 
   logger.info(`PWA enabled with config from ${swConfigPath}`);
 

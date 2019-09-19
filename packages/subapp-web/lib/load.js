@@ -16,6 +16,8 @@ const { loadSubAppByName, loadSubAppServerByName } = require("subapp-util");
 const ReactRedux = optionalRequire("react-redux", { default: {} });
 const { Provider } = ReactRedux;
 
+const ReactRouterDom = optionalRequire("react-router-dom");
+
 module.exports = function setup(setupContext, token) {
   const props = token.props;
 
@@ -72,16 +74,16 @@ module.exports = function setup(setupContext, token) {
       .join("");
   }
 
-  let SubApp;
+  let subApp;
   let subAppServer;
   let StartComponent;
 
   let subAppLoadTime = 0;
 
   const loadSubApp = () => {
-    SubApp = loadSubAppByName(name);
+    subApp = loadSubAppByName(name);
     subAppServer = loadSubAppServerByName(name);
-    StartComponent = subAppServer.StartComponent || SubApp.Component;
+    StartComponent = subAppServer.StartComponent || subApp.Component;
   };
 
   loadSubApp();
@@ -114,17 +116,17 @@ module.exports = function setup(setupContext, token) {
       }
 
       const outputSpot = context.output.reserve();
-      console.log("subapp load", name, "useReactRouter", SubApp.useReactRouter);
+      // console.log("subapp load", name, "useReactRouter", subApp.useReactRouter);
       let rrContext;
 
       const createElement = Component => {
-        if (SubApp.useReactRouter) {
+        if (subApp.useReactRouter) {
           rrContext = {};
           const rrProps = { location: req.url.path, context: rrContext };
-          console.log("rendering", name, "for react router", rrProps);
+          // console.log("rendering", name, "for react router", rrProps);
           return React.createElement(Component, rrProps);
         } else {
-          console.log("rendering without react router", name);
+          // console.log("rendering without react router", name);
           return React.createElement(Component);
         }
       };
@@ -135,31 +137,71 @@ module.exports = function setup(setupContext, token) {
         }
 
         let ssrContent = "";
-        let initialState = "";
+        let initialStateStr = "";
         if (props.serverSideRendering) {
+          // If subapp wants to use react router and server didn't specify a StartComponent,
+          // then create a wrap StartComponent that uses react router's StaticRouter
+          if (subApp.useReactRouter && !subAppServer.StartComponent) {
+            assert(
+              ReactRouterDom && ReactRouterDom.StaticRouter,
+              `subapp ${subApp.name} specified useReactRouter without a StartComponent, \
+and can't generate it because module react-dom-router with StaticRouter is not found`
+            );
+            StartComponent = props2 =>
+              React.createElement(
+                ReactRouterDom.StaticRouter,
+                props2,
+                React.createElement(subApp.Component)
+              );
+          }
+
           if (!StartComponent) {
             ssrContent = `<!-- serverSideRendering ${name} has no StartComponent -->`;
-          } else if (SubApp.reduxCreateStore) {
+          } else if (subApp.reduxReducers || subApp.reduxCreateStore) {
+            // if sub app has reduxReducers or reduxCreateStore then assume it's using
+            // redux data model.  prepare initial state and store to render it.
             let reduxData;
 
-            if (subAppServer.prepare) {
-              reduxData = await subAppServer.prepare(req, context);
+            // see if app has a prepare callback, on the server side first, and then the
+            // app itself, and call it.  assume the object it returns would contain the
+            // initial redux state data.
+            const prepare = subAppServer.prepare || subApp.prepare;
+            if (prepare) {
+              reduxData = await prepare({ request, context });
             }
-            // TODO: load server entry and check redux flag and get initial state store from server
-            initialState = JSON.stringify(reduxData.initialState);
+
+            if (!reduxData) {
+              reduxData = { initialState: {} };
+            }
+
+            // if subapp didn't request to skip sending initial state, then stringify it
+            // and attach it to the index html.
+            if (subAppServer.attachInitialState !== false) {
+              initialStateStr = JSON.stringify(reduxData.initialState);
+            }
+            // next we take the initial state and create redux store from it
+            const store =
+              reduxData.store || (await subApp.reduxCreateStore(reduxData.initialState));
             if (props.serverSideRendering === true) {
               assert(Provider, "subapp-web: react-redux Provider not available");
+              // finally render the element with Redux Provider and the store created
               ssrContent = renderElement(
-                React.createElement(
-                  Provider,
-                  { store: reduxData.store },
-                  createElement(StartComponent)
-                )
+                React.createElement(Provider, { store }, createElement(StartComponent))
               );
             }
           } else if (props.serverSideRendering === true) {
+            let initialProps;
+
+            // even though we don't know what data model the component is using, but if it
+            // has a prepare callback, we will just call it to get initial props to pass
+            // to the component when rendering it
+            const prepare = subAppServer.prepare || subApp.prepare;
+            if (prepare) {
+              initialProps = await prepare({ request, context });
+            }
+
             try {
-              ssrContent = renderElement(createElement(StartComponent));
+              ssrContent = renderElement(createElement(StartComponent, initialProps));
             } catch (err) {
               console.log("rendering", name, "failed", err);
             }
@@ -170,6 +212,9 @@ module.exports = function setup(setupContext, token) {
 
         outputSpot.add(`\n${comment}`);
 
+        // If user specified an element ID for a DOM Node to host the SSR content then
+        // add the div for the Node and the SSR content to it, and add JS to start the
+        // sub app on load.
         if (props.elementId) {
           outputSpot.add(`<div id="${props.elementId}">\n`);
           outputSpot.add(ssrContent);
@@ -178,7 +223,7 @@ module.exports = function setup(setupContext, token) {
   elementId: "${props.elementId}",
   serverSideRendering: ${props.serverSideRendering},
   clientProps: ${clientProps},
-  initialState: ${initialState || "{}"}
+  initialState: ${initialStateStr || "{}"}
 })</script>\n`);
         } else {
           outputSpot.add("<!-- no elementId for starting subApp on load -->\n");

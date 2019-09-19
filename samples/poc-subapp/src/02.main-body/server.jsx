@@ -4,7 +4,7 @@ import Promise from "bluebird";
 import { StaticRouter } from "react-router-dom";
 
 module.exports = {
-  prepare: async (request, context) => {
+  prepare: async ({ request, context }) => {
     return Promise.delay(50 + Math.random() * 1000)
       .return({
         number: { value: 999 },
@@ -45,19 +45,11 @@ module.exports = {
             imageUrl: "https://placehold.it/150x80?text=IMAGE",
             footer: "Buy 50 mobiles and get a gift card",
             type: "success"
-          },
-          {
-            heading: "BLACK FRIDAY DEAL",
-            imageUrl: "https://placehold.it/150x80?text=IMAGE",
-            footer: "Buy 50 mobiles and get a gift card"
           }
         ]
       })
       .then(initialState => {
-        return {
-          initialState,
-          store: subApp.reduxCreateStore(initialState)
-        };
+        return { initialState };
       });
   },
   StartComponent: props => {
