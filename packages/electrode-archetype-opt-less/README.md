@@ -1,13 +1,15 @@
-# Electrode Archetype Option Stylus
+# Electrode Archetype Option Less
 
-Allow [Electrode](https://github.com/electrode-io/electrode) apps to optionally choose to skip installing dependencies for stylus.
+Optional addon support for [less](http://lesscss.org)
 
-The app can skip installing stylus dependencies by adding a file `archetype/config/index.js` or `archetype/config.js` and set:
+Allow [Electrode](https://github.com/electrode-io/electrode) apps to optionally choose to skip installing dependencies for less.
+
+The app can skip installing less dependencies by adding a file `archetype/config/index.js` or `archetype/config.js` and set:
 
 ```js
 module.exports = {
   options: {
-    stylus: false
+    less: false
   }
 };
 ```
@@ -25,7 +27,7 @@ In `package.json`:
 ```js
 {
   "optionalDependencies": {
-    "electrode-archetype-opt-stylus": "^1.0.0"
+    "electrode-archetype-opt-less": "^1.0.0"
   }
 }
 ```
