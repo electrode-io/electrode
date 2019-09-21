@@ -72,14 +72,41 @@ const Template = (
           serverSideRendering
         />
 
-        <Require
-          _id="subapp-web/lib/load"
-          _concurrent
-          timestamp
-          elementId="subapp-extras"
-          name="Extras"
-          async
-        />
+        <div style="background: #e8b487; padding: 10px">
+          <Require
+            _id="subapp-web/lib/load"
+            _concurrent
+            timestamp
+            elementId="subapp-extras"
+            name="Extras"
+            async
+          />
+        </div>
+
+        <div style="background: #f0a360; padding: 10px">
+          <Require
+            _id="subapp-web/lib/load"
+            _concurrent
+            timestamp
+            elementId="subapp-suspense-demo"
+            name="SuspenseDemo"
+            async
+          />
+        </div>
+
+        <div style="background: #e88f41; padding: 10px">
+          <Require
+            _id="subapp-web/lib/load"
+            _concurrent
+            timestamp
+            elementId="subapp-suspense-demo-ssr"
+            name="SuspenseDemo"
+            streaming
+            hydrateServerData
+            async
+            serverSideRendering
+          />
+        </div>
 
         <Require
           _id="subapp-web/lib/load"
