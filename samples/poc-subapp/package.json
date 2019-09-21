@@ -26,35 +26,26 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">= 6",
-    "npm": ">= 3"
+    "node": ">= 8",
+    "npm": ">= 5"
   },
   "scripts": {
-    "build": "clap build",
-    "prod-start": "NODE_ENV=production clap -n -x electrode/build prod",
-    "start": "if test \"$NODE_ENV\" = \"production\"; then npm run prod-start; else clap dev; fi",
+    "dev": "clap dev",
     "test": "clap check",
-    "coverage": "clap check",
-    "prod": "echo 'Starting standalone server in PROD mode'; NODE_ENV=production node ./lib/server/",
-    "heroku-postbuild": "clap build"
+    "build": "clap build"
   },
   "dependencies": {
-    "bluebird": "^3.5.3",
     "electrode-archetype-react-app": "^6.3.0",
     "electrode-confippet": "^1.5.0",
     "electrode-server": "^2.3.0",
     "electrode-static-paths": "^2.0.2",
-    "history": "^4.7.2",
     "inert": "^5.1.2",
-    "lodash": "^4.17.11",
-    "optional-require": "^1.0.0",
     "react-redux": "^6.0.1",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.1",
     "subapp-redux": "../../packages/subapp-redux",
     "subapp-server": "../../packages/subapp-server",
-    "subapp-util": "../../packages/subapp-util",
     "subapp-web": "../../packages/subapp-web"
   },
   "devDependencies": {

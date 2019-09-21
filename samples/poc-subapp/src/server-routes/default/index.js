@@ -76,6 +76,15 @@ const Template = (
           _id="subapp-web/lib/load"
           _concurrent
           timestamp
+          elementId="subapp-extras"
+          name="Extras"
+          async
+        />
+
+        <Require
+          _id="subapp-web/lib/load"
+          _concurrent
+          timestamp
           elementId="subapp-footer"
           name="Footer"
           async
@@ -84,7 +93,7 @@ const Template = (
 
         <Require _id="subapp-web/lib/start" />
 
-        <Require _id="subapp-web/lib/more-data" _concurrent name="MainBody" />
+        {/* <Require _id="subapp-web/lib/more-data" _concurrent name="MainBody" /> */}
       </body>
       <Token _id="BODY_CLOSED" />
     </html>
