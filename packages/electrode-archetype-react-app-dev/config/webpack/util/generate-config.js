@@ -37,7 +37,7 @@ function initWebpackConfigComposer(options) {
   options = Object.assign({ profileNames: [] }, options);
 
   if (!options.composer) {
-    options.composer = new WebpackConfigComposer();
+    const composer = (options.composer = new WebpackConfigComposer());
 
     composer.addProfiles(options.profiles);
     composer.addProfile("user", {});
@@ -49,6 +49,8 @@ function initWebpackConfigComposer(options) {
 
 function generateConfig(opts, archetypeControl) {
   const options = initWebpackConfigComposer(opts);
+
+  const { composer } = options;
 
   if (options.profileNames.indexOf("user") < 0) {
     options.profileNames.push("user");
