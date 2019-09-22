@@ -5,6 +5,7 @@ const Path = require("path");
 const archetype = require("../../archetype");
 
 function useAppWebpackConfig() {
+  console.log("111111", process.env.USE_APP_WEBPACK_CONFIG);
   return process.env.USE_APP_WEBPACK_CONFIG === "true";
 }
 
@@ -16,7 +17,7 @@ function getWebpackStartConfig(defaultFile) {
     return customFilePath;
   }
 
-  return defaultFile || Path.join(archetype.config.webpack, "webpack.config.js");
+  return Path.join(archetype.config.webpack, defaultFile || "webpack.config.js");
 }
 
 function setWebpackProfile(profile) {

@@ -18,7 +18,7 @@ const devRequire = archetype.devRequire;
 
 const devOptRequire = require("optional-require")(devRequire);
 
-const { useAppWebpackConfig, getWebpackStartConfig, setWebpackProfile } = devRequire(
+const { getWebpackStartConfig, setWebpackProfile } = devRequire(
   "./config/webpack/util/custom-check"
 );
 
