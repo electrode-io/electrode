@@ -51,7 +51,7 @@ const webpackConfigSpec = {
     env: ["WEBPACK_PRESERVE_SYMLINKS", "NODE_PRESERVE_SYMLINKS"],
     default: false
   },
-  enableShortenCSSNames: { env: "ENABLE_SHORTEN_CSS_NAMES", default: false },
+  enableShortenCSSNames: { env: "ENABLE_SHORTEN_CSS_NAMES", default: true },
   optimizeCssOptions: {
     env: "OPTIMIZE_CSS_OPTIONS",
     type: "json",
@@ -142,6 +142,7 @@ module.exports = Object.assign(
   _.merge(config, typeScriptOption),
   xenvConfig(topConfigSpec, _.pick(userConfig, Object.keys(topConfigSpec)), { merge })
 );
+
 module.exports.babel.hasMultiTargets =
   Object.keys(module.exports.babel.envTargets)
     .sort()
