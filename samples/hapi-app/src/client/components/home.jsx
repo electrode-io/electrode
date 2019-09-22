@@ -83,9 +83,8 @@ class Home extends React.Component {
         </div>
 
         <div styleName={"custom.docs-section"}>
-          <DemoDynamicImport/>
+          <DemoDynamicImport />
         </div>
-
       </div>
     );
   }
