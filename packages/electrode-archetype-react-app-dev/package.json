@@ -75,7 +75,6 @@
     "filter-scan-dir": "^1.0.9",
     "finalhandler": "^1.1.1",
     "fs-extra": "^0.26.5",
-    "glob": "^7.0.6",
     "identity-obj-proxy": "^3.0.0",
     "isomorphic-loader": "^2.1.1",
     "istanbul": "^0.4.5",

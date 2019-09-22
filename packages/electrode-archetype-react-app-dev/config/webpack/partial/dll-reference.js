@@ -6,7 +6,7 @@
  */
 
 const fs = require("fs");
-const glob = require("glob");
+const filterScanDir = require("filter-scan-dir");
 const webpack = require("webpack");
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const Path = require("path");
@@ -18,7 +18,13 @@ module.exports = function(options) {
 
   try {
     const exists = fs.existsSync(Path.resolve(archetype.AppMode.src.client, "dll.config.js"));
-    const filenames = glob.sync(Path.resolve("dll", "js", "*-manifest.*.json"));
+    const filenames = filterScanDir.sync({
+      dir: Path.resolve("dll", "js"),
+      includeRoot: true,
+      filter(file, path, extras) {
+        return extras.ext === ".json" && file.indexOf("-manifest") >= 0;
+      }
+    });
 
     if (exists && filenames.length) {
       return {
