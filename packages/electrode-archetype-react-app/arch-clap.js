@@ -18,6 +18,10 @@ const devRequire = archetype.devRequire;
 
 const devOptRequire = require("optional-require")(devRequire);
 
+const { useAppWebpackConfig, getWebpackStartConfig, setWebpackProfile } = devRequire(
+  "./config/webpack/util/custom-check"
+);
+
 const optFlow = devOptRequire("electrode-archetype-opt-flow");
 
 const scanDir = devRequire("filter-scan-dir");
@@ -144,36 +148,6 @@ function removeLogFiles() {
   try {
     Fs.unlinkSync(Path.resolve("archetype-debug.log"));
   } catch (e) {} // eslint-disable-line
-}
-
-function setWebpackProfile(profile) {
-  if (process.env.USE_APP_WEBPACK_CONFIG === "true") {
-    process.env.ELECTRODE_WEBPACK_PROFILE = profile || "production";
-    logger.info(`Electrode Webpack Profile set to ${process.env.ELECTRODE_WEBPACK_PROFILE}`);
-  }
-}
-
-function checkForCustomWebpackConfig(defaultFile) {
-  const customFilePath = Path.join(process.cwd(), "webpack.config.js");
-  const archetypeFilePath = webpackConfig(defaultFile);
-  const canUseAppProfile =
-    process.env.USE_APP_WEBPACK_CONFIG === "true" && Fs.existsSync(customFilePath);
-
-  return canUseAppProfile ? customFilePath : archetypeFilePath;
-}
-
-function buildDistExecOptions(event) {
-  setWebpackProfile();
-  return { env: { ENV_TARGET: event } };
-}
-
-function webpackSetAppProfile() {
-  process.env.USE_APP_WEBPACK_CONFIG = "true";
-}
-
-function webpackSetArchetypeProfile() {
-  process.env.USE_APP_WEBPACK_CONFIG = "false";
-  process.env.ELECTRODE_WEBPACK_PROFILE = "";
 }
 
 /*
@@ -428,8 +402,6 @@ function makeTasks(xclap) {
     ".static-files-env": () => setStaticFilesEnv(),
     ".optimize-stats": () => setOptimizeStats(),
     ".remove-log-files": () => removeLogFiles(),
-    ".webpack-app-profile": () => webpackSetAppProfile(),
-    ".webpack-archetype-profile": () => webpackSetArchetypeProfile(),
     build: {
       dep: [".remove-log-files", ".production-env", ".set.css-module.env"],
       desc: AppMode.isSrc
@@ -447,7 +419,7 @@ function makeTasks(xclap) {
       return exec(
         `webpack`,
         `--config`,
-        quote(checkForCustomWebpackConfig("webpack.config.browsercoverage.js")),
+        quote(getWebpackStartConfig("webpack.config.browsercoverage.js")),
         `--colors`
       );
     },
@@ -491,7 +463,7 @@ function makeTasks(xclap) {
         setWebpackProfile("static");
         return mkCmd(
           `~$webpack --config`,
-          quote(checkForCustomWebpackConfig("webpack.config.dev.static.js")),
+          quote(getWebpackStartConfig("webpack.config.dev.static.js")),
           `--colors`,
           `--display-error-details`
         );
@@ -517,19 +489,19 @@ function makeTasks(xclap) {
     "copy-dll": () => undefined,
 
     "build-dist-min": {
-      dep: [".production-env"],
+      dep: [".production-env", () => setWebpackProfile("production")],
       desc: "build dist for production",
       task: xclap.concurrent(
         babelEnvTargetsArr.map((name, index) =>
           xclap.exec(
             [
               `webpack --config`,
-              quote(checkForCustomWebpackConfig("webpack.config.js")),
+              quote(getWebpackStartConfig("webpack.config.js")),
               `--colors --display-error-details`
             ],
             {
               xclap: { delayRunMs: index * 2000 },
-              execOptions: buildDistExecOptions(name)
+              execOptions: { env: { ENV_TARGET: name } }
             }
           )
         )
@@ -917,7 +889,7 @@ Individual .babelrc files were generated for you in src/client and src/server
           `--watch --watch-aggregate-timeout 2000`,
           archetype.webpack.enableHotModuleReload ? `--hot` : ``,
           `--config`,
-          quote(checkForCustomWebpackConfig("webpack.config.dev.js")),
+          quote(getWebpackStartConfig("webpack.config.dev.js")),
           `--progress --colors`,
           `--port ${archetype.webpack.devPort}`,
           `--host ${archetype.webpack.devHostname}`
@@ -932,7 +904,7 @@ Individual .babelrc files were generated for you in src/client and src/server
         return mkCmd(
           "~$webpack-dev-server",
           `--config`,
-          quote(checkForCustomWebpackConfig("webpack.config.test.js")),
+          quote(getWebpackStartConfig("webpack.config.test.js")),
           `--progress --colors`,
           `--port ${archetype.webpack.testPort}`,
           `--host ${archetype.webpack.devHostname}`
@@ -1058,7 +1030,7 @@ Individual .babelrc files were generated for you in src/client and src/server
           setWebpackProfile("dll");
           return exec(
             `webpack --config`,
-            quote(checkForCustomWebpackConfig("webpack.config.dll.js")),
+            quote(getWebpackStartConfig("webpack.config.dll.js")),
             `--colors`,
             `--display-error-details`
           );

@@ -11,6 +11,8 @@ process.env.SERVER_ES6 = true;
 
 process.env.WEBPACK_DEV_MIDDLEWARE = true;
 
+process.env.USE_APP_WEBPACK_CONFIG = true;
+
 /*
  * Tell Electrode app archetype that you want to shorten css names under production env
  */

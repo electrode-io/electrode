@@ -9,33 +9,15 @@ const Path = require("path");
 const _ = require("lodash");
 const logger = require("electrode-archetype-react-app/lib/logger");
 
-function isWebpackDirectlyControlled() {
-  let isDirectlyControlled = false;
-  if (process.env.USE_APP_WEBPACK_CONFIG === "true") {
-    const customFilePath = Path.join(process.cwd(), "webpack.config.js");
-    logger.info(`Webpack using App profile from ${customFilePath}`);
-    isDirectlyControlled = Fs.existsSync(customFilePath);
-  } else {
-    logger.info("Webpack using Archetype profile");
-  }
-  return isDirectlyControlled;
-}
-
-/* eslint-disable max-statements */
-function generateConfig(options) {
-  options = Object.assign({ profileNames: [] }, options);
-  const composer = new WebpackConfigComposer();
-  composer.addProfiles(options.profiles);
-  composer.addProfile("user", {});
-  composer.addPartials(partialConfigs.partials);
-
+function searchUserCustomConfig(options) {
   let customConfig;
-  const customDirs = isWebpackDirectlyControlled() ? [] : [process.cwd(), Path.resolve("archetype/config/webpack")];
+  const customDirs = [process.cwd(), Path.resolve("archetype/config/webpack")];
 
   const foundDir = customDirs.find(d => {
     customConfig = optionalRequire(Path.join(d, options.configFilename));
     return !!customConfig;
   });
+
   if (foundDir) {
     const dir = xsh.pathCwd.replace(foundDir);
     logger.info(`Custom webpack config ${options.configFilename} loaded from ${dir}`);
@@ -43,6 +25,18 @@ function generateConfig(options) {
     const dirs = customDirs.map(d => xsh.pathCwd.replace(d)).join("; ");
     logger.info(`No custom webpack config ${options.configFilename} found in dirs ${dirs}`);
   }
+
+  return customConfig;
+}
+
+function generateConfig(options, archetypeControl) {
+  options = Object.assign({ profileNames: [] }, options);
+  const composer = new WebpackConfigComposer();
+  composer.addProfiles(options.profiles);
+  composer.addProfile("user", {});
+  composer.addPartials(partialConfigs.partials);
+
+  const customConfig = archetypeControl && searchUserCustomConfig(options);
 
   if (options.profileNames.indexOf("user") < 0) {
     options.profileNames.push("user");
