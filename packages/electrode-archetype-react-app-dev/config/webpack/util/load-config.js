@@ -1,6 +1,6 @@
 "use strict";
 
-const generateConfig = require("./generate-config");
+const { generateConfig } = require("./generate-config");
 
 function loadConfig(envOpt) {
   const options = require(`../options/${envOpt}`);

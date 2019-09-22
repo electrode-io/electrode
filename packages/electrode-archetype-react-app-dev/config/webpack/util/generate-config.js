@@ -29,20 +29,33 @@ function searchUserCustomConfig(options) {
   return customConfig;
 }
 
-function generateConfig(options, archetypeControl) {
+//
+// create a webpack config composer and add it to options as composer
+// returns a new options copy
+//
+function initWebpackConfigComposer(options) {
   options = Object.assign({ profileNames: [] }, options);
-  const composer = new WebpackConfigComposer();
-  composer.addProfiles(options.profiles);
-  composer.addProfile("user", {});
-  composer.addPartials(partialConfigs.partials);
 
-  const customConfig = archetypeControl && searchUserCustomConfig(options);
+  if (!options.composer) {
+    options.composer = new WebpackConfigComposer();
+
+    composer.addProfiles(options.profiles);
+    composer.addProfile("user", {});
+    composer.addPartials(partialConfigs.partials);
+  }
+
+  return options;
+}
+
+function generateConfig(opts, archetypeControl) {
+  const options = initWebpackConfigComposer(opts);
 
   if (options.profileNames.indexOf("user") < 0) {
     options.profileNames.push("user");
   }
 
   const keepCustomProps = options.keepCustomProps;
+
   const compose = () => {
     return composer.compose(
       { keepCustomProps },
@@ -51,6 +64,8 @@ function generateConfig(options, archetypeControl) {
   };
 
   let config;
+
+  const customConfig = archetypeControl && searchUserCustomConfig(options);
 
   if (customConfig) {
     if (_.isFunction(customConfig)) {
@@ -67,4 +82,4 @@ function generateConfig(options, archetypeControl) {
   return config;
 }
 
-module.exports = generateConfig;
+module.exports = { initWebpackConfigComposer, generateConfig };

@@ -1,6 +1,6 @@
 "use strict";
 
-const generateConfig = require("./util/generate-config");
+const { initWebpackConfigComposer, generateConfig } = require("./util/generate-config");
 
 //
 // When clap execute a build task that involves invoking webpack it
@@ -14,6 +14,7 @@ const profile = process.env.ELECTRODE_WEBPACK_PROFILE || "production";
 const options = require(`./options/${profile}`);
 
 module.exports = {
+  initWebpackConfigComposer,
   compose: generateConfig,
   env: profile,
   options
