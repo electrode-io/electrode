@@ -1,6 +1,5 @@
 "use strict";
 
-const Fs = require("fs");
 const xsh = require("xsh");
 const partialConfigs = require("../partial");
 const WebpackConfigComposer = require("webpack-config-composer");
