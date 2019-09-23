@@ -5,11 +5,11 @@ import PropTypes from "prop-types";
 let data;
 
 class Data1 extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
 
-  render(props) {
+  render() {
     if (!data) {
       throw new Promise(resolve => {
         setTimeout(() => {
@@ -23,11 +23,11 @@ class Data1 extends React.Component {
 }
 
 class SuspenseDemo extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
 
-  render(props) {
+  render() {
     return (
       <React.Suspense fallback={<div>suspense demo waiting for data...</div>}>
         <div>
