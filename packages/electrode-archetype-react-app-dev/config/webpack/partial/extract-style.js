@@ -195,7 +195,7 @@ module.exports = function() {
           options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
         },
         { loader: cssLoader, options: getCSSModuleOptions() },
-        getPostcssQuery(),
+        getPostCssQuery(),
         stylusQuery
       ]
     });
