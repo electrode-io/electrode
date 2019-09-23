@@ -7,8 +7,3 @@
   background-color: var(--black);
   color: var(--white);
 }
-
-.someStyle {
-  composes: baseStyle;
-  font-size: 18px;
-}

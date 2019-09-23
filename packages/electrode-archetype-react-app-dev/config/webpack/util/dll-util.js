@@ -22,7 +22,7 @@ const Path = require("path");
 const _ = require("lodash");
 const logger = require("electrode-archetype-react-app/lib/logger");
 const archetype = require("electrode-archetype-react-app/config/archetype");
-const mkdirp = archetype.devRequire("mkdirp");
+const mkdirp = require("mkdirp");
 const { devServerBaseUrl } = require("../util/webpack-dev-url");
 const requireAt = require("require-at");
 
