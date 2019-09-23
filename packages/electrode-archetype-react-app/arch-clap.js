@@ -374,6 +374,7 @@ function makeTasks(xclap) {
   const babelCliIgnore = quote(
     [`**/__test__`, `**/__tests__`, `**/_test_`, `**/*.spec.js`, `**/*.spec.jsx`]
       .concat(archetype.babel.enableTypeScript && [`**/*.test.ts`, `**/*.test.tsx`])
+      .concat(`**/.__dev_hmr`)
       .filter(x => x)
       .join(",")
   );
@@ -610,15 +611,22 @@ Individual .babelrc files were generated for you in src/client and src/server
     ".build-lib:delete-babel-ignored-files": {
       desc: false,
       task: () => {
-        const libDir = Path.resolve(AppMode.lib.dir);
-        const ignoredFiles = scanDir.sync({
-          dir: libDir,
+        const scanned = scanDir.sync({
+          dir: Path.resolve(AppMode.lib.dir),
           includeRoot: true,
-          filter: x => {
-            return x.indexOf(".spec.") > 0 || x.indexOf(".test.") > 0;
+          includeDir: true,
+          grouping: true,
+          filterDir: x => x === `.__dev_hmr` && "dirs",
+          filter: (x, p) => x.indexOf(".spec.") > 0 || x.indexOf(".test.") > 0 || p === `.__dev_hmr`
+        });
+        scanned.files.forEach(f => Fs.unlinkSync(f));
+        (scanned.dirs || []).forEach(d => {
+          try {
+            Fs.rmdirSync(d);
+          } catch (err) {
+            //
           }
         });
-        ignoredFiles.forEach(f => Fs.unlinkSync(f));
       }
     },
 
