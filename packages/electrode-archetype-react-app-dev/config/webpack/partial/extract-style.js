@@ -4,6 +4,7 @@
 
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const Path = require("path");
+const detectCssModule = require("../util/detect-css-module");
 
 const { getOptArchetypeRequire } = require("../../../lib/utils");
 const webpack = require("webpack");
@@ -46,17 +47,23 @@ function loadPostCss() {
  * - *.css => normal CSS
  * - *.styl => stylus compiled to normal CSS
  * - *.scss => SASS compiled to normal CSS
+ * - *.less => SASS compiled to normal CSS
  *
  * cssModuleSupport: true
  *
  * - *.css => CSS-Modules + CSS-Next
  * - *.styl => stylus compiled to normal CSS => CSS-Modules + CSS-Next
  * - *.scss => SASS compiled to normal CSS => CSS-Modules + CSS-Next
+ * - *.less => LESS compiled to normal CSS => CSS-Modules + CSS-Next
  *
  * cssModuleSupport: undefined (default)
  *
  * - *only* *.css => cssModuleSupport sets to true
  * - *no* *.css (but *.styl or *.scss) => cssModuleSupport sets to false
+ *
+ * cssModuleSupport: array ["css", "styl", "scss", "less"]
+ *
+ * - individual extension enabled for CSS-Modules + CSS-Next
  */
 
 module.exports = function() {
@@ -65,7 +72,7 @@ module.exports = function() {
 
   const { hasPostCss, atImport, postcssPresetEnv, postcssLoader } = loadPostCss();
 
-  const cssModuleSupport = hasPostCss && archetype.webpack.cssModuleSupport;
+  const cssModuleSupport = hasPostCss && detectCssModule();
   const cssModuleStylusSupport = hasPostCss && archetype.webpack.cssModuleStylusSupport;
 
   const rules = [];
@@ -77,7 +84,7 @@ module.exports = function() {
    * - webpack requires an identifier (ident) in options
    * when {Function}/require is used (Complex Options).
    */
-  const getPostcssQuery = () =>
+  const getPostCssQuery = () =>
     hasPostCss && {
       loader: postcssLoader,
       options: {
@@ -105,15 +112,25 @@ module.exports = function() {
     };
   };
 
-  const cssQueryUse = [
-    cssModuleSupport
-      ? { loader: cssLoader, options: getCSSModuleOptions() }
-      : { loader: cssLoader, options: { minimize: true } },
-    getPostcssQuery()
-  ].filter(x => x);
+  const getCssQueryUse = ext => {
+    let cssModule = Boolean(cssModuleSupport);
+    if (ext && Array.isArray(cssModuleSupport)) {
+      cssModule = cssModuleSupport.indexOf(ext) >= 0;
+    }
+
+    return [
+      cssModule
+        ? { loader: cssLoader, options: getCSSModuleOptions() }
+        : { loader: cssLoader, options: { minimize: true } },
+      getPostCssQuery()
+    ].filter(x => x);
+  };
 
   const namePrefix = `extract-css${cssModuleSupport ? "-modules" : ""}`;
 
+  /*
+   * PLAIN css
+   */
   rules.push({
     _name: namePrefix,
     test: /\.css$/,
@@ -122,10 +139,13 @@ module.exports = function() {
         loader: MiniCssExtractPlugin.loader,
         options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
       },
-      ...cssQueryUse
+      ...getCssQueryUse()
     ]
   });
 
+  /*
+   * SASS
+   */
   if (archetype.options.sass && sassLoader) {
     rules.push({
       _name: `${namePrefix}-scss`,
@@ -135,14 +155,15 @@ module.exports = function() {
           loader: MiniCssExtractPlugin.loader,
           options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
         },
-        ...cssQueryUse.concat({ loader: sassLoader })
+        ...getCssQueryUse().concat({ loader: sassLoader })
       ]
     });
   }
 
-  // stylus query
+  /*
+   * STYLUS
+   */
   let stylusQuery;
-
   if (stylusLoader) {
     stylusQuery = { loader: stylusLoader };
 
@@ -154,7 +175,7 @@ module.exports = function() {
           loader: MiniCssExtractPlugin.loader,
           options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
         },
-        ...cssQueryUse.concat(stylusQuery)
+        ...getCssQueryUse().concat(stylusQuery)
       ]
     });
   }
@@ -174,12 +195,15 @@ module.exports = function() {
           options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
         },
         { loader: cssLoader, options: getCSSModuleOptions() },
-        getPostcssQuery(),
+        getPostCssQuery(),
         stylusQuery
       ]
     });
   }
 
+  /*
+   * LESS
+   */
   if (lessLoader) {
     rules.push({
       _name: `${namePrefix}-less`,
@@ -189,7 +213,7 @@ module.exports = function() {
           loader: MiniCssExtractPlugin.loader,
           options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
         },
-        ...cssQueryUse.concat({ loader: lessLoader })
+        ...getCssQueryUse().concat({ loader: lessLoader })
       ]
     });
   }

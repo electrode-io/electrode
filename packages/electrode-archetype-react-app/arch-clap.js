@@ -16,6 +16,8 @@ const warnYarn = require("./lib/warn-yarn");
 
 const devRequire = archetype.devRequire;
 
+const detectCssModule = devRequire("./config/webpack/util/detect-css-module");
+
 const devOptRequire = require("optional-require")(devRequire);
 
 const { getWebpackStartConfig, setWebpackProfile } = devRequire(
@@ -426,7 +428,8 @@ function makeTasks(xclap) {
     },
     ".set.css-module.env": () => {
       const x = archetype.webpack;
-      if (x.cssModuleSupport && x.enableShortenCSSNames) {
+      const cssModule = detectCssModule();
+      if (cssModule) {
         process.env.ENABLE_CSS_MODULE = "true";
       }
     },
@@ -624,7 +627,7 @@ Individual .babelrc files were generated for you in src/client and src/server
           try {
             Fs.rmdirSync(d);
           } catch (err) {
-            //
+            // ignore
           }
         });
       }
