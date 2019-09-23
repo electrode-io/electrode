@@ -10,7 +10,6 @@ const devDir = Path.join(__dirname, "..");
 const devRequire = require(`../require`);
 const configDir = `${devDir}/config`;
 const xenvConfig = devRequire("xenv-config");
-const detectCSSModule = require("./webpack/util/detect-css-module");
 const _ = require("lodash");
 
 const defaultOptimizeCssOptions = {
@@ -41,7 +40,7 @@ const webpackConfigSpec = {
   // stats.json are needed by different uses and the stats partial saves a copy to
   // disk.  It will use this as the path to save the file.
   devArtifactsPath: { env: "WEBPACK_DEV_ARTIFACTS_PATH", default: ".etmp" },
-  cssModuleSupport: { env: "CSS_MODULE_SUPPORT", type: "boolean", default: detectCSSModule },
+  cssModuleSupport: { env: "CSS_MODULE_SUPPORT", type: "boolean", default: undefined },
   cssModuleStylusSupport: { env: "CSS_MODULE_STYLUS_SUPPORT", default: false },
   enableBabelPolyfill: { env: "ENABLE_BABEL_POLYFILL", default: false },
   enableNodeSourcePlugin: { env: "ENABLE_NODESOURCE_PLUGIN", default: false },

@@ -67,12 +67,30 @@ export function loadSubApp(info, renderStart) {
       return undefined;
     }
 
-    // if user provided a start function, then user is expected to
-    // have reference to info
-    if (subApp.info.start) return subApp.info.start(instance, element);
+    const callStart = () => {
+      // if user provided a start function, then user is expected to
+      // have reference to info
+      if (subApp.info.start) {
+        return subApp.info.start(instance, element);
+      }
 
-    console.log("rendering subapp", name, "into", element);
-    return subApp._renderStart(instance, element);
+      console.log("rendering subapp", name, "into", element);
+      return subApp._renderStart(instance, element);
+    };
+
+    if (subApp.info.prepare) {
+      const _prepared = subApp.info.prepare(subApp.info, instance);
+      if (_prepared.then) {
+        return _prepared.then(r => {
+          instance._prepared = r;
+          return callStart();
+        });
+      } else {
+        instance._prepared = _prepared;
+      }
+    }
+
+    return callStart();
   };
 
   const onLoadStart = webSubApps._onLoadStart[name];

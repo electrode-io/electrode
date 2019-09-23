@@ -39,7 +39,7 @@ module.exports = () =>
   support.load().then(() => {
     const config = electrodeConfippet.config;
     return startServer(config).catch(e => {
-      console.log("start server failed -", e.message);
+      console.log("start server failed -", e.message); // eslint-disable-line
       process.exit(1);
     });
   });

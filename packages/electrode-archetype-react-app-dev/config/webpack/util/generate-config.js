@@ -1,6 +1,5 @@
 "use strict";
 
-const Fs = require("fs");
 const xsh = require("xsh");
 const partialConfigs = require("../partial");
 const WebpackConfigComposer = require("webpack-config-composer");
@@ -9,33 +8,15 @@ const Path = require("path");
 const _ = require("lodash");
 const logger = require("electrode-archetype-react-app/lib/logger");
 
-function isWebpackDirectlyControlled() {
-  let isDirectlyControlled = false;
-  if (process.env.USE_APP_WEBPACK_CONFIG === "true") {
-    const customFilePath = Path.join(process.cwd(), "webpack.config.js");
-    logger.info(`Webpack using App profile from ${customFilePath}`);
-    isDirectlyControlled = Fs.existsSync(customFilePath);
-  } else {
-    logger.info("Webpack using Archetype profile");
-  }
-  return isDirectlyControlled;
-}
-
-/* eslint-disable max-statements */
-function generateConfig(options) {
-  options = Object.assign({ profileNames: [] }, options);
-  const composer = new WebpackConfigComposer();
-  composer.addProfiles(options.profiles);
-  composer.addProfile("user", {});
-  composer.addPartials(partialConfigs.partials);
-
+function searchUserCustomConfig(options) {
   let customConfig;
-  const customDirs = isWebpackDirectlyControlled() ? [] : [process.cwd(), Path.resolve("archetype/config/webpack")];
+  const customDirs = [process.cwd(), Path.resolve("archetype/config/webpack")];
 
   const foundDir = customDirs.find(d => {
     customConfig = optionalRequire(Path.join(d, options.configFilename));
     return !!customConfig;
   });
+
   if (foundDir) {
     const dir = xsh.pathCwd.replace(foundDir);
     logger.info(`Custom webpack config ${options.configFilename} loaded from ${dir}`);
@@ -44,11 +25,38 @@ function generateConfig(options) {
     logger.info(`No custom webpack config ${options.configFilename} found in dirs ${dirs}`);
   }
 
+  return customConfig;
+}
+
+//
+// create a webpack config composer and add it to options as composer
+// returns a new options copy
+//
+function initWebpackConfigComposer(options) {
+  options = Object.assign({ profileNames: [] }, options);
+
+  if (!options.composer) {
+    const composer = (options.composer = new WebpackConfigComposer());
+
+    composer.addProfiles(options.profiles);
+    composer.addProfile("user", {});
+    composer.addPartials(partialConfigs.partials);
+  }
+
+  return options;
+}
+
+function generateConfig(opts, archetypeControl) {
+  const options = initWebpackConfigComposer(opts);
+
+  const { composer } = options;
+
   if (options.profileNames.indexOf("user") < 0) {
     options.profileNames.push("user");
   }
 
   const keepCustomProps = options.keepCustomProps;
+
   const compose = () => {
     return composer.compose(
       { keepCustomProps },
@@ -57,6 +65,8 @@ function generateConfig(options) {
   };
 
   let config;
+
+  const customConfig = archetypeControl && searchUserCustomConfig(options);
 
   if (customConfig) {
     if (_.isFunction(customConfig)) {
@@ -73,4 +83,4 @@ function generateConfig(options) {
   return config;
 }
 
-module.exports = generateConfig;
+module.exports = { initWebpackConfigComposer, generateConfig };

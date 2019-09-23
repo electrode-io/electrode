@@ -8,7 +8,7 @@ const Fs = require("fs");
 const webpack = require("webpack");
 const hotHelpers = require("webpack-hot-middleware/helpers");
 const Url = require("url");
-const checkForCustomWebpackConfig = require("../../config/webpack/util/check-custom-config");
+const { getWebpackStartConfig } = require("../../config/webpack/util/custom-check");
 
 hotHelpers.pathMatch = (url, path) => {
   try {
@@ -75,7 +75,7 @@ class Middleware {
     const options = this._options;
 
     const webpackDevConfigFile = Path.join(archetype.config.webpack, "webpack.config.dev.js");
-    const config = require(checkForCustomWebpackConfig(webpackDevConfigFile));
+    const config = require(getWebpackStartConfig(webpackDevConfigFile));
 
     const { devPort, devHostname } = archetype.webpack;
 

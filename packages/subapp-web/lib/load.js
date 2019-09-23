@@ -157,7 +157,8 @@ and can't generate it because module react-dom-router with StaticRouter is not f
 
           if (!StartComponent) {
             ssrContent = `<!-- serverSideRendering ${name} has no StartComponent -->`;
-          } else if (subApp.reduxReducers || subApp.reduxCreateStore) {
+          } else if (subApp.__redux) {
+            // subApp.reduxReducers || subApp.reduxCreateStore) {
             // if sub app has reduxReducers or reduxCreateStore then assume it's using
             // redux data model.  prepare initial state and store to render it.
             let reduxData;
@@ -174,14 +175,20 @@ and can't generate it because module react-dom-router with StaticRouter is not f
               reduxData = { initialState: {} };
             }
 
+            const initialState = reduxData.initialState || reduxData;
             // if subapp didn't request to skip sending initial state, then stringify it
             // and attach it to the index html.
             if (subAppServer.attachInitialState !== false) {
-              initialStateStr = JSON.stringify(reduxData.initialState);
+              initialStateStr = JSON.stringify(initialState);
             }
             // next we take the initial state and create redux store from it
             const store =
-              reduxData.store || (await subApp.reduxCreateStore(reduxData.initialState));
+              reduxData.store ||
+              (subApp.reduxCreateStore && (await subApp.reduxCreateStore(initialState)));
+            assert(
+              store,
+              `redux subapp ${subApp.name} didn't provide store, reduxCreateStore, or reducers`
+            );
             if (props.serverSideRendering === true) {
               assert(Provider, "subapp-web: react-redux Provider not available");
               // finally render the element with Redux Provider and the store created
