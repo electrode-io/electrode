@@ -623,7 +623,9 @@ Individual .babelrc files were generated for you in src/client and src/server
         (scanned.dirs || []).forEach(d => {
           try {
             Fs.rmdirSync(d);
-          } catch {}
+          } catch (err) {
+            //
+          }
         });
       }
     },
