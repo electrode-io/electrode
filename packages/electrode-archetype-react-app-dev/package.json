@@ -2,6 +2,7 @@
   "name": "electrode-archetype-react-app-dev",
   "version": "6.5.11",
   "description": "Electrode NodeJS/React Application Archetype (Development)",
+  "main": "index.js",
   "homepage": "http://www.electrode.io",
   "repository": {
     "type": "git",
