@@ -18,6 +18,7 @@
 
 import React from "react";
 import custom from "../styles/custom.css"; // eslint-disable-line no-unused-vars
+import demo3 from "../styles/demo3.less";
 import Cookies from "electrode-cookies";
 import PropTypes from "prop-types";
 import milligram from "milligram/dist/milligram.css"; // eslint-disable-line no-unused-vars
@@ -60,7 +61,7 @@ class DemoCookies extends React.Component {
     return (
       <div>
         <h6 styleName={"custom.docs-header"}>Demo Non-Redux Universal Cookies</h6>
-        <p>Test cookie value: {cookieValue || "<NOT SET>"}</p>
+        <p styleName={"demo3.cookieTitle"}>Test cookie value: {cookieValue || "<NOT SET>"}</p>
 
         <input type="text" style={{ width: "100px", marginRight: "10px" }} ref="newCookieValue" />
         <button
