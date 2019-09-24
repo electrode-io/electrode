@@ -74,8 +74,7 @@ class Middleware {
   setup() {
     const options = this._options;
 
-    const webpackDevConfigFile = Path.join(archetype.config.webpack, "webpack.config.dev.js");
-    const config = require(getWebpackStartConfig(webpackDevConfigFile));
+    const config = require(getWebpackStartConfig("webpack.config.dev.js"));
 
     const { devPort, devHostname } = archetype.webpack;
 
