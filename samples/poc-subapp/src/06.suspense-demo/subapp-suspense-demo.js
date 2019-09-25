@@ -30,7 +30,6 @@ class SuspenseDemo extends React.Component {
     return (
       <AppContext.Consumer>
         {({ isSsr, ssr, subApp }) => {
-          debugger;
           return (
             <div>
               <div>SubApp name: {subApp ? subApp.name : "Not Available from context"}</div>
