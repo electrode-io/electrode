@@ -16,7 +16,7 @@
   - `Composable` - Create routes/pages that are composed of multiple subapps.
   - `Lazy loading` - Dynamically lazy load and create multiple instances of subapps on a page.
   - `Initial Props` - Automatically retrieve initial props before rendering subapps.
-  - `Async data fetch` - Use React suspense to enable single pass async data fetch within.
+  - `Async data fetch` - Use React suspense to enable single pass async data fetch within components.
   - `Server Side Rendering` - Independently enable server side render for each subapp.
   - `Redux` - Automatically facilitate, initialize, and hydrate SSR data using Redux.
   - `React Router` - Automatically setup component routing using react-router.
@@ -27,7 +27,7 @@
 **How do I create a subapp?**
 
 - Electrode automatically look under the directory `src` for subapps.
-- To create a subapp, create a directory for it and an entry file with `subapp-` prefix, or it just `subapp.js`.
+- To create a subapp, create a directory for it and an entry file with `subapp-` prefix, or just `subapp.js`.
 - Load your subapp with the `loadSubApp` API.
 
 - The simplest sample of a subapp:
