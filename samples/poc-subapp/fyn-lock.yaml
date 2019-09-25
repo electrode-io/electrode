@@ -4832,7 +4832,6 @@ electrode-archetype-react-app-dev:
    filter-scan-dir: ^1.0.9
    finalhandler: ^1.1.1
    fs-extra: ^0.26.5
-   glob: ^7.0.6
    identity-obj-proxy: ^3.0.0
    isomorphic-loader: ^2.1.1
    istanbul: ^0.4.5
@@ -6433,7 +6432,7 @@ glob:
  _:
   7.1.2: 7.1.2
   ^5.0.15: 5.0.15
-  '^7.0.0,^7.0.3,^7.0.6,^7.1.1,^7.1.2,^7.1.3,~7.1.1': 7.1.3
+  '^7.0.0,^7.0.3,^7.1.1,^7.1.2,^7.1.3,~7.1.1': 7.1.3
  7.1.3:
   $: sha512-vcfuiIxogLV4DlGBHIUOwI0IbrJ8HWPc4MU7HzviGeNho/UJDfi6B5p3sHeWIQ0KGIU0Jpxi5ZHxemQfLkkAwQ==
   _: 'https://registry.npmjs.org/glob/-/glob-7.1.3.tgz'
@@ -7167,7 +7166,7 @@ ignore-styles:
   $: sha1-tJ7yJ0va/NikiAqWa/440aC/RnE=
   _: 'https://registry.npmjs.org/ignore-styles/-/ignore-styles-5.0.1.tgz'
 image-size:
- _latest: 0.7.4
+ _latest: 0.8.1
  _:
   ^0.4.0: 0.4.0
   '^0.5.0,~0.5.0': 0.5.5
@@ -12348,9 +12347,33 @@ react:
    object-assign: ^4.1.1
    prop-types: ^15.6.2
    scheduler: ^0.12.0
+react-async-ssr:
+ _latest: 0.5.2
+ _:
+  ^0.5.2: 0.5.2
+ 0.5.2:
+  top: 1
+  $: sha512-+yb7L3tiO5HUBam0A7bW658achSvuLHR+rXaoIAfuGH8o7+SRb/Jbo2KdFI+ou6W8/k3yhYoMdNpEi+yZf24MQ==
+  _: 'https://registry.npmjs.org/react-async-ssr/-/react-async-ssr-0.5.2.tgz'
+  dependencies:
+   react-dom: ^16.9.0
+  peerDependencies:
+   react: ^16.6.0
 react-dom:
+ _latest: 16.9.0
  _:
   ^16.0.0: 16.7.0
+  ^16.9.0: 16.9.0
+ 16.9.0:
+  $: sha512-YFT2rxO9hM70ewk9jq0y6sQk8cL02xm4+IzYBz75CQGlClQQ1Bxq0nhHF6OtSbit+AIahujJgb/CPRibFkMNJQ==
+  _: 'https://registry.npmjs.org/react-dom/-/react-dom-16.9.0.tgz'
+  dependencies:
+   loose-envify: ^1.1.0
+   object-assign: ^4.1.1
+   prop-types: ^15.6.2
+   scheduler: ^0.15.0
+  peerDependencies:
+   react: ^16.0.0
  16.7.0:
   $: sha512-D0Ufv1ExCAmF38P2Uh1lwpminZFRXEINJe53zRAbm4KPwSyd6DY/uDoS0Blj9jvPpn1+wivKpZYc8aAAN/nAkg==
   _: 'https://registry.npmjs.org/react-dom/-/react-dom-16.7.0.tgz'
@@ -13138,9 +13161,17 @@ sax:
   $: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
   _: 'https://registry.npmjs.org/sax/-/sax-1.2.4.tgz'
 scheduler:
+ _latest: 0.15.0
  _:
   ^0.12.0: 0.12.0
   ^0.13.3: 0.13.3
+  ^0.15.0: 0.15.0
+ 0.15.0:
+  $: sha512-xAefmSfN6jqAa7Kuq7LIJY0bwAPG3xlCj0HMEBQk1lxYiDKZscY2xJ5U/61ZTrYbmNQbXa+gc7czPkVo11tnCg==
+  _: 'https://registry.npmjs.org/scheduler/-/scheduler-0.15.0.tgz'
+  dependencies:
+   loose-envify: ^1.1.0
+   object-assign: ^4.1.1
  0.13.3:
   $: sha512-UxN5QRYWtpR1egNWzJcVLk8jlegxAugswQc984lD3kU7NuobsO37/sRfbpTdBjtnD5TBNFA2Q2oLV5+UmPSmEQ==
   _: 'https://registry.npmjs.org/scheduler/-/scheduler-0.13.3.tgz'
