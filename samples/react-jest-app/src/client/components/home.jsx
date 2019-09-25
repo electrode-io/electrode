@@ -29,12 +29,12 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div styleName={"custom.container"}>
+      <div styleName="custom.container">
         {/**/}
         <Notifications />
         {/**/}
 
-        <section styleName={"custom.header"}>
+        <section styleName="custom.header">
           <h2>
             <span>Hello from </span>
             <a href="https://github.com/electrode-io">
