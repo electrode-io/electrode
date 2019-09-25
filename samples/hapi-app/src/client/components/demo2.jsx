@@ -11,9 +11,9 @@ class Demo2 extends Component {
 
   render() {
     return (
-      <div styleName={"custom.container"}>
+      <div styleName="custom.container">
         <Nav {...this.props} />
-        <section styleName={"custom.header"}>
+        <section styleName="custom.header">
           <h2>Buttons Demo</h2>
           <div styleName="demoStyle.main">
             <div styleName="demoStyle.sub-main">
