@@ -101,10 +101,10 @@ const Template = (
             timestamp
             elementId="subapp-suspense-demo-ssr"
             name="SuspenseDemo"
-            streaming
             hydrateServerData
             async
             serverSideRendering
+            suspenseSsr
           />
         </div>
 

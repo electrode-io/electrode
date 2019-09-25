@@ -6,9 +6,10 @@ const assert = require("assert");
 const Fs = require("fs");
 const Path = require("path");
 const _ = require("lodash");
+const optionalRequire = require("optional-require")(require);
 const React = require("react");
 const ReactDOMServer = require("react-dom/server");
-const optionalRequire = require("optional-require")(require);
+const AsyncReactDOMServer = optionalRequire("react-async-ssr");
 const request = require("request");
 const util = require("./util");
 const { loadSubAppByName, loadSubAppServerByName } = require("subapp-util");
@@ -92,10 +93,19 @@ module.exports = function setup(setupContext, token) {
 
   const renderElement = element => {
     if (props.streaming) {
+      assert(!props.suspenseSsr, "streaming and suspense SSR together are not supported");
       if (props.hydrateServerData) {
         return ReactDOMServer.renderToNodeStream(element);
       } else {
         return ReactDOMServer.renderToStaticNodeStream(element);
+      }
+    }
+    if (props.suspenseSsr) {
+      assert(AsyncReactDOMServer, "You must install react-async-ssr for suspense SSR support");
+      if (props.hydrateServerData) {
+        return AsyncReactDOMServer.renderToStringAsync(element);
+      } else {
+        return AsyncReactDOMServer.renderToStaticMarkupAsync(element);
       }
     }
 
@@ -195,7 +205,7 @@ and can't generate it because module react-dom-router with StaticRouter is not f
             if (props.serverSideRendering === true) {
               assert(Provider, "subapp-web: react-redux Provider not available");
               // finally render the element with Redux Provider and the store created
-              ssrContent = renderElement(
+              ssrContent = await renderElement(
                 React.createElement(Provider, { store }, createElement(StartComponent))
               );
             }
@@ -211,7 +221,7 @@ and can't generate it because module react-dom-router with StaticRouter is not f
             }
 
             try {
-              ssrContent = renderElement(createElement(StartComponent, initialProps));
+              ssrContent = await renderElement(createElement(StartComponent, initialProps));
             } catch (err) {
               console.log("rendering", name, "failed", err);
             }
@@ -231,7 +241,7 @@ and can't generate it because module react-dom-router with StaticRouter is not f
           outputSpot.add(`\n</div><script>startSubAppOnLoad({
   name: "${name}",
   elementId: "${props.elementId}",
-  serverSideRendering: ${props.serverSideRendering},
+  serverSideRendering: ${Boolean(props.serverSideRendering)},
   clientProps: ${clientProps},
   initialState: ${initialStateStr || "{}"}
 })</script>\n`);
