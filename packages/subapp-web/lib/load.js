@@ -119,18 +119,18 @@ module.exports = function setup(setupContext, token) {
       // console.log("subapp load", name, "useReactRouter", subApp.useReactRouter);
       let rrContext;
 
-      const createElement = (Component, initalProps) => {
+      const createElement = (Component, initialProps) => {
         if (subApp.useReactRouter) {
           rrContext = {};
           const rrProps = Object.assign(
             { location: req.url.path, context: rrContext },
-            initalProps
+            initialProps
           );
           // console.log("rendering", name, "for react router", rrProps);
           return React.createElement(Component, rrProps);
         } else {
           // console.log("rendering without react router", name);
-          return React.createElement(Component, initalProps);
+          return React.createElement(Component, initialProps);
         }
       };
 
