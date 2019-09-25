@@ -42,15 +42,16 @@ const startProxy = options => {
   proxy.notFound((req, res) => {
     res.statusCode = 404;
     const actualHost = req.headers.host.split(":")[0];
+    const port = getIntFromEnv("PORT", "3000");
+    res.write("Electrode development reverse proxy is unable to forward your URL.\n"
+      + `Check http://${getHost()}:${port}/__proxy_admin/status to see list of forward rules.`);
     if (actualHost !== getHost()) {
-      res.write("The host did not match the expected value.\n"
-        + `Received "${actualHost}" expected "${getHost()}".\n`
-        + "In order to start the development server with a different host, "
-        + "set the HOST environment variable:\n"
-        + "\t$ HOST=dev.example.com clap dev"
+      res.write(`\n\nThe host ${actualHost} from your URL doesn't match `
+        + "the host the proxy used for its rules.\n"
+        + "In order to to start the development server with a different host, "
+        + "please set the HOST env variable:\n"
+        + `For example, in bash: HOST=${actualHost} clap dev`
       );
-    } else {
-      res.write("not found");
     }
     res.end();
   });
