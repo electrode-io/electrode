@@ -391,6 +391,59 @@ describe("redux-router-engine", function() {
     });
   });
 
+  it("should load init by path if init is true and url is string", () => {
+    const req = {
+      path: "/test-init2",
+      method: "get",
+      log: () => {},
+      app: {},
+      url: "/test-init2"
+    };
+
+    const engine = new ReduxRouterEngine({
+      routes: "./test/routes",
+      routesHandlerPath: "./test"
+    });
+
+    return engine.render(req).then(result => {
+      expect(result.status).to.equal(200);
+      expect(result.prefetch).include("test-init2");
+    });
+  });
+
+  it("should load init by path if init is true and url is hapi@18 WHATWG url format", () => {
+    const req = {
+      path: "/test-init2",
+      method: "get",
+      log: () => {},
+      app: {},
+      url: {
+        href: "/test-init2",
+        origin: "",
+        protocol: "http:",
+        username: "",
+        password: "",
+        host: "",
+        hostname: "",
+        port: "80",
+        pathname: "/test-init2",
+        search: "",
+        searchParams: {},
+        hash: ""
+      }
+    };
+
+    const engine = new ReduxRouterEngine({
+      routes: "./test/routes",
+      routesHandlerPath: "./test"
+    });
+
+    return engine.render(req).then(result => {
+      expect(result.status).to.equal(200);
+      expect(result.prefetch).include("test-init2");
+    });
+  });
+
   it("should have state preloaded after rendering", () => {
     process.env.NODE_ENV = "production";
     const req = {

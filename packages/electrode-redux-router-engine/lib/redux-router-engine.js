@@ -73,7 +73,12 @@ class ReduxRouterEngine {
   }
 
   startMatch(req, options = {}) {
-    const location = options.location || Url.parse(req.url || req.path);
+    // hapi@18 compatibility: use "origin" to determine (WHATWG has origin, Url.parse does not)
+    // https://github.com/hapijs/hapi/issues/3871
+    const url = (typeof req.url === "object") && ("origin" in req.url) && req.url.href
+      ? req.url.href
+      : req.url;
+    const location = options.location || Url.parse(url || req.path);
 
     options = Object.assign({}, options, { req, location });
 
