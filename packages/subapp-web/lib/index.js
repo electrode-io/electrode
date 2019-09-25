@@ -5,6 +5,7 @@
 const { registerSubApp } = require("subapp-util");
 
 const { default: makeSubAppSpec } = require("../browser/make-subapp-spec");
+const { default: AppContext } = require("../browser/app-context");
 
 module.exports = {
   // isomorphic functions
@@ -19,5 +20,6 @@ module.exports = {
 
   init: require("./init"),
   load: require("./load"),
-  start: require("./start")
+  start: require("./start"),
+  AppContext
 };

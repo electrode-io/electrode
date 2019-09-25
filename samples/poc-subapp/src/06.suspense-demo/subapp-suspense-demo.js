@@ -1,6 +1,5 @@
 import React from "react";
-import { loadSubApp } from "subapp-web";
-import PropTypes from "prop-types";
+import { loadSubApp, AppContext } from "subapp-web";
 
 let data;
 
@@ -29,12 +28,24 @@ class SuspenseDemo extends React.Component {
 
   render() {
     return (
-      <React.Suspense fallback={<div>suspense demo waiting for data...</div>}>
-        <div>
-          Suspense Demo Received Data
-          <Data1 />
-        </div>
-      </React.Suspense>
+      <AppContext.Consumer>
+        {({ isSsr, ssr, subApp }) => {
+          return (
+            <div>
+              <div>SubApp name: {subApp ? subApp.name : "Not Available from context"}</div>
+              <div>
+                IS_SSR: {`${Boolean(isSsr)}`} HAS_REQUEST: {ssr && ssr.request ? "yes" : "no"}
+              </div>
+              <React.Suspense fallback={<div>suspense demo waiting for data...</div>}>
+                <div>
+                  Suspense Demo Received Data
+                  <Data1 />
+                </div>
+              </React.Suspense>
+            </div>
+          );
+        }}
+      </AppContext.Consumer>
     );
   }
 }

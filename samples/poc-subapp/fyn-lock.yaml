@@ -1012,6 +1012,12 @@
 '@babel/runtime':
  _:
   '^7.0.0,^7.1.2,^7.1.5,^7.3.1': 7.3.1
+  ^7.4.0: 7.6.2
+ 7.6.2:
+  $: sha512-EXxN64agfUqqIGeEjI5dL5z0Sw0ZwWo1mLTi4mQowCZ42O59b7DRpZAnTC6OqdF28wMBMFKNb/4uFGrVaigSpg==
+  _: 'https://registry.npmjs.org/@babel/runtime/-/runtime-7.6.2.tgz'
+  dependencies:
+   regenerator-runtime: ^0.13.2
  7.3.1:
   $: sha512-7jGW8ppV0ant637pIqAcFfQDDH1orEPGJb8aXfUozuCU3QqX7rX4DA8iwrbPrR1hcH0FTTHz47yQnk+bl5xHQA==
   _: 'https://registry.npmjs.org/@babel/runtime/-/runtime-7.3.1.tgz'
@@ -6618,6 +6624,13 @@ growly:
  1.3.0:
   $: sha1-8QdIy+dq+WS3yWyTxrzCivEgwIE=
   _: 'https://registry.npmjs.org/growly/-/growly-1.3.0.tgz'
+gud:
+ _latest: 1.0.0
+ _:
+  ^1.0.0: 1.0.0
+ 1.0.0:
+  $: sha512-zGEOVKFM5sVPPrYs7J5/hYEw2Pof8KCyOwyhG8sAF26mCAeUFAcYPu1mwB7hhpIP29zOIBaDqwuHdLp0jvZXjw==
+  _: 'https://registry.npmjs.org/gud/-/gud-1.0.0.tgz'
 handle-thing:
  _:
   ^2.0.0: 2.0.0
@@ -6861,7 +6874,7 @@ hex-color-regex:
 history:
  _latest: 4.9.0
  _:
-  '^4.7.2,^4.9.0': 4.9.0
+  ^4.9.0: 4.9.0
  4.9.0:
   $: sha512-H2DkjCjXf0Op9OAr6nJ56fcRkTSNrUiv41vNJ6IswJjif6wlpZK0BTfFbi7qK9dXLSYZxkq5lBsj3vUjlYBYZA==
   _: 'https://registry.npmjs.org/history/-/history-4.9.0.tgz'
@@ -6890,8 +6903,8 @@ hoek:
   _: 'https://registry.npmjs.org/hoek/-/hoek-6.0.1.tgz'
 hoist-non-react-statics:
  _:
-  '^2.5.0,^2.5.5': 2.5.5
-  ^3.3.0: 3.3.0
+  ^2.5.5: 2.5.5
+  '^3.1.0,^3.3.0': 3.3.0
  3.3.0:
   $: sha512-0XsbTXxgiaCDYDIWFcwkmerZPSwywfUqYmwT4jzewKTQSWoE6FCMoUVOeBJWK3E/CrWbxRG3m5GzY4lnIwGRBA==
   _: 'https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-3.3.0.tgz'
@@ -9728,6 +9741,20 @@ min-document:
   _: 'https://registry.npmjs.org/min-document/-/min-document-2.19.0.tgz'
   dependencies:
    dom-walk: ^0.1.0
+mini-create-react-context:
+ _latest: 0.3.2
+ _:
+  ^0.3.0: 0.3.2
+ 0.3.2:
+  $: sha512-2v+OeetEyliMt5VHMXsBhABoJ0/M4RCe7fatd/fBy6SMiKazUSEt3gxxypfnk2SHMkdBYvorHRoQxuGoiwbzAw==
+  _: 'https://registry.npmjs.org/mini-create-react-context/-/mini-create-react-context-0.3.2.tgz'
+  dependencies:
+   gud: ^1.0.0
+   tiny-warning: ^1.0.2
+   '@babel/runtime': ^7.4.0
+  peerDependencies:
+   prop-types: ^15.0.0
+   react: '^0.14.0 || ^15.0.0 || ^16.0.0'
 mini-css-extract-plugin:
  _latest: 0.8.0
  _:
@@ -12065,7 +12092,7 @@ prompts:
    sisteransi: ^0.1.1
 prop-types:
  _:
-  '^15.5.6,^15.6.1,^15.6.2,^15.7.2': 15.7.2
+  '^15.5.6,^15.6.2,^15.7.2': 15.7.2
  15.7.2:
   $: sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
   _: 'https://registry.npmjs.org/prop-types/-/prop-types-15.7.2.tgz'
@@ -12401,8 +12428,8 @@ react-intl:
    react: '^0.14.9 || ^15.0.0 || ^16.0.0'
 react-is:
  _:
+  '^16.6.0,^16.8.1,^16.8.2,^16.8.3': 16.8.3
   ^16.7.0: 16.7.0
-  '^16.8.1,^16.8.2,^16.8.3': 16.8.3
  16.8.3:
   $: sha512-Y4rC1ZJmsxxkkPuMLwvKvlL1Zfpbcu+Bf4ZigkHup3v9EfdYhAlWAaVyA19olXq2o2mGn0w+dFKvk3pVVlYcIA==
   _: 'https://registry.npmjs.org/react-is/-/react-is-16.8.3.tgz'
@@ -12427,36 +12454,42 @@ react-redux:
    react: ^16.4.0-0
    redux: '^2.0.0 || ^3.0.0 || ^4.0.0-0'
 react-router:
+ _latest: 5.1.0
  _:
-  ^4.3.1: 4.3.1
- 4.3.1:
+  '5.1.0,^5.1.0': 5.1.0
+ 5.1.0:
   top: 1
-  $: sha512-yrvL8AogDh2X42Dt9iknk4wF4V8bWREPirFfS9gLU1huk6qK41sg7Z/1S81jjTrGHxa3B8R3J6xIkDAA6CVarg==
-  _: 'https://registry.npmjs.org/react-router/-/react-router-4.3.1.tgz'
+  $: sha512-n9HXxaL/6yRlig9XPfGyagI8+bUNdqcu7FUAx0/Z+Us22Z8iHsbkyJ21Inebn9HOxI5Nxlfc8GNabkNSeXfhqw==
+  _: 'https://registry.npmjs.org/react-router/-/react-router-5.1.0.tgz'
   dependencies:
-   history: ^4.7.2
-   hoist-non-react-statics: ^2.5.0
-   invariant: ^2.2.4
+   '@babel/runtime': ^7.1.2
+   history: ^4.9.0
+   hoist-non-react-statics: ^3.1.0
    loose-envify: ^1.3.1
+   mini-create-react-context: ^0.3.0
    path-to-regexp: ^1.7.0
-   prop-types: ^15.6.1
-   warning: ^4.0.1
+   prop-types: ^15.6.2
+   react-is: ^16.6.0
+   tiny-invariant: ^1.0.2
+   tiny-warning: ^1.0.0
   peerDependencies:
    react: '>=15'
 react-router-dom:
+ _latest: 5.1.0
  _:
-  ^4.3.1: 4.3.1
- 4.3.1:
+  ^5.1.0: 5.1.0
+ 5.1.0:
   top: 1
-  $: sha512-c/MlywfxDdCp7EnB7YfPMOfMD3tOtIjrQlj/CKfNMBxdmpJP8xcz5P/UAFn3JbnQCNUxsHyVVqllF9LhgVyFCA==
-  _: 'https://registry.npmjs.org/react-router-dom/-/react-router-dom-4.3.1.tgz'
+  $: sha512-OkxKbMKjO7IkYqnoaZNX19MnwgjhxwZE871cPUTq0YU2wpIw7QwGxSnSoNRMOa7wO1TwvJJMFpgiEB4C/gVhTw==
+  _: 'https://registry.npmjs.org/react-router-dom/-/react-router-dom-5.1.0.tgz'
   dependencies:
-   history: ^4.7.2
-   invariant: ^2.2.4
+   '@babel/runtime': ^7.1.2
+   history: ^4.9.0
    loose-envify: ^1.3.1
-   prop-types: ^15.6.1
-   react-router: ^4.3.1
-   warning: ^4.0.1
+   prop-types: ^15.6.2
+   react-router: 5.1.0
+   tiny-invariant: ^1.0.2
+   tiny-warning: ^1.0.0
   peerDependencies:
    react: '>=15'
 react-test-renderer:
@@ -12594,12 +12627,13 @@ redent:
    indent-string: ^2.1.0
    strip-indent: ^1.0.1
 redux:
+ _latest: 4.0.4
  _:
-  ^4.0.1: 4.0.1
- 4.0.1:
+  ^4.0.4: 4.0.4
+ 4.0.4:
   top: 1
-  $: sha512-R7bAtSkk7nY6O/OYMVR9RiBI+XghjF9rlbl5806HJbQph0LJVHZrU5oaO4q70eUKiqMRqm4y07KLTlMZ2BlVmg==
-  _: 'https://registry.npmjs.org/redux/-/redux-4.0.1.tgz'
+  $: sha512-vKv4WdiJxOWKxK0yRoaK3Y4pxxB0ilzVx6dszU2W8wLxlb2yikRph4iV/ymtdJ6ZxpBLFbyrxklnT5yBbQSl3Q==
+  _: 'https://registry.npmjs.org/redux/-/redux-4.0.4.tgz'
   dependencies:
    loose-envify: ^1.4.0
    symbol-observable: ^1.2.0
@@ -14540,7 +14574,7 @@ tiny-invariant:
 tiny-warning:
  _latest: 1.0.3
  _:
-  ^1.0.0: 1.0.3
+  '^1.0.0,^1.0.2': 1.0.3
  1.0.3:
   $: sha512-lBN9zLN/oAf68o3zNXYrdCt1kP8WsiGW8Oo2ka41b2IM5JL/S1CTyX1rW0mb/zSuJun0ZUrDxx4sqvYS2FWzPA==
   _: 'https://registry.npmjs.org/tiny-warning/-/tiny-warning-1.0.3.tgz'
@@ -15186,14 +15220,6 @@ walker:
   _: 'https://registry.npmjs.org/walker/-/walker-1.0.7.tgz'
   dependencies:
    makeerror: 1.0.x
-warning:
- _:
-  ^4.0.1: 4.0.2
- 4.0.2:
-  $: sha512-wbTp09q/9C+jJn4KKJfJfoS6VleK/Dti0yqWSm6KMvJ4MRCXFQNapHuJXutJIrWV0Cf4AhTdeIe4qdKHR1+Hug==
-  _: 'https://registry.npmjs.org/warning/-/warning-4.0.2.tgz'
-  dependencies:
-   loose-envify: ^1.0.0
 watch:
  _:
   ~0.18.0: 0.18.0
