@@ -13,10 +13,14 @@ const getIntFromEnv = (name, defaultVal) => {
   return parseInt(process.env[envKey] || (defaultVal && defaultVal.toString()), 10);
 };
 
+const getHost = () => {
+  return process.env.HOST || "localhost";
+};
+
 const startProxy = options => {
   options = Object.assign(
     {
-      host: process.env.HOST || "localhost",
+      host: getHost(),
       port: getIntFromEnv("PORT", "3000"),
       appPort: getIntFromEnv("APP_SERVER_PORT", "3001"),
       webpackDevPort: getIntFromEnv(["WEBPACK_PORT", "WEBPACK_DEV_PORT"], "2992"),
@@ -37,7 +41,17 @@ const startProxy = options => {
 
   proxy.notFound((req, res) => {
     res.statusCode = 404;
-    res.write("not found");
+    const actualHost = req.headers.host.split(":")[0];
+    if (actualHost !== getHost()) {
+      res.write("The host did not match the expected value.\n"
+        + `Received "${actualHost}" expected "${getHost()}".\n`
+        + "In order to start the development server with a different host, "
+        + "set the HOST environment variable:\n"
+        + "\t$ HOST=dev.example.com clap dev"
+      );
+    } else {
+      res.write("not found");
+    }
     res.end();
   });
 
