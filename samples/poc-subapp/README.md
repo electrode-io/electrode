@@ -69,7 +69,7 @@ export default {
 
 ## Initial Props
 
-Your subapp can provide a `prepare` method that retrieve `props`.
+Your subapp can provide a `prepare` method that retrieves `props`.
 
 Example:
 
@@ -115,7 +115,7 @@ export default {
 
 You can have data fetching that only runs on server side, and send that to the client for hydration if you use Redux.
 
-To enable server side only data fetching, create a file `server.js` under your subapp's directory, and exports a `prepare` method.
+To enable server side only data fetching, create a file `server.js` under your subapp's directory, and have it exports a `prepare` method.
 
 Example:
 
@@ -175,7 +175,7 @@ export default loadSubApp({
 
 Electrode will automatically ensure your subapp is integrated with `StaticRouter` when doing SSR and `DynamicRouter` with `history` when running in the browser.
 
-**SPA** Further, you can have other subapps on the same page, and those will stay persistent while your subapp that's enabled with [react-router] will change. When loading each of the [react-router] routes, your page will be properly server side rendered.
+**SPA** Further, you can have other subapps on the same page, and those will stay persistent while your subapp that is enabled with [react-router] will change. When loading each of the [react-router] routes, your page will be properly server side rendered.
 
 ## Redux
 
