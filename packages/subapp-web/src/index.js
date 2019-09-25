@@ -4,6 +4,7 @@ import { createBrowserHistory } from "history";
 import makeSubAppSpec from "./make-subapp-spec";
 
 export { default as makeSubAppSpec } from "./make-subapp-spec";
+export { default as AppContext } from "./app-context";
 
 export function defaultRenderStart(Component, ssr, element, props) {
   if (ssr) {
@@ -140,3 +141,5 @@ export function hotReloadSubApp(info) {
   subApp.info = info;
   subApp._started.forEach(instance => setTimeout(() => subApp.start(instance), 0));
 }
+
+export const ssrContext = React.createContext("electrode-subapp-ssr");

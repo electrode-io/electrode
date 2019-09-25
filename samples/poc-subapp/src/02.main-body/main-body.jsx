@@ -1,5 +1,5 @@
 import React from "react";
-import { getBrowserHistory } from "subapp-web";
+import { getBrowserHistory, AppContext } from "subapp-web";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { Router, Route, Switch } from "react-router-dom";
@@ -10,7 +10,25 @@ import { createStore } from "redux";
 import reducers from "./reducers";
 import { reduxLoadSubApp } from "subapp-redux";
 
-const Home = () => `Home`;
+const Home = () => {
+  return (
+    <AppContext.Consumer>
+      {({ isSsr, ssr, subApp }) => {
+        return (
+          <div className="container-fluid text-center">
+            <p>HOME</p>
+
+            <div>SubApp name: {subApp ? subApp.name : "Not Available from context"}</div>
+            <div>
+              IS_SSR: {`${Boolean(isSsr)}`} HAS_REQUEST: {ssr && ssr.request ? "yes" : "no"}
+            </div>
+          </div>
+        );
+      }}
+    </AppContext.Consumer>
+  );
+};
+
 const Stores = () => `Stores`;
 const Contact = () => `Contact`;
 
