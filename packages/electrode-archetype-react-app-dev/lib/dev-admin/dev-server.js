@@ -9,6 +9,14 @@ const electrodeServer = optionalRequire("electrode-server");
 const Koa = optionalRequire("koa");
 const express = optionalRequire("express");
 
+const isInstalled = (moduleName) => {
+  try {
+    return Boolean(require(moduleName));
+  } catch (e) {
+    return false;
+  }
+};
+
 //
 // indicate that app is running in webpack dev mode
 // also set by electrode-archetype-react-app/arch-clap.js
@@ -20,7 +28,7 @@ if (process.env.WEBPACK_DEV === undefined) {
 process.env.WEBPACK_DEV_MIDDLEWARE = true;
 
 if (electrodeServer) {
-  electrodeServer({
+  const config = {
     electrode: {
       logLevel: "warn"
     },
@@ -31,13 +39,18 @@ if (electrodeServer) {
       }
     },
     plugins: {
-      inert: {},
       webpackDevHapi: {
         module: "./dev-hapi.js",
         requireFromPath: __dirname
       }
     }
-  });
+  };
+  if (isInstalled("@hapi/inert")) {
+    config.plugins.inert = {module: "@hapi/inert"};
+  } else if (isInstalled("inert")) {
+    config.plugins.inert = {};
+  }
+  electrodeServer(config);
 } else if (Koa) {
   const app = new Koa();
   const setup = require("./dev-koa");

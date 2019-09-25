@@ -3,9 +3,10 @@
 /* eslint-disable no-console, no-magic-numbers */
 
 const Url = require("url");
-const Boom = require("boom");
+const Boom = require("@hapi/boom");
 const mime = require("mime");
 const archetype = require("electrode-archetype-react-app/config/archetype");
+const fs = require("fs");
 
 const Middleware = require("./middleware");
 const FakeRes = require("../fake-res");
@@ -62,7 +63,19 @@ function register(server) {
             return resp.takeover();
           },
           replyFile: name => {
-            return h.file(name);
+            let data;
+            try {
+              data = fs.readFileSync(name);
+            } catch (e) {
+              return h.code(404);
+            }
+            const type = mime.lookup(name);
+            const resp = h.response(data).code(200);
+            if (type) {
+              const charset = mime.charsets.lookup(type);
+              resp.header("Content-Type", type + (charset ? `; charset=${charset}` : ""));
+            }
+            return resp.takeover();
           }
         })
         .then(next1 => {

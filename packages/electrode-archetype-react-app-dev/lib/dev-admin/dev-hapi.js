@@ -3,11 +3,12 @@
 /* eslint-disable no-console, no-magic-numbers */
 
 const Url = require("url");
-const Boom = require("boom");
+const Boom = require("@hapi/boom");
 const mime = require("mime");
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const { universalHapiPlugin } = require("electrode-hapi-compat");
 const hapi17Plugin = require("./dev-hapi17");
+const fs = require("fs");
 
 const Middleware = require("./middleware");
 const FakeRes = require("../fake-res");
@@ -57,7 +58,21 @@ function register(server, options, next) {
             }
             return resp;
           },
-          replyFile: name => reply.file(name)
+          replyFile: name => {
+            let data;
+            try {
+              data = fs.readFileSync(name);
+            } catch (e) {
+              return reply.code(404);
+            }
+            const type = mime.lookup(name);
+            const resp = reply.response(data).code(200);
+            if (type) {
+              const charset = mime.charsets.lookup(type);
+              resp.header("Content-Type", type + (charset ? `; charset=${charset}` : ""));
+            }
+            return resp;
+          }
         })
         .then(next1 => {
           if (fakeRes.responded) {
