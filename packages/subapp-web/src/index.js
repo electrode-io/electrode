@@ -5,11 +5,11 @@ import makeSubAppSpec from "./make-subapp-spec";
 
 export { default as makeSubAppSpec } from "./make-subapp-spec";
 
-export function defaultRenderStart(Component, ssr, element) {
+export function defaultRenderStart(Component, ssr, element, props) {
   if (ssr) {
-    hydrate(<Component />, element);
+    hydrate(<Component {...props} />, element);
   } else {
-    render(<Component />, element);
+    render(<Component {...props} />, element);
   }
 }
 
@@ -43,7 +43,8 @@ export function loadSubApp(info, renderStart) {
       return defaultRenderStart(
         this.info.StartComponent || this.info.Component,
         options.serverSideRendering,
-        element
+        element,
+        options._prepared
       );
     };
 
