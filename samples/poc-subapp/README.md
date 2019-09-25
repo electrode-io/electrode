@@ -19,7 +19,7 @@
   - `Async data fetch` - Use React suspense to enable single pass async data fetch within components.
   - `Server Side Rendering` - Independently enable server side render for each subapp.
   - `Redux` - Automatically facilitate, initialize, and hydrate SSR data using Redux.
-  - `React Router` - Automatically setup component routing using react-router.
+  - `React Router` - Automatically setup component routing using [react-router].
   - `Hot module Reload` - Automatically support Hot Module Reload during development.
 
 ## Introduction
@@ -135,13 +135,13 @@ You can also control how your subapp works from server side to client side for e
 
 Some of the attributes supported:
 
-`hydrate` - Enable client side hydration of initial state from server. ie: Use `React.hydrate` API.
-`streaming` - Use the streaming SSR APIs. ie: `ReactDomServer.renderToNodeStream`.
-`suspenseSsr` - Support suspense in SSR. No streaming.
+- `hydrate` - Enable client side hydration of initial state from server. ie: Use `React.hydrate` API.
+- `streaming` - Use the streaming SSR APIs. ie: `ReactDomServer.renderToNodeStream`.
+- `suspenseSsr` - Support suspense in SSR. No streaming.
 
 ## React Router and SPA
 
-In addition to the basic server routes, your subapps can have its own routing using react-router.
+In addition to the basic server routes, your subapps can have its own routing using [react-router].
 
 To enable, set the `useReactRouter` flag when loading your subapp and wrap your component with a router.
 
@@ -175,7 +175,7 @@ export default loadSubApp({
 
 Electrode will automatically ensure your subapp is integrated with `StaticRouter` when doing SSR and `DynamicRouter` with `history` when running in the browser.
 
-**SPA** Further, you can have other subapps on the same page, and those will stay persistent while your subapp that's enabled with react-router will change. When loading each of the react-router routes, your page will be properly server side rendered.
+**SPA** Further, you can have other subapps on the same page, and those will stay persistent while your subapp that's enabled with [react-router] will change. When loading each of the [react-router] routes, your page will be properly server side rendered.
 
 ## Redux
 
@@ -208,3 +208,5 @@ export default reduxLoadSubApp({
 ## License
 
 Apache-2.0 ©
+
+[react-router]: https://www.npmjs.com/package/react-router
