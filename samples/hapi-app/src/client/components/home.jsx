@@ -42,14 +42,14 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div styleName={"custom.container"}>
+      <div styleName="custom.container">
         <Nav {...this.props} />
 
         {/**/}
         <Notifications />
         {/**/}
 
-        <section styleName={"custom.header"}>
+        <section styleName="custom.header">
           <h2>
             <span>Hello from </span>
             <a href="https://github.com/electrode-io">
@@ -59,30 +59,30 @@ class Home extends React.Component {
           </h2>
         </section>
 
-        <div styleName={"custom.docs-section"}>
+        <div styleName="custom.docs-section">
           <DemoStates />
         </div>
 
-        <div styleName={"custom.docs-section"}>
+        <div styleName="custom.docs-section">
           <DemoPureStates />
         </div>
 
         {/* */}
-        <div styleName={"custom.docs-section"}>
+        <div styleName="custom.docs-section">
           <DemoCookies />
         </div>
         {/**/}
 
-        <div styleName={"custom.docs-section"}>
-          <h6 styleName={"custom.docs-header"}>Demo Isomorphic UI Config</h6>
+        <div styleName="custom.docs-section">
+          <h6 styleName="custom.docs-header">Demo Isomorphic UI Config</h6>
           <div>config.ui.demo: "{config.ui.demo}"</div>
         </div>
 
-        <div styleName={"custom.docs-section"}>
+        <div styleName="custom.docs-section">
           <DemoButtons />
         </div>
 
-        <div styleName={"custom.docs-section"}>
+        <div styleName="custom.docs-section">
           <DemoDynamicImport />
         </div>
       </div>

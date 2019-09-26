@@ -19,6 +19,7 @@ const getHost = () => {
 
 const getNotFoundPage = (data) => {
   const { actualHost, expectedHost, port } = data;
+  /* eslint-disable max-len */
   const invalidHostMessage = `
     <p>
       <span style="color: red;">ERROR:</span> The server's configured host <span style="color: red;">${expectedHost}</span> doesn't match the requested host <span style="color: green;">${actualHost}</span><br />
@@ -26,7 +27,6 @@ const getNotFoundPage = (data) => {
       For example, in bash: <code style="color: green;">HOST=${actualHost} clap dev</code>
     </p>
   `;
-  /* eslint-disable max-len */
   return `
     <html>
       <body>

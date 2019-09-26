@@ -60,25 +60,25 @@ class DemoCookies extends React.Component {
 
     return (
       <div>
-        <h6 styleName={"custom.docs-header"}>Demo Non-Redux Universal Cookies</h6>
-        <p styleName={"demo3.cookieTitle"}>Test cookie value: {cookieValue || "<NOT SET>"}</p>
+        <h6 styleName="custom.docs-header">Demo Non-Redux Universal Cookies</h6>
+        <p styleName="demo3.cookieTitle">Test cookie value: {cookieValue || "<NOT SET>"}</p>
 
         <input type="text" style={{ width: "100px", marginRight: "10px" }} ref="newCookieValue" />
         <button
-          styleName={"milligram.button-outline"}
+          styleName="milligram.button-outline"
           type="submit"
           onClick={x => this._setCookie(x)}
         >
           Update Cookie
         </button>
         <button
-          styleName={"milligram.button-outline"}
+          styleName="milligram.button-outline"
           type="submit"
           onClick={() => this._refresh()}
         >
           Refresh Cookie
         </button>
-        <button styleName={"milligram.button-outline"} onClick={() => this._expireCookie()}>
+        <button styleName="milligram.button-outline" onClick={() => this._expireCookie()}>
           Expire Cookie
         </button>
       </div>

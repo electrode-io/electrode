@@ -8,7 +8,7 @@ import demoStyle from "../styles/demo2.css"; // eslint-disable-line no-unused-va
 import custom from "../styles/custom.css"; // eslint-disable-line no-unused-vars
 
 const Fallback = () => (
-  <div styleName={"custom.dynamic-demo-fallback"}>
+  <div styleName="custom.dynamic-demo-fallback">
     <strong>Dynamic Imported Component is loading ...</strong>
   </div>
 );
@@ -31,13 +31,13 @@ const load = dispatch => {
 const DynamicImportDemo = ({ showFakeComp, dispatch }) => {
   return (
     <div>
-      <h6 styleName={"custom.docs-header"}>
+      <h6 styleName="custom.docs-header">
         Demo Dynamic Import with&nbsp;
         <a href="https://www.smooth-code.com/open-source/loadable-components/">
           Loadable Components
         </a>
       </h6>
-      <div styleName={"custom.dynamic-demo-box"}>
+      <div styleName="custom.dynamic-demo-box">
         {showFakeComp.value ? <Demo /> : <Fallback />}
       </div>
       <div>

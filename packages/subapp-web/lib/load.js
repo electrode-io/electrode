@@ -13,6 +13,7 @@ const AsyncReactDOMServer = optionalRequire("react-async-ssr");
 const request = require("request");
 const util = require("./util");
 const { loadSubAppByName, loadSubAppServerByName } = require("subapp-util");
+const { default: AppContext } = require("../browser/app-context");
 
 const ReactRedux = optionalRequire("react-redux", { default: {} });
 const { Provider } = ReactRedux;
@@ -130,6 +131,7 @@ module.exports = function setup(setupContext, token) {
       let rrContext;
 
       const createElement = (Component, initialProps) => {
+        let TopComponent;
         if (subApp.useReactRouter) {
           rrContext = {};
           const rrProps = Object.assign(
@@ -137,11 +139,16 @@ module.exports = function setup(setupContext, token) {
             initialProps
           );
           // console.log("rendering", name, "for react router", rrProps);
-          return React.createElement(Component, rrProps);
+          TopComponent = React.createElement(Component, rrProps);
         } else {
           // console.log("rendering without react router", name);
-          return React.createElement(Component, initialProps);
+          TopComponent = React.createElement(Component, initialProps);
         }
+        return React.createElement(
+          AppContext.Provider,
+          { value: { isSsr: true, subApp, ssr: { request: req } } },
+          TopComponent
+        );
       };
 
       const asyncProcess = async () => {
