@@ -22,7 +22,7 @@ const getNotFoundPage = (data) => {
   /* eslint-disable max-len */
   const invalidHostMessage = `
     <p>
-      <span style="color: red;">ERROR:</span> The server's configured host <span style="color: red;">${expectedHost}</span> doesn't match the requested host <span style="color: green;">${actualHost}</span><br />
+      <span style="color: red;">ERROR:</span> The server's configured host <span style="color: green;">${expectedHost}</span> doesn't match the requested host <span style="color: red;">${actualHost}</span><br />
       In order to to start the development server with a different host, please set the HOST env variable:<br />
       For example, in bash: <code style="color: green;">HOST=${actualHost} clap dev</code>
     </p>
