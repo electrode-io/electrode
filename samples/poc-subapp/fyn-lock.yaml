@@ -12428,14 +12428,10 @@ react-intl:
    react: '^0.14.9 || ^15.0.0 || ^16.0.0'
 react-is:
  _:
-  '^16.6.0,^16.8.1,^16.8.2,^16.8.3': 16.8.3
-  ^16.7.0: 16.7.0
+  '^16.6.0,^16.7.0,^16.8.1,^16.8.2,^16.8.3': 16.8.3
  16.8.3:
   $: sha512-Y4rC1ZJmsxxkkPuMLwvKvlL1Zfpbcu+Bf4ZigkHup3v9EfdYhAlWAaVyA19olXq2o2mGn0w+dFKvk3pVVlYcIA==
   _: 'https://registry.npmjs.org/react-is/-/react-is-16.8.3.tgz'
- 16.7.0:
-  $: sha512-Z0VRQdF4NPDoI0tsXVMLkJLiwEBa+RP66g0xDHxgxysxSoCUccSten4RTF/UFvZF1dZvZ9Zu1sx+MDXwcOR34g==
-  _: 'https://registry.npmjs.org/react-is/-/react-is-16.7.0.tgz'
 react-redux:
  _:
   ^6.0.1: 6.0.1

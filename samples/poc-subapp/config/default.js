@@ -3,7 +3,7 @@
 const defaultListenPort = 3000;
 
 const portFromEnv = () => {
-  const x = parseInt(process.env.PORT, 10);
+  const x = parseInt(process.env.APP_SERVER_PORT || process.env.PORT, 10);
   /* istanbul ignore next */
   return x !== null && !isNaN(x) ? x : defaultListenPort;
 };
