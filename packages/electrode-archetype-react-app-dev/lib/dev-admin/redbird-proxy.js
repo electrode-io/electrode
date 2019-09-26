@@ -44,7 +44,7 @@ const getNotFoundPage = (data) => {
               Electrode development reverse proxy is unable to forward your URL.<br />
               Check <a href="http://${expectedHost}:${port}/__proxy_admin/status">
                 http://${expectedHost}:${port}/__proxy_admin/status
-              </a> to see list of forward rules.
+              </a> to see a list of forward rules.
             </p>
             ${actualHost !== expectedHost ? invalidHostMessage : ""}
           </div>
