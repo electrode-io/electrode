@@ -20,9 +20,9 @@ class Demo1 extends Component {
   render() {
     const { dispatch } = this.props;
     return (
-      <div styleName={"custom.container"}>
+      <div styleName="custom.container">
         <Nav {...this.props} />
-        <div styleName={"demoStyle.container"}>
+        <div styleName="demoStyle.container">
           <h2>Forms Demo</h2>
           <form>
             <fieldset>

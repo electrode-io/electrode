@@ -12,7 +12,7 @@ export class Nav extends Component {
     const navs = [["Home", ""], ["Demo1", "demo1"], ["Demo2", "demo2"]];
     const currentTab = this.props.location.pathname.replace("/", "");
     return (
-      <ul styleName={"styles.bar"}>
+      <ul styleName="styles.bar">
         {navs.map((x, i) => {
           const s = `styles.base${currentTab === x[1] ? " styles.active" : ""}`;
           return (

@@ -12,7 +12,7 @@ class Demo3 extends Component {
 
   render() {
     return (
-      <div styleName={"custom.container"}>
+      <div styleName="custom.container">
         <Nav {...this.props} />
         <DemoComponent />
       </div>
