@@ -28,7 +28,8 @@
     "postcss-loader": "^3.0.0",
     "postcss-nested": "^3.0.0",
     "postcss-preset-env": "^5.3.0",
-    "postcss-scss": "^1.0.6"
+    "postcss-scss": "^1.0.6",
+    "sugarss": "^1.0.1"
   },
   "devDependencies": {
     "opt-archetype-check": "../opt-archetype-check"

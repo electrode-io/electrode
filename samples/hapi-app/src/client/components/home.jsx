@@ -9,6 +9,7 @@
  * - demo-buttons.jsx
  * - demo-pure-states.jsx
  * - demo-states.jsx
+ * - demo-sugarss.jsx
  * - reducers/index.jsx
  * - styles/*.css
  *
@@ -22,6 +23,7 @@ import electrodePng from "../images/electrode.png";
 import DemoStates from "./demo-states";
 import DemoPureStates from "./demo-pure-states";
 import { DemoButtons } from "./demo-buttons";
+import DemoSugarss from "./demo-sugarss";
 import DemoDynamicImport from "./demo-dynamic-import";
 import { Nav } from "./nav";
 
@@ -33,6 +35,7 @@ import config from "electrode-ui-config";
 
 //
 import Notifications from "react-notify-toast";
+
 //
 
 class Home extends React.Component {
@@ -84,6 +87,10 @@ class Home extends React.Component {
 
         <div styleName="custom.docs-section">
           <DemoDynamicImport />
+        </div>
+
+        <div styleName={"custom.docs-section"}>
+          <DemoSugarss />
         </div>
       </div>
     );

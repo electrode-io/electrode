@@ -103,7 +103,6 @@
     "style-loader": "^0.20.1",
     "subapp-util": "^1.0.1",
     "sudo-prompt": "^8.2.5",
-    "sugarss": "^1.0.1",
     "url-loader": "^0.6.2",
     "webpack": "^4.19.1",
     "webpack-cli": "^3.1.1",
