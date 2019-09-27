@@ -17693,7 +17693,7 @@ yargs:
   ^7.0.0: 7.1.0
  13.3.0:
   $: sha512-2eehun/8ALW8TLoIl7MVaRUrg+yCnenu8B4kBlRxj3GJGDKU1Og7sMXPNm1BYyM1DOJmTZ4YeN/Nwxv+8XJsUA==
-  _: 'https://repository.cache.walmart.com/content/groups/npm/yargs/-/yargs-13.3.0.tgz'
+  _: 'https://registry.npmjs.org/yargs/-/yargs-13.3.0.tgz'
   dependencies:
    cliui: ^5.0.0
    find-up: ^3.0.0
