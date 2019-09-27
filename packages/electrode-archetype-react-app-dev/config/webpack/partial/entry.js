@@ -61,10 +61,32 @@ function makeEntryPartial() {
     const hmrEntry = `hmr-${manifest.subAppDir}.js`;
     subAppReq = `../${subAppReq}`;
 
+    let reducerHmrCode = "";
+
+    if (manifest.reducers) {
+      const subAppReducers = `../${manifest.subAppDir}/reducers`;
+      reducerHmrCode = `
+import { createStore } from "redux";
+import reducers from "${subAppReducers}";
+
+if (subApp.reduxReducers && (!subApp.reduxCreateStore || subApp._genReduxCreateStore)) {
+  subApp._genReduxCreateStore = "hmr";
+  subApp.reduxCreateStore = initialState => {
+    const store = createStore(reducers, initialState);
+    module.hot.accept("${subAppReducers}", () => {
+      store.replaceReducer(require("${subAppReducers}").default);
+    });
+
+    return store;
+  };
+}`;
+    }
+
     Fs.writeFileSync(
       Path.join(hmrDir, hmrEntry),
-      `"use strict";
-require("${subAppReq}");
+      `import subApp from "${subAppReq}";
+${reducerHmrCode}
+
 if (module.hot) {
   module.hot.accept("${subAppReq}", () => {
     require("subapp-web").hotReloadSubApp(require("${subAppReq}"));
@@ -72,6 +94,7 @@ if (module.hot) {
 }
 `
     );
+
     return `./${DEV_HMR_DIR}/${hmrEntry}`;
   }
 

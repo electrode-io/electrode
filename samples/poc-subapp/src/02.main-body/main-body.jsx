@@ -6,9 +6,8 @@ import { Router, Route, Switch } from "react-router-dom";
 import { Products } from "../components/products";
 import { Navigation } from "../components/navigation";
 import { Deals } from "../components/deals";
-import { createStore } from "redux";
-import reducers from "./reducers";
 import { reduxLoadSubApp } from "subapp-redux";
+import reduxReducers from "./reducers";
 
 const Home = () => {
   return (
@@ -71,17 +70,5 @@ export default reduxLoadSubApp({
 
   prepare: async () => {},
 
-  reduxReducers: "./reducers",
-
-  reduxCreateStore: initialState => {
-    const store = createStore(reducers, initialState);
-
-    if (module.hot) {
-      module.hot.accept("./reducers", () => {
-        store.replaceReducer(require("./reducers").default);
-      });
-    }
-
-    return store;
-  }
+  reduxReducers
 });

@@ -10,8 +10,13 @@ module.exports = {
       __redux: true
     };
 
-    if (!subapp.reduxCreateStore && !subapp.reduxReducers) {
-      extras.reduxCreateStore = initialState => createStore(x => x, initialState || {});
+    if (!subapp.reduxCreateStore) {
+      extras._genReduxCreateStore = "subapp";
+      if (subapp.reduxReducers) {
+        extras.reduxCreateStore = initialState => createStore(subapp.reduxReducers, initialState);
+      } else {
+        extras.reduxCreateStore = initialState => createStore(x => x, initialState || {});
+      }
     }
 
     return registerSubApp(Object.assign(extras, subapp));
