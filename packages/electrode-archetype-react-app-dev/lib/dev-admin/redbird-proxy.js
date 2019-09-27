@@ -25,7 +25,7 @@ const getNotFoundPage = (data) => {
       <span style="color: red;">ERROR:</span> You used a hostname that the development proxy doesn't recognize.<br />
       The proxy is using the hostname <span style="color: green;">${expectedHost}</span>.<br />
       The hostname in your URL is <span style="color: red;">${actualHost}</span>.<br />
-      To change the hostname the proxy uses, set the HOST env variable.<br />
+      To change the hostname that the proxy uses, set the HOST env variable.<br />
       For example:<br /><br />
       In unix bash: <code style="color: white;background-color: black;padding: 5px;">
         HOST=${actualHost} clap dev
