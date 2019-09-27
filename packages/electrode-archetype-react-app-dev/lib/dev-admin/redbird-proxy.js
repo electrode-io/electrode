@@ -22,9 +22,17 @@ const getNotFoundPage = (data) => {
   /* eslint-disable max-len */
   const invalidHostMessage = `
     <p>
-      <span style="color: red;">ERROR:</span> The server's configured host <span style="color: green;">${expectedHost}</span> doesn't match the requested host <span style="color: red;">${actualHost}</span><br />
-      In order to to start the development server with a different host, please set the HOST env variable:<br />
-      For example, in bash: <code style="color: green;">HOST=${actualHost} clap dev</code>
+      <span style="color: red;">ERROR:</span> You used a hostname that the development proxy doesn't recognize.<br />
+      The proxy is using the hostname <span style="color: green;">${expectedHost}</span>.<br />
+      The hostname in your URL is <span style="color: red;">${actualHost}</span>.<br />
+      To change the hostname that the proxy uses, set the HOST env variable.<br />
+      For example:<br /><br />
+      In unix bash: <code style="color: white;background-color: black;padding: 5px;">
+        HOST=${actualHost} clap dev
+      </code><br /><br />
+      In Windows PowerShell: <code style="color: white;background-color: #012456;padding: 5px;">
+        $Env:HOST="${actualHost}"; clap dev
+      </code>
     </p>
   `;
   return `
