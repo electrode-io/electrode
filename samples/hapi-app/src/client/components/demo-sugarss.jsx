@@ -5,7 +5,8 @@ class DemoSugarss extends React.Component {
   render() {
     return (
       <div>
-        <h6 styleName={"sugar.docs-header"}>Demo SugarSS</h6>
+        <h6 styleName="sugar.docs-header">Demo SugarSS</h6>
+        <div styleName="sugar.docs-section"></div>
       </div>
     );
   }
