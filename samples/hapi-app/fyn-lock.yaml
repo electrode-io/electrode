@@ -5104,7 +5104,7 @@ electrode-archetype-react-app-dev:
    css-loader: ^1.0.0
    electrode-bundle-analyzer: ^1.0.0
    electrode-cdn-file-loader: ^1.0.0
-   electrode-hapi-compat: ^1.0.0
+   electrode-hapi-compat: ^1.2.0
    electrode-node-resolver: ^2.0.0
    electrode-webpack-reporter: ^0.5.1
    enzyme: ^3.0.0
@@ -5218,7 +5218,7 @@ electrode-cookies:
 electrode-hapi-compat:
  _latest: 1.2.0
  _:
-  ^1.0.0: 1.2.0
+  '^1.0.0,^1.2.0': 1.2.0
  1.2.0:
   $: sha512-oalPOkP3+eLQGV/fQPKf3NRjIZkUXvjb6WflB6wRscCvy7G4JShs2I0fmYHWD/Bp/7ro+9qlno78K97HTDsteQ==
   _: 'https://repository.cache.walmart.com/content/groups/npm/electrode-hapi-compat/-/electrode-hapi-compat-1.2.0.tgz'
@@ -5241,7 +5241,7 @@ electrode-react-webapp:
   _: ../../packages/electrode-react-webapp
   dependencies:
    bluebird: '^2 || ^3'
-   electrode-hapi-compat: ^1.0.0
+   electrode-hapi-compat: ^1.2.0
    http-status-codes: ^1.3.0
    in-publish: ^2.0.0
    lodash: ^4.17.10
@@ -6500,7 +6500,7 @@ fsevents:
  1.2.9:
   hasI: 1
   $: sha512-oeyj2H3EjjonWcFjD5NvZNE9Rqe4UW+nQBU2HNeKw0koVLEFIhtyETyAakeAM3de7Z/SW5kcA+fZUait9EApnw==
-  _: 'http://npme.walmart.com/fsevents/-/fsevents-1.2.9.tgz'
+  _: 'https://registry.npmjs.org/fsevents/-/fsevents-1.2.9.tgz'
   dependencies:
    nan: ^2.12.1
    node-pre-gyp: ^0.12.0
@@ -7414,16 +7414,16 @@ ignore-styles:
   $: sha1-tJ7yJ0va/NikiAqWa/440aC/RnE=
   _: 'https://repository.cache.walmart.com/content/groups/npm/ignore-styles/-/ignore-styles-5.0.1.tgz'
 image-size:
- _latest: 0.7.4
+ _latest: 0.8.1
  _:
   ^0.4.0: 0.4.0
   '^0.5.0,~0.5.0': 0.5.5
  0.5.5:
   $: sha1-Cd/Uq50g4p6xw+gLiZA3jfnjy5w=
-  _: 'http://npme.walmart.com/image-size/-/image-size-0.5.5.tgz'
+  _: 'https://registry.npmjs.org/image-size/-/image-size-0.5.5.tgz'
  0.4.0:
   $: sha1-1LTh9hlS5MvBzqmmsMkV/stwdRA=
-  _: 'http://npme.walmart.com/image-size/-/image-size-0.4.0.tgz'
+  _: 'https://registry.npmjs.org/image-size/-/image-size-0.4.0.tgz'
 import-cwd:
  _latest: 3.0.0
  _:
@@ -10445,10 +10445,10 @@ node-forge:
   _: 'https://repository.cache.walmart.com/content/groups/npm/node-forge/-/node-forge-0.8.2.tgz'
  0.7.6:
   $: sha512-sol30LUpz1jQFBjOKwbjxijiE3b6pjd74YwfD0fJOKPjF+fONKb2Yg8rYgS6+bK6VDl+/wfr4IYpC7jDzLUIfw==
-  _: 'http://npme.walmart.com/node-forge/-/node-forge-0.7.6.tgz'
+  _: 'https://registry.npmjs.org/node-forge/-/node-forge-0.7.6.tgz'
  0.6.49:
   $: sha1-8e6V1ddGI5OP4Z1piqWibVTS9g8=
-  _: 'http://npme.walmart.com/node-forge/-/node-forge-0.6.49.tgz'
+  _: 'https://registry.npmjs.org/node-forge/-/node-forge-0.6.49.tgz'
 node-gyp:
  _latest: 5.0.3
  _:
@@ -12614,7 +12614,7 @@ promise:
   ^7.1.1: 7.3.1
  7.3.1:
   $: sha512-nolQXZ/4L+bP/UGlkfaIujX9BKxGwmQ9OT4mOt5yvy8iK1h3wqTEJCijzGANTCCl9nWjY41juyAn2K3Q1hLLTg==
-  _: 'http://npme.walmart.com/promise/-/promise-7.3.1.tgz'
+  _: 'https://registry.npmjs.org/promise/-/promise-7.3.1.tgz'
   dependencies:
    asap: ~2.0.3
 promise-each:
@@ -14321,7 +14321,7 @@ source-map:
   ~0.2.0: 0.2.0
  0.7.3:
   $: sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==
-  _: 'http://npme.walmart.com/source-map/-/source-map-0.7.3.tgz'
+  _: 'https://registry.npmjs.org/source-map/-/source-map-0.7.3.tgz'
  0.6.1:
   $: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
   _: 'https://repository.cache.walmart.com/content/groups/npm/source-map/-/source-map-0.6.1.tgz'
@@ -14330,12 +14330,12 @@ source-map:
   _: 'https://repository.cache.walmart.com/content/groups/npm/source-map/-/source-map-0.5.7.tgz'
  0.4.4:
   $: sha1-66T12pwNyZneaAMti092FzZSA2s=
-  _: 'http://npme.walmart.com/source-map/-/source-map-0.4.4.tgz'
+  _: 'https://registry.npmjs.org/source-map/-/source-map-0.4.4.tgz'
   dependencies:
    amdefine: '>=0.0.4'
  0.2.0:
   $: sha1-2rc/vPwrqBm03gO9b26qSBZLP50=
-  _: 'http://npme.walmart.com/source-map/-/source-map-0.2.0.tgz'
+  _: 'https://registry.npmjs.org/source-map/-/source-map-0.2.0.tgz'
   dependencies:
    amdefine: '>=0.0.4'
 source-map-resolve:
@@ -15419,7 +15419,7 @@ uglify-js:
   ^3.1.4: 3.6.0
  3.6.0:
   $: sha512-W+jrUHJr3DXKhrsS7NUVxn3zqMOFn0hL/Ei6v0anCIMoKC93TjcflTagwIHLW7SfMFfiQuktQyFVCFHGUE0+yg==
-  _: 'http://npme.walmart.com/uglify-js/-/uglify-js-3.6.0.tgz'
+  _: 'https://registry.npmjs.org/uglify-js/-/uglify-js-3.6.0.tgz'
   dependencies:
    commander: ~2.20.0
    source-map: ~0.6.1
@@ -15687,7 +15687,7 @@ ursa-optional:
  0.9.10:
   hasI: 1
   $: sha512-RvEbhnxlggX4MXon7KQulTFiJQtLJZpSb9ZSa7ZTkOW0AzqiVTaLjI4vxaSzJBDH9dwZ3ltZadFiBaZslp6haA==
-  _: 'http://npme.walmart.com/ursa-optional/-/ursa-optional-0.9.10.tgz'
+  _: 'https://registry.npmjs.org/ursa-optional/-/ursa-optional-0.9.10.tgz'
   dependencies:
    bindings: ^1.3.0
    nan: ^2.11.1

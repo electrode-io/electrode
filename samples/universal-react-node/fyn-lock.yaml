@@ -5398,7 +5398,7 @@ electrode-archetype-react-app-dev:
    css-loader: ^1.0.0
    electrode-bundle-analyzer: ^1.0.0
    electrode-cdn-file-loader: ^1.0.0
-   electrode-hapi-compat: ^1.0.0
+   electrode-hapi-compat: ^1.2.0
    electrode-node-resolver: ^2.0.0
    electrode-webpack-reporter: ^0.5.1
    enzyme: ^3.0.0
@@ -5434,7 +5434,6 @@ electrode-archetype-react-app-dev:
    style-loader: ^0.20.1
    subapp-util: ^1.0.1
    sudo-prompt: ^8.2.5
-   sugarss: ^1.0.1
    url-loader: ^0.6.2
    webpack: ^4.19.1
    webpack-cli: ^3.1.1
@@ -5517,6 +5516,10 @@ electrode-hapi-compat:
  _latest: 1.0.0
  _:
   ^1.0.0: 1.0.0
+  ^1.2.0: 1.2.0
+ 1.2.0:
+  $: sha512-oalPOkP3+eLQGV/fQPKf3NRjIZkUXvjb6WflB6wRscCvy7G4JShs2I0fmYHWD/Bp/7ro+9qlno78K97HTDsteQ==
+  _: 'https://registry.npmjs.org/electrode-hapi-compat/-/electrode-hapi-compat-1.2.0.tgz'
  1.0.0:
   $: sha512-Hiy5jKTVas8CHmX+M1Qh/bkUKuCBVFjDvrXE4ZKHa9lrsLdYc0oYqsTQ0BWYN3OZq8i7X1yXdqy+aPWEsgd0yA==
   _: 'https://registry.npmjs.org/electrode-hapi-compat/-/electrode-hapi-compat-1.0.0.tgz'
@@ -5539,7 +5542,7 @@ electrode-react-webapp:
   _: ../../packages/electrode-react-webapp
   dependencies:
    bluebird: '^2 || ^3'
-   electrode-hapi-compat: ^1.0.0
+   electrode-hapi-compat: ^1.2.0
    http-status-codes: ^1.3.0
    in-publish: ^2.0.0
    lodash: ^4.17.10
@@ -6998,7 +7001,7 @@ fs.realpath:
   $: sha1-FQStJSMVjKpA20onh8sBQRmU6k8=
   _: 'https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz'
 fsevents:
- _latest: 2.0.6
+ _latest: 2.0.7
  _:
   '^1.2.3,^1.2.7': 1.2.8
  1.2.8:
@@ -7010,6 +7013,7 @@ fsevents:
    node-pre-gyp: ^0.12.0
   bundleDependencies:
    - node-pre-gyp
+  deprecated: 'Please update: there are crash fixes'
   os:
    - darwin
 fstream:
@@ -7976,7 +7980,7 @@ ignore-styles:
   $: sha1-tJ7yJ0va/NikiAqWa/440aC/RnE=
   _: 'https://registry.npmjs.org/ignore-styles/-/ignore-styles-5.0.1.tgz'
 image-size:
- _latest: 0.7.4
+ _latest: 0.8.2
  _:
   ^0.4.0: 0.4.0
   '^0.5.0,~0.5.0': 0.5.5
@@ -16603,7 +16607,7 @@ uglify-es:
    commander: ~2.13.0
    source-map: ~0.6.1
 uglify-js:
- _latest: 3.5.8
+ _latest: 3.6.0
  _:
   ^3.1.4: 3.5.8
  3.5.8:
@@ -16901,7 +16905,7 @@ url-to-options:
   $: sha1-FQWgOiiaSMvXpDTvuu7FBV9WM6k=
   _: 'https://registry.npmjs.org/url-to-options/-/url-to-options-1.0.1.tgz'
 ursa-optional:
- _latest: 0.9.10
+ _latest: 0.10.1
  _:
   ^0.9.10: 0.9.10
  0.9.10:
@@ -17693,7 +17697,7 @@ yargs:
   ^7.0.0: 7.1.0
  13.3.0:
   $: sha512-2eehun/8ALW8TLoIl7MVaRUrg+yCnenu8B4kBlRxj3GJGDKU1Og7sMXPNm1BYyM1DOJmTZ4YeN/Nwxv+8XJsUA==
-  _: 'https://repository.cache.walmart.com/content/groups/npm/yargs/-/yargs-13.3.0.tgz'
+  _: 'https://registry.npmjs.org/yargs/-/yargs-13.3.0.tgz'
   dependencies:
    cliui: ^5.0.0
    find-up: ^3.0.0
@@ -17707,7 +17711,7 @@ yargs:
    yargs-parser: ^13.1.1
  12.0.5:
   $: sha512-Lhz8TLaYnxq/2ObqHDql8dX8CJi97oHxrjUcYtzKbbykPtVW9WB+poxI+NM2UIzsMgNCZTIf0AQwsjK5yMAqZw==
-  _: 'https://repository.cache.walmart.com/content/groups/npm/yargs/-/yargs-12.0.5.tgz'
+  _: 'https://registry.npmjs.org/yargs/-/yargs-12.0.5.tgz'
   dependencies:
    cliui: ^4.0.0
    decamelize: ^1.2.0
@@ -17723,7 +17727,7 @@ yargs:
    yargs-parser: ^11.1.1
  11.1.0:
   $: sha512-NwW69J42EsCSanF8kyn5upxvjp5ds+t3+udGBeTbFnERA+lF541DDpMawzo4z6W/QrzNM18D+BPMiOBibnFV5A==
-  _: 'https://repository.cache.walmart.com/content/groups/npm/yargs/-/yargs-11.1.0.tgz'
+  _: 'https://registry.npmjs.org/yargs/-/yargs-11.1.0.tgz'
   dependencies:
    cliui: ^4.0.0
    decamelize: ^1.1.1
@@ -17739,7 +17743,7 @@ yargs:
    yargs-parser: ^9.0.2
  7.1.0:
   $: sha1-a6MY6xaWFyf10oT46gA+jWFU0Mg=
-  _: 'https://repository.cache.walmart.com/content/groups/npm/yargs/-/yargs-7.1.0.tgz'
+  _: 'https://registry.npmjs.org/yargs/-/yargs-7.1.0.tgz'
   dependencies:
    camelcase: ^3.0.0
    cliui: ^3.2.0
@@ -17774,7 +17778,7 @@ yargs:
    yargs-parser: ^3.2.0
  4.8.1:
   $: sha1-wMQpJMpKqmsObaFznfshZDn53cA=
-  _: 'https://repository.cache.walmart.com/content/groups/npm/yargs/-/yargs-4.8.1.tgz'
+  _: 'https://registry.npmjs.org/yargs/-/yargs-4.8.1.tgz'
   dependencies:
    cliui: ^3.2.0
    decamelize: ^1.1.1
@@ -17792,7 +17796,7 @@ yargs:
    yargs-parser: ^2.4.1
  3.32.0:
   $: sha1-AwiOnr+edWtpdRYR0qXvWRSCyZU=
-  _: 'https://repository.cache.walmart.com/content/groups/npm/yargs/-/yargs-3.32.0.tgz'
+  _: 'https://registry.npmjs.org/yargs/-/yargs-3.32.0.tgz'
   dependencies:
    camelcase: ^2.0.1
    cliui: ^3.0.3
