@@ -10,8 +10,7 @@ const portFromEnv = () => {
 
 module.exports = {
   plugins: {
-    "webpack-dev": {
-      module: "electrode-archetype-react-app-dev/lib/webpack-dev-hapi",
+    "electrode-archetype-react-app-dev": {
       enable: process.env.WEBPACK_DEV_MIDDLEWARE === "true" && process.env.WEBPACK_DEV === "true"
     },
     inert: {
