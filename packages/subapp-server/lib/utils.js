@@ -312,7 +312,10 @@ async function setupRoutesFromFile(srcDir, server, pluginOpts) {
         const status = data.status;
 
         if (status === undefined) {
-          return data;
+          return h
+            .response(data)
+            .type("text/html; charset=UTF-8")
+            .code(200);
         } else if (HttpStatus.redirect[status]) {
           return h.redirect(data.path);
         } else if (HttpStatus.displayHtml[status]) {
