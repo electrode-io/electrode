@@ -59,8 +59,13 @@ export function reduxLoadSubApp(info) {
     __redux: true
   };
 
-  if (!info.reduxCreateStore && !info.reduxReducers) {
-    extras.reduxCreateStore = initialState => createStore(x => x, initialState || {});
+  if (!info.reduxCreateStore) {
+    extras._genReduxCreateStore = "subapp";
+    if (info.reduxReducers) {
+      extras.reduxCreateStore = initialState => createStore(info.reduxReducers, initialState);
+    } else {
+      extras.reduxCreateStore = initialState => createStore(x => x, initialState || {});
+    }
   }
 
   return loadSubApp(Object.assign(extras, info), renderStart);

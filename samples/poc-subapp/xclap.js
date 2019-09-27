@@ -2,7 +2,7 @@
  * Tell Electrode app archetype that you want to use ES6 syntax in your server code
  */
 
-process.env.SERVER_ES6 = true;
+// process.env.SERVER_ES6 = true;
 
 process.env.WEBPACK_DEV_MIDDLEWARE = true;
 

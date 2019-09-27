@@ -28,40 +28,74 @@ function removeExt(f) {
   return ix > 0 ? f.substring(0, ix) : f;
 }
 
+//
+// scan a subapp's directory for additional things:
+// - server side entry in server.js, server-{name}.js, server-{verbatimName}.js
+// - reducers directory, reducers[.js|.jsx|.ts|.tsx]
+//
+function scanSubAppAdditions(dir, manifest) {
+  const { name, verbatimName } = manifest;
+  // does subapp dir contain a file matching server.*, server-<name>.* pattern
+  const entries = ["server.", name && `server-${name}.`, verbatimName && `server-${verbatimName}.`]
+    .filter(x => x)
+    .map(x => x.toLowerCase());
+
+  const scanned = scanDir.sync({
+    dir,
+    grouping: true,
+    filterExt: [".js", ".jsx", ".ts", ".tsx"],
+    filterDir: x => x === "reducers" && "dir",
+    filter: x => {
+      if (entries.find(e => x.toLowerCase().startsWith(e))) {
+        return "server";
+      } else if (x.startsWith("reducers")) {
+        return "reducers";
+      }
+      return false;
+    },
+    maxLevel: 0
+  });
+
+  if (!manifest.serverEntry && scanned.server) {
+    manifest.serverEntry = scanned.server[0];
+  }
+
+  const reducers = (scanned.dir && scanned.dir[0]) || (scanned.reducers && scanned.reducers[0]);
+
+  if (!manifest.reducers && reducers) {
+    manifest.reducers = reducers;
+  }
+}
+
 function scanSubApp(name, verbatimName, dir, file) {
   const subAppDir = Path.dirname(file);
   const subAppFullPath = Path.resolve(dir, subAppDir);
-
-  // does subapp dir contain a file matching server.*, server-<name>.* pattern
-  const entries = ["server.", `server-${name}.`, `server-${verbatimName}.`].map(x =>
-    x.toLowerCase()
-  );
-
-  const serverEntry = scanDir.sync({
-    dir: subAppFullPath,
-    filterExt: [".js", ".jsx", ".ts", ".tsx"],
-    filter: x => entries.find(e => x.toLowerCase().startsWith(e)),
-    maxLevel: 0
-  })[0];
 
   const manifest = {
     // fullDir: subAppFullPath,
     subAppDir,
     type: "app",
     name,
-    entry: removeExt(Path.basename(file)),
-    serverEntry: serverEntry ? removeExt(serverEntry) : undefined
+    verbatimName,
+    entry: removeExt(Path.basename(file))
   };
+
+  scanSubAppAdditions(subAppFullPath, manifest);
 
   return manifest;
 }
 
 function determineName(file) {
   const dirName = Path.basename(Path.dirname(file));
+  //
   // convert dir name to mix case to use as subapp name
   // skip parts before a . to allow naming subapp dirs like 01.app1
+  //
+  // verbatimName is subapp's dir as named
+  //
   const verbatimName = dirName.substr(dirName.indexOf(".") + 1);
 
+  // verbatimName converted to mix case by removing any . or -
   const name = verbatimName.replace(/^(.)|-(.)/g, (a, b, c) =>
     b ? b.toUpperCase() : c && c.toUpperCase()
   );
@@ -104,6 +138,7 @@ function scanSubAppsFromDir(srcDir, maxLevel = Infinity) {
       const fullDir = Path.join(fullSrcDir, subAppDir);
       const manifest = es6Require(Path.join(fullSrcDir, mani));
       const subapp = Object.assign({ subAppDir }, manifest);
+      scanSubAppAdditions(fullDir, subapp);
       subApps[manifest.name] = subApps[MAP_BY_PATH_SYM][fullDir] = subapp;
       return null;
     } catch (error) {
