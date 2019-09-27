@@ -139,6 +139,7 @@
   "devDependencies": {
     "electrode-archetype-njs-module-dev": "^3.0.0",
     "electrode-archetype-react-app": "../electrode-archetype-react-app",
+    "mock-require": "^3.0.3",
     "prettier": "^1.14.2"
   },
   "engines": {
