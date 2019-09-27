@@ -23,7 +23,7 @@ function getHashedPath(filepath) {
   const parsed = Path.parse(filepath);
   const name = parsed.name;
   const ext = parsed.ext;
-  return `${name}.[hash]${ext}`;
+  return `${name}.[contenthash]${ext}`;
 }
 
 /**
@@ -135,7 +135,7 @@ module.exports = function(options) {
     entry = createEntryConfigFromScripts(importScripts, options.currentConfig.entry);
 
     output = {
-      filename: "[name].[hash].js"
+      filename: "[name].[contenthash].js"
     };
   }
 

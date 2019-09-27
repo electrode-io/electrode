@@ -7,7 +7,7 @@ const { AppMode, babel } = archetype;
 const inspectpack = process.env.INSPECTPACK_DEBUG === "true";
 
 const getOutputFilename = () => {
-  let filename = "[name].bundle.[hash].js";
+  let filename = "[name].bundle.[contenthash].js";
 
   if (AppMode.hasSubApps) {
     filename = "[name].bundle.js";
@@ -31,7 +31,7 @@ module.exports = {
     path: getOutputPath(),
     pathinfo: inspectpack, // Enable path information for inspectpack
     publicPath: "/js/",
-    chunkFilename: babel.hasMultiTargets ? `${babel.target}.[hash].[name].js` : "[hash].[name].js",
+    chunkFilename: babel.hasMultiTargets ? `${babel.target}.[contenthash].[name].js` : "[contenthash].[name].js",
     filename: getOutputFilename()
   }
 };

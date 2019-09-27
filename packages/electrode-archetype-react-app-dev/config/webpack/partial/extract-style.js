@@ -222,7 +222,7 @@ module.exports = function() {
     module: { rules },
     plugins: [
       new MiniCssExtractPlugin({
-        filename: archetype.babel.hasMultiTargets ? "[name].style.css" : "[name].style.[hash].css"
+        filename: archetype.babel.hasMultiTargets ? "[name].style.css" : "[name].style.[contenthash].css"
       }),
       isProduction && new OptimizeCssAssetsPlugin(archetype.webpack.optimizeCssOptions),
       new webpack.LoaderOptionsPlugin({
