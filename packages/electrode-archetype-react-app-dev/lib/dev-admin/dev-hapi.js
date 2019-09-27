@@ -3,7 +3,6 @@
 /* eslint-disable no-console, no-magic-numbers */
 
 const Url = require("url");
-const Boom = require("@hapi/boom");
 const mime = require("mime");
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const { universalHapiPlugin } = require("electrode-hapi-compat");
@@ -47,7 +46,6 @@ function register(server, options, next) {
               .code(200)
               .header("Content-Type", "text/html");
           },
-          replyNotFound: () => reply(Boom.notFound),
           replyError: err => reply(err),
           replyStaticData: data => {
             const type = mime.lookup(req.url);
