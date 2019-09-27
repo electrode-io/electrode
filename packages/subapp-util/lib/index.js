@@ -51,6 +51,7 @@ function scanSubAppAdditions(dir, manifest) {
       } else if (x.startsWith("reducers")) {
         return "reducers";
       }
+      return false;
     },
     maxLevel: 0
   });
