@@ -135,7 +135,7 @@ module.exports = function setup(setupContext, token) {
         if (subApp.useReactRouter) {
           rrContext = {};
           const rrProps = Object.assign(
-            { location: req.url.path, context: rrContext },
+            { location: req.url.pathname, context: rrContext },
             initialProps
           );
           // console.log("rendering", name, "for react router", rrProps);
