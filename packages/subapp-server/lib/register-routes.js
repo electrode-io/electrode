@@ -9,7 +9,7 @@ const Boom = require("@hapi/boom");
 const { ReactWebapp } = require("electrode-react-webapp");
 const { resolveChunkSelector, updateFullTemplate } = require("./utils");
 
-module.exports = function registerRoutes({ routes, topOpts, assets, server }) {
+module.exports = function registerRoutes({ routes, topOpts, server }) {
   // register routes
   routes.forEach(r => {
     const { route } = r;
@@ -25,10 +25,7 @@ module.exports = function registerRoutes({ routes, topOpts, assets, server }) {
 
     const chunkSelector = resolveChunkSelector(routeOptions);
 
-    routeOptions.__internals = {
-      assets,
-      chunkSelector
-    };
+    routeOptions.__internals = { chunkSelector };
 
     const routeHandler = ReactWebapp.makeRouteHandler(routeOptions);
 

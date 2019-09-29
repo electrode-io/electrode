@@ -15,17 +15,16 @@ module.exports = function setup(setupContext) {
     "utf8"
   );
 
-  const routeData = setupContext.routeOptions.__internals;
+  const { assets } = util.loadAssetsFromStats(setupContext.routeOptions.stats);
 
-  const cdnJsBundles = util.getCdnJsBundles(
-    routeData.assets.byChunkName,
-    setupContext.routeOptions
-  );
+  setupContext.routeOptions.__internals.assets = assets;
+
+  const cdnJsBundles = util.getCdnJsBundles(assets, setupContext.routeOptions);
 
   let vendorBundleLoadJs = "";
   let commonScript = "";
 
-  const vendorAssets = util.getVendorBundles(routeData.assets);
+  const vendorAssets = util.getVendorBundles(assets);
   const bundleNames = vendorAssets.map(a => a.chunkNames[0]);
 
   if (vendorAssets.length > 0) {
@@ -43,6 +42,7 @@ module.exports = function setup(setupContext) {
 
   const bundleAssets = {
     byChunkName: cdnJsBundles,
+    entryPoints: assets.entryPoints,
     basePath: ""
   };
 

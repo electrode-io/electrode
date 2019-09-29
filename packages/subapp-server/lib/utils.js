@@ -2,9 +2,6 @@
 
 // Copy from electrode-react-webapp for now
 
-/* eslint-disable max-statements, complexity, global-require, no-magic-numbers, no-console */
-
-const _ = require("lodash");
 const Fs = require("fs");
 const Path = require("path");
 
@@ -25,43 +22,6 @@ function resolveChunkSelector(options) {
     css: "main",
     js: "main"
   });
-}
-
-/**
- * Load stats.json which is created during build.
- * Attempt to load the stats.json file which contains a manifest of
- * The file contains bundle files which are to be loaded on the client side.
- *
- * @param {string} statsPath - path of stats.json
- * @returns {Promise.<Object>} an object containing an array of file names
- */
-function loadAssetsFromStats(statsPath) {
-  let stats;
-  try {
-    stats = JSON.parse(Fs.readFileSync(Path.resolve(statsPath)).toString());
-  } catch (err) {
-    return {};
-  }
-  const assets = {};
-  const manifestAsset = _.find(stats.assets, asset => {
-    return asset.name.endsWith("manifest.json");
-  });
-  const jsAssets = stats.assets.filter(asset => {
-    return asset.name.endsWith(".js");
-  });
-  const cssAssets = stats.assets.filter(asset => {
-    return asset.name.endsWith(".css");
-  });
-
-  if (manifestAsset) {
-    assets.manifest = manifestAsset.name;
-  }
-
-  assets.js = jsAssets;
-  assets.css = cssAssets;
-  assets.byChunkName = stats.assetsByChunkName;
-
-  return assets;
 }
 
 function getIconStats(iconStatsPath) {
@@ -89,23 +49,6 @@ function getCriticalCSS(path) {
   }
 }
 
-/**
- * Resolves the path to the stats.json file containing our
- * asset list. In dev the stats.json file is written to a
- * build artifacts directory, while in produciton its contained
- * within the dist/server folder
- * @param  {string} statsFilePath      path to stats.json
- * @param  {string} buildArtifactsPath path to stats.json in dev
- * @return {string}                    current active path
- */
-function getStatsPath(statsFilePath, buildArtifactsPath) {
-  return process.env.WEBPACK_DEV === "true"
-    ? Path.resolve(buildArtifactsPath, "stats.json")
-    : statsFilePath;
-}
-
-const resolvePath = path => (!Path.isAbsolute(path) ? Path.resolve(path) : path);
-
 const updateFullTemplate = (baseDir, options) => {
   if (options.templateFile) {
     options.templateFile = Path.resolve(baseDir, options.templateFile);
@@ -119,10 +62,14 @@ function findEnv(keys, defVal) {
 
 function getDefaultRouteOptions() {
   const isDevProxy = process.env.hasOwnProperty("APP_SERVER_PORT");
+  const webpackDev = process.env.WEBPACK_DEV === "true";
+  // temporary location to write build artifacts in dev mode
+  const buildArtifacts = ".etmp";
   return {
     pageTitle: "Untitled Electrode Web Application",
     //
-    webpackDev: process.env.WEBPACK_DEV === "true",
+    webpackDev,
+    isDevProxy,
     //
     devServer: {
       host: findEnv([isDevProxy && "HOST", "WEBPACK_DEV_HOST", "WEBPACK_HOST"], "127.0.0.1"),
@@ -130,11 +77,12 @@ function getDefaultRouteOptions() {
       https: Boolean(process.env.WEBPACK_DEV_HTTPS)
     },
     //
-    stats: "dist/server/stats.json",
+    stats: webpackDev ? `${buildArtifacts}/stats.json` : "dist/server/stats.json",
     iconStats: "dist/server/iconstats.json",
     criticalCSS: "dist/js/critical.css",
-    buildArtifacts: ".etmp",
+    buildArtifacts,
     prodBundleBase: "/js/",
+    devBundleBase: "/js",
     cspNonceValue: undefined,
     templateFile: Path.join(__dirname, "..", "resources", "index-page")
   };
@@ -142,11 +90,8 @@ function getDefaultRouteOptions() {
 
 module.exports = {
   resolveChunkSelector,
-  loadAssetsFromStats,
   getIconStats,
   getCriticalCSS,
-  getStatsPath,
-  resolvePath,
   getDefaultRouteOptions,
   updateFullTemplate
 };

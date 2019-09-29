@@ -2,8 +2,10 @@
 
 /* eslint-disable global-require, max-statements */
 
+const Fs = require("fs");
 const assert = require("assert");
 const Path = require("path");
+const _ = require("lodash");
 
 let CDN_ASSETS;
 let CDN_JS_BUNDLES;
@@ -33,7 +35,7 @@ const utils = {
   },
 
   getBundleBase: routeData => {
-    if (process.env.NODE_ENV === "production" || process.env.WEBPACK_DEV !== "true") {
+    if (process.env.NODE_ENV === "production" || !routeData.webpackDev) {
       return routeData.prodBundleBase;
     } else {
       return routeData.devBundleBase;
@@ -96,12 +98,18 @@ const utils = {
     return cdnBundles;
   },
 
-  getCdnJsBundles(byChunkNameAssets, routeOptions) {
+  getCdnJsBundles(assets, routeOptions) {
     if (CDN_JS_BUNDLES) {
       return CDN_JS_BUNDLES;
     }
 
-    const jsBundleByChunkName = Object.entries(byChunkNameAssets).reduce((a, [name, bundle]) => {
+    //
+    // pack up entrypoints data from stats
+    //
+
+    const { byChunkName } = assets;
+
+    const jsBundleByChunkName = Object.entries(byChunkName).reduce((a, [name, bundle]) => {
       a[name] = Array.isArray(bundle) ? bundle.find(x => x.endsWith(".js")) : bundle;
       return a;
     }, {});
@@ -109,6 +117,48 @@ const utils = {
     const bundleBase = utils.getBundleBase(routeOptions);
 
     return (CDN_JS_BUNDLES = utils.mapCdnAssets(jsBundleByChunkName, bundleBase));
+  },
+
+  /**
+   * Load stats.json which is created during build.
+   * Attempt to load the stats.json file which contains a manifest of
+   * The file contains bundle files which are to be loaded on the client side.
+   *
+   * @param {string} statsPath - path of stats.json
+   * @returns {Promise.<Object>} an object containing an array of file names
+   */
+  loadAssetsFromStats(statsPath) {
+    let stats;
+
+    try {
+      stats = JSON.parse(Fs.readFileSync(Path.resolve(statsPath)).toString());
+    } catch (err) {
+      return {};
+    }
+
+    const assets = {};
+    const manifestAsset = _.find(stats.assets, asset => {
+      return asset.name.endsWith("manifest.json");
+    });
+
+    const jsAssets = stats.assets.filter(asset => {
+      return asset.name.endsWith(".js");
+    });
+
+    const cssAssets = stats.assets.filter(asset => {
+      return asset.name.endsWith(".css");
+    });
+
+    if (manifestAsset) {
+      assets.manifest = manifestAsset.name;
+    }
+
+    assets.js = jsAssets;
+    assets.css = cssAssets;
+    assets.byChunkName = stats.assetsByChunkName;
+    assets.entryPoints = stats.entrypoints;
+
+    return { assets, stats };
   }
 };
 

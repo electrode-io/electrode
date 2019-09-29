@@ -146,7 +146,11 @@ function getDevJsBundle(chunkNames, routeData) {
 }
 
 function getProdBundles(chunkNames, routeData) {
-  const assets = routeData.assets;
+  if (!routeData || !routeData.assets) {
+    return {};
+  }
+
+  const { assets } = routeData;
 
   return {
     jsChunk: _.find(assets.js, asset => _.includes(asset.chunkNames, chunkNames.js)),
