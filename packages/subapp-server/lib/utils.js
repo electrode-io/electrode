@@ -112,15 +112,21 @@ const updateFullTemplate = (baseDir, options) => {
   }
 };
 
+function findEnv(keys, defVal) {
+  const k = [].concat(keys).find(x => x && process.env.hasOwnProperty(x));
+  return k ? process.env[k] : defVal;
+}
+
 function getDefaultRouteOptions() {
+  const isDevProxy = process.env.hasOwnProperty("APP_SERVER_PORT");
   return {
     pageTitle: "Untitled Electrode Web Application",
     //
     webpackDev: process.env.WEBPACK_DEV === "true",
     //
     devServer: {
-      host: process.env.WEBPACK_DEV_HOST || process.env.WEBPACK_HOST || "127.0.0.1",
-      port: process.env.WEBPACK_DEV_PORT || "2992",
+      host: findEnv([isDevProxy && "HOST", "WEBPACK_DEV_HOST", "WEBPACK_HOST"], "127.0.0.1"),
+      port: findEnv([isDevProxy && "PORT", "WEBPACK_DEV_PORT"], isDevProxy ? "3000" : "2992"),
       https: Boolean(process.env.WEBPACK_DEV_HTTPS)
     },
     //
