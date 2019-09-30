@@ -257,7 +257,6 @@ class AdminServer {
             } else {
               clearStatusMessage(out);
               out.write(this._wds + l);
-              writeStatusMessage(out);
             }
           });
       };
