@@ -221,7 +221,7 @@ class AdminServer {
     const writeStatusMessage = out => {
       if (!currentStatusMessage) return;
       const l = out.columns;
-      const str = l ? currentStatusMessage.substr(1, l) : currentStatusMessage;
+      const str = l ? currentStatusMessage.substr(0, l) : currentStatusMessage;
       const coloredStr = `\u001b[1m${str}\u001b[39m\u001b[22m`;
       out.write(`\x1b[2K\r${coloredStr}`);
       hasStatusMessage = true;
