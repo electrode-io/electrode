@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-app",
-  "version": "6.5.11",
+  "version": "6.5.12",
   "description": "Electrode NodeJS/React Universal Application Archetype",
   "main": "arch-clap.js",
   "homepage": "http://www.electrode.io",
@@ -30,7 +30,7 @@
     "ignore-styles": "^5.0.1",
     "isomorphic-loader": "^2.1.1",
     "optional-require": "^1.0.0",
-    "subapp-util": "^1.0.1"
+    "subapp-util": "^1.0.2"
   },
   "optionalDependencies": {
     "electrode-archetype-opt-inferno": "^0.2.9",

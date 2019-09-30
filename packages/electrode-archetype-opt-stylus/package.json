@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-opt-stylus",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Electrode NodeJS/React Optional Archetype Stylus",
   "main": "optional-check.js",
   "homepage": "http://www.electrode.io",

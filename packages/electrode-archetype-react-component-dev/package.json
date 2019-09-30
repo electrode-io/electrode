@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-component-dev",
-  "version": "6.1.8",
+  "version": "6.1.9",
   "description": "Electrode Component (Development)",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -97,7 +97,7 @@
     "electrode-archetype-opt-eslint": "^1.0.0",
     "electrode-archetype-opt-inferno": "^0.2.8",
     "electrode-archetype-opt-jest": "^1.0.0",
-    "electrode-archetype-opt-karma": "^2.0.2",
+    "electrode-archetype-opt-karma": "^2.0.4",
     "electrode-archetype-opt-mocha": "^1.0.0",
     "electrode-archetype-opt-phantomjs": "^1.0.0",
     "electrode-archetype-opt-react": "^2.0.1",
