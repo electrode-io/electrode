@@ -221,9 +221,9 @@ class AdminServer {
     const writeStatusMessage = out => {
       if (!currentStatusMessage) return;
       const l = out.columns;
-      const str = l ? currentStatusMessage.substr(0, l) : currentStatusMessage;
+      const str = l ? currentStatusMessage.substr(0, l - 6) : currentStatusMessage;
       const coloredStr = `\u001b[1m${str}\u001b[39m\u001b[22m`;
-      out.write(`\x1b[2K\r${coloredStr}`);
+      out.write(`\x1b[2K\r${this._wds}${coloredStr}`);
       hasStatusMessage = true;
     };
 
@@ -235,7 +235,8 @@ class AdminServer {
         data
           .toString()
           .split("\n")
-          .map(x => x.trim())
+          // kill empty blank lines but preserve spaces
+          .map(x => x.trim() && x)
           .filter(x => x)
           .forEach(l => {
             if (l.startsWith(progSig)) {
