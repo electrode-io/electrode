@@ -229,21 +229,9 @@ class AdminServer {
 
     const progSig = `<s> [webpack.Progress] `;
     const waitStart = async info => {
-      const log = (out, data) => {
-        data
-          .toString()
-          .split("\n")
-          .map(x => x.trim())
-          .filter(x => x)
-          .forEach(l => {
-            clearStatusMessage(out);
-            out.write(this._wds + l + "\n");
-          });
-      };
-
       const cwdRegex = new RegExp(process.cwd(), "g");
 
-      const logProgress = (out, data) => {
+      const log = (out, data) => {
         data
           .toString()
           .split("\n")
@@ -256,13 +244,13 @@ class AdminServer {
               writeStatusMessage(out);
             } else {
               clearStatusMessage(out);
-              out.write(this._wds + l);
+              out.write(this._wds + l.replace(cwdRegex, ".") + "\n");
             }
           });
       };
 
       info._child.stdout.on("data", data => log(process.stdout, data));
-      info._child.stderr.on("data", data => logProgress(process.stderr, data));
+      info._child.stderr.on("data", data => log(process.stderr, data));
 
       return new Promise(resolve => {
         info._child.on("message", data => {
