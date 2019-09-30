@@ -240,8 +240,7 @@ class AdminServer {
           .filter(x => x)
           .forEach(l => {
             if (l.startsWith(progSig)) {
-              const nl = l.substring(progSig.length).replace(cwdRegex, ".");
-              currentStatusMessage = nl;
+              currentStatusMessage = l.substring(progSig.length).replace(cwdRegex, ".");
               writeStatusMessage(out);
             } else {
               clearStatusMessage(out);
