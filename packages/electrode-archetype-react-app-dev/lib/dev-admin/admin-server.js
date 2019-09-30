@@ -208,7 +208,7 @@ class AdminServer {
   }
 
   async startDevServer(debug) {
-    let currentStatusMessage = undefined;
+    let currentStatusMessage;
     let hasStatusMessage = false;
 
     const clearStatusMessage = out => {
