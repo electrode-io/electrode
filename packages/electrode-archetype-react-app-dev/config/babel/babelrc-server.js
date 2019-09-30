@@ -1,6 +1,6 @@
 "use strict";
 
-const archetype = require("../archetype");
+const archetype = require("electrode-archetype-react-app/config/archetype");
 const optionalRequire = require("optional-require")(require);
 const optFlow = optionalRequire("electrode-archetype-opt-flow");
 

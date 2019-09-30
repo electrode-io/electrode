@@ -1,8 +1,8 @@
 "use strict";
 
-const requireAt = require("require-at");
-const archetype = require("../archetype");
 const ck = require("chalker");
+const requireAt = require("require-at");
+const archetype = require("electrode-archetype-react-app/config/archetype");
 const optionalRequire = require("optional-require")(require);
 const optFlow = optionalRequire("electrode-archetype-opt-flow");
 
@@ -68,12 +68,14 @@ const basePlugins = [
 
 const { BABEL_ENV, NODE_ENV } = process.env;
 
-const fileId = "electrode-archetype-react-app-dev babelrc-client.js";
+const fileId = "electrode-archetype-react-app-dev:babelrc-client.js";
 
 const checkEnv = names => {
   names = names.filter(x => !process.env.hasOwnProperty(x));
   if (names.length > 0) {
-    console.error(ck`\n<red>ERROR: ${fileId}: env ${names.join(", ")} not defined</>`);
+    console.error(
+      ck`\n<red>Notice:</> ${fileId}: env ${names.join(", ")} not defined - default to 'false'`
+    );
   }
 };
 
@@ -123,7 +125,7 @@ const plugins = basePlugins.concat(
 );
 
 const targets = archetype.babel.envTargets[archetype.babel.target];
-const coreJsVersion = archetype.devRequire("core-js/package.json").version.split(".")[0];
+const coreJsVersion = require("core-js/package.json").version.split(".")[0];
 const useBuiltIns = archetype.babel.hasMultiTargets
   ? { useBuiltIns: "entry", corejs: coreJsVersion }
   : {};
