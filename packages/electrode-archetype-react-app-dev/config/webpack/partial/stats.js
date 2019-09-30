@@ -28,6 +28,13 @@ module.exports = function(opts) {
         return _.pick(c, ["id", "hash", "names", "entry", "initial", "rendered", "reason"]);
       });
     }
+
+    if (stats.entrypoints) {
+      stats.entrypoints = Object.entries(stats.entrypoints).reduce((ep, [name, e]) => {
+        ep[name] = e.chunks;
+        return ep;
+      }, {});
+    }
     return stats;
   };
 

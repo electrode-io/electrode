@@ -20,13 +20,7 @@ const { ReactWebapp } = require("electrode-react-webapp");
 const subAppUtil = require("subapp-util");
 const registerRoutes = require("./register-routes");
 
-const {
-  resolveChunkSelector,
-  loadAssetsFromStats,
-  getDefaultRouteOptions,
-  updateFullTemplate,
-  getStatsPath
-} = require("./utils");
+const { resolveChunkSelector, getDefaultRouteOptions, updateFullTemplate } = require("./utils");
 
 async function searchRoutesDir(srcDir, pluginOpts) {
   const { loadRoutesFrom } = pluginOpts;
@@ -145,8 +139,6 @@ async function setupRoutesFromFile(srcDir, server, pluginOpts) {
     return h.continue;
   });
 
-  const statsPath = getStatsPath(topOpts.stats, topOpts.buildArtifacts);
-  const assets = loadAssetsFromStats(statsPath);
   topOpts.devBundleBase = Url.format({
     protocol: topOpts.devServer.https ? "https" : "http",
     hostname: topOpts.devServer.host,
@@ -162,7 +154,7 @@ async function setupRoutesFromFile(srcDir, server, pluginOpts) {
     const routeOptions = Object.assign({}, topOpts, route);
     updateFullTemplate(routeOptions.dir, routeOptions);
     const chunkSelector = resolveChunkSelector(routeOptions);
-    routeOptions.__internals = { assets, chunkSelector };
+    routeOptions.__internals = { chunkSelector };
 
     // load subapps for the route
     if (routeOptions.subApps) {
@@ -264,8 +256,6 @@ async function setupRoutesFromDir(server, pluginOpts, fromDir) {
     });
   }
 
-  const statsPath = getStatsPath(topOpts.stats, topOpts.buildArtifacts);
-  const assets = loadAssetsFromStats(statsPath);
   topOpts.devBundleBase = Url.format({
     protocol: topOpts.devServer.https ? "https" : "http",
     hostname: topOpts.devServer.host,
@@ -273,7 +263,7 @@ async function setupRoutesFromDir(server, pluginOpts, fromDir) {
     pathname: "/js/"
   });
 
-  registerRoutes({ routes, topOpts, assets, server });
+  registerRoutes({ routes, topOpts, server });
 }
 
 async function setupSubAppHapiRoutes(server, pluginOpts) {

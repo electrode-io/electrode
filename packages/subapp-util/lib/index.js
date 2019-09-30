@@ -57,10 +57,11 @@ function scanSubAppAdditions(dir, manifest) {
   });
 
   if (!manifest.serverEntry && scanned.server) {
-    manifest.serverEntry = scanned.server[0];
+    manifest.serverEntry = removeExt(scanned.server[0]);
   }
 
-  const reducers = (scanned.dir && scanned.dir[0]) || (scanned.reducers && scanned.reducers[0]);
+  const reducers =
+    (scanned.dir && scanned.dir[0]) || (scanned.reducers && removeExt(scanned.reducers[0]));
 
   if (!manifest.reducers && reducers) {
     manifest.reducers = reducers;

@@ -349,4 +349,11 @@ describe("utils", function() {
       expect(baseUrl).to.equal("/js/");
     });
   });
+
+  describe("getProdBundles", function() {
+    it("should return empty object if no route data or assets", () => {
+      expect(utils.getProdBundles()).to.deep.equal({});
+      expect(utils.getProdBundles("", {})).to.deep.equal({});
+    });
+  });
 });

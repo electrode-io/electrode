@@ -1,15 +1,6 @@
 "use strict";
 
-const {
-  resolveChunkSelector,
-  loadAssetsFromStats,
-  getIconStats,
-  getCriticalCSS,
-  getStatsPath,
-  resolvePath
-} = require("../../lib/utils");
-
-const Path = require("path");
+const { resolveChunkSelector, getIconStats, getCriticalCSS } = require("../../lib/utils");
 
 describe("subapp-server utils", () => {
   describe("resolveChunkSelector", () => {
@@ -27,24 +18,6 @@ describe("subapp-server utils", () => {
       const { js, css } = selector();
       expect(js).to.equal("main");
       expect(css).to.equal("main");
-    });
-  });
-
-  describe("loadAssetsFromStats", () => {
-    it("should load assets", () => {
-      const assets = loadAssetsFromStats("./test/data/stats.json");
-      expect(assets).be.not.empty;
-    });
-
-    it("should load assets without manifest if no such asset exists", () => {
-      const assets = loadAssetsFromStats("./test/data/stats-no-manifest.json");
-      expect(assets).be.not.empty;
-      expect(assets).to.not.have.own.property("manifest");
-    });
-
-    it("should return empty assets if stats.json does not exist", () => {
-      const assets = loadAssetsFromStats("some path");
-      expect(assets).be.empty;
     });
   });
 
@@ -78,35 +51,6 @@ describe("subapp-server utils", () => {
 
     it("should return empty string if criticalCss file does not exist", () => {
       expect(getCriticalCSS()).to.equal("");
-    });
-  });
-
-  describe("getStatsPath", () => {
-    after(() => {
-      delete process.env.WEBPACK_DEV;
-    });
-
-    it("should get stats.json path in dev mode", () => {
-      process.env.WEBPACK_DEV = "true";
-      const path = getStatsPath("", ".build");
-      expect(path).to.satisfy(s => s.endsWith(".build/stats.json"));
-    });
-
-    it("should get stats.json path in prod mode", () => {
-      process.env.WEBPACK_DEV = "";
-      const path = getStatsPath("./stats.json");
-      expect(path).to.equal("./stats.json");
-    });
-  });
-
-  describe("resolvePath", () => {
-    it("should resolve path if it is not absolute path", () => {
-      const path = resolvePath("./a/b");
-      expect(path).to.equal(Path.resolve("./a/b"));
-    });
-
-    it("should return path if it is absolute path", () => {
-      expect("/a/b").to.equal(resolvePath("/a/b"));
     });
   });
 });
