@@ -208,6 +208,26 @@ class AdminServer {
   }
 
   async startDevServer(debug) {
+    let currentStatusMessage = undefined;
+    let hasStatusMessage = false;
+
+    const clearStatusMessage = out => {
+      if (hasStatusMessage) {
+        out.write("\x1b[2K\r");
+        hasStatusMessage = false;
+      }
+    };
+
+    const writeStatusMessage = out => {
+      if (!currentStatusMessage) return;
+      const l = out.columns;
+      const str = l ? currentStatusMessage.substr(1, l) : currentStatusMessage;
+      const coloredStr = `\u001b[1m${str}\u001b[39m\u001b[22m`;
+      out.write(`\x1b[2K\r${coloredStr}`);
+      hasStatusMessage = true;
+    };
+
+    const progSig = `<s> [webpack.Progress] `;
     const waitStart = async info => {
       const log = (out, data) => {
         data
@@ -216,12 +236,34 @@ class AdminServer {
           .map(x => x.trim())
           .filter(x => x)
           .forEach(l => {
+            clearStatusMessage(out);
             out.write(this._wds + l + "\n");
           });
       };
 
+      const cwdRegex = new RegExp(process.cwd(), "g");
+
+      const logProgress = (out, data) => {
+        data
+          .toString()
+          .split("\n")
+          .map(x => x.trim())
+          .filter(x => x)
+          .forEach(l => {
+            if (l.startsWith(progSig)) {
+              const nl = l.substring(progSig.length).replace(cwdRegex, ".");
+              currentStatusMessage = nl;
+              writeStatusMessage(out);
+            } else {
+              clearStatusMessage(out);
+              out.write(this._wds + l);
+              writeStatusMessage(out);
+            }
+          });
+      };
+
       info._child.stdout.on("data", data => log(process.stdout, data));
-      info._child.stderr.on("data", data => process.stderr.write(data));
+      info._child.stderr.on("data", data => logProgress(process.stderr, data));
 
       return new Promise(resolve => {
         info._child.on("message", data => {
