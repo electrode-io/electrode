@@ -17,10 +17,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import "../styles/raleway.css";
+import "./test1.styl";
 import custom from "../styles/custom.css"; // eslint-disable-line no-unused-vars
 import electrodePng from "../images/electrode.png";
 import Notifications from "react-notify-toast";
-
 
 class Home extends React.Component {
   constructor(props) {
@@ -43,7 +43,6 @@ class Home extends React.Component {
             </a>
           </h2>
         </section>
-
       </div>
     );
   }
