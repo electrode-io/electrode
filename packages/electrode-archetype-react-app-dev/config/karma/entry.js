@@ -13,22 +13,18 @@ require("regenerator-runtime/runtime");
  * - Browser tests: `http://localhost:3000/test/client/test.html`
  */
 /*globals window:false*/
-var chai = require("chai");
-try {
-  var sinonChai = require("sinon-chai");
-} catch (error) {
-  console.warn("could not load sinon-chai - archetype config sinon set to false ");
-}
-var chaiShallowly = require("chai-shallowly");
 
 /**
  * Install enzyme along with an Adapter corresponding to React 16
  * Configure enzyme to use the adapter using the top level configure(...) API
  */
-var enzyme = require("enzyme");
-var Adapter = require("enzyme-adapter-react-16");
-enzyme.configure({ adapter: new Adapter() });
-
+try {
+  var enzyme = require("enzyme");
+  var Adapter = require("enzyme-adapter-react-16");
+  enzyme.configure({ adapter: new Adapter() });
+} catch (err) {
+  //
+}
 /*
  * We need a global sinon to maintain compatibility
  * with existing test suites. However, this will be
@@ -36,22 +32,37 @@ enzyme.configure({ adapter: new Adapter() });
  * https://gecgithub01.walmart.com/electrode/electrode-archetype-react-component/issues/10
  */
 try {
-  window.sinon = require("sinon");
-} catch (error) {
-  console.warn("could not load sinon - archetype config sinon set to false ");
+  var sinon = require("sinon");
+  window.sinon = sinon;
+} catch (err) {
+  //
 }
 
 // --------------------------------------------------------------------------
 // Chai / Sinon / Mocha configuration.
 // --------------------------------------------------------------------------
 // Exports
-window.expect = chai.expect;
 
-// Plugins
-if (sinonChai) {
-  chai.use(sinonChai);
+try {
+  var chai = require("chai");
+  window.expect = chai.expect;
+
+  try {
+    var sinonChai = require("sinon-chai");
+    chai.use(sinonChai);
+  } catch (err) {
+    //
+  }
+
+  try {
+    var chaiShallowly = require("chai-shallowly");
+    chai.use(chaiShallowly);
+  } catch (err) {
+    //
+  }
+} catch (err) {
+  //
 }
-chai.use(chaiShallowly);
 
 // Mocha (part of static include).
 window.mocha.setup({
