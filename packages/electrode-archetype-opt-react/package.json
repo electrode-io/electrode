@@ -29,6 +29,10 @@
   "electrodeOptArchetype": {
     "optionalTagName": "reactLib",
     "expectTag": "react",
-    "defaultInstall": true
+    "defaultInstall": true,
+    "onlyOneOf": [
+      "electrode-archetype-opt-react",
+      "electrode-archetype-opt-inferno"
+    ]
   }
 }
