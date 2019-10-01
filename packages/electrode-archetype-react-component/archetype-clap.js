@@ -44,15 +44,12 @@ function setES6Module(flag) {
 }
 
 function checkFrontendCov(minimum) {
-  if (typeof minimum === "string") {
-    minimum += ".";
-  } else {
-    minimum = "";
+  if (typeof minimum !== "string") {
+    minimum = "5";
   }
 
   return exec(
-    `istanbul check-coverage 'coverage/client/*/coverage.json'`,
-    `--config=${archetype.devPath}/config/istanbul/.istanbul.${minimum}yml`
+    `nyc check-coverage --temp-dir "coverage/client" --branches ${minimum} --lines ${minimum} --functions ${minimum} --statements ${minimum} --per-file`
   );
 }
 
@@ -288,7 +285,9 @@ function makeTasks(hostDir) {
       )
     });
   } else {
-    console.log("Disabling karma test tasks since archetype config options.karma === false or options.mocha === false");
+    console.log(
+      "Disabling karma test tasks since archetype config options.karma === false or options.mocha === false"
+    );
   }
   if (archetype.options.jest !== false) {
     Object.assign(tasks, {

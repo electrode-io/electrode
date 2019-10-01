@@ -78,7 +78,6 @@
     "fs-extra": "^0.26.5",
     "identity-obj-proxy": "^3.0.0",
     "isomorphic-loader": "^2.1.1",
-    "istanbul": "^0.4.5",
     "nyc": "^14.1.1",
     "jsonfile": "^2.2.2",
     "loader-utils": "^1.1.0",

@@ -128,7 +128,6 @@ const config = {
     {
       babel: `${configDir}/babel`,
       eslint: `${configDir}/eslint`,
-      istanbul: `${configDir}/istanbul`,
       karma: `${configDir}/karma`,
       mocha: `${configDir}/mocha`,
       webpack: `${configDir}/webpack`,
