@@ -1,21 +1,28 @@
 "use strict";
 
 const optionalRequire = require("optional-require")(require);
-const chai = require("chai");
-const sinonChai = optionalRequire("sinon-chai");
-const chaiShallowly = require("chai-shallowly");
-const chaiAsPromised = require("chai-as-promised");
-const Enzyme = require("enzyme");
-const Adapter = require("enzyme-adapter-react-16");
+const Enzyme = optionalRequire("enzyme");
+const Adapter = optionalRequire("enzyme-adapter-react-16");
 
-Enzyme.configure({ adapter: new Adapter() });
-
-chai.use(chaiAsPromised);
-if (sinonChai) {
-  chai.use(sinonChai);
+if (Enzyme && Adapter) {
+  Enzyme.configure({ adapter: new Adapter() });
 }
-chai.use(chaiShallowly);
 
-chai.config.includeStack = true;
+const chai = optionalRequire("chai");
 
-global.expect = chai.expect;
+function chaiUse(addons) {
+  [].concat(addons).forEach(x => {
+    const AddonMod = x && optionalRequire(x);
+    if (AddonMod) {
+      chai.use(AddonMod);
+    }
+  });
+}
+
+if (chai) {
+  chaiUse(["chai-as-promised", "sinon-chai", "chai-shallowly"]);
+
+  chai.config.includeStack = true;
+
+  global.expect = chai.expect;
+}

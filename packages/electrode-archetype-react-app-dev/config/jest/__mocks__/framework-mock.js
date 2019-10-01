@@ -1,5 +1,10 @@
-const Enzyme = require("enzyme");
-const EnzymeAdapter = require("enzyme-adapter-react-16");
+"use strict";
+const optionalRequire = require("optional-require")(require);
 
-// Setup enzyme's react adapter
-Enzyme.configure({ adapter: new EnzymeAdapter() });
+const Enzyme = optionalRequire("enzyme");
+const EnzymeAdapter = optionalRequire("enzyme-adapter-react-16");
+
+if (Enzyme && EnzymeAdapter) {
+  // Setup enzyme's react adapter
+  Enzyme.configure({ adapter: new EnzymeAdapter() });
+}
