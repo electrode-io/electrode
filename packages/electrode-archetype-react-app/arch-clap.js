@@ -619,13 +619,19 @@ Individual .babelrc files were generated for you in src/client and src/server
           includeRoot: true,
           includeDir: true,
           grouping: true,
-          filterDir: x => x === `.__dev_hmr` && "dirs",
+          filterDir: x => (x === `.__dev_hmr` && "dirs") || "otherDirs",
           filter: (x, p) => x.indexOf(".spec.") > 0 || x.indexOf(".test.") > 0 || p === `.__dev_hmr`
         });
-        scanned.files.forEach(f => Fs.unlinkSync(f));
-        (scanned.dirs || []).forEach(d => {
+        scanned.files.forEach(f => {
           try {
-            Fs.rmdirSync(d);
+            Fs.unlinkSync(f);
+          } catch (err) {
+            //
+          }
+        });
+        [].concat(scanned.dirs, scanned.otherDirs).forEach(d => {
+          try {
+            if (d) Fs.rmdirSync(d);
           } catch (err) {
             // ignore
           }
