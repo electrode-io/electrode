@@ -34,10 +34,8 @@
     "prod-start": "NODE_ENV=production clap -n -x electrode/build prod",
     "start": "if test \"$NODE_ENV\" = \"production\"; then npm run prod-start; else clap dev; fi",
     "test": "clap check",
-
     "nuke-lib": "rm -rf lib",
     "check-test-in-lib": "test -e ./lib/client/components/home.spec.js && echo 'FAIL' || echo 'PASS'",
-
     "coverage": "clap check",
     "prod": "echo 'Starting standalone server in PROD mode'; NODE_ENV=production node ./lib/server/",
     "heroku-postbuild": "clap build"

@@ -141,7 +141,7 @@ xclap.load({
     task: () => {
       process.env.BUILD_TEST = "true";
       process.env.NODE_PRESERVE_SYMLINKS = "1";
-      const tasks = ["test-boilerplate", "test-stylus-sample"];
+      const tasks = ["test-boilerplate", "test-stylus-sample", ".test-jest-sample"];
       let updated;
       return exec("lerna updated")
         .then(output => {
@@ -199,6 +199,13 @@ xclap.load({
     }
   },
 
+  ".test-jest-sample": {
+    desc: "Run tests for the boilerplage app react-jest-app",
+    task: () => {
+      return runAppTest(Path.join(__dirname, "samples/react-jest-app"));
+    }
+  },
+
   "samples-local": {
     desc: "modify all samples to pull electrode packages from local",
     task: () => {
@@ -206,7 +213,8 @@ xclap.load({
         "electrode-demo-index",
         "stylus-sample",
         "universal-material-ui",
-        "universal-react-node"
+        "universal-react-node",
+        "react-jest-app"
       ].forEach(a => {
         pullLocalPackages(Path.join(__dirname, "samples", a));
       });
