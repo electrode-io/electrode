@@ -30,6 +30,10 @@
   },
   "electrodeOptArchetype": {
     "optionalTagName": "reactLib",
-    "expectTag": "inferno"
+    "expectTag": "inferno",
+    "onlyOneOf": [
+      "electrode-archetype-opt-react",
+      "electrode-archetype-opt-inferno"
+    ]
   }
 }
