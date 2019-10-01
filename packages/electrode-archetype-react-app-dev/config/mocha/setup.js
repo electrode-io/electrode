@@ -10,7 +10,7 @@ if (Enzyme && Adapter) {
 
 const chai = optionalRequire("chai");
 
-function chaiUse(...addons) {
+function chaiUse(addons) {
   [].concat(addons).forEach(x => {
     const AddonMod = x && optionalRequire(x);
     if (AddonMod) {
