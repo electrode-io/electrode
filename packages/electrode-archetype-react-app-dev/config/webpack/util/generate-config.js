@@ -10,18 +10,34 @@ const logger = require("electrode-archetype-react-app/lib/logger");
 
 function searchUserCustomConfig(options) {
   let customConfig;
-  const customDirs = [process.cwd(), Path.resolve("archetype/config/webpack")];
+  const cwd = process.cwd();
+  const archPath = Path.resolve("archetype/config/webpack");
 
-  const foundDir = customDirs.find(d => {
-    customConfig = optionalRequire(Path.join(d, options.configFilename));
+  const customLocations = [
+    {
+      dir: cwd,
+      file: options.configFilename
+    },
+    {
+      dir: cwd,
+      file: "webpack.config.js"
+    },
+    {
+      dir: archPath,
+      file: options.configFilename
+    }
+  ];
+
+  const foundLocation = customLocations.find(d => {
+    customConfig = optionalRequire(Path.join(d.dir, d.file));
     return !!customConfig;
   });
 
-  if (foundDir) {
-    const dir = xsh.pathCwd.replace(foundDir);
-    logger.info(`Custom webpack config ${options.configFilename} loaded from ${dir}`);
+  if (foundLocation) {
+    const dir = xsh.pathCwd.replace(foundLocation.dir);
+    logger.info(`Custom webpack config ${foundLocation.file} loaded from ${dir}`);
   } else {
-    const dirs = customDirs.map(d => xsh.pathCwd.replace(d)).join("; ");
+    const dirs = [cwd, archPath].map(d => xsh.pathCwd.replace(d)).join("; ");
     logger.info(`No custom webpack config ${options.configFilename} found in dirs ${dirs}`);
   }
 
