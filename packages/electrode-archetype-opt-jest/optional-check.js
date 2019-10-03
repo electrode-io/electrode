@@ -118,6 +118,38 @@ function optionalArchetypeCheck() {
 
   const options = (appArchetypeConfig && appArchetypeConfig.options) || {};
 
+  let foundOOO = [];
+
+  if (optParams.onlyOneOf) {
+    // first, user's package.json cannot have multiple packages from onlyOneOf list
+    ["dependencies", "devDependencies", "optionalDependencies"].forEach(x => {
+      if (appPkg[x]) {
+        foundOOO = foundOOO.concat(optParams.onlyOneOf.filter(n => appPkg[x].hasOwnProperty(n)));
+      }
+    });
+
+    if (foundOOO.length > 1) {
+      return done(
+        false,
+        `
+  ERROR
+  ERROR: you can have *only* ONE of these packages in your package.json dependencies/devDependencies/optionalDependencies.
+  ERROR: ${foundOOO.join(", ")}
+  ERROR
+  `
+      );
+    }
+
+    // If found a mutually excluding package but it's not this one, then skip installing this.
+    if (foundOOO.length > 0 && foundOOO.indexOf(myName) < 0) {
+      return done(
+        false,
+        `Found ${foundOOO[0]} in your package.json and \
+it excludes this package ${myName} - skip installing`
+      );
+    }
+  }
+
   //
   // check if app's package.json has the package in its dependencies or optionalDependencies
   //
