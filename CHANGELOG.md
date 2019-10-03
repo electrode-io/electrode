@@ -1,3 +1,107 @@
+# 10/3/2019
+
+- minor fixes
+
+## Packages
+
+- `electrode-archetype-opt-critical-css@1.0.2` `(1.0.1 => 1.0.2)`
+- `electrode-archetype-opt-eslint@1.0.2` `(1.0.1 => 1.0.2)`
+- `electrode-archetype-opt-flow@1.0.1` `(1.0.0 => 1.0.1)`
+- `electrode-archetype-opt-inferno@0.2.10` `(0.2.9 => 0.2.10)`
+- `electrode-archetype-opt-jest@1.0.2` `(1.0.1 => 1.0.2)`
+- `electrode-archetype-opt-karma@2.0.5` `(2.0.4 => 2.0.5)`
+- `electrode-archetype-opt-less@1.0.1` `(1.0.0 => 1.0.1)`
+- `electrode-archetype-opt-mocha@1.0.2` `(1.0.1 => 1.0.2)`
+- `electrode-archetype-opt-phantomjs@1.0.1` `(1.0.0 => 1.0.1)`
+- `electrode-archetype-opt-postcss@1.0.3` `(1.0.2 => 1.0.3)`
+- `electrode-archetype-opt-pwa@1.0.5` `(1.0.4 => 1.0.5)`
+- `electrode-archetype-opt-react@2.0.3` `(2.0.2 => 2.0.3)`
+- `electrode-archetype-opt-sass@1.0.8` `(1.0.7 => 1.0.8)`
+- `electrode-archetype-opt-sinon@1.0.2` `(1.0.1 => 1.0.2)`
+- `electrode-archetype-opt-stylus@1.0.1` `(1.0.0 => 1.0.1)`
+- `electrode-archetype-opt-typescript@1.0.2` `(1.0.1 => 1.0.2)`
+- `electrode-archetype-react-app@6.5.13` `(6.5.12 => 6.5.13)`
+- `electrode-archetype-react-app-dev@6.5.13` `(6.5.12 => 6.5.13)`
+
+## Commits
+
+- `packages/electrode-archetype-opt-critical-css`
+
+  - [auto] update optional check [commit](http://github.com/electrode-io/electrode/commit/7bf5f3b361aed1fd81d2035f084b63fa055cc3c2)
+
+- `packages/electrode-archetype-opt-eslint`
+
+  - [auto] update optional check [commit](http://github.com/electrode-io/electrode/commit/7bf5f3b361aed1fd81d2035f084b63fa055cc3c2)
+
+- `packages/electrode-archetype-opt-flow`
+
+  - [auto] update optional check [commit](http://github.com/electrode-io/electrode/commit/7bf5f3b361aed1fd81d2035f084b63fa055cc3c2)
+
+- `packages/electrode-archetype-opt-inferno`
+
+  - add onlyOneOf options to optional archetypes check ([#1392](https://github.com/electrode-io/electrode/pull/1392)) [commit](http://github.com/electrode-io/electrode/commit/0eed5fd05703eb95f31cbc20a58ac519339b2a96)
+
+- `packages/electrode-archetype-opt-jest`
+
+  - [auto] update optional check [commit](http://github.com/electrode-io/electrode/commit/7bf5f3b361aed1fd81d2035f084b63fa055cc3c2)
+
+- `packages/electrode-archetype-opt-karma`
+
+  - [auto] update optional check [commit](http://github.com/electrode-io/electrode/commit/7bf5f3b361aed1fd81d2035f084b63fa055cc3c2)
+
+- `packages/electrode-archetype-opt-less`
+
+  - [auto] update optional check [commit](http://github.com/electrode-io/electrode/commit/7bf5f3b361aed1fd81d2035f084b63fa055cc3c2)
+
+- `packages/electrode-archetype-opt-mocha`
+
+  - [auto] update optional check [commit](http://github.com/electrode-io/electrode/commit/7bf5f3b361aed1fd81d2035f084b63fa055cc3c2)
+
+- `packages/electrode-archetype-opt-phantomjs`
+
+  - [auto] update optional check [commit](http://github.com/electrode-io/electrode/commit/7bf5f3b361aed1fd81d2035f084b63fa055cc3c2)
+
+- `packages/electrode-archetype-opt-postcss`
+
+  - [auto] update optional check [commit](http://github.com/electrode-io/electrode/commit/7bf5f3b361aed1fd81d2035f084b63fa055cc3c2)
+
+- `packages/electrode-archetype-opt-pwa`
+
+  - [auto] update optional check [commit](http://github.com/electrode-io/electrode/commit/7bf5f3b361aed1fd81d2035f084b63fa055cc3c2)
+
+- `packages/electrode-archetype-opt-react`
+
+  - add onlyOneOf options to optional archetypes check ([#1392](https://github.com/electrode-io/electrode/pull/1392)) [commit](http://github.com/electrode-io/electrode/commit/0eed5fd05703eb95f31cbc20a58ac519339b2a96)
+
+- `packages/electrode-archetype-opt-sass`
+
+  - [auto] update optional check [commit](http://github.com/electrode-io/electrode/commit/7bf5f3b361aed1fd81d2035f084b63fa055cc3c2)
+
+- `packages/electrode-archetype-opt-sinon`
+
+  - [auto] update optional check [commit](http://github.com/electrode-io/electrode/commit/7bf5f3b361aed1fd81d2035f084b63fa055cc3c2)
+
+- `packages/electrode-archetype-opt-stylus`
+
+  - [auto] update optional check [commit](http://github.com/electrode-io/electrode/commit/7bf5f3b361aed1fd81d2035f084b63fa055cc3c2)
+
+- `packages/electrode-archetype-opt-typescript`
+
+  - [auto] update optional check [commit](http://github.com/electrode-io/electrode/commit/7bf5f3b361aed1fd81d2035f084b63fa055cc3c2)
+
+- `packages/electrode-archetype-react-app[-dev]`
+
+  - Add some unit tests for generate-config ([#1394](https://github.com/electrode-io/electrode/pull/1394)) [commit](http://github.com/electrode-io/electrode/commit/3afed1c9e7a2f01fa1fd522553c50c430618de73)
+  - Change searchUserCustomConfig to guarantee a search for "webpack.config" ([#1393](https://github.com/electrode-io/electrode/pull/1393)) [commit](http://github.com/electrode-io/electrode/commit/d659cf0d6b1c1e1927ec87af3a10d5797629aa6c)
+  - add onlyOneOf options to optional archetypes check ([#1392](https://github.com/electrode-io/electrode/pull/1392)) [commit](http://github.com/electrode-io/electrode/commit/0eed5fd05703eb95f31cbc20a58ac519339b2a96)
+  - test frameworks require chai/etc gracefully ([#1391](https://github.com/electrode-io/electrode/pull/1391)) [commit](http://github.com/electrode-io/electrode/commit/486819ee21254bce6637409fc76b669f5518f2be)
+  - fix deleting babel ignore files after build ([#1390](https://github.com/electrode-io/electrode/pull/1390)) [commit](http://github.com/electrode-io/electrode/commit/7ecdb9e3069d7c0eef87f9687b104d562412afe8)
+  - add styl, less, scss, sass to jest identify proxy ([#1389](https://github.com/electrode-io/electrode/pull/1389)) [commit](http://github.com/electrode-io/electrode/commit/152398ac4c2d8af4465d0432eb575935f03e57b7)
+
+- `packages/opt-archetype-check`
+
+  - add onlyOneOf options to optional archetypes check ([#1392](https://github.com/electrode-io/electrode/pull/1392)) [commit](http://github.com/electrode-io/electrode/commit/0eed5fd05703eb95f31cbc20a58ac519339b2a96)
+
 # 9/30/2019
 
 - add optionals: flow, less, phantomjs, stylus
