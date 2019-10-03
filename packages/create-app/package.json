@@ -21,7 +21,10 @@
     "template",
     "dist"
   ],
-  "author": "Electrode",
+  "author": "Electrode (http://www.electrode.io/)",
+  "contributors": [
+    "Joel Chen <xchen@walmartlabs.com>"
+  ],
   "license": "Apache-2.0",
   "devDependencies": {
     "@babel/core": "^7.6.2",
