@@ -317,15 +317,11 @@ function makeTasks(xclap) {
   process.env.ENABLE_KARMA_COV = "false";
 
   const checkFrontendCov = minimum => {
-    if (typeof minimum === "string") {
-      minimum += ".";
-    } else {
-      minimum = "";
+    if (typeof minimum !== "string") {
+      minimum = "5";
     }
-    const configFile = quote(`${config.istanbul}/.istanbul.${minimum}yml`);
     return exec(
-      `istanbul check-coverage "coverage/client/*/coverage.json"`,
-      `--config=${configFile}`
+      `nyc check-coverage --temp-dir "coverage/client" --branches ${minimum} --lines ${minimum} --functions ${minimum} --statements ${minimum} --per-file`
     );
   };
 
