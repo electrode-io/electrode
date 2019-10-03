@@ -20,6 +20,10 @@
     "plugins",
     "optional-check.js"
   ],
+  "author": "Electrode (http://www.electrode.io/)",
+  "contributors": [
+    "Joel Chen <xchen@walmartlabs.com>"
+  ],
   "dependencies": {
     "favicons": "^4.8.3",
     "favicons-webpack-plugin": "^0.0.9",

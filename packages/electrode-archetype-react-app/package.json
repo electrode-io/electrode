@@ -24,6 +24,10 @@
     "require.js",
     "supports.js"
   ],
+  "author": "Electrode (http://www.electrode.io/)",
+  "contributors": [
+    "Joel Chen <xchen@walmartlabs.com>"
+  ],
   "dependencies": {
     "@babel/runtime": "^7.1.5",
     "css-modules-require-hook": "^4.0.2",

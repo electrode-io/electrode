@@ -13,18 +13,16 @@
     "coverage": "clap check",
     "format": "prettier --write --print-width 100 *.js `find . -type d -d 1 -exec echo '{}/**/*.js' \\; | egrep -v '(/node_modules/|/dist/|/coverage/)'`"
   },
+  "author": "Electrode (http://www.electrode.io/)",
+  "contributors": [
+    "Joel Chen <xchen@walmartlabs.com>"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/electrode-io/electrode.git"
   },
   "keywords": [],
   "license": "Apache-2.0",
-  "maintainers": [
-    {
-      "name": "jchip",
-      "email": "joel123@gmail.com"
-    }
-  ],
   "files": [
     "lib"
   ],

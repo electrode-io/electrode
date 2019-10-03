@@ -10,11 +10,10 @@
   "bugs": {
     "url": "https://github.com/electrode-io/electrode/issues"
   },
-  "author": {
-    "name": "Joel Chen",
-    "email": "xchen@walmartlabs.com",
-    "url": "https://github.com/jchip"
-  },
+  "author": "Electrode (http://www.electrode.io/)",
+  "contributors": [
+    "Joel Chen <xchen@walmartlabs.com>"
+  ],
   "files": [
     "generators",
     "component",

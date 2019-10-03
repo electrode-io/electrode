@@ -10,12 +10,12 @@
   "bugs": {
     "url": "https://github.com/electrode-io/electrode/issues"
   },
-  "author": {
-    "name": "Joel Chen",
-    "email": "xchen@walmartlabs.com"
-  },
   "files": [
     "lib"
+  ],
+  "author": "Electrode (http://www.electrode.io/)",
+  "contributors": [
+    "Joel Chen <xchen@walmartlabs.com>"
   ],
   "license": "Apache-2.0",
   "scripts": {

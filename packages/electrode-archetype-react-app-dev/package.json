@@ -24,6 +24,10 @@
     "scripts",
     "require.js"
   ],
+  "author": "Electrode (http://www.electrode.io/)",
+  "contributors": [
+    "Joel Chen <xchen@walmartlabs.com>"
+  ],
   "peerDependencies": {
     "electrode-archetype-react-app": "^6.0.0"
   },
