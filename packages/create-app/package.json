@@ -1,0 +1,40 @@
+{
+  "name": "@xarc/create-app",
+  "version": "0.0.2",
+  "description": "Create react.js/node.js webapp using the Electrode Platform",
+  "main": "index.js",
+  "scripts": {
+    "prepublishOnly": "webpack"
+  },
+  "bin": {
+    "create-app": "bin/create-app.js"
+  },
+  "keywords": [
+    "electrode",
+    "react",
+    "node.js",
+    "webapp"
+  ],
+  "files": [
+    "bin",
+    "lib",
+    "template",
+    "dist"
+  ],
+  "author": "Electrode (http://www.electrode.io/)",
+  "contributors": [
+    "Joel Chen <xchen@walmartlabs.com>"
+  ],
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "babel-loader": "^8.0.6",
+    "lodash": "^4.17.15",
+    "shcmd": "^0.7.9",
+    "webpack": "^4.41.0",
+    "webpack-bundle-analyzer": "^3.5.2",
+    "webpack-cli": "^3.3.9",
+    "xclap": "^0.2.37"
+  }
+}
