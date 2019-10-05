@@ -1178,15 +1178,20 @@ Individual .babelrc files were generated for you in src/client and src/server
         }
       },
       ".jest.test-frontend-cov"() {
-        const testDir = ["_test_", "__test__", "__tests__"].find(x => shell.test("-d", x));
+        const dirs = ["_test_", "_tests_", "__test__", "__tests__"];
+        const testDir = dirs.find(x => shell.test("-d", x));
         let runJest = testDir;
         if (!runJest) {
-          runJest =
-            scanDir.sync({
-              dir: Path.resolve(AppMode.src.dir),
-              filterExt: [".js", ".jsx", ".ts", ".tsx"],
-              filter: x => x.indexOf(".spec.") > 0 || x.indexOf(".test.") > 0
-            }).length > 0;
+          const scanned = scanDir.sync({
+            dir: Path.resolve(AppMode.src.dir),
+            grouping: true,
+            includeDir: true,
+            filterDir: d => (dirs.indexOf(d) >= 0 ? "dirs" : "otherDirs"),
+            filterExt: [".js", ".jsx", ".ts", ".tsx"],
+            filter: x => x.indexOf(".spec.") > 0 || x.indexOf(".test.") > 0
+          });
+
+          runJest = Boolean(scanned.dirs || scanned.files.length > 0);
         }
 
         if (!runJest) {
