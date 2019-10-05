@@ -7,19 +7,20 @@ const config = {};
 
 const splitMap = {};
 
-if (AppMode.hasSubApps) {
-  function hashChunks(mod, chunks, key) {
-    const chunkNames = chunks.map(c => c.name).sort();
-    const id = `${key}~${chunkNames.join("~")}`;
-    let digest = splitMap[id];
-    if (!digest) {
-      const hash = Crypto.createHash("md5");
-      hash.update(id);
-      digest = hash.digest("hex");
-      splitMap[id] = digest;
-    }
-    return `${key}~${digest}`;
+function hashChunks(mod, chunks, key) {
+  const chunkNames = chunks.map(c => c.name).sort();
+  const id = `${key}~${chunkNames.join("~")}`;
+  let digest = splitMap[id];
+  if (!digest) {
+    const hash = Crypto.createHash("md5");
+    hash.update(id);
+    digest = hash.digest("hex");
+    splitMap[id] = digest;
   }
+  return `${key}~${digest}`;
+}
+
+if (AppMode.hasSubApps) {
   // use webpack splitChunks optimization to automatically put modules
   // shared by subapps into common bundles.
   // The common bundles will be determined by the splitChunks parameters.
