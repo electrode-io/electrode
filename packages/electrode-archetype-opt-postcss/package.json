@@ -21,6 +21,10 @@
   "files": [
     "optional-check.js"
   ],
+  "author": "Electrode (http://www.electrode.io/)",
+  "contributors": [
+    "Joel Chen <xchen@walmartlabs.com>"
+  ],
   "dependencies": {
     "babel-plugin-react-css-modules": "^3.4.2",
     "postcss-import": "^9.1.0",

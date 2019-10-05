@@ -17,6 +17,10 @@
     "coverage": "istanbul cover _mocha -- test/spec/*.js",
     "lint": "eslint \"**/**/*.js\""
   },
+  "author": "Electrode (http://www.electrode.io/)",
+  "contributors": [
+    "Joel Chen <xchen@walmartlabs.com>"
+  ],
   "files": [
     "lib"
   ],

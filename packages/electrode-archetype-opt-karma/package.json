@@ -20,6 +20,10 @@
     "lib",
     "optional-check.js"
   ],
+  "author": "Electrode (http://www.electrode.io/)",
+  "contributors": [
+    "Joel Chen <xchen@walmartlabs.com>"
+  ],
   "dependencies": {
     "babel-plugin-istanbul": "^5.1.0",
     "karma": "^3.1.1",
