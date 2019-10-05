@@ -27,6 +27,7 @@ async function create() {
     console.log("bye");
     return;
   }
+
   const srcDir = Path.join(__dirname, "../template");
 
   sortDeps(pkg);
@@ -37,6 +38,9 @@ async function create() {
   shcmd.cp("-R", Path.join(srcDir, "src"), process.cwd());
   shcmd.cp("-R", Path.join(srcDir, "static"), process.cwd());
   shcmd.cp("-R", Path.join(srcDir, "_gitignore"), Path.resolve(".gitignore"));
+  shcmd.cp("-R", Path.join(srcDir, "README.md"), Path.resolve("README.md"));
+
+  console.log("created react/node webapp - please check README.md for info.");
 }
 
 create();
