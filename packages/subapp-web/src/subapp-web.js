@@ -20,9 +20,9 @@ function startSubAppOnLoad(options) {
   }
 }
 
-function markBundlesLoaded(names) {
-  [].concat(names).forEach(x => {
-    window.webSubApps._bundles[x] = true;
+function markBundlesLoaded(ids) {
+  [].concat(ids).forEach(id => {
+    window.webSubApps._bundles[id] = true;
   });
 }
 
@@ -48,22 +48,25 @@ function loadSubAppBundles(names, done) {
   const loaded = [];
 
   toLoad.forEach(name => {
-    const bundle = ba.byChunkName[name];
-    wsa._bundles[name] = null; // mark as loading
-    window._lload(`${ba.basePath}${bundle}`, {
-      callback: err => {
-        if (err) {
-          console.error(`load bundle ${name} failed`, err);
-        } else {
-          console.log(`loaded bundle for ${name} - ${bundle}`);
-          wsa._bundles[name] = true;
+    const entries = ba.entryPoints[name];
+    entries.forEach(id => {
+      const bundle = ba.jsChunksById[id];
+      wsa._bundles[id] = null; // mark as loading
+      window._lload(`${ba.basePath}${bundle}`, {
+        callback: err => {
+          if (err) {
+            console.error(`load bundle ${name} (id: ${id}) failed`, err);
+          } else {
+            console.log(`loaded bundle for ${name} (id: ${id}) - ${bundle}`);
+            wsa._bundles[id] = true;
+          }
+          loaded.push(id);
+          if (loaded.length === toLoad.length) {
+            console.log("all bundles loaded", toLoad);
+            done();
+          }
         }
-        loaded.push(name);
-        if (loaded.length === toLoad.length) {
-          console.log("all bundles loaded", toLoad);
-          done();
-        }
-      }
+      });
     });
   });
 }
