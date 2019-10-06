@@ -13,7 +13,7 @@ let CDN_JS_BUNDLES;
 const utils = {
   getVendorBundles: assets => {
     const chunkNames = Object.keys(assets.byChunkName)
-      .filter(x => x.startsWith("vendors"))
+      .filter(x => x.startsWith("vendors~") || x.startsWith("shared~"))
       .map(x => {
         const a = assets.byChunkName[x];
         if (Array.isArray(a)) {

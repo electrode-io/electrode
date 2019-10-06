@@ -7,6 +7,19 @@ const config = {};
 
 const splitMap = {};
 
+function hashChunks(mod, chunks, key) {
+  const chunkNames = chunks.map(c => c.name).sort();
+  const id = `${key}~${chunkNames.join("~")}`;
+  let digest = splitMap[id];
+  if (!digest) {
+    const hash = Crypto.createHash("md5");
+    hash.update(id);
+    digest = hash.digest("hex");
+    splitMap[id] = digest;
+  }
+  return `${key}~${digest}`;
+}
+
 if (AppMode.hasSubApps) {
   // use webpack splitChunks optimization to automatically put modules
   // shared by subapps into common bundles.
@@ -20,18 +33,10 @@ if (AppMode.hasSubApps) {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
           // https://webpack.js.org/plugins/split-chunks-plugin/#splitchunksname
-          name(mod, chunks, key) {
-            const chunkNames = chunks.map(c => c.name).sort();
-            const id = `${key}~${chunkNames.join("~")}`;
-            let digest = splitMap[id];
-            if (!digest) {
-              const hash = Crypto.createHash("md5");
-              hash.update(id);
-              digest = hash.digest("hex");
-              splitMap[id] = digest;
-            }
-            return `${key}~${digest}`;
-          }
+          name: hashChunks
+        },
+        shared: {
+          name: hashChunks
         }
       }
       // minSize: 1 * 1024,
