@@ -54,6 +54,17 @@ const checkGitClean = () => {
     .catch(() => (gitClean = false));
 };
 
+const removeNpmScope = name => {
+  if (name.startsWith("@")) {
+    const parts = name.split("/");
+    if (parts.length === 2) {
+      return parts[1];
+    }
+  }
+
+  return name;
+};
+
 const processLernaUpdated = output => {
   // search for last commit that's Publish using lerna
   const lernaInfo = output.stderr.split("\n");
@@ -135,10 +146,11 @@ const collateCommitsPackages = commits => {
 
           if (parts[0] === "packages" || parts[0] === "samples") {
             if (Fs.existsSync(Path.resolve("packages", parts[1]))) {
-              if (parts[0] === "packages" && collated.realPackages.indexOf(parts[1]) < 0) {
-                collated.realPackages.push(parts[1]);
+              const Pkg = require(Path.resolve("packages", parts[1], "package.json"));
+              if (parts[0] === "packages" && collated.realPackages.indexOf(Pkg.name) < 0) {
+                collated.realPackages.push(Pkg.name);
               }
-              add(parts[0], mapPkg(parts[1]));
+              add(parts[0], mapPkg(Pkg.name));
             }
           } else if (parts.length > 1) {
             add("others", parts[0]);
@@ -186,7 +198,8 @@ const determinePackageVersions = collated => {
   const types = ["patch", "minor", "major"];
 
   const findVersion = (name, packages) => {
-    const Pkg = require(Path.resolve("packages", name, "package.json"));
+    const pkgDir = removeNpmScope(name);
+    const Pkg = require(Path.resolve("packages", pkgDir, "package.json"));
     const mappedName = mapPkg(name);
     packages[mappedName] = packages[mappedName] || {};
     const msgs = packages[mappedName].msgs || [];
@@ -291,7 +304,7 @@ const updateChangelog = collated => {
     keys.sort().forEach(p => {
       const pkg = items[p];
       if (pkg.msgs.length === 0) return;
-      output.push("-   `" + prefix + p + "`\n\n");
+      output.push("-   `" + prefix + removeNpmScope(p) + "`\n\n");
       pkg.msgs
         .slice()
         .reverse()
