@@ -1,4 +1,4 @@
-const number = (store, action) => {
+const number = (store = { value: 0 }, action) => {
   if (action.type === "INC_NUMBER") {
     return {
       value: store.value + 1
@@ -9,7 +9,7 @@ const number = (store, action) => {
     };
   }
 
-  return store || { value: 0 };
+  return store;
 };
 
 export default number;
