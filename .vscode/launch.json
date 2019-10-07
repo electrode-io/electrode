@@ -15,9 +15,9 @@
     {
       "type": "node",
       "request": "attach",
-      "name": "Attach to Remote 127.0.0.1:9229",
+      "name": "Attach to Remote 127.0.0.1:3000",
       "address": "127.0.0.1",
-      "port": 9229,
+      "port": 3000,
       "localRoot": "${workspaceFolder}",
       "remoteRoot": "${workspaceFolder}"
     },

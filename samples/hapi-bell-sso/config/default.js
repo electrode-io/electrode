@@ -66,8 +66,12 @@ module.exports = {
         }
       }
     }, //
-    "electrode-cookies/hapi-plugin": {}
-    // 
+    "electrode-cookies/hapi-plugin": {},
+    //
+    "@hapi/bell": {},
+    "server/plugins/bell": {
+      module: "./{{env.APP_SRC_DIR}}/server/plugins/bell"
+    }
   },
   connections: {
     default: {
