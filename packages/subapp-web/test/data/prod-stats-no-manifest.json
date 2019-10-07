@@ -1,0 +1,272 @@
+{
+  "assetsByChunkName": {
+    "vendors~280289005828299c685d173f73011e79": [
+      "81a2781f3c286bcb2fa9.vendors~280289005828299c685d173f73011e79.js",
+      "../map/81a2781f3c286bcb2fa9.vendors~280289005828299c685d173f73011e79.js.map"
+    ],
+    "vendors~df46bbfde33def881518e43ea8cff946": [
+      "81a2781f3c286bcb2fa9.vendors~df46bbfde33def881518e43ea8cff946.js",
+      "../map/81a2781f3c286bcb2fa9.vendors~df46bbfde33def881518e43ea8cff946.js.map"
+    ],
+    "bottom": ["bottom.bundle.js", "../map/bottom.bundle.js.map"],
+    "deal": ["deal.bundle.js", "../map/deal.bundle.js.map"],
+    "extras": ["extras.bundle.js", "../map/extras.bundle.js.map"],
+    "footer": ["footer.bundle.js", "../map/footer.bundle.js.map"],
+    "header": ["header.bundle.js", "../map/header.bundle.js.map"],
+    "mainbody": ["mainbody.bundle.js", "../map/mainbody.bundle.js.map"],
+    "suspensedemo": ["suspensedemo.bundle.js", "../map/suspensedemo.bundle.js.map"]
+  },
+  "assets": [
+    {
+      "name": "../map/81a2781f3c286bcb2fa9.vendors~280289005828299c685d173f73011e79.js.map",
+      "size": 377348,
+      "chunks": [0],
+      "chunkNames": ["vendors~280289005828299c685d173f73011e79"],
+      "info": {
+        "development": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "../map/81a2781f3c286bcb2fa9.vendors~df46bbfde33def881518e43ea8cff946.js.map",
+      "size": 101239,
+      "chunks": [1],
+      "chunkNames": ["vendors~df46bbfde33def881518e43ea8cff946"],
+      "info": {
+        "development": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "../map/bottom.bundle.js.map",
+      "size": 71290,
+      "chunks": [2],
+      "chunkNames": ["bottom"],
+      "info": {
+        "development": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "../map/deal.bundle.js.map",
+      "size": 8701,
+      "chunks": [3],
+      "chunkNames": ["deal"],
+      "info": {
+        "development": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "../map/extras.bundle.js.map",
+      "size": 9574,
+      "chunks": [4],
+      "chunkNames": ["extras"],
+      "info": {
+        "development": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "../map/footer.bundle.js.map",
+      "size": 9937,
+      "chunks": [5],
+      "chunkNames": ["footer"],
+      "info": {
+        "development": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "../map/header.bundle.js.map",
+      "size": 8868,
+      "chunks": [6],
+      "chunkNames": ["header"],
+      "info": {
+        "development": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "../map/mainbody.bundle.js.map",
+      "size": 126685,
+      "chunks": [7],
+      "chunkNames": ["mainbody"],
+      "info": {
+        "development": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "../map/suspensedemo.bundle.js.map",
+      "size": 10978,
+      "chunks": [8],
+      "chunkNames": ["suspensedemo"],
+      "info": {
+        "development": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "81a2781f3c286bcb2fa9.vendors~280289005828299c685d173f73011e79.js",
+      "size": 144200,
+      "chunks": [0],
+      "chunkNames": ["vendors~280289005828299c685d173f73011e79"],
+      "info": {
+        "immutable": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "81a2781f3c286bcb2fa9.vendors~df46bbfde33def881518e43ea8cff946.js",
+      "size": 21560,
+      "chunks": [1],
+      "chunkNames": ["vendors~df46bbfde33def881518e43ea8cff946"],
+      "info": {
+        "immutable": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "bottom.bundle.js",
+      "size": 13577,
+      "chunks": [2],
+      "chunkNames": ["bottom"],
+      "info": {},
+      "emitted": false
+    },
+    {
+      "name": "deal.bundle.js",
+      "size": 1768,
+      "chunks": [3],
+      "chunkNames": ["deal"],
+      "info": {},
+      "emitted": false
+    },
+    {
+      "name": "extras.bundle.js",
+      "size": 2104,
+      "chunks": [4],
+      "chunkNames": ["extras"],
+      "info": {},
+      "emitted": false
+    },
+    {
+      "name": "footer.bundle.js",
+      "size": 2291,
+      "chunks": [5],
+      "chunkNames": ["footer"],
+      "info": {},
+      "emitted": false
+    },
+    {
+      "name": "header.bundle.js",
+      "size": 1862,
+      "chunks": [6],
+      "chunkNames": ["header"],
+      "info": {},
+      "emitted": false
+    },
+    {
+      "name": "mainbody.bundle.js",
+      "size": 24510,
+      "chunks": [7],
+      "chunkNames": ["mainbody"],
+      "info": {},
+      "emitted": false
+    },
+    {
+      "name": "suspensedemo.bundle.js",
+      "size": 2759,
+      "chunks": [8],
+      "chunkNames": ["suspensedemo"],
+      "info": {},
+      "emitted": false
+    }
+  ],
+  "entrypoints": {
+    "mainbody": [0, 1, 7],
+    "bottom": [0, 1, 2],
+    "header": [0, 6],
+    "footer": [0, 1, 5],
+    "extras": [0, 1, 4],
+    "suspensedemo": [0, 8],
+    "deal": [0, 3]
+  },
+  "chunks": [
+    {
+      "id": 0,
+      "hash": "4ac7e783f5a5335167a9",
+      "names": ["vendors~280289005828299c685d173f73011e79"],
+      "entry": false,
+      "initial": true,
+      "rendered": true,
+      "reason": "split chunk (cache group: vendors) (name: vendors~280289005828299c685d173f73011e79)"
+    },
+    {
+      "id": 1,
+      "hash": "80a3ec0cc7029185c1b4",
+      "names": ["vendors~df46bbfde33def881518e43ea8cff946"],
+      "entry": false,
+      "initial": true,
+      "rendered": true,
+      "reason": "split chunk (cache group: vendors) (name: vendors~df46bbfde33def881518e43ea8cff946)"
+    },
+    {
+      "id": 2,
+      "hash": "dff9300d33d0bcbc6f4e",
+      "names": ["bottom"],
+      "entry": true,
+      "initial": true,
+      "rendered": true
+    },
+    {
+      "id": 3,
+      "hash": "e5ef51a63f39919367a6",
+      "names": ["deal"],
+      "entry": true,
+      "initial": true,
+      "rendered": true
+    },
+    {
+      "id": 4,
+      "hash": "60a75cbfa4c94ca0b4ff",
+      "names": ["extras"],
+      "entry": true,
+      "initial": true,
+      "rendered": true
+    },
+    {
+      "id": 5,
+      "hash": "585b545d1bbbedaaa7eb",
+      "names": ["footer"],
+      "entry": true,
+      "initial": true,
+      "rendered": true
+    },
+    {
+      "id": 6,
+      "hash": "b6e19e01795c4c106a77",
+      "names": ["header"],
+      "entry": true,
+      "initial": true,
+      "rendered": true
+    },
+    {
+      "id": 7,
+      "hash": "3e30c5e305a54bf6a2a0",
+      "names": ["mainbody"],
+      "entry": true,
+      "initial": true,
+      "rendered": true
+    },
+    {
+      "id": 8,
+      "hash": "210cf1990e88de13bae6",
+      "names": ["suspensedemo"],
+      "entry": true,
+      "initial": true,
+      "rendered": true
+    }
+  ]
+}

@@ -11,22 +11,6 @@ let CDN_ASSETS;
 let CDN_JS_BUNDLES;
 
 const utils = {
-  getVendorBundles: assets => {
-    const chunkNames = Object.keys(assets.byChunkName)
-      .filter(x => x.startsWith("vendors~") || x.startsWith("shared~"))
-      .map(x => {
-        const a = assets.byChunkName[x];
-        if (Array.isArray(a)) {
-          return a.find(e => e.endsWith(".js"));
-        } else {
-          return a;
-        }
-      });
-    return assets.js.filter(a => {
-      return chunkNames.indexOf(a.name) >= 0;
-    });
-  },
-
   getSubAppBundle: (name, assets) => {
     const bundleName = `${name.toLowerCase()}`;
     const bundleAsset = assets.js.find(j => j.chunkNames[0] === bundleName);
@@ -68,7 +52,7 @@ const utils = {
     }
   */
 
-  mapCdnAssets(bundlesByName, basePath = "", assetsFile = "config/assets.json") {
+  mapCdnAssets(bundlesById, basePath = "", assetsFile = "config/assets.json") {
     if (!CDN_ASSETS) {
       const assetsFp = Path.resolve(assetsFile);
       try {
@@ -79,19 +63,18 @@ const utils = {
     }
 
     const cdnBundles = {};
-    const bundleNames = Object.keys(bundlesByName);
 
-    for (const name of bundleNames) {
-      const bundleFile = bundlesByName[name];
+    for (const id in bundlesById) {
+      const bundleFile = bundlesById[id];
       for (const mapName in CDN_ASSETS) {
         if (mapName.endsWith(bundleFile)) {
-          cdnBundles[name] = CDN_ASSETS[mapName];
+          cdnBundles[id] = CDN_ASSETS[mapName];
           break;
         }
       }
 
-      if (!cdnBundles[name]) {
-        cdnBundles[name] = basePath.concat(bundlesByName[name]);
+      if (!cdnBundles[id]) {
+        cdnBundles[id] = basePath.concat(bundleFile);
       }
     }
 
@@ -107,16 +90,54 @@ const utils = {
     // pack up entrypoints data from stats
     //
 
-    const { byChunkName } = assets;
-
-    const jsBundleByChunkName = Object.entries(byChunkName).reduce((a, [name, bundle]) => {
-      a[name] = Array.isArray(bundle) ? bundle.find(x => x.endsWith(".js")) : bundle;
-      return a;
-    }, {});
+    const { chunksById } = assets;
 
     const bundleBase = utils.getBundleBase(routeOptions);
 
-    return (CDN_JS_BUNDLES = utils.mapCdnAssets(jsBundleByChunkName, bundleBase));
+    return (CDN_JS_BUNDLES = utils.mapCdnAssets(chunksById.js, bundleBase));
+  },
+
+  getChunksById(stats) {
+    //
+    // generate a byChunkId object so we can map entry points chunks like this:
+    // id = entrypoints.<entryName>[0,1,2...]
+    // .js asset URL = byChunkId.js[id], .css asset URL = byChunkId.css[id],
+    // .map asset URL = byChunkId.map[id]
+    //
+    const chunksById = stats.chunks.reduce((a, chunk) => {
+      a[chunk.id] = chunk;
+      return a;
+    }, {});
+
+    const byChunkId = {};
+    for (const ep in stats.entrypoints) {
+      for (const id of stats.entrypoints[ep]) {
+        const names = chunksById[id].names;
+        // only expecting one file per chunk for now
+        assert(
+          names.length === 1,
+          `stats.chunks[${id}].names length ${names.length} must be 1: ${names.join(", ")}`
+        );
+
+        if (id !== names[0]) {
+          _.set(byChunkId, ["_names_", id], names[0]);
+        }
+
+        const assets = stats.assetsByChunkName[names[0]];
+
+        // now assign the assets into byChunkId according to extensions
+        []
+          .concat(assets)
+          .filter(x => x)
+          .forEach(x => {
+            const ext = Path.extname(x).substring(1);
+            assert(ext, `asset ${x} doesn't have extension`);
+            _.set(byChunkId, [ext, id], x);
+          });
+      }
+    }
+
+    return byChunkId;
   },
 
   /**
@@ -137,26 +158,24 @@ const utils = {
     }
 
     const assets = {};
-    const manifestAsset = _.find(stats.assets, asset => {
-      return asset.name.endsWith("manifest.json");
-    });
-
-    const jsAssets = stats.assets.filter(asset => {
-      return asset.name.endsWith(".js");
-    });
-
-    const cssAssets = stats.assets.filter(asset => {
-      return asset.name.endsWith(".css");
-    });
-
+    const manifestAsset = _.find(stats.assets, asset => asset.name.endsWith("manifest.json"));
     if (manifestAsset) {
       assets.manifest = manifestAsset.name;
     }
 
-    assets.js = jsAssets;
-    assets.css = cssAssets;
-    assets.byChunkName = stats.assetsByChunkName;
+    //
+    // How we determine the assets needed for each entry point:
+    //
+    // entryPoints:[id] => chunks.id:names[0] => assetsByChunkName[name] => bundle URL
+    // Note: there are some redundant info in stats.  For example, stats.assets.chunks is
+    // an array of chunk IDs, but at this point assuming the chunks array has length 1 only.
+    //
+
+    assets.chunksById = utils.getChunksById(stats);
+    assets.js = stats.assets.filter(asset => asset.name.endsWith(".js"));
+    assets.css = stats.assets.filter(asset => asset.name.endsWith(".css"));
     assets.entryPoints = stats.entrypoints;
+    assets.chunks = stats.chunks;
 
     return { assets, stats };
   }
