@@ -7,7 +7,7 @@ const Bell = require("@hapi/bell");
 const plugin = {
   pkg: {
     name: "@hapi/bell",
-    version: "9.6.0"
+    version: "11.1.0"
   }
 };
 
@@ -28,20 +28,16 @@ plugin.register = function(server) {
         strategy: "twitter",
         mode: "try"
       },
-      handler: function(request, h) {
-        if (!request.auth.isAuthenticated) {
-          return `Authentication failed due to: ${request.auth.error.message}`;
+      handler: (request, reply) => {
+        try {
+          console.log(request.auth.credentials.profile);
+          // if (request.auth.credentials) {
+          //   electrodeCookies.set("SSO_CRED", request.auth.credentials.profile, { request });
+          // }
+          return "<pre>" + JSON.stringify(request.auth.credentials.profile, null, 4) + "</pre>";
+        } catch (err) {
+          return `Authentication failed due to: ${request.auth.error}`;
         }
-        // const profile = request.auth.credentials.profile;
-
-        // request.cookieAuth.set({
-        //   twitterId: profile.id,
-        //   username: profile.username,
-        //   displayName: profile.displayName
-        // });
-
-        // return reply.redirect("/");
-        return "<pre>" + JSON.stringify(request.auth.credentials, null, 4) + "</pre>";
       }
     }
   });
