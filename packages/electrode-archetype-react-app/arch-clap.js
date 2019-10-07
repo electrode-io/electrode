@@ -1210,7 +1210,7 @@ Individual .babelrc files were generated for you in src/client and src/server
           const jestOpts = this.argv.slice(1).filter(x => x !== "--inspect-brk");
 
           return mkCmd(
-            `~$node`,
+            `~(tty)$node`,
             brk,
             jestBinJs,
             jestOpts.join(" "),
