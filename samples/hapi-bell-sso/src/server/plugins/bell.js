@@ -1,5 +1,6 @@
 "use strict";
 
+const electrodeCookies = require("electrode-cookies");
 const Bell = require("@hapi/bell");
 
 /* eslint-env es6 */
@@ -32,7 +33,8 @@ plugin.register = function(server) {
         try {
           console.log(request.auth.credentials.profile);
           // if (request.auth.credentials) {
-          //   electrodeCookies.set("SSO_CRED", request.auth.credentials.profile, { request });
+          //   electrodeCookies.set("SSO_CRED", request.auth.credentials, { request });
+          //   console.log(electrodeCookies);
           // }
           return "<pre>" + JSON.stringify(request.auth.credentials.profile, null, 4) + "</pre>";
         } catch (err) {

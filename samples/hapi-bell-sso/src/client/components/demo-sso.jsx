@@ -3,6 +3,7 @@ import { Nav } from "./nav";
 import { connect } from "react-redux";
 import custom from "../styles/custom.css"; // eslint-disable-line no-unused-vars
 import demoStyle from "../styles/demo2.css"; // eslint-disable-line no-unused-vars
+import electrodeCookies from "electrode-cookies";
 
 class DemoSSO extends Component {
   constructor(props) {
@@ -10,6 +11,9 @@ class DemoSSO extends Component {
   }
 
   render() {
+    const ssoCred = electrodeCookies.get("SSO_CRED");
+    const obj = JSON.parse(ssoCred);
+    console.log(obj);
     return (
       <div styleName="custom.container">
         <Nav {...this.props} />
@@ -17,6 +21,9 @@ class DemoSSO extends Component {
           <h2>SSO Demo</h2>
           <div styleName="demoStyle.main">
             <h2>User credentials were passed from server to client using cookies.</h2>
+            <p>Name: {obj.name}</p>
+            <p>Email: {obj.email}</p>
+            <p>Login ID: {obj.id}</p>
           </div>
         </section>
       </div>

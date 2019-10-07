@@ -5,6 +5,8 @@ import Demo1 from "./components/demo1";
 import Demo2 from "./components/demo2";
 import { withRouter } from "react-router-dom";
 import { renderRoutes } from "react-router-config";
+import DemoSso from "./components/demo-sso";
+import demoSignin from "./components/demo-signin";
 
 const Root = ({ route, children }) => {
   return (
@@ -40,6 +42,16 @@ const routes = [
         path: "/demo2",
         exact: true,
         component: Demo2
+      },
+      {
+        path: "/demosso",
+        exact: true,
+        component: DemoSso
+      },
+      {
+        path: "/demosignin",
+        exact: true,
+        component: demoSignin
       }
     ]
   }
