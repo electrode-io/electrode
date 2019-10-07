@@ -34,6 +34,9 @@ module.exports = base => {
     dependencies: {
       "electrode-archetype-react-app": "^6.5.13",
       "electrode-server": "^3.0.0",
+      "react-redux": "^7.1.1",
+      redux: "^4.0.4",
+      "subapp-redux": "^1.0.4",
       "subapp-server": "^1.1.4",
       "subapp-web": "^1.0.4"
     },
