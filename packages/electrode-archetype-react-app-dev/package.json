@@ -125,7 +125,7 @@
     "electrode-archetype-opt-eslint": "^1.0.2",
     "electrode-archetype-opt-flow": "^1.0.1",
     "electrode-archetype-opt-inferno": "^0.2.10",
-    "electrode-archetype-opt-jest": "^1.0.2",
+    "electrode-archetype-opt-jest": "^24.0.0",
     "electrode-archetype-opt-karma": "^2.0.5",
     "electrode-archetype-opt-less": "^1.0.1",
     "electrode-archetype-opt-mocha": "^1.0.2",
