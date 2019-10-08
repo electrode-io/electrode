@@ -6,9 +6,12 @@
       }
     }
   },
-  "webapp": {
-    "options": {
-      "insertTokenIds": true
+  "plugins": {
+    "webapp": {
+      "options": {
+        "insertTokenIds": true,
+        "serverSideRendering": false
+      }
     }
   }
 }

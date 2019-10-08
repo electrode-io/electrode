@@ -11,19 +11,20 @@ class DemoSSO extends Component {
   }
 
   render() {
-    const ssoCred = electrodeCookies.get("SSO_CRED");
+    const ssoCred = electrodeCookies.get("SSO_CRED", {});
     const obj = JSON.parse(ssoCred);
     console.log(obj);
+
     return (
       <div styleName="custom.container">
         <Nav {...this.props} />
         <section styleName="custom.header">
           <h2>SSO Demo</h2>
           <div styleName="demoStyle.main">
-            <h2>User credentials were passed from server to client using cookies.</h2>
-            <p>Name: {obj.name}</p>
-            <p>Email: {obj.email}</p>
-            <p>Login ID: {obj.id}</p>
+            <h2>User credentials were passed from server to client using cookiessss.</h2>
+            <h4>Name: {obj.profile.displayName}</h4>
+            <h4>Username: {obj.profile.username}</h4>
+            <h4>ID: {obj.profile.id}</h4>
           </div>
         </section>
       </div>

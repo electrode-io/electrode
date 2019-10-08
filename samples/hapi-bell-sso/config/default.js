@@ -57,6 +57,7 @@ module.exports = {
       options: {
         pageTitle: "hapi-bell-sso",
         insertTokenIds: false,
+        serverSideRendering: false,
         paths: {
           "/{args*}": {
             content: {

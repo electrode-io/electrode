@@ -21,6 +21,16 @@ plugin.register = function(server) {
     clientSecret: "ytwJBGJWigTXUfseSb6koQYFgGxKrsZLh1Jj1K1qEkcdStUG2F" // Set client secret
   });
 
+  server.auth.strategy("github", "bell", {
+    provider: "github",
+    password: "cookie_encryption_password_secure",
+    isSecure: false, // For testing or in environments secured via other means
+    clientId: "854560a4dee2e2aac9bf",
+    clientSecret: "6820e46efb60f912afb9ad17459ff22b0cbc9010",
+    location: "https://example.com",
+    scope: []
+  });
+
   server.route({
     method: ["GET", "POST"],
     path: "/auth/twitter/callback",
@@ -32,11 +42,12 @@ plugin.register = function(server) {
       handler: (request, reply) => {
         try {
           console.log(request.auth.credentials.profile);
-          // if (request.auth.credentials) {
-          //   electrodeCookies.set("SSO_CRED", request.auth.credentials, { request });
-          //   console.log(electrodeCookies);
-          // }
-          return "<pre>" + JSON.stringify(request.auth.credentials.profile, null, 4) + "</pre>";
+          if (request.auth.credentials) {
+            electrodeCookies.set("SSO_CRED", request.auth.credentials, { request });
+            // console.log(electrodeCookies);
+          }
+          // return "<pre>" + JSON.stringify(request.auth.credentials.profile, null, 4) + "</pre>";
+          return reply.redirect("/demosso");
         } catch (err) {
           return `Authentication failed due to: ${request.auth.error}`;
         }
@@ -45,17 +56,20 @@ plugin.register = function(server) {
   });
 
   server.route({
-    method: "GET",
-    path: "/",
-    config: {
-      // auth: {
-      //   strategy: "session", //<-- require a session for this, so we have access to the twitter profile
-      //   mode: "try"
-      // },
-      handler: function(request, reply) {
-        // Return a message using the information from the session
-        // return reply("Hello, " + request.auth.credentials.displayName + "!");
-        return "Congrats you are logged in to Twitter!";
+    method: ["GET", "POST"],
+    path: "/auth/github/callback",
+    options: {
+      auth: {
+        strategy: "github",
+        mode: "try"
+      },
+      handler: (request, reply) => {
+        try {
+          console.log(request.auth.credentials.profile);
+          return "<pre>" + JSON.stringify(request.auth.credentials.profile, null, 4) + "</pre>";
+        } catch (err) {
+          return `Authentication failed due to: ${request.auth.error}`;
+        }
       }
     }
   });
