@@ -27,7 +27,7 @@ function searchUserCustomConfig(options) {
         break;
     }
   }
-  
+
   const customLocations = [
     {
       dir: cwd,
