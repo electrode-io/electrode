@@ -21,7 +21,7 @@ class DemoSSO extends Component {
         <section styleName="custom.header">
           <h2>SSO Demo</h2>
           <div styleName="demoStyle.main">
-            <h2>User credentials were passed from server to client using cookiessss.</h2>
+            <h2>User credentials were passed from server to client using cookies.</h2>
             <h4>Name: {obj.profile.displayName}</h4>
             <h4>Username: {obj.profile.username}</h4>
             <h4>ID: {obj.profile.id}</h4>
