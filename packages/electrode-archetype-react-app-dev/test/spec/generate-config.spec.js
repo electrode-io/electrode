@@ -21,21 +21,17 @@ describe("generate-config", function() {
   });
 
   describe("generateConfig", () => {
-    it("If the configFilename and webpack.config.js exist, prioritize the configFilename", () => {
+    it("If the configFilename is development.js and only webpack.config.development.js exists, fall back to archetype webpack", () => {
       const { generateConfig } = require(moduleName);
-      const configFilename = "production.js";
-      const defaultFilename = "webpack.config.js";
-
-      const configWebpackPath = Path.join(process.cwd(), configFilename);
-      const configWebpackContents = {test: 1};
-      mockRequire(configWebpackPath, configWebpackContents);
+      const configFilename = "development.js";
+      const defaultFilename = "webpack.config.development.js";
 
       const defaultWebpackPath = Path.join(process.cwd(), defaultFilename);
-      const defaultWebpackContents = {test: 2};
+      const defaultWebpackContents = {test: 1};
       mockRequire(defaultWebpackPath, defaultWebpackContents);
 
       const archWebpackPath = Path.join(Path.resolve("archetype/config/webpack"), configFilename);
-      const archWebpackContents = {test: 3};
+      const archWebpackContents = {test: 2};
       mockRequire(archWebpackPath, archWebpackContents);
 
       const config = generateConfig({
@@ -51,27 +47,23 @@ describe("generate-config", function() {
         configFilename
       }, true);
 
-      expect(config).to.deep.equal(configWebpackContents);
+      expect(config).to.deep.equal(archWebpackContents);
 
-      mockRequire.stop(configWebpackPath);
       mockRequire.stop(defaultWebpackPath);
       mockRequire.stop(archWebpackPath);
     });
 
-    it("If only the root webpack.config.js and arch/configFilename exist, prioritize the webpack.config", () => {
+    it("If the configFilename is development.js and only webpack.config.dev.js exists, use webpack.config.dev.js", () => {
       const { generateConfig } = require(moduleName);
-      const configFilename = "production.js";
-      const defaultFilename = "webpack.config.js";
-
-      const configWebpackPath = Path.join(process.cwd(), configFilename);
-      mockRequire(configWebpackPath, undefined);
+      const configFilename = "development.js";
+      const defaultFilename = "webpack.config.dev.js";
 
       const defaultWebpackPath = Path.join(process.cwd(), defaultFilename);
-      const defaultWebpackContents = {test: 2};
+      const defaultWebpackContents = {test: 3};
       mockRequire(defaultWebpackPath, defaultWebpackContents);
 
       const archWebpackPath = Path.join(Path.resolve("archetype/config/webpack"), configFilename);
-      const archWebpackContents = {test: 3};
+      const archWebpackContents = {test: 4};
       mockRequire(archWebpackPath, archWebpackContents);
 
       const config = generateConfig({
@@ -89,24 +81,20 @@ describe("generate-config", function() {
 
       expect(config).to.deep.equal(defaultWebpackContents);
 
-      mockRequire.stop(configWebpackPath);
       mockRequire.stop(defaultWebpackPath);
       mockRequire.stop(archWebpackPath);
     });
 
-    it("If only the arch/configFilename exists, use that config", () => {
+    it("If the configName is coverage.js and only coverage.js exists, fall back to archetype webpack", () => {
       const { generateConfig } = require(moduleName);
-      const configFilename = "production.js";
-      const defaultFilename = "webpack.config.js";
+      const configFilename = "coverage.js";
 
       const configWebpackPath = Path.join(process.cwd(), configFilename);
-      mockRequire(configWebpackPath, undefined);
-
-      const defaultWebpackPath = Path.join(process.cwd(), defaultFilename);
-      mockRequire(defaultWebpackPath, undefined);
+      const configWebpackContents = {test: 5};
+      mockRequire(configWebpackPath, configWebpackContents);
 
       const archWebpackPath = Path.join(Path.resolve("archetype/config/webpack"), configFilename);
-      const archWebpackContents = {test: 3};
+      const archWebpackContents = {test: 6};
       mockRequire(archWebpackPath, archWebpackContents);
 
       const config = generateConfig({
@@ -125,23 +113,139 @@ describe("generate-config", function() {
       expect(config).to.deep.equal(archWebpackContents);
 
       mockRequire.stop(configWebpackPath);
-      mockRequire.stop(defaultWebpackPath);
+      mockRequire.stop(archWebpackPath);
+    });
+
+    it("If the configName is coverage.js and only webpack.config.coverage.js exists, use webpack.config.coverage.js", () => {
+      const { generateConfig } = require(moduleName);
+      const configFilename = "coverage.js";
+      const defaultFilename = "webpack.config.coverage.js";
+
+      const configWebpackPath = Path.join(process.cwd(), defaultFilename);
+      const configWebpackContents = {test: 7};
+      mockRequire(configWebpackPath, configWebpackContents);
+
+      const archWebpackPath = Path.join(Path.resolve("archetype/config/webpack"), configFilename);
+      const archWebpackContents = {test: 8};
+      mockRequire(archWebpackPath, archWebpackContents);
+
+      const config = generateConfig({
+        profiles: {
+          _base: {
+            partials: {}
+          },
+          _production: {
+            partials: {}
+          }
+        },
+        profileNames: [ "_base", "_production" ],
+        configFilename
+      }, true);
+
+      expect(config).to.deep.equal(configWebpackContents);
+
+      mockRequire.stop(configWebpackPath);
+      mockRequire.stop(archWebpackPath);
+    });
+
+    it("If the configName is production.js and only production.js exists, fall back to archetype webpack", () => {
+      const { generateConfig } = require(moduleName);
+      const configFilename = "production.js";
+
+      const configWebpackPath = Path.join(process.cwd(), configFilename);
+      const configWebpackContents = {test: 9};
+      mockRequire(configWebpackPath, configWebpackContents);
+
+      const archWebpackPath = Path.join(Path.resolve("archetype/config/webpack"), configFilename);
+      const archWebpackContents = {test: 10};
+      mockRequire(archWebpackPath, archWebpackContents);
+
+      const config = generateConfig({
+        profiles: {
+          _base: {
+            partials: {}
+          },
+          _production: {
+            partials: {}
+          }
+        },
+        profileNames: [ "_base", "_production" ],
+        configFilename
+      }, true);
+
+      expect(config).to.deep.equal(archWebpackContents);
+
+      mockRequire.stop(configWebpackPath);
+      mockRequire.stop(archWebpackPath);
+    });
+
+    it("If the configName is production.js and only webpack.config.production.js exists, fall back to archetype webpack", () => {
+      const { generateConfig } = require(moduleName);
+      const configFilename = "production.js";
+      const defaultFilename = "webpack.config.production.js";
+
+      const configWebpackPath = Path.join(process.cwd(), defaultFilename);
+      const configWebpackContents = {test: 11};
+      mockRequire(configWebpackPath, configWebpackContents);
+
+      const archWebpackPath = Path.join(Path.resolve("archetype/config/webpack"), configFilename);
+      const archWebpackContents = {test: 12};
+      mockRequire(archWebpackPath, archWebpackContents);
+
+      const config = generateConfig({
+        profiles: {
+          _base: {
+            partials: {}
+          },
+          _production: {
+            partials: {}
+          }
+        },
+        profileNames: [ "_base", "_production" ],
+        configFilename
+      }, true);
+
+      expect(config).to.deep.equal(archWebpackContents);
+
+      mockRequire.stop(configWebpackPath);
+      mockRequire.stop(archWebpackPath);
+    });
+
+    it("If the configName is production.js and only webpack.config.js exists, use webpack.config.js", () => {
+      const { generateConfig } = require(moduleName);
+      const configFilename = "production.js";
+      const defaultFilename = "webpack.config.js";
+
+      const configWebpackPath = Path.join(process.cwd(), defaultFilename);
+      const configWebpackContents = {test: 13};
+      mockRequire(configWebpackPath, configWebpackContents);
+
+      const archWebpackPath = Path.join(Path.resolve("archetype/config/webpack"), configFilename);
+      const archWebpackContents = {test: 14};
+      mockRequire(archWebpackPath, archWebpackContents);
+
+      const config = generateConfig({
+        profiles: {
+          _base: {
+            partials: {}
+          },
+          _production: {
+            partials: {}
+          }
+        },
+        profileNames: [ "_base", "_production" ],
+        configFilename
+      }, true);
+
+      expect(config).to.deep.equal(configWebpackContents);
+
+      mockRequire.stop(configWebpackPath);
       mockRequire.stop(archWebpackPath);
     });
 
     it("If none of the configs are available, return an empty config", () => {
       const { generateConfig } = require(moduleName);
       const configFilename = "production.js";
-      const defaultFilename = "webpack.config.js";
-
-      const configWebpackPath = Path.join(process.cwd(), configFilename);
-      mockRequire(configWebpackPath, undefined);
-
-      const defaultWebpackPath = Path.join(process.cwd(), defaultFilename);
-      mockRequire(defaultWebpackPath, undefined);
-
-      const archWebpackPath = Path.join(Path.resolve("archetype/config/webpack"), configFilename);
-      mockRequire(archWebpackPath, undefined);
 
       const config = generateConfig({
         profiles: {
@@ -157,10 +261,6 @@ describe("generate-config", function() {
       }, true);
 
       expect(config).to.deep.equal({});
-
-      mockRequire.stop(configWebpackPath);
-      mockRequire.stop(defaultWebpackPath);
-      mockRequire.stop(archWebpackPath);
     });
   });
 });
