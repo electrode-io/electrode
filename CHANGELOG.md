@@ -1,3 +1,16 @@
+# 10/9/2019
+
+## Packages
+
+-   `electrode-archetype-react-app@6.5.15` `(6.5.14 => 6.5.15)`
+-   `electrode-archetype-react-app-dev@6.5.15` `(6.5.14 => 6.5.15)`
+
+## Commits
+
+-   `packages/electrode-archetype-react-app[-dev]`
+
+    -   fix babel rc extends path ([#1406](https://github.com/electrode-io/electrode/pull/1406)) [commit](http://github.com/electrode-io/electrode/commit/366a5e0b2f89d8dec21cbc45408fae180fc39a58)
+
 # 10/8/2019
 
 - subapp updates
