@@ -13,14 +13,25 @@ function searchUserCustomConfig(options) {
   const cwd = process.cwd();
   const archPath = Path.resolve("archetype/config/webpack");
 
+  let configFilename = options.configFilename;
+  if (!configFilename.startsWith("webpack.config")) {
+    switch (configFilename) {
+      case "production.js":
+        configFilename = `webpack.config.js`;
+        break;
+      case "development.js":
+        configFilename = `webpack.config.dev.js`;
+        break;
+      default:
+        configFilename = `webpack.config.${configFilename}`;
+        break;
+    }
+  }
+
   const customLocations = [
     {
       dir: cwd,
-      file: options.configFilename
-    },
-    {
-      dir: cwd,
-      file: "webpack.config.js"
+      file: configFilename
     },
     {
       dir: archPath,
@@ -38,7 +49,7 @@ function searchUserCustomConfig(options) {
     logger.info(`Custom webpack config ${foundLocation.file} loaded from ${dir}`);
   } else {
     const dirs = [cwd, archPath].map(d => xsh.pathCwd.replace(d)).join("; ");
-    logger.info(`No custom webpack config ${options.configFilename} found in dirs ${dirs}`);
+    logger.info(`No custom webpack config ${configFilename} found in dirs ${dirs}`);
   }
 
   return customConfig;
