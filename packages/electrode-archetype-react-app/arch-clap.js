@@ -348,7 +348,9 @@ function makeTasks(xclap) {
 
     if (!Fs.existsSync(destDir)) return;
 
-    const archRc = Path.join(archetype.devPkg.name, "config", "babel", rcFile);
+    // must use posix path to save the path to the archetype's babel rc file
+    // to use in babel RC's extends option
+    const archRc = Path.posix.join(archetype.devPkg.name, "config", "babel", rcFile);
 
     const oldFn = Path.join(destDir, ".babelrc");
     const fn = Path.join(destDir, resultFile);
