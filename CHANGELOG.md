@@ -1,3 +1,50 @@
+# 10/8/2019
+
+- subapp updates
+- drop istanbul for nyc
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/create-app@1.0.0` `(0.0.2 => 1.0.0)`
+- `electrode-archetype-react-app@6.5.14` `(6.5.13 => 6.5.14)`
+- `electrode-archetype-react-app-dev@6.5.14` `(6.5.13 => 6.5.14)`
+- `electrode-archetype-react-component@6.1.10` `(6.1.9 => 6.1.10)`
+- `electrode-archetype-react-component-dev@6.1.10` `(6.1.9 => 6.1.10)`
+- `subapp-web@1.0.5` `(1.0.4 => 1.0.5)`
+
+## Commits
+
+- `packages/create-app`
+
+  - prompt to overwrite dir ([#1400](https://github.com/electrode-io/electrode/pull/1400)) [commit](http://github.com/electrode-io/electrode/commit/bae39cd2e7558fc019ff3524235b5f815317b8ec)
+  - [major] new @xarc/creat-app package for npm init ([#1395](https://github.com/electrode-io/electrode/pull/1395)) [commit](http://github.com/electrode-io/electrode/commit/dc6b650d12d437ee4681365331fb5b9211f22fc9)
+
+- `packages/electrode-archetype-react-app[-dev]`
+
+  - Change webpack include priority in searchUserCustomConfig ([#1405](https://github.com/electrode-io/electrode/pull/1405)) [commit](http://github.com/electrode-io/electrode/commit/0b01ac42e63aa8a354ed53af52ebb47574195ecc)
+  - default jest to v24 ([#1403](https://github.com/electrode-io/electrode/pull/1403)) [commit](http://github.com/electrode-io/electrode/commit/5bddea39da36e09098634f7e31e1dcbcad38ae5f)
+  - enable tty for jest so it can run in watch mode ([#1402](https://github.com/electrode-io/electrode/pull/1402)) [commit](http://github.com/electrode-io/electrode/commit/de11fbb7883be50539446c9235f277f8b8925e35)
+  - look for _test_ dirs under src for tests ([#1399](https://github.com/electrode-io/electrode/pull/1399)) [commit](http://github.com/electrode-io/electrode/commit/eb3bea49e8123d201cc5c46de6f293f023f88997)
+  - fix subapp handling shared bundles ([#1398](https://github.com/electrode-io/electrode/pull/1398)) [commit](http://github.com/electrode-io/electrode/commit/2faa16bff7c8843238630ef6df059624d8a86d47)
+  - add contributors field to package.json ([#1396](https://github.com/electrode-io/electrode/pull/1396)) [commit](http://github.com/electrode-io/electrode/commit/ed6dcb8990bd03958435ad71a88546a3335605a1)
+  - switch to nyc from istanbul ([#1388](https://github.com/electrode-io/electrode/pull/1388)) [commit](http://github.com/electrode-io/electrode/commit/8fb08e02491241d5ee7d4f3abdbc40d0f67fcb1f)
+
+- `packages/electrode-archetype-react-component[-dev]`
+
+  - switch to nyc from istanbul ([#1388](https://github.com/electrode-io/electrode/pull/1388)) [commit](http://github.com/electrode-io/electrode/commit/8fb08e02491241d5ee7d4f3abdbc40d0f67fcb1f)
+
+* `packages/subapp-web`
+
+  - load subapp bundles by their entry points and id ([#1401](https://github.com/electrode-io/electrode/pull/1401)) [commit](http://github.com/electrode-io/electrode/commit/2ccbd5946a8a6f0eed62ed5217ab504f66dba23f)
+  - fix subapp handling shared bundles ([#1398](https://github.com/electrode-io/electrode/pull/1398)) [commit](http://github.com/electrode-io/electrode/commit/2faa16bff7c8843238630ef6df059624d8a86d47)
+  - add contributors field to package.json ([#1396](https://github.com/electrode-io/electrode/pull/1396)) [commit](http://github.com/electrode-io/electrode/commit/ed6dcb8990bd03958435ad71a88546a3335605a1)
+
+* `tools`
+
+  - fix tools for package with scopes [commit](http://github.com/electrode-io/electrode/commit/57350fdbc9b4ae1f29449d6e35be6e398f6992d9)
+
 # 10/3/2019
 
 - minor fixes
