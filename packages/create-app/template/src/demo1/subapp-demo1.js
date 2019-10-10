@@ -6,7 +6,7 @@ const Demo1 = props => {
     <div>
       demo1: {props.data}
       <p>
-        <a href="http://docs.walmart.com/@electrode">Electrode Docs</a>
+        <a href="http://docs.electrode.io">Electrode Docs</a>
       </p>
     </div>
   );
