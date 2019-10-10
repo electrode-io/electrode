@@ -54,6 +54,8 @@ const CleanCSS = optionalRequire("clean-css");
 
 const logger = require("./lib/logger");
 
+const jestTestDirectories = ["_test_", "_tests_", "__test__", "__tests__"];
+
 function quote(str) {
   return str.startsWith(`"`) ? str : `"${str}"`;
 }
@@ -372,7 +374,10 @@ function makeTasks(xclap) {
   const AppMode = archetype.AppMode;
 
   const babelCliIgnore = quote(
-    [`**/__test__`, `**/__tests__`, `**/_test_`, `**/*.spec.js`, `**/*.spec.jsx`]
+    [
+      ...jestTestDirectories.map((dir) => `**/${dir}`),
+      `**/*.spec.js`, `**/*.spec.jsx`
+    ]
       .concat(archetype.babel.enableTypeScript && [`**/*.test.ts`, `**/*.test.tsx`])
       .concat(`**/.__dev_hmr`)
       .filter(x => x)
@@ -1073,7 +1078,7 @@ Individual .babelrc files were generated for you in src/client and src/server
           lint({
             ext: ".js,.jsx",
             config: eslintConfig(".eslintrc-react-test"),
-            targets: ["test/client"]
+            targets: ["test/client", ...jestTestDirectories.map((dir) => `${dir}/client`)]
           })
       },
       "lint-server": {
@@ -1180,8 +1185,7 @@ Individual .babelrc files were generated for you in src/client and src/server
         }
       },
       ".jest.test-frontend-cov"() {
-        const dirs = ["_test_", "_tests_", "__test__", "__tests__"];
-        const testDir = dirs.find(x => shell.test("-d", x));
+        const testDir = jestTestDirectories.find(x => shell.test("-d", x));
         let runJest = testDir;
         if (!runJest) {
           const scanned = scanDir.sync({
