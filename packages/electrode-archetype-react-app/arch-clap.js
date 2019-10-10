@@ -374,10 +374,7 @@ function makeTasks(xclap) {
   const AppMode = archetype.AppMode;
 
   const babelCliIgnore = quote(
-    [
-      ...jestTestDirectories.map((dir) => `**/${dir}`),
-      `**/*.spec.js`, `**/*.spec.jsx`
-    ]
+    [...jestTestDirectories.map(dir => `**/${dir}`), `**/*.spec.js`, `**/*.spec.jsx`]
       .concat(archetype.babel.enableTypeScript && [`**/*.test.ts`, `**/*.test.tsx`])
       .concat(`**/.__dev_hmr`)
       .filter(x => x)
@@ -1078,7 +1075,7 @@ Individual .babelrc files were generated for you in src/client and src/server
           lint({
             ext: ".js,.jsx",
             config: eslintConfig(".eslintrc-react-test"),
-            targets: ["test/client", ...jestTestDirectories.map((dir) => `${dir}/client`)]
+            targets: ["test/client", ...jestTestDirectories.map(dir => `${dir}/client`)]
           })
       },
       "lint-server": {
