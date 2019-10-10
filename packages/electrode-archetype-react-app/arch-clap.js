@@ -1073,7 +1073,7 @@ Individual .babelrc files were generated for you in src/client and src/server
           lint({
             ext: ".js,.jsx",
             config: eslintConfig(".eslintrc-react-test"),
-            targets: ["test/client"]
+            targets: ["test/client", "_test_/client", "__test__/client", "_tests_/client", "__tests__/client"]
           })
       },
       "lint-server": {
