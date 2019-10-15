@@ -15,59 +15,48 @@ module.exports = function setup(setupContext) {
     "utf8"
   );
 
+  //
+  // TODO: in webpack dev mode, we need to reload stats after there's a change
+  //
+
   const { assets } = util.loadAssetsFromStats(setupContext.routeOptions.stats);
 
   setupContext.routeOptions.__internals.assets = assets;
 
   const cdnJsBundles = util.getCdnJsBundles(assets, setupContext.routeOptions);
 
-  let vendorBundleLoadJs = "";
-  let commonScript = "";
-
-  const vendorAssets = util.getVendorBundles(assets);
-  const bundleNames = vendorAssets.map(a => a.chunkNames[0]);
-
-  if (vendorAssets.length > 0) {
-    vendorBundleLoadJs = `markBundlesLoaded(${JSON.stringify(bundleNames)});`;
-    commonScript = vendorAssets
-      .map(a => {
-        // map all chunk names that has a URL mapped and load them with script tags
-        return a.chunkNames
-          .map(x => cdnJsBundles[x] && `<script src="${cdnJsBundles[x]}" async></script>`)
-          .filter(x => x)
-          .join("");
-      })
-      .join("\n");
-  }
-
   const bundleAssets = {
-    byChunkName: cdnJsBundles,
+    jsChunksById: cdnJsBundles,
     entryPoints: assets.entryPoints,
     basePath: ""
   };
 
-  const webSubAppJs = `\n<script id="bundleAssets" type="application/json">
+  const webSubAppJs = `<script id="bundleAssets" type="application/json">
 ${JSON.stringify(bundleAssets)}
 </script>
-<script>${littleLoader}
+<script>/*LL*/${littleLoader}/*LL*/
 ${clientJs}
-${vendorBundleLoadJs}
 </script>
 `;
 
+  // check if any subapp has server side code with initialize method and load them
   const subAppServers = Object.keys(subappUtil.getAllSubAppManifest())
     .map(name => subappUtil.loadSubAppServerByName(name))
     .filter(x => x && x.initialize);
 
   return {
     process: context => {
+      context.user.assets = assets;
+      context.user.includedBundles = {};
+
+      // invoke the initialize method of subapp's server code
       if (subAppServers.length > 0) {
         for (const server of subAppServers) {
           server.initialize(context);
         }
       }
 
-      return `${commonScript}${webSubAppJs}`;
+      return webSubAppJs;
     }
   };
 };

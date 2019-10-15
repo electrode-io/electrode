@@ -19,6 +19,10 @@
     "preinstall": "node optional-check.js",
     "prepare": "cp node_modules/opt-archetype-check/optional-check.js ."
   },
+  "author": "Electrode (http://www.electrode.io/)",
+  "contributors": [
+    "Joel Chen <xchen@walmartlabs.com>"
+  ],
   "dependencies": {
     "@types/jest": "^23.3.14",
     "babel-jest": "^23.6.0",

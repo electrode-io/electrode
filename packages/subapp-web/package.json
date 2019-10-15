@@ -1,6 +1,6 @@
 {
   "name": "subapp-web",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Electrode subapp web support",
   "browser": "browser/index.js",
   "main": "lib/index.js",
@@ -15,7 +15,10 @@
     "react",
     "subapp"
   ],
-  "author": "Joel Chen <xchen@walmartlabs.com>",
+  "author": "Electrode (http://www.electrode.io/)",
+  "contributors": [
+    "Joel Chen <xchen@walmartlabs.com>"
+  ],
   "license": "Apache-2.0",
   "files": [
     "lib",

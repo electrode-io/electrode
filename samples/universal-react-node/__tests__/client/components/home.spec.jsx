@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { Home } from "client/components/home";
 import { mount } from "enzyme";
 
@@ -26,12 +25,12 @@ describe("Home", () => {
   });
 
   it("has 8 items on menu", () => {
-    expect(component.find("li").length).toEqual(8);
+    expect(component.find("li").length).toEqual(8); // eslint-disable-line no-magic-numbers
 
     const items = [
       "CSRF protection using electrode-csrf-jwt",
       "Above the Fold Render with skip=true - increase your App's performance by using a skip prop",
-      "Above the Fold Render with skip=false - increase your App's performance by using a skip prop",
+      "Above the Fold Render with skip=false - increase your App's performance by using a skip prop", // eslint-disable-line max-len
       "SSR Caching Simple Type Example",
       "SSR Caching Template Type Example",
       "Push Notifications Example",
@@ -39,7 +38,7 @@ describe("Home", () => {
       "MongoDB Example"
     ];
 
-    for (let x = 0; x < 8; x++) {
+    for (let x = 0; x < 8; x++) { // eslint-disable-line no-magic-numbers
       expect(
         component
           .find("li")

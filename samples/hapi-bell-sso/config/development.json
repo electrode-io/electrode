@@ -1,0 +1,17 @@
+{
+  "connections": {
+    "default": {
+      "routes": {
+        "cors": true
+      }
+    }
+  },
+  "plugins": {
+    "webapp": {
+      "options": {
+        "insertTokenIds": true,
+        "serverSideRendering": false
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-app",
-  "version": "6.5.13",
+  "version": "6.5.15",
   "description": "Electrode NodeJS/React Universal Application Archetype",
   "main": "arch-clap.js",
   "homepage": "http://www.electrode.io",
@@ -23,6 +23,10 @@
     "arch-clap.js",
     "require.js",
     "supports.js"
+  ],
+  "author": "Electrode (http://www.electrode.io/)",
+  "contributors": [
+    "Joel Chen <xchen@walmartlabs.com>"
   ],
   "dependencies": {
     "@babel/runtime": "^7.1.5",

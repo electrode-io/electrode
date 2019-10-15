@@ -11,11 +11,15 @@
     "type": "git",
     "url": "https://github.com/electrode-io/electrode.git"
   },
-  "author": {
-    "name": "Sheng Di",
-    "email": "sdi@walmartlabs.com",
-    "url": "https://github.com/didi0613"
-  },
+  "author": "Electrode (http://www.electrode.io/)",
+  "contributors": [
+    {
+      "name": "Sheng Di",
+      "email": "sdi@walmartlabs.com",
+      "url": "https://github.com/didi0613"
+    },
+    "Joel Chen <xchen@walmartlabs.com>"
+  ],
   "keywords": [
     "npm",
     "scripts",

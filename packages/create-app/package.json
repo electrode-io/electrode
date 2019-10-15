@@ -1,10 +1,14 @@
 {
   "name": "@xarc/create-app",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Create react.js/node.js webapp using the Electrode Platform",
   "main": "index.js",
   "scripts": {
     "prepublishOnly": "webpack"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "bin": {
     "create-app": "bin/create-app.js"
@@ -31,10 +35,12 @@
     "@babel/preset-env": "^7.6.2",
     "babel-loader": "^8.0.6",
     "lodash": "^4.17.15",
+    "opfs": "^1.1.1",
+    "prompts": "^2.2.1",
     "shcmd": "^0.7.9",
-    "webpack": "^4.41.0",
     "webpack-bundle-analyzer": "^3.5.2",
     "webpack-cli": "^3.3.9",
+    "webpack": "^4.41.0",
     "xclap": "^0.2.37"
   }
 }

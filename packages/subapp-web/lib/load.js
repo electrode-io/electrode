@@ -36,62 +36,60 @@ module.exports = function setup(setupContext, token) {
 
   // TODO: how to export and load subapp
 
+  // TODO: Need a way to figure out all the subapps need for a page and send out script
+  // tags ASAP in <header> so browser can start fetching them before entire page is loaded.
+
   const name = props.name;
   const routeData = setupContext.routeOptions.__internals;
   const bundleAsset = util.getSubAppBundle(name, routeData.assets);
-  const async = props.async ? " async" : "";
-  const defer = props.defer ? " defer" : "";
   const bundleBase = util.getBundleBase(setupContext.routeOptions);
-  const comment = process.env.NODE_ENV === "production" ? "" : `<!-- subapp load ${name} -->\n`;
+  const comment = process.env.NODE_ENV === "production" ? "\n" : `\n<!-- subapp load ${name} -->\n`;
 
+  //
+  // in webpack dev mode, we have to retrieve the subapp's JS bundle from webpack dev server
+  // to inline in the index page.
+  //
   const retrieveDevServerBundle = async () => {
     return new Promise((resolve, reject) => {
       request(`${bundleBase}${bundleAsset.name}`, (err, resp, body) => {
         if (err) {
           reject(err);
         } else {
-          resolve(`<script>${body}</script>`);
+          resolve(`<script>/*${name}*/${body}</script>`);
         }
       });
     });
   };
 
-  let bundleScript;
-  const webpackDev = process.env.WEBPACK_DEV === "true";
+  //
+  // When loading a subapp and its instance in the index, user can choose
+  // to inline the JS for the subapp's bundle.
+  // - In production mode, we read its bundle from dist/js
+  // - In webpack dev mode, we retrieve the bundle from webpack dev server every time
+  //
+  let inlineSubAppJs;
 
-  const cdnJsBundles = util.getCdnJsBundles(
-    routeData.assets.byChunkName,
-    setupContext.routeOptions
-  );
+  const prepareSubAppJsBundle = () => {
+    const webpackDev = process.env.WEBPACK_DEV === "true";
 
-  if (props.inlineScript === "always" || (props.inlineScript === true && !webpackDev)) {
-    if (!webpackDev) {
-      const src = Fs.readFileSync(Path.resolve("dist/js", bundleAsset.name)).toString();
-      bundleScript = `<script>${src}</script>`;
+    if (props.inlineScript === "always" || (props.inlineScript === true && !webpackDev)) {
+      if (!webpackDev) {
+        // if we have to inline the subapp's JS bundle, we load it for production mode
+        const src = Fs.readFileSync(Path.resolve("dist/js", bundleAsset.name)).toString();
+        inlineSubAppJs = `<script>/*${name}*/${src}</script>`;
+      } else {
+        inlineSubAppJs = true;
+      }
+    } else {
+      // if should inline script for webpack dev mode
+      // make sure we retrieve from webpack dev server and inline the script later
+      inlineSubAppJs = webpackDev && Boolean(props.inlineScript);
     }
-  } else {
-    bundleScript = bundleAsset.chunkNames
-      .map(x => cdnJsBundles[x] && `<script src="${cdnJsBundles[x]}"${async}${defer}></script>`)
-      .filter(x => x)
-      .join("");
-  }
-
-  let subApp;
-  let subAppServer;
-  let StartComponent;
-
-  let subAppLoadTime = 0;
-
-  const loadSubApp = () => {
-    subApp = loadSubAppByName(name);
-    subAppServer = loadSubAppServerByName(name);
-    StartComponent = subAppServer.StartComponent || subApp.Component;
   };
 
-  loadSubApp();
-
-  const clientProps = JSON.stringify(_.pick(props, ["useReactRouter"]));
-
+  //
+  // do server side rendering for the subapp instance
+  //
   const renderElement = element => {
     if (props.streaming) {
       assert(!props.suspenseSsr, "streaming and suspense SSR together are not supported");
@@ -101,6 +99,7 @@ module.exports = function setup(setupContext, token) {
         return ReactDOMServer.renderToStaticNodeStream(element);
       }
     }
+
     if (props.suspenseSsr) {
       assert(AsyncReactDOMServer, "You must install react-async-ssr for suspense SSR support");
       if (props.hydrateServerData) {
@@ -116,6 +115,55 @@ module.exports = function setup(setupContext, token) {
       return ReactDOMServer.renderToStaticMarkup(element);
     }
   };
+
+  let subApp;
+  let subAppServer;
+  let StartComponent;
+  let subAppLoadTime = 0;
+
+  //
+  // ensure that other bundles a subapp depends on are loaded
+  //
+  const prepareSubAppSplitBundles = async context => {
+    const { assets, includedBundles } = context.user;
+    const entryName = subApp.name.toLowerCase();
+    //
+    const entryPoints = assets.entryPoints[entryName];
+    const cdnJsBundles = util.getCdnJsBundles(assets, setupContext.routeOptions);
+
+    const bundles = entryPoints.filter(ep => !includedBundles[ep]);
+    const splits = bundles
+      .map(ep => {
+        if (!inlineSubAppJs && !includedBundles[entryName]) {
+          includedBundles[ep] = true;
+          return cdnJsBundles[ep] && `<script src="${cdnJsBundles[ep]}" async></script>`;
+        }
+        return false;
+      })
+      .filter(x => x);
+
+    if (inlineSubAppJs && !includedBundles[entryName]) {
+      includedBundles[entryName] = true;
+      if (inlineSubAppJs === true) {
+        splits.push(await retrieveDevServerBundle());
+      } else {
+        splits.push(inlineSubAppJs);
+      }
+    }
+
+    return { bundles, scripts: splits.join("\n") };
+  };
+
+  const loadSubApp = () => {
+    subApp = loadSubAppByName(name);
+    subAppServer = loadSubAppServerByName(name);
+    StartComponent = subAppServer.StartComponent || subApp.Component;
+  };
+
+  loadSubApp();
+  prepareSubAppJsBundle();
+
+  const clientProps = JSON.stringify(_.pick(props, ["useReactRouter"]));
 
   return {
     process: context => {
@@ -237,7 +285,13 @@ and can't generate it because module react-dom-router with StaticRouter is not f
           ssrContent = `<!-- serverSideRendering flag is ${props.serverSideRendering} -->`;
         }
 
-        outputSpot.add(`\n${comment}`);
+        let markBundlesLoadedJs = "";
+        const { bundles, scripts } = await prepareSubAppSplitBundles(context);
+        outputSpot.add(`${comment}`);
+        if (bundles.length > 0) {
+          outputSpot.add(`${scripts}\n`);
+          markBundlesLoadedJs = `markBundlesLoaded(${JSON.stringify(bundles)});\n`;
+        }
 
         // If user specified an element ID for a DOM Node to host the SSR content then
         // add the div for the Node and the SSR content to it, and add JS to start the
@@ -245,7 +299,7 @@ and can't generate it because module react-dom-router with StaticRouter is not f
         if (props.elementId) {
           outputSpot.add(`<div id="${props.elementId}">\n`);
           outputSpot.add(ssrContent);
-          outputSpot.add(`\n</div><script>startSubAppOnLoad({
+          outputSpot.add(`\n</div><script>${markBundlesLoadedJs}startSubAppOnLoad({
   name: "${name}",
   elementId: "${props.elementId}",
   serverSideRendering: ${Boolean(props.serverSideRendering)},
@@ -255,10 +309,6 @@ and can't generate it because module react-dom-router with StaticRouter is not f
         } else {
           outputSpot.add("<!-- no elementId for starting subApp on load -->\n");
         }
-
-        const script = bundleScript || (await retrieveDevServerBundle());
-
-        outputSpot.add(script);
 
         if (props.timestamp) {
           outputSpot.add(`<!-- time: ${Date.now()} -->`);

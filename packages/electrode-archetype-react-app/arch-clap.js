@@ -54,6 +54,8 @@ const CleanCSS = optionalRequire("clean-css");
 
 const logger = require("./lib/logger");
 
+const jestTestDirectories = ["_test_", "_tests_", "__test__", "__tests__"];
+
 function quote(str) {
   return str.startsWith(`"`) ? str : `"${str}"`;
 }
@@ -348,7 +350,9 @@ function makeTasks(xclap) {
 
     if (!Fs.existsSync(destDir)) return;
 
-    const archRc = Path.join(archetype.devPkg.name, "config", "babel", rcFile);
+    // must use posix path to save the path to the archetype's babel rc file
+    // to use in babel RC's extends option
+    const archRc = Path.posix.join(archetype.devPkg.name, "config", "babel", rcFile);
 
     const oldFn = Path.join(destDir, ".babelrc");
     const fn = Path.join(destDir, resultFile);
@@ -370,7 +374,7 @@ function makeTasks(xclap) {
   const AppMode = archetype.AppMode;
 
   const babelCliIgnore = quote(
-    [`**/__test__`, `**/__tests__`, `**/_test_`, `**/*.spec.js`, `**/*.spec.jsx`]
+    [...jestTestDirectories.map(dir => `**/${dir}`), `**/*.spec.js`, `**/*.spec.jsx`]
       .concat(archetype.babel.enableTypeScript && [`**/*.test.ts`, `**/*.test.tsx`])
       .concat(`**/.__dev_hmr`)
       .filter(x => x)
@@ -1071,7 +1075,7 @@ Individual .babelrc files were generated for you in src/client and src/server
           lint({
             ext: ".js,.jsx",
             config: eslintConfig(".eslintrc-react-test"),
-            targets: ["test/client"]
+            targets: ["test/client", ...jestTestDirectories.map(dir => `${dir}/client`)]
           })
       },
       "lint-server": {
@@ -1178,15 +1182,19 @@ Individual .babelrc files were generated for you in src/client and src/server
         }
       },
       ".jest.test-frontend-cov"() {
-        const testDir = ["_test_", "__test__", "__tests__"].find(x => shell.test("-d", x));
+        const testDir = jestTestDirectories.find(x => shell.test("-d", x));
         let runJest = testDir;
         if (!runJest) {
-          runJest =
-            scanDir.sync({
-              dir: Path.resolve(AppMode.src.dir),
-              filterExt: [".js", ".jsx", ".ts", ".tsx"],
-              filter: x => x.indexOf(".spec.") > 0 || x.indexOf(".test.") > 0
-            }).length > 0;
+          const scanned = scanDir.sync({
+            dir: Path.resolve(AppMode.src.dir),
+            grouping: true,
+            includeDir: true,
+            filterDir: d => (dirs.indexOf(d) >= 0 ? "dirs" : "otherDirs"),
+            filterExt: [".js", ".jsx", ".ts", ".tsx"],
+            filter: x => x.indexOf(".spec.") > 0 || x.indexOf(".test.") > 0
+          });
+
+          runJest = Boolean(scanned.dirs || scanned.files.length > 0);
         }
 
         if (!runJest) {
@@ -1205,7 +1213,7 @@ Individual .babelrc files were generated for you in src/client and src/server
           const jestOpts = this.argv.slice(1).filter(x => x !== "--inspect-brk");
 
           return mkCmd(
-            `~$node`,
+            `~(tty)$node`,
             brk,
             jestBinJs,
             jestOpts.join(" "),
