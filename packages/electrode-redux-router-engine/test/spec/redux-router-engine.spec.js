@@ -196,15 +196,6 @@ describe("redux-router-engine", function() {
     });
   });
 
-  it("should populate react-id when requested", () => {
-    const engine = new ReduxRouterEngine({ routes, withIds: true });
-    testReq.url = Url.parse("/test");
-
-    return engine.render(testReq).then(result => {
-      expect(result.html).to.contain("data-reactroot");
-    });
-  });
-
   it("should fail if path doesn't start with basename", () => {
     const engine = new ReduxRouterEngine({ routes, basename: "/my-base" });
     testReq.url = Url.parse("/wrong-base/test/basename");
@@ -271,15 +262,6 @@ describe("redux-router-engine", function() {
         expect(result.status).to.equal(500);
         expect(error).to.not.equal(undefined);
       });
-  });
-
-  it("render options should override constructor options", () => {
-    const engine = new ReduxRouterEngine({ routes, withIds: true });
-    testReq.url = Url.parse("/test");
-
-    return engine.render(testReq, { withIds: false }).then(result => {
-      expect(result.html).to.not.contain("data-reactroot");
-    });
   });
 
   it("should return 500 for method not allowed", () => {

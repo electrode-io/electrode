@@ -11,7 +11,7 @@ require("babel-register");
 const routes = require("../routes.jsx").default;
 
 describe("electrode server (Hapi) integration", function() {
-  const setupServer = async (streaming, withIds) => {
+  const setupServer = async (streaming) => {
     let engine;
 
     const server = await electrodeServer({
@@ -23,7 +23,7 @@ describe("electrode server (Hapi) integration", function() {
       method: "get",
       path: "/test",
       handler: async (request, reply) => {
-        if (!engine) engine = new ReduxRouterEngine({ routes, streaming, withIds });
+        if (!engine) engine = new ReduxRouterEngine({ routes, streaming });
         const result = await engine.render(request);
         if (streaming) {
           result.resultType = result.html.constructor.name;
@@ -95,25 +95,6 @@ describe("electrode server (Hapi) integration", function() {
           expect(resp.result).to.deep.equal({
             status: 200,
             html: "<div>Page<div>Home</div></div>",
-            prefetch: "window.__PRELOADED_STATE__ = {};",
-            resultType: "ReactMarkupReadableStream"
-          });
-        });
-      },
-      runFinally(() => closeServer(server))
-    );
-  });
-
-  it("should render with ids and streaming", () => {
-    let server;
-    return asyncVerify(
-      () => setupServer(true, true),
-      s => {
-        server = s;
-        return server.inject("/test").then(resp => {
-          expect(resp.result).to.deep.equal({
-            status: 200,
-            html: `<div data-reactroot="">Page<div>Home</div></div>`,
             prefetch: "window.__PRELOADED_STATE__ = {};",
             resultType: "ReactMarkupReadableStream"
           });
