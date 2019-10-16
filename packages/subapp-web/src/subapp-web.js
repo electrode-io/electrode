@@ -22,15 +22,15 @@ function startSubAppOnLoad(options) {
 
 function markBundlesLoaded(ids) {
   [].concat(ids).forEach(id => {
-    window.webSubApps._bundles[id] = true;
+    window.webSubApps._bundles[id] = 1;
   });
 }
 
 function loadSubAppBundles(names, done) {
-  let wsa = window.webSubApps;
+  const wsa = window.webSubApps;
   done = done || (() => {});
 
-  let toLoad = [].concat(names).filter(x => !wsa._bundles[x]);
+  const toLoad = [].concat(names).filter(x => wsa._bundles[x] === undefined);
   if (toLoad.length === 0) {
     return done();
   }
@@ -44,29 +44,42 @@ function loadSubAppBundles(names, done) {
       return;
     }
   }
+
   const ba = wsa.bundleAssets;
   const loaded = [];
+  const assetsToLoad = toLoad
+    .reduce((a, name) => {
+      const chunkIds = ba.entryPoints[name];
+      return chunkIds.reduce((a2, id) => {
+        // chunk could have multiple assets
+        return [].concat(ba.jsChunksById[id]).reduce((a3, asset) => {
+          return a3.concat({ name, id, asset });
+        }, a2);
+      }, a);
+    }, [])
+    .filter(({ id }) => {
+      if (wsa._bundles[id] === undefined) {
+        wsa._bundles[id] = 0; // mark as loading
+        return true;
+      }
+      return false;
+    });
 
-  toLoad.forEach(name => {
-    const entries = ba.entryPoints[name];
-    entries.forEach(id => {
-      const bundle = ba.jsChunksById[id];
-      wsa._bundles[id] = null; // mark as loading
-      window._lload(`${ba.basePath}${bundle}`, {
-        callback: err => {
-          if (err) {
-            console.error(`load bundle ${name} (id: ${id}) failed`, err);
-          } else {
-            console.log(`loaded bundle for ${name} (id: ${id}) - ${bundle}`);
-            wsa._bundles[id] = true;
-          }
-          loaded.push(id);
-          if (loaded.length === toLoad.length) {
-            console.log("all bundles loaded", toLoad);
-            done();
-          }
+  assetsToLoad.forEach(({ name, id, asset }) => {
+    window._lload(`${ba.basePath}${asset}`, {
+      callback: err => {
+        if (err) {
+          console.error(`load asset ${name} (id: ${id}) failed`, err);
+        } else {
+          console.log(`loaded asset for ${name} (id: ${id}) - ${asset}`);
+          wsa._bundles[id]++;
         }
-      });
+        loaded.push(asset);
+        if (loaded.length === assetsToLoad.length) {
+          console.log("all assets loaded", assetsToLoad);
+          done();
+        }
+      }
     });
   });
 }
