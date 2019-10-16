@@ -1,6 +1,6 @@
 "use strict";
 
-/* eslint-disable global-require, max-statements */
+/* eslint-disable global-require, max-statements, no-loop-func */
 
 const Fs = require("fs");
 const assert = require("assert");
@@ -65,17 +65,21 @@ const utils = {
     const cdnBundles = {};
 
     for (const id in bundlesById) {
-      const bundleFile = bundlesById[id];
-      for (const mapName in CDN_ASSETS) {
-        if (mapName.endsWith(bundleFile)) {
-          cdnBundles[id] = CDN_ASSETS[mapName];
-          break;
+      const bundles = bundlesById[id];
+      [].concat(bundles).forEach(bundleFile => {
+        for (const mapName in CDN_ASSETS) {
+          if (mapName.endsWith(bundleFile)) {
+            cdnBundles[id] = CDN_ASSETS[mapName];
+            break;
+          }
         }
-      }
 
-      if (!cdnBundles[id]) {
-        cdnBundles[id] = basePath.concat(bundleFile);
-      }
+        if (!cdnBundles[id]) {
+          cdnBundles[id] = basePath.concat(bundleFile);
+        } else {
+          cdnBundles[id] = [].concat(cdnBundles[id], bundleFile);
+        }
+      });
     }
 
     return cdnBundles;
@@ -113,27 +117,34 @@ const utils = {
     for (const ep in stats.entrypoints) {
       for (const id of stats.entrypoints[ep]) {
         const names = chunksById[id].names;
-        // only expecting one file per chunk for now
-        assert(
-          names.length === 1,
-          `stats.chunks[${id}].names length ${names.length} must be 1: ${names.join(", ")}`
-        );
 
-        if (id !== names[0]) {
-          _.set(byChunkId, ["_names_", id], names[0]);
+        // in dev mode, chunk id is the same as the name
+        // in prod mode, chunk id is an integer (index)
+        if (names.indexOf(id) < 0) {
+          // save the names for the id
+          _.set(byChunkId, ["_names_", id], names);
         }
 
-        const assets = stats.assetsByChunkName[names[0]];
+        names.forEach(name => {
+          const assets = stats.assetsByChunkName[name];
 
-        // now assign the assets into byChunkId according to extensions
-        []
-          .concat(assets)
-          .filter(x => x)
-          .forEach(x => {
-            const ext = Path.extname(x).substring(1);
-            assert(ext, `asset ${x} doesn't have extension`);
-            _.set(byChunkId, [ext, id], x);
-          });
+          // now assign the assets into byChunkId according to extensions
+          []
+            .concat(assets)
+            .filter(x => x)
+            .forEach(asset => {
+              const ext = Path.extname(asset).substring(1);
+              assert(ext, `asset ${asset} doesn't have extension`);
+              const found = _.get(byChunkId, [ext, id]);
+              if (found) {
+                if (found.indexOf(asset) < 0) {
+                  byChunkId[ext][id] = [].concat(found, asset);
+                }
+              } else {
+                _.set(byChunkId, [ext, id], asset);
+              }
+            });
+        });
       }
     }
 

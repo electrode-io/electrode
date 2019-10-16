@@ -136,7 +136,13 @@ module.exports = function setup(setupContext, token) {
       .map(ep => {
         if (!inlineSubAppJs && !includedBundles[entryName]) {
           includedBundles[ep] = true;
-          return cdnJsBundles[ep] && `<script src="${cdnJsBundles[ep]}" async></script>`;
+          return (
+            cdnJsBundles[ep] &&
+            []
+              .concat(cdnJsBundles[ep])
+              .map(jsBundle => `<script src="${jsBundle}" async></script>`)
+              .join("\n")
+          );
         }
         return false;
       })
