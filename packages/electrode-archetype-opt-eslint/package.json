@@ -21,7 +21,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "preinstall": "node optional-check.js",
-    "prepare": "cp node_modules/opt-archetype-check/optional-check.js ."
+    "prepare": "shx cp node_modules/opt-archetype-check/optional-check.js ."
   },
   "dependencies": {
     "eslint": "^4.8.0",
@@ -32,7 +32,8 @@
     "eslint-plugin-react": "^7.4.0"
   },
   "devDependencies": {
-    "opt-archetype-check": "../opt-archetype-check"
+    "opt-archetype-check": "../opt-archetype-check",
+    "shx": "^0.3.2"
   },
   "electrodeOptArchetype": {
     "optionalTagName": "eslint",

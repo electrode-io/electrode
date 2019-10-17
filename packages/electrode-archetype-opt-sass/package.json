@@ -28,7 +28,8 @@
     "sass-loader": "^6.0.6"
   },
   "devDependencies": {
-    "opt-archetype-check": "../opt-archetype-check"
+    "opt-archetype-check": "../opt-archetype-check",
+    "shx": "^0.3.2"
   },
   "electrodeOptArchetype": {
     "optionalTagName": "sass",
