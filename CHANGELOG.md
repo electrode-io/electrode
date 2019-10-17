@@ -1,15 +1,52 @@
+# 10/17/2019
+
+- fix subapp to handle bundles with multiple assets
+- fix eslint to look at `__tests__` etc dirs
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/create-app@1.0.1` `(1.0.0 => 1.0.1)`
+- `electrode-archetype-react-app@6.5.16` `(6.5.15 => 6.5.16)`
+- `electrode-archetype-react-app-dev@6.5.16` `(6.5.15 => 6.5.16)`
+- `subapp-web@1.0.6` `(1.0.5 => 1.0.6)`
+
+### Lerna Updated
+
+- `subapp-redux@1.0.5` `(1.0.4 => 1.0.5)`
+
+## Commits
+
+- `packages/create-app`
+
+  - update app template ([#1408](https://github.com/electrode-io/electrode/pull/1408)) [commit](http://github.com/electrode-io/electrode/commit/6928988f04af0d3c9166118f4ebd59b673874ad7)
+
+- `packages/electrode-archetype-react-app[-dev]`
+
+  - [auto] prettier format [commit](http://github.com/electrode-io/electrode/commit/c67201d0d1c1e3a95cc015cc9b23942145d94cb8)
+  - Add additional directories to linter ([#1407](https://github.com/electrode-io/electrode/pull/1407)) [commit](http://github.com/electrode-io/electrode/commit/024c08b181934c721fb025fc097ad61de1c74fe4)
+
+- `packages/subapp-web`
+
+  - handle bundles with multiple assets ([#1410](https://github.com/electrode-io/electrode/pull/1410)) [commit](http://github.com/electrode-io/electrode/commit/696439b6fb6596c361b9df66f6c4d6d0a05a90f9)
+
+- `.vscode`
+
+  - [auto] save vscode settings for prettier [commit](http://github.com/electrode-io/electrode/commit/0fc451f74293854415617aced139ee03e7654335)
+
 # 10/9/2019
 
 ## Packages
 
--   `electrode-archetype-react-app@6.5.15` `(6.5.14 => 6.5.15)`
--   `electrode-archetype-react-app-dev@6.5.15` `(6.5.14 => 6.5.15)`
+- `electrode-archetype-react-app@6.5.15` `(6.5.14 => 6.5.15)`
+- `electrode-archetype-react-app-dev@6.5.15` `(6.5.14 => 6.5.15)`
 
 ## Commits
 
--   `packages/electrode-archetype-react-app[-dev]`
+- `packages/electrode-archetype-react-app[-dev]`
 
-    -   fix babel rc extends path ([#1406](https://github.com/electrode-io/electrode/pull/1406)) [commit](http://github.com/electrode-io/electrode/commit/366a5e0b2f89d8dec21cbc45408fae180fc39a58)
+  - fix babel rc extends path ([#1406](https://github.com/electrode-io/electrode/pull/1406)) [commit](http://github.com/electrode-io/electrode/commit/366a5e0b2f89d8dec21cbc45408fae180fc39a58)
 
 # 10/8/2019
 
