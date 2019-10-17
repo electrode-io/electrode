@@ -21,7 +21,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "preinstall": "node optional-check.js",
-    "prepare": "cp node_modules/opt-archetype-check/optional-check.js ."
+    "prepare": "shx cp node_modules/opt-archetype-check/optional-check.js ."
   },
   "dependencies": {
     "node-sass": "^4.9.3",
