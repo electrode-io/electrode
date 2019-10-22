@@ -61,9 +61,6 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
     "batch": "^0.6.1",
     "boxen": "^2.1.0",
-    "chai": "^4.0.0",
-    "chai-as-promised": "^7.1.1",
-    "chai-shallowly": "^1.0.0",
     "chalker": "^1.1.1",
     "chokidar": "^2.0.4",
     "convert-source-map": "^1.5.0",
@@ -139,6 +136,7 @@
     "electrode-archetype-opt-typescript": "^1.0.2"
   },
   "devDependencies": {
+    "chai": "^4.0.0",
     "electrode-archetype-njs-module-dev": "^3.0.0",
     "electrode-archetype-react-app": "../electrode-archetype-react-app",
     "mock-require": "^3.0.3",
