@@ -25,6 +25,8 @@
   },
   "dependencies": {
     "@types/mocha": "5.2.7",
+    "enzyme": "^3.0.0",
+    "enzyme-adapter-react-16": "^1.1.0",
     "mocha": "^4.0.0"
   },
   "devDependencies": {
