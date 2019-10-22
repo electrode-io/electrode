@@ -10,14 +10,14 @@
 
 ### Prerequisites
 
-Make sure you have installed NodeJS >= 4.x and npm >= 3.x, and [clap-cli].
+Make sure you have installed NodeJS >= 4.x and npm >= 3.x, and [xclap-cli].
 
 ```bash
 $ node -v
 v6.6.0
 $ npm -v
 3.10.3
-$ npm install -g clap-cli
+$ npm install -g xclap-cli
 ```
 
 ### Check it out
@@ -79,7 +79,7 @@ $ npm install material-ui react-tap-event-plugin --save
 
 ### Add [material-ui] Examples
 
-Now we are ready to add some of the [material-ui examples] to the app.  
+Now we are ready to add some of the [material-ui examples] to the app.
 
 > Note that the examples are written with babel stage-1 which is not supported in Electrode so you might have to rewrite some of them.
 
@@ -182,7 +182,7 @@ Apache-2.0 © [Joel Chen](https://github.com/jchip)
 [RaisedButton]: http://www.material-ui.com/#/components/raised-button
 [webpack-dev-server]: https://webpack.github.io/docs/webpack-dev-server.html
 [Server Rendering]: http://www.material-ui.com/#/get-started/server-rendering
-[clap-cli]: https://www.npmjs.com/package/clap-cli
+[xclap-cli]: https://www.npmjs.com/package/xclap-cli
 [material-ui examples]: http://www.material-ui.com/#/components/app-bar
 [AppBar example]:  http://www.material-ui.com/#/components/app-bar
 [BottomNavigation example]: http://www.material-ui.com/#/components/bottom-navigation

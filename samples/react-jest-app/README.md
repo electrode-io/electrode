@@ -8,14 +8,14 @@
 
 ### Prerequisites
 
-Make sure you have installed NodeJS >= 4.x and npm >= 3.x, and [clap-cli].
+Make sure you have installed NodeJS >= 4.x and npm >= 3.x, and [xclap-cli].
 
 ```bash
 $ node -v
 v6.6.0
 $ npm -v
 3.10.3
-$ npm install -g clap-cli
+$ npm install -g xclap-cli
 ```
 
 ### Check it out
@@ -36,10 +36,10 @@ $ npm run test
 ### Check your lib
 
 The common way to test with jest is to embed the tests next to
-the source of the component they are testing. 
+the source of the component they are testing.
 
-This project was partially created as a test for a pull request 
-to ensure test/spec files were not ending up 
+This project was partially created as a test for a pull request
+to ensure test/spec files were not ending up
 in the `/lib` directory on build.  As such, a couple of helper scripts were added.
 
 ```sh
@@ -54,7 +54,7 @@ This should output a PASS or FAIL depending on if it finds a spec file in the `/
 ### Check your electrode changes
 
 If you're making changes to electrode itself,
-you can use this sample app to check if your react client tests 
+you can use this sample app to check if your react client tests
 are ending up in your `/lib` directory.
 
 ```sh
@@ -77,7 +77,7 @@ Apache-2.0 © [Joel Chen](https://github.com/jchip)
 [RaisedButton]: http://www.material-ui.com/#/components/raised-button
 [webpack-dev-server]: https://webpack.github.io/docs/webpack-dev-server.html
 [Server Rendering]: http://www.material-ui.com/#/get-started/server-rendering
-[clap-cli]: https://www.npmjs.com/package/clap-cli
+[xclap-cli]: https://www.npmjs.com/package/xclap-cli
 [material-ui examples]: http://www.material-ui.com/#/components/app-bar
 [AppBar example]:  http://www.material-ui.com/#/components/app-bar
 [BottomNavigation example]: http://www.material-ui.com/#/components/bottom-navigation
