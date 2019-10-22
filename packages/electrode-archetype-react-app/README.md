@@ -96,19 +96,9 @@ It accepts a single `options` object, with the following supported fields:
 
 -   `babelRegister` - Set to `false` to disable loading `babel-register`
     -   `babel-register` is loaded by default only in babel-register app mode, and off in src/lib app mode.
--   `optimizeModulesForProduction` - Set to `false` to disable loading optimized copy of React modules.
-    -   also disabled unless `NODE_ENV=production`
-    -   If this is an object, then it's used as `options` for `optimizeModulesForProduction`
 -   `cssModuleHook` - Set to `false` to disable loading [css-module-hook]
     -   If this is an object, then it's used as `options` for `cssModuleHook`
 -   `isomorphicExtendRequire` - Set to `false` to disable loading isomorphic-loader support
-
-#### optimizeModulesForProduction Options
-
-The `optimizeModulesForProduction` options supported the following flags:
-
--   `quiet` - Boolean to turn off console.log messages
--   `force` - Boolean to force enable regardless of `NODE_ENV`
 
 ### src/lib Mode
 
