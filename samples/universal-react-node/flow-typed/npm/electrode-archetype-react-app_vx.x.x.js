@@ -66,10 +66,6 @@ declare module 'electrode-archetype-react-app/support/index' {
   declare module.exports: any;
 }
 
-declare module 'electrode-archetype-react-app/support/optimize-modules-for-production' {
-  declare module.exports: any;
-}
-
 declare module 'electrode-archetype-react-app/supports' {
   declare module.exports: any;
 }
@@ -107,9 +103,6 @@ declare module 'electrode-archetype-react-app/support/babel-run.js' {
 }
 declare module 'electrode-archetype-react-app/support/index.js' {
   declare module.exports: $Exports<'electrode-archetype-react-app/support/index'>;
-}
-declare module 'electrode-archetype-react-app/support/optimize-modules-for-production.js' {
-  declare module.exports: $Exports<'electrode-archetype-react-app/support/optimize-modules-for-production'>;
 }
 declare module 'electrode-archetype-react-app/supports.js' {
   declare module.exports: $Exports<'electrode-archetype-react-app/supports'>;

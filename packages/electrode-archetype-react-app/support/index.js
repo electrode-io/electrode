@@ -1,7 +1,6 @@
 "use strict";
 
 const optionalRequire = require("optional-require")(require);
-const optimizeModulesForProduction = require("./optimize-modules-for-production");
 const isomorphicExtendRequire = require("isomorphic-loader/lib/extend-require");
 const archetype = require("../config/archetype");
 const AppMode = archetype.AppMode;
@@ -42,7 +41,6 @@ const support = {
       }
     });
   },
-  optimizeModulesForProduction
 };
 
 if (AppMode.isSrc) {
@@ -101,12 +99,6 @@ support.load = function(options, callback) {
     );
     logger.info(`The transpilation only occurs the first time you load a file.`);
     babelRegister(regOptions);
-  }
-
-  if (options.optimizeModulesForProduction === true) {
-    const opts = options.optimizeModulesForProduction;
-
-    support.optimizeModulesForProduction(typeof opts === "object" && opts);
   }
 
   /**
