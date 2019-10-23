@@ -457,7 +457,9 @@ function jsonToHtml(obj, useColors, anchors) {
     });
   }
 
-  while (buf[buf.length - 1] === "\n") buf.pop();
+  while (buf[buf.length - 1] === "\n") {
+    buf.pop();
+  }
   return buf.join("");
 }
 
