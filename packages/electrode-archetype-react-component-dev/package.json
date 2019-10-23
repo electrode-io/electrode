@@ -46,8 +46,6 @@
     "electrode-check-dependencies": "^1.0.2",
     "electrode-docgen": "^1.0.0",
     "electrode-node-resolver": "^2.0.0",
-    "enzyme": "^3.0.0",
-    "enzyme-adapter-react-16": "^1.1.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^2.0.0",
     "flow-bin": "^0.74.0",

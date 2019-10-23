@@ -71,8 +71,6 @@
     "electrode-hapi-compat": "^1.2.0",
     "electrode-node-resolver": "^2.0.0",
     "electrode-webpack-reporter": "^0.5.1",
-    "enzyme": "^3.0.0",
-    "enzyme-adapter-react-16": "^1.1.0",
     "file-loader": "^2.0.0",
     "filter-scan-dir": "^1.0.9",
     "finalhandler": "^1.1.1",

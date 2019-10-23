@@ -28,6 +28,8 @@
     "chai": "^4.0.0",
     "chai-as-promised": "^7.1.1",
     "chai-shallowly": "^1.0.0",
+    "enzyme": "^3.0.0",
+    "enzyme-adapter-react-16": "^1.1.0",
     "mocha": "^4.0.0"
   },
   "devDependencies": {

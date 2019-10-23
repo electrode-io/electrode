@@ -26,6 +26,8 @@
   "dependencies": {
     "@types/jest": "^23.3.14",
     "babel-jest": "^23.6.0",
+    "enzyme": "^3.0.0",
+    "enzyme-adapter-react-16": "^1.1.0",
     "eslint-plugin-jest": "^21.27.2",
     "jest": "^23.6.0"
   },
