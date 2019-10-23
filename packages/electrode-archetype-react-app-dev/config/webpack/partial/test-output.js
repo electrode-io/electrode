@@ -3,7 +3,7 @@
 module.exports = {
   output: {
     path: process.cwd(),
-    filename: "bundle.js",
+    filename: "[name].bundle.js",
     publicPath: "/assets/"
   }
 };
