@@ -196,12 +196,13 @@ describe("redux-router-engine", function() {
     });
   });
 
-  it("should populate react-id when requested", () => {
+  it("Ensure engine renders page when withIds is requested", () => {
     const engine = new ReduxRouterEngine({ routes, withIds: true });
     testReq.url = Url.parse("/test");
 
     return engine.render(testReq).then(result => {
-      expect(result.html).to.contain("data-reactroot");
+      // At one time, this would generate react-id and reactroot, but no longer
+      expect(result.html).to.equal("<div>Page<div>Home</div></div>");
     });
   });
 
@@ -273,12 +274,13 @@ describe("redux-router-engine", function() {
       });
   });
 
-  it("render options should override constructor options", () => {
+  it("Ensure engine renders page when withIds construction option is overridden", () => {
     const engine = new ReduxRouterEngine({ routes, withIds: true });
     testReq.url = Url.parse("/test");
 
     return engine.render(testReq, { withIds: false }).then(result => {
-      expect(result.html).to.not.contain("data-reactroot");
+      // At one time, this would generate react-id and reactroot, but no longer
+      expect(result.html).to.equal("<div>Page<div>Home</div></div>");
     });
   });
 

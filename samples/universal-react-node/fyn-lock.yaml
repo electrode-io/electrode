@@ -1132,7 +1132,7 @@
 '@babel/runtime':
  _latest: 7.4.3
  _:
-  '^7.0.0,^7.1.2,^7.1.5': 7.4.3
+  '^7.0.0,^7.1.2,^7.1.5,^7.4.0': 7.4.3
   ^7.4.4: 7.4.5
  7.4.5:
   $: sha512-TuI4qpWZP6lGOGIuGWtp9sPluqYICmbk8T/1vpSysqJxRPkudh/ofFWyqdcMsDf2s7KvDL4/YHgKyvcS3g9CJQ==
@@ -5348,10 +5348,10 @@ electrode-archetype-opt-typescript:
    typescript: ^3.2.1
    '@babel/preset-typescript': ^7.1.0
 electrode-archetype-react-app:
- _latest: 6.5.13-fynlocal_h
+ _latest: 6.5.15-fynlocal_h
  _:
-  ../../packages/electrode-archetype-react-app: 6.5.13-fynlocal_h
- 6.5.13-fynlocal_h:
+  ../../packages/electrode-archetype-react-app: 6.5.15-fynlocal_h
+ 6.5.15-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app
@@ -5366,10 +5366,10 @@ electrode-archetype-react-app:
    electrode-archetype-opt-inferno: ^0.2.10
    electrode-archetype-opt-react: ^2.0.3
 electrode-archetype-react-app-dev:
- _latest: 6.5.13-fynlocal_h
+ _latest: 6.5.15-fynlocal_h
  _:
-  ../../packages/electrode-archetype-react-app-dev: 6.5.13-fynlocal_h
- 6.5.13-fynlocal_h:
+  ../../packages/electrode-archetype-react-app-dev: 6.5.15-fynlocal_h
+ 6.5.15-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app-dev
@@ -5576,9 +5576,9 @@ electrode-redux-router-engine:
    '@loadable/server': ^5.9.0
    optional-require: ^1.0.0
    react-redux: '^4.4.5 || ^5.x.x'
-   react-router: ^4.3.1
-   react-router-config: ^1.0.0-beta.4
-   react-router-dom: ^4.3.1
+   react-router: ^5.1.2
+   react-router-config: ^5.1.1
+   react-router-dom: ^5.1.2
    redux: '^4.0.0 || ^3.6.0'
   peerDependencies:
    react: '^16.0.0 || ^15.3.1 || ^0.14.8'
@@ -7422,6 +7422,13 @@ growly:
  1.3.0:
   $: sha1-8QdIy+dq+WS3yWyTxrzCivEgwIE=
   _: 'https://registry.npmjs.org/growly/-/growly-1.3.0.tgz'
+gud:
+ _latest: 1.0.0
+ _:
+  ^1.0.0: 1.0.0
+ 1.0.0:
+  $: sha512-zGEOVKFM5sVPPrYs7J5/hYEw2Pof8KCyOwyhG8sAF26mCAeUFAcYPu1mwB7hhpIP29zOIBaDqwuHdLp0jvZXjw==
+  _: 'https://registry.npmjs.org/gud/-/gud-1.0.0.tgz'
 handle-thing:
  _latest: 2.0.0
  _:
@@ -7678,9 +7685,9 @@ hex-color-regex:
   $: sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ==
   _: 'https://registry.npmjs.org/hex-color-regex/-/hex-color-regex-1.1.0.tgz'
 history:
- _latest: 4.9.0
+ _latest: 4.10.1
  _:
-  ^4.7.2: 4.9.0
+  ^4.9.0: 4.9.0
  4.9.0:
   $: sha512-H2DkjCjXf0Op9OAr6nJ56fcRkTSNrUiv41vNJ6IswJjif6wlpZK0BTfFbi7qK9dXLSYZxkq5lBsj3vUjlYBYZA==
   _: 'https://registry.npmjs.org/history/-/history-4.9.0.tgz'
@@ -7718,7 +7725,7 @@ hoek:
 hoist-non-react-statics:
  _latest: 3.3.0
  _:
-  '^2.5.0,^2.5.5': 2.5.5
+  ^2.5.5: 2.5.5
   '^3.1.0,^3.3.0': 3.3.0
  3.3.0:
   $: sha512-0XsbTXxgiaCDYDIWFcwkmerZPSwywfUqYmwT4jzewKTQSWoE6FCMoUVOeBJWK3E/CrWbxRG3m5GzY4lnIwGRBA==
@@ -10984,6 +10991,20 @@ min-document:
   _: 'https://registry.npmjs.org/min-document/-/min-document-2.19.0.tgz'
   dependencies:
    dom-walk: ^0.1.0
+mini-create-react-context:
+ _latest: 0.3.2
+ _:
+  ^0.3.0: 0.3.2
+ 0.3.2:
+  $: sha512-2v+OeetEyliMt5VHMXsBhABoJ0/M4RCe7fatd/fBy6SMiKazUSEt3gxxypfnk2SHMkdBYvorHRoQxuGoiwbzAw==
+  _: 'https://registry.npmjs.org/mini-create-react-context/-/mini-create-react-context-0.3.2.tgz'
+  dependencies:
+   gud: ^1.0.0
+   tiny-warning: ^1.0.2
+   '@babel/runtime': ^7.4.0
+  peerDependencies:
+   prop-types: ^15.0.0
+   react: '^0.14.0 || ^15.0.0 || ^16.0.0'
 mini-css-extract-plugin:
  _latest: 0.7.0
  _:
@@ -14083,48 +14104,54 @@ react-redux:
    react: '^0.14.0 || ^15.0.0-0 || ^16.0.0-0'
    redux: '^2.0.0 || ^3.0.0 || ^4.0.0-0'
 react-router:
- _latest: 5.0.0
+ _latest: 5.1.2
  _:
-  ^4.3.1: 4.3.1
- 4.3.1:
-  $: sha512-yrvL8AogDh2X42Dt9iknk4wF4V8bWREPirFfS9gLU1huk6qK41sg7Z/1S81jjTrGHxa3B8R3J6xIkDAA6CVarg==
-  _: 'https://registry.npmjs.org/react-router/-/react-router-4.3.1.tgz'
+  '5.1.2,^5.1.2': 5.1.2
+ 5.1.2:
+  $: sha512-yjEuMFy1ONK246B+rsa0cUam5OeAQ8pyclRDgpxuSCrAlJ1qN9uZ5IgyKC7gQg0w8OM50NXHEegPh/ks9YuR2A==
+  _: 'https://registry.npmjs.org/react-router/-/react-router-5.1.2.tgz'
   dependencies:
-   history: ^4.7.2
-   hoist-non-react-statics: ^2.5.0
-   invariant: ^2.2.4
+   '@babel/runtime': ^7.1.2
+   history: ^4.9.0
+   hoist-non-react-statics: ^3.1.0
    loose-envify: ^1.3.1
+   mini-create-react-context: ^0.3.0
    path-to-regexp: ^1.7.0
-   prop-types: ^15.6.1
-   warning: ^4.0.1
+   prop-types: ^15.6.2
+   react-is: ^16.6.0
+   tiny-invariant: ^1.0.2
+   tiny-warning: ^1.0.0
   peerDependencies:
    react: '>=15'
 react-router-config:
- _latest: 5.0.0
+ _latest: 5.1.1
  _:
-  ^1.0.0-beta.4: 1.0.0-beta.4
- 1.0.0-beta.4:
+  ^5.1.1: 5.1.1
+ 5.1.1:
   top: 1
-  $: sha512-4jWfQK+PNAYeMU7dZ5h/dNDTReVjm41p761+XP+II360Jz5TfzHiuP27tAasIQ+JcGWwX2l2dCWG8jEmcS5SBA==
-  _: 'https://registry.npmjs.org/react-router-config/-/react-router-config-1.0.0-beta.4.tgz'
+  $: sha512-DuanZjaD8mQp1ppHjgnnUnyOlqYXZVjnov/JzFhjLEwd3Z4dYjMSnqrEzzGThH47vpCOqPPwJM2FtthLeJ8Pbg==
+  _: 'https://registry.npmjs.org/react-router-config/-/react-router-config-5.1.1.tgz'
+  dependencies:
+   '@babel/runtime': ^7.1.2
   peerDependencies:
    react: '>=15'
-   react-router: ^4.2.0
+   react-router: '>=5'
 react-router-dom:
- _latest: 5.0.0
+ _latest: 5.1.2
  _:
-  ^4.3.1: 4.3.1
- 4.3.1:
+  ^5.1.2: 5.1.2
+ 5.1.2:
   top: 1
-  $: sha512-c/MlywfxDdCp7EnB7YfPMOfMD3tOtIjrQlj/CKfNMBxdmpJP8xcz5P/UAFn3JbnQCNUxsHyVVqllF9LhgVyFCA==
-  _: 'https://registry.npmjs.org/react-router-dom/-/react-router-dom-4.3.1.tgz'
+  $: sha512-7BPHAaIwWpZS074UKaw1FjVdZBSVWEk8IuDXdB+OkLb8vd/WRQIpA4ag9WQk61aEfQs47wHyjWUoUGGZxpQXew==
+  _: 'https://registry.npmjs.org/react-router-dom/-/react-router-dom-5.1.2.tgz'
   dependencies:
-   history: ^4.7.2
-   invariant: ^2.2.4
+   '@babel/runtime': ^7.1.2
+   history: ^4.9.0
    loose-envify: ^1.3.1
-   prop-types: ^15.6.1
-   react-router: ^4.3.1
-   warning: ^4.0.1
+   prop-types: ^15.6.2
+   react-router: 5.1.2
+   tiny-invariant: ^1.0.2
+   tiny-warning: ^1.0.0
   peerDependencies:
    react: '>=15'
 react-test-renderer:
@@ -16411,7 +16438,7 @@ tiny-invariant:
 tiny-warning:
  _latest: 1.0.2
  _:
-  ^1.0.0: 1.0.2
+  '^1.0.0,^1.0.2': 1.0.2
  1.0.2:
   $: sha512-rru86D9CpQRLvsFG5XFdy0KdLAvjdQDyZCsRcuu60WtzFylDM3eAWSxEVz5kzL2Gp544XiUvPbVKtOA/txLi9Q==
   _: 'https://registry.npmjs.org/tiny-warning/-/tiny-warning-1.0.2.tgz'
@@ -17153,15 +17180,6 @@ walker:
   _: 'https://registry.npmjs.org/walker/-/walker-1.0.7.tgz'
   dependencies:
    makeerror: 1.0.x
-warning:
- _latest: 4.0.3
- _:
-  ^4.0.1: 4.0.3
- 4.0.3:
-  $: sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==
-  _: 'https://registry.npmjs.org/warning/-/warning-4.0.3.tgz'
-  dependencies:
-   loose-envify: ^1.0.0
 watch:
  _latest: 1.0.2
  _:
