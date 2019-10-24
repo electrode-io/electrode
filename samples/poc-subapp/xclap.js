@@ -21,13 +21,6 @@ process.env.APP_SERVER_PORT = 3100;
 // process.env.KARMA_BROWSER = "phantomjs";
 
 /*
- * Turn off using electrode-webpack-reporter to show visual report of your webpack
- * compile results when running in dev mode with `clap dev`
- */
-
-// process.env.HTML_WEBPACK_REPORTER_OFF = true;
-
-/*
  * Use a custom host name instead of localhost, and a diff port instead of 2992
  * for webpack dev server when running in dev mode with `clap dev`
  */

@@ -33,7 +33,6 @@ const webpackConfigSpec = {
   cdnPort: { env: ["WEBPACK_DEV_CDN_PORT"], default: 0 },
   //
   testPort: { env: "WEBPACK_TEST_PORT", default: 3001 },
-  reporterSocketPort: { env: "WEBPACK_REPORTER_SOCKET_PORT", default: 5000 },
   https: { env: "WEBPACK_DEV_HTTPS", default: false },
   devMiddleware: { env: "WEBPACK_DEV_MIDDLEWARE", default: false },
   // in dev mode, all webpack output are saved to memory only, but some files like

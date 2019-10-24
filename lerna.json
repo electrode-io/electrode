@@ -5,7 +5,6 @@
     "ignore": ["*.md"]
   },
   "fynpo": {
-    "ignore": ["electrode-webpack-reporter"],
     "publishConfig": {
       "tags": {
         "babel7-beta": {

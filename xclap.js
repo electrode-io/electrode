@@ -106,25 +106,9 @@ const testGenerator = (testDir, name, clean, runTest, prompts) => {
 };
 
 xclap.load({
-  ".lerna.coverage": "~$lerna run --stream coverage --ignore=electrode-webpack-reporter",
-  "test-reporter": {
-    task: () => {
-      return exec(true, "lerna updated")
-        .then(r => {
-          if (r.stdout.indexOf("electrode-webpack-reporter") >= 0) {
-            return `~$cd packages/electrode-webpack-reporter && fyn --pg none install && npm test`;
-          }
-        })
-        .catch(err => {
-          assert(
-            err.output.stderr.indexOf("lerna info No packages need updating") > 0,
-            ".test-reporter: lerna updated failed without 'No packages need updating' message"
-          );
-        });
-    }
-  },
+  ".lerna.coverage": "~$lerna run --stream coverage",
   bootstrap: "~$fynpo",
-  test: ["bootstrap", ".lerna.coverage", "test-reporter", "build-test"],
+  test: ["bootstrap", ".lerna.coverage", "build-test"],
   "test-generator": [".test-generator --all"],
   "gen-hapi-app": [".test-generator --hapi --no-test"],
   "gen-express-app": [".test-generator --express --no-test"],
