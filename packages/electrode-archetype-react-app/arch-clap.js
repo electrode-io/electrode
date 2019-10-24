@@ -774,7 +774,7 @@ Individual .babelrc files were generated for you in src/client and src/server
           ".webpack-dev",
           archetype.webpack.devMiddleware
             ? ["server-admin", "generate-service-worker"]
-            : ["wds.dev", `server-watch ${args.join(" ")}`, "generate-service-worker"]
+            : ["wds.dev", "generate-service-worker"]
         ];
       }
     },
@@ -836,41 +836,6 @@ Individual .babelrc files were generated for you in src/client and src/server
 
     ".init-bundle.valid.log": () =>
       Fs.writeFileSync(Path.resolve(eTmpDir, "bundle.valid.log"), `${Date.now()}`),
-
-    "server-watch": {
-      dep: [".init-bundle.valid.log"],
-      desc: "Start app's node server in watch mode with nodemon",
-      task: function() {
-        const watches = (archetype.webpack.devMiddleware
-          ? []
-          : [Path.join(eTmpDir, "bundle.valid.log")]
-        )
-          .concat(["config", AppMode.src.server])
-          .filter(x => x)
-          .map(n => `--watch ${n}`)
-          .join(" ");
-
-        AppMode.setEnv(AppMode.src.dir);
-
-        let nodeRunApp;
-
-        if (AppMode.isSrc) {
-          const babelRun = require.resolve(Path.join(archetype.dir, "support/babel-run"));
-          nodeRunApp = `${Path.relative(process.cwd(), babelRun)} src/server`;
-        } else {
-          const serverRun = require.resolve(Path.resolve(AppMode.src.server));
-          nodeRunApp = quote(Path.relative(process.cwd(), serverRun));
-        }
-
-        return mkCmd(
-          `~$nodemon`,
-          taskArgs(this.argv).join(" "),
-          archetype.webpack.devMiddleware ? "" : "-C",
-          `--delay 1 --ext js,jsx,json,yaml,log,ts,tsx ${watches}`,
-          `${nodeRunApp}`
-        );
-      }
-    },
 
     "server-admin": {
       desc: "Start development with admin server",
