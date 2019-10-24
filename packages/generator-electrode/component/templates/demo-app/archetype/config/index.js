@@ -1,5 +1,1 @@
-module.exports = {
-  webpack: {
-    cssModuleStylusSupport: true
-  }
-};
+module.exports = {};

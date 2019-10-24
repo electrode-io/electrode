@@ -21,7 +21,6 @@ const archetypeAppPath = Path.resolve(demoAppPath, "archetype", "config");
 const archetypeApp = optionalRequire(archetypeAppPath) || { webpack: {}, options: {} };
 const archetypeAppWebpack = archetypeApp.webpack;
 let cssModuleSupport = archetypeAppWebpack.cssModuleSupport;
-const cssModuleStylusSupport = archetypeAppWebpack.cssModuleStylusSupport;
 
 /*
  * cssModuleSupport: false
@@ -153,23 +152,6 @@ module.exports = function() {
         use: cssModuleSupport
           ? [cssModuleQuery, postcssQuery, stylusQuery]
           : [cssQuery, postcssQuery, stylusQuery],
-        publicPath: ""
-      })
-    });
-  }
-
-  /*
-   *** cssModuleStylusSupport flag is about to deprecate. ***
-   * If you want to enable stylus with CSS-Modules + CSS-Next,
-   * Please use stylus as your style and enable cssModuleSupport flag instead.
-   */
-  if (cssModuleStylusSupport && stylusSupport) {
-    rules.push({
-      _name: "extract-css-stylus",
-      test: /\.styl$/,
-      use: ExtractTextPlugin.extract({
-        fallback: styleLoader,
-        use: [cssModuleQuery, postcssQuery, stylusQuery],
         publicPath: ""
       })
     });
