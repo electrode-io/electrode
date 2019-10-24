@@ -4,7 +4,6 @@ module.exports = {
   //
   options: {
     eslint: false,
-    reactIntl: false,
     // FlowJS
     flow: false,
     typescript: false,
