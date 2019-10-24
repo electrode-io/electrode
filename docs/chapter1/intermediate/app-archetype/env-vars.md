@@ -7,7 +7,6 @@ Some of the app archetype's features can be controlled by environment variables.
 | Variable            |                                              Description                                               |     Default |
 | ------------------- | :---------------------------------------------------------------------------------------------------- | :----------: |
 | `PORT`              | The port number your app's `config/default.js` will read from to start up your app server to listen at |      `3000` |
-| `OPTIMIZE_STATS`    |               If set to `true`, generates stats for the optimized webpack output bundle                | `undefined` |
 | `INSPECTPACK_DEBUG` |                 If set to `true`, generates stats for used with the [inspectpack] tool                 | `undefined` |
 
 ## Webpack Related Configs
