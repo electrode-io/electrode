@@ -58,17 +58,6 @@ module.exports = function(opts) {
     };
   }
 
-  if (process.env.OPTIMIZE_STATS === "true") {
-    statsOptions.fields = null;
-    statsOptions.transform = data => {
-      data.modules.forEach(m => {
-        delete m.source;
-      });
-      delete data.children;
-      return JSON.stringify(data, null, 2);
-    };
-  }
-
   return {
     plugins: [new StatsWriterPlugin(statsOptions)]
   };

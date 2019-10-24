@@ -119,10 +119,6 @@ function setWebpackDev() {
   }
 }
 
-function setOptimizeStats() {
-  process.env.OPTIMIZE_STATS = "true";
-}
-
 const eTmpDir = archetype.eTmpDir;
 
 function createGitIgnoreDir(dir, comment) {
@@ -403,7 +399,6 @@ function makeTasks(xclap) {
     ".development-env": () => setDevelopmentEnv(),
     ".webpack-dev": () => setWebpackDev(),
     ".static-files-env": () => setStaticFilesEnv(),
-    ".optimize-stats": () => setOptimizeStats(),
     ".remove-log-files": () => removeLogFiles(),
     build: {
       dep: [".remove-log-files", ".production-env", ".set.css-module.env"],
@@ -953,11 +948,6 @@ Individual .babelrc files were generated for you in src/client and src/server
 
     "test-frontend-dev-watch": ["?.karma.test-frontend-dev-watch"],
 
-    "build-analyze": {
-      dep: [".optimize-stats"],
-      desc: "Build your app's client bundle for production and run bundle analyzer",
-      task: ["build-dist", "optimize-stats"]
-    },
     "critical-css": {
       desc: "Start server and run penthouse to output critical CSS",
       task: () => {
@@ -975,29 +965,6 @@ Individual .babelrc files were generated for you in src/client and src/server
         "Generate Service Worker using the options provided in the app/config/sw-precache-config.json " +
         "file for prod/dev mode",
       task: () => generateServiceWorker()
-    },
-    "optimize-stats": {
-      desc: "Generate a list of all files that went into production bundle JS (results in .etmp)",
-      task: () => {
-        const stats = JSON.parse(Fs.readFileSync("dist/server/stats.json"));
-
-        for (const chunk in stats.assetsByChunkName) {
-          if (!chunk.includes("styles")) {
-            const bundle = stats.assetsByChunkName[chunk].find(
-              x => x.endsWith(".js") && x.includes("bundle")
-            );
-            if (bundle) {
-              if (!Fs.existsSync(`.etmp.${chunk}`)) {
-                Fs.mkdirSync(`.etmp.${chunk}`);
-              }
-              exec(
-                `analyze-bundle -b dist/js/${bundle} -s dist/server/stats.json --d .etmp.${chunk}`
-              );
-            }
-          }
-        }
-        return;
-      }
     },
     pwa: {
       desc: "PWA must have dist by running `clap build` first and then start the app server only.",
