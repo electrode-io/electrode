@@ -89,7 +89,6 @@
     "offline-plugin": "^4.6.1",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "optional-require": "^1.0.0",
-    "prop-types": "^15.5.6",
     "raw-loader": "^0.5.1",
     "react-intl": "^2.1.0",
     "regenerator-runtime": "^0.13.2",
