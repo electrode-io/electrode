@@ -66,7 +66,6 @@
     "convert-source-map": "^1.5.0",
     "core-js": "^2 || ^3",
     "css-loader": "^1.0.0",
-    "electrode-bundle-analyzer": "^1.0.0",
     "electrode-cdn-file-loader": "^1.0.0",
     "electrode-hapi-compat": "^1.2.0",
     "electrode-node-resolver": "^2.0.0",

@@ -44,5 +44,4 @@ This boilerplate includes the [Electrode Generator](../quick-start/whats-inside.
 -   [Server Side Render Cache + Profiling](./stand-alone-modules/server-side-render-caching-+-profiling.md)
 -   [Stateless CSRF Validation](./stand-alone-modules/stateless-csrf-validation.md)
 -   [Electrode Redux Router Engine](./stand-alone-modules/redux-router-engine.md)
--   [Electrode Bundle Analyzer](./powerful-electrode-tools/bundle-analyzer.md)
 -   [Electrify](./powerful-electrode-tools/electrify.md)
