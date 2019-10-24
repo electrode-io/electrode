@@ -73,7 +73,6 @@ module.exports = function() {
   const { hasPostCss, atImport, postcssPresetEnv, postcssLoader } = loadPostCss();
 
   const cssModuleSupport = hasPostCss && detectCssModule();
-  const cssModuleStylusSupport = hasPostCss && archetype.webpack.cssModuleStylusSupport;
 
   const rules = [];
 
@@ -176,27 +175,6 @@ module.exports = function() {
           options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
         },
         ...getCssQueryUse().concat(stylusQuery)
-      ]
-    });
-  }
-
-  /*
-   *** cssModuleStylusSupport flag is about to deprecate. ***
-   * If you want to enable stylus with CSS-Modules + CSS-Next,
-   * Please use stylus as your style and enable cssModuleSupport flag instead.
-   */
-  if (!cssModuleSupport && cssModuleStylusSupport && hasPostCss && stylusQuery) {
-    rules.push({
-      _name: "extract-css-stylus-modules",
-      test: /\.styl$/,
-      use: [
-        {
-          loader: MiniCssExtractPlugin.loader,
-          options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
-        },
-        { loader: cssLoader, options: getCSSModuleOptions() },
-        getPostCssQuery(),
-        stylusQuery
       ]
     });
   }

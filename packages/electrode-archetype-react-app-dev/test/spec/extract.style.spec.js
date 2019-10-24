@@ -27,17 +27,6 @@ describe("electrode-archetype-react-app-dev extract-styles", function() {
       expect(moduleConfig.rules[1]._name).to.equal("extract-css-scss");
       expect(moduleConfig.rules[2]._name).to.equal("extract-css-stylus");
     });
-
-    it("Should enable both stylus & css modules when cssModuleStylusSupport is true", () => {
-      archetype.webpack.cssModuleSupport = false;
-      archetype.webpack.cssModuleStylusSupport = true;
-      const moduleConfig = require(moduleName)().module;
-      expect(moduleConfig.rules[0]._name).to.equal("extract-css");
-      expect(moduleConfig.rules[1]._name).to.equal("extract-css-scss");
-      expect(moduleConfig.rules[2]._name).to.equal("extract-css-stylus");
-      expect(moduleConfig.rules[3]._name).to.equal("extract-css-stylus-modules");
-      expect(moduleConfig.rules[4]._name).to.equal("extract-css-less");
-    });
   });
 
   describe("enableShortenCSSNames", () => {

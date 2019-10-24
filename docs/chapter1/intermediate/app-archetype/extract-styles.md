@@ -7,7 +7,6 @@ Application Archetype supports multiple styles, such as pure CSS, [CSS-Modules +
 > Note: You can check how to customize the configs [here](./customize-config.md#extending-webpack-configurations).
 
 - `cssModuleSupport`: A flag to enable `css-modules + css-next` support. Enabled via setting user environment variable `CSS_MODULE_SUPPORT`.
-- <span style="color:red">**[Deprecated Warning] This is not a recommended set up.**</span> `cssModulesStylusSupport`: A flag to enable `stylus` support with CSS modules. (Default: false)
 
 ## Style Default Cases
 
