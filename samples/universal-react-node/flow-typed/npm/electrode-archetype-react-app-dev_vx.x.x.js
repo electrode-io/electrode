@@ -130,10 +130,6 @@ declare module 'electrode-archetype-react-app-dev/config/webpack/partial/hot' {
   declare module.exports: any;
 }
 
-declare module 'electrode-archetype-react-app-dev/config/webpack/partial/html-reporter' {
-  declare module.exports: any;
-}
-
 declare module 'electrode-archetype-react-app-dev/config/webpack/partial/images' {
   declare module.exports: any;
 }
@@ -387,9 +383,6 @@ declare module 'electrode-archetype-react-app-dev/config/webpack/partial/fonts.j
 }
 declare module 'electrode-archetype-react-app-dev/config/webpack/partial/hot.js' {
   declare module.exports: $Exports<'electrode-archetype-react-app-dev/config/webpack/partial/hot'>;
-}
-declare module 'electrode-archetype-react-app-dev/config/webpack/partial/html-reporter.js' {
-  declare module.exports: $Exports<'electrode-archetype-react-app-dev/config/webpack/partial/html-reporter'>;
 }
 declare module 'electrode-archetype-react-app-dev/config/webpack/partial/images.js' {
   declare module.exports: $Exports<'electrode-archetype-react-app-dev/config/webpack/partial/images'>;

@@ -10,8 +10,7 @@ function devOptions() {
   const devProfile = {
     partials: {
       "_dev-mode": { order: 10000 },
-      _dev: { order: 10100 },
-      "_html-reporter": { order: 10300 } // must be after _dev to override devServer
+      _dev: { order: 10100 }
     }
   };
 

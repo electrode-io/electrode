@@ -1,7 +1,0 @@
-{
-  "plugins": {
-    "electrode-react-webapp/lib/hapi": {
-      "enable": false
-    }
-  }
-}
