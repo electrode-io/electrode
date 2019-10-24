@@ -81,7 +81,6 @@
 - [Powerful Electrode Tools](chapter1/advanced/powerful-electrode-tools.md)
   - [Electrify](chapter1/advanced/powerful-electrode-tools/electrify.md)
   - [Electrode Explorer](chapter1/advanced/powerful-electrode-tools/electrode-explorer.md)
-  - [Bundle Analyzer](chapter1/advanced/powerful-electrode-tools/bundle-analyzer.md)
   - [React Native and Over the Air](chapter1/over-the-air/react-native-and-over-the-air.md)
 
 ### Contribute

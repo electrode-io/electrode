@@ -1,0 +1,38 @@
+{
+  "name": "electrode-archetype-opt-react-intl",
+  "version": "1.0.0",
+  "description": "Electrode NodeJS/React Optional Archetype React-International",
+  "main": "optional-check.js",
+  "homepage": "http://www.electrode.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electrode-io/electrode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/electrode-io/electrode/issues"
+  },
+  "files": [
+    "optional-check.js"
+  ],
+  "author": "Electrode (http://www.electrode.io/)",
+  "contributors": [
+    "Christian Lent <clent@walmartlabs.com>"
+  ],
+  "license": "Apache-2.0",
+  "scripts": {
+    "preinstall": "node optional-check.js",
+    "prepare": "shx cp node_modules/opt-archetype-check/optional-check.js ."
+  },
+  "dependencies": {
+    "react-intl": "^2.1.3"
+  },
+  "devDependencies": {
+    "opt-archetype-check": "../opt-archetype-check",
+    "shx": "^0.3.2"
+  },
+  "electrodeOptArchetype": {
+    "optionalTagName": "reactIntl",
+    "expectTag": true,
+    "defaultInstall": true
+  }
+}

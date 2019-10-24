@@ -13,6 +13,3 @@ Electrify is a sophisticated tool for analyzing the module tree of project bundl
 Electrode-Explorer is a dynamic, real-time showcase of all your components.
 
 ![](http://www.electrode.io/img/electrode-explorer.png)
-
-#### [Bundle Analyzer](./powerful-electrode-tools/bundle-analyzer.md)
-Bundle Analyzer is a webpack tool that gives you a detailed list of all the files that went into your deduped and minified bundle JS file. For additional information, check out this example   [bundle.analyze.tsv](https://docs.google.com/spreadsheets/d/1IomT2fYCKEwVY0CO-0jImc7CBj_uAmgy70Egsm4CnVE/preview?usp=embed_googleplus) file.
