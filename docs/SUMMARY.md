@@ -29,6 +29,7 @@
 - Testing
   - [Unit Tests](/chapter1/intermediate/app-archetype/unit-tests.md)
 - Flow and TypeScript
+  - [Enabling Flow and Typescript](/chapter1/intermediate/languages/README.md)
   - [Working with Flow](/chapter1/intermediate/flow.md)
   - [Flow FAQ](/chapter1/intermediate/flow-faq.md)
   - [Deploy Your App](/chapter1/further-develop-app/deploy-your-app.md)
