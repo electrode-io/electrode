@@ -39,8 +39,8 @@
     "babel-register": "^6.5.2",
     "electrode-archetype-njs-module-dev": "^2.1.0",
     "electrode-server": "^1.5.1",
-    "react": "^16.0.0 || ^15.3.1 || ^0.14.8",
-    "react-dom": "^16.0.0 || ^15.3.1 || ^0.14.8",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "run-verify": "^1.0.2",
     "stream-to-array": "^2.3.0",
     "test-init-nm": "./test/nm/test-init-nm",
@@ -57,8 +57,8 @@
     "redux": "^4.0.0 || ^3.6.0"
   },
   "peerDependencies": {
-    "react": "^16.0.0 || ^15.3.1 || ^0.14.8",
-    "react-dom": "^16.0.0 || ^15.3.1 || ^0.14.8"
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
   },
   "nyc": {
     "all": true,
