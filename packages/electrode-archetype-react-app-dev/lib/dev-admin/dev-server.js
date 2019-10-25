@@ -17,8 +17,6 @@ if (process.env.WEBPACK_DEV === undefined) {
   process.env.WEBPACK_DEV = true;
 }
 
-process.env.WEBPACK_DEV_MIDDLEWARE = true;
-
 if (electrodeServer) {
   electrodeServer({
     electrode: {

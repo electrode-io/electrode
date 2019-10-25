@@ -11,7 +11,7 @@ const portFromEnv = () => {
 module.exports = {
   plugins: {
     "electrode-archetype-react-app-dev": {
-      enable: process.env.WEBPACK_DEV_MIDDLEWARE === "true" && process.env.WEBPACK_DEV === "true"
+      enable: process.env.WEBPACK_DEV === "true"
     },
     inert: {
       enable: true

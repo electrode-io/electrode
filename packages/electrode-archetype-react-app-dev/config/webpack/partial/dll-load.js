@@ -20,7 +20,6 @@
 const webpack = require("webpack");
 const DonePlugin = require("../plugins/done-plugin");
 const dllUtil = require("../util/dll-util");
-const archetype = require("electrode-archetype-react-app/config/archetype");
 
 module.exports = function(options) {
   const dll = dllUtil.loadAssets();
@@ -28,9 +27,6 @@ module.exports = function(options) {
   // dev mode?
   if (process.env.WEBPACK_DEV === "true") {
     dllUtil.updateDllAssetsForDev(dll.assets);
-    if (!archetype.webpack.devMiddleware) {
-      dllUtil.setupWebpackDevServer(options.currentConfig, dll.assets);
-    }
   }
 
   return {

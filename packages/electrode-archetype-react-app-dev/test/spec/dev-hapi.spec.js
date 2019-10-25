@@ -8,7 +8,6 @@ describe("dev-hapi", function() {
   this.timeout(10000);
 
   before(() => {
-    mockRequire("electrode-archetype-react-app/config/archetype", {webpack: {devMiddleware: true}});
   });
 
   beforeEach(() => {

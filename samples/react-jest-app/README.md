@@ -75,7 +75,6 @@ Apache-2.0 © [Joel Chen](https://github.com/jchip)
 [daviddm-dev-url]:https://david-dm.org/electrode-io/electrode?path=samples/universal-material-ui?type-dev
 [material-ui]: http://www.material-ui.com/
 [RaisedButton]: http://www.material-ui.com/#/components/raised-button
-[webpack-dev-server]: https://webpack.github.io/docs/webpack-dev-server.html
 [Server Rendering]: http://www.material-ui.com/#/get-started/server-rendering
 [xclap-cli]: https://www.npmjs.com/package/xclap-cli
 [material-ui examples]: http://www.material-ui.com/#/components/app-bar

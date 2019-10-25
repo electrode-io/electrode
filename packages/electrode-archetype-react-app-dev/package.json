@@ -100,7 +100,6 @@
     "webpack-cli": "^3.3.9",
     "webpack-config-composer": "^1.1.0",
     "webpack-dev-middleware": "^3.4.0",
-    "webpack-dev-server": "^3.1.10",
     "webpack-disk-plugin": "0.0.2",
     "webpack-hot-middleware": "^2.22.2",
     "webpack-stats-plugin": "^0.2.1",

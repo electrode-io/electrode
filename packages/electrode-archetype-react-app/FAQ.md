@@ -27,7 +27,7 @@ $ clap test-dev
 #### Why can't my test and code changes get automatically run with the tests?  Why do the tests take so long to start?
 
 ```bash
-# This will start a webpack-dev-server to hot watch your code and also start a karma test browser that auto-reruns when specs or client code changes.
+# This will start the webpack-dev-middleware to hot watch your code and also start a karma test browser that auto-reruns when specs or client code changes.
 $ clap test-watch-all
 ```
 

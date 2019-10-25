@@ -36,16 +36,6 @@ If you want to use Electrode's dev reverse proxy, then you should set `APP_SERVE
 
 The latest Electrode runs an interactive menu that allows you to restart these two servers on demand, with the `--inspect-brk` flag if you need to attach a debugger to them.
 
-Electrode will activate the admin console if you set env `WEBPACK_DEV_MIDDLEWARE` to `true`.
-
-Typically you should set that in `xclap.js` with:
-
-```js
-process.env.WEBPACK_DEV_MIDDLEWARE = true;
-```
-
-> It's already there if you generated your app with Electrode ignite.
-
 You can access the Electrode Development Dashboard using the URL `http://localhost:3000/__electrode_dev`.
 
 ## Dev Reverse Proxy

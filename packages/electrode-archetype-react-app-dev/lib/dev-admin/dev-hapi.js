@@ -4,7 +4,6 @@
 
 const Url = require("url");
 const mime = require("mime");
-const archetype = require("electrode-archetype-react-app/config/archetype");
 const { universalHapiPlugin } = require("electrode-hapi-compat");
 const hapi17Plugin = require("./dev-hapi17");
 const fs = require("fs");
@@ -13,11 +12,6 @@ const Middleware = require("./middleware");
 const FakeRes = require("../fake-res");
 
 function register(server, options, next) {
-  if (!archetype.webpack.devMiddleware) {
-    console.error("dev-hapi plugin was loaded but WEBPACK_DEV_MIDDLEWARE is not true. Skipping.");
-    return next();
-  }
-
   const middleware = new Middleware({
     baseUrl: () => {
       return Url.format({

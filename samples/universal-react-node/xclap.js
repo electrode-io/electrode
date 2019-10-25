@@ -5,13 +5,6 @@
 process.env.SERVER_ES6 = true;
 
 /*
- * Tell Electrode app archetype that you want to use webpack dev as a middleware
- * This will run webpack dev server as part of your app server.
- */
-
-process.env.WEBPACK_DEV_MIDDLEWARE = true;
-
-/*
  * Tell Electrode app archetype that you want to shorten css names under production env
  */
 
