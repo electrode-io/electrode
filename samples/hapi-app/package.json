@@ -46,17 +46,17 @@
     "electrode-cookies": "^1.0.0",
     "electrode-react-webapp": "^3.2.0",
     "electrode-redux-router-engine": "^2.1.8",
-    "electrode-server": "^2.2.0",
+    "electrode-server": "^3.0.0",
     "electrode-static-paths": "^2.0.1",
     "electrode-ui-config": "^1.1.2",
-    "good": "^8.1.1",
-    "good-console": "^7.1.0",
-    "inert": "^5.1.2",
+    "@hapi/good": "^8.2.4",
+    "@hapi/good-console": "^8.1.2",
+    "@hapi/inert": "^5.1.2",
     "lodash": "^4.17.11",
     "milligram": "^1.3.0",
     "react-notify-toast": "^0.5.0",
-    "react-router-config": "^1.0.0-beta.4",
-    "react-router-dom": "^4.3.1"
+    "react-router-config": "^5.1.1",
+    "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
     "electrode-archetype-react-app-dev": "^6.0.0",
