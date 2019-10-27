@@ -85,10 +85,13 @@ function generateConfig(opts, archetypeControl) {
   const keepCustomProps = options.keepCustomProps;
 
   const compose = () => {
-    return composer.compose(
-      { keepCustomProps },
+    const r = composer.compose(
+      { keepCustomProps, meta: true },
       options.profileNames
     );
+    logger.info("Composed webpack config from profiles:", r.profileNames.join(", "));
+    logger.info("Webpack config partials:", r.partialNames.join(", "));
+    return r.config;
   };
 
   let config;
