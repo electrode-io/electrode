@@ -1,6 +1,6 @@
 "use strict";
 
-/* eslint-disable no-console, no-process-exit, complexity */
+/* eslint-disable complexity */
 /* eslint-disable no-magic-numbers, max-len, max-statements, prefer-template */
 
 const Path = require("path");
@@ -34,7 +34,6 @@ class AdminServer {
     this._wds = ck`<gray.inverse>[wds]</> `;
     this._proxy = ck`<green.inverse>[proxy]</> `;
     this._io.setup();
-    // this.setupConsoleInterface();
     this.handleUserInput();
     await this.startWebpackDevServer();
     await this.startAppServer();

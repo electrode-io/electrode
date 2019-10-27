@@ -1,5 +1,7 @@
 "use strict";
 
+/* eslint-disable no-console, no-process-exit */
+
 const readline = require("readline");
 
 class ConsoleIO {
