@@ -26,6 +26,13 @@ Some of the app archetype's features can be controlled by environment variables.
 | `ELECTRODE_LOAD_DLLS`          |                                                                                                                                                                                                                                                                  If non empty json, each entry is the name of Electrode Webpack DLL to be loaded by the app                                                                                                                                                                                                                                                                  |          `{}` |
 | `WEBPACK_MINIFY`               |                                                                                                                                                                                                                                                                                   If `true`, webpack in `development` mode to minify code                                                                                                                                                                                                                                                                                    |        `true` |
 
+- The following settings are used by the Webpack dev middleware server to determine the host and port. The Electrode dev reverse proxy will automatically reconfigure itself to use overridden values:
+
+| Variable                    |                        Description                         |     Default |
+| --------------------------- | :-------------------------------------------------------- | :----------: |
+| `WEBPACK_DEV_HOST`          |  If defined, used as the hostname for webpack dev server   | `localhost` |
+| `WEBPACK_DEV_PORT`          | If defined, used as the port number for webpack dev server |      `2992` |
+
 ## Babel Related Configs
 
 | Variable                  |                                                                                                                      Description                                                                                                                      |                                                         Default |
