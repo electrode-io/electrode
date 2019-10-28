@@ -1,4 +1,16 @@
+const defaultListenPort = 3000;
+
+const portFromEnv = () => {
+  const x = parseInt(process.env.APP_SERVER_PORT || process.env.PORT, 10);
+  return x !== null && !isNaN(x) ? x : defaultListenPort;
+};
+
 module.exports = {
+  connections: {
+    default: {
+      port: portFromEnv()
+    }
+  },
   plugins: {
     "webpack-dev": {
       module: "electrode-archetype-react-app-dev/lib/webpack-dev-hapi",

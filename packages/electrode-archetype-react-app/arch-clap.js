@@ -56,6 +56,14 @@ const logger = require("./lib/logger");
 
 const jestTestDirectories = ["_test_", "_tests_", "__test__", "__tests__"];
 
+// By default, the dev proxy server will be hosted from PORT (3000)
+//  and the app from APP_SERVER_PORT (3100).
+//  If the APP_SERVER_PORT is set to the empty string however,
+//  leave it empty and therefore disable the dev proxy server.
+if (!process.env.APP_SERVER_PORT && process.env.APP_SERVER_PORT !== "") {
+  process.env.APP_SERVER_PORT = 3100;
+}
+
 function quote(str) {
   return str.startsWith(`"`) ? str : `"${str}"`;
 }
