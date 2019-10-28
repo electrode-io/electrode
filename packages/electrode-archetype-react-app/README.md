@@ -128,7 +128,7 @@ For code under `src/server`, you can refer to client with `"../client/foo"`.
 
 ##### development
 
-In dev mode, your code will be executed from the `src` directory.  Your client code is transpiled and packed by `webpack-dev-server` on the fly.  Your node server is executed by `babel-node`.
+In dev mode, your code will be executed from the `src` directory.  Your client code is transpiled and packed by `webpack-dev-middleware` on the fly.  Your node server is executed by `babel-node`.
 
 ##### production
 

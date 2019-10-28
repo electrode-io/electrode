@@ -4,8 +4,6 @@
 
 // process.env.SERVER_ES6 = true;
 
-process.env.WEBPACK_DEV_MIDDLEWARE = true;
-
 process.env.APP_SERVER_PORT = 3100;
 
 /*
@@ -19,19 +17,5 @@ process.env.APP_SERVER_PORT = 3100;
  */
 
 // process.env.KARMA_BROWSER = "phantomjs";
-
-/*
- * Use a custom host name instead of localhost, and a diff port instead of 2992
- * for webpack dev server when running in dev mode with `clap dev`
- */
-
-// process.env.WEBPACK_DEV_HOST = "dev.mymachine.net";
-// process.env.WEBPACK_DEV_PORT = 8100;
-
-/*
- * Enable HTTPS for webpack dev server when running in dev mode with `clap dev`
- */
-
-// process.env.WEBPACK_DEV_HTTPS = true;
 
 require("electrode-archetype-react-app")();

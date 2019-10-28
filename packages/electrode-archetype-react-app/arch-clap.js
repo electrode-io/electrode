@@ -56,6 +56,14 @@ const logger = require("./lib/logger");
 
 const jestTestDirectories = ["_test_", "_tests_", "__test__", "__tests__"];
 
+// By default, the dev proxy server will be hosted from PORT (3000)
+//  and the app from APP_SERVER_PORT (3100).
+//  If the APP_SERVER_PORT is set to the empty string however,
+//  leave it empty and therefore disable the dev proxy server.
+if (!process.env.APP_SERVER_PORT && process.env.APP_SERVER_PORT !== "") {
+  process.env.APP_SERVER_PORT = 3100;
+}
+
 function quote(str) {
   return str.startsWith(`"`) ? str : `"${str}"`;
 }
@@ -114,9 +122,6 @@ const portFromEnv = () => {
 
 function setWebpackDev() {
   process.env.WEBPACK_DEV = "true";
-  if (archetype.webpack.devMiddleware) {
-    process.env.WEBPACK_DEV_MIDDLEWARE = "true";
-  }
 }
 
 const eTmpDir = archetype.eTmpDir;
@@ -772,9 +777,7 @@ Individual .babelrc files were generated for you in src/client and src/server
         return [
           ".set.css-module.env",
           ".webpack-dev",
-          archetype.webpack.devMiddleware
-            ? ["server-admin", "generate-service-worker"]
-            : ["wds.dev", "generate-service-worker"]
+          ["server-admin", "generate-service-worker"]
         ];
       }
     },
@@ -857,40 +860,28 @@ Individual .babelrc files were generated for you in src/client and src/server
       }
     },
 
-    "wds.dev": {
-      desc: "Start webpack-dev-server in dev mode",
-      task: function() {
-        setWebpackProfile("development");
-        return mkCmd(
-          "~$webpack-dev-server",
-          `--watch --watch-aggregate-timeout 2000`,
-          archetype.webpack.enableHotModuleReload ? `--hot` : ``,
-          `--config`,
-          quote(getWebpackStartConfig("webpack.config.dev.js")),
-          `--progress --colors`,
-          `--port ${archetype.webpack.devPort}`,
-          `--host ${archetype.webpack.devHostname}`
-        );
-      }
-    },
-
-    "wds.test": {
-      desc: "Start webpack-dev-server in test mode",
+    "server-admin.test": {
+      desc: "Start development with admin server in test mode",
       task: function() {
         setWebpackProfile("test");
+        AppMode.setEnv(AppMode.src.dir);
+        // eslint-disable-next-line no-shadow
+        const exec = AppMode.isSrc
+          ? quote(Path.join(archetype.dir, "support/babel-run"))
+          : AppMode.src.server;
+
         return mkCmd(
-          "~$webpack-dev-server",
-          `--config`,
-          quote(getWebpackStartConfig("webpack.config.test.js")),
-          `--progress --colors`,
-          `--port ${archetype.webpack.testPort}`,
-          `--host ${archetype.webpack.devHostname}`
+          `~(tty)$node ${quote(Path.join(archetype.devDir, "lib/dev-admin"))}`,
+          taskArgs(this.argv).join(" "),
+          `--exec ${exec} --ext js,jsx,json,yaml,log,ts,tsx`,
+          `--watch config ${AppMode.src.server}`,
+          AppMode.isSrc ? `-- ${AppMode.src.server}` : ""
         );
       }
     },
 
     "test-server": xclap.concurrent(["lint-server", "lint-server-test"], "test-server-cov"),
-    "test-watch-all": xclap.concurrent("wds.test", "test-frontend-dev-watch"),
+    "test-watch-all": xclap.concurrent("server-admin.test", "test-frontend-dev-watch"),
 
     "test-ci": ["test-frontend-ci"],
     "test-cov": [
@@ -902,10 +893,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     ].filter(x => x),
     "test-dev": ["test-frontend-dev", "test-server-dev"],
 
-    "test-watch": () =>
-      exec(`pgrep -fl "webpack-dev-server.*${archetype.webpack.testPort}"`)
-        .then(() => `test-frontend-dev-watch`)
-        .catch(() => `test-watch-all`),
+    "test-watch": ["test-watch-all"],
 
     "test-frontend": ["?.karma.test-frontend"],
     "test-frontend-ci": ["?.karma.test-frontend-ci"],
@@ -1077,10 +1065,7 @@ Individual .babelrc files were generated for you in src/client and src/server
         }
       },
 
-      ".karma.test-frontend-dev": () =>
-        exec(`pgrep -fl "webpack-dev-server.*${archetype.webpack.testPort}"`)
-          .then(() => exec(`karma start`, quote(karmaConfig("karma.conf.dev.js")), `--colors`))
-          .catch(() => `test-frontend`),
+      ".karma.test-frontend-dev": ["test-frontend"],
 
       ".karma.test-frontend-dev-watch": () => {
         setWebpackProfile("test");

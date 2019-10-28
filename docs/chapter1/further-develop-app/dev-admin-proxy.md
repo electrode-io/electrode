@@ -26,25 +26,15 @@ It starts a node server that listens at port ***2992***, which you can change wi
 
 ## Your application node server
 
-Electrode will also starts your application server from `src/server/index.js`, with `@babel/register` loaded.
+Electrode will also start your application server from `src/server/index.js`, with `@babel/register` loaded.
 
-The port it listens to is ***3000***, which you can change with the env variable `PORT`.
+By default, Electrode's development server will be hosted from the dev reverse proxy. The port it listens to is ***3000***, which you can change with the env variable `PORT`.
 
-If you want to use Electrode's dev reverse proxy, then you should set `APP_SERVER_PORT` to run your app server at another port, so the proxy can listens at `PORT` (`3000`) and forward to it.
+The application server is hosted at ***3100*** by default, which you can change with the env variable `APP_SERVER_PORT`.
 
 ## Dev Admin Console
 
 The latest Electrode runs an interactive menu that allows you to restart these two servers on demand, with the `--inspect-brk` flag if you need to attach a debugger to them.
-
-Electrode will activate the admin console if you set env `WEBPACK_DEV_MIDDLEWARE` to `true`.
-
-Typically you should set that in `xclap.js` with:
-
-```js
-process.env.WEBPACK_DEV_MIDDLEWARE = true;
-```
-
-> It's already there if you generated your app with Electrode ignite.
 
 You can access the Electrode Development Dashboard using the URL `http://localhost:3000/__electrode_dev`.
 
@@ -59,21 +49,25 @@ To make dev mode more similar to production, Electrode offers a reverse proxy se
 1. [Enable Reverse Proxy](#enable-reverse-proxy) or [Persist APP_SERVER_PORT](#persist-app_server_port) : Specify the env variable `APP_SERVER_PORT` to run the app node server on a different port.
 2. [Update your server's port](#update-your-servers-port): Update the app server to listen on the port from `APP_SERVER_PORT`.
 
-### Enable Reverse Proxy
+### Disable Reverse Proxy
 
-To enable the reverse proxy, you have to let Electrode run your app node server on a different port.
+The dev reverse proxy is enabled by default at port ***3000*** forwarding to the application server at ***3100***.
 
-To do that, specify the env variable `APP_SERVER_PORT`.  When Electrode detects that, it assumes you want to run your development with the reverse proxy.  You also need to update your app server's startup code to get its port number from that.
+To disable the reverse proxy, specify the empty string `""` to the env variable `APP_SERVER_PORT`.
 
-For example, to continue to serve your app on port ***3000***, which redirects to webpack dev server at ***2992*** and your app server at ***3100***, do this:
+This will cause the Electrode application server to run directly on the env variable `PORT` (which is ***3000*** by default). 
+
+For example, to serve your app on port ***3000***, which uses webpack dev server at ***2992*** but disable the dev reverse proxy, do this:
 
 ```bash
-APP_SERVER_PORT=3100 clap dev
+APP_SERVER_PORT= clap dev
 ```
 
 Now if you point your browser to `http://localhost:3000`, your entire app will appear to be serving from that single port.
 
-You can also run your app at the standard HTTP port ***80*** while continue to run your app server at ***3000***:
+### Serving the your application from HTTP port 80
+
+You can also run your app at the standard HTTP port ***80*** while continuing to run your app server at ***3000***:
 
 ```bash
 PORT=80 APP_SERVER_PORT=3000 clap dev
@@ -85,10 +79,10 @@ Now you can point your browser to `http://localhost` to access your entire app.
 
 ### Persist APP_SERVER_PORT
 
-If you want to set `APP_SERVER_PORT` persistently and always use the reverse proxy, then you should set it in `xclap.js` with:
+If you want to set `APP_SERVER_PORT` persistently and always disable the reverse proxy, then you should set it in `xclap.js` with:
 
 ```js
-process.env.APP_SERVER_PORT=3100;
+process.env.APP_SERVER_PORT="";
 ```
 
 ### Proxy Admin

@@ -4,17 +4,11 @@
 
 const Url = require("url");
 const mime = require("mime");
-const archetype = require("electrode-archetype-react-app/config/archetype");
 
 const Middleware = require("./middleware");
 const FakeRes = require("../fake-res");
 
 function setup(app, protocol, port) {
-  if (!archetype.webpack.devMiddleware) {
-    console.error("dev-express middleware: WEBPACK_DEV_MIDDLEWARE is not true. Skipping.");
-    return;
-  }
-
   const middleware = new Middleware({
     baseUrl: () => {
       return Url.format({

@@ -133,32 +133,8 @@ const updateDllAssetsForDev = dllAssets => {
   });
 };
 
-//
-// If using webpack-dev-server, then setup routes on the dev-server to listen
-// at `electrodeDllDevBasePath` and serve up DLL js bundles.
-// This updates the CDN mapping in `dllAssets`, which gets saved to
-// `dist/electrode-dll-assets.dev.json`
-//
-
-const setupWebpackDevServer = config => {
-  config = config.devServer || config;
-  const setup = config.setup;
-  config.setup = app => {
-    logger.info("Setting up DLL assets routes for webpack dev server");
-    if (setup) setup(app);
-    app.get(`/${electrodeDllDevBasePath}/:moduleName/:bundleName`, (req, res) => {
-      const modName = decodeURIComponent(req.params.moduleName);
-      const bundle = require.resolve(`${modName}/dist/${req.params.bundleName}`);
-      // TODO: cache read content
-      const bundleStr = Fs.readFileSync(bundle).toString();
-      res.type("js").send(bundleStr);
-    });
-  };
-};
-
 module.exports = {
   loadJson,
-  setupWebpackDevServer,
   updateDllAssetsForDev,
   loadAssets: () => {
     const loadDlls = archetype.webpack.loadDlls;

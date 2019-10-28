@@ -32,9 +32,6 @@ const webpackConfigSpec = {
   cdnHostname: { env: ["WEBPACK_DEV_CDN_HOST"], type: "string", default: null },
   cdnPort: { env: ["WEBPACK_DEV_CDN_PORT"], default: 0 },
   //
-  testPort: { env: "WEBPACK_TEST_PORT", default: 3001 },
-  https: { env: "WEBPACK_DEV_HTTPS", default: false },
-  devMiddleware: { env: "WEBPACK_DEV_MIDDLEWARE", default: false },
   // in dev mode, all webpack output are saved to memory only, but some files like
   // stats.json are needed by different uses and the stats partial saves a copy to
   // disk.  It will use this as the path to save the file.

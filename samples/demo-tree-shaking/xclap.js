@@ -5,13 +5,6 @@
 process.env.SERVER_ES6 = true;
 
 /*
- * Tell Electrode app archetype that you want to use webpack dev as a middleware
- * This will run webpack dev server as part of your app server.
- */
-
-process.env.WEBPACK_DEV_MIDDLEWARE = true;
-
-/*
  * Tell Electrode app archetype that you want to shorten css names under production env
  */
 
@@ -40,29 +33,6 @@ process.env.ENABLE_SHORTEN_CSS_NAMES = true;
  */
 
 // process.env.KARMA_BROWSER = "phantomjs";
-
-/******************************************************************************
- * Begin webpack-dev-server only settings.                                    *
- * These do not apply if WEBPACK_DEV_MIDDLEWARE is enabled                    *
- ******************************************************************************/
-
-/*
- * Use a custom host name instead of localhost, and a diff port instead of 2992
- * for webpack dev server when running in dev mode with `clap dev`
- */
-
-// process.env.WEBPACK_DEV_HOST = "dev.mymachine.net";
-// process.env.WEBPACK_DEV_PORT = 8100;
-
-/*
- * Enable HTTPS for webpack dev server when running in dev mode with `clap dev`
- */
-
-// process.env.WEBPACK_DEV_HTTPS = true;
-
-/******************************************************************************
- * End webpack-dev-server only settings.                                      *
- ******************************************************************************/
 
 require("electrode-archetype-react-app")();
 

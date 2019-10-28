@@ -1,6 +1,6 @@
 # Upgrade to webpack-dev-middleware
 
-With the release of [electrode-archetype-react-app version 5.3.4], Electrode is no longer depending on [webpack-dev-server].
+With the release of [electrode-archetype-react-app version 7.0.0], Electrode no longer includes [webpack-dev-server].
 
 Instead, webpack-dev is now integrated as part of the app server by using [webpack-dev-middleware].
 
@@ -30,12 +30,12 @@ In `package.json`, these dependencies should be updated:
 
 - dependencies
 
-  - `"electrode-archetype-react-app": "^5.3.4"`
+  - `"electrode-archetype-react-app": "^7.0.0"`
   - `"electrode-react-webapp": "^2.5.1"`
 
 - devDependencies
 
-  - `"electrode-archetype-react-app-dev": "^5.3.4"`
+  - `"electrode-archetype-react-app-dev": "^7.0.0"`
 
 ## Add webpack-dev plugin
 
@@ -46,7 +46,7 @@ In the file `config/default.js`, add the following plugin to the top:
   "plugins": {
     "webpack-dev": {
       module: "electrode-archetype-react-app-dev/lib/webpack-dev-hapi",
-      enable: process.env.WEBPACK_DEV_MIDDLEWARE === "true" && process.env.WEBPACK_DEV === "true",
+      enable: process.env.WEBPACK_DEV === "true",
     }
   }
 }
@@ -54,13 +54,7 @@ In the file `config/default.js`, add the following plugin to the top:
 
 > If you only have `config/default.json`, then please add a new `config/default.js` file with the entire content above.
 
-In the file `xclap.js`, add **near the top**:
-
-```js
-process.env.WEBPACK_DEV_MIDDLEWARE = true;
-```
-
-Now running `clap dev` should no longer starts [webpack-dev-server].
+Now running `clap dev` should no longer start [webpack-dev-server].
 
 ## HMR with RR4
 
@@ -131,11 +125,11 @@ And these are the steps required to migrate Electrode's basic app to use the new
 
 In summary:
 
-1.  Update dependencies for [electrode-archetype-react-app] and the `-dev` one to `^5.3.4`
+1.  Update dependencies for [electrode-archetype-react-app] and the `-dev` one to `^7.0.0`
 2.  Add the webpack-dev middleware hapi plugin to `config/default.js`
 3.  For React router 4, update `src/client/app.jsx` to enable HMR.
 
-[electrode-archetype-react-app version 5.3.4]: https://www.npmjs.com/package/electrode-archetype-react-app/v/5.3.4
+[electrode-archetype-react-app version 7.0.0]: https://www.npmjs.com/package/electrode-archetype-react-app/v/7.0.0
 [electrode-redux-router-engine v2]: https://www.npmjs.com/package/electrode-redux-router-engine/v/2.1.1
 [rr4 migration]: rr3-to-rr4.md
 [webpack-dev-server]: https://github.com/webpack/webpack-dev-server

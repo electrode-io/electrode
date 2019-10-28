@@ -73,9 +73,9 @@ $ npm install material-ui react-tap-event-plugin --save
 1. Add [material-ui]'s required font *Roboto* to `src/server/views/index-view.js`
 1. Update `src/client/styles/base.css` with styles for [material-ui].
 1. Test [material-ui] component by adding a [RaisedButton] to `src/client/components/home.jsx`
-1. Watch [webpack-dev-server] update your bundle and refresh browser to see changes.
+1. Watch [webpack-dev-middleware] update your bundle and refresh browser to see changes.
 1. Add `global.navigator.userAgent` to `src/server/index.js` as required by [material-ui] for [Server Rendering].
-1. Watch [webpack-dev-server] update your bundle and refresh browser to see changes.
+1. Watch [webpack-dev-middleware] update your bundle and refresh browser to see changes.
 
 ### Add [material-ui] Examples
 
@@ -104,7 +104,7 @@ First add the IconMenu [AppBar example] by following the steps below.
 
 1. Copy the source from the example into a file `src/client/components/AppBarExampleIconMenu.jsx`
 2. Replace the `Hello Electrode` and the RaisedButton content in `src/client/components/home.jsx` with `<AppBarExampleIconMenu />`;
-3. Watch [webpack-dev-server] update your bundle and refresh browser to see changes.
+3. Watch [webpack-dev-middleware] update your bundle and refresh browser to see changes.
 4. If the AppBar shows up, click on the right menu button, you should see a menu pops up.
 
 #### [BottomNavigation example]
@@ -113,7 +113,7 @@ Next add the [BottomNavigation example]
 
 1. Copy the source from the example into a file `src/client/components/BottomNavigationExampleSimple.jsx`
 2. Import the component in `src/client/components/home.jsx` and add it to `render` after the `AppBarExampleIconMenu` component.
-3. Watch [webpack-dev-server] update your bundle and refresh browser to see changes.
+3. Watch [webpack-dev-middleware] update your bundle and refresh browser to see changes.
 4. You should see AppBar and BottomNavigation show up.  You should be able to interact with the buttons on the BottomNavigation component.
 
 #### [Card example]
@@ -122,7 +122,7 @@ In this section we add the [Card example].
 
 1. Copy the source from the [Card example] into a file `src/client/components/CardExampleWithAvatar.jsx`
 2. Import the component in `src/client/components/home.jsx` and add it to `render` after the `AppBarExampleIconMenu` component.
-3. Watch [webpack-dev-server] update your bundle and refresh browser to see changes.
+3. Watch [webpack-dev-middleware] update your bundle and refresh browser to see changes.
 4. You should see Card show up but with broken images
 
 > You can replace the image URLs with the full URLs to the images by adding `http://www.material-ui.com/` to them to fix the broken images, but we will explore isomorphic images next.
@@ -166,7 +166,7 @@ support.load({
 
 ```
 
-1. Watch [webpack-dev-server] update your bundle and refresh browser to see changes.
+1. Watch [webpack-dev-middleware] update your bundle and refresh browser to see changes.
 
 > Note that you will see the message `Warning: Unknown prop onTouchTap on <button> tag.` show up on the server side rendering because of the tapping event plugin, which we don't need on server anyways.
 
@@ -180,7 +180,7 @@ Apache-2.0 © [Joel Chen](https://github.com/jchip)
 [daviddm-dev-url]:https://david-dm.org/electrode-io/electrode?path=samples/universal-material-ui?type-dev
 [material-ui]: http://www.material-ui.com/
 [RaisedButton]: http://www.material-ui.com/#/components/raised-button
-[webpack-dev-server]: https://webpack.github.io/docs/webpack-dev-server.html
+[webpack-dev-middleware]: https://github.com/webpack/webpack-dev-middleware
 [Server Rendering]: http://www.material-ui.com/#/get-started/server-rendering
 [xclap-cli]: https://www.npmjs.com/package/xclap-cli
 [material-ui examples]: http://www.material-ui.com/#/components/app-bar
