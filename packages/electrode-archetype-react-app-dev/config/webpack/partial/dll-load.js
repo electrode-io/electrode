@@ -21,7 +21,7 @@ const webpack = require("webpack");
 const DonePlugin = require("../plugins/done-plugin");
 const dllUtil = require("../util/dll-util");
 
-module.exports = function(options) {
+module.exports = function() {
   const dll = dllUtil.loadAssets();
 
   // dev mode?
