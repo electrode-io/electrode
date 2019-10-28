@@ -47,6 +47,7 @@
     "@jchip/redbird": "^1.0.0",
     "@loadable/babel-plugin": "^5.10.0",
     "@loadable/webpack-plugin": "^5.7.1",
+    "@xarc/defer": "^1.0.0",
     "acorn": "^6.0.5",
     "ansi-to-html": "^0.6.8",
     "autoprefixer": "^9.6.0",
@@ -76,7 +77,7 @@
     "finalhandler": "^1.1.1",
     "fs-extra": "^0.26.5",
     "identity-obj-proxy": "^3.0.0",
-    "isomorphic-loader": "^2.1.1",
+    "isomorphic-loader": "^3.0.0",
     "nyc": "^14.1.1",
     "jsonfile": "^2.2.2",
     "loader-utils": "^1.1.0",
@@ -137,7 +138,8 @@
     "electrode-archetype-njs-module-dev": "^3.0.0",
     "electrode-archetype-react-app": "../electrode-archetype-react-app",
     "mock-require": "^3.0.3",
-    "prettier": "^1.14.2"
+    "prettier": "^1.14.2",
+    "run-verify": "^1.2.1"
   },
   "engines": {
     "node": ">= 6",

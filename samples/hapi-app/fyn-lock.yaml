@@ -1906,6 +1906,13 @@
    '@webassemblyjs/ast': 1.8.5
    '@webassemblyjs/wast-parser': 1.8.5
    '@xtuc/long': 4.2.2
+'@xarc/defer':
+ _latest: 1.0.0
+ _:
+  ^1.0.0: 1.0.0
+ 1.0.0:
+  $: sha512-sRz93+umHI40pmTn0l17oCd0pkRN8lJ8e3yvtOT8xPDFMPIkDslnQOCwntYt49RMPJD9ez7Jl2IFE3xnVj9Kew==
+  _: 'https://registry.npmjs.org/@xarc/defer/-/defer-1.0.0.tgz'
 '@xtuc/ieee754':
  _latest: 1.2.0
  _:
@@ -5324,7 +5331,7 @@ electrode-archetype-react-app:
    '@babel/runtime': ^7.1.5
    css-modules-require-hook: ^4.0.2
    ignore-styles: ^5.0.1
-   isomorphic-loader: ^2.1.1
+   isomorphic-loader: ^3.0.0
    optional-require: ^1.0.0
    subapp-util: ^1.0.2
   optionalDependencies:
@@ -5354,6 +5361,7 @@ electrode-archetype-react-app-dev:
    '@jchip/redbird': ^1.0.0
    '@loadable/babel-plugin': ^5.10.0
    '@loadable/webpack-plugin': ^5.7.1
+   '@xarc/defer': ^1.0.0
    acorn: ^6.0.5
    ansi-to-html: ^0.6.8
    autoprefixer: ^9.6.0
@@ -5383,7 +5391,7 @@ electrode-archetype-react-app-dev:
    finalhandler: ^1.1.1
    fs-extra: ^0.26.5
    identity-obj-proxy: ^3.0.0
-   isomorphic-loader: ^2.1.1
+   isomorphic-loader: ^3.0.0
    nyc: ^14.1.1
    jsonfile: ^2.2.2
    loader-utils: ^1.1.0
@@ -5554,17 +5562,16 @@ electrode-server:
 electrode-static-paths:
  _latest: 3.0.0
  _:
-  ^2.0.1: 2.0.4
- 2.0.4:
+  ^3.0.0: 3.0.0
+ 3.0.0:
   top: 1
-  $: sha512-E/AifPS2kw/Yro9YKzll+0ku6Vsb2qzerqFD87d9DQu5wI/lkWWXXLdvhpw1064mT8oZzpW9xRn+kQq+tJNyWw==
-  _: 'https://registry.npmjs.org/electrode-static-paths/-/electrode-static-paths-2.0.4.tgz'
+  $: sha512-Y8Ojt1XWRhiwIfW9UXYBbIH7FLWDKx7TFVgTZcsXRhx8oQcjj0wC/9zIl1XqZnqU9MaBIU5zlZIm6sDJKFfKOw==
+  _: 'https://registry.npmjs.org/electrode-static-paths/-/electrode-static-paths-3.0.0.tgz'
   dependencies:
    chalk: ^2.4.2
-   electrode-hapi-compat: ^1.0.0
    lodash: ^4.17.11
   peerDependencies:
-   inert: '^4.0.0 || ^5.0.0'
+   '@hapi/inert': ^5.2.0
 electrode-ui-config:
  _latest: 1.3.1-fynlocal_h
  _:
@@ -8391,12 +8398,12 @@ isobject:
   dependencies:
    isarray: 1.0.0
 isomorphic-loader:
- _latest: 2.1.1
+ _latest: 3.0.0
  _:
-  ^2.1.1: 2.1.1
- 2.1.1:
-  $: sha512-rPs8mD9Vv32Ob4CU0X9HYXdQmDoUv77qRq4Kx+TLCOKZ9sj1KULLIRvERPFGCc7fz+CSRcQL07RQcUVaXk+7ug==
-  _: 'https://registry.npmjs.org/isomorphic-loader/-/isomorphic-loader-2.1.1.tgz'
+  ^3.0.0: 3.0.0
+ 3.0.0:
+  $: sha512-YCEVK5lrs2trGcfd84xkBsnfHEp8zlUb0KcmC1ZdcQKvIZk7q8hsUzK/WPPLm934qVIOmoo/RDGBA7C2j9shMw==
+  _: 'https://registry.npmjs.org/isomorphic-loader/-/isomorphic-loader-3.0.0.tgz'
   dependencies:
    deep-extend: ^0.6.0
    lockfile: ^1.0.4

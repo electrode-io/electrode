@@ -175,7 +175,7 @@ class Middleware {
     // of loading them from config.assetsFile, so no need to transfer that
     // from Mem FS to physical disk.
     const waitIsoLock = cb => {
-      if (Fs.existsSync(isoLockfile) || !Fs.existsSync(isoConfigFile)) {
+      if (!process.send && (Fs.existsSync(isoLockfile) || !Fs.existsSync(isoConfigFile))) {
         return setTimeout(() => waitIsoLock(cb), 50);
       } else {
         return cb();

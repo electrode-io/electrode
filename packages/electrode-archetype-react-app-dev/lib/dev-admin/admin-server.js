@@ -1,6 +1,6 @@
 "use strict";
 
-/* eslint-disable no-console, no-process-exit, complexity */
+/* eslint-disable complexity */
 /* eslint-disable no-magic-numbers, max-len, max-statements, prefer-template */
 
 const Path = require("path");
@@ -8,8 +8,10 @@ const _ = require("lodash");
 const boxen = require("boxen");
 const ck = require("chalker");
 const chokidar = require("chokidar");
-const readline = require("readline");
+const WebpackDevRelay = require("./webpack-dev-relay");
 const { fork } = require("child_process");
+const ConsoleIO = require("./console-io");
+const makeDefer = require("@xarc/defer");
 
 const APP_SERVER_NAME = "your app server";
 const DEV_SERVER_NAME = "Electrode webpack dev server";
@@ -18,35 +20,32 @@ const PROXY_SERVER_NAME = "Electrode Dev Proxy";
 const DEV_PROXY_ENABLED = Boolean(process.env.APP_SERVER_PORT);
 
 class AdminServer {
-  constructor(args) {
+  constructor(args, options) {
     this._opts = args.opts;
     this._passThru = args._;
     this._messageId = 1;
     this._saveWebpackReportData = undefined;
+    this._webpackDevRelay = new WebpackDevRelay();
     this._servers = {};
+    this._io = (options && options.inputOutput) || new ConsoleIO();
   }
 
   async start() {
     this._wds = ck`<gray.inverse>[wds]</> `;
     this._proxy = ck`<green.inverse>[proxy]</> `;
-    this.setupConsoleInterface();
+    this._io.setup();
     this.handleUserInput();
-    await this.startDevServer();
+    await this.startWebpackDevServer();
     await this.startAppServer();
     if (DEV_PROXY_ENABLED) {
       // to debug dev proxy
       // await this.startProxyServer("--inspect-brk");
       await this.startProxyServer();
     }
-    setTimeout(() => this.showConsoleMenu(), 100);
+    setTimeout(() => this.showMenu(), 100);
   }
 
-  setupConsoleInterface() {
-    readline.emitKeypressEvents(process.stdin);
-    process.stdin.setRawMode(true);
-  }
-
-  showConsoleMenu() {
+  showMenu() {
     const proxyItem = DEV_PROXY_ENABLED ? "<magenta>P</> - Restart Dev Proxy " : "";
     const menu = ck`              <green.inverse>   Electrode Dev Admin Console   </>
 
@@ -55,7 +54,7 @@ class AdminServer {
  <white.inverse>For Electrode webpack dev server</>  ${this._wds}
    <magenta>W</> - Restart <magenta>E</> - <cyan>inspect-brk</> mode <magenta>R</> - <cyan>inspect</> mode <magenta>X</> - Kill&nbsp;
  ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown`;
-    console.log(boxen(menu, { margin: { left: 5 } }));
+    this._io.show(boxen(menu, { margin: { left: 5 } }));
   }
 
   getServer(name) {
@@ -67,9 +66,10 @@ class AdminServer {
     const info = this.getServer(name);
     if (info._child) {
       info._child.once("exit", (code, signal) => {
-        console.log(ck`<orange>${name} exited code ${code} - signal ${signal}</orange>`);
+        this._io.show(ck`<orange>${name} exited code ${code} - signal ${signal}</orange>`);
         info._child = undefined;
         info._starting = false;
+        this._webpackDevRelay.setAppServer(null);
       });
     }
   }
@@ -92,60 +92,48 @@ class AdminServer {
     }
   }
 
-  async _getUserInput() {
-    return new Promise(resolve => {
-      process.stdin.once("keypress", (str, key) => {
-        resolve({ str: str && str.toLowerCase(), key });
-      });
-    });
+  async _quit() {
+    this._io.show(ck`<magenta>admin server exit, shutting down servers</magenta>`);
+    if (this._appWatcher) {
+      this._appWatcher.close();
+    }
+    await Promise.all([
+      this.kill(DEV_SERVER_NAME, "SIGINT"),
+      this.kill(APP_SERVER_NAME, "SIGINT"),
+      this.kill(PROXY_SERVER_NAME, "SIGINT")
+    ]);
+    this._io.exit();
+  }
+
+  async processCommand(str) {
+    const handlers = {
+      q: () => this._quit(),
+      m: () => this.showMenu(),
+      // app server
+      a: () => this.startAppServer(),
+      d: () => this.startAppServer("--inspect-brk"),
+      i: () => this.startAppServer("--inspect"),
+      k: () => this.kill(APP_SERVER_NAME, "SIGINT"),
+      // webpack dev server
+      w: () => this.startWebpackDevServer(),
+      e: () => this.startWebpackDevServer("--inspect-brk"),
+      r: () => this.startWebpackDevServer("--inspect"),
+      x: () => this.kill(DEV_SERVER_NAME, "SIGINT"),
+      // dev proxy server
+      p: () => DEV_PROXY_ENABLED && this.signal(PROXY_SERVER_NAME, "SIGHUP")
+    };
+    return handlers[str] && (await handlers[str]());
   }
 
   async handleUserInput() {
-    const { str, key } = await this._getUserInput();
-    if (str === "q") {
-      console.log(ck`<magenta>admin server exit, shutting down servers</magenta>`);
-      if (this._appWatcher) {
-        this._appWatcher.close();
-      }
-      await this.kill(DEV_SERVER_NAME, "SIGINT");
-      await this.kill(APP_SERVER_NAME, "SIGINT");
-      await this.kill(PROXY_SERVER_NAME, "SIGINT");
-      process.exit();
-    } else if ((key.ctrl && key.name === "c") || str === "m") {
-      // allow user to press ctrl+c to bring up console menu
-      this.showConsoleMenu();
-    } else if (str === "w") {
-      this.startDevServer();
-    } else if (str === "e") {
-      this.startDevServer("--inspect-brk");
-    } else if (str === "r") {
-      this.startDevServer("--inspect");
-    } else if (str === "x") {
-      await this.kill(DEV_SERVER_NAME, "SIGINT");
-    } else if (str === "a") {
-      this.startAppServer();
-    } else if (str === "k") {
-      await this.kill(APP_SERVER_NAME, "SIGINT");
-    } else if (str === "d") {
-      this.startAppServer("--inspect-brk");
-    } else if (str === "i") {
-      this.startAppServer("--inspect");
-    } else if (DEV_PROXY_ENABLED && str === "p") {
-      this.signal(PROXY_SERVER_NAME, "SIGHUP");
-    }
+    const { str } = await this._io.getUserInput();
+    await this.processCommand(str);
     process.nextTick(() => this.handleUserInput());
   }
 
-  _handleWebpackReport(data) {
-    const appInfo = this.getServer(APP_SERVER_NAME);
-    if (appInfo._child) {
-      data.id = this._messageId++;
-      appInfo._child.send(data);
-    } else {
-      this._saveWebpackReportData = data;
-    }
-  }
-
+  //
+  // Start a server
+  //
   async startServer(options) {
     const { name, debug, killKey } = options;
 
@@ -154,9 +142,8 @@ class AdminServer {
     const info = this._servers[name];
     info.options = options;
     info.name = name;
-
     if (info._starting) {
-      console.log(
+      this._io.show(
         ck`<yellow.inverse> Start ${name} already in progress - press<magenta> ${killKey} </>to kill it.</>`
       );
       return;
@@ -195,7 +182,7 @@ class AdminServer {
     };
 
     const re = info._child ? "Res" : "S";
-    console.log(ck`<orange>${re}tarting ${name}${debugMsg}</orange>`);
+    this._io.show(ck`<orange>${re}tarting ${name}${debugMsg}</orange>`);
     await this.kill(name, "SIGINT");
 
     start();
@@ -207,7 +194,10 @@ class AdminServer {
     info._starting = false;
   }
 
-  async startDevServer(debug) {
+  //
+  // start webpack dev server
+  //
+  async startWebpackDevServer(debug) {
     let currentStatusMessage;
     let hasStatusMessage = false;
 
@@ -252,15 +242,21 @@ class AdminServer {
       info._child.stdout.on("data", data => log(process.stdout, data));
       info._child.stderr.on("data", data => log(process.stderr, data));
 
-      return new Promise(resolve => {
-        info._child.on("message", data => {
-          if (data.name === "webpack-report") {
-            this._handleWebpackReport(data);
-            resolve();
-          }
-        });
+      this._webpackDevRelay.setWebpackServer(info._child);
 
-        info._child.on("exit", () => {
+      return new Promise(resolve => {
+        const listenForReport = () =>
+          info._child.once("message", data => {
+            if (data.name === "webpack-report") {
+              resolve();
+            } else {
+              listenForReport();
+            }
+          });
+
+        listenForReport();
+
+        info._child.once("exit", () => {
           resolve();
         });
       });
@@ -298,6 +294,7 @@ class AdminServer {
         });
 
         await this.waitForAppServerStart(info);
+        this._webpackDevRelay.setAppServer(info._child);
       }
     });
   }
@@ -323,56 +320,75 @@ class AdminServer {
   async waitForAppServerStart(info) {
     let startTimeout;
     let started = false;
-    let deferRes;
+    const defer = makeDefer();
 
-    const promise = new Promise(resolve => (deferRes = resolve));
+    const pendingMessages = [];
 
-    const markStarted = data => {
-      if (started) return;
-      data = data || {};
+    let messageHandler; // eslint-disable-line
+
+    const processPending = () => {
+      if (pendingMessages.length > 0) {
+        messageHandler(pendingMessages.shift());
+        setTimeout(processPending);
+      }
+    };
+
+    const checkStarted = data => {
+      if (started) {
+        return true;
+      }
+
       if (data.name === "timeout") {
-        console.log(ck`<orange>WARNING: Did not receive start event from \
+        this._io.show(ck`<orange>WARNING: Did not receive start event from \
 ${info.name} - assuming it started.</>`);
       } else if (data.name !== "app-setup") {
-        info._child.once("message", markStarted);
-        return;
+        pendingMessages.push(data);
+        return false;
       } else {
-        console.log(ck`<orange>${info.name} started</>`);
+        this._io.show(ck`<orange>${info.name} started</>`);
       }
+
       started = true;
-      if (startTimeout) clearTimeout(startTimeout);
+      clearTimeout(startTimeout);
+      setTimeout(processPending);
 
-      setTimeout(() => {
-        if (this._saveWebpackReportData && info._child) {
-          info._child.send(this._saveWebpackReportData);
-        }
+      return started;
+    };
 
-        this.watchServer(info.name);
-        deferRes();
-      }, 100);
+    messageHandler = (data = {}) => {
+      if (!checkStarted(data)) {
+        return;
+      }
+
+      info._child.removeListener("message", messageHandler);
+      this.watchServer(info.name);
+      defer.resolve();
     };
 
     const handleTimeout = () => {
       startTimeout = undefined;
       if (info._child) {
-        markStarted({ name: "timeout" });
+        messageHandler({ name: "timeout" });
       }
     };
 
     info._child.once("exit", () => {
       clearTimeout(startTimeout);
-      deferRes();
+      defer.resolve();
     });
 
-    info._child.once("message", markStarted);
+    info._child.on("message", messageHandler);
 
     if (info.options.noTimeoutCheck !== true) {
       startTimeout = setTimeout(handleTimeout, 5000);
     }
 
-    return promise;
+    return defer.promise;
   }
 
+  //
+  // watches files change and restart a server
+  //
   watchServer(name) {
     let timer;
 
