@@ -11,11 +11,30 @@ let CDN_ASSETS;
 let CDN_JS_BUNDLES;
 
 const utils = {
+  //
+  // Each subapp is an entry, which has an array of all bundle IDs
+  // using IDs to lookup bundle name from assets.chunksById
+  // keep only chunks with name starts with subapp name
+  // map chunks to actual assets
+  //
   getSubAppBundle: (name, assets) => {
-    const bundleName = `${name.toLowerCase()}`;
-    const bundleAsset = assets.js.find(j => j.chunkNames[0] === bundleName);
-    assert(bundleAsset, `subapp-web: ${name} doesn't have a JS bundle ${bundleName}`);
-    return bundleAsset;
+    const entryName = name.toLowerCase();
+    // find entry point
+    const entryPoints = assets.entryPoints[entryName];
+    assert(entryPoints, `subapp-web: no entry point found for ${name}`);
+    // get chunkd ID for all bundles that start with name
+    const bundleIds = entryPoints.filter(id => assets.chunksById.js[id].startsWith(entryName));
+    // map all IDs to actual assets
+    const bundleAssets = bundleIds.map(id =>
+      assets.js.find(x => x.name === assets.chunksById.js[id])
+    );
+    assert(
+      bundleAssets.length > 0,
+      `subapp-web: ${name} doesn't have a JS bundle for entry ${entryName}`
+    );
+    // TODO: handle subapp bundle that got broken into multiple chunks, when splitChunks
+    // minSize + maxSize cause it to be broken up
+    return bundleAssets[0];
   },
 
   getBundleBase: routeData => {

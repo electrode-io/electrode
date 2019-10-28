@@ -29,18 +29,27 @@ if (AppMode.hasSubApps) {
   config.optimization = {
     splitChunks: {
       chunks: "all",
+      minSize: 30 * 1024,
+      maxSize: 0,
+      minChunks: 2,
+      maxAsyncRequests: 500,
+      maxInitialRequests: 500,
+      automaticNameDelimiter: "~",
+      automaticNameMaxLength: 250,
       cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
           // https://webpack.js.org/plugins/split-chunks-plugin/#splitchunksname
-          name: hashChunks
+          name: hashChunks,
+          priority: -10,
+          reuseExistingChunk: true
         },
         shared: {
-          name: hashChunks
+          name: hashChunks,
+          priority: -20,
+          reuseExistingChunk: true
         }
       }
-      // minSize: 1 * 1024,
-      // maxSize: 200 * 1024
     }
   };
 }
