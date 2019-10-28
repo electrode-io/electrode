@@ -176,7 +176,7 @@ class AdminServer {
 
     const start = () => {
       const forkOpts = {
-        env: Object.assign({}, process.env, { FORCE_COLOR: true, ELECTRODE_ADMIN_SERVER: true }),
+        env: Object.assign({}, process.env, { ELECTRODE_ADMIN_SERVER: true }),
         silent: true
       };
 
