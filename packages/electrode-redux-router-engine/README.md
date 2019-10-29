@@ -4,6 +4,8 @@
 
 Handle [react-router] routes matching and redirecting for [redux async actions] data for React Server Side Rendering using the [Redux Server Rendering] pattern.
 
+Version 3 now uses react-router 5.
+
 ## Install
 
 ```bash
