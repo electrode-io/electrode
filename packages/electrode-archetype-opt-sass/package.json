@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-opt-sass",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Electrode NodeJS/React Optional Archetype SASS",
   "main": "index.js",
   "homepage": "http://www.electrode.io",

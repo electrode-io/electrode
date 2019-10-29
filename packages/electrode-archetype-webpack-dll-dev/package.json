@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-webpack-dll-dev",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Electrode Archetype to build webpack DLLs",
   "main": "index.js",
   "scripts": {
@@ -23,7 +23,7 @@
     "uglifyjs-webpack-plugin": "^2.0.1",
     "webpack": "^4.26.0",
     "webpack-cli": "^3.1.2",
-    "webpack-config-composer": "^1.1.1",
+    "webpack-config-composer": "^1.1.2",
     "webpack-stats-plugin": "^0.2.1",
     "xclap": "^0.2.38",
     "xsh": "^0.4.4"

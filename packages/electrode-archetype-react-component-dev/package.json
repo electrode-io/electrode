@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-component-dev",
-  "version": "6.1.10",
+  "version": "6.1.11",
   "description": "Electrode Component (Development)",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -80,7 +80,7 @@
     "url-loader": "^0.6.2",
     "webpack": "^4.19.1",
     "webpack-cli": "^3.1.1",
-    "webpack-config-composer": "^1.1.0",
+    "webpack-config-composer": "^1.1.2",
     "webpack-dev-middleware": "^3.4.0",
     "webpack-dev-server": "^3.1.10",
     "xclap": "^0.2.24",
@@ -88,16 +88,16 @@
     "xsh": "^0.3.2"
   },
   "optionalDependencies": {
-    "electrode-archetype-opt-eslint": "^1.0.0",
-    "electrode-archetype-opt-inferno": "^0.2.8",
-    "electrode-archetype-opt-jest": "^1.0.0",
-    "electrode-archetype-opt-karma": "^2.0.4",
-    "electrode-archetype-opt-mocha": "^1.0.0",
-    "electrode-archetype-opt-phantomjs": "^1.0.0",
-    "electrode-archetype-opt-react": "^2.0.1",
+    "electrode-archetype-opt-eslint": "^1.0.3",
+    "electrode-archetype-opt-inferno": "^0.2.11",
+    "electrode-archetype-opt-jest": "^1.0.3",
+    "electrode-archetype-opt-karma": "^2.0.6",
+    "electrode-archetype-opt-mocha": "^1.0.3",
+    "electrode-archetype-opt-phantomjs": "^1.0.2",
+    "electrode-archetype-opt-react": "^2.0.4",
     "electrode-archetype-opt-react-intl": "^1.0.0",
-    "electrode-archetype-opt-sass": "^1.0.6",
-    "electrode-archetype-opt-sinon": "^1.0.0"
+    "electrode-archetype-opt-sass": "^1.0.9",
+    "electrode-archetype-opt-sinon": "^1.0.3"
   },
   "devDependencies": {
     "electrode-archetype-react-component": "../electrode-archetype-react-component",
