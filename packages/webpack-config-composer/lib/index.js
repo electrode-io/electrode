@@ -10,8 +10,8 @@ const { getConcatMethod } = require("./concat-method");
 class WebpackConfigComposer {
   constructor(options) {
     options = options || {};
-    this.profiles = {};
-    this.partials = {};
+    this._profiles = {};
+    this._partials = {};
     if (options.profiles) {
       this.addProfiles(options.profiles);
     }
@@ -19,6 +19,14 @@ class WebpackConfigComposer {
       this.addPartials(options.partials);
     }
     this.logger = options.logger || console.log;
+  }
+
+  get profiles() {
+    return this._profiles;
+  }
+
+  get partials() {
+    return this._partials;
   }
 
   addProfiles(profiles) {
@@ -45,7 +53,7 @@ class WebpackConfigComposer {
       profile = new Profile(name, partials);
     }
 
-    this.profiles[name] = profile;
+    this._profiles[name] = profile;
 
     return profile;
   }
@@ -74,10 +82,10 @@ class WebpackConfigComposer {
   }
 
   _addPartial(name, data, addOpt) {
-    const exist = this.partials[name];
+    const exist = this._partials[name];
 
     if (!exist || _.get(addOpt, "method") === "replace") {
-      this.partials[name] = new Partial(name, data);
+      this._partials[name] = new Partial(name, data);
     } else {
       exist.merge(data, _.get(addOpt, "concatArray"));
     }
@@ -89,20 +97,24 @@ class WebpackConfigComposer {
     return this._addPartial(name, { config }, options);
   }
 
+  replacePartial(name, config, options) {
+    return this._addPartial(name, { config }, Object.assign({}, options, { method: "replace" }));
+  }
+
   getPartial(name) {
-    return this.partials[name];
+    return this._partials[name];
   }
 
   getProfile(name) {
-    return this.profiles[name];
+    return this._profiles[name];
   }
 
-  compose(options, profile) {
-    if (!_.isArray(profile)) {
-      profile = Array.prototype.slice.call(arguments, 1);
-    }
+  compose(options, ...profiles) {
+    const allProfiles = _.flatten(profiles);
 
-    let profPartials = profile.map(p => {
+    const profileNames = allProfiles.map(p => (_.isString(p) ? p : p.name));
+
+    let profPartials = allProfiles.map(p => {
       if (_.isString(p)) {
         const prof = this.getProfile(p);
         assert(prof, `Profile ${p} doesn't exist in the composer`);
@@ -112,8 +124,7 @@ class WebpackConfigComposer {
       return p.partials || {};
     });
 
-    profPartials.unshift({});
-    profPartials = _.merge.apply(null, profPartials);
+    profPartials = _.merge({}, ...profPartials);
 
     const num = x => {
       return _.isString(x) ? parseInt(x, 10) : x;
@@ -159,6 +170,10 @@ class WebpackConfigComposer {
 
     if (!options.keepCustomProps) {
       deleteCustomProps(currentConfig);
+    }
+
+    if (options.meta) {
+      return { config: currentConfig, profileNames, partialNames: sortedKeys };
     }
 
     return currentConfig;

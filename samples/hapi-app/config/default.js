@@ -15,12 +15,12 @@ module.exports = {
   },
   plugins: {
     good: {
-      module: "good",
+      module: "@hapi/good",
       options: {
         reporters: {
           myConsoleReporter: [
             {
-              module: "good-console"
+              module: "@hapi/good-console"
             },
             "stdout"
           ]
@@ -45,6 +45,7 @@ module.exports = {
     },
     "electrode-ui-config/hapi-plugin": {},
     inert: {
+      module: "@hapi/inert",
       enable: true
     },
     electrodeStaticPaths: {

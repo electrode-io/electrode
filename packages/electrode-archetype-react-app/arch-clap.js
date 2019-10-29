@@ -1190,7 +1190,9 @@ module.exports = function(xclap) {
   setupPath();
   createElectrodeTmpDir();
   xclap = xclap || requireAt(process.cwd())("xclap") || devRequire("xclap");
-  process.env.FORCE_COLOR = "true"; // force color for chalk
+  if (!process.env.hasOwnProperty("FORCE_COLOR")) {
+    process.env.FORCE_COLOR = "1"; // force color for chalk
+  }
   xclap.load("electrode", makeTasks(xclap));
   warnYarn();
   generateBrowsersListRc();
