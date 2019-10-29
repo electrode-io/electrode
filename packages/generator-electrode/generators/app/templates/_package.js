@@ -32,7 +32,7 @@ return {
     "<%= uiConfigModule %>": "<%= uiConfigModuleSemver %>",
     //<% } %>
     "electrode-confippet": "^1.5.0",
-    "electrode-redux-router-engine": "^2.1.8", //<% if (isHapi) { %>
+    "electrode-redux-router-engine": "^3.0.0", //<% if (isHapi) { %>
     //<% if (isAutoSSR) {%>
     "electrode-auto-ssr": "^1.0.0", //<% } %>
     "electrode-server": "^2.2.0",
