@@ -58,9 +58,8 @@ class AppDevMiddleware {
         this.handleWebpackReport(data);
       }
     });
-    setTimeout(() => {
-      process.send({ name: "app-setup" });
-    }, 100);
+    // notify dev-admin that app server started
+    process.nextTick(() => process.send({ name: "app-setup" }));
   }
 }
 
