@@ -784,6 +784,23 @@ Individual .babelrc files were generated for you in src/client and src/server
       }
     },
 
+    "client-dev": {
+      desc: "Start your app with watch in hot mode for client changes only",
+      dep: [".development-env"],
+      task: () => {
+        if (!Fs.existsSync(".isomorphic-loader-config.json")) {
+          Fs.writeFileSync(".isomorphic-loader-config.json", JSON.stringify({}));
+        }
+        return [
+          ".set.css-module.env",
+          ".webpack-dev",
+          archetype.webpack.devMiddleware
+            ? ["server-admin", "generate-service-worker"]
+            : ["wds.dev", "client-watch", "generate-service-worker"]
+        ];
+      }
+    },
+
     hot: {
       desc: "Start app dev with hot reload enabled",
       task: () => {
@@ -874,6 +891,20 @@ Individual .babelrc files were generated for you in src/client and src/server
           `--delay 1 --ext js,jsx,json,yaml,log,ts,tsx ${watches}`,
           `${nodeRunApp}`
         );
+      }
+    },
+
+    "client-watch": {
+      dep: [".init-bundle.valid.log"],
+      desc: "Start app's client server in watch mode with node. It detects only client changes.",
+      task: () => {
+        AppMode.setEnv(AppMode.src.dir);
+        const nodeRunApp = AppMode.isSrc
+          ? `node ${archetype.dir}/support/babel-run ${AppMode.src.server}`
+          : `node ${AppMode.src.server}`;
+          return exec(
+            `${nodeRunApp}`
+          );
       }
     },
 
