@@ -407,9 +407,7 @@ function makeTasks(xclap) {
     ".remove-log-files": () => removeLogFiles(),
     build: {
       dep: [".remove-log-files", ".production-env", ".set.css-module.env"],
-      desc: AppMode.isSrc
-        ? `Build your app's ${AppMode.src.dir} directory into ${AppMode.lib.dir} for production`
-        : "Build your app's client bundle",
+      desc: `Build your app's ${AppMode.src.dir} directory into ${AppMode.lib.dir} for production`,
       task: [".build-lib", "build-dist", ".check.top.level.babelrc", "mv-to-dist"]
     },
 
@@ -589,8 +587,8 @@ function makeTasks(xclap) {
     ".build-lib": () => undefined,
 
     ".check.top.level.babelrc": () => {
-      if (AppMode.isSrc && archetype.checkUserBabelRc() !== false) {
-        logger.warn(`
+      if (archetype.checkUserBabelRc() !== false) {
+        logger.error(`
 You are using src for client & server, archetype will ignore your top level .babelrc
 Please remove your top level .babelrc file if you have no other use of it.
 Individual .babelrc files were generated for you in src/client and src/server
@@ -731,11 +729,11 @@ Individual .babelrc files were generated for you in src/client and src/server
     },
 
     ".build.test.client.babelrc": () => {
-      return AppMode.isSrc && makeBabelRc("test/client", "babelrc-client.js");
+      return makeBabelRc("test/client", "babelrc-client.js");
     },
 
     ".build.test.server.babelrc": () => {
-      return AppMode.isSrc && makeBabelRc("test/server", "babelrc-server.js");
+      return makeBabelRc("test/server", "babelrc-server.js");
     },
 
     check: ["lint", "test-cov"],
@@ -846,16 +844,14 @@ Individual .babelrc files were generated for you in src/client and src/server
         setWebpackProfile("development");
         AppMode.setEnv(AppMode.src.dir);
         // eslint-disable-next-line no-shadow
-        const exec = AppMode.isSrc
-          ? quote(Path.join(archetype.dir, "support/babel-run"))
-          : AppMode.src.server;
+        const exec = quote(Path.join(archetype.dir, "support/babel-run"));
 
         return mkCmd(
           `~(tty)$node ${quote(Path.join(archetype.devDir, "lib/dev-admin"))}`,
           taskArgs(this.argv).join(" "),
           `--exec ${exec} --ext js,jsx,json,yaml,log,ts,tsx`,
           `--watch config ${AppMode.src.server}`,
-          AppMode.isSrc ? `-- ${AppMode.src.server}` : ""
+          `-- ${AppMode.src.server}`
         );
       }
     },
@@ -866,16 +862,14 @@ Individual .babelrc files were generated for you in src/client and src/server
         setWebpackProfile("test");
         AppMode.setEnv(AppMode.src.dir);
         // eslint-disable-next-line no-shadow
-        const exec = AppMode.isSrc
-          ? quote(Path.join(archetype.dir, "support/babel-run"))
-          : AppMode.src.server;
+        const exec = quote(Path.join(archetype.dir, "support/babel-run"));
 
         return mkCmd(
           `~(tty)$node ${quote(Path.join(archetype.devDir, "lib/dev-admin"))}`,
           taskArgs(this.argv).join(" "),
           `--exec ${exec} --ext js,jsx,json,yaml,log,ts,tsx`,
           `--watch config ${AppMode.src.server}`,
-          AppMode.isSrc ? `-- ${AppMode.src.server}` : ""
+          `-- ${AppMode.src.server}`
         );
       }
     },
@@ -945,19 +939,17 @@ Individual .babelrc files were generated for you in src/client and src/server
     });
   }
 
-  if (AppMode.isSrc) {
-    tasks = Object.assign(tasks, {
-      ".clean.lib": () =>
-        shell.rm("-rf", AppMode.lib.client, AppMode.lib.server, AppMode.savedFile),
-      ".build-lib:app-mode": () =>
-        Fs.writeFileSync(Path.resolve(AppMode.savedFile), JSON.stringify(AppMode, null, 2)),
-      ".build-lib": {
-        desc: false,
-        dep: [".clean.lib", ".mk-prod-dir"],
-        task: ["build-lib:all", ".build-lib:app-mode"]
-      }
-    });
-  }
+  tasks = Object.assign(tasks, {
+    ".clean.lib": () =>
+      shell.rm("-rf", AppMode.lib.client, AppMode.lib.server, AppMode.savedFile),
+    ".build-lib:app-mode": () =>
+      Fs.writeFileSync(Path.resolve(AppMode.savedFile), JSON.stringify(AppMode, null, 2)),
+    ".build-lib": {
+      desc: false,
+      dep: [".clean.lib", ".mk-prod-dir"],
+      task: ["build-lib:all", ".build-lib:app-mode"]
+    }
+  });
 
   if (Fs.existsSync(Path.resolve(AppMode.src.client, "dll.config.js"))) {
     Object.assign(tasks, {

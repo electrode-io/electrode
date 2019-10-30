@@ -45,10 +45,6 @@ function makeAppMode(prodDir, reactLib) {
 
   const saved = loadSavedAppMode();
 
-  if (!srcDir) {
-    logger.info(`There's a new src/lib mode that doesn't need babel-register.`);
-  }
-
   reactLib = reactLib || "react";
 
   const posixify = s => s.replace(/\\/g, "/");
@@ -59,7 +55,6 @@ function makeAppMode(prodDir, reactLib) {
       reactLib,
       savedFile,
       envKey,
-      isSrc: !!srcDir,
       setEnv: dir => {
         if (dir) {
           dir = posixify(dir);

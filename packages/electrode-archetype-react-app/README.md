@@ -43,28 +43,11 @@ To invoke a task, for example, the `dev` task, run:
 $ clap dev
 ```
 
-## AppMode
+## Directory Structure
 
-The archetype supports two app modes.  The default legacy babel-register mode and the [src/lib mode](#srclib-mode).
+The archetype supports the [src/lib](#srclib-mode) directory structure. In this mode, you put your `client` and `server` code under the `src` directory and the `build` task will transpile them into the `lib` directory during build time.
 
-In babel-register mode, you put your `client` and `server` code under your project's top level and your Node server requires installing babel-register to transpile your code during run time.  This is not recommended due to babel-register consuming resources.
-
-In the [src/lib mode](#srclib-mode), you put your `client` and `server` code under the `src` directory and the `build` task will transpile them into the `lib` directory during build time.
-
-> In the next major release, we plan to remove the babel-register mode.
-
-#### babel-register mode `.babelrc`
-
-> Note: If you opt-in to use the src/lib mode, then this is not applicable.  See [here](#srclib-babelrc) for more details.
-
-If you are using babel-register mode, then you need to add a `.babelrc` in your app's top level directory to extend
-[the archetype's babel configuration](config/babel/.babelrc) in order to apply the presets (ES2015, React) and the plugins like i18n. If your project needs additional Babel settings (like using stage 0 features) you can add them to this file. See the [Babel docs](https://babeljs.io/docs/usage/babelrc/) for more information.
-
-```json
-{
-  "extends": "electrode-archetype-react-app/config/babel/.babelrc"
-}
-```
+If you are not currently using this directory structure, please read the [src/lib](#srclib-mode) section for migration instructions
 
 ## Opt-in features
 
@@ -95,7 +78,6 @@ If you are using this API, then things like isomorphic support and React module 
 It accepts a single `options` object, with the following supported fields:
 
 -   `babelRegister` - Set to `false` to disable loading `babel-register`
-    -   `babel-register` is loaded by default only in babel-register app mode, and off in src/lib app mode.
 -   `cssModuleHook` - Set to `false` to disable loading [css-module-hook]
     -   If this is an object, then it's used as `options` for `cssModuleHook`
 -   `isomorphicExtendRequire` - Set to `false` to disable loading isomorphic-loader support
@@ -106,7 +88,7 @@ In order to avoid requiring run time babel transpilation, this archetype support
 
 > The archetype `build` task will only overwrite `lib/client` and `lib/server`.  So you can put other normal code under `lib` if you want.
 >
-> If you are migrating from babel-register mode, then you should move your code to `src` directory.  For the most part, there should be very little you need to change except if you have code that refers to those two directories explicitly from outside.
+> If you are migrating from the deprecated babel-register mode, then you should move your code to `src` directory.  For the most part, there should be very little you need to change except if you have code that refers to those two directories explicitly from outside.
 
 You will also need to use the [Run time support API](#run-time-support-api) to initialize your server startup.
 
@@ -134,9 +116,9 @@ In dev mode, your code will be executed from the `src` directory.  Your client c
 
 In prod mode, your client code is being loaded from the bundle packed by webpack.  On server side, SSR will load client code from `lib` and your node server being executed from the `lib/server` directory.  ie: `NODE_ENV=production node lib/server/index.js`
 
-#### src/lib .babelrc
+#### .babelrc
 
-In the src/lib mode, an independent `.babelrc` file will be automatically generated for you in both `src/client` and `src/server`.  The one for client is setup for React and the one for server is setup for the NodeJS version you are using.
+An independent `.babelrc` file will be automatically generated for you in both `src/client` and `src/server`.  The one for client is setup for React and the one for server is setup for the NodeJS version you are using.
 
 #### APP_SRC_DIR
 
