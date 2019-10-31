@@ -306,7 +306,7 @@
 '@babel/parser':
  _latest: 7.6.4
  _:
-  '^7.1.0,^7.4.3,^7.6.0,^7.6.3,^7.6.4': 7.6.4
+  '^7.0.0,^7.1.0,^7.4.3,^7.6.0,^7.6.3,^7.6.4': 7.6.4
  7.6.4:
   $: sha512-D8RHPW5qd0Vbyo3qb+YjO5nvUVRTXFLQ/FsDxJU2Nqz4uB5EnUN0ZQSEYpvTIbRuttig1XbHWU5oMeQwQSAA+A==
   _: 'https://registry.npmjs.org/@babel/parser/-/parser-7.6.4.tgz'
@@ -438,6 +438,17 @@
  7.2.0:
   $: sha512-mVxuJ0YroI/h/tbFTPGZR8cv6ai+STMKNBq0f8hFxsxWjl94qqhsb+wXbpNMDPU3cfR1TIsVFzU3nXyZMqyK4w==
   _: 'https://registry.npmjs.org/@babel/plugin-syntax-dynamic-import/-/plugin-syntax-dynamic-import-7.2.0.tgz'
+  dependencies:
+   '@babel/helper-plugin-utils': ^7.0.0
+  peerDependencies:
+   '@babel/core': ^7.0.0-0
+'@babel/plugin-syntax-flow':
+ _latest: 7.7.0
+ _:
+  ^7.2.0: 7.7.0
+ 7.7.0:
+  $: sha512-vQMV07p+L+jZeUnvX3pEJ9EiXGCjB5CTTvsirFD9rpEuATnoAvLBLoYbw1v5tyn3d2XxSuvEKi8cV3KqYUa0vQ==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/@babel/plugin-syntax-flow/-/plugin-syntax-flow-7.7.0.tgz'
   dependencies:
    '@babel/helper-plugin-utils': ^7.0.0
   peerDependencies:
@@ -618,6 +629,18 @@
   dependencies:
    '@babel/helper-builder-binary-assignment-operator-visitor': ^7.1.0
    '@babel/helper-plugin-utils': ^7.0.0
+  peerDependencies:
+   '@babel/core': ^7.0.0-0
+'@babel/plugin-transform-flow-strip-types':
+ _latest: 7.6.3
+ _:
+  ^7.2.0: 7.6.3
+ 7.6.3:
+  $: sha512-l0ETkyEofkqFJ9LS6HChNIKtVJw2ylKbhYMlJ5C6df+ldxxaLIyXY4yOdDQQspfFpV8/vDiaWoJlvflstlYNxg==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/@babel/plugin-transform-flow-strip-types/-/plugin-transform-flow-strip-types-7.6.3.tgz'
+  dependencies:
+   '@babel/helper-plugin-utils': ^7.0.0
+   '@babel/plugin-syntax-flow': ^7.2.0
   peerDependencies:
    '@babel/core': ^7.0.0-0
 '@babel/plugin-transform-for-of':
@@ -966,6 +989,16 @@
    regexpu-core: ^4.6.0
   peerDependencies:
    '@babel/core': ^7.0.0-0
+'@babel/polyfill':
+ _latest: 7.7.0
+ _:
+  ^7.0.0: 7.7.0
+ 7.7.0:
+  $: sha512-/TS23MVvo34dFmf8mwCisCbWGrfhbiWZSwBo6HkADTBhUa2Q/jWltyY/tpofz/b6/RIhqaqQcquptCirqIhOaQ==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/@babel/polyfill/-/polyfill-7.7.0.tgz'
+  dependencies:
+   core-js: ^2.6.5
+   regenerator-runtime: ^0.13.2
 '@babel/preset-env':
  _latest: 7.6.3
  _:
@@ -1091,7 +1124,7 @@
 '@babel/traverse':
  _latest: 7.6.3
  _:
-  '^7.1.0,^7.4.3,^7.4.4,^7.5.5,^7.6.2,^7.6.3': 7.6.3
+  '^7.0.0,^7.1.0,^7.4.3,^7.4.4,^7.5.5,^7.6.2,^7.6.3': 7.6.3
  7.6.3:
   $: sha512-unn7P4LGsijIxaAJo/wpoU11zN+2IaClkQAxcJWBNCMS6cmVh802IyLHNkAjQ0iYnRS3nnxk5O3fuXW28IMxTw==
   _: 'https://registry.npmjs.org/@babel/traverse/-/traverse-7.6.3.tgz'
@@ -1580,6 +1613,73 @@
    mkdirp: ^0.5.1
   peerDependencies:
    webpack: '>=4.6.0'
+'@octokit/endpoint':
+ _latest: 5.5.1
+ _:
+  ^5.5.0: 5.5.1
+ 5.5.1:
+  $: sha512-nBFhRUb5YzVTCX/iAK1MgQ4uWo89Gu0TH00qQHoYRCsE12dWcG1OiLd7v2EIo2+tpUKPMOQ62QFy9hy9Vg2ULg==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/@octokit/endpoint/-/endpoint-5.5.1.tgz'
+  dependencies:
+   '@octokit/types': ^2.0.0
+   is-plain-object: ^3.0.0
+   universal-user-agent: ^4.0.0
+'@octokit/request':
+ _latest: 5.3.1
+ _:
+  ^5.2.0: 5.3.1
+ 5.3.1:
+  $: sha512-5/X0AL1ZgoU32fAepTfEoggFinO3rxsMLtzhlUX+RctLrusn/CApJuGFCd0v7GMFhF+8UiCsTTfsu7Fh1HnEJg==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/@octokit/request/-/request-5.3.1.tgz'
+  dependencies:
+   '@octokit/endpoint': ^5.5.0
+   '@octokit/request-error': ^1.0.1
+   '@octokit/types': ^2.0.0
+   deprecation: ^2.0.0
+   is-plain-object: ^3.0.0
+   node-fetch: ^2.3.0
+   once: ^1.4.0
+   universal-user-agent: ^4.0.0
+'@octokit/request-error':
+ _latest: 1.2.0
+ _:
+  '^1.0.1,^1.0.2': 1.2.0
+ 1.2.0:
+  $: sha512-DNBhROBYjjV/I9n7A8kVkmQNkqFAMem90dSxqvPq57e2hBr7mNTX98y3R2zDpqMQHVRpBDjsvsfIGgBzy+4PAg==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/@octokit/request-error/-/request-error-1.2.0.tgz'
+  dependencies:
+   '@octokit/types': ^2.0.0
+   deprecation: ^2.0.0
+   once: ^1.4.0
+'@octokit/rest':
+ _latest: 16.34.1
+ _:
+  ^16.33.1: 16.34.1
+ 16.34.1:
+  $: sha512-JUoS12cdktf1fv86rgrjC/RvYLuL+o7p57W7zX1x7ANFJ7OvdV8emvUNkFlcidEaOkYrxK3SoWgQFt3FhNmabA==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/@octokit/rest/-/rest-16.34.1.tgz'
+  dependencies:
+   '@octokit/request': ^5.2.0
+   '@octokit/request-error': ^1.0.2
+   atob-lite: ^2.0.0
+   before-after-hook: ^2.0.0
+   btoa-lite: ^1.0.0
+   deprecation: ^2.0.0
+   lodash.get: ^4.4.2
+   lodash.set: ^4.3.2
+   lodash.uniq: ^4.5.0
+   octokit-pagination-methods: ^1.1.0
+   once: ^1.4.0
+   universal-user-agent: ^4.0.0
+'@octokit/types':
+ _latest: 2.0.1
+ _:
+  ^2.0.0: 2.0.1
+ 2.0.1:
+  $: sha512-YDYgV6nCzdGdOm7wy43Ce8SQ3M5DMKegB8E5sTB/1xrxOdo2yS/KgUgML2N2ZGD621mkbdrAglwTyA4NDOlFFA==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/@octokit/types/-/types-2.0.1.tgz'
+  dependencies:
+   '@types/node': '>= 8'
 '@root/mkdirp':
  _latest: 1.0.0
  _:
@@ -1594,6 +1694,13 @@
  3.10.4:
   $: sha512-YXJqp9gdHcZKAmBY/WnwFpPtNQp2huD/ME2YMurH2YHJvxrVzYsmpKw/pb7yINArRpp8E++fwbQd3ajYXGA45Q==
   _: 'https://registry.npmjs.org/@sailshq/lodash/-/lodash-3.10.4.tgz'
+'@sindresorhus/is':
+ _latest: 1.2.0
+ _:
+  ^0.7.0: 0.7.0
+ 0.7.0:
+  $: sha512-ONhaKPIufzzrlNbqtWFFd+jlnemX6lJAgq9ZeiZtS7I1PIf/la7CW4m83rTXRnVnsMbW2k56pGYu7AUFJD9Pow==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/@sindresorhus/is/-/is-0.7.0.tgz'
 '@sinonjs/commons':
  _latest: 1.6.0
  _:
@@ -1678,24 +1785,6 @@
   _: 'https://registry.npmjs.org/@types/babel__traverse/-/babel__traverse-7.0.7.tgz'
   dependencies:
    '@babel/types': ^7.3.0
-'@types/events':
- _latest: 3.0.0
- _:
-  '*': 3.0.0
- 3.0.0:
-  $: sha512-EaObqwIvayI5a8dCzhFrjKzVwKLxjoG9T6Ppd5CEo07LRKfQ8Yokw54r5+Wq7FaBQ+yXRvQAYPrHwya1/UFt9g==
-  _: 'https://registry.npmjs.org/@types/events/-/events-3.0.0.tgz'
-'@types/glob':
- _latest: 7.1.1
- _:
-  ^7.1.1: 7.1.1
- 7.1.1:
-  $: sha512-1Bh06cbWJUHMC97acuD6UMG29nMt0Aqz1vF3guLfG+kHHJhy3AyohZFFxYk2f7Q1SQIrNwvncxAE0N/9s70F2w==
-  _: 'https://registry.npmjs.org/@types/glob/-/glob-7.1.1.tgz'
-  dependencies:
-   '@types/events': '*'
-   '@types/minimatch': '*'
-   '@types/node': '*'
 '@types/jest':
  _latest: 24.0.20
  _:
@@ -1703,17 +1792,17 @@
  23.3.14:
   $: sha512-Q5hTcfdudEL2yOmluA1zaSyPbzWPmJ3XfSWeP3RyoYvS9hnje1ZyagrZOuQ6+1nQC1Gw+7gap3pLNL3xL6UBug==
   _: 'https://registry.npmjs.org/@types/jest/-/jest-23.3.14.tgz'
-'@types/minimatch':
- _latest: 3.0.3
+'@types/mocha':
+ _latest: 5.2.7
  _:
-  '*': 3.0.3
- 3.0.3:
-  $: sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
-  _: 'https://registry.npmjs.org/@types/minimatch/-/minimatch-3.0.3.tgz'
+  5.2.7: 5.2.7
+ 5.2.7:
+  $: sha512-NYrtPht0wGzhwe9+/idPaBB+TqkY9AhTvOLMkThm0IoEfLaiVQZwBwyJ5puCkO3AUCWrmcoePjp2mbFocKy4SQ==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/@types/mocha/-/mocha-5.2.7.tgz'
 '@types/node':
  _latest: 12.11.7
  _:
-  '*': 12.11.7
+  '*,>= 8': 12.11.7
  12.11.7:
   $: sha512-JNbGaHFCLwgHn/iCckiGSOZ1XYHsKFwREtzPwSGCVld1SGhOlmZw2D4ZI94HQCrBHbADzW9m4LER/8olJTRGHA==
   _: 'https://registry.npmjs.org/@types/node/-/node-12.11.7.tgz'
@@ -1937,9 +2026,7 @@ abab:
 abbrev:
  _latest: 1.1.1
  _:
-  '1':
-   - 1.1.1
-   - 1.0.9
+  '1': 1.1.1
   1.0.x: 1.0.9
  1.1.1:
   $: sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==
@@ -1950,35 +2037,28 @@ abbrev:
 accepts:
  _latest: 1.3.7
  _:
-  1.3.3: 1.3.3
-  '~1.3.4,~1.3.5,~1.3.7': 1.3.7
+  '~1.3.4,~1.3.5': 1.3.7
  1.3.7:
   $: sha512-Il80Qs2WjYlJIBNzNkK6KYqlVMTbZLXgHx2oT0pU/fjRHyEp+PEfEPY0R3WCwAGVOtauxh1hOxNgIf5bv7dQpA==
   _: 'https://registry.npmjs.org/accepts/-/accepts-1.3.7.tgz'
   dependencies:
    mime-types: ~2.1.24
    negotiator: 0.6.2
- 1.3.3:
-  $: sha1-w8p0NJOGSMPg2cHjKN1otiLChMo=
-  _: 'https://registry.npmjs.org/accepts/-/accepts-1.3.3.tgz'
-  dependencies:
-   mime-types: ~2.1.11
-   negotiator: 0.6.1
 acorn:
  _latest: 7.1.0
  _:
-  ^4.0.3: 4.0.13
-  ^5.5.3: 5.7.3
+  ^3.0.4: 3.3.0
+  '^5.5.0,^5.5.3': 5.7.3
   '^6.0.1,^6.0.5,^6.2.1': 6.3.0
  6.3.0:
   $: sha512-/czfa8BwS88b9gWQVhc8eknunSA2DoJpJyTQkhheIf5E48u1N0R4q/YxxsAeqRrmK9TQ/uYfgLDfZo91UlANIA==
   _: 'https://registry.npmjs.org/acorn/-/acorn-6.3.0.tgz'
  5.7.3:
   $: sha512-T/zvzYRfbVojPWahDsE5evJdHb3oJoQfFbsrKM7w5Zcs++Tr257tia3BmMP8XYVjp1S9RZXQMh7gao96BlqZOw==
-  _: 'https://registry.npmjs.org/acorn/-/acorn-5.7.3.tgz'
- 4.0.13:
-  $: sha1-EFSVrlNh1pe9GVyCUZLhrX8lN4c=
-  _: 'https://registry.npmjs.org/acorn/-/acorn-4.0.13.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/acorn/-/acorn-5.7.3.tgz'
+ 3.3.0:
+  $: sha1-ReN/s56No/JbruP/U2niu18iAXo=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/acorn/-/acorn-3.3.0.tgz'
 acorn-globals:
  _latest: 4.3.4
  _:
@@ -1989,6 +2069,15 @@ acorn-globals:
   dependencies:
    acorn: ^6.0.1
    acorn-walk: ^6.0.1
+acorn-jsx:
+ _latest: 5.1.0
+ _:
+  ^3.0.0: 3.0.1
+ 3.0.1:
+  $: sha1-r9+UiPsezvyDSPb7IvRk4ypYs2s=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/acorn-jsx/-/acorn-jsx-3.0.1.tgz'
+  dependencies:
+   acorn: ^3.0.4
 acorn-walk:
  _latest: 7.0.0
  _:
@@ -2035,7 +2124,7 @@ airbnb-prop-types:
 ajv:
  _latest: 6.10.2
  _:
-  ^5.0.0: 5.5.2
+  '^5.0.0,^5.2.3,^5.3.0': 5.5.2
   '^6.1.0,^6.10.2,^6.5.0,^6.5.5': 6.10.2
  6.10.2:
   $: sha512-TXtUUEYHuaTEbLZWIKUr5pmBuhDLy+8KYtPYdcV8qC+pOZL+NKqYwvWSRrVXHn+ZmRRAu8vJTAznH7Oag6RVRw==
@@ -2065,12 +2154,18 @@ ajv-errors:
 ajv-keywords:
  _latest: 3.4.1
  _:
+  ^2.1.0: 2.1.1
   '^3.1.0,^3.2.0,^3.4.1': 3.4.1
  3.4.1:
   $: sha512-RO1ibKvd27e6FEShVFfPALuHI3WjSVNeK5FIsmme/LYRNxjKuNj+Dt7bucLa6NdSv3JcVTyMlm9kGR84z1XpaQ==
   _: 'https://registry.npmjs.org/ajv-keywords/-/ajv-keywords-3.4.1.tgz'
   peerDependencies:
    ajv: ^6.9.1
+ 2.1.1:
+  $: sha1-YXmX/F9gV2iUxDX5QNgZ4TW4B2I=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/ajv-keywords/-/ajv-keywords-2.1.1.tgz'
+  peerDependencies:
+   ajv: ^5.0.0
 alphanum-sort:
  _latest: 1.0.2
  _:
@@ -2152,7 +2247,7 @@ ansi-styles:
 ansi-to-html:
  _latest: 0.6.12
  _:
-  '^0.6.0,^0.6.8': 0.6.12
+  ^0.6.8: 0.6.12
  0.6.12:
   $: sha512-qBkIqLW979675mP76yB7yVkzeAWtATegdnDQ0RA3CZzknx0yUlNxMSML4xFdBfTs2GWYFQ1FELfbGbVSPzJ+LA==
   _: 'https://registry.npmjs.org/ansi-to-html/-/ansi-to-html-0.6.12.tgz'
@@ -2271,17 +2366,6 @@ array-find-index:
  1.0.2:
   $: sha1-3wEKoSh+Fku9pvlyOwqWoexBh6E=
   _: 'https://registry.npmjs.org/array-find-index/-/array-find-index-1.0.2.tgz'
-array-flatten:
- _latest: 2.1.2
- _:
-  1.1.1: 1.1.1
-  ^2.1.0: 2.1.2
- 2.1.2:
-  $: sha512-hNfzcOV8W4NdualtqBFPyVO+54DSJuZGY9qT4pRroB6S9e3iiido2ISIC5h9R2sPJ8H3FHCIiEnsv1lPXO3KtQ==
-  _: 'https://registry.npmjs.org/array-flatten/-/array-flatten-2.1.2.tgz'
- 1.1.1:
-  $: sha1-ml9pkFGx5wczKPKgCJaLZOopVdI=
-  _: 'https://registry.npmjs.org/array-flatten/-/array-flatten-1.1.1.tgz'
 array-from:
  _latest: 2.1.1
  _:
@@ -2289,6 +2373,16 @@ array-from:
  2.1.1:
   $: sha1-z+nYwmYoudxa7MYqn12PHzUsEZU=
   _: 'https://registry.npmjs.org/array-from/-/array-from-2.1.1.tgz'
+array-includes:
+ _latest: 3.0.3
+ _:
+  ^3.0.3: 3.0.3
+ 3.0.3:
+  $: sha1-GEtI9i2S10UrsxsyMWXH+L0CJm0=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/array-includes/-/array-includes-3.0.3.tgz'
+  dependencies:
+   define-properties: ^1.1.2
+   es-abstract: ^1.7.0
 array-slice:
  _latest: 1.1.0
  _:
@@ -2347,14 +2441,10 @@ array.prototype.flat:
 arraybuffer.slice:
  _latest: 0.0.7
  _:
-  0.0.6: 0.0.6
   ~0.0.7: 0.0.7
  0.0.7:
   $: sha512-wGUIVQXuehL5TCqQun8OW81jGzAWycqzFF8lFp+GOM5BXLYj3bKNsYC4daB7n6XjCqxQA/qgTJ+8ANR3acjrog==
   _: 'https://registry.npmjs.org/arraybuffer.slice/-/arraybuffer.slice-0.0.7.tgz'
- 0.0.6:
-  $: sha1-8zshWfBTKj8xB6JywMz70a0peco=
-  _: 'https://registry.npmjs.org/arraybuffer.slice/-/arraybuffer.slice-0.0.6.tgz'
 arrify:
  _latest: 2.0.1
  _:
@@ -2439,7 +2529,7 @@ async:
  _:
   '1.x,~1.0.0': 1.0.0
   ^1.5.0: 1.5.2
-  '^2.0.0,^2.1.2,^2.1.4,^2.4.0,^2.6.2': 2.6.3
+  '^2.0.0,^2.1.2,^2.1.4,^2.4.0': 2.6.3
  2.6.3:
   $: sha512-zflvls11DCy+dQWzTW2dzuilv8Z5X/pjfmZOWba6TNIVDm+2UDaJmXSOXlasHKfNBs8oo3M0aT50fDEWfKZjXg==
   _: 'https://registry.npmjs.org/async/-/async-2.6.3.tgz'
@@ -2495,6 +2585,13 @@ atob:
  2.1.2:
   $: sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
   _: 'https://registry.npmjs.org/atob/-/atob-2.1.2.tgz'
+atob-lite:
+ _latest: 2.0.0
+ _:
+  ^2.0.0: 2.0.0
+ 2.0.0:
+  $: sha1-D+9a1G8b16hQLGVyfwNn1e5D1pY=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/atob-lite/-/atob-lite-2.0.0.tgz'
 autoprefixer:
  _latest: 9.7.0
  _:
@@ -2538,7 +2635,7 @@ aws4:
 babel-code-frame:
  _latest: 6.26.0
  _:
-  ^6.26.0: 6.26.0
+  '^6.22.0,^6.26.0': 6.26.0
  6.26.0:
   $: sha1-Y/1D99weO7fONZR9uP42mj9Yx0s=
   _: 'https://registry.npmjs.org/babel-code-frame/-/babel-code-frame-6.26.0.tgz'
@@ -2579,6 +2676,22 @@ babel-core:
    private: ^0.1.8
    slash: ^1.0.0
    source-map: ^0.5.7
+babel-eslint:
+ _latest: 10.0.3
+ _:
+  ^10.0.1: 10.0.3
+ 10.0.3:
+  $: sha512-z3U7eMY6r/3f3/JB9mTsLjyxrv0Yb1zb8PCWCLpguxfCzBIZUwy23R1t/XKewP+8mEN2Ck8Dtr4q20z6ce6SoA==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/babel-eslint/-/babel-eslint-10.0.3.tgz'
+  dependencies:
+   '@babel/code-frame': ^7.0.0
+   '@babel/parser': ^7.0.0
+   '@babel/traverse': ^7.0.0
+   '@babel/types': ^7.0.0
+   eslint-visitor-keys: ^1.0.0
+   resolve: ^1.12.0
+  peerDependencies:
+   eslint: '>= 4.12.1'
 babel-generator:
  _latest: 6.26.1
  _:
@@ -2948,6 +3061,13 @@ bcrypt-pbkdf:
   _: 'https://registry.npmjs.org/bcrypt-pbkdf/-/bcrypt-pbkdf-1.0.2.tgz'
   dependencies:
    tweetnacl: ^0.14.3
+before-after-hook:
+ _latest: 2.1.0
+ _:
+  ^2.0.0: 2.1.0
+ 2.1.0:
+  $: sha512-IWIbu7pMqyw3EAJHzzHbWa85b6oud/yfKYg5rqB5hNE8CeMi3nX+2C2sj0HswfblST86hpVEOAb9x34NZd6P7A==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/before-after-hook/-/before-after-hook-2.1.0.tgz'
 better-assert:
  _latest: 1.0.2
  _:
@@ -2957,6 +3077,13 @@ better-assert:
   _: 'https://registry.npmjs.org/better-assert/-/better-assert-1.0.2.tgz'
   dependencies:
    callsite: 1.0.0
+big-integer:
+ _latest: 1.6.47
+ _:
+  ^1.6.17: 1.6.47
+ 1.6.47:
+  $: sha512-9t9f7X3as2XGX8b52GqG6ox0GvIdM86LyIXASJnDCFhYNgt+A+MByQZ3W2PyMRZjEvG5f8TEbSPfEotVuMJnQg==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/big-integer/-/big-integer-1.6.47.tgz'
 big.js:
  _latest: 5.2.2
  _:
@@ -2975,6 +3102,16 @@ bignumber.js:
  2.4.0:
   $: sha1-g4qZLan51zfg9LLbC+YrsJ3Qxeg=
   _: 'https://registry.npmjs.org/bignumber.js/-/bignumber.js-2.4.0.tgz'
+binary:
+ _latest: 0.3.0
+ _:
+  ~0.3.0: 0.3.0
+ 0.3.0:
+  $: sha1-n2BVO8XOjDOG87VTz/R0Yq3sqnk=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/binary/-/binary-0.3.0.tgz'
+  dependencies:
+   chainsaw: ~0.1.0
+   buffers: ~0.1.1
 binary-extensions:
  _latest: 2.0.0
  _:
@@ -2998,14 +3135,10 @@ bindings:
 blob:
  _latest: 0.0.5
  _:
-  0.0.4: 0.0.4
   0.0.5: 0.0.5
  0.0.5:
   $: sha512-gaqbzQPqOoamawKg0LGVd7SzLgXS+JH61oWprSLH+P+abTczqJbhTR8CmJ2u9/bUYNmHTGJx/UEmn6doAvvuig==
   _: 'https://registry.npmjs.org/blob/-/blob-0.0.5.tgz'
- 0.0.4:
-  $: sha1-vPEwUspURj8w+fx+lbmkdjCpSSE=
-  _: 'https://registry.npmjs.org/blob/-/blob-0.0.4.tgz'
 block-stream:
  _latest: 0.0.9
  _:
@@ -3020,10 +3153,14 @@ bluebird:
  _:
   '>= 2.10.0 <= 3.x.x,^2 || ^3,^2.11.0 || ^3.5.3,^3.0.6,^3.3.0,^3.4.6,^3.5.5': 3.7.1
   '^2.11.0,^2.9.24': 2.11.0
+  ~3.4.1: 3.4.7
  3.7.1:
   top: 1
   $: sha512-DdmyoGCleJnkbp3nkbxTLJ18rjDsE4yCggEwKNXkeV123sPNfOCYeDoeuOY+F2FrSjO1YXcTU+dsy96KMy+gcg==
   _: 'https://registry.npmjs.org/bluebird/-/bluebird-3.7.1.tgz'
+ 3.4.7:
+  $: sha1-9y12C+Cbf3bQjtj66Ysomo0F+rM=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/bluebird/-/bluebird-3.4.7.tgz'
  2.11.0:
   $: sha1-U0uQM8AiyVecVro7Plpcqvu2UOE=
   _: 'https://registry.npmjs.org/bluebird/-/bluebird-2.11.0.tgz'
@@ -3048,7 +3185,7 @@ bn.js:
 body-parser:
  _latest: 1.19.0
  _:
-  '1.19.0,^1.16.1': 1.19.0
+  ^1.16.1: 1.19.0
  1.19.0:
   $: sha512-dhEPs72UPbDnAQJ9ZKMNTP6ptJaionhP5cBb541nXPlW60Jepo9RV/a4fX4XWW9CuFNK22krhrj1+rgzifNCsw==
   _: 'https://registry.npmjs.org/body-parser/-/body-parser-1.19.0.tgz'
@@ -3063,20 +3200,6 @@ body-parser:
    qs: 6.7.0
    raw-body: 2.4.0
    type-is: ~1.6.17
-bonjour:
- _latest: 3.5.0
- _:
-  ^3.5.0: 3.5.0
- 3.5.0:
-  $: sha1-jokKGD2O6aI5OzhExpGkK897yfU=
-  _: 'https://registry.npmjs.org/bonjour/-/bonjour-3.5.0.tgz'
-  dependencies:
-   array-flatten: ^2.1.0
-   deep-equal: ^1.0.1
-   dns-equal: ^1.0.0
-   dns-txt: ^2.0.2
-   multicast-dns: ^6.0.1
-   multicast-dns-service-types: ^1.1.0
 boolbase:
  _latest: 1.0.0
  _:
@@ -3176,6 +3299,13 @@ browser-resolve:
   _: 'https://registry.npmjs.org/browser-resolve/-/browser-resolve-1.11.3.tgz'
   dependencies:
    resolve: 1.1.7
+browser-stdout:
+ _latest: 1.3.1
+ _:
+  1.3.0: 1.3.0
+ 1.3.0:
+  $: sha1-81HTKWnTL6XXpVZxVCY9korjvR8=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/browser-stdout/-/browser-stdout-1.3.0.tgz'
 browserify-aes:
  _latest: 1.2.0
  _:
@@ -3274,6 +3404,13 @@ bser:
   _: 'https://registry.npmjs.org/bser/-/bser-2.1.1.tgz'
   dependencies:
    node-int64: ^0.4.0
+btoa-lite:
+ _latest: 1.0.0
+ _:
+  ^1.0.0: 1.0.0
+ 1.0.0:
+  $: sha1-M3dm2hWAEhD92VbCLpxokaudAzc=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/btoa-lite/-/btoa-lite-1.0.0.tgz'
 buffer:
  _latest: 5.4.3
  _:
@@ -3323,13 +3460,13 @@ buffer-from:
  1.1.1:
   $: sha512-MQcXEUbCKtEo7bhqEs6560Hyd4XaovZlO/k9V3hjVUF/zwW7KBVdSK4gIt/bzwS9MbR5qob+F5jusZsb0YQK2A==
   _: 'https://registry.npmjs.org/buffer-from/-/buffer-from-1.1.1.tgz'
-buffer-indexof:
- _latest: 1.1.1
+buffer-indexof-polyfill:
+ _latest: 1.0.1
  _:
-  ^1.0.0: 1.1.1
- 1.1.1:
-  $: sha512-4/rOEg86jivtPTeOUUT61jJO1Ya1TrR/OkqCSZDyq84WJh3LuuiphBYJN+fm5xufIk4XAFcEwte/8WzC8If/1g==
-  _: 'https://registry.npmjs.org/buffer-indexof/-/buffer-indexof-1.1.1.tgz'
+  ~1.0.0: 1.0.1
+ 1.0.1:
+  $: sha1-qfuAbOgUXVQoUQznLyeLs2OmOL8=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/buffer-indexof-polyfill/-/buffer-indexof-polyfill-1.0.1.tgz'
 buffer-xor:
  _latest: 2.0.2
  _:
@@ -3337,6 +3474,13 @@ buffer-xor:
  1.0.3:
   $: sha1-JuYe0UIvtw3ULm42cp7VHYVf6Nk=
   _: 'https://registry.npmjs.org/buffer-xor/-/buffer-xor-1.0.3.tgz'
+buffers:
+ _latest: 0.1.1
+ _:
+  ~0.1.1: 0.1.1
+ 0.1.1:
+  $: sha1-skV5w77U1tOWru5tmorn9Ugqt7s=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/buffers/-/buffers-0.1.1.tgz'
 builtin-status-codes:
  _latest: 3.0.0
  _:
@@ -3347,14 +3491,10 @@ builtin-status-codes:
 bytes:
  _latest: 3.1.0
  _:
-  3.0.0: 3.0.0
   3.1.0: 3.1.0
  3.1.0:
   $: sha512-zauLjrfCG+xvoyaqLoV8bLVXXNGC4JqlxFCutSDWA6fJrTo2ZuvLYTqZ7aHBLZSMOopbzwv8f+wZcVzfVTI2Dg==
   _: 'https://registry.npmjs.org/bytes/-/bytes-3.1.0.tgz'
- 3.0.0:
-  $: sha1-0ygVQE1olpn4Wk6k+odV3ROpYEg=
-  _: 'https://registry.npmjs.org/bytes/-/bytes-3.0.0.tgz'
 cacache:
  _latest: 13.0.1
  _:
@@ -3395,6 +3535,21 @@ cache-base:
    to-object-path: ^0.3.0
    union-value: ^1.0.0
    unset-value: ^1.0.0
+cacheable-request:
+ _latest: 7.0.0
+ _:
+  ^2.1.1: 2.1.4
+ 2.1.4:
+  $: sha1-DYCIAbY0KtM8kd+dC0TcCbkeXD0=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/cacheable-request/-/cacheable-request-2.1.4.tgz'
+  dependencies:
+   clone-response: 1.0.2
+   get-stream: 3.0.0
+   http-cache-semantics: 3.8.1
+   keyv: 3.0.0
+   lowercase-keys: 1.0.0
+   normalize-url: 2.0.1
+   responselike: 1.0.2
 caching-transform:
  _latest: 4.0.0
  _:
@@ -3419,12 +3574,18 @@ caller-callsite:
 caller-path:
  _latest: 2.0.0
  _:
+  ^0.1.0: 0.1.0
   ^2.0.0: 2.0.0
  2.0.0:
   $: sha1-Ro+DBE42mrIBD6xfBs7uFbsssfQ=
-  _: 'https://registry.npmjs.org/caller-path/-/caller-path-2.0.0.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/caller-path/-/caller-path-2.0.0.tgz'
   dependencies:
    caller-callsite: ^2.0.0
+ 0.1.0:
+  $: sha1-lAhe9jWB7NPaqSREqP6U6CV3dR8=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/caller-path/-/caller-path-0.1.0.tgz'
+  dependencies:
+   callsites: ^0.2.0
 callsite:
  _latest: 1.0.0
  _:
@@ -3435,10 +3596,14 @@ callsite:
 callsites:
  _latest: 3.1.0
  _:
+  ^0.2.0: 0.2.0
   ^2.0.0: 2.0.0
  2.0.0:
   $: sha1-BuuE8A7qQT2oav/vrL/7Ngk7PFA=
-  _: 'https://registry.npmjs.org/callsites/-/callsites-2.0.0.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/callsites/-/callsites-2.0.0.tgz'
+ 0.2.0:
+  $: sha1-r6uWJikQp/M8GaV3WCXGnzTjUMo=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/callsites/-/callsites-0.2.0.tgz'
 camelcase:
  _latest: 5.3.1
  _:
@@ -3554,10 +3719,19 @@ chai-shallowly:
   _: 'https://registry.npmjs.org/chai-shallowly/-/chai-shallowly-1.0.0.tgz'
   dependencies:
    enzyme: ^3.0.0
+chainsaw:
+ _latest: 0.1.0
+ _:
+  ~0.1.0: 0.1.0
+ 0.1.0:
+  $: sha1-XqtQsor+WAdNDVgpE4iCi15fvJg=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/chainsaw/-/chainsaw-0.1.0.tgz'
+  dependencies:
+   traverse: '>=0.3.0 <0.4'
 chalk:
  _latest: 2.4.2
  _:
-  '2.4.2,^2.0.0,^2.0.1,^2.1.0,^2.3.0,^2.4.1,^2.4.2': 2.4.2
+  '2.4.2,^2.0.0,^2.0.1,^2.1.0,^2.4.1,^2.4.2': 2.4.2
   '^1.1.1,^1.1.3': 1.1.3
  2.4.2:
   $: sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==
@@ -3584,6 +3758,20 @@ chalker:
   _: 'https://registry.npmjs.org/chalker/-/chalker-1.1.2.tgz'
   dependencies:
    chalk: ^2.4.2
+chardet:
+ _latest: 0.8.0
+ _:
+  ^0.4.0: 0.4.2
+ 0.4.2:
+  $: sha1-tUc7M9yXxCTl2Y3IfVXU2KKci/I=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/chardet/-/chardet-0.4.2.tgz'
+charenc:
+ _latest: 0.0.2
+ _:
+  ~0.0.1: 0.0.2
+ 0.0.2:
+  $: sha1-wKHS86cJLgN3S/qD8UwPxXkKhmc=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/charenc/-/charenc-0.0.2.tgz'
 check-error:
  _latest: 1.0.2
  _:
@@ -3672,10 +3860,15 @@ cipher-base:
 circular-json:
  _latest: 0.5.9
  _:
+  ^0.3.1: 0.3.3
   ^0.5.5: 0.5.9
  0.5.9:
   $: sha512-4ivwqHpIFJZBuhN3g/pEcdbnGUywkBblloGbkglyloVjjR3uT6tieI89MVOfbP2tHX5sgb01FuLgAOzebNlJNQ==
   _: 'https://registry.npmjs.org/circular-json/-/circular-json-0.5.9.tgz'
+  deprecated: 'CircularJSON is in maintenance only, flatted is its successor.'
+ 0.3.3:
+  $: sha512-UZK3NBx2Mca+b5LsG7bY183pHWt5Y1xts4P3Pz7ENTwGVnJOUWbRb3ocjvX7hx9tq/yTAdclXm9sZ38gNuem4A==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/circular-json/-/circular-json-0.3.3.tgz'
   deprecated: 'CircularJSON is in maintenance only, flatted is its successor.'
 class-utils:
  _latest: 0.3.6
@@ -3705,6 +3898,22 @@ cli-boxes:
  1.0.0:
   $: sha1-T6kXw+WclKAEzWH47lCdplFocUM=
   _: 'https://registry.npmjs.org/cli-boxes/-/cli-boxes-1.0.0.tgz'
+cli-cursor:
+ _latest: 3.1.0
+ _:
+  ^2.1.0: 2.1.0
+ 2.1.0:
+  $: sha1-s12sN2R5+sw+lHR9QdDQ9SOP/LU=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/cli-cursor/-/cli-cursor-2.1.0.tgz'
+  dependencies:
+   restore-cursor: ^2.0.0
+cli-width:
+ _latest: 2.2.0
+ _:
+  ^2.0.0: 2.2.0
+ 2.2.0:
+  $: sha1-/xnt6Kml5XkyQUewwR8PvLq+1jk=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/cli-width/-/cli-width-2.2.0.tgz'
 cliui:
  _latest: 5.0.0
  _:
@@ -3755,6 +3964,15 @@ clone-deep:
    is-plain-object: ^2.0.4
    kind-of: ^6.0.0
    shallow-clone: ^1.0.0
+clone-response:
+ _latest: 1.0.2
+ _:
+  1.0.2: 1.0.2
+ 1.0.2:
+  $: sha1-0dyXOSAxTfZ/vrlCI7TuNQI56Ws=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/clone-response/-/clone-response-1.0.2.tgz'
+  dependencies:
+   mimic-response: ^1.0.0
 clone-stats:
  _latest: 1.0.0
  _:
@@ -3844,10 +4062,10 @@ colors:
  _latest: 1.4.0
  _:
   1.0.x: 1.0.3
-  '^1.1.0,^1.1.2': 1.4.0
+  '^1.1.0,^1.1.2,^1.3.2': 1.4.0
  1.4.0:
   $: sha512-a+UqTh4kgZg/SlGvfbzDHpgRu7AAQOmmqRHJnxhRZICKFUT91brVhNNt58CMWU9PsBbv3PDCZUHbVxuDiH2mtA==
-  _: 'https://registry.npmjs.org/colors/-/colors-1.4.0.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/colors/-/colors-1.4.0.tgz'
  1.0.3:
   $: sha1-BDP0TYCWgP3rYO0mDxsMJi6CpAs=
   _: 'https://registry.npmjs.org/colors/-/colors-1.0.3.tgz'
@@ -3872,14 +4090,18 @@ combined-stream:
 commander:
  _latest: 3.0.2
  _:
-  '^2.19.0,^2.20.0,^2.8.1,~2.20.3': 2.20.3
+  2.11.0: 2.11.0
+  '^2.11.0,^2.19.0,^2.20.0,^2.8.1,~2.20.3': 2.20.3
   ~2.13.0: 2.13.0
  2.20.3:
   $: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
   _: 'https://registry.npmjs.org/commander/-/commander-2.20.3.tgz'
  2.13.0:
   $: sha512-MVuS359B+YzaWqjCL/c+22gfryv+mCBPHAv3zyVI2GN8EY6IRP8VwtasXn8jyyhvvq84R4ImN1OKRtcbIasjYA==
-  _: 'https://registry.npmjs.org/commander/-/commander-2.13.0.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/commander/-/commander-2.13.0.tgz'
+ 2.11.0:
+  $: sha512-b0553uYA5YAEGgyYIGYROzKQ7X5RAqedkfjiZxwi0kL1g3bOaBNNZfYkzt/CL0umgD5wc9Jec2FbB98CjkMRvQ==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/commander/-/commander-2.11.0.tgz'
 commondir:
  _latest: 1.0.1
  _:
@@ -3897,14 +4119,10 @@ component-bind:
 component-emitter:
  _latest: 1.3.0
  _:
-  1.1.2: 1.1.2
   '1.2.1,^1.2.1': 1.2.1
  1.2.1:
   $: sha1-E3kY1teCg/ffemt8WmPhQOaUJeY=
   _: 'https://registry.npmjs.org/component-emitter/-/component-emitter-1.2.1.tgz'
- 1.1.2:
-  $: sha1-KWWU8nU9qmOZbSrwjRWpURbJrsM=
-  _: 'https://registry.npmjs.org/component-emitter/-/component-emitter-1.1.2.tgz'
 component-inherit:
  _latest: 0.0.3
  _:
@@ -3912,30 +4130,6 @@ component-inherit:
  0.0.3:
   $: sha1-ZF/ErfWLcrZJ1crmUTVhnbJv8UM=
   _: 'https://registry.npmjs.org/component-inherit/-/component-inherit-0.0.3.tgz'
-compressible:
- _latest: 2.0.17
- _:
-  ~2.0.16: 2.0.17
- 2.0.17:
-  $: sha512-BGHeLCK1GV7j1bSmQQAi26X+GgWcTjLr/0tzSvMCl3LH1w1IJ4PFSPoV5316b30cneTziC+B1a+3OjoSUcQYmw==
-  _: 'https://registry.npmjs.org/compressible/-/compressible-2.0.17.tgz'
-  dependencies:
-   mime-db: '>= 1.40.0 < 2'
-compression:
- _latest: 1.7.4
- _:
-  ^1.7.4: 1.7.4
- 1.7.4:
-  $: sha512-jaSIDzP9pZVS4ZfQ+TzvtiWhdpFhE2RDHz8QJkpX9SIpLq88VueF5jJw6t+6CUQcAoA6t+x89MLrWAqpfDE8iQ==
-  _: 'https://registry.npmjs.org/compression/-/compression-1.7.4.tgz'
-  dependencies:
-   accepts: ~1.3.5
-   bytes: 3.0.0
-   compressible: ~2.0.16
-   debug: 2.6.9
-   on-headers: ~1.0.2
-   safe-buffer: 5.1.2
-   vary: ~1.1.2
 concat-map:
  _latest: 0.0.1
  _:
@@ -3946,10 +4140,10 @@ concat-map:
 concat-stream:
  _latest: 2.0.0
  _:
-  '1.6.2,^1.5.0': 1.6.2
+  '1.6.2,^1.5.0,^1.6.0': 1.6.2
  1.6.2:
   $: sha512-27HBghJxjiZtIk3Ycvn/4kbJk/1uZuJFfuPEns6LaEvpvG1f0hTea8lilrouyo9mVc2GWdcEZ8OLoGmSADlrCw==
-  _: 'https://registry.npmjs.org/concat-stream/-/concat-stream-1.6.2.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/concat-stream/-/concat-stream-1.6.2.tgz'
   dependencies:
    buffer-from: ^1.0.0
    inherits: ^2.0.3
@@ -3981,13 +4175,6 @@ connect:
    finalhandler: 1.1.2
    parseurl: ~1.3.3
    utils-merge: 1.0.1
-connect-history-api-fallback:
- _latest: 1.6.0
- _:
-  ^1.6.0: 1.6.0
- 1.6.0:
-  $: sha512-e54B99q/OUoH64zYYRf3HBP5z24G38h5D3qXu23JGRoigpX5Ss4r9ZnDk3g0Z8uQC2x2lPaJ+UlWBc1ZWBWdLg==
-  _: 'https://registry.npmjs.org/connect-history-api-fallback/-/connect-history-api-fallback-1.6.0.tgz'
 console-browserify:
  _latest: 1.1.0
  _:
@@ -4011,15 +4198,6 @@ constants-browserify:
  1.0.0:
   $: sha1-wguW2MYXdIqvHBYCF2DNJ/y4y3U=
   _: 'https://registry.npmjs.org/constants-browserify/-/constants-browserify-1.0.0.tgz'
-content-disposition:
- _latest: 0.5.3
- _:
-  0.5.3: 0.5.3
- 0.5.3:
-  $: sha512-ExO0774ikEObIAEV9kDo50o+79VCUdEB6n6lzKgGwupcVeRlhrj3qGAfwq8G6uBJjkqLrhT0qEYFcWng8z1z0g==
-  _: 'https://registry.npmjs.org/content-disposition/-/content-disposition-0.5.3.tgz'
-  dependencies:
-   safe-buffer: 5.1.2
 content-type:
  _latest: 1.0.4
  _:
@@ -4040,20 +4218,9 @@ cookie:
  _latest: 0.4.0
  _:
   0.3.1: 0.3.1
-  0.4.0: 0.4.0
- 0.4.0:
-  $: sha512-+Hp8fLp57wnUSt0tY0tHEXh4voZRDnoIrZPqlo3DPiI4y9lwg/jqx+1Om94/W6ZaPDOUbnjOt/99w66zk+l1Xg==
-  _: 'https://registry.npmjs.org/cookie/-/cookie-0.4.0.tgz'
  0.3.1:
   $: sha1-5+Ch+e9DtMi6klxcWpboBtFoc7s=
   _: 'https://registry.npmjs.org/cookie/-/cookie-0.3.1.tgz'
-cookie-signature:
- _latest: 1.1.0
- _:
-  1.0.6: 1.0.6
- 1.0.6:
-  $: sha1-4wOogrNCzD7oylE6eZmXNNqzriw=
-  _: 'https://registry.npmjs.org/cookie-signature/-/cookie-signature-1.0.6.tgz'
 copy-concurrently:
  _latest: 1.0.5
  _:
@@ -4079,7 +4246,7 @@ core-js:
  _latest: 3.3.4
  _:
   '^2 || ^3': 3.3.4
-  '^2.2.0,^2.4.0,^2.5.0': 2.6.10
+  '^2.2.0,^2.4.0,^2.5.0,^2.6.5': 2.6.10
  3.3.4:
   hasI: 1
   $: sha512-BtibooaAmSOptGLRccsuX/dqgPtXwNgqcvYA6kOTTMzonRxZ+pJS4e+6mvVutESfXMeTnK8m3M+aBu3bkJbR+w==
@@ -4182,7 +4349,7 @@ cross-spawn:
   '6.0.5,^6.0.0': 6.0.5
   ^3.0.0: 3.0.1
   ^4: 4.0.2
-  ^5.0.1: 5.1.0
+  '^5.0.1,^5.1.0': 5.1.0
  6.0.5:
   $: sha512-eTVLrBSt7fjbDygz805pMnstIs2VTBNkRm0qxZd+M7A5XDdxVRWO5MxGBXZhjY4cqLYLdtrGqRf8mBPmzwSpWQ==
   _: 'https://registry.npmjs.org/cross-spawn/-/cross-spawn-6.0.5.tgz'
@@ -4194,7 +4361,7 @@ cross-spawn:
    which: ^1.2.9
  5.1.0:
   $: sha1-6L0O/uWPz/b4+UUQoKVUu/ojVEk=
-  _: 'https://registry.npmjs.org/cross-spawn/-/cross-spawn-5.1.0.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/cross-spawn/-/cross-spawn-5.1.0.tgz'
   dependencies:
    lru-cache: ^4.0.1
    shebang-command: ^1.2.0
@@ -4207,10 +4374,17 @@ cross-spawn:
    which: ^1.2.9
  3.0.1:
   $: sha1-ElYDfsufDF9549bvE14wdwGEuYI=
-  _: 'https://registry.npmjs.org/cross-spawn/-/cross-spawn-3.0.1.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/cross-spawn/-/cross-spawn-3.0.1.tgz'
   dependencies:
    lru-cache: ^4.0.1
    which: ^1.2.9
+crypt:
+ _latest: 0.0.2
+ _:
+  ~0.0.1: 0.0.2
+ 0.0.2:
+  $: sha1-iNf/fsDfuG9xPch7u0LQRNPmxBs=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/crypt/-/crypt-0.0.2.tgz'
 crypto-browserify:
  _latest: 3.12.0
  _:
@@ -4643,12 +4817,11 @@ deasync:
 debug:
  _latest: 4.1.1
  _:
-  '2.2.0,~2.2.0': 2.2.0
-  2.3.3: 2.3.3
   '2.6.9,^2.2.0,^2.3.3,^2.6.8,^2.6.9': 2.6.9
-  '^3.0.0,^3.1.0,^3.1.1,^3.2.5,^3.2.6': 3.2.6
+  '3.1.0,~3.1.0': 3.1.0
+  '^3.0.0,^3.1.0': 3.2.6
   '^4.1.0,^4.1.1': 4.1.1
-  ~3.1.0: 3.1.0
+  ~2.2.0: 2.2.0
  4.1.1:
   $: sha512-pYAIzeRo8J6KPEaJ0VWOh5Pzkbw/RetuzehGM7QRRX5he4fPHx2rdKMB256ehJCkX+XRQm16eZLqLNS8RSZXZw==
   _: 'https://registry.npmjs.org/debug/-/debug-4.1.1.tgz'
@@ -4661,7 +4834,7 @@ debug:
    ms: ^2.1.1
  3.1.0:
   $: sha512-OX8XqP7/1a9cqkxYw2yXss15f26NKWBpDXQd0/uK/KPqdQhxbPa994hnzjcE2VqQpDslf55723cKPUOGSmMY3g==
-  _: 'https://registry.npmjs.org/debug/-/debug-3.1.0.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/debug/-/debug-3.1.0.tgz'
   dependencies:
    ms: 2.0.0
  2.6.9:
@@ -4669,14 +4842,9 @@ debug:
   _: 'https://registry.npmjs.org/debug/-/debug-2.6.9.tgz'
   dependencies:
    ms: 2.0.0
- 2.3.3:
-  $: sha1-QMRT5n5uE8kB3ewxeviYbNqe/4w=
-  _: 'https://registry.npmjs.org/debug/-/debug-2.3.3.tgz'
-  dependencies:
-   ms: 0.7.2
  2.2.0:
   $: sha1-+HBX6ZWxofauaklgZkE3vFbwOdo=
-  _: 'https://registry.npmjs.org/debug/-/debug-2.2.0.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/debug/-/debug-2.2.0.tgz'
   dependencies:
    ms: 0.7.1
 decamelize:
@@ -4693,6 +4861,15 @@ decode-uri-component:
  0.2.0:
   $: sha1-6zkTMzRYd1y4TNGh+uBiEGu4dUU=
   _: 'https://registry.npmjs.org/decode-uri-component/-/decode-uri-component-0.2.0.tgz'
+decompress-response:
+ _latest: 5.0.0
+ _:
+  ^3.3.0: 3.3.0
+ 3.3.0:
+  $: sha1-gKTdMjdIOEv6JICDYirt7Jgq3/M=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/decompress-response/-/decompress-response-3.3.0.tgz'
+  dependencies:
+   mimic-response: ^1.0.0
 deep-eql:
  _latest: 4.0.0
  _:
@@ -4702,20 +4879,6 @@ deep-eql:
   _: 'https://registry.npmjs.org/deep-eql/-/deep-eql-3.0.1.tgz'
   dependencies:
    type-detect: ^4.0.0
-deep-equal:
- _latest: 1.1.0
- _:
-  ^1.0.1: 1.1.0
- 1.1.0:
-  $: sha512-ZbfWJq/wN1Z273o7mUSjILYqehAktR2NVoSrOukDkU9kg2v/Uv89yU4Cvz8seJeAmtN5oqiefKq8FPuXOboqLw==
-  _: 'https://registry.npmjs.org/deep-equal/-/deep-equal-1.1.0.tgz'
-  dependencies:
-   is-arguments: ^1.0.4
-   is-date-object: ^1.0.1
-   is-regex: ^1.0.4
-   object-is: ^1.0.1
-   object-keys: ^1.1.1
-   regexp.prototype.flags: ^1.2.0
 deep-extend:
  _latest: 0.6.0
  _:
@@ -4734,16 +4897,6 @@ deep-is:
  0.1.3:
   $: sha1-s2nW+128E+7PUk+RsHD+7cNXzzQ=
   _: 'https://registry.npmjs.org/deep-is/-/deep-is-0.1.3.tgz'
-default-gateway:
- _latest: 5.0.4
- _:
-  ^4.2.0: 4.2.0
- 4.2.0:
-  $: sha512-h6sMrVB1VMWVrW13mSc6ia/DwYYw5MN6+exNu1OaJeFac5aSAvwM7lZ0NVfTABuSkQelr4h5oebg3KB1XPdjgA==
-  _: 'https://registry.npmjs.org/default-gateway/-/default-gateway-4.2.0.tgz'
-  dependencies:
-   execa: ^1.0.0
-   ip-regex: ^2.1.0
 default-require-extensions:
  _latest: 3.0.0
  _:
@@ -4794,18 +4947,6 @@ del:
  _latest: 5.1.0
  _:
   ^3.0.0: 3.0.0
-  ^4.1.1: 4.1.1
- 4.1.1:
-  $: sha512-QwGuEUouP2kVwQenAsOof5Fv8K9t3D8Ca8NxcXKrIpEHjTXK5J2nXLdP+ALI1cgv8wj7KuwBhTwBkOZSJKM5XQ==
-  _: 'https://registry.npmjs.org/del/-/del-4.1.1.tgz'
-  dependencies:
-   '@types/glob': ^7.1.1
-   globby: ^6.1.0
-   is-path-cwd: ^2.0.0
-   is-path-in-cwd: ^2.0.0
-   p-map: ^2.0.0
-   pify: ^4.0.1
-   rimraf: ^2.6.3
  3.0.0:
   $: sha1-U+z2mf/LyzljdpGrE7rxYIGXZuU=
   _: 'https://registry.npmjs.org/del/-/del-3.0.0.tgz'
@@ -4837,6 +4978,13 @@ depd:
  1.1.2:
   $: sha1-m81S4UwJd2PnSbJ0xDRu0uVgtak=
   _: 'https://registry.npmjs.org/depd/-/depd-1.1.2.tgz'
+deprecation:
+ _latest: 2.3.1
+ _:
+  ^2.0.0: 2.3.1
+ 2.3.1:
+  $: sha512-xmHIy4F3scKVwMsQ4WnVaS8bHOx0DmVwRywosKhaILI0ywMDWPtBSku2HNxRvF7jtwDRsoEwYQSfbxj8b7RlJQ==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/deprecation/-/deprecation-2.3.1.tgz'
 des.js:
  _latest: 1.0.0
  _:
@@ -4847,13 +4995,6 @@ des.js:
   dependencies:
    inherits: ^2.0.1
    minimalistic-assert: ^1.0.0
-destroy:
- _latest: 1.0.4
- _:
-  ~1.0.4: 1.0.4
- 1.0.4:
-  $: sha1-l4hXRCxEdJ5CBmE+N5RiBYJqvYA=
-  _: 'https://registry.npmjs.org/destroy/-/destroy-1.0.4.tgz'
 detect-file:
  _latest: 1.0.0
  _:
@@ -4894,10 +5035,14 @@ di:
 diff:
  _latest: 4.0.1
  _:
+  3.3.1: 3.3.1
   '^3.1.0,^3.2.0': 3.5.0
  3.5.0:
   $: sha512-A46qtFgd+g7pDZinpnwiRJtxbC1hpgf0uzP3iG89scHk0AUC7A1TGxf5OiiOUv/JMZR8GOt8hL900hV0bOy5xA==
-  _: 'https://registry.npmjs.org/diff/-/diff-3.5.0.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/diff/-/diff-3.5.0.tgz'
+ 3.3.1:
+  $: sha512-MKPHZDMB0o6yHyDryUOScqZibp914ksXwAMYMTHj6KO8UeKsRYNJD3oNCKjTqZon+V488P7N/HzXF8t7ZR95ww==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/diff/-/diff-3.3.1.tgz'
 diffie-hellman:
  _latest: 5.0.3
  _:
@@ -4916,32 +5061,15 @@ discontinuous-range:
  1.0.0:
   $: sha1-44Mx8IRLukm5qctxx3FYWqsbxlo=
   _: 'https://registry.npmjs.org/discontinuous-range/-/discontinuous-range-1.0.0.tgz'
-dns-equal:
- _latest: 1.0.0
+doctrine:
+ _latest: 3.0.0
  _:
-  ^1.0.0: 1.0.0
- 1.0.0:
-  $: sha1-s55/HabrCnW6nBcySzR1PEfgZU0=
-  _: 'https://registry.npmjs.org/dns-equal/-/dns-equal-1.0.0.tgz'
-dns-packet:
- _latest: 5.2.1
- _:
-  ^1.3.1: 1.3.1
- 1.3.1:
-  $: sha512-0UxfQkMhYAUaZI+xrNZOz/as5KgDU0M/fQ9b6SpkyLbk3GEswDi6PADJVaYJradtRVsRIlF1zLyOodbcTCDzUg==
-  _: 'https://registry.npmjs.org/dns-packet/-/dns-packet-1.3.1.tgz'
+  ^2.1.0: 2.1.0
+ 2.1.0:
+  $: sha512-35mSku4ZXK0vfCuHEDAwt55dg2jNajHZ1odvF+8SSr82EsZY4QmXfuWso8oEd8zRhVObSN18aM0CjSdoBX7zIw==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/doctrine/-/doctrine-2.1.0.tgz'
   dependencies:
-   ip: ^1.1.0
-   safe-buffer: ^5.0.1
-dns-txt:
- _latest: 2.0.2
- _:
-  ^2.0.2: 2.0.2
- 2.0.2:
-  $: sha1-uR2Ab10nGI5Ks+fRB9iBocxGQrY=
-  _: 'https://registry.npmjs.org/dns-txt/-/dns-txt-2.0.2.tgz'
-  dependencies:
-   buffer-indexof: ^1.0.0
+   esutils: ^2.0.2
 dolphin:
  _latest: 0.1.14
  _:
@@ -5061,6 +5189,15 @@ dot-prop:
   _: 'https://registry.npmjs.org/dot-prop/-/dot-prop-4.2.0.tgz'
   dependencies:
    is-obj: ^1.0.0
+duplexer2:
+ _latest: 0.1.4
+ _:
+  ~0.1.4: 0.1.4
+ 0.1.4:
+  $: sha1-ixLauHjA1p4+eJEFFmKjL8a93ME=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/duplexer2/-/duplexer2-0.1.4.tgz'
+  dependencies:
+   readable-stream: ^2.0.2
 duplexer3:
  _latest: 0.1.4
  _:
@@ -5112,46 +5249,55 @@ ejs:
   $: sha512-kS/gEPzZs3Y1rRsbGX4UOSjtP/CeJP0CxSNZHYxGfVM/VgLcv0ZqM7C45YyTj2DI2g7+P9Dd24C+IMIg6D0nYQ==
   _: 'https://registry.npmjs.org/ejs/-/ejs-2.7.1.tgz'
 electrode-archetype-opt-critical-css:
- _latest: 1.0.2-fynlocal_h
+ _latest: 1.0.3-fynlocal_h
  _:
-  ../electrode-archetype-opt-critical-css: 1.0.2-fynlocal_h
- 1.0.2-fynlocal_h:
-  hasPI: 1
+  ../electrode-archetype-opt-critical-css: 1.0.3-fynlocal_h
+ 1.0.3-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-critical-css
   dependencies:
    clean-css: ^4.2.1
    penthouse: ^2.2.0
 electrode-archetype-opt-eslint:
- _latest: 1.0.2-fynlocal_h
+ _latest: 1.0.3-fynlocal_h
  _:
-  ../electrode-archetype-opt-eslint: 1.0.2-fynlocal_h
- 1.0.2-fynlocal_h:
-  optFailed: 1
+  ../electrode-archetype-opt-eslint: 1.0.3-fynlocal_h
+ 1.0.3-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-eslint
+  dependencies:
+   eslint: ^4.8.0
+   babel-eslint: ^10.0.1
+   eslint-config-walmart: ^2.0.0
+   eslint-plugin-filenames: ^1.1.0
+   eslint-plugin-flowtype: ^2.49.3
+   eslint-plugin-react: ^7.4.0
 electrode-archetype-opt-flow:
- _latest: 1.0.1-fynlocal_h
- _:
-  ../electrode-archetype-opt-flow: 1.0.1-fynlocal_h
- 1.0.1-fynlocal_h:
-  optFailed: 1
-  $: local
-  _: ../../packages/electrode-archetype-opt-flow
-electrode-archetype-opt-inferno:
- _latest: 0.2.10-fynlocal_h
- _:
-  ../electrode-archetype-opt-inferno: 0.2.10-fynlocal_h
- 0.2.10-fynlocal_h:
-  optFailed: 1
-  $: local
-  _: ../../packages/electrode-archetype-opt-inferno
-electrode-archetype-opt-jest:
  _latest: 1.0.2-fynlocal_h
  _:
-  ../electrode-archetype-opt-jest: 1.0.2-fynlocal_h
+  ../electrode-archetype-opt-flow: 1.0.2-fynlocal_h
  1.0.2-fynlocal_h:
-  hasPI: 1
+  $: local
+  _: ../../packages/electrode-archetype-opt-flow
+  dependencies:
+   '@babel/plugin-transform-flow-strip-types': ^7.2.0
+   flow-bin: ^0.74.0
+   flow-typed: ^2.4.0
+electrode-archetype-opt-inferno:
+ _latest: 0.2.11-fynlocal_h
+ _:
+  ../electrode-archetype-opt-inferno: 0.2.11-fynlocal_h
+ 0.2.11-fynlocal_h:
+  $: local
+  _: ../../packages/electrode-archetype-opt-inferno
+  dependencies:
+   inferno: ^3.0.0
+   inferno-compat: ^3.0.0
+electrode-archetype-opt-jest:
+ _latest: 1.0.3-fynlocal_h
+ _:
+  ../electrode-archetype-opt-jest: 1.0.3-fynlocal_h
+ 1.0.3-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-jest
   dependencies:
@@ -5162,11 +5308,10 @@ electrode-archetype-opt-jest:
    eslint-plugin-jest: ^21.27.2
    jest: ^23.6.0
 electrode-archetype-opt-karma:
- _latest: 2.0.5-fynlocal_h
+ _latest: 2.0.6-fynlocal_h
  _:
-  ../electrode-archetype-opt-karma: 2.0.5-fynlocal_h
- 2.0.5-fynlocal_h:
-  hasPI: 1
+  ../electrode-archetype-opt-karma: 2.0.6-fynlocal_h
+ 2.0.6-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-karma
   dependencies:
@@ -5190,30 +5335,35 @@ electrode-archetype-opt-karma:
    karma-spec-reporter: 0.0.32
    karma-webpack: 4.0.0-rc.3
 electrode-archetype-opt-less:
- _latest: 1.0.1-fynlocal_h
+ _latest: 1.0.2-fynlocal_h
  _:
-  ../electrode-archetype-opt-less: 1.0.1-fynlocal_h
- 1.0.1-fynlocal_h:
-  hasPI: 1
+  ../electrode-archetype-opt-less: 1.0.2-fynlocal_h
+ 1.0.2-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-less
   dependencies:
    less: ^3.9.0
    less-loader: ^4.1.0
 electrode-archetype-opt-mocha:
- _latest: 1.0.2-fynlocal_h
+ _latest: 1.0.3-fynlocal_h
  _:
-  ../electrode-archetype-opt-mocha: 1.0.2-fynlocal_h
- 1.0.2-fynlocal_h:
-  optFailed: 1
+  ../electrode-archetype-opt-mocha: 1.0.3-fynlocal_h
+ 1.0.3-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-mocha
+  dependencies:
+   '@types/mocha': 5.2.7
+   chai: ^4.0.0
+   chai-as-promised: ^7.1.1
+   chai-shallowly: ^1.0.0
+   enzyme: ^3.0.0
+   enzyme-adapter-react-16: ^1.1.0
+   mocha: ^4.0.0
 electrode-archetype-opt-phantomjs:
- _latest: 1.0.1-fynlocal_h
+ _latest: 1.0.2-fynlocal_h
  _:
-  ../electrode-archetype-opt-phantomjs: 1.0.1-fynlocal_h
- 1.0.1-fynlocal_h:
-  hasPI: 1
+  ../electrode-archetype-opt-phantomjs: 1.0.2-fynlocal_h
+ 1.0.2-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-phantomjs
   dependencies:
@@ -5221,11 +5371,10 @@ electrode-archetype-opt-phantomjs:
    karma-phantomjs-shim: ^1.5.0
    phantomjs-prebuilt: ^2.1.16
 electrode-archetype-opt-postcss:
- _latest: 1.0.3-fynlocal_h
+ _latest: 1.0.4-fynlocal_h
  _:
-  ../electrode-archetype-opt-postcss: 1.0.3-fynlocal_h
- 1.0.3-fynlocal_h:
-  hasPI: 1
+  ../electrode-archetype-opt-postcss: 1.0.4-fynlocal_h
+ 1.0.4-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-postcss
   dependencies:
@@ -5238,11 +5387,10 @@ electrode-archetype-opt-postcss:
    postcss-scss: ^1.0.6
    sugarss: ^1.0.1
 electrode-archetype-opt-pwa:
- _latest: 1.0.5-fynlocal_h
+ _latest: 1.0.6-fynlocal_h
  _:
-  ../electrode-archetype-opt-pwa: 1.0.5-fynlocal_h
- 1.0.5-fynlocal_h:
-  hasPI: 1
+  ../electrode-archetype-opt-pwa: 1.0.6-fynlocal_h
+ 1.0.6-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-pwa
   dependencies:
@@ -5255,11 +5403,10 @@ electrode-archetype-opt-pwa:
    web-app-manifest-loader: ^0.1.1
    webpack-disk-plugin: 0.0.2
 electrode-archetype-opt-react:
- _latest: 2.0.3-fynlocal_h
+ _latest: 2.0.4-fynlocal_h
  _:
-  ../electrode-archetype-opt-react: 2.0.3-fynlocal_h
- 2.0.3-fynlocal_h:
-  hasPI: 1
+  ../electrode-archetype-opt-react: 2.0.4-fynlocal_h
+ 2.0.4-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-react
   dependencies:
@@ -5270,60 +5417,55 @@ electrode-archetype-opt-react-intl:
  _:
   ../electrode-archetype-opt-react-intl: 1.0.0-fynlocal_h
  1.0.0-fynlocal_h:
-  hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-react-intl
   dependencies:
    react-intl: ^2.1.3
 electrode-archetype-opt-sass:
- _latest: 1.0.8-fynlocal_h
+ _latest: 1.0.9-fynlocal_h
  _:
-  ../electrode-archetype-opt-sass: 1.0.8-fynlocal_h
- 1.0.8-fynlocal_h:
-  hasPI: 1
+  ../electrode-archetype-opt-sass: 1.0.9-fynlocal_h
+ 1.0.9-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-sass
   dependencies:
    node-sass: ^4.9.3
    sass-loader: ^6.0.6
 electrode-archetype-opt-sinon:
- _latest: 1.0.2-fynlocal_h
+ _latest: 1.0.3-fynlocal_h
  _:
-  ../electrode-archetype-opt-sinon: 1.0.2-fynlocal_h
- 1.0.2-fynlocal_h:
-  hasPI: 1
+  ../electrode-archetype-opt-sinon: 1.0.3-fynlocal_h
+ 1.0.3-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-sinon
   dependencies:
    sinon: ^4.0.0
    sinon-chai: ^2.14.0
 electrode-archetype-opt-stylus:
- _latest: 1.0.1-fynlocal_h
+ _latest: 1.0.2-fynlocal_h
  _:
-  ../electrode-archetype-opt-stylus: 1.0.1-fynlocal_h
- 1.0.1-fynlocal_h:
-  hasPI: 1
+  ../electrode-archetype-opt-stylus: 1.0.2-fynlocal_h
+ 1.0.2-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-stylus
   dependencies:
    stylus: ^0.54.7
    stylus-relative-loader: ^3.4.0
 electrode-archetype-opt-typescript:
- _latest: 1.0.2-fynlocal_h
+ _latest: 1.0.3-fynlocal_h
  _:
-  ../electrode-archetype-opt-typescript: 1.0.2-fynlocal_h
- 1.0.2-fynlocal_h:
-  hasPI: 1
+  ../electrode-archetype-opt-typescript: 1.0.3-fynlocal_h
+ 1.0.3-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-typescript
   dependencies:
    typescript: ^3.2.1
    '@babel/preset-typescript': ^7.1.0
 electrode-archetype-react-app:
- _latest: 6.5.16-fynlocal_h
+ _latest: 6.5.18-fynlocal_h
  _:
-  ../../packages/electrode-archetype-react-app: 6.5.16-fynlocal_h
- 6.5.16-fynlocal_h:
+  ../../packages/electrode-archetype-react-app: 6.5.18-fynlocal_h
+ 6.5.18-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app
@@ -5335,13 +5477,13 @@ electrode-archetype-react-app:
    optional-require: ^1.0.0
    subapp-util: ^1.0.2
   optionalDependencies:
-   electrode-archetype-opt-inferno: ^0.2.10
-   electrode-archetype-opt-react: ^2.0.3
+   electrode-archetype-opt-inferno: ^0.2.11
+   electrode-archetype-opt-react: ^2.0.4
 electrode-archetype-react-app-dev:
- _latest: 6.5.16-fynlocal_h
+ _latest: 6.5.18-fynlocal_h
  _:
-  ../../packages/electrode-archetype-react-app-dev: 6.5.16-fynlocal_h
- 6.5.16-fynlocal_h:
+  ../../packages/electrode-archetype-react-app-dev: 6.5.18-fynlocal_h
+ 6.5.18-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app-dev
@@ -5381,11 +5523,9 @@ electrode-archetype-react-app-dev:
    convert-source-map: ^1.5.0
    core-js: '^2 || ^3'
    css-loader: ^1.0.0
-   electrode-bundle-analyzer: ^1.0.0
    electrode-cdn-file-loader: ^1.0.0
    electrode-hapi-compat: ^1.2.0
    electrode-node-resolver: ^2.0.0
-   electrode-webpack-reporter: ^0.5.1
    file-loader: ^2.0.0
    filter-scan-dir: ^1.0.9
    finalhandler: ^1.1.1
@@ -5400,11 +5540,9 @@ electrode-archetype-react-app-dev:
    mini-css-extract-plugin: ^0.7.0
    mkdirp: ^0.5.1
    nix-clap: ^1.3.7
-   nodemon: ^1.18.7
    offline-plugin: ^4.6.1
    optimize-css-assets-webpack-plugin: ^5.0.1
    optional-require: ^1.0.0
-   prop-types: ^15.5.6
    raw-loader: ^0.5.1
    regenerator-runtime: ^0.13.2
    request: ^2.88.0
@@ -5417,48 +5555,35 @@ electrode-archetype-react-app-dev:
    url-loader: ^0.6.2
    webpack: ^4.41.0
    webpack-cli: ^3.3.9
-   webpack-config-composer: ^1.1.0
+   webpack-config-composer: ^1.1.2
    webpack-dev-middleware: ^3.4.0
-   webpack-dev-server: ^3.1.10
    webpack-disk-plugin: 0.0.2
    webpack-hot-middleware: ^2.22.2
    webpack-stats-plugin: ^0.2.1
    winston: ^2.3.1
-   xclap: ^0.2.37
+   xclap: ^0.2.38
    xenv-config: ^1.3.0
    xsh: ^0.4.4
   optionalDependencies:
-   electrode-archetype-opt-critical-css: ^1.0.2
-   electrode-archetype-opt-eslint: ^1.0.2
-   electrode-archetype-opt-flow: ^1.0.1
-   electrode-archetype-opt-inferno: ^0.2.10
-   electrode-archetype-opt-jest: ^24.0.0
-   electrode-archetype-opt-karma: ^2.0.5
-   electrode-archetype-opt-less: ^1.0.1
-   electrode-archetype-opt-mocha: ^1.0.2
-   electrode-archetype-opt-phantomjs: ^1.0.1
-   electrode-archetype-opt-postcss: ^1.0.3
-   electrode-archetype-opt-pwa: ^1.0.5
-   electrode-archetype-opt-react: ^2.0.3
+   electrode-archetype-opt-critical-css: ^1.0.3
+   electrode-archetype-opt-eslint: ^1.0.3
+   electrode-archetype-opt-flow: ^1.0.2
+   electrode-archetype-opt-inferno: ^0.2.11
+   electrode-archetype-opt-jest: ^1.0.3
+   electrode-archetype-opt-karma: ^2.0.6
+   electrode-archetype-opt-less: ^1.0.2
+   electrode-archetype-opt-mocha: ^1.0.3
+   electrode-archetype-opt-phantomjs: ^1.0.2
+   electrode-archetype-opt-postcss: ^1.0.4
+   electrode-archetype-opt-pwa: ^1.0.6
+   electrode-archetype-opt-react: ^2.0.4
    electrode-archetype-opt-react-intl: ^1.0.0
-   electrode-archetype-opt-sass: ^1.0.8
-   electrode-archetype-opt-stylus: ^1.0.1
-   electrode-archetype-opt-sinon: ^1.0.2
-   electrode-archetype-opt-typescript: ^1.0.2
+   electrode-archetype-opt-sass: ^1.0.9
+   electrode-archetype-opt-stylus: ^1.0.2
+   electrode-archetype-opt-sinon: ^1.0.3
+   electrode-archetype-opt-typescript: ^1.0.3
   peerDependencies:
    electrode-archetype-react-app: ^6.0.0
-electrode-bundle-analyzer:
- _latest: 1.0.1
- _:
-  ^1.0.0: 1.0.1
- 1.0.1:
-  $: sha512-Cs+WPhuvUA358umG8mE7PTJRB2kmK7y6Er1/+DJcylHIdxD0CRojtsBwQWjrWkevZBohk+L9nM3v8SEryul6bg==
-  _: 'https://registry.npmjs.org/electrode-bundle-analyzer/-/electrode-bundle-analyzer-1.0.1.tgz'
-  dependencies:
-   acorn: ^4.0.3
-   lodash: ^4.15.0
-   mkdirp: ^0.5.1
-   yargs: ^5.0.0
 electrode-cdn-file-loader:
  _latest: 1.1.1
  _:
@@ -5524,10 +5649,10 @@ electrode-react-webapp:
    require-at: ^1.0.0
    string-array: ^1.0.0
 electrode-redux-router-engine:
- _latest: 2.3.2-fynlocal_h
+ _latest: 3.0.0-fynlocal_h
  _:
-  ../../packages/electrode-redux-router-engine: 2.3.2-fynlocal_h
- 2.3.2-fynlocal_h:
+  ../../packages/electrode-redux-router-engine: 3.0.0-fynlocal_h
+ 3.0.0-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-redux-router-engine
@@ -5541,8 +5666,8 @@ electrode-redux-router-engine:
    react-router-dom: ^5.1.2
    redux: '^4.0.0 || ^3.6.0'
   peerDependencies:
-   react: '^16.0.0 || ^15.3.1 || ^0.14.8'
-   react-dom: '^16.0.0 || ^15.3.1 || ^0.14.8'
+   react: ^16.0.0
+   react-dom: ^16.0.0
 electrode-server:
  _latest: 3.0.0
  _:
@@ -5584,18 +5709,6 @@ electrode-ui-config:
    bluebird: ^2.11.0
    electrode-hapi-compat: ^1.0.0
    lodash: ^4.17.11
-electrode-webpack-reporter:
- _latest: 0.5.1
- _:
-  ^0.5.1: 0.5.1
- 0.5.1:
-  $: sha512-LDBTivVnFxnZ30CSAH0NFE8yMkclRrMntEi0gprxIErS8pTqqbRA8vhHiZ93HeWVFYlJ3BpA/4S37jOQwEJhiA==
-  _: 'https://registry.npmjs.org/electrode-webpack-reporter/-/electrode-webpack-reporter-0.5.1.tgz'
-  dependencies:
-   ansi-to-html: ^0.6.0
-   chalk: ^2.3.0
-   optional-require: ^1.0.0
-   socket.io: ^1.7.3
 electron-to-chromium:
  _latest: 1.3.296
  _:
@@ -5651,7 +5764,6 @@ end-of-stream:
 engine.io:
  _latest: 3.4.0
  _:
-  ~1.8.4: 1.8.5
   ~3.2.0: 3.2.1
  3.2.1:
   $: sha512-+VlKzHzMhaU+GsCIg4AoXF1UdDFjHHwMmMKqMJNDNLlUlejz58FCy4LBqB2YVJskHGYl06BatYWKP2TVdVXE5w==
@@ -5663,20 +5775,9 @@ engine.io:
    engine.io-parser: ~2.1.0
    ws: ~3.3.1
    cookie: 0.3.1
- 1.8.5:
-  $: sha512-j1DWIcktw4hRwrv6nWx++5nFH2X64x16MAG2P0Lmi5Dvdfi3I+Jhc7JKJIdAmDJa+5aZ/imHV7dWRPy2Cqjh3A==
-  _: 'https://registry.npmjs.org/engine.io/-/engine.io-1.8.5.tgz'
-  dependencies:
-   accepts: 1.3.3
-   base64id: 1.0.0
-   debug: 2.3.3
-   engine.io-parser: 1.3.2
-   ws: ~1.1.5
-   cookie: 0.3.1
 engine.io-client:
  _latest: 3.4.0
  _:
-  ~1.8.4: 1.8.5
   ~3.2.0: 3.2.1
  3.2.1:
   $: sha512-y5AbkytWeM4jQr7m/koQLc5AxpRKC1hEVUb/s1FUAWEJq5AzJJ4NLvzuKPuxtDi5Mq755WuDvZ6Iv2rXj4PTzw==
@@ -5693,26 +5794,9 @@ engine.io-client:
    ws: ~3.3.1
    xmlhttprequest-ssl: ~1.5.4
    yeast: 0.1.2
- 1.8.5:
-  $: sha512-AYTgHyeVUPitsseqjoedjhYJapNVoSPShbZ+tEUX9/73jgZ/Z3sUlJf9oYgdEBBdVhupUpUqSxH0kBCXlQnmZg==
-  _: 'https://registry.npmjs.org/engine.io-client/-/engine.io-client-1.8.5.tgz'
-  dependencies:
-   component-emitter: 1.2.1
-   component-inherit: 0.0.3
-   debug: 2.3.3
-   engine.io-parser: 1.3.2
-   has-cors: 1.1.0
-   indexof: 0.0.1
-   parsejson: 0.0.3
-   parseqs: 0.0.5
-   parseuri: 0.0.5
-   ws: ~1.1.5
-   xmlhttprequest-ssl: 1.5.3
-   yeast: 0.1.2
 engine.io-parser:
  _latest: 2.2.0
  _:
-  1.3.2: 1.3.2
   '~2.1.0,~2.1.1': 2.1.3
  2.1.3:
   $: sha512-6HXPre2O4Houl7c4g7Ic/XzPnHBvaEmN90vtRO9uLmwtRqQmTOw0QMevL1TOfL2Cpu1VzsaTmMotQgMdkzGkVA==
@@ -5723,16 +5807,6 @@ engine.io-parser:
    base64-arraybuffer: 0.1.5
    blob: 0.0.5
    has-binary2: ~1.0.2
- 1.3.2:
-  $: sha1-k3sHnwAH0Ik+xW1GyyILjLQ1Igo=
-  _: 'https://registry.npmjs.org/engine.io-parser/-/engine.io-parser-1.3.2.tgz'
-  dependencies:
-   after: 0.8.2
-   arraybuffer.slice: 0.0.6
-   base64-arraybuffer: 0.1.5
-   blob: 0.0.4
-   has-binary: 0.1.7
-   wtf-8: 1.0.0
 enhanced-resolve:
  _latest: 4.1.1
  _:
@@ -5867,10 +5941,10 @@ error-ex:
 es-abstract:
  _latest: 1.16.0
  _:
-  '^1.12.0,^1.13.0,^1.15.0,^1.5.1': 1.16.0
+  '^1.12.0,^1.13.0,^1.15.0,^1.5.1,^1.7.0': 1.16.0
  1.16.0:
   $: sha512-xdQnfykZ9JMEiasTAJZJdMWCQ1Vm00NBw79/AWi7ELfZuuPCSOMDZbT9mkOfSctVtfhb+sAAzrm+j//GjjLHLg==
-  _: 'https://registry.npmjs.org/es-abstract/-/es-abstract-1.16.0.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/es-abstract/-/es-abstract-1.16.0.tgz'
   dependencies:
    es-to-primitive: ^1.2.0
    function-bind: ^1.1.1
@@ -5930,7 +6004,7 @@ escape-html:
 escape-string-regexp:
  _latest: 2.0.0
  _:
-  '^1.0.2,^1.0.5': 1.0.5
+  '1.0.5,^1.0.2,^1.0.5': 1.0.5
  1.0.5:
   $: sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
   _: 'https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz'
@@ -5959,6 +6033,84 @@ escodegen:
    optionator: ^0.8.1
   optionalDependencies:
    source-map: ~0.2.0
+eslint:
+ _latest: 6.6.0
+ _:
+  ^4.8.0: 4.19.1
+ 4.19.1:
+  $: sha512-bT3/1x1EbZB7phzYu7vCr1v3ONuzDtX8WjuM9c0iYxe+cq+pwcKEoQjl7zd3RpC6YOLgnSy3cTN58M2jcoPDIQ==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/eslint/-/eslint-4.19.1.tgz'
+  dependencies:
+   ajv: ^5.3.0
+   babel-code-frame: ^6.22.0
+   chalk: ^2.1.0
+   concat-stream: ^1.6.0
+   cross-spawn: ^5.1.0
+   debug: ^3.1.0
+   doctrine: ^2.1.0
+   eslint-scope: ^3.7.1
+   eslint-visitor-keys: ^1.0.0
+   espree: ^3.5.4
+   esquery: ^1.0.0
+   esutils: ^2.0.2
+   file-entry-cache: ^2.0.0
+   functional-red-black-tree: ^1.0.1
+   glob: ^7.1.2
+   globals: ^11.0.1
+   ignore: ^3.3.3
+   imurmurhash: ^0.1.4
+   inquirer: ^3.0.6
+   is-resolvable: ^1.0.0
+   js-yaml: ^3.9.1
+   json-stable-stringify-without-jsonify: ^1.0.1
+   levn: ^0.3.0
+   lodash: ^4.17.4
+   minimatch: ^3.0.2
+   mkdirp: ^0.5.1
+   natural-compare: ^1.4.0
+   optionator: ^0.8.2
+   path-is-inside: ^1.0.2
+   pluralize: ^7.0.0
+   progress: ^2.0.0
+   regexpp: ^1.0.1
+   require-uncached: ^1.0.3
+   semver: ^5.3.0
+   strip-ansi: ^4.0.0
+   strip-json-comments: ~2.0.1
+   table: 4.0.2
+   text-table: ~0.2.0
+eslint-config-walmart:
+ _latest: 2.2.1
+ _:
+  ^2.0.0: 2.2.1
+ 2.2.1:
+  $: sha512-0z0rXi8DbqSJanJq5lKnDuKBs4hMsx9Qp3Ksl9QWYzvqG/8ibzbraGKDy3b44JD3ZZEbBig3BvpWXP9Sw0E+3A==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/eslint-config-walmart/-/eslint-config-walmart-2.2.1.tgz'
+eslint-plugin-filenames:
+ _latest: 1.3.2
+ _:
+  ^1.1.0: 1.3.2
+ 1.3.2:
+  $: sha512-tqxJTiEM5a0JmRCUYQmxw23vtTxrb2+a3Q2mMOPhFxvt7ZQQJmdiuMby9B/vUAuVMghyP7oET+nIf6EO6CBd/w==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/eslint-plugin-filenames/-/eslint-plugin-filenames-1.3.2.tgz'
+  dependencies:
+   lodash.camelcase: 4.3.0
+   lodash.kebabcase: 4.1.1
+   lodash.snakecase: 4.1.1
+   lodash.upperfirst: 4.3.1
+  peerDependencies:
+   eslint: '*'
+eslint-plugin-flowtype:
+ _latest: 4.3.0
+ _:
+  ^2.49.3: 2.50.3
+ 2.50.3:
+  $: sha512-X+AoKVOr7Re0ko/yEXyM5SSZ0tazc6ffdIOocp2fFUlWoDt7DV0Bz99mngOkAFLOAWjqRA5jPwqUCbrx13XoxQ==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/eslint-plugin-flowtype/-/eslint-plugin-flowtype-2.50.3.tgz'
+  dependencies:
+   lodash: ^4.17.10
+  peerDependencies:
+   eslint: '>=2.0.0'
 eslint-plugin-jest:
  _latest: 22.20.0
  _:
@@ -5968,9 +6120,29 @@ eslint-plugin-jest:
   _: 'https://registry.npmjs.org/eslint-plugin-jest/-/eslint-plugin-jest-21.27.2.tgz'
   peerDependencies:
    eslint: '>=3.6'
+eslint-plugin-react:
+ _latest: 7.16.0
+ _:
+  ^7.4.0: 7.16.0
+ 7.16.0:
+  $: sha512-GacBAATewhhptbK3/vTP09CbFrgUJmBSaaRcWdbQLFvUZy9yVcQxigBNHGPU/KE2AyHpzj3AWXpxoMTsIDiHug==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/eslint-plugin-react/-/eslint-plugin-react-7.16.0.tgz'
+  dependencies:
+   array-includes: ^3.0.3
+   doctrine: ^2.1.0
+   has: ^1.0.3
+   jsx-ast-utils: ^2.2.1
+   object.entries: ^1.1.0
+   object.fromentries: ^2.0.0
+   object.values: ^1.1.0
+   prop-types: ^15.7.2
+   resolve: ^1.12.0
+  peerDependencies:
+   eslint: '^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0'
 eslint-scope:
  _latest: 5.0.0
  _:
+  ^3.7.1: 3.7.3
   ^4.0.3: 4.0.3
  4.0.3:
   $: sha512-p7VutNr1O/QrxysMo3E45FjYDTeXBy0iTltPFNSqKAIfjDSXC+4dj+qfyuD8bfAXrW/y6lW3O76VaYNPKfpKrg==
@@ -5978,6 +6150,29 @@ eslint-scope:
   dependencies:
    esrecurse: ^4.1.0
    estraverse: ^4.1.1
+ 3.7.3:
+  $: sha512-W+B0SvF4gamyCTmUc+uITPY0989iXVfKvhwtmJocTaYoc/3khEHmEmvfY/Gn9HA9VV75jrQECsHizkNw1b68FA==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/eslint-scope/-/eslint-scope-3.7.3.tgz'
+  dependencies:
+   esrecurse: ^4.1.0
+   estraverse: ^4.1.1
+eslint-visitor-keys:
+ _latest: 1.1.0
+ _:
+  ^1.0.0: 1.1.0
+ 1.1.0:
+  $: sha512-8y9YjtM1JBJU/A9Kc+SbaOV4y29sSWckBwMHa+FGtVj5gN/sbnKDf6xJUl+8g7FAij9LVaP8C24DUiH/f/2Z9A==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/eslint-visitor-keys/-/eslint-visitor-keys-1.1.0.tgz'
+espree:
+ _latest: 6.1.2
+ _:
+  ^3.5.4: 3.5.4
+ 3.5.4:
+  $: sha512-yAcIQxtmMiB/jL32dzEp2enBeidsB7xWPLNiw3IIkpVds1P+h7qF9YwJq1yUNzp2OKXgAprs4F61ih66UsoD1A==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/espree/-/espree-3.5.4.tgz'
+  dependencies:
+   acorn: ^5.5.0
+   acorn-jsx: ^3.0.0
 esprima:
  _latest: 4.0.1
  _:
@@ -5993,6 +6188,15 @@ esprima:
  2.7.3:
   $: sha1-luO3DVd59q1JzQMmc9HDEnZ7pYE=
   _: 'https://registry.npmjs.org/esprima/-/esprima-2.7.3.tgz'
+esquery:
+ _latest: 1.0.1
+ _:
+  ^1.0.0: 1.0.1
+ 1.0.1:
+  $: sha512-SmiyZ5zIWH9VM+SRUReLS5Q8a7GxtRdxEBVZpm98rJM7Sb+A9DVCndXfkeFUd3byderg+EbDkfnevfCwynWaNA==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/esquery/-/esquery-1.0.1.tgz'
+  dependencies:
+   estraverse: ^4.0.0
 esrecurse:
  _latest: 4.2.1
  _:
@@ -6006,7 +6210,7 @@ estraverse:
  _latest: 4.3.0
  _:
   ^1.9.1: 1.9.3
-  '^4.1.0,^4.1.1,^4.2.0': 4.3.0
+  '^4.0.0,^4.1.0,^4.1.1,^4.2.0': 4.3.0
  4.3.0:
   $: sha512-39nnKffWz8xN1BU/2c79n9nB9HDzo0niYUqx6xyqUnyoAnQyyWpOTdZEeiCch8BBu515t4wp9ZmgVfVhn9EBpw==
   _: 'https://registry.npmjs.org/estraverse/-/estraverse-4.3.0.tgz'
@@ -6020,13 +6224,6 @@ esutils:
  2.0.3:
   $: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==
   _: 'https://registry.npmjs.org/esutils/-/esutils-2.0.3.tgz'
-etag:
- _latest: 1.8.1
- _:
-  ~1.8.1: 1.8.1
- 1.8.1:
-  $: sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=
-  _: 'https://registry.npmjs.org/etag/-/etag-1.8.1.tgz'
 eventemitter3:
  _latest: 4.0.0
  _:
@@ -6041,15 +6238,6 @@ events:
  3.0.0:
   $: sha512-Dc381HFWJzEOhQ+d8pkNon++bk9h6cdAoAj4iE6Q4y6xgTzySWXlKn05/TVNpjnfRqi/X0EpJEJohPjNI3zpVA==
   _: 'https://registry.npmjs.org/events/-/events-3.0.0.tgz'
-eventsource:
- _latest: 1.0.7
- _:
-  ^1.0.7: 1.0.7
- 1.0.7:
-  $: sha512-4Ln17+vVT0k8aWq+t/bF5arcS3EpT9gYtW66EPacdj/mAFevznsnyoHLPy2BA8gbIQeIHoPsvwmfBftfcG//BQ==
-  _: 'https://registry.npmjs.org/eventsource/-/eventsource-1.0.7.tgz'
-  dependencies:
-   original: ^1.0.0
 evp_bytestokey:
  _latest: 1.0.3
  _:
@@ -6181,44 +6369,6 @@ expect:
    jest-matcher-utils: ^23.6.0
    jest-message-util: ^23.4.0
    jest-regex-util: ^23.3.0
-express:
- _latest: 4.17.1
- _:
-  ^4.17.1: 4.17.1
- 4.17.1:
-  $: sha512-mHJ9O79RqluphRrcw2X/GTh3k9tVv8YcoyY4Kkh4WDMUYKRZUq0h1o0w2rrrxBqM7VoeUVqgb27xlEMXTnYt4g==
-  _: 'https://registry.npmjs.org/express/-/express-4.17.1.tgz'
-  dependencies:
-   accepts: ~1.3.7
-   array-flatten: 1.1.1
-   body-parser: 1.19.0
-   content-disposition: 0.5.3
-   content-type: ~1.0.4
-   cookie: 0.4.0
-   cookie-signature: 1.0.6
-   debug: 2.6.9
-   depd: ~1.1.2
-   encodeurl: ~1.0.2
-   escape-html: ~1.0.3
-   etag: ~1.8.1
-   finalhandler: ~1.1.2
-   fresh: 0.5.2
-   merge-descriptors: 1.0.1
-   methods: ~1.1.2
-   on-finished: ~2.3.0
-   parseurl: ~1.3.3
-   path-to-regexp: 0.1.7
-   proxy-addr: ~2.0.5
-   qs: 6.7.0
-   range-parser: ~1.2.1
-   safe-buffer: 5.1.2
-   send: 0.17.1
-   serve-static: 1.14.1
-   setprototypeof: 1.1.1
-   statuses: ~1.5.0
-   type-is: ~1.6.18
-   utils-merge: 1.0.1
-   vary: ~1.1.2
 extend:
  _latest: 3.0.2
  _:
@@ -6242,6 +6392,17 @@ extend-shallow:
   _: 'https://registry.npmjs.org/extend-shallow/-/extend-shallow-2.0.1.tgz'
   dependencies:
    is-extendable: ^0.1.0
+external-editor:
+ _latest: 3.1.0
+ _:
+  ^2.0.4: 2.2.0
+ 2.2.0:
+  $: sha512-bSn6gvGxKt+b7+6TKEv1ZycHleA7aHhRHyAqJyp5pbUFuYYNIzpZnQDk7AsYckyWdEnTeAnay0aCy2aV6iTk9A==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/external-editor/-/external-editor-2.2.0.tgz'
+  dependencies:
+   chardet: ^0.4.0
+   iconv-lite: ^0.4.17
+   tmp: ^0.0.33
 extglob:
  _latest: 3.0.0
  _:
@@ -6413,21 +6574,6 @@ favicons-webpack-plugin:
    lodash: ^4.11.1
   peerDependencies:
    webpack: '^1.13.0 || ^2.0.0 || ^3.0.0 || ^4.0.0'
-faye-websocket:
- _latest: 0.11.3
- _:
-  ^0.10.0: 0.10.0
-  ~0.11.1: 0.11.3
- 0.11.3:
-  $: sha512-D2y4bovYpzziGgbHYtGCMjlJM36vAl/y+xUyn1C+FVx8szd1E+86KwVw6XvYSzOP8iMpm1X0I4xJD+QtUb36OA==
-  _: 'https://registry.npmjs.org/faye-websocket/-/faye-websocket-0.11.3.tgz'
-  dependencies:
-   websocket-driver: '>=0.5.1'
- 0.10.0:
-  $: sha1-TkkvjQTftviQA1B/btvy1QHnxvQ=
-  _: 'https://registry.npmjs.org/faye-websocket/-/faye-websocket-0.10.0.tgz'
-  dependencies:
-   websocket-driver: '>=0.5.1'
 fb-watchman:
  _latest: 2.0.0
  _:
@@ -6453,6 +6599,25 @@ figgy-pudding:
  3.5.1:
   $: sha512-vNKxJHTEKNThjfrdJwHc7brvM6eVevuO5nTj6ez8ZQ1qbXTvGthucRF7S4vf2cr71QVnT70V34v0S1DyQsti0w==
   _: 'https://registry.npmjs.org/figgy-pudding/-/figgy-pudding-3.5.1.tgz'
+figures:
+ _latest: 3.1.0
+ _:
+  ^2.0.0: 2.0.0
+ 2.0.0:
+  $: sha1-OrGi0qYsi/tDGgyUy3l6L84nyWI=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/figures/-/figures-2.0.0.tgz'
+  dependencies:
+   escape-string-regexp: ^1.0.5
+file-entry-cache:
+ _latest: 5.0.1
+ _:
+  ^2.0.0: 2.0.0
+ 2.0.0:
+  $: sha1-w5KZDD5oR4PYOLjISkXYoEhFg2E=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/file-entry-cache/-/file-entry-cache-2.0.0.tgz'
+  dependencies:
+   flat-cache: ^1.2.1
+   object-assign: ^4.0.1
 file-loader:
  _latest: 4.2.0
  _:
@@ -6528,7 +6693,7 @@ filter-scan-dir:
 finalhandler:
  _latest: 1.1.2
  _:
-  '1.1.2,^1.1.1,~1.1.2': 1.1.2
+  '1.1.2,^1.1.1': 1.1.2
  1.1.2:
   $: sha512-aAWcW57uxVNrQZqFXjITpW3sIUQmHGG3qSb9mUah9MgMC4NeWhNOlNjXEYq3HjRAvL6arUviZGGJsBg6z0zsWA==
   _: 'https://registry.npmjs.org/finalhandler/-/finalhandler-1.1.2.tgz'
@@ -6585,6 +6750,18 @@ findup-sync:
    is-glob: ^4.0.0
    micromatch: ^3.0.4
    resolve-dir: ^1.0.1
+flat-cache:
+ _latest: 2.0.1
+ _:
+  ^1.2.1: 1.3.4
+ 1.3.4:
+  $: sha512-VwyB3Lkgacfik2vhqR4uv2rvebqmDvFu4jlN/C1RzWoJEo8I7z4Q404oiqYCkq41mni8EzQnm95emU9seckwtg==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/flat-cache/-/flat-cache-1.3.4.tgz'
+  dependencies:
+   circular-json: ^0.3.1
+   graceful-fs: ^4.1.2
+   rimraf: ~2.6.2
+   write: ^0.2.1
 flatstr:
  _latest: 1.0.12
  _:
@@ -6607,6 +6784,55 @@ flatten:
   $: sha1-2uRqnXj74lKSJYzB54CkHZXAN4I=
   _: 'https://registry.npmjs.org/flatten/-/flatten-1.0.2.tgz'
   deprecated: 'I wrote this module a very long time ago; you should use something else.'
+flow-bin:
+ _latest: 0.111.3
+ _:
+  ^0.74.0: 0.74.0
+ 0.74.0:
+  $: sha512-tIN9J5qg71S4UbofCu80tve8a+p7Hj7ytwUtu79cLg9KJVVTNnVVJXKgCghVzaZT1Rvl9SMHVPlDs9uYhPHEGQ==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/flow-bin/-/flow-bin-0.74.0.tgz'
+flow-typed:
+ _latest: 2.6.2
+ _:
+  ^2.4.0: 2.6.2
+ 2.6.2:
+  $: sha512-brTh8SukLidVpR1u8hSR3OcZSvLtptpwLEGgEhK/qBhWCB7zxPZmnmChYi40JQH6vB448ck380+qbkDo3fJ6qA==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/flow-typed/-/flow-typed-2.6.2.tgz'
+  dependencies:
+   '@babel/polyfill': ^7.0.0
+   '@octokit/rest': ^16.33.1
+   colors: ^1.3.2
+   flowgen: ^1.9.0
+   fs-extra: ^7.0.0
+   glob: ^7.1.3
+   got: ^8.3.2
+   md5: ^2.2.1
+   mkdirp: ^0.5.1
+   prettier: ^1.18.2
+   rimraf: ^2.6.2
+   semver: ^5.5.1
+   table: ^5.0.2
+   through: ^2.3.8
+   unzipper: ^0.9.3
+   which: ^1.3.1
+   yargs: ^12.0.2
+flowgen:
+ _latest: 1.10.0
+ _:
+  ^1.9.0: 1.10.0
+ 1.10.0:
+  $: sha512-3lsoaa1vxGXhnkHuoE4mLPJi/klvpR3ID8R9CFJ/GBNi+cxJXecWQaUPrWMdNI5tGs8Y+7wrIZaCVFKFLQiGOg==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/flowgen/-/flowgen-1.10.0.tgz'
+  dependencies:
+   '@babel/code-frame': ^7.0.0
+   '@babel/highlight': ^7.0.0
+   commander: ^2.11.0
+   lodash: ^4.17.4
+   paralleljs: ^0.2.1
+   prettier: ^1.16.4
+   shelljs: ^0.8.3
+   typescript: ^3.4
+   typescript-compiler: ^1.4.1-2
 flush-write-stream:
  _latest: 2.0.0
  _:
@@ -6689,13 +6915,6 @@ form-data:
    asynckit: ^0.4.0
    combined-stream: ^1.0.6
    mime-types: ^2.1.12
-forwarded:
- _latest: 0.1.2
- _:
-  ~0.1.2: 0.1.2
- 0.1.2:
-  $: sha1-mMI9qxF1ZXuMBXPozszZGw/xjIQ=
-  _: 'https://registry.npmjs.org/forwarded/-/forwarded-0.1.2.tgz'
 fragment-cache:
  _latest: 0.2.1
  _:
@@ -6705,17 +6924,10 @@ fragment-cache:
   _: 'https://registry.npmjs.org/fragment-cache/-/fragment-cache-0.2.1.tgz'
   dependencies:
    map-cache: ^0.2.2
-fresh:
- _latest: 0.5.2
- _:
-  0.5.2: 0.5.2
- 0.5.2:
-  $: sha1-PYyt2Q2XZWn6g1qx+OSyOhBWBac=
-  _: 'https://registry.npmjs.org/fresh/-/fresh-0.5.2.tgz'
 from2:
  _latest: 2.3.0
  _:
-  ^2.1.0: 2.3.0
+  '^2.1.0,^2.1.1': 2.3.0
  2.3.0:
   $: sha1-i/tVAr3kpNNs/e6gB/zKIdfjgq8=
   _: 'https://registry.npmjs.org/from2/-/from2-2.3.0.tgz'
@@ -6736,12 +6948,20 @@ fs-extra:
  _:
   ^0.26.5: 0.26.7
   ^1.0.0: 1.0.0
+  ^7.0.0: 7.0.1
   ^8.0.1: 8.1.0
  8.1.0:
   $: sha512-yhlQgA6mnOJUKOsRUFsgJdQCvkKhcz8tlZG5HBQfReYZy46OwLcY+Zia0mtdHsOo9y/hP+CxMN0TU9QxoOtG4g==
   _: 'https://registry.npmjs.org/fs-extra/-/fs-extra-8.1.0.tgz'
   dependencies:
    graceful-fs: ^4.2.0
+   jsonfile: ^4.0.0
+   universalify: ^0.1.0
+ 7.0.1:
+  $: sha512-YJDaCJZEnBmcbw13fvdAM9AwNOJwOzrE4pqMqBq5nFiEqXUqHwlK4B+3pUw6JNvfSPtX05xFHtYy/1ni01eGCw==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/fs-extra/-/fs-extra-7.0.1.tgz'
+  dependencies:
+   graceful-fs: ^4.1.2
    jsonfile: ^4.0.0
    universalify: ^0.1.0
  1.0.0:
@@ -6832,6 +7052,13 @@ function.prototype.name:
    function-bind: ^1.1.1
    functions-have-names: ^1.1.1
    is-callable: ^1.1.4
+functional-red-black-tree:
+ _latest: 1.0.1
+ _:
+  ^1.0.1: 1.0.1
+ 1.0.1:
+  $: sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz'
 functions-have-names:
  _latest: 1.2.0
  _:
@@ -6901,8 +7128,8 @@ get-stdin:
 get-stream:
  _latest: 5.1.0
  _:
+  '3.0.0,^3.0.0': 3.0.0
   ^2.0.0: 2.3.1
-  ^3.0.0: 3.0.0
   ^4.0.0: 4.1.0
  4.1.0:
   $: sha512-GMat4EJ5161kIy2HevLlr4luNjBgvmj413KaQA7jt4V8B4RDsfpHk7WQ9GVqfYyyx8OS/L66Kox+rJRNklLK7w==
@@ -6937,6 +7164,7 @@ getpass:
 glob:
  _latest: 7.1.5
  _:
+  7.1.2: 7.1.2
   ^5.0.15: 5.0.15
   '^7.0.0,^7.0.3,^7.1.1,^7.1.2,^7.1.3,^7.1.4,~7.1.1': 7.1.5
  7.1.5:
@@ -6949,9 +7177,19 @@ glob:
    minimatch: ^3.0.4
    once: ^1.3.0
    path-is-absolute: ^1.0.0
+ 7.1.2:
+  $: sha512-MJTUg1kjuLeQCJ+ccE4Vpa6kKVXkPYJ2mOCQyUuKLcLQsdrMCpBPUi8qVE6+YuaJkozeA9NusTAw3hLr8Xe5EQ==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/glob/-/glob-7.1.2.tgz'
+  dependencies:
+   fs.realpath: ^1.0.0
+   inflight: ^1.0.4
+   inherits: '2'
+   minimatch: ^3.0.4
+   once: ^1.3.0
+   path-is-absolute: ^1.0.0
  5.0.15:
   $: sha1-G8k2ueAvSmA/zCIuz3Yz0wuLk7E=
-  _: 'https://registry.npmjs.org/glob/-/glob-5.0.15.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/glob/-/glob-5.0.15.tgz'
   dependencies:
    inflight: ^1.0.4
    inherits: '2'
@@ -7051,7 +7289,7 @@ global-prefix:
 globals:
  _latest: 12.1.1
  _:
-  ^11.1.0: 11.12.0
+  '^11.0.1,^11.1.0': 11.12.0
   ^9.18.0: 9.18.0
  11.12.0:
   $: sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==
@@ -7087,9 +7325,31 @@ got:
  _latest: 9.6.0
  _:
   ^6.7.1: 6.7.1
+  ^8.3.2: 8.3.2
+ 8.3.2:
+  $: sha512-qjUJ5U/hawxosMryILofZCkm3C84PLJS/0grRIpjAwu+Lkxxj5cxeCU25BG0/3mDSpXKTyZr8oh8wIgLaH0QCw==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/got/-/got-8.3.2.tgz'
+  dependencies:
+   '@sindresorhus/is': ^0.7.0
+   cacheable-request: ^2.1.1
+   decompress-response: ^3.3.0
+   duplexer3: ^0.1.4
+   get-stream: ^3.0.0
+   into-stream: ^3.1.0
+   is-retry-allowed: ^1.1.0
+   isurl: ^1.0.0-alpha5
+   lowercase-keys: ^1.0.0
+   mimic-response: ^1.0.0
+   p-cancelable: ^0.4.0
+   p-timeout: ^2.0.1
+   pify: ^3.0.0
+   safe-buffer: ^5.1.1
+   timed-out: ^4.0.1
+   url-parse-lax: ^3.0.0
+   url-to-options: ^1.0.1
  6.7.1:
   $: sha1-JAzQV4WpoY5WHcG0S0HHY+8ejbA=
-  _: 'https://registry.npmjs.org/got/-/got-6.7.1.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/got/-/got-6.7.1.tgz'
   dependencies:
    create-error-class: ^3.0.0
    duplexer3: ^0.1.4
@@ -7109,6 +7369,13 @@ graceful-fs:
  4.2.3:
   $: sha512-a30VEBm4PEdx1dRB7MFK7BejejvCvBronbLjht+sHuGYj8PHs7M/5Z+rt5lw551vZ7yfTCj4Vuyy3mSJytDWRQ==
   _: 'https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.2.3.tgz'
+growl:
+ _latest: 1.10.5
+ _:
+  1.10.3: 1.10.3
+ 1.10.3:
+  $: sha512-hKlsbA5Vu3xsh1Cg3J7jSmX/WaW6A5oBeqzM88oNbCRQFz+zUaXm6yxS4RVytp1scBoJzSYl4YAEOQIt6O8V1Q==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/growl/-/growl-1.10.3.tgz'
 growly:
  _latest: 1.3.0
  _:
@@ -7185,15 +7452,6 @@ has-ansi:
   _: 'https://registry.npmjs.org/has-ansi/-/has-ansi-2.0.0.tgz'
   dependencies:
    ansi-regex: ^2.0.0
-has-binary:
- _latest: 0.1.7
- _:
-  0.1.7: 0.1.7
- 0.1.7:
-  $: sha1-aOYesWIQyVRaClzOBqhzkS/h5ow=
-  _: 'https://registry.npmjs.org/has-binary/-/has-binary-0.1.7.tgz'
-  dependencies:
-   isarray: 0.0.1
 has-binary2:
  _latest: 1.0.3
  _:
@@ -7214,13 +7472,24 @@ has-flag:
  _latest: 4.0.0
  _:
   ^1.0.0: 1.0.0
+  ^2.0.0: 2.0.0
   ^3.0.0: 3.0.0
  3.0.0:
   $: sha1-tdRU3CGZriJWmfNGfloH87lVuv0=
   _: 'https://registry.npmjs.org/has-flag/-/has-flag-3.0.0.tgz'
+ 2.0.0:
+  $: sha1-6CB68cx7MNRGzHC3NLXovhj4jVE=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/has-flag/-/has-flag-2.0.0.tgz'
  1.0.0:
   $: sha1-nZ55MWXOAXoA8AQYxD+UKnsdEfo=
-  _: 'https://registry.npmjs.org/has-flag/-/has-flag-1.0.0.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/has-flag/-/has-flag-1.0.0.tgz'
+has-symbol-support-x:
+ _latest: 2.1.2
+ _:
+  ^1.4.1: 1.4.2
+ 1.4.2:
+  $: sha512-3ToOva++HaW+eCpgqZrCfN51IPB+7bJNVT6CUATzueB5Heb8o6Nam0V3HG5dlDvZU1Gn5QLcbahiKw/XVk5JJw==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/has-symbol-support-x/-/has-symbol-support-x-1.4.2.tgz'
 has-symbols:
  _latest: 1.0.0
  _:
@@ -7228,6 +7497,15 @@ has-symbols:
  1.0.0:
   $: sha1-uhqPGvKg/DllD1yFA2dwQSIGO0Q=
   _: 'https://registry.npmjs.org/has-symbols/-/has-symbols-1.0.0.tgz'
+has-to-string-tag-x:
+ _latest: 2.1.2
+ _:
+  ^1.2.0: 1.4.1
+ 1.4.1:
+  $: sha512-vdbKfmw+3LoOYVr+mtxHaX5a96+0f3DljYd8JOqvOLsf5mw2Otda2qCDT9qRqLAhrjyQ0h7ual5nOiASpsGNFw==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/has-to-string-tag-x/-/has-to-string-tag-x-1.4.1.tgz'
+  dependencies:
+   has-symbol-support-x: ^1.4.1
 has-unicode:
  _latest: 2.0.1
  _:
@@ -7304,6 +7582,13 @@ hasha:
   dependencies:
    is-stream: ^1.0.1
    pinkie-promise: ^2.0.0
+he:
+ _latest: 1.2.0
+ _:
+  1.1.1: 1.1.1
+ 1.1.1:
+  $: sha1-k0EP0hsAlzUVH4howvJx80J+I/0=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/he/-/he-1.1.1.tgz'
 hex-color-regex:
  _latest: 1.1.0
  _:
@@ -7432,7 +7717,7 @@ html-encoding-sniffer:
 html-entities:
  _latest: 1.2.1
  _:
-  '^1.2.0,^1.2.1': 1.2.1
+  ^1.2.0: 1.2.1
  1.2.1:
   $: sha1-DfKTUfByEWNRXfueVUPl9u7VFi8=
   _: 'https://registry.npmjs.org/html-entities/-/html-entities-1.2.1.tgz'
@@ -7460,6 +7745,13 @@ htmlparser2:
    domelementtype: '1'
    readable-stream: '1.1'
    entities: '1.0'
+http-cache-semantics:
+ _latest: 4.0.3
+ _:
+  3.8.1: 3.8.1
+ 3.8.1:
+  $: sha512-5ai2iksyV8ZXmnZhHH4rWPoxxistEexSi5936zIQ1bnNTW5VnA85B6P/VpXiRM017IgRvb2kKo1a//y+0wSp3w==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/http-cache-semantics/-/http-cache-semantics-3.8.1.tgz'
 http-deceiver:
  _latest: 1.2.7
  _:
@@ -7470,8 +7762,8 @@ http-deceiver:
 http-errors:
  _latest: 1.7.3
  _:
-  '1.7.2,~1.7.2': 1.7.2
-  '~1.6.2,~1.6.3': 1.6.3
+  1.7.2: 1.7.2
+  ~1.6.3: 1.6.3
  1.7.2:
   $: sha512-uUQBt3H/cSIVfch6i1EuPNy/YsRSOUBXTVfZ+yR7Zjez3qjBz6i9+i4zjNaoqcoFVI4lQJ5plg63TvGfRSDCRg==
   _: 'https://registry.npmjs.org/http-errors/-/http-errors-1.7.2.tgz'
@@ -7489,13 +7781,6 @@ http-errors:
    inherits: 2.0.3
    setprototypeof: 1.1.0
    statuses: '>= 1.4.0 < 2'
-http-parser-js:
- _latest: 0.5.1
- _:
-  '>=0.4.0 <0.4.11': 0.4.10
- 0.4.10:
-  $: sha1-ksnBN0w1CF912zWexWzCV8u5P6Q=
-  _: 'https://registry.npmjs.org/http-parser-js/-/http-parser-js-0.4.10.tgz'
 http-proxy:
  _latest: 1.18.0
  _:
@@ -7507,18 +7792,6 @@ http-proxy:
    eventemitter3: ^4.0.0
    requires-port: ^1.0.0
    follow-redirects: ^1.0.0
-http-proxy-middleware:
- _latest: 0.20.0
- _:
-  0.19.1: 0.19.1
- 0.19.1:
-  $: sha512-yHYTgWMQO8VvwNS22eLLloAkvungsKdKTLO8AJlftYIKNfJr3GK3zK0ZCfzDDGUBttdGc8xFy1mCitvNKQtC3Q==
-  _: 'https://registry.npmjs.org/http-proxy-middleware/-/http-proxy-middleware-0.19.1.tgz'
-  dependencies:
-   http-proxy: ^1.17.0
-   is-glob: ^4.0.0
-   lodash: ^4.17.11
-   micromatch: ^3.1.10
 http-signature:
  _latest: 1.2.0
  _:
@@ -7557,7 +7830,7 @@ https-proxy-agent:
 iconv-lite:
  _latest: 0.5.0
  _:
-  0.4.24: 0.4.24
+  '0.4.24,^0.4.17': 0.4.24
  0.4.24:
   $: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==
   _: 'https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.4.24.tgz'
@@ -7608,13 +7881,13 @@ iferr:
  0.1.5:
   $: sha1-xg7taebY/bazEEofy8ocGS3FtQE=
   _: 'https://registry.npmjs.org/iferr/-/iferr-0.1.5.tgz'
-ignore-by-default:
- _latest: 1.0.1
+ignore:
+ _latest: 5.1.4
  _:
-  ^1.0.1: 1.0.1
- 1.0.1:
-  $: sha1-SMptcvbGo68Aqa1K5odr44ieKwk=
-  _: 'https://registry.npmjs.org/ignore-by-default/-/ignore-by-default-1.0.1.tgz'
+  ^3.3.3: 3.3.10
+ 3.3.10:
+  $: sha512-Pgs951kaMm5GXP7MOvxERINe3gsaVjUWFm+UZPSq9xYriQAksyhg0csnS0KXSNRD5NmNdapXEpjxG49+AKh/ug==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/ignore/-/ignore-3.3.10.tgz'
 ignore-styles:
  _latest: 5.0.1
  _:
@@ -7671,7 +7944,7 @@ import-lazy:
 import-local:
  _latest: 3.0.2
  _:
-  '2.0.0,^2.0.0': 2.0.0
+  2.0.0: 2.0.0
   ^1.0.0: 1.0.0
  2.0.0:
   $: sha512-b6s04m3O+s3CGSbqDIyP4R6aAwAeYlVq9+WUWep6iHa8ETRf9yei1U48C5MmfJmV9AiLYYBKPMq/W+/WRpQmCQ==
@@ -7729,6 +8002,90 @@ infer-owner:
  1.0.4:
   $: sha512-IClj+Xz94+d7irH5qRyfJonOdfTzuDaifE6ZPWfx0N0+/ATZCbuTPq2prFl526urkQd90WyUKIh1DfBQ2hMz9A==
   _: 'https://registry.npmjs.org/infer-owner/-/infer-owner-1.0.4.tgz'
+inferno:
+ _latest: 7.3.2
+ _:
+  '3.10.1,^3.0.0,^3.4.3': 3.10.1
+ 3.10.1:
+  $: sha512-Sm+Wi9TI9REIHsuUlWyCNVZMlk7vMRs2QFjMEfKPsj7p8be8wB+sl8T8jBU2T+2S3oKzbJdKmKNTxWeMjHdypA==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/inferno/-/inferno-3.10.1.tgz'
+  dependencies:
+   inferno-shared: 3.10.1
+   inferno-vnode-flags: 3.10.1
+inferno-compat:
+ _latest: 7.3.2
+ _:
+  ^3.0.0: 3.10.1
+ 3.10.1:
+  $: sha512-kz3U65Ak5GeMAZ7jtUz29rlASKpIM1n3m+1fag0F7pgcYAEMUvfAxJJFiVPDW3lBCeRAR+LMbhdy4YuTNStlQA==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/inferno-compat/-/inferno-compat-3.10.1.tgz'
+  dependencies:
+   inferno: 3.10.1
+   inferno-component: 3.10.1
+   inferno-create-class: 3.10.1
+   inferno-create-element: 3.10.1
+   inferno-shared: 3.10.1
+   inferno-transition-group: 2.1.1
+   inferno-vnode-flags: 3.10.1
+   rc-css-transition-group-modern: ^2.1.6
+inferno-component:
+ _latest: 7.3.2
+ _:
+  '3.10.1,^3.4.3': 3.10.1
+ 3.10.1:
+  $: sha512-8tXc4XXx7U2P22NLd21g4TLR+jJ0X+KyeznodlGjWYzQ6A6uy5AXsDyfStZl8GxeNzq3otTrrSV5n5yPcVZI2Q==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/inferno-component/-/inferno-component-3.10.1.tgz'
+  dependencies:
+   inferno: 3.10.1
+   inferno-shared: 3.10.1
+   inferno-vnode-flags: 3.10.1
+inferno-create-class:
+ _latest: 7.3.2
+ _:
+  3.10.1: 3.10.1
+ 3.10.1:
+  $: sha512-dHVxcqhTFY6bGpdu6p/M8Hec1aHygqCSzcFCod8wowcxwJgKKlNJy2lvRD5BxaTQ8fDaUjxr78k0R/Rvfp1Tvg==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/inferno-create-class/-/inferno-create-class-3.10.1.tgz'
+  dependencies:
+   inferno-component: 3.10.1
+   inferno-shared: 3.10.1
+inferno-create-element:
+ _latest: 7.3.2
+ _:
+  3.10.1: 3.10.1
+ 3.10.1:
+  $: sha512-1Sn6d+FknSIZSEyEeRqwT6E2DMZUhRBBZCW2c4IHYXECozLXMwR7IgIHkVDQwWBoyJABRFeZE2UbfQ/nyJDuqw==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/inferno-create-element/-/inferno-create-element-3.10.1.tgz'
+  dependencies:
+   inferno: 3.10.1
+   inferno-component: 3.10.1
+   inferno-shared: 3.10.1
+   inferno-vnode-flags: 3.10.1
+inferno-shared:
+ _latest: 7.3.2
+ _:
+  3.10.1: 3.10.1
+ 3.10.1:
+  $: sha512-mzh4qmnQb23W5sdfsR6W93vSqNll7etLSMG4JhlzYXYn1e4zVcAqJRbeVISI3mTkU6nS4gJBHueZtSb1ORuuBw==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/inferno-shared/-/inferno-shared-3.10.1.tgz'
+inferno-transition-group:
+ _latest: 3.0.2
+ _:
+  2.1.1: 2.1.1
+ 2.1.1:
+  $: sha512-2JjAvIfvYAx1KEq8pAR91+5xCpoIYb08vA38XFW6RICq1eqxUOe60ntjuDQJPJ2B8PYuMLFrwji6X5vcqkJ7aA==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/inferno-transition-group/-/inferno-transition-group-2.1.1.tgz'
+  dependencies:
+   inferno: ^3.4.3
+   inferno-component: ^3.4.3
+  deprecated: 'This package is deprecated, use https://github.com/JoonasLUT/inferno-css-transition-group'
+inferno-vnode-flags:
+ _latest: 7.3.2
+ _:
+  3.10.1: 3.10.1
+ 3.10.1:
+  $: sha512-jqc6yiFy9ZcpDW+6I6cWQUrSXHjpfm2Fut5qLuuXxLwKdfLQUh68sWBHd+y9J+7gIm+0V1QZn4x5Jx4G3m1hPA==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/inferno-vnode-flags/-/inferno-vnode-flags-3.10.1.tgz'
 inflight:
  _latest: 1.0.6
  _:
@@ -7761,6 +8118,28 @@ ini:
  1.3.5:
   $: sha512-RZY5huIKCMRWDUqZlEi72f/lmXKMvuszcMBduliQ3nnWbx9X/ZBQO7DijMEYS9EhHBb2qacRUMtC7svLwe0lcw==
   _: 'https://registry.npmjs.org/ini/-/ini-1.3.5.tgz'
+inquirer:
+ _latest: 7.0.0
+ _:
+  ^3.0.6: 3.3.0
+ 3.3.0:
+  $: sha512-h+xtnyk4EwKvFWHrUYsWErEVR+igKtLdchu+o0Z1RL7VU/jVMFbYir2bp6bAj8efFNxWqHX0dIss6fJQ+/+qeQ==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/inquirer/-/inquirer-3.3.0.tgz'
+  dependencies:
+   ansi-escapes: ^3.0.0
+   chalk: ^2.0.0
+   cli-cursor: ^2.1.0
+   cli-width: ^2.0.0
+   external-editor: ^2.0.4
+   figures: ^2.0.0
+   lodash: ^4.3.0
+   mute-stream: 0.0.7
+   run-async: ^2.2.0
+   rx-lite: ^4.0.8
+   rx-lite-aggregates: ^4.0.8
+   string-width: ^2.1.0
+   strip-ansi: ^4.0.0
+   through: ^2.3.6
 insync:
  _latest: 2.1.1
  _:
@@ -7768,20 +8147,10 @@ insync:
  2.1.1:
   $: sha1-IuJsYRITA8BvUdNaPM9tj8HpFMQ=
   _: 'https://registry.npmjs.org/insync/-/insync-2.1.1.tgz'
-internal-ip:
- _latest: 5.0.0
- _:
-  ^4.3.0: 4.3.0
- 4.3.0:
-  $: sha512-S1zBo1D6zcsyuC6PMmY5+55YMILQ9av8lotMx447Bq6SAgo/sDK6y6uUKmuYhW7eacnIhFfsPmCNYdDzsnnDCg==
-  _: 'https://registry.npmjs.org/internal-ip/-/internal-ip-4.3.0.tgz'
-  dependencies:
-   default-gateway: ^4.2.0
-   ipaddr.js: ^1.9.0
 interpret:
  _latest: 2.0.0
  _:
-  1.2.0: 1.2.0
+  '1.2.0,^1.0.0': 1.2.0
  1.2.0:
   $: sha512-mT34yGKMNceBQUoVn7iCDKDntA7SC6gycMAWzGx1z/CMCTV7b2AAtXlo3nRyHZ1FelRkQbQjprHSYGwzLtkVbw==
   _: 'https://registry.npmjs.org/interpret/-/interpret-1.2.0.tgz'
@@ -7829,6 +8198,16 @@ intl-relativeformat:
   dependencies:
    intl-messageformat: ^2.0.0
   deprecated: 'This package has been deprecated, please see migration guide at ''https://github.com/formatjs/formatjs/tree/master/packages/intl-relativeformat#migration-guide'''
+into-stream:
+ _latest: 5.1.1
+ _:
+  ^3.1.0: 3.1.0
+ 3.1.0:
+  $: sha1-lvsKk2wSur1v8XUqF9BWFqvQlMY=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/into-stream/-/into-stream-3.1.0.tgz'
+  dependencies:
+   from2: ^2.1.1
+   p-is-promise: ^1.1.0
 invariant:
  _latest: 2.2.4
  _:
@@ -7849,35 +8228,13 @@ invert-kv:
  1.0.0:
   $: sha1-EEqOSqym09jNFXqO+L+rLXo//bY=
   _: 'https://registry.npmjs.org/invert-kv/-/invert-kv-1.0.0.tgz'
-ip:
- _latest: 1.1.5
- _:
-  '^1.1.0,^1.1.5': 1.1.5
- 1.1.5:
-  $: sha1-vd7XARQpCCjAoDnnLvJfWq7ENUo=
-  _: 'https://registry.npmjs.org/ip/-/ip-1.1.5.tgz'
 ip-regex:
  _latest: 4.1.0
  _:
   ^1.0.1: 1.0.3
-  ^2.1.0: 2.1.0
- 2.1.0:
-  $: sha1-+ni/XS5pE8kRzp+BnuUUa7bYROk=
-  _: 'https://registry.npmjs.org/ip-regex/-/ip-regex-2.1.0.tgz'
  1.0.3:
   $: sha1-3FiQdvZZ9BnCIgOaMzFvHHOH7/0=
   _: 'https://registry.npmjs.org/ip-regex/-/ip-regex-1.0.3.tgz'
-ipaddr.js:
- _latest: 1.9.1
- _:
-  1.9.0: 1.9.0
-  ^1.9.0: 1.9.1
- 1.9.1:
-  $: sha512-0KI/607xoxSToH7GjN1FfSbLoU0+btTicjsQSWQlh/hZykN8KpmMf7uYwPW3R+akZ6R/w18ZlXSHBYXiYUPO3g==
-  _: 'https://registry.npmjs.org/ipaddr.js/-/ipaddr.js-1.9.1.tgz'
- 1.9.0:
-  $: sha512-M4Sjn6N/+O6/IXSJseKqHoFc+5FdGJ22sXqnjTpdZweHK64MzEPAyQZyEU3R/KRv2GLoa7nNtg/C2Ev6m7z+eA==
-  _: 'https://registry.npmjs.org/ipaddr.js/-/ipaddr.js-1.9.0.tgz'
 is:
  _latest: 3.3.0
  _:
@@ -7889,10 +8246,6 @@ is-absolute-url:
  _latest: 3.0.3
  _:
   ^2.0.0: 2.1.0
-  ^3.0.3: 3.0.3
- 3.0.3:
-  $: sha512-opmNIX7uFnS96NtPmhWQgQx6/NYFgsUXYMllcfzwWKUMwfo8kku1TvE6hkNcH+Q1ts5cMVrsY7j0bxXQDciu9Q==
-  _: 'https://registry.npmjs.org/is-absolute-url/-/is-absolute-url-3.0.3.tgz'
  2.1.0:
   $: sha1-UFMN+4T8yap9vnhS6Do3uTufKqY=
   _: 'https://registry.npmjs.org/is-absolute-url/-/is-absolute-url-2.1.0.tgz'
@@ -7911,13 +8264,6 @@ is-accessor-descriptor:
   _: 'https://registry.npmjs.org/is-accessor-descriptor/-/is-accessor-descriptor-0.1.6.tgz'
   dependencies:
    kind-of: ^3.0.2
-is-arguments:
- _latest: 1.0.4
- _:
-  ^1.0.4: 1.0.4
- 1.0.4:
-  $: sha512-xPh0Rmt8NE65sNzvyUmWgI1tz3mKq74lGA0mL8LYZcoIzKOzDh6HmrYm3d18k60nHerC8A9Km8kYu87zfSFnLA==
-  _: 'https://registry.npmjs.org/is-arguments/-/is-arguments-1.0.4.tgz'
 is-arrayish:
  _latest: 0.3.2
  _:
@@ -7948,10 +8294,10 @@ is-boolean-object:
 is-buffer:
  _latest: 2.0.4
  _:
-  ^1.1.5: 1.1.6
+  '^1.1.5,~1.1.1': 1.1.6
  1.1.6:
   $: sha512-NcdALwpXkTm5Zvvbk7owOUSvVvBKDgKP5/ewfXEznmQFfs4ZRmanOeKBTjRVjka3QFoN6XJ+9F3USqfHqTaU5w==
-  _: 'https://registry.npmjs.org/is-buffer/-/is-buffer-1.1.6.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/is-buffer/-/is-buffer-1.1.6.tgz'
 is-callable:
  _latest: 1.1.4
  _:
@@ -8181,14 +8527,17 @@ is-obj:
  1.0.1:
   $: sha1-PkcprB9f3gJc19g6iW2rn09n2w8=
   _: 'https://registry.npmjs.org/is-obj/-/is-obj-1.0.1.tgz'
+is-object:
+ _latest: 1.0.1
+ _:
+  ^1.0.1: 1.0.1
+ 1.0.1:
+  $: sha1-iVJojF7C/9awPsyF52ngKQMINHA=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/is-object/-/is-object-1.0.1.tgz'
 is-path-cwd:
  _latest: 2.2.0
  _:
   ^1.0.0: 1.0.0
-  ^2.0.0: 2.2.0
- 2.2.0:
-  $: sha512-w942bTcih8fdJPJmQHFzkS76NEP8Kzzvmw92cXsazb8intwLqPibPPdXf4ANdKV3rYMuuQYGIWtvz9JilB3NFQ==
-  _: 'https://registry.npmjs.org/is-path-cwd/-/is-path-cwd-2.2.0.tgz'
  1.0.0:
   $: sha1-0iXsIxMuie3Tj9p2dHLmLmXxEG0=
   _: 'https://registry.npmjs.org/is-path-cwd/-/is-path-cwd-1.0.0.tgz'
@@ -8196,12 +8545,6 @@ is-path-in-cwd:
  _latest: 3.0.0
  _:
   ^1.0.0: 1.0.1
-  ^2.0.0: 2.1.0
- 2.1.0:
-  $: sha512-rNocXHgipO+rvnP6dk3zI20RpOtrAM/kzbB258Uw5BWr3TpXi861yzjo16Dn4hUox07iw5AyeMLHWsujkjzvRQ==
-  _: 'https://registry.npmjs.org/is-path-in-cwd/-/is-path-in-cwd-2.1.0.tgz'
-  dependencies:
-   is-path-inside: ^2.1.0
  1.0.1:
   $: sha512-FjV1RTW48E7CWM7eE/J2NJvAEEVektecDBVBE5Hh3nM1Jd0kvhHtX68Pr3xsDf857xt3Y4AkwVULK1Vku62aaQ==
   _: 'https://registry.npmjs.org/is-path-in-cwd/-/is-path-in-cwd-1.0.1.tgz'
@@ -8211,12 +8554,6 @@ is-path-inside:
  _latest: 3.0.2
  _:
   ^1.0.0: 1.0.1
-  ^2.1.0: 2.1.0
- 2.1.0:
-  $: sha512-wiyhTzfDWsvwAW53OBWF5zuvaOGlZ6PwYxAbPVDhpm+gM09xKQGjBq/8uYN12aDvMxnAnq3dxTyoSoRNmg5YFg==
-  _: 'https://registry.npmjs.org/is-path-inside/-/is-path-inside-2.1.0.tgz'
-  dependencies:
-   path-is-inside: ^1.0.2
  1.0.1:
   $: sha1-jvW33lBDej/cprToZe96pVy0gDY=
   _: 'https://registry.npmjs.org/is-path-inside/-/is-path-inside-1.0.1.tgz'
@@ -8233,6 +8570,12 @@ is-plain-object:
  _latest: 3.0.0
  _:
   '^2.0.3,^2.0.4': 2.0.4
+  ^3.0.0: 3.0.0
+ 3.0.0:
+  $: sha512-tZIpofR+P05k8Aocp7UI/2UTa9lTJSebCXpFFoR9aibpokDj/uXBsJ8luUu0tTVYKkMU6URDUuOfJZ7koewXvg==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/is-plain-object/-/is-plain-object-3.0.0.tgz'
+  dependencies:
+   isobject: ^4.0.0
  2.0.4:
   $: sha512-h5PpgXkWitc38BBMYawTYMWJHFZJVnBquFE57xFpjB8pJFiF6gZ+bU+WyI/yqXiFR5mdLsgYNaPe8uao6Uv9Og==
   _: 'https://registry.npmjs.org/is-plain-object/-/is-plain-object-2.0.4.tgz'
@@ -8252,6 +8595,13 @@ is-primitive:
  2.0.0:
   $: sha1-IHurkWOEmcB7Kt8kCkGochADRXU=
   _: 'https://registry.npmjs.org/is-primitive/-/is-primitive-2.0.0.tgz'
+is-promise:
+ _latest: 2.1.0
+ _:
+  ^2.1.0: 2.1.0
+ 2.1.0:
+  $: sha1-eaKp7OfwlugPNtKy87wWwf9L8/o=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/is-promise/-/is-promise-2.1.0.tgz'
 is-redirect:
  _latest: 1.0.0
  _:
@@ -8278,10 +8628,10 @@ is-resolvable:
 is-retry-allowed:
  _latest: 1.2.0
  _:
-  ^1.0.0: 1.2.0
+  '^1.0.0,^1.1.0': 1.2.0
  1.2.0:
   $: sha512-RUbUeKwvm3XG2VYamhJL1xFktgjvPzL0Hq8C+6yrWIswDy3BIXGqCxhxkc30N9jqK311gVU137K8Ei55/zVJRg==
-  _: 'https://registry.npmjs.org/is-retry-allowed/-/is-retry-allowed-1.2.0.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/is-retry-allowed/-/is-retry-allowed-1.2.0.tgz'
 is-stream:
  _latest: 2.0.0
  _:
@@ -8389,12 +8739,16 @@ isobject:
  _:
   ^2.0.0: 2.1.0
   '^3.0.0,^3.0.1': 3.0.1
+  ^4.0.0: 4.0.0
+ 4.0.0:
+  $: sha512-S/2fF5wH8SJA/kmwr6HYhK/RI/OkhD84k8ntalo0iJjZikgq1XFvR5M8NPT1x5F7fBwCG3qHfnzeP/Vh/ZxCUA==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/isobject/-/isobject-4.0.0.tgz'
  3.0.1:
   $: sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
   _: 'https://registry.npmjs.org/isobject/-/isobject-3.0.1.tgz'
  2.1.0:
   $: sha1-8GVWEJaj8dou9GJy+BXIQNh+DIk=
-  _: 'https://registry.npmjs.org/isobject/-/isobject-2.1.0.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/isobject/-/isobject-2.1.0.tgz'
   dependencies:
    isarray: 1.0.0
 isomorphic-loader:
@@ -8567,6 +8921,16 @@ istanbul-reports:
   _: 'https://registry.npmjs.org/istanbul-reports/-/istanbul-reports-1.5.1.tgz'
   dependencies:
    handlebars: ^4.0.3
+isurl:
+ _latest: 4.0.1
+ _:
+  ^1.0.0-alpha5: 1.0.0-alpha6
+ 1.0.0-alpha6:
+  $: sha1-nfC4R3hmqkJdBGvo+7Qp5ktbiRU=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/isurl/-/isurl-1.0.0-alpha6.tgz'
+  dependencies:
+   has-to-string-tag-x: ^1.2.0
+   is-object: ^1.0.1
 jaro-winkler:
  _latest: 0.2.8
  _:
@@ -9008,7 +9372,7 @@ js-tokens:
 js-yaml:
  _latest: 3.13.1
  _:
-  '3.x,^3.13.1,^3.5.3,^3.7.0': 3.13.1
+  '3.x,^3.13.1,^3.5.3,^3.7.0,^3.9.1': 3.13.1
  3.13.1:
   $: sha512-YfbcO7jXDdyj0DGxYVSlSeQNHbD7XPWvrVWeVUujrQEoZzWJIRrCPoyk6kL6IAjAG2IolMK4T0hNUe0HOUs5Jw==
   _: 'https://registry.npmjs.org/js-yaml/-/js-yaml-3.13.1.tgz'
@@ -9071,6 +9435,13 @@ jsesc:
  0.5.0:
   $: sha1-597mbjXW/Bb3EP6R1c9p9w8IkR0=
   _: 'https://registry.npmjs.org/jsesc/-/jsesc-0.5.0.tgz'
+json-buffer:
+ _latest: 3.0.1
+ _:
+  3.0.0: 3.0.0
+ 3.0.0:
+  $: sha1-Wx85evx11ne96Lz8Dkfh+aPZqJg=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/json-buffer/-/json-buffer-3.0.0.tgz'
 json-parse-better-errors:
  _latest: 1.0.2
  _:
@@ -9096,6 +9467,13 @@ json-schema-traverse:
  0.3.1:
   $: sha1-NJptRMU6Ud6JtAgFxdXlm0F9M0A=
   _: 'https://registry.npmjs.org/json-schema-traverse/-/json-schema-traverse-0.3.1.tgz'
+json-stable-stringify-without-jsonify:
+ _latest: 1.0.1
+ _:
+  ^1.0.1: 1.0.1
+ 1.0.1:
+  $: sha1-nbe1lJatPzz+8wp1FC0tkwrXJlE=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/json-stable-stringify-without-jsonify/-/json-stable-stringify-without-jsonify-1.0.1.tgz'
 json-stringify-safe:
  _latest: 5.0.1
  _:
@@ -9103,18 +9481,6 @@ json-stringify-safe:
  5.0.1:
   $: sha1-Epai1Y/UXxmg9s4B1lcB4sc1tus=
   _: 'https://registry.npmjs.org/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz'
-json3:
- _latest: 3.3.3
- _:
-  3.3.2: 3.3.2
-  ^3.3.2: 3.3.3
- 3.3.3:
-  $: sha512-c7/8mbUsKigAbLkD5B010BK4D9LZm7A1pNItkEwiUZRpIN66exu/e7YQWysGun+TRKaJp8MhemM+VkfWv42aCA==
-  _: 'https://registry.npmjs.org/json3/-/json3-3.3.3.tgz'
- 3.3.2:
-  $: sha1-PAQ0dD35Pi9cQq7nsZvLSDV19OE=
-  _: 'https://registry.npmjs.org/json3/-/json3-3.3.2.tgz'
-  deprecated: 'Please use the native JSON object instead of JSON 3'
 json5:
  _latest: 2.1.1
  _:
@@ -9168,6 +9534,16 @@ jsprim:
    extsprintf: 1.3.0
    json-schema: 0.2.3
    verror: 1.10.0
+jsx-ast-utils:
+ _latest: 2.2.3
+ _:
+  ^2.2.1: 2.2.3
+ 2.2.3:
+  $: sha512-EdIHFMm+1BPynpKOpdPqiOsvnIrInRGJD7bzPZdPkjitQEqpdpUuFpq4T0npZFKTiB3RhWFdGN+oqOJIdhDhQA==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/jsx-ast-utils/-/jsx-ast-utils-2.2.3.tgz'
+  dependencies:
+   array-includes: ^3.0.3
+   object.assign: ^4.1.0
 just-extend:
  _latest: 4.0.2
  _:
@@ -9381,13 +9757,15 @@ keypairs:
   dependencies:
    eckles: ^1.4.1
    rasha: ^1.2.4
-killable:
- _latest: 1.0.1
+keyv:
+ _latest: 3.1.0
  _:
-  ^1.0.1: 1.0.1
- 1.0.1:
-  $: sha512-LzqtLKlUwirEUyl/nicirVmNiPvYs7l5n8wOPP7fyJVpUPkvCnW/vuiXGpylGUlnPDnB7311rARzAt3Mhswpjg==
-  _: 'https://registry.npmjs.org/killable/-/killable-1.0.1.tgz'
+  3.0.0: 3.0.0
+ 3.0.0:
+  $: sha512-eguHnq22OE3uVoSYG0LVWNP+4ppamWr9+zWBe1bsNcovIMy6huUJFPgy4mGwCd/rnl3vOLGW1MTlu4c57CT1xA==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/keyv/-/keyv-3.0.0.tgz'
+  dependencies:
+   json-buffer: 3.0.0
 kind-of:
  _latest: 6.0.2
  _:
@@ -9591,13 +9969,20 @@ leven:
 levn:
  _latest: 0.3.0
  _:
-  ~0.3.0: 0.3.0
+  '^0.3.0,~0.3.0': 0.3.0
  0.3.0:
   $: sha1-OwmSTt+fCDwEkP3UwLxEIeBHZO4=
-  _: 'https://registry.npmjs.org/levn/-/levn-0.3.0.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/levn/-/levn-0.3.0.tgz'
   dependencies:
    prelude-ls: ~1.1.2
    type-check: ~0.3.2
+listenercount:
+ _latest: 1.0.1
+ _:
+  ~1.0.1: 1.0.1
+ 1.0.1:
+  $: sha1-hMinKrWcRyUyFIDJdeZQg0LnCTc=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/listenercount/-/listenercount-1.0.1.tgz'
 load-bmfont:
  _latest: 1.4.0
  _:
@@ -9746,20 +10131,13 @@ lodash._reinterpolate:
  3.0.0:
   $: sha1-DM8tiRZq8Ds2Y8eWU4t1rG4RTZ0=
   _: 'https://registry.npmjs.org/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz'
-lodash.assign:
- _latest: 4.2.0
- _:
-  '^4.1.0,^4.2.0': 4.2.0
- 4.2.0:
-  $: sha1-DZnzzNem0mHRm9rrkkUAXShYCOc=
-  _: 'https://registry.npmjs.org/lodash.assign/-/lodash.assign-4.2.0.tgz'
 lodash.camelcase:
  _latest: 4.3.0
  _:
-  ^4.3.0: 4.3.0
+  '4.3.0,^4.3.0': 4.3.0
  4.3.0:
   $: sha1-soqmKIorn8ZRA1x3EfZathkDMaY=
-  _: 'https://registry.npmjs.org/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz'
 lodash.defaults:
  _latest: 4.2.0
  _:
@@ -9825,6 +10203,13 @@ lodash.isequal:
  4.5.0:
   $: sha1-QVxEePK8wwEgwizhDtMib30+GOA=
   _: 'https://registry.npmjs.org/lodash.isequal/-/lodash.isequal-4.5.0.tgz'
+lodash.kebabcase:
+ _latest: 4.1.1
+ _:
+  4.1.1: 4.1.1
+ 4.1.1:
+  $: sha1-hImxyw0p/4gZXM7KRI/21swpXDY=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/lodash.kebabcase/-/lodash.kebabcase-4.1.1.tgz'
 lodash.keys:
  _latest: 4.2.0
  _:
@@ -9843,6 +10228,20 @@ lodash.memoize:
  4.1.2:
   $: sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
   _: 'https://registry.npmjs.org/lodash.memoize/-/lodash.memoize-4.1.2.tgz'
+lodash.set:
+ _latest: 4.3.2
+ _:
+  ^4.3.2: 4.3.2
+ 4.3.2:
+  $: sha1-2HV7HagH3eJIFrDWqEvqGnYjCyM=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/lodash.set/-/lodash.set-4.3.2.tgz'
+lodash.snakecase:
+ _latest: 4.1.1
+ _:
+  4.1.1: 4.1.1
+ 4.1.1:
+  $: sha1-OdcUo1NXFHg3rv1ktdy7Fr7Nj40=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/lodash.snakecase/-/lodash.snakecase-4.1.1.tgz'
 lodash.sortby:
  _latest: 4.7.0
  _:
@@ -9883,6 +10282,13 @@ lodash.uniq:
  4.5.0:
   $: sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
   _: 'https://registry.npmjs.org/lodash.uniq/-/lodash.uniq-4.5.0.tgz'
+lodash.upperfirst:
+ _latest: 4.3.1
+ _:
+  4.3.1: 4.3.1
+ 4.3.1:
+  $: sha1-E2Xt9DFIBIHvDRxolXpe2Z1J984=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/lodash.upperfirst/-/lodash.upperfirst-4.3.1.tgz'
 log-symbols:
  _latest: 3.0.0
  _:
@@ -9905,13 +10311,6 @@ log4js:
    debug: ^3.1.0
    rfdc: ^1.1.2
    streamroller: 0.7.0
-loglevel:
- _latest: 1.6.4
- _:
-  ^1.6.4: 1.6.4
- 1.6.4:
-  $: sha512-p0b6mOGKcGa+7nnmKbpzR6qloPbrgLcnio++E+14Vo/XffOGwZtRpUhr8dTH/x2oCMmEoIU0Zwm3ZauhvYD17g==
-  _: 'https://registry.npmjs.org/loglevel/-/loglevel-1.6.4.tgz'
 lolex:
  _latest: 5.1.1
  _:
@@ -9945,10 +10344,16 @@ loud-rejection:
 lowercase-keys:
  _latest: 2.0.0
  _:
-  ^1.0.0: 1.0.1
+  1.0.0: 1.0.0
+  ^1.0.0:
+   - 1.0.1
+   - 1.0.0
  1.0.1:
   $: sha512-G2Lj61tXDnVFFOi8VZds+SoQjtQC3dgokKdDG2mTm1tx4m50NUHBOZSBwQQHyy0V12A0JTG4icfZQH+xPyh8VA==
   _: 'https://registry.npmjs.org/lowercase-keys/-/lowercase-keys-1.0.1.tgz'
+ 1.0.0:
+  $: sha1-TjNms55/VFfjXxMkvfb4jQv8cwY=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/lowercase-keys/-/lowercase-keys-1.0.0.tgz'
 lru-cache:
  _latest: 5.1.1
  _:
@@ -9965,6 +10370,13 @@ lru-cache:
   dependencies:
    pseudomap: ^1.0.2
    yallist: ^2.1.2
+macos-release:
+ _latest: 2.3.0
+ _:
+  ^2.2.0: 2.3.0
+ 2.3.0:
+  $: sha512-OHhSbtcviqMPt7yfw5ef5aghS2jzFVKEFyCJndQt2YpSQ9qRVSEv2axSJI1paVThEu+FFGs584h/1YhxjVqajA==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/macos-release/-/macos-release-2.3.0.tgz'
 make-dir:
  _latest: 3.0.0
  _:
@@ -10036,6 +10448,17 @@ math-random:
  1.0.4:
   $: sha512-rUxjysqif/BZQH2yhd5Aaq7vXMSx9NdEsQcyA07uEzIvxgI7zIr33gGsh+RU0/XjmQpCW7RsVof1vlkvQVCK5A==
   _: 'https://registry.npmjs.org/math-random/-/math-random-1.0.4.tgz'
+md5:
+ _latest: 2.2.1
+ _:
+  ^2.2.1: 2.2.1
+ 2.2.1:
+  $: sha1-U6s41f48iJG6RlMp6iP6wFQBJvk=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/md5/-/md5-2.2.1.tgz'
+  dependencies:
+   charenc: ~0.0.1
+   crypt: ~0.0.1
+   is-buffer: ~1.1.1
 md5.js:
  _latest: 1.3.5
  _:
@@ -10127,13 +10550,6 @@ merge-defaults:
   _: 'https://registry.npmjs.org/merge-defaults/-/merge-defaults-0.2.2.tgz'
   dependencies:
    '@sailshq/lodash': ^3.10.2
-merge-descriptors:
- _latest: 1.0.1
- _:
-  1.0.1: 1.0.1
- 1.0.1:
-  $: sha1-sAqqVW3YtEVoFQ7J0blT8/kMu2E=
-  _: 'https://registry.npmjs.org/merge-descriptors/-/merge-descriptors-1.0.1.tgz'
 merge-source-map:
  _latest: 1.1.0
  _:
@@ -10152,13 +10568,6 @@ merge-stream:
   _: 'https://registry.npmjs.org/merge-stream/-/merge-stream-1.0.1.tgz'
   dependencies:
    readable-stream: ^2.0.1
-methods:
- _latest: 1.1.2
- _:
-  ~1.1.2: 1.1.2
- 1.1.2:
-  $: sha1-VSmk1nZUE07cxSZmVoNbD4Ua/O4=
-  _: 'https://registry.npmjs.org/methods/-/methods-1.1.2.tgz'
 micromatch:
  _latest: 4.0.2
  _:
@@ -10221,7 +10630,7 @@ milligram:
 mime:
  _latest: 2.4.4
  _:
-  '1.6.0,^1.0.0,^1.3.4,^1.4.1': 1.6.0
+  '^1.0.0,^1.3.4,^1.4.1': 1.6.0
   '^2.0.3,^2.3.1,^2.4.4': 2.4.4
  2.4.4:
   $: sha512-LRxmNwziLPT828z+4YkNzloCFC2YM4wrB99k+AV5ZbEyfGNWfG8SO1FUXLmLDBSo89NrJZ4DIWeLjy1CHGhMGA==
@@ -10232,7 +10641,7 @@ mime:
 mime-db:
  _latest: 1.42.0
  _:
-  '1.40.0,>= 1.40.0 < 2': 1.40.0
+  1.40.0: 1.40.0
   1.x.x: 1.37.0
  1.40.0:
   $: sha512-jYdeOMPy9vnxEqFRRo6ZvTZ8d9oPb+k18PKoYNYUe2stVEBPPwsln/qWzdbmaIvnhZ9v2P+CuecK+fpUfsV2mA==
@@ -10243,7 +10652,7 @@ mime-db:
 mime-types:
  _latest: 2.1.24
  _:
-  '^2.1.12,~2.1.11,~2.1.17,~2.1.18,~2.1.19,~2.1.24': 2.1.24
+  '^2.1.12,~2.1.18,~2.1.19,~2.1.24': 2.1.24
  2.1.24:
   $: sha512-WaFHS3MCl5fapm3oLxU4eYDw77IQM2ACcxQ9RIxfaC3ooc6PFuBMGZZsYpvoXS5D5QTWPieo1jjLdAm3TBP3cQ==
   _: 'https://registry.npmjs.org/mime-types/-/mime-types-2.1.24.tgz'
@@ -10252,10 +10661,21 @@ mime-types:
 mimic-fn:
  _latest: 3.0.0
  _:
+  ^1.0.0: 1.2.0
   ^2.0.0: 2.1.0
  2.1.0:
   $: sha512-OqbOk5oEQeAZ8WXWydlu9HJjz9WVdEIvamMCcXmuqUYjTknH/sqsWvhQ3vgwKFRR1HpjvNBKQ37nbJgYzGqGcg==
   _: 'https://registry.npmjs.org/mimic-fn/-/mimic-fn-2.1.0.tgz'
+ 1.2.0:
+  $: sha512-jf84uxzwiuiIVKiOLpfYk7N46TSy8ubTonmneY9vrpHNAnp0QBt2BxWV9dO3/j+BoVAb+a5G6YDPW3M5HOdMWQ==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/mimic-fn/-/mimic-fn-1.2.0.tgz'
+mimic-response:
+ _latest: 2.0.0
+ _:
+  ^1.0.0: 1.0.1
+ 1.0.1:
+  $: sha512-j5EctnkH7amfV/q5Hgmoal1g2QHFJRraOtmx0JpIqkxhBhI/lJSl1nMpQ45hVarwNETOoWEimndZ4QK0RHxuxQ==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/mimic-response/-/mimic-response-1.0.1.tgz'
 min-document:
  _latest: 2.19.0
  _:
@@ -10374,6 +10794,24 @@ mkdirp:
   _: 'https://registry.npmjs.org/mkdirp/-/mkdirp-0.5.1.tgz'
   dependencies:
    minimist: 0.0.8
+mocha:
+ _latest: 6.2.2
+ _:
+  ^4.0.0: 4.1.0
+ 4.1.0:
+  $: sha512-0RVnjg1HJsXY2YFDoTNzcc1NKhYuXKRrBAG2gDygmJJA136Cs2QlRliZG1mA0ap7cuaT30mw16luAeln+4RiNA==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/mocha/-/mocha-4.1.0.tgz'
+  dependencies:
+   browser-stdout: 1.3.0
+   commander: 2.11.0
+   debug: 3.1.0
+   diff: 3.3.1
+   escape-string-regexp: 1.0.5
+   glob: 7.1.2
+   growl: 1.10.3
+   he: 1.1.1
+   mkdirp: 0.5.1
+   supports-color: 4.4.0
 moment:
  _latest: 2.24.0
  _:
@@ -10406,42 +10844,17 @@ ms:
  _latest: 2.1.2
  _:
   0.7.1: 0.7.1
-  0.7.2: 0.7.2
   2.0.0: 2.0.0
-  2.1.1: 2.1.1
   ^2.1.1: 2.1.2
  2.1.2:
   $: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
   _: 'https://registry.npmjs.org/ms/-/ms-2.1.2.tgz'
- 2.1.1:
-  $: sha512-tgp+dl5cGk28utYktBsrFqA7HKgrhgPsg6Z/EfhWI4gl1Hwq8B/GmY/0oXZ6nF8hDVesS/FpnYaD/kOWhYQvyg==
-  _: 'https://registry.npmjs.org/ms/-/ms-2.1.1.tgz'
  2.0.0:
   $: sha1-VgiurfwAvmwpAd9fmGF4jeDVl8g=
   _: 'https://registry.npmjs.org/ms/-/ms-2.0.0.tgz'
- 0.7.2:
-  $: sha1-riXPJRKziFodldfwN4aNhDESR2U=
-  _: 'https://registry.npmjs.org/ms/-/ms-0.7.2.tgz'
  0.7.1:
   $: sha1-nNE8A62/8ltl7/3nzoZO6VIBcJg=
   _: 'https://registry.npmjs.org/ms/-/ms-0.7.1.tgz'
-multicast-dns:
- _latest: 7.2.0
- _:
-  ^6.0.1: 6.2.3
- 6.2.3:
-  $: sha512-ji6J5enbMyGRHIAkAOu3WdV8nggqviKCEKtXcOqfphZZtQrmHKycfynJ2V7eVPUA4NhJ6V7Wf4TmGbTwKE9B6g==
-  _: 'https://registry.npmjs.org/multicast-dns/-/multicast-dns-6.2.3.tgz'
-  dependencies:
-   dns-packet: ^1.3.1
-   thunky: ^1.0.2
-multicast-dns-service-types:
- _latest: 1.1.0
- _:
-  ^1.1.0: 1.1.0
- 1.1.0:
-  $: sha1-iZ8R2WhuXgXLkbNdXw5jt3PPyQE=
-  _: 'https://registry.npmjs.org/multicast-dns-service-types/-/multicast-dns-service-types-1.1.0.tgz'
 munchy:
  _latest: 1.0.7
  _:
@@ -10449,6 +10862,13 @@ munchy:
  1.0.7:
   $: sha512-Evw3XK/wSwHdw2WVQ+aP/1OGD52+zCm9Lc9OdiERTyNnZBgc9GR6VNSj+87X8foHP9LxpRjW98nE8k6/WlLsxA==
   _: 'https://registry.npmjs.org/munchy/-/munchy-1.0.7.tgz'
+mute-stream:
+ _latest: 0.0.8
+ _:
+  0.0.7: 0.0.7
+ 0.0.7:
+  $: sha1-MHXOk7whuPq0PhvE2n6BFe0ee6s=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/mute-stream/-/mute-stream-0.0.7.tgz'
 nan:
  _latest: 2.14.0
  _:
@@ -10498,14 +10918,10 @@ nearley:
 negotiator:
  _latest: 0.6.2
  _:
-  0.6.1: 0.6.1
   0.6.2: 0.6.2
  0.6.2:
   $: sha512-hZXc7K2e+PgeI1eDBe/10Ard4ekbfrrqG8Ep+8Jmf4JID2bNg7NvCPOZN+kfF574pFQI7mum2AUqDidoKqcTOw==
   _: 'https://registry.npmjs.org/negotiator/-/negotiator-0.6.2.tgz'
- 0.6.1:
-  $: sha1-KzJxhOiZIQEXeyhWP7XnECrNDKk=
-  _: 'https://registry.npmjs.org/negotiator/-/negotiator-0.6.1.tgz'
 neo-async:
  _latest: 2.6.1
  _:
@@ -10568,15 +10984,18 @@ node-etcd:
    lodash: ^4.17.10
    request: ^2.87.0
    url-parse: ^1.4.3
+node-fetch:
+ _latest: 2.6.0
+ _:
+  ^2.3.0: 2.6.0
+ 2.6.0:
+  $: sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/node-fetch/-/node-fetch-2.6.0.tgz'
 node-forge:
  _latest: 0.9.1
  _:
-  0.9.0: 0.9.0
   ^0.6.43: 0.6.49
   ^0.7.6: 0.7.6
- 0.9.0:
-  $: sha512-7ASaDa3pD+lJ3WvXFsxekJQelBKRpne+GOVbLbtHYdd7pFspyeuJHnWfLplGf3SwKGbfs/aYl5V/JCIaHVUKKQ==
-  _: 'https://registry.npmjs.org/node-forge/-/node-forge-0.9.0.tgz'
  0.7.6:
   $: sha512-sol30LUpz1jQFBjOKwbjxijiE3b6pjd74YwfD0fJOKPjF+fONKb2Yg8rYgS6+bK6VDl+/wfr4IYpC7jDzLUIfw==
   _: 'https://registry.npmjs.org/node-forge/-/node-forge-0.7.6.tgz'
@@ -10716,38 +11135,13 @@ node.extend:
   dependencies:
    has: ^1.0.3
    is: ^3.2.1
-nodemon:
- _latest: 1.19.4
- _:
-  ^1.18.7: 1.19.4
- 1.19.4:
-  hasI: 1
-  $: sha512-VGPaqQBNk193lrJFotBU8nvWZPqEZY2eIzymy2jjY0fJ9qIsxA0sxQ8ATPl0gZC645gijYEc1jtZvpS8QWzJGQ==
-  _: 'https://registry.npmjs.org/nodemon/-/nodemon-1.19.4.tgz'
-  dependencies:
-   chokidar: ^2.1.8
-   debug: ^3.2.6
-   ignore-by-default: ^1.0.1
-   minimatch: ^3.0.4
-   pstree.remy: ^1.1.7
-   semver: ^5.7.1
-   supports-color: ^5.5.0
-   touch: ^3.1.0
-   undefsafe: ^2.0.2
-   update-notifier: ^2.5.0
 nopt:
  _latest: 4.0.1
  _:
   '2 || 3,3.x': 3.0.6
-  ~1.0.10: 1.0.10
  3.0.6:
   $: sha1-xkZdvwirzU2zWTF/eaxopkayj/k=
   _: 'https://registry.npmjs.org/nopt/-/nopt-3.0.6.tgz'
-  dependencies:
-   abbrev: '1'
- 1.0.10:
-  $: sha1-bd0hvSoxQXuScn3Vhfim83YI6+4=
-  _: 'https://registry.npmjs.org/nopt/-/nopt-1.0.10.tgz'
   dependencies:
    abbrev: '1'
 normalize-package-data:
@@ -10786,10 +11180,18 @@ normalize-url:
  _latest: 4.5.0
  _:
   1.9.1: 1.9.1
+  2.0.1: 2.0.1
   ^3.0.0: 3.3.0
  3.3.0:
   $: sha512-U+JJi7duF1o+u2pynbp2zXDW2/PADgC30f0GsHZtRh+HOcXHnw137TrNlyxxRvWW5fjKd3bcLHPxofWuCjaeZg==
   _: 'https://registry.npmjs.org/normalize-url/-/normalize-url-3.3.0.tgz'
+ 2.0.1:
+  $: sha512-D6MUW4K/VzoJ4rJ01JFKxDrtY1v9wrgzCX5f2qj/lzH1m/lW6MhUZFKerVsnyjOhOsYzI9Kqqak+10l4LvLpMw==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/normalize-url/-/normalize-url-2.0.1.tgz'
+  dependencies:
+   prepend-http: ^2.0.0
+   query-string: ^5.0.1
+   sort-keys: ^2.0.0
  1.9.1:
   $: sha1-LMDWazHqIwNkWENuNiDYWVTGbDw=
   _: 'https://registry.npmjs.org/normalize-url/-/normalize-url-1.9.1.tgz'
@@ -10906,14 +11308,10 @@ oauth-sign:
 object-assign:
  _latest: 4.1.1
  _:
-  4.1.0: 4.1.0
   '^4.0.0,^4.0.1,^4.1.0,^4.1.1': 4.1.1
  4.1.1:
   $: sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=
   _: 'https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz'
- 4.1.0:
-  $: sha1-ejs9DpgGPUP0wD8uiubNUahog6A=
-  _: 'https://registry.npmjs.org/object-assign/-/object-assign-4.1.0.tgz'
 object-component:
  _latest: 0.0.3
  _:
@@ -10996,10 +11394,10 @@ object.entries:
 object.fromentries:
  _latest: 2.0.1
  _:
-  ^2.0.1: 2.0.1
+  '^2.0.0,^2.0.1': 2.0.1
  2.0.1:
   $: sha512-PUQv8Hbg3j2QX0IQYv3iAGCbGcu4yY4KQ92/dhA4sFSixBmSmp13UpDLs6jGK8rBtbmhNNIK99LD2k293jpiGA==
-  _: 'https://registry.npmjs.org/object.fromentries/-/object.fromentries-2.0.1.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/object.fromentries/-/object.fromentries-2.0.1.tgz'
   dependencies:
    define-properties: ^1.1.3
    es-abstract: ^1.15.0
@@ -11053,6 +11451,13 @@ obuf:
  1.1.2:
   $: sha512-PX1wu0AmAdPqOL1mWhqmlOd8kOIZQwGZw6rh7uby9fTc5lhaOWFLX3I6R1hrF9k3zUY40e6igsLGkDXK92LJNg==
   _: 'https://registry.npmjs.org/obuf/-/obuf-1.1.2.tgz'
+octokit-pagination-methods:
+ _latest: 1.1.0
+ _:
+  ^1.1.0: 1.1.0
+ 1.1.0:
+  $: sha512-fZ4qZdQ2nxJvtcasX7Ghl+WlWS/d9IgnBIwFZXVNNZUmzpno91SX5bc5vuxiuKoCtK78XxGGNuSCrDC7xYB3OQ==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/octokit-pagination-methods/-/octokit-pagination-methods-1.1.0.tgz'
 offline-plugin:
  _latest: 5.0.7
  _:
@@ -11075,13 +11480,6 @@ on-finished:
   _: 'https://registry.npmjs.org/on-finished/-/on-finished-2.3.0.tgz'
   dependencies:
    ee-first: 1.1.1
-on-headers:
- _latest: 1.0.2
- _:
-  ~1.0.2: 1.0.2
- 1.0.2:
-  $: sha512-pZAE+FJLoyITytdqK0U5s+FIpjN0JP3OzFi/u8Rx+EV5/W+JTWGXG8xFzevE7AjBfDqHv/8vL8qQsIhHnqRkrA==
-  _: 'https://registry.npmjs.org/on-headers/-/on-headers-1.0.2.tgz'
 once:
  _latest: 1.4.0
  _:
@@ -11091,15 +11489,15 @@ once:
   _: 'https://registry.npmjs.org/once/-/once-1.4.0.tgz'
   dependencies:
    wrappy: '1'
-opn:
- _latest: 6.0.0
+onetime:
+ _latest: 5.1.0
  _:
-  ^5.5.0: 5.5.0
- 5.5.0:
-  $: sha512-PqHpggC9bLV0VeWcdKhkpxY+3JTzetLSqTCWL/z/tFIbI6G8JCjondXklT1JinczLz2Xib62sSp0T/gKT4KksA==
-  _: 'https://registry.npmjs.org/opn/-/opn-5.5.0.tgz'
+  ^2.0.0: 2.0.1
+ 2.0.1:
+  $: sha1-BnQoIw/WdEOyeUsiu6UotoZ5YtQ=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/onetime/-/onetime-2.0.1.tgz'
   dependencies:
-   is-wsl: ^1.1.0
+   mimic-fn: ^1.0.0
 optimist:
  _latest: 0.6.1
  _:
@@ -11130,12 +11528,12 @@ optional-require:
   $: sha1-Fo02GYQ6zA+81tbMXaTL5ThmOvI=
   _: 'https://registry.npmjs.org/optional-require/-/optional-require-1.0.0.tgz'
 optionator:
- _latest: 0.8.2
+ _latest: 0.8.3
  _:
-  ^0.8.1: 0.8.2
+  '^0.8.1,^0.8.2': 0.8.2
  0.8.2:
   $: sha1-NkxeQJ0/TWMB1sC0wFu6UBgK62Q=
-  _: 'https://registry.npmjs.org/optionator/-/optionator-0.8.2.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/optionator/-/optionator-0.8.2.tgz'
   dependencies:
    prelude-ls: ~1.1.2
    deep-is: ~0.1.3
@@ -11143,22 +11541,6 @@ optionator:
    type-check: ~0.3.2
    levn: ~0.3.0
    fast-levenshtein: ~2.0.4
-options:
- _latest: 0.0.6
- _:
-  '>=0.0.5': 0.0.6
- 0.0.6:
-  $: sha1-7CLTEoBrtT5zF3Pnza788cZDEo8=
-  _: 'https://registry.npmjs.org/options/-/options-0.0.6.tgz'
-original:
- _latest: 1.0.2
- _:
-  ^1.0.0: 1.0.2
- 1.0.2:
-  $: sha512-hyBVl6iqqUOJ8FqRe+l/gS8H+kKYjrEndd5Pm1MfBtsEKA038HkkdbAl/72EAXGyonD/PFsvmVG+EvcIpliMBg==
-  _: 'https://registry.npmjs.org/original/-/original-1.0.2.tgz'
-  dependencies:
-   url-parse: ^1.4.3
 os-browserify:
  _latest: 0.3.0
  _:
@@ -11190,6 +11572,16 @@ os-locale:
   _: 'https://registry.npmjs.org/os-locale/-/os-locale-1.4.0.tgz'
   dependencies:
    lcid: ^1.0.0
+os-name:
+ _latest: 3.1.0
+ _:
+  ^3.1.0: 3.1.0
+ 3.1.0:
+  $: sha512-h8L+8aNjNcMpo/mAIBPn5PXCM16iyPGjHNWo6U1YO8sJTMHtEtyczI6QJnLoplswm6goopQkqc7OAnjhWcugVg==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/os-name/-/os-name-3.1.0.tgz'
+  dependencies:
+   macos-release: ^2.2.0
+   windows-release: ^3.1.0
 os-tmpdir:
  _latest: 2.0.0
  _:
@@ -11218,6 +11610,13 @@ output-file-sync:
    graceful-fs: ^4.1.11
    is-plain-obj: ^1.1.0
    mkdirp: ^0.5.1
+p-cancelable:
+ _latest: 2.0.0
+ _:
+  ^0.4.0: 0.4.1
+ 0.4.1:
+  $: sha512-HNa1A8LvB1kie7cERyy21VNeHb2CWJJYqyyC2o3klWFfMGlFmWv2Z7sFgZH8ZiaYL95ydToKTFVXgMV/Os0bBQ==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/p-cancelable/-/p-cancelable-0.4.1.tgz'
 p-defer:
  _latest: 3.0.0
  _:
@@ -11235,10 +11634,14 @@ p-finally:
 p-is-promise:
  _latest: 3.0.0
  _:
+  ^1.1.0: 1.1.0
   ^2.0.0: 2.1.0
  2.1.0:
   $: sha512-Y3W0wlRPK8ZMRbNq97l4M5otioeA5lm1z7bkNkxCka8HSPjR0xRWmpCmc9utiaLP9Jb1eD8BgeIxTW4AIF45Pg==
   _: 'https://registry.npmjs.org/p-is-promise/-/p-is-promise-2.1.0.tgz'
+ 1.1.0:
+  $: sha1-nJRWmJ6fZYgBewQ01WCXZ1w9oF4=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/p-is-promise/-/p-is-promise-1.1.0.tgz'
 p-limit:
  _latest: 2.2.1
  _:
@@ -11273,22 +11676,18 @@ p-map:
  _latest: 3.0.0
  _:
   ^1.1.1: 1.2.0
-  ^2.0.0: 2.1.0
- 2.1.0:
-  $: sha512-y3b8Kpd8OAN444hxfBbFfj1FY/RjtTd8tzYwhUqNYXx0fXx2iX4maP4Qr6qhIKbQXI02wTLAda4fYUbDagTUFw==
-  _: 'https://registry.npmjs.org/p-map/-/p-map-2.1.0.tgz'
  1.2.0:
   $: sha512-r6zKACMNhjPJMTl8KcFH4li//gkrXWfbD6feV8l6doRHlzljFWGJ2AP6iKaCJXyZmAUMOPtvbW7EXkbWO/pLEA==
   _: 'https://registry.npmjs.org/p-map/-/p-map-1.2.0.tgz'
-p-retry:
- _latest: 4.1.0
+p-timeout:
+ _latest: 3.2.0
  _:
-  ^3.0.1: 3.0.1
- 3.0.1:
-  $: sha512-XE6G4+YTTkT2a0UWb2kjZe8xNwf8bIbnqpc/IS/idOBVhyves0mK5OJgeocjx7q5pvX/6m23xuzVPYT1uGM73w==
-  _: 'https://registry.npmjs.org/p-retry/-/p-retry-3.0.1.tgz'
+  ^2.0.1: 2.0.1
+ 2.0.1:
+  $: sha512-88em58dDVB/KzPEx1X0N3LwFfYZPyDc4B6eF38M1rk9VTZMbxXXgjugz8mmwpS9Ox4BDZ+t6t3QP5+/gazweIA==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/p-timeout/-/p-timeout-2.0.1.tgz'
   dependencies:
-   retry: ^0.12.0
+   p-finally: ^1.0.0
 p-try:
  _latest: 2.2.0
  _:
@@ -11342,6 +11741,13 @@ parallel-transform:
    cyclist: ^1.0.1
    inherits: ^2.0.3
    readable-stream: ^2.1.5
+paralleljs:
+ _latest: 0.2.1
+ _:
+  ^0.2.1: 0.2.1
+ 0.2.1:
+  $: sha1-68p0XT4JwB4r68wUhYiR/0UQ6SY=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/paralleljs/-/paralleljs-0.2.1.tgz'
 parse-asn1:
  _latest: 5.1.5
  _:
@@ -11447,15 +11853,6 @@ parse5:
   _: 'https://registry.npmjs.org/parse5/-/parse5-3.0.3.tgz'
   dependencies:
    '@types/node': '*'
-parsejson:
- _latest: 0.0.3
- _:
-  0.0.3: 0.0.3
- 0.0.3:
-  $: sha1-q343WfIJ7OmUN5c/fQ8fZK4OZKs=
-  _: 'https://registry.npmjs.org/parsejson/-/parsejson-0.0.3.tgz'
-  dependencies:
-   better-assert: ~1.0.0
 parseqs:
  _latest: 0.0.5
  _:
@@ -11546,16 +11943,12 @@ path-parse:
 path-to-regexp:
  _latest: 3.1.0
  _:
-  0.1.7: 0.1.7
   '^1.0.1,^1.7.0': 1.7.0
  1.7.0:
   $: sha1-Wf3g9DW62suhA6hOnTvGTpa5k30=
   _: 'https://registry.npmjs.org/path-to-regexp/-/path-to-regexp-1.7.0.tgz'
   dependencies:
    isarray: 0.0.1
- 0.1.7:
-  $: sha1-32BBeABfUi8V60SQ5yR6G/qmf4w=
-  _: 'https://registry.npmjs.org/path-to-regexp/-/path-to-regexp-0.1.7.tgz'
 path-type:
  _latest: 4.0.0
  _:
@@ -11738,6 +12131,13 @@ pkijs:
  1.3.33:
   $: sha1-ponvYhE7fDSOH/wJll0iOeW7TJI=
   _: 'https://registry.npmjs.org/pkijs/-/pkijs-1.3.33.tgz'
+pluralize:
+ _latest: 8.0.0
+ _:
+  ^7.0.0: 7.0.0
+ 7.0.0:
+  $: sha512-ARhBOdzS3e41FbkW/XWrTEtukqqLoK5+Z/4UeDaLuSW+39JPeFgs4gCGqsrJHVZX0fUrx//4OF0K1CUGwlIFow==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/pluralize/-/pluralize-7.0.0.tgz'
 pn:
  _latest: 1.1.0
  _:
@@ -11752,17 +12152,6 @@ pngjs:
  3.4.0:
   $: sha512-NCrCHhWmnQklfH4MtJMRjZ2a8c80qXeMlQMv2uVp9ISJMTt562SbGd6n2oq0PaPgKm7Z6pL9E2UlLIhC+SHL3w==
   _: 'https://registry.npmjs.org/pngjs/-/pngjs-3.4.0.tgz'
-portfinder:
- _latest: 1.0.25
- _:
-  ^1.0.25: 1.0.25
- 1.0.25:
-  $: sha512-6ElJnHBbxVA1XSLgBp7G1FiCkQdlqGzuF7DswL5tcea+E8UpuvPU7beVAjjRwCioTS9ZluNbu+ZyRvgTsmqEBg==
-  _: 'https://registry.npmjs.org/portfinder/-/portfinder-1.0.25.tgz'
-  dependencies:
-   async: ^2.6.2
-   debug: ^3.1.1
-   mkdirp: ^0.5.1
 posix-character-classes:
  _latest: 1.0.0
  _:
@@ -12636,6 +13025,10 @@ prepend-http:
  _latest: 3.0.1
  _:
   '^1.0.0,^1.0.1': 1.0.4
+  ^2.0.0: 2.0.0
+ 2.0.0:
+  $: sha1-6SQ0v6XqjBn0HN/UAddBo8gZ2Jc=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/prepend-http/-/prepend-http-2.0.0.tgz'
  1.0.4:
   $: sha1-1PRWKwzjaW5BrFLQ4ALlemNdxtw=
   _: 'https://registry.npmjs.org/prepend-http/-/prepend-http-1.0.4.tgz'
@@ -12646,6 +13039,13 @@ preserve:
  0.2.0:
   $: sha1-gV7R9uvGWSb4ZbMQwHE7yzMVzks=
   _: 'https://registry.npmjs.org/preserve/-/preserve-0.2.0.tgz'
+prettier:
+ _latest: 1.18.2
+ _:
+  '^1.16.4,^1.18.2': 1.18.2
+ 1.18.2:
+  $: sha512-OeHeMc0JhFE9idD4ZdtNibzY0+TPHSpSSb9h8FqtP+YnoZZ1sl8Vc9b1sasjfymH3SonAF4QcA2+mzHPhMvIiw==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/prettier/-/prettier-1.18.2.tgz'
 pretty-bytes:
  _latest: 5.3.0
  _:
@@ -12692,13 +13092,13 @@ progress:
  _latest: 2.0.3
  _:
   ^1.1.8: 1.1.8
-  ^2.0.1: 2.0.3
+  '^2.0.0,^2.0.1': 2.0.3
  2.0.3:
   $: sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==
-  _: 'https://registry.npmjs.org/progress/-/progress-2.0.3.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/progress/-/progress-2.0.3.tgz'
  1.1.8:
   $: sha1-4mDHj2Fhzdmw5WzD4Khd4Xx6V74=
-  _: 'https://registry.npmjs.org/progress/-/progress-1.1.8.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/progress/-/progress-1.1.8.tgz'
 promise:
  _latest: 8.0.3
  _:
@@ -12737,7 +13137,7 @@ prompts:
 prop-types:
  _latest: 15.7.2
  _:
-  '^15.5.6,^15.5.8,^15.6.1,^15.6.2,^15.7.2': 15.7.2
+  '^15.5.8,^15.6.1,^15.6.2,^15.7.2': 15.7.2
  15.7.2:
   $: sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
   _: 'https://registry.npmjs.org/prop-types/-/prop-types-15.7.2.tgz'
@@ -12756,16 +13156,6 @@ prop-types-exact:
    has: ^1.0.3
    object.assign: ^4.1.0
    reflect.ownkeys: ^0.2.0
-proxy-addr:
- _latest: 2.0.5
- _:
-  ~2.0.5: 2.0.5
- 2.0.5:
-  $: sha512-t/7RxHXPH6cJtP0pRG6smSr9QJidhB+3kXu0KgXnbGYMgzEnUxRQ4/LDdfOwZEMyIh3/xHb8PX3t+lfL9z+YVQ==
-  _: 'https://registry.npmjs.org/proxy-addr/-/proxy-addr-2.0.5.tgz'
-  dependencies:
-   forwarded: ~0.1.2
-   ipaddr.js: 1.9.0
 proxy-from-env:
  _latest: 1.0.0
  _:
@@ -12794,13 +13184,6 @@ psl:
  1.4.0:
   $: sha512-HZzqCGPecFLyoRj5HLfuDSKYTJkAfB5thKBIkRHtGjWwY7p1dAyveIbXIq4tO0KYfDF2tHqPUgY9SDnGm00uFw==
   _: 'https://registry.npmjs.org/psl/-/psl-1.4.0.tgz'
-pstree.remy:
- _latest: 1.1.7
- _:
-  ^1.1.7: 1.1.7
- 1.1.7:
-  $: sha512-xsMgrUwRpuGskEzBFkH8NmTimbZ5PcPup0LA8JJkHIm2IMUbQcpo3yeLNWVrufEYjh8YwtSVh0xz6UeWc5Oh5A==
-  _: 'https://registry.npmjs.org/pstree.remy/-/pstree.remy-1.1.7.tgz'
 public-encrypt:
  _latest: 4.0.3
  _:
@@ -12913,6 +13296,14 @@ query-string:
  _latest: 6.8.3
  _:
   ^4.1.0: 4.3.4
+  ^5.0.1: 5.1.1
+ 5.1.1:
+  $: sha512-gjWOsm2SoGlgLEdAGt7a6slVOk9mGiXmPFMqrEhLQ68rhQuBnpfs3+EmlvqKyxnCo9/PPlF+9MtY02S1aFg+Jw==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/query-string/-/query-string-5.1.1.tgz'
+  dependencies:
+   decode-uri-component: ^0.2.0
+   object-assign: ^4.1.0
+   strict-uri-encode: ^1.0.0
  4.3.4:
   $: sha1-u7aTucqRXCMlFbIosaArYJBD2+s=
   _: 'https://registry.npmjs.org/query-string/-/query-string-4.3.4.tgz'
@@ -13006,7 +13397,7 @@ randomfill:
 range-parser:
  _latest: 1.2.1
  _:
-  '^1.2.0,^1.2.1,~1.2.1': 1.2.1
+  '^1.2.0,^1.2.1': 1.2.1
  1.2.1:
   $: sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==
   _: 'https://registry.npmjs.org/range-parser/-/range-parser-1.2.1.tgz'
@@ -13048,6 +13439,13 @@ rc:
    ini: ~1.3.0
    minimist: ^1.2.0
    strip-json-comments: ~2.0.1
+rc-css-transition-group-modern:
+ _latest: 2.1.6
+ _:
+  ^2.1.6: 2.1.6
+ 2.1.6:
+  $: sha1-401jdSEQ7izPUYXNa6THdM/fG7c=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/rc-css-transition-group-modern/-/rc-css-transition-group-modern-2.1.6.tgz'
 react:
  _latest: 16.11.0
  _:
@@ -13304,6 +13702,15 @@ realpath-native:
   _: 'https://registry.npmjs.org/realpath-native/-/realpath-native-1.1.0.tgz'
   dependencies:
    util.promisify: ^1.0.0
+rechoir:
+ _latest: 0.7.0
+ _:
+  ^0.6.2: 0.6.2
+ 0.6.2:
+  $: sha1-hSBLVNuoLVdC4oyWdW70OvUOM4Q=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/rechoir/-/rechoir-0.6.2.tgz'
+  dependencies:
+   resolve: ^1.1.6
 redent:
  _latest: 3.0.0
  _:
@@ -13386,15 +13793,13 @@ regex-not:
   dependencies:
    extend-shallow: ^3.0.2
    safe-regex: ^1.1.0
-regexp.prototype.flags:
- _latest: 1.2.0
+regexpp:
+ _latest: 3.0.0
  _:
-  ^1.2.0: 1.2.0
- 1.2.0:
-  $: sha512-ztaw4M1VqgMwl9HlPpOuiYgItcHlunW0He2fE6eNfT6E/CF2FtYi9ofOYe4mKntstYk0Fyh/rDRBdS3AnxjlrA==
-  _: 'https://registry.npmjs.org/regexp.prototype.flags/-/regexp.prototype.flags-1.2.0.tgz'
-  dependencies:
-   define-properties: ^1.1.2
+  ^1.0.1: 1.1.0
+ 1.1.0:
+  $: sha512-LOPw8FpgdQF9etWMaAfG/WRthIdXJGYp4mJ2Jgn/2lpkbod9jPn0t9UqN7AxBOKNfzRbYyVfgc7Vk4t/MpnXgw==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/regexpp/-/regexpp-1.1.0.tgz'
 regexpu-core:
  _latest: 4.6.0
  _:
@@ -13605,6 +14010,16 @@ require-package-name:
  2.0.1:
   $: sha1-wR6XJ2tluOKSP3Xav1+y7ww4Qbk=
   _: 'https://registry.npmjs.org/require-package-name/-/require-package-name-2.0.1.tgz'
+require-uncached:
+ _latest: 2.0.0
+ _:
+  ^1.0.3: 1.0.3
+ 1.0.3:
+  $: sha1-Tg1W1slmL9MeQwEcS5WqSZVUIdM=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/require-uncached/-/require-uncached-1.0.3.tgz'
+  dependencies:
+   caller-path: ^0.1.0
+   resolve-from: ^1.0.0
 requires-port:
  _latest: 1.0.0
  _:
@@ -13630,7 +14045,7 @@ resolve:
  _latest: 1.12.0
  _:
   '1.1.7,1.1.x': 1.1.7
-  '^1.1.7,^1.10.0,^1.3.2,^1.8.1': 1.12.0
+  '^1.1.6,^1.1.7,^1.10.0,^1.12.0,^1.3.2,^1.8.1': 1.12.0
  1.12.0:
   $: sha512-B/dOmuoAik5bKcD6s6nXDCjzUKnaDvdkRyAk6rsmsKLipWj4797iothd7jmmUhWTfinVMU+wc56rYKsit2Qy4w==
   _: 'https://registry.npmjs.org/resolve/-/resolve-1.12.0.tgz'
@@ -13661,6 +14076,7 @@ resolve-dir:
 resolve-from:
  _latest: 5.0.0
  _:
+  ^1.0.0: 1.0.1
   ^3.0.0: 3.0.0
   ^4.0.0: 4.0.0
  4.0.0:
@@ -13669,6 +14085,9 @@ resolve-from:
  3.0.0:
   $: sha1-six699nWiBvItuZTM17rywoYh0g=
   _: 'https://registry.npmjs.org/resolve-from/-/resolve-from-3.0.0.tgz'
+ 1.0.1:
+  $: sha1-Jsv+k10a7uq7Kbw/5a6wHpPUQiY=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/resolve-from/-/resolve-from-1.0.1.tgz'
 resolve-pathname:
  _latest: 3.0.0
  _:
@@ -13683,6 +14102,25 @@ resolve-url:
  0.2.1:
   $: sha1-LGN/53yJOv0qZj/iGqkIAGjiBSo=
   _: 'https://registry.npmjs.org/resolve-url/-/resolve-url-0.2.1.tgz'
+responselike:
+ _latest: 2.0.0
+ _:
+  1.0.2: 1.0.2
+ 1.0.2:
+  $: sha1-kYcg7ztjHFZCvgaPFa3lpG9Loec=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/responselike/-/responselike-1.0.2.tgz'
+  dependencies:
+   lowercase-keys: ^1.0.0
+restore-cursor:
+ _latest: 3.1.0
+ _:
+  ^2.0.0: 2.0.0
+ 2.0.0:
+  $: sha1-n37ih/gv0ybU/RYpI9YhKe7g368=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/restore-cursor/-/restore-cursor-2.0.0.tgz'
+  dependencies:
+   onetime: ^2.0.0
+   signal-exit: ^3.0.2
 ret:
  _latest: 0.3.1
  _:
@@ -13690,13 +14128,6 @@ ret:
  0.1.15:
   $: sha512-TTlYpa+OL+vMMNG24xSlQGEJ3B/RzEfUlLct7b5G/ytav+wPrplCpVMFuwzXbkecJrb6IYo1iFb0S9v37754mg==
   _: 'https://registry.npmjs.org/ret/-/ret-0.1.15.tgz'
-retry:
- _latest: 0.12.0
- _:
-  ^0.12.0: 0.12.0
- 0.12.0:
-  $: sha1-G0KmJmoh8HQh0bC1S33BZ7AcATs=
-  _: 'https://registry.npmjs.org/retry/-/retry-0.12.0.tgz'
 reusify:
  _latest: 1.0.4
  _:
@@ -13729,9 +14160,15 @@ rimraf:
  _latest: 3.0.0
  _:
   '2,^2.2.8,^2.4.0,^2.5.4,^2.6.0,^2.6.1,^2.6.2,^2.6.3': 2.7.1
+  ~2.6.2: 2.6.3
  2.7.1:
   $: sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==
   _: 'https://registry.npmjs.org/rimraf/-/rimraf-2.7.1.tgz'
+  dependencies:
+   glob: ^7.1.3
+ 2.6.3:
+  $: sha512-mwqeW5XsA2qAejG46gYdENaxXjx9onRNCfn7L0duuP4hCuTIi/QO7PDK07KJfp1d+izWPrzEJDcSqBa0OZQriA==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/rimraf/-/rimraf-2.6.3.tgz'
   dependencies:
    glob: ^7.1.3
 ripemd160:
@@ -13773,6 +14210,15 @@ rsvp:
  3.6.2:
   $: sha512-OfWGQTb9vnwRjwtA2QwpG2ICclHC3pgXZO5xt8H2EfgDquO0qVdSb5T88L4qJVAEugbS56pAuV4XZM58UX8ulw==
   _: 'https://registry.npmjs.org/rsvp/-/rsvp-3.6.2.tgz'
+run-async:
+ _latest: 2.3.0
+ _:
+  ^2.2.0: 2.3.0
+ 2.3.0:
+  $: sha1-A3GrSuC91yDUFm19/aZP96RFpsA=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/run-async/-/run-async-2.3.0.tgz'
+  dependencies:
+   is-promise: ^2.1.0
 run-queue:
  _latest: 2.0.1
  _:
@@ -13782,10 +14228,26 @@ run-queue:
   _: 'https://registry.npmjs.org/run-queue/-/run-queue-1.0.3.tgz'
   dependencies:
    aproba: ^1.1.1
+rx-lite:
+ _latest: 4.0.8
+ _:
+  '*,^4.0.8': 4.0.8
+ 4.0.8:
+  $: sha1-Cx4Rr4vESDbwSmQH6S2kJGe3lEQ=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/rx-lite/-/rx-lite-4.0.8.tgz'
+rx-lite-aggregates:
+ _latest: 4.0.8
+ _:
+  ^4.0.8: 4.0.8
+ 4.0.8:
+  $: sha1-dTuHqJoRyVRnxKwWJsTvxOBcZ74=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/rx-lite-aggregates/-/rx-lite-aggregates-4.0.8.tgz'
+  dependencies:
+   rx-lite: '*'
 safe-buffer:
  _latest: 5.2.0
  _:
-  '5.1.2,>=5.1.0,^5.0.1,^5.1.0,^5.1.1,^5.1.2,~5.1.0,~5.1.1': 5.1.2
+  '^5.0.1,^5.1.0,^5.1.1,^5.1.2,~5.1.0,~5.1.1': 5.1.2
   ~5.2.0: 5.2.0
  5.2.0:
   $: sha512-fZEwUGbVl7kouZs1jCdMLdt95hdIv0ZeHg6L7qPeciMZhZ+/gdesW4wgTARkrFWEpspjEATAzUGPG8N2jJiwbg==
@@ -13943,19 +14405,10 @@ select-hose:
  2.0.0:
   $: sha1-Yl2GWPhlr0Psliv8N2o3NZpJlMo=
   _: 'https://registry.npmjs.org/select-hose/-/select-hose-2.0.0.tgz'
-selfsigned:
- _latest: 1.10.7
- _:
-  ^1.10.7: 1.10.7
- 1.10.7:
-  $: sha512-8M3wBCzeWIJnQfl43IKwOmC4H/RAp50S8DF60znzjW5GVqTcSe2vWclt7hmYVPkKPlHWOu5EaWOMZ2Y6W8ZXTA==
-  _: 'https://registry.npmjs.org/selfsigned/-/selfsigned-1.10.7.tgz'
-  dependencies:
-   node-forge: 0.9.0
 semver:
  _latest: 6.3.0
  _:
-  '2 || 3 || 4 || 5,^5.0.3,^5.1.0,^5.3.0,^5.4.1,^5.5.0,^5.5.1,^5.6.0,^5.7.0,^5.7.1': 5.7.1
+  '2 || 3 || 4 || 5,^5.0.3,^5.1.0,^5.3.0,^5.4.1,^5.5.0,^5.5.1,^5.6.0,^5.7.0': 5.7.1
   '^6.0.0,^6.3.0': 6.3.0
   ~5.3.0: 5.3.0
  6.3.0:
@@ -13976,27 +14429,6 @@ semver-diff:
   _: 'https://registry.npmjs.org/semver-diff/-/semver-diff-2.1.0.tgz'
   dependencies:
    semver: ^5.0.3
-send:
- _latest: 0.17.1
- _:
-  0.17.1: 0.17.1
- 0.17.1:
-  $: sha512-BsVKsiGcQMFwT8UxypobUKyv7irCNRHk1T0G680vk88yf6LBByGcZJOTJCrTP2xVN6yI+XjPJcNuE3V4fT9sAg==
-  _: 'https://registry.npmjs.org/send/-/send-0.17.1.tgz'
-  dependencies:
-   debug: 2.6.9
-   depd: ~1.1.2
-   destroy: ~1.0.4
-   encodeurl: ~1.0.2
-   escape-html: ~1.0.3
-   etag: ~1.8.1
-   fresh: 0.5.2
-   http-errors: ~1.7.2
-   mime: 1.6.0
-   ms: 2.1.1
-   on-finished: ~2.3.0
-   range-parser: ~1.2.1
-   statuses: ~1.5.0
 serialize-javascript:
  _latest: 2.1.0
  _:
@@ -14004,21 +14436,6 @@ serialize-javascript:
  1.9.1:
   $: sha512-0Vb/54WJ6k5v8sSWN09S0ora+Hnr+cX40r9F170nT+mSkaxltoE/7R3OrIdBSUv1OoiobH1QoWQbCnAO+e8J1A==
   _: 'https://registry.npmjs.org/serialize-javascript/-/serialize-javascript-1.9.1.tgz'
-serve-index:
- _latest: 1.9.1
- _:
-  ^1.9.1: 1.9.1
- 1.9.1:
-  $: sha1-03aNabHn2C5c4FD/9bRTvqEqkjk=
-  _: 'https://registry.npmjs.org/serve-index/-/serve-index-1.9.1.tgz'
-  dependencies:
-   accepts: ~1.3.4
-   batch: 0.6.1
-   debug: 2.6.9
-   escape-html: ~1.0.3
-   http-errors: ~1.6.2
-   mime-types: ~2.1.17
-   parseurl: ~1.3.2
 serve-index-fs:
  _latest: 1.10.1
  _:
@@ -14034,18 +14451,6 @@ serve-index-fs:
    http-errors: ~1.6.3
    mime-types: ~2.1.18
    parseurl: ~1.3.2
-serve-static:
- _latest: 1.14.1
- _:
-  1.14.1: 1.14.1
- 1.14.1:
-  $: sha512-JMrvUwE54emCYWlTI+hGrGv5I8dEwmco/00EvkzIIsR7MqrHonbD9pO2MOfFnpFntl7ecpZs+3mW+XbQZu9QCg==
-  _: 'https://registry.npmjs.org/serve-static/-/serve-static-1.14.1.tgz'
-  dependencies:
-   encodeurl: ~1.0.2
-   escape-html: ~1.0.3
-   parseurl: ~1.3.3
-   send: 0.17.1
 serviceworker-cache-polyfill:
  _latest: 4.0.0
  _:
@@ -14075,7 +14480,7 @@ set-value:
 setimmediate:
  _latest: 1.0.5
  _:
-  ^1.0.4: 1.0.5
+  '^1.0.4,~1.0.4': 1.0.5
  1.0.5:
   $: sha1-KQy7Iy4waULX1+qbg3Mqt4VvgoU=
   _: 'https://registry.npmjs.org/setimmediate/-/setimmediate-1.0.5.tgz'
@@ -14136,6 +14541,17 @@ shebang-regex:
  1.0.0:
   $: sha1-2kL0l0DAtC2yypcoVxyxkMmO/qM=
   _: 'https://registry.npmjs.org/shebang-regex/-/shebang-regex-1.0.0.tgz'
+shelljs:
+ _latest: 0.8.3
+ _:
+  ^0.8.3: 0.8.3
+ 0.8.3:
+  $: sha512-fc0BKlAWiLpwZljmOvAOTE/gXawtCoNrP5oaY7KIaQbbyHeQVg01pSEuEGvGh3HEdBU4baCD7wQBwADmM/7f7A==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/shelljs/-/shelljs-0.8.3.tgz'
+  dependencies:
+   glob: ^7.0.0
+   interpret: ^1.0.0
+   rechoir: ^0.6.2
 shellwords:
  _latest: 0.1.1
  _:
@@ -14203,6 +14619,23 @@ slash:
  1.0.0:
   $: sha1-xB8vbDn8FtHNF61LXYlhFK5HDVU=
   _: 'https://registry.npmjs.org/slash/-/slash-1.0.0.tgz'
+slice-ansi:
+ _latest: 3.0.0
+ _:
+  1.0.0: 1.0.0
+  ^2.1.0: 2.1.0
+ 2.1.0:
+  $: sha512-Qu+VC3EwYLldKa1fCxuuvULvSJOKEgk9pi8dZeCVK7TqBfUNTH4sFkk4joj8afVSfAYgJoSOetjx9QWOJ5mYoQ==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/slice-ansi/-/slice-ansi-2.1.0.tgz'
+  dependencies:
+   ansi-styles: ^3.2.0
+   astral-regex: ^1.0.0
+   is-fullwidth-code-point: ^2.0.0
+ 1.0.0:
+  $: sha512-POqxBK6Lb3q6s047D/XsDVNPnF9Dl8JSaqe9h9lURl0OdNqy/ujDrOiIHtsqXMGbWWTIomRzAMaTyawAU//Reg==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/slice-ansi/-/slice-ansi-1.0.0.tgz'
+  dependencies:
+   is-fullwidth-code-point: ^2.0.0
 snapdragon:
  _latest: 0.12.0
  _:
@@ -14243,7 +14676,6 @@ socket.io:
  _latest: 2.3.0
  _:
   2.1.1: 2.1.1
-  ^1.7.3: 1.7.4
  2.1.1:
   $: sha512-rORqq9c+7W0DAK3cleWNSyfv/qKXV99hV4tZe+gGLfBECw3XEhBy7x85F3wypA9688LKjtwO9pX9L33/xQI8yA==
   _: 'https://registry.npmjs.org/socket.io/-/socket.io-2.1.1.tgz'
@@ -14254,35 +14686,16 @@ socket.io:
    socket.io-adapter: ~1.1.0
    socket.io-client: 2.1.1
    socket.io-parser: ~3.2.0
- 1.7.4:
-  $: sha1-L37O3DORvy1cc+KR/iM+bjTU3QA=
-  _: 'https://registry.npmjs.org/socket.io/-/socket.io-1.7.4.tgz'
-  dependencies:
-   debug: 2.3.3
-   engine.io: ~1.8.4
-   has-binary: 0.1.7
-   object-assign: 4.1.0
-   socket.io-adapter: 0.5.0
-   socket.io-client: 1.7.4
-   socket.io-parser: 2.3.1
 socket.io-adapter:
  _latest: 1.1.1
  _:
-  0.5.0: 0.5.0
   ~1.1.0: 1.1.1
  1.1.1:
   $: sha1-KoBeihTWNyEk3ZFZrUUC+MsH8Gs=
   _: 'https://registry.npmjs.org/socket.io-adapter/-/socket.io-adapter-1.1.1.tgz'
- 0.5.0:
-  $: sha1-y21LuL7IHhB4uZZ3+c7QBGBmu4s=
-  _: 'https://registry.npmjs.org/socket.io-adapter/-/socket.io-adapter-0.5.0.tgz'
-  dependencies:
-   debug: 2.3.3
-   socket.io-parser: 2.3.1
 socket.io-client:
  _latest: 2.3.0
  _:
-  1.7.4: 1.7.4
   2.1.1: 2.1.1
  2.1.1:
   $: sha512-jxnFyhAuFxYfjqIgduQlhzqTcOEQSn+OHKVfAxWaNWa7ecP7xSNk2Dx/3UEsDcY7NcFafxvNvKPmmO7HTwTxGQ==
@@ -14302,25 +14715,9 @@ socket.io-client:
    parseuri: 0.0.5
    socket.io-parser: ~3.2.0
    to-array: 0.1.4
- 1.7.4:
-  $: sha1-7J+CA1btme9tNX8HVtZIcXvdQoE=
-  _: 'https://registry.npmjs.org/socket.io-client/-/socket.io-client-1.7.4.tgz'
-  dependencies:
-   backo2: 1.0.2
-   component-bind: 1.0.0
-   component-emitter: 1.2.1
-   debug: 2.3.3
-   engine.io-client: ~1.8.4
-   has-binary: 0.1.7
-   indexof: 0.0.1
-   object-component: 0.0.3
-   parseuri: 0.0.5
-   socket.io-parser: 2.3.1
-   to-array: 0.1.4
 socket.io-parser:
  _latest: 3.4.0
  _:
-  2.3.1: 2.3.1
   ~3.2.0: 3.2.0
  3.2.0:
   $: sha512-FYiBx7rc/KORMJlgsXysflWx/RIvtqZbyGLlHZvjfmPTPeuD/I8MaW7cfFrj5tRltICJdgwflhfZ3NVVbVLFQA==
@@ -14329,38 +14726,6 @@ socket.io-parser:
    debug: ~3.1.0
    component-emitter: 1.2.1
    isarray: 2.0.1
- 2.3.1:
-  $: sha1-3VMgJRA85Clpcya+/WQAX8/ltKA=
-  _: 'https://registry.npmjs.org/socket.io-parser/-/socket.io-parser-2.3.1.tgz'
-  dependencies:
-   debug: 2.2.0
-   json3: 3.3.2
-   component-emitter: 1.1.2
-   isarray: 0.0.1
-sockjs:
- _latest: 0.3.19
- _:
-  0.3.19: 0.3.19
- 0.3.19:
-  $: sha512-V48klKZl8T6MzatbLlzzRNhMepEys9Y4oGFpypBFFn1gLI/QQ9HtLLyWJNbPlwGLelOVOEijUbTTJeLLI59jLw==
-  _: 'https://registry.npmjs.org/sockjs/-/sockjs-0.3.19.tgz'
-  dependencies:
-   faye-websocket: ^0.10.0
-   uuid: ^3.0.1
-sockjs-client:
- _latest: 1.4.0
- _:
-  1.4.0: 1.4.0
- 1.4.0:
-  $: sha512-5zaLyO8/nri5cua0VtOrFXBPK1jbL4+1cebT/mmKA1E1ZXOvJrII75bPu0l0k843G/+iAbhEqzyKr0w/eCCj7g==
-  _: 'https://registry.npmjs.org/sockjs-client/-/sockjs-client-1.4.0.tgz'
-  dependencies:
-   debug: ^3.2.5
-   eventsource: ^1.0.7
-   faye-websocket: ~0.11.1
-   inherits: ^2.0.3
-   json3: ^3.3.2
-   url-parse: ^1.4.3
 sonic-boom:
  _latest: 0.7.6
  _:
@@ -14374,6 +14739,12 @@ sort-keys:
  _latest: 4.0.0
  _:
   ^1.0.0: 1.1.2
+  ^2.0.0: 2.0.0
+ 2.0.0:
+  $: sha1-ZYU1WEhh7JfXMNbPQYIuH1ZoQSg=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/sort-keys/-/sort-keys-2.0.0.tgz'
+  dependencies:
+   is-plain-obj: ^1.0.0
  1.1.2:
   $: sha1-RBttTTRnmPG05J6JIK37oOVD+a0=
   _: 'https://registry.npmjs.org/sort-keys/-/sort-keys-1.1.2.tgz'
@@ -14500,7 +14871,7 @@ spdx-license-ids:
 spdy:
  _latest: 4.0.1
  _:
-  '^4.0.0,^4.0.1': 4.0.1
+  ^4.0.0: 4.0.1
  4.0.1:
   $: sha512-HeZS3PBdMA+sZSu0qwpCxl3DeALD5ASx8pAX0jZdKXSpPWbQ6SYGnlg3BBmYLx5LtiZrmkAZfErCm2oECBcioA==
   _: 'https://registry.npmjs.org/spdy/-/spdy-4.0.1.tgz'
@@ -14736,7 +15107,7 @@ string-width:
  _latest: 4.1.0
  _:
   '^1.0.1,^1.0.2,^1.0.2 || 2': 1.0.2
-  '^2.0.0,^2.1.1': 2.1.1
+  '^2.0.0,^2.1.0,^2.1.1': 2.1.1
   '^3.0.0,^3.1.0': 3.1.0
  3.1.0:
   $: sha512-vafcv6KjVZKSgz06oM/H6GDBrAtz8vdhQakGjFIvNrHA6y3HCF1CInLy+QLq8dTJPQ1b+KDUqDFctkdRW44e1w==
@@ -14944,10 +15315,11 @@ sugarss:
 supports-color:
  _latest: 7.1.0
  _:
+  4.4.0: 4.4.0
   '6.1.0,^6.1.0': 6.1.0
   ^2.0.0: 2.0.0
   '^3.1.0,^3.1.2,^3.2.3': 3.2.3
-  '^5.1.0,^5.3.0,^5.4.0,^5.5.0': 5.5.0
+  '^5.1.0,^5.3.0,^5.4.0': 5.5.0
  6.1.0:
   $: sha512-qe1jfm1Mg7Nq/NSh6XE24gPXROEVsWHxC1LIx//XNlD9iw7YZQGjZNjYN7xGaEG6iKdA8EtNFW6R0gjnVXp+wQ==
   _: 'https://registry.npmjs.org/supports-color/-/supports-color-6.1.0.tgz'
@@ -14958,14 +15330,19 @@ supports-color:
   _: 'https://registry.npmjs.org/supports-color/-/supports-color-5.5.0.tgz'
   dependencies:
    has-flag: ^3.0.0
+ 4.4.0:
+  $: sha512-rKC3+DyXWgK0ZLKwmRsrkyHVZAjNkfzeehuFWdGGcqGDTZFH73+RH6S/RDAAxl9GusSjZSUWYLmT9N5pzXFOXQ==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/supports-color/-/supports-color-4.4.0.tgz'
+  dependencies:
+   has-flag: ^2.0.0
  3.2.3:
   $: sha1-ZawFBLOVQXHYpklGsq48u4pfVPY=
-  _: 'https://registry.npmjs.org/supports-color/-/supports-color-3.2.3.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/supports-color/-/supports-color-3.2.3.tgz'
   dependencies:
    has-flag: ^1.0.0
  2.0.0:
   $: sha1-U10EXOa2Nj+kARcIRimZXp3zJMc=
-  _: 'https://registry.npmjs.org/supports-color/-/supports-color-2.0.0.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/supports-color/-/supports-color-2.0.0.tgz'
 svg2png:
  _latest: 4.1.1
  _:
@@ -15055,6 +15432,29 @@ symbol-tree:
  3.2.4:
   $: sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==
   _: 'https://registry.npmjs.org/symbol-tree/-/symbol-tree-3.2.4.tgz'
+table:
+ _latest: 5.4.6
+ _:
+  4.0.2: 4.0.2
+  ^5.0.2: 5.4.6
+ 5.4.6:
+  $: sha512-wmEc8m4fjnob4gt5riFRtTu/6+4rSe12TpAELNSqHMfF3IqnA+CH37USM6/YR3qRZv7e56kAEAtd6nKZaxe0Ug==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/table/-/table-5.4.6.tgz'
+  dependencies:
+   ajv: ^6.10.2
+   lodash: ^4.17.14
+   slice-ansi: ^2.1.0
+   string-width: ^3.0.0
+ 4.0.2:
+  $: sha512-UUkEAPdSGxtRpiV9ozJ5cMTtYiqz7Ni1OGqLXRCynrvzdtR1p+cfOWe2RJLwvUG8hNanaSRjecIqwOjqeatDsA==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/table/-/table-4.0.2.tgz'
+  dependencies:
+   ajv: ^5.2.3
+   ajv-keywords: ^2.1.0
+   chalk: ^2.1.0
+   lodash: ^4.17.4
+   slice-ansi: 1.0.0
+   string-width: ^2.1.1
 tapable:
  _latest: 1.1.3
  _:
@@ -15134,6 +15534,13 @@ test-exclude:
    object-assign: ^4.1.0
    read-pkg-up: ^1.0.1
    require-main-filename: ^1.0.1
+text-table:
+ _latest: 0.2.0
+ _:
+  ~0.2.0: 0.2.0
+ 0.2.0:
+  $: sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/text-table/-/text-table-0.2.0.tgz'
 throat:
  _latest: 5.0.0
  _:
@@ -15148,6 +15555,13 @@ throttleit:
  1.0.0:
   $: sha1-nnhYNtr0Z0MUWlmEtiaNgoUorGw=
   _: 'https://registry.npmjs.org/throttleit/-/throttleit-1.0.0.tgz'
+through:
+ _latest: 2.3.8
+ _:
+  '^2.3.6,^2.3.8': 2.3.8
+ 2.3.8:
+  $: sha1-DdTJ/6q8NXlgsbckEV1+Doai4fU=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/through/-/through-2.3.8.tgz'
 through2:
  _latest: 3.0.1
  _:
@@ -15158,20 +15572,13 @@ through2:
   dependencies:
    readable-stream: ~2.3.6
    xtend: ~4.0.1
-thunky:
- _latest: 1.1.0
- _:
-  ^1.0.2: 1.1.0
- 1.1.0:
-  $: sha512-eHY7nBftgThBqOyHGVN+l8gF0BucP09fMo0oO/Lb0w1OF80dJv+lDVpXG60WMQvkcxAkNybKsrEIE3ZtKGmPrA==
-  _: 'https://registry.npmjs.org/thunky/-/thunky-1.1.0.tgz'
 timed-out:
  _latest: 5.0.0
  _:
-  ^4.0.0: 4.0.1
+  '^4.0.0,^4.0.1': 4.0.1
  4.0.1:
   $: sha1-8y6srFoXW+ol1/q1Zas+2HQe9W8=
-  _: 'https://registry.npmjs.org/timed-out/-/timed-out-4.0.1.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/timed-out/-/timed-out-4.0.1.tgz'
 timers-browserify:
  _latest: 2.0.11
  _:
@@ -15212,7 +15619,7 @@ tinycolor2:
 tmp:
  _latest: 0.1.0
  _:
-  '0.0.33,0.0.x': 0.0.33
+  '0.0.33,0.0.x,^0.0.33': 0.0.33
  0.0.33:
   $: sha512-jRCJlojKnZ3addtTOjdIqoRuPEKBvNXcGYqzO6zWZX8KfKEpnGY5jfggJQ3EjKuu8D4bJRr0y+cYJFmYbImXGw==
   _: 'https://registry.npmjs.org/tmp/-/tmp-0.0.33.tgz'
@@ -15301,15 +15708,6 @@ toidentifier:
  1.0.0:
   $: sha512-yaOH/Pk/VEhBWWTlhI+qXxDFXlejDGcQipMlyxda9nthulaxLZUNcUqFxokp0vcYnvteJln5FNQDRrxj3YcbVw==
   _: 'https://registry.npmjs.org/toidentifier/-/toidentifier-1.0.0.tgz'
-touch:
- _latest: 3.1.0
- _:
-  ^3.1.0: 3.1.0
- 3.1.0:
-  $: sha512-WBx8Uy5TLtOSRtIq+M03/sKDrXCLHxwDcquSP2c43Le03/9serjQBIztjRz6FkJez9D/hleyAXTBGLwwZUw9lA==
-  _: 'https://registry.npmjs.org/touch/-/touch-3.1.0.tgz'
-  dependencies:
-   nopt: ~1.0.10
 tough-cookie:
  _latest: 3.0.1
  _:
@@ -15329,6 +15727,13 @@ tr46:
   _: 'https://registry.npmjs.org/tr46/-/tr46-1.0.1.tgz'
   dependencies:
    punycode: ^2.1.0
+traverse:
+ _latest: 0.6.6
+ _:
+  '>=0.3.0 <0.4': 0.3.9
+ 0.3.9:
+  $: sha1-cXuPIgzAu3tE5AUUwisui7xw2Lk=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/traverse/-/traverse-0.3.9.tgz'
 trim-newlines:
  _latest: 3.0.0
  _:
@@ -15401,7 +15806,7 @@ type-detect:
 type-is:
  _latest: 1.6.18
  _:
-  '~1.6.17,~1.6.18': 1.6.18
+  ~1.6.17: 1.6.18
  1.6.18:
   $: sha512-TkRKr9sUTxEH8MdfuCSP7VizJyzRNMjj2J2do2Jr3Kym598JVdEksuzPQCnlFPW4ky9Q+iA+ma9BGm06XQBy8g==
   _: 'https://registry.npmjs.org/type-is/-/type-is-1.6.18.tgz'
@@ -15418,10 +15823,17 @@ typedarray:
 typescript:
  _latest: 3.6.4
  _:
-  ^3.2.1: 3.6.4
+  '^3.2.1,^3.4': 3.6.4
  3.6.4:
   $: sha512-unoCll1+l+YK4i4F8f22TaNVPRHcD9PA3yCuZ8g5e0qGqlVlJ/8FSateOLLSagn+Yg5+ZwuPkL8LFUc0Jcvksg==
   _: 'https://registry.npmjs.org/typescript/-/typescript-3.6.4.tgz'
+typescript-compiler:
+ _latest: 1.4.1-2
+ _:
+  ^1.4.1-2: 1.4.1-2
+ 1.4.1-2:
+  $: sha1-uk99si2RU0oZKdkACdzhYety/T8=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/typescript-compiler/-/typescript-compiler-1.4.1-2.tgz'
 uglify-es:
  _latest: 3.3.9
  _:
@@ -15445,23 +15857,10 @@ uglify-js:
 ultron:
  _latest: 1.1.1
  _:
-  1.0.x: 1.0.2
   ~1.1.0: 1.1.1
  1.1.1:
   $: sha512-UIEXBNeYmKptWH6z8ZnqTeS8fV74zG0/eRU9VGkpzz+LIJNs8W/zM/L+7ctCkRrgbNnnR0xxw4bKOr0cW0N0Og==
   _: 'https://registry.npmjs.org/ultron/-/ultron-1.1.1.tgz'
- 1.0.2:
-  $: sha1-rOEWq1V80Zc4ak6I9GhTeMiy5Po=
-  _: 'https://registry.npmjs.org/ultron/-/ultron-1.0.2.tgz'
-undefsafe:
- _latest: 2.0.2
- _:
-  ^2.0.2: 2.0.2
- 2.0.2:
-  $: sha1-Il9rngM3Zj4Njnz9aG/Cg2zKznY=
-  _: 'https://registry.npmjs.org/undefsafe/-/undefsafe-2.0.2.tgz'
-  dependencies:
-   debug: ^2.2.0
 underscore:
  _latest: 1.9.1
  _:
@@ -15553,6 +15952,15 @@ unique-string:
   _: 'https://registry.npmjs.org/unique-string/-/unique-string-1.0.0.tgz'
   dependencies:
    crypto-random-string: ^1.0.0
+universal-user-agent:
+ _latest: 4.0.0
+ _:
+  ^4.0.0: 4.0.0
+ 4.0.0:
+  $: sha512-eM8knLpev67iBDizr/YtqkJsF3GK8gzDc6st/WKzrTuPtcsOKW/0IdL4cnMBsU69pOx0otavLWBDGTwg+dB0aA==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/universal-user-agent/-/universal-user-agent-4.0.0.tgz'
+  dependencies:
+   os-name: ^3.1.0
 universalify:
  _latest: 0.1.2
  _:
@@ -15600,6 +16008,23 @@ unzip-response:
  2.0.1:
   $: sha1-0vD3N9FrBhXnKmk17QQhRXLVb5c=
   _: 'https://registry.npmjs.org/unzip-response/-/unzip-response-2.0.1.tgz'
+unzipper:
+ _latest: 0.10.5
+ _:
+  ^0.9.3: 0.9.15
+ 0.9.15:
+  $: sha512-2aaUvO4RAeHDvOCuEtth7jrHFaCKTSXPqUkXwADaLBzGbgZGzUDccoEdJ5lW+3RmfpOZYNx0Rw6F6PUzM6caIA==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/unzipper/-/unzipper-0.9.15.tgz'
+  dependencies:
+   big-integer: ^1.6.17
+   binary: ~0.3.0
+   bluebird: ~3.4.1
+   buffer-indexof-polyfill: ~1.0.0
+   duplexer2: ~0.1.4
+   fstream: ^1.0.12
+   listenercount: ~1.0.1
+   readable-stream: ~2.3.6
+   setimmediate: ~1.0.4
 upath:
  _latest: 1.2.0
  _:
@@ -15610,7 +16035,7 @@ upath:
 update-notifier:
  _latest: 3.0.1
  _:
-  '^2.3.0,^2.5.0': 2.5.0
+  ^2.3.0: 2.5.0
  2.5.0:
   $: sha512-gwMdhgJHGuj/+wHJJs9e6PcCszpxR1b236igrOkUofGhqJuG+amlIKwApH1IW1WWl7ovZxsX49lMBWLxSdm5Dw==
   _: 'https://registry.npmjs.org/update-notifier/-/update-notifier-2.5.0.tgz'
@@ -15685,9 +16110,15 @@ url-parse-lax:
  _latest: 4.0.0
  _:
   ^1.0.0: 1.0.0
+  ^3.0.0: 3.0.0
+ 3.0.0:
+  $: sha1-FrXK/Afb42dsGxmZF3gj1lA6yww=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/url-parse-lax/-/url-parse-lax-3.0.0.tgz'
+  dependencies:
+   prepend-http: ^2.0.0
  1.0.0:
   $: sha1-evjzA2Rem9eaJy56FKxovAYJ2nM=
-  _: 'https://registry.npmjs.org/url-parse-lax/-/url-parse-lax-1.0.0.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/url-parse-lax/-/url-parse-lax-1.0.0.tgz'
   dependencies:
    prepend-http: ^1.0.1
 url-regex:
@@ -15699,6 +16130,13 @@ url-regex:
   _: 'https://registry.npmjs.org/url-regex/-/url-regex-3.2.0.tgz'
   dependencies:
    ip-regex: ^1.0.1
+url-to-options:
+ _latest: 2.0.0
+ _:
+  ^1.0.1: 1.0.1
+ 1.0.1:
+  $: sha1-FQWgOiiaSMvXpDTvuu7FBV9WM6k=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/url-to-options/-/url-to-options-1.0.1.tgz'
 ursa-optional:
  _latest: 0.10.1
  _:
@@ -15769,7 +16207,7 @@ utils-merge:
 uuid:
  _latest: 3.3.3
  _:
-  '^3.0.1,^3.3.2': 3.3.3
+  ^3.3.2: 3.3.3
  3.3.3:
   $: sha512-pW0No1RGHgzlpHJO1nsVrHKpOEIxkGg1xB+v0ZmdNH5OAeAwzAVrCnI2/6Mtx+Uys6iaylxa+D3g4j63IKKjSQ==
   _: 'https://registry.npmjs.org/uuid/-/uuid-3.3.3.tgz'
@@ -15804,13 +16242,6 @@ value-equal:
  1.0.1:
   $: sha512-NOJ6JZCAWr0zlxZt+xqCHNTEKOsrks2HQd4MqhP1qy4z1SkbEP467eNx6TgDKXMvUOb+OENfJCZwM+16n7fRfw==
   _: 'https://registry.npmjs.org/value-equal/-/value-equal-1.0.1.tgz'
-vary:
- _latest: 1.1.2
- _:
-  ~1.1.2: 1.1.2
- 1.1.2:
-  $: sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
-  _: 'https://registry.npmjs.org/vary/-/vary-1.1.2.tgz'
 vendors:
  _latest: 1.0.3
  _:
@@ -15972,10 +16403,10 @@ webpack-cli:
   peerDependencies:
    webpack: 4.x.x
 webpack-config-composer:
- _latest: 1.1.1-fynlocal_h
+ _latest: 1.1.2-fynlocal_h
  _:
-  ../webpack-config-composer: 1.1.1-fynlocal_h
- 1.1.1-fynlocal_h:
+  ../webpack-config-composer: 1.1.2-fynlocal_h
+ 1.1.2-fynlocal_h:
   $: local
   _: ../../packages/webpack-config-composer
   dependencies:
@@ -15983,7 +16414,7 @@ webpack-config-composer:
 webpack-dev-middleware:
  _latest: 3.7.2
  _:
-  '^3.2.0,^3.4.0,^3.7.2': 3.7.2
+  '^3.2.0,^3.4.0': 3.7.2
  3.7.2:
   $: sha512-1xC42LxbYoqLNAhV6YzTYacicgMZQTqRd27Sim9wn5hJrX3I5nxYy1SxSd4+gjUFsz1dQFj+yEe6zEVmSkeJjw==
   _: 'https://registry.npmjs.org/webpack-dev-middleware/-/webpack-dev-middleware-3.7.2.tgz'
@@ -15993,49 +16424,6 @@ webpack-dev-middleware:
    mkdirp: ^0.5.1
    range-parser: ^1.2.1
    webpack-log: ^2.0.0
-  peerDependencies:
-   webpack: ^4.0.0
-webpack-dev-server:
- _latest: 3.9.0
- _:
-  ^3.1.10: 3.9.0
- 3.9.0:
-  $: sha512-E6uQ4kRrTX9URN9s/lIbqTAztwEPdvzVrcmHE8EQ9YnuT9J8Es5Wrd8n9BKg1a0oZ5EgEke/EQFgUsp18dSTBw==
-  _: 'https://registry.npmjs.org/webpack-dev-server/-/webpack-dev-server-3.9.0.tgz'
-  dependencies:
-   ansi-html: 0.0.7
-   bonjour: ^3.5.0
-   chokidar: ^2.1.8
-   compression: ^1.7.4
-   connect-history-api-fallback: ^1.6.0
-   debug: ^4.1.1
-   del: ^4.1.1
-   express: ^4.17.1
-   html-entities: ^1.2.1
-   http-proxy-middleware: 0.19.1
-   import-local: ^2.0.0
-   internal-ip: ^4.3.0
-   ip: ^1.1.5
-   is-absolute-url: ^3.0.3
-   killable: ^1.0.1
-   loglevel: ^1.6.4
-   opn: ^5.5.0
-   p-retry: ^3.0.1
-   portfinder: ^1.0.25
-   schema-utils: ^1.0.0
-   selfsigned: ^1.10.7
-   semver: ^6.3.0
-   serve-index: ^1.9.1
-   sockjs: 0.3.19
-   sockjs-client: 1.4.0
-   spdy: ^4.0.1
-   strip-ansi: ^3.0.1
-   supports-color: ^6.1.0
-   url: ^0.11.0
-   webpack-dev-middleware: ^3.7.2
-   webpack-log: ^2.0.0
-   ws: ^6.2.1
-   yargs: 12.0.5
   peerDependencies:
    webpack: ^4.0.0
 webpack-disk-plugin:
@@ -16095,24 +16483,6 @@ webpack-stats-plugin:
  0.2.1:
   $: sha512-OYMZLpZrK/qLA79NE4kC4DCt85h/5ipvWJcsefKe9MMw0qU4/ck/IJg+4OmWA+5EfrZZpHXDq92IptfYDWVfkw==
   _: 'https://registry.npmjs.org/webpack-stats-plugin/-/webpack-stats-plugin-0.2.1.tgz'
-websocket-driver:
- _latest: 0.7.3
- _:
-  '>=0.5.1': 0.7.3
- 0.7.3:
-  $: sha512-bpxWlvbbB459Mlipc5GBzzZwhoZgGEZLuqPaR0INBGnPAY1vdBX6hPnoFXiw+3yWxDuHyQjO2oXTMyS8A5haFg==
-  _: 'https://registry.npmjs.org/websocket-driver/-/websocket-driver-0.7.3.tgz'
-  dependencies:
-   http-parser-js: '>=0.4.0 <0.4.11'
-   safe-buffer: '>=5.1.0'
-   websocket-extensions: '>=0.1.1'
-websocket-extensions:
- _latest: 0.1.3
- _:
-  '>=0.1.1': 0.1.3
- 0.1.3:
-  $: sha512-nqHUnMXmBzT0w570r2JpJxfiSD1IzoI+HGVdd3aZ0yNi3ngvQ4jv1dtHt5VGxfI2yj5yqImPhOK4vmIh2xMbGg==
-  _: 'https://registry.npmjs.org/websocket-extensions/-/websocket-extensions-0.1.3.tgz'
 whatwg-encoding:
  _latest: 1.0.5
  _:
@@ -16190,13 +16560,18 @@ window-size:
  _latest: 1.1.1
  _:
   ^0.1.4: 0.1.4
-  ^0.2.0: 0.2.0
- 0.2.0:
-  $: sha1-tDFbtCFKPXBY6+7okuE/ok2YsHU=
-  _: 'https://registry.npmjs.org/window-size/-/window-size-0.2.0.tgz'
  0.1.4:
   $: sha1-+OGqHuWlPsW/FR/6CXQqatdpeHY=
   _: 'https://registry.npmjs.org/window-size/-/window-size-0.1.4.tgz'
+windows-release:
+ _latest: 3.2.0
+ _:
+  ^3.1.0: 3.2.0
+ 3.2.0:
+  $: sha512-QTlz2hKLrdqukrsapKsINzqMgOUpQW268eJ0OaOpJN32h272waxR9fkB9VoWRtK7uKHG5EHJcTXQBD8XZVJkFA==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/windows-release/-/windows-release-3.2.0.tgz'
+  dependencies:
+   execa: ^1.0.0
 winston:
  _latest: 3.2.1
  _:
@@ -16256,6 +16631,15 @@ wrappy:
  1.0.2:
   $: sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
   _: 'https://registry.npmjs.org/wrappy/-/wrappy-1.0.2.tgz'
+write:
+ _latest: 2.0.0
+ _:
+  ^0.2.1: 0.2.1
+ 0.2.1:
+  $: sha1-X8A4KOJkzqP+kUVUdvejxWbLB1c=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/write/-/write-0.2.1.tgz'
+  dependencies:
+   mkdirp: ^0.5.1
 write-file-atomic:
  _latest: 3.0.1
  _:
@@ -16271,8 +16655,7 @@ ws:
  _latest: 7.2.0
  _:
   ^5.2.0: 5.2.2
-  '^6.1.0,^6.2.1': 6.2.1
-  ~1.1.5: 1.1.5
+  ^6.1.0: 6.2.1
   ~3.3.1: 3.3.3
  6.2.1:
   $: sha512-GIyAXC2cB7LjvpgMt9EKS2ldqr0MTrORaleiOno6TweZ6r3TKtoFQWay/2PceJ3RuBasOHzXNn5Lrw1X0bEjqA==
@@ -16291,26 +16674,13 @@ ws:
    async-limiter: ~1.0.0
    safe-buffer: ~5.1.0
    ultron: ~1.1.0
- 1.1.5:
-  $: sha512-o3KqipXNUdS7wpQzBHSe180lBGO60SoK0yVo3CYJgb2MkobuWuBX6dhkYP5ORCLd55y+SaflMOV5fqAB53ux4w==
-  _: 'https://registry.npmjs.org/ws/-/ws-1.1.5.tgz'
-  dependencies:
-   options: '>=0.0.5'
-   ultron: 1.0.x
-wtf-8:
- _latest: 1.0.1
- _:
-  1.0.0: 1.0.0
- 1.0.0:
-  $: sha1-OS2LotDxw00e4tYw8V0O+2jhBIo=
-  _: 'https://registry.npmjs.org/wtf-8/-/wtf-8-1.0.0.tgz'
 xclap:
- _latest: 0.2.37
+ _latest: 0.2.38
  _:
-  ^0.2.37: 0.2.37
- 0.2.37:
-  $: sha512-pB+1kedlEfZ5fkBVwjLdRpdLDIiU4aVPEaQ8+bg7P/oolfevbmCl01lwF3pc4c0mc5mqygJetTAST3hPVJ8AaA==
-  _: 'https://registry.npmjs.org/xclap/-/xclap-0.2.37.tgz'
+  ^0.2.38: 0.2.38
+ 0.2.38:
+  $: sha512-FqiqZEHnscTwgitgr6as5UF8mMvgelui6w23V/KGT1GfFGS6YyqofHMEoYVBWIPVXdX7EbgdhlU7sinnLTXlwQ==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/xclap/-/xclap-0.2.38.tgz'
   dependencies:
    chalk: ^2.0.1
    insync: ^2.1.1
@@ -16389,14 +16759,10 @@ xmlbuilder:
 xmlhttprequest-ssl:
  _latest: 1.6.0
  _:
-  1.5.3: 1.5.3
   ~1.5.4: 1.5.5
  1.5.5:
   $: sha1-wodrBhaKrcQOV9l+gRkayPQ5iz4=
   _: 'https://registry.npmjs.org/xmlhttprequest-ssl/-/xmlhttprequest-ssl-1.5.5.tgz'
- 1.5.3:
-  $: sha1-GFqIjATspGw+QHDZn3tJ3jUomS0=
-  _: 'https://registry.npmjs.org/xmlhttprequest-ssl/-/xmlhttprequest-ssl-1.5.3.tgz'
 xsh:
  _latest: 0.4.4
  _:
@@ -16438,12 +16804,11 @@ yallist:
 yargs:
  _latest: 14.2.0
  _:
-  12.0.5: 12.0.5
   13.2.4: 13.2.4
   ^11.0.0: 11.1.1
+  ^12.0.2: 12.0.5
   ^13.2.2: 13.3.0
   ^3.31.0: 3.32.0
-  ^5.0.0: 5.0.0
   ^7.0.0: 7.1.0
  13.3.0:
   $: sha512-2eehun/8ALW8TLoIl7MVaRUrg+yCnenu8B4kBlRxj3GJGDKU1Og7sMXPNm1BYyM1DOJmTZ4YeN/Nwxv+8XJsUA==
@@ -16476,7 +16841,7 @@ yargs:
    yargs-parser: ^13.1.0
  12.0.5:
   $: sha512-Lhz8TLaYnxq/2ObqHDql8dX8CJi97oHxrjUcYtzKbbykPtVW9WB+poxI+NM2UIzsMgNCZTIf0AQwsjK5yMAqZw==
-  _: 'https://registry.npmjs.org/yargs/-/yargs-12.0.5.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/yargs/-/yargs-12.0.5.tgz'
   dependencies:
    cliui: ^4.0.0
    decamelize: ^1.2.0
@@ -16492,7 +16857,7 @@ yargs:
    yargs-parser: ^11.1.1
  11.1.1:
   $: sha512-PRU7gJrJaXv3q3yQZ/+/X6KBswZiaQ+zOmdprZcouPYtQgvNU35i+68M4b1ZHLZtYFT5QObFLV+ZkmJYcwKdiw==
-  _: 'https://registry.npmjs.org/yargs/-/yargs-11.1.1.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/yargs/-/yargs-11.1.1.tgz'
   dependencies:
    cliui: ^4.0.0
    decamelize: ^1.1.1
@@ -16508,7 +16873,7 @@ yargs:
    yargs-parser: ^9.0.2
  7.1.0:
   $: sha1-a6MY6xaWFyf10oT46gA+jWFU0Mg=
-  _: 'https://registry.npmjs.org/yargs/-/yargs-7.1.0.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/yargs/-/yargs-7.1.0.tgz'
   dependencies:
    camelcase: ^3.0.0
    cliui: ^3.2.0
@@ -16523,27 +16888,9 @@ yargs:
    which-module: ^1.0.0
    y18n: ^3.2.1
    yargs-parser: ^5.0.0
- 5.0.0:
-  $: sha1-M1UUSXfQV1fbuG1uOOwFYSOzpm4=
-  _: 'https://registry.npmjs.org/yargs/-/yargs-5.0.0.tgz'
-  dependencies:
-   cliui: ^3.2.0
-   decamelize: ^1.1.1
-   get-caller-file: ^1.0.1
-   lodash.assign: ^4.2.0
-   os-locale: ^1.4.0
-   read-pkg-up: ^1.0.1
-   require-directory: ^2.1.1
-   require-main-filename: ^1.0.1
-   set-blocking: ^2.0.0
-   string-width: ^1.0.2
-   which-module: ^1.0.0
-   window-size: ^0.2.0
-   y18n: ^3.2.1
-   yargs-parser: ^3.2.0
  3.32.0:
   $: sha1-AwiOnr+edWtpdRYR0qXvWRSCyZU=
-  _: 'https://registry.npmjs.org/yargs/-/yargs-3.32.0.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/yargs/-/yargs-3.32.0.tgz'
   dependencies:
    camelcase: ^2.0.1
    cliui: ^3.0.3
@@ -16557,7 +16904,6 @@ yargs-parser:
  _:
   ^11.1.1: 11.1.1
   '^13.0.0,^13.1.0,^13.1.1': 13.1.1
-  ^3.2.0: 3.2.0
   ^5.0.0: 5.0.0
   ^9.0.2: 9.0.2
  13.1.1:
@@ -16582,12 +16928,6 @@ yargs-parser:
   _: 'https://registry.npmjs.org/yargs-parser/-/yargs-parser-5.0.0.tgz'
   dependencies:
    camelcase: ^3.0.0
- 3.2.0:
-  $: sha1-UIE1XRnZ0MjF2BrakIy05tGGZk8=
-  _: 'https://registry.npmjs.org/yargs-parser/-/yargs-parser-3.2.0.tgz'
-  dependencies:
-   camelcase: ^3.0.0
-   lodash.assign: ^4.1.0
 yauzl:
  _latest: 2.10.0
  _:

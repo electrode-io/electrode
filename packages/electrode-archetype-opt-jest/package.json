@@ -38,6 +38,7 @@
   "electrodeOptArchetype": {
     "optionalTagName": "jest",
     "expectTag": true,
+    "devOnly": true,
     "defaultInstall": true
   }
 }

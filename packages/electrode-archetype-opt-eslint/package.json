@@ -38,6 +38,7 @@
   "electrodeOptArchetype": {
     "optionalTagName": "eslint",
     "expectTag": true,
+    "devOnly": true,
     "defaultInstall": true
   }
 }

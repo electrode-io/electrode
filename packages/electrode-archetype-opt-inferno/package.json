@@ -36,6 +36,7 @@
   "electrodeOptArchetype": {
     "optionalTagName": "reactLib",
     "expectTag": "inferno",
+    "devOnly": false,
     "onlyOneOf": [
       "electrode-archetype-opt-react",
       "electrode-archetype-opt-inferno"

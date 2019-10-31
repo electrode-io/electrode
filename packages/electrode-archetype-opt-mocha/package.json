@@ -39,6 +39,7 @@
   "electrodeOptArchetype": {
     "optionalTagName": "mocha",
     "expectTag": true,
+    "devOnly": true,
     "defaultInstall": true
   }
 }

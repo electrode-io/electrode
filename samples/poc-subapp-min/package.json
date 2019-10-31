@@ -49,10 +49,13 @@
     "react-router-dom": "^5.1.0",
     "subapp-server": "../../packages/subapp-server",
     "subapp-util": "../../packages/subapp-util",
-    "subapp-web": "../../packages/subapp-web"
+    "subapp-web": "../../packages/subapp-web",
+    "electrode-archetype-opt-react": "^2.0.4",
+    "electrode-archetype-opt-react-intl": "^1.0.0"
   },
   "devDependencies": {
-    "electrode-archetype-react-app-dev": "^6.3.0"
+    "electrode-archetype-react-app-dev": "^6.3.0",
+    "electrode-archetype-opt-stylus": "^1.0.2"
   },
   "fyn": {
     "dependencies": {
@@ -61,5 +64,6 @@
     "devDependencies": {
       "electrode-archetype-react-app-dev": "../../packages/electrode-archetype-react-app-dev"
     }
-  }
+  },
+  "optionalDependencies": {}
 }

@@ -35,6 +35,7 @@
   "electrodeOptArchetype": {
     "optionalTagName": "flow",
     "expectTag": true,
+    "devOnly": true,
     "defaultInstall": true
   }
 }

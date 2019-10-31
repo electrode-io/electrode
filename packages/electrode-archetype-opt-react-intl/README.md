@@ -1,36 +1,34 @@
 # Electrode Archetype Option React-International
 
-Allow [Electrode](https://github.com/electrode-io/electrode) apps to optionally choose to skip installing dependencies for react-intl.
+This is a feature package that instructs [Electrode](https://github.com/electrode-io/electrode) to install react-intl.
 
-The app can skip installing react-intl dependencies by adding a file `archetype/config/index.js` or `archetype/config.js` and set:
+## Interactive Install
 
-```js
-module.exports = {
-  options: {
-    reactIntl: false
-  }
-};
+Inclusion of this (and all other [Electrode](https://github.com/electrode-io/electrode) features) is maintained by the `features` xclap task.
+
+To run `features` in interactive mode (recommended!), simply call the `features` xclap task with no arguments:
+
+```sh
+clap features
 ```
 
-If nothing is set, then default is to install.
+## Migrating from legacy archetype options
 
-# Usage
+In versions of Electrode Archetype < 7, features were enabled or disabled by modifying `archetype/config/index.js` or `archetype/config.js`. To migrate from legacy features, simply run the `features` xclap task with no arguments:
 
-This module generally is included by other Electrode modules. An Electrode app should not need to install this directly.
-
-## Install
-
-In `package.json`:
-
-```js
-{
-  "optionalDependencies": {
-    "electrode-archetype-opt-react-intl": "^1.0.0"
-  }
-}
+```sh
+clap features
 ```
 
-And setup archetype config accordingly.
+If the features task detects that you are still using legacy features, it will give you the following prompt: `Convert archetype feature usage to new style (recommended)?`. Answering `yes` to this question will cause the legacy features to be migrated to the new style.
+
+## Manual Install
+
+This feature can also be installed directly using npm:
+
+```sh
+npm install electrode-archetype-opt-react-intl
+```
 
 ## License
 
