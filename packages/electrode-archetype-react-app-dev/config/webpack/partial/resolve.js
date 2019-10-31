@@ -28,7 +28,7 @@ module.exports = {
     // plugins and the modules paths specified below
     plugins: [new ModuleResolver("module", "resolve", archetype.devDir, undefined)],
     modules: [
-      (AppMode.isSrc && Path.resolve(AppMode.src.dir)) || null,
+      Path.resolve(AppMode.src.dir),
       process.cwd(),
       "node_modules"
     ]
