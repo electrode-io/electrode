@@ -25,13 +25,27 @@ function isUnicodeSupported() {
   return UTF8_REGEX.test(process.env.LC_ALL || process.env.LC_CTYPE || process.env.LANG);
 }
 
-// from https://stackoverflow.com/questions/9637517/parsing-relaxed-json-without-eval
+// Heavily adapted from here:
+//  https://stackoverflow.com/questions/9637517/parsing-relaxed-json-without-eval
 function parseRelaxedJson(json) {
-  return json
+  json = json.trim();
+  if (json.startsWith("'") && json.endsWith("'")) {
+    return json.replace(/^'(.*)'$/, "$1");
+  }
+  const formalJson = json
     .replace(/:\s*"([^"]*)"/g, (match, p1) => ': "' + p1.replace(/:/g, "@colon@") + '"')
     .replace(/:\s*'([^']*)'/g, (match, p1) => ': "' + p1.replace(/:/g, "@colon@") + '"')
+    .replace(/:\s*\[\s*((?:'(?:[^']*)',?\s*)*)\s*\]/g, (match, p1) => {
+      let out = ": [";
+      out += p1
+        .replace(/'([^']*)',?\s*/g, (match, p1) => '"' + p1.replace(/:/g, "@colon@") + '",')
+        .replace(/,$/, "");
+      out += "]";
+      return out;
+    })
     .replace(/(['"])?([a-z0-9A-Z_]+)(['"])?\s*:/g, '"$2": ')
     .replace(/@colon@/g, ":");
+  return JSON.parse(formalJson);
 }
 
 function areCurrentEnablesLegacy() {
@@ -41,41 +55,24 @@ function areCurrentEnablesLegacy() {
 class Feature {
   constructor(packageName) {
     this.packageName = packageName;
-    this.getName = this.getName.bind(this);
-    this.getVersion = this.getVersion.bind(this);
-    this.isEnabled = this.isEnabled.bind(this);
-    this.isEnabledNew = this.isEnabledNew.bind(this);
-    this.isEnabledLegacy = this.isEnabledLegacy.bind(this);
-    this.getExclusivities = this.getExclusivities.bind(this);
+    this.attachNpmAttributes = this.attachNpmAttributes.bind(this);
     this.setEnabled = this.setEnabled.bind(this);
     this.removeLegacyEnabled = this.removeLegacyEnabled.bind(this);
     this.convert = this.convert.bind(this);
   }
 
-  async fetchInformation() {
-    this.package = optionalRequire(`${this.packageName}/package.json`);
-    const { description, electrodeOptArchetype, version } = await this.getLatestAttributes([
+  async attachNpmAttributes() {
+    const { description, electrodeOptArchetype, version } = await this.getNpmAttributes([
       "description",
       "electrodeOptArchetype",
       "version"
     ]);
-    this.description = description;
-    this.electrodeOptArchetype = electrodeOptArchetype;
-    this.latestVersion = version;
-    this.enabled = this.isEnabled();
-    this.name = this.getName();
-    this.version = this.getVersion();
-    this.exclusivities = this.getExclusivities();
-
-    if (!this.package && this.enabled) {
-      console.error(
-        chalk.red(`The feature "${name}" is enabled but is not available in your node_modules directory.
-    Please perform an "npm install"`)
-      );
-    }
+    this.npmDescription = description;
+    this.npmElectrodeOptArchetype = electrodeOptArchetype;
+    this.npmVersion = version;
   }
 
-  async getLatestAttributes(fields) {
+  async getNpmAttributes(fields) {
     const { stdout } = await exec(`npm view ${this.packageName} ${fields.join(" ")}`);
     const regex = fields.map(field => `${field} =(.*)`).join("");
     const values = stdout
@@ -88,21 +85,37 @@ class Feature {
     return fieldMap;
   }
 
-  getName() {
-    return this.electrodeOptArchetype.expectTag === true
-      ? this.electrodeOptArchetype.optionalTagName
-      : this.electrodeOptArchetype.expectTag;
+  get name() {
+    const options = this.electrodeOptArchetype;
+    return options.expectTag === true
+      ? options.optionalTagName
+      : options.expectTag;
   }
 
-  getVersion() {
+  get description() {
+    return this.package ? this.package.description : this.npmDescription;
+  }
+
+  get electrodeOptArchetype() {
+    return this.package ? this.package.electrodeOptArchetype : this.npmElectrodeOptArchetype;
+  }
+
+  get package() {
+    if (!this._package && this._package !== false) {
+      this._package = optionalRequire(`${this.packageName}/package.json`) || false;
+    }
+    return this._package;
+  }
+
+  get version() {
     return this.package ? this.package.version : "";
   }
 
-  isEnabled() {
-    return this.isEnabledNew() || this.isEnabledLegacy();
+  get enabled() {
+    return this.enabledNew || this.enabledLegacy;
   }
 
-  isEnabledNew() {
+  get enabledNew() {
     return Boolean(
       ["dependencies", "devDependencies"].find(
         x => appPkg && appPkg[x] && appPkg[x].hasOwnProperty(this.packageName)
@@ -110,7 +123,7 @@ class Feature {
     );
   }
 
-  isEnabledLegacy() {
+  get enabledLegacy() {
     if (!this.electrodeOptArchetype.hasOwnProperty("optionalTagName")) {
       throw `opt archetype ${this.packageName}: package.json missing this.electrodeOptArchetype.optionalTagName`;
     }
@@ -163,7 +176,7 @@ class Feature {
         // Try to do a simple major version check.  If they don't match then assume user
         // is trying install a different one, so fail this copy.
         const appSemV = appPkg[appDep][this.packageName];
-        if (!isSameMajorVersion(appSemV, this.latestVersion)) {
+        if (!isSameMajorVersion(appSemV, this.version)) {
           // Found a different version from this copy's major version skipping installing this copy.
           return false;
         }
@@ -183,14 +196,14 @@ class Feature {
     return userConfig === expectTag;
   }
 
-  getExclusivities() {
+  get exclusivities() {
     return this.electrodeOptArchetype.onlyOneOf || [];
   }
 
   setEnabled(pkg, enabled) {
     const dependencies = { ...pkg.dependencies };
     if (enabled) {
-      dependencies[this.packageName] = `^${this.version || this.latestVersion}`;
+      dependencies[this.packageName] = `^${this.version || this.npmVersion}`;
     } else {
       delete dependencies[this.packageName];
     }
@@ -210,7 +223,7 @@ class Feature {
   }
 
   convert(pkg) {
-    pkg = this.setEnabled(pkg, this.isEnabledLegacy());
+    pkg = this.setEnabled(pkg, this.enabledLegacy);
     return this.removeLegacyEnabled(pkg);
   }
 }
@@ -218,8 +231,8 @@ class Feature {
 async function getFeatures() {
   console.log("Fetching feature information, please wait...");
   const features = Object.keys(optionalDependencies).map(packageName => new Feature(packageName));
-  await Promise.all(features.map(feature => feature.fetchInformation()));
-  features.sort(function (a, b) {
+  await Promise.all(features.map(feature => feature.attachNpmAttributes()));
+  features.sort(function(a, b) {
     return a.name.localeCompare(b.name);
   });
   return features;
@@ -246,14 +259,14 @@ function displayFeatureStatus(features) {
 
   features.forEach(feature => {
     const version =
-      feature.version === feature.latestVersion
+      feature.version === feature.npmVersion
         ? chalk.cyan(feature.version.padEnd(versionPadding))
         : chalk.red(feature.version.padEnd(versionPadding));
     console.log(
       feature.name.padEnd(namePadding),
       feature.enabled ? ENABLED : DISABLED,
       version,
-      chalk.magenta(feature.latestVersion.padEnd(versionPadding)),
+      chalk.magenta(feature.npmVersion.padEnd(versionPadding)),
       feature.description
     );
   });
@@ -263,8 +276,11 @@ function displayFeatureIssues(features) {
   const featuresByName = {};
   features.forEach(feature => (featuresByName[feature.packageName] = feature));
   features.forEach(feature => {
-    if (!feature.exclusivities.length) {
-      return;
+    if (!feature.package && feature.enabled) {
+      console.error(
+        chalk.red(`The feature "${name}" is enabled but is not available in your node_modules directory.
+Please perform an "npm install"`)
+      );
     }
 
     feature.exclusivities
