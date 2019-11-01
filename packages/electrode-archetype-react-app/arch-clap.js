@@ -846,7 +846,7 @@ Individual .babelrc files were generated for you in src/client and src/server
       dep: [".init-bundle.valid.log"],
       desc: "Start app's node server in watch mode with nodemon",
       task: function() {
-        const watches = (archetype.webpack.devMiddleware
+        const watches = (archetype.webpack.devMiddleware || this.argv.includes("--no-ssr-sync")
           ? []
           : [Path.join(eTmpDir, "bundle.valid.log")]
         )
@@ -867,9 +867,10 @@ Individual .babelrc files were generated for you in src/client and src/server
           nodeRunApp = quote(Path.relative(process.cwd(), serverRun));
         }
 
+        const taskArguments = taskArgs(this.argv.filter( x => x !== "--no-ssr-sync" )).join( " " );
         return mkCmd(
           `~$nodemon`,
-          taskArgs(this.argv).join(" "),
+          taskArguments,
           archetype.webpack.devMiddleware ? "" : "-C",
           `--delay 1 --ext js,jsx,json,yaml,log,ts,tsx ${watches}`,
           `${nodeRunApp}`
