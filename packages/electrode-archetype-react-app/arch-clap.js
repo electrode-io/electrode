@@ -867,7 +867,7 @@ Individual .babelrc files were generated for you in src/client and src/server
           nodeRunApp = quote(Path.relative(process.cwd(), serverRun));
         }
 
-        let taskArguments = this.argv.includes("--no-ssr-sync") ? "" : taskArgs(this.argv).join(" ");
+        const taskArguments = taskArgs(this.argv.filter( x => x !== "--no-ssr-sync" )).join( " " );
         return mkCmd(
           `~$nodemon`,
           taskArguments,
