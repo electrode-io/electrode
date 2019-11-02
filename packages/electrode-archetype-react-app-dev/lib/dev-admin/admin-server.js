@@ -81,6 +81,13 @@ class AdminServer {
     }
   }
 
+  async sendMsg(name, data) {
+    const info = this.getServer(name);
+    if (info._child) {
+      info._child.send(data);
+    }
+  }
+
   async kill(name, sig) {
     const info = this.getServer(name);
     if (info._child) {
@@ -120,7 +127,7 @@ class AdminServer {
       r: () => this.startWebpackDevServer("--inspect"),
       x: () => this.kill(DEV_SERVER_NAME, "SIGINT"),
       // dev proxy server
-      p: () => DEV_PROXY_ENABLED && this.signal(PROXY_SERVER_NAME, "SIGHUP")
+      p: () => DEV_PROXY_ENABLED && this.sendMsg(PROXY_SERVER_NAME, { name: "restart" })
     };
     return handlers[str] && (await handlers[str]());
   }

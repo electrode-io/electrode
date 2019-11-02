@@ -17,7 +17,7 @@ const port = getIntFromEnv("PORT", 3000);
 const restartUrl = `http://localhost:${port}/__proxy_admin/restart`;
 
 const handleRestart = type => {
-  process.on("SIGHUP", () => {
+  const restart = () => {
     console.log(`${type}Electrode dev proxy restarting`);
     request(restartUrl, (err, res, body) => {
       if (!err) {
@@ -26,6 +26,13 @@ const handleRestart = type => {
         console.error(body, err);
       }
     });
+  };
+
+  process.on("SIGHUP", restart);
+  process.on("message", data => {
+    if (data.name === "restart") {
+      restart();
+    }
   });
 };
 
