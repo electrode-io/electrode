@@ -22,12 +22,20 @@ const utils = {
     // find entry point
     const entryPoints = assets.entryPoints[entryName];
     assert(entryPoints, `subapp-web: no entry point found for ${name}`);
-    // get chunkd ID for all bundles that start with name
-    const bundleIds = entryPoints.filter(id => assets.chunksById.js[id].startsWith(entryName));
     // map all IDs to actual assets
-    const bundleAssets = bundleIds.map(id =>
-      assets.js.find(x => x.name === assets.chunksById.js[id])
-    );
+    const bundleAssets = entryPoints
+      .map(id => {
+        let bundleName;
+        const js = assets.chunksById.js[id];
+        // Only use IDs that has bundle with name that starts with entry's name
+        if (Array.isArray(js)) {
+          bundleName = js.find(x => x.startsWith(entryName));
+        } else if (js.startsWith(entryName)) {
+          bundleName = js;
+        }
+        return bundleName && assets.js.find(x => x.name === bundleName);
+      })
+      .filter(x => x);
     assert(
       bundleAssets.length > 0,
       `subapp-web: ${name} doesn't have a JS bundle for entry ${entryName}`
