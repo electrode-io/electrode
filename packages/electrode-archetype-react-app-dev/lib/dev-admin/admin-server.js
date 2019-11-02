@@ -306,6 +306,22 @@ class AdminServer {
     });
   }
 
+  writeMultiLine(tag, data, out) {
+    const lines = data
+      .toString()
+      .replace(/\r/g, "")
+      .split("\n");
+
+    const last = lines.length - 1;
+    lines.forEach((l, ix) => {
+      if (ix < last) {
+        out.write(tag + l + "\n");
+      } else if (l) {
+        out.write(tag + l);
+      }
+    });
+  }
+
   async startProxyServer(debug) {
     await this.startServer({
       name: PROXY_SERVER_NAME,
@@ -314,11 +330,11 @@ class AdminServer {
       exec: Path.join(__dirname, "redbird-spawn"),
       waitStart: async info => {
         info._child.stdout.on("data", data => {
-          process.stdout.write(this._proxy + data);
+          this.writeMultiLine(this._proxy, data, process.stdout);
         });
 
         info._child.stderr.on("data", data => {
-          process.stderr.write(this._proxy + data);
+          this.writeMultiLine(this._proxy, data, process.stderr);
         });
       }
     });
