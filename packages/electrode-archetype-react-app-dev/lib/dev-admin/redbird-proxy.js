@@ -64,7 +64,9 @@ const getNotFoundPage = data => {
   /* eslint-enable max-len */
 };
 
+// eslint-disable-next-line max-params
 const makeUrl = (host, port, pathname = "", protocol = "http") => {
+  // eslint-disable-next-line
   if (port !== 80) {
     host = `${host}:${port}`;
   }
