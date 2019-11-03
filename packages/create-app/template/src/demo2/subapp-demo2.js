@@ -19,19 +19,22 @@ const Demo2 = props => {
   const { value, dispatch } = props;
 
   return (
-    <div
-      style={{
-        padding: "5px",
-        marginTop: "15px",
-        border: "solid",
-        marginLeft: "15%",
-        marginRight: "15%"
-      }}
-    >
-      <p>subapp demo2</p>
-      Redux State Demo: <button onClick={() => dispatch(decNumber())}>&#8810;</button>
-      &nbsp;{value}&nbsp;
-      <button onClick={() => dispatch(incNumber())}>&#8811;</button>
+    <div>
+      <div
+        style={{
+          padding: "5px",
+          marginTop: "15px",
+          border: "solid",
+          marginLeft: "15%",
+          marginRight: "15%"
+        }}
+      >
+        <p>subapp demo2</p>
+        Redux State Demo: <button onClick={() => dispatch(decNumber())}>&#8810;</button>
+        &nbsp;{value}&nbsp;
+        <button onClick={() => dispatch(incNumber())}>&#8811;</button>
+      </div>
+      <p style={{ textAlign: "center" }}>© {new Date().getFullYear()} Your (Company) Name Here</p>
     </div>
   );
 };
