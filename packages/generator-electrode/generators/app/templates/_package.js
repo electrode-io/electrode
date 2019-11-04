@@ -32,7 +32,7 @@ return {
     "<%= uiConfigModule %>": "<%= uiConfigModuleSemver %>",
     //<% } %>
     "electrode-confippet": "^1.5.0",
-    "electrode-redux-router-engine": "^2.1.8", //<% if (isHapi) { %>
+    "electrode-redux-router-engine": "^3.0.0", //<% if (isHapi) { %>
     //<% if (isAutoSSR) {%>
     "electrode-auto-ssr": "^1.0.0", //<% } %>
     "electrode-server": "^2.2.0",
@@ -49,8 +49,8 @@ return {
     lodash: "^4.17.11",
     "@loadable/component": "^5.7.0",
     "@loadable/server": "^5.9.0",
-    "react-router-config": "^1.0.0-beta.4",
-    "react-router-dom": "^4.3.1",
+    "react-router-config": "^5.1.1",
+    "react-router-dom": "^5.1.2",
     milligram: "^1.3.0",
     //<% if (cookiesModule) {%>
     "<%= cookiesModule %>": "<%= cookiesModuleSemver %>"

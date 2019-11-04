@@ -1,3 +1,178 @@
+# 10/29/2019
+
+- Move enzyme dependencies into the opt archetype
+- Move chai dependencies into the opt archetype
+- Move react-intl into optional archetype
+- avoid overriding exist FORCE_COLOR env
+- use process.send to transfer isomorphic config from wds to app
+- show profiles/partials used to compose webpack config
+- update config to split more vendor/shared bundles (subapps)
+- Remove react-test-renderer from dev archetype
+- update react-redux-router-engine to react-router 5
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/create-app@1.0.2` `(1.0.1 => 1.0.2)`
+- `electrode-archetype-opt-critical-css@1.0.3` `(1.0.2 => 1.0.3)`
+- `electrode-archetype-opt-eslint@1.0.3` `(1.0.2 => 1.0.3)`
+- `electrode-archetype-opt-flow@1.0.2` `(1.0.1 => 1.0.2)`
+- `electrode-archetype-opt-inferno@0.2.11` `(0.2.10 => 0.2.11)`
+- `electrode-archetype-opt-jest@1.0.3` `(1.0.2 => 1.0.3)`
+- `electrode-archetype-opt-karma@2.0.6` `(2.0.5 => 2.0.6)`
+- `electrode-archetype-opt-less@1.0.2` `(1.0.1 => 1.0.2)`
+- `electrode-archetype-opt-mocha@1.0.3` `(1.0.2 => 1.0.3)`
+- `electrode-archetype-opt-phantomjs@1.0.2` `(1.0.1 => 1.0.2)`
+- `electrode-archetype-opt-postcss@1.0.4` `(1.0.3 => 1.0.4)`
+- `electrode-archetype-opt-pwa@1.0.6` `(1.0.5 => 1.0.6)`
+- `electrode-archetype-opt-react@2.0.4` `(2.0.3 => 2.0.4)`
+- `electrode-archetype-opt-react-intl@1.0.0` `(0.1.0 => 1.0.0)`
+- `electrode-archetype-opt-sass@1.0.9` `(1.0.8 => 1.0.9)`
+- `electrode-archetype-opt-sinon@1.0.3` `(1.0.2 => 1.0.3)`
+- `electrode-archetype-opt-stylus@1.0.2` `(1.0.1 => 1.0.2)`
+- `electrode-archetype-opt-typescript@1.0.3` `(1.0.2 => 1.0.3)`
+- `electrode-archetype-react-app@6.5.17` `(6.5.16 => 6.5.17)`
+- `electrode-archetype-react-app-dev@6.5.17` `(6.5.16 => 6.5.17)`
+- `electrode-archetype-react-component@6.1.11` `(6.1.10 => 6.1.11)`
+- `electrode-archetype-react-component-dev@6.1.11` `(6.1.10 => 6.1.11)`
+- `electrode-archetype-webpack-dll@2.0.1` `(2.0.0 => 2.0.1)`
+- `electrode-archetype-webpack-dll-dev@2.0.1` `(2.0.0 => 2.0.1)`
+- `electrode-redux-router-engine@3.0.0` `(2.3.2 => 3.0.0)`
+- `generator-electrode@5.1.10` `(5.1.9 => 5.1.10)`
+- `subapp-web@1.0.7` `(1.0.6 => 1.0.7)`
+- `webpack-config-composer@1.1.2` `(1.1.1 => 1.1.2)`
+
+### Lerna Updated
+
+- `electrode-ignite@3.0.14` `(3.0.13 => 3.0.14)`
+- `subapp-redux@1.0.6` `(1.0.5 => 1.0.6)`
+
+## Commits
+
+- `packages/create-app`
+
+  - Move react-intl into optional archetype ([#1419](https://github.com/electrode-io/electrode/pull/1419)) [commit](http://github.com/electrode-io/electrode/commit/89c3d168176b2c6c4333f86a7108656e3e7f0dfb)
+
+- `packages/electrode-archetype-opt-critical-css`
+
+  - windows compat: use shx to execute copy command ([#1411](https://github.com/electrode-io/electrode/pull/1411)) [commit](http://github.com/electrode-io/electrode/commit/7f28c5aaab3fbfc442fe85b1c88e14615e479cef)
+
+- `packages/electrode-archetype-opt-eslint`
+
+  - windows compat: use shx to execute copy command ([#1411](https://github.com/electrode-io/electrode/pull/1411)) [commit](http://github.com/electrode-io/electrode/commit/7f28c5aaab3fbfc442fe85b1c88e14615e479cef)
+
+- `packages/electrode-archetype-opt-flow`
+
+  - windows compat: use shx to execute copy command ([#1411](https://github.com/electrode-io/electrode/pull/1411)) [commit](http://github.com/electrode-io/electrode/commit/7f28c5aaab3fbfc442fe85b1c88e14615e479cef)
+
+- `packages/electrode-archetype-opt-inferno`
+
+  - windows compat: use shx to execute copy command ([#1411](https://github.com/electrode-io/electrode/pull/1411)) [commit](http://github.com/electrode-io/electrode/commit/7f28c5aaab3fbfc442fe85b1c88e14615e479cef)
+
+- `packages/electrode-archetype-opt-jest`
+
+  - Move enzyme dependencies into the opt archetype that uses them ([#1415](https://github.com/electrode-io/electrode/pull/1415)) [commit](http://github.com/electrode-io/electrode/commit/bd6728dabfed990f4b55911cf1cd400e3b16e35c)
+  - windows compat: use shx to execute copy command ([#1411](https://github.com/electrode-io/electrode/pull/1411)) [commit](http://github.com/electrode-io/electrode/commit/7f28c5aaab3fbfc442fe85b1c88e14615e479cef)
+
+- `packages/electrode-archetype-opt-karma`
+
+  - Move enzyme dependencies into the opt archetype that uses them ([#1415](https://github.com/electrode-io/electrode/pull/1415)) [commit](http://github.com/electrode-io/electrode/commit/bd6728dabfed990f4b55911cf1cd400e3b16e35c)
+  - Move chai dependencies into the opt archetype that uses them ([#1414](https://github.com/electrode-io/electrode/pull/1414)) [commit](http://github.com/electrode-io/electrode/commit/6ac63e70e1ed5af684b8d28f5a83a1ac13f52788)
+  - windows compat: use shx to execute copy command ([#1411](https://github.com/electrode-io/electrode/pull/1411)) [commit](http://github.com/electrode-io/electrode/commit/7f28c5aaab3fbfc442fe85b1c88e14615e479cef)
+
+- `packages/electrode-archetype-opt-less`
+
+  - windows compat: use shx to execute copy command ([#1411](https://github.com/electrode-io/electrode/pull/1411)) [commit](http://github.com/electrode-io/electrode/commit/7f28c5aaab3fbfc442fe85b1c88e14615e479cef)
+
+- `packages/electrode-archetype-opt-mocha`
+
+  - Move enzyme dependencies into the opt archetype that uses them ([#1415](https://github.com/electrode-io/electrode/pull/1415)) [commit](http://github.com/electrode-io/electrode/commit/bd6728dabfed990f4b55911cf1cd400e3b16e35c)
+  - Move chai dependencies into the opt archetype that uses them ([#1414](https://github.com/electrode-io/electrode/pull/1414)) [commit](http://github.com/electrode-io/electrode/commit/6ac63e70e1ed5af684b8d28f5a83a1ac13f52788)
+  - windows compat: use shx to execute copy command ([#1411](https://github.com/electrode-io/electrode/pull/1411)) [commit](http://github.com/electrode-io/electrode/commit/7f28c5aaab3fbfc442fe85b1c88e14615e479cef)
+
+- `packages/electrode-archetype-opt-phantomjs`
+
+  - windows compat: use shx to execute copy command ([#1411](https://github.com/electrode-io/electrode/pull/1411)) [commit](http://github.com/electrode-io/electrode/commit/7f28c5aaab3fbfc442fe85b1c88e14615e479cef)
+
+- `packages/electrode-archetype-opt-postcss`
+
+  - windows compat: use shx to execute copy command ([#1411](https://github.com/electrode-io/electrode/pull/1411)) [commit](http://github.com/electrode-io/electrode/commit/7f28c5aaab3fbfc442fe85b1c88e14615e479cef)
+
+- `packages/electrode-archetype-opt-pwa`
+
+  - windows compat: use shx to execute copy command ([#1411](https://github.com/electrode-io/electrode/pull/1411)) [commit](http://github.com/electrode-io/electrode/commit/7f28c5aaab3fbfc442fe85b1c88e14615e479cef)
+
+- `packages/electrode-archetype-opt-react`
+
+  - windows compat: use shx to execute copy command ([#1411](https://github.com/electrode-io/electrode/pull/1411)) [commit](http://github.com/electrode-io/electrode/commit/7f28c5aaab3fbfc442fe85b1c88e14615e479cef)
+
+- `packages/electrode-archetype-opt-react-intl`
+
+  - [major] prepare for first release [commit](http://github.com/electrode-io/electrode/commit/960afcce0dc1017e1dd28bf273e742f103c2048a)
+  - Move react-intl into optional archetype ([#1419](https://github.com/electrode-io/electrode/pull/1419)) [commit](http://github.com/electrode-io/electrode/commit/89c3d168176b2c6c4333f86a7108656e3e7f0dfb)
+
+- `packages/electrode-archetype-opt-sass`
+
+  - add shx to missed opt package [commit](http://github.com/electrode-io/electrode/commit/1db9284ff9267ef8c824e4a89a23477d43b4dea3)
+  - windows compat: use shx to execute copy command ([#1411](https://github.com/electrode-io/electrode/pull/1411)) [commit](http://github.com/electrode-io/electrode/commit/7f28c5aaab3fbfc442fe85b1c88e14615e479cef)
+
+- `packages/electrode-archetype-opt-sinon`
+
+  - windows compat: use shx to execute copy command ([#1411](https://github.com/electrode-io/electrode/pull/1411)) [commit](http://github.com/electrode-io/electrode/commit/7f28c5aaab3fbfc442fe85b1c88e14615e479cef)
+
+- `packages/electrode-archetype-opt-stylus`
+
+  - windows compat: use shx to execute copy command ([#1411](https://github.com/electrode-io/electrode/pull/1411)) [commit](http://github.com/electrode-io/electrode/commit/7f28c5aaab3fbfc442fe85b1c88e14615e479cef)
+
+- `packages/electrode-archetype-opt-typescript`
+
+  - windows compat: use shx to execute copy command ([#1411](https://github.com/electrode-io/electrode/pull/1411)) [commit](http://github.com/electrode-io/electrode/commit/7f28c5aaab3fbfc442fe85b1c88e14615e479cef)
+
+- `packages/electrode-archetype-react-app[-dev]`
+
+  - avoid overriding exist FORCE_COLOR env ([#1430](https://github.com/electrode-io/electrode/pull/1430)) [commit](http://github.com/electrode-io/electrode/commit/51485fd4205c783b951a78a9f6c8d7b988930296)
+  - use process.send to transfer isomorphic config from wds to app ([#1427](https://github.com/electrode-io/electrode/pull/1427)) [commit](http://github.com/electrode-io/electrode/commit/b1728ce4418c417b04c6d800518a692f7a7a5e41)
+  - show profiles/partials used to compose webpack config ([#1429](https://github.com/electrode-io/electrode/pull/1429)) [commit](http://github.com/electrode-io/electrode/commit/719a69c2835cfe8c441f67eb4bd4637023e5bae7)
+  - update config to split more vendor/shared bundles ([#1428](https://github.com/electrode-io/electrode/pull/1428)) [commit](http://github.com/electrode-io/electrode/commit/bf9c379414f6fa88ca8f4234c8f205cc598def0c)
+  - Move react-intl into optional archetype ([#1419](https://github.com/electrode-io/electrode/pull/1419)) [commit](http://github.com/electrode-io/electrode/commit/89c3d168176b2c6c4333f86a7108656e3e7f0dfb)
+  - Remove react-test-renderer ([#1417](https://github.com/electrode-io/electrode/pull/1417)) [commit](http://github.com/electrode-io/electrode/commit/39fde52810b3d0c67992d2fd71479becb24a7a3e)
+  - Move enzyme dependencies into the opt archetype that uses them ([#1415](https://github.com/electrode-io/electrode/pull/1415)) [commit](http://github.com/electrode-io/electrode/commit/bd6728dabfed990f4b55911cf1cd400e3b16e35c)
+  - Move chai dependencies into the opt archetype that uses them ([#1414](https://github.com/electrode-io/electrode/pull/1414)) [commit](http://github.com/electrode-io/electrode/commit/6ac63e70e1ed5af684b8d28f5a83a1ac13f52788)
+
+- `packages/electrode-archetype-react-component[-dev]`
+
+  - Move react-intl into optional archetype ([#1419](https://github.com/electrode-io/electrode/pull/1419)) [commit](http://github.com/electrode-io/electrode/commit/89c3d168176b2c6c4333f86a7108656e3e7f0dfb)
+  - Remove react-test-renderer ([#1417](https://github.com/electrode-io/electrode/pull/1417)) [commit](http://github.com/electrode-io/electrode/commit/39fde52810b3d0c67992d2fd71479becb24a7a3e)
+  - Move enzyme dependencies into the opt archetype that uses them ([#1415](https://github.com/electrode-io/electrode/pull/1415)) [commit](http://github.com/electrode-io/electrode/commit/bd6728dabfed990f4b55911cf1cd400e3b16e35c)
+  - Move chai dependencies into the opt archetype that uses them ([#1414](https://github.com/electrode-io/electrode/pull/1414)) [commit](http://github.com/electrode-io/electrode/commit/6ac63e70e1ed5af684b8d28f5a83a1ac13f52788)
+
+- `packages/electrode-archetype-webpack-dll[-dev]`
+
+  - avoid overriding exist FORCE_COLOR env ([#1430](https://github.com/electrode-io/electrode/pull/1430)) [commit](http://github.com/electrode-io/electrode/commit/51485fd4205c783b951a78a9f6c8d7b988930296)
+
+- `packages/electrode-redux-router-engine`
+
+  - [major] mark for major bump due to react-router 5 ([#1432](https://github.com/electrode-io/electrode/pull/1432)) [commit](http://github.com/electrode-io/electrode/commit/89e307d29fa16fe256901d6cff2ddf88d7306683)
+  - [minor][dep] react router 5.x.x ([#1409](https://github.com/electrode-io/electrode/pull/1409)) [commit](http://github.com/electrode-io/electrode/commit/4367abd181ba110a299dbdce0e82bdac3447fa39)
+
+- `packages/generator-electrode`
+
+  - update generator to create app for react-router 5 ([#1433](https://github.com/electrode-io/electrode/pull/1433)) [commit](http://github.com/electrode-io/electrode/commit/3ef79c7217982a59f345932e66a218aedfd18ee0)
+  - generate app to use redux-router-engine@3 [commit](http://github.com/electrode-io/electrode/commit/d0436ae35c08d7fa5b924c38f8b04a7a54a5606d)
+
+- `packages/subapp-web`
+
+  - update config to split more vendor/shared bundles ([#1428](https://github.com/electrode-io/electrode/pull/1428)) [commit](http://github.com/electrode-io/electrode/commit/bf9c379414f6fa88ca8f4234c8f205cc598def0c)
+
+- `packages/webpack-config-composer`
+
+  - show profiles/partials used to compose webpack config ([#1429](https://github.com/electrode-io/electrode/pull/1429)) [commit](http://github.com/electrode-io/electrode/commit/719a69c2835cfe8c441f67eb4bd4637023e5bae7)
+
+- `docs`
+
+  - Add flow to summary ([#1422](https://github.com/electrode-io/electrode/pull/1422)) [commit](http://github.com/electrode-io/electrode/commit/b4634fbea437ddf744de33c02bab571e3d07bb2c)
+
 # 10/17/2019
 
 - fix subapp to handle bundles with multiple assets

@@ -843,6 +843,42 @@ Individual .babelrc files were generated for you in src/client and src/server
     ".init-bundle.valid.log": () =>
       Fs.writeFileSync(Path.resolve(eTmpDir, "bundle.valid.log"), `${Date.now()}`),
 
+    "server-watch": {
+      dep: [".init-bundle.valid.log"],
+      desc: "Start app's node server in watch mode with nodemon",
+      task: function() {
+        const watches = (archetype.webpack.devMiddleware || this.argv.includes("--no-ssr-sync")
+          ? []
+          : [Path.join(eTmpDir, "bundle.valid.log")]
+        )
+          .concat(["config", AppMode.src.server])
+          .filter(x => x)
+          .map(n => `--watch ${n}`)
+          .join(" ");
+
+        AppMode.setEnv(AppMode.src.dir);
+
+        let nodeRunApp;
+
+        if (AppMode.isSrc) {
+          const babelRun = require.resolve(Path.join(archetype.dir, "support/babel-run"));
+          nodeRunApp = `${Path.relative(process.cwd(), babelRun)} src/server`;
+        } else {
+          const serverRun = require.resolve(Path.resolve(AppMode.src.server));
+          nodeRunApp = quote(Path.relative(process.cwd(), serverRun));
+        }
+
+        const taskArguments = taskArgs(this.argv.filter( x => x !== "--no-ssr-sync" )).join( " " );
+        return mkCmd(
+          `~$nodemon`,
+          taskArguments,
+          archetype.webpack.devMiddleware ? "" : "-C",
+          `--delay 1 --ext js,jsx,json,yaml,log,ts,tsx ${watches}`,
+          `${nodeRunApp}`
+        );
+      }
+    },
+
     "server-admin": {
       desc: "Start development with admin server",
       task: function() {
@@ -1193,7 +1229,9 @@ module.exports = function(xclap) {
   setupPath();
   createElectrodeTmpDir();
   xclap = xclap || requireAt(process.cwd())("xclap") || devRequire("xclap");
-  process.env.FORCE_COLOR = "true"; // force color for chalk
+  if (!process.env.hasOwnProperty("FORCE_COLOR")) {
+    process.env.FORCE_COLOR = "1"; // force color for chalk
+  }
   xclap.load("electrode", makeTasks(xclap));
   warnYarn();
   generateBrowsersListRc();

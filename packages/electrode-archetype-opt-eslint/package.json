@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-opt-eslint",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Electrode NodeJS/React Optional Archetype ESLint",
   "main": "optional-check.js",
   "homepage": "http://www.electrode.io",
