@@ -10,7 +10,7 @@ const optionalRequire = require("optional-require")(require);
 const React = require("react");
 const ReactDOMServer = require("react-dom/server");
 const AsyncReactDOMServer = optionalRequire("react-async-ssr");
-const request = require("request");
+const retrieveUrl = require("request");
 const util = require("./util");
 const { loadSubAppByName, loadSubAppServerByName } = require("subapp-util");
 const { default: AppContext } = require("../browser/app-context");
@@ -51,7 +51,7 @@ module.exports = function setup(setupContext, token) {
   //
   const retrieveDevServerBundle = async () => {
     return new Promise((resolve, reject) => {
-      request(`${bundleBase}${bundleAsset.name}`, (err, resp, body) => {
+      retrieveUrl(`${bundleBase}${bundleAsset.name}`, (err, resp, body) => {
         if (err) {
           reject(err);
         } else {
@@ -173,10 +173,10 @@ module.exports = function setup(setupContext, token) {
 
   return {
     process: context => {
-      const req = context.user.request;
+      const { request } = context.user;
 
-      if (req.app.webpackDev && subAppLoadTime < req.app.webpackDev.compileTime) {
-        subAppLoadTime = req.app.webpackDev.compileTime;
+      if (request.app.webpackDev && subAppLoadTime < request.app.webpackDev.compileTime) {
+        subAppLoadTime = request.app.webpackDev.compileTime;
         loadSubApp();
       }
 
@@ -189,7 +189,7 @@ module.exports = function setup(setupContext, token) {
         if (subApp.useReactRouter) {
           rrContext = {};
           const rrProps = Object.assign(
-            { location: req.url.pathname, context: rrContext },
+            { location: request.url.pathname, context: rrContext },
             initialProps
           );
           // console.log("rendering", name, "for react router", rrProps);
@@ -200,16 +200,12 @@ module.exports = function setup(setupContext, token) {
         }
         return React.createElement(
           AppContext.Provider,
-          { value: { isSsr: true, subApp, ssr: { request: req } } },
+          { value: { isSsr: true, subApp, ssr: { request } } },
           TopComponent
         );
       };
 
-      const asyncProcess = async () => {
-        if (props.timestamp) {
-          outputSpot.add(`<!-- time: ${Date.now()} -->`);
-        }
-
+      const processSubapp = async () => {
         let ssrContent = "";
         let initialStateStr = "";
         if (props.serverSideRendering) {
@@ -281,11 +277,7 @@ and can't generate it because module react-dom-router with StaticRouter is not f
               initialProps = await prepare({ request, context });
             }
 
-            try {
-              ssrContent = await renderElement(createElement(StartComponent, initialProps));
-            } catch (err) {
-              console.log("rendering", name, "failed", err);
-            }
+            ssrContent = await renderElement(createElement(StartComponent, initialProps));
           }
         } else {
           ssrContent = `<!-- serverSideRendering flag is ${props.serverSideRendering} -->`;
@@ -315,12 +307,33 @@ and can't generate it because module react-dom-router with StaticRouter is not f
         } else {
           outputSpot.add("<!-- no elementId for starting subApp on load -->\n");
         }
+      };
 
+      const asyncProcess = async () => {
         if (props.timestamp) {
           outputSpot.add(`<!-- time: ${Date.now()} -->`);
         }
 
-        outputSpot.close();
+        try {
+          await processSubapp();
+        } catch (err) {
+          if (process.env.NODE_ENV !== "production") {
+            console.error(`SSR subapp ${name} failed <error>${err.stack}</error>`); // eslint-disable-line
+            outputSpot.add(`<!-- SSR subapp ${name} failed
+
+${err.stack}
+
+-->`);
+          } else if (request && request.log) {
+            request.log(["error"], { msg: `SSR subapp ${name} failed`, err });
+          }
+        } finally {
+          if (props.timestamp) {
+            outputSpot.add(`<!-- time: ${Date.now()} -->`);
+          }
+
+          outputSpot.close();
+        }
       };
 
       process.nextTick(asyncProcess);
