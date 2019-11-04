@@ -10,7 +10,7 @@ const optionalRequire = require("optional-require")(require);
 const React = require("react");
 const ReactDOMServer = require("react-dom/server");
 const AsyncReactDOMServer = optionalRequire("react-async-ssr");
-const fetch = require("request");
+const retrieveUrl = require("request");
 const util = require("./util");
 const { loadSubAppByName, loadSubAppServerByName } = require("subapp-util");
 const { default: AppContext } = require("../browser/app-context");
@@ -51,7 +51,7 @@ module.exports = function setup(setupContext, token) {
   //
   const retrieveDevServerBundle = async () => {
     return new Promise((resolve, reject) => {
-      fetch(`${bundleBase}${bundleAsset.name}`, (err, resp, body) => {
+      retrieveUrl(`${bundleBase}${bundleAsset.name}`, (err, resp, body) => {
         if (err) {
           reject(err);
         } else {
@@ -200,7 +200,7 @@ module.exports = function setup(setupContext, token) {
         }
         return React.createElement(
           AppContext.Provider,
-          { value: { isSsr: true, subApp, ssr: { request: request } } },
+          { value: { isSsr: true, subApp, ssr: { request } } },
           TopComponent
         );
       };
@@ -321,7 +321,7 @@ and can't generate it because module react-dom-router with StaticRouter is not f
             console.error(`SSR subapp ${name} failed <error>${err.stack}</error>`); // eslint-disable-line
             outputSpot.add(`<!-- SSR subapp ${name} failed
 
-${err.stack} 
+${err.stack}
 
 -->`);
           } else if (request && request.log) {
