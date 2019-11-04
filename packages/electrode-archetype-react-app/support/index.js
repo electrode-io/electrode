@@ -39,22 +39,20 @@ const support = {
   },
 };
 
-if (AppMode.isSrc) {
-  if (!AppMode.hasEnv()) {
-    const guessAppSrcDir = () => {
-      if (module.parent && module.parent.filename) {
-        const fn = module.parent.filename;
-        const dir = fn.substr(process.cwd().length + 1).split("/")[0];
-        if (dir === AppMode.src.dir || dir === AppMode.lib.dir) {
-          return `${dir}/`;
-        }
+if (!AppMode.hasEnv()) {
+  const guessAppSrcDir = () => {
+    if (module.parent && module.parent.filename) {
+      const fn = module.parent.filename;
+      const dir = fn.substr(process.cwd().length + 1).split("/")[0];
+      if (dir === AppMode.src.dir || dir === AppMode.lib.dir) {
+        return `${dir}/`;
       }
-      return "lib/";
-    };
-    AppMode.setEnv(guessAppSrcDir());
-  }
-  logger.info(`${AppMode.envKey} set to`, AppMode.getEnv());
+    }
+    return "lib/";
+  };
+  AppMode.setEnv(guessAppSrcDir());
 }
+logger.info(`${AppMode.envKey} set to`, AppMode.getEnv());
 
 /* eslint max-statements: 0 complexity: 0 */
 support.load = function(options, callback) {
@@ -65,16 +63,7 @@ support.load = function(options, callback) {
     options = options || {};
   }
 
-  let br = options.babelRegister;
-  if (br !== false) {
-    if (!br) {
-      br = !AppMode.isSrc; // we need babel-register if not in src/lib mode
-    } else {
-      br = true; // normalize flag to boolean
-    }
-  }
-
-  if (br) {
+  if (options.babelRegister) {
     const babelRegister = optionalRequire("@babel/register");
     if (!babelRegister) {
       console.log(
