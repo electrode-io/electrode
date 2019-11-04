@@ -9,6 +9,7 @@ const os = require("os");
 const exec = util.promisify(require("child_process").exec);
 const appArchetypeConfig = optionalRequire("electrode-archetype-react-app/config/archetype") || {};
 const prompts = require("prompts");
+const request = require("request");
 
 const appArchetypeConfigOptions = appArchetypeConfig.options || {};
 
@@ -25,29 +26,6 @@ function isUnicodeSupported() {
   return UTF8_REGEX.test(process.env.LC_ALL || process.env.LC_CTYPE || process.env.LANG);
 }
 
-// Heavily adapted from here:
-//  https://stackoverflow.com/questions/9637517/parsing-relaxed-json-without-eval
-function parseRelaxedJson(json) {
-  json = json.trim();
-  if (json.startsWith("'") && json.endsWith("'")) {
-    return json.replace(/^'(.*)'$/, "$1");
-  }
-  const formalJson = json
-    .replace(/:\s*"([^"]*)"/g, (match, p1) => ': "' + p1.replace(/:/g, "@colon@") + '"')
-    .replace(/:\s*'([^']*)'/g, (match, p1) => ': "' + p1.replace(/:/g, "@colon@") + '"')
-    .replace(/:\s*\[\s*((?:'(?:[^']*)',?\s*)*)\s*\]/g, (match, p1) => {
-      let out = ": [";
-      out += p1
-        .replace(/'([^']*)',?\s*/g, (match, p1) => '"' + p1.replace(/:/g, "@colon@") + '",')
-        .replace(/,$/, "");
-      out += "]";
-      return out;
-    })
-    .replace(/(['"])?([a-z0-9A-Z_]+)(['"])?\s*:/g, '"$2": ')
-    .replace(/@colon@/g, ":");
-  return JSON.parse(formalJson);
-}
-
 function areCurrentEnablesLegacy() {
   return true;
 }
@@ -62,27 +40,38 @@ class Feature {
   }
 
   async attachNpmAttributes() {
-    const { description, electrodeOptArchetype, version } = await this.getNpmAttributes([
-      "description",
-      "electrodeOptArchetype",
-      "version"
-    ]);
+    const { description, electrodeOptArchetype, version } = await this.getNpmAttributes();
     this.npmDescription = description;
     this.npmElectrodeOptArchetype = electrodeOptArchetype;
     this.npmVersion = version;
   }
 
-  async getNpmAttributes(fields) {
-    const { stdout } = await exec(`npm view ${this.packageName} ${fields.join(" ")}`);
-    const regex = fields.map(field => `${field} =(.*)`).join("");
-    const values = stdout
-      .replace(/[\n\r]/g, "") // No newlines
-      .match(regex)
-      .splice(1)
-      .map(parseRelaxedJson);
-    const fieldMap = {};
-    fields.forEach((field, index) => (fieldMap[field] = values[index]));
-    return fieldMap;
+  async getNpmAttributes() {
+    const pathName = `.etmp/${this.packageName}.registry.json`;
+    let mtime = 0;
+    try {
+      mtime = fs.statSync(pathName).mtime;
+    } catch (e) {}
+    const currentDate = new Date();
+    const hour = 1000 * 60 * 60;
+    let body;
+    if (currentDate.getTime() - mtime < hour) {
+      body = JSON.parse(fs.readFileSync(pathName));
+    } else {
+      const { stdout } = await exec("npm get registry");
+      const url = `${stdout.trim()}/${this.packageName}`;
+      const promise = new Promise((resolve, reject) => {
+        request(url, { json: true }, (err, res, body) => {
+          if (err) {
+            return reject(err);
+          }
+          return resolve(body);
+        }, reject);
+      });
+      body = await promise;
+      fs.writeFileSync(pathName, JSON.stringify(body));
+    }
+    return body.versions[body["dist-tags"].latest];
   }
 
   get name() {
@@ -266,7 +255,7 @@ function displayFeatureStatus(features) {
       feature.name.padEnd(namePadding),
       feature.enabled ? ENABLED : DISABLED,
       version,
-      chalk.magenta(feature.npmVersion.padEnd(versionPadding)),
+      chalk.yellow(feature.npmVersion.padEnd(versionPadding)),
       feature.description
     );
   });
