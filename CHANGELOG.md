@@ -1,3 +1,39 @@
+# 11/4/2019
+
+- fix dev proxy issues (SIGHUP) on windows
+- no-ssr-sync flag added to reload client only without app server restart
+- minor subapp load fixes
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/create-app@1.0.3` `(1.0.2 => 1.0.3)`
+- `electrode-archetype-react-app@6.5.18` `(6.5.17 => 6.5.18)`
+- `electrode-archetype-react-app-dev@6.5.18` `(6.5.17 => 6.5.18)`
+- `subapp-web@1.0.8` `(1.0.7 => 1.0.8)`
+
+### Lerna Updated
+
+- `subapp-redux@1.0.7` `(1.0.6 => 1.0.7)`
+
+## Commits
+
+- `packages/create-app`
+
+  - style subapps for create-app sample ([#1441](https://github.com/electrode-io/electrode/pull/1441)) [commit](http://github.com/electrode-io/electrode/commit/77be05fad310c3fc2b790aa74e3a971f7567e437)
+
+- `packages/electrode-archetype-react-app[-dev]`
+
+  - fix dev proxy issues (SIGHUP) on windows ([#1440](https://github.com/electrode-io/electrode/pull/1440)) [commit](http://github.com/electrode-io/electrode/commit/24f57e8e0eaaeeee265f5c4039d8eba009982b4a)
+  - no-ssr-sync flag added to reload client only without app server restart ([#1437](https://github.com/electrode-io/electrode/pull/1437)) [commit](http://github.com/electrode-io/electrode/commit/67db96f4924b6d5c8ca26cbef691630642be5ea1)
+  - notify dev-admin app server started ASAP ([#1434](https://github.com/electrode-io/electrode/pull/1434)) [commit](http://github.com/electrode-io/electrode/commit/9bd8cfa7bf7b6eecd7e5e1b15a5a15b4b20d2867)
+
+- `packages/subapp-web`
+
+  - handle chunks asset could be an array ([#1442](https://github.com/electrode-io/electrode/pull/1442)) [commit](http://github.com/electrode-io/electrode/commit/99e0af2fb9f4b30a471a89039f6d0c2301802047)
+  - Handle load subapp error ([#1443](https://github.com/electrode-io/electrode/pull/1443)) [commit](http://github.com/electrode-io/electrode/commit/88db73fdc9c055ad89ef354de21c4b0f45326fca)
+
 # 10/29/2019
 
 - Move enzyme dependencies into the opt archetype
