@@ -772,11 +772,7 @@ Individual .babelrc files were generated for you in src/client and src/server
         }
         const args = taskArgs(this.argv);
 
-        return [
-          ".set.css-module.env",
-          ".webpack-dev",
-          ["server-admin", "generate-service-worker"]
-        ];
+        return [".set.css-module.env", ".webpack-dev", ["server-admin", "generate-service-worker"]];
       }
     },
 
@@ -940,8 +936,7 @@ Individual .babelrc files were generated for you in src/client and src/server
   }
 
   tasks = Object.assign(tasks, {
-    ".clean.lib": () =>
-      shell.rm("-rf", AppMode.lib.client, AppMode.lib.server, AppMode.savedFile),
+    ".clean.lib": () => shell.rm("-rf", AppMode.lib.client, AppMode.lib.server, AppMode.savedFile),
     ".build-lib:app-mode": () =>
       Fs.writeFileSync(Path.resolve(AppMode.savedFile), JSON.stringify(AppMode, null, 2)),
     ".build-lib": {
