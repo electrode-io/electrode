@@ -2,6 +2,7 @@
 
 /* eslint-disable max-statements, no-process-exit, global-require, no-console */
 
+const Url = require("url");
 const Path = require("path");
 const _ = require("lodash");
 const redbird = require("@jchip/redbird");
@@ -17,7 +18,7 @@ const getHost = () => {
   return process.env.HOST || "localhost";
 };
 
-const getNotFoundPage = (data) => {
+const getNotFoundPage = data => {
   const { actualHost, expectedHost, port } = data;
   /* eslint-disable max-len */
   const invalidHostMessage = `
@@ -63,6 +64,20 @@ const getNotFoundPage = (data) => {
   /* eslint-enable max-len */
 };
 
+// eslint-disable-next-line max-params
+const makeUrl = (host, port, pathname = "", protocol = "http") => {
+  // eslint-disable-next-line
+  if (port !== 80) {
+    host = `${host}:${port}`;
+  }
+  return Url.format({
+    protocol,
+    host,
+    port: `${port}`,
+    pathname
+  });
+};
+
 const startProxy = options => {
   options = Object.assign(
     {
@@ -81,30 +96,35 @@ const startProxy = options => {
   );
 
   const proxyOptions = _.pick(options, ["port", "xfwd", "bunyan", "resolvers"]);
-  const { host } = options;
+  const { host, port } = options;
 
   let proxy = redbird(proxyOptions);
 
   proxy.notFound((req, res) => {
     res.statusCode = 404;
     res.setHeader("Content-Type", "text/html");
-    res.write(getNotFoundPage({
-      actualHost: req.headers.host.split(":")[0],
-      expectedHost: getHost(),
-      port: getIntFromEnv("PORT", "3000")
-    }));
+    res.write(
+      getNotFoundPage({
+        actualHost: req.headers.host.split(":")[0],
+        expectedHost: getHost(),
+        port: getIntFromEnv("PORT", "3000")
+      })
+    );
     res.end();
   });
 
   const { appPort, webpackDevPort } = options;
 
   const rules = [
-    [host, `http://${host}:${appPort}`],
-    [`${host}/js`, `http://${host}:${webpackDevPort}/js`],
-    [`${host}/__electrode_dev`, `http://${host}:${webpackDevPort}/__electrode_dev`],
-    ["127.0.0.1", `http://${host}:${appPort}`],
-    [`127.0.0.1/js`, `http://${host}:${webpackDevPort}/js`],
-    [`127.0.0.1/__electrode_dev`, `http://${host}:${webpackDevPort}/__electrode_dev`]
+    [makeUrl(host, port), makeUrl(host, appPort)],
+    [makeUrl(host, port, `/js`), makeUrl(host, webpackDevPort, `/js`)],
+    [makeUrl(host, port, `/__electrode_dev`), makeUrl(host, webpackDevPort, `/__electrode_dev`)],
+    [makeUrl("127.0.0.1", port), makeUrl(host, appPort)],
+    [makeUrl(`127.0.0.1`, port, `/js`), makeUrl(host, webpackDevPort, `/js`)],
+    [
+      makeUrl(`127.0.0.1`, port, `/__electrode_dev`),
+      makeUrl(host, webpackDevPort, `/__electrode_dev`)
+    ]
   ];
 
   rules.forEach(x => proxy.register(...x));
@@ -137,7 +157,11 @@ const startProxy = options => {
 <h1>Electrode Development Reverse Proxy</h1>
 <h2>Rules</h2>
 <ul>
-${rules.map(x => `<li><pre>${x[0]} ===&gt; <a href="${x[1]}">${x[1]}</a></pre></li>`).join("")}
+${rules
+  .map(
+    x => `<li><pre><a href="${x[0]}">${x[0]}</a> ===&gt; <a href="${x[1]}">${x[1]}</a></pre></li>`
+  )
+  .join("")}
 </ul>
 </body>
 </html>`);
@@ -181,7 +205,7 @@ ${rules.map(x => `<li><pre>${x[0]} ===&gt; <a href="${x[1]}">${x[1]}</a></pre></
 
   console.log(
     ck`Electrode dev proxy server running, \
-admin portal at <green>http://${host}:${options.port}/__electrode_dev</>`
+status at <green>http://${host}:${options.port}/__proxy_admin/status</>`
   );
   console.log(ck`You can access your app at <green>http://${host}:${options.port}</>`);
 };
