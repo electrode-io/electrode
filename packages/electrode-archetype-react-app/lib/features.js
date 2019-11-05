@@ -1,17 +1,20 @@
-const optionalRequire = require("optional-require")(require);
-const { optionalDependencies } = require("electrode-archetype-react-app-dev/package");
 const cwd = process.env.PWD || process.cwd();
+const optionalRequire = require("optional-require")(require);
+const archetype = require("electrode-archetype-react-app/config/archetype");
+const { optionalDependencies } = require("electrode-archetype-react-app-dev/package");
 const appPkg = require(`${cwd}/package.json`);
-const chalk = require("chalk");
 const fs = require("fs");
 const util = require("util");
 const os = require("os");
-const exec = util.promisify(require("child_process").exec);
-const appArchetypeConfig = optionalRequire("electrode-archetype-react-app/config/archetype") || {};
+const Path = require("path");
 const prompts = require("prompts");
-const request = require("request");
 
-const appArchetypeConfigOptions = appArchetypeConfig.options || {};
+const devRequire = archetype.devRequire;
+const chalk = devRequire("chalk");
+const exec = util.promisify(require("child_process").exec);
+const request = devRequire("request");
+
+const archetypeOptions = archetype.options || {};
 
 const ENABLE_PACKAGE_SELECTION = false;
 const ENABLE_PACKAGE_CONVERSION = false;
@@ -47,7 +50,7 @@ class Feature {
   }
 
   async getNpmAttributes() {
-    const pathName = `.etmp/${this.packageName}.registry.json`;
+    const pathName = Path.resolve(archetype.eTmpDir, `${this.packageName}.registry.json`);
     let mtime = 0;
     try {
       mtime = fs.statSync(pathName).mtime;
@@ -156,7 +159,7 @@ class Feature {
     );
 
     if (appDep) {
-      if (appArchetypeConfigOptions.hasOwnProperty(optionalTagName)) {
+      if (archetypeOptions.hasOwnProperty(optionalTagName)) {
         // onlyOneOf conflict
         return false;
       }
@@ -175,12 +178,12 @@ class Feature {
     }
 
     // check if app's archetype/config/index.js options specify the feature tag for the package to be installed.
-    if (!appArchetypeConfigOptions.hasOwnProperty(optionalTagName) && defaultInstall === true) {
+    if (!archetypeOptions.hasOwnProperty(optionalTagName) && defaultInstall === true) {
       // No optional flag specified for package - default to installing
       return true;
     }
 
-    const userConfig = appArchetypeConfigOptions[optionalTagName];
+    const userConfig = archetypeOptions[optionalTagName];
 
     return userConfig === expectTag;
   }
