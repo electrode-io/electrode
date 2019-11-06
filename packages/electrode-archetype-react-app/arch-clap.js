@@ -7,6 +7,7 @@ const Path = require("path");
 const assert = require("assert");
 const requireAt = require("require-at");
 const archetype = require("./config/archetype");
+const { displayFeatures } = require("./lib/features");
 const optionalRequire = require("optional-require")(require);
 // make sure that -dev app archetype is also installed.
 // if it's not then this will fail with an error message that it's not found.
@@ -509,6 +510,8 @@ function makeTasks(xclap) {
         )
       )
     },
+
+    "features": displayFeatures,
 
     "mv-to-dist:clean": {
       desc: `clean static resources within ${buildDistDirs}`,

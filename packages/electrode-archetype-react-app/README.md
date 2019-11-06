@@ -78,6 +78,7 @@ If you are using this API, then things like isomorphic support and React module 
 It accepts a single `options` object, with the following supported fields:
 
 -   `babelRegister` - Set to `false` to disable loading `babel-register`
+
 -   `cssModuleHook` - Set to `false` to disable loading [css-module-hook]
     -   If this is an object, then it's used as `options` for `cssModuleHook`
 -   `isomorphicExtendRequire` - Set to `false` to disable loading isomorphic-loader support
