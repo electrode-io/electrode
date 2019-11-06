@@ -112,7 +112,7 @@ The configurations are loaded using electrode-confippet. For additional informat
 
                     "github-oauth": {
                         "options": {
-                            //A Cookie password otherwise a raondom one (Optional)
+                            //A Cookie password otherwise a random one (Optional)
                             "password":"<%= another cookie password%>",
                              //This is true by default if not running https change to false.   You should run over https though
                             "isSecure":true,
@@ -126,7 +126,7 @@ The configurations are loaded using electrode-confippet. For additional informat
                     },
                    "session": {
                         "options": {
-                            //A Cookie password otherwise a raondom one (Optional)
+                            //A Cookie password otherwise a random one (Optional)
                             "password":"<%= another cookie password%>",
                              //This is true by default if not running https change to false.   You should run over https though
                             "isSecure":true
@@ -210,7 +210,7 @@ $ code-push register https://<%=your_ota_server%>
 
 #### Login
 
-After registering, if you need to log back in or if your acccess-key is lost or expired, you can log back in using the following command:  
+After registering, if you need to log back in or if your access-key is lost or expired, you can log back in using the following command:  
 ```sh
 $ code-push login https://<%=your_ota_server%>
 ```
