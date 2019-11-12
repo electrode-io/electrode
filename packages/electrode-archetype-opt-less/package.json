@@ -34,7 +34,7 @@
   "electrodeOptArchetype": {
     "optionalTagName": "less",
     "expectTag": true,
-    "devOnly": false,
+    "devOnly": true,
     "defaultInstall": true
   }
 }

@@ -2,7 +2,7 @@
 
 ESLint is enabled using the `clap features` interactive command or using npm:
 ```sh
-npm i electrode-archetype-opt-eslint
+npm i -D electrode-archetype-opt-eslint
 ```
 
 The app archetype provides eslint configuration files base on [eslint-config-walmart]. The RC files can be found in the `config/eslint` directory of the module `electrode-archetype-react-app-dev`.

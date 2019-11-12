@@ -42,7 +42,7 @@
   "electrodeOptArchetype": {
     "optionalTagName": "postcss",
     "expectTag": true,
-    "devOnly": false,
+    "devOnly": true,
     "defaultInstall": true
   }
 }

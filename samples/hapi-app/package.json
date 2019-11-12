@@ -57,9 +57,6 @@
     "react-notify-toast": "^0.5.0",
     "react-router-config": "^5.1.1",
     "react-router-dom": "^5.1.2",
-    "electrode-archetype-opt-less": "^1.0.2",
-    "electrode-archetype-opt-postcss": "^1.0.4",
-    "electrode-archetype-opt-pwa": "^1.0.6",
     "electrode-archetype-opt-react": "^2.0.4",
     "electrode-archetype-opt-react-intl": "^1.0.0"
   },
@@ -69,7 +66,10 @@
     "electrode-archetype-opt-critical-css": "^1.0.3",
     "electrode-archetype-opt-jest": "^1.0.3",
     "electrode-archetype-opt-karma": "^2.0.6",
+    "electrode-archetype-opt-less": "^1.0.2",
     "electrode-archetype-opt-phantomjs": "^1.0.2",
+    "electrode-archetype-opt-postcss": "^1.0.4",
+    "electrode-archetype-opt-pwa": "^1.0.6",
     "electrode-archetype-opt-sinon": "^1.0.3",
     "electrode-archetype-opt-stylus": "^1.0.2",
     "electrode-archetype-opt-typescript": "^1.0.3"

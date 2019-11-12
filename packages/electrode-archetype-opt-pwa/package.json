@@ -41,7 +41,7 @@
   "electrodeOptArchetype": {
     "optionalTagName": "pwa",
     "expectTag": true,
-    "devOnly": false,
+    "devOnly": true,
     "defaultInstall": true
   }
 }
