@@ -35,7 +35,7 @@ function searchUserCustomConfig(options) {
     },
     {
       dir: archPath,
-      file: options.configFilename
+      file: configFilename
     }
   ];
 
