@@ -60,6 +60,7 @@ class Feature {
     this.setEnabled = this.setEnabled.bind(this);
     this.removeLegacyEnabled = this.removeLegacyEnabled.bind(this);
     this.convert = this.convert.bind(this);
+    this.getConflictingFeatures = this.getConflictingFeatures.bind(this);
   }
 
   async attachNpmAttributes() {
@@ -124,6 +125,9 @@ class Feature {
   }
 
   get enabled() {
+    if (this.hasOwnProperty("_enabled")) {
+      return this._enabled;
+    }
     return Boolean(
       ["dependencies", "devDependencies"].find(
         x => appPkg && appPkg[x] && appPkg[x].hasOwnProperty(this.packageName)
@@ -209,6 +213,9 @@ class Feature {
   }
 
   setEnabled(pkg, enabled) {
+    if (enabled === this.enabled) {
+      return pkg;
+    }
     const dependencies = { ...pkg.dependencies };
     const devDependencies = { ...pkg.devDependencies };
     if (enabled && this.electrodeOptArchetype.devOnly) {
@@ -221,6 +228,7 @@ class Feature {
       delete dependencies[this.packageName];
       delete devDependencies[this.packageName];
     }
+    this._enabled = enabled;
     return {
       ...pkg,
       dependencies,
@@ -240,6 +248,20 @@ class Feature {
   convert(pkg) {
     pkg = this.setEnabled(pkg, this.enabledLegacy);
     return this.removeLegacyEnabled(pkg);
+  }
+
+  getConflictingFeatures(features) {
+    if (!this.exclusivities.length) {
+      return [];
+    }
+
+    return features.filter((feature) => {
+      if (feature.packageName === this.packageName || !feature.enabled) {
+        return false;
+      }
+
+      return this.exclusivities.indexOf(feature.packageName) >= 0;
+    });
   }
 }
 
@@ -352,21 +374,28 @@ async function promptForConversion(features) {
 }
 
 async function promptForEnabled(features) {
-  const featureEnablePrompts = features.map((feature, index) => ({
-    type: "confirm",
-    name: index,
-    message: `Enable ${feature.name}?`,
-    initial: feature.enabled
-  }));
-  const responses = await prompts(featureEnablePrompts);
   let pkg = appPkg;
-  features.forEach((feature, index) => {
-    const enabled = responses[index];
-    if (feature.enabled === enabled) {
-      return;
+  const seenFeatures = [];
+  for (let i = 0; i < features.length; ++i) {
+    const feature = features[i];
+    const conflicts = feature.getConflictingFeatures(seenFeatures);
+    if (conflicts.length > 0) {
+      console.log(`Because ${feature.packageName} conflicts with ${conflicts[0].packageName}, it has been automatically deselected.`);
+      pkg = feature.setEnabled(pkg, false);
+      continue;
     }
+
+    seenFeatures.push(feature);
+    const prompt = {
+      type: "confirm",
+      name: feature.packageName,
+      message: `Enable ${feature.name}?`,
+      initial: feature.enabled,
+    };
+    const response = await prompts(prompt);
+    const enabled = response[feature.packageName];
     pkg = feature.setEnabled(pkg, enabled);
-  });
+  }
   writeAppPkg(pkg);
 }
 
