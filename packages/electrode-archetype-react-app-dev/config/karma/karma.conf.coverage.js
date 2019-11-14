@@ -18,11 +18,7 @@ const webpackCovCfg = require(customCheck.getWebpackStartConfig(
 module.exports = function(config) {
   karmaConf(config);
   const settings = {
-    reporters: [
-      "spec",
-      // "sonarqubeUnit",
-      "coverage"
-    ],
+    reporters: ["spec", "sonarqubeUnit", "coverage"],
     webpack: webpackCovCfg,
     coverageReporter: {
       reporters: [
@@ -31,14 +27,14 @@ module.exports = function(config) {
         { type: "text", subdir: "." }
       ],
       dir: Path.resolve("coverage", "client")
+    },
+    sonarQubeUnitReporter: {
+      sonarQubeVersion: "5.x",
+      outputFile: "gunit.xml",
+      outputDir: Path.resolve("coverage", "client"),
+      overrideTestDescription: true,
+      useBrowserName: false
     }
-    // sonarQubeUnitReporter: {
-    //   sonarQubeVersion: "5.x",
-    //   outputFile: "gunit.xml",
-    //   outputDir: Path.resolve("coverage", "client"),
-    //   overrideTestDescription: true,
-    //   useBrowserName: false
-    // }
   };
 
   loadUserConfig(Path.basename(__filename), config, settings);
