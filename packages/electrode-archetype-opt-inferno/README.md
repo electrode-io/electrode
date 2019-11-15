@@ -1,37 +1,37 @@
 # Electrode Archetype Option Inferno
 
-Allow [Electrode](https://github.com/electrode-io/electrode) apps to optionally choose to use the [inferno](https://github.com/infernojs/inferno) lib.
+This is a feature package that instructs [Electrode](https://github.com/electrode-io/electrode) to install Inferno.
 
-The app can set React lib by adding a file `archetype/config/index.js` or `archetype/config.js` and set:
+## Interactive Install
 
-```js
-module.exports = {
-  options: {
-    reactLib: "inferno"
-  }
-};
+Inclusion of this (and all other [Electrode](https://github.com/electrode-io/electrode) features) is maintained by the `features` xclap task.
+
+To run `features` in interactive mode (recommended!), simply call the `features` xclap task with no arguments:
+
+```sh
+clap features
 ```
 
-This module only installs if `reactLib` is set to `inferno`.
+## Migrating from legacy archetype options
 
-# Usage
+In versions of Electrode Archetype < 7, features were enabled or disabled by modifying `archetype/config/index.js` or `archetype/config.js`. To migrate from legacy features, simply run the `features` xclap task with no arguments:
 
-This module generally is included by other Electrode modules.  An Electrode app should not need to install this directly.
-
-## Install
-
-In `package.json`:
-
-```js
-{
-  "optionalDependencies": {
-    "electrode-archetype-opt-inferno": "^0.1.0"
-  }
-}
+```sh
+clap features
 ```
 
-And setup archetype config accordingly.
+If the features task detects that you are still using legacy features, it will give you the following prompt: `Convert archetype feature usage to new style (recommended)?`. Answering `yes` to this question will cause the legacy features to be migrated to the new style.
+
+## Manual Install
+
+This feature can also be installed directly using npm:
+
+```sh
+npm install electrode-archetype-opt-inferno
+```
 
 ## License
 
-Built with :heart: by [Team Electrode](https://github.com/orgs/electrode-io/people) @WalmartLabs.
+Copyright (c) 2016-present, WalmartLabs
+
+Licensed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).

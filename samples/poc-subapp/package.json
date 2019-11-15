@@ -47,10 +47,25 @@
     "redux": "^4.0.4",
     "subapp-redux": "../../packages/subapp-redux",
     "subapp-server": "../../packages/subapp-server",
-    "subapp-web": "../../packages/subapp-web"
+    "subapp-web": "../../packages/subapp-web",
+    "electrode-archetype-opt-react": "^2.0.4",
+    "electrode-archetype-opt-react-intl": "^1.0.0"
   },
   "devDependencies": {
-    "electrode-archetype-react-app-dev": "^6.3.0"
+    "electrode-archetype-react-app-dev": "^6.3.0",
+    "electrode-archetype-opt-critical-css": "^1.0.3",
+    "electrode-archetype-opt-eslint": "^1.0.3",
+    "electrode-archetype-opt-flow": "^1.0.2",
+    "electrode-archetype-opt-jest": "^1.0.3",
+    "electrode-archetype-opt-karma": "^2.0.6",
+    "electrode-archetype-opt-less": "^1.0.2",
+    "electrode-archetype-opt-mocha": "^1.0.3",
+    "electrode-archetype-opt-phantomjs": "^1.0.2",
+    "electrode-archetype-opt-postcss": "^1.0.4",
+    "electrode-archetype-opt-pwa": "^1.0.6",
+    "electrode-archetype-opt-sinon": "^1.0.3",
+    "electrode-archetype-opt-stylus": "^1.0.2",
+    "electrode-archetype-opt-typescript": "^1.0.3"
   },
   "fyn": {
     "dependencies": {
@@ -59,5 +74,6 @@
     "devDependencies": {
       "electrode-archetype-react-app-dev": "../../packages/electrode-archetype-react-app-dev"
     }
-  }
+  },
+  "optionalDependencies": {}
 }

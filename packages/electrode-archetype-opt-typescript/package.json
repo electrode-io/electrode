@@ -34,6 +34,7 @@
   "electrodeOptArchetype": {
     "optionalTagName": "typescript",
     "expectTag": true,
+    "devOnly": true,
     "defaultInstall": true
   }
 }

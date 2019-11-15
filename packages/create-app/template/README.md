@@ -30,7 +30,7 @@ Some initial things to do and try:
 
 4. Create some React components and add them to the home or demo subapp.
 
-5. Enable some optional features in `archetype/config/index.js`.
+5. Enable some optional features using `clap features`.
 
 6. Read up on a quick intro to the [Electrode SubApp architecture](https://github.com/electrode-io/electrode/blob/master/samples/poc-subapp/README.md).
 

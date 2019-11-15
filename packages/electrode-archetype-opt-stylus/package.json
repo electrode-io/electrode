@@ -34,6 +34,7 @@
   "electrodeOptArchetype": {
     "optionalTagName": "stylus",
     "expectTag": true,
+    "devOnly": true,
     "defaultInstall": true
   }
 }

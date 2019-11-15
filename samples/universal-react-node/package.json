@@ -49,13 +49,28 @@
     "react-router-config": "^5.1.1",
     "react-router-dom": "^5.1.2",
     "react-vendor-dll": "../react-vendor-dll",
-    "uuid": "^3.0.1"
+    "uuid": "^3.0.1",
+    "electrode-archetype-opt-react": "^2.0.4",
+    "electrode-archetype-opt-react-intl": "^1.0.0"
   },
   "devDependencies": {
     "electrode-archetype-react-app-dev": "^5.4.23",
     "redux-devtools": "^3.3.1",
     "redux-devtools-dock-monitor": "^1.1.1",
-    "redux-devtools-log-monitor": "^1.0.11"
+    "redux-devtools-log-monitor": "^1.0.11",
+    "electrode-archetype-opt-critical-css": "^1.0.3",
+    "electrode-archetype-opt-eslint": "^1.0.3",
+    "electrode-archetype-opt-flow": "^1.0.2",
+    "electrode-archetype-opt-jest": "^1.0.3",
+    "electrode-archetype-opt-karma": "^2.0.6",
+    "electrode-archetype-opt-less": "^1.0.2",
+    "electrode-archetype-opt-mocha": "^1.0.3",
+    "electrode-archetype-opt-phantomjs": "^1.0.2",
+    "electrode-archetype-opt-postcss": "^1.0.4",
+    "electrode-archetype-opt-pwa": "^1.0.6",
+    "electrode-archetype-opt-sinon": "^1.0.3",
+    "electrode-archetype-opt-stylus": "^1.0.2",
+    "electrode-archetype-opt-typescript": "^1.0.3"
   },
   "fyn": {
     "dependencies": {
@@ -67,5 +82,6 @@
     "devDependencies": {
       "electrode-archetype-react-app-dev": "../../packages/electrode-archetype-react-app-dev"
     }
-  }
+  },
+  "optionalDependencies": {}
 }

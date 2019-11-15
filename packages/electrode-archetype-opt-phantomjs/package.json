@@ -35,6 +35,7 @@
   "electrodeOptArchetype": {
     "optionalTagName": "phantomjs",
     "expectTag": true,
+    "devOnly": true,
     "defaultInstall": true
   }
 }

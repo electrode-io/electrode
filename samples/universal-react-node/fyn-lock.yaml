@@ -1614,7 +1614,6 @@ accept:
 accepts:
  _latest: 1.3.5
  _:
-  1.3.3: 1.3.3
   '~1.3.4,~1.3.5': 1.3.5
  1.3.5:
   $: sha1-63d99gEXI6OxTopywIBcjoZ0a9I=
@@ -1622,17 +1621,10 @@ accepts:
   dependencies:
    mime-types: ~2.1.18
    negotiator: 0.6.1
- 1.3.3:
-  $: sha1-w8p0NJOGSMPg2cHjKN1otiLChMo=
-  _: 'https://registry.npmjs.org/accepts/-/accepts-1.3.3.tgz'
-  dependencies:
-   mime-types: ~2.1.11
-   negotiator: 0.6.1
 acorn:
  _latest: 6.1.1
  _:
   ^3.0.4: 3.3.0
-  ^4.0.3: 4.0.13
   '^5.5.0,^5.5.3': 5.7.3
   '^6.0.1,^6.0.5': 6.1.1
   ^6.2.1: 6.3.0
@@ -1645,9 +1637,6 @@ acorn:
  5.7.3:
   $: sha512-T/zvzYRfbVojPWahDsE5evJdHb3oJoQfFbsrKM7w5Zcs++Tr257tia3BmMP8XYVjp1S9RZXQMh7gao96BlqZOw==
   _: 'https://registry.npmjs.org/acorn/-/acorn-5.7.3.tgz'
- 4.0.13:
-  $: sha1-EFSVrlNh1pe9GVyCUZLhrX8lN4c=
-  _: 'https://registry.npmjs.org/acorn/-/acorn-4.0.13.tgz'
  3.3.0:
   $: sha1-ReN/s56No/JbruP/U2niu18iAXo=
   _: 'https://registry.npmjs.org/acorn/-/acorn-3.3.0.tgz'
@@ -1865,7 +1854,7 @@ ansi-styles:
 ansi-to-html:
  _latest: 0.6.10
  _:
-  '^0.6.0,^0.6.8': 0.6.10
+  ^0.6.8: 0.6.10
  0.6.10:
   $: sha512-znsY3gvsk4CiApWu1yVYF8Nx5Vy0FEe8B0YwyxdbCdErJu5lfKlRHB2twtUjR+dxR4WewTk2OP8XqTmWYnImOg==
   _: 'https://registry.npmjs.org/ansi-to-html/-/ansi-to-html-0.6.10.tgz'
@@ -1984,17 +1973,6 @@ array-find-index:
  1.0.2:
   $: sha1-3wEKoSh+Fku9pvlyOwqWoexBh6E=
   _: 'https://registry.npmjs.org/array-find-index/-/array-find-index-1.0.2.tgz'
-array-flatten:
- _latest: 2.1.2
- _:
-  1.1.1: 1.1.1
-  ^2.1.0: 2.1.2
- 2.1.2:
-  $: sha512-hNfzcOV8W4NdualtqBFPyVO+54DSJuZGY9qT4pRroB6S9e3iiido2ISIC5h9R2sPJ8H3FHCIiEnsv1lPXO3KtQ==
-  _: 'https://registry.npmjs.org/array-flatten/-/array-flatten-2.1.2.tgz'
- 1.1.1:
-  $: sha1-ml9pkFGx5wczKPKgCJaLZOopVdI=
-  _: 'https://registry.npmjs.org/array-flatten/-/array-flatten-1.1.1.tgz'
 array-from:
  _latest: 2.1.1
  _:
@@ -2070,14 +2048,10 @@ array.prototype.flat:
 arraybuffer.slice:
  _latest: 0.0.7
  _:
-  0.0.6: 0.0.6
   ~0.0.7: 0.0.7
  0.0.7:
   $: sha512-wGUIVQXuehL5TCqQun8OW81jGzAWycqzFF8lFp+GOM5BXLYj3bKNsYC4daB7n6XjCqxQA/qgTJ+8ANR3acjrog==
   _: 'https://registry.npmjs.org/arraybuffer.slice/-/arraybuffer.slice-0.0.7.tgz'
- 0.0.6:
-  $: sha1-8zshWfBTKj8xB6JywMz70a0peco=
-  _: 'https://registry.npmjs.org/arraybuffer.slice/-/arraybuffer.slice-0.0.6.tgz'
 arrify:
  _latest: 2.0.1
  _:
@@ -2159,7 +2133,7 @@ astral-regex:
 async:
  _latest: 2.6.2
  _:
-  '1.x,^1.5.0,^1.5.2': 1.5.2
+  '1.x,^1.5.0': 1.5.2
   '^2.0.0,^2.1.2,^2.1.4,^2.4.0': 2.6.2
   ~1.0.0: 1.0.0
  2.6.2:
@@ -2783,14 +2757,10 @@ bindings:
 blob:
  _latest: 0.0.5
  _:
-  0.0.4: 0.0.4
   0.0.5: 0.0.5
  0.0.5:
   $: sha512-gaqbzQPqOoamawKg0LGVd7SzLgXS+JH61oWprSLH+P+abTczqJbhTR8CmJ2u9/bUYNmHTGJx/UEmn6doAvvuig==
   _: 'https://registry.npmjs.org/blob/-/blob-0.0.5.tgz'
- 0.0.4:
-  $: sha1-vPEwUspURj8w+fx+lbmkdjCpSSE=
-  _: 'https://registry.npmjs.org/blob/-/blob-0.0.4.tgz'
 block-stream:
  _latest: 0.0.9
  _:
@@ -2841,7 +2811,7 @@ bn.js:
 body-parser:
  _latest: 1.18.3
  _:
-  '1.18.3,^1.16.1': 1.18.3
+  ^1.16.1: 1.18.3
  1.18.3:
   $: sha1-WykhmP/dVTs6DyDe0FkrlWlVyLQ=
   _: 'https://registry.npmjs.org/body-parser/-/body-parser-1.18.3.tgz'
@@ -2856,20 +2826,6 @@ body-parser:
    qs: 6.5.2
    raw-body: 2.3.3
    type-is: ~1.6.16
-bonjour:
- _latest: 3.5.0
- _:
-  ^3.5.0: 3.5.0
- 3.5.0:
-  $: sha1-jokKGD2O6aI5OzhExpGkK897yfU=
-  _: 'https://registry.npmjs.org/bonjour/-/bonjour-3.5.0.tgz'
-  dependencies:
-   array-flatten: ^2.1.0
-   deep-equal: ^1.0.1
-   dns-equal: ^1.0.0
-   dns-txt: ^2.0.2
-   multicast-dns: ^6.0.1
-   multicast-dns-service-types: ^1.1.0
 boolbase:
  _latest: 1.0.0
  _:
@@ -3177,13 +3133,6 @@ buffer-from:
  1.1.1:
   $: sha512-MQcXEUbCKtEo7bhqEs6560Hyd4XaovZlO/k9V3hjVUF/zwW7KBVdSK4gIt/bzwS9MbR5qob+F5jusZsb0YQK2A==
   _: 'https://registry.npmjs.org/buffer-from/-/buffer-from-1.1.1.tgz'
-buffer-indexof:
- _latest: 1.1.1
- _:
-  ^1.0.0: 1.1.1
- 1.1.1:
-  $: sha512-4/rOEg86jivtPTeOUUT61jJO1Ya1TrR/OkqCSZDyq84WJh3LuuiphBYJN+fm5xufIk4XAFcEwte/8WzC8If/1g==
-  _: 'https://registry.npmjs.org/buffer-indexof/-/buffer-indexof-1.1.1.tgz'
 buffer-indexof-polyfill:
  _latest: 1.0.1
  _:
@@ -3484,7 +3433,7 @@ chainsaw:
 chalk:
  _latest: 2.4.2
  _:
-  '2.4.2,^2.0.0,^2.0.1,^2.1.0,^2.3.0,^2.4.1,^2.4.2': 2.4.2
+  '2.4.2,^2.0.0,^2.0.1,^2.1.0,^2.4.1,^2.4.2': 2.4.2
   '^1.1.1,^1.1.3': 1.1.3
  2.4.2:
   $: sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==
@@ -3559,7 +3508,7 @@ cheerio:
 chokidar:
  _latest: 2.1.5
  _:
-  '^2.0.2,^2.0.3,^2.0.4,^2.1.5': 2.1.5
+  '^2.0.2,^2.0.3,^2.0.4': 2.1.5
  2.1.5:
   $: sha512-i0TprVWp+Kj4WRPtInjexJ8Q+BqTE909VpH8xVhXrJkoc5QC8VO9TryGOqTr+2hljzc1sC62t22h5tZePodM/A==
   _: 'https://registry.npmjs.org/chokidar/-/chokidar-2.1.5.tgz'
@@ -3863,14 +3812,10 @@ component-bind:
 component-emitter:
  _latest: 1.3.0
  _:
-  1.1.2: 1.1.2
   '1.2.1,^1.2.1': 1.2.1
  1.2.1:
   $: sha1-E3kY1teCg/ffemt8WmPhQOaUJeY=
   _: 'https://registry.npmjs.org/component-emitter/-/component-emitter-1.2.1.tgz'
- 1.1.2:
-  $: sha1-KWWU8nU9qmOZbSrwjRWpURbJrsM=
-  _: 'https://registry.npmjs.org/component-emitter/-/component-emitter-1.1.2.tgz'
 component-inherit:
  _latest: 0.0.3
  _:
@@ -3878,30 +3823,6 @@ component-inherit:
  0.0.3:
   $: sha1-ZF/ErfWLcrZJ1crmUTVhnbJv8UM=
   _: 'https://registry.npmjs.org/component-inherit/-/component-inherit-0.0.3.tgz'
-compressible:
- _latest: 2.0.17
- _:
-  ~2.0.16: 2.0.17
- 2.0.17:
-  $: sha512-BGHeLCK1GV7j1bSmQQAi26X+GgWcTjLr/0tzSvMCl3LH1w1IJ4PFSPoV5316b30cneTziC+B1a+3OjoSUcQYmw==
-  _: 'https://registry.npmjs.org/compressible/-/compressible-2.0.17.tgz'
-  dependencies:
-   mime-db: '>= 1.40.0 < 2'
-compression:
- _latest: 1.7.4
- _:
-  ^1.7.4: 1.7.4
- 1.7.4:
-  $: sha512-jaSIDzP9pZVS4ZfQ+TzvtiWhdpFhE2RDHz8QJkpX9SIpLq88VueF5jJw6t+6CUQcAoA6t+x89MLrWAqpfDE8iQ==
-  _: 'https://registry.npmjs.org/compression/-/compression-1.7.4.tgz'
-  dependencies:
-   accepts: ~1.3.5
-   bytes: 3.0.0
-   compressible: ~2.0.16
-   debug: 2.6.9
-   on-headers: ~1.0.2
-   safe-buffer: 5.1.2
-   vary: ~1.1.2
 concat-map:
  _latest: 0.0.1
  _:
@@ -3947,13 +3868,6 @@ connect:
    finalhandler: 1.1.0
    parseurl: ~1.3.2
    utils-merge: 1.0.1
-connect-history-api-fallback:
- _latest: 1.6.0
- _:
-  ^1.6.0: 1.6.0
- 1.6.0:
-  $: sha512-e54B99q/OUoH64zYYRf3HBP5z24G38h5D3qXu23JGRoigpX5Ss4r9ZnDk3g0Z8uQC2x2lPaJ+UlWBc1ZWBWdLg==
-  _: 'https://registry.npmjs.org/connect-history-api-fallback/-/connect-history-api-fallback-1.6.0.tgz'
 console-browserify:
  _latest: 1.1.0
  _:
@@ -3987,13 +3901,6 @@ content:
   dependencies:
    boom: 5.x.x
   deprecated: 'This version has been deprecated in accordance with the hapi support policy (hapi.im/support). Please upgrade to the latest version to get the best features, bug fixes, and security patches. If you are unable to upgrade at this time, paid support is available for older versions (hapi.im/commercial).'
-content-disposition:
- _latest: 0.5.3
- _:
-  0.5.2: 0.5.2
- 0.5.2:
-  $: sha1-DPaLud318r55YcOoUXjLhdunjLQ=
-  _: 'https://registry.npmjs.org/content-disposition/-/content-disposition-0.5.2.tgz'
 content-type:
  _latest: 1.0.4
  _:
@@ -4017,13 +3924,6 @@ cookie:
  0.3.1:
   $: sha1-5+Ch+e9DtMi6klxcWpboBtFoc7s=
   _: 'https://registry.npmjs.org/cookie/-/cookie-0.3.1.tgz'
-cookie-signature:
- _latest: 1.1.0
- _:
-  1.0.6: 1.0.6
- 1.0.6:
-  $: sha1-4wOogrNCzD7oylE6eZmXNNqzriw=
-  _: 'https://registry.npmjs.org/cookie-signature/-/cookie-signature-1.0.6.tgz'
 copy-concurrently:
  _latest: 1.0.5
  _:
@@ -4646,12 +4546,11 @@ deasync:
 debug:
  _latest: 4.1.1
  _:
-  '2.2.0,~2.2.0': 2.2.0
-  2.3.3: 2.3.3
   '2.6.9,^2.2.0,^2.3.3,^2.6.8,^2.6.9': 2.6.9
   '3.1.0,~3.1.0': 3.1.0
-  '^3.1.0,^3.2.5,^3.2.6': 3.2.6
+  '^3.1.0,^3.2.6': 3.2.6
   '^4.1.0,^4.1.1': 4.1.1
+  ~2.2.0: 2.2.0
  4.1.1:
   $: sha512-pYAIzeRo8J6KPEaJ0VWOh5Pzkbw/RetuzehGM7QRRX5he4fPHx2rdKMB256ehJCkX+XRQm16eZLqLNS8RSZXZw==
   _: 'https://registry.npmjs.org/debug/-/debug-4.1.1.tgz'
@@ -4672,11 +4571,6 @@ debug:
   _: 'https://registry.npmjs.org/debug/-/debug-2.6.9.tgz'
   dependencies:
    ms: 2.0.0
- 2.3.3:
-  $: sha1-QMRT5n5uE8kB3ewxeviYbNqe/4w=
-  _: 'https://registry.npmjs.org/debug/-/debug-2.3.3.tgz'
-  dependencies:
-   ms: 0.7.2
  2.2.0:
   $: sha1-+HBX6ZWxofauaklgZkE3vFbwOdo=
   _: 'https://registry.npmjs.org/debug/-/debug-2.2.0.tgz'
@@ -4714,13 +4608,6 @@ deep-eql:
   _: 'https://registry.npmjs.org/deep-eql/-/deep-eql-3.0.1.tgz'
   dependencies:
    type-detect: ^4.0.0
-deep-equal:
- _latest: 1.0.1
- _:
-  ^1.0.1: 1.0.1
- 1.0.1:
-  $: sha1-9dJgKStmDghO/0zbyfCK0yR0SLU=
-  _: 'https://registry.npmjs.org/deep-equal/-/deep-equal-1.0.1.tgz'
 deep-extend:
  _latest: 0.6.0
  _:
@@ -4739,16 +4626,6 @@ deep-is:
  0.1.3:
   $: sha1-s2nW+128E+7PUk+RsHD+7cNXzzQ=
   _: 'https://registry.npmjs.org/deep-is/-/deep-is-0.1.3.tgz'
-default-gateway:
- _latest: 4.2.0
- _:
-  ^4.2.0: 4.2.0
- 4.2.0:
-  $: sha512-h6sMrVB1VMWVrW13mSc6ia/DwYYw5MN6+exNu1OaJeFac5aSAvwM7lZ0NVfTABuSkQelr4h5oebg3KB1XPdjgA==
-  _: 'https://registry.npmjs.org/default-gateway/-/default-gateway-4.2.0.tgz'
-  dependencies:
-   execa: ^1.0.0
-   ip-regex: ^2.1.0
 default-require-extensions:
  _latest: 2.0.0
  _:
@@ -4799,17 +4676,6 @@ del:
  _latest: 4.1.0
  _:
   ^3.0.0: 3.0.0
-  ^4.1.0: 4.1.0
- 4.1.0:
-  $: sha512-C4kvKNlYrwXhKxz97BuohF8YoGgQ23Xm9lvoHmgT7JaPGprSEjk3+XFled74Yt/x0ZABUHg2D67covzAPUKx5Q==
-  _: 'https://registry.npmjs.org/del/-/del-4.1.0.tgz'
-  dependencies:
-   globby: ^6.1.0
-   is-path-cwd: ^2.0.0
-   is-path-in-cwd: ^2.0.0
-   p-map: ^2.0.0
-   pify: ^4.0.1
-   rimraf: ^2.6.3
  3.0.0:
   $: sha1-U+z2mf/LyzljdpGrE7rxYIGXZuU=
   _: 'https://registry.npmjs.org/del/-/del-3.0.0.tgz'
@@ -4851,13 +4717,6 @@ des.js:
   dependencies:
    inherits: ^2.0.1
    minimalistic-assert: ^1.0.0
-destroy:
- _latest: 1.0.4
- _:
-  ~1.0.4: 1.0.4
- 1.0.4:
-  $: sha1-l4hXRCxEdJ5CBmE+N5RiBYJqvYA=
-  _: 'https://registry.npmjs.org/destroy/-/destroy-1.0.4.tgz'
 detect-file:
  _latest: 1.0.0
  _:
@@ -4920,32 +4779,6 @@ discontinuous-range:
  1.0.0:
   $: sha1-44Mx8IRLukm5qctxx3FYWqsbxlo=
   _: 'https://registry.npmjs.org/discontinuous-range/-/discontinuous-range-1.0.0.tgz'
-dns-equal:
- _latest: 1.0.0
- _:
-  ^1.0.0: 1.0.0
- 1.0.0:
-  $: sha1-s55/HabrCnW6nBcySzR1PEfgZU0=
-  _: 'https://registry.npmjs.org/dns-equal/-/dns-equal-1.0.0.tgz'
-dns-packet:
- _latest: 5.2.1
- _:
-  ^1.3.1: 1.3.1
- 1.3.1:
-  $: sha512-0UxfQkMhYAUaZI+xrNZOz/as5KgDU0M/fQ9b6SpkyLbk3GEswDi6PADJVaYJradtRVsRIlF1zLyOodbcTCDzUg==
-  _: 'https://registry.npmjs.org/dns-packet/-/dns-packet-1.3.1.tgz'
-  dependencies:
-   ip: ^1.1.0
-   safe-buffer: ^5.0.1
-dns-txt:
- _latest: 2.0.2
- _:
-  ^2.0.2: 2.0.2
- 2.0.2:
-  $: sha1-uR2Ab10nGI5Ks+fRB9iBocxGQrY=
-  _: 'https://registry.npmjs.org/dns-txt/-/dns-txt-2.0.2.tgz'
-  dependencies:
-   buffer-indexof: ^1.0.0
 doctrine:
  _latest: 3.0.0
  _:
@@ -5150,22 +4983,30 @@ ejs:
   $: sha512-0xy4A/twfrRCnkhfk8ErDi5DqdAsAqeGxht4xkCUrsvhhbQNs7E+4jV0CN7+NKIY0aHE72+XvqtBIXzD31ZbXQ==
   _: 'https://registry.npmjs.org/ejs/-/ejs-2.6.1.tgz'
 electrode-archetype-opt-critical-css:
- _latest: 1.0.2-fynlocal_h
+ _latest: 1.0.3
  _:
-  ../electrode-archetype-opt-critical-css: 1.0.2-fynlocal_h
- 1.0.2-fynlocal_h:
-  hasPI: 1
+  ../electrode-archetype-opt-critical-css: 1.0.3-fynlocal_h
+  ^1.0.3: 1.0.3
+ 1.0.3-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-critical-css
   dependencies:
    clean-css: ^4.2.1
    penthouse: ^2.2.0
-electrode-archetype-opt-eslint:
- _latest: 1.0.2-fynlocal_h
- _:
-  ../electrode-archetype-opt-eslint: 1.0.2-fynlocal_h
- 1.0.2-fynlocal_h:
+ 1.0.3:
+  top: 1
   hasPI: 1
+  $: sha512-j0T4/FroL8uNvyDUuQpfAi8ZXRT5Zl8q1g2FWGPc8CNcoXMEhnkDN/vSZKYfzGz2MxYAc7wjnmcBoeunZzK0Ig==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/electrode-archetype-opt-critical-css/-/electrode-archetype-opt-critical-css-1.0.3.tgz'
+  dependencies:
+   clean-css: ^4.2.1
+   penthouse: ^2.2.0
+electrode-archetype-opt-eslint:
+ _latest: 1.0.3
+ _:
+  ../electrode-archetype-opt-eslint: 1.0.3-fynlocal_h
+  ^1.0.3: 1.0.3
+ 1.0.3-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-eslint
   dependencies:
@@ -5175,32 +5016,55 @@ electrode-archetype-opt-eslint:
    eslint-plugin-filenames: ^1.1.0
    eslint-plugin-flowtype: ^2.49.3
    eslint-plugin-react: ^7.4.0
-electrode-archetype-opt-flow:
- _latest: 1.0.1-fynlocal_h
- _:
-  ../electrode-archetype-opt-flow: 1.0.1-fynlocal_h
- 1.0.1-fynlocal_h:
+ 1.0.3:
+  top: 1
   hasPI: 1
+  $: sha512-ZvXohg3HoWFossSRCd01aVesIyjhPlGOcTN3h2CEcVyg2CImb0FA2bvdAlGhoFDAaVtrEV0jg8EQC1GlA2qDFw==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/electrode-archetype-opt-eslint/-/electrode-archetype-opt-eslint-1.0.3.tgz'
+  dependencies:
+   eslint: ^4.8.0
+   babel-eslint: ^10.0.1
+   eslint-config-walmart: ^2.0.0
+   eslint-plugin-filenames: ^1.1.0
+   eslint-plugin-flowtype: ^2.49.3
+   eslint-plugin-react: ^7.4.0
+electrode-archetype-opt-flow:
+ _latest: 1.0.2
+ _:
+  ../electrode-archetype-opt-flow: 1.0.2-fynlocal_h
+  ^1.0.2: 1.0.2
+ 1.0.2-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-flow
   dependencies:
    '@babel/plugin-transform-flow-strip-types': ^7.2.0
    flow-bin: ^0.74.0
    flow-typed: ^2.4.0
+ 1.0.2:
+  top: 1
+  hasPI: 1
+  $: sha512-1aq+b/+gVbWhQS3z2VS/JXyJtTMsCVcCnlJg3dhWsbbybhNG88oIG9oZhsZ/6fAqFoBg6Cki1jMuiJkgqjl7cA==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/electrode-archetype-opt-flow/-/electrode-archetype-opt-flow-1.0.2.tgz'
+  dependencies:
+   '@babel/plugin-transform-flow-strip-types': ^7.2.0
+   flow-bin: ^0.74.0
+   flow-typed: ^2.4.0
 electrode-archetype-opt-inferno:
- _latest: 0.2.10-fynlocal_h
+ _latest: 0.2.11-fynlocal_h
  _:
-  ../electrode-archetype-opt-inferno: 0.2.10-fynlocal_h
- 0.2.10-fynlocal_h:
-  optFailed: 1
+  ../electrode-archetype-opt-inferno: 0.2.11-fynlocal_h
+ 0.2.11-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-inferno
+  dependencies:
+   inferno: ^3.0.0
+   inferno-compat: ^3.0.0
 electrode-archetype-opt-jest:
- _latest: 1.0.2-fynlocal_h
+ _latest: 1.0.3
  _:
-  ../electrode-archetype-opt-jest: 1.0.2-fynlocal_h
- 1.0.2-fynlocal_h:
-  hasPI: 1
+  ../electrode-archetype-opt-jest: 1.0.3-fynlocal_h
+  ^1.0.3: 1.0.3
+ 1.0.3-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-jest
   dependencies:
@@ -5210,12 +5074,24 @@ electrode-archetype-opt-jest:
    enzyme-adapter-react-16: ^1.1.0
    eslint-plugin-jest: ^21.27.2
    jest: ^23.6.0
-electrode-archetype-opt-karma:
- _latest: 2.0.5-fynlocal_h
- _:
-  ../electrode-archetype-opt-karma: 2.0.5-fynlocal_h
- 2.0.5-fynlocal_h:
+ 1.0.3:
+  top: 1
   hasPI: 1
+  $: sha512-yKOzMoFB68w1+opAcGZEzlVYvkGYD3rPerrx26bkQv4JQDdFv7ABCKVJzR/tZmQcbQt5iC0/y67lUVCpA/jSRQ==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/electrode-archetype-opt-jest/-/electrode-archetype-opt-jest-1.0.3.tgz'
+  dependencies:
+   '@types/jest': ^23.3.14
+   babel-jest: ^23.6.0
+   enzyme: ^3.0.0
+   enzyme-adapter-react-16: ^1.1.0
+   eslint-plugin-jest: ^21.27.2
+   jest: ^23.6.0
+electrode-archetype-opt-karma:
+ _latest: 2.0.6
+ _:
+  ../electrode-archetype-opt-karma: 2.0.6-fynlocal_h
+  ^2.0.6: 2.0.6
+ 2.0.6-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-karma
   dependencies:
@@ -5238,23 +5114,56 @@ electrode-archetype-opt-karma:
    karma-sourcemap-loader: ^0.3.7
    karma-spec-reporter: 0.0.32
    karma-webpack: 4.0.0-rc.3
-electrode-archetype-opt-less:
- _latest: 1.0.1-fynlocal_h
- _:
-  ../electrode-archetype-opt-less: 1.0.1-fynlocal_h
- 1.0.1-fynlocal_h:
+ 2.0.6:
+  top: 1
   hasPI: 1
+  $: sha512-mL/tPocGZ5zfvXzLAs/SdSgQDlBOTWSDtDaRjmDY6Y2FZsg97aNv+0pb7dFbf1rqj0hw4ehHWH/TAJdezQJy1A==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/electrode-archetype-opt-karma/-/electrode-archetype-opt-karma-2.0.6.tgz'
+  dependencies:
+   babel-plugin-istanbul: ^5.1.0
+   chai: ^4.0.0
+   chai-as-promised: ^7.1.1
+   chai-shallowly: ^1.0.0
+   enzyme: ^3.0.0
+   enzyme-adapter-react-16: ^1.1.0
+   karma: ^3.1.1
+   karma-chrome-launcher: ^2.2.0
+   karma-coverage: ^2.0.0
+   karma-firefox-launcher: ^1.1.0
+   karma-ie-launcher: ^1.0.0
+   karma-intl-shim: ^1.0.3
+   karma-mocha: ^1.3.0
+   karma-mocha-reporter: ^2.2.2
+   karma-safari-launcher: ^1.0.0
+   karma-sonarqube-unit-reporter: 0.0.18
+   karma-sourcemap-loader: ^0.3.7
+   karma-spec-reporter: 0.0.32
+   karma-webpack: 4.0.0-rc.3
+electrode-archetype-opt-less:
+ _latest: 1.0.2
+ _:
+  ../electrode-archetype-opt-less: 1.0.2-fynlocal_h
+  ^1.0.2: 1.0.2
+ 1.0.2-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-less
   dependencies:
    less: ^3.9.0
    less-loader: ^4.1.0
-electrode-archetype-opt-mocha:
- _latest: 1.0.2-fynlocal_h
- _:
-  ../electrode-archetype-opt-mocha: 1.0.2-fynlocal_h
- 1.0.2-fynlocal_h:
+ 1.0.2:
+  top: 1
   hasPI: 1
+  $: sha512-8SSqGH5SoVdIu4AxDvYBQe7EAh79QTneOIYpGAyRvsZSL+aq5dUR1d9ryI16jj23FBptTksunOnv2Ec40sHqng==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/electrode-archetype-opt-less/-/electrode-archetype-opt-less-1.0.2.tgz'
+  dependencies:
+   less: ^3.9.0
+   less-loader: ^4.1.0
+electrode-archetype-opt-mocha:
+ _latest: 1.0.3
+ _:
+  ../electrode-archetype-opt-mocha: 1.0.3-fynlocal_h
+  ^1.0.3: 1.0.3
+ 1.0.3-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-mocha
   dependencies:
@@ -5265,24 +5174,46 @@ electrode-archetype-opt-mocha:
    enzyme: ^3.0.0
    enzyme-adapter-react-16: ^1.1.0
    mocha: ^4.0.0
-electrode-archetype-opt-phantomjs:
- _latest: 1.0.1-fynlocal_h
- _:
-  ../electrode-archetype-opt-phantomjs: 1.0.1-fynlocal_h
- 1.0.1-fynlocal_h:
+ 1.0.3:
+  top: 1
   hasPI: 1
+  $: sha512-uRJOj03Bu0s2JEH6HdVcz0+c+zzX63WlsGOcwouJ1aDW4aTFueMt6oT9dynGUUKzHHFUifm0rjwLlhrTJ9W+Hw==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/electrode-archetype-opt-mocha/-/electrode-archetype-opt-mocha-1.0.3.tgz'
+  dependencies:
+   '@types/mocha': 5.2.7
+   chai: ^4.0.0
+   chai-as-promised: ^7.1.1
+   chai-shallowly: ^1.0.0
+   enzyme: ^3.0.0
+   enzyme-adapter-react-16: ^1.1.0
+   mocha: ^4.0.0
+electrode-archetype-opt-phantomjs:
+ _latest: 1.0.2
+ _:
+  ../electrode-archetype-opt-phantomjs: 1.0.2-fynlocal_h
+  ^1.0.2: 1.0.2
+ 1.0.2-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-phantomjs
   dependencies:
    karma-phantomjs-launcher: ^1.0.4
    karma-phantomjs-shim: ^1.5.0
    phantomjs-prebuilt: ^2.1.16
-electrode-archetype-opt-postcss:
- _latest: 1.0.3-fynlocal_h
- _:
-  ../electrode-archetype-opt-postcss: 1.0.3-fynlocal_h
- 1.0.3-fynlocal_h:
+ 1.0.2:
+  top: 1
   hasPI: 1
+  $: sha512-enELv+MTp7XvKHc9JGPY29tEfCYGPNPjgMK8OMdFBCQtPD8j0iv1ZjJqocveBrPguBtOJwKfTsTDaimuaREKAQ==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/electrode-archetype-opt-phantomjs/-/electrode-archetype-opt-phantomjs-1.0.2.tgz'
+  dependencies:
+   karma-phantomjs-launcher: ^1.0.4
+   karma-phantomjs-shim: ^1.5.0
+   phantomjs-prebuilt: ^2.1.16
+electrode-archetype-opt-postcss:
+ _latest: 1.0.4
+ _:
+  ../electrode-archetype-opt-postcss: 1.0.4-fynlocal_h
+  ^1.0.4: 1.0.4
+ 1.0.4-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-postcss
   dependencies:
@@ -5294,12 +5225,26 @@ electrode-archetype-opt-postcss:
    postcss-preset-env: ^5.3.0
    postcss-scss: ^1.0.6
    sugarss: ^1.0.1
-electrode-archetype-opt-pwa:
- _latest: 1.0.5-fynlocal_h
- _:
-  ../electrode-archetype-opt-pwa: 1.0.5-fynlocal_h
- 1.0.5-fynlocal_h:
+ 1.0.4:
+  top: 1
   hasPI: 1
+  $: sha512-WtVOhkcrXhEGAvLezgbfWaMx2/m5ZaS1UDSMTXZolaUY6u7T117Z4z4YnQybER7SaKyGWV6zX5w/ZD37SoHngQ==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/electrode-archetype-opt-postcss/-/electrode-archetype-opt-postcss-1.0.4.tgz'
+  dependencies:
+   babel-plugin-react-css-modules: ^3.4.2
+   postcss-import: ^9.1.0
+   postcss-less: ^3.1.4
+   postcss-loader: ^3.0.0
+   postcss-nested: ^3.0.0
+   postcss-preset-env: ^5.3.0
+   postcss-scss: ^1.0.6
+   sugarss: ^1.0.1
+electrode-archetype-opt-pwa:
+ _latest: 1.0.6
+ _:
+  ../electrode-archetype-opt-pwa: 1.0.6-fynlocal_h
+  ^1.0.6: 1.0.6
+ 1.0.6-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-pwa
   dependencies:
@@ -5311,76 +5256,128 @@ electrode-archetype-opt-pwa:
    uglify-es: ^3.3.9
    web-app-manifest-loader: ^0.1.1
    webpack-disk-plugin: 0.0.2
-electrode-archetype-opt-react:
- _latest: 2.0.3-fynlocal_h
- _:
-  ../electrode-archetype-opt-react: 2.0.3-fynlocal_h
- 2.0.3-fynlocal_h:
+ 1.0.6:
+  top: 1
   hasPI: 1
+  $: sha512-4KR+7Ma66LYFwZ/fBGa9ShISVA1ngb81z9wkzfOT8fZ3sxzeByl/KJmmytMmGlg36zf8psv6dXqpDrFECobyCQ==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/electrode-archetype-opt-pwa/-/electrode-archetype-opt-pwa-1.0.6.tgz'
+  dependencies:
+   favicons: ^4.8.3
+   favicons-webpack-plugin: ^0.0.9
+   sw-precache: ^5.0.0
+   sw-precache-webpack-plugin: ^0.11.5
+   sw-toolbox: ^3.4.0
+   uglify-es: ^3.3.9
+   web-app-manifest-loader: ^0.1.1
+   webpack-disk-plugin: 0.0.2
+electrode-archetype-opt-react:
+ _latest: 2.0.4
+ _:
+  ../electrode-archetype-opt-react: 2.0.4-fynlocal_h
+  ^2.0.4: 2.0.4
+ 2.0.4-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-react
   dependencies:
    react: ^16.0.0
    react-dom: ^16.0.0
+ 2.0.4:
+  top: 1
+  hasPI: 1
+  $: sha512-LvupNEI87aVnVo8z+otXoP5BrKa1vdANT49+laH5+8pk/32PZdQ80r0xkppWGf/wu4lS2B1VSjkvkzK95YTMnw==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/electrode-archetype-opt-react/-/electrode-archetype-opt-react-2.0.4.tgz'
+  dependencies:
+   react: ^16.0.0
+   react-dom: ^16.0.0
 electrode-archetype-opt-react-intl:
- _latest: 1.0.0-fynlocal_h
+ _latest: 1.0.0
  _:
   ../electrode-archetype-opt-react-intl: 1.0.0-fynlocal_h
+  ^1.0.0: 1.0.0
  1.0.0-fynlocal_h:
-  hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-react-intl
   dependencies:
    react-intl: ^2.1.3
-electrode-archetype-opt-sass:
- _latest: 1.0.8-fynlocal_h
- _:
-  ../electrode-archetype-opt-sass: 1.0.8-fynlocal_h
- 1.0.8-fynlocal_h:
+ 1.0.0:
+  top: 1
   hasPI: 1
+  $: sha512-99m0ivYYhZ+cbpZf+EdYkYWipTOtscBj9wbw+ccZEb0K1F+ry1p2VhqsZkO9xuvNwip8XF83vsXteDaZGbWbAg==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/electrode-archetype-opt-react-intl/-/electrode-archetype-opt-react-intl-1.0.0.tgz'
+  dependencies:
+   react-intl: ^2.1.3
+electrode-archetype-opt-sass:
+ _latest: 1.0.9-fynlocal_h
+ _:
+  ../electrode-archetype-opt-sass: 1.0.9-fynlocal_h
+ 1.0.9-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-sass
   dependencies:
    node-sass: ^4.9.3
    sass-loader: ^6.0.6
 electrode-archetype-opt-sinon:
- _latest: 1.0.2-fynlocal_h
+ _latest: 1.0.3
  _:
-  ../electrode-archetype-opt-sinon: 1.0.2-fynlocal_h
- 1.0.2-fynlocal_h:
-  hasPI: 1
+  ../electrode-archetype-opt-sinon: 1.0.3-fynlocal_h
+  ^1.0.3: 1.0.3
+ 1.0.3-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-sinon
   dependencies:
    sinon: ^4.0.0
    sinon-chai: ^2.14.0
-electrode-archetype-opt-stylus:
- _latest: 1.0.1-fynlocal_h
- _:
-  ../electrode-archetype-opt-stylus: 1.0.1-fynlocal_h
- 1.0.1-fynlocal_h:
+ 1.0.3:
+  top: 1
   hasPI: 1
+  $: sha512-upfTYrHDdClGXDNJRNgdZDw1vmDKofA/xucmkGRS82jP5y9rIqvWNxoMZHUrGO40FA18czUpApspCHpbp9GjAw==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/electrode-archetype-opt-sinon/-/electrode-archetype-opt-sinon-1.0.3.tgz'
+  dependencies:
+   sinon: ^4.0.0
+   sinon-chai: ^2.14.0
+electrode-archetype-opt-stylus:
+ _latest: 1.0.2
+ _:
+  ../electrode-archetype-opt-stylus: 1.0.2-fynlocal_h
+  ^1.0.2: 1.0.2
+ 1.0.2-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-stylus
   dependencies:
    stylus: ^0.54.7
    stylus-relative-loader: ^3.4.0
-electrode-archetype-opt-typescript:
- _latest: 1.0.2-fynlocal_h
- _:
-  ../electrode-archetype-opt-typescript: 1.0.2-fynlocal_h
- 1.0.2-fynlocal_h:
+ 1.0.2:
+  top: 1
   hasPI: 1
+  $: sha512-/P9dLHGz6xFKVDL70UQdfM9kf4aPWBOhJ1kWGJp/ousXxTksoWFc7t2BY5KVKIyB0yU7bR+jcuDQEWY4ZYRRtw==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/electrode-archetype-opt-stylus/-/electrode-archetype-opt-stylus-1.0.2.tgz'
+  dependencies:
+   stylus: ^0.54.7
+   stylus-relative-loader: ^3.4.0
+electrode-archetype-opt-typescript:
+ _latest: 1.0.3
+ _:
+  ../electrode-archetype-opt-typescript: 1.0.3-fynlocal_h
+  ^1.0.3: 1.0.3
+ 1.0.3-fynlocal_h:
   $: local
   _: ../../packages/electrode-archetype-opt-typescript
   dependencies:
    typescript: ^3.2.1
    '@babel/preset-typescript': ^7.1.0
+ 1.0.3:
+  top: 1
+  hasPI: 1
+  $: sha512-uWCBodrqMFUbzG9efHXLC8VL/pbTLIIHLWWB0FgtUVpRCpyOtKvMHiBUKQ3VQfvJ8KnhllHwH27HBVyLEQk+7w==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/electrode-archetype-opt-typescript/-/electrode-archetype-opt-typescript-1.0.3.tgz'
+  dependencies:
+   typescript: ^3.2.1
+   '@babel/preset-typescript': ^7.1.0
 electrode-archetype-react-app:
- _latest: 6.5.16-fynlocal_h
+ _latest: 6.5.18-fynlocal_h
  _:
-  ../../packages/electrode-archetype-react-app: 6.5.16-fynlocal_h
- 6.5.16-fynlocal_h:
+  ../../packages/electrode-archetype-react-app: 6.5.18-fynlocal_h
+ 6.5.18-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app
@@ -5392,13 +5389,13 @@ electrode-archetype-react-app:
    optional-require: ^1.0.0
    subapp-util: ^1.0.2
   optionalDependencies:
-   electrode-archetype-opt-inferno: ^0.2.10
-   electrode-archetype-opt-react: ^2.0.3
+   electrode-archetype-opt-inferno: ^0.2.11
+   electrode-archetype-opt-react: ^2.0.4
 electrode-archetype-react-app-dev:
- _latest: 6.5.16-fynlocal_h
+ _latest: 6.5.18-fynlocal_h
  _:
-  ../../packages/electrode-archetype-react-app-dev: 6.5.16-fynlocal_h
- 6.5.16-fynlocal_h:
+  ../../packages/electrode-archetype-react-app-dev: 6.5.18-fynlocal_h
+ 6.5.18-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app-dev
@@ -5438,11 +5435,9 @@ electrode-archetype-react-app-dev:
    convert-source-map: ^1.5.0
    core-js: '^2 || ^3'
    css-loader: ^1.0.0
-   electrode-bundle-analyzer: ^1.0.0
    electrode-cdn-file-loader: ^1.0.0
    electrode-hapi-compat: ^1.2.0
    electrode-node-resolver: ^2.0.0
-   electrode-webpack-reporter: ^0.5.1
    file-loader: ^2.0.0
    filter-scan-dir: ^1.0.9
    finalhandler: ^1.1.1
@@ -5457,11 +5452,9 @@ electrode-archetype-react-app-dev:
    mini-css-extract-plugin: ^0.7.0
    mkdirp: ^0.5.1
    nix-clap: ^1.3.7
-   nodemon: ^1.18.7
    offline-plugin: ^4.6.1
    optimize-css-assets-webpack-plugin: ^5.0.1
    optional-require: ^1.0.0
-   prop-types: ^15.5.6
    raw-loader: ^0.5.1
    regenerator-runtime: ^0.13.2
    request: ^2.88.0
@@ -5474,48 +5467,35 @@ electrode-archetype-react-app-dev:
    url-loader: ^0.6.2
    webpack: ^4.41.0
    webpack-cli: ^3.3.9
-   webpack-config-composer: ^1.1.0
+   webpack-config-composer: ^1.1.2
    webpack-dev-middleware: ^3.4.0
-   webpack-dev-server: ^3.1.10
    webpack-disk-plugin: 0.0.2
    webpack-hot-middleware: ^2.22.2
    webpack-stats-plugin: ^0.2.1
    winston: ^2.3.1
-   xclap: ^0.2.37
+   xclap: ^0.2.38
    xenv-config: ^1.3.0
    xsh: ^0.4.4
   optionalDependencies:
-   electrode-archetype-opt-critical-css: ^1.0.2
-   electrode-archetype-opt-eslint: ^1.0.2
-   electrode-archetype-opt-flow: ^1.0.1
-   electrode-archetype-opt-inferno: ^0.2.10
-   electrode-archetype-opt-jest: ^24.0.0
-   electrode-archetype-opt-karma: ^2.0.5
-   electrode-archetype-opt-less: ^1.0.1
-   electrode-archetype-opt-mocha: ^1.0.2
-   electrode-archetype-opt-phantomjs: ^1.0.1
-   electrode-archetype-opt-postcss: ^1.0.3
-   electrode-archetype-opt-pwa: ^1.0.5
-   electrode-archetype-opt-react: ^2.0.3
+   electrode-archetype-opt-critical-css: ^1.0.3
+   electrode-archetype-opt-eslint: ^1.0.3
+   electrode-archetype-opt-flow: ^1.0.2
+   electrode-archetype-opt-inferno: ^0.2.11
+   electrode-archetype-opt-jest: ^1.0.3
+   electrode-archetype-opt-karma: ^2.0.6
+   electrode-archetype-opt-less: ^1.0.2
+   electrode-archetype-opt-mocha: ^1.0.3
+   electrode-archetype-opt-phantomjs: ^1.0.2
+   electrode-archetype-opt-postcss: ^1.0.4
+   electrode-archetype-opt-pwa: ^1.0.6
+   electrode-archetype-opt-react: ^2.0.4
    electrode-archetype-opt-react-intl: ^1.0.0
-   electrode-archetype-opt-sass: ^1.0.8
-   electrode-archetype-opt-stylus: ^1.0.1
-   electrode-archetype-opt-sinon: ^1.0.2
-   electrode-archetype-opt-typescript: ^1.0.2
+   electrode-archetype-opt-sass: ^1.0.9
+   electrode-archetype-opt-stylus: ^1.0.2
+   electrode-archetype-opt-sinon: ^1.0.3
+   electrode-archetype-opt-typescript: ^1.0.3
   peerDependencies:
    electrode-archetype-react-app: ^6.0.0
-electrode-bundle-analyzer:
- _latest: 1.0.1
- _:
-  ^1.0.0: 1.0.1
- 1.0.1:
-  $: sha512-Cs+WPhuvUA358umG8mE7PTJRB2kmK7y6Er1/+DJcylHIdxD0CRojtsBwQWjrWkevZBohk+L9nM3v8SEryul6bg==
-  _: 'https://registry.npmjs.org/electrode-bundle-analyzer/-/electrode-bundle-analyzer-1.0.1.tgz'
-  dependencies:
-   acorn: ^4.0.3
-   lodash: ^4.15.0
-   mkdirp: ^0.5.1
-   yargs: ^5.0.0
 electrode-cdn-file-loader:
  _latest: 1.1.1
  _:
@@ -5588,10 +5568,10 @@ electrode-react-webapp:
    require-at: ^1.0.0
    string-array: ^1.0.0
 electrode-redux-router-engine:
- _latest: 2.3.2-fynlocal_h
+ _latest: 3.0.0-fynlocal_h
  _:
-  ../../packages/electrode-redux-router-engine: 2.3.2-fynlocal_h
- 2.3.2-fynlocal_h:
+  ../../packages/electrode-redux-router-engine: 3.0.0-fynlocal_h
+ 3.0.0-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-redux-router-engine
@@ -5605,8 +5585,8 @@ electrode-redux-router-engine:
    react-router-dom: ^5.1.2
    redux: '^4.0.0 || ^3.6.0'
   peerDependencies:
-   react: '^16.0.0 || ^15.3.1 || ^0.14.8'
-   react-dom: '^16.0.0 || ^15.3.1 || ^0.14.8'
+   react: ^16.0.0
+   react-dom: ^16.0.0
 electrode-server:
  _latest: 2.2.2
  _:
@@ -5635,18 +5615,6 @@ electrode-static-paths:
    chalk: ^1.1.1
    inert: ^4.0.1
    lodash: ^4.5.1
-electrode-webpack-reporter:
- _latest: 0.5.1
- _:
-  ^0.5.1: 0.5.1
- 0.5.1:
-  $: sha512-LDBTivVnFxnZ30CSAH0NFE8yMkclRrMntEi0gprxIErS8pTqqbRA8vhHiZ93HeWVFYlJ3BpA/4S37jOQwEJhiA==
-  _: 'https://registry.npmjs.org/electrode-webpack-reporter/-/electrode-webpack-reporter-0.5.1.tgz'
-  dependencies:
-   ansi-to-html: ^0.6.0
-   chalk: ^2.3.0
-   optional-require: ^1.0.0
-   socket.io: ^1.7.3
 electron-to-chromium:
  _latest: 1.3.127
  _:
@@ -5715,7 +5683,6 @@ end-of-stream:
 engine.io:
  _latest: 3.3.2
  _:
-  ~1.8.4: 1.8.5
   ~3.2.0: 3.2.1
  3.2.1:
   $: sha512-+VlKzHzMhaU+GsCIg4AoXF1UdDFjHHwMmMKqMJNDNLlUlejz58FCy4LBqB2YVJskHGYl06BatYWKP2TVdVXE5w==
@@ -5727,20 +5694,9 @@ engine.io:
    engine.io-parser: ~2.1.0
    ws: ~3.3.1
    cookie: 0.3.1
- 1.8.5:
-  $: sha512-j1DWIcktw4hRwrv6nWx++5nFH2X64x16MAG2P0Lmi5Dvdfi3I+Jhc7JKJIdAmDJa+5aZ/imHV7dWRPy2Cqjh3A==
-  _: 'https://registry.npmjs.org/engine.io/-/engine.io-1.8.5.tgz'
-  dependencies:
-   accepts: 1.3.3
-   base64id: 1.0.0
-   debug: 2.3.3
-   engine.io-parser: 1.3.2
-   ws: ~1.1.5
-   cookie: 0.3.1
 engine.io-client:
  _latest: 3.3.2
  _:
-  ~1.8.4: 1.8.5
   ~3.2.0: 3.2.1
  3.2.1:
   $: sha512-y5AbkytWeM4jQr7m/koQLc5AxpRKC1hEVUb/s1FUAWEJq5AzJJ4NLvzuKPuxtDi5Mq755WuDvZ6Iv2rXj4PTzw==
@@ -5757,26 +5713,9 @@ engine.io-client:
    ws: ~3.3.1
    xmlhttprequest-ssl: ~1.5.4
    yeast: 0.1.2
- 1.8.5:
-  $: sha512-AYTgHyeVUPitsseqjoedjhYJapNVoSPShbZ+tEUX9/73jgZ/Z3sUlJf9oYgdEBBdVhupUpUqSxH0kBCXlQnmZg==
-  _: 'https://registry.npmjs.org/engine.io-client/-/engine.io-client-1.8.5.tgz'
-  dependencies:
-   component-emitter: 1.2.1
-   component-inherit: 0.0.3
-   debug: 2.3.3
-   engine.io-parser: 1.3.2
-   has-cors: 1.1.0
-   indexof: 0.0.1
-   parsejson: 0.0.3
-   parseqs: 0.0.5
-   parseuri: 0.0.5
-   ws: ~1.1.5
-   xmlhttprequest-ssl: 1.5.3
-   yeast: 0.1.2
 engine.io-parser:
  _latest: 2.1.3
  _:
-  1.3.2: 1.3.2
   '~2.1.0,~2.1.1': 2.1.3
  2.1.3:
   $: sha512-6HXPre2O4Houl7c4g7Ic/XzPnHBvaEmN90vtRO9uLmwtRqQmTOw0QMevL1TOfL2Cpu1VzsaTmMotQgMdkzGkVA==
@@ -5787,16 +5726,6 @@ engine.io-parser:
    base64-arraybuffer: 0.1.5
    blob: 0.0.5
    has-binary2: ~1.0.2
- 1.3.2:
-  $: sha1-k3sHnwAH0Ik+xW1GyyILjLQ1Igo=
-  _: 'https://registry.npmjs.org/engine.io-parser/-/engine.io-parser-1.3.2.tgz'
-  dependencies:
-   after: 0.8.2
-   arraybuffer.slice: 0.0.6
-   base64-arraybuffer: 0.1.5
-   blob: 0.0.4
-   has-binary: 0.1.7
-   wtf-8: 1.0.0
 enhanced-resolve:
  _latest: 4.1.0
  _:
@@ -6189,13 +6118,6 @@ esutils:
  2.0.2:
   $: sha1-Cr9PHKpbyx96nYrMbepPqqBLrJs=
   _: 'https://registry.npmjs.org/esutils/-/esutils-2.0.2.tgz'
-etag:
- _latest: 1.8.1
- _:
-  ~1.8.1: 1.8.1
- 1.8.1:
-  $: sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=
-  _: 'https://registry.npmjs.org/etag/-/etag-1.8.1.tgz'
 eventemitter3:
  _latest: 3.1.0
  _:
@@ -6210,15 +6132,6 @@ events:
  3.0.0:
   $: sha512-Dc381HFWJzEOhQ+d8pkNon++bk9h6cdAoAj4iE6Q4y6xgTzySWXlKn05/TVNpjnfRqi/X0EpJEJohPjNI3zpVA==
   _: 'https://registry.npmjs.org/events/-/events-3.0.0.tgz'
-eventsource:
- _latest: 1.0.7
- _:
-  ^1.0.7: 1.0.7
- 1.0.7:
-  $: sha512-4Ln17+vVT0k8aWq+t/bF5arcS3EpT9gYtW66EPacdj/mAFevznsnyoHLPy2BA8gbIQeIHoPsvwmfBftfcG//BQ==
-  _: 'https://registry.npmjs.org/eventsource/-/eventsource-1.0.7.tgz'
-  dependencies:
-   original: ^1.0.0
 evp_bytestokey:
  _latest: 1.0.3
  _:
@@ -6350,44 +6263,6 @@ expect:
    jest-matcher-utils: ^23.6.0
    jest-message-util: ^23.4.0
    jest-regex-util: ^23.3.0
-express:
- _latest: 4.16.4
- _:
-  ^4.16.4: 4.16.4
- 4.16.4:
-  $: sha512-j12Uuyb4FMrd/qQAm6uCHAkPtO8FDTRJZBDd5D2KOL2eLaz1yUNdUB/NOIyq0iU4q4cFarsUCrnFDPBcnksuOg==
-  _: 'https://registry.npmjs.org/express/-/express-4.16.4.tgz'
-  dependencies:
-   accepts: ~1.3.5
-   array-flatten: 1.1.1
-   body-parser: 1.18.3
-   content-disposition: 0.5.2
-   content-type: ~1.0.4
-   cookie: 0.3.1
-   cookie-signature: 1.0.6
-   debug: 2.6.9
-   depd: ~1.1.2
-   encodeurl: ~1.0.2
-   escape-html: ~1.0.3
-   etag: ~1.8.1
-   finalhandler: 1.1.1
-   fresh: 0.5.2
-   merge-descriptors: 1.0.1
-   methods: ~1.1.2
-   on-finished: ~2.3.0
-   parseurl: ~1.3.2
-   path-to-regexp: 0.1.7
-   proxy-addr: ~2.0.4
-   qs: 6.5.2
-   range-parser: ~1.2.0
-   safe-buffer: 5.1.2
-   send: 0.16.2
-   serve-static: 1.13.2
-   setprototypeof: 1.1.0
-   statuses: ~1.4.0
-   type-is: ~1.6.16
-   utils-merge: 1.0.1
-   vary: ~1.1.2
 extend:
  _latest: 3.0.2
  _:
@@ -6593,21 +6468,6 @@ favicons-webpack-plugin:
    lodash: ^4.11.1
   peerDependencies:
    webpack: '^1.13.0 || ^2.0.0 || ^3.0.0 || ^4.0.0'
-faye-websocket:
- _latest: 0.11.1
- _:
-  ^0.10.0: 0.10.0
-  ~0.11.1: 0.11.1
- 0.11.1:
-  $: sha1-8O/hjE9W5PQK/H4Gxxn9XuYYjzg=
-  _: 'https://registry.npmjs.org/faye-websocket/-/faye-websocket-0.11.1.tgz'
-  dependencies:
-   websocket-driver: '>=0.5.1'
- 0.10.0:
-  $: sha1-TkkvjQTftviQA1B/btvy1QHnxvQ=
-  _: 'https://registry.npmjs.org/faye-websocket/-/faye-websocket-0.10.0.tgz'
-  dependencies:
-   websocket-driver: '>=0.5.1'
 fb-watchman:
  _latest: 2.0.0
  _:
@@ -6728,7 +6588,7 @@ finalhandler:
  _latest: 1.1.1
  _:
   1.1.0: 1.1.0
-  '1.1.1,^1.1.1': 1.1.1
+  ^1.1.1: 1.1.1
  1.1.1:
   $: sha512-Y1GUDo39ez4aHAw7MysnUD5JzYX+WaIj8I57kO3aEPT1fFRL4sr7mjei97FgnwhAyyzRYmQZaTHb2+9uZ1dPtg==
   _: 'https://registry.npmjs.org/finalhandler/-/finalhandler-1.1.1.tgz'
@@ -6941,13 +6801,6 @@ form-data:
    asynckit: ^0.4.0
    combined-stream: ^1.0.6
    mime-types: ^2.1.12
-forwarded:
- _latest: 0.1.2
- _:
-  ~0.1.2: 0.1.2
- 0.1.2:
-  $: sha1-mMI9qxF1ZXuMBXPozszZGw/xjIQ=
-  _: 'https://registry.npmjs.org/forwarded/-/forwarded-0.1.2.tgz'
 fragment-cache:
  _latest: 0.2.1
  _:
@@ -6957,13 +6810,6 @@ fragment-cache:
   _: 'https://registry.npmjs.org/fragment-cache/-/fragment-cache-0.2.1.tgz'
   dependencies:
    map-cache: ^0.2.2
-fresh:
- _latest: 0.5.2
- _:
-  0.5.2: 0.5.2
- 0.5.2:
-  $: sha1-PYyt2Q2XZWn6g1qx+OSyOhBWBac=
-  _: 'https://registry.npmjs.org/fresh/-/fresh-0.5.2.tgz'
 from2:
  _latest: 2.3.0
  _:
@@ -7543,15 +7389,6 @@ has-ansi:
   _: 'https://registry.npmjs.org/has-ansi/-/has-ansi-2.0.0.tgz'
   dependencies:
    ansi-regex: ^2.0.0
-has-binary:
- _latest: 0.1.7
- _:
-  0.1.7: 0.1.7
- 0.1.7:
-  $: sha1-aOYesWIQyVRaClzOBqhzkS/h5ow=
-  _: 'https://registry.npmjs.org/has-binary/-/has-binary-0.1.7.tgz'
-  dependencies:
-   isarray: 0.0.1
 has-binary2:
  _latest: 1.0.3
  _:
@@ -7846,7 +7683,7 @@ html-encoding-sniffer:
 html-entities:
  _latest: 1.2.1
  _:
-  '^1.2.0,^1.2.1': 1.2.1
+  ^1.2.0: 1.2.1
  1.2.1:
   $: sha1-DfKTUfByEWNRXfueVUPl9u7VFi8=
   _: 'https://registry.npmjs.org/html-entities/-/html-entities-1.2.1.tgz'
@@ -7884,7 +7721,7 @@ http-deceiver:
 http-errors:
  _latest: 1.7.2
  _:
-  '1.6.3,~1.6.2,~1.6.3': 1.6.3
+  '1.6.3,~1.6.3': 1.6.3
  1.6.3:
   $: sha1-i1VoC7S+KDoLW/TqLjhYC+HZMg0=
   _: 'https://registry.npmjs.org/http-errors/-/http-errors-1.6.3.tgz'
@@ -7893,13 +7730,6 @@ http-errors:
    inherits: 2.0.3
    setprototypeof: 1.1.0
    statuses: '>= 1.4.0 < 2'
-http-parser-js:
- _latest: 0.5.0
- _:
-  '>=0.4.0': 0.5.0
- 0.5.0:
-  $: sha512-cZdEF7r4gfRIq7ezX9J0T+kQmJNOub71dWbgAXVHDct80TKP4MCETtZQ31xyv38UwgzkWPYF/Xc0ge55dW9Z9w==
-  _: 'https://registry.npmjs.org/http-parser-js/-/http-parser-js-0.5.0.tgz'
 http-proxy:
  _latest: 1.17.0
  _:
@@ -7921,18 +7751,6 @@ http-proxy-agent:
   dependencies:
    agent-base: '4'
    debug: 3.1.0
-http-proxy-middleware:
- _latest: 0.19.1
- _:
-  ^0.19.1: 0.19.1
- 0.19.1:
-  $: sha512-yHYTgWMQO8VvwNS22eLLloAkvungsKdKTLO8AJlftYIKNfJr3GK3zK0ZCfzDDGUBttdGc8xFy1mCitvNKQtC3Q==
-  _: 'https://registry.npmjs.org/http-proxy-middleware/-/http-proxy-middleware-0.19.1.tgz'
-  dependencies:
-   http-proxy: ^1.17.0
-   is-glob: ^4.0.0
-   lodash: ^4.17.11
-   micromatch: ^3.1.10
 http-signature:
  _latest: 1.2.0
  _:
@@ -8035,13 +7853,6 @@ ignore:
  3.3.10:
   $: sha512-Pgs951kaMm5GXP7MOvxERINe3gsaVjUWFm+UZPSq9xYriQAksyhg0csnS0KXSNRD5NmNdapXEpjxG49+AKh/ug==
   _: 'https://registry.npmjs.org/ignore/-/ignore-3.3.10.tgz'
-ignore-by-default:
- _latest: 1.0.1
- _:
-  ^1.0.1: 1.0.1
- 1.0.1:
-  $: sha1-SMptcvbGo68Aqa1K5odr44ieKwk=
-  _: 'https://registry.npmjs.org/ignore-by-default/-/ignore-by-default-1.0.1.tgz'
 ignore-styles:
  _latest: 5.0.1
  _:
@@ -8098,7 +7909,7 @@ import-lazy:
 import-local:
  _latest: 3.0.2
  _:
-  '2.0.0,^2.0.0': 2.0.0
+  2.0.0: 2.0.0
   ^1.0.0: 1.0.0
  2.0.0:
   $: sha512-b6s04m3O+s3CGSbqDIyP4R6aAwAeYlVq9+WUWep6iHa8ETRf9yei1U48C5MmfJmV9AiLYYBKPMq/W+/WRpQmCQ==
@@ -8171,6 +7982,90 @@ infer-owner:
  1.0.4:
   $: sha512-IClj+Xz94+d7irH5qRyfJonOdfTzuDaifE6ZPWfx0N0+/ATZCbuTPq2prFl526urkQd90WyUKIh1DfBQ2hMz9A==
   _: 'https://registry.npmjs.org/infer-owner/-/infer-owner-1.0.4.tgz'
+inferno:
+ _latest: 7.3.2
+ _:
+  '3.10.1,^3.0.0,^3.4.3': 3.10.1
+ 3.10.1:
+  $: sha512-Sm+Wi9TI9REIHsuUlWyCNVZMlk7vMRs2QFjMEfKPsj7p8be8wB+sl8T8jBU2T+2S3oKzbJdKmKNTxWeMjHdypA==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/inferno/-/inferno-3.10.1.tgz'
+  dependencies:
+   inferno-shared: 3.10.1
+   inferno-vnode-flags: 3.10.1
+inferno-compat:
+ _latest: 7.3.2
+ _:
+  ^3.0.0: 3.10.1
+ 3.10.1:
+  $: sha512-kz3U65Ak5GeMAZ7jtUz29rlASKpIM1n3m+1fag0F7pgcYAEMUvfAxJJFiVPDW3lBCeRAR+LMbhdy4YuTNStlQA==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/inferno-compat/-/inferno-compat-3.10.1.tgz'
+  dependencies:
+   inferno: 3.10.1
+   inferno-component: 3.10.1
+   inferno-create-class: 3.10.1
+   inferno-create-element: 3.10.1
+   inferno-shared: 3.10.1
+   inferno-transition-group: 2.1.1
+   inferno-vnode-flags: 3.10.1
+   rc-css-transition-group-modern: ^2.1.6
+inferno-component:
+ _latest: 7.3.2
+ _:
+  '3.10.1,^3.4.3': 3.10.1
+ 3.10.1:
+  $: sha512-8tXc4XXx7U2P22NLd21g4TLR+jJ0X+KyeznodlGjWYzQ6A6uy5AXsDyfStZl8GxeNzq3otTrrSV5n5yPcVZI2Q==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/inferno-component/-/inferno-component-3.10.1.tgz'
+  dependencies:
+   inferno: 3.10.1
+   inferno-shared: 3.10.1
+   inferno-vnode-flags: 3.10.1
+inferno-create-class:
+ _latest: 7.3.2
+ _:
+  3.10.1: 3.10.1
+ 3.10.1:
+  $: sha512-dHVxcqhTFY6bGpdu6p/M8Hec1aHygqCSzcFCod8wowcxwJgKKlNJy2lvRD5BxaTQ8fDaUjxr78k0R/Rvfp1Tvg==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/inferno-create-class/-/inferno-create-class-3.10.1.tgz'
+  dependencies:
+   inferno-component: 3.10.1
+   inferno-shared: 3.10.1
+inferno-create-element:
+ _latest: 7.3.2
+ _:
+  3.10.1: 3.10.1
+ 3.10.1:
+  $: sha512-1Sn6d+FknSIZSEyEeRqwT6E2DMZUhRBBZCW2c4IHYXECozLXMwR7IgIHkVDQwWBoyJABRFeZE2UbfQ/nyJDuqw==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/inferno-create-element/-/inferno-create-element-3.10.1.tgz'
+  dependencies:
+   inferno: 3.10.1
+   inferno-component: 3.10.1
+   inferno-shared: 3.10.1
+   inferno-vnode-flags: 3.10.1
+inferno-shared:
+ _latest: 7.3.2
+ _:
+  3.10.1: 3.10.1
+ 3.10.1:
+  $: sha512-mzh4qmnQb23W5sdfsR6W93vSqNll7etLSMG4JhlzYXYn1e4zVcAqJRbeVISI3mTkU6nS4gJBHueZtSb1ORuuBw==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/inferno-shared/-/inferno-shared-3.10.1.tgz'
+inferno-transition-group:
+ _latest: 3.0.2
+ _:
+  2.1.1: 2.1.1
+ 2.1.1:
+  $: sha512-2JjAvIfvYAx1KEq8pAR91+5xCpoIYb08vA38XFW6RICq1eqxUOe60ntjuDQJPJ2B8PYuMLFrwji6X5vcqkJ7aA==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/inferno-transition-group/-/inferno-transition-group-2.1.1.tgz'
+  dependencies:
+   inferno: ^3.4.3
+   inferno-component: ^3.4.3
+  deprecated: 'This package is deprecated, use https://github.com/JoonasLUT/inferno-css-transition-group'
+inferno-vnode-flags:
+ _latest: 7.3.2
+ _:
+  3.10.1: 3.10.1
+ 3.10.1:
+  $: sha512-jqc6yiFy9ZcpDW+6I6cWQUrSXHjpfm2Fut5qLuuXxLwKdfLQUh68sWBHd+y9J+7gIm+0V1QZn4x5Jx4G3m1hPA==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/inferno-vnode-flags/-/inferno-vnode-flags-3.10.1.tgz'
 inflight:
  _latest: 1.0.6
  _:
@@ -8228,16 +8123,6 @@ insync:
  2.1.1:
   $: sha1-IuJsYRITA8BvUdNaPM9tj8HpFMQ=
   _: 'https://registry.npmjs.org/insync/-/insync-2.1.1.tgz'
-internal-ip:
- _latest: 4.3.0
- _:
-  ^4.2.0: 4.3.0
- 4.3.0:
-  $: sha512-S1zBo1D6zcsyuC6PMmY5+55YMILQ9av8lotMx447Bq6SAgo/sDK6y6uUKmuYhW7eacnIhFfsPmCNYdDzsnnDCg==
-  _: 'https://registry.npmjs.org/internal-ip/-/internal-ip-4.3.0.tgz'
-  dependencies:
-   default-gateway: ^4.2.0
-   ipaddr.js: ^1.9.0
 interpret:
  _latest: 1.2.0
  _:
@@ -8304,31 +8189,13 @@ invert-kv:
  1.0.0:
   $: sha1-EEqOSqym09jNFXqO+L+rLXo//bY=
   _: 'https://registry.npmjs.org/invert-kv/-/invert-kv-1.0.0.tgz'
-ip:
- _latest: 1.1.5
- _:
-  '^1.1.0,^1.1.5': 1.1.5
- 1.1.5:
-  $: sha1-vd7XARQpCCjAoDnnLvJfWq7ENUo=
-  _: 'https://registry.npmjs.org/ip/-/ip-1.1.5.tgz'
 ip-regex:
  _latest: 4.1.0
  _:
   ^1.0.1: 1.0.3
-  ^2.1.0: 2.1.0
- 2.1.0:
-  $: sha1-+ni/XS5pE8kRzp+BnuUUa7bYROk=
-  _: 'https://registry.npmjs.org/ip-regex/-/ip-regex-2.1.0.tgz'
  1.0.3:
   $: sha1-3FiQdvZZ9BnCIgOaMzFvHHOH7/0=
   _: 'https://registry.npmjs.org/ip-regex/-/ip-regex-1.0.3.tgz'
-ipaddr.js:
- _latest: 1.9.0
- _:
-  '1.9.0,^1.9.0': 1.9.0
- 1.9.0:
-  $: sha512-M4Sjn6N/+O6/IXSJseKqHoFc+5FdGJ22sXqnjTpdZweHK64MzEPAyQZyEU3R/KRv2GLoa7nNtg/C2Ev6m7z+eA==
-  _: 'https://registry.npmjs.org/ipaddr.js/-/ipaddr.js-1.9.0.tgz'
 iron:
  _latest: 5.0.6
  _:
@@ -8644,10 +8511,6 @@ is-path-cwd:
  _latest: 2.1.0
  _:
   ^1.0.0: 1.0.0
-  ^2.0.0: 2.1.0
- 2.1.0:
-  $: sha512-Sc5j3/YnM8tDeyCsVeKlm/0p95075DyLmDEIkSgQ7mXkrOX+uTCtmQFm0CYzVyJwcCCmO3k8qfJt17SxQwB5Zw==
-  _: 'https://registry.npmjs.org/is-path-cwd/-/is-path-cwd-2.1.0.tgz'
  1.0.0:
   $: sha1-0iXsIxMuie3Tj9p2dHLmLmXxEG0=
   _: 'https://registry.npmjs.org/is-path-cwd/-/is-path-cwd-1.0.0.tgz'
@@ -8655,12 +8518,6 @@ is-path-in-cwd:
  _latest: 2.1.0
  _:
   ^1.0.0: 1.0.1
-  ^2.0.0: 2.1.0
- 2.1.0:
-  $: sha512-rNocXHgipO+rvnP6dk3zI20RpOtrAM/kzbB258Uw5BWr3TpXi861yzjo16Dn4hUox07iw5AyeMLHWsujkjzvRQ==
-  _: 'https://registry.npmjs.org/is-path-in-cwd/-/is-path-in-cwd-2.1.0.tgz'
-  dependencies:
-   is-path-inside: ^2.1.0
  1.0.1:
   $: sha512-FjV1RTW48E7CWM7eE/J2NJvAEEVektecDBVBE5Hh3nM1Jd0kvhHtX68Pr3xsDf857xt3Y4AkwVULK1Vku62aaQ==
   _: 'https://registry.npmjs.org/is-path-in-cwd/-/is-path-in-cwd-1.0.1.tgz'
@@ -8670,12 +8527,6 @@ is-path-inside:
  _latest: 2.1.0
  _:
   ^1.0.0: 1.0.1
-  ^2.1.0: 2.1.0
- 2.1.0:
-  $: sha512-wiyhTzfDWsvwAW53OBWF5zuvaOGlZ6PwYxAbPVDhpm+gM09xKQGjBq/8uYN12aDvMxnAnq3dxTyoSoRNmg5YFg==
-  _: 'https://registry.npmjs.org/is-path-inside/-/is-path-inside-2.1.0.tgz'
-  dependencies:
-   path-is-inside: ^1.0.2
  1.0.1:
   $: sha1-jvW33lBDej/cprToZe96pVy0gDY=
   _: 'https://registry.npmjs.org/is-path-inside/-/is-path-inside-1.0.1.tgz'
@@ -9661,13 +9512,6 @@ json-stringify-safe:
  5.0.1:
   $: sha1-Epai1Y/UXxmg9s4B1lcB4sc1tus=
   _: 'https://registry.npmjs.org/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz'
-json3:
- _latest: 3.3.2
- _:
-  '3.3.2,^3.3.2': 3.3.2
- 3.3.2:
-  $: sha1-PAQ0dD35Pi9cQq7nsZvLSDV19OE=
-  _: 'https://registry.npmjs.org/json3/-/json3-3.3.2.tgz'
 json5:
  _latest: 2.1.0
  _:
@@ -9980,13 +9824,6 @@ keypairs:
   dependencies:
    eckles: ^1.4.1
    rasha: ^1.2.4
-killable:
- _latest: 1.0.1
- _:
-  ^1.0.1: 1.0.1
- 1.0.1:
-  $: sha512-LzqtLKlUwirEUyl/nicirVmNiPvYs7l5n8wOPP7fyJVpUPkvCnW/vuiXGpylGUlnPDnB7311rARzAt3Mhswpjg==
-  _: 'https://registry.npmjs.org/killable/-/killable-1.0.1.tgz'
 kind-of:
  _latest: 6.0.2
  _:
@@ -10360,7 +10197,7 @@ lodash._reinterpolate:
 lodash.assign:
  _latest: 4.2.0
  _:
-  '^4.0.3,^4.0.6,^4.1.0,^4.2.0': 4.2.0
+  '^4.0.3,^4.0.6,^4.2.0': 4.2.0
  4.2.0:
   $: sha1-DZnzzNem0mHRm9rrkkUAXShYCOc=
   _: 'https://registry.npmjs.org/lodash.assign/-/lodash.assign-4.2.0.tgz'
@@ -10634,13 +10471,6 @@ log4js:
    debug: ^3.1.0
    rfdc: ^1.1.2
    streamroller: 0.7.0
-loglevel:
- _latest: 1.6.1
- _:
-  ^1.6.1: 1.6.1
- 1.6.1:
-  $: sha1-4PyVEztu8nbNyIh82vJKpvFW+Po=
-  _: 'https://registry.npmjs.org/loglevel/-/loglevel-1.6.1.tgz'
 lolex:
  _latest: 4.0.1
  _:
@@ -10865,13 +10695,6 @@ merge-defaults:
   _: 'https://registry.npmjs.org/merge-defaults/-/merge-defaults-0.2.1.tgz'
   dependencies:
    lodash: ~2.4.1
-merge-descriptors:
- _latest: 1.0.1
- _:
-  1.0.1: 1.0.1
- 1.0.1:
-  $: sha1-sAqqVW3YtEVoFQ7J0blT8/kMu2E=
-  _: 'https://registry.npmjs.org/merge-descriptors/-/merge-descriptors-1.0.1.tgz'
 merge-source-map:
  _latest: 1.1.0
  _:
@@ -10890,13 +10713,6 @@ merge-stream:
   _: 'https://registry.npmjs.org/merge-stream/-/merge-stream-1.0.1.tgz'
   dependencies:
    readable-stream: ^2.0.1
-methods:
- _latest: 1.1.2
- _:
-  ~1.1.2: 1.1.2
- 1.1.2:
-  $: sha1-VSmk1nZUE07cxSZmVoNbD4Ua/O4=
-  _: 'https://registry.npmjs.org/methods/-/methods-1.1.2.tgz'
 micromatch:
  _latest: 4.0.2
  _:
@@ -10949,7 +10765,6 @@ miller-rabin:
 mime:
  _latest: 2.4.2
  _:
-  1.4.1: 1.4.1
   '^1.0.0,^1.3.4,^1.4.1': 1.6.0
   '^2.0.3,^2.3.1': 2.4.2
  2.4.2:
@@ -10958,20 +10773,17 @@ mime:
  1.6.0:
   $: sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==
   _: 'https://registry.npmjs.org/mime/-/mime-1.6.0.tgz'
- 1.4.1:
-  $: sha512-KI1+qOZu5DcW6wayYHSzR/tXKCDC5Om4s1z2QJjDULzLcmf3DvzS7oluY4HCTrc+9FiKmWUgeNLg7W3uIQvxtQ==
-  _: 'https://registry.npmjs.org/mime/-/mime-1.4.1.tgz'
 mime-db:
  _latest: 1.40.0
  _:
-  '1.40.0,1.x.x,>= 1.40.0 < 2': 1.40.0
+  '1.40.0,1.x.x': 1.40.0
  1.40.0:
   $: sha512-jYdeOMPy9vnxEqFRRo6ZvTZ8d9oPb+k18PKoYNYUe2stVEBPPwsln/qWzdbmaIvnhZ9v2P+CuecK+fpUfsV2mA==
   _: 'https://registry.npmjs.org/mime-db/-/mime-db-1.40.0.tgz'
 mime-types:
  _latest: 2.1.24
  _:
-  '^2.1.12,~2.1.11,~2.1.17,~2.1.18,~2.1.19,~2.1.24': 2.1.24
+  '^2.1.12,~2.1.18,~2.1.19,~2.1.24': 2.1.24
  2.1.24:
   $: sha512-WaFHS3MCl5fapm3oLxU4eYDw77IQM2ACcxQ9RIxfaC3ooc6PFuBMGZZsYpvoXS5D5QTWPieo1jjLdAm3TBP3cQ==
   _: 'https://registry.npmjs.org/mime-types/-/mime-types-2.1.24.tgz'
@@ -11212,7 +11024,6 @@ ms:
  _latest: 2.1.1
  _:
   0.7.1: 0.7.1
-  0.7.2: 0.7.2
   2.0.0: 2.0.0
   ^2.1.1: 2.1.1
  2.1.1:
@@ -11221,29 +11032,9 @@ ms:
  2.0.0:
   $: sha1-VgiurfwAvmwpAd9fmGF4jeDVl8g=
   _: 'https://registry.npmjs.org/ms/-/ms-2.0.0.tgz'
- 0.7.2:
-  $: sha1-riXPJRKziFodldfwN4aNhDESR2U=
-  _: 'https://registry.npmjs.org/ms/-/ms-0.7.2.tgz'
  0.7.1:
   $: sha1-nNE8A62/8ltl7/3nzoZO6VIBcJg=
   _: 'https://registry.npmjs.org/ms/-/ms-0.7.1.tgz'
-multicast-dns:
- _latest: 7.2.0
- _:
-  ^6.0.1: 6.2.3
- 6.2.3:
-  $: sha512-ji6J5enbMyGRHIAkAOu3WdV8nggqviKCEKtXcOqfphZZtQrmHKycfynJ2V7eVPUA4NhJ6V7Wf4TmGbTwKE9B6g==
-  _: 'https://registry.npmjs.org/multicast-dns/-/multicast-dns-6.2.3.tgz'
-  dependencies:
-   dns-packet: ^1.3.1
-   thunky: ^1.0.2
-multicast-dns-service-types:
- _latest: 1.1.0
- _:
-  ^1.1.0: 1.1.0
- 1.1.0:
-  $: sha1-iZ8R2WhuXgXLkbNdXw5jt3PPyQE=
-  _: 'https://registry.npmjs.org/multicast-dns-service-types/-/multicast-dns-service-types-1.1.0.tgz'
 munchy:
  _latest: 1.0.7
  _:
@@ -11405,15 +11196,11 @@ node-fetch:
 node-forge:
  _latest: 0.8.2
  _:
-  0.7.5: 0.7.5
   ^0.6.43: 0.6.49
   ^0.7.6: 0.7.6
  0.7.6:
   $: sha512-sol30LUpz1jQFBjOKwbjxijiE3b6pjd74YwfD0fJOKPjF+fONKb2Yg8rYgS6+bK6VDl+/wfr4IYpC7jDzLUIfw==
   _: 'https://registry.npmjs.org/node-forge/-/node-forge-0.7.6.tgz'
- 0.7.5:
-  $: sha512-MmbQJ2MTESTjt3Gi/3yG1wGpIMhUfcIypUCGtTizFR9IiccFwxSpfp0vtIZlkFclEqERemxfnSdZEMR9VqqEFQ==
-  _: 'https://registry.npmjs.org/node-forge/-/node-forge-0.7.5.tgz'
  0.6.49:
   $: sha1-8e6V1ddGI5OP4Z1piqWibVTS9g8=
   _: 'https://registry.npmjs.org/node-forge/-/node-forge-0.6.49.tgz'
@@ -11558,38 +11345,13 @@ node.extend:
   dependencies:
    has: ^1.0.3
    is: ^3.2.1
-nodemon:
- _latest: 1.18.11
- _:
-  ^1.18.7: 1.18.11
- 1.18.11:
-  hasI: 1
-  $: sha512-KdN3tm1zkarlqNo4+W9raU3ihM4H15MVMSE/f9rYDZmFgDHAfAJsomYrHhApAkuUemYjFyEeXlpCOQ2v5gtBEw==
-  _: 'https://registry.npmjs.org/nodemon/-/nodemon-1.18.11.tgz'
-  dependencies:
-   chokidar: ^2.1.5
-   debug: ^3.1.0
-   ignore-by-default: ^1.0.1
-   minimatch: ^3.0.4
-   pstree.remy: ^1.1.6
-   semver: ^5.5.0
-   supports-color: ^5.2.0
-   touch: ^3.1.0
-   undefsafe: ^2.0.2
-   update-notifier: ^2.5.0
 nopt:
  _latest: 4.0.1
  _:
   '2 || 3,3.x': 3.0.6
-  ~1.0.10: 1.0.10
  3.0.6:
   $: sha1-xkZdvwirzU2zWTF/eaxopkayj/k=
   _: 'https://registry.npmjs.org/nopt/-/nopt-3.0.6.tgz'
-  dependencies:
-   abbrev: '1'
- 1.0.10:
-  $: sha1-bd0hvSoxQXuScn3Vhfim83YI6+4=
-  _: 'https://registry.npmjs.org/nopt/-/nopt-1.0.10.tgz'
   dependencies:
    abbrev: '1'
 normalize-package-data:
@@ -11749,14 +11511,10 @@ oauth-sign:
 object-assign:
  _latest: 4.1.1
  _:
-  4.1.0: 4.1.0
   '^4.0.0,^4.0.1,^4.1.0,^4.1.1': 4.1.1
  4.1.1:
   $: sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=
   _: 'https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz'
- 4.1.0:
-  $: sha1-ejs9DpgGPUP0wD8uiubNUahog6A=
-  _: 'https://registry.npmjs.org/object-assign/-/object-assign-4.1.0.tgz'
 object-component:
  _latest: 0.0.3
  _:
@@ -11921,7 +11679,7 @@ on-finished:
 on-headers:
  _latest: 1.0.2
  _:
-  '^1.0.1,~1.0.2': 1.0.2
+  ^1.0.1: 1.0.2
  1.0.2:
   $: sha512-pZAE+FJLoyITytdqK0U5s+FIpjN0JP3OzFi/u8Rx+EV5/W+JTWGXG8xFzevE7AjBfDqHv/8vL8qQsIhHnqRkrA==
   _: 'https://registry.npmjs.org/on-headers/-/on-headers-1.0.2.tgz'
@@ -11943,15 +11701,6 @@ onetime:
   _: 'https://registry.npmjs.org/onetime/-/onetime-2.0.1.tgz'
   dependencies:
    mimic-fn: ^1.0.0
-opn:
- _latest: 6.0.0
- _:
-  ^5.5.0: 5.5.0
- 5.5.0:
-  $: sha512-PqHpggC9bLV0VeWcdKhkpxY+3JTzetLSqTCWL/z/tFIbI6G8JCjondXklT1JinczLz2Xib62sSp0T/gKT4KksA==
-  _: 'https://registry.npmjs.org/opn/-/opn-5.5.0.tgz'
-  dependencies:
-   is-wsl: ^1.1.0
 oppsy:
  _latest: 2.0.1
  _:
@@ -12006,22 +11755,6 @@ optionator:
    type-check: ~0.3.2
    levn: ~0.3.0
    fast-levenshtein: ~2.0.4
-options:
- _latest: 0.0.6
- _:
-  '>=0.0.5': 0.0.6
- 0.0.6:
-  $: sha1-7CLTEoBrtT5zF3Pnza788cZDEo8=
-  _: 'https://registry.npmjs.org/options/-/options-0.0.6.tgz'
-original:
- _latest: 1.0.2
- _:
-  ^1.0.0: 1.0.2
- 1.0.2:
-  $: sha512-hyBVl6iqqUOJ8FqRe+l/gS8H+kKYjrEndd5Pm1MfBtsEKA038HkkdbAl/72EAXGyonD/PFsvmVG+EvcIpliMBg==
-  _: 'https://registry.npmjs.org/original/-/original-1.0.2.tgz'
-  dependencies:
-   url-parse: ^1.4.3
 os-browserify:
  _latest: 0.3.0
  _:
@@ -12041,7 +11774,7 @@ os-locale:
  _:
   ^1.4.0: 1.4.0
   ^2.0.0: 2.1.0
-  '^3.0.0,^3.1.0': 3.1.0
+  ^3.1.0: 3.1.0
  3.1.0:
   $: sha512-Z8l3R4wYWM40/52Z+S265okfFj8Kt2cC2MKY+xNi3kFs+XGI7WXu/I309QQQYbRW4ijiZ+yxs9pqEhJh0DqW3Q==
   _: 'https://registry.npmjs.org/os-locale/-/os-locale-3.1.0.tgz'
@@ -12161,10 +11894,6 @@ p-map:
  _latest: 2.1.0
  _:
   ^1.1.1: 1.2.0
-  ^2.0.0: 2.1.0
- 2.1.0:
-  $: sha512-y3b8Kpd8OAN444hxfBbFfj1FY/RjtTd8tzYwhUqNYXx0fXx2iX4maP4Qr6qhIKbQXI02wTLAda4fYUbDagTUFw==
-  _: 'https://registry.npmjs.org/p-map/-/p-map-2.1.0.tgz'
  1.2.0:
   $: sha512-r6zKACMNhjPJMTl8KcFH4li//gkrXWfbD6feV8l6doRHlzljFWGJ2AP6iKaCJXyZmAUMOPtvbW7EXkbWO/pLEA==
   _: 'https://registry.npmjs.org/p-map/-/p-map-1.2.0.tgz'
@@ -12349,15 +12078,6 @@ parse5:
   _: 'https://registry.npmjs.org/parse5/-/parse5-3.0.3.tgz'
   dependencies:
    '@types/node': '*'
-parsejson:
- _latest: 0.0.3
- _:
-  0.0.3: 0.0.3
- 0.0.3:
-  $: sha1-q343WfIJ7OmUN5c/fQ8fZK4OZKs=
-  _: 'https://registry.npmjs.org/parsejson/-/parsejson-0.0.3.tgz'
-  dependencies:
-   better-assert: ~1.0.0
 parseqs:
  _latest: 0.0.5
  _:
@@ -12448,16 +12168,12 @@ path-parse:
 path-to-regexp:
  _latest: 3.0.0
  _:
-  0.1.7: 0.1.7
   '^1.0.1,^1.7.0': 1.7.0
  1.7.0:
   $: sha1-Wf3g9DW62suhA6hOnTvGTpa5k30=
   _: 'https://registry.npmjs.org/path-to-regexp/-/path-to-regexp-1.7.0.tgz'
   dependencies:
    isarray: 0.0.1
- 0.1.7:
-  $: sha1-32BBeABfUi8V60SQ5yR6G/qmf4w=
-  _: 'https://registry.npmjs.org/path-to-regexp/-/path-to-regexp-0.1.7.tgz'
 path-type:
  _latest: 4.0.0
  _:
@@ -12686,17 +12402,6 @@ podium:
    items: 2.x.x
    joi: 10.x.x
   deprecated: 'This version has been deprecated in accordance with the hapi support policy (hapi.im/support). Please upgrade to the latest version to get the best features, bug fixes, and security patches. If you are unable to upgrade at this time, paid support is available for older versions (hapi.im/commercial).'
-portfinder:
- _latest: 1.0.20
- _:
-  ^1.0.20: 1.0.20
- 1.0.20:
-  $: sha512-Yxe4mTyDzTd59PZJY4ojZR8F+E5e97iq2ZOHPz3HDgSvYC5siNad2tLooQ5y5QHyQhc3xVqvyk/eNA3wuoa7Sw==
-  _: 'https://registry.npmjs.org/portfinder/-/portfinder-1.0.20.tgz'
-  dependencies:
-   async: ^1.5.2
-   debug: ^2.2.0
-   mkdirp: 0.5.x
 posix-character-classes:
  _latest: 1.0.0
  _:
@@ -13679,7 +13384,7 @@ prompts:
 prop-types:
  _latest: 15.7.2
  _:
-  '^15.0.0,^15.5.6,^15.5.7,^15.5.8,^15.6.1,^15.6.2,^15.7.2': 15.7.2
+  '^15.0.0,^15.5.7,^15.5.8,^15.6.1,^15.6.2,^15.7.2': 15.7.2
  15.7.2:
   $: sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
   _: 'https://registry.npmjs.org/prop-types/-/prop-types-15.7.2.tgz'
@@ -13698,16 +13403,6 @@ prop-types-exact:
    has: ^1.0.3
    object.assign: ^4.1.0
    reflect.ownkeys: ^0.2.0
-proxy-addr:
- _latest: 2.0.5
- _:
-  ~2.0.4: 2.0.5
- 2.0.5:
-  $: sha512-t/7RxHXPH6cJtP0pRG6smSr9QJidhB+3kXu0KgXnbGYMgzEnUxRQ4/LDdfOwZEMyIh3/xHb8PX3t+lfL9z+YVQ==
-  _: 'https://registry.npmjs.org/proxy-addr/-/proxy-addr-2.0.5.tgz'
-  dependencies:
-   forwarded: ~0.1.2
-   ipaddr.js: 1.9.0
 proxy-from-env:
  _latest: 1.0.0
  _:
@@ -13736,13 +13431,6 @@ psl:
  1.1.31:
   $: sha512-/6pt4+C+T+wZUieKR620OpzN/LlnNKuWjy1iFLQ/UG35JqHlR/89MP1d96dUfkf6Dne3TuLQzOYEYshJ+Hx8mw==
   _: 'https://registry.npmjs.org/psl/-/psl-1.1.31.tgz'
-pstree.remy:
- _latest: 1.1.6
- _:
-  ^1.1.6: 1.1.6
- 1.1.6:
-  $: sha512-NdF35+QsqD7EgNEI5mkI/X+UwaxVEbQaz9f4IooEmMUv6ZPmlTQYGjBPJGgrlzNdjSvIy4MWMg6Q6vCgBO2K+w==
-  _: 'https://registry.npmjs.org/pstree.remy/-/pstree.remy-1.1.6.tgz'
 public-encrypt:
  _latest: 4.0.3
  _:
@@ -13951,7 +13639,7 @@ randomfill:
 range-parser:
  _latest: 1.2.0
  _:
-  '^1.0.3,^1.2.0,~1.2.0': 1.2.0
+  '^1.0.3,^1.2.0': 1.2.0
  1.2.0:
   $: sha1-9JvmtIeJTdxA3MlKMi9hEJLgDV4=
   _: 'https://registry.npmjs.org/range-parser/-/range-parser-1.2.0.tgz'
@@ -13993,6 +13681,13 @@ rc:
    ini: ~1.3.0
    minimist: ^1.2.0
    strip-json-comments: ~2.0.1
+rc-css-transition-group-modern:
+ _latest: 2.1.6
+ _:
+  ^2.1.6: 2.1.6
+ 2.1.6:
+  $: sha1-401jdSEQ7izPUYXNa6THdM/fG7c=
+  _: 'https://repository.cache.walmart.com/content/groups/npm/rc-css-transition-group-modern/-/rc-css-transition-group-modern-2.1.6.tgz'
 react:
  _latest: 16.8.6
  _:
@@ -14959,7 +14654,7 @@ rx-lite-aggregates:
 safe-buffer:
  _latest: 5.1.2
  _:
-  '5.1.2,^5.0.1,^5.1.0,^5.1.1,^5.1.2,~5.1.0,~5.1.1': 5.1.2
+  '^5.0.1,^5.1.0,^5.1.1,^5.1.2,~5.1.0,~5.1.1': 5.1.2
  5.1.2:
   $: sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==
   _: 'https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.1.2.tgz'
@@ -15113,15 +14808,6 @@ select-hose:
  2.0.0:
   $: sha1-Yl2GWPhlr0Psliv8N2o3NZpJlMo=
   _: 'https://registry.npmjs.org/select-hose/-/select-hose-2.0.0.tgz'
-selfsigned:
- _latest: 1.10.4
- _:
-  ^1.10.4: 1.10.4
- 1.10.4:
-  $: sha512-9AukTiDmHXGXWtWjembZ5NDmVvP2695EtpgbCsxCa68w3c88B+alqbmZ4O3hZ4VWGXeGWzEVdvqgAJD8DQPCDw==
-  _: 'https://registry.npmjs.org/selfsigned/-/selfsigned-1.10.4.tgz'
-  dependencies:
-   node-forge: 0.7.5
 semver:
  _latest: 6.0.0
  _:
@@ -15146,27 +14832,6 @@ semver-diff:
   _: 'https://registry.npmjs.org/semver-diff/-/semver-diff-2.1.0.tgz'
   dependencies:
    semver: ^5.0.3
-send:
- _latest: 0.16.2
- _:
-  0.16.2: 0.16.2
- 0.16.2:
-  $: sha512-E64YFPUssFHEFBvpbbjr44NCLtI1AohxQ8ZSiJjQLskAdKuriYEP6VyGEsRDH8ScozGpkaX1BGvhanqCwkcEZw==
-  _: 'https://registry.npmjs.org/send/-/send-0.16.2.tgz'
-  dependencies:
-   debug: 2.6.9
-   depd: ~1.1.2
-   destroy: ~1.0.4
-   encodeurl: ~1.0.2
-   escape-html: ~1.0.3
-   etag: ~1.8.1
-   fresh: 0.5.2
-   http-errors: ~1.6.2
-   mime: 1.4.1
-   ms: 2.0.0
-   on-finished: ~2.3.0
-   range-parser: ~1.2.0
-   statuses: ~1.4.0
 serialize-javascript:
  _latest: 2.1.0
  _:
@@ -15174,21 +14839,6 @@ serialize-javascript:
  1.7.0:
   $: sha512-ke8UG8ulpFOxO8f8gRYabHQe/ZntKlcig2Mp+8+URDP1D8vJZ0KUt7LYo07q25Z/+JVSgpr/cui9PIp5H6/+nA==
   _: 'https://registry.npmjs.org/serialize-javascript/-/serialize-javascript-1.7.0.tgz'
-serve-index:
- _latest: 1.9.1
- _:
-  ^1.9.1: 1.9.1
- 1.9.1:
-  $: sha1-03aNabHn2C5c4FD/9bRTvqEqkjk=
-  _: 'https://registry.npmjs.org/serve-index/-/serve-index-1.9.1.tgz'
-  dependencies:
-   accepts: ~1.3.4
-   batch: 0.6.1
-   debug: 2.6.9
-   escape-html: ~1.0.3
-   http-errors: ~1.6.2
-   mime-types: ~2.1.17
-   parseurl: ~1.3.2
 serve-index-fs:
  _latest: 1.10.1
  _:
@@ -15204,18 +14854,6 @@ serve-index-fs:
    http-errors: ~1.6.3
    mime-types: ~2.1.18
    parseurl: ~1.3.2
-serve-static:
- _latest: 1.13.2
- _:
-  1.13.2: 1.13.2
- 1.13.2:
-  $: sha512-p/tdJrO4U387R9oMjb1oj7qSMaMfmOyd4j9hOFoxZe2baQszgHcSWjuya/CiT5kgZZKRudHNOA0pYXOl8rQ5nw==
-  _: 'https://registry.npmjs.org/serve-static/-/serve-static-1.13.2.tgz'
-  dependencies:
-   encodeurl: ~1.0.2
-   escape-html: ~1.0.3
-   parseurl: ~1.3.2
-   send: 0.16.2
 serviceworker-cache-polyfill:
  _latest: 4.0.0
  _:
@@ -15438,7 +15076,6 @@ socket.io:
  _latest: 2.2.0
  _:
   2.1.1: 2.1.1
-  ^1.7.3: 1.7.4
  2.1.1:
   $: sha512-rORqq9c+7W0DAK3cleWNSyfv/qKXV99hV4tZe+gGLfBECw3XEhBy7x85F3wypA9688LKjtwO9pX9L33/xQI8yA==
   _: 'https://registry.npmjs.org/socket.io/-/socket.io-2.1.1.tgz'
@@ -15449,35 +15086,16 @@ socket.io:
    socket.io-adapter: ~1.1.0
    socket.io-client: 2.1.1
    socket.io-parser: ~3.2.0
- 1.7.4:
-  $: sha1-L37O3DORvy1cc+KR/iM+bjTU3QA=
-  _: 'https://registry.npmjs.org/socket.io/-/socket.io-1.7.4.tgz'
-  dependencies:
-   debug: 2.3.3
-   engine.io: ~1.8.4
-   has-binary: 0.1.7
-   object-assign: 4.1.0
-   socket.io-adapter: 0.5.0
-   socket.io-client: 1.7.4
-   socket.io-parser: 2.3.1
 socket.io-adapter:
  _latest: 1.1.1
  _:
-  0.5.0: 0.5.0
   ~1.1.0: 1.1.1
  1.1.1:
   $: sha1-KoBeihTWNyEk3ZFZrUUC+MsH8Gs=
   _: 'https://registry.npmjs.org/socket.io-adapter/-/socket.io-adapter-1.1.1.tgz'
- 0.5.0:
-  $: sha1-y21LuL7IHhB4uZZ3+c7QBGBmu4s=
-  _: 'https://registry.npmjs.org/socket.io-adapter/-/socket.io-adapter-0.5.0.tgz'
-  dependencies:
-   debug: 2.3.3
-   socket.io-parser: 2.3.1
 socket.io-client:
  _latest: 2.2.0
  _:
-  1.7.4: 1.7.4
   2.1.1: 2.1.1
  2.1.1:
   $: sha512-jxnFyhAuFxYfjqIgduQlhzqTcOEQSn+OHKVfAxWaNWa7ecP7xSNk2Dx/3UEsDcY7NcFafxvNvKPmmO7HTwTxGQ==
@@ -15497,25 +15115,9 @@ socket.io-client:
    parseuri: 0.0.5
    socket.io-parser: ~3.2.0
    to-array: 0.1.4
- 1.7.4:
-  $: sha1-7J+CA1btme9tNX8HVtZIcXvdQoE=
-  _: 'https://registry.npmjs.org/socket.io-client/-/socket.io-client-1.7.4.tgz'
-  dependencies:
-   backo2: 1.0.2
-   component-bind: 1.0.0
-   component-emitter: 1.2.1
-   debug: 2.3.3
-   engine.io-client: ~1.8.4
-   has-binary: 0.1.7
-   indexof: 0.0.1
-   object-component: 0.0.3
-   parseuri: 0.0.5
-   socket.io-parser: 2.3.1
-   to-array: 0.1.4
 socket.io-parser:
  _latest: 3.3.0
  _:
-  2.3.1: 2.3.1
   ~3.2.0: 3.2.0
  3.2.0:
   $: sha512-FYiBx7rc/KORMJlgsXysflWx/RIvtqZbyGLlHZvjfmPTPeuD/I8MaW7cfFrj5tRltICJdgwflhfZ3NVVbVLFQA==
@@ -15524,38 +15126,6 @@ socket.io-parser:
    debug: ~3.1.0
    component-emitter: 1.2.1
    isarray: 2.0.1
- 2.3.1:
-  $: sha1-3VMgJRA85Clpcya+/WQAX8/ltKA=
-  _: 'https://registry.npmjs.org/socket.io-parser/-/socket.io-parser-2.3.1.tgz'
-  dependencies:
-   debug: 2.2.0
-   json3: 3.3.2
-   component-emitter: 1.1.2
-   isarray: 0.0.1
-sockjs:
- _latest: 0.3.19
- _:
-  0.3.19: 0.3.19
- 0.3.19:
-  $: sha512-V48klKZl8T6MzatbLlzzRNhMepEys9Y4oGFpypBFFn1gLI/QQ9HtLLyWJNbPlwGLelOVOEijUbTTJeLLI59jLw==
-  _: 'https://registry.npmjs.org/sockjs/-/sockjs-0.3.19.tgz'
-  dependencies:
-   faye-websocket: ^0.10.0
-   uuid: ^3.0.1
-sockjs-client:
- _latest: 1.3.0
- _:
-  1.3.0: 1.3.0
- 1.3.0:
-  $: sha512-R9jxEzhnnrdxLCNln0xg5uGHqMnkhPSTzUZH2eXcR03S/On9Yvoq2wyUZILRUhZCNVu2PmwWVoyuiPz8th8zbg==
-  _: 'https://registry.npmjs.org/sockjs-client/-/sockjs-client-1.3.0.tgz'
-  dependencies:
-   debug: ^3.2.5
-   eventsource: ^1.0.7
-   faye-websocket: ~0.11.1
-   inherits: ^2.0.3
-   json3: ^3.3.2
-   url-parse: ^1.4.3
 somever:
  _latest: 2.0.0
  _:
@@ -16168,7 +15738,7 @@ supports-color:
   '6.1.0,^6.1.0': 6.1.0
   ^2.0.0: 2.0.0
   '^3.1.0,^3.1.2,^3.2.3': 3.2.3
-  '^5.1.0,^5.2.0,^5.3.0,^5.4.0': 5.5.0
+  '^5.1.0,^5.3.0,^5.4.0': 5.5.0
  6.1.0:
   $: sha512-qe1jfm1Mg7Nq/NSh6XE24gPXROEVsWHxC1LIx//XNlD9iw7YZQGjZNjYN7xGaEG6iKdA8EtNFW6R0gjnVXp+wQ==
   _: 'https://registry.npmjs.org/supports-color/-/supports-color-6.1.0.tgz'
@@ -16575,15 +16145,6 @@ topo:
   dependencies:
    hoek: 4.x.x
   deprecated: 'This version has been deprecated in accordance with the hapi support policy (hapi.im/support). Please upgrade to the latest version to get the best features, bug fixes, and security patches. If you are unable to upgrade at this time, paid support is available for older versions (hapi.im/commercial).'
-touch:
- _latest: 3.1.0
- _:
-  ^3.1.0: 3.1.0
- 3.1.0:
-  $: sha512-WBx8Uy5TLtOSRtIq+M03/sKDrXCLHxwDcquSP2c43Le03/9serjQBIztjRz6FkJez9D/hleyAXTBGLwwZUw9lA==
-  _: 'https://registry.npmjs.org/touch/-/touch-3.1.0.tgz'
-  dependencies:
-   nopt: ~1.0.10
 tough-cookie:
  _latest: 3.0.1
  _:
@@ -16726,23 +16287,10 @@ uglify-js:
 ultron:
  _latest: 1.1.1
  _:
-  1.0.x: 1.0.2
   ~1.1.0: 1.1.1
  1.1.1:
   $: sha512-UIEXBNeYmKptWH6z8ZnqTeS8fV74zG0/eRU9VGkpzz+LIJNs8W/zM/L+7ctCkRrgbNnnR0xxw4bKOr0cW0N0Og==
   _: 'https://registry.npmjs.org/ultron/-/ultron-1.1.1.tgz'
- 1.0.2:
-  $: sha1-rOEWq1V80Zc4ak6I9GhTeMiy5Po=
-  _: 'https://registry.npmjs.org/ultron/-/ultron-1.0.2.tgz'
-undefsafe:
- _latest: 2.0.2
- _:
-  ^2.0.2: 2.0.2
- 2.0.2:
-  $: sha1-Il9rngM3Zj4Njnz9aG/Cg2zKznY=
-  _: 'https://registry.npmjs.org/undefsafe/-/undefsafe-2.0.2.tgz'
-  dependencies:
-   debug: ^2.2.0
 underscore:
  _latest: 1.9.1
  _:
@@ -16917,7 +16465,7 @@ upath:
 update-notifier:
  _latest: 2.5.0
  _:
-  '^2.3.0,^2.5.0': 2.5.0
+  ^2.3.0: 2.5.0
  2.5.0:
   $: sha512-gwMdhgJHGuj/+wHJJs9e6PcCszpxR1b236igrOkUofGhqJuG+amlIKwApH1IW1WWl7ovZxsX49lMBWLxSdm5Dw==
   _: 'https://registry.npmjs.org/update-notifier/-/update-notifier-2.5.0.tgz'
@@ -17126,13 +16674,6 @@ value-equal:
  0.4.0:
   $: sha512-x+cYdNnaA3CxvMaTX0INdTCN8m8aF2uY9BvEqmxuYp8bL09cs/kWVQPVGcA35fMktdOsP69IgU7wFj/61dJHEw==
   _: 'https://registry.npmjs.org/value-equal/-/value-equal-0.4.0.tgz'
-vary:
- _latest: 1.1.2
- _:
-  ~1.1.2: 1.1.2
- 1.1.2:
-  $: sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
-  _: 'https://registry.npmjs.org/vary/-/vary-1.1.2.tgz'
 vendors:
  _latest: 1.0.2
  _:
@@ -17304,10 +16845,10 @@ webpack-cli:
   peerDependencies:
    webpack: 4.x.x
 webpack-config-composer:
- _latest: 1.1.1-fynlocal_h
+ _latest: 1.1.2-fynlocal_h
  _:
-  ../webpack-config-composer: 1.1.1-fynlocal_h
- 1.1.1-fynlocal_h:
+  ../webpack-config-composer: 1.1.2-fynlocal_h
+ 1.1.2-fynlocal_h:
   $: local
   _: ../../packages/webpack-config-composer
   dependencies:
@@ -17315,7 +16856,7 @@ webpack-config-composer:
 webpack-dev-middleware:
  _latest: 3.6.2
  _:
-  '^3.2.0,^3.4.0,^3.6.2': 3.6.2
+  '^3.2.0,^3.4.0': 3.6.2
  3.6.2:
   $: sha512-A47I5SX60IkHrMmZUlB0ZKSWi29TZTcPz7cha1Z75yYOsgWh/1AcPmQEbC8ZIbU3A1ytSv1PMU0PyPz2Lmz2jg==
   _: 'https://registry.npmjs.org/webpack-dev-middleware/-/webpack-dev-middleware-3.6.2.tgz'
@@ -17324,46 +16865,6 @@ webpack-dev-middleware:
    mime: ^2.3.1
    range-parser: ^1.0.3
    webpack-log: ^2.0.0
-  peerDependencies:
-   webpack: ^4.0.0
-webpack-dev-server:
- _latest: 3.3.1
- _:
-  ^3.1.10: 3.3.1
- 3.3.1:
-  $: sha512-jY09LikOyGZrxVTXK0mgIq9y2IhCoJ05848dKZqX1gAGLU1YDqgpOT71+W53JH/wI4v6ky4hm+KvSyW14JEs5A==
-  _: 'https://registry.npmjs.org/webpack-dev-server/-/webpack-dev-server-3.3.1.tgz'
-  dependencies:
-   ansi-html: 0.0.7
-   bonjour: ^3.5.0
-   chokidar: ^2.1.5
-   compression: ^1.7.4
-   connect-history-api-fallback: ^1.6.0
-   debug: ^4.1.1
-   del: ^4.1.0
-   express: ^4.16.4
-   html-entities: ^1.2.1
-   http-proxy-middleware: ^0.19.1
-   import-local: ^2.0.0
-   internal-ip: ^4.2.0
-   ip: ^1.1.5
-   killable: ^1.0.1
-   loglevel: ^1.6.1
-   opn: ^5.5.0
-   portfinder: ^1.0.20
-   schema-utils: ^1.0.0
-   selfsigned: ^1.10.4
-   semver: ^6.0.0
-   serve-index: ^1.9.1
-   sockjs: 0.3.19
-   sockjs-client: 1.3.0
-   spdy: ^4.0.0
-   strip-ansi: ^3.0.1
-   supports-color: ^6.1.0
-   url: ^0.11.0
-   webpack-dev-middleware: ^3.6.2
-   webpack-log: ^2.0.0
-   yargs: 12.0.5
   peerDependencies:
    webpack: ^4.0.0
 webpack-disk-plugin:
@@ -17422,23 +16923,6 @@ webpack-stats-plugin:
  0.2.1:
   $: sha512-OYMZLpZrK/qLA79NE4kC4DCt85h/5ipvWJcsefKe9MMw0qU4/ck/IJg+4OmWA+5EfrZZpHXDq92IptfYDWVfkw==
   _: 'https://registry.npmjs.org/webpack-stats-plugin/-/webpack-stats-plugin-0.2.1.tgz'
-websocket-driver:
- _latest: 0.7.0
- _:
-  '>=0.5.1': 0.7.0
- 0.7.0:
-  $: sha1-DK+dLXVdk67gSdS90NP+LMoqJOs=
-  _: 'https://registry.npmjs.org/websocket-driver/-/websocket-driver-0.7.0.tgz'
-  dependencies:
-   http-parser-js: '>=0.4.0'
-   websocket-extensions: '>=0.1.1'
-websocket-extensions:
- _latest: 0.1.3
- _:
-  '>=0.1.1': 0.1.3
- 0.1.3:
-  $: sha512-nqHUnMXmBzT0w570r2JpJxfiSD1IzoI+HGVdd3aZ0yNi3ngvQ4jv1dtHt5VGxfI2yj5yqImPhOK4vmIh2xMbGg==
-  _: 'https://registry.npmjs.org/websocket-extensions/-/websocket-extensions-0.1.3.tgz'
 whatwg-encoding:
  _latest: 1.0.5
  _:
@@ -17634,7 +17118,6 @@ ws:
  _:
   ^5.2.0: 5.2.2
   ^6.1.0: 6.2.1
-  ~1.1.5: 1.1.5
   ~3.3.1: 3.3.3
  6.2.1:
   $: sha512-GIyAXC2cB7LjvpgMt9EKS2ldqr0MTrORaleiOno6TweZ6r3TKtoFQWay/2PceJ3RuBasOHzXNn5Lrw1X0bEjqA==
@@ -17653,26 +17136,13 @@ ws:
    async-limiter: ~1.0.0
    safe-buffer: ~5.1.0
    ultron: ~1.1.0
- 1.1.5:
-  $: sha512-o3KqipXNUdS7wpQzBHSe180lBGO60SoK0yVo3CYJgb2MkobuWuBX6dhkYP5ORCLd55y+SaflMOV5fqAB53ux4w==
-  _: 'https://registry.npmjs.org/ws/-/ws-1.1.5.tgz'
-  dependencies:
-   options: '>=0.0.5'
-   ultron: 1.0.x
-wtf-8:
- _latest: 1.0.1
- _:
-  1.0.0: 1.0.0
- 1.0.0:
-  $: sha1-OS2LotDxw00e4tYw8V0O+2jhBIo=
-  _: 'https://registry.npmjs.org/wtf-8/-/wtf-8-1.0.0.tgz'
 xclap:
- _latest: 0.2.37
+ _latest: 0.2.38
  _:
-  ^0.2.37: 0.2.37
- 0.2.37:
-  $: sha512-pB+1kedlEfZ5fkBVwjLdRpdLDIiU4aVPEaQ8+bg7P/oolfevbmCl01lwF3pc4c0mc5mqygJetTAST3hPVJ8AaA==
-  _: 'https://registry.npmjs.org/xclap/-/xclap-0.2.37.tgz'
+  ^0.2.38: 0.2.38
+ 0.2.38:
+  $: sha512-FqiqZEHnscTwgitgr6as5UF8mMvgelui6w23V/KGT1GfFGS6YyqofHMEoYVBWIPVXdX7EbgdhlU7sinnLTXlwQ==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/xclap/-/xclap-0.2.38.tgz'
   dependencies:
    chalk: ^2.0.1
    insync: ^2.1.1
@@ -17750,14 +17220,10 @@ xmlbuilder:
 xmlhttprequest-ssl:
  _latest: 1.5.5
  _:
-  1.5.3: 1.5.3
   ~1.5.4: 1.5.5
  1.5.5:
   $: sha1-wodrBhaKrcQOV9l+gRkayPQ5iz4=
   _: 'https://registry.npmjs.org/xmlhttprequest-ssl/-/xmlhttprequest-ssl-1.5.5.tgz'
- 1.5.3:
-  $: sha1-GFqIjATspGw+QHDZn3tJ3jUomS0=
-  _: 'https://registry.npmjs.org/xmlhttprequest-ssl/-/xmlhttprequest-ssl-1.5.3.tgz'
 xsh:
  _latest: 0.4.4
  _:
@@ -17777,7 +17243,7 @@ xtend:
 y18n:
  _latest: 4.0.0
  _:
-  '^3.2.0,^3.2.1,^3.2.1 || ^4.0.0': 3.2.1
+  '^3.2.0,^3.2.1': 3.2.1
   ^4.0.0: 4.0.0
  4.0.0:
   $: sha512-r9S/ZyXu/Xu9q1tYlpsLIsa3EeLXXk0VwlxqTcFRfg9EhMW+17kbt9G0NrgCmhGb5vT2hyhJZLfDGx+7+5Uj/w==
@@ -17797,19 +17263,17 @@ yallist:
   $: sha1-HBH5IY8HYImkfdUS+TxmmaaoHVI=
   _: 'https://registry.npmjs.org/yallist/-/yallist-2.1.2.tgz'
 yargs:
- _latest: 13.2.2
+ _latest: 14.2.0
  _:
-  12.0.5: 12.0.5
   13.2.4: 13.2.4
   ^11.0.0: 11.1.0
   ^13.2.2: 13.3.0
   ^3.31.0: 3.32.0
   ^4.2.0: 4.8.1
-  ^5.0.0: 5.0.0
   ^7.0.0: 7.1.0
  13.3.0:
   $: sha512-2eehun/8ALW8TLoIl7MVaRUrg+yCnenu8B4kBlRxj3GJGDKU1Og7sMXPNm1BYyM1DOJmTZ4YeN/Nwxv+8XJsUA==
-  _: 'https://registry.npmjs.org/yargs/-/yargs-13.3.0.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/yargs/-/yargs-13.3.0.tgz'
   dependencies:
    cliui: ^5.0.0
    find-up: ^3.0.0
@@ -17823,7 +17287,7 @@ yargs:
    yargs-parser: ^13.1.1
  13.2.4:
   $: sha512-HG/DWAJa1PAnHT9JAhNa8AbAv3FPaiLzioSjCcmuXXhP8MlpHO5vwls4g4j6n30Z74GVQj8Xa62dWVx1QCGklg==
-  _: 'https://registry.npmjs.org/yargs/-/yargs-13.2.4.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/yargs/-/yargs-13.2.4.tgz'
   dependencies:
    cliui: ^5.0.0
    find-up: ^3.0.0
@@ -17836,25 +17300,9 @@ yargs:
    which-module: ^2.0.0
    y18n: ^4.0.0
    yargs-parser: ^13.1.0
- 12.0.5:
-  $: sha512-Lhz8TLaYnxq/2ObqHDql8dX8CJi97oHxrjUcYtzKbbykPtVW9WB+poxI+NM2UIzsMgNCZTIf0AQwsjK5yMAqZw==
-  _: 'https://registry.npmjs.org/yargs/-/yargs-12.0.5.tgz'
-  dependencies:
-   cliui: ^4.0.0
-   decamelize: ^1.2.0
-   find-up: ^3.0.0
-   get-caller-file: ^1.0.1
-   os-locale: ^3.0.0
-   require-directory: ^2.1.1
-   require-main-filename: ^1.0.1
-   set-blocking: ^2.0.0
-   string-width: ^2.0.0
-   which-module: ^2.0.0
-   y18n: '^3.2.1 || ^4.0.0'
-   yargs-parser: ^11.1.1
  11.1.0:
   $: sha512-NwW69J42EsCSanF8kyn5upxvjp5ds+t3+udGBeTbFnERA+lF541DDpMawzo4z6W/QrzNM18D+BPMiOBibnFV5A==
-  _: 'https://registry.npmjs.org/yargs/-/yargs-11.1.0.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/yargs/-/yargs-11.1.0.tgz'
   dependencies:
    cliui: ^4.0.0
    decamelize: ^1.1.1
@@ -17870,7 +17318,7 @@ yargs:
    yargs-parser: ^9.0.2
  7.1.0:
   $: sha1-a6MY6xaWFyf10oT46gA+jWFU0Mg=
-  _: 'https://registry.npmjs.org/yargs/-/yargs-7.1.0.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/yargs/-/yargs-7.1.0.tgz'
   dependencies:
    camelcase: ^3.0.0
    cliui: ^3.2.0
@@ -17885,27 +17333,9 @@ yargs:
    which-module: ^1.0.0
    y18n: ^3.2.1
    yargs-parser: ^5.0.0
- 5.0.0:
-  $: sha1-M1UUSXfQV1fbuG1uOOwFYSOzpm4=
-  _: 'https://registry.npmjs.org/yargs/-/yargs-5.0.0.tgz'
-  dependencies:
-   cliui: ^3.2.0
-   decamelize: ^1.1.1
-   get-caller-file: ^1.0.1
-   lodash.assign: ^4.2.0
-   os-locale: ^1.4.0
-   read-pkg-up: ^1.0.1
-   require-directory: ^2.1.1
-   require-main-filename: ^1.0.1
-   set-blocking: ^2.0.0
-   string-width: ^1.0.2
-   which-module: ^1.0.0
-   window-size: ^0.2.0
-   y18n: ^3.2.1
-   yargs-parser: ^3.2.0
  4.8.1:
   $: sha1-wMQpJMpKqmsObaFznfshZDn53cA=
-  _: 'https://registry.npmjs.org/yargs/-/yargs-4.8.1.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/yargs/-/yargs-4.8.1.tgz'
   dependencies:
    cliui: ^3.2.0
    decamelize: ^1.1.1
@@ -17923,7 +17353,7 @@ yargs:
    yargs-parser: ^2.4.1
  3.32.0:
   $: sha1-AwiOnr+edWtpdRYR0qXvWRSCyZU=
-  _: 'https://registry.npmjs.org/yargs/-/yargs-3.32.0.tgz'
+  _: 'https://repository.cache.walmart.com/content/groups/npm/yargs/-/yargs-3.32.0.tgz'
   dependencies:
    camelcase: ^2.0.1
    cliui: ^3.0.3
@@ -17935,21 +17365,13 @@ yargs:
 yargs-parser:
  _latest: 13.1.1
  _:
-  ^11.1.1: 11.1.1
   '^13.0.0,^13.1.0,^13.1.1': 13.1.1
   ^2.4.1: 2.4.1
-  ^3.2.0: 3.2.0
   ^5.0.0: 5.0.0
   ^9.0.2: 9.0.2
  13.1.1:
   $: sha512-oVAVsHz6uFrg3XQheFII8ESO2ssAf9luWuAd6Wexsu4F3OtIW0o8IribPXYrD4WC24LWtPrJlGy87y5udK+dxQ==
   _: 'https://registry.npmjs.org/yargs-parser/-/yargs-parser-13.1.1.tgz'
-  dependencies:
-   camelcase: ^5.0.0
-   decamelize: ^1.2.0
- 11.1.1:
-  $: sha512-C6kB/WJDiaxONLJQnF8ccx9SEeoTTLek8RVbaOIsrAUS8VrBEXfmeSnCZxygc+XC2sNMBIwOOnfcxiynjHsVSQ==
-  _: 'https://registry.npmjs.org/yargs-parser/-/yargs-parser-11.1.1.tgz'
   dependencies:
    camelcase: ^5.0.0
    decamelize: ^1.2.0
@@ -17963,12 +17385,6 @@ yargs-parser:
   _: 'https://registry.npmjs.org/yargs-parser/-/yargs-parser-5.0.0.tgz'
   dependencies:
    camelcase: ^3.0.0
- 3.2.0:
-  $: sha1-UIE1XRnZ0MjF2BrakIy05tGGZk8=
-  _: 'https://registry.npmjs.org/yargs-parser/-/yargs-parser-3.2.0.tgz'
-  dependencies:
-   camelcase: ^3.0.0
-   lodash.assign: ^4.1.0
  2.4.1:
   $: sha1-hVaN488VD/SfpRgl8DqMiA3cxcQ=
   _: 'https://registry.npmjs.org/yargs-parser/-/yargs-parser-2.4.1.tgz'

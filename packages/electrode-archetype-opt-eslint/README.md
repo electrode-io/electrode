@@ -1,31 +1,34 @@
 # Electrode Archetype Option Eslint
 
-Optionally installs ESLint to your [Electrode](https://github.com/electrode-io/electrode) app.
+This is a feature package that instructs [Electrode](https://github.com/electrode-io/electrode) to install ESLint.
 
-# Usage
-The app can skip installing ESLint dependencies by adding a file `archetype/config/index.js` or `archetype/config.js` and set:
+## Interactive Install
 
-```js
-module.exports = {
-  options: {
-    eslint: false
-  }
-};
+Inclusion of this (and all other [Electrode](https://github.com/electrode-io/electrode) features) is maintained by the `features` xclap task.
+
+To run `features` in interactive mode (recommended!), simply call the `features` xclap task with no arguments:
+
+```sh
+clap features
 ```
 
-If nothing is set, then default is to install.
+## Migrating from legacy archetype options
 
-# Installing
-This module is part of Electrode, and should have already been included in your package.json.
+In versions of Electrode Archetype < 7, features were enabled or disabled by modifying `archetype/config/index.js` or `archetype/config.js`. To migrate from legacy features, simply run the `features` xclap task with no arguments:
 
-```json
-{
-  "optionalDependencies": {
-    "electrode-archetype-opt-eslint": "^1.0.0"
-  }
-}
+```sh
+clap features
 ```
 
+If the features task detects that you are still using legacy features, it will give you the following prompt: `Convert archetype feature usage to new style (recommended)?`. Answering `yes` to this question will cause the legacy features to be migrated to the new style.
+
+## Manual Install
+
+This feature can also be installed directly using npm:
+
+```sh
+npm install electrode-archetype-opt-eslint
+```
 
 ## License
 

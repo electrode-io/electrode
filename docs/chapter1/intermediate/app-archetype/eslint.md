@@ -1,12 +1,8 @@
 # Eslint Configuration
 
-ESLint is enabled with the following `archetype/config/index.js` configuration:
-```js
-module.exports = {
-  options: {
-    eslint: false
-  }
-};
+ESLint is enabled using the `clap features` interactive command or using npm:
+```sh
+npm i -D electrode-archetype-opt-eslint
 ```
 
 The app archetype provides eslint configuration files base on [eslint-config-walmart]. The RC files can be found in the `config/eslint` directory of the module `electrode-archetype-react-app-dev`.

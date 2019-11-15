@@ -1,24 +1,39 @@
 const cwd = process.env.PWD || process.cwd();
 const optionalRequire = require("optional-require")(require);
-const archetype = require("electrode-archetype-react-app/config/archetype");
-const { optionalDependencies } = require("electrode-archetype-react-app-dev/package");
-const appPkg = require(`${cwd}/package.json`);
+const archetype = require("../config/archetype");
+const { optionalDependencies } = optionalRequire("electrode-archetype-react-app-dev/package")
+  || { optionalDependencies: {} };
+let appPkg = require(`${cwd}/package.json`);
 const fs = require("fs");
 const util = require("util");
 const os = require("os");
 const Path = require("path");
-const prompts = require("prompts");
 
 const devRequire = archetype.devRequire;
 const chalk = devRequire("chalk");
-const exec = util.promisify(require("child_process").exec);
+const childProcess = require("child_process");
+const execPromise = util.promisify(childProcess.exec);
+const execSync = require("child_process").execSync;
+const prompts = devRequire("prompts");
 const request = devRequire("request");
 
 const archetypeOptions = archetype.options || {};
 
-const ENABLE_PACKAGE_SELECTION = false;
-const ENABLE_PACKAGE_CONVERSION = false;
 const UTF8_REGEX = /UTF-?8$/i;
+
+const isSameMajorVersion = (verA, verB) => {
+  // check for simple semver like x.x.x, ~x.x.x, or ^x.x.x only
+  let majorA = verA.match(/[\~\^]{0,1}(\d+)\.(\d+)\.(\d+)/);
+  if (majorA) {
+    majorA = majorA.slice(1, 4);
+    const majorB = verB.split(".");
+    if (majorB[0] !== majorA[0] || (majorB[0] === "0" && majorB[1] !== majorA[1])) {
+      return false;
+    }
+  }
+
+  return true;
+};
 
 // Adapted from here: https://www.npmjs.com/package/has-unicode
 function isUnicodeSupported() {
@@ -29,8 +44,13 @@ function isUnicodeSupported() {
   return UTF8_REGEX.test(process.env.LC_ALL || process.env.LC_CTYPE || process.env.LANG);
 }
 
-function areCurrentEnablesLegacy() {
-  return true;
+function areCurrentEnablementsLegacy(features) {
+  const packageNames = features.map(feature => feature.packageName);
+  const deps = (appPkg.dependencies || {});
+  const devDeps = (appPkg.devDependencies || {});
+  return !(packageNames.find(name =>
+    deps.hasOwnProperty(name) || devDeps.hasOwnProperty(name)
+  ));
 }
 
 class Feature {
@@ -40,6 +60,7 @@ class Feature {
     this.setEnabled = this.setEnabled.bind(this);
     this.removeLegacyEnabled = this.removeLegacyEnabled.bind(this);
     this.convert = this.convert.bind(this);
+    this.getConflictingFeatures = this.getConflictingFeatures.bind(this);
   }
 
   async attachNpmAttributes() {
@@ -61,7 +82,7 @@ class Feature {
     if (currentDate.getTime() - mtime < hour) {
       body = JSON.parse(fs.readFileSync(pathName));
     } else {
-      const { stdout } = await exec("npm get registry");
+      const { stdout } = await execPromise("npm get registry");
       const url = `${stdout.trim()}/${this.packageName}`;
       const promise = new Promise((resolve, reject) => {
         request(url, { json: true }, (err, res, body) => {
@@ -99,15 +120,14 @@ class Feature {
     return this._package;
   }
 
-  get version() {
+  get installedVersion() {
     return this.package ? this.package.version : "";
   }
 
   get enabled() {
-    return this.enabledNew || this.enabledLegacy;
-  }
-
-  get enabledNew() {
+    if (this.hasOwnProperty("_enabled")) {
+      return this._enabled;
+    }
     return Boolean(
       ["dependencies", "devDependencies"].find(
         x => appPkg && appPkg[x] && appPkg[x].hasOwnProperty(this.packageName)
@@ -168,7 +188,7 @@ class Feature {
         // Try to do a simple major version check.  If they don't match then assume user
         // is trying install a different one, so fail this copy.
         const appSemV = appPkg[appDep][this.packageName];
-        if (!isSameMajorVersion(appSemV, this.version)) {
+        if (!isSameMajorVersion(appSemV, this.installedVersion)) {
           // Found a different version from this copy's major version skipping installing this copy.
           return false;
         }
@@ -193,15 +213,26 @@ class Feature {
   }
 
   setEnabled(pkg, enabled) {
+    if (enabled === this.enabled) {
+      return pkg;
+    }
     const dependencies = { ...pkg.dependencies };
-    if (enabled) {
-      dependencies[this.packageName] = `^${this.version || this.npmVersion}`;
+    const devDependencies = { ...pkg.devDependencies };
+    if (enabled && this.electrodeOptArchetype.devOnly) {
+      delete dependencies[this.packageName];
+      devDependencies[this.packageName] = `^${this.installedVersion || this.npmVersion}`;
+    } else if (enabled && !this.electrodeOptArchetype.devOnly) {
+      dependencies[this.packageName] = `^${this.installedVersion || this.npmVersion}`;
+      delete devDependencies[this.packageName];
     } else {
       delete dependencies[this.packageName];
+      delete devDependencies[this.packageName];
     }
+    this._enabled = enabled;
     return {
       ...pkg,
-      dependencies
+      dependencies,
+      devDependencies
     };
   }
 
@@ -218,10 +249,23 @@ class Feature {
     pkg = this.setEnabled(pkg, this.enabledLegacy);
     return this.removeLegacyEnabled(pkg);
   }
+
+  getConflictingFeatures(features) {
+    if (!this.exclusivities.length) {
+      return [];
+    }
+
+    return features.filter((feature) => {
+      if (feature.packageName === this.packageName || !feature.enabled) {
+        return false;
+      }
+
+      return this.exclusivities.indexOf(feature.packageName) >= 0;
+    });
+  }
 }
 
 async function getFeatures() {
-  console.log("Fetching feature information, please wait...");
   const features = Object.keys(optionalDependencies).map(packageName => new Feature(packageName));
   await Promise.all(features.map(feature => feature.attachNpmAttributes()));
   features.sort(function(a, b) {
@@ -236,7 +280,7 @@ function displayFeatureStatus(features) {
       return a.name.length > b.name.length ? a : b;
     }).name.length + 1;
   const enabledPadding = 4;
-  const versionPadding = 8;
+  const versionPadding = 10;
 
   const DISABLED = (isUnicodeSupported() ? "✗" : "N").padEnd(enabledPadding);
   const ENABLED = chalk.green((isUnicodeSupported() ? "✓" : "Y").padEnd(enabledPadding));
@@ -244,19 +288,21 @@ function displayFeatureStatus(features) {
   console.log(
     chalk.bold("Feature".padEnd(namePadding)),
     chalk.bold("En?".padEnd(enabledPadding)),
-    chalk.bold("Current".padEnd(versionPadding)),
+    chalk.bold("Installed".padEnd(versionPadding)),
     chalk.bold("Latest".padEnd(versionPadding)),
     chalk.bold("Description")
   );
 
+  const legacy = areCurrentEnablementsLegacy(features);
+
   features.forEach(feature => {
     const version =
-      feature.version === feature.npmVersion
-        ? chalk.cyan(feature.version.padEnd(versionPadding))
-        : chalk.red(feature.version.padEnd(versionPadding));
+      feature.installedVersion === feature.npmVersion
+        ? chalk.cyan(feature.installedVersion.padEnd(versionPadding))
+        : chalk.red(feature.installedVersion.padEnd(versionPadding));
     console.log(
       feature.name.padEnd(namePadding),
-      feature.enabled ? ENABLED : DISABLED,
+      (legacy ? feature.enabledLegacy : feature.enabled) ? ENABLED : DISABLED,
       version,
       chalk.yellow(feature.npmVersion.padEnd(versionPadding)),
       feature.description
@@ -296,6 +342,23 @@ Please perform an "npm install"`)
 function writeAppPkg(pkg) {
   const file = `${cwd}/package.json`;
   fs.writeFileSync(file, JSON.stringify(pkg, undefined, "  ") + "\n");
+  appPkg = pkg;
+}
+
+function npmInstall() {
+  execSync('npm install', {stdio:[0,1,2]});
+}
+
+async function convertEnablements(features, runNpmInstall = true) {
+  features = features || await getFeatures();
+  let pkg = appPkg;
+  features.forEach(feature => {
+    pkg = feature.convert(pkg);
+  });
+  writeAppPkg(pkg);
+  if (runNpmInstall) {
+    npmInstall();
+  }
 }
 
 async function promptForConversion(features) {
@@ -305,32 +368,34 @@ async function promptForConversion(features) {
     message: `Convert archetype feature usage to new style (recommended)?`,
     initial: true
   });
-  if (!responses.convert) {
-    return;
+  if (responses.convert) {
+    convertEnablements(features, false);
   }
-  let pkg = appPkg;
-  features.forEach(feature => {
-    pkg = feature.convert(pkg);
-  });
-  writeAppPkg(pkg);
 }
 
 async function promptForEnabled(features) {
-  const featureEnablePrompts = features.map((feature, index) => ({
-    type: "confirm",
-    name: index,
-    message: `Enable ${feature.name}?`,
-    initial: feature.enabled
-  }));
-  const responses = await prompts(featureEnablePrompts);
   let pkg = appPkg;
-  features.forEach((feature, index) => {
-    const enabled = responses[index];
-    if (feature.enabled === enabled) {
-      return;
+  const seenFeatures = [];
+  for (let i = 0; i < features.length; ++i) {
+    const feature = features[i];
+    const conflicts = feature.getConflictingFeatures(seenFeatures);
+    if (conflicts.length > 0) {
+      console.log(`Because ${feature.packageName} conflicts with ${conflicts[0].packageName}, it has been automatically deselected.`);
+      pkg = feature.setEnabled(pkg, false);
+      continue;
     }
+
+    seenFeatures.push(feature);
+    const prompt = {
+      type: "confirm",
+      name: feature.packageName,
+      message: `Enable ${feature.name}?`,
+      initial: feature.enabled,
+    };
+    const response = await prompts(prompt);
+    const enabled = response[feature.packageName];
     pkg = feature.setEnabled(pkg, enabled);
-  });
+  }
   writeAppPkg(pkg);
 }
 
@@ -338,14 +403,16 @@ async function displayFeatures() {
   const features = await getFeatures();
   displayFeatureStatus(features);
   displayFeatureIssues(features);
-  if (ENABLE_PACKAGE_CONVERSION && areCurrentEnablesLegacy()) {
+  if (areCurrentEnablementsLegacy(features)) {
     await promptForConversion(features);
   }
-  if (ENABLE_PACKAGE_SELECTION) {
-    await promptForEnabled(features);
-  }
+  await promptForEnabled(features);
+  npmInstall();
 }
 
 module.exports = {
-  displayFeatures
+  convertEnablements,
+  displayFeatures,
+  isUnicodeSupported,
+  Feature
 };

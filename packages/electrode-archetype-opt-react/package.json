@@ -34,6 +34,7 @@
   "electrodeOptArchetype": {
     "optionalTagName": "reactLib",
     "expectTag": "react",
+    "devOnly": false,
     "defaultInstall": true,
     "onlyOneOf": [
       "electrode-archetype-opt-react",

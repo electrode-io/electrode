@@ -52,6 +52,7 @@
   "electrodeOptArchetype": {
     "optionalTagName": "karma",
     "expectTag": true,
+    "devOnly": true,
     "defaultInstall": true
   }
 }
