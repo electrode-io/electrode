@@ -11,10 +11,12 @@ function checkOptArchetypeInAppDep(dependencies) {
   const options = Object.keys(dependencies)
     .filter(x => x.startsWith("electrode-archetype-opt-"))
     .reduce((acc, name) => {
-      const optPkg = require(name)();
-      if (optPkg.pass) {
-        acc[optPkg.optionalTagName] = optPkg.expectTag;
-      }
+      try {
+        const optPkg = require(name)();
+        if (optPkg.pass) {
+          acc[optPkg.optionalTagName] = optPkg.expectTag;
+        }
+      } catch (err) {}
       return acc;
     }, {});
 
