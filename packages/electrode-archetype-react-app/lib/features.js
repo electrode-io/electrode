@@ -35,6 +35,11 @@ const isSameMajorVersion = (verA, verB) => {
   return true;
 };
 
+function userCancel() {
+  console.log("User cancelled");
+  process.exit(1);
+}
+
 // Adapted from here: https://www.npmjs.com/package/has-unicode
 function isUnicodeSupported() {
   if (os.type() === "Windows_NT") {
@@ -368,6 +373,9 @@ async function promptForConversion(features) {
     message: `Convert archetype feature usage to new style (recommended)?`,
     initial: true
   });
+  if (responses.convert === undefined) {
+    userCancel();
+  }
   if (responses.convert) {
     convertEnablements(features, false);
   }
@@ -394,6 +402,9 @@ async function promptForEnabled(features) {
     };
     const response = await prompts(prompt);
     const enabled = response[feature.packageName];
+    if (enabled === undefined) {
+      userCancel();
+    }
     pkg = feature.setEnabled(pkg, enabled);
   }
   writeAppPkg(pkg);
