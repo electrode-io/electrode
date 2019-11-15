@@ -19,6 +19,7 @@ module.exports = {
     criticalCSS: false,
     less: false,
     sass: false,
+    stylus: false,
     // Progressive Web App
     pwa: false
   }
