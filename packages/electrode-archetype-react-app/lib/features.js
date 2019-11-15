@@ -399,6 +399,20 @@ async function promptForEnabled(features) {
   writeAppPkg(pkg);
 }
 
+async function promptForNpmInstall() {
+  const responses = await prompts({
+    type: "confirm",
+    name: "npm",
+    message: "Run `npm install`?",
+    initial: false,
+  });
+  if (responses.npm) {
+    npmInstall();
+  } else {
+    console.log("Please run `npm install` to finalize feature selections.");
+  }
+}
+
 async function displayFeatures() {
   const features = await getFeatures();
   displayFeatureStatus(features);
@@ -407,7 +421,7 @@ async function displayFeatures() {
     await promptForConversion(features);
   }
   await promptForEnabled(features);
-  npmInstall();
+  await promptForNpmInstall();
 }
 
 module.exports = {
