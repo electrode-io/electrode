@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - v8
+  - v10
 dist: trusty # needs Ubuntu Trusty
 sudo: required  # no need for virtualization.
 addons:
