@@ -21,7 +21,10 @@ const pullLocalPackages = dir => {
     "electrode-redux-router-engine",
     "electrode-auto-ssr",
     "electrode-cookies",
-    "electrode-ui-config"
+    "electrode-ui-config",
+    "subapp-redux",
+    "subapp-server",
+    "subapp-web"
   ];
   const localDevPkgs = ["electrode-archetype-react-app-dev"];
   const localPackagesDir = Path.relative(dir, packagesDir);
@@ -68,6 +71,19 @@ const runAppTest = (dir, forceLocal) => {
     .then(() => exec({ cwd: dir }, `${localClap} build`));
 };
 
+const testCreateApp = async (testDir, name, clean, runTest, prompts) => {
+  name = name || "my-app";
+  const testAppDir = Path.join(testDir, name);
+
+  if (!clean) {
+    shell.mkdir("-p", testAppDir);
+  }
+
+  shell.pushd(testAppDir);
+  await require("./packages/create-app/src/create")();
+  shell.popd();
+};
+
 const testGenerator = (testDir, name, clean, runTest, prompts) => {
   name = name || "test-app";
   const yoApp = Path.join(packagesDir, "generator-electrode/generators/app/index.js");
@@ -110,6 +126,7 @@ xclap.load({
   bootstrap: "~$fynpo",
   test: ["bootstrap", ".lerna.coverage", "build-test"],
   "test-generator": [".test-generator --all"],
+  "test-create-app": [".test-create-app"],
   "gen-hapi-app": [".test-generator --hapi --no-test"],
   "gen-express-app": [".test-generator --express --no-test"],
   "gen-koa-app": [".test-generator --koa --no-test"],
@@ -202,6 +219,15 @@ xclap.load({
       ].forEach(a => {
         pullLocalPackages(Path.join(__dirname, "samples", a));
       });
+    }
+  },
+
+  ".test-create-app": {
+    async task() {
+      const testDir = Path.join(__dirname, "tmp");
+      await testCreateApp(testDir, "my-app");
+      const testAppDir = Path.join(testDir, "my-app");
+      pullLocalPackages(testAppDir);
     }
   },
 

@@ -2,7 +2,7 @@
   "name": "@xarc/create-app",
   "version": "1.0.3",
   "description": "Create react.js/node.js webapp using the Electrode Platform",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "prepublishOnly": "webpack"
   },
