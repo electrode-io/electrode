@@ -87,6 +87,7 @@
     "offline-plugin": "^4.6.1",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "optional-require": "^1.0.0",
+    "prompts": "^2.2.1",
     "raw-loader": "^0.5.1",
     "regenerator-runtime": "^0.13.2",
     "request": "^2.88.0",
