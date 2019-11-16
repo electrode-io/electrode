@@ -329,7 +329,7 @@ function displayFeatureIssues(features) {
   features.forEach(feature => {
     if (!feature.package && feature.enabled) {
       console.error(
-        chalk.red(`The feature "${name}" is enabled but is not available in your node_modules directory.
+        chalk.red(`The feature "${feature.packageName}" is enabled but is not available in your node_modules directory.
 Please perform an "npm install"`)
       );
     }
