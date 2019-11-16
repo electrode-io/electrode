@@ -160,12 +160,15 @@ it excludes this package ${myName} - skip installing`
   if (appDep) {
     if (options.hasOwnProperty(optionalTagName)) {
       return done(
-        false,
+        true,
         `
-  ERROR
-  ERROR: you have ${myName} in your package.json *and* ${optionalTagName} in your archetype/config options.
-  ERROR: Please specify only one of those.
-  ERROR
+  WARNING
+  WARNING: You have ${myName} in your package.json *and* ${optionalTagName} in your archetype/config options.
+  WARNING: Defaulting to ${myName} to enabled.
+  WARNING: Because enabling features in archetype/config will be deprecated in the next archetype version,
+  WARNING: it is recommended that you remove ${optionalTagName} from your archetype/config options if you wish
+  WARNING: to keep ${myName} enabled.
+  WARNING
   `
       );
     }
