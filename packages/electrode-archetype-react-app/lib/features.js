@@ -223,10 +223,18 @@ class Feature {
     }
     const dependencies = { ...pkg.dependencies };
     const devDependencies = { ...pkg.devDependencies };
-    if (enabled && this.electrodeOptArchetype.devOnly) {
+
+    let devOnly = true;
+    if (this.electrodeOptArchetype.devOnly !== undefined) {
+      devOnly = this.electrodeOptArchetype.devOnly;
+    } else if (this.package && this.package.electrodeOptArchetype.devOnly !== undefined) {
+      devOnly = this.package.electrodeOptArchetype.devOnly;
+    }
+
+    if (enabled && devOnly) {
       delete dependencies[this.packageName];
       devDependencies[this.packageName] = `^${this.installedVersion || this.npmVersion}`;
-    } else if (enabled && !this.electrodeOptArchetype.devOnly) {
+    } else if (enabled && !devOnly) {
       dependencies[this.packageName] = `^${this.installedVersion || this.npmVersion}`;
       delete devDependencies[this.packageName];
     } else {
