@@ -414,7 +414,6 @@ async function promptForEnabled(features) {
 
     if (response.enabled === undefined) {
       userCancel();
-      return;
     }
 
     features.forEach(feature => {
