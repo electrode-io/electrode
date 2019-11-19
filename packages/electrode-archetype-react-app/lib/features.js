@@ -400,7 +400,7 @@ async function promptForEnabled(features) {
 
   do {
     const choices = features.map(feature => ({
-      title: feature.name,
+      title: `${feature.name} - ${feature.description}`,
       value: feature.packageName,
       selected: feature.enabled,
     }));
