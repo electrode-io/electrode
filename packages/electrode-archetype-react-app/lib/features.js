@@ -140,6 +140,10 @@ class Feature {
     );
   }
 
+  set enabled(value) {
+    this._enabled = value;
+  }
+
   get enabledLegacy() {
     if (!this.electrodeOptArchetype.hasOwnProperty("optionalTagName")) {
       throw `opt archetype ${this.packageName}: package.json missing this.electrodeOptArchetype.optionalTagName`;
@@ -218,9 +222,6 @@ class Feature {
   }
 
   setEnabled(pkg, enabled) {
-    if (enabled === this.enabled) {
-      return pkg;
-    }
     const dependencies = { ...pkg.dependencies };
     const devDependencies = { ...pkg.devDependencies };
 
@@ -241,7 +242,7 @@ class Feature {
       delete dependencies[this.packageName];
       delete devDependencies[this.packageName];
     }
-    this._enabled = enabled;
+    this.enabled = enabled;
     return {
       ...pkg,
       dependencies,
@@ -269,7 +270,10 @@ class Feature {
     }
 
     return features.filter((feature) => {
-      if (feature.packageName === this.packageName || !feature.enabled) {
+      if (feature.packageName === this.packageName
+        || !feature.enabled
+        || !this.enabled
+      ) {
         return false;
       }
 
@@ -391,30 +395,47 @@ async function promptForConversion(features) {
 
 async function promptForEnabled(features) {
   let pkg = appPkg;
-  const seenFeatures = [];
-  for (let i = 0; i < features.length; ++i) {
-    const feature = features[i];
-    const conflicts = feature.getConflictingFeatures(seenFeatures);
-    if (conflicts.length > 0) {
-      console.log(`Because ${feature.packageName} conflicts with ${conflicts[0].packageName}, it has been automatically deselected.`);
-      pkg = feature.setEnabled(pkg, false);
-      continue;
-    }
+  let conflictingFeature;
+  let message = "Select features to enable:";
 
-    seenFeatures.push(feature);
-    const prompt = {
-      type: "confirm",
-      name: feature.packageName,
-      message: `Enable ${feature.name}?`,
-      initial: feature.enabled,
-    };
-    const response = await prompts(prompt);
-    const enabled = response[feature.packageName];
-    if (enabled === undefined) {
+  do {
+    const choices = features.map(feature => ({
+      title: feature.name,
+      value: feature.packageName,
+      selected: feature.enabled,
+    }));
+
+    const response = await prompts({
+      type: "multiselect",
+      name: "enabled",
+      message,
+      choices,
+    });
+
+    if (response.enabled === undefined) {
       userCancel();
     }
-    pkg = feature.setEnabled(pkg, enabled);
-  }
+
+    features.forEach(feature => {
+      const enabled = response.enabled.indexOf(feature.packageName) >= 0;
+      feature.enabled = enabled;
+    })
+
+    conflictingFeature = features.find(feature => {
+      const conflicts = feature.getConflictingFeatures(features);
+      if (conflicts.length > 0) {
+        const package1 = chalk.underline(feature.name);
+        const package2 = chalk.underline(conflicts[0].name);
+        message = chalk.red(`${package1} conflicts with ${package2}, please reselect features:`);
+        return true;
+      }
+
+      return false;
+    })
+
+  } while (conflictingFeature);
+
+  features.forEach(feature => pkg = feature.setEnabled(pkg, feature.enabled))
   writeAppPkg(pkg);
 }
 
