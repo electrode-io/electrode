@@ -9,6 +9,7 @@ const webpack = require("webpack");
 const hotHelpers = require("webpack-hot-middleware/helpers");
 const Url = require("url");
 const { getWebpackStartConfig } = require("../../config/webpack/util/custom-check");
+const { getLogs, getLogEventAsHtml } = require("./log-reader");
 
 hotHelpers.pathMatch = (url, path) => {
   try {
@@ -162,6 +163,8 @@ class Middleware {
     this.cwdBaseUrl = urlJoin(this.devBaseUrl, "/cwd");
     this.cwdContextBaseUrl = urlJoin(this.devBaseUrl, "/memfs");
     this.reporterUrl = urlJoin(this.devBaseUrl, "/reporter");
+    this.logUrl = urlJoin(this.devBaseUrl, "/log");
+    this.logEventsUrl = urlJoin(this.devBaseUrl, "/log-events");
     this.dllDevUrl = urlJoin(this.devBaseUrl, "/dll");
 
     const ISO_LOADER_CONFIG = ".isomorphic-loader-config.json";
@@ -348,6 +351,19 @@ ${jumpToError}</body></html>
       );
     };
 
+    const serveLogEvents = async () => {
+      const htmlLogs = (await getLogs()).map((event) => ({
+        ...event,
+        message: getLogEventAsHtml(event)
+      }));
+      return Promise.resolve(cycle.replyStaticData(JSON.stringify(htmlLogs)));
+    };
+
+    const serveLog = () => {
+      const file = require.resolve("electrode-archetype-react-app-dev/lib/dev-admin/log.html");
+      return Promise.resolve(cycle.replyFile(file));
+    };
+
     if (isHmrRequest) {
       // do nothing and continue to webpack dev middleware
       return Promise.resolve(this.canContinue);
@@ -384,6 +400,10 @@ ${listDirectoryHtml(this.listAssetPath, outputPath)}
         this.memFsCwd,
         isMemFs
       ).catch(err => sendStaticServeError("reading webpack mem fs", err));
+    } else if (req.url.startsWith(this.logEventsUrl)) {
+      return serveLogEvents();
+    } else if (req.url.startsWith(this.logUrl)) {
+      return serveLog();
     } else if (req.url.startsWith(this.reporterUrl) || this.returnReporter) {
       return serveReporter(this.webpackDev.lastReporterOptions);
     } else if (req.url.startsWith(this.dllDevUrl)) {
