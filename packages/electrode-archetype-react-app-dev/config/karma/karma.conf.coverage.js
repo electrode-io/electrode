@@ -32,7 +32,6 @@ module.exports = function(config) {
       sonarQubeVersion: "5.x",
       outputFile: "gunit.xml",
       outputDir: Path.resolve("coverage", "client"),
-      overrideTestDescription: true,
       useBrowserName: false
     }
   };
