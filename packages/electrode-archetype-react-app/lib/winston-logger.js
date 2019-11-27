@@ -18,12 +18,12 @@ const makeWinstonLogger = winston => {
     ],
     transports: [
       new winston.transports.Console({
-        level: "info",
+        level: "error",
         colorize: true,
         prettyPrint: true
       }),
       new winston.transports.File({
-        json: false,
+        json: true,
         maxsize: 10 * 1024 * 1024, // 10 MB
         maxFiles: 1,
         name: "archetype-debug-file",

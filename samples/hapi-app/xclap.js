@@ -4,6 +4,16 @@
 
 process.env.SERVER_ES6 = true;
 
+// Run app server at port 3100 to enable dev proxy at port 3000
+process.env.APP_SERVER_PORT = 3100;
+
+/*
+ * Tell Electrode app archetype that you want to use webpack dev as a middleware
+ * This will run webpack dev server as part of your app server.
+ */
+
+process.env.WEBPACK_DEV_MIDDLEWARE = true;
+
 process.env.USE_APP_WEBPACK_CONFIG = true;
 
 /*

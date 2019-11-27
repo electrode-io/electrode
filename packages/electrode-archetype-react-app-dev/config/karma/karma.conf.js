@@ -64,11 +64,7 @@ module.exports = function(config) {
     logLevel: config.LOG_INFO,
     colors: true,
     autoWatch: false,
-    reporters: [
-      "spec",
-      // "sonarqubeUnit",
-      "coverage"
-    ],
+    reporters: ["spec", "sonarqubeUnit", "coverage"],
     browserNoActivityTimeout: 60000,
     coverageReporter: {
       reporters: [
@@ -78,13 +74,12 @@ module.exports = function(config) {
       ],
       dir: Path.resolve("coverage", "client")
     },
-    // sonarQubeUnitReporter: {
-    //   sonarQubeVersion: "5.x",
-    //   outputFile: "gunit.xml",
-    //   outputDir: Path.resolve("coverage", "client"),
-    //   overrideTestDescription: true,
-    //   useBrowserName: false
-    // },
+    sonarQubeUnitReporter: {
+      sonarQubeVersion: "5.x",
+      outputFile: "gunit.xml",
+      outputDir: Path.resolve("coverage", "client"),
+      useBrowserName: false
+    },
     captureTimeout: 100000,
     singleRun: true
   };

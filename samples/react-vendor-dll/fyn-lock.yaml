@@ -1000,20 +1000,20 @@ ejs:
   $: sha512-0xy4A/twfrRCnkhfk8ErDi5DqdAsAqeGxht4xkCUrsvhhbQNs7E+4jV0CN7+NKIY0aHE72+XvqtBIXzD31ZbXQ==
   _: 'https://registry.npmjs.org/ejs/-/ejs-2.6.1.tgz'
 electrode-archetype-webpack-dll:
- _latest: 2.0.0-fynlocal_h
+ _latest: 2.0.1-fynlocal_h
  _:
-  ../../packages/electrode-archetype-webpack-dll: 2.0.0-fynlocal_h
- 2.0.0-fynlocal_h:
+  ../../packages/electrode-archetype-webpack-dll: 2.0.1-fynlocal_h
+ 2.0.1-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-webpack-dll
   dependencies:
    optional-require: ^1.0.0
 electrode-archetype-webpack-dll-dev:
- _latest: 2.0.0-fynlocal_h
+ _latest: 2.0.1-fynlocal_h
  _:
-  ../../packages/electrode-archetype-webpack-dll-dev: 2.0.0-fynlocal_h
- 2.0.0-fynlocal_h:
+  ../../packages/electrode-archetype-webpack-dll-dev: 2.0.1-fynlocal_h
+ 2.0.1-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-webpack-dll-dev
@@ -1026,9 +1026,9 @@ electrode-archetype-webpack-dll-dev:
    uglifyjs-webpack-plugin: ^2.0.1
    webpack: ^4.26.0
    webpack-cli: ^3.1.2
-   webpack-config-composer: ^1.1.1
+   webpack-config-composer: ^1.1.2
    webpack-stats-plugin: ^0.2.1
-   xclap: ^0.2.4
+   xclap: ^0.2.38
    xsh: ^0.4.4
   peerDependencies:
    electrode-archetype-webpack-dll: 1.1.0
@@ -3496,6 +3496,15 @@ unset-value:
   dependencies:
    has-value: ^0.3.1
    isobject: ^3.0.0
+unwrap-npm-cmd:
+ _latest: 1.1.1
+ _:
+  ^1.1.0: 1.1.1
+ 1.1.1:
+  $: sha512-Y0PFhW+X6oahjV/e4yBxThgq0k9Ymh3RwUh6P/rMiGp55X5qa2mQghZAHKyJ9tDPinZntD0Z+5DHFzlx9/UNbg==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/unwrap-npm-cmd/-/unwrap-npm-cmd-1.1.1.tgz'
+  dependencies:
+   which: ^1.3.1
 upath:
  _latest: 1.1.2
  _:
@@ -3656,12 +3665,12 @@ webpack-cli:
   peerDependencies:
    webpack: 4.x.x
 webpack-config-composer:
- _latest: 1.1.1
+ _latest: 1.1.2
  _:
-  ^1.1.1: 1.1.1
- 1.1.1:
-  $: sha512-rCiv9Y+F75SNL1v6lNCwOoQRghidSD4OanP0omZPquNI1I02Jmi4qs4Xyk7LhWX4xlAJz0xMCxBxOBtDbafRKQ==
-  _: 'https://registry.npmjs.org/webpack-config-composer/-/webpack-config-composer-1.1.1.tgz'
+  ^1.1.2: 1.1.2
+ 1.1.2:
+  $: sha512-05qOIWkI9uV+7VpNOp9Bd0m9LMQsIB21WcNeA8nkhfhs/AiY5u9vEd4KD8P4mWy4OF/Iv+FzgnofRrkQbiwH1g==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/webpack-config-composer/-/webpack-config-composer-1.1.2.tgz'
   dependencies:
    lodash: ^4.13.1
 webpack-sources:
@@ -3684,7 +3693,7 @@ webpack-stats-plugin:
 which:
  _latest: 1.3.1
  _:
-  '^1.2.14,^1.2.9': 1.3.1
+  '^1.2.14,^1.2.9,^1.3.1': 1.3.1
  1.3.1:
   $: sha512-HxJdYWq1MTIQbJ3nw0cqssHoTNU267KlrDuGZ1WYlxDStUtKUhOaJmh112/TZmHxxUfuJqPXSOm7tDyas0OSIQ==
   _: 'https://registry.npmjs.org/which/-/which-1.3.1.tgz'
@@ -3724,12 +3733,12 @@ wrappy:
   $: sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
   _: 'https://registry.npmjs.org/wrappy/-/wrappy-1.0.2.tgz'
 xclap:
- _latest: 0.2.33
+ _latest: 0.2.39
  _:
-  ^0.2.4: 0.2.33
- 0.2.33:
-  $: sha512-X7S7KE6+3laDQ91+W1MJUGlntcsbXIm2x0S8h2Nrcr19EWGPAiKp1+Yy0ZNsP9JwvEY5Kmxs2tj6JZpVXPwBGw==
-  _: 'https://registry.npmjs.org/xclap/-/xclap-0.2.33.tgz'
+  ^0.2.38: 0.2.39
+ 0.2.39:
+  $: sha512-Tw3CcHakbVuq2LWgmiMaDvRRvhbrKMkON4KW1dHxXbqHpk5RpZiH75LWeJb/El+sacoU6R0+cNyDmQ84hf3y8g==
+  _: 'https://repository.cache.walmart.com/content/groups/npm/xclap/-/xclap-0.2.39.tgz'
   dependencies:
    chalk: ^2.0.1
    insync: ^2.1.1
@@ -3739,6 +3748,7 @@ xclap:
    optional-require: ^1.0.0
    path-is-inside: ^1.0.2
    string-array: ^1.0.0
+   unwrap-npm-cmd: ^1.1.0
    xsh: ^0.4.0
 xsh:
  _latest: 0.4.4

@@ -1,3 +1,47 @@
+# 11/25/2019
+
+Minor fixes:
+
+- Add back sonarQubeUnitReporter to Karma test coverage
+- lock dep to workaround babel 7.7.0 issue
+
+## Packages
+
+### Directly Updated
+
+- `electrode-archetype-opt-karma@2.0.7` `(2.0.6 => 2.0.7)`
+- `electrode-archetype-react-app@6.5.19` `(6.5.18 => 6.5.19)`
+- `electrode-archetype-react-app-dev@6.5.19` `(6.5.18 => 6.5.19)`
+- `subapp-web@1.0.9` `(1.0.8 => 1.0.9)`
+
+### Lerna Updated
+
+- `subapp-redux@1.0.8` `(1.0.7 => 1.0.8)`
+
+## Commits
+
+- `packages/electrode-archetype-opt-karma`
+
+  - Add back sonarQubeUnitReporter to Karma test coverage ([#1448](https://github.com/electrode-io/electrode/pull/1448)) [commit](http://github.com/electrode-io/electrode/commit/5a417e2d238842b7db53a364db9bebcdeacdc2e3)
+
+- `packages/electrode-archetype-react-app[-dev]`
+
+  - Add back sonarQubeUnitReporter to Karma test coverage ([#1448](https://github.com/electrode-io/electrode/pull/1448)) [commit](http://github.com/electrode-io/electrode/commit/5a417e2d238842b7db53a364db9bebcdeacdc2e3)
+  - Fix config fail to load ([#1446](https://github.com/electrode-io/electrode/pull/1446)) [commit](http://github.com/electrode-io/electrode/commit/c5ffca01d87510f9dc367aff001b9c5ba1826b99)
+
+- `packages/subapp-web`
+
+  - lock dep to workaround babel 7.7.0 issue [commit](http://github.com/electrode-io/electrode/commit/eb091d82bc536caca89836f1fa4a7d0560f25307)
+
+- `.vscode`
+
+  - CI: update to node 10 [commit](http://github.com/electrode-io/electrode/commit/b80c3643ed88aa5f4ef32c13ee663d232cbdc840)
+
+- `docs`
+
+  - Polyfilling now uses core-js ([#1447](https://github.com/electrode-io/electrode/pull/1447)) [commit](http://github.com/electrode-io/electrode/commit/79b0226ec539e42f1638c1517dedd9d314f5ecea)
+  - Typo fix ([#1444](https://github.com/electrode-io/electrode/pull/1444)) [commit](http://github.com/electrode-io/electrode/commit/b4d87b87abe6d0e292499704bb3594464f724681)
+
 # 11/4/2019
 
 - fix dev proxy issues (SIGHUP) on windows
