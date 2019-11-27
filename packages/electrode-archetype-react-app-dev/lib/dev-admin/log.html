@@ -1,0 +1,85 @@
+<html>
+  <body>
+    <div style="margin-bottom: 10px">
+      <button type="button" onclick="displayLogs();">Refresh</button>
+      <label>
+        <input type="checkbox" id="level.error" checked onclick="levelChangeHandler();" />
+        Error
+      </label>
+      <label>
+        <input type="checkbox" id="level.warn" checked onclick="levelChangeHandler();" />
+        Warn
+      </label>
+      <label>
+        <input type="checkbox" id="level.info" checked onclick="levelChangeHandler();" />
+        Info
+      </label>
+      <label>
+        <input type="checkbox" id="level.http" checked onclick="levelChangeHandler();" />
+        Http
+      </label>
+      <label>
+        <input type="checkbox" id="level.verbose" checked onclick="levelChangeHandler();" />
+        Verbose
+      </label>
+      <label>
+        <input type="checkbox" id="level.debug" checked onclick="levelChangeHandler();" />
+        Debug
+      </label>
+      <label>
+        <input type="checkbox" id="level.silly" checked onclick="levelChangeHandler();" />
+        Silly
+      </label>
+    </div>
+    <div style="border-radius: 10px; background: black; color: gray; padding: 10px;">
+      <pre style="white-space: pre-wrap;" id="logs"></pre>
+    </div>
+    <script>
+      let logs = [];
+      const el = document.getElementById("logs");
+      let lastLevelSelections;
+
+      function getLevelSelections() {
+        const levels = ["error", "warn", "info", "http", "verbose", "debug", "silly"];
+        const levelSelections = {};
+        levels.forEach((level) => {
+          const c = document.getElementById("level." + level);
+          levelSelections[level] = c.checked;
+        });
+        return levelSelections;
+      }
+
+      function resetLogView() {
+        logs = [];
+        el.innerHTML = "";
+      }
+
+      function appendLogView(message) {
+        el.innerHTML += message + "\n";
+      }
+
+      function levelChangeHandler() {
+        resetLogView();
+        displayLogs(getLevelSelections());
+      }
+
+      async function displayLogs(levelSelections) {
+        const logResponse = await fetch("/__electrode_dev/log-events");
+        let newLogs = await logResponse.json();
+        if (lastLevelSelections || !newLogs[0] || (logs[0] && newLogs[0].message !== logs[0].message)) {
+          resetLogView();
+        }
+        lastLevelSelections = levelSelections;
+        newLogs = newLogs.slice(logs.length);
+        newLogs.forEach((event) => {
+          if (levelSelections && !levelSelections[event.level]) {
+            return;
+          }
+          appendLogView(event.message);
+        });
+        logs = logs.concat(newLogs);
+      }
+      displayLogs();
+    </script>
+  </body>
+</html>
