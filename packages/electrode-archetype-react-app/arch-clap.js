@@ -511,7 +511,7 @@ function makeTasks(xclap) {
       )
     },
 
-    "features": displayFeatures,
+    features: displayFeatures,
 
     "mv-to-dist:clean": {
       desc: `clean static resources within ${buildDistDirs}`,
@@ -1026,12 +1026,18 @@ Individual .babelrc files were generated for you in src/client and src/server
   }
 
   if (archetype.options.karma !== false && archetype.options.mocha !== false) {
+    const noSingleRun = process.argv.indexOf("--no-single-run") >= 0 ? "--no-single-run" : "";
     Object.assign(tasks, {
       ".karma.test-frontend": {
         desc: false,
         task: () => {
           setWebpackProfile("test");
-          return mkCmd(`~$karma start`, quote(karmaConfig("karma.conf.js")), `--colors`);
+          return mkCmd(
+            `~$karma start`,
+            quote(karmaConfig("karma.conf.js")),
+            `--colors`,
+            noSingleRun
+          );
         }
       },
 
@@ -1039,7 +1045,12 @@ Individual .babelrc files were generated for you in src/client and src/server
         dep: [setKarmaCovEnv],
         task: () => {
           setWebpackProfile("coverage");
-          return mkCmd(`~$karma start`, quote(karmaConfig("karma.conf.coverage.js")), `--colors`);
+          return mkCmd(
+            `~$karma start`,
+            quote(karmaConfig("karma.conf.coverage.js")),
+            `--colors`,
+            noSingleRun
+          );
         }
       },
 
@@ -1049,7 +1060,12 @@ Individual .babelrc files were generated for you in src/client and src/server
           setWebpackProfile("coverage");
           if (shell.test("-d", "test")) {
             logger.info("\nRunning Karma unit tests:\n");
-            return mkCmd(`~$karma start`, quote(karmaConfig("karma.conf.coverage.js")), `--colors`);
+            return mkCmd(
+              `~$karma start`,
+              quote(karmaConfig("karma.conf.coverage.js")),
+              `--colors`,
+              noSingleRun
+            );
           }
           return undefined;
         }
@@ -1062,7 +1078,8 @@ Individual .babelrc files were generated for you in src/client and src/server
         return mkCmd(
           `~$karma start`,
           quote(karmaConfig("karma.conf.watch.js")),
-          `--colors --browsers Chrome --no-single-run --auto-watch`
+          `--colors --browsers Chrome --no-single-run --auto-watch`,
+          noSingleRun
         );
       }
     });

@@ -1,3 +1,36 @@
+# 12/5/2019
+
+- Added --no-single-run support for karma tests
+- Logging web interface
+- Subapp redux store sharing
+
+## Packages
+
+- `electrode-archetype-react-app@6.5.20` `(6.5.19 => 6.5.20)`
+- `electrode-archetype-react-app-dev@6.5.20` `(6.5.19 => 6.5.20)`
+- `subapp-redux@1.0.9` `(1.0.8 => 1.0.9)`
+
+## Commits
+
+- `packages/electrode-archetype-react-app[-dev]`
+
+  - Added --no-single-run support for karma tests ([#1464](https://github.com/electrode-io/electrode/pull/1464)) [commit](http://github.com/electrode-io/electrode/commit/cb4de9f83451e7b4b110bf7e558eaddc88f8fbc3)
+  - Document dev-admin logging ([#1462](https://github.com/electrode-io/electrode/pull/1462)) [commit](http://github.com/electrode-io/electrode/commit/9de84908cb5408798327459f6589dd01fa9a82da)
+  - Logging web interface ([#1460](https://github.com/electrode-io/electrode/pull/1460)) [commit](http://github.com/electrode-io/electrode/commit/60c6127e903b496d066386dacf5d88c40a53d6e1)
+  - remove overridetestDescription ([#1459](https://github.com/electrode-io/electrode/pull/1459)) [commit](http://github.com/electrode-io/electrode/commit/64c0b2c2617df517e5bd10f3dee1db6f66a52a55)
+
+- `packages/subapp-redux`
+
+  - Subapp redux store sharing ([#1463](https://github.com/electrode-io/electrode/pull/1463)) [commit](http://github.com/electrode-io/electrode/commit/460ddbf755a165099b2e6f8a233f4bc965d4aafa)
+
+- `docs`
+
+  - Document dev-admin logging ([#1462](https://github.com/electrode-io/electrode/pull/1462)) [commit](http://github.com/electrode-io/electrode/commit/9de84908cb5408798327459f6589dd01fa9a82da)
+
+- `MISC`
+
+  - [ci] add node 12 [commit](http://github.com/electrode-io/electrode/commit/2d5f73e207438ae4d393a89212b46db1c7d3e158)
+
 # 11/25/2019
 
 Minor fixes:

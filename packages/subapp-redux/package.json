@@ -1,6 +1,6 @@
 {
   "name": "subapp-redux",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Electrode subapp redux support",
   "browser": "browser/index.js",
   "main": "lib/index.js",

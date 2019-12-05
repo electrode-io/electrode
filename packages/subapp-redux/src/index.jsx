@@ -2,7 +2,7 @@ import React from "react";
 import { render, hydrate } from "react-dom";
 import { Provider } from "react-redux";
 import { loadSubApp } from "subapp-web";
-import { createStore } from "redux";
+import { getReduxCreateStore } from "./shared";
 export { hotReloadSubApp } from "subapp-web";
 
 //
@@ -61,12 +61,9 @@ export function reduxLoadSubApp(info) {
 
   if (!info.reduxCreateStore) {
     extras._genReduxCreateStore = "subapp";
-    if (info.reduxReducers) {
-      extras.reduxCreateStore = initialState => createStore(info.reduxReducers, initialState);
-    } else {
-      extras.reduxCreateStore = initialState => createStore(x => x, initialState || {});
-    }
   }
 
-  return loadSubApp(Object.assign(extras, info), renderStart);
+  return loadSubApp(Object.assign(extras, info, {
+    reduxCreateStore: getReduxCreateStore(info)
+  }), renderStart);
 }
