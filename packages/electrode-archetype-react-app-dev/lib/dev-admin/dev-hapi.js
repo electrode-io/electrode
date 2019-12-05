@@ -60,9 +60,7 @@ function register(server, options, next) {
             let data;
             try {
               data = fs.readFileSync(name);
-              console.log(data);
             } catch (e) {
-              console.log(e);
               return reply.code(404);
             }
             const type = mime.lookup(name);

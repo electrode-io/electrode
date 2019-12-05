@@ -57,7 +57,8 @@ class AdminServer {
    <magenta>A</> - Restart <magenta>D</> - <cyan>inspect-brk</> mode <magenta>I</> - <cyan>inspect</> mode <magenta>K</> - Kill&nbsp;
  <white.inverse>For Electrode webpack dev server</>  ${this._wds}
    <magenta>W</> - Restart <magenta>E</> - <cyan>inspect-brk</> mode <magenta>R</> - <cyan>inspect</> mode <magenta>X</> - Kill&nbsp;
- ${proxyItem}<magenta>M</> - Show this menu&nbsp;<magenta>L</> or <magenta>0-6</> - Show Logs&nbsp;<magenta>Q</> - Shutdown`;
+ <magenta>L</> - Show All Logs <magenta>0-6</> - Show Logs by Winston level
+ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown`;
     this._io.show(boxen(menu, { margin: { left: 5 } }));
   }
 
