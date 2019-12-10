@@ -1,7 +1,7 @@
 {
-  "name": "electrode-archetype-opt-inferno",
-  "version": "0.2.11",
-  "description": "Electrode NodeJS/React Optional Archetype - inferno",
+  "name": "electrode-archetype-opt-preact",
+  "version": "1.0.0",
+  "description": "Electrode NodeJS/Preact Optional Archetype - preact",
   "main": "optional-check.js",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -11,23 +11,20 @@
   "bugs": {
     "url": "https://github.com/electrode-io/electrode/issues"
   },
+  "license": "Apache-2.0",
+  "scripts": {
+    "preinstall": "node optional-check.js",
+    "prepare": "shx cp node_modules/opt-archetype-check/optional-check.js ."
+  },
   "files": [
     "optional-check.js"
   ],
   "author": "Electrode (http://www.electrode.io/)",
   "contributors": [
-    "Joel Chen <xchen@walmartlabs.com>"
+    "Christian Lent <clent@walmartlabs.com>"
   ],
-  "license": "Apache-2.0",
-  "scripts": {
-    "test": "echo OK",
-    "coverage": "echo OK",
-    "preinstall": "node optional-check.js",
-    "prepare": "shx cp node_modules/opt-archetype-check/optional-check.js ."
-  },
   "dependencies": {
-    "inferno": "^3.0.0",
-    "inferno-compat": "^3.0.0"
+    "preact": "^10.0.5"
   },
   "devDependencies": {
     "opt-archetype-check": "../opt-archetype-check",
@@ -35,8 +32,9 @@
   },
   "electrodeOptArchetype": {
     "optionalTagName": "reactLib",
-    "expectTag": "inferno",
+    "expectTag": "preact",
     "devOnly": false,
+    "defaultInstall": true,
     "onlyOneOf": [
       "electrode-archetype-opt-preact",
       "electrode-archetype-opt-react",

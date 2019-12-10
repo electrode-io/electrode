@@ -37,6 +37,7 @@
     "devOnly": false,
     "defaultInstall": true,
     "onlyOneOf": [
+      "electrode-archetype-opt-preact",
       "electrode-archetype-opt-react",
       "electrode-archetype-opt-inferno"
     ]
