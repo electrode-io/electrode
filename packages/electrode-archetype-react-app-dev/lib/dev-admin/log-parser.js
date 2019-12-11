@@ -22,7 +22,7 @@ const BunyanLevelLookup = {
 const parsers = [
   {
     custom: (raw) => raw === PropTypesError ? [raw, "error", raw] : undefined,
-    prefix: "",
+    prefix: ""
   },
   {regex: LogParse, prefix: ""},
   {regex: FyiLogParse, prefix: FyiTag}
