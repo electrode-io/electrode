@@ -7,6 +7,7 @@ const { Levels } = require("./log-reader");
 const LogParse = /^(?:\u001b\[[0-9]+?m)?([a-z]+)(?:\u001b\[[0-9]+?m)?:(?: ([\s\S]*))?$/;
 // eslint-disable-next-line no-control-regex
 const FyiLogParse = /^(?:\u001b\[[0-9]+?m)?FYI ([a-z]+):(?:\u001b\[[0-9]+?m)?(?: ([\s\S]*))?$/;
+const PropTypesError = "info: Unhandled rejection ReferenceError: PropTypes is not defined";
 
 const FyiTag = ck`<yellow.inverse>[fyi]</> `;
 const BunyanTag = ck`<cyan.inverse>[byn]</> `;
@@ -19,12 +20,16 @@ const BunyanLevelLookup = {
   10: "silly"
 };
 const parsers = [
+  {
+    custom: (raw) => raw === PropTypesError ? [raw, "error", raw] : undefined,
+    prefix: "",
+  },
   {regex: LogParse, prefix: ""},
   {regex: FyiLogParse, prefix: FyiTag}
 ];
 
 function parseRegex(raw, parser) {
-  const match = raw.match(parser.regex);
+  const match = parser.custom ? parser.custom(raw) : raw.match(parser.regex);
   if (!match) {
     return false;
   }

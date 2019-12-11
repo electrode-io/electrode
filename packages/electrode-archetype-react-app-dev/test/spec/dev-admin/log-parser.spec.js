@@ -25,6 +25,13 @@ describe("log-parser", function() {
     expect(message).equal("An issue was detected in electrode error: Unable to load secrets file /secrets/ccm-secrets.json");
   });
 
+  it("should detect PropTypes messages as an error", () => {
+    const raw = "info: Unhandled rejection ReferenceError: PropTypes is not defined";
+    const { level, message } = parse(raw);
+    expect(level).equal("error");
+    expect(message).equal(raw);
+  });
+
   it("should return correct level and message with badge for an FYI error", () => {
     const raw = "FYI error: Something unexpected happened";
     const { level, message } = parse(raw);
