@@ -25,8 +25,15 @@ describe("log-parser", function() {
     expect(message).equal("An issue was detected in electrode error: Unable to load secrets file /secrets/ccm-secrets.json");
   });
 
-  it("should detect PropTypes messages as an error", () => {
+  it("should detect Unhandled rejection messages as an error when they are annotated 'info'", () => {
     const raw = "info: Unhandled rejection ReferenceError: PropTypes is not defined";
+    const { level, message } = parse(raw);
+    expect(level).equal("error");
+    expect(message).equal(raw);
+  });
+
+  it("should detect Unhandled rejection messages as an error when they are annotated 'debug'", () => {
+    const raw = "debug: Unhandled rejection (rejection id: 3): TypeError: Cannot read property 'Electrode' of undefined";
     const { level, message } = parse(raw);
     expect(level).equal("error");
     expect(message).equal(raw);
