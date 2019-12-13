@@ -2,8 +2,12 @@ import React from "react";
 import { render, hydrate } from "react-dom";
 import { Provider } from "react-redux";
 import { loadSubApp } from "subapp-web";
-import { getReduxCreateStore } from "./shared";
+import { setStoreContainer, getReduxCreateStore } from "./shared";
 export { hotReloadSubApp } from "subapp-web";
+
+export { getReduxCreateStore } from "./shared";
+
+setStoreContainer(window);
 
 //
 // client side function to start a subapp with redux support
@@ -63,7 +67,10 @@ export function reduxLoadSubApp(info) {
     extras._genReduxCreateStore = "subapp";
   }
 
-  return loadSubApp(Object.assign(extras, info, {
-    reduxCreateStore: getReduxCreateStore(info)
-  }), renderStart);
+  return loadSubApp(
+    Object.assign(extras, info, {
+      reduxCreateStore: getReduxCreateStore(info)
+    }),
+    renderStart
+  );
 }

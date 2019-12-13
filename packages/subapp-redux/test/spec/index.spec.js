@@ -1,7 +1,7 @@
 "use strict";
 
 const subappRedux = require("../..");
-const { getReduxCreateStore, clearSharedStore } = require("../../src/shared");
+const { getReduxCreateStore, clearSharedStore, setStoreContainer } = require("../../src/shared");
 const { getSubAppContainer } = require("subapp-util");
 
 const SimpleReducer = (x = true) => x;
@@ -77,21 +77,16 @@ describe("subapp-redux", function() {
       reduxShareStore: "green"
     })({});
 
-
     expect(blue).to.not.equal(green);
   });
 
-  it("should create and share a store based on reduxCreateStore", () => {
-    getReduxCreateStore({
-      reduxCreateStore: () => 5,
-      reduxShareStore: true
-    })({});
-
-    const store = getReduxCreateStore({
-      reduxShareStore: true
-    })({});
-
-    expect(store).to.equal(5);
+  it("should not allow reduxCreateStore when share store is used", () => {
+    expect(() =>
+      getReduxCreateStore({
+        reduxCreateStore: () => 5,
+        reduxShareStore: true
+      })({})
+    ).throws("cannot have reduxCreateStore");
   });
 
   it("should not allow functional reducers in a shared store", () => {
@@ -105,17 +100,106 @@ describe("subapp-redux", function() {
 
   it("should combine named reducers when sharing a store", () => {
     getReduxCreateStore({
-      reduxReducers: { pi: (x = 3.146) => x},
+      name: "app1",
+      reduxReducers: { pi: (x = 3.146) => x },
       reduxShareStore: true
     })({});
 
     const store = getReduxCreateStore({
-      reduxReducers: { sqrt2: (x = 1.414) => x},
+      name: "app2",
+      reduxReducers: { sqrt2: (x = 1.414) => x },
       reduxShareStore: true
     })({});
 
     const state = store.getState();
     expect(state.pi).to.equal(3.146);
     expect(state.sqrt2).to.equal(1.414);
+  });
+
+  it("should replace one app's reducers in share store", () => {
+    getReduxCreateStore({
+      name: "app1",
+      reduxReducers: { pi: (x = 3.146) => x },
+      reduxShareStore: true
+    })({});
+
+    const app2 = {
+      name: "app2",
+      reduxReducers: {
+        sqrt2: (x = 1.414) => {
+          return x;
+        }
+      },
+      reduxShareStore: true
+    };
+    const store = getReduxCreateStore(app2)({});
+
+    const state = store.getState();
+    expect(state.pi).to.equal(3.146);
+    expect(state.sqrt2).to.equal(1.414);
+    store.replaceReducer(
+      {
+        sqrt2: () => {
+          return 11;
+        }
+      },
+      app2
+    );
+    store.dispatch({ type: 1 });
+    const state2 = store.getState();
+    expect(state2.sqrt2).to.equal(11);
+  });
+
+  it("should use user container to hold share stores", () => {
+    const container = {};
+    setStoreContainer(container);
+    const store = getReduxCreateStore({
+      name: "app1",
+      reduxReducers: { pi: (x = 3.146) => x },
+      reduxShareStore: true
+    })({});
+
+    expect(container.namedStores._.store).equals(store);
+  });
+
+  it("should create private store if not share with function reducer", () => {
+    const container = {};
+    setStoreContainer(container);
+    const store = getReduxCreateStore({
+      name: "app",
+      reduxReducers: () => {
+        return { v: 1 };
+      }
+    })({});
+    expect(container.namedStores).to.deep.equal({});
+    const state = store.getState();
+    expect(state.v).equals(1);
+  });
+
+  it("should create private store if not share with named reducer", () => {
+    const container = {};
+    setStoreContainer(container);
+    const store = getReduxCreateStore({
+      name: "app",
+      reduxReducers: {
+        a: () => {
+          return 2;
+        }
+      }
+    })({});
+    expect(container.namedStores).to.deep.equal({});
+    const state = store.getState();
+    expect(state.a).equals(2);
+  });
+
+  it("should create private store with default reducer if no reducer provided", () => {
+    const container = {};
+    setStoreContainer(container);
+    const store = getReduxCreateStore({
+      name: "app"
+    })({ a: 1 });
+    expect(container.namedStores).to.deep.equal({});
+    const state = store.getState();
+    expect(state).to.deep.equal({ a: 1 });
   });
 });

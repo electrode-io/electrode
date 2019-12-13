@@ -72,6 +72,22 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "subapp-redux Mocha Tests",
+      "cwd": "${workspaceFolder}/packages/subapp-redux",
+      "program": "${workspaceFolder}/packages/subapp-redux/node_modules/mocha/bin/_mocha",
+      "args": [
+        "-u",
+        "tdd",
+        "--timeout",
+        "999999",
+        "--colors",
+        "${workspaceFolder}/packages/subapp-redux/test/spec"
+      ],
+      "internalConsoleOptions": "openOnSessionStart"
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "electrode-redux-router-engine Mocha Tests",
       "cwd": "${workspaceFolder}/packages/electrode-redux-router-engine",
       "program": "${workspaceFolder}/packages/electrode-redux-router-engine/node_modules/mocha/bin/_mocha",

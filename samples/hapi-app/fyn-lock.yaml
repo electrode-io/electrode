@@ -5330,10 +5330,10 @@ electrode-archetype-opt-typescript:
    typescript: ^3.2.1
    '@babel/preset-typescript': ^7.1.0
 electrode-archetype-react-app:
- _latest: 6.5.19-fynlocal_h
+ _latest: 6.5.20-fynlocal_h
  _:
-  ../../packages/electrode-archetype-react-app: 6.5.19-fynlocal_h
- 6.5.19-fynlocal_h:
+  ../../packages/electrode-archetype-react-app: 6.5.20-fynlocal_h
+ 6.5.20-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app
@@ -5348,10 +5348,10 @@ electrode-archetype-react-app:
    electrode-archetype-opt-inferno: ^0.2.11
    electrode-archetype-opt-react: ^2.0.4
 electrode-archetype-react-app-dev:
- _latest: 6.5.19-fynlocal_h
+ _latest: 6.5.20-fynlocal_h
  _:
-  ../../packages/electrode-archetype-react-app-dev: 6.5.19-fynlocal_h
- 6.5.19-fynlocal_h:
+  ../../packages/electrode-archetype-react-app-dev: 6.5.20-fynlocal_h
+ 6.5.20-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app-dev

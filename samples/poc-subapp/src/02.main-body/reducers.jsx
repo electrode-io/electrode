@@ -1,5 +1,3 @@
-import { combineReducers } from "redux";
-
 const number = (store, action) => {
   if (action.type === "INC_NUMBER") {
     return {
@@ -18,7 +16,7 @@ const items = s => {
   return s || { items: [] };
 };
 
-export default combineReducers({
+export default {
   number,
   items
-});
+};
