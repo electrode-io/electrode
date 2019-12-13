@@ -1910,6 +1910,13 @@
    '@webassemblyjs/ast': 1.8.5
    '@webassemblyjs/wast-parser': 1.8.5
    '@xtuc/long': 4.2.2
+'@xarc/defer':
+ _latest: 1.0.0
+ _:
+  ^1.0.0: 1.0.0
+ 1.0.0:
+  $: sha512-sRz93+umHI40pmTn0l17oCd0pkRN8lJ8e3yvtOT8xPDFMPIkDslnQOCwntYt49RMPJD9ez7Jl2IFE3xnVj9Kew==
+  _: 'https://registry.npmjs.org/@xarc/defer/-/defer-1.0.0.tgz'
 '@xtuc/ieee754':
  _latest: 1.2.0
  _:
@@ -3833,15 +3840,6 @@ class-utils:
    define-property: ^0.2.5
    isobject: ^3.0.0
    static-extend: ^0.1.1
-clean-css:
- _latest: 4.2.1
- _:
-  ^4.2.1: 4.2.1
- 4.2.1:
-  $: sha512-4ZxI6dy4lrY6FHzfiy1aEOXgu4LIsW2MhwG0VBKdcoGoH/XLFgaHSdLTGr4O8Be6A8r3MOphEiI8Gc1n0ecf3g==
-  _: 'https://registry.npmjs.org/clean-css/-/clean-css-4.2.1.tgz'
-  dependencies:
-   source-map: ~0.6.0
 cli-boxes:
  _latest: 2.2.0
  _:
@@ -4468,13 +4466,6 @@ css-loader:
    source-list-map: ^2.0.0
   peerDependencies:
    webpack: ^4.0.0
-css-mediaquery:
- _latest: 0.1.2
- _:
-  ^0.1.2: 0.1.2
- 0.1.2:
-  $: sha1-aiw3NEkoYYYxxUvTPO3TAdoYvqA=
-  _: 'https://registry.npmjs.org/css-mediaquery/-/css-mediaquery-0.1.2.tgz'
 css-modules-loader-core:
  _latest: 1.1.0
  _:
@@ -4569,7 +4560,6 @@ css-selector-tokenizer:
 css-tree:
  _latest: 1.0.0-alpha.34
  _:
-  1.0.0-alpha.28: 1.0.0-alpha.28
   1.0.0-alpha.29: 1.0.0-alpha.29
   1.0.0-alpha.33: 1.0.0-alpha.33
  1.0.0-alpha.33:
@@ -4581,12 +4571,6 @@ css-tree:
  1.0.0-alpha.29:
   $: sha512-sRNb1XydwkW9IOci6iB2xmy8IGCj6r/fr+JWitvJ2JxQRPzN3T4AGGVWCMlVmVwM1gtgALJRmGIlWv5ppnGGkg==
   _: 'https://registry.npmjs.org/css-tree/-/css-tree-1.0.0-alpha.29.tgz'
-  dependencies:
-   mdn-data: ~1.1.0
-   source-map: ^0.5.3
- 1.0.0-alpha.28:
-  $: sha512-joNNW1gCp3qFFzj4St6zk+Wh/NBv0vM5YbEreZk0SD4S23S+1xBKb6cLDg2uj4P4k/GUMlIm6cKIDqIG+vdt0w==
-  _: 'https://registry.npmjs.org/css-tree/-/css-tree-1.0.0-alpha.28.tgz'
   dependencies:
    mdn-data: ~1.1.0
    source-map: ^0.5.3
@@ -5319,21 +5303,18 @@ ejs:
   $: sha512-kS/gEPzZs3Y1rRsbGX4UOSjtP/CeJP0CxSNZHYxGfVM/VgLcv0ZqM7C45YyTj2DI2g7+P9Dd24C+IMIg6D0nYQ==
   _: 'https://registry.npmjs.org/ejs/-/ejs-2.7.1.tgz'
 electrode-archetype-opt-critical-css:
- _latest: 1.0.1-fynlocal_h
+ _latest: 1.0.3-fynlocal_h
  _:
-  ../electrode-archetype-opt-critical-css: 1.0.1-fynlocal_h
- 1.0.1-fynlocal_h:
-  hasPI: 1
+  ../electrode-archetype-opt-critical-css: 1.0.3-fynlocal_h
+ 1.0.3-fynlocal_h:
+  optFailed: 1
   $: local
   _: ../../packages/electrode-archetype-opt-critical-css
-  dependencies:
-   clean-css: ^4.2.1
-   penthouse: ^2.2.0
 electrode-archetype-opt-eslint:
- _latest: 1.0.1-fynlocal_h
+ _latest: 1.0.3-fynlocal_h
  _:
-  ../electrode-archetype-opt-eslint: 1.0.1-fynlocal_h
- 1.0.1-fynlocal_h:
+  ../electrode-archetype-opt-eslint: 1.0.3-fynlocal_h
+ 1.0.3-fynlocal_h:
   hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-eslint
@@ -5345,10 +5326,10 @@ electrode-archetype-opt-eslint:
    eslint-plugin-flowtype: ^2.49.3
    eslint-plugin-react: ^7.4.0
 electrode-archetype-opt-flow:
- _latest: 0.0.1-fynlocal_h
+ _latest: 1.0.2-fynlocal_h
  _:
-  ../electrode-archetype-opt-flow: 0.0.1-fynlocal_h
- 0.0.1-fynlocal_h:
+  ../electrode-archetype-opt-flow: 1.0.2-fynlocal_h
+ 1.0.2-fynlocal_h:
   hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-flow
@@ -5357,54 +5338,61 @@ electrode-archetype-opt-flow:
    flow-bin: ^0.74.0
    flow-typed: ^2.4.0
 electrode-archetype-opt-inferno:
- _latest: 0.2.9-fynlocal_h
+ _latest: 0.2.11-fynlocal_h
  _:
-  ../electrode-archetype-opt-inferno: 0.2.9-fynlocal_h
- 0.2.9-fynlocal_h:
+  ../electrode-archetype-opt-inferno: 0.2.11-fynlocal_h
+ 0.2.11-fynlocal_h:
   optFailed: 1
   $: local
   _: ../../packages/electrode-archetype-opt-inferno
 electrode-archetype-opt-jest:
- _latest: 1.0.1-fynlocal_h
+ _latest: 1.0.3-fynlocal_h
  _:
-  ../electrode-archetype-opt-jest: 1.0.1-fynlocal_h
- 1.0.1-fynlocal_h:
+  ../electrode-archetype-opt-jest: 1.0.3-fynlocal_h
+ 1.0.3-fynlocal_h:
   hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-jest
   dependencies:
    '@types/jest': ^23.3.14
    babel-jest: ^23.6.0
+   enzyme: ^3.0.0
+   enzyme-adapter-react-16: ^1.1.0
    eslint-plugin-jest: ^21.27.2
    jest: ^23.6.0
 electrode-archetype-opt-karma:
- _latest: 2.0.3-fynlocal_h
+ _latest: 2.0.7-fynlocal_h
  _:
-  ../electrode-archetype-opt-karma: 2.0.3-fynlocal_h
- 2.0.3-fynlocal_h:
+  ../electrode-archetype-opt-karma: 2.0.7-fynlocal_h
+ 2.0.7-fynlocal_h:
   hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-karma
   dependencies:
    babel-plugin-istanbul: ^5.1.0
+   chai: ^4.0.0
+   chai-as-promised: ^7.1.1
+   chai-shallowly: ^1.0.0
+   enzyme: ^3.0.0
+   enzyme-adapter-react-16: ^1.1.0
    karma: ^3.1.1
    karma-chrome-launcher: ^2.2.0
-   karma-coverage: ^1.1.2
+   karma-coverage: ^2.0.0
    karma-firefox-launcher: ^1.1.0
    karma-ie-launcher: ^1.0.0
    karma-intl-shim: ^1.0.3
    karma-mocha: ^1.3.0
    karma-mocha-reporter: ^2.2.2
    karma-safari-launcher: ^1.0.0
-   karma-sonarqube-unit-reporter: 0.0.18
+   karma-sonarqube-unit-reporter: 0.0.21
    karma-sourcemap-loader: ^0.3.7
    karma-spec-reporter: 0.0.32
    karma-webpack: 4.0.0-rc.3
 electrode-archetype-opt-less:
- _latest: 0.0.1-fynlocal_h
+ _latest: 1.0.2-fynlocal_h
  _:
-  ../electrode-archetype-opt-less: 0.0.1-fynlocal_h
- 0.0.1-fynlocal_h:
+  ../electrode-archetype-opt-less: 1.0.2-fynlocal_h
+ 1.0.2-fynlocal_h:
   hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-less
@@ -5412,33 +5400,34 @@ electrode-archetype-opt-less:
    less: ^3.9.0
    less-loader: ^4.1.0
 electrode-archetype-opt-mocha:
- _latest: 1.0.1-fynlocal_h
+ _latest: 1.0.3-fynlocal_h
  _:
-  ../electrode-archetype-opt-mocha: 1.0.1-fynlocal_h
- 1.0.1-fynlocal_h:
+  ../electrode-archetype-opt-mocha: 1.0.3-fynlocal_h
+ 1.0.3-fynlocal_h:
   hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-mocha
   dependencies:
    '@types/mocha': 5.2.7
+   chai: ^4.0.0
+   chai-as-promised: ^7.1.1
+   chai-shallowly: ^1.0.0
+   enzyme: ^3.0.0
+   enzyme-adapter-react-16: ^1.1.0
    mocha: ^4.0.0
 electrode-archetype-opt-phantomjs:
- _latest: 1.0.0-fynlocal_h
+ _latest: 1.0.2-fynlocal_h
  _:
-  ../electrode-archetype-opt-phantomjs: 1.0.0-fynlocal_h
- 1.0.0-fynlocal_h:
-  hasPI: 1
+  ../electrode-archetype-opt-phantomjs: 1.0.2-fynlocal_h
+ 1.0.2-fynlocal_h:
+  optFailed: 1
   $: local
   _: ../../packages/electrode-archetype-opt-phantomjs
-  dependencies:
-   karma-phantomjs-launcher: ^1.0.4
-   karma-phantomjs-shim: ^1.5.0
-   phantomjs-prebuilt: ^2.1.16
 electrode-archetype-opt-postcss:
- _latest: 1.0.1-fynlocal_h
+ _latest: 1.0.4-fynlocal_h
  _:
-  ../electrode-archetype-opt-postcss: 1.0.1-fynlocal_h
- 1.0.1-fynlocal_h:
+  ../electrode-archetype-opt-postcss: 1.0.4-fynlocal_h
+ 1.0.4-fynlocal_h:
   hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-postcss
@@ -5452,10 +5441,10 @@ electrode-archetype-opt-postcss:
    postcss-scss: ^1.0.6
    sugarss: ^1.0.1
 electrode-archetype-opt-pwa:
- _latest: 1.0.3-fynlocal_h
+ _latest: 1.0.6-fynlocal_h
  _:
-  ../electrode-archetype-opt-pwa: 1.0.3-fynlocal_h
- 1.0.3-fynlocal_h:
+  ../electrode-archetype-opt-pwa: 1.0.6-fynlocal_h
+ 1.0.6-fynlocal_h:
   hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-pwa
@@ -5469,21 +5458,31 @@ electrode-archetype-opt-pwa:
    web-app-manifest-loader: ^0.1.1
    webpack-disk-plugin: 0.0.2
 electrode-archetype-opt-react:
- _latest: 2.0.2-fynlocal_h
+ _latest: 2.0.4-fynlocal_h
  _:
-  ../electrode-archetype-opt-react: 2.0.2-fynlocal_h
- 2.0.2-fynlocal_h:
+  ../electrode-archetype-opt-react: 2.0.4-fynlocal_h
+ 2.0.4-fynlocal_h:
   hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-react
   dependencies:
    react: ^16.0.0
    react-dom: ^16.0.0
-electrode-archetype-opt-sass:
- _latest: 1.0.7-fynlocal_h
+electrode-archetype-opt-react-intl:
+ _latest: 1.0.0-fynlocal_h
  _:
-  ../electrode-archetype-opt-sass: 1.0.7-fynlocal_h
- 1.0.7-fynlocal_h:
+  ../electrode-archetype-opt-react-intl: 1.0.0-fynlocal_h
+ 1.0.0-fynlocal_h:
+  hasPI: 1
+  $: local
+  _: ../../packages/electrode-archetype-opt-react-intl
+  dependencies:
+   react-intl: ^2.1.3
+electrode-archetype-opt-sass:
+ _latest: 1.0.9-fynlocal_h
+ _:
+  ../electrode-archetype-opt-sass: 1.0.9-fynlocal_h
+ 1.0.9-fynlocal_h:
   hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-sass
@@ -5491,10 +5490,10 @@ electrode-archetype-opt-sass:
    node-sass: ^4.9.3
    sass-loader: ^6.0.6
 electrode-archetype-opt-sinon:
- _latest: 1.0.1-fynlocal_h
+ _latest: 1.0.3-fynlocal_h
  _:
-  ../electrode-archetype-opt-sinon: 1.0.1-fynlocal_h
- 1.0.1-fynlocal_h:
+  ../electrode-archetype-opt-sinon: 1.0.3-fynlocal_h
+ 1.0.3-fynlocal_h:
   hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-sinon
@@ -5502,10 +5501,10 @@ electrode-archetype-opt-sinon:
    sinon: ^4.0.0
    sinon-chai: ^2.14.0
 electrode-archetype-opt-stylus:
- _latest: 0.0.1-fynlocal_h
+ _latest: 1.0.2-fynlocal_h
  _:
-  ../electrode-archetype-opt-stylus: 0.0.1-fynlocal_h
- 0.0.1-fynlocal_h:
+  ../electrode-archetype-opt-stylus: 1.0.2-fynlocal_h
+ 1.0.2-fynlocal_h:
   hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-stylus
@@ -5513,10 +5512,10 @@ electrode-archetype-opt-stylus:
    stylus: ^0.54.7
    stylus-relative-loader: ^3.4.0
 electrode-archetype-opt-typescript:
- _latest: 1.0.1-fynlocal_h
+ _latest: 1.0.3-fynlocal_h
  _:
-  ../electrode-archetype-opt-typescript: 1.0.1-fynlocal_h
- 1.0.1-fynlocal_h:
+  ../electrode-archetype-opt-typescript: 1.0.3-fynlocal_h
+ 1.0.3-fynlocal_h:
   hasPI: 1
   $: local
   _: ../../packages/electrode-archetype-opt-typescript
@@ -5524,10 +5523,10 @@ electrode-archetype-opt-typescript:
    typescript: ^3.2.1
    '@babel/preset-typescript': ^7.1.0
 electrode-archetype-react-app:
- _latest: 6.5.11-fynlocal_h
+ _latest: 6.5.20-fynlocal_h
  _:
-  ../../packages/electrode-archetype-react-app: 6.5.11-fynlocal_h
- 6.5.11-fynlocal_h:
+  ../../packages/electrode-archetype-react-app: 6.5.20-fynlocal_h
+ 6.5.20-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app
@@ -5535,17 +5534,17 @@ electrode-archetype-react-app:
    '@babel/runtime': ^7.1.5
    css-modules-require-hook: ^4.0.2
    ignore-styles: ^5.0.1
-   isomorphic-loader: ^2.1.1
+   isomorphic-loader: ^3.0.0
    optional-require: ^1.0.0
-   subapp-util: ^1.0.1
+   subapp-util: ^1.0.2
   optionalDependencies:
-   electrode-archetype-opt-inferno: ^0.2.9
-   electrode-archetype-opt-react: ^2.0.2
+   electrode-archetype-opt-inferno: ^0.2.11
+   electrode-archetype-opt-react: ^2.0.4
 electrode-archetype-react-app-dev:
- _latest: 6.5.11-fynlocal_h
+ _latest: 6.5.20-fynlocal_h
  _:
-  ../../packages/electrode-archetype-react-app-dev: 6.5.11-fynlocal_h
- 6.5.11-fynlocal_h:
+  ../../packages/electrode-archetype-react-app-dev: 6.5.20-fynlocal_h
+ 6.5.20-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app-dev
@@ -5565,6 +5564,7 @@ electrode-archetype-react-app-dev:
    '@jchip/redbird': ^1.0.0
    '@loadable/babel-plugin': ^5.10.0
    '@loadable/webpack-plugin': ^5.7.1
+   '@xarc/defer': ^1.0.0
    acorn: ^6.0.5
    ansi-to-html: ^0.6.8
    autoprefixer: ^9.6.0
@@ -5579,9 +5579,6 @@ electrode-archetype-react-app-dev:
    babel-plugin-transform-react-remove-prop-types: ^0.4.20
    batch: ^0.6.1
    boxen: ^2.1.0
-   chai: ^4.0.0
-   chai-as-promised: ^7.1.1
-   chai-shallowly: ^1.0.0
    chalker: ^1.1.1
    chokidar: ^2.0.4
    convert-source-map: ^1.5.0
@@ -5592,15 +5589,12 @@ electrode-archetype-react-app-dev:
    electrode-hapi-compat: ^1.2.0
    electrode-node-resolver: ^2.0.0
    electrode-webpack-reporter: ^0.5.1
-   enzyme: ^3.0.0
-   enzyme-adapter-react-16: ^1.1.0
    file-loader: ^2.0.0
    filter-scan-dir: ^1.0.9
    finalhandler: ^1.1.1
    fs-extra: ^0.26.5
    identity-obj-proxy: ^3.0.0
-   isomorphic-loader: ^2.1.1
-   istanbul: ^0.4.5
+   isomorphic-loader: ^3.0.0
    nyc: ^14.1.1
    jsonfile: ^2.2.2
    loader-utils: ^1.1.0
@@ -5615,46 +5609,45 @@ electrode-archetype-react-app-dev:
    optional-require: ^1.0.0
    prop-types: ^15.5.6
    raw-loader: ^0.5.1
-   react-intl: ^2.1.0
-   react-test-renderer: ^16.1.1
    regenerator-runtime: ^0.13.2
    request: ^2.88.0
    require-at: ^1.0.2
    rimraf: ^2.4.0
    serve-index-fs: ^1.10.1
    style-loader: ^0.20.1
-   subapp-util: ^1.0.1
+   subapp-util: ^1.0.2
    sudo-prompt: ^8.2.5
    url-loader: ^0.6.2
-   webpack: ^4.19.1
-   webpack-cli: ^3.1.1
-   webpack-config-composer: ^1.1.0
+   webpack: ^4.41.0
+   webpack-cli: ^3.3.9
+   webpack-config-composer: ^1.1.2
    webpack-dev-middleware: ^3.4.0
    webpack-dev-server: ^3.1.10
    webpack-disk-plugin: 0.0.2
    webpack-hot-middleware: ^2.22.2
    webpack-stats-plugin: ^0.2.1
    winston: ^2.3.1
-   xclap: ^0.2.28
+   xclap: ^0.2.38
    xenv-config: ^1.3.0
    xsh: ^0.4.4
   optionalDependencies:
-   electrode-archetype-opt-critical-css: ^1.0.1
-   electrode-archetype-opt-eslint: ^1.0.1
-   electrode-archetype-opt-flow: ^0.0.1
-   electrode-archetype-opt-inferno: ^0.2.9
-   electrode-archetype-opt-jest: ^1.0.1
-   electrode-archetype-opt-karma: ^2.0.3
-   electrode-archetype-opt-less: ^0.0.1
-   electrode-archetype-opt-mocha: ^1.0.1
-   electrode-archetype-opt-phantomjs: ^1.0.0
-   electrode-archetype-opt-postcss: ^1.0.1
-   electrode-archetype-opt-pwa: ^1.0.3
-   electrode-archetype-opt-react: ^2.0.2
-   electrode-archetype-opt-sass: ^1.0.7
-   electrode-archetype-opt-stylus: ^0.0.1
-   electrode-archetype-opt-sinon: ^1.0.1
-   electrode-archetype-opt-typescript: ^1.0.1
+   electrode-archetype-opt-critical-css: ^1.0.3
+   electrode-archetype-opt-eslint: ^1.0.3
+   electrode-archetype-opt-flow: ^1.0.2
+   electrode-archetype-opt-inferno: ^0.2.11
+   electrode-archetype-opt-jest: ^1.0.3
+   electrode-archetype-opt-karma: ^2.0.7
+   electrode-archetype-opt-less: ^1.0.2
+   electrode-archetype-opt-mocha: ^1.0.3
+   electrode-archetype-opt-phantomjs: ^1.0.2
+   electrode-archetype-opt-postcss: ^1.0.4
+   electrode-archetype-opt-pwa: ^1.0.6
+   electrode-archetype-opt-react: ^2.0.4
+   electrode-archetype-opt-react-intl: ^1.0.0
+   electrode-archetype-opt-sass: ^1.0.9
+   electrode-archetype-opt-stylus: ^1.0.2
+   electrode-archetype-opt-sinon: ^1.0.3
+   electrode-archetype-opt-typescript: ^1.0.3
   peerDependencies:
    electrode-archetype-react-app: ^6.0.0
 electrode-bundle-analyzer:
@@ -5706,10 +5699,10 @@ electrode-node-resolver:
   dependencies:
    require-at: ^1.0.0
 electrode-react-webapp:
- _latest: 3.8.3-fynlocal_h
+ _latest: 3.8.4-fynlocal_h
  _:
-  ../electrode-react-webapp: 3.8.3-fynlocal_h
- 3.8.3-fynlocal_h:
+  ../electrode-react-webapp: 3.8.4-fynlocal_h
+ 3.8.4-fynlocal_h:
   $: local
   _: ../../packages/electrode-react-webapp
   dependencies:
@@ -6555,7 +6548,7 @@ extglob:
 extract-zip:
  _latest: 1.6.7
  _:
-  '^1.6.5,^1.6.6': 1.6.7
+  ^1.6.5: 1.6.7
  1.6.7:
   $: sha1-qEC0uK9kAyZMjbV/Txp0Mz74H+k=
   _: 'https://registry.npmjs.org/extract-zip/-/extract-zip-1.6.7.tgz'
@@ -7163,7 +7156,7 @@ fs.realpath:
   $: sha1-FQStJSMVjKpA20onh8sBQRmU6k8=
   _: 'https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz'
 fsevents:
- _latest: 2.0.7
+ _latest: 2.1.2
  _:
   '^1.2.3,^1.2.7': 1.2.9
  1.2.9:
@@ -7175,6 +7168,7 @@ fsevents:
    node-pre-gyp: ^0.12.0
   bundleDependencies:
    - node-pre-gyp
+  deprecated: 'One of your dependencies needs to upgrade to fsevents v2: 1) Proper nodejs v10+ support 2) No more fetching binaries from AWS, smaller package size'
   os:
    - darwin
 fstream:
@@ -8014,7 +8008,7 @@ https-browserify:
 https-proxy-agent:
  _latest: 2.2.2
  _:
-  '^2.2.0,^2.2.1': 2.2.2
+  ^2.2.0: 2.2.2
  2.2.2:
   $: sha512-c8Ndjc9Bkpfx/vCJueCPy0jlP4ccCCSNDp8xwCZzPjKJUm+B+u9WX2x98Qx4n1PiMNTWo3D7KK5ifNV/yJyRzg==
   _: 'https://registry.npmjs.org/https-proxy-agent/-/https-proxy-agent-2.2.2.tgz'
@@ -8097,7 +8091,7 @@ ignore-styles:
   $: sha1-tJ7yJ0va/NikiAqWa/440aC/RnE=
   _: 'https://registry.npmjs.org/ignore-styles/-/ignore-styles-5.0.1.tgz'
 image-size:
- _latest: 0.8.2
+ _latest: 0.8.3
  _:
   ^0.4.0: 0.4.0
   '^0.5.0,~0.5.0': 0.5.5
@@ -8918,12 +8912,12 @@ isobject:
   dependencies:
    isarray: 1.0.0
 isomorphic-loader:
- _latest: 2.1.1
+ _latest: 3.0.0
  _:
-  ^2.1.1: 2.1.1
- 2.1.1:
-  $: sha512-rPs8mD9Vv32Ob4CU0X9HYXdQmDoUv77qRq4Kx+TLCOKZ9sj1KULLIRvERPFGCc7fz+CSRcQL07RQcUVaXk+7ug==
-  _: 'https://registry.npmjs.org/isomorphic-loader/-/isomorphic-loader-2.1.1.tgz'
+  ^3.0.0: 3.0.0
+ 3.0.0:
+  $: sha512-YCEVK5lrs2trGcfd84xkBsnfHEp8zlUb0KcmC1ZdcQKvIZk7q8hsUzK/WPPLm934qVIOmoo/RDGBA7C2j9shMw==
+  _: 'https://registry.npmjs.org/isomorphic-loader/-/isomorphic-loader-3.0.0.tgz'
   dependencies:
    deep-extend: ^0.6.0
    lockfile: ^1.0.4
@@ -8937,7 +8931,7 @@ isstream:
 istanbul:
  _latest: 0.4.5
  _:
-  '^0.4.0,^0.4.5': 0.4.5
+  ^0.4.0: 0.4.5
  0.4.5:
   $: sha1-ZcfXPUxNqE1POsMQuRj7C4Azczs=
   _: 'https://registry.npmjs.org/istanbul/-/istanbul-0.4.5.tgz'
@@ -9590,7 +9584,7 @@ jsesc:
  _latest: 2.5.2
  _:
   ^1.3.0: 1.3.0
-  '^2.5.1,^2.5.2': 2.5.2
+  ^2.5.1: 2.5.2
   ~0.5.0: 0.5.0
  2.5.2:
   $: sha512-OYu7XEzjkCQ3C5Ps3QIZsQfNpqoJyZZA99wd9aWd05NCtC5pWOkShK2mkL6HXQR6/Cy2lbNdPlZBpuQHXE63gA==
@@ -9778,14 +9772,19 @@ karma-chrome-launcher:
 karma-coverage:
  _latest: 2.0.1
  _:
-  ^1.1.2: 1.1.2
- 1.1.2:
-  $: sha512-eQawj4Cl3z/CjxslYy9ariU4uDh7cCNFZHNWXWRpl0pNeblY/4wHR7M7boTYXWrn9bY0z2pZmr11eKje/S/hIw==
-  _: 'https://registry.npmjs.org/karma-coverage/-/karma-coverage-1.1.2.tgz'
+  ^2.0.0: 2.0.1
+ 2.0.1:
+  $: sha512-SnFkHsnLsaXfxkey51rRN9JDLAEKYW2Lb0qOEvcruukk0NkSNDkjobNDZPt9Ni3kIhLZkLtpGOz661hN7OaZvQ==
+  _: 'https://registry.npmjs.org/karma-coverage/-/karma-coverage-2.0.1.tgz'
   dependencies:
    dateformat: ^1.0.6
    istanbul: ^0.4.0
-   lodash: ^4.17.0
+   istanbul-lib-coverage: ^2.0.5
+   istanbul-lib-instrument: ^3.3.0
+   istanbul-lib-report: ^2.0.8
+   istanbul-lib-source-maps: ^3.0.6
+   istanbul-reports: ^2.2.4
+   lodash: ^4.17.11
    minimatch: ^3.0.0
    source-map: ^0.5.1
 karma-firefox-launcher:
@@ -9839,25 +9838,6 @@ karma-mocha-reporter:
    strip-ansi: ^4.0.0
   peerDependencies:
    karma: '>=0.13'
-karma-phantomjs-launcher:
- _latest: 1.0.4
- _:
-  ^1.0.4: 1.0.4
- 1.0.4:
-  $: sha1-0jyjSAG9qYY60xjju0vUBisTrNI=
-  _: 'https://registry.npmjs.org/karma-phantomjs-launcher/-/karma-phantomjs-launcher-1.0.4.tgz'
-  dependencies:
-   lodash: ^4.0.1
-   phantomjs-prebuilt: ^2.1.7
-  peerDependencies:
-   karma: '>=0.9'
-karma-phantomjs-shim:
- _latest: 1.5.0
- _:
-  ^1.5.0: 1.5.0
- 1.5.0:
-  $: sha512-t0h1x7btXROaGElv36TLpuoWqTnVZ/f+GJHH/qVerjbX6AENoM5brQoB9ISO3hQ6zO1k9rDSRLrY5ZZb83ANdg==
-  _: 'https://registry.npmjs.org/karma-phantomjs-shim/-/karma-phantomjs-shim-1.5.0.tgz'
 karma-safari-launcher:
  _latest: 1.0.0
  _:
@@ -9870,12 +9850,12 @@ karma-safari-launcher:
 karma-sonarqube-unit-reporter:
  _latest: 0.0.21
  _:
-  0.0.18: 0.0.18
- 0.0.18:
-  $: sha512-JucHngf83yAQn+n1YDwFGL43HvxVLW+fHnmLoMMzm2P7rCkk4ATLU7x1nEl/to5fqGbx4RCazFAlXJpDH72M5Q==
-  _: 'https://registry.npmjs.org/karma-sonarqube-unit-reporter/-/karma-sonarqube-unit-reporter-0.0.18.tgz'
+  0.0.21: 0.0.21
+ 0.0.21:
+  $: sha512-hZofQzPbyc60kiP00LsIKA+Y4dwRymn50LD0D34RCXD5HhxYl/BGjcY7j79VUvrpm7sNBL7w40WVjVEywtC4rg==
+  _: 'https://registry.npmjs.org/karma-sonarqube-unit-reporter/-/karma-sonarqube-unit-reporter-0.0.21.tgz'
   dependencies:
-   xmlbuilder: 3.1.0
+   xmlbuilder: ^13.0.2
   peerDependencies:
    karma: '>=0.9'
 karma-sourcemap-loader:
@@ -10272,8 +10252,8 @@ lockfile:
 lodash:
  _latest: 4.17.15
  _:
-  '^3.2.0,^3.5.0': 3.10.1
-  '^4.0.0,^4.0.1,^4.11.1,^4.13.1,^4.15.0,^4.17.0,^4.17.10,^4.17.11,^4.17.13,^4.17.14,^4.17.15,^4.17.4,^4.17.5,^4.3.0,^4.5.0,^4.6.1,~4.17.10': 4.17.15
+  ^3.2.0: 3.10.1
+  '^4.0.0,^4.11.1,^4.13.1,^4.15.0,^4.17.10,^4.17.11,^4.17.13,^4.17.14,^4.17.15,^4.17.4,^4.17.5,^4.3.0,^4.5.0,^4.6.1,~4.17.10': 4.17.15
  4.17.15:
   $: sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
   _: 'https://registry.npmjs.org/lodash/-/lodash-4.17.15.tgz'
@@ -10827,7 +10807,7 @@ mime:
  _latest: 2.4.4
  _:
   '1.6.0,^1.0.0,^1.3.4,^1.4.1': 1.6.0
-  '^2.0.3,^2.3.1,^2.4.4': 2.4.4
+  '^2.3.1,^2.4.4': 2.4.4
  2.4.4:
   $: sha512-LRxmNwziLPT828z+4YkNzloCFC2YM4wrB99k+AV5ZbEyfGNWfG8SO1FUXLmLDBSo89NrJZ4DIWeLjy1CHGhMGA==
   _: 'https://registry.npmjs.org/mime/-/mime-2.4.4.tgz'
@@ -12296,19 +12276,6 @@ pend:
  1.2.0:
   $: sha1-elfrVQpng/kRUzH89GY9XI4AelA=
   _: 'https://registry.npmjs.org/pend/-/pend-1.2.0.tgz'
-penthouse:
- _latest: 2.2.0
- _:
-  ^2.2.0: 2.2.0
- 2.2.0:
-  $: sha512-Mgw9GpwV2D0ZwaJjW6FaXsybaHe/LiQBb2BcX0LQm+AkzHVMp1gyuy1Z4VQfKf4G2ovGVYg5T60UoO+BArculw==
-  _: 'https://registry.npmjs.org/penthouse/-/penthouse-2.2.0.tgz'
-  dependencies:
-   css-mediaquery: ^0.1.2
-   css-tree: 1.0.0-alpha.28
-   debug: ^4.1.1
-   jsesc: ^2.5.2
-   puppeteer: 1.15.0
 performance-now:
  _latest: 2.1.0
  _:
@@ -12319,7 +12286,7 @@ performance-now:
 phantomjs-prebuilt:
  _latest: 2.1.16
  _:
-  '^2.1.10,^2.1.16,^2.1.7': 2.1.16
+  ^2.1.10: 2.1.16
  2.1.16:
   hasI: 1
   $: sha1-79ISpKOWbTZHaE6ouniFSb4q7+8=
@@ -13406,7 +13373,7 @@ progress:
  _latest: 2.0.3
  _:
   ^1.1.8: 1.1.8
-  '^2.0.0,^2.0.1': 2.0.3
+  ^2.0.0: 2.0.3
  2.0.3:
   $: sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==
   _: 'https://registry.npmjs.org/progress/-/progress-2.0.3.tgz'
@@ -13480,13 +13447,6 @@ proxy-addr:
   dependencies:
    forwarded: ~0.1.2
    ipaddr.js: 1.9.0
-proxy-from-env:
- _latest: 1.0.0
- _:
-  ^1.0.0: 1.0.0
- 1.0.0:
-  $: sha1-M8UDmPcOp+uW0h97gXYwpVeRx+4=
-  _: 'https://registry.npmjs.org/proxy-from-env/-/proxy-from-env-1.0.0.tgz'
 prr:
  _latest: 1.0.1
  _:
@@ -13572,23 +13532,6 @@ punycode:
  1.3.2:
   $: sha1-llOgNvt8HuQjQvIyXM7v6jkmxI0=
   _: 'https://registry.npmjs.org/punycode/-/punycode-1.3.2.tgz'
-puppeteer:
- _latest: 1.20.0
- _:
-  1.15.0: 1.15.0
- 1.15.0:
-  hasI: 1
-  $: sha512-D2y5kwA9SsYkNUmcBzu9WZ4V1SGHiQTmgvDZSx6sRYFsgV25IebL4V6FaHjF6MbwLK9C6f3G3pmck9qmwM8H3w==
-  _: 'https://registry.npmjs.org/puppeteer/-/puppeteer-1.15.0.tgz'
-  dependencies:
-   debug: ^4.1.0
-   extract-zip: ^1.6.6
-   https-proxy-agent: ^2.2.1
-   mime: ^2.0.3
-   progress: ^2.0.1
-   proxy-from-env: ^1.0.0
-   rimraf: ^2.6.1
-   ws: ^6.1.0
 pyconf:
  _latest: 1.1.7
  _:
@@ -13808,9 +13751,9 @@ react-dom:
   peerDependencies:
    react: ^16.0.0
 react-intl:
- _latest: 3.3.2
+ _latest: 3.9.1
  _:
-  ^2.1.0: 2.9.0
+  ^2.1.3: 2.9.0
  2.9.0:
   $: sha512-27jnDlb/d2A7mSJwrbOBnUgD+rPep+abmoJE511Tf8BnoONIAUehy/U1zZCHGO17mnOwMWxqN4qC0nW11cD6rA==
   _: 'https://registry.npmjs.org/react-intl/-/react-intl-2.9.0.tgz'
@@ -13890,7 +13833,7 @@ react-router-dom:
 react-test-renderer:
  _latest: 16.10.1
  _:
-  '^16.0.0-0,^16.1.1': 16.10.1
+  ^16.0.0-0: 16.10.1
  16.10.1:
   $: sha512-VT8nd7XrrUV7MQPxeIuH7WstfrK2A8kgcMwGUtVXa0ja+CiYkxdmLYNjwX1L7irRF7ydzJJWiSLsQf2xBj4Xaw==
   _: 'https://registry.npmjs.org/react-test-renderer/-/react-test-renderer-16.10.1.tgz'
@@ -15732,53 +15675,53 @@ stylus-relative-loader:
   peerDependencies:
    stylus: ^0.54.5
 subapp-redux:
- _latest: 1.0.3-fynlocal_h
+ _latest: 1.0.9-fynlocal_h
  _:
-  ../../packages/subapp-redux: 1.0.3-fynlocal_h
- 1.0.3-fynlocal_h:
+  ../../packages/subapp-redux: 1.0.9-fynlocal_h
+ 1.0.9-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-redux
   dependencies:
    optional-require: ^1.0.0
-   subapp-util: ^1.0.1
-   subapp-web: ^1.0.3
+   subapp-util: ^1.0.2
+   subapp-web: ^1.0.9
   peerDependencies:
    react: '*'
    react-dom: '*'
    redux: '*'
    react-redux: '*'
 subapp-server:
- _latest: 1.1.3-fynlocal_h
+ _latest: 1.1.4-fynlocal_h
  _:
-  ../../packages/subapp-server: 1.1.3-fynlocal_h
- 1.1.3-fynlocal_h:
+  ../../packages/subapp-server: 1.1.4-fynlocal_h
+ 1.1.4-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-server
   dependencies:
    '@hapi/boom': ^7.4.1
-   electrode-react-webapp: ^3.8.3
+   electrode-react-webapp: ^3.8.4
    filter-scan-dir: ^1.0.9
    http-status-codes: ^1.3.0
    optional-require: ^1.0.0
-   subapp-util: ^1.0.1
+   subapp-util: ^1.0.2
    xaa: ^1.0.0
 subapp-util:
- _latest: 1.0.1-fynlocal_h
+ _latest: 1.0.2-fynlocal_h
  _:
-  ../subapp-util: 1.0.1-fynlocal_h
- 1.0.1-fynlocal_h:
+  ../subapp-util: 1.0.2-fynlocal_h
+ 1.0.2-fynlocal_h:
   $: local
   _: ../../packages/subapp-util
   dependencies:
    filter-scan-dir: ^1.0.9
    optional-require: ^1.0.0
 subapp-web:
- _latest: 1.0.3-fynlocal_h
+ _latest: 1.0.9-fynlocal_h
  _:
-  '../../packages/subapp-web,../subapp-web': 1.0.3-fynlocal_h
- 1.0.3-fynlocal_h:
+  '../../packages/subapp-web,../subapp-web': 1.0.9-fynlocal_h
+ 1.0.9-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-web
@@ -15788,7 +15731,7 @@ subapp-web:
    lodash: ^4.17.15
    optional-require: ^1.0.0
    request: ^2.88.0
-   subapp-util: ^1.0.1
+   subapp-util: ^1.0.2
   peerDependencies:
    react: '*'
    react-dom: '*'
@@ -16357,7 +16300,7 @@ uglify-es:
    commander: ~2.13.0
    source-map: ~0.6.1
 uglify-js:
- _latest: 3.6.0
+ _latest: 3.7.1
  _:
   ^3.1.4: 3.6.0
  3.6.0:
@@ -16890,9 +16833,9 @@ webidl-conversions:
   $: sha512-YQ+BmxuTgd6UXZW3+ICGfyqRyHXVlD5GtQr5+qjiNW7bF0cqrzX500HVXPBOvgXb5YnzDd+h0zqyv61KUD7+Sg==
   _: 'https://registry.npmjs.org/webidl-conversions/-/webidl-conversions-4.0.2.tgz'
 webpack:
- _latest: 4.41.0
+ _latest: 4.41.2
  _:
-  ^4.19.1: 4.41.0
+  ^4.41.0: 4.41.0
  4.41.0:
   $: sha512-yNV98U4r7wX1VJAj5kyMsu36T8RPPQntcb5fJLOsMz/pt/WrKC0Vp1bAlqPLkA1LegSwQwf6P+kAbyhRKVQ72g==
   _: 'https://registry.npmjs.org/webpack/-/webpack-4.41.0.tgz'
@@ -16921,9 +16864,9 @@ webpack:
    watchpack: ^1.6.0
    webpack-sources: ^1.4.1
 webpack-cli:
- _latest: 3.3.9
+ _latest: 3.3.10
  _:
-  ^3.1.1: 3.3.9
+  ^3.3.9: 3.3.9
  3.3.9:
   $: sha512-xwnSxWl8nZtBl/AFJCOn9pG7s5CYUYdZxmmukv+fAHLcBIHM36dImfpQg3WfShZXeArkWlf6QRw24Klcsv8a5A==
   _: 'https://registry.npmjs.org/webpack-cli/-/webpack-cli-3.3.9.tgz'
@@ -16942,10 +16885,10 @@ webpack-cli:
   peerDependencies:
    webpack: 4.x.x
 webpack-config-composer:
- _latest: 1.1.1-fynlocal_h
+ _latest: 1.1.2-fynlocal_h
  _:
-  ../webpack-config-composer: 1.1.1-fynlocal_h
- 1.1.1-fynlocal_h:
+  ../webpack-config-composer: 1.1.2-fynlocal_h
+ 1.1.2-fynlocal_h:
   $: local
   _: ../../packages/webpack-config-composer
   dependencies:
@@ -17251,7 +17194,7 @@ ws:
  _latest: 7.1.2
  _:
   ^5.2.0: 5.2.2
-  '^6.1.0,^6.2.1': 6.2.1
+  ^6.2.1: 6.2.1
   ~1.1.5: 1.1.5
   ~3.3.1: 3.3.3
  6.2.1:
@@ -17292,12 +17235,12 @@ xaa:
   $: sha512-20Gh7kuSRoQo8UTlaiYjs7/eT39vJUNEYI7v6mcz9+m/wGCPUbwtkEBUCXklrBPQtc2cRjj3xs05IjDwhhlJKw==
   _: 'https://registry.npmjs.org/xaa/-/xaa-1.0.0.tgz'
 xclap:
- _latest: 0.2.36
+ _latest: 0.2.39
  _:
-  ^0.2.28: 0.2.36
- 0.2.36:
-  $: sha512-4Z5vD5tQDHLp9UJh++LuEtrtED4sr/bJKTZI75lW7RmliQ0Y5M9QirhXOEOM0Q4GNTG19FdNPxFvYRjWwx+QUA==
-  _: 'https://registry.npmjs.org/xclap/-/xclap-0.2.36.tgz'
+  ^0.2.38: 0.2.39
+ 0.2.39:
+  $: sha512-Tw3CcHakbVuq2LWgmiMaDvRRvhbrKMkON4KW1dHxXbqHpk5RpZiH75LWeJb/El+sacoU6R0+cNyDmQ84hf3y8g==
+  _: 'https://registry.npmjs.org/xclap/-/xclap-0.2.39.tgz'
   dependencies:
    chalk: ^2.0.1
    insync: ^2.1.1
@@ -17363,16 +17306,14 @@ xml2js:
 xmlbuilder:
  _latest: 13.0.2
  _:
-  3.1.0: 3.1.0
+  ^13.0.2: 13.0.2
   ~11.0.0: 11.0.1
+ 13.0.2:
+  $: sha512-Eux0i2QdDYKbdbA6AM6xE4m6ZTZr4G4xF9kahI2ukSEMCzwce2eX9WlTI5J3s+NU7hpasFsr8hWIONae7LluAQ==
+  _: 'https://registry.npmjs.org/xmlbuilder/-/xmlbuilder-13.0.2.tgz'
  11.0.1:
   $: sha512-fDlsI/kFEx7gLvbecc0/ohLG50fugQp8ryHzMTuW9vSa1GJ0XYWKnhsUx7oie3G98+r56aTQIUB4kht42R3JvA==
   _: 'https://registry.npmjs.org/xmlbuilder/-/xmlbuilder-11.0.1.tgz'
- 3.1.0:
-  $: sha1-LIaIjy1OrehQ+jjKf3Ij9yCVFuE=
-  _: 'https://registry.npmjs.org/xmlbuilder/-/xmlbuilder-3.1.0.tgz'
-  dependencies:
-   lodash: ^3.5.0
 xmlhttprequest-ssl:
  _latest: 1.6.0
  _:

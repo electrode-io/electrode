@@ -1,8 +1,8 @@
 "use strict";
 
-const { createStore } = require("redux");
-
 const { registerSubApp } = require("subapp-util");
+
+const shared = require("../dist/shared");
 
 module.exports = {
   reduxLoadSubApp: subapp => {
@@ -12,11 +12,7 @@ module.exports = {
 
     if (!subapp.reduxCreateStore) {
       extras._genReduxCreateStore = "subapp";
-      if (subapp.reduxReducers) {
-        extras.reduxCreateStore = initialState => createStore(subapp.reduxReducers, initialState);
-      } else {
-        extras.reduxCreateStore = initialState => createStore(x => x, initialState || {});
-      }
+      extras.reduxCreateStore = shared.getReduxCreateStore(subapp);
     }
 
     return registerSubApp(Object.assign(extras, subapp));

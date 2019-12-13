@@ -1,5 +1,7 @@
 module.exports = {
   options: {
-    subapp: true
+    subapp: true,
+    phantomjs: false,
+    criticalCSS: false
   }
 };
