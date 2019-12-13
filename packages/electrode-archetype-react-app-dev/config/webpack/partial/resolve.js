@@ -7,13 +7,22 @@ const ModuleResolver = require("electrode-node-resolver/lib/webpack-plugin");
 const identity = require("lodash/identity");
 
 function infernoReactAlias() {
-  return AppMode.reactLib === "inferno"
-    ? {
+  switch (AppMode.reactLib) {
+    case "inferno":
+      return {
         react: "inferno-compat",
         "react-dom": "inferno-compat",
         "react-dom/server": "inferno-compat"
-      }
-    : {};
+      };
+    case "preact":
+      return {
+        react: "preact/compat",
+        "react-dom": "preact/compat",
+        "react-dom/server": "preact/compat"
+      };
+    default:
+      return {};
+  }
 }
 
 const { enableTypeScript } = archetype.babel;
