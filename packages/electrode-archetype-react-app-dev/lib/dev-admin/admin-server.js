@@ -148,7 +148,11 @@ class AdminServer {
 
   async handleUserInput() {
     const { str } = await this._io.getUserInput();
-    await this.processCommand(str);
+    const processing = this.processCommand(str);
+    // If the user has selected "--inspect-brk" ('d' or 'e'), do not wait for command to process
+    if ("de".indexOf(str) < 0) {
+      await processing;
+    }
     process.nextTick(() => this.handleUserInput());
   }
 
