@@ -18,7 +18,7 @@ const makeWinstonLogger = winston => {
     ],
     transports: [
       new winston.transports.Console({
-        level: "error",
+        level: "warn",
         colorize: true,
         prettyPrint: true
       }),
