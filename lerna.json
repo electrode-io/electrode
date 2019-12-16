@@ -7,16 +7,13 @@
   "fynpo": {
     "publishConfig": {
       "tags": {
-        "babel7-beta": {
-          "enabled": false,
+        "v7": {
+          "enabled": true,
           "packages": {
             "electrode-archetype-react-app": true,
             "electrode-archetype-react-app-dev": true,
             "electrode-archetype-react-component": true,
-            "electrode-archetype-react-component-dev": true,
-            "electrode-archetype-opt-karma": true,
-            "electrode-ignite": true,
-            "generator-electrode": true
+            "electrode-archetype-react-component-dev": true
           },
           "addToVersion": true
         }
