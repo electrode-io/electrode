@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-opt-critical-css",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Electrode Critical CSS Optional Archetype",
   "main": "optional-check.js",
   "homepage": "http://www.electrode.io",

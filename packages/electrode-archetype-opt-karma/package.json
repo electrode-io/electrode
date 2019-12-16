@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-opt-karma",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "Electrode Karma Optional Archetype",
   "main": "optional-check.js",
   "homepage": "http://www.electrode.io",

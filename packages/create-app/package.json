@@ -1,6 +1,6 @@
 {
   "name": "@xarc/create-app",
-  "version": "1.0.3",
+  "version": "2.0.0-beta7.0",
   "description": "Create react.js/node.js webapp using the Electrode Platform",
   "main": "dist/index.js",
   "scripts": {
@@ -8,7 +8,8 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-    "access": "public"
+    "access": "public",
+    "tag": "beta7"
   },
   "bin": {
     "create-app": "bin/create-app.js"

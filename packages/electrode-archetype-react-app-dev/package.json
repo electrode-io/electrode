@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-app-dev",
-  "version": "6.5.21",
+  "version": "7.0.0-beta7.0",
   "description": "Electrode NodeJS/React Application Archetype (Development)",
   "main": "index.js",
   "homepage": "http://www.electrode.io",
@@ -111,24 +111,24 @@
     "xsh": "^0.4.4"
   },
   "optionalDependencies": {
-    "electrode-archetype-opt-critical-css": "^1.0.3",
-    "electrode-archetype-opt-eslint": "^1.0.3",
-    "electrode-archetype-opt-flow": "^1.0.2",
-    "electrode-archetype-opt-inferno": "^0.2.11",
-    "electrode-archetype-opt-jest": "^1.0.3",
-    "electrode-archetype-opt-karma": "^2.0.7",
-    "electrode-archetype-opt-less": "^1.0.2",
-    "electrode-archetype-opt-mocha": "^1.0.3",
-    "electrode-archetype-opt-phantomjs": "^1.0.2",
-    "electrode-archetype-opt-postcss": "^1.0.4",
-    "electrode-archetype-opt-preact": "^1.0.0",
-    "electrode-archetype-opt-pwa": "^1.0.6",
-    "electrode-archetype-opt-react": "^2.0.4",
-    "electrode-archetype-opt-react-intl": "^1.0.0",
-    "electrode-archetype-opt-sass": "^1.0.9",
-    "electrode-archetype-opt-stylus": "^1.0.2",
-    "electrode-archetype-opt-sinon": "^1.0.3",
-    "electrode-archetype-opt-typescript": "^1.0.3"
+    "electrode-archetype-opt-critical-css": "^1.0.4",
+    "electrode-archetype-opt-eslint": "^1.0.4",
+    "electrode-archetype-opt-flow": "^1.0.3",
+    "electrode-archetype-opt-inferno": "^0.2.12",
+    "electrode-archetype-opt-jest": "^1.0.4",
+    "electrode-archetype-opt-karma": "^2.0.8",
+    "electrode-archetype-opt-less": "^1.0.3",
+    "electrode-archetype-opt-mocha": "^1.0.4",
+    "electrode-archetype-opt-phantomjs": "^1.0.3",
+    "electrode-archetype-opt-postcss": "^1.0.5",
+    "electrode-archetype-opt-preact": "^1.0.1",
+    "electrode-archetype-opt-pwa": "^1.0.7",
+    "electrode-archetype-opt-react": "^2.0.5",
+    "electrode-archetype-opt-react-intl": "^1.0.1",
+    "electrode-archetype-opt-sass": "^1.0.10",
+    "electrode-archetype-opt-stylus": "^1.0.3",
+    "electrode-archetype-opt-sinon": "^1.0.4",
+    "electrode-archetype-opt-typescript": "^1.0.4"
   },
   "devDependencies": {
     "chai": "^4.0.0",
@@ -192,5 +192,8 @@
     "functions": 0,
     "lines": 0,
     "cache": true
+  },
+  "publishConfig": {
+    "tag": "beta7"
   }
 }

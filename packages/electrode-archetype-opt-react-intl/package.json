@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-opt-react-intl",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Electrode NodeJS/React Optional Archetype React-International",
   "main": "optional-check.js",
   "homepage": "http://www.electrode.io",
