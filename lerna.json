@@ -7,13 +7,15 @@
   "fynpo": {
     "publishConfig": {
       "tags": {
-        "v7": {
+        "beta7": {
           "enabled": true,
           "packages": {
             "electrode-archetype-react-app": true,
             "electrode-archetype-react-app-dev": true,
             "electrode-archetype-react-component": true,
-            "electrode-archetype-react-component-dev": true
+            "electrode-archetype-react-component-dev": true,
+            "generator-electrode": true,
+            "@xarc/create-app": true
           },
           "addToVersion": true
         }
