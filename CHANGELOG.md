@@ -1,3 +1,35 @@
+# 12/16/2019
+
+- fix dev-admin process command
+- support shared redux store for subapps
+
+## Packages
+
+- `electrode-archetype-react-app@6.5.21` `(6.5.20 => 6.5.21)`
+- `electrode-archetype-react-app-dev@6.5.21` `(6.5.20 => 6.5.21)`
+- `subapp-redux@1.0.10` `(1.0.9 => 1.0.10)`
+
+## Commits
+
+- `packages/electrode-archetype-react-app[-dev]`
+
+  - When running dev-admin, no longer await command before listening ([#1469](https://github.com/electrode-io/electrode/pull/1469)) [commit](http://github.com/electrode-io/electrode/commit/e30c58c8bbb44384fa5b5d0018d19065a451130b)
+  - Fix defect in which menu was unresponsive after inspect-brk mode ([#1468](https://github.com/electrode-io/electrode/pull/1468)) [commit](http://github.com/electrode-io/electrode/commit/1c599ceaf175671a53b950e5168aee59a57c2098)
+  - support replace reducers for share redux store ([#1467](https://github.com/electrode-io/electrode/pull/1467)) [commit](http://github.com/electrode-io/electrode/commit/21f9c5b5255a6ae985410d032ec6834a64d443b4)
+  - Should detect all Unhandled rejection messages as an error in log-parser ([#1466](https://github.com/electrode-io/electrode/pull/1466)) [commit](http://github.com/electrode-io/electrode/commit/bc12bb943925d5115f6ef34b29ce009e1b4dec6a)
+
+- `packages/subapp-redux`
+
+  - support replace reducers for share redux store ([#1467](https://github.com/electrode-io/electrode/pull/1467)) [commit](http://github.com/electrode-io/electrode/commit/21f9c5b5255a6ae985410d032ec6834a64d443b4)
+
+- `.vscode`
+
+  - support replace reducers for share redux store ([#1467](https://github.com/electrode-io/electrode/pull/1467)) [commit](http://github.com/electrode-io/electrode/commit/21f9c5b5255a6ae985410d032ec6834a64d443b4)
+
+- `MISC`
+
+  - update release instructions [commit](http://github.com/electrode-io/electrode/commit/05172e10861605e149911b158bb2726550223ee3)
+
 # 12/5/2019
 
 - Added --no-single-run support for karma tests

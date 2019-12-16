@@ -48,12 +48,7 @@ const MainBody = props => {
 
 const mapStateToProps = state => state;
 
-const Component = withRouter(
-  connect(
-    mapStateToProps,
-    dispatch => ({ dispatch })
-  )(MainBody)
-);
+const Component = withRouter(connect(mapStateToProps, dispatch => ({ dispatch }))(MainBody));
 
 export default reduxLoadSubApp({
   name: "MainBody",
@@ -70,5 +65,6 @@ export default reduxLoadSubApp({
 
   prepare: async () => {},
 
+  reduxShareStore: true,
   reduxReducers
 });

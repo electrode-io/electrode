@@ -147,8 +147,12 @@ It's important that commits are isolated for the package they affected only and 
 To release, there are three steps:
 
 1. Use `clap update-changelog` to detect packages that changed and their version bumps.
-2. Run `npx fynpo prepare` to look at `CHANGELOG.md` and update dependencies and versions.
-3. Publish the packages that `fynpo prepare` shown that has updates.
+1. Verify and check the file `CHANGELOG.md`, add a summary of key changes under the date.
+1. Amend the commit for `CHANGELOG.md` with summary changes.
+1. Run `npx fynpo prepare --no-tag` to prepare packages for release.
+1. Run `git tag -a rel-v<#>-<date>` where `<#>` is the major archetype version, and `<date>` as `MMDDYYYY`.
+1. Publish the packages that `fynpo prepare` shown that has updates.
+1. Push release commits.
 
 [gitbook-cli]: https://www.npmjs.com/package/gitbook-cli
 [prettier]: https://www.npmjs.com/package/prettier

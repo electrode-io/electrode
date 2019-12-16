@@ -148,7 +148,7 @@ class AdminServer {
 
   async handleUserInput() {
     const { str } = await this._io.getUserInput();
-    await this.processCommand(str);
+    this.processCommand(str);
     process.nextTick(() => this.handleUserInput());
   }
 
