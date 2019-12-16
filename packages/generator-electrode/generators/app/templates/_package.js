@@ -26,7 +26,7 @@ return {
   },
   dependencies: {
     bluebird: "^3.4.6",
-    "electrode-archetype-react-app": "^6.0.0",
+    "electrode-archetype-react-app": "7.0.0-beta7.0",
     "electrode-react-webapp": "^3.2.0",
     //<% if (uiConfigModule) {%>
     "<%= uiConfigModule %>": "<%= uiConfigModuleSemver %>",
@@ -59,7 +59,7 @@ return {
   devDependencies: {
     "@loadable/babel-plugin": "^5.10.0",
     "@loadable/webpack-plugin": "^5.7.1",
-    "electrode-archetype-react-app-dev": "^6.0.0"
+    "electrode-archetype-react-app-dev": "7.0.0-beta7.0"
   }, //<% if (isSingleQuote) { %>
   eslintConfig: {
     rules: {
