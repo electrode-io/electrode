@@ -257,7 +257,7 @@ const getTaggedVersion = pkg => {
           if (semv.prerelease[0] && semv.prerelease[0] === tag) {
             return semv.inc("prerelease").format();
           }
-          return `${pkg.versionOnly}-${tag}.0`;
+          return `${pkg.newVersion}-${tag}.0`;
         }
       }
     }
