@@ -9,7 +9,9 @@ class ConsoleIO {
 
   setup() {
     readline.emitKeypressEvents(process.stdin);
-    process.stdin.setRawMode(true);
+    if (process.stdin.isTTY) {
+      process.stdin.setRawMode(true);
+    }
   }
 
   async getUserInput() {
