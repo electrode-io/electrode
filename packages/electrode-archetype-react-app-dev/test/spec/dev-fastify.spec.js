@@ -63,13 +63,7 @@ describe("dev-fastify", function() {
     const fakeRequest = {
       app: {}
     };
-    const fakeReply = () => {};
-    let doneCalled = false;
-    const fakeDone = () => {
-      doneCalled = true;
-    };
-    hooks.onRequest(fakeRequest, fakeReply, fakeDone);
+    hooks.onRequest(fakeRequest);
     expect(fakeRequest.app.webpackDev).exist;
-    expect(doneCalled).true;
   });
 });
