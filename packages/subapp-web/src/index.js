@@ -105,24 +105,35 @@ export function loadSubApp(info, renderStart) {
   return info;
 }
 
-export function dynamicLoadSubApp(options) {
+export function dynamicLoadSubApp({ name, id, timeout = 15000, onLoad, onError }) {
   // TODO: timeout and callback
   const wsa = window.webSubApps;
-  const lname = options.name.toLowerCase();
+  const lname = name.toLowerCase();
 
   if (wsa._bundles[lname] === undefined) {
     window.loadSubAppBundles(lname);
   }
+  const startTime = Date.now();
 
   const load = delay => {
     setTimeout(() => {
-      const subApp = wsa[options.name];
-      const element = document.getElementById(options.id);
-      if (element && subApp && subApp.start) {
-        subApp.start({ id: options.id });
-      } else {
-        load(50);
+      const subApp = wsa[name];
+      if (subApp) {
+        if (!id) {
+          return onLoad();
+        } else {
+          const element = document.getElementById(id);
+          if (element && subApp.start) {
+            return subApp.start({ id });
+          }
+        }
       }
+
+      if (timeout > 50 && Date.now() - startTime > timeout) {
+        return onError(new Error("dynamicLoadSubApp Timeout"));
+      }
+
+      return load(50);
     }, delay);
   };
 

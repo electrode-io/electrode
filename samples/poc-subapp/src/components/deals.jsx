@@ -3,6 +3,46 @@ import { dynamicLoadSubApp } from "subapp-web";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+class SubApp extends React.Component {
+  constructor() {
+    super();
+    this.state = { ready: false };
+  }
+
+  render() {
+    // is subapp loaded?
+    // TODO: handle SSR
+    if (typeof window === "undefined") {
+      return "";
+    }
+    const { name } = this.props;
+    const wsa = window.webSubApps;
+    const lname = name.toLowerCase();
+
+    if (wsa._bundles[lname] && wsa[name]) {
+      const subapp = window.webSubApps[name];
+      return (
+        <div className="col-sm-4">
+          <div className="panel panel-primary">
+            <div className="panel-body">
+              <subapp.info.Component {...this.props} />
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      const onLoad = () => this.setState({ ready: true });
+      dynamicLoadSubApp({
+        name: "Deal",
+        onLoad
+      });
+
+      // if not, return loadingComponent
+      return "";
+    }
+  }
+}
+
 const DealSubApp = props => {
   const { id } = props;
 
@@ -46,6 +86,9 @@ const Deals = props => {
         <DealSubApp {...props} id="deal_1" />
         <DealSubApp {...props} id="deal_2" />
         <DealSubApp {...props} id="deal_3" />
+      </div>
+      <div>
+        <SubApp name="Deal" deal="hello" />
       </div>
     </div>
   );
