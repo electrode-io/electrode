@@ -24,9 +24,7 @@ class SubApp extends React.Component {
       return (
         <div className="col-sm-4">
           <div className="panel panel-primary">
-            <div className="panel-body">
-              <subapp.info.Component {...this.props} />
-            </div>
+            <div className="panel-body">{subapp.start({ props: this.props })}</div>
           </div>
         </div>
       );
