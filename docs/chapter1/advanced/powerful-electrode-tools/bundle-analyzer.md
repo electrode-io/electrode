@@ -74,4 +74,4 @@ Module ID       Full Path       Identity Path   Size (bytes)
 4       ./~/react/lib/ReactChildren.js  ~/react/lib/ReactChildren.js    1344
 ```
 
-You can view an example [`bundle.analyze.tsv`](https://docs.google.com/spreadsheets/d/1IomT2fYCKEwVY0CO-0jImc7CBj_uAmgy70Egsm4CnVE/edit?usp=sharing&rm=minimal) output file using the [Electrode Boilerplate](https://github.com/electrode-io/electrode/tree/d4142ee0c938cbf973a429ee8467052aa4e1c9be/samples/universal-react-node#electrode-bundle-analyzer) code.
+You can view an example [`bundle.analyze.tsv`](https://docs.google.com/spreadsheets/d/1IomT2fYCKEwVY0CO-0jImc7CBj_uAmgy70Egsm4CnVE/edit?usp=sharing&rm=minimal) output file using the [Electrode Boilerplate](https://github.com/electrode-io/electrode/tree/master/samples/universal-react-node#electrode-bundle-analyzer) code.

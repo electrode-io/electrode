@@ -44,7 +44,7 @@ module.exports = {
 
 ### Disabling Jest
 
-If you prefer [Karma](#Karma) only for writing your unit tests, then you can explicitly turn off Jest support and skip installing the dependencies required. To do that, create a file `archetype/config/index.js`, and add the following code to it:
+If you prefer [Karma](#karma) only for writing your unit tests, then you can explicitly turn off Jest support and skip installing the dependencies required. To do that, create a file `archetype/config/index.js`, and add the following code to it:
 
 ```js
 module.exports = {

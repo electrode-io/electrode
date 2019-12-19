@@ -1,6 +1,7 @@
 # Server Side Data Hydration
 
 Server side rendering consists of two steps:
+
 1. Create the initial redux store data.
 2. Call `ReactDOM.renderToString` with that data.  
 

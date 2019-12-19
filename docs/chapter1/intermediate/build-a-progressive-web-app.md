@@ -39,7 +39,7 @@ $ yo electrode
 # ... answer rest of the questions and wait for app to be generated ...
 ```
 
-_Follow Prerequisites and skip to _[_Push Notifications_](./build-a-progressive-web-app.md)
+_Follow Prerequisites and skip to [Push Notifications](#push-notifications)._
 
 ### Prerequisites
 
@@ -202,7 +202,7 @@ Go ahead and click on the `Offline` checkbox in the Developer tools. Terminate y
 
 **NOTE: The **`Add to Homescreen` **banner will pop up only on Android devices with Chrome 42+. To simulate the banner on your desktop Chrome, navigate to **`Developer tools` **-> **`Applications` **-> **`Manifest` **and click on **`Add to homescreen`**.**
 
-### Push notifications {#push-notifications}
+### Push notifications
 
 The [Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API) requires a registered service worker so it can send notifications in the background when the web application isn't running. We already have our Service Worker generated with the help of `sw-config.js`. We only need to add a `Push` event to it. Create a new file `sw-events.js` inside the `client` directory and add the following to it:
 
@@ -431,7 +431,7 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
 ```
 
-Make sure you update the `API_KEY` with the one you previously generated in [Prerequisites](http://www.electrode.io/docs/service_workers.html#prerequisites).
+Make sure you update the `API_KEY` with the one you previously generated in [Prerequisites](#prerequisites).
 
 `navigator.serviceWorker.ready` is a promise that will resolve once a service worker is registered, and it returns a reference to the active [ServiceWorkerRegistration](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration). The showNotification() method of the ServiceWorkerRegistration interface creates a notification and returns a Promise that resolves to a [NotificationEvent](https://developer.mozilla.org/en-US/docs/Web/API/NotificationEvent).
 

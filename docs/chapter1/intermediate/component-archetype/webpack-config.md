@@ -35,4 +35,4 @@ Below are the partial configurations for a new component archetype webpack struc
 
 ---
 
-After understanding the new Component Archetype Structure, it's time to generate Electrode components by using the latest Electrode generators. With `generator-electrode`, we can create dynamic and performant Lerna-structured Electrode components. Let's explore and personalize this in our next section, [Create an Electrode Component.](../create-a-electrode-component.md)
+After understanding the new Component Archetype Structure, it's time to generate Electrode components by using the latest Electrode generators. With `generator-electrode`, we can create dynamic and performant Lerna-structured Electrode components. Let's explore and personalize this in our next section, [Create an Electrode Component.](../create-a-electrode-component)

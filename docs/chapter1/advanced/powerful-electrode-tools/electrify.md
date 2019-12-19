@@ -26,7 +26,7 @@ $ npm install --save electrode-electrify
 
 ### Example Applications
 
-* [Electrode Boilerplate](https://github.com/electrode-io/electrode-boilerplate-universal-react-node#electrode-electrify)
+* [Electrode Boilerplate](https://github.com/electrode-io/electrode/tree/master/samples/universal-react-node#electrode-electrify)
 
 ## Usage
 

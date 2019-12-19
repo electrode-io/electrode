@@ -182,6 +182,6 @@ The `electrode-archetype-react-app-dev/config/webpack` file exports similar para
 - `options` - The [options](#options) for the app archetype's webpack configuration composition.
 - `compose` - The [webpack-config-composer] instance that the app archetype has setup. It contains all the webpack partials and composer profiles from the app archetype.
 
-You can find this example in one of the [sample application](https://github.com/electrode-io/electrode/blob/master/samples/hapi-app/webpack.config.js).
+You can find this example in [one of the sample applications](https://github.com/electrode-io/electrode/blob/master/samples/hapi-app/webpack.config.js).
 
 [webpack-config-composer]: https://www.npmjs.com/package/webpack-config-composer
