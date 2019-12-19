@@ -35,7 +35,7 @@ $ npm install --save electrode-csrf-jwt
 
 ### Example Applications
 
-* [Electrode Boilerplate](https://github.com/electrode-io/electrode-boilerplate-universal-react-node#electrode-csrf-jwt)
+* [Electrode Boilerplate](https://github.com/electrode-io/electrode/tree/master/samples/universal-react-node#electrode-csrf-jwt)
 
 * [Express Example with Standalone Modules](https://github.com/docs-code-examples-electrode-io/express-example-with-standalone-electrode-modules#electrode-csrf-jwt)
 
@@ -66,7 +66,7 @@ Other configuration properties are optional and follow the [same usage as jsonwe
 
 ### Electrode {#stateless-validation-electrode}
 
-All server configurations in [Electrode apps](../../../what-is-electrode.md) are handled by the versatile [confippet](./confippet.md) module. The Stateless CSRF JWT Validation module can be easily configured by adding the following property to `config/default.json`:
+All server configurations in [Electrode apps](/docs/overview/what-is-electrode) are handled by the versatile [confippet](./confippet.md) module. The Stateless CSRF JWT Validation module can be easily configured by adding the following property to `config/default.json`:
 
 ```
 {
@@ -184,4 +184,4 @@ function doGet() {
 
 In this example a `POST` request to `/2` can be made using the token retrieved from the `/1` endpoint.
 
-You can checkout our [Electrode Boilerplate React Application](https://github.com/electrode-io/electrode#boilerplate-universal-react-node) for a more detailed example.
+You can checkout our [Electrode Boilerplate React Application](https://github.com/electrode-io/electrode/tree/master/samples/universal-react-node) for a more detailed example.

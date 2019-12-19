@@ -20,7 +20,7 @@ The Electrode Redux Router Engine is a tool that handles asynchronous data for R
     - [Route Redux Init Example](#route-redux-init-example)
       - [`options` param](#options-param)
     - [More Route Redux Init Details](#more-route-redux-init-details)
-- [Redux Router Engine](#redux-router-engine-1)
+- [Redux Router Engine](#redux-router-engine)
   - [Electrode](#electrode)
   - [Hapi/Express](#hapiexpress)
 - [Redirect](#redirect)
@@ -214,7 +214,7 @@ export default function reduxInit(options) {
 
 ## Redux Router Engine
 
-The [redux-router engine](#redux-router-engine) is initialized by passing a set of [options](#redux-router-engine-api) including [your react router routes](#define-your-routes) definition.
+The [redux-router engine](#redux-router-engine) is initialized by passing a set of [options](#apis) including [your react router routes](#define-your-routes) definition.
 
 The `ReduxRouterEngine` is stand-alone and can be used in **any** Redux/React application that runs on Express, Hapi or [WalmartLab's Electrode Platform](http://www.electrode.io/). Here's how to configure the engine depending on your framework:
 

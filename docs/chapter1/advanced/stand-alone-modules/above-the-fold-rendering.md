@@ -2,7 +2,7 @@
 
 The [above-the-fold-only-server-render](https://github.com/electrode-io/above-the-fold-only-server-render) module is a React component for optionally skipping server side rendering of components outside above-the-fold \(or inside of the viewport\). This component helps render your components on the server that are above the fold and the remaining components on the client.
 
-This module is a stand-alone module and can be configured to work in any [Electrode](#stateless-validation-electrode), [Express](#stateless-validation-express), or [Hapi](#stateless-validation-hapi) application.
+This module is a stand-alone module and can be configured to work in any [Electrode](https://github.com/electrode-io/electrode), [Express.js](https://github.com/electrode-samples/express-example-with-standalone-electrode-modules), or [Hapi.js](https://github.com/electrode-samples/hapijs-example-with-standalone-electrode-modules) application.
 
 ### Why do we need this module?
 
@@ -20,7 +20,7 @@ $ npm install --save above-the-fold-only-server-render
 
 ### Example Applications
 
-* [Electrode Boilerplate](https://github.com/electrode-io/electrode-boilerplate-universal-react-node#above-the-fold-only-server-render)
+* [Electrode Boilerplate](https://github.com/electrode-io/electrode/tree/master/samples/universal-react-node#above-the-fold-only-server-render)
 
 * [Express React Redux Webpack Example](https://github.com/docs-code-examples-electrode-io/express-react-redux-webpack#above-the-fold-only-server-render)
 
