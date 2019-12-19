@@ -5,7 +5,7 @@ const WebpackDevRelay = require("../../../lib/dev-admin/webpack-dev-relay");
 const { asyncVerify } = require("run-verify");
 const _ = require("lodash");
 
-describe.only("webpack-dev-relay", function() {
+describe("webpack-dev-relay", function() {
   it("should clear webpack dev data if dev server exits", () => {
     const wdr = new WebpackDevRelay();
     const wds = new EventEmitter();
