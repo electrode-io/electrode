@@ -105,7 +105,7 @@ export function loadSubApp(info, renderStart) {
   return info;
 }
 
-export function dynamicLoadSubApp({ name, id, timeout, onLoad, onError }) {
+export function dynamicLoadSubApp({ name, id, timeout = 15000, onLoad, onError }) {
   // TODO: timeout and callback
   const wsa = window.webSubApps;
   const lname = name.toLowerCase();
