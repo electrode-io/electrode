@@ -73,5 +73,5 @@ async function register(fastify) {
 }
 
 module.exports = fastifyPlugin(register, {
-  name: "electrode-dev-hapi"
+  name: "electrode-dev-fastify"
 });
