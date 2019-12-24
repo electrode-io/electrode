@@ -121,4 +121,4 @@ Set your token for heroku deployment:
 heroku config:set token='your-token-here'
 ```
 
-A great tool for testing your server requests is [Postman](https://www.getpostman.com/). Its user interface for viewing response objects and errors is incredible. For now, we will build out Your Awesome App. Navigate to [Intermediate: Add Routes](/docs/chapter1/intermediate/react-routes/add-routes), to add routing to the app and extend our UI to display our contributor array.
+A great tool for testing your server requests is [Postman](https://www.getpostman.com/). Its user interface for viewing response objects and errors is incredible. For now, we will build out Your Awesome App. Navigate to [Intermediate: Add Routes](/chapter1/intermediate/react-routes/add-routes.md) to add routing to the app and extend our UI to display our contributor array.

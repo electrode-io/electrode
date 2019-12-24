@@ -34,7 +34,7 @@ $ npm install --save electrode-confippet
 ## Usage
 
 * [Getting Started](#getting-started)
-* [configuration Composition](#config-composition)
+* [Configuration Composition](#config-composition)
 * [Environment Variables](#environment-variables)
 * [Using Templates](#using-templates)
 * [Usage in Node Modules](#usage-in-node-modules)

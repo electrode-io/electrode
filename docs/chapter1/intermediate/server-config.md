@@ -79,6 +79,6 @@ When all of our guests are invited to the House Party, our CSS modules kick in a
 
 Feel free to add your own personal touch and build out your Resource List House Party. You can compare your work to our [Heroku deployed example app](https://electrode-example-app.herokuapp.com/).
 
-When you're ready, you can deploy Your Awesome App to [Heroku](https://devcenter.heroku.com/categories/deployment) by following the previous steps in our [Getting Started: Build More](../../chapter1/further-develop-app/build-app.md) section. If you choose this step, make sure you set all of the Heroku configurations, including the one for our [GitHub Api](../../chapter1/intermediate/build-a-server-plugin.md).
+When you're ready, you can deploy Your Awesome App to [Heroku](https://devcenter.heroku.com/categories/deployment) by following the previous steps in our [Getting Started: Build More](/chapter1/further-develop-app/build-app.md) section. If you choose this step, make sure you set all of the Heroku configurations, including the one for our [GitHub Api](./build-a-server-plugin.md).
 
-You can also navigate to [Intermediate: More Deployments](more-deployments.md) to learn how to deploy with [Docker](./more-deployments/docker.md) and [Kubernetes](./more-deployments/kubernetes.md).
+You can also navigate to [Intermediate: More Deployments](./more-deployments.md) to learn how to deploy with [Docker](./more-deployments/docker.md) and [Kubernetes](./more-deployments/kubernetes.md).
