@@ -130,7 +130,7 @@ GHACCESS_TOKEN=YOUR_GITHUB_TOKEN NODE_ENV=production node .
 
 ## Deploy
 
-Since this is an Electrode application, it can be deployed the same way as any other Electrode app. You can use [Heroku](/docs/chapter1/further-develop-app/deploy-your-app) by following the steps in our Quick Start or use the [More Deployments](/docs/chapter1/intermediate/more-deployments) as a resource.
+Since this is an Electrode application, it can be deployed the same way as any other Electrode app. You can use [Heroku](/chapter1/further-develop-app/deploy-your-app.md) by following the steps in our Quick Start or use the [More Deployments](/chapter1/intermediate/more-deployments.md) as a resource.
 
 \*Just remember to set your GitHub token as an environment variable.
 
