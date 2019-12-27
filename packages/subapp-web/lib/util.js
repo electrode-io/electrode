@@ -112,7 +112,7 @@ const utils = {
     return cdnBundles;
   },
 
-  getCdnJsBundles(assets, routeOptions) {
+  getCdnJsBundles(assets, routeOptions, cdnAssetsFile) {
     if (CDN_JS_BUNDLES) {
       return CDN_JS_BUNDLES;
     }
@@ -125,7 +125,7 @@ const utils = {
 
     const bundleBase = utils.getBundleBase(routeOptions);
 
-    return (CDN_JS_BUNDLES = utils.mapCdnAssets(chunksById.js, bundleBase));
+    return (CDN_JS_BUNDLES = utils.mapCdnAssets(chunksById.js, bundleBase, cdnAssetsFile));
   },
 
   getChunksById(stats) {
