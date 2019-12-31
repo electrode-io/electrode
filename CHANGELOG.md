@@ -1,3 +1,24 @@
+# 12/31/2019
+
+- dev admin only read keys in TTY mode
+
+## Packages
+
+- `electrode-archetype-react-app@6.5.22` `(6.5.21 => 6.5.22)`
+- `electrode-archetype-react-app-dev@6.5.22` `(6.5.21 => 6.5.22)`
+
+## Commits
+
+- `packages/electrode-archetype-react-app[-dev]`
+
+  - Fix tests ([#1475](https://github.com/electrode-io/electrode/pull/1475)) [commit](http://github.com/electrode-io/electrode/commit/a3114aac60257648671a449121a5c8d43e9a7ff8)
+  - dev admin only read keys in TTY mode ([#1470](https://github.com/electrode-io/electrode/pull/1470)) [commit](http://github.com/electrode-io/electrode/commit/9cd31c465b9b30478e128ec0a999324703deda26)
+
+- `docs`
+
+  - link fixes ([#1476](https://github.com/electrode-io/electrode/pull/1476)) [commit](http://github.com/electrode-io/electrode/commit/4ce9bf9e83d5295a7596dfce7c2b163467f5f5a1)
+  - doc link fixes 2 ([#1479](https://github.com/electrode-io/electrode/pull/1479)) [commit](http://github.com/electrode-io/electrode/commit/ea206268010ee0fa6bd8a010464bef3dbaac80df)
+
 # 12/16/2019
 
 - fix dev-admin process command
