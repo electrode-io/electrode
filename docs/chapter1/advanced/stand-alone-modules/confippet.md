@@ -25,7 +25,7 @@ $ npm install --save electrode-confippet
 
 ### Example Applications
 
-* [Electrode Boilerplate](https://github.com/electrode-io/electrode-boilerplate-universal-react-node#electrode-confippet)
+* [Electrode Boilerplate](https://github.com/electrode-io/electrode/tree/master/samples/universal-react-node#electrode-confippet)
 
 * [Express Example with Standalone Modules](https://github.com/docs-code-examples-electrode-io/express-example-with-standalone-electrode-modules#electrode-confippet)
 
@@ -33,22 +33,22 @@ $ npm install --save electrode-confippet
 
 ## Usage
 
-* [Getting Started](https://docs.electrode.io/other/stand-alone-modules/confippet#getting-started)
-* [configuration Composition](https://docs.electrode.io/other/stand-alone-modules/confippet#config-composition)
-* [Environment Variables](https://docs.electrode.io/other/stand-alone-modules/confippet#environment-variables)
-* [Using Templates](https://docs.electrode.io/other/stand-alone-modules/confippet#using-templates)
-* [Usage in Node Modules](https://docs.electrode.io/other/stand-alone-modules/confippet#usage-in-node-modules)
-* [Customization](https://docs.electrode.io/other/stand-alone-modules/confippet#customization)
+* [Getting Started](#getting-started)
+* [Configuration Composition](#config-composition)
+* [Environment Variables](#environment-variables)
+* [Using Templates](#using-templates)
+* [Usage in Node Modules](#usage-in-node-modules)
+* [Customization](#customization)
 
 ### Getting Started
 
-Confippet can be integrated seamlessly into any existing [Express](https://docs.electrode.io/other/stand-alone-modules/confippet#express-setup), [Hapi](https://docs.electrode.io/other/stand-alone-modules/confippet#hapi-setup) or [Electrode](https://docs.electrode.io/other/stand-alone-modules/confippet#electrode-setup) application.
+Confippet can be integrated seamlessly into any existing [Express](#express-setup), [Hapi](#hapi-setup) or [Electrode](#electrode-setup) application.
 
 For example, let's say that in our application we need to access a database that is running locally in our development environment but is running on a specific hostname in our production environment. We would like to be able to get the correct hostname in our code based on the current environment. Confippet can help us with this. Follow the setup instructions for this example depending on your app's framework:
 
-* [Electrode](https://docs.electrode.io/other/stand-alone-modules/confippet#electrode-setup)
-* [Express](https://docs.electrode.io/other/stand-alone-modules/confippet#express-setup)
-* [Hapi](https://docs.electrode.io/other/stand-alone-modules/confippet#hapi-setup)
+* [Electrode](#electrode-setup)
+* [Express](#express-setup)
+* [Hapi](#hapi-setup)
 
 #### _**Electrode Setup**_
 
@@ -377,7 +377,7 @@ Confippet's `presetConfig` composes together files in the `config/` directory, i
 
 Where:
 
-* `EXT` can be any of `["json", "yaml", "js"]`. Confippet will load all of them, in that order. Each time it finds a configuration file, the values in that file will be loaded and merged into the configuration store. So `js` overrides `yaml`, which overrides `json`. You can add handlers for other file types and change their loading order—see [composeConfig](/chapter1/advanced/stand-alone-modules/confippet.md) for further details.
+* `EXT` can be any of `["json", "yaml", "js"]`. Confippet will load all of them, in that order. Each time it finds a configuration file, the values in that file will be loaded and merged into the configuration store. So `js` overrides `yaml`, which overrides `json`. You can add handlers for other file types and change their loading order—see [composeConfig](https://github.com/electrode-io/electrode-confippet/blob/master/compose.md) for further details.
 * `{instance}` is your app's instance string in multi-instance deployments \(specified by the `NODE_APP_INSTANCE`
   environment variable\).
 * `{short_hostname}` is your server name up to the first dot.
@@ -406,7 +406,7 @@ Confippet reads the following environment variables when composing a configurati
 * `NODE_CONFIG`- You can set this to a valid JSON string and Confippet will parse it to override the configuration.
 * `CONFIPPET*`- Any environment variables that starts with `CONFIPPET` will be parsed as JSON strings to override the configuration.
 
-### Using Templates {#using-templates}
+### Using Templates
 
 Values in your configuration files can be templates, which will be resolved with a preset context. See [processConfig](https://github.com/electrode-io/electrode-confippet/blob/master/templates.md) for more information about how to use configuration value templates.
 

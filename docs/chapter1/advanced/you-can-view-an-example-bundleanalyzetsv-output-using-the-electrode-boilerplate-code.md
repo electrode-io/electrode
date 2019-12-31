@@ -2,7 +2,7 @@
 
 ### Maximum Performance Out-of-the-Box
 
-In our [Getting Started](/chapter1.md) section, we introduced you to our Yeoman Electrode [Generator](https://github.com/electrode-io/electrode#yeoman-generator) and we constructed an impressive application with the built in technologies that the simple `yo electrode` command gave us (read our Getting Started: [What's Inside](../quick-start/whats-inside.md) to learn more):
+In our **Getting Started** section, we introduced you to our Yeoman Electrode [Generator](https://github.com/electrode-io/electrode#yeoman-generator) and we constructed an impressive application with the built in technologies that the simple `yo electrode` command gave us (read our Getting Started: [What's Inside](/chapter1/further-develop-app/whats-inside.md) to learn more):
 
 -   [React](https://facebook.github.io/react/index.html)
 
@@ -36,9 +36,9 @@ In our [Getting Started](/chapter1.md) section, we introduced you to our Yeoman 
 
 -   [Electrode-Docgen](https://github.com/electrode-io/electrode-docgen)
 
-This is the beginning foundation of the [Electrode Boilerplate](./you-can-view-an-example-bundleanalyzetsv-output-using-the-electrode-boilerplate-code.md). You have learned in the [Stand Alone Modules](./stand-alone-modules.md) section that each of the Electrode modules are agnostic and can be used individually to enhance one specific area of your application. However, integrated together, you have a supercharged application; one that is capable of handling the complex problems we face at WalmartLabs and reach maximum efficiency and performance.
+This is the beginning foundation of the Electrode Boilerplate. You have learned in the [Stand Alone Modules](./stand-alone-modules.md) section that each of the Electrode modules are agnostic and can be used individually to enhance one specific area of your application. However, integrated together, you have a supercharged application; one that is capable of handling the complex problems we face at WalmartLabs and reach maximum efficiency and performance.
 
-This boilerplate includes the [Electrode Generator](../quick-start/whats-inside.md) and it also has the following stand-alone modules and tools built in for peak optimization right out-of-the-box:
+This boilerplate includes the [Electrode Generator](/chapter1/further-develop-app/whats-inside.md) and it also has the following stand-alone modules and tools built in for peak optimization right out-of-the-box:
 
 -   [Above the Fold Rendering](./stand-alone-modules/above-the-fold-rendering.md)
 -   [Server Side Render Cache + Profiling](./stand-alone-modules/server-side-render-caching-+-profiling.md)

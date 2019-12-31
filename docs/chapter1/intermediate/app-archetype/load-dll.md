@@ -26,4 +26,4 @@ module.exports = {
 
 In development mode with `clap dev`, Electrode will ensure your DLL is properly loaded from your local.
 
-[electrode dll archetype]: ./chapter1/dll-archetype
+[electrode dll archetype]: ../dll-archetype/README.md

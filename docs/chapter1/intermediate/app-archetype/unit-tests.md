@@ -13,6 +13,7 @@ To run your karma unit tests, simply place your tests in the `test` folder. And 
 ### Disabling Karma
 
 If you prefer [Jest](#jest) only for writing your unit tests, then you can explicitly turn off Karma support and skip installing the dependencies required. To do that, use the `clap features` interactive command or use npm:
+
 ```sh
 npm r electrode-archetype-opt-karma
 ```
@@ -40,6 +41,7 @@ module.exports = {
 ### Disabling Jest
 
 If you prefer [Karma](#Karma) only for writing your unit tests, then you can explicitly turn off Jest support and skip installing the dependencies required. To do that, use the `clap features` interactive command or use npm:
+
 ```sh
 npm r electrode-archetype-opt-jest
 ```
