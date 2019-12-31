@@ -11,6 +11,10 @@ let CDN_ASSETS;
 let CDN_JS_BUNDLES;
 
 const utils = {
+  resetCdn() {
+    CDN_ASSETS = undefined;
+    CDN_JS_BUNDLES = undefined;
+  },
   //
   // Each subapp is an entry, which has an array of all bundle IDs
   // using IDs to lookup bundle name from assets.chunksById

@@ -4,6 +4,7 @@ const Path = require("path");
 const Fs = require("fs");
 
 const {
+  resetCdn,
   loadAssetsFromStats,
   getSubAppBundle,
   getChunksById,
@@ -85,6 +86,7 @@ describe("getBundleBase", function() {
 
 describe("getCdnJsBundles", function() {
   it("should generate mapping of chunk ID to CDN URLs", () => {
+    resetCdn();
     const { assets } = loadAssetsFromStats(Path.join(__dirname, "../data/prod-stats.json"));
     const cdnJsBundles = getCdnJsBundles(assets, {}, "test/data/cdn-assets.json");
     expect(cdnJsBundles[7]).contains("http://cdnasset.com/hash-123.js");
