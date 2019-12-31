@@ -11,6 +11,10 @@ let CDN_ASSETS;
 let CDN_JS_BUNDLES;
 
 const utils = {
+  resetCdn() {
+    CDN_ASSETS = undefined;
+    CDN_JS_BUNDLES = undefined;
+  },
   //
   // Each subapp is an entry, which has an array of all bundle IDs
   // using IDs to lookup bundle name from assets.chunksById
@@ -112,7 +116,7 @@ const utils = {
     return cdnBundles;
   },
 
-  getCdnJsBundles(assets, routeOptions) {
+  getCdnJsBundles(assets, routeOptions, cdnAssetsFile) {
     if (CDN_JS_BUNDLES) {
       return CDN_JS_BUNDLES;
     }
@@ -125,7 +129,7 @@ const utils = {
 
     const bundleBase = utils.getBundleBase(routeOptions);
 
-    return (CDN_JS_BUNDLES = utils.mapCdnAssets(chunksById.js, bundleBase));
+    return (CDN_JS_BUNDLES = utils.mapCdnAssets(chunksById.js, bundleBase, cdnAssetsFile));
   },
 
   getChunksById(stats) {
