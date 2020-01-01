@@ -1,14 +1,16 @@
 import React from "react";
 import { render, hydrate } from "react-dom";
 
-export function defaultRenderStart(Component, ssr, element, props) {
-  if (element) {
-    if (ssr) {
-      hydrate(<Component {...props} />, element);
+export default {
+  renderToElement({ Component, serverSideRendering, element, props }) {
+    if (element) {
+      if (serverSideRendering) {
+        hydrate(<Component {...props} />, element);
+      } else {
+        render(<Component {...props} />, element);
+      }
     } else {
-      render(<Component {...props} />, element);
+      return <Component {...props} />;
     }
-  } else {
-    return <Component {...props} />;
   }
-}
+};
