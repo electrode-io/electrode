@@ -1,21 +1,15 @@
-import React from "react";
-import { render, hydrate } from "react-dom";
 import { createBrowserHistory } from "history";
 import makeSubAppSpec from "./make-subapp-spec";
 
 export { default as makeSubAppSpec } from "./make-subapp-spec";
 export { default as AppContext } from "./app-context";
 
-export function defaultRenderStart(Component, ssr, element, props) {
-  if (element) {
-    if (ssr) {
-      hydrate(<Component {...props} />, element);
-    } else {
-      render(<Component {...props} />, element);
-    }
-  } else {
-    return <Component {...props} />;
-  }
+import ReactFrameworkLib from "./fe-framework-lib";
+
+let FrameworkLib = ReactFrameworkLib;
+
+export function setupFramework(frameworkLib) {
+  FrameworkLib = frameworkLib;
 }
 
 export function loadSubApp(info, renderStart) {
@@ -44,14 +38,11 @@ export function loadSubApp(info, renderStart) {
 
   subApp._renderStart =
     renderStart ||
-    function(options, element) {
-      return defaultRenderStart(
-        this.info.StartComponent || this.info.Component,
-        options.serverSideRendering,
-        element,
-        { ...options._prepared, ...options.props }
-      );
-    };
+    ((options, element) => {
+      const lib = new FrameworkLib({ subApp, element, options });
+
+      return lib.renderStart();
+    });
 
   subApp.start = options => {
     let instance;
@@ -156,5 +147,3 @@ export function hotReloadSubApp(info) {
   subApp.info = info;
   subApp._started.forEach(instance => setTimeout(() => subApp.start(instance), 0));
 }
-
-export const ssrContext = React.createContext("electrode-subapp-ssr");
