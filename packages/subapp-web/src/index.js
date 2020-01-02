@@ -4,12 +4,12 @@ import makeSubAppSpec from "./make-subapp-spec";
 export { default as makeSubAppSpec } from "./make-subapp-spec";
 export { default as AppContext } from "./app-context";
 
-import reactFrameWork from "./fe-framework-lib";
+import ReactFrameworkLib from "./fe-framework-lib";
 
-let FRAMEWORK_LIB = reactFrameWork;
+let FrameworkLib = ReactFrameworkLib;
 
 export function setupFramework(frameworkLib) {
-  FRAMEWORK_LIB = frameworkLib;
+  FrameworkLib = frameworkLib;
 }
 
 export function loadSubApp(info, renderStart) {
@@ -38,14 +38,11 @@ export function loadSubApp(info, renderStart) {
 
   subApp._renderStart =
     renderStart ||
-    function(options, element) {
-      return FRAMEWORK_LIB.renderToElement({
-        Component: this.info.StartComponent || this.info.Component,
-        serverSiderRendering: options.serverSideRendering,
-        element,
-        props: { ...options._prepared, ...options.props }
-      });
-    };
+    ((options, element) => {
+      const lib = new FrameworkLib({ subApp, element, options });
+
+      return lib.renderStart();
+    });
 
   subApp.start = options => {
     let instance;
