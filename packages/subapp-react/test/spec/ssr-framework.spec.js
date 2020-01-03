@@ -21,7 +21,25 @@ describe("SSR React framework", function() {
     expect(res).contains("has no StartComponent");
   });
 
-  it("should render Component from subapp", async () => {
+  it("should render Component from subapp with initial props from prepare", async () => {
+    const framework = new lib.FrameworkLib({
+      subApp: {
+        prepare: () => ({ test: "foo bar" }),
+        Component: props => {
+          return <div>Hello {props.test}</div>;
+        }
+      },
+      subAppServer: {},
+      props: { serverSideRendering: true },
+      context: {
+        user: {}
+      }
+    });
+    const res = await framework.handleSSR();
+    expect(res).contains("Hello foo bar");
+  });
+
+  it("should render Component from subapp with initial props from server's prepare", async () => {
     const framework = new lib.FrameworkLib({
       subApp: {
         Component: props => {

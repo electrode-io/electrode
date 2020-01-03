@@ -56,6 +56,10 @@
   },
   "nyc": {
     "all": true,
+    "require": [
+      "@babel/register",
+      "mocha"
+    ],
     "reporter": [
       "lcov",
       "text",
@@ -67,7 +71,8 @@
       "gulpfile.js",
       "dist",
       "test",
-      "browser"
+      "browser",
+      "**/.babelrc.js"
     ],
     "check-coverage": true,
     "statements": 0,
