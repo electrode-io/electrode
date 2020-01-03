@@ -1,5 +1,6 @@
 import React from "react";
-import { getBrowserHistory, AppContext } from "subapp-web";
+import { getBrowserHistory } from "subapp-web";
+import { AppContext } from "subapp-react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { Router, Route, Switch } from "react-router-dom";

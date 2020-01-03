@@ -4,6 +4,12 @@ const subappWeb = require("subapp-web");
 
 const { default: AppContext } = require("../browser/app-context");
 
+console.log(`
+
+subapp-react setup framework on server
+
+`);
+
 subappWeb.setupFramework(require("./framework-lib"));
 
 module.exports = {

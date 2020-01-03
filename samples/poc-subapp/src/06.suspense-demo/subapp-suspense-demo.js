@@ -1,5 +1,5 @@
 import React from "react";
-import { loadSubApp, AppContext } from "subapp-web";
+import { loadSubApp, AppContext } from "subapp-react";
 
 let data;
 
