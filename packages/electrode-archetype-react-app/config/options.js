@@ -29,7 +29,8 @@ const userConfigOptions = Object.assign(
   //
   // Check for any optional archetype in application's devDependencies or dependencies
   //
-  checkOptArchetypeInAppDep(appPkg.devDependencies).options,
+  process.env.NODE_ENV !== "production" &&
+    checkOptArchetypeInAppDep(appPkg.devDependencies).options,
   checkOptArchetypeInAppDep(appPkg.dependencies).options
 );
 

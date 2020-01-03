@@ -1,3 +1,18 @@
+# 1/3/2020
+
+- avoid dev mode stuff in production mode
+
+## Packages
+
+- `electrode-archetype-react-app@6.5.23` `(6.5.22 => 6.5.23)`
+- `electrode-archetype-react-app-dev@6.5.23` `(6.5.22 => 6.5.23)`
+
+## Commits
+
+- `packages/electrode-archetype-react-app[-dev]`
+
+  - avoid dev mode stuff in production mode ([#1483](https://github.com/electrode-io/electrode/pull/1483)) [commit](http://github.com/electrode-io/electrode/commit/990f0b33dd2bab176d000e280912e3346bcd83da)
+
 # 12/31/2019
 
 - dev admin only read keys in TTY mode
