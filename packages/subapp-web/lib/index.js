@@ -7,6 +7,7 @@ const { registerSubApp } = require("subapp-util");
 const { default: makeSubAppSpec } = require("../browser/make-subapp-spec");
 
 const { setupFramework } = require("./get-framework");
+
 module.exports = {
   // isomorphic functions
   loadSubApp(spec) {
