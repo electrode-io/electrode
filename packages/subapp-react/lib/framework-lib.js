@@ -2,14 +2,6 @@
 
 /* eslint-disable max-statements */
 
-/*
-   In order to support different UI framework like React/Preact,
-   first extract the framework specific code from subapp lib into
-   their own file.
-   Next allow a separate module to DI this into the subapp lib
-   in order to allow apps to use the framework they choose
- */
-
 const assert = require("assert");
 const optionalRequire = require("optional-require")(require);
 const React = require("react");
