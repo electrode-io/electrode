@@ -78,6 +78,38 @@ describe("SSR React framework", function() {
     expect(res).contains("Hello foo bar");
   });
 
+  it("should render Component with react context containing request", async () => {
+    const request = {};
+    const framework = new lib.FrameworkLib({
+      subApp: {
+        Component: () => {
+          return (
+            <lib.AppContext.Consumer>
+              {({ isSsr, ssr }) => {
+                ssr.request.foo = "bar";
+                return (
+                  <div>
+                    IS_SSR: {`${Boolean(isSsr)}`} HAS_REQUEST: {ssr && ssr.request ? "yes" : "no"}
+                  </div>
+                );
+              }}
+            </lib.AppContext.Consumer>
+          );
+        }
+      },
+      subAppServer: {
+        prepare: () => ({ test: "foo bar" })
+      },
+      props: { serverSideRendering: true },
+      context: {
+        user: { request }
+      }
+    });
+    const res = await framework.handleSSR();
+    expect(res).contains(`<div>IS_SSR: true HAS_REQUEST: yes</div>`);
+    expect(request.foo).equals("bar");
+  });
+
   it("should render subapp with react-router StaticRouter", async () => {
     const TestComponent = () => {
       return <div>Hello test path</div>;
