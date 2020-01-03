@@ -8,7 +8,6 @@ module.exports = {
   },
 
   setupFramework(frameworkLib) {
-    console.log("subapp-web setup framework for server");
     FrameworkLib = frameworkLib;
   }
 };
