@@ -9,8 +9,17 @@ const _ = require("lodash");
 
 let CDN_ASSETS;
 let CDN_JS_BUNDLES;
+let FrameworkLib;
 
 const utils = {
+  getFramework(ref) {
+    return new FrameworkLib(ref);
+  },
+
+  setupFramework(frameworkLib) {
+    FrameworkLib = frameworkLib;
+  },
+
   resetCdn() {
     CDN_ASSETS = undefined;
     CDN_JS_BUNDLES = undefined;

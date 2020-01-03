@@ -19,8 +19,6 @@ const retrieveUrl = require("request");
 const util = require("./util");
 const { loadSubAppByName, loadSubAppServerByName } = require("subapp-util");
 
-const { getFramework } = require("./get-framework");
-
 module.exports = function setup(setupContext, token) {
   const props = token.props;
 
@@ -163,7 +161,7 @@ module.exports = function setup(setupContext, token) {
           props
         };
         if (props.serverSideRendering) {
-          const lib = getFramework(ref);
+          const lib = util.getFramework(ref);
           ssrContent = await lib.handleSSR(ref);
           initialStateStr = lib.initialStateStr;
         } else {
