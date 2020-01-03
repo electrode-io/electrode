@@ -1,12 +1,11 @@
-import React from "react";
-import { getBrowserHistory } from "subapp-web";
+import { React, getBrowserHistory } from "subapp-react";
+import { reduxLoadSubApp } from "subapp-redux";
 import { withRouter } from "react-router";
 import { Router, Route, Switch } from "react-router-dom";
 import { createStore } from "redux";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Large from "../components/large";
-import { reduxLoadSubApp } from "subapp-redux";
 
 // import AdvGridList from "../components/adv-grid";
 

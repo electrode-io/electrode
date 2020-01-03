@@ -1,4 +1,4 @@
-import React from "react";
+import { React } from "subapp-react";
 import { reduxLoadSubApp } from "subapp-redux";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
