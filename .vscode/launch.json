@@ -40,6 +40,22 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "subapp-react Mocha Tests",
+      "cwd": "${workspaceFolder}/packages/subapp-react",
+      "program": "${workspaceFolder}/packages/subapp-react/node_modules/mocha/bin/_mocha",
+      "args": [
+        "-u",
+        "tdd",
+        "--timeout",
+        "999999",
+        "--colors",
+        "${workspaceFolder}/packages/subapp-react/test/spec"
+      ],
+      "internalConsoleOptions": "openOnSessionStart"
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "subapp-util Mocha Tests",
       "cwd": "${workspaceFolder}/packages/subapp-util",
       "program": "${workspaceFolder}/packages/subapp-util/node_modules/mocha/bin/_mocha",

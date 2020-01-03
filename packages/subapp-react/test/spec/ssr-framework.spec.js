@@ -1,7 +1,10 @@
 "use strict";
 
+const url = require("url");
 const React = require("react"); // eslint-disable-line
 const lib = require("../../lib");
+const { withRouter } = require("react-router");
+const { Route, Switch } = require("react-router-dom"); // eslint-disable-line
 
 describe("SSR React framework", function() {
   it("should setup React framework", () => {
@@ -19,6 +22,23 @@ describe("SSR React framework", function() {
     });
     const res = await framework.handleSSR();
     expect(res).contains("has no StartComponent");
+  });
+
+  it("should render subapp with w/o initial props if no prepare provided", async () => {
+    const framework = new lib.FrameworkLib({
+      subApp: {
+        Component: props => {
+          return <div>Hello {props.test}</div>;
+        }
+      },
+      subAppServer: {},
+      props: { serverSideRendering: true },
+      context: {
+        user: {}
+      }
+    });
+    const res = await framework.handleSSR();
+    expect(res).contains("Hello <");
   });
 
   it("should render Component from subapp with initial props from prepare", async () => {
@@ -56,5 +76,36 @@ describe("SSR React framework", function() {
     });
     const res = await framework.handleSSR();
     expect(res).contains("Hello foo bar");
+  });
+
+  it("should render subapp with react-router StaticRouter", async () => {
+    const TestComponent = () => {
+      return <div>Hello test path</div>;
+    };
+    const Component = withRouter(props => {
+      return (
+        <Switch>
+          <Route path="/test" component={TestComponent} {...props} />
+          <Route path="/foo" component={() => "bar"} {...props} />
+        </Switch>
+      );
+    });
+    const framework = new lib.FrameworkLib({
+      subApp: {
+        useReactRouter: true,
+        Component
+      },
+      subAppServer: {
+        prepare: () => ({ test: "foo bar" })
+      },
+      props: { serverSideRendering: true },
+      context: {
+        user: {
+          request: { url: url.parse("http://localhost/test") }
+        }
+      }
+    });
+    const res = await framework.handleSSR();
+    expect(res).contains("Hello test path<");
   });
 });
