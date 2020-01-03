@@ -78,6 +78,29 @@ describe("SSR React framework", function() {
     expect(res).contains("Hello foo bar");
   });
 
+  it("should render Component with suspense using react-async-ssr", async () => {
+    const framework = new lib.FrameworkLib({
+      subApp: {
+        Component: props => {
+          return (
+            <React.Suspense fallback={<h1>Loading...</h1>}>
+              <div>Hello {props.test}</div>
+            </React.Suspense>
+          );
+        }
+      },
+      subAppServer: {
+        prepare: () => ({ test: "foo bar" })
+      },
+      props: { serverSideRendering: true, suspenseSsr: true },
+      context: {
+        user: {}
+      }
+    });
+    const res = await framework.handleSSR();
+    expect(res).contains("Hello foo bar");
+  });
+
   it("should render Component with react context containing request", async () => {
     const request = {};
     const framework = new lib.FrameworkLib({
