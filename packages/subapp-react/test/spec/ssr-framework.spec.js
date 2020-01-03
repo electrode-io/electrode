@@ -1,5 +1,6 @@
 "use strict";
 
+const React = require("react"); // eslint-disable-line
 const lib = require("../../lib");
 
 describe("SSR React framework", function() {
@@ -18,5 +19,24 @@ describe("SSR React framework", function() {
     });
     const res = await framework.handleSSR();
     expect(res).contains("has no StartComponent");
+  });
+
+  it("should render Component from subapp", async () => {
+    const framework = new lib.FrameworkLib({
+      subApp: {
+        Component: props => {
+          return <div>Hello {props.test}</div>;
+        }
+      },
+      subAppServer: {
+        prepare: () => ({ test: "foo bar" })
+      },
+      props: { serverSideRendering: true },
+      context: {
+        user: {}
+      }
+    });
+    const res = await framework.handleSSR();
+    expect(res).contains("Hello foo bar");
   });
 });
