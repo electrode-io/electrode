@@ -53,6 +53,26 @@ const Component = () => {
 };
 ```
 
+## Support for React Router
+
+If you want to use [react-router] in your application, then you need to install the dependencies:
+
+- [react-router] and [react-router-dom]
+
+ie:
+
+```bash
+npm i react-router react-router-dom
+```
+
+And then set the `useReactRouter` flag to true in your subapp:
+
+```js
+import { React, loadSubApp } from "subapp-react";
+
+export default loadSubApp({ name: "MySubapp", Component, useReactRouter: true });
+```
+
 ## License
 
 Copyright (c) 2016-present, WalmartLabs
@@ -60,3 +80,9 @@ Copyright (c) 2016-present, WalmartLabs
 Licensed under the [Apache License, Version 2.0].
 
 [apache license, version 2.0]: https://www.apache.org/licenses/LICENSE-2.0
+[react-router]: https://www.npmjs.com/package/react-router
+[react-router-dom]: https://www.npmjs.com/package/react-router-dom
+
+```
+
+```
