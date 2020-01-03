@@ -18,7 +18,7 @@ class FrameworkLib {
   }
 
   async handleSSR() {
-    const { subApp, subAppServer, props } = this.ref;
+    const { subApp, subAppServer, options } = this.ref;
     // If subapp wants to use react router and server didn't specify a StartComponent,
     // then create a wrap StartComponent that uses react router's StaticRouter
     if (subApp.useReactRouter && !subAppServer.StartComponent) {
@@ -31,14 +31,14 @@ class FrameworkLib {
       return `<!-- serverSideRendering ${subApp.name} has no StartComponent -->`;
     } else if (subApp.__redux) {
       return await this.doReduxSSR();
-    } else if (props.serverSideRendering === true) {
+    } else if (options.serverSideRendering === true) {
       return await this.doSSR();
     }
 
     return "";
   }
 
-  renderTo(element, options = {}) {
+  renderTo(element, options) {
     if (options.streaming) {
       assert(!options.suspenseSsr, "streaming and suspense SSR together are not supported");
       if (options.hydrateServerData) {
@@ -100,11 +100,11 @@ class FrameworkLib {
       initialProps = await prepare({ request, context });
     }
 
-    return await this.renderTo(this.createTopComponent(initialProps), this.ref.props);
+    return await this.renderTo(this.createTopComponent(initialProps), this.ref.options);
   }
 
   async doReduxSSR() {
-    const { subApp, subAppServer, context, props } = this.ref;
+    const { subApp, subAppServer, context, options } = this.ref;
     const { request } = context.user;
     // subApp.reduxReducers || subApp.reduxCreateStore) {
     // if sub app has reduxReducers or reduxCreateStore then assume it's using
@@ -137,7 +137,7 @@ class FrameworkLib {
       this.store,
       `redux subapp ${subApp.name} didn't provide store, reduxCreateStore, or reducers`
     );
-    if (props.serverSideRendering === true) {
+    if (options.serverSideRendering === true) {
       assert(Provider, "subapp-web: react-redux Provider not available");
       // finally render the element with Redux Provider and the store created
       return await this.renderTo(

@@ -18,7 +18,7 @@ describe("SSR React framework", function() {
     const framework = new lib.FrameworkLib({
       subApp: {},
       subAppServer: {},
-      props: {}
+      options: {}
     });
     const res = await framework.handleSSR();
     expect(res).contains("has no StartComponent");
@@ -32,7 +32,7 @@ describe("SSR React framework", function() {
         }
       },
       subAppServer: {},
-      props: { serverSideRendering: true },
+      options: { serverSideRendering: true },
       context: {
         user: {}
       }
@@ -50,7 +50,7 @@ describe("SSR React framework", function() {
         }
       },
       subAppServer: {},
-      props: { serverSideRendering: true },
+      options: { serverSideRendering: true },
       context: {
         user: {}
       }
@@ -69,7 +69,7 @@ describe("SSR React framework", function() {
       subAppServer: {
         prepare: () => ({ test: "foo bar" })
       },
-      props: { serverSideRendering: true },
+      options: { serverSideRendering: true },
       context: {
         user: {}
       }
@@ -92,7 +92,7 @@ describe("SSR React framework", function() {
       subAppServer: {
         prepare: () => ({ test: "foo bar" })
       },
-      props: { serverSideRendering: true, suspenseSsr: true },
+      options: { serverSideRendering: true, suspenseSsr: true },
       context: {
         user: {}
       }
@@ -123,7 +123,7 @@ describe("SSR React framework", function() {
       subAppServer: {
         prepare: () => ({ test: "foo bar" })
       },
-      props: { serverSideRendering: true },
+      options: { serverSideRendering: true },
       context: {
         user: { request }
       }
@@ -153,7 +153,7 @@ describe("SSR React framework", function() {
       subAppServer: {
         prepare: () => ({ test: "foo bar" })
       },
-      props: { serverSideRendering: true },
+      options: { serverSideRendering: true },
       context: {
         user: {
           request: { url: url.parse("http://localhost/test") }
