@@ -19,10 +19,8 @@ const retrieveUrl = require("request");
 const util = require("./util");
 const { loadSubAppByName, loadSubAppServerByName } = require("subapp-util");
 
-const FrameworkLib = require("./framework-lib");
-
 module.exports = function setup(setupContext, token) {
-  const props = token.props;
+  const options = token.props;
 
   // TODO: create JSON schema to validate props
 
@@ -40,7 +38,7 @@ module.exports = function setup(setupContext, token) {
   // TODO: Need a way to figure out all the subapps need for a page and send out script
   // tags ASAP in <header> so browser can start fetching them before entire page is loaded.
 
-  const name = props.name;
+  const name = options.name;
   const routeData = setupContext.routeOptions.__internals;
   const bundleAsset = util.getSubAppBundle(name, routeData.assets);
   const bundleBase = util.getBundleBase(setupContext.routeOptions);
@@ -73,7 +71,7 @@ module.exports = function setup(setupContext, token) {
   const prepareSubAppJsBundle = () => {
     const webpackDev = process.env.WEBPACK_DEV === "true";
 
-    if (props.inlineScript === "always" || (props.inlineScript === true && !webpackDev)) {
+    if (options.inlineScript === "always" || (options.inlineScript === true && !webpackDev)) {
       if (!webpackDev) {
         // if we have to inline the subapp's JS bundle, we load it for production mode
         const src = Fs.readFileSync(Path.resolve("dist/js", bundleAsset.name)).toString();
@@ -84,7 +82,7 @@ module.exports = function setup(setupContext, token) {
     } else {
       // if should inline script for webpack dev mode
       // make sure we retrieve from webpack dev server and inline the script later
-      inlineSubAppJs = webpackDev && Boolean(props.inlineScript);
+      inlineSubAppJs = webpackDev && Boolean(options.inlineScript);
     }
   };
 
@@ -139,7 +137,7 @@ module.exports = function setup(setupContext, token) {
   loadSubApp();
   prepareSubAppJsBundle();
 
-  const clientProps = JSON.stringify(_.pick(props, ["useReactRouter"]));
+  const clientProps = JSON.stringify(_.pick(options, ["useReactRouter"]));
 
   return {
     process: context => {
@@ -160,14 +158,14 @@ module.exports = function setup(setupContext, token) {
           context,
           subApp,
           subAppServer,
-          props
+          options
         };
-        if (props.serverSideRendering) {
-          const lib = new FrameworkLib(ref);
+        if (options.serverSideRendering) {
+          const lib = util.getFramework(ref);
           ssrContent = await lib.handleSSR(ref);
           initialStateStr = lib.initialStateStr;
         } else {
-          ssrContent = `<!-- serverSideRendering flag is ${props.serverSideRendering} -->`;
+          ssrContent = `<!-- serverSideRendering flag is ${options.serverSideRendering} -->`;
         }
 
         let markBundlesLoadedJs = "";
@@ -181,13 +179,13 @@ module.exports = function setup(setupContext, token) {
         // If user specified an element ID for a DOM Node to host the SSR content then
         // add the div for the Node and the SSR content to it, and add JS to start the
         // sub app on load.
-        if (props.elementId) {
-          outputSpot.add(`<div id="${props.elementId}">\n`);
+        if (options.elementId) {
+          outputSpot.add(`<div id="${options.elementId}">\n`);
           outputSpot.add(ssrContent);
           outputSpot.add(`\n</div><script>${markBundlesLoadedJs}startSubAppOnLoad({
   name: "${name}",
-  elementId: "${props.elementId}",
-  serverSideRendering: ${Boolean(props.serverSideRendering)},
+  elementId: "${options.elementId}",
+  serverSideRendering: ${Boolean(options.serverSideRendering)},
   clientProps: ${clientProps},
   initialState: ${initialStateStr || "{}"}
 })</script>\n`);
@@ -197,7 +195,7 @@ module.exports = function setup(setupContext, token) {
       };
 
       const asyncProcess = async () => {
-        if (props.timestamp) {
+        if (options.timestamp) {
           outputSpot.add(`<!-- time: ${Date.now()} -->`);
         }
 
@@ -215,7 +213,7 @@ ${err.stack}
             request.log(["error"], { msg: `SSR subapp ${name} failed`, err });
           }
         } finally {
-          if (props.timestamp) {
+          if (options.timestamp) {
             outputSpot.add(`<!-- time: ${Date.now()} -->`);
           }
 

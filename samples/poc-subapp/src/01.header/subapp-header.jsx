@@ -1,6 +1,5 @@
 // @subapp@ {name: "Header"}
-import React from "react";
-import { loadSubApp } from "subapp-web";
+import { loadSubApp, React } from "subapp-react";
 
 const Header = () => {
   return (

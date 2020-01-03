@@ -1,12 +1,12 @@
-import React from "react";
-import { getBrowserHistory, AppContext } from "subapp-web";
+import { reduxLoadSubApp } from "subapp-redux";
+import { React, getBrowserHistory } from "subapp-react";
+import { AppContext } from "subapp-react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { Router, Route, Switch } from "react-router-dom";
 import { Products } from "../components/products";
 import { Navigation } from "../components/navigation";
 import { Deals } from "../components/deals";
-import { reduxLoadSubApp } from "subapp-redux";
 import reduxReducers from "./reducers";
 
 const Home = () => {
