@@ -2,7 +2,6 @@ import { createBrowserHistory } from "history";
 import makeSubAppSpec from "./make-subapp-spec";
 
 export { default as makeSubAppSpec } from "./make-subapp-spec";
-export { default as AppContext } from "./app-context";
 
 import ReactFrameworkLib from "./fe-framework-lib";
 
