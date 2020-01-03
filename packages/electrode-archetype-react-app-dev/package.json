@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-app-dev",
-  "version": "6.5.22",
+  "version": "6.5.23",
   "description": "Electrode NodeJS/React Application Archetype (Development)",
   "main": "index.js",
   "homepage": "http://www.electrode.io",
