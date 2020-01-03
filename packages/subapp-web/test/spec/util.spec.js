@@ -9,7 +9,9 @@ const {
   getSubAppBundle,
   getChunksById,
   getBundleBase,
-  getCdnJsBundles
+  getCdnJsBundles,
+  getFramework,
+  setupFramework
 } = require("../../lib/util");
 
 describe("loadAssetsFromStats", () => {
@@ -90,5 +92,17 @@ describe("getCdnJsBundles", function() {
     const { assets } = loadAssetsFromStats(Path.join(__dirname, "../data/prod-stats.json"));
     const cdnJsBundles = getCdnJsBundles(assets, {}, "test/data/cdn-assets.json");
     expect(cdnJsBundles[7]).contains("http://cdnasset.com/hash-123.js");
+  });
+});
+
+describe("get/set framework", function() {
+  it("should allow set/get framework lib", () => {
+    function FL(ref) {
+      this.ref = ref;
+    }
+
+    setupFramework(FL);
+    const lib = getFramework({ test: "framework setup" });
+    expect(lib.ref.test).to.equal("framework setup");
   });
 });
