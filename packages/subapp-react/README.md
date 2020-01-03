@@ -29,6 +29,30 @@ export default loadSubApp({ name: "MyComponent", Component });
 
 `react` and `react-dom` are specified as peerDependencies, so you must install them as part of your `package.json` dependencies.
 
+## SSR App Context
+
+This module also exports a default React context that SSR uses to pass in server `request` object to your React component.
+
+ie:
+
+```js
+import { AppContext } from "subapp-react";
+
+const Component = () => {
+  return (
+    <AppContext.Consumer>
+      {({ isSsr, ssr, subApp }) => {
+        return (
+          <div>
+            IS_SSR: {`${Boolean(isSsr)}`} HAS_REQUEST: {ssr && ssr.request ? "yes" : "no"}
+          </div>
+        );
+      }}
+    </AppContext.Consumer>
+  );
+};
+```
+
 ## License
 
 Copyright (c) 2016-present, WalmartLabs
