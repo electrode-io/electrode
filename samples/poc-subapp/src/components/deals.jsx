@@ -1,5 +1,4 @@
-import React from "react";
-import { dynamicLoadSubApp } from "subapp-web";
+import { React, dynamicLoadSubApp } from "subapp-react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
