@@ -141,7 +141,8 @@ class FrameworkLib {
       assert(Provider, "subapp-web: react-redux Provider not available");
       // finally render the element with Redux Provider and the store created
       return await this.renderTo(
-        React.createElement(Provider, { store: this.store }, this.createTopComponent())
+        React.createElement(Provider, { store: this.store }, this.createTopComponent()),
+        options
       );
     }
     return "";

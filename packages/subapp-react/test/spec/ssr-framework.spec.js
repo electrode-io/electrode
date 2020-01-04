@@ -6,6 +6,8 @@ const lib = require("../../lib");
 const { withRouter } = require("react-router");
 const { Route, Switch } = require("react-router-dom"); // eslint-disable-line
 const { asyncVerify } = require("run-verify");
+const Redux = require("redux");
+const { connect } = require("react-redux");
 
 describe("SSR React framework", function() {
   it("should setup React framework", () => {
@@ -165,6 +167,89 @@ describe("SSR React framework", function() {
     });
     const res = await framework.handleSSR();
     expect(res).contains("Hello foo bar");
+  });
+
+  it("should init redux store and render Component", async () => {
+    const Component = connect(x => x)(props => <div>Hello {props.test}</div>);
+
+    const framework = new lib.FrameworkLib({
+      subApp: {
+        __redux: true,
+        Component,
+        reduxCreateStore: initState => Redux.createStore(x => x, initState),
+        prepare: () => ({ test: "foo bar" })
+      },
+      subAppServer: {},
+      options: { serverSideRendering: true },
+      context: {
+        user: {}
+      }
+    });
+    const res = await framework.handleSSR();
+    expect(res).contains("Hello foo bar");
+    expect(framework.initialStateStr).equals(`{"test":"foo bar"}`);
+  });
+
+  it("should init redux store and render Component but doesn't attach initial state", async () => {
+    const Component = connect(x => x)(props => <div>Hello {props.test}</div>);
+
+    const framework = new lib.FrameworkLib({
+      subApp: {
+        __redux: true,
+        Component,
+        reduxCreateStore: initState => Redux.createStore(x => x, initState),
+        prepare: () => ({ test: "foo bar" })
+      },
+      subAppServer: { attachInitialState: false },
+      options: { serverSideRendering: true },
+      context: {
+        user: {}
+      }
+    });
+    const res = await framework.handleSSR();
+    expect(res).contains("Hello foo bar");
+    expect(framework.initialStateStr).equals(undefined);
+  });
+
+  it("should init redux store but doesn't render Component if serverSideRendering is not true", async () => {
+    const Component = connect(x => x)(props => <div>Hello {props.test}</div>);
+
+    const framework = new lib.FrameworkLib({
+      subApp: {
+        __redux: true,
+        Component,
+        reduxCreateStore: initState => Redux.createStore(x => x, initState),
+        prepare: () => ({ test: "foo bar" })
+      },
+      subAppServer: { attachInitialState: false },
+      options: { serverSideRendering: false },
+      context: {
+        user: {}
+      }
+    });
+    const res = await framework.handleSSR();
+    expect(res).equals("");
+    expect(framework.initialStateStr).equals(undefined);
+  });
+
+  it("should init redux store with empty state without prepare and render Component", async () => {
+    const Component = connect(x => x)(props => <div>Hello {props.test}</div>);
+
+    const framework = new lib.FrameworkLib({
+      subApp: {
+        __redux: true,
+        Component,
+        reduxCreateStore: initState => Redux.createStore(x => x, initState)
+      },
+      subAppServer: {},
+      options: { serverSideRendering: true },
+      context: {
+        user: {}
+      }
+    });
+    const res = await framework.handleSSR();
+    expect(res).contains("Hello <");
+    expect(framework.initialStateStr).equals(`{}`);
   });
 
   it("should hydrate render Component with suspense using react-async-ssr", async () => {
