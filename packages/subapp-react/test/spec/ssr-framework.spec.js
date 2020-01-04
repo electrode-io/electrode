@@ -59,6 +59,32 @@ describe("SSR React framework", function() {
     expect(res).contains("Hello foo bar");
   });
 
+  it("should render Component from subapp with hydration info", async () => {
+    const framework = new lib.FrameworkLib({
+      subApp: {
+        prepare: () => ({
+          test: "foo bar"
+        }),
+        Component: props => {
+          return <div>Hello {props.test}</div>;
+        }
+      },
+      subAppServer: {},
+      options: {
+        serverSideRendering: true,
+        hydrateServerData: true
+      },
+      context: {
+        user: {}
+      }
+    });
+    // data-reactroot isn't getting created due to Context.Provider
+    // see https://github.com/facebook/react/issues/15012
+    const res = await framework.handleSSR();
+    // but the non-static renderToString adds a <!-- --> for some reason
+    expect(res).contains("Hello <!-- -->foo bar");
+  });
+
   it("should render Component from subapp with initial props from server's prepare", async () => {
     const framework = new lib.FrameworkLib({
       subApp: {
