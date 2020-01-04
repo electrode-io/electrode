@@ -24,6 +24,16 @@ describe("SSR React framework", function() {
     expect(res).contains("has no StartComponent");
   });
 
+  it("should not do SSR if serverSideRendering is not true", async () => {
+    const framework = new lib.FrameworkLib({
+      subApp: { Component: () => {} },
+      subAppServer: {},
+      options: { serverSideRendering: false }
+    });
+    const res = await framework.handleSSR();
+    expect(res).equals("");
+  });
+
   it("should render subapp with w/o initial props if no prepare provided", async () => {
     const framework = new lib.FrameworkLib({
       subApp: {
@@ -102,6 +112,30 @@ describe("SSR React framework", function() {
     });
     const res = await framework.handleSSR();
     expect(res).contains("Hello foo bar");
+  });
+
+  it("should hydrate render Component with suspense using react-async-ssr", async () => {
+    const framework = new lib.FrameworkLib({
+      subApp: {
+        Component: props => {
+          return (
+            <React.Suspense fallback={<h1>Loading...</h1>}>
+              <div>Hello {props.test}</div>
+            </React.Suspense>
+          );
+        }
+      },
+      subAppServer: {
+        prepare: () => ({ test: "foo bar" })
+      },
+      options: { serverSideRendering: true, suspenseSsr: true, hydrateServerData: true },
+      context: {
+        user: {}
+      }
+    });
+    const res = await framework.handleSSR();
+    // react-async-ssr includes data-reactroot
+    expect(res).contains(`<div data-reactroot="">Hello <!-- -->foo bar</div>`);
   });
 
   it("should render Component with suspense using react-async-ssr", async () => {
