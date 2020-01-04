@@ -5,6 +5,7 @@ const React = require("react"); // eslint-disable-line
 const lib = require("../../lib");
 const { withRouter } = require("react-router");
 const { Route, Switch } = require("react-router-dom"); // eslint-disable-line
+const { asyncVerify } = require("run-verify");
 
 describe("SSR React framework", function() {
   it("should setup React framework", () => {
@@ -67,6 +68,58 @@ describe("SSR React framework", function() {
     });
     const res = await framework.handleSSR();
     expect(res).contains("Hello foo bar");
+  });
+
+  it("should render Component with streaming if enabled", () => {
+    const framework = new lib.FrameworkLib({
+      subApp: {
+        prepare: () => ({ test: "foo bar" }),
+        Component: props => {
+          return <div>Hello {props.test}</div>;
+        }
+      },
+      subAppServer: {},
+      options: { serverSideRendering: true, streaming: true },
+      context: {
+        user: {}
+      }
+    });
+    return asyncVerify(
+      () => framework.handleSSR(),
+      (stream, next) => {
+        let res = "";
+        stream.on("data", data => (res += data.toString()));
+        stream.on("end", () => next(null, res));
+        stream.on("error", next);
+      },
+      res => expect(res).contains("Hello foo bar")
+    );
+  });
+
+  it("should hydrate render Component with streaming if enabled", () => {
+    const framework = new lib.FrameworkLib({
+      subApp: {
+        prepare: () => ({ test: "foo bar" }),
+        Component: props => {
+          return <div>Hello {props.test}</div>;
+        }
+      },
+      subAppServer: {},
+      options: { serverSideRendering: true, streaming: true, hydrateServerData: true },
+      context: {
+        user: {}
+      }
+    });
+    return asyncVerify(
+      () => framework.handleSSR(),
+      (stream, next) => {
+        let res = "";
+        stream.on("data", data => (res += data.toString()));
+        stream.on("end", () => next(null, res));
+        stream.on("error", next);
+      },
+      res => expect(res).contains(`<div>Hello <!-- -->foo bar</div>`)
+    );
   });
 
   it("should render Component from subapp with hydration info", async () => {
