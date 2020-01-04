@@ -11,7 +11,6 @@ class FrameworkLib {
 
     const props = { ...options._prepared, ...options.props };
     const Component = subApp.info.StartComponent || subApp.info.Component;
-
     if (element) {
       if (options.serverSideRendering) {
         hydrate(<Component {...props} />, element);
