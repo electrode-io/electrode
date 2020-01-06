@@ -1,0 +1,60 @@
+{
+  "name": "poc-subapp-pmin",
+  "version": "0.0.1",
+  "description": "SubApp minimum sample for preact",
+  "homepage": "http://test",
+  "author": "Electrode (http://www.electrode.io/)",
+  "contributors": [
+    "Joel Chen <xchen@walmartlabs.com>"
+  ],
+  "files": [
+    "server",
+    "src",
+    "lib",
+    "dist"
+  ],
+  "main": "lib/server/index.js",
+  "keywords": [
+    "test",
+    "electrode"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "test/test-app"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">= 8",
+    "npm": ">= 5"
+  },
+  "scripts": {
+    "dev": "clap dev",
+    "test": "clap check",
+    "build": "clap build"
+  },
+  "dependencies": {
+    "@hapi/inert": "^5.2.2",
+    "electrode-archetype-react-app": "^6.3.0",
+    "electrode-confippet": "^1.5.0",
+    "electrode-server": "^3.0.0",
+    "electrode-static-paths": "^3.0.0",
+    "preact": "^10.1.1",
+    "preact-render-to-string": "^5.1.3",
+    "redux": "^4.0.4",
+    "subapp-pbundle": "../../packages/subapp-pbundle",
+    "subapp-server": "../../packages/subapp-server"
+  },
+  "devDependencies": {
+    "electrode-archetype-react-app-dev": "^6.3.0"
+  },
+  "fyn": {
+    "dependencies": {
+      "electrode-archetype-react-app": "../../packages/electrode-archetype-react-app",
+      "electrode-archetype-opt-preact": "../../packages/electrode-archetype-opt-preact"
+    },
+    "devDependencies": {
+      "electrode-archetype-react-app-dev": "../../packages/electrode-archetype-react-app-dev"
+    }
+  },
+  "optionalDependencies": {}
+}
