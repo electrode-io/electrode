@@ -13,3 +13,5 @@ export { h, Component, render } from "preact";
 export { default as AppContext } from "./app-context";
 
 export { FrameworkLib };
+
+export { reduxBundlerLoadSubApp } from "./redux-bundler";
