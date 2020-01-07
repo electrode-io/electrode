@@ -9,8 +9,7 @@
     "url": "https://github.com/electrode-io/electrode.git"
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org",
-    "tag": "jest24"
+    "registry": "https://registry.npmjs.org"
   },
   "bugs": {
     "url": "https://github.com/electrode-io/electrode/issues"
