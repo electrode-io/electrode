@@ -1,4 +1,4 @@
-import { h, render, hydrate } from "preact";
+import { createElement, render, hydrate } from "preact";
 import { loadSubApp } from "subapp-web";
 import { Provider } from 'redux-bundler-preact';
 import { setStoreContainer, getReduxCreateStore } from "./shared";
@@ -14,24 +14,22 @@ export function reduxRenderStart(options) {
 
   if (options.serverSideRendering) {
     hydrate(
-      <Provider store={store}>
-        <Component />
-      </Provider>,
+      createElement(Provider, {
+        store: store
+      }, createElement(Component, null)),
       options.element
     );
   } else {
     render(
-      <Provider store={store}>
-        <Component />
-      </Provider>,
+      createElement(Provider, {
+        store: store
+      }, createElement(Component, null)),
       options.element
     );
   }
 
   return store;
 }
-
-let store;
 
 //
 // Load a subapp with redux-bundler support
