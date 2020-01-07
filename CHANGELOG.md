@@ -1122,6 +1122,36 @@ Minor fixes:
 
   - Updated document for reverse proxy ([#1329](https://github.com/electrode-io/electrode/pull/1329)) [commit](http://github.com/electrode-io/electrode/commit/7ce42b7627ec0a082fde09bda67f62ad866362e3)
 
+# 8/22/2019
+
+## Packages
+
+- `electrode-archetype-opt-jest@24.0.1` `(24.0.0 => 24.0.1)`
+
+## Commits
+
+- `packages/electrode-archetype-opt-jest`
+
+  - update auto gen files [commit](http://github.com/electrode-io/electrode/commit/e9af7120b731dadbf08066f5b63eb14dcb519315)
+
+- `packages/opt-archetype-check`
+
+  - check user's dep even if no archetype config found ([#1335](https://github.com/electrode-io/electrode/pull/1335)) [commit](http://github.com/electrode-io/electrode/commit/d619658eb5617e4e18e8f901d327f17f3d78739a)
+
+# 8/22/2019
+
+## Packages
+
+- `electrode-archetype-opt-jest@24.0.0` `(1.0.0 => 24.0.0)`
+
+## Commits
+
+- `packages/electrode-archetype-opt-jest`
+
+  - update to jest@24.9.0 [commit](http://github.com/electrode-io/electrode/commit/1eac2150aa0c34711bab0ec9af8805935ec8736c)
+  - dep: @types/jest, eslint-plugin-jest ([#1332](https://github.com/electrode-io/electrode/pull/1332)) [commit](http://github.com/electrode-io/electrode/commit/7b235a5db660b766fb8378c932358c1631958698)
+  - add publishConfig [commit](http://github.com/electrode-io/electrode/commit/b0d534e503397c82d8b7194e7bbf303774646882)
+
 # 8/21/2019
 
 ## Packages
