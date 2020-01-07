@@ -1,3 +1,89 @@
+# 1/7/2020
+
+- remove beta from ver7
+
+## Packages
+
+- `@xarc/create-app@2.0.2` `(2.0.1 => 2.0.2)`
+- `electrode-archetype-react-app@7.0.2` `(7.0.1 => 7.0.2)`
+- `electrode-archetype-react-app-dev@7.0.2` `(7.0.1 => 7.0.2)`
+- `electrode-archetype-react-component@7.0.2` `(7.0.1 => 7.0.2)`
+- `electrode-archetype-react-component-dev@7.0.2` `(7.0.1 => 7.0.2)`
+- `electrode-ignite@3.0.17` `(3.0.16 => 3.0.17)`
+- `generator-electrode@6.0.2` `(6.0.1 => 6.0.2)`
+- `subapp-pbundle@0.0.3` `(0.0.2 => 0.0.3)`
+- `subapp-react@0.0.3` `(0.0.2 => 0.0.3)`
+- `subapp-redux@1.0.12` `(1.0.11 => 1.0.12)`
+- `subapp-web@1.0.11` `(1.0.10 => 1.0.11)`
+
+## Commits
+
+- `packages/create-app`
+
+  - remove beta from ver7 [commit](http://github.com/electrode-io/electrode/commit/f84dbd825e2755f8a76c5b0cd41f87633db90034)
+
+- `packages/electrode-archetype-react-app[-dev]`
+
+  - Publish [commit](http://github.com/electrode-io/electrode/commit/1086a008be2ee61c8080083073606a914b6dbd4e)
+  - avoid dev mode stuff in production mode ([#1483](https://github.com/electrode-io/electrode/pull/1483)) [commit](http://github.com/electrode-io/electrode/commit/990f0b33dd2bab176d000e280912e3346bcd83da)
+  - Publish [commit](http://github.com/electrode-io/electrode/commit/55c491cf5935fe15fb4725a61f3c640713a8d689)
+  - react-app-dev: Add dev-admin for fastify ([#1478](https://github.com/electrode-io/electrode/pull/1478)) [commit](http://github.com/electrode-io/electrode/commit/4a018e1457f9811b2b146fe06879adac77b61850)
+  - dev admin webpack plugin for fastify ([#1474](https://github.com/electrode-io/electrode/pull/1474)) [commit](http://github.com/electrode-io/electrode/commit/93e967ad76fe1f5a5956336f6bdbf916212babe9)
+  - Fix tests ([#1475](https://github.com/electrode-io/electrode/pull/1475)) [commit](http://github.com/electrode-io/electrode/commit/a3114aac60257648671a449121a5c8d43e9a7ff8)
+  - dev admin only read keys in TTY mode ([#1470](https://github.com/electrode-io/electrode/pull/1470)) [commit](http://github.com/electrode-io/electrode/commit/9cd31c465b9b30478e128ec0a999324703deda26)
+  - remove beta from ver7 [commit](http://github.com/electrode-io/electrode/commit/f84dbd825e2755f8a76c5b0cd41f87633db90034)
+
+- `packages/electrode-archetype-react-component[-dev]`
+
+  - remove beta from ver7 [commit](http://github.com/electrode-io/electrode/commit/f84dbd825e2755f8a76c5b0cd41f87633db90034)
+
+- `packages/electrode-ignite`
+
+  - remove beta from ver7 [commit](http://github.com/electrode-io/electrode/commit/f84dbd825e2755f8a76c5b0cd41f87633db90034)
+
+- `packages/generator-electrode`
+
+  - remove beta from ver7 [commit](http://github.com/electrode-io/electrode/commit/f84dbd825e2755f8a76c5b0cd41f87633db90034)
+
+- `packages/subapp-pbundle`
+
+  - add subapp support for preact & redux-bundler ([#1487](https://github.com/electrode-io/electrode/pull/1487)) [commit](http://github.com/electrode-io/electrode/commit/7619241cb0b530e22190ae9d5a87573f8eb88d75)
+  - remove beta from ver7 [commit](http://github.com/electrode-io/electrode/commit/f84dbd825e2755f8a76c5b0cd41f87633db90034)
+
+- `packages/subapp-react`
+
+  - add subapp support for preact & redux-bundler ([#1487](https://github.com/electrode-io/electrode/pull/1487)) [commit](http://github.com/electrode-io/electrode/commit/7619241cb0b530e22190ae9d5a87573f8eb88d75)
+  - add tests for subapp-react ([#1486](https://github.com/electrode-io/electrode/pull/1486)) [commit](http://github.com/electrode-io/electrode/commit/6aac4309903600941616d467ed4886acbd0deb2e)
+  - extract React specific code into subapp-react module ([#1485](https://github.com/electrode-io/electrode/pull/1485)) [commit](http://github.com/electrode-io/electrode/commit/599e4b7bd40750d614e2c9411eeebcd29b27df9f)
+  - remove beta from ver7 [commit](http://github.com/electrode-io/electrode/commit/f84dbd825e2755f8a76c5b0cd41f87633db90034)
+
+- `packages/subapp-redux`
+
+  - remove beta from ver7 [commit](http://github.com/electrode-io/electrode/commit/f84dbd825e2755f8a76c5b0cd41f87633db90034)
+
+- `packages/subapp-web`
+
+  - extract React specific code into subapp-react module ([#1485](https://github.com/electrode-io/electrode/pull/1485)) [commit](http://github.com/electrode-io/electrode/commit/599e4b7bd40750d614e2c9411eeebcd29b27df9f)
+  - extract FE React specific code to another file ([#1482](https://github.com/electrode-io/electrode/pull/1482)) [commit](http://github.com/electrode-io/electrode/commit/880d5e35a572eebd2ff47c5f501f1b297741c8f8)
+  - multi framework support, step1: extract framework specific code ([#1480](https://github.com/electrode-io/electrode/pull/1480)) [commit](http://github.com/electrode-io/electrode/commit/342f3a07bc659523d5655c70e1dc1ff88eff47f6)
+  - subapp.start handles inline rendering ([#1477](https://github.com/electrode-io/electrode/pull/1477)) [commit](http://github.com/electrode-io/electrode/commit/bcad095b47d46e98312c374775a72615958c8cfc)
+  - first inline SubApp PoC ([#1472](https://github.com/electrode-io/electrode/pull/1472)) [commit](http://github.com/electrode-io/electrode/commit/ca708a1871ded2773f38c21749e93ab92ed36287)
+  - remove beta from ver7 [commit](http://github.com/electrode-io/electrode/commit/f84dbd825e2755f8a76c5b0cd41f87633db90034)
+
+- `.vscode`
+
+  - extract React specific code into subapp-react module ([#1485](https://github.com/electrode-io/electrode/pull/1485)) [commit](http://github.com/electrode-io/electrode/commit/599e4b7bd40750d614e2c9411eeebcd29b27df9f)
+
+- `docs`
+
+  - doc link fixes 2 ([#1479](https://github.com/electrode-io/electrode/pull/1479)) [commit](http://github.com/electrode-io/electrode/commit/ea206268010ee0fa6bd8a010464bef3dbaac80df)
+  - link fixes ([#1476](https://github.com/electrode-io/electrode/pull/1476)) [commit](http://github.com/electrode-io/electrode/commit/4ce9bf9e83d5295a7596dfce7c2b163467f5f5a1)
+
+- `MISC`
+
+  - Update changelog [commit](http://github.com/electrode-io/electrode/commit/1a601ffc811f0fa0c23e24149b116b2aeaf65ca0)
+  - Update changelog [commit](http://github.com/electrode-io/electrode/commit/336541cbb64d5c4ed5647abbfe25a413307dbd9e)
+
 # 1/3/2020
 
 - avoid dev mode stuff in production mode
@@ -40,206 +126,206 @@
 
 ### Directly Updated
 
--   `@xarc/create-app@2.0.0-beta7.0` `(1.0.3 => 2.0.0-beta7.0)`
--   `electrode-archetype-opt-critical-css@1.0.4` `(1.0.3 => 1.0.4)`
--   `electrode-archetype-opt-eslint@1.0.4` `(1.0.3 => 1.0.4)`
--   `electrode-archetype-opt-flow@1.0.3` `(1.0.2 => 1.0.3)`
--   `electrode-archetype-opt-inferno@0.2.12` `(0.2.11 => 0.2.12)`
--   `electrode-archetype-opt-jest@1.0.4` `(1.0.3 => 1.0.4)`
--   `electrode-archetype-opt-karma@2.0.8` `(2.0.7 => 2.0.8)`
--   `electrode-archetype-opt-less@1.0.3` `(1.0.2 => 1.0.3)`
--   `electrode-archetype-opt-mocha@1.0.4` `(1.0.3 => 1.0.4)`
--   `electrode-archetype-opt-phantomjs@1.0.3` `(1.0.2 => 1.0.3)`
--   `electrode-archetype-opt-postcss@1.0.5` `(1.0.4 => 1.0.5)`
--   `electrode-archetype-opt-preact@1.0.1` `(1.0.0 => 1.0.1)`
--   `electrode-archetype-opt-pwa@1.0.7` `(1.0.6 => 1.0.7)`
--   `electrode-archetype-opt-react@2.0.5` `(2.0.4 => 2.0.5)`
--   `electrode-archetype-opt-react-intl@1.0.1` `(1.0.0 => 1.0.1)`
--   `electrode-archetype-opt-sass@1.0.10` `(1.0.9 => 1.0.10)`
--   `electrode-archetype-opt-sinon@1.0.4` `(1.0.3 => 1.0.4)`
--   `electrode-archetype-opt-stylus@1.0.3` `(1.0.2 => 1.0.3)`
--   `electrode-archetype-opt-typescript@1.0.4` `(1.0.3 => 1.0.4)`
--   `electrode-archetype-react-app@7.0.0-beta7.0` `(6.5.21 => 7.0.0-beta7.0)`
--   `electrode-archetype-react-app-dev@7.0.0-beta7.0` `(6.5.21 => 7.0.0-beta7.0)`
--   `electrode-archetype-react-component@7.0.0-beta7.0` `(6.1.11 => 7.0.0-beta7.0)`
--   `electrode-archetype-react-component-dev@7.0.0-beta7.0` `(6.1.11 => 7.0.0-beta7.0)`
--   `electrode-redux-router-engine@4.0.0` `(3.0.0 => 4.0.0)`
--   `generator-electrode@6.0.0-beta7.0` `(5.1.10 => 6.0.0-beta7.0)`
+- `@xarc/create-app@2.0.0-beta7.0` `(1.0.3 => 2.0.0-beta7.0)`
+- `electrode-archetype-opt-critical-css@1.0.4` `(1.0.3 => 1.0.4)`
+- `electrode-archetype-opt-eslint@1.0.4` `(1.0.3 => 1.0.4)`
+- `electrode-archetype-opt-flow@1.0.3` `(1.0.2 => 1.0.3)`
+- `electrode-archetype-opt-inferno@0.2.12` `(0.2.11 => 0.2.12)`
+- `electrode-archetype-opt-jest@1.0.4` `(1.0.3 => 1.0.4)`
+- `electrode-archetype-opt-karma@2.0.8` `(2.0.7 => 2.0.8)`
+- `electrode-archetype-opt-less@1.0.3` `(1.0.2 => 1.0.3)`
+- `electrode-archetype-opt-mocha@1.0.4` `(1.0.3 => 1.0.4)`
+- `electrode-archetype-opt-phantomjs@1.0.3` `(1.0.2 => 1.0.3)`
+- `electrode-archetype-opt-postcss@1.0.5` `(1.0.4 => 1.0.5)`
+- `electrode-archetype-opt-preact@1.0.1` `(1.0.0 => 1.0.1)`
+- `electrode-archetype-opt-pwa@1.0.7` `(1.0.6 => 1.0.7)`
+- `electrode-archetype-opt-react@2.0.5` `(2.0.4 => 2.0.5)`
+- `electrode-archetype-opt-react-intl@1.0.1` `(1.0.0 => 1.0.1)`
+- `electrode-archetype-opt-sass@1.0.10` `(1.0.9 => 1.0.10)`
+- `electrode-archetype-opt-sinon@1.0.4` `(1.0.3 => 1.0.4)`
+- `electrode-archetype-opt-stylus@1.0.3` `(1.0.2 => 1.0.3)`
+- `electrode-archetype-opt-typescript@1.0.4` `(1.0.3 => 1.0.4)`
+- `electrode-archetype-react-app@7.0.0-beta7.0` `(6.5.21 => 7.0.0-beta7.0)`
+- `electrode-archetype-react-app-dev@7.0.0-beta7.0` `(6.5.21 => 7.0.0-beta7.0)`
+- `electrode-archetype-react-component@7.0.0-beta7.0` `(6.1.11 => 7.0.0-beta7.0)`
+- `electrode-archetype-react-component-dev@7.0.0-beta7.0` `(6.1.11 => 7.0.0-beta7.0)`
+- `electrode-redux-router-engine@4.0.0` `(3.0.0 => 4.0.0)`
+- `generator-electrode@6.0.0-beta7.0` `(5.1.10 => 6.0.0-beta7.0)`
 
 ### Lerna Updated
 
--   `electrode-ignite@3.0.15` `(3.0.14 => 3.0.15)`
+- `electrode-ignite@3.0.15` `(3.0.14 => 3.0.15)`
 
 ## Commits
 
--   `packages/create-app`
+- `packages/create-app`
 
-    -   [major] update archetype dep to beta7 [commit](http://github.com/electrode-io/electrode/commit/766a695b09dc23ad505b32e076ee23959c6f7813)
-    -   create-app stylus default off [commit](http://github.com/electrode-io/electrode/commit/e4d979d71a43073a2d91849570fa25dde0b8fb43)
-    -   test-create-app task [commit](http://github.com/electrode-io/electrode/commit/bab537840c07a436817098d848637b6349578851)
-    -   Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
-    -   Drop webpack dev server ([#1431](https://github.com/electrode-io/electrode/pull/1431)) [commit](http://github.com/electrode-io/electrode/commit/bfc8794ad6482959a1325fb1766f1080c1b48f56)
-    -   Remove electrode-bundle-analyzer ([#1420](https://github.com/electrode-io/electrode/pull/1420)) [commit](http://github.com/electrode-io/electrode/commit/dc3ab6fe699b2c1dd69b1406ecce7ac0e862aa4f)
+  - [major] update archetype dep to beta7 [commit](http://github.com/electrode-io/electrode/commit/766a695b09dc23ad505b32e076ee23959c6f7813)
+  - create-app stylus default off [commit](http://github.com/electrode-io/electrode/commit/e4d979d71a43073a2d91849570fa25dde0b8fb43)
+  - test-create-app task [commit](http://github.com/electrode-io/electrode/commit/bab537840c07a436817098d848637b6349578851)
+  - Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
+  - Drop webpack dev server ([#1431](https://github.com/electrode-io/electrode/pull/1431)) [commit](http://github.com/electrode-io/electrode/commit/bfc8794ad6482959a1325fb1766f1080c1b48f56)
+  - Remove electrode-bundle-analyzer ([#1420](https://github.com/electrode-io/electrode/pull/1420)) [commit](http://github.com/electrode-io/electrode/commit/dc3ab6fe699b2c1dd69b1406ecce7ac0e862aa4f)
 
--   `packages/electrode-archetype-opt-critical-css`
+- `packages/electrode-archetype-opt-critical-css`
 
-    -   Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
-    -   Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
+  - Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
+  - Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
 
--   `packages/electrode-archetype-opt-eslint`
+- `packages/electrode-archetype-opt-eslint`
 
-    -   Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
-    -   Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
+  - Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
+  - Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
 
--   `packages/electrode-archetype-opt-flow`
+- `packages/electrode-archetype-opt-flow`
 
-    -   Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
-    -   Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
+  - Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
+  - Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
 
--   `packages/electrode-archetype-opt-inferno`
+- `packages/electrode-archetype-opt-inferno`
 
-    -   Add archetype Preact support ([#1465](https://github.com/electrode-io/electrode/pull/1465)) [commit](http://github.com/electrode-io/electrode/commit/e1693c2fd6f99f94725a09de662a4e8e1ba3595f)
-    -   Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
-    -   Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
+  - Add archetype Preact support ([#1465](https://github.com/electrode-io/electrode/pull/1465)) [commit](http://github.com/electrode-io/electrode/commit/e1693c2fd6f99f94725a09de662a4e8e1ba3595f)
+  - Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
+  - Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
 
--   `packages/electrode-archetype-opt-jest`
+- `packages/electrode-archetype-opt-jest`
 
-    -   Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
-    -   Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
+  - Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
+  - Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
 
--   `packages/electrode-archetype-opt-karma`
+- `packages/electrode-archetype-opt-karma`
 
-    -   Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
-    -   Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
+  - Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
+  - Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
 
--   `packages/electrode-archetype-opt-less`
+- `packages/electrode-archetype-opt-less`
 
-    -   Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
-    -   Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
+  - Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
+  - Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
 
--   `packages/electrode-archetype-opt-mocha`
+- `packages/electrode-archetype-opt-mocha`
 
-    -   Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
-    -   Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
+  - Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
+  - Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
 
--   `packages/electrode-archetype-opt-phantomjs`
+- `packages/electrode-archetype-opt-phantomjs`
 
-    -   Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
-    -   Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
+  - Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
+  - Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
 
--   `packages/electrode-archetype-opt-postcss`
+- `packages/electrode-archetype-opt-postcss`
 
-    -   Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
-    -   Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
+  - Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
+  - Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
 
--   `packages/electrode-archetype-opt-preact`
+- `packages/electrode-archetype-opt-preact`
 
-    -   Add archetype Preact support ([#1465](https://github.com/electrode-io/electrode/pull/1465)) [commit](http://github.com/electrode-io/electrode/commit/e1693c2fd6f99f94725a09de662a4e8e1ba3595f)
+  - Add archetype Preact support ([#1465](https://github.com/electrode-io/electrode/pull/1465)) [commit](http://github.com/electrode-io/electrode/commit/e1693c2fd6f99f94725a09de662a4e8e1ba3595f)
 
--   `packages/electrode-archetype-opt-pwa`
+- `packages/electrode-archetype-opt-pwa`
 
-    -   Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
-    -   Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
+  - Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
+  - Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
 
--   `packages/electrode-archetype-opt-react`
+- `packages/electrode-archetype-opt-react`
 
-    -   Add archetype Preact support ([#1465](https://github.com/electrode-io/electrode/pull/1465)) [commit](http://github.com/electrode-io/electrode/commit/e1693c2fd6f99f94725a09de662a4e8e1ba3595f)
-    -   Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
-    -   Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
+  - Add archetype Preact support ([#1465](https://github.com/electrode-io/electrode/pull/1465)) [commit](http://github.com/electrode-io/electrode/commit/e1693c2fd6f99f94725a09de662a4e8e1ba3595f)
+  - Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
+  - Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
 
--   `packages/electrode-archetype-opt-react-intl`
+- `packages/electrode-archetype-opt-react-intl`
 
-    -   Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
-    -   Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
-    -   Remove electrode-bundle-analyzer ([#1420](https://github.com/electrode-io/electrode/pull/1420)) [commit](http://github.com/electrode-io/electrode/commit/dc3ab6fe699b2c1dd69b1406ecce7ac0e862aa4f)
+  - Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
+  - Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
+  - Remove electrode-bundle-analyzer ([#1420](https://github.com/electrode-io/electrode/pull/1420)) [commit](http://github.com/electrode-io/electrode/commit/dc3ab6fe699b2c1dd69b1406ecce7ac0e862aa4f)
 
--   `packages/electrode-archetype-opt-sass`
+- `packages/electrode-archetype-opt-sass`
 
-    -   Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
-    -   Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
+  - Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
+  - Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
 
--   `packages/electrode-archetype-opt-sinon`
+- `packages/electrode-archetype-opt-sinon`
 
-    -   Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
-    -   Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
+  - Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
+  - Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
 
--   `packages/electrode-archetype-opt-stylus`
+- `packages/electrode-archetype-opt-stylus`
 
-    -   Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
-    -   Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
+  - Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
+  - Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
 
--   `packages/electrode-archetype-opt-typescript`
+- `packages/electrode-archetype-opt-typescript`
 
-    -   Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
-    -   Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
+  - Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
+  - Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
 
--   `packages/electrode-archetype-react-app[-dev]`
+- `packages/electrode-archetype-react-app[-dev]`
 
-    -   update archetype peer dep for v7 beta [commit](http://github.com/electrode-io/electrode/commit/3bf570b3d5a551b591536c926b686449e45dbf56)
-    -   Add archetype Preact support ([#1465](https://github.com/electrode-io/electrode/pull/1465)) [commit](http://github.com/electrode-io/electrode/commit/e1693c2fd6f99f94725a09de662a4e8e1ba3595f)
-    -   Include description in features selector ([#1456](https://github.com/electrode-io/electrode/pull/1456)) [commit](http://github.com/electrode-io/electrode/commit/9c2e7fb64e0bf0c161f942fd282fdca963e8182e)
-    -   Create a features menu for random-access feature selection ([#1455](https://github.com/electrode-io/electrode/pull/1455)) [commit](http://github.com/electrode-io/electrode/commit/7e0a793e60a23faaeffb2a8c93c04d597e7fa763)
-    -   add dep for dev: prompts@2.2.1 ([#1453](https://github.com/electrode-io/electrode/pull/1453)) [commit](http://github.com/electrode-io/electrode/commit/b93490d1417bff46c8bc98c08ab4e1f60ed104ad)
-    -   Fix defect where exception is thrown if package is not available ([#1451](https://github.com/electrode-io/electrode/pull/1451)) [commit](http://github.com/electrode-io/electrode/commit/4a7c46497238569b089a2963305c7eef8653298d)
-    -   If devOnly is undefined, default to true. ([#1450](https://github.com/electrode-io/electrode/pull/1450)) [commit](http://github.com/electrode-io/electrode/commit/3dac9f69da37025091b4be9d1274e05fadb36989)
-    -   Allow use to break out of prompts in features task ([#1452](https://github.com/electrode-io/electrode/pull/1452)) [commit](http://github.com/electrode-io/electrode/commit/2f17574caf883e4617a2bf0aadf10d58bd098e77)
-    -   Do not run npm install by default ([#1454](https://github.com/electrode-io/electrode/pull/1454)) [commit](http://github.com/electrode-io/electrode/commit/2a0c8ceace76a81e6dbfeb32962bd44275dd0e27)
-    -   avoid failure checking for options in clap [commit](http://github.com/electrode-io/electrode/commit/08427ffaceb64ec63b5a564197e96a29314e8df5)
-    -   Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
-    -   new task features ([#1439](https://github.com/electrode-io/electrode/pull/1439)) [commit](http://github.com/electrode-io/electrode/commit/b3cba6f3d94cae0a82d2ce6f433d30301d5bee9e)
-    -   Make lib/src directory structure default ([#1436](https://github.com/electrode-io/electrode/pull/1436)) [commit](http://github.com/electrode-io/electrode/commit/80749da538f71abcb874c22901ce97c79d9dd6b4)
-    -   Drop webpack dev server ([#1431](https://github.com/electrode-io/electrode/pull/1431)) [commit](http://github.com/electrode-io/electrode/commit/bfc8794ad6482959a1325fb1766f1080c1b48f56)
-    -   Removing electrode-webpack-reporter ([#1425](https://github.com/electrode-io/electrode/pull/1425)) [commit](http://github.com/electrode-io/electrode/commit/2ea9250cb42d33d637f072189ba696a636dd6696)
-    -   Remove nodemon and associated tasks ([#1424](https://github.com/electrode-io/electrode/pull/1424)) [commit](http://github.com/electrode-io/electrode/commit/c6d984c94504eb9850836d0dbf064ed82cd1c746)
-    -   Remove cssModuleStylusSupport flag ([#1423](https://github.com/electrode-io/electrode/pull/1423)) [commit](http://github.com/electrode-io/electrode/commit/aacafe7572d9e33e0161e46f6078b8bc1b79b643)
-    -   Remove OPTIMIZE_STATS and associated tasks ([#1421](https://github.com/electrode-io/electrode/pull/1421)) [commit](http://github.com/electrode-io/electrode/commit/8ad412896fc138a279228c4afb7a157cf4e98383)
-    -   Remove electrode-bundle-analyzer ([#1420](https://github.com/electrode-io/electrode/pull/1420)) [commit](http://github.com/electrode-io/electrode/commit/dc3ab6fe699b2c1dd69b1406ecce7ac0e862aa4f)
-    -   removing prop-types ([#1418](https://github.com/electrode-io/electrode/pull/1418)) [commit](http://github.com/electrode-io/electrode/commit/d330c97e7472a8fee1993b74477162a69e7dd2e2)
-    -   [major] Drop optimizeModulesForProduction option ([#1416](https://github.com/electrode-io/electrode/pull/1416)) [commit](http://github.com/electrode-io/electrode/commit/7155a0d6ba36684a8a217b93aa90e44d19229bcb)
-    -   [major] Replace webpack [hash] with [contenthash] ([#1373](https://github.com/electrode-io/electrode/pull/1373)) [commit](http://github.com/electrode-io/electrode/commit/180215a1e29b2d8f664b3070a1b0086600cd3be1)
+  - update archetype peer dep for v7 beta [commit](http://github.com/electrode-io/electrode/commit/3bf570b3d5a551b591536c926b686449e45dbf56)
+  - Add archetype Preact support ([#1465](https://github.com/electrode-io/electrode/pull/1465)) [commit](http://github.com/electrode-io/electrode/commit/e1693c2fd6f99f94725a09de662a4e8e1ba3595f)
+  - Include description in features selector ([#1456](https://github.com/electrode-io/electrode/pull/1456)) [commit](http://github.com/electrode-io/electrode/commit/9c2e7fb64e0bf0c161f942fd282fdca963e8182e)
+  - Create a features menu for random-access feature selection ([#1455](https://github.com/electrode-io/electrode/pull/1455)) [commit](http://github.com/electrode-io/electrode/commit/7e0a793e60a23faaeffb2a8c93c04d597e7fa763)
+  - add dep for dev: prompts@2.2.1 ([#1453](https://github.com/electrode-io/electrode/pull/1453)) [commit](http://github.com/electrode-io/electrode/commit/b93490d1417bff46c8bc98c08ab4e1f60ed104ad)
+  - Fix defect where exception is thrown if package is not available ([#1451](https://github.com/electrode-io/electrode/pull/1451)) [commit](http://github.com/electrode-io/electrode/commit/4a7c46497238569b089a2963305c7eef8653298d)
+  - If devOnly is undefined, default to true. ([#1450](https://github.com/electrode-io/electrode/pull/1450)) [commit](http://github.com/electrode-io/electrode/commit/3dac9f69da37025091b4be9d1274e05fadb36989)
+  - Allow use to break out of prompts in features task ([#1452](https://github.com/electrode-io/electrode/pull/1452)) [commit](http://github.com/electrode-io/electrode/commit/2f17574caf883e4617a2bf0aadf10d58bd098e77)
+  - Do not run npm install by default ([#1454](https://github.com/electrode-io/electrode/pull/1454)) [commit](http://github.com/electrode-io/electrode/commit/2a0c8ceace76a81e6dbfeb32962bd44275dd0e27)
+  - avoid failure checking for options in clap [commit](http://github.com/electrode-io/electrode/commit/08427ffaceb64ec63b5a564197e96a29314e8df5)
+  - Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
+  - new task features ([#1439](https://github.com/electrode-io/electrode/pull/1439)) [commit](http://github.com/electrode-io/electrode/commit/b3cba6f3d94cae0a82d2ce6f433d30301d5bee9e)
+  - Make lib/src directory structure default ([#1436](https://github.com/electrode-io/electrode/pull/1436)) [commit](http://github.com/electrode-io/electrode/commit/80749da538f71abcb874c22901ce97c79d9dd6b4)
+  - Drop webpack dev server ([#1431](https://github.com/electrode-io/electrode/pull/1431)) [commit](http://github.com/electrode-io/electrode/commit/bfc8794ad6482959a1325fb1766f1080c1b48f56)
+  - Removing electrode-webpack-reporter ([#1425](https://github.com/electrode-io/electrode/pull/1425)) [commit](http://github.com/electrode-io/electrode/commit/2ea9250cb42d33d637f072189ba696a636dd6696)
+  - Remove nodemon and associated tasks ([#1424](https://github.com/electrode-io/electrode/pull/1424)) [commit](http://github.com/electrode-io/electrode/commit/c6d984c94504eb9850836d0dbf064ed82cd1c746)
+  - Remove cssModuleStylusSupport flag ([#1423](https://github.com/electrode-io/electrode/pull/1423)) [commit](http://github.com/electrode-io/electrode/commit/aacafe7572d9e33e0161e46f6078b8bc1b79b643)
+  - Remove OPTIMIZE_STATS and associated tasks ([#1421](https://github.com/electrode-io/electrode/pull/1421)) [commit](http://github.com/electrode-io/electrode/commit/8ad412896fc138a279228c4afb7a157cf4e98383)
+  - Remove electrode-bundle-analyzer ([#1420](https://github.com/electrode-io/electrode/pull/1420)) [commit](http://github.com/electrode-io/electrode/commit/dc3ab6fe699b2c1dd69b1406ecce7ac0e862aa4f)
+  - removing prop-types ([#1418](https://github.com/electrode-io/electrode/pull/1418)) [commit](http://github.com/electrode-io/electrode/commit/d330c97e7472a8fee1993b74477162a69e7dd2e2)
+  - [major] Drop optimizeModulesForProduction option ([#1416](https://github.com/electrode-io/electrode/pull/1416)) [commit](http://github.com/electrode-io/electrode/commit/7155a0d6ba36684a8a217b93aa90e44d19229bcb)
+  - [major] Replace webpack [hash] with [contenthash](<[#1373](https://github.com/electrode-io/electrode/pull/1373)>) [commit](http://github.com/electrode-io/electrode/commit/180215a1e29b2d8f664b3070a1b0086600cd3be1)
 
--   `packages/electrode-archetype-react-component[-dev]`
+- `packages/electrode-archetype-react-component[-dev]`
 
-    -   update archetype peer dep for v7 beta [commit](http://github.com/electrode-io/electrode/commit/3bf570b3d5a551b591536c926b686449e45dbf56)
-    -   [major] Drop support for React version < 16 ([#1426](https://github.com/electrode-io/electrode/pull/1426)) [commit](http://github.com/electrode-io/electrode/commit/ba4bd3666f65cda4fc2470e9923ac79dc66adf6f)
-    -   Remove nodemon and associated tasks ([#1424](https://github.com/electrode-io/electrode/pull/1424)) [commit](http://github.com/electrode-io/electrode/commit/c6d984c94504eb9850836d0dbf064ed82cd1c746)
-    -   Remove cssModuleStylusSupport flag ([#1423](https://github.com/electrode-io/electrode/pull/1423)) [commit](http://github.com/electrode-io/electrode/commit/aacafe7572d9e33e0161e46f6078b8bc1b79b643)
-    -   Remove electrode-bundle-analyzer ([#1420](https://github.com/electrode-io/electrode/pull/1420)) [commit](http://github.com/electrode-io/electrode/commit/dc3ab6fe699b2c1dd69b1406ecce7ac0e862aa4f)
-    -   removing prop-types ([#1418](https://github.com/electrode-io/electrode/pull/1418)) [commit](http://github.com/electrode-io/electrode/commit/d330c97e7472a8fee1993b74477162a69e7dd2e2)
+  - update archetype peer dep for v7 beta [commit](http://github.com/electrode-io/electrode/commit/3bf570b3d5a551b591536c926b686449e45dbf56)
+  - [major] Drop support for React version < 16 ([#1426](https://github.com/electrode-io/electrode/pull/1426)) [commit](http://github.com/electrode-io/electrode/commit/ba4bd3666f65cda4fc2470e9923ac79dc66adf6f)
+  - Remove nodemon and associated tasks ([#1424](https://github.com/electrode-io/electrode/pull/1424)) [commit](http://github.com/electrode-io/electrode/commit/c6d984c94504eb9850836d0dbf064ed82cd1c746)
+  - Remove cssModuleStylusSupport flag ([#1423](https://github.com/electrode-io/electrode/pull/1423)) [commit](http://github.com/electrode-io/electrode/commit/aacafe7572d9e33e0161e46f6078b8bc1b79b643)
+  - Remove electrode-bundle-analyzer ([#1420](https://github.com/electrode-io/electrode/pull/1420)) [commit](http://github.com/electrode-io/electrode/commit/dc3ab6fe699b2c1dd69b1406ecce7ac0e862aa4f)
+  - removing prop-types ([#1418](https://github.com/electrode-io/electrode/pull/1418)) [commit](http://github.com/electrode-io/electrode/commit/d330c97e7472a8fee1993b74477162a69e7dd2e2)
 
--   `packages/electrode-redux-router-engine`
+- `packages/electrode-redux-router-engine`
 
-    -   [major] Drop support for React version < 16 ([#1426](https://github.com/electrode-io/electrode/pull/1426)) [commit](http://github.com/electrode-io/electrode/commit/ba4bd3666f65cda4fc2470e9923ac79dc66adf6f)
+  - [major] Drop support for React version < 16 ([#1426](https://github.com/electrode-io/electrode/pull/1426)) [commit](http://github.com/electrode-io/electrode/commit/ba4bd3666f65cda4fc2470e9923ac79dc66adf6f)
 
--   `packages/generator-electrode`
+- `packages/generator-electrode`
 
-    -   [major] update archetype dep to v7 beta [commit](http://github.com/electrode-io/electrode/commit/cf3d78a7938ace248f71d0a472d735837ee469d6)
-    -   Drop webpack dev server ([#1431](https://github.com/electrode-io/electrode/pull/1431)) [commit](http://github.com/electrode-io/electrode/commit/bfc8794ad6482959a1325fb1766f1080c1b48f56)
-    -   Removing electrode-webpack-reporter ([#1425](https://github.com/electrode-io/electrode/pull/1425)) [commit](http://github.com/electrode-io/electrode/commit/2ea9250cb42d33d637f072189ba696a636dd6696)
-    -   Remove cssModuleStylusSupport flag ([#1423](https://github.com/electrode-io/electrode/pull/1423)) [commit](http://github.com/electrode-io/electrode/commit/aacafe7572d9e33e0161e46f6078b8bc1b79b643)
+  - [major] update archetype dep to v7 beta [commit](http://github.com/electrode-io/electrode/commit/cf3d78a7938ace248f71d0a472d735837ee469d6)
+  - Drop webpack dev server ([#1431](https://github.com/electrode-io/electrode/pull/1431)) [commit](http://github.com/electrode-io/electrode/commit/bfc8794ad6482959a1325fb1766f1080c1b48f56)
+  - Removing electrode-webpack-reporter ([#1425](https://github.com/electrode-io/electrode/pull/1425)) [commit](http://github.com/electrode-io/electrode/commit/2ea9250cb42d33d637f072189ba696a636dd6696)
+  - Remove cssModuleStylusSupport flag ([#1423](https://github.com/electrode-io/electrode/pull/1423)) [commit](http://github.com/electrode-io/electrode/commit/aacafe7572d9e33e0161e46f6078b8bc1b79b643)
 
--   `packages/opt-archetype-check`
+- `packages/opt-archetype-check`
 
-    -   Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
+  - Do not fail the optional-check if both archetype config and package.json ([#1449](https://github.com/electrode-io/electrode/pull/1449)) [commit](http://github.com/electrode-io/electrode/commit/ae4adeb62c161182c8de5c40e747c766270aaeb5)
 
--   `docs`
+- `docs`
 
-    -   Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
-    -   Drop webpack dev server ([#1431](https://github.com/electrode-io/electrode/pull/1431)) [commit](http://github.com/electrode-io/electrode/commit/bfc8794ad6482959a1325fb1766f1080c1b48f56)
-    -   Removing electrode-webpack-reporter ([#1425](https://github.com/electrode-io/electrode/pull/1425)) [commit](http://github.com/electrode-io/electrode/commit/2ea9250cb42d33d637f072189ba696a636dd6696)
-    -   Remove cssModuleStylusSupport flag ([#1423](https://github.com/electrode-io/electrode/pull/1423)) [commit](http://github.com/electrode-io/electrode/commit/aacafe7572d9e33e0161e46f6078b8bc1b79b643)
-    -   Remove OPTIMIZE_STATS and associated tasks ([#1421](https://github.com/electrode-io/electrode/pull/1421)) [commit](http://github.com/electrode-io/electrode/commit/8ad412896fc138a279228c4afb7a157cf4e98383)
-    -   Remove electrode-bundle-analyzer ([#1420](https://github.com/electrode-io/electrode/pull/1420)) [commit](http://github.com/electrode-io/electrode/commit/dc3ab6fe699b2c1dd69b1406ecce7ac0e862aa4f)
+  - Default optional add-ons to off ([#1445](https://github.com/electrode-io/electrode/pull/1445)) [commit](http://github.com/electrode-io/electrode/commit/9a4f33678fe610c26c9d3bfbcbc3901e966d39ec)
+  - Drop webpack dev server ([#1431](https://github.com/electrode-io/electrode/pull/1431)) [commit](http://github.com/electrode-io/electrode/commit/bfc8794ad6482959a1325fb1766f1080c1b48f56)
+  - Removing electrode-webpack-reporter ([#1425](https://github.com/electrode-io/electrode/pull/1425)) [commit](http://github.com/electrode-io/electrode/commit/2ea9250cb42d33d637f072189ba696a636dd6696)
+  - Remove cssModuleStylusSupport flag ([#1423](https://github.com/electrode-io/electrode/pull/1423)) [commit](http://github.com/electrode-io/electrode/commit/aacafe7572d9e33e0161e46f6078b8bc1b79b643)
+  - Remove OPTIMIZE_STATS and associated tasks ([#1421](https://github.com/electrode-io/electrode/pull/1421)) [commit](http://github.com/electrode-io/electrode/commit/8ad412896fc138a279228c4afb7a157cf4e98383)
+  - Remove electrode-bundle-analyzer ([#1420](https://github.com/electrode-io/electrode/pull/1420)) [commit](http://github.com/electrode-io/electrode/commit/dc3ab6fe699b2c1dd69b1406ecce7ac0e862aa4f)
 
--   `tools`
+- `tools`
 
-    -   use new version with npm tag [commit](http://github.com/electrode-io/electrode/commit/a173f43a14864e5e1a50589670bb0f71a8a7cf76)
+  - use new version with npm tag [commit](http://github.com/electrode-io/electrode/commit/a173f43a14864e5e1a50589670bb0f71a8a7cf76)
 
--   `MISC`
+- `MISC`
 
-    -   CI on node 10 [commit](http://github.com/electrode-io/electrode/commit/028ae621aaf500543c53ab892c77303b0251abe8)
-    -   set v7 tag [commit](http://github.com/electrode-io/electrode/commit/a218558f42b30352abf95558ac4c69258066f9a1)
-    -   add beta7 npm tag [commit](http://github.com/electrode-io/electrode/commit/20c9dd51469a3303f491d66aea5a530da4c8d667)
+  - CI on node 10 [commit](http://github.com/electrode-io/electrode/commit/028ae621aaf500543c53ab892c77303b0251abe8)
+  - set v7 tag [commit](http://github.com/electrode-io/electrode/commit/a218558f42b30352abf95558ac4c69258066f9a1)
+  - add beta7 npm tag [commit](http://github.com/electrode-io/electrode/commit/20c9dd51469a3303f491d66aea5a530da4c8d667)
 
 # 12/16/2019
 
