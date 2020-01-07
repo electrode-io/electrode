@@ -1,5 +1,4 @@
-import React from "react";
-import { render, hydrate } from "react-dom";
+import { h, render, hydrate } from "preact";
 import { loadSubApp } from "subapp-web";
 import { Provider } from 'redux-bundler-preact';
 import { setStoreContainer, getReduxCreateStore } from "./shared";
