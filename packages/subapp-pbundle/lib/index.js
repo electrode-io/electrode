@@ -3,6 +3,7 @@
 const subappWeb = require("subapp-web");
 const preact = require("preact");
 const FrameworkLib = require("./framework-lib");
+const { reduxBundlerLoadSubApp } = require("./redux-bundler");
 const { default: AppContext } = require("../browser/app-context");
 
 const { h, Component, render } = preact;
@@ -16,5 +17,6 @@ module.exports = {
   preact,
   h,
   Component,
+  reduxBundlerLoadSubApp,
   render
 };
