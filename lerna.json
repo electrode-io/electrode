@@ -8,7 +8,7 @@
     "publishConfig": {
       "tags": {
         "beta7": {
-          "enabled": true,
+          "enabled": false,
           "packages": {
             "electrode-archetype-react-app": true,
             "electrode-archetype-react-app-dev": true,

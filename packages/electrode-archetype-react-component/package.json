@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-component",
-  "version": "7.0.0-beta7.0",
+  "version": "7.0.1",
   "description": "Archetype - Electrode Component",
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -44,6 +44,7 @@
     }
   },
   "publishConfig": {
-    "tag": "beta7"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   }
 }

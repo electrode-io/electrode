@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-app",
-  "version": "7.0.0-beta7.0",
+  "version": "7.0.1",
   "description": "Electrode NodeJS/React Universal Application Archetype",
   "main": "arch-clap.js",
   "homepage": "http://www.electrode.io",
@@ -78,6 +78,7 @@
     }
   },
   "publishConfig": {
-    "tag": "beta7"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   }
 }

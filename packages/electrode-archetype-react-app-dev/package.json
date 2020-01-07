@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-app-dev",
-  "version": "7.0.0-beta7.0",
+  "version": "7.0.1",
   "description": "Electrode NodeJS/React Application Archetype (Development)",
   "main": "index.js",
   "homepage": "http://www.electrode.io",
@@ -195,6 +195,7 @@
     "cache": true
   },
   "publishConfig": {
-    "tag": "beta7"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   }
 }
