@@ -1,4 +1,4 @@
-const composeBundles = require("redux-bundler").composeBundles;
+const { composeBundles } = require("redux-bundler");
 
 //
 // - stores can be shared between subapps with reduxShareStore flag
@@ -44,7 +44,7 @@ function getReduxCreateStore(info) {
       setSharedStore(store);
     }
     return store;
-  }
+  };
 }
 
 module.exports = {
