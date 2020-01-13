@@ -4,7 +4,7 @@
 
 const { registerSubApp } = require("subapp-util");
 
-const { default: makeSubAppSpec } = require("../browser/make-subapp-spec");
+const { default: makeSubAppSpec } = require("../node-dist/make-subapp-spec");
 
 const { setupFramework } = require("./util");
 

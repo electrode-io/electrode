@@ -5,10 +5,10 @@
   "browser": "browser/index.js",
   "main": "lib/index.js",
   "scripts": {
-    "test": "clap check",
-    "coverage": "clap check",
-    "build": "clap -x -n compile minify",
-    "compile": "babel src -d browser --source-maps"
+    "test": "clap -x compile check",
+    "coverage": "clap -x compile check",
+    "build": "clap compile",
+    "prepublishOnly": "clap compile"
   },
   "keywords": [
     "web",
@@ -23,7 +23,8 @@
   "files": [
     "lib",
     "browser",
-    "dist"
+    "dist",
+    "node-dist"
   ],
   "dependencies": {
     "history": "^4.9.0",
