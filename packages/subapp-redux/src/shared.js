@@ -103,7 +103,8 @@ function createSharedStore(initialState, info) {
     return store;
   }
 
-  if (info.reduxCreateStore) {
+  // call user provided reduxCreateStore
+  if (info.reduxCreateStore && !info._genReduxCreateStore) {
     return info.reduxCreateStore(initialState);
   }
 
