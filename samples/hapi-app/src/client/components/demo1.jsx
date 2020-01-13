@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Nav } from "./nav";
 import { inputName, inputTextarea, selectOption } from "../actions";
 import custom from "../styles/custom.css"; // eslint-disable-line no-unused-vars
-import demoStyle from "../styles/demo1.css"; // eslint-disable-line no-unused-vars
+import demoStyle from "../styles/demo1.scss"; // eslint-disable-line no-unused-vars
 
 class Demo1 extends Component {
   constructor(props) {
@@ -80,7 +80,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  dispatch => ({ dispatch })
-)(Demo1);
+export default connect(mapStateToProps, dispatch => ({ dispatch }))(Demo1);
