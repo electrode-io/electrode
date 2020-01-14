@@ -1,5 +1,4 @@
-import React from "react";
-import { loadSubApp } from "subapp-web";
+import { React, loadSubApp } from "subapp-react";
 import electrodePng from "../../static/electrode.png";
 
 const Home = () => {

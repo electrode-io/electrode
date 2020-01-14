@@ -1,5 +1,4 @@
-import React from "react";
-import { loadSubApp } from "subapp-web";
+import { React, loadSubApp } from "subapp-react";
 
 const Demo1 = props => {
   return (
