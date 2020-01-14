@@ -53,7 +53,7 @@ function loadSubAppBundles(names, done) {
       return chunkIds.reduce((a2, id) => {
         // chunk could have multiple assets
         return [].concat(ba.jsChunksById[id]).reduce((a3, asset) => {
-          return a3.concat({ name, id, asset });
+          return asset ? a3.concat({ name, id, asset }) : a3;
         }, a2);
       }, a);
     }, [])
