@@ -4,8 +4,16 @@ This module mainly serve to setup subapp-web with [Preact] framework, and the su
 
 It basically re-exports the module subapp-web and sets it up with [Preact] specific APIs.
 
-- For convenience, it also exports the module `preact` as `preact`, and its `h`, `Component`, and `render` APIs.
+- For convenience, it also exports [preact]'s `h`, `Component`, and `render` APIs.
 - It adds a new `reduxBundlerLoadSubApp` API for loading subapps that use [redux-bundler].
+
+## ES Modules
+
+This package only export its code for node.js with `main` field and ES modules with `module` field.
+
+This is neccessary for webpack to do treeshaking when bundling code.
+
+## Usage
 
 To use, a subapp's code should be doing:
 

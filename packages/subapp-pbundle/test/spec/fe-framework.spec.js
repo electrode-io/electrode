@@ -1,6 +1,7 @@
 "use strict";
 /** @jsx h */
 
+process.env.BABEL_ENV = "src-node";
 const { h } = require("preact"); // eslint-disable-line
 const feLib = require("../../src");
 const { JSDOM } = require("jsdom");
@@ -8,7 +9,6 @@ const { JSDOM } = require("jsdom");
 describe("FE Preact framework", function() {
   //
   it("should setup FrameworkLib", () => {
-    expect(feLib.preact).to.be.ok;
     expect(feLib.AppContext).to.be.ok;
     expect(feLib.loadSubApp).to.be.a("function");
     expect(feLib.FrameworkLib).to.be.ok;
