@@ -35,6 +35,13 @@ const utils = {
     // find entry point
     const entryPoints = assets.entryPoints[entryName];
     assert(entryPoints, `subapp-web: no entry point found for ${name}`);
+
+    // without webpack optimization.runtimeChunk the entry point bundles are generated
+    // as <entryName>.bundle.js, like header.bundle.js
+    // but with runtimeChunk, the entry point are generated with hash
+    // as <hash>.<entryName>.js
+    // So check both cases.
+    const matchEntry = x => x === `${entryName}.bundle.js` || x.endsWith(`.${entryName}.js`);
     // map all IDs to actual assets
     const bundleAssets = entryPoints
       .map(id => {
@@ -42,8 +49,8 @@ const utils = {
         const js = assets.chunksById.js[id];
         // Only use IDs that has bundle with name that starts with entry's name
         if (Array.isArray(js)) {
-          bundleName = js.find(x => x.startsWith(entryName));
-        } else if (js.startsWith(entryName)) {
+          bundleName = js.find(matchEntry);
+        } else if (matchEntry(js)) {
           bundleName = js;
         }
         return bundleName && assets.js.find(x => x.name === bundleName);

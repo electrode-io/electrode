@@ -27,6 +27,7 @@ if (AppMode.hasSubApps) {
   // The filename has the pattern of hex-sum.bundle1~bundle2~bundle#.js
   // https://webpack.js.org/plugins/split-chunks-plugin/
   config.optimization = {
+    runtimeChunk: "single",
     splitChunks: {
       chunks: "all",
       minSize: 30 * 1024,
