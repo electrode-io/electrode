@@ -1,5 +1,4 @@
-const { composeBundles } = require("redux-bundler");
-
+import { composeBundles } from "redux-bundler";
 //
 // - stores can be shared between subapps with reduxShareStore flag
 //  - if it's true, then a common global store is used
@@ -47,10 +46,4 @@ function getReduxCreateStore(info) {
   };
 }
 
-module.exports = {
-  setStoreContainer,
-  getReduxCreateStore,
-  getSharedStore,
-  setSharedStore,
-  clearSharedStore
-};
+export { setStoreContainer, getReduxCreateStore, getSharedStore, setSharedStore, clearSharedStore };
