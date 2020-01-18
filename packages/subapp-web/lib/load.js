@@ -19,6 +19,10 @@ const retrieveUrl = require("request");
 const util = require("./util");
 const { loadSubAppByName, loadSubAppServerByName } = require("subapp-util");
 
+// global name to store client subapp runtime, ie: window.xarcV1
+// V1: version 1.
+const xarc = "window.xarcV1";
+
 module.exports = function setup(setupContext, token) {
   const options = token.props;
 
@@ -181,7 +185,7 @@ module.exports = function setup(setupContext, token) {
         outputSpot.add(`${comment}`);
         if (bundles.length > 0) {
           outputSpot.add(`${scripts}
-<script>markBundlesLoaded(${JSON.stringify(bundles)});</script>
+<script>${xarc}.markBundlesLoaded(${JSON.stringify(bundles)});</script>
 `);
         }
 
@@ -197,18 +201,16 @@ module.exports = function setup(setupContext, token) {
         // add the div for the Node and the SSR content to it, and add JS to start the
         // sub app on load.
         if (options.elementId) {
-          outputSpot.add(`<div id="${options.elementId}">
- ${ssrContent}
-</div>
-<script>
- startSubAppOnLoad({
-  name:"${name}",
-  elementId:"${options.elementId}",
-  serverSideRendering:${Boolean(options.serverSideRendering)},
-  clientProps:${clientProps},
-  initialState:${initialStateStr || "{}"}
- })
-</script>
+          outputSpot.add(`<div id="${options.elementId}">`);
+          outputSpot.add(ssrContent); // must add by itself since this could be a stream
+          outputSpot.add(`</div>
+<script>${xarc}.startSubAppOnLoad({
+ name:"${name}",
+ elementId:"${options.elementId}",
+ serverSideRendering:${Boolean(options.serverSideRendering)},
+ clientProps:${clientProps},
+ initialState:${initialStateStr || "{}"}
+});</script>
 `);
         } else {
           outputSpot.add("<!-- no elementId for starting subApp on load -->\n");
