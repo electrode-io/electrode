@@ -75,7 +75,14 @@ module.exports = function setup(setupContext, token) {
       if (!webpackDev) {
         // if we have to inline the subapp's JS bundle, we load it for production mode
         const src = Fs.readFileSync(Path.resolve("dist/js", bundleAsset.name)).toString();
-        inlineSubAppJs = `<script>/*${name}*/${src}</script>`;
+        const ext = Path.extname(bundleAsset.name);
+        if (ext === ".js") {
+          inlineSubAppJs = `<script>/*${name}*/${src}</script>`;
+        } else if (ext === ".css") {
+          inlineSubAppJs = `<style id="${name}">${src}</style>`;
+        } else {
+          inlineSubAppJs = `<!-- UNKNOWN bundle extension ${name} -->`;
+        }
       } else {
         inlineSubAppJs = true;
       }
@@ -109,7 +116,16 @@ module.exports = function setup(setupContext, token) {
             cdnJsBundles[ep] &&
             []
               .concat(cdnJsBundles[ep])
-              .map(jsBundle => `<script src="${jsBundle}" async></script>`)
+              .map(jsBundle => {
+                const ext = Path.extname(jsBundle);
+                if (ext === ".js") {
+                  return `<script src="${jsBundle}" async></script>`;
+                } else if (ext === ".css") {
+                  return `<link rel="stylesheet" href="${jsBundle}">`;
+                } else {
+                  return `<!-- UNKNOWN bundle extension ${jsBundle} -->`;
+                }
+              })
               .join("\n")
           );
         }
@@ -160,6 +176,15 @@ module.exports = function setup(setupContext, token) {
           subAppServer,
           options
         };
+
+        const { bundles, scripts } = await prepareSubAppSplitBundles(context);
+        outputSpot.add(`${comment}`);
+        if (bundles.length > 0) {
+          outputSpot.add(`${scripts}
+<script>markBundlesLoaded(${JSON.stringify(bundles)});</script>
+`);
+        }
+
         if (options.serverSideRendering) {
           const lib = util.getFramework(ref);
           ssrContent = await lib.handleSSR(ref);
@@ -168,27 +193,23 @@ module.exports = function setup(setupContext, token) {
           ssrContent = `<!-- serverSideRendering flag is ${options.serverSideRendering} -->`;
         }
 
-        let markBundlesLoadedJs = "";
-        const { bundles, scripts } = await prepareSubAppSplitBundles(context);
-        outputSpot.add(`${comment}`);
-        if (bundles.length > 0) {
-          outputSpot.add(`${scripts}\n`);
-          markBundlesLoadedJs = `markBundlesLoaded(${JSON.stringify(bundles)});\n`;
-        }
-
         // If user specified an element ID for a DOM Node to host the SSR content then
         // add the div for the Node and the SSR content to it, and add JS to start the
         // sub app on load.
         if (options.elementId) {
-          outputSpot.add(`<div id="${options.elementId}">\n`);
-          outputSpot.add(ssrContent);
-          outputSpot.add(`\n</div><script>${markBundlesLoadedJs}startSubAppOnLoad({
-  name: "${name}",
-  elementId: "${options.elementId}",
-  serverSideRendering: ${Boolean(options.serverSideRendering)},
-  clientProps: ${clientProps},
-  initialState: ${initialStateStr || "{}"}
-})</script>\n`);
+          outputSpot.add(`<div id="${options.elementId}">
+ ${ssrContent}
+</div>
+<script>
+ startSubAppOnLoad({
+  name:"${name}",
+  elementId:"${options.elementId}",
+  serverSideRendering:${Boolean(options.serverSideRendering)},
+  clientProps:${clientProps},
+  initialState:${initialStateStr || "{}"}
+ })
+</script>
+`);
         } else {
           outputSpot.add("<!-- no elementId for starting subApp on load -->\n");
         }

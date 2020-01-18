@@ -47,7 +47,8 @@
     "subapp-server": "../../packages/subapp-server"
   },
   "devDependencies": {
-    "electrode-archetype-react-app-dev": "^6.3.0"
+    "electrode-archetype-react-app-dev": "^6.3.0",
+    "tachyons-sass": "^4.9.5"
   },
   "fyn": {
     "dependencies": {
