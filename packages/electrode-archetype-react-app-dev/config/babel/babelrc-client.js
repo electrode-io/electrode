@@ -44,19 +44,23 @@ const basePlugins = [
     "@babel/plugin-proposal-class-properties",
     { loose: looseClassProps }
   ],
-  [
-    "babel-plugin-i18n-id-hashing",
-    {
-      varsContainingMessages: ["defaultMessages", "translations"]
-    }
-  ],
-  [
-    "babel-plugin-react-intl",
-    {
-      messagesDir: "./tmp/messages/",
-      enforceDescriptions: true
-    }
-  ],
+  //
+  // i18n has not been used at all and these are very outdated
+  // remove them for now until they can be updated
+  //
+  // [
+  //   "babel-plugin-i18n-id-hashing",
+  //   {
+  //     varsContainingMessages: ["defaultMessages", "translations"]
+  //   }
+  // ],
+  // [
+  //   "babel-plugin-react-intl",
+  //   {
+  //     messagesDir: "./tmp/messages/",
+  //     enforceDescriptions: true
+  //   }
+  // ],
   "transform-node-env-inline",
   "babel-plugin-lodash",
   "@babel/plugin-transform-runtime",
