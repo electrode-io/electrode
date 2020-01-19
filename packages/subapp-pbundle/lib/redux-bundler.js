@@ -2,7 +2,7 @@
 
 const { registerSubApp } = require("subapp-util");
 
-const shared = require("../node-dist/shared");
+const shared = require("../dist/node/shared");
 
 module.exports = {
   reduxBundlerLoadSubApp: subapp => {

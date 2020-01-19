@@ -6,7 +6,7 @@
   "scripts": {
     "test": "clap -n -x build check",
     "coverage": "clap -n -x build check",
-    "build": "babel src -d resources",
+    "build": "babel src -d resources --source-maps",
     "prepare": "npm run build",
     "prepublishOnly": "npm run build"
   },

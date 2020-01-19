@@ -7,11 +7,19 @@ It basically re-exports the module subapp-web and sets it up with [Preact] speci
 - For convenience, it also exports [preact]'s `h`, `Component`, and `render` APIs.
 - It adds a new `reduxBundlerLoadSubApp` API for loading subapps that use [redux-bundler].
 
-## ES Modules
+## ES6 and Modules
 
 This package only export its code for node.js with `main` field and ES modules with `module` field.
 
 This is neccessary for webpack to do treeshaking when bundling code.
+
+This module also depend on the app loading polyfills for ES6 libraries and APIs such as `Promise` or array methods.
+
+The recommendation is to use [polyfill.io](https://polyfill.io).
+
+## Babel Runtime
+
+This package transpile ES6 syntax to ES5 syntax and depend on [@babel/runtime] to provide helpers. It pulls version 7.
 
 ## Usage
 

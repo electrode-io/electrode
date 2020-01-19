@@ -2,13 +2,13 @@
   "name": "subapp-redux",
   "version": "1.0.12",
   "description": "Electrode subapp redux support",
-  "browser": "browser/index.js",
+  "module": "dist/dev/index.js",
   "main": "lib/index.js",
   "scripts": {
-    "test": "clap check",
-    "coverage": "clap check",
-    "build": "clap -x -n compile minify",
-    "compile": "babel src -d browser --source-maps=inline"
+    "test": "clap test",
+    "coverage": "clap coverage",
+    "build": "clap compile",
+    "prepublishOnly": "clap compile"
   },
   "keywords": [
     "web",
@@ -22,7 +22,6 @@
   "license": "Apache-2.0",
   "files": [
     "lib",
-    "browser",
     "dist"
   ],
   "dependencies": {
@@ -33,15 +32,19 @@
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
+    "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.8.3",
+    "@babel/runtime": "^7.8.3",
     "babel-preset-minify": "^0.4.3",
     "electrode-archetype-njs-module-dev": "^3.0.0",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-redux": "^6.0.1",
     "redux": "^4.0.1",
-    "run-verify": "^1.2.2"
+    "run-verify": "^1.2.2",
+    "subapp-pkg-util": "../subapp-pkg-util"
   },
   "peerDependencies": {
     "react": "*",
@@ -51,6 +54,10 @@
   },
   "nyc": {
     "all": true,
+    "require": [
+      "@babel/register",
+      "mocha"
+    ],
     "reporter": [
       "lcov",
       "text",

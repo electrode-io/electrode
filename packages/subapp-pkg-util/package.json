@@ -1,0 +1,14 @@
+{
+  "name": "subapp-pkg-util",
+  "version": "0.0.1",
+  "description": "",
+  "main": "xclap.js",
+  "private": true,
+  "keywords": [],
+  "author": "Electrode",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "shcmd": "^0.7.9",
+    "xclap": "^0.2.40"
+  }
+}

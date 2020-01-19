@@ -1,4 +1,4 @@
-const { createStore, combineReducers } = require("redux");
+import { createStore, combineReducers } from "redux";
 
 //
 // - stores can be shared between subapps with reduxShareStore flag
@@ -124,7 +124,7 @@ function getReduxCreateStore(info) {
   return initialState => createSharedStore(initialState, info);
 }
 
-module.exports = {
+export {
   setStoreContainer,
   getReduxCreateStore,
   createSharedStore,

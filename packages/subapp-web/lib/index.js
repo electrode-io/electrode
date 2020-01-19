@@ -4,7 +4,7 @@
 
 const { registerSubApp } = require("subapp-util");
 
-const { default: makeSubAppSpec } = require("../node-dist/make-subapp-spec");
+const { default: makeSubAppSpec } = require("../dist/node/make-subapp-spec");
 
 const { setupFramework } = require("./util");
 
@@ -22,6 +22,7 @@ module.exports = {
 
   // server side template token processing modules
 
+  polyfill: require("./polyfill"),
   init: require("./init"),
   load: require("./load"),
   start: require("./start")
