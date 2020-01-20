@@ -1,4 +1,4 @@
-import { React, dynamicLoadSubApp } from "subapp-react";
+import { React, dynamicLoadSubApp, xarc } from "subapp-react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -15,11 +15,9 @@ class SubApp extends React.Component {
       return "";
     }
     const { name } = this.props;
-    const wsa = window.webSubApps;
-    const lname = name.toLowerCase();
 
-    if (wsa._bundles[lname] && wsa[name]) {
-      const subapp = window.webSubApps[name];
+    const subapp = xarc.getSubApp(name);
+    if (xarc.getBundle(name) && subapp) {
       return (
         <div className="col-sm-4">
           <div className="panel panel-primary">

@@ -1,7 +1,10 @@
 import { createBrowserHistory } from "history";
 import makeSubAppSpec from "./make-subapp-spec";
+import xarc from "./xarc";
 
 export { default as makeSubAppSpec } from "./make-subapp-spec";
+
+export { default as xarc } from "./xarc";
 
 let FrameworkLib;
 
@@ -12,16 +15,13 @@ export function setupFramework(frameworkLib) {
 export function loadSubApp(info, renderStart) {
   info = makeSubAppSpec(info);
 
-  let webSubApps = window.webSubApps;
-  if (!webSubApps) webSubApps = window.webSubApps = {};
-
   const name = info.name;
-  let subApp = webSubApps[name] || { info };
+  let subApp = xarc.getSubApp(name) || { info };
 
   // mark the subapp's webpack bundle as loaded
   const lname = name.toLowerCase();
-  if (!webSubApps._bundles[lname]) {
-    webSubApps._bundles[lname] = true;
+  if (!xarc.getBundle(lname)) {
+    xarc.setBundle(lname, true);
   }
 
   // subapp already loaded, do nothing and return the info
@@ -31,7 +31,7 @@ export function loadSubApp(info, renderStart) {
   }
 
   subApp._started = [];
-  webSubApps[name] = subApp;
+  xarc.setSubApp(name, subApp);
 
   subApp._renderStart =
     renderStart ||
@@ -87,29 +87,23 @@ export function loadSubApp(info, renderStart) {
     return callStart();
   };
 
-  const onLoadStart = webSubApps._onLoadStart[name];
-  webSubApps._onLoadStart[name] = [];
-
-  if (onLoadStart && onLoadStart.length > 0) {
-    onLoadStart.forEach(options => setTimeout(() => subApp.start(options), 0));
-  }
+  xarc.getOnLoadStart(name).forEach(options => setTimeout(() => subApp.start(options), 0));
 
   return info;
 }
 
 export function dynamicLoadSubApp({ name, id, timeout = 15000, onLoad, onError }) {
   // TODO: timeout and callback
-  const wsa = window.webSubApps;
   const lname = name.toLowerCase();
 
-  if (wsa._bundles[lname] === undefined) {
-    window.loadSubAppBundles(lname);
+  if (xarc.getBundle(name) === undefined) {
+    xarc.loadSubAppBundles(lname);
   }
   const startTime = Date.now();
 
   const load = delay => {
     setTimeout(() => {
-      const subApp = wsa[name];
+      const subApp = xarc.getSubApp(name);
       if (subApp) {
         if (!id) {
           return onLoad();
@@ -133,14 +127,13 @@ export function dynamicLoadSubApp({ name, id, timeout = 15000, onLoad, onError }
 }
 
 export function getBrowserHistory() {
-  const wsa = window.webSubApps;
-  if (!wsa.history) wsa.history = createBrowserHistory();
-  return wsa.history;
+  if (!xarc.rt.history) xarc.rt.history = createBrowserHistory();
+  return xarc.rt.history;
 }
 
 export function hotReloadSubApp(info) {
   info = info.default || info; // check for es6 module
-  const subApp = window.webSubApps[info.name];
+  const subApp = xarc.getSubApp[info.name];
   subApp.info = info;
   subApp._started.forEach(instance => setTimeout(() => subApp.start(instance), 0));
 }
