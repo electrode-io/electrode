@@ -1,5 +1,7 @@
 import { h, loadSubApp } from "subapp-pbundle"; /** @jsx h */
 
+import "tachyons-sass/tachyons.scss";
+
 const Home = () => {
   return (
     <div>

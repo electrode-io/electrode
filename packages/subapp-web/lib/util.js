@@ -114,6 +114,8 @@ const utils = {
     for (const id in bundlesById) {
       const bundles = bundlesById[id];
       [].concat(bundles).forEach(bundleFile => {
+        if (!bundleFile) return;
+
         for (const mapName in CDN_ASSETS) {
           if (mapName.endsWith(bundleFile)) {
             cdnBundles[id] = CDN_ASSETS[mapName];
@@ -124,7 +126,7 @@ const utils = {
         if (!cdnBundles[id]) {
           cdnBundles[id] = basePath.concat(bundleFile);
         } else {
-          cdnBundles[id] = [].concat(cdnBundles[id], bundleFile);
+          cdnBundles[id] = [].concat(cdnBundles[id], basePath.concat(bundleFile));
         }
       });
     }
@@ -141,11 +143,13 @@ const utils = {
     // pack up entrypoints data from stats
     //
 
-    const { chunksById } = assets;
+    const {
+      chunksById: { js, css }
+    } = assets;
 
     const bundleBase = utils.getBundleBase(routeOptions);
-
-    return (CDN_JS_BUNDLES = utils.mapCdnAssets(chunksById.js, bundleBase, cdnAssetsFile));
+    const allChunks = _.mergeWith({}, js, css, (a, b) => (a && b ? [].concat(a, b) : a || b));
+    return (CDN_JS_BUNDLES = utils.mapCdnAssets(allChunks, bundleBase, cdnAssetsFile));
   },
 
   getChunksById(stats) {
