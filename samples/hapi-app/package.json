@@ -64,7 +64,7 @@
     "electrode-archetype-react-app-dev": "^6.0.0",
     "webpack-hook-plugin": "1.0.7",
     "electrode-archetype-opt-critical-css": "^1.0.3",
-    "electrode-archetype-opt-jest": "^1.0.3",
+    "electrode-archetype-opt-jest": "^24.0.0",
     "electrode-archetype-opt-karma": "^2.0.6",
     "electrode-archetype-opt-less": "^1.0.2",
     "electrode-archetype-opt-phantomjs": "^1.0.2",
