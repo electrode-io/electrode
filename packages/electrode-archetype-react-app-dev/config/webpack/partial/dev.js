@@ -1,7 +1,7 @@
 "use strict";
 
 const Url = require("url");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+// const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const webpackDevReporter = require("../util/webpack-dev-reporter");
 
@@ -23,9 +23,7 @@ module.exports = function() {
   if (process.env.WEBPACK_DEV_HOST || process.env.WEBPACK_HOST) {
     devServerConfig.public = `${archetype.webpack.devHostname}:${archetype.webpack.devPort}`;
     devServerConfig.headers = {
-      "Access-Control-Allow-Origin": `${devProtocol}${archetype.webpack.devHostname}:${
-        archetype.webpack.devPort
-      }`
+      "Access-Control-Allow-Origin": `${devProtocol}${archetype.webpack.devHostname}:${archetype.webpack.devPort}`
     };
   } else {
     devServerConfig.disableHostCheck = true;
@@ -73,7 +71,10 @@ module.exports = function() {
       filename: "[name].bundle.dev.js"
     },
     devtool: "inline-source-map",
-    plugins: [new MiniCssExtractPlugin({ filename: "[name].style.css" })],
+    // TODO: why is this here and duplicates what's in extract-style partial?  This is causing
+    // duplicate CSS bundles to be generated in dev mode.
+    // Comment out for now
+    // plugins: [new MiniCssExtractPlugin({ filename: "[name].style.css" })],
     optimization: {
       noEmitOnErrors: true
     }
