@@ -11,7 +11,11 @@ Electrode Subapps is a mechanism for code splitting within a larger application.
 To easily start using the npm initializer, run the following command:
 
 ```bash
-mkdir my-app && cd my-app && npm init -y @xarc/app && npm i && npm run dev
+mkdir my-app # Create a new directory for the project
+cd my-app # Change to our new project directory
+npm init -y @xarc/app # Run npm init for Electrode apps
+npm i # Install npm requirements
+npm run dev # Run our project in development mode
 ```
 
 This will create, install, and run an Electrode web application with a few simple subapps.
@@ -20,7 +24,7 @@ This will create, install, and run an Electrode web application with a few simpl
 
 - What is a subapp?
 
-  At its core, a subapp is simply a display component. Currently, this can be either or React or Preact component, but more UI libraries may be supported in the future.
+  At its core, a subapp is simply a display component. Currently, this can be either a React or Preact component, but more UI libraries may be supported in the future.
 
 - What makes a subapp special?
 
