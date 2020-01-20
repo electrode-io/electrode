@@ -3,7 +3,7 @@
 const subappWeb = require("subapp-web");
 const React = require("react");
 const FrameworkLib = require("./framework-lib");
-const { default: AppContext } = require("../browser/app-context");
+const { default: AppContext } = require("../dist/node/app-context");
 
 subappWeb.setupFramework(FrameworkLib);
 

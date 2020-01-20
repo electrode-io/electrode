@@ -2,11 +2,11 @@
   "name": "subapp-web",
   "version": "1.0.11",
   "description": "Electrode subapp web support",
-  "module": "browser/index.js",
+  "module": "dist/dev/index.js",
   "main": "lib/index.js",
   "scripts": {
-    "test": "clap -x compile check",
-    "coverage": "clap -x compile check",
+    "test": "clap test",
+    "coverage": "clap coverage",
     "build": "clap compile",
     "prepublishOnly": "clap compile"
   },
@@ -22,11 +22,10 @@
   "license": "Apache-2.0",
   "files": [
     "lib",
-    "browser",
-    "dist",
-    "node-dist"
+    "dist"
   ],
   "dependencies": {
+    "@babel/runtime": "^7.8.3",
     "history": "^4.9.0",
     "little-loader": "^0.2.0",
     "lodash": "^4.17.15",
@@ -37,10 +36,12 @@
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
+    "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "babel-preset-minify": "^0.5.1",
-    "electrode-archetype-njs-module-dev": "^3.0.0"
+    "electrode-archetype-njs-module-dev": "^3.0.0",
+    "subapp-pkg-util": "../subapp-pkg-util"
   },
   "fyn": {
     "dependencies": {

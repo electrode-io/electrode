@@ -8,7 +8,7 @@ const util = require("./util");
 const subappUtil = require("subapp-util");
 
 module.exports = function setup(setupContext) {
-  const distDir = process.env.NODE_ENV === "production" ? "../dist" : "../browser";
+  const distDir = process.env.NODE_ENV === "production" ? "../dist/min" : "../dist/dev";
   const clientJs = Fs.readFileSync(Path.join(__dirname, distDir, "subapp-web.js")).toString();
   const littleLoader = Fs.readFileSync(
     require.resolve("little-loader/dist/little-loader.min.js"),

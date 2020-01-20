@@ -3,7 +3,7 @@
 /* eslint-disable max-statements */
 
 const preact = require("preact");
-const { default: AppContext } = require("../node-dist/app-context");
+const { default: AppContext } = require("../dist/node/app-context");
 const prts = require("preact-render-to-string");
 
 class FrameworkLib {

@@ -2,11 +2,11 @@
   "name": "subapp-pbundle",
   "version": "0.0.3",
   "description": "Electrode subapp support for Preact and redux-bundler",
-  "module": "browser/index.js",
+  "module": "dist/dev/index.js",
   "main": "lib/index.js",
   "scripts": {
-    "test": "clap -x compile check",
-    "coverage": "clap -x compile check",
+    "test": "clap test",
+    "coverage": "clap coverage",
     "build": "clap compile",
     "prepublishOnly": "clap compile"
   },
@@ -24,17 +24,17 @@
   "license": "Apache-2.0",
   "files": [
     "lib",
-    "browser",
-    "dist",
-    "node-dist"
+    "dist"
   ],
   "dependencies": {
+    "@babel/runtime": "^7.8.3",
     "subapp-util": "^1.0.2",
     "subapp-web": "^1.0.11"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
+    "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.7.7",
@@ -45,7 +45,8 @@
     "preact-render-to-string": "^5.1.3",
     "redux-bundler": "^26.0.0",
     "redux-bundler-preact": "^2.0.1",
-    "run-verify": "^1.2.2"
+    "run-verify": "^1.2.2",
+    "subapp-pkg-util": "../subapp-pkg-util"
   },
   "peerDependencies": {
     "preact": "*",
