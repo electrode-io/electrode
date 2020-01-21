@@ -2,9 +2,11 @@
 
 /* eslint-disable max-statements */
 
+const assert = require("assert");
 const preact = require("preact");
 const { default: AppContext } = require("../dist/node/app-context");
 const prts = require("preact-render-to-string");
+const { Provider } = require("redux-bundler-preact");
 
 class FrameworkLib {
   constructor(ref) {
@@ -24,7 +26,7 @@ class FrameworkLib {
     if (!this.StartComponent) {
       return `<!-- serverSideRendering ${subApp.name} has no StartComponent -->`;
     } else if (subApp.__redux) {
-      // return await this.doReduxSSR();
+      return await this.doReduxBundlerSSR();
     } else if (options.serverSideRendering === true) {
       return await this.doSSR();
     }
@@ -89,52 +91,50 @@ class FrameworkLib {
     return await this.renderTo(this.createTopComponent(initialProps), this.ref.options);
   }
 
-  // TODO for redux-bundler
+  async doReduxBundlerSSR() {
+    const { subApp, subAppServer, context, options } = this.ref;
+    const { request } = context.user;
+    // subApp.reduxReducers || subApp.reduxCreateStore) {
+    // if sub app has reduxReducers or reduxCreateStore then assume it's using
+    // redux data model.  prepare initial state and store to render it.
+    let reduxData;
 
-  // async doReduxSSR() {
-  //   const { subApp, subAppServer, context, options } = this.ref;
-  //   const { request } = context.user;
-  //   // subApp.reduxReducers || subApp.reduxCreateStore) {
-  //   // if sub app has reduxReducers or reduxCreateStore then assume it's using
-  //   // redux data model.  prepare initial state and store to render it.
-  //   let reduxData;
+    // see if app has a prepare callback, on the server side first, and then the
+    // app itself, and call it.  assume the object it returns would contain the
+    // initial redux state data.
+    const prepare = subAppServer.prepare || subApp.prepare;
+    if (prepare) {
+      reduxData = await prepare({ request, context });
+    }
 
-  //   // see if app has a prepare callback, on the server side first, and then the
-  //   // app itself, and call it.  assume the object it returns would contain the
-  //   // initial redux state data.
-  //   const prepare = subAppServer.prepare || subApp.prepare;
-  //   if (prepare) {
-  //     reduxData = await prepare({ request, context });
-  //   }
+    if (!reduxData) {
+      reduxData = { initialState: {} };
+    }
 
-  //   if (!reduxData) {
-  //     reduxData = { initialState: {} };
-  //   }
-
-  //   this.initialState = reduxData.initialState || reduxData;
-  //   // if subapp didn't request to skip sending initial state, then stringify it
-  //   // and attach it to the index html.
-  //   if (subAppServer.attachInitialState !== false) {
-  //     this.initialStateStr = JSON.stringify(this.initialState);
-  //   }
-  //   // next we take the initial state and create redux store from it
-  //   this.store =
-  //     reduxData.store ||
-  //     (subApp.reduxCreateStore && (await subApp.reduxCreateStore(this.initialState)));
-  //   assert(
-  //     this.store,
-  //     `redux subapp ${subApp.name} didn't provide store, reduxCreateStore, or reducers`
-  //   );
-  //   if (options.serverSideRendering === true) {
-  //     assert(Provider, "subapp-web: react-redux Provider not available");
-  //     // finally render the element with Redux Provider and the store created
-  //     return await this.renderTo(
-  //       preact.createElement(Provider, { store: this.store }, this.createTopComponent()),
-  //       options
-  //     );
-  //   }
-  //   return "";
-  // }
+    this.initialState = reduxData.initialState || reduxData;
+    // if subapp didn't request to skip sending initial state, then stringify it
+    // and attach it to the index html.
+    if (subAppServer.attachInitialState !== false) {
+      this.initialStateStr = JSON.stringify(this.initialState);
+    }
+    // next we take the initial state and create redux store from it
+    this.store =
+      reduxData.store ||
+      (subApp.reduxCreateStore && (await subApp.reduxCreateStore(this.initialState)));
+    assert(
+      this.store,
+      `redux subapp ${subApp.name} didn't provide store, reduxCreateStore, or reducers`
+    );
+    if (options.serverSideRendering === true) {
+      assert(Provider, "subapp-web: react-redux Provider not available");
+      // finally render the element with Redux Provider and the store created
+      return await this.renderTo(
+        preact.createElement(Provider, { store: this.store }, this.createTopComponent()),
+        options
+      );
+    }
+    return "";
+  }
 }
 
 module.exports = FrameworkLib;

@@ -27,7 +27,11 @@ export default {
     // an object of options, ie: [ "./home", {serverSideRendering: true } ]
     // Ultimately, the resolved path will uniquely identify the subapp
     // TBD: A subapp could potentially be loaded from a remote URL.
-    subApps: ["./home", ["./demo1", { serverSideRendering: false }]],
+    subApps: [
+      "./home",
+      ["./demo1", { serverSideRendering: false }],
+      ["./demo1", { serverSideRendering: true }]
+    ],
 
     /* templateFile */
     // - path your own index page template
