@@ -133,7 +133,7 @@ export function getBrowserHistory() {
 
 export function hotReloadSubApp(info) {
   info = info.default || info; // check for es6 module
-  const subApp = xarc.getSubApp[info.name];
+  const subApp = xarc.getSubApp(info.name);
   subApp.info = info;
   subApp._started.forEach(instance => setTimeout(() => subApp.start(instance), 0));
 }
