@@ -226,6 +226,15 @@ function getAllSubAppManifest() {
 
 function loadSubAppByName(name) {
   const manifest = subAppManifest()[name];
+
+  if (!manifest) {
+    const msg = `loadSubApp: No subapp named '${name}' found. Your subapp's name
+  comes from its subapp-manifest.js file. Without that file, the name is the
+  subapp's directory name in MixCase form. ie: 'my-subapp' => 'MySubapp'`;
+    console.error(msg);
+    throw new Error(msg);
+  }
+
   const container = getSubAppContainer();
   const subAppDir = manifest.subAppDir;
   // load subapp's entry
