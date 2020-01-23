@@ -20,27 +20,27 @@ function setStoreContainer(container) {
   shared = container;
 }
 
-function clearSharedStore() {
-  delete shared.store;
+function clearSharedStore(container) {
+  delete (container || shared).store;
 }
 
-function getSharedStore() {
-  return shared.store;
+function getSharedStore(container) {
+  return (container || shared).store;
 }
 
-function setSharedStore(store) {
-  shared.store = store;
+function setSharedStore(store, container) {
+  (container || shared).store = store;
 }
 
 function getReduxCreateStore(info) {
   const bundles = info.reduxBundles || [];
-  return function reduxCreateStore(initialState) {
-    let store = getSharedStore();
+  return function reduxCreateStore(initialState, container) {
+    let store = getSharedStore(container);
     if (store) {
       store.integrateBundles.apply(this, bundles);
     } else {
       store = composeBundles.apply(this, bundles)(initialState);
-      setSharedStore(store);
+      setSharedStore(store, container);
     }
     return store;
   };
