@@ -13,21 +13,12 @@ export function reduxRenderStart(options) {
   const store = options._store || options.reduxCreateStore(options.initialState);
   const { Component } = options;
 
-  if (options.serverSideRendering) {
-    hydrate(
-      <Provider store={store}>
-        <Component />
-      </Provider>,
-      options.element
-    );
-  } else {
-    render(
-      <Provider store={store}>
-        <Component />
-      </Provider>,
-      options.element
-    );
-  }
+  render(
+    <Provider store={store}>
+      <Component />
+    </Provider>,
+    options.element
+  );
 
   return store;
 }
