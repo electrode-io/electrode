@@ -91,7 +91,7 @@ class FrameworkLib {
     return await this.renderTo(this.createTopComponent(initialProps), this.ref.options);
   }
 
-  async doReduxBundlerSSR() {
+  async doReduxBundlerSSR() { // eslint-disable-line complexity
     const { subApp, subAppServer, context, options } = this.ref;
     const { request } = context.user;
     const container = request.container || (request.container = {});
