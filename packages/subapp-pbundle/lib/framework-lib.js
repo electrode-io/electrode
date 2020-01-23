@@ -127,7 +127,7 @@ class FrameworkLib {
     );
     const reduxStoreReady = subAppServer.reduxStoreReady || subApp.reduxStoreReady;
     if (reduxStoreReady) {
-      await reduxStoreReady(this);
+      await reduxStoreReady({store: this.store});
     }
     if (options.serverSideRendering === true) {
       assert(Provider, "subapp-web: react-redux Provider not available");
