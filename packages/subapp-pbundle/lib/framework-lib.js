@@ -125,6 +125,10 @@ class FrameworkLib {
       this.store,
       `redux subapp ${subApp.name} didn't provide store, reduxCreateStore, or reducers`
     );
+    const reduxStoreReady = subAppServer.reduxStoreReady || subApp.reduxStoreReady;
+    if (reduxStoreReady) {
+      await reduxStoreReady({store: this.store});
+    }
     if (options.serverSideRendering === true) {
       assert(Provider, "subapp-web: react-redux Provider not available");
       // finally render the element with Redux Provider and the store created
