@@ -196,12 +196,15 @@ module.exports = function() {
     });
   }
 
+  const styleBundleFilename =
+    process.env.WEBPACK_DEV || archetype.babel.hasMultiTargets
+      ? "[name].style.css"
+      : "[name].style.[contenthash].css";
+
   return {
     module: { rules },
     plugins: [
-      new MiniCssExtractPlugin({
-        filename: archetype.babel.hasMultiTargets ? "[name].style.css" : "[name].style.[contenthash].css"
-      }),
+      new MiniCssExtractPlugin({ filename: styleBundleFilename }),
       isProduction && new OptimizeCssAssetsPlugin(archetype.webpack.optimizeCssOptions),
       new webpack.LoaderOptionsPlugin({
         minimize: true,
