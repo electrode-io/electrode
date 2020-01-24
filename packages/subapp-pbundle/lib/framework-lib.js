@@ -91,9 +91,11 @@ class FrameworkLib {
     return await this.renderTo(this.createTopComponent(initialProps), this.ref.options);
   }
 
-  async doReduxBundlerSSR() {
+  async doReduxBundlerSSR() { // eslint-disable-line complexity
     const { subApp, subAppServer, context, options } = this.ref;
     const { request } = context.user;
+    const container = request.container || (request.container = {});
+
     // subApp.reduxReducers || subApp.reduxCreateStore) {
     // if sub app has reduxReducers or reduxCreateStore then assume it's using
     // redux data model.  prepare initial state and store to render it.
@@ -120,7 +122,7 @@ class FrameworkLib {
     // next we take the initial state and create redux store from it
     this.store =
       reduxData.store ||
-      (subApp.reduxCreateStore && (await subApp.reduxCreateStore(this.initialState)));
+      (subApp.reduxCreateStore && (await subApp.reduxCreateStore(this.initialState, container)));
     assert(
       this.store,
       `redux subapp ${subApp.name} didn't provide store, reduxCreateStore, or reducers`
