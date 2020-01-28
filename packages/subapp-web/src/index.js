@@ -115,13 +115,23 @@ export function getSubAppComponent({ name, timeout = 15000, onReady, onError, fa
   //
 }
 
+export function waitForSubApp(name) {
+  return new Promise((resolve, reject) => {
+    dynamicLoadSubApp({
+      name,
+      onLoad: () => resolve(),
+      onError: () => reject()
+    });
+  });
+}
+
 export function dynamicLoadSubApp({ name, id, timeout = 15000, onLoad, onError, fallback }) {
   // TODO: timeout and callback
   const lname = name.toLowerCase();
 
   const renderToDomId = subApp => {
     if (!id) {
-      return onLoad();
+      return onLoad && onLoad();
     } else {
       const element = document.getElementById(id);
       if (element && subApp.start) {
@@ -133,7 +143,7 @@ export function dynamicLoadSubApp({ name, id, timeout = 15000, onLoad, onError, 
   const renderInline = () => {
     const subApp = xarc.getSubApp(name);
     if (subApp) {
-      return "Render inline";
+      return subApp.start({});
     }
     return false;
   };
