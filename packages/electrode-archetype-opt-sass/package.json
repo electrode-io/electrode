@@ -2,7 +2,7 @@
   "name": "electrode-archetype-opt-sass",
   "version": "1.0.10",
   "description": "Electrode NodeJS/React Optional Archetype SASS",
-  "main": "index.js",
+  "main": "optional-check.js",
   "homepage": "http://www.electrode.io",
   "repository": {
     "type": "git",
