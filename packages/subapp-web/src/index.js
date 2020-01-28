@@ -19,9 +19,8 @@ export function loadSubApp(info, renderStart) {
   let subApp = xarc.getSubApp(name) || { info };
 
   // mark the subapp's webpack bundle as loaded
-  const lname = name.toLowerCase();
-  if (!xarc.getBundle(lname)) {
-    xarc.setBundle(lname, true);
+  if (!xarc.getBundle(name)) {
+    xarc.setBundle(name, true);
   }
 
   // subapp already loaded, do nothing and return the info
@@ -41,78 +40,134 @@ export function loadSubApp(info, renderStart) {
       return lib.renderStart();
     });
 
-  subApp.start = options => {
-    let instance;
+  subApp.getInstance = options => {
     let element;
-    const id = options.id || options.elementId;
+    let id = options.id || options.elementId;
 
-    if (id) {
-      element = document.getElementById(id);
-      instance = subApp._started.find(x => x.id === id);
-
-      if (!instance) {
-        instance = Object.assign({}, options, { id, element });
-        subApp._started.push(instance);
-      } else {
-        instance.element = element;
-      }
-      console.log("rendering subapp", name, "into", element);
+    if (!id) {
+      id = options._genId;
     } else {
-      // inline rendering, no instance
-      instance = { props: options.props };
+      element = document.getElementById(id);
     }
 
-    const callStart = () => {
-      // if user provided a start function, then user is expected to
-      // have reference to info
-      if (subApp.info.start) {
-        return subApp.info.start(instance, element);
-      }
+    let instance = subApp._started.find(x => x.id === id);
 
-      return subApp._renderStart(instance, element);
-    };
-
-    if (subApp.info.prepare) {
-      const _prepared = subApp.info.prepare(subApp.info, instance);
-      if (_prepared.then) {
-        return _prepared.then(r => {
-          instance._prepared = r;
-          return callStart();
-        });
-      } else {
-        instance._prepared = _prepared;
-      }
+    if (!instance) {
+      instance = Object.assign({}, options, { id, element });
+      subApp._started.push(instance);
+    } else if (instance.element !== element) {
+      // document has changed
+      instance.element = element;
     }
 
-    return callStart();
+    if (element) {
+      console.debug("rendering subapp", name, "into", element);
+    }
+
+    return instance;
   };
 
-  xarc.getOnLoadStart(name).forEach(options => setTimeout(() => subApp.start(options), 0));
+  subApp.preStart = options => {
+    const instance = subApp.getInstance(options);
+
+    if (!instance._prepared) {
+      if (subApp.info.prepare) {
+        instance._prepared = subApp.info.prepare(subApp.info, instance);
+      } else {
+        instance._prepared = {};
+      }
+    }
+
+    return instance;
+  };
+
+  subApp.start = options => {
+    const instance = subApp.preStart(options);
+    // if user provided a start function, then user is expected to
+    // have reference to info
+    const callStart = () => {
+      if (subApp.info.start) {
+        return subApp.info.start(instance, instance.element);
+      }
+
+      return subApp._renderStart(instance, instance.element);
+    };
+
+    if (instance._prepared.then) {
+      return instance._prepared.then(r => {
+        instance._prepared = r;
+        return callStart();
+      });
+    } else {
+      return callStart();
+    }
+  };
+
+  // xarc.addOnLoadStart(name, options);
+
+  // getOnLoadStart(name)
+  //   .forEach(options => setTimeout(() => subApp.start(options), 0));
 
   return info;
 }
 
-export function dynamicLoadSubApp({ name, id, timeout = 15000, onLoad, onError }) {
+export function getSubAppComponent({ name, timeout = 15000, onReady, onError, fallback }) {
+  //
+}
+
+export function waitForSubApp(name) {
+  return new Promise((resolve, reject) => {
+    dynamicLoadSubApp({
+      name,
+      onLoad: () => resolve(),
+      onError: () => reject()
+    });
+  });
+}
+
+export function isLoaded(name) {
+  return Boolean(xarc.getSubApp(name));
+}
+
+export function dynamicLoadSubApp({ name, id, timeout = 15000, onLoad, onError, fallback }) {
   // TODO: timeout and callback
   const lname = name.toLowerCase();
 
+  const renderToDomId = subApp => {
+    if (!id) {
+      return onLoad && onLoad();
+    } else {
+      const element = document.getElementById(id);
+      if (element && subApp.start) {
+        return subApp.start({ id });
+      }
+    }
+  };
+
+  const renderInline = () => {
+    const subApp = xarc.getSubApp(name);
+    if (subApp) {
+      return subApp.start({});
+    }
+    return false;
+  };
+
   if (xarc.getBundle(name) === undefined) {
     xarc.loadSubAppBundles(lname);
+  } else if (!id && !onLoad) {
+    const inlined = renderInline();
+    if (inlined) {
+      return inlined;
+    }
   }
+
   const startTime = Date.now();
 
   const load = delay => {
     setTimeout(() => {
       const subApp = xarc.getSubApp(name);
       if (subApp) {
-        if (!id) {
-          return onLoad();
-        } else {
-          const element = document.getElementById(id);
-          if (element && subApp.start) {
-            return subApp.start({ id });
-          }
-        }
+        return renderToDomId(subApp);
       }
 
       if (timeout > 50 && Date.now() - startTime > timeout) {
@@ -124,6 +179,8 @@ export function dynamicLoadSubApp({ name, id, timeout = 15000, onLoad, onError }
   };
 
   load(0);
+
+  return fallback;
 }
 
 export function getBrowserHistory() {

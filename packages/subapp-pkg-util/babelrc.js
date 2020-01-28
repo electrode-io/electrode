@@ -26,7 +26,9 @@ if (babelEnv.includes("-node")) {
 const presets = [["@babel/env", envOpts], "@babel/react"];
 
 if (babelEnv.includes("-minify")) {
-  presets.push("minify");
+  presets.push(["minify", {
+    "keepFnName": false,
+  }]);
 }
 
 Object.assign(config, { presets });

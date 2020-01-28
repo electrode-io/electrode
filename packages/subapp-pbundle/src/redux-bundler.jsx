@@ -12,15 +12,24 @@ setStoreContainer(typeof window === "undefined" ? global : window);
 export function reduxRenderStart(options) {
   const store = options._store || options.reduxCreateStore(options.initialState);
   const { Component } = options;
+  let component = undefined;
 
-  render(
-    <Provider store={store}>
-      <Component />
-    </Provider>,
-    options.element
-  );
+  if (options.element) {
+    render(
+      <Provider store={store}>
+        <Component />
+      </Provider>,
+      options.element
+    );
+  } else {
+    component = (
+      <Provider store={store}>
+        <Component />
+      </Provider>
+    );
+  }
 
-  return store;
+  return {store, component};
 }
 
 //
@@ -33,7 +42,7 @@ export function reduxBundlerLoadSubApp(info) {
     const reduxCreateStore = instance.reduxCreateStore || this.info.reduxCreateStore;
     const Component = this.info.StartComponent || this.info.Component;
 
-    const store = reduxRenderStart({
+    const {store, component} = reduxRenderStart({
       _store: instance._store,
       initialState,
       reduxCreateStore,
@@ -43,7 +52,7 @@ export function reduxBundlerLoadSubApp(info) {
     });
 
     instance._store = store;
-    return store;
+    return component;
   };
 
   // allow subApp to specify redux bundles as reduxBundles or bundles
