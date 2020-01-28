@@ -125,6 +125,10 @@ export function waitForSubApp(name) {
   });
 }
 
+export function isLoaded(name) {
+  return Boolean(xarc.getSubApp(name));
+}
+
 export function dynamicLoadSubApp({ name, id, timeout = 15000, onLoad, onError, fallback }) {
   // TODO: timeout and callback
   const lname = name.toLowerCase();
