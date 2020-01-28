@@ -60,6 +60,10 @@
     "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
+    "electrode-archetype-opt-eslint": "../../packages/electrode-archetype-opt-eslint",
+    "electrode-archetype-opt-karma": "../../packages/electrode-archetype-opt-karma",
+    "electrode-archetype-opt-mocha": "../../packages/electrode-archetype-opt-mocha",
+    "electrode-archetype-opt-phantomjs": "../../packages/electrode-archetype-opt-phantomjs",
     "electrode-archetype-react-app-dev": "^5.3.4"
   },
   "fyn": {
@@ -72,7 +76,10 @@
       "electrode-cookies": "../../packages/electrode-cookies"
     },
     "devDependencies": {
-      "electrode-archetype-react-app-dev": "../../packages/electrode-archetype-react-app-dev"
+      "electrode-archetype-react-app-dev": "../../packages/electrode-archetype-react-app-dev",
+      "electrode-archetype-opt-eslint": "../../packages/electrode-archetype-opt-eslint",
+      "electrode-archetype-opt-karma": "../../packages/electrode-archetype-opt-karma",
+      "electrode-archetype-opt-phantomjs": "../../packages/electrode-archetype-opt-phantomjs"
     }
   }
 }
