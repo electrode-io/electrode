@@ -1,9 +1,8 @@
 module.exports = {
   options: {
-    eslint: false,
-    flow: false,
-    mocha: false,
-    sass: true
+    sass: true,
+    stylus: true,
+    less: true
   },
   babel: {
     enableDynamicImport: true

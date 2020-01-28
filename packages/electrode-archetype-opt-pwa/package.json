@@ -42,6 +42,6 @@
     "optionalTagName": "pwa",
     "expectTag": true,
     "devOnly": true,
-    "defaultInstall": true
+    "defaultInstall": false
   }
 }

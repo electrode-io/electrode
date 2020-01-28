@@ -53,6 +53,6 @@
     "optionalTagName": "karma",
     "expectTag": true,
     "devOnly": true,
-    "defaultInstall": true
+    "defaultInstall": false
   }
 }
