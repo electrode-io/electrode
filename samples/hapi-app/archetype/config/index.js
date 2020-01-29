@@ -1,9 +1,5 @@
 module.exports = {
-  options: {
-    sass: true,
-    stylus: true,
-    less: true
-  },
+  options: {},
   babel: {
     enableDynamicImport: true
   },

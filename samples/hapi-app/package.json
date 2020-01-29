@@ -61,7 +61,10 @@
   },
   "devDependencies": {
     "electrode-archetype-opt-jest": "^24.0.0",
+    "electrode-archetype-opt-less": "../../packages/electrode-archetype-opt-less",
     "electrode-archetype-opt-postcss": "^1.0.4",
+    "electrode-archetype-opt-sass": "../../packages/electrode-archetype-opt-sass",
+    "electrode-archetype-opt-stylus": "../../packages/electrode-archetype-opt-stylus",
     "electrode-archetype-react-app-dev": "^6.0.0",
     "webpack-hook-plugin": "^1.0.7"
   },
