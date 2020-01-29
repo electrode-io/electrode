@@ -477,7 +477,7 @@
 '@babel/plugin-syntax-jsx':
  _latest: 7.7.4
  _:
-  ^7.7.4: 7.7.4
+  '^7.0.0,^7.7.4': 7.7.4
  7.7.4:
   $: sha512-wuy6fiMe9y7HeZBWXYCGt2RGxZOj0BImZ9EyXJVnVGBKO/Br592rbR3rtIQn0eQhAk9vqaKP5n8tVqEFBQMfLg==
   _: 'https://registry.npmjs.org/@babel/plugin-syntax-jsx/-/plugin-syntax-jsx-7.7.4.tgz'
@@ -2052,7 +2052,7 @@ ajv:
  _latest: 6.10.2
  _:
   '^5.0.0,^5.2.3,^5.3.0': 5.5.2
-  '^6.1.0,^6.10.2,^6.5.0,^6.5.5': 6.10.2
+  '^6.1.0,^6.10.2,^6.5.0,^6.5.3,^6.5.5': 6.10.2
  6.10.2:
   $: sha512-TXtUUEYHuaTEbLZWIKUr5pmBuhDLy+8KYtPYdcV8qC+pOZL+NKqYwvWSRrVXHn+ZmRRAu8vJTAznH7Oag6RVRw==
   _: 'https://registry.npmjs.org/ajv/-/ajv-6.10.2.tgz'
@@ -2522,7 +2522,7 @@ autoprefixer:
  _latest: 9.7.3
  _:
   ^8.6.5: 8.6.5
-  ^9.6.0: 9.7.3
+  '^9.6.0,^9.6.1': 9.7.3
  9.7.3:
   $: sha512-8T5Y1C5Iyj6PgkPSFd0ODvK9DIleuPKUPYniNxybS47g2k2wFgLZ46lGQHlBuGKIAEV8fbCDfKCCRS1tvOgc3Q==
   _: 'https://registry.npmjs.org/autoprefixer/-/autoprefixer-9.7.3.tgz'
@@ -2705,6 +2705,23 @@ babel-plugin-react-css-modules:
  _latest: 5.2.6
  _:
   ^3.4.2: 3.4.2
+  ^5.2.6: 5.2.6
+ 5.2.6:
+  $: sha512-jBU/oVgoEg/58Dcu0tjyNvaXBllxJXip7hlpiX+e0CYTmDADWB484P4pJb7d0L6nWKSzyEqtePcBaq3SKalG/g==
+  _: 'https://registry.npmjs.org/babel-plugin-react-css-modules/-/babel-plugin-react-css-modules-5.2.6.tgz'
+  dependencies:
+   '@babel/plugin-syntax-jsx': ^7.0.0
+   '@babel/types': ^7.0.0
+   ajv: ^6.5.3
+   ajv-keywords: ^3.2.0
+   generic-names: ^2.0.1
+   postcss: ^7.0.2
+   postcss-modules: ^1.3.2
+   postcss-modules-extract-imports: ^1.2.0
+   postcss-modules-local-by-default: ^1.2.0
+   postcss-modules-parser: ^1.1.1
+   postcss-modules-scope: ^1.1.0
+   postcss-modules-values: ^1.3.0
  3.4.2:
   $: sha512-pU7owkj5IO6rlleRzaF27ME/eCG7ZhO+EM+WfthfeykYe0eZzK51JD7nlcUr4UU9y4Zlc+QsTH+139L7PSwYtQ==
   _: 'https://registry.npmjs.org/babel-plugin-react-css-modules/-/babel-plugin-react-css-modules-3.4.2.tgz'
@@ -3179,7 +3196,7 @@ browserslist:
  _latest: 4.8.2
  _:
   ^3.2.8: 3.2.8
-  '^4.0.0,^4.6.0,^4.8.0': 4.8.2
+  '^4.0.0,^4.6.0,^4.6.4,^4.8.0': 4.8.2
  4.8.2:
   $: sha512-+M4oeaTplPm/f1pXDw84YohEv7B1i/2Aisei8s4s6k3QsoSHa7i5sz8u/cGQkkatCPxMASKxPualR4wwYgVboA==
   _: 'https://registry.npmjs.org/browserslist/-/browserslist-4.8.2.tgz'
@@ -3482,7 +3499,7 @@ caniuse-api:
 caniuse-lite:
  _latest: 1.0.30001015
  _:
-  '^1.0.0,^1.0.30000844,^1.0.30000864,^1.0.30000865,^1.0.30001012,^1.0.30001015': 1.0.30001015
+  '^1.0.0,^1.0.30000844,^1.0.30000864,^1.0.30000865,^1.0.30000981,^1.0.30001012,^1.0.30001015': 1.0.30001015
  1.0.30001015:
   $: sha512-/xL2AbW/XWHNu1gnIrO8UitBGoFthcsDgU9VLK1/dpsoxbaD5LscHozKze05R6WLsBvLhqv78dAPozMFQBYLbQ==
   _: 'https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001015.tgz'
@@ -4306,6 +4323,15 @@ css:
    source-map: ^0.6.1
    source-map-resolve: ^0.5.2
    urix: ^0.1.0
+css-blank-pseudo:
+ _latest: 1.0.0
+ _:
+  ^0.1.4: 0.1.4
+ 0.1.4:
+  $: sha512-LHz35Hr83dnFeipc7oqFDmsjHdljj3TQtxGGiNWSOsTLIAubSm4TEz8qCaKFpk7idaQ1GfWscF4E6mgpBysA1w==
+  _: 'https://registry.npmjs.org/css-blank-pseudo/-/css-blank-pseudo-0.1.4.tgz'
+  dependencies:
+   postcss: ^7.0.5
 css-color-names:
  _latest: 1.0.1
  _:
@@ -4323,6 +4349,16 @@ css-declaration-sorter:
   dependencies:
    postcss: ^7.0.1
    timsort: ^0.3.0
+css-has-pseudo:
+ _latest: 1.0.0
+ _:
+  ^0.10.0: 0.10.0
+ 0.10.0:
+  $: sha512-Z8hnfsZu4o/kt+AuFzeGpLVhFOGO9mluyHBaA2bA8aCGTwah5sT3WV/fTHH8UNZUytOIImuGPrl/prlb4oX4qQ==
+  _: 'https://registry.npmjs.org/css-has-pseudo/-/css-has-pseudo-0.10.0.tgz'
+  dependencies:
+   postcss: ^7.0.6
+   postcss-selector-parser: ^5.0.0-rc.4
 css-loader:
  _latest: 3.2.1
  _:
@@ -4395,6 +4431,15 @@ css-parse:
   _: 'https://registry.npmjs.org/css-parse/-/css-parse-2.0.0.tgz'
   dependencies:
    css: ^2.0.0
+css-prefers-color-scheme:
+ _latest: 4.0.0
+ _:
+  ^3.1.1: 3.1.1
+ 3.1.1:
+  $: sha512-MTu6+tMs9S3EUqzmqLXEcgNRbNkkD/TGFvowpeoWJn5Vfq7FMgsmRQs9X5NXAURiOBmOxm/lLjsDNXDE6k9bhg==
+  _: 'https://registry.npmjs.org/css-prefers-color-scheme/-/css-prefers-color-scheme-3.1.1.tgz'
+  dependencies:
+   postcss: ^7.0.5
 css-select:
  _latest: 2.1.0
  _:
@@ -4486,6 +4531,10 @@ cssdb:
  _latest: 5.0.0
  _:
   ^3.1.0: 3.2.1
+  ^4.4.0: 4.4.0
+ 4.4.0:
+  $: sha512-LsTAR1JPEM9TpGhl/0p3nQecC2LJ0kD8X5YARu1hk/9I1gril5vDtMZyNxcEpxxDj34YNck/ucjuoUd66K03oQ==
+  _: 'https://registry.npmjs.org/cssdb/-/cssdb-4.4.0.tgz'
  3.2.1:
   $: sha512-I0IS8zvxED8sQtFZnV7M+AkhWqTgp1HIyfMQJBbjdn4GgurBt7NCZaDgrWiAN2kNJN34mhF1p50aZIMQu290mA==
   _: 'https://registry.npmjs.org/cssdb/-/cssdb-3.2.1.tgz'
@@ -4495,6 +4544,10 @@ cssesc:
   ^0.1.0: 0.1.0
   ^1.0.1: 1.0.1
   ^2.0.0: 2.0.0
+  ^3.0.0: 3.0.0
+ 3.0.0:
+  $: sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==
+  _: 'https://registry.npmjs.org/cssesc/-/cssesc-3.0.0.tgz'
  2.0.0:
   $: sha512-MsCAG1z9lPdoO/IUMLSBWBSVxVtJ1395VGIQ+Fc2gNdkQ1hNDnQdw3YhA71WJCBW1vdwA0cAnk/DnW6bqoEUYg==
   _: 'https://registry.npmjs.org/cssesc/-/cssesc-2.0.0.tgz'
@@ -5355,14 +5408,14 @@ electrode-archetype-opt-postcss:
   $: local
   _: ../../packages/electrode-archetype-opt-postcss
   dependencies:
-   babel-plugin-react-css-modules: ^3.4.2
-   postcss-import: ^9.1.0
+   babel-plugin-react-css-modules: ^5.2.6
+   postcss-import: ^12.0.1
    postcss-less: ^3.1.4
    postcss-loader: ^3.0.0
-   postcss-nested: ^3.0.0
-   postcss-preset-env: ^5.3.0
-   postcss-scss: ^1.0.6
-   sugarss: ^1.0.1
+   postcss-nested: ^4.2.1
+   postcss-preset-env: ^6.7.0
+   postcss-scss: ^2.0.0
+   sugarss: ^2.0.0
  1.0.4:
   top: 1
   hasPI: 1
@@ -7096,6 +7149,12 @@ generic-names:
  _latest: 2.0.1
  _:
   '^1.0.1,^1.0.3': 1.0.3
+  ^2.0.1: 2.0.1
+ 2.0.1:
+  $: sha512-kPCHWa1m9wGG/OwQpeweTwM/PYiQLrUIxXbt/P4Nic3LbGjCP0YwrALHW1uNLKZ0LIMg+RF+XRlj2ekT9ZlZAQ==
+  _: 'https://registry.npmjs.org/generic-names/-/generic-names-2.0.1.tgz'
+  dependencies:
+   loader-utils: ^1.1.0
  1.0.3:
   $: sha1-LXhqEhruUIh2eWk56OO/+DbCCRc=
   _: 'https://registry.npmjs.org/generic-names/-/generic-names-1.0.3.tgz'
@@ -10344,7 +10403,7 @@ lodash.tail:
 lodash.template:
  _latest: 4.5.0
  _:
-  '^4.2.4,^4.4.0': 4.5.0
+  '^4.2.4,^4.4.0,^4.5.0': 4.5.0
  4.5.0:
   $: sha512-84vYFxIkmidUiFxidA/KjjH9pAycqW+h980j7Fuz5qxRtO9pgB7MDFTdys1N7A5mcucRiDyEq4fusljItR1T/A==
   _: 'https://registry.npmjs.org/lodash.template/-/lodash.template-4.5.0.tgz'
@@ -12296,7 +12355,7 @@ postcss:
   ^6.0.1:
    - 6.0.23
    - 6.0.1
-  '^7.0.0,^7.0.1,^7.0.14,^7.0.23,^7.0.5': 7.0.23
+  '^7.0.0,^7.0.1,^7.0.14,^7.0.17,^7.0.2,^7.0.21,^7.0.23,^7.0.5,^7.0.6': 7.0.23
  7.0.23:
   $: sha512-hOlMf3ouRIFXD+j2VJecwssTwbvsPGJVMzupptg+85WA+i7MwyrydmQAgY3R+m0Bc0exunhbJmijy8u8+vufuQ==
   _: 'https://registry.npmjs.org/postcss/-/postcss-7.0.23.tgz'
@@ -12330,6 +12389,13 @@ postcss-attribute-case-insensitive:
  _latest: 4.0.1
  _:
   ^3.0.1: 3.0.1
+  ^4.0.1: 4.0.2
+ 4.0.2:
+  $: sha512-clkFxk/9pcdb4Vkn0hAHq3YnxBQ2p0CGD1dy24jN+reBck+EWxMbxSUqN4Yj7t0w8csl87K6p0gxBe1utkJsYA==
+  _: 'https://registry.npmjs.org/postcss-attribute-case-insensitive/-/postcss-attribute-case-insensitive-4.0.2.tgz'
+  dependencies:
+   postcss: ^7.0.2
+   postcss-selector-parser: ^6.0.2
  3.0.1:
   $: sha512-X/viSS9YrAoDnRa2R4sElsAmW+scOWeVW11FjWQN8m+FW1YY0jdIA9fuBSSF1pKsJTYXJXGJ1oAjFHl8cqcmKw==
   _: 'https://registry.npmjs.org/postcss-attribute-case-insensitive/-/postcss-attribute-case-insensitive-3.0.1.tgz'
@@ -12352,16 +12418,41 @@ postcss-color-functional-notation:
  _latest: 2.0.1
  _:
   ^1.0.2: 1.0.2
+  ^2.0.1: 2.0.1
+ 2.0.1:
+  $: sha512-ZBARCypjEDofW4P6IdPVTLhDNXPRn8T2s1zHbZidW6rPaaZvcnCS2soYFIQJrMZSxiePJ2XIYTlcb2ztr/eT2g==
+  _: 'https://registry.npmjs.org/postcss-color-functional-notation/-/postcss-color-functional-notation-2.0.1.tgz'
+  dependencies:
+   postcss: ^7.0.2
+   postcss-values-parser: ^2.0.0
  1.0.2:
   $: sha512-FxkEr+s/KCrcrTxUhHcDMKGZmnLjUKK7pl2gDjnEoAJaVcbThdDWLhuASu02qdA3Ys7np/BwJgwc72JrURTvJQ==
   _: 'https://registry.npmjs.org/postcss-color-functional-notation/-/postcss-color-functional-notation-1.0.2.tgz'
   dependencies:
    postcss: ^6.0.23
    postcss-values-parser: ^1.5.0
+postcss-color-gray:
+ _latest: 5.0.0
+ _:
+  ^5.0.0: 5.0.0
+ 5.0.0:
+  $: sha512-q6BuRnAGKM/ZRpfDascZlIZPjvwsRye7UDNalqVz3s7GDxMtqPY6+Q871liNxsonUw8oC61OG+PSaysYpl1bnw==
+  _: 'https://registry.npmjs.org/postcss-color-gray/-/postcss-color-gray-5.0.0.tgz'
+  dependencies:
+   '@csstools/convert-colors': ^1.4.0
+   postcss: ^7.0.5
+   postcss-values-parser: ^2.0.0
 postcss-color-hex-alpha:
  _latest: 5.0.3
  _:
   ^3.0.0: 3.0.0
+  ^5.0.3: 5.0.3
+ 5.0.3:
+  $: sha512-PF4GDel8q3kkreVXKLAGNpHKilXsZ6xuu+mOQMHWHLPNyjiUBOr75sp5ZKJfmv1MCus5/DWUGcK9hm6qHEnXYw==
+  _: 'https://registry.npmjs.org/postcss-color-hex-alpha/-/postcss-color-hex-alpha-5.0.3.tgz'
+  dependencies:
+   postcss: ^7.0.14
+   postcss-values-parser: ^2.0.1
  3.0.0:
   $: sha1-HlPmyKyyN5Vej9CLfs2xuLgwn5U=
   _: 'https://registry.npmjs.org/postcss-color-hex-alpha/-/postcss-color-hex-alpha-3.0.0.tgz'
@@ -12373,6 +12464,14 @@ postcss-color-mod-function:
  _latest: 3.0.3
  _:
   ^2.4.3: 2.4.3
+  ^3.0.3: 3.0.3
+ 3.0.3:
+  $: sha512-YP4VG+xufxaVtzV6ZmhEtc+/aTXH3d0JLpnYfxqTvwZPbJhWqp8bSY3nfNzNRFLgB4XSaBA82OE4VjOOKpCdVQ==
+  _: 'https://registry.npmjs.org/postcss-color-mod-function/-/postcss-color-mod-function-3.0.3.tgz'
+  dependencies:
+   '@csstools/convert-colors': ^1.4.0
+   postcss: ^7.0.2
+   postcss-values-parser: ^2.0.0
  2.4.3:
   $: sha512-TEATRHN1m2+vM4efwRoPyrAQTbBA4xgx1jSMPv64oLcwVFC4qr6d4o9DAD5LxygIMeBBBugQHvXoSIM+87NaFQ==
   _: 'https://registry.npmjs.org/postcss-color-mod-function/-/postcss-color-mod-function-2.4.3.tgz'
@@ -12384,6 +12483,13 @@ postcss-color-rebeccapurple:
  _latest: 4.0.1
  _:
   ^3.1.0: 3.1.0
+  ^4.0.1: 4.0.1
+ 4.0.1:
+  $: sha512-aAe3OhkS6qJXBbqzvZth2Au4V3KieR5sRQ4ptb2b2O8wgvB3SJBsdG+jsn2BZbbwekDG8nTfcCNKcSfe/lEy8g==
+  _: 'https://registry.npmjs.org/postcss-color-rebeccapurple/-/postcss-color-rebeccapurple-4.0.1.tgz'
+  dependencies:
+   postcss: ^7.0.2
+   postcss-values-parser: ^2.0.0
  3.1.0:
   $: sha512-212hJUk9uSsbwO5ECqVjmh/iLsmiVL1xy9ce9TVf+X3cK/ZlUIlaMdoxje/YpsL9cmUH3I7io+/G2LyWx5rg1g==
   _: 'https://registry.npmjs.org/postcss-color-rebeccapurple/-/postcss-color-rebeccapurple-3.1.0.tgz'
@@ -12417,6 +12523,12 @@ postcss-custom-media:
  _latest: 7.0.8
  _:
   ^6.0.0: 6.0.0
+  ^7.0.8: 7.0.8
+ 7.0.8:
+  $: sha512-c9s5iX0Ge15o00HKbuRuTqNndsJUbaXdiNsksnVH8H4gdc+zbLzr/UasOwNG6CTDpLFekVY4672eWdiiWu2GUg==
+  _: 'https://registry.npmjs.org/postcss-custom-media/-/postcss-custom-media-7.0.8.tgz'
+  dependencies:
+   postcss: ^7.0.14
  6.0.0:
   $: sha1-vlMnhBEOyylQRPtTlaGABushpzc=
   _: 'https://registry.npmjs.org/postcss-custom-media/-/postcss-custom-media-6.0.0.tgz'
@@ -12426,6 +12538,13 @@ postcss-custom-properties:
  _latest: 9.0.2
  _:
   ^7.0.0: 7.0.0
+  ^8.0.11: 8.0.11
+ 8.0.11:
+  $: sha512-nm+o0eLdYqdnJ5abAJeXp4CEU1c1k+eB2yMCvhgzsds/e0umabFrN6HoTy/8Q4K5ilxERdl/JD1LO5ANoYBeMA==
+  _: 'https://registry.npmjs.org/postcss-custom-properties/-/postcss-custom-properties-8.0.11.tgz'
+  dependencies:
+   postcss: ^7.0.17
+   postcss-values-parser: ^2.0.1
  7.0.0:
   $: sha512-dl/CNaM6z2RBa0vZZqsV6Hunj4HD6Spu7FcAkiVp5B2tgm6xReKKYzI7x7QNx3wTMBNj5v+ylfVcQGMW4xdkHw==
   _: 'https://registry.npmjs.org/postcss-custom-properties/-/postcss-custom-properties-7.0.0.tgz'
@@ -12436,6 +12555,13 @@ postcss-custom-selectors:
  _latest: 5.1.2
  _:
   ^4.0.1: 4.0.1
+  ^5.1.2: 5.1.2
+ 5.1.2:
+  $: sha512-DSGDhqinCqXqlS4R7KGxL1OSycd1lydugJ1ky4iRXPHdBRiozyMHrdu0H3o7qNOCiZwySZTUI5MV0T8QhCLu+w==
+  _: 'https://registry.npmjs.org/postcss-custom-selectors/-/postcss-custom-selectors-5.1.2.tgz'
+  dependencies:
+   postcss: ^7.0.2
+   postcss-selector-parser: ^5.0.0-rc.3
  4.0.1:
   $: sha1-eBOC+UxS5yfvXKR3bqKt9JphE4I=
   _: 'https://registry.npmjs.org/postcss-custom-selectors/-/postcss-custom-selectors-4.0.1.tgz'
@@ -12446,6 +12572,13 @@ postcss-dir-pseudo-class:
  _latest: 5.0.0
  _:
   ^4.0.0: 4.0.0
+  ^5.0.0: 5.0.0
+ 5.0.0:
+  $: sha512-3pm4oq8HYWMZePJY+5ANriPs3P07q+LW6FAdTlkFH2XqDdP4HeeJYMOzn0HYLhRSjBO3fhiqSwwU9xEULSrPgw==
+  _: 'https://registry.npmjs.org/postcss-dir-pseudo-class/-/postcss-dir-pseudo-class-5.0.0.tgz'
+  dependencies:
+   postcss: ^7.0.2
+   postcss-selector-parser: ^5.0.0-rc.3
  4.0.0:
   $: sha512-ZAeXMIyZukHHeDt5IFchWB+okPzasb8YnpkXIgTiJl4216X1IplMrODjihZIBDXNE2RdJRBCAOx8uGzCnGSxTA==
   _: 'https://registry.npmjs.org/postcss-dir-pseudo-class/-/postcss-dir-pseudo-class-4.0.0.tgz'
@@ -12488,10 +12621,27 @@ postcss-discard-overridden:
   _: 'https://registry.npmjs.org/postcss-discard-overridden/-/postcss-discard-overridden-4.0.1.tgz'
   dependencies:
    postcss: ^7.0.0
+postcss-double-position-gradients:
+ _latest: 1.0.0
+ _:
+  ^1.0.0: 1.0.0
+ 1.0.0:
+  $: sha512-G+nV8EnQq25fOI8CH/B6krEohGWnF5+3A6H/+JEpOncu5dCnkS1QQ6+ct3Jkaepw1NGVqqOZH6lqrm244mCftA==
+  _: 'https://registry.npmjs.org/postcss-double-position-gradients/-/postcss-double-position-gradients-1.0.0.tgz'
+  dependencies:
+   postcss: ^7.0.5
+   postcss-values-parser: ^2.0.0
 postcss-env-function:
  _latest: 2.0.2
  _:
   ^1.0.0: 1.0.0
+  ^2.0.2: 2.0.2
+ 2.0.2:
+  $: sha512-rwac4BuZlITeUbiBq60h/xbLzXY43qOsIErngWa4l7Mt+RaSkT7QBjXVGTcBHupykkblHMDrBFh30zchYPaOUw==
+  _: 'https://registry.npmjs.org/postcss-env-function/-/postcss-env-function-2.0.2.tgz'
+  dependencies:
+   postcss: ^7.0.2
+   postcss-values-parser: ^2.0.0
  1.0.0:
   $: sha512-UVkdbVCRAEr79XkS6uxMRWIHYrFNuhXmjw6gxyesCBXzzHIvYOoz5UKTWM39xX3j9vGO5waVzxq/VzEiZgsM0g==
   _: 'https://registry.npmjs.org/postcss-env-function/-/postcss-env-function-1.0.0.tgz'
@@ -12502,6 +12652,12 @@ postcss-focus-visible:
  _latest: 4.0.0
  _:
   ^3.0.0: 3.0.0
+  ^4.0.0: 4.0.0
+ 4.0.0:
+  $: sha512-Z5CkWBw0+idJHSV6+Bgf2peDOFf/x4o+vX/pwcNYrWpXFrSfTkQ3JQ1ojrq9yS+upnAlNRHeg8uEwFTgorjI8g==
+  _: 'https://registry.npmjs.org/postcss-focus-visible/-/postcss-focus-visible-4.0.0.tgz'
+  dependencies:
+   postcss: ^7.0.2
  3.0.0:
   $: sha512-6i3HsOrWNelxBYPh/HWAXF9lPwCFAfFVlUTZqsLRXYMPhcXH1eXdItozRBvT9l5pYF4ddJJbgk4JOp0au0QToA==
   _: 'https://registry.npmjs.org/postcss-focus-visible/-/postcss-focus-visible-3.0.0.tgz'
@@ -12511,6 +12667,12 @@ postcss-focus-within:
  _latest: 3.0.0
  _:
   ^2.0.0: 2.0.0
+  ^3.0.0: 3.0.0
+ 3.0.0:
+  $: sha512-W0APui8jQeBKbCGZudW37EeMCjDeVxKgiYfIIEo8Bdh5SpB9sxds/Iq8SEuzS0Q4YFOlG7EPFulbbxujpkrV2w==
+  _: 'https://registry.npmjs.org/postcss-focus-within/-/postcss-focus-within-3.0.0.tgz'
+  dependencies:
+   postcss: ^7.0.2
  2.0.0:
   $: sha512-LTbT/dxZ3FahpOv1XZMyRLNnBk5QWVU4HL/p82iFkzoPNVhNQazaYIujHXTOAKea5clgjbj6GdFj7mU7qzy1kQ==
   _: 'https://registry.npmjs.org/postcss-focus-within/-/postcss-focus-within-2.0.0.tgz'
@@ -12529,6 +12691,12 @@ postcss-font-variant:
  _latest: 4.0.0
  _:
   ^3.0.0: 3.0.0
+  ^4.0.0: 4.0.0
+ 4.0.0:
+  $: sha512-M8BFYKOvCrI2aITzDad7kWuXXTm0YhGdP9Q8HanmN4EF1Hmcgs1KK5rSHylt/lUJe8yLxiSwWAHdScoEiIxztg==
+  _: 'https://registry.npmjs.org/postcss-font-variant/-/postcss-font-variant-4.0.0.tgz'
+  dependencies:
+   postcss: ^7.0.2
  3.0.0:
   $: sha1-CMzIj2BQuoLtjvLMdsDGprQfGD4=
   _: 'https://registry.npmjs.org/postcss-font-variant/-/postcss-font-variant-3.0.0.tgz'
@@ -12538,6 +12706,12 @@ postcss-gap-properties:
  _latest: 2.0.0
  _:
   ^1.0.0: 1.0.0
+  ^2.0.0: 2.0.0
+ 2.0.0:
+  $: sha512-QZSqDaMgXCHuHTEzMsS2KfVDOq7ZFiknSpkrPJY6jmxbugUPTuSzs/vuE5I3zv0WAS+3vhrlqhijiprnuQfzmg==
+  _: 'https://registry.npmjs.org/postcss-gap-properties/-/postcss-gap-properties-2.0.0.tgz'
+  dependencies:
+   postcss: ^7.0.2
  1.0.0:
   $: sha512-snL2k0Nie72J0uCsKgfO2Sd5rs3Wlhsk+k9uVzyMaeBH9gouNPPY7tZ4bopRJmBISbZEUtvF8Gchat6nOFQHdg==
   _: 'https://registry.npmjs.org/postcss-gap-properties/-/postcss-gap-properties-1.0.0.tgz'
@@ -12547,6 +12721,13 @@ postcss-image-set-function:
  _latest: 3.0.1
  _:
   ^2.0.0: 2.0.0
+  ^3.0.1: 3.0.1
+ 3.0.1:
+  $: sha512-oPTcFFip5LZy8Y/whto91L9xdRHCWEMs3e1MdJxhgt4jy2WYXfhkng59fH5qLXSCPN8k4n94p1Czrfe5IOkKUw==
+  _: 'https://registry.npmjs.org/postcss-image-set-function/-/postcss-image-set-function-3.0.1.tgz'
+  dependencies:
+   postcss: ^7.0.2
+   postcss-values-parser: ^2.0.0
  2.0.0:
   $: sha512-2bpCIj2wFhIhpyM1G/ZZgBJM8K/VKbEcQ0SX5MI9MTGv4giPMnuXMa/sX3bHXHhi1PL4v2WRfqD1+w5T9EhFqg==
   _: 'https://registry.npmjs.org/postcss-image-set-function/-/postcss-image-set-function-2.0.0.tgz'
@@ -12556,7 +12737,16 @@ postcss-image-set-function:
 postcss-import:
  _latest: 12.0.1
  _:
+  ^12.0.1: 12.0.1
   ^9.1.0: 9.1.0
+ 12.0.1:
+  $: sha512-3Gti33dmCjyKBgimqGxL3vcV8w9+bsHwO5UrBawp796+jdardbcFl4RP5w/76BwNL7aGzpKstIfF9I+kdE8pTw==
+  _: 'https://registry.npmjs.org/postcss-import/-/postcss-import-12.0.1.tgz'
+  dependencies:
+   postcss: ^7.0.1
+   postcss-value-parser: ^3.2.3
+   read-cache: ^1.0.0
+   resolve: ^1.1.7
  9.1.0:
   $: sha1-lf6YdqHnmvSfvcNYnwH+WqfMHoA=
   _: 'https://registry.npmjs.org/postcss-import/-/postcss-import-9.1.0.tgz'
@@ -12571,6 +12761,13 @@ postcss-initial:
  _latest: 3.0.2
  _:
   ^2.0.0: 2.0.0
+  ^3.0.0: 3.0.2
+ 3.0.2:
+  $: sha512-ugA2wKonC0xeNHgirR4D3VWHs2JcU08WAi1KFLVcnb7IN89phID6Qtg2RIctWbnvp1TM2BOmDtX8GGLCKdR8YA==
+  _: 'https://registry.npmjs.org/postcss-initial/-/postcss-initial-3.0.2.tgz'
+  dependencies:
+   lodash.template: ^4.5.0
+   postcss: ^7.0.2
  2.0.0:
   $: sha1-cnFfczbgu3k1HZnuZcSiU6hEG6Q=
   _: 'https://registry.npmjs.org/postcss-initial/-/postcss-initial-2.0.0.tgz'
@@ -12581,6 +12778,14 @@ postcss-lab-function:
  _latest: 2.0.1
  _:
   ^1.1.0: 1.1.0
+  ^2.0.1: 2.0.1
+ 2.0.1:
+  $: sha512-whLy1IeZKY+3fYdqQFuDBf8Auw+qFuVnChWjmxm/UhHWqNHZx+B99EwxTvGYmUBqe3Fjxs4L1BoZTJmPu6usVg==
+  _: 'https://registry.npmjs.org/postcss-lab-function/-/postcss-lab-function-2.0.1.tgz'
+  dependencies:
+   '@csstools/convert-colors': ^1.4.0
+   postcss: ^7.0.2
+   postcss-values-parser: ^2.0.0
  1.1.0:
   $: sha512-n5OBvdjTUSIpMnYuwOYp2wyrUxx3WwDnuAWLyFUryKU67QrlgHndtOn/8xEUzviknpC6fEi/HQ+qLoVew3C+0A==
   _: 'https://registry.npmjs.org/postcss-lab-function/-/postcss-lab-function-1.1.0.tgz'
@@ -12623,6 +12828,12 @@ postcss-logical:
  _latest: 4.0.2
  _:
   ^1.1.1: 1.1.1
+  ^3.0.0: 3.0.0
+ 3.0.0:
+  $: sha512-1SUKdJc2vuMOmeItqGuNaC+N8MzBWFWEkAnRnLpFYj1tGGa7NqyVBujfRtgNa2gXR+6RkGUiB2O5Vmh7E2RmiA==
+  _: 'https://registry.npmjs.org/postcss-logical/-/postcss-logical-3.0.0.tgz'
+  dependencies:
+   postcss: ^7.0.2
  1.1.1:
   $: sha512-ZJgyLJlp3uPKae9+6sJKFjD06UZzb/m3M1LPeHsaBMvvyatcNWwCfOZVIq00fJdxUqa9QeuQO6RZElKmRdWMEg==
   _: 'https://registry.npmjs.org/postcss-logical/-/postcss-logical-1.1.1.tgz'
@@ -12632,6 +12843,12 @@ postcss-media-minmax:
  _latest: 4.0.0
  _:
   ^3.0.0: 3.0.0
+  ^4.0.0: 4.0.0
+ 4.0.0:
+  $: sha512-fo9moya6qyxsjbFAYl97qKO9gyre3qvbMnkOZeZwlsW6XYFsvs2DMGDlchVLfAd8LHPZDxivu/+qW2SMQeTHBw==
+  _: 'https://registry.npmjs.org/postcss-media-minmax/-/postcss-media-minmax-4.0.0.tgz'
+  dependencies:
+   postcss: ^7.0.2
  3.0.0:
   $: sha1-Z1JWA3pD70C8Twdgv9BtTcadSNI=
   _: 'https://registry.npmjs.org/postcss-media-minmax/-/postcss-media-minmax-3.0.0.tgz'
@@ -12721,7 +12938,7 @@ postcss-minify-selectors:
 postcss-modules:
  _latest: 1.4.1
  _:
-  ^1.1.0: 1.4.1
+  '^1.1.0,^1.3.2': 1.4.1
  1.4.1:
   $: sha512-btTrbK+Xc3NBuYF8TPBjCMRSp5h6NoQ1iVZ6WiDQENIze6KIYCSf0+UFQuV3yJ7gRHA+4AAtF8i2jRvUpbBMMg==
   _: 'https://registry.npmjs.org/postcss-modules/-/postcss-modules-1.4.1.tgz'
@@ -12804,6 +13021,13 @@ postcss-nested:
  _latest: 4.2.1
  _:
   ^3.0.0: 3.0.0
+  ^4.2.1: 4.2.1
+ 4.2.1:
+  $: sha512-AMayXX8tS0HCp4O4lolp4ygj9wBn32DJWXvG6gCv+ZvJrEa00GUxJcJEEzMh87BIe6FrWdYkpR2cuyqHKrxmXw==
+  _: 'https://registry.npmjs.org/postcss-nested/-/postcss-nested-4.2.1.tgz'
+  dependencies:
+   postcss: ^7.0.21
+   postcss-selector-parser: ^6.0.2
  3.0.0:
   $: sha512-1xxmLHSfubuUi6xZZ0zLsNoiKfk3BWQj6fkNMaBJC529wKKLcdeCxXt6KJmDLva+trNyQNwEaE/ZWMA7cve1fA==
   _: 'https://registry.npmjs.org/postcss-nested/-/postcss-nested-3.0.0.tgz'
@@ -12814,6 +13038,12 @@ postcss-nesting:
  _latest: 7.0.1
  _:
   ^6.0.0: 6.0.0
+  ^7.0.0: 7.0.1
+ 7.0.1:
+  $: sha512-FrorPb0H3nuVq0Sff7W2rnc3SmIcruVC6YwpcS+k687VxyxO33iE1amna7wHuRVzM8vfiYofXSBHNAZ3QhLvYg==
+  _: 'https://registry.npmjs.org/postcss-nesting/-/postcss-nesting-7.0.1.tgz'
+  dependencies:
+   postcss: ^7.0.2
  6.0.0:
   $: sha512-Yoglsy6eZbDCbRIXoYSmnIt9ao4xyg07iFwVBd7WyIkDzMSeRxIqUk8xEAdkeJQ7eGfWo6RufrTU7FSUjZ22fg==
   _: 'https://registry.npmjs.org/postcss-nesting/-/postcss-nesting-6.0.0.tgz'
@@ -12933,6 +13163,12 @@ postcss-overflow-shorthand:
  _latest: 2.0.0
  _:
   ^1.0.1: 1.0.1
+  ^2.0.0: 2.0.0
+ 2.0.0:
+  $: sha512-aK0fHc9CBNx8jbzMYhshZcEv8LtYnBIRYQD5i7w/K/wS9c2+0NSR6B3OVMu5y0hBHYLcMGjfU+dmWYNKH0I85g==
+  _: 'https://registry.npmjs.org/postcss-overflow-shorthand/-/postcss-overflow-shorthand-2.0.0.tgz'
+  dependencies:
+   postcss: ^7.0.2
  1.0.1:
   $: sha512-QeJk23W8dLP2DrWYSKTwfFfh4Tcy5Msr58vuuxCPcCijX/07jva0OGNKtUH9vZ6NnXB2WEsnfIIg5M0ScPEWeQ==
   _: 'https://registry.npmjs.org/postcss-overflow-shorthand/-/postcss-overflow-shorthand-1.0.1.tgz'
@@ -12942,6 +13178,12 @@ postcss-page-break:
  _latest: 2.0.0
  _:
   ^1.0.0: 1.0.0
+  ^2.0.0: 2.0.0
+ 2.0.0:
+  $: sha512-tkpTSrLpfLfD9HvgOlJuigLuk39wVTbbd8RKcy8/ugV2bNBUW3xU+AIqyxhDrQr1VUj1RmyJrBn1YWrqUm9zAQ==
+  _: 'https://registry.npmjs.org/postcss-page-break/-/postcss-page-break-2.0.0.tgz'
+  dependencies:
+   postcss: ^7.0.2
  1.0.0:
   $: sha512-FgjJ7q/cQFbfQFdmm15XDu+DjNb6Tcn7LYm+o1CxyHV5p6pCm0jkRhuU+PF6FaMrSTfy5nF8nuWhwOtUQyWiYA==
   _: 'https://registry.npmjs.org/postcss-page-break/-/postcss-page-break-1.0.0.tgz'
@@ -12951,6 +13193,13 @@ postcss-place:
  _latest: 4.0.1
  _:
   ^3.0.1: 3.0.1
+  ^4.0.1: 4.0.1
+ 4.0.1:
+  $: sha512-Zb6byCSLkgRKLODj/5mQugyuj9bvAAw9LqJJjgwz5cYryGeXfFZfSXoP1UfveccFmeq0b/2xxwcTEVScnqGxBg==
+  _: 'https://registry.npmjs.org/postcss-place/-/postcss-place-4.0.1.tgz'
+  dependencies:
+   postcss: ^7.0.2
+   postcss-values-parser: ^2.0.0
  3.0.1:
   $: sha512-6Cg0z39zBU4FOS85Z6+Us+GCIW7UqKdOGH/9j26LwMzZ3L909wG7NP3BF+L12AEeIL5XfI8Q5SWu9Or3nJTS8g==
   _: 'https://registry.npmjs.org/postcss-place/-/postcss-place-3.0.1.tgz'
@@ -12961,6 +13210,48 @@ postcss-preset-env:
  _latest: 6.7.0
  _:
   ^5.3.0: 5.3.0
+  ^6.7.0: 6.7.0
+ 6.7.0:
+  $: sha512-eU4/K5xzSFwUFJ8hTdTQzo2RBLbDVt83QZrAvI07TULOkmyQlnYlpwep+2yIK+K+0KlZO4BvFcleOCCcUtwchg==
+  _: 'https://registry.npmjs.org/postcss-preset-env/-/postcss-preset-env-6.7.0.tgz'
+  dependencies:
+   autoprefixer: ^9.6.1
+   browserslist: ^4.6.4
+   caniuse-lite: ^1.0.30000981
+   css-blank-pseudo: ^0.1.4
+   css-has-pseudo: ^0.10.0
+   css-prefers-color-scheme: ^3.1.1
+   cssdb: ^4.4.0
+   postcss: ^7.0.17
+   postcss-attribute-case-insensitive: ^4.0.1
+   postcss-color-functional-notation: ^2.0.1
+   postcss-color-gray: ^5.0.0
+   postcss-color-hex-alpha: ^5.0.3
+   postcss-color-mod-function: ^3.0.3
+   postcss-color-rebeccapurple: ^4.0.1
+   postcss-custom-media: ^7.0.8
+   postcss-custom-properties: ^8.0.11
+   postcss-custom-selectors: ^5.1.2
+   postcss-dir-pseudo-class: ^5.0.0
+   postcss-double-position-gradients: ^1.0.0
+   postcss-env-function: ^2.0.2
+   postcss-focus-visible: ^4.0.0
+   postcss-focus-within: ^3.0.0
+   postcss-font-variant: ^4.0.0
+   postcss-gap-properties: ^2.0.0
+   postcss-image-set-function: ^3.0.1
+   postcss-initial: ^3.0.0
+   postcss-lab-function: ^2.0.1
+   postcss-logical: ^3.0.0
+   postcss-media-minmax: ^4.0.0
+   postcss-nesting: ^7.0.0
+   postcss-overflow-shorthand: ^2.0.0
+   postcss-page-break: ^2.0.0
+   postcss-place: ^4.0.1
+   postcss-pseudo-class-any-link: ^6.0.0
+   postcss-replace-overflow-wrap: ^3.0.0
+   postcss-selector-matches: ^4.0.0
+   postcss-selector-not: ^4.0.0
  5.3.0:
   $: sha512-9EfvxjfFpNv6IDv9Eoih7NE9vrfC5s9s9nvFpOXA/jAB49MNh4OE4OWyliS3nieRpRObsiL65ZIEiuQ8ajdl+A==
   _: 'https://registry.npmjs.org/postcss-preset-env/-/postcss-preset-env-5.3.0.tgz'
@@ -13002,6 +13293,13 @@ postcss-pseudo-class-any-link:
  _latest: 6.0.0
  _:
   ^5.0.0: 5.0.0
+  ^6.0.0: 6.0.0
+ 6.0.0:
+  $: sha512-lgXW9sYJdLqtmw23otOzrtbDXofUdfYzNm4PIpNE322/swES3VU9XlXHeJS46zT2onFO7V1QFdD4Q9LiZj8mew==
+  _: 'https://registry.npmjs.org/postcss-pseudo-class-any-link/-/postcss-pseudo-class-any-link-6.0.0.tgz'
+  dependencies:
+   postcss: ^7.0.2
+   postcss-selector-parser: ^5.0.0-rc.3
  5.0.0:
   $: sha512-rA5grdRhLLMMI654eOZVuKGr4fUBQNGSH0K+7j5839CiBA/IvNt/Ewt7aIrkGZPySKI3nqzs34HefO8U0Fxahg==
   _: 'https://registry.npmjs.org/postcss-pseudo-class-any-link/-/postcss-pseudo-class-any-link-5.0.0.tgz'
@@ -13036,6 +13334,12 @@ postcss-replace-overflow-wrap:
  _latest: 3.0.0
  _:
   ^2.0.0: 2.0.0
+  ^3.0.0: 3.0.0
+ 3.0.0:
+  $: sha512-2T5hcEHArDT6X9+9dVSPQdo7QHzG4XKclFT8rU5TzJPDN7RIRTbO9c4drUISOVemLj03aezStHCR2AIcr8XLpw==
+  _: 'https://registry.npmjs.org/postcss-replace-overflow-wrap/-/postcss-replace-overflow-wrap-3.0.0.tgz'
+  dependencies:
+   postcss: ^7.0.2
  2.0.0:
   $: sha1-eU22+qVPjbEAhUOSqTr0V2i04ls=
   _: 'https://registry.npmjs.org/postcss-replace-overflow-wrap/-/postcss-replace-overflow-wrap-2.0.0.tgz'
@@ -13045,6 +13349,12 @@ postcss-scss:
  _latest: 2.0.0
  _:
   ^1.0.6: 1.0.6
+  ^2.0.0: 2.0.0
+ 2.0.0:
+  $: sha512-um9zdGKaDZirMm+kZFKKVsnKPF7zF7qBAtIfTSnZXD1jZ0JNZIxdB6TxQOjCnlSzLRInVl2v3YdBh/M881C4ug==
+  _: 'https://registry.npmjs.org/postcss-scss/-/postcss-scss-2.0.0.tgz'
+  dependencies:
+   postcss: ^7.0.0
  1.0.6:
   $: sha512-4EFYGHcEw+H3E06PT/pQQri06u/1VIIPjeJQaM8skB80vZuXMhp4cSNV5azmdNkontnOID/XYWEvEEELLFB1ww==
   _: 'https://registry.npmjs.org/postcss-scss/-/postcss-scss-1.0.6.tgz'
@@ -13054,6 +13364,13 @@ postcss-selector-matches:
  _latest: 4.0.0
  _:
   '^3.0.0,^3.0.1': 3.0.1
+  ^4.0.0: 4.0.0
+ 4.0.0:
+  $: sha512-LgsHwQR/EsRYSqlwdGzeaPKVT0Ml7LAT6E75T8W8xLJY62CE4S/l03BWIt3jT8Taq22kXP08s2SfTSzaraoPww==
+  _: 'https://registry.npmjs.org/postcss-selector-matches/-/postcss-selector-matches-4.0.0.tgz'
+  dependencies:
+   balanced-match: ^1.0.0
+   postcss: ^7.0.2
  3.0.1:
   $: sha1-5WNAEeE5UIgYYbvdWMLQER/8lqs=
   _: 'https://registry.npmjs.org/postcss-selector-matches/-/postcss-selector-matches-3.0.1.tgz'
@@ -13064,6 +13381,13 @@ postcss-selector-not:
  _latest: 4.0.0
  _:
   ^3.0.1: 3.0.1
+  ^4.0.0: 4.0.0
+ 4.0.0:
+  $: sha512-W+bkBZRhqJaYN8XAnbbZPLWMvZD1wKTu0UxtFKdhtGjWYmxhkUneoeOhRJKdAE5V7ZTlnbHfCR+6bNwK9e1dTQ==
+  _: 'https://registry.npmjs.org/postcss-selector-not/-/postcss-selector-not-4.0.0.tgz'
+  dependencies:
+   balanced-match: ^1.0.0
+   postcss: ^7.0.2
  3.0.1:
   $: sha1-Lk2y8JZTNsAefOx9tsYN/3ZzNdk=
   _: 'https://registry.npmjs.org/postcss-selector-not/-/postcss-selector-not-3.0.1.tgz'
@@ -13075,7 +13399,15 @@ postcss-selector-parser:
  _:
   '^3.0.0,^3.1.1': 3.1.1
   ^4.0.0: 4.0.0
-  ^5.0.0-rc.4: 5.0.0-rc.4
+  '^5.0.0-rc.3,^5.0.0-rc.4': 5.0.0-rc.4
+  ^6.0.2: 6.0.2
+ 6.0.2:
+  $: sha512-36P2QR59jDTOAiIkqEprfJDsoNrvwFei3eCqKd1Y0tUsBimsq39BLp7RD+JWny3WgB1zGhJX8XVePwm9k4wdBg==
+  _: 'https://registry.npmjs.org/postcss-selector-parser/-/postcss-selector-parser-6.0.2.tgz'
+  dependencies:
+   cssesc: ^3.0.0
+   indexes-of: ^1.0.1
+   uniq: ^1.0.1
  5.0.0-rc.4:
   $: sha512-0XvfYuShrKlTk1ooUrVzMCFQRcypsdEIsGqh5IxC5rdtBi4/M/tDAJeSONwC2MTqEFsmPZYAV7Dd4X8rgAfV0A==
   _: 'https://registry.npmjs.org/postcss-selector-parser/-/postcss-selector-parser-5.0.0-rc.4.tgz'
@@ -13135,6 +13467,14 @@ postcss-values-parser:
  _latest: 3.0.5
  _:
   ^1.5.0: 1.5.0
+  '^2.0.0,^2.0.1': 2.0.1
+ 2.0.1:
+  $: sha512-2tLuBsA6P4rYTNKCXYG/71C7j1pU6pK503suYOmn4xYrQIzW+opD+7FAFNuGSdZC/3Qfy334QbeMu7MEb8gOxg==
+  _: 'https://registry.npmjs.org/postcss-values-parser/-/postcss-values-parser-2.0.1.tgz'
+  dependencies:
+   flatten: ^1.0.2
+   indexes-of: ^1.0.1
+   uniq: ^1.0.1
  1.5.0:
   $: sha512-3M3p+2gMp0AH3da530TlX8kiO1nxdTnc3C6vr8dMxRLIlh8UYkz0/wcwptSXjhtx2Fr0TySI7a+BHDQ8NL7LaQ==
   _: 'https://registry.npmjs.org/postcss-values-parser/-/postcss-values-parser-1.5.0.tgz'
@@ -15614,6 +15954,12 @@ sugarss:
  _latest: 2.0.0
  _:
   ^1.0.1: 1.0.1
+  ^2.0.0: 2.0.0
+ 2.0.0:
+  $: sha512-WfxjozUk0UVA4jm+U1d736AUpzSrNsQcIbyOkoE364GrtWmIrFdk5lksEupgWMD4VaT/0kVx1dobpiDumSgmJQ==
+  _: 'https://registry.npmjs.org/sugarss/-/sugarss-2.0.0.tgz'
+  dependencies:
+   postcss: ^7.0.2
  1.0.1:
   $: sha512-3qgLZytikQQEVn1/FrhY7B68gPUUGY3R1Q1vTiD5xT+Ti1DP/8iZuwFet9ONs5+bmL8pZoDQ6JrQHVgrNlK6mA==
   _: 'https://registry.npmjs.org/sugarss/-/sugarss-1.0.1.tgz'
