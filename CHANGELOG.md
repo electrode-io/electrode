@@ -1,3 +1,194 @@
+# 1/29/2020
+
+- update create-app to use archetype ver7
+- [major] fix change meant for v7: default all optionals to off
+- support inline subapp with SSR
+
+## Packages
+
+- `@xarc/create-app@2.0.3` `(2.0.2 => 2.0.3)`
+- `electrode-archetype-opt-critical-css@2.0.0` `(1.0.4 => 2.0.0)`
+- `electrode-archetype-opt-eslint@2.0.0` `(1.0.4 => 2.0.0)`
+- `electrode-archetype-opt-flow@1.0.4` `(1.0.3 => 1.0.4)`
+- `electrode-archetype-opt-jest@25.0.0` `(24.0.1 => 25.0.0)`
+- `electrode-archetype-opt-karma@3.0.0` `(2.0.8 => 3.0.0)`
+- `electrode-archetype-opt-less@2.0.0` `(1.0.3 => 2.0.0)`
+- `electrode-archetype-opt-mocha@2.0.0` `(1.0.4 => 2.0.0)`
+- `electrode-archetype-opt-phantomjs@2.0.0` `(1.0.3 => 2.0.0)`
+- `electrode-archetype-opt-postcss@2.0.0` `(1.0.5 => 2.0.0)`
+- `electrode-archetype-opt-preact@2.0.0` `(1.0.1 => 2.0.0)`
+- `electrode-archetype-opt-pwa@2.0.0` `(1.0.7 => 2.0.0)`
+- `electrode-archetype-opt-react@3.0.0` `(2.0.5 => 3.0.0)`
+- `electrode-archetype-opt-react-intl@2.0.0` `(1.0.1 => 2.0.0)`
+- `electrode-archetype-opt-sass@2.0.0` `(1.0.10 => 2.0.0)`
+- `electrode-archetype-opt-sinon@2.0.0` `(1.0.4 => 2.0.0)`
+- `electrode-archetype-opt-stylus@2.0.0` `(1.0.3 => 2.0.0)`
+- `electrode-archetype-opt-typescript@2.0.0` `(1.0.4 => 2.0.0)`
+- `electrode-archetype-react-app@7.0.3` `(7.0.2 => 7.0.3)`
+- `electrode-archetype-react-app-dev@7.0.3` `(7.0.2 => 7.0.3)`
+- `subapp-pbundle@0.0.4` `(0.0.3 => 0.0.4)`
+- `subapp-react@0.0.4` `(0.0.3 => 0.0.4)`
+- `subapp-redux@1.0.13` `(1.0.12 => 1.0.13)`
+- `subapp-server@1.1.5` `(1.1.4 => 1.1.5)`
+- `subapp-util@1.0.3` `(1.0.2 => 1.0.3)`
+- `subapp-web@1.0.12` `(1.0.11 => 1.0.12)`
+
+## Commits
+
+- `packages/create-app`
+
+  - update create-app to use archetype ver7 ([#1493](https://github.com/electrode-io/electrode/pull/1493)) [commit](http://github.com/electrode-io/electrode/commit/7966069105005062f7d6bd5fdbe1e6c91e725984)
+  - udpate app template dep [commit](http://github.com/electrode-io/electrode/commit/dd17df618c257485799a8b2d8d57bf88a45d1396)
+
+- `packages/electrode-archetype-opt-critical-css`
+
+  - [major] fix change meant for v7: default all optionals to off ([#1511](https://github.com/electrode-io/electrode/pull/1511)) [commit](http://github.com/electrode-io/electrode/commit/75421bcdefbe39646c7722eb370cd05f9fe878af)
+
+- `packages/electrode-archetype-opt-eslint`
+
+  - [major] fix change meant for v7: default all optionals to off ([#1511](https://github.com/electrode-io/electrode/pull/1511)) [commit](http://github.com/electrode-io/electrode/commit/75421bcdefbe39646c7722eb370cd05f9fe878af)
+
+- `packages/electrode-archetype-opt-flow`
+
+  - drop i18n and flow from default ([#1501](https://github.com/electrode-io/electrode/pull/1501)) [commit](http://github.com/electrode-io/electrode/commit/ad62ae686f474d0374782b59b80f26755c47b299)
+
+- `packages/electrode-archetype-opt-jest`
+
+  - [major] fix change meant for v7: default all optionals to off ([#1511](https://github.com/electrode-io/electrode/pull/1511)) [commit](http://github.com/electrode-io/electrode/commit/75421bcdefbe39646c7722eb370cd05f9fe878af)
+  - default jest to v24 ([#1488](https://github.com/electrode-io/electrode/pull/1488)) [commit](http://github.com/electrode-io/electrode/commit/11bbae9fa31e6fec59de2a6ba90e4307e421b289)
+  - Publish [commit](http://github.com/electrode-io/electrode/commit/3564c26fb5c7b5c7ac55fe7cac41068d2361303f)
+  - update auto gen files [commit](http://github.com/electrode-io/electrode/commit/e9af7120b731dadbf08066f5b63eb14dcb519315)
+  - Publish [commit](http://github.com/electrode-io/electrode/commit/151d75c997b17e4a54559b8be0491b8cb1a00735)
+  - add publishConfig [commit](http://github.com/electrode-io/electrode/commit/b0d534e503397c82d8b7194e7bbf303774646882)
+  - update to jest@24.9.0 [commit](http://github.com/electrode-io/electrode/commit/1eac2150aa0c34711bab0ec9af8805935ec8736c)
+
+- `packages/electrode-archetype-opt-karma`
+
+  - [major] fix change meant for v7: default all optionals to off ([#1511](https://github.com/electrode-io/electrode/pull/1511)) [commit](http://github.com/electrode-io/electrode/commit/75421bcdefbe39646c7722eb370cd05f9fe878af)
+
+- `packages/electrode-archetype-opt-less`
+
+  - [major] fix change meant for v7: default all optionals to off ([#1511](https://github.com/electrode-io/electrode/pull/1511)) [commit](http://github.com/electrode-io/electrode/commit/75421bcdefbe39646c7722eb370cd05f9fe878af)
+
+- `packages/electrode-archetype-opt-mocha`
+
+  - [major] fix change meant for v7: default all optionals to off ([#1511](https://github.com/electrode-io/electrode/pull/1511)) [commit](http://github.com/electrode-io/electrode/commit/75421bcdefbe39646c7722eb370cd05f9fe878af)
+
+- `packages/electrode-archetype-opt-phantomjs`
+
+  - [major] fix change meant for v7: default all optionals to off ([#1511](https://github.com/electrode-io/electrode/pull/1511)) [commit](http://github.com/electrode-io/electrode/commit/75421bcdefbe39646c7722eb370cd05f9fe878af)
+
+- `packages/electrode-archetype-opt-postcss`
+
+  - [major] fix change meant for v7: default all optionals to off ([#1511](https://github.com/electrode-io/electrode/pull/1511)) [commit](http://github.com/electrode-io/electrode/commit/75421bcdefbe39646c7722eb370cd05f9fe878af)
+  - [major] update all postcss deps to latest ([#1502](https://github.com/electrode-io/electrode/pull/1502)) [commit](http://github.com/electrode-io/electrode/commit/cf48c08d3aaa23128d923788c9d380c76ae6a714)
+
+- `packages/electrode-archetype-opt-preact`
+
+  - [major] fix change meant for v7: default all optionals to off ([#1511](https://github.com/electrode-io/electrode/pull/1511)) [commit](http://github.com/electrode-io/electrode/commit/75421bcdefbe39646c7722eb370cd05f9fe878af)
+
+- `packages/electrode-archetype-opt-pwa`
+
+  - [major] fix change meant for v7: default all optionals to off ([#1511](https://github.com/electrode-io/electrode/pull/1511)) [commit](http://github.com/electrode-io/electrode/commit/75421bcdefbe39646c7722eb370cd05f9fe878af)
+
+- `packages/electrode-archetype-opt-react`
+
+  - [major] fix change meant for v7: default all optionals to off ([#1511](https://github.com/electrode-io/electrode/pull/1511)) [commit](http://github.com/electrode-io/electrode/commit/75421bcdefbe39646c7722eb370cd05f9fe878af)
+
+- `packages/electrode-archetype-opt-react-intl`
+
+  - [major] fix change meant for v7: default all optionals to off ([#1511](https://github.com/electrode-io/electrode/pull/1511)) [commit](http://github.com/electrode-io/electrode/commit/75421bcdefbe39646c7722eb370cd05f9fe878af)
+
+- `packages/electrode-archetype-opt-sass`
+
+  - [major] fix change meant for v7: default all optionals to off ([#1511](https://github.com/electrode-io/electrode/pull/1511)) [commit](http://github.com/electrode-io/electrode/commit/75421bcdefbe39646c7722eb370cd05f9fe878af)
+  - fix package main ([#1513](https://github.com/electrode-io/electrode/pull/1513)) [commit](http://github.com/electrode-io/electrode/commit/b1b0dbed55802494c65f5e4e743d80930ceb8c9c)
+
+- `packages/electrode-archetype-opt-sinon`
+
+  - [major] fix change meant for v7: default all optionals to off ([#1511](https://github.com/electrode-io/electrode/pull/1511)) [commit](http://github.com/electrode-io/electrode/commit/75421bcdefbe39646c7722eb370cd05f9fe878af)
+
+- `packages/electrode-archetype-opt-stylus`
+
+  - [major] fix change meant for v7: default all optionals to off ([#1511](https://github.com/electrode-io/electrode/pull/1511)) [commit](http://github.com/electrode-io/electrode/commit/75421bcdefbe39646c7722eb370cd05f9fe878af)
+
+- `packages/electrode-archetype-opt-typescript`
+
+  - [major] fix change meant for v7: default all optionals to off ([#1511](https://github.com/electrode-io/electrode/pull/1511)) [commit](http://github.com/electrode-io/electrode/commit/75421bcdefbe39646c7722eb370cd05f9fe878af)
+
+- `packages/electrode-archetype-react-app[-dev]`
+
+  - always expect opt pkg to exist in dev mode ([#1514](https://github.com/electrode-io/electrode/pull/1514)) [commit](http://github.com/electrode-io/electrode/commit/94213d46371bd13674c3694215af8b157e825561)
+  - fix style bundle filename in dev mode ([#1509](https://github.com/electrode-io/electrode/pull/1509)) [commit](http://github.com/electrode-io/electrode/commit/3e6209c60e58e25bb4e4660c3ffcf5772f421b89)
+  - avoid duplicate style bundles in dev mode ([#1503](https://github.com/electrode-io/electrode/pull/1503)) [commit](http://github.com/electrode-io/electrode/commit/8a0724afada2d59de678d6f754c77ba6bc14d47c)
+  - drop i18n and flow from default ([#1501](https://github.com/electrode-io/electrode/pull/1501)) [commit](http://github.com/electrode-io/electrode/commit/ad62ae686f474d0374782b59b80f26755c47b299)
+  - default to babel runtime and polyfill for subapps [commit](http://github.com/electrode-io/electrode/commit/3e75bfc2352db6e33d156cd4441efc49166e3c87)
+  - ensure webpack treeshaking works for subapp packages ([#1496](https://github.com/electrode-io/electrode/pull/1496)) [commit](http://github.com/electrode-io/electrode/commit/c24c68ae9ab926756eab68e648876f708a8b2709)
+  - optimize webpack runtime as a single chunk for subapps ([#1495](https://github.com/electrode-io/electrode/pull/1495)) [commit](http://github.com/electrode-io/electrode/commit/89a9c86f073f2add96c283e8b6e00390f2916b92)
+  - default jest to v24 ([#1488](https://github.com/electrode-io/electrode/pull/1488)) [commit](http://github.com/electrode-io/electrode/commit/11bbae9fa31e6fec59de2a6ba90e4307e421b289)
+
+- `packages/opt-archetype-check`
+
+  - check user's dep even if no archetype config found ([#1335](https://github.com/electrode-io/electrode/pull/1335)) [commit](http://github.com/electrode-io/electrode/commit/d619658eb5617e4e18e8f901d327f17f3d78739a)
+
+- `packages/subapp-pbundle`
+
+  - Add new function for subapps: waitForSubApp [commit](http://github.com/electrode-io/electrode/commit/15b94ce3f53184a106bf7a6537db5633f7e4f589)
+  - Set new store container for each request in subapp-pbundle ([#1508](https://github.com/electrode-io/electrode/pull/1508)) [commit](http://github.com/electrode-io/electrode/commit/5d05c01661089ff04c627fb5fc763877ca2c7022)
+  - Add option for reduxStoreReady for subapp pbundle ([#1507](https://github.com/electrode-io/electrode/pull/1507)) [commit](http://github.com/electrode-io/electrode/commit/55ebfb0e4fdba2d6d62a6dec67e56c49c5a747dc)
+  - first step at supporting SSR for preact+redux-bundler ([#1506](https://github.com/electrode-io/electrode/pull/1506)) [commit](http://github.com/electrode-io/electrode/commit/93206c59f757a4a904679210d6ce6c2542d3b5d2)
+  - default to babel runtime and polyfill for subapps [commit](http://github.com/electrode-io/electrode/commit/3e75bfc2352db6e33d156cd4441efc49166e3c87)
+  - ensure webpack treeshaking works for subapp packages ([#1496](https://github.com/electrode-io/electrode/pull/1496)) [commit](http://github.com/electrode-io/electrode/commit/c24c68ae9ab926756eab68e648876f708a8b2709)
+  - dep: preact@10.2.1 [commit](http://github.com/electrode-io/electrode/commit/0e860f554895c4535f21b178d19de05b71fcd918)
+  - minor redux-bundler fix and demo in sample app ([#1490](https://github.com/electrode-io/electrode/pull/1490)) [commit](http://github.com/electrode-io/electrode/commit/b3674a560d86f3bcf0c2caeff8b92cd3302f8829)
+  - lock preact@10.1.1 to pass issue with 10.2.0 [commit](http://github.com/electrode-io/electrode/commit/75c7320fb4b9466e069363eebe4353ba76b309d4)
+  - Add redux-bundler support for Electrode subapps ([#1484](https://github.com/electrode-io/electrode/pull/1484)) [commit](http://github.com/electrode-io/electrode/commit/ceaa8b4f96c2d3b7ed51fd5dd66729b877c836a7)
+
+- `packages/subapp-pkg-util`
+
+  - prepare data before invoking SSR'ed subapp that's inlined [commit](http://github.com/electrode-io/electrode/commit/264878cfef69d81cd245e9ddc970fa77ea8309fd)
+  - default to babel runtime and polyfill for subapps [commit](http://github.com/electrode-io/electrode/commit/3e75bfc2352db6e33d156cd4441efc49166e3c87)
+
+- `packages/subapp-react`
+
+  - default to babel runtime and polyfill for subapps [commit](http://github.com/electrode-io/electrode/commit/3e75bfc2352db6e33d156cd4441efc49166e3c87)
+
+- `packages/subapp-redux`
+
+  - default to babel runtime and polyfill for subapps [commit](http://github.com/electrode-io/electrode/commit/3e75bfc2352db6e33d156cd4441efc49166e3c87)
+  - only call reduxCreateStore if it's user provided ([#1494](https://github.com/electrode-io/electrode/pull/1494)) [commit](http://github.com/electrode-io/electrode/commit/8d12e0d661fb16ae66cfc256bbf55d1a9eb8c7f2)
+
+- `packages/subapp-server`
+
+  - default to babel runtime and polyfill for subapps [commit](http://github.com/electrode-io/electrode/commit/3e75bfc2352db6e33d156cd4441efc49166e3c87)
+
+- `packages/subapp-util`
+
+  - show error on subapp name mismatch ([#1505](https://github.com/electrode-io/electrode/pull/1505)) [commit](http://github.com/electrode-io/electrode/commit/b26a6dda4ba37f2df487dd2ef320b0722e5fc0ab)
+
+- `packages/subapp-web`
+
+  - Fix for non-string (numeric) subapp bundle ids ([#1515](https://github.com/electrode-io/electrode/pull/1515)) [commit](http://github.com/electrode-io/electrode/commit/51375063c92e6adf9d76d0798dd57dfbdb3bfebe)
+  - New subapp-web function: isLoaded [commit](http://github.com/electrode-io/electrode/commit/5ff500542f36246e8e5139471a12db3c9b2e89fe)
+  - Add new function for subapps: waitForSubApp [commit](http://github.com/electrode-io/electrode/commit/15b94ce3f53184a106bf7a6537db5633f7e4f589)
+  - prepare data before invoking SSR'ed subapp that's inlined [commit](http://github.com/electrode-io/electrode/commit/264878cfef69d81cd245e9ddc970fa77ea8309fd)
+  - fix function call ([#1504](https://github.com/electrode-io/electrode/pull/1504)) [commit](http://github.com/electrode-io/electrode/commit/ce35f85c6adfae0f6e4104cbb2d7b607a06e03d0)
+  - default to babel runtime and polyfill for subapps [commit](http://github.com/electrode-io/electrode/commit/3e75bfc2352db6e33d156cd4441efc49166e3c87)
+  - scope client side lib for subapps [commit](http://github.com/electrode-io/electrode/commit/7da7cadd89b599b5b547756626ad6abb210db3d5)
+  - handle css bundles for subapps [commit](http://github.com/electrode-io/electrode/commit/9d85e259fd7908f2190682a77f37afdf917747c1)
+  - ensure webpack treeshaking works for subapp packages ([#1496](https://github.com/electrode-io/electrode/pull/1496)) [commit](http://github.com/electrode-io/electrode/commit/c24c68ae9ab926756eab68e648876f708a8b2709)
+  - optimize webpack runtime as a single chunk for subapps ([#1495](https://github.com/electrode-io/electrode/pull/1495)) [commit](http://github.com/electrode-io/electrode/commit/89a9c86f073f2add96c283e8b6e00390f2916b92)
+  - transpile src to multi targets ([#1492](https://github.com/electrode-io/electrode/pull/1492)) [commit](http://github.com/electrode-io/electrode/commit/1553f9ae6c40460ec52f9a4202f45400387a54a3)
+
+- `docs`
+
+  - First pass of an Electrode subapp guide ([#1497](https://github.com/electrode-io/electrode/pull/1497)) [commit](http://github.com/electrode-io/electrode/commit/12e87c06a4a44e591ef4ca3db1727045cfe3e28a)
+
+- `MISC`
+
+  - Update changelog [commit](http://github.com/electrode-io/electrode/commit/852812743f6280723c8645bb1d96d2abaed6c435)
+  - Update changelog [commit](http://github.com/electrode-io/electrode/commit/59e4f8eb5ff2e2b42a935ac1fe5a7e37ed90a44b)
+
 # 1/7/2020
 
 - remove beta from ver7
