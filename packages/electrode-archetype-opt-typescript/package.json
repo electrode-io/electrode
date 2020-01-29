@@ -35,6 +35,6 @@
     "optionalTagName": "typescript",
     "expectTag": true,
     "devOnly": true,
-    "defaultInstall": true
+    "defaultInstall": false
   }
 }

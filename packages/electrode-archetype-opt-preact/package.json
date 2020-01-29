@@ -34,7 +34,7 @@
     "optionalTagName": "reactLib",
     "expectTag": "preact",
     "devOnly": false,
-    "defaultInstall": true,
+    "defaultInstall": false,
     "onlyOneOf": [
       "electrode-archetype-opt-preact",
       "electrode-archetype-opt-react",

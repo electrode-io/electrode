@@ -17,11 +17,20 @@
   },
   "homepage": "https://github.com/electrode-io/electrode",
   "dependencies": {
-    "@babel/runtime": "^7.1.2",
+    "electrode-demo-index": "^2.0.0",
     "material-ui": "^0.20.0",
-    "electrode-demo-index": "^2.0.0"
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-intl": "^2.9.0"
   },
   "devDependencies": {
+    "electrode-archetype-opt-eslint": "../../../../packages/electrode-archetype-opt-eslint",
+    "electrode-archetype-opt-flow": "../../../../packages/electrode-archetype-opt-flow",
+    "electrode-archetype-opt-karma": "../../../../packages/electrode-archetype-opt-karma",
+    "electrode-archetype-opt-mocha": "../../../../packages/electrode-archetype-opt-mocha",
+    "electrode-archetype-opt-phantomjs": "../../../../packages/electrode-archetype-opt-phantomjs",
+    "electrode-archetype-opt-sass": "../../../../packages/electrode-archetype-opt-sass",
+    "electrode-archetype-opt-sinon": "../../../../packages/electrode-archetype-opt-sinon",
     "electrode-archetype-react-component": "^6.0.0",
     "electrode-archetype-react-component-dev": "^6.0.0",
     "xclap": "^0.2.24"
@@ -29,7 +38,13 @@
   "fyn": {
     "devDependencies": {
       "electrode-archetype-react-component": "../../../../packages/electrode-archetype-react-component",
-      "electrode-archetype-react-component-dev": "../../../../packages/electrode-archetype-react-component-dev"
+      "electrode-archetype-react-component-dev": "../../../../packages/electrode-archetype-react-component-dev",
+      "electrode-archetype-opt-sass": "../../../../packages/electrode-archetype-opt-sass",
+      "electrode-archetype-opt-flow": "../../../../packages/electrode-archetype-opt-flow",
+      "electrode-archetype-opt-eslint": "../../../../packages/electrode-archetype-opt-eslint",
+      "electrode-archetype-opt-karma": "../../../../packages/electrode-archetype-opt-karma",
+      "electrode-archetype-opt-mocha": "../../../../packages/electrode-archetype-opt-mocha",
+      "electrode-archetype-opt-sinon": "../../../../packages/electrode-archetype-opt-sinon"
     }
   },
   "engines": {

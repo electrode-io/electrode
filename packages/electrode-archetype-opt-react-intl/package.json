@@ -34,6 +34,6 @@
     "optionalTagName": "reactIntl",
     "expectTag": true,
     "devOnly": false,
-    "defaultInstall": true
+    "defaultInstall": false
   }
 }

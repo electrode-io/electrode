@@ -40,7 +40,7 @@
     "optionalTagName": "jest",
     "expectTag": true,
     "devOnly": true,
-    "defaultInstall": true
+    "defaultInstall": false
   },
   "fyn": {
     "devDependencies": {

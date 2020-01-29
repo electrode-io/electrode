@@ -49,20 +49,13 @@
     "electrode-archetype-opt-react-intl": "^1.0.0"
   },
   "devDependencies": {
-    "electrode-archetype-react-app-dev": "../../packages/electrode-archetype-react-app-dev",
-    "electrode-archetype-opt-critical-css": "^1.0.3",
     "electrode-archetype-opt-eslint": "^1.0.3",
-    "electrode-archetype-opt-flow": "^1.0.2",
     "electrode-archetype-opt-jest": "^1.0.3",
-    "electrode-archetype-opt-karma": "^2.0.6",
-    "electrode-archetype-opt-less": "^1.0.2",
-    "electrode-archetype-opt-mocha": "^1.0.3",
-    "electrode-archetype-opt-phantomjs": "^1.0.2",
-    "electrode-archetype-opt-postcss": "^1.0.4",
-    "electrode-archetype-opt-pwa": "^1.0.6",
-    "electrode-archetype-opt-sinon": "^1.0.3",
+    "electrode-archetype-opt-karma": "../../packages/electrode-archetype-opt-karma",
+    "electrode-archetype-opt-mocha": "../../packages/electrode-archetype-opt-mocha",
+    "electrode-archetype-opt-phantomjs": "../../packages/electrode-archetype-opt-phantomjs",
     "electrode-archetype-opt-stylus": "^1.0.2",
-    "electrode-archetype-opt-typescript": "^1.0.3"
+    "electrode-archetype-react-app-dev": "../../packages/electrode-archetype-react-app-dev"
   },
   "fyn": {
     "dependencies": {
@@ -71,7 +64,9 @@
       "electrode-redux-router-engine": "../../packages/electrode-redux-router-engine"
     },
     "devDependencies": {
-      "electrode-archetype-react-app-dev": "../../packages/electrode-archetype-react-app-dev"
+      "electrode-archetype-react-app-dev": "../../packages/electrode-archetype-react-app-dev",
+      "electrode-archetype-opt-karma": "../../packages/electrode-archetype-opt-karma",
+      "electrode-archetype-opt-phantomjs": "../../packages/electrode-archetype-opt-phantomjs"
     }
   },
   "optionalDependencies": {}

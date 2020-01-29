@@ -36,6 +36,6 @@
     "optionalTagName": "phantomjs",
     "expectTag": true,
     "devOnly": true,
-    "defaultInstall": true
+    "defaultInstall": false
   }
 }
