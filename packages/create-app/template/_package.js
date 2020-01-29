@@ -32,16 +32,18 @@ module.exports = base => {
       npm: ">= 6.4.1"
     },
     dependencies: {
-      "electrode-archetype-react-app": "^7.0.2",
+      "electrode-archetype-react-app": "^7.0.3",
       "electrode-server": "^3.0.0",
+      react: "^16",
+      "react-dom": "^16",
       "react-redux": "^7.1.1",
       redux: "^4.0.4",
-      "subapp-react": "~0.0.1",
-      "subapp-redux": "^1.0.4",
-      "subapp-server": "^1.1.4"
+      "subapp-react": "~0.0.4",
+      "subapp-redux": "^1.0.13",
+      "subapp-server": "^1.1.5"
     },
     devDependencies: {
-      "electrode-archetype-react-app-dev": "^7.0.2"
+      "electrode-archetype-react-app-dev": "^7.0.3"
     }
   };
 
