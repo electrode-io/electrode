@@ -1197,6 +1197,7 @@ module.exports = function(xclap) {
   setupPath();
   createElectrodeTmpDir();
   xclap = xclap || requireAt(process.cwd())("xclap") || devRequire("xclap");
+  process.env._ELECTRODE_DEV_ = "1";
   if (!process.env.hasOwnProperty("FORCE_COLOR")) {
     process.env.FORCE_COLOR = "1"; // force color for chalk
   }

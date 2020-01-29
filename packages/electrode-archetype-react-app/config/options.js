@@ -7,16 +7,38 @@ const constants = require("./constants");
 const utils = require("../lib/utils");
 const appPkg = require(Path.resolve("package.json"));
 
-function checkOptArchetypeInAppDep(dependencies) {
+function checkOptArchetypeInAppDep(dependencies, isDev) {
   const options = Object.keys(dependencies)
     .filter(x => x.startsWith("electrode-archetype-opt-"))
     .reduce((acc, name) => {
-      try {
-        const optPkg = require(name)();
-        if (optPkg.pass) {
-          acc[optPkg.optionalTagName] = optPkg.expectTag;
+      //
+      // In dev mode, when all dev deps are installed, we can safely load
+      // opt packages and find the feature flag name to enable.
+      //
+      // In production mode, dep could've been pruned for prod, and dev only
+      // opt packages would not even exist.
+      // note 1: we don't expect dev only opt packages to have any effect
+      //   in production runs.
+      //
+      const optPkg = optionalRequire(name, {
+        notFound(err) {
+          //
+          // if in dev mode, or if in production but looking for
+          //  opt pkg _not_ within devDependencies:
+          // then always expect opt pkg to be installed.
+          //
+          if (process.env._ELECTRODE_DEV_ || (process.env.NODE_ENV === "production" && !isDev)) {
+            throw err;
+          }
         }
-      } catch (err) {}
+      });
+
+      if (optPkg) {
+        const optPkgFlag = optPkg();
+        if (optPkgFlag.pass) {
+          acc[optPkgFlag.optionalTagName] = optPkgFlag.expectTag;
+        }
+      }
       return acc;
     }, {});
 
@@ -29,8 +51,8 @@ const userConfigOptions = Object.assign(
   //
   // Check for any optional archetype in application's devDependencies or dependencies
   //
-  process.env.NODE_ENV !== "production" &&
-    checkOptArchetypeInAppDep(appPkg.devDependencies).options,
+
+  checkOptArchetypeInAppDep(appPkg.devDependencies, true).options,
   checkOptArchetypeInAppDep(appPkg.dependencies).options
 );
 
