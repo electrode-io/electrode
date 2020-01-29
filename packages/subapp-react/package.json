@@ -1,6 +1,6 @@
 {
   "name": "subapp-react",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Electrode subapp support for React/Redux/React Router",
   "module": "dist/dev/index.js",
   "main": "lib/index.js",
@@ -29,8 +29,8 @@
   "dependencies": {
     "@babel/runtime": "^7.8.3",
     "optional-require": "^1.0.0",
-    "subapp-util": "^1.0.2",
-    "subapp-web": "^1.0.11"
+    "subapp-util": "^1.0.3",
+    "subapp-web": "^1.0.12"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

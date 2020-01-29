@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-opt-flow",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Electrode NodeJS/React Optional Archetype Flow",
   "main": "optional-check.js",
   "homepage": "http://www.electrode.io",
