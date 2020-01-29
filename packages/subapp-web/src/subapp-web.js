@@ -138,7 +138,7 @@
 
     markBundlesLoaded(ids) {
       [].concat(ids).forEach(id => {
-        xv1.setBundle(id, 1);
+        xv1.setBundle(id.toString(), 1);
       });
     },
 
@@ -180,8 +180,8 @@
           }, a);
         }, [])
         .filter(({ id }) => {
-          if (xv1.getBundle(id) === undefined) {
-            xv1.setBundle(id, 0); // mark as loading
+          if (xv1.getBundle(id.toString()) === undefined) {
+            xv1.setBundle(id.toString(), 0); // mark as loading
 
             return true;
           }
