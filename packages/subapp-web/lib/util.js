@@ -12,6 +12,25 @@ let CDN_JS_BUNDLES;
 let FrameworkLib;
 
 const utils = {
+  getOrSet(obj, path, initial) {
+    const x = _.get(obj, path);
+    if (x === undefined) {
+      _.set(obj, path, initial);
+      return initial;
+    }
+    return x;
+  },
+
+  removeCwd(msg) {
+    if (!msg) return msg;
+    const cwd = process.cwd();
+    if (cwd.length > 1) {
+      const regex = new RegExp(cwd + Path.sep, "g");
+      return msg.replace(regex, `.${Path.sep}`);
+    }
+    return msg;
+  },
+
   getFramework(ref) {
     return new FrameworkLib(ref);
   },

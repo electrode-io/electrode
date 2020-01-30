@@ -15,9 +15,11 @@ const ReactRouterDom = optionalRequire("react-router-dom");
 class FrameworkLib {
   constructor(ref) {
     this.ref = ref;
+    this._prepared = false;
   }
 
-  async handleSSR() {
+  async handlePrepare() {
+    this._prepared = true;
     const { subApp, subAppServer, options } = this.ref;
     // If subapp wants to use react router and server didn't specify a StartComponent,
     // then create a wrap StartComponent that uses react router's StaticRouter
@@ -25,6 +27,24 @@ class FrameworkLib {
       this.StartComponent = this.wrapReactRouter(subApp);
     } else {
       this.StartComponent = subAppServer.StartComponent || subApp.Component;
+    }
+
+    if (this.StartComponent) {
+      if (subApp.__redux) {
+        return await this.prepareReduxData();
+      } else if (options.serverSideRendering === true) {
+        return await this.prepareData();
+      }
+    }
+
+    return false;
+  }
+
+  async handleSSR() {
+    const { subApp, options } = this.ref;
+
+    if (!this._prepared) {
+      await this.handlePrepare();
     }
 
     if (!this.StartComponent) {
@@ -86,25 +106,27 @@ class FrameworkLib {
     );
   }
 
-  async doSSR() {
+  async prepareData() {
     const { subApp, subAppServer, context } = this.ref;
     const { request } = context.user;
-
-    let initialProps;
 
     // even though we don't know what data model the component is using, but if it
     // has a prepare callback, we will just call it to get initial props to pass
     // to the component when rendering it
     const prepare = subAppServer.prepare || subApp.prepare;
     if (prepare) {
-      initialProps = await prepare({ request, context });
+      this._initialProps = await prepare({ request, context });
     }
 
-    return await this.renderTo(this.createTopComponent(initialProps), this.ref.options);
+    return this._initialProps;
   }
 
-  async doReduxSSR() {
-    const { subApp, subAppServer, context, options } = this.ref;
+  async doSSR() {
+    return await this.renderTo(this.createTopComponent(this._initialProps), this.ref.options);
+  }
+
+  async prepareReduxData() {
+    const { subApp, subAppServer, context } = this.ref;
     const { request } = context.user;
     // subApp.reduxReducers || subApp.reduxCreateStore) {
     // if sub app has reduxReducers or reduxCreateStore then assume it's using
@@ -137,6 +159,11 @@ class FrameworkLib {
       this.store,
       `redux subapp ${subApp.name} didn't provide store, reduxCreateStore, or reducers`
     );
+  }
+
+  async doReduxSSR() {
+    const { options } = this.ref;
+
     if (options.serverSideRendering === true) {
       assert(Provider, "subapp-web: react-redux Provider not available");
       // finally render the element with Redux Provider and the store created
