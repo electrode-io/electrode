@@ -191,12 +191,16 @@ describe("SSR React framework", function() {
 
   it("should init redux store and render Component", async () => {
     const Component = connect(x => x)(props => <div>Hello {props.test}</div>);
+    let storeReady;
 
     const framework = new lib.FrameworkLib({
       subApp: {
         __redux: true,
         Component,
         reduxCreateStore: initState => Redux.createStore(x => x, initState),
+        async reduxStoreReady() {
+          storeReady = true;
+        },
         prepare: () => ({ test: "foo bar" })
       },
       subAppServer: {},
@@ -208,6 +212,7 @@ describe("SSR React framework", function() {
     const res = await framework.handleSSR();
     expect(res).contains("Hello foo bar");
     expect(framework.initialStateStr).equals(`{"test":"foo bar"}`);
+    expect(storeReady).equal(true);
   });
 
   it("should init redux store and render Component but doesn't attach initial state", async () => {

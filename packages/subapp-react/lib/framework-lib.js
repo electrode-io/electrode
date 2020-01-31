@@ -159,6 +159,11 @@ class FrameworkLib {
       this.store,
       `redux subapp ${subApp.name} didn't provide store, reduxCreateStore, or reducers`
     );
+
+    const reduxStoreReady = subAppServer.reduxStoreReady || subApp.reduxStoreReady;
+    if (reduxStoreReady) {
+      await reduxStoreReady({ store: this.store });
+    }
   }
 
   async doReduxSSR() {
