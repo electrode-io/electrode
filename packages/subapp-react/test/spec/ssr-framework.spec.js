@@ -72,6 +72,26 @@ describe("SSR React framework", function() {
     expect(res).contains("Hello foo bar");
   });
 
+  it("should allow preparing data before SSR", async () => {
+    const framework = new lib.FrameworkLib({
+      subApp: {
+        prepare: () => ({ test: "foo bar" }),
+        Component: props => {
+          return <div>Hello {props.test}</div>;
+        }
+      },
+      subAppServer: {},
+      options: { serverSideRendering: true },
+      context: {
+        user: {}
+      }
+    });
+    await framework.handlePrepare();
+    expect(framework._initialProps).to.be.ok;
+    const res = await framework.handleSSR();
+    expect(res).contains("Hello foo bar");
+  });
+
   it("should render Component with streaming if enabled", () => {
     const framework = new lib.FrameworkLib({
       subApp: {

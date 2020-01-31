@@ -17,15 +17,14 @@ const Path = require("path");
 const _ = require("lodash");
 const retrieveUrl = require("request");
 const util = require("./util");
+const xaa = require("xaa");
 const { loadSubAppByName, loadSubAppServerByName } = require("subapp-util");
 
 // global name to store client subapp runtime, ie: window.xarcV1
 // V1: version 1.
 const xarc = "window.xarcV1";
 
-module.exports = function setup(setupContext, token) {
-  const options = token.props;
-
+module.exports = function setup(setupContext, { props: options }) {
   // TODO: create JSON schema to validate props
 
   // name="Header"
@@ -160,7 +159,7 @@ module.exports = function setup(setupContext, token) {
   const clientProps = JSON.stringify(_.pick(options, ["useReactRouter"]));
 
   return {
-    process: context => {
+    process: (context, { props }) => {
       const { request } = context.user;
 
       if (request.app.webpackDev && subAppLoadTime < request.app.webpackDev.compileTime) {
@@ -168,17 +167,81 @@ module.exports = function setup(setupContext, token) {
         loadSubApp();
       }
 
+      let { group = "_" } = props;
+      group = [].concat(group);
+      const ssrGroups = group.map(grp =>
+        util.getOrSet(context, ["user", "xarcSubappSSR", grp], { queue: [] })
+      );
+
+      //
+      // push {awaitData, ready, renderSSR, props} into queue
+      //
+      // awaitData - promise
+      // ready - defer promise to signal SSR info is ready for processing
+      // props - token.props
+      // renderSSR - callback to start rendering SSR for the group
+      //
+
+      const ssrInfo = { props, group, ready: xaa.defer() };
+      ssrGroups.forEach(grp => grp.queue.push(ssrInfo));
+
       const outputSpot = context.output.reserve();
       // console.log("subapp load", name, "useReactRouter", subApp.useReactRouter);
 
+      const outputSSRContent = (ssrContent, initialStateStr) => {
+        // If user specified an element ID for a DOM Node to host the SSR content then
+        // add the div for the Node and the SSR content to it, and add JS to start the
+        // sub app on load.
+        let elementId = "";
+        if (options.elementId) {
+          elementId = `elementId:"${options.elementId}",\n `;
+          outputSpot.add(`<div id="${options.elementId}">`);
+          outputSpot.add(ssrContent); // must add by itself since this could be a stream
+          outputSpot.add(`</div>`);
+        } else {
+          outputSpot.add("<!-- no elementId for starting subApp on load -->\n");
+          outputSpot.add(ssrContent);
+        }
+
+        outputSpot.add(`
+<script>${xarc}.startSubAppOnLoad({
+ name:"${name}",
+ ${elementId}serverSideRendering:${Boolean(options.serverSideRendering)},
+ clientProps:${clientProps},
+ initialState:${initialStateStr || "{}"}
+});</script>
+`);
+      };
+
+      const handleError = err => {
+        if (process.env.NODE_ENV !== "production") {
+          const stack = util.removeCwd(err.stack);
+          console.error(`SSR subapp ${name} failed <error>${stack}</error>`); // eslint-disable-line
+          outputSpot.add(`<!-- SSR subapp ${name} failed
+
+${stack}
+
+-->`);
+        } else if (request && request.log) {
+          request.log(["error"], { msg: `SSR subapp ${name} failed`, err });
+        }
+      };
+
+      const closeOutput = () => {
+        if (options.timestamp) {
+          outputSpot.add(`<!-- time: ${Date.now()} -->`);
+        }
+
+        outputSpot.close();
+      };
+
       const processSubapp = async () => {
-        let ssrContent = "";
-        let initialStateStr = "";
         const ref = {
           context,
           subApp,
           subAppServer,
-          options
+          options,
+          ssrGroups
         };
 
         const { bundles, scripts } = await prepareSubAppSplitBundles(context);
@@ -191,29 +254,19 @@ module.exports = function setup(setupContext, token) {
 
         if (options.serverSideRendering) {
           const lib = util.getFramework(ref);
-          ssrContent = await lib.handleSSR(ref);
-          initialStateStr = lib.initialStateStr;
-        } else {
-          ssrContent = `<!-- serverSideRendering flag is ${options.serverSideRendering} -->`;
-        }
+          ssrInfo.awaitData = lib.handlePrepare();
 
-        // If user specified an element ID for a DOM Node to host the SSR content then
-        // add the div for the Node and the SSR content to it, and add JS to start the
-        // sub app on load.
-        if (options.elementId) {
-          outputSpot.add(`<div id="${options.elementId}">`);
-          outputSpot.add(ssrContent); // must add by itself since this could be a stream
-          outputSpot.add(`</div>
-<script>${xarc}.startSubAppOnLoad({
- name:"${name}",
- elementId:"${options.elementId}",
- serverSideRendering:${Boolean(options.serverSideRendering)},
- clientProps:${clientProps},
- initialState:${initialStateStr || "{}"}
-});</script>
-`);
+          ssrInfo.renderSSR = async () => {
+            try {
+              outputSSRContent(await lib.handleSSR(ref), lib.initialStateStr);
+            } catch (err) {
+              handleError(err);
+            } finally {
+              closeOutput();
+            }
+          };
         } else {
-          outputSpot.add("<!-- no elementId for starting subApp on load -->\n");
+          outputSSRContent("");
         }
       };
 
@@ -224,23 +277,13 @@ module.exports = function setup(setupContext, token) {
 
         try {
           await processSubapp();
+          ssrInfo.ready.resolve();
         } catch (err) {
-          if (process.env.NODE_ENV !== "production") {
-            console.error(`SSR subapp ${name} failed <error>${err.stack}</error>`); // eslint-disable-line
-            outputSpot.add(`<!-- SSR subapp ${name} failed
-
-${err.stack}
-
--->`);
-          } else if (request && request.log) {
-            request.log(["error"], { msg: `SSR subapp ${name} failed`, err });
-          }
+          handleError(err);
         } finally {
-          if (options.timestamp) {
-            outputSpot.add(`<!-- time: ${Date.now()} -->`);
+          if (!ssrInfo.renderSSR) {
+            closeOutput();
           }
-
-          outputSpot.close();
         }
       };
 
