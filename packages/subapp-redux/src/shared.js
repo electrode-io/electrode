@@ -15,23 +15,33 @@ import { createStore, combineReducers } from "redux";
 //  - a top level initializer can be specified to do this
 //
 
-let shared = { namedStores: {} };
+let persistenStoreContainer = { namedStores: {} };
 
-function setStoreContainer(container) {
-  shared = container;
-  shared.namedStores = shared.namedStores || {};
+function initContainer(storeContainer) {
+  storeContainer = storeContainer || persistenStoreContainer;
+  if (!storeContainer.namedStores) {
+    storeContainer.namedStores = {};
+  }
+  return storeContainer;
+}
+
+function setStoreContainer(storeContainer) {
+  persistenStoreContainer = storeContainer;
+  initContainer(storeContainer);
 }
 
 function clearSharedStore() {
-  shared.namedStores = {};
+  persistenStoreContainer.namedStores = {};
 }
 
-function getSharedStore(name) {
-  return (name && shared.namedStores[name === true ? "_" : name]) || {};
+function getSharedStore(name, storeContainer) {
+  storeContainer = initContainer(storeContainer);
+  return (name && storeContainer.namedStores[name === true ? "_" : name]) || {};
 }
 
-function setSharedStore(name, contents) {
-  shared.namedStores[name === true ? "_" : name] = contents;
+function setSharedStore(name, contents, storeContainer) {
+  storeContainer = initContainer(storeContainer);
+  storeContainer.namedStores[name === true ? "_" : name] = contents;
 }
 
 const assert = (flag, msg) => {
@@ -64,21 +74,21 @@ const combineSharedReducers = (info, container, reducers) => {
   return combineReducers(addSharedReducer(info, container, reducers));
 };
 
-function replaceReducer(newReducers, info) {
-  let { store, reducerContainer } = getSharedStore(info.reduxShareStore);
+function replaceReducer(newReducers, info, storeContainer) {
+  let { store, reducerContainer } = getSharedStore(info.reduxShareStore, storeContainer);
   const reducer = combineSharedReducers(info, reducerContainer, newReducers);
   return store[originalReplaceReducerSym](reducer);
 }
 
-function createSharedStore(initialState, info) {
-  const sharedStore = info.reduxShareStore;
+function createSharedStore(initialState, info, storeContainer) {
+  const sharedStoreName = info.reduxShareStore;
 
-  if (sharedStore) {
+  if (sharedStoreName) {
     assert(
       info._genReduxCreateStore || !info.reduxCreateStore,
       `${WHEN_SHARED_MSG}, you cannot have reduxCreateStore`
     );
-    let { store, reducerContainer } = getSharedStore(sharedStore);
+    let { store, reducerContainer } = getSharedStore(sharedStoreName, storeContainer);
     if (store) {
       // TODO: redux doesn't have a way to set initial state
       // after store's created?  What can we do about this?
@@ -97,14 +107,22 @@ function createSharedStore(initialState, info) {
       // that alters argument type is worst
       // Maybe create a proxy store object, one for each sub-app
       //
-      store.replaceReducer = (reducers, info2) => replaceReducer(reducers, info2);
+      // NOTE: It's only on SSR that we need to share store within the
+      // request and replaceReducer doesn't make sense for SSR, but it's
+      // taking a storeContainer here anyways.
+      //
+      store.replaceReducer = (reducers, info2, storeContainer2) => {
+        return replaceReducer(reducers, info2, storeContainer2);
+      };
     }
-    setSharedStore(sharedStore, { store, reducerContainer });
+    setSharedStore(sharedStoreName, { store, reducerContainer }, storeContainer);
     return store;
   }
 
   // call user provided reduxCreateStore
   if (info.reduxCreateStore && !info._genReduxCreateStore) {
+    // TODO: given the complexities of dealing with and maintaining store
+    // allowing user reduxCreateStore is not a good idea.  Consider for removal.
     return info.reduxCreateStore(initialState);
   }
 
@@ -121,7 +139,7 @@ function createSharedStore(initialState, info) {
 }
 
 function getReduxCreateStore(info) {
-  return initialState => createSharedStore(initialState, info);
+  return (initialState, storeContainer) => createSharedStore(initialState, info, storeContainer);
 }
 
 export {

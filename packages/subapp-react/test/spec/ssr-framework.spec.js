@@ -189,30 +189,45 @@ describe("SSR React framework", function() {
     expect(res).contains("Hello foo bar");
   });
 
-  it("should init redux store and render Component", async () => {
+  it("should init redux store in context and render Component", async () => {
     const Component = connect(x => x)(props => <div>Hello {props.test}</div>);
     let storeReady;
 
-    const framework = new lib.FrameworkLib({
-      subApp: {
-        __redux: true,
-        Component,
-        reduxCreateStore: initState => Redux.createStore(x => x, initState),
-        async reduxStoreReady() {
-          storeReady = true;
-        },
-        prepare: () => ({ test: "foo bar" })
+    const subApp = {
+      __redux: true,
+      Component,
+      reduxCreateStore: (initState, container) => {
+        // simulate sharing store in conainter (see subapp-redux/lib/shared)
+        if (!container.store) {
+          container.store = Redux.createStore(x => x, initState);
+        }
+        return container.store;
       },
-      subAppServer: {},
-      options: { serverSideRendering: true },
-      context: {
-        user: {}
-      }
-    });
-    const res = await framework.handleSSR();
-    expect(res).contains("Hello foo bar");
-    expect(framework.initialStateStr).equals(`{"test":"foo bar"}`);
-    expect(storeReady).equal(true);
+      async reduxStoreReady() {
+        storeReady = true;
+      },
+
+      prepare: () => ({ test: "foo bar" })
+    };
+    const context = { user: {} };
+    const verify = async () => {
+      const framework = new lib.FrameworkLib({
+        subApp,
+        subAppServer: {},
+        options: { serverSideRendering: true },
+        context
+      });
+      const res = await framework.handleSSR();
+      expect(res).contains("Hello foo bar");
+      expect(framework.initialStateStr).equals(`{"test":"foo bar"}`);
+      expect(context.user).to.have.property("storeContainer");
+      expect(storeReady).equal(true);
+    };
+    await verify();
+    const store = context.user.storeContainer.store;
+    // should be able to render again with the same store in context
+    await verify();
+    expect(store).to.equal(context.user.storeContainer.store);
   });
 
   it("should init redux store and render Component but doesn't attach initial state", async () => {

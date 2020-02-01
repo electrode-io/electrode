@@ -141,6 +141,12 @@ class FrameworkLib {
       reduxData = await prepare({ request, context });
     }
 
+    let storeContainer = context.user.storeContainer;
+
+    if (!storeContainer) {
+      storeContainer = context.user.storeContainer = {};
+    }
+
     if (!reduxData) {
       reduxData = { initialState: {} };
     }
@@ -154,7 +160,8 @@ class FrameworkLib {
     // next we take the initial state and create redux store from it
     this.store =
       reduxData.store ||
-      (subApp.reduxCreateStore && (await subApp.reduxCreateStore(this.initialState)));
+      (subApp.reduxCreateStore &&
+        (await subApp.reduxCreateStore(this.initialState, storeContainer)));
     assert(
       this.store,
       `redux subapp ${subApp.name} didn't provide store, reduxCreateStore, or reducers`
