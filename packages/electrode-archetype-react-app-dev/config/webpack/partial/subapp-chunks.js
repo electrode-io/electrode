@@ -1,7 +1,7 @@
 "use strict";
 
 const Crypto = require("crypto");
-const { AppMode } = require("electrode-archetype-react-app/config/archetype");
+const { AppMode, webpack } = require("electrode-archetype-react-app/config/archetype");
 
 const config = {};
 
@@ -20,7 +20,21 @@ function hashChunks(mod, chunks, key) {
   return `${key}~${digest}`;
 }
 
-if (AppMode.hasSubApps) {
+if (AppMode.hasSubApps && webpack.minimizeSubappChunks) {
+  config.optimization = {
+    runtimeChunk: "single",
+    splitChunks: {
+      cacheGroups: {
+        common: {
+          chunks: "all",
+          minChunks: 2,
+          enforce: true,
+          name: "common"
+        }
+      }
+    }
+  };
+} else if (AppMode.hasSubApps) {
   // use webpack splitChunks optimization to automatically put modules
   // shared by subapps into common bundles.
   // The common bundles will be determined by the splitChunks parameters.
