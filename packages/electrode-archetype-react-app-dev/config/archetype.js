@@ -47,6 +47,7 @@ const webpackConfigSpec = {
     default: false
   },
   enableShortenCSSNames: { env: "ENABLE_SHORTEN_CSS_NAMES", default: true },
+  minimizeSubappChunks: { env: "MINIMIZE_SUBAPP_CHUNKS", default: false },
   optimizeCssOptions: {
     env: "OPTIMIZE_CSS_OPTIONS",
     type: "json",
