@@ -6,6 +6,7 @@ const ck = require("chalker");
 const archetype = require("electrode-archetype-react-app/config/archetype");
 const optionalRequire = require("optional-require")(require);
 const electrodeServer = optionalRequire("electrode-server");
+const Hapi = optionalRequire("@hapi/hapi");
 const Koa = optionalRequire("koa");
 const express = optionalRequire("express");
 
@@ -35,6 +36,21 @@ if (electrodeServer) {
       }
     }
   });
+} else if (Hapi) {
+  const app = Hapi.server({
+    port: archetype.webpack.devPort,
+    host: archetype.webpack.devHostname
+  });
+  app.register(require("./dev-hapi"))
+      .then(() => app.start())
+      .then(() => {
+        console.log(
+          ck`<green>Hapi webpack dev server listening on port ${archetype.webpack.devPort}</>`
+        );
+      })
+      .catch(err => {
+        console.error(ck`<red>koa webpack dev server failed</>${err}`);
+      });
 } else if (Koa) {
   const app = new Koa();
   const setup = require("./dev-koa");
