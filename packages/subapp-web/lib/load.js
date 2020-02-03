@@ -24,6 +24,14 @@ const { loadSubAppByName, loadSubAppServerByName } = require("subapp-util");
 // V1: version 1.
 const xarc = "window.xarcV1";
 
+// Size threshold of initial state string to embed it as a application/json script tag
+// It's more efficent to JSON.parse large JSON data instead of embedding them as JS.
+// https://quipblog.com/efficiently-loading-inlined-json-data-911960b0ac0a
+// > The data sizes are as follows: large is 1.7MB of JSON, medium is 130K,
+// > small is 10K and tiny is 781 bytes.
+const INITIAL_STATE_SIZE_FOR_JSON = 1024;
+let INITIAL_STATE_TAG_ID = 0;
+
 module.exports = function setup(setupContext, { props: options }) {
   // TODO: create JSON schema to validate props
 
@@ -203,12 +211,28 @@ module.exports = function setup(setupContext, { props: options }) {
           outputSpot.add(ssrContent);
         }
 
+        let dynInitialState = "";
+        let initialStateScript;
+        if (!initialStateStr) {
+          initialStateScript = "{}";
+        } else if (initialStateStr.length < INITIAL_STATE_SIZE_FOR_JSON) {
+          initialStateScript = initialStateStr;
+        } else {
+          // embed large initial state as text and parse with JSON.parse instead.
+          const dataId = `${name}-initial-state-${Date.now()}-${++INITIAL_STATE_TAG_ID}`;
+          dynInitialState = `<script type="application/json" id="${dataId}">
+${initialStateStr}
+</script>
+`;
+          initialStateScript = `JSON.parse(document.getElementById("${dataId}").innerHTML)`;
+        }
+
         outputSpot.add(`
-<script>${xarc}.startSubAppOnLoad({
+${dynInitialState}<script>${xarc}.startSubAppOnLoad({
  name:"${name}",
  ${elementId}serverSideRendering:${Boolean(options.serverSideRendering)},
  clientProps:${clientProps},
- initialState:${initialStateStr || "{}"}
+ initialState:${initialStateScript}
 });</script>
 `);
       };
