@@ -4293,18 +4293,18 @@ ejs:
   $: sha512-7vmuyh5+kuUyJKePhQfRQBhXV5Ce+RnaeeQArKu1EAMpL3WbgMt5WG6uQZpEVvYSSsxMXRKOewtDk9RaTKXRlA==
   _: 'https://registry.npmjs.org/ejs/-/ejs-2.7.4.tgz'
 electrode-archetype-opt-critical-css:
- _latest: 1.0.4-fynlocal_h
+ _latest: 2.0.0-fynlocal_h
  _:
-  ../electrode-archetype-opt-critical-css: 1.0.4-fynlocal_h
- 1.0.4-fynlocal_h:
+  ../electrode-archetype-opt-critical-css: 2.0.0-fynlocal_h
+ 2.0.0-fynlocal_h:
   optFailed: 1
   $: local
   _: ../../packages/electrode-archetype-opt-critical-css
 electrode-archetype-opt-eslint:
- _latest: 1.0.4-fynlocal_h
+ _latest: 2.0.0-fynlocal_h
  _:
-  ../electrode-archetype-opt-eslint: 1.0.4-fynlocal_h
- 1.0.4-fynlocal_h:
+  ../electrode-archetype-opt-eslint: 2.0.0-fynlocal_h
+ 2.0.0-fynlocal_h:
   optFailed: 1
   $: local
   _: ../../packages/electrode-archetype-opt-eslint
@@ -4317,10 +4317,10 @@ electrode-archetype-opt-inferno:
   $: local
   _: ../../packages/electrode-archetype-opt-inferno
 electrode-archetype-opt-jest:
- _latest: 24.0.1-fynlocal_h
+ _latest: 25.0.0-fynlocal_h
  _:
-  '../../packages/electrode-archetype-opt-jest,../electrode-archetype-opt-jest': 24.0.1-fynlocal_h
- 24.0.1-fynlocal_h:
+  '../../packages/electrode-archetype-opt-jest,../electrode-archetype-opt-jest': 25.0.0-fynlocal_h
+ 25.0.0-fynlocal_h:
   top: 1
   hasPI: 1
   $: local
@@ -4331,18 +4331,18 @@ electrode-archetype-opt-jest:
    eslint-plugin-jest: ^22.15.2
    jest: ^24.9.0
 electrode-archetype-opt-karma:
- _latest: 2.0.8-fynlocal_h
+ _latest: 3.0.0-fynlocal_h
  _:
-  ../electrode-archetype-opt-karma: 2.0.8-fynlocal_h
- 2.0.8-fynlocal_h:
+  ../electrode-archetype-opt-karma: 3.0.0-fynlocal_h
+ 3.0.0-fynlocal_h:
   optFailed: 1
   $: local
   _: ../../packages/electrode-archetype-opt-karma
 electrode-archetype-opt-less:
- _latest: 1.0.3-fynlocal_h
+ _latest: 2.0.0-fynlocal_h
  _:
-  '../../packages/electrode-archetype-opt-less,../electrode-archetype-opt-less': 1.0.3-fynlocal_h
- 1.0.3-fynlocal_h:
+  '../../packages/electrode-archetype-opt-less,../electrode-archetype-opt-less': 2.0.0-fynlocal_h
+ 2.0.0-fynlocal_h:
   top: 1
   hasPI: 1
   $: local
@@ -4351,26 +4351,26 @@ electrode-archetype-opt-less:
    less: ^3.9.0
    less-loader: ^4.1.0
 electrode-archetype-opt-mocha:
- _latest: 1.0.4-fynlocal_h
+ _latest: 2.0.0-fynlocal_h
  _:
-  ../electrode-archetype-opt-mocha: 1.0.4-fynlocal_h
- 1.0.4-fynlocal_h:
+  ../electrode-archetype-opt-mocha: 2.0.0-fynlocal_h
+ 2.0.0-fynlocal_h:
   optFailed: 1
   $: local
   _: ../../packages/electrode-archetype-opt-mocha
 electrode-archetype-opt-phantomjs:
- _latest: 1.0.3-fynlocal_h
+ _latest: 2.0.0-fynlocal_h
  _:
-  ../electrode-archetype-opt-phantomjs: 1.0.3-fynlocal_h
- 1.0.3-fynlocal_h:
+  ../electrode-archetype-opt-phantomjs: 2.0.0-fynlocal_h
+ 2.0.0-fynlocal_h:
   optFailed: 1
   $: local
   _: ../../packages/electrode-archetype-opt-phantomjs
 electrode-archetype-opt-postcss:
- _latest: 1.0.5-fynlocal_h
+ _latest: 2.0.0-fynlocal_h
  _:
-  '../../packages/electrode-archetype-opt-postcss,../electrode-archetype-opt-postcss': 1.0.5-fynlocal_h
- 1.0.5-fynlocal_h:
+  '../../packages/electrode-archetype-opt-postcss,../electrode-archetype-opt-postcss': 2.0.0-fynlocal_h
+ 2.0.0-fynlocal_h:
   top: 1
   hasPI: 1
   $: local
@@ -4385,46 +4385,34 @@ electrode-archetype-opt-postcss:
    postcss-scss: ^2.0.0
    sugarss: ^2.0.0
 electrode-archetype-opt-preact:
- _latest: 1.0.1-fynlocal_h
+ _latest: 2.0.0-fynlocal_h
  _:
-  ../electrode-archetype-opt-preact: 1.0.1-fynlocal_h
- 1.0.1-fynlocal_h:
+  ../electrode-archetype-opt-preact: 2.0.0-fynlocal_h
+ 2.0.0-fynlocal_h:
   optFailed: 1
   $: local
   _: ../../packages/electrode-archetype-opt-preact
 electrode-archetype-opt-pwa:
- _latest: 1.0.7-fynlocal_h
+ _latest: 2.0.0-fynlocal_h
  _:
-  ../electrode-archetype-opt-pwa: 1.0.7-fynlocal_h
- 1.0.7-fynlocal_h:
+  ../electrode-archetype-opt-pwa: 2.0.0-fynlocal_h
+ 2.0.0-fynlocal_h:
   optFailed: 1
   $: local
   _: ../../packages/electrode-archetype-opt-pwa
 electrode-archetype-opt-react:
- _latest: 2.0.5
+ _latest: 3.0.0-fynlocal_h
  _:
-  ../electrode-archetype-opt-react: 2.0.5-fynlocal_h
-  ^2.0.4: 2.0.5
- 2.0.5-fynlocal_h:
-  hasPI: 1
+  ../electrode-archetype-opt-react: 3.0.0-fynlocal_h
+ 3.0.0-fynlocal_h:
+  optFailed: 1
   $: local
   _: ../../packages/electrode-archetype-opt-react
-  dependencies:
-   react: ^16.0.0
-   react-dom: ^16.0.0
- 2.0.5:
-  top: 1
-  hasPI: 1
-  $: sha512-SHXd71RwyA4d+Hmw9y+6lPJX2S99Ucr409G7UppcZzniFRwVHm0hKkZC4q8Axh9rCDrCf7pNg2iRGyxngvKo+Q==
-  _: 'https://registry.npmjs.org/electrode-archetype-opt-react/-/electrode-archetype-opt-react-2.0.5.tgz'
-  dependencies:
-   react: ^16.0.0
-   react-dom: ^16.0.0
 electrode-archetype-opt-sass:
- _latest: 1.0.10-fynlocal_h
+ _latest: 2.0.0-fynlocal_h
  _:
-  '../../packages/electrode-archetype-opt-sass,../electrode-archetype-opt-sass': 1.0.10-fynlocal_h
- 1.0.10-fynlocal_h:
+  '../../packages/electrode-archetype-opt-sass,../electrode-archetype-opt-sass': 2.0.0-fynlocal_h
+ 2.0.0-fynlocal_h:
   top: 1
   hasPI: 1
   $: local
@@ -4433,18 +4421,18 @@ electrode-archetype-opt-sass:
    node-sass: ^4.9.3
    sass-loader: ^6.0.6
 electrode-archetype-opt-sinon:
- _latest: 1.0.4-fynlocal_h
+ _latest: 2.0.0-fynlocal_h
  _:
-  ../electrode-archetype-opt-sinon: 1.0.4-fynlocal_h
- 1.0.4-fynlocal_h:
+  ../electrode-archetype-opt-sinon: 2.0.0-fynlocal_h
+ 2.0.0-fynlocal_h:
   optFailed: 1
   $: local
   _: ../../packages/electrode-archetype-opt-sinon
 electrode-archetype-opt-stylus:
- _latest: 1.0.3-fynlocal_h
+ _latest: 2.0.0-fynlocal_h
  _:
-  '../../packages/electrode-archetype-opt-stylus,../electrode-archetype-opt-stylus': 1.0.3-fynlocal_h
- 1.0.3-fynlocal_h:
+  '../../packages/electrode-archetype-opt-stylus,../electrode-archetype-opt-stylus': 2.0.0-fynlocal_h
+ 2.0.0-fynlocal_h:
   top: 1
   hasPI: 1
   $: local
@@ -4453,18 +4441,18 @@ electrode-archetype-opt-stylus:
    stylus: ^0.54.7
    stylus-relative-loader: ^3.4.0
 electrode-archetype-opt-typescript:
- _latest: 1.0.4-fynlocal_h
+ _latest: 2.0.0-fynlocal_h
  _:
-  ../electrode-archetype-opt-typescript: 1.0.4-fynlocal_h
- 1.0.4-fynlocal_h:
+  ../electrode-archetype-opt-typescript: 2.0.0-fynlocal_h
+ 2.0.0-fynlocal_h:
   optFailed: 1
   $: local
   _: ../../packages/electrode-archetype-opt-typescript
 electrode-archetype-react-app:
- _latest: 7.0.2-fynlocal_h
+ _latest: 7.0.3-fynlocal_h
  _:
-  ../../packages/electrode-archetype-react-app: 7.0.2-fynlocal_h
- 7.0.2-fynlocal_h:
+  ../../packages/electrode-archetype-react-app: 7.0.3-fynlocal_h
+ 7.0.3-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app
@@ -4474,15 +4462,15 @@ electrode-archetype-react-app:
    ignore-styles: ^5.0.1
    isomorphic-loader: ^3.0.0
    optional-require: ^1.0.0
-   subapp-util: ^1.0.2
+   subapp-util: ^1.0.3
   optionalDependencies:
    electrode-archetype-opt-inferno: ^0.2.12
-   electrode-archetype-opt-react: ^2.0.5
+   electrode-archetype-opt-react: ^3.0.0
 electrode-archetype-react-app-dev:
- _latest: 7.0.2-fynlocal_h
+ _latest: 7.0.3-fynlocal_h
  _:
-  ../../packages/electrode-archetype-react-app-dev: 7.0.2-fynlocal_h
- 7.0.2-fynlocal_h:
+  ../../packages/electrode-archetype-react-app-dev: 7.0.3-fynlocal_h
+ 7.0.3-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-archetype-react-app-dev
@@ -4548,7 +4536,7 @@ electrode-archetype-react-app-dev:
    rimraf: ^2.4.0
    serve-index-fs: ^1.10.1
    style-loader: ^0.20.1
-   subapp-util: ^1.0.2
+   subapp-util: ^1.0.3
    sudo-prompt: ^8.2.5
    url-loader: ^0.6.2
    webpack: ^4.41.0
@@ -4563,22 +4551,22 @@ electrode-archetype-react-app-dev:
    xenv-config: ^1.3.0
    xsh: ^0.4.4
   optionalDependencies:
-   electrode-archetype-opt-critical-css: ^1.0.4
-   electrode-archetype-opt-eslint: ^1.0.4
+   electrode-archetype-opt-critical-css: ^2.0.0
+   electrode-archetype-opt-eslint: ^2.0.0
    electrode-archetype-opt-inferno: ^0.2.12
-   electrode-archetype-opt-jest: ^24.0.1
-   electrode-archetype-opt-karma: ^2.0.8
-   electrode-archetype-opt-less: ^1.0.3
-   electrode-archetype-opt-mocha: ^1.0.4
-   electrode-archetype-opt-phantomjs: ^1.0.3
-   electrode-archetype-opt-postcss: ^1.0.5
-   electrode-archetype-opt-preact: ^1.0.1
-   electrode-archetype-opt-pwa: ^1.0.7
-   electrode-archetype-opt-react: ^2.0.5
-   electrode-archetype-opt-sass: ^1.0.10
-   electrode-archetype-opt-stylus: ^1.0.3
-   electrode-archetype-opt-sinon: ^1.0.4
-   electrode-archetype-opt-typescript: ^1.0.4
+   electrode-archetype-opt-jest: ^25.0.0
+   electrode-archetype-opt-karma: ^3.0.0
+   electrode-archetype-opt-less: ^2.0.0
+   electrode-archetype-opt-mocha: ^2.0.0
+   electrode-archetype-opt-phantomjs: ^2.0.0
+   electrode-archetype-opt-postcss: ^2.0.0
+   electrode-archetype-opt-preact: ^2.0.0
+   electrode-archetype-opt-pwa: ^2.0.0
+   electrode-archetype-opt-react: ^3.0.0
+   electrode-archetype-opt-sass: ^2.0.0
+   electrode-archetype-opt-stylus: ^2.0.0
+   electrode-archetype-opt-sinon: ^2.0.0
+   electrode-archetype-opt-typescript: ^2.0.0
   peerDependencies:
    electrode-archetype-react-app: 7.0.0-beta7.0
 electrode-cdn-file-loader:
@@ -11440,10 +11428,10 @@ stylus-relative-loader:
   peerDependencies:
    stylus: ^0.54.5
 subapp-util:
- _latest: 1.0.2-fynlocal_h
+ _latest: 1.0.3-fynlocal_h
  _:
-  ../subapp-util: 1.0.2-fynlocal_h
- 1.0.2-fynlocal_h:
+  ../subapp-util: 1.0.3-fynlocal_h
+ 1.0.3-fynlocal_h:
   $: local
   _: ../../packages/subapp-util
   dependencies:

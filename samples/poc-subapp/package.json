@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@hapi/inert": "^5.2.2",
-    "electrode-archetype-opt-react": "^2.0.4",
+    "electrode-archetype-opt-react": "^3.0.0",
     "electrode-archetype-react-app": "^6.3.0",
     "electrode-confippet": "^1.5.0",
     "electrode-server": "^3.0.0",
@@ -55,8 +55,8 @@
   },
   "devDependencies": {
     "electrode-archetype-react-app-dev": "^6.3.0",
-    "electrode-archetype-opt-eslint": "^1.0.3",
-    "electrode-archetype-opt-jest": "^24.0.0"
+    "electrode-archetype-opt-eslint": "^2.0.0",
+    "electrode-archetype-opt-jest": "^25.0.0"
   },
   "fyn": {
     "dependencies": {
