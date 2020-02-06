@@ -92,7 +92,7 @@ function createSharedStore(initialState, info, storeContainer) {
     if (store) {
       // TODO: redux doesn't have a way to set initial state
       // after store's created?  What can we do about this?
-      replaceReducer(info.reduxReducers, info);
+      replaceReducer(info.reduxReducers, info, storeContainer);
     } else {
       reducerContainer = newReducerContainer();
       store = createStore(
@@ -101,10 +101,11 @@ function createSharedStore(initialState, info, storeContainer) {
       );
       store[originalReplaceReducerSym] = store.replaceReducer;
       //
-      // TODO: monkey patching store is bad
-      // since this is share store, reducers must be replaced
-      // as object of named reducers also, but patching an API
-      // that alters argument type is worst
+      // TODO: better handling of a replaceReducer that takes extra params
+      //
+      // Since this is share store, reducers must be replaced
+      // as object of named reducers also.
+      //
       // Maybe create a proxy store object, one for each sub-app
       //
       // NOTE: It's only on SSR that we need to share store within the
