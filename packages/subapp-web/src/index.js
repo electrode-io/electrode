@@ -72,9 +72,9 @@ export function loadSubApp(info, renderStart) {
 
     if (!instance._prepared) {
       if (subApp.info.prepare) {
-        instance._prepared = subApp.info.prepare(subApp.info, instance);
+        instance._prepared = subApp.info.prepare(subApp.info, instance, options);
       } else {
-        instance._prepared = {};
+        instance._prepared = options.initialState || {};
       }
     }
 
