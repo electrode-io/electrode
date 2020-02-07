@@ -201,14 +201,18 @@ module.exports = function setup(setupContext, { props: options }) {
         // add the div for the Node and the SSR content to it, and add JS to start the
         // sub app on load.
         let elementId = "";
-        if (options.elementId) {
+        if (!options.inline && options.elementId) {
           elementId = `elementId:"${options.elementId}",\n `;
           outputSpot.add(`<div id="${options.elementId}">`);
           outputSpot.add(ssrContent); // must add by itself since this could be a stream
           outputSpot.add(`</div>`);
         } else {
-          outputSpot.add("<!-- no elementId for starting subApp on load -->\n");
-          outputSpot.add(ssrContent);
+          outputSpot.add("<!-- inline or no elementId for starting subApp on load -->");
+          if (ssrContent) {
+            outputSpot.add("\n");
+            outputSpot.add(ssrContent);
+            outputSpot.add("\n");
+          }
         }
 
         let dynInitialState = "";
@@ -227,11 +231,13 @@ ${initialStateStr}
           initialStateScript = `JSON.parse(document.getElementById("${dataId}").innerHTML)`;
         }
 
+        const inlineStr = options.inline ? `inline:${options.inline},\n ` : "";
+        const groupStr = options.group ? `group:"${options.group}",\n ` : "";
         outputSpot.add(`
 ${dynInitialState}<script>${xarc}.startSubAppOnLoad({
  name:"${name}",
  ${elementId}serverSideRendering:${Boolean(options.serverSideRendering)},
- clientProps:${clientProps},
+ ${inlineStr}${groupStr}clientProps:${clientProps},
  initialState:${initialStateScript}
 });</script>
 `);
@@ -280,15 +286,32 @@ ${stack}
           const lib = util.getFramework(ref);
           ssrInfo.awaitData = lib.handlePrepare();
 
-          ssrInfo.renderSSR = async () => {
-            try {
-              outputSSRContent(await lib.handleSSR(ref), lib.initialStateStr);
-            } catch (err) {
-              handleError(err);
-            } finally {
-              closeOutput();
-            }
-          };
+          ssrInfo.defer = true;
+
+          if (!options.inline) {
+            ssrInfo.renderSSR = async () => {
+              try {
+                outputSSRContent(await lib.handleSSR(ref), lib.initialStateStr);
+              } catch (err) {
+                handleError(err);
+              } finally {
+                closeOutput();
+              }
+            };
+          } else {
+            ssrInfo.saveSSRInfo = () => {
+              try {
+                // output load without SSR content
+                outputSSRContent("", lib.initialStateStr);
+                ssrInfo.lib = lib;
+                _.set(request.app, ["xarcInlineSSR", name], ssrInfo);
+              } catch (err) {
+                handleError(err);
+              } finally {
+                closeOutput();
+              }
+            };
+          }
         } else {
           outputSSRContent("");
         }
@@ -305,7 +328,7 @@ ${stack}
         } catch (err) {
           handleError(err);
         } finally {
-          if (!ssrInfo.renderSSR) {
+          if (!ssrInfo.defer) {
             closeOutput();
           }
         }

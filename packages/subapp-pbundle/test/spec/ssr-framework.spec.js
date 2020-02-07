@@ -1,9 +1,11 @@
+/** @jsx h */
+
 "use strict";
 
-/** @jsx h */
-// const url = require("url");
 const { h } = require("preact"); // eslint-disable-line
 const lib = require("../../lib");
+
+const { expectErrorHas, asyncVerify } = require("run-verify");
 
 describe("SSR Preact framework", function() {
   it("should setup React framework", () => {
@@ -140,5 +142,43 @@ describe("SSR Preact framework", function() {
     const res = await framework.handleSSR();
     expect(res).contains(`<div>IS_SSR: true HAS_REQUEST: yes</div>`);
     expect(request.foo).equals("bar");
+  });
+
+  it("handlePrepare should throw error if trying to use react router", () => {
+    const framework = new lib.FrameworkLib({
+      subApp: {
+        useReactRouter: true
+      },
+      subAppServer: {}
+    });
+    return asyncVerify(
+      expectErrorHas(
+        async () => await framework.handlePrepare(),
+        "react router is not yet supported"
+      )
+    );
+  });
+
+  it("handlePrepare should prepare redux data and store", async () => {
+    const framework = new lib.FrameworkLib({
+      subApp: {
+        __redux: true,
+        reduxCreateStore() {
+          return { testStore: true };
+        }
+      },
+      subAppServer: {
+        StartComponent: () => {},
+        async prepare() {
+          return { hello: "world" };
+        }
+      },
+      context: {
+        user: {}
+      }
+    });
+
+    const store = await framework.handlePrepare();
+    expect(store.testStore).to.equal(true);
   });
 });
