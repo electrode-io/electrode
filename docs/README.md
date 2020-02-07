@@ -99,7 +99,7 @@ Licensed under the [Apache License, Version 2.0].
 [apache license, version 2.0]: https://www.apache.org/licenses/LICENSE-2.0
 [electrode main repo]: https://github.com/electrode-io/electrode
 [material-ui]: http://www.material-ui.com
-[lerna]: https://lernajs.io/
+[lerna]: https://lerna.js.org
 [electrode-archetype-react-app]: https://github.com/electrode-io/electrode/tree/master/packages/electrode-archetype-react-app
 [electrode-archetype-react-app-dev]: https://github.com/electrode-io/electrode/tree/master/packages/electrode-archetype-react-app-dev
 [electrode-archetype-react-component]: https://github.com/electrode-io/electrode/tree/master/packages/electrode-archetype-react-component
