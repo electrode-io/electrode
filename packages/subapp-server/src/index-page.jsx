@@ -6,6 +6,7 @@ const RenderSubApps = (props, context) => {
   const { routeOptions } = context.user;
   const { subApps } = routeOptions.__internals;
 
+  const elementId = props.inline ? undefined : `subapp-${subapp.name}-${ix}`;
   return (
     subApps &&
     subApps.length > 0 &&
@@ -19,7 +20,7 @@ const RenderSubApps = (props, context) => {
           Object.assign(
             {
               _concurrent: true,
-              elementId: `subapp-${subapp.name}-${ix}`,
+              elementId,
               timestamp: true,
               streaming: false,
               async: true,

@@ -27,13 +27,16 @@ module.exports = function setup() {
               // and then wait for it to complete data prepare
               // awaitData should be available once ready is awaited
               await info.awaitData;
+              if (info.saveSSRInfo) {
+                info.saveSSRInfo();
+              }
             },
             { concurrency }
           );
 
           // finally kick off rendering for every subapp in the group
           await xaa.map(
-            queue,
+            queue.filter(x => x.renderSSR),
             async ({ renderSSR }) => {
               if (renderSSR) await renderSSR();
             },

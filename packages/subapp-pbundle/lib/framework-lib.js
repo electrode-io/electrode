@@ -54,6 +54,22 @@ class FrameworkLib {
     return "";
   }
 
+  handleSSRSync() {
+    const { subApp, options } = this.ref;
+
+    assert(this._prepared, "subapp's data must've been prepared to run handleSSRSync");
+
+    if (!this.StartComponent) {
+      return `<!-- serverSideRendering ${subApp.name} has no StartComponent -->`;
+    } else if (subApp.__redux) {
+      return this.doReduxBundlerSSR();
+    } else if (options.serverSideRendering === true) {
+      return this.doSSR();
+    }
+
+    return "";
+  }
+
   renderTo(element, options) {
     if (options.streaming) {
       throw new Error("render to stream is not yet supported for preact");
@@ -109,14 +125,13 @@ class FrameworkLib {
     return this._initialProps;
   }
 
-  async doSSR() {
-    return await this.renderTo(this.createTopComponent(this._initialProps), this.ref.options);
+  doSSR() {
+    return this.renderTo(this.createTopComponent(this._initialProps), this.ref.options);
   }
 
   async prepareReduxData() {
     const { subApp, subAppServer, context } = this.ref;
     const { request } = context.user;
-    const container = request.container || (request.container = {});
 
     // subApp.reduxReducers || subApp.reduxCreateStore) {
     // if sub app has reduxReducers or reduxCreateStore then assume it's using
@@ -133,6 +148,8 @@ class FrameworkLib {
 
     if (!reduxData) {
       reduxData = { initialState: {} };
+    } else {
+      this.store = reduxData.store;
     }
 
     this.initialState = reduxData.initialState || reduxData;
@@ -142,28 +159,41 @@ class FrameworkLib {
       this.initialStateStr = JSON.stringify(this.initialState);
     }
     // next we take the initial state and create redux store from it
-    this.store =
-      reduxData.store ||
-      (subApp.reduxCreateStore && (await subApp.reduxCreateStore(this.initialState, container)));
+    return await this.prepareReduxStore();
+  }
+
+  async prepareReduxStore() {
+    const { subApp, context } = this.ref;
+
+    // next we take the initial state and create redux store from it
+    if (!this.store && subApp.reduxCreateStore) {
+      const storeContainer =
+        context.user.xarcReduxStoreContainer || (context.user.xarcReduxStoreContainer = {});
+
+      this.store = await subApp.reduxCreateStore(this.initialState, storeContainer);
+    }
+
     assert(
       this.store,
-      `redux subapp ${subApp.name} didn't provide store, reduxCreateStore, or reducers`
+      `redux subapp ${subApp.name} didn't provide store, reduxCreateStore, or redux bundles`
     );
 
-    const reduxStoreReady = subAppServer.reduxStoreReady || subApp.reduxStoreReady;
+    const reduxStoreReady = this.ref.subAppServer.reduxStoreReady || subApp.reduxStoreReady;
 
     if (reduxStoreReady) {
       await reduxStoreReady({ store: this.store });
     }
+
+    return this.store;
   }
 
-  async doReduxBundlerSSR() {
+  doReduxBundlerSSR() {
     const { options } = this.ref;
 
     if (options.serverSideRendering === true) {
       assert(Provider, "subapp-web: react-redux Provider not available");
       // finally render the element with Redux Provider and the store created
-      return await this.renderTo(
+      return this.renderTo(
         preact.createElement(Provider, { store: this.store }, this.createTopComponent()),
         options
       );

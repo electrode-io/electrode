@@ -56,6 +56,24 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "subapp-pbundle Mocha Tests",
+      "cwd": "${workspaceFolder}/packages/subapp-pbundle",
+      "env": { "BABEL_ENV": "-src-node" },
+      "program": "${workspaceFolder}/packages/subapp-pbundle/node_modules/mocha/bin/_mocha",
+      "args": [
+        "-u",
+        "tdd",
+        "--timeout",
+        "999999",
+        "--colors",
+        "${workspaceFolder}/packages/subapp-pbundle/test/spec"
+      ],
+      "internalConsoleOptions": "openOnSessionStart"
+    },
+
+    {
+      "type": "node",
+      "request": "launch",
       "name": "subapp-util Mocha Tests",
       "cwd": "${workspaceFolder}/packages/subapp-util",
       "program": "${workspaceFolder}/packages/subapp-util/node_modules/mocha/bin/_mocha",
