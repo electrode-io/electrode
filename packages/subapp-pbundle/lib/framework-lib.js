@@ -1,9 +1,7 @@
 "use strict";
 
-/* eslint-disable max-statements */
-
 const assert = require("assert");
-const preact = require("preact");
+const { createElement } = require("preact");
 const { default: AppContext } = require("../dist/node/app-context");
 const prts = require("preact-render-to-string");
 const { Provider } = require("redux-bundler-preact");
@@ -17,18 +15,15 @@ class FrameworkLib {
   async handlePrepare() {
     this._prepared = true;
     const { subApp, subAppServer, options } = this.ref;
-    // If subapp wants to use react router and server didn't specify a StartComponent,
-    // then create a wrap StartComponent that uses react router's StaticRouter
-    if (subApp.useReactRouter && !subAppServer.StartComponent) {
-      throw new Error("react router is not yet supported for preact");
-    } else {
-      this.StartComponent = subAppServer.StartComponent || subApp.Component;
-    }
 
-    if (this.StartComponent) {
+    assert(!subApp.useReactRouter, "react router is not yet supported for preact");
+
+    this.StartComponent = subAppServer.StartComponent || subApp.Component;
+
+    if (this.StartComponent && options.serverSideRendering === true) {
       if (subApp.__redux) {
         return await this.prepareReduxData();
-      } else if (options.serverSideRendering === true) {
+      } else {
         return await this.prepareData();
       }
     }
@@ -37,21 +32,12 @@ class FrameworkLib {
   }
 
   async handleSSR() {
-    const { subApp, options } = this.ref;
-
     if (!this._prepared) {
       await this.handlePrepare();
+      await this.realizeReduxStore();
     }
 
-    if (!this.StartComponent) {
-      return `<!-- serverSideRendering ${subApp.name} has no StartComponent -->`;
-    } else if (subApp.__redux) {
-      return await this.doReduxBundlerSSR();
-    } else if (options.serverSideRendering === true) {
-      return await this.doSSR();
-    }
-
-    return "";
+    return this.handleSSRSync();
   }
 
   handleSSRSync() {
@@ -61,23 +47,28 @@ class FrameworkLib {
 
     if (!this.StartComponent) {
       return `<!-- serverSideRendering ${subApp.name} has no StartComponent -->`;
-    } else if (subApp.__redux) {
-      return this.doReduxBundlerSSR();
     } else if (options.serverSideRendering === true) {
-      return this.doSSR();
+      if (subApp.__redux) {
+        // we can't realize the store here because signaling store ready is async
+        assert(!this.store.realize, "BUG: redux store is not yet realized");
+        assert(Provider, "subapp-pbundle: redux-bundler-preact Provider not available");
+        // finally render the element with Redux Provider and the store created
+        return this.renderTo(
+          createElement(Provider, { store: this.store }, this.createTopComponent()),
+          this.ref.options
+        );
+      } else {
+        return this.doSSR();
+      }
     }
 
     return "";
   }
 
   renderTo(element, options) {
-    if (options.streaming) {
-      throw new Error("render to stream is not yet supported for preact");
-    }
+    assert(!options.streaming, "render to stream is not yet supported for preact");
 
-    if (options.suspenseSsr) {
-      throw new Error("suspense is not yet supported for preact");
-    }
+    assert(!options.suspenseSsr, "suspense is not yet supported for preact");
 
     if (options.hydrateServerData) {
       return prts.render(element);
@@ -90,20 +81,9 @@ class FrameworkLib {
     const { request } = this.ref.context.user;
     const { subApp } = this.ref;
 
-    let TopComponent;
-    if (subApp.useReactRouter) {
-      const rrContext = {};
-      const rrProps = Object.assign(
-        { location: request.url.pathname, context: rrContext },
-        initialProps
-      );
-      // console.log("rendering", name, "for react router", rrProps);
-      TopComponent = preact.createElement(this.StartComponent, rrProps);
-    } else {
-      // console.log("rendering without react router", name);
-      TopComponent = preact.createElement(this.StartComponent, initialProps);
-    }
-    return preact.createElement(
+    const TopComponent = createElement(this.StartComponent, initialProps);
+
+    return createElement(
       AppContext.Provider,
       { value: { isSsr: true, subApp, ssr: { request } } },
       TopComponent
@@ -133,7 +113,6 @@ class FrameworkLib {
     const { subApp, subAppServer, context } = this.ref;
     const { request } = context.user;
 
-    // subApp.reduxReducers || subApp.reduxCreateStore) {
     // if sub app has reduxReducers or reduxCreateStore then assume it's using
     // redux data model.  prepare initial state and store to render it.
     let reduxData;
@@ -155,10 +134,13 @@ class FrameworkLib {
     this.initialState = reduxData.initialState || reduxData;
     // if subapp didn't request to skip sending initial state, then stringify it
     // and attach it to the index html.
+
     if (subAppServer.attachInitialState !== false) {
       this.initialStateStr = JSON.stringify(this.initialState);
+    } else {
+      this.initialStateStr = "";
     }
-    // next we take the initial state and create redux store from it
+
     return await this.prepareReduxStore();
   }
 
@@ -178,27 +160,27 @@ class FrameworkLib {
       `redux subapp ${subApp.name} didn't provide store, reduxCreateStore, or redux bundles`
     );
 
-    const reduxStoreReady = this.ref.subAppServer.reduxStoreReady || subApp.reduxStoreReady;
-
-    if (reduxStoreReady) {
-      await reduxStoreReady({ store: this.store });
+    if (!this.store.realize) {
+      await this.signalStoreReady();
     }
 
     return this.store;
   }
 
-  doReduxBundlerSSR() {
-    const { options } = this.ref;
-
-    if (options.serverSideRendering === true) {
-      assert(Provider, "subapp-web: react-redux Provider not available");
-      // finally render the element with Redux Provider and the store created
-      return this.renderTo(
-        preact.createElement(Provider, { store: this.store }, this.createTopComponent()),
-        options
-      );
+  async realizeReduxStore() {
+    if (this.store && this.store.realize) {
+      this.store = this.store.realize();
+      await this.signalStoreReady();
     }
-    return "";
+  }
+
+  async signalStoreReady() {
+    const reduxStoreReady =
+      this.ref.subAppServer.reduxStoreReady || this.ref.subApp.reduxStoreReady;
+
+    if (reduxStoreReady) {
+      await reduxStoreReady({ store: this.store });
+    }
   }
 }
 

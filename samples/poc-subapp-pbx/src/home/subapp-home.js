@@ -9,8 +9,8 @@ import {
   Component
 } from "subapp-pbundle";
 
-import bundleA from "../group-1-a/bundle-a";
-import bundleB from "../group-1-b/bundle-b";
+// import bundleA from "../group-1-a/bundle-a";
+// import bundleB from "../group-1-b/bundle-b";
 
 import "tachyons-sass/tachyons.scss";
 
@@ -39,13 +39,13 @@ class SubApp extends Component {
 
           const subapp = xarc.getSubApp(name);
           if (subapp && xarc.getBundle(name)) {
-            return subapp.start({ props: this.props });
+            return subapp.inline({ group: "1", props: this.props });
           } else {
             const onLoad = () => this.setState({ ready: true });
             dynamicLoadSubApp({ name, onLoad });
 
             // if not, return loadingComponent
-            return "";
+            return this.props.fallback || "";
           }
         }}
       </AppContext.Consumer>
@@ -71,5 +71,5 @@ export default reduxBundlerLoadSubApp({
   // bootstrap() {},
   // TBD: each instance props/state initializing hook
   // initialize() {},
-  reduxBundles: [bundleA, bundleB]
+  reduxBundles: []
 });

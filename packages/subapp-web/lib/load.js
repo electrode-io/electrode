@@ -32,7 +32,7 @@ const xarc = "window.xarcV1";
 const INITIAL_STATE_SIZE_FOR_JSON = 1024;
 let INITIAL_STATE_TAG_ID = 0;
 
-module.exports = function setup(setupContext, { props: options }) {
+module.exports = function setup(setupContext, { props: setupProps }) {
   // TODO: create JSON schema to validate props
 
   // name="Header"
@@ -49,7 +49,7 @@ module.exports = function setup(setupContext, { props: options }) {
   // TODO: Need a way to figure out all the subapps need for a page and send out script
   // tags ASAP in <header> so browser can start fetching them before entire page is loaded.
 
-  const name = options.name;
+  const name = setupProps.name;
   const routeData = setupContext.routeOptions.__internals;
   const bundleAsset = util.getSubAppBundle(name, routeData.assets);
   const bundleBase = util.getBundleBase(setupContext.routeOptions);
@@ -82,7 +82,7 @@ module.exports = function setup(setupContext, { props: options }) {
   const prepareSubAppJsBundle = () => {
     const webpackDev = process.env.WEBPACK_DEV === "true";
 
-    if (options.inlineScript === "always" || (options.inlineScript === true && !webpackDev)) {
+    if (setupProps.inlineScript === "always" || (setupProps.inlineScript === true && !webpackDev)) {
       if (!webpackDev) {
         // if we have to inline the subapp's JS bundle, we load it for production mode
         const src = Fs.readFileSync(Path.resolve("dist/js", bundleAsset.name)).toString();
@@ -100,7 +100,7 @@ module.exports = function setup(setupContext, { props: options }) {
     } else {
       // if should inline script for webpack dev mode
       // make sure we retrieve from webpack dev server and inline the script later
-      inlineSubAppJs = webpackDev && Boolean(options.inlineScript);
+      inlineSubAppJs = webpackDev && Boolean(setupProps.inlineScript);
     }
   };
 
@@ -164,7 +164,7 @@ module.exports = function setup(setupContext, { props: options }) {
   loadSubApp();
   prepareSubAppJsBundle();
 
-  const clientProps = JSON.stringify(_.pick(options, ["useReactRouter"]));
+  const clientProps = JSON.stringify(_.pick(setupProps, ["useReactRouter"]));
 
   return {
     process: (context, { props }) => {
@@ -201,9 +201,9 @@ module.exports = function setup(setupContext, { props: options }) {
         // add the div for the Node and the SSR content to it, and add JS to start the
         // sub app on load.
         let elementId = "";
-        if (!options.inline && options.elementId) {
-          elementId = `elementId:"${options.elementId}",\n `;
-          outputSpot.add(`<div id="${options.elementId}">`);
+        if (!props.inline && props.elementId) {
+          elementId = `elementId:"${props.elementId}",\n `;
+          outputSpot.add(`<div id="${props.elementId}">`);
           outputSpot.add(ssrContent); // must add by itself since this could be a stream
           outputSpot.add(`</div>`);
         } else {
@@ -231,12 +231,12 @@ ${initialStateStr}
           initialStateScript = `JSON.parse(document.getElementById("${dataId}").innerHTML)`;
         }
 
-        const inlineStr = options.inline ? `inline:${options.inline},\n ` : "";
-        const groupStr = options.group ? `group:"${options.group}",\n ` : "";
+        const inlineStr = props.inline ? `inline:${props.inline},\n ` : "";
+        const groupStr = props.group ? `group:"${props.group}",\n ` : "";
         outputSpot.add(`
 ${dynInitialState}<script>${xarc}.startSubAppOnLoad({
  name:"${name}",
- ${elementId}serverSideRendering:${Boolean(options.serverSideRendering)},
+ ${elementId}serverSideRendering:${Boolean(props.serverSideRendering)},
  ${inlineStr}${groupStr}clientProps:${clientProps},
  initialState:${initialStateScript}
 });</script>
@@ -258,7 +258,7 @@ ${stack}
       };
 
       const closeOutput = () => {
-        if (options.timestamp) {
+        if (props.timestamp) {
           outputSpot.add(`<!-- time: ${Date.now()} -->`);
         }
 
@@ -270,7 +270,7 @@ ${stack}
           context,
           subApp,
           subAppServer,
-          options,
+          options: props,
           ssrGroups
         };
 
@@ -282,13 +282,13 @@ ${stack}
 `);
         }
 
-        if (options.serverSideRendering) {
-          const lib = util.getFramework(ref);
+        if (props.serverSideRendering) {
+          const lib = (ssrInfo.lib = util.getFramework(ref));
           ssrInfo.awaitData = lib.handlePrepare();
 
           ssrInfo.defer = true;
 
-          if (!options.inline) {
+          if (!props.inline) {
             ssrInfo.renderSSR = async () => {
               try {
                 outputSSRContent(await lib.handleSSR(ref), lib.initialStateStr);
@@ -300,10 +300,13 @@ ${stack}
             };
           } else {
             ssrInfo.saveSSRInfo = () => {
+              if (ssrInfo.saved) {
+                return;
+              }
+              ssrInfo.saved = true;
               try {
                 // output load without SSR content
                 outputSSRContent("", lib.initialStateStr);
-                ssrInfo.lib = lib;
                 _.set(request.app, ["xarcInlineSSR", name], ssrInfo);
               } catch (err) {
                 handleError(err);
@@ -318,7 +321,7 @@ ${stack}
       };
 
       const asyncProcess = async () => {
-        if (options.timestamp) {
+        if (props.timestamp) {
           outputSpot.add(`<!-- time: ${Date.now()} -->`);
         }
 

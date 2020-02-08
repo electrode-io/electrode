@@ -9,7 +9,9 @@
     instId: 1,
     subApps: {},
     bundles: {},
-    onLoadStart: {}
+    onLoadStart: {},
+    groups: {},
+    started: false
   };
 
   let xv1;
@@ -18,6 +20,81 @@
     version,
 
     rt: runtimeInfo,
+
+    defer() {
+      const defer = {};
+      defer.promise = new Promise((resolve, reject) => {
+        defer.resolve = resolve;
+        defer.reject = reject;
+        defer.done = (err, result) => {
+          if (err) reject(err);
+          else resolve(result);
+        };
+      });
+      return defer;
+    },
+
+    /* implement concurrent async map */
+
+    asyncMap(array, func, concurrency) {
+      const mapped = [];
+      let error;
+      let completedCount = 0;
+      let index = 0;
+      let total = array && array.length;
+
+      concurrency > 0 || (concurrency = 10);
+
+      const defer = xv1.defer();
+
+      const next = () => {
+        if (error || index >= total || concurrency <= 0) {
+          return;
+        }
+
+        concurrency--;
+        const pendingIx = index++;
+        mapped[pendingIx] = undefined;
+
+        const save = r => {
+          concurrency++;
+          completedCount++;
+          mapped[pendingIx] = r;
+          if (!error && completedCount === total) {
+            defer.resolve(mapped);
+          } else {
+            next();
+          }
+        };
+
+        const fail = err => {
+          if (error) {
+            return;
+          }
+          error = err;
+          err.partial = mapped;
+          defer.reject(err);
+        };
+
+        try {
+          const mapped = func(array[pendingIx], pendingIx, array);
+
+          if (mapped && mapped.then) {
+            // a promise
+            mapped.then(save, fail);
+            next();
+          } else {
+            save(mapped);
+          }
+        } catch (err) {
+          fail(err);
+        }
+      };
+
+      setTimeout(total > 0 ? next : () => defer.resolve(mapped), 0);
+
+      return defer.promise;
+    },
 
     getBundle(name) {
       return name ? runtimeInfo.bundles[name.toLowerCase()] : undefined;
@@ -44,14 +121,59 @@
       xv1.getOnLoadStart(name).push(load);
     },
 
-    copyObject(src, dst) {
-      dst = dst || {};
-      for (const x in src) {
-        if (src.hasOwnProperty(x)) {
-          dst[x] = src[x];
-        }
+    startSubApp(subApp, options) {
+      let instance;
+      const makeInvoke = m => () => subApp[m] && subApp[m](instance, options, subApp.info);
+      return Promise.resolve()
+        .then(makeInvoke("preStart"))
+        .then(x => (instance = x) && x._prepared) // await _prepared in case it's a promise
+        .then(makeInvoke("preRender"))
+        .then(makeInvoke("signalReady"))
+        .then(makeInvoke("start"));
+    },
+
+    startGroup(groupInfo) {
+      if (!runtimeInfo.started || groupInfo.started || groupInfo.queue.length < groupInfo.total) {
+        return;
       }
-      return dst;
+      const makeInvoke = (m, queue) => {
+        return () =>
+          xv1.asyncMap(queue || groupInfo.queue, startInfo => {
+            const subApp = startInfo.subApp;
+            return subApp[m] && subApp[m](startInfo.instance, startInfo.options, subApp.info);
+          });
+      };
+
+      groupInfo.started = true;
+      console.log("Starting subapp group", groupInfo);
+
+      xv1
+        .asyncMap(groupInfo.queue, startInfo => {
+          return startInfo.instance._prepared;
+        })
+        .then(makeInvoke("preRender"))
+        .then(makeInvoke("signalReady"))
+        .then(() => {
+          return xv1.asyncMap(
+            groupInfo.queue.filter(x => x.options.inline),
+            startInfo => {
+              const subApp = startInfo.subApp;
+              subApp.inline = ({ group, props }) => {
+                return subApp.start(
+                  startInfo.instance,
+                  Object.assign({}, startInfo.options, { props }),
+                  subApp.info
+                );
+              };
+            }
+          );
+        })
+        .then(
+          makeInvoke(
+            "start",
+            groupInfo.queue.filter(x => !x.options.inline)
+          )
+        );
     },
 
     //
@@ -68,13 +190,13 @@
     watchSubAppOnLoad(immediate) {
       if (runtimeInfo.onLoadWatcher) {
         clearTimeout(runtimeInfo.onLoadWatcher);
+        runtimeInfo.onLoadWatcher = undefined;
       }
 
       const watchCheck = () => {
         runtimeInfo.onLoadWatcher = undefined;
         const ols = runtimeInfo.onLoadStart;
         let pending = 0;
-        let delay = 0;
         for (const name in ols) {
           if (!ols[name]) {
             continue;
@@ -86,27 +208,34 @@
             const queue = ols[name];
             ols[name] = undefined;
             queue.forEach(options => {
-              if (!options.id || !options.elementId) {
-                options = xv1.copyObject(options);
+              if (!options.id && !options.elementId) {
+                options = Object.assign({}, options);
                 options._genId = options.name + "_inst_id_" + runtimeInfo.instId++;
               }
-              if (options.serverSideRendering && options.inline) {
-                const instance = subApp.preStart(options);
-                // async prepare needed, await for it and then start
-                if (instance._prepared.then) {
-                  return instance._prepared.then(() => {
-                    return subApp.start(options, subApp.info);
-                  });
-                }
-                // no async needed, continue down to start
-              }
 
-              setTimeout(() => {
-                subApp.start(options, subApp.info);
-              }, delay++);
+              if (options.group) {
+                // start subapps as a group
+                const grpInfo = runtimeInfo.groups[options.group];
+                const startInfo = { options, subApp, instance: subApp.preStart(null, options) };
+                grpInfo.queue.push(startInfo);
+                xv1.startGroup(grpInfo);
+
+                if (grpInfo.queue.length < grpInfo.total) {
+                  console.log(
+                    "subapp group",
+                    options.group,
+                    "not ready to start: total",
+                    grpInfo.total,
+                    "count",
+                    grpInfo.queue.length
+                  );
+                }
+              } else {
+                return xv1.startSubApp(subApp, options);
+              }
             });
           } else {
-            console.error(`subApp ${name} exist but missing start and info`);
+            console.error(`subApp ${name} exist but missing start or info`);
           }
         }
 
@@ -121,7 +250,7 @@
         watchCheck();
       }
 
-      runtimeInfo.onLoadWatcher = setTimeout(watchCheck, 50);
+      runtimeInfo.onLoadWatcher = setTimeout(watchCheck, 10);
     },
 
     startSubAppOnLoad(options) {
@@ -132,7 +261,25 @@
         ols[name] = [];
       }
 
+      const group = options.group;
+      if (group) {
+        let groupInfo = runtimeInfo.groups[group];
+        if (!groupInfo) {
+          groupInfo = runtimeInfo.groups[group] = { group: group, total: 0, queue: [] };
+        }
+        groupInfo.total++;
+      }
+
       ols[name].push(options);
+    },
+
+    start() {
+      console.log("xarcV1 start, version:", version);
+      runtimeInfo.started = true;
+      const groups = runtimeInfo.groups;
+      for (let grp in groups) {
+        xv1.startGroup(groups[grp]);
+      }
       xv1.watchSubAppOnLoad(true);
     },
 

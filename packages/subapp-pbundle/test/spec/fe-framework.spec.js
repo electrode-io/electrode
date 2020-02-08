@@ -7,6 +7,10 @@ const feLib = require("../../src");
 const { JSDOM } = require("jsdom");
 
 describe("FE Preact framework", function() {
+  afterEach(() => {
+    delete global.window;
+    delete global.document;
+  });
   //
   it("should setup FrameworkLib", () => {
     expect(feLib.AppContext).to.be.ok;

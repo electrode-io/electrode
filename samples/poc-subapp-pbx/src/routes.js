@@ -29,7 +29,7 @@ export default {
     // TBD: A subapp could potentially be loaded from a remote URL.
     subApps: [
       ["./home", { serverSideRendering: true, group: "1" }],
-      ["./demo1", { serverSideRendering: false, inline: false }],
+      ["./demo1", { serverSideRendering: false, inline: false, group: "1" }],
       ["./demo1", { serverSideRendering: true, inline: true, group: "1" }],
       ["./group-1-a", { serverSideRendering: true, inline: true, group: "1" }],
       ["./group-1-b", { serverSideRendering: true, inline: true, group: "1" }]

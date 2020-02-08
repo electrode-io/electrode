@@ -12,7 +12,8 @@ export function setupFramework(frameworkLib) {
   FrameworkLib = frameworkLib;
 }
 
-export function loadSubApp(info, renderStart) {
+export function loadSubApp(info, renderStart, options) {
+  setTimeout(() => xarc.watchSubAppOnLoad(), 0);
   info = makeSubAppSpec(info);
 
   const name = info.name;
@@ -67,12 +68,13 @@ export function loadSubApp(info, renderStart) {
     return instance;
   };
 
-  subApp.preStart = options => {
-    const instance = subApp.getInstance(options);
+  subApp.preStart = (instance, options, info) => {
+    instance = instance || subApp.getInstance(options);
+    info = info || subApp.info;
 
     if (!instance._prepared) {
-      if (subApp.info.prepare) {
-        instance._prepared = subApp.info.prepare(subApp.info, instance, options);
+      if (info.prepare) {
+        instance._prepared = info.prepare(instance, options, info);
       } else {
         instance._prepared = options.initialState || {};
       }
@@ -81,19 +83,23 @@ export function loadSubApp(info, renderStart) {
     return instance;
   };
 
-  subApp.start = options => {
-    const instance = subApp.preStart(options);
+  subApp.preRender = info.__preRender;
+  subApp.signalReady = info.__signalReady;
+
+  subApp.start = (instance, options, info) => {
+    instance = instance || subApp.preStart(instance, options, info);
+    info = info || subApp.info;
     // if user provided a start function, then user is expected to
     // have reference to info
     const callStart = () => {
-      if (subApp.info.start) {
-        return subApp.info.start(instance, instance.element);
+      if (info.start) {
+        return info.start(instance, instance.element);
       }
 
       return subApp._renderStart(instance, instance.element);
     };
 
-    if (instance._prepared.then) {
+    if (instance._prepared && instance._prepared.then) {
       return instance._prepared.then(r => {
         instance._prepared = r;
         return callStart();
@@ -139,7 +145,7 @@ export function dynamicLoadSubApp({ name, id, timeout = 15000, onLoad, onError, 
     } else {
       const element = document.getElementById(id);
       if (element && subApp.start) {
-        return subApp.start({ id });
+        return subApp.start(null, { id });
       }
     }
   };
@@ -147,7 +153,7 @@ export function dynamicLoadSubApp({ name, id, timeout = 15000, onLoad, onError, 
   const renderInline = () => {
     const subApp = xarc.getSubApp(name);
     if (subApp) {
-      return subApp.start({});
+      return subApp.start(null, {});
     }
     return false;
   };
