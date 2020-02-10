@@ -1,3 +1,68 @@
+# 2/10/2020
+
+- try to use hapi if electrodeServer is not found
+- New webpack option to minimize the number of created subapp chunks
+- subapp inlining
+
+## Packages
+
+- `electrode-archetype-react-app@7.0.4` `(7.0.3 => 7.0.4)`
+- `electrode-archetype-react-app-dev@7.0.4` `(7.0.3 => 7.0.4)`
+- `subapp-pbundle@0.0.5` `(0.0.4 => 0.0.5)`
+- `subapp-react@0.0.5` `(0.0.4 => 0.0.5)`
+- `subapp-redux@1.0.14` `(1.0.13 => 1.0.14)`
+- `subapp-server@1.1.6` `(1.1.5 => 1.1.6)`
+- `subapp-web@1.0.13` `(1.0.12 => 1.0.13)`
+
+## Commits
+
+- `packages/electrode-archetype-react-app[-dev]`
+
+  - try to use hapi if electrodeServer is not found ([#1521](https://github.com/electrode-io/electrode/pull/1521)) [commit](http://github.com/electrode-io/electrode/commit/1bdbc0bf6caa624d22d7ab6032fb74c2cb83ef2b)
+  - New webpack option to minimize the number of created subapp chunks ([#1520](https://github.com/electrode-io/electrode/pull/1520)) [commit](http://github.com/electrode-io/electrode/commit/3fac52093e32c60555218aa7052358ea5c590f66)
+
+- `packages/subapp-pbundle`
+
+  - collect all bundles and initial states before creating real redux store ([#1525](https://github.com/electrode-io/electrode/pull/1525)) [commit](http://github.com/electrode-io/electrode/commit/73d78d16d91b4fd75fd8ad7d4b79cffa911ca416)
+  - more work to support subapp inlining subapp ([#1524](https://github.com/electrode-io/electrode/pull/1524)) [commit](http://github.com/electrode-io/electrode/commit/a985431cfa9d5ebd4950cf3d0d4e69ac7b33f714)
+  - update pbundle with support for await prepare data ([#1517](https://github.com/electrode-io/electrode/pull/1517)) [commit](http://github.com/electrode-io/electrode/commit/4b8c4b29f25bfd4a1852f96da86ac7c77fb450c0)
+
+- `packages/subapp-pkg-util`
+
+  - collect all bundles and initial states before creating real redux store ([#1525](https://github.com/electrode-io/electrode/pull/1525)) [commit](http://github.com/electrode-io/electrode/commit/73d78d16d91b4fd75fd8ad7d4b79cffa911ca416)
+
+- `packages/subapp-react`
+
+  - support sharing redux store for a request ([#1518](https://github.com/electrode-io/electrode/pull/1518)) [commit](http://github.com/electrode-io/electrode/commit/a37d03a53e2395471afb36c33dc94babd11da1ce)
+  - update pbundle with support for await prepare data ([#1517](https://github.com/electrode-io/electrode/pull/1517)) [commit](http://github.com/electrode-io/electrode/commit/4b8c4b29f25bfd4a1852f96da86ac7c77fb450c0)
+  - refactor SSR flow to support await data prepare ([#1516](https://github.com/electrode-io/electrode/pull/1516)) [commit](http://github.com/electrode-io/electrode/commit/3fe407d2f985850ec046aace1c10a3927127b9ea)
+
+- `packages/subapp-redux`
+
+  - minor fix for initial state handling ([#1522](https://github.com/electrode-io/electrode/pull/1522)) [commit](http://github.com/electrode-io/electrode/commit/18dad287dcfad8788658a5b1a8e198a84476fd40)
+  - support sharing redux store for a request ([#1518](https://github.com/electrode-io/electrode/pull/1518)) [commit](http://github.com/electrode-io/electrode/commit/a37d03a53e2395471afb36c33dc94babd11da1ce)
+
+- `packages/subapp-server`
+
+  - more work to support subapp inlining subapp ([#1524](https://github.com/electrode-io/electrode/pull/1524)) [commit](http://github.com/electrode-io/electrode/commit/a985431cfa9d5ebd4950cf3d0d4e69ac7b33f714)
+
+- `packages/subapp-web`
+
+  - general subApp.inline method ([#1527](https://github.com/electrode-io/electrode/pull/1527)) [commit](http://github.com/electrode-io/electrode/commit/963a9f4cc4c8d519899e516ab12b2f31fdce8095)
+  - collect all bundles and initial states before creating real redux store ([#1525](https://github.com/electrode-io/electrode/pull/1525)) [commit](http://github.com/electrode-io/electrode/commit/73d78d16d91b4fd75fd8ad7d4b79cffa911ca416)
+  - more work to support subapp inlining subapp ([#1524](https://github.com/electrode-io/electrode/pull/1524)) [commit](http://github.com/electrode-io/electrode/commit/a985431cfa9d5ebd4950cf3d0d4e69ac7b33f714)
+  - minor fix for initial state handling ([#1522](https://github.com/electrode-io/electrode/pull/1522)) [commit](http://github.com/electrode-io/electrode/commit/18dad287dcfad8788658a5b1a8e198a84476fd40)
+  - embed large initial state as JSON text ([#1519](https://github.com/electrode-io/electrode/pull/1519)) [commit](http://github.com/electrode-io/electrode/commit/e39afa7e86907eb3616e03a6a718ca979ab23db3)
+  - refactor SSR flow to support await data prepare ([#1516](https://github.com/electrode-io/electrode/pull/1516)) [commit](http://github.com/electrode-io/electrode/commit/3fe407d2f985850ec046aace1c10a3927127b9ea)
+
+- `.vscode`
+
+  - more work to support subapp inlining subapp ([#1524](https://github.com/electrode-io/electrode/pull/1524)) [commit](http://github.com/electrode-io/electrode/commit/a985431cfa9d5ebd4950cf3d0d4e69ac7b33f714)
+
+- `docs`
+
+  - Update README.md ([#1523](https://github.com/electrode-io/electrode/pull/1523)) [commit](http://github.com/electrode-io/electrode/commit/3cda7f265f83ea5d36f57245ce9763f272ac1a55)
+
 # 1/29/2020
 
 - update create-app to use archetype ver7
