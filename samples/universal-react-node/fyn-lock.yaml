@@ -9347,12 +9347,12 @@ karma-safari-launcher:
 karma-sonarqube-unit-reporter:
  _latest: 0.0.21
  _:
-  0.0.18: 0.0.18
- 0.0.18:
-  $: sha512-JucHngf83yAQn+n1YDwFGL43HvxVLW+fHnmLoMMzm2P7rCkk4ATLU7x1nEl/to5fqGbx4RCazFAlXJpDH72M5Q==
-  _: 'https://registry.npmjs.org/karma-sonarqube-unit-reporter/-/karma-sonarqube-unit-reporter-0.0.18.tgz'
+  0.0.21: 0.0.21
+ 0.0.21:
+  $: sha512-hZofQzPbyc60kiP00LsIKA+Y4dwRymn50LD0D34RCXD5HhxYl/BGjcY7j79VUvrpm7sNBL7w40WVjVEywtC4rg==
+  _: 'https://registry.npmjs.org/karma-sonarqube-unit-reporter/-/karma-sonarqube-unit-reporter-0.0.21.tgz'
   dependencies:
-   xmlbuilder: 3.1.0
+   xmlbuilder: ^13.0.2
   peerDependencies:
    karma: '>=0.9'
 karma-sourcemap-loader:
@@ -9727,7 +9727,7 @@ lockfile:
 lodash:
  _latest: 4.17.15
  _:
-  '^3.2.0,^3.5.0': 3.10.1
+  ^3.2.0: 3.10.1
   '^4.0.0,^4.0.1,^4.11.1,^4.13.1,^4.15.0,^4.17.10,^4.17.11,^4.17.13,^4.17.14,^4.17.15,^4.17.4,^4.17.5,^4.2.0,^4.3.0,^4.5.0,^4.5.1,^4.6.1': 4.17.15
  4.17.15:
   $: sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
@@ -16532,16 +16532,14 @@ xml2js:
 xmlbuilder:
  _latest: 13.0.2
  _:
-  3.1.0: 3.1.0
+  ^13.0.2: 13.0.2
   ~11.0.0: 11.0.1
+ 13.0.2:
+  $: sha512-Eux0i2QdDYKbdbA6AM6xE4m6ZTZr4G4xF9kahI2ukSEMCzwce2eX9WlTI5J3s+NU7hpasFsr8hWIONae7LluAQ==
+  _: 'https://registry.npmjs.org/xmlbuilder/-/xmlbuilder-13.0.2.tgz'
  11.0.1:
   $: sha512-fDlsI/kFEx7gLvbecc0/ohLG50fugQp8ryHzMTuW9vSa1GJ0XYWKnhsUx7oie3G98+r56aTQIUB4kht42R3JvA==
   _: 'https://registry.npmjs.org/xmlbuilder/-/xmlbuilder-11.0.1.tgz'
- 3.1.0:
-  $: sha1-LIaIjy1OrehQ+jjKf3Ij9yCVFuE=
-  _: 'https://registry.npmjs.org/xmlbuilder/-/xmlbuilder-3.1.0.tgz'
-  dependencies:
-   lodash: ^3.5.0
 xmlhttprequest-ssl:
  _latest: 1.6.0
  _:
