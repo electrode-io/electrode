@@ -26,36 +26,30 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">= 6",
-    "npm": ">= 3"
+    "node": ">= 10",
+    "npm": ">= 6"
   },
   "scripts": {
-    "build": "clap build",
-    "prod-start": "NODE_ENV=production clap -n -x electrode/build prod",
-    "start": "if test \"$NODE_ENV\" = \"production\"; then npm run prod-start; else clap dev; fi",
+    "dev": "clap -q dev",
     "test": "clap check",
-    "coverage": "clap check",
-    "prod": "echo 'Starting standalone server in PROD mode'; NODE_ENV=production node ./lib/server/",
-    "heroku-postbuild": "clap build"
+    "build": "clap build"
   },
   "dependencies": {
-    "electrode-archetype-react-app": "^6.3.0",
+    "@hapi/inert": "^5.2.2",
+    "electrode-archetype-opt-react": "^2.0.4",
+    "electrode-archetype-react-app": "^7.0.0",
     "electrode-confippet": "^1.5.0",
-    "electrode-server": "^2.3.0",
-    "electrode-static-paths": "^2.0.2",
+    "electrode-server": "^3.0.0",
+    "electrode-static-paths": "^3.0.0",
     "http-codes": "^1.0.0",
-    "inert": "^5.1.2",
-    "react-router": "^5.1.0",
     "react-router-dom": "^5.1.0",
+    "react-router": "^5.1.0",
     "subapp-server": "../../packages/subapp-server",
     "subapp-util": "../../packages/subapp-util",
-    "subapp-web": "../../packages/subapp-web",
-    "electrode-archetype-opt-react": "^2.0.4",
-    "electrode-archetype-opt-react-intl": "^1.0.0"
+    "subapp-react": "../../packages/subapp-react"
   },
   "devDependencies": {
-    "electrode-archetype-react-app-dev": "^6.3.0",
-    "electrode-archetype-opt-stylus": "^1.0.2"
+    "electrode-archetype-react-app-dev": "^7.0.0"
   },
   "fyn": {
     "dependencies": {
