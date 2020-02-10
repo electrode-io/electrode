@@ -81,10 +81,10 @@
       "node-dist"
     ],
     "check-coverage": true,
-    "statements": 71,
-    "branches": 57,
-    "functions": 84,
-    "lines": 71,
+    "statements": 100,
+    "branches": 100,
+    "functions": 100,
+    "lines": 100,
     "cache": true
   }
 }

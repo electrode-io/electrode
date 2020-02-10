@@ -4,6 +4,8 @@
 
 const { h } = require("preact"); // eslint-disable-line
 const lib = require("../../lib");
+const { connect } = require("redux-bundler-preact");
+const { composeBundles } = require("redux-bundler");
 
 const { expectErrorHas, asyncVerify } = require("run-verify");
 
@@ -159,26 +161,197 @@ describe("SSR Preact framework", function() {
     );
   });
 
+  const helloBundle = {
+    name: "hello",
+    reducer(state = "foo") {
+      return state;
+    },
+    selectHello(state) {
+      return state.hello;
+    }
+  };
+
   it("handlePrepare should prepare redux data and store", async () => {
+    let storeReady;
+
     const framework = new lib.FrameworkLib({
       subApp: {
         __redux: true,
-        reduxCreateStore() {
-          return { testStore: true };
+        reduxCreateStore(initialState) {
+          return composeBundles(helloBundle)(initialState);
+        },
+        reduxStoreReady({ store }) {
+          storeReady = store;
         }
       },
       subAppServer: {
-        StartComponent: () => {},
+        StartComponent: connect("selectHello", ({ hello }) => {
+          return `test hello ${hello}`;
+        }),
         async prepare() {
           return { hello: "world" };
         }
       },
       context: {
         user: {}
-      }
+      },
+      options: { serverSideRendering: true }
     });
 
     const store = await framework.handlePrepare();
-    expect(store.testStore).to.equal(true);
+    const html = await framework.handleSSR();
+    expect(store.selectHello).to.be.ok;
+    expect(storeReady).to.equal(store);
+    expect(html).to.equal("test hello world");
+  });
+
+  it("handleSSR should prepare and realize redux data and store", async () => {
+    let storeReady;
+
+    const framework = new lib.FrameworkLib({
+      subApp: {
+        __redux: true,
+        reduxCreateStore(initialState) {
+          return {
+            realize() {
+              return composeBundles(helloBundle)(initialState);
+            }
+          };
+        },
+        reduxStoreReady({ store }) {
+          storeReady = store;
+        }
+      },
+      subAppServer: {
+        StartComponent: connect("selectHello", ({ hello }) => {
+          return `test hello ${hello}`;
+        }),
+        async prepare() {
+          return { hello: "world" };
+        }
+      },
+      context: {
+        user: {}
+      },
+      options: { serverSideRendering: true }
+    });
+
+    const html = await framework.handleSSR();
+    const store = framework.store;
+    expect(store.selectHello).to.be.ok;
+    expect(storeReady).to.equal(store);
+    expect(html).to.equal("test hello world");
+  });
+
+  it("should use empty default initial state if no prepare exist", async () => {
+    const framework = new lib.FrameworkLib({
+      subApp: {
+        __redux: true,
+        reduxCreateStore(initialState) {
+          return composeBundles(helloBundle)(initialState);
+        }
+      },
+      subAppServer: {
+        StartComponent: connect("selectHello", ({ hello }) => {
+          return `test hello ${hello}`;
+        })
+      },
+      context: {
+        user: {}
+      },
+      options: { serverSideRendering: true }
+    });
+
+    const store = await framework.handlePrepare();
+    const html = await framework.handleSSR();
+    expect(framework.initialStateStr).to.equal("{}");
+    expect(store.selectHello).to.be.ok;
+    expect(html).to.equal("test hello foo");
+  });
+
+  it("should not attach initial state if attachInitialState is false", async () => {
+    const framework = new lib.FrameworkLib({
+      subApp: {
+        __redux: true,
+        reduxCreateStore(initialState) {
+          return composeBundles(helloBundle)(initialState);
+        }
+      },
+      subAppServer: {
+        StartComponent: connect("selectHello", ({ hello }) => {
+          return `test hello ${hello}`;
+        }),
+        async prepare() {
+          return { hello: "world" };
+        },
+        attachInitialState: false
+      },
+      context: {
+        user: {}
+      },
+      options: { serverSideRendering: true }
+    });
+
+    const store = await framework.handlePrepare();
+    const html = await framework.handleSSR();
+    expect(framework.initialStateStr).to.equal("");
+    expect(store.selectHello).to.be.ok;
+    expect(html).to.equal("test hello world");
+  });
+
+  it("should throw if unable to create redux store", async () => {
+    const framework = new lib.FrameworkLib({
+      subApp: {
+        name: "test",
+        __redux: true
+      },
+      subAppServer: {
+        StartComponent: connect("selectHello", ({ hello }) => {
+          return `test hello ${hello}`;
+        }),
+        async prepare() {
+          return { hello: "world" };
+        }
+      },
+      context: {
+        user: {}
+      },
+      options: { serverSideRendering: true }
+    });
+    return asyncVerify(
+      expectErrorHas(
+        async () => await framework.handlePrepare(),
+        "redux subapp test didn't provide store, reduxCreateStore, or redux bundles"
+      )
+    );
+  });
+
+  it("should skip SSR if serverSideRendering is not true", async () => {
+    const framework = new lib.FrameworkLib({
+      subApp: {
+        __redux: true,
+        reduxCreateStore(initialState) {
+          return composeBundles(helloBundle)(initialState);
+        }
+      },
+      subAppServer: {
+        StartComponent: connect("selectHello", ({ hello }) => {
+          return `test hello ${hello}`;
+        }),
+        async prepare() {
+          return { hello: "world" };
+        }
+      },
+      context: {
+        user: {}
+      },
+      options: { serverSideRendering: null }
+    });
+
+    const store = await framework.handlePrepare();
+    const html = await framework.handleSSR();
+    expect(framework.initialStateStr).to.equal(undefined);
+    expect(store).to.equal(false);
+    expect(html).to.equal("");
   });
 });
