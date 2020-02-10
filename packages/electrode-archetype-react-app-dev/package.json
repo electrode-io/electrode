@@ -29,7 +29,7 @@
     "Joel Chen <xchen@walmartlabs.com>"
   ],
   "peerDependencies": {
-    "electrode-archetype-react-app": "7.0.0-beta7.0"
+    "electrode-archetype-react-app": "^7.0.4"
   },
   "dependencies": {
     "@babel/cli": "^7.1.5",

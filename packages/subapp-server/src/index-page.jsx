@@ -6,7 +6,6 @@ const RenderSubApps = (props, context) => {
   const { routeOptions } = context.user;
   const { subApps } = routeOptions.__internals;
 
-  const elementId = props.inline ? undefined : `subapp-${subapp.name}-${ix}`;
   return (
     subApps &&
     subApps.length > 0 &&
@@ -15,6 +14,8 @@ const RenderSubApps = (props, context) => {
       null,
       ...subApps.map((info, ix) => {
         const { subapp, options } = info;
+        const elementId = props.inline ? undefined : `subapp-${subapp.name}-${ix}`;
+
         return createElement(
           Require,
           Object.assign(
