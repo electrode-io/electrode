@@ -153,21 +153,6 @@
         })
         .then(makeInvoke("preRender"))
         .then(makeInvoke("signalReady"))
-        .then(() => {
-          return xv1.asyncMap(
-            groupInfo.queue.filter(x => x.options.inline),
-            startInfo => {
-              const subApp = startInfo.subApp;
-              subApp.inline = ({ group, props }) => {
-                return subApp.start(
-                  startInfo.instance,
-                  Object.assign({}, startInfo.options, { props }),
-                  subApp.info
-                );
-              };
-            }
-          );
-        })
         .then(
           makeInvoke(
             "start",

@@ -109,6 +109,34 @@ export function loadSubApp(info, renderStart, options) {
     }
   };
 
+  subApp.inline = ({ group, props }) => {
+    const groupInfo = xarc.rt.groups[group];
+    const fail = msg => {
+      console.error(msg);
+      return `<!--
+****** ${msg}
+-->`;
+    };
+
+    if (!groupInfo) {
+      return fail(`subApp inline unable to find group ${group}`);
+    }
+
+    const found = groupInfo.queue.find(x => {
+      if (x.options.name === subApp.info.name && x.options.group === group && x.options.inline) {
+        return x.instance;
+      }
+      return undefined;
+    });
+
+    if (!found) {
+      return fail(`subApp inline unable to find instance in group ${group} \
+for subapp ${subApp.info.name}`);
+    }
+
+    return subApp.start(found.instance, Object.assign({}, found.options, { props }), found.info);
+  };
+
   // xarc.addOnLoadStart(name, options);
 
   // getOnLoadStart(name)
