@@ -84,5 +84,6 @@
       "generator-electrode": "../generator-electrode",
       "ignite-core": "../ignite-core"
     }
-  }
+  },
+  "private": true
 }
