@@ -1,0 +1,15 @@
+---
+extends:
+  - "walmart/configurations/es6-node"
+globals:
+  expect: false
+  sandbox: false
+  sinon: false
+env:
+  mocha: true
+rules:
+  "no-unused-expressions": "off" # for `chai.expect`
+  "max-statements": "off"
+  "max-nested-callbacks": "off"
+  "prefer-arrow-callback": "off"
+  "no-multi-spaces": "off"

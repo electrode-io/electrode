@@ -1,0 +1,23 @@
+---
+extends:
+  - "walmart/configurations/es6-test"
+  - "./.eslintrc-react"
+globals:
+  document: false
+  expect: false
+  sinon: false
+  Element: false
+plugins: [
+  "flowtype"
+]
+rules:
+  "no-unused-expressions": "off" # for `chai.expect`
+  "max-len": ["error", 100, 2, {ignorePattern: "^\\s*(?:it|describe)\\(.*"}]
+  "max-statements": "off"
+  "max-nested-callbacks": "off"
+  "react/jsx-wrap-multilines": "warn"
+  "no-multi-spaces": "off"
+
+  "flowtype/define-flow-type": "warn"
+  "flowtype/use-flow-type": "warn"
+  "flowtype/require-valid-file-annotation": "error"
