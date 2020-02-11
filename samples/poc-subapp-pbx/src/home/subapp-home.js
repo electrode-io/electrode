@@ -53,6 +53,36 @@ class SubApp extends Component {
   }
 }
 
+// dynamic inlining subapp
+class DynSubApp extends Component {
+  constructor() {
+    super();
+    this.state = { ready: false };
+    this.elementId = Math.random();
+  }
+
+  render() {
+    const { name } = this.props;
+    if (!xarc.IS_BROWSER) {
+      // xarc is only available on the browser
+      // and dynamic inlining only makes sense on the browser
+      return "";
+    }
+
+    const subapp = xarc.getSubApp(name);
+    if (subapp && xarc.getBundle(name)) {
+      subapp.start(null, { id: this.elementId, props: this.props });
+      return <div id={this.elementId}></div>;
+    } else {
+      const onLoad = () => this.setState({ ready: true });
+      dynamicLoadSubApp({ id: this.elementId, name, onLoad });
+
+      // if not, return loadingComponent
+      return this.props.fallback || <div id={this.elementId}></div>;
+    }
+  }
+}
+
 const Home = () => {
   return (
     <div>
@@ -60,6 +90,7 @@ const Home = () => {
       <SubApp name="Group1A" />
       <SubApp name="Group1B" />
       <SubApp name="Demo1" />
+      <DynSubApp name="Demo2" />
     </div>
   );
 };
