@@ -24,8 +24,8 @@ const changeLogFile = Path.resolve("CHANGELOG.md");
 const changeLog = Fs.readFileSync(changeLogFile).toString();
 let gitClean = false;
 const packageMapping = {
-  "electrode-archetype-react-app": "electrode-archetype-react-app[-dev]",
-  "electrode-archetype-react-app-dev": "electrode-archetype-react-app[-dev]",
+  "@xarc/app": "@xarc/app[-dev]",
+  "@xarc/app-dev": "@xarc/app[-dev]",
   "electrode-archetype-react-component": "electrode-archetype-react-component[-dev]",
   "electrode-archetype-react-component-dev": "electrode-archetype-react-component[-dev]",
   "electrode-archetype-webpack-dll": "electrode-archetype-webpack-dll[-dev]",
@@ -58,7 +58,10 @@ const removeNpmScope = name => {
   if (name.startsWith("@")) {
     const parts = name.split("/");
     if (parts.length === 2) {
-      return parts[1];
+      if (parts[1] === "create-app") {
+        return parts[1];
+      }
+      return parts[0].substr(1) + "-" + parts[1];
     }
   }
 

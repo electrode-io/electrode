@@ -4,6 +4,11 @@
   "command.publish.config": {
     "ignore": ["*.md"]
   },
+  "commands": {
+    "bootstrap": {
+      "ignore": ["ignite-core", "electrode-ignite", "generator-electrode"]
+    }
+  },
   "fynpo": {
     "publishConfig": {
       "tags": {
