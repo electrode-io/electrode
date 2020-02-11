@@ -1,5 +1,5 @@
 // Custom Webpack Config that takes control and overrides Archetype
-const { compose, env, options } = require("electrode-archetype-react-app-dev/config/webpack");
+const { compose, env, options } = require("@xarc/app-dev/config/webpack");
 const WebpackHookPlugin = require("webpack-hook-plugin");
 
 // An example to add a plugin

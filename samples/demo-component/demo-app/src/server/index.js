@@ -6,11 +6,10 @@ process.on("SIGINT", () => {
 
 const electrodeConfippet = require("electrode-confippet");
 const staticPathsDecor = require("electrode-static-paths");
-const support = require("electrode-archetype-react-app/support");
+const support = require("@xarc/app/support");
 
-support.load()
-  .then(() => {
-    const config = electrodeConfippet.config;
+support.load().then(() => {
+  const config = electrodeConfippet.config;
 
-    require("electrode-server")(config, [staticPathsDecor()]);  // eslint-disable-line
-  });
+  require("electrode-server")(config, [staticPathsDecor()]); // eslint-disable-line
+});

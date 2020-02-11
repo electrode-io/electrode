@@ -1,5 +1,5 @@
 ---
 extends:
-  - "../../node_modules/electrode-archetype-react-app-dev/config/eslint/.eslintrc-react-test"
+  - "@xarc/app-dev/config/eslint/.eslintrc-react-test"
 
 

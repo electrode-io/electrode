@@ -69,5 +69,6 @@
     "functions": 100,
     "lines": 100,
     "cache": true
-  }
+  },
+  "private": true
 }

@@ -7,7 +7,7 @@
     "test": "clap test",
     "test-generator": "clap test-generator",
     "test-boilerplate": "clap test-boilerplate",
-    "bootstrap": "fynpo",
+    "bootstrap": "clap bootstrap",
     "clean": "npm run nuke && npm run nuke-packages && npm run nuke-samples",
     "nuke": "rm -rf node_modules tmp lerna-debug.log npm-debug.log",
     "nuke-packages": "rm -rf packages/*/node_modules packages/*/coverage",
@@ -37,5 +37,8 @@
     "npm": ">= 3"
   },
   "private": true,
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "prettier": {
+    "printWidth": 100
+  }
 }

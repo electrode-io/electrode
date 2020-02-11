@@ -13,10 +13,24 @@ const _ = require("lodash");
 const isWin32 = process.platform.startsWith("win32");
 const packagesDir = Path.join(__dirname, "packages");
 
+const removeNpmScope = name => {
+  if (name.startsWith("@")) {
+    const parts = name.split("/");
+    if (parts.length === 2) {
+      if (parts[1] === "create-app") {
+        return parts[1];
+      }
+      return parts[0].substr(1) + "-" + parts[1];
+    }
+  }
+
+  return name;
+};
+
 const pullLocalPackages = dir => {
   dir = Path.isAbsolute(dir) ? dir : Path.join(__dirname, dir);
   const localPkgs = [
-    "electrode-archetype-react-app",
+    "@xarc/app",
     "electrode-react-webapp",
     "electrode-redux-router-engine",
     "electrode-auto-ssr",
@@ -26,7 +40,7 @@ const pullLocalPackages = dir => {
     "subapp-server",
     "subapp-web"
   ];
-  const localDevPkgs = ["electrode-archetype-react-app-dev"];
+  const localDevPkgs = ["@xarc/app-dev"];
   const localPackagesDir = Path.relative(dir, packagesDir);
 
   const appPkgFile = Path.join(dir, "package.json");
@@ -40,7 +54,7 @@ const pullLocalPackages = dir => {
           _.set(
             appPkg,
             ["fyn", section, pkg],
-            Path.join(localPackagesDir, pkg).replace(/\\/g, "/")
+            Path.join(localPackagesDir, removeNpmScope(pkg)).replace(/\\/g, "/")
           );
         }
       });
@@ -122,8 +136,9 @@ const testGenerator = (testDir, name, clean, runTest, prompts) => {
 };
 
 xclap.load({
-  ".lerna.coverage": "~$lerna run --stream coverage",
-  bootstrap: "~$fynpo",
+  ".lerna.coverage":
+    "~$lerna run --ignore ignite-core --ignore electrode-ignite --ignore generator-electrode --stream coverage",
+  bootstrap: "~$fynpo --ignore ignite-core electrode-ignite generator-electrode",
   test: ["bootstrap", ".lerna.coverage", "build-test"],
   "test-generator": [".test-generator --all"],
   "test-create-app": [".test-create-app"],
@@ -153,13 +168,13 @@ xclap.load({
 
           const updatedStr = updated.join(" ");
 
-          if (updatedStr.indexOf("generator-electrode") >= 0) {
-            tasks.push("test-generator");
-          }
+          // if (updatedStr.indexOf("generator-electrode") >= 0) {
+          //   tasks.push("test-generator");
+          // }
 
           if (
             updatedStr.indexOf("electrode-archetype-react-component") >= 0 ||
-            updatedStr.indexOf("electrode-archetype-react-app") >= 0
+            updatedStr.indexOf("@xarc/app") >= 0
           ) {
             tasks.push([".", "test-demo-component", ".test-tree-shaking"]);
           }

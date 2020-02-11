@@ -4,7 +4,7 @@ process.on("SIGINT", () => {
   process.exit(0);
 });
 
-const support = require("electrode-archetype-react-app/support");
+const support = require("@xarc/app/support");
 // test import syntax properly handled by babel
 import electrodeConfippet from "electrode-confippet";
 const electrodeServer = require("electrode-server");

@@ -1,3 +1,3 @@
 module.exports = {
-  extends: "electrode-archetype-react-app-dev/config/babel/babelrc-server.js"
+  extends: "@xarc/app-dev/config/babel/babelrc-server.js"
 };

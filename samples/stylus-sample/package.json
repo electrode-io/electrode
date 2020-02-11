@@ -26,16 +26,17 @@
     "npm": ">= 3"
   },
   "scripts": {
+    "dev": "clap -q dev",
     "prestart": "clap build",
     "start": "if test \"$NODE_ENV\" = \"production\"; then npm run prod; else clap dev; fi",
     "test": "clap check",
     "coverage": "clap check",
-    "prod": "echo 'Starting standalone server in PROD mode'; NODE_ENV=production node ./lib/server/",
-    "heroku-postbuild": "clap build"
+    "prod": "echo 'Starting standalone server in PROD mode'; NODE_ENV=production node ./lib/server/"
   },
   "dependencies": {
+    "@xarc/app": "../../packages/xarc-app",
     "bluebird": "^3.4.6",
-    "electrode-archetype-react-app": "../../packages/electrode-archetype-react-app",
+    "electrode-archetype-opt-react": "^2.0.4",
     "electrode-confippet": "^1.0.0",
     "electrode-react-webapp": "../../packages/electrode-react-webapp",
     "electrode-redux-router-engine": "../../packages/electrode-redux-router-engine",
@@ -44,30 +45,27 @@
     "lodash": "^4.10.1",
     "milligram-stylus": "^1.3.0",
     "react-router-config": "^1.0.0-beta.4",
-    "react-router-dom": "^4.3.1",
-    "electrode-archetype-opt-react": "^2.0.4",
-    "electrode-archetype-opt-react-intl": "^1.0.0"
+    "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
+    "@xarc/app-dev": "../../packages/xarc-app-dev",
     "electrode-archetype-opt-eslint": "^1.0.3",
     "electrode-archetype-opt-jest": "^1.0.3",
     "electrode-archetype-opt-karma": "../../packages/electrode-archetype-opt-karma",
     "electrode-archetype-opt-mocha": "../../packages/electrode-archetype-opt-mocha",
     "electrode-archetype-opt-phantomjs": "../../packages/electrode-archetype-opt-phantomjs",
-    "electrode-archetype-opt-stylus": "^1.0.2",
-    "electrode-archetype-react-app-dev": "../../packages/electrode-archetype-react-app-dev"
+    "electrode-archetype-opt-stylus": "^1.0.2"
   },
   "fyn": {
     "dependencies": {
-      "electrode-archetype-react-app": "../../packages/electrode-archetype-react-app",
+      "@xarc/app": "../../packages/xarc-app",
       "electrode-react-webapp": "../../packages/electrode-react-webapp",
       "electrode-redux-router-engine": "../../packages/electrode-redux-router-engine"
     },
     "devDependencies": {
-      "electrode-archetype-react-app-dev": "../../packages/electrode-archetype-react-app-dev",
+      "@xarc/app-dev": "../../packages/xarc-app-dev",
       "electrode-archetype-opt-karma": "../../packages/electrode-archetype-opt-karma",
       "electrode-archetype-opt-phantomjs": "../../packages/electrode-archetype-opt-phantomjs"
     }
-  },
-  "optionalDependencies": {}
+  }
 }

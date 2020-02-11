@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "bluebird": "^3.4.6",
-    "electrode-archetype-react-app": "../../../packages/electrode-archetype-react-app",
+    "@xarc/app": "../../../packages/xarc-app",
     "electrode-confippet": "^1.5.0",
     "electrode-react-webapp": "../../../packages/electrode-react-webapp",
     "electrode-redux-router-engine": "../../../packages/electrode-redux-router-engine",
@@ -46,7 +46,7 @@
     "demo-component": "../packages/demo-component"
   },
   "devDependencies": {
-    "electrode-archetype-react-app-dev": "../../../packages/electrode-archetype-react-app-dev"
+    "@xarc/app-dev": "../../../packages/xarc-app-dev"
   },
   "private": true
 }

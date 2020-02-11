@@ -1,1 +1,1 @@
-require("electrode-archetype-react-app")();
+require("@xarc/app")();
