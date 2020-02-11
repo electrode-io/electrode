@@ -1,5 +1,25 @@
 # 2/10/2020
 
+- minor fixes
+
+## Packages
+
+- `electrode-archetype-react-app@7.0.5` `(7.0.4 => 7.0.5)`
+- `electrode-archetype-react-app-dev@7.0.5` `(7.0.4 => 7.0.5)`
+- `subapp-server@1.1.7` `(1.1.6 => 1.1.7)`
+
+## Commits
+
+- `packages/electrode-archetype-react-app[-dev]`
+
+  - minor fixes ([#1528](https://github.com/electrode-io/electrode/pull/1528)) [commit](http://github.com/electrode-io/electrode/commit/3471092c4a1459a038a8d987e913b0c0c94b0999)
+
+- `packages/subapp-server`
+
+  - minor fixes ([#1528](https://github.com/electrode-io/electrode/pull/1528)) [commit](http://github.com/electrode-io/electrode/commit/3471092c4a1459a038a8d987e913b0c0c94b0999)
+
+# 2/10/2020
+
 - try to use hapi if electrodeServer is not found
 - New webpack option to minimize the number of created subapp chunks
 - subapp inlining
