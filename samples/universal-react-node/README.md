@@ -118,7 +118,7 @@ This will set up an Electrode webapplication which will have 2 of the above 6 mo
 
 ## Multiple Entry Points
 
-The `electrode-archetype-react-app` module supports multiple entry points per app. In order to enable this feature:
+The `@xarc/app` module supports multiple entry points per app. In order to enable this feature:
 
 - Add an entry file in `client/entry.config.js`.
 
@@ -186,25 +186,25 @@ module.exports = request => {
 #### 1. Offline first
 
 Offline first lets your app run without a network connection. At the same time it provides a great performance boost for repeat visit to your web site.
-This is done with a service worker and by pre-caching your static assets as well as runtime caching of dynamic server routes and external resources.  
- [Learn More](https://github.com/electrode-io/electrode-archetype-react-app/blob/master/README.md#2-cache)
+This is done with a service worker and by pre-caching your static assets as well as runtime caching of dynamic server routes and external resources.
+[Learn More](https://github.com/electrode-io/@xarc/app/blob/master/README.md#2-cache)
 
 #### 2. Add To Homescreen
 
-After visiting your website, users will get a prompt (if the user has visited your site at least twice, with at least five minutes between visits.) to add your application to their homescreen (web or [mobile](https://developers.google.com/web/updates/2015/03/increasing-engagement-with-app-install-banners-in-chrome-for-android)). Combined with offline caching, this means your web app can be used exactly like a native application.  
- [Learn More](https://github.com/electrode-io/electrode-archetype-react-app/blob/master/README.md#1-manifest)
+After visiting your website, users will get a prompt (if the user has visited your site at least twice, with at least five minutes between visits.) to add your application to their homescreen (web or [mobile](https://developers.google.com/web/updates/2015/03/increasing-engagement-with-app-install-banners-in-chrome-for-android)). Combined with offline caching, this means your web app can be used exactly like a native application.
+[Learn More](https://github.com/electrode-io/@xarc/app/blob/master/README.md#1-manifest)
 
 #### 3. Push Notifications
 
-Web push notifications allow users to opt-in to timely updates from sites they love and allow you to effectively re-engage them with customized, relevant content.  
- We will learn about Push Notifications in the next couple of sections.
+Web push notifications allow users to opt-in to timely updates from sites they love and allow you to effectively re-engage them with customized, relevant content.
+We will learn about Push Notifications in the next couple of sections.
 
 ## Instructions for setting up Push Notifications
 
 ### Web push is only supported on: Google Chrome 42+ (Desktop & Android)
 
-The [Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API) requires a registered service worker so it can send notifications in the background when the web application isn't running. So we need to register our service worker first.  
-Check out [this guideline](https://github.com/electrode-io/electrode-archetype-react-app/blob/master/README.md#how-do-i-generate-a-manifestjson-and-a-service-worker-file) to generate a service worker in an electrode app.  
+The [Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API) requires a registered service worker so it can send notifications in the background when the web application isn't running. So we need to register our service worker first.
+Check out [this guideline](https://github.com/electrode-io/@xarc/app/blob/master/README.md#how-do-i-generate-a-manifestjson-and-a-service-worker-file) to generate a service worker in an electrode app.
 Also, check out the [Adding Push Notifications to a Web App](https://developers.google.com/web/fundamentals/getting-started/codelabs/push-notifications/) Codelab provided by Google for an in-depth guide on how push notifications and service workers work together.
 
 Next we need to add a `push` event to this existing service worker for sending notifications to the client from a push server:
@@ -256,10 +256,10 @@ The service worker is ready to accept `push` from the server. On receiving the p
 
 #### 4. Setting up your API_KEY and GCM_SENDER_ID
 
-We will be needing the API_KEY and GCM_ENDPOINT to send the messages from the server.  
-To generate these values, visit [Firebase](https://console.firebase.google.com) and create a new project.  
-Click on the setting icons and open `Project settings`.  
-Navigate to the `CLOUD MESSAGING` tab to view your `Server key or Legacy Server key` (API_KEY) and the `Sender ID`.  
+We will be needing the API_KEY and GCM_ENDPOINT to send the messages from the server.
+To generate these values, visit [Firebase](https://console.firebase.google.com) and create a new project.
+Click on the setting icons and open `Project settings`.
+Navigate to the `CLOUD MESSAGING` tab to view your `Server key or Legacy Server key` (API_KEY) and the `Sender ID`.
 You need to update your `manifest` in `sw-config.js` to update the [gcm_sender_id](https://github.com/electrode-io/electrode/blob/master/samples/universal-react-node/config/sw-config.js#L18).
 
 ## Instructions for sending a push notification
@@ -453,11 +453,11 @@ An Electrode Javascript bundle viewer aptly named [Electrify](https://github.com
 
 #### Integration points in your app
 
-- Use [electrode-archetype-react-app](https://github.com/electrode-io/electrode-archetype-react-app) which is already integrated with [electrify](https://github.com/electrode-io/electrify) and part of [electrode-boilerplate-universal-react-node](https://github.com/electrode-io/electrode-boilerplate-universal-react-node), all you have to do is run **clap electrify** after installing [electrode-archetype-react-app](https://github.com/electrode-io/electrode-archetype-react-app) in your app.
+- Use [@xarc/app](https://github.com/electrode-io/@xarc/app) which is already integrated with [electrify](https://github.com/electrode-io/electrify) and part of [electrode-boilerplate-universal-react-node](https://github.com/electrode-io/electrode-boilerplate-universal-react-node), all you have to do is run **clap electrify** after installing [@xarc/app](https://github.com/electrode-io/@xarc/app) in your app.
 - [Electrify](https://github.com/electrode-io/electrify) dependency `sudo npm install -g electrode-electrify` and npm task runner integration.
 - [Electrify](https://github.com/electrode-io/electrify) command line interface (CLI) `electrify <path-to-stats.json> --open`.
 
-`Electrode-boilerplate-universal-react-node` & [electrode-scaffolder](https://github.com/electrode-io/generator-electrode) internally use `electrode-archetype-react-app` hence `clap electrify` on your terminal will start the bundle viewer in the browser.
+`Electrode-boilerplate-universal-react-node` & [electrode-scaffolder](https://github.com/electrode-io/generator-electrode) internally use `@xarc/app` hence `clap electrify` on your terminal will start the bundle viewer in the browser.
 
 When you install Electrify globally using `sudo npm install -g electrode-electrify`, the `Electrify` command-line tool is made available as the quickest means of checking out your bundle. As of `electrode-electrify v1.0.0`, the tool takes any [webpack-stats](http://webpack.github.io/docs/node.js-api.html#stats-tojson) object as input and starts out a standalone HTML page as output in your browser, all you have to do is type `electrify <path to stats.json> --open` on your terminal.
 

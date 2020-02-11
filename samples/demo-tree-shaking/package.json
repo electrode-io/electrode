@@ -30,19 +30,19 @@
     "npm": ">= 5"
   },
   "scripts": {
+    "dev": "clap -q dev",
     "build": "clap build",
     "prod-start": "NODE_ENV=production clap -n -x electrode/build prod",
     "start": "if test \"$NODE_ENV\" = \"production\"; then npm run prod-start; else clap dev; fi",
     "test": "clap -n -x check electrode/build check-tree-shaking",
     "check-tree-shaking": "grep -o DeadCardExampleToBeRemovedByTreeShaking dist/js/*.js && exit 1 || exit 0",
     "coverage": "clap check",
-    "prod": "echo 'Starting standalone server in PROD mode'; NODE_ENV=production node ./lib/server/",
-    "heroku-postbuild": "clap build"
+    "prod": "echo 'Starting standalone server in PROD mode'; NODE_ENV=production node ./lib/server/"
   },
   "dependencies": {
     "bluebird": "^3.4.6",
     "demo-component": "../demo-component/packages/demo-component",
-    "electrode-archetype-react-app": "^5.3.4",
+    "@xarc/app": "^7.0.5",
     "electrode-auto-ssr": "^1.0.0",
     "electrode-confippet": "^1.0.0",
     "electrode-cookies": "^1.0.0",
@@ -64,19 +64,19 @@
     "electrode-archetype-opt-karma": "../../packages/electrode-archetype-opt-karma",
     "electrode-archetype-opt-mocha": "../../packages/electrode-archetype-opt-mocha",
     "electrode-archetype-opt-phantomjs": "../../packages/electrode-archetype-opt-phantomjs",
-    "electrode-archetype-react-app-dev": "^5.3.4"
+    "@xarc/app-dev": "^7.0.5"
   },
   "fyn": {
     "dependencies": {
       "demo-component": "../demo-component/packages/demo-component",
-      "electrode-archetype-react-app": "../../packages/electrode-archetype-react-app",
+      "@xarc/app": "../../packages/xarc-app",
       "electrode-auto-ssr": "../../packages/electrode-auto-ssr",
       "electrode-react-webapp": "../../packages/electrode-react-webapp",
       "electrode-redux-router-engine": "../../packages/electrode-redux-router-engine",
       "electrode-cookies": "../../packages/electrode-cookies"
     },
     "devDependencies": {
-      "electrode-archetype-react-app-dev": "../../packages/electrode-archetype-react-app-dev",
+      "@xarc/app-dev": "../../packages/xarc-app-dev",
       "electrode-archetype-opt-eslint": "../../packages/electrode-archetype-opt-eslint",
       "electrode-archetype-opt-karma": "../../packages/electrode-archetype-opt-karma",
       "electrode-archetype-opt-phantomjs": "../../packages/electrode-archetype-opt-phantomjs"

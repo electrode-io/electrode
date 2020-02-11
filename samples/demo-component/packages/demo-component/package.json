@@ -40,8 +40,8 @@
       "electrode-archetype-react-component": "../../../../packages/electrode-archetype-react-component",
       "electrode-archetype-react-component-dev": "../../../../packages/electrode-archetype-react-component-dev",
       "electrode-archetype-opt-sass": "../../../../packages/electrode-archetype-opt-sass",
-      "electrode-archetype-opt-flow": "../../../../packages/electrode-archetype-opt-flow",
       "electrode-archetype-opt-eslint": "../../../../packages/electrode-archetype-opt-eslint",
+      "electrode-archetype-opt-flow": "../../../../packages/electrode-archetype-opt-flow",
       "electrode-archetype-opt-karma": "../../../../packages/electrode-archetype-opt-karma",
       "electrode-archetype-opt-mocha": "../../../../packages/electrode-archetype-opt-mocha",
       "electrode-archetype-opt-sinon": "../../../../packages/electrode-archetype-opt-sinon"
@@ -54,7 +54,7 @@
   "scripts": {
     "prepare": "clap prepublish",
     "start": "clap demo",
-    "test": "flow && clap check"
+    "test": "clap check"
   },
   "keywords": [
     "react",

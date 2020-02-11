@@ -23,6 +23,7 @@
   ],
   "license": "Apache-2.0",
   "scripts": {
+    "dev": "clap -q dev",
     "build": "clap build",
     "start": "clap server",
     "hot": "clap hot",
@@ -33,7 +34,7 @@
   "dependencies": {
     "above-the-fold-only-server-render": "^1.1.0",
     "bluebird": "^3.4.6",
-    "electrode-archetype-react-app": "^5.4.23",
+    "@xarc/app": "^7.0.5",
     "electrode-csrf-jwt": "^1.0.0",
     "electrode-react-webapp": "^3.2.0",
     "electrode-redux-router-engine": "^2.1.8",
@@ -54,7 +55,7 @@
     "electrode-archetype-opt-react-intl": "^1.0.0"
   },
   "devDependencies": {
-    "electrode-archetype-react-app-dev": "^5.4.23",
+    "@xarc/app-dev": "^7.0.5",
     "redux-devtools": "^3.3.1",
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-devtools-log-monitor": "^1.0.11",
@@ -74,13 +75,13 @@
   },
   "fyn": {
     "dependencies": {
-      "electrode-archetype-react-app": "../../packages/electrode-archetype-react-app",
+      "@xarc/app": "../../packages/xarc-app",
       "electrode-react-webapp": "../../packages/electrode-react-webapp",
       "electrode-redux-router-engine": "../../packages/electrode-redux-router-engine",
       "react-vendor-dll": "../react-vendor-dll"
     },
     "devDependencies": {
-      "electrode-archetype-react-app-dev": "../../packages/electrode-archetype-react-app-dev"
+      "@xarc/app-dev": "../../packages/xarc-app-dev"
     }
   },
   "optionalDependencies": {}

@@ -10,7 +10,7 @@ const portFromEnv = () => {
 
 module.exports = {
   plugins: {
-    "electrode-archetype-react-app-dev": {
+    "@xarc/app-dev": {
       enable: process.env.WEBPACK_DEV === "true"
     },
     inert: {

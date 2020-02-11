@@ -46,6 +46,6 @@ process.env.ENABLE_SHORTEN_CSS_NAMES = true;
 
 // process.env.KARMA_BROWSER = "phantomjs";
 
-require("electrode-archetype-react-app")();
+require("@xarc/app")();
 
 //

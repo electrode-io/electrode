@@ -28,6 +28,6 @@ process.env.SERVER_ES6 = true;
 
 // process.env.KARMA_BROWSER = "phantomjs";
 
-require("electrode-archetype-react-app")();
+require("@xarc/app")();
 
 //

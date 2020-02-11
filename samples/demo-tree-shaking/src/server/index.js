@@ -7,7 +7,7 @@ process.on("SIGINT", () => {
 });
 
 const electrodeConfippet = require("electrode-confippet");
-const support = require("electrode-archetype-react-app/support");
+const support = require("@xarc/app/support");
 
 //
 const staticPathsDecor = require("electrode-static-paths");

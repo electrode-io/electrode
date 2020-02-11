@@ -18,4 +18,4 @@ process.env.APP_SERVER_PORT = 3100;
 
 // process.env.KARMA_BROWSER = "phantomjs";
 
-require("electrode-archetype-react-app")();
+require("@xarc/app")();

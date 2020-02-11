@@ -37,7 +37,7 @@
   "dependencies": {
     "@hapi/inert": "^5.2.2",
     "electrode-archetype-opt-react": "^2.0.4",
-    "electrode-archetype-react-app": "^7.0.0",
+    "@xarc/app": "^7.0.0",
     "electrode-confippet": "^1.5.0",
     "electrode-server": "^3.0.0",
     "electrode-static-paths": "^3.0.0",
@@ -49,14 +49,14 @@
     "subapp-react": "../../packages/subapp-react"
   },
   "devDependencies": {
-    "electrode-archetype-react-app-dev": "^7.0.0"
+    "@xarc/app-dev": "^7.0.0"
   },
   "fyn": {
     "dependencies": {
-      "electrode-archetype-react-app": "../../packages/electrode-archetype-react-app"
+      "@xarc/app": "../../packages/xarc-app"
     },
     "devDependencies": {
-      "electrode-archetype-react-app-dev": "../../packages/electrode-archetype-react-app-dev"
+      "@xarc/app-dev": "../../packages/xarc-app-dev"
     }
   },
   "optionalDependencies": {}
