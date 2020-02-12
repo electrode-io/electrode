@@ -1,3 +1,25 @@
+# 2/12/2020
+
+- support dynamic load inlining subapp
+
+## Packages
+
+### Directly Updated
+
+- `subapp-web@1.0.14` `(1.0.13 => 1.0.14)`
+
+### Lerna Updated
+
+- `subapp-pbundle@0.0.6` `(0.0.5 => 0.0.6)`
+- `subapp-react@0.0.6` `(0.0.5 => 0.0.6)`
+- `subapp-redux@1.0.15` `(1.0.14 => 1.0.15)`
+
+## Commits
+
+- `packages/subapp-web`
+
+  - support dynamic load inlining subapp [commit](http://github.com/electrode-io/electrode/commit/7068f1d5a1020b7faedea51c7adb9d57597b298c)
+
 # 2/10/2020
 
 - minor fixes
