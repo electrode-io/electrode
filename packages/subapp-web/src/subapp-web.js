@@ -17,6 +17,9 @@
   let xv1;
 
   return (w.xarcV1 = xv1 = {
+    IS_BROWSER: true,
+    HAS_WINDOW: typeof window !== "undefined",
+
     version,
 
     rt: runtimeInfo,
@@ -121,15 +124,15 @@
       xv1.getOnLoadStart(name).push(load);
     },
 
-    startSubApp(subApp, options) {
+    startSubApp(subApp, options, readyOnly) {
       let instance;
       const makeInvoke = m => () => subApp[m] && subApp[m](instance, options, subApp.info);
-      return Promise.resolve()
+      const promise = Promise.resolve()
         .then(makeInvoke("preStart"))
         .then(x => (instance = x) && x._prepared) // await _prepared in case it's a promise
         .then(makeInvoke("preRender"))
-        .then(makeInvoke("signalReady"))
-        .then(makeInvoke("start"));
+        .then(makeInvoke("signalReady"));
+      return !readyOnly ? promise.then(makeInvoke("start")) : promise;
     },
 
     startGroup(groupInfo) {

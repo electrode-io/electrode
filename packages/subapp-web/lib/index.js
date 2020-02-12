@@ -25,5 +25,6 @@ module.exports = {
   polyfill: require("./polyfill"),
   init: require("./init"),
   load: require("./load"),
-  start: require("./start")
+  start: require("./start"),
+  xarc: { IS_BROWSER: false, HAS_WINDOW: false } // no xarc client lib on the server
 };
