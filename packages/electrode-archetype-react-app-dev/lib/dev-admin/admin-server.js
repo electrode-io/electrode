@@ -1,6 +1,6 @@
 "use strict";
 
-/* eslint-disable complexity */
+/* eslint-disable complexity, no-unused-expressions */
 /* eslint-disable no-magic-numbers, max-len, max-statements, prefer-template */
 
 const Path = require("path");
@@ -32,6 +32,7 @@ class AdminServer {
     this._webpackDevRelay = new WebpackDevRelay();
     this._servers = {};
     this._io = (options && options.inputOutput) || new ConsoleIO();
+    this._shutdown = false;
   }
 
   async start() {
@@ -39,14 +40,19 @@ class AdminServer {
     this._proxy = ck`<green.inverse>[proxy]</> `;
     this._io.setup();
     this.handleUserInput();
-    await this.startWebpackDevServer();
-    await this.startAppServer();
-    if (DEV_PROXY_ENABLED) {
+
+    this._shutdown || (await this.startWebpackDevServer());
+    this._shutdown || (await this.startAppServer());
+    if (!this._shutdown && DEV_PROXY_ENABLED) {
       // to debug dev proxy
       // await this.startProxyServer("--inspect-brk");
       await this.startProxyServer();
     }
-    setTimeout(() => this.showMenu(), 100);
+
+    this._shutdown ||
+      setTimeout(() => {
+        this.showMenu();
+      }, 100);
   }
 
   showMenu() {
@@ -95,16 +101,26 @@ class AdminServer {
 
   async kill(name, sig) {
     const info = this.getServer(name);
-    if (info._child) {
-      const promise = new Promise(resolve => info._child.once("close", resolve));
-      info._child.kill(sig);
-      await promise;
+    info._cancelled = true;
+    if (info._startDefer) {
+      await info._startDefer.promise;
+    }
+    const child = info._child;
+    if (child) {
+      const defer = makeDefer();
+      child.once("close", () => defer.resolve());
+      child.kill(sig);
+      await defer.promise;
+      child.kill("SIGKILL");
       info._child = undefined;
       info._starting = false;
+    } else if (info._starting) {
+      this._io.show(ck`<red>No child process for ${name} to send signal ${sig}</>`);
     }
   }
 
   async _quit() {
+    this._shutdown = true;
     this._io.show(ck`<magenta>admin server exit, shutting down servers</magenta>`);
     if (this._appWatcher) {
       this._appWatcher.close();
@@ -158,7 +174,7 @@ class AdminServer {
   async startServer(options) {
     const { name, debug, killKey } = options;
 
-    if (!this._servers[name]) this._servers[name] = {};
+    if (!this._servers[name]) this._servers[name] = { time: Date.now() };
 
     const info = this._servers[name];
     info.options = options;
@@ -169,7 +185,7 @@ class AdminServer {
       );
       return;
     }
-
+    info._startDefer = makeDefer();
     info._starting = true;
 
     //
@@ -204,12 +220,20 @@ class AdminServer {
 
     const re = info._child ? "Res" : "S";
     this._io.show(ck`<orange>${re}tarting ${name}${debugMsg}</orange>`);
-    await this.kill(name, "SIGINT");
+    if (info._child) {
+      await this.kill(name, "SIGINT");
+    }
 
-    start();
+    if (!info._cancelled) {
+      start();
+      if (options.waitStart) {
+        await options.waitStart(info);
+      }
 
-    if (options.waitStart) {
-      await options.waitStart(info);
+      info._startDefer.resolve("started");
+      this._io.show(`Server ${name} done starting`);
+    } else {
+      this._startDefer.resolve("cancelled");
     }
 
     info._starting = false;
@@ -310,7 +334,7 @@ class AdminServer {
           input: info._child.stdout
         });
 
-        readStdout.on("line", (data) => {
+        readStdout.on("line", data => {
           const { level, message } = parse(data.toString().trim());
           logger[level](message);
         });
@@ -319,7 +343,7 @@ class AdminServer {
           input: info._child.stderr
         });
 
-        readStderr.on("line", (data) => {
+        readStderr.on("line", data => {
           const { level, message } = parse(data.toString().trim());
           logger[level](message);
         });
