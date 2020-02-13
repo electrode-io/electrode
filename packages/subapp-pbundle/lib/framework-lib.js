@@ -37,6 +37,12 @@ class FrameworkLib {
       await this.realizeReduxStore();
     }
 
+    const packReduxData =
+      this.ref.subAppServer.packReduxData || this.ref.subApp.packReduxData;
+    if (packReduxData) {
+      this.initialStateStr = JSON.stringify(packReduxData(this.store));
+    }
+
     return this.handleSSRSync();
   }
 
