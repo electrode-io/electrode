@@ -1,5 +1,17 @@
 # 2/14/2020
 
+## Packages
+
+- `@xarc/create-app@3.0.1` `(3.0.0 => 3.0.1)`
+
+## Commits
+
+- `packages/create-app`
+
+  - minor fix for create app template [commit](http://github.com/electrode-io/electrode/commit/d4bd96157beaf55b2f3d54d4bc8de8a189b799cd)
+
+# 2/14/2020
+
 - rename main packages
 - deprecating ignite and generator packages
 
