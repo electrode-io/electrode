@@ -1,5 +1,18 @@
 # 2/14/2020
 
+## Packages
+
+- `electrode-archetype-react-app@7.0.7` `(7.0.6 => 7.0.7)`
+- `electrode-archetype-react-app-dev@7.0.7` `(7.0.6 => 7.0.7)`
+
+## Commits
+
+- `packages/electrode-archetype-react-app[-dev]`
+
+  - fix dev admin server restart [commit](http://github.com/electrode-io/electrode/commit/8b6f3d6c59529c8e93c1090e07c1231c51bba24d)
+
+# 2/14/2020
+
 - avoid orphaned servers for dev admin
 
 ## Packages
