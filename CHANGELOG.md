@@ -1,5 +1,49 @@
 # 2/14/2020
 
+- rename main packages
+- deprecating ignite and generator packages
+
+## Packages
+
+- `@xarc/app@8.0.0` `(7.0.7 => 8.0.0)`
+- `@xarc/app-dev@8.0.0` `(7.0.7 => 8.0.0)`
+- `@xarc/create-app@3.0.0` `(2.0.4 => 3.0.0)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - rename main packages [commit](http://github.com/electrode-io/electrode/commit/3577a7cc6696ab6014a6f64e3680f43714549741)
+  - [major] mark for major bump [commit](http://github.com/electrode-io/electrode/commit/7d3ff3cdda5997ae138e4048696b0c258c474256)
+
+- `packages/create-app`
+
+  - update create app template with new package names [commit](http://github.com/electrode-io/electrode/commit/eae9bbfffa2e1cc5a2294805335003f2c2b4efec)
+  - [major] mark for major bump [commit](http://github.com/electrode-io/electrode/commit/7d3ff3cdda5997ae138e4048696b0c258c474256)
+
+- `packages/electrode-ignite`
+
+  - deprecating ignite and generator packages [commit](http://github.com/electrode-io/electrode/commit/4b4c0d6545ca8bd855fe7abeaa7b207029ddccd3)
+
+- `packages/generator-electrode`
+
+  - deprecating ignite and generator packages [commit](http://github.com/electrode-io/electrode/commit/4b4c0d6545ca8bd855fe7abeaa7b207029ddccd3)
+
+- `packages/ignite-core`
+
+  - deprecating ignite and generator packages [commit](http://github.com/electrode-io/electrode/commit/4b4c0d6545ca8bd855fe7abeaa7b207029ddccd3)
+
+- `tools`
+
+  - update tools to handle renamed packages [commit](http://github.com/electrode-io/electrode/commit/0f73b282f53d3d23bed0bb57305f63ce8a4a50f5)
+
+- `MISC`
+
+  - Update changelog [commit](http://github.com/electrode-io/electrode/commit/31563075e98ccf1bc363ab3110ee53ddabc2cf2e)
+  - add xarc8 npm tag for beta [commit](http://github.com/electrode-io/electrode/commit/fdad596ac840905eef150ddbabb04431d4ef72db)
+
+# 2/14/2020
+
 - avoid orphaned servers for dev admin
 
 ## Packages
