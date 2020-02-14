@@ -2,26 +2,19 @@
 
 ## Packages
 
--   `@xarc/app@8.0.1` `(8.0.0 => 8.0.1)`
--   `@xarc/app-dev@8.0.1` `(8.0.0 => 8.0.1)`
--   `@xarc/create-app@3.0.2` `(3.0.1 => 3.0.2)`
+- `@xarc/app@8.0.1` `(8.0.0 => 8.0.1)`
+- `@xarc/app-dev@8.0.1` `(8.0.0 => 8.0.1)`
+- `@xarc/create-app@3.0.2` `(3.0.1 => 3.0.2)`
 
 ## Commits
 
--   `packages/xarc-app[-dev]`
+- `packages/xarc-app[-dev]`
 
-    -   touch for release [commit](http://github.com/electrode-io/electrode/commit/43234d4e0138d521b3c8dc86f518f172b15ad785)
+  - touch for release [commit](http://github.com/electrode-io/electrode/commit/43234d4e0138d521b3c8dc86f518f172b15ad785)
 
--   `packages/create-app`
+- `packages/create-app`
 
-    -   Publish [commit](http://github.com/electrode-io/electrode/commit/77a8fc8b4d0b0b515caca8c3cd99429d372b2a14)
-    -   minor fix for create app template [commit](http://github.com/electrode-io/electrode/commit/d4bd96157beaf55b2f3d54d4bc8de8a189b799cd)
-    -   avoid copying removed files [commit](http://github.com/electrode-io/electrode/commit/89df3d6bc6eff0533c369fc3ac62a10cac2e56be)
-
--   `MISC`
-
-    -   Update changelog [commit](http://github.com/electrode-io/electrode/commit/35e773220f0428f6444ae4313573d8d0b2929d77)
-    -   Update changelog [commit](http://github.com/electrode-io/electrode/commit/d16837b19249be2db91ec8bbb990335e0c4dec0f)
+  - avoid copying removed files [commit](http://github.com/electrode-io/electrode/commit/89df3d6bc6eff0533c369fc3ac62a10cac2e56be)
 
 # 2/14/2020
 
