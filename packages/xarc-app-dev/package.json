@@ -1,6 +1,6 @@
 {
   "name": "@xarc/app-dev",
-  "version": "7.0.7",
+  "version": "8.0.0",
   "description": "Electrode X application development support",
   "main": "index.js",
   "homepage": "http://www.electrode.io",
@@ -157,6 +157,7 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-    "access": "public"
+    "access": "public",
+    "tag": "xarc8"
   }
 }
