@@ -1,3 +1,18 @@
+# 2/14/2020
+
+- avoid orphaned servers for dev admin
+
+## Packages
+
+- `electrode-archetype-react-app@7.0.6` `(7.0.5 => 7.0.6)`
+- `electrode-archetype-react-app-dev@7.0.6` `(7.0.5 => 7.0.6)`
+
+## Commits
+
+- `packages/electrode-archetype-react-app[-dev]`
+
+  - avoid orphaned servers ([#1531](https://github.com/electrode-io/electrode/pull/1531)) [commit](http://github.com/electrode-io/electrode/commit/ea27b35183bfee9c88b7ebca48ebc1f64bb8b9da)
+
 # 2/12/2020
 
 - support dynamic load inlining subapp
