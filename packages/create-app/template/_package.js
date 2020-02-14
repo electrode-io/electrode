@@ -43,7 +43,7 @@ module.exports = base => {
       "subapp-server": "^1.1.5"
     },
     devDependencies: {
-      "@xarc/app-dev": "@xarc8"
+      "@xarc/app-dev": "xarc8"
     }
   };
 
