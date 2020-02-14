@@ -37,12 +37,6 @@ class FrameworkLib {
       await this.realizeReduxStore();
     }
 
-    const packReduxData =
-      this.ref.subAppServer.packReduxData || this.ref.subApp.packReduxData;
-    if (packReduxData) {
-      this.initialStateStr = JSON.stringify(packReduxData(this.store));
-    }
-
     return this.handleSSRSync();
   }
 
@@ -138,10 +132,11 @@ class FrameworkLib {
     }
 
     this.initialState = reduxData.initialState || reduxData;
-    // if subapp didn't request to skip sending initial state, then stringify it
-    // and attach it to the index html.
+    const packReduxData = subAppServer.packReduxData || subApp.packReduxData;
 
-    if (subAppServer.attachInitialState !== false) {
+    // if subapp didn't request to skip sending initial state and packReduxData was not specified,
+    //  then stringify the initial store state and attach it to the index html.
+    if (!packReduxData && subAppServer.attachInitialState !== false) {
       this.initialStateStr = JSON.stringify(this.initialState);
     } else {
       this.initialStateStr = "";
@@ -175,8 +170,16 @@ class FrameworkLib {
 
   async realizeReduxStore() {
     if (this.store && this.store.realize) {
+      const { subApp, subAppServer } = this.ref;
       this.store = this.store.realize();
       await this.signalStoreReady();
+
+      const packReduxData = subAppServer.packReduxData || subApp.packReduxData;
+      // if subapp didn't request to skip sending initial state and packReduxData was specified,
+      //  then stringify packReduxData's return value and attach it to the index html.
+      if (packReduxData && subAppServer.attachInitialState !== false) {
+        this.initialStateStr = JSON.stringify(packReduxData(this.store));
+      }
     }
   }
 
