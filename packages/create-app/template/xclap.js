@@ -9,4 +9,4 @@ process.env.APP_SERVER_PORT = 3100;
 
 // process.env.ENABLE_NODESOURCE_PLUGIN = true;
 
-require("electrode-archetype-react-app")();
+require("@xarc/app")();

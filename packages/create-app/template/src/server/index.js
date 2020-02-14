@@ -1,6 +1,6 @@
 "use strict";
 
-const support = require("electrode-archetype-react-app/support");
+const support = require("@xarc/app/support");
 const electrodeServer = require("electrode-server");
 
 const config = {
@@ -8,7 +8,7 @@ const config = {
     port: parseInt(process.env.APP_SERVER_PORT || process.env.PORT || "3000")
   },
   plugins: {
-    "electrode-archetype-react-app-dev": {
+    "@xarc/app-dev": {
       priority: -1,
       enable: process.env.WEBPACK_DEV === "true"
     },

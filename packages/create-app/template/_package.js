@@ -9,7 +9,7 @@ module.exports = base => {
     description: "",
     homepage: "",
     scripts: {
-      dev: "clap dev",
+      dev: "clap -q dev",
       test: "clap check",
       build: "clap build",
       start: "node lib/server"
@@ -28,11 +28,11 @@ module.exports = base => {
     },
     license: "UNLICENSED",
     engines: {
-      node: ">= 8.12.0",
-      npm: ">= 6.4.1"
+      node: ">= 10",
+      npm: ">= 6"
     },
     dependencies: {
-      "electrode-archetype-react-app": "^7.0.3",
+      "@xarc/app": "xarc8",
       "electrode-server": "^3.0.0",
       react: "^16",
       "react-dom": "^16",
@@ -43,7 +43,7 @@ module.exports = base => {
       "subapp-server": "^1.1.5"
     },
     devDependencies: {
-      "electrode-archetype-react-app-dev": "^7.0.3"
+      "@xarc/app-dev": "@xarc8"
     }
   };
 
