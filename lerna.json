@@ -23,6 +23,14 @@
             "@xarc/create-app": true
           },
           "addToVersion": true
+        },
+        "xarc8": {
+          "enabled": "true",
+          "packages": {
+            "@xarc/app": true,
+            "@xarc/app-dev": true,
+            "@xarc/create-app": true
+          }
         }
       }
     }
