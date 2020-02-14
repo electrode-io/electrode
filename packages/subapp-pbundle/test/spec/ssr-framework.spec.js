@@ -163,8 +163,14 @@ describe("SSR Preact framework", function() {
 
   const helloBundle = {
     name: "hello",
-    reducer(state = "foo") {
+    reducer(state = "foo", action) {
+      if (action.type === "UPDATE_STATE") {
+        return action.newState;
+      }
       return state;
+    },
+    doUpdateState: (newState) => ({ dispatch }) => {
+      dispatch({ type: "UPDATE_STATE", newState });
     },
     selectHello(state) {
       return state.hello;
@@ -353,5 +359,39 @@ describe("SSR Preact framework", function() {
     expect(framework.initialStateStr).to.equal(undefined);
     expect(store).to.equal(false);
     expect(html).to.equal("");
+  });
+
+  it("should use packReduxData to generate initial state if it exists", async () => {
+    const framework = new lib.FrameworkLib({
+      subApp: {
+        __redux: true,
+        packReduxData: (store) => store.getState(),
+        reduxStoreReady: ({ store }) => {
+          store.doUpdateState("universe");
+        },
+        reduxCreateStore(initialState) {
+          return {
+            realize() {
+              return composeBundles(helloBundle)(initialState);
+            }
+          };
+        }
+      },
+      subAppServer: {
+        StartComponent: connect("selectHello", ({ hello }) => {
+          return `test hello ${hello}`;
+        }),
+        async prepare() {
+          return { hello: "world" };
+        }
+      },
+      context: {
+        user: {}
+      },
+      options: { serverSideRendering: true }
+    });
+
+    await framework.handleSSR();
+    expect(JSON.parse(framework.initialStateStr).hello).to.equal("universe");
   });
 });
