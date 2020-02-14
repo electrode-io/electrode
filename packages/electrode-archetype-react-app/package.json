@@ -1,6 +1,6 @@
 {
   "name": "electrode-archetype-react-app",
-  "version": "7.0.6",
+  "version": "7.0.7",
   "description": "Electrode NodeJS/React Universal Application Archetype",
   "main": "arch-clap.js",
   "homepage": "http://www.electrode.io",
