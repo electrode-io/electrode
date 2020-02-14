@@ -34,7 +34,7 @@ async function create() {
 
   Fs.writeFileSync(Path.resolve("package.json"), `${JSON.stringify(pkg, null, 2)}\n`);
   shcmd.cp(Path.join(srcDir, "xclap.js"), process.cwd());
-  shcmd.cp("-R", Path.join(srcDir, "archetype"), process.cwd());
+  // shcmd.cp("-R", Path.join(srcDir, "archetype"), process.cwd());
   shcmd.cp("-R", Path.join(srcDir, "src"), process.cwd());
   shcmd.cp("-R", Path.join(srcDir, "static"), process.cwd());
   shcmd.cp("-R", Path.join(srcDir, "_gitignore"), Path.resolve(".gitignore"));
