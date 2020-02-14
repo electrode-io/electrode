@@ -117,6 +117,7 @@ class AdminServer {
     } else if (info._starting) {
       this._io.show(ck`<red>No child process for ${name} to send signal ${sig}</>`);
     }
+    info._cancelled = false;
   }
 
   async _quit() {
@@ -185,6 +186,16 @@ class AdminServer {
       );
       return;
     }
+
+    const debugMsg = debug ? ` with <cyan>${debug}</>` : "";
+
+    // show Restarting or Starting message
+    const re = info._child ? "Res" : "S";
+    this._io.show(ck`<orange>${re}tarting ${name}${debugMsg}</orange>`);
+    if (info._child) {
+      await this.kill(name, "SIGINT");
+    }
+
     info._startDefer = makeDefer();
     info._starting = true;
 
@@ -196,11 +207,11 @@ class AdminServer {
       info._watcher = undefined;
     }
 
-    const debugMsg = debug ? ` with <cyan>${debug}</>` : "";
-
     const start = () => {
       const forkOpts = {
-        env: Object.assign({}, process.env, { ELECTRODE_ADMIN_SERVER: true }),
+        env: Object.assign({}, process.env, {
+          ELECTRODE_ADMIN_SERVER: true
+        }),
         silent: true
       };
 
@@ -218,12 +229,6 @@ class AdminServer {
       this.handleServerExit(name);
     };
 
-    const re = info._child ? "Res" : "S";
-    this._io.show(ck`<orange>${re}tarting ${name}${debugMsg}</orange>`);
-    if (info._child) {
-      await this.kill(name, "SIGINT");
-    }
-
     if (!info._cancelled) {
       start();
       if (options.waitStart) {
@@ -231,7 +236,6 @@ class AdminServer {
       }
 
       info._startDefer.resolve("started");
-      this._io.show(`Server ${name} done starting`);
     } else {
       this._startDefer.resolve("cancelled");
     }
