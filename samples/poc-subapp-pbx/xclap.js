@@ -18,4 +18,6 @@ process.env.APP_SERVER_PORT = 3100;
 
 // process.env.KARMA_BROWSER = "phantomjs";
 
+process.env.USE_APP_WEBPACK_CONFIG = true;
+
 require("@xarc/app")();
