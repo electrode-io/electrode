@@ -287,13 +287,7 @@
       }
 
       if (!runtimeInfo.bundleAssets) {
-        try {
-          // TODO: right way to extract JSON from script tag?
-          runtimeInfo.bundleAssets = JSON.parse(document.getElementById("bundleAssets").innerHTML);
-        } catch (err) {
-          console.log("ERROR: fail retrieve bundleAssets", err);
-          return;
-        }
+        runtimeInfo.bundleAssets = xv1.dyn("bundleAssets");
       }
 
       const ba = runtimeInfo.bundleAssets;
@@ -315,8 +309,9 @@
           }, a);
         }, [])
         .filter(({ id }) => {
-          if (xv1.getBundle(id.toString()) === undefined) {
-            xv1.setBundle(id.toString(), 0); // mark as loading
+          id = id.toString();
+          if (xv1.getBundle(id) === undefined) {
+            xv1.setBundle(id, 0); // mark as loading
 
             return true;
           }
@@ -342,6 +337,21 @@
           }
         });
       });
+    },
+
+    dyn(id) {
+      const msg = "ERROR: fail retrieve dynamic data from element";
+      const element = document.getElementById(id);
+      if (!id) {
+        console.error(msg, id, "- get");
+      } else {
+        try {
+          return JSON.parse(element.innerHTML);
+        } catch (err) {
+          console.error(msg, "- parse");
+          return {};
+        }
+      }
     }
   });
 })(window);
