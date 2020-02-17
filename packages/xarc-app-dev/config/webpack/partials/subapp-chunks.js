@@ -1,9 +1,6 @@
 "use strict";
 
 const Crypto = require("crypto");
-const { AppMode, webpack } = require("@xarc/app/config/archetype");
-
-const config = {};
 
 const splitMap = {};
 
@@ -20,53 +17,65 @@ function hashChunks(mod, chunks, key) {
   return `${key}~${digest}`;
 }
 
-if (AppMode.hasSubApps && webpack.minimizeSubappChunks) {
-  config.optimization = {
-    runtimeChunk: "single",
-    splitChunks: {
-      cacheGroups: {
-        common: {
-          chunks: "all",
-          minChunks: 2,
-          enforce: true,
-          name: "common"
+function makeConfig() {
+  const { AppMode, webpack } = require("@xarc/app/config/archetype");
+
+  const config = {};
+
+  if (!AppMode.hasSubApps) {
+    return config;
+  }
+
+  if (webpack.minimizeSubappChunks) {
+    config.optimization = {
+      runtimeChunk: "single",
+      splitChunks: {
+        cacheGroups: {
+          common: {
+            chunks: "all",
+            minChunks: 2,
+            enforce: true,
+            name: "common"
+          }
         }
       }
-    }
-  };
-} else if (AppMode.hasSubApps) {
-  // use webpack splitChunks optimization to automatically put modules
-  // shared by subapps into common bundles.
-  // The common bundles will be determined by the splitChunks parameters.
-  // The filename has the pattern of hex-sum.bundle1~bundle2~bundle#.js
-  // https://webpack.js.org/plugins/split-chunks-plugin/
-  config.optimization = {
-    runtimeChunk: "single",
-    splitChunks: {
-      chunks: "all",
-      minSize: 30 * 1024,
-      maxSize: 0,
-      minChunks: 2,
-      maxAsyncRequests: 500,
-      maxInitialRequests: 500,
-      automaticNameDelimiter: "~",
-      automaticNameMaxLength: 250,
-      cacheGroups: {
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          // https://webpack.js.org/plugins/split-chunks-plugin/#splitchunksname
-          name: hashChunks,
-          priority: -10,
-          reuseExistingChunk: true
-        },
-        shared: {
-          name: hashChunks,
-          priority: -20,
-          reuseExistingChunk: true
+    };
+  } else {
+    // use webpack splitChunks optimization to automatically put modules
+    // shared by subapps into common bundles.
+    // The common bundles will be determined by the splitChunks parameters.
+    // The filename has the pattern of hex-sum.bundle1~bundle2~bundle#.js
+    // https://webpack.js.org/plugins/split-chunks-plugin/
+    config.optimization = {
+      runtimeChunk: "single",
+      splitChunks: {
+        chunks: "all",
+        minSize: 30 * 1024,
+        maxSize: 0,
+        minChunks: 2,
+        maxAsyncRequests: 500,
+        maxInitialRequests: 500,
+        automaticNameDelimiter: "~",
+        automaticNameMaxLength: 250,
+        cacheGroups: {
+          vendors: {
+            test: /[\\/]node_modules[\\/]/,
+            // https://webpack.js.org/plugins/split-chunks-plugin/#splitchunksname
+            name: hashChunks,
+            priority: -10,
+            reuseExistingChunk: true
+          },
+          shared: {
+            name: hashChunks,
+            priority: -20,
+            reuseExistingChunk: true
+          }
         }
       }
-    }
-  };
+    };
+  }
+
+  return config;
 }
 
-module.exports = config;
+module.exports = makeConfig;

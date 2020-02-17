@@ -3,7 +3,7 @@
 /* eslint-disable no-unused-expressions */
 
 const xsh = require("xsh");
-const partialConfigs = require("../partials");
+const partials = require("../partials");
 const WebpackConfigComposer = require("webpack-config-composer");
 const optionalRequire = require("optional-require")(require);
 const Path = require("path");
@@ -69,7 +69,7 @@ function initWebpackConfigComposer(options) {
 
     options.profiles && composer.addProfiles(options.profiles);
     composer.addProfile("user", {});
-    composer.addPartials(partialConfigs.partials);
+    composer.addPartials(partials);
     options.partials && composer.addPartials(options.partials);
   }
 

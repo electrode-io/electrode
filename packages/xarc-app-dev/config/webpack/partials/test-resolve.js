@@ -1,7 +1,7 @@
 "use strict";
 
 const optionalRequire = require("optional-require")(require);
-module.exports = {
+module.exports = () => ({
   resolve: {
     alias: {
       // Allow root import of `src/FOO` from ROOT/src.
@@ -9,4 +9,4 @@ module.exports = {
       sinon: optionalRequire.resolve("sinon/pkg/sinon") || ""
     }
   }
-};
+});

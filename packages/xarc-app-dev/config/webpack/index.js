@@ -17,5 +17,6 @@ module.exports = {
   initWebpackConfigComposer,
   compose: generateConfig,
   env: profile,
-  options
+  options,
+  partials: require("./partials")
 };

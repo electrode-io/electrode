@@ -1,9 +1,11 @@
 "use strict";
 
+const { PARTIALS } = require("./constants");
+
 class Profile {
   constructor(name, partials) {
     this._name = name;
-    this._partials = partials || {};
+    this[PARTIALS] = partials || {};
   }
 
   get name() {
@@ -11,19 +13,19 @@ class Profile {
   }
 
   get partials() {
-    return this._partials;
+    return this[PARTIALS];
   }
 
   setPartial(name, options) {
-    this._partials[name] = options || {};
+    this[PARTIALS][name] = options || {};
   }
 
   getPartial(name) {
-    return this._partials[name];
+    return this[PARTIALS][name];
   }
 
   delPartial(name) {
-    delete this._partials[name];
+    delete this[PARTIALS][name];
   }
 }
 

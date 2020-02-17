@@ -5,7 +5,7 @@ const Path = require("path");
 const ModuleResolver = require("electrode-node-resolver/lib/webpack-plugin");
 const archetype = require("@xarc/app/config/archetype");
 
-module.exports = {
+module.exports = () => ({
   resolveLoader: {
     symlinks: !archetype.webpack.preserveSymlinks,
     modules: [Path.resolve("lib"), process.cwd()]
@@ -13,4 +13,4 @@ module.exports = {
       .filter(identity),
     plugins: [new ModuleResolver("module", "resolve", archetype.devDir, undefined)]
   }
-};
+});

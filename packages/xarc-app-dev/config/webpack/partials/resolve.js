@@ -53,4 +53,4 @@ if (AppMode.hasSubApps) {
   resolve.mainFields = ["module", "browser", "main"];
 }
 
-module.exports = { resolve };
+module.exports = () => ({ resolve });
