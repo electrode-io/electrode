@@ -2,7 +2,7 @@
 
 const Path = require("path");
 
-module.exports = {
+module.exports = () => ({
   module: {
     /*
      * This prevents webpack from running its parsers on any sinon files. Sinon breaks when it is
@@ -34,4 +34,4 @@ module.exports = {
     "react/lib/ExecutionEnvironment": true,
     "react/lib/ReactContext": true
   }
-};
+});

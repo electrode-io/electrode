@@ -2,34 +2,49 @@
 
 const _ = require("lodash");
 const { getConcatMethod } = require("./concat-method");
+const assert = require("assert");
+
+const OVERRIDE = Symbol("override webpack config partial");
+const DATA = Symbol("webpack partial data");
 
 class Partial {
   constructor(name, data) {
     this._name = name;
-    this._data = Object.assign({ config: {}, options: {} }, data);
+    if (typeof data === "function") {
+      this[DATA] = { config: data };
+    } else {
+      this[DATA] = Object.assign({ config: {}, options: {} }, data);
+    }
+    this.setOverride();
   }
 
   set config(config) {
-    this._data.config = config;
+    this[DATA].config = config;
   }
 
   get config() {
-    return this._data.config;
+    return this[DATA].config;
   }
 
   set options(options) {
-    this._data.options = Object.assign({}, options);
+    this[DATA].options = Object.assign({}, options);
   }
 
   get options() {
-    return this._data.options;
+    return this[DATA].options;
   }
 
   merge(data, concatArray) {
-    _.mergeWith(this._data, data, getConcatMethod(concatArray));
+    _.mergeWith(this[DATA], data, getConcatMethod(concatArray));
+  }
+
+  setOverride(fn) {
+    this[OVERRIDE] = fn || _.identity;
   }
 
   compose(options) {
+    options = Object.assign({}, this.options, options);
+
     const config = this.config;
     const configType = typeof config;
 
@@ -38,7 +53,6 @@ class Partial {
     if (configType === "object") {
       ret = config;
     } else if (configType === "function") {
-      options = Object.assign({}, this.options, options);
       ret = config(options);
       if (typeof ret === "function") {
         ret = ret(options);
@@ -47,7 +61,9 @@ class Partial {
       throw new Error(`can't process config from Partial ${this._name}`);
     }
 
-    return ret;
+    const override = this[OVERRIDE](ret, options);
+
+    return override || ret;
   }
 }
 

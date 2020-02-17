@@ -26,7 +26,7 @@ const getOutputPath = () => {
   }
 };
 
-module.exports = {
+module.exports = () => ({
   output: {
     path: getOutputPath(),
     pathinfo: inspectpack, // Enable path information for inspectpack
@@ -36,4 +36,4 @@ module.exports = {
       : "[contenthash].[name].js",
     filename: getOutputFilename()
   }
-};
+});

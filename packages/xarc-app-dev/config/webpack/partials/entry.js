@@ -211,4 +211,4 @@ if (module.hot) {
   return partial;
 }
 
-module.exports = makeEntryPartial();
+module.exports = makeEntryPartial;

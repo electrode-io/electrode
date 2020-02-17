@@ -7,11 +7,13 @@ const Partial = require("./partial");
 const Profile = require("./profile");
 const { getConcatMethod } = require("./concat-method");
 
+const { PARTIALS, PROFILES } = require("./constants");
+
 class WebpackConfigComposer {
   constructor(options) {
     options = options || {};
-    this._profiles = {};
-    this._partials = {};
+    this[PROFILES] = {};
+    this[PARTIALS] = {};
     if (options.profiles) {
       this.addProfiles(options.profiles);
     }
@@ -22,11 +24,11 @@ class WebpackConfigComposer {
   }
 
   get profiles() {
-    return this._profiles;
+    return this[PROFILES];
   }
 
   get partials() {
-    return this._partials;
+    return this[PARTIALS];
   }
 
   addProfiles(profiles) {
@@ -53,7 +55,7 @@ class WebpackConfigComposer {
       profile = new Profile(name, partials);
     }
 
-    this._profiles[name] = profile;
+    this[PROFILES][name] = profile;
 
     return profile;
   }
@@ -82,10 +84,10 @@ class WebpackConfigComposer {
   }
 
   _addPartial(name, data, addOpt) {
-    const exist = this._partials[name];
+    const exist = this[PARTIALS][name];
 
     if (!exist || _.get(addOpt, "method") === "replace") {
-      this._partials[name] = new Partial(name, data);
+      this[PARTIALS][name] = data instanceof Partial ? data : new Partial(name, data);
     } else {
       exist.merge(data, _.get(addOpt, "concatArray"));
     }
@@ -102,11 +104,18 @@ class WebpackConfigComposer {
   }
 
   getPartial(name) {
-    return this._partials[name];
+    return this[PARTIALS][name];
+  }
+
+  enablePartial(name, flag) {
+    const partial = this.getPartial(name);
+    if (partial) {
+      partial.enable = flag;
+    }
   }
 
   getProfile(name) {
-    return this._profiles[name];
+    return this[PROFILES][name];
   }
 
   compose(options, ...profiles) {
