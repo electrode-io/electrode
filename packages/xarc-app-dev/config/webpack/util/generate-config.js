@@ -1,7 +1,9 @@
 "use strict";
 
+/* eslint-disable no-unused-expressions */
+
 const xsh = require("xsh");
-const partialConfigs = require("../partial");
+const partialConfigs = require("../partials");
 const WebpackConfigComposer = require("webpack-config-composer");
 const optionalRequire = require("optional-require")(require);
 const Path = require("path");
@@ -65,9 +67,10 @@ function initWebpackConfigComposer(options) {
   if (!options.composer) {
     const composer = (options.composer = new WebpackConfigComposer());
 
-    composer.addProfiles(options.profiles);
+    options.profiles && composer.addProfiles(options.profiles);
     composer.addProfile("user", {});
     composer.addPartials(partialConfigs.partials);
+    options.partials && composer.addPartials(options.partials);
   }
 
   return options;
