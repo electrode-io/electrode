@@ -1,3 +1,42 @@
+# 2/17/2020
+
+- New pbundle option "packReduxData" for SSR redux state
+- make Electrode internal webpack config a little easier to override
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.0.2` `(8.0.1 => 8.0.2)`
+- `@xarc/app-dev@8.0.2` `(8.0.1 => 8.0.2)`
+- `subapp-pbundle@0.0.7` `(0.0.6 => 0.0.7)`
+- `subapp-web@1.0.15` `(1.0.14 => 1.0.15)`
+- `webpack-config-composer@1.1.3` `(1.1.2 => 1.1.3)`
+
+### Lerna Updated
+
+- `subapp-react@0.0.7` `(0.0.6 => 0.0.7)`
+- `subapp-redux@1.0.16` `(1.0.15 => 1.0.16)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - make Electrode internal webpack config a little easier to override ([#1536](https://github.com/electrode-io/electrode/pull/1536)) [commit](http://github.com/electrode-io/electrode/commit/22b52347e082da52a8107bb7adfddcda15b3462e)
+  - rename dir partial to partials ([#1534](https://github.com/electrode-io/electrode/pull/1534)) [commit](http://github.com/electrode-io/electrode/commit/b5f18ca80efb5d0b9e1a053b08d3a013a9bae046)
+
+- `packages/subapp-pbundle`
+
+  - New pbundle option "packReduxData" for SSR redux state ([#1532](https://github.com/electrode-io/electrode/pull/1532)) [commit](http://github.com/electrode-io/electrode/commit/35eca3b314b0c56a89684d9cb17a9aea9edb07cb)
+
+- `packages/subapp-web`
+
+  - more robust dynamic data retrieval from element ([#1535](https://github.com/electrode-io/electrode/pull/1535)) [commit](http://github.com/electrode-io/electrode/commit/7f7a24d42c5325dcfdae375bb7510c029758367a)
+
+- `packages/webpack-config-composer`
+
+  - make Electrode internal webpack config a little easier to override ([#1536](https://github.com/electrode-io/electrode/pull/1536)) [commit](http://github.com/electrode-io/electrode/commit/22b52347e082da52a8107bb7adfddcda15b3462e)
+
 # 2/14/2020
 
 ## Packages
