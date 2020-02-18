@@ -1,6 +1,6 @@
 {
   "name": "@xarc/app",
-  "version": "8.0.1",
+  "version": "8.0.2",
   "description": "Electrode X application runtime support",
   "main": "arch-clap.js",
   "homepage": "http://www.electrode.io",
