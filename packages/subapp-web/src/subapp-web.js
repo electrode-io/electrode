@@ -342,7 +342,7 @@
     dyn(id) {
       const msg = "ERROR: fail retrieve dynamic data from element";
       const element = document.getElementById(id);
-      if (!id) {
+      if (!element) {
         console.error(msg, id, "- get");
       } else {
         try {
