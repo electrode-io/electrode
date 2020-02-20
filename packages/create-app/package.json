@@ -8,8 +8,7 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-    "access": "public",
-    "tag": "xarc8"
+    "access": "public"
   },
   "bin": {
     "create-app": "bin/create-app.js"

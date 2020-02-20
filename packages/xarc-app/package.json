@@ -71,7 +71,6 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-    "access": "public",
-    "tag": "xarc8"
+    "access": "public"
   }
 }

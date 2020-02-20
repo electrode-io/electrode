@@ -25,7 +25,7 @@
           "addToVersion": true
         },
         "xarc8": {
-          "enabled": "true",
+          "enabled": false,
           "packages": {
             "@xarc/app": true,
             "@xarc/app-dev": true,
