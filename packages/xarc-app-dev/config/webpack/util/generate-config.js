@@ -1,6 +1,6 @@
 "use strict";
 
-/* eslint-disable no-unused-expressions */
+/* eslint-disable no-unused-expressions, max-statements */
 
 const xsh = require("xsh");
 const partials = require("../partials");
@@ -9,6 +9,9 @@ const optionalRequire = require("optional-require")(require);
 const Path = require("path");
 const _ = require("lodash");
 const logger = require("@xarc/app/lib/logger");
+const ck = require("chalker");
+
+const xarcWebpackConfig = Symbol("Electrode X webpack config");
 
 function searchUserCustomConfig(options) {
   let customConfig;
@@ -101,12 +104,21 @@ function generateConfig(opts, archetypeControl) {
   if (customConfig) {
     if (_.isFunction(customConfig)) {
       config = customConfig(composer, options, compose);
+    } else if (customConfig[xarcWebpackConfig]) {
+      console.error(ck`<yellow>WARNING:
+WARNING: Your custom webpack config file returned a config that contains Electrode webpack config.
+WARNING: Assuming you want Electrode to start with your webpack config file.
+WARNING: To supress this warning, please set env USE_APP_WEBPACK_CONFIG to true.
+WARNING: </>`);
+      config = customConfig;
     } else {
       composer.addPartialToProfile("custom", "user", customConfig);
     }
   }
 
   if (!config) config = compose();
+
+  config[xarcWebpackConfig] = true;
 
   logger.verbose("Final Webpack config", JSON.stringify(config, null, 2));
 
