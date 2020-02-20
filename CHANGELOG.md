@@ -1,3 +1,44 @@
+# 2/20/2020
+
+Release notes:
+
+Git tag: `rel-v8-02202020`
+
+- fix issue with starting with user webpack.config.js
+  - if user generated webpack config is Electrode then use directly ([#1539](https://github.com/electrode-io/electrode/pull/1539))
+- fix dynamic data element check
+- remove xarc8 npm tag for ver 8 release
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.0.3` `(8.0.2 => 8.0.3)`
+- `@xarc/app-dev@8.0.3` `(8.0.2 => 8.0.3)`
+- `@xarc/create-app@3.0.3` `(3.0.2 => 3.0.3)`
+- `subapp-web@1.0.16` `(1.0.15 => 1.0.16)`
+
+### Lerna Updated
+
+- `subapp-pbundle@0.0.8` `(0.0.7 => 0.0.8)`
+- `subapp-react@0.0.8` `(0.0.7 => 0.0.8)`
+- `subapp-redux@1.0.17` `(1.0.16 => 1.0.17)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - if user generated webpack config is Electrode then use directly ([#1539](https://github.com/electrode-io/electrode/pull/1539)) [commit](http://github.com/electrode-io/electrode/commit/668b5ef837abf823126ebcbb6c50d29e1048596a)
+  - remove xarc8 npm tag for ver 8 release [commit](http://github.com/electrode-io/electrode/commit/7e6f77c166814ceab9881be9a254b7e867927373)
+
+- `packages/create-app`
+
+  - remove xarc8 npm tag for ver 8 release [commit](http://github.com/electrode-io/electrode/commit/7e6f77c166814ceab9881be9a254b7e867927373)
+
+- `packages/subapp-web`
+
+  - fix dynamic data element check ([#1538](https://github.com/electrode-io/electrode/pull/1538)) [commit](http://github.com/electrode-io/electrode/commit/544100d7021f375d2330b214f6192f364f8ad159)
+
 # 2/17/2020
 
 - New pbundle option "packReduxData" for SSR redux state
