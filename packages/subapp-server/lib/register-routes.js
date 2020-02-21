@@ -8,6 +8,7 @@ const HttpStatus = require("./http-status");
 const Boom = require("@hapi/boom");
 const { ReactWebapp } = require("electrode-react-webapp");
 const { resolveChunkSelector, updateFullTemplate } = require("./utils");
+const HttpStatusCodes = require("http-status-codes");
 
 module.exports = function registerRoutes({ routes, topOpts, server }) {
   // register routes
@@ -32,18 +33,22 @@ module.exports = function registerRoutes({ routes, topOpts, server }) {
     const handler = async (request, h) => {
       try {
         const context = await routeHandler({
-          content: { html: "", status: 200, useStream: true },
+          content: { html: "", status: HttpStatusCodes.OK, useStream: true },
           mode: "",
           request
         });
         const data = context.result;
         const status = data.status;
 
+        if (data instanceof Error) {
+          throw data;
+        }
+
         if (status === undefined) {
           return h
             .response(data)
             .type("text/html; charset=UTF-8")
-            .code(200);
+            .code(HttpStatusCodes.OK);
         } else if (HttpStatus.redirect[status]) {
           return h.redirect(data.path);
         } else if (HttpStatus.displayHtml[status]) {
@@ -56,7 +61,10 @@ module.exports = function registerRoutes({ routes, topOpts, server }) {
       } catch (err) {
         if (process.env.NODE_ENV !== "production") {
           console.error(`Route ${r.name} failed:`, err);
-          return err.stack;
+          return h
+            .response(`<html><body><pre>${err.stack}</pre></body></html>`)
+            .type("text/html; charset=UTF-8")
+            .code(HttpStatusCodes.INTERNAL_SERVER_ERROR);
         } else {
           return Boom.internal();
         }
