@@ -6,7 +6,7 @@ const archetype = require("@xarc/app/config/archetype");
 const Path = require("path");
 const detectCssModule = require("../util/detect-css-module");
 
-const { getOptArchetypeRequire } = require("../../../lib/utils");
+const { getOptArchetypeRequire } = require("@xarc/app-dev/lib/utils");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");

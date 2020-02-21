@@ -1,6 +1,6 @@
 "use strict";
 
-const dllUtil = require("../../webpack/util/dll-util");
+const dllUtil = require("@xarc/webpack/lib/util/dll-util");
 
 module.exports = () => {
   const tag = process.env.NODE_ENV === "production" ? "" : ".dev";

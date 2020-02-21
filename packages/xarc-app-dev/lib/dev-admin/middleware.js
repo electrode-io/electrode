@@ -8,7 +8,7 @@ const Fs = require("fs");
 const webpack = require("webpack");
 const hotHelpers = require("webpack-hot-middleware/helpers");
 const Url = require("url");
-const { getWebpackStartConfig } = require("../../config/webpack/util/custom-check");
+const { getWebpackStartConfig } = require("@xarc/webpack/lib/util/custom-check");
 const { getLogs, getLogEventAsHtml } = require("./log-reader");
 
 hotHelpers.pathMatch = (url, path) => {

@@ -17,12 +17,12 @@ const warnYarn = require("./lib/warn-yarn");
 
 const devRequire = archetype.devRequire;
 
-const detectCssModule = devRequire("./config/webpack/util/detect-css-module");
+const detectCssModule = devRequire("@xarc/webpack/lib/util/detect-css-module");
 
 const devOptRequire = require("optional-require")(devRequire);
 
 const { getWebpackStartConfig, setWebpackProfile } = devRequire(
-  "./config/webpack/util/custom-check"
+  "@xarc/webpack/lib/util/custom-check"
 );
 
 const optFlow = devOptRequire("electrode-archetype-opt-flow");

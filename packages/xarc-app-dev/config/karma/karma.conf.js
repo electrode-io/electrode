@@ -1,7 +1,7 @@
 "use strict";
 
 const Path = require("path");
-const customCheck = require("../webpack/util/custom-check");
+const customCheck = require("@xarc/webpack/lib/util/custom-check");
 const loadUserConfig = require("./util/load-user-config");
 const browserSettings = require("./browser-settings");
 const loadElectrodeDll = require("./util/load-electrode-dll");
@@ -16,7 +16,7 @@ const DLL_PATHS = loadElectrodeDll().map(x => require.resolve(x));
 function loadWebpackConfig() {
   if (!process.env.KARMA_RUN_TYPE) {
     process.env.KARMA_RUN_TYPE = "base";
-    return require(customCheck.getWebpackStartConfig("../webpack/webpack.config.test"));
+    return require(customCheck.getWebpackStartConfig("@xarc/webpack/lib/webpack.config.test"));
   }
 
   return {};
