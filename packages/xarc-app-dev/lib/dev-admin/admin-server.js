@@ -16,6 +16,7 @@ const { fork } = require("child_process");
 const ConsoleIO = require("./console-io");
 const makeDefer = require("@xarc/defer");
 const logger = require("@xarc/app/lib/logger");
+const xaa = require("xaa");
 
 const APP_SERVER_NAME = "your app server";
 const DEV_SERVER_NAME = "Electrode webpack dev server";
@@ -103,14 +104,14 @@ class AdminServer {
     const info = this.getServer(name);
     info._cancelled = true;
     if (info._startDefer) {
-      await info._startDefer.promise;
+      await xaa.try(() => xaa.runTimeout(info._startDefer.promise, 1000));
     }
     const child = info._child;
     if (child) {
       const defer = makeDefer();
       child.once("close", () => defer.resolve());
       child.kill(sig);
-      await defer.promise;
+      await xaa.try(() => xaa.runTimeout(defer.promise, 5000));
       child.kill("SIGKILL");
       info._child = undefined;
       info._starting = false;
