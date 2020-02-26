@@ -1,3 +1,26 @@
+# 2/26/2020
+
+Release Notes:
+
+- Increase minChunks to 10 for MINIMIZE_SUBAPP_CHUNKS
+- ensure original error is preserved for subapp server routes
+
+## Packages
+
+- `@xarc/app@8.0.4` `(8.0.3 => 8.0.4)`
+- `@xarc/app-dev@8.0.4` `(8.0.3 => 8.0.4)`
+- `subapp-server@1.1.8` `(1.1.7 => 1.1.8)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - Increase minChunks to 10 for MINIMIZE_SUBAPP_CHUNKS ([#1541](https://github.com/electrode-io/electrode/pull/1541)) [commit](http://github.com/electrode-io/electrode/commit/9acb8b1ac91556e71554f15e471626d9f95c508a)
+
+- `packages/subapp-server`
+
+  - ensure original error is preserved ([#1540](https://github.com/electrode-io/electrode/pull/1540)) [commit](http://github.com/electrode-io/electrode/commit/d1bafc5045d17964bf610a86dfc57430df8a1a74)
+
 # 2/20/2020
 
 Release notes:
