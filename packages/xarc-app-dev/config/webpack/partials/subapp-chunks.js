@@ -33,7 +33,7 @@ function makeConfig() {
         cacheGroups: {
           common: {
             chunks: "all",
-            minChunks: 2,
+            minChunks: 10,
             enforce: true,
             name: "common"
           }
