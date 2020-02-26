@@ -1,6 +1,6 @@
 {
   "name": "@xarc/app-dev",
-  "version": "8.0.3",
+  "version": "8.0.4",
   "description": "Electrode X application development support",
   "main": "index.js",
   "homepage": "http://www.electrode.io",
