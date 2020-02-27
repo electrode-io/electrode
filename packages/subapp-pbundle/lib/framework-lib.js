@@ -77,23 +77,10 @@ class FrameworkLib {
     }
   }
 
-  getLocation() {
-    const { request } = this.ref.context.user;
-    if (!request || !request.url) {
-      return {};
-    }
-    return {
-      pathname: request.url.pathname,
-      search: request.url.search,
-      hash: request.url.hash
-    };
-  }
-
   createTopComponent(initialProps) {
     const { request } = this.ref.context.user;
     const { subApp } = this.ref;
     const TopComponent = createElement(this.StartComponent, {
-      location: this.getLocation(),
       request,
       ...initialProps
     });
@@ -204,8 +191,9 @@ class FrameworkLib {
       this.ref.subAppServer.reduxStoreReady || this.ref.subApp.reduxStoreReady;
 
     if (reduxStoreReady) {
+      const { request } = this.ref.context.user;
       await reduxStoreReady({
-        location: this.getLocation(),
+        request,
         store: this.store
       });
     }

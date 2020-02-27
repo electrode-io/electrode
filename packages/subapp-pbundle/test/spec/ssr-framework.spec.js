@@ -404,7 +404,7 @@ describe("SSR Preact framework", function() {
         }
       },
       subAppServer: {
-        StartComponent: ({ location }) => `path is: ${location.pathname}`
+        StartComponent: ({ request }) => `path is: ${request.url.pathname}`
       },
       context: {
         user: {
