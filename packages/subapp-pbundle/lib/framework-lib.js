@@ -80,8 +80,10 @@ class FrameworkLib {
   createTopComponent(initialProps) {
     const { request } = this.ref.context.user;
     const { subApp } = this.ref;
-
-    const TopComponent = createElement(this.StartComponent, initialProps);
+    const TopComponent = createElement(this.StartComponent, {
+      request,
+      ...initialProps
+    });
 
     return createElement(
       AppContext.Provider,
@@ -189,7 +191,11 @@ class FrameworkLib {
       this.ref.subAppServer.reduxStoreReady || this.ref.subApp.reduxStoreReady;
 
     if (reduxStoreReady) {
-      await reduxStoreReady({ store: this.store });
+      const { request } = this.ref.context.user;
+      await reduxStoreReady({
+        request,
+        store: this.store
+      });
     }
   }
 }

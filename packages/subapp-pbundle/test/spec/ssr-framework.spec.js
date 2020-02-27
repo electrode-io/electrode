@@ -394,4 +394,31 @@ describe("SSR Preact framework", function() {
     await framework.handleSSR();
     expect(JSON.parse(framework.initialStateStr).hello).to.equal("universe");
   });
+
+  it("should provide location prop to StartComponent", async () => {
+    const framework = new lib.FrameworkLib({
+      subApp: {
+        __redux: true,
+        reduxCreateStore(initialState) {
+          return composeBundles(helloBundle)(initialState);
+        }
+      },
+      subAppServer: {
+        StartComponent: ({ request }) => `path is: ${request.url.pathname}`
+      },
+      context: {
+        user: {
+          request: {
+            url: {
+              pathname: "somepath"
+            }
+          }
+        }
+      },
+      options: { serverSideRendering: true }
+    });
+
+    const html = await framework.handleSSR();
+    expect(html).to.equal("path is: somepath");
+  });
 });
