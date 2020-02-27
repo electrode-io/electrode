@@ -149,12 +149,13 @@ export function getSubAppComponent({ name, timeout = 15000, onReady, onError, fa
   //
 }
 
-export function waitForSubApp(name) {
+export function waitForSubApp(name, timeout = 15000) {
   return new Promise((resolve, reject) => {
     dynamicLoadSubApp({
       name,
       onLoad: () => resolve(),
-      onError: () => reject()
+      onError: () => reject(),
+      timeout
     });
   });
 }

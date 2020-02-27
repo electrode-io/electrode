@@ -1,2 +1,3 @@
 --require node_modules/electrode-archetype-njs-module-dev/config/test/setup.js
+--require @babel/register
 --recursive
