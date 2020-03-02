@@ -1,3 +1,37 @@
+# 3/2/2020
+
+- subapp-pbundle: send location to StartComponent and reduxStoreReady (#1544)
+- Add some subapp web tests (#1543)
+- avoid dev admin stuck waiting for a child to start (#1542)
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.0.5` `(8.0.4 => 8.0.5)`
+- `@xarc/app-dev@8.0.5` `(8.0.4 => 8.0.5)`
+- `subapp-pbundle@0.0.9` `(0.0.8 => 0.0.9)`
+- `subapp-web@1.0.17` `(1.0.16 => 1.0.17)`
+
+### Lerna Updated
+
+- `subapp-react@0.0.9` `(0.0.8 => 0.0.9)`
+- `subapp-redux@1.0.18` `(1.0.17 => 1.0.18)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - avoid dev admin stuck waiting for a child to start ([#1542](https://github.com/electrode-io/electrode/pull/1542)) [commit](http://github.com/electrode-io/electrode/commit/f181afc177634d2ca1bd958b97aceee7a6c379c2)
+
+- `packages/subapp-pbundle`
+
+  - subapp-pbundle: send location to StartComponent and reduxStoreReady ([#1544](https://github.com/electrode-io/electrode/pull/1544)) [commit](http://github.com/electrode-io/electrode/commit/35285f7f11e78e6cf91b89c7b3cd354ae3c410fe)
+
+- `packages/subapp-web`
+
+  - Add some subapp web tests ([#1543](https://github.com/electrode-io/electrode/pull/1543)) [commit](http://github.com/electrode-io/electrode/commit/7298f1e706b2ad9313338bbb1e777339416340c2)
+
 # 2/26/2020
 
 Release Notes:
