@@ -7,10 +7,12 @@ const { Levels } = require("./log-reader");
 const LogParse = /^(?:\u001b\[[0-9]+?m)?([a-z]+)(?:\u001b\[[0-9]+?m)?:(?: ([\s\S]*))?$/;
 // eslint-disable-next-line no-control-regex
 const FyiLogParse = /^(?:\u001b\[[0-9]+?m)?FYI ([a-z]+):(?:\u001b\[[0-9]+?m)?(?: ([\s\S]*))?$/;
+const NodeParse = /(^Debugger listening)|(^For help, see: https:\/\/nodejs.org\/en\/docs)/;
 const UnhandledRejection = /([a-zA-Z]+): Unhandled rejection .*/;
 
 const FyiTag = ck`<yellow.inverse>[fyi]</> `;
-const BunyanTag = ck`<cyan.inverse>[byn]</> `;
+const BunyanTag = ck`<cyan.inverse>[app]</> `;
+const NodeDebuggerTag = "[nod] ";
 const BunyanLevelLookup = {
   60: "error",
   50: "error",
@@ -25,6 +27,10 @@ const parsers = [
     prefix: ""
   },
   {regex: LogParse, prefix: ""},
+  {
+    custom: (raw) => raw.match(NodeParse) ? [raw, "warn", raw] : undefined,
+    prefix: NodeDebuggerTag
+  },
   {regex: FyiLogParse, prefix: FyiTag}
 ];
 

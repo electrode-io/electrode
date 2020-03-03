@@ -110,4 +110,18 @@ describe("log-parser", function() {
     expect(level).equal("info");
     expect(message).equal(raw);
   });
+
+  it("should mark the debugger listening message as a 'warn' so it is rendered to the console", () => {
+    const raw = "Debugger listening on ws://127.0.0.1:9229/75cf1993-daff-4533-a53e-30fb92a5ad16";
+    const { level, message } = parse(raw);
+    expect(level).equal("warn");
+    expect(message).equal("[nod] Debugger listening on ws://127.0.0.1:9229/75cf1993-daff-4533-a53e-30fb92a5ad16");
+  });
+
+  it("should mark the inspector help message as a 'warn' so it is rendered to the console", () => {
+    const raw = "For help, see: https://nodejs.org/en/docs/inspector";
+    const { level, message } = parse(raw);
+    expect(level).equal("warn");
+    expect(message).equal("[nod] For help, see: https://nodejs.org/en/docs/inspector");
+  });
 });
