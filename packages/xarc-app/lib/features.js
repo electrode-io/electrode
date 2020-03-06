@@ -1,9 +1,8 @@
+"use strict";
+
 const cwd = process.env.PWD || process.cwd();
 const optionalRequire = require("optional-require")(require);
 const archetype = require("../config/archetype");
-const { optionalDependencies } = optionalRequire("@xarc/app-dev/package") || {
-  optionalDependencies: {}
-};
 let appPkg = require(`${cwd}/package.json`);
 const fs = require("fs");
 const util = require("util");
@@ -22,11 +21,42 @@ const archetypeOptions = archetype.options || {};
 
 const UTF8_REGEX = /UTF-?8$/i;
 
+const optionalDependenciesList = [
+  "electrode-archetype-opt-critical-css",
+  "electrode-archetype-opt-eslint",
+  "electrode-archetype-opt-flow",
+  "electrode-archetype-opt-inferno",
+  "electrode-archetype-opt-jest",
+  "electrode-archetype-opt-karma",
+  "electrode-archetype-opt-less",
+  "electrode-archetype-opt-mocha",
+  "electrode-archetype-opt-phantomjs",
+  "electrode-archetype-opt-postcss",
+  "electrode-archetype-opt-preact",
+  "electrode-archetype-opt-pwa",
+  "electrode-archetype-opt-react",
+  "electrode-archetype-opt-react-intl",
+  "electrode-archetype-opt-sass",
+  "electrode-archetype-opt-sinon",
+  "electrode-archetype-opt-stylus",
+  "electrode-archetype-opt-typescript"
+];
+
+const write = function() {
+  console.log.apply(undefined, arguments); // eslint-disable-line no-console
+};
+
+const writeError = function() {
+  console.error.apply(undefined, arguments); // eslint-disable-line no-console
+};
+
+const Hour = 1000 * 60 * 60; // eslint-disable-line no-magic-numbers
+
 const isSameMajorVersion = (verA, verB) => {
   // check for simple semver like x.x.x, ~x.x.x, or ^x.x.x only
   let majorA = verA.match(/[\~\^]{0,1}(\d+)\.(\d+)\.(\d+)/);
   if (majorA) {
-    majorA = majorA.slice(1, 4);
+    majorA = majorA.slice(1, 4); // eslint-disable-line no-magic-numbers
     const majorB = verB.split(".");
     if (majorB[0] !== majorA[0] || (majorB[0] === "0" && majorB[1] !== majorA[1])) {
       return false;
@@ -37,8 +67,8 @@ const isSameMajorVersion = (verA, verB) => {
 };
 
 function userCancel() {
-  console.log("User cancelled");
-  process.exit(1);
+  write("User cancelled");
+  process.exit(1); // eslint-disable-line no-process-exit
 }
 
 // Adapted from here: https://www.npmjs.com/package/has-unicode
@@ -79,11 +109,10 @@ class Feature {
     let mtime = 0;
     try {
       mtime = fs.statSync(pathName).mtime;
-    } catch (e) {}
+    } catch (e) {} // eslint-disable-line no-empty
     const currentDate = new Date();
-    const hour = 1000 * 60 * 60;
     let body;
-    if (currentDate.getTime() - mtime < hour) {
+    if (currentDate.getTime() - mtime < Hour) {
       body = JSON.parse(fs.readFileSync(pathName));
     } else {
       const { stdout } = await execPromise("npm get registry");
@@ -92,11 +121,11 @@ class Feature {
         request(
           url,
           { json: true },
-          (err, res, body) => {
+          (err, res, reqBody) => {
             if (err) {
               return reject(err);
             }
-            return resolve(body);
+            return resolve(reqBody);
           },
           reject
         );
@@ -146,12 +175,12 @@ class Feature {
     this._enabled = value;
   }
 
-  get enabledLegacy() {
+  get enabledLegacy() { // eslint-disable-line
     if (!this.electrodeOptArchetype.hasOwnProperty("optionalTagName")) {
-      throw `opt archetype ${this.packageName}: package.json missing this.electrodeOptArchetype.optionalTagName`;
+      throw new Error(`feature ${this.packageName}: package.json missing optionalTagName`);
     }
     if (!this.electrodeOptArchetype.hasOwnProperty("expectTag")) {
-      throw `opt archetype ${this.packageName}: package.json missing this.electrodeOptArchetype.expectTag`;
+      throw new Error(`feature ${this.packageName}: package.json missing expectTag`);
     }
 
     const optionalTagName = this.electrodeOptArchetype.optionalTagName;
@@ -208,7 +237,8 @@ class Feature {
       }
     }
 
-    // check if app's archetype/config/index.js options specify the feature tag for the package to be installed.
+    // check if app's archetype/config/index.js options specify the feature tag
+    //  for the package to be installed.
     if (!archetypeOptions.hasOwnProperty(optionalTagName) && defaultInstall === true) {
       // No optional flag specified for package - default to installing
       return true;
@@ -282,7 +312,7 @@ class Feature {
 }
 
 async function getFeatures() {
-  const features = Object.keys(optionalDependencies).map(packageName => new Feature(packageName));
+  const features = optionalDependenciesList.map(packageName => new Feature(packageName));
   await Promise.all(features.map(feature => feature.attachNpmAttributes()));
   features.sort(function(a, b) {
     return a.name.localeCompare(b.name);
@@ -301,7 +331,7 @@ function displayFeatureStatus(features) {
   const DISABLED = (isUnicodeSupported() ? "✗" : "N").padEnd(enabledPadding);
   const ENABLED = chalk.green((isUnicodeSupported() ? "✓" : "Y").padEnd(enabledPadding));
 
-  console.log(
+  write(
     chalk.bold("Feature".padEnd(namePadding)),
     chalk.bold("En?".padEnd(enabledPadding)),
     chalk.bold("Installed".padEnd(versionPadding)),
@@ -316,7 +346,7 @@ function displayFeatureStatus(features) {
       feature.installedVersion === feature.npmVersion
         ? chalk.cyan(feature.installedVersion.padEnd(versionPadding))
         : chalk.red(feature.installedVersion.padEnd(versionPadding));
-    console.log(
+    write(
       feature.name.padEnd(namePadding),
       (legacy ? feature.enabledLegacy : feature.enabled) ? ENABLED : DISABLED,
       version,
@@ -331,9 +361,11 @@ function displayFeatureIssues(features) {
   features.forEach(feature => (featuresByName[feature.packageName] = feature));
   features.forEach(feature => {
     if (!feature.package && feature.enabled) {
-      console.error(
-        chalk.red(`The feature "${feature.packageName}" is enabled but is not available in your node_modules directory.
-Please perform an "npm install"`)
+      writeError(
+        chalk.red(
+`The feature "${feature.packageName}" is enabled but isn’t available in your node_modules directory.
+Please perform an "npm install"`
+        )
       );
     }
 
@@ -346,7 +378,7 @@ Please perform an "npm install"`)
       )
       .forEach(exclusiveName => {
         const exclusive = featuresByName[exclusiveName];
-        console.error(
+        writeError(
           chalk.red(
             `The feature "${feature.name}" collides with "${exclusive.name}". Please uninstall one.`
           )
@@ -362,7 +394,7 @@ function writeAppPkg(pkg) {
 }
 
 function npmInstall() {
-  execSync("npm install", { stdio: [0, 1, 2] });
+  execSync("npm install", { stdio: [0, 1, 2] }); // eslint-disable-line no-magic-numbers
 }
 
 async function convertEnablements(features, runNpmInstall = true) {
@@ -420,7 +452,7 @@ async function promptForEnabled(features) {
       feature.enabled = enabled;
     });
 
-    conflictingFeature = features.find(feature => {
+    conflictingFeature = features.find(feature => { // eslint-disable-line no-loop-func
       const conflicts = feature.getConflictingFeatures(features);
       if (conflicts.length > 0) {
         const package1 = chalk.underline(feature.name);
@@ -447,7 +479,7 @@ async function promptForNpmInstall() {
   if (responses.npm) {
     npmInstall();
   } else {
-    console.log("Please run `npm install` to finalize feature selections.");
+    write("Please run `npm install` to finalize feature selections.");
   }
 }
 
