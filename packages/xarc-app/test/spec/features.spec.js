@@ -1,8 +1,8 @@
 "use strict";
 
 const expect = require("chai").expect;
-const sinon = require("sinon");
-const fs = require('fs');
+require("sinon");
+const fs = require("fs");
 const mockRequire = require("mock-require");
 const Path = require("path");
 
@@ -12,7 +12,7 @@ const eTmpDir = ".testetmp";
 // https://stackoverflow.com/questions/18052762/remove-directory-which-is-not-empty
 const deleteFolderRecursive = function(path) {
   if (!fs.existsSync(path)) return;
-  fs.readdirSync(path).forEach((file, index) => {
+  fs.readdirSync(path).forEach((file) => {
     const curPath = Path.resolve(path, file);
     if (fs.lstatSync(curPath).isDirectory()) {
       deleteFolderRecursive(curPath);
@@ -27,7 +27,7 @@ describe("features", function() {
   before(() => {
     mockRequire("../../config/archetype", {
       devRequire: require,
-      eTmpDir,
+      eTmpDir
     });
   });
 
@@ -46,7 +46,7 @@ describe("features", function() {
     mockRequire("../../config/archetype", {
       devRequire: require,
       eTmpDir,
-      options,
+      options
     });
   }
 
@@ -63,11 +63,11 @@ describe("features", function() {
     function request(url, options, callback) {
       callback(undefined, undefined, {
         "dist-tags": {
-          "latest": "fakeVersion",
+          "latest": "fakeVersion"
         },
         "versions": {
-          "fakeVersion": contents,
-        },
+          "fakeVersion": contents
+        }
       });
     }
     mockRequire("request", request);
@@ -151,8 +151,8 @@ describe("features", function() {
       electrodeOptArchetype: {
         defaultInstall: false,
         expectTag: true,
-        optionalTagName,
-      },
+        optionalTagName
+      }
     });
     mockArchetypeOptions({ someTagName: true });
     const { Feature } = require(moduleName);
@@ -171,8 +171,8 @@ describe("features", function() {
       electrodeOptArchetype: {
         defaultInstall: true,
         expectTag: true,
-        optionalTagName,
-      },
+        optionalTagName
+      }
     });
     mockArchetypeOptions({});
     const { Feature } = require(moduleName);
@@ -191,8 +191,8 @@ describe("features", function() {
       electrodeOptArchetype: {
         defaultInstall: true,
         expectTag: true,
-        optionalTagName,
-      },
+        optionalTagName
+      }
     });
     mockArchetypeOptions({ someTagName: false });
     const { Feature } = require(moduleName);
@@ -211,8 +211,8 @@ describe("features", function() {
       electrodeOptArchetype: {
         defaultInstall: false,
         expectTag: true,
-        optionalTagName,
-      },
+        optionalTagName
+      }
     });
     mockArchetypeOptions({});
     const { Feature } = require(moduleName);
