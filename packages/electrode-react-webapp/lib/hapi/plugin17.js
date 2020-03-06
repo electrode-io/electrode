@@ -28,7 +28,7 @@ const DefaultHandleRoute = (request, h, handler, content, routeOptions) => {
         respond = h.response(data);
       } else if (HttpStatus.redirect[status]) {
         respond = h.redirect(data.path);
-        return respond;
+        return respond.code(status);
       } else if (status >= 200 && status < 300) {
         respond = h.response(getDataHtml(data));
       } else if (routeOptions.responseForBadStatus) {
