@@ -1,3 +1,26 @@
+# 3/6/2020
+
+- use original status for redirect
+- Debugger messages marked as "debug" (shown in console)
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.0.6` `(8.0.5 => 8.0.6)`
+- `@xarc/app-dev@8.0.6` `(8.0.5 => 8.0.6)`
+- `electrode-react-webapp@3.8.5` `(3.8.4 => 3.8.5)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - Debugger messages marked as "debug" (shown in console) ([#1545](https://github.com/electrode-io/electrode/pull/1545)) [commit](http://github.com/electrode-io/electrode/commit/94e1a017b6beedcb3c349ab3abd7ee340b93fcd9)
+
+- `packages/electrode-react-webapp`
+
+  - use original status for redirect ([#1548](https://github.com/electrode-io/electrode/pull/1548)) [commit](http://github.com/electrode-io/electrode/commit/b8fe63a5bcbc94852cc369cc1bf0a1d8a5062e4c)
+
 # 3/2/2020
 
 - subapp-pbundle: send location to StartComponent and reduxStoreReady (#1544)
