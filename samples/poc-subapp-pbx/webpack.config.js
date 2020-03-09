@@ -31,8 +31,8 @@ const { composer, ...opts } = initWebpackConfigComposer(options);
 //
 composer.getPartial("_dev").setOverride((config, options) => {
   // Electrode default devtool to inline-source-map, which could be
-  // kind of slow, so override it with eval, which is the fastest
-  return { ...config, devtool: "eval" };
+  // kind of slow, so override it with eval-source-map, which is a little faster
+  return { ...config, devtool: "eval-source-map" };
 });
 
 //
@@ -44,6 +44,6 @@ const finalConfig = compose({ composer, ...opts });
 
 // final config can be override or even modified at will:
 
-finalConfig.devtool = "eval";
+finalConfig.devtool = "eval-source-map";
 
 module.exports = finalConfig;

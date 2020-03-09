@@ -33,18 +33,18 @@ describe("subapp-web", function() {
     delete global.document;
   });
 
-  it("dynamicLoadSubApp should return inline if no id or onLoad are specified and both subapp and bundle are available", () => {
+  it("lazyLoadSubApp should return inline if no id or onLoad are specified and both subapp and bundle are available", () => {
     require("../../src/subapp-web");
     const xarc = require("../../src/xarc").default;
     const index = require("../../src/index");
     require("../../src/subapp-web");
-    xarc.setSubApp("phantom-subapp", {start: () => "test string"});
+    xarc.setSubApp("phantom-subapp", { start: () => "test string" });
     xarc.setBundle("phantom-subapp", {});
-    const ret = index.dynamicLoadSubApp({name: "phantom-subapp"});
+    const ret = index.lazyLoadSubApp({ name: "phantom-subapp" });
     expect(ret).to.equal("test string");
   });
 
-  it("dynamicLoadSubApp should run onLoad if it is specified but not id and both subapp and bundle are available", async () => {
+  it("lazyLoadSubApp should run onLoad if it is specified but not id and both subapp and bundle are available", async () => {
     let called = false;
     mockRequire("../../src/xarc", {
       getBundle: () => true,
@@ -52,15 +52,18 @@ describe("subapp-web", function() {
       startSubApp: () => Promise.resolve()
     });
     const index = require("../../src/index");
-    index.dynamicLoadSubApp({name: "phantom-subapp", onLoad: () => {
-      called = true;
-    }});
+    index.lazyLoadSubApp({
+      name: "phantom-subapp",
+      onLoad: () => {
+        called = true;
+      }
+    });
     expect(called).to.equal(false);
     await clock.runAll();
     expect(called).to.equal(true);
   });
 
-  it("dynamicLoadSubApp should call loadSubAppBundles if the bundle is not available", async () => {
+  it("lazyLoadSubApp should call loadSubAppBundles if the bundle is not available", async () => {
     let called = false;
     global.window = {};
     mockRequire("../../src/xarc", {
@@ -70,11 +73,11 @@ describe("subapp-web", function() {
       }
     });
     const index = require("../../src/index");
-    index.dynamicLoadSubApp({name: "phantom-subapp"});
+    index.lazyLoadSubApp({ name: "phantom-subapp" });
     expect(called).to.equal(true);
   });
 
-  it("dynamicLoadSubApp should run subapp.start if id is specified", async () => {
+  it("lazyLoadSubApp should run subapp.start if id is specified", async () => {
     let called = false;
     global.window = {};
     global.document = {
@@ -90,7 +93,7 @@ describe("subapp-web", function() {
       startSubApp: () => Promise.resolve()
     });
     const index = require("../../src/index");
-    index.dynamicLoadSubApp({name: "phantom-subapp", id: "test-id"});
+    index.lazyLoadSubApp({ name: "phantom-subapp", id: "test-id" });
     expect(called).to.equal(false);
     await clock.runAll();
     expect(called).to.equal(true);
@@ -152,9 +155,11 @@ describe("subapp-web", function() {
     require("../../src/subapp-web");
     const xarc = require("../../src/xarc").default;
     const index = require("../../src/index");
-    index.setupFramework(class {
-      renderStart() {}
-    });
+    index.setupFramework(
+      class {
+        renderStart() {}
+      }
+    );
     const subAppInfo = {
       name: "testsubapp",
       Component: () => "asdf"
@@ -168,16 +173,22 @@ describe("subapp-web", function() {
       preStartCalled = true;
       return {};
     };
-    subApp.preRender = () => { preRenderCalled = true; };
-    subApp.signalReady = () => { signalReadyCalled = true; };
-    subApp.start = () => { startCalled = true; };
+    subApp.preRender = () => {
+      preRenderCalled = true;
+    };
+    subApp.signalReady = () => {
+      signalReadyCalled = true;
+    };
+    subApp.start = () => {
+      startCalled = true;
+    };
     expect(preStartCalled).to.equal(false);
     expect(preRenderCalled).to.equal(false);
     expect(signalReadyCalled).to.equal(false);
     expect(startCalled).to.equal(false);
     await clock.runAll();
     clock.restore();
-    return new Promise((accept) => {
+    return new Promise(accept => {
       setTimeout(() => {
         expect(preStartCalled).to.equal(true);
         expect(preRenderCalled).to.equal(true);
@@ -198,7 +209,7 @@ describe("subapp-web", function() {
     };
     index.loadSubApp(subAppInfo);
     const subApp = xarc.getSubApp("testsubapp");
-    const instance = subApp.getInstance({id: "testid"});
+    const instance = subApp.getInstance({ id: "testid" });
     expect(instance).to.exist;
   });
 

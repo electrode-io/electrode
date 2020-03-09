@@ -109,8 +109,23 @@ export function loadSubApp(info, renderStart, options) {
     }
   };
 
+  const findInstanceInGroup = (groupInfo, group, name) => {
+    return groupInfo.queue.find(x => {
+      if (x.options.name === name && x.options.group === group && x.options.inline) {
+        return x.instance;
+      }
+      return undefined;
+    });
+  };
+
+  const findFirstGroup = ({ name }) => {
+    for (let k in xarc.rt.groups) {
+      const groupInfo = xarc.rt.groups[k];
+      return findInstanceInGroup(groupInfo, groupInfo.group, name);
+    }
+  };
+
   subApp.inline = ({ group, props }) => {
-    const groupInfo = xarc.rt.groups[group];
     const fail = msg => {
       console.error(msg);
       return `<!--
@@ -118,20 +133,23 @@ export function loadSubApp(info, renderStart, options) {
 -->`;
     };
 
-    if (!groupInfo) {
-      return fail(`subApp inline unable to find group ${group}`);
-    }
+    let found;
 
-    const found = groupInfo.queue.find(x => {
-      if (x.options.name === subApp.info.name && x.options.group === group && x.options.inline) {
-        return x.instance;
+    if (group) {
+      const groupInfo = xarc.rt.groups[group];
+      if (!groupInfo) {
+        return fail(`subApp inline unable to find group ${group}`);
       }
-      return undefined;
-    });
-
-    if (!found) {
-      return fail(`subApp inline unable to find instance in group ${group} \
+      found = findInstanceInGroup(groupInfo, group, subApp.info.name);
+      if (!found) {
+        return fail(`subApp inline unable to find instance in group ${group} \
 for subapp ${subApp.info.name}`);
+      }
+    } else {
+      found = findFirstGroup(props);
+      if (!found) {
+        return fail(`subApp inline unable to find a group with instance for subApp ${name}`);
+      }
     }
 
     return subApp.start(found.instance, Object.assign({}, found.options, { props }), found.info);
@@ -151,7 +169,7 @@ export function getSubAppComponent({ name, timeout = 15000, onReady, onError, fa
 
 export function waitForSubApp(name, timeout = 15000) {
   return new Promise((resolve, reject) => {
-    dynamicLoadSubApp({
+    lazyLoadSubApp({
       name,
       onLoad: () => resolve(),
       onError: () => reject(),
@@ -164,7 +182,7 @@ export function isLoaded(name) {
   return Boolean(xarc.getSubApp(name));
 }
 
-export function dynamicLoadSubApp({ name, id, timeout = 15000, onLoad, onError, fallback }) {
+export function lazyLoadSubApp({ name, id, timeout = 15000, onLoad, onError, fallback }) {
   // TODO: timeout and callback
   const lname = name.toLowerCase();
 
@@ -206,7 +224,7 @@ export function dynamicLoadSubApp({ name, id, timeout = 15000, onLoad, onError, 
       }
 
       if (timeout > 50 && Date.now() - startTime > timeout) {
-        return onError(new Error("dynamicLoadSubApp Timeout"));
+        return onError(new Error("lazyLoadSubApp Timeout"));
       }
 
       return load(50);
@@ -217,6 +235,8 @@ export function dynamicLoadSubApp({ name, id, timeout = 15000, onLoad, onError, 
 
   return fallback;
 }
+
+export { lazyLoadSubApp as dynamicLoadSubApp };
 
 export function getBrowserHistory() {
   if (!xarc.rt.history) xarc.rt.history = createBrowserHistory();
