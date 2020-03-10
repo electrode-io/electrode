@@ -1,3 +1,32 @@
+# 3/10/2020
+
+- Hardcode the optional features for the features task
+- support join SubApp and DynSubApp as a single component
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.0.7` `(8.0.6 => 8.0.7)`
+- `@xarc/app-dev@8.0.7` `(8.0.6 => 8.0.7)`
+- `subapp-web@1.0.18` `(1.0.17 => 1.0.18)`
+
+### Lerna Updated
+
+- `subapp-pbundle@0.0.10` `(0.0.9 => 0.0.10)`
+- `subapp-react@0.0.10` `(0.0.9 => 0.0.10)`
+- `subapp-redux@1.0.19` `(1.0.18 => 1.0.19)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - Hardcode the optional features for the features task ([#1549](https://github.com/electrode-io/electrode/pull/1549)) [commit](http://github.com/electrode-io/electrode/commit/c403bf0cab60e8e42fc490694b87f4f7888f2842)
+
+- `packages/subapp-web`
+
+  - support join SubApp and DynSubApp as a single component ([#1550](https://github.com/electrode-io/electrode/pull/1550)) [commit](http://github.com/electrode-io/electrode/commit/03d4bed18b297679f2397e0c62a6ea3ab69dd5c9)
+
 # 3/6/2020
 
 - use original status for redirect
