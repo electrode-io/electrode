@@ -7,6 +7,7 @@ const { registerSubApp } = require("subapp-util");
 const { default: makeSubAppSpec } = require("../dist/node/make-subapp-spec");
 
 const { setupFramework } = require("./util");
+const lazyLoadSubApp = () => {};
 
 module.exports = {
   // isomorphic functions
@@ -16,8 +17,10 @@ module.exports = {
 
   setupFramework,
 
-  // dynamic load subapp is only for client side
-  dynamicLoadSubApp: () => {},
+  // lazy load subapp is only for client side
+  lazyLoadSubApp,
+  dynamicLoadSubApp: lazyLoadSubApp,
+
   getBrowserHistory: () => undefined,
 
   // server side template token processing modules
