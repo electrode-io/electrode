@@ -26,9 +26,10 @@ describe("loadAssetsFromStats", () => {
     expect(assets).to.not.have.own.property("manifest");
   });
 
-  it("should return empty assets if stats.json does not exist", () => {
-    const assets = loadAssetsFromStats("some path");
-    expect(assets).be.empty;
+  it("should throw if stats.json does not exist", () => {
+    expect(
+        () => loadAssetsFromStats("some path")
+    ).to.throw();
   });
 });
 

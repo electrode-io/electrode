@@ -235,7 +235,11 @@ const utils = {
     try {
       stats = JSON.parse(Fs.readFileSync(Path.resolve(statsPath)).toString());
     } catch (err) {
-      return {};
+      throw new Error(
+        `Couldn't find stats.json at ${Path.resolve(
+          statsPath
+        )}. Please ensure environment is set up correctly. (Did you run 'clap dev'?)`
+      );
     }
 
     const assets = {};
