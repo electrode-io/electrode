@@ -33,6 +33,11 @@ const getConfig = () => {
                 module: Path.join(__dirname, "../router-engine/content.jsx")
               }
             },
+            "/test/verbatim": {
+              content: {
+                module: Path.join(__dirname, "../router-engine/content-verbatim.jsx")
+              }
+            },
             "/{args*}": {
               content: {
                 status: 200,
@@ -390,6 +395,21 @@ describe("hapi 17 electrode-react-webapp", () => {
           throw err;
         });
     });
+  });
+
+  it("should successfully use content status verbatim", () => {
+    let server;
+    return asyncVerify(
+      () => electrodeServer(config),
+      s => {
+        server = s;
+        return server.inject({ method: "GET", url: "/test/verbatim" });
+      },
+      res => {
+        expect(res.statusCode).to.equal(560);
+      },
+      runFinally(() => stopServer(server))
+    );
   });
 
   it("should return 500 if content rejects with error", () => {
@@ -757,7 +777,6 @@ describe("hapi 17 electrode-react-webapp", () => {
         });
     });
   });
-
 
   it("should use top level htmlFile and return response headers", () => {
     configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";

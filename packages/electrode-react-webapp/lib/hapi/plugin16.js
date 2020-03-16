@@ -23,6 +23,10 @@ const DefaultHandleRoute = (request, reply, handler, content, routeOptions) => {
       let respond;
       let status = data.status;
 
+      if (data.verbatim) {
+        return reply(getDataHtml(data)).code(data.status);
+      }
+
       if (status === undefined) {
         status = 200;
         respond = reply(data);

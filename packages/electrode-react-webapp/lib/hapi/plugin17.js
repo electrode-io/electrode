@@ -20,6 +20,10 @@ const DefaultHandleRoute = (request, h, handler, content, routeOptions) => {
         throw data;
       }
 
+      if (data.verbatim) {
+        return h.response(getDataHtml(data)).code(data.status);
+      }
+
       let respond;
       let status = data.status;
 

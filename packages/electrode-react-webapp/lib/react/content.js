@@ -40,6 +40,7 @@ function transformOutput(result, context) {
   const content = context.user.content;
   if (content && content.status !== HttpStatusCodes.OK) {
     return {
+      verbatim: content.verbatim,
       status: content.status,
       path: content.path,
       store: content.store,
