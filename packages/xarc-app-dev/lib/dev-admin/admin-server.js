@@ -78,7 +78,7 @@ class AdminServer {
     const info = this.getServer(name);
     if (info._child) {
       info._child.once("exit", (code, signal) => {
-        this._io.show(ck`<orange>${name} exited code ${code} - signal ${signal}</orange>`);
+        this._io.show(ck`<orange>${name} (PID: ${info._child.pid}) exited code ${code} ${signal ? "- signal " + signal : ""}</orange>`);
         info._child = undefined;
         info._starting = false;
         this._webpackDevRelay.setAppServer(null);
@@ -421,7 +421,7 @@ ${info.name} - assuming it started.</>`);
         pendingMessages.push(data);
         return false;
       } else {
-        this._io.show(ck`<orange>${info.name} started</>`);
+        this._io.show(ck`<orange>${info.name} (PID: ${info._child.pid}) started</>`);
       }
 
       started = true;
