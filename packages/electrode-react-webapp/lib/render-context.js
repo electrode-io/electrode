@@ -46,6 +46,14 @@ class RenderContext {
     return this._stop;
   }
 
+  get status() {
+    return this._status;
+  }
+
+  set status(s) {
+    this._status = s;
+  }
+
   //
   // set this any time to fully stop and close rendering
   // stop modes:
