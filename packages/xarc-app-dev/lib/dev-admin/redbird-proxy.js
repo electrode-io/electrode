@@ -78,6 +78,22 @@ const makeUrl = (host, port, pathname = "", protocol = "http") => {
   });
 };
 
+// eslint-disable-next-line max-params
+const getLineForTree = (host) => (tree, [envVarName, port], idx, arr) => {
+  const boxChar = idx === arr.length - 1 ? "└" : "├";
+
+  return `${tree}  ${boxChar}─http://${host}:${port} (${envVarName.replace(/port/ig, "")})\n`;
+};
+
+const buildProxyTree = (options) => {
+  const {host, port} = options;
+  const portTree = Object.entries(options)
+                         .filter(([k]) => k !== "port" && k.match(/port/ig))
+                         .reduce(getLineForTree(host), "");
+
+  return `http://${host}:${port} (proxy) \n${portTree}`;
+};
+
 const startProxy = options => {
   options = Object.assign(
     {
@@ -204,9 +220,10 @@ ${rules
   }
 
   console.log(
-    ck`Electrode dev proxy server running, \
-status at <green>http://${host}:${options.port}/__proxy_admin/status</>`
-  );
+    ck`Electrode dev proxy server running:
+
+${buildProxyTree(options)}
+View status at <green>http://${host}:${options.port}/__proxy_admin/status</>`);
   console.log(ck`You can access your app at <green>http://${host}:${options.port}</>`);
 };
 
