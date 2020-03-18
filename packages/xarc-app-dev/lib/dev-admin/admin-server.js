@@ -78,7 +78,10 @@ class AdminServer {
     const info = this.getServer(name);
     if (info._child) {
       info._child.once("exit", (code, signal) => {
-        this._io.show(ck`<orange>${name} (PID: ${info._child.pid}) exited code ${code} ${signal ? "- signal " + signal : ""}</orange>`);
+        const signalText = signal ? `- signal ${signal}` : "";
+        this._io.show(
+          ck`<orange>${name} (PID: ${info._child.pid}) exited code ${code} ${signalText}</orange>`
+        );
         info._child = undefined;
         info._starting = false;
         this._webpackDevRelay.setAppServer(null);
@@ -436,7 +439,9 @@ ${info.name} - assuming it started.</>`);
         return;
       }
 
-      info._child.removeListener("message", messageHandler);
+      if (info._child) {
+        info._child.removeListener("message", messageHandler);
+      }
       this.watchServer(info.name);
       defer.resolve();
     };
@@ -444,7 +449,7 @@ ${info.name} - assuming it started.</>`);
     const handleTimeout = () => {
       startTimeout = undefined;
       if (info._child) {
-        messageHandler({ name: "timeout" });
+        messageHandler({ name: "timeout", _child: info._child });
       }
     };
 
