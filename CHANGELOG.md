@@ -1,3 +1,40 @@
+# 3/18/2020
+
+- fix(throw on missing stats.json)
+- fix: add helpful output to admin console and dev proxy
+- allow user content set verbatim flag to use response status as is
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.0.8` `(8.0.7 => 8.0.8)`
+- `@xarc/app-dev@8.0.8` `(8.0.7 => 8.0.8)`
+- `electrode-react-webapp@3.8.6` `(3.8.5 => 3.8.6)`
+- `subapp-web@1.0.19` `(1.0.18 => 1.0.19)`
+
+### Lerna Updated
+
+- `subapp-pbundle@0.0.11` `(0.0.10 => 0.0.11)`
+- `subapp-react@0.0.11` `(0.0.10 => 0.0.11)`
+- `subapp-redux@1.0.20` `(1.0.19 => 1.0.20)`
+- `subapp-server@1.1.9` `(1.1.8 => 1.1.9)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix: add helpful output to admin console and dev proxy ([#1564](https://github.com/electrode-io/electrode/pull/1564)) [commit](http://github.com/electrode-io/electrode/commit/35500b49c893b4d3f14fd8b2341a7686b60b0cb5)
+  - fix: dev admin check for null child ([#1567](https://github.com/electrode-io/electrode/pull/1567)) [commit](http://github.com/electrode-io/electrode/commit/9eb7259de687b051e3861a58a6e54f0534ed1ee7)
+
+- `packages/electrode-react-webapp`
+
+  - allow user content set verbatim flag to use response status as is ([#1562](https://github.com/electrode-io/electrode/pull/1562)) [commit](http://github.com/electrode-io/electrode/commit/c5b2069cfd605c6460955e17a8dec2a988d0b465)
+
+- `packages/subapp-web`
+
+  - fix(throw on missing stats.json) ([#1561](https://github.com/electrode-io/electrode/pull/1561)) [commit](http://github.com/electrode-io/electrode/commit/bd7f5c4ecc49467e994096c87f45c92577922bab)
+
 # 3/10/2020
 
 - Hardcode the optional features for the features task
