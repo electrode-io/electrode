@@ -13,6 +13,7 @@ const webapp = require("../../lib/hapi/plugin16");
 const ReactDOMServer = require("react-dom/server");
 const React = require("react");
 const Helmet = require("react-helmet").Helmet;
+const { runFinally, asyncVerify } = require("run-verify");
 
 describe("hapi 16 electrode-react-webapp", () => {
   let config;
@@ -39,6 +40,11 @@ describe("hapi 16 electrode-react-webapp", () => {
               "/test/component-redirect": {
                 content: {
                   module: Path.join(__dirname, "../router-engine/content.jsx")
+                }
+              },
+              "/test/verbatim": {
+                content: {
+                  module: Path.join(__dirname, "../router-engine/content-verbatim.jsx")
                 }
               },
               "/{args*}": {
@@ -260,6 +266,21 @@ describe("hapi 16 electrode-react-webapp", () => {
           throw err;
         });
     });
+  });
+
+  it("should successfully use content status verbatim", () => {
+    let server;
+    return asyncVerify(
+      () => electrodeServer(config),
+      s => {
+        server = s;
+        return server.inject({ method: "GET", url: "/test/verbatim" });
+      },
+      res => {
+        expect(res.statusCode).to.equal(560);
+      },
+      runFinally(() => stopServer(server))
+    );
   });
 
   it("should return 500 if content rejects with error", () => {

@@ -33,6 +33,16 @@ const getConfig = () => {
                 module: Path.join(__dirname, "../router-engine/content.jsx")
               }
             },
+            "/test/verbatim": {
+              content: {
+                module: Path.join(__dirname, "../router-engine/content-verbatim.jsx")
+              }
+            },
+            "/test/context-status": {
+              content: {
+                module: Path.join(__dirname, "../router-engine/context-status.jsx")
+              }
+            },
             "/{args*}": {
               content: {
                 status: 200,
@@ -61,6 +71,10 @@ const getConfig = () => {
                     options: {
                       pageTitle: "test page title 1"
                     }
+                  };
+                } else if (request.query.template === "4") {
+                  return {
+                    templateFile: Path.join(__dirname, "../jsx-templates/index-3.jsx")
                   };
                 }
                 return null; // select default
@@ -390,6 +404,21 @@ describe("hapi 17 electrode-react-webapp", () => {
           throw err;
         });
     });
+  });
+
+  it("should successfully use content status verbatim", () => {
+    let server;
+    return asyncVerify(
+      () => electrodeServer(config),
+      s => {
+        server = s;
+        return server.inject({ method: "GET", url: "/test/verbatim" });
+      },
+      res => {
+        expect(res.statusCode).to.equal(560);
+      },
+      runFinally(() => stopServer(server))
+    );
   });
 
   it("should return 500 if content rejects with error", () => {
@@ -757,7 +786,6 @@ describe("hapi 17 electrode-react-webapp", () => {
         });
     });
   });
-
 
   it("should use top level htmlFile and return response headers", () => {
     configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
@@ -1937,6 +1965,34 @@ describe("hapi 17 electrode-react-webapp", () => {
         },
         runFinally(() => stopServer(server))
       );
+    });
+
+    it("should select template 4 set context status", () => {
+      return electrodeServer(config).then(server => {
+        const compileTime = Date.now();
+        server.ext({
+          type: "onRequest",
+          method: (request, h) => {
+            request.app.webpackDev = { valid: true, hasErrors: false, compileTime };
+            return h.continue;
+          }
+        });
+
+        const makeRequest = () => {
+          return server
+            .inject({
+              method: "GET",
+              url: "/select?template=4"
+            })
+            .then(res => {
+              expect(res.statusCode).to.equal(204);
+            });
+        };
+
+        return makeRequest()
+          .then(() => makeRequest())
+          .finally(() => stopServer(server));
+      });
     });
 
     it("should select template 2 and render to static markup", () => {

@@ -2,6 +2,7 @@
 
 /* eslint-disable no-magic-numbers, max-params, max-statements, complexity */
 
+const HttpStatusCodes = require("http-status-codes");
 const HttpStatus = require("../http-status");
 
 const getDataHtml = data => (data.html !== undefined ? data.html : data);
@@ -15,22 +16,24 @@ const DefaultHandleRoute = (request, h, handler, content, routeOptions) => {
   })
     .then(context => {
       const data = context.result;
+      const html = getDataHtml(data);
 
-      if (data instanceof Error) {
-        throw data;
+      if (html instanceof Error) {
+        throw html;
       }
 
       let respond;
       let status = data.status;
 
-      if (status === undefined) {
-        status = 200;
-        respond = h.response(data);
+      if (data.verbatim || status === undefined) {
+        // if no status, fallback to context.status, and then 200
+        status = status || context.status || HttpStatusCodes.OK;
+        respond = h.response(html);
       } else if (HttpStatus.redirect[status]) {
         respond = h.redirect(data.path);
         return respond.code(status);
-      } else if (status >= 200 && status < 300) {
-        respond = h.response(getDataHtml(data));
+      } else if (status >= HttpStatusCodes.OK && status < 300) {
+        respond = h.response(html);
       } else if (routeOptions.responseForBadStatus) {
         const output = routeOptions.responseForBadStatus(request, routeOptions, data);
         status = output.status;
@@ -39,7 +42,7 @@ const DefaultHandleRoute = (request, h, handler, content, routeOptions) => {
         // should not reach here w/o html because user returned content
         // would have to return a literal string that has no `.status`
         // and html being undefined to be able to skip all the cases above
-        respond = h.response(getDataHtml(data));
+        respond = h.response(html);
       }
 
       const response = context.user && context.user.response;
