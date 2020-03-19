@@ -1,6 +1,6 @@
 "use strict";
 
-/* eslint-disable no-unused-expressions, max-statements */
+/* eslint-disable no-console, no-magic-numbers, no-unused-expressions, max-statements */
 
 const xsh = require("xsh");
 const partials = require("../partials");

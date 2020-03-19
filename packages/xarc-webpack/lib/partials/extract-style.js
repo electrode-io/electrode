@@ -6,7 +6,7 @@ const archetype = require("@xarc/app/config/archetype");
 const Path = require("path");
 const detectCssModule = require("../util/detect-css-module");
 
-const { getOptArchetypeRequire } = require("../../../lib/utils");
+const getOptRequire = require("../util/get-opt-require");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
@@ -15,19 +15,19 @@ const autoprefixer = require("autoprefixer");
 const cssLoader = require.resolve("css-loader");
 
 // Stylus support
-const optStylusRequire = getOptArchetypeRequire("electrode-archetype-opt-stylus");
+const optStylusRequire = getOptRequire("electrode-archetype-opt-stylus");
 const stylusLoader = optStylusRequire.resolve("stylus-relative-loader");
 
 // SASS support
-const optSassRequire = getOptArchetypeRequire("electrode-archetype-opt-sass");
+const optSassRequire = getOptRequire("electrode-archetype-opt-sass");
 const sassLoader = optSassRequire.resolve("sass-loader");
 
 // LESS support
-const optLessRequire = getOptArchetypeRequire("electrode-archetype-opt-less");
+const optLessRequire = getOptRequire("electrode-archetype-opt-less");
 const lessLoader = optLessRequire.resolve("less-loader");
 
 function loadPostCss() {
-  const cssModuleRequire = getOptArchetypeRequire("electrode-archetype-opt-postcss");
+  const cssModuleRequire = getOptRequire("electrode-archetype-opt-postcss");
   if (cssModuleRequire.invalid) {
     return { hasPostCss: false };
   }

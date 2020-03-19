@@ -5,6 +5,6 @@ const Path = require("path");
 module.exports = function() {
   return {
     context: Path.resolve("test", "client"),
-    entry: require.resolve("../../karma/entry")
+    entry: require.resolve("@xarc/app-dev/config/karma/entry")
   };
 };

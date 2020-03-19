@@ -2,7 +2,7 @@ const mockRequire = require("mock-require");
 const expect = require("chai").expect;
 const Path = require("path");
 
-const moduleName = "../../config/webpack/util/generate-config";
+const moduleName = "@xarc/webpack/lib/util/generate-config";
 
 describe("generate-config", function() {
   this.timeout(10000);

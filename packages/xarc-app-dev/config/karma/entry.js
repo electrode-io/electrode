@@ -2,6 +2,13 @@
 
 /* eslint-disable no-var */
 
+/**
+ * All requires in this file will be processed by webpack, which is unforgiving
+ * about missing dependencies and will generate hard module not found errors,
+ * and try/catch doesn't work.  Further, these module not found issues could
+ * cause very weird and unexpected errors from webpack.
+ */
+
 require("core-js");
 require("regenerator-runtime/runtime");
 
@@ -18,50 +25,30 @@ require("regenerator-runtime/runtime");
  * Install enzyme along with an Adapter corresponding to React 16
  * Configure enzyme to use the adapter using the top level configure(...) API
  */
-try {
-  var enzyme = require("enzyme");
-  var Adapter = require("enzyme-adapter-react-16");
-  enzyme.configure({ adapter: new Adapter() });
-} catch (err) {
-  //
-}
+var enzyme = require("enzyme");
+var Adapter = require("enzyme-adapter-react-16");
+enzyme.configure({ adapter: new Adapter() });
+
 /*
  * We need a global sinon to maintain compatibility
  * with existing test suites. However, this will be
  * removed in the future.
  */
-try {
-  var sinon = require("sinon");
-  window.sinon = sinon;
-} catch (err) {
-  //
-}
+var sinon = require("sinon");
+window.sinon = sinon;
 
 // --------------------------------------------------------------------------
 // Chai / Sinon / Mocha configuration.
 // --------------------------------------------------------------------------
 // Exports
+var chai = require("chai");
+window.expect = chai.expect;
 
-try {
-  var chai = require("chai");
-  window.expect = chai.expect;
+var sinonChai = require("sinon-chai");
+chai.use(sinonChai);
 
-  try {
-    var sinonChai = require("sinon-chai");
-    chai.use(sinonChai);
-  } catch (err) {
-    //
-  }
-
-  try {
-    var chaiShallowly = require("chai-shallowly");
-    chai.use(chaiShallowly);
-  } catch (err) {
-    //
-  }
-} catch (err) {
-  //
-}
+var chaiShallowly = require("chai-shallowly");
+chai.use(chaiShallowly);
 
 // Mocha (part of static include).
 window.mocha.setup({

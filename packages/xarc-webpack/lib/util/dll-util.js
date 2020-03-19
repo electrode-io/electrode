@@ -1,6 +1,6 @@
 "use strict";
 
-/* eslint-disable max-statements */
+/* eslint-disable max-statements, no-magic-numbers */
 
 //
 // Check config archetype.webpack.loadDlls

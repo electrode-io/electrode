@@ -1,5 +1,7 @@
 "use strict";
 
+/* eslint-disable global-require */
+
 const notifyBundleValid = require("../util/notify-bundle-valid");
 
 /* eslint max-statements: 0 */

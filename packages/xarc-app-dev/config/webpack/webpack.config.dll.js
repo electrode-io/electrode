@@ -1,3 +1,1 @@
-"use strict";
-
-module.exports = require("./util/load-config")("dll");
+module.exports = require("@xarc/webpack/lib/webpack.config.dll");

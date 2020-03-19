@@ -1,3 +1,1 @@
-"use strict";
-
-module.exports = require("./util/load-config")("production");
+module.exports = require("@xarc/webpack/lib/webpack.config");

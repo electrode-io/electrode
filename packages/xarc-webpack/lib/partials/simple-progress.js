@@ -1,5 +1,7 @@
 "use strict";
 
+/* eslint-disable no-magic-numbers */
+
 const webpack = require("webpack");
 
 let lastPct;

@@ -1,12 +1,21 @@
 "use strict";
 
 const Path = require("path");
-const customCheck = require("../webpack/util/custom-check");
+const customCheck = require("@xarc/webpack/lib/util/custom-check");
 const loadUserConfig = require("./util/load-user-config");
 const browserSettings = require("./browser-settings");
 const loadElectrodeDll = require("./util/load-electrode-dll");
 
-const MAIN_PATH = require.resolve("./entry.js");
+let MAIN_PATH;
+
+try {
+  MAIN_PATH = require.resolve(Path.resolve("test/karma-entry"));
+} catch (err) {
+  MAIN_PATH = require.resolve("./entry.js");
+}
+
+console.log(`KARMA will use entry file ${MAIN_PATH}`);
+
 const PREPROCESSORS = {};
 
 PREPROCESSORS[MAIN_PATH] = ["webpack", "sourcemap"];
@@ -16,7 +25,7 @@ const DLL_PATHS = loadElectrodeDll().map(x => require.resolve(x));
 function loadWebpackConfig() {
   if (!process.env.KARMA_RUN_TYPE) {
     process.env.KARMA_RUN_TYPE = "base";
-    return require(customCheck.getWebpackStartConfig("../webpack/webpack.config.test"));
+    return require(customCheck.getWebpackStartConfig("@xarc/webpack/lib/webpack.config.test"));
   }
 
   return {};

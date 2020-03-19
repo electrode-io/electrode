@@ -1,5 +1,7 @@
 "use strict";
 
+/* eslint-disable no-magic-numbers */
+
 /*
  * This partial adds DllReferencePlugin to the main bundle for referencing
  * DLL bundles.

@@ -14,7 +14,6 @@ const { parse } = require("./log-parser");
 const { displayLogs } = require("./log-reader");
 const { fork } = require("child_process");
 const ConsoleIO = require("./console-io");
-const makeDefer = require("@xarc/defer");
 const logger = require("@xarc/app/lib/logger");
 const xaa = require("xaa");
 
@@ -111,7 +110,7 @@ class AdminServer {
     }
     const child = info._child;
     if (child) {
-      const defer = makeDefer();
+      const defer = xaa.defer();
       child.once("close", () => defer.resolve());
       child.kill(sig);
       await xaa.try(() => xaa.runTimeout(defer.promise, 5000));
@@ -200,7 +199,7 @@ class AdminServer {
       await this.kill(name, "SIGINT");
     }
 
-    info._startDefer = makeDefer();
+    info._startDefer = xaa.defer();
     info._starting = true;
 
     //
@@ -399,7 +398,7 @@ class AdminServer {
   async waitForAppServerStart(info) {
     let startTimeout;
     let started = false;
-    const defer = makeDefer();
+    const defer = xaa.defer();
 
     const pendingMessages = [];
 

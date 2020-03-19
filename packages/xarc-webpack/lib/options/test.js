@@ -1,3 +1,5 @@
+"use strict";
+
 const baseProfile = require("../profile.base");
 const testBaseProfile = require("../profile.base.test");
 const Path = require("path");

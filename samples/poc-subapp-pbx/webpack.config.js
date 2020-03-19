@@ -4,7 +4,7 @@
 //
 "use strict";
 
-const { initWebpackConfigComposer, compose, options } = require("@xarc/app-dev/config/webpack");
+const { initWebpackConfigComposer, compose, options } = require("@xarc/webpack");
 
 //
 // options contains information pertain to Electrode's internal webpack

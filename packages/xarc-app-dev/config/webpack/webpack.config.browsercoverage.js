@@ -1,3 +1,1 @@
-"use strict";
-
-module.exports = require("./util/load-config")("browsercoverage");
+module.exports = require("@xarc/webpack/lib/webpack.config.browsercoverage");

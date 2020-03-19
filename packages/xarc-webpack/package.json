@@ -1,0 +1,89 @@
+{
+  "name": "@xarc/webpack",
+  "version": "7.0.0",
+  "description": "Electrode X webpack config",
+  "main": "lib/index.js",
+  "homepage": "http://www.electrode.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electrode-io/electrode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/electrode-io/electrode/issues"
+  },
+  "license": "Apache-2.0",
+  "scripts": {
+    "test": "clap lint test",
+    "lint": "clap lint",
+    "coverage": "clap lint check"
+  },
+  "files": [
+    "lib"
+  ],
+  "author": "Electrode (http://www.electrode.io/)",
+  "contributors": [
+    "Joel Chen <xchen@walmartlabs.com>"
+  ],
+  "dependencies": {
+    "@loadable/webpack-plugin": "^5.7.1",
+    "autoprefixer": "^9.6.0",
+    "babel-loader": "^8.0.4",
+    "chalk": "^3.0.0",
+    "chalker": "^1.1.2",
+    "css-loader": "^1.0.0",
+    "electrode-cdn-file-loader": "^1.0.0",
+    "electrode-node-resolver": "^2.0.0",
+    "file-loader": "^2.0.0",
+    "filter-scan-dir": "^1.0.9",
+    "isomorphic-loader": "^3.0.0",
+    "lodash": "^4.13.1",
+    "mini-css-extract-plugin": "^0.7.0",
+    "mkdirp": "^1.0.3",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "optional-require": "^1.0.0",
+    "require-at": "^1.0.2",
+    "url-loader": "^0.6.2",
+    "webpack": "^4.41.0",
+    "webpack-config-composer": "^1.1.3",
+    "webpack-stats-plugin": "^0.3.1",
+    "xsh": "^0.4.4"
+  },
+  "peerDependencies": {
+    "@xarc/app": "^8.0.0",
+    "@xarc/app-dev": "^8.0.0"
+  },
+  "devDependencies": {
+    "electrode-archetype-njs-module-dev": "^3.0.0",
+    "prettier": "^1.14.2",
+    "run-verify": "^1.2.1"
+  },
+  "engines": {
+    "node": ">= 10",
+    "npm": ">= 6"
+  },
+  "nyc": {
+    "all": true,
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "exclude": [
+      "coverage",
+      "*clap.js",
+      "gulpfile.js",
+      "dist",
+      "test"
+    ],
+    "check-coverage": false,
+    "statements": 0,
+    "branches": 0,
+    "functions": 0,
+    "lines": 0,
+    "cache": true
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  }
+}

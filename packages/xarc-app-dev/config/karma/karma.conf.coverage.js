@@ -10,7 +10,7 @@ process.env.KARMA_RUN_TYPE = "coverage";
 const karmaConf = require("./karma.conf");
 const loadUserConfig = require("./util/load-user-config");
 const Path = require("path");
-const customCheck = require("../webpack/util/custom-check");
+const customCheck = require("@xarc/webpack/lib/util/custom-check");
 const webpackCovCfg = require(customCheck.getWebpackStartConfig(
   "../webpack/webpack.config.coverage"
 ));

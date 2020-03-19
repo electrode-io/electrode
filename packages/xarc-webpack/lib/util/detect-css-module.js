@@ -4,10 +4,10 @@ const Path = require("path");
 const filterScanDir = require("filter-scan-dir");
 const archetype = require("@xarc/app/config/archetype");
 const AppMode = archetype.AppMode;
-const { getOptArchetypeRequire } = require("../../../lib/utils");
+const getOptRequire = require("../util/get-opt-require");
 
 function detectCSSModule() {
-  if (getOptArchetypeRequire("electrode-archetype-opt-postcss").invalid) {
+  if (getOptRequire("electrode-archetype-opt-postcss").invalid) {
     return false;
   }
 
