@@ -1,5 +1,7 @@
 "use strict";
 
+/* eslint-disable global-require */
+
 const { generateConfig } = require("./generate-config");
 
 function loadConfig(envOpt) {

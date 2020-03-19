@@ -10,7 +10,7 @@ let MAIN_PATH;
 
 try {
   MAIN_PATH = require.resolve(Path.resolve("test/karma-entry"));
-} catch {
+} catch (err) {
   MAIN_PATH = require.resolve("./entry.js");
 }
 

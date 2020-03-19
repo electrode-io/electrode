@@ -13,8 +13,9 @@
   },
   "license": "Apache-2.0",
   "scripts": {
-    "test": "npm run lint && clap test",
-    "coverage": "npm run lint && clap check"
+    "test": "clap lint test",
+    "lint": "clap lint",
+    "coverage": "clap lint check"
   },
   "files": [
     "lib"

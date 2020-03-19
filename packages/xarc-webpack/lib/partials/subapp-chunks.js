@@ -1,5 +1,7 @@
 "use strict";
 
+/* eslint-disable global-require, no-magic-numbers */
+
 const Crypto = require("crypto");
 
 const splitMap = {};

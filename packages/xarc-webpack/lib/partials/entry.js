@@ -1,5 +1,7 @@
 "use strict";
 
+/* eslint-disable no-process-exit */
+
 const Fs = require("fs");
 const _ = require("lodash");
 const optionalRequire = require("optional-require")(require);

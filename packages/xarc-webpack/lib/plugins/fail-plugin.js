@@ -1,5 +1,7 @@
 "use strict";
 
+/* eslint-disable no-process-exit */
+
 module.exports = class FailPlugin {
   constructor() {
     this.isWatch = true;

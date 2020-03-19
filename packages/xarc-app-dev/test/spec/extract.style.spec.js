@@ -1,6 +1,6 @@
 const expect = require("chai").expect;
 const archetype = require("@xarc/app/config/archetype");
-const moduleName = "../../config/webpack/partials/extract-style";
+const moduleName = "@xarc/webpack/lib/partials/extract-style";
 
 describe("@xarc/app-dev extract-styles", function() {
   this.timeout(10000);

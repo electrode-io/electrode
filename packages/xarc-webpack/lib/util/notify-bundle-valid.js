@@ -1,5 +1,7 @@
 "use strict";
 
+/* eslint-disable no-magic-numbers */
+
 const Fs = require("fs");
 const Path = require("path");
 const archetype = require("@xarc/app/config/archetype");

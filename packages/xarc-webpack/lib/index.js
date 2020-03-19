@@ -12,11 +12,12 @@ const { initWebpackConfigComposer, generateConfig } = require("./util/generate-c
 //
 const profile = process.env.ELECTRODE_WEBPACK_PROFILE || "production";
 const options = require(`./options/${profile}`);
+const partials = require("./partials");
 
 module.exports = {
   initWebpackConfigComposer,
   compose: generateConfig,
   env: profile,
   options,
-  partials: require("./partials")
+  partials
 };

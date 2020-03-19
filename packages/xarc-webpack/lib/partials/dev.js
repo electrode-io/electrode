@@ -22,8 +22,9 @@ module.exports = function() {
 
   if (process.env.WEBPACK_DEV_HOST || process.env.WEBPACK_HOST) {
     devServerConfig.public = `${archetype.webpack.devHostname}:${archetype.webpack.devPort}`;
+    const orginUrl = `${devProtocol}${archetype.webpack.devHostname}:${archetype.webpack.devPort}`;
     devServerConfig.headers = {
-      "Access-Control-Allow-Origin": `${devProtocol}${archetype.webpack.devHostname}:${archetype.webpack.devPort}`
+      "Access-Control-Allow-Origin": orginUrl
     };
   } else {
     devServerConfig.disableHostCheck = true;

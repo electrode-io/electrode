@@ -1,5 +1,7 @@
 "use strict";
 
+/* eslint-disable global-require, no-magic-numbers */
+
 const Fs = require("fs");
 const assert = require("assert");
 const Partial = require("webpack-config-composer/lib/partial");
