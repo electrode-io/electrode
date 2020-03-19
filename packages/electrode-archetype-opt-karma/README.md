@@ -1,6 +1,6 @@
 # Electrode Archetype Option Karma
 
-This is a feature package that instructs [Electrode](https://github.com/electrode-io/electrode) to install Karma.
+This is a feature package for [Electrode](https://github.com/electrode-io/electrode) to enable testing with Karma, chai, enzyme, mocha, and sinon.
 
 ## Interactive Install
 
@@ -27,7 +27,7 @@ If the features task detects that you are still using legacy features, it will g
 This feature can also be installed directly using npm:
 
 ```sh
-npm install electrode-archetype-opt-karma
+npm install --save-dev electrode-archetype-opt-karma
 ```
 
 ## License

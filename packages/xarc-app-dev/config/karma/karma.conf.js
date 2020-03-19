@@ -6,7 +6,16 @@ const loadUserConfig = require("./util/load-user-config");
 const browserSettings = require("./browser-settings");
 const loadElectrodeDll = require("./util/load-electrode-dll");
 
-const MAIN_PATH = require.resolve("./entry.js");
+let MAIN_PATH;
+
+try {
+  MAIN_PATH = require.resolve(Path.resolve("test/karma-entry"));
+} catch {
+  MAIN_PATH = require.resolve("./entry.js");
+}
+
+console.log(`KARMA will use entry file ${MAIN_PATH}`);
+
 const PREPROCESSORS = {};
 
 PREPROCESSORS[MAIN_PATH] = ["webpack", "sourcemap"];
