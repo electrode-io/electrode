@@ -10,6 +10,8 @@ const hotHelpers = require("webpack-hot-middleware/helpers");
 const Url = require("url");
 const { getWebpackStartConfig } = require("@xarc/webpack/lib/util/custom-check");
 const { getLogs, getLogEventAsHtml } = require("./log-reader");
+const { fullDevServer, controlPaths } = require("../../config/dev-proxy");
+const { formUrl } = require("../utils");
 
 hotHelpers.pathMatch = (url, path) => {
   try {
@@ -23,12 +25,10 @@ const webpackDevMiddleware = require("webpack-dev-middleware");
 const webpackHotMiddleware = require("webpack-hot-middleware");
 const serveIndex = require("serve-index-fs");
 const ck = require("chalker");
-const archetype = require("@xarc/app/config/archetype");
 const _ = require("lodash");
 const statsUtils = require("../stats-utils");
 const statsMapper = require("../stats-mapper");
-const devRequire = archetype.devRequire;
-const xsh = devRequire("xsh");
+const xsh = require("xsh");
 const shell = xsh.$;
 
 function urlJoin() {
@@ -77,15 +77,12 @@ class Middleware {
 
     const config = require(getWebpackStartConfig("webpack.config.dev.js"));
 
-    const { devPort, devHostname } = archetype.webpack;
-
-    // this is webpack-hot-middleware's default
-    this._hmrPath = "/__webpack_hmr";
+    this._hmrPath = controlPaths.hmr;
 
     const webpackHotOptions = _.merge(
       {
         log: false,
-        path: `http://${devHostname}:${devPort}${this._hmrPath}`,
+        path: formUrl({ ...fullDevServer, path: this._hmrPath }),
         heartbeat: 2000
       },
       options.hot
@@ -158,7 +155,7 @@ class Middleware {
     });
 
     this.cwdIndex = serveIndex(process.cwd(), { icons: true, hidden: true });
-    this.devBaseUrl = urlJoin(options.devBaseUrl || "/__electrode_dev");
+    this.devBaseUrl = urlJoin(options.devBaseUrl || controlPaths.dev);
     this.devBaseUrlSlash = urlJoin(this.devBaseUrl, "/");
     this.cwdBaseUrl = urlJoin(this.devBaseUrl, "/cwd");
     this.cwdContextBaseUrl = urlJoin(this.devBaseUrl, "/memfs");

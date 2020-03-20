@@ -873,6 +873,16 @@ Individual .babelrc files were generated for you in src/client and src/server
       }
     },
 
+    "dev-proxy": {
+      desc:
+        "Start Electrode dev reverse proxy by itself - useful for running it with sudo (options: --debug)",
+      task() {
+        const debug = this.argv.includes("--debug") ? "--inspect-brk " : "";
+        const proxySpawn = require.resolve("@xarc/app-dev/lib/dev-admin/redbird-spawn");
+        return `~(tty)$node ${debug}${proxySpawn}`;
+      }
+    },
+
     "test-server": xclap.concurrent(["lint-server", "lint-server-test"], "test-server-cov"),
     "test-watch-all": xclap.concurrent("server-admin.test", "test-frontend-dev-watch"),
 

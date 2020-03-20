@@ -4,6 +4,13 @@
 
 const Fs = require("fs");
 const Path = require("path");
+const optionalRequire = require("optional-require")(require);
+const {
+  settings = {},
+  devServer = {},
+  fullDevServer = {},
+  httpDevServer = {}
+} = optionalRequire("@xarc/app-dev/config/dev-proxy", { default: {} });
 
 /**
  * Tries to import bundle chunk selector function if the corresponding option is set in the
@@ -55,33 +62,22 @@ const updateFullTemplate = (baseDir, options) => {
   }
 };
 
-function findEnv(keys, defVal) {
-  const k = [].concat(keys).find(x => x && process.env.hasOwnProperty(x));
-  return k ? process.env[k] : defVal;
-}
-
 function getDefaultRouteOptions() {
-  const isDevProxy = process.env.hasOwnProperty("APP_SERVER_PORT");
-  const webpackDev = process.env.WEBPACK_DEV === "true";
+  const { webpackDev, useDevProxy } = settings;
   // temporary location to write build artifacts in dev mode
   const buildArtifacts = ".etmp";
   return {
     pageTitle: "Untitled Electrode Web Application",
-    //
     webpackDev,
-    isDevProxy,
-    //
-    devServer: {
-      host: findEnv([isDevProxy && "HOST", "WEBPACK_DEV_HOST", "WEBPACK_HOST"], "127.0.0.1"),
-      port: findEnv([isDevProxy && "PORT", "WEBPACK_DEV_PORT"], isDevProxy ? "3000" : "2992"),
-      https: Boolean(process.env.WEBPACK_DEV_HTTPS)
-    },
-    //
+    useDevProxy,
+    devServer,
+    fullDevServer,
+    httpDevServer,
     stats: webpackDev ? `${buildArtifacts}/stats.json` : "dist/server/stats.json",
     iconStats: "dist/server/iconstats.json",
     criticalCSS: "dist/js/critical.css",
     buildArtifacts,
-    prodBundleBase: "/js/",
+    prodBundleBase: "/js",
     devBundleBase: "/js",
     cspNonceValue: undefined,
     templateFile: Path.join(__dirname, "..", "resources", "index-page")

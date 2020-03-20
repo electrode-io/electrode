@@ -42,12 +42,12 @@ const Levels = {
 };
 
 async function getLogsByLine(maxLevel = DefaultMaxLevel, handleLogLine) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     const readInterface = readline.createInterface({
       input: fs.createReadStream("archetype-debug.log")
     });
 
-    readInterface.on("line", (event) => {
+    readInterface.on("line", event => {
       event = JSON.parse(event);
       const levelInfo = Levels[event.level];
       if (levelInfo.index > maxLevel) {
@@ -61,15 +61,13 @@ async function getLogsByLine(maxLevel = DefaultMaxLevel, handleLogLine) {
 
 async function getLogs(maxLevel = DefaultMaxLevel) {
   const logs = [];
-  await getLogsByLine(maxLevel, (event) => logs.push(event));
+  await getLogsByLine(maxLevel, event => logs.push(event));
   return logs;
 }
 
 function getLogEventAsAnsi(event) {
   const levelInfo = Levels[event.level];
-  const name = levelInfo.color
-    ? ck(`<${levelInfo.color}>${levelInfo.name}</>`)
-    : levelInfo.name;
+  const name = levelInfo.color ? ck(`<${levelInfo.color}>${levelInfo.name}</>`) : levelInfo.name;
   return `${name}: ${event.message}`;
 }
 
@@ -83,7 +81,7 @@ function getLogEventAsHtml(event) {
 
 // eslint-disable-next-line no-console
 async function displayLogs(maxLevel = DefaultMaxLevel, show = console.log) {
-  await getLogsByLine(maxLevel, (event) => show(getLogEventAsAnsi(event, show)));
+  await getLogsByLine(maxLevel, event => show(getLogEventAsAnsi(event, show)));
 }
 
 module.exports = {

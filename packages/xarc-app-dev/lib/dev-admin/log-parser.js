@@ -23,15 +23,15 @@ const BunyanLevelLookup = {
 };
 const parsers = [
   {
-    custom: (raw) => raw.match(UnhandledRejection) ? [raw, "error", raw] : undefined,
+    custom: raw => (raw.match(UnhandledRejection) ? [raw, "error", raw] : undefined),
     prefix: ""
   },
-  {regex: LogParse, prefix: ""},
+  { regex: LogParse, prefix: "" },
   {
-    custom: (raw) => raw.match(NodeParse) ? [raw, "warn", raw] : undefined,
+    custom: raw => (raw.match(NodeParse) ? [raw, "warn", raw] : undefined),
     prefix: NodeDebuggerTag
   },
-  {regex: FyiLogParse, prefix: FyiTag}
+  { regex: FyiLogParse, prefix: FyiTag }
 ];
 
 function parseRegex(raw, parser) {

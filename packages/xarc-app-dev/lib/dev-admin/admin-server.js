@@ -16,12 +16,13 @@ const { fork } = require("child_process");
 const ConsoleIO = require("./console-io");
 const logger = require("@xarc/app/lib/logger");
 const xaa = require("xaa");
+const {
+  settings: { useDevProxy: DEV_PROXY_ENABLED }
+} = require("../../config/dev-proxy");
 
 const APP_SERVER_NAME = "your app server";
 const DEV_SERVER_NAME = "Electrode webpack dev server";
 const PROXY_SERVER_NAME = "Electrode Dev Proxy";
-
-const DEV_PROXY_ENABLED = Boolean(process.env.APP_SERVER_PORT);
 
 class AdminServer {
   constructor(args, options) {

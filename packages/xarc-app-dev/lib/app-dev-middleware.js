@@ -59,7 +59,7 @@ class AppDevMiddleware {
       }
     });
     // notify dev-admin that app server started
-    process.nextTick(() => process.send({ name: "app-setup" }));
+    process.nextTick(() => process.send && process.send({ name: "app-setup" }));
   }
 }
 
