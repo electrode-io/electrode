@@ -8,7 +8,6 @@ const _ = require("lodash");
 const Fs = require("fs");
 const Path = require("path");
 const assert = require("assert");
-const Url = require("url");
 const util = require("util");
 const optionalRequire = require("optional-require")(require);
 const scanDir = require("filter-scan-dir");
@@ -139,11 +138,9 @@ async function setupRoutesFromFile(srcDir, server, pluginOpts) {
     return h.continue;
   });
 
-  topOpts.devBundleBase = Url.format({
-    protocol: topOpts.devServer.https ? "https" : "http",
-    hostname: topOpts.devServer.host,
-    port: topOpts.devServer.port,
-    pathname: "/js/"
+  topOpts.devBundleBase = subAppUtil.formUrl({
+    ..._.pick(topOpts.devServer, ["protocol", "host", "port"]),
+    path: "/js/"
   });
 
   // register routes
@@ -192,7 +189,7 @@ async function setupRoutesFromFile(srcDir, server, pluginOpts) {
             .type("text/html; charset=UTF-8")
             .code(200);
         } else if (HttpStatus.redirect[status]) {
-          return h.redirect(data.path);
+          return h.redirect(data.path).code(status);
         } else if (HttpStatus.displayHtml[status]) {
           return h.response(data.html !== undefined ? data.html : data).code(status);
         } else if (status >= 200 && status < 300) {
@@ -256,11 +253,9 @@ async function setupRoutesFromDir(server, pluginOpts, fromDir) {
     });
   }
 
-  topOpts.devBundleBase = Url.format({
-    protocol: topOpts.devServer.https ? "https" : "http",
-    hostname: topOpts.devServer.host,
-    port: topOpts.devServer.port,
-    pathname: "/js/"
+  topOpts.devBundleBase = subAppUtil.formUrl({
+    ..._.pick(topOpts.devServer, ["protocol", "host", "port"]),
+    path: "/js/"
   });
 
   registerRoutes({ routes, topOpts, server });

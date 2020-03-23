@@ -1,6 +1,6 @@
 "use strict";
 
-/* eslint-disable max-statements, no-console, complexity */
+/* eslint-disable max-statements, no-console, complexity, no-magic-numbers */
 
 /*
  * - Figure out all the dependencies and bundles a subapp needs and make sure
@@ -19,19 +19,33 @@ const retrieveUrl = require("request");
 const util = require("./util");
 const xaa = require("xaa");
 const jsesc = require("jsesc");
-const { loadSubAppByName, loadSubAppServerByName } = require("subapp-util");
+const { loadSubAppByName, loadSubAppServerByName, formUrl } = require("subapp-util");
 
 // global name to store client subapp runtime, ie: window.xarcV1
 // V1: version 1.
 const xarc = "window.xarcV1";
 
 // Size threshold of initial state string to embed it as a application/json script tag
-// It's more efficent to JSON.parse large JSON data instead of embedding them as JS.
+// It's more efficient to JSON.parse large JSON data instead of embedding them as JS.
 // https://quipblog.com/efficiently-loading-inlined-json-data-911960b0ac0a
 // > The data sizes are as follows: large is 1.7MB of JSON, medium is 130K,
 // > small is 10K and tiny is 781 bytes.
 const INITIAL_STATE_SIZE_FOR_JSON = 1024;
 let INITIAL_STATE_TAG_ID = 0;
+
+const makeDevDebugMessage = (msg, reportLink = true) => {
+  const reportMsg = reportLink
+    ? `\nError: Please capture this info and submit a bug report at https://github.com/electrode-io/electrode`
+    : "";
+  return `Error: at ${util.removeCwd(__filename)}
+${msg}${reportMsg}`;
+};
+
+const makeDevDebugHtml = msg => {
+  return `<h1 style="background-color: red">DEV ERROR</h1>
+<p><pre style="color: red">${msg}</pre></p>
+<!-- ${msg} -->`;
+};
 
 module.exports = function setup(setupContext, { props: setupProps }) {
   // TODO: create JSON schema to validate props
@@ -61,10 +75,18 @@ module.exports = function setup(setupContext, { props: setupProps }) {
   // to inline in the index page.
   //
   const retrieveDevServerBundle = async () => {
-    return new Promise((resolve, reject) => {
-      retrieveUrl(`${bundleBase}${bundleAsset.name}`, (err, resp, body) => {
-        if (err) {
-          reject(err);
+    return new Promise(resolve => {
+      const routeOptions = setupContext.routeOptions;
+      const path = `${bundleBase}${bundleAsset.name}`;
+      const bundleUrl = formUrl({ ...routeOptions.httpDevServer, path });
+      retrieveUrl(bundleUrl, (err, resp, body) => {
+        if (err || resp.statusCode !== 200) {
+          const msg = makeDevDebugMessage(
+            `Error: fail to retrieve subapp bundle from '${bundleUrl}' for inlining in index HTML
+${err || body}`
+          );
+          console.error(msg); // eslint-disable-line
+          resolve(makeDevDebugHtml(msg));
         } else {
           resolve(`<script>/*${name}*/${body}</script>`);
         }
@@ -81,7 +103,7 @@ module.exports = function setup(setupContext, { props: setupProps }) {
   let inlineSubAppJs;
 
   const prepareSubAppJsBundle = () => {
-    const webpackDev = process.env.WEBPACK_DEV === "true";
+    const { webpackDev } = setupContext.routeOptions;
 
     if (setupProps.inlineScript === "always" || (setupProps.inlineScript === true && !webpackDev)) {
       if (!webpackDev) {
@@ -93,7 +115,9 @@ module.exports = function setup(setupContext, { props: setupProps }) {
         } else if (ext === ".css") {
           inlineSubAppJs = `<style id="${name}">${src}</style>`;
         } else {
-          inlineSubAppJs = `<!-- UNKNOWN bundle extension ${name} -->`;
+          const msg = makeDevDebugMessage(`Error: UNKNOWN bundle extension ${name}`);
+          console.error(msg); // eslint-disable-line
+          inlineSubAppJs = makeDevDebugHtml(msg);
         }
       } else {
         inlineSubAppJs = true;
@@ -251,12 +275,13 @@ ${dynInitialState}<script>${xarc}.startSubAppOnLoad({
       const handleError = err => {
         if (process.env.NODE_ENV !== "production") {
           const stack = util.removeCwd(err.stack);
-          console.error(`SSR subapp ${name} failed <error>${stack}</error>`); // eslint-disable-line
-          outputSpot.add(`<!-- SSR subapp ${name} failed
-
-${stack}
-
--->`);
+          const msg = makeDevDebugMessage(
+            `Error: SSR subapp ${name} failed
+${stack}`,
+            false // SSR failure is likely an issue in user code, don't show link to report bug
+          );
+          console.error(msg); // eslint-disable-line
+          outputSpot.add(makeDevDebugHtml(msg));
         } else if (request && request.log) {
           request.log(["error"], { msg: `SSR subapp ${name} failed`, err });
         }

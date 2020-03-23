@@ -2,6 +2,7 @@
 
 /* eslint-disable no-console, no-process-exit, max-params */
 
+const Url = require("url");
 const Path = require("path");
 const assert = require("assert");
 const optionalRequire = require("optional-require")(require);
@@ -289,6 +290,24 @@ function refreshAllSubApps() {
   }
 }
 
+const formUrl = ({ protocol = "http", host = "", port = "", path = "" }) => {
+  let proto = protocol.toString().toLowerCase();
+  let host2 = host;
+
+  if (port) {
+    const sp = port.toString();
+    if (sp === "80") {
+      proto = "http";
+    } else if (sp === "443") {
+      proto = "https";
+    } else if (host) {
+      host2 = `${host}:${port}`;
+    }
+  }
+
+  return Url.format({ protocol: proto, host: host2, pathname: path });
+};
+
 module.exports = {
   es6Require,
   scanSubAppsFromDir,
@@ -300,5 +319,6 @@ module.exports = {
   loadSubAppByName,
   loadSubAppServerByName,
   refreshSubAppByName,
-  refreshAllSubApps
+  refreshAllSubApps,
+  formUrl
 };
