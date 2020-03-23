@@ -1,6 +1,6 @@
 {
   "name": "subapp-web",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "Electrode subapp web support",
   "module": "dist/dev/index.js",
   "main": "lib/index.js",
@@ -32,7 +32,7 @@
     "lodash": "^4.17.15",
     "optional-require": "^1.0.0",
     "request": "^2.88.0",
-    "subapp-util": "^1.0.3",
+    "subapp-util": "^1.0.4",
     "xaa": "^1.1.4"
   },
   "devDependencies": {
