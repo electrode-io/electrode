@@ -1,3 +1,52 @@
+# 3/23/2020
+
+- feat: https support for dev reverse proxy
+- extract webpack config to its own module (@xarc/webpack)
+- subapp-web: Json script escape fix
+
+## Packages
+
+- `@xarc/app@8.0.9` `(8.0.8 => 8.0.9)`
+- `@xarc/app-dev@8.0.9` `(8.0.8 => 8.0.9)`
+- `@xarc/webpack@8.0.0` `(7.0.1 => 8.0.0)`
+- `electrode-archetype-opt-karma@3.0.1` `(3.0.0 => 3.0.1)`
+- `subapp-server@1.1.10` `(1.1.9 => 1.1.10)`
+- `subapp-util@1.0.4` `(1.0.3 => 1.0.4)`
+- `subapp-web@1.0.20` `(1.0.19 => 1.0.20)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - feat: https support for dev reverse proxy ([#1572](https://github.com/electrode-io/electrode/pull/1572)) [commit](http://github.com/electrode-io/electrode/commit/6aaed710ceef2c38adb5a7b26128c35672bb6c62)
+  - extract webpack config to its own module ([#1569](https://github.com/electrode-io/electrode/pull/1569)) [commit](http://github.com/electrode-io/electrode/commit/41d81faa9da1d07a05a18db4535ede3e07b8a760)
+
+- `packages/xarc-webpack`
+
+  - extract webpack config to its own module ([#1569](https://github.com/electrode-io/electrode/pull/1569)) [commit](http://github.com/electrode-io/electrode/commit/41d81faa9da1d07a05a18db4535ede3e07b8a760)
+  - [major] mark @xarc/webpack for first release [commit](http://github.com/electrode-io/electrode/commit/98babfee0b10fc409a240db225f8d820727b9ad6)
+
+- `packages/electrode-archetype-opt-karma`
+
+  - extract webpack config to its own module ([#1569](https://github.com/electrode-io/electrode/pull/1569)) [commit](http://github.com/electrode-io/electrode/commit/41d81faa9da1d07a05a18db4535ede3e07b8a760)
+
+- `packages/subapp-server`
+
+  - feat: https support for dev reverse proxy ([#1572](https://github.com/electrode-io/electrode/pull/1572)) [commit](http://github.com/electrode-io/electrode/commit/6aaed710ceef2c38adb5a7b26128c35672bb6c62)
+
+- `packages/subapp-util`
+
+  - feat: https support for dev reverse proxy ([#1572](https://github.com/electrode-io/electrode/pull/1572)) [commit](http://github.com/electrode-io/electrode/commit/6aaed710ceef2c38adb5a7b26128c35672bb6c62)
+
+- `packages/subapp-web`
+
+  - feat: https support for dev reverse proxy ([#1572](https://github.com/electrode-io/electrode/pull/1572)) [commit](http://github.com/electrode-io/electrode/commit/6aaed710ceef2c38adb5a7b26128c35672bb6c62)
+  - subapp-web: Json script escape fix ([#1573](https://github.com/electrode-io/electrode/pull/1573)) [commit](http://github.com/electrode-io/electrode/commit/6c346548a02b9163f1011a8fb866f1e2a1569964)
+
+- `docs`
+
+  - feat: https support for dev reverse proxy ([#1572](https://github.com/electrode-io/electrode/pull/1572)) [commit](http://github.com/electrode-io/electrode/commit/6aaed710ceef2c38adb5a7b26128c35672bb6c62)
+
 # 3/18/2020
 
 - fix(throw on missing stats.json)
