@@ -226,7 +226,7 @@ module.exports = function setup(setupContext, { props: setupProps }) {
           // embed large initial state as text and parse with JSON.parse instead.
           const dataId = `${name}-initial-state-${Date.now()}-${++INITIAL_STATE_TAG_ID}`;
           dynInitialState = `<script type="application/json" id="${dataId}">
-${jsesc(initialStateStr, {
+${jsesc(JSON.parse(initialStateStr), {
   json: true,
   isScriptContext: true,
   wrap: true
