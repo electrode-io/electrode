@@ -287,9 +287,12 @@ ${stack}`,
         }
       };
 
+      let startTime;
+
       const closeOutput = () => {
         if (props.timestamp) {
-          outputSpot.add(`<!-- time: ${Date.now()} -->`);
+          const now = Date.now();
+          outputSpot.add(`<!-- time: ${now} diff: ${now - startTime} -->`);
         }
 
         outputSpot.close();
@@ -352,7 +355,8 @@ ${stack}`,
 
       const asyncProcess = async () => {
         if (props.timestamp) {
-          outputSpot.add(`<!-- time: ${Date.now()} -->`);
+          startTime = Date.now();
+          outputSpot.add(`<!-- time: ${startTime} -->`);
         }
 
         try {
