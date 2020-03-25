@@ -142,10 +142,13 @@ const utils = {
           }
         }
 
+        const baseFilePath = Path.posix.join(basePath, bundleFile);
         if (!cdnBundles[id]) {
-          cdnBundles[id] = basePath.concat(bundleFile);
+          // set a simple string
+          cdnBundles[id] = baseFilePath;
         } else {
-          cdnBundles[id] = [].concat(cdnBundles[id], basePath.concat(bundleFile));
+          // multiple assets for bundle, set and concat as an array
+          cdnBundles[id] = [].concat(cdnBundles[id], baseFilePath);
         }
       });
     }
