@@ -138,9 +138,10 @@ async function setupRoutesFromFile(srcDir, server, pluginOpts) {
     return h.continue;
   });
 
+  // in case needed, add full protocol/host/port to dev bundle base URL
   topOpts.devBundleBase = subAppUtil.formUrl({
     ..._.pick(topOpts.devServer, ["protocol", "host", "port"]),
-    path: "/js/"
+    path: topOpts.devBundleBase
   });
 
   // register routes
@@ -253,9 +254,10 @@ async function setupRoutesFromDir(server, pluginOpts, fromDir) {
     });
   }
 
+  // in case needed, add full protocol/host/port to dev bundle base URL
   topOpts.devBundleBase = subAppUtil.formUrl({
     ..._.pick(topOpts.devServer, ["protocol", "host", "port"]),
-    path: "/js/"
+    path: topOpts.devBundleBase
   });
 
   registerRoutes({ routes, topOpts, server });
