@@ -13,8 +13,6 @@ const optionalRequire = require("optional-require")(require);
 // if it's not then this will fail with an error message that it's not found.
 require.resolve(`${archetype.devArchetypeName}/package.json`);
 
-const warnYarn = require("./lib/warn-yarn");
-
 const devRequire = archetype.devRequire;
 
 const detectCssModule = devRequire("@xarc/webpack/lib/util/detect-css-module");
@@ -1211,7 +1209,6 @@ module.exports = function(xclap) {
   if (!process.env.hasOwnProperty("FORCE_COLOR")) {
     process.env.FORCE_COLOR = "1"; // force color for chalk
   }
-  xclap.load("electrode", makeTasks(xclap));
-  warnYarn();
+  xclap.load("electrode", makeTasks(xclap), -10);
   generateBrowsersListRc();
 };
