@@ -1,6 +1,6 @@
 {
   "name": "subapp-server",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "description": "Electrode SubApp app server support",
   "main": "lib/index.js",
   "scripts": {
