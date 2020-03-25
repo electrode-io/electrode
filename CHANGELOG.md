@@ -1,3 +1,39 @@
+# 3/25/2020
+
+- dep: update xclap, and yarn message
+- fix: ensure bundle asset file URL are properly formed
+- show time diff used to load a subapp
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.0.10` `(8.0.9 => 8.0.10)`
+- `@xarc/app-dev@8.0.10` `(8.0.9 => 8.0.10)`
+- `subapp-server@1.1.11` `(1.1.10 => 1.1.11)`
+- `subapp-web@1.0.21` `(1.0.20 => 1.0.21)`
+
+### Lerna Updated
+
+- `subapp-pbundle@0.0.12` `(0.0.11 => 0.0.12)`
+- `subapp-react@0.0.12` `(0.0.11 => 0.0.12)`
+- `subapp-redux@1.0.21` `(1.0.20 => 1.0.21)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - dep: update xclap, and yarn message [commit](http://github.com/electrode-io/electrode/commit/f681bf5d3935492cf0b3df60b8874cba3a1f8f19)
+
+- `packages/subapp-server`
+
+  - fix: ensure bundle asset file URL are properly formed [commit](http://github.com/electrode-io/electrode/commit/8d11390a72ac63c8e3745617e1850b31d9d67a09)
+
+- `packages/subapp-web`
+
+  - fix: ensure bundle asset file URL are properly formed [commit](http://github.com/electrode-io/electrode/commit/8d11390a72ac63c8e3745617e1850b31d9d67a09)
+  - show time diff used to load a subapp [commit](http://github.com/electrode-io/electrode/commit/ee0b34db757d134ff3f0543b40d209882d0032f1)
+
 # 3/23/2020
 
 - feat: https support for dev reverse proxy
