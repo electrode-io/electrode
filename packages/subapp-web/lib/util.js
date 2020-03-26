@@ -56,9 +56,11 @@ const utils = {
     assert(entryPoints, `subapp-web: no entry point found for ${name}`);
 
     //
-    // Normal entry output bundles are generated as <entryName>.bundle[.dev].js, like header.bundle.js
+    // Normal entry output bundles are generated as <entryName>.bundle[.dev].js,
+    // like header.bundle.js
     // See xarc-webpack/lib/partial/[output, dev]
-    // The plugin SplitChunksPlugin generate chunks with name as <entryName>.~<hash>.bundle[.dev].js
+    // The plugin SplitChunksPlugin generate chunks with name as
+    // <entryName>.~<hash>.bundle[.dev].js
     // See xarc-webpack/lib/partial/subapp-chunks.js
     //
     const matchEntry = x => x.startsWith(`${entryName}.bundle`) || x.startsWith(`${entryName}.~`);
