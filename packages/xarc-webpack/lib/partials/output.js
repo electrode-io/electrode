@@ -31,9 +31,7 @@ module.exports = () => ({
     path: getOutputPath(),
     pathinfo: inspectpack, // Enable path information for inspectpack
     publicPath: "/js/",
-    chunkFilename: babel.hasMultiTargets
-      ? `${babel.target}.[contenthash].[name].js`
-      : "[contenthash].[name].js",
+    chunkFilename: getOutputFilename(),
     filename: getOutputFilename()
   }
 });

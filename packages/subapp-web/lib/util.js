@@ -55,12 +55,15 @@ const utils = {
     const entryPoints = assets.entryPoints[entryName];
     assert(entryPoints, `subapp-web: no entry point found for ${name}`);
 
-    // without webpack optimization.runtimeChunk the entry point bundles are generated
-    // as <entryName>.bundle.js, like header.bundle.js
-    // but with runtimeChunk, the entry point are generated with hash
-    // as <hash>.<entryName>.js
-    // So check both cases.
-    const matchEntry = x => x === `${entryName}.bundle.js` || x.endsWith(`.${entryName}.js`);
+    //
+    // Normal entry output bundles are generated as <entryName>.bundle[.dev].js,
+    // like header.bundle.js
+    // See xarc-webpack/lib/partial/[output, dev]
+    // The plugin SplitChunksPlugin generate chunks with name as
+    // <entryName>.~<hash>.bundle[.dev].js
+    // See xarc-webpack/lib/partial/subapp-chunks.js
+    //
+    const matchEntry = x => x.startsWith(`${entryName}.bundle`) || x.startsWith(`${entryName}.~`);
     // map all IDs to actual assets
     const bundleAssets = entryPoints
       .map(id => {

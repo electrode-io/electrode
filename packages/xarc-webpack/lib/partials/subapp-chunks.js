@@ -16,7 +16,9 @@ function hashChunks(mod, chunks, key) {
     digest = hash.digest("hex");
     splitMap[id] = digest;
   }
-  return `${key}~${digest}`;
+  digest = digest.substr(-8);
+  // subapp-web/lib/util.js will try to match <entryName>.~ to detect subapp bundles
+  return `${key}.~${digest}`;
 }
 
 function makeConfig() {
