@@ -69,7 +69,8 @@ module.exports = function() {
     devServer: devServerConfig,
     output: {
       publicPath: makePublicPath(),
-      filename: "[name].bundle.dev.js"
+      filename: "[name].bundle.dev.js",
+      chunkFilename: "[name].bundle.dev.js"
     },
     devtool: "inline-source-map",
     // TODO: why is this here and duplicates what's in extract-style partial?  This is causing
