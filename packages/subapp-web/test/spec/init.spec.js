@@ -18,6 +18,7 @@ describe("init", function() {
     const initToken = init({
       routeOptions: {
         __internals: {},
+        cdn: {},
         stats: Path.join(__dirname, "../data/prod-stats.json")
       }
     });

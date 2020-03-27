@@ -27,9 +27,7 @@ describe("loadAssetsFromStats", () => {
   });
 
   it("should throw if stats.json does not exist", () => {
-    expect(
-        () => loadAssetsFromStats("some path")
-    ).to.throw();
+    expect(() => loadAssetsFromStats("some path")).to.throw();
   });
 });
 
@@ -91,7 +89,11 @@ describe("getCdnJsBundles", function() {
   it("should generate mapping of chunk ID to CDN URLs", () => {
     resetCdn();
     const { assets } = loadAssetsFromStats(Path.join(__dirname, "../data/prod-stats.json"));
-    const cdnJsBundles = getCdnJsBundles(assets, {}, "test/data/cdn-assets.json");
+    const cdnJsBundles = getCdnJsBundles(
+      assets,
+      { cdn: { enable: true } },
+      "test/data/cdn-assets.json"
+    );
     expect(cdnJsBundles[7]).contains("http://cdnasset.com/hash-123.js");
   });
 });
