@@ -139,7 +139,9 @@ const utils = {
               break;
             }
           }
-        } else {
+        }
+
+        if (!assetUrl) {
           // make asset URL by joining bundleFile with basePath
           assetUrl = Path.posix.join(basePath, bundleFile);
         }
