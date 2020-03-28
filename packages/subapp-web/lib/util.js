@@ -121,16 +121,7 @@ const utils = {
     }
   */
 
-  mapCdnAssets(bundlesById, basePath = "", assetsFile = "config/assets.json") {
-    if (!CDN_ASSETS) {
-      const assetsFp = Path.resolve(assetsFile);
-      try {
-        CDN_ASSETS = require(assetsFp);
-      } catch (err) {
-        CDN_ASSETS = {};
-      }
-    }
-
+  mapCdnAssets(bundlesById, basePath = "", cdnAssets) {
     const cdnBundles = {};
 
     for (const id in bundlesById) {
@@ -138,20 +129,29 @@ const utils = {
       [].concat(bundles).forEach(bundleFile => {
         if (!bundleFile) return;
 
-        for (const mapName in CDN_ASSETS) {
-          if (mapName.endsWith(bundleFile)) {
-            cdnBundles[id] = CDN_ASSETS[mapName];
-            break;
+        let assetUrl;
+
+        if (cdnAssets) {
+          // lookup asset URL from CDN mapping
+          for (const mapName in cdnAssets) {
+            if (mapName.endsWith(bundleFile)) {
+              assetUrl = cdnAssets[mapName];
+              break;
+            }
           }
         }
 
-        const baseFilePath = Path.posix.join(basePath, bundleFile);
+        if (!assetUrl) {
+          // make asset URL by joining bundleFile with basePath
+          assetUrl = Path.posix.join(basePath, bundleFile);
+        }
+
         if (!cdnBundles[id]) {
           // set a simple string
-          cdnBundles[id] = baseFilePath;
+          cdnBundles[id] = assetUrl;
         } else {
           // multiple assets for bundle, set and concat as an array
-          cdnBundles[id] = [].concat(cdnBundles[id], baseFilePath);
+          cdnBundles[id] = [].concat(cdnBundles[id], assetUrl);
         }
       });
     }
@@ -159,9 +159,19 @@ const utils = {
     return cdnBundles;
   },
 
-  getCdnJsBundles(assets, routeOptions, cdnAssetsFile) {
+  getCdnJsBundles(assets, routeOptions, cdnAssetsFile = "config/assets.json") {
     if (CDN_JS_BUNDLES) {
       return CDN_JS_BUNDLES;
+    }
+
+    if (routeOptions.cdn.enable !== false && CDN_ASSETS === undefined) {
+      try {
+        const assetsFp = Path.resolve(cdnAssetsFile);
+        CDN_ASSETS = require(assetsFp);
+      } catch (err) {
+        console.error("Error: Loading CDN assets map failed", err); // eslint-disable-line
+        CDN_ASSETS = false;
+      }
     }
 
     //
@@ -174,7 +184,7 @@ const utils = {
 
     const bundleBase = utils.getBundleBase(routeOptions);
     const allChunks = _.mergeWith({}, js, css, (a, b) => (a && b ? [].concat(a, b) : a || b));
-    return (CDN_JS_BUNDLES = utils.mapCdnAssets(allChunks, bundleBase, cdnAssetsFile));
+    return (CDN_JS_BUNDLES = utils.mapCdnAssets(allChunks, bundleBase, CDN_ASSETS));
   },
 
   getChunksById(stats) {

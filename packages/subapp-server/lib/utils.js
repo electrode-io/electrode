@@ -80,7 +80,8 @@ function getDefaultRouteOptions() {
     prodBundleBase: "/js",
     devBundleBase: "/js",
     cspNonceValue: undefined,
-    templateFile: Path.join(__dirname, "..", "resources", "index-page")
+    templateFile: Path.join(__dirname, "..", "resources", "index-page"),
+    cdn: {}
   };
 }
 
