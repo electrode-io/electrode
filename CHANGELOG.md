@@ -1,3 +1,39 @@
+# 3/30/2020
+
+-   fix: remove content hash from chunk names (subapps)
+-   fix: when using CDN assets, skip local asset URLs (subapps)
+
+## Packages
+
+### Directly Updated
+
+-   `@xarc/webpack@8.0.1` `(8.0.0 => 8.0.1)`
+-   `subapp-server@1.1.12` `(1.1.11 => 1.1.12)`
+-   `subapp-web@1.0.22` `(1.0.21 => 1.0.22)`
+
+### Lerna Updated
+
+-   `@xarc/app@8.0.11` `(8.0.10 => 8.0.11)`
+-   `@xarc/app-dev@8.0.11` `(8.0.10 => 8.0.11)`
+-   `subapp-pbundle@0.0.13` `(0.0.12 => 0.0.13)`
+-   `subapp-react@0.0.13` `(0.0.12 => 0.0.13)`
+-   `subapp-redux@1.0.22` `(1.0.21 => 1.0.22)`
+
+## Commits
+
+-   `packages/xarc-webpack`
+
+    -   fix: remove content hash from chunk names ([#1575](https://github.com/electrode-io/electrode/pull/1575)) [commit](http://github.com/electrode-io/electrode/commit/0d44b3fb574f855df6690e9ed1d4beacff3dd5e7)
+
+-   `packages/subapp-server`
+
+    -   fix: when using CDN assets, skip local asset URLs ([#1576](https://github.com/electrode-io/electrode/pull/1576)) [commit](http://github.com/electrode-io/electrode/commit/1bb6b8af3e5b235f8284e1ef5badb954b39902a7)
+
+-   `packages/subapp-web`
+
+    -   fix: remove content hash from chunk names ([#1575](https://github.com/electrode-io/electrode/pull/1575)) [commit](http://github.com/electrode-io/electrode/commit/0d44b3fb574f855df6690e9ed1d4beacff3dd5e7)
+    -   fix: when using CDN assets, skip local asset URLs ([#1576](https://github.com/electrode-io/electrode/pull/1576)) [commit](http://github.com/electrode-io/electrode/commit/1bb6b8af3e5b235f8284e1ef5badb954b39902a7)
+
 # 3/25/2020
 
 - dep: update xclap, and yarn message
