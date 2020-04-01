@@ -87,15 +87,14 @@ class SWPrecacheWebpackPlugin {
 
   apply(compiler) {
     // sw-precache needs physical files to reference so we MUST wait until after assets are emitted before generating the service-worker.
-    compiler.plugin("after-emit", (compilation, callback) => {
+    compiler.hooks.afterEmit.tap("SWPrecacheWebpackPlugin", compilation => {
       this.configure(compiler, compilation); // configure the serviceworker options
       this.checkWarnings(compilation);
 
       // generate service worker then write to file system
       this.createServiceWorker()
         .then(serviceWorker => this.writeServiceWorker(serviceWorker, compiler))
-        .then(() => callback())
-        .catch(err => callback(err));
+        .catch(err => console.log(err));
     });
   }
 
