@@ -60,7 +60,6 @@ function makeConfig() {
         maxAsyncRequests: 500,
         maxInitialRequests: 500,
         automaticNameDelimiter: "~",
-        automaticNameMaxLength: 250,
         cacheGroups: {
           vendors: {
             test: /[\\/]node_modules[\\/]/,
