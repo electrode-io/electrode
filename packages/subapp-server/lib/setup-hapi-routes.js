@@ -218,7 +218,7 @@ async function setupRoutesFromFile(srcDir, server, pluginOpts) {
 
     paths.forEach(pathObj => {
       _.each(pathObj, (method, xpath) => {
-        server.route(Object.assign({}, route.options, { path: xpath, method, handler }));
+        server.route(Object.assign({}, route.settings, { path: xpath, method, handler }));
       });
     });
   }
@@ -275,7 +275,7 @@ async function setupSubAppHapiRoutes(server, pluginOpts) {
   }
 
   // no directory based routes, then they must in a JS file
-  return await xaa.try(() => setupRoutesFromFile(srcDir, server, pluginOpts));
+  return await xaa.wrap(() => setupRoutesFromFile(srcDir, server, pluginOpts));
 }
 
 module.exports = {
