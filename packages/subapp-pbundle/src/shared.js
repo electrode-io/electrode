@@ -14,11 +14,11 @@ function setStoreContainer(container) {
 }
 
 function setSharedStore(store, container) {
-  (container || shared).xarcReduxStore = store;
+  (container || shared).store = store;
 }
 
 function getSharedStore(container) {
-  return (container || shared).xarcReduxStore;
+  return (container || shared).store;
 }
 
 function clearSharedStore(container) {
