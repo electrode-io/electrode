@@ -24,6 +24,14 @@ const APP_SERVER_NAME = "your app server";
 const DEV_SERVER_NAME = "Electrode webpack dev server";
 const PROXY_SERVER_NAME = "Electrode Dev Proxy";
 
+const SERVER_ENVS = {
+  [APP_SERVER_NAME]: {
+    XARC_BABEL_TARGET: "node"
+  },
+  [DEV_SERVER_NAME]: {},
+  [PROXY_SERVER_NAME]: {}
+};
+
 class AdminServer {
   constructor(args, options) {
     this._opts = args.opts;
@@ -214,7 +222,8 @@ class AdminServer {
     const start = () => {
       const forkOpts = {
         env: Object.assign({}, process.env, {
-          ELECTRODE_ADMIN_SERVER: true
+          ELECTRODE_ADMIN_SERVER: true,
+          ...SERVER_ENVS[name]
         }),
         silent: true
       };

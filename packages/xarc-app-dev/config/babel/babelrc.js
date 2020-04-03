@@ -30,8 +30,29 @@ function getPluginFrom(host, pluginName) {
   return requireAt(require.resolve(`${host}/package.json`)).resolve(pluginName);
 }
 
+const fileId = "xarc-app-dev:babelrc.js";
+
+const checkEnv = names => {
+  names = names.filter(x => !process.env.hasOwnProperty(x));
+  if (names.length > 0) {
+    console.error(
+      ck`\n<red>Notice:</> ${fileId}: env ${names.join(", ")} not defined - default to 'false'\n`
+    );
+  }
+};
+
+checkEnv(["ENABLE_CSS_MODULE", "ENABLE_KARMA_COV"]);
+
+const { BABEL_ENV, NODE_ENV, XARC_BABEL_TARGET, ENABLE_CSS_MODULE, ENABLE_KARMA_COV } = process.env;
+
+const enableCssModule = ENABLE_CSS_MODULE === "true";
+const enableKarmaCov = ENABLE_KARMA_COV === "true";
+const isProduction = (BABEL_ENV || NODE_ENV) === "production";
+const isTest = (BABEL_ENV || NODE_ENV) === "test";
+const isNodeTarget = XARC_BABEL_TARGET === "node";
+
 const basePlugins = [
-  ...(enableDynamicImport
+  ...(!isNodeTarget && enableDynamicImport
     ? ["@babel/plugin-syntax-dynamic-import", "@loadable/babel-plugin"]
     : [false]),
   // allow decorators on class and method
@@ -66,35 +87,14 @@ const basePlugins = [
   //     enforceDescriptions: true
   //   }
   // ],
-  "transform-node-env-inline",
-  "babel-plugin-lodash",
-  "@babel/plugin-transform-runtime",
+  !isNodeTarget && "transform-node-env-inline",
+  !isNodeTarget && "babel-plugin-lodash",
+  !isNodeTarget && "@babel/plugin-transform-runtime",
   addFlowPlugin && [
     "@babel/plugin-transform-flow-strip-types",
     { requireDirective: flowRequireDirective }
   ]
 ];
-
-const fileId = "xarc-app-dev:babelrc.js";
-
-const checkEnv = names => {
-  names = names.filter(x => !process.env.hasOwnProperty(x));
-  if (names.length > 0) {
-    console.error(
-      ck`\n<red>Notice:</> ${fileId}: env ${names.join(", ")} not defined - default to 'false'\n`
-    );
-  }
-};
-
-checkEnv(["ENABLE_CSS_MODULE", "ENABLE_KARMA_COV"]);
-
-const { BABEL_ENV, NODE_ENV, XARC_BABEL_TARGET, ENABLE_CSS_MODULE, ENABLE_KARMA_COV } = process.env;
-
-const enableCssModule = ENABLE_CSS_MODULE === "true";
-const enableKarmaCov = ENABLE_KARMA_COV === "true";
-const isProduction = (BABEL_ENV || NODE_ENV) === "production";
-const isTest = (BABEL_ENV || NODE_ENV) === "test";
-const isNodeTarget = XARC_BABEL_TARGET === "node";
 
 const plugins = basePlugins.concat(
   // test env
