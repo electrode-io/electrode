@@ -29,6 +29,11 @@ class ConsoleIO {
     console.log(...args);
   }
 
+  write(str) {
+    process.stdout.write(str);
+    this._newLine = str.endsWith("\n");
+  }
+
   exit() {
     process.exit();
   }
