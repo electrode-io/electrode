@@ -14,6 +14,7 @@ const optionalRequire = require("optional-require")(require);
 require.resolve(`${archetype.devArchetypeName}/package.json`);
 
 const devRequire = archetype.devRequire;
+const ck = devRequire("chalker");
 
 const detectCssModule = devRequire("@xarc/webpack/lib/util/detect-css-module");
 
@@ -345,29 +346,22 @@ function makeTasks(xclap) {
     });
   };
 
-  const makeBabelRc = (destDir, rcFile, resultFile = ".babelrc.js") => {
+  const makeBabelConfig = (destDir, rcFile, resultFile = "babel.config.js") => {
     destDir = Path.resolve(destDir);
 
     if (!Fs.existsSync(destDir)) return;
 
-    // must use posix path to save the path to the archetype's babel rc file
-    // to use in babel RC's extends option
-    const archRc = Path.posix.join(archetype.devPkg.name, "config", "babel", rcFile);
+    const newName = Path.join(destDir, resultFile);
 
-    const oldFn = Path.join(destDir, ".babelrc");
-    const fn = Path.join(destDir, resultFile);
-
-    if (Fs.existsSync(oldFn)) {
-      const rc = JSON.parse(Fs.readFileSync(oldFn));
-      rc.extends = archRc;
-      Fs.writeFileSync(oldFn, `${JSON.stringify(rc, null, 2)}\n`);
-      logger.info(`You have old ${oldFn} - please remove it to allow ${resultFile}.`);
-    } else if (!Fs.existsSync(fn)) {
-      logger.info(`Generating ${fn} for you - please commit it.`);
-      const rc = `module.exports = {
-  extends: "${archRc}"
+    if (!Fs.existsSync(newName)) {
+      console.log(ck`<orange>Generating <cyan>${newName}</> for you - please commit it.</>`);
+      const babelConfig = `"use strict";
+module.exports = function (api) {
+  api.cache(true);
+  const config = require("@xarc/app-dev/config/babel/babelrc.js");
+  return { ...config };
 };\n`;
-      Fs.writeFileSync(fn, rc);
+      Fs.writeFileSync(newName, babelConfig);
     }
   };
 
@@ -605,9 +599,8 @@ Individual .babelrc files were generated for you in src/client and src/server
       );
     },
 
-    ".build.client.babelrc": () => {
-      makeBabelRc(AppMode.src.dir, "babelrc-client.js");
-      makeBabelRc(AppMode.src.client, "babelrc-client.js");
+    ".build.babelrc": () => {
+      makeBabelConfig(process.cwd(), "babelrc.js");
     },
 
     ".build-lib:delete-babel-ignored-files": {
@@ -645,15 +638,17 @@ Individual .babelrc files were generated for you in src/client and src/server
         ".clean.lib:server",
         ".mk.lib.client.dir",
         ".mk.lib.server.dir",
-        ".build.client.babelrc",
-        ".build.server.babelrc"
+        ".build.babelrc"
       ],
-      task: mkCmd(
-        `~$babel ${AppMode.src.dir}`,
-        `--out-dir=${AppMode.lib.dir}`,
-        `--extensions=${babelCliExtensions}`,
-        `--source-maps=inline --copy-files`,
-        `--verbose --ignore=${babelCliIgnore}`
+      task: xclap.exec(
+        [
+          `babel ${AppMode.src.dir}`,
+          `--out-dir=${AppMode.lib.dir}`,
+          `--extensions=${babelCliExtensions}`,
+          `--source-maps=inline --copy-files`,
+          `--verbose --ignore=${babelCliIgnore}`
+        ],
+        { env: { XARC_BABEL_TARGET: "node" } }
       ),
       finally: [".build-lib:delete-babel-ignored-files"]
     },
@@ -661,7 +656,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     // TODO: to be removed
     "build-lib:client": {
       desc: false,
-      dep: [".clean.lib:client", ".mk.lib.client.dir", ".build.client.babelrc"],
+      dep: [".clean.lib:client", ".mk.lib.client.dir"],
       task: () => {
         const dirs = AppMode.hasSubApps
           ? []
@@ -698,26 +693,10 @@ Individual .babelrc files were generated for you in src/client and src/server
       );
     },
 
-    ".build.server.babelrc": () => {
-      const serverDirs =
-        scanDir.sync({
-          dir: AppMode.src.dir,
-          includeDir: true,
-          includeRoot: true,
-          grouping: true,
-          filterDir: x => x.startsWith("server") && "dirs",
-          filter: () => false
-        }).dirs || [];
-
-      serverDirs.forEach(x => {
-        makeBabelRc(x, "babelrc-server.js");
-      });
-    },
-
     // TODO: to be removed
     "build-lib:server": {
       desc: false,
-      dep: [".clean.lib:server", ".mk.lib.server.dir", ".build.server.babelrc"],
+      dep: [".clean.lib:server", ".mk.lib.server.dir"],
       task: [
         mkCmd(
           `~$babel ${AppMode.src.server} --out-dir=${AppMode.lib.server}`,
@@ -727,14 +706,6 @@ Individual .babelrc files were generated for you in src/client and src/server
         ),
         ".build-lib:delete-babel-ignored-files"
       ]
-    },
-
-    ".build.test.client.babelrc": () => {
-      return makeBabelRc("test/client", "babelrc-client.js");
-    },
-
-    ".build.test.server.babelrc": () => {
-      return makeBabelRc("test/server", "babelrc-server.js");
     },
 
     check: ["lint", "test-cov"],
@@ -760,13 +731,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     devbrk: ["dev --inspect-brk"],
     dev: {
       desc: "Start your app with watch in development mode",
-      dep: [
-        ".remove-log-files",
-        ".development-env",
-        ".mk-dist-dir",
-        ".build.client.babelrc",
-        ".build.server.babelrc"
-      ],
+      dep: [".remove-log-files", ".development-env", ".mk-dist-dir", ".build.babelrc"],
       task: function() {
         if (!Fs.existsSync(".isomorphic-loader-config.json")) {
           Fs.writeFileSync(".isomorphic-loader-config.json", JSON.stringify({}));
@@ -885,13 +850,9 @@ Individual .babelrc files were generated for you in src/client and src/server
     "test-watch-all": xclap.concurrent("server-admin.test", "test-frontend-dev-watch"),
 
     "test-ci": ["test-frontend-ci"],
-    "test-cov": [
-      ".build.test.client.babelrc",
-      ".build.test.server.babelrc",
-      "?.karma.test-frontend-cov",
-      "?.jest.test-frontend-cov",
-      "test-server-cov"
-    ].filter(x => x),
+    "test-cov": ["?.karma.test-frontend-cov", "?.jest.test-frontend-cov", "test-server-cov"].filter(
+      x => x
+    ),
     "test-dev": ["test-frontend-dev", "test-server-dev"],
 
     "test-watch": ["test-watch-all"],
@@ -1135,9 +1096,6 @@ Individual .babelrc files were generated for you in src/client and src/server
         }
 
         if (runJest) {
-          if (testDir) {
-            makeBabelRc(Path.join(testDir, "client"), "babelrc-client.js");
-          }
           const jestBinJs = require.resolve("jest/bin/jest");
           logger.info("Running jest unit tests");
 
