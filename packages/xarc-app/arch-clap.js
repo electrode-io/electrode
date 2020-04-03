@@ -14,6 +14,7 @@ const optionalRequire = require("optional-require")(require);
 require.resolve(`${archetype.devArchetypeName}/package.json`);
 
 const devRequire = archetype.devRequire;
+const ck = devRequire("chalker");
 
 const detectCssModule = devRequire("@xarc/webpack/lib/util/detect-css-module");
 
@@ -345,29 +346,22 @@ function makeTasks(xclap) {
     });
   };
 
-  const makeBabelRc = (destDir, rcFile, resultFile = ".babelrc.js") => {
+  const makeBabelConfig = (destDir, rcFile, resultFile = "babel.config.js") => {
     destDir = Path.resolve(destDir);
 
     if (!Fs.existsSync(destDir)) return;
 
-    // must use posix path to save the path to the archetype's babel rc file
-    // to use in babel RC's extends option
-    const archRc = Path.posix.join(archetype.devPkg.name, "config", "babel", rcFile);
+    const newName = Path.join(destDir, resultFile);
 
-    const oldFn = Path.join(destDir, ".babelrc");
-    const fn = Path.join(destDir, resultFile);
-
-    if (Fs.existsSync(oldFn)) {
-      const rc = JSON.parse(Fs.readFileSync(oldFn));
-      rc.extends = archRc;
-      Fs.writeFileSync(oldFn, `${JSON.stringify(rc, null, 2)}\n`);
-      logger.info(`You have old ${oldFn} - please remove it to allow ${resultFile}.`);
-    } else if (!Fs.existsSync(fn)) {
-      logger.info(`Generating ${fn} for you - please commit it.`);
-      const rc = `module.exports = {
-  extends: "${archRc}"
+    if (!Fs.existsSync(newName)) {
+      console.log(ck`<orange>Generating <cyan>${newName}</> for you - please commit it.</>`);
+      const babelConfig = `"use strict";
+module.exports = function (api) {
+  api.cache(true);
+  const config = require("@xarc/app-dev/config/babel/babelrc.js");
+  return { ...config };
 };\n`;
-      Fs.writeFileSync(fn, rc);
+      Fs.writeFileSync(newName, babelConfig);
     }
   };
 
@@ -606,7 +600,7 @@ Individual .babelrc files were generated for you in src/client and src/server
     },
 
     ".build.babelrc": () => {
-      makeBabelRc(AppMode.src.dir, "babelrc.js");
+      makeBabelConfig(process.cwd(), "babelrc.js");
     },
 
     ".build-lib:delete-babel-ignored-files": {
