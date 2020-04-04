@@ -41,13 +41,20 @@ function parse(str) {
   if (jsonData) {
     level = BunyanLevelLookup[jsonData.level];
     message = jsonData.msg || jsonData.message;
+    if (level === "warn" || level === "error") {
+      show = 2;
+    }
   }
 
-  const match = str.match(/warn|error|fail|rejection|unhandled|exception|debugger listening on/i);
-  if (match) {
-    const tag = match[0].toLowerCase();
-    level = tagLevelMap[tag];
-    show = tag === "debugger listening on" ? 1 : 2;
+  if (!level) {
+    const match = str.match(/warn|error|fail|rejection|unhandled|exception|debugger listening on/i);
+    if (match) {
+      const tag = match[0].toLowerCase();
+      if (!level) {
+        level = tagLevelMap[tag];
+      }
+      show = tag === "debugger listening on" ? 1 : 2;
+    }
   }
 
   return {
