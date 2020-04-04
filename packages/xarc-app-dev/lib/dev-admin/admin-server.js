@@ -380,13 +380,14 @@ class AdminServer {
       let str = data.toString();
       if (!str.trim()) {
         store.push("");
+        logger.info("");
       } else {
         const entry = parseLog(str.trimRight());
         store.push(entry.json || entry.message);
         if (entry.show) {
           this.deferLogsOutput(context, entry.show > 1);
         }
-        logger[entry.level](entry.message);
+        logger[entry.level](str);
       }
     };
 

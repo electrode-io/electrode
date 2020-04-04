@@ -17,11 +17,11 @@ const makeWinstonLogger = winston => {
       })
     ],
     transports: [
-      new winston.transports.Console({
-        level: "warn",
-        colorize: true,
-        prettyPrint: true
-      }),
+      // new winston.transports.Console({
+      //   level: "error",
+      //   colorize: true,
+      //   prettyPrint: true
+      // }),
       new winston.transports.File({
         json: true,
         maxsize: 10 * 1024 * 1024, // 10 MB
