@@ -15,6 +15,16 @@ const BunyanLevelLookup = {
   10: "silly"
 };
 
+const tagLevelMap = {
+  warn: "warn",
+  error: "error",
+  fail: "error",
+  rejection: "error",
+  unhandled: "error",
+  exception: "error",
+  "debugger listening on": "silly"
+};
+
 function parse(str) {
   let jsonData;
   let show;
@@ -25,17 +35,19 @@ function parse(str) {
     }
   } catch {}
 
-  const match = str.match(/warn|error|fail|rejection|unhandled|exception|debugger listening on/i);
-  if (match) {
-    show = match[0].toLowerCase() === "debugger listening on" ? 1 : 2;
-  }
-
   let message;
   let level;
 
   if (jsonData) {
     level = BunyanLevelLookup[jsonData.level];
     message = jsonData.msg || jsonData.message;
+  }
+
+  const match = str.match(/warn|error|fail|rejection|unhandled|exception|debugger listening on/i);
+  if (match) {
+    const tag = match[0].toLowerCase();
+    level = tagLevelMap[tag];
+    show = tag === "debugger listening on" ? 1 : 2;
   }
 
   return {
