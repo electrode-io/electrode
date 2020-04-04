@@ -219,8 +219,6 @@ class Middleware {
         this.webpackDev.compileTime = Date.now();
 
         const baseUrl = this._options.baseUrl;
-        console.log(ck`<cyan.underline>${urlJoin(baseUrl(), this.logUrl)}</> \
-- View logs from your browser`);
 
         const update = () => {
           if (notOk) {
@@ -422,7 +420,7 @@ ${listDirectoryHtml(this.listAssetPath, outputPath)}
 <h1>Electrode Development Dashboard</h1>
 <h3><a href="${this.cwdBaseUrl}">View current working directory files</a></h3>
 <h3><a href="${this.cwdContextBaseUrl}">View webpack dev memfs files</a></h3>
-<h3><a href="${this.logUrl}">View logs</a></h3>
+<h3><a href="${this.logUrl}">View your app server console logs</a></h3>
 </body></html>`);
       return Promise.resolve();
     }

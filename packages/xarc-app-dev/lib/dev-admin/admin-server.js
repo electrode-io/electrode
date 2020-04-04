@@ -9,15 +9,18 @@ const boxen = require("boxen");
 const ck = require("chalker");
 const chokidar = require("chokidar");
 const readline = require("readline");
+const { parse: parseLog } = require("./log-parser");
 const WebpackDevRelay = require("./webpack-dev-relay");
-const { parse } = require("./log-parser");
 const { displayLogs } = require("./log-reader");
 const { fork } = require("child_process");
 const ConsoleIO = require("./console-io");
 const logger = require("@xarc/app/lib/logger");
 const xaa = require("xaa");
+const { formUrl } = require("../utils");
 const {
-  settings: { useDevProxy: DEV_PROXY_ENABLED }
+  settings: { useDevProxy: DEV_PROXY_ENABLED },
+  fullDevServer,
+  controlPaths
 } = require("../../config/dev-proxy");
 
 const APP_SERVER_NAME = "your app server";
@@ -40,13 +43,20 @@ class AdminServer {
     this._saveWebpackReportData = undefined;
     this._webpackDevRelay = new WebpackDevRelay();
     this._servers = {};
+    //
+    // All output to terminal must be done through this IO.
+    // Any out-of-band writes to the terminal with process.stdout or console
+    // will mess up the in place progress display that log-update handles
+    //
     this._io = (options && options.inputOutput) || new ConsoleIO();
     this._shutdown = false;
+    this._fullAppLogUrl = formUrl({ ...fullDevServer, path: controlPaths.appLog });
   }
 
   async start() {
     this._wds = ck`<gray.inverse>[wds]</> `;
     this._proxy = ck`<green.inverse>[proxy]</> `;
+    this._app = ck`<cyan.inverse>[app]</> `;
     this._io.setup();
     this.handleUserInput();
 
@@ -74,7 +84,7 @@ class AdminServer {
    <magenta>W</> - Restart <magenta>E</> - <cyan>inspect-brk</> mode <magenta>R</> - <cyan>inspect</> mode <magenta>X</> - Kill&nbsp;
  <magenta>L</> - Show All Logs <magenta>0-6</> - Show Logs by Winston level
  ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown`;
-    this._io.show(boxen(menu, { margin: { left: 5 } }));
+    this._io.show("\n" + boxen(menu, { margin: { left: 5 } }));
   }
 
   getServer(name) {
@@ -134,6 +144,7 @@ class AdminServer {
 
   async _quit() {
     this._shutdown = true;
+    this._io.clearStatusMessage(true);
     this._io.show(ck`<magenta>admin server exit, shutting down servers</magenta>`);
     if (this._appWatcher) {
       this._appWatcher.close();
@@ -169,6 +180,7 @@ class AdminServer {
       e: () => this.startWebpackDevServer("--inspect-brk"),
       r: () => this.startWebpackDevServer("--inspect"),
       x: () => this.kill(DEV_SERVER_NAME, "SIGINT"),
+      z: () => this.toggleFullLogUrlMessage(APP_SERVER_NAME),
       // dev proxy server
       p: () => DEV_PROXY_ENABLED && this.sendMsg(PROXY_SERVER_NAME, { name: "restart" })
     };
@@ -260,29 +272,11 @@ class AdminServer {
   // start webpack dev server
   //
   async startWebpackDevServer(debug) {
-    let currentStatusMessage;
-    let hasStatusMessage = false;
-
-    const clearStatusMessage = out => {
-      if (hasStatusMessage) {
-        out.write("\x1b[2K\r");
-        hasStatusMessage = false;
-      }
-    };
-
-    const writeStatusMessage = out => {
-      if (!currentStatusMessage) return;
-      const l = out.columns;
-      const str = l ? currentStatusMessage.substr(0, l - 6) : currentStatusMessage;
-      const coloredStr = `\u001b[1m${str}\u001b[39m\u001b[22m`;
-      out.write(`\x1b[2K\r${this._wds}${coloredStr}`);
-      hasStatusMessage = true;
-    };
-
     const progSig = `<s> [webpack.Progress] `;
     const waitStart = async info => {
       const cwdRegex = new RegExp(process.cwd(), "g");
 
+      let progLine = "";
       const log = (out, data) => {
         data
           .toString()
@@ -290,19 +284,22 @@ class AdminServer {
           // kill empty blank lines but preserve spaces
           .map(x => x.trim() && x)
           .filter(x => x)
-          .forEach(l => {
-            if (l.startsWith(progSig)) {
-              currentStatusMessage = l.substring(progSig.length).replace(cwdRegex, ".");
-              writeStatusMessage(out);
+          .forEach(line => {
+            if (line.startsWith(progSig)) {
+              progLine = line.substring(progSig.length).replace(cwdRegex, ".");
+              out.writeStatusMessage(this._wds, progLine);
             } else {
-              clearStatusMessage(out);
-              out.write(this._wds + l.replace(cwdRegex, ".") + "\n");
+              if (progLine) {
+                out.clearStatusMessage(this._wds);
+                progLine = "";
+              }
+              out.write(this._wds + line.replace(cwdRegex, ".") + "\n");
             }
           });
       };
 
-      info._child.stdout.on("data", data => log(process.stdout, data));
-      info._child.stderr.on("data", data => log(process.stderr, data));
+      info._child.stdout.on("data", data => log(this._io, data));
+      info._child.stderr.on("data", data => log(this._io, data));
 
       this._webpackDevRelay.setWebpackServer(info._child);
 
@@ -334,8 +331,98 @@ class AdminServer {
     });
   }
 
+  toggleFullLogUrlMessage(serverName) {
+    const server = this.getServer(serverName);
+    if (server && server.options.logSaver) {
+      const { options } = server;
+      const { logSaver } = options;
+      logSaver._toggle = !logSaver._toggle;
+      if (!logSaver._toggle) {
+        this._io.clearStatusMessage(options.tag);
+      } else {
+        this.showFullLogUrlMessage(options.tag, options.fullLogUrl);
+      }
+    }
+  }
+
+  showFullLogUrlMessage(tag, url) {
+    const time = new Date().toLocaleTimeString().replace(/ /g, "");
+    this._io.writeStatusMessage(
+      tag,
+      [
+        ck`${time} - <orange>There may be logs from your app server that requires your attention.</>`,
+        ck`<orange>View full logs at: <cyan.underline>${url}</></>`
+      ],
+      true,
+      ck`<green>Press Z to hide or show this message.</>`
+    );
+  }
+
+  deferLogsOutput(context, showFullLink = true, delay = 999) {
+    const { tag, store } = context;
+
+    if (context._deferTimer) {
+      clearTimeout(context._deferTimer);
+    } else {
+      context._deferIx = store.length - 1;
+    }
+
+    if (!context._showFullLink) {
+      context._showFullLink = showFullLink;
+    }
+
+    context._deferTimer = setTimeout(() => {
+      context._deferTimer = undefined;
+      for (let ix = context._deferIx; ix < store.length; ix++) {
+        if (typeof store[ix] === "string") {
+          this._io.write(tag + store[ix] + "\n");
+        } else if (store[ix]) {
+          const json = store[ix];
+          this._io.write(tag + (json.msg || json.message || JSON.stringify(json)) + "\n");
+        }
+      }
+      if (context._showFullLink === true) {
+        context._toggle = true;
+        this.showFullLogUrlMessage(tag, context.fullLogUrl);
+      }
+      context._showFullLink = undefined;
+      if (store.length > 19999) {
+        context.store = store.slice(store.length - 9999);
+      }
+    }, delay);
+  }
+
+  saveLineOutput(context) {
+    const { inputs, store } = context;
+
+    const handler = data => {
+      let str = data.toString();
+      if (!str.trim()) {
+        store.push("");
+        logger.info("");
+      } else {
+        const entry = parseLog(str.trimRight());
+        store.push(entry.json || entry.message);
+        if (entry.show) {
+          this.deferLogsOutput(context, entry.show > 1);
+        }
+        logger[entry.level](str);
+      }
+    };
+
+    inputs.forEach(input => {
+      const reader = readline.createInterface({ input });
+      reader.on("line", handler);
+      return reader;
+    });
+  }
+
   async startAppServer(debug) {
     const skipWatch = debug === "--inspect-brk";
+
+    this._io.clearStatusMessage(this._app);
+
+    const logSaver = { tag: this._app, store: [], fullLogUrl: this._fullAppLogUrl };
 
     await this.startServer({
       name: APP_SERVER_NAME,
@@ -346,45 +433,22 @@ class AdminServer {
       skipWatch,
       noTimeoutCheck: skipWatch,
       passThruArgs: this._passThru,
+      logSaver,
       waitStart: async info => {
-        const readStdout = readline.createInterface({
-          input: info._child.stdout
-        });
-
-        readStdout.on("line", data => {
-          const { level, message } = parse(data.toString().trim());
-          logger[level](message);
-        });
-
-        const readStderr = readline.createInterface({
-          input: info._child.stderr
-        });
-
-        readStderr.on("line", data => {
-          const { level, message } = parse(data.toString().trim());
-          logger[level](message);
-        });
-
+        logSaver.inputs = [info._child.stdout, info._child.stderr];
+        this.saveLineOutput(logSaver);
         await this.waitForAppServerStart(info);
         this._webpackDevRelay.setAppServer(info._child);
       }
     });
   }
 
-  writeMultiLine(tag, data, out) {
-    const lines = data
-      .toString()
-      .replace(/\r/g, "")
-      .split("\n");
-
-    const last = lines.length - 1;
-    lines.forEach((l, ix) => {
-      if (ix < last) {
-        out.write(tag + l + "\n");
-      } else if (l) {
-        out.write(tag + l);
-      }
+  passThruLineOutput(tag, input, output) {
+    const reader = readline.createInterface({ input });
+    reader.on("line", data => {
+      output.write(tag + data.toString() + "\n");
     });
+    return reader;
   }
 
   async startProxyServer(debug) {
@@ -394,13 +458,8 @@ class AdminServer {
       debug,
       exec: Path.join(__dirname, "redbird-spawn"),
       waitStart: async info => {
-        info._child.stdout.on("data", data => {
-          this.writeMultiLine(this._proxy, data, process.stdout);
-        });
-
-        info._child.stderr.on("data", data => {
-          this.writeMultiLine(this._proxy, data, process.stderr);
-        });
+        this.passThruLineOutput(this._proxy, info._child.stdout, process.stdout);
+        this.passThruLineOutput(this._proxy, info._child.stderr, process.stderr);
       }
     });
   }

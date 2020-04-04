@@ -3,16 +3,9 @@
 const ck = require("chalker");
 const { Levels } = require("./log-reader");
 
-// eslint-disable-next-line no-control-regex
-const LogParse = /^(?:\u001b\[[0-9]+?m)?([a-z]+)(?:\u001b\[[0-9]+?m)?:(?: ([\s\S]*))?$/;
-// eslint-disable-next-line no-control-regex
-const FyiLogParse = /^(?:\u001b\[[0-9]+?m)?FYI ([a-z]+):(?:\u001b\[[0-9]+?m)?(?: ([\s\S]*))?$/;
-const NodeParse = /(^Debugger listening)|(^For help, see: https:\/\/nodejs.org\/en\/docs)/;
-const UnhandledRejection = /([a-zA-Z]+): Unhandled rejection .*/;
-
 const FyiTag = ck`<yellow.inverse>[fyi]</> `;
 const BunyanTag = ck`<cyan.inverse>[app]</> `;
-const NodeDebuggerTag = "[nod] ";
+
 const BunyanLevelLookup = {
   60: "error",
   50: "error",
@@ -21,61 +14,54 @@ const BunyanLevelLookup = {
   20: "debug",
   10: "silly"
 };
-const parsers = [
-  {
-    custom: raw => (raw.match(UnhandledRejection) ? [raw, "error", raw] : undefined),
-    prefix: ""
-  },
-  { regex: LogParse, prefix: "" },
-  {
-    custom: raw => (raw.match(NodeParse) ? [raw, "warn", raw] : undefined),
-    prefix: NodeDebuggerTag
-  },
-  { regex: FyiLogParse, prefix: FyiTag }
-];
 
-function parseRegex(raw, parser) {
-  const match = parser.custom ? parser.custom(raw) : raw.match(parser.regex);
-  if (!match) {
-    return false;
-  }
+const tagLevelMap = {
+  warn: "warn",
+  error: "error",
+  fail: "error",
+  rejection: "error",
+  unhandled: "error",
+  exception: "error",
+  "debugger listening on": "silly"
+};
 
-  const level = match[1];
-  const message = parser.prefix + (match[2] || ""); // eslint-disable-line no-magic-numbers
-
-  if (!Levels.hasOwnProperty(level)) {
-    // Unrecognized level probably means this is a malformed log line
-    return false;
-  }
-
-  return {
-    level,
-    message
-  };
-}
-
-function parse(raw) {
-  for (let lcv = 0; lcv < parsers.length; lcv++) {
-    const match = parseRegex(raw, parsers[lcv]);
-    if (match) {
-      return match;
-    }
-  }
+function parse(str) {
+  let jsonData;
+  let show;
 
   try {
-    const bunyanLogLine = JSON.parse(raw);
-    const level = BunyanLevelLookup[bunyanLogLine.level];
-    if (level) {
-      return {
-        level,
-        message: BunyanTag + bunyanLogLine.msg
-      };
+    if (str[0] === "{" || str[0] === "[") {
+      jsonData = JSON.parse(str);
     }
-  } catch (e) {} // eslint-disable-line no-empty
+  } catch {}
+
+  let message;
+  let level;
+
+  if (jsonData) {
+    level = BunyanLevelLookup[jsonData.level];
+    message = jsonData.msg || jsonData.message;
+    if (level === "warn" || level === "error") {
+      show = 2;
+    }
+  }
+
+  if (!level) {
+    const match = str.match(/warn|error|fail|rejection|unhandled|exception|debugger listening on/i);
+    if (match) {
+      const tag = match[0].toLowerCase();
+      if (!level) {
+        level = tagLevelMap[tag];
+      }
+      show = tag === "debugger listening on" ? 1 : 2;
+    }
+  }
 
   return {
-    level: "info",
-    message: raw
+    level: level || "info",
+    message: message || str,
+    json: jsonData,
+    show
   };
 }
 
