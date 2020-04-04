@@ -19,9 +19,9 @@ describe("shared redux store", function() {
     setStoreContainer(container);
     setSharedStore("hello");
     expect(getSharedStore()).to.equal("hello");
-    expect(container).to.have.property("xarcReduxStore", "hello");
+    expect(container).to.have.property("store", "hello");
     clearSharedStore();
-    expect(container).to.deep.equal({ xarcReduxStore: null });
+    expect(container).to.deep.equal({ store: null });
   });
 
   it("getReduxCreateStore should create redux-bundler store", () => {
