@@ -1283,12 +1283,12 @@
   $: sha512-yN7kbciD87WzLGc5539Tn0sApjyiGHAJgKvG9W8C7O+6c7qmoQMfVs0W4bX17eqz6C78QJqqFrtgdK5EWf6Qow==
   _: 'https://registry.npmjs.org/@hapi/hoek/-/hoek-8.5.1.tgz'
 '@jchip/redbird':
- _latest: 1.0.0
+ _latest: 1.1.0-fynlocal_h
  _:
-  ^1.0.0: 1.0.0
- 1.0.0:
-  $: sha512-Tob0gFEBUMQVQMW4wameI5CPCbE81MkUmABEiae3Q75o0cpNv5+xfGLjSQjd8O2ifhTnWX5GC+1twG9KMFLzlA==
-  _: 'https://registry.npmjs.org/@jchip/redbird/-/redbird-1.0.0.tgz'
+  ../../../redbird: 1.1.0-fynlocal_h
+ 1.1.0-fynlocal_h:
+  $: local
+  _: ../../../redbird
   dependencies:
    bluebird: '^2.11.0 || ^3.5.3'
    dolphin: '*'
@@ -1727,6 +1727,13 @@
   _: 'https://registry.npmjs.org/@types/babel__traverse/-/babel__traverse-7.0.8.tgz'
   dependencies:
    '@babel/types': ^7.3.0
+'@types/color-name':
+ _latest: 1.1.1
+ _:
+  ^1.1.1: 1.1.1
+ 1.1.1:
+  $: sha512-rr+OQyAjxze7GgWrSaJwydHStIhHq2lvY3BOC2Mj7KnzI7XK0Uw1TOOdI9lDoajEbSWLiYgoo4f1R51erQfhPQ==
+  _: 'https://registry.npmjs.org/@types/color-name/-/color-name-1.1.1.tgz'
 '@types/istanbul-lib-coverage':
  _latest: 2.0.1
  _:
@@ -2019,10 +2026,10 @@
    '@webassemblyjs/wast-parser': 1.8.5
    '@xtuc/long': 4.2.2
 '@xarc/app':
- _latest: 7.0.5-fynlocal_h
+ _latest: 8.0.12-fynlocal_h
  _:
-  ../../packages/xarc-app: 7.0.5-fynlocal_h
- 7.0.5-fynlocal_h:
+  ../../packages/xarc-app: 8.0.12-fynlocal_h
+ 8.0.12-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/xarc-app
@@ -2032,12 +2039,12 @@
    ignore-styles: ^5.0.1
    isomorphic-loader: ^3.0.0
    optional-require: ^1.0.0
-   subapp-util: ^1.0.3
+   subapp-util: ^1.0.4
 '@xarc/app-dev':
- _latest: 7.0.5-fynlocal_h
+ _latest: 8.0.12-fynlocal_h
  _:
-  ../../packages/xarc-app-dev: 7.0.5-fynlocal_h
- 7.0.5-fynlocal_h:
+  ../../packages/xarc-app-dev: 8.0.12-fynlocal_h
+ 8.0.12-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/xarc-app-dev
@@ -2054,78 +2061,84 @@
    '@babel/preset-env': ^7.1.6
    '@babel/preset-react': ^7.0.0
    '@babel/register': ^7.0.0
-   '@jchip/redbird': ^1.0.0
+   '@jchip/redbird': ^1.1.0
    '@loadable/babel-plugin': ^5.10.0
-   '@loadable/webpack-plugin': ^5.7.1
-   '@xarc/defer': ^1.0.0
-   acorn: ^6.0.5
+   '@xarc/webpack': 8.0.1
    ansi-to-html: ^0.6.8
-   autoprefixer: ^9.6.0
-   babel-loader: ^8.0.4
    babel-plugin-dynamic-import-node: ^2.2.0
    babel-plugin-lodash: ^3.3.4
    babel-plugin-minify-dead-code-elimination: ^0.5.0
    babel-plugin-transform-node-env-inline: ^0.4.3
    babel-plugin-transform-react-remove-prop-types: ^0.4.20
-   batch: ^0.6.1
-   boxen: ^2.1.0
-   chalker: ^1.1.1
+   boxen: ^4.2.0
+   chalker: ^1.2.0
    chokidar: ^2.0.4
-   convert-source-map: ^1.5.0
-   core-js: '^2 || ^3'
-   css-loader: ^1.0.0
-   electrode-cdn-file-loader: ^1.0.0
+   core-js: ^3
    electrode-hapi-compat: ^1.2.0
    electrode-node-resolver: ^2.0.0
    fastify-plugin: ^1.6.0
-   file-loader: ^2.0.0
    filter-scan-dir: ^1.0.9
-   finalhandler: ^1.1.1
    fs-extra: ^0.26.5
    identity-obj-proxy: ^3.0.0
    isomorphic-loader: ^3.0.0
-   nyc: ^14.1.1
-   jsonfile: ^2.2.2
-   loader-utils: ^1.1.0
    lodash: ^4.13.1
+   log-update: ^4.0.0
    mime: ^1.0.0
-   mini-css-extract-plugin: ^0.7.0
    mkdirp: ^0.5.1
    nix-clap: ^1.3.7
-   offline-plugin: ^4.6.1
-   optimize-css-assets-webpack-plugin: ^5.0.1
+   nyc: ^14.1.1
    optional-require: ^1.0.0
    prompts: ^2.2.1
-   raw-loader: ^0.5.1
    regenerator-runtime: ^0.13.2
    request: ^2.88.0
    require-at: ^1.0.2
-   rimraf: ^2.4.0
    serve-index-fs: ^1.10.1
    style-loader: ^0.20.1
-   subapp-util: ^1.0.3
+   subapp-util: ^1.0.4
    sudo-prompt: ^8.2.5
-   url-loader: ^0.6.2
-   webpack: ^4.41.0
    webpack-cli: ^3.3.9
-   webpack-config-composer: ^1.1.2
    webpack-dev-middleware: ^3.4.0
-   webpack-disk-plugin: 0.0.2
    webpack-hot-middleware: ^2.22.2
-   webpack-stats-plugin: ^0.2.1
    winston: ^2.3.1
-   xclap: ^0.2.38
-   xenv-config: ^1.3.0
+   xaa: ^1.3.0
+   xclap: ^0.2.48
+   xenv-config: ^1.3.1
    xsh: ^0.4.4
   peerDependencies:
-   '@xarc/app': ^7.0.4
-'@xarc/defer':
- _latest: 1.0.0
+   '@xarc/app': ^8.0.3
+'@xarc/webpack':
+ _latest: 8.0.1-fynlocal_h
  _:
-  ^1.0.0: 1.0.0
- 1.0.0:
-  $: sha512-sRz93+umHI40pmTn0l17oCd0pkRN8lJ8e3yvtOT8xPDFMPIkDslnQOCwntYt49RMPJD9ez7Jl2IFE3xnVj9Kew==
-  _: 'https://registry.npmjs.org/@xarc/defer/-/defer-1.0.0.tgz'
+  ../xarc-webpack: 8.0.1-fynlocal_h
+ 8.0.1-fynlocal_h:
+  $: local
+  _: ../../packages/xarc-webpack
+  dependencies:
+   '@loadable/webpack-plugin': ^5.7.1
+   autoprefixer: ^9.6.0
+   babel-loader: ^8.0.4
+   chalk: ^4.0.0
+   chalker: ^1.2.0
+   css-loader: ^1.0.0
+   electrode-cdn-file-loader: ^1.0.0
+   electrode-node-resolver: ^2.0.0
+   file-loader: ^2.0.0
+   filter-scan-dir: ^1.0.9
+   isomorphic-loader: ^3.0.0
+   lodash: ^4.13.1
+   mini-css-extract-plugin: ^0.7.0
+   mkdirp: ^1.0.3
+   optimize-css-assets-webpack-plugin: ^5.0.1
+   optional-require: ^1.0.0
+   require-at: ^1.0.2
+   url-loader: ^0.6.2
+   webpack: ^4.41.0
+   webpack-config-composer: ^1.1.3
+   webpack-stats-plugin: ^0.3.1
+   xsh: ^0.4.4
+  peerDependencies:
+   '@xarc/app': ^8.0.0
+   '@xarc/app-dev': ^8.0.0
 '@xtuc/ieee754':
  _latest: 1.2.0
  _:
@@ -2190,7 +2203,7 @@ acorn:
  _:
   ^3.0.4: 3.3.0
   '^5.5.0,^5.5.3': 5.7.3
-  '^6.0.1,^6.0.5,^6.2.1': 6.4.0
+  '^6.0.1,^6.2.1': 6.4.0
  6.4.0:
   $: sha512-gac8OEcQ2Li1dxIEWGZzsp2BitJxwkwcOm0zHAJLcPJaVvm58FRnk6RkuLRpU1EujipU2ZFODv2P9DLMfnV8mw==
   _: 'https://registry.npmjs.org/acorn/-/acorn-6.4.0.tgz'
@@ -2355,9 +2368,15 @@ ansi-colors:
   $: sha512-hHUXGagefjN2iRrID63xckIvotOXOojhQKWIPUZ4mNUZ9nLZW+7FMNoE1lOkEhNWYsx/7ysGIuJYCiMAA9FnrA==
   _: 'https://registry.npmjs.org/ansi-colors/-/ansi-colors-3.2.4.tgz'
 ansi-escapes:
- _latest: 4.3.0
+ _latest: 4.3.1
  _:
   ^3.0.0: 3.2.0
+  ^4.3.0: 4.3.1
+ 4.3.1:
+  $: sha512-JWF7ocqNrp8u9oqpgV+wH5ftbt+cfvv+PTjOvKLT3AdYly/LmORARfEVT1iyjwN+4MqE5UmVKoAdIBqeoCHgLA==
+  _: 'https://registry.npmjs.org/ansi-escapes/-/ansi-escapes-4.3.1.tgz'
+  dependencies:
+   type-fest: ^0.11.0
  3.2.0:
   $: sha512-cBhpre4ma+U0T1oM5fXg7Dy1Jw7zzwv7lt/GoCpr+hDQJoYnKVPLL4dCvSEFMmQurOQvSrwT7SL/DAlhBI97RQ==
   _: 'https://registry.npmjs.org/ansi-escapes/-/ansi-escapes-3.2.0.tgz'
@@ -2374,6 +2393,10 @@ ansi-regex:
   ^2.0.0: 2.1.1
   ^3.0.0: 3.0.0
   '^4.0.0,^4.1.0': 4.1.0
+  ^5.0.0: 5.0.0
+ 5.0.0:
+  $: sha512-bY6fj56OUQ0hU1KjFNDQuJFezqKdrAyFdIevADiqrWHwSlbmBNMHp5ak2f40Pm8JTFyM2mqxkG6ngkHO11f/lg==
+  _: 'https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.0.tgz'
  4.1.0:
   $: sha512-1apePfXM1UOSqw0o9IiFAovVz9M5S1Dg+4TrDwfMewQ6p/rmMueb7tWZjQ1rx4Loy1ArBggoqGpfqqdI4rondg==
   _: 'https://registry.npmjs.org/ansi-regex/-/ansi-regex-4.1.0.tgz'
@@ -2388,6 +2411,13 @@ ansi-styles:
  _:
   ^2.2.1: 2.2.1
   '^3.2.0,^3.2.1': 3.2.1
+  '^4.0.0,^4.1.0': 4.2.1
+ 4.2.1:
+  $: sha512-9VGjrMsG1vePxcSweQsN20KY/c4zN0h9fLjqAbwbPfahM3t+NL+M9HC8xeXG2I8pX5NoamTGNuomEUFI7fcUjA==
+  _: 'https://registry.npmjs.org/ansi-styles/-/ansi-styles-4.2.1.tgz'
+  dependencies:
+   '@types/color-name': ^1.1.1
+   color-convert: ^2.0.1
  3.2.1:
   $: sha512-VT0ZI6kZRdTh8YyJw3SMbYm/u+NqfsAxEpWO0Pf9sq8/e94WxxOpPKx9FR1FlyCtOVDNOQ+8ntlqFxiRc+r5qA==
   _: 'https://registry.npmjs.org/ansi-styles/-/ansi-styles-3.2.1.tgz'
@@ -2651,6 +2681,10 @@ astral-regex:
  _latest: 2.0.0
  _:
   ^1.0.0: 1.0.0
+  ^2.0.0: 2.0.0
+ 2.0.0:
+  $: sha512-Z7tMw1ytTXt5jqMcOP+OQteU1VuNK9Y02uuJtKQ1Sv69jXQKKg5cibLwGJow8yzZP+eAc18EmLGPal0bp36rvQ==
+  _: 'https://registry.npmjs.org/astral-regex/-/astral-regex-2.0.0.tgz'
  1.0.0:
   $: sha512-+Ryf6g3BKoRc7jfp7ad8tM4TtMiaWvbF/1/sQcZPkkS7ag3D5nMBCe2UfOTONtAkaG0tO0ij3C5Lwmf1EiyjHg==
   _: 'https://registry.npmjs.org/astral-regex/-/astral-regex-1.0.0.tgz'
@@ -3037,7 +3071,7 @@ base64id:
 batch:
  _latest: 0.6.1
  _:
-  '0.6.1,^0.6.1': 0.6.1
+  0.6.1: 0.6.1
  0.6.1:
   $: sha1-3DQxT05nkxgJP8dgJyUl+UvyXBY=
   _: 'https://registry.npmjs.org/batch/-/batch-0.6.1.tgz'
@@ -3205,18 +3239,19 @@ boxen:
  _latest: 4.2.0
  _:
   ^1.2.1: 1.3.0
-  ^2.1.0: 2.1.0
- 2.1.0:
-  $: sha512-luq3RQOt2U5sUX+fiu+qnT+wWnHDcATLpEe63jvge6GUZO99AKbVRfp97d2jgLvq1iQa0ORzaAm4lGVG52ZSlw==
-  _: 'https://registry.npmjs.org/boxen/-/boxen-2.1.0.tgz'
+  ^4.2.0: 4.2.0
+ 4.2.0:
+  $: sha512-eB4uT9RGzg2odpER62bBwSLvUeGC+WbRjjyyFhGsKnc8wp/m0+hQsMUvUe3H2V0D5vw0nBdO1hCJoZo5mKeuIQ==
+  _: 'https://registry.npmjs.org/boxen/-/boxen-4.2.0.tgz'
   dependencies:
    ansi-align: ^3.0.0
-   camelcase: ^5.0.0
-   chalk: ^2.4.1
-   cli-boxes: ^1.0.0
-   string-width: ^3.0.0
-   term-size: ^1.2.0
-   widest-line: ^2.0.0
+   camelcase: ^5.3.1
+   chalk: ^3.0.0
+   cli-boxes: ^2.2.0
+   string-width: ^4.1.0
+   term-size: ^2.1.0
+   type-fest: ^0.8.1
+   widest-line: ^3.1.0
  1.3.0:
   $: sha512-TNPjfTr432qx7yOjQyaXm3dSR0MH9vXp7eT1BFSl/C51g+EFnOR9hTg1IreahGBmDNCehscshe45f+C1TBZbLw==
   _: 'https://registry.npmjs.org/boxen/-/boxen-1.3.0.tgz'
@@ -3773,6 +3808,20 @@ chalk:
  _:
   '2.4.2,^2.0.0,^2.0.1,^2.1.0,^2.4.1,^2.4.2': 2.4.2
   '^1.1.1,^1.1.3': 1.1.3
+  ^3.0.0: 3.0.0
+  ^4.0.0: 4.0.0
+ 4.0.0:
+  $: sha512-N9oWFcegS0sFr9oh1oz2d7Npos6vNoWW9HvtCg5N1KRFpUhaAhvTv5Y58g880fZaEYSNm3qDz8SU1UrGvp+n7A==
+  _: 'https://registry.npmjs.org/chalk/-/chalk-4.0.0.tgz'
+  dependencies:
+   ansi-styles: ^4.1.0
+   supports-color: ^7.1.0
+ 3.0.0:
+  $: sha512-4D3B6Wf41KOYRFdszmDqMCGq5VV/uMAB273JILmO+3jAlh8X4qDtdtgCR3fxtbLEMzSx22QdhnDcJvu2u1fVwg==
+  _: 'https://registry.npmjs.org/chalk/-/chalk-3.0.0.tgz'
+  dependencies:
+   ansi-styles: ^4.1.0
+   supports-color: ^7.1.0
  2.4.2:
   $: sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==
   _: 'https://registry.npmjs.org/chalk/-/chalk-2.4.2.tgz'
@@ -3790,14 +3839,14 @@ chalk:
    strip-ansi: ^3.0.0
    supports-color: ^2.0.0
 chalker:
- _latest: 1.1.2
+ _latest: 1.2.0
  _:
-  ^1.1.1: 1.1.2
- 1.1.2:
-  $: sha512-DYaS9gfTsjQz8aYBKVlqicaXgNHfp6/HqOmNXdq40C/QgXl16kJSp2USdF8l2bJGDEE9hJKQqSGQVB5UczxnTA==
-  _: 'https://registry.npmjs.org/chalker/-/chalker-1.1.2.tgz'
+  ^1.2.0: 1.2.0
+ 1.2.0:
+  $: sha512-Cag6asQV/lK6AQGBWGGDt5bu+FSzo4OlLHQVrd4Io1cJCGNXIvKcaxx6JH0+iL1azQ4Bs1i7qkvzlkH2Vwo2OQ==
+  _: 'https://registry.npmjs.org/chalker/-/chalker-1.2.0.tgz'
   dependencies:
-   chalk: ^2.4.2
+   chalk: ^4.0.0
 chardet:
  _latest: 0.8.0
  _:
@@ -3939,6 +3988,10 @@ cli-boxes:
  _latest: 2.2.0
  _:
   ^1.0.0: 1.0.0
+  ^2.2.0: 2.2.0
+ 2.2.0:
+  $: sha512-gpaBrMAizVEANOpfZp/EEUixTXDyGt7DFzdK5hU+UbWt/J0lB0w20ncZj59Z9a93xHb9u12zF5BS6i9RKbtg4w==
+  _: 'https://registry.npmjs.org/cli-boxes/-/cli-boxes-2.2.0.tgz'
  1.0.0:
   $: sha1-T6kXw+WclKAEzWH47lCdplFocUM=
   _: 'https://registry.npmjs.org/cli-boxes/-/cli-boxes-1.0.0.tgz'
@@ -3946,6 +3999,12 @@ cli-cursor:
  _latest: 3.1.0
  _:
   ^2.1.0: 2.1.0
+  ^3.1.0: 3.1.0
+ 3.1.0:
+  $: sha512-I/zHAwsKf9FqGoXM4WWRACob9+SNukZTd94DWF57E4toouRulbCxcUh6RKUEOQlYTHJnzkPMySvPNaaSLNfLZw==
+  _: 'https://registry.npmjs.org/cli-cursor/-/cli-cursor-3.1.0.tgz'
+  dependencies:
+   restore-cursor: ^3.1.0
  2.1.0:
   $: sha1-s12sN2R5+sw+lHR9QdDQ9SOP/LU=
   _: 'https://registry.npmjs.org/cli-cursor/-/cli-cursor-2.1.0.tgz'
@@ -4068,6 +4127,12 @@ color-convert:
  _latest: 2.0.1
  _:
   '^1.8.2,^1.9.0,^1.9.1': 1.9.3
+  ^2.0.1: 2.0.1
+ 2.0.1:
+  $: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==
+  _: 'https://registry.npmjs.org/color-convert/-/color-convert-2.0.1.tgz'
+  dependencies:
+   color-name: ~1.1.4
  1.9.3:
   $: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==
   _: 'https://registry.npmjs.org/color-convert/-/color-convert-1.9.3.tgz'
@@ -4077,6 +4142,10 @@ color-name:
  _latest: 1.1.4
  _:
   '1.1.3,^1.0.0': 1.1.3
+  ~1.1.4: 1.1.4
+ 1.1.4:
+  $: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
+  _: 'https://registry.npmjs.org/color-name/-/color-name-1.1.4.tgz'
  1.1.3:
   $: sha1-p9BVi9icQveV3UIyj3QIMcpTvCU=
   _: 'https://registry.npmjs.org/color-name/-/color-name-1.1.3.tgz'
@@ -4245,7 +4314,7 @@ content-type:
 convert-source-map:
  _latest: 1.7.0
  _:
-  '^1.1.0,^1.4.0,^1.5.0,^1.6.0,^1.7.0': 1.7.0
+  '^1.1.0,^1.4.0,^1.6.0,^1.7.0': 1.7.0
  1.7.0:
   $: sha512-4FJkXzKXEDB1snCFZlLP4gpC3JILicCpGbzG9f9G7tGqGCzETQ2hWPrcinA9oU4wtf2biUaEH5065UnMeR33oA==
   _: 'https://registry.npmjs.org/convert-source-map/-/convert-source-map-1.7.0.tgz'
@@ -4282,8 +4351,8 @@ copy-descriptor:
 core-js:
  _latest: 3.6.4
  _:
-  '^2 || ^3': 3.6.4
   '^2.2.0,^2.4.0,^2.6.5': 2.6.11
+  ^3: 3.6.4
  3.6.4:
   hasI: 1
   $: sha512-4paDGScNgZP2IXXilaffL9X7968RuvwlkK3xWtZRVqgd8SYNiVKRJvkFd1aqqEuPfN7E68ZHEp9hDj6lHj4Hyw==
@@ -4913,14 +4982,10 @@ deep-eql:
 deep-extend:
  _latest: 0.6.0
  _:
-  ^0.4.0: 0.4.2
   ^0.6.0: 0.6.0
  0.6.0:
   $: sha512-LOHxIOaPYdHlJRtCQfDIVZtfw/ufM8+rVj649RIHzcm/vGwQRXFt6OPqIFWsm2XEMrNIEtWR64sY1LEKD2vAOA==
   _: 'https://registry.npmjs.org/deep-extend/-/deep-extend-0.6.0.tgz'
- 0.4.2:
-  $: sha1-SLaZwn4zS/ifEIkr5DL25MfTSn8=
-  _: 'https://registry.npmjs.org/deep-extend/-/deep-extend-0.4.2.tgz'
 deep-is:
  _latest: 0.1.3
  _:
@@ -5269,14 +5334,6 @@ ee-first:
  1.1.1:
   $: sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
   _: 'https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz'
-ejs:
- _latest: 3.0.1
- _:
-  ^2.3.4: 2.7.4
- 2.7.4:
-  hasI: 1
-  $: sha512-7vmuyh5+kuUyJKePhQfRQBhXV5Ce+RnaeeQArKu1EAMpL3WbgMt5WG6uQZpEVvYSSsxMXRKOewtDk9RaTKXRlA==
-  _: 'https://registry.npmjs.org/ejs/-/ejs-2.7.4.tgz'
 electrode-archetype-opt-critical-css:
  _latest: 2.0.0
  _:
@@ -5542,17 +5599,17 @@ electrode-hapi-compat:
 electrode-node-resolver:
  _latest: 2.0.0-fynlocal_h
  _:
-  ../electrode-node-resolver: 2.0.0-fynlocal_h
+  '../electrode-node-resolver,^2.0.0': 2.0.0-fynlocal_h
  2.0.0-fynlocal_h:
   $: local
   _: ../../packages/electrode-node-resolver
   dependencies:
    require-at: ^1.0.0
 electrode-react-webapp:
- _latest: 3.8.4-fynlocal_h
+ _latest: 3.8.6-fynlocal_h
  _:
-  ../../packages/electrode-react-webapp: 3.8.4-fynlocal_h
- 3.8.4-fynlocal_h:
+  ../../packages/electrode-react-webapp: 3.8.6-fynlocal_h
+ 3.8.6-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-react-webapp
@@ -5639,6 +5696,10 @@ emoji-regex:
  _latest: 8.0.0
  _:
   ^7.0.1: 7.0.3
+  ^8.0.0: 8.0.0
+ 8.0.0:
+  $: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==
+  _: 'https://registry.npmjs.org/emoji-regex/-/emoji-regex-8.0.0.tgz'
  7.0.3:
   $: sha512-CwBLREIQ7LvYFB0WyRvwhq5N5qPhc6PMjD6bYggFlI5YyDgl+0vxq5VHbMOFqLg7hfWzmu8T5Z1QofhmTIhItA==
   _: 'https://registry.npmjs.org/emoji-regex/-/emoji-regex-7.0.3.tgz'
@@ -6570,7 +6631,7 @@ filter-scan-dir:
 finalhandler:
  _latest: 1.1.2
  _:
-  '1.1.2,^1.1.1': 1.1.2
+  1.1.2: 1.1.2
  1.1.2:
   $: sha512-aAWcW57uxVNrQZqFXjITpW3sIUQmHGG3qSb9mUah9MgMC4NeWhNOlNjXEYq3HjRAvL6arUviZGGJsBg6z0zsWA==
   _: 'https://registry.npmjs.org/finalhandler/-/finalhandler-1.1.2.tgz'
@@ -7322,6 +7383,10 @@ has-flag:
   ^1.0.0: 1.0.0
   ^2.0.0: 2.0.0
   ^3.0.0: 3.0.0
+  ^4.0.0: 4.0.0
+ 4.0.0:
+  $: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==
+  _: 'https://registry.npmjs.org/has-flag/-/has-flag-4.0.0.tgz'
  3.0.0:
   $: sha1-tdRU3CGZriJWmfNGfloH87lVuv0=
   _: 'https://registry.npmjs.org/has-flag/-/has-flag-3.0.0.tgz'
@@ -8215,6 +8280,10 @@ is-fullwidth-code-point:
  _:
   ^1.0.0: 1.0.0
   ^2.0.0: 2.0.0
+  ^3.0.0: 3.0.0
+ 3.0.0:
+  $: sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==
+  _: 'https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-3.0.0.tgz'
  2.0.0:
   $: sha1-o7MKXE8ZkYMWeqq5O+764937ZU8=
   _: 'https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-2.0.0.tgz'
@@ -9285,7 +9354,7 @@ json5:
 jsonfile:
  _latest: 5.0.0
  _:
-  '^2.1.0,^2.2.2': 2.4.0
+  ^2.1.0: 2.4.0
   ^4.0.0: 4.0.0
  4.0.0:
   $: sha1-h3Gq4HmbZAdrdmQPygWPnBDjPss=
@@ -9861,8 +9930,8 @@ loader-runner:
 loader-utils:
  _latest: 1.2.3
  _:
-  '0.2.x,^0.2.12,^0.2.14,^0.2.16,^0.2.9': 0.2.17
   '1.2.3,^1.0.2,^1.1.0,^1.2.3': 1.2.3
+  '^0.2.12,^0.2.14,^0.2.16,^0.2.9': 0.2.17
  1.2.3:
   $: sha512-fkpz8ejdnEMG3s37wGL07iSBDg99O9D5yflE9RGNH3hRdx9SOwYfnGYdZOUIZitN8E+E2vkq3MUMYMvPYl5ZZA==
   _: 'https://registry.npmjs.org/loader-utils/-/loader-utils-1.2.3.tgz'
@@ -10196,6 +10265,18 @@ log-symbols:
   _: 'https://registry.npmjs.org/log-symbols/-/log-symbols-2.2.0.tgz'
   dependencies:
    chalk: ^2.0.1
+log-update:
+ _latest: 4.0.0
+ _:
+  ^4.0.0: 4.0.0
+ 4.0.0:
+  $: sha512-9fkkDevMefjg0mmzWFBW8YkFP91OrizzkW3diF7CpG+S2EYdy4+TVfGwz1zeF8x7hCx1ovSPTOE9Ngib74qqUg==
+  _: 'https://registry.npmjs.org/log-update/-/log-update-4.0.0.tgz'
+  dependencies:
+   ansi-escapes: ^4.3.0
+   cli-cursor: ^3.1.0
+   slice-ansi: ^4.0.0
+   wrap-ansi: ^6.2.0
 log4js:
  _latest: 6.1.2
  _:
@@ -10514,7 +10595,7 @@ mimic-fn:
  _latest: 3.0.0
  _:
   ^1.0.0: 1.2.0
-  ^2.0.0: 2.1.0
+  '^2.0.0,^2.1.0': 2.1.0
  2.1.0:
   $: sha512-OqbOk5oEQeAZ8WXWydlu9HJjz9WVdEIvamMCcXmuqUYjTknH/sqsWvhQ3vgwKFRR1HpjvNBKQ37nbJgYzGqGcg==
   _: 'https://registry.npmjs.org/mimic-fn/-/mimic-fn-2.1.0.tgz'
@@ -10593,7 +10674,7 @@ minimalistic-crypto-utils:
 minimatch:
  _latest: 3.0.4
  _:
-  '2 || 3,^3.0.0,^3.0.2,^3.0.3,^3.0.4': 3.0.4
+  '2 || 3,^3.0.0,^3.0.2,^3.0.4': 3.0.4
  3.0.4:
   $: sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==
   _: 'https://registry.npmjs.org/minimatch/-/minimatch-3.0.4.tgz'
@@ -10642,11 +10723,16 @@ mkdirp:
  _latest: 1.0.3
  _:
   '0.5.1,0.5.x,>=0.5 0,^0.5.0,^0.5.1,~0.5.1,~0.5.x': 0.5.1
+  ^1.0.3: 1.0.4
+ 1.0.4:
+  $: sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
+  _: 'https://registry.npmjs.org/mkdirp/-/mkdirp-1.0.4.tgz'
  0.5.1:
   $: sha1-MAV0OOrGz3+MR2fzhkjWaX11yQM=
   _: 'https://registry.npmjs.org/mkdirp/-/mkdirp-0.5.1.tgz'
   dependencies:
    minimist: 0.0.8
+  deprecated: 'Legacy versions of mkdirp are no longer supported. Please update to mkdirp 1.x. (Note that the API surface has changed to use Promises in 1.x.)'
 mocha:
  _latest: 7.0.1
  _:
@@ -10861,7 +10947,7 @@ nise:
 nix-clap:
  _latest: 1.3.10
  _:
-  '^1.0.8,^1.3.7': 1.3.10
+  '^1.3.10,^1.3.7': 1.3.10
  1.3.10:
   $: sha512-sdQTROrsLYFFRo4koLdVPfXC+H7kB+cEjSvSLNP/9m2foSypqoLzqfITdUHNZQi8IuvAMLdB+leaDtBj2EJPlA==
   _: 'https://registry.npmjs.org/nix-clap/-/nix-clap-1.3.10.tgz'
@@ -11300,19 +11386,6 @@ octokit-pagination-methods:
  1.1.0:
   $: sha512-fZ4qZdQ2nxJvtcasX7Ghl+WlWS/d9IgnBIwFZXVNNZUmzpno91SX5bc5vuxiuKoCtK78XxGGNuSCrDC7xYB3OQ==
   _: 'https://registry.npmjs.org/octokit-pagination-methods/-/octokit-pagination-methods-1.1.0.tgz'
-offline-plugin:
- _latest: 5.0.7
- _:
-  ^4.6.1: 4.9.1
- 4.9.1:
-  $: sha1-6Xpr4xGLTcNg4G7UvEc/EPLec7Y=
-  _: 'https://registry.npmjs.org/offline-plugin/-/offline-plugin-4.9.1.tgz'
-  dependencies:
-   deep-extend: ^0.4.0
-   ejs: ^2.3.4
-   loader-utils: 0.2.x
-   minimatch: ^3.0.3
-   slash: ^1.0.0
 on-finished:
  _latest: 2.3.0
  _:
@@ -11342,6 +11415,12 @@ onetime:
  _latest: 5.1.0
  _:
   ^2.0.0: 2.0.1
+  ^5.1.0: 5.1.0
+ 5.1.0:
+  $: sha512-5NcSkPHhwTVFIQN+TUqXoS5+dlElHXdpAWu9I0HP20YOtIi+aZ0Ct82jdlILDxjLEAWwvm+qj1m6aEtsDVmm6Q==
+  _: 'https://registry.npmjs.org/onetime/-/onetime-5.1.0.tgz'
+  dependencies:
+   mimic-fn: ^2.1.0
  2.0.1:
   $: sha1-BnQoIw/WdEOyeUsiu6UotoZ5YtQ=
   _: 'https://registry.npmjs.org/onetime/-/onetime-2.0.1.tgz'
@@ -13273,13 +13352,6 @@ raw-body:
    http-errors: 1.7.2
    iconv-lite: 0.4.24
    unpipe: 1.0.0
-raw-loader:
- _latest: 4.0.0
- _:
-  ^0.5.1: 0.5.1
- 0.5.1:
-  $: sha1-DD0L6u2KAclm2Xh793goElKpeao=
-  _: 'https://registry.npmjs.org/raw-loader/-/raw-loader-0.5.1.tgz'
 rc:
  _latest: 1.2.8
  _:
@@ -14117,6 +14189,13 @@ restore-cursor:
  _latest: 3.1.0
  _:
   ^2.0.0: 2.0.0
+  ^3.1.0: 3.1.0
+ 3.1.0:
+  $: sha512-l+sSefzHpj5qimhFSE5a8nufZYAM3sBSVMAPtYkmC+4EH2anSGaEMXSD0izRQbu9nfyQ9y5JrVmp7E8oZrUjvA==
+  _: 'https://registry.npmjs.org/restore-cursor/-/restore-cursor-3.1.0.tgz'
+  dependencies:
+   onetime: ^5.1.0
+   signal-exit: ^3.0.2
  2.0.0:
   $: sha1-n37ih/gv0ybU/RYpI9YhKe7g368=
   _: 'https://registry.npmjs.org/restore-cursor/-/restore-cursor-2.0.0.tgz'
@@ -14161,7 +14240,7 @@ rgba-regex:
 rimraf:
  _latest: 3.0.2
  _:
-  '2,^2.2.8,^2.4.0,^2.5.4,^2.6.0,^2.6.1,^2.6.2,^2.6.3': 2.7.1
+  '2,^2.2.8,^2.5.4,^2.6.0,^2.6.1,^2.6.2,^2.6.3': 2.7.1
   ~2.6.2: 2.6.3
  2.7.1:
   $: sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==
@@ -14584,19 +14663,23 @@ sisteransi:
 slash:
  _latest: 3.0.0
  _:
-  ^1.0.0: 1.0.0
   ^2.0.0: 2.0.0
  2.0.0:
   $: sha512-ZYKh3Wh2z1PpEXWr0MpSBZ0V6mZHAQfYevttO11c51CaWjGTaadiKZ+wVt1PbMlDV5qhMFslpZCemhwOK7C89A==
   _: 'https://registry.npmjs.org/slash/-/slash-2.0.0.tgz'
- 1.0.0:
-  $: sha1-xB8vbDn8FtHNF61LXYlhFK5HDVU=
-  _: 'https://registry.npmjs.org/slash/-/slash-1.0.0.tgz'
 slice-ansi:
- _latest: 3.0.0
+ _latest: 4.0.0
  _:
   1.0.0: 1.0.0
   ^2.1.0: 2.1.0
+  ^4.0.0: 4.0.0
+ 4.0.0:
+  $: sha512-qMCMfhY040cVHT43K9BFygqYbUPFZKHOg7K73mtTWJRb8pyP3fzf4Ixd5SzdEJQ6MRUg/WBnOLxghZtKKurENQ==
+  _: 'https://registry.npmjs.org/slice-ansi/-/slice-ansi-4.0.0.tgz'
+  dependencies:
+   ansi-styles: ^4.0.0
+   astral-regex: ^2.0.0
+   is-fullwidth-code-point: ^3.0.0
  2.1.0:
   $: sha512-Qu+VC3EwYLldKa1fCxuuvULvSJOKEgk9pi8dZeCVK7TqBfUNTH4sFkk4joj8afVSfAYgJoSOetjx9QWOJ5mYoQ==
   _: 'https://registry.npmjs.org/slice-ansi/-/slice-ansi-2.1.0.tgz'
@@ -15087,6 +15170,14 @@ string-width:
   ^1.0.1: 1.0.2
   '^2.0.0,^2.1.0,^2.1.1': 2.1.1
   '^3.0.0,^3.1.0': 3.1.0
+  '^4.0.0,^4.1.0': 4.2.0
+ 4.2.0:
+  $: sha512-zUz5JD+tgqtuDjMhwIg5uFVV3dtqZ9yQJlZVfq4I01/K5Paj5UHj7VyrQOJvzawSVlKpObApbfD0Ed6yJc+1eg==
+  _: 'https://registry.npmjs.org/string-width/-/string-width-4.2.0.tgz'
+  dependencies:
+   emoji-regex: ^8.0.0
+   is-fullwidth-code-point: ^3.0.0
+   strip-ansi: ^6.0.0
  3.1.0:
   $: sha512-vafcv6KjVZKSgz06oM/H6GDBrAtz8vdhQakGjFIvNrHA6y3HCF1CInLy+QLq8dTJPQ1b+KDUqDFctkdRW44e1w==
   _: 'https://registry.npmjs.org/string-width/-/string-width-3.1.0.tgz'
@@ -15177,6 +15268,12 @@ strip-ansi:
   '^3.0.0,^3.0.1': 3.0.1
   ^4.0.0: 4.0.0
   '^5.0.0,^5.1.0,^5.2.0': 5.2.0
+  ^6.0.0: 6.0.0
+ 6.0.0:
+  $: sha512-AuvKTrTfQNYNIctbR1K/YGTR1756GycPsg7b9bdV9Duqur4gv6aKqHXah67Z8ImS7WEz5QVcOtlfW2rZEugt6w==
+  _: 'https://registry.npmjs.org/strip-ansi/-/strip-ansi-6.0.0.tgz'
+  dependencies:
+   ansi-regex: ^5.0.0
  5.2.0:
   $: sha512-DuRs1gKbBqsMKIZlrffwlug8MHkcnpjs5VPmL1PAh+mA30U0DTotfDZ0d2UUsXpPmPmMMJ6W773MaA3J+lbiWA==
   _: 'https://registry.npmjs.org/strip-ansi/-/strip-ansi-5.2.0.tgz'
@@ -15279,10 +15376,10 @@ stylus-relative-loader:
   peerDependencies:
    stylus: ^0.54.5
 subapp-util:
- _latest: 1.0.3-fynlocal_h
+ _latest: 1.0.4-fynlocal_h
  _:
-  ../subapp-util: 1.0.3-fynlocal_h
- 1.0.3-fynlocal_h:
+  ../subapp-util: 1.0.4-fynlocal_h
+ 1.0.4-fynlocal_h:
   $: local
   _: ../../packages/subapp-util
   dependencies:
@@ -15327,6 +15424,12 @@ supports-color:
   ^2.0.0: 2.0.0
   '^3.1.0,^3.2.3': 3.2.3
   '^5.1.0,^5.3.0,^5.4.0': 5.5.0
+  ^7.1.0: 7.1.0
+ 7.1.0:
+  $: sha512-oRSIpR8pxT1Wr2FquTNnGet79b3BWljqOuoW/h4oBhxJ/HUbX5nX6JSruTkvXDCFMwDPvsaTTbvMLKZWSy0R5g==
+  _: 'https://registry.npmjs.org/supports-color/-/supports-color-7.1.0.tgz'
+  dependencies:
+   has-flag: ^4.0.0
  6.1.0:
   $: sha512-qe1jfm1Mg7Nq/NSh6XE24gPXROEVsWHxC1LIx//XNlD9iw7YZQGjZNjYN7xGaEG6iKdA8EtNFW6R0gjnVXp+wQ==
   _: 'https://registry.npmjs.org/supports-color/-/supports-color-6.1.0.tgz'
@@ -15473,6 +15576,10 @@ term-size:
  _latest: 2.2.0
  _:
   ^1.2.0: 1.2.0
+  ^2.1.0: 2.2.0
+ 2.2.0:
+  $: sha512-a6sumDlzyHVJWb8+YofY4TW112G6p2FCPEAFk+59gIYHv3XHRhm9ltVQ9kli4hNWeQBwSpe8cRN25x0ROunMOw==
+  _: 'https://registry.npmjs.org/term-size/-/term-size-2.2.0.tgz'
  1.2.0:
   $: sha1-RYuDiH8oj8Vtb/+/rSYuJmOO+mk=
   _: 'https://registry.npmjs.org/term-size/-/term-size-1.2.0.tgz'
@@ -15797,6 +15904,17 @@ type-detect:
  4.0.8:
   $: sha512-0fr/mIH1dlO+x7TlcMy+bIDqKPsw/70tVyeHW787goQjhmqaZe10uwLujubK9q9Lg6Fiho1KUKDYz0Z7k7g5/g==
   _: 'https://registry.npmjs.org/type-detect/-/type-detect-4.0.8.tgz'
+type-fest:
+ _latest: 0.13.0
+ _:
+  ^0.11.0: 0.11.0
+  ^0.8.1: 0.8.1
+ 0.11.0:
+  $: sha512-OdjXJxnCN1AvyLSzeKIgXTXxV+99ZuXl3Hpo9XpJAv9MBcHrrJOQ5kV7ypXOuQie+AmWG25hLbiKdwYTifzcfQ==
+  _: 'https://registry.npmjs.org/type-fest/-/type-fest-0.11.0.tgz'
+ 0.8.1:
+  $: sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
+  _: 'https://registry.npmjs.org/type-fest/-/type-fest-0.8.1.tgz'
 type-is:
  _latest: 1.6.18
  _:
@@ -15989,7 +16107,7 @@ unset-value:
 unwrap-npm-cmd:
  _latest: 1.1.1
  _:
-  ^1.1.0: 1.1.1
+  ^1.1.1: 1.1.1
  1.1.1:
   $: sha512-Y0PFhW+X6oahjV/e4yBxThgq0k9Ymh3RwUh6P/rMiGp55X5qa2mQghZAHKyJ9tDPinZntD0Z+5DHFzlx9/UNbg==
   _: 'https://registry.npmjs.org/unwrap-npm-cmd/-/unwrap-npm-cmd-1.1.1.tgz'
@@ -16400,12 +16518,12 @@ webpack-cli:
   peerDependencies:
    webpack: 4.x.x
 webpack-config-composer:
- _latest: 1.1.2-fynlocal_h
+ _latest: 1.1.3
  _:
-  ../webpack-config-composer: 1.1.2-fynlocal_h
- 1.1.2-fynlocal_h:
-  $: local
-  _: ../../packages/webpack-config-composer
+  ^1.1.3: 1.1.3
+ 1.1.3:
+  $: sha512-JVAkVLseFFZX4Hg6X3sNbFOClyhkBeHnOUcZlA/OMKX34XNcGyDsgVRKylZmlvMG1LeGT1ToSoL9rg08+q/zWw==
+  _: 'https://registry.npmjs.org/webpack-config-composer/-/webpack-config-composer-1.1.3.tgz'
   dependencies:
    lodash: ^4.13.1
 webpack-dev-middleware:
@@ -16468,10 +16586,10 @@ webpack-sources:
 webpack-stats-plugin:
  _latest: 0.3.1
  _:
-  ^0.2.1: 0.2.1
- 0.2.1:
-  $: sha512-OYMZLpZrK/qLA79NE4kC4DCt85h/5ipvWJcsefKe9MMw0qU4/ck/IJg+4OmWA+5EfrZZpHXDq92IptfYDWVfkw==
-  _: 'https://registry.npmjs.org/webpack-stats-plugin/-/webpack-stats-plugin-0.2.1.tgz'
+  ^0.3.1: 0.3.1
+ 0.3.1:
+  $: sha512-pxqzFE055NlNTlNyfDG3xlB2QwT1EWdm/CF5dCJI/e+rRHVxrWhWg1rf1lfsWhI1/EePv8gi/A36YxO/+u0FgQ==
+  _: 'https://registry.npmjs.org/webpack-stats-plugin/-/webpack-stats-plugin-0.3.1.tgz'
 whatwg-encoding:
  _latest: 1.0.5
  _:
@@ -16534,6 +16652,12 @@ widest-line:
  _latest: 3.1.0
  _:
   ^2.0.0: 2.0.1
+  ^3.1.0: 3.1.0
+ 3.1.0:
+  $: sha512-NsmoXalsWVDMGupxZ5R08ka9flZjjiLvHVAWYOKtiKM8ujtZWr9cRffak+uSE48+Ob8ObalXpwyeUiyDD6QFgg==
+  _: 'https://registry.npmjs.org/widest-line/-/widest-line-3.1.0.tgz'
+  dependencies:
+   string-width: ^4.0.0
  2.0.1:
   $: sha512-Ba5m9/Fa4Xt9eb2ELXt77JxVDV8w7qQrH0zS/TWSJdLyAwQjWoOzpzj5lwVftDz6n/EOu3tNACS84v509qwnJA==
   _: 'https://registry.npmjs.org/widest-line/-/widest-line-2.0.1.tgz'
@@ -16601,6 +16725,14 @@ wrap-ansi:
  _:
   ^2.0.0: 2.1.0
   ^5.1.0: 5.1.0
+  ^6.2.0: 6.2.0
+ 6.2.0:
+  $: sha512-r6lPcBGxZXlIcymEu7InxDMhdW0KDxpLgoFLcguasxCaJ/SOIZwINatK9KY/tf+ZrlywOKU0UDj3ATXUBfxJXA==
+  _: 'https://registry.npmjs.org/wrap-ansi/-/wrap-ansi-6.2.0.tgz'
+  dependencies:
+   ansi-styles: ^4.0.0
+   string-width: ^4.1.0
+   strip-ansi: ^6.0.0
  5.1.0:
   $: sha512-QC1/iN/2/RPVJ5jYK8BGttj5z83LmSKmvbvrXPNCLZSEb32KKVDJDl/MOt2N01qU2H/FkzEa9PKto1BqDjtd7Q==
   _: 'https://registry.npmjs.org/wrap-ansi/-/wrap-ansi-5.1.0.tgz'
@@ -16683,24 +16815,32 @@ ws:
    async-limiter: ~1.0.0
    safe-buffer: ~5.1.0
    ultron: ~1.1.0
-xclap:
- _latest: 0.2.42
+xaa:
+ _latest: 1.3.0
  _:
-  ^0.2.38: 0.2.42
- 0.2.42:
-  $: sha512-gARBezQxNveVIGidp28dGj0lcElWcB/3m+e+povyxZgPx9hedgYpBRAU5sblKh49lDZCfOaW+diAig+CNsOFgA==
-  _: 'https://registry.npmjs.org/xclap/-/xclap-0.2.42.tgz'
+  ^1.3.0: 1.3.0
+ 1.3.0:
+  $: sha512-E8ZzzvcdXkkbCaE/OJyWjCZkGMryoVa8BNF+aMNOlEOsxo/0arEFDCXPzRs5Pb4j3BAtluPzt1J9Ne1aCVjcNA==
+  _: 'https://registry.npmjs.org/xaa/-/xaa-1.3.0.tgz'
+xclap:
+ _latest: 0.2.48
+ _:
+  ^0.2.48: 0.2.48
+ 0.2.48:
+  $: sha512-jc9/NjcaTDUszhNj0wOW83NNBx7wUcrzYzldotao6go7g/qMH+5QZYNiYyh98Y/8DhFQndDJihL39+oJIPNJFg==
+  _: 'https://registry.npmjs.org/xclap/-/xclap-0.2.48.tgz'
   dependencies:
-   chalk: ^2.0.1
+   chalk: ^4.0.0
+   chalker: ^1.2.0
    insync: ^2.1.1
    jaro-winkler: ^0.2.8
    lodash.foreach: ^4.5.0
-   nix-clap: ^1.0.8
+   nix-clap: ^1.3.10
    optional-require: ^1.0.0
    path-is-inside: ^1.0.2
    string-array: ^1.0.0
-   unwrap-npm-cmd: ^1.1.0
-   xsh: ^0.4.0
+   unwrap-npm-cmd: ^1.1.1
+   xsh: ^0.4.4
 xdg-basedir:
  _latest: 4.0.0
  _:
@@ -16709,12 +16849,12 @@ xdg-basedir:
   $: sha1-SWsswQnsqNus/i3HK2A8F8WHCtQ=
   _: 'https://registry.npmjs.org/xdg-basedir/-/xdg-basedir-3.0.0.tgz'
 xenv-config:
- _latest: 1.3.0
+ _latest: 1.3.1
  _:
-  ^1.3.0: 1.3.0
- 1.3.0:
-  $: sha512-uHR9P7EqQRqvQs3mAF2GzKxUPXNfHoatFgPOEVpEGh4o6DvpyLw25GIDeYqDm63Z7UP/akHnwrluqTK7xfgmQA==
-  _: 'https://registry.npmjs.org/xenv-config/-/xenv-config-1.3.0.tgz'
+  ^1.3.1: 1.3.1
+ 1.3.1:
+  $: sha512-ekNalpPoXwgWx1tE384qlkx8+17ANcpmCtak4TYK1EsEcM+0a607TqszGHv4sWMBuogM28XyJmzcRoIgMjABIA==
+  _: 'https://registry.npmjs.org/xenv-config/-/xenv-config-1.3.1.tgz'
 xhr:
  _latest: 2.5.0
  _:
@@ -16772,7 +16912,7 @@ xmlhttprequest-ssl:
 xsh:
  _latest: 0.4.4
  _:
-  '^0.4.0,^0.4.4': 0.4.4
+  ^0.4.4: 0.4.4
  0.4.4:
   $: sha512-fwl0KsCubpCv/PMwwy6PiaLAak12aROkIgZMec8pzlgB8TvA7jckou7CBDta7SQouiG9KNqWNVOYBKnkEdx4gQ==
   _: 'https://registry.npmjs.org/xsh/-/xsh-0.4.4.tgz'
