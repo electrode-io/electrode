@@ -364,30 +364,49 @@ class AdminServer {
     if (context._deferTimer) {
       clearTimeout(context._deferTimer);
     } else {
-      context._deferIx = store.length - 1;
+      context._deferIx = [];
+    }
+
+    if (_.isEmpty(context._deferIx) || store.length - _.last(context._deferIx) > 1) {
+      context._deferIx.push(store.length - 1);
     }
 
     if (!context._showFullLink) {
       context._showFullLink = showFullLink;
     }
 
+    context._deferTimestamp = Date.now();
     context._deferTimer = setTimeout(() => {
       context._deferTimer = undefined;
-      for (let ix = context._deferIx; ix < store.length; ix++) {
-        if (typeof store[ix] === "string") {
-          this._io.write(tag + store[ix] + "\n");
-        } else if (store[ix]) {
-          const json = store[ix];
-          this._io.write(tag + (json.msg || json.message || JSON.stringify(json)) + "\n");
+      let currentIx = 0;
+      context._deferIx.forEach(deferIx => {
+        if (currentIx > deferIx) {
+          return;
         }
-      }
+        let ix = deferIx;
+        for (; ix < store.length; ix++) {
+          if (store[ix] === false) {
+            break;
+          }
+
+          if (typeof store[ix] === "string") {
+            this._io.write(tag + store[ix] + "\n");
+          } else if (store[ix]) {
+            const json = store[ix];
+            this._io.write(tag + (json.msg || json.message || JSON.stringify(json)) + "\n");
+          }
+        }
+        currentIx = ix + 1;
+      });
+      context._deferIx = [];
       if (context._showFullLink === true) {
         context._toggle = true;
         this.showFullLogUrlMessage(tag, context.fullLogUrl);
       }
       context._showFullLink = undefined;
-      if (store.length > 19999) {
-        context.store = store.slice(store.length - 9999);
+      if (store.length > 25000) {
+        const cleanup = store.filter(x => x !== false);
+        context.store = cleanup.slice(cleanup.length - 9999);
       }
     }, delay);
   }
@@ -396,6 +415,13 @@ class AdminServer {
     const { inputs, store } = context;
 
     const handler = data => {
+      const timeDiff = Date.now() - context._deferTimestamp;
+      // if an error line has been detected, then only consider other lines following it
+      // within 30 milliseconds as part of it.
+      if (context._deferTimer && timeDiff > 30) {
+        store.push(false);
+      }
+
       let str = data.toString();
       if (!str.trim()) {
         store.push("");
