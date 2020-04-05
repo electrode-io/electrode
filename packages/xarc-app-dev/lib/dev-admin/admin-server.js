@@ -75,16 +75,24 @@ class AdminServer {
   }
 
   showMenu() {
+    const reporterUrl = formUrl({ ...fullDevServer, path: controlPaths.reporter });
+    const logUrl = formUrl({ ...fullDevServer, path: controlPaths.appLog });
+    const devurl = formUrl({ ...fullDevServer, path: controlPaths.dev });
     const proxyItem = DEV_PROXY_ENABLED ? "<magenta>P</> - Restart Dev Proxy " : "";
-    const menu = ck`              <green.inverse>   Electrode Dev Admin Console   </>
+    const menu = ck`             <green.inverse>   Electrode Dev Admin Console   </>
 
- <white.inverse>For your app server</>
-   <magenta>A</> - Restart <magenta>D</> - <cyan>inspect-brk</> mode <magenta>I</> - <cyan>inspect</> mode <magenta>K</> - Kill&nbsp;
- <white.inverse>For Electrode webpack dev server</>  ${this._wds}
-   <magenta>W</> - Restart <magenta>E</> - <cyan>inspect-brk</> mode <magenta>R</> - <cyan>inspect</> mode <magenta>X</> - Kill&nbsp;
- <magenta>L</> - Show All Logs <magenta>0-6</> - Show Logs by Winston level
- ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown`;
-    this._io.show("\n" + boxen(menu, { margin: { left: 5 } }));
+<white.inverse>For your app server</> ${this._app}
+  <magenta>A</> - Restart <magenta>D</> - <cyan>inspect-brk</> mode <magenta>I</> - <cyan>inspect</> mode <magenta>K</> - Kill&nbsp;
+<white.inverse>For Electrode webpack dev server</>  ${this._wds}
+  <magenta>W</> - Restart <magenta>E</> - <cyan>inspect-brk</> mode <magenta>R</> - <cyan>inspect</> mode <magenta>X</> - Kill&nbsp;
+<magenta>L</> - Show All Logs <magenta>0-6</> - Show Logs by Winston level
+${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
+
+<green>         App URL: <cyan.underline>${formUrl(fullDevServer)}</></>
+<green>     App Log URL: <cyan.underline>${logUrl}</></>
+<green>   DEV dashboard: <cyan.underline>${devurl}</></>
+<green>WebPack reporter: <cyan.underline>${reporterUrl}</></>`;
+    this._io.show("\n" + boxen(menu, { margin: { left: 5 }, padding: { right: 3, left: 3 } }));
   }
 
   getServer(name) {
