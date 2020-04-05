@@ -492,8 +492,8 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
       debug,
       exec: Path.join(__dirname, "redbird-spawn"),
       waitStart: async info => {
-        this.passThruLineOutput(this._proxy, info._child.stdout, process.stdout);
-        this.passThruLineOutput(this._proxy, info._child.stderr, process.stderr);
+        this.passThruLineOutput(this._proxy, info._child.stdout, this._io);
+        this.passThruLineOutput(this._proxy, info._child.stderr, this._io);
       }
     });
   }
