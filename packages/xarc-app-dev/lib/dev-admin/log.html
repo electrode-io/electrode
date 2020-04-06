@@ -102,7 +102,6 @@
         levelSelections = levelSelections || getLevelSelections();
         const logResponse = await fetch("/__electrode_dev/log-events");
         let newLogs = await logResponse.json();
-        newLogs = newLogs.slice(logs.length);
         const filteredLogs = newLogs.filter(event => levelSelections[event.level]);
         el.innerHTML = filteredLogs.map(event => event.message).join("\n") + "\n\n";
         // scroll to bottom
