@@ -98,18 +98,20 @@ class RenderContext {
   // - else add it to output if it's a string, and then invoke callback
   // Note: If it's async, then the result from the Promise is not checked because
   //       we don't know how token handler wants to deal with it.
-  handleTokenResult(id, res, cb) {
-    // it's a promise, wait for it before invoking callback
-    if (res && res.then) {
-      return res.then(r => cb(null, r)).catch(cb);
-    } else {
+  handleTokenResult(id, result, cb) {
+    const addToOutput = res => {
       // if it's a string, buffer, or stream, then add to output
       if (typeof res === "string" || Buffer.isBuffer(res) || utils.isReadableStream(res)) {
         this.output.add(res);
       }
       // ignore other return value types
-
       return cb();
+    };
+    // it's a promise, wait for it before invoking callback
+    if (result && result.then) {
+      return result.then(addToOutput).catch(cb);
+    } else {
+      return addToOutput(result);
     }
   }
 }
