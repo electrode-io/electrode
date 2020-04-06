@@ -14,17 +14,15 @@
 
       /* Links inside the navbar */
       .navbar a {
-        float: left;
-        display: block;
-        color: #f2f2f2;
+        /* color: #f2f2f2; */
         text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
+        padding-left: 10px;
+        padding-right: 10px;
       }
 
       /* Change background on mouse-over */
       .navbar a:hover {
-        background: #ddd;
+        background: #1e9ae2;
         color: black;
       }
 
@@ -49,7 +47,7 @@
   </head>
   <body>
     <div id="controls" class="navbar">
-      <button type="button" onclick="displayLogs();">Refresh</button>
+      <button type="button" onclick="displayLogs();">Refresh Logs</button>
       <label>
         <input type="checkbox" id="level.error" checked onclick="levelChangeHandler();" />
         Error
@@ -78,6 +76,7 @@
         <input type="checkbox" id="level.silly" checked onclick="levelChangeHandler();" />
         Silly
       </label>
+      <a href="/__electrode_dev" class="button">Dev Dashboard</a>
     </div>
     <div class="main">
       <pre class="logs" id="logs"></pre>
