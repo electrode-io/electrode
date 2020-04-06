@@ -107,10 +107,10 @@
         el.innerHTML = filteredLogs.map(event => event.message).join("\n") + "\n\n";
         // scroll to bottom
         if (scrollToEnd) {
-          window.scrollTo(0, document.body.scrollHeight);
+          setTimeout(() => window.scrollTo(0, document.body.scrollHeight), 350);
         }
       }
-      displayLogs();
+      setTimeout(displayLogs(), 10);
     </script>
   </body>
 </html>
