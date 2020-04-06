@@ -1,3 +1,49 @@
+# 4/6/2020
+
+- many improvements on the dev admin app log handling
+- dep: chalk@4, chalk@1.2.0, xaa@1.3.0, xclap@0.2.48
+- fix: a single babel.config.js over .babelrc.js
+- fix: add result from promise to output
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.0.13` `(8.0.12 => 8.0.13)`
+- `@xarc/app-dev@8.0.13` `(8.0.12 => 8.0.13)`
+- `@xarc/webpack@8.0.2` `(8.0.1 => 8.0.2)`
+- `electrode-react-webapp@3.8.7` `(3.8.6 => 3.8.7)`
+- `subapp-pbundle@0.0.15` `(0.0.14 => 0.0.15)`
+
+### Lerna Updated
+
+- `subapp-server@1.1.14` `(1.1.13 => 1.1.14)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix: use timer to filter out logs unrelated to errors ([#1585](https://github.com/electrode-io/electrode/pull/1585)) [commit](http://github.com/electrode-io/electrode/commit/5ab2e90e322ee27c2c52439d54857d46dc26d39b)
+  - dep: chalk@4, chalk@1.2.0, xaa@1.3.0, xclap@0.2.48 ([#1586](https://github.com/electrode-io/electrode/pull/1586)) [commit](http://github.com/electrode-io/electrode/commit/92270291156830971c6a9be18ad9e27ede2611cd)
+  - fix: more informative app log handling in admin ([#1584](https://github.com/electrode-io/electrode/pull/1584)) [commit](http://github.com/electrode-io/electrode/commit/2d711437f2a8c4a628ae91e1ffc0c0106a0c7239)
+  - fix: a single babel.config.js over .babelrc.js ([#1583](https://github.com/electrode-io/electrode/pull/1583)) [commit](http://github.com/electrode-io/electrode/commit/2fea74e5708d977ce9a9c3f487ba69219fefa2e7)
+
+- `packages/xarc-webpack`
+
+  - dep: chalk@4, chalk@1.2.0, xaa@1.3.0, xclap@0.2.48 ([#1586](https://github.com/electrode-io/electrode/pull/1586)) [commit](http://github.com/electrode-io/electrode/commit/92270291156830971c6a9be18ad9e27ede2611cd)
+
+- `packages/electrode-archetype-react-component[-dev]`
+
+  - fix CI [commit](http://github.com/electrode-io/electrode/commit/d16b995fb75ce09d351ace0c2f93a8a13b149da1)
+
+- `packages/electrode-react-webapp`
+
+  - fix: add result from promise to output ([#1587](https://github.com/electrode-io/electrode/pull/1587)) [commit](http://github.com/electrode-io/electrode/commit/5908531769ee277a35f2b0b75097d387d3a1897e)
+
+- `packages/subapp-pbundle`
+
+  - fix: pbundle test [commit](http://github.com/electrode-io/electrode/commit/69174e38bf4314fbc060a5ae615ccd27786db171)
+
 # 4/2/2020
 
 - fix: return 404 for /favicon.ico in webpack dev server (Hapi)
