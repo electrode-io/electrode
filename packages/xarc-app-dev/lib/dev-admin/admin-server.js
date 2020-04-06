@@ -75,16 +75,24 @@ class AdminServer {
   }
 
   showMenu() {
+    const reporterUrl = formUrl({ ...fullDevServer, path: controlPaths.reporter });
+    const logUrl = formUrl({ ...fullDevServer, path: controlPaths.appLog });
+    const devurl = formUrl({ ...fullDevServer, path: controlPaths.dev });
     const proxyItem = DEV_PROXY_ENABLED ? "<magenta>P</> - Restart Dev Proxy " : "";
-    const menu = ck`              <green.inverse>   Electrode Dev Admin Console   </>
+    const menu = ck`             <green.inverse>   Electrode Dev Admin Console   </>
 
- <white.inverse>For your app server</>
-   <magenta>A</> - Restart <magenta>D</> - <cyan>inspect-brk</> mode <magenta>I</> - <cyan>inspect</> mode <magenta>K</> - Kill&nbsp;
- <white.inverse>For Electrode webpack dev server</>  ${this._wds}
-   <magenta>W</> - Restart <magenta>E</> - <cyan>inspect-brk</> mode <magenta>R</> - <cyan>inspect</> mode <magenta>X</> - Kill&nbsp;
- <magenta>L</> - Show All Logs <magenta>0-6</> - Show Logs by Winston level
- ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown`;
-    this._io.show("\n" + boxen(menu, { margin: { left: 5 } }));
+<white.inverse>For your app server</> ${this._app}
+  <magenta>A</> - Restart <magenta>D</> - <cyan>inspect-brk</> mode <magenta>I</> - <cyan>inspect</> mode <magenta>K</> - Kill&nbsp;
+<white.inverse>For Electrode webpack dev server</>  ${this._wds}
+  <magenta>W</> - Restart <magenta>E</> - <cyan>inspect-brk</> mode <magenta>R</> - <cyan>inspect</> mode <magenta>X</> - Kill&nbsp;
+<magenta>L</> - Show All Logs <magenta>0-6</> - Show Logs by Winston level
+${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
+
+<green>         App URL: <cyan.underline>${formUrl(fullDevServer)}</></>
+<green>     App Log URL: <cyan.underline>${logUrl}</></>
+<green>   DEV dashboard: <cyan.underline>${devurl}</></>
+<green>WebPack reporter: <cyan.underline>${reporterUrl}</></>`;
+    this._io.show("\n" + boxen(menu, { margin: { left: 5 }, padding: { right: 3, left: 3 } }));
   }
 
   getServer(name) {
@@ -364,30 +372,49 @@ class AdminServer {
     if (context._deferTimer) {
       clearTimeout(context._deferTimer);
     } else {
-      context._deferIx = store.length - 1;
+      context._deferIx = [];
+    }
+
+    if (_.isEmpty(context._deferIx) || store.length - _.last(context._deferIx) > 1) {
+      context._deferIx.push(store.length - 1);
     }
 
     if (!context._showFullLink) {
       context._showFullLink = showFullLink;
     }
 
+    context._deferTimestamp = Date.now();
     context._deferTimer = setTimeout(() => {
       context._deferTimer = undefined;
-      for (let ix = context._deferIx; ix < store.length; ix++) {
-        if (typeof store[ix] === "string") {
-          this._io.write(tag + store[ix] + "\n");
-        } else if (store[ix]) {
-          const json = store[ix];
-          this._io.write(tag + (json.msg || json.message || JSON.stringify(json)) + "\n");
+      let currentIx = 0;
+      context._deferIx.forEach(deferIx => {
+        if (currentIx > deferIx) {
+          return;
         }
-      }
+        let ix = deferIx;
+        for (; ix < store.length; ix++) {
+          if (store[ix] === false) {
+            break;
+          }
+
+          if (typeof store[ix] === "string") {
+            this._io.write(tag + store[ix] + "\n");
+          } else if (store[ix]) {
+            const json = store[ix];
+            this._io.write(tag + (json.msg || json.message || JSON.stringify(json)) + "\n");
+          }
+        }
+        currentIx = ix + 1;
+      });
+      context._deferIx = [];
       if (context._showFullLink === true) {
         context._toggle = true;
         this.showFullLogUrlMessage(tag, context.fullLogUrl);
       }
       context._showFullLink = undefined;
-      if (store.length > 19999) {
-        context.store = store.slice(store.length - 9999);
+      if (store.length > 25000) {
+        const cleanup = store.filter(x => x !== false);
+        context.store = cleanup.slice(cleanup.length - 9999);
       }
     }, delay);
   }
@@ -396,6 +423,13 @@ class AdminServer {
     const { inputs, store } = context;
 
     const handler = data => {
+      const timeDiff = Date.now() - context._deferTimestamp;
+      // if an error line has been detected, then only consider other lines following it
+      // within 30 milliseconds as part of it.
+      if (context._deferTimer && timeDiff > 30) {
+        store.push(false);
+      }
+
       let str = data.toString();
       if (!str.trim()) {
         store.push("");
@@ -458,8 +492,8 @@ class AdminServer {
       debug,
       exec: Path.join(__dirname, "redbird-spawn"),
       waitStart: async info => {
-        this.passThruLineOutput(this._proxy, info._child.stdout, process.stdout);
-        this.passThruLineOutput(this._proxy, info._child.stderr, process.stderr);
+        this.passThruLineOutput(this._proxy, info._child.stdout, this._io);
+        this.passThruLineOutput(this._proxy, info._child.stderr, this._io);
       }
     });
   }
