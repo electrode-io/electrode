@@ -115,8 +115,8 @@ describe("shared redux store", function() {
 
     const container = {};
     const reduxCreateStore = getReduxCreateStore(info1);
-    const store = reduxCreateStore(null, container);
-    store.realize();
+    let store = reduxCreateStore(null, container);
+    store = store.realize();
     reduxCreateStore(null, container);
     expect(store.meta.chunks[0].bundleNames).to.deep.equal(["count"]);
   });
