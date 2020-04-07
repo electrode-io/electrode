@@ -99,4 +99,25 @@ describe("shared redux store", function() {
     expect(store.initialState).to.deep.equal({});
     expect(store.realize).to.be.a("function");
   });
+
+  it("should not add bundle to the store twice", () => {
+    const countBundle = {
+      name: "count",
+      reducer(state = 0) {
+        return state + 1;
+      },
+      selectCount(state) {
+        return state.count;
+      }
+    };
+
+    const info1 = { reduxBundles: [countBundle] };
+
+    const container = {};
+    const reduxCreateStore = getReduxCreateStore(info1);
+    const store = reduxCreateStore(null, container);
+    store.realize();
+    reduxCreateStore(null, container);
+    expect(store.meta.chunks[0].bundleNames).to.deep.equal(["count"]);
+  });
 });
