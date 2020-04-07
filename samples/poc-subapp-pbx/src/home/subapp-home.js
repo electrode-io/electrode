@@ -8,6 +8,7 @@ import {
   xarc,
   Component
 } from "subapp-pbundle";
+import { unmountComponentAtNode } from "preact/compat";
 
 // import bundleA from "../group-1-a/bundle-a";
 // import bundleB from "../group-1-b/bundle-b";
@@ -47,6 +48,15 @@ class ClientSubApp extends Component {
   constructor() {
     super();
     this.state = { ready: false };
+  }
+
+  componentWillUnmount() {
+    if (this.elementId) {
+      const el = window.document.getElementById(this.elementId);
+      if (el) {
+        unmountComponentAtNode(el);
+      }
+    }
   }
 
   render() {
@@ -93,7 +103,7 @@ const SubApp = xarc.IS_BROWSER ? ClientSubApp : SSRSubApp;
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { showDemo2: true };
+    this.state = { showDemo2: true, showDemo3: true };
   }
 
   render() {
@@ -109,6 +119,11 @@ class Home extends Component {
         </button>
         {this.state.showDemo2 && " - Now including Demo 2!"}
         {this.state.showDemo2 && <SubApp dynamic name="Demo2" />}
+        <button onClick={() => this.setState({ showDemo3: !this.state.showDemo3 })}>
+          Toggle Demo3 inlined in Home
+        </button>
+        {this.state.showDemo3 && " - Now including Demo 3!"}
+        {this.state.showDemo3 && <SubApp dynamic name="Demo3" />}
         <p>End of SubApp Home</p>
       </div>
     );
