@@ -75,7 +75,15 @@ const getConfig = () => {
                 prefetch: "console.log('Hello');"
               }
             },
-            "/react-helmet": {}
+            "/react-helmet": {},
+            "/intercept": {
+              templateFile: Path.join(__dirname, "../jsx-templates/index-intercept"),
+              content: {
+                status: 200,
+                html: "<div>Hello Electrode</div>",
+                prefetch: "console.log('Hello');"
+              }
+            }
           }
         }
       }
@@ -1546,6 +1554,24 @@ describe("hapi 17 electrode-react-webapp with jsx template", () => {
       .finally(() => {
         delete process.env.WEBPACK_DEV;
       });
+  });
+
+  it("should handle user intercept on rendering", () => {
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/intercept"
+        })
+        .then(res => {
+          expect(res.result).equals("context intercept handler");
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
   });
 
   it("should allow support react-helmet with custom token handler", () => {

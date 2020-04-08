@@ -33,10 +33,15 @@ module.exports = function registerRoutes({ routes, topOpts, server }) {
     const handler = async (request, h) => {
       try {
         const context = await routeHandler({
-          content: { html: "", status: HttpStatusCodes.OK, useStream: true },
+          content: { html: "", status: HttpStatusCodes.OK, useStream: false },
           mode: "",
           request
         });
+
+        if (context._intercepted) {
+          return context._intercepted.responseHandler(request, h, context);
+        }
+
         const data = context.result;
         const status = data.status;
 

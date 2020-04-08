@@ -133,7 +133,7 @@ module.exports = function setup() {
           context.voidStop(err);
           xaa.map(
             Object.entries(xarcSubappSSR),
-            async ([group, { queue }]) => {
+            async ([, { queue }]) => {
               await xaa.map(queue, async info => info.done(), { concurrency });
             },
             { concurrency }

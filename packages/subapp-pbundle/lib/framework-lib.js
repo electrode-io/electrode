@@ -182,9 +182,9 @@ class FrameworkLib {
     // if subapp didn't request to skip sending initial state and packReduxData was specified,
     //  then stringify packReduxData's return value and attach it to the index html.
     if (packReduxData && !subAppServer.attachInitialState) {
-      this.initialStateStr = JSON.stringify(packReduxData(this.store));
+      this.initialStateStr = JSON.stringify(packReduxData(this.store, this.ref.context));
     }
-}
+  }
 
   async signalStoreReady() {
     const reduxStoreReady =
@@ -194,7 +194,8 @@ class FrameworkLib {
       const { request } = this.ref.context.user;
       await reduxStoreReady({
         request,
-        store: this.store
+        store: this.store,
+        context: this.ref.context
       });
     }
   }

@@ -54,6 +54,16 @@ class RenderContext {
     this._status = s;
   }
 
+  /*
+   * Allow user to intercept handling of the rendering flow and take over the response with handler
+   *
+   * - If no handler provided, then the error is returned.
+   */
+  intercept({ responseHandler }) {
+    this._intercepted = { responseHandler };
+    throw new Error("electrode-react-webapp: render-context - user intercepted");
+  }
+
   //
   // set this any time to fully stop and close rendering
   // stop modes:

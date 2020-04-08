@@ -15,6 +15,10 @@ const DefaultHandleRoute = (request, h, handler, content, routeOptions) => {
     request
   })
     .then(context => {
+      if (context._intercepted) {
+        return context._intercepted.responseHandler(request, h, context);
+      }
+
       const data = context.result;
       const html = getDataHtml(data);
 
