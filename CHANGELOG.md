@@ -1,5 +1,50 @@
 # 4/8/2020
 
+- fix: handle errors from subapp preparing and processing
+- [feat]: support user intercept rendering flow through context
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.0.15` `(8.0.14 => 8.0.15)`
+- `@xarc/app-dev@8.0.15` `(8.0.14 => 8.0.15)`
+- `electrode-react-webapp@3.8.8` `(3.8.7 => 3.8.8)`
+- `subapp-pbundle@0.0.17` `(0.0.16 => 0.0.17)`
+- `subapp-server@1.1.15` `(1.1.14 => 1.1.15)`
+- `subapp-web@1.0.23` `(1.0.22 => 1.0.23)`
+
+### Lerna Updated
+
+- `subapp-react@0.0.14` `(0.0.13 => 0.0.14)`
+- `subapp-redux@1.0.23` `(1.0.22 => 1.0.23)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - [feat]: support user intercept rendering flow through context [commit](http://github.com/electrode-io/electrode/commit/3d01006b0e10c7b3cd7912b8dc7b843d8b8c75cf)
+
+- `packages/electrode-react-webapp`
+
+  - [feat]: support user intercept rendering flow through context [commit](http://github.com/electrode-io/electrode/commit/3d01006b0e10c7b3cd7912b8dc7b843d8b8c75cf)
+
+- `packages/subapp-pbundle`
+
+  - [feat]: support user intercept rendering flow through context [commit](http://github.com/electrode-io/electrode/commit/3d01006b0e10c7b3cd7912b8dc7b843d8b8c75cf)
+  - fix: Use shallow check for existing redux-bundles to allow for updates ([#1592](https://github.com/electrode-io/electrode/pull/1592)) [commit](http://github.com/electrode-io/electrode/commit/6292a90b273e4f9761c2233d7c8bf24bffb0f2b6)
+
+- `packages/subapp-server`
+
+  - [feat]: support user intercept rendering flow through context [commit](http://github.com/electrode-io/electrode/commit/3d01006b0e10c7b3cd7912b8dc7b843d8b8c75cf)
+
+- `packages/subapp-web`
+
+  - [feat]: support user intercept rendering flow through context [commit](http://github.com/electrode-io/electrode/commit/3d01006b0e10c7b3cd7912b8dc7b843d8b8c75cf)
+  - fix: handle errors from subapp preparing and processing [commit](http://github.com/electrode-io/electrode/commit/07c15ebceed5793758b3b2b9902eddb77ece8a66)
+
+# 4/8/2020
+
 - fix: consider .babelrc.js also
 - fix: Use composeBundlesRaw instead of composeBundles
 
