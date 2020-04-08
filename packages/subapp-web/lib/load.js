@@ -290,12 +290,19 @@ ${stack}`,
       let startTime;
 
       const closeOutput = () => {
+        ssrInfo.isDone = true;
         if (props.timestamp) {
           const now = Date.now();
           outputSpot.add(`<!-- time: ${now} diff: ${now - startTime} -->`);
         }
 
         outputSpot.close();
+      };
+
+      ssrInfo.done = () => {
+        if (!ssrInfo.isDone) {
+          closeOutput();
+        }
       };
 
       const processSubapp = async () => {
