@@ -1,3 +1,25 @@
+# 4/8/2020
+
+- fix: consider .babelrc.js also
+- fix: Use composeBundlesRaw instead of composeBundles
+
+## Packages
+
+- `@xarc/app@8.0.14` `(8.0.13 => 8.0.14)`
+- `@xarc/app-dev@8.0.14` `(8.0.13 => 8.0.14)`
+- `subapp-pbundle@0.0.16` `(0.0.15 => 0.0.16)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix: consider .babelrc.js also ([#1591](https://github.com/electrode-io/electrode/pull/1591)) [commit](http://github.com/electrode-io/electrode/commit/80e09956a8f4a7eb4801d03b7f7b9d843cd63068)
+
+- `packages/subapp-pbundle`
+
+  - fix: Redux bundler no dup ([#1590](https://github.com/electrode-io/electrode/pull/1590)) [commit](http://github.com/electrode-io/electrode/commit/2fc74a9e23c80fb50a8c004b8af769c255d608f7)
+  - fix: Use composeBundlesRaw instead of composeBundles ([#1589](https://github.com/electrode-io/electrode/pull/1589)) [commit](http://github.com/electrode-io/electrode/commit/26c373dfc912b37a64960e3f9f6bc06140b3a349)
+
 # 4/6/2020
 
 - many improvements on the dev admin app log handling
