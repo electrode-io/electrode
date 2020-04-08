@@ -349,20 +349,23 @@ function makeTasks(xclap) {
   const makeBabelConfig = (destDir, rcFile, resultFile = "babel.config.js") => {
     destDir = Path.resolve(destDir);
 
-    if (!Fs.existsSync(destDir)) return;
+    const files = [".babelrc.js", resultFile];
+
+    if (!Fs.existsSync(destDir) || files.find(file => Fs.existsSync(Path.join(destDir, file)))) {
+      return;
+    }
 
     const newName = Path.join(destDir, resultFile);
 
-    if (!Fs.existsSync(newName)) {
-      console.log(ck`<orange>Generating <cyan>${newName}</> for you - please commit it.</>`);
-      const babelConfig = `"use strict";
-module.exports = function (api) {
-  api.cache(true);
-  const config = require("@xarc/app-dev/config/babel/babelrc.js");
-  return { ...config };
-};\n`;
-      Fs.writeFileSync(newName, babelConfig);
-    }
+    console.log(ck`<orange>Generating <cyan>${newName}</> for you - please commit it.</>`);
+    Fs.writeFileSync(
+      newName,
+      `"use strict";
+module.exports = {
+  extends: "@xarc/app-dev/config/babel/${rcFile}"
+};
+`
+    );
   };
 
   const AppMode = archetype.AppMode;
