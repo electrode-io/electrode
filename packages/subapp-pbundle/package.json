@@ -1,6 +1,6 @@
 {
   "name": "subapp-pbundle",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Electrode subapp support for Preact and redux-bundler",
   "module": "dist/dev/index.js",
   "main": "lib/index.js",
