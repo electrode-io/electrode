@@ -61,12 +61,10 @@ function getReduxCreateStore(info) {
       });
       Object.assign(store.initialState, initialState);
     } else {
-      const integratedBundleNames = store.meta.chunks[0].bundleNames;
-      const unintegratedBundles = bundles.filter(
-        bundle => integratedBundleNames.indexOf(bundle.name) < 0
-      );
+      const integratedBundles = Object.values(store.meta.chunks[0].rawBundles);
+      const unintegratedBundles = bundles.filter(bundle => integratedBundles.indexOf(bundle) < 0);
       // using apply to destruct bundles array into arguments
-      store.integrateBundles.apply(undefined, unintegratedBundles);
+      store.integrateBundles(...unintegratedBundles);
     }
     return store;
   };
