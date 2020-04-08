@@ -53,7 +53,9 @@ class JsxRenderer {
     const context = new RenderContext(options, this);
 
     return Promise.each(this._beforeRenders, r => r.beforeRender(context))
-      .then(() => this._render(this._template, context, 0, defer))
+      .then(() => {
+        return this._render(this._template, context, 0, defer);
+      })
       .then(() => {
         return defer.promise
           .then(() => context.output.close())
@@ -111,12 +113,18 @@ class JsxRenderer {
           return handleClose();
         } else {
           const child = element.children[ix++];
-          const promise = this._render(child, context, depth);
 
-          if (promise) {
-            return promise.then(nextChild);
-          } else {
-            return nextChild();
+          try {
+            const promise = this._render(child, context, depth);
+            if (promise) {
+              return promise.then(nextChild);
+            } else {
+              return nextChild();
+            }
+          } catch (err) {
+            if (defer) return defer.reject(err);
+
+            throw err;
           }
         }
       };
@@ -144,6 +152,7 @@ class JsxRenderer {
             context.handleError(err);
           });
       } else {
+        // TODO: is try/catch needed for this block?  Need test case.
         const promise = this._render(rendered, context, depth + 1);
         if (promise) {
           return promise
