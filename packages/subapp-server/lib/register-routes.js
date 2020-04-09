@@ -18,7 +18,7 @@ module.exports = function registerRoutes({ routes, topOpts, server }) {
     const routeOptions = Object.assign(
       {},
       topOpts,
-      _.pick(route, ["pageTitle", "bundleChunkSelector", "templateFile"])
+      _.pick(route, ["pageTitle", "bundleChunkSelector", "templateFile", "selectTemplate"])
     );
 
     assert(routeOptions.templateFile, `subapp-server: route ${r.name} must define templateFile`);
