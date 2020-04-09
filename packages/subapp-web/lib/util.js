@@ -164,12 +164,32 @@ const utils = {
       return CDN_JS_BUNDLES;
     }
 
-    if (routeOptions.cdn.enable !== false && CDN_ASSETS === undefined) {
+    if (routeOptions.cdn.enable === true && CDN_ASSETS === undefined) {
+      const env = process.env.NODE_ENV;
+      const prod = env === "production";
+      const ignoreMsg = `== This is OK and you can ignore this message if it's what you intended. ==`;
+      const logError = console.error; // eslint-disable-line
+      if (!prod) {
+        logError(
+          `Warning: you've set cdn.enable to true for NODE_ENV ${env}.
+Generally you should do that for production deployment in the cloud only.
+${ignoreMsg}`
+        );
+      }
+
       try {
         const assetsFp = Path.resolve(cdnAssetsFile);
-        CDN_ASSETS = require(assetsFp);
+        CDN_ASSETS = JSON.parse(Fs.readFileSync(assetsFp));
       } catch (err) {
-        console.error("Error: Loading CDN assets map failed", err); // eslint-disable-line
+        if (prod) {
+          logError("Error: Loading CDN assets map failed", err); // eslint-disable-line
+        } else {
+          logError(
+            `Warning: load CDN asset map failed, default to local assets for NODE_ENV ${env} mode. path: ${cdnAssetsFile}
+Error: ${err.message}
+${ignoreMsg}`
+          );
+        }
         CDN_ASSETS = false;
       }
     }

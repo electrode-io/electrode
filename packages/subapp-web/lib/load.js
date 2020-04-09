@@ -77,13 +77,13 @@ module.exports = function setup(setupContext, { props: setupProps }) {
   const retrieveDevServerBundle = async () => {
     return new Promise(resolve => {
       const routeOptions = setupContext.routeOptions;
-      const path = `${bundleBase}${bundleAsset.name}`;
+      const path = Path.posix.join(bundleBase, bundleAsset.name);
       const bundleUrl = formUrl({ ...routeOptions.httpDevServer, path });
       retrieveUrl(bundleUrl, (err, resp, body) => {
         if (err || resp.statusCode !== 200) {
           const msg = makeDevDebugMessage(
             `Error: fail to retrieve subapp bundle from '${bundleUrl}' for inlining in index HTML
-${err || body}`
+Response: ${err || body}`
           );
           console.error(msg); // eslint-disable-line
           resolve(makeDevDebugHtml(msg));
