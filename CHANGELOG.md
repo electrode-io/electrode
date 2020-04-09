@@ -1,3 +1,17 @@
+# 4/9/2020
+
+- Add "selectTemplate" to picked opts: subapp -> electrode-react-webapp
+
+## Packages
+
+- `subapp-server@1.1.16` `(1.1.15 => 1.1.16)`
+
+## Commits
+
+- `packages/subapp-server`
+
+  - Add "selectTemplate" to picked opts: subapp -> electrode-react-webapp ([#1594](https://github.com/electrode-io/electrode/pull/1594)) [commit](http://github.com/electrode-io/electrode/commit/2865ec49ec43575b803abd705e20e5d0c39b066a)
+
 # 4/8/2020
 
 - fix: handle errors from subapp preparing and processing
