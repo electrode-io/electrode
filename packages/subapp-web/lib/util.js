@@ -6,6 +6,7 @@ const Fs = require("fs");
 const assert = require("assert");
 const Path = require("path");
 const _ = require("lodash");
+const { tryThrowOriginalSubappRegisterError } = require("subapp-util");
 
 let CDN_ASSETS;
 let CDN_JS_BUNDLES;
@@ -53,7 +54,12 @@ const utils = {
     const entryName = name.toLowerCase();
     // find entry point
     const entryPoints = assets.entryPoints[entryName];
-    assert(entryPoints, `subapp-web: no entry point found for ${name}`);
+    if (!entryPoints) {
+      tryThrowOriginalSubappRegisterError(name);
+      throw new Error(
+        `subapp-web: no entry point found for subapp '${name}' - please double check its directory name match ${entryName}.`
+      );
+    }
 
     //
     // Normal entry output bundles are generated as <entryName>.bundle[.dev].js,

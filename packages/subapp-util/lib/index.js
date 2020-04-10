@@ -211,12 +211,15 @@ const subAppManifest = () => {
 };
 
 function registerSubApp(subapp) {
+  const _trace = new Error(
+    `registerSubApp - subapp name '${subapp.name}' does not match its directory name`
+  );
   const container = getSubAppContainer();
   if (container[subapp.name]) {
     console.error(`registerSubApp: subapp '${subapp.name}' already registered - replacing`);
   }
 
-  container[subapp.name] = Object.assign({}, container[subapp.name], subapp);
+  container[subapp.name] = Object.assign({ _trace }, container[subapp.name], subapp);
 
   return container[subapp.name];
 }
@@ -308,6 +311,16 @@ const formUrl = ({ protocol = "http", host = "", port = "", path = "" }) => {
   return Url.format({ protocol: proto, host: host2, pathname: path });
 };
 
+const tryThrowOriginalSubappRegisterError = name => {
+  // an entry point can't be found for a subapp name, so try to match it to
+  // the scanned result.
+  const container = getSubAppContainer();
+  const subapp = container[name];
+  if (subapp && subapp._trace) {
+    throw subapp._trace;
+  }
+};
+
 module.exports = {
   es6Require,
   scanSubAppsFromDir,
@@ -320,5 +333,6 @@ module.exports = {
   loadSubAppServerByName,
   refreshSubAppByName,
   refreshAllSubApps,
-  formUrl
+  formUrl,
+  tryThrowOriginalSubappRegisterError
 };
