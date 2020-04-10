@@ -56,13 +56,13 @@ class AdminServer {
 
     this._shutdown = false;
     this._fullAppLogUrl = formUrl({ ...fullDevServer, path: controlPaths.appLog });
-    this.makeMenu();
   }
 
   async start() {
     this._wds = ck`<gray.inverse>[wds]</> `;
     this._proxy = ck`<green.inverse>[proxy]</> `;
     this._app = ck`<cyan.inverse>[app]</> `;
+    this.makeMenu();
     this._io.setup();
     this._io.addItem({
       name: DEV_ADMIN_STATUS,
