@@ -526,7 +526,8 @@ ${info.name} - assuming it started.</>`);
         pendingMessages.push(data);
         return false;
       } else {
-        this._io.show(ck`<orange>${info.name} (PID: ${info._child.pid}) started</>`);
+        const pid = _.get(info, "_child.pid");
+        this._io.show(ck`<orange>${info.name} (PID: ${pid}) started</>`);
       }
 
       started = true;

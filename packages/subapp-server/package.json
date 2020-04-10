@@ -72,5 +72,10 @@
     "functions": 0,
     "lines": 0,
     "cache": true
+  },
+  "prettier": {
+    "printWidth": 100,
+    "trailingComma": "none",
+    "arrowParens": "avoid"
   }
 }
