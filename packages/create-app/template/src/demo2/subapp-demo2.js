@@ -45,7 +45,7 @@ export default reduxLoadSubApp({
   Component: connect(mapStateToProps, dispatch => ({ dispatch }))(Demo2),
   name: "Demo2",
   reduxReducers,
-  prepare: ({ initialData }) => {
-    return Promise.resolve(initialData || { value: 999 });
+  prepare: ({ context, request }) => {
+    return Promise.resolve({ value: 999 });
   }
 });
