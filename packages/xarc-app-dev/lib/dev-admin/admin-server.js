@@ -82,12 +82,18 @@ class AdminServer {
 
     this._shutdown ||
       setTimeout(() => {
-        this.showMenu();
+        this.showMenu(true);
       }, 100);
   }
 
   updateStatus(line) {
-    this._io.updateItem(DEV_ADMIN_STATUS, `Press M for menu, Q to exit. ${line}`);
+    if (line !== undefined) {
+      this._statusLine = line;
+    }
+    this._io.updateItem(
+      DEV_ADMIN_STATUS,
+      `Press M to show/hide menu. Q to exit. ${this._statusLine}${this._menu}`
+    );
   }
 
   makeMenu() {
@@ -109,11 +115,21 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
 <green>   DEV dashboard: <cyan.underline>${devurl}</></>
 <green>WebPack reporter: <cyan.underline>${reporterUrl}</></>`;
 
-    this._menu = boxen(menu, { margin: { left: 5 }, padding: { right: 3, left: 3 } });
+    this._menu = "\n" + boxen(menu, { margin: { left: 5 }, padding: { right: 3, left: 3 } });
   }
 
-  showMenu() {
-    this._io.show(this._menu);
+  showMenu(force) {
+    let show = !this._menu; // show if not showing
+    if (force === false) show = false; // if force to not show
+    if (force === true) show = true; // do not hide if force is true
+
+    if (show) {
+      this.makeMenu();
+      setTimeout(() => this.showMenu(false), 15 * 60 * 1000).unref(); // hide menu in 15 minutes
+    } else {
+      this._menu = "";
+    }
+    this.updateStatus();
   }
 
   getServer(name) {
