@@ -319,7 +319,7 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
               this._io.updateItem(WDS_PROGRESS, progLine);
             } else {
               if (progLine) {
-                this._io.removeItem(WDS_PROGRESS);
+                setTimeout(() => this._io.removeItem(WDS_PROGRESS), 2000).unref();
                 progLine = "";
               }
               if (line.includes("webpack bundle is now")) {
