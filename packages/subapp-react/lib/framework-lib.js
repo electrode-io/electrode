@@ -59,8 +59,8 @@ class FrameworkLib {
   }
 
   renderTo(element, options) {
-    if (options.streaming) {
-      assert(!options.suspenseSsr, "streaming and suspense SSR together are not supported");
+    if (options.useStream) {
+      assert(!options.suspenseSsr, "useStream and suspense SSR together are not supported");
       if (options.hydrateServerData) {
         return ReactDOMServer.renderToNodeStream(element);
       } else {
@@ -193,7 +193,7 @@ class FrameworkLib {
       `subapp ${this.ref.subApp.name} specified useReactRouter without a StartComponent, \
 and can't generate it because module react-router-dom with StaticRouter is not found`
     );
-    return props2 =>
+    return (props2) =>
       React.createElement(
         ReactRouterDom.StaticRouter,
         props2,

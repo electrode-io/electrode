@@ -1,4 +1,4 @@
-# Streaming SSR [ ]
+# Streaming SSR [x]
 
 - Enable support for `renderToNodeStream`
 - Enable HTTP streaming
@@ -11,7 +11,7 @@
 - Store bundle load status in `window.webSubApps`
 - When rendering subapp without bundle yet, dynamically load them
 
-# Dynamic SSR [ ]
+# Dynamic SSR [x]
 
 - Allow each route and subapp to dynamically turn on/off SSR for a request
 

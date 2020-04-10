@@ -69,5 +69,9 @@
       "electrode-archetype-opt-jest": "../../packages/electrode-archetype-opt-jest"
     }
   },
-  "optionalDependencies": {}
+  "prettier": {
+    "printWidth": 100,
+    "trailingComma": "none",
+    "arrowParens": "avoid"
+  }
 }

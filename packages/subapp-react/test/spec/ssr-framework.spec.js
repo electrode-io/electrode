@@ -9,7 +9,7 @@ const { asyncVerify } = require("run-verify");
 const Redux = require("redux");
 const { connect } = require("react-redux");
 
-describe("SSR React framework", function() {
+describe("SSR React framework", function () {
   it("should setup React framework", () => {
     expect(lib.React).to.be.ok;
     expect(lib.AppContext).to.be.ok;
@@ -92,7 +92,7 @@ describe("SSR React framework", function() {
     expect(res).contains("Hello foo bar");
   });
 
-  it("should render Component with streaming if enabled", () => {
+  it("should render Component with stream if enabled", () => {
     const framework = new lib.FrameworkLib({
       subApp: {
         prepare: () => ({ test: "foo bar" }),
@@ -101,7 +101,7 @@ describe("SSR React framework", function() {
         }
       },
       subAppServer: {},
-      options: { serverSideRendering: true, streaming: true },
+      options: { serverSideRendering: true, useStream: true },
       context: {
         user: {}
       }
@@ -118,7 +118,7 @@ describe("SSR React framework", function() {
     );
   });
 
-  it("should hydrate render Component with streaming if enabled", () => {
+  it("should hydrate render Component with stream if enabled", () => {
     const framework = new lib.FrameworkLib({
       subApp: {
         prepare: () => ({ test: "foo bar" }),
@@ -127,7 +127,7 @@ describe("SSR React framework", function() {
         }
       },
       subAppServer: {},
-      options: { serverSideRendering: true, streaming: true, hydrateServerData: true },
+      options: { serverSideRendering: true, useStream: true, hydrateServerData: true },
       context: {
         user: {}
       }

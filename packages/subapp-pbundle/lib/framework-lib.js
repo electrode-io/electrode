@@ -66,7 +66,7 @@ class FrameworkLib {
   }
 
   renderTo(element, options) {
-    assert(!options.streaming, "render to stream is not yet supported for preact");
+    assert(!options.useStream, "render to stream is not yet supported for preact");
 
     assert(!options.suspenseSsr, "suspense is not yet supported for preact");
 

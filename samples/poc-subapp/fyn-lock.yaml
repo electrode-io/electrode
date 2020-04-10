@@ -2088,10 +2088,10 @@
    '@webassemblyjs/wast-parser': 1.8.5
    '@xtuc/long': 4.2.2
 '@xarc/app':
- _latest: 8.0.9-fynlocal_h
+ _latest: 8.0.15-fynlocal_h
  _:
-  ../../packages/xarc-app: 8.0.9-fynlocal_h
- 8.0.9-fynlocal_h:
+  ../../packages/xarc-app: 8.0.15-fynlocal_h
+ 8.0.15-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/xarc-app
@@ -2103,10 +2103,10 @@
    optional-require: ^1.0.0
    subapp-util: ^1.0.4
 '@xarc/app-dev':
- _latest: 8.0.9-fynlocal_h
+ _latest: 8.0.15-fynlocal_h
  _:
-  ../../packages/xarc-app-dev: 8.0.9-fynlocal_h
- 8.0.9-fynlocal_h:
+  ../../packages/xarc-app-dev: 8.0.15-fynlocal_h
+ 8.0.15-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/xarc-app-dev
@@ -2125,15 +2125,15 @@
    '@babel/register': ^7.0.0
    '@jchip/redbird': ^1.1.0
    '@loadable/babel-plugin': ^5.10.0
-   '@xarc/webpack': 8.0.0
+   '@xarc/webpack': 8.0.2
    ansi-to-html: ^0.6.8
    babel-plugin-dynamic-import-node: ^2.2.0
    babel-plugin-lodash: ^3.3.4
    babel-plugin-minify-dead-code-elimination: ^0.5.0
    babel-plugin-transform-node-env-inline: ^0.4.3
    babel-plugin-transform-react-remove-prop-types: ^0.4.20
-   boxen: ^2.1.0
-   chalker: ^1.1.1
+   boxen: ^4.2.0
+   chalker: ^1.2.0
    chokidar: ^2.0.4
    core-js: ^3
    electrode-hapi-compat: ^1.2.0
@@ -2144,6 +2144,7 @@
    identity-obj-proxy: ^3.0.0
    isomorphic-loader: ^3.0.0
    lodash: ^4.13.1
+   log-update: ^4.0.0
    mime: ^1.0.0
    mkdirp: ^0.5.1
    nix-clap: ^1.3.7
@@ -2161,25 +2162,25 @@
    webpack-dev-middleware: ^3.4.0
    webpack-hot-middleware: ^2.22.2
    winston: ^2.3.1
-   xaa: ^1.2.2
-   xclap: ^0.2.46
+   xaa: ^1.4.0
+   xclap: ^0.2.48
    xenv-config: ^1.3.1
    xsh: ^0.4.4
   peerDependencies:
    '@xarc/app': ^8.0.3
 '@xarc/webpack':
- _latest: 8.0.0-fynlocal_h
+ _latest: 8.0.2-fynlocal_h
  _:
-  ../xarc-webpack: 8.0.0-fynlocal_h
- 8.0.0-fynlocal_h:
+  ../xarc-webpack: 8.0.2-fynlocal_h
+ 8.0.2-fynlocal_h:
   $: local
   _: ../../packages/xarc-webpack
   dependencies:
    '@loadable/webpack-plugin': ^5.7.1
    autoprefixer: ^9.6.0
    babel-loader: ^8.0.4
-   chalk: ^3.0.0
-   chalker: ^1.1.2
+   chalk: ^4.0.0
+   chalker: ^1.2.0
    css-loader: ^1.0.0
    electrode-cdn-file-loader: ^1.0.0
    electrode-node-resolver: ^2.0.0
@@ -2341,9 +2342,15 @@ ansi-colors:
   $: sha512-hHUXGagefjN2iRrID63xckIvotOXOojhQKWIPUZ4mNUZ9nLZW+7FMNoE1lOkEhNWYsx/7ysGIuJYCiMAA9FnrA==
   _: 'https://registry.npmjs.org/ansi-colors/-/ansi-colors-3.2.4.tgz'
 ansi-escapes:
- _latest: 4.3.0
+ _latest: 4.3.1
  _:
   ^3.0.0: 3.2.0
+  ^4.3.0: 4.3.1
+ 4.3.1:
+  $: sha512-JWF7ocqNrp8u9oqpgV+wH5ftbt+cfvv+PTjOvKLT3AdYly/LmORARfEVT1iyjwN+4MqE5UmVKoAdIBqeoCHgLA==
+  _: 'https://registry.npmjs.org/ansi-escapes/-/ansi-escapes-4.3.1.tgz'
+  dependencies:
+   type-fest: ^0.11.0
  3.2.0:
   $: sha512-cBhpre4ma+U0T1oM5fXg7Dy1Jw7zzwv7lt/GoCpr+hDQJoYnKVPLL4dCvSEFMmQurOQvSrwT7SL/DAlhBI97RQ==
   _: 'https://registry.npmjs.org/ansi-escapes/-/ansi-escapes-3.2.0.tgz'
@@ -2360,6 +2367,10 @@ ansi-regex:
   ^2.0.0: 2.1.1
   ^3.0.0: 3.0.0
   '^4.0.0,^4.1.0': 4.1.0
+  ^5.0.0: 5.0.0
+ 5.0.0:
+  $: sha512-bY6fj56OUQ0hU1KjFNDQuJFezqKdrAyFdIevADiqrWHwSlbmBNMHp5ak2f40Pm8JTFyM2mqxkG6ngkHO11f/lg==
+  _: 'https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.0.tgz'
  4.1.0:
   $: sha512-1apePfXM1UOSqw0o9IiFAovVz9M5S1Dg+4TrDwfMewQ6p/rmMueb7tWZjQ1rx4Loy1ArBggoqGpfqqdI4rondg==
   _: 'https://registry.npmjs.org/ansi-regex/-/ansi-regex-4.1.0.tgz'
@@ -2374,7 +2385,7 @@ ansi-styles:
  _:
   ^2.2.1: 2.2.1
   '^3.2.0,^3.2.1': 3.2.1
-  ^4.1.0: 4.2.1
+  '^4.0.0,^4.1.0': 4.2.1
  4.2.1:
   $: sha512-9VGjrMsG1vePxcSweQsN20KY/c4zN0h9fLjqAbwbPfahM3t+NL+M9HC8xeXG2I8pX5NoamTGNuomEUFI7fcUjA==
   _: 'https://registry.npmjs.org/ansi-styles/-/ansi-styles-4.2.1.tgz'
@@ -2541,6 +2552,10 @@ astral-regex:
  _latest: 2.0.0
  _:
   ^1.0.0: 1.0.0
+  ^2.0.0: 2.0.0
+ 2.0.0:
+  $: sha512-Z7tMw1ytTXt5jqMcOP+OQteU1VuNK9Y02uuJtKQ1Sv69jXQKKg5cibLwGJow8yzZP+eAc18EmLGPal0bp36rvQ==
+  _: 'https://registry.npmjs.org/astral-regex/-/astral-regex-2.0.0.tgz'
  1.0.0:
   $: sha512-+Ryf6g3BKoRc7jfp7ad8tM4TtMiaWvbF/1/sQcZPkkS7ag3D5nMBCe2UfOTONtAkaG0tO0ij3C5Lwmf1EiyjHg==
   _: 'https://registry.npmjs.org/astral-regex/-/astral-regex-1.0.0.tgz'
@@ -2884,18 +2899,19 @@ boolbase:
 boxen:
  _latest: 4.2.0
  _:
-  ^2.1.0: 2.1.0
- 2.1.0:
-  $: sha512-luq3RQOt2U5sUX+fiu+qnT+wWnHDcATLpEe63jvge6GUZO99AKbVRfp97d2jgLvq1iQa0ORzaAm4lGVG52ZSlw==
-  _: 'https://registry.npmjs.org/boxen/-/boxen-2.1.0.tgz'
+  ^4.2.0: 4.2.0
+ 4.2.0:
+  $: sha512-eB4uT9RGzg2odpER62bBwSLvUeGC+WbRjjyyFhGsKnc8wp/m0+hQsMUvUe3H2V0D5vw0nBdO1hCJoZo5mKeuIQ==
+  _: 'https://registry.npmjs.org/boxen/-/boxen-4.2.0.tgz'
   dependencies:
    ansi-align: ^3.0.0
-   camelcase: ^5.0.0
-   chalk: ^2.4.1
-   cli-boxes: ^1.0.0
-   string-width: ^3.0.0
-   term-size: ^1.2.0
-   widest-line: ^2.0.0
+   camelcase: ^5.3.1
+   chalk: ^3.0.0
+   cli-boxes: ^2.2.0
+   string-width: ^4.1.0
+   term-size: ^2.1.0
+   type-fest: ^0.8.1
+   widest-line: ^3.1.0
 brace-expansion:
  _latest: 1.1.11
  _:
@@ -3219,6 +3235,13 @@ chalk:
   '2.4.2,^2.0.0,^2.0.1,^2.1.0,^2.4.1,^2.4.2': 2.4.2
   ^1.1.3: 1.1.3
   ^3.0.0: 3.0.0
+  ^4.0.0: 4.0.0
+ 4.0.0:
+  $: sha512-N9oWFcegS0sFr9oh1oz2d7Npos6vNoWW9HvtCg5N1KRFpUhaAhvTv5Y58g880fZaEYSNm3qDz8SU1UrGvp+n7A==
+  _: 'https://registry.npmjs.org/chalk/-/chalk-4.0.0.tgz'
+  dependencies:
+   ansi-styles: ^4.1.0
+   supports-color: ^7.1.0
  3.0.0:
   $: sha512-4D3B6Wf41KOYRFdszmDqMCGq5VV/uMAB273JILmO+3jAlh8X4qDtdtgCR3fxtbLEMzSx22QdhnDcJvu2u1fVwg==
   _: 'https://registry.npmjs.org/chalk/-/chalk-3.0.0.tgz'
@@ -3242,14 +3265,14 @@ chalk:
    strip-ansi: ^3.0.0
    supports-color: ^2.0.0
 chalker:
- _latest: 1.1.2
+ _latest: 1.2.0
  _:
-  '^1.1.1,^1.1.2': 1.1.2
- 1.1.2:
-  $: sha512-DYaS9gfTsjQz8aYBKVlqicaXgNHfp6/HqOmNXdq40C/QgXl16kJSp2USdF8l2bJGDEE9hJKQqSGQVB5UczxnTA==
-  _: 'https://registry.npmjs.org/chalker/-/chalker-1.1.2.tgz'
+  ^1.2.0: 1.2.0
+ 1.2.0:
+  $: sha512-Cag6asQV/lK6AQGBWGGDt5bu+FSzo4OlLHQVrd4Io1cJCGNXIvKcaxx6JH0+iL1azQ4Bs1i7qkvzlkH2Vwo2OQ==
+  _: 'https://registry.npmjs.org/chalker/-/chalker-1.2.0.tgz'
   dependencies:
-   chalk: ^2.4.2
+   chalk: ^4.0.0
 chardet:
  _latest: 0.8.0
  _:
@@ -3334,14 +3357,20 @@ class-utils:
 cli-boxes:
  _latest: 2.2.0
  _:
-  ^1.0.0: 1.0.0
- 1.0.0:
-  $: sha1-T6kXw+WclKAEzWH47lCdplFocUM=
-  _: 'https://registry.npmjs.org/cli-boxes/-/cli-boxes-1.0.0.tgz'
+  ^2.2.0: 2.2.0
+ 2.2.0:
+  $: sha512-gpaBrMAizVEANOpfZp/EEUixTXDyGt7DFzdK5hU+UbWt/J0lB0w20ncZj59Z9a93xHb9u12zF5BS6i9RKbtg4w==
+  _: 'https://registry.npmjs.org/cli-boxes/-/cli-boxes-2.2.0.tgz'
 cli-cursor:
  _latest: 3.1.0
  _:
   ^2.1.0: 2.1.0
+  ^3.1.0: 3.1.0
+ 3.1.0:
+  $: sha512-I/zHAwsKf9FqGoXM4WWRACob9+SNukZTd94DWF57E4toouRulbCxcUh6RKUEOQlYTHJnzkPMySvPNaaSLNfLZw==
+  _: 'https://registry.npmjs.org/cli-cursor/-/cli-cursor-3.1.0.tgz'
+  dependencies:
+   restore-cursor: ^3.1.0
  2.1.0:
   $: sha1-s12sN2R5+sw+lHR9QdDQ9SOP/LU=
   _: 'https://registry.npmjs.org/cli-cursor/-/cli-cursor-2.1.0.tgz'
@@ -3635,7 +3664,7 @@ cross-spawn:
  _:
   '6.0.5,^6.0.0': 6.0.5
   ^4: 4.0.2
-  '^5.0.1,^5.1.0': 5.1.0
+  ^5.1.0: 5.1.0
  6.0.5:
   $: sha512-eTVLrBSt7fjbDygz805pMnstIs2VTBNkRm0qxZd+M7A5XDdxVRWO5MxGBXZhjY4cqLYLdtrGqRf8mBPmzwSpWQ==
   _: 'https://registry.npmjs.org/cross-spawn/-/cross-spawn-6.0.5.tgz'
@@ -4287,10 +4316,10 @@ electrode-node-resolver:
   dependencies:
    require-at: ^1.0.0
 electrode-react-webapp:
- _latest: 3.8.6-fynlocal_h
+ _latest: 3.8.8-fynlocal_h
  _:
-  ../electrode-react-webapp: 3.8.6-fynlocal_h
- 3.8.6-fynlocal_h:
+  ../electrode-react-webapp: 3.8.8-fynlocal_h
+ 3.8.8-fynlocal_h:
   $: local
   _: ../../packages/electrode-react-webapp
   dependencies:
@@ -4357,6 +4386,10 @@ emoji-regex:
  _latest: 8.0.0
  _:
   ^7.0.1: 7.0.3
+  ^8.0.0: 8.0.0
+ 8.0.0:
+  $: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==
+  _: 'https://registry.npmjs.org/emoji-regex/-/emoji-regex-8.0.0.tgz'
  7.0.3:
   $: sha512-CwBLREIQ7LvYFB0WyRvwhq5N5qPhc6PMjD6bYggFlI5YyDgl+0vxq5VHbMOFqLg7hfWzmu8T5Z1QofhmTIhItA==
   _: 'https://registry.npmjs.org/emoji-regex/-/emoji-regex-7.0.3.tgz'
@@ -4705,7 +4738,6 @@ exec-sh:
 execa:
  _latest: 4.0.0
  _:
-  ^0.7.0: 0.7.0
   ^1.0.0: 1.0.0
  1.0.0:
   $: sha512-adbxcyWV46qiHyvSp50TKt05tB4tK3HcmF7/nxfAdhnox83seTDbwnaqKO4sXRy7roHAIFqJP/Rw/AuEbX61LA==
@@ -4713,17 +4745,6 @@ execa:
   dependencies:
    cross-spawn: ^6.0.0
    get-stream: ^4.0.0
-   is-stream: ^1.1.0
-   npm-run-path: ^2.0.0
-   p-finally: ^1.0.0
-   signal-exit: ^3.0.0
-   strip-eof: ^1.0.0
- 0.7.0:
-  $: sha1-lEvs00zEHuMqY6n68nrVpl/Fl3c=
-  _: 'https://registry.npmjs.org/execa/-/execa-0.7.0.tgz'
-  dependencies:
-   cross-spawn: ^5.0.1
-   get-stream: ^3.0.0
    is-stream: ^1.1.0
    npm-run-path: ^2.0.0
    p-finally: ^1.0.0
@@ -5184,16 +5205,12 @@ get-caller-file:
 get-stream:
  _latest: 5.1.0
  _:
-  ^3.0.0: 3.0.0
   ^4.0.0: 4.1.0
  4.1.0:
   $: sha512-GMat4EJ5161kIy2HevLlr4luNjBgvmj413KaQA7jt4V8B4RDsfpHk7WQ9GVqfYyyx8OS/L66Kox+rJRNklLK7w==
   _: 'https://registry.npmjs.org/get-stream/-/get-stream-4.1.0.tgz'
   dependencies:
    pump: ^3.0.0
- 3.0.0:
-  $: sha1-jpQ9E1jcN1VQVOy+LtsFqhdO3hQ=
-  _: 'https://registry.npmjs.org/get-stream/-/get-stream-3.0.0.tgz'
 get-value:
  _latest: 3.0.1
  _:
@@ -5980,6 +5997,10 @@ is-fullwidth-code-point:
  _latest: 3.0.0
  _:
   ^2.0.0: 2.0.0
+  ^3.0.0: 3.0.0
+ 3.0.0:
+  $: sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==
+  _: 'https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-3.0.0.tgz'
  2.0.0:
   $: sha1-o7MKXE8ZkYMWeqq5O+764937ZU8=
   _: 'https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-2.0.0.tgz'
@@ -7137,6 +7158,18 @@ lodash.upperfirst:
  4.3.1:
   $: sha1-E2Xt9DFIBIHvDRxolXpe2Z1J984=
   _: 'https://registry.npmjs.org/lodash.upperfirst/-/lodash.upperfirst-4.3.1.tgz'
+log-update:
+ _latest: 4.0.0
+ _:
+  ^4.0.0: 4.0.0
+ 4.0.0:
+  $: sha512-9fkkDevMefjg0mmzWFBW8YkFP91OrizzkW3diF7CpG+S2EYdy4+TVfGwz1zeF8x7hCx1ovSPTOE9Ngib74qqUg==
+  _: 'https://registry.npmjs.org/log-update/-/log-update-4.0.0.tgz'
+  dependencies:
+   ansi-escapes: ^4.3.0
+   cli-cursor: ^3.1.0
+   slice-ansi: ^4.0.0
+   wrap-ansi: ^6.2.0
 loose-envify:
  _latest: 1.4.0
  _:
@@ -7337,7 +7370,7 @@ mimic-fn:
  _latest: 3.0.0
  _:
   ^1.0.0: 1.2.0
-  ^2.0.0: 2.1.0
+  '^2.0.0,^2.1.0': 2.1.0
  2.1.0:
   $: sha512-OqbOk5oEQeAZ8WXWydlu9HJjz9WVdEIvamMCcXmuqUYjTknH/sqsWvhQ3vgwKFRR1HpjvNBKQ37nbJgYzGqGcg==
   _: 'https://registry.npmjs.org/mimic-fn/-/mimic-fn-2.1.0.tgz'
@@ -7551,7 +7584,7 @@ nice-try:
 nix-clap:
  _latest: 1.3.10
  _:
-  '^1.0.8,^1.3.7': 1.3.10
+  '^1.3.10,^1.3.7': 1.3.10
  1.3.10:
   $: sha512-sdQTROrsLYFFRo4koLdVPfXC+H7kB+cEjSvSLNP/9m2foSypqoLzqfITdUHNZQi8IuvAMLdB+leaDtBj2EJPlA==
   _: 'https://registry.npmjs.org/nix-clap/-/nix-clap-1.3.10.tgz'
@@ -7919,6 +7952,12 @@ onetime:
  _latest: 5.1.0
  _:
   ^2.0.0: 2.0.1
+  ^5.1.0: 5.1.0
+ 5.1.0:
+  $: sha512-5NcSkPHhwTVFIQN+TUqXoS5+dlElHXdpAWu9I0HP20YOtIi+aZ0Ct82jdlILDxjLEAWwvm+qj1m6aEtsDVmm6Q==
+  _: 'https://registry.npmjs.org/onetime/-/onetime-5.1.0.tgz'
+  dependencies:
+   mimic-fn: ^2.1.0
  2.0.1:
   $: sha1-BnQoIw/WdEOyeUsiu6UotoZ5YtQ=
   _: 'https://registry.npmjs.org/onetime/-/onetime-2.0.1.tgz'
@@ -9432,6 +9471,13 @@ restore-cursor:
  _latest: 3.1.0
  _:
   ^2.0.0: 2.0.0
+  ^3.1.0: 3.1.0
+ 3.1.0:
+  $: sha512-l+sSefzHpj5qimhFSE5a8nufZYAM3sBSVMAPtYkmC+4EH2anSGaEMXSD0izRQbu9nfyQ9y5JrVmp7E8oZrUjvA==
+  _: 'https://registry.npmjs.org/restore-cursor/-/restore-cursor-3.1.0.tgz'
+  dependencies:
+   onetime: ^5.1.0
+   signal-exit: ^3.0.2
  2.0.0:
   $: sha1-n37ih/gv0ybU/RYpI9YhKe7g368=
   _: 'https://registry.npmjs.org/restore-cursor/-/restore-cursor-2.0.0.tgz'
@@ -9808,9 +9854,17 @@ slash:
   $: sha512-ZYKh3Wh2z1PpEXWr0MpSBZ0V6mZHAQfYevttO11c51CaWjGTaadiKZ+wVt1PbMlDV5qhMFslpZCemhwOK7C89A==
   _: 'https://registry.npmjs.org/slash/-/slash-2.0.0.tgz'
 slice-ansi:
- _latest: 3.0.0
+ _latest: 4.0.0
  _:
   1.0.0: 1.0.0
+  ^4.0.0: 4.0.0
+ 4.0.0:
+  $: sha512-qMCMfhY040cVHT43K9BFygqYbUPFZKHOg7K73mtTWJRb8pyP3fzf4Ixd5SzdEJQ6MRUg/WBnOLxghZtKKurENQ==
+  _: 'https://registry.npmjs.org/slice-ansi/-/slice-ansi-4.0.0.tgz'
+  dependencies:
+   ansi-styles: ^4.0.0
+   astral-regex: ^2.0.0
+   is-fullwidth-code-point: ^3.0.0
  1.0.0:
   $: sha512-POqxBK6Lb3q6s047D/XsDVNPnF9Dl8JSaqe9h9lURl0OdNqy/ujDrOiIHtsqXMGbWWTIomRzAMaTyawAU//Reg==
   _: 'https://registry.npmjs.org/slice-ansi/-/slice-ansi-1.0.0.tgz'
@@ -10149,6 +10203,14 @@ string-width:
  _:
   '^2.1.0,^2.1.1': 2.1.1
   '^3.0.0,^3.1.0': 3.1.0
+  '^4.0.0,^4.1.0': 4.2.0
+ 4.2.0:
+  $: sha512-zUz5JD+tgqtuDjMhwIg5uFVV3dtqZ9yQJlZVfq4I01/K5Paj5UHj7VyrQOJvzawSVlKpObApbfD0Ed6yJc+1eg==
+  _: 'https://registry.npmjs.org/string-width/-/string-width-4.2.0.tgz'
+  dependencies:
+   emoji-regex: ^8.0.0
+   is-fullwidth-code-point: ^3.0.0
+   strip-ansi: ^6.0.0
  3.1.0:
   $: sha512-vafcv6KjVZKSgz06oM/H6GDBrAtz8vdhQakGjFIvNrHA6y3HCF1CInLy+QLq8dTJPQ1b+KDUqDFctkdRW44e1w==
   _: 'https://registry.npmjs.org/string-width/-/string-width-3.1.0.tgz'
@@ -10217,6 +10279,12 @@ strip-ansi:
   ^3.0.0: 3.0.1
   ^4.0.0: 4.0.0
   '^5.0.0,^5.1.0,^5.2.0': 5.2.0
+  ^6.0.0: 6.0.0
+ 6.0.0:
+  $: sha512-AuvKTrTfQNYNIctbR1K/YGTR1756GycPsg7b9bdV9Duqur4gv6aKqHXah67Z8ImS7WEz5QVcOtlfW2rZEugt6w==
+  _: 'https://registry.npmjs.org/strip-ansi/-/strip-ansi-6.0.0.tgz'
+  dependencies:
+   ansi-regex: ^5.0.0
  5.2.0:
   $: sha512-DuRs1gKbBqsMKIZlrffwlug8MHkcnpjs5VPmL1PAh+mA30U0DTotfDZ0d2UUsXpPmPmMMJ6W773MaA3J+lbiWA==
   _: 'https://registry.npmjs.org/strip-ansi/-/strip-ansi-5.2.0.tgz'
@@ -10275,10 +10343,10 @@ stylehacks:
    postcss: ^7.0.0
    postcss-selector-parser: ^3.0.0
 subapp-react:
- _latest: 0.0.11-fynlocal_h
+ _latest: 0.0.14-fynlocal_h
  _:
-  ../../packages/subapp-react: 0.0.11-fynlocal_h
- 0.0.11-fynlocal_h:
+  ../../packages/subapp-react: 0.0.14-fynlocal_h
+ 0.0.14-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-react
@@ -10286,43 +10354,43 @@ subapp-react:
    '@babel/runtime': ^7.8.3
    optional-require: ^1.0.0
    subapp-util: ^1.0.3
-   subapp-web: ^1.0.19
+   subapp-web: ^1.0.23
   peerDependencies:
    react: '*'
    react-dom: '*'
 subapp-redux:
- _latest: 1.0.20-fynlocal_h
+ _latest: 1.0.23-fynlocal_h
  _:
-  ../../packages/subapp-redux: 1.0.20-fynlocal_h
- 1.0.20-fynlocal_h:
+  ../../packages/subapp-redux: 1.0.23-fynlocal_h
+ 1.0.23-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-redux
   dependencies:
    optional-require: ^1.0.0
    subapp-util: ^1.0.3
-   subapp-web: ^1.0.19
+   subapp-web: ^1.0.23
   peerDependencies:
    react: '*'
    react-dom: '*'
    redux: '*'
    react-redux: '*'
 subapp-server:
- _latest: 1.1.10-fynlocal_h
+ _latest: 1.1.16-fynlocal_h
  _:
-  ../../packages/subapp-server: 1.1.10-fynlocal_h
- 1.1.10-fynlocal_h:
+  ../../packages/subapp-server: 1.1.16-fynlocal_h
+ 1.1.16-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-server
   dependencies:
    '@hapi/boom': ^7.4.1
-   electrode-react-webapp: ^3.8.6
+   electrode-react-webapp: ^3.8.8
    filter-scan-dir: ^1.0.9
    http-status-codes: ^1.3.0
    optional-require: ^1.0.0
    subapp-util: ^1.0.4
-   xaa: ^1.0.0
+   xaa: ^1.4.0
 subapp-util:
  _latest: 1.0.4-fynlocal_h
  _:
@@ -10334,10 +10402,10 @@ subapp-util:
    filter-scan-dir: ^1.0.9
    optional-require: ^1.0.0
 subapp-web:
- _latest: 1.0.20-fynlocal_h
+ _latest: 1.0.23-fynlocal_h
  _:
-  '../../packages/subapp-web,../subapp-web': 1.0.20-fynlocal_h
- 1.0.20-fynlocal_h:
+  '../../packages/subapp-web,../subapp-web': 1.0.23-fynlocal_h
+ 1.0.23-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-web
@@ -10350,7 +10418,7 @@ subapp-web:
    optional-require: ^1.0.0
    request: ^2.88.0
    subapp-util: ^1.0.4
-   xaa: ^1.1.4
+   xaa: ^1.4.0
 sudo-prompt:
  _latest: 9.1.1
  _:
@@ -10442,12 +10510,10 @@ tapable:
 term-size:
  _latest: 2.2.0
  _:
-  ^1.2.0: 1.2.0
- 1.2.0:
-  $: sha1-RYuDiH8oj8Vtb/+/rSYuJmOO+mk=
-  _: 'https://registry.npmjs.org/term-size/-/term-size-1.2.0.tgz'
-  dependencies:
-   execa: ^0.7.0
+  ^2.1.0: 2.2.0
+ 2.2.0:
+  $: sha512-a6sumDlzyHVJWb8+YofY4TW112G6p2FCPEAFk+59gIYHv3XHRhm9ltVQ9kli4hNWeQBwSpe8cRN25x0ROunMOw==
+  _: 'https://registry.npmjs.org/term-size/-/term-size-2.2.0.tgz'
 terser:
  _latest: 4.6.3
  _:
@@ -10670,6 +10736,17 @@ type-check:
   _: 'https://registry.npmjs.org/type-check/-/type-check-0.3.2.tgz'
   dependencies:
    prelude-ls: ~1.1.2
+type-fest:
+ _latest: 0.13.1
+ _:
+  ^0.11.0: 0.11.0
+  ^0.8.1: 0.8.1
+ 0.11.0:
+  $: sha512-OdjXJxnCN1AvyLSzeKIgXTXxV+99ZuXl3Hpo9XpJAv9MBcHrrJOQ5kV7ypXOuQie+AmWG25hLbiKdwYTifzcfQ==
+  _: 'https://registry.npmjs.org/type-fest/-/type-fest-0.11.0.tgz'
+ 0.8.1:
+  $: sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
+  _: 'https://registry.npmjs.org/type-fest/-/type-fest-0.8.1.tgz'
 typedarray:
  _latest: 0.0.6
  _:
@@ -10772,7 +10849,7 @@ unset-value:
 unwrap-npm-cmd:
  _latest: 1.1.1
  _:
-  ^1.1.0: 1.1.1
+  ^1.1.1: 1.1.1
  1.1.1:
   $: sha512-Y0PFhW+X6oahjV/e4yBxThgq0k9Ymh3RwUh6P/rMiGp55X5qa2mQghZAHKyJ9tDPinZntD0Z+5DHFzlx9/UNbg==
   _: 'https://registry.npmjs.org/unwrap-npm-cmd/-/unwrap-npm-cmd-1.1.1.tgz'
@@ -11163,12 +11240,12 @@ which-module:
 widest-line:
  _latest: 3.1.0
  _:
-  ^2.0.0: 2.0.1
- 2.0.1:
-  $: sha512-Ba5m9/Fa4Xt9eb2ELXt77JxVDV8w7qQrH0zS/TWSJdLyAwQjWoOzpzj5lwVftDz6n/EOu3tNACS84v509qwnJA==
-  _: 'https://registry.npmjs.org/widest-line/-/widest-line-2.0.1.tgz'
+  ^3.1.0: 3.1.0
+ 3.1.0:
+  $: sha512-NsmoXalsWVDMGupxZ5R08ka9flZjjiLvHVAWYOKtiKM8ujtZWr9cRffak+uSE48+Ob8ObalXpwyeUiyDD6QFgg==
+  _: 'https://registry.npmjs.org/widest-line/-/widest-line-3.1.0.tgz'
   dependencies:
-   string-width: ^2.1.1
+   string-width: ^4.0.0
 winston:
  _latest: 3.2.1
  _:
@@ -11203,6 +11280,14 @@ wrap-ansi:
  _latest: 6.2.0
  _:
   ^5.1.0: 5.1.0
+  ^6.2.0: 6.2.0
+ 6.2.0:
+  $: sha512-r6lPcBGxZXlIcymEu7InxDMhdW0KDxpLgoFLcguasxCaJ/SOIZwINatK9KY/tf+ZrlywOKU0UDj3ATXUBfxJXA==
+  _: 'https://registry.npmjs.org/wrap-ansi/-/wrap-ansi-6.2.0.tgz'
+  dependencies:
+   ansi-styles: ^4.0.0
+   string-width: ^4.1.0
+   strip-ansi: ^6.0.0
  5.1.0:
   $: sha512-QC1/iN/2/RPVJ5jYK8BGttj5z83LmSKmvbvrXPNCLZSEb32KKVDJDl/MOt2N01qU2H/FkzEa9PKto1BqDjtd7Q==
   _: 'https://registry.npmjs.org/wrap-ansi/-/wrap-ansi-5.1.0.tgz'
@@ -11257,33 +11342,33 @@ ws:
 xaa:
  _latest: 1.2.1
  _:
-  '^1.0.0,^1.1.4': 1.2.1
-  ^1.2.2: 1.2.2
- 1.2.2:
-  $: sha512-1kkYxIZRFj8CruXv/lEFfjQvNnI9lL50AqE2ho7jqdre/ClmrPc10Gc9JgCtwUFM63CxViPn99+4IqHad6Zfrw==
-  _: 'https://registry.npmjs.org/xaa/-/xaa-1.2.2.tgz'
+  ^1.1.4: 1.2.1
+  ^1.4.0: 1.4.0
+ 1.4.0:
+  $: sha512-mX3ELNk7ZU5KtUwO7XsamqlVoE7xJ/0WRLHRpb6u//sgWfm6AHxsnrnu/pUyp3ppQ4lwV5bsA06j4K7U+WYEhA==
+  _: 'https://registry.npmjs.org/xaa/-/xaa-1.4.0.tgz'
  1.2.1:
   $: sha512-PUHTFveQ6XOheZq4GlimMcVFrgn9m6rrbFefN8UKeUoJqqeam76VCFMx8hFip1/aXPAnolJCiTAH+KcUQ92G2w==
   _: 'https://registry.npmjs.org/xaa/-/xaa-1.2.1.tgz'
 xclap:
- _latest: 0.2.46
+ _latest: 0.2.48
  _:
-  ^0.2.46: 0.2.46
- 0.2.46:
-  $: sha512-gootgqb/zpagBldylcMkxACZA+9DAZV0hKkNnailNOcpQ25G+xl+VPYfCZyMW3pLM1B/gffb98jXPUFT1I3rZg==
-  _: 'https://registry.npmjs.org/xclap/-/xclap-0.2.46.tgz'
+  ^0.2.48: 0.2.48
+ 0.2.48:
+  $: sha512-jc9/NjcaTDUszhNj0wOW83NNBx7wUcrzYzldotao6go7g/qMH+5QZYNiYyh98Y/8DhFQndDJihL39+oJIPNJFg==
+  _: 'https://registry.npmjs.org/xclap/-/xclap-0.2.48.tgz'
   dependencies:
-   chalk: ^2.0.1
-   chalker: ^1.1.2
+   chalk: ^4.0.0
+   chalker: ^1.2.0
    insync: ^2.1.1
    jaro-winkler: ^0.2.8
    lodash.foreach: ^4.5.0
-   nix-clap: ^1.0.8
+   nix-clap: ^1.3.10
    optional-require: ^1.0.0
    path-is-inside: ^1.0.2
    string-array: ^1.0.0
-   unwrap-npm-cmd: ^1.1.0
-   xsh: ^0.4.0
+   unwrap-npm-cmd: ^1.1.1
+   xsh: ^0.4.4
 xenv-config:
  _latest: 1.3.1
  _:
@@ -11301,7 +11386,7 @@ xml-name-validator:
 xsh:
  _latest: 0.4.4
  _:
-  '^0.4.0,^0.4.4': 0.4.4
+  ^0.4.4: 0.4.4
  0.4.4:
   $: sha512-fwl0KsCubpCv/PMwwy6PiaLAak12aROkIgZMec8pzlgB8TvA7jckou7CBDta7SQouiG9KNqWNVOYBKnkEdx4gQ==
   _: 'https://registry.npmjs.org/xsh/-/xsh-0.4.4.tgz'

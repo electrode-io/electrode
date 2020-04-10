@@ -73,7 +73,7 @@ hello
 token process module subapp-web/lib/load not found
 <!-- require(subapp-web/lib/load) END -->
 </div>
-<div class="blah" style="background: green;"><!-- BEGIN require(subapp-web/lib/load) props: {"_concurrent":true,"name":"MainBody","timestamp":true,"elementId":"subapp-mainbody","streaming":true,"async":true,"hydrateServerData":true,"serverSideRendering":true} -->
+<div class="blah" style="background: green;"><!-- BEGIN require(subapp-web/lib/load) props: {"_concurrent":true,"name":"MainBody","timestamp":true,"elementId":"subapp-mainbody","useStream":true,"async":true,"hydrateServerData":true,"serverSideRendering":true} -->
 
 token process module subapp-web/lib/load not found
 <!-- require(subapp-web/lib/load) END -->

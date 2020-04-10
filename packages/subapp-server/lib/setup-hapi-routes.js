@@ -172,11 +172,13 @@ async function setupRoutesFromFile(srcDir, server, pluginOpts) {
       });
     }
 
+    const useStream = routeOptions.useStream !== false;
+
     const routeHandler = ReactWebapp.makeRouteHandler(routeOptions);
     const handler = async (request, h) => {
       try {
         const context = await routeHandler({
-          content: { html: "", status: 200, useStream: true },
+          content: { html: "", status: 200, useStream },
           mode: "",
           request
         });
@@ -185,10 +187,7 @@ async function setupRoutesFromFile(srcDir, server, pluginOpts) {
         const status = data.status;
 
         if (status === undefined) {
-          return h
-            .response(data)
-            .type("text/html; charset=UTF-8")
-            .code(200);
+          return h.response(data).type("text/html; charset=UTF-8").code(200);
         } else if (HttpStatus.redirect[status]) {
           return h.redirect(data.path).code(status);
         } else if (HttpStatus.displayHtml[status]) {
