@@ -1,6 +1,6 @@
 "use strict";
 
-/* eslint-disable global-require, max-statements, no-loop-func */
+/* eslint-disable global-require, max-statements, no-loop-func, max-len */
 
 const Fs = require("fs");
 const assert = require("assert");

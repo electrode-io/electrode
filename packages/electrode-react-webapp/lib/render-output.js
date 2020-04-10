@@ -27,7 +27,7 @@ class Output {
         out += x.stringify();
       } else {
         const typeName = (x && x.constructor && x.constructor.name) || typeof x;
-        const msg = `SpotOutput unable to stringify item of type ${typeName}`;
+        const msg = `RenderOutput unable to stringify item of type ${typeName}`;
         console.error("FATAL Error:", msg + "\n"); // eslint-disable-line
         throw new Error(msg);
       }
