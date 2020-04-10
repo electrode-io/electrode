@@ -384,11 +384,21 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
       display: ck`<orange.inverse>ALERT</>`,
       spinner: true
     });
-    this._io.updateItem(
-      LOG_ALERT,
-      ck`${time} - <orange>There may be logs from your app server that requires your attention.</>
-<orange>View full logs at: <cyan.underline>${url}</></> - <green>Press Z to hide or show this message</>`
-    );
+    const instruction = `<orange>View full logs at: <cyan.underline>${url}</></> - \
+<green>Press Z to hide or show this message</>`;
+    if (time) {
+      this._io.updateItem(
+        LOG_ALERT,
+        ck`${time} - <orange>Your app server may have logs that requires your attention.</>
+${instruction}`
+      );
+    } else {
+      this._io.updateItem(
+        LOG_ALERT,
+        ck`<orange>no unusual log detected from your app server.</>
+${instruction}`
+      );
+    }
   }
 
   deferLogsOutput(context, showFullLink = true, delay = 999) {
