@@ -12,6 +12,7 @@
  *   - generate code to bootstrap subapp on client
  */
 
+const assert = require("assert");
 const Fs = require("fs");
 const Path = require("path");
 const _ = require("lodash");
@@ -53,7 +54,7 @@ module.exports = function setup(setupContext, { props: setupProps }) {
   // name="Header"
   // async=true
   // defer=true
-  // streaming=true
+  // useStream=true
   // serverSideRendering=true
   // hydrateServerData=false
   // clientSideRendering=false
@@ -189,10 +190,24 @@ Response: ${err || body}`
   loadSubApp();
   prepareSubAppJsBundle();
 
+  const verifyUseStream = props => {
+    if (props.useStream) {
+      const routeStream = setupContext.routeOptions.useStream;
+      assert(
+        routeStream !== false,
+        `subapp '${props.name}' can't set useStream when route options 'useStream' is false.`
+      );
+    }
+  };
+
+  verifyUseStream(setupProps);
+
   const clientProps = JSON.stringify(_.pick(setupProps, ["useReactRouter"]));
 
   return {
     process: (context, { props }) => {
+      verifyUseStream(props);
+
       const { request } = context.user;
 
       if (request.app.webpackDev && subAppLoadTime < request.app.webpackDev.compileTime) {
