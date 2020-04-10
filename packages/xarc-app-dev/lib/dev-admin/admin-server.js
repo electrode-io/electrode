@@ -62,7 +62,7 @@ class AdminServer {
     this._wds = ck`<gray.inverse>[wds]</> `;
     this._proxy = ck`<green.inverse>[proxy]</> `;
     this._app = ck`<cyan.inverse>[app]</> `;
-    this.makeMenu();
+    this._menu = "";
     this._io.setup();
     this._io.addItem({
       name: DEV_ADMIN_STATUS,
@@ -119,13 +119,12 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
   }
 
   showMenu(force) {
-    let show = !this._menu; // show if not showing
-    if (force === false) show = false; // if force to not show
-    if (force === true) show = true; // do not hide if force is true
+    const show = force !== undefined ? force : !this._menu;
 
     if (show) {
       this.makeMenu();
-      setTimeout(() => this.showMenu(false), 15 * 60 * 1000).unref(); // hide menu in 15 minutes
+      clearTimeout(this._hideMenuTimer);
+      this._hideMenuTimer = setTimeout(() => this.showMenu(false), 15 * 60 * 1000).unref(); // hide menu after a while
     } else {
       this._menu = "";
     }
