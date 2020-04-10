@@ -53,7 +53,7 @@ const Template = (
             name="MainBody"
             timestamp
             elementId="subapp-mainbody"
-            streaming
+            useStream
             async
             hydrateServerData
             serverSideRendering
@@ -66,7 +66,7 @@ const Template = (
           timestamp
           elementId="subapp-bottom"
           name="Bottom"
-          streaming
+          useStream
           hydrateServerData
           async
           serverSideRendering
