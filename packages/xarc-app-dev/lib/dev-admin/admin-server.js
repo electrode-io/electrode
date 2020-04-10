@@ -27,6 +27,10 @@ const APP_SERVER_NAME = "your app server";
 const DEV_SERVER_NAME = "Electrode webpack dev server";
 const PROXY_SERVER_NAME = "Electrode Dev Proxy";
 
+const DEV_ADMIN_STATUS = "DevAdminStatus";
+const WDS_PROGRESS = "WDSProgress";
+const LOG_ALERT = "LogAlert";
+
 const SERVER_ENVS = {
   [APP_SERVER_NAME]: {
     XARC_BABEL_TARGET: "node"
@@ -49,8 +53,10 @@ class AdminServer {
     // will mess up the in place progress display that log-update handles
     //
     this._io = (options && options.inputOutput) || new ConsoleIO();
+
     this._shutdown = false;
     this._fullAppLogUrl = formUrl({ ...fullDevServer, path: controlPaths.appLog });
+    this.makeMenu();
   }
 
   async start() {
@@ -58,6 +64,12 @@ class AdminServer {
     this._proxy = ck`<green.inverse>[proxy]</> `;
     this._app = ck`<cyan.inverse>[app]</> `;
     this._io.setup();
+    this._io.addItem({
+      name: DEV_ADMIN_STATUS,
+      display: ck`<green.inverse>[DEV ADMIN]</>`,
+      spinner: true
+    });
+    this.updateStatus("webpack is PENDING");
     this.handleUserInput();
 
     this._shutdown || (await this.startWebpackDevServer());
@@ -74,7 +86,11 @@ class AdminServer {
       }, 100);
   }
 
-  showMenu() {
+  updateStatus(line) {
+    this._io.updateItem(DEV_ADMIN_STATUS, `Press M for menu, Q to exit. ${line}`);
+  }
+
+  makeMenu() {
     const reporterUrl = formUrl({ ...fullDevServer, path: controlPaths.reporter });
     const logUrl = formUrl({ ...fullDevServer, path: controlPaths.appLog });
     const devurl = formUrl({ ...fullDevServer, path: controlPaths.dev });
@@ -92,7 +108,12 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
 <green>     App Log URL: <cyan.underline>${logUrl}</></>
 <green>   DEV dashboard: <cyan.underline>${devurl}</></>
 <green>WebPack reporter: <cyan.underline>${reporterUrl}</></>`;
-    this._io.show("\n" + boxen(menu, { margin: { left: 5 }, padding: { right: 3, left: 3 } }));
+
+    this._menu = boxen(menu, { margin: { left: 5 }, padding: { right: 3, left: 3 } });
+  }
+
+  showMenu() {
+    this._io.show(this._menu);
   }
 
   getServer(name) {
@@ -152,7 +173,6 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
 
   async _quit() {
     this._shutdown = true;
-    this._io.clearStatusMessage(true);
     this._io.show(ck`<magenta>admin server exit, shutting down servers</magenta>`);
     if (this._appWatcher) {
       this._appWatcher.close();
@@ -295,13 +315,18 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
           .forEach(line => {
             if (line.startsWith(progSig)) {
               progLine = line.substring(progSig.length).replace(cwdRegex, ".");
-              out.writeStatusMessage(this._wds, progLine);
+              this._io.addItem({ name: WDS_PROGRESS, spinner: true, display: `Webpack Progress` });
+              this._io.updateItem(WDS_PROGRESS, progLine);
             } else {
               if (progLine) {
-                out.clearStatusMessage(this._wds);
+                this._io.removeItem(WDS_PROGRESS);
                 progLine = "";
               }
-              out.write(this._wds + line.replace(cwdRegex, ".") + "\n");
+              if (line.includes("webpack bundle is now")) {
+                this.updateStatus(line);
+              } else {
+                out.write(this._wds + line.replace(cwdRegex, ".") + "\n");
+              }
             }
           });
       };
@@ -346,23 +371,23 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
       const { logSaver } = options;
       logSaver._toggle = !logSaver._toggle;
       if (!logSaver._toggle) {
-        this._io.clearStatusMessage(options.tag);
+        this._io.removeItem(LOG_ALERT);
       } else {
-        this.showFullLogUrlMessage(options.tag, options.fullLogUrl);
+        this.showFullLogUrlMessage(logSaver._time, logSaver.fullLogUrl);
       }
     }
   }
 
-  showFullLogUrlMessage(tag, url) {
-    const time = new Date().toLocaleTimeString().replace(/ /g, "");
-    this._io.writeStatusMessage(
-      tag,
-      [
-        ck`${time} - <orange>There may be logs from your app server that requires your attention.</>`,
-        ck`<orange>View full logs at: <cyan.underline>${url}</></>`
-      ],
-      true,
-      ck`<green>Press Z to hide or show this message.</>`
+  showFullLogUrlMessage(time, url) {
+    this._io.addItem({
+      name: LOG_ALERT,
+      display: ck`<orange.inverse>ALERT</>`,
+      spinner: true
+    });
+    this._io.updateItem(
+      LOG_ALERT,
+      ck`${time} - <orange>There may be logs from your app server that requires your attention.</>
+<orange>View full logs at: <cyan.underline>${url}</></> - <green>Press Z to hide or show this message</>`
     );
   }
 
@@ -398,10 +423,10 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
           }
 
           if (typeof store[ix] === "string") {
-            this._io.write(tag + store[ix] + "\n");
+            this._io.show(tag + store[ix]);
           } else if (store[ix]) {
             const json = store[ix];
-            this._io.write(tag + (json.msg || json.message || JSON.stringify(json)) + "\n");
+            this._io.show(tag + (json.msg || json.message || JSON.stringify(json)));
           }
         }
         currentIx = ix + 1;
@@ -409,7 +434,8 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
       context._deferIx = [];
       if (context._showFullLink === true) {
         context._toggle = true;
-        this.showFullLogUrlMessage(tag, context.fullLogUrl);
+        context._time = new Date().toLocaleTimeString().replace(/ /g, "");
+        this.showFullLogUrlMessage(context._time, context.fullLogUrl);
       }
       context._showFullLink = undefined;
       if (store.length > 25000) {
@@ -453,8 +479,6 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
 
   async startAppServer(debug) {
     const skipWatch = debug === "--inspect-brk";
-
-    this._io.clearStatusMessage(this._app);
 
     const logSaver = { tag: this._app, store: [], fullLogUrl: this._fullAppLogUrl };
 
