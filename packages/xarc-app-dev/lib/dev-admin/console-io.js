@@ -4,11 +4,12 @@
 
 const readline = require("readline");
 const logUpdate = require("log-update");
+const VisualLogger = require("visual-logger");
 
-class ConsoleIO {
-  constructor() {
-    this._out = process.stdout;
-    this.currentStatus = {};
+class ConsoleIO extends VisualLogger {
+  constructor(options) {
+    super({ ...options, saveLogs: false });
+    this.setPrefix("");
   }
 
   setup() {
@@ -30,63 +31,15 @@ class ConsoleIO {
   }
 
   show(...args) {
-    this.clearStatusMessage();
-    console.log(...args);
-    this.writeStatusMessage();
+    this.log(...args);
   }
 
   write(str) {
-    this.clearStatusMessage();
-    this._out.write(str);
-    this.writeStatusMessage();
-  }
-
-  clearStatusMessage(resetTag) {
-    const { showing, preserve } = this.currentStatus;
-    if (showing) {
-      if (resetTag && resetTag !== true && resetTag !== this.currentStatus.tag) {
-        this.preserveStatusMsg();
-      }
-      logUpdate.clear();
-      this.currentStatus.showing = false;
-    }
-    if (resetTag) {
-      this.currentStatus = {};
-    }
-  }
-
-  preserveStatusMsg() {
-    if (this.currentStatus.msg && this.currentStatus.preserve) {
-      const { tag, msg } = this.currentStatus;
-      this.showStatusMessage(tag, msg);
-      logUpdate.done();
-    }
-  }
-
-  showStatusMessage(tag, msg, clearMsg = "") {
-    const lineTxt = []
-      .concat(msg, clearMsg)
-      .filter(x => x)
-      .map(line => `${tag}${line}`);
-    logUpdate(lineTxt.join("\n"));
-    this.currentStatus.showing = true;
-  }
-
-  writeStatusMessage(tag, msg, preserve = false, clearMsg = "") {
-    if (tag && msg) {
-      if (this.currentStatus.tag && this.currentStatus.tag !== tag) {
-        this.preserveStatusMsg();
-      }
-      this.currentStatus = { tag, msg, preserve, clearMsg };
-    }
-    if (!this.currentStatus.msg) return;
-
-    const { tag: xtag, msg: xmsg } = this.currentStatus;
-    this.showStatusMessage(xtag, xmsg, clearMsg);
+    this.log(str.trimRight());
   }
 
   exit() {
-    this._out.write("\n");
+    this.clearItems();
     process.exit();
   }
 }
