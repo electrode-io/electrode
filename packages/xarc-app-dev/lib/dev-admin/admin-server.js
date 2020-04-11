@@ -31,6 +31,8 @@ const DEV_ADMIN_STATUS = "DevAdminStatus";
 const WDS_PROGRESS = "WDSProgress";
 const LOG_ALERT = "LogAlert";
 
+const PROMPT_SPINNER = ">>>>>>>>      ";
+
 const SERVER_ENVS = {
   [APP_SERVER_NAME]: {
     XARC_BABEL_TARGET: "node"
@@ -66,8 +68,8 @@ class AdminServer {
     this._io.setup();
     this._io.addItem({
       name: DEV_ADMIN_STATUS,
-      display: ck`<green.inverse>[DEV ADMIN]</>`,
-      spinner: true
+      display: ck`[<green.inverse>DEV ADMIN</>]`,
+      spinner: PROMPT_SPINNER
     });
     this.updateStatus("webpack is PENDING");
     this.handleUserInput();
@@ -318,36 +320,42 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
     const progSig = `<s> [webpack.Progress] `;
     const waitStart = async info => {
       const cwdRegex = new RegExp(process.cwd(), "g");
-
+      let removeTimer;
       let progLine = "";
-      const log = (out, data) => {
-        data
-          .toString()
-          .split("\n")
-          // kill empty blank lines but preserve spaces
-          .map(x => x.trim() && x)
-          .filter(x => x)
-          .forEach(line => {
-            if (line.startsWith(progSig)) {
-              progLine = line.substring(progSig.length).replace(cwdRegex, ".");
-              this._io.addItem({ name: WDS_PROGRESS, spinner: true, display: `Webpack Progress` });
-              this._io.updateItem(WDS_PROGRESS, progLine);
-            } else {
-              if (progLine) {
-                setTimeout(() => this._io.removeItem(WDS_PROGRESS), 2000).unref();
-                progLine = "";
-              }
-              if (line.includes("webpack bundle is now")) {
-                this.updateStatus(line);
-              } else {
-                out.write(this._wds + line.replace(cwdRegex, ".") + "\n");
-              }
+      const watchWdsLog = input => {
+        const processLine = data => {
+          const line = data.toString();
+          if (line.trim().length < 1) {
+            return;
+          }
+          if (line.startsWith(progSig)) {
+            progLine = line.substring(progSig.length).replace(cwdRegex, ".");
+            this._io.addItem({ name: WDS_PROGRESS, spinner: true, display: `Webpack Progress` });
+            this._io.updateItem(WDS_PROGRESS, progLine);
+            const match = progLine.match(/\d{1,3}%/);
+            if (match) {
+              this.updateStatus(ck`Webpack Compile Progress [<orange>${match[0]}</>]`);
             }
-          });
+            clearTimeout(removeTimer);
+          } else {
+            if (progLine) {
+              removeTimer = setTimeout(() => this._io.removeItem(WDS_PROGRESS), 2000).unref();
+              progLine = "";
+            }
+            if (line.includes("webpack bundle is now")) {
+              this.updateStatus(line);
+            } else {
+              this._io.show(this._wds + line.replace(cwdRegex, "."));
+            }
+          }
+        };
+
+        const reader = readline.createInterface({ input });
+        reader.on("line", processLine);
       };
 
-      info._child.stdout.on("data", data => log(this._io, data));
-      info._child.stderr.on("data", data => log(this._io, data));
+      watchWdsLog(info._child.stdout);
+      watchWdsLog(info._child.stderr);
 
       this._webpackDevRelay.setWebpackServer(info._child);
 
@@ -396,15 +404,15 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
   showFullLogUrlMessage(time, url) {
     this._io.addItem({
       name: LOG_ALERT,
-      display: ck`<orange.inverse>ALERT</>`,
-      spinner: true
+      display: ck`[<orange.inverse>ALERT</>]`,
+      spinner: PROMPT_SPINNER
     });
     const instruction = `<orange>View full logs at: <cyan.underline>${url}</></> - \
 <green>Press Z to hide or show this message</>`;
     if (time) {
       this._io.updateItem(
         LOG_ALERT,
-        ck`${time} - <orange>Your app server may have logs that requires your attention.</>
+        ck`${time} - <orange>Your app server may have logs that require your attention.</>
 ${instruction}`
       );
     } else {
