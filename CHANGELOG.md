@@ -1,3 +1,74 @@
+# 4/14/2020
+
+- dev-admin log enhancements and fixes: using visual-logger now, better webpack status display.
+- fix: index.html rendering - verify and ensure consistent useStream flag
+- fix: app can now configure useStream flag for index.html response.
+- fix: more informative error if subapp name and dir mismatch
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app-dev@8.0.16` `(8.0.15 => 8.0.16)`
+- `@xarc/create-app@3.0.4` `(3.0.3 => 3.0.4)`
+- `electrode-react-webapp@3.8.9` `(3.8.8 => 3.8.9)`
+- `subapp-pbundle@0.0.18` `(0.0.17 => 0.0.18)`
+- `subapp-react@0.0.15` `(0.0.14 => 0.0.15)`
+- `subapp-server@1.1.17` `(1.1.16 => 1.1.17)`
+- `subapp-util@1.0.5` `(1.0.4 => 1.0.5)`
+- `subapp-web@1.0.24` `(1.0.23 => 1.0.24)`
+
+### Lerna Updated
+
+- `@xarc/app@8.0.16` `(8.0.15 => 8.0.16)`
+- `subapp-redux@1.0.24` `(1.0.23 => 1.0.24)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - use visual-logger for dev-admin ([#1597](https://github.com/electrode-io/electrode/pull/1597)) [commit](http://github.com/electrode-io/electrode/commit/c1420c1e4e96412f02edb598049c52c3d6ddf479)
+  - fix: avoid null \_child [commit](http://github.com/electrode-io/electrode/commit/ef82cfd5418acc68c608996e0f815df8a71bf3d6)
+  - use line reader to process wds logs ([#1599](https://github.com/electrode-io/electrode/pull/1599)) [commit](http://github.com/electrode-io/electrode/commit/ef5f8c92c12eec528c22270b11203172e56f2b9f)
+
+- `packages/create-app`
+
+  - fix: correct prepare args ([#1598](https://github.com/electrode-io/electrode/pull/1598)) [commit](http://github.com/electrode-io/electrode/commit/8bc52132d6f913723cc220a0deaf3a4ad7239c6a)
+
+- `packages/electrode-react-webapp`
+
+  - fix: verify and ensure consistent useStream flag ([#1596](https://github.com/electrode-io/electrode/pull/1596)) [commit](http://github.com/electrode-io/electrode/commit/b73118b1a097bc7c3ba0e4fbfa2a025c8504c2fb)
+  - fix: add tests [commit](http://github.com/electrode-io/electrode/commit/7d70bcd8419e7ef7d75f24721e2fca442ea03812)
+  - fix: detect unexpected item to stringify [commit](http://github.com/electrode-io/electrode/commit/72288178dee4079409fdc59d82115fcbab3472a5)
+
+- `packages/subapp-pbundle`
+
+  - fix: verify and ensure consistent useStream flag ([#1596](https://github.com/electrode-io/electrode/pull/1596)) [commit](http://github.com/electrode-io/electrode/commit/b73118b1a097bc7c3ba0e4fbfa2a025c8504c2fb)
+
+- `packages/subapp-react`
+
+  - fix: verify and ensure consistent useStream flag ([#1596](https://github.com/electrode-io/electrode/pull/1596)) [commit](http://github.com/electrode-io/electrode/commit/b73118b1a097bc7c3ba0e4fbfa2a025c8504c2fb)
+
+- `packages/subapp-server`
+
+  - fix: verify and ensure consistent useStream flag ([#1596](https://github.com/electrode-io/electrode/pull/1596)) [commit](http://github.com/electrode-io/electrode/commit/b73118b1a097bc7c3ba0e4fbfa2a025c8504c2fb)
+  - fix: allow app to control useStream option [commit](http://github.com/electrode-io/electrode/commit/d20e7e2aa2cfc381d672d7ca605422551dddff86)
+
+- `packages/subapp-util`
+
+  - fix: more informative error if subapp name and dir mismatch [commit](http://github.com/electrode-io/electrode/commit/abdf249768b8b01c71386e74f73944844fac2cf9)
+
+- `packages/subapp-web`
+
+  - fix: verify and ensure consistent useStream flag ([#1596](https://github.com/electrode-io/electrode/pull/1596)) [commit](http://github.com/electrode-io/electrode/commit/b73118b1a097bc7c3ba0e4fbfa2a025c8504c2fb)
+  - fix: add tests [commit](http://github.com/electrode-io/electrode/commit/7d70bcd8419e7ef7d75f24721e2fca442ea03812)
+  - fix: more informative error if subapp name and dir mismatch [commit](http://github.com/electrode-io/electrode/commit/abdf249768b8b01c71386e74f73944844fac2cf9)
+  - fix: avoid log error in dev mode [commit](http://github.com/electrode-io/electrode/commit/8f16f114543b78ba6b0d575a7be9fc4897647043)
+
+- `docs`
+
+  - fix: correct prepare args ([#1598](https://github.com/electrode-io/electrode/pull/1598)) [commit](http://github.com/electrode-io/electrode/commit/8bc52132d6f913723cc220a0deaf3a4ad7239c6a)
+
 # 4/9/2020
 
 - Add "selectTemplate" to picked opts: subapp -> electrode-react-webapp
