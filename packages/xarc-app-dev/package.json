@@ -1,6 +1,6 @@
 {
   "name": "@xarc/app-dev",
-  "version": "8.0.15",
+  "version": "8.0.16",
   "description": "Electrode X application development support",
   "main": "index.js",
   "homepage": "http://www.electrode.io",
@@ -77,7 +77,7 @@
     "require-at": "^1.0.2",
     "serve-index-fs": "^1.10.1",
     "style-loader": "^0.20.1",
-    "subapp-util": "^1.0.4",
+    "subapp-util": "^1.0.5",
     "sudo-prompt": "^8.2.5",
     "visual-logger": "^1.1.0",
     "webpack-cli": "^3.3.9",

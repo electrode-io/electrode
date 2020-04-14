@@ -1,6 +1,6 @@
 {
   "name": "subapp-redux",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "description": "Electrode subapp redux support",
   "module": "dist/dev/index.js",
   "main": "lib/index.js",
@@ -26,8 +26,8 @@
   ],
   "dependencies": {
     "optional-require": "^1.0.0",
-    "subapp-util": "^1.0.3",
-    "subapp-web": "^1.0.23"
+    "subapp-util": "^1.0.5",
+    "subapp-web": "^1.0.24"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
