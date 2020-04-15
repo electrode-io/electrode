@@ -16,7 +16,7 @@ const DEV_HMR_DIR = ".__dev_hmr";
 
 function makeEntryPartial() {
   const partial = {
-    context: Path.resolve(AppMode.src.client)
+    context: Path.resolve(AppMode.src.client),
   };
 
   //
@@ -37,11 +37,11 @@ function makeEntryPartial() {
     const entryPath = Path.join(partial.context, "entry.config.js");
 
     const entry = optionalRequire(entryPath, {
-      fail: err => {
+      fail: (err) => {
         logger.error(`Loading ${entryPath} failed`, err);
         process.exit(1);
       },
-      notFound: () => logger.info(`No custom entry point configuration ${entryPath}`)
+      notFound: () => logger.info(`No custom entry point configuration ${entryPath}`),
     });
 
     if (entry) {
@@ -60,7 +60,7 @@ function makeEntryPartial() {
       return `./${subAppReq}`;
     }
 
-    const hmrEntry = `hmr-${manifest.subAppDir}.js`;
+    const hmrEntry = `hmr-${manifest.subAppDir.replace("/", "-")}.js`;
     subAppReq = `../${subAppReq}`;
 
     let reducerHmrCode = "";
@@ -134,7 +134,7 @@ if (module.hot) {
     }
     partial.context = Path.resolve(AppMode.src.dir);
     const entry = {};
-    _.each(subApps, ma => {
+    _.each(subApps, (ma) => {
       const entryName = `${ma.name.toLowerCase()}`;
       const x1 = `${chalk.magenta("subapp")} ${chalk.blue(ma.name)}`;
       entry[entryName] = genSubAppHmrEntry(hmrDir, isDev, ma);
@@ -161,7 +161,7 @@ if (module.hot) {
 
     // finally look for src/client/app.js or src/client/app.jsx or src/client/app.tsx
     const entries = ["./app.js", "./app.jsx", "./app.tsx"];
-    const entry = entries.find(f => Fs.existsSync(Path.join(partial.context, f))) || "./app.jsx";
+    const entry = entries.find((f) => Fs.existsSync(Path.join(partial.context, f))) || "./app.jsx";
     logger.info(
       `Default to single app entry point using ${entry} under context ${partial.context}`
     );
@@ -172,9 +172,7 @@ if (module.hot) {
   function shouldPolyfill() {
     if (archetype.webpack.enableBabelPolyfill) {
       const hasMultipleTarget =
-        Object.keys(archetype.babel.envTargets)
-          .sort()
-          .join(",") !== "default,node";
+        Object.keys(archetype.babel.envTargets).sort().join(",") !== "default,node";
       if (hasMultipleTarget) {
         return archetype.babel.target === "default";
         // for all other targets, disable polyfill
