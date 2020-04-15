@@ -185,8 +185,10 @@ async function setupRoutesFromFile(srcDir, server, pluginOpts) {
 
         const data = context.result;
         const status = data.status;
-
-        if (status === undefined) {
+        if (data instanceof Error) {
+          // rethrow to get default error behavior below with helpful errors in dev mode
+          throw data;
+        } else if (status === undefined) {
           return h.response(data).type("text/html; charset=UTF-8").code(200);
         } else if (HttpStatus.redirect[status]) {
           return h.redirect(data.path).code(status);
