@@ -60,7 +60,7 @@ function makeEntryPartial() {
       return `./${subAppReq}`;
     }
 
-    const hmrEntry = `hmr-${manifest.subAppDir}.js`;
+    const hmrEntry = `hmr-${manifest.subAppDir.replace(/[\/\\]/g, "-")}.js`;
     subAppReq = `../${subAppReq}`;
 
     let reducerHmrCode = "";

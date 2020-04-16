@@ -1546,12 +1546,12 @@
    '@hapi/boom': 7.x.x
    '@hapi/hoek': 8.x.x
 '@jchip/redbird':
- _latest: 1.1.0-fynlocal_h
+ _latest: 1.1.0
  _:
-  ../../../redbird: 1.1.0-fynlocal_h
- 1.1.0-fynlocal_h:
-  $: local
-  _: ../../../redbird
+  ^1.1.0: 1.1.0
+ 1.1.0:
+  $: sha512-P74xhJRyuegR/xp0fVuChTmBLPE79rF3DS3FCw70NmoePgK9rO7ybg/1CizWOqqqGQVcF7D3mbaicmUgY+c8EA==
+  _: 'https://npme.walmart.com/@jchip/redbird/-/redbird-1.1.0.tgz'
   dependencies:
    bluebird: '^2.11.0 || ^3.5.3'
    dolphin: '*'
@@ -2088,10 +2088,10 @@
    '@webassemblyjs/wast-parser': 1.8.5
    '@xtuc/long': 4.2.2
 '@xarc/app':
- _latest: 8.0.15-fynlocal_h
+ _latest: 8.0.16-fynlocal_h
  _:
-  ../../packages/xarc-app: 8.0.15-fynlocal_h
- 8.0.15-fynlocal_h:
+  ../../packages/xarc-app: 8.0.16-fynlocal_h
+ 8.0.16-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/xarc-app
@@ -2101,12 +2101,12 @@
    ignore-styles: ^5.0.1
    isomorphic-loader: ^3.0.0
    optional-require: ^1.0.0
-   subapp-util: ^1.0.4
+   subapp-util: ^1.0.5
 '@xarc/app-dev':
- _latest: 8.0.15-fynlocal_h
+ _latest: 8.0.16-fynlocal_h
  _:
-  ../../packages/xarc-app-dev: 8.0.15-fynlocal_h
- 8.0.15-fynlocal_h:
+  ../../packages/xarc-app-dev: 8.0.16-fynlocal_h
+ 8.0.16-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/xarc-app-dev
@@ -2156,8 +2156,9 @@
    require-at: ^1.0.2
    serve-index-fs: ^1.10.1
    style-loader: ^0.20.1
-   subapp-util: ^1.0.4
+   subapp-util: ^1.0.5
    sudo-prompt: ^8.2.5
+   visual-logger: ^1.1.0
    webpack-cli: ^3.3.9
    webpack-dev-middleware: ^3.4.0
    webpack-hot-middleware: ^2.22.2
@@ -4316,10 +4317,10 @@ electrode-node-resolver:
   dependencies:
    require-at: ^1.0.0
 electrode-react-webapp:
- _latest: 3.8.8-fynlocal_h
+ _latest: 3.8.9-fynlocal_h
  _:
-  ../electrode-react-webapp: 3.8.8-fynlocal_h
- 3.8.8-fynlocal_h:
+  ../electrode-react-webapp: 3.8.9-fynlocal_h
+ 3.8.9-fynlocal_h:
   $: local
   _: ../../packages/electrode-react-webapp
   dependencies:
@@ -10343,69 +10344,69 @@ stylehacks:
    postcss: ^7.0.0
    postcss-selector-parser: ^3.0.0
 subapp-react:
- _latest: 0.0.14-fynlocal_h
+ _latest: 0.0.15-fynlocal_h
  _:
-  ../../packages/subapp-react: 0.0.14-fynlocal_h
- 0.0.14-fynlocal_h:
+  ../../packages/subapp-react: 0.0.15-fynlocal_h
+ 0.0.15-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-react
   dependencies:
    '@babel/runtime': ^7.8.3
    optional-require: ^1.0.0
-   subapp-util: ^1.0.3
-   subapp-web: ^1.0.23
+   subapp-util: ^1.0.5
+   subapp-web: ^1.0.24
   peerDependencies:
    react: '*'
    react-dom: '*'
 subapp-redux:
- _latest: 1.0.23-fynlocal_h
+ _latest: 1.0.24-fynlocal_h
  _:
-  ../../packages/subapp-redux: 1.0.23-fynlocal_h
- 1.0.23-fynlocal_h:
+  ../../packages/subapp-redux: 1.0.24-fynlocal_h
+ 1.0.24-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-redux
   dependencies:
    optional-require: ^1.0.0
-   subapp-util: ^1.0.3
-   subapp-web: ^1.0.23
+   subapp-util: ^1.0.5
+   subapp-web: ^1.0.24
   peerDependencies:
    react: '*'
    react-dom: '*'
    redux: '*'
    react-redux: '*'
 subapp-server:
- _latest: 1.1.16-fynlocal_h
+ _latest: 1.1.17-fynlocal_h
  _:
-  ../../packages/subapp-server: 1.1.16-fynlocal_h
- 1.1.16-fynlocal_h:
+  ../../packages/subapp-server: 1.1.17-fynlocal_h
+ 1.1.17-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-server
   dependencies:
    '@hapi/boom': ^7.4.1
-   electrode-react-webapp: ^3.8.8
+   electrode-react-webapp: ^3.8.9
    filter-scan-dir: ^1.0.9
    http-status-codes: ^1.3.0
    optional-require: ^1.0.0
-   subapp-util: ^1.0.4
+   subapp-util: ^1.0.5
    xaa: ^1.4.0
 subapp-util:
- _latest: 1.0.4-fynlocal_h
+ _latest: 1.0.5-fynlocal_h
  _:
-  ../subapp-util: 1.0.4-fynlocal_h
- 1.0.4-fynlocal_h:
+  ../subapp-util: 1.0.5-fynlocal_h
+ 1.0.5-fynlocal_h:
   $: local
   _: ../../packages/subapp-util
   dependencies:
    filter-scan-dir: ^1.0.9
    optional-require: ^1.0.0
 subapp-web:
- _latest: 1.0.23-fynlocal_h
+ _latest: 1.0.24-fynlocal_h
  _:
-  '../../packages/subapp-web,../subapp-web': 1.0.23-fynlocal_h
- 1.0.23-fynlocal_h:
+  '../../packages/subapp-web,../subapp-web': 1.0.24-fynlocal_h
+ 1.0.24-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-web
@@ -10417,7 +10418,7 @@ subapp-web:
    lodash: ^4.17.15
    optional-require: ^1.0.0
    request: ^2.88.0
-   subapp-util: ^1.0.4
+   subapp-util: ^1.0.5
    xaa: ^1.4.0
 sudo-prompt:
  _latest: 9.1.1
@@ -11019,6 +11020,16 @@ verror:
    assert-plus: ^1.0.0
    core-util-is: 1.0.2
    extsprintf: ^1.2.0
+visual-logger:
+ _latest: 1.1.1
+ _:
+  ^1.1.0: 1.1.1
+ 1.1.1:
+  $: sha512-fMqKlV5YqUVycfF5QxOpIlivBTvF1Fx/jwlNu3JSxFwyzVyi4P11i+R1+iVDNsU8AHHuUZqi1ONs1OpxAplMoA==
+  _: 'https://npme.walmart.com/visual-logger/-/visual-logger-1.1.1.tgz'
+  dependencies:
+   chalk: ^4.0.0
+   log-update: ^4.0.0
 vm-browserify:
  _latest: 1.1.2
  _:
