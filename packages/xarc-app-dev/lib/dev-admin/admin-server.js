@@ -31,8 +31,6 @@ const DEV_ADMIN_STATUS = "DevAdminStatus";
 const WDS_PROGRESS = "WDSProgress";
 const LOG_ALERT = "LogAlert";
 
-const PROMPT_SPINNER = ">>>>>>>>      ";
-
 const SERVER_ENVS = {
   [APP_SERVER_NAME]: {
     XARC_BABEL_TARGET: "node"
@@ -68,8 +66,7 @@ class AdminServer {
     this._io.setup();
     this._io.addItem({
       name: DEV_ADMIN_STATUS,
-      display: ck`[<green.inverse>DEV ADMIN</>]`,
-      spinner: PROMPT_SPINNER
+      display: ck`[<green.inverse>DEV ADMIN</>]`
     });
     this.updateStatus("webpack is PENDING");
     this.handleUserInput();
@@ -134,8 +131,7 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
   }
 
   getServer(name) {
-    if (this._servers[name]) return this._servers[name];
-    return {};
+    return this._servers[name] || {};
   }
 
   handleServerExit(name) {
@@ -330,7 +326,11 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
           }
           if (line.startsWith(progSig)) {
             progLine = line.substring(progSig.length).replace(cwdRegex, ".");
-            this._io.addItem({ name: WDS_PROGRESS, spinner: true, display: `Webpack Progress` });
+            this._io.addItem({
+              name: WDS_PROGRESS,
+              spinner: true,
+              display: `Webpack Progress`
+            });
             this._io.updateItem(WDS_PROGRESS, progLine);
             const match = progLine.match(/\d{1,3}%/);
             if (match) {
@@ -389,9 +389,8 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
 
   toggleFullLogUrlMessage(serverName) {
     const server = this.getServer(serverName);
-    if (server && server.options.logSaver) {
-      const { options } = server;
-      const { logSaver } = options;
+    if (server.options) {
+      const { logSaver } = server.options;
       logSaver._toggle = !logSaver._toggle;
       if (!logSaver._toggle) {
         this._io.removeItem(LOG_ALERT);
@@ -405,7 +404,7 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
     this._io.addItem({
       name: LOG_ALERT,
       display: ck`[<orange.inverse>ALERT</>]`,
-      spinner: PROMPT_SPINNER
+      spinner: false
     });
     const instruction = `<orange>View full logs at: <cyan.underline>${url}</></> - \
 <green>Press Z to hide or show this message</>`;
