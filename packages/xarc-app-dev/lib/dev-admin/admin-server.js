@@ -98,7 +98,7 @@ class AdminServer {
     }
     this._io.updateItem(
       DEV_ADMIN_STATUS,
-      ck`Press M to show/hide menu. Q to exit. L to change App Log Show Level: <white.inverse>${this._appLogLevel}</> ${this._statusLine}${this._menu}`
+      ck`Press M show/hide menu | Q exit | L set App Log Show Level: <white.inverse> ${this._appLogLevel} </> | ${this._statusLine}${this._menu}`
     );
   }
 
@@ -130,7 +130,7 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
     if (show) {
       this.makeMenu();
       clearTimeout(this._hideMenuTimer);
-      this._hideMenuTimer = setTimeout(() => this.showMenu(false), 15 * 60 * 1000).unref(); // hide menu after a while
+      this._hideMenuTimer = setTimeout(() => this.showMenu(false), 5 * 60 * 1000).unref(); // hide menu after a while
     } else {
       this._menu = "";
     }
@@ -471,6 +471,7 @@ ${instruction}`
             logs.push(tag + (json.msg || json.message || JSON.stringify(json)));
           }
         }
+
         currentIx = ix + 1;
         return logs;
       }, []);
