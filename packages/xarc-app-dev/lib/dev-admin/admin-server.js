@@ -33,7 +33,7 @@ const LOG_ALERT = "LogAlert";
 
 const LOG_SHOW_LEVELS = ["all", "error"];
 const PROMPT_SPINNER = ">-+";
-const PROMPT_SPIN_INTERVAL = 5000;
+const PROMPT_SPIN_INTERVAL = 3500;
 
 const SERVER_ENVS = {
   [APP_SERVER_NAME]: {
