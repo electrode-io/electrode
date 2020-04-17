@@ -93,15 +93,24 @@
       const el = document.getElementById("logs");
       let logCount = 0;
       let currentHash = "";
+      const defaultLevelSelections = {
+        error: true,
+        warn: true,
+        info: true,
+        http: true,
+        verbose: true,
+        debug: true,
+        silly: true
+      };
 
       function getLevelSelections() {
-        const levels = ["error", "warn", "info", "http", "verbose", "debug", "silly"];
-        const levelSelections = {};
-        levels.forEach(level => {
-          const c = document.getElementById("level." + level);
-          levelSelections[level] = c.checked;
-        });
-        return levelSelections;
+        const levels = Object.keys(defaultLevelSelections);
+        const levelSelections = levels.reduce((acc, level) => {
+          const checkBox = document.getElementById("level." + level);
+          acc[level] = checkBox.checked;
+          return acc;
+        }, {});
+        return { ...defaultLevelSelections, ...levelSelections };
       }
 
       function levelChangeHandler() {
@@ -153,7 +162,7 @@
       }
 
       function setValuesInHash(values) {
-        const info = { ...getHashValues(), ...values };
+        const info = { ...defaultLevelSelections, ...getHashValues(), ...values };
         currentHash = window.location.hash =
           "#" +
           Object.keys(info)
@@ -198,8 +207,8 @@
         }
       }
 
-      function updateLevelChecks() {
-        const info = getHashValues();
+      function updateLevelCheckboxes() {
+        const info = { ...defaultLevelSelections, ...getLevelSelections(), ...getHashValues() };
         Object.keys(info).forEach(k => {
           const elem = document.getElementById(`level.${k}`);
           if (elem) {
@@ -213,7 +222,7 @@
         () => {
           if (currentHash !== window.location.hash) {
             currentHash = window.location.hash;
-            updateLevelChecks();
+            updateLevelCheckboxes();
             const count = getCountFromHash();
             if (count !== logCount) {
               logCount = count;
@@ -228,7 +237,7 @@
       );
 
       logCount = getCountFromHash();
-      updateLevelChecks();
+      updateLevelCheckboxes();
       setTimeout(displayLogs, 10);
     </script>
   </body>
