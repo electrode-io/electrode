@@ -42,6 +42,9 @@
         white-space: -pre-wrap;
         white-space: -o-pre-wrap;
         word-wrap: break-word;
+        font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+        font-size: small;
+        line-height: normal;
       }
     </style>
   </head>
@@ -109,7 +112,7 @@
           setTimeout(() => window.scrollTo(0, document.body.scrollHeight), 350);
         }
       }
-      setTimeout(displayLogs(), 10);
+      setTimeout(displayLogs, 10);
     </script>
   </body>
 </html>

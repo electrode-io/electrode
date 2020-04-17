@@ -31,6 +31,10 @@ const DEV_ADMIN_STATUS = "DevAdminStatus";
 const WDS_PROGRESS = "WDSProgress";
 const LOG_ALERT = "LogAlert";
 
+const LOG_SHOW_LEVELS = ["all", "error"];
+const PROMPT_SPINNER = ">-+";
+const PROMPT_SPIN_INTERVAL = 3500;
+
 const SERVER_ENVS = {
   [APP_SERVER_NAME]: {
     XARC_BABEL_TARGET: "node"
@@ -62,11 +66,14 @@ class AdminServer {
     this._wds = ck`<gray.inverse>[wds]</> `;
     this._proxy = ck`<green.inverse>[proxy]</> `;
     this._app = ck`<cyan.inverse>[app]</> `;
+    this._appLogLevel = LOG_SHOW_LEVELS[0];
     this._menu = "";
     this._io.setup();
     this._io.addItem({
       name: DEV_ADMIN_STATUS,
-      display: ck`[<green.inverse>DEV ADMIN</>]`
+      display: ck`[<green.inverse>DEV ADMIN</>]`,
+      spinner: PROMPT_SPINNER,
+      spinInterval: PROMPT_SPIN_INTERVAL
     });
     this.updateStatus("webpack is PENDING");
     this.handleUserInput();
@@ -91,7 +98,7 @@ class AdminServer {
     }
     this._io.updateItem(
       DEV_ADMIN_STATUS,
-      `Press M to show/hide menu. Q to exit. ${this._statusLine}${this._menu}`
+      ck`Press M show/hide menu | Q exit | L set App Log Show Level: <white.inverse> ${this._appLogLevel} </> | ${this._statusLine}${this._menu}`
     );
   }
 
@@ -106,7 +113,7 @@ class AdminServer {
   <magenta>A</> - Restart <magenta>D</> - <cyan>inspect-brk</> mode <magenta>I</> - <cyan>inspect</> mode <magenta>K</> - Kill&nbsp;
 <white.inverse>For Electrode webpack dev server</>  ${this._wds}
   <magenta>W</> - Restart <magenta>E</> - <cyan>inspect-brk</> mode <magenta>R</> - <cyan>inspect</> mode <magenta>X</> - Kill&nbsp;
-<magenta>L</> - Show All Logs <magenta>0-6</> - Show Logs by Winston level
+<magenta>L</> - Change App Log Show Level <magenta>Z</> - Show/Hide App Log Alert
 ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
 
 <green>         App URL: <cyan.underline>${formUrl(fullDevServer)}</></>
@@ -123,7 +130,7 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
     if (show) {
       this.makeMenu();
       clearTimeout(this._hideMenuTimer);
-      this._hideMenuTimer = setTimeout(() => this.showMenu(false), 15 * 60 * 1000).unref(); // hide menu after a while
+      this._hideMenuTimer = setTimeout(() => this.showMenu(false), 5 * 60 * 1000).unref(); // hide menu after a while
     } else {
       this._menu = "";
     }
@@ -198,19 +205,21 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
     this._io.exit();
   }
 
+  _changeLogShowLevel() {
+    let ix = LOG_SHOW_LEVELS.indexOf(this._appLogLevel) + 1;
+    if (ix >= LOG_SHOW_LEVELS.length) {
+      ix = 0;
+    }
+    this._appLogLevel = LOG_SHOW_LEVELS[ix];
+    this.updateStatus();
+  }
+
   async processCommand(str) {
     const handlers = {
       q: () => this._quit(),
       m: () => this.showMenu(),
       //logs
-      l: () => this.displayLogs(),
-      0: () => this.displayLogs(0),
-      1: () => this.displayLogs(1),
-      2: () => this.displayLogs(2),
-      3: () => this.displayLogs(3),
-      4: () => this.displayLogs(4),
-      5: () => this.displayLogs(5),
-      6: () => this.displayLogs(6),
+      l: () => this._changeLogShowLevel(),
       // app server
       a: () => this.startAppServer(),
       d: () => this.startAppServer("--inspect-brk"),
@@ -404,7 +413,8 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
     this._io.addItem({
       name: LOG_ALERT,
       display: ck`[<orange.inverse>ALERT</>]`,
-      spinner: false
+      spinner: PROMPT_SPINNER,
+      spinInterval: PROMPT_SPIN_INTERVAL
     });
     const instruction = `<orange>View full logs at: <cyan.underline>${url}</></> - \
 <green>Press Z to hide or show this message</>`;
@@ -423,7 +433,7 @@ ${instruction}`
     }
   }
 
-  deferLogsOutput(context, showFullLink = true, delay = 999) {
+  deferLogsOutput(context, showFullLink = true, delay = 250) {
     const { tag, store } = context;
 
     if (context._deferTimer) {
@@ -444,9 +454,9 @@ ${instruction}`
     context._deferTimer = setTimeout(() => {
       context._deferTimer = undefined;
       let currentIx = 0;
-      context._deferIx.forEach(deferIx => {
+      const logsToShow = context._deferIx.reduce((logs, deferIx) => {
         if (currentIx > deferIx) {
-          return;
+          return logs;
         }
         let ix = deferIx;
         for (; ix < store.length; ix++) {
@@ -455,14 +465,17 @@ ${instruction}`
           }
 
           if (typeof store[ix] === "string") {
-            this._io.show(tag + store[ix]);
+            logs.push(tag + store[ix]);
           } else if (store[ix]) {
             const json = store[ix];
-            this._io.show(tag + (json.msg || json.message || JSON.stringify(json)));
+            logs.push(tag + (json.msg || json.message || JSON.stringify(json)));
           }
         }
+
         currentIx = ix + 1;
-      });
+        return logs;
+      }, []);
+      this._io.show(logsToShow.join("\n"));
       context._deferIx = [];
       if (context._showFullLink === true) {
         context._toggle = true;
@@ -495,7 +508,7 @@ ${instruction}`
       } else {
         const entry = parseLog(str.trimRight());
         store.push(entry.json || entry.message);
-        if (entry.show) {
+        if (entry.show || this._appLogLevel === "all") {
           this.deferLogsOutput(context, entry.show > 1);
         }
         logger[entry.level](str);
@@ -535,9 +548,16 @@ ${instruction}`
 
   passThruLineOutput(tag, input, output) {
     const reader = readline.createInterface({ input });
+    let deferWrites;
+
     reader.on("line", data => {
-      output.write(tag + data.toString() + "\n");
+      if (!deferWrites) {
+        deferWrites = [];
+        setTimeout(() => output.show(deferWrites.join("\n")), 500).unref();
+      }
+      deferWrites.push(tag + data);
     });
+
     return reader;
   }
 
