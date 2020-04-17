@@ -46,11 +46,16 @@
         font-size: small;
         line-height: normal;
       }
+
+      .hide {
+        display: none;
+      }
     </style>
   </head>
   <body>
     <div id="controls" class="navbar">
       <button type="button" onclick="displayLogs();">Refresh Logs</button>
+      <button type="button" onclick="wipeLogs();">Wipe Logs</button>
       <label>
         <input type="checkbox" id="level.error" checked onclick="levelChangeHandler();" />
         Error
@@ -86,32 +91,153 @@
     </div>
     <script>
       const el = document.getElementById("logs");
+      let logCount = 0;
+      let currentHash = "";
+      const defaultLevelSelections = {
+        error: true,
+        warn: true,
+        info: true,
+        http: true,
+        verbose: true,
+        debug: true,
+        silly: true
+      };
 
       function getLevelSelections() {
-        const levels = ["error", "warn", "info", "http", "verbose", "debug", "silly"];
-        const levelSelections = {};
-        levels.forEach(level => {
-          const c = document.getElementById("level." + level);
-          levelSelections[level] = c.checked;
-        });
-        return levelSelections;
+        const levels = Object.keys(defaultLevelSelections);
+        const levelSelections = levels.reduce((acc, level) => {
+          const checkBox = document.getElementById("level." + level);
+          acc[level] = checkBox.checked;
+          return acc;
+        }, {});
+        return { ...defaultLevelSelections, ...levelSelections };
       }
 
       function levelChangeHandler() {
-        displayLogs(getLevelSelections(), false);
+        refreshLogs(getLevelSelections(), false);
+      }
+
+      function refreshLogs(levelSelections, scrollToEnd = true) {
+        levelSelections = levelSelections || getLevelSelections();
+
+        for (let line = el.firstChild; line !== null; line = line.nextSibling) {
+          const lvl = line.getAttribute("lvl");
+          if (!levelSelections[lvl]) {
+            line.setAttribute("class", "hide");
+          } else {
+            line.removeAttribute("class");
+          }
+        }
+
+        setValuesInHash(levelSelections);
+      }
+
+      function getHashValues() {
+        const hash = window.location.hash;
+        if (hash) {
+          return hash
+            .substr(1)
+            .split("&")
+            .reduce((acc, val) => {
+              const kvp = val.split("=");
+              if (kvp.length === 2 && kvp[0]) {
+                acc[kvp[0]] = kvp[1];
+              }
+              return acc;
+            }, {});
+        }
+        return {};
+      }
+
+      function getCountFromHash() {
+        const info = getHashValues();
+        if (info.count) {
+          const count = parseInt(info.count, 10);
+          if (Number.isInteger(count) && count >= 0) {
+            return count;
+          }
+        } else {
+          return 0;
+        }
+      }
+
+      function setValuesInHash(values) {
+        const info = { ...defaultLevelSelections, ...getHashValues(), ...values };
+        currentHash = window.location.hash =
+          "#" +
+          Object.keys(info)
+            .sort()
+            .map(k => `${k}=${info[k]}`)
+            .join("&");
+      }
+
+      function setCountInHash() {
+        setValuesInHash({ count: logCount });
+      }
+
+      function wipeLogs() {
+        setCountInHash();
+        while (el.lastChild) {
+          el.removeChild(el.lastChild);
+        }
       }
 
       async function displayLogs(levelSelections, scrollToEnd = true) {
         levelSelections = levelSelections || getLevelSelections();
-        const logResponse = await fetch("/__electrode_dev/log-events");
+        const logResponse = await fetch(`/__electrode_dev/log-events`);
         let newLogs = await logResponse.json();
-        const filteredLogs = newLogs.filter(event => levelSelections[event.level]);
-        el.innerHTML = filteredLogs.map(event => event.message).join("\n") + "\n\n";
-        // scroll to bottom
+        const updateLogs = newLogs.slice(logCount, newLogs.length);
+
+        if (updateLogs.length > 0) {
+          updateLogs.forEach(event => {
+            const newLine = document.createElement("div");
+            newLine.setAttribute("lvl", event.level);
+            if (!levelSelections[event.level]) {
+              newLine.setAttribute("class", "hide");
+            }
+            newLine.innerHTML = event.message;
+            el.appendChild(newLine);
+          });
+        }
+
+        logCount += updateLogs.length;
+
         if (scrollToEnd) {
           setTimeout(() => window.scrollTo(0, document.body.scrollHeight), 350);
         }
       }
+
+      function updateLevelCheckboxes() {
+        const info = { ...defaultLevelSelections, ...getLevelSelections(), ...getHashValues() };
+        Object.keys(info).forEach(k => {
+          const elem = document.getElementById(`level.${k}`);
+          if (elem) {
+            elem.checked = info[k] !== "false";
+          }
+        });
+      }
+
+      window.addEventListener(
+        "hashchange",
+        () => {
+          if (currentHash !== window.location.hash) {
+            currentHash = window.location.hash;
+            updateLevelCheckboxes();
+            const count = getCountFromHash();
+            if (count !== logCount) {
+              logCount = count;
+              wipeLogs();
+              displayLogs();
+            } else {
+              refreshLogs();
+            }
+          }
+        },
+        false
+      );
+
+      logCount = getCountFromHash();
+      updateLevelCheckboxes();
       setTimeout(displayLogs, 10);
     </script>
   </body>
