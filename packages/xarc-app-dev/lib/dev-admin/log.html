@@ -137,7 +137,7 @@
         if (hash) {
           return hash
             .substr(1)
-            .split(";")
+            .split("&")
             .reduce((acc, val) => {
               const kvp = val.split("=");
               if (kvp.length === 2 && kvp[0]) {
@@ -168,7 +168,7 @@
           Object.keys(info)
             .sort()
             .map(k => `${k}=${info[k]}`)
-            .join(";");
+            .join("&");
       }
 
       function setCountInHash() {
@@ -184,7 +184,7 @@
 
       async function displayLogs(levelSelections, scrollToEnd = true) {
         levelSelections = levelSelections || getLevelSelections();
-        const logResponse = await fetch("/__electrode_dev/log-events");
+        const logResponse = await fetch(`/__electrode_dev/log-events`);
         let newLogs = await logResponse.json();
         const updateLogs = newLogs.slice(logCount, newLogs.length);
 
