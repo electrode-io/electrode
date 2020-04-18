@@ -55,7 +55,7 @@
   <body>
     <div id="controls" class="navbar">
       <button type="button" onclick="displayLogs();">Refresh Logs</button>
-      <button type="button" onclick="wipeLogs();">Wipe Logs</button>
+      <button type="button" onclick="wipeLogs();">Wipe Logs [Ctrl+K]</button>
       <label>
         <input type="checkbox" id="level.error" checked onclick="levelChangeHandler();" />
         Error
@@ -91,7 +91,14 @@
     </div>
     <script>
       const el = document.getElementById("logs");
-      let logCount = 0;
+      // this is the starting number we are showing the logs
+      // used to allow wiping out existing logs from being display
+      let startIndex = 0;
+      // this is the number of logs we've fetched from the server
+      // we send this back to server so only new logs are fetched
+      let fetchedCount = 0;
+      // track logs from across restarted dev servers
+      let instanceId = -1;
       let currentHash = "";
       const defaultLevelSelections = {
         error: true,
@@ -102,6 +109,93 @@
         debug: true,
         silly: true
       };
+
+      class HashValues {
+        constructor() {
+          this.setFromUrl();
+        }
+
+        setFromUrl() {
+          const hash = window.location.hash;
+          if (hash) {
+            this._hash = hash
+              .substr(1)
+              .split("&")
+              .reduce((acc, val) => {
+                const kvp = val.split("=");
+                if (kvp.length === 2 && kvp[0]) {
+                  acc[kvp[0]] = kvp[1];
+                }
+                return acc;
+              }, {});
+          } else {
+            this._hash = {};
+          }
+        }
+
+        toUrl() {
+          const str = Object.keys(this._hash)
+            .sort()
+            .map(k => `${k}=${this._hash[k]}`)
+            .join("&");
+
+          return str ? "#" + str : "";
+        }
+
+        changed() {
+          const str = this.toUrl();
+          return str !== window.location.hash;
+        }
+
+        add(values) {
+          this._hash = { ...this._hash, ...values };
+          this.update();
+        }
+
+        remove(values) {
+          [].concat(values).forEach(k => delete this._hash[k]);
+          this.update();
+        }
+
+        update() {
+          if (this._updateTimer) {
+            return;
+          }
+          this._updateTimer = setTimeout(() => {
+            this._updateTimer = undefined;
+            const str = this.toUrl();
+            if (str !== window.location.hash) {
+              window.history.pushState(
+                this._hash,
+                document.title,
+                window.location.pathname + window.location.search + str
+              );
+            }
+          }, 10);
+        }
+
+        getInt(name, defaultVal = 0) {
+          const int = parseInt(this._hash[name], 10);
+          if (Number.isInteger(int)) {
+            return int;
+          }
+          return defaultVal;
+        }
+
+        get(name) {
+          return this._hash[name];
+        }
+
+        has(name) {
+          return this._hash.hasOwnProperty(name);
+        }
+
+        keys() {
+          return Object.keys(this._hash);
+        }
+      }
+
+      const hashVal = new HashValues();
 
       function getLevelSelections() {
         const levels = Object.keys(defaultLevelSelections);
@@ -129,64 +223,68 @@
           }
         }
 
-        setValuesInHash(levelSelections);
-      }
-
-      function getHashValues() {
-        const hash = window.location.hash;
-        if (hash) {
-          return hash
-            .substr(1)
-            .split("&")
-            .reduce((acc, val) => {
-              const kvp = val.split("=");
-              if (kvp.length === 2 && kvp[0]) {
-                acc[kvp[0]] = kvp[1];
-              }
-              return acc;
-            }, {});
-        }
-        return {};
-      }
-
-      function getCountFromHash() {
-        const info = getHashValues();
-        if (info.count) {
-          const count = parseInt(info.count, 10);
-          if (Number.isInteger(count) && count >= 0) {
-            return count;
+        const offLevels = Object.keys(levelSelections).reduce((acc, k) => {
+          if (!levelSelections[k]) {
+            acc[k] = false;
           }
-        } else {
-          return 0;
-        }
+          return acc;
+        }, {});
+
+        hashVal.remove(Object.keys(levelSelections));
+        hashVal.add(offLevels);
       }
 
-      function setValuesInHash(values) {
-        const info = { ...defaultLevelSelections, ...getHashValues(), ...values };
-        currentHash = window.location.hash =
-          "#" +
-          Object.keys(info)
-            .sort()
-            .map(k => `${k}=${info[k]}`)
-            .join("&");
-      }
-
-      function setCountInHash() {
-        setValuesInHash({ count: logCount });
-      }
-
-      function wipeLogs() {
-        setCountInHash();
+      function clearLogs() {
         while (el.lastChild) {
           el.removeChild(el.lastChild);
         }
       }
 
+      function wipeLogs() {
+        startIndex = fetchedCount;
+        hashVal.add({ start: startIndex, id: instanceId });
+        clearLogs();
+      }
+
       async function displayLogs(levelSelections, scrollToEnd = true) {
         levelSelections = levelSelections || getLevelSelections();
-        const logResponse = await fetch(`/__electrode_dev/log-events`);
-        let newLogs = await logResponse.json();
-        const updateLogs = newLogs.slice(logCount, newLogs.length);
+
+        if (hashVal.has("id")) {
+          instanceId = hashVal.getInt("id");
+        }
+
+        // if we have no logs displaying, we need to fetch all logs from start index
+        // else we just fetch new logs since last fetch
+        const start = el.childElementCount === 0 ? startIndex : fetchedCount;
+
+        const logResponse = await fetch(
+          `/__electrode_dev/log-events?start=${start}&id=${instanceId}`
+        );
+        const data = await logResponse.json();
+
+        let updateLogs = data.logs;
+
+        fetchedCount = data.total;
+
+        // different instanceId means server would've returned all logs
+        if (data.instanceId && instanceId !== data.instanceId) {
+          if (hashVal.has("start") && instanceId > 0) {
+            hashVal.remove(["start", "id"]);
+            startIndex = 0;
+          }
+          instanceId = data.instanceId;
+          // instance ID completely different, need to start a clean slate log
+          clearLogs();
+        } else if (data.start < startIndex) {
+          // we fetched more than we asked, probably everything, due to a reload
+          // on a URL that contains a valid instance ID, but has a different startIndex
+          // so take only the part after startIndex
+          if (startIndex > 0) {
+            updateLogs = data.logs.slice(startIndex - data.start);
+            // display should have no logs but clear anyways
+            clearLogs();
+          }
+        }
 
         if (updateLogs.length > 0) {
           updateLogs.forEach(event => {
@@ -200,19 +298,16 @@
           });
         }
 
-        logCount += updateLogs.length;
-
         if (scrollToEnd) {
           setTimeout(() => window.scrollTo(0, document.body.scrollHeight), 350);
         }
       }
 
       function updateLevelCheckboxes() {
-        const info = { ...defaultLevelSelections, ...getLevelSelections(), ...getHashValues() };
-        Object.keys(info).forEach(k => {
+        Object.keys(defaultLevelSelections).forEach(k => {
           const elem = document.getElementById(`level.${k}`);
           if (elem) {
-            elem.checked = info[k] !== "false";
+            elem.checked = hashVal.get(k) !== "false";
           }
         });
       }
@@ -220,13 +315,14 @@
       window.addEventListener(
         "hashchange",
         () => {
-          if (currentHash !== window.location.hash) {
-            currentHash = window.location.hash;
+          if (hashVal.changed()) {
+            hashVal.setFromUrl();
             updateLevelCheckboxes();
-            const count = getCountFromHash();
-            if (count !== logCount) {
-              logCount = count;
-              wipeLogs();
+            const start = hashVal.getInt("start");
+            if (start !== startIndex) {
+              hashVal.add({ start });
+              clearLogs();
+              startIndex = start;
               displayLogs();
             } else {
               refreshLogs();
@@ -236,7 +332,13 @@
         false
       );
 
-      logCount = getCountFromHash();
+      window.addEventListener("keypress", function(event) {
+        if (event.ctrlKey && event.code === "KeyK") {
+          wipeLogs();
+        }
+      });
+
+      startIndex = hashVal.getInt("start");
       updateLevelCheckboxes();
       setTimeout(displayLogs, 10);
     </script>

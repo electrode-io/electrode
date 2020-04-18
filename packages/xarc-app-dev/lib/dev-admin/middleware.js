@@ -8,6 +8,7 @@ const Fs = require("fs");
 const webpack = require("webpack");
 const hotHelpers = require("webpack-hot-middleware/helpers");
 const Url = require("url");
+const queryStr = require("querystring");
 const { getWebpackStartConfig } = require("@xarc/webpack/lib/util/custom-check");
 const { getLogs, getLogEventAsHtml } = require("./log-reader");
 const { fullDevServer, controlPaths } = require("../../config/dev-proxy");
@@ -70,6 +71,7 @@ class Middleware {
   constructor(options) {
     this._options = options;
     this.canContinue = Symbol("webpack dev middleware continue");
+    this._instanceId = Date.now();
   }
 
   setup() {
@@ -349,11 +351,29 @@ ${jumpToError}</body></html>
     };
 
     const serveLogEvents = async () => {
-      const htmlLogs = (await getLogs()).map(event => ({
-        ...event,
-        message: getLogEventAsHtml(event)
-      }));
-      return Promise.resolve(cycle.replyStaticData(JSON.stringify(htmlLogs)));
+      const query = queryStr.parse(Url.parse(req.url).query);
+      let start = parseInt(query.start, 10) || 0;
+      const id = parseInt(query.id, 10);
+      if (id !== this._instanceId) {
+        start = 0;
+      }
+
+      const htmlLogs = [];
+      const allLogs = await getLogs();
+      for (let ix = start; ix < allLogs.length; ix++) {
+        const event = allLogs[ix];
+        htmlLogs.push({
+          ...event,
+          message: getLogEventAsHtml(event)
+        });
+      }
+      const data = {
+        start,
+        logs: htmlLogs,
+        total: allLogs.length,
+        instanceId: this._instanceId
+      };
+      return Promise.resolve(cycle.replyStaticData(JSON.stringify(data)));
     };
 
     const serveLog = () => {
