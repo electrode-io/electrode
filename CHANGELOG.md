@@ -1,3 +1,38 @@
+# 4/20/2020
+
+- improve dev-admin log handling and HTML viewer
+- Fix subapp manifests found in sub directories of src/
+- provide original error for debug purposes
+
+## Packages
+
+- `@xarc/app@8.0.17` `(8.0.16 => 8.0.17)`
+- `@xarc/app-dev@8.0.17` `(8.0.16 => 8.0.17)`
+- `@xarc/webpack@8.0.3` `(8.0.2 => 8.0.3)`
+- `subapp-server@1.1.18` `(1.1.17 => 1.1.18)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix HTML log viewer fetching logs across different runs ([#1605](https://github.com/electrode-io/electrode/pull/1605)) [commit](http://github.com/electrode-io/electrode/commit/78201996f097382dc4ecfd8543ee4f218585494c)
+  - improve HTML viewer ([#1604](https://github.com/electrode-io/electrode/pull/1604)) [commit](http://github.com/electrode-io/electrode/commit/11f6e6cde026b30d1662e6f369ddcfedd80fafe5)
+  - fix: show all app log by default ([#1603](https://github.com/electrode-io/electrode/pull/1603)) [commit](http://github.com/electrode-io/electrode/commit/96af8972d841da4812f117b893afbf73b770ee36)
+  - fix: persistent spinner breaks vscode context link detection ([#1602](https://github.com/electrode-io/electrode/pull/1602)) [commit](http://github.com/electrode-io/electrode/commit/065431ee1c117b374220ea25ce8c139aa387694f)
+  - Add env var to set dev admin log level ([#1606](https://github.com/electrode-io/electrode/pull/1606)) [commit](http://github.com/electrode-io/electrode/commit/2c5ce68878d7d574ba4ff53e31d0341f09d3c915)
+
+- `packages/xarc-webpack`
+
+  - Fix subapp manifests found in sub directories of src/ ([#1601](https://github.com/electrode-io/electrode/pull/1601)) [commit](http://github.com/electrode-io/electrode/commit/b4bca3da148e8a174eb5315d121aceaf47164d1c)
+
+- `packages/subapp-server`
+
+  - [patch] provide original error for debug purposes ([#1600](https://github.com/electrode-io/electrode/pull/1600)) [commit](http://github.com/electrode-io/electrode/commit/3a1138841b72963cc200096bc3f7d4b88ba0e0f2)
+
+- `docs`
+
+  - Add env var to set dev admin log level ([#1606](https://github.com/electrode-io/electrode/pull/1606)) [commit](http://github.com/electrode-io/electrode/commit/2c5ce68878d7d574ba4ff53e31d0341f09d3c915)
+
 # 4/14/2020
 
 - dev-admin log enhancements and fixes: using visual-logger now, better webpack status display.
