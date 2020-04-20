@@ -25,7 +25,7 @@ const { webpackDev, devPort: webpackDevPort, devHostname: webpackDevHost } = env
 let protocol;
 let port;
 let httpPort = envApp.port;
-let { httpsPort } = envProxy;
+let { adminLogLevel, httpsPort } = envProxy;
 const { elevated } = envProxy;
 const useDevProxy = appPort > 0;
 
@@ -44,6 +44,7 @@ if (httpsPort) {
 const settings = {
   host,
   port,
+  adminLogLevel,
   appPort,
   httpPort,
   httpsPort,
