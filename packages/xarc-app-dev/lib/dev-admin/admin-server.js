@@ -23,6 +23,9 @@ const {
   controlPaths
 } = require("../../config/dev-proxy");
 
+const { webpack } = require("../../config/archetype");
+const logLevel = parseInt(webpack.defaultAdminLogLevel) || 0;
+
 const APP_SERVER_NAME = "your app server";
 const DEV_SERVER_NAME = "Electrode webpack dev server";
 const PROXY_SERVER_NAME = "Electrode Dev Proxy";
@@ -66,7 +69,7 @@ class AdminServer {
     this._wds = ck`<gray.inverse>[wds]</> `;
     this._proxy = ck`<green.inverse>[proxy]</> `;
     this._app = ck`<cyan.inverse>[app]</> `;
-    this._appLogLevel = LOG_SHOW_LEVELS[0];
+    this._appLogLevel = LOG_SHOW_LEVELS[logLevel] || LOG_SHOW_LEVELS[0];
     this._menu = "";
     this._io.setup();
     this._io.addItem({

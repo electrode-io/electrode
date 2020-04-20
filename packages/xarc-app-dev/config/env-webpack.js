@@ -23,6 +23,7 @@ const webpackConfigSpec = {
   // disk.  It will use this as the path to save the file.
   devArtifactsPath: { env: "WEBPACK_DEV_ARTIFACTS_PATH", default: ".etmp" },
   cssModuleSupport: { env: "CSS_MODULE_SUPPORT", type: "boolean", default: undefined },
+  defaultAdminLogLevel: { env: "DEFAULT_ADMIN_LOG_LEVEL", default: 0 },
   enableBabelPolyfill: { env: "ENABLE_BABEL_POLYFILL", default: false },
   enableNodeSourcePlugin: { env: "ENABLE_NODESOURCE_PLUGIN", default: false },
   enableHotModuleReload: { env: "WEBPACK_HOT_MODULE_RELOAD", default: true },
