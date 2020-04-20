@@ -18,10 +18,12 @@ const logger = require("@xarc/app/lib/logger");
 const xaa = require("xaa");
 const { formUrl } = require("../utils");
 const {
-  settings: { useDevProxy: DEV_PROXY_ENABLED },
+  settings: { useDevProxy: DEV_PROXY_ENABLED, adminLogLevel },
   fullDevServer,
   controlPaths
 } = require("../../config/dev-proxy");
+
+const ADMIN_LOG_LEVEL = parseInt(adminLogLevel) || 0;
 
 const APP_SERVER_NAME = "your app server";
 const DEV_SERVER_NAME = "Electrode webpack dev server";
@@ -66,7 +68,7 @@ class AdminServer {
     this._wds = ck`<gray.inverse>[wds]</> `;
     this._proxy = ck`<green.inverse>[proxy]</> `;
     this._app = ck`<cyan.inverse>[app]</> `;
-    this._appLogLevel = LOG_SHOW_LEVELS[0];
+    this._appLogLevel = LOG_SHOW_LEVELS[ADMIN_LOG_LEVEL] || LOG_SHOW_LEVELS[0];
     this._menu = "";
     this._io.setup();
     this._io.addItem({
