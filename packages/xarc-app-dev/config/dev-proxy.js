@@ -7,7 +7,50 @@ const envWebpack = require("./env-webpack");
 const envApp = require("./env-app");
 const envProxy = require("./env-proxy");
 
+/*
+ * Look in app's devDependencies for a module with a name that starts with ssl-certs,
+ * load it, and try to get dev SSL key/cert file from the functions devKeyFile and devCertFile.
+ *
+ * If they exist and return strings, then use them as the path to the SSL key/cert file
+ * for the dev proxy.
+ */
+function searchSSLCertsModule() {
+  let sslCertsMod;
+
+  try {
+    const appPkg = JSON.parse(Fs.readFileSync("package.json"));
+    sslCertsMod = Object.keys(appPkg.devDependencies).find(n => n.match(/(@[^\/]+\/|)ssl-certs.*/));
+    if (sslCertsMod) {
+      const sslCerts = require(sslCertsMod);
+      const key = sslCerts.devKeyFile();
+      const cert = sslCerts.devCertFile();
+      Fs.accessSync(key);
+      Fs.accessSync(cert);
+      console.log(`dev proxy found SSL certs module ${sslCertsMod}, using:
+  KEY: ${key}
+  CERT: ${cert}
+`);
+      return { key, cert };
+    }
+  } catch (err) {
+    if (sslCertsMod && err.code !== "MODULE_NOT_FOUND") {
+      console.error(
+        `dev proxy trying to load Key/Cert from module ${sslCertsMod} failed, error:`,
+        err
+      );
+    }
+  }
+
+  return undefined;
+}
+
 function searchSSLCerts() {
+  const fromModule = searchSSLCertsModule();
+
+  if (fromModule) {
+    return fromModule;
+  }
+
   const searchDirs = ["", "config", "test", "src"];
   for (const f of searchDirs) {
     const key = Path.resolve(f, "dev-proxy.key");
@@ -86,6 +129,5 @@ module.exports = {
   // If using dev proxy in HTTPS, then it's also listening on a HTTP port also:
   httpDevServer: { protocol: "http", host, port: httpPort, https: false },
   controlPaths,
-  searchSSLCerts,
-  certs: searchSSLCerts()
+  searchSSLCerts
 };
