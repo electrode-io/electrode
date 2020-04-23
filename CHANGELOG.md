@@ -1,3 +1,44 @@
+# 4/23/2020
+
+- fix: allow --inspect option to debug dev-admin
+- search for dev certs from module in devDependencies
+- fix: handle non JS/CSS assets for CDN
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.0.18` `(8.0.17 => 8.0.18)`
+- `@xarc/app-dev@8.0.18` `(8.0.17 => 8.0.18)`
+- `subapp-web@1.0.25` `(1.0.24 => 1.0.25)`
+
+### Lerna Updated
+
+- `@xarc/webpack@8.0.4` `(8.0.3 => 8.0.4)`
+- `subapp-pbundle@0.0.19` `(0.0.18 => 0.0.19)`
+- `subapp-react@0.0.16` `(0.0.15 => 0.0.16)`
+- `subapp-redux@1.0.25` `(1.0.24 => 1.0.25)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix: allow --inspect option to debug dev-admin ([#1613](https://github.com/electrode-io/electrode/pull/1613)) [commit](http://github.com/electrode-io/electrode/commit/1c9fc8d596262083cc3b6e9a9c599f6e61682737)
+  - fix: CI failing due to linting errors [commit](http://github.com/electrode-io/electrode/commit/43436adca1deef5da8108aa7a4be9eca7505c63f)
+  - search for dev certs from module in devDependencies ([#1612](https://github.com/electrode-io/electrode/pull/1612)) [commit](http://github.com/electrode-io/electrode/commit/268ce953399287df39a221bcceb8d0801b2a5543)
+
+- `packages/subapp-web`
+
+  - fix: handle non JS/CSS assets for CDN ([#1614](https://github.com/electrode-io/electrode/pull/1614)) [commit](http://github.com/electrode-io/electrode/commit/948658578c89224a219d0b604b44353e816f53a4)
+
+- `MISC`
+
+  - npmignore [commit](http://github.com/electrode-io/electrode/commit/e25f2a7768b64560eb6d13400ba24ba79b16afba)
+  - 1.1.1 [commit](http://github.com/electrode-io/electrode/commit/118c4f605fcde4580d5fa9664de78739c47f50b5)
+  - 1.1.0 [commit](http://github.com/electrode-io/electrode/commit/d8ce52379827a0d28f4b68b87b750796efd78e77)
+  - Replace const with var to make bundle output friendlier to old IE. ([#1](https://github.com/electrode-io/electrode/pull/1)) [commit](http://github.com/electrode-io/electrode/commit/f84212d6f8b6e92bc3730c6475add5e87703384e)
+  - update loader-utils [commit](http://github.com/electrode-io/electrode/commit/b1b360e27e681eb2f4f17599affaa11e518f834f)
+
 # 4/20/2020
 
 - improve dev-admin log handling and HTML viewer
