@@ -68,10 +68,6 @@ function quote(str) {
   return str.startsWith(`"`) ? str : `"${str}"`;
 }
 
-function taskArgs(argv) {
-  return (argv && argv.length > 1 && argv.slice(1)) || [];
-}
-
 function webpackConfig(file) {
   return Path.join(config.webpack, file);
 }
@@ -733,15 +729,19 @@ Individual .babelrc files were generated for you in src/client and src/server
     debug: ["build-dev-static", "server-debug"],
     devbrk: ["dev --inspect-brk"],
     dev: {
-      desc: "Start your app with watch in development mode",
+      desc: `Start your app with watch in development mode with dev-admin.
+      options: node.js --inspect can be used to debug the dev-admin`,
       dep: [".remove-log-files", ".development-env", ".mk-dist-dir", ".build.babelrc"],
-      task: function() {
+      task() {
         if (!Fs.existsSync(".isomorphic-loader-config.json")) {
           Fs.writeFileSync(".isomorphic-loader-config.json", JSON.stringify({}));
         }
-        const args = taskArgs(this.argv);
 
-        return [".set.css-module.env", ".webpack-dev", ["server-admin", "generate-service-worker"]];
+        return [
+          ".set.css-module.env",
+          ".webpack-dev",
+          [`server-admin ${this.args.join(" ")}`, "generate-service-worker"]
+        ];
       }
     },
 
@@ -805,15 +805,20 @@ Individual .babelrc files were generated for you in src/client and src/server
 
     "server-admin": {
       desc: "Start development with admin server",
-      task: function() {
+      task(context) {
         setWebpackProfile("development");
         AppMode.setEnv(AppMode.src.dir);
         // eslint-disable-next-line no-shadow
         const exec = quote(Path.join(archetype.dir, "support/babel-run"));
+        const isNodeArgs = x => x.startsWith("--inspect");
+        const nodeArgs = context.args.filter(isNodeArgs);
+        const otherArgs = context.args.filter(x => !isNodeArgs(x));
 
         return mkCmd(
-          `~(tty)$node ${quote(Path.join(archetype.devDir, "lib/dev-admin"))}`,
-          taskArgs(this.argv).join(" "),
+          `~(tty)$node`,
+          nodeArgs.join(" "),
+          quote(Path.join(archetype.devDir, "lib/dev-admin")),
+          otherArgs.join(" "),
           `--exec ${exec} --ext js,jsx,json,yaml,log,ts,tsx`,
           `--watch config ${AppMode.src.server}`,
           `-- ${AppMode.src.server}`
@@ -823,15 +828,19 @@ Individual .babelrc files were generated for you in src/client and src/server
 
     "server-admin.test": {
       desc: "Start development with admin server in test mode",
-      task: function() {
+      task(context) {
         setWebpackProfile("test");
         AppMode.setEnv(AppMode.src.dir);
         // eslint-disable-next-line no-shadow
         const exec = quote(Path.join(archetype.dir, "support/babel-run"));
-
+        const isNodeArgs = x => x.startsWith("--inspect");
+        const nodeArgs = context.args.filter(isNodeArgs);
+        const otherArgs = context.args.filter(x => !isNodeArgs(x));
         return mkCmd(
-          `~(tty)$node ${quote(Path.join(archetype.devDir, "lib/dev-admin"))}`,
-          taskArgs(this.argv).join(" "),
+          `~(tty)$node`,
+          nodeArgs.join(" "),
+          quote(Path.join(archetype.devDir, "lib/dev-admin")),
+          otherArgs.join(" "),
           `--exec ${exec} --ext js,jsx,json,yaml,log,ts,tsx`,
           `--watch config ${AppMode.src.server}`,
           `-- ${AppMode.src.server}`
