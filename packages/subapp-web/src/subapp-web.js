@@ -1,6 +1,6 @@
 // xarc subapp client side lib version 1
 // load into window.xarcV1 as a global
-(function(w) {
+(function (w) {
   const version = 1000000; // ###.###.### major.minor.patch
 
   if (w.xarcV1 && w.xarcV1.version >= version) return w.xarcV1;
@@ -23,6 +23,15 @@
     version,
 
     rt: runtimeInfo,
+
+    //
+    // empty place holders for CDN mapping
+    //
+    cdnInit() {},
+    cdnUpdate() {},
+    cdnMap(x) {
+      return x;
+    },
 
     defer() {
       const defer = {};
@@ -277,6 +286,14 @@
       });
     },
 
+    getBundleAssets() {
+      if (!runtimeInfo.bundleAssets) {
+        runtimeInfo.bundleAssets = xv1.dyn("bundleAssets");
+        xv1.cdnInit(runtimeInfo.bundleAssets);
+      }
+      return runtimeInfo.bundleAssets;
+    },
+
     loadSubAppBundles(names, done) {
       done = done || (() => {});
 
@@ -286,11 +303,7 @@
         return done();
       }
 
-      if (!runtimeInfo.bundleAssets) {
-        runtimeInfo.bundleAssets = xv1.dyn("bundleAssets");
-      }
-
-      const ba = runtimeInfo.bundleAssets;
+      const ba = xv1.getBundleAssets();
       const loaded = [];
       const assetsToLoad = toLoad
         .reduce((a, name) => {

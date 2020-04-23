@@ -10,6 +10,7 @@ const { tryThrowOriginalSubappRegisterError } = require("subapp-util");
 
 let CDN_ASSETS;
 let CDN_JS_BUNDLES;
+let CDN_OTHER_MAPPINGS;
 let FrameworkLib;
 
 const utils = {
@@ -165,11 +166,7 @@ const utils = {
     return cdnBundles;
   },
 
-  getCdnJsBundles(assets, routeOptions, cdnAssetsFile = "config/assets.json") {
-    if (CDN_JS_BUNDLES) {
-      return CDN_JS_BUNDLES;
-    }
-
+  loadCdnAssets(routeOptions, cdnAssetsFile = "config/assets.json") {
     if (routeOptions.cdn.enable === true && CDN_ASSETS === undefined) {
       const env = process.env.NODE_ENV;
       const prod = env === "production";
@@ -200,6 +197,42 @@ ${ignoreMsg}`
       }
     }
 
+    return CDN_ASSETS;
+  },
+
+  getCdnOtherMappings(routeOptions) {
+    if (CDN_OTHER_MAPPINGS) {
+      return CDN_OTHER_MAPPINGS;
+    }
+    utils.loadCdnAssets(routeOptions);
+
+    /*
+     * Send non js/css assets as CDN mapping data to the browser.
+     *
+     * For js and css assets, webpack is aware of them, and treat them as special chunks.
+     * IDs are assign to each "chunks".  In dev mode, it's the chunk name, but in prod mode
+     * it's an integer.
+     *
+     * For any other assets that are managed by Electrode, after they are uploaded to CDN,
+     * there's just the CDN mapping info on them, and we need to send them to the browser
+     * and provide code to map them from original file name to the CDN URL.
+     */
+    CDN_OTHER_MAPPINGS = Object.keys(CDN_ASSETS || {})
+      .filter(x => !x.endsWith(".js") && !x.endsWith(".css"))
+      .reduce((acc, k) => {
+        acc[Path.basename(k)] = CDN_ASSETS[k];
+        return acc;
+      }, {});
+
+    return CDN_OTHER_MAPPINGS;
+  },
+
+  getCdnJsBundles(assets, routeOptions) {
+    if (CDN_JS_BUNDLES) {
+      return CDN_JS_BUNDLES;
+    }
+
+    utils.loadCdnAssets(routeOptions);
     //
     // pack up entrypoints data from stats
     //
@@ -210,7 +243,9 @@ ${ignoreMsg}`
 
     const bundleBase = utils.getBundleBase(routeOptions);
     const allChunks = _.mergeWith({}, js, css, (a, b) => (a && b ? [].concat(a, b) : a || b));
-    return (CDN_JS_BUNDLES = utils.mapCdnAssets(allChunks, bundleBase, CDN_ASSETS));
+    CDN_JS_BUNDLES = utils.mapCdnAssets(allChunks, bundleBase, CDN_ASSETS);
+
+    return CDN_JS_BUNDLES;
   },
 
   getChunksById(stats) {
@@ -299,6 +334,7 @@ ${ignoreMsg}`
     //
 
     assets.chunksById = utils.getChunksById(stats);
+    assets.all = stats.assets;
     assets.js = stats.assets.filter(asset => asset.name.endsWith(".js"));
     assets.css = stats.assets.filter(asset => asset.name.endsWith(".css"));
     assets.entryPoints = stats.entrypoints;
