@@ -3,7 +3,6 @@
 /* eslint-disable no-console, no-process-exit */
 
 const readline = require("readline");
-const logUpdate = require("log-update");
 const VisualLogger = require("visual-logger");
 
 class ConsoleIO extends VisualLogger {

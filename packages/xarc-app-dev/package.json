@@ -90,16 +90,28 @@
     "xsh": "^0.4.4"
   },
   "devDependencies": {
+    "@types/chai": "^4.2.11",
+    "@types/mocha": "^7.0.2",
+    "@types/sinon": "^9.0.0",
+    "@types/sinon-chai": "^3.2.4",
     "@xarc/app": "../xarc-app",
-    "@xarc/module-dev": "^2.0.3",
+    "@xarc/module-dev": "^2.1.0",
     "babel-eslint": "^10.1.0",
-    "chai": "^4.0.0",
+    "chai": "^4.2.0",
     "electrode-archetype-opt-postcss": "../electrode-archetype-opt-postcss",
     "electrode-archetype-opt-sass": "../electrode-archetype-opt-sass",
     "electrode-archetype-opt-stylus": "../electrode-archetype-opt-stylus",
+    "eslint": "^6.8.0",
+    "eslint-config-walmart": "^2.2.1",
+    "eslint-plugin-filenames": "^1.1.0",
+    "eslint-plugin-jsdoc": "^21.0.0",
+    "mocha": "^7.1.0",
     "mock-require": "^3.0.3",
+    "nyc": "^15.0.0",
     "prettier": "^1.14.2",
-    "run-verify": "^1.2.1"
+    "run-verify": "^1.2.1",
+    "sinon": "^7.2.6",
+    "sinon-chai": "^3.3.0"
   },
   "engines": {
     "node": ">= 10",

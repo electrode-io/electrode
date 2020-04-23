@@ -1,8 +1,8 @@
 "use strict";
 
-const ck = require("chalker");
-const { Levels } = require("./log-reader");
+/* eslint-disable max-statements, complexity */
 
+const ck = require("chalker");
 const FyiTag = ck`<yellow.inverse>[fyi]</> `;
 const BunyanTag = ck`<cyan.inverse>[app]</> `;
 
@@ -33,7 +33,9 @@ function parse(str) {
     if (str[0] === "{" || str[0] === "[") {
       jsonData = JSON.parse(str);
     }
-  } catch {}
+  } catch {
+    //
+  }
 
   let message;
   let level;

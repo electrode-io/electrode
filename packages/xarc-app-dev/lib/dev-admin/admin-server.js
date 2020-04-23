@@ -503,7 +503,7 @@ ${instruction}`
         store.push(false);
       }
 
-      let str = data.toString();
+      const str = data.toString();
       if (!str.trim()) {
         store.push("");
         logger.info("");

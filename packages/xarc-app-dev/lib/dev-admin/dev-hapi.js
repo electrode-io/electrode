@@ -97,6 +97,8 @@ function register(server, options, next) {
           console.error("webpack dev middleware error", err);
           reply(err);
         });
+
+      return undefined;
     }
   });
 

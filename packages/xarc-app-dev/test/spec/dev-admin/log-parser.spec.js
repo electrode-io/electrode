@@ -1,7 +1,7 @@
 "use strict";
 
 const expect = require("chai").expect;
-const { BunyanTag, FyiTag, parse } = require("../../../lib/dev-admin/log-parser");
+const { parse } = require("../../../lib/dev-admin/log-parser");
 
 describe("log-parser", function() {
   it("should return correct level and message for a simple error", () => {
