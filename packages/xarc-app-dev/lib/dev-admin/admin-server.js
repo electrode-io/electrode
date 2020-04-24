@@ -65,6 +65,8 @@ class AdminServer {
   }
 
   async start() {
+    this._startTime = Date.now();
+    this._io.show(ck`<orange>Dev Admin start time <cyan>${this._startTime}</></>`);
     this._wds = ck`<gray.inverse>[wds]</> `;
     this._proxy = ck`<green.inverse>[proxy]</> `;
     this._app = ck`<cyan.inverse>[app]</> `;
@@ -80,7 +82,9 @@ class AdminServer {
     this.updateStatus("webpack is PENDING");
     this.handleUserInput();
 
+    this._fullyStarted = false;
     this._shutdown || (await this.startWebpackDevServer());
+    this.logTime(`Time Webpack Dev Server took`);
     this._shutdown || (await this.startAppServer());
     if (!this._shutdown && DEV_PROXY_ENABLED) {
       // to debug dev proxy
@@ -92,6 +96,12 @@ class AdminServer {
       setTimeout(() => {
         this.showMenu(true);
       }, 100);
+  }
+
+  logTime(msg) {
+    const now = Date.now();
+    const elapsed = (now - this._startTime) / 1000;
+    this._io.show(ck`<orange>${msg} was <cyan>${elapsed}</> seconds</>`);
   }
 
   updateStatus(line) {
@@ -504,6 +514,7 @@ ${instruction}`
       }
 
       const str = data.toString();
+      context.checkLine && context.checkLine(str);
       if (!str.trim()) {
         store.push("");
         logger.info("");
@@ -527,7 +538,18 @@ ${instruction}`
   async startAppServer(debug) {
     const skipWatch = debug === "--inspect-brk";
 
-    const logSaver = { tag: this._app, store: [], fullLogUrl: this._fullAppLogUrl };
+    const logSaver = {
+      tag: this._app,
+      store: [],
+      fullLogUrl: this._fullAppLogUrl,
+      checkLine: str => {
+        if (!this._fullyStarted && str.includes("server running")) {
+          this._fullyStarted = true;
+          this.logTime(`App is ready in dev mode, total time took`);
+        }
+        return str;
+      }
+    };
 
     await this.startServer({
       name: APP_SERVER_NAME,
