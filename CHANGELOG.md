@@ -1,5 +1,20 @@
 # 4/27/2020
 
+- fix: update cdn mock to mime 1.0 downgrade
+
+## Packages
+
+- `@xarc/app@8.0.20` `(8.0.19 => 8.0.20)`
+- `@xarc/app-dev@8.0.20` `(8.0.19 => 8.0.20)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix: update cdn mock to mime 1.0 downgrade ([#1629](https://github.com/electrode-io/electrode/pull/1629)) [commit](http://github.com/electrode-io/electrode/commit/80ac506fcbc7a5e7e8efc4ece4ce66f4c8f0f524)
+
+# 4/27/2020
+
 - fix: upgrade fs-extra from 0.26.7 to 0.30.0
 - fix: show some timing in dev admin startup
 - feat: support mock CDN in dev-proxy for mock prod mode
