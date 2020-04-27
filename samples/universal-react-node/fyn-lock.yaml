@@ -1283,10 +1283,10 @@
   $: sha512-yN7kbciD87WzLGc5539Tn0sApjyiGHAJgKvG9W8C7O+6c7qmoQMfVs0W4bX17eqz6C78QJqqFrtgdK5EWf6Qow==
   _: 'https://registry.npmjs.org/@hapi/hoek/-/hoek-8.5.1.tgz'
 '@jchip/redbird':
- _latest: 1.1.0-fynlocal_h
+ _latest: 1.0.2-fynlocal_h
  _:
-  ../../../redbird: 1.1.0-fynlocal_h
- 1.1.0-fynlocal_h:
+  ../../../redbird: 1.0.2-fynlocal_h
+ 1.0.2-fynlocal_h:
   $: local
   _: ../../../redbird
   dependencies:
@@ -2026,10 +2026,10 @@
    '@webassemblyjs/wast-parser': 1.8.5
    '@xtuc/long': 4.2.2
 '@xarc/app':
- _latest: 8.0.12-fynlocal_h
+ _latest: 8.0.18-fynlocal_h
  _:
-  ../../packages/xarc-app: 8.0.12-fynlocal_h
- 8.0.12-fynlocal_h:
+  ../../packages/xarc-app: 8.0.18-fynlocal_h
+ 8.0.18-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/xarc-app
@@ -2039,12 +2039,12 @@
    ignore-styles: ^5.0.1
    isomorphic-loader: ^3.0.0
    optional-require: ^1.0.0
-   subapp-util: ^1.0.4
+   subapp-util: ^1.0.5
 '@xarc/app-dev':
- _latest: 8.0.12-fynlocal_h
+ _latest: 8.0.18-fynlocal_h
  _:
-  ../../packages/xarc-app-dev: 8.0.12-fynlocal_h
- 8.0.12-fynlocal_h:
+  ../../packages/xarc-app-dev: 8.0.18-fynlocal_h
+ 8.0.18-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/xarc-app-dev
@@ -2063,7 +2063,7 @@
    '@babel/register': ^7.0.0
    '@jchip/redbird': ^1.1.0
    '@loadable/babel-plugin': ^5.10.0
-   '@xarc/webpack': 8.0.1
+   '@xarc/webpack': 8.0.4
    ansi-to-html: ^0.6.8
    babel-plugin-dynamic-import-node: ^2.2.0
    babel-plugin-lodash: ^3.3.4
@@ -2078,7 +2078,7 @@
    electrode-node-resolver: ^2.0.0
    fastify-plugin: ^1.6.0
    filter-scan-dir: ^1.0.9
-   fs-extra: ^0.26.5
+   fs-extra: ^0.30.0
    identity-obj-proxy: ^3.0.0
    isomorphic-loader: ^3.0.0
    lodash: ^4.13.1
@@ -2094,23 +2094,24 @@
    require-at: ^1.0.2
    serve-index-fs: ^1.10.1
    style-loader: ^0.20.1
-   subapp-util: ^1.0.4
+   subapp-util: ^1.0.5
    sudo-prompt: ^8.2.5
+   visual-logger: ^1.1.3
    webpack-cli: ^3.3.9
    webpack-dev-middleware: ^3.4.0
    webpack-hot-middleware: ^2.22.2
    winston: ^2.3.1
-   xaa: ^1.3.0
+   xaa: ^1.4.0
    xclap: ^0.2.48
    xenv-config: ^1.3.1
    xsh: ^0.4.4
   peerDependencies:
    '@xarc/app': ^8.0.3
 '@xarc/webpack':
- _latest: 8.0.1-fynlocal_h
+ _latest: 8.0.4-fynlocal_h
  _:
-  ../xarc-webpack: 8.0.1-fynlocal_h
- 8.0.1-fynlocal_h:
+  ../xarc-webpack: 8.0.4-fynlocal_h
+ 8.0.4-fynlocal_h:
   $: local
   _: ../../packages/xarc-webpack
   dependencies:
@@ -5606,10 +5607,10 @@ electrode-node-resolver:
   dependencies:
    require-at: ^1.0.0
 electrode-react-webapp:
- _latest: 3.8.6-fynlocal_h
+ _latest: 3.8.9-fynlocal_h
  _:
-  ../../packages/electrode-react-webapp: 3.8.6-fynlocal_h
- 3.8.6-fynlocal_h:
+  ../../packages/electrode-react-webapp: 3.8.9-fynlocal_h
+ 3.8.9-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-react-webapp
@@ -6847,9 +6848,9 @@ fs-access:
   dependencies:
    null-check: ^1.0.0
 fs-extra:
- _latest: 8.1.0
+ _latest: 9.0.0
  _:
-  ^0.26.5: 0.26.7
+  ^0.30.0: 0.30.0
   ^1.0.0: 1.0.0
   ^7.0.0: 7.0.1
  7.0.1:
@@ -6866,9 +6867,9 @@ fs-extra:
    graceful-fs: ^4.1.2
    jsonfile: ^2.1.0
    klaw: ^1.0.0
- 0.26.7:
-  $: sha1-muH92UiXeY7at20JGM9C0MMYT6k=
-  _: 'https://registry.npmjs.org/fs-extra/-/fs-extra-0.26.7.tgz'
+ 0.30.0:
+  $: sha1-8jP/zAjU2n1DLapEl3aYnbHfk/A=
+  _: 'https://registry.npmjs.org/fs-extra/-/fs-extra-0.30.0.tgz'
   dependencies:
    graceful-fs: ^4.1.2
    jsonfile: ^2.1.0
@@ -6901,21 +6902,6 @@ fs.realpath:
  1.0.0:
   $: sha1-FQStJSMVjKpA20onh8sBQRmU6k8=
   _: 'https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz'
-fsevents:
- _latest: 2.1.2
- _:
-  ^1.2.7: 1.2.11
- 1.2.11:
-  hasI: 1
-  $: sha512-+ux3lx6peh0BpvY0JebGyZoiR4D+oYzdPZMKJwkZ+sFkNJzpL7tXc/wehS49gUAxg3tmMHPHZkA8JU2rhhgDHw==
-  _: 'https://registry.npmjs.org/fsevents/-/fsevents-1.2.11.tgz'
-  dependencies:
-   bindings: ^1.5.0
-   nan: ^2.12.1
-  bundleDependencies:
-   - node-pre-gyp
-  os:
-   - darwin
 fstream:
  _latest: 1.0.12
  _:
@@ -10849,7 +10835,7 @@ mute-stream:
 nan:
  _latest: 2.14.0
  _:
-  '^2.11.1,^2.12.1': 2.14.0
+  ^2.11.1: 2.14.0
  2.14.0:
   $: sha512-INOFj37C7k3AfaNTtX8RhsTw7qRy7eLET14cROi9+5HAVbbHuIWUHEauBv5qT4Av2tWasiTY1Jw6puUNqRJXQg==
   _: 'https://registry.npmjs.org/nan/-/nan-2.14.0.tgz'
@@ -15376,10 +15362,10 @@ stylus-relative-loader:
   peerDependencies:
    stylus: ^0.54.5
 subapp-util:
- _latest: 1.0.4-fynlocal_h
+ _latest: 1.0.5-fynlocal_h
  _:
-  ../subapp-util: 1.0.4-fynlocal_h
- 1.0.4-fynlocal_h:
+  ../subapp-util: 1.0.5-fynlocal_h
+ 1.0.5-fynlocal_h:
   $: local
   _: ../../packages/subapp-util
   dependencies:
@@ -16396,6 +16382,16 @@ vise:
   dependencies:
    hoek: 4.x.x
   deprecated: 'This version has been deprecated in accordance with the hapi support policy (hapi.im/support). Please upgrade to the latest version to get the best features, bug fixes, and security patches. If you are unable to upgrade at this time, paid support is available for older versions (hapi.im/commercial).'
+visual-logger:
+ _latest: 1.1.3
+ _:
+  ^1.1.3: 1.1.3
+ 1.1.3:
+  $: sha512-8XPxTR+RoZZtSkx1TY+aLAvG1EivsO0352WuWyXr0nU7n7T2XOh3ty/QwGS2dx7ZUDJQ5PTVp/p5StXaR11H7w==
+  _: 'https://registry.npmjs.org/visual-logger/-/visual-logger-1.1.3.tgz'
+  dependencies:
+   chalk: ^4.0.0
+   log-update: ^4.0.0
 vm-browserify:
  _latest: 1.1.2
  _:
@@ -16816,12 +16812,12 @@ ws:
    safe-buffer: ~5.1.0
    ultron: ~1.1.0
 xaa:
- _latest: 1.3.0
+ _latest: 1.5.0
  _:
-  ^1.3.0: 1.3.0
- 1.3.0:
-  $: sha512-E8ZzzvcdXkkbCaE/OJyWjCZkGMryoVa8BNF+aMNOlEOsxo/0arEFDCXPzRs5Pb4j3BAtluPzt1J9Ne1aCVjcNA==
-  _: 'https://registry.npmjs.org/xaa/-/xaa-1.3.0.tgz'
+  ^1.4.0: 1.5.0
+ 1.5.0:
+  $: sha512-TzN/0Gc4+7oCs/Rv+xOQCBm1NXCsTSSYoSBgFjgwNwlHSanIKD4Muln/w8cTmcHo5I38rRgeCeiketd7YdNv0w==
+  _: 'https://registry.npmjs.org/xaa/-/xaa-1.5.0.tgz'
 xclap:
  _latest: 0.2.48
  _:
