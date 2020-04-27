@@ -1,3 +1,28 @@
+# 4/27/2020
+
+- fix: upgrade fs-extra from 0.26.7 to 0.30.0
+- fix: show some timing in dev admin startup
+- feat: support mock CDN in dev-proxy for mock prod mode
+- fix: upgrade karma-webpack from 4.0.0-rc.3 to 4.0.2
+
+## Packages
+
+- `@xarc/app@8.0.19` `(8.0.18 => 8.0.19)`
+- `@xarc/app-dev@8.0.19` `(8.0.18 => 8.0.19)`
+- `electrode-archetype-opt-karma@3.0.2` `(3.0.1 => 3.0.2)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix: upgrade fs-extra from 0.26.7 to 0.30.0 ([#1621](https://github.com/electrode-io/electrode/pull/1621)) [commit](http://github.com/electrode-io/electrode/commit/47e249d4fb96c85be87ee2fa74216dba8892f29f)
+  - fix: show some timing in dev admin startup ([#1620](https://github.com/electrode-io/electrode/pull/1620)) [commit](http://github.com/electrode-io/electrode/commit/b179ac5ceece0ab8bb1d52f1350e587440bd1839)
+  - feat: support mock CDN in dev-proxy for mock prod mode ([#1627](https://github.com/electrode-io/electrode/pull/1627)) [commit](http://github.com/electrode-io/electrode/commit/638ed9b718082457084cdcdcb8aea286c6679d86)
+
+- `packages/electrode-archetype-opt-karma`
+
+  - fix: upgrade karma-webpack from 4.0.0-rc.3 to 4.0.2 ([#1625](https://github.com/electrode-io/electrode/pull/1625)) [commit](http://github.com/electrode-io/electrode/commit/c36f7ee7737b797d8a1143f18d49147f4136afc6)
+
 # 4/23/2020
 
 - fix: allow --inspect option to debug dev-admin
