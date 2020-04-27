@@ -49,15 +49,15 @@ const cdnMock = {
   },
 
   respondAsset(req, res) {
+    const filePath = req.url.replace(/\/__mock-cdn\/[0-9]+/, "dist");
     try {
-      const filePath = req.url.replace(/\/__mock-cdn\/[0-9]+/, "dist");
       const fp = Path.resolve(filePath);
       let asset = LOADED_ASSETS[filePath];
       if (!asset) {
         asset = LOADED_ASSETS[filePath] = Fs.readFileSync(fp);
       }
       const ext = Path.extname(filePath);
-      const mimeType = mime.getType(ext);
+      const mimeType = mime.lookup(ext);
       res.writeHead(200, {
         "Content-Type": mimeType,
         "Content-Length": Buffer.byteLength(asset)
@@ -66,7 +66,18 @@ const cdnMock = {
       res.end();
     } catch (err) {
       res.statusCode = 404;
-      res.write("Not Found");
+      res.write(`<html>
+<body>
+<h1>Mock CDN asset Not Found</h1>
+
+<pre>
+URL: ${req.url}
+filepath: ${filePath}
+
+${err.stack}
+</pre>
+</body></html>
+`);
       res.end();
     }
   }
