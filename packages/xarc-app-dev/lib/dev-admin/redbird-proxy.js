@@ -9,6 +9,7 @@ const redbird = require("@jchip/redbird");
 const ck = require("chalker");
 const optionalRequire = require("optional-require")(require);
 const { settings, searchSSLCerts, controlPaths } = require("../../config/dev-proxy");
+const cdnMock = require("./cdn-mock");
 
 const { formUrl } = require("../utils");
 
@@ -115,7 +116,8 @@ const registerElectrodeDevRules = ({
   port,
   appPort,
   webpackDevPort,
-  restart
+  restart,
+  enableCdnMock
 }) => {
   const { dev: devPath, admin: adminPath, hmr: hmrPath, appLog, reporter } = controlPaths;
   const appForwards = [
@@ -183,6 +185,22 @@ const registerElectrodeDevRules = ({
       return false;
     }
   });
+
+  // mock-cdn
+
+  if (enableCdnMock) {
+    const mockCdnSrc = formUrl({ protocol, host, port, path: `/__mock-cdn` });
+    cdnMock.generateMockAssets(mockCdnSrc);
+    proxy.register({
+      ssl,
+      src: mockCdnSrc,
+      target: `http://localhost:29999/__mock-cdn`,
+      onRequest(req, res) {
+        cdnMock.respondAsset(req, res);
+        return false;
+      }
+    });
+  }
 };
 
 const startProxy = inOptions => {
@@ -255,8 +273,9 @@ const startProxy = inOptions => {
     res.end();
   });
 
+  const enableCdnMock = process.argv.includes("--mock-cdn");
   // register with primary protocol/host/port
-  registerElectrodeDevRules({ ...options, ssl, proxy, restart });
+  registerElectrodeDevRules({ ...options, ssl, proxy, restart, enableCdnMock });
 
   // if primary protocol is https, then register regular http rules at httpPort
   if (ssl) {
@@ -277,9 +296,11 @@ const startProxy = inOptions => {
   }
 
   const proxyUrl = formUrl({ protocol, host, port: options.port });
+  const mockCdnMsg = enableCdnMock
+    ? `\nMock CDN is enabled (mapping saved to config/assets.json)\n`
+    : "\n";
   console.log(
-    ck`Electrode dev proxy server running:
-
+    ck`Electrode dev proxy server running:${mockCdnMsg}
 ${buildProxyTree(options, ["appPort", "webpackDevPort"])}
 View status at <green>${proxyUrl}${controlPaths.status}</>`
   );
