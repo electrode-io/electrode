@@ -8,7 +8,7 @@ const _ = require("lodash");
 const redbird = require("@jchip/redbird");
 const ck = require("chalker");
 const optionalRequire = require("optional-require")(require);
-const { settings, certs: proxyCerts, controlPaths } = require("../../config/dev-proxy");
+const { settings, searchSSLCerts, controlPaths } = require("../../config/dev-proxy");
 
 const { formUrl } = require("../utils");
 
@@ -206,7 +206,8 @@ const startProxy = inOptions => {
   const ssl = Boolean(options.httpsPort);
 
   if (ssl) {
-    assert(proxyCerts.key, "Dev Proxy can't find SSL key and certs");
+    const proxyCerts = searchSSLCerts();
+    assert(proxyCerts.key && proxyCerts.cert, "Dev Proxy can't find SSL key and certs");
     Object.assign(proxyOptions, {
       // We still setup a regular http rules even if HTTPS is enabled
       port: options.httpPort,

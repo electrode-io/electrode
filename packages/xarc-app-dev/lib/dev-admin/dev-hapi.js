@@ -27,6 +27,9 @@ function register(server, options, next) {
   server.ext({
     type: "onRequest",
     method: (request, reply) => {
+      if (request.path === "/favicon.ico") {
+        return reply("").code(404);
+      }
       const { req } = request.raw;
 
       // simulate a res to capture what the devMiddleware might send back
@@ -94,6 +97,8 @@ function register(server, options, next) {
           console.error("webpack dev middleware error", err);
           reply(err);
         });
+
+      return undefined;
     }
   });
 

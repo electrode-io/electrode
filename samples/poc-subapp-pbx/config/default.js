@@ -22,7 +22,7 @@ module.exports = {
         pathPrefix: "dist"
       }
     },
-    "subapp-server": { options: { insertTokenIds: true } }
+    "subapp-server": { options: { cdn: { enable: true }, insertTokenIds: true } }
   },
   connections: {
     default: {

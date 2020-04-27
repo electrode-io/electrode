@@ -52,12 +52,12 @@ const handleFile = filename => {
       }
     })
     .catch(err => {
-      console.error(`Error catched: ${err.message}`);
+      console.error(`copy-as-flow-declaration: error caught`, err);
       process.exit(1);
     });
 };
 
-const copyDir = (dir = srcRootDir) => {
+const copyDir = async (dir = srcRootDir) => {
   return fs
     .readdirAsync(dir)
     .then(items => {
@@ -72,7 +72,7 @@ const copyDir = (dir = srcRootDir) => {
     })
     .then(() => {})
     .catch(err => {
-      console.error(`Error catched: ${err.message}`);
+      console.error(`copy-as-flow-declaration: dir: ${dir}, error caught`, err);
       process.exit(1);
     });
 };

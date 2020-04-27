@@ -1,38 +1,339 @@
-# 3/30/2020
+# 4/23/2020
 
--   fix: remove content hash from chunk names (subapps)
--   fix: when using CDN assets, skip local asset URLs (subapps)
+- fix: allow --inspect option to debug dev-admin
+- search for dev certs from module in devDependencies
+- fix: handle non JS/CSS assets for CDN
 
 ## Packages
 
 ### Directly Updated
 
--   `@xarc/webpack@8.0.1` `(8.0.0 => 8.0.1)`
--   `subapp-server@1.1.12` `(1.1.11 => 1.1.12)`
--   `subapp-web@1.0.22` `(1.0.21 => 1.0.22)`
+- `@xarc/app@8.0.18` `(8.0.17 => 8.0.18)`
+- `@xarc/app-dev@8.0.18` `(8.0.17 => 8.0.18)`
+- `subapp-web@1.0.25` `(1.0.24 => 1.0.25)`
 
 ### Lerna Updated
 
--   `@xarc/app@8.0.11` `(8.0.10 => 8.0.11)`
--   `@xarc/app-dev@8.0.11` `(8.0.10 => 8.0.11)`
--   `subapp-pbundle@0.0.13` `(0.0.12 => 0.0.13)`
--   `subapp-react@0.0.13` `(0.0.12 => 0.0.13)`
--   `subapp-redux@1.0.22` `(1.0.21 => 1.0.22)`
+- `@xarc/webpack@8.0.4` `(8.0.3 => 8.0.4)`
+- `subapp-pbundle@0.0.19` `(0.0.18 => 0.0.19)`
+- `subapp-react@0.0.16` `(0.0.15 => 0.0.16)`
+- `subapp-redux@1.0.25` `(1.0.24 => 1.0.25)`
 
 ## Commits
 
--   `packages/xarc-webpack`
+- `packages/xarc-app[-dev]`
 
-    -   fix: remove content hash from chunk names ([#1575](https://github.com/electrode-io/electrode/pull/1575)) [commit](http://github.com/electrode-io/electrode/commit/0d44b3fb574f855df6690e9ed1d4beacff3dd5e7)
+  - fix: allow --inspect option to debug dev-admin ([#1613](https://github.com/electrode-io/electrode/pull/1613)) [commit](http://github.com/electrode-io/electrode/commit/1c9fc8d596262083cc3b6e9a9c599f6e61682737)
+  - fix: CI failing due to linting errors [commit](http://github.com/electrode-io/electrode/commit/43436adca1deef5da8108aa7a4be9eca7505c63f)
+  - search for dev certs from module in devDependencies ([#1612](https://github.com/electrode-io/electrode/pull/1612)) [commit](http://github.com/electrode-io/electrode/commit/268ce953399287df39a221bcceb8d0801b2a5543)
 
--   `packages/subapp-server`
+- `packages/subapp-web`
 
-    -   fix: when using CDN assets, skip local asset URLs ([#1576](https://github.com/electrode-io/electrode/pull/1576)) [commit](http://github.com/electrode-io/electrode/commit/1bb6b8af3e5b235f8284e1ef5badb954b39902a7)
+  - fix: handle non JS/CSS assets for CDN ([#1614](https://github.com/electrode-io/electrode/pull/1614)) [commit](http://github.com/electrode-io/electrode/commit/948658578c89224a219d0b604b44353e816f53a4)
 
--   `packages/subapp-web`
+- `MISC`
 
-    -   fix: remove content hash from chunk names ([#1575](https://github.com/electrode-io/electrode/pull/1575)) [commit](http://github.com/electrode-io/electrode/commit/0d44b3fb574f855df6690e9ed1d4beacff3dd5e7)
-    -   fix: when using CDN assets, skip local asset URLs ([#1576](https://github.com/electrode-io/electrode/pull/1576)) [commit](http://github.com/electrode-io/electrode/commit/1bb6b8af3e5b235f8284e1ef5badb954b39902a7)
+  - npmignore [commit](http://github.com/electrode-io/electrode/commit/e25f2a7768b64560eb6d13400ba24ba79b16afba)
+  - 1.1.1 [commit](http://github.com/electrode-io/electrode/commit/118c4f605fcde4580d5fa9664de78739c47f50b5)
+  - 1.1.0 [commit](http://github.com/electrode-io/electrode/commit/d8ce52379827a0d28f4b68b87b750796efd78e77)
+  - Replace const with var to make bundle output friendlier to old IE. ([#1](https://github.com/electrode-io/electrode/pull/1)) [commit](http://github.com/electrode-io/electrode/commit/f84212d6f8b6e92bc3730c6475add5e87703384e)
+  - update loader-utils [commit](http://github.com/electrode-io/electrode/commit/b1b360e27e681eb2f4f17599affaa11e518f834f)
+
+# 4/20/2020
+
+- improve dev-admin log handling and HTML viewer
+- Fix subapp manifests found in sub directories of src/
+- provide original error for debug purposes
+
+## Packages
+
+- `@xarc/app@8.0.17` `(8.0.16 => 8.0.17)`
+- `@xarc/app-dev@8.0.17` `(8.0.16 => 8.0.17)`
+- `@xarc/webpack@8.0.3` `(8.0.2 => 8.0.3)`
+- `subapp-server@1.1.18` `(1.1.17 => 1.1.18)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix HTML log viewer fetching logs across different runs ([#1605](https://github.com/electrode-io/electrode/pull/1605)) [commit](http://github.com/electrode-io/electrode/commit/78201996f097382dc4ecfd8543ee4f218585494c)
+  - improve HTML viewer ([#1604](https://github.com/electrode-io/electrode/pull/1604)) [commit](http://github.com/electrode-io/electrode/commit/11f6e6cde026b30d1662e6f369ddcfedd80fafe5)
+  - fix: show all app log by default ([#1603](https://github.com/electrode-io/electrode/pull/1603)) [commit](http://github.com/electrode-io/electrode/commit/96af8972d841da4812f117b893afbf73b770ee36)
+  - fix: persistent spinner breaks vscode context link detection ([#1602](https://github.com/electrode-io/electrode/pull/1602)) [commit](http://github.com/electrode-io/electrode/commit/065431ee1c117b374220ea25ce8c139aa387694f)
+  - Add env var to set dev admin log level ([#1606](https://github.com/electrode-io/electrode/pull/1606)) [commit](http://github.com/electrode-io/electrode/commit/2c5ce68878d7d574ba4ff53e31d0341f09d3c915)
+
+- `packages/xarc-webpack`
+
+  - Fix subapp manifests found in sub directories of src/ ([#1601](https://github.com/electrode-io/electrode/pull/1601)) [commit](http://github.com/electrode-io/electrode/commit/b4bca3da148e8a174eb5315d121aceaf47164d1c)
+
+- `packages/subapp-server`
+
+  - [patch] provide original error for debug purposes ([#1600](https://github.com/electrode-io/electrode/pull/1600)) [commit](http://github.com/electrode-io/electrode/commit/3a1138841b72963cc200096bc3f7d4b88ba0e0f2)
+
+- `docs`
+
+  - Add env var to set dev admin log level ([#1606](https://github.com/electrode-io/electrode/pull/1606)) [commit](http://github.com/electrode-io/electrode/commit/2c5ce68878d7d574ba4ff53e31d0341f09d3c915)
+
+# 4/14/2020
+
+- dev-admin log enhancements and fixes: using visual-logger now, better webpack status display.
+- fix: index.html rendering - verify and ensure consistent useStream flag
+- fix: app can now configure useStream flag for index.html response.
+- fix: more informative error if subapp name and dir mismatch
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app-dev@8.0.16` `(8.0.15 => 8.0.16)`
+- `@xarc/create-app@3.0.4` `(3.0.3 => 3.0.4)`
+- `electrode-react-webapp@3.8.9` `(3.8.8 => 3.8.9)`
+- `subapp-pbundle@0.0.18` `(0.0.17 => 0.0.18)`
+- `subapp-react@0.0.15` `(0.0.14 => 0.0.15)`
+- `subapp-server@1.1.17` `(1.1.16 => 1.1.17)`
+- `subapp-util@1.0.5` `(1.0.4 => 1.0.5)`
+- `subapp-web@1.0.24` `(1.0.23 => 1.0.24)`
+
+### Lerna Updated
+
+- `@xarc/app@8.0.16` `(8.0.15 => 8.0.16)`
+- `subapp-redux@1.0.24` `(1.0.23 => 1.0.24)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - use visual-logger for dev-admin ([#1597](https://github.com/electrode-io/electrode/pull/1597)) [commit](http://github.com/electrode-io/electrode/commit/c1420c1e4e96412f02edb598049c52c3d6ddf479)
+  - fix: avoid null \_child [commit](http://github.com/electrode-io/electrode/commit/ef82cfd5418acc68c608996e0f815df8a71bf3d6)
+  - use line reader to process wds logs ([#1599](https://github.com/electrode-io/electrode/pull/1599)) [commit](http://github.com/electrode-io/electrode/commit/ef5f8c92c12eec528c22270b11203172e56f2b9f)
+
+- `packages/create-app`
+
+  - fix: correct prepare args ([#1598](https://github.com/electrode-io/electrode/pull/1598)) [commit](http://github.com/electrode-io/electrode/commit/8bc52132d6f913723cc220a0deaf3a4ad7239c6a)
+
+- `packages/electrode-react-webapp`
+
+  - fix: verify and ensure consistent useStream flag ([#1596](https://github.com/electrode-io/electrode/pull/1596)) [commit](http://github.com/electrode-io/electrode/commit/b73118b1a097bc7c3ba0e4fbfa2a025c8504c2fb)
+  - fix: add tests [commit](http://github.com/electrode-io/electrode/commit/7d70bcd8419e7ef7d75f24721e2fca442ea03812)
+  - fix: detect unexpected item to stringify [commit](http://github.com/electrode-io/electrode/commit/72288178dee4079409fdc59d82115fcbab3472a5)
+
+- `packages/subapp-pbundle`
+
+  - fix: verify and ensure consistent useStream flag ([#1596](https://github.com/electrode-io/electrode/pull/1596)) [commit](http://github.com/electrode-io/electrode/commit/b73118b1a097bc7c3ba0e4fbfa2a025c8504c2fb)
+
+- `packages/subapp-react`
+
+  - fix: verify and ensure consistent useStream flag ([#1596](https://github.com/electrode-io/electrode/pull/1596)) [commit](http://github.com/electrode-io/electrode/commit/b73118b1a097bc7c3ba0e4fbfa2a025c8504c2fb)
+
+- `packages/subapp-server`
+
+  - fix: verify and ensure consistent useStream flag ([#1596](https://github.com/electrode-io/electrode/pull/1596)) [commit](http://github.com/electrode-io/electrode/commit/b73118b1a097bc7c3ba0e4fbfa2a025c8504c2fb)
+  - fix: allow app to control useStream option [commit](http://github.com/electrode-io/electrode/commit/d20e7e2aa2cfc381d672d7ca605422551dddff86)
+
+- `packages/subapp-util`
+
+  - fix: more informative error if subapp name and dir mismatch [commit](http://github.com/electrode-io/electrode/commit/abdf249768b8b01c71386e74f73944844fac2cf9)
+
+- `packages/subapp-web`
+
+  - fix: verify and ensure consistent useStream flag ([#1596](https://github.com/electrode-io/electrode/pull/1596)) [commit](http://github.com/electrode-io/electrode/commit/b73118b1a097bc7c3ba0e4fbfa2a025c8504c2fb)
+  - fix: add tests [commit](http://github.com/electrode-io/electrode/commit/7d70bcd8419e7ef7d75f24721e2fca442ea03812)
+  - fix: more informative error if subapp name and dir mismatch [commit](http://github.com/electrode-io/electrode/commit/abdf249768b8b01c71386e74f73944844fac2cf9)
+  - fix: avoid log error in dev mode [commit](http://github.com/electrode-io/electrode/commit/8f16f114543b78ba6b0d575a7be9fc4897647043)
+
+- `docs`
+
+  - fix: correct prepare args ([#1598](https://github.com/electrode-io/electrode/pull/1598)) [commit](http://github.com/electrode-io/electrode/commit/8bc52132d6f913723cc220a0deaf3a4ad7239c6a)
+
+# 4/9/2020
+
+- Add "selectTemplate" to picked opts: subapp -> electrode-react-webapp
+
+## Packages
+
+- `subapp-server@1.1.16` `(1.1.15 => 1.1.16)`
+
+## Commits
+
+- `packages/subapp-server`
+
+  - Add "selectTemplate" to picked opts: subapp -> electrode-react-webapp ([#1594](https://github.com/electrode-io/electrode/pull/1594)) [commit](http://github.com/electrode-io/electrode/commit/2865ec49ec43575b803abd705e20e5d0c39b066a)
+
+# 4/8/2020
+
+- fix: handle errors from subapp preparing and processing
+- [feat]: support user intercept rendering flow through context
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.0.15` `(8.0.14 => 8.0.15)`
+- `@xarc/app-dev@8.0.15` `(8.0.14 => 8.0.15)`
+- `electrode-react-webapp@3.8.8` `(3.8.7 => 3.8.8)`
+- `subapp-pbundle@0.0.17` `(0.0.16 => 0.0.17)`
+- `subapp-server@1.1.15` `(1.1.14 => 1.1.15)`
+- `subapp-web@1.0.23` `(1.0.22 => 1.0.23)`
+
+### Lerna Updated
+
+- `subapp-react@0.0.14` `(0.0.13 => 0.0.14)`
+- `subapp-redux@1.0.23` `(1.0.22 => 1.0.23)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - [feat]: support user intercept rendering flow through context [commit](http://github.com/electrode-io/electrode/commit/3d01006b0e10c7b3cd7912b8dc7b843d8b8c75cf)
+
+- `packages/electrode-react-webapp`
+
+  - [feat]: support user intercept rendering flow through context [commit](http://github.com/electrode-io/electrode/commit/3d01006b0e10c7b3cd7912b8dc7b843d8b8c75cf)
+
+- `packages/subapp-pbundle`
+
+  - [feat]: support user intercept rendering flow through context [commit](http://github.com/electrode-io/electrode/commit/3d01006b0e10c7b3cd7912b8dc7b843d8b8c75cf)
+  - fix: Use shallow check for existing redux-bundles to allow for updates ([#1592](https://github.com/electrode-io/electrode/pull/1592)) [commit](http://github.com/electrode-io/electrode/commit/6292a90b273e4f9761c2233d7c8bf24bffb0f2b6)
+
+- `packages/subapp-server`
+
+  - [feat]: support user intercept rendering flow through context [commit](http://github.com/electrode-io/electrode/commit/3d01006b0e10c7b3cd7912b8dc7b843d8b8c75cf)
+
+- `packages/subapp-web`
+
+  - [feat]: support user intercept rendering flow through context [commit](http://github.com/electrode-io/electrode/commit/3d01006b0e10c7b3cd7912b8dc7b843d8b8c75cf)
+  - fix: handle errors from subapp preparing and processing [commit](http://github.com/electrode-io/electrode/commit/07c15ebceed5793758b3b2b9902eddb77ece8a66)
+
+# 4/8/2020
+
+- fix: consider .babelrc.js also
+- fix: Use composeBundlesRaw instead of composeBundles
+
+## Packages
+
+- `@xarc/app@8.0.14` `(8.0.13 => 8.0.14)`
+- `@xarc/app-dev@8.0.14` `(8.0.13 => 8.0.14)`
+- `subapp-pbundle@0.0.16` `(0.0.15 => 0.0.16)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix: consider .babelrc.js also ([#1591](https://github.com/electrode-io/electrode/pull/1591)) [commit](http://github.com/electrode-io/electrode/commit/80e09956a8f4a7eb4801d03b7f7b9d843cd63068)
+
+- `packages/subapp-pbundle`
+
+  - fix: Redux bundler no dup ([#1590](https://github.com/electrode-io/electrode/pull/1590)) [commit](http://github.com/electrode-io/electrode/commit/2fc74a9e23c80fb50a8c004b8af769c255d608f7)
+  - fix: Use composeBundlesRaw instead of composeBundles ([#1589](https://github.com/electrode-io/electrode/pull/1589)) [commit](http://github.com/electrode-io/electrode/commit/26c373dfc912b37a64960e3f9f6bc06140b3a349)
+
+# 4/6/2020
+
+- many improvements on the dev admin app log handling
+- dep: chalk@4, chalk@1.2.0, xaa@1.3.0, xclap@0.2.48
+- fix: a single babel.config.js over .babelrc.js
+- fix: add result from promise to output
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.0.13` `(8.0.12 => 8.0.13)`
+- `@xarc/app-dev@8.0.13` `(8.0.12 => 8.0.13)`
+- `@xarc/webpack@8.0.2` `(8.0.1 => 8.0.2)`
+- `electrode-react-webapp@3.8.7` `(3.8.6 => 3.8.7)`
+- `subapp-pbundle@0.0.15` `(0.0.14 => 0.0.15)`
+
+### Lerna Updated
+
+- `subapp-server@1.1.14` `(1.1.13 => 1.1.14)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix: use timer to filter out logs unrelated to errors ([#1585](https://github.com/electrode-io/electrode/pull/1585)) [commit](http://github.com/electrode-io/electrode/commit/5ab2e90e322ee27c2c52439d54857d46dc26d39b)
+  - dep: chalk@4, chalk@1.2.0, xaa@1.3.0, xclap@0.2.48 ([#1586](https://github.com/electrode-io/electrode/pull/1586)) [commit](http://github.com/electrode-io/electrode/commit/92270291156830971c6a9be18ad9e27ede2611cd)
+  - fix: more informative app log handling in admin ([#1584](https://github.com/electrode-io/electrode/pull/1584)) [commit](http://github.com/electrode-io/electrode/commit/2d711437f2a8c4a628ae91e1ffc0c0106a0c7239)
+  - fix: a single babel.config.js over .babelrc.js ([#1583](https://github.com/electrode-io/electrode/pull/1583)) [commit](http://github.com/electrode-io/electrode/commit/2fea74e5708d977ce9a9c3f487ba69219fefa2e7)
+
+- `packages/xarc-webpack`
+
+  - dep: chalk@4, chalk@1.2.0, xaa@1.3.0, xclap@0.2.48 ([#1586](https://github.com/electrode-io/electrode/pull/1586)) [commit](http://github.com/electrode-io/electrode/commit/92270291156830971c6a9be18ad9e27ede2611cd)
+
+- `packages/electrode-archetype-react-component[-dev]`
+
+  - fix CI [commit](http://github.com/electrode-io/electrode/commit/d16b995fb75ce09d351ace0c2f93a8a13b149da1)
+
+- `packages/electrode-react-webapp`
+
+  - fix: add result from promise to output ([#1587](https://github.com/electrode-io/electrode/pull/1587)) [commit](http://github.com/electrode-io/electrode/commit/5908531769ee277a35f2b0b75097d387d3a1897e)
+
+- `packages/subapp-pbundle`
+
+  - fix: pbundle test [commit](http://github.com/electrode-io/electrode/commit/69174e38bf4314fbc060a5ae615ccd27786db171)
+
+# 4/2/2020
+
+- fix: return 404 for /favicon.ico in webpack dev server (Hapi)
+- fix: rename xarcReduxStore to store
+- fix: throw errors from route setup
+
+## Packages
+
+- `@xarc/app@8.0.12` `(8.0.11 => 8.0.12)`
+- `@xarc/app-dev@8.0.12` `(8.0.11 => 8.0.12)`
+- `subapp-pbundle@0.0.14` `(0.0.13 => 0.0.14)`
+- `subapp-server@1.1.13` `(1.1.12 => 1.1.13)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix: return 404 for /favicon.ico in webpack dev server (Hapi) ([#1580](https://github.com/electrode-io/electrode/pull/1580)) [commit](http://github.com/electrode-io/electrode/commit/eae84f210ea5c362497174d114e94c9e4a2dcca3)
+
+- `packages/subapp-pbundle`
+
+  - fix: rename xarcReduxStore to store ([#1582](https://github.com/electrode-io/electrode/pull/1582)) [commit](http://github.com/electrode-io/electrode/commit/d21109d0fb586b698d6575d916e883c4c8a98c35)
+
+- `packages/subapp-server`
+
+  - fix: throw errors from route setup ([#1581](https://github.com/electrode-io/electrode/pull/1581)) [commit](http://github.com/electrode-io/electrode/commit/84ec240ba4466b553c952daefce71d32f675cfab)
+
+# 3/30/2020
+
+- fix: remove content hash from chunk names (subapps)
+- fix: when using CDN assets, skip local asset URLs (subapps)
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/webpack@8.0.1` `(8.0.0 => 8.0.1)`
+- `subapp-server@1.1.12` `(1.1.11 => 1.1.12)`
+- `subapp-web@1.0.22` `(1.0.21 => 1.0.22)`
+
+### Lerna Updated
+
+- `@xarc/app@8.0.11` `(8.0.10 => 8.0.11)`
+- `@xarc/app-dev@8.0.11` `(8.0.10 => 8.0.11)`
+- `subapp-pbundle@0.0.13` `(0.0.12 => 0.0.13)`
+- `subapp-react@0.0.13` `(0.0.12 => 0.0.13)`
+- `subapp-redux@1.0.22` `(1.0.21 => 1.0.22)`
+
+## Commits
+
+- `packages/xarc-webpack`
+
+  - fix: remove content hash from chunk names ([#1575](https://github.com/electrode-io/electrode/pull/1575)) [commit](http://github.com/electrode-io/electrode/commit/0d44b3fb574f855df6690e9ed1d4beacff3dd5e7)
+
+- `packages/subapp-server`
+
+  - fix: when using CDN assets, skip local asset URLs ([#1576](https://github.com/electrode-io/electrode/pull/1576)) [commit](http://github.com/electrode-io/electrode/commit/1bb6b8af3e5b235f8284e1ef5badb954b39902a7)
+
+- `packages/subapp-web`
+
+  - fix: remove content hash from chunk names ([#1575](https://github.com/electrode-io/electrode/pull/1575)) [commit](http://github.com/electrode-io/electrode/commit/0d44b3fb574f855df6690e9ed1d4beacff3dd5e7)
+  - fix: when using CDN assets, skip local asset URLs ([#1576](https://github.com/electrode-io/electrode/pull/1576)) [commit](http://github.com/electrode-io/electrode/commit/1bb6b8af3e5b235f8284e1ef5badb954b39902a7)
 
 # 3/25/2020
 

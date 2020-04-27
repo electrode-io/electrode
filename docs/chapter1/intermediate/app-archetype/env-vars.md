@@ -8,6 +8,7 @@ Some of the app archetype's features can be controlled by environment variables.
 | ------------------- | :----------------------------------------------------------------------------------------------------- | :---------: |
 | `PORT`              | The port number your app's `config/default.js` will read from to start up your app server to listen at |   `3000`    |
 | `INSPECTPACK_DEBUG` | If set to `true`, generates stats for used with the [inspectpack] tool                                 | `undefined` |
+| `DEV_ADMIN_LOG_LEVEL`          | When using the dev admin server, "0" shows all console log lines by default, and "1" displays only warning and error console log lines by default. Note that this can be changed during runtime                                                                                                                    |       0  |
 
 ## Webpack Related Configs
 

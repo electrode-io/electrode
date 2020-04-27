@@ -1,4 +1,4 @@
-import { composeBundles } from "redux-bundler";
+import { composeBundlesRaw } from "redux-bundler";
 //
 // - stores can be shared between subapps with reduxShareStore flag
 //  - if it's true, then a common global store is used
@@ -14,11 +14,11 @@ function setStoreContainer(container) {
 }
 
 function setSharedStore(store, container) {
-  (container || shared).xarcReduxStore = store;
+  (container || shared).store = store;
 }
 
 function getSharedStore(container) {
-  return (container || shared).xarcReduxStore;
+  return (container || shared).store;
 }
 
 function clearSharedStore(container) {
@@ -37,7 +37,7 @@ function createDeferStore(bundles, initialState, storeContainer) {
     if (!real) {
       // Using apply to destruct bundles array as arguments
       // not doing ... because babel would intro some toConsumableArray call
-      store.real = real = composeBundles.apply(undefined, store.bundles)(store.initialState);
+      store.real = real = composeBundlesRaw.apply(undefined, store.bundles)(store.initialState);
       setSharedStore(real, storeContainer);
     }
     return real;
@@ -61,8 +61,10 @@ function getReduxCreateStore(info) {
       });
       Object.assign(store.initialState, initialState);
     } else {
+      const integratedBundles = Object.values(store.meta.chunks[0].rawBundles);
+      const unintegratedBundles = bundles.filter(bundle => integratedBundles.indexOf(bundle) < 0);
       // using apply to destruct bundles array into arguments
-      store.integrateBundles.apply(undefined, bundles);
+      store.integrateBundles(...unintegratedBundles);
     }
     return store;
   };

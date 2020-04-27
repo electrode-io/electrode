@@ -22,7 +22,7 @@ module.exports = {
     [
       "@babel/preset-env",
       {
-        targets: { node }
+        targets: node
       }
     ],
     enableTypeScript && "@babel/preset-typescript",

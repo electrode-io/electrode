@@ -136,8 +136,8 @@ You can also control how your subapp works from server side to client side for e
 Some of the attributes supported:
 
 - `hydrate` - Enable client side hydration of initial state from server. ie: Use `React.hydrate` API.
-- `streaming` - Use the streaming SSR APIs. ie: `ReactDomServer.renderToNodeStream`.
-- `suspenseSsr` - Support suspense in SSR. No streaming.
+- `useStream` - Use the stream SSR APIs. ie: `ReactDomServer.renderToNodeStream`.
+- `suspenseSsr` - Support suspense in SSR. No stream support.
 
 ## React Router and SPA
 
@@ -195,10 +195,7 @@ const mapStateToProps = state => state;
 
 export default reduxLoadSubApp({
   name: "Home",
-  Component: connect(
-    mapStateToProps,
-    dispatch => ({ dispatch })
-  )(Home),
+  Component: connect(mapStateToProps, dispatch => ({ dispatch }))(Home),
   reduxCreateStore(initialState) {
     return createStore(reducers, initialState);
   }

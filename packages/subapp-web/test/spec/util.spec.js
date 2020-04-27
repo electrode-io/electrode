@@ -9,6 +9,7 @@ const {
   getSubAppBundle,
   getChunksById,
   getBundleBase,
+  loadCdnAssets,
   getCdnJsBundles,
   getFramework,
   setupFramework
@@ -31,7 +32,7 @@ describe("loadAssetsFromStats", () => {
   });
 });
 
-describe("getChunksById", function() {
+describe("getChunksById", function () {
   const prodStats = JSON.parse(Fs.readFileSync(Path.join(__dirname, "../data/prod-stats.json")));
   const devStats = JSON.parse(Fs.readFileSync(Path.join(__dirname, "../data/dev-stats.json")));
 
@@ -55,7 +56,7 @@ describe("getChunksById", function() {
   });
 });
 
-describe("getSubAppBundle", function() {
+describe("getSubAppBundle", function () {
   it("should get bundles for a subapp by name", () => {
     // load prod-stats.json
     const { assets } = loadAssetsFromStats(Path.join(__dirname, "../data/prod-stats.json"));
@@ -67,7 +68,7 @@ describe("getSubAppBundle", function() {
   });
 });
 
-describe("getBundleBase", function() {
+describe("getBundleBase", function () {
   it("should get base url for bundles in prod mode", () => {
     expect(getBundleBase({ prodBundleBase: "http://prod", devBundleBase: "http://dev" })).to.equal(
       "http://prod"
@@ -85,20 +86,18 @@ describe("getBundleBase", function() {
   });
 });
 
-describe("getCdnJsBundles", function() {
+describe("getCdnJsBundles", function () {
   it("should generate mapping of chunk ID to CDN URLs", () => {
     resetCdn();
     const { assets } = loadAssetsFromStats(Path.join(__dirname, "../data/prod-stats.json"));
-    const cdnJsBundles = getCdnJsBundles(
-      assets,
-      { cdn: { enable: true } },
-      "test/data/cdn-assets.json"
-    );
+    const options = { cdn: { enable: true } };
+    loadCdnAssets(options, "test/data/cdn-assets.json");
+    const cdnJsBundles = getCdnJsBundles(assets, options);
     expect(cdnJsBundles[7]).contains("http://cdnasset.com/hash-123.js");
   });
 });
 
-describe("get/set framework", function() {
+describe("get/set framework", function () {
   it("should allow set/get framework lib", () => {
     function FL(ref) {
       this.ref = ref;

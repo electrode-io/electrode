@@ -126,7 +126,7 @@ const Template = () => (
             name="MainBody"
             timestamp
             elementId="subapp-mainbody"
-            streaming
+            useStream
             async
             hydrateServerData
             serverSideRendering

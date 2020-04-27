@@ -24,7 +24,7 @@ const babelConfigSpec = {
       default: {
         ie: "8"
       },
-      node: process.versions.node.split(".")[0]
+      node: { node: process.versions.node.split(".")[0] }
     }
   },
   target: {

@@ -4,6 +4,9 @@
 
 process.env.SERVER_ES6 = true;
 
+// Run app server at port 3100 to enable dev proxy at port 3000
+process.env.APP_SERVER_PORT = 3100;
+
 /*
  * Tell Electrode app archetype that you want to shorten css names under production env
  */

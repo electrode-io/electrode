@@ -12,6 +12,7 @@
  *   - generate code to bootstrap subapp on client
  */
 
+const assert = require("assert");
 const Fs = require("fs");
 const Path = require("path");
 const _ = require("lodash");
@@ -53,7 +54,7 @@ module.exports = function setup(setupContext, { props: setupProps }) {
   // name="Header"
   // async=true
   // defer=true
-  // streaming=true
+  // useStream=true
   // serverSideRendering=true
   // hydrateServerData=false
   // clientSideRendering=false
@@ -77,13 +78,13 @@ module.exports = function setup(setupContext, { props: setupProps }) {
   const retrieveDevServerBundle = async () => {
     return new Promise(resolve => {
       const routeOptions = setupContext.routeOptions;
-      const path = `${bundleBase}${bundleAsset.name}`;
+      const path = Path.posix.join(bundleBase, bundleAsset.name);
       const bundleUrl = formUrl({ ...routeOptions.httpDevServer, path });
       retrieveUrl(bundleUrl, (err, resp, body) => {
         if (err || resp.statusCode !== 200) {
           const msg = makeDevDebugMessage(
             `Error: fail to retrieve subapp bundle from '${bundleUrl}' for inlining in index HTML
-${err || body}`
+Response: ${err || body}`
           );
           console.error(msg); // eslint-disable-line
           resolve(makeDevDebugHtml(msg));
@@ -189,10 +190,24 @@ ${err || body}`
   loadSubApp();
   prepareSubAppJsBundle();
 
+  const verifyUseStream = props => {
+    if (props.useStream) {
+      const routeStream = setupContext.routeOptions.useStream;
+      assert(
+        routeStream !== false,
+        `subapp '${props.name}' can't set useStream when route options 'useStream' is false.`
+      );
+    }
+  };
+
+  verifyUseStream(setupProps);
+
   const clientProps = JSON.stringify(_.pick(setupProps, ["useReactRouter"]));
 
   return {
     process: (context, { props }) => {
+      verifyUseStream(props);
+
       const { request } = context.user;
 
       if (request.app.webpackDev && subAppLoadTime < request.app.webpackDev.compileTime) {
@@ -290,12 +305,19 @@ ${stack}`,
       let startTime;
 
       const closeOutput = () => {
+        ssrInfo.isDone = true;
         if (props.timestamp) {
           const now = Date.now();
           outputSpot.add(`<!-- time: ${now} diff: ${now - startTime} -->`);
         }
 
         outputSpot.close();
+      };
+
+      ssrInfo.done = () => {
+        if (!ssrInfo.isDone) {
+          closeOutput();
+        }
       };
 
       const processSubapp = async () => {
