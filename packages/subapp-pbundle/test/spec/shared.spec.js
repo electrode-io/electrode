@@ -19,9 +19,9 @@ describe("shared redux store", function() {
     setStoreContainer(container);
     setSharedStore("hello");
     expect(getSharedStore()).to.equal("hello");
-    expect(container).to.have.property("xarcReduxStore", "hello");
+    expect(container).to.have.property("store", "hello");
     clearSharedStore();
-    expect(container).to.deep.equal({ xarcReduxStore: null });
+    expect(container).to.deep.equal({ store: null });
   });
 
   it("getReduxCreateStore should create redux-bundler store", () => {
@@ -98,5 +98,26 @@ describe("shared redux store", function() {
     const store = reduxCreateStore(null, container);
     expect(store.initialState).to.deep.equal({});
     expect(store.realize).to.be.a("function");
+  });
+
+  it("should not add bundle to the store twice", () => {
+    const countBundle = {
+      name: "count",
+      reducer(state = 0) {
+        return state + 1;
+      },
+      selectCount(state) {
+        return state.count;
+      }
+    };
+
+    const info1 = { reduxBundles: [countBundle] };
+
+    const container = {};
+    const reduxCreateStore = getReduxCreateStore(info1);
+    let store = reduxCreateStore(null, container);
+    store = store.realize();
+    reduxCreateStore(null, container);
+    expect(store.meta.chunks[0].bundleNames).to.deep.equal(["count"]);
   });
 });

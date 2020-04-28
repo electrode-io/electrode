@@ -10,6 +10,7 @@ const subappUtil = require("subapp-util");
 module.exports = function setup(setupContext) {
   const distDir = process.env.NODE_ENV === "production" ? "../dist/min" : "../dist/dev";
   const clientJs = Fs.readFileSync(Path.join(__dirname, distDir, "subapp-web.js")).toString();
+  const cdnJs = Fs.readFileSync(Path.join(__dirname, distDir, "cdn-map.js")).toString();
   const littleLoader = Fs.readFileSync(
     require.resolve("little-loader/dist/little-loader.min.js"),
     "utf8"
@@ -27,6 +28,8 @@ module.exports = function setup(setupContext) {
 
   const bundleAssets = {
     jsChunksById: cdnJsBundles,
+    // md === mapping data for other assets
+    md: util.getCdnOtherMappings(setupContext.routeOptions),
     entryPoints: assets.entryPoints,
     basePath: ""
   };
@@ -36,6 +39,7 @@ ${JSON.stringify(bundleAssets)}
 </script>
 <script>/*LL*/${littleLoader}/*LL*/
 ${clientJs}
+${cdnJs}
 </script>
 `;
 

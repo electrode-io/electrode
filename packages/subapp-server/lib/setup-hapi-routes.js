@@ -172,23 +172,24 @@ async function setupRoutesFromFile(srcDir, server, pluginOpts) {
       });
     }
 
+    const useStream = routeOptions.useStream !== false;
+
     const routeHandler = ReactWebapp.makeRouteHandler(routeOptions);
     const handler = async (request, h) => {
       try {
         const context = await routeHandler({
-          content: { html: "", status: 200, useStream: true },
+          content: { html: "", status: 200, useStream },
           mode: "",
           request
         });
 
         const data = context.result;
         const status = data.status;
-
-        if (status === undefined) {
-          return h
-            .response(data)
-            .type("text/html; charset=UTF-8")
-            .code(200);
+        if (data instanceof Error) {
+          // rethrow to get default error behavior below with helpful errors in dev mode
+          throw data;
+        } else if (status === undefined) {
+          return h.response(data).type("text/html; charset=UTF-8").code(200);
         } else if (HttpStatus.redirect[status]) {
           return h.redirect(data.path).code(status);
         } else if (HttpStatus.displayHtml[status]) {
@@ -218,7 +219,7 @@ async function setupRoutesFromFile(srcDir, server, pluginOpts) {
 
     paths.forEach(pathObj => {
       _.each(pathObj, (method, xpath) => {
-        server.route(Object.assign({}, route.options, { path: xpath, method, handler }));
+        server.route(Object.assign({}, route.settings, { path: xpath, method, handler }));
       });
     });
   }
@@ -275,7 +276,7 @@ async function setupSubAppHapiRoutes(server, pluginOpts) {
   }
 
   // no directory based routes, then they must in a JS file
-  return await xaa.try(() => setupRoutesFromFile(srcDir, server, pluginOpts));
+  return await xaa.wrap(() => setupRoutesFromFile(srcDir, server, pluginOpts));
 }
 
 module.exports = {

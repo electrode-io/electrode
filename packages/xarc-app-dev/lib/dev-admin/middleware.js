@@ -8,6 +8,7 @@ const Fs = require("fs");
 const webpack = require("webpack");
 const hotHelpers = require("webpack-hot-middleware/helpers");
 const Url = require("url");
+const queryStr = require("querystring");
 const { getWebpackStartConfig } = require("@xarc/webpack/lib/util/custom-check");
 const { getLogs, getLogEventAsHtml } = require("./log-reader");
 const { fullDevServer, controlPaths } = require("../../config/dev-proxy");
@@ -70,6 +71,7 @@ class Middleware {
   constructor(options) {
     this._options = options;
     this.canContinue = Symbol("webpack dev middleware continue");
+    this._instanceId = Date.now();
   }
 
   setup() {
@@ -220,8 +222,6 @@ class Middleware {
         this.webpackDev.compileTime = Date.now();
 
         const baseUrl = this._options.baseUrl;
-        console.log(ck`<cyan.underline>${urlJoin(baseUrl(), this.logUrl)}</> \
-- View logs from your browser`);
 
         const update = () => {
           if (notOk) {
@@ -352,11 +352,29 @@ ${jumpToError}</body></html>
     };
 
     const serveLogEvents = async () => {
-      const htmlLogs = (await getLogs()).map(event => ({
-        ...event,
-        message: getLogEventAsHtml(event)
-      }));
-      return Promise.resolve(cycle.replyStaticData(JSON.stringify(htmlLogs)));
+      const query = queryStr.parse(Url.parse(req.url).query);
+      let start = parseInt(query.start, 10) || 0;
+      const id = parseInt(query.id, 10);
+      if (id !== this._instanceId) {
+        start = 0;
+      }
+
+      const htmlLogs = [];
+      const allLogs = await getLogs();
+      for (let ix = start; ix < allLogs.length; ix++) {
+        const event = allLogs[ix];
+        htmlLogs.push({
+          ...event,
+          message: getLogEventAsHtml(event)
+        });
+      }
+      const data = {
+        start,
+        logs: htmlLogs,
+        total: allLogs.length,
+        instanceId: this._instanceId
+      };
+      return Promise.resolve(cycle.replyStaticData(JSON.stringify(data)));
     };
 
     const serveLog = () => {
@@ -423,7 +441,7 @@ ${listDirectoryHtml(this.listAssetPath, outputPath)}
 <h1>Electrode Development Dashboard</h1>
 <h3><a href="${this.cwdBaseUrl}">View current working directory files</a></h3>
 <h3><a href="${this.cwdContextBaseUrl}">View webpack dev memfs files</a></h3>
-<h3><a href="${this.logUrl}">View logs</a></h3>
+<h3><a href="${this.logUrl}">View your app server console logs</a></h3>
 </body></html>`);
       return Promise.resolve();
     }

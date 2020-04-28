@@ -1,0 +1,19 @@
+{
+  "name": "electrode-cdn-file-loader",
+  "version": "1.1.1",
+  "description": "Webpack CDN file loader",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electrode-io/electrode-cdn-file-loader.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "loader-utils": "^1.1.0"
+  }
+}

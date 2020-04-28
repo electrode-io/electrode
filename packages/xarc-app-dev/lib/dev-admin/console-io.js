@@ -3,9 +3,13 @@
 /* eslint-disable no-console, no-process-exit */
 
 const readline = require("readline");
+const VisualLogger = require("visual-logger");
 
-class ConsoleIO {
-  constructor() {}
+class ConsoleIO extends VisualLogger {
+  constructor(options) {
+    super({ ...options, saveLogs: false });
+    this.setPrefix("");
+  }
 
   setup() {
     readline.emitKeypressEvents(process.stdin);
@@ -26,10 +30,15 @@ class ConsoleIO {
   }
 
   show(...args) {
-    console.log(...args);
+    this.log(...args);
+  }
+
+  write(str) {
+    this.log(str.trimRight());
   }
 
   exit() {
+    this.clearItems();
     process.exit();
   }
 }

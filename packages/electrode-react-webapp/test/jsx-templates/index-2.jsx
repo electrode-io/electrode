@@ -1,6 +1,10 @@
 /* @jsx createElement */
 
-const { IndexPage, createElement, Token, Require } = require("../../lib/jsx");
+const { IndexPage, createElement, Token } = require("../../lib/jsx");
+
+const TestAsync = async () => {
+  return `<div>Hello from async tag JSX-2</div>`;
+};
 
 const Template = (
   <IndexPage DOCTYPE="html">
@@ -23,6 +27,7 @@ const Template = (
         </div>
         <Token _id="PREFETCH_BUNDLES" />
         <Token _id="WEBAPP_BODY_BUNDLES" />
+        <TestAsync />
         <script>if (window.webappStart) webappStart();</script>
         <noscript>
           <h4>JavaScript is Disabled</h4>

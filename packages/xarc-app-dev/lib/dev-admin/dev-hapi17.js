@@ -25,6 +25,9 @@ function register(server) {
   server.ext({
     type: "onRequest",
     method: (request, h) => {
+      if (request.path === "/favicon.ico") {
+        return h.response("").code(404).takeover();
+      }
       const { req } = request.raw;
 
       // simulate a res to capture what the devMiddleware might send back

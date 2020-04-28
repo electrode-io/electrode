@@ -23,8 +23,13 @@ class Output {
     for (const x of this._items) {
       if (typeof x === "string") {
         out += x;
-      } else {
+      } else if (x && x.stringify) {
         out += x.stringify();
+      } else {
+        const typeName = (x && x.constructor && x.constructor.name) || typeof x;
+        const msg = `RenderOutput unable to stringify item of type ${typeName}`;
+        console.error("FATAL Error:", msg + "\n"); // eslint-disable-line
+        throw new Error(msg);
       }
     }
     return out;
