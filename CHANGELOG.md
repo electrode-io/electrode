@@ -1,3 +1,26 @@
+# 4/29/2020
+
+- added: mechanism to defer initial state read for sub apps
+
+## Packages
+
+### Directly Updated
+
+- `subapp-web@1.0.26` `(1.0.25 => 1.0.26)`
+
+### Lerna Updated
+
+- `subapp-pbundle@0.0.20` `(0.0.19 => 0.0.20)`
+- `subapp-react@0.0.17` `(0.0.16 => 0.0.17)`
+- `subapp-redux@1.0.26` `(1.0.25 => 1.0.26)`
+
+## Commits
+
+- `packages/subapp-web`
+
+  - added: mechanism to defer initial state read for sub apps ([#1630](https://github.com/electrode-io/electrode/pull/1630)) [commit](http://github.com/electrode-io/electrode/commit/bb36efb4f1f10db27b2d63c8eecdcd2a9f915275)
+  - handle getInitialState for queued subapp starts ([#1632](https://github.com/electrode-io/electrode/pull/1632)) [commit](http://github.com/electrode-io/electrode/commit/2233fa82fb2f9dc6051cdf64d0bc9b6150b94998)
+
 # 4/27/2020
 
 - fix: update cdn mock to mime 1.0 downgrade
