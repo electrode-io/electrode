@@ -51,6 +51,10 @@ const Template = (
         <Token _id="PAGE_TITLE" />
         <Require _id="subapp-web/lib/init" />
 
+        <Token
+          _id="WML_DYNAMIC_DATA"
+          data={["ccm", "uiConfig", "expoCookies"]}
+        />
         <Token _id="CRITICAL_CSS" />
       </head>
       <Token _id="HEAD_CLOSED" />

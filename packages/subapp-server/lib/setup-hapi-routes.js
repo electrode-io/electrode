@@ -114,6 +114,9 @@ async function setupRoutesFromFile(srcDir, server, pluginOpts) {
     pluginOpts
   );
 
+  const uiConfig = server.settings.app.config.ui || {};
+  topOpts.uiConfig = uiConfig;
+
   topOpts.routes = _.merge({}, spec.routes || spec.default, topOpts.routes);
 
   await handleFavIcon(server, topOpts);

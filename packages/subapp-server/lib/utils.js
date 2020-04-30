@@ -81,7 +81,9 @@ function getDefaultRouteOptions() {
     devBundleBase: "/js",
     cspNonceValue: undefined,
     templateFile: Path.join(__dirname, "..", "resources", "index-page"),
-    cdn: {}
+    cdn: {},
+    tokenHandlers: [Path.join(__dirname, "./token-handler")],
+    expoPrefix: null // optional, for expo cookies prefix
   };
 }
 
