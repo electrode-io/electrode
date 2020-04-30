@@ -14,7 +14,10 @@ const WebpackDevRelay = require("./webpack-dev-relay");
 const { displayLogs } = require("./log-reader");
 const { fork } = require("child_process");
 const ConsoleIO = require("./console-io");
-const logger = require("@xarc/app/lib/logger");
+const winstonLogger = require("@xarc/app/lib/winston-logger");
+const winston = require("winston");
+const logger = winstonLogger(winston, false);
+const { doCleanup } = require("./cleanup");
 const xaa = require("xaa");
 const { formUrl } = require("../utils");
 const {
@@ -91,11 +94,6 @@ class AdminServer {
       // await this.startProxyServer("--inspect-brk");
       await this.startProxyServer();
     }
-
-    this._shutdown ||
-      setTimeout(() => {
-        this.showMenu(true);
-      }, 100);
   }
 
   logTime(msg) {
@@ -214,6 +212,9 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
       this.kill(APP_SERVER_NAME, "SIGINT"),
       this.kill(PROXY_SERVER_NAME, "SIGINT")
     ]);
+
+    this._io.shutdown();
+    await doCleanup();
     this._io.exit();
   }
 
@@ -545,6 +546,11 @@ ${instruction}`
       checkLine: str => {
         if (!this._fullyStarted && str.includes("server running")) {
           this._fullyStarted = true;
+          // opens menu automatically once after startup
+          this._shutdown ||
+            setTimeout(() => {
+              this.showMenu(true);
+            }, 5000);
           this.logTime(`App is ready in dev mode, total time took`);
         }
         return str;

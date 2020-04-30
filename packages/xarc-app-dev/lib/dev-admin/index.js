@@ -20,4 +20,6 @@ const AdminServer = require("./admin-server");
 
 const admin = new AdminServer(parsed);
 
+require("./cleanup");
+
 admin.start();
