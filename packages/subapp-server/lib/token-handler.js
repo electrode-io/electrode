@@ -1,5 +1,7 @@
 "use strict";
 
+/* eslint-disable no-console */
+
 const Cookies = require("electrode-cookies");
 
 const dynamicDataTags = {
