@@ -106,9 +106,11 @@ class AdminServer {
     if (line !== undefined) {
       this._statusLine = line;
     }
+    const exitMsg = this._ctrlCExit ? "\n<orange>      == Press ^C again to Exit ==  </>" : "";
     this._io.updateItem(
       DEV_ADMIN_STATUS,
-      ck`Press M show/hide menu | Q exit | L set App Log Show Level: <white.inverse> ${this._appLogLevel} </> | ${this._statusLine}${this._menu}`
+      ck`Press M show/hide menu | Q exit | L set App Log Show Level: <white.inverse> \
+${this._appLogLevel} </> | ${this._statusLine}${this._menu}${exitMsg}`
     );
   }
 
@@ -230,6 +232,13 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
   async processCommand(str) {
     const handlers = {
       q: () => this._quit(),
+      "^c": () => {
+        if (!this._menu) {
+          this.showMenu();
+        } else {
+          this.updateStatus();
+        }
+      },
       m: () => this.showMenu(),
       //logs
       l: () => this._changeLogShowLevel(),
@@ -247,6 +256,17 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
       // dev proxy server
       p: () => DEV_PROXY_ENABLED && this.sendMsg(PROXY_SERVER_NAME, { name: "restart" })
     };
+
+    if (str === "^c") {
+      if (this._ctrlCExit) {
+        return this._quit();
+      }
+      this._ctrlCExit = true;
+    } else if (this._ctrlCExit) {
+      this._ctrlCExit = false;
+      this.updateStatus();
+    }
+
     return handlers[str] && (await handlers[str]());
   }
 
