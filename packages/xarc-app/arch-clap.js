@@ -15,6 +15,8 @@ require.resolve(`${archetype.devArchetypeName}/package.json`);
 
 const devRequire = archetype.devRequire;
 const ck = devRequire("chalker");
+const xaa = devRequire("xaa");
+const { psChildren } = devRequire("ps-get");
 
 const detectCssModule = devRequire("@xarc/webpack/lib/util/detect-css-module");
 
@@ -23,6 +25,10 @@ const devOptRequire = require("optional-require")(devRequire);
 const { getWebpackStartConfig, setWebpackProfile } = devRequire(
   "@xarc/webpack/lib/util/custom-check"
 );
+
+const chokidar = devRequire("chokidar");
+
+const { spawn } = require("child_process");
 
 const optFlow = devOptRequire("electrode-archetype-opt-flow");
 
@@ -56,6 +62,46 @@ const logger = require("./lib/logger");
 
 const jestTestDirectories = ["_test_", "_tests_", "__test__", "__tests__"];
 
+const watchExec = (files, cmd) => {
+  let timer;
+  let child;
+  let defer = xaa.makeDefer();
+  const doExec = () => {
+    if (timer) {
+      clearTimeout(timer);
+    }
+
+    timer = setTimeout(async () => {
+      timer = undefined;
+      const run = msg => {
+        child = true;
+        console.log(`${msg} '${cmd}'`);
+        const ch = spawn(cmd, { shell: true, stdio: "inherit" });
+        ch.on("close", () => {
+          if (child === "restart") {
+            run("Restarting");
+          } else {
+            defer.resolve();
+          }
+        });
+        child = ch;
+      };
+      if (!child) {
+        run("Running");
+      } else if (child.kill && child.pid) {
+        const ch = child;
+        child = "restart";
+        (await psChildren(ch.pid)).reverse().forEach(c => process.kill(c.pid));
+        ch.kill();
+      }
+    }, 500);
+  };
+  const watcher = chokidar.watch([].concat(files));
+  watcher.on("change", doExec);
+  doExec();
+  return defer.promise;
+};
+
 // By default, the dev proxy server will be hosted from PORT (3000)
 //  and the app from APP_SERVER_PORT (3100).
 //  If the APP_SERVER_PORT is set to the empty string however,
@@ -66,10 +112,6 @@ if (!process.env.APP_SERVER_PORT && process.env.APP_SERVER_PORT !== "") {
 
 function quote(str) {
   return str.startsWith(`"`) ? str : `"${str}"`;
-}
-
-function webpackConfig(file) {
-  return Path.join(config.webpack, file);
 }
 
 function karmaConfig(file) {
@@ -728,6 +770,33 @@ Individual .babelrc files were generated for you in src/client and src/server
 
     debug: ["build-dev-static", "server-debug"],
     devbrk: ["dev --inspect-brk"],
+
+    "mock-cloud": {
+      desc: `Run app locally like it's deployed to cloud with CDN mock and HTTPS proxy.
+      You must run clap build first and set env vars like HOST, PORT, NODE_ENV=production yourself.
+      options: [all options will be passed to node when starting your app server]`,
+      task(context) {
+        const mockTask = xclap.concurrent([
+          "dev-proxy --mock-cdn",
+          xclap.serial(
+            () => xaa.delay(500),
+            () => watchExec("config/assets.json", `node ${context.args.join(" ")} lib/server`)
+          )
+        ]);
+
+        if (!Fs.existsSync("dist")) {
+          console.log("dist does not exist, running build task first.");
+          return xclap.serial(
+            "build",
+            () => console.log("build completed, starting mock prod mode with proxy"),
+            mockTask
+          );
+        }
+
+        return xclap.serial(() => console.log("dist exist, skipping build task"), mockTask);
+      }
+    },
+
     dev: {
       desc: `Start your app with watch in development mode with dev-admin.
       options: node.js --inspect can be used to debug the dev-admin`,
@@ -849,12 +918,12 @@ Individual .babelrc files were generated for you in src/client and src/server
     },
 
     "dev-proxy": {
-      desc:
-        "Start Electrode dev reverse proxy by itself - useful for running it with sudo (options: --debug)",
-      task() {
-        const debug = this.argv.includes("--debug") ? "--inspect-brk " : "";
+      desc: `Start Electrode dev reverse proxy by itself - useful for running it with sudo.
+      options: --debug --mock-cdn`,
+      task(context) {
+        const debug = context.argOpts.debug ? "--inspect-brk " : "";
         const proxySpawn = require.resolve("@xarc/app-dev/lib/dev-admin/redbird-spawn");
-        return `~(tty)$node ${debug}${proxySpawn}`;
+        return `~(tty)$node ${debug}${proxySpawn} ${context.args.join(" ")}`;
       }
     },
 
