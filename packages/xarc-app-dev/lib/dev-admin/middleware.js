@@ -13,6 +13,7 @@ const { getWebpackStartConfig } = require("@xarc/webpack/lib/util/custom-check")
 const { getLogs, getLogEventAsHtml } = require("./log-reader");
 const { fullDevServer, controlPaths } = require("../../config/dev-proxy");
 const { formUrl } = require("../utils");
+const isomorphicLoaderConfig = require("isomorphic-loader/lib/config");
 
 hotHelpers.pathMatch = (url, path) => {
   try {
@@ -166,10 +167,9 @@ class Middleware {
     this.logEventsUrl = urlJoin(this.devBaseUrl, "/log-events");
     this.dllDevUrl = urlJoin(this.devBaseUrl, "/dll");
 
-    const ISO_LOADER_CONFIG = ".isomorphic-loader-config.json";
     const LOADABLE_STATS = "loadable-stats.json";
-    const isoLockfile = Path.resolve(`${ISO_LOADER_CONFIG}.lock`);
-    const isoConfigFile = Path.resolve(ISO_LOADER_CONFIG);
+    const isoLockfile = Path.resolve(isomorphicLoaderConfig.lockFile);
+    const isoConfigFile = Path.resolve(isomorphicLoaderConfig.configFile);
 
     // Must wait for isomorphic-loader to complete saving its config
     // file before continuing and do hot reload in the app server.

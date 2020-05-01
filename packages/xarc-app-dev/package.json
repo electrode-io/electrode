@@ -63,7 +63,7 @@
     "filter-scan-dir": "^1.0.9",
     "fs-extra": "^0.30.0",
     "identity-obj-proxy": "^3.0.0",
-    "isomorphic-loader": "^3.0.0",
+    "isomorphic-loader": "^3.1.0",
     "lodash": "^4.13.1",
     "log-update": "^4.0.0",
     "mime": "^1.6.0",
