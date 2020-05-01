@@ -35,7 +35,7 @@
     "electrode-node-resolver": "^2.0.0",
     "file-loader": "^2.0.0",
     "filter-scan-dir": "^1.0.9",
-    "isomorphic-loader": "^3.0.0",
+    "isomorphic-loader": "^3.1.0",
     "lodash": "^4.13.1",
     "mini-css-extract-plugin": "^0.7.0",
     "mkdirp": "^1.0.3",

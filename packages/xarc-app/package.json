@@ -32,7 +32,7 @@
     "@babel/runtime": "^7.8.3",
     "css-modules-require-hook": "^4.0.2",
     "ignore-styles": "^5.0.1",
-    "isomorphic-loader": "^3.0.0",
+    "isomorphic-loader": "^3.1.0",
     "optional-require": "^1.0.0",
     "subapp-util": "^1.0.5"
   },
