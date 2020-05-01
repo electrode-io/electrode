@@ -185,4 +185,18 @@ describe("render-output", function() {
     };
     expect(() => ro._finish()).to.throw("test error");
   });
+
+  it("should throw if can't stringify an item", () => {
+    const ro = new RenderOutput();
+    ro.add({});
+    expect(() => ro.flush()).to.throw("unable to stringify item of type Object");
+  });
+
+  it("should throw if can't stringify an item without constructor", () => {
+    const ro = new RenderOutput();
+    const item = {};
+    item.constructor = false;
+    ro.add(item);
+    expect(() => ro.flush()).to.throw("unable to stringify item of type object");
+  });
 });

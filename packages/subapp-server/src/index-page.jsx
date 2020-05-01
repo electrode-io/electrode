@@ -23,7 +23,7 @@ const RenderSubApps = (props, context) => {
               _concurrent: true,
               elementId,
               timestamp: true,
-              streaming: false,
+              useStream: false,
               async: true,
               serverSideRendering: true
             },

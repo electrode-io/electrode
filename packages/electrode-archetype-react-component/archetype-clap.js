@@ -157,7 +157,7 @@ function makeTasks(hostDir) {
     },
     "babel-src-step": `~$babel -D src -d .tmplib`,
     "build-lib:clean-tmp": () => $$.rm("-rf", "./tmp"),
-    "build-lib:copy-flow": copyAsFlowDeclaration,
+    "build-lib:copy-flow": () => copyAsFlowDeclaration(),
     "build-lib:flatten-l10n": flattenMessagesL10n,
 
     "archetype:check": [

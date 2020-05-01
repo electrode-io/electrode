@@ -1,14 +1,16 @@
 "use strict";
 
-/* eslint-disable global-require, max-statements, no-loop-func */
+/* eslint-disable global-require, max-statements, no-loop-func, max-len */
 
 const Fs = require("fs");
 const assert = require("assert");
 const Path = require("path");
 const _ = require("lodash");
+const { tryThrowOriginalSubappRegisterError } = require("subapp-util");
 
 let CDN_ASSETS;
 let CDN_JS_BUNDLES;
+let CDN_OTHER_MAPPINGS;
 let FrameworkLib;
 
 const utils = {
@@ -53,7 +55,12 @@ const utils = {
     const entryName = name.toLowerCase();
     // find entry point
     const entryPoints = assets.entryPoints[entryName];
-    assert(entryPoints, `subapp-web: no entry point found for ${name}`);
+    if (!entryPoints) {
+      tryThrowOriginalSubappRegisterError(name);
+      throw new Error(
+        `subapp-web: no entry point found for subapp '${name}' - please double check its directory name match ${entryName}.`
+      );
+    }
 
     //
     // Normal entry output bundles are generated as <entryName>.bundle[.dev].js,
@@ -159,21 +166,73 @@ const utils = {
     return cdnBundles;
   },
 
-  getCdnJsBundles(assets, routeOptions, cdnAssetsFile = "config/assets.json") {
-    if (CDN_JS_BUNDLES) {
-      return CDN_JS_BUNDLES;
-    }
+  loadCdnAssets(routeOptions, cdnAssetsFile = "config/assets.json") {
+    if (routeOptions.cdn.enable === true && CDN_ASSETS === undefined) {
+      const env = process.env.NODE_ENV;
+      const prod = env === "production";
+      const ignoreMsg = `== This is OK and you can ignore this message if it's what you intended. ==`;
+      const logError = console.error; // eslint-disable-line
+      if (!prod) {
+        logError(
+          `Warning: you've set cdn.enable to true for NODE_ENV ${env}.
+Generally you should do that for production deployment in the cloud only.
+${ignoreMsg}`
+        );
+      }
 
-    if (routeOptions.cdn.enable !== false && CDN_ASSETS === undefined) {
       try {
         const assetsFp = Path.resolve(cdnAssetsFile);
-        CDN_ASSETS = require(assetsFp);
+        CDN_ASSETS = JSON.parse(Fs.readFileSync(assetsFp));
       } catch (err) {
-        console.error("Error: Loading CDN assets map failed", err); // eslint-disable-line
+        if (prod) {
+          logError("Error: Loading CDN assets map failed", err); // eslint-disable-line
+        } else {
+          logError(
+            `Warning: load CDN asset map failed, default to local assets for NODE_ENV ${env} mode. path: ${cdnAssetsFile}
+Error: ${err.message}
+${ignoreMsg}`
+          );
+        }
         CDN_ASSETS = false;
       }
     }
 
+    return CDN_ASSETS;
+  },
+
+  getCdnOtherMappings(routeOptions) {
+    if (CDN_OTHER_MAPPINGS) {
+      return CDN_OTHER_MAPPINGS;
+    }
+    utils.loadCdnAssets(routeOptions);
+
+    /*
+     * Send non js/css assets as CDN mapping data to the browser.
+     *
+     * For js and css assets, webpack is aware of them, and treat them as special chunks.
+     * IDs are assign to each "chunks".  In dev mode, it's the chunk name, but in prod mode
+     * it's an integer.
+     *
+     * For any other assets that are managed by Electrode, after they are uploaded to CDN,
+     * there's just the CDN mapping info on them, and we need to send them to the browser
+     * and provide code to map them from original file name to the CDN URL.
+     */
+    CDN_OTHER_MAPPINGS = Object.keys(CDN_ASSETS || {})
+      .filter(x => !x.endsWith(".js") && !x.endsWith(".css"))
+      .reduce((acc, k) => {
+        acc[Path.basename(k)] = CDN_ASSETS[k];
+        return acc;
+      }, {});
+
+    return CDN_OTHER_MAPPINGS;
+  },
+
+  getCdnJsBundles(assets, routeOptions) {
+    if (CDN_JS_BUNDLES) {
+      return CDN_JS_BUNDLES;
+    }
+
+    utils.loadCdnAssets(routeOptions);
     //
     // pack up entrypoints data from stats
     //
@@ -184,7 +243,9 @@ const utils = {
 
     const bundleBase = utils.getBundleBase(routeOptions);
     const allChunks = _.mergeWith({}, js, css, (a, b) => (a && b ? [].concat(a, b) : a || b));
-    return (CDN_JS_BUNDLES = utils.mapCdnAssets(allChunks, bundleBase, CDN_ASSETS));
+    CDN_JS_BUNDLES = utils.mapCdnAssets(allChunks, bundleBase, CDN_ASSETS);
+
+    return CDN_JS_BUNDLES;
   },
 
   getChunksById(stats) {
@@ -273,6 +334,7 @@ const utils = {
     //
 
     assets.chunksById = utils.getChunksById(stats);
+    assets.all = stats.assets;
     assets.js = stats.assets.filter(asset => asset.name.endsWith(".js"));
     assets.css = stats.assets.filter(asset => asset.name.endsWith(".css"));
     assets.entryPoints = stats.entrypoints;

@@ -75,7 +75,15 @@ const getConfig = () => {
                 prefetch: "console.log('Hello');"
               }
             },
-            "/react-helmet": {}
+            "/react-helmet": {},
+            "/intercept": {
+              templateFile: Path.join(__dirname, "../jsx-templates/index-intercept"),
+              content: {
+                status: 200,
+                html: "<div>Hello Electrode</div>",
+                prefetch: "console.log('Hello');"
+              }
+            }
           }
         }
       }
@@ -716,7 +724,7 @@ describe("hapi 17 electrode-react-webapp with jsx template", () => {
     });
   });
 
-   it.skip("should use top level htmlFile and return response headers", () => {
+  it.skip("should use top level htmlFile and return response headers", () => {
     configOptions.prodBundleBase = "http://awesome-cdn.com/myapp/";
     configOptions.stats = "test/data/stats-test-one-bundle.json";
     configOptions.htmlFile = "test/data/index-1.html";
@@ -1033,6 +1041,7 @@ describe("hapi 17 electrode-react-webapp with jsx template", () => {
           expect(res.statusCode).to.equal(200);
           const result = res.result.split("\n").join("");
           expect(result).to.contain(`<div>test jsx-2</div>`);
+          expect(result).contains(`<div>Hello from async tag JSX-2</div>`);
           stopServer(server);
         })
         .catch(err => {
@@ -1547,6 +1556,24 @@ describe("hapi 17 electrode-react-webapp with jsx template", () => {
       });
   });
 
+  it("should handle user intercept on rendering", () => {
+    return electrodeServer(config).then(server => {
+      return server
+        .inject({
+          method: "GET",
+          url: "/intercept"
+        })
+        .then(res => {
+          expect(res.result).equals("context intercept handler");
+          stopServer(server);
+        })
+        .catch(err => {
+          stopServer(server);
+          throw err;
+        });
+    });
+  });
+
   it("should allow support react-helmet with custom token handler", () => {
     configOptions.unbundledJS = {
       enterHead: ["test-1 script"]
@@ -1840,18 +1867,19 @@ describe("hapi 17 electrode-react-webapp with jsx template", () => {
 
     it("should render with selectTemplate even if htmlFile is not specified", () => {
       return electrodeServer(config).then(server => {
-        return server.inject({
-          method: "GET",
-          url: "/select?template=4"
-        })
-        .then(res => {
-          expect(res.statusCode).equal(200);
-          stopServer(server);
-        })
-        .catch(err => {
-          stopServer(server);
-          throw err;
-        });
+        return server
+          .inject({
+            method: "GET",
+            url: "/select?template=4"
+          })
+          .then(res => {
+            expect(res.statusCode).equal(200);
+            stopServer(server);
+          })
+          .catch(err => {
+            stopServer(server);
+            throw err;
+          });
       });
     });
 

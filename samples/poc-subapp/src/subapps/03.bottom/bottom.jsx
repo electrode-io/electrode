@@ -5,7 +5,7 @@ import { Router, Route, Switch } from "react-router-dom";
 import { createStore } from "redux";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import Large from "../components/large";
+import Large from "../../components/large";
 
 // import AdvGridList from "../components/adv-grid";
 

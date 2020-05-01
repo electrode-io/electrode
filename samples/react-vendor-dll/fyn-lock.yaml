@@ -390,15 +390,6 @@ binary-extensions:
  1.13.1:
   $: sha512-Un7MIEDdUC5gNpcGDV97op1Ywk748MpHcFTHoYs6qnj1Z3j7I53VG3nwZhKzoBZmbdRNnb6WRdFlwl7tSDuZGw==
   _: 'https://registry.npmjs.org/binary-extensions/-/binary-extensions-1.13.1.tgz'
-bindings:
- _latest: 1.5.0
- _:
-  ^1.5.0: 1.5.0
- 1.5.0:
-  $: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==
-  _: 'https://registry.npmjs.org/bindings/-/bindings-1.5.0.tgz'
-  dependencies:
-   file-uri-to-path: 1.0.0
 bluebird:
  _latest: 3.7.2
  _:
@@ -1227,13 +1218,6 @@ figgy-pudding:
  3.5.1:
   $: sha512-vNKxJHTEKNThjfrdJwHc7brvM6eVevuO5nTj6ez8ZQ1qbXTvGthucRF7S4vf2cr71QVnT70V34v0S1DyQsti0w==
   _: 'https://registry.npmjs.org/figgy-pudding/-/figgy-pudding-3.5.1.tgz'
-file-uri-to-path:
- _latest: 2.0.0
- _:
-  1.0.0: 1.0.0
- 1.0.0:
-  $: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==
-  _: 'https://registry.npmjs.org/file-uri-to-path/-/file-uri-to-path-1.0.0.tgz'
 fill-range:
  _latest: 7.0.1
  _:
@@ -1344,21 +1328,6 @@ fs.realpath:
  1.0.0:
   $: sha1-FQStJSMVjKpA20onh8sBQRmU6k8=
   _: 'https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz'
-fsevents:
- _latest: 2.1.2
- _:
-  ^1.2.7: 1.2.11
- 1.2.11:
-  hasI: 1
-  $: sha512-+ux3lx6peh0BpvY0JebGyZoiR4D+oYzdPZMKJwkZ+sFkNJzpL7tXc/wehS49gUAxg3tmMHPHZkA8JU2rhhgDHw==
-  _: 'https://registry.npmjs.org/fsevents/-/fsevents-1.2.11.tgz'
-  dependencies:
-   bindings: ^1.5.0
-   nan: ^2.12.1
-  bundleDependencies:
-   - node-pre-gyp
-  os:
-   - darwin
 get-caller-file:
  _latest: 2.0.5
  _:
@@ -2208,13 +2177,6 @@ ms:
  2.0.0:
   $: sha1-VgiurfwAvmwpAd9fmGF4jeDVl8g=
   _: 'https://registry.npmjs.org/ms/-/ms-2.0.0.tgz'
-nan:
- _latest: 2.14.0
- _:
-  ^2.12.1: 2.14.0
- 2.14.0:
-  $: sha512-INOFj37C7k3AfaNTtX8RhsTw7qRy7eLET14cROi9+5HAVbbHuIWUHEauBv5qT4Av2tWasiTY1Jw6puUNqRJXQg==
-  _: 'https://registry.npmjs.org/nan/-/nan-2.14.0.tgz'
 nanomatch:
  _latest: 1.2.13
  _:

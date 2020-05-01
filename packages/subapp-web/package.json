@@ -1,6 +1,6 @@
 {
   "name": "subapp-web",
-  "version": "1.0.22",
+  "version": "1.0.25",
   "description": "Electrode subapp web support",
   "module": "dist/dev/index.js",
   "main": "lib/index.js",
@@ -32,8 +32,8 @@
     "lodash": "^4.17.15",
     "optional-require": "^1.0.0",
     "request": "^2.88.0",
-    "subapp-util": "^1.0.4",
-    "xaa": "^1.1.4"
+    "subapp-util": "^1.0.5",
+    "xaa": "^1.4.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -77,5 +77,10 @@
     "functions": 0,
     "lines": 0,
     "cache": true
+  },
+  "prettier": {
+    "printWidth": 100,
+    "trailingComma": "none",
+    "arrowParens": "avoid"
   }
 }
