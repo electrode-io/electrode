@@ -89,11 +89,35 @@ function getDefaultRouteOptions() {
   };
 }
 
+function cleanStack(stack) {
+  const lines = stack
+    .split("\n")
+    .map(x => {
+      const x2 = x.trimRight();
+      const cwd = process.cwd();
+      if (cwd.length > 2) {
+        return x2.replace(cwd, ".");
+      }
+      return x2;
+    })
+    .filter(x => {
+      return !x.match(
+        // drop node.js internal modules
+        // drop isomorphic-loader extend-require
+        // drop pirates require hooks
+        /(\(internal\/modules\/)|(node_modules\/isomorphic-loader)|(node_modules\/pirates\/)/
+      );
+    });
+
+  return lines.join("\n");
+}
+
 function errorResponse({ routeName, h, err }) {
   if (process.env.NODE_ENV !== "production") {
-    console.error(`Route ${routeName} failed:`, err);
+    const stack = cleanStack(err.stack);
+    console.error(`Route ${routeName} failed:`, stack);
     return h
-      .response(`<html><body><h1>DEV ERROR</h1><pre>${err.stack}</pre></body></html>`)
+      .response(`<html><body><h1>DEV ERROR</h1><pre>${stack}</pre></body></html>`)
       .type("text/html; charset=UTF-8")
       .code(HttpStatusCodes.INTERNAL_SERVER_ERROR);
   } else {
