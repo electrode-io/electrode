@@ -1,0 +1,32 @@
+<!--%{INITIALIZE}-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--%{INITIALIZE_HELMET}-->
+  <!--%{META_TAGS}-->
+  <!--%{PAGE_TITLE}-->
+  <!--%{CRITICAL_CSS}-->
+  <!--%{WEBAPP_HEADER_BUNDLES}-->
+</head>
+
+<body>
+  <div>test html-2</div>
+  <div class="js-content">
+    <!--%{SSR_CONTENT}-->
+  </div>
+  <!--%{PREFETCH_BUNDLES}-->
+  <!--%{WEBAPP_BODY_BUNDLES}-->
+  <script>
+    if (window.webappStart) webappStart();
+  </script>
+  <noscript>
+    <h4>JavaScript is Disabled</h4>
+    <p>Sorry, this webpage requires JavaScript to function correctly.</p>
+    <p>Please enable JavaScript in your browser and reload the page.</p>
+  </noscript>
+</body>
+
+</html>

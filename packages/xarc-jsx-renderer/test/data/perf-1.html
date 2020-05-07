@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--%{INITIALIZE}-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--%{META_TAGS}-->
+  <!--%{PAGE_TITLE}-->
+  <!--%{CRITICAL_CSS}-->
+  <!--%{WEBAPP_HEADER_BUNDLES}-->
+</head>
+<!--%{HEAD_CLOSED}-->
+
+<body>
+  <div>test perf 1 html</div>
+  <!--%{user-spot-token}-->
+  <div class="js-content">
+    <!--%{SSR_CONTENT}-->
+  </div>
+  <!--%{AFTER_SSR_CONTENT}-->
+  <!--%{PREFETCH_BUNDLES}-->
+  <!--%{user-promise-token}-->
+  <!--%{WEBAPP_BODY_BUNDLES}-->
+  <script>
+    if (window.webappStart) webappStart();
+  </script>
+  <!--%{#../fixtures/custom-1}-->
+  <!--%{user-token-1}-->
+  <!--%{user-token-2}-->
+  <noscript>
+    <h4>JavaScript is Disabled</h4>
+    <p>Sorry, this webpage requires JavaScript to function correctly.</p>
+    <p>Please enable JavaScript in your browser and reload the page.</p>
+  </noscript>
+</body>
+<!--%{BODY_CLOSED}-->
+
+</html>
+<!--%{HTML_CLOSED}-->
