@@ -1,3 +1,32 @@
+# 5/7/2020
+
+- dep: isomorphic-loader 3.1.0
+- feat: ^C 2x makes dev-admin exit
+- feat: dev-admin cleans child process automatically
+
+## Packages
+
+- `@xarc/app@8.0.21` `(8.0.20 => 8.0.21)`
+- `@xarc/app-dev@8.0.21` `(8.0.20 => 8.0.21)`
+- `@xarc/webpack@8.0.5` `(8.0.4 => 8.0.5)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - dep: isomorphic-loader 3.1.0 ([#1636](https://github.com/electrode-io/electrode/pull/1636)) [commit](http://github.com/electrode-io/electrode/commit/7e0da3ac9575288857bcc5ffda2786e342bee0c8)
+  - feat: ^C 2x makes dev-admin exit ([#1634](https://github.com/electrode-io/electrode/pull/1634)) [commit](http://github.com/electrode-io/electrode/commit/fcf78dadb24b5273d80998947b84911209197220)
+  - feat: dev-admin cleans child process automatically ([#1633](https://github.com/electrode-io/electrode/pull/1633)) [commit](http://github.com/electrode-io/electrode/commit/fd2c408507a91b2880295327ac5dd1be0a50ed4b)
+
+- `packages/xarc-webpack`
+
+  - dep: isomorphic-loader 3.1.0 ([#1636](https://github.com/electrode-io/electrode/pull/1636)) [commit](http://github.com/electrode-io/electrode/commit/7e0da3ac9575288857bcc5ffda2786e342bee0c8)
+
+- `.github`
+
+  - remove node 14 from github CI [commit](http://github.com/electrode-io/electrode/commit/7e0ccc4ae539284b0478553bad92d676d67a343a)
+  - docs(github): one-command solution for collecting system stats ([#1637](https://github.com/electrode-io/electrode/pull/1637)) [commit](http://github.com/electrode-io/electrode/commit/6926618064aadaa6b24aa197a9af53881bb2d6f4)
+
 # 4/29/2020
 
 - added: mechanism to defer initial state read for sub apps
