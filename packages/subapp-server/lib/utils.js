@@ -1,9 +1,12 @@
 "use strict";
 
+/* eslint-disable no-console */
+
 // Copy from electrode-react-webapp for now
 
 const Fs = require("fs");
 const Path = require("path");
+const Boom = require("@hapi/boom");
 const optionalRequire = require("optional-require")(require);
 const {
   settings = {},
@@ -11,6 +14,7 @@ const {
   fullDevServer = {},
   httpDevServer = {}
 } = optionalRequire("@xarc/app-dev/config/dev-proxy", { default: {} });
+const HttpStatusCodes = require("http-status-codes");
 
 /**
  * Tries to import bundle chunk selector function if the corresponding option is set in the
@@ -85,10 +89,23 @@ function getDefaultRouteOptions() {
   };
 }
 
+function errorResponse({ routeName, h, err }) {
+  if (process.env.NODE_ENV !== "production") {
+    console.error(`Route ${routeName} failed:`, err);
+    return h
+      .response(`<html><body><h1>DEV ERROR</h1><pre>${err.stack}</pre></body></html>`)
+      .type("text/html; charset=UTF-8")
+      .code(HttpStatusCodes.INTERNAL_SERVER_ERROR);
+  } else {
+    return Boom.internal();
+  }
+}
+
 module.exports = {
   resolveChunkSelector,
   getIconStats,
   getCriticalCSS,
   getDefaultRouteOptions,
-  updateFullTemplate
+  updateFullTemplate,
+  errorResponse
 };

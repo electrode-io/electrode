@@ -19,7 +19,12 @@ const { ReactWebapp } = require("electrode-react-webapp");
 const subAppUtil = require("subapp-util");
 const registerRoutes = require("./register-routes");
 
-const { resolveChunkSelector, getDefaultRouteOptions, updateFullTemplate } = require("./utils");
+const {
+  errorResponse,
+  resolveChunkSelector,
+  getDefaultRouteOptions,
+  updateFullTemplate
+} = require("./utils");
 
 async function searchRoutesDir(srcDir, pluginOpts) {
   const { loadRoutesFrom } = pluginOpts;
@@ -200,12 +205,7 @@ async function setupRoutesFromFile(srcDir, server, pluginOpts) {
           return h.response(data).code(status);
         }
       } catch (err) {
-        if (process.env.NODE_ENV !== "production") {
-          console.error(`Route ${path} failed:`, err);
-          return err.stack;
-        } else {
-          return Boom.internal();
-        }
+        return errorResponse({ routeName: path, request, h, err });
       }
     };
 
