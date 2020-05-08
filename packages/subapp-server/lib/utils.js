@@ -1,6 +1,6 @@
 "use strict";
 
-/* eslint-disable no-console */
+/* eslint-disable no-console, no-magic-numbers */
 
 // Copy from electrode-react-webapp for now
 
