@@ -186,7 +186,7 @@ describe("dev-admin-fastify", function() {
     expect(reply.statusCode).eq(200);
     expect(reply.savedHeaders[0]).deep.eq({
       name: "Content-Type",
-      value: "text/plain; charset=UTF-8"
+      value: "text/plain"
     });
     expect(reply.savedPayloads.length).eq(1);
     expect(reply.savedPayloads[0].toString()).eq("blah");
