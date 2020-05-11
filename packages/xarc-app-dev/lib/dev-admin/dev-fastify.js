@@ -44,10 +44,9 @@ async function register(fastify) {
         reply.send(err);
       },
       replyStaticData: data => {
-        const type = mime.lookup(request.url);
+        const type = mime.getType(request.url);
         if (type) {
-          const charset = mime.charsets.lookup(type);
-          reply.header("Content-Type", type + (charset ? `; charset=${charset}` : ""));
+          reply.header("Content-Type", type);
         }
         reply.code(200).send(data);
       },
@@ -59,10 +58,9 @@ async function register(fastify) {
           reply.code(404);
           return;
         }
-        const type = mime.lookup(name);
+        const type = mime.getType(name);
         if (type) {
-          const charset = mime.charsets.lookup(type);
-          reply.header("Content-Type", type + (charset ? `; charset=${charset}` : ""));
+          reply.header("Content-Type", type);
         }
         reply.code(200).send(data);
       }
