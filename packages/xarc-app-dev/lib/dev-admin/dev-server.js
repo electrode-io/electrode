@@ -5,6 +5,7 @@
 const ck = require("chalker");
 const archetype = require("@xarc/app/config/archetype");
 const optionalRequire = require("optional-require")(require);
+const fastifyServer = optionalRequire("@xarc/fastify-server");
 const electrodeServer = optionalRequire("electrode-server");
 const Hapi = optionalRequire("@hapi/hapi");
 const Koa = optionalRequire("koa");
@@ -18,16 +19,31 @@ if (process.env.WEBPACK_DEV === undefined) {
   process.env.WEBPACK_DEV = true;
 }
 
-if (electrodeServer) {
+if (fastifyServer) {
+  fastifyServer({
+    electrode: {
+      logLevel: "warn",
+      pinoOptions: false
+    },
+    connection: {
+      host: archetype.webpack.devHostname,
+      port: archetype.webpack.devPort
+    },
+    plugins: {
+      webpackDevFastify: {
+        module: "./dev-fastify",
+        requireFromPath: __dirname
+      }
+    }
+  });
+} else if (electrodeServer) {
   electrodeServer({
     electrode: {
       logLevel: "warn"
     },
-    connections: {
-      default: {
-        host: archetype.webpack.devHostname,
-        port: archetype.webpack.devPort
-      }
+    connection: {
+      host: archetype.webpack.devHostname,
+      port: archetype.webpack.devPort
     },
     plugins: {
       webpackDevHapi: {
@@ -50,7 +66,7 @@ if (electrodeServer) {
       );
     })
     .catch(err => {
-      console.error(ck`<red>koa webpack dev server failed</>${err}`);
+      console.error(ck`<red>Hapi webpack dev server failed</>${err}`);
     });
 } else if (Koa) {
   const app = new Koa();
@@ -81,7 +97,10 @@ if (electrodeServer) {
 } else {
   console.error(
     ck(`<red>
-ERROR: can't find one of electrode-server, express, koa to run dev-server.
+ERROR: can't find a HTTP server to run dev-server.
+Please install at least one of these dependencies:
+  @xarc/fastify-server@1+, electrode-server@3+, @hapi/hapi@18+, express@4+, or koa
+
 </red>`)
   );
 }
