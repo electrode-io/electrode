@@ -48,10 +48,9 @@ function setup(app, protocol, port) {
           return res;
         },
         replyStaticData: data => {
-          const type = mime.lookup(req.url);
+          const type = mime.getType(req.url);
           if (type) {
-            const charset = mime.charsets.lookup(type);
-            res.append("Content-Type", type + (charset ? `; charset=${charset}` : ""));
+            res.append("Content-Type", type);
           }
           res.status = 200;
           res.body = data;

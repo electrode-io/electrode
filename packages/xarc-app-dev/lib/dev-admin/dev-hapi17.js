@@ -47,11 +47,10 @@ function register(server) {
             return h.response(err);
           },
           replyStaticData: data => {
-            const type = mime.lookup(req.url);
+            const type = mime.getType(req.url);
             const resp = h.response(data).code(200);
             if (type) {
-              const charset = mime.charsets.lookup(type);
-              resp.header("Content-Type", type + (charset ? `; charset=${charset}` : ""));
+              resp.header("Content-Type", type);
             }
             return resp.takeover();
           },
@@ -62,11 +61,10 @@ function register(server) {
             } catch (e) {
               return h.code(404);
             }
-            const type = mime.lookup(name);
+            const type = mime.getType(name);
             const resp = h.response(data).code(200);
             if (type) {
-              const charset = mime.charsets.lookup(type);
-              resp.header("Content-Type", type + (charset ? `; charset=${charset}` : ""));
+              resp.header("Content-Type", type);
             }
             return resp.takeover();
           }

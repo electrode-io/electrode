@@ -37,10 +37,9 @@ function setup(app, protocol, port) {
         replyNotFound: () => res.status(404).send("Not Found"),
         replyError: err => res.status(500).send(err),
         replyStaticData: data => {
-          const type = mime.lookup(req.url);
+          const type = mime.getType(req.url);
           if (type) {
-            const charset = mime.charsets.lookup(type);
-            res.set("Content-Type", type + (charset ? `; charset=${charset}` : ""));
+            res.set("Content-Type", type);
           }
           res.status(200).send(data);
         },

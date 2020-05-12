@@ -77,7 +77,7 @@ describe("dev-hapi", function() {
         const { result } = cycle.replyFile("./xclap.js");
         expect(result.code).to.equal(200);
         expect(result).to.have.any.keys("response");
-        expect(result.headers["Content-Type"]).to.equal("application/javascript; charset=UTF-8");
+        expect(result.headers["Content-Type"]).to.equal("application/javascript");
       });
     });
 
@@ -96,7 +96,7 @@ describe("dev-hapi", function() {
         expect(result.code).to.equal(200);
         expect(result.takeover).to.equal(true);
         expect(result).to.have.any.keys("response");
-        expect(result.headers["Content-Type"]).to.equal("application/javascript; charset=UTF-8");
+        expect(result.headers["Content-Type"]).to.equal("application/javascript");
       });
     });
 
@@ -115,7 +115,7 @@ describe("dev-hapi", function() {
         expect(result.code).to.equal(200);
         expect(result.takeover).to.equal(true);
         expect(result).to.have.any.keys("response");
-        expect(result.headers["Content-Type"]).to.equal("application/javascript; charset=UTF-8");
+        expect(result.headers["Content-Type"]).to.equal("application/javascript");
       });
     });
 

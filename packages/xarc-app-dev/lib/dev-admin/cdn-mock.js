@@ -57,7 +57,7 @@ const cdnMock = {
         asset = LOADED_ASSETS[filePath] = Fs.readFileSync(fp);
       }
       const ext = Path.extname(filePath);
-      const mimeType = mime.lookup(ext);
+      const mimeType = mime.getType(ext);
       res.writeHead(200, {
         "Content-Type": mimeType,
         "Content-Length": Buffer.byteLength(asset)
