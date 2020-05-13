@@ -131,7 +131,7 @@ describe("dev-admin-fastify", function() {
     expect(reply.called);
     expect(reply.statusCode).eq(200);
     expect(reply.savedHeaders).deep.eq([{ name: "Content-Type", value: "text/html" }]);
-    expect(reply.savedPayloads).deep.eq(["Some html content"]);
+    expect(reply.savedPayloads).deep.eq(["<!DOCTYPE html>Some html content"]);
   });
 
   it("process calls replyNotFound", async () => {
@@ -203,18 +203,5 @@ describe("dev-admin-fastify", function() {
     await mockFastify.hooks.emit("onRequest", request, reply);
     expect(reply.statusCode).eq(404);
     expect(reply.savedPayloads.length).eq(0);
-  });
-
-  it("middleware skip does not load middleware", () => {
-    mockRequire("@xarc/app/config/archetype", {
-      webpack: { devMiddleware: false }
-    });
-
-    const register = require("../../../lib/dev-admin/dev-fastify");
-    register(mockFastify);
-
-    expect(MiddlewareClass.setupCount).eq(0);
-    expect(mockFastify.use.callCount).eq(0);
-    expect(mockFastify.hooks.listenerCount("onRequest")).eq(0);
   });
 });

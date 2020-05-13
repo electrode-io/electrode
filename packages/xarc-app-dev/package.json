@@ -59,7 +59,6 @@
     "core-js": "^3",
     "electrode-hapi-compat": "^1.2.0",
     "electrode-node-resolver": "^2.0.0",
-    "fastify-plugin": "^1.6.0",
     "filter-scan-dir": "^1.0.9",
     "fs-extra": "^0.30.0",
     "identity-obj-proxy": "^3.0.0",

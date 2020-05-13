@@ -1,8 +1,6 @@
 "use strict";
 /* eslint-disable no-console, no-magic-numbers */
 
-const fastifyPlugin = require("fastify-plugin");
-
 const archetype = require("@xarc/app/config/archetype");
 
 const AppDevMiddleware = require("./app-dev-middleware");
@@ -26,6 +24,4 @@ async function register(server) {
   return;
 }
 
-module.exports = fastifyPlugin(register, {
-  name: "@xarc/app-dev"
-});
+module.exports = register;

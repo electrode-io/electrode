@@ -436,13 +436,13 @@ ${listDirectoryHtml(this.listAssetPath, outputPath)}
       const bundle = require.resolve(`${modName}/dist/${dllParts[1]}`);
       return Promise.resolve(cycle.replyFile(bundle));
     } else if (req.url === this.devBaseUrl || req.url === this.devBaseUrlSlash) {
-      res.send(`<html><head><meta charset="utf-8"/></head><body>
+      const html = `<html><head><meta charset="utf-8"/></head><body>
 <h1>Electrode Development Dashboard</h1>
 <h3><a href="${this.cwdBaseUrl}">View current working directory files</a></h3>
 <h3><a href="${this.cwdContextBaseUrl}">View webpack dev memfs files</a></h3>
 <h3><a href="${this.logUrl}">View your app server console logs</a></h3>
-</body></html>`);
-      return Promise.resolve();
+</body></html>`;
+      return Promise.resolve(cycle.replyHtml(html));
     }
 
     return Promise.resolve(this.canContinue);
