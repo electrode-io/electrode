@@ -1,5 +1,6 @@
 "use strict";
 
 const hapiPlugin = require("./hapi-plugin");
+const { fastifyPlugin } = require("./fastify-plugin");
 
-module.exports = { hapiPlugin };
+module.exports = { hapiPlugin, fastifyPlugin };
