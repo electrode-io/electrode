@@ -2,6 +2,10 @@
 
 const Path = require("path");
 const { merge } = require("lodash")
-
 const optionalRequire = require("optional-require")(require);
-module.exports = merge({ options: {} }, optionalRequire(Path.resolve("archetype/config")));
+
+let cachedUserConfig = null
+module.exports = function getUserConfig () {
+  cachedUserConfig = cachedUserConfig || merge({ options: {} }, optionalRequire(Path.resolve("archetype/config")));
+  return cachedUserConfig
+}

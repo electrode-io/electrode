@@ -7,7 +7,7 @@ const Path = require("path");
 const mkdirp = require("mkdirp");
 const _ = require("lodash");
 const INDENT = 2;
-const archetype = require("@xarc/app/config/archetype");
+const archetype = require("@xarc/app/config/archetype")();
 
 module.exports = function(opts) {
   const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;

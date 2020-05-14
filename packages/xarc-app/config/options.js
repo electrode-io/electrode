@@ -5,10 +5,10 @@ const pkg = require("../package.json");
 const optionalRequire = require("optional-require")(require);
 const constants = require("./constants");
 const utils = require("../lib/utils");
-const appPkg = require(Path.resolve("package.json"));
+require("../typedef");
 
 function checkOptArchetypeInAppDep(dependencies, isDev) {
-  const options = Object.keys(dependencies)
+  const options = dependencies
     .filter(x => x.startsWith("electrode-archetype-opt-"))
     .reduce((acc, name) => {
       //
@@ -45,24 +45,34 @@ function checkOptArchetypeInAppDep(dependencies, isDev) {
   return { options };
 }
 
-const userConfigOptions = Object.assign(
-  { reactLib: "react", karma: true, sass: false },
-  optionalRequire(Path.resolve("archetype/config"), { default: {} }).options,
-  //
-  // Check for any optional archetype in application's devDependencies or dependencies
-  //
+const getUserConfigOptions = (packageNames, devPackageNames) =>
+  Object.assign(
+    { reactLib: "react", karma: true, sass: false },
+    optionalRequire(Path.resolve("archetype/config"), { default: {} }).options,
+    //
+    // Check for any optional archetype in application's devDependencies or dependencies
+    //
+    checkOptArchetypeInAppDep(devPackageNames, true).options,
+    checkOptArchetypeInAppDep(packageNames).options
+  );
 
-  checkOptArchetypeInAppDep(appPkg.devDependencies, true).options,
-  checkOptArchetypeInAppDep(appPkg.dependencies).options
-);
+/**
+ * @param {CreateXarcOptions} createXarcOptions - configure default archetype options
+ * @returns {object} options
+ */
+module.exports = function getDefaultArchetypeOptions(createXarcOptions) {
+  const appPkg = optionalRequire(Path.resolve("package.json")) || { dependencies: {}, devDependencies: {}};
+  const packageNames = [...Object.keys(appPkg.dependencies), ...createXarcOptions.electrodePackages];
+  const devPackageNames = [...Object.keys(appPkg.devDependencies), ...createXarcOptions.electrodePackagesDev];
 
-module.exports = {
-  dir: Path.resolve(__dirname, ".."),
-  pkg,
-  options: userConfigOptions,
-  prodDir: constants.PROD_DIR,
-  eTmpDir: constants.ETMP_DIR,
-  prodModulesDir: Path.join(constants.PROD_DIR, "modules"),
-  checkUserBabelRc: utils.checkUserBabelRc,
-  devArchetypeName: "@xarc/app-dev"
+  return {
+    dir: Path.resolve(__dirname, ".."),
+    pkg,
+    options: getUserConfigOptions(packageNames, devPackageNames),
+    prodDir: constants.PROD_DIR,
+    eTmpDir: constants.ETMP_DIR,
+    prodModulesDir: Path.join(constants.PROD_DIR, "modules"),
+    checkUserBabelRc: utils.checkUserBabelRc,
+    devArchetypeName: "@xarc/app-dev"
+  };
 };

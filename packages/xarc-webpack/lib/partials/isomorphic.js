@@ -1,6 +1,6 @@
 "use strict";
 
-const archetype = require("@xarc/app/config/archetype");
+const archetype = require("@xarc/app/config/archetype")();
 const IsomorphicLoaderPlugin = require("isomorphic-loader/lib/webpack-plugin");
 const isomorphicConfig = require("isomorphic-loader/lib/config");
 const Path = require("path");

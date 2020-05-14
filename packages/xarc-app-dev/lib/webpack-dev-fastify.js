@@ -1,7 +1,7 @@
 "use strict";
 /* eslint-disable no-console, no-magic-numbers */
 
-const archetype = require("@xarc/app/config/archetype");
+const archetype = require("@xarc/app/config/archetype")();
 
 const AppDevMiddleware = require("./app-dev-middleware");
 

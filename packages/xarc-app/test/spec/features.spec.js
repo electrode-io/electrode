@@ -12,7 +12,7 @@ const eTmpDir = ".testetmp";
 // https://stackoverflow.com/questions/18052762/remove-directory-which-is-not-empty
 const deleteFolderRecursive = function(path) {
   if (!fs.existsSync(path)) return;
-  fs.readdirSync(path).forEach((file) => {
+  fs.readdirSync(path).forEach(file => {
     const curPath = Path.resolve(path, file);
     if (fs.lstatSync(curPath).isDirectory()) {
       deleteFolderRecursive(curPath);
@@ -63,10 +63,10 @@ describe("features", function() {
     function request(url, options, callback) {
       callback(undefined, undefined, {
         "dist-tags": {
-          "latest": "fakeVersion"
+          latest: "fakeVersion"
         },
-        "versions": {
-          "fakeVersion": contents
+        versions: {
+          fakeVersion: contents
         }
       });
     }
