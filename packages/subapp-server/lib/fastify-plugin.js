@@ -12,7 +12,6 @@ const { getSrcDir, setupRouteRender, searchRoutesFromFile } = require("./setup-h
 
 module.exports = {
   fastifyPlugin: async (fastify, pluginOpts) => {
-    debugger;
     const srcDir = getSrcDir(pluginOpts);
 
     // TODO:
