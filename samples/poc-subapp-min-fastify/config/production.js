@@ -7,10 +7,12 @@
 // by a dedicated CDN server, you might want to turn these plugins off.
 //
 
-const serveStaticFiles = () => {
-  return process.env.STATIC_FILES_OFF !== "true";
-};
-
 module.exports = {
-  plugins: {}
+  plugins: {
+    "subapp-server": {
+      options: {
+        cdn: { enable: true }
+      }
+    }
+  }
 };
