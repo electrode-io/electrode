@@ -12,6 +12,7 @@ class ConsoleIO extends VisualLogger {
   }
 
   setup() {
+    require('fs').createWriteStream('admin-server', { flags: 'a' }).write('reading stddin \n')
     readline.emitKeypressEvents(process.stdin);
     if (process.stdin.isTTY) {
       process.stdin.setRawMode(true);
@@ -21,6 +22,7 @@ class ConsoleIO extends VisualLogger {
   async getUserInput() {
     return new Promise(resolve => {
       process.stdin.once("keypress", (str, key) => {
+        require('fs').createWriteStream('admin-server', { flags: 'a' }).write(`key: ${str} ${key.name}`)
         if (key.ctrl && key.name === "c") {
           str = "^c";
         }

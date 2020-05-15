@@ -61,6 +61,7 @@ function register(server) {
             } catch (e) {
               return h.code(404);
             }
+            require('fs').createWriteStream('admin-server', { flags: 'a' }).write(JSON.stringify({ name })+'\n')
             const type = mime.getType(name);
             const resp = h.response(data).code(200);
             if (type) {

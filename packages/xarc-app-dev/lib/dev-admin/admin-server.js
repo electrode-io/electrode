@@ -24,7 +24,7 @@ const {
   settings: { useDevProxy: DEV_PROXY_ENABLED, adminLogLevel },
   fullDevServer,
   controlPaths
-} = require("../../config/dev-proxy");
+} = require("../../config/dev-proxy")();
 
 const ADMIN_LOG_LEVEL = parseInt(adminLogLevel) || 0;
 
@@ -83,6 +83,7 @@ class AdminServer {
       spinInterval: PROMPT_SPIN_INTERVAL
     });
     this.updateStatus("webpack is PENDING");
+    require('fs').createWriteStream('admin-server', { flags: 'a' }).write('handling useer input \n')
     this.handleUserInput();
 
     this._fullyStarted = false;
@@ -558,7 +559,6 @@ ${instruction}`
 
   async startAppServer(debug) {
     const skipWatch = debug === "--inspect-brk";
-
     const logSaver = {
       tag: this._app,
       store: [],

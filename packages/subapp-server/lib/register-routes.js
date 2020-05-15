@@ -11,6 +11,7 @@ const HttpStatusCodes = require("http-status-codes");
 
 module.exports = function registerRoutes({ routes, topOpts, server }) {
   // register routes
+  debugger
   routes.forEach(routeInfo => {
     const { route } = routeInfo;
 
