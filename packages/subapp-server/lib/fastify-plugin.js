@@ -12,6 +12,7 @@ const { getSrcDir, setupRouteRender, searchRoutesFromFile } = require("./setup-h
 
 module.exports = {
   fastifyPlugin: async (fastify, pluginOpts) => {
+    debugger;
     const srcDir = getSrcDir(pluginOpts);
 
     // TODO:
@@ -20,7 +21,7 @@ module.exports = {
     //   //
     // }
 
-    const { routes, topOpts } = searchRoutesFromFile(srcDir, fastify, pluginOpts);
+    const { routes, topOpts } = searchRoutesFromFile(srcDir, pluginOpts);
 
     const subApps = await subAppUtil.scanSubAppsFromDir(srcDir);
     const subAppsByPath = subAppUtil.getSubAppByPathMap(subApps);
