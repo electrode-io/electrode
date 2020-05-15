@@ -6,13 +6,6 @@ const archetype = require("@xarc/app/config/archetype");
 const AppDevMiddleware = require("./app-dev-middleware");
 
 async function register(server) {
-  if (!archetype.webpack.devMiddleware) {
-    console.error(
-      "dev-fastify plugin was loaded but WEBPACK_DEV_MIDDLEWARE is not true. Skipping."
-    );
-    return;
-  }
-
   const middleware = new AppDevMiddleware({});
 
   middleware.setup();

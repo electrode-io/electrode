@@ -564,7 +564,10 @@ ${instruction}`
       store: [],
       fullLogUrl: this._fullAppLogUrl,
       checkLine: str => {
-        if (!this._fullyStarted && str.includes("server running")) {
+        if (
+          !this._fullyStarted &&
+          (str.includes("server running") || str.includes("Server listening"))
+        ) {
           this._fullyStarted = true;
           // opens menu automatically once after startup
           this._shutdown ||
