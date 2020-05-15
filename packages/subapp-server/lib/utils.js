@@ -112,12 +112,16 @@ function cleanStack(stack) {
   return lines.join("\n");
 }
 
+function makeErrorStackResponse(routeName, err) {
+  const stack = cleanStack(err.stack);
+  console.error(`Route ${routeName} failed:`, stack);
+  return `<html><body><h1>DEV ERROR</h1><pre>${stack}</pre></body></html>`;
+}
+
 function errorResponse({ routeName, h, err }) {
   if (process.env.NODE_ENV !== "production") {
-    const stack = cleanStack(err.stack);
-    console.error(`Route ${routeName} failed:`, stack);
     return h
-      .response(`<html><body><h1>DEV ERROR</h1><pre>${stack}</pre></body></html>`)
+      .response(makeErrorStackResponse(routeName, err))
       .type("text/html; charset=UTF-8")
       .code(HttpStatusCodes.INTERNAL_SERVER_ERROR);
   } else {
@@ -131,5 +135,6 @@ module.exports = {
   getCriticalCSS,
   getDefaultRouteOptions,
   updateFullTemplate,
-  errorResponse
+  errorResponse,
+  makeErrorStackResponse
 };
