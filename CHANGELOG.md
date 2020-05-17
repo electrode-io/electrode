@@ -1,3 +1,28 @@
+# 5/17/2020
+
+- fix: use fastify-server for serving dev-server
+- update to mime version 2
+- [minor]: add fastify support to subapp-server
+
+## Packages
+
+- `@xarc/app@8.1.0` `(8.0.21 => 8.1.0)`
+- `@xarc/app-dev@8.1.0` `(8.0.21 => 8.1.0)`
+- `subapp-server@1.2.0` `(1.1.18 => 1.2.0)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix: use fastify-server for serving dev-server ([#1640](https://github.com/electrode-io/electrode/pull/1640)) [commit](http://github.com/electrode-io/electrode/commit/fcceeb0c6a129fb615c5e17ca17153dc1f7b9864)
+  - update to mime version 2 ([#1639](https://github.com/electrode-io/electrode/pull/1639)) [commit](http://github.com/electrode-io/electrode/commit/4a57109b4754ea420e693c347688518230cd9676)
+  - [minor]: add fastify support to subapp-server ([#1642](https://github.com/electrode-io/electrode/pull/1642)) [commit](http://github.com/electrode-io/electrode/commit/c8d704530427b5bd623aed6fcc173e28c4092f77)
+
+- `packages/subapp-server`
+
+  - fix: consistent error response for routes ([#1638](https://github.com/electrode-io/electrode/pull/1638)) [commit](http://github.com/electrode-io/electrode/commit/874513becccc945934eb17113008d5a3c0995aba)
+  - [minor]: add fastify support to subapp-server ([#1642](https://github.com/electrode-io/electrode/pull/1642)) [commit](http://github.com/electrode-io/electrode/commit/c8d704530427b5bd623aed6fcc173e28c4092f77)
+
 # 5/7/2020
 
 - dep: isomorphic-loader 3.1.0
