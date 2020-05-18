@@ -8,12 +8,7 @@ const Fs = require("fs");
 const Path = require("path");
 const Boom = require("@hapi/boom");
 const optionalRequire = require("optional-require")(require);
-const {
-  settings = {},
-  devServer = {},
-  fullDevServer = {},
-  httpDevServer = {}
-} = optionalRequire("@xarc/app-dev/config/dev-proxy", { default: {} });
+const getDevProxy = optionalRequire("@xarc/app-dev/config/dev-proxy");
 const HttpStatusCodes = require("http-status-codes");
 
 /**
@@ -67,6 +62,12 @@ const updateFullTemplate = (baseDir, options) => {
 };
 
 function getDefaultRouteOptions() {
+  const {
+    settings = {},
+    devServer = {},
+    fullDevServer = {},
+    httpDevServer = {}
+  } = getDevProxy ? getDevProxy() : {};
   const { webpackDev, useDevProxy } = settings;
   // temporary location to write build artifacts in dev mode
   const buildArtifacts = ".etmp";

@@ -25,10 +25,10 @@ const deleteFolderRecursive = function(path) {
 
 describe("features", function() {
   before(() => {
-    mockRequire("../../config/archetype", {
+    mockRequire("../../config/archetype", () => ({
       devRequire: require,
       eTmpDir
-    });
+    }));
   });
 
   beforeEach(() => {
@@ -43,11 +43,11 @@ describe("features", function() {
   });
 
   function mockArchetypeOptions(options) {
-    mockRequire("../../config/archetype", {
+    mockRequire("../../config/archetype", () => ({
       devRequire: require,
       eTmpDir,
       options
-    });
+    }));
   }
 
   function mockApplicationPackageJson(contents) {
