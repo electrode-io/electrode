@@ -98,40 +98,39 @@ async function handleFavIcon(server, options) {
   });
 }
 
-async function setupRoutesFromFile(srcDir, server, pluginOpts) {
-  // there should be a src/routes.js file with routes spec
-  const { loadRoutesFrom } = pluginOpts;
+function setupRouteRender({ subAppsByPath, srcDir, routeOptions }) {
+  updateFullTemplate(routeOptions.dir, routeOptions);
+  const chunkSelector = resolveChunkSelector(routeOptions);
+  routeOptions.__internals = { chunkSelector };
 
-  const routesFile = [
-    loadRoutesFrom && Path.resolve(srcDir, loadRoutesFrom),
-    Path.resolve(srcDir, "routes")
-  ].find(x => x && optionalRequire(x));
+  // load subapps for the route
+  if (routeOptions.subApps) {
+    routeOptions.__internals.subApps = [].concat(routeOptions.subApps).map(x => {
+      let options = {};
+      if (Array.isArray(x)) {
+        options = x[1];
+        x = x[0];
+      }
+      // absolute: use as path
+      // else: assume dir under srcDir
+      // TBD: handle it being a module
+      return {
+        subapp: subAppsByPath[Path.isAbsolute(x) ? x : Path.resolve(srcDir, x)],
+        options
+      };
+    });
+  }
 
-  const spec = routesFile ? require(routesFile) : {};
+  // const useStream = routeOptions.useStream !== false;
 
+  const routeHandler = ReactWebapp.makeRouteHandler(routeOptions);
+
+  return routeHandler;
+}
+
+async function registerHapiRoutes({ server, srcDir, routes, topOpts }) {
   const subApps = await subAppUtil.scanSubAppsFromDir(srcDir);
   const subAppsByPath = subAppUtil.getSubAppByPathMap(subApps);
-
-  const topOpts = _.merge(
-    getDefaultRouteOptions(),
-    { dir: Path.resolve(srcDir) },
-    _.omit(spec, ["routes", "default"]),
-    pluginOpts
-  );
-
-  topOpts.routes = _.merge({}, spec.routes || spec.default, topOpts.routes);
-
-  await handleFavIcon(server, topOpts);
-
-  // routes can either be in default (es6) or routes
-  const routes = topOpts.routes;
-
-  // invoke setup callback
-  for (const path in routes) {
-    if (routes[path].setup) {
-      await routes[path].setup(server);
-    }
-  }
 
   // setup for initialize callback
   server.ext("onPreAuth", async (request, h) => {
@@ -143,47 +142,23 @@ async function setupRoutesFromFile(srcDir, server, pluginOpts) {
     return h.continue;
   });
 
-  // in case needed, add full protocol/host/port to dev bundle base URL
-  topOpts.devBundleBase = subAppUtil.formUrl({
-    ..._.pick(topOpts.devServer, ["protocol", "host", "port"]),
-    path: topOpts.devBundleBase
-  });
-
   // register routes
 
   for (const path in routes) {
     const route = routes[path];
-
     const routeOptions = Object.assign({}, topOpts, route);
-    updateFullTemplate(routeOptions.dir, routeOptions);
-    const chunkSelector = resolveChunkSelector(routeOptions);
-    routeOptions.__internals = { chunkSelector };
 
-    // load subapps for the route
-    if (routeOptions.subApps) {
-      routeOptions.__internals.subApps = [].concat(routeOptions.subApps).map(x => {
-        let options = {};
-        if (Array.isArray(x)) {
-          options = x[1];
-          x = x[0];
-        }
-        // absolute: use as path
-        // else: assume dir under srcDir
-        // TBD: handle it being a module
-        return {
-          subapp: subAppsByPath[Path.isAbsolute(x) ? x : Path.resolve(srcDir, x)],
-          options
-        };
-      });
-    }
-
+    const routeRenderer = setupRouteRender({ subAppsByPath, srcDir, routeOptions });
     const useStream = routeOptions.useStream !== false;
 
-    const routeHandler = ReactWebapp.makeRouteHandler(routeOptions);
     const handler = async (request, h) => {
       try {
-        const context = await routeHandler({
-          content: { html: "", status: 200, useStream },
+        const context = await routeRenderer({
+          content: {
+            html: "",
+            status: 200,
+            useStream
+          },
           mode: "",
           request
         });
@@ -205,7 +180,12 @@ async function setupRoutesFromFile(srcDir, server, pluginOpts) {
           return h.response(data).code(status);
         }
       } catch (err) {
-        return errorResponse({ routeName: path, request, h, err });
+        return errorResponse({
+          routeName: path,
+          request,
+          h,
+          err
+        });
       }
     };
 
@@ -219,10 +199,68 @@ async function setupRoutesFromFile(srcDir, server, pluginOpts) {
 
     paths.forEach(pathObj => {
       _.each(pathObj, (method, xpath) => {
-        server.route(Object.assign({}, route.settings, { path: xpath, method, handler }));
+        server.route(
+          Object.assign({}, route.settings, {
+            path: xpath,
+            method,
+            handler
+          })
+        );
       });
     });
   }
+}
+
+function searchRoutesFromFile(srcDir, pluginOpts) {
+  // there should be a src/routes.js file with routes spec
+  const { loadRoutesFrom } = pluginOpts;
+
+  const routesFile = [
+    loadRoutesFrom && Path.resolve(srcDir, loadRoutesFrom),
+    Path.resolve(srcDir, "routes")
+  ].find(x => x && optionalRequire(x));
+
+  const spec = routesFile ? require(routesFile) : {};
+
+  const topOpts = _.merge(
+    getDefaultRouteOptions(),
+    { dir: Path.resolve(srcDir) },
+    _.omit(spec, ["routes", "default"]),
+    pluginOpts
+  );
+
+  topOpts.routes = _.merge({}, spec.routes || spec.default, topOpts.routes);
+
+  // routes can either be in default (es6) or routes
+  const routes = topOpts.routes;
+
+  // in case needed, add full protocol/host/port to dev bundle base URL
+  topOpts.devBundleBase = subAppUtil.formUrl({
+    ..._.pick(topOpts.devServer, ["protocol", "host", "port"]),
+    path: topOpts.devBundleBase
+  });
+
+  return { routes, topOpts };
+}
+
+async function setupRoutesFromFile(srcDir, server, pluginOpts) {
+  const { routes, topOpts } = searchRoutesFromFile(srcDir, server, pluginOpts);
+
+  await handleFavIcon(server, topOpts);
+
+  // invoke setup callback
+  for (const path in routes) {
+    if (routes[path].setup) {
+      await routes[path].setup(server);
+    }
+  }
+
+  await registerHapiRoutes({
+    server,
+    routes,
+    topOpts,
+    srcDir
+  });
 }
 
 async function setupRoutesFromDir(server, pluginOpts, fromDir) {
@@ -264,11 +302,16 @@ async function setupRoutesFromDir(server, pluginOpts, fromDir) {
   registerRoutes({ routes, topOpts, server });
 }
 
-async function setupSubAppHapiRoutes(server, pluginOpts) {
-  const srcDir =
+function getSrcDir(pluginOpts) {
+  return (
     pluginOpts.srcDir ||
     process.env.APP_SRC_DIR ||
-    (process.env.NODE_ENV === "production" ? "lib" : "src");
+    (process.env.NODE_ENV === "production" ? "lib" : "src")
+  );
+}
+
+async function setupSubAppHapiRoutes(server, pluginOpts) {
+  const srcDir = getSrcDir(pluginOpts);
 
   const fromDir = await searchRoutesDir(srcDir, pluginOpts);
   if (fromDir) {
@@ -280,5 +323,10 @@ async function setupSubAppHapiRoutes(server, pluginOpts) {
 }
 
 module.exports = {
-  setupSubAppHapiRoutes
+  getSrcDir,
+  searchRoutesDir,
+  searchRoutesFromFile,
+  setupRoutesFromFile,
+  setupSubAppHapiRoutes,
+  setupRouteRender
 };
