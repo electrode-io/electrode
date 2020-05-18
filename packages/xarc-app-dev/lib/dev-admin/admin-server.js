@@ -83,7 +83,6 @@ class AdminServer {
       spinInterval: PROMPT_SPIN_INTERVAL
     });
     this.updateStatus("webpack is PENDING");
-    require('fs').createWriteStream('admin-server', { flags: 'a' }).write('handling useer input \n')
     this.handleUserInput();
 
     this._fullyStarted = false;
