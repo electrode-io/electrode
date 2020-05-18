@@ -4,21 +4,33 @@
   "command.publish.config": {
     "ignore": ["*.md"]
   },
+  "commands": {
+    "bootstrap": {
+      "ignore": ["ignite-core", "electrode-ignite", "generator-electrode"]
+    }
+  },
   "fynpo": {
-    "ignore": ["electrode-webpack-reporter"],
     "publishConfig": {
       "tags": {
-        "beta": {
+        "beta7": {
           "enabled": false,
           "packages": {
             "electrode-archetype-react-app": true,
             "electrode-archetype-react-app-dev": true,
             "electrode-archetype-react-component": true,
             "electrode-archetype-react-component-dev": true,
-            "electrode-ignite": true,
-            "generator-electrode": true
+            "generator-electrode": true,
+            "@xarc/create-app": true
           },
           "addToVersion": true
+        },
+        "xarc8": {
+          "enabled": false,
+          "packages": {
+            "@xarc/app": true,
+            "@xarc/app-dev": true,
+            "@xarc/create-app": true
+          }
         }
       }
     }
