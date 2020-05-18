@@ -10,7 +10,13 @@ const configDir = Path.join(devDir, 'config');
 const _ = require("lodash");
 const xenvConfig = require("xenv-config");
 
+let cachedArchetype = null;
 module.exports = function getDevArchetype() {
+  if (cachedArchetype) {
+    cachedArchetype._fromCache = true;
+    // maintained for backwards compatibility
+    return cachedArchetype;
+  }
   const userConfig = require("./user-config")();
   const webpack = require("./env-webpack")();
   const babel = require("./env-babel")();
@@ -59,5 +65,6 @@ module.exports = function getDevArchetype() {
     Object.keys(nextArchetype.babel.envTargets)
       .sort()
       .join(",") !== "default,node";
-  return nextArchetype
+  cachedArchetype = nextArchetype
+  return cachedArchetype
 }

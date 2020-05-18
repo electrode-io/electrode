@@ -2,11 +2,19 @@
 const { getXarcOptions } = require('../lib/utils')
 require("../typedef");
 
+let cachedArchetype = null;
 /**
+ * Access the archetype singleton. Creates the archetype on first call, otherwise
+ * returns the cached version.
  * @param {CreateXarcOptions} [createXarcOptions] - configure default archetype options
  * @returns {object} options
  */
 module.exports = function getArchetype(createXarcOptions) {
+  if (cachedArchetype) {
+    cachedArchetype._fromCache = true;
+    // maintained for backwards compatibility
+    return cachedArchetype;
+  }
   const xarcOptions = getXarcOptions(createXarcOptions);
   const getOptions = require("./options");
   const loadDev = require("./load-dev");
@@ -30,5 +38,6 @@ module.exports = function getArchetype(createXarcOptions) {
     }
   });
 
-  return archetypeConfig;
+  cachedArchetype = archetypeConfig;
+  return cachedArchetype;
 };
