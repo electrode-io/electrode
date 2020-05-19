@@ -1,3 +1,38 @@
+# 5/19/2020
+
+- fix: minor dev-admin and fastify plugin fix
+- fix: subapp-server hapi plugin loading options
+- fix: use loadjs to support CSS bundles
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.1.1` `(8.1.0 => 8.1.1)`
+- `@xarc/app-dev@8.1.1` `(8.1.0 => 8.1.1)`
+- `subapp-server@1.2.1` `(1.2.0 => 1.2.1)`
+- `subapp-web@1.0.27` `(1.0.26 => 1.0.27)`
+
+### Lerna Updated
+
+- `subapp-pbundle@0.0.21` `(0.0.20 => 0.0.21)`
+- `subapp-react@0.0.18` `(0.0.17 => 0.0.18)`
+- `subapp-redux@1.0.27` `(1.0.26 => 1.0.27)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix: minor dev-admin and fastify plugin fix ([#1644](https://github.com/electrode-io/electrode/pull/1644)) [commit](http://github.com/electrode-io/electrode/commit/100c6b12c3ca79049840bd7ebe812f1384f6a2eb)
+
+- `packages/subapp-server`
+
+  - fix: subapp-server hapi plugin loading options ([#1648](https://github.com/electrode-io/electrode/pull/1648)) [commit](http://github.com/electrode-io/electrode/commit/ccbff68c838f99711cfb712d98fadd86d3b62509)
+
+- `packages/subapp-web`
+
+  - fix: use loadjs to support CSS bundles ([#1647](https://github.com/electrode-io/electrode/pull/1647)) [commit](http://github.com/electrode-io/electrode/commit/d1186b0e3f8f8e541c7107c7a558259a084c0887)
+
 # 5/17/2020
 
 - fix: use fastify-server for serving dev-server
