@@ -10,7 +10,7 @@ const optRequire = getOptArchetypeRequire("electrode-archetype-opt-jest");
 const jestPkg = optRequire("jest/package.json");
 const jestMajVersion = parseInt(jestPkg.version.split(".")[0], 10);
 
-const archetype = require("@xarc/app/config/archetype");
+const archetype = require("@xarc/app/config/archetype")();
 
 const { enableTypeScript } = archetype.babel;
 

@@ -2,7 +2,7 @@
 
 const optionalRequire = require("optional-require")(require);
 const isomorphicExtendRequire = require("isomorphic-loader/lib/extend-require");
-const archetype = require("../config/archetype");
+const archetype = require("../config/archetype")();
 const AppMode = archetype.AppMode;
 const Path = require("path");
 const logger = require("../lib/logger");
@@ -36,7 +36,7 @@ const support = {
     }).catch(err => {
       isomorphicExtendRequire._instance.interceptLoad();
     });
-  },
+  }
 };
 
 if (!AppMode.hasEnv()) {
