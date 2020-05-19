@@ -76,9 +76,9 @@ describe("dev-admin-fastify", function() {
     MiddlewareClass.processStub = sandbox.stub();
 
     mockRequire("../../../lib/dev-admin/middleware", MiddlewareClass);
-    mockRequire("@xarc/app/config/archetype", {
+    mockRequire("@xarc/app/config/archetype", () => ({
       webpack: { devMiddleware: true }
-    });
+    }));
   });
 
   afterEach(() => {

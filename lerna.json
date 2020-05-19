@@ -12,7 +12,7 @@
   "fynpo": {
     "publishConfig": {
       "tags": {
-        "beta7": {
+        "alpha-archfn": {
           "enabled": false,
           "packages": {
             "electrode-archetype-react-app": true,

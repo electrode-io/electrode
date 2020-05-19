@@ -22,6 +22,7 @@
     "support",
     "arch-clap.js",
     "require.js",
+    "typedef.js",
     "supports.js"
   ],
   "author": "Electrode (http://www.electrode.io/)",

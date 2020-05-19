@@ -9,9 +9,9 @@ describe("dev-fastify", function() {
   };
 
   before(() => {
-    mockRequire("@xarc/app/config/archetype", {
+    mockRequire("@xarc/app/config/archetype", () => ({
       webpack: webpackConfig
-    });
+    }));
   });
 
   beforeEach(() => {
