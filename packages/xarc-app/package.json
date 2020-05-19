@@ -1,6 +1,6 @@
 {
   "name": "@xarc/app",
-  "version": "8.1.0",
+  "version": "8.1.1-beta.0",
   "description": "Electrode X application runtime support",
   "main": "arch-clap.js",
   "homepage": "http://www.electrode.io",
@@ -72,7 +72,8 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-    "access": "public"
+    "access": "public",
+    "tag": "beta"
   },
   "prettier": {
     "printWidth": 100,
