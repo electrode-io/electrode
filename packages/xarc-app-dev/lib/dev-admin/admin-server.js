@@ -156,11 +156,10 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
   handleServerExit(name) {
     const info = this.getServer(name);
     if (info._child) {
+      const { pid } = info._child;
       info._child.once("exit", (code, signal) => {
         const signalText = signal ? `- signal ${signal}` : "";
-        this._io.show(
-          ck`<orange>${name} (PID: ${info._child.pid}) exited code ${code} ${signalText}</orange>`
-        );
+        this._io.show(ck`<orange>${name} (PID: ${pid}) exited code ${code} ${signalText}</orange>`);
         info._child = undefined;
         info._starting = false;
         this._webpackDevRelay.setAppServer(null);
