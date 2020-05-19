@@ -316,15 +316,14 @@
           const chunkIds = ba.entryPoints[name];
           return chunkIds.reduce((a2, id) => {
             // chunk could have multiple assets
-            return [].concat(ba.jsChunksById[id]).reduce((a3, asset) => {
-              return asset
-                ? a3.concat({
-                    name,
-                    id,
-                    asset
-                  })
-                : a3;
-            }, a2);
+            const assets = ba.jsChunksById[id];
+            return assets
+              ? a2.concat({
+                  name,
+                  id,
+                  assets: [].concat(assets)
+                })
+              : a2;
           }, a);
         }, [])
         .filter(({ id }) => {
@@ -337,22 +336,24 @@
 
           return false;
         });
-      assetsToLoad.forEach(({ name, id, asset }) => {
-        window._lload(`${ba.basePath}${asset}`, {
-          callback: err => {
-            if (err) {
-              console.error(`load asset ${name} (id: ${id}) failed`, err);
-            } else {
-              console.log(`loaded asset for ${name} (id: ${id}) - ${asset}`);
-              runtimeInfo.bundles[id]++;
-            }
-
-            loaded.push(asset);
-
-            if (loaded.length === assetsToLoad.length) {
-              console.log("all assets loaded", assetsToLoad);
-              done();
-            }
+      assetsToLoad.forEach(({ name, id, assets }) => {
+        const new_assets = assets.map(asset => `${ba.basePath}${asset}`);
+        const afterLoad = () => {
+          loaded.push(assets);
+          if (loaded.length === assetsToLoad.length) {
+            console.log("all assets loaded", assetsToLoad);
+            done();
+          }
+        };
+        loadjs(new_assets, id, {
+          success: () => {
+            console.log(`loaded asset for ${name} (id: ${id}) - ${assets}`);
+            runtimeInfo.bundles[id]++;
+            afterLoad();
+          },
+          error: () => {
+            console.error(`load asset ${name} (id: ${id}) failed`, err);
+            afterLoad();
           }
         });
       });

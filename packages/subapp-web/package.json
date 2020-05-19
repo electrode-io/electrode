@@ -28,7 +28,7 @@
     "@babel/runtime": "^7.8.3",
     "history": "^4.9.0",
     "jsesc": "^2.5.2",
-    "little-loader": "^0.2.0",
+    "loadjs": "^4.2.0",
     "lodash": "^4.17.15",
     "optional-require": "^1.0.0",
     "request": "^2.88.0",
