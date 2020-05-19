@@ -1,3 +1,33 @@
+# 5/19/2020
+
+- feat: archetypes as functions
+
+## Packages
+
+- `@xarc/app@8.1.1-beta.0` `(8.1.0 => 8.1.1-beta.0)`
+- `@xarc/app-dev@8.1.1-beta.0` `(8.1.0 => 8.1.1-beta.0)`
+- `@xarc/webpack@8.0.6-beta.0` `(8.0.5 => 8.0.6-beta.0)`
+- `subapp-server@1.2.1-beta.0` `(1.2.0 => 1.2.1-beta.0)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - feat: archetypes as functions ([#1646](https://github.com/electrode-io/electrode/pull/1646)) [commit](http://github.com/electrode-io/electrode/commit/3d847eec1ebfd5ef7c7d88b2bdc5c0d0889a8f82)
+  - fix: minor dev-admin and fastify plugin fix ([#1644](https://github.com/electrode-io/electrode/pull/1644)) [commit](http://github.com/electrode-io/electrode/commit/100c6b12c3ca79049840bd7ebe812f1384f6a2eb)
+
+- `packages/xarc-webpack`
+
+  - feat: archetypes as functions ([#1646](https://github.com/electrode-io/electrode/pull/1646)) [commit](http://github.com/electrode-io/electrode/commit/3d847eec1ebfd5ef7c7d88b2bdc5c0d0889a8f82)
+
+- `packages/subapp-server`
+
+  - feat: archetypes as functions ([#1646](https://github.com/electrode-io/electrode/pull/1646)) [commit](http://github.com/electrode-io/electrode/commit/3d847eec1ebfd5ef7c7d88b2bdc5c0d0889a8f82)
+
+- `MISC`
+
+  - add beta tag to lerna config [commit](http://github.com/electrode-io/electrode/commit/07742ed1843956a6ded2edcb0bca9bd1e7427cf4)
+
 # 5/17/2020
 
 - fix: use fastify-server for serving dev-server
