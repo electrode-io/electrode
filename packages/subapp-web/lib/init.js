@@ -37,7 +37,7 @@ module.exports = function setup(setupContext) {
   const webSubAppJs = `<script id="bundleAssets" type="application/json">
 ${JSON.stringify(bundleAssets)}
 </script>
-<script>/*LoadJS*/${loadJs}/*LoadJS*/
+<script>/*LJ*/${loadJs}/*LJ*/
 ${clientJs}
 ${cdnJs}
 </script>

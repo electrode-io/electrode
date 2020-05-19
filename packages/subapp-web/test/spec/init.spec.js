@@ -27,6 +27,6 @@ describe("init", function() {
     const initJs = initToken.process(context);
     expect(context.user.assets).to.be.ok;
     expect(initJs).contains(`<script id="bundleAssets" type="application/json">`);
-    expect(initJs).contains(`<script>/*LoadJS*/`);
+    expect(initJs).contains(`<script>/*LJ*/`);
   });
 });
