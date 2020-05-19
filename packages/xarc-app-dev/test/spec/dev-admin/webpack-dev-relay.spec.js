@@ -2,6 +2,7 @@
 
 const { EventEmitter } = require("events");
 const WebpackDevRelay = require("../../../lib/dev-admin/webpack-dev-relay");
+const isomorphicConfig = require("isomorphic-loader/lib/config");
 const { asyncVerify } = require("run-verify");
 const _ = require("lodash");
 
@@ -47,7 +48,7 @@ describe("webpack-dev-relay", function() {
     wds.emit("message", { name: "webpack-report", valid: true, id: 1 });
     wds.emit("message", { name: "webpack-report", valid: true, id: 2 });
     wds.emit("message", { name: "webpack-report", valid: true, id: 3 });
-    wds.emit("message", { name: "isomorphic-loader-config", valid: true });
+    wds.emit("message", { name: isomorphicConfig.configName, valid: true });
     wds.emit("message", { name: "webpack-stats", valid: true });
     const app = new EventEmitter();
     app.send = data => app.emit("message", data);
@@ -62,7 +63,7 @@ describe("webpack-dev-relay", function() {
       },
       r => {
         const s = _.sortBy(r, "name");
-        expect(s[0]).to.include({ name: "isomorphic-loader-config", valid: true });
+        expect(s[0]).to.include({ name: isomorphicConfig.configName, valid: true });
         expect(s[1]).to.include({ name: "webpack-report", valid: true, id: 3 });
         expect(s[2]).to.include({ name: "webpack-stats", valid: true });
       }
@@ -81,7 +82,7 @@ describe("webpack-dev-relay", function() {
     wds.emit("message", { name: "webpack-report", valid: true, id: 1 });
     wds.emit("message", { name: "webpack-report", valid: true, id: 2 });
     wds.emit("message", { name: "webpack-report", valid: true, id: 3 });
-    wds.emit("message", { name: "isomorphic-loader-config", valid: true });
+    wds.emit("message", { name: isomorphicConfig.configName, valid: true });
     wds.emit("message", { name: "webpack-stats", valid: true });
     const recv = [];
     return asyncVerify(
@@ -93,7 +94,7 @@ describe("webpack-dev-relay", function() {
       },
       r => {
         const s = _.sortBy(r, "name");
-        expect(s[0]).to.include({ name: "isomorphic-loader-config", valid: true });
+        expect(s[0]).to.include({ name: isomorphicConfig.configName, valid: true });
         expect(s[1]).to.include({ name: "webpack-report", valid: true, id: 3 });
         expect(s[2]).to.include({ name: "webpack-stats", valid: true });
       }

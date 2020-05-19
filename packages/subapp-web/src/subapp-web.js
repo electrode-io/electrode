@@ -210,6 +210,12 @@
                 options._genId = options.name + "_inst_id_" + runtimeInfo.instId++;
               }
 
+              //
+              // check and retrieve initialState.
+              //
+              if (options.getInitialState) {
+                options.initialState = options.getInitialState();
+              }
               if (options.group) {
                 // start subapps as a group
                 const grpInfo = runtimeInfo.groups[options.group];

@@ -13,6 +13,7 @@ const { getWebpackStartConfig } = require("@xarc/webpack/lib/util/custom-check")
 const { getLogs, getLogEventAsHtml } = require("./log-reader");
 const { fullDevServer, controlPaths } = require("../../config/dev-proxy");
 const { formUrl } = require("../utils");
+const isomorphicLoaderConfig = require("isomorphic-loader/lib/config");
 
 hotHelpers.pathMatch = (url, path) => {
   try {
@@ -167,10 +168,9 @@ class Middleware {
     this.logEventsUrl = urlJoin(this.devBaseUrl, "/log-events");
     this.dllDevUrl = urlJoin(this.devBaseUrl, "/dll");
 
-    const ISO_LOADER_CONFIG = ".isomorphic-loader-config.json";
     const LOADABLE_STATS = "loadable-stats.json";
-    const isoLockfile = Path.resolve(`${ISO_LOADER_CONFIG}.lock`);
-    const isoConfigFile = Path.resolve(ISO_LOADER_CONFIG);
+    const isoLockfile = Path.resolve(isomorphicLoaderConfig.lockFile);
+    const isoConfigFile = Path.resolve(isomorphicLoaderConfig.configFile);
 
     // Must wait for isomorphic-loader to complete saving its config
     // file before continuing and do hot reload in the app server.
@@ -437,13 +437,13 @@ ${listDirectoryHtml(this.listAssetPath, outputPath)}
       const bundle = require.resolve(`${modName}/dist/${dllParts[1]}`);
       return Promise.resolve(cycle.replyFile(bundle));
     } else if (req.url === this.devBaseUrl || req.url === this.devBaseUrlSlash) {
-      res.send(`<html><head><meta charset="utf-8"/></head><body>
+      const html = `<html><head><meta charset="utf-8"/></head><body>
 <h1>Electrode Development Dashboard</h1>
 <h3><a href="${this.cwdBaseUrl}">View current working directory files</a></h3>
 <h3><a href="${this.cwdContextBaseUrl}">View webpack dev memfs files</a></h3>
 <h3><a href="${this.logUrl}">View your app server console logs</a></h3>
-</body></html>`);
-      return Promise.resolve();
+</body></html>`;
+      return Promise.resolve(cycle.replyHtml(html));
     }
 
     return Promise.resolve(this.canContinue);

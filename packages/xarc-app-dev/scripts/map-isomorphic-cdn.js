@@ -5,6 +5,7 @@
 const logger = require("@xarc/app/lib/logger");
 const fs = require("fs");
 const Path = require("path");
+const isomorphicConfig = require("isomorphic-loader/lib/config");
 const isMain = require.main === module;
 
 function exit(code) {
@@ -13,7 +14,7 @@ function exit(code) {
 
 function mapIsomorphicCdn(appDir) {
   appDir = appDir || process.cwd();
-  const isoConfigFile = Path.join(appDir, ".isomorphic-loader-config.json");
+  const isoConfigFile = Path.join(appDir, isoConfig.prodConfigFile);
   const cdnAssetsFile = Path.join(appDir, "config/assets.json");
   const isoConfig = require(isoConfigFile);
   const cdnAssets = require(cdnAssetsFile);

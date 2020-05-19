@@ -2,9 +2,9 @@
 
 /* eslint-disable no-magic-numbers */
 
-const makeWinstonLogger = winston => {
+const makeWinstonLogger = (winston, handlers = true) => {
   return new winston.Logger({
-    exceptionHandlers: [
+    exceptionHandlers: handlers && [
       new winston.transports.Console({
         colorize: true,
         prettyPrint: true
