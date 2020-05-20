@@ -7,6 +7,7 @@ const Path = require("path");
 const assert = require("assert");
 const requireAt = require("require-at");
 const archetype = require("./config/archetype");
+const { updateEnv } = require("xclap");
 const { displayFeatures } = require("./lib/features");
 const optionalRequire = require("optional-require")(require);
 // make sure that -dev app archetype is also installed.
@@ -773,9 +774,11 @@ Individual .babelrc files were generated for you in src/client and src/server
 
     "mock-cloud": {
       desc: `Run app locally like it's deployed to cloud with CDN mock and HTTPS proxy.
-      You must run clap build first and set env vars like HOST, PORT, NODE_ENV=production yourself.
-      options: [all options will be passed to node when starting your app server]`,
+      - You must run clap build first and set env vars like HOST, PORT yourself.
+      - NODE_ENV is set to 'production' if it's not set.
+      - options: [all options will be passed to node when starting your app server]`,
       task(context) {
+        updateEnv({ NODE_ENV: "production" }, { override: false });
         const mockTask = xclap.concurrent([
           "dev-proxy --mock-cdn",
           xclap.serial(
