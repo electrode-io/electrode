@@ -76,10 +76,13 @@ const utils = {
       .map(id => {
         let bundleName;
         const js = assets.chunksById.js[id];
+        const hash = assets.chunks[id].hash;
+        const jsName = `${hash}.${js}`;
+
         // Only use IDs that has bundle with name that starts with entry's name
         if (Array.isArray(js)) {
-          bundleName = js.find(matchEntry);
-        } else if (matchEntry(js)) {
+          bundleName = jsName.find(matchEntry);
+        } else if (matchEntry(jsName)) {
           bundleName = js;
         }
         return bundleName && assets.js.find(x => x.name === bundleName);
