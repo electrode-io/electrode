@@ -35,6 +35,8 @@ module.exports = function setup(setupContext) {
   };
 
   const webSubAppJs = `<script id="bundleAssets" type="application/json">
+  ${cdnJsBundles && cdnJsBundles.runtime && Fs.readFileSync('dist'+cdnJsBundles.runtime)  }
+
 ${JSON.stringify(bundleAssets)}
 </script>
 <script>/*LJ*/${loadJs}/*LJ*/
