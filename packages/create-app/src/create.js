@@ -3,23 +3,9 @@ const Fs = require("opfs");
 const Path = require("path");
 const shcmd = require("shcmd");
 const sortDeps = require("./sort-obj-keys");
-const prompts = require("prompts");
-const pkg = require("../template/_package")();
-
-async function checkDir() {
-  const existDirFiles = await Fs.readdir(process.cwd());
-  if (existDirFiles.length > 0) {
-    const response = await prompts({
-      type: "confirm",
-      name: "overwrite",
-      message: "Your directory is not empty, write to it?"
-    });
-
-    return response.overwrite;
-  }
-
-  return true;
-}
+const checkDir = require("./check-dir");
+const makePkg = require("../template/_package");
+const _ = require("lodash");
 
 async function create() {
   const dirOk = await checkDir();
@@ -29,6 +15,8 @@ async function create() {
   }
 
   const srcDir = Path.join(__dirname, "../template");
+
+  const pkg = makePkg({}, _.merge);
 
   sortDeps(pkg);
 
