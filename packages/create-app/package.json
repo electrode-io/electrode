@@ -36,11 +36,17 @@
     "babel-loader": "^8.0.6",
     "lodash": "^4.17.15",
     "opfs": "^1.1.1",
-    "prompts": "^2.2.1",
+    "prompts": "^2.3.2",
     "shcmd": "^0.7.9",
+    "webpack": "^4.41.0",
     "webpack-bundle-analyzer": "^3.5.2",
     "webpack-cli": "^3.3.9",
-    "webpack": "^4.41.0",
-    "xclap": "^0.2.37"
-  }
+    "xclap": "^0.2.51"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "arrowParens": "avoid",
+    "trailingComma": "none"
+  },
+  "dependencies": {}
 }
