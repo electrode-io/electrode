@@ -3,19 +3,22 @@
 const { fastifyPlugin } = require("../../lib/fastify-plugin");
 const Path = require("path");
 const { runFinally, asyncVerify } = require("run-verify");
-const fastify = require("fastify");
 
 describe("fastify-plugin", function () {
-  it("loads server from file system", () => {
-    let server;
+  it("loads server from file system", async () => {
+    const server = await require("@xarc/fastify-server")({
+      deferStart: true,
+      connection: { port: 3004 }
+    });
+
     const opts = {
       srcDir: Path.join(__dirname, "../data/fastify-plugin-test"),
       loadRoutesFrom: "routes.js",
       stats: Path.join(__dirname, "../data/stats.json") // "dist/server/stats.json"
     };
     return asyncVerify(
-      () => (server = fastify()),
       () => fastifyPlugin(server, opts),
+      () => server.start(),
       () => {
         server
           .inject({
