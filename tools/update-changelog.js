@@ -58,9 +58,6 @@ const removeNpmScope = name => {
   if (name.startsWith("@")) {
     const parts = name.split("/");
     if (parts.length === 2) {
-      if (parts[1] === "create-app") {
-        return parts[1];
-      }
       return parts[0].substr(1) + "-" + parts[1];
     }
   }
@@ -308,10 +305,7 @@ const updateChangelog = collated => {
       const pkg = items[p];
       if (pkg.msgs.length === 0) return;
       output.push("-   `" + prefix + removeNpmScope(p) + "`\n\n");
-      pkg.msgs
-        .slice()
-        .reverse()
-        .forEach(emitCommitMsg);
+      pkg.msgs.slice().reverse().forEach(emitCommitMsg);
       output.push("\n");
     });
   };
