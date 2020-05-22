@@ -1,4 +1,3 @@
-import { React } from "subapp-react";
 import { connect } from "react-redux";
 import { reduxLoadSubApp } from "subapp-redux";
 import reduxReducers from "./reducers";
@@ -34,7 +33,7 @@ const Demo2 = props => {
         &nbsp;{value}&nbsp;
         <button onClick={() => dispatch(incNumber())}>&#8811;</button>
       </div>
-      <p style={{ textAlign: "center" }}>© {new Date().getFullYear()} Your (Company) Name Here</p>
+      <p style={{ textAlign: "center" }}>© {new Date().getFullYear()} WalmartLabs</p>
     </div>
   );
 };
@@ -45,7 +44,7 @@ export default reduxLoadSubApp({
   Component: connect(mapStateToProps, dispatch => ({ dispatch }))(Demo2),
   name: "Demo2",
   reduxReducers,
-  prepare: ({ context, request }) => {
-    return Promise.resolve({ value: 999 });
+  prepare: ({ initialData }) => {
+    return Promise.resolve(initialData || { value: 999 });
   }
 });

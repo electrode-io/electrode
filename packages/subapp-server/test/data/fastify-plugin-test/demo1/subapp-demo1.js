@@ -1,4 +1,4 @@
-import { React, loadSubApp } from "subapp-react";
+import { loadSubApp } from "subapp-react";
 
 const Demo1 = props => {
   return (
@@ -6,7 +6,7 @@ const Demo1 = props => {
       <p>subapp demo1</p>
       props: {JSON.stringify(props)}
       <p>
-        <a href="http://docs.electrode.io">Electrode Docs</a>
+        <a href="https://wmlink.wal-mart.com/electrode">Electrode Docs</a>
       </p>
     </div>
   );
