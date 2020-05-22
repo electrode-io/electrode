@@ -3,44 +3,33 @@
 const { fastifyPlugin } = require("../../lib/fastify-plugin");
 const Path = require("path");
 const { runFinally, asyncVerify } = require("run-verify");
+const http = require("http");
 
 describe("fastify-plugin", function () {
   it("loads server from file system", async () => {
     const server = await require("@xarc/fastify-server")({
       deferStart: true,
-      connection: { port: 3004 }
+      connection: { port: 3002, host: "localhost" }
     });
 
-    const opts = {
+    const opt = {
       srcDir: Path.join(__dirname, "../data/fastify-plugin-test"),
       loadRoutesFrom: "routes.js",
       stats: Path.join(__dirname, "../data/stats.json") // "dist/server/stats.json"
     };
     return asyncVerify(
-      () => fastifyPlugin(server, opts),
+      () => fastifyPlugin(server, opt),
       () => server.start(),
+      () => {},
       () => {
-        server
-          .inject({
-            method: "GET",
-            url: "/",
-            port: 2222
-          })
-          .then(res => {
-            expect(res.statusCode).to.equal(200);
+        http.get("http://localhost:3002/", res => {
+          expect(res.statusCode).to.equal(200);
+          let data = "";
+          res.on("data", chunk => (data += chunk));
+          res.on("done", () => {
+            expect(data.to.contain("hello"));
           });
-      },
-      () => {
-        server
-          .inject({
-            method: "POST",
-            url: "/"
-          })
-          .then(res => {
-            it("throws 404 respomse", function () {
-              expect(res.statusCode).to.equal(404);
-            });
-          });
+        });
       },
       runFinally(() => server.close())
     );
@@ -48,7 +37,8 @@ describe("fastify-plugin", function () {
 
   it("preserves original end points", async function () {
     const server = await require("@xarc/fastify-server")({
-      deferStart: true
+      deferStart: true,
+      connection: { port: 3002, host: "localhost" }
     });
     server.route({
       method: "GET",
@@ -66,23 +56,14 @@ describe("fastify-plugin", function () {
     asyncVerify(
       () => fastifyPlugin(server, {}),
       () => server.start(),
-      async () => {
-        const { result, responseCode } = await server.inject({ path: "/" });
-        expect(responseCode).to.equal(200);
-        expect(result).to.equal("Hello World");
-      },
       () => {
-        it("responds with 'Internal Server Error' when node env is production", async () => {
-          process.env.NODE_ENV = "production";
-          const { result, responseCode } = await server.inject({ path: "/500" });
-          expect(result).to.equal("Internal Server Error");
-          expect(responseCode).to.equal(500);
-        });
-        it("responds with error message when node env is not production ", async () => {
-          process.env.NODE_ENV = "developement";
-          const { result, responseCode } = await server.inject({ path: "/500" });
-          expect(result).to.contain("db error");
-          expect(responseCode).to.equal(500);
+        http.get("http://localhost:3002/", res => {
+          expect(res.statusCode).to.equal(200);
+          let data = "";
+          res.on("data", chunk => (data += chunk));
+          res.on("done", () => {
+            expect(data.to.contain("Hello World"));
+          });
         });
       },
       runFinally(() => server.close())
