@@ -13,12 +13,9 @@ describe("fastify-plugin", function () {
       loadRoutesFrom: "routes.js",
       stats: Path.join(__dirname, "../data/stats.json") // "dist/server/stats.json"
     };
-    const stopServer = () => server && server.close();
-
     return asyncVerify(
       () => (server = fastify()),
       () => fastifyPlugin(server, opts),
-      () => server.listen(2222),
       () => {
         server
           .inject({
@@ -42,12 +39,14 @@ describe("fastify-plugin", function () {
             });
           });
       },
-      runFinally(() => stopServer())
+      runFinally(() => server.close())
     );
   });
 
   it("preserves original end points", async function () {
-    const server = await require("@xarc/fastify-server")({ deferStart: true });
+    const server = await require("@xarc/fastify-server")({
+      deferStart: true
+    });
     server.route({
       method: "GET",
       path: "/",
@@ -60,6 +59,7 @@ describe("fastify-plugin", function () {
         throw new Error("db error");
       }
     });
+
     asyncVerify(
       () => fastifyPlugin(server, {}),
       () => server.start(),
@@ -75,8 +75,14 @@ describe("fastify-plugin", function () {
           expect(result).to.equal("Internal Server Error");
           expect(responseCode).to.equal(500);
         });
+        it("responds with error message when node env is not production ", async () => {
+          process.env.NODE_ENV = "developement";
+          const { result, responseCode } = await server.inject({ path: "/500" });
+          expect(result).to.contain("db error");
+          expect(responseCode).to.equal(500);
+        });
       },
-      runFinally(() => server.stop())
+      runFinally(() => server.close())
     );
   });
 });
