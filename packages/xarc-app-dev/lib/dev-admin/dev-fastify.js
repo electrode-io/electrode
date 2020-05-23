@@ -22,10 +22,9 @@ async function register(fastify) {
 
   fastify.addHook("onRequest", async (request, reply) => {
     // simulate a res to capture what the devMiddleware might send back
-    await middleware.process(request.raw, reply, {
+    await middleware.process(request.raw, reply.res, {
       skip: () => {},
       replyHtml: html => {
-        console.log("replying", html);
         reply
           .code(200)
           .header("Content-Type", "text/html")
