@@ -1,277 +1,155 @@
 {
   "assetsByChunkName": {
-    "vendors~280289005828299c685d173f73011e79": [
-      "81a2781f3c286bcb2fa9.vendors~280289005828299c685d173f73011e79.js",
-      "../map/81a2781f3c286bcb2fa9.vendors~280289005828299c685d173f73011e79.js.map"
-    ],
-    "vendors~df46bbfde33def881518e43ea8cff946": [
-      "81a2781f3c286bcb2fa9.vendors~df46bbfde33def881518e43ea8cff946.js",
-      "../map/81a2781f3c286bcb2fa9.vendors~df46bbfde33def881518e43ea8cff946.js.map"
-    ],
-    "bottom": ["bottom.bundle.js", "../map/bottom.bundle.js.map"],
-    "deal": ["deal.bundle.js", "../map/deal.bundle.js.map"],
-    "extras": ["extras.bundle.js", "../map/extras.bundle.js.map"],
-    "footer": ["footer.bundle.js", "../map/footer.bundle.js.map"],
-    "header": ["header.bundle.js", "../map/header.bundle.js.map"],
-    "mainbody": ["mainbody.bundle.js", "../map/mainbody.bundle.js.map"],
-    "suspensedemo": ["suspensedemo.bundle.js", "../map/suspensedemo.bundle.js.map"]
+    "runtime": ["runtime.bundle.js", "../map/runtime.bundle.js.map"],
+    "vendors.~c145fdcf": ["vendors.~c145fdcf.bundle.js", "../map/vendors.~c145fdcf.bundle.js.map"],
+    "demo1": ["demo1.bundle.js", "../map/demo1.bundle.js.map"],
+    "demo2": ["demo2.bundle.js", "../map/demo2.bundle.js.map"],
+    "home": ["home.bundle.js", "../map/home.bundle.js.map"]
   },
   "assets": [
     {
-      "name": "../map/81a2781f3c286bcb2fa9.vendors~280289005828299c685d173f73011e79.js.map",
-      "size": 377348,
-      "chunks": [0],
-      "chunkNames": ["vendors~280289005828299c685d173f73011e79"],
-      "info": {
-        "development": true
-      },
-      "emitted": false
-    },
-    {
-      "name": "../map/81a2781f3c286bcb2fa9.vendors~df46bbfde33def881518e43ea8cff946.js.map",
-      "size": 101239,
-      "chunks": [1],
-      "chunkNames": ["vendors~df46bbfde33def881518e43ea8cff946"],
-      "info": {
-        "development": true
-      },
-      "emitted": false
-    },
-    {
-      "name": "../map/bottom.bundle.js.map",
-      "size": 71290,
+      "name": "../map/demo1.bundle.js.map",
+      "size": 7349,
       "chunks": [2],
-      "chunkNames": ["bottom"],
+      "chunkNames": ["demo1"],
       "info": {
         "development": true
       },
       "emitted": false
     },
     {
-      "name": "../map/deal.bundle.js.map",
-      "size": 8701,
+      "name": "../map/demo2.bundle.js.map",
+      "size": 122584,
       "chunks": [3],
-      "chunkNames": ["deal"],
+      "chunkNames": ["demo2"],
       "info": {
         "development": true
       },
       "emitted": false
     },
     {
-      "name": "../map/extras.bundle.js.map",
-      "size": 9574,
+      "name": "../map/home.bundle.js.map",
+      "size": 7451,
       "chunks": [4],
-      "chunkNames": ["extras"],
+      "chunkNames": ["home"],
       "info": {
         "development": true
       },
       "emitted": false
     },
     {
-      "name": "../map/footer.bundle.js.map",
-      "size": 9937,
-      "chunks": [5],
-      "chunkNames": ["footer"],
-      "info": {
-        "development": true
-      },
-      "emitted": false
-    },
-    {
-      "name": "../map/header.bundle.js.map",
-      "size": 8868,
-      "chunks": [6],
-      "chunkNames": ["header"],
-      "info": {
-        "development": true
-      },
-      "emitted": false
-    },
-    {
-      "name": "../map/mainbody.bundle.js.map",
-      "size": 126685,
-      "chunks": [7],
-      "chunkNames": ["mainbody"],
-      "info": {
-        "development": true
-      },
-      "emitted": false
-    },
-    {
-      "name": "../map/suspensedemo.bundle.js.map",
-      "size": 10978,
-      "chunks": [8],
-      "chunkNames": ["suspensedemo"],
-      "info": {
-        "development": true
-      },
-      "emitted": false
-    },
-    {
-      "name": "81a2781f3c286bcb2fa9.vendors~280289005828299c685d173f73011e79.js",
-      "size": 144200,
+      "name": "../map/runtime.bundle.js.map",
+      "size": 8258,
       "chunks": [0],
-      "chunkNames": ["vendors~280289005828299c685d173f73011e79"],
+      "chunkNames": ["runtime"],
       "info": {
-        "immutable": true
+        "development": true
       },
       "emitted": false
     },
     {
-      "name": "81a2781f3c286bcb2fa9.vendors~df46bbfde33def881518e43ea8cff946.js",
-      "size": 21560,
+      "name": "../map/vendors.~c145fdcf.bundle.js.map",
+      "size": 354688,
       "chunks": [1],
-      "chunkNames": ["vendors~df46bbfde33def881518e43ea8cff946"],
+      "chunkNames": ["vendors.~c145fdcf"],
       "info": {
-        "immutable": true
+        "development": true
       },
       "emitted": false
     },
     {
-      "name": "bottom.bundle.js",
-      "size": 13577,
-      "chunks": [2],
-      "chunkNames": ["bottom"],
-      "info": {},
-      "emitted": false
-    },
-    {
-      "name": "deal.bundle.js",
-      "size": 1768,
-      "chunks": [3],
-      "chunkNames": ["deal"],
-      "info": {},
-      "emitted": false
-    },
-    {
-      "name": "extras.bundle.js",
-      "size": 2104,
-      "chunks": [4],
-      "chunkNames": ["extras"],
-      "info": {},
-      "emitted": false
-    },
-    {
-      "name": "footer.bundle.js",
-      "size": 2291,
-      "chunks": [5],
-      "chunkNames": ["footer"],
-      "info": {},
-      "emitted": false
-    },
-    {
-      "name": "header.bundle.js",
-      "size": 1862,
-      "chunks": [6],
-      "chunkNames": ["header"],
-      "info": {},
-      "emitted": false
-    },
-    {
-      "name": "mainbody.bundle.js",
-      "size": 24510,
-      "chunks": [7],
-      "chunkNames": ["mainbody"],
-      "info": {},
-      "emitted": false
-    },
-    {
-      "name": "suspensedemo.bundle.js",
-      "size": 2759,
-      "chunks": [8],
-      "chunkNames": ["suspensedemo"],
-      "info": {},
-      "emitted": false
-    },
-    {
-      "name": "icons-2b7ac2d4ff91cca5b9c8e742eda58b24/manifest.json",
-      "size": 1201,
+      "name": "2b7ac2d4ff91cca5b9c8e742eda58b24.png",
+      "size": 5402,
       "chunks": [],
       "chunkNames": [],
+      "info": {},
+      "emitted": false
+    },
+    {
+      "name": "demo1.bundle.js",
+      "size": 2153,
+      "chunks": [2],
+      "chunkNames": ["demo1"],
+      "info": {},
+      "emitted": false
+    },
+    {
+      "name": "demo2.bundle.js",
+      "size": 21808,
+      "chunks": [3],
+      "chunkNames": ["demo2"],
+      "info": {},
+      "emitted": false
+    },
+    {
+      "name": "home.bundle.js",
+      "size": 2139,
+      "chunks": [4],
+      "chunkNames": ["home"],
+      "info": {},
+      "emitted": false
+    },
+    {
+      "name": "runtime.bundle.js",
+      "size": 1551,
+      "chunks": [0],
+      "chunkNames": ["runtime"],
+      "info": {},
+      "emitted": false
+    },
+    {
+      "name": "vendors.~c145fdcf.bundle.js",
+      "size": 132264,
+      "chunks": [1],
+      "chunkNames": ["vendors.~c145fdcf"],
+      "info": {},
       "emitted": false
     }
   ],
   "entrypoints": {
-    "mainbody": [0, 1, 7],
-    "bottom": [0, 1, 2],
-    "header": [0, 6],
-    "footer": [0, 1, 5],
-    "extras": [0, 1, 4],
-    "suspensedemo": [0, 8],
-    "deal": [0, 3]
+    "demo1": [0, 1, 2],
+    "demo2": [0, 1, 3],
+    "home": [0, 1, 4]
   },
   "chunks": [
     {
       "id": 0,
-      "hash": "4ac7e783f5a5335167a9",
-      "names": ["vendors~280289005828299c685d173f73011e79"],
-      "entry": false,
+      "hash": "7a720e5ee25fe7c2fc7d",
+      "names": ["runtime"],
+      "entry": true,
       "initial": true,
-      "rendered": true,
-      "reason": "split chunk (cache group: vendors) (name: vendors~280289005828299c685d173f73011e79)"
+      "rendered": true
     },
     {
       "id": 1,
-      "hash": "80a3ec0cc7029185c1b4",
-      "names": ["vendors~df46bbfde33def881518e43ea8cff946"],
+      "hash": "cf181f43d0d9ef793316",
+      "names": ["vendors.~c145fdcf"],
       "entry": false,
       "initial": true,
       "rendered": true,
-      "reason": "split chunk (cache group: vendors) (name: vendors~df46bbfde33def881518e43ea8cff946)"
+      "reason": "split chunk (cache group: vendors) (name: vendors.~c145fdcf)"
     },
     {
       "id": 2,
-      "hash": "dff9300d33d0bcbc6f4e",
-      "names": ["bottom"],
-      "entry": true,
+      "hash": "536dcd6808cc93441725",
+      "names": ["demo1"],
+      "entry": false,
       "initial": true,
       "rendered": true
     },
     {
       "id": 3,
-      "hash": "e5ef51a63f39919367a6",
-      "names": ["deal"],
-      "entry": true,
+      "hash": "cd5a8800a0311615f3de",
+      "names": ["demo2"],
+      "entry": false,
       "initial": true,
       "rendered": true
     },
     {
       "id": 4,
-      "hash": "60a75cbfa4c94ca0b4ff",
-      "names": ["extras"],
-      "entry": true,
-      "initial": true,
-      "rendered": true
-    },
-    {
-      "id": 5,
-      "hash": "585b545d1bbbedaaa7eb",
-      "names": ["footer"],
-      "entry": true,
-      "initial": true,
-      "rendered": true
-    },
-    {
-      "id": 6,
-      "hash": "b6e19e01795c4c106a77",
-      "names": ["header"],
-      "entry": true,
-      "initial": true,
-      "rendered": true
-    },
-    {
-      "id": 7,
-      "hash": "3e30c5e305a54bf6a2a0",
-      "names": ["mainbody"],
-      "entry": true,
-      "initial": true,
-      "rendered": true
-    },
-    {
-      "id": 8,
-      "hash": "210cf1990e88de13bae6",
-      "names": ["suspensedemo"],
-      "entry": true,
+      "hash": "bcaf762e6a7f230aebb4",
+      "names": ["home"],
+      "entry": false,
       "initial": true,
       "rendered": true
     }

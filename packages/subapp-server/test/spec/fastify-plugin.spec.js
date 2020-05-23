@@ -15,7 +15,7 @@ describe("fastify-plugin", function () {
     const opt = {
       srcDir: Path.join(__dirname, "../data/fastify-plugin-test"),
       loadRoutesFrom: "routes.js",
-      stats: Path.join(__dirname, "../data/stats.json") // "dist/server/stats.json"
+      stats: Path.join(__dirname, "../data/fastify-plugin-test/stats.json")
     };
     return asyncVerify(
       () => fastifyPlugin(server, opt),
