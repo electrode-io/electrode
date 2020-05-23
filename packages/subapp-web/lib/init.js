@@ -56,7 +56,7 @@ ${cdnJs}
       context.user.assets = assets;
       context.user.includedBundles = {};
       if (inlineRuntime) {
-        context.user.includedBundles["runtime"] = true;
+        context.user.includedBundles.runtime = true;
       }
       // invoke the initialize method of subapp's server code
       if (subAppServers.length > 0) {
