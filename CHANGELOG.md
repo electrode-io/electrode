@@ -1,3 +1,26 @@
+# 5/21/2020
+
+- fix: wds fastify files serving
+- fix: mock-cloud create config dir and set NODE_ENV
+- update: create-app templates and dep
+
+## Packages
+
+- `@xarc/app@8.1.2` `(8.1.1 => 8.1.2)`
+- `@xarc/app-dev@8.1.2` `(8.1.1 => 8.1.2)`
+- `@xarc/create-app@3.0.5` `(3.0.4 => 3.0.5)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix: wds fastify files serving ([#1650](https://github.com/electrode-io/electrode/pull/1650)) [commit](http://github.com/electrode-io/electrode/commit/3047b9e2a0716a0907b3d6279a12b0a14663d749)
+  - fix: mock-cloud create config dir and set NODE_ENV ([#1649](https://github.com/electrode-io/electrode/pull/1649)) [commit](http://github.com/electrode-io/electrode/commit/49774499363b717f4aa25a02096a966ef42b973e)
+
+- `packages/create-app`
+
+  - update: create-app templates and dep ([#1655](https://github.com/electrode-io/electrode/pull/1655)) [commit](http://github.com/electrode-io/electrode/commit/18e36091d5647e6999a8eda825ba23cec955652b)
+
 # 5/19/2020
 
 - fix: minor dev-admin and fastify plugin fix

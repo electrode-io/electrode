@@ -39,3 +39,5 @@ coverage
 
 .tmp
 .nyc_output
+config/assets.json
+.isomorphic*

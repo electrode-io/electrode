@@ -1,6 +1,6 @@
-# my-app
+# my-x-app
 
-Welcome to your Electrode application.
+Welcome to your web application using Electrode X.
 
 ## Development
 
@@ -30,7 +30,7 @@ Some initial things to do and try:
 
 4. Create some React components and add them to the home or demo subapp.
 
-5. Enable some optional features using `clap features`.
+5. Enable some optional features in `archetype/config/index.js`.
 
 6. Read up on a quick intro to the [Electrode SubApp architecture](https://github.com/electrode-io/electrode/blob/master/samples/poc-subapp/README.md).
 
