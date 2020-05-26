@@ -14,7 +14,10 @@ const WebpackDevRelay = require("./webpack-dev-relay");
 const { displayLogs } = require("./log-reader");
 const { fork } = require("child_process");
 const ConsoleIO = require("./console-io");
-const logger = require("@xarc/app/lib/logger");
+const winstonLogger = require("@xarc/app/lib/winston-logger");
+const winston = require("winston");
+const logger = winstonLogger(winston, false);
+const { doCleanup } = require("./cleanup");
 const xaa = require("xaa");
 const { formUrl } = require("../utils");
 const {
@@ -91,11 +94,6 @@ class AdminServer {
       // await this.startProxyServer("--inspect-brk");
       await this.startProxyServer();
     }
-
-    this._shutdown ||
-      setTimeout(() => {
-        this.showMenu(true);
-      }, 100);
   }
 
   logTime(msg) {
@@ -108,9 +106,11 @@ class AdminServer {
     if (line !== undefined) {
       this._statusLine = line;
     }
+    const exitMsg = this._ctrlCExit ? "\n<orange>      == Press ^C again to Exit ==  </>" : "";
     this._io.updateItem(
       DEV_ADMIN_STATUS,
-      ck`Press M show/hide menu | Q exit | L set App Log Show Level: <white.inverse> ${this._appLogLevel} </> | ${this._statusLine}${this._menu}`
+      ck`Press M show/hide menu | Q exit | L set App Log Show Level: <white.inverse> \
+${this._appLogLevel} </> | ${this._statusLine}${this._menu}${exitMsg}`
     );
   }
 
@@ -156,11 +156,10 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
   handleServerExit(name) {
     const info = this.getServer(name);
     if (info._child) {
+      const { pid } = info._child;
       info._child.once("exit", (code, signal) => {
         const signalText = signal ? `- signal ${signal}` : "";
-        this._io.show(
-          ck`<orange>${name} (PID: ${info._child.pid}) exited code ${code} ${signalText}</orange>`
-        );
+        this._io.show(ck`<orange>${name} (PID: ${pid}) exited code ${code} ${signalText}</orange>`);
         info._child = undefined;
         info._starting = false;
         this._webpackDevRelay.setAppServer(null);
@@ -214,6 +213,9 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
       this.kill(APP_SERVER_NAME, "SIGINT"),
       this.kill(PROXY_SERVER_NAME, "SIGINT")
     ]);
+
+    this._io.shutdown();
+    await doCleanup();
     this._io.exit();
   }
 
@@ -229,6 +231,13 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
   async processCommand(str) {
     const handlers = {
       q: () => this._quit(),
+      "^c": () => {
+        if (!this._menu) {
+          this.showMenu();
+        } else {
+          this.updateStatus();
+        }
+      },
       m: () => this.showMenu(),
       //logs
       l: () => this._changeLogShowLevel(),
@@ -246,6 +255,17 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
       // dev proxy server
       p: () => DEV_PROXY_ENABLED && this.sendMsg(PROXY_SERVER_NAME, { name: "restart" })
     };
+
+    if (str === "^c") {
+      if (this._ctrlCExit) {
+        return this._quit();
+      }
+      this._ctrlCExit = true;
+    } else if (this._ctrlCExit) {
+      this._ctrlCExit = false;
+      this.updateStatus();
+    }
+
     return handlers[str] && (await handlers[str]());
   }
 
@@ -543,8 +563,16 @@ ${instruction}`
       store: [],
       fullLogUrl: this._fullAppLogUrl,
       checkLine: str => {
-        if (!this._fullyStarted && str.includes("server running")) {
+        if (
+          !this._fullyStarted &&
+          (str.includes("server running") || str.includes("Server listening"))
+        ) {
           this._fullyStarted = true;
+          // opens menu automatically once after startup
+          this._shutdown ||
+            setTimeout(() => {
+              this.showMenu(true);
+            }, 5000);
           this.logTime(`App is ready in dev mode, total time took`);
         }
         return str;

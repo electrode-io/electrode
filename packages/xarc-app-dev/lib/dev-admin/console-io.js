@@ -22,7 +22,7 @@ class ConsoleIO extends VisualLogger {
     return new Promise(resolve => {
       process.stdin.once("keypress", (str, key) => {
         if (key.ctrl && key.name === "c") {
-          str = "m";
+          str = "^c";
         }
         resolve({ str: str && str.toLowerCase(), key });
       });

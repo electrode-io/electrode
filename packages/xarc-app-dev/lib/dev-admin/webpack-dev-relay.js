@@ -5,9 +5,11 @@
 
 const _ = require("lodash");
 
+const isomorphicConfig = require("isomorphic-loader/lib/config");
+
 const WEBPACK_DEV_MESSAGES = [
   // received config from isomorphic-loader webpack plugin
-  "isomorphic-loader-config",
+  isomorphicConfig.configName,
   // received webpack compile report, for refresh assets in SSR
   "webpack-report",
   // received webpack compile stats

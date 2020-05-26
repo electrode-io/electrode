@@ -5,15 +5,14 @@
 const assert = require("assert");
 const _ = require("lodash");
 const HttpStatus = require("./http-status");
-const Boom = require("@hapi/boom");
 const { ReactWebapp } = require("electrode-react-webapp");
-const { resolveChunkSelector, updateFullTemplate } = require("./utils");
+const { errorResponse, resolveChunkSelector, updateFullTemplate } = require("./utils");
 const HttpStatusCodes = require("http-status-codes");
 
 module.exports = function registerRoutes({ routes, topOpts, server }) {
   // register routes
-  routes.forEach(r => {
-    const { route } = r;
+  routes.forEach(routeInfo => {
+    const { route } = routeInfo;
 
     const routeOptions = Object.assign(
       {},
@@ -21,8 +20,11 @@ module.exports = function registerRoutes({ routes, topOpts, server }) {
       _.pick(route, ["pageTitle", "bundleChunkSelector", "templateFile", "selectTemplate"])
     );
 
-    assert(routeOptions.templateFile, `subapp-server: route ${r.name} must define templateFile`);
-    updateFullTemplate(r.dir, routeOptions);
+    assert(
+      routeOptions.templateFile,
+      `subapp-server: route ${routeInfo.name} must define templateFile`
+    );
+    updateFullTemplate(routeInfo.dir, routeOptions);
 
     const chunkSelector = resolveChunkSelector(routeOptions);
 
@@ -63,15 +65,7 @@ module.exports = function registerRoutes({ routes, topOpts, server }) {
           return h.response(data).code(status);
         }
       } catch (err) {
-        if (process.env.NODE_ENV !== "production") {
-          console.error(`Route ${r.name} failed:`, err);
-          return h
-            .response(`<html><body><pre>${err.stack}</pre></body></html>`)
-            .type("text/html; charset=UTF-8")
-            .code(HttpStatusCodes.INTERNAL_SERVER_ERROR);
-        } else {
-          return Boom.internal();
-        }
+        return errorResponse({ routeName: routeInfo.name, request, h, err });
       }
     };
 

@@ -1,3 +1,80 @@
+# 5/17/2020
+
+- fix: use fastify-server for serving dev-server
+- update to mime version 2
+- [minor]: add fastify support to subapp-server
+
+## Packages
+
+- `@xarc/app@8.1.0` `(8.0.21 => 8.1.0)`
+- `@xarc/app-dev@8.1.0` `(8.0.21 => 8.1.0)`
+- `subapp-server@1.2.0` `(1.1.18 => 1.2.0)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix: use fastify-server for serving dev-server ([#1640](https://github.com/electrode-io/electrode/pull/1640)) [commit](http://github.com/electrode-io/electrode/commit/fcceeb0c6a129fb615c5e17ca17153dc1f7b9864)
+  - update to mime version 2 ([#1639](https://github.com/electrode-io/electrode/pull/1639)) [commit](http://github.com/electrode-io/electrode/commit/4a57109b4754ea420e693c347688518230cd9676)
+  - [minor]: add fastify support to subapp-server ([#1642](https://github.com/electrode-io/electrode/pull/1642)) [commit](http://github.com/electrode-io/electrode/commit/c8d704530427b5bd623aed6fcc173e28c4092f77)
+
+- `packages/subapp-server`
+
+  - fix: consistent error response for routes ([#1638](https://github.com/electrode-io/electrode/pull/1638)) [commit](http://github.com/electrode-io/electrode/commit/874513becccc945934eb17113008d5a3c0995aba)
+  - [minor]: add fastify support to subapp-server ([#1642](https://github.com/electrode-io/electrode/pull/1642)) [commit](http://github.com/electrode-io/electrode/commit/c8d704530427b5bd623aed6fcc173e28c4092f77)
+
+# 5/7/2020
+
+- dep: isomorphic-loader 3.1.0
+- feat: ^C 2x makes dev-admin exit
+- feat: dev-admin cleans child process automatically
+
+## Packages
+
+- `@xarc/app@8.0.21` `(8.0.20 => 8.0.21)`
+- `@xarc/app-dev@8.0.21` `(8.0.20 => 8.0.21)`
+- `@xarc/webpack@8.0.5` `(8.0.4 => 8.0.5)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - dep: isomorphic-loader 3.1.0 ([#1636](https://github.com/electrode-io/electrode/pull/1636)) [commit](http://github.com/electrode-io/electrode/commit/7e0da3ac9575288857bcc5ffda2786e342bee0c8)
+  - feat: ^C 2x makes dev-admin exit ([#1634](https://github.com/electrode-io/electrode/pull/1634)) [commit](http://github.com/electrode-io/electrode/commit/fcf78dadb24b5273d80998947b84911209197220)
+  - feat: dev-admin cleans child process automatically ([#1633](https://github.com/electrode-io/electrode/pull/1633)) [commit](http://github.com/electrode-io/electrode/commit/fd2c408507a91b2880295327ac5dd1be0a50ed4b)
+
+- `packages/xarc-webpack`
+
+  - dep: isomorphic-loader 3.1.0 ([#1636](https://github.com/electrode-io/electrode/pull/1636)) [commit](http://github.com/electrode-io/electrode/commit/7e0da3ac9575288857bcc5ffda2786e342bee0c8)
+
+- `.github`
+
+  - remove node 14 from github CI [commit](http://github.com/electrode-io/electrode/commit/7e0ccc4ae539284b0478553bad92d676d67a343a)
+  - docs(github): one-command solution for collecting system stats ([#1637](https://github.com/electrode-io/electrode/pull/1637)) [commit](http://github.com/electrode-io/electrode/commit/6926618064aadaa6b24aa197a9af53881bb2d6f4)
+
+# 4/29/2020
+
+- added: mechanism to defer initial state read for sub apps
+
+## Packages
+
+### Directly Updated
+
+- `subapp-web@1.0.26` `(1.0.25 => 1.0.26)`
+
+### Lerna Updated
+
+- `subapp-pbundle@0.0.20` `(0.0.19 => 0.0.20)`
+- `subapp-react@0.0.17` `(0.0.16 => 0.0.17)`
+- `subapp-redux@1.0.26` `(1.0.25 => 1.0.26)`
+
+## Commits
+
+- `packages/subapp-web`
+
+  - added: mechanism to defer initial state read for sub apps ([#1630](https://github.com/electrode-io/electrode/pull/1630)) [commit](http://github.com/electrode-io/electrode/commit/bb36efb4f1f10db27b2d63c8eecdcd2a9f915275)
+  - handle getInitialState for queued subapp starts ([#1632](https://github.com/electrode-io/electrode/pull/1632)) [commit](http://github.com/electrode-io/electrode/commit/2233fa82fb2f9dc6051cdf64d0bc9b6150b94998)
+
 # 4/27/2020
 
 - fix: update cdn mock to mime 1.0 downgrade

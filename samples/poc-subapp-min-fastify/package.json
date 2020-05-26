@@ -1,0 +1,67 @@
+{
+  "name": "poc-subapp",
+  "version": "0.0.1",
+  "description": "SubApp POC",
+  "homepage": "http://test",
+  "author": {
+    "name": "Joel Chen",
+    "email": "joel123@gmail.com",
+    "url": "https://github.com/jchip"
+  },
+  "contributors": [],
+  "files": [
+    "server",
+    "src",
+    "lib",
+    "dist"
+  ],
+  "main": "lib/server/index.js",
+  "keywords": [
+    "test",
+    "electrode"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "test/test-app"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">= 10",
+    "npm": ">= 6"
+  },
+  "scripts": {
+    "dev": "clap -q dev",
+    "test": "clap check",
+    "build": "clap build"
+  },
+  "dependencies": {
+    "@xarc/app": "^8.0.0",
+    "@xarc/fastify-server": "^1.1.0",
+    "electrode-confippet": "^1.5.0",
+    "http-codes": "^1.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router": "^5.1.0",
+    "react-router-dom": "^5.1.0",
+    "subapp-react": "../../packages/subapp-react",
+    "subapp-server": "../../packages/subapp-server",
+    "subapp-util": "../../packages/subapp-util"
+  },
+  "devDependencies": {
+    "@xarc/app-dev": "^8.0.0"
+  },
+  "fyn": {
+    "dependencies": {
+      "@xarc/app": "../../packages/xarc-app",
+      "@xarc/fastify-server": "../../../fastify-server"
+    },
+    "devDependencies": {
+      "@xarc/app-dev": "../../packages/xarc-app-dev"
+    }
+  },
+  "prettier": {
+    "printWidth": 100,
+    "arrowParens": "avoid",
+    "trailingComma": "none"
+  }
+}
