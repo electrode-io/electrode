@@ -282,7 +282,7 @@ ${dynInitialState}<script>${xarc}.startSubAppOnLoad({
  name:"${name}",
  ${elementId}serverSideRendering:${Boolean(props.serverSideRendering)},
  ${inlineStr}${groupStr}clientProps:${clientProps},
- initialState:${initialStateScript}
+ getInitialState:function(){return ${initialStateScript}}
 });</script>
 `);
       };

@@ -802,10 +802,6 @@ Individual .babelrc files were generated for you in src/client and src/server
       options: node.js --inspect can be used to debug the dev-admin`,
       dep: [".remove-log-files", ".development-env", ".mk-dist-dir", ".build.babelrc"],
       task() {
-        if (!Fs.existsSync(".isomorphic-loader-config.json")) {
-          Fs.writeFileSync(".isomorphic-loader-config.json", JSON.stringify({}));
-        }
-
         return [
           ".set.css-module.env",
           ".webpack-dev",
