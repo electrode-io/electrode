@@ -157,13 +157,16 @@ Response: ${err || body}`
               .reduce((a, jsBundle) => {
                 const ext = Path.extname(jsBundle);
                 if (ext === ".js") {
-                  context.user.headEntries &&
-                  headSplits.push(`<link rel="preload" href="${jsBundle}" as="script">`);
+                  if (context.user.headEntries) {
+                    headSplits.push(`<link rel="preload" href="${jsBundle}" as="script">`);
+                  }
                   a.push(`<script src="${jsBundle}" async></script>`);
                 } else if (ext === ".css") {
-                  context.user.headEntries
-                    ? headSplits.push(`<link rel="stylesheet" href="${jsBundle}">`)
-                    : a.push(`<link rel="stylesheet" href="${jsBundle}">`);
+                  if (context.user.headEntries) {
+                    headSplits.push(`<link rel="stylesheet" href="${jsBundle}">`);
+                  } else {
+                    a.push(`<link rel="stylesheet" href="${jsBundle}">`);
+                  }
                 } else {
                   a.push(`<!-- UNKNOWN bundle extension ${jsBundle} -->`);
                 }
@@ -321,7 +324,7 @@ ${stack}`,
 
         outputSpot.close();
         context.user.numOfSubapps--;
-        if(context.user.numOfSubapps == 0 && context.user.headEntries){
+        if (context.user.numOfSubapps === 0 && context.user.headEntries) {
           context.user.headEntries.close();
           context.user.headEntries = undefined;
         }
@@ -350,7 +353,7 @@ ${stack}`,
 <script>${xarc}.markBundlesLoaded(${JSON.stringify(bundles)});</script>
 `);
         }
-        if(preLoads.length > 0) {
+        if (preLoads.length > 0) {
           context.user.headEntries.add("\n");
           context.user.headEntries.add(preLoads);
           context.user.headEntries.add("\n");
