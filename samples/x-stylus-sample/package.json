@@ -43,7 +43,8 @@
     "subapp-web": "../../packages/subapp-web"
   },
   "devDependencies": {
-    "@xarc/app-dev": "^8.1.1"
+    "@xarc/app-dev": "^8.1.1",
+    "electrode-archetype-opt-stylus": "^2.0.0"
   },
   "fyn": {
     "devDependencies": {

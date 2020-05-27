@@ -1,6 +1,13 @@
-# my-x-app
+# x-stylus-sample
 
-Welcome to your web application using Electrode X.
+This sample demos using stylus for CSS in an Electrode X app.
+
+## Steps
+
+1. add `electrode-archetype-opt-stylus`: `npm install --save-dev electrode-archetype-opt-stylus`
+2. Add `.styl` file to app under `src` dir
+3. import the `.styl` files in one of the subapp's entry file
+4. Use the styles in components
 
 ## Development
 
