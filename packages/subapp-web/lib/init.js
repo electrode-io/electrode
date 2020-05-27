@@ -34,10 +34,9 @@ module.exports = function setup(setupContext) {
   let inlineRuntimeJS = "";
   const runtimeFSPath = cdnJsBundles.runtime && Path.join(approot, "dist", cdnJsBundles.runtime);
   if (runtimeFSPath) {
-    inlineRuntimeJS = Fs.readFileSync(runtimeJSPath).toString();
+    inlineRuntimeJS = Fs.readFileSync(runtimeFSPath).toString();
   }
 
-  console.log(runtimeJSPath);
   const webSubAppJs = `<script id="bundleAssets" type="application/json">
 ${JSON.stringify(bundleAssets)}
 </script>
@@ -57,7 +56,7 @@ ${cdnJs}
     process: context => {
       context.user.assets = assets;
       context.user.includedBundles = {};
-      if (inlineRuntime) {
+      if (inlineRuntimeJS) {
         context.user.includedBundles.runtime = true;
       }
       // invoke the initialize method of subapp's server code
