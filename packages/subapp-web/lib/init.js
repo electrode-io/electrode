@@ -33,7 +33,7 @@ module.exports = function setup(setupContext) {
   const approot = process.env.APP_ROOT_DIR || process.cwd();
   let inlineRuntimeJS = "";
   const runtimeFSPath = cdnJsBundles.runtime && Path.join(approot, "dist", cdnJsBundles.runtime);
-  if (runtimeFSPath) {
+  if (runtimeFSPath && Fs.existsSync(runtimeFSPath)) {
     inlineRuntimeJS = Fs.readFileSync(runtimeFSPath).toString();
   }
 

@@ -1,6 +1,8 @@
 "use strict";
 
 const { init } = require("../../lib");
+const { resetCdn } = require("../../lib/util");
+
 const Path = require("path");
 
 // test the init token for subapps
@@ -31,17 +33,15 @@ describe("init", function () {
   });
 
   it("it should load timetime runtime.bundle.js inline and mark includedBundles.runtime to true", () => {
-    /*
-      let init = require('../../lib/init');
-      let __dirname = '/Users/vn08447/Documents/GitHub/packages/subapp-web/test/spec';
-      let Path = require()
-    */
+    resetCdn();
     process.env.APP_ROOT_DIR = Path.join(process.cwd(), "test/data/mock-app");
     process.env.NODE_ENV = "development";
     const initToken = init({
       routeOptions: {
         __internals: {},
         cdn: {},
+        devBundleBase: "/js",
+        prodBundleBase: "/js",
         stats: Path.join(__dirname, "../data/mock-app/dist/stats-with-runtime.json")
       }
     });
