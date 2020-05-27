@@ -29,12 +29,18 @@ module.exports = function setup(setupContext) {
     entryPoints: assets.entryPoints,
     basePath: ""
   };
+  console.log(cdnJsBundles);
 
-  const approot = process.env.APP_ROOT_DIR || Path.resolve() || process.cwd();
   let inlineRuntimeJS = "";
-  const runtimeFSPath = cdnJsBundles.runtime && Path.join(approot, "dist", cdnJsBundles.runtime);
-  if (runtimeFSPath && Fs.existsSync(runtimeFSPath)) {
-    inlineRuntimeJS = Fs.readFileSync(runtimeFSPath).toString();
+  if (process.env.NODE_ENV === "production") {
+    const runtimeRelativePath =
+      cdnJsBundles.runtime ||
+      Object.values(cdnJsBundles).filter(file => file.includes("runtime.bundle"))[0];
+    const runtimeFullPath =
+      runtimeRelativePath && Path.join(Path.resolve("dist"), runtimeRelativePath);
+    if (Fs.existsSync(runtimeFullPath)) {
+      inlineRuntimeJS = Fs.readFileSync(runtimeFullPath).toString();
+    }
   }
 
   const webSubAppJs = `<script id="bundleAssets" type="application/json">

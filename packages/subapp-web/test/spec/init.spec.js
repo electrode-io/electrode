@@ -34,13 +34,14 @@ describe("init", function () {
 
   it("it should load timetime runtime.bundle.js inline and mark includedBundles.runtime to true", () => {
     resetCdn();
-    process.env.APP_ROOT_DIR = Path.join(process.cwd(), "test/data/mock-app");
-    process.env.NODE_ENV = "development";
+    process.env.NODE_ENV = "production";
+    const originalWd = process.cwd();
+    process.chdir(Path.resolve("test/data/mock-app"));
+
     const initToken = init({
       routeOptions: {
         __internals: {},
         cdn: {},
-        devBundleBase: "/js",
         prodBundleBase: "/js",
         stats: Path.join(__dirname, "../data/mock-app/dist/stats-with-runtime.json")
       }
@@ -48,10 +49,10 @@ describe("init", function () {
 
     const context = { user: {} };
     const initJs = initToken.process(context);
-    console.log(context.user.includedBundles);
+    process.chdir(originalWd);
+
     expect(context.user.includedBundles.runtime).to.equal(true);
 
     expect(initJs).to.contain("/* placeholder */");
-    delete process.env.APP_ROOT_DIR;
   });
 });
