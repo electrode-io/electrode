@@ -18,7 +18,6 @@ module.exports = function setup(setupContext) {
   //
 
   const { assets } = util.loadAssetsFromStats(setupContext.routeOptions.stats);
-  debugger;
   setupContext.routeOptions.__internals.assets = assets;
 
   const cdnJsBundles = util.getCdnJsBundles(assets, setupContext.routeOptions);
@@ -31,15 +30,19 @@ module.exports = function setup(setupContext) {
     basePath: ""
   };
 
-  const runtimeJSPath = Path.resolve("dist/" + cdnJsBundles.runtime);
-  const inlineRuntime =
-    runtimeJSPath && Fs.existsSync(runtimeJSPath) ? Fs.readFileSync(runtimeJsPath).toString() : "";
+  const approot = process.env.APP_ROOT_DIR || process.cwd();
+  let inlineRuntimeJS = "";
+  const runtimeFSPath = cdnJsBundles.runtime && Path.join(approot, "dist", cdnJsBundles.runtime);
+  if (runtimeFSPath) {
+    inlineRuntimeJS = Fs.readFileSync(runtimeJSPath).toString();
+  }
 
+  console.log(runtimeJSPath);
   const webSubAppJs = `<script id="bundleAssets" type="application/json">
 ${JSON.stringify(bundleAssets)}
 </script>
 <script>/*LJ*/${loadJs}/*LJ*/
-/*rt*/${inlineRuntime} /*rt*/
+/*rt*/${inlineRuntimeJS} /*rt*/
 ${clientJs}
 ${cdnJs}
 </script>

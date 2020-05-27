@@ -1,0 +1,107 @@
+{
+  "assetsByChunkName": {
+    "demo1": "demo1.bundle.dev.js",
+    "demo2": "demo2.bundle.dev.js",
+    "home": "home.bundle.dev.js",
+    "runtime": "runtime.bundle.dev.js",
+    "vendors.~c145fdcf": "vendors.~c145fdcf.bundle.dev.js"
+  },
+  "assets": [
+    {
+      "name": "2b7ac2d4ff91cca5b9c8e742eda58b24.png",
+      "size": 5402,
+      "chunks": [],
+      "chunkNames": [],
+      "info": {},
+      "emitted": false
+    },
+    {
+      "name": "demo1.bundle.dev.js",
+      "size": 19842,
+      "chunks": ["demo1"],
+      "chunkNames": ["demo1"],
+      "info": {},
+      "emitted": false
+    },
+    {
+      "name": "demo2.bundle.dev.js",
+      "size": 346052,
+      "chunks": ["demo2"],
+      "chunkNames": ["demo2"],
+      "info": {},
+      "emitted": false
+    },
+    {
+      "name": "home.bundle.dev.js",
+      "size": 19852,
+      "chunks": ["home"],
+      "chunkNames": ["home"],
+      "info": {},
+      "emitted": false
+    },
+    {
+      "name": "runtime.bundle.dev.js",
+      "size": 14728,
+      "chunks": ["runtime"],
+      "chunkNames": ["runtime"],
+      "info": {},
+      "emitted": false
+    },
+    {
+      "name": "vendors.~c145fdcf.bundle.dev.js",
+      "size": 2578110,
+      "chunks": ["vendors.~c145fdcf"],
+      "chunkNames": ["vendors.~c145fdcf"],
+      "info": {},
+      "emitted": false
+    }
+  ],
+  "entrypoints": {
+    "demo1": ["runtime", "vendors.~c145fdcf", "demo1"],
+    "demo2": ["runtime", "vendors.~c145fdcf", "demo2"],
+    "home": ["runtime", "vendors.~c145fdcf", "home"]
+  },
+  "chunks": [
+    {
+      "id": "demo1",
+      "hash": "7d55e810e42ecf0d0543",
+      "names": ["demo1"],
+      "entry": false,
+      "initial": true,
+      "rendered": true
+    },
+    {
+      "id": "demo2",
+      "hash": "c315321b11e120a07b4f",
+      "names": ["demo2"],
+      "entry": false,
+      "initial": true,
+      "rendered": true
+    },
+    {
+      "id": "home",
+      "hash": "6d49a17dea8f6f942443",
+      "names": ["home"],
+      "entry": false,
+      "initial": true,
+      "rendered": true
+    },
+    {
+      "id": "runtime",
+      "hash": "58d28262806c9aa51e20",
+      "names": ["runtime"],
+      "entry": true,
+      "initial": true,
+      "rendered": true
+    },
+    {
+      "id": "vendors.~c145fdcf",
+      "hash": "2589bd8c1c29c3fcb29c",
+      "names": ["vendors.~c145fdcf"],
+      "entry": false,
+      "initial": true,
+      "rendered": true,
+      "reason": "split chunk (cache group: vendors) (name: vendors.~c145fdcf)"
+    }
+  ]
+}
