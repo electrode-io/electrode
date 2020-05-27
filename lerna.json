@@ -12,18 +12,6 @@
   "fynpo": {
     "publishConfig": {
       "tags": {
-        "alpha-archfn": {
-          "enabled": false,
-          "packages": {
-            "electrode-archetype-react-app": true,
-            "electrode-archetype-react-app-dev": true,
-            "electrode-archetype-react-component": true,
-            "electrode-archetype-react-component-dev": true,
-            "generator-electrode": true,
-            "@xarc/create-app": true
-          },
-          "addToVersion": true
-        },
         "xarc8": {
           "enabled": false,
           "packages": {
@@ -33,7 +21,7 @@
           }
         },
         "beta": {
-          "enabled": true,
+          "enabled": false,
           "packages": {
             "@xarc/app": true,
             "@xarc/app-dev": true,
