@@ -1,11 +1,13 @@
 "use strict";
+let cachedEnvKarma = null
+module.exports = function getEnvKarma() {
+  const xenvConfig = require("xenv-config");
+  const { merge } = require("lodash");
+  const userConfig = require("./user-config");
 
-const xenvConfig = require("xenv-config");
-const { merge } = require("lodash");
-const userConfig = require("./user-config");
-
-const karmaConfigSpec = {
-  browser: { env: "KARMA_BROWSER", default: "chrome" }
-};
-
-module.exports = xenvConfig(karmaConfigSpec, userConfig.karma, { merge });
+  const karmaConfigSpec = {
+    browser: { env: "KARMA_BROWSER", default: "chrome" }
+  };
+  cachedEnvKarma = cachedEnvKarma || xenvConfig(karmaConfigSpec, userConfig.karma, { merge });
+  return cachedEnvKarma
+}

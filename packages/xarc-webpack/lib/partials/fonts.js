@@ -3,7 +3,7 @@
 const urlLoader = require.resolve("url-loader");
 const fileLoader = require.resolve("file-loader");
 const isomorphicLoader = require.resolve("isomorphic-loader");
-const archetype = require("@xarc/app/config/archetype");
+const archetype = require("@xarc/app/config/archetype")();
 
 module.exports = function() {
   return {

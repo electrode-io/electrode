@@ -1,5 +1,5 @@
 var path = require("path");
-var archetype = require("@xarc/app/config/archetype");
+var archetype = require("@xarc/app/config/archetype")();
 var archetypeEslint = path.join(archetype.config.eslint, ".eslintrc-react");
 
 function dotify(p) {

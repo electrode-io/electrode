@@ -77,5 +77,8 @@
     "printWidth": 100,
     "trailingComma": "none",
     "arrowParens": "avoid"
+  },
+  "publishConfig": {
+    "tag": "beta"
   }
 }

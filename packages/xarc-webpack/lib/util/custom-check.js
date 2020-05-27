@@ -4,7 +4,7 @@
 
 const Fs = require("fs");
 const Path = require("path");
-const archetype = require("@xarc/app-dev/config/archetype");
+const archetype = require("@xarc/app-dev/config/archetype")();
 
 function useAppWebpackConfig() {
   return process.env.USE_APP_WEBPACK_CONFIG === "true";

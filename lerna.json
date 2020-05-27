@@ -12,7 +12,7 @@
   "fynpo": {
     "publishConfig": {
       "tags": {
-        "beta7": {
+        "alpha-archfn": {
           "enabled": false,
           "packages": {
             "electrode-archetype-react-app": true,
@@ -31,6 +31,16 @@
             "@xarc/app-dev": true,
             "@xarc/create-app": true
           }
+        },
+        "beta": {
+          "enabled": true,
+          "packages": {
+            "@xarc/app": true,
+            "@xarc/app-dev": true,
+            "@xarc/webpack": true,
+            "subapp-server": true
+          },
+          "addToVersion": true
         }
       }
     }

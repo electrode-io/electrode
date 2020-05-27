@@ -22,6 +22,7 @@
     "support",
     "arch-clap.js",
     "require.js",
+    "typedef.js",
     "supports.js"
   ],
   "author": "Electrode (http://www.electrode.io/)",
@@ -71,7 +72,8 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-    "access": "public"
+    "access": "public",
+    "tag": "beta"
   },
   "prettier": {
     "printWidth": 100,

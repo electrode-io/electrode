@@ -6,7 +6,7 @@ const sudoPrompt = require("sudo-prompt");
 const request = require("request");
 const http = require("http");
 const Util = require("util");
-const { controlPaths, settings, httpDevServer } = require("../../config/dev-proxy");
+const { controlPaths, settings, httpDevServer } = require("../../config/dev-proxy")();
 const proxyJs = require.resolve("./redbird-proxy");
 const { formUrl } = require("../utils");
 

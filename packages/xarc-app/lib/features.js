@@ -2,7 +2,7 @@
 
 const cwd = process.env.PWD || process.cwd();
 const optionalRequire = require("optional-require")(require);
-const archetype = require("../config/archetype");
+const archetype = require("../config/archetype")();
 let appPkg = require(`${cwd}/package.json`);
 const fs = require("fs");
 const util = require("util");
@@ -174,8 +174,8 @@ class Feature {
   set enabled(value) {
     this._enabled = value;
   }
-
-  get enabledLegacy() { // eslint-disable-line
+  // eslint-disable-next-line complexity, max-statements
+  get enabledLegacy() {
     if (!this.electrodeOptArchetype.hasOwnProperty("optionalTagName")) {
       throw new Error(`feature ${this.packageName}: package.json missing optionalTagName`);
     }
@@ -314,7 +314,7 @@ class Feature {
 async function getFeatures() {
   const features = optionalDependenciesList.map(packageName => new Feature(packageName));
   await Promise.all(features.map(feature => feature.attachNpmAttributes()));
-  features.sort(function(a, b) {
+  features.sort(function(a, b) { // eslint-disable-line prefer-arrow-callback
     return a.name.localeCompare(b.name);
   });
   return features;
@@ -322,7 +322,7 @@ async function getFeatures() {
 
 function displayFeatureStatus(features) {
   const namePadding =
-    features.reduce(function(a, b) {
+    features.reduce(function(a, b) { // eslint-disable-line prefer-arrow-callback
       return a.name.length > b.name.length ? a : b;
     }).name.length + 1;
   const enabledPadding = 4;
@@ -362,10 +362,10 @@ function displayFeatureIssues(features) {
   features.forEach(feature => {
     if (!feature.package && feature.enabled) {
       writeError(
-        chalk.red(
-`The feature "${feature.packageName}" is enabled but isn’t available in your node_modules directory.
-Please perform an "npm install"`
-        )
+        chalk.red([
+          `The feature "${feature.packageName}" is enabled but isn’t available`,
+          `in your node_modules directory. Please perform an "npm install"`
+        ].join(" "))
       );
     }
 
@@ -389,7 +389,7 @@ Please perform an "npm install"`
 
 function writeAppPkg(pkg) {
   const file = `${cwd}/package.json`;
-  fs.writeFileSync(file, JSON.stringify(pkg, undefined, "  ") + "\n");
+  fs.writeFileSync(file, JSON.stringify(pkg, undefined, "  ") + "\n"); // eslint-disable-line
   appPkg = pkg;
 }
 
@@ -452,7 +452,8 @@ async function promptForEnabled(features) {
       feature.enabled = enabled;
     });
 
-    conflictingFeature = features.find(feature => { // eslint-disable-line no-loop-func
+    conflictingFeature = features.find(feature => { // eslint-disable-line
+      // eslint-disable-line no-loop-func
       const conflicts = feature.getConflictingFeatures(features);
       if (conflicts.length > 0) {
         const package1 = chalk.underline(feature.name);

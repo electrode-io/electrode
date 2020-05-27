@@ -1,6 +1,6 @@
 "use strict";
 
-const archetype = require("@xarc/app/config/archetype");
+const archetype = require("@xarc/app/config/archetype")();
 const Path = require("path");
 const requireAt = require("require-at");
 const AppMode = archetype.AppMode;
