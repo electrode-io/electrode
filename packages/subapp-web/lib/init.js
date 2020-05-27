@@ -29,7 +29,6 @@ module.exports = function setup(setupContext) {
     entryPoints: assets.entryPoints,
     basePath: ""
   };
-  console.log(cdnJsBundles);
 
   let inlineRuntimeJS = "";
   if (process.env.NODE_ENV === "production") {
