@@ -30,7 +30,7 @@ module.exports = function setup(setupContext) {
     basePath: ""
   };
 
-  const approot = process.env.APP_ROOT_DIR || process.cwd();
+  const approot = process.env.APP_ROOT_DIR || Path.resolve() || process.cwd();
   let inlineRuntimeJS = "";
   const runtimeFSPath = cdnJsBundles.runtime && Path.join(approot, "dist", cdnJsBundles.runtime);
   if (runtimeFSPath && Fs.existsSync(runtimeFSPath)) {
