@@ -64,6 +64,18 @@ apply(compiler) {
 })
 ```
 
+## New Options TBD
+
+### SplitChunks and Module Sizes
+The SplitChunksPlugin now knows how to handle these different sizes and uses them for minSize and maxSize. By default, only javascript size is handled, but you can now pass multiple values to manage them:
+
+```javascript
+minSize: {
+  javascript: 30000,
+  style: 50000,
+}
+```
+
 ### Persistent Caching
 
 There is now a filesystem cache. Note that it's not enabled by default. You have to opt-in with the following configuration:
@@ -84,13 +96,25 @@ cache: {
   }
 }
 ```
-
 More info on the same can be seen at this [guide](https://github.com/webpack/changelog-v5/blob/master/guides/persistent-caching.md)
+
+Do we need a partial to enable it on demand or via config ?
+
 
 ### Experiments
 Webpack 5 offers new experiments config option which allows to enabled experimental features. This makes it clear which ones are enabled/used. `experiments` option was introduced to empower users with an ability of activating and trying out experimental features.
 
 For more [options and usage](https://webpack.js.org/configuration/experiments/)
+
+### splitChunks.cacheGroups.defaultVendors
+
+`optimization.splitChunks.cacheGroups.vendors` has be renamed to `optimization.splitChunks.cacheGroups.defaultVendors`.
+`optimization.splitChunks.cacheGroups.defaultVendors.reuseExistingChunk` now defaults to `true`.
+
+### Few defaults to consider
+- Using `entry: "./src/index.js"`: you can omit it, that's the default
+- Using `output.path: path.resolve(__dirname, "dist")`: you can omit it, that's the default
+- Using `output.filename: "[name].js"`: you can omit it, that's the default
 
 ## References
 
