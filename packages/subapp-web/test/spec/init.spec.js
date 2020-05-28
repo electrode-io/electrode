@@ -50,8 +50,7 @@ describe("init", function () {
     const context = { user: {} };
     const initJs = initToken.process(context);
     process.chdir(originalWd);
-
-    expect(context.user.includedBundles.runtime).to.equal(true);
+    expect(Object.keys(context.user.includedBundles).length).to.equal(1);
 
     expect(initJs).to.contain("/* placeholder */");
   });
