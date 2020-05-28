@@ -244,7 +244,7 @@ function searchRoutesFromFile(srcDir, pluginOpts) {
 }
 
 async function setupRoutesFromFile(srcDir, server, pluginOpts) {
-  const { routes, topOpts } = searchRoutesFromFile(srcDir, server, pluginOpts);
+  const { routes, topOpts } = searchRoutesFromFile(srcDir, pluginOpts);
 
   await handleFavIcon(server, topOpts);
 

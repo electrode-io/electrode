@@ -12,6 +12,8 @@ const Url = require("url");
 const Fs = require("fs");
 const chokidar = require("chokidar");
 const mime = require("mime");
+const mkdirp = require("mkdirp");
+
 const LOADED_ASSETS = {};
 
 const cdnMock = {
@@ -45,6 +47,7 @@ const cdnMock = {
       return acc;
     }, {});
 
+    mkdirp.sync("config");
     Fs.writeFileSync("config/assets.json", `${JSON.stringify(mockAssets, null, 2)}\n`);
   },
 

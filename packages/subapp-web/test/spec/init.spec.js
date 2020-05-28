@@ -11,7 +11,7 @@ describe("init", function() {
     delete process.env.APP_SRC_DIR;
   });
 
-  it("should return assets as JSON script and little loader", () => {
+  it("should return assets as JSON script and loadJs", () => {
     // point subapp-util to look for subapps under a test dir
     process.env.APP_SRC_DIR = "test/subapps";
 
@@ -27,6 +27,6 @@ describe("init", function() {
     const initJs = initToken.process(context);
     expect(context.user.assets).to.be.ok;
     expect(initJs).contains(`<script id="bundleAssets" type="application/json">`);
-    expect(initJs).contains(`<script>/*LL*/`);
+    expect(initJs).contains(`<script>/*LJ*/`);
   });
 });

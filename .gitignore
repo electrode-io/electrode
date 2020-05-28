@@ -513,6 +513,7 @@ _book
 #      .gitignore evolves. Please add any project specific ignores below.     #
 ###############################################################################
 
+.watchmanconfig
 .nyc_output
 fyn-lock.yaml
 package-lock.json

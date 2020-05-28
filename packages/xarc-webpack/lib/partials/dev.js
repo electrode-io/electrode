@@ -2,7 +2,7 @@
 
 const Url = require("url");
 // const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const archetype = require("@xarc/app/config/archetype");
+const archetype = require("@xarc/app/config/archetype")();
 const webpackDevReporter = require("../util/webpack-dev-reporter");
 
 const HTTP_PORT = 80;

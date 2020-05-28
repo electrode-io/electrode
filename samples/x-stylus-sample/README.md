@@ -1,6 +1,13 @@
-# my-app
+# x-stylus-sample
 
-Welcome to your Electrode application.
+This sample demos using stylus for CSS in an Electrode X app.
+
+## Steps
+
+1. add `electrode-archetype-opt-stylus`: `npm install --save-dev electrode-archetype-opt-stylus`
+2. Add `.styl` file to app under `src` dir
+3. import the `.styl` files in one of the subapp's entry file
+4. Use the styles in components
 
 ## Development
 
@@ -30,7 +37,7 @@ Some initial things to do and try:
 
 4. Create some React components and add them to the home or demo subapp.
 
-5. Enable some optional features using `clap features`.
+5. Enable some optional features in `archetype/config/index.js`.
 
 6. Read up on a quick intro to the [Electrode SubApp architecture](https://github.com/electrode-io/electrode/blob/master/samples/poc-subapp/README.md).
 

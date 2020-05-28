@@ -1,6 +1,6 @@
 {
   "name": "subapp-server",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Electrode SubApp app server support",
   "main": "lib/index.js",
   "scripts": {
@@ -43,7 +43,8 @@
     "@babel/register": "^7.4.4",
     "electrode-archetype-njs-module-dev": "^3.0.0",
     "electrode-server": "^3.0.0",
-    "run-verify": "^1.1.2"
+    "run-verify": "^1.1.2",
+    "@xarc/fastify-server": "^1.1.0"
   },
   "fyn": {
     "dependencies": {
@@ -77,5 +78,8 @@
     "printWidth": 100,
     "trailingComma": "none",
     "arrowParens": "avoid"
+  },
+  "publishConfig": {
+    "tag": "beta"
   }
 }

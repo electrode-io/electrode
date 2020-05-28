@@ -24,7 +24,7 @@ const {
   settings: { useDevProxy: DEV_PROXY_ENABLED, adminLogLevel },
   fullDevServer,
   controlPaths
-} = require("../../config/dev-proxy");
+} = require("../../config/dev-proxy")();
 
 const ADMIN_LOG_LEVEL = parseInt(adminLogLevel) || 0;
 
@@ -557,7 +557,6 @@ ${instruction}`
 
   async startAppServer(debug) {
     const skipWatch = debug === "--inspect-brk";
-
     const logSaver = {
       tag: this._app,
       store: [],

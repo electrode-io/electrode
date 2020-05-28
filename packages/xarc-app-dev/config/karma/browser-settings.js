@@ -1,9 +1,8 @@
 "use strict";
 
-const archetype = require("@xarc/app/config/archetype");
-const logger = require("@xarc/app/lib/logger");
-
 module.exports = function(settings) {
+  const archetype = require("@xarc/app/config/archetype")();
+  const logger = require("@xarc/app/lib/logger");
   const browser = archetype.karma.browser.toLowerCase();
   if (browser === "chrome") {
     settings.browsers = ["ChromeHeadless"];

@@ -11,8 +11,8 @@ module.exports = function setup(setupContext) {
   const distDir = process.env.NODE_ENV === "production" ? "../dist/min" : "../dist/dev";
   const clientJs = Fs.readFileSync(Path.join(__dirname, distDir, "subapp-web.js")).toString();
   const cdnJs = Fs.readFileSync(Path.join(__dirname, distDir, "cdn-map.js")).toString();
-  const littleLoader = Fs.readFileSync(
-    require.resolve("little-loader/dist/little-loader.min.js"),
+  const loadJs = Fs.readFileSync(
+    require.resolve("loadjs/dist/loadjs.min.js"),
     "utf8"
   );
 
@@ -37,7 +37,7 @@ module.exports = function setup(setupContext) {
   const webSubAppJs = `<script id="bundleAssets" type="application/json">
 ${JSON.stringify(bundleAssets)}
 </script>
-<script>/*LL*/${littleLoader}/*LL*/
+<script>/*LJ*/${loadJs}/*LJ*/
 ${clientJs}
 ${cdnJs}
 </script>

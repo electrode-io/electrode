@@ -1,3 +1,91 @@
+# 5/21/2020
+
+- fix: wds fastify files serving
+- fix: mock-cloud create config dir and set NODE_ENV
+- update: create-app templates and dep
+
+## Packages
+
+- `@xarc/app@8.1.2` `(8.1.1 => 8.1.2)`
+- `@xarc/app-dev@8.1.2` `(8.1.1 => 8.1.2)`
+- `@xarc/create-app@3.0.5` `(3.0.4 => 3.0.5)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix: wds fastify files serving ([#1650](https://github.com/electrode-io/electrode/pull/1650)) [commit](http://github.com/electrode-io/electrode/commit/3047b9e2a0716a0907b3d6279a12b0a14663d749)
+  - fix: mock-cloud create config dir and set NODE_ENV ([#1649](https://github.com/electrode-io/electrode/pull/1649)) [commit](http://github.com/electrode-io/electrode/commit/49774499363b717f4aa25a02096a966ef42b973e)
+
+- `packages/create-app`
+
+  - update: create-app templates and dep ([#1655](https://github.com/electrode-io/electrode/pull/1655)) [commit](http://github.com/electrode-io/electrode/commit/18e36091d5647e6999a8eda825ba23cec955652b)
+
+# 5/19/2020
+
+- fix: minor dev-admin and fastify plugin fix
+- fix: subapp-server hapi plugin loading options
+- fix: use loadjs to support CSS bundles
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.1.1` `(8.1.0 => 8.1.1)`
+- `@xarc/app-dev@8.1.1` `(8.1.0 => 8.1.1)`
+- `subapp-server@1.2.1` `(1.2.0 => 1.2.1)`
+- `subapp-web@1.0.27` `(1.0.26 => 1.0.27)`
+
+### Lerna Updated
+
+- `subapp-pbundle@0.0.21` `(0.0.20 => 0.0.21)`
+- `subapp-react@0.0.18` `(0.0.17 => 0.0.18)`
+- `subapp-redux@1.0.27` `(1.0.26 => 1.0.27)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix: minor dev-admin and fastify plugin fix ([#1644](https://github.com/electrode-io/electrode/pull/1644)) [commit](http://github.com/electrode-io/electrode/commit/100c6b12c3ca79049840bd7ebe812f1384f6a2eb)
+
+- `packages/subapp-server`
+
+  - fix: subapp-server hapi plugin loading options ([#1648](https://github.com/electrode-io/electrode/pull/1648)) [commit](http://github.com/electrode-io/electrode/commit/ccbff68c838f99711cfb712d98fadd86d3b62509)
+
+- `packages/subapp-web`
+
+  - fix: use loadjs to support CSS bundles ([#1647](https://github.com/electrode-io/electrode/pull/1647)) [commit](http://github.com/electrode-io/electrode/commit/d1186b0e3f8f8e541c7107c7a558259a084c0887)
+
+# 5/19/2020
+
+- feat: archetypes as functions
+
+## Packages
+
+- `@xarc/app@8.1.1-beta.0` `(8.1.0 => 8.1.1-beta.0)`
+- `@xarc/app-dev@8.1.1-beta.0` `(8.1.0 => 8.1.1-beta.0)`
+- `@xarc/webpack@8.0.6-beta.0` `(8.0.5 => 8.0.6-beta.0)`
+- `subapp-server@1.2.1-beta.0` `(1.2.0 => 1.2.1-beta.0)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - feat: archetypes as functions ([#1646](https://github.com/electrode-io/electrode/pull/1646)) [commit](http://github.com/electrode-io/electrode/commit/3d847eec1ebfd5ef7c7d88b2bdc5c0d0889a8f82)
+  - fix: minor dev-admin and fastify plugin fix ([#1644](https://github.com/electrode-io/electrode/pull/1644)) [commit](http://github.com/electrode-io/electrode/commit/100c6b12c3ca79049840bd7ebe812f1384f6a2eb)
+
+- `packages/xarc-webpack`
+
+  - feat: archetypes as functions ([#1646](https://github.com/electrode-io/electrode/pull/1646)) [commit](http://github.com/electrode-io/electrode/commit/3d847eec1ebfd5ef7c7d88b2bdc5c0d0889a8f82)
+
+- `packages/subapp-server`
+
+  - feat: archetypes as functions ([#1646](https://github.com/electrode-io/electrode/pull/1646)) [commit](http://github.com/electrode-io/electrode/commit/3d847eec1ebfd5ef7c7d88b2bdc5c0d0889a8f82)
+
+- `MISC`
+
+  - add beta tag to lerna config [commit](http://github.com/electrode-io/electrode/commit/07742ed1843956a6ded2edcb0bca9bd1e7427cf4)
+
 # 5/17/2020
 
 - fix: use fastify-server for serving dev-server

@@ -1,0 +1,21 @@
+import { loadSubApp } from "subapp-react";
+
+const Demo1 = props => {
+  return (
+    <div style={{ padding: "5px", border: "solid", marginLeft: "15%", marginRight: "15%" }}>
+      <p>subapp demo1</p>
+      props: {JSON.stringify(props)}
+      <p>
+        <a href="https://wmlink.wal-mart.com/electrode">Electrode Docs</a>
+      </p>
+    </div>
+  );
+};
+
+export default loadSubApp({
+  Component: Demo1,
+  name: "Demo1",
+  prepare: () => {
+    return { data: "hello from demo1" };
+  }
+});
