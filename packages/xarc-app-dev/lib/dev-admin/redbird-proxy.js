@@ -8,7 +8,7 @@ const _ = require("lodash");
 const redbird = require("@jchip/redbird");
 const ck = require("chalker");
 const optionalRequire = require("optional-require")(require);
-const { settings, searchSSLCerts, controlPaths } = require("../../config/dev-proxy")();
+const { settings, searchSSLCerts, controlPaths } = require("../../config/dev-proxy");
 const cdnMock = require("./cdn-mock");
 
 const { formUrl } = require("../utils");
