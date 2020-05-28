@@ -31,12 +31,15 @@ module.exports = function setup(setupContext) {
   };
 
   let inlineRuntimeJS = "";
+  let rtJsCdnEntryPoint;
   if (process.env.NODE_ENV === "production") {
-    const runtimeRelativePath =
-      cdnJsBundles.runtime ||
-      Object.values(cdnJsBundles).filter(file => file.includes("runtime.bundle"))[0];
+    rtJsCdnEntryPoint = Object.keys(cdnJsBundles).filter(ep =>
+      cdnJsBundles[ep].includes("runtime.bundle")
+    )[0];
     const runtimeFullPath =
-      runtimeRelativePath && Path.join(Path.resolve("dist"), runtimeRelativePath);
+      rtJsCdnEntryPoint &&
+      cdnJsBundles[rtJsCdnEntryPoint] &&
+      Path.join(Path.resolve("dist"), "js", Path.basename(cdnJsBundles[rtJsCdnEntryPoint]));
     if (Fs.existsSync(runtimeFullPath)) {
       inlineRuntimeJS = Fs.readFileSync(runtimeFullPath).toString();
     }
@@ -61,8 +64,8 @@ ${cdnJs}
     process: context => {
       context.user.assets = assets;
       context.user.includedBundles = {};
-      if (inlineRuntimeJS) {
-        context.user.includedBundles.runtime = true;
+      if (rtJsCdnEntryPoint && inlineRuntimeJS) {
+        context.user.includedBundles[rtJsCdnEntryPoint] = true;
       }
       // invoke the initialize method of subapp's server code
       if (subAppServers.length > 0) {
