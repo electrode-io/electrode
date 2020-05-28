@@ -52,6 +52,10 @@ ${JSON.stringify(bundleAssets)}
 /*rt*/${inlineRuntimeJS} /*rt*/
 ${clientJs}
 ${cdnJs}
+${
+  inlineRuntimeJS && rtJsCdnEntryPoint && `window.xarcV1.markBundlesLoaded([${rtJsCdnEntryPoint}]);`
+}
+
 </script>
 `;
 
