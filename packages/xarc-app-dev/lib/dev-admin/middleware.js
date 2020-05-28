@@ -11,7 +11,7 @@ const Url = require("url");
 const queryStr = require("querystring");
 const { getWebpackStartConfig } = require("@xarc/webpack/lib/util/custom-check");
 const { getLogs, getLogEventAsHtml } = require("./log-reader");
-const { fullDevServer, controlPaths } = require("../../config/dev-proxy")();
+const { fullDevServer, controlPaths } = require("../../config/dev-proxy");
 const { formUrl } = require("../utils");
 const isomorphicLoaderConfig = require("isomorphic-loader/lib/config");
 
