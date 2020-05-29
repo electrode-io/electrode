@@ -29,7 +29,7 @@ module.exports = function setup(setupContext) {
     basePath: ""
   };
 
-  var inlineRuntimeJS = "";
+  let inlineRuntimeJS = "";
   let runtimeEntryPoints = [];
   if (process.env.NODE_ENV === "production") {
     runtimeEntryPoints = Object.keys(cdnJsBundles).filter(ep =>
