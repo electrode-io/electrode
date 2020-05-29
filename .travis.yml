@@ -1,7 +1,7 @@
 language: node_js
 node_js:
   - v10
-  - v12
+  - v12.16
 dist: trusty # needs Ubuntu Trusty
 sudo: required  # no need for virtualization.
 addons:

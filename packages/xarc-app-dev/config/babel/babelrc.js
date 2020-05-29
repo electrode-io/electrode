@@ -11,6 +11,8 @@ const archetype = require("@xarc/app/config/archetype")();
 const optionalRequire = require("optional-require")(require);
 const optFlow = optionalRequire("electrode-archetype-opt-flow");
 
+const isJest = Boolean(process.env.JEST_WORKER_ID);
+
 const {
   enableTypeScript,
   flowRequireDirective,
@@ -34,7 +36,7 @@ const fileId = "xarc-app-dev:babelrc.js";
 
 const checkEnv = names => {
   names = names.filter(x => !process.env.hasOwnProperty(x));
-  if (names.length > 0) {
+  if (!isJest && names.length > 0) {
     console.error(
       ck`\n<red>Notice:</> ${fileId}: env ${names.join(", ")} not defined - default to 'false'\n`
     );
@@ -140,7 +142,9 @@ const plugins = basePlugins.concat(
 const target = isNodeTarget ? "node" : archetype.babel.target;
 
 const targets = archetype.babel.envTargets[target];
-console.log(ck`<orange>Babel preset-env compile targets: </><cyan>${JSON.stringify(targets)}</>`);
+if (!isJest) {
+  console.log(ck`<orange>Babel preset-env compile targets: </><cyan>${JSON.stringify(targets)}</>`);
+}
 
 const useBuiltIns =
   !isNodeTarget && archetype.babel.hasMultiTargets
