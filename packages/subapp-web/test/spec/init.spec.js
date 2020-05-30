@@ -51,7 +51,7 @@ describe("init", function () {
     const initJs = initToken.process(context);
     process.chdir(originalWd);
     expect(Object.keys(context.user.includedBundles).length).to.equal(1);
-    const loadedBundles = Object.keys(context.user.includedBundles).map(ep => parseInt(ep));
+    const loadedBundles = Object.keys(context.user.includedBundles);
     const markLoadedStr = `markBundlesLoaded(${JSON.stringify(loadedBundles)})`;
     expect(initJs).to.contain(markLoadedStr);
     expect(initJs).to.contain("/* placeholder */");

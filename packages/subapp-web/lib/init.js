@@ -32,8 +32,8 @@ module.exports = function setup(setupContext) {
   let inlineRuntimeJS = "";
   let runtimeEntryPoints = [];
   if (process.env.NODE_ENV === "production") {
-    runtimeEntryPoints = Object.keys(cdnJsBundles).filter(ep =>
-      cdnJsBundles[ep].includes("runtime.bundle")
+    runtimeEntryPoints = Object.keys(assets.chunksById.js).filter(ep =>
+      assets.chunksById.js[ep].startsWith("runtime.bundle")
     );
     inlineRuntimeJS = runtimeEntryPoints
       .map(ep => Path.resolve("dist", "js", Path.basename(cdnJsBundles[ep])))
@@ -49,7 +49,7 @@ ${JSON.stringify(bundleAssets)}
 /*rt*/${inlineRuntimeJS} /*rt*/
 ${clientJs}
 ${cdnJs}
-window.xarcV1.markBundlesLoaded([${runtimeEntryPoints.join(",")}]);
+window.xarcV1.markBundlesLoaded(${JSON.stringify(runtimeEntryPoints)});
 </script>`;
 
   // check if any subapp has server side code with initialize method and load them
