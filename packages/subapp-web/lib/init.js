@@ -35,21 +35,25 @@ module.exports = function setup(setupContext) {
     runtimeEntryPoints = Object.keys(assets.chunksById.js).filter(ep =>
       assets.chunksById.js[ep].startsWith("runtime.bundle")
     );
-    inlineRuntimeJS = runtimeEntryPoints
-      .map(ep => Path.resolve("dist", "js", Path.basename(cdnJsBundles[ep])))
-      .filter(fullPath => Fs.existsSync(fullPath))
-      .map(fullPath => Fs.readFileSync(fullPath))
-      .join(" ");
+    inlineRuntimeJS =
+      "/*rt*/" +
+      runtimeEntryPoints
+        .map(ep => Path.resolve("dist", "js", Path.basename(cdnJsBundles[ep])))
+        .filter(fullPath => Fs.existsSync(fullPath))
+        .map(fullPath => Fs.readFileSync(fullPath))
+        .join(" ") +
+      "/*rt*/";
+
+    inlineRuntimeJS += `\nwindow.xarcV1.markBundlesLoaded(${JSON.stringify(runtimeEntryPoints)});`;
   }
 
   const webSubAppJs = `<script id="bundleAssets" type="application/json">
 ${JSON.stringify(bundleAssets)}
 </script>
 <script>/*LJ*/${loadJs}/*LJ*/
-/*rt*/${inlineRuntimeJS} /*rt*/
 ${clientJs}
 ${cdnJs}
-window.xarcV1.markBundlesLoaded(${JSON.stringify(runtimeEntryPoints)});
+${inlineRuntimeJS}
 </script>`;
 
   // check if any subapp has server side code with initialize method and load them
