@@ -1,6 +1,7 @@
 /* @jsx createElement */
 
 import { IndexPage, createElement, Token, Require } from "../template";
+import { ReserveSpot } from "subapp-web";
 
 const RenderSubApps = (props, context) => {
   const { routeOptions } = context.user;
@@ -46,6 +47,7 @@ const Template = (
       <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <ReserveSpot saveId="headEntries" />
         <Require _id="subapp-web/lib/polyfill" />
         <Token _id="META_TAGS" />
         <Token _id="PAGE_TITLE" />

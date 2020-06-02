@@ -8,6 +8,7 @@ const { default: makeSubAppSpec } = require("../dist/node/make-subapp-spec");
 
 const { setupFramework } = require("./util");
 const lazyLoadSubApp = () => {};
+const ReserveSpot = require("./ReserveSpot");
 
 module.exports = {
   // isomorphic functions
@@ -29,5 +30,6 @@ module.exports = {
   init: require("./init"),
   load: require("./load"),
   start: require("./start"),
+  ReserveSpot,
   xarc: { IS_BROWSER: false, HAS_WINDOW: false } // no xarc client lib on the server
 };

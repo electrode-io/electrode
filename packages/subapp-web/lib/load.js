@@ -145,6 +145,7 @@ Response: ${err || body}`
     const cdnJsBundles = util.getCdnJsBundles(assets, setupContext.routeOptions);
 
     const bundles = entryPoints.filter(ep => !includedBundles[ep]);
+    const headSplits = [];
     const splits = bundles
       .map(ep => {
         if (!inlineSubAppJs && !includedBundles[entryName]) {
@@ -153,16 +154,24 @@ Response: ${err || body}`
             cdnJsBundles[ep] &&
             []
               .concat(cdnJsBundles[ep])
-              .map(jsBundle => {
+              .reduce((a, jsBundle) => {
                 const ext = Path.extname(jsBundle);
                 if (ext === ".js") {
-                  return `<script src="${jsBundle}" async></script>`;
+                  if (context.user.headEntries) {
+                    headSplits.push(`<link rel="preload" href="${jsBundle}" as="script">`);
+                  }
+                  a.push(`<script src="${jsBundle}" async></script>`);
                 } else if (ext === ".css") {
-                  return `<link rel="stylesheet" href="${jsBundle}">`;
+                  if (context.user.headEntries) {
+                    headSplits.push(`<link rel="stylesheet" href="${jsBundle}">`);
+                  } else {
+                    a.push(`<link rel="stylesheet" href="${jsBundle}">`);
+                  }
                 } else {
-                  return `<!-- UNKNOWN bundle extension ${jsBundle} -->`;
+                  a.push(`<!-- UNKNOWN bundle extension ${jsBundle} -->`);
                 }
-              })
+                return a;
+              }, [])
               .join("\n")
           );
         }
@@ -179,7 +188,7 @@ Response: ${err || body}`
       }
     }
 
-    return { bundles, scripts: splits.join("\n") };
+    return { bundles, scripts: splits.join("\n"), preLoads: headSplits.join("\n") };
   };
 
   const loadSubApp = () => {
@@ -209,6 +218,8 @@ Response: ${err || body}`
       verifyUseStream(props);
 
       const { request } = context.user;
+
+      context.user.numOfSubapps = context.user.numOfSubapps || 0;
 
       if (request.app.webpackDev && subAppLoadTime < request.app.webpackDev.compileTime) {
         subAppLoadTime = request.app.webpackDev.compileTime;
@@ -312,6 +323,11 @@ ${stack}`,
         }
 
         outputSpot.close();
+        context.user.numOfSubapps--;
+        if (context.user.numOfSubapps === 0 && context.user.headEntries) {
+          context.user.headEntries.close();
+          context.user.headEntries = undefined;
+        }
       };
 
       ssrInfo.done = () => {
@@ -329,12 +345,18 @@ ${stack}`,
           ssrGroups
         };
 
-        const { bundles, scripts } = await prepareSubAppSplitBundles(context);
+        context.user.numOfSubapps++;
+        const { bundles, scripts, preLoads } = await prepareSubAppSplitBundles(context);
         outputSpot.add(`${comment}`);
         if (bundles.length > 0) {
           outputSpot.add(`${scripts}
 <script>${xarc}.markBundlesLoaded(${JSON.stringify(bundles)});</script>
 `);
+        }
+        if (preLoads.length > 0) {
+          context.user.headEntries.add("\n");
+          context.user.headEntries.add(preLoads);
+          context.user.headEntries.add("\n");
         }
 
         if (props.serverSideRendering) {
