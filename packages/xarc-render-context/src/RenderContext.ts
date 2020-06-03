@@ -7,7 +7,7 @@
 import { RenderOutput } from "./RenderOutput";
 import Munchy from "munchy";
 
-const munchyHandleStreamError = err => {
+export const munchyHandleStreamError = err => {
   let errMsg = (process.env.NODE_ENV !== "production" && err.stack) || err.message;
 
   if (process.cwd().length > 3) {
