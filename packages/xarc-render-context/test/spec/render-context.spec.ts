@@ -118,18 +118,19 @@ describe("render-context", function () {
     // expect(x).to.equal("hello world");
   });
 
-  it("should handle token result with promise", function () {
+  it("should handle token result with promise", async function () {
     const defer = makeDefer();
-    console.log(defer.promise);
     // const done = () => defer && defer.resolve("foo");
 
     const context = new RenderContext({}, {});
     let x;
-    // context.send = _x => (x = _x);
-    context.handleTokenResult(1, defer, err => {
+    context.send = output => {
+      x = output;
+    };
+    context.handleTokenResult(1, defer.promise, err => {
       expect(err).to.be.undefined;
     });
-    defer.done(null, "foo");
+    await defer.done(null, "foo");
     context.output.flush();
     expect(x).to.equal("foo");
   });
