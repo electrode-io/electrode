@@ -5,7 +5,10 @@ import { RenderOutput } from "../../src/RenderOutput";
 import { expect } from "chai";
 import * as Munchy from "munchy";
 import { PassThrough } from "stream";
+import { SpotOutput } from "../../src";
+import { makeDefer } from "xaa";
 
+// import { Fs } from "fs";
 describe("render-context", function () {
   it("should handle setting all stop modes", () => {
     const context = new RenderContext({}, {});
@@ -49,7 +52,7 @@ describe("render-context", function () {
       {
         handlersMap: {
           title: function (a) {
-            return "<title>" + a + "</title>";
+            return `<title>${a}</title>`;
           },
           handlerWithToken: {
             tokens: ["abc"]
@@ -101,14 +104,33 @@ describe("render-context", function () {
     expect(x).to.equal("stringOutput");
   });
 
+  it("should handle token results with buffer as input", function () {
+    const context = new RenderContext({}, {});
+    context.output = new SpotOutput();
+    //    const spotOutput = new SpotOutput({ context });
+    let x; //  = "";
+
+    context.handleTokenResult(1, Buffer.from("hello world", "utf8"), err => {
+      expect(err).to.be.undefined;
+    });
+
+    //context.output.flush();
+    // expect(x).to.equal("hello world");
+  });
+
   it("should handle token result with promise", function () {
-    // const context = new RenderContext({}, {});
-    // let x;
+    const defer = makeDefer();
+    console.log(defer.promise);
+    // const done = () => defer && defer.resolve("foo");
+
+    const context = new RenderContext({}, {});
+    let x;
     // context.send = _x => (x = _x);
-    // context.handleTokenResult(1, deferred, err => {
-    //   expect(err).to.be.undefined;
-    // });
-    // context.output.flush();
-    // expect(x).to.equal("deferredOutput");
+    context.handleTokenResult(1, defer, err => {
+      expect(err).to.be.undefined;
+    });
+    defer.done(null, "foo");
+    context.output.flush();
+    expect(x).to.equal("foo");
   });
 });
