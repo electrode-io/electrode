@@ -6,9 +6,7 @@
 import * as assert from "assert";
 import { loadTokenModuleHandler } from "./load-handler";
 import { TEMPLATE_DIR, TOKEN_HANDLER } from "./symbols";
-
 const viewTokenModules = {};
-
 export class TokenModule {
   id: any;
   modPath: any;
@@ -47,15 +45,22 @@ export class TokenModule {
 
   // if token is a module, then load it
   load(options) {
+    console.log("====load ", this.id);
+    console.log("===custom", this.custom);
+    console.log(viewTokenModules);
     if (!this.isModule || this.custom !== undefined) return;
-
     let tokenMod = viewTokenModules[this.id];
 
+    console.log(tokenMod);
+
     if (tokenMod === undefined) {
-      tokenMod = loadTokenModuleHandler(this.modPath, this[TEMPLATE_DIR]);
+      if (this._modCall) {
+        tokenMod = loadTokenModuleHandler(this.modPath, this[TEMPLATE_DIR], this._modCall[0]);
+      } else {
+        tokenMod = loadTokenModuleHandler(this.modPath, this[TEMPLATE_DIR]);
+      }
       viewTokenModules[this.id] = tokenMod;
     }
-
     if (this._modCall) {
       // call setup function to get an instance
       const params = [options || {}, this].concat(this._modCall[1] || []);
@@ -74,7 +79,7 @@ export class TokenModule {
       this.custom && this.custom.process,
       `custom token ${this.id} module doesn't have process method`
     );
-
+    console.log(".. viewTokenModules", viewTokenModules);
     // if process function takes more than one params, then it should take a
     // next callback so it can do async work, and call next after that's done.
     this.wantsNext = this.custom.process.length > 1;

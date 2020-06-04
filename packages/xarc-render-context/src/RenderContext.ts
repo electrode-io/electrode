@@ -5,7 +5,7 @@
 /* eslint-disable comma-dangle, arrow-parens, filenames/match-regex, no-magic-numbers */
 
 import { RenderOutput } from "./RenderOutput";
-import Munchy from "munchy";
+import * as Munchy from "munchy";
 
 export const munchyHandleStreamError = err => {
   let errMsg = (process.env.NODE_ENV !== "production" && err.stack) || err.message;
@@ -169,6 +169,8 @@ export class RenderContext {
       // if it's a string, buffer, or stream, then add to output
       if (typeof res === "string" || Buffer.isBuffer(res) || isReadableStream(res)) {
         this.output.add(res);
+      } else {
+        // console.log(" not ignored");
       }
       // ignore other return value types
       return cb();
