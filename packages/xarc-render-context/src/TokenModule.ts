@@ -52,7 +52,11 @@ export class TokenModule {
     let tokenMod = viewTokenModules[this.id];
 
     if (tokenMod === undefined) {
-      tokenMod = loadTokenModuleHandler(this.modPath, this[TEMPLATE_DIR]);
+      if (this._modCall) {
+        tokenMod = loadTokenModuleHandler(this.modPath, this[TEMPLATE_DIR], this._modCall[0]);
+      } else {
+        tokenMod = loadTokenModuleHandler(this.modPath, this[TEMPLATE_DIR]);
+      }
       viewTokenModules[this.id] = tokenMod;
     }
 

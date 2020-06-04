@@ -5,8 +5,6 @@ import { RenderOutput } from "../../src/RenderOutput";
 import { expect } from "chai";
 import * as Munchy from "munchy";
 import { PassThrough } from "stream";
-import { nextTick } from "process";
-import { isContext } from "vm";
 
 describe("render-context", function () {
   it("should handle setting all stop modes", () => {
@@ -29,7 +27,6 @@ describe("render-context", function () {
     const munchyoutput = new PassThrough();
     context.munchy.pipe(munchyoutput);
     munchyoutput.on("data", data => {
-      console.log("STDOUT DATA", data.toString());
       expect(data.toString()).to.equal("foo");
     });
 

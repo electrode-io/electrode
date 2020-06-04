@@ -6,6 +6,7 @@
 import * as Path from "path";
 import * as requireAt from "require-at";
 import * as optionalRequire from "optional-require";
+import { isContext } from "vm";
 
 const failLoadTokenModule = (msg: string, err: Error) => {
   console.error(`error: @xarc/render-context failed to load token process module ${msg}`, err);
@@ -21,7 +22,7 @@ const notFoundLoadTokenModule = (msg: string) => {
   });
 };
 
-export const loadTokenModuleHandler = (path: string, templateDir?: string) => {
+export const loadTokenModuleHandler = (path: string, templateDir?: string, customCall?: string) => {
   const tokenMod = optionalRequire(requireAt(Path.resolve(templateDir || "")))(path, {
     fail: (e: Error) => failLoadTokenModule(path, e),
     notFound: () => notFoundLoadTokenModule(path)
@@ -34,6 +35,10 @@ export const loadTokenModuleHandler = (path: string, templateDir?: string) => {
   }
   if (tokenMod.default) {
     return tokenMod.default;
+  }
+
+  if (customCall && tokenMod[customCall]) {
+    return tokenMod;
   }
   throw new Error(
     "@xarc/render-context: token module invalid - should export a function directly or as 'default' or 'tokenHandler'"
