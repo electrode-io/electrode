@@ -39,7 +39,6 @@
     "eslint-plugin-filenames": "^1.1.0",
     "eslint-plugin-jsdoc": "^21.0.0",
     "mocha": "^7.1.0",
-    "munchy": "^1.0.7",
     "nyc": "^15.0.0",
     "prettier": "^2.0.4",
     "sinon": "^7.2.6",
