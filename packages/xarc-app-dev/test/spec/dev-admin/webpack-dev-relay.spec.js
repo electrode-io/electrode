@@ -63,6 +63,7 @@ describe("webpack-dev-relay", function() {
       },
       r => {
         const s = _.sortBy(r, "name");
+        console.log(s);
         expect(s[0]).to.include({ name: isomorphicConfig.configName, valid: true });
         expect(s[1]).to.include({ name: "webpack-report", valid: true, id: 3 });
         expect(s[2]).to.include({ name: "webpack-stats", valid: true });
