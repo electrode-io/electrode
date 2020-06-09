@@ -36,14 +36,15 @@ describe("init", function () {
     resetCdn();
     process.env.NODE_ENV = "production";
     const originalWd = process.cwd();
-    process.chdir(Path.resolve("test/data/mock-app"));
+    process.chdir(Path.resolve("test/subapps"));
+    process.env.APP_SRC_DIR = "subapp1/..";
 
     const initToken = init({
       routeOptions: {
         __internals: {},
         cdn: {},
         prodBundleBase: "/js",
-        stats: Path.join(__dirname, "../data/mock-app/dist/stats-with-runtime.json")
+        stats: Path.join(__dirname, "../data/prod-stats.json")
       }
     });
 
