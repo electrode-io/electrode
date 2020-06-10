@@ -50,6 +50,7 @@ describe("munchy output", function () {
     expect(result).to.contain("Error1");
 
     const output = munchyHandleStreamError(new Error());
+
     expect(output.result).to.contain("SSR ERROR");
   });
   it("should return stack trace on non-production", function () {
@@ -155,6 +156,7 @@ describe("token handler in render context", function () {
       expect(err).to.be.undefined;
     });
     expect(received).to.equal("hello world");
+    expect(context.transform("s")).to.equal("s");
   });
 
   it("should handle token results with readable stream as input", function () {
