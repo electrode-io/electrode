@@ -15,7 +15,7 @@ const failLoadTokenModule = (msg: string, err: Error) => {
   });
 };
 
-const notFoundLoadTokenModule = (msg: string) => {
+const notFoundLoadTokenModule = (msg: string, err: Error) => {
   console.error(`error: @xarc/render-context can't find token process module ${msg}`);
   return () => ({
     process: () => `\n@xarc/render-context: token process module ${msg} not found\n`
@@ -25,7 +25,7 @@ const notFoundLoadTokenModule = (msg: string) => {
 export const loadTokenModuleHandler = (path: string, templateDir?: string, customCall?: string) => {
   const tokenMod = optionalRequire(requireAt(Path.resolve(templateDir || "")))(path, {
     fail: (e: Error) => failLoadTokenModule(path, e),
-    notFound: () => notFoundLoadTokenModule(path)
+    notFound: (e: Error) => notFoundLoadTokenModule(path, e)
   });
   if (typeof tokenMod === "function") {
     return tokenMod;

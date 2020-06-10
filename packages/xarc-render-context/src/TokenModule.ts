@@ -44,7 +44,7 @@ export class TokenModule {
   }
 
   // if token is a module, then load it
-  load(options) {
+  load(options = {}) {
     if (!this.isModule || this.custom !== undefined) return;
     let tokenMod = viewTokenModules[this.id];
 
@@ -58,16 +58,17 @@ export class TokenModule {
     }
     if (this._modCall) {
       // call setup function to get an instance
-      const params = [options || {}, this].concat(this._modCall[1] || []);
+      const params = [options, this].concat(this._modCall[1] || []);
       assert(
         tokenMod[this._modCall[0]],
         `electrode-react-webapp: _call of token ${this.id} - '${this._modCall[0]}' not found`
       );
       this.custom = tokenMod[this._modCall[0]](...params);
     } else {
-      this.custom = tokenMod(options || {}, this);
+      this.custom = tokenMod(options, this);
     }
 
+    /* if token doesn't provide any code (null) then there's no handler to set for it */
     if (this.custom === null) return;
 
     assert(
