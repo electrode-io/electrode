@@ -45,13 +45,8 @@ export class TokenModule {
 
   // if token is a module, then load it
   load(options) {
-    console.log("====load ", this.id);
-    console.log("===custom", this.custom);
-    console.log(viewTokenModules);
     if (!this.isModule || this.custom !== undefined) return;
     let tokenMod = viewTokenModules[this.id];
-
-    console.log(tokenMod);
 
     if (tokenMod === undefined) {
       if (this._modCall) {
@@ -79,7 +74,6 @@ export class TokenModule {
       this.custom && this.custom.process,
       `custom token ${this.id} module doesn't have process method`
     );
-    console.log(".. viewTokenModules", viewTokenModules);
     // if process function takes more than one params, then it should take a
     // next callback so it can do async work, and call next after that's done.
     this.wantsNext = this.custom.process.length > 1;

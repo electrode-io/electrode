@@ -1,10 +1,15 @@
 import { TokenModule, loadTokenModuleHandler } from "../../src";
 import { expect } from "chai";
 import * as Path from "path";
-import { TEMPLATE_DIR, TOKEN_HANDLER } from "../../src/symbols";
+import { TEMPLATE_DIR, TOKEN_HANDLER } from "../../src/index";
+
 const templateDir = Path.join(__dirname, "../fixtures");
 
 describe("TokenModule ", function () {
+  it("should have laoded symbols TEMPLATE_DIR TOKEN_HANDLER", function () {
+    expect(TOKEN_HANDLER).to.not.be.undefined;
+    expect(TEMPLATE_DIR).to.not.be.undefined;
+  });
   it("should store id, pos, templateDir as props", function () {
     const tk = new TokenModule("test", 0, {}, templateDir);
     expect(tk.id).to.equal("test");
@@ -74,9 +79,14 @@ describe("_call in options ", function () {
     tk.load("css");
     expect(tk[TOKEN_HANDLER]({ folder: "dist" })).to.equal("load css from dist folder");
   });
-  it("should initialize null props to empty object", function () {
+  it("should null fill load(options) and props", function () {
     const tk = new TokenModule("test", 0, null, templateDir);
     expect(tk.props).to.deep.equal({});
+
+    console.log(tk._modCall);
+    tk.load(null);
+    expect(tk.custom).to.deep.equal({});
+    console.log(tk.custom);
   });
 
   it("should set template dir to props[TEMPLATE_DIR] when exists ", function () {
@@ -91,6 +101,7 @@ describe("_call in options ", function () {
     const tk = new TokenModule("test", 0, null, null);
 
     expect(tk[TEMPLATE_DIR]).to.equal(process.cwd()); //deep.equal({});
+    tk.load(null);
   });
 });
 
@@ -100,20 +111,23 @@ describe("require from modPath", function () {
     tk.load({});
     expect(tk[TOKEN_HANDLER]()).to.equal("hello from token 01");
   });
+  it("should have same result when called with load(null)", function () {
+    tk.load(null);
+    expect(tk[TOKEN_HANDLER]()).to.equal("hello from token 01");
+  });
 });
 
 describe("_call in options ", function () {
-  it("should load custom __call ggg function", function () {
+  it("should load custom _modCall", function () {
     const tk = new TokenModule("#./custom-call.ts", 0, { _call: "setup" }, templateDir);
     expect(tk.props).to.deep.equal({ _call: "setup" });
 
-    tk.load({});
+    tk.load(null);
     expect(tk[TOKEN_HANDLER]()).to.equal("hello from custom setup");
-    //  tk.custom = null;
+
     tk.modPath = null;
+
     tk.load({ a: 11 });
-    expect(tk[TOKEN_HANDLER]()).to.equal("hello from custom setup");
-    expect(tk[TOKEN_HANDLER]()).to.equal("hello from custom setup");
     expect(tk[TOKEN_HANDLER]()).to.equal("hello from custom setup");
   });
 
