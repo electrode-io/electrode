@@ -16,7 +16,7 @@ const failLoadTokenModule = (msg: string, err: Error) => {
 };
 
 const notFoundLoadTokenModule = (msg: string, err: Error) => {
-  console.error(`error: @xarc/render-context can't find token process module ${msg}`);
+  console.error(`error: @xarc/render-context can't find token process module ${msg}`, err);
   return () => ({
     process: () => `\n@xarc/render-context: token process module ${msg} not found\n`
   });
