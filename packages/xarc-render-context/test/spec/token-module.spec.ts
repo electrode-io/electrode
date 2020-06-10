@@ -82,7 +82,7 @@ describe("_call in options ", function () {
     expect(tk[TOKEN_HANDLER]({ folder: "dist" })).to.equal("load css from dist folder");
   });
 
-  it.skip("should set default for options when calling load", function () {
+  it("should set default for options when calling load", function () {
     const tk = new TokenModule("test", 0, null, templateDir);
     expect(tk.props).to.deep.equal({});
   });
@@ -151,6 +151,7 @@ describe("_call in options ", function () {
     tk.load(null);
     expect(typeof tk.custom.process).to.equal("function");
   });
+
   it("null fill custom params", function () {
     const tk = new TokenModule("#./token-module-01.ts", 0, {}, templateDir);
     tk.load(null);
