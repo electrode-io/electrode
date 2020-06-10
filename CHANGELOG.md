@@ -1,5 +1,20 @@
 # 6/10/2020
 
+- remove beta tag
+
+## Packages
+
+- `@xarc/app@8.1.4` `(8.1.3 => 8.1.4)`
+- `@xarc/app-dev@8.1.4` `(8.1.3 => 8.1.4)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - remove beta tag [commit](http://github.com/electrode-io/electrode/commit/0a7cebeee8c5f65f316c673b6f7c6f9f099cafb9)
+
+# 6/10/2020
+
 - Preload scripts and load styles in <head>
 - Inline webpack runtime js bundle for production
 - feat: archetypes as functions
