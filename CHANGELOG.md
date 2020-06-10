@@ -1,3 +1,56 @@
+# 6/10/2020
+
+- Preload scripts and load styles in <head>
+- Inline webpack runtime js bundle for production
+- feat: archetypes as functions
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.1.3` `(8.1.2 => 8.1.3)`
+- `@xarc/app-dev@8.1.3` `(8.1.2 => 8.1.3)`
+- `@xarc/create-app@3.0.6` `(3.0.5 => 3.0.6)`
+- `@xarc/webpack@8.0.7` `(8.0.6-beta.0 => 8.0.7)`
+- `subapp-server@1.2.2` `(1.2.1 => 1.2.2)`
+- `subapp-web@1.0.28` `(1.0.27 => 1.0.28)`
+
+### Lerna Updated
+
+- `subapp-pbundle@0.0.22` `(0.0.21 => 0.0.22)`
+- `subapp-react@0.0.19` `(0.0.18 => 0.0.19)`
+- `subapp-redux@1.0.28` `(1.0.27 => 1.0.28)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - feat: archetypes as functions ([#1646](https://github.com/electrode-io/electrode/pull/1646)) [commit](http://github.com/electrode-io/electrode/commit/3d847eec1ebfd5ef7c7d88b2bdc5c0d0889a8f82)
+
+- `packages/xarc-create-app`
+
+  - Inline webpack runtime js bundle for production ([#1662](https://github.com/electrode-io/electrode/pull/1662)) [commit](http://github.com/electrode-io/electrode/commit/cf64c597891e1762fa1803a6c9759918e65fc3ff)
+  - [chore]: rename package create-app to xarc-create-app [commit](http://github.com/electrode-io/electrode/commit/e638ec3372f379ce35c5c379713bdf2cfd2c4af4)
+
+- `packages/xarc-webpack`
+
+  - feat: archetypes as functions ([#1646](https://github.com/electrode-io/electrode/pull/1646)) [commit](http://github.com/electrode-io/electrode/commit/3d847eec1ebfd5ef7c7d88b2bdc5c0d0889a8f82)
+
+- `packages/subapp-pkg-util`
+
+  - fix test [commit](http://github.com/electrode-io/electrode/commit/5a59e2b165ab6ed8f05d06bf0a8a66d9b19c4fec)
+
+- `packages/subapp-server`
+
+  - Preload scripts and load styles in <head> ([#1659](https://github.com/electrode-io/electrode/pull/1659)) [commit](http://github.com/electrode-io/electrode/commit/94a60acf874830034bd97f34141fa703f23cd69e)
+  - feat: archetypes as functions ([#1646](https://github.com/electrode-io/electrode/pull/1646)) [commit](http://github.com/electrode-io/electrode/commit/3d847eec1ebfd5ef7c7d88b2bdc5c0d0889a8f82)
+
+- `packages/subapp-web`
+
+  - Preload scripts and load styles in <head> ([#1659](https://github.com/electrode-io/electrode/pull/1659)) [commit](http://github.com/electrode-io/electrode/commit/94a60acf874830034bd97f34141fa703f23cd69e)
+  - Inline webpack runtime js bundle for production ([#1662](https://github.com/electrode-io/electrode/pull/1662)) [commit](http://github.com/electrode-io/electrode/commit/cf64c597891e1762fa1803a6c9759918e65fc3ff)
+  - dep: xaa 1.6.0 ([#1669](https://github.com/electrode-io/electrode/pull/1669)) [commit](http://github.com/electrode-io/electrode/commit/512cdb5ca887e1f8933415ce7a41ca24c82d852d)
+
 # 5/21/2020
 
 - fix: wds fastify files serving
