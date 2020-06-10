@@ -32,7 +32,7 @@ export function loadSubApp(info, renderStart, options) {
 
   subApp._started = [];
   xarc.setSubApp(name, subApp);
-
+  debugger;
   subApp._renderStart =
     renderStart ||
     ((options, element) => {

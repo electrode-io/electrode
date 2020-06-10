@@ -82,11 +82,6 @@ describe("_call in options ", function () {
   it("should null fill load(options) and props", function () {
     const tk = new TokenModule("test", 0, null, templateDir);
     expect(tk.props).to.deep.equal({});
-
-    console.log(tk._modCall);
-    tk.load(null);
-    expect(tk.custom).to.deep.equal({});
-    console.log(tk.custom);
   });
 
   it("should set template dir to props[TEMPLATE_DIR] when exists ", function () {
@@ -142,5 +137,12 @@ describe("_call in options ", function () {
 
     tk.load("css");
     expect(tk[TOKEN_HANDLER]({ folder: "dist" })).to.equal("load css from dist folder");
+    tk.load(null);
+    expect(typeof tk.custom.process).to.equal("function");
+  });
+  it("null fill custom params", function () {
+    const tk = new TokenModule("#./token-module-01.ts", 0, {}, templateDir);
+    tk.load(null);
+    expect(tk.custom.process()).to.equal("hello from token 01");
   });
 });
