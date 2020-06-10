@@ -8,7 +8,6 @@ import * as streamToArray from "stream-to-array";
 
 import { expect } from "chai";
 import { makeDefer } from "xaa";
-import { isMainThread } from "worker_threads";
 describe("render-output", function () {
   it("should flush simple string", () => {
     let text;
@@ -225,7 +224,7 @@ describe("render-output", function () {
     try {
       await ro2._finish();
     } catch (e) {
-      expect(e.message).to.equal("new Error2");
+      expect(e.message).to.equal("new error2");
     }
   });
 });
