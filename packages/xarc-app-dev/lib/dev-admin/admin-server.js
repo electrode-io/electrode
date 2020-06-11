@@ -14,9 +14,11 @@ const WebpackDevRelay = require("./webpack-dev-relay");
 const { displayLogs } = require("./log-reader");
 const { fork } = require("child_process");
 const ConsoleIO = require("./console-io");
+const AutomationIO = require("./automation-io");
 const winstonLogger = require("@xarc/app/lib/winston-logger");
 const winston = require("winston");
 const logger = winstonLogger(winston, false);
+const isCI = require("is-ci");
 const { doCleanup } = require("./cleanup");
 const xaa = require("xaa");
 const { formUrl } = require("../utils");
@@ -61,7 +63,12 @@ class AdminServer {
     // Any out-of-band writes to the terminal with process.stdout or console
     // will mess up the in place progress display that log-update handles
     //
-    this._io = (options && options.inputOutput) || new ConsoleIO();
+    const defaultIo = () => {
+      const autoIo = args.source.interactive === "cli" ? !args.source.interactive : isCI;
+      return autoIo ? new AutomationIO("Dev Admin") : new ConsoleIO();
+    };
+
+    this._io = (options && options.inputOutput) || defaultIo();
 
     this._shutdown = false;
     this._fullAppLogUrl = formUrl({ ...fullDevServer, path: controlPaths.appLog });
