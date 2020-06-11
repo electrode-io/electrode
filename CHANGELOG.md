@@ -1,3 +1,18 @@
+# 6/11/2020
+
+- fix: disable dev admin interactivity in CI
+
+## Packages
+
+- `@xarc/app@8.1.5` `(8.1.4 => 8.1.5)`
+- `@xarc/app-dev@8.1.5` `(8.1.4 => 8.1.5)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix: disable dev admin interactivity in CI ([#1670](https://github.com/electrode-io/electrode/pull/1670)) [commit](http://github.com/electrode-io/electrode/commit/22278a551e01b88fff03a2af844bbcba7dd899c7)
+
 # 6/10/2020
 
 - remove beta tag
