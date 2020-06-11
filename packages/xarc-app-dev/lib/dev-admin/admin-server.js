@@ -63,8 +63,12 @@ class AdminServer {
     // Any out-of-band writes to the terminal with process.stdout or console
     // will mess up the in place progress display that log-update handles
     //
-    this._io =
-      (options && options.inputOutput) || (isCI ? new AutomationIO("Dev Admin") : new ConsoleIO());
+    const defaultIo = () => {
+      const autoIo = args.source.interactive === "cli" ? !args.source.interactive : isCI;
+      return autoIo ? new AutomationIO("Dev Admin") : new ConsoleIO();
+    };
+
+    this._io = (options && options.inputOutput) || defaultIo();
 
     this._shutdown = false;
     this._fullAppLogUrl = formUrl({ ...fullDevServer, path: controlPaths.appLog });
