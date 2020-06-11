@@ -64,7 +64,7 @@ class AdminServer {
     // will mess up the in place progress display that log-update handles
     //
     const defaultIo = () => {
-      const autoIo = args.source.interactive === "cli" ? !args.source.interactive : isCI;
+      const autoIo = args.source.interactive === "cli" ? !args.opts.interactive : isCI;
       return autoIo ? new AutomationIO("Dev Admin") : new ConsoleIO();
     };
 
