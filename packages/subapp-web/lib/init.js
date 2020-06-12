@@ -16,6 +16,8 @@ module.exports = function setup(setupContext) {
   // TODO: in webpack dev mode, we need to reload stats after there's a change
   //
 
+  const metricReport = setupContext.routeOptions.reporting || {};
+
   const { assets } = util.loadAssetsFromStats(setupContext.routeOptions.stats);
   setupContext.routeOptions.__internals.assets = assets;
 
@@ -68,6 +70,13 @@ ${inlineRuntimeJS}
       runtimeEntryPoints.forEach(ep => {
         context.user.includedBundles[ep] = true;
       });
+
+      if (metricReport.enable && metricReport.reporter) {
+        context.user.emitter = util.getEventEmiiter(metricReport.reporter);
+      } else {
+        // eslint-disable-next-line
+        console.warn(`Warning: Metric reporting for ssr not enabled or no reporter specified.`);
+      }
       // invoke the initialize method of subapp's server code
       if (subAppServers.length > 0) {
         for (const server of subAppServers) {

@@ -10,11 +10,12 @@ const xaa = require("xaa");
 module.exports = function setup() {
   return {
     process: (context, { props: { concurrency } }) => {
-      const { xarcSubappSSR } = context.user;
+      const { xarcSubappSSR, emitter } = context.user;
       const startMsg = `
 <!-- subapp start -->
 <script>window.xarcV1.start();</script>
 `;
+      const startTimes = {};
 
       if (!xarcSubappSSR) {
         return startMsg;
@@ -63,6 +64,7 @@ module.exports = function setup() {
 
       // default group _ subapps should all run independently
       if (xarcSubappSSR._) {
+        startTimes[`load-subapps`] = Date.now();
         xaa
           .map(
             xarcSubappSSR._.queue,
@@ -76,6 +78,12 @@ module.exports = function setup() {
             context.voidStop(err);
             xaa.map(xarcSubappSSR._.queue, async info => info.done(), { concurrency });
           });
+        if (emitter) {
+          emitter.emit("web_ssr", {
+            action: `load-subapps`,
+            duration: Date.now() - startTimes[`load-subapps`]
+          });
+        }
       }
 
       xaa
@@ -84,6 +92,8 @@ module.exports = function setup() {
           async ([group, { queue }], ix, mapCtx) => {
             if (group !== "_") {
               mapCtx.assertNoFailure();
+
+              startTimes[`load-grp-${group}`] = Date.now();
 
               // first ensure everyone in the queue finish preparing
               await xaa.map(
@@ -95,10 +105,19 @@ module.exports = function setup() {
                 },
                 { concurrency }
               );
+              if (emitter) {
+                emitter.emit("web_ssr", {
+                  action: `prepare-group`,
+                  labels: ["group"],
+                  group,
+                  duration: Date.now() - context.user[`prepare-grp-${group}`]
+                });
+              }
 
               mapCtx.assertNoFailure();
 
               // and then kick off rendering for every subapp in the group
+              startTimes[`render-grp-${group}`] = Date.now();
               await xaa.map(
                 queue,
                 async (v, ix2, ctx2) => {
@@ -108,6 +127,20 @@ module.exports = function setup() {
                 },
                 { concurrency }
               );
+              if (emitter) {
+                emitter.emit("web_ssr", {
+                  action: `render-group`,
+                  group,
+                  labels: ["group"],
+                  duration: Date.now() - startTimes[`render-grp-${group}`]
+                });
+                emitter.emit("web_ssr", {
+                  action: `load-group`,
+                  group,
+                  labels: ["group"],
+                  duration: Date.now() - startTimes[`load-grp-${group}`]
+                });
+              }
             }
           },
           { concurrency }
