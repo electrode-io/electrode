@@ -1,4 +1,3 @@
-
 <p align="center">
 <a><img src="https://raw.githubusercontent.com/electrode-io/electrode/cc4ea3e1851cee3333ecca08fdbf5534f51b1ae7/samples/universal-react-node/client/images/logo-192x192.png" alt="Electrode Logo"></a>
 <br>
@@ -11,10 +10,8 @@ Electrode was developed by Walmart Labs in 2016 as an internal rapid application
 
 Electrode Web is a rapid application development framework; a full stack, end-to-end platform for developing, deploying, and maintaining JavaScript applications at Walmart.
 
-:::warning
-This framework is for the open-source version of electrode.
-
-We maintain additional code to support our internal systems.  Please check internal docs to get started.
+We maintain additional code to support internal systems. 
+> If you are a Walmart developer, please check internal docs to get started.
 
 **Do you have 5 minutes?** That is how long it takes to scaffold your first app. Try it now!
 

@@ -19,15 +19,18 @@ Try it now!
 
 #### Development on your local machine
 
-To generate and deploy your Electrode app and Electrode components, install the following (if you have not already): 
+To generate and deploy your Electrode app and Electrode components, install the following (if you have not already):
 
-1. Install the [NodeJS package installer] version 10.x.x or later
+1. Install the [NodeJS] version 10.x.x or later
+
    + Electrode uses `async/await` directly so Node 10 or later is required.
    + We recommend a tool such as [nvm] for managing NodeJS installations.
 
-2. Enter the following commands
+2. To build an app scaffold, enter the following commands:
 
 ```bash
+mkdir my-app
+cd my-app
 npm init @xarc/app
 npm install
 npm run dev
@@ -84,4 +87,4 @@ Licensed under the [Apache License, Version 2.0]
 
 [apache license, version 2.0]: https://www.apache.org/licenses/LICENSE-2.0
 [nvm]: https://github.com/nvm-sh/nvm#install-script
-[NodeJS package installer]: https://nodejs.org/en/download
+[NodeJS]: https://nodejs.org/en/download

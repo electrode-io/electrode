@@ -73,13 +73,13 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl:
-            'https://gecgithub01.walmart.com/electrode/docs',
+            'https://github.com/electrode-io/electrode/tree/master/docs',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl:
-            'https://gecgithub01.walmart.com/electrode/docs',
+            'https://github.com/electrode-io/electrode/tree/master/docs',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
