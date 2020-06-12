@@ -14,7 +14,7 @@ async function create() {
   const dirOk = await checkDir(appDir);
 
   if (!dirOk) {
-    console.log("bye");
+    console.log(`Not able to write to directory '${appDir}'. bye.`);
     return;
   }
 
