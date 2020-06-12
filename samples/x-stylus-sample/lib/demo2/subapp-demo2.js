@@ -46,7 +46,7 @@ const Demo2 = props => {
     style: {
       textAlign: "center"
     }
-  }, "\xA9 ", new Date().getFullYear(), " Walmart Labs"));
+  }, "\xA9 ", new Date().getFullYear(), " Your (Company) name here"));
 };
 
 const mapStateToProps = state => state;

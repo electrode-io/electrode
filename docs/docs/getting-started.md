@@ -26,17 +26,24 @@ To generate and deploy your Electrode app and Electrode components, install the 
    + Electrode uses `async/await` directly so Node 10 or later is required.
    + We recommend a tool such as [nvm] for managing NodeJS installations.
 
-2. To build an app scaffold, enter the following commands:
+2. To build an app scaffold, run the following command in your console/terminal:
 
 ```bash
-mkdir my-app
-cd my-app
-npm init @xarc/app
-npm install
-npm run dev
+npm init @xarc/app my-app
 ```
 
-3. Open your browser to <http://localhost:3000> to view the application running:
+2. Wait a moment for the installer to complete the build.
+3. When complete, the console will display:
+
+```bash
+Created react/node webapp in directory 'my-app'
+```
+
+4. Follow the instructions outlined in the console.
+5. When complete, open your browser to [localhost:3000](http://localhost:3000)
+6. To stop the DEV server, press `Q`
+
+Your new electrode app will appear as shown below.
 
 ![Hello from Electrode](../static/img/electrode-first-run.png)
 

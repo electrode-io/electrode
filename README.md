@@ -10,7 +10,7 @@ Electrode was developed by Walmart Labs in 2016 as an internal rapid application
 
 Electrode Web is a rapid application development framework; a full stack, end-to-end platform for developing, deploying, and maintaining JavaScript applications at Walmart.
 
-We maintain additional code to support internal systems. 
+We maintain additional code to support internal systems.
 > If you are a Walmart developer, please check internal docs to get started.
 
 **Do you have 5 minutes?** That is how long it takes to scaffold your first app. Try it now!
@@ -19,34 +19,19 @@ We maintain additional code to support internal systems.
 
 > You will need [Node.js] installed on your system
 
-1. Run the following commands in your console/terminal:
+1. Run the following command in your console/terminal:
 
 ```bash
-mkdir my-app
-cd my-app
-npm init @xarc/app
+npm init @xarc/app my-app
 ```
 
 2. Wait a moment for the installer to complete the build.
 3. When complete, the console will display `Created react/node webapp in directory 'my-app'`
-4. Now install the packages:
-
-```bash
-npm install
-npm run dev
-```
-
-5. Start the development server:
-
-+ <http://localhost:3000>
-
-  **or**
-
-+ Open the `App URL` listed in the console
-
-![Console dev server](docs/docs/images/console-msg.png)
-
+4. Follow the instructions in the console.
+5. When complete, open your browser to [localhost:3000](http://localhost:3000)
 6. To stop the DEV server, press `Q`
+
+Your electrode app will appear as shown below.
 
 ![Hello from Electrode](docs/static/img/electrode-first-run.png)
 
