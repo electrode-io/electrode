@@ -169,6 +169,8 @@ export class RenderContext {
       // if it's a string, buffer, or stream, then add to output
       if (typeof res === "string" || Buffer.isBuffer(res) || isReadableStream(res)) {
         this.output.add(res);
+      } else {
+        // console.log(" not ignored");
       }
       // ignore other return value types
       return cb();
