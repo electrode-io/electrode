@@ -1,6 +1,6 @@
 "use strict";
 
-import { RenderContext, munchyHandleStreamError } from "../../src/RenderContext";
+import { RenderContext } from "../../src/RenderContext";
 import { RenderOutput } from "../../src/RenderOutput";
 import { expect } from "chai";
 import { PassThrough } from "stream";
@@ -46,6 +46,7 @@ describe("munchy output", function () {
   });
   it("should return error message", function () {
     process.env.NODE_ENV = "production";
+    context.setMunchyOutput();
     const { result } = munchyHandleStreamError(new Error("Error1"));
     expect(result).to.contain("Error1");
 

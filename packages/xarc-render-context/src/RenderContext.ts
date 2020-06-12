@@ -5,9 +5,9 @@
 /* eslint-disable comma-dangle, arrow-parens, filenames/match-regex, no-magic-numbers */
 
 import { RenderOutput } from "./RenderOutput";
-import * as Munchy from "munchy";
+import Munchy from "munchy";
 
-export const munchyHandleStreamError = err => {
+const munchyHandleStreamError = err => {
   let errMsg = (process.env.NODE_ENV !== "production" && err.stack) || err.message;
 
   if (process.cwd().length > 3) {
