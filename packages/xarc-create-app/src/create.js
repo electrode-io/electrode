@@ -6,11 +6,15 @@ const sortDeps = require("./sort-obj-keys");
 const checkDir = require("./check-dir");
 const makePkg = require("../template/_package");
 const _ = require("lodash");
+const prepareAppDir = require("./prep-app-dir");
+const ck = require("chalker");
 
 async function create() {
-  const dirOk = await checkDir();
+  const appDir = await prepareAppDir();
+  const dirOk = await checkDir(appDir);
+
   if (!dirOk) {
-    console.log("bye");
+    console.log(`Not able to write to directory '${appDir}'. bye.`);
     return;
   }
 
@@ -28,7 +32,16 @@ async function create() {
   shcmd.cp("-R", Path.join(srcDir, "_gitignore"), Path.resolve(".gitignore"));
   shcmd.cp("-R", Path.join(srcDir, "README.md"), Path.resolve("README.md"));
 
-  console.log("created react/node webapp - please check README.md for info.");
+  console.log(ck`
+Created react/node webapp in directory '${appDir}'. To start development, please run:
+
+<cyan>cd ${appDir}
+npm install
+npm run dev</>
+
+For more info, please check the README.md file.
+
+`);
 }
 
 module.exports = create;
