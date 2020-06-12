@@ -1,6 +1,6 @@
 {
   "name": "@xarc/app-dev",
-  "version": "8.1.2",
+  "version": "8.1.5",
   "description": "Electrode X application development support",
   "main": "index.js",
   "homepage": "http://www.electrode.io",
@@ -46,7 +46,7 @@
     "@babel/register": "^7.0.0",
     "@jchip/redbird": "^1.1.0",
     "@loadable/babel-plugin": "^5.10.0",
-    "@xarc/webpack": "^8.0.6-beta.0",
+    "@xarc/webpack": "8.0.7",
     "ansi-to-html": "^0.6.8",
     "babel-plugin-dynamic-import-node": "^2.2.0",
     "babel-plugin-lodash": "^3.3.4",
@@ -62,6 +62,7 @@
     "filter-scan-dir": "^1.0.9",
     "fs-extra": "^0.30.0",
     "identity-obj-proxy": "^3.0.0",
+    "is-ci": "^2.0.0",
     "isomorphic-loader": "^3.1.0",
     "lodash": "^4.13.1",
     "log-update": "^4.0.0",
@@ -155,8 +156,7 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-    "access": "public",
-    "tag": "beta"
+    "access": "public"
   },
   "mocha": {
     "require": [

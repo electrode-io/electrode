@@ -14,7 +14,8 @@
     "footer": ["footer.bundle.js", "../map/footer.bundle.js.map"],
     "header": ["header.bundle.js", "../map/header.bundle.js.map"],
     "mainbody": ["mainbody.bundle.js", "../map/mainbody.bundle.js.map"],
-    "suspensedemo": ["suspensedemo.bundle.js", "../map/suspensedemo.bundle.js.map"]
+    "suspensedemo": ["suspensedemo.bundle.js", "../map/suspensedemo.bundle.js.map"],
+    "runtime": ["runtime.bundle.js", "../map/runtime.bundle.js.map"]
   },
   "assets": [
     {
@@ -108,6 +109,16 @@
       "emitted": false
     },
     {
+      "name": "../map/runtime.bundle.js.map",
+      "size": 8258,
+      "chunks": [9],
+      "chunkNames": ["runtime"],
+      "info": {
+        "development": true
+      },
+      "emitted": false
+    },
+    {
       "name": "81a2781f3c286bcb2fa9.vendors~280289005828299c685d173f73011e79.js",
       "size": 144200,
       "chunks": [0],
@@ -184,6 +195,14 @@
       "emitted": false
     },
     {
+      "name": "runtime.bundle.js",
+      "size": 1551,
+      "chunks": [0],
+      "chunkNames": ["runtime"],
+      "info": {},
+      "emitted": false
+    },
+    {
       "name": "icons-2b7ac2d4ff91cca5b9c8e742eda58b24/manifest.json",
       "size": 1201,
       "chunks": [],
@@ -192,13 +211,14 @@
     }
   ],
   "entrypoints": {
-    "mainbody": [0, 1, 7],
+    "mainbody": [0, 1, 7, 9],
     "bottom": [0, 1, 2],
     "header": [0, 6],
     "footer": [0, 1, 5],
     "extras": [0, 1, 4],
     "suspensedemo": [0, 8],
-    "deal": [0, 3]
+    "deal": [0, 3],
+    "runtime": [9]
   },
   "chunks": [
     {
@@ -271,6 +291,14 @@
       "id": 8,
       "hash": "210cf1990e88de13bae6",
       "names": ["suspensedemo"],
+      "entry": true,
+      "initial": true,
+      "rendered": true
+    },
+    {
+      "id": 9,
+      "hash": "7a720e5ee25fe7c2fc7d",
+      "names": ["runtime"],
       "entry": true,
       "initial": true,
       "rendered": true

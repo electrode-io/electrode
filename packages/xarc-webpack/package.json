@@ -1,6 +1,6 @@
 {
   "name": "@xarc/webpack",
-  "version": "8.0.6-beta.0",
+  "version": "8.0.7",
   "description": "Electrode X webpack config",
   "main": "lib/index.js",
   "homepage": "http://www.electrode.io",
@@ -84,7 +84,6 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-    "access": "public",
-    "tag": "beta"
+    "access": "public"
   }
 }

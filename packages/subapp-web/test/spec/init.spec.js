@@ -2,6 +2,7 @@
 
 const { init } = require("../../lib");
 const { resetCdn } = require("../../lib/util");
+const { asyncVerify, runFinally } = require("run-verify");
 
 const Path = require("path");
 
@@ -32,28 +33,33 @@ describe("init", function () {
     expect(initJs).contains(`<script>/*LJ*/`);
   });
 
-  it("it should load timetime runtime.bundle.js inline and mark includedBundles.runtime to true", () => {
+  it("it should load runtime.bundle.js inline and mark includedBundles.runtime to true", () => {
     resetCdn();
     process.env.NODE_ENV = "production";
     const originalWd = process.cwd();
-    process.chdir(Path.resolve("test/data/mock-app"));
+    process.chdir(Path.join(__dirname, "../subapps"));
+    process.env.APP_SRC_DIR = "subapp1/..";
 
     const initToken = init({
       routeOptions: {
         __internals: {},
         cdn: {},
         prodBundleBase: "/js",
-        stats: Path.join(__dirname, "../data/mock-app/dist/stats-with-runtime.json")
+        stats: Path.join(__dirname, "../data/prod-stats.json")
       }
     });
 
-    const context = { user: {} };
-    const initJs = initToken.process(context);
-    process.chdir(originalWd);
-    expect(Object.keys(context.user.includedBundles).length).to.equal(1);
-    const loadedBundles = Object.keys(context.user.includedBundles);
-    const markLoadedStr = `markBundlesLoaded(${JSON.stringify(loadedBundles)})`;
-    expect(initJs).to.contain(markLoadedStr);
-    expect(initJs).to.contain("/* placeholder */");
+    return asyncVerify(
+      () => {
+        const context = { user: {} };
+        const initJs = initToken.process(context);
+        expect(Object.keys(context.user.includedBundles).length).to.equal(1);
+        const loadedBundles = Object.keys(context.user.includedBundles);
+        const markLoadedStr = `markBundlesLoaded(${JSON.stringify(loadedBundles)})`;
+        expect(initJs).to.contain(markLoadedStr);
+        expect(initJs).to.contain("/* placeholder */");
+      },
+      runFinally(() => process.chdir(originalWd))
+    );
   });
 });
