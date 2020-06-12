@@ -8,7 +8,8 @@ const subAppUtil = require("subapp-util");
 const HttpStatusCodes = require("http-status-codes");
 
 const { makeErrorStackResponse } = require("./utils");
-const { getSrcDir, setupRouteRender, searchRoutesFromFile } = require("./setup-hapi-routes");
+const { getSrcDir, searchRoutesFromFile } = require("./setup-hapi-routes");
+const { setupRouteRender } = require("./jsx-route-renderer");
 
 module.exports = {
   fastifyPlugin: async (fastify, pluginOpts) => {
