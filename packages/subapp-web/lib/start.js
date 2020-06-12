@@ -10,7 +10,7 @@ const xaa = require("xaa");
 module.exports = function setup() {
   return {
     process: (context, { props: { concurrency } }) => {
-      const { xarcSubappSSR, emitter } = context.user;
+      const { xarcSubappSSR, xarcSSREmitter } = context.user;
       const startMsg = `
 <!-- subapp start -->
 <script>window.xarcV1.start();</script>
@@ -78,8 +78,8 @@ module.exports = function setup() {
             context.voidStop(err);
             xaa.map(xarcSubappSSR._.queue, async info => info.done(), { concurrency });
           });
-        if (emitter) {
-          emitter.emit("web_ssr", {
+        if (xarcSSREmitter) {
+          xarcSSREmitter.emit("web_ssr", {
             action: `load-subapps`,
             duration: Date.now() - startTimes[`load-subapps`]
           });
@@ -105,8 +105,8 @@ module.exports = function setup() {
                 },
                 { concurrency }
               );
-              if (emitter) {
-                emitter.emit("web_ssr", {
+              if (xarcSSREmitter) {
+                xarcSSREmitter.emit("web_ssr", {
                   action: `prepare-group`,
                   labels: ["group"],
                   group,
@@ -127,14 +127,14 @@ module.exports = function setup() {
                 },
                 { concurrency }
               );
-              if (emitter) {
-                emitter.emit("web_ssr", {
+              if (xarcSSREmitter) {
+                xarcSSREmitter.emit("web_ssr", {
                   action: `render-group`,
                   group,
                   labels: ["group"],
                   duration: Date.now() - startTimes[`render-grp-${group}`]
                 });
-                emitter.emit("web_ssr", {
+                xarcSSREmitter.emit("web_ssr", {
                   action: `load-group`,
                   group,
                   labels: ["group"],
