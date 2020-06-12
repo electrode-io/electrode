@@ -20,7 +20,7 @@ export class RenderOutput {
   constructor(context = null) {
     this._output = new MainOutput();
     this._flushQ = [];
-    this._context = context || { transform: (x) => x };
+    this._context = context || { transform: x => x };
     this._result = ""; // will hold final result if context doesn't have send
   }
 

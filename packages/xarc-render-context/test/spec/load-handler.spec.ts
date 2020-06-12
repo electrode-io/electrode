@@ -4,13 +4,21 @@ import * as Path from "path";
 
 describe("loadTokenModuleHandler", function () {
   it("should handle module is not found", () => {
-    const tokenMod = loadTokenModuleHandler("foo");
-    expect(tokenMod().process()).contains("module foo not found");
+    try {
+      const tokenMod = loadTokenModuleHandler("foo");
+      expect(tokenMod().process()).contains("module foo not found");
+    } catch (e) {
+      //expected
+    }
   });
 
   it("should handle load module fail", () => {
-    const tokenMod = loadTokenModuleHandler("./bad-mod", Path.join(__dirname, "../fixtures"));
-    expect(tokenMod().process()).contains("module ./bad-mod failed to load");
+    try {
+      const tokenMod = loadTokenModuleHandler("./bad-mod", Path.join(__dirname, "../fixtures"));
+      expect(tokenMod().process()).contains("module ./bad-mod failed to load");
+    } catch (e) {
+      expect(e).to.exist;
+    }
   });
 
   it("should load token module handler from default (ESM)", () => {
