@@ -21,9 +21,11 @@ If you are a Walmart developer, please see the internal electrode X documentatio
 ## electrode quick start
 
 ```bash
-npm install -g xclap-cli
+mkdir my-app
+cd my-app
 npm init @xarc/app
-clap dev
+npm install
+npm run dev
 ```
 
 ![Hello from Electrode](docs/static/img/electrode-first-run.png)
