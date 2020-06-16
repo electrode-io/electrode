@@ -6,6 +6,7 @@ const Fs = require("fs");
 const Path = require("path");
 const util = require("./util");
 const subappUtil = require("subapp-util");
+const _ = require("lodash");
 
 module.exports = function setup(setupContext) {
   const distDir = process.env.NODE_ENV === "production" ? "../dist/min" : "../dist/dev";
@@ -15,6 +16,8 @@ module.exports = function setup(setupContext) {
   //
   // TODO: in webpack dev mode, we need to reload stats after there's a change
   //
+
+  const metricReport = _.get(setupContext, "routeOptions.reporting", {});
 
   const { assets } = util.loadAssetsFromStats(setupContext.routeOptions.stats);
   setupContext.routeOptions.__internals.assets = assets;
@@ -68,6 +71,10 @@ ${inlineRuntimeJS}
       runtimeEntryPoints.forEach(ep => {
         context.user.includedBundles[ep] = true;
       });
+
+      if (metricReport.enable && metricReport.reporter) {
+        context.user.xarcSSREmitter = util.getEventEmiiter(metricReport.reporter);
+      }
       // invoke the initialize method of subapp's server code
       if (subAppServers.length > 0) {
         for (const server of subAppServers) {

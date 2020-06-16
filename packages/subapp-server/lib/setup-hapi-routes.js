@@ -246,6 +246,12 @@ function searchRoutesFromFile(srcDir, pluginOpts) {
 async function setupRoutesFromFile(srcDir, server, pluginOpts) {
   const { routes, topOpts } = searchRoutesFromFile(srcDir, pluginOpts);
 
+  const reporting = _.get(topOpts, "reporting", {});
+  if (!reporting.enable || !reporting.reporter) {
+    // eslint-disable-next-line
+    console.warn(`Warning: Metric reporting for ssr not enabled or no reporter specified.`);
+  }
+
   await handleFavIcon(server, topOpts);
 
   // invoke setup callback
@@ -267,6 +273,12 @@ async function setupRoutesFromDir(server, pluginOpts, fromDir) {
   const { routes } = fromDir;
 
   const topOpts = _.merge(getDefaultRouteOptions(), fromDir.options, pluginOpts);
+
+  const reporting = _.get(topOpts, "reporting", {});
+  if (!reporting.enable || !reporting.reporter) {
+    // eslint-disable-next-line
+    console.warn(`Warning: Metric reporting for ssr not enabled or no reporter specified.`);
+  }
 
   topOpts.routes = _.merge({}, routes, topOpts.routes);
 

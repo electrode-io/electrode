@@ -360,6 +360,9 @@ ${stack}`,
         }
 
         if (props.serverSideRendering) {
+          if (!context.user[`prepare-grp-${props.group}`]) {
+            context.user[`prepare-grp-${props.group}`] = Date.now();
+          }
           const lib = (ssrInfo.lib = util.getFramework(ref));
           ssrInfo.awaitData = lib.handlePrepare();
 

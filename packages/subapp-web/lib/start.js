@@ -10,7 +10,7 @@ const xaa = require("xaa");
 module.exports = function setup() {
   return {
     process: (context, { props: { concurrency } }) => {
-      const { xarcSubappSSR } = context.user;
+      const { xarcSubappSSR, xarcSSREmitter } = context.user;
       const startMsg = `
 <!-- subapp start -->
 <script>window.xarcV1.start();</script>
@@ -63,6 +63,7 @@ module.exports = function setup() {
 
       // default group _ subapps should all run independently
       if (xarcSubappSSR._) {
+        const startTime = Date.now();
         xaa
           .map(
             xarcSubappSSR._.queue,
@@ -76,6 +77,12 @@ module.exports = function setup() {
             context.voidStop(err);
             xaa.map(xarcSubappSSR._.queue, async info => info.done(), { concurrency });
           });
+        if (xarcSSREmitter) {
+          xarcSSREmitter.emit("web_ssr", {
+            action: `subapps-ssr`,
+            duration: Date.now() - startTime
+          });
+        }
       }
 
       xaa
@@ -84,6 +91,8 @@ module.exports = function setup() {
           async ([group, { queue }], ix, mapCtx) => {
             if (group !== "_") {
               mapCtx.assertNoFailure();
+
+              const loadStartTime = Date.now();
 
               // first ensure everyone in the queue finish preparing
               await xaa.map(
@@ -95,10 +104,19 @@ module.exports = function setup() {
                 },
                 { concurrency }
               );
+              if (xarcSSREmitter) {
+                xarcSSREmitter.emit("web_ssr", {
+                  action: `prepare-group`,
+                  labels: ["group"],
+                  group,
+                  duration: Date.now() - context.user[`prepare-grp-${group}`]
+                });
+              }
 
               mapCtx.assertNoFailure();
 
               // and then kick off rendering for every subapp in the group
+              const renderStartTime = Date.now();
               await xaa.map(
                 queue,
                 async (v, ix2, ctx2) => {
@@ -108,6 +126,21 @@ module.exports = function setup() {
                 },
                 { concurrency }
               );
+              if (xarcSSREmitter) {
+                const now = Date.now();
+                xarcSSREmitter.emit("web_ssr", {
+                  action: `render-group`,
+                  group,
+                  labels: ["group"],
+                  duration: now - renderStartTime
+                });
+                xarcSSREmitter.emit("web_ssr", {
+                  action: `group-ssr-total`,
+                  group,
+                  labels: ["group"],
+                  duration: now - loadStartTime
+                });
+              }
             }
           },
           { concurrency }
