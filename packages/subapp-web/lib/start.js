@@ -15,7 +15,6 @@ module.exports = function setup() {
 <!-- subapp start -->
 <script>window.xarcV1.start();</script>
 `;
-      const startTimes = {};
 
       if (!xarcSubappSSR) {
         return startMsg;
@@ -64,7 +63,7 @@ module.exports = function setup() {
 
       // default group _ subapps should all run independently
       if (xarcSubappSSR._) {
-        startTimes[`load-subapps`] = Date.now();
+        const startTime = Date.now();
         xaa
           .map(
             xarcSubappSSR._.queue,
@@ -80,8 +79,8 @@ module.exports = function setup() {
           });
         if (xarcSSREmitter) {
           xarcSSREmitter.emit("web_ssr", {
-            action: `load-subapps`,
-            duration: Date.now() - startTimes[`load-subapps`]
+            action: `subapps-ssr`,
+            duration: Date.now() - startTime
           });
         }
       }
@@ -93,7 +92,7 @@ module.exports = function setup() {
             if (group !== "_") {
               mapCtx.assertNoFailure();
 
-              startTimes[`load-grp-${group}`] = Date.now();
+              const loadStartTime = Date.now();
 
               // first ensure everyone in the queue finish preparing
               await xaa.map(
@@ -117,7 +116,7 @@ module.exports = function setup() {
               mapCtx.assertNoFailure();
 
               // and then kick off rendering for every subapp in the group
-              startTimes[`render-grp-${group}`] = Date.now();
+              const renderStartTime = Date.now();
               await xaa.map(
                 queue,
                 async (v, ix2, ctx2) => {
@@ -128,17 +127,18 @@ module.exports = function setup() {
                 { concurrency }
               );
               if (xarcSSREmitter) {
+                const now = Date.now();
                 xarcSSREmitter.emit("web_ssr", {
                   action: `render-group`,
                   group,
                   labels: ["group"],
-                  duration: Date.now() - startTimes[`render-grp-${group}`]
+                  duration: now - renderStartTime
                 });
                 xarcSSREmitter.emit("web_ssr", {
-                  action: `load-group`,
+                  action: `group-ssr-total`,
                   group,
                   labels: ["group"],
-                  duration: Date.now() - startTimes[`load-grp-${group}`]
+                  duration: now - loadStartTime
                 });
               }
             }

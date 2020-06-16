@@ -352,7 +352,7 @@ ${ignoreMsg}`
       groupEvents[group] = groupEvents[group] || [];
       groupEvents[group].push(data);
 
-      if (data.action.startsWith("load-")) {
+      if (data.action === "group-ssr-total" || data.action === "subapps-ssr") {
         const events = groupEvents[group];
         events.forEach((event) => reporter(event));
         delete groupEvents[group];
