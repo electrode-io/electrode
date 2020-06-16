@@ -1,0 +1,8 @@
+{
+  "id": "chapter1/intermediate/server-actions",
+  "title": "Route Action on the Server Side",
+  "description": "When your React app is rendered on the server side, the module [react-redux-router-engine] handles the following tasks:",
+  "source": "@site/docs/chapter1/intermediate/server-actions.md",
+  "permalink": "/docs/chapter1/intermediate/server-actions",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/intermediate/server-actions.md"
+}

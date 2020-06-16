@@ -1,0 +1,8 @@
+{
+  "id": "start-with-component",
+  "title": "Adding subapps/components",
+  "description": "Getting Started With Electrode Components",
+  "source": "@site/docs/start-with-component.md",
+  "permalink": "/docs/start-with-component",
+  "editUrl": "https://github.com/facebook/docusaurus/edit/master/website/docs/start-with-component.md"
+}

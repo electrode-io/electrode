@@ -1,0 +1,17 @@
+{
+  "id": "requirements",
+  "title": "System requirements",
+  "description": "The requirements for setting up your development environment and your online deployments are described in the following sections.",
+  "source": "@site/docs/requirements.md",
+  "permalink": "/docs/requirements",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/requirements.md",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "Getting started",
+    "permalink": "/docs/getting-started"
+  },
+  "next": {
+    "title": "xclap task runner",
+    "permalink": "/docs/xclap"
+  }
+}

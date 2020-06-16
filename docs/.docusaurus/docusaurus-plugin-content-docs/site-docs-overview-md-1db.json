@@ -1,0 +1,8 @@
+{
+  "id": "overview",
+  "title": "overview",
+  "description": "Overview",
+  "source": "@site/docs/overview.md",
+  "permalink": "/docs/overview",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/overview.md"
+}

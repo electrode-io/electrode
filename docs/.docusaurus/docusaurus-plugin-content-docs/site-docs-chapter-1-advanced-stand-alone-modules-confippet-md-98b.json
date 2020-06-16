@@ -1,0 +1,8 @@
+{
+  "id": "chapter1/advanced/stand-alone-modules/confippet",
+  "title": "Confippet",
+  "description": "Confippet is a versatile, flexible utility for managing configurations of Node.js applications. It's simple to get started and can be customized and extended to meet the needs of your app.",
+  "source": "@site/docs/chapter1/advanced/stand-alone-modules/confippet.md",
+  "permalink": "/docs/chapter1/advanced/stand-alone-modules/confippet",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/advanced/stand-alone-modules/confippet.md"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "chapter1/advanced/stand-alone-modules/above-the-fold-rendering",
+  "title": "Above The Fold Rendering",
+  "description": "The above-the-fold-only-server-render module is a React component for optionally skipping server side rendering of components outside above-the-fold \\(or inside of the viewport\\). This component helps render your components on the server that are above the fold and the remaining components on the client.",
+  "source": "@site/docs/chapter1/advanced/stand-alone-modules/above-the-fold-rendering.md",
+  "permalink": "/docs/chapter1/advanced/stand-alone-modules/above-the-fold-rendering",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/advanced/stand-alone-modules/above-the-fold-rendering.md"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "nodejs-nix",
+  "title": "Node.js OSX | Linux",
+  "description": "About Node.js in WML dev environments",
+  "source": "@site/docs/nodejs-nix.md",
+  "permalink": "/docs/nodejs-nix",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/nodejs-nix.md"
+}

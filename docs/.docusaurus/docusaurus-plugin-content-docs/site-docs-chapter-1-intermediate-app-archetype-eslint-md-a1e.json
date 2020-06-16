@@ -1,0 +1,17 @@
+{
+  "id": "chapter1/intermediate/app-archetype/eslint",
+  "title": "Eslint Configuration",
+  "description": "ESLint is enabled using the clap features interactive command or using npm:",
+  "source": "@site/docs/chapter1/intermediate/app-archetype/eslint.md",
+  "permalink": "/docs/chapter1/intermediate/app-archetype/eslint",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/intermediate/app-archetype/eslint.md",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "Customize Configurations From Your App",
+    "permalink": "/docs/chapter1/intermediate/app-archetype/customize-config"
+  },
+  "next": {
+    "title": "Webpack Configurations",
+    "permalink": "/docs/chapter1/intermediate/app-archetype/webpack-config"
+  }
+}

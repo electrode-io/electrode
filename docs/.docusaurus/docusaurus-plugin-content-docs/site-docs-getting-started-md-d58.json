@@ -1,0 +1,13 @@
+{
+  "id": "getting-started",
+  "title": "Getting started",
+  "description": "Building large scale universal React Web Applications",
+  "source": "@site/docs/getting-started.md",
+  "permalink": "/docs/getting-started",
+  "editUrl": "https://github.com/electrode-io/electrode/tree/master/docs/docs/getting-started.md",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "Glossary",
+    "permalink": "/docs/glossary"
+  }
+}

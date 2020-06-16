@@ -1,0 +1,8 @@
+{
+  "id": "chapter1/intermediate/react-routes/add-routes",
+  "title": "Add Routes",
+  "description": "From working the previous steps, we have our open source friends, the ability to have a resource-list house party, and a working demo. It's time to build our components to handle user interaction and send requests to our Hapi Plugin (for getting more friends to our party). We will use the React-Router and create separate routes to serve different content to our views.",
+  "source": "@site/docs/chapter1/intermediate/react-routes/add-routes.md",
+  "permalink": "/docs/chapter1/intermediate/react-routes/add-routes",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/intermediate/react-routes/add-routes.md"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "chapter1/further-develop-app/deploy-your-app",
+  "title": "Deploy Your App",
+  "description": "We're almost finished with our Electrode app development. The final step is to deploy electrode-app and share it with your fellow developers using Heroku. We have listed the steps below, but feel free to learn more about Heroku. These instructions assume you have a GitHub account.",
+  "source": "@site/docs/chapter1/further-develop-app/deploy-your-app.md",
+  "permalink": "/docs/chapter1/further-develop-app/deploy-your-app",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/further-develop-app/deploy-your-app.md",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "Development Setup",
+    "permalink": "/docs/chapter1/further-develop-app/dev-admin-proxy"
+  }
+}

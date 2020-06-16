@@ -1,0 +1,17 @@
+{
+  "id": "chapter1/intermediate/flow",
+  "title": "Flow",
+  "description": "Flow is a static type checker for Javascript and is widely used by front-end developers nowadays. It helps us to code faster, smarter and more confidently. Since Electrode Archetype has already got Babel in place, we need to set up Flow with babel: use babel to compile the code and integrate Flow into Electrode app/component.",
+  "source": "@site/docs/chapter1/intermediate/flow.md",
+  "permalink": "/docs/chapter1/intermediate/flow",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/intermediate/flow.md",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/docs/chapter1/intermediate/languages/README"
+  },
+  "next": {
+    "title": "Flow FAQs",
+    "permalink": "/docs/chapter1/intermediate/flow-faq"
+  }
+}

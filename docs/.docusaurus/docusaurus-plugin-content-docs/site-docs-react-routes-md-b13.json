@@ -1,0 +1,17 @@
+{
+  "id": "react-routes",
+  "title": "React routes",
+  "description": "The Electrode platform, by default, is setup to use [react-router] to handle routes for your React application.",
+  "source": "@site/docs/react-routes.md",
+  "permalink": "/docs/react-routes",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/react-routes.md",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "Add routes",
+    "permalink": "/docs/add-routes"
+  },
+  "next": {
+    "title": "Create route components",
+    "permalink": "/docs/route-component"
+  }
+}

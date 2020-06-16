@@ -1,0 +1,8 @@
+{
+  "id": "nodejs-win",
+  "title": "Node.js for Windows",
+  "description": "About Windows and Node.js in WML dev environments",
+  "source": "@site/docs/nodejs-win.md",
+  "permalink": "/docs/nodejs-win",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/nodejs-win.md"
+}

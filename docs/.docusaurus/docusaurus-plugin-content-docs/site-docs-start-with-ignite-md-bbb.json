@@ -1,0 +1,17 @@
+{
+  "id": "start-with-ignite",
+  "title": "Getting Started with ignite",
+  "description": "Getting Started with Electrode Ignite",
+  "source": "@site/docs/start-with-ignite.md",
+  "permalink": "/docs/start-with-ignite",
+  "editUrl": "https://github.com/facebook/docusaurus/edit/master/website/docs/start-with-ignite.md",
+  "sidebar": "electrode_io",
+  "previous": {
+    "title": "xclap task runner",
+    "permalink": "/docs/xclap"
+  },
+  "next": {
+    "title": "Subapps",
+    "permalink": "/docs/subapps"
+  }
+}

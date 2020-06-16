@@ -1,0 +1,8 @@
+{
+  "id": "chapter1/intermediate/react-routes/route-component",
+  "title": "Creating Components For Your Route",
+  "description": "You must create the actual component itself after specifying the [react-router] in the file src/client/routes.jsx--what React component to redirect matching routes to.",
+  "source": "@site/docs/chapter1/intermediate/react-routes/route-component.md",
+  "permalink": "/docs/chapter1/intermediate/react-routes/route-component",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/intermediate/react-routes/route-component.md"
+}

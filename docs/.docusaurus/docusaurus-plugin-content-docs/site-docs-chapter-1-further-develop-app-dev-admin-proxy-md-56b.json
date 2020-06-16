@@ -1,0 +1,17 @@
+{
+  "id": "chapter1/further-develop-app/dev-admin-proxy",
+  "title": "Development Setup",
+  "description": "When you run your app in dev mode with clap dev, Electrode starts two servers for you:",
+  "source": "@site/docs/chapter1/further-develop-app/dev-admin-proxy.md",
+  "permalink": "/docs/chapter1/further-develop-app/dev-admin-proxy",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/further-develop-app/dev-admin-proxy.md",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "whats-inside",
+    "permalink": "/docs/chapter1/further-develop-app/whats-inside"
+  },
+  "next": {
+    "title": "Deploy Your App",
+    "permalink": "/docs/chapter1/further-develop-app/deploy-your-app"
+  }
+}

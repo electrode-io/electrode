@@ -1,0 +1,8 @@
+{
+  "id": "chapter1/advanced/powerful-electrode-tools/electrode-explorer",
+  "title": "Electrode Explorer",
+  "description": "An electrode application that allows you to view all the components in your organization, play with the components, read the component docs, view the different versions of the component, and more - All in your browser.",
+  "source": "@site/docs/chapter1/advanced/powerful-electrode-tools/electrode-explorer.md",
+  "permalink": "/docs/chapter1/advanced/powerful-electrode-tools/electrode-explorer",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/advanced/powerful-electrode-tools/electrode-explorer.md"
+}

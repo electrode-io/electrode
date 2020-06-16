@@ -1,0 +1,17 @@
+{
+  "id": "chapter1/intermediate/app-archetype/customize-config",
+  "title": "Customize Configurations From Your App",
+  "description": "You can extend or customize the configurations in your Electrode applications. This section describes concepts and details to help you configure and customize your Electrode app.",
+  "source": "@site/docs/chapter1/intermediate/app-archetype/customize-config.md",
+  "permalink": "/docs/chapter1/intermediate/app-archetype/customize-config",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/intermediate/app-archetype/customize-config.md",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "Development Setup",
+    "permalink": "/docs/chapter1/further-develop-app/dev-admin-proxy"
+  },
+  "next": {
+    "title": "Eslint Configuration",
+    "permalink": "/docs/chapter1/intermediate/app-archetype/eslint"
+  }
+}

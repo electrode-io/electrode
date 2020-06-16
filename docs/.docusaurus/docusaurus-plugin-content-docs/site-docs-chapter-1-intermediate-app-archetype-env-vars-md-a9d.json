@@ -1,0 +1,17 @@
+{
+  "id": "chapter1/intermediate/app-archetype/env-vars",
+  "title": "Environment Variables",
+  "description": "Some of the electrode's features can be controlled by environment variables.",
+  "source": "@site/docs/chapter1/intermediate/app-archetype/env-vars.md",
+  "permalink": "/docs/chapter1/intermediate/app-archetype/env-vars",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/intermediate/app-archetype/env-vars.md",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "Webpack Configurations",
+    "permalink": "/docs/chapter1/intermediate/app-archetype/webpack-config"
+  },
+  "next": {
+    "title": "Loading Webpack DLL",
+    "permalink": "/docs/chapter1/intermediate/app-archetype/load-dll"
+  }
+}

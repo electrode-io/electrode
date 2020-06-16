@@ -1,0 +1,13 @@
+{
+  "id": "welcome-to-electrode",
+  "title": "Welcome to Electrode",
+  "description": "Electrode is a platform for building large scale Universal React web applications with a standardized structure that follows best practices and has modern technologies built in. Electrode focuses on performance, component reusability, and simple deployment to multiple cloud providers—so you can focus on what makes your app unique.",
+  "source": "@site/docs/welcome-to-electrode.md",
+  "permalink": "/docs/welcome-to-electrode",
+  "editUrl": "https://github.com/electrode-io/electrode/tree/master/docs/docs/welcome-to-electrode.md",
+  "sidebar": "someSidebar",
+  "next": {
+    "title": "Contribute!",
+    "permalink": "/docs/contributing"
+  }
+}

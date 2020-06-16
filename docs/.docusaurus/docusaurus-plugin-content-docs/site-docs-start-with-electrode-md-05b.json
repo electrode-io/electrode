@@ -1,0 +1,8 @@
+{
+  "id": "start-with-electrode",
+  "title": "Getting started",
+  "description": "Getting Started With Electrode",
+  "source": "@site/docs/start-with-electrode.md",
+  "permalink": "/docs/start-with-electrode",
+  "editUrl": "https://github.com/facebook/docusaurus/edit/master/website/docs/start-with-electrode.md"
+}

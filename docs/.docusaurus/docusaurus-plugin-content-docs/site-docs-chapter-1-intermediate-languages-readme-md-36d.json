@@ -1,0 +1,17 @@
+{
+  "id": "chapter1/intermediate/languages/README",
+  "title": "README",
+  "description": "Flow and TypeScript",
+  "source": "@site/docs/chapter1/intermediate/languages/README.md",
+  "permalink": "/docs/chapter1/intermediate/languages/README",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/intermediate/languages/README.md",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "Unit Tests Runner",
+    "permalink": "/docs/chapter1/intermediate/app-archetype/unit-tests"
+  },
+  "next": {
+    "title": "Flow",
+    "permalink": "/docs/chapter1/intermediate/flow"
+  }
+}

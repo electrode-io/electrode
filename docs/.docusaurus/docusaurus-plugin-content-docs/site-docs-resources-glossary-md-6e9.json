@@ -1,0 +1,8 @@
+{
+  "id": "resources/glossary",
+  "title": "glossary",
+  "description": "Glossary",
+  "source": "@site/docs/resources/glossary.md",
+  "permalink": "/docs/resources/glossary",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/resources/glossary.md"
+}

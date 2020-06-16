@@ -1,0 +1,17 @@
+{
+  "id": "chapter1/further-develop-app/build-app",
+  "title": "Build an app",
+  "description": "Build an electrode application",
+  "source": "@site/docs/chapter1/further-develop-app/build-app.md",
+  "permalink": "/docs/chapter1/further-develop-app/build-app",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/further-develop-app/build-app.md",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "xclap task runner",
+    "permalink": "/docs/xclap"
+  },
+  "next": {
+    "title": "Subapps",
+    "permalink": "/docs/subapps"
+  }
+}

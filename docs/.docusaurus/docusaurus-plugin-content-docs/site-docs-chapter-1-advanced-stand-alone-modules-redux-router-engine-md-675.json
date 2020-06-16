@@ -1,0 +1,8 @@
+{
+  "id": "chapter1/advanced/stand-alone-modules/redux-router-engine",
+  "title": "Redux Router Engine",
+  "description": "The Electrode Redux Router Engine is a tool that handles asynchronous data for React Server Side Rendering using [react-router], Redux, and the [Redux Server Rendering] pattern.",
+  "source": "@site/docs/chapter1/advanced/stand-alone-modules/redux-router-engine.md",
+  "permalink": "/docs/chapter1/advanced/stand-alone-modules/redux-router-engine",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/advanced/stand-alone-modules/redux-router-engine.md"
+}

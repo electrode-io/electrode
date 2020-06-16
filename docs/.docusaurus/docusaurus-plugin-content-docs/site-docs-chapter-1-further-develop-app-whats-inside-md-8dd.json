@@ -1,0 +1,17 @@
+{
+  "id": "chapter1/further-develop-app/whats-inside",
+  "title": "whats-inside",
+  "description": "--",
+  "source": "@site/docs/chapter1/further-develop-app/whats-inside.md",
+  "permalink": "/docs/chapter1/further-develop-app/whats-inside",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/further-develop-app/whats-inside.md",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "Server routes",
+    "permalink": "/docs/server-actions"
+  },
+  "next": {
+    "title": "Development Setup",
+    "permalink": "/docs/chapter1/further-develop-app/dev-admin-proxy"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "id": "chapter1/intermediate/server-side-data-hydration",
+  "title": "Server Side Data Hydration",
+  "description": "Server side rendering consists of two steps:",
+  "source": "@site/docs/chapter1/intermediate/server-side-data-hydration.md",
+  "permalink": "/docs/chapter1/intermediate/server-side-data-hydration",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/intermediate/server-side-data-hydration.md"
+}

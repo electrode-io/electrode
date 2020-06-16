@@ -1,0 +1,8 @@
+{
+  "id": "nodejs-version",
+  "title": "Node.js version",
+  "description": "How to control the Node.js version that your app uses",
+  "source": "@site/docs/nodejs-version.md",
+  "permalink": "/docs/nodejs-version",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/nodejs-version.md"
+}

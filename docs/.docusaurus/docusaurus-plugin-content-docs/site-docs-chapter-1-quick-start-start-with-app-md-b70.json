@@ -1,0 +1,17 @@
+{
+  "id": "chapter1/quick-start/start-with-app",
+  "title": "Generate app",
+  "description": "Getting started with your electrode app",
+  "source": "@site/docs/chapter1/quick-start/start-with-app.md",
+  "permalink": "/docs/chapter1/quick-start/start-with-app",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/quick-start/start-with-app.md",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/docs/chapter1/intermediate/app-archetype/README"
+  },
+  "next": {
+    "title": "Build an app",
+    "permalink": "/docs/chapter1/further-develop-app/build-app"
+  }
+}

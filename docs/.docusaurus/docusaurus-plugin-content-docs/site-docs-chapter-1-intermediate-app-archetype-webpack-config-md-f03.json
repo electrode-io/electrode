@@ -1,0 +1,17 @@
+{
+  "id": "chapter1/intermediate/app-archetype/webpack-config",
+  "title": "Webpack Configurations",
+  "description": "Webpack configurations are a significant part of the app archetype. They help with compiling and bundling your React app code. Webpack is a very sophisticated and complex software and while we provided sensible defaults, we make it possible for you to customize your own.",
+  "source": "@site/docs/chapter1/intermediate/app-archetype/webpack-config.md",
+  "permalink": "/docs/chapter1/intermediate/app-archetype/webpack-config",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/intermediate/app-archetype/webpack-config.md",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "Eslint Configuration",
+    "permalink": "/docs/chapter1/intermediate/app-archetype/eslint"
+  },
+  "next": {
+    "title": "Environment Variables",
+    "permalink": "/docs/chapter1/intermediate/app-archetype/env-vars"
+  }
+}

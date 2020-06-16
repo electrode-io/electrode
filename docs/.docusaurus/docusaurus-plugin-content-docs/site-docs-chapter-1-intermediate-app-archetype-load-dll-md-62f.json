@@ -1,0 +1,17 @@
+{
+  "id": "chapter1/intermediate/app-archetype/load-dll",
+  "title": "Loading Webpack DLL",
+  "description": "Webpack DLL allows you to put common libraries in a separate bundle. For example, a React app can put all the React core modules in a DLL. See our sample [react-vendor-dll].",
+  "source": "@site/docs/chapter1/intermediate/app-archetype/load-dll.md",
+  "permalink": "/docs/chapter1/intermediate/app-archetype/load-dll",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/intermediate/app-archetype/load-dll.md",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "Environment Variables",
+    "permalink": "/docs/chapter1/intermediate/app-archetype/env-vars"
+  },
+  "next": {
+    "title": "Extract Styles",
+    "permalink": "/docs/chapter1/intermediate/app-archetype/extract-styles"
+  }
+}

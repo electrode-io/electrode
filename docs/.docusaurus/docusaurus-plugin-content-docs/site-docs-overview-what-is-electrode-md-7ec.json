@@ -1,0 +1,8 @@
+{
+  "id": "overview/what-is-electrode",
+  "title": "What is Electrode",
+  "description": "Electrode is a platform for building large scale Universal React web applications with a standardized structure that follows best practices and has modern technologies built in. Electrode focuses on performance, component reusability, and simple deployment to multiple cloud providers—so you can focus on what makes your app unique.",
+  "source": "@site/docs/overview/what-is-electrode.md",
+  "permalink": "/docs/overview/what-is-electrode",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/overview/what-is-electrode.md"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "guides/webpack4",
+  "title": "Webpack 4 Migration Guide",
+  "description": "Webpack 4 was released earlier this year and includes lots of robust features and improvements which will help the development process easier.",
+  "source": "@site/docs/guides/webpack4.md",
+  "permalink": "/docs/guides/webpack4",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/guides/webpack4.md"
+}

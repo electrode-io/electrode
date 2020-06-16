@@ -1,0 +1,8 @@
+{
+  "id": "resources/faqs",
+  "title": "faqs",
+  "description": "FAQs",
+  "source": "@site/docs/resources/faqs.md",
+  "permalink": "/docs/resources/faqs",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/resources/faqs.md"
+}

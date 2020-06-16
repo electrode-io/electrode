@@ -1,0 +1,8 @@
+{
+  "id": "build-app",
+  "title": "Build an app",
+  "description": "Build an electrode application",
+  "source": "@site/docs/build-app.md",
+  "permalink": "/docs/build-app",
+  "editUrl": "https://github.com/facebook/docusaurus/edit/master/website/docs/build-app.md"
+}

@@ -1,0 +1,50 @@
+{
+  "docsSidebars": {
+    "someSidebar": [
+      {
+        "type": "category",
+        "label": "Introduction",
+        "items": [
+          {
+            "type": "link",
+            "label": "Welcome to Electrode",
+            "href": "/docs/welcome-to-electrode"
+          },
+          {
+            "type": "link",
+            "label": "Contribute!",
+            "href": "/docs/contributing"
+          },
+          {
+            "type": "link",
+            "label": "Community",
+            "href": "/docs/community"
+          },
+          {
+            "type": "link",
+            "label": "Glossary",
+            "href": "/docs/glossary"
+          }
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Quick_Start",
+        "items": [
+          {
+            "type": "link",
+            "label": "Getting started",
+            "href": "/docs/getting-started"
+          }
+        ]
+      }
+    ]
+  },
+  "permalinkToSidebar": {
+    "/docs/community": "someSidebar",
+    "/docs/contributing": "someSidebar",
+    "/docs/getting-started": "someSidebar",
+    "/docs/glossary": "someSidebar",
+    "/docs/welcome-to-electrode": "someSidebar"
+  }
+}

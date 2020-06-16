@@ -1,0 +1,8 @@
+{
+  "id": "mdx",
+  "title": "Powered by MDX",
+  "description": "You can write JSX and use React components within your Markdown thanks to MDX.",
+  "source": "@site/docs/mdx.md",
+  "permalink": "/docs/mdx",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/mdx.md"
+}

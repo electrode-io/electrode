@@ -1,0 +1,8 @@
+{
+  "id": "chapter1/intermediate/build-with-material-ui",
+  "title": "Build with material-ui",
+  "description": "material-ui is a set of React components that implement Google's material design. It's a great choice to help you quickly develop your web app with a sophisticated look and feel UI that is designed to be responsive. It's very simple to add material-ui components to an Electrode app. We've built a sample with step-by-step instructions to show you how.",
+  "source": "@site/docs/chapter1/intermediate/build-with-material-ui.md",
+  "permalink": "/docs/chapter1/intermediate/build-with-material-ui",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/intermediate/build-with-material-ui.md"
+}

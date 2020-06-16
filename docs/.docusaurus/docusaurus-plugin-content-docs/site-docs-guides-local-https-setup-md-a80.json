@@ -1,0 +1,8 @@
+{
+  "id": "guides/local-https-setup",
+  "title": "Localhost HTTPS Setup",
+  "description": "These instructions are for MacOS, verified on macOS Mojave version 10.14.6",
+  "source": "@site/docs/guides/local-https-setup.md",
+  "permalink": "/docs/guides/local-https-setup",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/guides/local-https-setup.md"
+}

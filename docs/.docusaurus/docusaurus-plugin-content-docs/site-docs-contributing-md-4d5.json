@@ -1,0 +1,17 @@
+{
+  "id": "contributing",
+  "title": "Contribute!",
+  "description": "If you are interested in contributing, check out the list of open Issues and Features.",
+  "source": "@site/docs/contributing.md",
+  "permalink": "/docs/contributing",
+  "editUrl": "https://github.com/electrode-io/electrode/tree/master/docs/docs/contributing.md",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "Welcome to Electrode",
+    "permalink": "/docs/welcome-to-electrode"
+  },
+  "next": {
+    "title": "Community",
+    "permalink": "/docs/community"
+  }
+}

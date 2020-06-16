@@ -1,0 +1,17 @@
+{
+  "id": "start-with-app",
+  "title": "Generate app",
+  "description": "Getting started with your electrode app",
+  "source": "@site/docs/start-with-app.md",
+  "permalink": "/docs/start-with-app",
+  "editUrl": "https://github.com/facebook/docusaurus/edit/master/website/docs/start-with-app.md",
+  "sidebar": "electrode_io",
+  "previous": {
+    "title": "System requirements",
+    "permalink": "/docs/requirements"
+  },
+  "next": {
+    "title": "Node.js OSX | Linux",
+    "permalink": "/docs/nodejs-nix"
+  }
+}

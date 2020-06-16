@@ -1,0 +1,17 @@
+{
+  "id": "add-routes",
+  "title": "Add routes",
+  "description": "Add Routes",
+  "source": "@site/docs/add-routes.md",
+  "permalink": "/docs/add-routes",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/add-routes.md",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "Subapps",
+    "permalink": "/docs/subapps"
+  },
+  "next": {
+    "title": "React routes",
+    "permalink": "/docs/react-routes"
+  }
+}

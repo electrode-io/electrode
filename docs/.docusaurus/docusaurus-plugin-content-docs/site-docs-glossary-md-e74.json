@@ -1,0 +1,17 @@
+{
+  "id": "glossary",
+  "title": "Glossary",
+  "description": "+ Archetypes are encapsulated boilerplates for centralizing your project configurations, workflows, and dependencies. An archetype is an npm module template, which is a “superclass” of a module, think inheritance for npm modules but not one that is used to generate code files and then discarded.",
+  "source": "@site/docs/glossary.md",
+  "permalink": "/docs/glossary",
+  "editUrl": "https://github.com/electrode-io/electrode/tree/master/docs/docs/glossary.md",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "Community",
+    "permalink": "/docs/community"
+  },
+  "next": {
+    "title": "Getting started",
+    "permalink": "/docs/getting-started"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "subapps",
+  "title": "Subapps",
+  "description": "Electrode Subapps",
+  "source": "@site/docs/subapps.md",
+  "permalink": "/docs/subapps",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/subapps.md",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "Build an app",
+    "permalink": "/docs/chapter1/further-develop-app/build-app"
+  },
+  "next": {
+    "title": "Add routes",
+    "permalink": "/docs/add-routes"
+  }
+}

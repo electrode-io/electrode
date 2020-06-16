@@ -1,0 +1,17 @@
+{
+  "id": "server-actions",
+  "title": "Server routes",
+  "description": "Route Action on the Server Side",
+  "source": "@site/docs/server-actions.md",
+  "permalink": "/docs/server-actions",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/server-actions.md",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "Create route components",
+    "permalink": "/docs/route-component"
+  },
+  "next": {
+    "title": "whats-inside",
+    "permalink": "/docs/chapter1/further-develop-app/whats-inside"
+  }
+}

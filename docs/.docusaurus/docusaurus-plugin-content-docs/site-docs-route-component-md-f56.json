@@ -1,0 +1,17 @@
+{
+  "id": "route-component",
+  "title": "Create route components",
+  "description": "How to create Routes Components",
+  "source": "@site/docs/route-component.md",
+  "permalink": "/docs/route-component",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/route-component.md",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "React routes",
+    "permalink": "/docs/react-routes"
+  },
+  "next": {
+    "title": "Server routes",
+    "permalink": "/docs/server-actions"
+  }
+}

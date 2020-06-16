@@ -1,0 +1,8 @@
+{
+  "id": "guides/subapps",
+  "title": "Electrode Subapps",
+  "description": "Electrode Subapps is a mechanism for code splitting within a larger application. There are several advantages to creating a web application using subapps:",
+  "source": "@site/docs/guides/subapps.md",
+  "permalink": "/docs/guides/subapps",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/guides/subapps.md"
+}

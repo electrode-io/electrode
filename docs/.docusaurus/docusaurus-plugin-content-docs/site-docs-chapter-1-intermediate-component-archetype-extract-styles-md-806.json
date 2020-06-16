@@ -1,0 +1,8 @@
+{
+  "id": "chapter1/intermediate/component-archetype/extract-styles",
+  "title": "Extract Styles",
+  "description": "Component Archetype supports for multiple styles, such as pure CSS, CSS-Modules + CSS-Next, Stylus and SCSS.",
+  "source": "@site/docs/chapter1/intermediate/component-archetype/extract-styles.md",
+  "permalink": "/docs/chapter1/intermediate/component-archetype/extract-styles",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/intermediate/component-archetype/extract-styles.md"
+}

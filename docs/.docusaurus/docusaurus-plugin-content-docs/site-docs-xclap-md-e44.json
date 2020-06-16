@@ -1,0 +1,17 @@
+{
+  "id": "xclap",
+  "title": "xclap task runner",
+  "description": "[xclap] is a task runner tool used extensively in Electrode.",
+  "source": "@site/docs/xclap.md",
+  "permalink": "/docs/xclap",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/xclap.md",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "System requirements",
+    "permalink": "/docs/requirements"
+  },
+  "next": {
+    "title": "Build an app",
+    "permalink": "/docs/chapter1/further-develop-app/build-app"
+  }
+}

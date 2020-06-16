@@ -1,0 +1,17 @@
+{
+  "id": "chapter1/intermediate/app-archetype/extract-styles",
+  "title": "Extract Styles",
+  "description": "Application Archetype supports multiple styles, such as pure CSS, CSS-Modules + CSS-Next, Stylus, SCSS and LESS. Use the following flags to choose your desired styles.",
+  "source": "@site/docs/chapter1/intermediate/app-archetype/extract-styles.md",
+  "permalink": "/docs/chapter1/intermediate/app-archetype/extract-styles",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/intermediate/app-archetype/extract-styles.md",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "Loading Webpack DLL",
+    "permalink": "/docs/chapter1/intermediate/app-archetype/load-dll"
+  },
+  "next": {
+    "title": "Unit Tests Runner",
+    "permalink": "/docs/chapter1/intermediate/app-archetype/unit-tests"
+  }
+}

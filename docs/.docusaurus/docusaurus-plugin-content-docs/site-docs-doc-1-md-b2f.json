@@ -1,0 +1,9 @@
+{
+  "id": "doc1",
+  "title": "Style Guide",
+  "description": "You can write content using GitHub-flavored Markdown syntax.",
+  "source": "@site/docs/doc1.md",
+  "permalink": "/docs/doc1",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/doc1.md",
+  "sidebar_label": "Style Guide"
+}

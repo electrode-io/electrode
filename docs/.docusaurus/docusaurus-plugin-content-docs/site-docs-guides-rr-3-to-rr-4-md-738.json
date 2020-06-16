@@ -1,0 +1,8 @@
+{
+  "id": "guides/rr3-to-rr4",
+  "title": "React Router v3 to v4 Migration",
+  "description": "With [electrode-redux-router-engine] v2 release, Electrode now supports [React Router v4] (RR4).",
+  "source": "@site/docs/guides/rr3-to-rr4.md",
+  "permalink": "/docs/guides/rr3-to-rr4",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/guides/rr3-to-rr4.md"
+}

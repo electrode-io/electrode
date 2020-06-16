@@ -1,0 +1,17 @@
+{
+  "id": "chapter1/intermediate/app-archetype/unit-tests",
+  "title": "Unit Tests Runner",
+  "description": "Electrode supports Karma and Jest as its javascript unit tests runners. It allows Karma and Jest unit tests to coexist, and will automatically detect and run both. App Archetype offers developers with different options for the productive testing environments.",
+  "source": "@site/docs/chapter1/intermediate/app-archetype/unit-tests.md",
+  "permalink": "/docs/chapter1/intermediate/app-archetype/unit-tests",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/intermediate/app-archetype/unit-tests.md",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "Extract Styles",
+    "permalink": "/docs/chapter1/intermediate/app-archetype/extract-styles"
+  },
+  "next": {
+    "title": "README",
+    "permalink": "/docs/chapter1/intermediate/languages/README"
+  }
+}

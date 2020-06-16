@@ -1,0 +1,8 @@
+{
+  "id": "chapter1/advanced/stand-alone-modules/server-side-render-caching-+-profiling",
+  "title": "Server Side Render Caching + Profiling",
+  "description": "Use the The electrode-react-ssr-caching module to optimize React SSR with profiling and component caching.",
+  "source": "@site/docs/chapter1/advanced/stand-alone-modules/server-side-render-caching-+-profiling.md",
+  "permalink": "/docs/chapter1/advanced/stand-alone-modules/server-side-render-caching-+-profiling",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/advanced/stand-alone-modules/server-side-render-caching-+-profiling.md"
+}

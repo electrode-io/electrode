@@ -1,0 +1,8 @@
+{
+  "id": "chapter1/intermediate/component-archetype/components-archetype-structure",
+  "title": "Component Archetype Structure",
+  "description": "In the previous component archetype, we used demo-server to demo and test the React component inside of the component itself, which adds a risk of confusion. To clarify, we removed demo-server for the component archetype to target the build, eslint check, and unit tests.",
+  "source": "@site/docs/chapter1/intermediate/component-archetype/component-archetype-structure.md",
+  "permalink": "/docs/chapter1/intermediate/component-archetype/components-archetype-structure",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/intermediate/component-archetype/component-archetype-structure.md"
+}

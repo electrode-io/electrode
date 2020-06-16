@@ -1,0 +1,8 @@
+{
+  "id": "chapter1/advanced/stand-alone-modules/stateless-csrf-validation",
+  "title": "Stateless CSRF Validation",
+  "description": "The electrode-csrf-jwt plugin enables stateless CSRF protection using JWT in Electrode, Express, or Hapi applications.",
+  "source": "@site/docs/chapter1/advanced/stand-alone-modules/stateless-csrf-validation.md",
+  "permalink": "/docs/chapter1/advanced/stand-alone-modules/stateless-csrf-validation",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/advanced/stand-alone-modules/stateless-csrf-validation.md"
+}

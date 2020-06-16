@@ -1,0 +1,8 @@
+{
+  "id": "guides/dev-and-debug",
+  "title": "Developing and Debugging",
+  "description": "With Electrode, it's simple to create and start developing your application.",
+  "source": "@site/docs/guides/dev-and-debug.md",
+  "permalink": "/docs/guides/dev-and-debug",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/guides/dev-and-debug.md"
+}

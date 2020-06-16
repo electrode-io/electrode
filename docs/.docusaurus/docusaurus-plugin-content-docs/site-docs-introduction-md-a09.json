@@ -1,0 +1,17 @@
+{
+  "id": "introduction",
+  "title": "Introduction",
+  "description": "It takes 5 minutes and a single command to get your own Universal React app to customize:",
+  "source": "@site/docs/introduction.md",
+  "permalink": "/docs/introduction",
+  "editUrl": "https://github.com/facebook/docusaurus/edit/master/website/docs/introduction.md",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "Powered by MDX",
+    "permalink": "/docs/mdx"
+  },
+  "next": {
+    "title": "Getting started",
+    "permalink": "/docs/getting-started"
+  }
+}

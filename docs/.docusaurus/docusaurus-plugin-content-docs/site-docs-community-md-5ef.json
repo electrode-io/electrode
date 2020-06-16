@@ -1,0 +1,17 @@
+{
+  "id": "community",
+  "title": "Community",
+  "description": "Connecting with Electrode",
+  "source": "@site/docs/community.md",
+  "permalink": "/docs/community",
+  "editUrl": "https://github.com/electrode-io/electrode/tree/master/docs/docs/community.md",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "Contribute!",
+    "permalink": "/docs/contributing"
+  },
+  "next": {
+    "title": "Glossary",
+    "permalink": "/docs/glossary"
+  }
+}

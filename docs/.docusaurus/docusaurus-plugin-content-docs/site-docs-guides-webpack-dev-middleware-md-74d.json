@@ -1,0 +1,8 @@
+{
+  "id": "guides/webpack-dev-middleware",
+  "title": "Upgrade to webpack-dev-middleware",
+  "description": "With the release of [@xarc/app version 7.0.0], Electrode no longer includes [webpack-dev-server].",
+  "source": "@site/docs/guides/webpack-dev-middleware.md",
+  "permalink": "/docs/guides/webpack-dev-middleware",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/guides/webpack-dev-middleware.md"
+}

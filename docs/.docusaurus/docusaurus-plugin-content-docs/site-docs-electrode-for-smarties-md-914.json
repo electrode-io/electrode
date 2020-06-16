@@ -1,0 +1,18 @@
+{
+  "id": "electrode-for-smarties",
+  "title": "Electrode For Smarties™",
+  "description": "export const SmartiesBookMode = () => {",
+  "source": "@site/docs/electrode-for-smarties.md",
+  "permalink": "/docs/electrode-for-smarties",
+  "editUrl": "https://github.com/facebook/docusaurus/edit/master/website/docs/electrode-for-smarties.md",
+  "sidebar_label": "Electrode For Smarties™",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "Style Guide",
+    "permalink": "/docs/doc1"
+  },
+  "next": {
+    "title": "Powered by MDX",
+    "permalink": "/docs/mdx"
+  }
+}

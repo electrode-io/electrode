@@ -1,0 +1,17 @@
+{
+  "id": "chapter1/quick-start/start-with-component",
+  "title": "start-with-component",
+  "description": "Getting Started With Electrode Components",
+  "source": "@site/docs/chapter1/quick-start/start-with-component.md",
+  "permalink": "/docs/chapter1/quick-start/start-with-component",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/quick-start/start-with-component.md",
+  "sidebar": "someSidebar",
+  "previous": {
+    "title": "README",
+    "permalink": "/docs/chapter1/intermediate/component-archetype/README"
+  },
+  "next": {
+    "title": "component-archetype-structure",
+    "permalink": "/docs/chapter1/intermediate/component-archetype/component-archetype-structure"
+  }
+}

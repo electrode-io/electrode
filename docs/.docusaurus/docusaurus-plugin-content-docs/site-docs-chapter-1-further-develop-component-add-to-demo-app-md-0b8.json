@@ -1,0 +1,8 @@
+{
+  "id": "chapter1/further-develop-component/add-to-demo-app",
+  "title": "Add Components to Your Demo-app",
+  "description": "After you finish developing your components, its time to demo them in demo-app. You don't need to re-install the components if they get updated, all the components are automatically linked to demo-app. (Required by generator-electrode@3Â.0.0 above)",
+  "source": "@site/docs/chapter1/further-develop-component/add-to-demo-app.md",
+  "permalink": "/docs/chapter1/further-develop-component/add-to-demo-app",
+  "editUrl": "https://gecgithub01.walmart.com/electrode/docs/docs/chapter1/further-develop-component/add-to-demo-app.md"
+}

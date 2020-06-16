@@ -1,0 +1,112 @@
+{
+  "docsSidebars": {
+    "electrode_io": [
+      {
+        "type": "category",
+        "label": "Introduction",
+        "items": [
+          {
+            "type": "link",
+            "label": "Markdown Style Guide",
+            "href": "/docs/doc1"
+          },
+          {
+            "type": "link",
+            "label": "What is Electrode?",
+            "href": "/docs/what-is-electrode"
+          }
+        ]
+      },
+      {
+        "type": "category",
+        "label": "electrode_io",
+        "items": [
+          {
+            "type": "link",
+            "label": "Getting started",
+            "href": "/docs/getting-started"
+          },
+          {
+            "type": "link",
+            "label": "System requirements",
+            "href": "/docs/requirements"
+          },
+          {
+            "type": "link",
+            "label": "Generate app",
+            "href": "/docs/start-with-app"
+          },
+          {
+            "type": "link",
+            "label": "Node.js OSX | Linux",
+            "href": "/docs/nodejs-nix"
+          },
+          {
+            "type": "link",
+            "label": "Node.js for Windows",
+            "href": "/docs/nodejs-win"
+          },
+          {
+            "type": "link",
+            "label": "Node.js version",
+            "href": "/docs/nodejs-version"
+          },
+          {
+            "type": "link",
+            "label": "xclap task runner",
+            "href": "/docs/xclap"
+          },
+          {
+            "type": "link",
+            "label": "Getting Started with ignite",
+            "href": "/docs/start-with-ignite"
+          },
+          {
+            "type": "link",
+            "label": "Subapps",
+            "href": "/docs/subapps"
+          },
+          {
+            "type": "link",
+            "label": "Add routes",
+            "href": "/docs/add-routes"
+          },
+          {
+            "type": "link",
+            "label": "React routes",
+            "href": "/docs/react-routes"
+          },
+          {
+            "type": "link",
+            "label": "Create route components",
+            "href": "/docs/route-component"
+          },
+          {
+            "type": "link",
+            "label": "Server routes",
+            "href": "/docs/server-actions"
+          }
+        ]
+      }
+    ]
+  },
+  "permalinkToSidebar": {
+    "/docs/add-routes": "electrode_io",
+    "/docs/doc1": "electrode_io",
+    "/docs/getting-started": "electrode_io",
+    "/docs/nodejs-nix": "electrode_io",
+    "/docs/nodejs-version": "electrode_io",
+    "/docs/nodejs-win": "electrode_io",
+    "/docs/react-routes": "electrode_io",
+    "/docs/requirements": "electrode_io",
+    "/docs/route-component": "electrode_io",
+    "/docs/server-actions": "electrode_io",
+    "/docs/start-with-app": "electrode_io",
+    "/docs/start-with-ignite": "electrode_io",
+    "/docs/subapps": "electrode_io",
+    "/docs/what-is-electrode": "electrode_io",
+    "/docs/xclap": "electrode_io"
+  },
+  "isHomePage": true,
+  "homePagePath": "/docs/doc1"
+}
