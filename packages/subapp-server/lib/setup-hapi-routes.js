@@ -18,7 +18,7 @@ const xaa = require("xaa");
 // const { ReactWebapp } = require("electrode-react-webapp");
 const subAppUtil = require("subapp-util");
 const registerRoutes = require("./register-routes");
-const WebApp = require("@xarc/webapp");
+const WebApp = require("@xarc/web-app");
 
 const {
   errorResponse,

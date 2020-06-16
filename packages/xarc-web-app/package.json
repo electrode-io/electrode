@@ -1,8 +1,8 @@
 {
-  "name": "@xarc/webapp",
+  "name": "@xarc/web-app",
   "version": "0.0.1",
   "description": "xarc module for webapps",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "clap test"
   },
@@ -16,7 +16,7 @@
   "dependencies": {
     "@xarc/jsx-renderer": "file:../xarc-jsx-renderer",
     "@xarc/render-context": "file:../xarc-render-context",
-    "@xarc/token-handlers": "file:../xarc-token-handlers",
+    "@xarc/token-templates": "file:../xarc-handler-templates",
     "xclap": "^0.2.51"
   },
   "author": "Walmart GTP.js",

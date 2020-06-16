@@ -28,8 +28,8 @@
   ],
   "dependencies": {
     "@hapi/boom": "^7.4.1",
-    "electrode-react-webapp": "^3.8.9",
-    "@xarc/webapp": "file:../../packages/xarc-web-app",
+    "@xarc/web-app": "file:../xarc-web-app",
+    "@xarc/token-templates": "file:../xarc-handler-templates",
     "filter-scan-dir": "^1.0.9",
     "http-status-codes": "^1.3.0",
     "optional-require": "^1.0.0",

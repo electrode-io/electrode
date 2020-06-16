@@ -1,1 +1,2 @@
-import { WebApp } from "./webapp";
+import { WebApp } from "./WebApp";
+export { WebApp };
