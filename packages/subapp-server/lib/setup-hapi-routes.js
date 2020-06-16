@@ -15,9 +15,10 @@ const Boom = require("@hapi/boom");
 const HttpStatus = require("./http-status");
 const readFile = util.promisify(Fs.readFile);
 const xaa = require("xaa");
-const { ReactWebapp } = require("electrode-react-webapp");
+// const { ReactWebapp } = require("electrode-react-webapp");
 const subAppUtil = require("subapp-util");
 const registerRoutes = require("./register-routes");
+const WebApp = require("@xarc/web-app");
 
 const {
   errorResponse,
@@ -123,7 +124,7 @@ function setupRouteRender({ subAppsByPath, srcDir, routeOptions }) {
 
   // const useStream = routeOptions.useStream !== false;
 
-  const routeHandler = ReactWebapp.makeRouteHandler(routeOptions);
+  const routeHandler = new WebApp(routeOptions).routeHandler;
 
   return routeHandler;
 }
