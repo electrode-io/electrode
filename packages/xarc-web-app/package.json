@@ -1,0 +1,29 @@
+{
+  "name": "@xarc/webapp",
+  "version": "0.0.1",
+  "description": "xarc module for webapps",
+  "main": "index.js",
+  "scripts": {
+    "test": "clap test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/electrode-io/electrode.git"
+  },
+  "keywords": [
+    "webapp"
+  ],
+  "dependencies": {
+    "@xarc/jsx-renderer": "file:../xarc-jsx-renderer",
+    "@xarc/render-context": "file:../xarc-render-context",
+    "@xarc/token-handlers": "file:../xarc-token-handlers",
+    "xclap": "^0.2.51"
+  },
+  "author": "Walmart GTP.js",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/electrode-io/electrode/issues"
+  },
+  "homepage": "https://github.com/electrode-io/electrode#readme",
+  "devDependencies": {}
+}
