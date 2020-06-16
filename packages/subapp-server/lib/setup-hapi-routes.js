@@ -123,8 +123,8 @@ function setupRouteRender({ subAppsByPath, srcDir, routeOptions }) {
   }
 
   // const useStream = routeOptions.useStream !== false;
-
-  const routeHandler = new WebApp(routeOptions).routeHandler;
+debugger;
+  const routeHandler = WebApp.makeRouteHanlder(routeOptions);
 
   return routeHandler;
 }

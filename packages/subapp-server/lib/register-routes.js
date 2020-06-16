@@ -30,7 +30,7 @@ module.exports = function registerRoutes({ routes, topOpts, server }) {
 
     routeOptions.__internals = { chunkSelector };
 
-    const routeHandler = new WebApp(routeOptions).makeRouteHandler(routeOptions);
+    const routeHandler = WebApp.makeRouteHandler(routeOptions); // new WebApp(routeOptions).makeRouteHandler(routeOptions);
 
     const useStream = routeOptions.useStream !== false;
 
