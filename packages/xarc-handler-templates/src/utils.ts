@@ -11,6 +11,12 @@ const Url = require("url");
 
 const HTTP_PORT = "80";
 
+interface IAsset {
+  css?: string | Array<String>;
+  js?: string | Array<String>;
+  name?: string;
+  manifest?: string;
+}
 /**
  * Tries to import bundle chunk selector function if the corresponding option is set in the
  * webapp plugin configuration. The function takes a `request` object as an argument and
@@ -45,7 +51,7 @@ function loadAssetsFromStats(statsPath) {
   } catch (err) {
     return {};
   }
-  const assets = {};
+  const assets: IAsset = {};
   const manifestAsset = _.find(stats.assets, asset => {
     return asset.name.endsWith("manifest.json");
   });
@@ -267,6 +273,7 @@ function getBundleJsNameByQuery(data, otherAssets) {
   }
   return name;
 }
+const isReadableStream = x => Boolean(x && x.pipe && x.on && x._readableState);
 
 const munchyHandleStreamError = err => {
   let errMsg = (process.env.NODE_ENV !== "production" && err.stack) || err.message;
@@ -313,7 +320,7 @@ const makeDevBundleBase = devServer => {
   }
 };
 
-module.exports = {
+export {
   resolveChunkSelector,
   loadAssetsFromStats,
   getIconStats,
@@ -333,7 +340,7 @@ module.exports = {
   getOtherStats,
   getOtherAssets,
   getBundleJsNameByQuery,
-  isReadableStream: x => Boolean(x && x.pipe && x.on && x._readableState),
+  isReadableStream,
   munchyHandleStreamError,
   makeDevBundleBase
 };
