@@ -19,7 +19,7 @@
     "strictFunctionTypes": true
   },
   "include": [
-    "src"
+    "src", "test", "lib"
   ]
 }
 

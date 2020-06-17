@@ -1,5 +1,5 @@
 import { JsxRenderer } from "@xarc/jsx-renderer";
-import { RenderContext,TokenModule} from "@xarc/render-context";
+import { RenderContext, TokenModule } from "@xarc/render-context";
 import { TokeHandler, getReactTokenHandlers } from "@xarc/handler_templates";
 import * as Path from "path";
 
@@ -18,13 +18,13 @@ export class WebApp {
       (routeOptions.templateFile && Path.resolve(routeOptions.templateFile)) ||
       Path.join(__dirname, "../template/index");
 
-    this.template = require(this.templateFullPath);
+    this.template = import templateFullPath;
 
     this.tokenHandlers = [].concat(routeOptions.tokenHandler, routeOptions.tokenHandlers);
-    if(!routeOptions.replaceTokenHandlers){
+    if (!routeOptions.replaceTokenHandlers) {
       this.tokenHandlers.concat(getReactTokenHandlers());
     }
-    
+
     this.renderer = new JsxRenderer({
       templateFullPath: Path.dirname(this.templateFullPath),
       template: _.get(this.template, "default", this.template),
@@ -34,9 +34,7 @@ export class WebApp {
     });
   }
 
-  static makeRouteHander(routeOptions){
-    return new WebApp(routeOptions).renderer
+  static makeRouteHander(routeOptions) {
+    return new WebApp(routeOptions).renderer;
   }
-
 }
-

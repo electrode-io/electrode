@@ -1,1 +1,1 @@
-export * as WebApp from "./WebApp";
+export * as WebApp from "./web-app";
