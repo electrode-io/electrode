@@ -1,10 +1,14 @@
-
+<p align="center">
+<a><img src="https://raw.githubusercontent.com/electrode-io/electrode/cc4ea3e1851cee3333ecca08fdbf5534f51b1ae7/samples/universal-react-node/client/images/logo-192x192.png" alt="Electrode Logo"></a>
+<br>
+<b>Electrode</b>
+</p>
 
 # Building large scale universal React Web Applications
 
 Electrode Web is a full stack, end-to-end, rapid application development platform for Node.js and React.js based applications.
 
-Originally designed for Walmart-specific use cases, we decided to open-source electrode with the hope that it will be useful to developers in the JavaScript community. 
+Originally designed for Walmart-specific use cases, we decided to open-source electrode with the hope that it will be useful to developers in the JavaScript community.
 This is the same version that is used to power the Walmart.com eCommerce website.
 
 + NOTE: We maintain additional code for internal Walmart systems. If you are a Walmart developer, please check internal docs to get started.
