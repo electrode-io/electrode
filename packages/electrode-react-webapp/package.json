@@ -61,7 +61,9 @@
     "lodash": "^4.17.10",
     "munchy": "^1.0.7",
     "require-at": "^1.0.0",
-    "string-array": "^1.0.0"
+    "string-array": "^1.0.0",
+    "@xarc/jsx-renderer": "file:../xarc-jsx-renderer",
+    "@xarc/render-context": "file:../xarc-render-context"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",

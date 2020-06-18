@@ -1,25 +1,19 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "lib": [
-      "es2018"
-    ],
+    "lib": ["es2018"],
     "module": "CommonJS",
     "esModuleInterop": false,
     "target": "ES2018",
     "preserveConstEnums": true,
     "sourceMap": true,
     "declaration": true,
-    "types": [
-      "node"
-    ],
+    "types": ["node"],
+    "jsx": "react",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "alwaysStrict": true,
     "strictFunctionTypes": true
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src", "test", "lib"]
 }
-

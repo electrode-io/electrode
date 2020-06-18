@@ -1,5 +1,5 @@
 {
-  "name": "@xarc/template-handlers",
+  "name": "@xarc/handler-templates",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
