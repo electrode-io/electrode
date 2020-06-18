@@ -1,9 +1,12 @@
 {
-  "name": "@xarc/token-template",
+  "name": "@xarc/template-handlers",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "test": "clap test"
+    "build": "tsc",
+    "test": "clap test",
+    "prepublishOnly": "clap -n build docs && clap check",
+    "docs": "clap xarc/docs"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
@@ -39,5 +42,16 @@
   "bugs": {
     "url": "https://github.com/electrode-io/electrode/issues"
   },
-  "homepage": "https://github.com/electrode-io/electrode#readme"
+  "homepage": "https://github.com/electrode-io/electrode#readme",
+  "mocha": {
+    "require": [
+      "ts-node/register",
+      "source-map-support/register",
+      "@xarc/module-dev/config/test/setup.js"
+    ],
+    "recursive": true
+  },
+  "files": [
+    "dist"
+  ]
 }

@@ -1,19 +1,17 @@
-"use strict";
-
 /* eslint-disable no-magic-numbers, no-console */
 
-const _ = require("lodash");
-const fs = require("fs");
-const Path = require("path");
-const requireAt = require("require-at");
-const assert = require("assert");
-const Url = require("url");
+import * as _ from "lodash";
+import * as fs from "fs";
+import * as Path from "path";
+import * as requireAt from "require-at";
+import * as assert from "assert";
+import * as Url from "url";
 
 const HTTP_PORT = "80";
 
-interface IAsset {
-  css?: string | Array<String>;
-  js?: string | Array<String>;
+interface iAsset {
+  css?: string | Array<string>;
+  js?: string | Array<string>;
   name?: string;
   manifest?: string;
 }
@@ -51,7 +49,7 @@ function loadAssetsFromStats(statsPath) {
   } catch (err) {
     return {};
   }
-  const assets: IAsset = {};
+  const assets: iAsset = {};
   const manifestAsset = _.find(stats.assets, asset => {
     return asset.name.endsWith("manifest.json");
   });

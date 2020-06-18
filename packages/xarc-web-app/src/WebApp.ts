@@ -1,7 +1,10 @@
 import { JsxRenderer } from "@xarc/jsx-renderer";
-import { RenderContext,TokenModule} from "@xarc/render-context";
-import { TokeHandler, getReactTokenHandlers } from "@xarc/handler_templates";
+import { RenderContext, TokenModule } from "@xarc/render-context";
+import { getReactTokenHandlers } from "@xarc/handler_templates";
+
 import * as Path from "path";
+
+static  const sharedTemplateCache = Map<String,String>
 
 export class WebApp {
   _routeOptions: any;
@@ -17,14 +20,20 @@ export class WebApp {
     this.templateFullPath =
       (routeOptions.templateFile && Path.resolve(routeOptions.templateFile)) ||
       Path.join(__dirname, "../template/index");
-
-    this.template = require(this.templateFullPath);
-
     this.tokenHandlers = [].concat(routeOptions.tokenHandler, routeOptions.tokenHandlers);
-    if(!routeOptions.replaceTokenHandlers){
+    if (!routeOptions.replaceTokenHandlers) {
       this.tokenHandlers.concat(getReactTokenHandlers());
     }
-    
+  }
+
+  get template(){
+
+  }
+}
+
+
+
+    this.template = await import(this.templateFullPath);
     this.renderer = new JsxRenderer({
       templateFullPath: Path.dirname(this.templateFullPath),
       template: _.get(this.template, "default", this.template),
@@ -34,9 +43,15 @@ export class WebApp {
     });
   }
 
-  static makeRouteHander(routeOptions){
-    return new WebApp(routeOptions).renderer
+  static makeRouteHander(routeOptions) {
+    this.template = await import(this.templateFullPath);
+    this.renderer = new JsxRenderer({
+      templateFullPath: Path.dirname(this.templateFullPath),
+      template: _.get(this.template, "default", this.template),
+      tokenHandlers: this.tokenHandlers.filter(x => x),
+      insertTokenIds: routeOptions.insertTokenIds,
+      routeOptions
+    });
+    return new WebApp(routeOptions).renderer;
   }
-
 }
-
