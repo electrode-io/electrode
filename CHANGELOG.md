@@ -1,3 +1,42 @@
+# 6/17/2020
+
+- create-app - take app directory as argument
+- add web SSR timing reporting events
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.1.6` `(8.1.5 => 8.1.6)`
+- `@xarc/app-dev@8.1.6` `(8.1.5 => 8.1.6)`
+- `@xarc/create-app@3.0.7` `(3.0.6 => 3.0.7)`
+- `subapp-server@1.2.3` `(1.2.2 => 1.2.3)`
+- `subapp-web@1.0.29` `(1.0.28 => 1.0.29)`
+
+### Lerna Updated
+
+- `subapp-pbundle@0.0.23` `(0.0.22 => 0.0.23)`
+- `subapp-react@0.0.20` `(0.0.19 => 0.0.20)`
+- `subapp-redux@1.0.29` `(1.0.28 => 1.0.29)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix: use proper dev-admin interactive flag [commit](http://github.com/electrode-io/electrode/commit/fc43f34f8a088a8cc68063c0f91a5910b943dff2)
+
+- `packages/xarc-create-app`
+
+  - create-app - take app directory as argument ([#1674](https://github.com/electrode-io/electrode/pull/1674)) [commit](http://github.com/electrode-io/electrode/commit/6c38df590f2475e15cbddda381d83656bde53260)
+
+- `packages/subapp-server`
+
+  - add web SSR timing reporting events ([#1672](https://github.com/electrode-io/electrode/pull/1672)) [commit](http://github.com/electrode-io/electrode/commit/6d8eaf9c64268da52b4f0c3665ad91ab8772be46)
+
+- `packages/subapp-web`
+
+  - add web SSR timing reporting events ([#1672](https://github.com/electrode-io/electrode/pull/1672)) [commit](http://github.com/electrode-io/electrode/commit/6d8eaf9c64268da52b4f0c3665ad91ab8772be46)
+
 # 6/11/2020
 
 - fix: disable dev admin interactivity in CI
