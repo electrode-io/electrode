@@ -20,7 +20,6 @@
     "@xarc/jsx-renderer": "file:../xarc-jsx-renderer",
     "@xarc/module-dev": "^2.1.1",
     "@xarc/render-context": "file:../xarc-render-context",
-    "@xarc/handler-templates": "file:../xarc-handler-templates",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.5",
     "xclap": "^0.2.51"

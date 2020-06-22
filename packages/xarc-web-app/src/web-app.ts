@@ -1,8 +1,7 @@
 import { JsxRenderer } from "@xarc/jsx-renderer";
 import { RenderContext, TokenModule } from "@xarc/render-context";
-import { getReactTokenHandlers } from "@xarc/handler_templates";
-import * as webAppTemplate from "./src-template/template-index-page";
 import * as Path from "path";
+import _ from "lodash";
 
 export class WebApp {
   _routeOptions: any;
@@ -20,12 +19,18 @@ export class WebApp {
       (routeOptions.templateFile && Path.resolve(routeOptions.templateFile)) ||
       Path.join(__dirname, "../template/index");
 
-    this.tokenHandlers = [].concat(routeOptions.tokenHandler, routeOptions.tokenHandlers);
+    const userTokenHandlers = [].concat(routeOptions.tokenHandler, routeOptions.tokenHandlers);
+    let finalTokenHandlers = userTokenHandlers;
+
     if (!routeOptions.replaceTokenHandlers) {
-      this.tokenHandlers.concat(getReactTokenHandlers());
+      const reactTokenHandlers = Path.join(__dirname, "handlers/react/token-handlers");
+      finalTokenHandlers =
+        userTokenHandlers.indexOf(reactTokenHandlers) < 0
+          ? [reactTokenHandlers].concat(userTokenHandlers)
+          : userTokenHandlers;
     }
 
-    this.template = webAppTemplate;
+    this.template = require(this.templateFullPath);
     this.renderer = new JsxRenderer({
       templateFullPath: Path.dirname(this.templateFullPath),
       template: _.get(this.template, "default", this.template),
