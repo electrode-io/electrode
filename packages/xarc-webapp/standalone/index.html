@@ -1,0 +1,17 @@
+<html>
+  <body>
+    <div id="console"></div>
+  </body>
+  <script type="module">
+    import WebApp from "../dist/index.js";
+    const debug = obj =>
+      typeof obj === "string"
+        ? (document.getElementById("console").innerHTML += obj)
+        : debug(JSON.stringify(obj));
+
+    const webapp = WebApp.makeRouterHandler({
+      templateFile: Path.resolve("../template/index.jsx")
+    });
+    debug(webapp);
+  </script>
+</html>
