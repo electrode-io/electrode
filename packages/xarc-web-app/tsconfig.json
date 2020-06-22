@@ -8,12 +8,12 @@
     "preserveConstEnums": true,
     "sourceMap": true,
     "declaration": true,
-    "types": ["node"],
+    "types": ["node", "mocha"],
     "jsx": "react",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "alwaysStrict": true,
     "strictFunctionTypes": true
   },
-  "include": ["src", "test", "lib"]
+  "include": ["src"]
 }

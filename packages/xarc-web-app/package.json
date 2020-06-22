@@ -57,14 +57,6 @@
   "files": [
     "dist"
   ],
-  "mocha": {
-    "require": [
-      "ts-node/register",
-      "source-map-support/register",
-      "./config/test/setup.js"
-    ],
-    "recursive": true
-  },
   "nyc": {
     "extends": [
       "@istanbuljs/nyc-config-typescript"
@@ -90,5 +82,13 @@
     "functions": 100,
     "lines": 100,
     "cache": false
+  },
+  "mocha": {
+    "require": [
+      "ts-node/register",
+      "source-map-support/register",
+      "./config/test/setup.js"
+    ],
+    "recursive": true
   }
 }

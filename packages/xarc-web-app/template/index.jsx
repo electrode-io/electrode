@@ -1,6 +1,6 @@
 /* @jsx createElement */
-
-const { IndexPage, createElement, Token } = require("../lib/jsx");
+"use strict";
+import { IndexPage, createElement, Token } from "@xarc/render-context";
 
 const Template = (
   <IndexPage DOCTYPE="html">
