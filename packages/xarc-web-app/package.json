@@ -1,5 +1,5 @@
 {
-  "name": "@xarc/web-app",
+  "name": "@xarc/webapp",
   "version": "0.0.1",
   "description": "xarc module for webapps",
   "main": "dist/index.js",
@@ -64,5 +64,31 @@
       "./config/test/setup.js"
     ],
     "recursive": true
+  },
+  "nyc": {
+    "extends": [
+      "@istanbuljs/nyc-config-typescript"
+    ],
+    "all": true,
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "exclude": [
+      "*clap.js",
+      "*clap.ts",
+      "coverage",
+      "dist",
+      "docs",
+      "gulpfile.js",
+      "test"
+    ],
+    "check-coverage": true,
+    "statements": 100,
+    "branches": 100,
+    "functions": 100,
+    "lines": 100,
+    "cache": false
   }
 }
