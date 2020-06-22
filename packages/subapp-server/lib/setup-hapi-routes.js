@@ -15,10 +15,10 @@ const Boom = require("@hapi/boom");
 const HttpStatus = require("./http-status");
 const readFile = util.promisify(Fs.readFile);
 const xaa = require("xaa");
-// const { ReactWebapp } = require("electrode-react-webapp");
+const { ReactWebapp } = require("electrode-react-webapp");
 const subAppUtil = require("subapp-util");
 const registerRoutes = require("./register-routes");
-const WebApp = require("@xarc/web-app");
+const WebApp = require("@xarc/webapp");
 
 const {
   errorResponse,
@@ -53,7 +53,7 @@ async function searchRoutesDir(srcDir, pluginOpts) {
   //
   const options = optionalRequire(Path.join(routesDir, "options"), { default: {} });
 
-  //
+  //\
   // Generate routes: load the route.js file for each route
   //
   const routes = dirs.map(x => {
@@ -121,12 +121,14 @@ function setupRouteRender({ subAppsByPath, srcDir, routeOptions }) {
       };
     });
   }
-
+  console.log(routeOptions);
+  debugger;
   // const useStream = routeOptions.useStream !== false;
-debugger;
-  const routeHandler = WebApp.makeRouteHanlder(routeOptions);
-
-  return routeHandler;
+  const routeHandler = WebApp.makeRouteHandler(routeOptions);
+  const v1routehandler = ReactWebapp.makeRouteHandler(routeOptions);
+  console.log(v1routehandler);
+  console.log(routeHandler);
+  return v1routehandler;
 }
 
 async function registerHapiRoutes({ server, srcDir, routes, topOpts }) {
