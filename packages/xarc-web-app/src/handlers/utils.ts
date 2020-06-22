@@ -1,23 +1,27 @@
-"use strict";
-
 /* eslint-disable no-magic-numbers, no-console */
 
-const _ = require("lodash");
-const fs = require("fs");
-const Path = require("path");
-const requireAt = require("require-at");
-const assert = require("assert");
-const Url = require("url");
+import * as _ from "lodash";
+import * as fs from "fs";
+import * as Path from "path";
+import * as requireAt from "require-at";
+import * as assert from "assert";
+import * as Url from "url";
 
 const HTTP_PORT = "80";
 
+interface Asset {
+  css?: string | Array<string>;
+  js?: string | Array<string>;
+  name?: string;
+  manifest?: string;
+}
 /**
  * Tries to import bundle chunk selector function if the corresponding option is set in the
  * webapp plugin configuration. The function takes a `request` object as an argument and
  * returns the chunk name.
  *
- * @param {Object} options - webapp plugin configuration options
- * @return {Function} function that selects the bundle based on the request object
+ * @param {object} options - webapp plugin configuration options
+ * @returns {Function} function that selects the bundle based on the request object
  */
 function resolveChunkSelector(options) {
   if (options.bundleChunkSelector) {
@@ -36,7 +40,7 @@ function resolveChunkSelector(options) {
  * The file contains bundle files which are to be loaded on the client side.
  *
  * @param {string} statsPath - path of stats.json
- * @returns {Promise.<Object>} an object containing an array of file names
+ * @returns {Promise.<object>} an object containing an array of file names
  */
 function loadAssetsFromStats(statsPath) {
   let stats;
@@ -45,7 +49,7 @@ function loadAssetsFromStats(statsPath) {
   } catch (err) {
     return {};
   }
-  const assets = {};
+  const assets: Asset = {};
   const manifestAsset = _.find(stats.assets, asset => {
     return asset.name.endsWith("manifest.json");
   });
@@ -66,6 +70,9 @@ function loadAssetsFromStats(statsPath) {
   return assets;
 }
 
+/**
+ * @param iconStatsPath
+ */
 function getIconStats(iconStatsPath) {
   let iconStats;
   try {
@@ -80,6 +87,9 @@ function getIconStats(iconStatsPath) {
   return iconStats;
 }
 
+/**
+ * @param path
+ */
 function getCriticalCSS(path) {
   const criticalCSSPath = Path.resolve(process.cwd(), path || "");
 
@@ -96,9 +106,10 @@ function getCriticalCSS(path) {
  * asset list. In dev the stats.json file is written to a
  * build artifacts directory, while in produciton its contained
  * within the dist/server folder
+ *
  * @param  {string} statsFilePath      path to stats.json
  * @param  {string} buildArtifactsPath path to stats.json in dev
- * @return {string}                    current active path
+ * @returns {string}                    current active path
  */
 function getStatsPath(statsFilePath, buildArtifactsPath) {
   return process.env.WEBPACK_DEV === "true"
@@ -106,6 +117,10 @@ function getStatsPath(statsFilePath, buildArtifactsPath) {
     : statsFilePath;
 }
 
+/**
+ * @param err
+ * @param withStack
+ */
 function htmlifyError(err, withStack) {
   const html = err.html ? `<div>${err.html}</div>\n` : "";
   const errMsg = () => {
@@ -127,6 +142,10 @@ ${errMsg()}
 </pre></body></html>`;
 }
 
+/**
+ * @param chunkNames
+ * @param routeData
+ */
 function getDevCssBundle(chunkNames, routeData) {
   const devBundleBase = routeData.devBundleBase;
   if (chunkNames.css) {
@@ -137,6 +156,10 @@ function getDevCssBundle(chunkNames, routeData) {
   }
 }
 
+/**
+ * @param chunkNames
+ * @param routeData
+ */
 function getDevJsBundle(chunkNames, routeData) {
   const devBundleBase = routeData.devBundleBase;
 
@@ -145,6 +168,10 @@ function getDevJsBundle(chunkNames, routeData) {
     : `${devBundleBase}bundle.dev.js`;
 }
 
+/**
+ * @param chunkNames
+ * @param routeData
+ */
 function getProdBundles(chunkNames, routeData) {
   if (!routeData || !routeData.assets) {
     return {};
@@ -161,6 +188,11 @@ function getProdBundles(chunkNames, routeData) {
   };
 }
 
+/**
+ * @param request
+ * @param renderSs
+ * @param mode
+ */
 function processRenderSsMode(request, renderSs, mode) {
   if (renderSs) {
     if (mode === "noss") {
@@ -175,6 +207,10 @@ function processRenderSsMode(request, renderSs, mode) {
   return renderSs;
 }
 
+/**
+ * @param request
+ * @param cspNonceValue
+ */
 function getCspNonce(request, cspNonceValue) {
   let scriptNonce = "";
   let styleNonce = "";
@@ -196,6 +232,11 @@ function getCspNonce(request, cspNonceValue) {
 
 const resolvePath = path => (!Path.isAbsolute(path) ? Path.resolve(path) : path);
 
+/**
+ * @param request
+ * @param routeOptions
+ * @param err
+ */
 function responseForError(request, routeOptions, err) {
   return {
     status: err.status || 500,
@@ -203,6 +244,11 @@ function responseForError(request, routeOptions, err) {
   };
 }
 
+/**
+ * @param request
+ * @param routeOptions
+ * @param data
+ */
 function responseForBadStatus(request, routeOptions, data) {
   return {
     status: data.status,
@@ -210,6 +256,11 @@ function responseForBadStatus(request, routeOptions, data) {
   };
 }
 
+/**
+ * @param modulePath
+ * @param exportFuncName
+ * @param requireAtDir
+ */
 function loadFuncFromModule(modulePath, exportFuncName, requireAtDir = "") {
   const mod = requireAt(requireAtDir || process.cwd())(modulePath);
   const exportFunc = (exportFuncName && mod[exportFuncName]) || mod;
@@ -220,6 +271,10 @@ function loadFuncFromModule(modulePath, exportFuncName, requireAtDir = "") {
   return exportFunc;
 }
 
+/**
+ * @param asyncTemplate
+ * @param routeOptions
+ */
 function invokeTemplateProcessor(asyncTemplate, routeOptions) {
   const tp = routeOptions.templateProcessor;
 
@@ -238,6 +293,9 @@ function invokeTemplateProcessor(asyncTemplate, routeOptions) {
   return undefined;
 }
 
+/**
+ *
+ */
 function getOtherStats() {
   const otherStats = {};
   if (fs.existsSync("dist/server")) {
@@ -252,6 +310,9 @@ function getOtherStats() {
   return otherStats;
 }
 
+/**
+ * @param pluginOptions
+ */
 function getOtherAssets(pluginOptions) {
   return Object.entries(pluginOptions.otherStats).reduce((prev, [k, v]) => {
     prev[k] = loadAssetsFromStats(getStatsPath(v, pluginOptions.buildArtifacts));
@@ -259,6 +320,10 @@ function getOtherAssets(pluginOptions) {
   }, {});
 }
 
+/**
+ * @param data
+ * @param otherAssets
+ */
 function getBundleJsNameByQuery(data, otherAssets) {
   let { name } = data.jsChunk;
   const { __dist } = data.query;
@@ -267,6 +332,7 @@ function getBundleJsNameByQuery(data, otherAssets) {
   }
   return name;
 }
+const isReadableStream = x => Boolean(x && x.pipe && x.on && x._readableState);
 
 const munchyHandleStreamError = err => {
   let errMsg = (process.env.NODE_ENV !== "production" && err.stack) || err.message;
@@ -313,7 +379,7 @@ const makeDevBundleBase = devServer => {
   }
 };
 
-module.exports = {
+export {
   resolveChunkSelector,
   loadAssetsFromStats,
   getIconStats,
@@ -333,7 +399,7 @@ module.exports = {
   getOtherStats,
   getOtherAssets,
   getBundleJsNameByQuery,
-  isReadableStream: x => Boolean(x && x.pipe && x.on && x._readableState),
+  isReadableStream,
   munchyHandleStreamError,
   makeDevBundleBase
 };

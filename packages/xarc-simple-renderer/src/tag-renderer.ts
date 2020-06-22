@@ -2,34 +2,34 @@
 
 /* eslint-disable max-params, max-statements, no-constant-condition, no-magic-numbers */
 
-import * as assert from("assert");
-import * as Fs from("fs");
-import loadHandler from("./load-handler");
-import Renderer from("./renderer");
-import { resolvePath } from("./utils");
-import Token from("./token");
-import stringArray from("string-array");
-import _ from("lodash");
-import Path from("path");
+import * as assert from "assert";
+import * as Fs from "fs";
+import loadHandler from "./load-handler";
+import Renderer from "./renderer";
+import { resolvePath } from "./utils";
+import Token from "./token";
+import stringArray from "string-array";
+import _ from "lodash";
+import Path from "path";
 
-const { TEMPLATE_DIR } from("./symbols");
+import { TEMPLATE_DIR } from "./symbols";
 
 const tokenTags = {
   "<!--%{": {
     // for tokens in html
     open: "<!--[ \n]*%{",
-    close: new RegExp("}[ \\n]*-->"),
+    close: new RegExp("}[ \\n]*-->")
   },
   "/*--%{": {
     // for tokens in script and style
     open: "\\/\\*--[ \n]*%{",
-    close: new RegExp("}--\\*/"),
-  },
+    close: new RegExp("}--\\*/")
+  }
 };
 
 const tokenOpenTagRegex = new RegExp(
   Object.keys(tokenTags)
-    .map((x) => `(${tokenTags[x].open})`)
+    .map(x => `(${tokenTags[x].open})`)
     .join("|")
 );
 
@@ -42,15 +42,15 @@ const tokenOpenTagRegex = new RegExp(
 export class TokenRenderer {
   constructor(options) {
     this._options = options;
-    this._tokenHandlers = [].concat(this._options.tokenHandlers).filter((x) => x);
+    this._tokenHandlers = [].concat(this._options.tokenHandlers).filter(x => x);
     this._handlersMap = {};
     // the same context that gets passed to each token handler's setup function
     this._handlerContext = _.merge(
       {
         user: {
           // set routeOptions in user also for consistency
-          routeOptions: options.routeOptions,
-        },
+          routeOptions: options.routeOptions
+        }
       },
       options
     );
@@ -64,7 +64,7 @@ export class TokenRenderer {
       this._renderer = new Renderer({
         insertTokenIds: this._options.insertTokenIds,
         htmlTokens: this._tokens,
-        tokenHandlers: this._tokenHandlers,
+        tokenHandlers: this._tokenHandlers
       });
     }
   }
@@ -78,14 +78,14 @@ export class TokenRenderer {
   }
 
   render(options) {
-      const { context } = options;
+    const { context } = options;
 
-    return Promise.each(this._beforeRenders, (r) => r.beforeRender(context))
+    return Promise.each(this._beforeRenders, r => r.beforeRender(context))
       .then(() => {
         return this._renderer.render(context);
       })
-      .then((result) => {
-        return Promise.each(this._afterRenders, (r) => r.afterRender(context)).then(() => {
+      .then(result => {
+        return Promise.each(this._afterRenders, r => r.afterRender(context)).then(() => {
           context.result = context.isVoidStop ? context.voidResult : result;
 
           return context;
@@ -127,7 +127,7 @@ export class TokenRenderer {
   //   - if {insert} is invalid
   //
   addTokens({ insert = "after", id, index, str, instance = 0, tokens }) {
-    const create = (tk) => {
+    const create = tk => {
       return new Token(
         tk.token,
         -1,
@@ -220,9 +220,9 @@ export class TokenRenderer {
     let match;
 
     if (typeof matcher === "string") {
-      match = (str) => str.indexOf(matcher) >= 0;
+      match = str => str.indexOf(matcher) >= 0;
     } else if (matcher && matcher.constructor.name === "RegExp") {
-      match = (str) => str.match(matcher);
+      match = str => str.match(matcher);
     } else {
       throw new Error("AsyncTemplate.findTokensByStr: matcher must be a string or RegExp");
     }
@@ -253,7 +253,7 @@ export class TokenRenderer {
 
     let pos = 0;
 
-    const parseFail = (msg) => {
+    const parseFail = msg => {
       const lineCount = [].concat(template.substring(0, pos).match(/\n/g)).length + 1;
       const lastNLIx = template.lastIndexOf("\n", pos);
       const lineCol = pos - lastNLIx;
@@ -288,9 +288,9 @@ export class TokenRenderer {
           .substring(0, closeMatch.index)
           .trim()
           .split("\n")
-          .map((x) => x.trim())
+          .map(x => x.trim())
           // remove empty and comment lines that start with "//"
-          .filter((x) => x && !x.startsWith("//"))
+          .filter(x => x && !x.startsWith("//"))
           .join(" ");
 
         const consumedCount = closeMatch.index + closeMatch[0].length;
@@ -374,7 +374,7 @@ export class TokenRenderer {
   }
 
   _applyTokenLoad() {
-    this._tokens.forEach((x) => {
+    this._tokens.forEach(x => {
       if (x.load) {
         x.load(this._options, this);
       }
@@ -382,7 +382,7 @@ export class TokenRenderer {
   }
 
   _initializeTokenHandlers(filenames) {
-    this._tokenHandlers = filenames.map((fname) => {
+    this._tokenHandlers = filenames.map(fname => {
       let handler;
       if (typeof fname === "string") {
         handler = this._loadTokenHandler(fname);
@@ -393,7 +393,7 @@ export class TokenRenderer {
       if (!handler.name) {
         handler = {
           name: fname,
-          tokens: handler,
+          tokens: handler
         };
       }
       assert(handler.tokens, "electrode-react-webapp AsyncTemplate token handler missing tokens");
@@ -405,8 +405,8 @@ export class TokenRenderer {
       return handler;
     });
 
-    this._beforeRenders = this._tokenHandlers.filter((x) => x.beforeRender);
-    this._afterRenders = this._tokenHandlers.filter((x) => x.afterRender);
+    this._beforeRenders = this._tokenHandlers.filter(x => x.beforeRender);
+    this._afterRenders = this._tokenHandlers.filter(x => x.afterRender);
   }
 }
 

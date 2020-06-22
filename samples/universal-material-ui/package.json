@@ -66,5 +66,10 @@
     "electrode-archetype-opt-stylus": "^1.0.2",
     "electrode-archetype-opt-typescript": "^1.0.3"
   },
-  "optionalDependencies": {}
+  "optionalDependencies": {},
+  "fyn": {
+    "dependencies": {
+      "electrode-react-webapp": "../../packages/electrode-react-webapp"
+    }
+  }
 }

@@ -6,7 +6,7 @@ const _ = require("lodash");
 const Path = require("path");
 const assert = require("assert");
 const AsyncTemplate = require("./async-template");
-const { JsxRenderer } = require("./");
+const { JsxRenderer } = require("@xarc/jsx-renderer");
 
 const {
   getOtherStats,

@@ -4,17 +4,19 @@
 
 const assert = require("assert");
 const Fs = require("fs");
-const RenderContext = require("./render-context");
-const loadHandler = require("./load-handler");
+const {
+  RenderContext,
+  loadTokenModuleHandler,
+  TokenModule,
+  TEMPLATE_DIR
+} = require("@xarc/render-context");
 const Renderer = require("./renderer");
 const { resolvePath } = require("./utils");
-const Token = require("./token");
+const Token = TokenModule;
 const stringArray = require("string-array");
 const _ = require("lodash");
 const Path = require("path");
 const Promise = require("bluebird");
-
-const { TEMPLATE_DIR } = require("./symbols");
 
 const tokenTags = {
   "<!--%{": {
@@ -124,7 +126,7 @@ class AsyncTemplate {
   //
   addTokens({ insert = "after", id, index, str, instance = 0, tokens }) {
     const create = tk => {
-      return new Token(
+      return new TokenModule(
         tk.token,
         -1,
         typeof tk.props === "string" ? this._parseTokenProps(tk.props) : tk.props
@@ -365,7 +367,7 @@ class AsyncTemplate {
   }
 
   _loadTokenHandler(path) {
-    const mod = loadHandler(path);
+    const mod = loadTokenModuleHandler(path);
     return mod(this._handlerContext, this);
   }
 

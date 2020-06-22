@@ -1,16 +1,35 @@
 {
-  "name": "@xarc/render-context",
-  "version": "1.0.0",
-  "description": "Context for index.htm generation",
+  "name": "@xarc/webapp",
+  "version": "0.0.1",
+  "description": "xarc module for webapps",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
+    "test": "clap test",
     "prepublishOnly": "clap -n build docs && clap check",
     "docs": "clap xarc/docs"
   },
-  "keywords": [],
-  "author": "Electrode <https://github.com/electrode-io/electrode>",
-  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/electrode-io/electrode.git"
+  },
+  "keywords": [
+    "webapp"
+  ],
+  "dependencies": {
+    "@xarc/jsx-renderer": "file:../xarc-jsx-renderer",
+    "@xarc/module-dev": "^2.1.1",
+    "@xarc/render-context": "file:../xarc-render-context",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.5",
+    "xclap": "^0.2.51"
+  },
+  "author": "Walmart GTP.js",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/electrode-io/electrode/issues"
+  },
+  "homepage": "https://github.com/electrode-io/electrode#readme",
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@types/chai": "^4.2.11",
@@ -20,7 +39,6 @@
     "@types/sinon-chai": "^3.2.4",
     "@typescript-eslint/eslint-plugin": "^2.21.0",
     "@typescript-eslint/parser": "^2.21.0",
-    "@xarc/module-dev": "^2.1.1",
     "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
     "eslint": "^6.8.0",
@@ -32,25 +50,20 @@
     "sinon": "^7.2.6",
     "sinon-chai": "^3.3.0",
     "source-map-support": "^0.5.16",
-    "stream-to-array": "^2.3.0",
     "ts-node": "^8.6.2",
     "typedoc": "^0.17.4",
     "typescript": "^3.8.3"
   },
+  "files": [
+    "dist"
+  ],
   "mocha": {
     "require": [
       "ts-node/register",
       "source-map-support/register",
-      "@xarc/module-dev/config/test/setup.js"
+      "./config/test/setup.js"
     ],
     "recursive": true
-  },
-  "files": [
-    "dist"
-  ],
-  "dependencies": {
-    "require-at": "^1.0.4",
-    "xaa": "^1.5.0"
   },
   "nyc": {
     "extends": [
