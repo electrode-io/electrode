@@ -112,7 +112,8 @@ class Middleware {
     const compiler = webpack(config);
 
     if (options.progress !== false) {
-      compiler.apply(new webpack.ProgressPlugin({ profile: options.progressProfile }));
+      // Ref: https://webpack.js.org/concepts/plugins/#node-api
+      new webpack.ProgressPlugin({ profile: options.progressProfile }).apply(compiler);
     }
 
     const webpackDevOptions = _.merge(

@@ -47,8 +47,8 @@ return {
     "koa-static": "^5.0.0", //<% } if (isPWA) { %>
     "react-notify-toast": "^0.5.0", //<% } %>
     lodash: "^4.17.11",
-    "@loadable/component": "^5.7.0",
-    "@loadable/server": "^5.9.0",
+    "@loadable/component": "^5.12.0",
+    "@loadable/server": "^5.12.0",
     "react-router-config": "^5.1.1",
     "react-router-dom": "^5.1.2",
     milligram: "^1.3.0",
@@ -57,8 +57,8 @@ return {
     //<% } %>
   },
   devDependencies: {
-    "@loadable/babel-plugin": "^5.10.0",
-    "@loadable/webpack-plugin": "^5.7.1",
+    "@loadable/babel-plugin": "^5.12.0",
+    "@loadable/webpack-plugin": "^5.12.0",
     "electrode-archetype-react-app-dev": "7.0.0-beta7.0"
   }, //<% if (isSingleQuote) { %>
   eslintConfig: {
