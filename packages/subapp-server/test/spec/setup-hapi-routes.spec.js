@@ -6,7 +6,8 @@ const Path = require("path");
 const electrodeServer = require("electrode-server");
 const sinon = require("sinon");
 const { ReactWebapp } = require("electrode-react-webapp");
-
+//const ReactWebApp = require("@xarc/webapp");
+// if (typeof describe === "undefined") describe = (str, func) => console.log(str) && func();
 describe("setupSubAppHapiRoutes", () => {
   let server;
   let stubPathResolve;

@@ -27,6 +27,7 @@ export type Element = {
 };
 
 export function createElement(type: any, props: any, ...children: any[]) {
+  console.log("create element ", props);
   children = children.length > 0 ? children : undefined;
 
   if (children) {
@@ -43,11 +44,11 @@ export function createElement(type: any, props: any, ...children: any[]) {
     id: ELEMENT_ID++,
     type,
     children,
-    props,
+    props
   };
 
   const literal = typeof type === "string";
-
+  console.log(type);
   if (literal) {
     element.tag = type.toLowerCase();
   } else if (type.prototype && type.prototype.isComponent) {

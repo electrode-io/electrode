@@ -121,8 +121,7 @@ function setupRouteRender({ subAppsByPath, srcDir, routeOptions }) {
       };
     });
   }
-  console.log(routeOptions);
-  debugger;
+
   // const useStream = routeOptions.useStream !== false;
   const routeHandler = WebApp.makeRouteHandler(routeOptions);
   const v1routehandler = ReactWebapp.makeRouteHandler(routeOptions);
