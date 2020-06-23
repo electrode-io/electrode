@@ -184,6 +184,7 @@ describe("Jsx Renderer", function () {
     renderer.initializeRenderer();
 
     const context = await renderer.render({});
+    console.log(context);
     expect(context.result.message).equal("test async component fail");
   });
 

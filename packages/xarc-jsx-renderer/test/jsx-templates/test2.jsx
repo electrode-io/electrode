@@ -58,7 +58,7 @@ const Template = (
         <link rel="stylesheet" id="bogel-font" href="" />
         <Token _id="META_TAGS" />
         <Token _id="PAGE_TITLE" />
-        <Require _id="subapp-web/lib/init" />
+        {/* <Require _id="subapp-web/lib/init" /> */}
         <Token _id="CRITICAL_CSS" />
         <style>
           <Literal _memoize={false} file={`${__dirname}/style.css`} />

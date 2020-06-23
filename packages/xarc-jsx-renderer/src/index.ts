@@ -9,10 +9,12 @@ import { Token } from "./tags/Token";
 import { IndexPage } from "./tags/IndexPage";
 import { Require } from "./tags/Require";
 import { Literal } from "./tags/Literal";
+import { ReserveSpot } from "./tags/ReserveSpot";
+
 import { JsxRenderer } from "./JsxRenderer";
 
 /** @ignore */
-export { Component, Token, IndexPage, Require, Literal, JsxRenderer };
+export { Component, ReserveSpot, Token, IndexPage, Require, Literal, JsxRenderer };
 
 let ELEMENT_ID = 0;
 
@@ -26,8 +28,8 @@ export type Element = {
   memoize?: any;
 };
 
+/* eslint-disable max-statements */
 export function createElement(type: any, props: any, ...children: any[]) {
-  console.log("create element ", props);
   children = children.length > 0 ? children : undefined;
 
   if (children) {
@@ -48,10 +50,9 @@ export function createElement(type: any, props: any, ...children: any[]) {
   };
 
   const literal = typeof type === "string";
-  console.log(type);
   if (literal) {
     element.tag = type.toLowerCase();
-  } else if (type.prototype && type.prototype.isComponent) {
+  } else if (type && type.prototype && type.prototype.isComponent) {
     element.Construct = type;
   }
 
