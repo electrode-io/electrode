@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "lib": ["es2018"],
+    "module": "CommonJS",
+    "allowJs": true,
+    "esModuleInterop": false,
+    "target": "ES2018",
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "declaration": true,
+    "types": ["node", "mocha", "chai"],
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "alwaysStrict": true,
+    "strictFunctionTypes": true,
+    "jsx": "react"
+  },
+  "include": [
+    "src",
+    "../xarc-render-context/src/symbols.ts",
+    "../xarc-render-context/src/TokenModule.ts",
+    "../xarc-render-context/src/load-handler.ts"
+  ]
+}
