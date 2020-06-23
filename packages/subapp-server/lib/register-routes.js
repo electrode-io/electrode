@@ -5,7 +5,7 @@
 const assert = require("assert");
 const _ = require("lodash");
 const HttpStatus = require("./http-status");
-const { ReactWebapp } = require("electrode-react-webapp");
+const { ReactWebapp } = require("@xarc/webapp");
 const { errorResponse, resolveChunkSelector, updateFullTemplate } = require("./utils");
 const HttpStatusCodes = require("http-status-codes");
 

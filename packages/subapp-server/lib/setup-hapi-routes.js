@@ -15,7 +15,7 @@ const Boom = require("@hapi/boom");
 const HttpStatus = require("./http-status");
 const readFile = util.promisify(Fs.readFile);
 const xaa = require("xaa");
-const { ReactWebapp } = require("electrode-react-webapp");
+const { ReactWebapp } = require("@xarc/webapp");
 const subAppUtil = require("subapp-util");
 const registerRoutes = require("./register-routes");
 
