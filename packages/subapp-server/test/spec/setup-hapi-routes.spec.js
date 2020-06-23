@@ -5,7 +5,7 @@ const { setupSubAppHapiRoutes } = require("../../lib/setup-hapi-routes");
 const Path = require("path");
 const electrodeServer = require("electrode-server");
 const sinon = require("sinon");
-const { ReactWebapp } = require("electrode-react-webapp");
+const { ReactWebapp } = require("@xarc/webapp");
 
 describe("setupSubAppHapiRoutes", () => {
   let server;
