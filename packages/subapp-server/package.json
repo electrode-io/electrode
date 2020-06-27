@@ -28,8 +28,8 @@
   ],
   "dependencies": {
     "@hapi/boom": "^7.4.1",
-    "@xarc/webapp": "file:../xarc-webapp",
-    "@xarc/jsx-renderer": "file:../xarc-jsx-renderer",
+    "@xarc/webapp": "../../packages/xarc-webapp",
+    "@xarc/jsx-renderer": "../../packages/xarc-jsx-renderer",
     "filter-scan-dir": "^1.0.9",
     "http-status-codes": "^1.3.0",
     "optional-require": "^1.0.0",
