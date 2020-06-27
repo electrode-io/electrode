@@ -15,18 +15,18 @@ Install these CLI tools globally: [xclap-cli] and [fyn]
 ```bash
 $ npm install -g xclap-cli fyn
 $ fyn -V
-0.1.76
+0.2.41
 ```
 
-> Make sure `fyn`'s version is at least `0.1.76`
+> Make sure `fyn`'s version is at least `0.2.41`
 
 Fork and clone the repo at <https://github.com/electrode-io/electrode.git> and bootstrap all the packages.
 
 ```bash
 $ git clone https://github.com/<your-github-id>/electrode.git
 $ cd electrode
-$ npm install
-$ npm run bootstrap
+$ fyn # install node_modules
+$ fun bootstrap # run npm script bootstrap
 ```
 
 ### Quick Test
@@ -38,26 +38,25 @@ Because many of our modules depend on each other, to make local development easi
 Now you can go to the `samples` folder and try the `universal-react-node` sample app, develop and test your changes over there.
 
 ```bash
-$ cd samples/react-vendor-dll
+$ cd samples/poc-subapp
 $ fyn
-$ cd ../universal-react-node
-$ fyn
-$ clap dev
+$ fun dev
 ```
 
 After running above, you should see a similar text as `Hapi.js server running at http://localhost:3000` in command line.
 
 And when you open the browser at `http://localhost:3000`, you should see a large Electrode icon with a few demonstration components.
 
-#### Test with generator
+#### Test with `@xarc/create-app`
 
-You can quickly use the generator to create an app in `tmp/hapi-app` for testing.
+You can quickly use the `xarc-create-app` package to create an app for testing.
 
 ```bash
-$ clap gen-hapi-app
-$ cd tmp/hapi-app
+$ clap packages/xarc-create-app
+$ node src test-app
+$ cd test-app
 $ fyn
-$ clap dev
+$ fun dev
 ```
 
 This sample app is using [fyn] to directly linked to the modules under the `packages` directory. Changes made there will be reflected in the app immediately. This is the typical testing and developing flow we use.
