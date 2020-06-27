@@ -1,6 +1,6 @@
 {
-  "name": "xarc-webapp",
-  "version": "1.0.1",
+  "name": "@xarc/webapp",
+  "version": "0.0.1",
   "description": "",
   "main": "dist/index.js",
   "directories": {
