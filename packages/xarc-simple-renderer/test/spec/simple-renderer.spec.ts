@@ -7,7 +7,6 @@ import {
 } from "@xarc/render-context";
 import { expect } from "chai";
 import { SimpleRenderer } from "../../src/simple-renderer";
-// const { SimpleRenderer } = require("../../src/simple-renderer");
 import * as Path from "path";
 import * as Fs from "fs";
 import * as _ from "lodash";
@@ -17,8 +16,7 @@ describe("simple renderer", function () {
   it("requires htmlFile in the constructor", function () {
     const renderer = new SimpleRenderer({
       htmlFile: "./test/data/template1.html",
-      tokenHandlers: "./test/fixtures/token-handler",
-      routeOptions: {}
+      tokenHandlers: "./test/fixtures/token-handler"
     });
     renderer.initializeRenderer(true);
 
@@ -26,16 +24,150 @@ describe("simple renderer", function () {
     expect(renderer._tokens[1].id).to.equal("ssr-content");
     expect(renderer._tokens[2].isModule).to.be.false;
   });
+  it("it locates tokens", function () {
+    const renderer = new SimpleRenderer({
+      htmlFile: "./test/data/template2.html",
+      tokenHandlers: "./test/fixtures/token-handler"
+    });
+    renderer.initializeRenderer(true);
+
+    expect(renderer._tokens[0].str).to.equal("<html>\n\n<head>");
+    expect(renderer._tokens[1].id).to.equal("ssr-content");
+    expect(renderer._tokens[2].isModule).to.be.false;
+  });
+});
+
+describe("_findTokenIndex", function () {
+  it("should validate and return index", () => {
+    const htmlFile = Path.join(__dirname, "../data/template2.html");
+    const simpleRenderer = new SimpleRenderer({
+      htmlFile,
+      tokenHandlers: "./test/fixtures/token-handler"
+    });
+
+    expect(simpleRenderer._findTokenIndex(null, null, 0)).to.equal(0);
+    expect(simpleRenderer._findTokenIndex(null, null, 1)).to.equal(1);
+    expect(simpleRenderer._findTokenIndex(null, null, 2)).to.equal(2);
+    expect(simpleRenderer._findTokenIndex(null, null, 3)).to.equal(3);
+  });
+
+  it("should find token by id and return its index", () => {
+    const htmlFile = Path.join(__dirname, "../data/template2.html");
+    const simpleRenderer = new SimpleRenderer({
+      htmlFile,
+      tokenHandlers: "./test/fixtures/token-handler"
+    });
+
+    expect(simpleRenderer._findTokenIndex("webapp-body-bundles")).to.equal(3);
+  });
+
+  it("should return false if token by id is not found", () => {
+    const htmlFile = Path.join(__dirname, "../data/template2.html");
+    const simpleRenderer = new SimpleRenderer({
+      htmlFile,
+      tokenHandlers: "./test/fixtures/token-handler"
+    });
+
+    expect(simpleRenderer._findTokenIndex("foo-bar")).to.equal(false);
+  });
+
+  it("should find token by str and return its index", () => {
+    const htmlFile = Path.join(__dirname, "../data/template2.html");
+    const simpleRenderer = new SimpleRenderer({
+      htmlFile,
+      tokenHandlers: "./test/fixtures/token-handler"
+    });
+
+    expect(simpleRenderer._findTokenIndex(null, `console.log("test")`)).to.equal(5);
+  });
+
+  it("should return false if token by str is not found", () => {
+    const htmlFile = Path.join(__dirname, "../data/template2.html");
+    const simpleRenderer = new SimpleRenderer({
+      htmlFile,
+      tokenHandlers: "./test/fixtures/token-handler"
+    });
+
+    expect(simpleRenderer._findTokenIndex(null, `foo-bar-test-blah-blah`)).to.equal(false);
+    expect(simpleRenderer._findTokenIndex(null, /foo-bar-test-blah-blah/)).to.equal(false);
+  });
+
+  it("should throw if id, str, and index are invalid", () => {
+    const htmlFile = Path.join(__dirname, "../data/template2.html");
+    const simpleRenderer = new SimpleRenderer({
+      htmlFile,
+      tokenHandlers: "./test/fixtures/token-handler"
+    });
+
+    expect(() => simpleRenderer._findTokenIndex()).to.throw(`invalid id, str, and index`);
+  });
+
+  it("should throw if index is out of range", () => {
+    const htmlFile = Path.join(__dirname, "../data/template2.html");
+    const simpleRenderer = new SimpleRenderer({
+      htmlFile,
+      tokenHandlers: "./test/fixtures/token-handler"
+    });
+
+    expect(() => simpleRenderer._findTokenIndex(null, null, -1)).to.throw(
+      `index -1 is out of range`
+    );
+    expect(() =>
+      simpleRenderer._findTokenIndex(null, null, simpleRenderer.tokens.length + 100)
+    ).to.throw(` is out of range`);
+  });
+});
+
+describe("findTokenByStr", function () {
+  it("should find tokens by str and return result", () => {
+    const htmlFile = Path.join(__dirname, "../data/template2.html");
+    const simpleRenderer = new SimpleRenderer({
+      htmlFile,
+      tokenHandlers: "./test/fixtures/token-handler"
+    });
+
+    const x = simpleRenderer.findTokensByStr(`html`, simpleRenderer.tokens.length);
+    expect(x.length).to.equal(2);
+    const x2 = simpleRenderer.findTokensByStr(/html/, 1);
+    expect(x2.length).to.equal(1);
+    const x3 = simpleRenderer.findTokensByStr(/html/, 0);
+    expect(x3.length).to.equal(0);
+  });
+
+  it("should return false if token by str is not found", () => {
+    const htmlFile = Path.join(__dirname, "../data/template2.html");
+    const simpleRenderer = new SimpleRenderer({
+      htmlFile,
+      tokenHandlers: "./test/fixtures/token-handler"
+    });
+
+    expect(simpleRenderer.findTokensByStr(`foo-bar-test-blah-blah`)).to.deep.equal([]);
+    expect(simpleRenderer.findTokensByStr(/foo-bar-test-blah-blah/, null)).to.deep.equal([]);
+  });
+
+  it("should throw if matcher is invalid", () => {
+    const htmlFile = Path.join(__dirname, "../data/template2.html");
+    const simpleRenderer = new SimpleRenderer({
+      htmlFile,
+      tokenHandlers: "./test/fixtures/token-handler"
+    });
+
+    expect(() => simpleRenderer.findTokensByStr(null)).to.throw(
+      "matcher must be a string or RegExp"
+    );
+  });
+});
+describe("intialzieRenderer: ", function () {
   it("should parse template multi line tokens with props", () => {
     const htmlFile = Path.join(__dirname, "../data/template3.html");
     const silentIntercept = true;
     const intercept = xstdout.intercept(silentIntercept);
 
-    const asyncTemplate = new SimpleRenderer({
+    const simpleRenderer = new SimpleRenderer({
       htmlFile,
       tokenHandlers: "./test/fixtures/token-handler"
     });
-    asyncTemplate.initializeRenderer();
+    simpleRenderer.initializeRenderer();
     intercept.restore();
 
     const expected = [
@@ -153,9 +285,9 @@ describe("simple renderer", function () {
         wantsNext: false
       }
     ];
-    expect(typeof _.last(asyncTemplate.tokens).custom.process).to.equal("function");
-    delete _.last(asyncTemplate.tokens).custom.process;
-    expect(asyncTemplate.tokens).to.deep.equal(expected);
+    expect(typeof _.last(simpleRenderer.tokens).custom.process).to.equal("function");
+    delete _.last(simpleRenderer.tokens).custom.process;
+    expect(simpleRenderer.tokens).to.deep.equal(expected);
   });
 
   it("should throw for token with invalid props", () => {
@@ -170,4 +302,45 @@ describe("simple renderer", function () {
       `at line 9 col 3 - 'prefetch-bundles bad-prop' has malformed prop: name must be name=Val;`
     );
   });
+  it("should throw for token empty body", () => {
+    const htmlFile = Path.join(__dirname, "../data/template7.html");
+    expect(
+      () =>
+        new SimpleRenderer({
+          htmlFile,
+          tokenHandlers: "./test/fixtures/token-handler"
+        })
+    ).to.throw(`at line 3 col 5 - empty token body`);
+  });
+  it("should throw for token empty body", () => {
+    const htmlFile = Path.join(__dirname, "../data/template7.html");
+    expect(
+      () =>
+        new SimpleRenderer({
+          htmlFile,
+          tokenHandlers: "./test/fixtures/token-handler"
+        })
+    ).to.throw(`at line 3 col 5 - empty token body`);
+  });
+
+  it("should throw for token missing close tag", () => {
+    const htmlFile = Path.join(__dirname, "../data/template8.html");
+    expect(
+      () =>
+        new SimpleRenderer({
+          htmlFile,
+          tokenHandlers: "./test/fixtures/token-handler"
+        })
+    ).to.throw(`at line 3 col 5 - Can't find token close tag for '<!--\\n      %{'`);
+  });
+});
+
+describe("before-renderer", function () {
+  const htmlFile = Path.join(__dirname, "../data/template2.html");
+  const renderer = new SimpleRenderer({
+    htmlFile,
+    tokenHandlers: "./test/fixtures/non-render-error"
+  });
+  renderer.initializeRenderer();
+  // expect(() => renderer.render({})).to.throw("error from test/fixtures/non-render-error");
 });

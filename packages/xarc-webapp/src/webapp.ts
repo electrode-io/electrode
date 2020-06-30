@@ -51,6 +51,7 @@ function initializeTemplate(
   }
 
   if (!templateFile) {
+    debugger;
     asyncTemplate = new SimpleRenderer({
       htmlFile,
       tokenHandlers: finalTokenHandlers.filter(x => x),
@@ -102,6 +103,7 @@ function makeRouteHandler(routeOptions) {
 
   return options => {
     if (routeOptions.selectTemplate) {
+      debugger;
       const selection = routeOptions.selectTemplate(options.request, routeOptions);
 
       if (selection && selection.then) {

@@ -15,6 +15,7 @@ import * as _ from "lodash";
 import * as Path from "path";
 import * as Promise from "bluebird";
 import { RenderProcessor } from "./render-processor";
+import { makeDefer, each } from "xaa";
 
 const tokenTags = {
   "<!--%{": {
@@ -91,23 +92,29 @@ export class SimpleRenderer {
     return this._handlersMap;
   }
 
-  render(options) {
-    const { context } = options;
-
-    return Promise.each(this._beforeRenders, r => r.beforeRender(context))
-      .then(() => {
-        return this._renderer.render(context);
-      })
-      .then(result => {
-        return Promise.each(this._afterRenders, r => r.afterRender(context)).then(() => {
-          context.result = context.isVoidStop ? context.voidResult : result;
-
-          return context;
-        });
-      });
+  async render(options) {
+    const defer = makeDefer();
+    const context = new RenderContext(options, this);
+    try {
+      await each(this._beforeRenders, (r: any) => r.beforeRender(context));
+      await defer.promise;
+      const result = this._renderer.render(context);
+      await each(this._afterRenders, (r: any) => r.afterRender(context));
+      context.result = context.isVoidStop ? context.voidResult : result;
+      return context;
+    } catch (err) {
+      context.result = err;
+      return context;
+    }
   }
 
-  _findTokenIndex(id, str, index, instance = 0, msg = "AsyncTemplate._findTokenIndex") {
+  _findTokenIndex(
+    id = "",
+    str: string | RegExp = "",
+    index = 0,
+    instance = 0,
+    msg = "AsyncTemplate._findTokenIndex"
+  ) {
     let found;
 
     if (id) {
