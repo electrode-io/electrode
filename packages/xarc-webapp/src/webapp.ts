@@ -103,7 +103,6 @@ function makeRouteHandler(routeOptions) {
 
   return options => {
     if (routeOptions.selectTemplate) {
-      debugger;
       const selection = routeOptions.selectTemplate(options.request, routeOptions);
 
       if (selection && selection.then) {
@@ -300,10 +299,4 @@ const getContentResolver = (registerOptions, pathData, path) => {
     return resolved.content;
   };
 };
-export const Webapp = {
-  setupOptions,
-  setupPathOptions,
-  makeRouteHandler,
-  resolveContent,
-  getContentResolver
-};
+export { setupOptions, setupPathOptions, makeRouteHandler, resolveContent, getContentResolver };

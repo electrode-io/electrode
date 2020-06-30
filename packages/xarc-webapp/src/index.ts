@@ -1,1 +1,1 @@
-export { Webapp } from "./webapp";
+export * from "./webapp";
