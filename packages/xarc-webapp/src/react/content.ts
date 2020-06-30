@@ -1,13 +1,13 @@
-"use strict";
-
-const Fs = require("fs");
-const Path = require("path");
-const HttpStatusCodes = require("http-status-codes");
-
-const Promise = require("bluebird");
+import * as Fs from "fs";
+import * as Path from "path";
 
 const HTTP_ERROR_500 = 500;
-
+const HTTP_OK = 200;
+/**
+ * @param renderSs
+ * @param options
+ * @param context
+ */
 function getContent(renderSs, options, context) {
   let userContent = options.content;
 
@@ -36,9 +36,13 @@ function getContent(renderSs, options, context) {
   return Promise.resolve(userContent);
 }
 
+/**
+ * @param result
+ * @param context
+ */
 function transformOutput(result, context) {
   const content = context.user.content;
-  if (content && content.status !== HttpStatusCodes.OK) {
+  if (content && content.status !== HTTP_OK) {
     return {
       verbatim: content.verbatim,
       status: content.status,
@@ -67,13 +71,13 @@ const loadElectrodeDllAssets = routeOptions => {
     const file = Path.resolve(
       routeOptions.electrodeDllAssetsPath || `dist/electrode-dll-assets${tag}.json`
     );
-    return JSON.parse(Fs.readFileSync(file));
+    return JSON.parse(Fs.readFileSync(file).toString());
   } catch (err) {
     return {};
   }
 };
 
-const makeElectrodeDllScripts = (dllAssets, nonce) => {
+const makeElectrodeDllScripts = (dllAssets, nonce = "") => {
   const scripts = [];
   for (const modName in dllAssets) {
     const cdnMapping = dllAssets[modName].cdnMapping;
@@ -84,8 +88,7 @@ const makeElectrodeDllScripts = (dllAssets, nonce) => {
 
   return htmlifyScripts([scripts], nonce);
 };
-
-module.exports = {
+export {
   getContent,
   transformOutput,
   htmlifyScripts,
