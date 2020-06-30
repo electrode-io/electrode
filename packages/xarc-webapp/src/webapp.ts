@@ -298,4 +298,10 @@ const getContentResolver = (registerOptions, pathData, path) => {
     return resolved.content;
   };
 };
-export { setupOptions, setupPathOptions, makeRouteHandler, resolveContent, getContentResolver };
+export const Webapp = {
+  setupOptions,
+  setupPathOptions,
+  makeRouteHandler,
+  resolveContent,
+  getContentResolver
+};

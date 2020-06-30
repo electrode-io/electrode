@@ -5,8 +5,7 @@ const { setupSubAppHapiRoutes } = require("../../lib/setup-hapi-routes");
 const Path = require("path");
 const electrodeServer = require("electrode-server");
 const sinon = require("sinon");
-const { ReactWebapp } = require("@xarc/webapp");
-
+const Webapp = require("@xarc/webapp");
 describe("setupSubAppHapiRoutes", () => {
   let server;
   let stubPathResolve;
@@ -113,7 +112,7 @@ describe("setupSubAppHapiRoutes", () => {
 
   it("should let the server redirect if status code = 301", async () => {
     stubPathResolve = getStubResolve1();
-    stubRouteHandler = sinon.stub(ReactWebapp, "makeRouteHandler").callsFake(() => async () => {
+    stubRouteHandler = sinon.stub(Webapp, "makeRouteHandler").callsFake(() => async () => {
       return {
         result: {
           status: 301,
@@ -133,7 +132,7 @@ describe("setupSubAppHapiRoutes", () => {
 
   it("should let the server reply html if status code = 404", async () => {
     stubPathResolve = getStubResolve1();
-    stubRouteHandler = sinon.stub(ReactWebapp, "makeRouteHandler").callsFake(() => async () => {
+    stubRouteHandler = sinon.stub(Webapp, "makeRouteHandler").callsFake(() => async () => {
       return {
         result: {
           status: 404,
@@ -154,7 +153,7 @@ describe("setupSubAppHapiRoutes", () => {
 
   it("should let the server reply data object if status code = 404 and no html set", async () => {
     stubPathResolve = getStubResolve1();
-    stubRouteHandler = sinon.stub(ReactWebapp, "makeRouteHandler").callsFake(() => async () => {
+    stubRouteHandler = sinon.stub(Webapp, "makeRouteHandler").callsFake(() => async () => {
       return {
         result: {
           status: 404,
@@ -174,7 +173,7 @@ describe("setupSubAppHapiRoutes", () => {
 
   it("should let the server reply html if status code = 200", async () => {
     stubPathResolve = getStubResolve1();
-    stubRouteHandler = sinon.stub(ReactWebapp, "makeRouteHandler").callsFake(() => async () => {
+    stubRouteHandler = sinon.stub(Webapp, "makeRouteHandler").callsFake(() => async () => {
       return {
         result: {
           status: 200,
@@ -195,7 +194,7 @@ describe("setupSubAppHapiRoutes", () => {
 
   it("should let the server reply data object if status code = 200 and no html set", async () => {
     stubPathResolve = getStubResolve1();
-    stubRouteHandler = sinon.stub(ReactWebapp, "makeRouteHandler").callsFake(() => async () => {
+    stubRouteHandler = sinon.stub(Webapp, "makeRouteHandler").callsFake(() => async () => {
       return {
         result: {
           status: 200,
@@ -215,7 +214,7 @@ describe("setupSubAppHapiRoutes", () => {
 
   it("should let the server reply data object if status code is 505", async () => {
     stubPathResolve = getStubResolve1();
-    stubRouteHandler = sinon.stub(ReactWebapp, "makeRouteHandler").callsFake(() => async () => {
+    stubRouteHandler = sinon.stub(Webapp, "makeRouteHandler").callsFake(() => async () => {
       return {
         result: {
           status: 505,
@@ -236,7 +235,7 @@ describe("setupSubAppHapiRoutes", () => {
 
   it("should let the server reply error stack if routeHandler throw an error", async () => {
     stubPathResolve = getStubResolve1();
-    stubRouteHandler = sinon.stub(ReactWebapp, "makeRouteHandler").callsFake(() => async () => {
+    stubRouteHandler = sinon.stub(Webapp, "makeRouteHandler").callsFake(() => async () => {
       throw new Error();
     });
     const logs = [];
@@ -260,7 +259,7 @@ describe("setupSubAppHapiRoutes", () => {
 
   it("should let the server reply error stack if routeHandler returns an error as a result", async () => {
     stubPathResolve = getStubResolve1();
-    stubRouteHandler = sinon.stub(ReactWebapp, "makeRouteHandler").callsFake(() => async () => ({
+    stubRouteHandler = sinon.stub(Webapp, "makeRouteHandler").callsFake(() => async () => ({
       result: new Error("Dev error here")
     }));
     const logs = [];

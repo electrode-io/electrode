@@ -5,7 +5,7 @@
 const assert = require("assert");
 const _ = require("lodash");
 const HttpStatus = require("./http-status");
-const { ReactWebapp } = require("@xarc/webapp");
+const Webapp = require("@xarc/webapp");
 const { errorResponse, resolveChunkSelector, updateFullTemplate } = require("./utils");
 const HttpStatusCodes = require("http-status-codes");
 
@@ -30,7 +30,7 @@ module.exports = function registerRoutes({ routes, topOpts, server }) {
 
     routeOptions.__internals = { chunkSelector };
 
-    const routeHandler = ReactWebapp.makeRouteHandler(routeOptions);
+    const routeHandler = Webapp.makeRouteHandler(routeOptions);
 
     const useStream = routeOptions.useStream !== false;
 

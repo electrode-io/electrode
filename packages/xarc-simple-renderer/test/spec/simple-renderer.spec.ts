@@ -10,13 +10,10 @@ import { SimpleRenderer } from "../../src/simple-renderer";
 // const { SimpleRenderer } = require("../../src/simple-renderer");
 import * as Path from "path";
 import * as Fs from "fs";
+import * as _ from "lodash";
+import * as xstdout from "xstdout";
+
 describe("simple renderer", function () {
-  let output = "";
-
-  afterEach(function () {
-    output = "";
-  });
-
   it("requires htmlFile in the constructor", function () {
     const renderer = new SimpleRenderer({
       htmlFile: "./test/data/template1.html",
@@ -31,10 +28,10 @@ describe("simple renderer", function () {
   });
   it("should parse template multi line tokens with props", () => {
     const htmlFile = Path.join(__dirname, "../data/template3.html");
+    const silentIntercept = true;
+    const intercept = xstdout.intercept(silentIntercept);
 
-    intercept = xstdout.intercept(silentIntercept);
-
-    const asyncTemplate = new AsyncTemplate({
+    const asyncTemplate = new SimpleRenderer({
       htmlFile,
       tokenHandlers: "./test/fixtures/token-handler"
     });
