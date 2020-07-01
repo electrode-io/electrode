@@ -24,8 +24,8 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">= 8",
-    "npm": ">= 5"
+    "node": ">= 10",
+    "npm": ">= 6"
   },
   "scripts": {
     "dev": "clap dev",
@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@hapi/inert": "^5.2.2",
-    "electrode-archetype-react-app": "^6.3.0",
+    "@xarc/app": "^6.3.0",
     "electrode-confippet": "^1.5.0",
     "electrode-server": "^3.0.0",
     "electrode-static-paths": "^3.0.0",
@@ -47,16 +47,22 @@
     "subapp-server": "../../packages/subapp-server"
   },
   "devDependencies": {
-    "electrode-archetype-react-app-dev": "^6.3.0",
+    "@xarc/app-dev": "^6.3.0",
+    "electrode-archetype-opt-less": "../../packages/electrode-archetype-opt-less",
+    "electrode-archetype-opt-sass": "../../packages/electrode-archetype-opt-sass",
+    "electrode-archetype-opt-stylus": "../../packages/electrode-archetype-opt-stylus",
     "tachyons-sass": "^4.9.5"
   },
   "fyn": {
     "dependencies": {
-      "electrode-archetype-react-app": "../../packages/electrode-archetype-react-app",
+      "@xarc/app": "../../packages/xarc-app",
       "electrode-archetype-opt-preact": "../../packages/electrode-archetype-opt-preact"
     },
     "devDependencies": {
-      "electrode-archetype-react-app-dev": "../../packages/electrode-archetype-react-app-dev"
+      "@xarc/app-dev": "../../packages/xarc-app-dev",
+      "electrode-archetype-opt-less": "../../packages/electrode-archetype-opt-less",
+      "electrode-archetype-opt-sass": "../../packages/electrode-archetype-opt-sass",
+      "electrode-archetype-opt-stylus": "../../packages/electrode-archetype-opt-stylus"
     }
   },
   "optionalDependencies": {}

@@ -1,6 +1,6 @@
 {
   "name": "@xarc/create-app",
-  "version": "3.0.6",
+  "version": "3.0.7",
   "description": "Create react.js/node.js webapp using the Electrode Platform",
   "main": "dist/index.js",
   "scripts": {
@@ -34,6 +34,7 @@
     "@babel/core": "^7.6.2",
     "@babel/preset-env": "^7.6.2",
     "babel-loader": "^8.0.6",
+    "chalker": "^1.2.0",
     "lodash": "^4.17.15",
     "opfs": "^1.1.1",
     "prompts": "^2.3.2",

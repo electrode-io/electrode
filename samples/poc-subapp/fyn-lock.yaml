@@ -2088,10 +2088,10 @@
    '@webassemblyjs/wast-parser': 1.8.5
    '@xtuc/long': 4.2.2
 '@xarc/app':
- _latest: 8.0.16-fynlocal_h
+ _latest: 8.1.6-fynlocal_h
  _:
-  ../../packages/xarc-app: 8.0.16-fynlocal_h
- 8.0.16-fynlocal_h:
+  ../../packages/xarc-app: 8.1.6-fynlocal_h
+ 8.1.6-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/xarc-app
@@ -2099,14 +2099,14 @@
    '@babel/runtime': ^7.8.3
    css-modules-require-hook: ^4.0.2
    ignore-styles: ^5.0.1
-   isomorphic-loader: ^3.0.0
+   isomorphic-loader: ^3.1.0
    optional-require: ^1.0.0
    subapp-util: ^1.0.5
 '@xarc/app-dev':
- _latest: 8.0.16-fynlocal_h
+ _latest: 8.1.6-fynlocal_h
  _:
-  ../../packages/xarc-app-dev: 8.0.16-fynlocal_h
- 8.0.16-fynlocal_h:
+  ../../packages/xarc-app-dev: 8.1.6-fynlocal_h
+ 8.1.6-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/xarc-app-dev
@@ -2125,7 +2125,7 @@
    '@babel/register': ^7.0.0
    '@jchip/redbird': ^1.1.0
    '@loadable/babel-plugin': ^5.10.0
-   '@xarc/webpack': 8.0.2
+   '@xarc/webpack': 8.0.7
    ansi-to-html: ^0.6.8
    babel-plugin-dynamic-import-node: ^2.2.0
    babel-plugin-lodash: ^3.3.4
@@ -2134,46 +2134,48 @@
    babel-plugin-transform-react-remove-prop-types: ^0.4.20
    boxen: ^4.2.0
    chalker: ^1.2.0
-   chokidar: ^2.0.4
+   chokidar: ^3.3.1
    core-js: ^3
    electrode-hapi-compat: ^1.2.0
    electrode-node-resolver: ^2.0.0
-   fastify-plugin: ^1.6.0
    filter-scan-dir: ^1.0.9
-   fs-extra: ^0.26.5
+   fs-extra: ^0.30.0
    identity-obj-proxy: ^3.0.0
-   isomorphic-loader: ^3.0.0
+   is-ci: ^2.0.0
+   isomorphic-loader: ^3.1.0
    lodash: ^4.13.1
    log-update: ^4.0.0
-   mime: ^1.0.0
+   mime: ^2.4.5
    mkdirp: ^0.5.1
    nix-clap: ^1.3.7
    nyc: ^14.1.1
    optional-require: ^1.0.0
    prompts: ^2.2.1
+   ps-get: ^1.1.0
    regenerator-runtime: ^0.13.2
    request: ^2.88.0
    require-at: ^1.0.2
+   semver: ^7.3.2
    serve-index-fs: ^1.10.1
    style-loader: ^0.20.1
    subapp-util: ^1.0.5
    sudo-prompt: ^8.2.5
-   visual-logger: ^1.1.0
+   visual-logger: ^1.1.3
    webpack-cli: ^3.3.9
    webpack-dev-middleware: ^3.4.0
    webpack-hot-middleware: ^2.22.2
    winston: ^2.3.1
-   xaa: ^1.4.0
-   xclap: ^0.2.48
+   xaa: ^1.5.0
+   xclap: ^0.2.50
    xenv-config: ^1.3.1
    xsh: ^0.4.4
   peerDependencies:
-   '@xarc/app': ^8.0.3
+   '@xarc/app': ^8.0.21
 '@xarc/webpack':
- _latest: 8.0.2-fynlocal_h
+ _latest: 8.0.7-fynlocal_h
  _:
-  ../xarc-webpack: 8.0.2-fynlocal_h
- 8.0.2-fynlocal_h:
+  ../xarc-webpack: 8.0.7-fynlocal_h
+ 8.0.7-fynlocal_h:
   $: local
   _: ../../packages/xarc-webpack
   dependencies:
@@ -2187,7 +2189,7 @@
    electrode-node-resolver: ^2.0.0
    file-loader: ^2.0.0
    filter-scan-dir: ^1.0.9
-   isomorphic-loader: ^3.0.0
+   isomorphic-loader: ^3.1.0
    lodash: ^4.13.1
    mini-css-extract-plugin: ^0.7.0
    mkdirp: ^1.0.3
@@ -2414,6 +2416,13 @@ anymatch:
  _latest: 3.1.1
  _:
   ^2.0.0: 2.0.0
+  ~3.1.1: 3.1.1
+ 3.1.1:
+  $: sha512-mM8522psRCqzV+6LhomX5wgp25YVibjh8Wj23I5RPkPppSVSjyKD2A2mBJmWGa+KN7f2D6LNh9jkBCeyLktzjg==
+  _: 'https://registry.npmjs.org/anymatch/-/anymatch-3.1.1.tgz'
+  dependencies:
+   normalize-path: ^3.0.0
+   picomatch: ^2.0.4
  2.0.0:
   $: sha512-5teOsQWABXHHBFP9y3skS5P3d/WfWXpv3FUpy+LorMrNYaT9pI4oLMQX7jzQ2KklNpGpWHzdCXTDT2Y3XGlZBw==
   _: 'https://registry.npmjs.org/anymatch/-/anymatch-2.0.0.tgz'
@@ -2860,6 +2869,10 @@ binary-extensions:
  _latest: 2.0.0
  _:
   ^1.0.0: 1.13.1
+  ^2.0.0: 2.0.0
+ 2.0.0:
+  $: sha512-Phlt0plgpIIBOGTT/ehfFnbNlfsDEiqmzE2KRXoX1bLIlir4X/MR+zSyBEkL05ffWgnRSf/DXv+WrUAVr93/ow==
+  _: 'https://registry.npmjs.org/binary-extensions/-/binary-extensions-2.0.0.tgz'
  1.13.1:
   $: sha512-Un7MIEDdUC5gNpcGDV97op1Ywk748MpHcFTHoYs6qnj1Z3j7I53VG3nwZhKzoBZmbdRNnb6WRdFlwl7tSDuZGw==
   _: 'https://registry.npmjs.org/binary-extensions/-/binary-extensions-1.13.1.tgz'
@@ -2927,6 +2940,12 @@ braces:
  _latest: 3.0.2
  _:
   '^2.3.1,^2.3.2': 2.3.2
+  ~3.0.2: 3.0.2
+ 3.0.2:
+  $: sha512-b8um+L1RzM3WDSzvhm6gIz1yfTbBt6YTlcEKAvsmqCZZFw46z626lVj9j1yEPW33H5H+lBQpZMP1k8l+78Ha0A==
+  _: 'https://registry.npmjs.org/braces/-/braces-3.0.2.tgz'
+  dependencies:
+   fill-range: ^7.0.1
  2.3.2:
   $: sha512-aNdbnj9P8PjdXU4ybaWLK2IF3jc/EoDYbC7AazW6to3TRsfXxscC9UXOB5iDiEQrkyIbWp2SLQda4+QAa7nc3w==
   _: 'https://registry.npmjs.org/braces/-/braces-2.3.2.tgz'
@@ -3282,9 +3301,23 @@ chardet:
   $: sha1-tUc7M9yXxCTl2Y3IfVXU2KKci/I=
   _: 'https://registry.npmjs.org/chardet/-/chardet-0.4.2.tgz'
 chokidar:
- _latest: 3.3.1
+ _latest: 3.4.0
  _:
-  '^2.0.2,^2.0.4,^2.1.8': 2.1.8
+  '^2.0.2,^2.1.8': 2.1.8
+  ^3.3.1: 3.4.0
+ 3.4.0:
+  $: sha512-aXAaho2VJtisB/1fg1+3nlLJqGOuewTzQpd/Tz0yTg2R0e4IGtshYvtjowyEumcBv2z+y4+kc75Mz7j5xJskcQ==
+  _: 'https://registry.npmjs.org/chokidar/-/chokidar-3.4.0.tgz'
+  dependencies:
+   anymatch: ~3.1.1
+   braces: ~3.0.2
+   glob-parent: ~5.1.0
+   is-binary-path: ~2.1.0
+   is-glob: ~4.0.1
+   normalize-path: ~3.0.0
+   readdirp: ~3.4.0
+  optionalDependencies:
+   fsevents: ~2.1.2
  2.1.8:
   $: sha512-ZmZUazfOzf0Nve7duiCKD23PFSCs4JPoYyccjUFF3aQkQadqBhfzhjkwBH2mNOG9cTBwhamM37EIsIkZw3nRgg==
   _: 'https://registry.npmjs.org/chokidar/-/chokidar-2.1.8.tgz'
@@ -3302,6 +3335,7 @@ chokidar:
    upath: ^1.1.1
   optionalDependencies:
    fsevents: ^1.2.7
+  deprecated: 'Chokidar 2 will break on node v14+. Upgrade to chokidar 3 with 15x less dependencies.'
 chownr:
  _latest: 1.1.3
  _:
@@ -4899,15 +4933,6 @@ fast-safe-stringify:
  2.0.7:
   $: sha512-Utm6CdzT+6xsDk2m8S6uL8VHxNwI6Jub+e9NYTcAms28T84pTa25GJQV9j0CY0N1rM8hK4x6grpF2BQf+2qwVA==
   _: 'https://registry.npmjs.org/fast-safe-stringify/-/fast-safe-stringify-2.0.7.tgz'
-fastify-plugin:
- _latest: 1.6.0
- _:
-  ^1.6.0: 1.6.0
- 1.6.0:
-  $: sha512-lFa9txg8LZx4tljj33oG53nUXhVg0baZxtP9Pxi0dJmI0NQxzkDk5DS9kr3D7iMalUAp3mvIq16OQumc7eIvLA==
-  _: 'https://registry.npmjs.org/fastify-plugin/-/fastify-plugin-1.6.0.tgz'
-  dependencies:
-   semver: ^6.0.0
 fastparse:
  _latest: 1.1.2
  _:
@@ -4973,6 +4998,12 @@ fill-range:
  _latest: 7.0.1
  _:
   ^4.0.0: 4.0.0
+  ^7.0.1: 7.0.1
+ 7.0.1:
+  $: sha512-qOo9F+dMUmC2Lcb4BbVvnKJxTPjCm+RRpe4gDuGrzkL7mEVl/djYSu2OdQ2Pa302N4oqkSg9ir6jaLWJ2USVpQ==
+  _: 'https://registry.npmjs.org/fill-range/-/fill-range-7.0.1.tgz'
+  dependencies:
+   to-regex-range: ^5.0.1
  4.0.0:
   $: sha1-1USBHUKPmOsGpj3EAtJAPDKMOPc=
   _: 'https://registry.npmjs.org/fill-range/-/fill-range-4.0.0.tgz'
@@ -5113,12 +5144,12 @@ from2:
    inherits: ^2.0.1
    readable-stream: ^2.0.0
 fs-extra:
- _latest: 8.1.0
+ _latest: 9.0.1
  _:
-  ^0.26.5: 0.26.7
- 0.26.7:
-  $: sha1-muH92UiXeY7at20JGM9C0MMYT6k=
-  _: 'https://registry.npmjs.org/fs-extra/-/fs-extra-0.26.7.tgz'
+  ^0.30.0: 0.30.0
+ 0.30.0:
+  $: sha1-8jP/zAjU2n1DLapEl3aYnbHfk/A=
+  _: 'https://registry.npmjs.org/fs-extra/-/fs-extra-0.30.0.tgz'
   dependencies:
    graceful-fs: ^4.1.2
    jsonfile: ^2.1.0
@@ -5152,9 +5183,15 @@ fs.realpath:
   $: sha1-FQStJSMVjKpA20onh8sBQRmU6k8=
   _: 'https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz'
 fsevents:
- _latest: 2.1.2
+ _latest: 2.1.3
  _:
   ^1.2.7: 1.2.11
+  ~2.1.2: 2.1.3
+ 2.1.3:
+  $: sha512-Auw9a4AxqWpa9GUfj370BMPzzyncfBABW8Mab7BGWBYDj4Isgq+cDKtx0i6u9jcX9pQDnswsaaOTgTmA5pEjuQ==
+  _: 'https://registry.npmjs.org/fsevents/-/fsevents-2.1.3.tgz'
+  os:
+   - darwin
  1.2.11:
   hasI: 1
   $: sha512-+ux3lx6peh0BpvY0JebGyZoiR4D+oYzdPZMKJwkZ+sFkNJzpL7tXc/wehS49gUAxg3tmMHPHZkA8JU2rhhgDHw==
@@ -5164,6 +5201,7 @@ fsevents:
    nan: ^2.12.1
   bundleDependencies:
    - node-pre-gyp
+  deprecated: 'fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.'
   os:
    - darwin
 function-bind:
@@ -5243,9 +5281,15 @@ glob:
    once: ^1.3.0
    path-is-absolute: ^1.0.0
 glob-parent:
- _latest: 5.1.0
+ _latest: 5.1.1
  _:
   ^3.1.0: 3.1.0
+  ~5.1.0: 5.1.1
+ 5.1.1:
+  $: sha512-FnI+VGOpnlGHWZxthPGR+QhR78fuiK0sNLkHQv+bL9fQi57lNNdquIbna/WrfROrolq8GK5Ek6BiMwqL/voRYQ==
+  _: 'https://registry.npmjs.org/glob-parent/-/glob-parent-5.1.1.tgz'
+  dependencies:
+   is-glob: ^4.0.1
  3.1.0:
   $: sha1-nmr2KZ2NO9K9QEMIMr0RPfkGxa4=
   _: 'https://registry.npmjs.org/glob-parent/-/glob-parent-3.1.0.tgz'
@@ -5884,6 +5928,12 @@ is-binary-path:
  _latest: 2.1.0
  _:
   ^1.0.0: 1.0.1
+  ~2.1.0: 2.1.0
+ 2.1.0:
+  $: sha512-ZMERYes6pDydyuGidse7OsHxtbI7WVeUEozgR/g7rd0xUimYNlvZRE/K2MgZTjWy725IfelLeVcEM97mmtRGXw==
+  _: 'https://registry.npmjs.org/is-binary-path/-/is-binary-path-2.1.0.tgz'
+  dependencies:
+   binary-extensions: ^2.0.0
  1.0.1:
   $: sha1-dfFmQrSA8YenEcgUFh/TpKdlWJg=
   _: 'https://registry.npmjs.org/is-binary-path/-/is-binary-path-1.0.1.tgz'
@@ -6016,7 +6066,7 @@ is-glob:
  _latest: 4.0.1
  _:
   ^3.1.0: 3.1.0
-  ^4.0.0: 4.0.1
+  '^4.0.0,^4.0.1,~4.0.1': 4.0.1
  4.0.1:
   $: sha512-5G0tKtBTFImOqDnLB2hG6Bp2qcKEFduo4tZu9MT/H6NQv/ghhy30o55ufafxJ/LdH79LLs2Kfrn85TLKyA7BUg==
   _: 'https://registry.npmjs.org/is-glob/-/is-glob-4.0.1.tgz'
@@ -6031,6 +6081,10 @@ is-number:
  _latest: 7.0.0
  _:
   ^3.0.0: 3.0.0
+  ^7.0.0: 7.0.0
+ 7.0.0:
+  $: sha512-41Cifkg6e8TylSpdtTpeLVMqvSBEVzTttHvERD741+pnZ8ANv0004MRL43QKPDlK9cGvNp6NZWZUBlbGXYxxng==
+  _: 'https://registry.npmjs.org/is-number/-/is-number-7.0.0.tgz'
  3.0.0:
   $: sha1-JP1iAaR4LPUFYcgQJ2r8fRLXEZU=
   _: 'https://registry.npmjs.org/is-number/-/is-number-3.0.0.tgz'
@@ -6167,12 +6221,12 @@ isobject:
   dependencies:
    isarray: 1.0.0
 isomorphic-loader:
- _latest: 3.0.0
+ _latest: 4.1.0
  _:
-  ^3.0.0: 3.0.0
- 3.0.0:
-  $: sha512-YCEVK5lrs2trGcfd84xkBsnfHEp8zlUb0KcmC1ZdcQKvIZk7q8hsUzK/WPPLm934qVIOmoo/RDGBA7C2j9shMw==
-  _: 'https://registry.npmjs.org/isomorphic-loader/-/isomorphic-loader-3.0.0.tgz'
+  ^3.1.0: 3.1.0
+ 3.1.0:
+  $: sha512-AMMnWgSiosPXdtS4AKLV3U9bdrGNbkxNCVmktETcM4ujtDtHQqkrEUoUX1pmJgBFpbYv6KjP8IXVzgUmHzHrJQ==
+  _: 'https://registry.npmjs.org/isomorphic-loader/-/isomorphic-loader-3.1.0.tgz'
   dependencies:
    deep-extend: ^0.6.0
    lockfile: ^1.0.4
@@ -7009,13 +7063,6 @@ levn:
   dependencies:
    prelude-ls: ~1.1.2
    type-check: ~0.3.2
-little-loader:
- _latest: 0.2.0
- _:
-  ^0.2.0: 0.2.0
- 0.2.0:
-  $: sha1-1XK4QquVq2+rQFcfeVFK1Jq42b0=
-  _: 'https://registry.npmjs.org/little-loader/-/little-loader-0.2.0.tgz'
 load-json-file:
  _latest: 6.2.0
  _:
@@ -7055,6 +7102,13 @@ loader-utils:
    emojis-list: ^2.0.0
    json5: ^0.5.0
    object-assign: ^4.0.1
+loadjs:
+ _latest: 4.2.0
+ _:
+  ^4.2.0: 4.2.0
+ 4.2.0:
+  $: sha512-AgQGZisAlTPbTEzrHPb6q+NYBMD+DP9uvGSIjSUM5uG+0jG15cb8axWpxuOIqrmQjn6scaaH8JwloiP27b2KXA==
+  _: 'https://registry.npmjs.org/loadjs/-/loadjs-4.2.0.tgz'
 localhost.daplie.com-certificates:
  _latest: 1.2.5
  _:
@@ -7341,10 +7395,14 @@ miller-rabin:
    bn.js: ^4.0.0
    brorand: ^1.0.1
 mime:
- _latest: 2.4.4
+ _latest: 2.4.6
  _:
-  '^1.0.0,^1.4.1': 1.6.0
+  ^1.4.1: 1.6.0
   ^2.4.4: 2.4.4
+  ^2.4.5: 2.4.6
+ 2.4.6:
+  $: sha512-RZKhC3EmpBchfTGBVb8fb+RL2cWyw/32lshnsETttkBAyAUXSGHxbEJWWRXc751DrIxG1q04b8QwMbAwkRPpUA==
+  _: 'https://registry.npmjs.org/mime/-/mime-2.4.6.tgz'
  2.4.4:
   $: sha512-LRxmNwziLPT828z+4YkNzloCFC2YM4wrB99k+AV5ZbEyfGNWfG8SO1FUXLmLDBSo89NrJZ4DIWeLjy1CHGhMGA==
   _: 'https://registry.npmjs.org/mime/-/mime-2.4.4.tgz'
@@ -7714,7 +7772,7 @@ normalize-path:
  _latest: 3.0.0
  _:
   ^2.1.1: 2.1.1
-  ^3.0.0: 3.0.0
+  '^3.0.0,~3.0.0': 3.0.0
  3.0.0:
   $: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==
   _: 'https://registry.npmjs.org/normalize-path/-/normalize-path-3.0.0.tgz'
@@ -8260,6 +8318,13 @@ performance-now:
  2.1.0:
   $: sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
   _: 'https://registry.npmjs.org/performance-now/-/performance-now-2.1.0.tgz'
+picomatch:
+ _latest: 2.2.2
+ _:
+  '^2.0.4,^2.2.1': 2.2.2
+ 2.2.2:
+  $: sha512-q0M/9eZHzmr0AulXyPwNfZjtwZ/RBZlbN3K3CErVrk50T2ASYI7Bye0EvekFY3IP1Nt2DHu0re+V2ZHIpMkuWg==
+  _: 'https://registry.npmjs.org/picomatch/-/picomatch-2.2.2.tgz'
 pify:
  _latest: 4.0.1
  _:
@@ -8830,6 +8895,13 @@ prr:
  1.0.1:
   $: sha1-0/wRS6BplaRexok/SEzrHXj19HY=
   _: 'https://registry.npmjs.org/prr/-/prr-1.0.1.tgz'
+ps-get:
+ _latest: 1.1.0
+ _:
+  ^1.1.0: 1.1.0
+ 1.1.0:
+  $: sha512-muN3eNy+lkwlICHD4/9XUM3YqzJaEyWJBRUJ8y5EnGsBRhsZBggF4KvVVPIdVZ+bj0KoiRJs7OrOELoYQSh76Q==
+  _: 'https://registry.npmjs.org/ps-get/-/ps-get-1.1.0.tgz'
 pseudomap:
  _latest: 1.0.2
  _:
@@ -9008,21 +9080,22 @@ react:
    object-assign: ^4.1.1
    prop-types: ^15.6.2
 react-async-ssr:
- _latest: 0.6.0
+ _latest: 0.7.2
  _:
-  ^0.5.2: 0.5.4
- 0.5.4:
+  ^0.6.0: 0.6.0
+ 0.6.0:
   top: 1
-  $: sha512-DPhaorIpcmE4EzfruXwE06PHEArGYbDFI7Whwme/IY7c5BgM4H0yJxqsNCdYt792VX6q1DzG3r/bXNDM8RAJTA==
-  _: 'https://registry.npmjs.org/react-async-ssr/-/react-async-ssr-0.5.4.tgz'
+  $: sha512-wFC3xt7rn3qC87kJIzpKRRjo7lmaMb0fRUG1y+kUdPsVqg+Zn2p9j3so3BAL3PsSUL7IAd6Jhni3AwNqbasjzA==
+  _: 'https://registry.npmjs.org/react-async-ssr/-/react-async-ssr-0.6.0.tgz'
   dependencies:
-   react-dom: ^16.12.0
+   react-dom: ~16.9.0
   peerDependencies:
-   react: '16.6.0 - 16.9.x || ^16.11.0'
+   react: '16.6.0 - 16.9.x'
 react-dom:
  _latest: 16.12.0
  _:
   '^16.0.0,^16.12.0': 16.12.0
+  ~16.9.0: 16.9.0
  16.12.0:
   top: 1
   $: sha512-LMxFfAGrcS3kETtQaCkTKjMiifahaMySFDn71fZUNpPHZQEzmk/GiAeIT8JSOrHB23fnuCOMruL2a8NYlw+8Gw==
@@ -9032,6 +9105,16 @@ react-dom:
    object-assign: ^4.1.1
    prop-types: ^15.6.2
    scheduler: ^0.18.0
+  peerDependencies:
+   react: ^16.0.0
+ 16.9.0:
+  $: sha512-YFT2rxO9hM70ewk9jq0y6sQk8cL02xm4+IzYBz75CQGlClQQ1Bxq0nhHF6OtSbit+AIahujJgb/CPRibFkMNJQ==
+  _: 'https://registry.npmjs.org/react-dom/-/react-dom-16.9.0.tgz'
+  dependencies:
+   loose-envify: ^1.1.0
+   object-assign: ^4.1.1
+   prop-types: ^15.6.2
+   scheduler: ^0.15.0
   peerDependencies:
    react: ^16.0.0
 react-is:
@@ -9143,9 +9226,15 @@ readable-stream:
    string_decoder: ~1.1.1
    util-deprecate: ~1.0.1
 readdirp:
- _latest: 3.3.0
+ _latest: 3.4.0
  _:
   ^2.2.1: 2.2.1
+  ~3.4.0: 3.4.0
+ 3.4.0:
+  $: sha512-0xe001vZBnJEK+uKcj8qOhyAKPzIT+gStxWr3LCB0DwcXR5NZJ3IaC+yGnHCYzB/S7ov3m3EEbZI2zeNvX+hGQ==
+  _: 'https://registry.npmjs.org/readdirp/-/readdirp-3.4.0.tgz'
+  dependencies:
+   picomatch: ^2.2.1
  2.2.1:
   $: sha512-1JU/8q+VgFZyxwrJ+SVIOsh+KywWGpds3NTqikiKpDMZWScmAYyKIgqkO+ARvNWJfXeXR1zxz7aHF4u4CyH6vQ==
   _: 'https://registry.npmjs.org/readdirp/-/readdirp-2.2.1.tgz'
@@ -9653,10 +9742,17 @@ sax:
 scheduler:
  _latest: 0.18.0
  _:
+  ^0.15.0: 0.15.0
   ^0.18.0: 0.18.0
  0.18.0:
   $: sha512-agTSHR1Nbfi6ulI0kYNK0203joW2Y5W4po4l+v03tOoiJKpTBbxpNhWDvqc/4IcOw+KLmSiQLTasZ4cab2/UWQ==
   _: 'https://registry.npmjs.org/scheduler/-/scheduler-0.18.0.tgz'
+  dependencies:
+   loose-envify: ^1.1.0
+   object-assign: ^4.1.1
+ 0.15.0:
+  $: sha512-xAefmSfN6jqAa7Kuq7LIJY0bwAPG3xlCj0HMEBQk1lxYiDKZscY2xJ5U/61ZTrYbmNQbXa+gc7czPkVo11tnCg==
+  _: 'https://registry.npmjs.org/scheduler/-/scheduler-0.15.0.tgz'
   dependencies:
    loose-envify: ^1.1.0
    object-assign: ^4.1.1
@@ -9699,12 +9795,16 @@ select-hose:
   $: sha1-Yl2GWPhlr0Psliv8N2o3NZpJlMo=
   _: 'https://registry.npmjs.org/select-hose/-/select-hose-2.0.0.tgz'
 semver:
- _latest: 7.1.2
+ _latest: 7.3.2
  _:
   '2 || 3 || 4 || 5,^5.3.0,^5.4.1,^5.5.0,^5.5.1,^5.6.0': 5.7.1
   5.5.0: 5.5.0
   7.0.0: 7.0.0
   '^6.0.0,^6.2.0,^6.3.0': 6.3.0
+  ^7.3.2: 7.3.2
+ 7.3.2:
+  $: sha512-OrOb32TeeambH6UrhtShmF7CRDqhL6/5XpPNp2DuRH6+9QLw/orhp72j87v8Qa1ScDkvrrBNpZcDejAirJmfXQ==
+  _: 'https://registry.npmjs.org/semver/-/semver-7.3.2.tgz'
  7.0.0:
   $: sha512-+GB6zVA9LWh6zovYQLALHwv5rb2PHGlJi3lfiqIHxR0uuwCgefcOJc59v9fv1w8GbStwxuuqqAjI9NMAOOgq1A==
   _: 'https://registry.npmjs.org/semver/-/semver-7.0.0.tgz'
@@ -10344,10 +10444,10 @@ stylehacks:
    postcss: ^7.0.0
    postcss-selector-parser: ^3.0.0
 subapp-react:
- _latest: 0.0.15-fynlocal_h
+ _latest: 0.0.20-fynlocal_h
  _:
-  ../../packages/subapp-react: 0.0.15-fynlocal_h
- 0.0.15-fynlocal_h:
+  ../../packages/subapp-react: 0.0.20-fynlocal_h
+ 0.0.20-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-react
@@ -10355,32 +10455,32 @@ subapp-react:
    '@babel/runtime': ^7.8.3
    optional-require: ^1.0.0
    subapp-util: ^1.0.5
-   subapp-web: ^1.0.24
+   subapp-web: ^1.0.29
   peerDependencies:
    react: '*'
    react-dom: '*'
 subapp-redux:
- _latest: 1.0.24-fynlocal_h
+ _latest: 1.0.29-fynlocal_h
  _:
-  ../../packages/subapp-redux: 1.0.24-fynlocal_h
- 1.0.24-fynlocal_h:
+  ../../packages/subapp-redux: 1.0.29-fynlocal_h
+ 1.0.29-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-redux
   dependencies:
    optional-require: ^1.0.0
    subapp-util: ^1.0.5
-   subapp-web: ^1.0.24
+   subapp-web: ^1.0.29
   peerDependencies:
    react: '*'
    react-dom: '*'
    redux: '*'
    react-redux: '*'
 subapp-server:
- _latest: 1.1.17-fynlocal_h
+ _latest: 1.2.3-fynlocal_h
  _:
-  ../../packages/subapp-server: 1.1.17-fynlocal_h
- 1.1.17-fynlocal_h:
+  ../../packages/subapp-server: 1.2.3-fynlocal_h
+ 1.2.3-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-server
@@ -10403,10 +10503,10 @@ subapp-util:
    filter-scan-dir: ^1.0.9
    optional-require: ^1.0.0
 subapp-web:
- _latest: 1.0.24-fynlocal_h
+ _latest: 1.0.29-fynlocal_h
  _:
-  '../../packages/subapp-web,../subapp-web': 1.0.24-fynlocal_h
- 1.0.24-fynlocal_h:
+  '../../packages/subapp-web,../subapp-web': 1.0.29-fynlocal_h
+ 1.0.29-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-web
@@ -10414,12 +10514,12 @@ subapp-web:
    '@babel/runtime': ^7.8.3
    history: ^4.9.0
    jsesc: ^2.5.2
-   little-loader: ^0.2.0
+   loadjs: ^4.2.0
    lodash: ^4.17.15
    optional-require: ^1.0.0
    request: ^2.88.0
    subapp-util: ^1.0.5
-   xaa: ^1.4.0
+   xaa: ^1.6.0
 sudo-prompt:
  _latest: 9.1.1
  _:
@@ -10673,6 +10773,12 @@ to-regex-range:
  _latest: 5.0.1
  _:
   ^2.1.0: 2.1.1
+  ^5.0.1: 5.0.1
+ 5.0.1:
+  $: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==
+  _: 'https://registry.npmjs.org/to-regex-range/-/to-regex-range-5.0.1.tgz'
+  dependencies:
+   is-number: ^7.0.0
  2.1.1:
   $: sha1-fIDBe53+vlmeJzZ+DU3VWQFB2zg=
   _: 'https://registry.npmjs.org/to-regex-range/-/to-regex-range-2.1.1.tgz'
@@ -11021,12 +11127,12 @@ verror:
    core-util-is: 1.0.2
    extsprintf: ^1.2.0
 visual-logger:
- _latest: 1.1.1
+ _latest: 1.1.3
  _:
-  ^1.1.0: 1.1.1
- 1.1.1:
-  $: sha512-fMqKlV5YqUVycfF5QxOpIlivBTvF1Fx/jwlNu3JSxFwyzVyi4P11i+R1+iVDNsU8AHHuUZqi1ONs1OpxAplMoA==
-  _: 'https://npme.walmart.com/visual-logger/-/visual-logger-1.1.1.tgz'
+  ^1.1.3: 1.1.3
+ 1.1.3:
+  $: sha512-8XPxTR+RoZZtSkx1TY+aLAvG1EivsO0352WuWyXr0nU7n7T2XOh3ty/QwGS2dx7ZUDJQ5PTVp/p5StXaR11H7w==
+  _: 'https://registry.npmjs.org/visual-logger/-/visual-logger-1.1.3.tgz'
   dependencies:
    chalk: ^4.0.0
    log-update: ^4.0.0
@@ -11355,6 +11461,10 @@ xaa:
  _:
   ^1.1.4: 1.2.1
   ^1.4.0: 1.4.0
+  '^1.5.0,^1.6.0': 1.6.0
+ 1.6.0:
+  $: sha512-BbxlOEfA3ndnab9cbHvUWh3Ow0rhVaiTgxwPaRrBdW6tcIGoR8ks7PuGLYvijuasclX9I1jfAiUC+V09knYWgQ==
+  _: 'https://registry.npmjs.org/xaa/-/xaa-1.6.0.tgz'
  1.4.0:
   $: sha512-mX3ELNk7ZU5KtUwO7XsamqlVoE7xJ/0WRLHRpb6u//sgWfm6AHxsnrnu/pUyp3ppQ4lwV5bsA06j4K7U+WYEhA==
   _: 'https://registry.npmjs.org/xaa/-/xaa-1.4.0.tgz'
@@ -11362,12 +11472,12 @@ xaa:
   $: sha512-PUHTFveQ6XOheZq4GlimMcVFrgn9m6rrbFefN8UKeUoJqqeam76VCFMx8hFip1/aXPAnolJCiTAH+KcUQ92G2w==
   _: 'https://registry.npmjs.org/xaa/-/xaa-1.2.1.tgz'
 xclap:
- _latest: 0.2.48
+ _latest: 0.2.51
  _:
-  ^0.2.48: 0.2.48
- 0.2.48:
-  $: sha512-jc9/NjcaTDUszhNj0wOW83NNBx7wUcrzYzldotao6go7g/qMH+5QZYNiYyh98Y/8DhFQndDJihL39+oJIPNJFg==
-  _: 'https://registry.npmjs.org/xclap/-/xclap-0.2.48.tgz'
+  ^0.2.50: 0.2.51
+ 0.2.51:
+  $: sha512-fmbW1+4WgGZ5EUPYsJmZb4nJj3nkOFJvPPPi/DIybmu/BpnLwPz5twFWpIzigGZINsVJ3Ce6I+A+uaEgbLiGgA==
+  _: 'https://registry.npmjs.org/xclap/-/xclap-0.2.51.tgz'
   dependencies:
    chalk: ^4.0.0
    chalker: ^1.2.0

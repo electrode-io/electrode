@@ -7,6 +7,7 @@ const assert = require("assert");
 const Path = require("path");
 const _ = require("lodash");
 const { tryThrowOriginalSubappRegisterError } = require("subapp-util");
+const EventEmitter = require("events");
 
 let CDN_ASSETS;
 let CDN_JS_BUNDLES;
@@ -341,6 +342,24 @@ ${ignoreMsg}`
     assets.chunks = stats.chunks;
 
     return { assets, stats };
+  },
+  getEventEmiiter(reporter) {
+    const emitter = new EventEmitter();
+    const groupEvents = {};
+
+    emitter.on("web_ssr", (data = {}) => {
+      const group = data.group || "_";
+      groupEvents[group] = groupEvents[group] || [];
+      groupEvents[group].push(data);
+
+      if (data.action === "group-ssr-total" || data.action === "subapps-ssr") {
+        const events = groupEvents[group];
+        events.forEach((event) => reporter(event));
+        delete groupEvents[group];
+      }
+    });
+
+    return emitter;
   }
 };
 
