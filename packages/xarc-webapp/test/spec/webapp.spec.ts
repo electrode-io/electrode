@@ -2,8 +2,7 @@ import { expect } from "chai";
 const xstdout = require("xstdout");
 import { describe } from "mocha";
 import * as Path from "path";
-import { Webapp } from "../../src/index";
-console.log(Webapp);
+import * as Webapp from "../../src/Webapp";
 describe("resolveContent", function () {
   it("should require module with relative path", () => {
     const f = "./test/data/foo.js";
@@ -42,7 +41,7 @@ describe("resolveContent", function () {
 
 describe("makeRouteHandler", () => {
   it("should not add default handler if it's already included in options", () => {
-    const htmlFile = Path.resolve("nano");
+    const htmlFile = Path.resolve("../test/jsx-template/index-1.jsx");
     const defaultReactHandler = Path.join(__dirname, "../../src/react/token-handlers");
     const intercept = xstdout.intercept(false);
     const handleRoute = Webapp.makeRouteHandler({
@@ -51,8 +50,6 @@ describe("makeRouteHandler", () => {
         {
           name: "internal-test-handler",
           beforeRender: context => {
-            console.log(context);
-            debugger;
             expect(typeof context).to.equal("undefined");
             context.handleError = () => {};
           },

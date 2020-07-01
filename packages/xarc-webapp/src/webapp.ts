@@ -51,7 +51,6 @@ function initializeTemplate(
   }
 
   if (!templateFile) {
-    debugger;
     asyncTemplate = new SimpleRenderer({
       htmlFile,
       tokenHandlers: finalTokenHandlers.filter(x => x),

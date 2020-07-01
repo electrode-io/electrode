@@ -5,7 +5,7 @@
 /* eslint-disable comma-dangle, arrow-parens, filenames/match-regex, no-magic-numbers */
 
 import { RenderOutput } from "./RenderOutput";
-import Munchy from "munchy";
+import * as Munchy from "munchy";
 
 const munchyHandleStreamError = err => {
   let errMsg = (process.env.NODE_ENV !== "production" && err.stack) || err.message;
@@ -87,7 +87,9 @@ export class RenderContext {
   setOutputSend(send) {
     this.send = send;
   }
-
+  setStandardMunchyOutput() {
+    this.munchy = new Munchy({ handleStreamError: munchyHandleStreamError });
+  }
   setMunchyOutput(munchy) {
     this.munchy = munchy || new Munchy({ handleStreamError: munchyHandleStreamError });
   }

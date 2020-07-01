@@ -43,9 +43,7 @@ module.exports = {
             request
           });
 
-          const data =
-            context.result instanceof Promise ? context.result.resolve() : context.result;
-
+          const data =  context.result;
           const status = data.status;
 
           if (data instanceof Error) {
