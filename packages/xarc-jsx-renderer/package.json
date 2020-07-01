@@ -70,7 +70,7 @@
     "trailingComma": "none"
   },
   "dependencies": {
-    "@xarc/render-context": "../xarc-render-context",
+    "@xarc/render-context": "^1.0.0",
     "lodash": "^4.17.15",
     "munchy": "^1.0.7",
     "optional-require": "^1.0.0",

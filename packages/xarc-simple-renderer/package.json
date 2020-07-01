@@ -79,5 +79,10 @@
     "functions": 100,
     "lines": 100,
     "cache": false
+  },
+  "fyn": {
+    "devDependencies": {
+      "@xarc/render-context": "../xarc-render-context"
+    }
   }
 }
