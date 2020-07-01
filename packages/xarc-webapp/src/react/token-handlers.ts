@@ -1,10 +1,7 @@
-"use strict";
-
 /* eslint-disable max-statements, max-depth */
+import * as groupScripts from "../group-scripts";
 
-const groupScripts = require("../group-scripts");
-
-const {
+import {
   getIconStats,
   getCriticalCSS,
   getDevCssBundle,
@@ -14,17 +11,18 @@ const {
   getCspNonce,
   getBundleJsNameByQuery,
   isReadableStream
-} = require("../utils");
+} from "./utils";
 
-const {
+import {
   getContent,
   transformOutput,
   htmlifyScripts,
   loadElectrodeDllAssets,
   makeElectrodeDllScripts
-} = require("./content");
+} from "./content";
 
-const prefetchBundles = require("./handlers/prefetch-bundles");
+import prefetchBundles from "./handlers/prefetch-bundles";
+
 const CONTENT_MARKER = "SSR_CONTENT";
 const HEADER_BUNDLE_MARKER = "WEBAPP_HEADER_BUNDLES";
 const BODY_BUNDLE_MARKER = "WEBAPP_BODY_BUNDLES";
@@ -36,7 +34,10 @@ const CRITICAL_CSS_MARKER = "CRITICAL_CSS";
 const APP_CONFIG_DATA_MARKER = "APP_CONFIG_DATA";
 const WEBAPP_START_SCRIPT_MARKER = "WEBAPP_START_SCRIPT";
 
-module.exports = function setup(handlerContext /*, asyncTemplate*/) {
+/**
+ * @param handlerContext
+ */
+export default function setup(handlerContext /*, asyncTemplate*/) {
   const routeOptions = handlerContext.user.routeOptions;
 
   const WEBPACK_DEV = routeOptions.webpackDev;
@@ -131,7 +132,7 @@ module.exports = function setup(handlerContext /*, asyncTemplate*/) {
       };
 
       if (content.useStream || isReadableStream(content.html)) {
-        context.setMunchyOutput();
+        context.setStandardMunchyOutput();
       }
 
       context.setOutputTransform(transformOutput);
@@ -160,37 +161,40 @@ window.${key}.ui = ${JSON.stringify(routeOptions.uiConfig)};
 </script>`;
     },
 
-    [HEADER_BUNDLE_MARKER]: context => {
-      const manifest = bundleManifest();
-      const manifestLink = manifest ? `<link rel="manifest" href="${manifest}" />\n` : "";
-      const css = [].concat(WEBPACK_DEV ? context.user.devCSSBundle : context.user.cssChunk);
+    //TODO: below to templats were diabled temporily for throwing error in typescript.
+    //      reminder to find resolution on this
+    //**** */
+    // [HEADER_BUNDLE_MARKER]: context => {
+    //   const manifest = bundleManifest();
+    //   const manifestLink = manifest ? `<link rel="manifest" href="${manifest}" />\n` : "";
+    //   const css = [].concat(WEBPACK_DEV ? context.user.devCSSBundle : context.user.cssChunk);
 
-      const cssLink = css.reduce((acc, file) => {
-        file = WEBPACK_DEV ? file : prodBundleBase + file.name;
-        return `${acc}<link rel="stylesheet" href="${file}" />`;
-      }, "");
+    //   const cssLink = css.reduce((acc, file) => {
+    //     file = WEBPACK_DEV ? file : prodBundleBase + file.name;
+    //     return `${acc}<link rel="stylesheet" href="${file}" />`;
+    //   }, "");
 
-      const htmlScripts = htmlifyScripts(
-        groupScripts(routeOptions.unbundledJS.enterHead).scripts,
-        context.user.scriptNonce
-      );
+    //   const htmlScripts = htmlifyScripts(
+    //     groupScripts(routeOptions.unbundledJS.enterHead).scripts,
+    //     context.user.scriptNonce
+    //   );
 
-      return `${manifestLink}${cssLink}${htmlScripts}`;
-    },
+    //   return `${manifestLink}${cssLink}${htmlScripts}`;
+    // },
 
-    [BODY_BUNDLE_MARKER]: context => {
-      context.user.query = context.user.request.query;
-      const js = bundleJs(context.user);
-      const jsLink = js ? { src: js } : "";
+    // [""]: context => {
+    //   context.user.query = context.user.request.query;
+    //   const js = bundleJs(context.user);
+    //   const jsLink = js ? { src: js } : "";
 
-      const ins = routeOptions.unbundledJS.preBundle.concat(
-        jsLink,
-        routeOptions.unbundledJS.postBundle
-      );
-      const htmlScripts = htmlifyScripts(groupScripts(ins).scripts, context.user.scriptNonce);
+    //   const ins = routeOptions.unbundledJS.preBundle.concat(
+    //     jsLink,
+    //     routeOptions.unbundledJS.postBundle
+    //   );
+    //   const htmlScripts = htmlifyScripts(groupScripts(ins).scripts, context.user.scriptNonce);
 
-      return `${htmlScripts}`;
-    },
+    //   return `${htmlScripts}`;
+    // },
 
     [DLL_BUNDLE_MARKER]: context => {
       if (WEBPACK_DEV) {
@@ -238,4 +242,4 @@ if (window["${startFuncName}"]) window["${startFuncName}"]();
     routeData,
     tokens: tokenHandlers
   };
-};
+}

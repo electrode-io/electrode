@@ -1,6 +1,4 @@
-"use strict";
-
-module.exports = context => {
+export default context => {
   const content = context.user.content;
   if (!content || !content.prefetch) return "";
 

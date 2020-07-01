@@ -1,21 +1,23 @@
 import * as _ from "lodash";
 import * as Path from "path";
 import * as assert from "assert";
-import * as AsyncTemplate from "./async-template";
+import { SimpleRenderer } from "@xarc/simple-renderer";
 import { JsxRenderer } from "@xarc/jsx-renderer";
+import { resolvePath } from "./react/utils";
 
-const {
+import {
   getOtherStats,
   getOtherAssets,
   resolveChunkSelector,
   loadAssetsFromStats,
   getStatsPath,
   invokeTemplateProcessor,
-  makeDevBundleBase,
-} = require("./utils");
+  makeDevBundleBase
+} from "./react/utils";
 
 const otherStats = getOtherStats();
 
+/*eslint-disable max-statements*/
 function initializeTemplate(
   { htmlFile, templateFile, tokenHandlers, cacheId, cacheKey, options },
   routeOptions
@@ -33,12 +35,8 @@ function initializeTemplate(
   }
 
   const userTokenHandlers = []
-    .concat(
-      tokenHandlers,
-      routeOptions.tokenHandler,
-      routeOptions.tokenHandlers
-    )
-    .filter((x) => x);
+    .concat(tokenHandlers, routeOptions.tokenHandler, routeOptions.tokenHandlers)
+    .filter(x => x);
 
   let finalTokenHandlers = userTokenHandlers;
 
@@ -53,24 +51,24 @@ function initializeTemplate(
   }
 
   if (!templateFile) {
-    asyncTemplate = new AsyncTemplate({
+    asyncTemplate = new SimpleRenderer({
       htmlFile,
-      tokenHandlers: finalTokenHandlers.filter((x) => x),
+      tokenHandlers: finalTokenHandlers.filter(x => x),
       insertTokenIds: routeOptions.insertTokenIds,
-      routeOptions,
+      routeOptions
     });
 
     invokeTemplateProcessor(asyncTemplate, routeOptions);
     asyncTemplate.initializeRenderer();
   } else {
-    const templateFullPath = require.resolve(tmplFile);
-    const template = require(tmplFile);
+    const templateFullPath = resolvePath(tmplFile);
+    const template = resolvePath(tmplFile);
     asyncTemplate = new JsxRenderer({
       templateFullPath: Path.dirname(templateFullPath),
       template: _.get(template, "default", template),
-      tokenHandlers: finalTokenHandlers.filter((x) => x),
+      tokenHandlers: finalTokenHandlers.filter(x => x),
       insertTokenIds: routeOptions.insertTokenIds,
-      routeOptions,
+      routeOptions
     });
     asyncTemplate.initializeRenderer();
   }
@@ -87,7 +85,7 @@ function makeRouteHandler(routeOptions) {
       templateFile:
         typeof routeOptions.templateFile === "string"
           ? Path.resolve(routeOptions.templateFile)
-          : Path.join(__dirname, "../template/index"),
+          : Path.join(__dirname, "../template/index")
     };
   } else {
     defaultSelection = { htmlFile: routeOptions.htmlFile };
@@ -95,26 +93,19 @@ function makeRouteHandler(routeOptions) {
 
   const render = (options, templateSelection) => {
     let selection = templateSelection || defaultSelection;
-    if (
-      templateSelection &&
-      !templateSelection.templateFile &&
-      !templateSelection.htmlFile
-    ) {
+    if (templateSelection && !templateSelection.templateFile && !templateSelection.htmlFile) {
       selection = Object.assign({}, templateSelection, defaultSelection);
     }
     const asyncTemplate = initializeTemplate(selection, routeOptions);
     return asyncTemplate.render(options);
   };
 
-  return (options) => {
+  return options => {
     if (routeOptions.selectTemplate) {
-      const selection = routeOptions.selectTemplate(
-        options.request,
-        routeOptions
-      );
+      const selection = routeOptions.selectTemplate(options.request, routeOptions);
 
       if (selection && selection.then) {
-        return selection.then((x) => render(options, x));
+        return selection.then(x => render(options, x));
       }
 
       return render(options, selection);
@@ -125,9 +116,8 @@ function makeRouteHandler(routeOptions) {
   };
 }
 
-const setupOptions = (options) => {
-  const https =
-    process.env.WEBPACK_DEV_HTTPS && process.env.WEBPACK_DEV_HTTPS !== "false";
+const setupOptions = options => {
+  const https = process.env.WEBPACK_DEV_HTTPS && process.env.WEBPACK_DEV_HTTPS !== "false";
 
   const pluginOptionsDefaults = {
     pageTitle: "Untitled Electrode Web Application",
@@ -137,15 +127,14 @@ const setupOptions = (options) => {
     htmlFile: Path.join(__dirname, "index.html"),
     devServer: {
       protocol: https ? "https" : "http",
-      host:
-        process.env.WEBPACK_DEV_HOST || process.env.WEBPACK_HOST || "localhost",
+      host: process.env.WEBPACK_DEV_HOST || process.env.WEBPACK_HOST || "localhost",
       port: process.env.WEBPACK_DEV_PORT || "2992",
-      https,
+      https
     },
     unbundledJS: {
       enterHead: [],
       preBundle: [],
-      postBundle: [],
+      postBundle: []
     },
     paths: {},
     stats: "dist/server/stats.json",
@@ -154,16 +143,13 @@ const setupOptions = (options) => {
     criticalCSS: "dist/js/critical.css",
     buildArtifacts: ".build",
     prodBundleBase: "/js/",
-    cspNonceValue: undefined,
+    cspNonceValue: undefined
   };
 
   const pluginOptions = _.defaultsDeep({}, options, pluginOptionsDefaults);
   const chunkSelector = resolveChunkSelector(pluginOptions);
   const devBundleBase = makeDevBundleBase(pluginOptions.devServer);
-  const statsPath = getStatsPath(
-    pluginOptions.stats,
-    pluginOptions.buildArtifacts
-  );
+  const statsPath = getStatsPath(pluginOptions.stats, pluginOptions.buildArtifacts);
 
   const assets = loadAssetsFromStats(statsPath);
   const otherAssets = getOtherAssets(pluginOptions);
@@ -171,7 +157,7 @@ const setupOptions = (options) => {
     assets,
     otherAssets,
     chunkSelector,
-    devBundleBase,
+    devBundleBase
   });
 
   return pluginOptions;
@@ -184,25 +170,18 @@ const pathSpecificOptions = [
   "pageTitle",
   "selectTemplate",
   "responseForBadStatus",
-  "responseForError",
+  "responseForError"
 ];
 
 const setupPathOptions = (routeOptions, path) => {
   const pathData = _.get(routeOptions, ["paths", path], {});
-  const pathOverride = _.get(
-    routeOptions,
-    ["paths", path, "overrideOptions"],
-    {}
-  );
+  const pathOverride = _.get(routeOptions, ["paths", path, "overrideOptions"], {});
   const pathOptions = pathData.options;
   return _.defaultsDeep(
     _.pick(pathData, pathSpecificOptions),
     {
       tokenHandler: [].concat(routeOptions.tokenHandler, pathData.tokenHandler),
-      tokenHandlers: [].concat(
-        routeOptions.tokenHandlers,
-        pathData.tokenHandlers
-      ),
+      tokenHandlers: [].concat(routeOptions.tokenHandlers, pathData.tokenHandlers)
     },
     pathOptions,
     _.omit(pathOverride, "paths"),
@@ -235,7 +214,7 @@ const setupPathOptions = (routeOptions, path) => {
 // If content is an object, it can contain module, a path to the JS module to require
 // to load the content.
 //
-const resolveContent = (pathData, xrequire) => {
+const resolveContent = (pathData, xrequire = null) => {
   const resolveTime = Date.now();
 
   let content = pathData;
@@ -249,9 +228,7 @@ const resolveContent = (pathData, xrequire) => {
 
   // content has module field, require it.
   if (!_.isString(content) && !_.isFunction(content) && content.module) {
-    const mod = content.module.startsWith(".")
-      ? Path.resolve(content.module)
-      : content.module;
+    const mod = content.module.startsWith(".") ? Path.resolve(content.module) : content.module;
 
     xrequire = xrequire || require;
 
@@ -260,7 +237,7 @@ const resolveContent = (pathData, xrequire) => {
         fullPath: xrequire.resolve(mod),
         xrequire,
         resolveTime,
-        content: xrequire(mod),
+        content: xrequire(mod)
       };
     } catch (error) {
       const msg = `electrode-react-webapp: load SSR content ${mod} failed - ${error.message}`;
@@ -269,7 +246,7 @@ const resolveContent = (pathData, xrequire) => {
         fullPath: null,
         error,
         resolveTime,
-        content: msg,
+        content: msg
       };
     }
   }
@@ -277,7 +254,7 @@ const resolveContent = (pathData, xrequire) => {
   return {
     fullPath: null,
     resolveTime,
-    content,
+    content
   };
 };
 
@@ -308,27 +285,17 @@ const getContentResolver = (registerOptions, pathData, path) => {
 
     if (registerOptions.serverSideRendering !== false) {
       resolved = resolveContent(pathData);
-      assert(
-        resolved,
-        `You must define content for the webapp plugin path ${path}`
-      );
+      assert(resolved, `You must define content for the webapp plugin path ${path}`);
     } else {
       resolved = {
         content: {
           status: 200,
-          html: "<!-- SSR disabled by options.serverSideRendring -->",
-        },
+          html: "<!-- SSR disabled by options.serverSideRendring -->"
+        }
       };
     }
 
     return resolved.content;
   };
 };
-
-module.exports = {
-  setupOptions,
-  setupPathOptions,
-  makeRouteHandler,
-  resolveContent,
-  getContentResolver,
-};
+export { setupOptions, setupPathOptions, makeRouteHandler, resolveContent, getContentResolver };

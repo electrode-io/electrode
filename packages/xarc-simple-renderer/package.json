@@ -2,7 +2,7 @@
   "name": "@xarc/simple-renderer",
   "version": "1.0.0",
   "description": "Render index.htm from simple string token based template",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "clap -n build docs && clap check",
@@ -34,10 +34,13 @@
     "source-map-support": "^0.5.16",
     "ts-node": "^8.6.2",
     "typedoc": "^0.17.4",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "xstdout": "^0.1.1",
+    "@xarc/render-context": "../../packages/xarc-render-context"
   },
   "mocha": {
     "require": [
+      "@babel/register",
       "ts-node/register",
       "source-map-support/register",
       "@xarc/module-dev/config/test/setup.js"
@@ -45,6 +48,36 @@
     "recursive": true
   },
   "files": [
-    "dist"
-  ]
+    "dist",
+    "lib"
+  ],
+  "dependencies": {
+    "ts-node": "^8.10.2"
+  },
+  "nyc": {
+    "extends": [
+      "@istanbuljs/nyc-config-typescript"
+    ],
+    "all": true,
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "exclude": [
+      "*clap.js",
+      "*clap.ts",
+      "coverage",
+      "dist",
+      "docs",
+      "gulpfile.js",
+      "test"
+    ],
+    "check-coverage": true,
+    "statements": 100,
+    "branches": 100,
+    "functions": 100,
+    "lines": 100,
+    "cache": false
+  }
 }
