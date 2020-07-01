@@ -1,0 +1,35 @@
+{
+  "name": "electrode-docs",
+  "version": "1.0.0",
+  "description": "Electrode Platform for NodeJS/React Universal Application",
+  "homepage": "http://www.electrode.io",
+  "scripts": {
+    "build": "docusaurus build",
+    "start": "npm run build && docusaurus start",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus build && touch build/.nojekyll && rm -rf ../docs && cp -r build ../docs"
+  },
+  "devDependencies": {
+    "@docusaurus/core": "^2.0.0-alpha.56",
+    "@docusaurus/preset-classic": "^2.0.0-alpha.56",
+    "@docusaurus/theme-live-codeblock": "^2.0.0-alpha.39",
+    "classnames": "^2.2.6",
+    "docusaurus-lunr-search": "^1.0.3",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
+  },
+  "bugs": {
+    "url": "https://github.com/electrode-io/electrode/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electrode-io/electrode.git"
+  },
+  "private": true,
+  "license": "Apache-2.0",
+  "prettier": {
+    "printWidth": 100,
+    "arrowParens": "avoid",
+    "trailingComma": "none"
+  }
+}

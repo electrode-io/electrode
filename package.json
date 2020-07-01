@@ -12,8 +12,7 @@
     "nuke": "rm -rf node_modules tmp lerna-debug.log npm-debug.log",
     "nuke-packages": "rm -rf packages/*/node_modules packages/*/coverage",
     "nuke-samples": "rm -rf samples/*/node_modules samples/*/coverage samples/*/dist samples/*/.isomorphic-loader-config.json samples/*/.etmp",
-    "update-changelog": "clap update-changelog",
-    "gitbook-serve": "clap gitbook-serve"
+    "update-changelog": "clap update-changelog"
   },
   "devDependencies": {
     "bluebird": "^3.5.0",

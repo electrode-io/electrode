@@ -11,7 +11,7 @@ Electrode Web is a full stack, end-to-end, rapid application development platfor
 Originally designed for Walmart-specific use cases, we decided to open-source electrode with the hope that it will be useful to developers in the JavaScript community.
 This is the same version that is used to power the Walmart.com eCommerce website.
 
-+ NOTE: We maintain additional code for internal Walmart systems. If you are a Walmart developer, please check internal docs to get started.
+- NOTE: We maintain additional code for internal Walmart systems. If you are a Walmart developer, please check internal docs to get started.
 
 **Do you have 5 minutes?** That is how long it takes to scaffold your first app. Try it now!
 
@@ -33,7 +33,7 @@ npm init @xarc/app my-app
 
 Your electrode app will appear as shown below.
 
-![Hello from Electrode](docs/static/img/electrode-first-run.png)
+![Hello from Electrode](docs/img/electrode-first-run.png)
 
 # Contributing
 
@@ -48,7 +48,7 @@ Copyright (c) 2016-present, Walmart
 Licensed under the [Apache License, Version 2.0]
 
 [apache license, version 2.0]: https://www.apache.org/licenses/LICENSE-2.0
-[Node.js]: https://nodejs.org/en/download
+[node.js]: https://nodejs.org/en/download
 [submitting a pr]: https://github.com/electrode-io/electrode/pulls
 [reporting an issue]: https://github.com/electrode-io/electrode/issues
 [contributing guide]: contributing.md
