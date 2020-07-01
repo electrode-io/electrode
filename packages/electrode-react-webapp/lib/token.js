@@ -42,7 +42,7 @@ class Token {
     let tokenMod = viewTokenModules[this.id];
 
     if (tokenMod === undefined) {
-      tokenMod = loadHandler(this.modPath, this[TEMPLATE_DIR]);
+      tokenMod = loadHandler(this.modPath, this[TEMPLATE_DIR], this._modCall && this._modCall[0]);
       viewTokenModules[this.id] = tokenMod;
     }
 
