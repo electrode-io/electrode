@@ -9,11 +9,11 @@
     "sourceMap": true,
     "declaration": true,
     "types": ["node", "mocha"],
-    "jsx": "react",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
-    "alwaysStrict": true,
-    "strictFunctionTypes": true
+    "alwaysStrict": false,
+    "strictFunctionTypes": true,
+    "jsx": "react"
   },
   "include": ["src"]
 }

@@ -39,7 +39,15 @@
     "@types/node": "^13.7.6",
     "@types/sinon": "^9.0.0",
     "@types/sinon-chai": "^3.2.4",
+    "@typescript-eslint/eslint-plugin": "^2.21.0",
+    "@typescript-eslint/parser": "^2.21.0",
+    "@xarc/module-dev": "^2.1.2",
+    "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-walmart": "^2.2.1",
+    "eslint-plugin-filenames": "^1.1.0",
+    "eslint-plugin-jsdoc": "^21.0.0",
     "mocha": "^7.1.0",
     "nyc": "^15.0.0",
     "sinon": "^7.2.6",
@@ -80,10 +88,18 @@
   },
   "mocha": {
     "require": [
+      "./config/test/setup.js",
       "ts-node/register",
       "source-map-support/register",
-      "./config/test/setup.js"
+      "@xarc/module-dev/config/test/setup.js"
     ],
     "recursive": true
+  },
+  "fyn": {
+    "dependencies": {
+      "@xarc/jsx-renderer": "../xarc-jsx-renderer",
+      "@xarc/render-context": "../xarc-render-context",
+      "@xarc/simple-renderer": "../xarc-simple-renderer"
+    }
   }
 }
