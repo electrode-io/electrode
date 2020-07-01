@@ -1,3 +1,35 @@
+# 6/30/2020
+
+- fix: handle token module in es6 format
+
+## Packages
+
+### Directly Updated
+
+- `electrode-react-webapp@3.8.10` `(3.8.9 => 3.8.10)`
+
+### Lerna Updated
+
+- `subapp-pbundle@0.0.24` `(0.0.23 => 0.0.24)`
+- `subapp-react@0.0.21` `(0.0.20 => 0.0.21)`
+- `subapp-redux@1.0.30` `(1.0.29 => 1.0.30)`
+- `subapp-server@1.2.4` `(1.2.3 => 1.2.4)`
+- `subapp-web@1.0.30` `(1.0.29 => 1.0.30)`
+
+## Commits
+
+- `packages/electrode-react-webapp`
+
+  - fix: handle token module in es6 format [commit](http://github.com/electrode-io/electrode/commit/e2db07ebfda3888ed9461a5835341f8a2426d8ee)
+
+- `docs`
+
+  - updated GitBook to Docusaurus ([#1673](https://github.com/electrode-io/electrode/pull/1673)) [commit](http://github.com/electrode-io/electrode/commit/2abe85bcf607ef3a92802ed741efcfff67776fba)
+
+- `MISC`
+
+  - update CONTRIBUTING.md [commit](http://github.com/electrode-io/electrode/commit/f2b5119706384ed7dfd1c4901a8d5828c0a7d51b)
+
 # 6/17/2020
 
 - create-app - take app directory as argument
