@@ -15,7 +15,7 @@ const Boom = require("@hapi/boom");
 const HttpStatus = require("./http-status");
 const readFile = util.promisify(Fs.readFile);
 const xaa = require("xaa");
-const Webapp = require("@xarc/webapp");
+const Webapp = require("@xarc/index-page");
 const subAppUtil = require("subapp-util");
 const registerRoutes = require("./register-routes");
 

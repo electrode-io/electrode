@@ -1,1 +1,1 @@
-export { SimpleRenderer } from "./simple-renderer";
+export { TagRenderer } from "./tag-renderer";

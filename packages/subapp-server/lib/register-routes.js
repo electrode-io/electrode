@@ -5,7 +5,7 @@
 const assert = require("assert");
 const _ = require("lodash");
 const HttpStatus = require("./http-status");
-const Webapp = require("@xarc/webapp");
+const Webapp = require("@xarc/index-page");
 const { errorResponse, resolveChunkSelector, updateFullTemplate } = require("./utils");
 const HttpStatusCodes = require("http-status-codes");
 

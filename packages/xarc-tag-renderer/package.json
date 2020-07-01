@@ -1,7 +1,7 @@
 {
-  "name": "@xarc/simple-renderer",
+  "name": "@xarc/tag-renderer",
   "version": "1.0.0",
-  "description": "Render index.htm from simple string token based template",
+  "description": "Generate index.html webpage from a tag based template",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
