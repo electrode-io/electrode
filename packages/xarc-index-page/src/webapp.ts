@@ -1,7 +1,7 @@
 import * as _ from "lodash";
 import * as Path from "path";
 import * as assert from "assert";
-import { SimpleRenderer } from "@xarc/simple-renderer";
+import { TagRenderer } from "@xarc/tag-renderer";
 import { JsxRenderer } from "@xarc/jsx-renderer";
 import { resolvePath } from "./react/utils";
 
@@ -51,7 +51,7 @@ function initializeTemplate(
   }
 
   if (!templateFile) {
-    asyncTemplate = new SimpleRenderer({
+    asyncTemplate = new TagRenderer({
       htmlFile,
       tokenHandlers: finalTokenHandlers.filter(x => x),
       insertTokenIds: routeOptions.insertTokenIds,

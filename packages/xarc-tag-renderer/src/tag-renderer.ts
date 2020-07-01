@@ -9,6 +9,7 @@ import {
   RenderContext,
   loadTokenModuleHandler
 } from "@xarc/render-context";
+
 import { resolvePath } from "./utils";
 import stringArray from "string-array";
 import * as _ from "lodash";
@@ -37,12 +38,12 @@ const tokenOpenTagRegex = new RegExp(
 );
 
 /**
- * SimpleRenderer
+ * TagRenderer
  *
  * A simple HTML renderer from string token based template
  *
  */
-export class SimpleRenderer {
+export class TagRenderer {
   /*
    * Yes, I know, everything any - I just want this to compile for now.
    */

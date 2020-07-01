@@ -1,7 +1,7 @@
 {
-  "name": "@xarc/webapp",
+  "name": "@xarc/index-page",
   "version": "0.0.1",
-  "description": "xarc module for webapps",
+  "description": "Electrode X template and handlers for generating index.html webpage",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
@@ -14,13 +14,14 @@
     "url": "git+https://github.com/electrode-io/electrode.git"
   },
   "keywords": [
-    "webapp"
+    "webapp",
+    "index-page"
   ],
   "dependencies": {
     "@xarc/jsx-renderer": "^1.0.0",
     "@xarc/module-dev": "^2.1.1",
     "@xarc/render-context": "^1.0.0",
-    "@xarc/simple-renderer": "^1.0.0",
+    "@xarc/tag-renderer": "^1.0.0",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.5",
     "xclap": "^0.2.51",
@@ -99,7 +100,7 @@
     "dependencies": {
       "@xarc/jsx-renderer": "../xarc-jsx-renderer",
       "@xarc/render-context": "../xarc-render-context",
-      "@xarc/simple-renderer": "../xarc-simple-renderer"
+      "@xarc/tag-renderer": "../xarc-tag-renderer"
     }
   }
 }

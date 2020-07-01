@@ -2171,6 +2171,69 @@
    xsh: ^0.4.4
   peerDependencies:
    '@xarc/app': ^8.0.21
+'@xarc/index-page':
+ _latest: 0.0.1-fynlocal_h
+ _:
+  ../xarc-index-page: 0.0.1-fynlocal_h
+ 0.0.1-fynlocal_h:
+  $: local
+  _: ../../packages/xarc-index-page
+  dependencies:
+   '@xarc/jsx-renderer': ^1.0.0
+   '@xarc/module-dev': ^2.1.1
+   '@xarc/render-context': ^1.0.0
+   '@xarc/tag-renderer': ^1.0.0
+   ts-node: ^8.10.2
+   typescript: ^3.9.5
+   xclap: ^0.2.51
+   xstdout: ^0.1.1
+'@xarc/jsx-renderer':
+ _latest: 0.0.1-fynlocal_h
+ _:
+  ../xarc-jsx-renderer: 0.0.1-fynlocal_h
+ 0.0.1-fynlocal_h:
+  $: local
+  _: ../../packages/xarc-jsx-renderer
+  dependencies:
+   '@xarc/render-context': ^1.0.0
+   lodash: ^4.17.15
+   munchy: ^1.0.7
+   optional-require: ^1.0.0
+   require-at: ^1.0.4
+   xaa: ^1.4.0
+'@xarc/module-dev':
+ _latest: 2.1.2
+ _:
+  ^2.1.1: 2.1.2
+ 2.1.2:
+  hasI: 1
+  $: sha512-hi8M6tK72lERpVJvX4d/Uqa16LmtpjC782hmCbLK8ukEvZKM3w6TeuU+jadP26Iu6NC4/mcwqY58p6OyK0ZpuQ==
+  _: 'https://registry.npmjs.org/@xarc/module-dev/-/module-dev-2.1.2.tgz'
+  dependencies:
+   filter-scan-dir: ^1.0.10
+   lodash: ^4.17.15
+   xclap: ^0.2.48
+   xsh: ^0.4.4
+'@xarc/render-context':
+ _latest: 1.0.0-fynlocal_h
+ _:
+  ../xarc-render-context: 1.0.0-fynlocal_h
+ 1.0.0-fynlocal_h:
+  $: local
+  _: ../../packages/xarc-render-context
+  dependencies:
+   munchy: ^1.0.8
+   require-at: ^1.0.4
+   xaa: ^1.5.0
+'@xarc/tag-renderer':
+ _latest: 1.0.0-fynlocal_h
+ _:
+  ../xarc-tag-renderer: 1.0.0-fynlocal_h
+ 1.0.0-fynlocal_h:
+  $: local
+  _: ../../packages/xarc-tag-renderer
+  dependencies:
+   ts-node: ^8.10.2
 '@xarc/webpack':
  _latest: 8.0.7-fynlocal_h
  _:
@@ -2452,6 +2515,13 @@ archy:
  1.0.0:
   $: sha1-+cjBN1fMHde8N5rHeyxipcKGjEA=
   _: 'https://registry.npmjs.org/archy/-/archy-1.0.0.tgz'
+arg:
+ _latest: 4.1.3
+ _:
+  ^4.1.0: 4.1.3
+ 4.1.3:
+  $: sha512-58S9QDqG0Xx27YwPSt9fJxivjYl432YCwfDMfZ+71RAqUrZef7LrKQZ3LHLOwCS4FLNBplP533Zx895SeOCHvA==
+  _: 'https://registry.npmjs.org/arg/-/arg-4.1.3.tgz'
 argparse:
  _latest: 1.0.10
  _:
@@ -2888,7 +2958,7 @@ bindings:
 bluebird:
  _latest: 3.7.2
  _:
-  '^2 || ^3,^2.11.0 || ^3.5.3,^3.0.6,^3.5.5': 3.7.2
+  '^2.11.0 || ^3.5.3,^3.0.6,^3.5.5': 3.7.2
   ^2.9.24: 2.11.0
  3.7.2:
   $: sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==
@@ -4149,6 +4219,13 @@ detect-node:
  2.0.4:
   $: sha512-ZIzRpLJrOj7jjP2miAtgqIfmzbxa4ZOr5jJc601zklsfEx9oTzmmj2nVpIPRpNlRTIh8lc1kyViIY7BWSGNmKw==
   _: 'https://registry.npmjs.org/detect-node/-/detect-node-2.0.4.tgz'
+diff:
+ _latest: 4.0.2
+ _:
+  ^4.0.1: 4.0.2
+ 4.0.2:
+  $: sha512-58lmxKSA4BNyLz+HHMUzlOEpg09FV+ev6ZMe3vJihgdxzgcwZ8VoEEPmALCZG9LmqfVoNMMKpttIYTVG6uDY7A==
+  _: 'https://registry.npmjs.org/diff/-/diff-4.0.2.tgz'
 diff-sequences:
  _latest: 25.1.0
  _:
@@ -4350,22 +4427,6 @@ electrode-node-resolver:
   _: ../../packages/electrode-node-resolver
   dependencies:
    require-at: ^1.0.0
-electrode-react-webapp:
- _latest: 3.8.9-fynlocal_h
- _:
-  ../electrode-react-webapp: 3.8.9-fynlocal_h
- 3.8.9-fynlocal_h:
-  $: local
-  _: ../../packages/electrode-react-webapp
-  dependencies:
-   bluebird: '^2 || ^3'
-   electrode-hapi-compat: ^1.2.0
-   http-status-codes: ^1.3.0
-   in-publish: ^2.0.0
-   lodash: ^4.17.10
-   munchy: ^1.0.7
-   require-at: ^1.0.0
-   string-array: ^1.0.0
 electrode-server:
  _latest: 3.0.2
  _:
@@ -5015,7 +5076,7 @@ fill-range:
 filter-scan-dir:
  _latest: 1.0.10
  _:
-  ^1.0.9: 1.0.10
+  '^1.0.10,^1.0.9': 1.0.10
  1.0.10:
   $: sha512-tuDUZPwDmWULMdJ0CopxwRsHuBq2LAwf2zcNMu0LEXD6V414jwrexMaPRS68/ct0ma2m6EREln8n5jYClvggZQ==
   _: 'https://registry.npmjs.org/filter-scan-dir/-/filter-scan-dir-1.0.10.tgz'
@@ -5768,13 +5829,6 @@ imurmurhash:
  0.1.4:
   $: sha1-khi5srkoojixPcT7a21XbyMUU+o=
   _: 'https://registry.npmjs.org/imurmurhash/-/imurmurhash-0.1.4.tgz'
-in-publish:
- _latest: 2.0.0
- _:
-  ^2.0.0: 2.0.0
- 2.0.0:
-  $: sha1-4g/146KvwmkDILbcVSaCqcf631E=
-  _: 'https://registry.npmjs.org/in-publish/-/in-publish-2.0.0.tgz'
 indexes-of:
  _latest: 1.0.1
  _:
@@ -7260,6 +7314,13 @@ make-dir:
   dependencies:
    pify: ^4.0.1
    semver: ^5.6.0
+make-error:
+ _latest: 1.3.6
+ _:
+  ^1.1.1: 1.3.6
+ 1.3.6:
+  $: sha512-s8UhlNe7vPKomQhC1qFelMokr/Sc3AgNbso3n74mVPA5LTZwkB9NlXf4XPamLxJE8h0gh73rM94xvwRT2CVInw==
+  _: 'https://registry.npmjs.org/make-error/-/make-error-1.3.6.tgz'
 makeerror:
  _latest: 1.0.11
  _:
@@ -7569,6 +7630,10 @@ munchy:
  _latest: 1.0.7
  _:
   ^1.0.7: 1.0.7
+  ^1.0.8: 1.0.8
+ 1.0.8:
+  $: sha512-9UHqKbnYvUNoKic/XuwuGX99r2D/d+nhepdWIILiqfJOroMs0NnNBlXSq8N+RSC1/mIZtYuQylDUpYPpwa7ezg==
+  _: 'https://registry.npmjs.org/munchy/-/munchy-1.0.8.tgz'
  1.0.7:
   $: sha512-Evw3XK/wSwHdw2WVQ+aP/1OGD52+zCm9Lc9OdiERTyNnZBgc9GR6VNSj+87X8foHP9LxpRjW98nE8k6/WlLsxA==
   _: 'https://registry.npmjs.org/munchy/-/munchy-1.0.7.tgz'
@@ -9454,7 +9519,7 @@ request-promise-native:
 require-at:
  _latest: 1.0.4
  _:
-  '^1.0.0,^1.0.1,^1.0.2': 1.0.4
+  '^1.0.0,^1.0.1,^1.0.2,^1.0.4': 1.0.4
  1.0.4:
   $: sha512-6CL3iL+yh6Zq5Rakldl0EgtmMkqnEUOrUPTYtOmEbtaks/sR/E4Vgx6LEsRzJ9RbEy2oH3DpZmHYV/h0y3Oj4g==
   _: 'https://registry.npmjs.org/require-at/-/require-at-1.0.4.tgz'
@@ -10060,6 +10125,13 @@ source-map-support:
  _latest: 0.5.16
  _:
   '^0.5.16,^0.5.6,~0.5.12': 0.5.16
+  ^0.5.17: 0.5.19
+ 0.5.19:
+  $: sha512-Wonm7zOCIJzBGQdB+thsPar0kYuCIzYvxZwlBa87yi/Mdjv7Tip2cyVbLj5o0cFPN4EVkuTwb3GDDyUx2DGnGw==
+  _: 'https://registry.npmjs.org/source-map-support/-/source-map-support-0.5.19.tgz'
+  dependencies:
+   buffer-from: ^1.0.0
+   source-map: ^0.6.0
  0.5.16:
   $: sha512-efyLRJDr68D9hBBNIPWFjhpFzURh+KJykQwvMyW5UiZzYwoF6l4YMMDIJJEyFWxWCqfyxLzz6tSfUFR+kXXsVQ==
   _: 'https://registry.npmjs.org/source-map-support/-/source-map-support-0.5.16.tgz'
@@ -10444,10 +10516,10 @@ stylehacks:
    postcss: ^7.0.0
    postcss-selector-parser: ^3.0.0
 subapp-react:
- _latest: 0.0.20-fynlocal_h
+ _latest: 0.0.21-fynlocal_h
  _:
-  ../../packages/subapp-react: 0.0.20-fynlocal_h
- 0.0.20-fynlocal_h:
+  ../../packages/subapp-react: 0.0.21-fynlocal_h
+ 0.0.21-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-react
@@ -10455,38 +10527,38 @@ subapp-react:
    '@babel/runtime': ^7.8.3
    optional-require: ^1.0.0
    subapp-util: ^1.0.5
-   subapp-web: ^1.0.29
+   subapp-web: ^1.0.30
   peerDependencies:
    react: '*'
    react-dom: '*'
 subapp-redux:
- _latest: 1.0.29-fynlocal_h
+ _latest: 1.0.30-fynlocal_h
  _:
-  ../../packages/subapp-redux: 1.0.29-fynlocal_h
- 1.0.29-fynlocal_h:
+  ../../packages/subapp-redux: 1.0.30-fynlocal_h
+ 1.0.30-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-redux
   dependencies:
    optional-require: ^1.0.0
    subapp-util: ^1.0.5
-   subapp-web: ^1.0.29
+   subapp-web: ^1.0.30
   peerDependencies:
    react: '*'
    react-dom: '*'
    redux: '*'
    react-redux: '*'
 subapp-server:
- _latest: 1.2.3-fynlocal_h
+ _latest: 1.2.4-fynlocal_h
  _:
-  ../../packages/subapp-server: 1.2.3-fynlocal_h
- 1.2.3-fynlocal_h:
+  ../../packages/subapp-server: 1.2.4-fynlocal_h
+ 1.2.4-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-server
   dependencies:
    '@hapi/boom': ^7.4.1
-   electrode-react-webapp: ^3.8.9
+   '@xarc/index-page': ^1.0.0
    filter-scan-dir: ^1.0.9
    http-status-codes: ^1.3.0
    optional-require: ^1.0.0
@@ -10503,10 +10575,10 @@ subapp-util:
    filter-scan-dir: ^1.0.9
    optional-require: ^1.0.0
 subapp-web:
- _latest: 1.0.29-fynlocal_h
+ _latest: 1.0.30-fynlocal_h
  _:
-  '../../packages/subapp-web,../subapp-web': 1.0.29-fynlocal_h
- 1.0.29-fynlocal_h:
+  '../../packages/subapp-web,../subapp-web': 1.0.30-fynlocal_h
+ 1.0.30-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-web
@@ -10804,6 +10876,21 @@ tr46:
   _: 'https://registry.npmjs.org/tr46/-/tr46-1.0.1.tgz'
   dependencies:
    punycode: ^2.1.0
+ts-node:
+ _latest: 8.10.2
+ _:
+  ^8.10.2: 8.10.2
+ 8.10.2:
+  $: sha512-ISJJGgkIpDdBhWVu3jufsWpK3Rzo7bdiIXJjQc0ynKxVOVcg2oIrf2H2cejminGrptVc6q6/uynAHNCuWGbpVA==
+  _: 'https://registry.npmjs.org/ts-node/-/ts-node-8.10.2.tgz'
+  dependencies:
+   arg: ^4.1.0
+   diff: ^4.0.1
+   make-error: ^1.1.1
+   source-map-support: ^0.5.17
+   yn: 3.1.1
+  peerDependencies:
+   typescript: '>=2.7'
 tslib:
  _latest: 1.10.0
  _:
@@ -10861,6 +10948,13 @@ typedarray:
  0.0.6:
   $: sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
   _: 'https://registry.npmjs.org/typedarray/-/typedarray-0.0.6.tgz'
+typescript:
+ _latest: 3.9.6
+ _:
+  ^3.9.5: 3.9.6
+ 3.9.6:
+  $: sha512-Pspx3oKAPJtjNwE92YS05HQoY7z2SFyOpHo9MqJor3BXAGNaPUs83CuVp9VISFkSjyRfiTpmKuAYGJB7S7hOxw==
+  _: 'https://registry.npmjs.org/typescript/-/typescript-3.9.6.tgz'
 unicode-canonical-property-names-ecmascript:
  _latest: 1.0.4
  _:
@@ -11474,7 +11568,7 @@ xaa:
 xclap:
  _latest: 0.2.51
  _:
-  ^0.2.50: 0.2.51
+  '^0.2.48,^0.2.50,^0.2.51': 0.2.51
  0.2.51:
   $: sha512-fmbW1+4WgGZ5EUPYsJmZb4nJj3nkOFJvPPPi/DIybmu/BpnLwPz5twFWpIzigGZINsVJ3Ce6I+A+uaEgbLiGgA==
   _: 'https://registry.npmjs.org/xclap/-/xclap-0.2.51.tgz'
@@ -11513,6 +11607,13 @@ xsh:
   _: 'https://registry.npmjs.org/xsh/-/xsh-0.4.4.tgz'
   dependencies:
    shcmd: ^0.7.9
+xstdout:
+ _latest: 0.1.1
+ _:
+  ^0.1.1: 0.1.1
+ 0.1.1:
+  $: sha1-hhGufW4pjy0tc5NuoQ1wnpMOCVo=
+  _: 'https://registry.npmjs.org/xstdout/-/xstdout-0.1.1.tgz'
 xtend:
  _latest: 4.0.2
  _:
@@ -11582,3 +11683,10 @@ yargs-parser:
   dependencies:
    camelcase: ^5.0.0
    decamelize: ^1.2.0
+yn:
+ _latest: 4.0.0
+ _:
+  3.1.1: 3.1.1
+ 3.1.1:
+  $: sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==
+  _: 'https://registry.npmjs.org/yn/-/yn-3.1.1.tgz'
