@@ -1,7 +1,6 @@
 "use strict";
 
 const assert = require("assert");
-const Promise = require("bluebird");
 
 class Output {
   constructor() {

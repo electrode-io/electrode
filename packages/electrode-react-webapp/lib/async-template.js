@@ -12,7 +12,7 @@ const Token = require("./token");
 const stringArray = require("string-array");
 const _ = require("lodash");
 const Path = require("path");
-const Promise = require("bluebird");
+const xaa = require("xaa");
 
 const { TEMPLATE_DIR } = require("./symbols");
 
@@ -76,16 +76,19 @@ class AsyncTemplate {
   render(options) {
     const context = new RenderContext(options, this);
 
-    return Promise.each(this._beforeRenders, r => r.beforeRender(context))
+    return xaa
+      .each(this._beforeRenders, r => r.beforeRender(context))
       .then(() => {
         return this._renderer.render(context);
       })
       .then(result => {
-        return Promise.each(this._afterRenders, r => r.afterRender(context)).then(() => {
-          context.result = context.isVoidStop ? context.voidResult : result;
+        return xaa
+          .each(this._afterRenders, r => r.afterRender(context))
+          .then(() => {
+            context.result = context.isVoidStop ? context.voidResult : result;
 
-          return context;
-        });
+            return context;
+          });
       });
   }
 

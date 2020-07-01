@@ -1,7 +1,6 @@
 "use strict";
 
 const Path = require("path");
-const Promise = require("bluebird");
 const express = require("express");
 const registerRoutes = require("../../lib/express");
 const request = require("superagent");

@@ -1,9 +1,9 @@
 "use strict";
 
-const Promise = require("bluebird");
 const Path = require("path");
 const AsyncTemplate = require("../../lib/async-template");
 const RenderContext = require("../../lib/render-context");
+const xaa = require("xaa");
 const xstdout = require("xstdout");
 
 const expect = require("chai").expect;
@@ -63,7 +63,8 @@ from wants next module<!-- unhandled token test-not-found -->
 from string only module
 from async ok module`;
     const intercept = xstdout.intercept(false);
-    return Promise.try(() => asyncTemplate.render({}))
+    return xaa
+      .wrap(() => asyncTemplate.render({}))
       .then(context => {
         intercept.restore();
         expect(

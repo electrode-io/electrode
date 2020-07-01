@@ -4,8 +4,6 @@ const Fs = require("fs");
 const Path = require("path");
 const HttpStatusCodes = require("http-status-codes");
 
-const Promise = require("bluebird");
-
 const HTTP_ERROR_500 = 500;
 
 function getContent(renderSs, options, context) {

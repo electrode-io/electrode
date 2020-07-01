@@ -1,7 +1,6 @@
 "use strict";
 
 /* eslint-disable complexity */
-const Promise = require("bluebird");
 
 const { TOKEN_HANDLER } = require("./symbols");
 

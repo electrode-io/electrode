@@ -3,7 +3,6 @@
 /* eslint-disable quotes */
 
 const Fs = require("fs");
-const Promise = require("bluebird");
 const assign = require("object-assign");
 const electrodeServer = require("electrode-server");
 const Path = require("path");
@@ -14,6 +13,7 @@ const ReactDOMServer = require("react-dom/server");
 const React = require("react");
 const Helmet = require("react-helmet").Helmet;
 const { runFinally, asyncVerify } = require("run-verify");
+const xaa = require("xaa");
 
 describe("hapi 16 electrode-react-webapp", () => {
   let config;
@@ -1695,7 +1695,8 @@ describe("hapi 16 electrode-react-webapp", () => {
 
         updateTestContent(testContent1);
 
-        return Promise.try(makeRequest)
+        return xaa
+          .wrap(makeRequest)
           .then(res => {
             expect(res.statusCode).to.equal(200);
             expect(res.result).to.contain("<title>Electrode App</title>");

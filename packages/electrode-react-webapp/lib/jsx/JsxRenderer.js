@@ -8,17 +8,8 @@ const loadHandler = require("../load-handler");
 const RenderContext = require("../render-context");
 const { omittedCloseTags, expandProps } = require("./utils");
 const Token = require("../token");
-const Promise = require("bluebird");
 const { TOKEN_HANDLER } = require("../symbols");
-
-const createDefer = () => {
-  const defer = {};
-  defer.promise = new Promise((resolve, reject) => {
-    defer.resolve = resolve;
-    defer.reject = reject;
-  });
-  return defer;
-};
+const xaa = require("xaa");
 
 class JsxRenderer {
   constructor(options) {
@@ -49,10 +40,11 @@ class JsxRenderer {
   }
 
   render(options) {
-    const defer = createDefer();
+    const defer = xaa.makeDefer();
     const context = new RenderContext(options, this);
 
-    return Promise.each(this._beforeRenders, r => r.beforeRender(context))
+    return xaa
+      .each(this._beforeRenders, r => r.beforeRender(context))
       .then(() => {
         return this._render(this._template, context, 0, defer);
       })
@@ -61,11 +53,13 @@ class JsxRenderer {
           .then(() => context.output.close())
           .then(result => {
             /* istanbul ignore next */
-            return Promise.each(this._afterRenders, r => r.afterRender(context)).then(() => {
-              context.result = context.isVoidStop ? context.voidResult : result;
+            return xaa
+              .each(this._afterRenders, r => r.afterRender(context))
+              .then(() => {
+                context.result = context.isVoidStop ? context.voidResult : result;
 
-              return context;
-            });
+                return context;
+              });
           });
       })
       .catch(err => {

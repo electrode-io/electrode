@@ -3,7 +3,6 @@
 /* eslint-disable no-magic-numbers */
 
 const Path = require("path");
-const Promise = require("bluebird");
 const Koa = require("koa");
 const koaRouter = require("koa-router");
 const registerRoutes = require("../../lib/koa");

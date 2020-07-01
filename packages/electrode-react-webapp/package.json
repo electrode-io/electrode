@@ -54,14 +54,14 @@
     "index.js"
   ],
   "dependencies": {
-    "bluebird": "^2 || ^3",
     "electrode-hapi-compat": "^1.2.0",
     "http-status-codes": "^1.3.0",
     "in-publish": "^2.0.0",
     "lodash": "^4.17.10",
     "munchy": "^1.0.7",
     "require-at": "^1.0.0",
-    "string-array": "^1.0.0"
+    "string-array": "^1.0.0",
+    "xaa": "^1.6.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
@@ -72,7 +72,7 @@
     "benchmark": "^2.1.4",
     "electrode-archetype-njs-module-dev": "^3.0.0",
     "electrode-redux-router-engine": "../electrode-redux-router-engine",
-    "electrode-server": "^1.0.1",
+    "electrode-server": "^1.8.0",
     "electrode-server2": "./electrode-server2",
     "express": "^4.15.4",
     "koa": "^2.3.0",
