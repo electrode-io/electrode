@@ -43,8 +43,9 @@ module.exports = {
             request
           });
 
-          const data = context.result;
+          const data =  context.result;
           const status = data.status;
+
           if (data instanceof Error) {
             // rethrow to get default error behavior below with helpful errors in dev mode
             throw data;

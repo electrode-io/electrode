@@ -49,6 +49,7 @@
     "dist"
   ],
   "dependencies": {
+    "munchy": "^1.0.8",
     "require-at": "^1.0.4",
     "xaa": "^1.5.0"
   },
