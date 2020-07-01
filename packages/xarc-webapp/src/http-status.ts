@@ -1,3 +1,4 @@
+// @ts-ignore
 import * as HttpStatusCode from "http-status-codes";
 
 export default {
