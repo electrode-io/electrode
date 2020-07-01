@@ -36,7 +36,7 @@
     "typedoc": "^0.17.4",
     "typescript": "^3.8.3",
     "xstdout": "^0.1.1",
-    "@xarc/render-context": "../../packages/xarc-render-context"
+    "@xarc/render-context": "^1.0.0"
   },
   "mocha": {
     "require": [
@@ -79,5 +79,10 @@
     "functions": 100,
     "lines": 100,
     "cache": false
+  },
+  "fyn": {
+    "devDependencies": {
+      "@xarc/render-context": "../xarc-render-context"
+    }
   }
 }
