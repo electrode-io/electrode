@@ -43,7 +43,7 @@ module.exports = {
             request
           });
 
-          const data =  context.result;
+          const data = context.result;
           const status = data.status;
 
           if (data instanceof Error) {

@@ -1,0 +1,27 @@
+{
+  "assetsByChunkName": {
+    "bundle": [
+      "bundle.f07a873ce87fc904a6a5.js",
+      "style.f07a873ce87fc904a6a5.css"
+    ]
+  },
+  "assets": [{
+     "name": "style.f07a873ce87fc904a6a5.css",
+      "size": 888,
+      "chunks": [
+        0
+      ],
+      "chunkNames": [
+        "main"
+      ]
+  }, {
+    "name": "bundle.f07a873ce87fc904a6a5.js",
+    "size": 888,
+    "chunks": [
+      0
+    ],
+    "chunkNames": [
+      "main"
+    ]
+  }]
+}

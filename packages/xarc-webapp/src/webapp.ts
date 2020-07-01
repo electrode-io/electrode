@@ -62,7 +62,7 @@ function initializeTemplate(
     asyncTemplate.initializeRenderer();
   } else {
     const templateFullPath = resolvePath(tmplFile);
-    const template = resolvePath(tmplFile);
+    const template = require(templateFullPath);
     asyncTemplate = new JsxRenderer({
       templateFullPath: Path.dirname(templateFullPath),
       template: _.get(template, "default", template),

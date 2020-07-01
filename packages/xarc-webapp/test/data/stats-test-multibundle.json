@@ -1,0 +1,71 @@
+{
+  "assetsByChunkName": {
+    "foo": [
+      "foo.bundle.f07a873ce87fc904a6a5.js",
+      "foo.style.f07a873ce87fc904a6a5.css"
+    ],
+    "bar": [
+      "bar.bundle.f07a873ce87fc904a6a5.js",
+      "bar.style.f07a873ce87fc904a6a5.css"
+    ],
+    "home": [
+      "home.bundle.f07a873ce87fc904a6a5.js",
+      "home.style.f07a873ce87fc904a6a5.css"
+    ]
+  },
+  "assets": [{
+     "name": "foo.style.f07a873ce87fc904a6a5.css",
+      "size": 888,
+      "chunks": [
+        0
+      ],
+      "chunkNames": [
+        "foo"
+      ]
+  }, {
+    "name": "foo.bundle.f07a873ce87fc904a6a5.js",
+    "size": 888,
+    "chunks": [
+      0
+    ],
+    "chunkNames": [
+      "foo"
+    ]
+  }, {
+     "name": "bar.style.f07a873ce87fc904a6a5.css",
+      "size": 888,
+      "chunks": [
+        0
+      ],
+      "chunkNames": [
+        "bar"
+      ]
+  }, {
+    "name": "bar.bundle.f07a873ce87fc904a6a5.js",
+    "size": 888,
+    "chunks": [
+      0
+    ],
+    "chunkNames": [
+      "bar"
+    ]
+  }, {
+     "name": "home.style.f07a873ce87fc904a6a5.css",
+      "size": 888,
+      "chunks": [
+        0
+      ],
+      "chunkNames": [
+        "home"
+      ]
+  }, {
+    "name": "home.bundle.f07a873ce87fc904a6a5.js",
+    "size": 888,
+    "chunks": [
+      0
+    ],
+    "chunkNames": [
+      "home"
+    ]
+  }]
+}
