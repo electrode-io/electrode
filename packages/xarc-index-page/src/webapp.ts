@@ -62,7 +62,7 @@ function initializeTemplate(
     asyncTemplate.initializeRenderer();
   } else {
     const templateFullPath = resolvePath(tmplFile);
-    const template = require(templateFullPath);
+    const template = require(templateFullPath); //  eslint-disable-line
     asyncTemplate = new JsxRenderer({
       templateFullPath: Path.dirname(templateFullPath),
       template: _.get(template, "default", template),
@@ -290,7 +290,7 @@ const getContentResolver = (registerOptions, pathData, path) => {
       resolved = {
         content: {
           status: 200,
-          html: "<!-- SSR disabled by options.serverSideRendring -->"
+          html: "<!-- SSR disabled by options.serverSideRendering -->"
         }
       };
     }
@@ -298,4 +298,5 @@ const getContentResolver = (registerOptions, pathData, path) => {
     return resolved.content;
   };
 };
+
 export { setupOptions, setupPathOptions, makeRouteHandler, resolveContent, getContentResolver };
