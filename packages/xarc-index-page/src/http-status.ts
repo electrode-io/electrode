@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
 // @ts-ignore
 import * as HttpStatusCode from "http-status-codes";
 

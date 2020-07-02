@@ -1,8 +1,8 @@
 import { expect } from "chai";
-const xstdout = require("xstdout");
+import xstdout = require("xstdout");
 import { describe } from "mocha";
-import * as Path from "path";
 import * as Webapp from "../../src/Webapp";
+
 describe("resolveContent", function () {
   it("should require module with relative path", () => {
     const f = "./test/data/foo.js";
@@ -38,4 +38,3 @@ describe("resolveContent", function () {
     expect(mod).to.equal(f);
   });
 });
-
