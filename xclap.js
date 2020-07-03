@@ -9,6 +9,7 @@ const fs = require("fs");
 const Path = require("path");
 const yoTest = require("yeoman-test");
 const _ = require("lodash");
+const { serial } = require("xclap");
 
 const isWin32 = process.platform.startsWith("win32");
 const packagesDir = Path.join(__dirname, "packages");
@@ -188,7 +189,50 @@ xclap.load({
         });
     }
   },
-
+  "xarc-build": () => {
+    [
+      "xarc-render-context",
+      "xarc-jsx-renderer",
+      "xarc-tag-renderer",
+      "xarc-index-page",
+      "subapp-server",
+      "subapp-web",
+      "subapp-react"
+    ].forEach(pkg => {
+      console.log("installing " + pkg);
+      `~$cd ${Path.join(__dirname, "packages", pkg)} && fyn && npm run build && cd ../..`;
+    });
+  },
+  ".xarc-clean-build": () => {
+    [
+      "xarc-render-context",
+      "xarc-jsx-renderer",
+      "xarc-tag-renderer",
+      "xarc-index-page",
+      "subapp-server",
+      "subapp-web",
+      "subapp-react"
+    ].forEach(pkg => {
+      console.log("installing " + pkg);
+      `~$cd ${Path.join(
+        __dirname,
+        "packages",
+        pkg
+      )} && rm -rf node_modules && fyn && npm run build && cd ../..`;
+    });
+  },
+  ".clear-ports": () => {
+    return exec("lsof -iTCP -sTCP:LISTEN -P -n |grep '2992|3000|3100' |xargs kill -9");
+  },
+  ".run-sample": {
+    desc: "compile and run a sample",
+    dep: [".xarc-clean-build", ".clear-ports"],
+    task: () => {
+      const localClap = Path.join("node_modules", ".bin", "clap");
+      const dir = `samples/${process.execArgv[2] || "poc-subapp-min-fastify"}`;
+      return exec({ cwd: dir }, `fyn --pg simple -q v i && ${localClap} dev`);
+    }
+  },
   ".build-sample-dll": () => {
     return runAppTest(Path.join(__dirname, "samples/react-vendor-dll"));
   },
