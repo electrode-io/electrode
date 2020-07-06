@@ -1,22 +1,22 @@
 module.exports = {
   title: 'electrode OSS',
   tagline: 'Quickly build React/Node.js applications with an emphasis on performance, component reusability, and simple deployment.',
-  url: 'https://your-docusaurus-test-site.com',
+  url: 'https://electrode.io/electrode',
   baseUrl: '/',
   favicon: 'img/favicon.ico',
   organizationName: 'GTP.js', // Usually your GitHub org/user name.
   projectName: 'OSS', // Usually your repo name.
   githubHost: 'https://github.com/electrode-io/electrode/tree/master/docs',
-  favicon: 'img/electrode-logo.png',
+  favicon: 'img/electrode-io-logo.png',
   plugins: [
     'docusaurus-lunr-search'
   ],
   themeConfig: {
     navbar: {
-      title: 'electrode OSS',
+      title: ' electrode OSS',
       logo: {
         alt: 'electrode logo',
-        src: 'img/electrode-logo.svg',
+        src: 'img/electrode-io-logo.png',
       },
       links: [
         {
