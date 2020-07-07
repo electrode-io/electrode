@@ -1,6 +1,6 @@
 /**
  * @packageDocumentation
- * @module index
+ * @module @xarc/jsx-renderer
  */
 
 /* eslint-disable filenames/match-regex */

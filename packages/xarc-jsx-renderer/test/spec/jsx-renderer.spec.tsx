@@ -16,6 +16,7 @@ import Template7 from "../jsx-templates/test7";
 import Template8 from "../jsx-templates/test8";
 import Template9 from "../jsx-templates/test9";
 import Template91 from "../jsx-templates/test91";
+import TemplateLoadTokenHandler from "../jsx-templates/test-load-token-handler";
 
 describe("IndexPage", function () {
   it("should have static memoize", () => {
@@ -30,7 +31,7 @@ describe("Jsx Renderer", function () {
       insertTokenIds: true,
       templateFullPath: Path.dirname(require.resolve("../jsx-templates/test1")),
       template: Template,
-      tokenHandlers: "./test/fixtures/token-handler"
+      tokenHandlers: "../fixtures/token-handler"
     });
     expect(renderer.getTokenInst({ props: { _id: "blah" } })).to.equal(undefined);
   });
@@ -40,7 +41,7 @@ describe("Jsx Renderer", function () {
       insertTokenIds: true,
       templateFullPath: Path.dirname(require.resolve("../jsx-templates/test1")),
       template: Template,
-      tokenHandlers: "./test/fixtures/token-handler"
+      tokenHandlers: "../fixtures/token-handler"
     });
     renderer.initializeRenderer();
     renderer.initializeRenderer(true);
@@ -65,7 +66,7 @@ describe("Jsx Renderer", function () {
           </html>
         </IndexPage>
       ),
-      tokenHandlers: "./test/fixtures/token-handler"
+      tokenHandlers: "../fixtures/token-handler"
     });
     renderer.initializeRenderer();
     return renderer.render({}).then(context => {
@@ -115,7 +116,7 @@ describe("Jsx Renderer", function () {
           </html>
         </IndexPage>
       ),
-      tokenHandlers: "./test/fixtures/token-handler"
+      tokenHandlers: "../fixtures/token-handler"
     });
 
     renderer.initializeRenderer();
@@ -151,7 +152,7 @@ describe("Jsx Renderer", function () {
       insertTokenIds: true,
       templateFullPath: Path.dirname(require.resolve("../jsx-templates/test1")),
       template: Template,
-      tokenHandlers: "./test/fixtures/token-handler"
+      tokenHandlers: "../fixtures/token-handler"
     });
 
     const verify = context => {
@@ -161,7 +162,7 @@ describe("Jsx Renderer", function () {
         .map(x => x.trimRight())
         .join("\n");
 
-      expect(r).equal(test1ExpectedOutput);
+      expect(r).contains(test1ExpectedOutput);
     };
 
     renderer.initializeRenderer();
@@ -176,7 +177,7 @@ describe("Jsx Renderer", function () {
   it("should handle failure in nesting async components", async () => {
     const renderer = new JsxRenderer({
       insertTokenIds: true,
-      templateFullPath: Path.dirname(require.resolve("../jsx-templates/test2")),
+      templateFullPath: null, // test passing no templateFullPath so CWD would be used
       template: Template2,
       tokenHandlers: "./test/fixtures/token-handler"
     });
@@ -191,7 +192,7 @@ describe("Jsx Renderer", function () {
     const renderer = new JsxRenderer({
       templateFullPath: Path.dirname(require.resolve("../jsx-templates/test4")),
       template: Template4,
-      tokenHandlers: "./test/fixtures/token-handler"
+      tokenHandlers: "../fixtures/token-handler"
     });
 
     renderer.initializeRenderer();
@@ -213,7 +214,7 @@ describe("Jsx Renderer", function () {
       insertTokenIds: true,
       templateFullPath: Path.dirname(require.resolve("../jsx-templates/test3")),
       template: Template3,
-      tokenHandlers: "./test/fixtures/token-handler"
+      tokenHandlers: "../fixtures/token-handler"
     });
 
     renderer.initializeRenderer();
@@ -235,7 +236,7 @@ describe("Jsx Renderer", function () {
       insertTokenIds: false,
       templateFullPath: Path.dirname(require.resolve("../jsx-templates/test5")),
       template: Template5,
-      tokenHandlers: "./test/fixtures/token-handler"
+      tokenHandlers: "../fixtures/token-handler"
     });
 
     const verify = context => {
@@ -263,7 +264,7 @@ describe("Jsx Renderer", function () {
       insertTokenIds: false,
       templateFullPath: Path.dirname(require.resolve("../jsx-templates/test6")),
       template: Template6,
-      tokenHandlers: "./test/fixtures/token-handler"
+      tokenHandlers: "../fixtures/token-handler"
     });
 
     const verify = context => {
@@ -288,7 +289,7 @@ World`
       insertTokenIds: true,
       templateFullPath: Path.dirname(require.resolve("../jsx-templates/test7")),
       template: Template7,
-      tokenHandlers: "./test/fixtures/token-handler"
+      tokenHandlers: "../fixtures/token-handler"
     });
 
     const verify = context => {
@@ -310,7 +311,7 @@ World`
       insertTokenIds: true,
       templateFullPath: Path.dirname(require.resolve("../jsx-templates/test8")),
       template: Template8,
-      tokenHandlers: "./test/fixtures/token-handler"
+      tokenHandlers: "../fixtures/token-handler"
     });
 
     const verify = context => {
@@ -332,7 +333,7 @@ World`
       insertTokenIds: true,
       templateFullPath: Path.dirname(require.resolve("../jsx-templates/test9")),
       template: Template9,
-      tokenHandlers: "./test/fixtures/token-handler"
+      tokenHandlers: "../fixtures/token-handler"
     });
 
     const verify = context => {
@@ -355,7 +356,7 @@ World`
       templateFullPath: Path.dirname(require.resolve("../jsx-templates/test91")),
       template: Template91,
       tokenHandlers: [
-        "./test/fixtures/token-handler",
+        "../fixtures/token-handler",
         {
           name: "test1",
           beforeRender: () => {
@@ -380,5 +381,19 @@ World`
     return promise.then(context => {
       verify(context);
     });
+  });
+
+  it("should handle LoadTokenHandler from template", async () => {
+    const renderer = new JsxRenderer({
+      insertTokenIds: true,
+      templateFullPath: Path.dirname(require.resolve("../jsx-templates/test91")),
+      template: TemplateLoadTokenHandler
+    });
+
+    renderer.initializeRenderer();
+    const context = await renderer.render({});
+    const result = await context.result;
+    expect(result).contains("this is a test<!-- FOO END -->");
+    expect(result).contains("<div>user-token-1</div>");
   });
 });

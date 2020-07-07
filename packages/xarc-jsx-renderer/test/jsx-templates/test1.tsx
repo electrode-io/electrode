@@ -26,7 +26,7 @@ class TestComponent1 extends Component {
 }
 
 function AsyncComponent(props, context, scope) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     setTimeout(() => {
       scope.output.add(`${props.indent}async component ${props.key}\n`);
       resolve(<div>async component children: {props.children}</div>);

@@ -65,3 +65,13 @@ module.exports = () => {
     }
   };
 };
+
+module.exports.handler2 = () => {
+  return {
+    tokens: {
+      TOKEN_HANDLER2: () => {
+        return "test token handler2";
+      }
+    }
+  };
+};

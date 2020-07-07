@@ -1,7 +1,6 @@
 /** @ignore */ /** */
 
-/* eslint-disable max-params */
-/* eslint-disable comma-dangle, arrow-parens */
+/* eslint-disable max-params, max-statements */
 
 import { TOKEN_HANDLER } from "@xarc/render-context";
 
@@ -33,7 +32,7 @@ export function processToken(props, context, scope, forRequire = false) {
   }
 
   const r = tokenInst[TOKEN_HANDLER](context, tokenInst);
-  return context.handleTokenResult(tokenInst.id, r, (err) => {
+  return context.handleTokenResult(tokenInst.id, r, err => {
     if (insertTokenIds) {
       scope.output.add(`<!-- ${tokenInst.id} END -->`);
     }
