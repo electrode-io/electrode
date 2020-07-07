@@ -7,7 +7,7 @@ const HttpStatus = require("./http-status");
 const subAppUtil = require("subapp-util");
 const HttpStatusCodes = require("http-status-codes");
 
-const { makeErrorStackResponse } = require("./utils");
+const { makeErrorStackResponse, checkSSRMetricsReporting } = require("./utils");
 const { getSrcDir, setupRouteRender, searchRoutesFromFile } = require("./setup-hapi-routes");
 
 module.exports = {
@@ -22,11 +22,7 @@ module.exports = {
 
     const { routes, topOpts } = searchRoutesFromFile(srcDir, pluginOpts);
 
-    const reporting = _.get(topOpts, "reporting", {});
-    if (!reporting.enable || !reporting.reporter) {
-      // eslint-disable-next-line
-      console.warn(`Warning: Metric reporting for ssr not enabled or no reporter specified.`);
-    }
+    checkSSRMetricsReporting(topOpts);
 
     const subApps = await subAppUtil.scanSubAppsFromDir(srcDir);
     const subAppsByPath = subAppUtil.getSubAppByPathMap(subApps);

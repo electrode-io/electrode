@@ -1,6 +1,6 @@
 /* @jsx createElement */
 
-import { IndexPage, createElement, Token, Require } from "../template";
+import { IndexPage, createElement, Token, Require, LoadTokenHandler } from "@xarc/jsx-renderer";
 import { ReserveSpot } from "subapp-web";
 
 const RenderSubApps = (props, context) => {
@@ -42,6 +42,8 @@ const RenderSubApps = (props, context) => {
 
 const Template = (
   <IndexPage DOCTYPE="html">
+    <LoadTokenHandler handler="@xarc/index-page" call="tokenHandler" />
+    <Token _id={tokens.FOO} />
     <Token _id="INITIALIZE" />
     <html lang="en">
       <head>

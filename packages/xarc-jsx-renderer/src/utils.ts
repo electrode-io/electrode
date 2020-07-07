@@ -1,7 +1,5 @@
 /** @ignore */ /** */
 
-/* eslint-disable comma-dangle, arrow-parens */
-
 export function expandProps(props, context) {
   let s = "";
 
@@ -38,6 +36,6 @@ export const omittedCloseTags = {
   param: true,
   source: true,
   track: true,
-  wbr: true,
+  wbr: true
   // NOTE: menuitem's close tag should be omitted, but that causes problems.
 };

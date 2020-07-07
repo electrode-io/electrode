@@ -5,8 +5,11 @@
 const assert = require("assert");
 const _ = require("lodash");
 const HttpStatus = require("./http-status");
-const Webapp = require("@xarc/index-page");
-const { errorResponse, resolveChunkSelector, updateFullTemplate } = require("./utils");
+const Routing = require("./routing");
+const { errorResponse, updateFullTemplate } = require("./utils");
+const {
+  utils: { resolveChunkSelector }
+} = require("@xarc/index-page");
 const HttpStatusCodes = require("http-status-codes");
 
 module.exports = function registerRoutes({ routes, topOpts, server }) {
@@ -30,7 +33,7 @@ module.exports = function registerRoutes({ routes, topOpts, server }) {
 
     routeOptions.__internals = { chunkSelector };
 
-    const routeHandler = Webapp.makeRouteHandler(routeOptions);
+    const routeHandler = Routing.makeRouteHandler(routeOptions);
 
     const useStream = routeOptions.useStream !== false;
 

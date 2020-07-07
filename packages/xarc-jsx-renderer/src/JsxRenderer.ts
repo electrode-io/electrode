@@ -1,11 +1,13 @@
 /**
  * @packageDocumentation
- * @module index
+ * @module @xarc/jsx-renderer
  */
 
 /* eslint-disable max-statements, max-params, prefer-template, complexity */
-/* eslint-disable comma-dangle, arrow-parens, filenames/match-regex */
+/* eslint-disable filenames/match-regex */
 
+import * as requireAt from "require-at";
+import * as Path from "path";
 import * as assert from "assert";
 import * as _ from "lodash";
 import {
@@ -30,6 +32,7 @@ export class JsxRenderer {
   private _beforeRenders: any;
   private _afterRenders: any;
   private _handlersLookup: any;
+  private _templateRequire: any;
 
   constructor(options: any) {
     this._options = options;
@@ -48,6 +51,7 @@ export class JsxRenderer {
       options
     );
     this._template = options.template;
+    this._templateRequire = requireAt(Path.resolve(this._options.templateFullPath || ""));
   }
 
   get insertTokenIds() {
@@ -206,8 +210,31 @@ export class JsxRenderer {
     }
   }
 
+  registerTokenHandler(name, handlerMod, call) {
+    let mod = handlerMod;
+    const isStr = typeof mod === "string";
+    if (isStr && !name) {
+      name = this._templateRequire.resolve(mod);
+    }
+
+    const id = name + (call || "");
+    if (this._handlersMap[id]) {
+      return;
+    }
+    if (typeof mod === "string") {
+      mod = loadTokenModuleHandler(mod, this.templateFullPath, call);
+      mod = (call && mod[call]) || mod;
+    }
+    let handler = mod(this._handlerContext, this);
+    if (!handler.tokens) {
+      handler = { name, tokens: handler };
+    }
+    this._handlersMap[id] = handler;
+    this._handlersLookup = [handler].concat(this._handlersLookup);
+  }
+
   private _loadTokenHandler(path) {
-    const mod = loadTokenModuleHandler(path);
+    const mod = loadTokenModuleHandler(path, this.templateFullPath);
     return mod(this._handlerContext, this);
   }
 

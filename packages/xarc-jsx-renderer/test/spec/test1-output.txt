@@ -17,7 +17,7 @@ my test
 <title>user-handler-title</title><!-- PAGE_TITLE END -->
 <!-- BEGIN require(subapp-web/lib/init) props: {} -->
 
-token process module subapp-web/lib/init not found
+@xarc/render-context: token process module subapp-web/lib/init not found
 <!-- require(subapp-web/lib/init) END -->
 <!-- CRITICAL_CSS removed due to its handler set to null -->
 <style>.test {
@@ -70,12 +70,12 @@ hello
 <div>from custom-1</div><!-- require(../fixtures/custom-1) END -->
 <!-- BEGIN require(subapp-web/lib/load) props: {"_concurrent":true,"name":"Header","timestamp":true,"startOnLoad":true,"elementId":"subapp-header01","serverSideRendering":true,"hydrateServerData":true,"clientSideRendering":true,"inlineScript":true} -->
 
-token process module subapp-web/lib/load not found
+@xarc/render-context: token process module subapp-web/lib/load not found
 <!-- require(subapp-web/lib/load) END -->
 </div>
 <div class="blah" style="background: green;"><!-- BEGIN require(subapp-web/lib/load) props: {"_concurrent":true,"name":"MainBody","timestamp":true,"elementId":"subapp-mainbody","useStream":true,"async":true,"hydrateServerData":true,"serverSideRendering":true} -->
 
-token process module subapp-web/lib/load not found
+@xarc/render-context: token process module subapp-web/lib/load not found
 <!-- require(subapp-web/lib/load) END -->
 </div>
 </body>

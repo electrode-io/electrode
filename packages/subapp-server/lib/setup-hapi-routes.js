@@ -15,15 +15,19 @@ const Boom = require("@hapi/boom");
 const HttpStatus = require("./http-status");
 const readFile = util.promisify(Fs.readFile);
 const xaa = require("xaa");
-const Webapp = require("@xarc/index-page");
+const Routing = require("./routing");
 const subAppUtil = require("subapp-util");
 const registerRoutes = require("./register-routes");
 
 const {
+  utils: { resolveChunkSelector }
+} = require("@xarc/index-page");
+
+const {
   errorResponse,
-  resolveChunkSelector,
   getDefaultRouteOptions,
-  updateFullTemplate
+  updateFullTemplate,
+  checkSSRMetricsReporting
 } = require("./utils");
 
 async function searchRoutesDir(srcDir, pluginOpts) {
@@ -123,7 +127,7 @@ function setupRouteRender({ subAppsByPath, srcDir, routeOptions }) {
 
   // const useStream = routeOptions.useStream !== false;
 
-  const routeHandler = Webapp.makeRouteHandler(routeOptions);
+  const routeHandler = Routing.makeRouteHandler(routeOptions);
 
   return routeHandler;
 }
@@ -246,11 +250,7 @@ function searchRoutesFromFile(srcDir, pluginOpts) {
 async function setupRoutesFromFile(srcDir, server, pluginOpts) {
   const { routes, topOpts } = searchRoutesFromFile(srcDir, pluginOpts);
 
-  const reporting = _.get(topOpts, "reporting", {});
-  if (!reporting.enable || !reporting.reporter) {
-    // eslint-disable-next-line
-    console.warn(`Warning: Metric reporting for ssr not enabled or no reporter specified.`);
-  }
+  checkSSRMetricsReporting(topOpts);
 
   await handleFavIcon(server, topOpts);
 
@@ -274,11 +274,7 @@ async function setupRoutesFromDir(server, pluginOpts, fromDir) {
 
   const topOpts = _.merge(getDefaultRouteOptions(), fromDir.options, pluginOpts);
 
-  const reporting = _.get(topOpts, "reporting", {});
-  if (!reporting.enable || !reporting.reporter) {
-    // eslint-disable-next-line
-    console.warn(`Warning: Metric reporting for ssr not enabled or no reporter specified.`);
-  }
+  checkSSRMetricsReporting(topOpts);
 
   topOpts.routes = _.merge({}, routes, topOpts.routes);
 

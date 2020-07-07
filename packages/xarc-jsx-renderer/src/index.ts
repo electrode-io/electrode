@@ -1,18 +1,19 @@
-/* eslint-disable comma-dangle, arrow-parens, no-param-reassign */
+/* eslint-disable no-param-reassign */
 /**
  * @packageDocumentation
- * @module index
+ * @module @xarc/jsx-renderer
  */
 
 import { Component } from "./Component";
+import { JsxRenderer } from "./JsxRenderer";
 import { Token } from "./tags/Token";
 import { IndexPage } from "./tags/IndexPage";
 import { Require } from "./tags/Require";
 import { Literal } from "./tags/Literal";
-import { JsxRenderer } from "./JsxRenderer";
+import { LoadTokenHandler } from "./tags/LoadTokenHandler";
 
 /** @ignore */
-export { Component, Token, IndexPage, Require, Literal, JsxRenderer };
+export { Component, Token, IndexPage, Require, Literal, JsxRenderer, LoadTokenHandler };
 
 let ELEMENT_ID = 0;
 
@@ -43,7 +44,7 @@ export function createElement(type: any, props: any, ...children: any[]) {
     id: ELEMENT_ID++,
     type,
     children,
-    props,
+    props
   };
 
   const literal = typeof type === "string";

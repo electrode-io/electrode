@@ -1,6 +1,6 @@
 /* @jsx createElement */
 
-const { IndexPage, createElement, Token, Require } = require("../../lib/jsx");
+const { IndexPage, createElement, Token } = require("../../src");
 
 const Test = (props, context) => {
   context.intercept({

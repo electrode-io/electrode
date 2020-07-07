@@ -1,9 +1,9 @@
 /**
  * @packageDocumentation
- * @module index
+ * @module @xarc/jsx-renderer
  */
 
-/* eslint-disable comma-dangle, arrow-parens, filenames/match-regex */
+/* eslint-disable filenames/match-regex */
 /* eslint-disable no-unused-vars, no-magic-numbers */
 
 import * as Path from "path";
