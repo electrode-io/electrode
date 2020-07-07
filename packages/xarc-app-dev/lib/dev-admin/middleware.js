@@ -168,6 +168,8 @@ class Middleware {
     this.dllDevUrl = urlJoin(this.devBaseUrl, "/dll");
 
     const LOADABLE_STATS = "loadable-stats.json";
+    const LOADABLE_STATS_DEV = "loadable-stats.dev.json";
+
     const isoLockfile = Path.resolve(isomorphicLoaderConfig.lockFile);
     const isoConfigFile = Path.resolve(isomorphicLoaderConfig.configFile);
 
@@ -192,6 +194,7 @@ class Middleware {
         const dir = Path.resolve("./dist/server");
         if (!Fs.existsSync(dir)) shell.mkdir("-p", dir);
         Fs.writeFileSync(Path.join(dir, LOADABLE_STATS), source);
+        Fs.writeFileSync(Path.join(dir, LOADABLE_STATS_DEV), source);
       }
 
       process.nextTick(() => cb(true));
