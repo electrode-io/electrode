@@ -4,56 +4,16 @@
 
 // Copy from electrode-react-webapp for now
 
-const Fs = require("fs");
+const assert = require("assert");
+const _ = require("lodash");
 const Path = require("path");
 const Boom = require("@hapi/boom");
 const optionalRequire = require("optional-require")(require);
 const getDevProxy = optionalRequire("@xarc/app-dev/config/get-dev-proxy");
 const HttpStatusCodes = require("http-status-codes");
-
-/**
- * Tries to import bundle chunk selector function if the corresponding option is set in the
- * webapp plugin configuration. The function takes a `request` object as an argument and
- * returns the chunk name.
- *
- * @param {Object} options - webapp plugin configuration options
- * @return {Function} function that selects the bundle based on the request object
- */
-function resolveChunkSelector(options) {
-  if (options.bundleChunkSelector) {
-    return require(Path.resolve(options.bundleChunkSelector)); // eslint-disable-line
-  }
-
-  return () => ({
-    css: "main",
-    js: "main"
-  });
-}
-
-function getIconStats(iconStatsPath) {
-  let iconStats;
-  try {
-    iconStats = Fs.readFileSync(Path.resolve(iconStatsPath)).toString();
-    iconStats = JSON.parse(iconStats);
-  } catch (err) {
-    return "";
-  }
-  if (iconStats && iconStats.html) {
-    return iconStats.html.join("");
-  }
-  return iconStats;
-}
-
-function getCriticalCSS(path) {
-  const criticalCSSPath = Path.resolve(process.cwd(), path || "");
-
-  try {
-    const criticalCSS = Fs.readFileSync(criticalCSSPath).toString();
-    return criticalCSS;
-  } catch (err) {
-    return "";
-  }
-}
+const {
+  utils: { loadFuncFromModule }
+} = require("@xarc/index-page");
 
 const updateFullTemplate = (baseDir, options) => {
   if (options.templateFile) {
@@ -128,12 +88,47 @@ function errorResponse({ routeName, h, err }) {
   }
 }
 
+const checkSSRMetricsReporting = _.once(topOpts => {
+  const reporting = _.get(topOpts, "reporting", {});
+  if (!reporting.enable || !reporting.reporter) {
+    // eslint-disable-next-line
+    console.log(
+      `INFO: subapp-server disabled SSR metrics. options.report: ${JSON.stringify(reporting)}`
+    );
+  }
+});
+
+/**
+ * invoke user specified custom template processing hook
+ *
+ * @param {*} asyncTemplate - the template container
+ * @param {*} routeOptions - route options
+ *
+ * @returns {*} - result from the processing hook
+ */
+function invokeTemplateProcessor(asyncTemplate, routeOptions) {
+  const tp = routeOptions.templateProcessor;
+
+  if (tp) {
+    let tpFunc;
+    if (typeof tp === "string") {
+      tpFunc = loadFuncFromModule(tp, "templateProcessor");
+    } else {
+      tpFunc = tp;
+      assert(typeof tpFunc === "function", `templateProcessor is not a function`);
+    }
+
+    return tpFunc(asyncTemplate, routeOptions);
+  }
+
+  return undefined;
+}
+
 module.exports = {
-  resolveChunkSelector,
-  getIconStats,
-  getCriticalCSS,
   getDefaultRouteOptions,
   updateFullTemplate,
   errorResponse,
-  makeErrorStackResponse
+  makeErrorStackResponse,
+  checkSSRMetricsReporting,
+  invokeTemplateProcessor
 };

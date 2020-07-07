@@ -46,7 +46,8 @@
     "recursive": true
   },
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "dependencies": {
     "munchy": "^1.0.8",

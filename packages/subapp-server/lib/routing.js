@@ -1,19 +1,21 @@
-import * as _ from "lodash";
-import * as Path from "path";
-import * as assert from "assert";
-import { TagRenderer } from "@xarc/tag-renderer";
-import { JsxRenderer } from "@xarc/jsx-renderer";
-import { resolvePath } from "./react/utils";
+"use strict";
 
-import {
-  getOtherStats,
-  getOtherAssets,
-  resolveChunkSelector,
-  loadAssetsFromStats,
-  getStatsPath,
-  invokeTemplateProcessor,
-  makeDevBundleBase
-} from "./react/utils";
+const _ = require("lodash");
+const Path = require("path");
+const { TagRenderer } = require("@xarc/tag-renderer");
+const { JsxRenderer } = require("@xarc/jsx-renderer");
+const {
+  utils: {
+    resolvePath,
+    getOtherStats,
+    getOtherAssets,
+    resolveChunkSelector,
+    loadAssetsFromStats,
+    getStatsPath,
+    invokeTemplateProcessor,
+    makeDevBundleBase
+  }
+} = require("@xarc/index-page");
 
 const otherStats = getOtherStats();
 
@@ -43,7 +45,7 @@ function initializeTemplate(
   // Inject the built-in react/token-handlers if it is not in user's handlers
   // and replaceTokenHandlers option is false
   if (!routeOptions.replaceTokenHandlers) {
-    const reactTokenHandlers = Path.join(__dirname, "react/token-handlers");
+    const reactTokenHandlers = require.resolve("@xarc/index-page");
     finalTokenHandlers =
       userTokenHandlers.indexOf(reactTokenHandlers) < 0
         ? [reactTokenHandlers].concat(userTokenHandlers)
@@ -189,114 +191,4 @@ const setupPathOptions = (routeOptions, path) => {
   );
 };
 
-//
-// The route path can supply:
-//
-// - a literal string
-// - a function
-// - an object
-//
-// If it's an object:
-//   -- if it doesn't contain content, then it's assume to be the content.
-//
-// If it contains content, then it can contain:
-//
-// - method: HTTP method for the route
-// - config: route config (applicable for framework like Hapi)
-// - content: second level field to define content
-//
-// content can be:
-//
-// - a literal string
-// - a function
-// - an object
-//
-// If content is an object, it can contain module, a path to the JS module to require
-// to load the content.
-//
-const resolveContent = (pathData, xrequire = null) => {
-  const resolveTime = Date.now();
-
-  let content = pathData;
-
-  // If it's an object, see if contains content field
-  if (_.isObject(pathData) && pathData.hasOwnProperty("content")) {
-    content = pathData.content;
-  }
-
-  if (!content && !_.isString(content)) return null;
-
-  // content has module field, require it.
-  if (!_.isString(content) && !_.isFunction(content) && content.module) {
-    const mod = content.module.startsWith(".") ? Path.resolve(content.module) : content.module;
-
-    xrequire = xrequire || require;
-
-    try {
-      return {
-        fullPath: xrequire.resolve(mod),
-        xrequire,
-        resolveTime,
-        content: xrequire(mod)
-      };
-    } catch (error) {
-      const msg = `electrode-react-webapp: load SSR content ${mod} failed - ${error.message}`;
-      console.error(msg, "\n", error); // eslint-disable-line
-      return {
-        fullPath: null,
-        error,
-        resolveTime,
-        content: msg
-      };
-    }
-  }
-
-  return {
-    fullPath: null,
-    resolveTime,
-    content
-  };
-};
-
-const getContentResolver = (registerOptions, pathData, path) => {
-  let resolved;
-
-  const resolveWithDev = (webpackDev, xrequire) => {
-    if (!webpackDev.valid) {
-      resolved = resolveContent("<!-- Webpack still compiling -->");
-    } else if (webpackDev.hasErrors) {
-      resolved = resolveContent("<!-- Webpack compile has errors -->");
-    } else if (!resolved || resolved.resolveTime < webpackDev.compileTime) {
-      if (resolved && resolved.fullPath) {
-        delete resolved.xrequire.cache[resolved.fullPath];
-      }
-      resolved = resolveContent(pathData, xrequire);
-    }
-
-    return resolved.content;
-  };
-
-  return (webpackDev, xrequire) => {
-    if (webpackDev && registerOptions.serverSideRendering !== false) {
-      return resolveWithDev(webpackDev, xrequire);
-    }
-
-    if (resolved) return resolved.content;
-
-    if (registerOptions.serverSideRendering !== false) {
-      resolved = resolveContent(pathData);
-      assert(resolved, `You must define content for the webapp plugin path ${path}`);
-    } else {
-      resolved = {
-        content: {
-          status: 200,
-          html: "<!-- SSR disabled by options.serverSideRendering -->"
-        }
-      };
-    }
-
-    return resolved.content;
-  };
-};
-
-export { setupOptions, setupPathOptions, makeRouteHandler, resolveContent, getContentResolver };
+module.exports = { setupOptions, setupPathOptions, makeRouteHandler };

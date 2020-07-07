@@ -90,8 +90,8 @@ function getIconStats(iconStatsPath) {
 /**
  * @param path
  */
-function getCriticalCSS(path) {
-  const criticalCSSPath = Path.resolve(process.cwd(), path || "");
+function getCriticalCSS(path = "") {
+  const criticalCSSPath = Path.resolve(process.cwd(), path);
 
   try {
     const criticalCSS = fs.readFileSync(criticalCSSPath).toString();
@@ -272,28 +272,6 @@ function loadFuncFromModule(modulePath, exportFuncName, requireAtDir = "") {
 }
 
 /**
- * @param asyncTemplate
- * @param routeOptions
- */
-function invokeTemplateProcessor(asyncTemplate, routeOptions) {
-  const tp = routeOptions.templateProcessor;
-
-  if (tp) {
-    let tpFunc;
-    if (typeof tp === "string") {
-      tpFunc = loadFuncFromModule(tp, "templateProcessor");
-    } else {
-      tpFunc = tp;
-      assert(typeof tpFunc === "function", `templateProcessor is not a function`);
-    }
-
-    return tpFunc(asyncTemplate, routeOptions);
-  }
-
-  return undefined;
-}
-
-/**
  *
  */
 function getOtherStats() {
@@ -395,7 +373,6 @@ export {
   responseForError,
   responseForBadStatus,
   loadFuncFromModule,
-  invokeTemplateProcessor,
   getOtherStats,
   getOtherAssets,
   getBundleJsNameByQuery,
