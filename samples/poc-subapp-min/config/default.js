@@ -11,17 +11,9 @@ const portFromEnv = () => {
 module.exports = {
   plugins: {
     "webpack-dev": {
-      module: "@xarc/app-dev/lib/webpack-dev-hapi",
+      module: "@xarc/app-dev/lib/webpack-dev-fastify",
+      cdnPostFix: "dev",
       enable: process.env.WEBPACK_DEV === "true"
-    },
-    inert: {
-      enable: true
-    },
-    electrodeStaticPaths: {
-      enable: true,
-      options: {
-        pathPrefix: "dist"
-      }
     },
     "subapp-server": { options: { insertTokenIds: true } }
   },

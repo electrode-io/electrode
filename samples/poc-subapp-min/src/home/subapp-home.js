@@ -15,5 +15,5 @@ export default loadSubApp({
   // TBD: one time props/state initializing hook
   // bootstrap() {},
   // TBD: each instance props/state initializing hook
-  // initialize() {},
+  initialize() {},
 });
