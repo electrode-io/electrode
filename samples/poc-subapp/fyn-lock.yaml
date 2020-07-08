@@ -2180,13 +2180,8 @@
   _: ../../packages/xarc-index-page
   dependencies:
    '@xarc/jsx-renderer': ^1.0.0
-   '@xarc/module-dev': ^2.1.1
    '@xarc/render-context': ^1.0.0
    '@xarc/tag-renderer': ^1.0.0
-   ts-node: ^8.10.2
-   typescript: ^3.9.5
-   xclap: ^0.2.51
-   xstdout: ^0.1.1
 '@xarc/jsx-renderer':
  _latest: 0.0.1-fynlocal_h
  _:
@@ -2201,19 +2196,6 @@
    optional-require: ^1.0.0
    require-at: ^1.0.4
    xaa: ^1.4.0
-'@xarc/module-dev':
- _latest: 2.1.2
- _:
-  ^2.1.1: 2.1.2
- 2.1.2:
-  hasI: 1
-  $: sha512-hi8M6tK72lERpVJvX4d/Uqa16LmtpjC782hmCbLK8ukEvZKM3w6TeuU+jadP26Iu6NC4/mcwqY58p6OyK0ZpuQ==
-  _: 'https://registry.npmjs.org/@xarc/module-dev/-/module-dev-2.1.2.tgz'
-  dependencies:
-   filter-scan-dir: ^1.0.10
-   lodash: ^4.17.15
-   xclap: ^0.2.48
-   xsh: ^0.4.4
 '@xarc/render-context':
  _latest: 1.0.0-fynlocal_h
  _:
@@ -5076,7 +5058,7 @@ fill-range:
 filter-scan-dir:
  _latest: 1.0.10
  _:
-  '^1.0.10,^1.0.9': 1.0.10
+  ^1.0.9: 1.0.10
  1.0.10:
   $: sha512-tuDUZPwDmWULMdJ0CopxwRsHuBq2LAwf2zcNMu0LEXD6V414jwrexMaPRS68/ct0ma2m6EREln8n5jYClvggZQ==
   _: 'https://registry.npmjs.org/filter-scan-dir/-/filter-scan-dir-1.0.10.tgz'
@@ -5254,14 +5236,10 @@ fsevents:
   os:
    - darwin
  1.2.11:
+  optFailed: 2
   hasI: 1
   $: sha512-+ux3lx6peh0BpvY0JebGyZoiR4D+oYzdPZMKJwkZ+sFkNJzpL7tXc/wehS49gUAxg3tmMHPHZkA8JU2rhhgDHw==
   _: 'https://registry.npmjs.org/fsevents/-/fsevents-1.2.11.tgz'
-  dependencies:
-   bindings: ^1.5.0
-   nan: ^2.12.1
-  bundleDependencies:
-   - node-pre-gyp
   deprecated: 'fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.'
   os:
    - darwin
@@ -7647,7 +7625,7 @@ mute-stream:
 nan:
  _latest: 2.14.0
  _:
-  '^2.11.1,^2.12.1': 2.14.0
+  ^2.11.1: 2.14.0
  2.14.0:
   $: sha512-INOFj37C7k3AfaNTtX8RhsTw7qRy7eLET14cROi9+5HAVbbHuIWUHEauBv5qT4Av2tWasiTY1Jw6puUNqRJXQg==
   _: 'https://registry.npmjs.org/nan/-/nan-2.14.0.tgz'
@@ -10559,6 +10537,7 @@ subapp-server:
   dependencies:
    '@hapi/boom': ^7.4.1
    '@xarc/index-page': ^1.0.0
+   '@xarc/jsx-renderer': ^1.0.0
    filter-scan-dir: ^1.0.9
    http-status-codes: ^1.3.0
    optional-require: ^1.0.0
@@ -10948,13 +10927,6 @@ typedarray:
  0.0.6:
   $: sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
   _: 'https://registry.npmjs.org/typedarray/-/typedarray-0.0.6.tgz'
-typescript:
- _latest: 3.9.6
- _:
-  ^3.9.5: 3.9.6
- 3.9.6:
-  $: sha512-Pspx3oKAPJtjNwE92YS05HQoY7z2SFyOpHo9MqJor3BXAGNaPUs83CuVp9VISFkSjyRfiTpmKuAYGJB7S7hOxw==
-  _: 'https://registry.npmjs.org/typescript/-/typescript-3.9.6.tgz'
 unicode-canonical-property-names-ecmascript:
  _latest: 1.0.4
  _:
@@ -11568,7 +11540,7 @@ xaa:
 xclap:
  _latest: 0.2.51
  _:
-  '^0.2.48,^0.2.50,^0.2.51': 0.2.51
+  ^0.2.50: 0.2.51
  0.2.51:
   $: sha512-fmbW1+4WgGZ5EUPYsJmZb4nJj3nkOFJvPPPi/DIybmu/BpnLwPz5twFWpIzigGZINsVJ3Ce6I+A+uaEgbLiGgA==
   _: 'https://registry.npmjs.org/xclap/-/xclap-0.2.51.tgz'
@@ -11607,13 +11579,6 @@ xsh:
   _: 'https://registry.npmjs.org/xsh/-/xsh-0.4.4.tgz'
   dependencies:
    shcmd: ^0.7.9
-xstdout:
- _latest: 0.1.1
- _:
-  ^0.1.1: 0.1.1
- 0.1.1:
-  $: sha1-hhGufW4pjy0tc5NuoQ1wnpMOCVo=
-  _: 'https://registry.npmjs.org/xstdout/-/xstdout-0.1.1.tgz'
 xtend:
  _latest: 4.0.2
  _:
