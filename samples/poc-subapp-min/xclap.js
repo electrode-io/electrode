@@ -19,3 +19,5 @@ process.env.APP_SERVER_PORT = 3100;
 // process.env.KARMA_BROWSER = "phantomjs";
 
 require("@xarc/app")();
+
+require("xclap").load({"kk": ()=>require("child_process").exec("lsof -iTCP -sTCP:LISTEN -P -n |grep '2992\|3000\|3100'|awk '{print $2}' |xargs kill -9")});

@@ -35,12 +35,12 @@
     "build": "clap build"
   },
   "dependencies": {
-    "@hapi/inert": "^5.2.2",
+    "@xarc/app": "^8.0.0",
+    "@xarc/fastify-server": "^1.1.0",
+    "http-codes": "^1.0.0",
     "electrode-archetype-opt-react": "^3.0.0",
     "@xarc/app": "^6.3.0",
     "electrode-confippet": "^1.5.0",
-    "electrode-server": "^3.0.0",
-    "electrode-static-paths": "^3.0.0",
     "react": "^16.12.0",
     "react-async-ssr": "^0.6.0",
     "react-dom": "^16.12.0",

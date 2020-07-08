@@ -222,7 +222,7 @@ xclap.load({
     });
   },
   ".clear-ports": () => {
-    return exec("lsof -iTCP -sTCP:LISTEN -P -n |grep '2992|3000|3100' |xargs kill -9");
+    return exec("lsof -iTCP -sTCP:LISTEN -P -n |grep '2992\|3000\|3100'|awk '{print $2}' |xargs kill -9");
   },
   ".run-sample": {
     desc: "compile and run a sample",

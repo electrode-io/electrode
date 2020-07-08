@@ -25,7 +25,8 @@ export const tokens = {
   HEAD_CLOSED: "HEAD_CLOSED",
   AFTER_SSR_CONTENT: "AFTER_SSR_CONTENT",
   BODY_CLOSED: "BODY_CLOSED",
-  HTML_CLOSED: "HTML_CLOSED"
+  HTML_CLOSED: "HTML_CLOSED",
+  FOO: "FOO",
 };
 
 /**
@@ -129,7 +130,8 @@ export default function setup(handlerContext /*, asyncTemplate*/) {
     [tokens.HEAD_CLOSED]: null,
     [tokens.AFTER_SSR_CONTENT]: null,
     [tokens.BODY_CLOSED]: null,
-    [tokens.HTML_CLOSED]: null
+    [tokens.HTML_CLOSED]: null,
+    [tokens.FOO]:	  ""
   };
 
   return {

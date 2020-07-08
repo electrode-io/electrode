@@ -9,9 +9,7 @@ process.on("SIGINT", () => {
 const electrodeConfippet = require("electrode-confippet");
 const support = require("@xarc/app/support");
 
-//
-const staticPathsDecor = require("electrode-static-paths");
-const electrodeServer = require("electrode-server");
+const fastifyServer = require("@xarc/fastify-server");
 
 //
 // sample to show electrode server startup events
