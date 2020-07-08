@@ -1,5 +1,5 @@
 "use strict";
-
+const xaa = require("xaa");
 /* eslint-disable global-require */
 
 process.on("SIGINT", () => {
