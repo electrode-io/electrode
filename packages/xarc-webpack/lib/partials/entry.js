@@ -52,21 +52,27 @@ function makeEntryPartial() {
   }
 
   function genSubAppHmrEntry(hmrDir, isDev, manifest) {
-    let subAppReq = `${manifest.subAppDir}/${manifest.entry}`;
+    const modOutputDir = manifest.outputDir || "dist";
+    let subAppReq = manifest.module
+      ? Path.resolve("node_modules", `${manifest.subAppDir}/${modOutputDir}/${manifest.entry}`)
+      : `${manifest.subAppDir}/${manifest.entry}`;
+
     // subapp has built-in code to handle HMR accept
     // or not running in webpack dev mode
     // => do not generate HMR accept code
     if (manifest.hmrSelfAccept || !isDev) {
-      return `./${subAppReq}`;
+      return manifest.module ? subAppReq : `./${subAppReq}`;
     }
 
     const hmrEntry = `hmr-${manifest.subAppDir.replace(/[\/\\]/g, "-")}.js`;
-    subAppReq = `../${subAppReq}`;
+    subAppReq = manifest.module ? subAppReq : `../${subAppReq}`;
 
     let reducerHmrCode = "";
 
     if (manifest.reducers) {
-      const subAppReducers = `../${manifest.subAppDir}/reducers`;
+      const subAppReducers = manifest.module
+        ? Path.resolve("node_modules", `${manifest.subAppDir}/${modOutputDir}/reducers`)
+        : `../${manifest.subAppDir}/reducers`;
       reducerHmrCode = `
 import { getReduxCreateStore } from "subapp-redux";
 import reducers from "${subAppReducers}";
