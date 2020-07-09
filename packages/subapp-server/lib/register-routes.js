@@ -5,14 +5,17 @@
 const assert = require("assert");
 const _ = require("lodash");
 const HttpStatus = require("./http-status");
-const Routing = require("./routing");
+const templateRouting = require("./template-routing");
 const { errorResponse, updateFullTemplate } = require("./utils");
 const {
   utils: { resolveChunkSelector }
 } = require("@xarc/index-page");
 const HttpStatusCodes = require("http-status-codes");
+const { checkSSRMetricsReporting } = require("./utils");
 
 module.exports = function registerRoutes({ routes, topOpts, server }) {
+  checkSSRMetricsReporting(topOpts);
+
   // register routes
   routes.forEach(routeInfo => {
     const { route } = routeInfo;
@@ -33,7 +36,7 @@ module.exports = function registerRoutes({ routes, topOpts, server }) {
 
     routeOptions.__internals = { chunkSelector };
 
-    const routeHandler = Routing.makeRouteHandler(routeOptions);
+    const routeHandler = templateRouting.makeRouteTemplateSelector(routeOptions);
 
     const useStream = routeOptions.useStream !== false;
 

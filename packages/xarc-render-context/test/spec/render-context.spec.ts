@@ -34,13 +34,13 @@ describe("render-context", function () {
 describe("munchy output", function () {
   it("call setDefaultMunchyOutput() with no arga", function () {
     const context = new RenderContext({}, {});
-    context.setStandardMunchyOutput();
+    context.setMunchyOutput();
     expect(context.munchy).to.exist;
   });
 
   it("should print output to munchy", function () {
     const context = new RenderContext({}, {});
-    context.setStandardMunchyOutput();
+    context.setMunchyOutput();
     const munchyoutput = new PassThrough();
     context.munchy.pipe(munchyoutput);
     munchyoutput.on("data", data => {
@@ -50,25 +50,6 @@ describe("munchy output", function () {
     const ro = new RenderOutput(context);
     ro.add("foo");
     ro.flush();
-  });
-  it("should return error message", function () {
-    // process.env.NODE_ENV = "production";
-    // context.setDefaultMunchyOutput();
-    // const { result } = munchyHandleStreamError(new Error("Error1"));
-    // expect(result).to.contain("Error1");
-    // const output = munchyHandleStreamError(new Error());
-    // expect(output.result).to.contain("SSR ERROR");
-  });
-  it("should return stack trace on non-production", function () {
-    // process.env.NODE_ENV = "development";
-    // const { result } = munchyHandleStreamError(new Error("e"));
-    // expect(result).to.contain("CWD");
-  });
-  it("not replace process.cwd() with CWD", function () {
-    // process.chdir("/");
-    // process.env.NODE_ENV = "development";
-    // const { result } = munchyHandleStreamError(new Error("e"));
-    // expect(result).to.not.contain("CWD");
   });
 
   it("should store token handlers in a map", function () {

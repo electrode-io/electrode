@@ -6,7 +6,6 @@
 import * as Path from "path";
 import * as requireAt from "require-at";
 import * as optionalRequire from "optional-require";
-import { isContext } from "vm";
 
 const failLoadTokenModule = (msg: string, err: Error) => {
   console.error(`error: @xarc/render-context failed to load token process module ${msg}`, err);
