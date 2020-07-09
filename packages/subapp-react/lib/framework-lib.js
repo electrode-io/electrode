@@ -90,7 +90,7 @@ class FrameworkLib {
     if (subApp.useReactRouter) {
       const rrContext = {};
       const rrProps = Object.assign(
-        { location: request.url.pathname, context: rrContext },
+        { location: request.path || request.url.pathname, context: rrContext },
         initialProps
       );
       // console.log("rendering", name, "for react router", rrProps);
@@ -193,7 +193,7 @@ class FrameworkLib {
       `subapp ${this.ref.subApp.name} specified useReactRouter without a StartComponent, \
 and can't generate it because module react-router-dom with StaticRouter is not found`
     );
-    return (props2) =>
+    return props2 =>
       React.createElement(
         ReactRouterDom.StaticRouter,
         props2,

@@ -124,7 +124,16 @@ function invokeTemplateProcessor(asyncTemplate, routeOptions) {
   return undefined;
 }
 
+function getSrcDir(pluginOpts) {
+  return (
+    pluginOpts.srcDir ||
+    process.env.APP_SRC_DIR ||
+    (process.env.NODE_ENV === "production" ? "lib" : "src")
+  );
+}
+
 module.exports = {
+  getSrcDir,
   getDefaultRouteOptions,
   updateFullTemplate,
   errorResponse,

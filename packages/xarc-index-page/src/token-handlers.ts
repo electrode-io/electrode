@@ -102,7 +102,7 @@ export default function setup(handlerContext /*, asyncTemplate*/) {
       };
 
       if (content.useStream || isReadableStream(content.html)) {
-        context.setStandardMunchyOutput();
+        context.setMunchyOutput();
       }
 
       context.setOutputTransform(transformOutput);

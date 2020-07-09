@@ -29,6 +29,7 @@
     "eslint-plugin-jsdoc": "^21.0.0",
     "mocha": "^7.1.0",
     "nyc": "^15.0.0",
+    "run-verify": "^1.2.5",
     "sinon": "^7.2.6",
     "sinon-chai": "^3.3.0",
     "source-map-support": "^0.5.16",
