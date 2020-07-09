@@ -122,11 +122,12 @@ function scanSubAppsFromDir(srcDir, maxLevel = Infinity) {
   const fullSrcDir = Path.resolve(srcDir);
 
   const subApps = { [MAP_BY_PATH_SYM]: {} };
-  const { maniFiles = [], files = [] } = scanDir.sync({
+  const { maniFiles = [], files = [], modFiles = [] } = scanDir.sync({
     dir: srcDir,
     grouping: true,
     maxLevel,
     filter: (f, p, ex) => {
+      if (ex.noExt === "subapps-modules") return "modFiles";
       if (ex.noExt === "subapp-manifest") return "maniFiles";
       return f.startsWith("subapp");
     },
@@ -162,7 +163,25 @@ function scanSubAppsFromDir(srcDir, maxLevel = Infinity) {
     return null;
   });
 
-  const errors = [].concat(errors1, errors2).filter(x => x);
+  // process subapps modules
+  const errors3 = modFiles.map(module => {
+    try {
+      const manifests = es6Require(Path.join(fullSrcDir, module));
+      Object.keys(manifests).forEach(modName => {
+        const manifest = manifests[modName];
+        const modSrcDir = manifest.srcDir || "lib";
+        const modFullSrcDir = Path.resolve("node_modules", modName, modSrcDir);
+        const subapp = Object.assign({ subAppDir: modName, module: true }, manifest);
+        scanSubAppAdditions(modFullSrcDir, subapp);
+        subApps[manifest.name] = subApps[MAP_BY_PATH_SYM][modFullSrcDir] = subapp;
+      });
+      return null;
+    } catch (error) {
+      return error;
+    }
+  });
+
+  const errors = [].concat(errors1, errors2, errors3).filter(x => x);
   if (errors.length > 0) {
     console.error("Loading SubApps failed");
     errors.forEach(err => {
@@ -242,7 +261,12 @@ function loadSubAppByName(name) {
   const container = getSubAppContainer();
   const subAppDir = manifest.subAppDir;
   // load subapp's entry
-  xrequire(Path.resolve(appSrcDir(), subAppDir, manifest.entry));
+  const modSrcDir = manifest.srcDir || "lib";
+  const fullSubappDir = manifest.module
+    ? Path.resolve("node_modules", subAppDir, modSrcDir)
+    : Path.resolve(appSrcDir(), subAppDir);
+
+  xrequire(Path.join(fullSubappDir, manifest.entry));
 
   // if subapp did not register itself then register it
   if (!container[name]) {
@@ -257,14 +281,19 @@ function loadSubAppServerByName(name) {
   const manifest = subAppManifest()[name];
   const { subAppDir, serverEntry } = manifest;
 
+  const modSrcDir = manifest.srcDir || "lib";
+  const fullSubappDir = manifest.module
+    ? Path.resolve("node_modules", subAppDir, modSrcDir)
+    : Path.resolve(appSrcDir(), subAppDir);
+
   if (serverEntry) {
-    return es6Require(Path.resolve(appSrcDir(), subAppDir, serverEntry));
+    return es6Require(Path.join(fullSubappDir, serverEntry));
   } else if (serverEntry === false) {
     return {};
   }
 
   // generate a server from subapp's main file
-  const subapp = es6Require(Path.resolve(appSrcDir(), subAppDir, manifest.entry));
+  const subapp = es6Require(Path.join(fullSubappDir, manifest.entry));
 
   return {
     StartComponent: subapp.Component
@@ -275,12 +304,15 @@ function refreshSubAppByName(name) {
   const manifest = subAppManifest()[name];
   const { subAppDir } = manifest;
 
-  const entryFullPath = xrequire.resolve(Path.resolve(appSrcDir(), subAppDir, manifest.entry));
+  const modSrcDir = manifest.srcDir || "lib";
+  const fullSubappDir = manifest.module
+    ? Path.resolve("node_modules", subAppDir, modSrcDir)
+    : Path.resolve(appSrcDir(), subAppDir);
+
+  const entryFullPath = xrequire.resolve(Path.join(fullSubappDir, manifest.entry));
   if (!xrequire.cache[entryFullPath] && manifest.serverEntry) {
     // also reload server side module
-    const serverEntryFullPath = xrequire.resolve(
-      Path.resolve(appSrcDir(), subAppDir, manifest.serverEntry)
-    );
+    const serverEntryFullPath = xrequire.resolve(Path.join(fullSubappDir, manifest.serverEntry));
     console.log("reloading server side subapp", name, serverEntryFullPath);
     delete xrequire.cache[serverEntryFullPath];
   }

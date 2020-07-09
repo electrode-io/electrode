@@ -108,12 +108,16 @@ function setupRouteRender({ subAppsByPath, srcDir, routeOptions }) {
     routeOptions.__internals.subApps = [].concat(routeOptions.subApps).map(x => {
       let options = {};
       if (Array.isArray(x)) {
-        options = x[1];
+        options = x[1] || {};
         x = x[0];
       }
       // absolute: use as path
       // else: assume dir under srcDir
       // TBD: handle it being a module
+      if (x.indexOf("/") === -1) {
+        const xSrcDir = options.srcDir || "lib";
+        x = Path.resolve("node_modules", x, xSrcDir);
+      }
       return {
         subapp: subAppsByPath[Path.isAbsolute(x) ? x : Path.resolve(srcDir, x)],
         options
