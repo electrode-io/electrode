@@ -5,9 +5,12 @@
 import { RenderOutput } from "../../src";
 import * as Munchy from "munchy";
 import * as streamToArray from "stream-to-array";
+import { describe, it } from "mocha";
+import { asyncVerify, expectError } from "run-verify";
 
 import { expect } from "chai";
 import { makeDefer } from "xaa";
+
 describe("render-output", function () {
   it("should flush simple string", () => {
     let text;
@@ -201,6 +204,7 @@ describe("render-output", function () {
     ro.add(item);
     expect(() => ro.flush()).to.throw("unable to stringify item of type object");
   });
+
   it("should re-throw error in _finish()", async () => {
     const ro2 = new RenderOutput({
       munchy: null,
@@ -210,21 +214,26 @@ describe("render-output", function () {
     });
     ro2._defer = makeDefer();
     ro2.add("item");
-    try {
-      await ro2._finish();
-    } catch (e) {
-      expect(e.message).to.equal("new Error");
-    }
-    ro2._defer = null;
-    ro2._context.munchy = {
-      munch: () => {
-        throw new Error("new error2");
+    return asyncVerify(
+      expectError(() => {
+        setTimeout(() => ro2._finish(), 1);
+        return ro2._defer.promise;
+      }),
+      err => expect(err.message).to.equal("new Error"),
+      () => {
+        ro2._defer = null;
+        ro2._context.munchy = {
+          munch: () => {
+            throw new Error("new error2");
+          }
+        };
+      },
+      expectError(() => {
+        return ro2._finish();
+      }),
+      err => {
+        expect(err.message).to.equal("new error2");
       }
-    };
-    try {
-      await ro2._finish();
-    } catch (e) {
-      expect(e.message).to.equal("new error2");
-    }
+    );
   });
 });

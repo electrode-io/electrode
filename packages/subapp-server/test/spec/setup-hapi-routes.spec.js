@@ -5,7 +5,7 @@ const { setupSubAppHapiRoutes } = require("../../lib/setup-hapi-routes");
 const Path = require("path");
 const electrodeServer = require("electrode-server");
 const sinon = require("sinon");
-const Routing = require("../../lib/routing");
+const templateRouting = require("../../lib/template-routing");
 
 describe("setupSubAppHapiRoutes", () => {
   let server;
@@ -113,14 +113,16 @@ describe("setupSubAppHapiRoutes", () => {
 
   it("should let the server redirect if status code = 301", async () => {
     stubPathResolve = getStubResolve1();
-    stubRouteHandler = sinon.stub(Routing, "makeRouteHandler").callsFake(() => async () => {
-      return {
-        result: {
-          status: 301,
-          path: "/file1"
-        }
-      };
-    });
+    stubRouteHandler = sinon
+      .stub(templateRouting, "makeRouteTemplateSelector")
+      .callsFake(() => async () => {
+        return {
+          result: {
+            status: 301,
+            path: "/file1"
+          }
+        };
+      });
     await setupSubAppHapiRoutes(server, {});
     await server.start();
     const { statusCode, result } = await server.inject({
@@ -133,15 +135,17 @@ describe("setupSubAppHapiRoutes", () => {
 
   it("should let the server reply html if status code = 404", async () => {
     stubPathResolve = getStubResolve1();
-    stubRouteHandler = sinon.stub(Routing, "makeRouteHandler").callsFake(() => async () => {
-      return {
-        result: {
-          status: 404,
-          path: "/file1",
-          html: "<h1>Not Found</h1>"
-        }
-      };
-    });
+    stubRouteHandler = sinon
+      .stub(templateRouting, "makeRouteTemplateSelector")
+      .callsFake(() => async () => {
+        return {
+          result: {
+            status: 404,
+            path: "/file1",
+            html: "<h1>Not Found</h1>"
+          }
+        };
+      });
     await setupSubAppHapiRoutes(server, {});
     await server.start();
     const { result, statusCode } = await server.inject({
@@ -154,14 +158,16 @@ describe("setupSubAppHapiRoutes", () => {
 
   it("should let the server reply data object if status code = 404 and no html set", async () => {
     stubPathResolve = getStubResolve1();
-    stubRouteHandler = sinon.stub(Routing, "makeRouteHandler").callsFake(() => async () => {
-      return {
-        result: {
-          status: 404,
-          path: "/file1"
-        }
-      };
-    });
+    stubRouteHandler = sinon
+      .stub(templateRouting, "makeRouteTemplateSelector")
+      .callsFake(() => async () => {
+        return {
+          result: {
+            status: 404,
+            path: "/file1"
+          }
+        };
+      });
     await setupSubAppHapiRoutes(server, {});
     await server.start();
     const { result, statusCode } = await server.inject({
@@ -174,15 +180,17 @@ describe("setupSubAppHapiRoutes", () => {
 
   it("should let the server reply html if status code = 200", async () => {
     stubPathResolve = getStubResolve1();
-    stubRouteHandler = sinon.stub(Routing, "makeRouteHandler").callsFake(() => async () => {
-      return {
-        result: {
-          status: 200,
-          path: "/file1",
-          html: "<h1>hello</h1>"
-        }
-      };
-    });
+    stubRouteHandler = sinon
+      .stub(templateRouting, "makeRouteTemplateSelector")
+      .callsFake(() => async () => {
+        return {
+          result: {
+            status: 200,
+            path: "/file1",
+            html: "<h1>hello</h1>"
+          }
+        };
+      });
     await setupSubAppHapiRoutes(server, {});
     await server.start();
     const { result, statusCode } = await server.inject({
@@ -195,14 +203,16 @@ describe("setupSubAppHapiRoutes", () => {
 
   it("should let the server reply data object if status code = 200 and no html set", async () => {
     stubPathResolve = getStubResolve1();
-    stubRouteHandler = sinon.stub(Routing, "makeRouteHandler").callsFake(() => async () => {
-      return {
-        result: {
-          status: 200,
-          path: "/file1"
-        }
-      };
-    });
+    stubRouteHandler = sinon
+      .stub(templateRouting, "makeRouteTemplateSelector")
+      .callsFake(() => async () => {
+        return {
+          result: {
+            status: 200,
+            path: "/file1"
+          }
+        };
+      });
     await setupSubAppHapiRoutes(server, {});
     await server.start();
     const { result, statusCode } = await server.inject({
@@ -215,15 +225,17 @@ describe("setupSubAppHapiRoutes", () => {
 
   it("should let the server reply data object if status code is 505", async () => {
     stubPathResolve = getStubResolve1();
-    stubRouteHandler = sinon.stub(Routing, "makeRouteHandler").callsFake(() => async () => {
-      return {
-        result: {
-          status: 505,
-          path: "/file1",
-          html: "<h1>hello</h1>"
-        }
-      };
-    });
+    stubRouteHandler = sinon
+      .stub(templateRouting, "makeRouteTemplateSelector")
+      .callsFake(() => async () => {
+        return {
+          result: {
+            status: 505,
+            path: "/file1",
+            html: "<h1>hello</h1>"
+          }
+        };
+      });
     await setupSubAppHapiRoutes(server, {});
     await server.start();
     const { result } = await server.inject({
@@ -236,9 +248,11 @@ describe("setupSubAppHapiRoutes", () => {
 
   it("should let the server reply error stack if routeHandler throw an error", async () => {
     stubPathResolve = getStubResolve1();
-    stubRouteHandler = sinon.stub(Routing, "makeRouteHandler").callsFake(() => async () => {
-      throw new Error();
-    });
+    stubRouteHandler = sinon
+      .stub(templateRouting, "makeRouteTemplateSelector")
+      .callsFake(() => async () => {
+        throw new Error();
+      });
     const logs = [];
     const stubConsoleError = sinon.stub(console, "error").callsFake(c => logs.push(c));
     await setupSubAppHapiRoutes(server, {});
@@ -260,9 +274,11 @@ describe("setupSubAppHapiRoutes", () => {
 
   it("should let the server reply error stack if routeHandler returns an error as a result", async () => {
     stubPathResolve = getStubResolve1();
-    stubRouteHandler = sinon.stub(Routing, "makeRouteHandler").callsFake(() => async () => ({
-      result: new Error("Dev error here")
-    }));
+    stubRouteHandler = sinon
+      .stub(templateRouting, "makeRouteTemplateSelector")
+      .callsFake(() => async () => ({
+        result: new Error("Dev error here")
+      }));
     const logs = [];
     const stubConsoleError = sinon.stub(console, "error").callsFake(c => logs.push(c));
     await setupSubAppHapiRoutes(server, {});

@@ -10,8 +10,7 @@ const electrodeConfippet = require("electrode-confippet");
 const support = require("@xarc/app/support");
 
 //
-const staticPathsDecor = require("electrode-static-paths");
-const electrodeServer = require("electrode-server");
+const electrodeServer = require("@xarc/fastify-server");
 
 //
 // sample to show electrode server startup events
@@ -28,21 +27,20 @@ function setupElectrodeServerEvents(emitter) {
 }
 
 const startServer = config => {
-  const decor = staticPathsDecor();
-  if (!config.listener) config.listener = setupElectrodeServerEvents;
-  return electrodeServer(config, [decor]);
+  if (!config.listener) {
+    config.listener = setupElectrodeServerEvents;
+  }
+  return electrodeServer(config);
 };
 
 //
 
-module.exports = () =>
-  support.load().then(() => {
-    const config = electrodeConfippet.config;
-    return startServer(config).catch(e => {
-      console.log("start server failed -", e.message); // eslint-disable-line
-      process.exit(1);
-    });
-  });
+module.exports = async () => {
+  await support.load();
+  const config = electrodeConfippet.config;
+  const server = await startServer(config);
+  return server;
+};
 
 if (require.main === module) {
   module.exports();

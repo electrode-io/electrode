@@ -43,7 +43,6 @@ const RenderSubApps = (props, context) => {
 const Template = (
   <IndexPage DOCTYPE="html">
     <LoadTokenHandler handler="@xarc/index-page" call="tokenHandler" />
-    <Token _id={tokens.FOO} />
     <Token _id="INITIALIZE" />
     <html lang="en">
       <head>

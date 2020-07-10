@@ -78,7 +78,7 @@ function initializeTemplate(
   return (routeOptions._templateCache[cacheKey] = asyncTemplate);
 }
 
-function makeRouteHandler(routeOptions) {
+function makeRouteTemplateSelector(routeOptions) {
   routeOptions._templateCache = {};
   let defaultSelection;
 
@@ -191,4 +191,4 @@ const setupPathOptions = (routeOptions, path) => {
   );
 };
 
-module.exports = { setupOptions, setupPathOptions, makeRouteHandler };
+module.exports = { setupOptions, setupPathOptions, makeRouteTemplateSelector };
