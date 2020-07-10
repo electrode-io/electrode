@@ -62,7 +62,7 @@
     "@xarc/app-dev": "^5.3.4",
     "electrode-archetype-opt-critical-css": "^1.0.3",
     "electrode-archetype-opt-eslint": "^1.0.3",
-    "electrode-archetype-opt-jest": "^25.1.0",
+    "electrode-archetype-opt-jest": "^25.0.0",
     "electrode-archetype-opt-less": "^1.0.2",
     "electrode-archetype-opt-mocha": "^1.0.3",
     "electrode-archetype-opt-phantomjs": "^1.0.2",
