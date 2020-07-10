@@ -1,6 +1,6 @@
 # Electrode Archetype Option Jest
 
-This is a feature package that instructs [Electrode](https://github.com/electrode-io/electrode) to install Jest.
+This is a feature package that instructs [Electrode](https://github.com/electrode-io/electrode) to install Jest v26.
 
 ## Interactive Install
 
