@@ -51,4 +51,4 @@ Licensed under the [Apache License, Version 2.0]
 [node.js]: https://nodejs.org/en/download
 [submitting a pr]: https://github.com/electrode-io/electrode/pulls
 [reporting an issue]: https://github.com/electrode-io/electrode/issues
-[contributing guide]: contributing.md
+[contributing guide]: CONTRIBUTING.md
