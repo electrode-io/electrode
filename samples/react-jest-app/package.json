@@ -80,7 +80,8 @@
       "electrode-auto-ssr": "../../packages/electrode-auto-ssr"
     },
     "devDependencies": {
-      "@xarc/app-dev": "../../packages/xarc-app-dev"
+      "@xarc/app-dev": "../../packages/xarc-app-dev",
+      "electrode-archetype-opt-jest": "../../packages/electrode-archetype-opt-jest"
     }
   },
   "optionalDependencies": {}
