@@ -14,7 +14,7 @@ module.exports = {
       title: "electrode OSS",
       logo: {
         alt: "electrode logo",
-        src: "/img/electrode-logo-full.svg"
+        src: "/img/electrode-io-logo.png"
       },
       links: [
         {
