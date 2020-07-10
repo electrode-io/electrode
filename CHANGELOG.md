@@ -1,3 +1,47 @@
+# 7/10/2020
+
+- remove bluebird from electrode-react-webapp
+- update to jest v26
+- update create-app template deps
+
+## Packages
+
+- `@xarc/create-app@3.0.8` `(3.0.7 => 3.0.8)`
+- `electrode-archetype-opt-jest@26.0.0` `(25.0.0 => 26.0.0)`
+- `electrode-react-webapp@4.0.0` `(3.8.10 => 4.0.0)`
+
+## Commits
+
+- `packages/xarc-create-app`
+
+  - update create-app template deps [commit](http://github.com/electrode-io/electrode/commit/23b7671d8879bc3cbd6bebdbef6dc34409430d1c)
+  - updated GitBook to Docusaurus ([#1673](https://github.com/electrode-io/electrode/pull/1673)) [commit](http://github.com/electrode-io/electrode/commit/2abe85bcf607ef3a92802ed741efcfff67776fba)
+
+- `packages/electrode-archetype-opt-jest`
+
+  - update to jest 26.1 ([#1695](https://github.com/electrode-io/electrode/pull/1695)) [commit](http://github.com/electrode-io/electrode/commit/38d721fef899aa71ea1547caa2d9d098b8cbafbe)
+  - [major] mark for major bump [commit](http://github.com/electrode-io/electrode/commit/3b118973966ba53190cbbb1763d5512f55546a69)
+
+- `packages/electrode-react-webapp`
+
+  - [major] remove bluebird [commit](http://github.com/electrode-io/electrode/commit/075868643636a72085ce5e15eef1c3466bd2bdf3)
+  - fix: handle token module in es6 format [commit](http://github.com/electrode-io/electrode/commit/e2db07ebfda3888ed9461a5835341f8a2426d8ee)
+
+* `docs`
+
+  - fix docusaurus files [commit](http://github.com/electrode-io/electrode/commit/d943ec354c7102f704362f76982d340dc8ccc1fe)
+  - updated GitBook to Docusaurus ([#1673](https://github.com/electrode-io/electrode/pull/1673)) [commit](http://github.com/electrode-io/electrode/commit/2abe85bcf607ef3a92802ed741efcfff67776fba)
+
+* `docusaurus`
+
+  - fix docusaurus files [commit](http://github.com/electrode-io/electrode/commit/d943ec354c7102f704362f76982d340dc8ccc1fe)
+
+* `MISC`
+
+  - Update changelog [commit](http://github.com/electrode-io/electrode/commit/01da08b2c6b4d0792ae5502e8398eaa7865d71b9)
+  - update CONTRIBUTING.md [commit](http://github.com/electrode-io/electrode/commit/f2b5119706384ed7dfd1c4901a8d5828c0a7d51b)
+  - [patch][bug] Fix the broken contribution link ([#1689](https://github.com/electrode-io/electrode/pull/1689)) [commit](http://github.com/electrode-io/electrode/commit/7a7f31b6a9193a635e4db578609e21389b40cb90)
+
 # 6/30/2020
 
 - fix: handle token module in es6 format
