@@ -35,33 +35,36 @@
     "build": "clap build"
   },
   "dependencies": {
-    "@hapi/inert": "^5.2.2",
+    "@xarc/app": "^8.1.6",
+    "@xarc/app-dev": "^8.1.6",
+    "@xarc/fastify-server": "^2.0.0",
     "electrode-archetype-opt-react": "^3.0.0",
-    "@xarc/app": "^6.3.0",
     "electrode-confippet": "^1.5.0",
-    "electrode-server": "^3.0.0",
-    "electrode-static-paths": "^3.0.0",
-    "react": "^16.12.0",
-    "react-async-ssr": "^0.6.0",
-    "react-dom": "^16.12.0",
-    "react-redux": "^6.0.1",
-    "react-router": "^5.1.0",
-    "react-router-dom": "^5.1.0",
-    "redux": "^4.0.4",
-    "subapp-react": "../../packages/subapp-react",
-    "subapp-redux": "../../packages/subapp-redux",
-    "subapp-server": "../../packages/subapp-server",
-    "subapp-web": "../../packages/subapp-web"
+    "react": "^16.13.1",
+    "react-async-ssr": "^0.7.2",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
+    "subapp-react": "^0.0.21",
+    "subapp-redux": "^1.0.30",
+    "subapp-server": "^1.2.4",
+    "subapp-web": "^1.0.30"
   },
   "devDependencies": {
-    "@xarc/app-dev": "^6.3.0",
+    "@xarc/app-dev": "^8.1.6",
     "electrode-archetype-opt-eslint": "^2.0.0",
     "electrode-archetype-opt-jest": "^25.0.0"
   },
   "fyn": {
     "dependencies": {
       "@xarc/app": "../../packages/xarc-app",
-      "electrode-archetype-opt-react": "../../packages/electrode-archetype-opt-react"
+      "electrode-archetype-opt-react": "../../packages/electrode-archetype-opt-react",
+      "subapp-react": "../../packages/subapp-react",
+      "subapp-redux": "../../packages/subapp-redux",
+      "subapp-server": "../../packages/subapp-server",
+      "subapp-web": "../../packages/subapp-web"
     },
     "devDependencies": {
       "@xarc/app-dev": "../../packages/xarc-app-dev",
