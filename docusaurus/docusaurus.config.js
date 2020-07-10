@@ -1,69 +1,90 @@
 module.exports = {
-  title: "electrode OSS",
-  tagline:
-    "Quickly build React/Node.js applications with an emphasis on performance, component reusability, and simple deployment.",
-  url: "https://www.electrode.io",
-  baseUrl: "/electrode/",
-  favicon: "/img/electrode-logo.svg",
-  organizationName: "electrode-io", // Usually your GitHub org/user name.
-  projectName: "electrode", // Usually your repo name.
-  githubHost: "https://github.com/electrode-io/electrode/tree/master/docusaurus",
-  plugins: ["docusaurus-lunr-search"],
+  title: 'electrode OSS',
+  tagline: 'Quickly build React/Node.js applications with an emphasis on performance, component reusability, and simple deployment.',
+  url: 'https://electrode.io/electrode',
+  baseUrl: '/',
+  favicon: 'img/favicon.ico',
+  organizationName: 'GTP.js', // Usually your GitHub org/user name.
+  projectName: 'OSS', // Usually your repo name.
+  githubHost: 'https://github.com/electrode-io/electrode/tree/master/docs',
+  favicon: 'img/electrode-io-logo.png',
+  plugins: [
+    'docusaurus-lunr-search'
+  ],
   themeConfig: {
     navbar: {
-      title: "electrode OSS",
+      title: ' electrode OSS',
       logo: {
-        alt: "electrode logo",
-        src: "/img/electrode-logo-full.svg"
+        alt: 'electrode logo',
+        src: 'img/electrode-io-logo.png',
       },
       links: [
         {
-          to: "docs/getting-started",
-          label: "Getting Started",
-          position: "left"
+          to: 'docs/getting-started',
+          label: 'docs',
+          position: 'left',
         },
         {
-          href: "https://github.com/electrode-io/electrode/",
-          label: "GitHub",
-          position: "right"
-        }
-      ]
+          href: 'https://github.com/electrode-io/electrode/',
+          label: 'GitHub',
+          position: 'right',
+        },
+      ],
     },
     footer: {
-      style: "dark",
+      style: 'dark',
       links: [
         {
-          title: "Docs",
-          items: [{}]
+          title: 'Docs',
+          items: [
+            {
+
+            },
+          ],
         },
         {
-          title: "Community",
-          items: [{}]
+          title: 'Community',
+          items: [
+            {
+
+            },
+          ],
         },
         {
-          title: "More",
-          items: [{}]
-        }
+          title: 'More',
+          items: [
+            {
+
+            },
+          ],
+        },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Walmart`
-    }
+      copyright: `Copyright © ${new Date().getFullYear()} electrode OSS - GTP - Walmart`,
+    },
   },
-  themes: ["@docusaurus/theme-live-codeblock"],
+  themes: ['@docusaurus/theme-live-codeblock'],
   presets: [
     [
-      "@docusaurus/preset-classic",
+      '@docusaurus/preset-classic',
       {
         docs: {
           // It is recommended to set document id as docs home page (`docs/` path).
-          homePageId: "introduction",
-          sidebarPath: require.resolve("./sidebars.js"),
+          homePageId: 'introduction',
+          sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl: "https://github.com/electrode-io/electrode/tree/master/docusaurus/docs"
+          editUrl:
+            'https://github.com/electrode-io/electrode/tree/master/docs',
+        },
+        blog: {
+          showReadingTime: true,
+          // Please change this to your repo.
+          editUrl:
+            'https://github.com/electrode-io/electrode/tree/master/docs',
         },
         theme: {
-          customCss: require.resolve("./src/css/custom.css")
-        }
-      }
-    ]
-  ]
+          customCss: require.resolve('./src/css/custom.css'),
+        },
+      },
+    ],
+  ],
 };
