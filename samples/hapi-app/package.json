@@ -60,7 +60,7 @@
     "electrode-archetype-opt-react": "^2.0.4"
   },
   "devDependencies": {
-    "electrode-archetype-opt-jest": "^25.0.0",
+    "electrode-archetype-opt-jest": "^26.1.0",
     "electrode-archetype-opt-less": "../../packages/electrode-archetype-opt-less",
     "electrode-archetype-opt-postcss": "^2.0.0",
     "electrode-archetype-opt-sass": "../../packages/electrode-archetype-opt-sass",
