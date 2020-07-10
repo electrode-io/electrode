@@ -1,6 +1,8 @@
 module.exports = {
   someSidebar: {
-    Introduction: ["welcome-to-electrode", "community", "glossary"],
-    Quick_Start: ["getting-started"]
-  }
+    Introduction: [
+      'welcome-to-electrode', 'contributing', 'community', 'glossary'],
+    Quick_Start: [ 
+      'getting-started'],
+ },
 };
