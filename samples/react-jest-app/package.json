@@ -77,11 +77,11 @@
       "@xarc/app": "../../packages/xarc-app",
       "electrode-react-webapp": "../../packages/electrode-react-webapp",
       "electrode-redux-router-engine": "../../packages/electrode-redux-router-engine",
-      "electrode-auto-ssr": "../../packages/electrode-auto-ssr",
-      "electrode-archetype-opt-jest": "../../packages/electrode-archetype-opt-jest"
+      "electrode-auto-ssr": "../../packages/electrode-auto-ssr"
     },
     "devDependencies": {
-      "@xarc/app-dev": "../../packages/xarc-app-dev"
+      "@xarc/app-dev": "../../packages/xarc-app-dev",
+      "electrode-archetype-opt-jest": "../../packages/electrode-archetype-opt-jest"
     }
   },
   "optionalDependencies": {}
