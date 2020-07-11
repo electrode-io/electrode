@@ -169,11 +169,10 @@ function scanSubAppsFromDir(srcDir, maxLevel = Infinity) {
       const manifests = es6Require(Path.join(fullSrcDir, module));
       Object.keys(manifests).forEach(modName => {
         const manifest = manifests[modName];
-        const modSrcDir = manifest.srcDir || "lib";
-        const modFullSrcDir = Path.resolve("node_modules", modName, modSrcDir);
+        const modFullDir = Path.dirname(require.resolve(`${modName}`));
         const subapp = Object.assign({ subAppDir: modName, module: true }, manifest);
-        scanSubAppAdditions(modFullSrcDir, subapp);
-        subApps[manifest.name] = subApps[MAP_BY_PATH_SYM][modFullSrcDir] = subapp;
+        scanSubAppAdditions(modFullDir, subapp);
+        subApps[manifest.name] = subApps[MAP_BY_PATH_SYM][modFullDir] = subapp;
       });
       return null;
     } catch (error) {
@@ -261,9 +260,8 @@ function loadSubAppByName(name) {
   const container = getSubAppContainer();
   const subAppDir = manifest.subAppDir;
   // load subapp's entry
-  const modSrcDir = manifest.srcDir || "lib";
   const fullSubappDir = manifest.module
-    ? Path.resolve("node_modules", subAppDir, modSrcDir)
+    ? Path.dirname(require.resolve(`${subAppDir}`))
     : Path.resolve(appSrcDir(), subAppDir);
 
   xrequire(Path.join(fullSubappDir, manifest.entry));
@@ -281,9 +279,8 @@ function loadSubAppServerByName(name) {
   const manifest = subAppManifest()[name];
   const { subAppDir, serverEntry } = manifest;
 
-  const modSrcDir = manifest.srcDir || "lib";
   const fullSubappDir = manifest.module
-    ? Path.resolve("node_modules", subAppDir, modSrcDir)
+    ? Path.dirname(require.resolve(`${subAppDir}`))
     : Path.resolve(appSrcDir(), subAppDir);
 
   if (serverEntry) {
@@ -304,9 +301,8 @@ function refreshSubAppByName(name) {
   const manifest = subAppManifest()[name];
   const { subAppDir } = manifest;
 
-  const modSrcDir = manifest.srcDir || "lib";
   const fullSubappDir = manifest.module
-    ? Path.resolve("node_modules", subAppDir, modSrcDir)
+    ? Path.dirname(require.resolve(`${subAppDir}`))
     : Path.resolve(appSrcDir(), subAppDir);
 
   const entryFullPath = xrequire.resolve(Path.join(fullSubappDir, manifest.entry));
