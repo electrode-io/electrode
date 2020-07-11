@@ -11,6 +11,7 @@ const AppMode = archetype.AppMode;
 const chalk = require("chalk");
 const logger = require("@xarc/app/lib/logger");
 const mkdirp = require("mkdirp");
+const requireFromPath = require("require-from-path");
 
 const DEV_HMR_DIR = ".__dev_hmr";
 
@@ -52,9 +53,13 @@ function makeEntryPartial() {
   }
 
   function genSubAppHmrEntry(hmrDir, isDev, manifest) {
-    const modOutputDir = manifest.outputDir || "dist";
+    let moduleDir;
+    if (manifest.module) {
+      moduleDir = Path.dirname(require.resolve(`${manifest.subAppDir}`));
+    }
+
     let subAppReq = manifest.module
-      ? Path.resolve("node_modules", `${manifest.subAppDir}/${modOutputDir}/${manifest.entry}`)
+      ? requireFromPath(moduleDir).resolve(`./${manifest.entry}`)
       : `${manifest.subAppDir}/${manifest.entry}`;
 
     // subapp has built-in code to handle HMR accept
@@ -71,7 +76,7 @@ function makeEntryPartial() {
 
     if (manifest.reducers) {
       const subAppReducers = manifest.module
-        ? Path.resolve("node_modules", `${manifest.subAppDir}/${modOutputDir}/reducers`)
+        ? requireFromPath(moduleDir).resolve(`./${manifest.reducers}`)
         : `../${manifest.subAppDir}/reducers`;
       reducerHmrCode = `
 import { getReduxCreateStore } from "subapp-redux";

@@ -115,8 +115,7 @@ function setupRouteRender({ subAppsByPath, srcDir, routeOptions }) {
       // else: assume dir under srcDir
       // TBD: handle it being a module
       if (x.indexOf("/") === -1) {
-        const xSrcDir = options.srcDir || "lib";
-        x = Path.resolve("node_modules", x, xSrcDir);
+        x = Path.dirname(require.resolve(`${x}`));
       }
       return {
         subapp: subAppsByPath[Path.isAbsolute(x) ? x : Path.resolve(srcDir, x)],
