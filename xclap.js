@@ -138,7 +138,8 @@ const testGenerator = (testDir, name, clean, runTest, prompts) => {
 xclap.load({
   ".lerna.coverage":
     "~$lerna run --ignore ignite-core --ignore electrode-ignite --ignore generator-electrode --stream coverage",
-  bootstrap: "~$fynpo --ignore ignite-core electrode-ignite generator-electrode",
+  bootstrap:
+    "~$fynpo --ignore ignite-core electrode-ignite generator-electrode electrode-ui-config",
   test: ["bootstrap", ".lerna.coverage", "build-test"],
   "test-generator": [".test-generator --all"],
   "test-create-app": [".test-create-app"],
