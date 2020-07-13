@@ -115,7 +115,7 @@ function setupRouteRender({ subAppsByPath, srcDir, routeOptions }) {
       // else: assume dir under srcDir
       // TBD: handle it being a module
       if (x.indexOf("/") === -1) {
-        x = Path.dirname(require.resolve(`${x}`));
+        x = Path.dirname(require.resolve(`${x}/package.json`));
       }
       return {
         subapp: subAppsByPath[Path.isAbsolute(x) ? x : Path.resolve(srcDir, x)],
