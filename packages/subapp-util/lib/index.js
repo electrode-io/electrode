@@ -5,6 +5,7 @@
 const Url = require("url");
 const Path = require("path");
 const assert = require("assert");
+const _ = require("lodash");
 const optionalRequire = require("optional-require")(require);
 const scanDir = require("filter-scan-dir");
 const appMode = optionalRequire(Path.resolve(".prod/.app-mode.json"), { default: {} });
@@ -28,6 +29,15 @@ function removeExt(f) {
   const ix = f.lastIndexOf(".");
   return ix > 0 ? f.substring(0, ix) : f;
 }
+
+const validateModuleManifest = manifest => {
+  const entries = _.pick(manifest, ["entry", "serverEntry", "reducers"]);
+  Object.keys(entries).forEach(x => {
+    if (!Path.isAbsolute(entries[x])) {
+      throw new Error(`Error: manifest ${x} requires absolute path`);
+    }
+  });
+};
 
 //
 // scan a subapp's directory for additional things:
@@ -164,21 +174,22 @@ function scanSubAppsFromDir(srcDir, maxLevel = Infinity) {
   });
 
   // process subapps modules
-  const errors3 = modFiles.map(module => {
-    try {
-      const manifests = es6Require(Path.join(fullSrcDir, module));
-      Object.keys(manifests).forEach(modName => {
+  let errors3 = [];
+  if (modFiles.length > 0) {
+    const manifests = es6Require(Path.join(fullSrcDir, modFiles[0]));
+    errors3 = Object.keys(manifests).map(modName => {
+      try {
         const manifest = manifests[modName];
-        const modFullDir = Path.dirname(require.resolve(`${modName}`));
+        validateModuleManifest(manifest);
+        const modFullDir = Path.dirname(require.resolve(`${modName}/package.json`));
         const subapp = Object.assign({ subAppDir: modName, module: true }, manifest);
-        scanSubAppAdditions(modFullDir, subapp);
         subApps[manifest.name] = subApps[MAP_BY_PATH_SYM][modFullDir] = subapp;
-      });
+      } catch (error) {
+        return error;
+      }
       return null;
-    } catch (error) {
-      return error;
-    }
-  });
+    });
+  }
 
   const errors = [].concat(errors1, errors2, errors3).filter(x => x);
   if (errors.length > 0) {
@@ -260,11 +271,7 @@ function loadSubAppByName(name) {
   const container = getSubAppContainer();
   const subAppDir = manifest.subAppDir;
   // load subapp's entry
-  const fullSubappDir = manifest.module
-    ? Path.dirname(require.resolve(`${subAppDir}`))
-    : Path.resolve(appSrcDir(), subAppDir);
-
-  xrequire(Path.join(fullSubappDir, manifest.entry));
+  xrequire(manifest.module ? manifest.entry : Path.resolve(appSrcDir(), subAppDir, manifest.entry));
 
   // if subapp did not register itself then register it
   if (!container[name]) {
@@ -279,18 +286,18 @@ function loadSubAppServerByName(name) {
   const manifest = subAppManifest()[name];
   const { subAppDir, serverEntry } = manifest;
 
-  const fullSubappDir = manifest.module
-    ? Path.dirname(require.resolve(`${subAppDir}`))
-    : Path.resolve(appSrcDir(), subAppDir);
-
   if (serverEntry) {
-    return es6Require(Path.join(fullSubappDir, serverEntry));
+    return es6Require(
+      manifest.module ? serverEntry : Path.resolve(appSrcDir(), subAppDir, serverEntry)
+    );
   } else if (serverEntry === false) {
     return {};
   }
 
   // generate a server from subapp's main file
-  const subapp = es6Require(Path.join(fullSubappDir, manifest.entry));
+  const subapp = es6Require(
+    manifest.module ? manifest.entry : Path.resolve(appSrcDir(), subAppDir, manifest.entry)
+  );
 
   return {
     StartComponent: subapp.Component
@@ -301,14 +308,16 @@ function refreshSubAppByName(name) {
   const manifest = subAppManifest()[name];
   const { subAppDir } = manifest;
 
-  const fullSubappDir = manifest.module
-    ? Path.dirname(require.resolve(`${subAppDir}`))
-    : Path.resolve(appSrcDir(), subAppDir);
-
-  const entryFullPath = xrequire.resolve(Path.join(fullSubappDir, manifest.entry));
+  const entryFullPath = xrequire.resolve(
+    manifest.module ? manifest.entry : Path.resolve(appSrcDir(), subAppDir, manifest.entry)
+  );
   if (!xrequire.cache[entryFullPath] && manifest.serverEntry) {
     // also reload server side module
-    const serverEntryFullPath = xrequire.resolve(Path.join(fullSubappDir, manifest.serverEntry));
+    const serverEntryFullPath = xrequire.resolve(
+      manifest.module
+        ? manifest.serverEntry
+        : Path.resolve(appSrcDir(), subAppDir, manifest.serverEntry)
+    );
     console.log("reloading server side subapp", name, serverEntryFullPath);
     delete xrequire.cache[serverEntryFullPath];
   }
