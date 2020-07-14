@@ -35,7 +35,8 @@ const validateModuleManifest = manifest => {
   Object.keys(entries).forEach(x => {
     if (!Path.isAbsolute(entries[x])) {
       throw new Error(
-        `Could not resolve subapp ${x} "${entries[x]}". Please provide absolute path to the ${x} in subapp manifest`
+        `Could not resolve subapp ${x} "${entries[x]}".\
+ Please provide absolute path to the ${x} in subapp manifest`
       );
     }
   });
