@@ -10,8 +10,7 @@ const electrodeConfippet = require("electrode-confippet");
 const support = require("@xarc/app/support");
 
 //
-const staticPathsDecor = require("electrode-static-paths");
-const electrodeServer = require("electrode-server");
+const electrodeServer = require("@xarc/fastify-server");
 
 //
 // sample to show electrode server startup events
@@ -23,14 +22,14 @@ function setupElectrodeServerEvents(emitter) {
   emitter.on("connection-set", (data, next) => next());
   emitter.on("plugins-sorted", (data, next) => next());
   emitter.on("plugins-registered", (data, next) => next());
+  q;
   emitter.on("server-started", (data, next) => next());
   emitter.on("complete", (data, next) => next());
 }
 
 const startServer = config => {
-  const decor = staticPathsDecor();
   if (!config.listener) config.listener = setupElectrodeServerEvents;
-  return electrodeServer(config, [decor]);
+  return electrodeServer(config, []);
 };
 
 //

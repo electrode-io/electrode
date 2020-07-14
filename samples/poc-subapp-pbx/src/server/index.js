@@ -1,6 +1,5 @@
 "use strict";
 
-const xaa = require("xaa");
 /* eslint-disable global-require */
 
 process.on("SIGINT", () => {
@@ -9,10 +8,10 @@ process.on("SIGINT", () => {
 
 const electrodeConfippet = require("electrode-confippet");
 const support = require("@xarc/app/support");
+const xaa = require("xaa");
 
 //
-const staticPathsDecor = require("electrode-static-paths");
-const electrodeServer = require("electrode-server");
+const electrodeServer = require("@xarc/fastify-server");
 
 //
 // sample to show electrode server startup events
@@ -29,32 +28,21 @@ function setupElectrodeServerEvents(emitter) {
 }
 
 const startServer = config => {
-  const decor = staticPathsDecor();
-  if (!config.listener) config.listener = setupElectrodeServerEvents;
-  return electrodeServer(config, [decor]);
+  if (!config.listener) {
+    config.listener = setupElectrodeServerEvents;
+  }
+
+  const server = electrodeServer(config, []);
+  return server;
 };
 
 //
 
 module.exports = async () => {
-  await support.load(); // loads runtime support
-
-  try {
-    const config = electrodeConfippet.config;
-    const server = await startServer(config);
-    server.route({
-      path: "/api/{delay}",
-      method: "get",
-      async handler(request, h) {
-        const delay = Number(request.params.delay);
-        await xaa.delay(delay);
-        return `hello ${request.query.msg} - delay ${delay}`;
-      }
-    });
-  } catch (err) {
-    console.log("start server failed -", err.message); // eslint-disable-line
-    process.exit(1);
-  }
+  await support.load();
+  const config = electrodeConfippet.config;
+  const server = await startServer(config);
+  return server;
 };
 
 if (require.main === module) {
