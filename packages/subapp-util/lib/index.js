@@ -184,7 +184,7 @@ function scanSubAppsFromDir(srcDir, maxLevel = Infinity) {
       try {
         const manifest = manifests[modName];
         validateModuleManifest(manifest);
-        const modFullDir = Path.dirname(require.resolve(`${modName}/package.json`));
+        const modFullDir = Path.dirname(require.resolve(modName));
         const subapp = Object.assign({ subAppDir: modName, module: true }, manifest);
         subApps[manifest.name] = subApps[MAP_BY_PATH_SYM][modFullDir] = subapp;
       } catch (error) {

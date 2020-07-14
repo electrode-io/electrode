@@ -108,14 +108,19 @@ function setupRouteRender({ subAppsByPath, srcDir, routeOptions }) {
     routeOptions.__internals.subApps = [].concat(routeOptions.subApps).map(x => {
       let options = {};
       if (Array.isArray(x)) {
-        options = x[1] || {};
+        options = x[1];
         x = x[0];
       }
       // absolute: use as path
       // module: resolve module path
       // else: assume dir under srcDir
-      if (options.module) {
-        x = Path.dirname(require.resolve(`${x}/package.json`));
+      if (!x.startsWith(".") && !x.startsWith("/")) {
+        const subAppPath = optionalRequire.resolve(x);
+        if (subAppPath) {
+          const { manifest, subAppOptions } = require(x);
+          x = manifest ? Path.dirname(subAppPath) : x;
+          options = subAppOptions || {};
+        }
       }
       return {
         subapp: subAppsByPath[Path.isAbsolute(x) ? x : Path.resolve(srcDir, x)],
