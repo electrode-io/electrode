@@ -42,7 +42,6 @@
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "optional-require": "^1.0.0",
     "require-at": "^1.0.2",
-    "require-from-path": "^1.0.4",
     "url-loader": "^0.6.2",
     "webpack": "^4.41.0",
     "webpack-config-composer": "^1.1.3",

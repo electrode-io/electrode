@@ -11,7 +11,6 @@ const AppMode = archetype.AppMode;
 const chalk = require("chalk");
 const logger = require("@xarc/app/lib/logger");
 const mkdirp = require("mkdirp");
-const requireFromPath = require("require-from-path");
 
 const DEV_HMR_DIR = ".__dev_hmr";
 
