@@ -112,7 +112,7 @@ function setupRouteRender({ subAppsByPath, srcDir, routeOptions }) {
         x = x[0];
       }
       // absolute: use as path
-      // is module: resolve module path
+      // module: resolve module path
       // else: assume dir under srcDir
       if (options.module) {
         x = Path.dirname(require.resolve(`${x}/package.json`));
