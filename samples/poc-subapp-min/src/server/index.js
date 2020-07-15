@@ -22,7 +22,6 @@ function setupElectrodeServerEvents(emitter) {
   emitter.on("connection-set", (data, next) => next());
   emitter.on("plugins-sorted", (data, next) => next());
   emitter.on("plugins-registered", (data, next) => next());
-  q;
   emitter.on("server-started", (data, next) => next());
   emitter.on("complete", (data, next) => next());
 }
