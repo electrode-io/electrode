@@ -36,7 +36,6 @@ export function loadSubApp(info, renderStart, options) {
   subApp._renderStart =
     renderStart ||
     ((options, element) => {
-debugger;
       const lib = new FrameworkLib({ subApp, element, options });
 
       return lib.renderStart();

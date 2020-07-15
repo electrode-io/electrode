@@ -364,7 +364,6 @@ ${stack}`,
             context.user[`prepare-grp-${props.group}`] = Date.now();
           }
           const lib = (ssrInfo.lib = util.getFramework(ref));
-console.log(lib);
           ssrInfo.awaitData = lib.handlePrepare();
 
           ssrInfo.defer = true;
