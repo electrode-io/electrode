@@ -106,7 +106,7 @@ function setupRouteRender({ subAppsByPath, srcDir, routeOptions }) {
   // load subapps for the route
   if (routeOptions.subApps) {
     routeOptions.__internals.subApps = [].concat(routeOptions.subApps).map(x => {
-      let options = {};
+      let options;
       if (Array.isArray(x)) {
         options = x[1];
         x = x[0];
@@ -119,12 +119,12 @@ function setupRouteRender({ subAppsByPath, srcDir, routeOptions }) {
         if (subAppPath) {
           const { manifest, subAppOptions } = require(x);
           x = manifest ? Path.dirname(subAppPath) : x;
-          options = subAppOptions || {};
+          options = options || subAppOptions;
         }
       }
       return {
         subapp: subAppsByPath[Path.isAbsolute(x) ? x : Path.resolve(srcDir, x)],
-        options
+        options: options || {}
       };
     });
   }
