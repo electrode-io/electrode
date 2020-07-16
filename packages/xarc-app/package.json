@@ -1,6 +1,6 @@
 {
   "name": "@xarc/app",
-  "version": "8.1.6",
+  "version": "8.1.7",
   "description": "Electrode X application runtime support",
   "main": "arch-clap.js",
   "homepage": "http://www.electrode.io",
@@ -35,7 +35,7 @@
     "ignore-styles": "^5.0.1",
     "isomorphic-loader": "^3.1.0",
     "optional-require": "^1.0.0",
-    "subapp-util": "^1.0.5"
+    "subapp-util": "^1.1.0"
   },
   "devDependencies": {
     "chalk": "^1.1.3",
