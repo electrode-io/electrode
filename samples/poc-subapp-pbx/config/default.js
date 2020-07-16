@@ -13,15 +13,6 @@ module.exports = {
     "@xarc/app-dev": {
       enable: process.env.WEBPACK_DEV === "true"
     },
-    inert: {
-      enable: true
-    },
-    electrodeStaticPaths: {
-      enable: true,
-      options: {
-        pathPrefix: "dist"
-      }
-    },
     "subapp-server": { options: { cdn: { enable: true }, insertTokenIds: true } }
   },
   connections: {

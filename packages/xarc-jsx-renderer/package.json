@@ -106,8 +106,7 @@
   },
   "fyn": {
     "dependencies": {
-      "@xarc/render-context": "../xarc-render-context",
-      "xaa": "../../../xaa"
+      "@xarc/render-context": "../xarc-render-context"
     },
     "devDependencies": {}
   }
