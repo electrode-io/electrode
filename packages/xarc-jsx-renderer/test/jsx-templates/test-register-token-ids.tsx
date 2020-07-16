@@ -7,13 +7,13 @@ import {
   Require,
   Literal,
   Component,
-  LoadTokenHandler
+  RegisterTokenIds
 } from "../../src";
 
 const Template = () => {
   return (
     <IndexPage DOCTYPE="html">
-      <LoadTokenHandler
+      <RegisterTokenIds
         name="test1"
         handler={() => {
           return {
@@ -22,11 +22,11 @@ const Template = () => {
         }}
       />
       <Token _id="FOO" />
-      <LoadTokenHandler handler="../fixtures/token-handler" />
+      <RegisterTokenIds handler="../fixtures/token-handler" />
       <Token _id="user-token-1" />
-      <LoadTokenHandler name="name_with_call" call="handler2" handler="../fixtures/token-handler" />
+      <RegisterTokenIds name="name_with_call" call="handler2" handler="../fixtures/token-handler" />
       {/* Test re-entry */}
-      <LoadTokenHandler name="name_with_call" call="handler2" handler="../fixtures/token-handler" />
+      <RegisterTokenIds name="name_with_call" call="handler2" handler="../fixtures/token-handler" />
       <Token _id="TOKEN_HANDLER2" />
     </IndexPage>
   );

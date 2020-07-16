@@ -16,7 +16,9 @@ import Template7 from "../jsx-templates/test7";
 import Template8 from "../jsx-templates/test8";
 import Template9 from "../jsx-templates/test9";
 import Template91 from "../jsx-templates/test91";
-import TemplateLoadTokenHandler from "../jsx-templates/test-load-token-handler";
+import TemplateRegisterTokenIds from "../jsx-templates/test-register-token-ids";
+import * as xstdout from "xstdout";
+import { asyncVerify, runFinally } from "run-verify";
 
 describe("IndexPage", function () {
   it("should have static memoize", () => {
@@ -167,11 +169,17 @@ describe("Jsx Renderer", function () {
 
     renderer.initializeRenderer();
 
-    const promise = renderer.render({});
-    return promise.then(context => {
-      verify(context);
-      return renderer.render({}).then(verify);
-    });
+    const intercept = xstdout.intercept(true);
+
+    return asyncVerify(
+      () => renderer.render({}),
+      verify,
+      () => renderer.render({}),
+      verify,
+      runFinally(() => {
+        intercept.restore();
+      })
+    );
   });
 
   it("should handle failure in nesting async components", async () => {
@@ -387,7 +395,7 @@ World`
     const renderer = new JsxRenderer({
       insertTokenIds: true,
       templateFullPath: Path.dirname(require.resolve("../jsx-templates/test91")),
-      template: TemplateLoadTokenHandler
+      template: TemplateRegisterTokenIds
     });
 
     renderer.initializeRenderer();

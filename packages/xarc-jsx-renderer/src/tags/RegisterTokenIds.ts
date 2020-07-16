@@ -12,8 +12,8 @@ import { JsxRenderer } from "../JsxRenderer";
  *
  * Usage: (*This is a JSX tag, don't call the function directly.*)
  *
- *  - With function: `<LoadTokenHandler name="handler1" handler={() => {...}}`
- *  - Load from source file: `<LoadTokenHandler handler="./token-handlers" />`
+ *  - With function: `<RegisterTokenIds name="handler1" handler={() => {...}}`
+ *  - Load from source file: `<RegisterTokenIds handler="./token-handlers" />`
  *    - If the handler string starts with `"."` then it will be resolved to the full
  *      path relative to the template's location, else it's a module for require.
  *    - The full path of the handler will be used as `name`, but you can provide
@@ -24,10 +24,10 @@ import { JsxRenderer } from "../JsxRenderer";
  * Example:
  *
  * ```js
- * import { IndexPage, Token, LoadTokenHandler } from "@xarc/jsx-renderer"
+ * import { IndexPage, Token, RegisterTokenIds } from "@xarc/jsx-renderer"
  *
  * export const Template = () => (<IndexPage>
- *   <LoadTokenHandler name="handler1" handler={setupContext => {
+ *   <RegisterTokenIds name="handler1" handler={setupContext => {
  *     return {
  *       TOKEN1: context => {
  *         return "result from TOKEN1"
@@ -41,7 +41,7 @@ import { JsxRenderer } from "../JsxRenderer";
  * @param props - JSX tag props
  * @param context - rendering context
  */
-export const LoadTokenHandler = (props, context) => {
+export const RegisterTokenIds = (props, context) => {
   const renderer: JsxRenderer = context.asyncTemplate;
   renderer.registerTokenHandler(props.name, props.handler, props.call);
 };
