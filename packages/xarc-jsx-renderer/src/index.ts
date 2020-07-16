@@ -10,10 +10,10 @@ import { Token } from "./tags/Token";
 import { IndexPage } from "./tags/IndexPage";
 import { Require } from "./tags/Require";
 import { Literal } from "./tags/Literal";
-import { LoadTokenHandler } from "./tags/LoadTokenHandler";
+import { RegisterTokenIds } from "./tags/RegisterTokenIds";
 
 /** @ignore */
-export { Component, Token, IndexPage, Require, Literal, JsxRenderer, LoadTokenHandler };
+export { Component, Token, IndexPage, Require, Literal, JsxRenderer, RegisterTokenIds };
 
 let ELEMENT_ID = 0;
 

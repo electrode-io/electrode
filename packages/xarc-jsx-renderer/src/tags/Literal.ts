@@ -12,6 +12,12 @@ import * as _ from "lodash";
 
 const MEMOIZE = {};
 
+/**
+ * Load literal data from a file and insert into the output
+ *
+ * @param props
+ * @param _context
+ */
 export function Literal(props: any, _context: any) {
   // const renderer = context.asyncTemplate;
 
