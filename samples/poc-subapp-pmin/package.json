@@ -33,11 +33,11 @@
     "build": "clap build"
   },
   "dependencies": {
-    "@hapi/inert": "^5.2.2",
-    "@xarc/app": "^6.3.0",
+    "@xarc/app": "^8.1.6",
+    "@xarc/app-dev": "^8.1.6",
+    "@xarc/fastify-server": "^2.0.0",
     "electrode-confippet": "^1.5.0",
     "electrode-server": "^3.0.0",
-    "electrode-static-paths": "^3.0.0",
     "preact": "^10.1.1",
     "preact-render-to-string": "^5.1.3",
     "redux": "^4.0.4",
@@ -47,22 +47,17 @@
     "subapp-server": "../../packages/subapp-server"
   },
   "devDependencies": {
-    "@xarc/app-dev": "^6.3.0",
-    "electrode-archetype-opt-less": "../../packages/electrode-archetype-opt-less",
-    "electrode-archetype-opt-sass": "../../packages/electrode-archetype-opt-sass",
-    "electrode-archetype-opt-stylus": "../../packages/electrode-archetype-opt-stylus",
-    "tachyons-sass": "^4.9.5"
+    "@xarc/app-dev": "^8.1.6",
+     "tachyons-sass": "^4.9.5",
+     "electrode-archetype-opt-sass": "../../packages/electrode-archetype-opt-sass",
+     "electrode-archetype-opt-stylus": "../../packages/electrode-archetype-opt-stylus"
   },
   "fyn": {
     "dependencies": {
-      "@xarc/app": "../../packages/xarc-app",
-      "electrode-archetype-opt-preact": "../../packages/electrode-archetype-opt-preact"
+      "@xarc/app": "../../packages/xarc-app"
     },
     "devDependencies": {
-      "@xarc/app-dev": "../../packages/xarc-app-dev",
-      "electrode-archetype-opt-less": "../../packages/electrode-archetype-opt-less",
-      "electrode-archetype-opt-sass": "../../packages/electrode-archetype-opt-sass",
-      "electrode-archetype-opt-stylus": "../../packages/electrode-archetype-opt-stylus"
+      "@xarc/app-dev": "../../packages/xarc-app-dev"
     }
   },
   "optionalDependencies": {}

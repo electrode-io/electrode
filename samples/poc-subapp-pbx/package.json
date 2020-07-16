@@ -33,11 +33,12 @@
     "build": "clap build"
   },
   "dependencies": {
-    "@hapi/inert": "^5.2.2",
-    "@xarc/app": "^6.3.0",
+
+    "@xarc/app": "^8.1.6",
+    "@xarc/app-dev": "^8.1.6",
+    "@xarc/fastify-server": "^2.0.0",
     "electrode-confippet": "^1.5.0",
-    "electrode-server": "^3.0.0",
-    "electrode-static-paths": "^3.0.0",
+    "electrode-archetype-opt-sass": "^2.0.0",
     "preact": "^10.1.1",
     "preact-render-to-string": "^5.1.3",
     "redux": "^4.0.4",
@@ -48,7 +49,7 @@
     "xaa": "^1.3.1"
   },
   "devDependencies": {
-    "@xarc/app-dev": "^6.3.0",
+        "@xarc/app-dev": "^8.1.6",
     "electrode-archetype-opt-sass": "^2.0.0",
     "prettier": "^1.19.1",
     "tachyons-sass": "^4.9.5"

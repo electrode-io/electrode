@@ -34,11 +34,10 @@
     "test": "clap check",
     "build": "clap build"
   },
-  "dependencies": {
+    "dependencies": {
     "@xarc/app": "^8.1.6",
     "@xarc/app-dev": "^8.1.6",
     "@xarc/fastify-server": "^2.0.0",
-    "electrode-archetype-opt-react": "^3.0.0",
     "electrode-confippet": "^1.5.0",
     "react": "^16.13.1",
     "react-async-ssr": "^0.7.2",
@@ -52,24 +51,16 @@
     "subapp-server": "^1.2.4",
     "subapp-web": "^1.0.30"
   },
-  "devDependencies": {
-    "@xarc/app-dev": "^8.1.6",
-    "electrode-archetype-opt-eslint": "^2.0.0",
-    "electrode-archetype-opt-jest": "^25.0.0"
-  },
+  "devDependencies":{
+	"@xarc/app-dev": "^8.1.6"
+	},
   "fyn": {
     "dependencies": {
       "@xarc/app": "../../packages/xarc-app",
-      "electrode-archetype-opt-react": "../../packages/electrode-archetype-opt-react",
       "subapp-react": "../../packages/subapp-react",
       "subapp-redux": "../../packages/subapp-redux",
       "subapp-server": "../../packages/subapp-server",
       "subapp-web": "../../packages/subapp-web"
-    },
-    "devDependencies": {
-      "@xarc/app-dev": "../../packages/xarc-app-dev",
-      "electrode-archetype-opt-eslint": "../../packages/electrode-archetype-opt-eslint",
-      "electrode-archetype-opt-jest": "../../packages/electrode-archetype-opt-jest"
     }
   },
   "prettier": {
