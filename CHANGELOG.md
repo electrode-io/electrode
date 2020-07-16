@@ -1,3 +1,46 @@
+# 7/16/2020
+
+## Packages
+
+- [minor] Loading subapps from a different repo
+
+### Directly Updated
+
+- `@xarc/webpack@8.1.0` `(8.0.7 => 8.1.0)`
+- `subapp-server@1.3.0` `(1.2.4 => 1.3.0)`
+- `subapp-util@1.1.0` `(1.0.5 => 1.1.0)`
+
+### Lerna Updated
+
+- `@xarc/app@8.1.7` `(8.1.6 => 8.1.7)`
+- `@xarc/app-dev@8.1.7` `(8.1.6 => 8.1.7)`
+- `subapp-pbundle@0.0.25` `(0.0.24 => 0.0.25)`
+- `subapp-react@0.0.22` `(0.0.21 => 0.0.22)`
+- `subapp-redux@1.0.31` `(1.0.30 => 1.0.31)`
+- `subapp-web@1.0.31` `(1.0.30 => 1.0.31)`
+
+## Commits
+
+- `packages/xarc-webpack`
+
+  - [minor] Loading subapps from a different repo ([#1700](https://github.com/electrode-io/electrode/pull/1700)) [commit](http://github.com/electrode-io/electrode/commit/c3e45e030249ecbcacd46db46000870c1e24f5f7)
+
+- `packages/subapp-server`
+
+  - [minor] Loading subapps from a different repo ([#1700](https://github.com/electrode-io/electrode/pull/1700)) [commit](http://github.com/electrode-io/electrode/commit/c3e45e030249ecbcacd46db46000870c1e24f5f7)
+
+- `packages/subapp-util`
+
+  - [minor] Loading subapps from a different repo ([#1700](https://github.com/electrode-io/electrode/pull/1700)) [commit](http://github.com/electrode-io/electrode/commit/c3e45e030249ecbcacd46db46000870c1e24f5f7)
+
+- `docs`
+
+  - deploy new docs [commit](http://github.com/electrode-io/electrode/commit/147187239efe7610c429197d5078d340190a03db)
+
+- `docusaurus`
+
+  - docs reconfig ([#1698](https://github.com/electrode-io/electrode/pull/1698)) [commit](http://github.com/electrode-io/electrode/commit/c426720224f11c13b24b6b4f124fd983c8d0ff16)
+
 # 7/10/2020
 
 - remove bluebird from electrode-react-webapp
