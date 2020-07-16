@@ -100,7 +100,7 @@ describe("token handler in render context", function () {
         responseHandler: resp => resp
       });
     } catch (e) {
-      expect(e.message).to.equal("electrode-react-webapp: render-context - user intercepted");
+      expect(e.message).to.equal("@xarc/render-context: user intercepted response");
     }
   });
 

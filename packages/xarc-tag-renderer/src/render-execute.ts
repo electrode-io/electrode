@@ -1,17 +1,24 @@
-/* eslint-disable complexity */
+/* eslint-disable complexity, max-statements */
 
 import { TOKEN_HANDLER } from "@xarc/render-context";
 
-const executeSteps = {
+export const executeSteps = {
   STEP_HANDLER: 0,
   STEP_STR_TOKEN: 1,
   STEP_NO_HANDLER: 2,
-  STEP_LITERAL_HANDLER: 3
+  STEP_LITERAL_HANDLER: 3,
+  STEP_FUNC_HANDLER: 4
 };
 
-const { STEP_HANDLER, STEP_STR_TOKEN, STEP_NO_HANDLER, STEP_LITERAL_HANDLER } = executeSteps;
+const {
+  STEP_HANDLER,
+  STEP_STR_TOKEN,
+  STEP_NO_HANDLER,
+  STEP_LITERAL_HANDLER,
+  STEP_FUNC_HANDLER
+} = executeSteps;
 
-function renderNext(err: Error, xt) {
+export function renderNext(err: Error, xt) {
   const { renderSteps, context } = xt;
   if (err) {
     context.handleError(err);
@@ -35,34 +42,43 @@ function renderNext(err: Error, xt) {
     const tk = step.tk;
     const withId = step.insertTokenId;
     switch (step.code) {
+      case STEP_FUNC_HANDLER:
+        return context.handleTokenResult("", tk.func(context), e => {
+          return renderNext(e, xt);
+        });
       case STEP_HANDLER:
-        if (withId) insertTokenId(tk);
+        if (withId) {
+          insertTokenId(tk);
+        }
         return context.handleTokenResult(tk.id, tk[TOKEN_HANDLER](context, tk), e => {
-          if (withId) insertTokenIdEnd(tk);
+          if (withId) {
+            insertTokenIdEnd(tk);
+          }
           return renderNext(e, xt);
         });
       case STEP_STR_TOKEN:
         context.output.add(tk.str);
         break;
       case STEP_NO_HANDLER:
-        context.output.add(`<!-- unhandled token ${tk.id} -->`);
+        context.output.add(`<!-- unhandled token ${tk.id} -->\n`);
         break;
       case STEP_LITERAL_HANDLER:
-        if (withId) insertTokenId(tk);
+        if (withId) {
+          insertTokenId(tk);
+        }
         context.output.add(step.data);
-        if (withId) insertTokenIdEnd(tk);
+        if (withId) {
+          insertTokenIdEnd(tk);
+        }
         break;
     }
     return renderNext(null, xt);
   }
 }
 
-function executeRenderSteps(renderSteps, context) {
+export function executeRenderSteps(renderSteps, context) {
   return new Promise(resolve => {
     const xt = { stepIndex: 0, renderSteps, context, resolve };
     return renderNext(null, xt);
   });
 }
-
-const RenderExecute = { executeRenderSteps, renderNext, executeSteps };
-export default RenderExecute;

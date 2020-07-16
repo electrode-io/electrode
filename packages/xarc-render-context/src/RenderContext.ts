@@ -113,7 +113,7 @@ export class RenderContext {
    */
   intercept({ responseHandler }) {
     this._intercepted = { responseHandler };
-    throw new Error("electrode-react-webapp: render-context - user intercepted");
+    throw new Error("@xarc/render-context: user intercepted response");
   }
 
   fullStop() {

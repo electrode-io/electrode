@@ -11,6 +11,9 @@
   "keywords": [],
   "author": "Electrode <https://github.com/electrode-io/electrode>",
   "license": "Apache-2.0",
+  "dependencies": {
+    "@xarc/render-context": "^1.0.0"
+  },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@types/chai": "^4.2.11",
@@ -20,7 +23,7 @@
     "@types/sinon-chai": "^3.2.4",
     "@typescript-eslint/eslint-plugin": "^2.21.0",
     "@typescript-eslint/parser": "^2.21.0",
-    "@xarc/module-dev": "^2.1.1",
+    "@xarc/module-dev": "^2.1.2",
     "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
     "eslint": "^6.8.0",
@@ -35,12 +38,10 @@
     "ts-node": "^8.6.2",
     "typedoc": "^0.17.4",
     "typescript": "^3.8.3",
-    "xstdout": "^0.1.1",
-    "@xarc/render-context": "^1.0.0"
+    "xstdout": "^0.1.1"
   },
   "mocha": {
     "require": [
-      "@babel/register",
       "ts-node/register",
       "source-map-support/register",
       "@xarc/module-dev/config/test/setup.js"
@@ -51,9 +52,6 @@
     "dist",
     "src"
   ],
-  "dependencies": {
-    "ts-node": "^8.10.2"
-  },
   "nyc": {
     "extends": [
       "@istanbuljs/nyc-config-typescript"
@@ -81,8 +79,9 @@
     "cache": false
   },
   "fyn": {
-    "devDependencies": {
+    "dependencies": {
       "@xarc/render-context": "../xarc-render-context"
-    }
+    },
+    "devDependencies": {}
   }
 }
