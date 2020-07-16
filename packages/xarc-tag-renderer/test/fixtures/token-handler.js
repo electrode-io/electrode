@@ -40,7 +40,7 @@ module.exports = () => {
     },
 
     PAGE_TITLE: () => {
-      return "<title>user-handler-title</title>";
+      return "<title>user-handler-title</title>\n";
     },
 
     TEST_DYNAMIC_2: () => {

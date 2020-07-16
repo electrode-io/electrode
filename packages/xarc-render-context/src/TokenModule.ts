@@ -16,6 +16,7 @@ export class TokenModule {
   wantsNext: any;
   props: any;
   _modCall: any;
+  _tokenMod: any;
 
   constructor(id, pos, props, templateDir) {
     this.id = id;
@@ -43,10 +44,14 @@ export class TokenModule {
     this[TEMPLATE_DIR] = this.props[TEMPLATE_DIR] || templateDir || process.cwd();
   }
 
+  set tokenMod(tm) {
+    this._tokenMod = tm;
+  }
+
   // if token is a module, then load it
-  load(options = {}) {
+  load(options: any = {}) {
     if (!this.isModule || this.custom !== undefined) return;
-    let tokenMod = viewTokenModules[this.id];
+    let tokenMod = this._tokenMod || viewTokenModules[this.id];
 
     if (tokenMod === undefined) {
       if (this._modCall) {
@@ -56,12 +61,13 @@ export class TokenModule {
       }
       viewTokenModules[this.id] = tokenMod;
     }
+
     if (this._modCall) {
       // call setup function to get an instance
       const params = [options, this].concat(this._modCall[1] || []);
       assert(
         tokenMod[this._modCall[0]],
-        `electrode-react-webapp: _call of token ${this.id} - '${this._modCall[0]}' not found`
+        `@xarc/render-context: _call of token ${this.id} - '${this._modCall[0]}' not found`
       );
       this.custom = tokenMod[this._modCall[0]](...params);
     } else {
@@ -69,7 +75,9 @@ export class TokenModule {
     }
 
     /* if token doesn't provide any code (null) then there's no handler to set for it */
-    if (this.custom === null) return;
+    if (this.custom === null) {
+      return;
+    }
 
     assert(
       this.custom && this.custom.process,
