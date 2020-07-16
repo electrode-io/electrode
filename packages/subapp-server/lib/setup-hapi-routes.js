@@ -73,11 +73,7 @@ async function registerRoutesFromFile({ server, srcDir, routes, topOpts }) {
     const handler = async (request, h) => {
       try {
         const context = await routeRenderer({
-          content: {
-            html: "",
-            status: 200,
-            useStream
-          },
+          useStream,
           mode: "",
           request
         });

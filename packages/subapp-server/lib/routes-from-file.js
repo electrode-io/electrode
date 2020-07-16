@@ -37,8 +37,6 @@ function setupRouteTemplate({ subAppsByPath, srcDir, routeOptions }) {
     });
   }
 
-  // const useStream = routeOptions.useStream !== false;
-
   const routeHandler = templateRouting.makeRouteTemplateSelector(routeOptions);
 
   return routeHandler;

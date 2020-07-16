@@ -33,11 +33,7 @@ function makeRouteHandler({ path, routeRenderer, routeOptions }) {
   return async (request, reply) => {
     try {
       const context = await routeRenderer({
-        content: {
-          html: "",
-          status: HttpStatusCodes.OK,
-          useStream
-        },
+        useStream,
         mode: "",
         request
       });

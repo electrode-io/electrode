@@ -7,23 +7,18 @@ import {
   getDevJsBundle,
   getProdBundles,
   processRenderSsMode,
-  getCspNonce,
-  isReadableStream
+  getCspNonce
 } from "./utils";
-
-import { getContent, transformOutput } from "./content";
 
 import prefetchBundles from "./handlers/prefetch-bundles";
 
 export const tokens = {
   INITIALIZE: "INITIALIZE",
-  SSR_CONTENT: "SSR_CONTENT",
   PREFETCH_BUNDLES: "PREFETCH_BUNDLES",
   META_TAGS: "META_TAGS",
   CRITICAL_CSS: "CRITICAL_CSS",
   HEAD_INITIALIZE: "HEAD_INITIALIZE",
   HEAD_CLOSED: "HEAD_CLOSED",
-  AFTER_SSR_CONTENT: "AFTER_SSR_CONTENT",
   BODY_CLOSED: "BODY_CLOSED",
   HTML_CLOSED: "HTML_CLOSED"
 };
@@ -66,56 +61,43 @@ export default function setup(handlerContext /*, asyncTemplate*/) {
     const mode = options.mode;
     const renderSs = processRenderSsMode(request, RENDER_SS, mode);
 
-    return getContent(renderSs, options, context).then(content => {
-      if (content.render === false || content.html === undefined) {
-        return context.voidStop(content);
-      }
+    const chunkNames = chunkSelector(request);
 
-      const chunkNames = chunkSelector(request);
+    const devCSSBundle = getDevCssBundle(chunkNames, routeData);
+    const devJSBundle = getDevJsBundle(chunkNames, routeData);
 
-      const devCSSBundle = getDevCssBundle(chunkNames, routeData);
-      const devJSBundle = getDevJsBundle(chunkNames, routeData);
+    const { jsChunk, cssChunk } = getProdBundles(chunkNames, routeData);
+    const { scriptNonce, styleNonce } = getCspNonce(request, routeOptions.cspNonceValue);
 
-      const { jsChunk, cssChunk } = getProdBundles(chunkNames, routeData);
-      const { scriptNonce, styleNonce } = getCspNonce(request, routeOptions.cspNonceValue);
+    const renderJs = RENDER_JS && mode !== "nojs";
 
-      const renderJs = RENDER_JS && mode !== "nojs";
+    context.user = {
+      request: options.request,
+      response: {
+        headers: {}
+      },
+      routeOptions,
+      routeData,
+      mode,
+      renderJs,
+      renderSs,
+      scriptNonce,
+      styleNonce,
+      chunkNames,
+      devCSSBundle,
+      devJSBundle,
+      jsChunk,
+      cssChunk
+    };
 
-      context.user = {
-        request: options.request,
-        response: {
-          headers: {}
-        },
-        routeOptions,
-        routeData,
-        content,
-        mode,
-        renderJs,
-        renderSs,
-        scriptNonce,
-        styleNonce,
-        chunkNames,
-        devCSSBundle,
-        devJSBundle,
-        jsChunk,
-        cssChunk
-      };
+    if (context.options.useStream) {
+      context.setMunchyOutput();
+    }
 
-      if (content.useStream || isReadableStream(content.html)) {
-        context.setMunchyOutput();
-      }
-
-      context.setOutputTransform(transformOutput);
-
-      return context;
-    });
+    return context;
   };
 
   const tokenHandlers = {
-    [tokens.SSR_CONTENT]: context => {
-      return (context.user.content && context.user.content.html) || "";
-    },
-
     [tokens.PREFETCH_BUNDLES]: prefetchBundles,
 
     [tokens.META_TAGS]: iconStats,
@@ -127,7 +109,6 @@ export default function setup(handlerContext /*, asyncTemplate*/) {
     [tokens.INITIALIZE]: Initialize,
     [tokens.HEAD_INITIALIZE]: null,
     [tokens.HEAD_CLOSED]: null,
-    [tokens.AFTER_SSR_CONTENT]: null,
     [tokens.BODY_CLOSED]: null,
     [tokens.HTML_CLOSED]: null
   };

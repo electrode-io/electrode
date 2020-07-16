@@ -143,6 +143,21 @@ ${errMsg()}
 }
 
 /**
+ *
+ * @param scripts
+ * @param scriptNonce
+ */
+const htmlifyScripts = (scripts, scriptNonce) => {
+  return scripts
+    .map(x =>
+      typeof x === "string"
+        ? `<script${scriptNonce || ""}>${x}</script>\n`
+        : x.map(n => `<script src="${n.src}"></script>`).join("\n")
+    )
+    .join("\n");
+};
+
+/**
  * @param chunkNames
  * @param routeData
  */
@@ -364,6 +379,7 @@ export {
   getCriticalCSS,
   getStatsPath,
   resolvePath,
+  htmlifyScripts,
   htmlifyError,
   getDevCssBundle,
   getDevJsBundle,
