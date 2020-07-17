@@ -22,17 +22,25 @@ function setupRouteTemplate({ subAppsByPath, srcDir, routeOptions }) {
   // load subapps for the route
   if (routeOptions.subApps) {
     routeOptions.__internals.subApps = [].concat(routeOptions.subApps).map(x => {
-      let options = {};
+      let options;
       if (Array.isArray(x)) {
         options = x[1];
         x = x[0];
       }
       // absolute: use as path
+      // module: resolve module path
       // else: assume dir under srcDir
-      // TBD: handle it being a module
+      if (!x.startsWith(".") && !x.startsWith("/")) {
+        const subAppPath = optionalRequire.resolve(x);
+        if (subAppPath) {
+          const { manifest, subAppOptions } = require(x);
+          x = manifest ? Path.dirname(subAppPath) : x;
+          options = options || subAppOptions;
+        }
+      }
       return {
         subapp: subAppsByPath[Path.isAbsolute(x) ? x : Path.resolve(srcDir, x)],
-        options
+        options: options || {}
       };
     });
   }
