@@ -1,10 +1,10 @@
-import { TagTemplate, createTemplateTags, Token, TokenInvoke, RegisterTokenIds } from "../../src";
+import { createTemplateTags, Token, TokenInvoke, RegisterTokenIds } from "../../src";
 
 const nullTokenProcess = () => {
   return null;
 };
 
-const templateTags = createTemplateTags`<html>
+export const templateTags = createTemplateTags`<html>
 <head>
   ${Token("ssr-content")}
   ${Token("webapp-header-bundles")}
@@ -28,5 +28,3 @@ const templateTags = createTemplateTags`<html>
 </html>
 ${Token("page-title")}
 `;
-
-export const template = new TagTemplate({ templateTags, templateDir: __dirname });

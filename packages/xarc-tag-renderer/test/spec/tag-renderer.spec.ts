@@ -1,15 +1,15 @@
 import { expect } from "chai";
-import { TagRenderer } from "../../src";
-import { template as template1 } from "../data/template1";
-import { template as template2 } from "../data/template2";
+import { TagRenderer, createTemplateTags } from "../../src";
+import { templateTags as templateTags1 } from "../data/template1";
+import { templateTags as templateTags2 } from "../data/template2";
+import { templateTags as templateTags3 } from "../data/template3";
 
 import { describe, it } from "mocha";
-import { TagTemplate, createTemplateTags } from "../../src";
 
 describe("tag template", function () {
   it("should render a TagTemplate", async () => {
     const renderer = new TagRenderer({
-      template: template1
+      templateTags: templateTags1
     });
 
     renderer.initializeRenderer();
@@ -24,9 +24,27 @@ describe("tag template", function () {
     expect(context.result).contains("custom-1</div>hello world from function: user,options");
   });
 
+  it("should render a TagTemplate with handler that returns a sub template", async () => {
+    const renderer = new TagRenderer({
+      templateTags: templateTags3
+    });
+
+    renderer.initializeRenderer();
+
+    const context = await renderer.render({});
+
+    expect(context.result).contains("<div>from custom-1</div>");
+    expect(context.result).contains(
+      "<div>subTags</div><div>sub template tagsx1<div>sub template tags 2x2</div></div><div>subTags</div>"
+    );
+    expect(context.result).contains(
+      "<div>subTagsPromise</div><div>sub template tagsx1<div>sub template tags 2x2</div></div><div>subTagsPromise</div>"
+    );
+  });
+
   it("should render a TagTemplate with token IDs as comments", async () => {
     const renderer = new TagRenderer({
-      template: template1,
+      templateTags: templateTags1,
       insertTokenIds: true
     });
 
@@ -54,7 +72,7 @@ ABC<!-- ABC END -->`
 
   it("should catch and return error as result", async () => {
     const renderer = new TagRenderer({
-      template: template1
+      templateTags: templateTags1
     });
 
     renderer.registerTokenIds("test", Symbol("test"), () => {
@@ -73,11 +91,9 @@ ABC<!-- ABC END -->`
 
   it("should invoke context handleError if a token returns error", async () => {
     const renderer = new TagRenderer({
-      template: new TagTemplate({
-        templateTags: createTemplateTags`${() => {
-          return Promise.reject(new Error("test blah"));
-        }}`
-      })
+      templateTags: createTemplateTags`${() => {
+        return Promise.reject(new Error("test blah"));
+      }}`
     });
 
     renderer.initializeRenderer();
@@ -87,9 +103,40 @@ ABC<!-- ABC END -->`
     expect(context.result.message).equal("test blah");
   });
 
+  it("should catch and handle error from executing a sub template", async () => {
+    const renderer = new TagRenderer({
+      templateTags: templateTags1
+    });
+
+    renderer.initializeRenderer();
+    renderer._template.initTagOpCode();
+    renderer.registerTokenIds(
+      "test",
+      Symbol("test"),
+      () => {
+        return {
+          X: () => {
+            throw new Error("test");
+          }
+        };
+      },
+      1
+    );
+
+    const context = await renderer.render({});
+
+    expect(context.result).to.be.an("Error");
+    expect(context.result.message).equal("test");
+  });
+
   it("should invoke RegisterTokenIds tag once only", () => {
     const renderer = new TagRenderer({
-      template: template1
+      templateTags: templateTags1,
+      tokenHandlers: [
+        () => {
+          return {};
+        }
+      ]
     });
 
     const handler = () => ({});
@@ -106,7 +153,7 @@ ABC<!-- ABC END -->`
 
   it("should allow context to void progress and return a replacement result", async () => {
     const renderer = new TagRenderer({
-      template: template1
+      templateTags: templateTags1
     });
 
     renderer.registerTokenIds("test", Symbol("test"), () => {
@@ -124,18 +171,17 @@ ABC<!-- ABC END -->`
 
   it("should handle token invoke handler return null", async () => {
     const renderer = new TagRenderer({
-      template: template2
+      templateTags: templateTags2
     });
     renderer.initializeRenderer();
     const context = await renderer.render({});
-    console.log(context.result);
     expect(context.result).contains(`<!-- unhandled token meta-tags -->
 <div>test</div>`);
   });
 
   it("should handle token invoke handler return null with comments", async () => {
     const renderer = new TagRenderer({
-      template: template2,
+      templateTags: templateTags2,
       insertTokenIds: true
     });
     renderer.initializeRenderer();
@@ -145,7 +191,7 @@ ABC<!-- ABC END -->`
 
   it("should handle token ID being null", async () => {
     const renderer = new TagRenderer({
-      template: template2
+      templateTags: templateTags2
     });
     renderer.initializeRenderer();
     const context = await renderer.render({});
@@ -155,7 +201,7 @@ ABC<!-- ABC END -->`
 
   it("should handle token ID being null with comments", async () => {
     const renderer = new TagRenderer({
-      template: template2,
+      templateTags: templateTags2,
       insertTokenIds: true
     });
     renderer.initializeRenderer();
@@ -166,13 +212,13 @@ ABC<!-- ABC END -->`
   describe("initializeRenderer", function () {
     it("should not reset already initialized renderer", () => {
       const renderer = new TagRenderer({
-        template: template1
+        templateTags: templateTags1
       });
 
       renderer.initializeRenderer();
-      const save = renderer._renderer;
+      const save = renderer._processor;
       renderer.initializeRenderer();
-      expect(save).equal(renderer._renderer);
+      expect(save).equal(renderer._processor);
     });
   });
 });

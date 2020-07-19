@@ -1,13 +1,17 @@
-/* eslint-disable complexity, max-statements */
+/* eslint-disable complexity, max-statements, max-params */
+/* eslint-disable @typescript-eslint/no-use-before-define */
 
 import { TOKEN_HANDLER } from "@xarc/render-context";
+import { TagTemplate } from "./tag-template";
+import { TAG_TYPE } from "./symbols";
 
 export const executeSteps = {
   STEP_HANDLER: 0,
   STEP_STR_TOKEN: 1,
   STEP_NO_HANDLER: 2,
   STEP_LITERAL_HANDLER: 3,
-  STEP_FUNC_HANDLER: 4
+  STEP_FUNC_HANDLER: 4,
+  STEP_SUB_TEMPLATE: 5
 };
 
 const {
@@ -15,11 +19,39 @@ const {
   STEP_STR_TOKEN,
   STEP_NO_HANDLER,
   STEP_LITERAL_HANDLER,
-  STEP_FUNC_HANDLER
+  STEP_FUNC_HANDLER,
+  STEP_SUB_TEMPLATE
 } = executeSteps;
 
-export function renderNext(err: Error, xt) {
-  const { renderSteps, context } = xt;
+function handleSubTemplate(tkId: string, step, result: any, xt: any, cb: Function) {
+  if (!result) {
+    return cb();
+  }
+
+  const handle = res => {
+    if (res[TAG_TYPE] && res[TAG_TYPE] === "template") {
+      const step2 = xt.template.handleSubTemplate(step, res);
+      return executeTagTemplate(step2.template, step2.tk, xt.context, true).then(cb, cb);
+    } else {
+      return xt.context.handleTokenResult(tkId, res, cb);
+    }
+  };
+
+  if (result.then) {
+    return result.then(handle, cb);
+  } else {
+    return handle(result);
+  }
+}
+/**
+ * Execute the next step for the token tags
+ * @param err - error from previous step
+ * @param xt - execution context
+ *
+ * @returns any - non-significant
+ */
+export function renderNext(err: Error, xt: any) {
+  const { template, tagTokens, context } = xt;
   if (err) {
     context.handleError(err);
   }
@@ -32,30 +64,46 @@ export function renderNext(err: Error, xt) {
     context.output.add(`<!-- ${tk.id} END -->\n`);
   };
 
-  if (context.isFullStop || context.isVoidStop || xt.stepIndex >= renderSteps.length) {
-    const r = context.output.close();
-    xt.resolve(r);
+  if (context.isFullStop || context.isVoidStop || xt.stepIndex >= tagTokens.length) {
+    if (!xt.subTemplate) {
+      xt.resolve(context.output.close());
+    } else {
+      xt.resolve();
+    }
     return null;
   } else {
-    // TODO: support soft stop
-    const step = renderSteps[xt.stepIndex++];
-    const tk = step.tk;
+    const tagIndex = xt.stepIndex++;
+    const tk = tagTokens[tagIndex];
+    const step = template.getTagOpCode(tagIndex);
+
+    if (!step) {
+      return renderNext(null, xt);
+    }
+
+    // const tk = step.tk;
     const withId = step.insertTokenId;
     switch (step.code) {
-      case STEP_FUNC_HANDLER:
-        return context.handleTokenResult("", tk.func(context), e => {
-          return renderNext(e, xt);
-        });
-      case STEP_HANDLER:
+      case STEP_SUB_TEMPLATE:
+        return executeTagTemplate(step.template, step.tk, context, true).then(
+          () => renderNext(null, xt),
+          (err2: Error) => renderNext(err2, xt)
+        );
+      case STEP_FUNC_HANDLER: {
+        const result = tk(context);
+        return handleSubTemplate("", step, result, xt, (e: Error) => renderNext(e, xt));
+      }
+      case STEP_HANDLER: {
         if (withId) {
           insertTokenId(tk);
         }
-        return context.handleTokenResult(tk.id, tk[TOKEN_HANDLER](context, tk), e => {
+        const result = tk[TOKEN_HANDLER](context, tk);
+        return handleSubTemplate(tk.id, step, result, xt, (e: Error) => {
           if (withId) {
             insertTokenIdEnd(tk);
           }
           return renderNext(e, xt);
         });
+      }
       case STEP_STR_TOKEN:
         context.output.add(tk.str);
         break;
@@ -76,9 +124,14 @@ export function renderNext(err: Error, xt) {
   }
 }
 
-export function executeRenderSteps(renderSteps, context) {
+export function executeTagTemplate(
+  template: TagTemplate,
+  tagTokens: any[],
+  context,
+  subTemplate = false
+) {
   return new Promise(resolve => {
-    const xt = { stepIndex: 0, renderSteps, context, resolve };
+    const xt = { stepIndex: 0, template, tagTokens, context, resolve, subTemplate };
     return renderNext(null, xt);
   });
 }

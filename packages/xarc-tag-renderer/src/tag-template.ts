@@ -2,6 +2,7 @@
 
 import { TAG_TYPE } from "./symbols";
 import { TokenModule } from "@xarc/render-context";
+import { RenderProcessor } from "./render-processor";
 
 /**
  * Create a simple tag template from ES6 template literal strings
@@ -9,7 +10,7 @@ import { TokenModule } from "@xarc/render-context";
  * Usage:
  *
  * ```js
- * import { TagTemplate, RegisterTokenIds, createTemplateTags, Token, TokenInvoke } from "@xarc/tag-renderer";
+ * import { RegisterTokenIds, createTemplateTags, Token, TokenInvoke } from "@xarc/tag-renderer";
  * import { myTokenHandler } from "./my-token-handler";
  * import { myHtmlRenderHandler } from "./my-html-render-handler";
  * import { myTokenIdRegister } from "./my-token-id-handler"
@@ -21,21 +22,18 @@ import { TokenModule } from "@xarc/render-context";
  *   }
  * }}`;
  *
- * const templateTags = createTemplateTags`<!DOCTYPE html>
+ * export const templateTags = createTemplateTags`<!DOCTYPE html>
  * ${RegisterTokenIds(myTokenIdRegister)}
  * <html>${Token("INITIALIZE", {})}
  * <head>
  * ${TokenInvoke(myTokenHandler, {})}
  * ${subTemplate}
- *
+ * ${() => subTemplate}
+ * ${() => Promise.resolve(subTemplate)}
  * </head>
  * <body>${TokenInvoke(myHtmlRenderHandler, {})}</body>
  * </html>
  * `
- *
- * export const template = TagTemplate({
- *  templateTags, templateDir: __dirname
- * })
  * ```
  *
  * @param literals - string array
@@ -91,6 +89,26 @@ export const TokenInvoke = (handler: Function, props = {}) => {
   return tm;
 };
 
+/**
+ * Register a handler to provide token IDs that can be used in the template
+ *
+ * Example:
+ *
+ * ```js
+ * import { RegisterTokenIds, createTemplateTags } from "@xarc/tag-renderer";
+ *
+ * const templateTags = createTemplateTags`
+ * ${RegisterTokenIds(() => {
+ *   return {
+ *     ID1: context => { }
+ *   }
+ * })}
+ * ```
+ *
+ * @param handler - handler function
+ * @param name - name to identify this handler
+ * @returns a register function
+ */
 export const RegisterTokenIds = (handler: Function, name?: string) => {
   const uniqSym = Symbol("register-token-${name}");
   const register = context => {
@@ -100,15 +118,25 @@ export const RegisterTokenIds = (handler: Function, name?: string) => {
   return register;
 };
 
+/**
+ * Holds supporting and execution information and data for a template of tags
+ */
 export class TagTemplate {
   _templateTags: any[];
+  _tagOpCodes: any[];
   _templateDir: string;
   _tokenHandlers: Function[];
+  _processor: RenderProcessor;
 
   constructor(options: {
+    /** template tags */
     templateTags: any[];
+    /** directory where the template file resides */
     templateDir?: string;
+    /** initial token handlers */
     tokenHandlers?: Function | Function[];
+    /** template tag processor for generating rendering steps */
+    processor: RenderProcessor;
   }) {
     this._templateTags = options.templateTags.map((tag, ix) => {
       if (tag.hasOwnProperty(TAG_TYPE)) {
@@ -118,8 +146,56 @@ export class TagTemplate {
       }
       return tag;
     });
+
+    this._tagOpCodes = new Array(this._templateTags.length);
     this._templateDir = options.templateDir;
     this._tokenHandlers = [].concat(options.tokenHandlers);
+    this._processor = options.processor;
+  }
+
+  /**
+   * Returns a template tag
+   * @param index - index of the tag in the template tags array
+   * @returns template tag
+   */
+  getTag(index: number) {
+    return this._templateTags[index];
+  }
+
+  /**
+   * Get a execution step opcode for the template tag at index
+   * @param index - index of the tag in the template tags array
+   * @returns template tag exec step opcode
+   */
+  getTagOpCode(index: number) {
+    if (this._tagOpCodes[index] === undefined) {
+      this._tagOpCodes[index] = this._processor.makeStep(this.getTag(index));
+    }
+
+    return this._tagOpCodes[index];
+  }
+
+  /**
+   * Pre-initialize execution step opcode for the template tags
+   */
+  initTagOpCode() {
+    for (let ix = 0; ix < this._templateTags.length; ix++) {
+      this.getTagOpCode(ix);
+    }
+  }
+
+  /**
+   * Handle a sub template returned by executing a step
+   * @param step - the step that was executed
+   * @param templateTags - the template tags returned
+   *
+   * @returns new step for executing the sub template tags
+   */
+
+  handleSubTemplate(step: any, templateTags: any[]) {
+    return (
+      step._subTemplateStep || (step._subTemplateStep = this._processor.makeStep(templateTags))
+    );
   }
 
   _findTokenIndex(
