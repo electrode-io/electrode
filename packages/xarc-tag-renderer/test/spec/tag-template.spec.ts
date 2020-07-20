@@ -1,12 +1,16 @@
 import { expect } from "chai";
-import { template as template1 } from "../data/template1";
-import { template as template2 } from "../data/template2";
+import { templateTags as templateTags1 } from "../data/template1";
+import { templateTags as templateTags2 } from "../data/template2";
 import { describe, it } from "mocha";
+import { TagTemplate } from "../../src";
 
 describe("tag template", function () {
+  const template2 = new TagTemplate({ templateTags: templateTags2, processor: null });
+
   it("should create a TagTemplate from ES6 template literal strings", () => {
-    expect(template1._templateTags[0].str).to.equal("<html>\n<head>");
-    const ssrToken = template1.findTokensById(`ssr-content`);
+    expect(templateTags1[0].str).to.equal("<html>\n<head>");
+    const template = new TagTemplate({ templateTags: templateTags1, processor: null });
+    const ssrToken = template.findTokensById(`ssr-content`);
     expect(ssrToken).to.exist;
   });
 

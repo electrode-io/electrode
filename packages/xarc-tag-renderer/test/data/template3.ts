@@ -1,7 +1,11 @@
 import { createTemplateTags, Token, TokenInvoke, RegisterTokenIds } from "../../src";
+import * as tokenHandler from "../fixtures/token-handler";
 
 import * as custom1 from "../fixtures/custom-1";
-import * as tokenHandler from "../fixtures/token-handler";
+
+const nullTokenProcess = () => {
+  return null;
+};
 
 const subTags2 = createTemplateTags`${RegisterTokenIds(tokenHandler)}
   ${RegisterTokenIds(() => {
@@ -27,32 +31,28 @@ const subTags = createTemplateTags`${RegisterTokenIds(tokenHandler)}
 
 export const templateTags = createTemplateTags`<html>
 <head>
-  ${RegisterTokenIds(tokenHandler)}
-  ${RegisterTokenIds(() => {
-    return {
-      name: "blah-blah",
-      tokens: {
-        ABC: "ABC",
-        "ssr-content": "SSR\n",
-        "webapp-header-bundles": () => "header\n"
-      }
-    };
-  })}
-  ${RegisterTokenIds(tokenHandler)}
   ${Token("ssr-content")}
   ${Token("webapp-header-bundles")}
   ${Token("webapp-body-bundles")}
-  ${Token("PAGE_TITLE")}
   ${Token("prefetch-bundles")}
-  ${TokenInvoke(custom1)}
-  ${context => {
-    return `hello world from function: ${Object.keys(context)}\n`;
-  }}
+  ${RegisterTokenIds(() => {
+    return {
+      NULL_ID: null
+    };
+  })}
+  ${Token("NULL_ID")}
+  <div>test null id</div>
   <script>
-    console.log("test");
+    console.log("test")
   </script>
-  ${subTags}
+  ${TokenInvoke(custom1)}
+  ${Token("webapp-body-bundles")}
   ${Token("meta-tags")}
-  ${Token("ABC")}
+  ${TokenInvoke(nullTokenProcess)}
+  <div>subTags</div>${() => subTags}<div>subTags</div>
+  <div>subTagsPromise</div>
+  ${() => Promise.resolve(subTags)}<div>subTagsPromise</div>
 </head>
-</html>`;
+</html>
+${Token("page-title")}
+`;
