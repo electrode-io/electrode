@@ -2,8 +2,6 @@
 
 /* eslint-disable no-console, no-magic-numbers */
 
-// Copy from electrode-react-webapp for now
-
 const assert = require("assert");
 const _ = require("lodash");
 const Path = require("path");
