@@ -16,7 +16,7 @@ const subTags2 = createTemplateTags`${RegisterTokenIds(tokenHandler)}
       }
     };
   })}
-  <div>sub template tags 2${Token("X2")}</div>`;
+  <div>sub template tags 2${TokenInvoke(custom1)}${Token("X2")}</div>`;
 
 const subTags = createTemplateTags`${RegisterTokenIds(tokenHandler)}
   ${RegisterTokenIds(() => {

@@ -44,15 +44,13 @@ export class TagRenderer {
     this._tokenIdLookupMap = {};
 
     // the same context that gets passed to each token handler's setup function
-    this._handlerContext = _.merge(
-      {
-        user: {
-          // set routeOptions in user also for consistency
-          routeOptions: options.routeOptions
-        }
+    this._handlerContext = {
+      user: {
+        // set routeOptions in user also for consistency
+        routeOptions: options.routeOptions
       },
-      options
-    );
+      ...options
+    };
   }
 
   /**
@@ -62,7 +60,7 @@ export class TagRenderer {
   initializeRenderer(reset = !this._processor) {
     if (reset) {
       this._initializeTokenHandlers(this._tokenHandlers);
-      this._applyTokenLoad(this._options);
+
       this._processor = new RenderProcessor({
         asyncTemplate: this,
         insertTokenIds: this._options.insertTokenIds
@@ -73,6 +71,7 @@ export class TagRenderer {
         processor: this._processor
       });
 
+      this._processor.applyTokenModuleLoad(this._options, this._template);
       this._template.initTagOpCode();
     }
   }

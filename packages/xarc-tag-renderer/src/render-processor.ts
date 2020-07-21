@@ -4,6 +4,7 @@ import { executeTagTemplate, executeSteps } from "./render-execute";
 import { TAG_TYPE } from "./symbols";
 import { TagTemplate } from "./tag-template";
 import { RenderContext } from "@xarc/render-context";
+import { TagRenderer } from "./tag-renderer";
 
 const {
   STEP_HANDLER,
@@ -17,6 +18,7 @@ const {
 export class RenderProcessor {
   _options: any;
   _insertTokenIds: boolean;
+  _renderer: TagRenderer;
 
   constructor(options: {
     /** Add debugging comment to rendered output with token IDs */
@@ -26,6 +28,15 @@ export class RenderProcessor {
   }) {
     this._options = options;
     this._insertTokenIds = Boolean(options.insertTokenIds);
+    this._renderer = options.asyncTemplate;
+  }
+
+  applyTokenModuleLoad(options, template: TagTemplate) {
+    for (const tokenModule of template._templateTags) {
+      if (tokenModule.load && typeof tokenModule.load === "function") {
+        tokenModule.load({ ...this._renderer._handlerContext, ...options });
+      }
+    }
   }
 
   /**
@@ -49,11 +60,10 @@ export class RenderProcessor {
    * @param tk
    */
   makeHandlerStep(tk: any) {
-    const options = this._options;
     const insertTokenIds = this._insertTokenIds;
 
     // look for first handler that has a token function for tk.id
-    const tkFunc = options.asyncTemplate.lookupTokenHandler(tk);
+    const tkFunc = this._renderer.lookupTokenHandler(tk);
     // no handler has function for token
     if (!tkFunc) {
       if (tkFunc === null) {
@@ -102,9 +112,11 @@ export class RenderProcessor {
       tk({ asyncTemplate: options.asyncTemplate });
       opCode = null;
     } else if (tk[TAG_TYPE] === "template") {
+      const template = new TagTemplate({ templateTags: tk, processor: this });
+      this.applyTokenModuleLoad({ insertTokenIds: this._options.insertTokenIds }, template);
       opCode = {
         tk,
-        template: new TagTemplate({ templateTags: tk, processor: this }),
+        template,
         code: STEP_SUB_TEMPLATE
       };
     } else if (tk.hasOwnProperty("str")) {

@@ -7,6 +7,7 @@ const Path = require("path");
 const util = require("./util");
 const subappUtil = require("subapp-util");
 const _ = require("lodash");
+const assert = require("assert");
 
 module.exports = function setup(setupContext) {
   const distDir = process.env.NODE_ENV === "production" ? "../dist/min" : "../dist/dev";
@@ -20,6 +21,7 @@ module.exports = function setup(setupContext) {
   const metricReport = _.get(setupContext, "routeOptions.reporting", {});
 
   const { assets } = util.loadAssetsFromStats(setupContext.routeOptions.stats);
+  assert(assets, `subapp-web unable to load assets from ${setupContext.routeOptions.stats}`);
   setupContext.routeOptions.__internals.assets = assets;
 
   const cdnJsBundles = util.getCdnJsBundles(assets, setupContext.routeOptions);

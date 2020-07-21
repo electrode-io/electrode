@@ -60,6 +60,18 @@ export const createTemplateTags = (literals: TemplateStringsArray, ...args: any[
 };
 
 /**
+ * Create a template tags array from a plain array of tags
+ *
+ * @param tags - array of tags
+ * @returns tat template
+ */
+export const createTemplateTagsFromArray = (tags: any[]) => {
+  const combined = [].concat(tags);
+  combined[TAG_TYPE] = "template";
+  return combined;
+};
+
+/**
  * Create a tag to invoke a token by its ID
  *
  * @param id - id of token

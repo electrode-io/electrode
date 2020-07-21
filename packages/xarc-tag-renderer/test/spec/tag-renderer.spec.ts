@@ -35,10 +35,10 @@ describe("tag template", function () {
 
     expect(context.result).contains("<div>from custom-1</div>");
     expect(context.result).contains(
-      "<div>subTags</div><div>sub template tagsx1<div>sub template tags 2x2</div></div><div>subTags</div>"
+      "<div>subTags</div><div>sub template tagsx1<div>sub template tags 2<div>from custom-1</div>x2</div></div><div>subTags</div>"
     );
     expect(context.result).contains(
-      "<div>subTagsPromise</div><div>sub template tagsx1<div>sub template tags 2x2</div></div><div>subTagsPromise</div>"
+      "<div>subTagsPromise</div><div>sub template tagsx1<div>sub template tags 2<div>from custom-1</div>x2</div></div><div>subTagsPromise</div>"
     );
   });
 

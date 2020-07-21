@@ -4,6 +4,7 @@ const _ = require("lodash");
 const Path = require("path");
 const { TagRenderer } = require("@xarc/tag-renderer");
 const { JsxRenderer } = require("@xarc/jsx-renderer");
+const { loadTokenModuleHandler } = require("@xarc/render-context");
 const {
   utils: {
     resolvePath,
@@ -12,20 +13,19 @@ const {
     resolveChunkSelector,
     loadAssetsFromStats,
     getStatsPath,
-    invokeTemplateProcessor,
     makeDevBundleBase
   }
 } = require("@xarc/index-page");
+const assert = require("assert");
 
 const otherStats = getOtherStats();
 
 /*eslint-disable max-statements*/
 function initializeTemplate(
-  { htmlFile, templateFile, tokenHandlers, cacheId, cacheKey, options },
+  { templateFile, tokenHandlers, cacheId, cacheKey, options },
   routeOptions
 ) {
-  const tmplFile = templateFile || htmlFile;
-  cacheKey = cacheKey || (cacheId && `${tmplFile}#${cacheId}`) || tmplFile;
+  cacheKey = cacheKey || (cacheId && `${templateFile}#${cacheId}`) || templateFile;
 
   let asyncTemplate = routeOptions._templateCache[cacheKey];
   if (asyncTemplate) {
@@ -52,28 +52,33 @@ function initializeTemplate(
         : userTokenHandlers;
   }
 
-  if (!templateFile) {
-    asyncTemplate = new TagRenderer({
-      htmlFile,
-      tokenHandlers: finalTokenHandlers.filter(x => x),
-      insertTokenIds: routeOptions.insertTokenIds,
-      routeOptions
-    });
+  const templateFullPath = resolvePath(templateFile);
+  const templateModule = require(templateFullPath); //  eslint-disable-line
+  const template = _.get(templateModule, "default", templateModule);
 
-    invokeTemplateProcessor(asyncTemplate, routeOptions);
-    asyncTemplate.initializeRenderer();
-  } else {
-    const templateFullPath = resolvePath(tmplFile);
-    const template = require(templateFullPath); //  eslint-disable-line
+  if (template.children) {
+    // JSX
     asyncTemplate = new JsxRenderer({
       templateFullPath: Path.dirname(templateFullPath),
-      template: _.get(template, "default", template),
+      template,
       tokenHandlers: finalTokenHandlers.filter(x => x),
       insertTokenIds: routeOptions.insertTokenIds,
       routeOptions
     });
-    asyncTemplate.initializeRenderer();
+  } else {
+    // Tag
+    const templateTags = _.get(template, "templateTags", template);
+    asyncTemplate = new TagRenderer({
+      templateTags,
+      tokenHandlers: finalTokenHandlers.map(x => loadTokenModuleHandler(x)),
+      insertTokenIds: routeOptions.insertTokenIds,
+      routeOptions
+    });
   }
+
+  //
+
+  asyncTemplate.initializeRenderer();
 
   return (routeOptions._templateCache[cacheKey] = asyncTemplate);
 }
@@ -112,6 +117,8 @@ function makeRouteTemplateSelector(routeOptions) {
 
       return render(options, selection);
     }
+
+    assert(!defaultSelection.htmlFile, `subapp-server doesn't support htmlFile templates`);
 
     const asyncTemplate = initializeTemplate(defaultSelection, routeOptions);
     return asyncTemplate.render(options);
