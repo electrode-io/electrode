@@ -15,9 +15,15 @@ module.exports = {
     },
     "subapp-server": { options: { insertTokenIds: true } }
   },
-  connections: {
+  connection: {
     host: process.env.HOST,
     address: process.env.HOST_IP || "0.0.0.0",
-    port: portFromEnv()
+    port: portFromEnv(),
+    routes: {
+      cors: false
+    },
+    state: {
+      ignoreErrors: true
+    }
   }
 };

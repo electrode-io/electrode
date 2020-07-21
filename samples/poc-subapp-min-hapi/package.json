@@ -35,20 +35,26 @@
     "build": "clap build"
   },
   "dependencies": {
+    "@hapi/inert": "^5.2.2",
     "@xarc/app": "^7.0.0",
-    "@xarc/fastify-server": "^2.0.0",
     "electrode-confippet": "^1.5.0",
+    "electrode-server": "^3.0.0",
+    "electrode-static-paths": "^3.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "subapp-react": "../../packages/subapp-react",
-    "subapp-server": "../../packages/subapp-server"
+    "react-router": "^5.1.0",
+    "react-router-dom": "^5.1.0",
+    "subapp-react": "^0.0.22",
+    "subapp-server": "^1.3.0"
   },
   "devDependencies": {
     "@xarc/app-dev": "^7.0.0"
   },
   "fyn": {
     "dependencies": {
-      "@xarc/app": "../../packages/xarc-app"
+      "@xarc/app": "../../packages/xarc-app",
+      "subapp-react": "../../packages/subapp-react",
+      "subapp-server": "../../packages/subapp-server"
     },
     "devDependencies": {
       "@xarc/app-dev": "../../packages/xarc-app-dev"
