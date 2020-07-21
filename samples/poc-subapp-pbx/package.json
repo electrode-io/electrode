@@ -33,23 +33,20 @@
     "build": "clap build"
   },
   "dependencies": {
-
-    "@xarc/app": "^8.1.6",
-    "@xarc/app-dev": "^8.1.6",
+    "@xarc/app": "^8.1.7",
     "@xarc/fastify-server": "^2.0.0",
     "electrode-confippet": "^1.5.0",
-    "electrode-archetype-opt-sass": "^2.0.0",
-    "preact": "^10.1.1",
-    "preact-render-to-string": "^5.1.3",
-    "redux": "^4.0.4",
+    "preact": "^10.4.6",
+    "preact-render-to-string": "^5.1.10",
+    "redux": "^4.0.5",
     "redux-bundler": "^26.0.0",
     "redux-bundler-preact": "^2.0.1",
-    "subapp-pbundle": "../../packages/subapp-pbundle",
-    "subapp-server": "../../packages/subapp-server",
-    "xaa": "^1.3.1"
+    "subapp-pbundle": "^0.0.25",
+    "subapp-server": "^1.3.0",
+    "xaa": "^1.6.0"
   },
   "devDependencies": {
-        "@xarc/app-dev": "^8.1.6",
+    "@xarc/app-dev": "^8.1.7",
     "electrode-archetype-opt-sass": "^2.0.0",
     "prettier": "^1.19.1",
     "tachyons-sass": "^4.9.5"
@@ -57,10 +54,13 @@
   "fyn": {
     "dependencies": {
       "@xarc/app": "../../packages/xarc-app",
-      "electrode-archetype-opt-preact": "../../packages/electrode-archetype-opt-preact"
+      "electrode-archetype-opt-preact": "../../packages/electrode-archetype-opt-preact",
+      "subapp-pbundle": "../../packages/subapp-pbundle",
+      "subapp-server": "../../packages/subapp-server"
     },
     "devDependencies": {
-      "@xarc/app-dev": "../../packages/xarc-app-dev"
+      "@xarc/app-dev": "../../packages/xarc-app-dev",
+      "electrode-archetype-opt-sass": "../../packages/electrode-archetype-opt-sass"
     }
   },
   "prettier": {
