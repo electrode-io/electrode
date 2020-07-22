@@ -41,9 +41,8 @@ if (fastifyServer) {
     electrode: {
       logLevel: "warn"
     },
-    connection: {
-      host: archetype.webpack.devHostname,
-      port: archetype.webpack.devPort
+    connections: {
+      default: { host: archetype.webpack.devHostname, port: archetype.webpack.devPort }
     },
     plugins: {
       webpackDevHapi: {
