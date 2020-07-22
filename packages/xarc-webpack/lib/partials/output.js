@@ -1,7 +1,7 @@
 "use strict";
 
 const Path = require("path");
-const archetype = require("@xarc/app/config/archetype")();
+const archetype = require("@xarc/app-dev/config/archetype")();
 const { AppMode, babel } = archetype;
 
 const inspectpack = process.env.INSPECTPACK_DEBUG === "true";

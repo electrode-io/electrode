@@ -1,6 +1,6 @@
 "use strict";
-let cachedEnvApp = null
-module.exports = function getAppEnv () {
+let cachedEnvApp = null;
+module.exports = function getAppEnv() {
   const xenvConfig = require("xenv-config");
   const { merge } = require("lodash");
 
@@ -15,5 +15,5 @@ module.exports = function getAppEnv () {
     }
   };
   cachedEnvApp = cachedEnvApp || xenvConfig(appConfigSpec, {}, { merge });
-  return cachedEnvApp
-}
+  return cachedEnvApp;
+};

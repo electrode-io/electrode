@@ -6,10 +6,10 @@ const Fs = require("fs");
 const _ = require("lodash");
 const optionalRequire = require("optional-require")(require);
 const Path = require("path");
-const archetype = require("@xarc/app/config/archetype")();
+const archetype = require("@xarc/app-dev/config/archetype")();
 const AppMode = archetype.AppMode;
 const chalk = require("chalk");
-const logger = require("@xarc/app/lib/logger");
+const logger = require("@xarc/app-dev/lib/logger");
 const mkdirp = require("mkdirp");
 
 const DEV_HMR_DIR = ".__dev_hmr";

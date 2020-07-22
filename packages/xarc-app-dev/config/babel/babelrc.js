@@ -7,7 +7,7 @@
  */
 const ck = require("chalker");
 const requireAt = require("require-at");
-const archetype = require("@xarc/app/config/archetype")();
+const archetype = require("@xarc/app-dev/config/archetype")();
 const optionalRequire = require("optional-require")(require);
 const optFlow = optionalRequire("electrode-archetype-opt-flow");
 

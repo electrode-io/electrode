@@ -1,7 +1,7 @@
 "use strict";
 
-const archetype = require("@xarc/app/config/archetype")();
-const logger = require("@xarc/app/lib/logger");
+const archetype = require("@xarc/app-dev/config/archetype")();
+const logger = require("@xarc/app-dev/lib/logger");
 
 module.exports = function(options) {
   const config = options.currentConfig;

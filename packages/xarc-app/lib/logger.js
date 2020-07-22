@@ -1,9 +1,18 @@
 "use strict";
 
-const optionalRequire = require("optional-require")(require);
-const devRequire =
-  process.env.NODE_ENV !== "production" && optionalRequire("@xarc/app-dev/require");
+/* eslint-disable global-require */
 
-const winstonLogger = require("./winston-logger");
+let logger;
 
-module.exports = devRequire ? winstonLogger(devRequire("winston")) : require("./console-logger");
+function getLogger() {
+  if (!logger) {
+    try {
+      logger = require("@xarc/app-dev/lib/logger");
+    } catch (e) {
+      logger = require("./console-logger");
+    }
+  }
+  return logger;
+}
+
+module.exports = getLogger();

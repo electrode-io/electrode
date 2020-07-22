@@ -20,8 +20,8 @@
 const Fs = require("fs");
 const Path = require("path");
 const _ = require("lodash");
-const logger = require("@xarc/app/lib/logger");
-const archetype = require("@xarc/app/config/archetype")();
+const logger = require("@xarc/app-dev/lib/logger");
+const archetype = require("@xarc/app-dev/config/archetype")();
 const mkdirp = require("mkdirp");
 const { devServerBaseUrl } = require("../util/webpack-dev-url");
 const requireAt = require("require-at");

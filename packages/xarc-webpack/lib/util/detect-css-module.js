@@ -2,7 +2,7 @@
 
 const Path = require("path");
 const filterScanDir = require("filter-scan-dir");
-const archetype = require("@xarc/app/config/archetype")();
+const archetype = require("@xarc/app-dev/config/archetype")();
 const AppMode = archetype.AppMode;
 const getOptRequire = require("../util/get-opt-require");
 

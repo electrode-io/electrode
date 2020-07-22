@@ -6,10 +6,12 @@ const Path = require("path");
 const assert = require("assert");
 const requireAt = require("require-at");
 const optionalRequire = require("optional-require")(require);
-const { getXarcOptions } = require("./lib/utils");
+const { getXarcOptions } = require("./utils");
 const { updateEnv } = require("xclap");
 
-require("./typedef");
+require("../typedef");
+
+const devRequire = require;
 
 /**
  * @param {object} xclap xclap task runner
@@ -20,10 +22,9 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
   const xarcOptions = getXarcOptions(userXarcOptions);
   // lazy require modules that have effects so as to permit customization
   // from userspace, i.e. `userOptions`
-  const getArchetype = require("./config/archetype");
+  const getArchetype = require("../config/archetype");
   const archetype = getArchetype(xarcOptions);
-  const features = xarcOptions.enableFeatures ? require("./lib/features") : undefined;
-  const devRequire = archetype.devRequire;
+  const features = xarcOptions.enableFeatures ? require("./features") : undefined;
   const ck = devRequire("chalker");
   const xaa = devRequire("xaa");
   const { psChildren } = devRequire("ps-get");
@@ -44,7 +45,8 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
   const chalk = devRequire("chalk");
 
   const assertNoGulpExecution = () => {
-    if (process.argv[1].indexOf("gulp") >= 0) {
+    const cli = process.argv[1];
+    if (cli && cli.indexOf("gulp") >= 0) {
       const cmd = chalk.magenta(`clap ${process.argv.slice(2).join(" ")}`);
       console.log(`\nPlease use ${chalk.magenta("clap")} to run archetype commands.`);
       console.log(`\nie:  ${cmd}`);
@@ -54,9 +56,9 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
     }
   };
 
-  const mergeIsomorphicAssets = require(`${archetype.devDir}/scripts/merge-isomorphic-assets.js`);
-  const flattenMessagesL10n = require(`${archetype.devDir}/scripts/l10n/flatten-messages.js`);
-  const mapIsomorphicCdn = require(`${archetype.devDir}/scripts/map-isomorphic-cdn.js`);
+  const mergeIsomorphicAssets = require(`../scripts/merge-isomorphic-assets.js`);
+  const flattenMessagesL10n = require(`../scripts/l10n/flatten-messages.js`);
+  const mapIsomorphicCdn = require(`../scripts/map-isomorphic-cdn.js`);
 
   const config = archetype.config;
   const mkdirp = devRequire("mkdirp");
@@ -68,7 +70,7 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
   const penthouse = optionalRequire("penthouse");
   const CleanCSS = optionalRequire("clean-css");
 
-  const logger = require("./lib/logger");
+  const logger = require("./logger");
 
   const jestTestDirectories = ["_test_", "_tests_", "__test__", "__tests__"];
 
@@ -891,7 +893,7 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
           setWebpackProfile("development");
           AppMode.setEnv(AppMode.src.dir);
           // eslint-disable-next-line no-shadow
-          const exec = quote(Path.join(archetype.dir, "support/babel-run"));
+          const exec = quote(Path.join(archetype.devDir, "lib/babel-run"));
           const isNodeArgs = x => x.startsWith("--inspect");
           const nodeArgs = context.args.filter(isNodeArgs);
           const otherArgs = context.args.filter(x => !isNodeArgs(x));
@@ -914,7 +916,7 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
           setWebpackProfile("test");
           AppMode.setEnv(AppMode.src.dir);
           // eslint-disable-next-line no-shadow
-          const exec = quote(Path.join(archetype.dir, "support/babel-run"));
+          const exec = quote(Path.join(archetype.devDir, "lib/babel-run"));
           const isNodeArgs = x => x.startsWith("--inspect");
           const nodeArgs = context.args.filter(isNodeArgs);
           const otherArgs = context.args.filter(x => !isNodeArgs(x));
@@ -1262,11 +1264,11 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
     return tasks;
   }
 
-  if (xarcOptions.assertDevArchetypePresent) {
-    // make sure that -dev app archetype is also installed.
-    // if it's not then this will fail with an error message that it's not found.
-    require.resolve(`${archetype.devArchetypeName}/package.json`);
-  }
+  // if (xarcOptions.assertDevArchetypePresent) {
+  //   // make sure that -dev app archetype is also installed.
+  //   // if it's not then this will fail with an error message that it's not found.
+  //   require.resolve(`${archetype.devArchetypeName}/package.json`);
+  // }
 
   if (xarcOptions.assertNoGulpExecution) {
     assertNoGulpExecution();

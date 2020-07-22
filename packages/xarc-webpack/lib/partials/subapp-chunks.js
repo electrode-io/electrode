@@ -22,7 +22,7 @@ function hashChunks(mod, chunks, key) {
 }
 
 function makeConfig() {
-  const { AppMode, webpack } = require("@xarc/app/config/archetype")();
+  const { AppMode, webpack } = require("@xarc/app-dev/config/archetype")();
 
   const config = {};
 

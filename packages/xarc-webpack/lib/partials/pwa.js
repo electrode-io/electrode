@@ -1,6 +1,6 @@
 "use strict";
 
-const archetype = require("@xarc/app/config/archetype")();
+const archetype = require("@xarc/app-dev/config/archetype")();
 const Path = require("path");
 const requireAt = require("require-at");
 const AppMode = archetype.AppMode;
@@ -11,7 +11,7 @@ const optionalRequire = require("optional-require")(require);
 
 const swConfigPath = Path.resolve("config", "sw-config.js");
 const mkdirp = require("mkdirp");
-const logger = require("@xarc/app/lib/logger");
+const logger = require("@xarc/app-dev/lib/logger");
 
 /**
  * Takes a file path and returns a webpack-compatible
