@@ -243,7 +243,7 @@ const startProxy = inOptions => {
   const userFiles = ["archetype/config", "src", "test", "config"].map(x => `${x}/dev-proxy-rules`);
   const userDevProxyFile = userFiles.find(f => optionalRequire.resolve(Path.resolve(f)));
 
-  const userDevProxy = userDevProxyFile && require(userDevProxyFile);
+  const userDevProxy = userDevProxyFile && require(Path.resolve(userDevProxyFile));
 
   const restart = async () => {
     // ensure user's proxy rules are refreshed
