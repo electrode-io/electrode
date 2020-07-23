@@ -120,11 +120,10 @@ WARNING: </>`);
 
   config[xarcWebpackConfig] = true;
 
-  try
-  {
+  try {
     logger.verbose("Final Webpack config", JSON.stringify(config, null, 2));
   } catch (err) {
-    logger.error("unable to stringify webpack config")
+    logger.error("unable to stringify webpack config");
   }
 
   return config;
