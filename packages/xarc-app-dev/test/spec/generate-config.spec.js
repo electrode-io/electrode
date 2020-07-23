@@ -4,7 +4,8 @@ const Path = require("path");
 
 const moduleName = "@xarc/webpack/lib/util/generate-config";
 
-describe("generate-config", function() {
+// TODO: should move to xarc-webpack
+describe.skip("generate-config", function() {
   this.timeout(10000);
 
   before(() => {});

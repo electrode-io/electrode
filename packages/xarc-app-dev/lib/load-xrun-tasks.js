@@ -1,5 +1,7 @@
 "use strict";
-/* eslint-disable object-shorthand, max-statements */
+
+/* eslint-disable object-shorthand, max-statements, no-magic-numbers */
+/* eslint-disable no-console, no-process-exit, global-require, no-param-reassign */
 
 const Fs = require("fs");
 const Path = require("path");
@@ -8,10 +10,21 @@ const requireAt = require("require-at");
 const optionalRequire = require("optional-require")(require);
 const { getXarcOptions } = require("./utils");
 const { updateEnv } = require("xclap");
+const getArchetype = require("../config/archetype");
+const ck = require("chalker");
+const xaa = require("xaa");
+const { psChildren } = require("ps-get");
+const detectCssModule = require("@xarc/webpack/lib/util/detect-css-module");
+const optFlow = optionalRequire("electrode-archetype-opt-flow");
+const { getWebpackStartConfig, setWebpackProfile } = require("@xarc/webpack/lib/util/custom-check");
+const chokidar = require("chokidar");
+const { spawn } = require("child_process");
+const scanDir = require("filter-scan-dir");
+const chalk = require("chalk");
+const mkdirp = require("mkdirp");
+const xsh = require("xsh");
 
 require("../typedef");
-
-const devRequire = require;
 
 /**
  * @param {object} xclap xclap task runner
@@ -22,27 +35,8 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
   const xarcOptions = getXarcOptions(userXarcOptions);
   // lazy require modules that have effects so as to permit customization
   // from userspace, i.e. `userOptions`
-  const getArchetype = require("../config/archetype");
   const archetype = getArchetype(xarcOptions);
   const features = xarcOptions.enableFeatures ? require("./features") : undefined;
-  const ck = devRequire("chalker");
-  const xaa = devRequire("xaa");
-  const { psChildren } = devRequire("ps-get");
-  const detectCssModule = devRequire("@xarc/webpack/lib/util/detect-css-module");
-  const devOptRequire = require("optional-require")(devRequire);
-
-  const { getWebpackStartConfig, setWebpackProfile } = devRequire(
-    "@xarc/webpack/lib/util/custom-check"
-  );
-
-  const chokidar = devRequire("chokidar");
-
-  const { spawn } = require("child_process");
-
-  const optFlow = devOptRequire("electrode-archetype-opt-flow");
-
-  const scanDir = devRequire("filter-scan-dir");
-  const chalk = devRequire("chalk");
 
   const assertNoGulpExecution = () => {
     const cli = process.argv[1];
@@ -61,8 +55,6 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
   const mapIsomorphicCdn = require(`../scripts/map-isomorphic-cdn.js`);
 
   const config = archetype.config;
-  const mkdirp = devRequire("mkdirp");
-  const xsh = devRequire("xsh");
   const shell = xsh.$;
   const exec = xsh.exec;
   const mkCmd = xsh.mkCmd;
@@ -77,7 +69,7 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
   const watchExec = (files, cmd) => {
     let timer;
     let child;
-    let defer = xaa.makeDefer();
+    const defer = xaa.makeDefer();
     const doExec = () => {
       if (timer) {
         clearTimeout(timer);
@@ -365,8 +357,8 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
   // - when invoking tasks in [], starting name with ? means optional (ie: won't fail if task not found)
 
   // eslint-disable-next-line complexity
-  function makeTasks(xclap) {
-    assert(xclap.concurrent, "xclap version must be 0.2.28+");
+  function makeTasks(xclap2) {
+    assert(xclap2.concurrent, "xclap version must be 0.2.28+");
     process.env.ENABLE_CSS_MODULE = "false";
     process.env.ENABLE_KARMA_COV = "false";
 
@@ -475,7 +467,6 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
         );
       },
       ".set.css-module.env": () => {
-        const x = archetype.webpack;
         const cssModule = detectCssModule();
         if (cssModule) {
           process.env.ENABLE_CSS_MODULE = "true";
@@ -534,7 +525,7 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
       "ss-prod-react": {
         desc: `Make optimized copy of react&react-dom for server side in dir ${archetype.prodModulesDir}`,
         dep: [".ss-clean.prod-react", ".mk-prod-dir"],
-        task: xclap.concurrent(".ss-prod-react", ".ss-prod-react-dom")
+        task: xclap2.concurrent(".ss-prod-react", ".ss-prod-react-dom")
       },
 
       "build-dist-dll": () => undefined,
@@ -543,9 +534,9 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
       "build-dist-min": {
         dep: [".production-env", () => setWebpackProfile("production")],
         desc: "build dist for production",
-        task: xclap.concurrent(
+        task: xclap2.concurrent(
           babelEnvTargetsArr.map((name, index) =>
-            xclap.exec(
+            xclap2.exec(
               [
                 `webpack --config`,
                 quote(getWebpackStartConfig("webpack.config.js")),
@@ -698,7 +689,7 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
           ".mk.lib.server.dir",
           ".build.babelrc"
         ],
-        task: xclap.exec(
+        task: xclap2.exec(
           [
             `babel ${AppMode.src.dir}`,
             `--out-dir=${AppMode.lib.dir}`,
@@ -795,9 +786,9 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
         task(context) {
           updateEnv({ NODE_ENV: "production" }, { override: false });
 
-          const mockTask = xclap.concurrent([
+          const mockTask = xclap2.concurrent([
             "dev-proxy --mock-cdn",
-            xclap.serial(
+            xclap2.serial(
               () => xaa.delay(500),
               () => watchExec("config/assets.json", `node ${context.args.join(" ")} lib/server`)
             )
@@ -805,14 +796,14 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
 
           if (!Fs.existsSync("dist")) {
             console.log("dist does not exist, running build task first.");
-            return xclap.serial(
+            return xclap2.serial(
               "build",
               () => console.log("build completed, starting mock prod mode with proxy"),
               mockTask
             );
           }
 
-          return xclap.serial(() => console.log("dist exist, skipping build task"), mockTask);
+          return xclap2.serial(() => console.log("dist exist, skipping build task"), mockTask);
         }
       },
 
@@ -942,8 +933,8 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
         }
       },
 
-      "test-server": xclap.concurrent(["lint-server", "lint-server-test"], "test-server-cov"),
-      "test-watch-all": xclap.concurrent("server-admin.test", "test-frontend-dev-watch"),
+      "test-server": xclap2.concurrent(["lint-server", "lint-server-test"], "test-server-cov"),
+      "test-watch-all": xclap2.concurrent("server-admin.test", "test-frontend-dev-watch"),
 
       "test-ci": ["test-frontend-ci"],
       "test-cov": [
@@ -1038,7 +1029,7 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
 
     if (archetype.options.eslint !== false) {
       Object.assign(tasks, {
-        lint: xclap.concurrent(
+        lint: xclap2.concurrent(
           "lint-client",
           "lint-client-test",
           "lint-server",
@@ -1187,7 +1178,7 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
               dir: Path.resolve(AppMode.src.dir),
               grouping: true,
               includeDir: true,
-              filterDir: d => (dirs.indexOf(d) >= 0 ? "dirs" : "otherDirs"),
+              filterDir: d => (jestTestDirectories.indexOf(d) >= 0 ? "dirs" : "otherDirs"),
               filterExt: [".js", ".jsx", ".ts", ".tsx"],
               filter: x => x.indexOf(".spec.") > 0 || x.indexOf(".test.") > 0
             });
@@ -1276,7 +1267,7 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
 
   setupPath();
   createElectrodeTmpDir();
-  xclap = xclap || requireAt(process.cwd())("xclap") || devRequire("xclap");
+  xclap = xclap || requireAt(process.cwd())("xclap") || require("xclap");
   process.env._ELECTRODE_DEV_ = "1";
   if (!process.env.hasOwnProperty("FORCE_COLOR")) {
     process.env.FORCE_COLOR = "1"; // force color for chalk
