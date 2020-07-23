@@ -30,18 +30,18 @@ module.exports = (base, merge) => {
       npm: ">= 6"
     },
     dependencies: {
-      "@xarc/app": "^8.1.7",
+      "@xarc/app": "^8.1.8",
       "@xarc/fastify-server": "^2.0.0",
       react: "^16.13.1",
       "react-dom": "^16.13.1",
       redux: "^4.0.5",
       "react-redux": "^7.2.0",
-      "subapp-react": "^0.0.21",
-      "subapp-redux": "^1.0.30",
-      "subapp-server": "^1.2.4"
+      "subapp-react": "^0.0.23",
+      "subapp-redux": "^1.0.32",
+      "subapp-server": "^1.3.1"
     },
     devDependencies: {
-      "@xarc/app-dev": "^8.1.7"
+      "@xarc/app-dev": "^8.1.8"
     }
   };
 
