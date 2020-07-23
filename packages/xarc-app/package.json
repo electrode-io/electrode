@@ -13,17 +13,21 @@
   },
   "license": "Apache-2.0",
   "scripts": {
+    "build": "tsc",
     "test": "clap check",
-    "format": "prettier --write --print-width 100 *.{js,jsx} `find . -type d -d 1 -exec echo '{}/**/*.{js,jsx}' \\; | egrep -v '(/node_modules/|/dist/|/coverage/)'`"
+    "format": "prettier --write --print-width 100 *.{js,jsx} `find . -type d -d 1 -exec echo '{}/**/*.{js,jsx}' \\; | egrep -v '(/node_modules/|/dist/|/coverage/)'`",
+    "prepublishOnly": "clap -n build docs && clap check",
+    "docs": "clap xarc/docs"
   },
   "files": [
-    "config",
-    "lib",
-    "support",
     "arch-clap.js",
+    "config",
+    "dist",
+    "lib",
     "require.js",
-    "typedef.js",
-    "supports.js"
+    "support",
+    "supports.js",
+    "typedef.js"
   ],
   "author": "Electrode (http://www.electrode.io/)",
   "contributors": [
@@ -31,6 +35,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.8.3",
+    "@xarc/module-dev": "^2.1.2",
     "css-modules-require-hook": "^4.0.2",
     "ignore-styles": "^5.0.1",
     "isomorphic-loader": "^3.1.0",
@@ -38,17 +43,36 @@
     "subapp-util": "^1.1.0"
   },
   "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.1",
+    "@types/chai": "^4.2.11",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^13.7.6",
+    "@types/sinon": "^9.0.0",
+    "@types/sinon-chai": "^3.2.4",
+    "@typescript-eslint/eslint-plugin": "^2.21.0",
+    "@typescript-eslint/parser": "^2.21.0",
+    "babel-eslint": "^10.1.0",
+    "chai": "^4.2.0",
     "chalk": "^1.1.3",
-    "electrode-archetype-njs-module-dev": "^3.0.0",
+    "eslint": "^6.8.0",
+    "eslint-config-walmart": "^2.2.1",
+    "eslint-plugin-filenames": "^1.1.0",
+    "eslint-plugin-jsdoc": "^21.0.0",
+    "mocha": "^7.1.0",
     "mock-require": "^3.0.3",
+    "nyc": "^15.0.0",
     "prettier": "^1.14.2",
     "prompts": "^2.2.1",
-    "request": "^2.88.0",
-    "winston": "^2.3.1"
+    "sinon": "^7.2.6",
+    "sinon-chai": "^3.3.0",
+    "source-map-support": "^0.5.16",
+    "ts-node": "^8.6.2",
+    "typedoc": "^0.17.4",
+    "typescript": "^3.8.3"
   },
   "engines": {
-    "node": ">= 6",
-    "npm": ">= 3"
+    "node": ">= 10",
+    "npm": ">= 6"
   },
   "nyc": {
     "all": true,
@@ -58,12 +82,23 @@
       "text-summary"
     ],
     "exclude": [
-      "coverage",
       "*clap.js",
-      "gulpfile.js",
+      "*clap.ts",
+      "coverage",
       "dist",
+      "docs",
+      "gulpfile.js",
       "test"
-    ]
+    ],
+    "extends": [
+      "@istanbuljs/nyc-config-typescript"
+    ],
+    "check-coverage": true,
+    "statements": 100,
+    "branches": 100,
+    "functions": 100,
+    "lines": 100,
+    "cache": false
   },
   "fyn": {
     "dependencies": {
@@ -78,5 +113,13 @@
     "printWidth": 100,
     "trailingComma": "none",
     "arrowParens": "avoid"
+  },
+  "mocha": {
+    "require": [
+      "ts-node/register",
+      "source-map-support/register",
+      "./config/test/setup.js"
+    ],
+    "recursive": true
   }
 }
