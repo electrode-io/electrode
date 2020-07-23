@@ -1,6 +1,6 @@
 {
   "name": "@xarc/index-page",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "Electrode X template and handlers for generating index.html webpage",
   "main": "dist/index.js",
   "scripts": {
@@ -12,6 +12,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/electrode-io/electrode.git"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [
     "webapp",
@@ -79,10 +82,10 @@
       "test"
     ],
     "check-coverage": true,
-    "statements": 100,
-    "branches": 100,
-    "functions": 100,
-    "lines": 100,
+    "statements": 29.59,
+    "branches": 8.33,
+    "functions": 12.2,
+    "lines": 30,
     "cache": false
   },
   "mocha": {

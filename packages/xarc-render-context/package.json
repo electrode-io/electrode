@@ -1,12 +1,15 @@
 {
   "name": "@xarc/render-context",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Context for index.htm generation",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "clap -n build docs && clap check",
     "docs": "clap xarc/docs"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [],
   "author": "Electrode <https://github.com/electrode-io/electrode>",

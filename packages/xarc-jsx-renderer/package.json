@@ -1,6 +1,6 @@
 {
   "name": "@xarc/jsx-renderer",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "Render index.htm from JSX template",
   "main": "dist/index.js",
   "scripts": {
@@ -9,6 +9,9 @@
     "coverage": "clap check",
     "prepublishOnly": "clap -n build docs && clap check",
     "docs": "clap xarc/docs"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [
     "jsx",

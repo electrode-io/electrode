@@ -1,12 +1,15 @@
 {
   "name": "@xarc/tag-renderer",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Generate index.html webpage from a tag based template",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "clap -n build docs && clap check",
     "docs": "clap xarc/docs"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [],
   "author": "Electrode <https://github.com/electrode-io/electrode>",
@@ -72,10 +75,10 @@
       "test"
     ],
     "check-coverage": true,
-    "statements": 100,
-    "branches": 100,
-    "functions": 100,
-    "lines": 100,
+    "statements": 97.67,
+    "branches": 98.55,
+    "functions": 92.86,
+    "lines": 97.55,
     "cache": false
   },
   "fyn": {
