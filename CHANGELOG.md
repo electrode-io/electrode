@@ -1,3 +1,138 @@
+# 7/22/2020
+
+- new packages extracted from electrode-react-webapp: `@xarc/index-page`, `@xarc/jsx-renderer`, `@xarc/render-context`, `@xarc/tag-renderer`
+- fix: minor fix to load the user dev proxy file
+- fix webpack dev server port config for electrode-server using hapi@16
+- update create app template deps
+
+subapp-server:
+
+- refactor subapp-sever and index-page to remove old SSR content
+- subapp-server handle routes from dir for fastify
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.1.8` `(8.1.7 => 8.1.8)`
+- `@xarc/app-dev@8.1.8` `(8.1.7 => 8.1.8)`
+- `@xarc/create-app@3.0.9` `(3.0.8 => 3.0.9)`
+- `@xarc/index-page@1.0.0` `(0.1.1 => 1.0.0)`
+- `@xarc/jsx-renderer@1.0.0` `(0.1.1 => 1.0.0)`
+- `@xarc/render-context@1.0.0` `(0.1.0 => 1.0.0)`
+- `@xarc/tag-renderer@1.0.0` `(0.1.0 => 1.0.0)`
+- `subapp-react@0.0.23` `(0.0.22 => 0.0.23)`
+- `subapp-server@1.3.1` `(1.3.0 => 1.3.1)`
+- `subapp-web@1.0.32` `(1.0.31 => 1.0.32)`
+
+### Lerna Updated
+
+- `subapp-pbundle@0.0.26` `(0.0.25 => 0.0.26)`
+- `subapp-redux@1.0.32` `(1.0.31 => 1.0.32)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix: minor fix to load the user dev proxy file ([#1706](https://github.com/electrode-io/electrode/pull/1706)) [commit](http://github.com/electrode-io/electrode/commit/11e13b30fefa92011e864fae34bfd37ea154a01a)
+  - fix webpack dev server port config for electrode-server using hapi@16 ([#1705](https://github.com/electrode-io/electrode/pull/1705)) [commit](http://github.com/electrode-io/electrode/commit/6e91db2237174435ed2fc75c462d1950e47a8693)
+
+- `packages/xarc-create-app`
+
+  - update create app template deps [commit](http://github.com/electrode-io/electrode/commit/397ff9735c78083bbfb230466f3fb43ea8c7c087)
+
+- `packages/xarc-index-page`
+
+  - refactor subapp-sever and index-page to remove old SSR content [commit](http://github.com/electrode-io/electrode/commit/7231bb62ca8b5075477f7c9b00f359ff0fc27ef7)
+  - subapp-server handle routes from dir for fastify [commit](http://github.com/electrode-io/electrode/commit/741a929a7b22f8dc8c9044fb9a0333982ba04630)
+  - refactor index-page/jsx-renderer/subapp-server [commit](http://github.com/electrode-io/electrode/commit/06f122102edf59c039c89626950e354ce2948787)
+  - updating tests for tag-renderer [commit](http://github.com/electrode-io/electrode/commit/05d4fbf17f2f005fd296d56fb5b3ea20558ee030)
+  - rename updates 1 [commit](http://github.com/electrode-io/electrode/commit/e909552172a6a85c95dcecec40d279e98d609826)
+  - rename xarc-webapp to xarc-index-page [commit](http://github.com/electrode-io/electrode/commit/9c94185d3a0805781881efe15f6ab3badba328bf)
+  - refactor subapp-sever and index-page to remove old SSR content [commit](http://github.com/electrode-io/electrode/commit/6a06efb150d01bdcd31552446b519d2b29d70d75)
+  - subapp-server handle routes from dir for fastify [commit](http://github.com/electrode-io/electrode/commit/bca34ccf30d63ce2d74a2c032fd63449f3e05ad8)
+  - refactor index-page/jsx-renderer/subapp-server [commit](http://github.com/electrode-io/electrode/commit/91352c0e67c0cc43a4316030b39bc75adb1527ce)
+  - updating tests for tag-renderer [commit](http://github.com/electrode-io/electrode/commit/eda64a0a028fe895e7a0d1ba234fb182b2602971)
+  - rename updates 1 [commit](http://github.com/electrode-io/electrode/commit/8e3cd0a077734cf7c93da5f23787929cf8c6b79f)
+  - rename xarc-webapp to xarc-index-page [commit](http://github.com/electrode-io/electrode/commit/71fe059e933b93541cabd3676d915ef7131f1f7a)
+  - [major] mark for major release [commit](http://github.com/electrode-io/electrode/commit/41cfce9c840a542bdc086b15f45bb234b31a72c8)
+
+- `packages/xarc-jsx-renderer`
+
+  - rename LoadTokenHandler to RegisterTokenIds [commit](http://github.com/electrode-io/electrode/commit/8309e3b459e4c840a2acba1b0a0cca25411a04b6)
+  - update subapp samples ([#1701](https://github.com/electrode-io/electrode/pull/1701)) [commit](http://github.com/electrode-io/electrode/commit/787df489e0388a6af513262f920fb78d9a468624)
+  - refactor index-page/jsx-renderer/subapp-server [commit](http://github.com/electrode-io/electrode/commit/06f122102edf59c039c89626950e354ce2948787)
+  - cleanup and fixes for xarc/webapp packages ([#1686](https://github.com/electrode-io/electrode/pull/1686)) [commit](http://github.com/electrode-io/electrode/commit/b985f4ebc0e26bd3238df9db9440857f5107654e)
+  - jsx-renderer module [commit](http://github.com/electrode-io/electrode/commit/e9ac516dab68bac2121d3673b1966d4f5a3166a6)
+  - rename LoadTokenHandler to RegisterTokenIds [commit](http://github.com/electrode-io/electrode/commit/1c88de1395d1a80ea41a819f859ac21f6d1c8b83)
+  - update subapp samples ([#1701](https://github.com/electrode-io/electrode/pull/1701)) [commit](http://github.com/electrode-io/electrode/commit/f8777d3f2f5d0bdd4aaca1dc2e9c36c4adab06e3)
+  - refactor index-page/jsx-renderer/subapp-server [commit](http://github.com/electrode-io/electrode/commit/91352c0e67c0cc43a4316030b39bc75adb1527ce)
+  - cleanup and fixes for xarc/webapp packages ([#1686](https://github.com/electrode-io/electrode/pull/1686)) [commit](http://github.com/electrode-io/electrode/commit/2e2201cfb363af32efa6809c48578595e3329fae)
+  - jsx-renderer module [commit](http://github.com/electrode-io/electrode/commit/d1d2524ce3f9d8b9f36b38e7118ff80ab6cbf6c0)
+  - [major] mark for major release [commit](http://github.com/electrode-io/electrode/commit/41cfce9c840a542bdc086b15f45bb234b31a72c8)
+
+- `packages/xarc-render-context`
+
+  - new tag-renderer base on ES6 strings [commit](http://github.com/electrode-io/electrode/commit/bd9891583539fe131a5416a294ebd0009585e81b)
+  - subapp-server handle routes from dir for fastify [commit](http://github.com/electrode-io/electrode/commit/741a929a7b22f8dc8c9044fb9a0333982ba04630)
+  - refactor index-page/jsx-renderer/subapp-server [commit](http://github.com/electrode-io/electrode/commit/06f122102edf59c039c89626950e354ce2948787)
+  - updates for @xarc/webapp, @xarc/simple-renderer ([#1685](https://github.com/electrode-io/electrode/pull/1685)) [commit](http://github.com/electrode-io/electrode/commit/d2d8389e8aa69f430a0ca12150056a7ee0eded82)
+  - tests for xarc-render-context ([#1671](https://github.com/electrode-io/electrode/pull/1671)) [commit](http://github.com/electrode-io/electrode/commit/aef1ebd2366a0d375e98eb5dcb6355a83f7de08c)
+  - jsx-renderer module [commit](http://github.com/electrode-io/electrode/commit/e9ac516dab68bac2121d3673b1966d4f5a3166a6)
+  - new tag-renderer base on ES6 strings [commit](http://github.com/electrode-io/electrode/commit/b35ae209974e23f85d9db78c248521115591444b)
+  - subapp-server handle routes from dir for fastify [commit](http://github.com/electrode-io/electrode/commit/bca34ccf30d63ce2d74a2c032fd63449f3e05ad8)
+  - refactor index-page/jsx-renderer/subapp-server [commit](http://github.com/electrode-io/electrode/commit/91352c0e67c0cc43a4316030b39bc75adb1527ce)
+  - updates for @xarc/webapp, @xarc/simple-renderer ([#1685](https://github.com/electrode-io/electrode/pull/1685)) [commit](http://github.com/electrode-io/electrode/commit/58f0fdaac1b4d5ebc499a67bba3a49ff16734fa6)
+  - tests for xarc-render-context ([#1671](https://github.com/electrode-io/electrode/pull/1671)) [commit](http://github.com/electrode-io/electrode/commit/27bc4a2da0ba966affe4db4ddbb3f36dc2392ac9)
+  - jsx-renderer module [commit](http://github.com/electrode-io/electrode/commit/d1d2524ce3f9d8b9f36b38e7118ff80ab6cbf6c0)
+  - [major] mark for major release [commit](http://github.com/electrode-io/electrode/commit/41cfce9c840a542bdc086b15f45bb234b31a72c8)
+
+- `packages/xarc-tag-renderer`
+
+  - add tag-renderer template to subapp-server ([#1703](https://github.com/electrode-io/electrode/pull/1703)) [commit](http://github.com/electrode-io/electrode/commit/8e7547d8b112c79fb925115a6a8df3fbcfaf1276)
+  - xarc/tag-renderer support rendering sub templates ([#1702](https://github.com/electrode-io/electrode/pull/1702)) [commit](http://github.com/electrode-io/electrode/commit/3ea2fe7dab005fa9daa6935b8f60c175d928574d)
+  - new tag-renderer base on ES6 strings [commit](http://github.com/electrode-io/electrode/commit/bd9891583539fe131a5416a294ebd0009585e81b)
+  - subapp-server handle routes from dir for fastify [commit](http://github.com/electrode-io/electrode/commit/741a929a7b22f8dc8c9044fb9a0333982ba04630)
+  - rename updates 1 [commit](http://github.com/electrode-io/electrode/commit/e909552172a6a85c95dcecec40d279e98d609826)
+  - rename xarc-simple-renderer to xarc-tag-renderer [commit](http://github.com/electrode-io/electrode/commit/92e10de1bdf3116045a9bfbfa8bc2e26593f7936)
+  - new tag-renderer base on ES6 strings [commit](http://github.com/electrode-io/electrode/commit/b35ae209974e23f85d9db78c248521115591444b)
+  - subapp-server handle routes from dir for fastify [commit](http://github.com/electrode-io/electrode/commit/bca34ccf30d63ce2d74a2c032fd63449f3e05ad8)
+  - rename updates 1 [commit](http://github.com/electrode-io/electrode/commit/8e3cd0a077734cf7c93da5f23787929cf8c6b79f)
+  - rename xarc-simple-renderer to xarc-tag-renderer [commit](http://github.com/electrode-io/electrode/commit/bec397fa369560875c9ac91ed2390cfc4b98caf5)
+  - [major] mark for major release [commit](http://github.com/electrode-io/electrode/commit/41cfce9c840a542bdc086b15f45bb234b31a72c8)
+
+- `packages/subapp-react`
+
+  - subapp-server handle routes from dir for fastify [commit](http://github.com/electrode-io/electrode/commit/741a929a7b22f8dc8c9044fb9a0333982ba04630)
+  - subapp-server handle routes from dir for fastify [commit](http://github.com/electrode-io/electrode/commit/bca34ccf30d63ce2d74a2c032fd63449f3e05ad8)
+
+- `packages/subapp-server`
+
+  - add tag-renderer template to subapp-server ([#1703](https://github.com/electrode-io/electrode/pull/1703)) [commit](http://github.com/electrode-io/electrode/commit/8e7547d8b112c79fb925115a6a8df3fbcfaf1276)
+  - Adding changes to load subapps module from master [commit](http://github.com/electrode-io/electrode/commit/28dea6de7ef88f07318274b25c1d9a42a046864e)
+  - rename LoadTokenHandler to RegisterTokenIds [commit](http://github.com/electrode-io/electrode/commit/8309e3b459e4c840a2acba1b0a0cca25411a04b6)
+  - update subapp samples ([#1701](https://github.com/electrode-io/electrode/pull/1701)) [commit](http://github.com/electrode-io/electrode/commit/787df489e0388a6af513262f920fb78d9a468624)
+  - refactor subapp-sever and index-page to remove old SSR content [commit](http://github.com/electrode-io/electrode/commit/7231bb62ca8b5075477f7c9b00f359ff0fc27ef7)
+  - subapp-server handle routes from dir for fastify [commit](http://github.com/electrode-io/electrode/commit/741a929a7b22f8dc8c9044fb9a0333982ba04630)
+  - refactor index-page/jsx-renderer/subapp-server [commit](http://github.com/electrode-io/electrode/commit/06f122102edf59c039c89626950e354ce2948787)
+  - rename updates 1 [commit](http://github.com/electrode-io/electrode/commit/e909552172a6a85c95dcecec40d279e98d609826)
+  - cleanup and fixes for xarc/webapp packages ([#1686](https://github.com/electrode-io/electrode/pull/1686)) [commit](http://github.com/electrode-io/electrode/commit/b985f4ebc0e26bd3238df9db9440857f5107654e)
+  - updates for @xarc/webapp, @xarc/simple-renderer ([#1685](https://github.com/electrode-io/electrode/pull/1685)) [commit](http://github.com/electrode-io/electrode/commit/d2d8389e8aa69f430a0ca12150056a7ee0eded82)
+  - extract tokens from electrode-react-webapp into @xarc/webapp for subapp-server ([#1681](https://github.com/electrode-io/electrode/pull/1681)) [commit](http://github.com/electrode-io/electrode/commit/a7f768feaaa1feabbe53e71d69e2b6e32ec955b4)
+  - rename LoadTokenHandler to RegisterTokenIds [commit](http://github.com/electrode-io/electrode/commit/1c88de1395d1a80ea41a819f859ac21f6d1c8b83)
+  - update subapp samples ([#1701](https://github.com/electrode-io/electrode/pull/1701)) [commit](http://github.com/electrode-io/electrode/commit/f8777d3f2f5d0bdd4aaca1dc2e9c36c4adab06e3)
+  - refactor subapp-sever and index-page to remove old SSR content [commit](http://github.com/electrode-io/electrode/commit/6a06efb150d01bdcd31552446b519d2b29d70d75)
+  - subapp-server handle routes from dir for fastify [commit](http://github.com/electrode-io/electrode/commit/bca34ccf30d63ce2d74a2c032fd63449f3e05ad8)
+  - refactor index-page/jsx-renderer/subapp-server [commit](http://github.com/electrode-io/electrode/commit/91352c0e67c0cc43a4316030b39bc75adb1527ce)
+  - rename updates 1 [commit](http://github.com/electrode-io/electrode/commit/8e3cd0a077734cf7c93da5f23787929cf8c6b79f)
+  - cleanup and fixes for xarc/webapp packages ([#1686](https://github.com/electrode-io/electrode/pull/1686)) [commit](http://github.com/electrode-io/electrode/commit/2e2201cfb363af32efa6809c48578595e3329fae)
+  - updates for @xarc/webapp, @xarc/simple-renderer ([#1685](https://github.com/electrode-io/electrode/pull/1685)) [commit](http://github.com/electrode-io/electrode/commit/58f0fdaac1b4d5ebc499a67bba3a49ff16734fa6)
+  - extract tokens from electrode-react-webapp into @xarc/webapp for subapp-server ([#1681](https://github.com/electrode-io/electrode/pull/1681)) [commit](http://github.com/electrode-io/electrode/commit/c150185075d8400edfaece4cb5c014657b34bd77)
+
+- `packages/subapp-web`
+
+  - add tag-renderer template to subapp-server ([#1703](https://github.com/electrode-io/electrode/pull/1703)) [commit](http://github.com/electrode-io/electrode/commit/8e7547d8b112c79fb925115a6a8df3fbcfaf1276)
+
 # 7/16/2020
 
 ## Packages
