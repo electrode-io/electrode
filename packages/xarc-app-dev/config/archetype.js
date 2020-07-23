@@ -86,7 +86,6 @@ module.exports = function getDevArchetype(createXarcOptions) {
   Object.defineProperty(archetypeConfig, "AppMode", {
     get() {
       if (!AppMode) {
-        const makeAppMode = require("@xarc/app/lib/app-mode");
         AppMode = makeAppMode(archetypeConfig.prodDir, archetypeConfig.reactLib);
       }
 
