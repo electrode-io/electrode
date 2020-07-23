@@ -1,6 +1,6 @@
 {
   "name": "@xarc/render-context",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Context for index.htm generation",
   "main": "dist/index.js",
   "scripts": {

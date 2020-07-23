@@ -1,6 +1,6 @@
 {
   "name": "@xarc/jsx-renderer",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "description": "Render index.htm from JSX template",
   "main": "dist/index.js",
   "scripts": {
