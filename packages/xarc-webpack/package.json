@@ -30,7 +30,7 @@
     "babel-loader": "^8.1.0",
     "chalk": "^4.1.0",
     "chalker": "^1.2.0",
-    "css-loader": "^2.1.1",
+    "css-loader": "^1.0.1",
     "electrode-cdn-file-loader": "^1.0.0",
     "electrode-node-resolver": "^2.0.0",
     "file-loader": "^2.0.0",
