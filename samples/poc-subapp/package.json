@@ -36,7 +36,6 @@
   },
   "dependencies": {
     "@xarc/app": "^8.1.6",
-    "@xarc/app-dev": "^8.1.6",
     "@xarc/fastify-server": "^2.0.0",
     "electrode-confippet": "^1.5.0",
     "react": "^16.13.1",

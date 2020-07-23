@@ -2,8 +2,8 @@
 
 const Path = require("path");
 const Fs = require("fs");
-const logger = require("./logger");
 const subappUtil = require("subapp-util");
+const logger = require("./logger");
 
 function makeAppMode(prodDir, reactLib) {
   const client = "client";
@@ -50,44 +50,43 @@ function makeAppMode(prodDir, reactLib) {
   const posixify = s => s.replace(/\\/g, "/");
 
   const envKey = "APP_SRC_DIR";
-  return Object.assign(
-    {
-      reactLib,
-      savedFile,
-      envKey,
-      setEnv: dir => {
-        if (dir) {
-          dir = posixify(dir);
-          if (!dir.endsWith("/")) {
-            dir += "/";
-          }
-          process.env[envKey] = dir;
-        } else {
-          delete process.env[envKey];
+
+  return {
+    reactLib,
+    savedFile,
+    envKey,
+    setEnv: dir => {
+      if (dir) {
+        dir = posixify(dir);
+        if (!dir.endsWith("/")) {
+          dir += "/";
         }
-      },
-      getEnv: () => {
-        return process.env[envKey];
-      },
-      hasEnv: () => {
-        return !!process.env[envKey];
-      },
-      client,
-      server,
-      src: {
-        dir: srcDir,
-        client: posixify(Path.join(srcDir, client)),
-        server: posixify(Path.join(srcDir, server))
-      },
-      lib: {
-        dir: libDir,
-        client: posixify(Path.join(libDir, client)),
-        server: posixify(Path.join(libDir, server))
+        process.env[envKey] = dir;
+      } else {
+        delete process.env[envKey];
       }
     },
-    saved,
-    { version }
-  );
+    getEnv: () => {
+      return process.env[envKey];
+    },
+    hasEnv: () => {
+      return !!process.env[envKey];
+    },
+    client,
+    server,
+    src: {
+      dir: srcDir,
+      client: posixify(Path.join(srcDir, client)),
+      server: posixify(Path.join(srcDir, server))
+    },
+    lib: {
+      dir: libDir,
+      client: posixify(Path.join(libDir, client)),
+      server: posixify(Path.join(libDir, server))
+    },
+    ...saved,
+    version
+  };
 }
 
 module.exports = makeAppMode;

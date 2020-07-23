@@ -2,10 +2,25 @@
 
 const optionalRequire = require("optional-require")(require);
 const isomorphicExtendRequire = require("isomorphic-loader/lib/extend-require");
-const archetype = require("../config/archetype")();
-const AppMode = archetype.AppMode;
+const makeAppMode = require("../lib/app-mode");
 const Path = require("path");
+const constants = require("../lib/constants");
 const logger = require("../lib/logger");
+
+let AppMode;
+
+function getAppMode() {
+  if (AppMode) {
+    return AppMode;
+  }
+
+  try {
+    const archetype = require("@xarc/app-dev/config/archetype")();
+    return (AppMode = archetype.AppMode);
+  } catch (e) {
+    return (AppMode = makeAppMode(constants.PROD_DIR));
+  }
+}
 
 const support = {
   cssModuleHook: options => {
@@ -20,12 +35,12 @@ const support = {
   isomorphicExtendRequire: () => {
     return isomorphicExtendRequire({
       processAssets: assets => {
-        const appSrcDir = (AppMode.getEnv() || AppMode.lib.dir).split("/")[0];
-        if (appSrcDir !== AppMode.src.dir && assets.marked) {
+        const appSrcDir = (getAppMode().getEnv() || getAppMode().lib.dir).split("/")[0];
+        if (appSrcDir !== getAppMode().src.dir && assets.marked) {
           const marked = assets.marked;
           Object.keys(marked).forEach(k => {
-            if (k.startsWith(AppMode.src.client) || k.startsWith(AppMode.src.server)) {
-              const nk = k.replace(AppMode.src.dir, appSrcDir);
+            if (k.startsWith(getAppMode().src.client) || k.startsWith(getAppMode().src.server)) {
+              const nk = k.replace(getAppMode().src.dir, appSrcDir);
               marked[nk] = marked[k];
             }
           });
@@ -39,20 +54,20 @@ const support = {
   }
 };
 
-if (!AppMode.hasEnv()) {
+if (!getAppMode().hasEnv()) {
   const guessAppSrcDir = () => {
     if (module.parent && module.parent.filename) {
       const fn = module.parent.filename;
       const dir = fn.substr(process.cwd().length + 1).split("/")[0];
-      if (dir === AppMode.src.dir || dir === AppMode.lib.dir) {
+      if (dir === getAppMode().src.dir || dir === getAppMode().lib.dir) {
         return `${dir}/`;
       }
     }
     return "lib/";
   };
-  AppMode.setEnv(guessAppSrcDir());
+  getAppMode().setEnv(guessAppSrcDir());
 }
-logger.info(`${AppMode.envKey} set to`, AppMode.getEnv());
+logger.info(`${getAppMode().envKey} set to`, getAppMode().getEnv());
 
 /* eslint max-statements: 0 complexity: 0 */
 support.load = function(options, callback) {

@@ -8,7 +8,7 @@ const WebpackConfigComposer = require("webpack-config-composer");
 const optionalRequire = require("optional-require")(require);
 const Path = require("path");
 const _ = require("lodash");
-const logger = require("@xarc/app/lib/logger");
+const logger = require("@xarc/app-dev/lib/logger");
 const ck = require("chalker");
 
 const xarcWebpackConfig = Symbol("Electrode X webpack config");
@@ -120,7 +120,11 @@ WARNING: </>`);
 
   config[xarcWebpackConfig] = true;
 
-  logger.verbose("Final Webpack config", JSON.stringify(config, null, 2));
+  try {
+    logger.verbose("Final Webpack config", JSON.stringify(config, null, 2));
+  } catch (err) {
+    logger.error("unable to stringify webpack config");
+  }
 
   return config;
 }

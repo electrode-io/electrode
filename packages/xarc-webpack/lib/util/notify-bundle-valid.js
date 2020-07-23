@@ -4,7 +4,7 @@
 
 const Fs = require("fs");
 const Path = require("path");
-const archetype = require("@xarc/app/config/archetype")();
+const archetype = require("@xarc/app-dev/config/archetype")();
 
 module.exports = function notifyBundleValid() {
   setTimeout(() => {

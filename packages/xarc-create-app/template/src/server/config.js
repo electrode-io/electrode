@@ -31,6 +31,11 @@ exports.config = {
     "subapp-server": {
       options: {
         cdn: {
+          /**
+           * Enable CDN in production mode.  To try this locally, do:
+           * 1. npm run build
+           * 2. NODE_ENV=production clap mock-cloud
+           */
           enable: process.env.NODE_ENV === "production"
         }
       }

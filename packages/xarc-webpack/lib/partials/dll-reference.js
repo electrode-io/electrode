@@ -10,9 +10,9 @@
 const fs = require("fs");
 const filterScanDir = require("filter-scan-dir");
 const webpack = require("webpack");
-const archetype = require("@xarc/app/config/archetype")();
+const archetype = require("@xarc/app-dev/config/archetype")();
 const Path = require("path");
-const logger = require("@xarc/app/lib/logger");
+const logger = require("@xarc/app-dev/lib/logger");
 
 module.exports = function(options) {
   const config = options.currentConfig;

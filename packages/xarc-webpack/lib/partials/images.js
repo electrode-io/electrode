@@ -3,7 +3,7 @@
 const isomorphicLoader = require.resolve("isomorphic-loader");
 const optionalRequire = require("optional-require")(require);
 const _ = require("lodash");
-const logger = require("@xarc/app/lib/logger");
+const logger = require("@xarc/app-dev/lib/logger");
 
 function getCdnLoader(optLoader) {
   if (optLoader) {

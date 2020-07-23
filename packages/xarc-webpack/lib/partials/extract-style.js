@@ -2,7 +2,7 @@
 
 /* eslint-disable max-statements, complexity */
 
-const archetype = require("@xarc/app/config/archetype")();
+const archetype = require("@xarc/app-dev/config/archetype")();
 const Path = require("path");
 const detectCssModule = require("../util/detect-css-module");
 

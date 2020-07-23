@@ -2,10 +2,9 @@
 
 /* eslint-disable max-statements */
 
-const logger = require("@xarc/app/lib/logger");
+const logger = require("../lib/logger");
 const fs = require("fs");
 const Path = require("path");
-const isomorphicConfig = require("isomorphic-loader/lib/config");
 const isMain = require.main === module;
 
 function exit(code) {

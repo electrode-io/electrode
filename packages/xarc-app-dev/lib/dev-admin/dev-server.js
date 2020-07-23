@@ -3,7 +3,7 @@
 /* eslint-disable global-require, no-console */
 
 const ck = require("chalker");
-const archetype = require("@xarc/app/config/archetype")();
+const archetype = require("../../config/archetype")();
 const optionalRequire = require("optional-require")(require);
 const fastifyServer = optionalRequire("@xarc/fastify-server");
 const electrodeServer = optionalRequire("electrode-server");
