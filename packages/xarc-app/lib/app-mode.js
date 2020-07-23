@@ -1,11 +1,30 @@
 "use strict";
 
+/* eslint-disable no-param-reassign */
+
 const Path = require("path");
 const Fs = require("fs");
 const subappUtil = require("subapp-util");
 const logger = require("./logger");
+const constants = require("./constants");
 
-function makeAppMode(prodDir, reactLib) {
+/**
+ * Figure out the mode app is setup.
+ *
+ * 1. src/client, src/server => lib
+ * 2. src/{subapp-directories}, src/server => lib
+ * 3. which react lib is being used (default react)
+ *
+ * And then setup the env APP_SRC_DIR so in dev mode code in src is executed
+ * with run time compiler like @babel/register, but in prod mode transpiled
+ * code in lib will be executed.
+ *
+ * @param {*} prodDir - directory to save data of the app mode
+ * @param {*} reactLib - UI framework (react)
+ *
+ * @returns app mode data
+ */
+function makeAppMode(prodDir = constants.PROD_DIR, reactLib = "react") {
   const client = "client";
   const server = "server";
 
