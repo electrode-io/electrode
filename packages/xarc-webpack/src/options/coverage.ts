@@ -1,10 +1,11 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 /**
  * Webpack coverage configuration
  */
 const baseProfile = require("../profile.base");
 const testBaseProfile = require("../profile.base.test");
-const Path = require("path");
+import * as Path from "path";
 
 function coverageOptions() {
   const coverageProfile = {

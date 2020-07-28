@@ -1,9 +1,9 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 /* eslint-disable no-magic-numbers */
 
-const Fs = require("fs");
-const Path = require("path");
+import * as Fs from "fs";
+import * as Path from "path";
 const archetype = require("@xarc/app-dev/config/archetype")();
 
 module.exports = function notifyBundleValid() {

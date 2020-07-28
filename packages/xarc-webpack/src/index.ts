@@ -1,6 +1,9 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 const { initWebpackConfigComposer, generateConfig } = require("./util/generate-config");
+
+// https://stackoverflow.com/questions/40900791/cannot-redeclare-block-scoped-variable-in-unrelated-files
+export {};
 
 //
 // When clap execute a build task that involves invoking webpack it

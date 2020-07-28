@@ -1,8 +1,9 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
+
+import * as Path from "path";
 
 const archetype = require("@xarc/app-dev/config/archetype")();
 const AppMode = archetype.AppMode;
-const Path = require("path");
 const ModuleResolver = require("electrode-node-resolver/lib/webpack-plugin");
 const identity = require("lodash/identity");
 
@@ -27,7 +28,7 @@ function infernoReactAlias() {
 
 const { enableTypeScript } = archetype.babel;
 
-const resolve = {
+const resolve: any = {
   alias: infernoReactAlias(),
   // https://webpack.js.org/configuration/resolve/#resolve-symlinks
   symlinks: !archetype.webpack.preserveSymlinks,

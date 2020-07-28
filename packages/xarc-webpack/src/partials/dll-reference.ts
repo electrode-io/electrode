@@ -1,4 +1,4 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 /* eslint-disable no-magic-numbers */
 
@@ -7,11 +7,11 @@
  * DLL bundles.
  */
 
-const fs = require("fs");
+import * as fs from "fs";
+import * as Path from "path";
+import * as webpack from "webpack";
 const filterScanDir = require("filter-scan-dir");
-const webpack = require("webpack");
 const archetype = require("@xarc/app-dev/config/archetype")();
-const Path = require("path");
 const logger = require("@xarc/app-dev/lib/logger");
 
 module.exports = function(options) {

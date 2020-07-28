@@ -1,7 +1,7 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 const baseProfile = require("../profile.base");
-const Path = require("path");
+import * as Path from "path";
 
 function prodOptions() {
   const productionProfile = {

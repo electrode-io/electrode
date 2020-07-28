@@ -1,9 +1,10 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
 
-const LoadablePlugin = require("@loadable/webpack-plugin");
-const archetype = require("@xarc/app-dev/config/archetype")();
+const archetypeConfig = require("@xarc/app-dev/config/archetype");
+import * as LoadablePlugin from "@loadable/webpack-plugin";
 
 module.exports = function() {
+  const archetype = archetypeConfig();
   return {
     plugins: archetype.babel.enableDynamicImport
       ? [new LoadablePlugin({ filename: "../server/loadable-stats.json" })]

@@ -1,6 +1,7 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
 
-const Path = require("path");
+import * as Path from "path";
+
 const filterScanDir = require("filter-scan-dir");
 const archetype = require("@xarc/app-dev/config/archetype")();
 const AppMode = archetype.AppMode;

@@ -1,6 +1,6 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
 
-const Url = require("url");
+import * as Url from "url";
 // const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const archetype = require("@xarc/app-dev/config/archetype")();
 const webpackDevReporter = require("../util/webpack-dev-reporter");
@@ -10,7 +10,7 @@ const HTTP_PORT = 80;
 const devProtocol = archetype.webpack.https ? "https://" : "http://";
 
 module.exports = function() {
-  const devServerConfig = {
+  const devServerConfig: any = {
     hot: archetype.webpack.enableHotModuleReload,
     overlay: {
       errors: true,

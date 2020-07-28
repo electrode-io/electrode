@@ -1,8 +1,8 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 /* eslint-disable global-require, no-magic-numbers */
 
-const Fs = require("fs");
+import * as Fs from "fs";
 const assert = require("assert");
 const Partial = require("webpack-config-composer/lib/partial");
 
@@ -50,7 +50,9 @@ const orders = [
 ];
 
 const files = Fs.readdirSync(__dirname)
-  .filter(x => x !== "index.js")
+  .filter(
+    x => x !== "index.js" && !x.endsWith(".d.js") && !x.endsWith(".map") && !x.endsWith(".ts")
+  )
   .map(x => x.substr(0, x.length - 3));
 
 const partials = files.reduce((a, p) => {

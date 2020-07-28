@@ -1,6 +1,4 @@
-"use strict";
-
-/* eslint-disable global-require */
+/* eslint-disable global-require, @typescript-eslint/no-var-requires */
 
 const notifyBundleValid = require("../util/notify-bundle-valid");
 

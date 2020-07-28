@@ -1,6 +1,4 @@
-"use strict";
-
-const Path = require("path");
+import * as Path from "path";
 
 module.exports = () => ({
   output: {

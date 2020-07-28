@@ -1,13 +1,14 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 /* eslint-disable no-console, no-magic-numbers, no-unused-expressions, max-statements */
+
+import * as _ from "lodash";
+import * as Path from "path";
 
 const xsh = require("xsh");
 const partials = require("../partials");
 const WebpackConfigComposer = require("webpack-config-composer");
 const optionalRequire = require("optional-require")(require);
-const Path = require("path");
-const _ = require("lodash");
 const logger = require("@xarc/app-dev/lib/logger");
 const ck = require("chalker");
 

@@ -1,12 +1,14 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
 
-const archetype = require("@xarc/app-dev/config/archetype")();
+import * as Path from "path";
+
+const archetypeConfig = require("@xarc/app-dev/config/archetype");
 const IsomorphicLoaderPlugin = require("isomorphic-loader/lib/webpack-plugin");
 const isomorphicConfig = require("isomorphic-loader/lib/config");
-const Path = require("path");
-const { babel } = archetype;
 
 module.exports = function(opts) {
+  const archetype = archetypeConfig();
+  const { babel } = archetype;
   const target = babel.target !== "default" ? `-${babel.target}` : "";
   const configFile = Path.resolve(isomorphicConfig.configFile.replace(".json", `${target}.json`));
   return {

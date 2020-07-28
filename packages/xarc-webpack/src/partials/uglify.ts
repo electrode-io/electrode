@@ -1,5 +1,3 @@
-"use strict";
-
 //
 // This partial used to use https://www.npmjs.com/package/uglifyjs-webpack-plugin to
 // minize JS bundle for production.

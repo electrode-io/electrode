@@ -1,9 +1,11 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 /* eslint-disable max-statements, complexity */
 
+import * as Path from "path";
+
 const archetype = require("@xarc/app-dev/config/archetype")();
-const Path = require("path");
+
 const detectCssModule = require("../util/detect-css-module");
 
 const getOptRequire = require("../util/get-opt-require");
@@ -111,7 +113,7 @@ module.exports = function() {
     };
   };
 
-  const getCssQueryUse = ext => {
+  const getCssQueryUse = (ext = "") => {
     let cssModule = Boolean(cssModuleSupport);
     if (ext && Array.isArray(cssModuleSupport)) {
       cssModule = cssModuleSupport.indexOf(ext) >= 0;
@@ -154,7 +156,7 @@ module.exports = function() {
           loader: MiniCssExtractPlugin.loader,
           options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
         },
-        ...getCssQueryUse().concat({ loader: sassLoader })
+        ...getCssQueryUse().concat({ loader: sassLoader } as any)
       ]
     });
   }
@@ -191,7 +193,7 @@ module.exports = function() {
           loader: MiniCssExtractPlugin.loader,
           options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
         },
-        ...getCssQueryUse().concat({ loader: lessLoader })
+        ...getCssQueryUse().concat({ loader: lessLoader } as any)
       ]
     });
   }

@@ -1,8 +1,8 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 /* eslint-disable no-magic-numbers */
 
-const webpack = require("webpack");
+import * as webpack from "webpack";
 
 let lastPct;
 let currentRun = 0;

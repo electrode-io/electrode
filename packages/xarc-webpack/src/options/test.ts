@@ -1,8 +1,8 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 const baseProfile = require("../profile.base");
 const testBaseProfile = require("../profile.base.test");
-const Path = require("path");
+import * as Path from "path";
 
 function testConfigs() {
   const testProfile = {

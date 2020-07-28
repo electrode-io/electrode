@@ -1,9 +1,10 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 /**
  * Webpack static dev configuration
  */
 const baseProfile = require("../profile.base");
-const Path = require("path");
+import * as Path from "path";
 
 function staticConfigs() {
   const devProfile = {

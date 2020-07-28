@@ -1,4 +1,4 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 /**
  * Figure out if an opt add-on is installed.  If so, return a require that's binded
@@ -6,7 +6,7 @@
  *
  */
 
-const Path = require("path");
+import * as Path from "path";
 const requireAt = require("require-at");
 const optionalRequire = require("optional-require")(require);
 

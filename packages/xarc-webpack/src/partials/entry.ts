@@ -1,11 +1,11 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 /* eslint-disable no-process-exit */
 
-const Fs = require("fs");
-const _ = require("lodash");
+import * as Fs from "fs";
+import * as Path from "path";
+import * as _ from "lodash";
 const optionalRequire = require("optional-require")(require);
-const Path = require("path");
 const archetype = require("@xarc/app-dev/config/archetype")();
 const AppMode = archetype.AppMode;
 const chalk = require("chalk");
@@ -15,7 +15,7 @@ const mkdirp = require("mkdirp");
 const DEV_HMR_DIR = ".__dev_hmr";
 
 function makeEntryPartial() {
-  const partial = {
+  const partial: any = {
     context: Path.resolve(AppMode.src.client)
   };
 
@@ -200,7 +200,7 @@ if (module.hot) {
         entry = { main: [coreJs, runtime, ...entry] };
       } else if (_.isObject(entry)) {
         entry = Object.entries(entry).reduce((prev, [k, v]) => {
-          prev[k] = [coreJs, runtime].concat(v);
+          prev[k] = [coreJs, runtime].concat(v as any[]);
           return prev;
         }, {});
       } else {

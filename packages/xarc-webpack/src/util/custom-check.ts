@@ -1,9 +1,10 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 /* eslint-disable global-require */
 
-const Fs = require("fs");
-const Path = require("path");
+import * as Fs from "fs";
+import * as Path from "path";
+
 const archetype = require("@xarc/app-dev/config/archetype")();
 
 function useAppWebpackConfig() {

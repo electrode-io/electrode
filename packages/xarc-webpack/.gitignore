@@ -1,6 +1,6 @@
 .nyc_output
 coverage
-dist
+lib
 node_modules
 # recommend avoid committing package-lock.* file because a module's CI
 # should use latest dep, as an app that consumes a module would have its

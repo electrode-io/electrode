@@ -1,4 +1,4 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 /* eslint-disable max-statements */
 
@@ -17,7 +17,7 @@
 // the newer Electrode Webpack DLL modules.
 //
 
-const webpack = require("webpack");
+import * as webpack from "webpack";
 const DonePlugin = require("../plugins/done-plugin");
 const dllUtil = require("../util/dll-util");
 

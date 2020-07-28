@@ -1,6 +1,9 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 const ContextReplacementPlugin = require("webpack").ContextReplacementPlugin;
+
+// https://stackoverflow.com/questions/40900791/cannot-redeclare-block-scoped-variable-in-unrelated-files
+export {};
 
 // Note that in modern versions of `moment`, there is actually no
 // `locale/en.js`, `en` is simply the default and included in `moment` itself.

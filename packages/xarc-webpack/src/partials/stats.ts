@@ -1,18 +1,19 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 /* eslint-disable global-require */
 
-const Fs = require("fs");
-const Path = require("path");
+import * as Path from "path";
+import * as Fs from "fs";
+import * as _ from "lodash";
+
 const mkdirp = require("mkdirp");
-const _ = require("lodash");
 const INDENT = 2;
 const archetype = require("@xarc/app-dev/config/archetype")();
 
 module.exports = function(opts) {
   const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
 
-  const statsOptions = {
+  const statsOptions: any = {
     filename: opts.filename || "../server/stats.json",
     fields: ["assetsByChunkName", "assets", "entrypoints", "chunks"]
   };
@@ -33,7 +34,7 @@ module.exports = function(opts) {
 
     if (stats.entrypoints) {
       stats.entrypoints = Object.entries(stats.entrypoints).reduce((ep, [name, e]) => {
-        ep[name] = e.chunks;
+        ep[name] = (e as any).chunks;
         return ep;
       }, {});
     }

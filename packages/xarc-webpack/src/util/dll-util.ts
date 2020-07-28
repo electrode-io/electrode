@@ -1,4 +1,4 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 /* eslint-disable max-statements, no-magic-numbers */
 
@@ -17,9 +17,10 @@
 // the newer Electrode Webpack DLL modules.
 //
 
-const Fs = require("fs");
-const Path = require("path");
-const _ = require("lodash");
+import * as Fs from "fs";
+import * as _ from "lodash";
+import * as Path from "path";
+
 const logger = require("@xarc/app-dev/lib/logger");
 const archetype = require("@xarc/app-dev/config/archetype")();
 const mkdirp = require("mkdirp");
@@ -28,7 +29,7 @@ const requireAt = require("require-at");
 
 const loadJson = (name, defaultVal) => {
   try {
-    return JSON.parse(Fs.readFileSync(name));
+    return JSON.parse(Fs.readFileSync(name).toString());
   } catch (err) {
     if (defaultVal !== undefined) return defaultVal;
     throw err;
@@ -43,7 +44,7 @@ const findDllManifests = name => {
     const moduleDir = Path.dirname(modulePath);
     const dev = getEnvTag();
     const statsFile = Path.join(moduleDir, "dist", `stats${dev}.json`);
-    const stats = JSON.parse(Fs.readFileSync(statsFile));
+    const stats = JSON.parse(Fs.readFileSync(statsFile).toString());
     const dllNames = Object.keys(stats.assetsByChunkName);
     const dllInfo = dllNames.map(n => {
       return {
@@ -63,7 +64,7 @@ const findDllManifests = name => {
 };
 
 const verifyVersions = info => {
-  const versions = JSON.parse(Fs.readFileSync(info.versions));
+  const versions = JSON.parse(Fs.readFileSync(info.versions).toString());
   Object.keys(versions).forEach(pkgDir => {
     const pkgInfo = versions[pkgDir];
     const modName = pkgInfo.name;

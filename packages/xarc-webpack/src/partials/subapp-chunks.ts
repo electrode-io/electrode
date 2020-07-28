@@ -1,8 +1,8 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 /* eslint-disable global-require, no-magic-numbers */
 
-const Crypto = require("crypto");
+import * as Crypto from "crypto";
 
 const splitMap = {};
 
@@ -24,7 +24,7 @@ function hashChunks(mod, chunks, key) {
 function makeConfig() {
   const { AppMode, webpack } = require("@xarc/app-dev/config/archetype")();
 
-  const config = {};
+  const config: any = {};
 
   if (!AppMode.hasSubApps) {
     return config;

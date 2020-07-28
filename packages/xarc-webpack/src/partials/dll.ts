@@ -1,6 +1,6 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
 
-const Path = require("path");
+import * as Path from "path";
 const webpack = require("webpack");
 
 module.exports = function() {

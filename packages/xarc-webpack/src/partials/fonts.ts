@@ -1,11 +1,13 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
 
-const urlLoader = require.resolve("url-loader");
-const fileLoader = require.resolve("file-loader");
-const isomorphicLoader = require.resolve("isomorphic-loader");
-const archetype = require("@xarc/app-dev/config/archetype")();
+const archetypeConfig = require("@xarc/app-dev/config/archetype");
 
 module.exports = function() {
+  const archetype = archetypeConfig();
+  const urlLoader = require.resolve("url-loader");
+  const fileLoader = require.resolve("file-loader");
+  const isomorphicLoader = require.resolve("isomorphic-loader");
+
   return {
     module: {
       rules: [

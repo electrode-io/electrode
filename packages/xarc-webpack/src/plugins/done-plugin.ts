@@ -1,6 +1,6 @@
-"use strict";
-
 class DonePlugin {
+  _func: Function;
+
   constructor(func) {
     this._func = func;
   }

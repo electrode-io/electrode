@@ -1,7 +1,7 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/camelcase */
 
+import * as Path from "path";
 const archetype = require("@xarc/app-dev/config/archetype")();
-const Path = require("path");
 const requireAt = require("require-at");
 const AppMode = archetype.AppMode;
 
