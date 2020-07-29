@@ -1,4 +1,6 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
+export {};
 
 /* eslint-disable no-console, no-process-exit */
 

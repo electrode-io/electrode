@@ -1,4 +1,5 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires, no-console, @typescript-eslint/ban-ts-ignore */
+export {};
 
 /*
  * A single babel RC for all transpiling, including client and server code.
@@ -98,6 +99,7 @@ const basePlugins = [
   ]
 ];
 
+// @ts-ignore
 const plugins = basePlugins.concat(
   // test env
   isTest && ["babel-plugin-dynamic-import-node"],

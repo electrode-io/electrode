@@ -1,13 +1,13 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
+export {};
 
 const Path = require("path");
-const pkg = require("../package.json");
 const optionalRequire = require("optional-require")(require);
 const constants = require("./constants");
 const utils = require("../lib/utils");
 require("../typedef");
 
-function checkOptArchetypeInAppDep(dependencies, isDev) {
+function checkOptArchetypeInAppDep(dependencies, isDev = undefined) {
   const options = dependencies
     .filter(x => x.startsWith("electrode-archetype-opt-"))
     .reduce((acc, name) => {
@@ -73,6 +73,8 @@ function getDefaultArchetypeOptions(createXarcOptions) {
     ...Object.keys(appPkg.devDependencies),
     ...createXarcOptions.electrodePackagesDev
   ];
+
+  const { myPkg: pkg } = utils.getMyPkg();
 
   return {
     dir: Path.resolve(__dirname, ".."),

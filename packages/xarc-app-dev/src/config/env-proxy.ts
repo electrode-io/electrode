@@ -1,8 +1,11 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
+export {};
+
 const { merge } = require("lodash");
 
-let cachedEnvProxy = null
-module.exports = function getEnvProxy () {
+let cachedEnvProxy = null;
+
+module.exports = function getEnvProxy() {
   const xenvConfig = require("xenv-config");
 
   const proxyConfigSpec = {
@@ -19,5 +22,5 @@ module.exports = function getEnvProxy () {
     elevated: { env: ["ELECTRODE_DEV_ELEVATED"], default: false }
   };
   cachedEnvProxy = cachedEnvProxy || xenvConfig(proxyConfigSpec, {}, { merge });
-  return cachedEnvProxy
-}
+  return cachedEnvProxy;
+};

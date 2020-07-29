@@ -1,4 +1,5 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
+export {};
 
 const AnsiConvert = require("ansi-to-html");
 const ck = require("chalker");
@@ -81,7 +82,7 @@ function getLogEventAsHtml(event) {
 
 // eslint-disable-next-line no-console
 async function displayLogs(maxLevel = DefaultMaxLevel, show = console.log) {
-  await getLogsByLine(maxLevel, event => show(getLogEventAsAnsi(event, show)));
+  await getLogsByLine(maxLevel, event => show(getLogEventAsAnsi(event)));
 }
 
 module.exports = {

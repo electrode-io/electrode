@@ -1,4 +1,5 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
+export {};
 
 /* eslint-disable complexity, no-unused-expressions */
 /* eslint-disable no-magic-numbers, max-len, max-statements, prefer-template */
@@ -51,6 +52,28 @@ const SERVER_ENVS = {
 };
 
 class AdminServer {
+  _opts: any;
+  _passThru: any;
+  _messageId: any;
+  _saveWebpackReportData: any;
+  _webpackDevRelay: any;
+  _servers: any;
+  _io: any;
+  _shutdown: any;
+  _fullAppLogUrl: any;
+  _startTime: any;
+  _wds: any;
+  _proxy: any;
+  _app: any;
+  _appLogLevel: any;
+  _menu: any;
+  _fullyStarted: any;
+  _ctrlCExit: any;
+  _statusLine: any;
+  _hideMenuTimer: any;
+  _appWatcher: any;
+  _startDefer: any;
+
   constructor(args, options) {
     this._opts = args.opts;
     this._passThru = args._;
@@ -109,7 +132,7 @@ class AdminServer {
     this._io.show(ck`<orange>${msg} was <cyan>${elapsed}</> seconds</>`);
   }
 
-  updateStatus(line) {
+  updateStatus(line = undefined) {
     if (line !== undefined) {
       this._statusLine = line;
     }
@@ -143,7 +166,7 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
     this._menu = "\n" + boxen(menu, { margin: { left: 5 }, padding: { right: 3, left: 3 } });
   }
 
-  showMenu(force) {
+  showMenu(force = undefined) {
     const show = force !== undefined ? force : !this._menu;
 
     if (show) {
@@ -321,7 +344,7 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
     }
 
     const start = () => {
-      const forkOpts = {
+      const forkOpts: any = {
         env: Object.assign({}, process.env, {
           ELECTRODE_ADMIN_SERVER: true,
           ...SERVER_ENVS[name]
@@ -360,7 +383,7 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
   //
   // start webpack dev server
   //
-  async startWebpackDevServer(debug) {
+  async startWebpackDevServer(debug = undefined) {
     const progSig = `<s> [webpack.Progress] `;
     const waitStart = async info => {
       const cwdRegex = new RegExp(process.cwd(), "g");
@@ -562,9 +585,9 @@ ${instruction}`
     });
   }
 
-  async startAppServer(debug) {
+  async startAppServer(debug = undefined) {
     const skipWatch = debug === "--inspect-brk";
-    const logSaver = {
+    const logSaver: any = {
       tag: this._app,
       store: [],
       fullLogUrl: this._fullAppLogUrl,
@@ -619,7 +642,7 @@ ${instruction}`
     return reader;
   }
 
-  async startProxyServer(debug) {
+  async startProxyServer(debug = undefined) {
     await this.startServer({
       name: PROXY_SERVER_NAME,
       killKey: "O",
@@ -644,7 +667,7 @@ ${instruction}`
     const processPending = () => {
       if (pendingMessages.length > 0) {
         messageHandler(pendingMessages.shift());
-        setTimeout(processPending);
+        setTimeout(processPending, 10);
       }
     };
 
@@ -666,7 +689,7 @@ ${info.name} - assuming it started.</>`);
 
       started = true;
       clearTimeout(startTimeout);
-      setTimeout(processPending);
+      setTimeout(processPending, 10);
 
       return started;
     };

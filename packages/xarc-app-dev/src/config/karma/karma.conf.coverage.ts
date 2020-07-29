@@ -1,4 +1,5 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
+export {};
 
 process.env.KARMA_RUN_TYPE = "coverage";
 

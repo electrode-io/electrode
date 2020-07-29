@@ -1,4 +1,5 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
+export {};
 
 const _ = require("lodash");
 const ModuleProcessor = require("./module-processor");
@@ -99,7 +100,7 @@ function jsonToHtml(obj, useColors, anchors) {
     }
   };
 
-  const table = (array, formats, align, splitter) => {
+  const table = (array, formats, align, splitter = null) => {
     const rows = array.length;
     const cols = array[0].length;
     const colSizes = new Array(cols);

@@ -1,4 +1,6 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
+export {};
+
 const optionalRequire = require("optional-require")(require);
 
 const Enzyme = optionalRequire("enzyme");

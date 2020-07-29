@@ -1,8 +1,13 @@
+/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/ban-ts-ignore, no-invalid-this, @typescript-eslint/class-name-casing */
+
 const mockRequire = require("mock-require");
-const expect = require("chai").expect;
 const hapiCompat = require("electrode-hapi-compat");
 
-const moduleName = "../../lib/dev-admin/dev-hapi";
+const moduleName = "../../src/lib/dev-admin/dev-hapi";
+
+import { before, beforeEach, describe, it, after, afterEach } from "mocha";
+import { expect } from "chai";
 
 describe("dev-hapi", function() {
   this.timeout(10000);
@@ -17,33 +22,40 @@ describe("dev-hapi", function() {
 
   after(() => {
     mockRequire.stop("@xarc/app/config/archetype");
-    mockRequire.stop("../../lib/dev-admin/middleware");
+    mockRequire.stop("../../src/lib/dev-admin/middleware");
   });
 
   const textCycle = callback => {
     const mockReply = arg => {
+      // @ts-ignore
       mockReply.result.reply = arg;
       return mockReply;
     };
     mockReply.result = {};
     mockReply.continue = () => {
+      // @ts-ignore
       mockReply.result.continue = true;
       return mockReply;
     };
     mockReply.takeover = () => {
+      // @ts-ignore
       mockReply.result.takeover = true;
       return mockReply;
     };
     mockReply.response = arg => {
+      // @ts-ignore
       mockReply.result.response = arg;
       return mockReply;
     };
     mockReply.code = arg => {
+      // @ts-ignore
       mockReply.result.code = arg;
       return mockReply;
     };
     mockReply.header = (key, value) => {
+      // @ts-ignore
       mockReply.result.headers = mockReply.result.headers || {};
+      // @ts-ignore
       mockReply.result.headers[key] = value;
       return mockReply;
     };
@@ -56,7 +68,7 @@ describe("dev-hapi", function() {
       }
       setup() {}
     }
-    mockRequire("../../lib/dev-admin/middleware", mockMiddleware);
+    mockRequire("../../src/lib/dev-admin/middleware", mockMiddleware);
     let register = require(moduleName);
     register = register.register || register;
     register(
@@ -74,7 +86,7 @@ describe("dev-hapi", function() {
     it("Hapi16: if replyFile is called with a valid file then return 200", () => {
       hapiCompat.hapiVersion = 16;
       textCycle(cycle => {
-        const { result } = cycle.replyFile("./xclap.js");
+        const { result } = cycle.replyFile("./require.js");
         expect(result.code).to.equal(200);
         expect(result).to.have.any.keys("response");
         expect(result.headers["Content-Type"]).to.equal("application/javascript");
@@ -92,7 +104,7 @@ describe("dev-hapi", function() {
     it("Hapi17: if replyFile is called with a valid file then return 200", () => {
       hapiCompat.hapiVersion = 17;
       textCycle(cycle => {
-        const { result } = cycle.replyFile("./xclap.js");
+        const { result } = cycle.replyFile("./require.js");
         expect(result.code).to.equal(200);
         expect(result.takeover).to.equal(true);
         expect(result).to.have.any.keys("response");
@@ -111,7 +123,7 @@ describe("dev-hapi", function() {
     it("Hapi18: if replyFile is called with a valid file then return 200", () => {
       hapiCompat.hapiVersion = 18;
       textCycle(cycle => {
-        const { result } = cycle.replyFile("./xclap.js");
+        const { result } = cycle.replyFile("./require.js");
         expect(result.code).to.equal(200);
         expect(result.takeover).to.equal(true);
         expect(result).to.have.any.keys("response");

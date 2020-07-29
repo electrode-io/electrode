@@ -1,10 +1,12 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires, callback-return */
 
 const { EventEmitter } = require("events");
-const WebpackDevRelay = require("../../../lib/dev-admin/webpack-dev-relay");
+const WebpackDevRelay = require("../../../src/lib/dev-admin/webpack-dev-relay");
 const isomorphicConfig = require("isomorphic-loader/lib/config");
 const { asyncVerify } = require("run-verify");
 const _ = require("lodash");
+import { describe, it } from "mocha";
+import { expect } from "chai";
 
 describe("webpack-dev-relay", function() {
   it("should clear webpack dev data if dev server exits", () => {

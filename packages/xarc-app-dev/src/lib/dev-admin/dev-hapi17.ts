@@ -1,4 +1,5 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
+export {};
 
 /* eslint-disable no-console, no-magic-numbers */
 
@@ -26,7 +27,10 @@ function register(server) {
     type: "onRequest",
     method: (request, h) => {
       if (request.path === "/favicon.ico") {
-        return h.response("").code(404).takeover();
+        return h
+          .response("")
+          .code(404)
+          .takeover();
       }
       const { req } = request.raw;
 

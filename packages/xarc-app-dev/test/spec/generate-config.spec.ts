@@ -1,8 +1,13 @@
+/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/ban-ts-ignore, no-invalid-this, @typescript-eslint/class-name-casing */
+
 const mockRequire = require("mock-require");
-const expect = require("chai").expect;
 const Path = require("path");
 
 const moduleName = "@xarc/webpack/lib/util/generate-config";
+
+import { before, beforeEach, describe, it, after, afterEach } from "mocha";
+import { expect } from "chai";
 
 // TODO: should move to xarc-webpack
 describe.skip("generate-config", function() {

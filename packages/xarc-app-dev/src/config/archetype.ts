@@ -1,14 +1,8 @@
-"use strict";
-
 const Path = require("path");
 const { merge } = require("lodash");
-const { getXarcOptions } = require("../lib/utils");
+const { getXarcOptions, getMyPkg } = require("../lib/utils");
 const constants = require("./constants");
 
-const devPkg = require("../package.json");
-const devDir = Path.join(__dirname, "..");
-const devRequire = require(`../require`);
-const configDir = Path.join(devDir, "config");
 const _ = require("lodash");
 const xenvConfig = require("xenv-config");
 const makeAppMode = require("@xarc/app/lib/app-mode");
@@ -30,6 +24,10 @@ module.exports = function getDevArchetype(createXarcOptions) {
   const webpack = require("./env-webpack")();
   const babel = require("./env-babel")();
   const karma = require("./env-karma")();
+
+  const { myPkg: devPkg, myDir: devDir } = getMyPkg();
+  const configDir = Path.join(devDir, "config");
+  const devRequire = require(Path.join(devDir, "require"));
 
   const config = {
     ...defaultArchetypeConfig,

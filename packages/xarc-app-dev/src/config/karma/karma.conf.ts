@@ -1,4 +1,5 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires, no-console */
+export {};
 
 const Path = require("path");
 const customCheck = require("@xarc/webpack/lib/util/custom-check");

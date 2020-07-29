@@ -1,7 +1,8 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
 
-const expect = require("chai").expect;
-const { parse } = require("../../../lib/dev-admin/log-parser");
+const { parse } = require("../../../src/lib/dev-admin/log-parser");
+import { describe, it } from "mocha";
+import { expect } from "chai";
 
 describe("log-parser", function() {
   it("should return correct level and message for a simple error", () => {

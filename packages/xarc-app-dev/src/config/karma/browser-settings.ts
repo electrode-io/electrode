@@ -1,4 +1,5 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires, no-process-exit */
+export {};
 
 module.exports = function(settings) {
   const archetype = require("@xarc/app/config/archetype")();

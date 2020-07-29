@@ -1,4 +1,5 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-empty-function */
+export {};
 
 /* eslint-disable no-magic-numbers, no-process-exit, global-require, no-console, max-statements */
 
@@ -10,7 +11,7 @@ const { controlPaths, settings, httpDevServer } = require("../../config/dev-prox
 const proxyJs = require.resolve("./redbird-proxy");
 const { formUrl } = require("../utils");
 
-const canListenPort = async (port, host) => {
+const canListenPort = async (port, host = undefined) => {
   const server = http.createServer(() => {});
 
   try {

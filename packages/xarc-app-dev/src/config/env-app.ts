@@ -1,5 +1,8 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
+export {};
+
 let cachedEnvApp = null;
+
 module.exports = function getAppEnv() {
   const xenvConfig = require("xenv-config");
   const { merge } = require("lodash");

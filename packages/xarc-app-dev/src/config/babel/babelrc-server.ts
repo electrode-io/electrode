@@ -1,4 +1,5 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
+export {};
 
 const archetype = require("@xarc/app-dev/config/archetype")();
 const optionalRequire = require("optional-require")(require);

@@ -1,4 +1,5 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-empty-function */
+export {};
 //
 // relay message between the webpack dev server and app server in dev mode
 //
@@ -17,6 +18,9 @@ const WEBPACK_DEV_MESSAGES = [
 ];
 
 class WebpackDevRelay {
+  _webpackData: any;
+  _servers: any;
+
   constructor() {
     this._webpackData = {};
     this._servers = {};
@@ -48,9 +52,9 @@ class WebpackDevRelay {
     }
   }
 
-  receiveAppServerMessage() {}
+  receiveAppServerMessage(data) {}
 
-  _setServer(name, child, handlers) {
+  _setServer(name, child, handlers = undefined) {
     const info = this._servers[name];
     if (info) {
       for (const event in info.handlers) {

@@ -1,4 +1,5 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires, no-loop-func */
+export {};
 
 const cwd = process.env.PWD || process.cwd();
 const optionalRequire = require("optional-require")(require);
@@ -42,12 +43,12 @@ const optionalDependenciesList = [
   "electrode-archetype-opt-typescript"
 ];
 
-const write = function() {
-  console.log.apply(undefined, arguments); // eslint-disable-line no-console
+const write = function(...args) {
+  console.log(...args); // eslint-disable-line no-console
 };
 
-const writeError = function() {
-  console.error.apply(undefined, arguments); // eslint-disable-line no-console
+const writeError = function(...args) {
+  console.error(...args); // eslint-disable-line no-console
 };
 
 const Hour = 1000 * 60 * 60; // eslint-disable-line no-magic-numbers
@@ -88,6 +89,13 @@ function areCurrentEnablementsLegacy(features) {
 }
 
 class Feature {
+  packageName: any;
+  npmDescription: any;
+  npmElectrodeOptArchetype: any;
+  npmVersion: any;
+  _package: any;
+  _enabled: any;
+
   constructor(packageName) {
     this.packageName = packageName;
     this.attachNpmAttributes = this.attachNpmAttributes.bind(this);
@@ -314,7 +322,8 @@ class Feature {
 async function getFeatures() {
   const features = optionalDependenciesList.map(packageName => new Feature(packageName));
   await Promise.all(features.map(feature => feature.attachNpmAttributes()));
-  features.sort(function(a, b) { // eslint-disable-line prefer-arrow-callback
+  features.sort(function(a, b) {
+    // eslint-disable-line prefer-arrow-callback
     return a.name.localeCompare(b.name);
   });
   return features;
@@ -322,7 +331,8 @@ async function getFeatures() {
 
 function displayFeatureStatus(features) {
   const namePadding =
-    features.reduce(function(a, b) { // eslint-disable-line prefer-arrow-callback
+    features.reduce(function(a, b) {
+      // eslint-disable-line prefer-arrow-callback
       return a.name.length > b.name.length ? a : b;
     }).name.length + 1;
   const enabledPadding = 4;
@@ -362,10 +372,12 @@ function displayFeatureIssues(features) {
   features.forEach(feature => {
     if (!feature.package && feature.enabled) {
       writeError(
-        chalk.red([
-          `The feature "${feature.packageName}" is enabled but isn’t available`,
-          `in your node_modules directory. Please perform an "npm install"`
-        ].join(" "))
+        chalk.red(
+          [
+            `The feature "${feature.packageName}" is enabled but isn’t available`,
+            `in your node_modules directory. Please perform an "npm install"`
+          ].join(" ")
+        )
       );
     }
 
@@ -452,7 +464,8 @@ async function promptForEnabled(features) {
       feature.enabled = enabled;
     });
 
-    conflictingFeature = features.find(feature => { // eslint-disable-line
+    conflictingFeature = features.find(feature => {
+      // eslint-disable-line
       // eslint-disable-line no-loop-func
       const conflicts = feature.getConflictingFeatures(features);
       if (conflicts.length > 0) {

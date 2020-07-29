@@ -1,4 +1,5 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
+export {};
 
 /* eslint-disable global-require, no-console */
 
@@ -16,7 +17,7 @@ const express = optionalRequire("express");
 // also set by @xarc/app/arch-clap.js
 //
 if (process.env.WEBPACK_DEV === undefined) {
-  process.env.WEBPACK_DEV = true;
+  process.env.WEBPACK_DEV = "true";
 }
 
 if (fastifyServer) {

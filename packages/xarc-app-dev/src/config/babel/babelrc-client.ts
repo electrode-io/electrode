@@ -1,4 +1,5 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires, no-console, @typescript-eslint/ban-ts-ignore */
+export {};
 
 const ck = require("chalker");
 const requireAt = require("require-at");
@@ -90,6 +91,7 @@ const enableKarmaCov = process.env.ENABLE_KARMA_COV === "true";
 const isProduction = (BABEL_ENV || NODE_ENV) === "production";
 const isTest = (BABEL_ENV || NODE_ENV) === "test";
 
+// @ts-ignore
 const plugins = basePlugins.concat(
   // test env
   isTest && ["babel-plugin-dynamic-import-node"],

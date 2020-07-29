@@ -1,4 +1,6 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
+export {};
+
 const AppDevMiddleware = require("./app-dev-middleware");
 
 function setup(app) {

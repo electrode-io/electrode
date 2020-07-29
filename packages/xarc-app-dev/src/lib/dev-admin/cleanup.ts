@@ -1,4 +1,5 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
+export {};
 
 /* eslint-disable no-console, no-process-exit */
 const { psChildren } = require("ps-get");
@@ -28,15 +29,15 @@ const doCleanup = async () => {
   });
 };
 
-["uncaughtException", "unhandledRejection"].forEach(event => {
-  process.on(event, async err => {
+["uncaughtException", "unhandledRejection"].forEach((event: any) => {
+  process.on(event, async (err: Error) => {
     console.log("dev-admin failure", event, err.stack);
     await doCleanup();
     process.exit(process.exitCode);
   });
 });
 
-["SIGTERM", "SIGINT", "SIGHUP"].forEach(sig => {
+["SIGTERM", "SIGINT", "SIGHUP"].forEach((sig: any) => {
   process.on(sig, async name => {
     console.log("dev-admin received signal:", name);
     await doCleanup();

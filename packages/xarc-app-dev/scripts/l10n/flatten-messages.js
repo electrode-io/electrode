@@ -1,5 +1,7 @@
 "use strict";
 
+/* eslint-disable no-process-exit, no-console */
+
 const _ = require("lodash");
 const Promise = require("bluebird");
 const fs = Promise.promisifyAll(require("fs-extra"));

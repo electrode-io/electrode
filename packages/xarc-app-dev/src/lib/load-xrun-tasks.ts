@@ -1,4 +1,5 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
+export {};
 
 /* eslint-disable object-shorthand, max-statements, no-magic-numbers */
 /* eslint-disable no-console, no-process-exit, global-require, no-param-reassign */
@@ -111,7 +112,7 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
   //  If the APP_SERVER_PORT is set to the empty string however,
   //  leave it empty and therefore disable the dev proxy server.
   if (!process.env.APP_SERVER_PORT && process.env.APP_SERVER_PORT !== "") {
-    process.env.APP_SERVER_PORT = 3100;
+    process.env.APP_SERVER_PORT = "3100";
   }
 
   function quote(str) {
@@ -314,13 +315,13 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
     });
   }
 
-  function startAppServer(options) {
-    options = options || [];
-    const x = options.length > 0 ? ` with options: ${options.join(" ")}` : "";
+  function startAppServer(argFlags = []) {
+    argFlags = argFlags || [];
+    const x = argFlags.length > 0 ? ` with options: ${argFlags.join(" ")}` : "";
     logger.info(`Starting app server${x}`);
     logger.info("To terminate press Ctrl+C.");
     archetype.AppMode.setEnv(archetype.AppMode.lib.dir);
-    return exec(`node`, options, Path.join(archetype.AppMode.lib.server, "index.js"));
+    return exec(`node`, argFlags, Path.join(archetype.AppMode.lib.server, "index.js"));
   }
 
   function generateBrowsersListRc() {
@@ -362,7 +363,7 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
     process.env.ENABLE_CSS_MODULE = "false";
     process.env.ENABLE_KARMA_COV = "false";
 
-    const checkFrontendCov = minimum => {
+    const checkFrontendCov = (minimum = "5") => {
       if (typeof minimum !== "string") {
         minimum = "5";
       }
@@ -1172,7 +1173,7 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
         },
         ".jest.test-frontend-cov"() {
           const testDir = jestTestDirectories.find(x => shell.test("-d", x));
-          let runJest = testDir;
+          let runJest: any = testDir;
           if (!runJest) {
             const scanned = scanDir.sync({
               dir: Path.resolve(AppMode.src.dir),

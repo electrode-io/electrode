@@ -1,4 +1,5 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
+export {};
 
 const dllUtil = require("@xarc/webpack/lib/util/dll-util");
 

@@ -1,4 +1,5 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/ban-ts-ignore */
+export {};
 
 /*
  * Karma Configuration: "watch" version.
@@ -19,6 +20,7 @@ module.exports = function(config) {
       "http://127.0.0.1:3001/assets/bundle.js"
       // Watch these files but do not add them to the bundle.
     ].concat(
+      // @ts-ignore
       ["src/client/**", "test/**"].map(pattern => {
         return {
           pattern,

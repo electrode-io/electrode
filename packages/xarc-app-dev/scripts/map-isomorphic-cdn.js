@@ -1,6 +1,6 @@
 "use strict";
 
-/* eslint-disable max-statements */
+/* eslint-disable max-statements, no-process-exit */
 
 const logger = require("../lib/logger");
 const fs = require("fs");
@@ -13,7 +13,7 @@ function exit(code) {
 
 function mapIsomorphicCdn(appDir) {
   appDir = appDir || process.cwd();
-  const isoConfigFile = Path.join(appDir, isoConfig.prodConfigFile);
+  const isoConfigFile = Path.join(appDir, ".isomorphic-loader-config.json");
   const cdnAssetsFile = Path.join(appDir, "config/assets.json");
   const isoConfig = require(isoConfigFile);
   const cdnAssets = require(cdnAssetsFile);

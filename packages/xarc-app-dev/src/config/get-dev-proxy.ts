@@ -1,4 +1,5 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires, max-statements, no-console, prefer-const */
+export {};
 
 const Path = require("path");
 const Fs = require("fs");

@@ -1,4 +1,5 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
+export {};
 
 /**
  * Take webpack Stat JSON output and group modules by npm packages,
@@ -17,6 +18,11 @@ const atModRegex = new RegExp(`([^/]+/[^/]+)/(.+)`);
 const modRegex = new RegExp(`([^/]+)/(.+)`);
 
 class ModuleProcessor {
+  statJson: any;
+  modulesByPackage: any;
+  totalSize: any;
+  modulesByName: any;
+
   constructor(statJson) {
     this.statJson = statJson;
     this.makeModulesByName();

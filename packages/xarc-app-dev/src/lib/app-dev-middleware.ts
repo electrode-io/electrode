@@ -1,4 +1,5 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
+export {};
 
 /* eslint-disable no-console, no-magic-numbers, max-statements */
 
@@ -8,6 +9,8 @@ const isomorphicExtendRequire = require("isomorphic-loader/lib/extend-require");
 const { refreshAllSubApps } = require("subapp-util");
 
 class AppDevMiddleware {
+  webpackDev: any;
+
   constructor() {
     this.webpackDev = { valid: false, hasErrors: false, hasWarnings: false };
   }

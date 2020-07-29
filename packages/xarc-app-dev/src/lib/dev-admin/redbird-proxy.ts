@@ -1,4 +1,5 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/ban-ts-ignore */
+export {};
 
 /* eslint-disable max-statements, no-process-exit, global-require, no-console */
 
@@ -141,10 +142,13 @@ const registerElectrodeDevRules = ({
       // repeat all rules for 127.0.0.1
       appForwards.map(([src, target, opts]) => {
         return [
+          // @ts-ignore
           formUrl({ protocol, port, ...src, host: src.host || "127.0.0.1" }),
           formUrl({
             ...target,
+            // @ts-ignore
             protocol: target.protocol || "http",
+            // @ts-ignore
             host: target.host || "127.0.0.1"
           }),
           opts
@@ -203,7 +207,7 @@ const registerElectrodeDevRules = ({
   }
 };
 
-const startProxy = inOptions => {
+const startProxy = (inOptions = {}) => {
   APP_RULES = [];
   const options = Object.assign(
     {
@@ -279,6 +283,7 @@ const startProxy = inOptions => {
 
   // if primary protocol is https, then register regular http rules at httpPort
   if (ssl) {
+    // @ts-ignore
     registerElectrodeDevRules({
       proxy,
       protocol: "http",

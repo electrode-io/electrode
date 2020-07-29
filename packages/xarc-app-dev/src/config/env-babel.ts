@@ -1,6 +1,9 @@
-"use strict";
-let cachedEnvBabel = null
-module.exports = function getEnvBabel () {
+/* eslint-disable @typescript-eslint/no-var-requires */
+export {};
+
+let cachedEnvBabel = null;
+
+module.exports = function getEnvBabel() {
   const xenvConfig = require("xenv-config");
   const { merge } = require("lodash");
 
@@ -40,5 +43,5 @@ module.exports = function getEnvBabel () {
     }
   };
   cachedEnvBabel = cachedEnvBabel || xenvConfig(babelConfigSpec, userConfig.babel, { merge });
-  return cachedEnvBabel
-}
+  return cachedEnvBabel;
+};

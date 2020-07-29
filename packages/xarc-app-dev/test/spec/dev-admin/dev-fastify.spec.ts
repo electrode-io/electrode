@@ -1,4 +1,9 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires, no-invalid-this, max-statements */
+
+import { describe, it, beforeEach, afterEach } from "mocha";
+import { expect } from "chai";
+
+export {};
 
 const events = require("events");
 const fs = require("fs");
@@ -40,7 +45,7 @@ describe("dev-admin-fastify", function() {
   let reply;
 
   function registerFastify() {
-    const register = require("../../../lib/dev-admin/dev-fastify");
+    const register = require("../../../src/lib/dev-admin/dev-fastify");
     register(mockFastify);
   }
 
@@ -75,7 +80,7 @@ describe("dev-admin-fastify", function() {
     MiddlewareClass.setupCount = 0;
     MiddlewareClass.processStub = sandbox.stub();
 
-    mockRequire("../../../lib/dev-admin/middleware", MiddlewareClass);
+    mockRequire("../../../src/lib/dev-admin/middleware", MiddlewareClass);
     mockRequire("@xarc/app/config/archetype", () => ({
       webpack: { devMiddleware: true }
     }));
@@ -84,7 +89,7 @@ describe("dev-admin-fastify", function() {
   afterEach(() => {
     mockRequire.stopAll();
     sandbox.restore();
-    delete require.cache[require.resolve("../../../lib/dev-admin/dev-fastify")];
+    delete require.cache[require.resolve("../../../src/lib/dev-admin/dev-fastify")];
   });
 
   it("register loads dev and hot middleware", () => {

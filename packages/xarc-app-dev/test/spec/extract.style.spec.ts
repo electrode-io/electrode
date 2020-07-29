@@ -1,6 +1,12 @@
-const expect = require("chai").expect;
-const archetype = require("../../config/archetype")();
+/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/ban-ts-ignore, no-invalid-this, @typescript-eslint/class-name-casing */
+/* eslint-disable no-unused-expressions, max-nested-callbacks, no-unused-expressions */
+
+const archetype = require("../../src/config/archetype")();
 const moduleName = "@xarc/webpack/lib/partials/extract-style";
+
+import { describe, it, afterEach } from "mocha";
+import { expect } from "chai";
 
 // TODO: should move to xarc-webpack
 describe.skip("@xarc/app-dev extract-styles", function() {

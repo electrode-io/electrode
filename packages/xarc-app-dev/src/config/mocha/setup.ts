@@ -1,4 +1,5 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/ban-ts-ignore */
+export {};
 
 const optionalRequire = require("optional-require")(require);
 const Enzyme = optionalRequire("enzyme");
@@ -24,5 +25,6 @@ if (chai) {
 
   chai.config.includeStack = true;
 
+  // @ts-ignore
   global.expect = chai.expect;
 }

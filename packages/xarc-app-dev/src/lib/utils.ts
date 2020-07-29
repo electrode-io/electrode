@@ -1,7 +1,8 @@
-"use strict";
+import * as readPkgUp from "read-pkg-up";
+import * as pkgUp from "pkg-up";
+
 const Path = require("path");
 const Fs = require("fs");
-const pkg = require("../package.json");
 require("../typedef");
 
 const Url = require("url");
@@ -26,7 +27,7 @@ function checkUserBabelRc() {
     if (
       Object.keys(userRc).length === 1 &&
       typeof userRc.extends === "string" &&
-      userRc.extends.indexOf(pkg.name) >= 0
+      userRc.extends.indexOf("@xarc/app") >= 0
     ) {
       return "extendsOnly";
     } else {
@@ -52,9 +53,17 @@ const defaultCreateOptions = {
  */
 const getXarcOptions = userXarcOptions => ({ ...defaultCreateOptions, ...userXarcOptions });
 
+function getMyPkg() {
+  const myPkg = readPkgUp.sync({ cwd: __dirname });
+  const myDir = Path.dirname(pkgUp.sync({ cwd: __dirname }));
+
+  return { myPkg, myDir };
+}
+
 module.exports = {
   getOptArchetypeRequire: getOptRequire,
   formUrl,
   getXarcOptions,
-  checkUserBabelRc
+  checkUserBabelRc,
+  getMyPkg
 };

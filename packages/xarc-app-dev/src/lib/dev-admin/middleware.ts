@@ -1,4 +1,5 @@
-"use strict";
+/* eslint-disable @typescript-eslint/no-var-requires */
+export {};
 
 /* eslint-disable no-console, no-magic-numbers, max-statements */
 /* eslint-disable max-params, prefer-template, complexity, global-require */
@@ -33,10 +34,10 @@ const statsMapper = require("../stats-mapper");
 const xsh = require("xsh");
 const shell = xsh.$;
 
-function urlJoin() {
-  if (arguments.length < 1) return undefined;
+function urlJoin(...args) {
+  if (args.length < 1) return undefined;
 
-  const base = arguments[0];
+  const base = args[0];
 
   if (!base) return undefined;
 
@@ -44,11 +45,11 @@ function urlJoin() {
   let saved = "";
 
   if (ix > 0) {
-    arguments[0] = base.substr(ix + 3);
+    args[0] = base.substr(ix + 3);
     saved = base.substring(0, ix + 3);
   }
 
-  return saved + Path.posix.join.apply(null, arguments);
+  return saved + Path.posix.join(...args);
 }
 
 //
@@ -69,6 +70,29 @@ const skipWebpackDevMiddleware = req => {
   );
 };
 class Middleware {
+  _options: any;
+  canContinue: symbol;
+  _instanceId: number;
+  _hmrPath: string;
+  _webpackHotOptions: any;
+  devMiddleware: any;
+  hotMiddleware: any;
+  listAssetPath: string;
+  publicPath: string;
+  memFsCwd: string;
+  cwdMemIndex: any;
+  cwdIndex: any;
+  devBaseUrl: string;
+  devBaseUrlSlash: string;
+  cwdBaseUrl: string;
+  cwdContextBaseUrl: string;
+  reporterUrl: string;
+  logUrl: string;
+  logEventsUrl: string;
+  dllDevUrl: string;
+  webpackDev: any;
+  returnReporter: any;
+
   constructor(options) {
     this._options = options;
     this.canContinue = Symbol("webpack dev middleware continue");
@@ -295,11 +319,17 @@ doReload(1); </script></body></html>`)
       );
     }
 
-    const serveStatic = (baseUrl, fileSystem, _serveIndex, cwd, isMemFs) => {
+    const serveStatic = (
+      baseUrl,
+      fileSystem,
+      _serveIndex,
+      cwd = process.cwd(),
+      isMemFs = false
+    ) => {
       req.originalUrl = req.url; // this is what express saves to, else serve-index nukes
       req.url = req.url.substr(baseUrl.length) || "/";
       const PathLib = isMemFs ? Path.posix : Path;
-      const fullPath = PathLib.join(cwd || process.cwd(), req.url);
+      const fullPath = PathLib.join(cwd, req.url);
 
       return new Promise((resolve, reject) => {
         fileSystem.stat(fullPath, (err, stats) => {
