@@ -114,5 +114,15 @@
       "@xarc/render-context": "../xarc-render-context"
     },
     "devDependencies": {}
+  },
+  "@xarc/module-dev": {
+    "srcDir": [ "src" ],
+    "features": [
+      "eslint",
+      "eslintTS",
+      "mocha",
+      "typedoc",
+      "typescript"
+    ]
   }
 }
