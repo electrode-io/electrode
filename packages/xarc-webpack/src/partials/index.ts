@@ -50,15 +50,13 @@ const orders = [
 ];
 
 const files = Fs.readdirSync(__dirname)
-  .filter(
-    x => x !== "index.js" && !x.endsWith(".d.js") && !x.endsWith(".map") && !x.endsWith(".ts")
-  )
+  .filter(x => x !== "index.js" && !x.endsWith(".d.ts") && !x.endsWith(".map") && x !== "index.ts")
   .map(x => x.substr(0, x.length - 3));
 
 const partials = files.reduce((a, p) => {
   const k = `_${p}`;
   assert(orders.indexOf(k) >= 0, `No default order specified for partial ${p}`);
-  a[k] = new Partial(k, { config: () => require(`./${p}`) });
+  a[k] = new Partial(k, { config: require(`./${p}`) });
   return a;
 }, {});
 
