@@ -16,7 +16,7 @@ function AddManifestFieldsPlugin(fields) {
 AddManifestFieldsPlugin.prototype.apply = function(compiler) {
   const regex = this.regex;
   const fields = this.fields;
-  compiler.plugin("emit", (compilation, callback) => {
+  compiler.hooks.emit.tap("AddManifestFieldsPlugin", compilation => {
     for (const filename in compilation.assets) {
       if (regex.test(filename)) {
         const manifestAsset = compilation.assets[filename];
@@ -32,7 +32,6 @@ AddManifestFieldsPlugin.prototype.apply = function(compiler) {
         };
       }
     }
-    callback();
   });
 };
 
