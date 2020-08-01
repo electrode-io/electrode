@@ -1,6 +1,6 @@
 /* @jsx createElement */
 
-import { IndexPage, createElement, Token, Require, Literal, Component } from "../../src";
+import { IndexPage, createElement, Token, Require, Literal, Component, xarcJsxElement } from "../../src";
 
 const getBogelFontUrl = () => {
   return "bogel";
@@ -136,5 +136,7 @@ const Template = () => (
     </html>
   </IndexPage>
 );
+
+Template.$$typeof = xarcJsxElement;
 
 export default Template;

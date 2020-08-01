@@ -5,10 +5,10 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "test": "clap test-only",
-    "coverage": "clap check",
-    "prepublishOnly": "clap -n build docs && clap check",
-    "docs": "clap xarc/docs"
+    "test": "xrun xarc/test-only",
+    "coverage": "xrun xarc/check",
+    "prepublishOnly": "xrun [[build, docs], xarc/check]",
+    "docs": "xrun xarc/docs"
   },
   "publishConfig": {
     "access": "public"

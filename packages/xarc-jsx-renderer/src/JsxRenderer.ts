@@ -18,6 +18,7 @@ import {
 } from "@xarc/render-context";
 import { omittedCloseTags, expandProps } from "./utils";
 import { makeDefer, each } from "xaa";
+import { xarcJsxElement } from "./symbols";
 
 /**
  * The JSX renderer
@@ -177,6 +178,11 @@ export class JsxRenderer {
       }
     };
 
+    assert(
+      element.$$typeof === xarcJsxElement,
+      "Invalid xarc jsx element. Please make sure the JSX pragma /* @jsx createElement */ is added in the template file"
+    );
+
     if (element.memoize) {
       context.output.add(`${element.memoize}\n`);
     } else if (element.tag) {
@@ -187,9 +193,9 @@ export class JsxRenderer {
         context.output.add(`<${element.tag}${expandProps(element.props, context)}/>`);
       }
     } else if (!element.type) {
-      return handleElementResult(
-        element(element.props, context, { element, depth, output: context.output })
-      );
+        return handleElementResult(
+          element(element.props, context, { element, depth, output: context.output })
+        );
     } else if (element.Construct) {
       const inst = new element.Construct(element.props, context);
       return handleElementResult(
