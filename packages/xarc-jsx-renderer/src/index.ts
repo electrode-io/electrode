@@ -11,13 +11,15 @@ import { IndexPage } from "./tags/IndexPage";
 import { Require } from "./tags/Require";
 import { Literal } from "./tags/Literal";
 import { RegisterTokenIds } from "./tags/RegisterTokenIds";
+import { xarcJsxElement } from "./symbols";
 
 /** @ignore */
-export { Component, Token, IndexPage, Require, Literal, JsxRenderer, RegisterTokenIds };
+export { Component, Token, IndexPage, Require, Literal, JsxRenderer, RegisterTokenIds, xarcJsxElement };
 
 let ELEMENT_ID = 0;
 
 export type Element = {
+  $$typeof: symbol;
   id: number;
   type: any;
   children: any;
@@ -41,6 +43,7 @@ export function createElement(type: any, props: any, ...children: any[]) {
   }
 
   const element: Element = {
+    $$typeof: xarcJsxElement,
     id: ELEMENT_ID++,
     type,
     children,

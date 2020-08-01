@@ -7,7 +7,8 @@ import {
   Require,
   Literal,
   Component,
-  RegisterTokenIds
+  RegisterTokenIds,
+  xarcJsxElement
 } from "../../src";
 
 const Template = () => {
@@ -32,4 +33,5 @@ const Template = () => {
   );
 };
 
+Template.$$typeof = xarcJsxElement;
 export default Template;

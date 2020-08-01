@@ -3,7 +3,7 @@
 const _ = require("lodash");
 const Path = require("path");
 const { TagRenderer } = require("@xarc/tag-renderer");
-const { JsxRenderer } = require("@xarc/jsx-renderer");
+const { JsxRenderer, xarcJsxElement } = require("@xarc/jsx-renderer");
 const { loadTokenModuleHandler } = require("@xarc/render-context");
 const {
   utils: {
@@ -56,7 +56,7 @@ function initializeTemplate(
   const templateModule = require(templateFullPath); //  eslint-disable-line
   const template = _.get(templateModule, "default", templateModule);
 
-  if (template.children) {
+  if (template.$$typeof === xarcJsxElement || template.children) {
     // JSX
     asyncTemplate = new JsxRenderer({
       templateFullPath: Path.dirname(templateFullPath),
