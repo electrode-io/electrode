@@ -22,13 +22,18 @@ const parsed = new NixClap()
       type: "boolean",
       default: true,
       desc: "disable interactivity (no-interactive to turn off)"
+    },
+    port: {
+      type: "number",
+      default: 8991,
+      desc: "HTTP port to serve admin data"
     }
   })
   .parse();
 
-const AdminServer = require("./admin-server");
+import { AdminServer } from "./admin-server";
 
-const admin = new AdminServer(parsed);
+const admin = new AdminServer(parsed, {});
 
 require("./cleanup");
 

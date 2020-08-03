@@ -10,15 +10,11 @@ const boxen = require("boxen");
 const ck = require("chalker");
 const chokidar = require("chokidar");
 const readline = require("readline");
-const { parse: parseLog } = require("./log-parser");
+import { parse as parseLog } from "./log-parser";
 const WebpackDevRelay = require("./webpack-dev-relay");
-const { displayLogs } = require("./log-reader");
 const { fork } = require("child_process");
 const ConsoleIO = require("./console-io");
 const AutomationIO = require("./automation-io");
-const winstonLogger = require("../winston-logger");
-const winston = require("winston");
-const logger = winstonLogger(winston, false);
 const isCI = require("is-ci");
 const { doCleanup } = require("./cleanup");
 const xaa = require("xaa");
@@ -28,6 +24,8 @@ const {
   fullDevServer,
   controlPaths
 } = require("../../config/dev-proxy");
+
+import { AdminHttp } from "./admin-http";
 
 const ADMIN_LOG_LEVEL = parseInt(adminLogLevel) || 0;
 
@@ -51,7 +49,7 @@ const SERVER_ENVS = {
   [PROXY_SERVER_NAME]: {}
 };
 
-class AdminServer {
+export class AdminServer {
   _opts: any;
   _passThru: any;
   _messageId: any;
@@ -73,6 +71,7 @@ class AdminServer {
   _hideMenuTimer: any;
   _appWatcher: any;
   _startDefer: any;
+  _adminHttp: AdminHttp;
 
   constructor(args, options) {
     this._opts = args.opts;
@@ -95,6 +94,7 @@ class AdminServer {
 
     this._shutdown = false;
     this._fullAppLogUrl = formUrl({ ...fullDevServer, path: controlPaths.appLog });
+    this._adminHttp = new AdminHttp({ admin: this, port: this._opts.port });
   }
 
   async start() {
@@ -245,7 +245,9 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
     ]);
 
     this._io.shutdown();
+    const httpShutdown = this._adminHttp.shutdown();
     await doCleanup();
+    await httpShutdown;
     this._io.exit();
   }
 
@@ -314,6 +316,7 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
     if (!this._servers[name]) this._servers[name] = { time: Date.now() };
 
     const info = this._servers[name];
+
     info.options = options;
     info.name = name;
     if (info._starting) {
@@ -327,7 +330,7 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
 
     // show Restarting or Starting message
     const re = info._child ? "Res" : "S";
-    this._io.show(ck`<orange>${re}tarting ${name}${debugMsg}</orange>`);
+    this._io.show(ck`<orange>${re}tarting ${name}${debugMsg} - log tag:</orange> ${options.tag}`);
     if (info._child) {
       await this.kill(name, "SIGINT");
     }
@@ -347,6 +350,7 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
       const forkOpts: any = {
         env: Object.assign({}, process.env, {
           ELECTRODE_ADMIN_SERVER: true,
+          ELECTRODE_ADMIN_PORT: this._adminHttp._port,
           ...SERVER_ENVS[name]
         }),
         silent: true
@@ -450,6 +454,7 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
 
     await this.startServer({
       name: DEV_SERVER_NAME,
+      tag: this._wds,
       killKey: "X",
       exec: Path.join(__dirname, "dev-server.js"),
       debug: debug || false,
@@ -559,22 +564,29 @@ ${instruction}`
       const timeDiff = Date.now() - context._deferTimestamp;
       // if an error line has been detected, then only consider other lines following it
       // within 30 milliseconds as part of it.
-      if (context._deferTimer && timeDiff > 30) {
+      const continuation = timeDiff < 30;
+      if (context._deferTimer && !continuation) {
         store.push(false);
       }
 
       const str = data.toString();
       context.checkLine && context.checkLine(str);
       if (!str.trim()) {
-        store.push("");
-        logger.info("");
+        store.push({ level: "info", message: "" });
       } else {
         const entry = parseLog(str.trimRight());
-        store.push(entry.json || entry.message);
+        // consider lines with at least two leading white spaces to be potential
+        // continuation of previous error/warning messages.
+        if (continuation && str.startsWith("  ")) {
+          const last = store[store.length - 1];
+          if (last && (last.level === "warn" || last.level === "error")) {
+            entry.level = last.level;
+          }
+        }
+        store.push(entry);
         if (entry.show || this._appLogLevel === "all") {
           this.deferLogsOutput(context, entry.show > 1);
         }
-        logger[entry.level](str);
       }
     };
 
@@ -610,6 +622,7 @@ ${instruction}`
 
     await this.startServer({
       name: APP_SERVER_NAME,
+      tag: this._app,
       debug: debug || false,
       killKey: "K",
       exec: this._opts.exec,
@@ -625,6 +638,26 @@ ${instruction}`
         this._webpackDevRelay.setAppServer(info._child);
       }
     });
+  }
+
+  /**
+   * Get the logs of a server the admin manages.
+   * name could be:
+   *
+   *  - "app" - app server
+   *  - "wds" - webpack dev server
+   *
+   * @param name
+   * @returns logs in an array of strings
+   */
+  getLogs(name: string): string[] {
+    const info = this.getServer({ app: APP_SERVER_NAME, wds: DEV_SERVER_NAME }[name]);
+    if (!info || !info.options) {
+      return [`server ${name} doesn't exist`];
+    }
+    const { logSaver } = info.options;
+
+    return logSaver.store;
   }
 
   passThruLineOutput(tag, input, output) {
@@ -645,6 +678,7 @@ ${instruction}`
   async startProxyServer(debug = undefined) {
     await this.startServer({
       name: PROXY_SERVER_NAME,
+      tag: this._proxy,
       killKey: "O",
       debug,
       exec: Path.join(__dirname, "redbird-spawn"),
@@ -727,10 +761,6 @@ ${info.name} - assuming it started.</>`);
     return defer.promise;
   }
 
-  displayLogs(maxLevel = 6) {
-    displayLogs(maxLevel);
-  }
-
   //
   // watches files change and restart a server
   //
@@ -756,5 +786,4 @@ ${info.name} - assuming it started.</>`);
   }
 }
 
-module.exports = AdminServer;
 //

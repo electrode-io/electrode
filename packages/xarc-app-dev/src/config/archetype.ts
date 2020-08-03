@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires, max-statements */
+
 const Path = require("path");
 const { merge } = require("lodash");
 const { getXarcOptions, getMyPkg } = require("../lib/utils");

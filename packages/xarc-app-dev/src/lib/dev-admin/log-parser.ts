@@ -1,11 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-export {};
-
 /* eslint-disable max-statements, complexity */
-
-const ck = require("chalker");
-const FyiTag = ck`<yellow.inverse>[fyi]</> `;
-const BunyanTag = ck`<cyan.inverse>[app]</> `;
+const AnsiConvert = require("ansi-to-html");
+const convert = new AnsiConvert();
 
 const BunyanLevelLookup = {
   60: "error",
@@ -17,8 +13,8 @@ const BunyanLevelLookup = {
 };
 
 const tagLevelMap = {
-  warn: "warn",
-  error: "error",
+  "warn:": "warn",
+  "error:": "error",
   fail: "error",
   rejection: "error",
   unhandled: "error",
@@ -26,7 +22,7 @@ const tagLevelMap = {
   "debugger listening on": "silly"
 };
 
-function parse(str) {
+export function parse(str) {
   let jsonData;
   let show;
 
@@ -50,7 +46,10 @@ function parse(str) {
   }
 
   if (!level) {
-    const match = str.match(/warn|error|fail|rejection|unhandled|exception|debugger listening on/i);
+    const match = str.match(
+      /warn\:|error\:|fail|rejection|unhandled|exception|debugger listening on/i
+    );
+
     if (match) {
       const tag = match[0].toLowerCase();
       if (!level) {
@@ -68,8 +67,44 @@ function parse(str) {
   };
 }
 
-module.exports = {
-  BunyanTag,
-  FyiTag,
-  parse
+const Levels = {
+  error: {
+    color: "red",
+    index: 0,
+    name: "error"
+  },
+  warn: {
+    color: "yellow",
+    index: 1,
+    name: "warn"
+  },
+  info: {
+    index: 2,
+    name: "info"
+  },
+  http: {
+    index: 3,
+    name: "http"
+  },
+  verbose: {
+    index: 4,
+    name: "verbose"
+  },
+  debug: {
+    index: 5,
+    name: "debug"
+  },
+  silly: {
+    index: 6,
+    name: "silly"
+  }
 };
+
+export function getLogEventAsHtml(event) {
+  const levelInfo = Levels[event.level];
+  const levelName = levelInfo.name.substring(0, 4);
+  const name = levelInfo.color
+    ? `<span style="color: ${levelInfo.color}">${levelName}</span>`
+    : levelName;
+  return `${name}: ${convert.toHtml(event.message)}`;
+}

@@ -3,7 +3,7 @@ export {};
 
 /* eslint-disable no-magic-numbers */
 
-const makeWinstonLogger = (winston, handlers = true) => {
+const makeWinstonLogger = (winston, handlers = true, options: any = {}) => {
   return new winston.Logger({
     exceptionHandlers: handlers && [
       new winston.transports.Console({
@@ -18,20 +18,21 @@ const makeWinstonLogger = (winston, handlers = true) => {
       })
     ],
     transports: [
-      // new winston.transports.Console({
-      //   level: "error",
-      //   colorize: true,
-      //   prettyPrint: true
-      // }),
+      options.noConsole ||
+        new winston.transports.Console({
+          level: "info",
+          colorize: true,
+          prettyPrint: true
+        }),
       new winston.transports.File({
         json: true,
         maxsize: 10 * 1024 * 1024, // 10 MB
         maxFiles: 1,
         name: "archetype-debug-file",
-        filename: "archetype-debug.log",
+        filename: options.debugFilename || "archetype-debug.log",
         level: "debug"
       })
-    ]
+    ].filter(x => x)
   });
 };
 

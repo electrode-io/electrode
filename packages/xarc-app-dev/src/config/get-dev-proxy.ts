@@ -109,7 +109,8 @@ module.exports = function createDevProxy() {
     webpackDevHost,
     protocol,
     elevated,
-    useDevProxy
+    useDevProxy,
+    devAdminPort: parseInt(process.env.ELECTRODE_ADMIN_PORT || "8991")
   };
 
   const adminPath = `/__proxy_admin`;
