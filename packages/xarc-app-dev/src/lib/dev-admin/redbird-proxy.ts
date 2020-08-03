@@ -122,12 +122,14 @@ const registerElectrodeDevRules = ({
 }) => {
   const { dev: devPath, admin: adminPath, hmr: hmrPath, appLog, reporter } = controlPaths;
   const logEventsPath = `${devPath}/log-events`;
+  const logStreamsPath = `${devPath}/stream-logs`;
   const appForwards = [
     [{}, { port: appPort }],
     [{ path: `/js` }, { path: `/js`, port: webpackDevPort }],
     [{ path: hmrPath }, { path: hmrPath, port: webpackDevPort }],
     [{ path: appLog }, { path: appLog, port: settings.devAdminPort }],
     [{ path: logEventsPath }, { path: logEventsPath, port: settings.devAdminPort }],
+    [{ path: logStreamsPath }, { path: logStreamsPath, port: settings.devAdminPort }],
     [{ path: devPath }, { path: devPath, port: webpackDevPort }],
     [{ path: reporter }, { path: reporter, port: webpackDevPort }],
     [{ path: `${adminPath}/test-google` }, { protocol: "https", host: "www.google.com" }]
