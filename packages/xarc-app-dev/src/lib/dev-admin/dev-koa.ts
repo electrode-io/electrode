@@ -40,7 +40,7 @@ function setup(app, protocol, port) {
         },
         replyNotFound: () => {
           res.status = 404;
-          res.body = "Not Found";
+          res.body = "dev server koa Not Found";
           return res;
         },
         replyError: err => {

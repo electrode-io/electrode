@@ -9,9 +9,7 @@ const Fs = require("fs");
 const webpack = require("webpack");
 const hotHelpers = require("webpack-hot-middleware/helpers");
 const Url = require("url");
-const queryStr = require("querystring");
 const { getWebpackStartConfig } = require("@xarc/webpack/lib/util/custom-check");
-const { getLogs, getLogEventAsHtml } = require("./log-reader");
 const { fullDevServer, controlPaths } = require("../../config/dev-proxy");
 const { formUrl } = require("../utils");
 const isomorphicLoaderConfig = require("isomorphic-loader/lib/config");
@@ -87,8 +85,6 @@ class Middleware {
   cwdBaseUrl: string;
   cwdContextBaseUrl: string;
   reporterUrl: string;
-  logUrl: string;
-  logEventsUrl: string;
   dllDevUrl: string;
   webpackDev: any;
   returnReporter: any;
@@ -187,8 +183,6 @@ class Middleware {
     this.cwdBaseUrl = urlJoin(this.devBaseUrl, "/cwd");
     this.cwdContextBaseUrl = urlJoin(this.devBaseUrl, "/memfs");
     this.reporterUrl = urlJoin(this.devBaseUrl, "/reporter");
-    this.logUrl = urlJoin(this.devBaseUrl, "/log");
-    this.logEventsUrl = urlJoin(this.devBaseUrl, "/log-events");
     this.dllDevUrl = urlJoin(this.devBaseUrl, "/dll");
 
     const LOADABLE_STATS = "loadable-stats.json";
@@ -380,37 +374,6 @@ ${jumpToError}</body></html>
       );
     };
 
-    const serveLogEvents = async () => {
-      const query = queryStr.parse(Url.parse(req.url).query);
-      let start = parseInt(query.start, 10) || 0;
-      const id = parseInt(query.id, 10);
-      if (id !== this._instanceId) {
-        start = 0;
-      }
-
-      const htmlLogs = [];
-      const allLogs = await getLogs();
-      for (let ix = start; ix < allLogs.length; ix++) {
-        const event = allLogs[ix];
-        htmlLogs.push({
-          ...event,
-          message: getLogEventAsHtml(event)
-        });
-      }
-      const data = {
-        start,
-        logs: htmlLogs,
-        total: allLogs.length,
-        instanceId: this._instanceId
-      };
-      return Promise.resolve(cycle.replyStaticData(JSON.stringify(data)));
-    };
-
-    const serveLog = () => {
-      const file = require.resolve("@xarc/app-dev/lib/dev-admin/log.html");
-      return Promise.resolve(cycle.replyFile(file));
-    };
-
     if (isHmrRequest) {
       // do nothing and continue to webpack dev middleware
       return Promise.resolve(this.canContinue);
@@ -447,10 +410,6 @@ ${listDirectoryHtml(this.listAssetPath, outputPath)}
         this.memFsCwd,
         isMemFs
       ).catch(err => sendStaticServeError("reading webpack mem fs", err));
-    } else if (req.url.startsWith(this.logEventsUrl)) {
-      return serveLogEvents();
-    } else if (req.url.startsWith(this.logUrl)) {
-      return serveLog();
     } else if (req.url.startsWith(this.reporterUrl) || this.returnReporter) {
       return serveReporter(this.webpackDev.lastReporterOptions);
     } else if (req.url.startsWith(this.dllDevUrl)) {
@@ -467,10 +426,9 @@ ${listDirectoryHtml(this.listAssetPath, outputPath)}
       return Promise.resolve(cycle.replyFile(bundle));
     } else if (req.url === this.devBaseUrl || req.url === this.devBaseUrlSlash) {
       const html = `<html><head><meta charset="utf-8"/></head><body>
-<h1>Electrode Development Dashboard</h1>
+<h1>xarc Webpack Dev Server Dashboard</h1>
 <h3><a href="${this.cwdBaseUrl}">View current working directory files</a></h3>
 <h3><a href="${this.cwdContextBaseUrl}">View webpack dev memfs files</a></h3>
-<h3><a href="${this.logUrl}">View your app server console logs</a></h3>
 </body></html>`;
       return Promise.resolve(cycle.replyHtml(html));
     }

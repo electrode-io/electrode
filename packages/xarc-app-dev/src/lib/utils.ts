@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 import * as readPkgUp from "read-pkg-up";
 import * as pkgUp from "pkg-up";
 
@@ -53,9 +55,14 @@ const defaultCreateOptions = {
  */
 const getXarcOptions = userXarcOptions => ({ ...defaultCreateOptions, ...userXarcOptions });
 
+let myPkg;
+let myDir;
+
 function getMyPkg() {
-  const myPkg = readPkgUp.sync({ cwd: __dirname });
-  const myDir = Path.dirname(pkgUp.sync({ cwd: __dirname }));
+  if (!myPkg) {
+    myPkg = readPkgUp.sync({ cwd: __dirname });
+    myDir = Path.dirname(pkgUp.sync({ cwd: __dirname }));
+  }
 
   return { myPkg, myDir };
 }

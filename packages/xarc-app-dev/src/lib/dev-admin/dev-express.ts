@@ -35,7 +35,7 @@ function setup(app, protocol, port) {
             .status(200)
             .send(`<!DOCTYPE html>${html}`);
         },
-        replyNotFound: () => res.status(404).send("Not Found"),
+        replyNotFound: () => res.status(404).send("dev server express Not Found"),
         replyError: err => res.status(500).send(err),
         replyStaticData: data => {
           const type = mime.getType(req.url);
