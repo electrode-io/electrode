@@ -94,7 +94,10 @@ export class AdminServer {
 
     this._shutdown = false;
     this._fullAppLogUrl = formUrl({ ...fullDevServer, path: controlPaths.appLog });
-    this._adminHttp = new AdminHttp({ admin: this, port: this._opts.port });
+    this._adminHttp = new AdminHttp({
+      getLogs: (app: string) => this.getLogs(app),
+      port: this._opts.port
+    });
   }
 
   async start() {
@@ -503,9 +506,15 @@ ${instruction}`
   deferLogsOutput(context, showFullLink = true, delay = 250) {
     const { tag, store } = context;
 
+    const now = Date.now();
     if (context._deferTimer) {
-      clearTimeout(context._deferTimer);
+      // avoid starving defer output
+      if (now - context._initialDefer < 150) {
+        clearTimeout(context._deferTimer);
+        context._deferTimer = null;
+      }
     } else {
+      context._initialDefer = now;
       context._deferIx = [];
     }
 
@@ -517,9 +526,13 @@ ${instruction}`
       context._showFullLink = showFullLink;
     }
 
+    if (context._deferTimer) {
+      return;
+    }
+
     context._deferTimestamp = Date.now();
     context._deferTimer = setTimeout(() => {
-      context._deferTimer = undefined;
+      context._deferTimer = null;
       let currentIx = 0;
       const logsToShow = context._deferIx.reduce((logs, deferIx) => {
         if (currentIx > deferIx) {
@@ -572,9 +585,9 @@ ${instruction}`
       const str = data.toString();
       context.checkLine && context.checkLine(str);
       if (!str.trim()) {
-        store.push({ level: "info", message: "" });
+        store.push({ ts: Date.now(), level: "info", message: "" });
       } else {
-        const entry = parseLog(str.trimRight());
+        const entry = parseLog(str.trimRight(), _.last(store));
         // consider lines with at least two leading white spaces to be potential
         // continuation of previous error/warning messages.
         if (continuation && str.startsWith("  ")) {
@@ -588,6 +601,8 @@ ${instruction}`
           this.deferLogsOutput(context, entry.show > 1);
         }
       }
+
+      this._adminHttp.sendLogsToStreamClients();
     };
 
     inputs.forEach(input => {

@@ -22,7 +22,7 @@ const tagLevelMap = {
   "debugger listening on": "silly"
 };
 
-export function parse(str) {
+export function parse(str: string, last: any) {
   let jsonData;
   let show;
 
@@ -59,12 +59,19 @@ export function parse(str) {
     }
   }
 
-  return {
+  const entry: any = {
     level: level || "info",
+    ts: Date.now(),
     message: message || str,
     json: jsonData,
     show
   };
+
+  if (last && entry.ts === last.ts) {
+    entry.tx = (last.tx || 0) + 1;
+  }
+
+  return entry;
 }
 
 const Levels = {
