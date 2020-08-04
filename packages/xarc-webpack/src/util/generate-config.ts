@@ -65,7 +65,7 @@ function searchUserCustomConfig(options) {
 // create a webpack config composer and add it to options as composer
 // returns a new options copy
 //
-function initWebpackConfigComposer(options) {
+export function initWebpackConfigComposer(options) {
   options = Object.assign({ profileNames: [] }, options);
 
   if (!options.composer) {
@@ -80,7 +80,7 @@ function initWebpackConfigComposer(options) {
   return options;
 }
 
-function generateConfig(opts, archetypeControl) {
+export function generateConfig(opts, archetypeControl) {
   const options = initWebpackConfigComposer(opts);
 
   const { composer } = options;
@@ -129,5 +129,3 @@ WARNING: </>`);
 
   return config;
 }
-
-module.exports = { initWebpackConfigComposer, generateConfig };

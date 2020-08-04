@@ -21,6 +21,7 @@
     "docs": "xrun xarc/docs"
   },
   "files": [
+    "dist",
     "lib",
     "src"
   ],
@@ -135,5 +136,16 @@
       "typedoc",
       "typescript"
     ]
+  },
+  "fyn": {
+    "dependencies": {
+      "electrode-cdn-file-loader": "../electrode-cdn-file-loader",
+      "electrode-node-resolver": "../electrode-node-resolver",
+      "webpack-config-composer": "../webpack-config-composer"
+    },
+    "devDependencies": {
+      "@xarc/app": "../xarc-app",
+      "@xarc/app-dev": "../xarc-app-dev"
+    }
   }
 }

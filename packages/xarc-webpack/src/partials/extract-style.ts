@@ -4,7 +4,7 @@
 
 import * as Path from "path";
 
-const archetype = require("@xarc/app-dev/config/archetype")();
+const archetypeConfig = require("@xarc/app-dev/config/archetype");
 
 const detectCssModule = require("../util/detect-css-module");
 
@@ -71,6 +71,7 @@ function loadPostCss() {
 module.exports = function() {
   const isProduction = process.env.NODE_ENV === "production";
   const isDevelopment = !isProduction;
+  const archetype = archetypeConfig();
 
   const { hasPostCss, atImport, postcssPresetEnv, postcssLoader } = loadPostCss();
 
