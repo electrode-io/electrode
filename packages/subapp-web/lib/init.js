@@ -10,7 +10,7 @@ const _ = require("lodash");
 const assert = require("assert");
 
 module.exports = function setup(setupContext) {
-  const cdnEnabled = setupContext.routeOptions.cdn && setupContext.routeOptions.cdn.enable === true;
+  const cdnEnabled = _.get(setupContext, "routeOptions.cdn.enable");
   const distDir = process.env.NODE_ENV === "production" ? "../dist/min" : "../dist/dev";
   const clientJs = Fs.readFileSync(Path.join(__dirname, distDir, "subapp-web.js")).toString();
   const cdnJs = cdnEnabled
