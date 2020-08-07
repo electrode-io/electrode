@@ -285,7 +285,7 @@ function loadSubAppByName(name) {
   return container[name];
 }
 
-function loadSubAppServerByName(name) {
+function loadSubAppServerByName(name, serverSideRendering) {
   const manifest = subAppManifest()[name];
   const { subAppDir, serverEntry } = manifest;
 
@@ -295,16 +295,16 @@ function loadSubAppServerByName(name) {
     );
   } else if (serverEntry === false) {
     return {};
+  } else if (serverSideRendering) {
+    const subapp = es6Require(
+      manifest.module ? manifest.entry : Path.resolve(appSrcDir(), subAppDir, manifest.entry)
+    );
+
+    return {
+      StartComponent: subapp.Component
+    };
   }
-
-  // generate a server from subapp's main file
-  const subapp = es6Require(
-    manifest.module ? manifest.entry : Path.resolve(appSrcDir(), subAppDir, manifest.entry)
-  );
-
-  return {
-    StartComponent: subapp.Component
-  };
+  return {};
 }
 
 function refreshSubAppByName(name) {

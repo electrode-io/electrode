@@ -121,7 +121,7 @@ describe("subapp-util", function() {
       process.env.APP_SRC_DIR = "test/data";
       const subapp = getAllSubAppManifest();
       expect(subapp).to.exist;
-      expect(Object.keys(subapp).length).to.equal(4);
+      expect(Object.keys(subapp).length).to.equal(5);
     });
   });
 
@@ -209,13 +209,13 @@ describe("subapp-util", function() {
     });
 
     it("should generate `serverEntry` given in subapp", () => {
-      const server = loadSubAppServerByName("Entry");
+      const server = loadSubAppServerByName("Entry", true);
       expect(server).to.have.property("StartComponent");
     });
 
     it("should return empty `serverEntry` if subapp manifest sets serverEntry to false", () => {
-      const server = loadSubAppServerByName("Entry");
-      expect(server).to.have.property("StartComponent");
+      const server = loadSubAppServerByName("subapp4");
+      expect(server).to.not.have.property("StartComponent");
     });
 
     it("should not load subapp server by name if NODE_ENV = production but lib does not exist", () => {
