@@ -351,8 +351,11 @@ ${stack}`,
             context.user[`prepare-grp-${props.group}`] = Date.now();
           }
 
-          if (request.app.webpackDev && subAppLoadTime < request.app.webpackDev.compileTime) {
-            subAppLoadTime = request.app.webpackDev.compileTime;
+          if (
+            !request.app.webpackDev ||
+            (request.app.webpackDev && subAppLoadTime < request.app.webpackDev.compileTime)
+          ) {
+            subAppLoadTime = _.get(request, "app.webpackDev.compileTime", 0);
             loadSubApp();
           }
           const ref = {
