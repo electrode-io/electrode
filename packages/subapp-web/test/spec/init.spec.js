@@ -50,7 +50,7 @@ describe("init", function () {
 
     const initToken = init({
       routeOptions: {
-        __internals:  {
+        __internals: {
           subApps: [
             {
               subapp: {
