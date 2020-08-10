@@ -139,7 +139,7 @@ Response: ${err || body}`
   //
   const prepareSubAppSplitBundles = async context => {
     const { assets, includedBundles } = context.user;
-    const entryName = subApp.name.toLowerCase();
+    const entryName = name.toLowerCase();
     //
     const entryPoints = assets.entryPoints[entryName];
     const cdnJsBundles = util.getCdnJsBundles(assets, setupContext.routeOptions);
@@ -193,10 +193,9 @@ Response: ${err || body}`
 
   const loadSubApp = () => {
     subApp = loadSubAppByName(name);
-    subAppServer = loadSubAppServerByName(name);
+    subAppServer = loadSubAppServerByName(name, true);
   };
 
-  loadSubApp();
   prepareSubAppJsBundle();
 
   const verifyUseStream = props => {
@@ -221,10 +220,6 @@ Response: ${err || body}`
 
       context.user.numOfSubapps = context.user.numOfSubapps || 0;
 
-      if (request.app.webpackDev && subAppLoadTime < request.app.webpackDev.compileTime) {
-        subAppLoadTime = request.app.webpackDev.compileTime;
-        loadSubApp();
-      }
 
       let { group = "_" } = props;
       group = [].concat(group);
@@ -337,14 +332,6 @@ ${stack}`,
       };
 
       const processSubapp = async () => {
-        const ref = {
-          context,
-          subApp,
-          subAppServer,
-          options: props,
-          ssrGroups
-        };
-
         context.user.numOfSubapps++;
         const { bundles, scripts, preLoads } = await prepareSubAppSplitBundles(context);
         outputSpot.add(`${comment}`);
@@ -363,6 +350,21 @@ ${stack}`,
           if (!context.user[`prepare-grp-${props.group}`]) {
             context.user[`prepare-grp-${props.group}`] = Date.now();
           }
+
+          if (
+            !request.app.webpackDev ||
+            (request.app.webpackDev && subAppLoadTime < request.app.webpackDev.compileTime)
+          ) {
+            subAppLoadTime = _.get(request, "app.webpackDev.compileTime", 0);
+            loadSubApp();
+          }
+          const ref = {
+            context,
+            subApp,
+            subAppServer,
+            options: props,
+            ssrGroups
+          };
           const lib = (ssrInfo.lib = util.getFramework(ref));
           ssrInfo.awaitData = lib.handlePrepare();
 

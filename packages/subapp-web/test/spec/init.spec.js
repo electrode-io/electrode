@@ -20,7 +20,15 @@ describe("init", function () {
 
     const initToken = init({
       routeOptions: {
-        __internals: {},
+        __internals: {
+          subApps: [
+            {
+              subapp: {
+                name: "mainbody"
+              }
+            }
+          ]
+        },
         cdn: {},
         stats: Path.join(__dirname, "../data/prod-stats.json")
       }
@@ -42,7 +50,15 @@ describe("init", function () {
 
     const initToken = init({
       routeOptions: {
-        __internals: {},
+        __internals: {
+          subApps: [
+            {
+              subapp: {
+                name: "mainbody"
+              }
+            }
+          ]
+        },
         cdn: {},
         prodBundleBase: "/js",
         stats: Path.join(__dirname, "../data/prod-stats.json")

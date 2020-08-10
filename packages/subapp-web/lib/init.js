@@ -65,8 +65,11 @@ ${inlineRuntimeJS}
 </script>`;
 
   // check if any subapp has server side code with initialize method and load them
-  const subAppServers = Object.keys(subappUtil.getAllSubAppManifest())
-    .map(name => subappUtil.loadSubAppServerByName(name))
+  const { subApps } = setupContext.routeOptions.__internals;
+  const subAppServers = subApps
+    .map(({ subapp }) => {
+      subappUtil.loadSubAppServerByName(subapp.name, false);
+    })
     .filter(x => x && x.initialize);
 
   return {
