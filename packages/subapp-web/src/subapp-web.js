@@ -1,6 +1,10 @@
 // xarc subapp client side lib version 1
 // load into window.xarcV1 as a global
 (function (w) {
+  if (!w._wml) {
+    w._wml = {};
+  }
+  
   const version = 1000000; // ###.###.### major.minor.patch
 
   if (w.xarcV1 && w.xarcV1.version >= version) return w.xarcV1;

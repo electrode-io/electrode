@@ -10,9 +10,12 @@ const _ = require("lodash");
 const assert = require("assert");
 
 module.exports = function setup(setupContext) {
+  const cdnEnabled = _.get(setupContext, "routeOptions.cdn.enable");
   const distDir = process.env.NODE_ENV === "production" ? "../dist/min" : "../dist/dev";
   const clientJs = Fs.readFileSync(Path.join(__dirname, distDir, "subapp-web.js")).toString();
-  const cdnJs = Fs.readFileSync(Path.join(__dirname, distDir, "cdn-map.js")).toString();
+  const cdnJs = cdnEnabled
+    ? Fs.readFileSync(Path.join(__dirname, distDir, "cdn-map.js")).toString()
+    : "";
   const loadJs = Fs.readFileSync(require.resolve("loadjs/dist/loadjs.min.js"), "utf8");
   //
   // TODO: in webpack dev mode, we need to reload stats after there's a change
