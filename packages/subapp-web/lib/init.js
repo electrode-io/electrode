@@ -49,7 +49,8 @@ module.exports = function setup(setupContext) {
         .map(ep => Path.resolve("dist", "js", Path.basename(cdnJsBundles[ep])))
         .filter(fullPath => Fs.existsSync(fullPath))
         .map(fullPath => Fs.readFileSync(fullPath))
-        .join(" ") +
+        .join(" ")
+        .replace(/\/\/#\ssourceMappingURL=.*$/, "") +
       "/*rt*/";
 
     inlineRuntimeJS += `\nwindow.xarcV1.markBundlesLoaded(${JSON.stringify(runtimeEntryPoints)});`;
