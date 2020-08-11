@@ -1,6 +1,6 @@
 {
   "name": "@xarc/jsx-renderer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Render index.htm from JSX template",
   "main": "dist/index.js",
   "scripts": {
@@ -116,7 +116,9 @@
     "devDependencies": {}
   },
   "@xarc/module-dev": {
-    "srcDir": [ "src" ],
+    "srcDir": [
+      "src"
+    ],
     "features": [
       "eslint",
       "eslintTS",

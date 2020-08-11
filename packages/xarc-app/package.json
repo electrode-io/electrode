@@ -1,6 +1,6 @@
 {
   "name": "@xarc/app",
-  "version": "8.1.8",
+  "version": "8.1.9",
   "description": "Electrode X application runtime support",
   "main": "index.js",
   "homepage": "http://www.electrode.io",
@@ -40,7 +40,7 @@
     "ignore-styles": "^5.0.1",
     "isomorphic-loader": "^3.1.0",
     "optional-require": "^1.0.0",
-    "subapp-util": "^1.1.0"
+    "subapp-util": "^1.1.1"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
