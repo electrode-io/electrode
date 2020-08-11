@@ -1,3 +1,78 @@
+# 8/11/2020
+
+- implement HTML log viewer using event source to do streaming
+- retrieve app logs from dev admin's memory storage
+- xarc-app-dev to ts - step 1: rename files
+- convert xarc-app to ts
+- move all dev related stuff to @xarc/app-dev
+- ensure the HTML jsx template used xarc's createElement
+- adding new API for customizing webpack configs
+- Refactor SSR to improve initial subapp loading performance
+- Load cdn mapping script for non js/css assets only if cdn option isenabled
+- Removing source map url of runtime bundle
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.1.9` `(8.1.8 => 8.1.9)`
+- `@xarc/app-dev@8.1.9` `(8.1.8 => 8.1.9)`
+- `@xarc/create-app@3.0.10` `(3.0.9 => 3.0.10)`
+- `@xarc/jsx-renderer@1.0.1` `(1.0.0 => 1.0.1)`
+- `@xarc/webpack@8.1.1` `(8.1.0 => 8.1.1)`
+- `subapp-server@1.3.2` `(1.3.1 => 1.3.2)`
+- `subapp-util@1.1.1` `(1.1.0 => 1.1.1)`
+- `subapp-web@1.0.33` `(1.0.32 => 1.0.33)`
+
+### Lerna Updated
+
+- `@xarc/index-page@1.0.1` `(1.0.0 => 1.0.1)`
+- `subapp-pbundle@0.0.27` `(0.0.26 => 0.0.27)`
+- `subapp-react@0.0.24` `(0.0.23 => 0.0.24)`
+- `subapp-redux@1.0.33` `(1.0.32 => 1.0.33)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - implement HTML log viewer using event source to do streaming ([#1714](https://github.com/electrode-io/electrode/pull/1714)) [commit](http://github.com/electrode-io/electrode/commit/6ac370a218dfec9cae150e609174420d66cae553)
+  - retrieve app logs from dev admin's memory storage ([#1713](https://github.com/electrode-io/electrode/pull/1713)) [commit](http://github.com/electrode-io/electrode/commit/5a4661d31e37a21504469cfaa1326416eb1fb09f)
+  - tsc just compile please [commit](http://github.com/electrode-io/electrode/commit/46014c55a29658b674427031fa9b1d53d2989547)
+  - xarc-app-dev to ts - step 1: rename files [commit](http://github.com/electrode-io/electrode/commit/c81c981f20d57038fb0f1a174bb60c6804e8cb1e)
+  - fix dev dep [commit](http://github.com/electrode-io/electrode/commit/687cf885bffb1fdbd9dc1dcfb11d0dcf6eb095e4)
+  - convert xarc-app to ts ([#1708](https://github.com/electrode-io/electrode/pull/1708)) [commit](http://github.com/electrode-io/electrode/commit/a847cd53b8bf9053a34435aeb5312aec8ea035c6)
+  - move all dev related stuff to @xarc/app-dev ([#1707](https://github.com/electrode-io/electrode/pull/1707)) [commit](http://github.com/electrode-io/electrode/commit/ffedf1925ba8b81f4f8a5fc9d9b95e566935fb40)
+
+- `packages/xarc-create-app`
+
+  - move all dev related stuff to @xarc/app-dev ([#1707](https://github.com/electrode-io/electrode/pull/1707)) [commit](http://github.com/electrode-io/electrode/commit/ffedf1925ba8b81f4f8a5fc9d9b95e566935fb40)
+
+- `packages/xarc-jsx-renderer`
+
+  - ensure the HTML jsx template used xarc's createElement ([#1712](https://github.com/electrode-io/electrode/pull/1712)) [commit](http://github.com/electrode-io/electrode/commit/1201fde10c865e17c42fa5fd868973f42826fcd3)
+  - update module-dev [commit](http://github.com/electrode-io/electrode/commit/96a568c3a5f38870f07535ccaff953f45acb7f4e)
+
+- `packages/xarc-webpack`
+
+  - adding new API for customizing webpack configs ([#1715](https://github.com/electrode-io/electrode/pull/1715)) [commit](http://github.com/electrode-io/electrode/commit/485508b6b4b008e53d0846367d54a29a47a998fb)
+  - tsc just compile please [commit](http://github.com/electrode-io/electrode/commit/40f2ada8efde46defba52c552c2bda3e20773bda)
+  - typescript conversion: step 1 - rename to .ts [commit](http://github.com/electrode-io/electrode/commit/ac3604428c622a8f12ab4350119de12e50d89187)
+  - move all dev related stuff to @xarc/app-dev ([#1707](https://github.com/electrode-io/electrode/pull/1707)) [commit](http://github.com/electrode-io/electrode/commit/ffedf1925ba8b81f4f8a5fc9d9b95e566935fb40)
+
+- `packages/subapp-server`
+
+  - ensure the HTML jsx template used xarc's createElement ([#1712](https://github.com/electrode-io/electrode/pull/1712)) [commit](http://github.com/electrode-io/electrode/commit/1201fde10c865e17c42fa5fd868973f42826fcd3)
+
+- `packages/subapp-util`
+
+  - Refactor SSR to improve initial subapp loading performance ([#1717](https://github.com/electrode-io/electrode/pull/1717)) [commit](http://github.com/electrode-io/electrode/commit/1b033fb955fc8339befe48b1494762e785873376)
+
+- `packages/subapp-web`
+
+  - Refactor SSR to improve initial subapp loading performance ([#1717](https://github.com/electrode-io/electrode/pull/1717)) [commit](http://github.com/electrode-io/electrode/commit/1b033fb955fc8339befe48b1494762e785873376)
+  - Load cdn mapping script for non js/css assets only if cdn option isenabled ([#1716](https://github.com/electrode-io/electrode/pull/1716)) [commit](http://github.com/electrode-io/electrode/commit/206b055d1ff2c4af8d74d452a1bd2c9fb0628823)
+  - Removing source map url of runtime bundle ([#1718](https://github.com/electrode-io/electrode/pull/1718)) [commit](http://github.com/electrode-io/electrode/commit/a732136c9777041663cc6b1922c9ebf3d81dfa52)
+
 # 7/22/2020
 
 - new packages extracted from electrode-react-webapp: `@xarc/index-page`, `@xarc/jsx-renderer`, `@xarc/render-context`, `@xarc/tag-renderer`
