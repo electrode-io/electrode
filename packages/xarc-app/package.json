@@ -14,10 +14,11 @@
   "license": "Apache-2.0",
   "scripts": {
     "build": "tsc",
-    "test": "clap check",
+    "test": "xrun xarc/test-only",
     "format": "prettier --write --print-width 100 *.{js,jsx} `find . -type d -d 1 -exec echo '{}/**/*.{js,jsx}' \\; | egrep -v '(/node_modules/|/dist/|/coverage/)'`",
-    "prepublishOnly": "clap -n build docs && clap check",
-    "docs": "clap xarc/docs"
+    "prepublishOnly": "xrun [[build, docs], xarc/check]",
+    "docs": "xrun xarc/docs",
+    "coverage": "xrun xarc/test-cov"
   },
   "files": [
     "arch-clap.js",
@@ -50,7 +51,7 @@
     "@types/sinon-chai": "^3.2.4",
     "@typescript-eslint/eslint-plugin": "^2.21.0",
     "@typescript-eslint/parser": "^2.21.0",
-    "@xarc/module-dev": "^2.2.1",
+    "@xarc/module-dev": "^2.2.4",
     "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
     "chalk": "^1.1.3",
@@ -88,16 +89,19 @@
       "dist",
       "docs",
       "gulpfile.js",
-      "test"
+      "test",
+      "xrun*.js",
+      "xrun*.ts",
+      "config"
     ],
     "extends": [
       "@istanbuljs/nyc-config-typescript"
     ],
     "check-coverage": true,
-    "statements": 100,
-    "branches": 100,
-    "functions": 100,
-    "lines": 100,
+    "statements": 0,
+    "branches": 0,
+    "functions": 0,
+    "lines": 0,
     "cache": false
   },
   "fyn": {
@@ -114,11 +118,20 @@
     "trailingComma": "none",
     "arrowParens": "avoid"
   },
+  "@xarc/module-dev": {
+    "features": [
+      "eslint",
+      "eslintTS",
+      "mocha",
+      "typedoc",
+      "typescript"
+    ]
+  },
   "mocha": {
     "require": [
       "ts-node/register",
       "source-map-support/register",
-      "./config/test/setup.js"
+      "@xarc/module-dev/config/test/setup.js"
     ],
     "recursive": true
   }
