@@ -1,6 +1,6 @@
 {
   "name": "@xarc/index-page",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Electrode X template and handlers for generating index.html webpage",
   "main": "dist/index.js",
   "scripts": {
@@ -21,7 +21,7 @@
     "index-page"
   ],
   "dependencies": {
-    "@xarc/jsx-renderer": "^1.0.1",
+    "@xarc/jsx-renderer": "^1.0.2",
     "@xarc/render-context": "^1.0.0",
     "@xarc/tag-renderer": "^1.0.0"
   },
