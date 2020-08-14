@@ -1,3 +1,38 @@
+# 8/14/2020
+
+- fix: subapp ssr initial load
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.1.10` `(8.1.9 => 8.1.10)`
+- `@xarc/app-dev@8.1.10` `(8.1.9 => 8.1.10)`
+- `@xarc/jsx-renderer@1.0.2` `(1.0.1 => 1.0.2)`
+- `subapp-web@1.0.34` `(1.0.33 => 1.0.34)`
+
+### Lerna Updated
+
+- `@xarc/index-page@1.0.2` `(1.0.1 => 1.0.2)`
+- `subapp-pbundle@0.0.28` `(0.0.27 => 0.0.28)`
+- `subapp-react@0.0.25` `(0.0.24 => 0.0.25)`
+- `subapp-redux@1.0.34` `(1.0.33 => 1.0.34)`
+- `subapp-server@1.3.3` `(1.3.2 => 1.3.3)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix: subapp ssr initial load ([#1719](https://github.com/electrode-io/electrode/pull/1719)) [commit](http://github.com/electrode-io/electrode/commit/5600ac0a59be27709b89971fdf4f45c0481f67f8)
+
+- `packages/xarc-jsx-renderer`
+
+  - [chore] more generated docs [commit](http://github.com/electrode-io/electrode/commit/6c2f30ee9b97e0549b03f2e4b427f8b088a2ecb6)
+
+- `packages/subapp-web`
+
+  - fix: subapp ssr initial load ([#1719](https://github.com/electrode-io/electrode/pull/1719)) [commit](http://github.com/electrode-io/electrode/commit/5600ac0a59be27709b89971fdf4f45c0481f67f8)
+
 # 8/11/2020
 
 - implement HTML log viewer using event source to do streaming
