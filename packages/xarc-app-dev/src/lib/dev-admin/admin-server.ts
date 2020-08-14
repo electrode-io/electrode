@@ -770,7 +770,7 @@ ${info.name} - assuming it started.</>`);
     info._child.on("message", messageHandler);
 
     if (info.options.noTimeoutCheck !== true) {
-      startTimeout = setTimeout(handleTimeout, 5000);
+      startTimeout = setTimeout(handleTimeout, 20000);
     }
 
     return defer.promise;
