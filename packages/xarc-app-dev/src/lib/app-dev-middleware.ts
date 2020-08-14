@@ -12,7 +12,7 @@ class AppDevMiddleware {
   webpackDev: any;
 
   constructor() {
-    this.webpackDev = { valid: false, hasErrors: false, hasWarnings: false };
+    this.webpackDev = { valid: false, hasErrors: false, hasWarnings: false, compileTime: Date.now() };
   }
 
   handleWebpackReport(data) {

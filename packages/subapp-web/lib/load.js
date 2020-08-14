@@ -220,7 +220,6 @@ Response: ${err || body}`
 
       context.user.numOfSubapps = context.user.numOfSubapps || 0;
 
-
       let { group = "_" } = props;
       group = [].concat(group);
       const ssrGroups = group.map(grp =>
@@ -352,10 +351,11 @@ ${stack}`,
           }
 
           if (
+            subAppLoadTime === 0 || // subapp has not been loaded yet, so must load once
             !request.app.webpackDev ||
             (request.app.webpackDev && subAppLoadTime < request.app.webpackDev.compileTime)
           ) {
-            subAppLoadTime = _.get(request, "app.webpackDev.compileTime", 0);
+            subAppLoadTime = _.get(request, "app.webpackDev.compileTime", Date.now());
             loadSubApp();
           }
           const ref = {
