@@ -39,7 +39,7 @@ xrun.load("user", {
       Fs.writeFileSync(fname, JSON.stringify(mapData) + "\n");
     });
 
-    return serial(exec("shx rm -rf config lib", {}), exec("shx mv dist/* .", {}), () =>
+    return serial(exec("shx rm -rf config", {}), exec("shx mv dist/* .", {}), () =>
       Fs.rmdirSync("dist")
     );
   }
