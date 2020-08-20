@@ -96,7 +96,7 @@ export const Token = (id: string | Function, props = {}) => {
  */
 export const TokenInvoke = (handler: Function, props = {}) => {
   const tm = new TokenModule("#tokenInvoke", -1, props, process.cwd());
-  tm.tokenMod = handler;
+  //tm.tokenMod = handler;
   tm[TAG_TYPE] = "token";
   return tm;
 };

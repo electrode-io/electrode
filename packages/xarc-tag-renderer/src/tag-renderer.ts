@@ -3,6 +3,7 @@
 import { RenderContext } from "@xarc/render-context";
 
 import * as _ from "lodash";
+import { Writable } from "stream";
 import { RenderProcessor } from "./render-processor";
 import { TagTemplate } from "./tag-template";
 
@@ -24,12 +25,14 @@ export class TagRenderer {
   _processor: RenderProcessor;
   _tokens: any[];
   _template: TagTemplate;
+  _output: Writable;
 
   constructor(options: {
     templateTags: any[];
     tokenHandlers?: Function | Function[];
     routeOptions?: any;
     insertTokenIds?: boolean;
+    output?: Writable;
   }) {
     this._options = options;
     this._tokens = options.templateTags;
@@ -51,6 +54,8 @@ export class TagRenderer {
       },
       ...options
     };
+
+    this._output = this._options.output || null;
   }
 
   /**
@@ -94,6 +99,9 @@ export class TagRenderer {
     let context;
     try {
       context = new RenderContext(options, this);
+      if (this._output) {
+        context.setOutputSend(this._output);
+      }
       const result = await this._processor.render(this._template, context, this._tokens);
       context.result = context.isVoidStop ? context.voidResult : result;
       return context;

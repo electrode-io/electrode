@@ -3,7 +3,7 @@ import { TagRenderer, createTemplateTags } from "../../src";
 import { templateTags as templateTags1 } from "../data/template1";
 import { templateTags as templateTags2 } from "../data/template2";
 import { templateTags as templateTags3 } from "../data/template3";
-
+import { PassThrough } from "stream";
 import { describe, it } from "mocha";
 
 describe("tag template", function () {
@@ -219,6 +219,23 @@ ABC<!-- ABC END -->`
       const save = renderer._processor;
       renderer.initializeRenderer();
       expect(save).equal(renderer._processor);
+    });
+  });
+  describe("render output", function () {
+    it("sends render output to writable stream", () => {
+      const pt = new PassThrough();
+      let html = "";
+      pt.on("data", d => (html += d.toString()));
+      pt.on("end", function () {
+        expect(html).to.equal("hello");
+      });
+
+      const renderer = new TagRenderer({
+        templateTags: createTemplateTags`hello`,
+        output: pt
+      });
+      renderer.initializeRenderer();
+      renderer.render({});
     });
   });
 });
