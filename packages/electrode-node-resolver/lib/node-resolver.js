@@ -29,31 +29,47 @@ function isModuleRequest(request) {
 }
 
 function resolve(req, atPath) {
-  // can only resolve modules under node_modules
-  if (!isModuleRequest(req)) return undefined;
+  if (!isModuleRequest(req))
+    // can only resolve modules under node_modules
+    return undefined;
 
   const splits = req.split("/");
   const nameX = splits[0].startsWith("@") ? 2 : 1; // check for scoped module
   const name = splits.slice(0, nameX).join("/");
 
+  const _xreq = requireAt(atPath);
+
   //
   // All modules must have package.json
   //
   const resolved = optionalRequire.resolve(
-    requireAt(atPath),
+    _xreq,
+    // some packages doesn't have index.js nor specify main so just require by
+    // its name will fail but we expect it to have a package.json file.
     // ensure require request paths are POSIX
-    Path.posix.join(name, "package.json"),
-    false
+    Path.join(name, "package.json"),
+    {
+      default: false,
+      fail(err) {
+        // newer version of node.js with ESM support restrict importing
+        // files that're not specified in package.json
+        if (err.code === "ERR_PACKAGE_PATH_NOT_EXPORTED") {
+          return optionalRequire.resolve(_xreq, name, false);
+        }
+        throw err;
+      }
+    }
   );
 
   if (!resolved) return undefined;
 
-  splits.splice(0, nameX, ".");
+  const ix = resolved.lastIndexOf(name);
+  const path = resolved.substr(0, ix + name.length);
 
-  return {
-    path: Path.dirname(resolved),
-    request: splits.join("/")
-  };
+  splits.splice(0, nameX, ".");
+  const request = splits.join("/");
+
+  return { path, request };
 }
 
 module.exports = {
