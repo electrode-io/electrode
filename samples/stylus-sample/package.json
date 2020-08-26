@@ -43,18 +43,16 @@
     "electrode-server": "^1.0.0",
     "electrode-static-paths": "^1.0.0",
     "lodash": "^4.10.1",
-    "milligram-stylus": "^1.3.0",
-    "react-router-config": "^1.0.0-beta.4",
-    "react-router-dom": "^4.3.1"
+    "milligram-stylus": "^1.3.0"
   },
   "devDependencies": {
     "@xarc/app-dev": "../../packages/xarc-app-dev",
-    "electrode-archetype-opt-eslint": "^1.0.3",
-    "electrode-archetype-opt-jest": "^1.0.3",
-    "electrode-archetype-opt-karma": "../../packages/electrode-archetype-opt-karma",
-    "electrode-archetype-opt-mocha": "../../packages/electrode-archetype-opt-mocha",
+    "@xarc/opt-eslint": "../../packages/xarc-opt-eslint",
+    "@xarc/opt-jest": "../../packages/xarc-opt-jest",
+    "@xarc/opt-karma": "../../packages/xarc-opt-karma",
+    "@xarc/opt-mocha": "../../packages/xarc-opt-mocha",
     "electrode-archetype-opt-phantomjs": "../../packages/electrode-archetype-opt-phantomjs",
-    "electrode-archetype-opt-stylus": "^1.0.2"
+    "@xarc/opt-stylus": "^1.0.0"
   },
   "fyn": {
     "dependencies": {
@@ -64,8 +62,12 @@
     },
     "devDependencies": {
       "@xarc/app-dev": "../../packages/xarc-app-dev",
-      "electrode-archetype-opt-karma": "../../packages/electrode-archetype-opt-karma",
-      "electrode-archetype-opt-phantomjs": "../../packages/electrode-archetype-opt-phantomjs"
+      "@xarc/opt-eslint": "../../packages/xarc-opt-eslint",
+      "@xarc/opt-jest": "../../packages/xarc-opt-jest",
+      "@xarc/opt-karma": "../../packages/xarc-opt-karma",
+      "@xarc/opt-mocha": "../../packages/xarc-opt-mocha",
+      "electrode-archetype-opt-phantomjs": "../../packages/electrode-archetype-opt-phantomjs",
+      "@xarc/opt-stylus": "../../packages/xarc-opt-stylus"
     }
   }
 }

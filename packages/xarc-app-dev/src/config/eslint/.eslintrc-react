@@ -1,6 +1,6 @@
 ---
 extends:
-  - "walmart/configurations/es6-react"
+  - "./js/es6-react.js"
 globals:
   window: false
   document: false

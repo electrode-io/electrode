@@ -1,0 +1,49 @@
+{
+  "name": "@xarc/opt-less",
+  "version": "0.0.1",
+  "description": "Electrode less styling addon",
+  "main": "xarc-opt-check.js",
+  "homepage": "http://www.electrode.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electrode-io/electrode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/electrode-io/electrode/issues"
+  },
+  "files": [
+    "xarc-opt-check.js"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "author": "Electrode (http://www.electrode.io/)",
+  "contributors": [
+    "Joel Chen <xchen@walmartlabs.com>"
+  ],
+  "license": "Apache-2.0",
+  "scripts": {
+    "test": "echo OK",
+    "coverage": "echo OK",
+    "preinstall": "node xarc-opt-check.js",
+    "prepare": "shx cp node_modules/opt-archetype-check/xarc-opt-check.js ."
+  },
+  "dependencies": {
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0"
+  },
+  "devDependencies": {
+    "opt-archetype-check": "../opt-archetype-check",
+    "shx": "^0.3.2"
+  },
+  "xarcOptCheck": {
+    "optionalTagName": "less",
+    "expectTag": true,
+    "devOnly": true,
+    "onlyOneOf": [
+      "@xarc/opt-less",
+      "electrode-archetype-opt-less"
+    ]
+  }
+}

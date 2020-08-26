@@ -39,8 +39,12 @@
     "prod": "echo 'Starting standalone server in PROD mode'; NODE_ENV=production node ./lib/server/"
   },
   "dependencies": {
+    "@hapi/good": "^8.2.4",
+    "@hapi/good-console": "^8.1.2",
+    "@hapi/inert": "^5.1.2",
     "@loadable/component": "^5.7.0",
     "@xarc/app": "^8.0.0",
+    "@xarc/opt-react": "^1.0.0",
     "electrode-confippet": "^1.5.0",
     "electrode-cookies": "^1.0.0",
     "electrode-react-webapp": "^3.2.0",
@@ -48,37 +52,35 @@
     "electrode-server": "^3.0.0",
     "electrode-static-paths": "^3.0.0",
     "electrode-ui-config": "^1.1.2",
-    "@hapi/good": "^8.2.4",
-    "@hapi/good-console": "^8.1.2",
-    "@hapi/inert": "^5.1.2",
     "lodash": "^4.17.11",
     "milligram": "^1.3.0",
     "react-notify-toast": "^0.5.0",
     "react-router-config": "^5.1.1",
-    "react-router-dom": "^5.1.2",
-    "electrode-archetype-opt-react": "^2.0.4"
+    "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
-    "electrode-archetype-opt-jest": "^26.0.0",
-    "electrode-archetype-opt-less": "../../packages/electrode-archetype-opt-less",
-    "electrode-archetype-opt-postcss": "^2.0.0",
-    "electrode-archetype-opt-sass": "../../packages/electrode-archetype-opt-sass",
-    "electrode-archetype-opt-stylus": "../../packages/electrode-archetype-opt-stylus",
     "@xarc/app-dev": "^8.0.0",
+    "@xarc/opt-less": "../../packages/xarc-opt-less",
+    "@xarc/opt-postcss": "^2.0.0",
+    "@xarc/opt-stylus": "../../packages/xarc-opt-stylus",
+    "electrode-archetype-opt-jest": "^26.0.0",
+    "@xarc/opt-sass": "../../packages/xarc-opt-sass",
     "webpack-hook-plugin": "^1.0.7"
   },
   "fyn": {
     "dependencies": {
       "@xarc/app": "../../packages/xarc-app",
+      "@xarc/opt-react": "../../packages/xarc-opt-react",
+      "electrode-cookies": "../../packages/electrode-cookies",
       "electrode-react-webapp": "../../packages/electrode-react-webapp",
       "electrode-redux-router-engine": "../../packages/electrode-redux-router-engine",
-      "electrode-cookies": "../../packages/electrode-cookies",
       "electrode-ui-config": "../../packages/electrode-ui-config"
     },
     "devDependencies": {
       "@xarc/app-dev": "../../packages/xarc-app-dev",
-      "electrode-archetype-opt-jest": "../../packages/electrode-archetype-opt-jest",
-      "electrode-archetype-opt-postcss": "../../packages/electrode-archetype-opt-postcss"
+      "@xarc/opt-postcss": "../../packages/xarc-opt-postcss",
+      "@xarc/opt-stylus": "../../packages/xarc-opt-stylus",
+      "electrode-archetype-opt-jest": "../../packages/electrode-archetype-opt-jest"
     }
   },
   "optionalDependencies": {}

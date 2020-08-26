@@ -9,7 +9,7 @@ require("../typedef");
 
 function checkOptArchetypeInAppDep(dependencies, isDev = undefined) {
   const options = dependencies
-    .filter(x => x.startsWith("electrode-archetype-opt-"))
+    .filter(x => x.startsWith("electrode-archetype-opt-") || x.startsWith("@xarc/opt-"))
     .reduce((acc, name) => {
       //
       // In dev mode, when all dev deps are installed, we can safely load

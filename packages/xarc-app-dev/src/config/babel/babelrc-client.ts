@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires, no-console, @typescript-eslint/ban-ts-ignore */
-export {};
 
 const ck = require("chalker");
-const requireAt = require("require-at");
 const archetype = require("@xarc/app-dev/config/archetype")();
 const optionalRequire = require("optional-require")(require);
 const optFlow = optionalRequire("electrode-archetype-opt-flow");
+import { getPluginFrom } from "./common";
 
 const {
   enableTypeScript,
@@ -19,12 +18,6 @@ const {
 } = archetype.babel;
 
 const addFlowPlugin = Boolean(enableFlow && optFlow);
-//
-// Resolve full path of a plugin that's the dependency of host npm package
-//
-function getPluginFrom(host, pluginName) {
-  return requireAt(require.resolve(`${host}/package.json`)).resolve(pluginName);
-}
 
 const basePlugins = [
   ...(enableDynamicImport
@@ -127,7 +120,9 @@ const plugins = basePlugins.concat(
       }
     ]
   ],
-  enableKarmaCov && [getPluginFrom("electrode-archetype-opt-karma", "babel-plugin-istanbul")]
+  enableKarmaCov && [
+    getPluginFrom(["@xarc/opt-karma", "electrode-archetype-opt-karma"], "babel-plugin-istanbul")
+  ]
 );
 
 const targets = archetype.babel.envTargets[archetype.babel.target];

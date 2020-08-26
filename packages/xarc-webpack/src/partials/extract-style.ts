@@ -17,19 +17,20 @@ const autoprefixer = require("autoprefixer");
 const cssLoader = require.resolve("css-loader");
 
 // Stylus support
-const optStylusRequire = getOptRequire("electrode-archetype-opt-stylus");
+const optStylusRequire = getOptRequire(["@xarc/opt-stylus", "electrode-archetype-opt-stylus"]);
 const stylusLoader = optStylusRequire.resolve("stylus-relative-loader");
 
 // SASS support
-const optSassRequire = getOptRequire("electrode-archetype-opt-sass");
+const optSassRequire = getOptRequire(["@xarc/opt-sass", "electrode-archetype-opt-sass"]);
 const sassLoader = optSassRequire.resolve("sass-loader");
 
 // LESS support
-const optLessRequire = getOptRequire("electrode-archetype-opt-less");
+const optLessRequire = getOptRequire(["@xarc/opt-less", "electrode-archetype-opt-less"]);
 const lessLoader = optLessRequire.resolve("less-loader");
 
 function loadPostCss() {
-  const cssModuleRequire = getOptRequire("electrode-archetype-opt-postcss");
+  const cssModuleRequire = getOptRequire(["@xarc/opt-postcss", "electrode-archetype-opt-postcss"]);
+
   if (cssModuleRequire.invalid) {
     return { hasPostCss: false };
   }
@@ -148,6 +149,7 @@ module.exports = function() {
   /*
    * SASS
    */
+  console.log("sass", archetype.options.sass, "loader", sassLoader);
   if (archetype.options.sass && sassLoader) {
     rules.push({
       _name: `${namePrefix}-scss`,

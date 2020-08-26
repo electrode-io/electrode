@@ -6,7 +6,7 @@ const _ = require("lodash");
 const fileMock = Path.join(__dirname, "__mocks__", "file-mock.js");
 const frameworkMock = Path.join(__dirname, "__mocks__", "framework-mock.js");
 const { getOptArchetypeRequire } = require("../../lib/utils");
-const optRequire = getOptArchetypeRequire("electrode-archetype-opt-jest");
+const optRequire = getOptArchetypeRequire(["@xarc/opt-jest", "electrode-archetype-opt-jest"]);
 
 const jestPkg = optRequire("jest/package.json");
 const jestMajVersion = parseInt(jestPkg.version.split(".")[0], 10);

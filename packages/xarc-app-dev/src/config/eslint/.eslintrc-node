@@ -1,6 +1,6 @@
 ---
 extends:
-  - "walmart/configurations/es6-node"
+  - "./js/es6-node.js"
   - plugin:react/recommended
 parserOptions:
   # this is not in the Walmart default configuration, for fairly good reason:
