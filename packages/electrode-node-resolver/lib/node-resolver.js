@@ -63,8 +63,10 @@ function resolve(req, atPath) {
 
   if (!resolved) return undefined;
 
-  const ix = resolved.lastIndexOf(name);
-  const path = resolved.substr(0, ix + name.length);
+  // ensure windows \ path separator changed to / when matching for require
+  // req name, which should always be using /.
+  const ix = resolved.replace(/\\/g, "/").lastIndexOf(`${name}/`);
+  const path = ix >= 0 ? resolved.substr(0, ix + name.length) : Path.dirname(resolved);
 
   splits.splice(0, nameX, ".");
   const request = splits.join("/");
