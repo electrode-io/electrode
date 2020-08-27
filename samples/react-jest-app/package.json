@@ -60,16 +60,16 @@
   },
   "devDependencies": {
     "@xarc/app-dev": "^5.3.4",
+    "@xarc/opt-eslint": "^1.0.3",
+    "@xarc/opt-jest": "^26.0.0",
+    "@xarc/opt-less": "^1.0.2",
+    "@xarc/opt-mocha": "../../packages/xarc-opt-mocha",
+    "@xarc/opt-postcss": "^1.0.4",
+    "@xarc/opt-stylus": "^1.0.2",
     "electrode-archetype-opt-critical-css": "^1.0.3",
-    "electrode-archetype-opt-eslint": "^1.0.3",
-    "electrode-archetype-opt-jest": "^26.0.0",
-    "electrode-archetype-opt-less": "^1.0.2",
-    "electrode-archetype-opt-mocha": "^1.0.3",
     "electrode-archetype-opt-phantomjs": "^1.0.2",
-    "electrode-archetype-opt-postcss": "^1.0.4",
     "electrode-archetype-opt-pwa": "^1.0.6",
     "electrode-archetype-opt-sinon": "^1.0.3",
-    "electrode-archetype-opt-stylus": "^1.0.2",
     "electrode-archetype-opt-typescript": "^1.0.3"
   },
   "fyn": {
@@ -80,7 +80,13 @@
       "electrode-auto-ssr": "../../packages/electrode-auto-ssr"
     },
     "devDependencies": {
-      "@xarc/app-dev": "../../packages/xarc-app-dev"
+      "@xarc/app-dev": "../../packages/xarc-app-dev",
+      "@xarc/opt-eslint": "../../packages/xarc-opt-eslint",
+      "@xarc/opt-jest": "../../packages/xarc-opt-jest",
+      "@xarc/opt-less": "../../packages/xarc-opt-less",
+      "@xarc/opt-mocha": "../../packages/xarc-opt-mocha",
+      "@xarc/opt-postcss": "../../packages/xarc-opt-postcss",
+      "@xarc/opt-stylus": "../../packages/xarc-opt-stylus"
     }
   },
   "optionalDependencies": {}

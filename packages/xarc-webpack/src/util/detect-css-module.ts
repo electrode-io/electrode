@@ -8,7 +8,7 @@ const AppMode = archetype.AppMode;
 const getOptRequire = require("../util/get-opt-require");
 
 function detectCSSModule() {
-  if (getOptRequire("electrode-archetype-opt-postcss").invalid) {
+  if (getOptRequire(["@xarc/opt-postcss", "electrode-archetype-opt-postcss"]).invalid) {
     return false;
   }
 

@@ -14,10 +14,12 @@ const invalidRequire = () => false;
 invalidRequire.resolve = () => false;
 invalidRequire.invalid = true;
 
-module.exports = function getOptRequire(name) {
-  const optPkg = optionalRequire.resolve(`${name}/package.json`);
-  if (optPkg) {
-    return requireAt(Path.dirname(optPkg));
+module.exports = function getOptRequire(name: string | string[]) {
+  for (const pkg of [].concat(name)) {
+    const optPkg = optionalRequire.resolve(`${pkg}/package.json`);
+    if (optPkg) {
+      return requireAt(Path.dirname(optPkg));
+    }
   }
   return invalidRequire;
 };
