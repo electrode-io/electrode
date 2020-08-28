@@ -1,51 +1,106 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-export { };
-import { createReadStream } from 'fs';
-import { createServer, IncomingMessage, request, RequestListener, ServerResponse } from 'http';
-import * as Url from 'url';
-import { resolve } from 'path';
-import * as ck from 'chalker';
+export {};
 
-const Middleware = require("./middleware");
+/* eslint-disable global-require, no-console */
+
+const ck = require("chalker");
 const archetype = require("../../config/archetype")();
-const FakeRes = require("../fake-res");
+const optionalRequire = require("optional-require")(require);
+const fastifyServer = optionalRequire("@xarc/fastify-server");
+const electrodeServer = optionalRequire("electrode-server");
+const Hapi = optionalRequire("@hapi/hapi");
+const Koa = optionalRequire("koa");
+const express = optionalRequire("express");
 
-const middleware = new Middleware({
-  baseUrl: () => {
-    return Url.format({
-      hostname: process.env.HOST || "localhost",
-      protocol: 'http', // doesn't matter since it's a downstream call anyway..
-      port: process.env.PORT
-    });
-  }
-});
-middleware.setup();
+//
+// indicate that app is running in webpack dev mode
+// also set by @xarc/app/arch-clap.js
+//
+if (process.env.WEBPACK_DEV === undefined) {
+  process.env.WEBPACK_DEV = "true";
+}
 
-createServer((req: IncomingMessage, res: ServerResponse) => {
-  middleware.process(req, new FakeRes(), {
-    skip: () => Promise.resolve(),
-    replyHtml: html => {
-      res.writeHead(200, {
-        'Content-Type': 'text/html'
-      }).end(`<!DOCTYPE html>${html}`);
+if (fastifyServer) {
+  fastifyServer({
+    electrode: {
+      logLevel: "warn",
+      pinoOptions: false
     },
-    replyError: (err) => {
-      res.writeHead(500, err);
+    connection: {
+      host: archetype.webpack.devHostname,
+      port: archetype.webpack.devPort
     },
-    replyNotFound: () => res.writeHead(404, "dev server express Not Found"), //res.status(404).send("dev server express Not Found"),
-    replyStaticData: (data) => {
-      const type = require("mime").getType(req.url);
-      res.writeHead(200, {
-        'Content-Type': type
-      });
-      res.end(data);
-    },
-    replyFile: (file) => createReadStream(resolve(file)).pipe(res)
+    plugins: {
+      webpackDevFastify: {
+        module: "./dev-fastify",
+        requireFromPath: __dirname
+      }
+    }
   });
-}).addListener("error", (err: Error) => {
-  console.error(ck`<red>Node.js webpack dev server failed</>${err}`);
-}).addListener("open", () => {
-  ck`<green>Node.js webpack dev server listening on port ${archetype.webpack.devPort}</>`
-}).listen(archetype.webpack.devPort, archetype.webpack.devHostname, () => {
-  ck`<green>Node.js webpack dev server listening on port ${archetype.webpack.devPort}</>`
-});
+} else if (electrodeServer) {
+  electrodeServer({
+    electrode: {
+      logLevel: "warn"
+    },
+    connections: {
+      default: { host: archetype.webpack.devHostname, port: archetype.webpack.devPort }
+    },
+    plugins: {
+      webpackDevHapi: {
+        module: "./dev-hapi.js",
+        requireFromPath: __dirname
+      }
+    }
+  });
+} else if (Hapi) {
+  const app = Hapi.server({
+    port: archetype.webpack.devPort,
+    host: archetype.webpack.devHostname
+  });
+  app
+    .register(require("./dev-hapi"))
+    .then(() => app.start())
+    .then(() => {
+      console.log(
+        ck`<green>Hapi webpack dev server listening on port ${archetype.webpack.devPort}</>`
+      );
+    })
+    .catch(err => {
+      console.error(ck`<red>Hapi webpack dev server failed</>${err}`);
+    });
+} else if (Koa) {
+  const app = new Koa();
+  const setup = require("./dev-koa");
+  setup(app);
+  app.listen(archetype.webpack.devPort, err => {
+    if (err) {
+      console.error(ck`<red>koa webpack dev server failed</>${err}`);
+    } else {
+      console.log(
+        ck`<green>koa webpack dev server listening on port ${archetype.webpack.devPort}</>`
+      );
+    }
+  });
+} else if (express) {
+  const app = express();
+  const setup = require("./dev-express");
+  setup(app);
+  app.listen(archetype.webpack.devPort, err => {
+    if (err) {
+      console.error(ck`<red>express webpack dev server failed</>${err}`);
+    } else {
+      console.log(
+        ck`<green>express webpack dev server listening on port ${archetype.webpack.devPort}</>`
+      );
+    }
+  });
+} else {
+  console.error(
+    ck(`<red>
+ERROR: can't find a HTTP server to run dev-server.
+Please install at least one of these dependencies:
+  @xarc/fastify-server@1+, electrode-server@3+, @hapi/hapi@18+, express@4+, or koa
+
+</red>`)
+  );
+}
