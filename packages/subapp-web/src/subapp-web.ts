@@ -4,7 +4,7 @@
   if (!w._wml) {
     w._wml = {};
   }
-  
+
   const version = 1000000; // ###.###.### major.minor.patch
 
   if (w.xarcV1 && w.xarcV1.version >= version) return w.xarcV1;
@@ -22,6 +22,7 @@
 
   return (w.xarcV1 = xv1 = {
     IS_BROWSER: true,
+    // @ts-ignore
     HAS_WINDOW: typeof window !== "undefined",
 
     version,
@@ -39,9 +40,13 @@
 
     defer() {
       const defer = {};
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'promise' does not exist on type '{}'.
       defer.promise = new Promise((resolve, reject) => {
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'resolve' does not exist on type '{}'.
         defer.resolve = resolve;
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'reject' does not exist on type '{}'.
         defer.reject = reject;
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'done' does not exist on type '{}'.
         defer.done = (err, result) => {
           if (err) reject(err);
           else resolve(result);
@@ -167,7 +172,9 @@
         .asyncMap(groupInfo.queue, startInfo => {
           return startInfo.instance._prepared;
         })
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         .then(makeInvoke("preRender"))
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         .then(makeInvoke("signalReady"))
         .then(
           makeInvoke(
@@ -189,12 +196,16 @@
     // action.
     //
     watchSubAppOnLoad(immediate) {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'onLoadWatcher' does not exist on type '{... Remove this comment to see the full error message
       if (runtimeInfo.onLoadWatcher) {
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'onLoadWatcher' does not exist on type '{... Remove this comment to see the full error message
         clearTimeout(runtimeInfo.onLoadWatcher);
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'onLoadWatcher' does not exist on type '{... Remove this comment to see the full error message
         runtimeInfo.onLoadWatcher = undefined;
       }
 
       const watchCheck = () => {
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'onLoadWatcher' does not exist on type '{... Remove this comment to see the full error message
         runtimeInfo.onLoadWatcher = undefined;
         const ols = runtimeInfo.onLoadStart;
         let pending = 0;
@@ -257,6 +268,7 @@
         watchCheck();
       }
 
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'onLoadWatcher' does not exist on type '{... Remove this comment to see the full error message
       runtimeInfo.onLoadWatcher = setTimeout(watchCheck, 10);
     },
 
@@ -297,10 +309,14 @@
     },
 
     getBundleAssets() {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'bundleAssets' does not exist on type '{ ... Remove this comment to see the full error message
       if (!runtimeInfo.bundleAssets) {
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'bundleAssets' does not exist on type '{ ... Remove this comment to see the full error message
         runtimeInfo.bundleAssets = xv1.dyn("bundleAssets");
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'bundleAssets' does not exist on type '{ ... Remove this comment to see the full error message
         xv1.cdnInit(runtimeInfo.bundleAssets);
       }
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'bundleAssets' does not exist on type '{ ... Remove this comment to see the full error message
       return runtimeInfo.bundleAssets;
     },
 
@@ -349,6 +365,7 @@
             done();
           }
         };
+        // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'loadjs'.
         loadjs(new_assets, id, {
           success: () => {
             console.log(`loaded asset for ${name} (id: ${id}) - ${assets}`);
@@ -356,6 +373,7 @@
             afterLoad();
           },
           error: () => {
+            // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'err'.
             console.error(`load asset ${name} (id: ${id}) failed`, err);
             afterLoad();
           }
@@ -365,6 +383,7 @@
 
     dyn(id) {
       const msg = "ERROR: fail retrieve dynamic data from element";
+      // @ts-ignore
       const element = document.getElementById(id);
       if (!element) {
         console.error(msg, id, "- get");
@@ -378,4 +397,5 @@
       }
     }
   });
+  // @ts-ignore
 })(window);

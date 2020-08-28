@@ -1,7 +1,9 @@
 "use strict";
 
 const { load } = require("../../lib");
+// @ts-ignore
 const utils = require("../../lib/util");
+// @ts-ignore
 const Path = require("path");
 const reserveSpot = require("../../lib/ReserveSpot");
 const RenderOutput = require("electrode-react-webapp/lib/render-output");

@@ -1,0 +1,15 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+      "outDir": "lib",
+      "lib": ["ES2018"],
+      "module": "CommonJS",
+      "types": [
+          "@types/mocha",
+          "@types/node",
+          "@types/sinon",
+          "@types/sinon-chai"
+      ],
+    },
+    "include": ["libsrc"]
+  }

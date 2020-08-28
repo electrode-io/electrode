@@ -48,6 +48,7 @@ export function loadSubApp(info, renderStart, options) {
     if (!id) {
       id = options._genId;
     } else {
+      // @ts-ignore
       element = document.getElementById(id);
     }
 
@@ -169,6 +170,7 @@ export function getSubAppComponent({ name, timeout = 15000, onReady, onError, fa
 
 export function waitForSubApp(name, timeout = 15000) {
   return new Promise((resolve, reject) => {
+    // @ts-expect-error ts-migrate(2345) FIXME: Type '{ name: any; onLoad: () => void; onError: ()... Remove this comment to see the full error message
     lazyLoadSubApp({
       name,
       onLoad: () => resolve(),
@@ -190,6 +192,7 @@ export function lazyLoadSubApp({ name, id, timeout = 15000, onLoad, onError, fal
     if (!id) {
       return onLoad && onLoad();
     } else {
+      // @ts-ignore
       const element = document.getElementById(id);
       if (element && subApp.start) {
         return subApp.start(instance, { id });

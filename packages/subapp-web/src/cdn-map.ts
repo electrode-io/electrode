@@ -43,4 +43,5 @@
 
   // initialize bundle assets
   xv1.getBundleAssets();
+// @ts-ignore
 })(window);

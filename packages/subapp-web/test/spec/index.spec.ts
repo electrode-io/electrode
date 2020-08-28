@@ -3,6 +3,7 @@
 const { JSDOM } = require("jsdom");
 const mockRequire = require("mock-require");
 const sinon = require("sinon");
+// @ts-ignore
 const chai = require("chai");
 const chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);
@@ -65,6 +66,7 @@ describe("subapp-web", function() {
 
   it("lazyLoadSubApp should call loadSubAppBundles if the bundle is not available", async () => {
     let called = false;
+    // @ts-ignore
     global.window = {};
     mockRequire("../../src/xarc", {
       getBundle: () => undefined,
@@ -79,8 +81,10 @@ describe("subapp-web", function() {
 
   it("lazyLoadSubApp should run subapp.start if id is specified", async () => {
     let called = false;
+    // @ts-ignore
     global.window = {};
     global.document = {
+      // @ts-ignore
       getElementById: () => true
     };
     mockRequire("../../src/xarc", {
@@ -130,7 +134,9 @@ describe("subapp-web", function() {
     const index = require("../../src/index");
     const history = index.getBrowserHistory();
     expect(history).to.exist;
+    // @ts-ignore
     expect(xarc.rt.history).to.exist;
+    // @ts-ignore
     expect(history).to.equal(xarc.rt.history);
   });
 

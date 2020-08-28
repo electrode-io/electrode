@@ -6,8 +6,9 @@ const xaa = require("xaa");
 describe("async map", function() {
   let xarcV1;
   before(() => {
-    const xarc = "../../src/subapp-web.js";
+    const xarc = "../../src/subapp-web.ts";
     delete require.cache[require.resolve(xarc)];
+    // @ts-ignore
     global.window = {};
     require(xarc);
     xarcV1 = global.window.xarcV1;

@@ -1,8 +1,9 @@
 "use strict";
-
+// @ts-ignore
 const Path = require("path");
+// @ts-ignore
 const Fs = require("fs");
-
+// @ts-ignore
 const {
   resetCdn,
   loadAssetsFromStats,
