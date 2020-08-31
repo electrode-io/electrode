@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.browser.json && tsc -p tsconfig.node.json && tsc -p tsconfig.lib.json && clap minify -s=dist/dev",
     "test": "BABEL_ENV=src-minify xrun xarc/test-only",
-    "coverage": "BABEL_ENV=src-minify xrun xarc/test-cov",
+    "coverage": "xrun xarc/test-cov",
     "prepublishOnly": "xrun [[build, docs], xarc/check]",
     "docs": "xrun xarc/docs"
   },
