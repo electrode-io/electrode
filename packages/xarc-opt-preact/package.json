@@ -1,6 +1,6 @@
 {
   "name": "@xarc/opt-preact",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Electrode preact addon",
   "main": "xarc-opt-check.js",
   "homepage": "http://www.electrode.io",

@@ -149,7 +149,7 @@ module.exports = function() {
   /*
    * SASS
    */
-  console.log("sass", archetype.options.sass, "loader", sassLoader);
+
   if (archetype.options.sass && sassLoader) {
     rules.push({
       _name: `${namePrefix}-scss`,

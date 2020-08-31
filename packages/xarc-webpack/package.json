@@ -1,6 +1,6 @@
 {
   "name": "@xarc/webpack",
-  "version": "8.1.1",
+  "version": "8.1.2",
   "description": "Electrode X webpack config",
   "main": "lib/index.js",
   "homepage": "http://www.electrode.io",
@@ -37,7 +37,7 @@
     "chalker": "^1.2.0",
     "css-loader": "^1.0.1",
     "electrode-cdn-file-loader": "^1.0.0",
-    "electrode-node-resolver": "^2.0.0",
+    "electrode-node-resolver": "^2.0.1",
     "file-loader": "^2.0.0",
     "filter-scan-dir": "^1.0.9",
     "isomorphic-loader": "^3.1.0",
