@@ -1,6 +1,6 @@
 {
   "name": "@xarc/opt-postcss",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Electrode postcss addon",
   "main": "xarc-opt-check.js",
   "homepage": "http://www.electrode.io",

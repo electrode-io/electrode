@@ -1,6 +1,6 @@
 {
   "name": "@xarc/opt-react",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Electrode react addon",
   "main": "xarc-opt-check.js",
   "homepage": "http://www.electrode.io",
