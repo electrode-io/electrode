@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "preserveConstEnums": true,
     "sourceMap": true,
     "declaration": true,

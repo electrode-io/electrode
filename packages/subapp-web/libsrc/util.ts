@@ -1,17 +1,13 @@
 "use strict";
 
 /* eslint-disable global-require, max-statements, no-loop-func, max-len */
-
-// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Fs'.
-const Fs = require("fs");
-// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'assert'.
+import * as Fs from "fs";
 const assert = require("assert");
-// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Path'.
-const Path = require("path");
-// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable '_'.
-const _ = require("lodash");
-const { tryThrowOriginalSubappRegisterError } = require("subapp-util");
-const EventEmitter = require("events");
+import * as Path from "path";
+import * as _ from "lodash";
+import { tryThrowOriginalSubappRegisterError } from "subapp-util";
+import { EventEmitter } from "events";
+import LoadAssetsData from "./types/LoadAssetsData";
 
 let CDN_ASSETS;
 let CDN_JS_BUNDLES;
@@ -187,6 +183,7 @@ ${ignoreMsg}`
 
       try {
         const assetsFp = Path.resolve(cdnAssetsFile);
+        // @ts-ignore
         CDN_ASSETS = JSON.parse(Fs.readFileSync(assetsFp));
       } catch (err) {
         if (prod) {
@@ -324,10 +321,9 @@ ${ignoreMsg}`
       );
     }
 
-    const assets = {};
+    const assets = new LoadAssetsData();
     const manifestAsset = _.find(stats.assets, asset => asset.name.endsWith("manifest.json"));
     if (manifestAsset) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'manifest' does not exist on type '{}'.
       assets.manifest = manifestAsset.name;
     }
 
@@ -339,17 +335,11 @@ ${ignoreMsg}`
     // an array of chunk IDs, but at this point assuming the chunks array has length 1 only.
     //
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'chunksById' does not exist on type '{}'.
     assets.chunksById = utils.getChunksById(stats);
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'all' does not exist on type '{}'.
     assets.all = stats.assets;
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'js' does not exist on type '{}'.
     assets.js = stats.assets.filter(asset => asset.name.endsWith(".js"));
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'css' does not exist on type '{}'.
     assets.css = stats.assets.filter(asset => asset.name.endsWith(".css"));
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'entryPoints' does not exist on type '{}'... Remove this comment to see the full error message
     assets.entryPoints = stats.entrypoints;
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'chunks' does not exist on type '{}'.
     assets.chunks = stats.chunks;
 
     return { assets, stats };
@@ -359,12 +349,12 @@ ${ignoreMsg}`
     const groupEvents = {};
 
     emitter.on("web_ssr", (data = {}) => {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'group' does not exist on type '{}'.
+      // @ts-ignore
       const group = data.group || "_";
       groupEvents[group] = groupEvents[group] || [];
       groupEvents[group].push(data);
 
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'action' does not exist on type '{}'.
+      // @ts-ignore
       if (data.action === "group-ssr-total" || data.action === "subapps-ssr") {
         const events = groupEvents[group];
         events.forEach((event) => reporter(event));
@@ -376,4 +366,4 @@ ${ignoreMsg}`
   }
 };
 
-module.exports = utils;
+export default utils;

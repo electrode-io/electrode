@@ -5,6 +5,9 @@
       "lib": ["ES2018"],
       "module": "CommonJS",
       "types": [
+          "@types/chai",
+          "@types/chai-as-promised",
+          "@types/lodash",
           "@types/mocha",
           "@types/node",
           "@types/sinon",

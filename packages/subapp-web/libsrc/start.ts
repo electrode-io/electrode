@@ -1,15 +1,15 @@
 "use strict";
 
 const DEFAULT_CONCURRENCY = 15;
-// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'xaa'.
-const xaa = require("xaa");
+import * as xaa from "xaa";
 
 /*
  * subapp start for SSR
  * Nothing needs to be done to start subapp for SSR
  */
-module.exports = function setup() {
+export default function() {
   return {
+
     process: (context, { props: { concurrency } }) => {
       const { xarcSubappSSR, xarcSSREmitter } = context.user;
       const startMsg = `
@@ -70,12 +70,14 @@ module.exports = function setup() {
             xarcSubappSSR._.queue,
             async (info, ix, mapCtx) => {
               await waitForPrepare(info, mapCtx);
+              // @ts-ignore
               await runSSR(info, mapCtx);
             },
             { concurrency }
           )
           .catch(err => {
             context.voidStop(err);
+            // @ts-ignore
             xaa.map(xarcSubappSSR._.queue, async info => info.done(), { concurrency });
           });
         if (xarcSSREmitter) {
@@ -89,6 +91,7 @@ module.exports = function setup() {
       xaa
         .map(
           Object.entries(xarcSubappSSR),
+          // @ts-ignore
           async ([group, { queue }], ix, mapCtx) => {
             if (group !== "_") {
               mapCtx.assertNoFailure();
@@ -122,7 +125,7 @@ module.exports = function setup() {
                 queue,
                 async (v, ix2, ctx2) => {
                   ctx2.assertNoFailure();
-
+                  // @ts-ignore
                   await runSSR(v, ctx2);
                 },
                 { concurrency }
@@ -150,7 +153,9 @@ module.exports = function setup() {
           context.voidStop(err);
           xaa.map(
             Object.entries(xarcSubappSSR),
+            // @ts-ignore
             async ([, { queue }]) => {
+              // @ts-ignore
               await xaa.map(queue, async info => info.done(), { concurrency });
             },
             { concurrency }

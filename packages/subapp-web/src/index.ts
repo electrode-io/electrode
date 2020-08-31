@@ -1,6 +1,7 @@
 import { createBrowserHistory } from "history";
 import makeSubAppSpec from "./make-subapp-spec";
 import xarc from "./xarc";
+import LazyLoadData from "./types/LazyLoadData"
 
 export { default as makeSubAppSpec } from "./make-subapp-spec";
 
@@ -170,7 +171,6 @@ export function getSubAppComponent({ name, timeout = 15000, onReady, onError, fa
 
 export function waitForSubApp(name, timeout = 15000) {
   return new Promise((resolve, reject) => {
-    // @ts-expect-error ts-migrate(2345) FIXME: Type '{ name: any; onLoad: () => void; onError: ()... Remove this comment to see the full error message
     lazyLoadSubApp({
       name,
       onLoad: () => resolve(),
@@ -184,9 +184,12 @@ export function isLoaded(name) {
   return Boolean(xarc.getSubApp(name));
 }
 
-export function lazyLoadSubApp({ name, id, timeout = 15000, onLoad, onError, fallback }) {
+export function lazyLoadSubApp({ name, id, timeout, onLoad, onError, fallback }: LazyLoadData) {
   // TODO: timeout and callback
   const lname = name.toLowerCase();
+  if (!timeout) {
+    timeout = 15000;
+  }
 
   const renderToDomId = (instance, subApp) => {
     if (!id) {

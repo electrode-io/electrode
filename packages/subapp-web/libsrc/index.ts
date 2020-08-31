@@ -1,36 +1,31 @@
 "use strict";
 
-/* eslint-disable global-require */
+import { registerSubApp } from "subapp-util";
+import makeSubAppSpec from "../dist/node/make-subapp-spec";
 
-const { registerSubApp } = require("subapp-util");
+import util from "./util";
 
-const { default: makeSubAppSpec } = require("../dist/node/make-subapp-spec");
-
-const { setupFramework } = require("./util");
-const lazyLoadSubApp = () => {};
-// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'ReserveSpo... Remove this comment to see the full error message
-const ReserveSpot = require("./ReserveSpot");
-
-module.exports = {
-  // isomorphic functions
-  loadSubApp(spec) {
-    return registerSubApp(makeSubAppSpec(spec));
-  },
-
-  setupFramework,
-
-  // lazy load subapp is only for client side
-  lazyLoadSubApp,
-  dynamicLoadSubApp: lazyLoadSubApp,
-
-  getBrowserHistory: () => undefined,
-
-  // server side template token processing modules
-
-  polyfill: require("./polyfill"),
-  init: require("./init"),
-  load: require("./load"),
-  start: require("./start"),
-  ReserveSpot,
-  xarc: { IS_BROWSER: false, HAS_WINDOW: false } // no xarc client lib on the server
+// isomorphic functions
+export function loadSubApp(spec) {
+  return registerSubApp(makeSubAppSpec(spec));
 };
+
+export const setupFramework = util.setupFramework;
+
+// lazy load subapp is only for client side
+export const lazyLoadSubApp = () => {};
+
+export const dynamicLoadSubApp = lazyLoadSubApp;
+
+export const getBrowserHistory = () => undefined;
+
+// server side template token processing modules
+
+export const polyfill = require("./polyfill");
+export const init = require("./init");
+export const load = require("./load");
+export const start = require("./start");
+export const ReserveSpot = require("./ReserveSpot");
+
+export const xarc = { IS_BROWSER: false, HAS_WINDOW: false } // no xarc client lib on the server
+

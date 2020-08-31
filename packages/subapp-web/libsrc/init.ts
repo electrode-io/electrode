@@ -2,17 +2,12 @@
 
 /* eslint-disable max-statements */
 
-// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Fs'.
-const Fs = require("fs");
-// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Path'.
-const Path = require("path");
-// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'util'.
-const util = require("./util");
-const subappUtil = require("subapp-util");
-// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable '_'.
-const _ = require("lodash");
-// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'assert'.
+import * as Fs from "fs";
+import * as Path from "path";
+import subappUtil from "subapp-util";
+import * as _ from "lodash";
 const assert = require("assert");
+import util from "./util";
 
 module.exports = function setup(setupContext) {
   const cdnEnabled = _.get(setupContext, "routeOptions.cdn.enable");
@@ -38,6 +33,7 @@ module.exports = function setup(setupContext) {
     jsChunksById: cdnJsBundles,
     // md === mapping data for other assets
     md: util.getCdnOtherMappings(setupContext.routeOptions),
+    // @ts-ignore
     entryPoints: assets.entryPoints,
     basePath: ""
   };
@@ -45,7 +41,9 @@ module.exports = function setup(setupContext) {
   let inlineRuntimeJS = "";
   let runtimeEntryPoints = [];
   if (process.env.NODE_ENV === "production") {
+    // @ts-ignore
     runtimeEntryPoints = Object.keys(assets.chunksById.js).filter(ep =>
+      // @ts-ignore
       assets.chunksById.js[ep].startsWith("runtime.bundle")
     );
     inlineRuntimeJS =

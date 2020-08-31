@@ -1,9 +1,10 @@
 "use strict";
-// @ts-ignore
-const Path = require("path");
-// @ts-ignore
-const Fs = require("fs");
-// @ts-ignore
+
+import * as Fs from "fs";
+import * as Path from "path";
+import { expect } from "chai";
+import utils from "../../libsrc/util";
+
 const {
   resetCdn,
   loadAssetsFromStats,
@@ -14,7 +15,7 @@ const {
   getCdnJsBundles,
   getFramework,
   setupFramework
-} = require("../../lib/util");
+} = utils;
 
 describe("loadAssetsFromStats", () => {
   it("should load assets", () => {
@@ -34,7 +35,9 @@ describe("loadAssetsFromStats", () => {
 });
 
 describe("getChunksById", function () {
+  // @ts-ignore
   const prodStats = JSON.parse(Fs.readFileSync(Path.join(__dirname, "../data/prod-stats.json")));
+  // @ts-ignore
   const devStats = JSON.parse(Fs.readFileSync(Path.join(__dirname, "../data/dev-stats.json")));
 
   it("should handle production stats", () => {
@@ -43,7 +46,9 @@ describe("getChunksById", function () {
     expect(result).to.have.property("_names_");
     expect(result).to.have.property("js");
     expect(result).to.have.property("map");
+    // @ts-ignore
     expect(result.js).contains("mainbody.bundle.js");
+    // @ts-ignore
     expect(result.map).contains("../map/mainbody.bundle.js.map");
   });
 
@@ -53,6 +58,7 @@ describe("getChunksById", function () {
     expect(result).to.not.have.property("_names_");
     expect(result).to.have.property("js");
     expect(result).to.not.have.property("map");
+    // @ts-ignore
     expect(result.js).to.have.property("mainbody");
   });
 });

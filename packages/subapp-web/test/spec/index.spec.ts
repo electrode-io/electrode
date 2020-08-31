@@ -1,13 +1,26 @@
-"use strict";
+declare global {
+  namespace NodeJS {
+    interface Global {
+        _wml: {
+            jwt: any
+        },
+        xarcV1: any;
+    }
+  }
 
-const { JSDOM } = require("jsdom");
-const mockRequire = require("mock-require");
-const sinon = require("sinon");
-// @ts-ignore
-const chai = require("chai");
-const chaiAsPromised = require("chai-as-promised");
+  interface Window {
+    _wml: any;
+    xarcV1: any;
+  }
+}
+
+import { JSDOM } from "jsdom";
+import mockRequire from "mock-require";
+import * as sinon from "sinon";
+import chai from 'chai';
+import chaiAsPromised from 'chai-as-promised';
+
 chai.use(chaiAsPromised);
-
 const expect = chai.expect;
 
 let clock;
@@ -16,6 +29,7 @@ describe("subapp-web", function() {
   beforeEach(() => {
     const dom = new JSDOM("");
     clock = sinon.useFakeTimers();
+    // @ts-ignore
     global.window = dom.window;
     global.document = dom.window.document;
     delete require.cache[require.resolve("../../src/index")];
@@ -123,6 +137,7 @@ describe("subapp-web", function() {
     const index = require("../../src/index");
     const ret = index.waitForSubApp("phantom-subapp", 51);
     await clock.runAll();
+    // @ts-ignore
     return expect(ret).to.be.rejected;
   });
 

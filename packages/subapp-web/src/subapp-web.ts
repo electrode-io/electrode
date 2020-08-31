@@ -1,4 +1,9 @@
+
 // xarc subapp client side lib version 1
+
+import { Defer } from "xaa";
+import RuntimeInfo from "./types/RuntimeInfo";
+
 // load into window.xarcV1 as a global
 (function (w) {
   if (!w._wml) {
@@ -9,14 +14,7 @@
 
   if (w.xarcV1 && w.xarcV1.version >= version) return w.xarcV1;
 
-  const runtimeInfo = {
-    instId: 1,
-    subApps: {},
-    bundles: {},
-    onLoadStart: {},
-    groups: {},
-    started: false
-  };
+  const runtimeInfo = new RuntimeInfo();
 
   let xv1;
 
@@ -39,14 +37,11 @@
     },
 
     defer() {
-      const defer = {};
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'promise' does not exist on type '{}'.
+      // Defer is the class from the module "xaa"
+      const defer = new Defer();
       defer.promise = new Promise((resolve, reject) => {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'resolve' does not exist on type '{}'.
         defer.resolve = resolve;
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'reject' does not exist on type '{}'.
         defer.reject = reject;
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'done' does not exist on type '{}'.
         defer.done = (err, result) => {
           if (err) reject(err);
           else resolve(result);
@@ -157,7 +152,7 @@
       if (!runtimeInfo.started || groupInfo.started || groupInfo.queue.length < groupInfo.total) {
         return;
       }
-      const makeInvoke = (m, queue) => {
+      const makeInvoke = (m: any, queue?: any) => {
         return () =>
           xv1.asyncMap(queue || groupInfo.queue, startInfo => {
             const subApp = startInfo.subApp;
@@ -172,9 +167,7 @@
         .asyncMap(groupInfo.queue, startInfo => {
           return startInfo.instance._prepared;
         })
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         .then(makeInvoke("preRender"))
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         .then(makeInvoke("signalReady"))
         .then(
           makeInvoke(
@@ -196,16 +189,12 @@
     // action.
     //
     watchSubAppOnLoad(immediate) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'onLoadWatcher' does not exist on type '{... Remove this comment to see the full error message
       if (runtimeInfo.onLoadWatcher) {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'onLoadWatcher' does not exist on type '{... Remove this comment to see the full error message
         clearTimeout(runtimeInfo.onLoadWatcher);
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'onLoadWatcher' does not exist on type '{... Remove this comment to see the full error message
         runtimeInfo.onLoadWatcher = undefined;
       }
 
       const watchCheck = () => {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'onLoadWatcher' does not exist on type '{... Remove this comment to see the full error message
         runtimeInfo.onLoadWatcher = undefined;
         const ols = runtimeInfo.onLoadStart;
         let pending = 0;
@@ -268,7 +257,6 @@
         watchCheck();
       }
 
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'onLoadWatcher' does not exist on type '{... Remove this comment to see the full error message
       runtimeInfo.onLoadWatcher = setTimeout(watchCheck, 10);
     },
 
@@ -309,14 +297,10 @@
     },
 
     getBundleAssets() {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'bundleAssets' does not exist on type '{ ... Remove this comment to see the full error message
       if (!runtimeInfo.bundleAssets) {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'bundleAssets' does not exist on type '{ ... Remove this comment to see the full error message
         runtimeInfo.bundleAssets = xv1.dyn("bundleAssets");
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'bundleAssets' does not exist on type '{ ... Remove this comment to see the full error message
         xv1.cdnInit(runtimeInfo.bundleAssets);
       }
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'bundleAssets' does not exist on type '{ ... Remove this comment to see the full error message
       return runtimeInfo.bundleAssets;
     },
 

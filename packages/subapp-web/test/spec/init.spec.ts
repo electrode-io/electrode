@@ -1,15 +1,12 @@
 "use strict";
 
-const { init } = require("../../lib");
-// @ts-ignore
-const { resetCdn } = require("../../lib/util");
-// @ts-ignore
-const { asyncVerify, runFinally } = require("run-verify");
-// @ts-ignore
-const Path = require("path");
+import { init } from "../../libsrc";
+import util from "../../libsrc/util";
+import { asyncVerify, runFinally } from "run-verify";
+import * as Path from "path";
+import { expect } from "chai";
 
 // test the init token for subapps
-
 describe("init", function () {
   afterEach(() => {
     delete process.env.NODE_ENV;
@@ -45,7 +42,7 @@ describe("init", function () {
   });
 
   it("it should load runtime.bundle.js inline and mark includedBundles.runtime to true", () => {
-    resetCdn();
+    util.resetCdn();
     process.env.NODE_ENV = "production";
     const originalWd = process.cwd();
     process.chdir(Path.join(__dirname, "../subapps"));
@@ -69,7 +66,7 @@ describe("init", function () {
     });
 
     return asyncVerify(
-      () => {
+      function init(dummy?: any) {
         const context = { user: {} };
         const initJs = initToken.process(context);
         // @ts-ignore

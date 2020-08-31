@@ -12,21 +12,15 @@
  *   - generate code to bootstrap subapp on client
  */
 
-// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'assert'.
 const assert = require("assert");
-// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Fs'.
-const Fs = require("fs");
-// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'Path'.
-const Path = require("path");
-// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable '_'.
-const _ = require("lodash");
-const retrieveUrl = require("request");
-// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'util'.
-const util = require("./util");
-// @ts-expect-error ts-migrate(2451) FIXME: Cannot redeclare block-scoped variable 'xaa'.
-const xaa = require("xaa");
-const jsesc = require("jsesc");
-const { loadSubAppByName, loadSubAppServerByName, formUrl } = require("subapp-util");
+import * as Fs from "fs";
+import * as Path from "path";
+import * as _ from "lodash";
+import retrieveUrl from "request";
+import * as xaa from "xaa";
+import jsesc from "jsesc";
+import { loadSubAppByName, loadSubAppServerByName, formUrl } from "subapp-util";
+import util from "./util";
 
 // global name to store client subapp runtime, ie: window.xarcV1
 // V1: version 1.
@@ -316,7 +310,7 @@ ${stack}`,
       let startTime;
 
       const closeOutput = () => {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'isDone' does not exist on type '{ props:... Remove this comment to see the full error message
+        // @ts-ignore
         ssrInfo.isDone = true;
         if (props.timestamp) {
           const now = Date.now();
@@ -331,9 +325,9 @@ ${stack}`,
         }
       };
 
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'done' does not exist on type '{ props: a... Remove this comment to see the full error message
+      // @ts-ignore
       ssrInfo.done = () => {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'isDone' does not exist on type '{ props:... Remove this comment to see the full error message
+        // @ts-ignore
         if (!ssrInfo.isDone) {
           closeOutput();
         }
@@ -374,16 +368,16 @@ ${stack}`,
             options: props,
             ssrGroups
           };
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'lib' does not exist on type '{ props: an... Remove this comment to see the full error message
+          // @ts-ignore
           const lib = (ssrInfo.lib = util.getFramework(ref));
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'awaitData' does not exist on type '{ pro... Remove this comment to see the full error message
+          // @ts-ignore
           ssrInfo.awaitData = lib.handlePrepare();
 
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'defer' does not exist on type '{ props: ... Remove this comment to see the full error message
+          // @ts-ignore
           ssrInfo.defer = true;
 
           if (!props.inline) {
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'renderSSR' does not exist on type '{ pro... Remove this comment to see the full error message
+            // @ts-ignore
             ssrInfo.renderSSR = async () => {
               try {
                 outputSSRContent(await lib.handleSSR(ref), lib.initialStateStr);
@@ -394,13 +388,13 @@ ${stack}`,
               }
             };
           } else {
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'saveSSRInfo' does not exist on type '{ p... Remove this comment to see the full error message
+            // @ts-ignore
             ssrInfo.saveSSRInfo = () => {
-              // @ts-expect-error ts-migrate(2339) FIXME: Property 'saved' does not exist on type '{ props: ... Remove this comment to see the full error message
+              // @ts-ignore
               if (ssrInfo.saved) {
                 return;
               }
-              // @ts-expect-error ts-migrate(2339) FIXME: Property 'saved' does not exist on type '{ props: ... Remove this comment to see the full error message
+              // @ts-ignore
               ssrInfo.saved = true;
               try {
                 // output load without SSR content
@@ -414,8 +408,7 @@ ${stack}`,
             };
           }
         } else {
-          // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
-          outputSSRContent("");
+          outputSSRContent("", "");
         }
       };
 
@@ -431,7 +424,7 @@ ${stack}`,
         } catch (err) {
           handleError(err);
         } finally {
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'defer' does not exist on type '{ props: ... Remove this comment to see the full error message
+          // @ts-ignore
           if (!ssrInfo.defer) {
             closeOutput();
           }
