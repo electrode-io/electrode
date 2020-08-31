@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 export {};
+import { DevHttpServer, setup } from "./dev-http";
 
 /* eslint-disable global-require, no-console */
 
@@ -11,6 +12,7 @@ const electrodeServer = optionalRequire("electrode-server");
 const Hapi = optionalRequire("@hapi/hapi");
 const Koa = optionalRequire("koa");
 const express = optionalRequire("express");
+const http = optionalRequire("http");
 
 //
 // indicate that app is running in webpack dev mode
@@ -20,7 +22,21 @@ if (process.env.WEBPACK_DEV === undefined) {
   process.env.WEBPACK_DEV = "true";
 }
 
-if (fastifyServer) {
+if (createServer) {
+  const devHttpServer: DevHttpServer = setup({
+    host: archetype.webpack.devHostname,
+    port: archetype.webpack.devPort
+  });
+  devHttpServer.start();
+  devHttpServer.addServerEventListener("error", e => {
+    console.error(ck`<red>HTTP webpack dev server having an error</>${err}`);
+  });
+  devHttpServer.addServerEventListener("listening", e => {
+    console.log(
+      ck`<green>Node.js webpack dev server listening on port ${archetype.webpack.devPort}</>`
+    );
+  });
+} else if (fastifyServer) {
   fastifyServer({
     electrode: {
       logLevel: "warn",
