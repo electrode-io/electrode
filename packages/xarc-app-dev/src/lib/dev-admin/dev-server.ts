@@ -22,13 +22,13 @@ if (process.env.WEBPACK_DEV === undefined) {
   process.env.WEBPACK_DEV = "true";
 }
 
-if (createServer) {
+if (http) {
   const devHttpServer: DevHttpServer = setup({
     host: archetype.webpack.devHostname,
     port: archetype.webpack.devPort
   });
   devHttpServer.start();
-  devHttpServer.addServerEventListener("error", e => {
+  devHttpServer.addServerEventListener("error", err => {
     console.error(ck`<red>HTTP webpack dev server having an error</>${err}`);
   });
   devHttpServer.addServerEventListener("listening", e => {

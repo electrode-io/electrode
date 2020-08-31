@@ -13,8 +13,6 @@ export interface IDevHttpServerOptions {
   protocol: "http";
 }
 
-
-}
 export type HttpRequestEvent = "connect" | "response" | "timeout" | "close" | "finish";
 export type HttpServerEvent = "open" | "close" | "listening" | "error";
 
@@ -41,7 +39,7 @@ export const setup = function({ port, host }): DevHttpServer {
 
   let webpackDevHttpPlugin: RequestListener = function(req: IncomingMessage, res: ServerResponse) {
     Object.keys(requestEventHooks).map(event => {
-      req.addListener(event, (event)=>requestEventHooks[event]({...event, ...req}));
+      req.addListener(event, event => requestEventHooks[event]({ ...event, ...req }));
     });
     middleware.process(req, res, {
       skip: () => Promise.resolve(),
