@@ -1,3 +1,99 @@
+# 8/30/2020
+
+- new `@xarc/opt-*` packages to replace electrode-archetype-opt- packages
+- fix: handle new node.js ESM quirks
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.1.11` `(8.1.10 => 8.1.11)`
+- `@xarc/app-dev@8.1.11` `(8.1.10 => 8.1.11)`
+- `@xarc/opt-eslint@1.0.0` `(0.0.2 => 1.0.0)`
+- `@xarc/opt-jest@1.0.0` `(0.0.2 => 1.0.0)`
+- `@xarc/opt-karma@1.0.0` `(0.0.2 => 1.0.0)`
+- `@xarc/opt-less@1.0.0` `(0.0.2 => 1.0.0)`
+- `@xarc/opt-mocha@1.0.0` `(0.0.2 => 1.0.0)`
+- `@xarc/opt-postcss@1.0.0` `(0.0.2 => 1.0.0)`
+- `@xarc/opt-preact@1.0.0` `(0.0.2 => 1.0.0)`
+- `@xarc/opt-react@1.0.0` `(0.0.2 => 1.0.0)`
+- `@xarc/opt-sass@1.0.0` `(0.0.2 => 1.0.0)`
+- `@xarc/opt-stylus@1.0.0` `(0.0.2 => 1.0.0)`
+- `@xarc/webpack@8.1.2` `(8.1.1 => 8.1.2)`
+- `electrode-node-resolver@2.0.1` `(2.0.0 => 2.0.1)`
+
+### Lerna Updated
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - new @xarc/opt- packages to replace the electrode-archetype-opt- ones ([#1725](https://github.com/electrode-io/electrode/pull/1725)) [commit](http://github.com/electrode-io/electrode/commit/a6dd2305a75cbad7faa5b677cbf11731dd4c1bca)
+  - [chore] generated docs [commit](http://github.com/electrode-io/electrode/commit/a0965962fb9bdb5f3bdb3b4efa9a0b37cdf3781c)
+
+- `packages/xarc-opt-eslint`
+
+  - new @xarc/opt- packages to replace the electrode-archetype-opt- ones ([#1725](https://github.com/electrode-io/electrode/pull/1725)) [commit](http://github.com/electrode-io/electrode/commit/a6dd2305a75cbad7faa5b677cbf11731dd4c1bca)
+  - [major]: mark for first release of new packages [commit](http://github.com/electrode-io/electrode/commit/ab1f94d6f65fade4bccf227202ee39e2292abe6d)
+
+- `packages/xarc-opt-jest`
+
+  - new @xarc/opt- packages to replace the electrode-archetype-opt- ones ([#1725](https://github.com/electrode-io/electrode/pull/1725)) [commit](http://github.com/electrode-io/electrode/commit/a6dd2305a75cbad7faa5b677cbf11731dd4c1bca)
+  - [major]: mark for first release of new packages [commit](http://github.com/electrode-io/electrode/commit/ab1f94d6f65fade4bccf227202ee39e2292abe6d)
+
+- `packages/xarc-opt-karma`
+
+  - new @xarc/opt- packages to replace the electrode-archetype-opt- ones ([#1725](https://github.com/electrode-io/electrode/pull/1725)) [commit](http://github.com/electrode-io/electrode/commit/a6dd2305a75cbad7faa5b677cbf11731dd4c1bca)
+  - [major]: mark for first release of new packages [commit](http://github.com/electrode-io/electrode/commit/ab1f94d6f65fade4bccf227202ee39e2292abe6d)
+
+- `packages/xarc-opt-less`
+
+  - new @xarc/opt- packages to replace the electrode-archetype-opt- ones ([#1725](https://github.com/electrode-io/electrode/pull/1725)) [commit](http://github.com/electrode-io/electrode/commit/a6dd2305a75cbad7faa5b677cbf11731dd4c1bca)
+  - [major]: mark for first release of new packages [commit](http://github.com/electrode-io/electrode/commit/ab1f94d6f65fade4bccf227202ee39e2292abe6d)
+
+- `packages/xarc-opt-mocha`
+
+  - new @xarc/opt- packages to replace the electrode-archetype-opt- ones ([#1725](https://github.com/electrode-io/electrode/pull/1725)) [commit](http://github.com/electrode-io/electrode/commit/a6dd2305a75cbad7faa5b677cbf11731dd4c1bca)
+  - [major]: mark for first release of new packages [commit](http://github.com/electrode-io/electrode/commit/ab1f94d6f65fade4bccf227202ee39e2292abe6d)
+
+- `packages/xarc-opt-postcss`
+
+  - new @xarc/opt- packages to replace the electrode-archetype-opt- ones ([#1725](https://github.com/electrode-io/electrode/pull/1725)) [commit](http://github.com/electrode-io/electrode/commit/a6dd2305a75cbad7faa5b677cbf11731dd4c1bca)
+  - [major]: mark for first release of new packages [commit](http://github.com/electrode-io/electrode/commit/ab1f94d6f65fade4bccf227202ee39e2292abe6d)
+
+- `packages/xarc-opt-preact`
+
+  - new @xarc/opt- packages to replace the electrode-archetype-opt- ones ([#1725](https://github.com/electrode-io/electrode/pull/1725)) [commit](http://github.com/electrode-io/electrode/commit/a6dd2305a75cbad7faa5b677cbf11731dd4c1bca)
+  - [major]: mark for first release of new packages [commit](http://github.com/electrode-io/electrode/commit/ab1f94d6f65fade4bccf227202ee39e2292abe6d)
+
+- `packages/xarc-opt-react`
+
+  - new @xarc/opt- packages to replace the electrode-archetype-opt- ones ([#1725](https://github.com/electrode-io/electrode/pull/1725)) [commit](http://github.com/electrode-io/electrode/commit/a6dd2305a75cbad7faa5b677cbf11731dd4c1bca)
+  - [major]: mark for first release of new packages [commit](http://github.com/electrode-io/electrode/commit/ab1f94d6f65fade4bccf227202ee39e2292abe6d)
+
+- `packages/xarc-opt-sass`
+
+  - new @xarc/opt- packages to replace the electrode-archetype-opt- ones ([#1725](https://github.com/electrode-io/electrode/pull/1725)) [commit](http://github.com/electrode-io/electrode/commit/a6dd2305a75cbad7faa5b677cbf11731dd4c1bca)
+  - [major]: mark for first release of new packages [commit](http://github.com/electrode-io/electrode/commit/ab1f94d6f65fade4bccf227202ee39e2292abe6d)
+
+- `packages/xarc-opt-stylus`
+
+  - new @xarc/opt- packages to replace the electrode-archetype-opt- ones ([#1725](https://github.com/electrode-io/electrode/pull/1725)) [commit](http://github.com/electrode-io/electrode/commit/a6dd2305a75cbad7faa5b677cbf11731dd4c1bca)
+  - [major]: mark for first release of new packages [commit](http://github.com/electrode-io/electrode/commit/ab1f94d6f65fade4bccf227202ee39e2292abe6d)
+
+- `packages/xarc-webpack`
+
+  - new @xarc/opt- packages to replace the electrode-archetype-opt- ones ([#1725](https://github.com/electrode-io/electrode/pull/1725)) [commit](http://github.com/electrode-io/electrode/commit/a6dd2305a75cbad7faa5b677cbf11731dd4c1bca)
+
+- `packages/electrode-node-resolver`
+
+  - fix: handle windows \ path separator ([#1726](https://github.com/electrode-io/electrode/pull/1726)) [commit](http://github.com/electrode-io/electrode/commit/52924d773ae217bc82abea42c12343022227e917)
+  - fix: handle new node.js ESM quirks ([#1723](https://github.com/electrode-io/electrode/pull/1723)) [commit](http://github.com/electrode-io/electrode/commit/d421006a20b0e8b6b01022b3a25378bc870079e9)
+
+- `packages/opt-archetype-check`
+
+  - new @xarc/opt- packages to replace the electrode-archetype-opt- ones ([#1725](https://github.com/electrode-io/electrode/pull/1725)) [commit](http://github.com/electrode-io/electrode/commit/a6dd2305a75cbad7faa5b677cbf11731dd4c1bca)
+
 # 8/14/2020
 
 - fix: subapp ssr initial load
