@@ -16,14 +16,14 @@ export interface IDevHttpServerOptions {
 export type HttpRequestEvent = "connect" | "response" | "timeout" | "close" | "finish";
 export type HttpServerEvent = "open" | "close" | "listening" | "error";
 
-export interface DevHttpServer {
+export interface IDevHttpServer {
   webpackDevHttpPlugin: RequestListener;
   start: () => void;
   addRequestListener: (event: HttpRequestEvent, handler: any) => void;
   addServerEventListener: (event: HttpServerEvent, hander: any) => void;
 }
 
-export const setup = function({ port, host }): DevHttpServer {
+export const setup = function({ port, host }): IDevHttpServer {
   const middleware = new Middleware({
     baseUrl: () => {
       return Url.format({
@@ -35,11 +35,14 @@ export const setup = function({ port, host }): DevHttpServer {
   });
   middleware.setup();
 
-  let requestEventHooks = {};
+  const requestEventHooks = {};
 
-  let webpackDevHttpPlugin: RequestListener = function(req: IncomingMessage, res: ServerResponse) {
-    Object.keys(requestEventHooks).map(event => {
-      req.addListener(event, event => requestEventHooks[event]({ ...event, ...req }));
+  const webpackDevHttpPlugin: RequestListener = function(
+    req: IncomingMessage,
+    res: ServerResponse
+  ) {
+    Object.keys(requestEventHooks).map(eventName => {
+      req.addListener(eventName, event => requestEventHooks[eventName]({ ...event, ...req }));
     });
     middleware.process(req, res, {
       skip: () => Promise.resolve(),
@@ -75,4 +78,3 @@ export const setup = function({ port, host }): DevHttpServer {
     addRequestListener: (event: HttpRequestEvent, cb: any) => (this.requestEventHooks[event] = cb)
   };
 };
-export default setup;
