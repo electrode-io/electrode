@@ -113,9 +113,6 @@
     "@xarc/run": "^1.0.2",
     "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
-    "electrode-archetype-opt-postcss": "../electrode-archetype-opt-postcss",
-    "electrode-archetype-opt-sass": "../electrode-archetype-opt-sass",
-    "electrode-archetype-opt-stylus": "../electrode-archetype-opt-stylus",
     "eslint": "^6.8.0",
     "eslint-config-walmart": "^2.2.1",
     "eslint-plugin-filenames": "^1.1.0",
@@ -144,8 +141,7 @@
       "subapp-util": "../subapp-util"
     },
     "devDependencies": {
-      "@xarc/app": "../xarc-app",
-      "electrode-archetype-opt-postcss": "../electrode-archetype-opt-postcss"
+      "@xarc/app": "../xarc-app"
     }
   },
   "nyc": {
