@@ -1,16 +1,15 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 export {};
 import { createReadStream } from "fs";
-import { createServer, IncomingMessage, request, RequestListener, ServerResponse } from "http";
+import { createServer, IncomingMessage, RequestListener, ServerResponse } from "http";
 import * as Url from "url";
 import { resolve } from "path";
-import { create } from "domain";
 const Middleware = require("./middleware");
 
-export interface IDevHttpServerOptions {
+export interface DevHttpServerOptions {
   port: number;
   host: string;
-  protocol: "http";
+  protocol?: string;
 }
 
 export type HttpRequestEvent = "connect" | "response" | "timeout" | "close" | "finish";
@@ -24,16 +23,21 @@ export interface DevHttpServer {
   addServerEventListener: (event: HttpServerEvent, hander: any) => void;
 }
 
-export const setup = function({ port, host }): DevHttpServer {
+export const setupHttpDevServer = function({
+  port,
+  host,
+  protocol = "http"
+}: DevHttpServerOptions): DevHttpServer {
   const middleware = new Middleware({
     baseUrl: () => {
       return Url.format({
         hostname: host || process.env.HOST || "localhost",
-        protocol: "http", // doesn't matter since it's a downstream call anyway..
+        protocol: protocol, // doesn't matter since it's a downstream call anyway..
         port: port || process.env.PORT
       });
     }
   });
+
   middleware.setup();
 
   const requestEventHooks = {};
@@ -78,9 +82,11 @@ export const setup = function({ port, host }): DevHttpServer {
     },
     stop: () => {
       server.close(function() {
+        /* eslint-disable no-console */
         console.log("Server closed!");
       });
     },
     addRequestListener: (event: HttpRequestEvent, cb: any) => (requestEventHooks[event] = cb)
   };
 };
+export const setup = setupHttpDevServer;

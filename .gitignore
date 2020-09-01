@@ -537,3 +537,4 @@ yarn.lock
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+packages/xarc-app-dev/.isomorphic-loader-config.dev.json

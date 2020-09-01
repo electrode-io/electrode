@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-export {};
-import { DevHttpServer, setup } from "./dev-http";
-
 /* eslint-disable global-require, no-console */
+
+import { DevHttpServer, setupHttpDevServer } from "./dev-http";
 
 const ck = require("chalker");
 const archetype = require("../../config/archetype")();
@@ -23,7 +22,7 @@ if (process.env.WEBPACK_DEV === undefined) {
 }
 
 if (http) {
-  const devHttpServer: DevHttpServer = setup({
+  const devHttpServer: DevHttpServer = setupHttpDevServer({
     host: archetype.webpack.devHostname,
     port: archetype.webpack.devPort
   });
