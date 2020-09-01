@@ -99,6 +99,18 @@ async function registerFastifyRoutesFromFile({ fastify, srcDir, routes, topOpts 
     });
 
     const handler = makeRouteHandler({ path, routeRenderer, routeOptions });
+    if (routeOptions.auth) {
+      const authStrategies = [].concat(routeOptions.auth).map(auth => fastify[auth]);
+      const userPreHandler = _.get(route, "settings.preHandler");
+
+      if (userPreHandler) {
+        route.settings.preHandler = fastify.auth([...authStrategies, route.settings.preHandler], {
+          run: "all"
+        });
+      } else {
+        _.set(route, "settings.preHandler", fastify.auth(authStrategies));
+      }
+    }
 
     getRoutePaths(route, path).forEach(pathObj => {
       _.each(pathObj, (method, xpath) => {
