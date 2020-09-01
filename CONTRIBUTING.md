@@ -13,7 +13,7 @@ This repo uses [Lerna] as a top level setup and [fyn] to manage Node Modules.
 Install these CLI tools globally: [xclap-cli] and [fyn]
 
 ```bash
-$ npm install -g xclap-cli fyn
+$ npm install -g xclap-cli @xarc/run-cli fyn
 $ fyn -V
 0.2.41
 ```
@@ -46,6 +46,16 @@ $ fun dev
 After running above, you should see a similar text as `Hapi.js server running at http://localhost:3000` in command line.
 
 And when you open the browser at `http://localhost:3000`, you should see a large Electrode icon with a few demonstration components.
+
+### **Important** Notes
+
+**Bootstrapping**
+
+- You must bootstrap the entire repo at the top dir at least once with `clap bootstrap`
+- Every time you pull down new changes or switch a branch, you should run bootstrap again.
+- Every time you make changes to a package that another depends on, you must bootstrap them again.
+- You can bootstrap a single package only: ie: `npx fynpo bootstrap --only @xarc/app-dev`
+  - This will ensure all its locally dependent packages are bootstrapped also.
 
 #### Test with `@xarc/create-app`
 
