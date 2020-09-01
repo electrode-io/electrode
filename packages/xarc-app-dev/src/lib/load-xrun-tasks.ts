@@ -28,6 +28,21 @@ const xsh = require("xsh");
 require("../typedef");
 
 /**
+ * Get the webpack's CLI command from @xarc/webpack
+ *
+ * @returns webpack's CLI command
+ */
+function webpackCmd() {
+  const exactCmd = Path.join(
+    Path.dirname(require.resolve("@xarc/webpack/package.json")),
+    "node_modules",
+    ".bin",
+    "webpack"
+  );
+  return Fs.existsSync(exactCmd) ? exactCmd : `webpack`;
+}
+
+/**
  * @param {object} xclap xclap task runner
  * @param {CreateXarcOptions} [userXarcOptions] user provided options to configure archetype generation
  * @returns {undefined} void
@@ -461,7 +476,7 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
         setProductionEnv();
         setWebpackProfile("browsercoverage");
         return exec(
-          `webpack`,
+          `${webpackCmd()}`,
           `--config`,
           quote(getWebpackStartConfig("webpack.config.browsercoverage.js")),
           `--colors`
@@ -506,7 +521,7 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
         task: function() {
           setWebpackProfile("static");
           return mkCmd(
-            `~$webpack --config`,
+            `~$${webpackCmd()} --config`,
             quote(getWebpackStartConfig("webpack.config.dev.static.js")),
             `--colors`,
             `--display-error-details`
@@ -539,7 +554,7 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
           babelEnvTargetsArr.map((name, index) =>
             xclap2.exec(
               [
-                `webpack --config`,
+                `${webpackCmd()} --config`,
                 quote(getWebpackStartConfig("webpack.config.js")),
                 `--colors --display-error-details`
               ],
@@ -1017,7 +1032,7 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
           task: () => {
             setWebpackProfile("dll");
             return exec(
-              `webpack --config`,
+              `${webpackCmd()} --config`,
               quote(getWebpackStartConfig("webpack.config.dll.js")),
               `--colors`,
               `--display-error-details`
