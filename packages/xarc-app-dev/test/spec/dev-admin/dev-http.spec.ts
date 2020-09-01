@@ -33,7 +33,7 @@ describe("dev-http", function() {
   });
 
   describe("setup", () => {
-    it("http server: if replyFile is called with a valid file then return 200", () => {
+    it.skip("http server: if replyFile is called with a valid file then return 200", () => {
       Axios.default.get("http://localhost:3003/").then(resp => {
         expect(resp.status).to.equal(200);
       });
