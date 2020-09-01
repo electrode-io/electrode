@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-export {};
 import { createReadStream } from "fs";
 import { createServer, IncomingMessage, RequestListener, ServerResponse } from "http";
 import * as Url from "url";
