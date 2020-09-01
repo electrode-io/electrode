@@ -16,14 +16,15 @@ export interface IDevHttpServerOptions {
 export type HttpRequestEvent = "connect" | "response" | "timeout" | "close" | "finish";
 export type HttpServerEvent = "open" | "close" | "listening" | "error";
 
-export interface IDevHttpServer {
+export interface DevHttpServer {
   webpackDevHttpPlugin: RequestListener;
   start: () => void;
+  stop?: () => void;
   addRequestListener: (event: HttpRequestEvent, handler: any) => void;
   addServerEventListener: (event: HttpServerEvent, hander: any) => void;
 }
 
-export const setup = function({ port, host }): IDevHttpServer {
+export const setup = function({ port, host }): DevHttpServer {
   const middleware = new Middleware({
     baseUrl: () => {
       return Url.format({
@@ -75,6 +76,11 @@ export const setup = function({ port, host }): IDevHttpServer {
     addServerEventListener: (event: HttpServerEvent, cb) => {
       server.addListener(event.toString(), cb);
     },
-    addRequestListener: (event: HttpRequestEvent, cb: any) => (this.requestEventHooks[event] = cb)
+    stop: () => {
+      server.close(function() {
+        console.log("Server closed!");
+      });
+    },
+    addRequestListener: (event: HttpRequestEvent, cb: any) => (requestEventHooks[event] = cb)
   };
 };

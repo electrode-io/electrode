@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 export {};
-import { IDevHttpServer, setup } from "./dev-http";
+import { DevHttpServer, setup } from "./dev-http";
 
 /* eslint-disable global-require, no-console */
 
@@ -23,7 +23,7 @@ if (process.env.WEBPACK_DEV === undefined) {
 }
 
 if (http) {
-  const devHttpServer: IDevHttpServer = setup({
+  const devHttpServer: DevHttpServer = setup({
     host: archetype.webpack.devHostname,
     port: archetype.webpack.devPort
   });

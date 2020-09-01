@@ -141,7 +141,11 @@
       "subapp-util": "../subapp-util"
     },
     "devDependencies": {
-      "@xarc/app": "../xarc-app"
+      "@xarc/app": "../xarc-app",
+      "electrode-archetype-opt-postcss": "../electrode-archetype-opt-postcss",
+      "@xarc/app-dev": "./",
+      "electrode-archetype-opt-sass": "../electrode-archetype-opt-sass",
+      "electrode-archetype-opt-stylus": "../electrode-archetype-opt-stylus"
     }
   },
   "nyc": {
