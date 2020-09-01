@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable global-require, no-console */
-
 import { DevHttpServer, setupHttpDevServer } from "./dev-http";
+import { createServer } from "http";
 
 const ck = require("chalker");
 const archetype = require("../../config/archetype")();
@@ -11,7 +11,6 @@ const electrodeServer = optionalRequire("electrode-server");
 const Hapi = optionalRequire("@hapi/hapi");
 const Koa = optionalRequire("koa");
 const express = optionalRequire("express");
-const http = optionalRequire("http");
 
 //
 // indicate that app is running in webpack dev mode
@@ -21,7 +20,7 @@ if (process.env.WEBPACK_DEV === undefined) {
   process.env.WEBPACK_DEV = "true";
 }
 
-if (http) {
+if (createServer) {
   const devHttpServer: DevHttpServer = setupHttpDevServer({
     host: archetype.webpack.devHostname,
     port: archetype.webpack.devPort
