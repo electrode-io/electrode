@@ -51,8 +51,7 @@
   },
   "fyn": {
     "dependencies": {
-      "@xarc/app": "../../packages/xarc-app",
-      "@xarc/fastify-server": "../../../fastify-server"
+      "@xarc/app": "../../packages/xarc-app"
     },
     "devDependencies": {
       "@xarc/app-dev": "../../packages/xarc-app-dev"
