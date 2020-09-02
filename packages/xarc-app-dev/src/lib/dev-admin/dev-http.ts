@@ -59,22 +59,29 @@ export const setupHttpDevServer = function({
       });
 
       if (next1 !== middleware.canContinue) {
+        //  return;
         return;
       }
 
       const devFakeRes = new FakeRes();
-      let next2 = await middleware.devMiddleware(req, devFakeRes, () =>
-        Promise.resolve(middleware.canContinue)
-      );
-
+      await middleware.devMiddleware(req, devFakeRes, () => {});
       if (devFakeRes.responded) {
         devFakeRes.httpRespond(res);
-      }
-      if (next2 !== middleware.canContinue) {
         return;
       }
-      await middleware.hotMiddleware(req, res, () => Promise.resolve());
+      try {
+        middleware.hotMiddleware(req, res, err => {
+          if (err) {
+            console.error("webpack hot middleware error", err);
+            res.writeHead(500, err.message);
+          }
+        });
+      } catch (e) {
+        console.error("caught webpack hot middleware exception", e);
+        res.writeHead(500, e.message);
+      }
     } catch (e) {
+      console.error("webpack dev middleware error", err);
       res.statusCode = 500;
       res.end(e.message);
     }
