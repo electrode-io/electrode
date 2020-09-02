@@ -5,8 +5,9 @@ import { getType } from "mime";
 import { createServer, Server } from "http";
 import * as Url from "url";
 import { resolve as pathResolve } from "path";
+
 const Middleware = require("./middleware");
-const FakeRes = require("fake-res");
+const FakeRes = require("../fake-res");
 export interface DevHttpServerOptions {
   port: number;
   host: string;
@@ -41,37 +42,40 @@ export const setupHttpDevServer = function({
   middleware.setup();
 
   const server: Server = createServer(async (req, res) => {
-    let next = false;
+    await middleware
+      .process(req, res, {
+        skip: () => Promise.resolve(),
+        replyHtml: html =>
+          res.writeHead(200, { "Content-Type": "text/html" }).end(`<!DOCTYPE html>${html}`),
+        replyError: err => res.writeHead(500, err) && res.end(),
+        replyNotFound: () => res.writeHead(404, "dev server express Not Found") && res.end(), //res.status(404).send("dev server express Not Found"),
+        replyStaticData: data => {
+          res.writeHead(200, { "Content-Type": getType(req.url) });
+          Readable.from(data).pipe(res);
+        },
+        replyFile: file =>
+          res.writeHead(200, { "Content-Type": getType(file) }) &&
+          createReadStream(pathResolve(file)).pipe(res)
+      })
+      .catch(err => {
+        /* eslint-disable no-console */
+        console.error("webpack dev middleware error", err);
+      });
 
-    await middleware.process(req, res, {
-      skip: () => (next = true),
-
-      replyHtml: html =>
-        res.writeHead(200, { "Content-Type": "text/html" }).end(`<!DOCTYPE html>${html}`),
-      replyError: err => res.writeHead(500, err) && res.end(),
-      replyNotFound: () => res.writeHead(404, "dev server express Not Found") && res.end(), //res.status(404).send("dev server express Not Found"),
-      replyStaticData: data => {
-        res.writeHead(200, { "Content-Type": getType(req.url) });
-        Readable.from(data).pipe(res);
-      },
-      replyFile: file =>
-        res.writeHead(200, { "Content-Type": getType(file) }) &&
-        createReadStream(pathResolve(file)).pipe(res)
-    });
-
-    if (!next || res.headersSent) {
+    if (res.headersSent) {
       return;
     }
     const devFakeRes = new FakeRes();
-    const hotFakeRes = new FakeRes();
+    await middleware.devMiddleware(req, devFakeRes, () => Promise.resolve());
 
-    middleware.devMiddleware(req, devFakeRes).then(() => {
-      if (devFakeRes.responded) devFakeRes.httpRespond(res);
-    });
-
-    middleware.hotMiddleware(req, hotFakeRes).then(() => {
-      if (!hotFakeRes.responded && hotFakeRes.responded) hotFakeRes.httpRespond(res);
-    });
+    if (devFakeRes.responded) {
+      devFakeRes.httpRespond(res);
+    } else {
+      middleware.hotMiddleware(req, res, () => {
+        if (!res.headersSent) res.writeHead(404);
+        res.end();
+      });
+    }
   });
 
   return {
