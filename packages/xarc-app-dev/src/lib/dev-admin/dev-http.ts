@@ -42,8 +42,8 @@ export const setupHttpDevServer = function({
   middleware.setup();
 
   const server: Server = createServer(async (req, res) => {
-    let shouldContinue = await middleware
-      .process(req, res, {
+    try {
+      let next1 = await middleware.process(req, res, {
         skip: () => Promise.resolve(true),
         replyHtml: html =>
           res.writeHead(200, { "Content-Type": "text/html" }).end(`<!DOCTYPE html>${html}`),
@@ -56,30 +56,23 @@ export const setupHttpDevServer = function({
         replyFile: file =>
           res.writeHead(200, { "Content-Type": getType(file) }) &&
           createReadStream(pathResolve(file)).pipe(res)
-      })
-      .catch(err => {
-        /* eslint-disable no-console */
-        console.error("webpack dev middleware error", err);
       });
+      if (next1 !== middleware.canContinue) {
+        return;
+      }
 
-    if (res.headersSent || !shouldContinue) {
-      return;
-    }
+      const devFakeRes = new FakeRes();
+      let next2 = await middleware.devMiddleware(req, devFakeRes, () =>
+        Promise.resolve(middleware.canContinue)
+      );
 
-    const devFakeRes = new FakeRes();
-    shouldContinue = middleware.devMiddleware(req, devFakeRes, () =>
-      Promise.resolve(middleware.canContinue)
-    );
-
-    if (devFakeRes.responded) {
-      devFakeRes.httpRespond(res);
-    } else if (shouldContinue) {
-      middleware.hotMiddleware(req, res, () => {
-        if (!res.headersSent) res.writeHead(404);
-        res.end();
-      });
-    } else {
-      //
+      if (next2 !== middleware.canContinue) {
+        return;
+      }
+      await middleware.hotMiddleware(req, res, () => Promise.resolve());
+    } catch (e) {
+      res.statusCode = 500;
+      res.end(e.message);
     }
   });
 
