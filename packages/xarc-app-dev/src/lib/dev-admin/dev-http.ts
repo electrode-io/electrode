@@ -59,7 +59,6 @@ export const setupHttpDevServer = function({
       });
 
       if (next1 !== middleware.canContinue) {
-        //  return;
         return;
       }
 
@@ -81,7 +80,7 @@ export const setupHttpDevServer = function({
         res.writeHead(500, e.message);
       }
     } catch (e) {
-      console.error("webpack dev middleware error", err);
+      console.error("webpack dev middleware error", e);
       res.statusCode = 500;
       res.end(e.message);
     }
