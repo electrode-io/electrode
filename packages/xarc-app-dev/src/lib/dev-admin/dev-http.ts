@@ -49,7 +49,7 @@ export const setupHttpDevServer = function({
       req.addListener(eventName, event => requestEventHooks[eventName]({ ...event, ...req }));
     });
     middleware.process(req, res, {
-      skip: () => Promise.resolve(),
+      skip: () => res.end(),
       replyHtml: html => {
         res
           .writeHead(200, {
@@ -68,7 +68,15 @@ export const setupHttpDevServer = function({
         });
         res.end(data);
       },
-      replyFile: file => createReadStream(resolve(file)).pipe(res)
+      replyFile: file => {
+        const type = require("mime").getType(req.url);
+        res.writeHead(200, {
+          "Content-Type": type
+        });
+        process.nextTick(() => {
+          createReadStream(resolve(file)).pipe(res);
+        });
+      }
     });
   };
   const server = createServer(webpackDevHttpPlugin);
