@@ -42,9 +42,9 @@ export const setupHttpDevServer = function({
   middleware.setup();
 
   const server: Server = createServer(async (req, res) => {
-    await middleware
+    let shouldContinue = await middleware
       .process(req, res, {
-        skip: () => Promise.resolve(),
+        skip: () => Promise.resolve(true),
         replyHtml: html =>
           res.writeHead(200, { "Content-Type": "text/html" }).end(`<!DOCTYPE html>${html}`),
         replyError: err => res.writeHead(500, err) && res.end(),
@@ -62,19 +62,24 @@ export const setupHttpDevServer = function({
         console.error("webpack dev middleware error", err);
       });
 
-    if (res.headersSent) {
+    if (res.headersSent || !shouldContinue) {
       return;
     }
+
     const devFakeRes = new FakeRes();
-    await middleware.devMiddleware(req, devFakeRes, () => Promise.resolve());
+    shouldContinue = middleware.devMiddleware(req, devFakeRes, () =>
+      Promise.resolve(middleware.canContinue)
+    );
 
     if (devFakeRes.responded) {
       devFakeRes.httpRespond(res);
-    } else {
+    } else if (shouldContinue) {
       middleware.hotMiddleware(req, res, () => {
         if (!res.headersSent) res.writeHead(404);
         res.end();
       });
+    } else {
+      //
     }
   });
 
