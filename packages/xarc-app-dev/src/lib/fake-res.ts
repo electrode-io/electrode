@@ -89,7 +89,7 @@ class FakeRes extends EventEmitter {
   }
 
   httpRespond(res) {
-    res.writeHeader(res.this._statusCode, this._headers);
+    res.writeHeader(res, this._statusCode, this._headers);
     res.statusCode = this._statusCode;
     res.send(this._content);
     return res;
