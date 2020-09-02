@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { createReadStream } from "fs";
-import { createServer, IncomingMessage, RequestListener, ServerResponse } from "http";
+import { Readable } from "stream";
+import { getType } from "mime";
+import { createServer, Server } from "http";
 import * as Url from "url";
-import { resolve } from "path";
+import { resolve as pathResolve } from "path";
 const Middleware = require("./middleware");
-
+const FakeRes = require("fake-res");
 export interface DevHttpServerOptions {
   port: number;
   host: string;
@@ -15,11 +17,10 @@ export type HttpRequestEvent = "connect" | "response" | "timeout" | "close" | "f
 export type HttpServerEvent = "open" | "close" | "listening" | "error";
 
 export interface DevHttpServer {
-  webpackDevHttpPlugin: RequestListener;
   start: () => void;
-  stop?: () => void;
-  addRequestListener: (event: HttpRequestEvent, handler: any) => void;
-  addServerEventListener: (event: HttpServerEvent, hander: any) => void;
+  stop: () => void;
+  httpServer?: Server;
+  addListener: (event: HttpServerEvent, hander: any) => void;
 }
 
 export const setupHttpDevServer = function({
@@ -39,53 +40,52 @@ export const setupHttpDevServer = function({
 
   middleware.setup();
 
-  const requestEventHooks = {};
+  const server: Server = createServer(async (req, res) => {
+    let next = false;
 
-  const webpackDevHttpPlugin: RequestListener = function(
-    req: IncomingMessage,
-    res: ServerResponse
-  ) {
-    Object.keys(requestEventHooks).map(eventName => {
-      req.addListener(eventName, event => requestEventHooks[eventName]({ ...event, ...req }));
-    });
-    middleware.process(req, res, {
-      skip: () => Promise.resolve(),
-      replyHtml: html => {
-        res
-          .writeHead(200, {
-            "Content-Type": "text/html"
-          })
-          .end(`<!DOCTYPE html>${html}`);
-      },
-      replyError: err => {
-        res.writeHead(500, err);
-      },
-      replyNotFound: () => res.writeHead(404, "dev server express Not Found"), //res.status(404).send("dev server express Not Found"),
+    await middleware.process(req, res, {
+      skip: () => (next = true),
+
+      replyHtml: html =>
+        res.writeHead(200, { "Content-Type": "text/html" }).end(`<!DOCTYPE html>${html}`),
+      replyError: err => res.writeHead(500, err) && res.end(),
+      replyNotFound: () => res.writeHead(404, "dev server express Not Found") && res.end(), //res.status(404).send("dev server express Not Found"),
       replyStaticData: data => {
-        const type = require("mime").getType(req.url);
-        res.writeHead(200, {
-          "Content-Type": type
-        });
-        res.end(data);
+        res.writeHead(200, { "Content-Type": getType(req.url) });
+        Readable.from(data).pipe(res);
       },
-      replyFile: file => createReadStream(resolve(file)).pipe(res)
+      replyFile: file =>
+        res.writeHead(200, { "Content-Type": getType(file) }) &&
+        createReadStream(pathResolve(file)).pipe(res)
     });
-  };
-  const server = createServer(webpackDevHttpPlugin);
+
+    if (!next || res.headersSent) {
+      return;
+    }
+    const devFakeRes = new FakeRes();
+    const hotFakeRes = new FakeRes();
+
+    middleware.devMiddleware(req, devFakeRes).then(() => {
+      if (devFakeRes.responded) devFakeRes.httpRespond(res);
+    });
+
+    middleware.hotMiddleware(req, hotFakeRes).then(() => {
+      if (!hotFakeRes.responded && hotFakeRes.responded) hotFakeRes.httpRespond(res);
+    });
+  });
 
   return {
     start: () => server.listen(port, host),
-    webpackDevHttpPlugin,
-    addServerEventListener: (event: HttpServerEvent, cb) => {
-      server.addListener(event.toString(), cb);
-    },
     stop: () => {
       server.close(function() {
         /* eslint-disable no-console */
         console.log("Server closed!");
       });
     },
-    addRequestListener: (event: HttpRequestEvent, cb: any) => (requestEventHooks[event] = cb)
+    addListener: (event: HttpServerEvent, cb) => {
+      server.addListener(event.toString(), cb);
+    },
+    httpServer: server
   };
 };
 export const setup = setupHttpDevServer;
