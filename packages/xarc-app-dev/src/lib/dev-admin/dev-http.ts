@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable no-console */
+
 import { createReadStream } from "fs";
 import { Readable } from "stream";
 import { getType } from "mime";
@@ -43,7 +45,7 @@ export const setupHttpDevServer = function({
 
   const server: Server = createServer(async (req, res) => {
     try {
-      let next1 = await middleware.process(req, res, {
+      const next1 = await middleware.process(req, res, {
         skip: () => middleware.canContinue,
         replyHtml: html =>
           res.writeHead(200, { "Content-Type": "text/html" }).end(`<!DOCTYPE html>${html}`),
@@ -58,12 +60,10 @@ export const setupHttpDevServer = function({
           createReadStream(pathResolve(file)).pipe(res)
       });
 
-      if (next1 !== middleware.canContinue) {
-        return;
-      }
+      if (next1 !== middleware.canContinue) return;
 
       const devFakeRes = new FakeRes();
-      await middleware.devMiddleware(req, devFakeRes, () => {});
+      await middleware.devMiddleware(req, devFakeRes, () => Promise.resolve());
       if (devFakeRes.responded) {
         devFakeRes.httpRespond(res);
         return;

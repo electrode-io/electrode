@@ -61,7 +61,7 @@ function register(server, options, next) {
               return reply.code(404);
             }
             const type = mime.getType(name);
-            const resp = reply.mresponse(data).code(200);
+            const resp = reply.response(data).code(200);
             if (type) {
               resp.header("Content-Type", type);
             }
