@@ -44,7 +44,7 @@ export const setupHttpDevServer = function({
   const server: Server = createServer(async (req, res) => {
     try {
       let next1 = await middleware.process(req, res, {
-        skip: () => Promise.resolve(true),
+        skip: () => middleware.canContinue,
         replyHtml: html =>
           res.writeHead(200, { "Content-Type": "text/html" }).end(`<!DOCTYPE html>${html}`),
         replyError: err => res.writeHead(500, err) && res.end(),
@@ -57,6 +57,7 @@ export const setupHttpDevServer = function({
           res.writeHead(200, { "Content-Type": getType(file) }) &&
           createReadStream(pathResolve(file)).pipe(res)
       });
+
       if (next1 !== middleware.canContinue) {
         return;
       }
@@ -66,6 +67,9 @@ export const setupHttpDevServer = function({
         Promise.resolve(middleware.canContinue)
       );
 
+      if (devFakeRes.responded) {
+        devFakeRes.httpRespond(res);
+      }
       if (next2 !== middleware.canContinue) {
         return;
       }
