@@ -87,6 +87,13 @@ class FakeRes extends EventEmitter {
     res.body = this._content;
     return res;
   }
+
+  httpRespond(res) {
+    res.writeHeader(this._statusCode, this._headers);
+    res.statusCode = this._statusCode;
+    res.end(this._content);
+    return res;
+  }
 }
 
 module.exports = FakeRes;

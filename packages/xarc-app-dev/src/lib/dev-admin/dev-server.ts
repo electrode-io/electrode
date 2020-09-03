@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable global-require, no-console */
-import { DevHttpServer, setupHttpDevServer } from "./dev-http";
+import { setupHttpDevServer } from "./dev-http";
 import { createServer } from "http";
 
 const ck = require("chalker");
@@ -21,19 +21,20 @@ if (process.env.WEBPACK_DEV === undefined) {
 }
 
 if (createServer) {
-  const devHttpServer: DevHttpServer = setupHttpDevServer({
+  const devHttpServer = setupHttpDevServer({
     host: archetype.webpack.devHostname,
     port: archetype.webpack.devPort
   });
-  devHttpServer.start();
-  devHttpServer.addServerEventListener("error", err => {
+  devHttpServer.addListener("error", err => {
     console.error(ck`<red>HTTP webpack dev server having an error</>${err}`);
   });
-  devHttpServer.addServerEventListener("listening", e => {
+
+  devHttpServer.addListener("listening", () =>
     console.log(
       ck`<green>Node.js webpack dev server listening on port ${archetype.webpack.devPort}</>`
-    );
-  });
+    )
+  );
+  devHttpServer.start();
 } else if (fastifyServer) {
   fastifyServer({
     electrode: {
