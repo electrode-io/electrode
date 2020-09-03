@@ -1144,7 +1144,7 @@ describe("hapi 17 electrode-react-webapp", () => {
   });
 
   it("should add a nonce value as provided by a function in the config", () => {
-    configOptions.cspNonceValue = function(request, type) {
+    configOptions.cspNonceValue = function (request, type) {
       return `==${type}`;
     };
 
@@ -1239,7 +1239,7 @@ describe("hapi 17 electrode-react-webapp", () => {
 
   it("should inject critical css with a nonce value provided by a function", () => {
     configOptions.criticalCSS = "test/data/critical.css";
-    configOptions.cspNonceValue = function(request, type) {
+    configOptions.cspNonceValue = function (request, type) {
       return `==${type}`;
     };
 
@@ -1664,6 +1664,7 @@ describe("hapi 17 electrode-react-webapp", () => {
           .inject({
             method: "GET",
             url: "/"
+
           })
           .then(() => {
             stdoutIntercept.restore();
@@ -1684,7 +1685,7 @@ describe("hapi 17 electrode-react-webapp", () => {
           .then(res => {
             expect(res.result).includes(
               `<meta data-react-helmet="true" name="description" content="Nested component"/>` +
-                `<title data-react-helmet="true">Nested Title</title>`
+              `<title data-react-helmet="true">Nested Title</title>`
             );
             expect(res.result)
               .includes(`window._config.ui = {"webappPrefix":""};\n</script><script>test-1 script;</script>
@@ -1698,7 +1699,7 @@ describe("hapi 17 electrode-react-webapp", () => {
       });
   });
 
-  describe("with webpackDev", function() {
+  describe("with webpackDev", function () {
     it("should skip if webpack dev is not valid", () => {
       return electrodeServer(config).then(server => {
         server.ext({
