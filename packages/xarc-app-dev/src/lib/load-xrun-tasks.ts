@@ -33,14 +33,11 @@ require("../typedef");
  * @returns webpack's CLI command
  */
 function webpackCmd() {
-  const cmd = "webpack-cli";
-  const exactCmd = Path.join(
-    Path.dirname(require.resolve("@xarc/webpack/package.json")),
-    "node_modules",
-    ".bin",
-    cmd
-  );
-  return Fs.existsSync(exactCmd) ? exactCmd : cmd;
+  const cmd = "xarc-webpack-cli";
+  // This command comes from my dependency @xarc/webpack, so the package manager should either
+  // installed it in my node_modules /.bin or hoisted it to the top level node_modules/.bin
+  const exactCmd = Path.join(__dirname, "..", "node_modules", ".bin", cmd);
+  return Fs.existsSync(exactCmd) ? Path.relative(process.cwd(), exactCmd) : cmd;
 }
 
 /**
