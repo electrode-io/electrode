@@ -8,6 +8,9 @@
     "type": "git",
     "url": "https://github.com/electrode-io/electrode.git"
   },
+  "bin": {
+    "xarc-webpack-cli": "./bin/xarc-webpack-cli.js"
+  },
   "bugs": {
     "url": "https://github.com/electrode-io/electrode/issues"
   },
@@ -21,6 +24,7 @@
     "docs": "xrun xarc/docs"
   },
   "files": [
+    "bin",
     "dist",
     "lib",
     "src"

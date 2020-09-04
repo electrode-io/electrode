@@ -12,6 +12,15 @@ export { initWebpackConfigComposer, generateConfig as compose } from "./util/gen
 //
 export const env = process.env.ELECTRODE_WEBPACK_PROFILE || "production";
 export const options = require(`./options/${env}`);
+
+/**
+ * The copy of webpack module that's installed for @xarc/webpack's use with its configs.
+ *
+ * If you need reference to webpack, say to get a plugin, you should use this copy instead
+ * of getting it with `require("webpack")`.
+ */
+export const webpack = require("webpack");
+
 const genPartials = require("./partials");
 
 const ConfigPartial = require("webpack-config-composer/lib/partial");
