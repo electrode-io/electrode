@@ -37,12 +37,6 @@
     "node": ">= 6",
     "npm": ">= 3"
   },
-  "fyn": {
-    "optionalDependencies": {
-      "electrode-archetype-opt-inferno": "../electrode-archetype-opt-inferno",
-      "electrode-archetype-opt-react": "../electrode-archetype-opt-react"
-    }
-  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"

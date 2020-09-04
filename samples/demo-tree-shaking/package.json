@@ -60,9 +60,9 @@
     "react-router-config": "^5.1.1"
   },
   "devDependencies": {
-    "electrode-archetype-opt-eslint": "../../packages/electrode-archetype-opt-eslint",
-    "electrode-archetype-opt-karma": "../../packages/electrode-archetype-opt-karma",
-    "electrode-archetype-opt-mocha": "../../packages/electrode-archetype-opt-mocha",
+    "@xarc/opt-eslint": "*",
+    "@xarc/opt-karma": "*",
+    "@xarc/opt-mocha": "*",
     "electrode-archetype-opt-phantomjs": "../../packages/electrode-archetype-opt-phantomjs",
     "@xarc/app-dev": "^7.0.5"
   },
@@ -77,9 +77,9 @@
     },
     "devDependencies": {
       "@xarc/app-dev": "../../packages/xarc-app-dev",
-      "electrode-archetype-opt-eslint": "../../packages/electrode-archetype-opt-eslint",
-      "electrode-archetype-opt-karma": "../../packages/electrode-archetype-opt-karma",
-      "electrode-archetype-opt-phantomjs": "../../packages/electrode-archetype-opt-phantomjs"
+      "@xarc/opt-eslint": "../../packages/xarc-opt-eslint",
+      "@xarc/opt-karma": "../../packages/xarc-opt-karma",
+      "@xarc/opt-mocha": "../../packages/xarc-opt-mocha"
     }
   }
 }
