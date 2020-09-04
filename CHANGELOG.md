@@ -1,3 +1,23 @@
+# 9/4/2020
+
+- fix: tweak webpack-cli to not break yarn workspace hoisting
+
+## Packages
+
+- `@xarc/app@8.1.13` `(8.1.12 => 8.1.13)`
+- `@xarc/app-dev@8.1.13` `(8.1.12 => 8.1.13)`
+- `@xarc/webpack@8.1.4` `(8.1.3 => 8.1.4)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix: tweak webpack-cli to not break yarn workspace hoisting ([#1734](https://github.com/electrode-io/electrode/pull/1734)) [commit](http://github.com/electrode-io/electrode/commit/d70852e47afa99673a36bc3eadcf9e9ef71477fb)
+
+- `packages/xarc-webpack`
+
+  - fix: tweak webpack-cli to not break yarn workspace hoisting ([#1734](https://github.com/electrode-io/electrode/pull/1734)) [commit](http://github.com/electrode-io/electrode/commit/d70852e47afa99673a36bc3eadcf9e9ef71477fb)
+
 # 9/3/2020
 
 - fix: webpack-cli should be dep in @xarc/webpack
