@@ -26,7 +26,10 @@ const DLL_PATHS = loadElectrodeDll().map(x => require.resolve(x));
 function loadWebpackConfig() {
   if (!process.env.KARMA_RUN_TYPE) {
     process.env.KARMA_RUN_TYPE = "base";
-    return require(customCheck.getWebpackStartConfig("@xarc/webpack/lib/webpack.config.test"));
+    return require(customCheck.getWebpackStartConfig(
+      "@xarc/webpack/lib/webpack.config.test",
+      false
+    ));
   }
 
   return {};

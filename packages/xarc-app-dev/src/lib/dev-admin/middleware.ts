@@ -98,7 +98,7 @@ class Middleware {
   setup() {
     const options = this._options;
 
-    const config = require(getWebpackStartConfig("webpack.config.dev.js"));
+    const config = require(getWebpackStartConfig("webpack.config.dev.js", false));
 
     this._hmrPath = controlPaths.hmr;
 

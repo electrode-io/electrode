@@ -11,15 +11,20 @@ function useAppWebpackConfig() {
   return process.env.USE_APP_WEBPACK_CONFIG === "true";
 }
 
-function getWebpackStartConfig(defaultFile) {
+function getWebpackStartConfig(defaultFile: string, relativeToCwd = true) {
   const customFilePath = Path.resolve("webpack.config.js");
   const canUseAppProfile = useAppWebpackConfig() && Fs.existsSync(customFilePath);
 
-  if (canUseAppProfile) {
-    return customFilePath;
-  }
+  const configFilePath = canUseAppProfile
+    ? customFilePath
+    : Path.join(archetype.config.webpack, defaultFile || "webpack.config.js");
 
-  return Path.join(archetype.config.webpack, defaultFile || "webpack.config.js");
+  if (relativeToCwd && Path.isAbsolute(configFilePath)) {
+    const cwdRel = Path.relative(process.cwd(), configFilePath);
+    return cwdRel.length < configFilePath.length ? cwdRel : configFilePath;
+  } else {
+    return configFilePath;
+  }
 }
 
 function setWebpackProfile(profile) {
