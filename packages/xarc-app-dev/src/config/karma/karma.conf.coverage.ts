@@ -13,7 +13,8 @@ const loadUserConfig = require("./util/load-user-config");
 const Path = require("path");
 const customCheck = require("@xarc/webpack/lib/util/custom-check");
 const webpackCovCfg = require(customCheck.getWebpackStartConfig(
-  "../webpack/webpack.config.coverage"
+  "../webpack/webpack.config.coverage",
+  false
 ));
 
 module.exports = function(config) {
