@@ -63,7 +63,7 @@
     "@xarc/opt-less": "../../packages/xarc-opt-less",
     "@xarc/opt-postcss": "^2.0.0",
     "@xarc/opt-stylus": "../../packages/xarc-opt-stylus",
-    "electrode-archetype-opt-jest": "^26.0.0",
+    "@xarc/opt-jest": "^1.0.0",
     "@xarc/opt-sass": "../../packages/xarc-opt-sass",
     "webpack-hook-plugin": "^1.0.7"
   },
@@ -80,7 +80,7 @@
       "@xarc/app-dev": "../../packages/xarc-app-dev",
       "@xarc/opt-postcss": "../../packages/xarc-opt-postcss",
       "@xarc/opt-stylus": "../../packages/xarc-opt-stylus",
-      "electrode-archetype-opt-jest": "../../packages/electrode-archetype-opt-jest"
+      "@xarc/opt-jest": "../../packages/xarc-opt-jest"
     }
   },
   "optionalDependencies": {}
