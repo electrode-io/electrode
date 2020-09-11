@@ -50,7 +50,7 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
   // lazy require modules that have effects so as to permit customization
   // from userspace, i.e. `userOptions`
   const archetype = getArchetype(xarcOptions);
-  const features = xarcOptions.enableFeatures ? require("./features") : undefined;
+  const features = xarcOptions.enableFeatures ? require("./features").displayFeatures : undefined;
 
   const assertNoGulpExecution = () => {
     const cli = process.argv[1];
