@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-export {};
+import { AppDevArchetype, defaultArchetypeOptions } from "./app-dev-archetype";
 
 /* eslint-disable object-shorthand, max-statements, no-magic-numbers */
 /* eslint-disable no-console, no-process-exit, global-require, no-param-reassign */
@@ -45,10 +45,10 @@ function webpackCmd() {
  * @param {CreateXarcOptions} [userXarcOptions] user provided options to configure archetype generation
  * @returns {undefined} void
  */
-module.exports = function loadArchetype(xclap, userXarcOptions) {
-  const xarcOptions = getXarcOptions(userXarcOptions);
-  // lazy require modules that have effects so as to permit customization
-  // from userspace, i.e. `userOptions`
+module.exports = function loadArchetype(xclap, devArchetype: AppDevArchetype) {
+  const xarcOptions = getXarcOptions({ ...defaultArchetypeOptions, ...devArchetype });
+  // // lazy require modules that have effects so as to permit customization
+  // // from userspace, i.e. `userOptions`
   const archetype = getArchetype(xarcOptions);
   const features = xarcOptions.enableFeatures ? require("./features").displayFeatures : undefined;
 
