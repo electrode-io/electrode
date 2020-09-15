@@ -2,6 +2,9 @@
 
 export { initWebpackConfigComposer, generateConfig as compose } from "./util/generate-config";
 
+export { JsonpScriptSrcPlugin } from "./plugins/jsonp-script-src-plugin";
+export { SubAppWebpackPlugin } from "./plugins/subapp-plugin";
+
 //
 // When xrun execute a build task that involves invoking webpack it
 // will check if user wants webpack to start with their webpack.config.js
