@@ -26,4 +26,21 @@ describe('sort-deps', function () {
             });
         })
     });
+
+    it("skip undefined sections", async () => {
+        await new Promise(resolve => {
+
+            const pkg = {
+                dependencies: { "a": 1, "b": 1 }
+            };
+            sortDeps(pkg);
+            const sortedDeps = pkg.dependencies;
+            const sortedStr = Object.keys(sortedDeps).join("\n");
+            const qaSortedStr = execSync(`echo '${sortedStr}' > temp.txt && cat temp.txt |sort`).toString();
+            expect(sortedStr.trim()).to.equal(qaSortedStr.trim());
+            unlink('temp.txt', () => {
+                resolve();
+            });
+        });
+    });
 })

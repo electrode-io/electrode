@@ -1,1 +1,2 @@
-require("@xarc/module-dev")();
+import { loadTasks } from "@xarc/module-dev";
+loadTasks();

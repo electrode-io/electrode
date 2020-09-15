@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "prepublishOnly": "webpack",
-    "test": "xrun xarc/test-only",
-    "coverage": "xrun xarc/test-cov"
+    "test": "mocha",
+    "coverage": "nyc npm test"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
@@ -37,8 +37,6 @@
     "@babel/preset-env": "^7.6.2",
     "@types/chai": "^4.2.11",
     "@types/mocha": "^7.0.2",
-    "@types/sinon": "^9.0.0",
-    "@types/sinon-chai": "^3.2.4",
     "@xarc/module-dev": "^2.2.4",
     "babel-loader": "^8.0.6",
     "chai": "^4.2.0",
@@ -54,15 +52,13 @@
     "webpack": "^4.41.0",
     "webpack-bundle-analyzer": "^3.5.2",
     "webpack-cli": "^3.3.9",
-    "xclap": "^0.2.51"
+    "xclap": "^0.2.51",
+    "run-verify": "^1.2.5"
   },
   "prettier": {
     "printWidth": 100,
     "arrowParens": "avoid",
     "trailingComma": "none"
-  },
-  "dependencies": {
-    "chai": "^4.2.0"
   },
   "mocha": {
     "require": [
@@ -78,6 +74,9 @@
       "text",
       "text-summary"
     ],
+    "include": [
+      "src"
+    ],
     "exclude": [
       "*clap.js",
       "*clap.ts",
@@ -87,7 +86,9 @@
       "gulpfile.js",
       "test",
       "xrun*.js",
-      "xrun*.ts"
+      "xrun*.ts",
+      "template",
+      "bin"
     ],
     "check-coverage": true,
     "statements": 100,
@@ -95,10 +96,5 @@
     "functions": 100,
     "lines": 100,
     "cache": true
-  },
-  "@xarc/module-dev": {
-    "features": [
-      "mocha"
-    ]
   }
 }
