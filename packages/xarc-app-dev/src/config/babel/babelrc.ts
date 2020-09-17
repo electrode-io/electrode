@@ -49,9 +49,10 @@ const isTest = (BABEL_ENV || NODE_ENV) === "test";
 const isNodeTarget = XARC_BABEL_TARGET === "node";
 
 const basePlugins = [
-  ...(!isNodeTarget && enableDynamicImport
-    ? ["@babel/plugin-syntax-dynamic-import", "@loadable/babel-plugin"]
-    : [false]),
+  !isNodeTarget && enableDynamicImport && "@babel/plugin-syntax-dynamic-import",
+  // add plugin for loadable component
+  // Note: this is needed for server side (node.js) also.
+  enableDynamicImport && "@loadable/babel-plugin",
   // allow decorators on class and method
   // Note: This must go before @babel/plugin-proposal-class-properties
   (enableTypeScript || proposalDecorators) && [
@@ -109,28 +110,28 @@ const plugins = basePlugins.concat(
       ]
     ],
   // css module support
-  !isNodeTarget &&
-    enableCssModule && [
-      [
-        "babel-plugin-react-css-modules",
-        {
-          context: "./src",
-          generateScopedName: `${isProduction ? "" : "[name]__[local]___"}[hash:base64:5]`,
-          filetypes: {
-            ".scss": {
-              syntax: "postcss-scss",
-              plugins: ["postcss-nested"]
-            },
-            ".styl": {
-              syntax: "sugarss"
-            },
-            ".less": {
-              syntax: "postcss-less"
-            }
+  // Note: this is needed for server side (node.js) also.
+  enableCssModule && [
+    [
+      "babel-plugin-react-css-modules",
+      {
+        context: "./src",
+        generateScopedName: `${isProduction ? "" : "[name]__[local]___"}[hash:base64:5]`,
+        filetypes: {
+          ".scss": {
+            syntax: "postcss-scss",
+            plugins: ["postcss-nested"]
+          },
+          ".styl": {
+            syntax: "sugarss"
+          },
+          ".less": {
+            syntax: "postcss-less"
           }
         }
-      ]
-    ],
+      }
+    ]
+  ],
   !isNodeTarget &&
     enableKarmaCov && [
       getPluginFrom(["@xarc/opt-karma", "electrode-archetype-opt-karma"], "babel-plugin-istanbul")
