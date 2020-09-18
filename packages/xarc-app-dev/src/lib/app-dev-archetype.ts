@@ -1,5 +1,5 @@
 import constants from "@xarc/app/lib/constants";
-import { AutomatedBrowsers } from "karma";
+import { PathLike } from "fs";
 
 export interface AppDevArchetype {
   config?: ArchetypeOptions;
@@ -9,6 +9,11 @@ export interface AppDevArchetype {
   appMode?: AppMode;
   prodDir?: string;
   eTmpDir?: string;
+  electrodePackages?: [];
+  electrodePackagesDev?: [];
+  enableFeatures?: boolean;
+  assertNoGulpExecution?: boolean;
+  assertDevArchetypePresent?: boolean;
 }
 
 export interface BabelEnvTargets {
@@ -66,17 +71,28 @@ export interface BabelOptions {
   target?: string;
   extendLoader?: {};
 }
+export type AutomatedBrowsers =
+  | "Chrome"
+  | "ChromeCanary"
+  | "ChromeHeadless"
+  | "PhantomJS"
+  | "Firefox"
+  | "Opera"
+  | "IE"
+  | "Safari";
 export interface KarmaOptions {
   browser: AutomatedBrowsers;
 }
 
 export interface ArchetypeOptions {
-  flow: boolean;
-  eslint: boolean;
-  karma: boolean;
-  jest: boolean;
-  mocha: boolean;
-  reactLib: string;
+  flow?: boolean;
+  eslint?: boolean;
+  karma?: boolean;
+  jest?: boolean;
+  mocha?: boolean;
+  reactLib?: string;
+  typescript?: boolean;
+  configPaths?: PathLike[];
 }
 export interface AppMode {
   lib: {
@@ -108,7 +124,8 @@ export const defaultArchetypeOptions: ArchetypeOptions = {
   karma: false,
   jest: true,
   mocha: false,
-  reactLib: "react"
+  reactLib: "react",
+  typescript: false
 };
 export const defaultKarmaOptions: KarmaOptions = {
   browser: "Chrome"
@@ -157,11 +174,16 @@ export const defaultBabelConfig: BabelOptions = {
 
 export const getDefaultAppDevArchetype = () => {};
 export const defaultAppDevArchetype: AppDevArchetype = {
-  prodDir: constants.PROD_DIR,
-  eTmpDir: constants.ETMP_DIR,
+  prodDir: ".prod",
+  eTmpDir: ".etmp",
   config: defaultArchetypeOptions,
   webpack: defaultWebpackConfig,
   babel: defaultBabelConfig,
   karma: defaultKarmaOptions,
-  appMode: defaultAppMode
+  appMode: defaultAppMode,
+  electrodePackages: [],
+  electrodePackagesDev: [],
+  enableFeatures: true,
+  assertNoGulpExecution: true,
+  assertDevArchetypePresent: true
 };

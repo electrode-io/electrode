@@ -45,13 +45,13 @@ function webpackCmd() {
  * @param {CreateXarcOptions} [userXarcOptions] user provided options to configure archetype generation
  * @returns {undefined} void
  */
-module.exports = function loadArchetype(xclap, devArchetype: AppDevArchetype) {
-  const xarcOptions = getXarcOptions({ ...defaultArchetypeOptions, ...devArchetype });
+module.exports = function loadArchetype(xclap, userXarcOptions: AppDevArchetype) {
   // // lazy require modules that have effects so as to permit customization
   // // from userspace, i.e. `userOptions`
-  const archetype = getArchetype(xarcOptions);
-  const features = xarcOptions.enableFeatures ? require("./features").displayFeatures : undefined;
+  const userOptionWithDefaults = { ...defaultArchetypeOptions, userXarcOptions };
 
+  const archetype = getArchetype({ ...defaultArchetypeOptions, userXarcOptions });
+  const features = xarcOptions.enableFeatures ? require("./features").displayFeatures : undefined;
   const assertNoGulpExecution = () => {
     const cli = process.argv[1];
     if (cli && cli.indexOf("gulp") >= 0) {

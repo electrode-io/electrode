@@ -21,7 +21,7 @@ module.exports = function getDevArchetype(createXarcOptions) {
 
   const xarcOptions = getXarcOptions(createXarcOptions);
   const defaultArchetypeConfig = getDefaultArchetypeOptions(xarcOptions);
-  const userConfig = defaultArchetypeConfig.options;
+  const userConfig = { ...defaultArchetypeConfig.options, ...createXarcOptions.options };
 
   const webpack = require("./env-webpack")();
   const babel = require("./env-babel")();
@@ -59,16 +59,13 @@ module.exports = function getDevArchetype(createXarcOptions) {
   };
 
   const { options } = userConfig;
-
-  const typeScriptOption =
-    options.typescript === false
-      ? {
-          babel: { enableTypeScript: options.typescript }
-        }
-      : {};
+  debugger;
+  const typescriptEnabled = options.typescript === true || babel.enableTypesCript;
 
   const archetypeConfig = Object.assign(
-    _.merge(config, typeScriptOption),
+    _.merge(config, {
+      babel: { enableTypeScript: typescriptEnabled }
+    }),
     xenvConfig(topConfigSpec, _.pick(userConfig, Object.keys(topConfigSpec)), { merge })
   );
 
