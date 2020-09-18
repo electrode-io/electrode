@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires, max-statements */
 
+import { XarcUserConfigs, defaultUserConfig } from "../xarc-user-configs";
 const Path = require("path");
 const { merge } = require("lodash");
 const { getXarcOptions, getMyPkg } = require("../lib/utils");
 const constants = require("./constants");
-
 const _ = require("lodash");
 const xenvConfig = require("xenv-config");
 const makeAppMode = require("@xarc/app/lib/app-mode");
@@ -12,16 +12,17 @@ const { getDefaultArchetypeOptions } = require("./options");
 
 let cachedArchetype = null;
 
-module.exports = function getDevArchetype(createXarcOptions) {
+module.exports = function getDevArchetype(xarcUserConfig: XarcUserConfigs = {}) {
+  xarcUserConfig = { ...defaultUserConfig, ...xarcUserConfig };
   if (cachedArchetype) {
     cachedArchetype._fromCache = true;
     // maintained for backwards compatibility
     return cachedArchetype;
   }
 
-  const xarcOptions = getXarcOptions(createXarcOptions);
+  const xarcOptions = getXarcOptions(xarcUserConfig.options);
   const defaultArchetypeConfig = getDefaultArchetypeOptions(xarcOptions);
-  const userConfig = { ...defaultArchetypeConfig.options, ...createXarcOptions.options };
+  const userConfig = { ...defaultArchetypeConfig.options, ...xarcUserConfig.options };
 
   const webpack = require("./env-webpack")();
   const babel = require("./env-babel")();
@@ -59,7 +60,6 @@ module.exports = function getDevArchetype(createXarcOptions) {
   };
 
   const { options } = userConfig;
-  debugger;
   const typescriptEnabled = options.typescript === true || babel.enableTypesCript;
 
   const archetypeConfig = Object.assign(

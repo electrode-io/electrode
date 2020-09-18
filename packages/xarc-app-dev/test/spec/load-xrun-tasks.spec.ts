@@ -1,6 +1,6 @@
 import { before, beforeEach, describe, it, after, afterEach } from "mocha";
 import { expect } from "chai";
-import { AppDevArchetype, defaultArchetypeOptions } from "../../src/lib/app-dev-archetype";
+import { CreateXarcOptions, XarcUserConfigs } from "../../src/xarc-user-configs";
 const {
   getOptArchetypeRequire,
   formUrl,
@@ -8,6 +8,7 @@ const {
   checkUserBabelRc,
   getMyPkg
 } = require("../../src/lib/utils");
+
 const getDevArchetype = require("../../src/config/archetype");
 const {
   checkOptArchetypeInAppDep,
@@ -16,21 +17,30 @@ const {
 } = require("../../src/config/options");
 
 describe("load-xrun-tasks", () => {
-  it("calls getXarcOptions to combine defaultCreateOptions and UserXarcOptions", () => {
+  it("calls getXarcOptions to determined package options", () => {
     const createXarcOptions = getXarcOptions({
-      webpack: {
-        devPort: 3000
-      },
-      electrodePackages: ["@xarc/opt-karma"]
+      electrodePackages: ["@xarc/opt-karma"],
+      enableFeatures: false
     });
-    expect(createXarcOptions.webpack.devPort).to.equal(3000);
     expect(createXarcOptions.electrodePackages).to.include("@xarc/opt-karma");
+    expect(createXarcOptions.enableFeatures).to.be.false;
+
+    expect(getXarcOptions({}).enableFeatures).to.be.true;
+  });
+
+  it("calls getDefaultArchetypeOptions to determine which packaes to use", () => {
+    const result = getDefaultArchetypeOptions(
+      getXarcOptions({
+        electrodePackages: ["@xarc/opt-mocha"]
+      })
+    );
+    console.log(result);
+    expect(result.options.opions.mocha).to.equal(true);
   });
 
   it("user can specifify optional features in electrode packages", () => {
-    debugger;
     const config = getDevArchetype({
-      enableFeature: true,
+      enableFeatures: true,
       electrodePackages: ["@xarc/opt-sass"],
       options: {
         typescript: true
@@ -38,6 +48,6 @@ describe("load-xrun-tasks", () => {
     });
     console.log(config);
     expect(config.pkg.packageJson).to.exist;
-    expect(config.options.sass).to.equal(true);
+    expect(config.options.sass).to.equal(false);
   });
 });
