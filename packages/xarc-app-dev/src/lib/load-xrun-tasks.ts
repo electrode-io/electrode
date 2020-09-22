@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { AppDevArchetype, defaultArchetypeOptions } from "./app-dev-archetype";
+import { XarcUserConfigs } from "../xarc-user-configs";
 
 /* eslint-disable object-shorthand, max-statements, no-magic-numbers */
 /* eslint-disable no-console, no-process-exit, global-require, no-param-reassign */
@@ -45,13 +45,14 @@ function webpackCmd() {
  * @param {CreateXarcOptions} [userXarcOptions] user provided options to configure archetype generation
  * @returns {undefined} void
  */
-module.exports = function loadArchetype(xclap, userXarcOptions: AppDevArchetype) {
+module.exports = function loadArchetype(xclap, xarcUserConfig: XarcUserConfigs) {
   // // lazy require modules that have effects so as to permit customization
   // // from userspace, i.e. `userOptions`
-  const userOptionWithDefaults = { ...defaultArchetypeOptions, userXarcOptions };
 
-  const archetype = getArchetype({ ...defaultArchetypeOptions, userXarcOptions });
-  const features = xarcOptions.enableFeatures ? require("./features").displayFeatures : undefined;
+  const archetype = getArchetype(xarcUserConfig);
+  const features = xarcUserConfig.enableFeatures
+    ? require("./features").displayFeatures
+    : undefined;
   const assertNoGulpExecution = () => {
     const cli = process.argv[1];
     if (cli && cli.indexOf("gulp") >= 0) {

@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires, max-statements */
 
-import { XarcUserConfigs, defaultUserConfig } from "../xarc-user-configs";
+import { XarcUserConfigs, CreateXarcOptions, defaultCreateXarcOptions } from "../xarc-user-configs";
+
+const getUserConfig = require("./user-config");
 const Path = require("path");
 const { merge } = require("lodash");
 const { getXarcOptions, getMyPkg } = require("../lib/utils");
@@ -13,16 +15,22 @@ const { getDefaultArchetypeOptions } = require("./options");
 let cachedArchetype = null;
 
 module.exports = function getDevArchetype(xarcUserConfig: XarcUserConfigs = {}) {
-  xarcUserConfig = { ...defaultUserConfig, ...xarcUserConfig };
+  syncWebpackProcessEnvVars(xarcUserConfig);
+  syncAdditioanlProcessEnv(xarcUserConfig);
+  mergeOptionalCheckIntoConfig(xarcUserConfig);
+
+  const xarcOptions = { ...defaultCreateXarcOptions, ...xarcUserConfig };
+
   if (cachedArchetype) {
     cachedArchetype._fromCache = true;
     // maintained for backwards compatibility
     return cachedArchetype;
   }
-
-  const xarcOptions = getXarcOptions(xarcUserConfig.options);
   const defaultArchetypeConfig = getDefaultArchetypeOptions(xarcOptions);
-  const userConfig = { ...defaultArchetypeConfig.options, ...xarcUserConfig.options };
+  const userConfig: CreateXarcOptions = {
+    ...defaultArchetypeConfig.options,
+    ...xarcOptions.options
+  };
 
   const webpack = require("./env-webpack")();
   const babel = require("./env-babel")();
@@ -39,7 +47,7 @@ module.exports = function getDevArchetype(xarcUserConfig: XarcUserConfigs = {}) 
     devRequire,
     webpack,
     karma,
-    jest: Object.assign({}, userConfig.jest),
+    jest: Object.assign({}, userConfig.options.jest),
     babel,
     config: {
       babel: `${configDir}/babel`,
@@ -52,7 +60,7 @@ module.exports = function getDevArchetype(xarcUserConfig: XarcUserConfigs = {}) 
     },
     prodDir: constants.PROD_DIR,
     eTmpDir: constants.ETMP_DIR,
-    AppMode: makeAppMode(constants.PROD_DIR, userConfig.reactLib)
+    AppMode: makeAppMode(constants.PROD_DIR, xarcUserConfig.options.reactLib)
   };
 
   const topConfigSpec = {
@@ -68,6 +76,8 @@ module.exports = function getDevArchetype(xarcUserConfig: XarcUserConfigs = {}) 
     }),
     xenvConfig(topConfigSpec, _.pick(userConfig, Object.keys(topConfigSpec)), { merge })
   );
+
+  archetypeConfig.merge;
 
   archetypeConfig.babel.hasMultiTargets =
     Object.keys(archetypeConfig.babel.envTargets)
@@ -93,4 +103,50 @@ module.exports = function getDevArchetype(xarcUserConfig: XarcUserConfigs = {}) 
   cachedArchetype = archetypeConfig;
 
   return cachedArchetype;
+};
+export const syncWebpackProcessEnvVars = (
+  xarcUserConfig: XarcUserConfigs = {}
+): XarcUserConfigs => {
+  const userVals = xarcUserConfig.webpack || {};
+  const userKeys = "webpackDev,devHostname,devPort,cdnProtocol,cdnHostname,cdnPort".split(",");
+  const envKeys = `WEBPACK_DEV,WEBPACK_HOST,WEBPACK_PORT,WEBPACK_DEV_CDN_PROTOCOL,WEBPACK_DEV_CDN_HOSTNAME,WEBPACK_DEV_CDN_PORT`.split(
+    ","
+  );
+  userKeys.map((userKey, idx) => {
+    const envKey = envKeys[idx];
+    if (userVals[userKey]) {
+      process.env[envKey] = userVals[userKey];
+    }
+  });
+
+  return xarcUserConfig;
+};
+
+export const syncAdditioanlProcessEnv = (xarcUserConfig: XarcUserConfigs = {}): XarcUserConfigs => {
+  [
+    "KARMA_BROWSER",
+    "SERVER_ES6",
+    "ELECTRODE_DEV_OPEN_BROWSER",
+    "_ELECTRODE_DEV_",
+    "STATIC_FILES",
+    "ENABLE_KARMA_COV",
+    "NODE_ENV",
+    "WEBPACK_DEV",
+    "HOST",
+    "PORT"
+  ].map(key => {
+    if (xarcUserConfig[key]) {
+      process.env[key] = xarcUserConfig[key];
+    }
+  });
+
+  return xarcUserConfig;
+};
+
+export const mergeOptionalCheckIntoConfig = (
+  xarcUserConfig: XarcUserConfigs = {}
+): XarcUserConfigs => {
+  const configs = getUserConfig();
+  xarcUserConfig.options = { ...configs.options, ...xarcUserConfig.options };
+  return xarcUserConfig;
 };

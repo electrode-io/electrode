@@ -1,5 +1,6 @@
 import { before, beforeEach, describe, it, after, afterEach } from "mocha";
 import { expect } from "chai";
+
 import { CreateXarcOptions, XarcUserConfigs } from "../../src/xarc-user-configs";
 const {
   getOptArchetypeRequire,
@@ -8,6 +9,8 @@ const {
   checkUserBabelRc,
   getMyPkg
 } = require("../../src/lib/utils");
+
+const mockRequire = require("mock-require");
 
 const getDevArchetype = require("../../src/config/archetype");
 const {
@@ -24,30 +27,33 @@ describe("load-xrun-tasks", () => {
     });
     expect(createXarcOptions.electrodePackages).to.include("@xarc/opt-karma");
     expect(createXarcOptions.enableFeatures).to.be.false;
-
     expect(getXarcOptions({}).enableFeatures).to.be.true;
   });
+});
 
-  it("calls getDefaultArchetypeOptions to determine which packaes to use", () => {
-    const result = getDefaultArchetypeOptions(
-      getXarcOptions({
-        electrodePackages: ["@xarc/opt-mocha"]
-      })
-    );
-    console.log(result);
-    expect(result.options.opions.mocha).to.equal(true);
-  });
-
-  it("user can specifify optional features in electrode packages", () => {
-    const config = getDevArchetype({
+describe("getDevArchetype", () => {
+  it("combines defaults with package.json's content to determine optional packages", () => {
+    mockRequire("../../src/lib/utils", {
+      getMyPkg: () => {
+        return {
+          dependencies: {
+            "@xarc/opt-sass": {}
+          }
+        };
+      }
+    });
+    const userConfig: XarcUserConfigs = {
       enableFeatures: true,
       electrodePackages: ["@xarc/opt-sass"],
       options: {
-        typescript: true
+        reactLib: "preact"
       }
-    });
-    console.log(config);
+    };
+    const config = getDevArchetype(userConfig);
+
     expect(config.pkg.packageJson).to.exist;
-    expect(config.options.sass).to.equal(false);
+    expect(config.options.sass).to.equal(true);
+    expect(config.AppMode.reactLib).to.equal("react");
+    expect(config.babel.hasMultiTargets).to.equal(false);
   });
 });

@@ -2,7 +2,7 @@
 
 import * as readPkgUp from "read-pkg-up";
 import * as pkgUp from "pkg-up";
-
+import { CreateXarcOptions, defaultCreateXarcOptions } from "../xarc-user-configs";
 const Path = require("path");
 const Fs = require("fs");
 require("../typedef");
@@ -53,7 +53,10 @@ const defaultCreateOptions = {
  * configurearchetype generation
  * @returns {CreateXarcOptions} CreateXarcOptions
  */
-const getXarcOptions = userXarcOptions => ({ ...defaultCreateOptions, ...userXarcOptions });
+const getXarcOptions = (userXarcOptions: CreateXarcOptions) => ({
+  ...defaultCreateXarcOptions,
+  ...userXarcOptions
+});
 
 let myPkg;
 let myDir;

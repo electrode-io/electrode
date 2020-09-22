@@ -1,3 +1,5 @@
+import { CreateXarcOptions } from "../xarc-user-configs";
+
 /* eslint-disable @typescript-eslint/no-var-requires */
 export {};
 
@@ -60,7 +62,7 @@ const getUserConfigOptions = (packageNames, devPackageNames) =>
  * @param {CreateXarcOptions} createXarcOptions - configure default archetype options
  * @returns {object} options
  */
-function getDefaultArchetypeOptions(createXarcOptions) {
+function getDefaultArchetypeOptions(createXarcOptions: CreateXarcOptions) {
   const appPkg = optionalRequire(Path.resolve("package.json")) || {
     dependencies: {},
     devDependencies: {}
