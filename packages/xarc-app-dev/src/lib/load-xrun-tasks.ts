@@ -1,15 +1,13 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { XarcUserConfigs } from "../xarc-user-configs";
 
 /* eslint-disable object-shorthand, max-statements, no-magic-numbers */
 /* eslint-disable no-console, no-process-exit, global-require, no-param-reassign */
-
+import { XarcUserConfigs } from "../config/xarc-user-configs";
 const Fs = require("fs");
 const Path = require("path");
 const assert = require("assert");
 const requireAt = require("require-at");
 const optionalRequire = require("optional-require")(require);
-const { getXarcOptions } = require("./utils");
 const { updateEnv } = require("xclap");
 const getArchetype = require("../config/archetype");
 const ck = require("chalker");
@@ -1276,7 +1274,7 @@ module.exports = function loadArchetype(xclap, xarcUserConfig: XarcUserConfigs) 
   //   require.resolve(`${archetype.devArchetypeName}/package.json`);
   // }
 
-  if (xarcOptions.assertNoGulpExecution) {
+  if (xarcUserConfig.assertNoGulpExecution) {
     assertNoGulpExecution();
   }
 

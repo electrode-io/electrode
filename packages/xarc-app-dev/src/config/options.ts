@@ -1,4 +1,4 @@
-import { CreateXarcOptions } from "../xarc-user-configs";
+import { CreateXarcOptions } from "./xarc-user-configs";
 
 /* eslint-disable @typescript-eslint/no-var-requires */
 export {};

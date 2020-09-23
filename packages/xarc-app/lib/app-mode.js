@@ -24,33 +24,33 @@ const constants = require("./constants");
  *
  * @returns app mode data
  */
-function makeAppMode(prodDir = constants.PROD_DIR, reactLib = "react") {
+function makeAppMode(prodDir = constants.PROD_DIR,reactLib = "react") {
   const client = "client";
   const server = "server";
 
   let srcDir = "";
   let libDir = "";
-  const savedFile = Path.join(prodDir, ".app-mode.json");
+  const savedFile = Path.join(prodDir,".app-mode.json");
 
   const version = 1;
 
   const loadSavedAppMode = () => {
+
     const savedFileFP = Path.resolve(savedFile);
     const subApps = subappUtil.scanSubAppsFromDir("src");
     const hasSubApps = Object.keys(subApps).length > 0;
-
     //
     // app still has src directory in production mode so we know
     // app is definitely in the src/lib dir structure setup
     //
     if (
       hasSubApps ||
-      Fs.existsSync(Path.resolve("src", client)) ||
-      Fs.existsSync(Path.resolve("src", server))
+      Fs.existsSync(Path.resolve("src",client)) ||
+      Fs.existsSync(Path.resolve("src",server))
     ) {
       srcDir = "src";
       libDir = "lib";
-      return hasSubApps ? { subApps, hasSubApps } : {};
+      return hasSubApps ? { subApps,hasSubApps } : {};
     } else if (Fs.existsSync(savedFileFP)) {
       const saved = JSON.parse(Fs.readFileSync(savedFileFP));
       if (saved.version === version) {
@@ -66,7 +66,7 @@ function makeAppMode(prodDir = constants.PROD_DIR, reactLib = "react") {
 
   reactLib = reactLib || "react";
 
-  const posixify = s => s.replace(/\\/g, "/");
+  const posixify = s => s.replace(/\\/g,"/");
 
   const envKey = "APP_SRC_DIR";
 
@@ -95,17 +95,16 @@ function makeAppMode(prodDir = constants.PROD_DIR, reactLib = "react") {
     server,
     src: {
       dir: srcDir,
-      client: posixify(Path.join(srcDir, client)),
-      server: posixify(Path.join(srcDir, server))
+      client: posixify(Path.join(srcDir,client)),
+      server: posixify(Path.join(srcDir,server))
     },
     lib: {
       dir: libDir,
-      client: posixify(Path.join(libDir, client)),
-      server: posixify(Path.join(libDir, server))
+      client: posixify(Path.join(libDir,client)),
+      server: posixify(Path.join(libDir,server))
     },
     ...saved,
     version
   };
 }
-
 module.exports = makeAppMode;

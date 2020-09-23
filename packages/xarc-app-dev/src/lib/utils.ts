@@ -2,7 +2,7 @@
 
 import * as readPkgUp from "read-pkg-up";
 import * as pkgUp from "pkg-up";
-import { CreateXarcOptions, defaultCreateXarcOptions } from "../xarc-user-configs";
+import { CreateXarcOptions, defaultCreateXarcOptions } from "../config/xarc-user-configs";
 const Path = require("path");
 const Fs = require("fs");
 require("../typedef");

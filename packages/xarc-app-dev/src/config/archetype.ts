@@ -1,7 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires, max-statements */
 
-import { XarcUserConfigs, CreateXarcOptions, defaultCreateXarcOptions } from "../xarc-user-configs";
-
+import { XarcUserConfigs, CreateXarcOptions, defaultCreateXarcOptions } from "./xarc-user-configs";
+import {
+  syncAdditionalEnvVars,
+  syncWebpackProcessEnvVars,
+  mergeOptionalCheckIntoConfig
+} from "./archetype-compat";
 const getUserConfig = require("./user-config");
 const Path = require("path");
 const { merge } = require("lodash");
@@ -16,7 +20,7 @@ let cachedArchetype = null;
 
 module.exports = function getDevArchetype(xarcUserConfig: XarcUserConfigs = {}) {
   syncWebpackProcessEnvVars(xarcUserConfig);
-  syncAdditioanlProcessEnv(xarcUserConfig);
+  syncAdditionalEnvVars(xarcUserConfig);
   mergeOptionalCheckIntoConfig(xarcUserConfig);
 
   const xarcOptions = { ...defaultCreateXarcOptions, ...xarcUserConfig };
@@ -77,8 +81,6 @@ module.exports = function getDevArchetype(xarcUserConfig: XarcUserConfigs = {}) 
     xenvConfig(topConfigSpec, _.pick(userConfig, Object.keys(topConfigSpec)), { merge })
   );
 
-  archetypeConfig.merge;
-
   archetypeConfig.babel.hasMultiTargets =
     Object.keys(archetypeConfig.babel.envTargets)
       .sort()
@@ -103,50 +105,4 @@ module.exports = function getDevArchetype(xarcUserConfig: XarcUserConfigs = {}) 
   cachedArchetype = archetypeConfig;
 
   return cachedArchetype;
-};
-export const syncWebpackProcessEnvVars = (
-  xarcUserConfig: XarcUserConfigs = {}
-): XarcUserConfigs => {
-  const userVals = xarcUserConfig.webpack || {};
-  const userKeys = "webpackDev,devHostname,devPort,cdnProtocol,cdnHostname,cdnPort".split(",");
-  const envKeys = `WEBPACK_DEV,WEBPACK_HOST,WEBPACK_PORT,WEBPACK_DEV_CDN_PROTOCOL,WEBPACK_DEV_CDN_HOSTNAME,WEBPACK_DEV_CDN_PORT`.split(
-    ","
-  );
-  userKeys.map((userKey, idx) => {
-    const envKey = envKeys[idx];
-    if (userVals[userKey]) {
-      process.env[envKey] = userVals[userKey];
-    }
-  });
-
-  return xarcUserConfig;
-};
-
-export const syncAdditioanlProcessEnv = (xarcUserConfig: XarcUserConfigs = {}): XarcUserConfigs => {
-  [
-    "KARMA_BROWSER",
-    "SERVER_ES6",
-    "ELECTRODE_DEV_OPEN_BROWSER",
-    "_ELECTRODE_DEV_",
-    "STATIC_FILES",
-    "ENABLE_KARMA_COV",
-    "NODE_ENV",
-    "WEBPACK_DEV",
-    "HOST",
-    "PORT"
-  ].map(key => {
-    if (xarcUserConfig[key]) {
-      process.env[key] = xarcUserConfig[key];
-    }
-  });
-
-  return xarcUserConfig;
-};
-
-export const mergeOptionalCheckIntoConfig = (
-  xarcUserConfig: XarcUserConfigs = {}
-): XarcUserConfigs => {
-  const configs = getUserConfig();
-  xarcUserConfig.options = { ...configs.options, ...xarcUserConfig.options };
-  return xarcUserConfig;
 };

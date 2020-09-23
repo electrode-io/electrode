@@ -1,36 +1,10 @@
-import { before, beforeEach, describe, it, after, afterEach } from "mocha";
+import { describe, it } from "mocha";
 import { expect } from "chai";
 
-import { CreateXarcOptions, XarcUserConfigs } from "../../src/xarc-user-configs";
-const {
-  getOptArchetypeRequire,
-  formUrl,
-  getXarcOptions,
-  checkUserBabelRc,
-  getMyPkg
-} = require("../../src/lib/utils");
-
-const mockRequire = require("mock-require");
-
-const getDevArchetype = require("../../src/config/archetype");
-const {
-  checkOptArchetypeInAppDep,
-  getUserConfigOptions,
-  getDefaultArchetypeOptions
-} = require("../../src/config/options");
-
-describe("load-xrun-tasks", () => {
-  it("calls getXarcOptions to determined package options", () => {
-    const createXarcOptions = getXarcOptions({
-      electrodePackages: ["@xarc/opt-karma"],
-      enableFeatures: false
-    });
-    expect(createXarcOptions.electrodePackages).to.include("@xarc/opt-karma");
-    expect(createXarcOptions.enableFeatures).to.be.false;
-    expect(getXarcOptions({}).enableFeatures).to.be.true;
-  });
-});
-
+import { XarcUserConfigs } from "../../src/config/xarc-user-configs";
+import * as mockRequire from "mock-require";
+/* eslint-disable @typescript-eslint/no-var-requires */
+const getArchetype = require("../../config/archetype");
 describe("getDevArchetype", () => {
   it("combines defaults with package.json's content to determine optional packages", () => {
     mockRequire("../../src/lib/utils", {
@@ -49,7 +23,7 @@ describe("getDevArchetype", () => {
         reactLib: "preact"
       }
     };
-    const config = getDevArchetype(userConfig);
+    const config = getArchetype(userConfig);
 
     expect(config.pkg.packageJson).to.exist;
     expect(config.options.sass).to.equal(true);
