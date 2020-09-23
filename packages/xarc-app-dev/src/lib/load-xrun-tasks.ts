@@ -48,9 +48,7 @@ module.exports = function loadArchetype(xclap, xarcUserConfig: XarcUserConfigs) 
   // // from userspace, i.e. `userOptions`
 
   const archetype = getArchetype(xarcUserConfig);
-  const features = xarcUserConfig.enableFeatures
-    ? require("./features").displayFeatures
-    : undefined;
+  const features = archetype.enableFeatures ? require("./features").displayFeatures : undefined;
   const assertNoGulpExecution = () => {
     const cli = process.argv[1];
     if (cli && cli.indexOf("gulp") >= 0) {
@@ -1274,7 +1272,7 @@ module.exports = function loadArchetype(xclap, xarcUserConfig: XarcUserConfigs) 
   //   require.resolve(`${archetype.devArchetypeName}/package.json`);
   // }
 
-  if (xarcUserConfig.assertNoGulpExecution) {
+  if (archetype.assertNoGulpExecution) {
     assertNoGulpExecution();
   }
 
