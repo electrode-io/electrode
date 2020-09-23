@@ -22,7 +22,14 @@ module.exports = function getDevArchetype(xarcUserConfig: XarcUserConfigs = {}) 
   syncWebpackProcessEnvVars(xarcUserConfig);
   syncAdditionalEnvVars(xarcUserConfig);
   mergeOptionalCheckIntoConfig(xarcUserConfig);
-  const xarcConfig = { ...defaultCreateXarcOptions, ...xarcUserConfig };
+
+  xarcUserConfig.options = {
+    ...getDefaultArchetypeOptions({
+      ...defaultCreateXarcOptions,
+      ...xarcUserConfig.options
+    }),
+    ...xarcUserConfig.options
+  };
 
   const webpack = require("./env-webpack")();
   const babel = require("./env-babel")();
@@ -33,13 +40,13 @@ module.exports = function getDevArchetype(xarcUserConfig: XarcUserConfigs = {}) 
   const devRequire = require(Path.join(devDir, "require"));
 
   const config = {
-    ...xarcConfig,
+    xarcUserConfig,
     devDir,
     devPkg,
     devRequire,
     webpack,
     karma,
-    jest: Object.assign({}, xarcConfig.options.jest),
+    jest: Object.assign({}, xarcUserConfig.options.jest),
     babel,
     config: {
       babel: `${configDir}/babel`,
@@ -48,25 +55,26 @@ module.exports = function getDevArchetype(xarcUserConfig: XarcUserConfigs = {}) 
       mocha: `${configDir}/mocha`,
       webpack: `${configDir}/webpack`,
       jest: `${configDir}/jest`,
-      ...xarcConfig.configPaths
+      ...xarcUserConfig.configPaths
     },
     prodDir: constants.PROD_DIR,
     eTmpDir: constants.ETMP_DIR,
-    AppMode: makeAppMode(constants.PROD_DIR, xarcUserConfig.options.reactLib)
+    AppMode: makeAppMode(constants.PROD_DIR, xarcUserConfig.options.reactLib),
+    ...xarcUserConfig.options
   };
 
   const topConfigSpec = {
     devOpenBrowser: { env: "ELECTRODE_DEV_OPEN_BROWSER", default: false }
   };
 
-  const { options } = xarcConfig;
+  const { options } = xarcUserConfig;
   const typescriptEnabled = options.typescript === true || babel.enableTypesCript;
 
   const archetypeConfig = Object.assign(
     _.merge(config, {
       babel: { enableTypeScript: typescriptEnabled }
     }),
-    xenvConfig(topConfigSpec, _.pick(xarcConfig, Object.keys(topConfigSpec)), { merge })
+    xenvConfig(topConfigSpec, _.pick(xarcUserConfig, Object.keys(topConfigSpec)), { merge })
   );
 
   archetypeConfig.babel.hasMultiTargets =
