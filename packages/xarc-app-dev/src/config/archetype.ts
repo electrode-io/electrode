@@ -22,19 +22,7 @@ module.exports = function getDevArchetype(xarcUserConfig: XarcUserConfigs = {}) 
   syncWebpackProcessEnvVars(xarcUserConfig);
   syncAdditionalEnvVars(xarcUserConfig);
   mergeOptionalCheckIntoConfig(xarcUserConfig);
-
-  const xarcOptions = { ...defaultCreateXarcOptions, ...xarcUserConfig };
-
-  if (cachedArchetype) {
-    cachedArchetype._fromCache = true;
-    // maintained for backwards compatibility
-    return cachedArchetype;
-  }
-  const defaultArchetypeConfig = getDefaultArchetypeOptions(xarcOptions);
-  const userConfig: CreateXarcOptions = {
-    ...defaultArchetypeConfig.options,
-    ...xarcOptions.options
-  };
+  const xarcConfig = { ...defaultCreateXarcOptions, ...xarcUserConfig };
 
   const webpack = require("./env-webpack")();
   const babel = require("./env-babel")();
@@ -45,13 +33,13 @@ module.exports = function getDevArchetype(xarcUserConfig: XarcUserConfigs = {}) 
   const devRequire = require(Path.join(devDir, "require"));
 
   const config = {
-    ...defaultArchetypeConfig,
+    ...xarcConfig,
     devDir,
     devPkg,
     devRequire,
     webpack,
     karma,
-    jest: Object.assign({}, userConfig.options.jest),
+    jest: Object.assign({}, xarcConfig.options.jest),
     babel,
     config: {
       babel: `${configDir}/babel`,
@@ -60,7 +48,7 @@ module.exports = function getDevArchetype(xarcUserConfig: XarcUserConfigs = {}) 
       mocha: `${configDir}/mocha`,
       webpack: `${configDir}/webpack`,
       jest: `${configDir}/jest`,
-      ...userConfig.configPaths
+      ...xarcConfig.configPaths
     },
     prodDir: constants.PROD_DIR,
     eTmpDir: constants.ETMP_DIR,
@@ -71,14 +59,14 @@ module.exports = function getDevArchetype(xarcUserConfig: XarcUserConfigs = {}) 
     devOpenBrowser: { env: "ELECTRODE_DEV_OPEN_BROWSER", default: false }
   };
 
-  const { options } = userConfig;
+  const { options } = xarcConfig;
   const typescriptEnabled = options.typescript === true || babel.enableTypesCript;
 
   const archetypeConfig = Object.assign(
     _.merge(config, {
       babel: { enableTypeScript: typescriptEnabled }
     }),
-    xenvConfig(topConfigSpec, _.pick(userConfig, Object.keys(topConfigSpec)), { merge })
+    xenvConfig(topConfigSpec, _.pick(xarcConfig, Object.keys(topConfigSpec)), { merge })
   );
 
   archetypeConfig.babel.hasMultiTargets =

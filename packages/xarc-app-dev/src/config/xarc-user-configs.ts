@@ -17,6 +17,7 @@ export interface OptionalPackages {
   mocha?: boolean;
   reactLib?: string;
   typescript?: boolean;
+  sass?: boolean;
 
   configPaths?: ConfigPaths;
 }

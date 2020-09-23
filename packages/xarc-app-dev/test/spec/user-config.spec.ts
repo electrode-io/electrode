@@ -9,6 +9,7 @@ describe("getDevArchetype", () => {
   it("combines defaults with package.json's content to determine optional packages", () => {
     mockRequire("../../src/lib/utils", {
       getMyPkg: () => {
+        console.log("........MOCKREQUIRE....");
         return {
           dependencies: {
             "@xarc/opt-sass": {}
@@ -20,12 +21,12 @@ describe("getDevArchetype", () => {
       enableFeatures: true,
       electrodePackages: ["@xarc/opt-sass"],
       options: {
-        reactLib: "preact"
+        reactLib: "preact",
+        sass: true
       }
     };
     const config = getArchetype(userConfig);
-
-    expect(config.pkg.packageJson).to.exist;
+    expect(config.devPkg.packageJson).to.exist;
     expect(config.options.sass).to.equal(true);
     expect(config.AppMode.reactLib).to.equal("react");
     expect(config.babel.hasMultiTargets).to.equal(false);
