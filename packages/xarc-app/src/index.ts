@@ -155,7 +155,7 @@ export function load(
    * https://github.com/webpack/css-loader#local-scope
    * https://github.com/css-modules/postcss-modules-scope
    */
-  if (options.cssModuleHook === true) {
+  if (options.cssModuleHook !== false) {
     const opts = Object.assign(
       {
         generateScopedName: "[name]__[local]___[hash:base64:5]",

@@ -8,12 +8,14 @@ const AppMode = archetype.AppMode;
 const getOptRequire = require("../util/get-opt-require");
 
 function detectCSSModule() {
-  if (getOptRequire(["@xarc/opt-postcss", "electrode-archetype-opt-postcss"]).invalid) {
-    return false;
-  }
-
+  // if user explicitly says they want CSS module support, then we enable it
   if (archetype.webpack.cssModuleSupport !== undefined) {
     return Boolean(archetype.webpack.cssModuleSupport);
+  }
+
+  // without postcss we don't want to do CSS module by default
+  if (getOptRequire(["@xarc/opt-postcss", "electrode-archetype-opt-postcss"]).invalid) {
+    return false;
   }
 
   const scanned = filterScanDir.sync({

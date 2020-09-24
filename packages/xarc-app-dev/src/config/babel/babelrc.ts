@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires, no-console, @typescript-eslint/ban-ts-ignore */
-export {};
 
 /*
  * A single babel RC for all transpiling, including client and server code.
  * When transpiling for node.js, env XARC_BABEL_TARGET should be set to "node"
  * and this file will set preset-env targets accordingly.
  */
+const requireAt = require("require-at");
 const ck = require("chalker");
 const archetype = require("@xarc/app-dev/config/archetype")();
 const optionalRequire = require("optional-require")(require);
@@ -47,6 +47,54 @@ const enableKarmaCov = ENABLE_KARMA_COV === "true";
 const isProduction = (BABEL_ENV || NODE_ENV) === "production";
 const isTest = (BABEL_ENV || NODE_ENV) === "test";
 const isNodeTarget = XARC_BABEL_TARGET === "node";
+
+/**
+ * https://www.npmjs.com/package/babel-plugin-react-css-modules
+ *
+ * This plugin enhances the CSS module support from css-loader.  It adds a new
+ * prop styleName in addition to the className prop.  This also automatically
+ * make it work for SSR.
+ *
+ * Currently, looks like the author has been inactive on maintaining this plugin
+ * and there's some compatibility issue with css-loader 4.x.
+ * https://github.com/gajus/babel-plugin-react-css-modules/issues/291
+ *
+ * Resolution: TBD
+ */
+const getReactCssModulePlugin = () => {
+  if (!enableCssModule) {
+    return null;
+  }
+
+  const postCssPath = optionalRequire.resolve("@xarc/opt-postcss/package.json");
+
+  if (!postCssPath) {
+    return null;
+  }
+
+  const babelReactCssModulePlugin = requireAt(postCssPath)("babel-plugin-react-css-modules");
+
+  return [
+    [
+      babelReactCssModulePlugin,
+      {
+        generateScopedName: `${isProduction ? "" : "[name]__[local]___"}[hash:base64:5]`,
+        filetypes: {
+          ".scss": {
+            syntax: "postcss-scss",
+            plugins: ["postcss-nested"]
+          },
+          ".styl": {
+            syntax: "sugarss"
+          },
+          ".less": {
+            syntax: "postcss-less"
+          }
+        }
+      }
+    ]
+  ];
+};
 
 const basePlugins = [
   !isNodeTarget && enableDynamicImport && "@babel/plugin-syntax-dynamic-import",
@@ -111,27 +159,7 @@ const plugins = basePlugins.concat(
     ],
   // css module support
   // Note: this is needed for server side (node.js) also.
-  enableCssModule && [
-    [
-      "babel-plugin-react-css-modules",
-      {
-        context: "./src",
-        generateScopedName: `${isProduction ? "" : "[name]__[local]___"}[hash:base64:5]`,
-        filetypes: {
-          ".scss": {
-            syntax: "postcss-scss",
-            plugins: ["postcss-nested"]
-          },
-          ".styl": {
-            syntax: "sugarss"
-          },
-          ".less": {
-            syntax: "postcss-less"
-          }
-        }
-      }
-    ]
-  ],
+  getReactCssModulePlugin(),
   !isNodeTarget &&
     enableKarmaCov && [
       getPluginFrom(["@xarc/opt-karma", "electrode-archetype-opt-karma"], "babel-plugin-istanbul")
