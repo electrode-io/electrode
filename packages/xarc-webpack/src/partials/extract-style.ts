@@ -1,7 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-
-/* eslint-disable max-statements, complexity */
-
+/* eslint-disable @typescript-eslint/no-var-requires, max-statements */
 import * as Path from "path";
 
 const archetypeConfig = require("@xarc/app-dev/config/archetype");
@@ -74,9 +71,9 @@ module.exports = function() {
   const isDevelopment = !isProduction;
   const archetype = archetypeConfig();
 
-  const { hasPostCss, atImport, postcssPresetEnv, postcssLoader } = loadPostCss();
+  const cssModuleSupport = detectCssModule();
 
-  const cssModuleSupport = hasPostCss && detectCssModule();
+  const { hasPostCss, atImport, postcssPresetEnv, postcssLoader } = loadPostCss();
 
   const rules = [];
 
@@ -140,7 +137,13 @@ module.exports = function() {
     use: [
       {
         loader: MiniCssExtractPlugin.loader,
-        options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
+        options: {
+          hmr: isDevelopment,
+          reload: isDevelopment,
+          publicPath: "",
+          esModule: true,
+          modules: Boolean(cssModuleSupport)
+        }
       },
       ...getCssQueryUse()
     ]
@@ -157,7 +160,13 @@ module.exports = function() {
       use: [
         {
           loader: MiniCssExtractPlugin.loader,
-          options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
+          options: {
+            hmr: isDevelopment,
+            reload: isDevelopment,
+            publicPath: "",
+            esModule: true,
+            modules: Boolean(cssModuleSupport)
+          }
         },
         ...getCssQueryUse().concat({ loader: sassLoader } as any)
       ]
