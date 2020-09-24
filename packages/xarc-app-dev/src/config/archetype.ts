@@ -55,7 +55,7 @@ module.exports = function getDevArchetype(xarcUserConfig: XarcUserConfigs = {}) 
       jest: false,
       mocha: true,
       reactLib: "react",
-      typescript: true,
+      typescript: false,
       sass: false,
       ...(xarcUserConfig.options || {})
     },
