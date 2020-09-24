@@ -14,6 +14,13 @@ const makeAppMode = require("@xarc/app/lib/app-mode");
 
 let cachedArchetype = null;
 
+/*
+  XarcUserConfigs configuration parameters for 
+  1. optional features (mocha, jest, eslint etc)
+  2. custom configurations for webpack, babel karma
+  3. additional process.env variables like KARMA_BROWSER that are synced to process.env
+  4. if user has a archetype/configs folder, values in that folder overrides valeus in xarcUserConfig
+  */
 module.exports = function getDevArchetype(xarcUserConfig: XarcUserConfigs = {}) {
   syncWebpackProcessEnvVars(xarcUserConfig);
   syncAdditionalEnvVars(xarcUserConfig);
