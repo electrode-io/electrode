@@ -2,6 +2,7 @@ import { XarcUserConfigs } from "./xarc-user-configs";
 
 /* eslint-disable-next-line @typescript-eslint/no-var-requires */
 const getUserConfig = require("./user-config");
+
 export const syncWebpackProcessEnvVars = (
   xarcUserConfig: XarcUserConfigs = {}
 ): XarcUserConfigs => {
