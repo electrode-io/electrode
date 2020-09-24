@@ -14,7 +14,9 @@ const pluginName = "JsonpScriptSrcPlugin";
  * so it won't be necessary.
  */
 export class JsonpScriptSrcPlugin {
-  constructor() {}
+  constructor() {
+    //
+  }
 
   _applyMainTemplate(mainTemplate) {
     // tapable/lib/Hook.js

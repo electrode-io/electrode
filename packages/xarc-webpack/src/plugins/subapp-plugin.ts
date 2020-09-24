@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/camelcase, global-require, @typescript-eslint/no-var-requires */
+/* eslint-disable no-magic-numbers, no-case-declarations, no-fallthrough */
 import Fs = require("fs");
 import _ = require("lodash");
 import Path = require("path");
@@ -202,7 +204,7 @@ export class SubAppWebpackPlugin {
           // try to figure out the module that's being imported for this subapp
           // getModule function: () => import("./subapp-module")
           // getModule function: function () { return import("./subapp-module") }
-          let mod = this.findImportCall(gm);
+          const mod = this.findImportCall(gm);
 
           this._subApps[nameVal] = {
             name: nameVal,
