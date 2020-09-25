@@ -1,3 +1,50 @@
+# 9/24/2020
+
+- fix: css module and loadable babel plugins needed in SSR
+- fix css modules
+- fix server loading subapps
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.1.14` `(8.1.13 => 8.1.14)`
+- `@xarc/app-dev@8.1.14` `(8.1.13 => 8.1.14)`
+- `@xarc/webpack@8.1.5` `(8.1.4 => 8.1.5)`
+- `electrode-archetype-react-component@7.0.4` `(7.0.3 => 7.0.4)`
+- `electrode-archetype-react-component-dev@7.0.4` `(7.0.3 => 7.0.4)`
+- `subapp-web@1.0.35` `(1.0.34 => 1.0.35)`
+
+### Lerna Updated
+
+- `subapp-pbundle@0.0.29` `(0.0.28 => 0.0.29)`
+- `subapp-react@0.0.26` `(0.0.25 => 0.0.26)`
+- `subapp-redux@1.0.35` `(1.0.34 => 1.0.35)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix: css module and loadable babel plugins needed in SSR ([#1741](https://github.com/electrode-io/electrode/pull/1741)) [commit](http://github.com/electrode-io/electrode/commit/4baed63b1f7c19145c943bc63e3e11f296e13551)
+  - fix reference to lib/features:displayFeatures in load-xrun-tasks ([#1738](https://github.com/electrode-io/electrode/pull/1738)) [commit](http://github.com/electrode-io/electrode/commit/6ce3a07a48190fc782540381ec252cb5368d9968)
+  - use relative path from CWD for webpack config file ([#1735](https://github.com/electrode-io/electrode/pull/1735)) [commit](http://github.com/electrode-io/electrode/commit/1b70d86cba9c7f2eaf2aa9216aff33153064c108)
+  - fix css modules ([#1743](https://github.com/electrode-io/electrode/pull/1743)) [commit](http://github.com/electrode-io/electrode/commit/c7a950cfd28f92e38529e88ed4f6efdd3adaa6aa)
+
+- `packages/xarc-webpack`
+
+  - [chore] fix lint errors [commit](http://github.com/electrode-io/electrode/commit/390fa2efdafe0fb8015aecb20b553b8f040a3c62)
+  - adding webpack plugins for subapp and dynamic import jsonp ([#1740](https://github.com/electrode-io/electrode/pull/1740)) [commit](http://github.com/electrode-io/electrode/commit/327ff235df5cfdde567dcfdac9a121d2419cb336)
+  - use relative path from CWD for webpack config file ([#1735](https://github.com/electrode-io/electrode/pull/1735)) [commit](http://github.com/electrode-io/electrode/commit/1b70d86cba9c7f2eaf2aa9216aff33153064c108)
+  - fix css modules ([#1743](https://github.com/electrode-io/electrode/pull/1743)) [commit](http://github.com/electrode-io/electrode/commit/c7a950cfd28f92e38529e88ed4f6efdd3adaa6aa)
+
+- `packages/electrode-archetype-react-component[-dev]`
+
+  - remove deprecated electrode-archetype-opt- packages ([#1736](https://github.com/electrode-io/electrode/pull/1736)) [commit](http://github.com/electrode-io/electrode/commit/a05c5ac0c406c24d6b62cb785d83c88c1eaffa14)
+
+- `packages/subapp-web`
+
+  - Fix the return. This was causing the issue in not invoking the route initialize method ([#1742](https://github.com/electrode-io/electrode/pull/1742)) [commit](http://github.com/electrode-io/electrode/commit/e22dc16734baff9afdd6d61dae4566507c249390)
+
 # 9/4/2020
 
 - fix: tweak webpack-cli to not break yarn workspace hoisting
