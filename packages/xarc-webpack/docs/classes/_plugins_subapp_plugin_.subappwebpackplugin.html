@@ -1,0 +1,525 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>SubAppWebpackPlugin | @xarc/webpack</title>
+	<meta name="description" content="Documentation for @xarc/webpack">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">@xarc/webpack</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/_plugins_subapp_plugin_.html">&quot;plugins/subapp-plugin&quot;</a>
+				</li>
+				<li>
+					<a href="_plugins_subapp_plugin_.subappwebpackplugin.html">SubAppWebpackPlugin</a>
+				</li>
+			</ul>
+			<h1>Class SubAppWebpackPlugin</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>This plugin will look for <code>declareSubApp</code> calls and do these:</p>
+					</div>
+					<ol>
+						<li>instruct webpack to name the dynamic import bundle as <code>subapp-&lt;name&gt;</code></li>
+						<li>collect the subapp meta info and save them as <code>subapps.json</code></li>
+					</ol>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">SubAppWebpackPlugin</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_plugins_subapp_plugin_.subappwebpackplugin.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_plugins_subapp_plugin_.subappwebpackplugin.html#_declareapiname" class="tsd-kind-icon">_declare<wbr>Api<wbr>Name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_plugins_subapp_plugin_.subappwebpackplugin.html#_makeidentifierbee" class="tsd-kind-icon">_make<wbr>IdentifierBEE</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_plugins_subapp_plugin_.subappwebpackplugin.html#_subapps" class="tsd-kind-icon">_sub<wbr>Apps</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_plugins_subapp_plugin_.subappwebpackplugin.html#_tapassets" class="tsd-kind-icon">_tap<wbr>Assets</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_plugins_subapp_plugin_.subappwebpackplugin.html#_wver" class="tsd-kind-icon">_w<wbr>Ver</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_plugins_subapp_plugin_.subappwebpackplugin.html#apply" class="tsd-kind-icon">apply</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_plugins_subapp_plugin_.subappwebpackplugin.html#findimportcall" class="tsd-kind-icon">find<wbr>Import<wbr>Call</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_plugins_subapp_plugin_.subappwebpackplugin.html#initwebpackver4" class="tsd-kind-icon">init<wbr>Webpack<wbr>Ver4</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_plugins_subapp_plugin_.subappwebpackplugin.html#initwebpackver5" class="tsd-kind-icon">init<wbr>Webpack<wbr>Ver5</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_plugins_subapp_plugin_.subappwebpackplugin.html#updateassets" class="tsd-kind-icon">update<wbr>Assets</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Sub<wbr>App<wbr>Webpack<wbr>Plugin<span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>declareApiName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>webpackVersion<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_plugins_subapp_plugin_.subappwebpackplugin.html" class="tsd-signature-type">SubAppWebpackPlugin</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/c7a950cf/packages/xarc-webpack/src/plugins/subapp-plugin.ts#L41">plugins/subapp-plugin.ts:41</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> __namedParameters: <span class="tsd-signature-symbol">{ </span>declareApiName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>webpackVersion<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> = {}</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter">
+											<h5>declare<wbr>Api<wbr>Name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5>webpack<wbr>Version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_plugins_subapp_plugin_.subappwebpackplugin.html" class="tsd-signature-type">SubAppWebpackPlugin</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="_declareapiname" class="tsd-anchor"></a>
+					<h3>_declare<wbr>Api<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">_declare<wbr>Api<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/c7a950cf/packages/xarc-webpack/src/plugins/subapp-plugin.ts#L37">plugins/subapp-plugin.ts:37</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="_makeidentifierbee" class="tsd-anchor"></a>
+					<h3>_make<wbr>IdentifierBEE</h3>
+					<div class="tsd-signature tsd-kind-icon">_make<wbr>IdentifierBEE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/c7a950cf/packages/xarc-webpack/src/plugins/subapp-plugin.ts#L40">plugins/subapp-plugin.ts:40</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="_subapps" class="tsd-anchor"></a>
+					<h3>_sub<wbr>Apps</h3>
+					<div class="tsd-signature tsd-kind-icon">_sub<wbr>Apps<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/c7a950cf/packages/xarc-webpack/src/plugins/subapp-plugin.ts#L38">plugins/subapp-plugin.ts:38</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="_tapassets" class="tsd-anchor"></a>
+					<h3>_tap<wbr>Assets</h3>
+					<div class="tsd-signature tsd-kind-icon">_tap<wbr>Assets<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/c7a950cf/packages/xarc-webpack/src/plugins/subapp-plugin.ts#L41">plugins/subapp-plugin.ts:41</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="_wver" class="tsd-anchor"></a>
+					<h3>_w<wbr>Ver</h3>
+					<div class="tsd-signature tsd-kind-icon">_w<wbr>Ver<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/c7a950cf/packages/xarc-webpack/src/plugins/subapp-plugin.ts#L39">plugins/subapp-plugin.ts:39</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="apply" class="tsd-anchor"></a>
+					<h3>apply</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">apply<span class="tsd-signature-symbol">(</span>compiler<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/c7a950cf/packages/xarc-webpack/src/plugins/subapp-plugin.ts#L130">plugins/subapp-plugin.ts:130</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>compiler: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="findimportcall" class="tsd-anchor"></a>
+					<h3>find<wbr>Import<wbr>Call</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">find<wbr>Import<wbr>Call<span class="tsd-signature-symbol">(</span>ast<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/c7a950cf/packages/xarc-webpack/src/plugins/subapp-plugin.ts#L110">plugins/subapp-plugin.ts:110</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>ast: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="initwebpackver4" class="tsd-anchor"></a>
+					<h3>init<wbr>Webpack<wbr>Ver4</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">init<wbr>Webpack<wbr>Ver4<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>BasicEvaluatedExpression<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>makeIdentifierBEE<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>tapAssets<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/c7a950cf/packages/xarc-webpack/src/plugins/subapp-plugin.ts#L58">plugins/subapp-plugin.ts:58</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>BasicEvaluatedExpression<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>makeIdentifierBEE<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>tapAssets<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></h4>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter">
+									<h5>Basic<wbr>Evaluated<wbr>Expression<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>make<wbr>IdentifierBEE<span class="tsd-signature-symbol">: </span>function</h5>
+									<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-type-literal">
+										<li class="tsd-signature tsd-kind-icon">make<wbr>IdentifierBEE<span class="tsd-signature-symbol">(</span>expr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+									</ul>
+									<ul class="tsd-descriptions">
+										<li class="tsd-description">
+											<aside class="tsd-sources">
+												<ul>
+													<li>Defined in <a href="https://github.com/jchip/electrode/blob/c7a950cf/packages/xarc-webpack/src/plugins/subapp-plugin.ts#L62">plugins/subapp-plugin.ts:62</a></li>
+												</ul>
+											</aside>
+											<h4 class="tsd-parameters-title">Parameters</h4>
+											<ul class="tsd-parameters">
+												<li>
+													<h5>expr: <span class="tsd-signature-type">any</span></h5>
+												</li>
+											</ul>
+											<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+										</li>
+									</ul>
+								</li>
+								<li class="tsd-parameter">
+									<h5>tap<wbr>Assets<span class="tsd-signature-symbol">: </span>function</h5>
+									<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-type-literal">
+										<li class="tsd-signature tsd-kind-icon">tap<wbr>Assets<span class="tsd-signature-symbol">(</span>compiler<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+									</ul>
+									<ul class="tsd-descriptions">
+										<li class="tsd-description">
+											<aside class="tsd-sources">
+												<ul>
+													<li>Defined in <a href="https://github.com/jchip/electrode/blob/c7a950cf/packages/xarc-webpack/src/plugins/subapp-plugin.ts#L65">plugins/subapp-plugin.ts:65</a></li>
+												</ul>
+											</aside>
+											<h4 class="tsd-parameters-title">Parameters</h4>
+											<ul class="tsd-parameters">
+												<li>
+													<h5>compiler: <span class="tsd-signature-type">any</span></h5>
+												</li>
+											</ul>
+											<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="initwebpackver5" class="tsd-anchor"></a>
+					<h3>init<wbr>Webpack<wbr>Ver5</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">init<wbr>Webpack<wbr>Ver5<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>BasicEvaluatedExpression<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>makeIdentifierBEE<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>tapAssets<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/c7a950cf/packages/xarc-webpack/src/plugins/subapp-plugin.ts#L71">plugins/subapp-plugin.ts:71</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>BasicEvaluatedExpression<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>makeIdentifierBEE<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>tapAssets<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></h4>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter">
+									<h5>Basic<wbr>Evaluated<wbr>Expression<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>make<wbr>IdentifierBEE<span class="tsd-signature-symbol">: </span>function</h5>
+									<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-type-literal">
+										<li class="tsd-signature tsd-kind-icon">make<wbr>IdentifierBEE<span class="tsd-signature-symbol">(</span>expr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+									</ul>
+									<ul class="tsd-descriptions">
+										<li class="tsd-description">
+											<aside class="tsd-sources">
+												<ul>
+													<li>Defined in <a href="https://github.com/jchip/electrode/blob/c7a950cf/packages/xarc-webpack/src/plugins/subapp-plugin.ts#L75">plugins/subapp-plugin.ts:75</a></li>
+												</ul>
+											</aside>
+											<h4 class="tsd-parameters-title">Parameters</h4>
+											<ul class="tsd-parameters">
+												<li>
+													<h5>expr: <span class="tsd-signature-type">any</span></h5>
+												</li>
+											</ul>
+											<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+										</li>
+									</ul>
+								</li>
+								<li class="tsd-parameter">
+									<h5>tap<wbr>Assets<span class="tsd-signature-symbol">: </span>function</h5>
+									<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-type-literal">
+										<li class="tsd-signature tsd-kind-icon">tap<wbr>Assets<span class="tsd-signature-symbol">(</span>compiler<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+									</ul>
+									<ul class="tsd-descriptions">
+										<li class="tsd-description">
+											<aside class="tsd-sources">
+												<ul>
+													<li>Defined in <a href="https://github.com/jchip/electrode/blob/c7a950cf/packages/xarc-webpack/src/plugins/subapp-plugin.ts#L81">plugins/subapp-plugin.ts:81</a></li>
+												</ul>
+											</aside>
+											<h4 class="tsd-parameters-title">Parameters</h4>
+											<ul class="tsd-parameters">
+												<li>
+													<h5>compiler: <span class="tsd-signature-type">any</span></h5>
+												</li>
+											</ul>
+											<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="updateassets" class="tsd-anchor"></a>
+					<h3>update<wbr>Assets</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">update<wbr>Assets<span class="tsd-signature-symbol">(</span>assets<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/c7a950cf/packages/xarc-webpack/src/plugins/subapp-plugin.ts#L89">plugins/subapp-plugin.ts:89</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>assets: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_index_.html">&quot;index&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_partials_fonts_.html">&quot;partials/fonts&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_partials_sourcemaps_remote_.html">&quot;partials/sourcemaps-<wbr>remote&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_plugins_done_plugin_.html">&quot;plugins/done-<wbr>plugin&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_plugins_jsonp_script_src_plugin_.html">&quot;plugins/jsonp-<wbr>script-<wbr>src-<wbr>plugin&quot;</a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="../modules/_plugins_subapp_plugin_.html">&quot;plugins/subapp-<wbr>plugin&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_util_generate_config_.html">&quot;util/generate-<wbr>config&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_util_webpack_dev_reporter_.html">&quot;util/webpack-<wbr>dev-<wbr>reporter&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_util_webpack_dev_url_.html">&quot;util/webpack-<wbr>dev-<wbr>url&quot;</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-module">
+						<a href="_plugins_subapp_plugin_.subappwebpackplugin.html" class="tsd-kind-icon">Sub<wbr>App<wbr>Webpack<wbr>Plugin</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="_plugins_subapp_plugin_.subappwebpackplugin.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_plugins_subapp_plugin_.subappwebpackplugin.html#_declareapiname" class="tsd-kind-icon">_declare<wbr>Api<wbr>Name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_plugins_subapp_plugin_.subappwebpackplugin.html#_makeidentifierbee" class="tsd-kind-icon">_make<wbr>IdentifierBEE</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_plugins_subapp_plugin_.subappwebpackplugin.html#_subapps" class="tsd-kind-icon">_sub<wbr>Apps</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_plugins_subapp_plugin_.subappwebpackplugin.html#_tapassets" class="tsd-kind-icon">_tap<wbr>Assets</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_plugins_subapp_plugin_.subappwebpackplugin.html#_wver" class="tsd-kind-icon">_w<wbr>Ver</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_plugins_subapp_plugin_.subappwebpackplugin.html#apply" class="tsd-kind-icon">apply</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_plugins_subapp_plugin_.subappwebpackplugin.html#findimportcall" class="tsd-kind-icon">find<wbr>Import<wbr>Call</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_plugins_subapp_plugin_.subappwebpackplugin.html#initwebpackver4" class="tsd-kind-icon">init<wbr>Webpack<wbr>Ver4</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_plugins_subapp_plugin_.subappwebpackplugin.html#initwebpackver5" class="tsd-kind-icon">init<wbr>Webpack<wbr>Ver5</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_plugins_subapp_plugin_.subappwebpackplugin.html#updateassets" class="tsd-kind-icon">update<wbr>Assets</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
