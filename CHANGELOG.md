@@ -1,3 +1,23 @@
+# 9/28/2020
+
+- fix: default css module hook to false
+
+## Packages
+
+- `@xarc/app@8.1.15` `(8.1.14 => 8.1.15)`
+- `@xarc/app-dev@8.1.15` `(8.1.14 => 8.1.15)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - [chore] auto gen docs [commit](http://github.com/electrode-io/electrode/commit/44e0173187ba0a5a9bc5a831195845c9f4aec73b)
+  - fix: default css module hook to false [commit](http://github.com/electrode-io/electrode/commit/797d52d8f4fba624c0ef2a163025fdc6ac25332e)
+
+- `packages/xarc-webpack`
+
+  - [chore] auto gen docs [commit](http://github.com/electrode-io/electrode/commit/44e0173187ba0a5a9bc5a831195845c9f4aec73b)
+
 # 9/24/2020
 
 - fix: css module and loadable babel plugins needed in SSR
