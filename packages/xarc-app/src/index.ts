@@ -144,6 +144,10 @@ export function load(
   }
 
   /**
+   * Any app that needs CSS module support has to set this flag when calling
+   * support.  We can't default this to enabled because it would break apps
+   * that doesn't use CSS modules.
+   *
    * css-modules-require-hook: handle css-modules on node.js server.
    * similar to Babel's babel/register it compiles CSS modules in runtime.
    *
@@ -155,7 +159,7 @@ export function load(
    * https://github.com/webpack/css-loader#local-scope
    * https://github.com/css-modules/postcss-modules-scope
    */
-  if (options.cssModuleHook !== false) {
+  if (options.cssModuleHook === true) {
     const opts = Object.assign(
       {
         generateScopedName: "[name]__[local]___[hash:base64:5]",
