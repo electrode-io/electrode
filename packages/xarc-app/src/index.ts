@@ -71,9 +71,13 @@ export function isomorphicExtendRequire() {
 
       return assets;
     }
-  }).catch((err: Error) => {
-    isoExtRequire._instance.interceptLoad();
-  });
+  })
+    .then(() => {
+      isoExtRequire.setLogLevel("error");
+    })
+    .catch((err: Error) => {
+      isoExtRequire._instance.interceptLoad();
+    });
 }
 
 /**

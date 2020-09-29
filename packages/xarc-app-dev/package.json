@@ -70,7 +70,7 @@
     "fs-extra": "^9.0.1",
     "identity-obj-proxy": "^3.0.0",
     "is-ci": "^2.0.0",
-    "isomorphic-loader": "^3.1.0",
+    "isomorphic-loader": "^3.2.0",
     "lodash": "^4.17.19",
     "log-update": "^4.0.0",
     "mime": "^2.4.6",
