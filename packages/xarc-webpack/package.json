@@ -16,7 +16,7 @@
   },
   "license": "Apache-2.0",
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf lib && tsc",
     "test": "xrun xarc/test-only",
     "lint": "clap lint",
     "coverage": "xrun xarc/test-cov",

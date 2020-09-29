@@ -4,7 +4,7 @@
   "description": "Render index.htm from JSX template",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf dist && tsc",
     "test": "xrun xarc/test-only",
     "coverage": "xrun xarc/check",
     "prepublishOnly": "xrun [[build, docs], xarc/check]",

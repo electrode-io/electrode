@@ -4,7 +4,7 @@
   "description": "Context for index.htm generation",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf dist && tsc",
     "prepublishOnly": "clap -n build docs && clap check",
     "docs": "clap xarc/docs"
   },
