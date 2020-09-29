@@ -6,7 +6,14 @@ import milligram from "milligram/dist/milligram.css"; // eslint-disable-line no-
  * Demostrates a simple pure functional component
  */
 
-export const DemoButtons = () => (
+import { createDynamicComponent } from "@xarc/react";
+
+const DemoButtonsOutline = createDynamicComponent({
+  name: "demo-buttons-outline",
+  getModule: () => import("./demo-buttons-outline")
+});
+
+const DemoButtons = () => (
   <div>
     <h6 styleName="custom.docs-header">
       demo CSS modules with buttons from <a href="https://milligram.io/">milligram</a>
@@ -19,13 +26,10 @@ export const DemoButtons = () => (
       <input type="submit" value="submit input" />
       <input type="button" value="button input" />
     </div>
-    <div styleName="custom.docs-example">
-      <a styleName="milligram.button milligram.button-outline" href="#">
-        Anchor button
-      </a>
-      <button styleName="milligram.button-outline">Button element</button>
-      <input styleName="milligram.button-outline" type="submit" value="submit input" />
-      <input styleName="milligram.button-outline" type="button" value="button input" />
-    </div>
+    <DemoButtonsOutline />
   </div>
 );
+
+export const subapp = {
+  Component: DemoButtons
+};

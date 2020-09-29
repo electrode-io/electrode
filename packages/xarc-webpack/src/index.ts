@@ -61,6 +61,10 @@ export const partials = {
    */
   resolveLoader: genPartials["_resolve-loader"],
   /**
+   * setup subapp version 2 plugins and config
+   */
+  subapp2: genPartials["_subapp2"],
+  /**
    * base setup for running Karma tests
    */
   karmaBase: genPartials["_test-base"],
@@ -182,6 +186,7 @@ export const profiles = {
     partials.output,
     partials.resolve,
     partials.resolveLoader,
+    partials.subapp2,
     partials.babel,
     partials.extractStyle,
     partials.fonts,

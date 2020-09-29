@@ -1893,9 +1893,18 @@
    '@types/yargs': ^15.0.0
    chalk: ^3.0.0
 '@loadable/babel-plugin':
- _latest: 5.12.0
+ _latest: 5.13.2
  _:
   ^5.10.0: 5.12.0
+  ^5.13.2: 5.13.2
+ 5.13.2:
+  top: 1
+  $: sha512-vSZUVeTH1S1sDbk8Tzft0plZSkN7W4zmVR5w/Bmy4UmvBiu9lin7ztrDpoUTUzxpoups+OJbTc/OosvN0aMXWg==
+  _: 'https://registry.npmjs.org/@loadable/babel-plugin/-/babel-plugin-5.13.2.tgz'
+  dependencies:
+   '@babel/plugin-syntax-dynamic-import': ^7.7.4
+  peerDependencies:
+   '@babel/core': ^7.0.0-0
  5.12.0:
   $: sha512-hb4TDUalaGogsCASEi0fD9Jn0Y2nQybupGgJQAxmx2KrLKxRoWfg78bJMabvownonsq3MEWgUWqb0c3m0uX9vQ==
   _: 'https://registry.npmjs.org/@loadable/babel-plugin/-/babel-plugin-5.12.0.tgz'
@@ -1915,12 +1924,12 @@
   peerDependencies:
    react: '>=16.3.0'
 '@loadable/server':
- _latest: 5.12.0
+ _latest: 5.13.2
  _:
-  ^5.9.0: 5.12.0
- 5.12.0:
-  $: sha512-Sb4hPz3vPf2z8GMPlW2kSiDwy3Lv38LhVFEW/Uy3BJqHxNlollJDD3rXQ6zmCZY5S/x/m1tPox8UyIBhcr8SZg==
-  _: 'https://registry.npmjs.org/@loadable/server/-/server-5.12.0.tgz'
+  ^5.9.0: 5.13.2
+ 5.13.2:
+  $: sha512-2Nn4YdpAuXngP5H3OQ1TlmdILLx35jyCZ0iOVWAf0ihdkWBYXbAiwOTYt+r2vQiXIGeAaQc44GkKgod8Vp5S8g==
+  _: 'https://registry.npmjs.org/@loadable/server/-/server-5.13.2.tgz'
   dependencies:
    lodash: ^4.17.15
   peerDependencies:
@@ -2056,9 +2065,13 @@
    jest-diff: ^25.2.1
    pretty-format: ^25.2.1
 '@types/json-schema':
- _latest: 7.0.4
+ _latest: 7.0.6
  _:
-  '^7.0.3,^7.0.4': 7.0.4
+  ^7.0.3: 7.0.4
+  ^7.0.4: 7.0.6
+ 7.0.6:
+  $: sha512-3c+yGKvVP5Y9TYBEibGNR+kLtijnj7mYrXRg+WpFb2X9xm04g/DXYkfg4hmzJQosc9snFNUPkbYIhu+KAm6jJw==
+  _: 'https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.6.tgz'
  7.0.4:
   $: sha512-8+KAKzEvSUdeo+kmqnKrqgeE+LcA0tjYWFY7RPProVYwnqDjukzO+3b6dLD56rYX5TdWejnEOLJYOIeh4CXKuA==
   _: 'https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.4.tgz'
@@ -2335,7 +2348,7 @@
    '@babel/runtime': ^7.8.3
    css-modules-require-hook: ^4.0.2
    ignore-styles: ^5.0.1
-   isomorphic-loader: ^3.1.0
+   isomorphic-loader: ^3.2.0
    optional-require: ^1.0.0
    subapp-util: ^1.1.1
 '@xarc/app-dev':
@@ -2378,7 +2391,7 @@
    fs-extra: ^9.0.1
    identity-obj-proxy: ^3.0.0
    is-ci: ^2.0.0
-   isomorphic-loader: ^3.1.0
+   isomorphic-loader: ^3.2.0
    lodash: ^4.17.19
    log-update: ^4.0.0
    mime: ^2.4.6
@@ -2488,6 +2501,18 @@
   dependencies:
    stylus: ^0.54.7
    stylus-relative-loader: ^3.4.0
+'@xarc/react':
+ _latest: 0.0.1-fynlocal_h
+ _:
+  ../../packages/xarc-react: 0.0.1-fynlocal_h
+ 0.0.1-fynlocal_h:
+  top: 1
+  $: local
+  _: ../../packages/xarc-react
+  dependencies:
+   '@xarc/subapp': ../xarc-subapp
+   react: ^16.13.1
+   react-dom: ^16.13.1
 '@xarc/run':
  _latest: 1.0.2
  _:
@@ -2509,6 +2534,13 @@
    string-array: ^1.0.1
    unwrap-npm-cmd: ^1.1.1
    xsh: ^0.4.5
+'@xarc/subapp':
+ _latest: 0.0.1-fynlocal_h
+ _:
+  ../xarc-subapp: 0.0.1-fynlocal_h
+ 0.0.1-fynlocal_h:
+  $: local
+  _: ../../packages/xarc-subapp
 '@xarc/webpack':
  _latest: 8.1.4-fynlocal_h
  _:
@@ -2527,7 +2559,7 @@
    electrode-node-resolver: ^2.0.1
    file-loader: ^2.0.0
    filter-scan-dir: ^1.0.9
-   isomorphic-loader: ^3.1.0
+   isomorphic-loader: ^3.2.0
    lodash: ^4.17.19
    mini-css-extract-plugin: ^0.9.0
    mkdirp: ^1.0.3
@@ -2623,10 +2655,10 @@ ajv:
  _latest: 6.11.0
  _:
   '^6.1.0,^6.10.2,^6.5.3,^6.5.5': 6.11.0
-  ^6.12.2: 6.12.3
- 6.12.3:
-  $: sha512-4K0cK3L1hsqk9xIb2z9vs/XU+PGJZ9PNpJRDS9YLzmNdX6jmVPfamLvTJr0aDAusnHyCHO6MjzlkAsgtqp9teA==
-  _: 'https://registry.npmjs.org/ajv/-/ajv-6.12.3.tgz'
+  ^6.12.2: 6.12.5
+ 6.12.5:
+  $: sha512-lRF8RORchjpKG50/WFf8xmg7sgCLFiYNNnqdKflk63whMQcWR5ngGjiSXkL9bjxy6B2npOK2HSMN49jEBMSkag==
+  _: 'https://registry.npmjs.org/ajv/-/ajv-6.12.5.tgz'
   dependencies:
    fast-deep-equal: ^3.1.1
    fast-json-stable-stringify: ^2.0.0
@@ -6816,12 +6848,12 @@ isobject:
   dependencies:
    isarray: 1.0.0
 isomorphic-loader:
- _latest: 4.1.0
+ _latest: 3.2.0
  _:
-  ^3.1.0: 3.1.0
- 3.1.0:
-  $: sha512-AMMnWgSiosPXdtS4AKLV3U9bdrGNbkxNCVmktETcM4ujtDtHQqkrEUoUX1pmJgBFpbYv6KjP8IXVzgUmHzHrJQ==
-  _: 'https://registry.npmjs.org/isomorphic-loader/-/isomorphic-loader-3.1.0.tgz'
+  ^3.2.0: 3.2.0
+ 3.2.0:
+  $: sha512-7hbfhhrL8XIYIkh+HOq6R6TCxYUsDKFPvcwoC6iLG2SyL7DNS5pl8sJD+j35oRqqvkPTpt5kMYTvNpJomY83bg==
+  _: 'https://registry.npmjs.org/isomorphic-loader/-/isomorphic-loader-3.2.0.tgz'
   dependencies:
    deep-extend: ^0.6.0
    lockfile: ^1.0.4
@@ -7744,8 +7776,8 @@ loader-utils:
   _: 'https://registry.npmjs.org/loader-utils/-/loader-utils-2.0.0.tgz'
   dependencies:
    big.js: ^5.2.2
-   emojis-list: ^2.0.0
-   json5: ^1.0.1
+   emojis-list: ^3.0.0
+   json5: ^2.1.2
  1.4.0:
   $: sha512-qH0WSMBtn/oHuwjy/NucEgbx5dbxxnxup9s4PVXJUDHZBQY+s0NWA9rJf53RBnQZxfch7euUui7hpoAPvALZdA==
   _: 'https://registry.npmjs.org/loader-utils/-/loader-utils-1.4.0.tgz'
@@ -7875,11 +7907,6 @@ lodash.foreach:
  4.5.0:
   $: sha1-Gmo16s5AEoDH8G3d7DUWWrJ+PlM=
   _: 'https://registry.npmjs.org/lodash.foreach/-/lodash.foreach-4.5.0.tgz'
-  dependencies:
-   lodash._arrayeach: ^3.0.0
-   lodash._baseeach: ^3.0.0
-   lodash._bindcallback: ^3.0.0
-   lodash.isarray: ^3.0.0
  3.0.3:
   $: sha1-b9fvt5aRrs1n/erCdhyY5wHWw5o=
   _: 'https://registry.npmjs.org/lodash.foreach/-/lodash.foreach-3.0.3.tgz'
@@ -10503,7 +10530,7 @@ rasha:
 react:
  _latest: 16.13.1
  _:
-  ^16.0.0: 16.13.1
+  '^16.0.0,^16.13.1': 16.13.1
  16.13.1:
   $: sha512-YMZQQq32xHLX0bz5Mnibv1/LHb3Sqzngu7xstSM+vrkE5Kzr9xE0yMByK5kMoTK30YVJE61WfbxIFFvfeDKT1w==
   _: 'https://registry.npmjs.org/react/-/react-16.13.1.tgz'
@@ -10514,7 +10541,7 @@ react:
 react-dom:
  _latest: 16.13.1
  _:
-  ^16.0.0: 16.13.1
+  '^16.0.0,^16.13.1': 16.13.1
  16.13.1:
   $: sha512-81PIMmVLnCNLO/fFOQxdQkvEq/+Hfpv24XNJfpyZhTRfO0QcmQIF/PgCa1zCOj2w1hrn12MFLyaJ/G0+Mxtfag==
   _: 'https://registry.npmjs.org/react-dom/-/react-dom-16.13.1.tgz'
@@ -11251,9 +11278,9 @@ schema-utils:
   $: sha512-0ilKFI6QQF5nxDZLFn2dMjvc4hjg/Wkg7rHd3jK6/A4a1Hl9VFdQWvgB1UMGoU94pad1P/8N7fMcEnLnSiju8A==
   _: 'https://registry.npmjs.org/schema-utils/-/schema-utils-2.7.0.tgz'
   dependencies:
-   ajv: ^6.1.0
-   ajv-errors: ^1.0.0
-   ajv-keywords: ^3.1.0
+   ajv: ^6.12.2
+   ajv-keywords: ^3.4.1
+   '@types/json-schema': ^7.0.4
  1.0.0:
   $: sha512-i27Mic4KovM/lnGsy8whRCHhc7VicJajAjTrYg11K9zfZXnYIt4k5F+kZkwjnrhKzLic/HLU4j11mjsz2G/75g==
   _: 'https://registry.npmjs.org/schema-utils/-/schema-utils-1.0.0.tgz'

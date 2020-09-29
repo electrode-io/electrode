@@ -17,12 +17,16 @@ import { routes } from "../../client/routes";
 
 let routesEngine;
 
-module.exports = req => {
+import { subAppReady } from "@xarc/react";
+
+module.exports = async req => {
   if (!routesEngine) {
     routesEngine = new ReduxRouterEngine({
       routes,
       webappPrefix: req.server.app.config.ui.webappPrefix
     });
+
+    await subAppReady();
   }
 
   return routesEngine.render(req);

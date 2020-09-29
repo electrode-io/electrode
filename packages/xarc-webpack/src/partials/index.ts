@@ -19,6 +19,7 @@ const orders = [
   "_output",
   "_resolve",
   "_resolve-loader",
+  "_subapp2",
   "_test-base",
   "_test-entry",
   "_test-output",

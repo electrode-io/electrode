@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "outDir": "dist-node-cjs",
+    "lib": ["es2018"],
+    "module": "CommonJS",
+    "esModuleInterop": false,
+    "target": "ES2018",
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "declaration": true,
+    "types": ["node"],
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "alwaysStrict": true,
+    "strictFunctionTypes": true,
+    "moduleResolution": "Node"
+  },
+  "include": ["src/node", "src/subapp"]
+}

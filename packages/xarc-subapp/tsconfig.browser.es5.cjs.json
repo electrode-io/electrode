@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "outDir": "dist-browser~es5~cjs~",
+    "lib": ["es2018", "DOM"],
+    "module": "CommonJS",
+    "esModuleInterop": false,
+    "target": "ES5",
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "declaration": true,
+    "types": [],
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "alwaysStrict": true,
+    "strictFunctionTypes": true,
+    "moduleResolution": "Node"
+  },
+  "include": ["src/browser", "src/subapp"]
+}

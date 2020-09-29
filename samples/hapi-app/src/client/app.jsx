@@ -3,6 +3,7 @@
 //
 
 import React from "react";
+
 import { render, hydrate } from "react-dom";
 import { routes } from "./routes";
 import { BrowserRouter } from "react-router-dom";
@@ -11,6 +12,7 @@ import { Provider } from "react-redux";
 import rootReducer from "./reducers";
 import { renderRoutes } from "react-router-config";
 import uiConfig from "electrode-ui-config";
+import { subAppReady } from "@xarc/react";
 
 //
 // PWA registration
@@ -65,8 +67,10 @@ const start = App => {
 };
 
 window.hapiSampleWebappStart = () => {
-  uiConfig.reload(window.hapiSample_config || {});
-  return start(() => renderRoutes(routes));
+  subAppReady().then(() => {
+    uiConfig.reload(window.hapiSample_config || {});
+    return start(() => renderRoutes(routes));
+  });
 };
 
 //

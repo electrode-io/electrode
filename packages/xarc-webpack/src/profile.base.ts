@@ -9,6 +9,7 @@ const profile = {
     _output: { order: 300 },
     _resolve: { order: 400 },
     "_resolve-loader": { order: 500 },
+    _subapp2: { order: 600 },
     //
     _babel: { order: 2000 },
     "_extract-style": { order: 2100 },

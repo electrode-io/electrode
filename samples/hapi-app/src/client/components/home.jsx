@@ -19,13 +19,27 @@ import React from "react";
 import { connect } from "react-redux";
 import "../styles/raleway.css";
 import custom from "../styles/custom.css"; // eslint-disable-line no-unused-vars
-import electrodePng from "../images/electrode.png";
 import DemoStates from "./demo-states";
 import DemoPureStates from "./demo-pure-states";
-import { DemoButtons } from "./demo-buttons";
+// import { DemoButtons } from "./demo-buttons";
 import DemoSugarss from "./demo-sugarss";
 import DemoDynamicImport from "./demo-dynamic-import";
 import { Nav } from "./nav";
+
+import { declareSubApp, createDynamicComponent } from "@xarc/react";
+
+const HelloComponent = createDynamicComponent(
+  {
+    name: "hello",
+    getModule: () => import("./hello")
+  },
+  { ssr: true }
+);
+
+const DemoButtons = createDynamicComponent(
+  declareSubApp({ name: "demo-buttons", getModule: () => import("./demo-buttons") }),
+  { ssr: true }
+);
 
 //
 import DemoCookies from "./demo-cookies";
@@ -53,13 +67,7 @@ class Home extends React.Component {
         {/**/}
 
         <section styleName="custom.header">
-          <h2>
-            <span>Hello from </span>
-            <a href="https://github.com/electrode-io">
-              {"Electrode"}
-              <img src={electrodePng} />
-            </a>
-          </h2>
+          <HelloComponent />
         </section>
 
         <div styleName="custom.docs-section">
@@ -101,7 +109,4 @@ Home.propTypes = {};
 
 const mapStateToProps = state => state;
 
-export default connect(
-  mapStateToProps,
-  dispatch => ({ dispatch })
-)(Home);
+export default connect(mapStateToProps, dispatch => ({ dispatch }))(Home);

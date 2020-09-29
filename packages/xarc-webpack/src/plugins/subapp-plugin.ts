@@ -34,7 +34,7 @@ const SHIM_parseCommentOptions = Symbol("parseCommentOptions");
  *
  */
 export class SubAppWebpackPlugin {
-  _declareApiName: string;
+  _declareApiNames: string[];
   _subApps: Record<string, any>;
   _wVer: number;
   _makeIdentifierBEE: Function;
@@ -44,8 +44,11 @@ export class SubAppWebpackPlugin {
    *
    * @param options - subapp plugin options
    */
-  constructor({ declareApiName = "declareSubApp", webpackVersion = findWebpackVersion() } = {}) {
-    this._declareApiName = declareApiName;
+  constructor({
+    declareApiName = ["declareSubApp", "createDynamicComponent"],
+    webpackVersion = findWebpackVersion()
+  }: { declareApiName?: string | string[]; webpackVersion?: number } = {}) {
+    this._declareApiNames = [].concat(declareApiName);
     this._subApps = {};
     this._wVer = webpackVersion;
 
@@ -128,7 +131,7 @@ export class SubAppWebpackPlugin {
   }
 
   apply(compiler) {
-    const apiName = this._declareApiName;
+    const apiNames = this._declareApiNames;
 
     this._tapAssets(compiler);
 
@@ -174,10 +177,14 @@ export class SubAppWebpackPlugin {
           return `${source}:${loc.start.line}:${loc.start.column + 1}`;
         };
 
-        parser.hooks.call.for(apiName).tap(pluginName, expression => {
+        const parseForSubApp = (expression, apiName) => {
           const currentSource = _.get(parser, "state.current.resource", "");
           const props = _.get(expression, "arguments[0].properties");
           const cw = () => where(noCwd(currentSource), expression.loc);
+
+          if (!props && apiName === "createDynamicComponent") {
+            return;
+          }
 
           assert(props, () => `${cw()}: you must pass an Object literal as argument to ${apiName}`);
 
@@ -214,12 +221,16 @@ export class SubAppWebpackPlugin {
             getModule: gm,
             module: mod
           };
+        };
+
+        [].concat(apiNames).forEach(apiName => {
+          parser.hooks.call.for(apiName).tap(pluginName, expr => parseForSubApp(expr, apiName));
         });
 
         parser.hooks.evaluate
           .for("Identifier")
           .tap({ name: pluginName, before: "Parser" }, expression => {
-            if (expression.name === apiName) {
+            if (apiNames.includes(expression.name)) {
               return this._makeIdentifierBEE(expression);
             }
 
@@ -229,5 +240,3 @@ export class SubAppWebpackPlugin {
     });
   }
 }
-
-module.exports = SubAppWebpackPlugin;

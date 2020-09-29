@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "outDir": "dist-browser~es5~cjs~",
+    "jsx": "react",
+    "jsxFactory": "createElement",
+    "lib": ["es2018", "DOM"],
+    "module": "CommonJS",
+    "esModuleInterop": false,
+    "target": "ES5",
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "declaration": true,
+    "types": ["node", "react", "react-dom"],
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "alwaysStrict": true,
+    "strictFunctionTypes": true,
+    "moduleResolution": "Node"
+  },
+  "include": ["src/browser", "src/common"]
+}
