@@ -78,6 +78,7 @@ const getReactCssModulePlugin = () => {
     [
       babelReactCssModulePlugin,
       {
+        context: "./src",
         generateScopedName: `${isProduction ? "" : "[name]__[local]___"}[hash:base64:5]`,
         filetypes: {
           ".scss": {
