@@ -4,7 +4,9 @@
   "description": "Create react.js/node.js webapp using the Electrode Platform",
   "main": "dist/index.js",
   "scripts": {
-    "prepublishOnly": "webpack"
+    "prepublishOnly": "webpack",
+    "test": "mocha",
+    "coverage": "nyc npm test"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
@@ -21,9 +23,9 @@
   ],
   "files": [
     "bin",
+    "dist",
     "lib",
-    "template",
-    "dist"
+    "template"
   ],
   "author": "Electrode (http://www.electrode.io/)",
   "contributors": [
@@ -33,21 +35,66 @@
   "devDependencies": {
     "@babel/core": "^7.6.2",
     "@babel/preset-env": "^7.6.2",
+    "@types/chai": "^4.2.11",
+    "@types/mocha": "^7.0.2",
+    "@xarc/module-dev": "^2.2.4",
     "babel-loader": "^8.0.6",
+    "chai": "^4.2.0",
     "chalker": "^1.2.0",
     "lodash": "^4.17.15",
+    "mocha": "^7.1.0",
+    "nyc": "^15.0.0",
     "opfs": "^1.1.1",
     "prompts": "^2.3.2",
     "shcmd": "^0.7.9",
+    "sinon": "^7.2.6",
+    "sinon-chai": "^3.3.0",
     "webpack": "^4.41.0",
     "webpack-bundle-analyzer": "^3.5.2",
     "webpack-cli": "^3.3.9",
-    "xclap": "^0.2.51"
+    "xclap": "^0.2.51",
+    "run-verify": "^1.2.5"
   },
   "prettier": {
     "printWidth": 100,
     "arrowParens": "avoid",
     "trailingComma": "none"
   },
-  "dependencies": {}
+  "mocha": {
+    "require": [
+      "./test/setup.js"
+    ],
+    "recursive": true
+  },
+  "nyc": {
+    "extends": [],
+    "all": true,
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "include": [
+      "src"
+    ],
+    "exclude": [
+      "*clap.js",
+      "*clap.ts",
+      "coverage",
+      "dist",
+      "docs",
+      "gulpfile.js",
+      "test",
+      "xrun*.js",
+      "xrun*.ts",
+      "template",
+      "bin"
+    ],
+    "check-coverage": true,
+    "statements": 100,
+    "branches": 100,
+    "functions": 100,
+    "lines": 100,
+    "cache": true
+  }
 }
