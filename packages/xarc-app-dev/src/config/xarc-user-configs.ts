@@ -1,30 +1,43 @@
-import { PathLike } from "fs";
-
-export type CreateXarcOptions = {
-  electrodePackages?: string[];
-  electrodePackagesDev?: string[];
-  enableFeatures?: boolean;
-  assertNoGulpExecution?: boolean;
-  assertDevArchetypePresent?: boolean;
-  options?: OptionalPackages;
-  configPaths?: ConfigPaths;
-};
+/** Optional features to install  */
 export interface OptionalPackages {
+  /** install flow */
   flow?: boolean;
+  /** es lint formatting */
   eslint?: boolean;
-  karma?: boolean;
-  jest?: boolean;
-  mocha?: boolean;
-  reactLib?: string;
-  typescript?: boolean;
-  sass?: boolean;
 
+  /** framework to enable browser testing */
+  karma?: boolean;
+
+  /** unit test framework */
+  jest?: boolean;
+
+  /** unit est framework */
+  mocha?: boolean;
+
+  /** enable 'react' or 'preact' */
+  reactLib?: string;
+
+  /** enable typescript */
+  typescript?: boolean;
+
+  /** enable sass */
+  sass?: boolean | "stylus" | "scss" | "less"[];
+
+  /** config paths for configuration of those packages */
   configPaths?: ConfigPaths;
 }
-export type PORT_NUMBER = number;
+
 
 export type ProcessEnvConfigs = {
-  KARMA_BROWSER?: AutomatedBrowsers;
+
+  KARMA_BROWSER?: | "Chrome"
+  | "ChromeCanary"
+  | "ChromeHeadless"
+  | "PhantomJS"
+  | "Firefox"
+  | "Opera"
+  | "IE"
+  | "Safari";
   SERVER_ES6?: boolean;
   ELECTRODE_DEV_OPEN_BROWSER?: boolean;
   _ELECTRODE_DEV_?: boolean;
@@ -36,38 +49,80 @@ export type ProcessEnvConfigs = {
   PORT?: number;
 };
 
+export type CreateXarcOptions = {
+  /* list of @xarc/opt-[scss|mocha|jest|eslint] packages to include */
+  electrodePackages?: string[];
+  /** list of @xarc/opt-[scss|mocha|jest|eslint] packages in dev dependency */
+  electrodePackagesDev?: string[];
+  /** enable the interactive mode to enable optional features */
+  enableFeatures?: boolean;
+  /** use xclap/xrun instead of gulp */
+  assertNoGulpExecution?: boolean;
+  /** list of @optionalPackages */
+  options?: OptionalPackages;
+  /** config files */
+  configPaths?: {
+    babel?: string;
+    eslint?: string;
+    karma?: string;
+    mocha?: string;
+    webpack?: string;
+    jest?: string;
+  }
+};
+
 export type XarcUserConfigs = CreateXarcOptions &
   ProcessEnvConfigs & {
     webpack?: WebpackConfig;
     babel?: BabelConfigs;
     karma?: KarmaConfigs;
-    enableCssModule?: boolean;
+    enableCssModule?: boolean | "stylus" | "scss" | "less"[];
   };
 export interface ConfigPaths {
-  babel: PathLike;
-  eslint: PathLike;
-  karma: PathLike;
-  mocha: PathLike;
-  webpack: PathLike;
-  jest: PathLike;
+  babel?: string;
+  eslint?: string;
+  karma?: string;
+  mocha?: string;
+  webpack?: string;
+  jest?: string;
 }
 
 export interface BabelConfigs {
+
+  /** enable typescript */
   enableTypeScript?: boolean;
+  /*only download javascript that user will need*/
   enableDynamicImport?: boolean;
+  /* flow uses data flow analysis to infer types and track data.. */
   enableFlow?: boolean;
+  /* enables @babel/plugin-transform-flow-strip-types */
   flowRequireDirective?: boolean;
+
+  /** @babel/plugin-proposal-decorators */
   proposalDecorators?: boolean;
+
+  /* whether to use the legacy (stage 1) decorators syntax and behavior. */
   legacyDecorators?: boolean;
+
+  /*transforms class props*/
   transformClassProps?: boolean;
+
+  /*transforms class props with Object.defineProperty*/
   looseClassProps?: boolean;
+
+  /* babel env target*/
   envTargets?: {
     default?: {};
     node?: {};
   };
-  target?: string;
+
+  /**  browserlist target*/
+  target?: string | Array<string>;
+  /** babel loader for multi target */
   extendLoader?: {};
 }
+
+/** list of browsers to load Karma unit tests on */
 export type AutomatedBrowsers =
   | "Chrome"
   | "ChromeCanary"
@@ -80,23 +135,48 @@ export type AutomatedBrowsers =
 export interface KarmaConfigs {
   browser: AutomatedBrowsers;
 }
+
+
 export interface WebpackConfig {
+  /* Webpack dev-sever configuration */
   webpackDev?: boolean;
   devHostname?: string;
   devPort?: number;
+
+  /* used for mock-cdn: simulated cdn hosting on webpack dev server*/
   cdnProtocol?: string;
   cdnHostname?: string;
   cdnPort?: number;
+
+  /*location of hmr and stats.json*/
   devArtifactsPath?: string;
-  cssModuleSupport?: boolean;
+
+  /** load css module */
+  cssModuleSupport?: boolean | "css" | "style" | "scss" | "less"[];
+
+  /** enable @babel/polyfill */
   enableBabelPolyfill?: boolean;
+
+  /** Enable webpack's NodeSourcePlugin to simulate NodeJS libs in browser */
   enableNodeSourcePlugin?: boolean;
+
+  /** Enable Webpack's HotModuleReload to watch fsevents and trigger devserver reload on code change*/
   enableHotModuleReload?: boolean;
   enableWarningsOverlay?: boolean;
+
+  /** application/font-woff file loader limit */
   woffFontInlineLimit?: number;
+
+  /** https://webpack.js.org/configuration/resolve/#resolve-symlinks */
   preserveSymlinks?: boolean;
+
+  /** Tell Electrode app archetype that you want to shorten css names under production env */
   enableShortenCSSNames?: boolean;
+
+  /** code split subapp js with their separate entry point to optimize load time */
   minimizeSubappChunks?: boolean;
+
+  /**  */
   optimizeCssOptions?: {
     zindex: boolean;
   };
@@ -179,7 +259,6 @@ export const defaultCreateXarcOptions: CreateXarcOptions = {
   electrodePackagesDev: [],
   enableFeatures: true,
   assertNoGulpExecution: true,
-  assertDevArchetypePresent: true
 };
 export const defaultUserConfig: XarcUserConfigs = {
   ...defaultCreateXarcOptions,
