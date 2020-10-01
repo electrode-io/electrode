@@ -25,8 +25,6 @@ const chalk = require("chalk");
 const mkdirp = require("mkdirp");
 const xsh = require("xsh");
 
-require("../typedef");
-
 /**
  * Get the webpack's CLI command from @xarc/webpack
  *

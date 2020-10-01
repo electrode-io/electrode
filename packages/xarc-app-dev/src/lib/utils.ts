@@ -5,7 +5,6 @@ import * as pkgUp from "pkg-up";
 
 const Path = require("path");
 const Fs = require("fs");
-require("../typedef");
 
 const Url = require("url");
 

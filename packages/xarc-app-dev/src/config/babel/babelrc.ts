@@ -106,7 +106,7 @@ const basePlugins = [
   // Note: This must go before @babel/plugin-proposal-class-properties
   (enableTypeScript || proposalDecorators) && [
     "@babel/plugin-proposal-decorators",
-    { legacy: legacyDecorators }
+    { legacy: legacyDecorators, ...proposalDecorators }
   ],
   //
   // allow class properties. loose option compile to assignment expression instead
@@ -115,7 +115,7 @@ const basePlugins = [
   //
   (enableTypeScript || transformClassProps) && [
     "@babel/plugin-proposal-class-properties",
-    { loose: looseClassProps }
+    { loose: looseClassProps, ...transformClassProps }
   ],
   //
   // i18n has not been used at all and these are very outdated
@@ -139,7 +139,7 @@ const basePlugins = [
   !isNodeTarget && "@babel/plugin-transform-runtime",
   addFlowPlugin && [
     "@babel/plugin-transform-flow-strip-types",
-    { requireDirective: flowRequireDirective }
+    { requireDirective: flowRequireDirective, ...enableFlow }
   ]
 ];
 

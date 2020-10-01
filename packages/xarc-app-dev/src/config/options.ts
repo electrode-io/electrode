@@ -5,7 +5,6 @@ const Path = require("path");
 const optionalRequire = require("optional-require")(require);
 const constants = require("./constants");
 const utils = require("../lib/utils");
-require("../typedef");
 
 function checkOptArchetypeInAppDep(dependencies, isDev = undefined) {
   const options = dependencies
@@ -47,7 +46,7 @@ function checkOptArchetypeInAppDep(dependencies, isDev = undefined) {
 
 const getUserConfigOptions = (packageNames, devPackageNames) =>
   Object.assign(
-    { reactLib: "react", karma: true, sass: false, options: {} },
+    { reactLib: "react", karma: true, sass: false },
     optionalRequire(Path.resolve("archetype/config"), { default: {} }).options,
     //
     // Check for any optional archetype in application's devDependencies or dependencies

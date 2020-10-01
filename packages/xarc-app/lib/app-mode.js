@@ -38,7 +38,6 @@ function makeAppMode(prodDir = constants.PROD_DIR, reactLib = "react") {
     const savedFileFP = Path.resolve(savedFile);
     const subApps = subappUtil.scanSubAppsFromDir("src");
     const hasSubApps = Object.keys(subApps).length > 0;
-
     //
     // app still has src directory in production mode so we know
     // app is definitely in the src/lib dir structure setup
@@ -107,5 +106,4 @@ function makeAppMode(prodDir = constants.PROD_DIR, reactLib = "react") {
     version
   };
 }
-
 module.exports = makeAppMode;
