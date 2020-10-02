@@ -1,3 +1,0 @@
-{
-  "extends": "electrode-archetype-react-component-dev/config/babel/.babelrc.js"
-}

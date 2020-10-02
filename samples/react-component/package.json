@@ -1,0 +1,92 @@
+{
+  "name": "react-component",
+  "version": "1.0.0",
+  "description": "A module with a simple react component for testing",
+  "main": "dist-node-cjs/index.js",
+  "module": "dist-node-esm/index.js",
+  "browser": {
+    "./dist-node-cjs/index.js": "./dist-browser~es5~cjs~/index.js",
+    "./dist-node-esm/index.js": "./dist-browser~es2x~esm~/index.js"
+  },
+  "scripts": {
+    "build": "rm -rf dist* && tsc --build tsconfig.node.cjs.json tsconfig.node.esm.json tsconfig.browser.es5.cjs.json tsconfig.browser.es2x.esm.json",
+    "test": "echo OK"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {
+    "react": "^16.13.1"
+  },
+  "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.1",
+    "@types/chai": "^4.2.11",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^13.7.6",
+    "@types/react": "^16.9.50",
+    "@types/react-dom": "^16.9.8",
+    "@types/sinon": "^9.0.0",
+    "@types/sinon-chai": "^3.2.4",
+    "@xarc/module-dev": "^2.2.4",
+    "chai": "^4.2.0",
+    "mocha": "^7.1.0",
+    "nyc": "^15.0.0",
+    "react": "^16.13.1",
+    "sinon": "^7.2.6",
+    "sinon-chai": "^3.3.0",
+    "source-map-support": "^0.5.16",
+    "ts-node": "^8.6.2",
+    "typedoc": "^0.17.4",
+    "typescript": "^3.8.3"
+  },
+  "files": [
+    "dist-node-cjs",
+    "dist-node-esm",
+    "dist-browser~es5~cjs~",
+    "dist-browser~es2x~esm~",
+    "src"
+  ],
+  "mocha": {
+    "require": [
+      "ts-node/register",
+      "source-map-support/register",
+      "@xarc/module-dev/config/test/setup.js"
+    ],
+    "recursive": true
+  },
+  "nyc": {
+    "extends": [
+      "@istanbuljs/nyc-config-typescript"
+    ],
+    "all": true,
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "exclude": [
+      "*clap.js",
+      "*clap.ts",
+      "coverage",
+      "dist",
+      "docs",
+      "gulpfile.js",
+      "test",
+      "xrun*.js",
+      "xrun*.ts"
+    ],
+    "check-coverage": false,
+    "statements": 100,
+    "branches": 100,
+    "functions": 100,
+    "lines": 100,
+    "cache": false
+  },
+  "@xarc/module-dev": {
+    "features": [
+      "mocha",
+      "typedoc",
+      "typescript"
+    ]
+  }
+}

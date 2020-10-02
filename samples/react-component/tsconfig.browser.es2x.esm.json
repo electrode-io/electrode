@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "outDir": "dist-browser~es2x~esm~",
+    "jsx": "react",
+    "jsxFactory": "createElement",
+    "lib": ["es2018", "DOM"],
+    "module": "ES2020",
+    "esModuleInterop": false,
+    "target": "ES2019",
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "declaration": true,
+    "types": ["react", "react-dom"],
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "alwaysStrict": true,
+    "strictFunctionTypes": true,
+    "moduleResolution": "Node"
+  },
+  "include": ["src"]
+}

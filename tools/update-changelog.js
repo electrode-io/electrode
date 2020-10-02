@@ -26,8 +26,6 @@ let gitClean = false;
 const packageMapping = {
   "@xarc/app": "@xarc/app[-dev]",
   "@xarc/app-dev": "@xarc/app[-dev]",
-  "electrode-archetype-react-component": "electrode-archetype-react-component[-dev]",
-  "electrode-archetype-react-component-dev": "electrode-archetype-react-component[-dev]",
   "electrode-archetype-webpack-dll": "electrode-archetype-webpack-dll[-dev]",
   "electrode-archetype-webpack-dll-dev": "electrode-archetype-webpack-dll[-dev]"
 };

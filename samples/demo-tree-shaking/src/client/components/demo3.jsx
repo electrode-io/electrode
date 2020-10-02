@@ -3,7 +3,7 @@ import { Nav } from "./nav";
 import { connect } from "react-redux";
 import custom from "../styles/custom.css"; // eslint-disable-line no-unused-vars
 
-import { DemoComponent } from "demo-component";
+import { DemoComponent } from "react-component";
 
 class Demo3 extends Component {
   constructor(props) {
@@ -24,7 +24,4 @@ const mapStateToProps = () => {
   return {};
 };
 
-export default connect(
-  mapStateToProps,
-  dispatch => ({ dispatch })
-)(Demo3);
+export default connect(mapStateToProps, dispatch => ({ dispatch }))(Demo3);

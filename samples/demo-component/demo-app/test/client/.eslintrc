@@ -1,5 +1,0 @@
----
-extends:
-  - "@xarc/app-dev/config/eslint/.eslintrc-react-test"
-
-

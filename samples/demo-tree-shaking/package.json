@@ -34,15 +34,14 @@
     "build": "clap build",
     "prod-start": "NODE_ENV=production clap -n -x electrode/build prod",
     "start": "if test \"$NODE_ENV\" = \"production\"; then npm run prod-start; else clap dev; fi",
-    "test": "clap -n -x check electrode/build check-tree-shaking",
+    "test": "clap -n -x electrode/build check-tree-shaking",
     "check-tree-shaking": "grep -o DeadCardExampleToBeRemovedByTreeShaking dist/js/*.js && exit 1 || exit 0",
     "coverage": "clap check",
     "prod": "echo 'Starting standalone server in PROD mode'; NODE_ENV=production node ./lib/server/"
   },
   "dependencies": {
-    "bluebird": "^3.4.6",
-    "demo-component": "../demo-component/packages/demo-component",
     "@xarc/app": "^7.0.5",
+    "bluebird": "^3.4.6",
     "electrode-auto-ssr": "^1.0.0",
     "electrode-confippet": "^1.0.0",
     "electrode-cookies": "^1.0.0",
@@ -52,10 +51,13 @@
     "electrode-static-paths": "^1.0.0",
     "good": "^7.3.0",
     "good-console": "^7.1.0",
+    "intl-format-cache": "4.2.46",
     "lodash": "^4.17.10",
     "milligram": "^1.3.0",
+    "react": "^16.13.1",
+    "react-component": "../react-component",
+    "react-dom": "^16.13.1",
     "react-intl": "^3.11.0",
-    "intl-format-cache": "4.2.46",
     "react-notify-toast": "^0.4.1",
     "react-router-config": "^5.1.1"
   },
@@ -63,17 +65,16 @@
     "@xarc/opt-eslint": "*",
     "@xarc/opt-karma": "*",
     "@xarc/opt-mocha": "*",
-    "electrode-archetype-opt-phantomjs": "../../packages/electrode-archetype-opt-phantomjs",
     "@xarc/app-dev": "^7.0.5"
   },
   "fyn": {
     "dependencies": {
-      "demo-component": "../demo-component/packages/demo-component",
       "@xarc/app": "../../packages/xarc-app",
       "electrode-auto-ssr": "../../packages/electrode-auto-ssr",
+      "electrode-cookies": "../../packages/electrode-cookies",
       "electrode-react-webapp": "../../packages/electrode-react-webapp",
       "electrode-redux-router-engine": "../../packages/electrode-redux-router-engine",
-      "electrode-cookies": "../../packages/electrode-cookies"
+      "react-component": "../react-component"
     },
     "devDependencies": {
       "@xarc/app-dev": "../../packages/xarc-app-dev",

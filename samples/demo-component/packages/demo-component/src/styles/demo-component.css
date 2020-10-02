@@ -1,9 +1,0 @@
-:root {
-  --black: #000;
-  --white: #fff;
-}
-
-.baseStyle {
-  background-color: var(--black);
-  color: var(--white);
-}

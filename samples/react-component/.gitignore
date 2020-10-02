@@ -1,0 +1,10 @@
+.nyc_output
+coverage
+dist/
+dist-*/
+dist~*/
+node_modules
+# recommend avoid committing package-lock.* file because a module's CI
+# should use latest dep, as an app that consumes a module would have its
+# own lockfile, but remove this if you want to commit the package lock file.
+*-lock*

@@ -80,9 +80,9 @@ const runAppTest = (dir, forceLocal) => {
   };
 
   const localClap = Path.join("node_modules", ".bin", "clap");
-  return exec({ cwd: dir }, `fyn --pg simple -q v i && ${localClap} ?fix-generator-eslint`)
+  return exec({ cwd: dir }, `fyn --pg simple -q v i`)
     .then(() => exec({ cwd: dir }, `npm test`))
-    .then(() => exec({ cwd: dir }, `${localClap} build`));
+    .then(() => exec({ cwd: dir }, `${localClap} -n build`));
 };
 
 const testCreateApp = async (testDir, name, clean, runTest, prompts) => {
@@ -98,56 +98,11 @@ const testCreateApp = async (testDir, name, clean, runTest, prompts) => {
   shell.popd();
 };
 
-const testGenerator = (testDir, name, clean, runTest, prompts) => {
-  name = name || "test-app";
-  const yoApp = Path.join(packagesDir, "generator-electrode/generators/app/index.js");
-  const defaultPrompts = {
-    name,
-    description: "test test",
-    homepage: "http://test",
-    serverType: "HapiJS",
-    authorName: "John Smith",
-    authorEmail: "john@smith.com",
-    authorUrl: "http://www.test.com",
-    keywords: ["test", "electrode"],
-    pwa: true,
-    autoSsr: true,
-    createDirectory: false,
-    githubAccount: "test",
-    license: "Apache-2.0"
-  };
-  prompts = _.extend({}, defaultPrompts, prompts || {});
-
-  const testAppDir = Path.join(testDir, name);
-
-  if (!clean) {
-    shell.mkdir("-p", testAppDir);
-  }
-
-  const yoRun = yoTest.run(yoApp);
-  return (clean ? yoRun.inDir(testAppDir) : yoRun.cd(testAppDir))
-    .withOptions({
-      "skip-install": true
-    })
-    .withPrompts(prompts)
-    .then(() => {
-      return runTest ? runAppTest(testAppDir, true) : pullLocalPackages(testAppDir);
-    });
-};
-
 xclap.load({
-  ".lerna.coverage":
-    "~$lerna run --ignore generator-electrode --stream coverage",
-  bootstrap: "~$fynpo --ignore generator-electrode",
+  ".lerna.coverage": "~$lerna run --stream coverage",
+  bootstrap: "~$fynpo",
   test: ["bootstrap", ".lerna.coverage", "build-test"],
-  "test-generator": [".test-generator --all"],
   "test-create-app": [".test-create-app"],
-  "gen-hapi-app": [".test-generator --hapi --no-test"],
-  "gen-express-app": [".test-generator --express --no-test"],
-  "gen-koa-app": [".test-generator --koa --no-test"],
-  "test-demo-component": [
-    `~$cd ${Path.join(__dirname, "samples/demo-component")} && fyn --pg none install && npm test`
-  ],
   "test-boilerplate": [".test-boilerplate"],
   "test-stylus-sample": [".test-stylus-sample"],
   "update-changelog": ["~$node tools/update-changelog.js"],
@@ -168,15 +123,8 @@ xclap.load({
 
           const updatedStr = updated.join(" ");
 
-          // if (updatedStr.indexOf("generator-electrode") >= 0) {
-          //   tasks.push("test-generator");
-          // }
-
-          if (
-            updatedStr.indexOf("electrode-archetype-react-component") >= 0 ||
-            updatedStr.indexOf("@xarc/app") >= 0
-          ) {
-            tasks.push([".", "test-demo-component", ".test-tree-shaking"]);
+          if (updatedStr.indexOf("@xarc/app") >= 0) {
+            tasks.push([".", ".build-react-component", ".test-tree-shaking"]);
           }
 
           return tasks;
@@ -191,6 +139,10 @@ xclap.load({
 
   ".build-sample-dll": () => {
     return runAppTest(Path.join(__dirname, "samples/react-vendor-dll"));
+  },
+
+  ".build-react-component": () => {
+    return runAppTest(Path.join(__dirname, "samples/react-component"));
   },
 
   ".test-boilerplate": {
@@ -243,38 +195,6 @@ xclap.load({
       await testCreateApp(testDir, "my-app");
       const testAppDir = Path.join(testDir, "my-app");
       pullLocalPackages(testAppDir);
-    }
-  },
-
-  ".test-generator": {
-    desc: "Run tests for the yeoman generators",
-    task() {
-      const all = this.argv.length < 2 || this.argv.indexOf("--all") >= 0;
-      const express = all || this.argv.indexOf("--express") >= 0;
-      const hapi = all || this.argv.indexOf("--hapi") >= 0;
-      const koa = all || this.argv.indexOf("--koa") >= 0;
-      const runTest = this.argv.indexOf("--no-test") < 0;
-      const clean = this.argv.indexOf("--no-clean") < 0;
-      const testDir = Path.join(__dirname, "tmp");
-
-      return Promise.resolve(
-        hapi && testGenerator(testDir, "hapi-app", clean, runTest, { serverType: "HapiJS" })
-      )
-        .then(
-          () =>
-            express &&
-            testGenerator(testDir, "express-app", clean && !hapi, runTest, {
-              serverType: "ExpressJS"
-            })
-        )
-        .then(
-          () =>
-            koa &&
-            testGenerator(testDir, "koa-app", clean && !hapi && !express, runTest, {
-              serverType: "KoaJS"
-            })
-        )
-        .then(() => undefined);
     }
   }
 });
