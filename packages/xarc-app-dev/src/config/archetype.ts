@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/no-var-requires, max-statements */
+/* eslint-disable @typescript-eslint/no-var-requires, max-statements, no-console */
 
 import { XarcOptions } from "./opt2/xarc-options";
 
 const Path = require("path");
 const { merge } = require("lodash");
-const { getXarcOptions, getMyPkg } = require("../lib/utils");
+const { getMyPkg } = require("../lib/utils");
 const constants = require("./constants");
 
 const Fs = require("fs");
@@ -16,9 +16,8 @@ const getEnvProxy = require("./env-proxy");
 
 let cachedArchetype = null;
 
-function getDevArchetypeLegacy(createXarcOptions) {
-  const xarcOptions = getXarcOptions(createXarcOptions);
-  const defaultArchetypeConfig = getDefaultArchetypeOptions(xarcOptions);
+function getDevArchetypeLegacy() {
+  const defaultArchetypeConfig = getDefaultArchetypeOptions();
   const userConfig = defaultArchetypeConfig.options;
 
   const webpack = require("./env-webpack")();
@@ -93,18 +92,26 @@ function getDevArchetypeLegacy(createXarcOptions) {
 }
 
 function saveArchetypeConfig(config) {
+  const filename = ".etmp/xarc-options.json";
   const copy = { ...config, pkg: undefined, devPkg: undefined };
   let existStr;
 
   try {
-    existStr = Fs.readFileSync(".etmp/config-options.json", "utf-8");
+    existStr = Fs.readFileSync(filename, "utf-8");
   } catch (err) {
     //
   }
 
   const str = JSON.stringify(copy, null, 2);
   if (str !== existStr) {
-    Fs.writeFileSync(".etmp/config-options.json", str);
+    try {
+      Fs.writeFileSync(filename, str);
+    } catch (err) {
+      console.error(
+        `Unable to save development options to ${filename} - this will cause other failures.\n`,
+        err
+      );
+    }
   }
 }
 
@@ -116,7 +123,7 @@ module.exports = function getDevArchetype(user: XarcOptions = {}) {
   }
 
   // first get legacy configs
-  const legacy = getDevArchetypeLegacy({});
+  const legacy = getDevArchetypeLegacy();
 
   const proxy = getEnvProxy();
 

@@ -1,3 +1,5 @@
+import { XarcOptions } from "../config/opt2/xarc-options";
+
 /* eslint-disable @typescript-eslint/no-var-requires */
 export {};
 
@@ -9,7 +11,6 @@ const Path = require("path");
 const assert = require("assert");
 const requireAt = require("require-at");
 const optionalRequire = require("optional-require")(require);
-const { getXarcOptions } = require("./utils");
 const { updateEnv } = require("xclap");
 const getArchetype = require("../config/archetype");
 const ck = require("chalker");
@@ -39,28 +40,16 @@ function webpackCmd() {
 }
 
 /**
- * @param {object} xclap xclap task runner
- * @param {CreateXarcOptions} [userXarcOptions] user provided options to configure archetype generation
- * @returns {undefined} void
+ * Load xarc development tasks that can be invoked using @xarc/run
+ *
+ * @param  xclap @xarc/run task runner
+ * @param  xarcOptions user provided options to configure features etc
+ * @returns void
  */
-module.exports = function loadArchetype(xclap, userXarcOptions) {
-  const xarcOptions = getXarcOptions(userXarcOptions);
+module.exports = function loadArchetype(xclap, xarcOptions: XarcOptions = {}) {
   // lazy require modules that have effects so as to permit customization
   // from userspace, i.e. `userOptions`
   const archetype = getArchetype(xarcOptions);
-  const features = xarcOptions.enableFeatures ? require("./features").displayFeatures : undefined;
-
-  const assertNoGulpExecution = () => {
-    const cli = process.argv[1];
-    if (cli && cli.indexOf("gulp") >= 0) {
-      const cmd = chalk.magenta(`clap ${process.argv.slice(2).join(" ")}`);
-      console.log(`\nPlease use ${chalk.magenta("clap")} to run archetype commands.`);
-      console.log(`\nie:  ${cmd}`);
-      const icmd = chalk.magenta(`'npm i -g xclap-cli'`);
-      console.log(`\nIf you haven't done so, please run ${icmd}\n`);
-      process.exit(1);
-    }
-  };
 
   const mergeIsomorphicAssets = require(`../scripts/merge-isomorphic-assets.js`);
   const flattenMessagesL10n = require(`../scripts/l10n/flatten-messages.js`);
@@ -164,15 +153,6 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
   function setStaticFilesEnv() {
     process.env.STATIC_FILES = "true";
   }
-
-  const defaultListenPort = 3000;
-
-  // eslint-disable-next-line no-unused-vars
-  const portFromEnv = () => {
-    const x = parseInt(process.env.PORT, 10);
-    /* istanbul ignore next */
-    return x !== null && !isNaN(x) ? x : defaultListenPort;
-  };
 
   function setWebpackDev() {
     process.env.WEBPACK_DEV = "true";
@@ -562,8 +542,6 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
           )
         )
       },
-
-      ...(features ? { features } : {}),
 
       "mv-to-dist:clean": {
         desc: `clean static resources within ${buildDistDirs}`,
@@ -1272,10 +1250,6 @@ module.exports = function loadArchetype(xclap, userXarcOptions) {
   //   // if it's not then this will fail with an error message that it's not found.
   //   require.resolve(`${archetype.devArchetypeName}/package.json`);
   // }
-
-  if (xarcOptions.assertNoGulpExecution) {
-    assertNoGulpExecution();
-  }
 
   setupPath();
   createElectrodeTmpDir();

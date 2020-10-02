@@ -39,21 +39,6 @@ function checkUserBabelRc() {
   return false;
 }
 
-const defaultCreateOptions = {
-  electrodePackages: [],
-  electrodePackagesDev: [],
-  enableFeatures: true,
-  assertNoGulpExecution: true,
-  assertDevArchetypePresent: true
-};
-
-/**
- * @param {CreateXarcOptions} [userXarcOptions] user provided options to
- * configurearchetype generation
- * @returns {CreateXarcOptions} CreateXarcOptions
- */
-const getXarcOptions = userXarcOptions => ({ ...defaultCreateOptions, ...userXarcOptions });
-
 let myPkg;
 let myDir;
 
@@ -69,7 +54,6 @@ function getMyPkg() {
 module.exports = {
   getOptArchetypeRequire: getOptRequire,
   formUrl,
-  getXarcOptions,
   checkUserBabelRc,
   getMyPkg
 };

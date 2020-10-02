@@ -7,10 +7,11 @@
  */
 const requireAt = require("require-at");
 const ck = require("chalker");
-const archetype = require("@xarc/app-dev/config/archetype")();
 const optionalRequire = require("optional-require")(require);
 const optFlow = optionalRequire("electrode-archetype-opt-flow");
-import { getPluginFrom } from "./common";
+import { getPluginFrom, loadXarcOptions } from "./common";
+
+const xOptions = loadXarcOptions(process.env.XARC_APP_DIR);
 
 const isJest = Boolean(process.env.JEST_WORKER_ID);
 
@@ -23,26 +24,13 @@ const {
   transformClassProps,
   looseClassProps,
   enableDynamicImport
-} = archetype.babel;
+} = xOptions.babel;
 
 const addFlowPlugin = Boolean(enableFlow && optFlow);
 
-const fileId = "xarc-app-dev:babelrc.js";
+const { BABEL_ENV, NODE_ENV, XARC_BABEL_TARGET, ENABLE_KARMA_COV } = process.env;
 
-const checkEnv = names => {
-  names = names.filter(x => !process.env.hasOwnProperty(x));
-  if (!isJest && names.length > 0) {
-    console.error(
-      ck`\n<red>Notice:</> ${fileId}: env ${names.join(", ")} not defined - default to 'false'\n`
-    );
-  }
-};
-
-checkEnv(["ENABLE_CSS_MODULE", "ENABLE_KARMA_COV"]);
-
-const { BABEL_ENV, NODE_ENV, XARC_BABEL_TARGET, ENABLE_CSS_MODULE, ENABLE_KARMA_COV } = process.env;
-
-const enableCssModule = ENABLE_CSS_MODULE === "true";
+const enableCssModule = Boolean(xOptions.webpack.cssModuleSupport);
 const enableKarmaCov = ENABLE_KARMA_COV === "true";
 const isProduction = (BABEL_ENV || NODE_ENV) === "production";
 const isTest = (BABEL_ENV || NODE_ENV) === "test";
@@ -167,15 +155,15 @@ const plugins = basePlugins.concat(
     ]
 );
 
-const target = isNodeTarget ? "node" : archetype.babel.target;
+const target = isNodeTarget ? "node" : xOptions.babel.target;
 
-const targets = archetype.babel.envTargets[target];
+const targets = xOptions.babel.envTargets[target];
 if (!isJest) {
   console.log(ck`<orange>Babel preset-env compile targets: </><cyan>${JSON.stringify(targets)}</>`);
 }
 
 const useBuiltIns =
-  !isNodeTarget && archetype.babel.hasMultiTargets
+  !isNodeTarget && xOptions.babel.hasMultiTargets
     ? { useBuiltIns: "entry", corejs: require("core-js/package.json").version.split(".")[0] }
     : {};
 

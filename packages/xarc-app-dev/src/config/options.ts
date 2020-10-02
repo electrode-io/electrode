@@ -44,34 +44,37 @@ function checkOptArchetypeInAppDep(dependencies, isDev = undefined) {
   return { options };
 }
 
-const getUserConfigOptions = (packageNames, devPackageNames) =>
-  Object.assign(
-    { reactLib: "react", karma: true, sass: false },
-    optionalRequire(Path.resolve("archetype/config"), { default: {} }).options,
+const getUserConfigOptions = (packageNames, devPackageNames) => {
+  return {
+    reactLib: "react",
+    karma: true,
+    sass: false,
+    ...optionalRequire(Path.resolve("archetype/config"), { default: {} }).options,
     //
     // Check for any optional archetype in application's devDependencies or dependencies
     //
-    checkOptArchetypeInAppDep(devPackageNames, true).options,
-    checkOptArchetypeInAppDep(packageNames).options
-  );
+    ...checkOptArchetypeInAppDep(devPackageNames, true).options,
+    ...checkOptArchetypeInAppDep(packageNames).options
+  };
+};
 
 /**
- * @param {CreateXarcOptions} createXarcOptions - configure default archetype options
- * @returns {object} options
+ * Get default xarc options
+ *
+ * @returns default options
  */
-function getDefaultArchetypeOptions(createXarcOptions) {
+function getDefaultArchetypeOptions() {
+  //
+  // try to find application's package.json so we can check its dependencies
+  // and devDependencies for modules that enable add on features.
+  // Basically any package named electrode-archetype-opt-* or @xarc/opt-*
+  //
   const appPkg = optionalRequire(Path.resolve("package.json")) || {
     dependencies: {},
     devDependencies: {}
   };
-  const packageNames = [
-    ...Object.keys(appPkg.dependencies),
-    ...createXarcOptions.electrodePackages
-  ];
-  const devPackageNames = [
-    ...Object.keys(appPkg.devDependencies),
-    ...createXarcOptions.electrodePackagesDev
-  ];
+  const packageNames = Object.keys(appPkg.dependencies);
+  const devPackageNames = Object.keys(appPkg.devDependencies);
 
   const { myPkg: pkg } = utils.getMyPkg();
 

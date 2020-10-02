@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-export {};
-
-const archetype = require("@xarc/app-dev/config/archetype")();
 const optionalRequire = require("optional-require")(require);
 const optFlow = optionalRequire("electrode-archetype-opt-flow");
+import { loadXarcOptions } from "./common";
+const xOptions = loadXarcOptions(process.env.XARC_APP_DIR);
 
 const {
   enableTypeScript,
@@ -12,7 +11,7 @@ const {
   transformClassProps,
   looseClassProps,
   envTargets
-} = archetype.babel;
+} = xOptions.babel;
 
 const addFlowPlugin = Boolean(enableFlow && optFlow);
 

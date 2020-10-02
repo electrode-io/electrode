@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires, no-console, @typescript-eslint/ban-ts-ignore */
 
 const ck = require("chalker");
-const archetype = require("@xarc/app-dev/config/archetype")();
 const optionalRequire = require("optional-require")(require);
 const optFlow = optionalRequire("electrode-archetype-opt-flow");
-import { getPluginFrom } from "./common";
+import { getPluginFrom, loadXarcOptions } from "./common";
+const xOptions = loadXarcOptions(process.env.XARC_APP_DIR);
 
 const {
   enableTypeScript,
@@ -15,7 +15,7 @@ const {
   transformClassProps,
   looseClassProps,
   enableDynamicImport
-} = archetype.babel;
+} = xOptions.babel;
 
 const addFlowPlugin = Boolean(enableFlow && optFlow);
 
@@ -27,7 +27,7 @@ const basePlugins = [
   // Note: This must go before @babel/plugin-proposal-class-properties
   (enableTypeScript || proposalDecorators) && [
     "@babel/plugin-proposal-decorators",
-    { legacy: legacyDecorators }
+    { legacy: legacyDecorators, ...proposalDecorators }
   ],
   //
   // allow class properties. loose option compile to assignment expression instead
@@ -36,7 +36,7 @@ const basePlugins = [
   //
   (enableTypeScript || transformClassProps) && [
     "@babel/plugin-proposal-class-properties",
-    { loose: looseClassProps }
+    { loose: looseClassProps, ...transformClassProps }
   ],
   //
   // i18n has not been used at all and these are very outdated
@@ -60,27 +60,14 @@ const basePlugins = [
   "@babel/plugin-transform-runtime",
   addFlowPlugin && [
     "@babel/plugin-transform-flow-strip-types",
-    { requireDirective: flowRequireDirective }
+    { requireDirective: flowRequireDirective, ...enableFlow }
   ]
 ];
 
-const { BABEL_ENV, NODE_ENV } = process.env;
+const { BABEL_ENV, NODE_ENV, ENABLE_KARMA_COV } = process.env;
 
-const fileId = "xarc-app-dev:babelrc-client.js";
-
-const checkEnv = names => {
-  names = names.filter(x => !process.env.hasOwnProperty(x));
-  if (names.length > 0) {
-    console.error(
-      ck`\n<red>Notice:</> ${fileId}: env ${names.join(", ")} not defined - default to 'false'`
-    );
-  }
-};
-
-checkEnv(["ENABLE_CSS_MODULE", "ENABLE_KARMA_COV"]);
-
-const enableCssModule = process.env.ENABLE_CSS_MODULE === "true";
-const enableKarmaCov = process.env.ENABLE_KARMA_COV === "true";
+const enableCssModule = Boolean(xOptions.webpack.cssModuleSupport);
+const enableKarmaCov = ENABLE_KARMA_COV === "true";
 const isProduction = (BABEL_ENV || NODE_ENV) === "production";
 const isTest = (BABEL_ENV || NODE_ENV) === "test";
 
@@ -125,9 +112,9 @@ const plugins = basePlugins.concat(
   ]
 );
 
-const targets = archetype.babel.envTargets[archetype.babel.target];
+const targets = xOptions.babel.envTargets[xOptions.babel.target];
 const coreJsVersion = require("core-js/package.json").version.split(".")[0];
-const useBuiltIns = archetype.babel.hasMultiTargets
+const useBuiltIns = xOptions.babel.hasMultiTargets
   ? { useBuiltIns: "entry", corejs: coreJsVersion }
   : {};
 
