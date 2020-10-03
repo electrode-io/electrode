@@ -1,7 +1,6 @@
 import { XarcOptions } from "../config/opt2/xarc-options";
 
 /* eslint-disable @typescript-eslint/no-var-requires */
-export {};
 
 /* eslint-disable object-shorthand, max-statements, no-magic-numbers */
 /* eslint-disable no-console, no-process-exit, global-require, no-param-reassign */
@@ -22,9 +21,10 @@ const { getWebpackStartConfig, setWebpackProfile } = require("@xarc/webpack/lib/
 const chokidar = require("chokidar");
 const { spawn } = require("child_process");
 const scanDir = require("filter-scan-dir");
-const chalk = require("chalk");
-const mkdirp = require("mkdirp");
+
 const xsh = require("xsh");
+const logger = require("./logger");
+import { createGitIgnoreDir } from "./utils";
 
 /**
  * Get the webpack's CLI command from @xarc/webpack
@@ -39,6 +39,30 @@ function webpackCmd() {
   return Fs.existsSync(exactCmd) ? Path.relative(process.cwd(), exactCmd) : cmd;
 }
 
+function quote(str) {
+  return str.startsWith(`"`) ? str : `"${str}"`;
+}
+
+function setProductionEnv() {
+  process.env.NODE_ENV = "production";
+}
+
+function setDevelopmentEnv() {
+  process.env.NODE_ENV = "development";
+}
+
+function setKarmaCovEnv() {
+  process.env.ENABLE_KARMA_COV = "true";
+}
+
+function setStaticFilesEnv() {
+  process.env.STATIC_FILES = "true";
+}
+
+function setWebpackDev() {
+  process.env.WEBPACK_DEV = "true";
+}
+
 /**
  * Load xarc development tasks that can be invoked using @xarc/run
  *
@@ -51,19 +75,29 @@ module.exports = function loadArchetype(xclap, xarcOptions: XarcOptions = {}) {
   // from userspace, i.e. `userOptions`
   const archetype = getArchetype(xarcOptions);
 
+  function setupPath() {
+    const nmBin = Path.join("node_modules", ".bin");
+    xsh.envPath.addToFront(Path.resolve(nmBin));
+    xsh.envPath.addToFront(Path.join(archetype.devDir, nmBin));
+  }
+
+  setupPath();
+
   const mergeIsomorphicAssets = require(`../scripts/merge-isomorphic-assets.js`);
   const flattenMessagesL10n = require(`../scripts/l10n/flatten-messages.js`);
   const mapIsomorphicCdn = require(`../scripts/map-isomorphic-cdn.js`);
 
   const config = archetype.config;
+  const karmaConfig = file => Path.join(config.karma, file);
+  const mochaConfig = file => Path.join(config.mocha, file);
+  const eslintConfig = file => Path.join(config.eslint, file);
+
   const shell = xsh.$;
   const exec = xsh.exec;
   const mkCmd = xsh.mkCmd;
 
   const penthouse = optionalRequire("penthouse");
   const CleanCSS = optionalRequire("clean-css");
-
-  const logger = require("./logger");
 
   const jestTestDirectories = ["_test_", "_tests_", "__test__", "__tests__"];
 
@@ -115,69 +149,7 @@ module.exports = function loadArchetype(xclap, xarcOptions: XarcOptions = {}) {
     process.env.APP_SERVER_PORT = "3100";
   }
 
-  function quote(str) {
-    return str.startsWith(`"`) ? str : `"${str}"`;
-  }
-
-  function karmaConfig(file) {
-    return Path.join(config.karma, file);
-  }
-
-  function mochaConfig(file) {
-    return Path.join(config.mocha, file);
-  }
-
-  function eslintConfig(file) {
-    return Path.join(config.eslint, file);
-  }
-
-  function setupPath() {
-    const nmBin = Path.join("node_modules", ".bin");
-    xsh.envPath.addToFront(Path.resolve(nmBin));
-    xsh.envPath.addToFront(Path.join(archetype.devDir, nmBin));
-    xsh.envPath.addToFront(Path.join(__dirname, nmBin));
-  }
-
-  function setProductionEnv() {
-    process.env.NODE_ENV = "production";
-  }
-
-  function setDevelopmentEnv() {
-    process.env.NODE_ENV = "development";
-  }
-
-  function setKarmaCovEnv() {
-    process.env.ENABLE_KARMA_COV = "true";
-  }
-
-  function setStaticFilesEnv() {
-    process.env.STATIC_FILES = "true";
-  }
-
-  function setWebpackDev() {
-    process.env.WEBPACK_DEV = "true";
-  }
-
   const eTmpDir = archetype.eTmpDir;
-
-  function createGitIgnoreDir(dir, comment) {
-    comment = comment || "";
-    const dirFP = Path.resolve(dir);
-    try {
-      mkdirp.sync(dirFP);
-    } catch (e) {
-      logger.info("mkdir", e);
-    }
-
-    const gitIgnore = Path.join(dirFP, ".gitignore");
-    if (!Fs.existsSync(gitIgnore)) {
-      Fs.writeFileSync(gitIgnore, `# ${comment}\n*\n`);
-    }
-  }
-
-  function createElectrodeTmpDir() {
-    createGitIgnoreDir(Path.resolve(eTmpDir), "Electrode tmp dir");
-  }
 
   function removeLogFiles() {
     try {
@@ -1251,8 +1223,6 @@ module.exports = function loadArchetype(xclap, xarcOptions: XarcOptions = {}) {
   //   require.resolve(`${archetype.devArchetypeName}/package.json`);
   // }
 
-  setupPath();
-  createElectrodeTmpDir();
   xclap = xclap || requireAt(process.cwd())("xclap") || require("xclap");
   process.env._ELECTRODE_DEV_ = "1";
   if (!process.env.hasOwnProperty("FORCE_COLOR")) {

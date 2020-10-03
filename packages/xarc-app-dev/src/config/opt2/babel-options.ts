@@ -24,7 +24,11 @@ export type BabelOptions = {
    *
    * - **Default: `false`**
    * - if not set, then we check env `ENABLE_BABEL_FLOW`
-   * - To require the `@flow` directive in source, set it to `{ requireDirective: true }`
+   *
+   * requireDirective behavior (defaulted to **NOT** required):
+   *
+   * - When this plugin is enabled, it's defaulted to not require the `@flow` directive in source.
+   * - To change this behavior, set this option to `{ requireDirective: true }`
    */
   enableFlow?: boolean | { requireDirective: boolean };
 
@@ -33,8 +37,12 @@ export type BabelOptions = {
   /**
    * Add `@babel/plugin-proposal-decorators`
    * - **Default: `false`**
-   * - To use the legacy decorators behavior, set it to `{ legacy: true }`
    * - if not set, then we check env `BABEL_PROPOSAL_DECORATORS`
+   *
+   * legacyDecorators behavior (default to enabled):
+   *
+   * - When this plugin is enabled, it's defaulted to legacy decorators behavior.
+   * - To change this behavior, set this option to `{ legacy: false }`
    */
   proposalDecorators?: boolean | { legacy: boolean };
 
@@ -43,9 +51,13 @@ export type BabelOptions = {
   /**
    * Add `@babel/plugin-proposal-class-properties` for class properties support
    * - **Default: `false`**
-   * - To use loose class props behavior, set it to `{ loose: true }`, which compile to
-   *   assignment expression instead of `Object.defineProperty`.
    * - if not set, then we check env `BABEL_CLASS_PROPS`
+   *
+   * looseClassProps behavior (default to enabled):
+   *
+   * - When this plugin is enabled, it's defaulted to loose class props setting, which compile to
+   *   assignment expression instead of `Object.defineProperty`
+   * - To change loose class props behavior, set this option to `{ loose: false }`,
    */
   transformClassProps?: boolean | { loose: boolean };
 

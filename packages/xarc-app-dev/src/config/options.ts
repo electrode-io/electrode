@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-export {};
-
 const Path = require("path");
 const optionalRequire = require("optional-require")(require);
 const constants = require("./constants");
 const utils = require("../lib/utils");
+const _ = require("lodash");
+const xenvConfig = require("xenv-config");
+const makeAppMode = require("@xarc/app/lib/app-mode");
 
-function checkOptArchetypeInAppDep(dependencies, isDev = undefined) {
+export function checkOptArchetypeInAppDep(dependencies, isDev = undefined) {
   const options = dependencies
     .filter(x => x.startsWith("electrode-archetype-opt-") || x.startsWith("@xarc/opt-"))
     .reduce((acc, name) => {
@@ -44,7 +45,7 @@ function checkOptArchetypeInAppDep(dependencies, isDev = undefined) {
   return { options };
 }
 
-const getUserConfigOptions = (packageNames, devPackageNames) => {
+export const getUserConfigOptions = (packageNames, devPackageNames) => {
   return {
     reactLib: "react",
     karma: true,
@@ -63,7 +64,7 @@ const getUserConfigOptions = (packageNames, devPackageNames) => {
  *
  * @returns default options
  */
-function getDefaultArchetypeOptions() {
+export function getDefaultArchetypeOptions() {
   //
   // try to find application's package.json so we can check its dependencies
   // and devDependencies for modules that enable add on features.
@@ -90,8 +91,84 @@ function getDefaultArchetypeOptions() {
   };
 }
 
-module.exports = {
-  checkOptArchetypeInAppDep,
-  getUserConfigOptions,
-  getDefaultArchetypeOptions
-};
+/**
+ * Legacy way to gather development options from user set env, config files in archetype/config,
+ * and internal default values.
+ *
+ * Now all these can be passed in as a single options object when loading the dev tasks,
+ * but still support the legacy ones by using them as default.
+ */
+export function getDevArchetypeLegacy() {
+  const defaultArchetypeConfig = getDefaultArchetypeOptions();
+  const userConfig = defaultArchetypeConfig.options;
+
+  const webpack = require("./env-webpack")();
+  const babel = require("./env-babel")();
+  const karma = require("./env-karma")();
+
+  const { myPkg: devPkg, myDir: devDir } = utils.getMyPkg();
+  const configDir = Path.join(devDir, "config");
+  const devRequire = require(Path.join(devDir, "require"));
+
+  const config = {
+    ...defaultArchetypeConfig,
+    devDir,
+    devPkg,
+    devRequire,
+    webpack,
+    karma,
+    jest: Object.assign({}, userConfig.jest),
+    babel,
+    config: {
+      babel: `${configDir}/babel`,
+      eslint: `${configDir}/eslint`,
+      karma: `${configDir}/karma`,
+      mocha: `${configDir}/mocha`,
+      webpack: `${configDir}/webpack`,
+      jest: `${configDir}/jest`,
+      ...userConfig.configPaths
+    },
+    prodDir: constants.PROD_DIR,
+    eTmpDir: constants.ETMP_DIR,
+    AppMode: makeAppMode(constants.PROD_DIR, userConfig.reactLib)
+  };
+
+  const topConfigSpec = {
+    devOpenBrowser: { env: "ELECTRODE_DEV_OPEN_BROWSER", default: false }
+  };
+
+  const typeScriptOption =
+    userConfig.typescript === false
+      ? {
+          babel: { enableTypeScript: userConfig.typescript }
+        }
+      : {};
+
+  const archetypeConfig = Object.assign(
+    _.merge(config, typeScriptOption),
+    xenvConfig(topConfigSpec, _.pick(userConfig, Object.keys(topConfigSpec)), { merge: _.merge })
+  );
+
+  archetypeConfig.babel.hasMultiTargets =
+    Object.keys(archetypeConfig.babel.envTargets)
+      .sort()
+      .join(",") !== "default,node";
+
+  let AppMode;
+
+  //
+  // AppMode could cause circular dependency loading
+  // Make it a get property so it's load after this file is processed
+  //
+  Object.defineProperty(archetypeConfig, "AppMode", {
+    get() {
+      if (!AppMode) {
+        AppMode = makeAppMode(archetypeConfig.prodDir, archetypeConfig.reactLib);
+      }
+
+      return AppMode;
+    }
+  });
+
+  return archetypeConfig;
+}
