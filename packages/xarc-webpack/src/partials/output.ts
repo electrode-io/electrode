@@ -11,10 +11,8 @@ module.exports = () => {
   const getOutputFilename = () => {
     let filename = "[name].bundle.[contenthash].js";
 
-    if (AppMode.hasSubApps) {
-      filename = "[name].bundle.js";
-    } else if (babel.hasMultiTargets) {
-      filename = `${babel.target}.[name].bundle.js`;
+    if (babel.hasMultiTargets) {
+      filename = `${babel.target}.[name].bundle.[contenthash].js`;
     }
 
     return filename;
