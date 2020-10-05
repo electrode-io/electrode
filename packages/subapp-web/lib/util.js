@@ -131,7 +131,7 @@ const utils = {
 
   mapCdnAssets(bundlesById, basePath = "", cdnAssets) {
     const cdnBundles = {};
-
+    
     for (const id in bundlesById) {
       const bundles = bundlesById[id];
       [].concat(bundles).forEach(bundleFile => {
@@ -142,7 +142,7 @@ const utils = {
         if (cdnAssets) {
           // lookup asset URL from CDN mapping
           for (const mapName in cdnAssets) {
-            if (mapName.endsWith(bundleFile)) {
+            if (Path.basename(mapName) === Path.basename(bundleFile)) {
               assetUrl = cdnAssets[mapName];
               break;
             }
