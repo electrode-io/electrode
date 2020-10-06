@@ -142,7 +142,7 @@ const utils = {
         if (cdnAssets) {
           // lookup asset URL from CDN mapping
           for (const mapName in cdnAssets) {
-            if (mapName.endsWith(bundleFile)) {
+            if (Path.basename(mapName) === Path.basename(bundleFile)) {
               assetUrl = cdnAssets[mapName];
               break;
             }
