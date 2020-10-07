@@ -111,6 +111,8 @@
     "@xarc/run": "^1.0.3",
     "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
+    "e1": "./e1",
+    "electrode-server": "^3.2.0",
     "eslint": "^6.8.0",
     "eslint-config-walmart": "^2.2.1",
     "eslint-plugin-filenames": "^1.1.0",
@@ -119,7 +121,7 @@
     "mock-require": "^3.0.3",
     "nyc": "^15.0.0",
     "prettier": "^1.14.2",
-    "run-verify": "^1.2.1",
+    "run-verify": "^1.2.5",
     "shx": "^0.3.2",
     "sinon": "^7.2.6",
     "sinon-chai": "^3.3.0",
@@ -139,7 +141,8 @@
       "subapp-util": "../subapp-util"
     },
     "devDependencies": {
-      "@xarc/app": "../xarc-app"
+      "@xarc/app": "../xarc-app",
+      "e1": "./e1"
     }
   },
   "nyc": {
