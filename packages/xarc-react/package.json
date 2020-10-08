@@ -1,6 +1,6 @@
 {
   "name": "@xarc/react",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "xarc web app platform support for React framework",
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
@@ -19,7 +19,7 @@
   "author": "Electrode",
   "license": "Apache-2.0",
   "dependencies": {
-    "@xarc/subapp": "../xarc-subapp",
+    "@xarc/subapp": "^0.0.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
