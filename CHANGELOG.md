@@ -1,3 +1,93 @@
+# 10/8/2020
+
+- feat: accept XarcOptions when loading tasks - now in xclap.[jt]s, user can pass in an options object to configure all aspect of Electrode X features.
+- set isomorphic loader extend-require log level to error - reduce log noises
+- feat: first round of subapp version 2 packages - preview only, not yet enabled.
+- remove deprecated component archetype and generator packages
+- fix: subapp map cdn assets - issue when one bundle ends with exactly the same name of another bundle
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.1.16` `(8.1.15 => 8.1.16)`
+- `@xarc/app-dev@8.1.16` `(8.1.15 => 8.1.16)`
+- `@xarc/create-app@3.0.11` `(3.0.10 => 3.0.11)`
+- `@xarc/jsx-renderer@1.0.3` `(1.0.2 => 1.0.3)`
+- `@xarc/react@0.0.2` `(0.0.1 => 0.0.2)`
+- `@xarc/render-context@1.0.1` `(1.0.0 => 1.0.1)`
+- `@xarc/subapp@0.0.2` `(0.0.1 => 0.0.2)`
+- `@xarc/tag-renderer@1.0.1` `(1.0.0 => 1.0.1)`
+- `@xarc/webpack@8.1.6` `(8.1.5 => 8.1.6)`
+- `electrode-react-webapp@4.0.1` `(4.0.0 => 4.0.1)`
+- `subapp-web@1.0.36` `(1.0.35 => 1.0.36)`
+
+### Lerna Updated
+
+- `@xarc/index-page@1.0.3` `(1.0.2 => 1.0.3)`
+- `subapp-pbundle@0.0.30` `(0.0.29 => 0.0.30)`
+- `subapp-react@0.0.27` `(0.0.26 => 0.0.27)`
+- `subapp-redux@1.0.36` `(1.0.35 => 1.0.36)`
+- `subapp-server@1.3.5` `(1.3.4 => 1.3.5)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix saving archetype options [commit](http://github.com/electrode-io/electrode/commit/a1ad08dfc06ebd44da7459ea6f29a51283d90e19)
+  - accept XarcOptions when loading tasks [commit](http://github.com/electrode-io/electrode/commit/a5241b7a20add0398a440555d17f082d5e561de0)
+  - allow user to pass in all options when loading xrun build tasks ([#1739](https://github.com/electrode-io/electrode/pull/1739)) [commit](http://github.com/electrode-io/electrode/commit/374926e10585218557c10b6db56d03183db06bac)
+  - fix: restore context for babel-plugin-react-css-modules config [commit](http://github.com/electrode-io/electrode/commit/3a2da013901f5e08a3fadf9b8b7d8718376ea5ff)
+  - delete dist before build with tsc [commit](http://github.com/electrode-io/electrode/commit/158e04b4fcd044fd4b6a57dea8a2ccfeea976af4)
+  - set ismorphic loader extend-require log level to error [commit](http://github.com/electrode-io/electrode/commit/e4db4a3b30369f6a4bc76090c34e28a0e3b02e1a)
+  - add tests for hapi7 webpack dev plugin [commit](http://github.com/electrode-io/electrode/commit/5497ffe0d93e18ddda2e1130b52b282c6d22bdd9)
+
+- `packages/xarc-create-app`
+
+  - create app unit test ([#1737](https://github.com/electrode-io/electrode/pull/1737)) [commit](http://github.com/electrode-io/electrode/commit/c7f1f038e7173bb0369d63a25777903f1e880181)
+
+- `packages/xarc-jsx-renderer`
+
+  - delete dist before build with tsc [commit](http://github.com/electrode-io/electrode/commit/158e04b4fcd044fd4b6a57dea8a2ccfeea976af4)
+
+- `packages/xarc-react`
+
+  - first round of subapp version 2 packages [commit](http://github.com/electrode-io/electrode/commit/4cfc660cad9c864d794d7a5b21473ab9ae509938)
+
+- `packages/xarc-render-context`
+
+  - delete dist before build with tsc [commit](http://github.com/electrode-io/electrode/commit/158e04b4fcd044fd4b6a57dea8a2ccfeea976af4)
+
+- `packages/xarc-subapp`
+
+  - first round of subapp version 2 packages [commit](http://github.com/electrode-io/electrode/commit/4cfc660cad9c864d794d7a5b21473ab9ae509938)
+
+- `packages/xarc-tag-renderer`
+
+  - delete dist before build with tsc [commit](http://github.com/electrode-io/electrode/commit/158e04b4fcd044fd4b6a57dea8a2ccfeea976af4)
+
+- `packages/xarc-webpack`
+
+  - feat: add contenthash to bundle names ([#1745](https://github.com/electrode-io/electrode/pull/1745)) [commit](http://github.com/electrode-io/electrode/commit/37fe2a29ce8a27aa7ec3c33cad929edf6daa1937)
+  - first round of subapp version 2 packages [commit](http://github.com/electrode-io/electrode/commit/4cfc660cad9c864d794d7a5b21473ab9ae509938)
+  - delete dist before build with tsc [commit](http://github.com/electrode-io/electrode/commit/158e04b4fcd044fd4b6a57dea8a2ccfeea976af4)
+
+- `packages/electrode-react-webapp`
+
+  - create app unit test ([#1737](https://github.com/electrode-io/electrode/pull/1737)) [commit](http://github.com/electrode-io/electrode/commit/c7f1f038e7173bb0369d63a25777903f1e880181)
+
+- `packages/subapp-web`
+
+  - fix: map cdn assets ([#1744](https://github.com/electrode-io/electrode/pull/1744)) [commit](http://github.com/electrode-io/electrode/commit/b462308168e8b51baa85d45fd0500dafc430d662)
+
+- `tools`
+
+  - remove deprecated component archetype and generator packages [commit](http://github.com/electrode-io/electrode/commit/52af61085a62d89426663d00bff9759d1a5b08fa)
+
+- `xchangelog`
+
+  - move 2019 change log out [commit](http://github.com/electrode-io/electrode/commit/72aed78c70c7d9c89422fda47d5f34f33eebd010)
+
 # 9/28/2020
 
 - fix: default css module hook to false
