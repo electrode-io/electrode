@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 import * as requireAt from "require-at";
 const Path = require("path");
 const Fs = require("fs");

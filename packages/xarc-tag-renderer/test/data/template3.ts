@@ -1,3 +1,5 @@
+/* eslint-disable new-cap */
+
 import { createTemplateTags, Token, TokenInvoke, RegisterTokenIds } from "../../src";
 import * as tokenHandler from "../fixtures/token-handler";
 

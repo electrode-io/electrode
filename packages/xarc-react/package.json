@@ -8,6 +8,10 @@
     "./dist-node-cjs/node/index.js": "./dist-browser~es5~cjs~/browser/index.js",
     "./dist-node-esm/node/index.js": "./dist-browser~es2x~esm~/browser/index.js"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
   "scripts": {
     "build": "rm -rf dist* && tsc --build tsconfig.node.cjs.json tsconfig.node.esm.json tsconfig.browser.es5.cjs.json tsconfig.browser.es2x.esm.json",
     "test": "xrun xarc/test-only",

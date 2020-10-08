@@ -43,7 +43,8 @@ describe("dev-hapi 17", function() {
   };
 
   const testPlugin17 = options => {
-    let server, data;
+    let server;
+    let data;
     return asyncVerify(
       () => electrodeServer(options),
       s => {

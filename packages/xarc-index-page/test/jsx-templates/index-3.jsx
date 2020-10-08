@@ -1,7 +1,8 @@
 /* @jsx createElement */
 
-const { IndexPage, createElement, Token, Require } = require("../../lib/jsx");
+const { IndexPage, createElement, Token } = require("../../lib/jsx"); // eslint-disable-line
 
+// eslint-disable-next-line
 const Test = (props, context) => {
   context.status = 204;
   return `<div>Hello Test JSX-3</div>`;

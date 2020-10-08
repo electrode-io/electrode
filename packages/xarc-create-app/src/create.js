@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 "use strict";
 const Fs = require("opfs");
 const Path = require("path");

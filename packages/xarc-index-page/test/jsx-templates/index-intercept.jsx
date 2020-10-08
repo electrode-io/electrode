@@ -1,6 +1,8 @@
 /* @jsx createElement */
 
-const { IndexPage, createElement, Token, Require } = require("../../lib/jsx");
+/* eslint-disable no-unused-vars */
+
+const { IndexPage, createElement, Token } = require("../../lib/jsx"); // eslint-disable-line
 
 const Test = (props, context) => {
   context.intercept({

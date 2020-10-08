@@ -1,3 +1,5 @@
+/* eslint-disable new-cap */
+
 import { TagTemplate, createTemplateTags, Token } from "../../src";
 
 export const templateTags = createTemplateTags/*html*/ `<!DOCTYPE html>

@@ -1,7 +1,8 @@
 /* @jsx createElement */
 
-const { IndexPage, createElement, Token } = require("../../lib/jsx");
+const { IndexPage, createElement, Token } = require("../../lib/jsx"); // eslint-disable-line
 
+// eslint-disable-next-line
 const TestAsync = async () => {
   return `<div>Hello from async tag JSX-2</div>`;
 };

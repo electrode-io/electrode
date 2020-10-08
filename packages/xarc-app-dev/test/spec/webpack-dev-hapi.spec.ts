@@ -37,7 +37,6 @@ describe("dev-hapi 16", function() {
       handler: (request, reply) => {
         data.request = request;
         data.called = true;
-        debugger;
         reply("DONE");
       }
     });
@@ -45,7 +44,8 @@ describe("dev-hapi 16", function() {
   };
 
   const testPlugin16 = options => {
-    let server, data;
+    let server;
+    let data;
     return asyncVerify(
       () => electrodeServer(options),
       s => {

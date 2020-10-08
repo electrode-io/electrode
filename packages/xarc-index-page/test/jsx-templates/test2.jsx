@@ -1,10 +1,8 @@
 /* @jsx createElement */
 
-import { IndexPage, createElement, Token, Require, Literal, Component } from "../../lib/jsx";
+/* eslint-disable no-unused-vars */
 
-const getBogelFontUrl = () => {
-  return "bogel";
-};
+import { IndexPage, createElement, Token, Require, Literal, Component } from "../../lib/jsx"; // eslint-disable-line
 
 const MyTest = (props, context) => {
   return (

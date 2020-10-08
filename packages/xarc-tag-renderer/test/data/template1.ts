@@ -1,3 +1,5 @@
+/* eslint-disable new-cap */
+
 import { createTemplateTags, Token, TokenInvoke, RegisterTokenIds } from "../../src";
 
 import * as custom1 from "../fixtures/custom-1";

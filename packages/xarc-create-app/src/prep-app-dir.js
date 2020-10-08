@@ -1,3 +1,5 @@
+/* eslint-disable no-console, no-process-exit */
+
 "use strict";
 
 const Fs = require("opfs");

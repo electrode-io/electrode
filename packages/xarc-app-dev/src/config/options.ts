@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-var-requires, max-statements */
+
 const Path = require("path");
 const optionalRequire = require("optional-require")(require);
 const constants = require("./constants");

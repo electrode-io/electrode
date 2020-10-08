@@ -1,6 +1,6 @@
 /* @jsx createElement */
 
-const { IndexPage, createElement, Token, Require } = require("../../lib/jsx");
+const { IndexPage, createElement, Token, Require } = require("../../lib/jsx"); // eslint-disable-line
 
 const Template = (
   <IndexPage DOCTYPE="html">

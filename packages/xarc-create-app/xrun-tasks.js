@@ -1,2 +1,2 @@
-import { loadTasks } from "@xarc/module-dev";
+const { loadTasks } = require("@xarc/module-dev");
 loadTasks();

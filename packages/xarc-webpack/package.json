@@ -19,7 +19,7 @@
     "build": "rm -rf lib && tsc",
     "test": "xrun xarc/test-only",
     "lint": "clap lint",
-    "coverage": "xrun xarc/test-cov",
+    "coverage": "xrun xarc/check",
     "prepublishOnly": "xrun [[build, docs], xarc/check]",
     "docs": "xrun xarc/docs"
   },

@@ -63,7 +63,7 @@ export const partials = {
   /**
    * setup subapp version 2 plugins and config
    */
-  subapp2: genPartials["_subapp2"],
+  subapp2: genPartials["_subapp2"], // eslint-disable-line
   /**
    * base setup for running Karma tests
    */

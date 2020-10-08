@@ -4,6 +4,8 @@
   "description": "Context for index.htm generation",
   "main": "dist/index.js",
   "scripts": {
+    "test": "clap xarc/test-only",
+    "coverage": "clap xarc/check",
     "build": "rm -rf dist && tsc",
     "prepublishOnly": "clap -n build docs && clap check",
     "docs": "clap xarc/docs"

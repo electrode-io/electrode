@@ -1,7 +1,7 @@
-export const prepare = modcall_param => {
+export const prepare = modCallParam => {
   return {
     process(context) {
-      return `load ${modcall_param} from ${context.folder} folder`;
+      return `load ${modCallParam} from ${context.folder} folder`;
     }
   };
 };

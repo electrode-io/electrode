@@ -1,6 +1,6 @@
 /* @jsx createElement */
 
-import { IndexPage, createElement, Require } from "../../lib/jsx";
+import { IndexPage, createElement, Require } from "../../lib/jsx"; // eslint-disable-line
 
 export default (
   <IndexPage>

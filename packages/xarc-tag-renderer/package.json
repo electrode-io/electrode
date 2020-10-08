@@ -4,6 +4,8 @@
   "description": "Generate index.html webpage from a tag based template",
   "main": "dist/index.js",
   "scripts": {
+    "test": "clap xarc/test-only",
+    "coverage": "clap xarc/check",
     "build": "rm -rf dist && tsc",
     "prepublishOnly": "clap -n build docs && clap check",
     "docs": "clap xarc/docs"

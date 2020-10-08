@@ -1,6 +1,8 @@
 /* @jsx createElement */
 
-import { IndexPage, createElement, Token, Require, Literal, Component } from "../../lib/jsx";
+/* eslint-disable no-unused-vars */
+
+import { IndexPage, createElement } from "../../lib/jsx"; // eslint-disable-line
 
 function Component1(props) {
   return (
