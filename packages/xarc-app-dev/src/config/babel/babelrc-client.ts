@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires, no-console, @typescript-eslint/ban-ts-ignore */
 
-const ck = require("chalker");
 const optionalRequire = require("optional-require")(require);
 const optFlow = optionalRequire("electrode-archetype-opt-flow");
 import { getPluginFrom, loadXarcOptions } from "./common";
 const xOptions = loadXarcOptions(process.env.XARC_APP_DIR);
+const _ = require("lodash");
 
 const {
   enableTypeScript,
@@ -14,8 +14,11 @@ const {
   legacyDecorators,
   transformClassProps,
   looseClassProps,
-  enableDynamicImport
-} = xOptions.babel;
+  enableDynamicImport,
+  hasMultiTargets,
+  target: babelTarget,
+  envTargets = {}
+} = _.get(xOptions, "babel", {});
 
 const addFlowPlugin = Boolean(enableFlow && optFlow);
 
@@ -66,7 +69,7 @@ const basePlugins = [
 
 const { BABEL_ENV, NODE_ENV, ENABLE_KARMA_COV } = process.env;
 
-const enableCssModule = Boolean(xOptions.webpack.cssModuleSupport);
+const enableCssModule = Boolean(_.get(xOptions, "webpack.cssModuleSupport"));
 const enableKarmaCov = ENABLE_KARMA_COV === "true";
 const isProduction = (BABEL_ENV || NODE_ENV) === "production";
 const isTest = (BABEL_ENV || NODE_ENV) === "test";
@@ -112,11 +115,9 @@ const plugins = basePlugins.concat(
   ]
 );
 
-const targets = xOptions.babel.envTargets[xOptions.babel.target];
+const targets = envTargets[babelTarget];
 const coreJsVersion = require("core-js/package.json").version.split(".")[0];
-const useBuiltIns = xOptions.babel.hasMultiTargets
-  ? { useBuiltIns: "entry", corejs: coreJsVersion }
-  : {};
+const useBuiltIns = hasMultiTargets ? { useBuiltIns: "entry", corejs: coreJsVersion } : {};
 
 const presets = [
   //

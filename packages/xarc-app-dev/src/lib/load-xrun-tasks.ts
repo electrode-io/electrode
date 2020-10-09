@@ -769,6 +769,14 @@ module.exports = function loadArchetype(xclap, xarcOptions: XarcOptions = {}) {
         }
       },
 
+      "setup-dev": {
+        desc: `Setup development related options for your application. \
+You only need to run this if you are doing something not through the xarc tasks.`,
+        task() {
+          console.log(`xarc dev options configured.`);
+        }
+      },
+
       dev: {
         desc: `Start your app with watch in development mode with dev-admin.
         options: node.js --inspect can be used to debug the dev-admin`,

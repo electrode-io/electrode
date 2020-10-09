@@ -10,6 +10,7 @@ const ck = require("chalker");
 const optionalRequire = require("optional-require")(require);
 const optFlow = optionalRequire("electrode-archetype-opt-flow");
 import { getPluginFrom, loadXarcOptions } from "./common";
+const _ = require("lodash");
 
 const xOptions = loadXarcOptions(process.env.XARC_APP_DIR);
 
@@ -23,14 +24,17 @@ const {
   legacyDecorators,
   transformClassProps,
   looseClassProps,
-  enableDynamicImport
-} = xOptions.babel;
+  enableDynamicImport,
+  hasMultiTargets,
+  target: babelTarget,
+  envTargets = {}
+} = _.get(xOptions, "babel", {});
 
 const addFlowPlugin = Boolean(enableFlow && optFlow);
 
 const { BABEL_ENV, NODE_ENV, XARC_BABEL_TARGET, ENABLE_KARMA_COV } = process.env;
 
-const enableCssModule = Boolean(xOptions.webpack.cssModuleSupport);
+const enableCssModule = Boolean(_.get(xOptions, "webpack.cssModuleSupport"));
 const enableKarmaCov = ENABLE_KARMA_COV === "true";
 const isProduction = (BABEL_ENV || NODE_ENV) === "production";
 const isTest = (BABEL_ENV || NODE_ENV) === "test";
@@ -155,15 +159,15 @@ const plugins = basePlugins.concat(
     ]
 );
 
-const target = isNodeTarget ? "node" : xOptions.babel.target;
+const target = isNodeTarget ? "node" : babelTarget;
 
-const targets = xOptions.babel.envTargets[target];
+const targets = envTargets[target];
 if (!isJest) {
   console.log(ck`<orange>Babel preset-env compile targets: </><cyan>${JSON.stringify(targets)}</>`);
 }
 
 const useBuiltIns =
-  !isNodeTarget && xOptions.babel.hasMultiTargets
+  !isNodeTarget && hasMultiTargets
     ? { useBuiltIns: "entry", corejs: require("core-js/package.json").version.split(".")[0] }
     : {};
 

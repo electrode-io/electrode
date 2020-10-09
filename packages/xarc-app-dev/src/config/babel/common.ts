@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
+const ck = require("chalker");
 import * as requireAt from "require-at";
 const Path = require("path");
 const Fs = require("fs");
@@ -28,6 +29,22 @@ export function loadXarcOptions(dir: string) {
     const data = Fs.readFileSync(filename, "utf-8");
     return JSON.parse(data);
   } catch (err) {
-    return {};
+    // eslint-disable-next-line
+    console.error(ck`
+<red>ERROR</>: Electrode xarc fail to load <cyan>.etmp/xarc-options.json</> in
+dev mode.  This means you are trying to use something not through
+xarc's development tasks.
+
+full path: ${filename}
+
+Please run "clap setup-dev" once to initialize the file
+<cyan>.etmp/xarc-options.json</> before doing your thing that loads
+xarc's development code.
+`);
+    return {
+      webpack: {},
+      babel: {},
+      options: {}
+    };
   }
 }

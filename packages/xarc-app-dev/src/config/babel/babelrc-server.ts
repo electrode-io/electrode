@@ -3,6 +3,7 @@ const optionalRequire = require("optional-require")(require);
 const optFlow = optionalRequire("electrode-archetype-opt-flow");
 import { loadXarcOptions } from "./common";
 const xOptions = loadXarcOptions(process.env.XARC_APP_DIR);
+const _ = require("lodash");
 
 const {
   enableTypeScript,
@@ -10,8 +11,8 @@ const {
   enableFlow,
   transformClassProps,
   looseClassProps,
-  envTargets
-} = xOptions.babel;
+  envTargets = {}
+} = _.get(xOptions, "babel", {});
 
 const addFlowPlugin = Boolean(enableFlow && optFlow);
 
