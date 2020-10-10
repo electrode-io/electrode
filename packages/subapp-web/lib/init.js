@@ -65,13 +65,23 @@ ${cdnJs}
 ${inlineRuntimeJS}
 </script>`;
 
-  // check if any subapp has server side code with initialize method and load them
-  const { subApps } = setupContext.routeOptions.__internals;
-  const subAppServers = subApps
-    .map(({ subapp }) =>
-      subappUtil.loadSubAppServerByName(subapp.name, false)
-    )
-    .filter(x => x && x.initialize);
+  let subAppServers;
+
+  const getSubAppServers = () => {
+    if (subAppServers) {
+      return subAppServers;
+    }
+
+    // TODO: where and how is subApps set in __internals?
+    const { subApps } = setupContext.routeOptions.__internals;
+
+    // check if any subapp has server side code with initialize method and load them
+    return (subAppServers =
+      subApps &&
+      subApps
+        .map(({ subapp }) => subappUtil.loadSubAppServerByName(subapp.name, false))
+        .filter(x => x && x.initialize));
+  };
 
   return {
     process: context => {
@@ -84,9 +94,12 @@ ${inlineRuntimeJS}
       if (metricReport.enable && metricReport.reporter) {
         context.user.xarcSSREmitter = util.getEventEmiiter(metricReport.reporter);
       }
+
+      getSubAppServers();
+
       // invoke the initialize method of subapp's server code
-      if (subAppServers.length > 0) {
-        for (const server of subAppServers) {
+      if (subAppServers && subAppServers.length > 0) {
+        for (const server of getSubAppServers()) {
           server.initialize(context);
         }
       }
