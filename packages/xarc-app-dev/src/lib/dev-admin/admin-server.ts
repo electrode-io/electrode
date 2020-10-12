@@ -11,7 +11,7 @@ const ck = require("chalker");
 const chokidar = require("chokidar");
 const readline = require("readline");
 import { parse as parseLog } from "./log-parser";
-const WebpackDevRelay = require("./webpack-dev-relay");
+import { WebpackDevRelay } from "./webpack-dev-relay";
 const { fork } = require("child_process");
 const ConsoleIO = require("./console-io");
 const AutomationIO = require("./automation-io");
@@ -795,7 +795,7 @@ ${info.name} - assuming it started.</>`);
     const info = this.getServer(name);
 
     if (!info._watcher && !info.options.skipWatch && !_.isEmpty(info.options.watch)) {
-      info._watcher = chokidar.watch(info.options.watch, { cwd: process.cwd() });
+      info._watcher = chokidar.watch(info.options.watch, { cwd: process.cwd(), persistent: true });
       info._watcher.on("change", restart);
     }
   }

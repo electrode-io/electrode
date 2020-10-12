@@ -5,14 +5,24 @@ export {};
 
 const Path = require("path");
 const _ = require("lodash");
-const isomorphicExtendRequire = require("isomorphic-loader/lib/extend-require");
+const { getXRequire } = require("isomorphic-loader");
 const { refreshAllSubApps } = require("subapp-util");
+import {
+  WEBPACK_EVENT_ISOMORPHIC_CONFIG,
+  WEBPACK_EVENT_REPORT,
+  WEBPACK_EVENT_STATS
+} from "./dev-admin/webpack-dev-relay";
 
 class AppDevMiddleware {
   webpackDev: any;
 
   constructor() {
-    this.webpackDev = { valid: false, hasErrors: false, hasWarnings: false, compileTime: Date.now() };
+    this.webpackDev = {
+      valid: false,
+      hasErrors: false,
+      hasWarnings: false,
+      compileTime: Date.now()
+    };
   }
 
   handleWebpackReport(data) {
@@ -22,7 +32,7 @@ class AppDevMiddleware {
     this.webpackDev.compileTime = Date.now();
 
     if (!data.valid) {
-      isomorphicExtendRequire.deactivate();
+      getXRequire().deactivate();
       return process.send({
         name: "app-ack",
         from: data.name,
@@ -44,21 +54,28 @@ class AppDevMiddleware {
       refreshAllSubApps();
     }
 
-    return isomorphicExtendRequire.loadAssets(err2 => {
-      if (err2) console.error("reload isomorphic assets failed", err2);
-      return process.send({
-        name: "app-ack",
-        from: data.name,
-        fromId: data.id,
-        isomorphicStatus: "on"
-      });
+    // activate extend require for isomorphic assets
+    getXRequire().activate();
+
+    return process.send({
+      name: "app-ack",
+      from: data.name,
+      fromId: data.id,
+      isomorphicStatus: "on"
     });
   }
 
   setup() {
     process.on("message", data => {
-      if (data.name === "webpack-report") {
-        this.handleWebpackReport(data);
+      switch (data.name) {
+        case WEBPACK_EVENT_REPORT:
+          this.handleWebpackReport(data);
+          break;
+        case WEBPACK_EVENT_ISOMORPHIC_CONFIG:
+          getXRequire().initialize(data.config);
+          break;
+        case WEBPACK_EVENT_STATS:
+          break;
       }
     });
     // notify dev-admin that app server started

@@ -1,23 +1,24 @@
 /* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-empty-function */
-export {};
-//
-// relay message between the webpack dev server and app server in dev mode
-//
 
 const _ = require("lodash");
 
-const isomorphicConfig = require("isomorphic-loader/lib/config");
+// received config from isomorphic-loader webpack plugin
+export const WEBPACK_EVENT_ISOMORPHIC_CONFIG = "isomorphic-loader-config";
+// received webpack compile report, for refresh assets in SSR
+export const WEBPACK_EVENT_REPORT = "webpack-report";
+// received webpack compile stats
+export const WEBPACK_EVENT_STATS = "webpack-stats";
 
 const WEBPACK_DEV_MESSAGES = [
-  // received config from isomorphic-loader webpack plugin
-  isomorphicConfig.configName,
-  // received webpack compile report, for refresh assets in SSR
-  "webpack-report",
-  // received webpack compile stats
-  "webpack-stats"
+  WEBPACK_EVENT_ISOMORPHIC_CONFIG,
+  WEBPACK_EVENT_REPORT,
+  WEBPACK_EVENT_STATS
 ];
 
-class WebpackDevRelay {
+/**
+ * relay message between the webpack dev server and app server in dev mode
+ */
+export class WebpackDevRelay {
   _webpackData: any;
   _servers: any;
 
@@ -88,6 +89,10 @@ class WebpackDevRelay {
       message: data => this.receiveAppServerMessage(data),
       exit: () => this._setServer("app", null)
     });
+    //
+    // resend any persisted message from webpack to app so it won't
+    // get stuck waiting for them
+    //
     if (child) {
       setTimeout(() => {
         _.each(this._webpackData, data => {
@@ -97,5 +102,3 @@ class WebpackDevRelay {
     }
   }
 }
-
-module.exports = WebpackDevRelay;

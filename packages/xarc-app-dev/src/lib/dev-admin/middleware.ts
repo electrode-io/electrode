@@ -12,7 +12,6 @@ const Url = require("url");
 const { getWebpackStartConfig } = require("@xarc/webpack/lib/util/custom-check");
 const { fullDevServer, controlPaths } = require("../../config/dev-proxy");
 const { formUrl } = require("../utils");
-const isomorphicLoaderConfig = require("isomorphic-loader/lib/config");
 
 hotHelpers.pathMatch = (url, path) => {
   try {
@@ -30,7 +29,6 @@ const _ = require("lodash");
 const statsUtils = require("../stats-utils");
 const statsMapper = require("../stats-mapper");
 const xsh = require("xsh");
-const shell = xsh.$;
 
 function urlJoin(...args) {
   if (args.length < 1) return undefined;
@@ -185,36 +183,6 @@ class Middleware {
     this.reporterUrl = urlJoin(this.devBaseUrl, "/reporter");
     this.dllDevUrl = urlJoin(this.devBaseUrl, "/dll");
 
-    const LOADABLE_STATS = "loadable-stats.json";
-    const isoLockfile = Path.resolve(isomorphicLoaderConfig.lockFile);
-    const isoConfigFile = Path.resolve(isomorphicLoaderConfig.configFile);
-
-    // Must wait for isomorphic-loader to complete saving its config
-    // file before continuing and do hot reload in the app server.
-    // In webpack dev mode, isomorphic-loader use config.assets instead
-    // of loading them from config.assetsFile, so no need to transfer that
-    // from Mem FS to physical disk.
-    const waitIsoLock = cb => {
-      if (!process.send && (Fs.existsSync(isoLockfile) || !Fs.existsSync(isoConfigFile))) {
-        return setTimeout(() => waitIsoLock(cb), 50);
-      } else {
-        return cb();
-      }
-    };
-
-    const transferMemFsFiles = (fileSystem, cb) => {
-      // always operate in custom fs with posix conventions
-      const loadableStats = Path.posix.join(this.memFsCwd, `server/${LOADABLE_STATS}`);
-      if (fileSystem.existsSync(loadableStats)) {
-        const source = fileSystem.readFileSync(loadableStats);
-        const dir = Path.resolve("./dist/server");
-        if (!Fs.existsSync(dir)) shell.mkdir("-p", dir);
-        Fs.writeFileSync(Path.join(dir, LOADABLE_STATS), source);
-      }
-
-      process.nextTick(() => cb(true));
-    };
-
     this.webpackDev = {
       lastReporterOptions: undefined,
       hasErrors: false,
@@ -225,64 +193,7 @@ class Middleware {
     this.returnReporter = undefined;
 
     defaultReporter = (middlewareOptions, reporterOptions) => {
-      if (reporterOptions.state) {
-        const stats = reporterOptions.stats;
-        const error = stats.hasErrors() ? "<red> ERRORS</>" : "";
-        const warning = stats.hasWarnings() ? "<yellow> WARNINGS</>" : "";
-        const notOk = Boolean(error || warning);
-        const but = (notOk && "<yellow> but has</>") || "";
-        const showError = Boolean(error);
-        console.log(ck`webpack bundle is now <green>VALID</>${but}${error}${warning}`);
-
-        this.webpackDev.valid = true;
-        this.webpackDev.hasErrors = stats.hasErrors();
-        this.webpackDev.compileTime = Date.now();
-
-        const baseUrl = this._options.baseUrl;
-
-        const update = () => {
-          if (notOk) {
-            console.log(ck`<cyan.underline>${urlJoin(baseUrl(), this.reporterUrl)}</> \
-- View status and errors/warnings from your browser`);
-          }
-
-          if (this.webpackDev.lastReporterOptions === undefined) {
-            this.returnReporter = showError;
-          } else {
-            // keep returning reporter until a first success compile
-            this.returnReporter = this.returnReporter ? showError : false;
-          }
-
-          const refreshModules = [];
-          if (!this.webpackDev.hasErrors) {
-            const cwd = process.cwd() + "/";
-            const bundles = statsMapper.getBundles(reporterOptions.stats);
-            bundles.forEach(b => {
-              b.modules.forEach(m => {
-                if (m.indexOf("node_modules") >= 0) return;
-                if (m.indexOf("(webpack)") >= 0) return;
-                if (m.startsWith("multi ")) return;
-                // webpack4 output like "./routes.jsx + 9 modules"
-                const plusIx = m.indexOf(" + ");
-                if (plusIx > 0) m = m.substring(0, plusIx);
-                refreshModules.push(m.replace(cwd, ""));
-              });
-            });
-          }
-
-          this.webpackDev.lastReporterOptions = reporterOptions;
-
-          process.send({
-            name: "webpack-report",
-            valid: true,
-            hasErrors: stats.hasErrors(),
-            hasWarnings: stats.hasWarnings(),
-            refreshModules
-          });
-        };
-
-        waitIsoLock(() => transferMemFsFiles(this.devMiddleware.fileSystem, update));
-      } else {
+      if (!reporterOptions.state) {
         process.send({
           name: "webpack-report",
           valid: false
@@ -290,7 +201,61 @@ class Middleware {
         console.log(ck`webpack bundle is now <magenta>INVALID</>`);
         this.webpackDev.valid = false;
         this.webpackDev.lastReporterOptions = false;
+        return;
       }
+
+      const stats = reporterOptions.stats;
+      const error = stats.hasErrors() ? "<red> ERRORS</>" : "";
+      const warning = stats.hasWarnings() ? "<yellow> WARNINGS</>" : "";
+      const notOk = Boolean(error || warning);
+      const but = (notOk && "<yellow> but has</>") || "";
+      const showError = Boolean(error);
+      console.log(ck`webpack bundle is now <green>VALID</>${but}${error}${warning}`);
+
+      this.webpackDev.valid = true;
+      this.webpackDev.hasErrors = stats.hasErrors();
+      this.webpackDev.compileTime = Date.now();
+
+      const baseUrl = this._options.baseUrl;
+
+      if (notOk) {
+        console.log(ck`<cyan.underline>${urlJoin(baseUrl(), this.reporterUrl)}</> \
+- View status and errors/warnings from your browser`);
+      }
+
+      if (this.webpackDev.lastReporterOptions === undefined) {
+        this.returnReporter = showError;
+      } else {
+        // keep returning reporter until a first success compile
+        this.returnReporter = this.returnReporter ? showError : false;
+      }
+
+      const refreshModules = [];
+      if (!this.webpackDev.hasErrors) {
+        const cwd = process.cwd() + "/";
+        const bundles = statsMapper.getBundles(reporterOptions.stats);
+        bundles.forEach(b => {
+          b.modules.forEach(m => {
+            if (m.indexOf("node_modules") >= 0) return;
+            if (m.indexOf("(webpack)") >= 0) return;
+            if (m.startsWith("multi ")) return;
+            // webpack4 output like "./routes.jsx + 9 modules"
+            const plusIx = m.indexOf(" + ");
+            if (plusIx > 0) m = m.substring(0, plusIx);
+            refreshModules.push(m.replace(cwd, ""));
+          });
+        });
+      }
+
+      this.webpackDev.lastReporterOptions = reporterOptions;
+
+      process.send({
+        name: "webpack-report",
+        valid: true,
+        hasErrors: stats.hasErrors(),
+        hasWarnings: stats.hasWarnings(),
+        refreshModules
+      });
     };
   }
 

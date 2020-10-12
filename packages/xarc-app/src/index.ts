@@ -3,7 +3,7 @@
 /* eslint max-statements: 0 complexity: 0 */
 
 const optionalRequire = require("optional-require")(require);
-const isoExtRequire = require("isomorphic-loader/lib/extend-require");
+const { extendRequire, setXRequire } = require("isomorphic-loader");
 const makeAppMode = require("../lib/app-mode");
 const Path = require("path");
 const constants = require("../lib/constants");
@@ -56,8 +56,9 @@ export function cssModuleHook(
  * Load the require hook to support isomorphic assets when doing SSR
  */
 export function isomorphicExtendRequire() {
-  return isoExtRequire({
-    processAssets: (assets: any) => {
+  const xReq = extendRequire({
+    processConfig: (isoConfig: any) => {
+      const { assets } = isoConfig;
       const appSrcDir = (getAppMode().getEnv() || getAppMode().lib.dir).split("/")[0];
       if (appSrcDir !== getAppMode().src.dir && assets.marked) {
         const marked = assets.marked;
@@ -69,15 +70,11 @@ export function isomorphicExtendRequire() {
         });
       }
 
-      return assets;
+      return isoConfig;
     }
-  })
-    .then(() => {
-      isoExtRequire.setLogLevel("error");
-    })
-    .catch((err: Error) => {
-      isoExtRequire._instance.interceptLoad();
-    });
+  });
+
+  setXRequire(xReq);
 }
 
 /**
@@ -193,7 +190,7 @@ export function load(
   }
 
   if (options.isomorphicExtendRequire !== false) {
-    return isomorphicExtendRequire();
+    isomorphicExtendRequire();
   }
 
   return callback ? callback() : Promise.resolve();
