@@ -1,3 +1,70 @@
+# 10/12/2020
+
+- fix: babel rc handle missing xarc-options.json file
+- use isomorphic-loader version 4.0.2
+- fix: avoid accessing non exist subApps
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.1.17` `(8.1.16 => 8.1.17)`
+- `@xarc/app-dev@8.1.17` `(8.1.16 => 8.1.17)`
+- `@xarc/webpack@8.1.7` `(8.1.6 => 8.1.7)`
+- `subapp-web@1.0.37` `(1.0.36 => 1.0.37)`
+
+### Lerna Updated
+
+- `subapp-pbundle@0.0.31` `(0.0.30 => 0.0.31)`
+- `subapp-react@0.0.28` `(0.0.27 => 0.0.28)`
+- `subapp-redux@1.0.37` `(1.0.36 => 1.0.37)`
+- `subapp-server@1.3.6` `(1.3.5 => 1.3.6)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix: babel rc handle missing xarc-options.json file [commit](http://github.com/electrode-io/electrode/commit/fc9c1fb6e54aecddae34da7f27279cb3822a6414)
+  - update docs and fix lint errors [commit](http://github.com/electrode-io/electrode/commit/9d19005113309e90402ed3bcd40a34b159022a39)
+  - use isomorphic-loader version 4.0.2 [commit](http://github.com/electrode-io/electrode/commit/b11e8e47dca63f90deb4de6879245795f076f83a)
+
+- `packages/xarc-create-app`
+
+  - update docs and fix lint errors [commit](http://github.com/electrode-io/electrode/commit/9d19005113309e90402ed3bcd40a34b159022a39)
+
+- `packages/xarc-index-page`
+
+  - update docs and fix lint errors [commit](http://github.com/electrode-io/electrode/commit/9d19005113309e90402ed3bcd40a34b159022a39)
+
+- `packages/xarc-jsx-renderer`
+
+  - update docs and fix lint errors [commit](http://github.com/electrode-io/electrode/commit/9d19005113309e90402ed3bcd40a34b159022a39)
+
+- `packages/xarc-react`
+
+  - update docs and fix lint errors [commit](http://github.com/electrode-io/electrode/commit/9d19005113309e90402ed3bcd40a34b159022a39)
+
+- `packages/xarc-render-context`
+
+  - update docs and fix lint errors [commit](http://github.com/electrode-io/electrode/commit/9d19005113309e90402ed3bcd40a34b159022a39)
+
+- `packages/xarc-subapp`
+
+  - update docs and fix lint errors [commit](http://github.com/electrode-io/electrode/commit/9d19005113309e90402ed3bcd40a34b159022a39)
+
+- `packages/xarc-tag-renderer`
+
+  - update docs and fix lint errors [commit](http://github.com/electrode-io/electrode/commit/9d19005113309e90402ed3bcd40a34b159022a39)
+
+- `packages/xarc-webpack`
+
+  - update docs and fix lint errors [commit](http://github.com/electrode-io/electrode/commit/9d19005113309e90402ed3bcd40a34b159022a39)
+  - use isomorphic-loader version 4.0.2 [commit](http://github.com/electrode-io/electrode/commit/b11e8e47dca63f90deb4de6879245795f076f83a)
+
+- `packages/subapp-web`
+
+  - fix: avoid accessing non exist subApps [commit](http://github.com/electrode-io/electrode/commit/7372642bc3b0b31ffd8af414e39d741c04e1b5f4)
+
 # 10/8/2020
 
 - feat: accept XarcOptions when loading tasks - now in xclap.[jt]s, user can pass in an options object to configure all aspect of Electrode X features.
