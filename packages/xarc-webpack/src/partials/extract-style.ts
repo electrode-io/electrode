@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires, max-statements */
 import * as Path from "path";
 
-const archetypeConfig = require("@xarc/app-dev/config/archetype");
+import { loadXarcOptions } from "../util/load-xarc-options";
 
 const detectCssModule = require("../util/detect-css-module");
 
@@ -67,9 +67,10 @@ function loadPostCss() {
  */
 
 module.exports = function() {
+  const xarcOptions = loadXarcOptions();
+
   const isProduction = process.env.NODE_ENV === "production";
   const isDevelopment = !isProduction;
-  const archetype = archetypeConfig();
 
   const cssModuleSupport = detectCssModule();
 
@@ -101,7 +102,7 @@ module.exports = function() {
    * css-modules Loader
    */
   const getCSSModuleOptions = () => {
-    const enableShortenCSSNames = archetype.webpack.enableShortenCSSNames;
+    const enableShortenCSSNames = xarcOptions.webpack.enableShortenCSSNames;
     const enableShortHash = isProduction && enableShortenCSSNames;
     const localIdentName = `${enableShortHash ? "" : "[name]__[local]___"}[hash:base64:5]`;
 
@@ -153,7 +154,7 @@ module.exports = function() {
    * SASS
    */
 
-  if (archetype.options.sass && sassLoader) {
+  if (xarcOptions.options.sass && sassLoader) {
     rules.push({
       _name: `${namePrefix}-scss`,
       test: /\.(scss|sass)$/,
@@ -211,7 +212,7 @@ module.exports = function() {
   }
 
   const styleBundleFilename =
-    process.env.WEBPACK_DEV || archetype.babel.hasMultiTargets
+    process.env.WEBPACK_DEV || xarcOptions.babel.hasMultiTargets
       ? "[name].style.css"
       : "[name].style.[contenthash].css";
 
@@ -219,7 +220,7 @@ module.exports = function() {
     module: { rules },
     plugins: [
       new MiniCssExtractPlugin({ filename: styleBundleFilename }),
-      isProduction && new OptimizeCssAssetsPlugin(archetype.webpack.optimizeCssOptions),
+      isProduction && new OptimizeCssAssetsPlugin(xarcOptions.webpack.optimizeCssOptions),
       new webpack.LoaderOptionsPlugin({
         minimize: true,
         options: { context: Path.resolve("src") }

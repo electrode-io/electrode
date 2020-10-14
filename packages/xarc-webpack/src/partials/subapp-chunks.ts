@@ -3,6 +3,7 @@
 /* eslint-disable global-require, no-magic-numbers */
 
 import * as Crypto from "crypto";
+import { loadXarcOptions } from "../util/load-xarc-options";
 
 const splitMap = {};
 
@@ -22,7 +23,7 @@ function hashChunks(mod, chunks, key) {
 }
 
 function makeConfig() {
-  const { AppMode, webpack } = require("@xarc/app-dev/config/archetype")();
+  const { AppMode, webpack } = loadXarcOptions();
 
   const config: any = {};
 

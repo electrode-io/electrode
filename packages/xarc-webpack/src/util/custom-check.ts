@@ -5,13 +5,15 @@
 import * as Fs from "fs";
 import * as Path from "path";
 
-const archetype = require("@xarc/app-dev/config/archetype")();
+import { loadXarcOptions } from "../util/load-xarc-options";
 
 function useAppWebpackConfig() {
   return process.env.USE_APP_WEBPACK_CONFIG === "true";
 }
 
 function getWebpackStartConfig(defaultFile: string, relativeToCwd = true) {
+  const archetype = loadXarcOptions();
+
   const customFilePath = Path.resolve("webpack.config.js");
   const canUseAppProfile = useAppWebpackConfig() && Fs.existsSync(customFilePath);
 

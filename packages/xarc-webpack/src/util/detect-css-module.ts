@@ -3,11 +3,13 @@
 import * as Path from "path";
 
 const filterScanDir = require("filter-scan-dir");
-const archetype = require("@xarc/app-dev/config/archetype")();
-const AppMode = archetype.AppMode;
 const getOptRequire = require("../util/get-opt-require");
+import { loadXarcOptions } from "../util/load-xarc-options";
 
 function detectCSSModule() {
+  const archetype = loadXarcOptions();
+  const AppMode = archetype.AppMode;
+
   // if user explicitly says they want CSS module support, then we enable it
   if (archetype.webpack.cssModuleSupport !== undefined) {
     return Boolean(archetype.webpack.cssModuleSupport);

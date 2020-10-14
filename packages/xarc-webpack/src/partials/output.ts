@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 import * as Path from "path";
-const archetypeConfig = require("@xarc/app-dev/config/archetype");
+import { loadXarcOptions } from "../util/load-xarc-options";
 
 module.exports = () => {
-  const { AppMode, babel } = archetypeConfig();
+  const { babel } = loadXarcOptions();
 
   const inspectpack = process.env.INSPECTPACK_DEBUG === "true";
 

@@ -22,7 +22,7 @@ import * as _ from "lodash";
 import * as Path from "path";
 
 const logger = require("@xarc/app-dev/lib/logger");
-const archetype = require("@xarc/app-dev/config/archetype")();
+import { loadXarcOptions } from "../util/load-xarc-options";
 const mkdirp = require("mkdirp");
 const { devServerBaseUrl } = require("../util/webpack-dev-url");
 const requireAt = require("require-at");
@@ -119,6 +119,8 @@ const verifyVersions = info => {
 const electrodeDllDevBasePath = "__electrode_dev/dll";
 
 const updateDllAssetsForDev = dllAssets => {
+  const archetype = loadXarcOptions();
+
   const baseUrl = devServerBaseUrl(archetype.webpack);
 
   const tag = getEnvTag();
@@ -138,6 +140,8 @@ module.exports = {
   loadJson,
   updateDllAssetsForDev,
   loadAssets: () => {
+    const archetype = loadXarcOptions();
+
     const loadDlls = archetype.webpack.loadDlls;
 
     const dllMods = Object.keys(loadDlls).filter(x => loadDlls[x] && loadDlls[x].enable !== false);

@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 import { IsomorphicLoaderPlugin } from "isomorphic-loader";
-const archetypeConfig = require("@xarc/app-dev/config/archetype");
+import { loadXarcOptions } from "../util/load-xarc-options";
 
 module.exports = function(opts) {
-  const archetype = archetypeConfig();
+  const xarcOptions = loadXarcOptions();
 
   const plugin = new IsomorphicLoaderPlugin({
     assetsFile: opts.assetsFile || "../isomorphic-assets.json",
     webpackDev: {
-      url: `http://${archetype.webpack.devHostname}:${archetype.webpack.devPort}`,
+      url: `http://${xarcOptions.webpack.devHostname}:${xarcOptions.webpack.devPort}`,
       addUrl: false
     }
   });

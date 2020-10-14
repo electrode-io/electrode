@@ -8,9 +8,11 @@ import * as _ from "lodash";
 
 const mkdirp = require("mkdirp");
 const INDENT = 2;
-const archetype = require("@xarc/app-dev/config/archetype")();
+import { loadXarcOptions } from "../util/load-xarc-options";
 
 module.exports = function(opts) {
+  const xarcOptions = loadXarcOptions();
+
   const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
 
   const statsOptions: any = {
@@ -48,7 +50,7 @@ module.exports = function(opts) {
     //
     statsOptions.transform = data => {
       cleanupChunks(data);
-      const dir = archetype.webpack.devArtifactsPath || archetype.eTmpDir;
+      const dir = xarcOptions.webpack.devArtifactsPath || xarcOptions.eTmpDir;
       mkdirp.sync(dir);
       const str = JSON.stringify(data, null, INDENT);
       Fs.writeFileSync(Path.resolve(dir, "stats.json"), str);

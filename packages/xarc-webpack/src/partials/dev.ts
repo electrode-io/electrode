@@ -2,27 +2,29 @@
 
 import * as Url from "url";
 // const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const archetype = require("@xarc/app-dev/config/archetype")();
 const webpackDevReporter = require("../util/webpack-dev-reporter");
+import { loadXarcOptions } from "../util/load-xarc-options";
 
 const HTTP_PORT = 80;
 
-const devProtocol = archetype.webpack.https ? "https://" : "http://";
-
 module.exports = function() {
+  const xarcOptions = loadXarcOptions();
+
+  const devProtocol = xarcOptions.webpack.https ? "https://" : "http://";
+
   const devServerConfig: any = {
-    hot: archetype.webpack.enableHotModuleReload,
+    hot: xarcOptions.webpack.enableHotModuleReload,
     overlay: {
       errors: true,
-      warnings: archetype.webpack.enableWarningsOverlay
+      warnings: xarcOptions.webpack.enableWarningsOverlay
     },
     reporter: webpackDevReporter,
-    https: Boolean(archetype.webpack.https)
+    https: Boolean(xarcOptions.webpack.https)
   };
 
   if (process.env.WEBPACK_DEV_HOST || process.env.WEBPACK_HOST) {
-    devServerConfig.public = `${archetype.webpack.devHostname}:${archetype.webpack.devPort}`;
-    const orginUrl = `${devProtocol}${archetype.webpack.devHostname}:${archetype.webpack.devPort}`;
+    devServerConfig.public = `${xarcOptions.webpack.devHostname}:${xarcOptions.webpack.devPort}`;
+    const orginUrl = `${devProtocol}${xarcOptions.webpack.devHostname}:${xarcOptions.webpack.devPort}`;
     devServerConfig.headers = {
       "Access-Control-Allow-Origin": orginUrl
     };
@@ -41,7 +43,7 @@ module.exports = function() {
   //
   const makePublicPath = () => {
     // is any of the webpack.cdn* options defined
-    const { cdnProtocol, cdnHostname, cdnPort } = archetype.webpack;
+    const { cdnProtocol, cdnHostname, cdnPort } = xarcOptions.webpack;
     if (cdnProtocol !== null || cdnHostname !== null || cdnPort !== 0) {
       return Url.format({
         protocol: cdnProtocol || "http",
@@ -54,7 +56,7 @@ module.exports = function() {
       // under the same host and port, so use a relative path
       return "/js/";
     } else {
-      const { https, devHostname, devPort } = archetype.webpack;
+      const { https, devHostname, devPort } = xarcOptions.webpack;
       // original dev assets URLs
       return Url.format({
         protocol: https ? "https" : "http",

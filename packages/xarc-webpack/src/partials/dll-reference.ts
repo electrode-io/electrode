@@ -11,15 +11,17 @@ import * as fs from "fs";
 import * as Path from "path";
 import * as webpack from "webpack";
 const filterScanDir = require("filter-scan-dir");
-const archetype = require("@xarc/app-dev/config/archetype")();
+import { loadXarcOptions } from "../util/load-xarc-options";
 const logger = require("@xarc/app-dev/lib/logger");
 
 module.exports = function(options) {
+  const xarcOptions = loadXarcOptions();
+
   const config = options.currentConfig;
   logger.verbose("add-dll-references configurations", JSON.stringify(config, null, 2));
 
   try {
-    const exists = fs.existsSync(Path.resolve(archetype.AppMode.src.client, "dll.config.js"));
+    const exists = fs.existsSync(Path.resolve(xarcOptions.AppMode.src.client, "dll.config.js"));
     const filenames = filterScanDir.sync({
       dir: Path.resolve("dll", "js"),
       includeRoot: true,

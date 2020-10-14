@@ -4,13 +4,16 @@ import { setupHttpDevServer } from "./dev-http";
 import { createServer } from "http";
 
 const ck = require("chalker");
-const archetype = require("../../config/archetype")();
 const optionalRequire = require("optional-require")(require);
 const fastifyServer = optionalRequire("@xarc/fastify-server");
 const electrodeServer = optionalRequire("electrode-server");
 const Hapi = optionalRequire("@hapi/hapi");
 const Koa = optionalRequire("koa");
 const express = optionalRequire("express");
+
+import { loadXarcOptions } from "../../lib/utils";
+
+const xarcOptions = loadXarcOptions();
 
 //
 // indicate that app is running in webpack dev mode
@@ -22,8 +25,8 @@ if (process.env.WEBPACK_DEV === undefined) {
 
 if (createServer) {
   const devHttpServer = setupHttpDevServer({
-    host: archetype.webpack.devHostname,
-    port: archetype.webpack.devPort
+    host: xarcOptions.webpack.devHostname,
+    port: xarcOptions.webpack.devPort
   });
   devHttpServer.addListener("error", err => {
     console.error(ck`<red>HTTP webpack dev server having an error</>${err}`);
@@ -31,7 +34,7 @@ if (createServer) {
 
   devHttpServer.addListener("listening", () =>
     console.log(
-      ck`<green>Node.js webpack dev server listening on port ${archetype.webpack.devPort}</>`
+      ck`<green>Node.js webpack dev server listening on port ${xarcOptions.webpack.devPort}</>`
     )
   );
   devHttpServer.start();
@@ -42,8 +45,8 @@ if (createServer) {
       pinoOptions: false
     },
     connection: {
-      host: archetype.webpack.devHostname,
-      port: archetype.webpack.devPort
+      host: xarcOptions.webpack.devHostname,
+      port: xarcOptions.webpack.devPort
     },
     plugins: {
       webpackDevFastify: {
@@ -58,7 +61,7 @@ if (createServer) {
       logLevel: "warn"
     },
     connections: {
-      default: { host: archetype.webpack.devHostname, port: archetype.webpack.devPort }
+      default: { host: xarcOptions.webpack.devHostname, port: xarcOptions.webpack.devPort }
     },
     plugins: {
       webpackDevHapi: {
@@ -69,15 +72,15 @@ if (createServer) {
   });
 } else if (Hapi) {
   const app = Hapi.server({
-    port: archetype.webpack.devPort,
-    host: archetype.webpack.devHostname
+    port: xarcOptions.webpack.devPort,
+    host: xarcOptions.webpack.devHostname
   });
   app
     .register(require("./dev-hapi"))
     .then(() => app.start())
     .then(() => {
       console.log(
-        ck`<green>Hapi webpack dev server listening on port ${archetype.webpack.devPort}</>`
+        ck`<green>Hapi webpack dev server listening on port ${xarcOptions.webpack.devPort}</>`
       );
     })
     .catch(err => {
@@ -87,12 +90,12 @@ if (createServer) {
   const app = new Koa();
   const setup = require("./dev-koa");
   setup(app);
-  app.listen(archetype.webpack.devPort, err => {
+  app.listen(xarcOptions.webpack.devPort, err => {
     if (err) {
       console.error(ck`<red>koa webpack dev server failed</>${err}`);
     } else {
       console.log(
-        ck`<green>koa webpack dev server listening on port ${archetype.webpack.devPort}</>`
+        ck`<green>koa webpack dev server listening on port ${xarcOptions.webpack.devPort}</>`
       );
     }
   });
@@ -100,12 +103,12 @@ if (createServer) {
   const app = express();
   const setup = require("./dev-express");
   setup(app);
-  app.listen(archetype.webpack.devPort, err => {
+  app.listen(xarcOptions.webpack.devPort, err => {
     if (err) {
       console.error(ck`<red>express webpack dev server failed</>${err}`);
     } else {
       console.log(
-        ck`<green>express webpack dev server listening on port ${archetype.webpack.devPort}</>`
+        ck`<green>express webpack dev server listening on port ${xarcOptions.webpack.devPort}</>`
       );
     }
   });

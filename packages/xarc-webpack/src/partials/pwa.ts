@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/camelcase */
 
 import * as Path from "path";
-const archetype = require("@xarc/app-dev/config/archetype")();
 const requireAt = require("require-at");
-const AppMode = archetype.AppMode;
+import { loadXarcOptions } from "../util/load-xarc-options";
 
 const assign = require("lodash/assign");
 const fileLoader = require.resolve("file-loader");
@@ -63,8 +62,11 @@ function createEntryConfigFromScripts(importScripts, entry) {
 }
 
 module.exports = function(options) {
+  const xarcOptions = loadXarcOptions();
+  const AppMode = xarcOptions.AppMode;
+
   /* eslint max-statements: 0 */
-  const swConfig = (archetype.options.pwa && optionalRequire(swConfigPath, true)) || {};
+  const swConfig = (xarcOptions.options.pwa && optionalRequire(swConfigPath, true)) || {};
 
   if (!swConfig.manifest) {
     return {};

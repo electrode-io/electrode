@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-const archetypeConfig = require("@xarc/app-dev/config/archetype");
+import { loadXarcOptions } from "../util/load-xarc-options";
 import * as LoadablePlugin from "@loadable/webpack-plugin";
 
 module.exports = function() {
-  const archetype = archetypeConfig();
+  const xarcOptions = loadXarcOptions();
   return {
-    plugins: archetype.babel.enableDynamicImport
+    plugins: xarcOptions.babel.enableDynamicImport
       ? [new LoadablePlugin({ filename: "../server/loadable-stats.json" })]
       : []
   };

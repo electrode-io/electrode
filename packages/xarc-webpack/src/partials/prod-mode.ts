@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-const archetype = require("@xarc/app-dev/config/archetype")();
-
-// https://stackoverflow.com/questions/40900791/cannot-redeclare-block-scoped-variable-in-unrelated-files
-export {};
+import { loadXarcOptions } from "../util/load-xarc-options";
 
 module.exports = function() {
+  const xarcOptions = loadXarcOptions();
+
   return {
-    mode: archetype.webpack.minify ? "production" : "development"
+    mode: xarcOptions.webpack.minify ? "production" : "development"
   };
 };

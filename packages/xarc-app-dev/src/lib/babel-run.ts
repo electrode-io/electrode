@@ -15,6 +15,8 @@ export {};
  */
 const Path = require("path");
 
+import { loadXarcOptions } from "../lib/utils";
+
 const serverDir = process.argv[2] || "src/server";
 
 let start;
@@ -23,7 +25,7 @@ try {
   // Try to load user's dev.js under src/server
   start = require(Path.resolve(serverDir, "dev.js"));
 } catch (e) {
-  const archetype = require("../config/archetype")();
+  const xarcOptions = loadXarcOptions();
   const cwdNM = Path.resolve("node_modules");
   const cwd = process.cwd();
 
@@ -37,7 +39,7 @@ try {
       }
     ],
     extensions: [".js", ".jsx"]
-      .concat(archetype.babel.enableTypeScript && [".ts", ".tsx"])
+      .concat(xarcOptions.babel.enableTypeScript && [".ts", ".tsx"])
       .filter(x => x),
     cache: true
   });

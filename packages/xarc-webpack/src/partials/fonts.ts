@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-const archetypeConfig = require("@xarc/app-dev/config/archetype");
+import { loadXarcOptions } from "../util/load-xarc-options";
 
 module.exports = function() {
-  const archetype = archetypeConfig();
+  const xarcOptions = loadXarcOptions();
   const urlLoader = require.resolve("url-loader");
   const fileLoader = require.resolve("file-loader");
   const isomorphicLoader = require.resolve("isomorphic-loader");
@@ -18,7 +18,7 @@ module.exports = function() {
             {
               loader: urlLoader,
               options: {
-                limit: archetype.webpack.woffFontInlineLimit,
+                limit: xarcOptions.webpack.woffFontInlineLimit,
                 mimetype: "application/font-woff"
               }
             },

@@ -4,9 +4,11 @@
 
 import * as Fs from "fs";
 import * as Path from "path";
-const archetype = require("@xarc/app-dev/config/archetype")();
+import { loadXarcOptions } from "../util/load-xarc-options";
 
 module.exports = function notifyBundleValid() {
+  const archetype = loadXarcOptions();
+
   setTimeout(() => {
     Fs.writeFileSync(Path.resolve(archetype.eTmpDir, "bundle.valid.log"), `${Date.now()}`);
   }, 100);

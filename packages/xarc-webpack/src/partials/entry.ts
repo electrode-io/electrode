@@ -6,15 +6,17 @@ import * as Fs from "fs";
 import * as Path from "path";
 import * as _ from "lodash";
 const optionalRequire = require("optional-require")(require);
-const archetype = require("@xarc/app-dev/config/archetype")();
-const AppMode = archetype.AppMode;
 const chalk = require("chalk");
 const logger = require("@xarc/app-dev/lib/logger");
 const mkdirp = require("mkdirp");
+import { loadXarcOptions } from "../util/load-xarc-options";
 
 const DEV_HMR_DIR = ".__dev_hmr";
 
 function makeEntryPartial() {
+  const xarcOptions = loadXarcOptions();
+  const AppMode = xarcOptions.AppMode;
+
   const partial: any = {
     context: Path.resolve(AppMode.src.client)
   };
@@ -152,7 +154,7 @@ if (module.hot) {
     const entryConfig = searchEntryConfig();
     if (entryConfig) return entryConfig;
 
-    if (archetype.options.subapp !== false) {
+    if (xarcOptions.options.subapp !== false) {
       // App has subapp apps within src?
       const subApps = searchSubApps();
       if (subApps) {
@@ -173,13 +175,13 @@ if (module.hot) {
   }
 
   function shouldPolyfill() {
-    if (archetype.webpack.enableBabelPolyfill) {
+    if (xarcOptions.webpack.enableBabelPolyfill) {
       const hasMultipleTarget =
-        Object.keys(archetype.babel.envTargets)
+        Object.keys(xarcOptions.babel.envTargets)
           .sort()
           .join(",") !== "default,node";
       if (hasMultipleTarget) {
-        return archetype.babel.target === "default";
+        return xarcOptions.babel.target === "default";
         // for all other targets, disable polyfill
       } else {
         return true;

@@ -1,13 +1,16 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 import * as Path from "path";
-const archetype = require("@xarc/app-dev/config/archetype")();
-const AppMode = archetype.AppMode;
 const identity = require("lodash/identity");
 const assign = require("lodash/assign");
 const babelLoader = require.resolve("babel-loader");
 
+import { loadXarcOptions } from "../util/load-xarc-options";
+
 module.exports = function(options) {
+  const xarcOptions = loadXarcOptions();
+  const AppMode = xarcOptions.AppMode;
+
   const clientVendor = Path.join(AppMode.src.client, "vendor/");
   const babelExclude = x => {
     if (x.indexOf("node_modules") >= 0) return true;
@@ -15,7 +18,7 @@ module.exports = function(options) {
     return false;
   };
 
-  const test = archetype.babel.enableTypeScript ? /\.[tj]sx?$/ : /\.jsx?$/;
+  const test = xarcOptions.babel.enableTypeScript ? /\.[tj]sx?$/ : /\.jsx?$/;
 
   const babelLoaderConfig = {
     _name: "babel",
@@ -38,7 +41,7 @@ module.exports = function(options) {
         assign(
           {},
           babelLoaderConfig,
-          archetype.babel.hasMultiTargets ? archetype.babel.extendLoader : {}
+          xarcOptions.babel.hasMultiTargets ? xarcOptions.babel.extendLoader : {}
         )
       ]
     }

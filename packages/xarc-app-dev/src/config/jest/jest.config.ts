@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-export {};
 
 const Path = require("path");
 const _ = require("lodash");
@@ -11,9 +10,11 @@ const optRequire = getOptArchetypeRequire(["@xarc/opt-jest", "electrode-archetyp
 const jestPkg = optRequire("jest/package.json");
 const jestMajVersion = parseInt(jestPkg.version.split(".")[0], 10);
 
-const archetype = require("@xarc/app/config/archetype")();
+import { loadXarcOptions } from "../../lib/utils";
 
-const { enableTypeScript } = archetype.babel;
+const xarcOptions = loadXarcOptions();
+
+const { enableTypeScript } = xarcOptions.babel;
 
 // https://jestjs.io/docs/en/configuration.html#testregex-string
 const scrTypes = enableTypeScript ? "jt" : "j";
@@ -55,5 +56,5 @@ module.exports = _.merge(
   {},
   _.pickBy(jestDefaultConfig, x => x !== undefined),
   jestVersionSpecificConfig[jestMajVersion],
-  archetype.jest
+  xarcOptions.jest
 );

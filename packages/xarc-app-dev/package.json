@@ -49,6 +49,7 @@
     "@babel/plugin-transform-runtime": "^7.1.0",
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.0.0",
     "@babel/register": "^7.0.0",
     "@jchip/redbird": "^1.1.2",
     "@loadable/babel-plugin": "^5.10.0",

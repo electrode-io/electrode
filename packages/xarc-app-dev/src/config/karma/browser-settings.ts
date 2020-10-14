@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires, no-process-exit */
-export {};
+
+import { loadXarcOptions } from "../../lib/utils";
 
 module.exports = function(settings) {
-  const archetype = require("@xarc/app/config/archetype")();
+  const xarcOptions = loadXarcOptions();
   const logger = require("@xarc/app/lib/logger");
-  const browser = archetype.karma.browser.toLowerCase();
+  const browser = xarcOptions.karma.browser.toLowerCase();
   if (browser === "chrome") {
     settings.browsers = ["ChromeHeadless"];
 
