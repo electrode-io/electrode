@@ -118,15 +118,16 @@ export class SubAppWebpackPlugin {
           return acc;
         },
         {
-          "//about": "Subapp meta information collected during webpack compile"
+          "//about": "Subapp meta information collected during webpack compile",
+          "//count": keys.length
         }
       );
+      const subapps = JSON.stringify(subappMeta, null, 2) + "\n";
+      assets[this._assetsFile] = {
+        source: () => subapps,
+        size: () => subapps.length
+      };
     }
-    const subapps = JSON.stringify(subappMeta, null, 2) + "\n";
-    assets[this._assetsFile] = {
-      source: () => subapps,
-      size: () => subapps.length
-    };
   }
 
   findImportCall(ast) {
