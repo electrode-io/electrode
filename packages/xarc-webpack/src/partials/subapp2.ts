@@ -7,6 +7,12 @@ import { JsonpScriptSrcPlugin } from "../plugins/jsonp-script-src-plugin";
 
 module.exports = function(opts) {
   return {
-    plugins: [new SubAppWebpackPlugin({ webpackVersion: 4 }), new JsonpScriptSrcPlugin()]
+    plugins: [
+      new SubAppWebpackPlugin({
+        webpackVersion: 4,
+        assetsFile: "../subapps.json"
+      }),
+      new JsonpScriptSrcPlugin()
+    ]
   };
 };

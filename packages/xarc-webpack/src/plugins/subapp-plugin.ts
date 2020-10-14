@@ -39,6 +39,7 @@ export class SubAppWebpackPlugin {
   _wVer: number;
   _makeIdentifierBEE: Function;
   _tapAssets: Function;
+  _assetsFile: string;
 
   /**
    *
@@ -46,8 +47,25 @@ export class SubAppWebpackPlugin {
    */
   constructor({
     declareApiName = ["declareSubApp", "createDynamicComponent"],
-    webpackVersion = findWebpackVersion()
-  }: { declareApiName?: string | string[]; webpackVersion?: number } = {}) {
+    webpackVersion = findWebpackVersion(),
+    assetsFile = "subapps.json"
+  }: {
+    /**
+     * The API names for declaring subapp and components
+     */
+    declareApiName?: string | string[];
+    /**
+     * Webpack version (4, 5, etc)
+     *
+     * minimum 4
+     */
+    webpackVersion?: number;
+    /**
+     * Filename to output the subapp assets JSON file
+     * **default**: `subapps.json`
+     */
+    assetsFile?: string;
+  } = {}) {
     this._declareApiNames = [].concat(declareApiName);
     this._subApps = {};
     this._wVer = webpackVersion;
@@ -56,6 +74,7 @@ export class SubAppWebpackPlugin {
 
     this._makeIdentifierBEE = makeIdentifierBEE;
     this._tapAssets = tapAssets;
+    this._assetsFile = assetsFile;
   }
 
   initWebpackVer4() {
@@ -104,7 +123,7 @@ export class SubAppWebpackPlugin {
       );
     }
     const subapps = JSON.stringify(subappMeta, null, 2) + "\n";
-    assets["subapps.json"] = {
+    assets[this._assetsFile] = {
       source: () => subapps,
       size: () => subapps.length
     };
