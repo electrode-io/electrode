@@ -1,13 +1,11 @@
 "use strict";
 
-const assert = require("assert");
 const xclap = require("xclap");
 const xsh = require("xsh");
 const shell = xsh.$;
 const exec = xsh.exec;
 const fs = require("fs");
 const Path = require("path");
-const yoTest = require("yeoman-test");
 const _ = require("lodash");
 
 const isWin32 = process.platform.startsWith("win32");
