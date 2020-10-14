@@ -26,6 +26,7 @@ const DemoButtons = () => (
       <input type="submit" value="submit input" />
       <input type="button" value="button input" />
     </div>
+    <h6 styleName="custom.docs-header">demo dynamic import component without SSR</h6>
     <DemoButtonsOutline />
   </div>
 );

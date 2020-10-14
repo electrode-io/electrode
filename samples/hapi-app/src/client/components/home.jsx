@@ -90,6 +90,7 @@ class Home extends React.Component {
         </div>
 
         <div styleName="custom.docs-section">
+          <h6 styleName="custom.docs-header">Demo dynamic import component with SSR</h6>
           <DemoButtons />
         </div>
 
