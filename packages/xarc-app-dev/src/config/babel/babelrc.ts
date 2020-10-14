@@ -23,7 +23,6 @@ const {
   legacyDecorators,
   transformClassProps,
   looseClassProps,
-  enableDynamicImport,
   hasMultiTargets,
   target: babelTarget,
   envTargets = {}
@@ -96,10 +95,6 @@ const basePlugins = [
       useRuntimeModule: true
     }
   ],
-  !isNodeTarget && enableDynamicImport && "@babel/plugin-syntax-dynamic-import",
-  // add plugin for loadable component
-  // Note: this is needed for server side (node.js) also.
-  enableDynamicImport && "@loadable/babel-plugin",
   // allow decorators on class and method
   // Note: This must go before @babel/plugin-proposal-class-properties
   (enableTypeScript || proposalDecorators) && [

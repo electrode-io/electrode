@@ -89,10 +89,7 @@ export const partials = {
    * setup CSS/styling support
    */
   extractStyle: genPartials["_extract-style"],
-  /**
-   * setup @loadable/webpack-plugin for dynamic import loadable components
-   */
-  loadable: genPartials._loadable,
+
   /**
    * setup loaders for font files like woff/woff2/eot/ttf
    */

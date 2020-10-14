@@ -23,7 +23,6 @@ import DemoStates from "./demo-states";
 import DemoPureStates from "./demo-pure-states";
 // import { DemoButtons } from "./demo-buttons";
 import DemoSugarss from "./demo-sugarss";
-import DemoDynamicImport from "./demo-dynamic-import";
 import { Nav } from "./nav";
 
 import { declareSubApp, createDynamicComponent } from "@xarc/react";
@@ -92,10 +91,6 @@ class Home extends React.Component {
         <div styleName="custom.docs-section">
           <h6 styleName="custom.docs-header">Demo dynamic import component with SSR</h6>
           <DemoButtons />
-        </div>
-
-        <div styleName="custom.docs-section">
-          <DemoDynamicImport />
         </div>
 
         <div styleName={"custom.docs-section"}>

@@ -75,9 +75,8 @@ class ReduxRouterEngine {
   startMatch(req, options = {}) {
     // hapi@18 compatibility: use "origin" to determine (WHATWG has origin, Url.parse does not)
     // https://github.com/hapijs/hapi/issues/3871
-    const url = (typeof req.url === "object") && ("origin" in req.url) && req.url.href
-      ? req.url.href
-      : req.url;
+    const url =
+      typeof req.url === "object" && "origin" in req.url && req.url.href ? req.url.href : req.url;
     const location = options.location || Url.parse(url || req.path);
 
     options = Object.assign({}, options, { req, location });
@@ -270,25 +269,20 @@ class ReduxRouterEngine {
         ssrApi = withIds ? ReactDomServer.renderToString : ReactDomServer.renderToStaticMarkup;
       }
 
-      const target = util.getTargetByQuery(req.query, this._envTargets);
-      this._extractor = util.createdStatExtractor(target);
-
       return ssrApi(
-        this._extractor.collectChunks(
+        React.createElement(
+          // server side context to provide request
+          ServerContext,
+          { request: req },
+          // redux provider
           React.createElement(
-            // server side context to provide request
-            ServerContext,
-            { request: req },
-            // redux provider
+            Provider,
+            { store },
+            // user route component
             React.createElement(
-              Provider,
-              { store },
-              // user route component
-              React.createElement(
-                StaticRouter,
-                { location, context: routeContext, basename: this.options.basename },
-                this._routesComponent
-              )
+              StaticRouter,
+              { location, context: routeContext, basename: this.options.basename },
+              this._routesComponent
             )
           )
         )
