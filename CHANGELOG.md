@@ -1,3 +1,57 @@
+# 10/14/2020
+
+- fix: update config and dev code to load xarc options
+- fix: drop webpack deprecated stuff
+- fix: add optional-require to dep for render-context
+- fix: don't output subapp v2 info assets if none was found
+- fix: output subapp v2 info to dist
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.1.18` `(8.1.17 => 8.1.18)`
+- `@xarc/app-dev@8.1.18` `(8.1.17 => 8.1.18)`
+- `@xarc/render-context@1.0.2` `(1.0.1 => 1.0.2)`
+- `@xarc/webpack@8.1.8` `(8.1.7 => 8.1.8)`
+- `subapp-web@1.0.38` `(1.0.37 => 1.0.38)`
+
+### Lerna Updated
+
+- `@xarc/index-page@1.0.4` `(1.0.3 => 1.0.4)`
+- `@xarc/jsx-renderer@1.0.4` `(1.0.3 => 1.0.4)`
+- `@xarc/tag-renderer@1.0.2` `(1.0.1 => 1.0.2)`
+- `subapp-pbundle@0.0.32` `(0.0.31 => 0.0.32)`
+- `subapp-react@0.0.29` `(0.0.28 => 0.0.29)`
+- `subapp-redux@1.0.38` `(1.0.37 => 1.0.38)`
+- `subapp-server@1.3.7` `(1.3.6 => 1.3.7)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix: update config and dev code to load xarc options [commit](http://github.com/electrode-io/electrode/commit/5a264183ddb2395fd08787e6fbc9854cbf21f27b)
+  - [fix] drop webpack deprecated stuff [commit](http://github.com/electrode-io/electrode/commit/f099cf4cdc03088a0fd327ded4788d9b89d34b3f)
+
+- `packages/xarc-render-context`
+
+  - fix: add optional-require to dep for render-context [commit](http://github.com/electrode-io/electrode/commit/617120836d37eb1d0c99090e1931872915bdf547)
+
+- `packages/xarc-webpack`
+
+  - fix: don't output subapp v2 info assets if none was found [commit](http://github.com/electrode-io/electrode/commit/17acaf52c55d8df151341b7e480226df4489db2d)
+  - fix: output subapp v2 info to dist [commit](http://github.com/electrode-io/electrode/commit/91d88ea55f09aa3037913478d1a85dec617cc4db)
+  - fix: update config and dev code to load xarc options [commit](http://github.com/electrode-io/electrode/commit/5a264183ddb2395fd08787e6fbc9854cbf21f27b)
+  - [fix] drop webpack deprecated stuff [commit](http://github.com/electrode-io/electrode/commit/f099cf4cdc03088a0fd327ded4788d9b89d34b3f)
+
+- `packages/subapp-web`
+
+  - fix: more helpful error message when subapp init fail on server [commit](http://github.com/electrode-io/electrode/commit/ffe45607b3d4306ae2e07509460ee77f3f475d86)
+
+- `MISC`
+
+  - [chore] update to fynpo 0.2.28 [commit](http://github.com/electrode-io/electrode/commit/d0ed64192e538d9e21f7ab1109730194c9b74605)
+
 # 10/12/2020
 
 - fix: babel rc handle missing xarc-options.json file
