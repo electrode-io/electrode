@@ -308,16 +308,27 @@ ${ignoreMsg}`
    * @returns {Promise.<Object>} an object containing an array of file names
    */
   loadAssetsFromStats(statsPath) {
-    let stats;
+    const statsFile = Path.resolve(statsPath);
 
+    let stats;
     try {
-      stats = JSON.parse(Fs.readFileSync(Path.resolve(statsPath)).toString());
+      stats = JSON.parse(Fs.readFileSync(statsFile).toString());
     } catch (err) {
-      throw new Error(
-        `Couldn't find stats.json at ${Path.resolve(
-          statsPath
-        )}. Please ensure environment is set up correctly. (Did you run 'clap dev'?)`
-      );
+      const msg = `
++------------
+| ERROR: subapp-web couldn't load the file ${statsFile}.
+|
+| This likely means that there was an error with webpack compile process.
+| Please check in the terminal if status message indicates webpack bundle
+| has ERRORS, and then look for webpack dev server reporter URL and open
+| it to view webpack compile results.
+|
+| Also, in dev mode you should be starting with the command 'clap dev'.
+|
+| Continuing or reloading will result in further strange errors.
++------------
+`;
+      throw new Error(msg);
     }
 
     const assets = {};
@@ -354,7 +365,7 @@ ${ignoreMsg}`
 
       if (data.action === "group-ssr-total" || data.action === "subapps-ssr") {
         const events = groupEvents[group];
-        events.forEach((event) => reporter(event));
+        events.forEach(event => reporter(event));
         delete groupEvents[group];
       }
     });
