@@ -1,6 +1,6 @@
 {
   "name": "@xarc/tag-renderer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Generate index.html webpage from a tag based template",
   "main": "dist/index.js",
   "scripts": {
@@ -17,7 +17,7 @@
   "author": "Electrode <https://github.com/electrode-io/electrode>",
   "license": "Apache-2.0",
   "dependencies": {
-    "@xarc/render-context": "^1.0.1"
+    "@xarc/render-context": "^1.0.2"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
