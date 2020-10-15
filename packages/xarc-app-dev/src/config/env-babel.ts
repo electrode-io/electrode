@@ -11,7 +11,7 @@ module.exports = function getEnvBabel() {
   const { options } = userConfig;
 
   const babelConfigSpec = {
-    enableTypeScript: { env: "ENABLE_BABEL_TYPESCRIPT", default: options.typescript || false },
+    enableTypeScript: { env: "ENABLE_BABEL_TYPESCRIPT", default: options.typescript || true },
     enableDynamicImport: { env: "ENABLE_DYNAMIC_IMPORT", default: false },
     enableFlow: { env: "ENABLE_BABEL_FLOW", default: true },
     // require the @flow directive in source to enable FlowJS type stripping
