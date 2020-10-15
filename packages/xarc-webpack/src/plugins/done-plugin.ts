@@ -6,7 +6,7 @@ class DonePlugin {
   }
 
   apply(compiler) {
-    compiler.plugin("done", () => {
+    compiler.hooks.done.tap("DonePlugin", () => {
       this._func();
     });
   }

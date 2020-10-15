@@ -124,14 +124,13 @@ class Middleware {
 
     config.plugins = [
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoEmitOnErrorsPlugin()
-    ].concat(config.plugins);
+      new webpack.NoEmitOnErrorsPlugin(),
+      options.progress !== false && new webpack.ProgressPlugin({ profile: options.progressProfile })
+    ]
+      .concat(config.plugins)
+      .filter(x => x);
 
     const compiler = webpack(config);
-
-    if (options.progress !== false) {
-      compiler.apply(new webpack.ProgressPlugin({ profile: options.progressProfile }));
-    }
 
     const webpackDevOptions = _.merge(
       {
