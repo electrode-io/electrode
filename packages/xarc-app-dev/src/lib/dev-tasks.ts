@@ -63,14 +63,17 @@ function setWebpackDev() {
   process.env.WEBPACK_DEV = "true";
 }
 
+export { XarcOptions } from "../config/opt2/xarc-options";
+
 /**
  * Load xarc development tasks that can be invoked using @xarc/run
  *
- * @param  xclap @xarc/run task runner
+ * @param  xrun - `@xarc/run` (or xclap) task runner.  pass `null` and an
+ *   internal version will be used.
  * @param  xarcOptions user provided options to configure features etc
  * @returns void
  */
-module.exports = function loadArchetype(xclap, xarcOptions: XarcOptions = {}) {
+export function loadXarcDevTasks(xrun, xarcOptions: XarcOptions = {}) {
   // lazy require modules that have effects so as to permit customization
   // from userspace, i.e. `userOptions`
   const archetype = getArchetype(xarcOptions);
@@ -1231,11 +1234,11 @@ You only need to run this if you are doing something not through the xarc tasks.
   //   require.resolve(`${archetype.devArchetypeName}/package.json`);
   // }
 
-  xclap = xclap || requireAt(process.cwd())("xclap") || require("xclap");
+  xrun = xrun || requireAt(process.cwd())("xclap") || require("xclap");
   process.env._ELECTRODE_DEV_ = "1";
   if (!process.env.hasOwnProperty("FORCE_COLOR")) {
     process.env.FORCE_COLOR = "1"; // force color for chalk
   }
-  xclap.load("electrode", makeTasks(xclap), -10);
+  xrun.load("electrode", makeTasks(xrun), -10);
   generateBrowsersListRc();
-};
+}

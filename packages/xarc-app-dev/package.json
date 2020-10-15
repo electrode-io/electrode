@@ -2,7 +2,7 @@
   "name": "@xarc/app-dev",
   "version": "8.1.18",
   "description": "Electrode X application development support",
-  "main": "index.js",
+  "main": "lib/index.js",
   "homepage": "http://www.electrode.io",
   "repository": {
     "type": "git",
