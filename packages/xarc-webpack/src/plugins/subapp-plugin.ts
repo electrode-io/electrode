@@ -151,8 +151,6 @@ export class SubAppWebpackPlugin {
   }
 
   apply(compiler) {
-    const apiNames = this._declareApiNames;
-
     this._tapAssets(compiler);
 
     const findGetModule = props => {
@@ -243,9 +241,22 @@ export class SubAppWebpackPlugin {
           };
         };
 
+        const apiNames = [].concat(this._declareApiNames);
+
         [].concat(apiNames).forEach(apiName => {
           parser.hooks.call.for(apiName).tap(pluginName, expr => parseForSubApp(expr, apiName));
         });
+
+        parser.hooks.evaluate
+          .for("CallExpression")
+          .tap({ name: pluginName, before: "Parser" }, expression => {
+            const calleeName = _.get(expression, "callee.property.name");
+            if (apiNames.includes(calleeName)) {
+              return parseForSubApp(expression, calleeName);
+            }
+
+            return undefined;
+          });
 
         parser.hooks.evaluate
           .for("Identifier")
