@@ -41,7 +41,10 @@ module.exports = (base, merge) => {
       "subapp-server": "^1.3.1"
     },
     devDependencies: {
-      "@xarc/app-dev": "^8.1.8"
+      "@xarc/app-dev": "^8.1.8",
+      "ts-node": "^9.0.0",
+      typescript: "^4.0.3",
+      xclap: "^0.2.53"
     }
   };
 
