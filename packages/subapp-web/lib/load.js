@@ -216,7 +216,7 @@ Response: ${err || body}`
     process: (context, { props }) => {
       verifyUseStream(props);
 
-      const { request } = context.user;
+      const { request, routeOptions } = context.user;
 
       context.user.numOfSubapps = context.user.numOfSubapps || 0;
 
@@ -366,7 +366,9 @@ ${stack}`,
             ssrGroups
           };
           const lib = (ssrInfo.lib = util.getFramework(ref));
-          ssrInfo.awaitData = lib.handlePrepare();
+          ssrInfo.awaitData = routeOptions.initialize
+            ? Promise.resolve(routeOptions.initialize(request)).then(() => lib.handlePrepare())
+            : lib.handlePrepare();
 
           ssrInfo.defer = true;
 
