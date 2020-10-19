@@ -1,3 +1,49 @@
+# 10/19/2020
+
+## Packages
+
+- fix: ts friendly dev tasks exports
+- feat: create-app default typescript
+- fix: handle webpack parser CallExpression event
+- major `@xarc/webpack@9.0.0` for isomorphic-loader 4.x
+- fix: subapp v1 call route initialize after subapps are loaded
+
+### Directly Updated
+
+- `@xarc/app@8.1.19` `(8.1.18 => 8.1.19)`
+- `@xarc/app-dev@8.1.19` `(8.1.18 => 8.1.19)`
+- `@xarc/create-app@3.0.12` `(3.0.11 => 3.0.12)`
+- `@xarc/webpack@9.0.0` `(8.1.8 => 9.0.0)`
+- `subapp-web@1.0.39` `(1.0.38 => 1.0.39)`
+
+### Lerna Updated
+
+- `subapp-pbundle@0.0.33` `(0.0.32 => 0.0.33)`
+- `subapp-react@0.0.30` `(0.0.29 => 0.0.30)`
+- `subapp-redux@1.0.39` `(1.0.38 => 1.0.39)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix: ts friendly dev tasks exports [commit](http://github.com/electrode-io/electrode/commit/a5c7d0d6fa6d804d500bcf9d28e81ee577d67810)
+  - update docs [commit](http://github.com/electrode-io/electrode/commit/926f722e45f44ce3d6756d3d17fc5e007a68ac6b)
+
+- `packages/xarc-create-app`
+
+  - fix: create-app [commit](http://github.com/electrode-io/electrode/commit/fef70bec17fb72f4423521e11623bdad7994a209)
+  - feat: create-app default typescript ([#1747](https://github.com/electrode-io/electrode/pull/1747)) [commit](http://github.com/electrode-io/electrode/commit/bd45494a413046805261878da67a9884725eaeae)
+
+- `packages/xarc-webpack`
+
+  - fix: handle webpack parser CallExpression event [commit](http://github.com/electrode-io/electrode/commit/4b82b4281f5a156074a08f5661aaab5d8a7b9318)
+  - update docs [commit](http://github.com/electrode-io/electrode/commit/926f722e45f44ce3d6756d3d17fc5e007a68ac6b)
+  - [major] mark for major bump for isomorphic-loader 4.x [commit](http://github.com/electrode-io/electrode/commit/5c543aa55c80f3d63564b72236f72f28e01725f7)
+
+- `packages/subapp-web`
+
+  - fix: subapp v1 call route initialize after subapps are loaded [commit](http://github.com/electrode-io/electrode/commit/206a5ace87841bbc26668eb9a83d5f2b027e9070)
+
 # 10/14/2020
 
 - fix: update config and dev code to load xarc options
