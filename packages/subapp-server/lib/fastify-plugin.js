@@ -92,6 +92,8 @@ async function registerFastifyRoutesFromFile({ fastify, srcDir, routes, topOpts 
 
     const routeOptions = Object.assign({}, topOpts, route);
 
+    routeOptions.uiConfig = _.get(fastify, "settings.app.config.ui", {});
+
     const routeRenderer = routesFromFile.setupRouteTemplate({
       subAppsByPath,
       srcDir,
@@ -136,6 +138,8 @@ async function registerFastifyRoutesFromDir({ fastify, topOpts, routes }) {
       topOpts,
       _.pick(route, ["pageTitle", "bundleChunkSelector", "templateFile", "selectTemplate"])
     );
+
+    routeOptions.uiConfig = _.get(fastify, "settings.app.config.ui", {});
 
     assert(
       routeOptions.templateFile,
