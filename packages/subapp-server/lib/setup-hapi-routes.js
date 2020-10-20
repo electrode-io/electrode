@@ -61,6 +61,8 @@ async function registerRoutesFromFile({ server, srcDir, routes, topOpts }) {
     const route = routes[path];
     const routeOptions = Object.assign({}, topOpts, route);
 
+    routeOptions.uiConfig = _.get(server, "settings.app.config.ui", {});
+
     // setup the template for rendering the route
     const routeRenderer = routesFromFile.setupRouteTemplate({
       subAppsByPath,
