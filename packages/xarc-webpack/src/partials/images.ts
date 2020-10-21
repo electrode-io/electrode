@@ -2,7 +2,9 @@
 
 import * as _ from "lodash";
 
-const isomorphicLoader = require.resolve("isomorphic-loader");
+import { xAppRequire } from "@xarc/app"
+
+const isomorphicLoader = xAppRequire.resolve("isomorphic-loader");
 const optionalRequire = require("optional-require")(require);
 const logger = require("@xarc/app-dev/lib/logger");
 

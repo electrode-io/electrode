@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-import { IsomorphicLoaderPlugin } from "isomorphic-loader";
+import { xAppRequire } from "@xarc/app";
 import { loadXarcOptions } from "../util/load-xarc-options";
 
 module.exports = function(opts) {
   const xarcOptions = loadXarcOptions();
+
+  const { IsomorphicLoaderPlugin } = xAppRequire("isomorphic-loader");
 
   const plugin = new IsomorphicLoaderPlugin({
     assetsFile: opts.assetsFile || "../isomorphic-assets.json",

@@ -35,7 +35,7 @@
     "Joel Chen <xchen@walmartlabs.com>"
   ],
   "peerDependencies": {
-    "@xarc/app": "^8.0.21"
+    "@xarc/app": "^8.1.19"
   },
   "dependencies": {
     "@babel/cli": "^7.1.5",
@@ -70,7 +70,6 @@
     "fs-extra": "^9.0.1",
     "identity-obj-proxy": "^3.0.0",
     "is-ci": "^2.0.0",
-    "isomorphic-loader": "^4.0.2",
     "lodash": "^4.17.19",
     "log-update": "^4.0.0",
     "mime": "^2.4.6",

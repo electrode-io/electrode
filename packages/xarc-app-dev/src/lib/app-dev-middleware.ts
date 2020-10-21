@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-export {};
-
 /* eslint-disable no-console, no-magic-numbers, max-statements */
 
 const Path = require("path");
 const _ = require("lodash");
-const { getXRequire } = require("isomorphic-loader");
+import { xAppRequire } from "@xarc/app";
+const { getXRequire } = xAppRequire("isomorphic-loader");
 const { refreshAllSubApps } = require("subapp-util");
 import {
   WEBPACK_EVENT_ISOMORPHIC_CONFIG,

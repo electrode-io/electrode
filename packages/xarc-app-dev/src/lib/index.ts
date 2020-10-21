@@ -6,19 +6,27 @@ Object.defineProperties(loadXarcDevTasks, {
     enumerable: false
   },
   hapiPlugin: {
-    value: require("./webpack-dev-hapi"),
+    get() {
+      return require("./webpack-dev-hapi");
+    },
     enumerable: false
   },
   fastifyPlugin: {
-    value: require("./webpack-dev-fastify"),
+    get() {
+      return require("./webpack-dev-fastify");
+    },
     enumerable: false
   },
   expressMiddleware: {
-    value: require("./webpack-dev-express"),
+    get() {
+      return require("./webpack-dev-express");
+    },
     enumerable: false
   },
   koaMiddleware: {
-    value: require("./webpack-dev-koa"),
+    get() {
+      return require("./webpack-dev-koa");
+    },
     enumerable: false
   }
 });

@@ -44,7 +44,6 @@
     "electrode-node-resolver": "^2.0.1",
     "file-loader": "^2.0.0",
     "filter-scan-dir": "^1.0.9",
-    "isomorphic-loader": "^4.0.2",
     "lodash": "^4.17.19",
     "mini-css-extract-plugin": "^0.9.0",
     "mkdirp": "^1.0.3",
@@ -59,8 +58,8 @@
     "xsh": "^0.4.5"
   },
   "peerDependencies": {
-    "@xarc/app": "^8.0.0",
-    "@xarc/app-dev": "^8.0.0"
+    "@xarc/app": "^8.1.19",
+    "@xarc/app-dev": "^8.1.19"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
@@ -71,6 +70,7 @@
     "@types/sinon-chai": "^3.2.4",
     "@typescript-eslint/eslint-plugin": "^2.21.0",
     "@typescript-eslint/parser": "^2.21.0",
+    "@xarc/app": "^8.1.19",
     "@xarc/module-dev": "^2.2.2",
     "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
