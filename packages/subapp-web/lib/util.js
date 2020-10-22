@@ -129,6 +129,41 @@ const utils = {
     }
   */
 
+  /* webpack 4 production stats structure
+
+  {
+    entrypoints: {
+      "extras": [0, 1, 4] --> A: assets.chunks[4], B: chunks.id
+    },
+    assets: [
+      {
+        "name": "extras.bundle.js",
+        "size": 2104,
+A: -->  "chunks": [4],
+        "chunkNames": ["extras"], --> C: assetsByChunkName
+        "info": {
+          "development": true // if development only asset
+        },
+        "emitted": false
+      },
+    ],
+    chunks: [
+      {
+B: -->  "id": 4,
+        "hash": "60a75cbfa4c94ca0b4ff",
+        "names": ["extras"], --> C: assetsByChunkName
+        "entry": true,
+        "initial": true,
+        "rendered": true
+      },
+    ],
+    assetsByChunkName: {
+C: --> "extras": ["extras.bundle.js", "../map/extras.bundle.js.map"],
+    }
+  }
+
+   */
+
   mapCdnAssets(bundlesById, basePath = "", cdnAssets) {
     const cdnBundles = {};
 
@@ -256,47 +291,40 @@ ${ignoreMsg}`
     // .js asset URL = byChunkId.js[id], .css asset URL = byChunkId.css[id],
     // .map asset URL = byChunkId.map[id]
     //
-    const chunksById = stats.chunks.reduce((a, chunk) => {
-      a[chunk.id] = chunk;
-      return a;
+    const chunksById = stats.chunks.reduce((result, chunk) => {
+      const { id, names } = chunk;
+      // in dev mode, chunk id is the same as the name
+      // in prod mode, chunk id is an integer (index)
+      if (names.indexOf(id) < 0) {
+        // save the names for the id
+        _.set(result, ["_names_", id], names);
+      }
+
+      names.forEach(name => {
+        const assets = stats.assetsByChunkName[name];
+
+        // now assign the assets into byChunkId according to extensions
+        []
+          .concat(assets)
+          .filter(x => x)
+          .forEach(asset => {
+            const ext = Path.extname(asset).substring(1);
+            assert(ext, `asset ${asset} doesn't have extension`);
+            const found = _.get(result, [ext, id]);
+            if (found) {
+              if (found.indexOf(asset) < 0) {
+                result[ext][id] = [].concat(found, asset);
+              }
+            } else {
+              _.set(result, [ext, id], asset);
+            }
+          });
+      });
+
+      return result;
     }, {});
 
-    const byChunkId = {};
-    for (const ep in stats.entrypoints) {
-      for (const id of stats.entrypoints[ep]) {
-        const names = chunksById[id].names;
-
-        // in dev mode, chunk id is the same as the name
-        // in prod mode, chunk id is an integer (index)
-        if (names.indexOf(id) < 0) {
-          // save the names for the id
-          _.set(byChunkId, ["_names_", id], names);
-        }
-
-        names.forEach(name => {
-          const assets = stats.assetsByChunkName[name];
-
-          // now assign the assets into byChunkId according to extensions
-          []
-            .concat(assets)
-            .filter(x => x)
-            .forEach(asset => {
-              const ext = Path.extname(asset).substring(1);
-              assert(ext, `asset ${asset} doesn't have extension`);
-              const found = _.get(byChunkId, [ext, id]);
-              if (found) {
-                if (found.indexOf(asset) < 0) {
-                  byChunkId[ext][id] = [].concat(found, asset);
-                }
-              } else {
-                _.set(byChunkId, [ext, id], asset);
-              }
-            });
-        });
-      }
-    }
-
-    return byChunkId;
+    return chunksById;
   },
 
   /**

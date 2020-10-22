@@ -37,6 +37,14 @@ module.exports = function setup(setupContext) {
     basePath: ""
   };
 
+  // For subapp version 2, when using to do dynamic import,
+  // code to translate for webpack 4 jsonp bundle loading.
+  // requires processing done by xarc-webpack/src/plugins/jsonp-script-src-plugin
+  // TBD: need to update when upgrade to webpack 5
+  const webpackJsonpJS = cdnEnabled
+    ? Fs.readFileSync(Path.join(__dirname, distDir, "webpack4-jsonp.js")).toString()
+    : "";
+
   let inlineRuntimeJS = "";
   let runtimeEntryPoints = [];
   if (process.env.NODE_ENV === "production") {
@@ -60,6 +68,7 @@ module.exports = function setup(setupContext) {
 ${JSON.stringify(bundleAssets)}
 </script>
 <script>/*LJ*/${loadJs}/*LJ*/
+${webpackJsonpJS}
 ${clientJs}
 ${cdnJs}
 ${inlineRuntimeJS}
