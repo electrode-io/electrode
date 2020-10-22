@@ -9,6 +9,7 @@ module.exports = function(opts) {
   const { IsomorphicLoaderPlugin } = xAppRequire("isomorphic-loader");
 
   const plugin = new IsomorphicLoaderPlugin({
+    appSrcDir: xarcOptions.AppMode.src.dir,
     assetsFile: opts.assetsFile || "../isomorphic-assets.json",
     webpackDev: {
       url: `http://${xarcOptions.webpack.devHostname}:${xarcOptions.webpack.devPort}`,

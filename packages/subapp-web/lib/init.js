@@ -9,6 +9,8 @@ const subappUtil = require("subapp-util");
 const _ = require("lodash");
 const assert = require("assert");
 
+const { getXRequire } = require("@xarc/app").isomorphicLoader;
+
 module.exports = function setup(setupContext) {
   const cdnEnabled = _.get(setupContext, "routeOptions.cdn.enable");
   const distDir = process.env.NODE_ENV === "production" ? "../dist/min" : "../dist/dev";
@@ -91,6 +93,22 @@ ${inlineRuntimeJS}
         .map(({ subapp }) => subappUtil.loadSubAppServerByName(subapp.name, false))
         .filter(x => x && x.initialize));
   };
+
+  const setupIsomorphicCdnUrlMapping = () => {
+    const extRequire = getXRequire();
+    if (!extRequire) return;
+    const cdnAssets = util.loadCdnAssets(setupContext.routeOptions);
+    const cdnKeys = Object.keys(cdnAssets).map(k => Path.basename(k));
+
+    extRequire.setUrlMapper(url => {
+      const urlBaseName = Path.basename(url);
+      return (cdnKeys.includes(urlBaseName) && cdnAssets[urlBaseName]) || url;
+    });
+  };
+
+  if (cdnEnabled) {
+    setupIsomorphicCdnUrlMapping();
+  }
 
   return {
     process: context => {

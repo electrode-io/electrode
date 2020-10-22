@@ -35,6 +35,9 @@
     "subapp-util": "^1.1.1",
     "xaa": "^1.6.0"
   },
+  "peerDependencies": {
+    "@xarc/app": "^8.1.20"
+  },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
@@ -42,18 +45,22 @@
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.7.7",
+    "@xarc/app": "^8.1.20",
     "babel-preset-minify": "^0.5.1",
     "chai-as-promised": "^7.1.1",
     "electrode-archetype-njs-module-dev": "^3.0.0",
+    "electrode-react-webapp": "^3.8.9",
     "jsdom": "^15.2.1",
     "mock-require": "^1.3.0",
     "run-verify": "^1.2.2",
-    "subapp-pkg-util": "../subapp-pkg-util",
-    "electrode-react-webapp": "^3.8.9"
+    "subapp-pkg-util": "../subapp-pkg-util"
   },
   "fyn": {
     "dependencies": {
       "subapp-util": "../subapp-util"
+    },
+    "devDependencies": {
+      "@xarc/app": "../xarc-app"
     }
   },
   "nyc": {
