@@ -1,3 +1,34 @@
+# 10/21/2020
+
+- fix: set ui config to route options
+- get isomorphic-loader from xarc-app only
+
+## Packages
+
+- `@xarc/app@8.1.20` `(8.1.19 => 8.1.20)`
+- `@xarc/app-dev@8.1.20` `(8.1.19 => 8.1.20)`
+- `@xarc/create-app@3.0.13` `(3.0.12 => 3.0.13)`
+- `@xarc/webpack@9.0.1` `(9.0.0 => 9.0.1)`
+- `subapp-server@1.3.8` `(1.3.7 => 1.3.8)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - get isomorphic-loader from xarc-app only [commit](http://github.com/electrode-io/electrode/commit/9a8218e7737df77559a111c95365d6d017c00d38)
+
+- `packages/xarc-create-app`
+
+  - [chore] remove extra file [commit](http://github.com/electrode-io/electrode/commit/bb8a452ba6a575f397b16c4773f20ff8737a0b6b)
+
+- `packages/xarc-webpack`
+
+  - get isomorphic-loader from xarc-app only [commit](http://github.com/electrode-io/electrode/commit/9a8218e7737df77559a111c95365d6d017c00d38)
+
+- `packages/subapp-server`
+
+  - set ui config to route options ([#1748](https://github.com/electrode-io/electrode/pull/1748)) [commit](http://github.com/electrode-io/electrode/commit/196f6d51c25d2fd63860a61f608dbe707815753b)
+
 # 10/19/2020
 
 ## Packages
