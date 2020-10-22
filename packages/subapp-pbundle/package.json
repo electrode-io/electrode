@@ -39,6 +39,7 @@
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.7.7",
+    "@xarc/app": "^8.1.20",
     "babel-preset-minify": "^0.5.1",
     "electrode-archetype-njs-module-dev": "^3.0.0",
     "jsdom": "^15.2.1",
@@ -57,6 +58,9 @@
     "dependencies": {
       "subapp-web": "../subapp-web",
       "subapp-util": "../subapp-util"
+    },
+    "devDependencies": {
+      "@xarc/app": "../xarc-app"
     }
   },
   "nyc": {

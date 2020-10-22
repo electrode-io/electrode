@@ -56,22 +56,9 @@ export function cssModuleHook(
  * Load the require hook to support isomorphic assets when doing SSR
  */
 export function isomorphicExtendRequire() {
+  const appSrcDir = (getAppMode().getEnv() || getAppMode().lib.dir).split("/")[0];
   const xReq = extendRequire({
-    processConfig: (isoConfig: any) => {
-      const { assets } = isoConfig;
-      const appSrcDir = (getAppMode().getEnv() || getAppMode().lib.dir).split("/")[0];
-      if (appSrcDir !== getAppMode().src.dir && assets.marked) {
-        const marked = assets.marked;
-        Object.keys(marked).forEach(k => {
-          if (k.startsWith(getAppMode().src.client) || k.startsWith(getAppMode().src.server)) {
-            const nk = k.replace(getAppMode().src.dir, appSrcDir);
-            marked[nk] = marked[k];
-          }
-        });
-      }
-
-      return isoConfig;
-    }
+    appSrcDir
   });
 
   setXRequire(xReq);
