@@ -1,3 +1,48 @@
+# 10/22/2020
+
+- fix: isomorphic-loader 4.0.3 and CDN mapping support
+- fix: map CDN urls for webpack4's jsonp bundle loading
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.1.21` `(8.1.20 => 8.1.21)`
+- `@xarc/app-dev@8.1.21` `(8.1.20 => 8.1.21)`
+- `@xarc/webpack@9.0.2` `(9.0.1 => 9.0.2)`
+- `subapp-pbundle@0.0.34` `(0.0.33 => 0.0.34)`
+- `subapp-react@0.0.31` `(0.0.30 => 0.0.31)`
+- `subapp-web@1.0.40` `(1.0.39 => 1.0.40)`
+
+### Lerna Updated
+
+- `subapp-redux@1.0.40` `(1.0.39 => 1.0.40)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - [chore] update auto gen docs [commit](http://github.com/electrode-io/electrode/commit/efa0f0d90961ea6243cd559485b3eb62835fc610)
+  - fix: isomorphic-loader 4.0.3 and CDN mapping support [commit](http://github.com/electrode-io/electrode/commit/d9c831db94f4f6c83bdd35ab604d20a2bb8c9854)
+
+- `packages/xarc-webpack`
+
+  - [chore] update auto gen docs [commit](http://github.com/electrode-io/electrode/commit/efa0f0d90961ea6243cd559485b3eb62835fc610)
+  - fix: isomorphic-loader 4.0.3 and CDN mapping support [commit](http://github.com/electrode-io/electrode/commit/d9c831db94f4f6c83bdd35ab604d20a2bb8c9854)
+
+- `packages/subapp-pbundle`
+
+  - fix: isomorphic-loader 4.0.3 and CDN mapping support [commit](http://github.com/electrode-io/electrode/commit/d9c831db94f4f6c83bdd35ab604d20a2bb8c9854)
+
+- `packages/subapp-react`
+
+  - fix: isomorphic-loader 4.0.3 and CDN mapping support [commit](http://github.com/electrode-io/electrode/commit/d9c831db94f4f6c83bdd35ab604d20a2bb8c9854)
+
+- `packages/subapp-web`
+
+  - fix: map CDN urls for webpack4's jsonp bundle loading [commit](http://github.com/electrode-io/electrode/commit/6713cc8e2f221f27552740e4660f6afd7bccc3e3)
+  - fix: isomorphic-loader 4.0.3 and CDN mapping support [commit](http://github.com/electrode-io/electrode/commit/d9c831db94f4f6c83bdd35ab604d20a2bb8c9854)
+
 # 10/21/2020
 
 - fix: set ui config to route options
