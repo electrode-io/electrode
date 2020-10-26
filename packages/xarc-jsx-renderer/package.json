@@ -4,7 +4,7 @@
   "description": "Render index.htm from JSX template",
   "main": "dist/index.js",
   "scripts": {
-    "build": "rm -rf dist && tsc",
+    "build": "xrun user/build",
     "test": "xrun xarc/test-only",
     "coverage": "xrun xarc/check",
     "prepublishOnly": "xrun [[build, docs], xarc/check]",
@@ -34,7 +34,7 @@
     "@types/sinon-chai": "^3.2.4",
     "@typescript-eslint/eslint-plugin": "^2.21.0",
     "@typescript-eslint/parser": "^2.21.0",
-    "@xarc/module-dev": "^2.1.2",
+    "@xarc/module-dev": "^2.2.5",
     "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
     "eslint": "^6.8.0",
@@ -54,6 +54,7 @@
     "typedoc": "^0.17.4",
     "typedoc-plugin-external-module-name": "^3.1.0",
     "typescript": "^3.8.3",
+    "xsh": "^0.4.5",
     "xstdout": "^0.1.1"
   },
   "files": [
@@ -95,6 +96,7 @@
     "exclude": [
       "*clap.js",
       "*clap.ts",
+      "xrun-tasks.*",
       "babel.config.js",
       "coverage",
       "dist",

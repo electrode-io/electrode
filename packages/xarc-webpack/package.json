@@ -16,7 +16,7 @@
   },
   "license": "Apache-2.0",
   "scripts": {
-    "build": "rm -rf lib && tsc",
+    "build": "xrun user/build",
     "test": "xrun xarc/test-only",
     "lint": "clap lint",
     "coverage": "xrun xarc/check",
@@ -71,7 +71,7 @@
     "@typescript-eslint/eslint-plugin": "^2.21.0",
     "@typescript-eslint/parser": "^2.21.0",
     "@xarc/app": "^8.1.19",
-    "@xarc/module-dev": "^2.2.2",
+    "@xarc/module-dev": "^2.2.5",
     "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
     "eslint": "^6.8.0",
@@ -109,7 +109,8 @@
       "gulpfile.js",
       "test",
       "xrun*.js",
-      "xrun*.ts"
+      "xrun*.ts",
+      "lib"
     ],
     "check-coverage": false,
     "statements": 0,

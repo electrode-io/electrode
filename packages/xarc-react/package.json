@@ -13,7 +13,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rm -rf dist* && tsc --build tsconfig.node.cjs.json tsconfig.node.esm.json tsconfig.browser.es5.cjs.json tsconfig.browser.es2x.esm.json",
+    "build": "xrun user/build",
     "test": "xrun xarc/test-only",
     "prepublishOnly": "xrun [[build, docs], xarc/check]",
     "docs": "xrun xarc/docs",
@@ -38,7 +38,7 @@
     "@types/sinon-chai": "^3.2.4",
     "@typescript-eslint/eslint-plugin": "^2.21.0",
     "@typescript-eslint/parser": "^2.21.0",
-    "@xarc/module-dev": "^2.2.4",
+    "@xarc/module-dev": "^2.2.5",
     "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
     "eslint": "^6.8.0",
