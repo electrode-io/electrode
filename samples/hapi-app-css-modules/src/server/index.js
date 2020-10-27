@@ -21,7 +21,7 @@ const startServer = config => {
 };
 
 module.exports = () =>
-  support.load().then(() => {
+  support.load({ cssModuleHook: true }).then(() => {
     const config = electrodeConfippet.config;
     return startServer(config);
   });
