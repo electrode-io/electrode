@@ -66,12 +66,39 @@ function setWebpackDev() {
 export { XarcOptions } from "../config/opt2/xarc-options";
 
 /**
+ * Get the dev task runner (xclap) from Electrode module's perspective.
+ *
+ * @returns the instance of xclap that's required
+ */
+export function getDevTaskRunner(): any {
+  return requireAt(process.cwd())("xclap") || require("xclap");
+}
+
+/**
  * Load xarc development tasks that can be invoked using @xarc/run
+ *
+ * You can override any of the tasks here by loading your own using the same
+ * name with a different namespace (ie: "user").
+ *
+ * **For example:**
+ *
+ * ```js
+ * import { getDevTaskRunner, loadXarcDevTasks } from "@xarc/app-dev/lib/dev-tasks"
+ *
+ * const xclap = getDevTaskRunner();
+ *
+ * xclap.load("user", {
+ *   check: xclap.exec("echo my custom check task")
+ * });
+ *
+ * loadXarcDevTasks();
+ * ```
  *
  * @param  xrun - `@xarc/run` (or xclap) task runner.  pass `null` and an
  *   internal version will be used.
  * @param  xarcOptions user provided options to configure features etc
- * @returns void
+ *
+ * @returns The xclap task runner instance that was used.
  */
 export function loadXarcDevTasks(xrun, xarcOptions: XarcOptions = {}) {
   // lazy require modules that have effects so as to permit customization
@@ -1234,11 +1261,13 @@ You only need to run this if you are doing something not through the xarc tasks.
   //   require.resolve(`${archetype.devArchetypeName}/package.json`);
   // }
 
-  xrun = xrun || requireAt(process.cwd())("xclap") || require("xclap");
+  xrun = xrun || getDevTaskRunner();
   process.env._ELECTRODE_DEV_ = "1";
   if (!process.env.hasOwnProperty("FORCE_COLOR")) {
     process.env.FORCE_COLOR = "1"; // force color for chalk
   }
   xrun.load("electrode", makeTasks(xrun), -10);
   generateBrowsersListRc();
+
+  return xrun;
 }

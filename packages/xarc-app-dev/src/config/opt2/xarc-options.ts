@@ -4,7 +4,6 @@ import { BabelOptions } from "./babel-options";
 
 export type XarcOptions = {
   // configurations from env-app.ts
-
   /**
    * hostname to listen on for serving your application
    *
