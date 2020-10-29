@@ -148,7 +148,7 @@ export function load(
    * https://github.com/webpack/css-loader#local-scope
    * https://github.com/css-modules/postcss-modules-scope
    */
-  if (options.cssModuleHook === true || Object.keys(options.cssModuleHook).length > 0) {
+  if (options.cssModuleHook === true || Object.keys(options.cssModuleHook || {}).length > 0) {
     const opts = Object.assign(
       {
         generateScopedName: `${process.env.NODE_ENV === "production" ? "" : "[name]__[local]___"}[hash:base64:5]`,
