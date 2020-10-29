@@ -117,10 +117,10 @@ if (module.hot) {
     const subApps = AppMode.subApps;
 
     if (_.isEmpty(subApps)) {
-      logger.info(`No subapps found under ${AppMode.src.dir}`);
+      logger.info(`No version 1 subapps found under ${AppMode.src.dir}`);
       return false;
     } else {
-      logger.info(`Found subapps: ${Object.keys(subApps).join(", ")}`);
+      logger.info(`Found version 1 subapps: ${Object.keys(subApps).join(", ")}`);
     }
 
     const isDev = Boolean(process.env.WEBPACK_DEV);
