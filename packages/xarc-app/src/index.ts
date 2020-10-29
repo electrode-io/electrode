@@ -62,6 +62,8 @@ export function isomorphicExtendRequire() {
   });
 
   setXRequire(xReq);
+
+  return xReq;
 }
 
 /**
@@ -95,9 +97,26 @@ export function load(
          */
         ignoreStyles?: boolean;
         /**
-         * Set to false to avoid loading node.js require hook to handle isomorphic assets
+         * Set to false to avoid loading node.js require hook to handle isomorphic assets.
          */
         isomorphicExtendRequire?: boolean;
+        /**
+         * If true, then ensure everything is ready before resolving the returned promise.
+         *
+         * @remarks
+         * In dev mode, resolving the promise depends on the app server starting and loading
+         * the dev plugin.  What this means is basically:
+         *
+         * ```js
+         * const loadSupport = support.load({awaitReady: true});
+         * await startServer();
+         * await loadSupport;
+         *
+         * // do any other initialization that could trigger importing isomorphic assets
+         *
+         * ```
+         */
+        awaitReady?: boolean;
       }
     | Function,
   callback?: Function
@@ -151,7 +170,9 @@ export function load(
   if (options.cssModuleHook === true || Object.keys(options.cssModuleHook || {}).length > 0) {
     const opts = Object.assign(
       {
-        generateScopedName: `${process.env.NODE_ENV === "production" ? "" : "[name]__[local]___"}[hash:base64:5]`,
+        generateScopedName: `${
+          process.env.NODE_ENV === "production" ? "" : "[name]__[local]___"
+        }[hash:base64:5]`,
         extensions: [".scss", ".styl", ".less", ".css"],
         preprocessCss: function(css, filename) {
           if (filename.endsWith(".styl")) {
@@ -177,11 +198,43 @@ export function load(
     optionalRequire("ignore-styles");
   }
 
+  let promise;
+
   if (options.isomorphicExtendRequire !== false) {
-    isomorphicExtendRequire();
+    const xReq = isomorphicExtendRequire();
+    let start = Date.now();
+    if (options.awaitReady && !xReq.activated) {
+      promise = new Promise((resolve, reject) => {
+        let timer;
+        const waitTo = () => {
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            const time = Math.round((Date.now() - start) / 1000);
+            if (process.env.NODE_ENV === "production") {
+              reject(new Error(`production mode: isomorphic assets not ready in ${time} seconds`));
+            } else {
+              console.error(
+                `dev mode: waiting for isomorphic assets to be ready - time: ${time}secs`
+              );
+              waitTo();
+            }
+          }, 5000);
+        };
+
+        waitTo();
+        xReq.once("activate", () => {
+          clearTimeout(timer);
+          resolve();
+        });
+      });
+    }
   }
 
-  return callback ? callback() : Promise.resolve();
+  if (!promise) {
+    promise = Promise.resolve();
+  }
+
+  return callback ? promise.then(callback, callback) : promise;
 }
 
 if (!getAppMode().hasEnv()) {
