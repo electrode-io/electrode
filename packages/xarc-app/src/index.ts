@@ -83,9 +83,10 @@ export function load(
          */
         babelRegister?: any;
         /**
-         * if true, then load and setup CSS module runtime for node.js
+         * - boolean: if true, then load and setup CSS module runtime for node.js
+         * - object: options to be passed to cssModuleHook
          */
-        cssModuleHook?: boolean;
+        cssModuleHook?: boolean | object;
         /**
          * if no CSS module hook, then a default ignore hook is load to avoid errors
          * when trying to load CSS modules.
@@ -147,10 +148,10 @@ export function load(
    * https://github.com/webpack/css-loader#local-scope
    * https://github.com/css-modules/postcss-modules-scope
    */
-  if (options.cssModuleHook === true) {
+  if (options.cssModuleHook === true || Object.keys(options.cssModuleHook).length > 0) {
     const opts = Object.assign(
       {
-        generateScopedName: "[name]__[local]___[hash:base64:5]",
+        generateScopedName: `${process.env.NODE_ENV === "production" ? "" : "[name]__[local]___"}[hash:base64:5]`,
         extensions: [".scss", ".styl", ".less", ".css"],
         preprocessCss: function(css, filename) {
           if (filename.endsWith(".styl")) {
