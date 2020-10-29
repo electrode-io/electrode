@@ -485,6 +485,8 @@ export function loadXarcDevTasks(xrun, xarcOptions: XarcOptions = {}) {
         ".production-env",
         ".set.css-module.env",
         ".clean.build",
+        ".mk-dist-dir",
+        ".copy-xarc-options-to-dist",
         "build-dist-dll",
         "build-dist-min",
         "build-dist:flatten-l10n",
@@ -492,6 +494,8 @@ export function loadXarcDevTasks(xrun, xarcOptions: XarcOptions = {}) {
         "copy-dll",
         "build-dist:clean-tmp"
       ],
+
+      ".copy-xarc-options-to-dist": () => shell.cp(Path.join(eTmpDir, "xarc-options.json"), "dist"),
 
       "mv-to-dist": ["mv-to-dist:clean", "mv-to-dist:mv-dirs", "mv-to-dist:keep-targets"],
       "build-dist-dev-static": {
@@ -810,7 +814,7 @@ You only need to run this if you are doing something not through the xarc tasks.
       dev: {
         desc: `Start your app with watch in development mode with dev-admin.
         options: node.js --inspect can be used to debug the dev-admin`,
-        dep: [".remove-log-files", ".development-env", ".mk-dist-dir", ".build.babelrc"],
+        dep: [".remove-log-files", ".development-env", ".build.babelrc"],
         task() {
           return [
             ".set.css-module.env",
@@ -1012,7 +1016,7 @@ You only need to run this if you are doing something not through the xarc tasks.
     if (Fs.existsSync(Path.resolve(AppMode.src.client, "dll.config.js"))) {
       Object.assign(tasks, {
         "build-dist-dll": {
-          dep: [".mk-dll-dir", ".mk-dist-dir", ".production-env"],
+          dep: [".mk-dll-dir", ".production-env"],
           task: () => {
             setWebpackProfile("dll");
             return exec(
