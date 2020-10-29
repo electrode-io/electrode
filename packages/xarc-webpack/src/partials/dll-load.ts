@@ -20,9 +20,15 @@
 import * as webpack from "webpack";
 const DonePlugin = require("../plugins/done-plugin");
 const dllUtil = require("../util/dll-util");
+const _ = require("lodash");
 
 module.exports = function() {
   const dll = dllUtil.loadAssets();
+
+  // no DLL
+  if (_.isEmpty(dll.assets)) {
+    return {};
+  }
 
   // dev mode?
   if (process.env.WEBPACK_DEV === "true") {
