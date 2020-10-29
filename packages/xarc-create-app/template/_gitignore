@@ -41,3 +41,4 @@ coverage
 .nyc_output
 config/assets.json
 .isomorphic*
+lib

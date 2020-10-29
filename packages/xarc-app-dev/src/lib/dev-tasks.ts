@@ -401,10 +401,10 @@ export function loadXarcDevTasks(xrun, xarcOptions: XarcOptions = {}) {
       Fs.writeFileSync(
         newName,
         `"use strict";
-  module.exports = {
-    extends: "@xarc/app-dev/config/babel/${rcFile}"
-  };
-  `
+module.exports = {
+  extends: "@xarc/app-dev/config/babel/${rcFile}"
+};
+`
       );
     };
 
