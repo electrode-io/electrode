@@ -25,7 +25,6 @@
   },
   "files": [
     "bin",
-    "dist",
     "lib",
     "src"
   ],
@@ -51,7 +50,7 @@
     "optional-require": "^1.0.2",
     "require-at": "^1.0.6",
     "url-loader": "^4.1.0",
-    "webpack": "^4.43.0",
+    "webpack": "^4.44.2",
     "webpack-cli": "^3.3.9",
     "webpack-config-composer": "^1.1.3",
     "webpack-stats-plugin": "^0.3.1",

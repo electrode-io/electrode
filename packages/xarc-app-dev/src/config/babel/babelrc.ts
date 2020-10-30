@@ -190,7 +190,14 @@ const presets = [
       // exclude these to allow fast-async to transpile async/await to promise
       // also is ok to exclude for node.js because it has native async/await
       exclude: ["transform-async-to-generator", "transform-regenerator"],
-      modules: isNodeTarget || isProduction || enableDynamicImport ? "auto" : "commonjs",
+      //
+      // We actually want/need auto.  Webpack understand import and ESM to do code splitting.
+      // With commonjs, code splitting breaks.  The only reason we are trying to do commonjs
+      // is because some apps have unit test that use sinon to modify ES6 module to fake exports
+      // but ESM doesn't allow that.
+      //
+      // modules: isNodeTarget || isProduction || enableDynamicImport ? "auto" : "commonjs",
+      modules: "auto",
       loose: true,
       targets,
       ...useBuiltIns

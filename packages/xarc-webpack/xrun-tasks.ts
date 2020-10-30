@@ -4,7 +4,8 @@ const xsh = require("xsh");
 
 xrun.load("user", {
   build: () => {
+    const { serial, exec } = xrun;
     xsh.$.rm("-rf", "lib");
-    return xrun.exec("tsc");
+    return serial(exec("tsc"), exec("tsc --build tsconfig.browser.es5.cjs.json"));
   }
 });

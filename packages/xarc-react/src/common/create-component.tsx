@@ -1,32 +1,44 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console, @typescript-eslint/ban-ts-comment */
+/* global window */
 
 import { createElement, Component } from "react"; // eslint-disable-line @typescript-eslint/no-unused-vars
 // rename declareSubApp to avoid triggering subapp webpack plugin
-import { SubAppDef, IS_BROWSER, SubAppOptions, declareSubApp as dsa } from "@xarc/subapp";
+import { SubAppDef, IS_BROWSER, SubAppOptions, SubAppMountInfo, declareSubApp } from "@xarc/subapp";
 
 export class SubAppComponent extends Component {
   subapp: SubAppDef;
   loading: JSX.Element;
   resolveName: string;
   state: { module: any; TheComponent: typeof Component };
+  _info: SubAppMountInfo;
 
   constructor(props) {
     super(props);
     this.subapp = props.__subapp;
     this.resolveName = props.__resolveName || this.subapp.resolveName;
     this.state = this.makeState(this.subapp._module);
-    this.loading = <div>subapp component loading... </div>;
+    this.loading = <div>subapp {this.subapp.name} component loading... </div>;
+    this._info = { component: this, subapp: props.__subapp };
+    this.subapp._mount(this._info);
   }
 
   makeState(mod) {
-    let TheComponent;
+    let TheComponent: typeof Component;
     if (mod) {
       const resolveName = [this.resolveName, "subapp", "default"].find(x => x && mod[x]);
 
-      TheComponent = resolveName && mod[resolveName]?.Component;
+      TheComponent = (resolveName && mod[resolveName]?.Component) || mod.subapp?.Component;
     }
 
     return { module: mod, TheComponent };
+  }
+
+  reload(mod) {
+    this.setState(this.makeState(mod));
+  }
+
+  componentWillUnmount() {
+    this.subapp._unmount(this._info);
   }
 
   componentDidMount() {
@@ -34,13 +46,10 @@ export class SubAppComponent extends Component {
       if (!IS_BROWSER) {
         console.error("SSR can't dynamic load subapp module");
       } else {
-        console.log("loading subapp module", this.subapp.name);
         this.subapp._getModule().then(mod => {
           this.setState(this.makeState(mod));
         });
       }
-    } else {
-      console.log("subapp module already available", this.subapp.name);
     }
   }
 
@@ -52,6 +61,10 @@ export class SubAppComponent extends Component {
         return <div>subapp {this.subapp.name}'s module did not export a SubApp</div>;
       }
     }
+
+    console.warn(
+      `subapp ${this.subapp.name} dynamic import component module is not ready - rendering loading fallback`
+    );
 
     return this.loading;
   }
@@ -77,17 +90,25 @@ export type CreateComponentOptions = {
  *
  * @returns a React Component
  */
-export function createDynamicComponent(
-  subapp: SubAppDef | SubAppOptions,
-  options: CreateComponentOptions = {}
+export function __createDynamicComponent(
+  optDef: SubAppDef | SubAppOptions,
+  options: CreateComponentOptions = {},
+  dsa: typeof declareSubApp
 ) {
-  const saDef = !subapp.hasOwnProperty("_getModule") ? dsa(subapp) : (subapp as SubAppDef);
+  let subappDef: SubAppDef;
+
+  // already a SubAppDef
+  if (!optDef.hasOwnProperty("_getModule")) {
+    subappDef = dsa(optDef);
+  } else {
+    subappDef = optDef as SubAppDef;
+  }
 
   if (options.ssr) {
-    saDef._ssr = true;
+    subappDef._ssr = true;
   }
 
   return (props: any) => (
-    <SubAppComponent {...props} __subapp={saDef} __resolveName={options.resolveName} />
+    <SubAppComponent {...props} __subapp={subappDef} __resolveName={options.resolveName} />
   );
 }

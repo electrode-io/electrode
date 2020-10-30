@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-var-requires, max-statements */
 
 /* eslint-disable no-process-exit */
 
@@ -137,6 +137,7 @@ if (module.hot) {
 `
       );
     }
+
     partial.context = Path.resolve(xarcCwd, AppMode.src.dir);
     const entry = {};
     _.each(subApps, ma => {
@@ -166,10 +167,30 @@ if (module.hot) {
 
     // finally look for src/client/app.js or src/client/app.jsx or src/client/app.tsx
     const entries = ["./app.js", "./app.jsx", "./app.tsx"];
-    const entry = entries.find(f => Fs.existsSync(Path.join(partial.context, f))) || "./app.jsx";
-    logger.info(
-      `Default to single app entry point using ${entry} under context ${partial.context}`
-    );
+    let entry = entries.find(f => Fs.existsSync(Path.join(partial.context, f)));
+    //
+    // no entry found, maybe there's no src/client
+    // look under src instead
+    //
+    if (!entry) {
+      entry = entries.find(f => Fs.existsSync(Path.join(AppMode.src.dir, f)));
+      if (entry) {
+        logger.info(
+          `Found your app entry as ${entry} under dir ${AppMode.src.dir} - setting webpack context to it.`
+        );
+        partial.context = Path.join(xarcCwd, AppMode.src.dir);
+        return entry;
+      }
+
+      entry = "./app.jsx";
+      logger.info(
+        `Unable to determine your app's entry - assuming it's ${entry} under dir ${partial.context}`
+      );
+    } else {
+      logger.info(
+        `Default to single app entry point using ${entry} under context ${partial.context}`
+      );
+    }
 
     return entry;
   }

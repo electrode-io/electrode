@@ -7,6 +7,9 @@ import { JsonpScriptSrcPlugin } from "../plugins/jsonp-script-src-plugin";
 
 module.exports = function(opts) {
   return {
+    optimization: {
+      runtimeChunk: "single"
+    },
     plugins: [
       new SubAppWebpackPlugin({
         webpackVersion: 4,

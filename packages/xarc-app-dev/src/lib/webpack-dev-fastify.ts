@@ -6,13 +6,15 @@ export {};
 const AppDevMiddleware = require("./app-dev-middleware");
 
 async function register(server) {
-  const middleware = new AppDevMiddleware({});
+  if (process.env.WEBPACK_DEV) {
+    const middleware = new AppDevMiddleware({});
 
-  middleware.setup();
+    middleware.setup();
 
-  server.addHook("onRequest", async request => {
-    request.app.webpackDev = middleware.webpackDev;
-  });
+    server.addHook("onRequest", async request => {
+      request.app.webpackDev = middleware.webpackDev;
+    });
+  }
 
   return;
 }
