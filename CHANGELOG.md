@@ -1,3 +1,90 @@
+# 10/30/2020
+
+- [fix] windows no rm
+- [feat] add CDN mapping option to run time support
+- [fix] allow await for support load
+- [feat] copy .etmp/xarc-options.json to dist for build
+- [fix] minor update to ts app template
+- [fix] await on RenderOutput::close
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.1.22` `(8.1.21 => 8.1.22)`
+- `@xarc/app-dev@8.1.22` `(8.1.21 => 8.1.22)`
+- `@xarc/create-app@3.0.14` `(3.0.13 => 3.0.14)`
+- `@xarc/index-page@1.0.5` `(1.0.4 => 1.0.5)`
+- `@xarc/jsx-renderer@1.0.5` `(1.0.4 => 1.0.5)`
+- `@xarc/react@0.0.3` `(0.0.2 => 0.0.3)`
+- `@xarc/render-context@1.0.3` `(1.0.2 => 1.0.3)`
+- `@xarc/subapp@0.0.3` `(0.0.2 => 0.0.3)`
+- `@xarc/tag-renderer@1.0.3` `(1.0.2 => 1.0.3)`
+- `@xarc/webpack@9.0.3` `(9.0.2 => 9.0.3)`
+
+### Lerna Updated
+
+- `subapp-pbundle@0.0.35` `(0.0.34 => 0.0.35)`
+- `subapp-react@0.0.32` `(0.0.31 => 0.0.32)`
+- `subapp-redux@1.0.41` `(1.0.40 => 1.0.41)`
+- `subapp-server@1.3.9` `(1.3.8 => 1.3.9)`
+- `subapp-web@1.0.41` `(1.0.40 => 1.0.41)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - [feat] add CDN mapping option to run time support [commit](http://github.com/electrode-io/electrode/commit/c0ba1c890642ce69313a5143877f301df961dd20)
+  - [fix] allow await for support load [commit](http://github.com/electrode-io/electrode/commit/daae627e6f97a85d5e97cd6e1e13f7f009f90972)
+  - [fix] only clean dist for prepublish [commit](http://github.com/electrode-io/electrode/commit/ddd349c16646171784e3afde6e23bd259bcd493f)
+  - [fix] handle null object [commit](http://github.com/electrode-io/electrode/commit/491251e5492e0c6de8709328e86ccc8689aad667)
+  - [fix] minor update to ts app template [commit](http://github.com/electrode-io/electrode/commit/1a26696fc950812ae979306cb96700a8d4f289e7)
+  - Fix CSS Modules generated scope name based on prod vs dev mode. ([#1749](https://github.com/electrode-io/electrode/pull/1749)) [commit](http://github.com/electrode-io/electrode/commit/69d77518ff6abc7395c81df91681564d0016089b)
+  - [feat] copy .etmp/xarc-options.json to dist for build [commit](http://github.com/electrode-io/electrode/commit/4ddc1a52abe89eeb64ad5834a0febe5ac14e751c)
+  - add getDevTaskRunner for loading custom dev tasks [commit](http://github.com/electrode-io/electrode/commit/d5ac7aff1f5a7b2ae291ff5b2d4904d526f4c77f)
+  - fix: windows no rm [commit](http://github.com/electrode-io/electrode/commit/36d65be7ced3b8422efba0357079789e2b12fab9)
+  - [chore] update autogen docs [commit](http://github.com/electrode-io/electrode/commit/186bd116e0105911426417d859d1dba6222eb4a3)
+
+- `packages/xarc-create-app`
+
+  - [fix] minor update to ts app template [commit](http://github.com/electrode-io/electrode/commit/1a26696fc950812ae979306cb96700a8d4f289e7)
+
+- `packages/xarc-index-page`
+
+  - fix: windows no rm [commit](http://github.com/electrode-io/electrode/commit/36d65be7ced3b8422efba0357079789e2b12fab9)
+
+- `packages/xarc-jsx-renderer`
+
+  - fix: windows no rm [commit](http://github.com/electrode-io/electrode/commit/36d65be7ced3b8422efba0357079789e2b12fab9)
+  - await on RenderOutput::close() ([#1750](https://github.com/electrode-io/electrode/pull/1750)) [commit](http://github.com/electrode-io/electrode/commit/2bedbc52b7f689fbaa0f7156102371c27827e4e3)
+
+- `packages/xarc-react`
+
+  - fix: windows no rm [commit](http://github.com/electrode-io/electrode/commit/36d65be7ced3b8422efba0357079789e2b12fab9)
+
+- `packages/xarc-render-context`
+
+  - fix: windows no rm [commit](http://github.com/electrode-io/electrode/commit/36d65be7ced3b8422efba0357079789e2b12fab9)
+
+- `packages/xarc-subapp`
+
+  - fix: windows no rm [commit](http://github.com/electrode-io/electrode/commit/36d65be7ced3b8422efba0357079789e2b12fab9)
+
+- `packages/xarc-tag-renderer`
+
+  - fix: windows no rm [commit](http://github.com/electrode-io/electrode/commit/36d65be7ced3b8422efba0357079789e2b12fab9)
+
+- `packages/xarc-webpack`
+
+  - update logging message to indicate subapp version [commit](http://github.com/electrode-io/electrode/commit/5e6f4c5bb56e1620e20828da56688f45d32a8cb4)
+  - [fix] don't setup DLL if assets is empty [commit](http://github.com/electrode-io/electrode/commit/1989fdfb8ce806cd5ea3979fd7b5c6641edb96fc)
+  - fix: windows no rm [commit](http://github.com/electrode-io/electrode/commit/36d65be7ced3b8422efba0357079789e2b12fab9)
+  - [chore] update autogen docs [commit](http://github.com/electrode-io/electrode/commit/186bd116e0105911426417d859d1dba6222eb4a3)
+
+- `MISC`
+
+  - [chore] dep fynpo@0.1.29 [commit](http://github.com/electrode-io/electrode/commit/9e6e7a53cb5357870e5f028cd38ee3a2f1735a25)
+
 # 10/22/2020
 
 - fix: isomorphic-loader 4.0.3 and CDN mapping support
