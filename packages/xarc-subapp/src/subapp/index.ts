@@ -1,3 +1,29 @@
+/* eslint-disable no-use-before-define */
+
+/**
+ * xarc subapp version client interface
+ */
+export interface XarcSubAppClientV2 {
+  IS_BROWSER: boolean;
+  HAS_WINDOW: boolean;
+  version: number;
+  rt: any; // run time info
+  cdnInit(data: any): void;
+  cdnUpdate(data: any): void;
+  cdnMap(x: string): string;
+  getOnLoadStart(name: string): any[];
+  addOnLoadStart(name: string, load: any): void;
+  startSubAppOnLoad(options: any, data: any): void;
+  start(): Promise<any>;
+  _start(): Promise<any>;
+  /**
+   * Need this for node.js.  While chrome dev tools allow setting console level, node.js'
+   * console.debug is just an alias for console.log.
+   */
+  debug(...args: any[]): void;
+  dyn(id: string): any;
+}
+
 /**
  * Options for calling declareSubApp
  */
@@ -41,13 +67,13 @@ export type SubAppOptions = {
    * - The intent is to allow a module to provide one or more features for a subapp.
    *
    * - Typically the feature needs to have implementation for server and client side, and exposed
-   *   thought the main/browser fields in package.json.
+   *   through the main/browser fields in package.json.
    *
    * - The feature is access through an API function.  The API should return another
    *   function to be called by the subapp system later, and the subapp's info will be
    *   passed.
    */
-  wantFeatures?: any[];
+  wantFeatures?: SubAppFeatureFactory[];
 
   /**
    * File name of the module that declares the subapp.
@@ -68,6 +94,114 @@ export type SubAppDef = SubAppOptions & {
   _getModule: () => Promise<any>;
   _module: any;
   _ssr: boolean;
+  /**
+   * SubApp's start method that declareSubApp will create, with versions
+   * for browser or node.js.
+   *
+   * - Browser: the browser subapp shell will call this from start.
+   * - Node.js: load-v2.ts in node dir will call this during SSR.
+   *
+   * @param options
+   */
+  _start?(options?: SubAppStartOptions): Promise<any>;
+  _startOptions?: SubAppStartOptions;
+  /** The UI component instance that this subapp started on */
+  _startComponent?: any;
+  _reload?(subAppName: string, modName?: string): Promise<any>;
+  _features?: Record<string, SubAppFeature>;
+  _frameworkFactory?: () => FrameworkLib;
+  /** For UI component instance to let the subapp know it's mounting to the subapp */
+  _mount?(info: SubAppMountInfo): void;
+  /** For UI component instance to let the subapp know it's unmounting from the subapp */
+  _unmount?(info: SubAppMountInfo): void;
+};
+
+/**
+ * Declare what info a subapp feature should have
+ */
+export type SubAppFeatureInfo = {
+  /**
+   * Unique ID to identify the feature.  There could be multiple implementations of a feature
+   */
+  id: string;
+
+  /**
+   * sub id to identify a particular implementation of a feature.
+   *
+   */
+  subId?: string;
+};
+
+/**
+ * Declare a subapp feature factory
+ */
+export interface ISubAppFeatureFactory {
+  /**
+   * Function to add the feature to a subapp definition
+   */
+  add: (subappDef: SubAppDef) => SubAppDef;
+}
+
+/**
+ * What a subapp feature should provide
+ */
+export type SubAppFeatureFactory = ISubAppFeatureFactory & SubAppFeatureInfo;
+
+export type SubAppFeatureResult = {
+  Component?: any;
+  props?: any;
+};
+
+export type SubAppFeatureExecuteParams = {
+  input: SubAppFeatureResult;
+  startOptions?: SubAppStartOptions;
+  reload?: boolean;
+  ssrData?: SubAppSSRData;
+};
+
+/**
+ * Declare the implementation of a subapp feature
+ */
+export interface ISubAppFeature {
+  /**
+   * execute the feature for the subapp
+   */
+  execute(param: SubAppFeatureExecuteParams): SubAppFeatureResult | Promise<SubAppFeatureResult>;
+}
+
+export type SubAppFeature = ISubAppFeature & SubAppFeatureInfo;
+
+export type LoadSubAppOptions = {
+  /**
+   * Name of the subapp to load
+   */
+  name: string;
+
+  /**
+   * Enable server side rendering for the subapp
+   */
+  ssr?: boolean;
+
+  /**
+   * group the subapp belongs to
+   */
+  group?: string;
+};
+
+export type SubAppStartOptions = LoadSubAppOptions & {
+  element?: Element;
+  elementId?: string;
+  getInitialState?(): any;
+};
+
+/**
+ * For a UI component to let the subapp know it has mount itself for the subapp
+ */
+export type SubAppMountInfo = {
+  /** The UI component instance that's mount to the subapp */
+  component: any;
+  /** The subapp that the UI component instance mount to */
+  subapp: SubAppDef;
 };
 
 /**
@@ -81,11 +215,20 @@ export type SubApp<ComponentType> = {
    *
    */
   Component?: ComponentType;
+
   /**
-   * The data prepare method for this subapp.
+   * Extra features that the subapp wants.  Should be initialized with the feature provider function
    *
+   * - The intent is to allow a module to provide one or more features for a subapp.
+   *
+   * - Typically the feature needs to have implementation for server and client side, and exposed
+   *   through the main/browser fields in package.json.
+   *
+   * - The feature is access through an API function.  The API should return another
+   *   function to be called by the subapp system later, and the subapp's info will be
+   *   passed.
    */
-  prepare?: () => void | Promise<any>;
+  wantFeatures?: SubAppFeatureFactory[];
 };
 
 /**
@@ -106,6 +249,18 @@ interface EnvHooks {
  */
 export const envHooks: EnvHooks = {};
 
+function loadFeatures(subapp: SubAppDef, features: SubAppFeatureFactory[]) {
+  if (features) {
+    for (const feat of features) {
+      feat.add(subapp);
+    }
+  }
+}
+
+const noop = (_: SubAppMountInfo) => {
+  //
+};
+
 /**
  * **internal use only**
  *
@@ -115,51 +270,60 @@ export const envHooks: EnvHooks = {};
 export function __declareSubApp(opts: SubAppOptions): SubAppDef {
   const def: SubAppDef = Object.assign(
     {
-      _getModule() {
-        return (typeof opts.getModule === "function" ? opts.getModule() : opts.getModule).then(
-          mod => {
-            return (this._module = mod);
-          }
-        );
+      async _getModule() {
+        const mod = await (typeof opts.getModule === "function"
+          ? opts.getModule()
+          : opts.getModule);
+        this._module = mod;
+        loadFeatures(this, mod.subapp?.wantFeatures);
+        return mod;
       },
       _module: null,
-      _ssr: false
+      _ssr: false,
+      _features: {},
+      _mount: noop,
+      _unmount: noop
     },
     opts
   );
 
-  envHooks.getContainer()[opts.name] = def;
+  const container = envHooks.getContainer();
+
+  container[opts.name] = def;
+
+  loadFeatures(def, opts.wantFeatures);
 
   return def;
 }
 
 /**
- * Wait for subapps to be ready.
- *
- * - A subapp is awaited if one of the following is true
- *  1. It needs SSR
- *  2. The param `list` is `true`
- *  3. The param `list` is array of strings and contains the subapp's name.
- *
- * @param list - list of subapps' names to wait (if it's true, then wait for all)
- * @returns promise
+ * potential data for doing server side rendering
  */
-export function subAppReady(list: boolean | string[] = false): Promise<any[]> {
-  const container = envHooks.getContainer();
+export type SubAppSSRData = {
+  context: any;
+  subapp: SubAppDef;
+  props?: any;
+  request?: any;
+  path?: string;
+  params?: Record<string, string>;
+  query?: Record<string, string>;
+};
 
-  const subappModules = [];
-  for (const x in container) {
-    if (list === true || (Array.isArray(list) && list.indexOf(x) >= 0) || container[x]._ssr) {
-      subappModules.push(container[x]._getModule());
-    }
-  }
+/**
+ * result of server side rendering
+ */
+export type SubAppSSRResult = {
+  /**
+   * content of the rendering
+   * TODO: types - could be string or a stream
+   */
+  content: any;
 
-  if (subappModules.length > 0) {
-    return Promise.all(subappModules);
-  } else {
-    return Promise.resolve([]);
-  }
-}
+  /**
+   * initialState props
+   */
+  props: any;
+};
 
 /**
  * Allow specific UI framework to be configured
@@ -173,88 +337,8 @@ export interface FrameworkLib {
   renderStart?(): void;
 
   renderToString?(Component: unknown): string;
-}
 
-let FRAMEWORK_LIB_CREATOR;
+  handleSSR?(data: SubAppSSRData): any;
 
-/**
- * setup a specific framework to use for rendering subapps
- *
- * @param creator function to create a framework lib
- */
-export function setupFramework(creator: () => FrameworkLib) {
-  FRAMEWORK_LIB_CREATOR = creator;
-}
-
-/**
- * Get callback to instantiate a framework object
- *
- * @returns framework
- */
-export function getFramework() {
-  return FRAMEWORK_LIB_CREATOR;
-}
-
-/**
- * Don't use.  TBD.
- *
- */
-type ServerModuleOptions = {
-  /**
-   * The directory path, relative to the subapp's declaration, that will contain modules pertaining
-   * to server only.
-   * If it's not provided, then the subapp's module will be loaded from the same location with the
-   * expectation that there is a module named subapp-<name>-server.
-   */
-  path?: string;
-};
-
-/**
- * Don't use.  TBD.
- *
- * @param meta
- * @returns unknown
- */
-export function serverModule(options: ServerModuleOptions) {
-  return (subapp: SubAppOptions) => options; // eslint-disable-line
-}
-
-/**
- * Don't use.  TBD.
- *
- * @param meta
- * @returns unknown
- */
-export function ssrFeature(meta) {
-  return (subapp: SubAppOptions) => meta; // eslint-disable-line
-}
-
-/**
- * Don't use.  TBD.
- *
- * @param meta
- * @returns unknown
- */
-export function reduxFeature(meta) {
-  return (subapp: SubAppOptions) => meta; // eslint-disable-line
-}
-
-/**
- * Don't use.  TBD.
- *
- * @param meta
- * @returns unknown
- */
-export function reactRouterFeature(meta) {
-  return (subapp: SubAppOptions) => meta; // eslint-disable-line
-}
-
-/**
- * Don't use.  TBD.
- *
- * @param meta
- * @returns unknown
- */
-export function routingFeature(meta) {
-  return (subapp: SubAppOptions) => meta; // eslint-disable-line
+  startSubApp?(def: SubAppDef, options: SubAppStartOptions, reload?: boolean): Promise<any>;
 }

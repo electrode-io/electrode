@@ -1,0 +1,124 @@
+{
+  "name": "@xarc/redux",
+  "version": "0.0.1",
+  "description": "xarc React.js application redux support",
+  "main": "dist-node-cjs/node/index.js",
+  "module": "dist-node-esm/node/index.js",
+  "browser": {
+    "./dist-node-cjs/node/index.js": "./dist-browser~es5~cjs~/browser/index.js",
+    "./dist-node-esm/node/index.js": "./dist-browser~es2x~esm~/browser/index.js"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "scripts": {
+    "build": "xrun user/build",
+    "test": "xrun xarc/test-only",
+    "check": "xrun xarc/check",
+    "prepublishOnly": "xrun [[build, docs], xarc/check]",
+    "docs": "xrun xarc/docs",
+    "coverage": "xrun xarc/test-cov"
+  },
+  "keywords": [],
+  "author": "WalmartLabs GTP.js team",
+  "license": "Apache-2.0",
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*",
+    "redux": "*",
+    "react-redux": "*",
+    "tslib": "*"
+  },
+  "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.1",
+    "@types/chai": "^4.2.14",
+    "@types/mocha": "^8.2.0",
+    "@types/node": "^14.14.16",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/sinon": "^9.0.10",
+    "@types/sinon-chai": "^3.2.5",
+    "@typescript-eslint/eslint-plugin": "^4.11.0",
+    "@typescript-eslint/parser": "^4.11.0",
+    "@xarc/module-dev": "^3.0.1",
+    "babel-eslint": "^10.1.0",
+    "chai": "^4.2.0",
+    "eslint": "^7.16.0",
+    "eslint-config-walmart": "^2.2.1",
+    "eslint-plugin-filenames": "^1.1.0",
+    "eslint-plugin-jsdoc": "^30.7.9",
+    "mocha": "^8.2.1",
+    "nyc": "^15.1.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-redux": "^7.2.2",
+    "redux": "^4.0.5",
+    "sinon": "^9.2.2",
+    "sinon-chai": "^3.5.0",
+    "source-map-support": "^0.5.19",
+    "ts-node": "^9.1.1",
+    "tslib": "^2.0.3",
+    "typedoc": "^0.19.2",
+    "typescript": "^4.1.3"
+  },
+  "files": [
+    "dist",
+    "dist*",
+    "src"
+  ],
+  "nyc": {
+    "extends": [
+      "@istanbuljs/nyc-config-typescript"
+    ],
+    "all": true,
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "exclude": [
+      "*clap.js",
+      "*clap.ts",
+      "coverage",
+      "dist",
+      "dist*",
+      "docs",
+      "gulpfile.js",
+      "test",
+      "xrun*.js",
+      "xrun*.ts"
+    ],
+    "check-coverage": false,
+    "statements": 100,
+    "branches": 100,
+    "functions": 100,
+    "lines": 100,
+    "cache": false
+  },
+  "@xarc/module-dev": {
+    "features": [
+      "eslint",
+      "eslintTS",
+      "mocha",
+      "typedoc",
+      "typescript"
+    ]
+  },
+  "dependencies": {
+    "@xarc/subapp": "^0.0.3"
+  },
+  "fyn": {
+    "dependencies": {
+      "@xarc/subapp": "../xarc-subapp"
+    }
+  },
+  "mocha": {
+    "require": [
+      "ts-node/register",
+      "source-map-support/register",
+      "@xarc/module-dev/config/test/setup.js"
+    ],
+    "recursive": true
+  }
+}

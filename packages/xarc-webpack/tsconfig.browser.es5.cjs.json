@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "outDir": "lib/client",
+    "lib": ["es2018", "DOM"],
+    "module": "CommonJS",
+    "esModuleInterop": false,
+    "importHelpers": true,
+    "target": "ES5",
+    "preserveConstEnums": false,
+    "sourceMap": true,
+    "declaration": true,
+    "types": [],
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "alwaysStrict": true,
+    "strictFunctionTypes": true,
+    "moduleResolution": "Node"
+  },
+  "include": ["src/client"]
+}

@@ -84,7 +84,7 @@ $pkg:
 '@babel/generator':
  _latest: 7.10.5
  _:
-  ^7.10.5: 7.10.5
+  '^7.0.0-beta.44,^7.10.5': 7.10.5
   ^7.12.5: 7.12.5
  7.12.5:
   $: sha512-m16TQQJ8hPt7E+OS/XVQg/7U184MLXtvuGbCdA7na61vha+ImkyyNM/9DDA0unYCVZn3ZOhng+qz48/KBOT96A==
@@ -264,7 +264,7 @@ $pkg:
 '@babel/helper-module-imports':
  _latest: 7.10.4
  _:
-  '^7.0.0-beta.49,^7.10.4': 7.10.4
+  '^7.0.0-beta.44,^7.0.0-beta.49,^7.10.4': 7.10.4
  7.10.4:
   $: sha512-nEQJHqYavI217oD9+s5MUBzk6x1IlvoS9WTPfgG43CbMEeStE0v+r+TucWdx8KFGowPGvyOkDT9+7DHedIDnVw==
   _: 'https://registry.npmjs.org/@babel/helper-module-imports/-/helper-module-imports-7.10.4.tgz'
@@ -1736,10 +1736,10 @@ $pkg:
    '@webassemblyjs/wast-parser': 1.9.0
    '@xtuc/long': 4.2.2
 '@xarc/app':
- _latest: 8.1.28-fynlocal_h
+ _latest: 8.1.29-fynlocal_h
  _:
-  ../../packages/xarc-app: 8.1.28-fynlocal_h
- 8.1.28-fynlocal_h:
+  ../../packages/xarc-app: 8.1.29-fynlocal_h
+ 8.1.29-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/xarc-app
@@ -1750,12 +1750,12 @@ $pkg:
    ignore-styles: ^5.0.1
    isomorphic-loader: ^4.2.1
    optional-require: ^1.0.0
-   subapp-util: ^1.1.1
+   subapp-util: ^1.1.2
 '@xarc/app-dev':
- _latest: 8.1.28-fynlocal_h
+ _latest: 8.1.29-fynlocal_h
  _:
-  ../../packages/xarc-app-dev: 8.1.28-fynlocal_h
- 8.1.28-fynlocal_h:
+  ../../packages/xarc-app-dev: 8.1.29-fynlocal_h
+ 8.1.29-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/xarc-app-dev
@@ -1775,7 +1775,8 @@ $pkg:
    '@babel/register': ^7.0.0
    '@jchip/redbird': ^1.1.2
    '@loadable/babel-plugin': ^5.10.0
-   '@xarc/webpack': ^9.0.5
+   '@xarc/subapp': ^0.0.3
+   '@xarc/webpack': ^9.0.6
    ansi-to-html: ^0.6.8
    babel-plugin-dynamic-import-node: ^2.2.0
    babel-plugin-lodash: ^3.3.4
@@ -1787,7 +1788,8 @@ $pkg:
    chokidar: ^3.4.1
    core-js: ^3.6.5
    electrode-hapi-compat: ^1.3.3
-   electrode-node-resolver: ^2.0.1
+   electrode-node-resolver: ^2.0.2
+   fast-async: ^7.0.5
    filter-scan-dir: ^1.0.10
    fs-extra: ^9.0.1
    identity-obj-proxy: ^3.0.0
@@ -1808,7 +1810,7 @@ $pkg:
    require-at: ^1.0.6
    semver: ^7.3.2
    serve-index-fs: ^1.10.1
-   subapp-util: ^1.1.1
+   subapp-util: ^1.1.2
    sudo-prompt: ^8.2.5
    visual-logger: ^1.1.3
    webpack-dev-middleware: ^3.7.2
@@ -1838,25 +1840,25 @@ $pkg:
    require-at: ^1.0.4
    xaa: ^1.6.0
 '@xarc/index-page':
- _latest: 1.0.7-fynlocal_h
+ _latest: 1.0.8-fynlocal_h
  _:
-  ../xarc-index-page: 1.0.7-fynlocal_h
- 1.0.7-fynlocal_h:
+  ../xarc-index-page: 1.0.8-fynlocal_h
+ 1.0.8-fynlocal_h:
   $: local
   _: ../../packages/xarc-index-page
   dependencies:
-   '@xarc/jsx-renderer': ^1.0.6
-   '@xarc/render-context': ^1.0.4
-   '@xarc/tag-renderer': ^1.0.5
+   '@xarc/jsx-renderer': ^1.0.7
+   '@xarc/render-context': ^1.0.5
+   '@xarc/tag-renderer': ^1.0.6
 '@xarc/jsx-renderer':
- _latest: 1.0.6-fynlocal_h
+ _latest: 1.0.7-fynlocal_h
  _:
-  ../xarc-jsx-renderer: 1.0.6-fynlocal_h
- 1.0.6-fynlocal_h:
+  ../xarc-jsx-renderer: 1.0.7-fynlocal_h
+ 1.0.7-fynlocal_h:
   $: local
   _: ../../packages/xarc-jsx-renderer
   dependencies:
-   '@xarc/render-context': ^1.0.4
+   '@xarc/render-context': ^1.0.5
    lodash: ^4.17.15
    munchy: ^1.0.9
    optional-require: ^1.0.0
@@ -1874,16 +1876,16 @@ $pkg:
   dependencies:
    babel-eslint: ^10.1.0
    eslint: ^7.15.0
-   eslint-config-walmart: ^2.0.0
+   eslint-config-walmart: ^2.2.1
    eslint-plugin-filenames: ^1.1.0
-   eslint-plugin-flowtype: ^2.49.3
+   eslint-plugin-flowtype: ^5.2.0
    eslint-plugin-mocha: ^8.0.0
    eslint-plugin-react: ^7.21.5
 '@xarc/render-context':
- _latest: 1.0.4-fynlocal_h
+ _latest: 1.0.5-fynlocal_h
  _:
-  ../xarc-render-context: 1.0.4-fynlocal_h
- 1.0.4-fynlocal_h:
+  ../xarc-render-context: 1.0.5-fynlocal_h
+ 1.0.5-fynlocal_h:
   $: local
   _: ../../packages/xarc-render-context
   dependencies:
@@ -1912,20 +1914,31 @@ $pkg:
    string-array: ^1.0.1
    unwrap-npm-cmd: ^1.1.1
    xsh: ^0.4.5
-'@xarc/tag-renderer':
- _latest: 1.0.5-fynlocal_h
+'@xarc/subapp':
+ _latest: 0.0.3-fynlocal_h
  _:
-  ../xarc-tag-renderer: 1.0.5-fynlocal_h
- 1.0.5-fynlocal_h:
+  ../xarc-subapp: 0.0.3-fynlocal_h
+ 0.0.3-fynlocal_h:
+  $: local
+  _: ../../packages/xarc-subapp
+  dependencies:
+   lodash: ^4.17.20
+  peerDependencies:
+   tslib: ^2.0.3
+'@xarc/tag-renderer':
+ _latest: 1.0.6-fynlocal_h
+ _:
+  ../xarc-tag-renderer: 1.0.6-fynlocal_h
+ 1.0.6-fynlocal_h:
   $: local
   _: ../../packages/xarc-tag-renderer
   dependencies:
-   '@xarc/render-context': ^1.0.4
+   '@xarc/render-context': ^1.0.5
 '@xarc/webpack':
- _latest: 9.0.5-fynlocal_h
+ _latest: 9.0.6-fynlocal_h
  _:
-  ../xarc-webpack: 9.0.5-fynlocal_h
- 9.0.5-fynlocal_h:
+  ../xarc-webpack: 9.0.6-fynlocal_h
+ 9.0.6-fynlocal_h:
   $: local
   _: ../../packages/xarc-webpack
   dependencies:
@@ -1936,7 +1949,7 @@ $pkg:
    chalker: ^1.2.0
    css-loader: ^1.0.1
    electrode-cdn-file-loader: ^1.0.0
-   electrode-node-resolver: ^2.0.1
+   electrode-node-resolver: ^2.0.2
    file-loader: ^2.0.0
    filter-scan-dir: ^1.0.9
    lodash: ^4.17.19
@@ -1946,7 +1959,7 @@ $pkg:
    optional-require: ^1.0.2
    require-at: ^1.0.6
    url-loader: ^4.1.0
-   webpack: ^4.43.0
+   webpack: ^4.44.2
    webpack-cli: ^3.3.9
    webpack-config-composer: ^1.1.3
    webpack-stats-plugin: ^0.3.1
@@ -2540,6 +2553,13 @@ babel-plugin-transform-react-remove-prop-types:
  0.4.24:
   $: sha512-eqj0hVcJUR57/Ug2zE1Yswsw4LhuqqHhD+8v120T1cl3kjg76QwtyBrdIk4WVwK+lAhBJVYCd/v+4nc4y+8JsA==
   _: 'https://registry.npmjs.org/babel-plugin-transform-react-remove-prop-types/-/babel-plugin-transform-react-remove-prop-types-0.4.24.tgz'
+babylon:
+ _latest: 6.18.0
+ _:
+  ^7.0.0-beta.44: 7.0.0-beta.47
+ 7.0.0-beta.47:
+  $: sha512-+rq2cr4GDhtToEzKFD6KZZMDBXhjFAr9JjPw9pAppZACeEWqNM294j+NdBzkSHYXwzzBmVjZ3nEVJlOhbR2gOQ==
+  _: 'https://registry.npmjs.org/babylon/-/babylon-7.0.0-beta.47.tgz'
 balanced-match:
  _latest: 1.0.0
  _:
@@ -2987,7 +3007,7 @@ chokidar:
  _latest: 3.4.1
  _:
   ^2.1.8: 2.1.8
-  '^3.4.0,^3.4.1': 3.4.1
+  ^3.4.1: 3.4.1
  3.4.1:
   $: sha512-TQTJyr2stihpC4Sya9hs2Xh+O2wf+igjL36Y75xx2WdHuiICcn/XJza46Jwt0eT5hVpQOzo3FpY3cj3RVYLX0g==
   _: 'https://registry.npmjs.org/chokidar/-/chokidar-3.4.1.tgz'
@@ -3895,10 +3915,10 @@ electrode-hapi-compat:
   $: sha512-cvpUs0csNP5NI4V3w6wbApUTRDlFb2gV11pjTmuDHc86QKQJb6YOhYHb9wT2Cp4+5bJost7p1jtCgz7m4TY1LA==
   _: 'https://registry.npmjs.org/electrode-hapi-compat/-/electrode-hapi-compat-1.3.3.tgz'
 electrode-node-resolver:
- _latest: 2.0.1-fynlocal_h
+ _latest: 2.0.2-fynlocal_h
  _:
-  ../electrode-node-resolver: 2.0.1-fynlocal_h
- 2.0.1-fynlocal_h:
+  ../electrode-node-resolver: 2.0.2-fynlocal_h
+ 2.0.2-fynlocal_h:
   $: local
   _: ../../packages/electrode-node-resolver
   dependencies:
@@ -3957,12 +3977,12 @@ end-of-stream:
   dependencies:
    once: ^1.4.0
 enhanced-resolve:
- _latest: 4.3.0
+ _latest: 5.4.0
  _:
-  '^4.1.0,^4.1.1': 4.3.0
+  '^4.1.1,^4.3.0': 4.3.0
  4.3.0:
   $: sha512-3e87LvavsdxyoCfGusJnrZ5G8SLPOFeHSNpZI/ATL9a5leXo2k0w6MKnbqhdBad9qTobSfB20Ld7UmgoNbAZkQ==
-  _: 'https://registry.npmjs.org/enhanced-resolve/-/enhanced-resolve-4.3.0.tgz'
+  _: 'https://npme.walmart.com/enhanced-resolve/-/enhanced-resolve-4.3.0.tgz'
   dependencies:
    graceful-fs: ^4.1.2
    memory-fs: ^0.5.0
@@ -4128,10 +4148,10 @@ eslint:
 eslint-config-walmart:
  _latest: 2.2.1
  _:
-  ^2.0.0: 2.2.1
+  ^2.2.1: 2.2.1
  2.2.1:
   $: sha512-0z0rXi8DbqSJanJq5lKnDuKBs4hMsx9Qp3Ksl9QWYzvqG/8ibzbraGKDy3b44JD3ZZEbBig3BvpWXP9Sw0E+3A==
-  _: 'https://registry.npmjs.org/eslint-config-walmart/-/eslint-config-walmart-2.2.1.tgz'
+  _: 'https://npme.walmart.com/eslint-config-walmart/-/eslint-config-walmart-2.2.1.tgz'
 eslint-plugin-filenames:
  _latest: 1.3.2
  _:
@@ -4149,14 +4169,15 @@ eslint-plugin-filenames:
 eslint-plugin-flowtype:
  _latest: 5.2.0
  _:
-  ^2.49.3: 2.50.3
- 2.50.3:
-  $: sha512-X+AoKVOr7Re0ko/yEXyM5SSZ0tazc6ffdIOocp2fFUlWoDt7DV0Bz99mngOkAFLOAWjqRA5jPwqUCbrx13XoxQ==
-  _: 'https://registry.npmjs.org/eslint-plugin-flowtype/-/eslint-plugin-flowtype-2.50.3.tgz'
+  ^5.2.0: 5.2.0
+ 5.2.0:
+  $: sha512-z7ULdTxuhlRJcEe1MVljePXricuPOrsWfScRXFhNzVD5dmTHWjIF57AxD0e7AbEoLSbjSsaA5S+hCg43WvpXJQ==
+  _: 'https://npme.walmart.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-5.2.0.tgz'
   dependencies:
-   lodash: ^4.17.10
+   lodash: ^4.17.15
+   string-natural-compare: ^3.0.1
   peerDependencies:
-   eslint: '>=2.0.0'
+   eslint: ^7.1.0
 eslint-plugin-mocha:
  _latest: 8.0.0
  _:
@@ -4388,6 +4409,19 @@ eyes:
  0.1.8:
   $: sha1-Ys8SAjTGg3hdkCNIqADvPgzCC8A=
   _: 'https://registry.npmjs.org/eyes/-/eyes-0.1.8.tgz'
+fast-async:
+ _latest: 6.3.8
+ _:
+  ^7.0.5: 7.0.6
+ 7.0.6:
+  $: sha512-/iUa3eSQC+Xh5tN6QcVLsEsN7b1DaPIoTZo++VpLLIxtdNW2tEmMZex4TcrMeRnBwMOpZwue2CB171wjt5Kgqg==
+  _: 'https://registry.npmjs.org/fast-async/-/fast-async-7.0.6.tgz'
+  dependencies:
+   '@babel/generator': ^7.0.0-beta.44
+   '@babel/helper-module-imports': ^7.0.0-beta.44
+   babylon: ^7.0.0-beta.44
+   nodent-runtime: ^3.2.1
+   nodent-transform: ^3.2.4
 fast-decode-uri-component:
  _latest: 1.0.1
  _:
@@ -6179,6 +6213,10 @@ lodash:
  _latest: 4.17.19
  _:
   '^4.13.1,^4.17.10,^4.17.11,^4.17.14,^4.17.15,^4.17.19,^4.17.5,^4.3.0': 4.17.19
+  ^4.17.20: 4.17.20
+ 4.17.20:
+  $: sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
+  _: 'https://registry.npmjs.org/lodash/-/lodash-4.17.20.tgz'
  4.17.19:
   $: sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
   _: 'https://registry.npmjs.org/lodash/-/lodash-4.17.19.tgz'
@@ -6728,6 +6766,21 @@ node-releases:
  1.1.59:
   $: sha512-H3JrdUczbdiwxN5FuJPyCHnGHIFqQ0wWxo+9j1kAXAzqNMAHlo+4I/sYYxpyK0irQ73HgdiyzD32oqQDcU2Osw==
   _: 'https://registry.npmjs.org/node-releases/-/node-releases-1.1.59.tgz'
+nodent-runtime:
+ _latest: 3.2.1
+ _:
+  ^3.2.1: 3.2.1
+ 3.2.1:
+  hasI: 1
+  $: sha512-7Ws63oC+215smeKJQCxzrK21VFVlCFBkwl0MOObt0HOpVQXs3u483sAmtkF33nNqZ5rSOQjB76fgyPBmAUrtCA==
+  _: 'https://registry.npmjs.org/nodent-runtime/-/nodent-runtime-3.2.1.tgz'
+nodent-transform:
+ _latest: 3.2.9
+ _:
+  ^3.2.4: 3.2.9
+ 3.2.9:
+  $: sha512-4a5FH4WLi+daH/CGD5o/JWRR8W5tlCkd3nrDSkxbOzscJTyTUITltvOJeQjg3HJ1YgEuNyiPhQbvbtRjkQBByQ==
+  _: 'https://registry.npmjs.org/nodent-transform/-/nodent-transform-3.2.9.tgz'
 normalize-package-data:
  _latest: 2.5.0
  _:
@@ -9167,6 +9220,13 @@ string-hash:
  1.1.3:
   $: sha1-6Kr8CsGFW0Zmkp7X3RJ1311sgRs=
   _: 'https://registry.npmjs.org/string-hash/-/string-hash-1.1.3.tgz'
+string-natural-compare:
+ _latest: 3.0.1
+ _:
+  ^3.0.1: 3.0.1
+ 3.0.1:
+  $: sha512-n3sPwynL1nwKi3WJ6AIsClwBMa0zTi54fn2oLU6ndfTSIO05xaznjSf15PcBZU6FNWbmN5Q6cxT4V5hGvB4taw==
+  _: 'https://npme.walmart.com/string-natural-compare/-/string-natural-compare-3.0.1.tgz'
 string-similarity:
  _latest: 4.0.1
  _:
@@ -9296,71 +9356,71 @@ stylehacks:
    postcss: ^7.0.0
    postcss-selector-parser: ^3.0.0
 subapp-react:
- _latest: 0.0.33-fynlocal_h
+ _latest: 0.0.34-fynlocal_h
  _:
-  ../../packages/subapp-react: 0.0.33-fynlocal_h
- 0.0.33-fynlocal_h:
+  ../../packages/subapp-react: 0.0.34-fynlocal_h
+ 0.0.34-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-react
   dependencies:
    '@babel/runtime': ^7.8.3
    optional-require: ^1.0.0
-   subapp-util: ^1.1.1
-   subapp-web: ^1.0.42
+   subapp-util: ^1.1.2
+   subapp-web: ^1.0.43
   peerDependencies:
    react: '*'
    react-dom: '*'
 subapp-redux:
- _latest: 1.0.42-fynlocal_h
+ _latest: 1.0.43-fynlocal_h
  _:
-  ../../packages/subapp-redux: 1.0.42-fynlocal_h
- 1.0.42-fynlocal_h:
+  ../../packages/subapp-redux: 1.0.43-fynlocal_h
+ 1.0.43-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-redux
   dependencies:
    optional-require: ^1.0.0
-   subapp-util: ^1.1.1
-   subapp-web: ^1.0.42
+   subapp-util: ^1.1.2
+   subapp-web: ^1.0.43
   peerDependencies:
    react: '*'
    react-dom: '*'
    redux: '*'
    react-redux: '*'
 subapp-server:
- _latest: 1.3.11-fynlocal_h
+ _latest: 1.3.12-fynlocal_h
  _:
-  ../../packages/subapp-server: 1.3.11-fynlocal_h
- 1.3.11-fynlocal_h:
+  ../../packages/subapp-server: 1.3.12-fynlocal_h
+ 1.3.12-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-server
   dependencies:
    '@hapi/boom': ^7.4.1
-   '@xarc/index-page': ^1.0.7
-   '@xarc/jsx-renderer': ^1.0.6
-   '@xarc/tag-renderer': ^1.0.5
+   '@xarc/index-page': ^1.0.8
+   '@xarc/jsx-renderer': ^1.0.7
+   '@xarc/tag-renderer': ^1.0.6
    filter-scan-dir: ^1.0.9
    http-status-codes: ^1.3.0
    optional-require: ^1.0.0
-   subapp-util: ^1.1.1
+   subapp-util: ^1.1.2
    xaa: ^1.4.0
 subapp-util:
- _latest: 1.1.1-fynlocal_h
+ _latest: 1.1.2-fynlocal_h
  _:
-  ../subapp-util: 1.1.1-fynlocal_h
- 1.1.1-fynlocal_h:
+  ../subapp-util: 1.1.2-fynlocal_h
+ 1.1.2-fynlocal_h:
   $: local
   _: ../../packages/subapp-util
   dependencies:
    filter-scan-dir: ^1.0.9
    optional-require: ^1.0.0
 subapp-web:
- _latest: 1.0.42-fynlocal_h
+ _latest: 1.0.43-fynlocal_h
  _:
-  '../../packages/subapp-web,../subapp-web': 1.0.42-fynlocal_h
- 1.0.42-fynlocal_h:
+  '../../packages/subapp-web,../subapp-web': 1.0.43-fynlocal_h
+ 1.0.43-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-web
@@ -9372,7 +9432,7 @@ subapp-web:
    lodash: ^4.17.15
    optional-require: ^1.0.0
    request: ^2.88.0
-   subapp-util: ^1.1.1
+   subapp-util: ^1.1.2
    xaa: ^1.6.0
   peerDependencies:
    '@xarc/app': ^8.1.20
@@ -9969,25 +10029,27 @@ vm-browserify:
   $: sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
   _: 'https://registry.npmjs.org/vm-browserify/-/vm-browserify-1.1.2.tgz'
 watchpack:
- _latest: 1.7.2
+ _latest: 2.1.0
  _:
-  ^1.6.1: 1.7.2
- 1.7.2:
-  $: sha512-ymVbbQP40MFTp+cNMvpyBpBtygHnPzPkHqoIwRRj/0B8KhqQwV8LaKjtbaxF2lK4vl8zN9wCxS46IFCU5K4W0g==
-  _: 'https://registry.npmjs.org/watchpack/-/watchpack-1.7.2.tgz'
+  ^1.7.4: 1.7.5
+ 1.7.5:
+  $: sha512-9P3MWk6SrKjHsGkLT2KHXdQ/9SNkyoJbabxnKOoJepsvJjJG8uYTR3yTPxPQvNDI3w4Nz1xnE0TLHK4RIVe/MQ==
+  _: 'https://npme.walmart.com/watchpack/-/watchpack-1.7.5.tgz'
   dependencies:
    graceful-fs: ^4.1.2
    neo-async: ^2.5.0
+   chokidar: ^3.4.1
+   watchpack-chokidar2: ^2.0.1
   optionalDependencies:
-   chokidar: ^3.4.0
-   watchpack-chokidar2: ^2.0.0
+   chokidar: ^3.4.1
+   watchpack-chokidar2: ^2.0.1
 watchpack-chokidar2:
- _latest: 2.0.0
+ _latest: 2.0.1
  _:
-  ^2.0.0: 2.0.0
- 2.0.0:
-  $: sha512-9TyfOyN/zLUbA288wZ8IsMZ+6cbzvsNyEzSBp6e/zkifi6xxbl8SmQ/CxQq32k8NNqrdVEVUVSEf56L4rQ/ZxA==
-  _: 'https://registry.npmjs.org/watchpack-chokidar2/-/watchpack-chokidar2-2.0.0.tgz'
+  ^2.0.1: 2.0.1
+ 2.0.1:
+  $: sha512-nCFfBIPKr5Sh61s4LPpy1Wtfi0HE8isJ3d2Yb5/Ppw2P2B/3eVSEBjKfN0fmHJSK14+31KwMKmcrzs2GM4P0Ww==
+  _: 'https://npme.walmart.com/watchpack-chokidar2/-/watchpack-chokidar2-2.0.1.tgz'
   dependencies:
    chokidar: ^2.1.8
 wbuf:
@@ -10000,12 +10062,12 @@ wbuf:
   dependencies:
    minimalistic-assert: ^1.0.0
 webpack:
- _latest: 4.43.0
+ _latest: 5.10.0
  _:
-  ^4.43.0: 4.43.0
- 4.43.0:
-  $: sha512-GW1LjnPipFW2Y78OOab8NJlCflB7EFskMih2AHdvjbpKMeDJqEgSx24cXXXiPS65+WSwVyxtDsJH6jGX2czy+g==
-  _: 'https://registry.npmjs.org/webpack/-/webpack-4.43.0.tgz'
+  ^4.44.2: 4.44.2
+ 4.44.2:
+  $: sha512-6KJVGlCxYdISyurpQ0IPTklv+DULv05rs2hseIXer6D7KrUicRDLFb4IUM1S6LUAKypPM/nSiVSuv8jHu1m3/Q==
+  _: 'https://npme.walmart.com/webpack/-/webpack-4.44.2.tgz'
   dependencies:
    '@webassemblyjs/ast': 1.9.0
    '@webassemblyjs/helper-module-context': 1.9.0
@@ -10015,7 +10077,7 @@ webpack:
    ajv: ^6.10.2
    ajv-keywords: ^3.4.1
    chrome-trace-event: ^1.0.2
-   enhanced-resolve: ^4.1.0
+   enhanced-resolve: ^4.3.0
    eslint-scope: ^4.0.3
    json-parse-better-errors: ^1.0.2
    loader-runner: ^2.4.0
@@ -10028,7 +10090,7 @@ webpack:
    schema-utils: ^1.0.0
    tapable: ^1.1.3
    terser-webpack-plugin: ^1.4.3
-   watchpack: ^1.6.1
+   watchpack: ^1.7.4
    webpack-sources: ^1.4.1
 webpack-cli:
  _latest: 3.3.12
