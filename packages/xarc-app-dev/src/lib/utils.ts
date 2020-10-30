@@ -7,6 +7,7 @@ const logger = require("./logger");
 const ck = require("chalker");
 const Path = require("path");
 const Fs = require("fs");
+const _ = require("lodash");
 
 const Url = require("url");
 
@@ -97,4 +98,12 @@ xarc's development code.
       options: {}
     });
   }
+}
+
+export function detectCSSModule(xOptions) {
+  const cssModuleSupport = _.get(xOptions, "webpack.cssModuleSupport", undefined);
+  if (cssModuleSupport === undefined) {
+    return true;
+  }
+  return Boolean(cssModuleSupport);
 }
