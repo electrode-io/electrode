@@ -76,7 +76,7 @@ export class JsxRenderer {
       await each(this._beforeRenders, (r: any) => r.beforeRender(context));
       await this._render(this._template, context, 0, defer);
       await defer.promise;
-      const result = context.output.close();
+      const result = await context.output.close();
       await each(this._afterRenders, (r: any) => r.afterRender(context));
       context.result = context.isVoidStop ? context.voidResult : result;
       return context;
