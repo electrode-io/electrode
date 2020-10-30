@@ -1,6 +1,6 @@
 {
   "name": "@xarc/subapp",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "xarc subapp version 2",
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",

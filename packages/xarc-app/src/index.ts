@@ -260,7 +260,7 @@ export function load(
 
   if (options.isomorphicExtendRequire !== false) {
     const xReq = isomorphicExtendRequire();
-    let start = Date.now();
+    const start = Date.now();
     if (options.awaitReady && !xReq.activated) {
       promise = new Promise((resolve, reject) => {
         let timer;

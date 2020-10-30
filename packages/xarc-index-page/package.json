@@ -1,6 +1,6 @@
 {
   "name": "@xarc/index-page",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Electrode X template and handlers for generating index.html webpage",
   "main": "dist/index.js",
   "scripts": {
@@ -22,9 +22,9 @@
     "index-page"
   ],
   "dependencies": {
-    "@xarc/jsx-renderer": "^1.0.4",
-    "@xarc/render-context": "^1.0.2",
-    "@xarc/tag-renderer": "^1.0.2"
+    "@xarc/jsx-renderer": "^1.0.5",
+    "@xarc/render-context": "^1.0.3",
+    "@xarc/tag-renderer": "^1.0.3"
   },
   "author": "Walmart GTP.js",
   "license": "ISC",
