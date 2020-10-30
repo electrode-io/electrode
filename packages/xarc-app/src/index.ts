@@ -184,7 +184,7 @@ export function load(
   /**
    * support load options or a callback for when support load is done
    */
-  options: XarcSupportOptions
+  options: XarcSupportOptions = {}
 ): Promise<any> {
   if (options.babelRegister) {
     const babelRegister = optionalRequire("@babel/register");
