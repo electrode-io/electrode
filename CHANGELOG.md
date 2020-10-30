@@ -1,5 +1,24 @@
 # 10/30/2020
 
+- [fix] support load argument should be optional
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.1.23` `(8.1.22 => 8.1.23)`
+- `@xarc/app-dev@8.1.23` `(8.1.22 => 8.1.23)`
+
+### Lerna Updated
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - [fix] support load argument should be optional [commit](http://github.com/electrode-io/electrode/commit/b1be5deb78d73bc6944bd7132785f3aa435e9ff0)
+
+# 10/30/2020
+
 - [fix] windows no rm
 - [feat] add CDN mapping option to run time support
 - [fix] allow await for support load
