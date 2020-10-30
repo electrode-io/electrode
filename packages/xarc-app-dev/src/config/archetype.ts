@@ -14,6 +14,13 @@ function createElectrodeTmpDir(eTmpDir = ".etmp") {
   createGitIgnoreDir(Path.resolve(eTmpDir), "Electrode tmp dir");
 }
 
+function jsonStringifyReplacer(key, value) {
+  if (value instanceof RegExp) {
+    return value.toString();
+  }
+  return value;
+}
+
 function saveArchetypeConfig(config) {
   const filename = `${config.eTmpDir}/xarc-options.json`;
   const copy = { ...config, pkg: undefined, devPkg: undefined };
@@ -25,7 +32,7 @@ function saveArchetypeConfig(config) {
     //
   }
 
-  const str = JSON.stringify(copy, null, 2);
+  const str = JSON.stringify(copy, jsonStringifyReplacer, 2);
   if (str !== existStr) {
     try {
       createElectrodeTmpDir(config.eTmpDir);

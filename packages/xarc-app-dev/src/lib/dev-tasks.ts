@@ -326,7 +326,6 @@ export function loadXarcDevTasks(xrun, xarcOptions: XarcOptions = {}) {
   // eslint-disable-next-line complexity
   function makeTasks(xclap2) {
     assert(xclap2.concurrent, "xclap version must be 0.2.28+");
-    process.env.ENABLE_CSS_MODULE = "false";
     process.env.ENABLE_KARMA_COV = "false";
 
     const checkFrontendCov = (minimum = "5") => {
@@ -415,7 +414,7 @@ export function loadXarcDevTasks(xrun, xarcOptions: XarcOptions = {}) {
       ".static-files-env": () => setStaticFilesEnv(),
       ".remove-log-files": () => removeLogFiles(),
       build: {
-        dep: [".remove-log-files", ".production-env", ".set.css-module.env"],
+        dep: [".remove-log-files", ".production-env"],
         desc: `Build your app's ${AppMode.src.dir} directory into ${AppMode.lib.dir} for production`,
         task: [".build-lib", "build-dist", ".check.top.level.babelrc", "mv-to-dist"]
       },
@@ -432,12 +431,6 @@ export function loadXarcDevTasks(xrun, xarcOptions: XarcOptions = {}) {
           quote(getWebpackStartConfig("webpack.config.browsercoverage.js")),
           `--colors`
         );
-      },
-      ".set.css-module.env": () => {
-        const cssModule = detectCssModule();
-        if (cssModule) {
-          process.env.ENABLE_CSS_MODULE = "true";
-        }
       },
       "build-browser-coverage": {
         desc: "Build browser coverage",
@@ -456,7 +449,6 @@ export function loadXarcDevTasks(xrun, xarcOptions: XarcOptions = {}) {
 
       "build-dist": [
         ".production-env",
-        ".set.css-module.env",
         ".clean.build",
         "build-dist-dll",
         "build-dist-min",
@@ -786,7 +778,6 @@ You only need to run this if you are doing something not through the xarc tasks.
         dep: [".remove-log-files", ".development-env", ".mk-dist-dir", ".build.babelrc"],
         task() {
           return [
-            ".set.css-module.env",
             ".webpack-dev",
             [`server-admin ${this.args.join(" ")}`, "generate-service-worker"]
           ];
