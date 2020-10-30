@@ -2,8 +2,10 @@
 /* eslint-disable no-process-exit, no-console, max-statements */
 /* eslint max-statements: 0 complexity: 0 */
 
+import * as Fs from "fs";
+
 const optionalRequire = require("optional-require")(require);
-const { extendRequire, setXRequire } = require("isomorphic-loader");
+const { extendRequire, setXRequire, getXRequire } = require("isomorphic-loader");
 const makeAppMode = require("../lib/app-mode");
 const Path = require("path");
 const constants = require("../lib/constants");
@@ -53,6 +55,63 @@ export function cssModuleHook(
 }
 
 /**
+ * Options for setting up CDN assets mapping
+ */
+export type XarcCdnAssetsMappingOptions = {
+  /**
+   * isomorphic-loader extend require instance
+   *
+   * - if not provided, then the default instance is used
+   */
+  extendRequire?: any;
+  /**
+   * assets mapping data
+   *
+   * - if not provided, then will try to load it from one of these files:
+   * 1. dist/cdn-mappings.json
+   * 2. config/assets.json
+   *
+   */
+  mapping?: object;
+  /**
+   * Only setup in production mode (NODE_ENV === "production")
+   */
+  prodOnly?: boolean;
+};
+
+export const setupIsomorphicCdnAssetsMapping = (options?: XarcCdnAssetsMappingOptions) => {
+  if (!options || (options.prodOnly && process.env.NODE_ENV !== "production")) {
+    return;
+  }
+
+  const extRequire = options.extendRequire || getXRequire();
+  if (!extRequire) return;
+
+  let mapping = options.mapping;
+  if (!mapping) {
+    for (const fn of ["dist/cdn-mappings.json", "config/assets.json"]) {
+      try {
+        mapping = JSON.parse(Fs.readFileSync(fn, "utf-8"));
+        break;
+      } catch {
+        //
+      }
+    }
+  }
+
+  if (!mapping) {
+    return;
+  }
+
+  const cdnKeys = Object.keys(mapping).map(k => Path.basename(k));
+
+  extRequire.setUrlMapper(url => {
+    const urlBaseName = Path.basename(url);
+    return (cdnKeys.includes(urlBaseName) && mapping[urlBaseName]) || url;
+  });
+};
+
+/**
  * Load the require hook to support isomorphic assets when doing SSR
  */
 export function isomorphicExtendRequire() {
@@ -67,67 +126,66 @@ export function isomorphicExtendRequire() {
 }
 
 /**
+ * Available options for setting up run time support
+ */
+type XarcSupportOptions = {
+  /**
+   * - boolean: true to load @babel/register
+   * - Object: options to be passed to @babel/register
+   */
+  babelRegister?: any;
+  /**
+   * - boolean: if true, then load and setup CSS module runtime for node.js
+   * - object: options to be passed to cssModuleHook
+   */
+  cssModuleHook?: boolean | object;
+  /**
+   * if no CSS module hook, then a default ignore hook is load to avoid errors
+   * when trying to load CSS modules.
+   *
+   * Set this to false to avoid loading the ignore hook.
+   */
+  ignoreStyles?: boolean;
+  /**
+   * Set to false to avoid loading node.js require hook to handle isomorphic assets.
+   */
+  isomorphicExtendRequire?: boolean;
+  /**
+   * Setup CDN mapping for isomorphic assets
+   */
+  isomorphicCdnOptions?: XarcCdnAssetsMappingOptions;
+  /**
+   * If true, then ensure everything is ready before resolving the returned promise.
+   *
+   * @remarks
+   * In dev mode, resolving the promise depends on the app server starting and loading
+   * the dev plugin.  What this means is basically:
+   *
+   * ```js
+   * const loadSupport = support.load({awaitReady: true});
+   * await startServer();
+   * await loadSupport;
+   *
+   * // do any other initialization that could trigger importing isomorphic assets
+   *
+   * ```
+   */
+  awaitReady?: boolean;
+};
+
+/**
  * Load run time supports
  *
  * @param options - options on what to load
  * @param callback - callback after loaded (returns Promise if no callback)
- * @returns nothing
+ * @returns Promise
  */
 export function load(
   /**
    * support load options or a callback for when support load is done
    */
-  options:
-    | {
-        /**
-         * - boolean: true to load @babel/register
-         * - Object: options to be passed to @babel/register
-         */
-        babelRegister?: any;
-        /**
-         * - boolean: if true, then load and setup CSS module runtime for node.js
-         * - object: options to be passed to cssModuleHook
-         */
-        cssModuleHook?: boolean | object;
-        /**
-         * if no CSS module hook, then a default ignore hook is load to avoid errors
-         * when trying to load CSS modules.
-         *
-         * Set this to false to avoid loading the ignore hook.
-         */
-        ignoreStyles?: boolean;
-        /**
-         * Set to false to avoid loading node.js require hook to handle isomorphic assets.
-         */
-        isomorphicExtendRequire?: boolean;
-        /**
-         * If true, then ensure everything is ready before resolving the returned promise.
-         *
-         * @remarks
-         * In dev mode, resolving the promise depends on the app server starting and loading
-         * the dev plugin.  What this means is basically:
-         *
-         * ```js
-         * const loadSupport = support.load({awaitReady: true});
-         * await startServer();
-         * await loadSupport;
-         *
-         * // do any other initialization that could trigger importing isomorphic assets
-         *
-         * ```
-         */
-        awaitReady?: boolean;
-      }
-    | Function,
-  callback?: Function
-) {
-  if (typeof options === "function") {
-    callback = options;
-    options = {};
-  } else {
-    options = options || {};
-  }
-
+  options: XarcSupportOptions
+): Promise<any> {
   if (options.babelRegister) {
     const babelRegister = optionalRequire("@babel/register");
     if (!babelRegister) {
@@ -226,15 +284,13 @@ export function load(
           clearTimeout(timer);
           resolve();
         });
-      });
+      }).then(() => setupIsomorphicCdnAssetsMapping(options.isomorphicCdnOptions));
+    } else {
+      setupIsomorphicCdnAssetsMapping(options.isomorphicCdnOptions);
     }
   }
 
-  if (!promise) {
-    promise = Promise.resolve();
-  }
-
-  return callback ? promise.then(callback, callback) : promise;
+  return promise || Promise.resolve();
 }
 
 if (!getAppMode().hasEnv()) {
