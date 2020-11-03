@@ -5,11 +5,10 @@
  * When transpiling for node.js, env XARC_BABEL_TARGET should be set to "node"
  * and this file will set preset-env targets accordingly.
  */
-const requireAt = require("require-at");
 const ck = require("chalker");
 const optionalRequire = require("optional-require")(require);
 const optFlow = optionalRequire("electrode-archetype-opt-flow");
-import { getPluginFrom, loadXarcOptions } from "./common";
+import { getPluginFrom, loadXarcOptions, detectCSSModule } from "./common";
 const _ = require("lodash");
 
 const xOptions = loadXarcOptions(process.env.XARC_APP_DIR);
@@ -34,7 +33,7 @@ const addFlowPlugin = Boolean(enableFlow && optFlow);
 
 const { BABEL_ENV, NODE_ENV, XARC_BABEL_TARGET, ENABLE_KARMA_COV } = process.env;
 
-const enableCssModule = Boolean(_.get(xOptions, "webpack.cssModuleSupport"));
+const enableCssModule = detectCSSModule(xOptions);
 const enableKarmaCov = ENABLE_KARMA_COV === "true";
 const isProduction = (BABEL_ENV || NODE_ENV) === "production";
 const isTest = (BABEL_ENV || NODE_ENV) === "test";
@@ -58,20 +57,14 @@ const getReactCssModulePlugin = () => {
     return null;
   }
 
-  const postCssPath = optionalRequire.resolve("@xarc/opt-postcss/package.json");
-
-  if (!postCssPath) {
-    return null;
-  }
-
-  const babelReactCssModulePlugin = requireAt(postCssPath)("babel-plugin-react-css-modules");
-
+  const enableShortenCSSNames = xOptions.webpack.enableShortenCSSNames;
+  const enableShortHash = isProduction && enableShortenCSSNames;
   return [
     [
-      babelReactCssModulePlugin,
+      "babel-plugin-react-css-modules",
       {
         context: "./src",
-        generateScopedName: `${isProduction ? "" : "[name]__[local]___"}[hash:base64:5]`,
+        generateScopedName: `${enableShortHash ? "" : "[name]__[local]___"}[hash:base64:5]`,
         filetypes: {
           ".scss": {
             syntax: "postcss-scss",

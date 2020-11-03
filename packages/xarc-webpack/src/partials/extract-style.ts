@@ -26,15 +26,15 @@ const optLessRequire = getOptRequire(["@xarc/opt-less", "electrode-archetype-opt
 const lessLoader = optLessRequire.resolve("less-loader");
 
 function loadPostCss() {
-  const cssModuleRequire = getOptRequire(["@xarc/opt-postcss", "electrode-archetype-opt-postcss"]);
+  const optPostcssRequire = getOptRequire(["@xarc/opt-postcss", "electrode-archetype-opt-postcss"]);
 
-  if (cssModuleRequire.invalid) {
+  if (optPostcssRequire.invalid) {
     return { hasPostCss: false };
   }
 
-  const atImport = cssModuleRequire("postcss-import");
-  const postcssPresetEnv = cssModuleRequire("postcss-preset-env");
-  const postcssLoader = cssModuleRequire.resolve("postcss-loader");
+  const atImport = optPostcssRequire("postcss-import");
+  const postcssPresetEnv = optPostcssRequire("postcss-preset-env");
+  const postcssLoader = optPostcssRequire.resolve("postcss-loader");
 
   return { hasPostCss: true, atImport, postcssPresetEnv, postcssLoader };
 }
@@ -49,30 +49,28 @@ function loadPostCss() {
  * - *.scss => SASS compiled to normal CSS
  * - *.less => SASS compiled to normal CSS
  *
- * cssModuleSupport: true
+ * cssModuleSupport: true|undefined
  *
+ * Any file that match the regex [.mod|module].[css|styl|sass|scss] will be treated as CSS module
+ * Files thet match the RexExp:
  * - *.css => CSS-Modules + CSS-Next
  * - *.styl => stylus compiled to normal CSS => CSS-Modules + CSS-Next
  * - *.scss => SASS compiled to normal CSS => CSS-Modules + CSS-Next
  * - *.less => LESS compiled to normal CSS => CSS-Modules + CSS-Next
  *
- * cssModuleSupport: undefined (default)
+ * cssModuleSupport: RegExp
  *
- * - *only* *.css => cssModuleSupport sets to true
- * - *no* *.css (but *.styl or *.scss) => cssModuleSupport sets to false
- *
- * cssModuleSupport: array ["css", "styl", "scss", "less"]
- *
- * - individual extension enabled for CSS-Modules + CSS-Next
+ * - Any file matching this user provided regexp will be treated as CSS module
  */
 
+/* eslint-disable complexity */
 module.exports = function() {
   const xarcOptions = loadXarcOptions();
 
   const isProduction = process.env.NODE_ENV === "production";
   const isDevelopment = !isProduction;
 
-  const cssModuleSupport = detectCssModule();
+  const { enableCssModule, cssModuleRegExp } = detectCssModule(xarcOptions);
 
   const { hasPostCss, atImport, postcssPresetEnv, postcssLoader } = loadPostCss();
 
@@ -113,65 +111,79 @@ module.exports = function() {
     };
   };
 
-  const getCssQueryUse = (ext = "") => {
-    let cssModule = Boolean(cssModuleSupport);
-    if (ext && Array.isArray(cssModuleSupport)) {
-      cssModule = cssModuleSupport.indexOf(ext) >= 0;
-    }
-
+  const getCssQueryUse = (isModule = false) => {
     return [
-      cssModule
+      isModule
         ? { loader: cssLoader, options: getCSSModuleOptions() }
-        : { loader: cssLoader, options: { minimize: true } },
+        : { loader: cssLoader, options: { minimize: true, modules: false } },
       getPostCssQuery()
     ].filter(x => x);
   };
 
-  const namePrefix = `extract-css${cssModuleSupport ? "-modules" : ""}`;
+  /*
+   * MiniCssExtractPlugin Loader
+   */
+
+  const miniCssExtractLoader = (isModule = false) => ({
+    loader: MiniCssExtractPlugin.loader,
+    options: {
+      hmr: isDevelopment,
+      reload: isDevelopment,
+      publicPath: "",
+      esModule: true,
+      modules: Boolean(isModule)
+    }
+  });
 
   /*
    * PLAIN css
    */
-  rules.push({
-    _name: namePrefix,
-    test: /\.css$/,
-    use: [
-      {
-        loader: MiniCssExtractPlugin.loader,
-        options: {
-          hmr: isDevelopment,
-          reload: isDevelopment,
-          publicPath: "",
-          esModule: true,
-          modules: Boolean(cssModuleSupport)
-        }
-      },
-      ...getCssQueryUse()
-    ]
-  });
+  rules.push(
+    {
+      _name: `extract-css`,
+      test: /\.css$/,
+      use: [
+        miniCssExtractLoader(false),
+        ...getCssQueryUse(false)
+      ],
+      ...(enableCssModule && { exclude: cssModuleRegExp }),
+    },
+    enableCssModule && {
+      _name: `extract-css-modules`,
+      test: /\.css$/,
+      use: [
+        miniCssExtractLoader(true),
+        ...getCssQueryUse(true)
+      ],
+      include: cssModuleRegExp
+    }
+  );
 
   /*
    * SASS
    */
 
-  if (xarcOptions.options.sass && sassLoader) {
-    rules.push({
-      _name: `${namePrefix}-scss`,
-      test: /\.(scss|sass)$/,
-      use: [
-        {
-          loader: MiniCssExtractPlugin.loader,
-          options: {
-            hmr: isDevelopment,
-            reload: isDevelopment,
-            publicPath: "",
-            esModule: true,
-            modules: Boolean(cssModuleSupport)
-          }
-        },
-        ...getCssQueryUse().concat({ loader: sassLoader } as any)
-      ]
-    });
+  if (sassLoader) {
+    rules.push(
+      {
+        _name: `extract-css-scss`,
+        test: /\.(scss|sass)$/,
+        use: [
+          miniCssExtractLoader(false),
+          ...getCssQueryUse(false).concat({ loader: sassLoader } as any)
+        ],
+        ...(enableCssModule && { exclude: cssModuleRegExp }),
+      },
+      enableCssModule && {
+        _name: `extract-css-modules-scss`,
+        test: /\.(scss|sass)$/,
+        use: [
+          miniCssExtractLoader(true),
+          ...getCssQueryUse(true).concat({ loader: sassLoader } as any)
+        ],
+        include: cssModuleRegExp
+      }
+    );
   }
 
   /*
@@ -181,34 +193,46 @@ module.exports = function() {
   if (stylusLoader) {
     stylusQuery = { loader: stylusLoader };
 
-    rules.push({
-      _name: `${namePrefix}-stylus`,
-      test: /\.styl$/,
-      use: [
-        {
-          loader: MiniCssExtractPlugin.loader,
-          options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
-        },
-        ...getCssQueryUse().concat(stylusQuery)
-      ]
-    });
+    rules.push(
+      {
+        _name: `extract-css-stylus`,
+        test: /\.styl$/,
+        use: [miniCssExtractLoader(false), ...getCssQueryUse(false).concat(stylusQuery)],
+        ...(enableCssModule && { exclude: cssModuleRegExp }),
+      },
+      enableCssModule && {
+        _name: `extract-css-modules-stylus`,
+        test: /\.styl$/,
+        use: [miniCssExtractLoader(true), ...getCssQueryUse(true).concat(stylusQuery)],
+        include: cssModuleRegExp
+      }
+    );
   }
 
   /*
    * LESS
    */
   if (lessLoader) {
-    rules.push({
-      _name: `${namePrefix}-less`,
-      test: /\.less$/,
-      use: [
-        {
-          loader: MiniCssExtractPlugin.loader,
-          options: { hmr: isDevelopment, reload: isDevelopment, publicPath: "" }
-        },
-        ...getCssQueryUse().concat({ loader: lessLoader } as any)
-      ]
-    });
+    rules.push(
+      {
+        _name: `extract-css-less`,
+        test: /\.less$/,
+        use: [
+          miniCssExtractLoader(false),
+          ...getCssQueryUse(false).concat({ loader: lessLoader } as any)
+        ],
+        ...(enableCssModule && { exclude: cssModuleRegExp }),
+      },
+      enableCssModule && {
+        _name: `extract-css-modules-less`,
+        test: /\.less$/,
+        use: [
+          miniCssExtractLoader(true),
+          ...getCssQueryUse(true).concat({ loader: lessLoader } as any)
+        ],
+        include: cssModuleRegExp
+      }
+    );
   }
 
   const styleBundleFilename =
@@ -217,7 +241,7 @@ module.exports = function() {
       : "[name].style.[contenthash].css";
 
   return {
-    module: { rules },
+    module: { rules: rules.filter(x => x) },
     plugins: [
       new MiniCssExtractPlugin({ filename: styleBundleFilename }),
       isProduction && new OptimizeCssAssetsPlugin(xarcOptions.webpack.optimizeCssOptions),

@@ -59,7 +59,7 @@ export type WebpackOptions = {
    * - **Default: `undefined` (auto detect)**
    * - If not set, then check env `CSS_MODULE_SUPPORT`
    */
-  cssModuleSupport?: boolean;
+  cssModuleSupport?: boolean | RegExp;
 
   /**
    * Enable loading `@babel/polyfill` for application

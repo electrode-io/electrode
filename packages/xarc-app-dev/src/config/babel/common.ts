@@ -19,4 +19,4 @@ export function getPluginFrom(host, pluginName) {
   throw err;
 }
 
-export { loadXarcOptions } from "../../lib/utils";
+export { loadXarcOptions, detectCSSModule } from "../../lib/utils";
