@@ -1,5 +1,5 @@
 import React from "react";
-import sugar from "../styles/custom-sugarss.styl";
+import sugar from "../styles/custom-sugarss.styl"; // eslint-disable-line no-unused-vars
 
 class DemoSugarss extends React.Component {
   render() {

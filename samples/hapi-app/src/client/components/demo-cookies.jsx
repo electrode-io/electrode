@@ -18,7 +18,7 @@
 
 import React from "react";
 import custom from "../styles/custom.css"; // eslint-disable-line no-unused-vars
-import demo3 from "../styles/demo3.less";
+import demo3 from "../styles/demo3.less"; // eslint-disable-line no-unused-vars
 import Cookies from "electrode-cookies";
 import PropTypes from "prop-types";
 import milligram from "milligram/dist/milligram.css"; // eslint-disable-line no-unused-vars
