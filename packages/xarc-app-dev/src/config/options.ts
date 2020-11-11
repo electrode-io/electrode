@@ -49,8 +49,6 @@ export function checkOptArchetypeInAppDep(dependencies, isDev = undefined) {
 export const getUserConfigOptions = (packageNames, devPackageNames) => {
   return {
     reactLib: "react",
-    karma: true,
-    sass: false,
     ...optionalRequire(Path.resolve("archetype/config"), { default: {} }).options,
     //
     // Check for any optional archetype in application's devDependencies or dependencies

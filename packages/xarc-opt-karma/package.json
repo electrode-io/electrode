@@ -12,7 +12,8 @@
     "url": "https://github.com/electrode-io/electrode/issues"
   },
   "files": [
-    "xarc-opt-check.js"
+    "xarc-opt-check.js",
+    "plugins"
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",

@@ -36,26 +36,32 @@ function loadWebpackConfig() {
 }
 
 module.exports = function(config) {
+  let xarcOptPlugins;
+  try {
+    require.resolve("@xarc/opt-karma");
+    xarcOptPlugins = [
+      "@xarc/opt-karma/plugins/chrome-launcher",
+      "@xarc/opt-karma/plugins/coverage",
+      "@xarc/opt-karma/plugins/firefox-launcher",
+      "@xarc/opt-karma/plugins/ie-launcher",
+      "@xarc/opt-karma/plugins/intl-shim",
+      "@xarc/opt-karma/plugins/mocha",
+      "@xarc/opt-karma/plugins/mocha-reporter",
+      "@xarc/opt-karma/plugins/safari-launcher",
+      "@xarc/opt-karma/plugins/sonarqube-unit-reporter",
+      "@xarc/opt-karma/plugins/sourcemap-loader",
+      "@xarc/opt-karma/plugins/spec-reporter",
+      "@xarc/opt-karma/plugins/webpack"
+    ];
+  } catch {
+    console.error("ERROR: @xarc/opt-karma not found - running karma tests is not possible");
+    xarcOptPlugins = [];
+  }
   const settings = {
     basePath: process.cwd(),
     frameworks: ["mocha", "intl-shim"],
     files: DLL_PATHS.concat(MAIN_PATH),
-    plugins: [
-      "karma-chrome-launcher",
-      "karma-coverage",
-      "karma-firefox-launcher",
-      "karma-ie-launcher",
-      "karma-intl-shim",
-      "karma-mocha",
-      "karma-mocha-reporter",
-      "karma-phantomjs-shim",
-      "karma-phantomjs-launcher",
-      "karma-safari-launcher",
-      "karma-sonarqube-unit-reporter",
-      "karma-sourcemap-loader",
-      "karma-spec-reporter",
-      "karma-webpack"
-    ],
+    plugins: xarcOptPlugins,
     preprocessors: PREPROCESSORS,
     webpack: loadWebpackConfig(),
     webpackServer: {

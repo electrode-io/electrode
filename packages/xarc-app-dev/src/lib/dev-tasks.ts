@@ -15,7 +15,6 @@ const getArchetype = require("../config/archetype");
 const ck = require("chalker");
 const xaa = require("xaa");
 const { psChildren } = require("ps-get");
-const detectCssModule = require("@xarc/webpack/lib/util/detect-css-module");
 const optFlow = optionalRequire("electrode-archetype-opt-flow");
 const { getWebpackStartConfig, setWebpackProfile } = require("@xarc/webpack/lib/util/custom-check");
 const chokidar = require("chokidar");
@@ -1085,8 +1084,9 @@ You only need to run this if you are doing something not through the xarc tasks.
       });
     }
 
-    if (archetype.options.karma !== false && archetype.options.mocha !== false) {
+    if (archetype.options.karma) {
       const noSingleRun = process.argv.indexOf("--no-single-run") >= 0 ? "--no-single-run" : "";
+
       Object.assign(tasks, {
         ".karma.test-frontend": {
           desc: false,
@@ -1145,9 +1145,8 @@ You only need to run this if you are doing something not through the xarc tasks.
       });
     } else {
       const karmaTasksDisabled = () => {
-        logger.info(
-          "Disabling karma test tasks since archetype config options.karma === false or options.mocha === false"
-        );
+        logger.info(`Karma tests disabled because @xarc/opt-karma is not installed.
+      Please add it to your devDependencies to enable running karma tests`);
       };
       Object.assign(tasks, {
         ".karma.test-frontend": karmaTasksDisabled,
