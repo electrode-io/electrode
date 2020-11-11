@@ -1156,7 +1156,8 @@ You only need to run this if you are doing something not through the xarc tasks.
         ".karma.test-frontend-dev-watch": karmaTasksDisabled
       });
     }
-    if (archetype.options.jest !== false) {
+
+    if (archetype.options.jest) {
       Object.assign(tasks, {
         jest: {
           desc: "Run jest tests (--inspect-brk to start debugger)",
@@ -1205,10 +1206,11 @@ You only need to run this if you are doing something not through the xarc tasks.
         }
       });
     } else {
-      logger.info("Disabling jest test tasks since archetype config options.jest === false");
+      logger.info(`Disable running jest tests because @xarc/opt-jest is not installed.
+    Please add it to your devDependencies to enable running jest tests.`);
     }
 
-    if (archetype.options.mocha !== false) {
+    if (archetype.options.mocha) {
       Object.assign(tasks, {
         "test-server-cov": () => {
           if (shell.test("-d", "test/server")) {
@@ -1232,17 +1234,13 @@ You only need to run this if you are doing something not through the xarc tasks.
         }
       });
     } else {
+      const mochaTestDisabled = () => {
+        logger.info(`Running tests with mocha disabled because @xarc/opt-mocha is not installed
+    Please add it to your devDependencies to enable running tests with mocha`);
+      };
       Object.assign(tasks, {
-        "test-server-cov": () => {
-          logger.info(
-            "Disabling Mocha task 'test-server-cov', since archetype config options.mocha === false"
-          );
-        },
-        "test-server-dev": () => {
-          logger.info(
-            "Disabling Mocha task 'test-server-dev', since archetype config options.mocha === false"
-          );
-        }
+        "test-server-cov": mochaTestDisabled,
+        "test-server-dev": mochaTestDisabled
       });
     }
 

@@ -35,11 +35,10 @@ function loadWebpackConfig() {
   return {};
 }
 
-module.exports = function(config) {
-  let xarcOptPlugins;
+function getXarcOptPlugins() {
   try {
     require.resolve("@xarc/opt-karma");
-    xarcOptPlugins = [
+    return [
       "@xarc/opt-karma/plugins/chrome-launcher",
       "@xarc/opt-karma/plugins/coverage",
       "@xarc/opt-karma/plugins/firefox-launcher",
@@ -53,15 +52,44 @@ module.exports = function(config) {
       "@xarc/opt-karma/plugins/spec-reporter",
       "@xarc/opt-karma/plugins/webpack"
     ];
-  } catch {
+  } catch (err) {
+    return false;
+  }
+}
+
+function getArchetypeOptPlugins() {
+  try {
+    require.resolve("electrode-archetype-opt-karma");
+    return [
+      "karma-chrome-launcher",
+      "karma-coverage",
+      "karma-firefox-launcher",
+      "karma-ie-launcher",
+      "karma-intl-shim",
+      "karma-mocha",
+      "karma-mocha-reporter",
+      "karma-safari-launcher",
+      "karma-sonarqube-unit-reporter",
+      "karma-sourcemap-loader",
+      "karma-spec-reporter",
+      "karma-webpack"
+    ];
+  } catch (err) {
+    return false;
+  }
+}
+
+module.exports = function(config) {
+  let plugins = getXarcOptPlugins() || getArchetypeOptPlugins();
+  if (!plugins) {
     console.error("ERROR: @xarc/opt-karma not found - running karma tests is not possible");
-    xarcOptPlugins = [];
+    plugins = [];
   }
   const settings = {
     basePath: process.cwd(),
     frameworks: ["mocha", "intl-shim"],
     files: DLL_PATHS.concat(MAIN_PATH),
-    plugins: xarcOptPlugins,
+    plugins,
     preprocessors: PREPROCESSORS,
     webpack: loadWebpackConfig(),
     webpackServer: {
