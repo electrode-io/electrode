@@ -2715,6 +2715,23 @@
   dependencies:
    less: ^3.9.0
    less-loader: ^4.1.0
+'@xarc/opt-mocha':
+ _latest: 1.0.0-fynlocal_h
+ _:
+  ../../packages/xarc-opt-mocha: 1.0.0-fynlocal_h
+ 1.0.0-fynlocal_h:
+  top: 1
+  hasPI: 1
+  $: local
+  _: ../../packages/xarc-opt-mocha
+  dependencies:
+   '@types/mocha': 5.2.7
+   chai: ^4.0.0
+   chai-as-promised: ^7.1.1
+   chai-shallowly: ^1.0.0
+   enzyme: ^3.0.0
+   enzyme-adapter-react-16: ^1.1.0
+   mocha: ^4.0.0
 '@xarc/opt-postcss':
  _latest: 1.0.0-fynlocal_h
  _:
