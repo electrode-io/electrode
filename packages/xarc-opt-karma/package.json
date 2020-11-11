@@ -13,7 +13,8 @@
   },
   "files": [
     "xarc-opt-check.js",
-    "plugins"
+    "plugins",
+    "lib"
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
