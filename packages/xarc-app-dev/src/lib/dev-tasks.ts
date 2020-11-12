@@ -1206,8 +1206,12 @@ You only need to run this if you are doing something not through the xarc tasks.
         }
       });
     } else {
-      logger.info(`Disable running jest tests because @xarc/opt-jest is not installed.
+      Object.assign(tasks, {
+        jest: () => {
+          logger.info(`Running jest tests is not enabled because @xarc/opt-jest is not installed.
     Please add it to your devDependencies to enable running jest tests.`);
+        }
+      });
     }
 
     if (archetype.options.mocha) {
