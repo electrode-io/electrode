@@ -1021,7 +1021,7 @@ You only need to run this if you are doing something not through the xarc tasks.
       });
     }
 
-    if (archetype.options.eslint !== false) {
+    if (archetype.options.eslint) {
       Object.assign(tasks, {
         lint: xclap2.concurrent(
           "lint-client",
@@ -1067,20 +1067,14 @@ You only need to run this if you are doing something not through the xarc tasks.
         }
       });
     } else {
+      const lintDisabled = () => {
+        logger.info(`eslint tasks are disabled because @xarc/opt-eslint is not installed.
+        Please add it to your devDependencies to enable eslint.`);
+      };
       Object.assign(tasks, {
-        lint: () => {
-          logger.info("Disabling ESLint tasks since archetype config options.eslint === false");
-        },
-        "lint-server": () => {
-          logger.info(
-            "Disabling ESLint task 'lint-server' since archetype config options.eslint === false"
-          );
-        },
-        "lint-server-test": () => {
-          logger.info(
-            "Disabling ESLint task 'lint-server-test' since archetype config options.eslint === false"
-          );
-        }
+        lint: lintDisabled,
+        "lint-server": lintDisabled,
+        "lint-server-test": lintDisabled
       });
     }
 
