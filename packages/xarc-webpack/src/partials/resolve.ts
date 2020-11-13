@@ -4,7 +4,7 @@ import * as Path from "path";
 
 const ModuleResolver = require("electrode-node-resolver/lib/webpack-plugin");
 const identity = require("lodash/identity");
-import { loadXarcOptions } from "../util/load-xarc-options";
+import { loadXarcOptions } from "@xarc/app-dev/lib/utils";
 
 module.exports = () => {
   const xarcOptions = loadXarcOptions();

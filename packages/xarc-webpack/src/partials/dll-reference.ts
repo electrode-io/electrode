@@ -11,7 +11,7 @@ import * as fs from "fs";
 import * as Path from "path";
 import * as webpack from "webpack";
 const filterScanDir = require("filter-scan-dir");
-import { loadXarcOptions } from "../util/load-xarc-options";
+import { loadXarcOptions } from "@xarc/app-dev/lib/utils";
 const logger = require("@xarc/app-dev/lib/logger");
 
 module.exports = function(options) {

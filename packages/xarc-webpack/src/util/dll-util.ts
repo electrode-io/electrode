@@ -22,7 +22,7 @@ import * as _ from "lodash";
 import * as Path from "path";
 
 const logger = require("@xarc/app-dev/lib/logger");
-import { loadXarcOptions } from "../util/load-xarc-options";
+import { loadXarcOptions } from "@xarc/app-dev/lib/utils";
 const mkdirp = require("mkdirp");
 const { devServerBaseUrl } = require("../util/webpack-dev-url");
 const requireAt = require("require-at");

@@ -69,6 +69,24 @@ export function createGitIgnoreDir(dir, comment) {
   }
 }
 
+const regExpSig = "@xarc/__RegExp__@";
+
+export const jsonStringifier = (key, value) => {
+  if (value instanceof RegExp) {
+    return `${regExpSig}${value.toString()}`;
+  } else {
+    return value;
+  }
+};
+
+export const jsonParser = (key, value) => {
+  if (typeof value === "string" && value.startsWith(regExpSig)) {
+    return new RegExp(value.substr(regExpSig.length));
+  } else {
+    return value;
+  }
+};
+
 let cachedXarcOptions;
 
 export function loadXarcOptions(dir: string = process.cwd()) {
@@ -78,7 +96,7 @@ export function loadXarcOptions(dir: string = process.cwd()) {
   const filename = Path.join(dir, ".etmp/xarc-options.json");
   try {
     const data = Fs.readFileSync(filename, "utf-8");
-    return (cachedXarcOptions = JSON.parse(data));
+    return (cachedXarcOptions = JSON.parse(data, jsonParser));
   } catch (err) {
     // eslint-disable-next-line
     console.error(ck`
@@ -97,6 +115,36 @@ xarc's development code.
       babel: {},
       options: {}
     });
+  }
+}
+
+function createElectrodeTmpDir(eTmpDir = ".etmp") {
+  createGitIgnoreDir(Path.resolve(eTmpDir), "Electrode tmp dir");
+}
+
+export function saveXarcOptions(config) {
+  const filename = `${config.eTmpDir}/xarc-options.json`;
+  const copy = { ...config, pkg: undefined, devPkg: undefined };
+  let existStr;
+
+  try {
+    existStr = Fs.readFileSync(filename, "utf-8");
+  } catch (err) {
+    //
+  }
+
+  const str = JSON.stringify(copy, jsonStringifier, 2);
+  if (str !== existStr) {
+    try {
+      createElectrodeTmpDir(config.eTmpDir);
+
+      Fs.writeFileSync(filename, str);
+    } catch (err) {
+      console.error(
+        `Unable to save development options to ${filename} - this will cause other failures.\n`,
+        err
+      );
+    }
   }
 }
 

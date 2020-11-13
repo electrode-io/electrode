@@ -3,7 +3,7 @@
 import * as Url from "url";
 // const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpackDevReporter = require("../util/webpack-dev-reporter");
-import { loadXarcOptions } from "../util/load-xarc-options";
+import { loadXarcOptions } from "@xarc/app-dev/lib/utils";
 
 const HTTP_PORT = 80;
 

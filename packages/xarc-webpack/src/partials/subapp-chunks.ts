@@ -3,7 +3,7 @@
 /* eslint-disable global-require, no-magic-numbers */
 
 import * as Crypto from "crypto";
-import { loadXarcOptions } from "../util/load-xarc-options";
+import { loadXarcOptions } from "@xarc/app-dev/lib/utils";
 
 const splitMap = {};
 

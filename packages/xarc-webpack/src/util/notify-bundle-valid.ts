@@ -4,7 +4,7 @@
 
 import * as Fs from "fs";
 import * as Path from "path";
-import { loadXarcOptions } from "../util/load-xarc-options";
+import { loadXarcOptions } from "@xarc/app-dev/lib/utils";
 
 module.exports = function notifyBundleValid() {
   const archetype = loadXarcOptions();

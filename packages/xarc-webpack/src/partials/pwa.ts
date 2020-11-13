@@ -2,7 +2,7 @@
 
 import * as Path from "path";
 const requireAt = require("require-at");
-import { loadXarcOptions } from "../util/load-xarc-options";
+import { loadXarcOptions } from "@xarc/app-dev/lib/utils";
 
 const assign = require("lodash/assign");
 const fileLoader = require.resolve("file-loader");

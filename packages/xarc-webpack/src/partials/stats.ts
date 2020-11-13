@@ -8,7 +8,7 @@ import * as _ from "lodash";
 
 const mkdirp = require("mkdirp");
 const INDENT = 2;
-import { loadXarcOptions } from "../util/load-xarc-options";
+import { loadXarcOptions } from "@xarc/app-dev/lib/utils";
 
 module.exports = function(opts) {
   const xarcOptions = loadXarcOptions();

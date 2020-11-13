@@ -2,50 +2,11 @@
 
 import { XarcOptions } from "./opt2/xarc-options";
 import { getDevArchetypeLegacy } from "./options";
-import { createGitIgnoreDir } from "../lib/utils";
-const Fs = require("fs");
 const _ = require("lodash");
 const getEnvProxy = require("./env-proxy");
-const Path = require("path");
+import { saveXarcOptions } from "../lib/utils";
 
 let cachedArchetype = null;
-
-function createElectrodeTmpDir(eTmpDir = ".etmp") {
-  createGitIgnoreDir(Path.resolve(eTmpDir), "Electrode tmp dir");
-}
-
-function jsonStringifyReplacer(key, value) {
-  if (value instanceof RegExp) {
-    return value.toString();
-  }
-  return value;
-}
-
-function saveArchetypeConfig(config) {
-  const filename = `${config.eTmpDir}/xarc-options.json`;
-  const copy = { ...config, pkg: undefined, devPkg: undefined };
-  let existStr;
-
-  try {
-    existStr = Fs.readFileSync(filename, "utf-8");
-  } catch (err) {
-    //
-  }
-
-  const str = JSON.stringify(copy, jsonStringifyReplacer, 2);
-  if (str !== existStr) {
-    try {
-      createElectrodeTmpDir(config.eTmpDir);
-
-      Fs.writeFileSync(filename, str);
-    } catch (err) {
-      console.error(
-        `Unable to save development options to ${filename} - this will cause other failures.\n`,
-        err
-      );
-    }
-  }
-}
 
 /**
  * Get development options
@@ -82,7 +43,7 @@ module.exports = function getDevOptions(user: XarcOptions = {}) {
     addOnFeatures: undefined
   });
 
-  saveArchetypeConfig(legacy);
+  saveXarcOptions(legacy);
 
   cachedArchetype = legacy;
 

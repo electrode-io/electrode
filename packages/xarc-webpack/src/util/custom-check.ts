@@ -5,7 +5,7 @@
 import * as Fs from "fs";
 import * as Path from "path";
 
-import { loadXarcOptions } from "../util/load-xarc-options";
+import { loadXarcOptions } from "@xarc/app-dev/lib/utils";
 
 function useAppWebpackConfig() {
   return process.env.USE_APP_WEBPACK_CONFIG === "true";

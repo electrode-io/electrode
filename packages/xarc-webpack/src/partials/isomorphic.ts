@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 import { xAppRequire } from "@xarc/app";
-import { loadXarcOptions } from "../util/load-xarc-options";
+import { loadXarcOptions } from "@xarc/app-dev/lib/utils";
 
 module.exports = function(opts) {
   const xarcOptions = loadXarcOptions();

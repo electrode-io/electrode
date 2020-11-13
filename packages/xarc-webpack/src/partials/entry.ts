@@ -9,7 +9,7 @@ const optionalRequire = require("optional-require")(require);
 const chalk = require("chalk");
 const logger = require("@xarc/app-dev/lib/logger");
 const mkdirp = require("mkdirp");
-import { loadXarcOptions } from "../util/load-xarc-options";
+import { loadXarcOptions } from "@xarc/app-dev/lib/utils";
 
 const DEV_HMR_DIR = ".__dev_hmr";
 
