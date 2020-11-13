@@ -7,12 +7,60 @@ const loadUserConfig = require("./util/load-user-config");
 const browserSettings = require("./browser-settings");
 const loadElectrodeDll = require("./util/load-electrode-dll");
 
+function getXarcOptPlugins() {
+  try {
+    require.resolve("@xarc/opt-karma");
+    return [
+      "@xarc/opt-karma/plugins/chrome-launcher",
+      "@xarc/opt-karma/plugins/coverage",
+      "@xarc/opt-karma/plugins/firefox-launcher",
+      "@xarc/opt-karma/plugins/ie-launcher",
+      "@xarc/opt-karma/plugins/intl-shim",
+      "@xarc/opt-karma/plugins/mocha",
+      "@xarc/opt-karma/plugins/mocha-reporter",
+      "@xarc/opt-karma/plugins/safari-launcher",
+      "@xarc/opt-karma/plugins/sonarqube-unit-reporter",
+      "@xarc/opt-karma/plugins/sourcemap-loader",
+      "@xarc/opt-karma/plugins/spec-reporter",
+      "@xarc/opt-karma/plugins/webpack"
+    ];
+  } catch (err) {
+    return false;
+  }
+}
+
+function getArchetypeOptPlugins() {
+  try {
+    require.resolve("electrode-archetype-opt-karma");
+    return [
+      "karma-chrome-launcher",
+      "karma-coverage",
+      "karma-firefox-launcher",
+      "karma-ie-launcher",
+      "karma-intl-shim",
+      "karma-mocha",
+      "karma-mocha-reporter",
+      "karma-safari-launcher",
+      "karma-sonarqube-unit-reporter",
+      "karma-sourcemap-loader",
+      "karma-spec-reporter",
+      "karma-webpack"
+    ];
+  } catch (err) {
+    return false;
+  }
+}
+
 let MAIN_PATH;
 
 try {
   MAIN_PATH = require.resolve(Path.resolve("test/karma-entry"));
 } catch (err) {
-  MAIN_PATH = require.resolve("./entry.js");
+  if (getXarcOptPlugins()) {
+    MAIN_PATH = require.resolve("./entry-xarc.js");
+  } else {
+    MAIN_PATH = require.resolve("./entry.js");
+  }
 }
 
 console.log(`KARMA will use entry file ${MAIN_PATH}`);
@@ -36,26 +84,16 @@ function loadWebpackConfig() {
 }
 
 module.exports = function(config) {
+  let plugins = getXarcOptPlugins() || getArchetypeOptPlugins();
+  if (!plugins) {
+    console.error("ERROR: @xarc/opt-karma not found - running karma tests is not possible");
+    plugins = [];
+  }
   const settings = {
     basePath: process.cwd(),
     frameworks: ["mocha", "intl-shim"],
     files: DLL_PATHS.concat(MAIN_PATH),
-    plugins: [
-      "karma-chrome-launcher",
-      "karma-coverage",
-      "karma-firefox-launcher",
-      "karma-ie-launcher",
-      "karma-intl-shim",
-      "karma-mocha",
-      "karma-mocha-reporter",
-      "karma-phantomjs-shim",
-      "karma-phantomjs-launcher",
-      "karma-safari-launcher",
-      "karma-sonarqube-unit-reporter",
-      "karma-sourcemap-loader",
-      "karma-spec-reporter",
-      "karma-webpack"
-    ],
+    plugins,
     preprocessors: PREPROCESSORS,
     webpack: loadWebpackConfig(),
     webpackServer: {

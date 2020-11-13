@@ -62,11 +62,13 @@
   },
   "devDependencies": {
     "@xarc/app-dev": "^8.0.0",
+    "@xarc/opt-eslint": "../../packages/xarc-opt-eslint",
+    "@xarc/opt-karma": "../../packages/xarc-opt-karma",
     "@xarc/opt-less": "../../packages/xarc-opt-less",
+    "@xarc/opt-mocha": "../../packages/xarc-opt-mocha",
     "@xarc/opt-postcss": "^2.0.0",
-    "@xarc/opt-stylus": "../../packages/xarc-opt-stylus",
-    "@xarc/opt-jest": "^1.0.0",
     "@xarc/opt-sass": "../../packages/xarc-opt-sass",
+    "@xarc/opt-stylus": "../../packages/xarc-opt-stylus",
     "webpack-hook-plugin": "^1.0.7"
   },
   "fyn": {
@@ -81,9 +83,11 @@
     },
     "devDependencies": {
       "@xarc/app-dev": "../../packages/xarc-app-dev",
+      "@xarc/opt-eslint": "../../packages/xarc-opt-eslint",
+      "@xarc/opt-karma": "../../packages/xarc-opt-karma",
+      "@xarc/opt-mocha": "../../packages/xarc-opt-mocha",
       "@xarc/opt-postcss": "../../packages/xarc-opt-postcss",
-      "@xarc/opt-stylus": "../../packages/xarc-opt-stylus",
-      "@xarc/opt-jest": "../../packages/xarc-opt-jest"
+      "@xarc/opt-stylus": "../../packages/xarc-opt-stylus"
     }
   },
   "optionalDependencies": {}

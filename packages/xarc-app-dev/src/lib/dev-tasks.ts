@@ -15,7 +15,6 @@ const getArchetype = require("../config/archetype");
 const ck = require("chalker");
 const xaa = require("xaa");
 const { psChildren } = require("ps-get");
-const detectCssModule = require("@xarc/webpack/lib/util/detect-css-module");
 const optFlow = optionalRequire("electrode-archetype-opt-flow");
 const { getWebpackStartConfig, setWebpackProfile } = require("@xarc/webpack/lib/util/custom-check");
 const chokidar = require("chokidar");
@@ -1022,7 +1021,7 @@ You only need to run this if you are doing something not through the xarc tasks.
       });
     }
 
-    if (archetype.options.eslint !== false) {
+    if (archetype.options.eslint) {
       Object.assign(tasks, {
         lint: xclap2.concurrent(
           "lint-client",
@@ -1068,25 +1067,20 @@ You only need to run this if you are doing something not through the xarc tasks.
         }
       });
     } else {
+      const lintDisabled = () => {
+        logger.info(`eslint tasks are disabled because @xarc/opt-eslint is not installed.
+        Please add it to your devDependencies to enable eslint.`);
+      };
       Object.assign(tasks, {
-        lint: () => {
-          logger.info("Disabling ESLint tasks since archetype config options.eslint === false");
-        },
-        "lint-server": () => {
-          logger.info(
-            "Disabling ESLint task 'lint-server' since archetype config options.eslint === false"
-          );
-        },
-        "lint-server-test": () => {
-          logger.info(
-            "Disabling ESLint task 'lint-server-test' since archetype config options.eslint === false"
-          );
-        }
+        lint: lintDisabled,
+        "lint-server": lintDisabled,
+        "lint-server-test": lintDisabled
       });
     }
 
-    if (archetype.options.karma !== false && archetype.options.mocha !== false) {
+    if (archetype.options.karma) {
       const noSingleRun = process.argv.indexOf("--no-single-run") >= 0 ? "--no-single-run" : "";
+
       Object.assign(tasks, {
         ".karma.test-frontend": {
           desc: false,
@@ -1145,9 +1139,8 @@ You only need to run this if you are doing something not through the xarc tasks.
       });
     } else {
       const karmaTasksDisabled = () => {
-        logger.info(
-          "Disabling karma test tasks since archetype config options.karma === false or options.mocha === false"
-        );
+        logger.info(`Karma tests disabled because @xarc/opt-karma is not installed.
+      Please add it to your devDependencies to enable running karma tests`);
       };
       Object.assign(tasks, {
         ".karma.test-frontend": karmaTasksDisabled,
@@ -1157,7 +1150,8 @@ You only need to run this if you are doing something not through the xarc tasks.
         ".karma.test-frontend-dev-watch": karmaTasksDisabled
       });
     }
-    if (archetype.options.jest !== false) {
+
+    if (archetype.options.jest) {
       Object.assign(tasks, {
         jest: {
           desc: "Run jest tests (--inspect-brk to start debugger)",
@@ -1206,10 +1200,15 @@ You only need to run this if you are doing something not through the xarc tasks.
         }
       });
     } else {
-      logger.info("Disabling jest test tasks since archetype config options.jest === false");
+      Object.assign(tasks, {
+        jest: () => {
+          logger.info(`Running jest tests is not enabled because @xarc/opt-jest is not installed.
+    Please add it to your devDependencies to enable running jest tests.`);
+        }
+      });
     }
 
-    if (archetype.options.mocha !== false) {
+    if (archetype.options.mocha) {
       Object.assign(tasks, {
         "test-server-cov": () => {
           if (shell.test("-d", "test/server")) {
@@ -1233,17 +1232,13 @@ You only need to run this if you are doing something not through the xarc tasks.
         }
       });
     } else {
+      const mochaTestDisabled = () => {
+        logger.info(`Running tests with mocha disabled because @xarc/opt-mocha is not installed
+    Please add it to your devDependencies to enable running tests with mocha`);
+      };
       Object.assign(tasks, {
-        "test-server-cov": () => {
-          logger.info(
-            "Disabling Mocha task 'test-server-cov', since archetype config options.mocha === false"
-          );
-        },
-        "test-server-dev": () => {
-          logger.info(
-            "Disabling Mocha task 'test-server-dev', since archetype config options.mocha === false"
-          );
-        }
+        "test-server-cov": mochaTestDisabled,
+        "test-server-dev": mochaTestDisabled
       });
     }
 
