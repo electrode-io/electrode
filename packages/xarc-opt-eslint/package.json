@@ -49,5 +49,10 @@
       "@xarc/opt-eslint",
       "electrode-archetype-opt-eslint"
     ]
+  },
+  "fyn": {
+    "devDependencies": {
+      "opt-archetype-check": "../opt-archetype-check"
+    }
   }
 }

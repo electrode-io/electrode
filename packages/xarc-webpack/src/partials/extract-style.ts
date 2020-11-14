@@ -142,19 +142,13 @@ module.exports = function() {
     {
       _name: `extract-css`,
       test: /\.css$/,
-      use: [
-        miniCssExtractLoader(false),
-        ...getCssQueryUse(false)
-      ],
-      ...(enableCssModule && { exclude: cssModuleRegExp }),
+      use: [miniCssExtractLoader(false), ...getCssQueryUse(false)],
+      ...(enableCssModule && { exclude: cssModuleRegExp })
     },
     enableCssModule && {
       _name: `extract-css-modules`,
       test: /\.css$/,
-      use: [
-        miniCssExtractLoader(true),
-        ...getCssQueryUse(true)
-      ],
+      use: [miniCssExtractLoader(true), ...getCssQueryUse(true)],
       include: cssModuleRegExp
     }
   );
@@ -172,7 +166,7 @@ module.exports = function() {
           miniCssExtractLoader(false),
           ...getCssQueryUse(false).concat({ loader: sassLoader } as any)
         ],
-        ...(enableCssModule && { exclude: cssModuleRegExp }),
+        ...(enableCssModule && { exclude: cssModuleRegExp })
       },
       enableCssModule && {
         _name: `extract-css-modules-scss`,
@@ -198,7 +192,7 @@ module.exports = function() {
         _name: `extract-css-stylus`,
         test: /\.styl$/,
         use: [miniCssExtractLoader(false), ...getCssQueryUse(false).concat(stylusQuery)],
-        ...(enableCssModule && { exclude: cssModuleRegExp }),
+        ...(enableCssModule && { exclude: cssModuleRegExp })
       },
       enableCssModule && {
         _name: `extract-css-modules-stylus`,
@@ -221,7 +215,7 @@ module.exports = function() {
           miniCssExtractLoader(false),
           ...getCssQueryUse(false).concat({ loader: lessLoader } as any)
         ],
-        ...(enableCssModule && { exclude: cssModuleRegExp }),
+        ...(enableCssModule && { exclude: cssModuleRegExp })
       },
       enableCssModule && {
         _name: `extract-css-modules-less`,

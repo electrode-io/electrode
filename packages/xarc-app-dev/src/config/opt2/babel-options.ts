@@ -61,6 +61,22 @@ export type BabelOptions = {
    */
   transformClassProps?: boolean | { loose: boolean };
 
+  /**
+   * List of RegExp to match files that should be included for transpiling.
+   *
+   * By default, files under node_modules are not transpiled.
+   *
+   * You can set this to control that.  ie: to compile everything under node_modules, use `[/node_modules/]`
+   */
+  includeRegExp?: RegExp[];
+
+  /**
+   * List of RegExp to match files that should not be transpiled by babel.
+   *
+   * This is checked after includeRegExp
+   */
+  excludeRegExp?: RegExp[];
+
   // DEPRECATE: looseClassProps?: boolean;
 
   // DEPRECATE:

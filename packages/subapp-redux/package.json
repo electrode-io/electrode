@@ -82,6 +82,9 @@
     "dependencies": {
       "subapp-util": "../subapp-util",
       "subapp-web": "../subapp-web"
+    },
+    "devDependencies": {
+      "subapp-pkg-util": "../subapp-pkg-util"
     }
   }
 }

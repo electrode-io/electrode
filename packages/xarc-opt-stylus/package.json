@@ -45,5 +45,10 @@
       "@xarc/opt-stylus",
       "electrode-archetype-opt-stylus"
     ]
+  },
+  "fyn": {
+    "devDependencies": {
+      "opt-archetype-check": "../opt-archetype-check"
+    }
   }
 }

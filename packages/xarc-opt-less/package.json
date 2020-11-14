@@ -45,5 +45,10 @@
       "@xarc/opt-less",
       "electrode-archetype-opt-less"
     ]
+  },
+  "fyn": {
+    "devDependencies": {
+      "opt-archetype-check": "../opt-archetype-check"
+    }
   }
 }

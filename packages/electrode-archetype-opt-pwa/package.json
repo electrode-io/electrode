@@ -43,5 +43,10 @@
     "expectTag": true,
     "devOnly": true,
     "defaultInstall": false
+  },
+  "fyn": {
+    "devDependencies": {
+      "opt-archetype-check": "../opt-archetype-check"
+    }
   }
 }

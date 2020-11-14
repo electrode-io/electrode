@@ -54,5 +54,10 @@
     "functions": 85,
     "lines": 79,
     "cache": true
+  },
+  "fyn": {
+    "dependencies": {
+      "webpack-config-composer": "../webpack-config-composer"
+    }
   }
 }

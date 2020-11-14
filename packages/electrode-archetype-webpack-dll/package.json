@@ -39,5 +39,10 @@
     "functions": 45,
     "lines": 66,
     "cache": true
+  },
+  "fyn": {
+    "devDependencies": {
+      "electrode-archetype-webpack-dll-dev": "../electrode-archetype-webpack-dll-dev"
+    }
   }
 }

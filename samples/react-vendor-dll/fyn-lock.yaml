@@ -3956,12 +3956,12 @@ webpack-cli:
   peerDependencies:
    webpack: 4.x.x
 webpack-config-composer:
- _latest: 1.1.3
+ _latest: 1.1.3-fynlocal_h
  _:
-  ^1.1.2: 1.1.3
- 1.1.3:
-  $: sha512-JVAkVLseFFZX4Hg6X3sNbFOClyhkBeHnOUcZlA/OMKX34XNcGyDsgVRKylZmlvMG1LeGT1ToSoL9rg08+q/zWw==
-  _: 'https://registry.npmjs.org/webpack-config-composer/-/webpack-config-composer-1.1.3.tgz'
+  ../webpack-config-composer: 1.1.3-fynlocal_h
+ 1.1.3-fynlocal_h:
+  $: local
+  _: ../../packages/webpack-config-composer
   dependencies:
    lodash: ^4.13.1
 webpack-sources:

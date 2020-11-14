@@ -50,5 +50,10 @@
       "@xarc/opt-postcss",
       "electrode-archetype-opt-postcss"
     ]
+  },
+  "fyn": {
+    "devDependencies": {
+      "opt-archetype-check": "../opt-archetype-check"
+    }
   }
 }
