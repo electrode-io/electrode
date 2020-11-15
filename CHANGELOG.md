@@ -1,5 +1,9 @@
 # 11/15/2020
 
+- fix tasks to run only if their dependent opt packages are installed
+- css module rework
+- [fix] allow transpiling code under node_modules
+
 ## Packages
 
 - `@xarc/app@8.1.24` `(8.1.23 => 8.1.24)`

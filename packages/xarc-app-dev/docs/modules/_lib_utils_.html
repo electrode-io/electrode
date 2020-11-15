@@ -79,9 +79,13 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_lib_utils_.html#checkuserbabelrc" class="tsd-kind-icon">check<wbr>User<wbr>Babel<wbr>Rc</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_lib_utils_.html#creategitignoredir" class="tsd-kind-icon">create<wbr>Git<wbr>Ignore<wbr>Dir</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_lib_utils_.html#detectcssmodule" class="tsd-kind-icon">detectCSSModule</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_lib_utils_.html#formurl" class="tsd-kind-icon">form<wbr>Url</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_lib_utils_.html#getmypkg" class="tsd-kind-icon">get<wbr>MyPkg</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_lib_utils_.html#jsonparser" class="tsd-kind-icon">json<wbr>Parser</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_lib_utils_.html#jsonstringifier" class="tsd-kind-icon">json<wbr>Stringifier</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_lib_utils_.html#loadxarcoptions" class="tsd-kind-icon">load<wbr>Xarc<wbr>Options</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_lib_utils_.html#savexarcoptions" class="tsd-kind-icon">save<wbr>Xarc<wbr>Options</a></li>
 							</ul>
 						</section>
 					</div>
@@ -95,7 +99,7 @@
 					<div class="tsd-signature tsd-kind-icon">get<wbr>Opt<wbr>Archetype<wbr>Require<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = require(&quot;@xarc/webpack/lib/util/get-opt-require&quot;)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/1a26696f/packages/xarc-app-dev/src/lib/utils.ts#L13">src/lib/utils.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/773d9f97/packages/xarc-app-dev/src/lib/utils.ts#L14">src/lib/utils.ts:14</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -112,7 +116,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/1a26696f/packages/xarc-app-dev/src/lib/utils.ts#L26">src/lib/utils.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/773d9f97/packages/xarc-app-dev/src/lib/utils.ts#L27">src/lib/utils.ts:27</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"extendsOnly"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"custom"</span></h4>
@@ -129,7 +133,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/1a26696f/packages/xarc-app-dev/src/lib/utils.ts#L56">src/lib/utils.ts:56</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/773d9f97/packages/xarc-app-dev/src/lib/utils.ts#L57">src/lib/utils.ts:57</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -146,6 +150,29 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="detectcssmodule" class="tsd-anchor"></a>
+					<h3>detectCSSModule</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">detectCSSModule<span class="tsd-signature-symbol">(</span>xOptions<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/773d9f97/packages/xarc-app-dev/src/lib/utils.ts#L152">src/lib/utils.ts:152</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>xOptions: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="formurl" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> form<wbr>Url</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
@@ -155,7 +182,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/1a26696f/packages/xarc-app-dev/src/lib/utils.ts#L15">src/lib/utils.ts:15</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/773d9f97/packages/xarc-app-dev/src/lib/utils.ts#L16">src/lib/utils.ts:16</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -192,7 +219,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/1a26696f/packages/xarc-app-dev/src/lib/utils.ts#L47">src/lib/utils.ts:47</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/773d9f97/packages/xarc-app-dev/src/lib/utils.ts#L48">src/lib/utils.ts:48</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>myDir<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>myPkg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></h4>
@@ -208,6 +235,58 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="jsonparser" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> json<wbr>Parser</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">json<wbr>Parser<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/773d9f97/packages/xarc-app-dev/src/lib/utils.ts#L82">src/lib/utils.ts:82</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>value: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="jsonstringifier" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> json<wbr>Stringifier</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">json<wbr>Stringifier<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/773d9f97/packages/xarc-app-dev/src/lib/utils.ts#L74">src/lib/utils.ts:74</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>value: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="loadxarcoptions" class="tsd-anchor"></a>
 					<h3>load<wbr>Xarc<wbr>Options</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
@@ -217,7 +296,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/1a26696f/packages/xarc-app-dev/src/lib/utils.ts#L73">src/lib/utils.ts:73</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/773d9f97/packages/xarc-app-dev/src/lib/utils.ts#L93">src/lib/utils.ts:93</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -227,6 +306,29 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="savexarcoptions" class="tsd-anchor"></a>
+					<h3>save<wbr>Xarc<wbr>Options</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">save<wbr>Xarc<wbr>Options<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/773d9f97/packages/xarc-app-dev/src/lib/utils.ts#L126">src/lib/utils.ts:126</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>config: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -255,13 +357,25 @@
 						<a href="_lib_utils_.html#creategitignoredir" class="tsd-kind-icon">create<wbr>Git<wbr>Ignore<wbr>Dir</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="_lib_utils_.html#detectcssmodule" class="tsd-kind-icon">detectCSSModule</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="_lib_utils_.html#formurl" class="tsd-kind-icon">form<wbr>Url</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="_lib_utils_.html#getmypkg" class="tsd-kind-icon">get<wbr>MyPkg</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="_lib_utils_.html#jsonparser" class="tsd-kind-icon">json<wbr>Parser</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="_lib_utils_.html#jsonstringifier" class="tsd-kind-icon">json<wbr>Stringifier</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="_lib_utils_.html#loadxarcoptions" class="tsd-kind-icon">load<wbr>Xarc<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="_lib_utils_.html#savexarcoptions" class="tsd-kind-icon">save<wbr>Xarc<wbr>Options</a>
 					</li>
 				</ul>
 			</nav>
