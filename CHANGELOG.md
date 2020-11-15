@@ -1,3 +1,24 @@
+# 11/15/2020
+
+## Packages
+
+- `@xarc/app@8.1.24` `(8.1.23 => 8.1.24)`
+- `@xarc/app-dev@8.1.24` `(8.1.23 => 8.1.24)`
+- `@xarc/webpack@9.0.4` `(9.0.3 => 9.0.4)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - fix tasks to run only if their dependent opt packages are installed ([#1753](https://github.com/electrode-io/electrode/pull/1753)) [commit](http://github.com/electrode-io/electrode/commit/e95886db2db5858fba83718920ad0cf9f4d092e8)
+  - css module rework ([#1751](https://github.com/electrode-io/electrode/pull/1751)) [commit](http://github.com/electrode-io/electrode/commit/cd6c681814b5e9016da9b5838c5d43afc6f0053b)
+  - [fix] allow transpiling code under node_modules ([#1754](https://github.com/electrode-io/electrode/pull/1754)) [commit](http://github.com/electrode-io/electrode/commit/773d9f97627df9451ff86aa138454acd440c3419)
+
+- `packages/xarc-webpack`
+
+  - css module rework ([#1751](https://github.com/electrode-io/electrode/pull/1751)) [commit](http://github.com/electrode-io/electrode/commit/cd6c681814b5e9016da9b5838c5d43afc6f0053b)
+  - [fix] allow transpiling code under node_modules ([#1754](https://github.com/electrode-io/electrode/pull/1754)) [commit](http://github.com/electrode-io/electrode/commit/773d9f97627df9451ff86aa138454acd440c3419)
+
 # 10/30/2020
 
 - [fix] support load argument should be optional
