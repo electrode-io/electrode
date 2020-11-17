@@ -4,7 +4,7 @@ import { XarcOptions } from "./opt2/xarc-options";
 import { getDevArchetypeLegacy } from "./options";
 const _ = require("lodash");
 const getEnvProxy = require("./env-proxy");
-import { saveXarcOptions } from "../lib/utils";
+import { saveXarcOptions, loadXarcOptions } from "../lib/utils";
 
 let cachedArchetype = null;
 
@@ -23,7 +23,9 @@ module.exports = function getDevOptions(user: XarcOptions = {}) {
 
   // first get legacy configs
   const legacy = getDevArchetypeLegacy();
-
+  // try to read xarc-options.json if it exist and merge it into legacy
+  const xarcOptions = loadXarcOptions();
+  user = _.merge({}, xarcOptions, user);
   const proxy = getEnvProxy();
 
   // proxy config was not set in legacy, so add to top level here
