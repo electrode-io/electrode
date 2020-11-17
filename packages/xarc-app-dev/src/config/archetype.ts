@@ -25,6 +25,7 @@ module.exports = function getDevOptions(user: XarcOptions = {}) {
   const legacy = getDevArchetypeLegacy();
   // try to read xarc-options.json if it exist and merge it into legacy
   const xarcOptions = loadXarcOptions();
+  user = _.merge({}, user, xarcOptions);
   const proxy = getEnvProxy();
 
   // proxy config was not set in legacy, so add to top level here
@@ -44,23 +45,9 @@ module.exports = function getDevOptions(user: XarcOptions = {}) {
     addOnFeatures: undefined
   });
 
-  //if xarcOptions are available then merge it
-  if (!_.isNil(xarcOptions)) {
-    // merge user.webpackOptions into legacy.webpack
-    _.merge(legacy.webpack, xarcOptions.webpack);
-    // merge user.babelOptions into legacy.babel
-    _.merge(legacy.babel, xarcOptions.babel);
-    // merge user.addOnFeatures into legacy.options
-    _.merge(legacy.options, xarcOptions.options);
-    // merge the rest into top level
-    _.merge(legacy, {
-      ...xarcOptions,
-      webpackOptions: undefined,
-      babelOptions: undefined,
-      addOnFeatures: undefined
-    });
-  }
   saveXarcOptions(legacy);
+
   cachedArchetype = legacy;
+
   return cachedArchetype;
 };
