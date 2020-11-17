@@ -15,6 +15,7 @@ let cachedArchetype = null;
  * @returns options - final options with defaults and env applied
  */
 module.exports = function getDevOptions(user: XarcOptions = {}) {
+  
   if (cachedArchetype) {
     cachedArchetype._fromCache = true;
     // maintained for backwards compatibility
@@ -29,7 +30,7 @@ module.exports = function getDevOptions(user: XarcOptions = {}) {
 
   // proxy config was not set in legacy, so add to top level here
   _.merge(legacy, proxy);
-  
+
   // merge user.webpackOptions into legacy.webpack
   _.merge(legacy.webpack, user.webpackOptions);
   // merge user.babelOptions into legacy.babel
