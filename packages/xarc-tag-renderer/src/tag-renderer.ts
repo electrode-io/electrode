@@ -91,6 +91,9 @@ export class TagRenderer {
    * @returns render context
    */
   async render(options) {
+    if (!this._processor) {
+      this.initializeRenderer();
+    }
     let context;
     try {
       context = new RenderContext(options, this);
@@ -132,14 +135,6 @@ export class TagRenderer {
     this._handlersMap[uniqSym] = handler;
     this.addTokenIds(name, handler, priority);
     this._initializeTokenHandlers(this._tokenHandlers);
-  }
-
-  _applyTokenLoad(options) {
-    this._tokens.forEach(tokenModule => {
-      if (tokenModule.load) {
-        tokenModule.load(options);
-      }
-    });
   }
 
   _initializeTokenHandlers(handlers) {
