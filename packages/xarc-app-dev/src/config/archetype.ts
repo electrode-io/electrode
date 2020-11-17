@@ -29,7 +29,7 @@ module.exports = function getDevOptions(user: XarcOptions = {}) {
 
   // proxy config was not set in legacy, so add to top level here
   _.merge(legacy, proxy);
-
+  
   // merge user.webpackOptions into legacy.webpack
   _.merge(legacy.webpack, user.webpackOptions);
   // merge user.babelOptions into legacy.babel
@@ -43,6 +43,7 @@ module.exports = function getDevOptions(user: XarcOptions = {}) {
     babelOptions: undefined,
     addOnFeatures: undefined,
   });
+
   //if xarcOptions are available then merge it
   if(!_.isNil(xarcOptions)){
      // merge user.webpackOptions into legacy.webpack
@@ -60,17 +61,7 @@ module.exports = function getDevOptions(user: XarcOptions = {}) {
   });
   
   }
-
-  //Added XARC CMD option
-  if(!_.isNil(user) && !_.isNil(user.XARC_CWD)){
-    legacy.options.XARC_CWD = user.XARC_CWD;
-  }
-  
-  console.log(`legacy.options.xarc_cwd ${JSON.stringify(legacy.options.XARC_CWD)}`);
-
   saveXarcOptions(legacy);
-
   cachedArchetype = legacy;
-
   return cachedArchetype;
 };
