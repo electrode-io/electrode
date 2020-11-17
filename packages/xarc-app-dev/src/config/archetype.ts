@@ -15,7 +15,6 @@ let cachedArchetype = null;
  * @returns options - final options with defaults and env applied
  */
 module.exports = function getDevOptions(user: XarcOptions = {}) {
-  
   if (cachedArchetype) {
     cachedArchetype._fromCache = true;
     // maintained for backwards compatibility
@@ -42,25 +41,24 @@ module.exports = function getDevOptions(user: XarcOptions = {}) {
     ...user,
     webpackOptions: undefined,
     babelOptions: undefined,
-    addOnFeatures: undefined,
+    addOnFeatures: undefined
   });
 
   //if xarcOptions are available then merge it
-  if(!_.isNil(xarcOptions)){
-     // merge user.webpackOptions into legacy.webpack
-  _.merge(legacy.webpack, xarcOptions.webpack);
-  // merge user.babelOptions into legacy.babel
-  _.merge(legacy.babel, xarcOptions.babel);
-  // merge user.addOnFeatures into legacy.options
-  _.merge(legacy.options, xarcOptions.options);
-  // merge the rest into top level
-  _.merge(legacy, {
-    ...xarcOptions,
-    webpackOptions: undefined,
-    babelOptions: undefined,
-    addOnFeatures: undefined,
-  });
-  
+  if (!_.isNil(xarcOptions)) {
+    // merge user.webpackOptions into legacy.webpack
+    _.merge(legacy.webpack, xarcOptions.webpack);
+    // merge user.babelOptions into legacy.babel
+    _.merge(legacy.babel, xarcOptions.babel);
+    // merge user.addOnFeatures into legacy.options
+    _.merge(legacy.options, xarcOptions.options);
+    // merge the rest into top level
+    _.merge(legacy, {
+      ...xarcOptions,
+      webpackOptions: undefined,
+      babelOptions: undefined,
+      addOnFeatures: undefined
+    });
   }
   saveXarcOptions(legacy);
   cachedArchetype = legacy;
