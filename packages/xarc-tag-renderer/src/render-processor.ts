@@ -2,7 +2,7 @@
 
 import { executeTagTemplate, executeSteps } from "./render-execute";
 import { TAG_TYPE } from "./symbols";
-import { TagTemplate } from "./tag-template";
+import { createTemplateTagsFromArray, TagTemplate } from "./tag-template";
 import { RenderContext } from "@xarc/render-context";
 import { TagRenderer } from "./tag-renderer";
 
@@ -111,8 +111,9 @@ export class RenderProcessor {
     } else if (tk[TAG_TYPE] === "register-token-ids") {
       tk({ asyncTemplate: options.asyncTemplate });
       opCode = null;
-    } else if (tk[TAG_TYPE] === "template") {
-      const template = new TagTemplate({ templateTags: tk, processor: this });
+    } else if (tk[TAG_TYPE] === "template" || Array.isArray(tk)) {
+      const tt = tk[TAG_TYPE] === "template" ? tk : createTemplateTagsFromArray(tk);
+      const template = new TagTemplate({ templateTags: tt, processor: this });
       this.applyTokenModuleLoad({ insertTokenIds: this._options.insertTokenIds }, template);
       opCode = {
         tk,

@@ -90,6 +90,7 @@ export function renderNext(err: Error, xt: any) {
         );
       case STEP_FUNC_HANDLER: {
         const result = tk(context);
+        // in case the function handler returned a sub template
         return handleSubTemplate("", step, result, xt, (e: Error) => renderNext(e, xt));
       }
       case STEP_HANDLER: {
@@ -97,6 +98,7 @@ export function renderNext(err: Error, xt: any) {
           insertTokenId(tk);
         }
         const result = tk[TOKEN_HANDLER](context, tk);
+        // in case the handler returned a sub template
         return handleSubTemplate(tk.id, step, result, xt, (e: Error) => {
           if (withId) {
             insertTokenIdEnd(tk);
