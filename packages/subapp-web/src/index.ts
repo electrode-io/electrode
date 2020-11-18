@@ -1,6 +1,7 @@
 import { createBrowserHistory } from "history";
 import makeSubAppSpec from "./make-subapp-spec";
 import xarc from "./xarc";
+// const xarc = require("./xarc");
 
 export { default as makeSubAppSpec } from "./make-subapp-spec";
 
@@ -48,12 +49,14 @@ export function loadSubApp(info, renderStart, options) {
     if (!id) {
       id = options._genId;
     } else {
+      // @ts-ignore
       element = document.getElementById(id);
     }
 
     let instance = subApp._started.find(x => x.id === id);
 
     if (!instance) {
+      // @ts-ignore
       instance = Object.assign({}, options, { id, element });
       subApp._started.push(instance);
     } else if (instance.element !== element) {
@@ -152,6 +155,7 @@ for subapp ${subApp.info.name}`);
       }
     }
 
+    // @ts-ignore
     return subApp.start(found.instance, Object.assign({}, found.options, { props }), found.info);
   };
 
@@ -168,6 +172,7 @@ export function getSubAppComponent({ name, timeout = 15000, onReady, onError, fa
 }
 
 export function waitForSubApp(name, timeout = 15000) {
+  // @ts-ignore
   return new Promise((resolve, reject) => {
     lazyLoadSubApp({
       name,
@@ -182,7 +187,7 @@ export function isLoaded(name) {
   return Boolean(xarc.getSubApp(name));
 }
 
-export function lazyLoadSubApp({ name, id, timeout = 15000, onLoad, onError, fallback }) {
+export function lazyLoadSubApp({ name, id, timeout = 15000, onLoad, onError, fallback }: any) {
   // TODO: timeout and callback
   const lname = name.toLowerCase();
 
@@ -190,6 +195,7 @@ export function lazyLoadSubApp({ name, id, timeout = 15000, onLoad, onError, fal
     if (!id) {
       return onLoad && onLoad();
     } else {
+      // @ts-ignore
       const element = document.getElementById(id);
       if (element && subApp.start) {
         return subApp.start(instance, { id });

@@ -1,7 +1,9 @@
 "use strict";
 
-const Path = require("path");
-const Fs = require("fs");
+import * as Fs from "fs";
+import * as Path from "path";
+import { expect } from "chai";
+import utils from "../../libsrc/util";
 
 const {
   resetCdn,
@@ -13,7 +15,7 @@ const {
   getCdnJsBundles,
   getFramework,
   setupFramework
-} = require("../../lib/util");
+} = utils;
 
 describe("loadAssetsFromStats", () => {
   it("should load assets", () => {
@@ -33,7 +35,9 @@ describe("loadAssetsFromStats", () => {
 });
 
 describe("getChunksById", function () {
+  // @ts-ignore
   const prodStats = JSON.parse(Fs.readFileSync(Path.join(__dirname, "../data/prod-stats.json")));
+  // @ts-ignore
   const devStats = JSON.parse(Fs.readFileSync(Path.join(__dirname, "../data/dev-stats.json")));
 
   it("should handle production stats", () => {

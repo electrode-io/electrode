@@ -1,10 +1,11 @@
-"use strict";
+import { expect } from "chai";
+import { start as startToken } from "../../libsrc";
 
-const startToken = require("../../lib/start");
+const props = { concurrency: 0 };
 
 describe("start", function() {
   it("should return subapp start HTML", () => {
-    expect(startToken().process({ user: {} }, { props: {} })).contains("subapp start");
+    expect(startToken().process({ user: {} }, { props })).contains("subapp start");
   });
 
   it("should call saveSSRInfo on independent group", async () => {
@@ -20,7 +21,7 @@ describe("start", function() {
         }]
       }
     };
-    startToken().process({ user: { xarcSubappSSR } }, { props: {} });
+    startToken().process({ user: { xarcSubappSSR } }, { props });
     return new Promise((accept) => {
       setTimeout(() => {
         expect(called).to.equal(true);
@@ -42,7 +43,7 @@ describe("start", function() {
         }]
       }
     };
-    startToken().process({ user: { xarcSubappSSR } }, { props: {} });
+    startToken().process({ user: { xarcSubappSSR } }, { props });
     return new Promise((accept) => {
       setTimeout(() => {
         expect(called).to.equal(true);
@@ -64,7 +65,7 @@ describe("start", function() {
         }]
       }
     };
-    startToken().process({ user: { xarcSubappSSR } }, { props: {} });
+    startToken().process({ user: { xarcSubappSSR } }, { props });
     return new Promise((accept) => {
       setTimeout(() => {
         expect(called).to.equal(true);
@@ -88,7 +89,7 @@ describe("start", function() {
         }]
       }
     };
-    startToken().process({ user: { xarcSubappSSR } }, { props: {} });
+    startToken().process({ user: { xarcSubappSSR } }, { props });
     return new Promise((accept) => {
       setTimeout(() => {
         expect(called).to.equal(true);

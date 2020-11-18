@@ -1,13 +1,11 @@
-"use strict";
 
 const DEFAULT_CONCURRENCY = 15;
-const xaa = require("xaa");
-
+import * as xaa from "xaa";
 /*
  * subapp start for SSR
  * Nothing needs to be done to start subapp for SSR
  */
-module.exports = function setup() {
+export function setup() {
   return {
     process: (context, { props: { concurrency } }) => {
       const { xarcSubappSSR, xarcSSREmitter } = context.user;
@@ -47,7 +45,7 @@ module.exports = function setup() {
 
       /*
        */
-      const runSSR = async ({ lib, renderSSR }, mapCtx) => {
+      const runSSR = async ({ lib, renderSSR }: any, mapCtx: any) => {
         mapCtx.assertNoFailure();
 
         if (lib && lib.realizeReduxStore) {
@@ -75,6 +73,7 @@ module.exports = function setup() {
           )
           .catch(err => {
             context.voidStop(err);
+            // @ts-ignore
             xaa.map(xarcSubappSSR._.queue, async info => info.done(), { concurrency });
           });
         if (xarcSSREmitter) {
@@ -88,6 +87,7 @@ module.exports = function setup() {
       xaa
         .map(
           Object.entries(xarcSubappSSR),
+          // @ts-ignore
           async ([group, { queue }], ix, mapCtx) => {
             if (group !== "_") {
               mapCtx.assertNoFailure();
@@ -149,7 +149,9 @@ module.exports = function setup() {
           context.voidStop(err);
           xaa.map(
             Object.entries(xarcSubappSSR),
+            // @ts-ignore
             async ([, { queue }]) => {
+              // @ts-ignore
               await xaa.map(queue, async info => info.done(), { concurrency });
             },
             { concurrency }

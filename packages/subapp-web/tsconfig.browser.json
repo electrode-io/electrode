@@ -1,0 +1,13 @@
+{
+    "extends": "./tsconfig.base.json",
+    "compilerOptions": {
+      "outDir": "dist/dev",
+      "lib": [
+          "DOM",
+          "ES5"
+      ],
+      "target": "ES5",
+      "types": ["@types/jsdom"]
+    },
+    "include": ["src"]
+}

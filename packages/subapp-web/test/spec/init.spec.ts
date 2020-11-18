@@ -1,10 +1,10 @@
-"use strict";
+import * as Path from "path";
+import { expect } from "chai";
+import { asyncVerify, runFinally } from "run-verify";
+import { init } from "../../libsrc";
+import util from "../../libsrc/util";
 
-const { init } = require("../../lib");
-const { resetCdn } = require("../../lib/util");
-const { asyncVerify, runFinally } = require("run-verify");
-
-const Path = require("path");
+const { resetCdn } = util;
 
 // test the init token for subapps
 
@@ -36,6 +36,7 @@ describe("init", function () {
 
     const context = { user: {} };
     const initJs = initToken.process(context);
+    // @ts-ignore
     expect(context.user.assets).to.be.ok;
     expect(initJs).contains(`<script id="bundleAssets" type="application/json">`);
     expect(initJs).contains(`<script>/*LJ*/`);
@@ -66,10 +67,12 @@ describe("init", function () {
     });
 
     return asyncVerify(
-      () => {
+      function init(dummy?: any) {
         const context = { user: {} };
         const initJs = initToken.process(context);
+        // @ts-ignore
         expect(Object.keys(context.user.includedBundles).length).to.equal(1);
+        // @ts-ignore
         const loadedBundles = Object.keys(context.user.includedBundles);
         const markLoadedStr = `markBundlesLoaded(${JSON.stringify(loadedBundles)})`;
         expect(initJs).to.contain(markLoadedStr);

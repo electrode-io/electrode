@@ -1,10 +1,11 @@
 "use strict";
 
-const { load } = require("../../lib");
-const utils = require("../../lib/util");
-const Path = require("path");
-const reserveSpot = require("../../lib/ReserveSpot");
+import * as Path from "path";
+import { expect } from "chai";
 const RenderOutput = require("electrode-react-webapp/lib/render-output");
+import { load } from "../../libsrc";
+import utils from "../../libsrc/util";
+import { ReserveSpot } from "../../libsrc/ReserveSpot";
 
 describe("load", function () {
   const statsPath = Path.join(__dirname, "../data/dev-stats.json");
@@ -75,7 +76,7 @@ describe("load", function () {
       done();
     };
     context.output = new RenderOutput(context);
-    reserveSpot({ saveId: "headEntries" }, context);
+    ReserveSpot({ saveId: "headEntries" }, context);
 
     loadToken.process(context, props);
     context.output.close();

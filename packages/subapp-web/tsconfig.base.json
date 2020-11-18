@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "declaration": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "alwaysStrict": true,
+    "removeComments": true,
+    "strictFunctionTypes": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true
+  }
+}

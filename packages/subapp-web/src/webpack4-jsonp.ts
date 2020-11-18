@@ -6,8 +6,10 @@
  * xarc-webpack/src/plugins/jsonp-script-src-plugin
  */
 (function (w) {
+  // @ts-ignore
   w.__webpack_get_script_src__ = (chunkId, publicPath, originalSrc) => {
     const chunks = w.xarcV1 && w.xarcV1.getBundleAssets().jsChunksById;
     return (chunks && chunks[chunkId]) || originalSrc;
   };
+// @ts-ignore
 })(window);

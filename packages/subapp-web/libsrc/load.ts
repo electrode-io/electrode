@@ -1,4 +1,3 @@
-"use strict";
 
 /* eslint-disable max-statements, no-console, complexity, no-magic-numbers */
 
@@ -13,14 +12,14 @@
  */
 
 const assert = require("assert");
-const Fs = require("fs");
-const Path = require("path");
-const _ = require("lodash");
-const retrieveUrl = require("request");
-const util = require("./util");
-const xaa = require("xaa");
-const jsesc = require("jsesc");
-const { loadSubAppByName, loadSubAppServerByName, formUrl } = require("subapp-util");
+import * as Fs from "fs";
+import * as Path from "path";
+import * as _ from "lodash";
+import retrieveUrl from "request";
+import * as xaa from "xaa";
+import jsesc from "jsesc";
+import { loadSubAppByName, loadSubAppServerByName, formUrl } from "subapp-util";
+import util from "./util";
 
 // global name to store client subapp runtime, ie: window.xarcV1
 // V1: version 1.
@@ -48,7 +47,7 @@ const makeDevDebugHtml = msg => {
 <!-- ${msg} -->`;
 };
 
-module.exports = function setup(setupContext, { props: setupProps }) {
+export function setup(setupContext, { props: setupProps }) {
   // TODO: create JSON schema to validate props
 
   // name="Header"
@@ -310,6 +309,7 @@ ${stack}`,
       let startTime;
 
       const closeOutput = () => {
+        // @ts-ignore
         ssrInfo.isDone = true;
         if (props.timestamp) {
           const now = Date.now();
@@ -324,7 +324,9 @@ ${stack}`,
         }
       };
 
+      // @ts-ignore
       ssrInfo.done = () => {
+        // @ts-ignore
         if (!ssrInfo.isDone) {
           closeOutput();
         }
@@ -365,14 +367,18 @@ ${stack}`,
             options: props,
             ssrGroups
           };
+          // @ts-ignore
           const lib = (ssrInfo.lib = util.getFramework(ref));
+          // @ts-ignore
           ssrInfo.awaitData = routeOptions.initialize
             ? Promise.resolve(routeOptions.initialize(request)).then(() => lib.handlePrepare())
             : lib.handlePrepare();
 
+          // @ts-ignore
           ssrInfo.defer = true;
 
           if (!props.inline) {
+            // @ts-ignore
             ssrInfo.renderSSR = async () => {
               try {
                 outputSSRContent(await lib.handleSSR(ref), lib.initialStateStr);
@@ -383,10 +389,13 @@ ${stack}`,
               }
             };
           } else {
+            // @ts-ignore
             ssrInfo.saveSSRInfo = () => {
+              // @ts-ignore
               if (ssrInfo.saved) {
                 return;
               }
+              // @ts-ignore
               ssrInfo.saved = true;
               try {
                 // output load without SSR content
@@ -400,6 +409,7 @@ ${stack}`,
             };
           }
         } else {
+          // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
           outputSSRContent("");
         }
       };
@@ -416,6 +426,7 @@ ${stack}`,
         } catch (err) {
           handleError(err);
         } finally {
+          // @ts-ignore
           if (!ssrInfo.defer) {
             closeOutput();
           }

@@ -1,12 +1,26 @@
-"use strict";
+declare global {
+  namespace NodeJS {
+    interface Global {
+        _wml: {
+            jwt: any
+        },
+        xarcV1: any;
+    }
+  }
 
-const { JSDOM } = require("jsdom");
-const mockRequire = require("mock-require");
-const sinon = require("sinon");
-const chai = require("chai");
-const chaiAsPromised = require("chai-as-promised");
+  interface Window {
+    _wml: any;
+    xarcV1: any;
+  }
+}
+
+import { JSDOM } from "jsdom";
+import * as mockRequire from "mock-require";
+import * as sinon from "sinon";
+import * as chai from "chai";
+import * as chaiAsPromised from "chai-as-promised";
+
 chai.use(chaiAsPromised);
-
 const expect = chai.expect;
 
 let clock;
@@ -15,16 +29,20 @@ describe("subapp-web", function() {
   beforeEach(() => {
     const dom = new JSDOM("");
     clock = sinon.useFakeTimers();
+    // @ts-ignore
     global.window = dom.window;
     global.document = dom.window.document;
     delete require.cache[require.resolve("../../src/index")];
     delete require.cache[require.resolve("../../src/xarc")];
     delete require.cache[require.resolve("../../src/subapp-web")];
+    delete require.cache[require.resolve("../../dist/dev/index")];
+    delete require.cache[require.resolve("../../dist/dev/xarc")];
   });
 
   afterEach(() => {
     try {
       mockRequire.stop("../../src/xarc");
+      mockRequire.stop("../../dist/dev/xarc");
     } catch (e) {} // eslint-disable-line
     try {
       clock.restore();
@@ -38,6 +56,7 @@ describe("subapp-web", function() {
     const xarc = require("../../src/xarc").default;
     const index = require("../../src/index");
     require("../../src/subapp-web");
+
     xarc.setSubApp("phantom-subapp", { start: () => "test string" });
     xarc.setBundle("phantom-subapp", {});
     const ret = index.lazyLoadSubApp({ name: "phantom-subapp" });
@@ -46,12 +65,13 @@ describe("subapp-web", function() {
 
   it("lazyLoadSubApp should run onLoad if it is specified but not id and both subapp and bundle are available", async () => {
     let called = false;
-    mockRequire("../../src/xarc", {
+    mockRequire("../../dist/dev/xarc", {
       getBundle: () => true,
       getSubApp: () => true,
       startSubApp: () => Promise.resolve()
     });
-    const index = require("../../src/index");
+
+    const index = require("../../dist/dev");
     index.lazyLoadSubApp({
       name: "phantom-subapp",
       onLoad: () => {
@@ -65,25 +85,28 @@ describe("subapp-web", function() {
 
   it("lazyLoadSubApp should call loadSubAppBundles if the bundle is not available", async () => {
     let called = false;
+    // @ts-ignore
     global.window = {};
-    mockRequire("../../src/xarc", {
+    mockRequire("../../dist/dev/xarc", {
       getBundle: () => undefined,
       loadSubAppBundles: () => {
         called = true;
       }
     });
-    const index = require("../../src/index");
+    const index = require("../../dist/dev/index");
     index.lazyLoadSubApp({ name: "phantom-subapp" });
     expect(called).to.equal(true);
   });
 
   it("lazyLoadSubApp should run subapp.start if id is specified", async () => {
     let called = false;
+    // @ts-ignore
     global.window = {};
     global.document = {
+      // @ts-ignore
       getElementById: () => true
     };
-    mockRequire("../../src/xarc", {
+    mockRequire("../../dist/dev/xarc", {
       getBundle: () => true,
       getSubApp: () => ({
         start: () => {
@@ -92,7 +115,7 @@ describe("subapp-web", function() {
       }),
       startSubApp: () => Promise.resolve()
     });
-    const index = require("../../src/index");
+    const index = require("../../dist/dev/index");
     index.lazyLoadSubApp({ name: "phantom-subapp", id: "test-id" });
     expect(called).to.equal(false);
     await clock.runAll();
@@ -100,12 +123,12 @@ describe("subapp-web", function() {
   });
 
   it("waitForSubApp should resolve promise if sub app is available", async () => {
-    mockRequire("../../src/xarc", {
+    mockRequire("../../dist/dev/xarc", {
       getBundle: () => true,
       getSubApp: () => true,
       startSubApp: () => Promise.resolve()
     });
-    const index = require("../../src/index");
+    const index = require("../../dist/dev/index");
     const ret = index.waitForSubApp("phantom-subapp");
     await clock.runAll();
     await ret;
@@ -119,6 +142,7 @@ describe("subapp-web", function() {
     const index = require("../../src/index");
     const ret = index.waitForSubApp("phantom-subapp", 51);
     await clock.runAll();
+    // @ts-ignore
     return expect(ret).to.be.rejected;
   });
 
@@ -126,11 +150,13 @@ describe("subapp-web", function() {
     const xarc = {
       rt: {}
     };
-    mockRequire("../../src/xarc", xarc);
-    const index = require("../../src/index");
+    mockRequire("../../dist/dev/xarc", xarc);
+    const index = require("../../dist/dev/index");
     const history = index.getBrowserHistory();
     expect(history).to.exist;
+    // @ts-ignore
     expect(xarc.rt.history).to.exist;
+    // @ts-ignore
     expect(history).to.equal(xarc.rt.history);
   });
 

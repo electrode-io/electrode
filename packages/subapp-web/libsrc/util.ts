@@ -2,12 +2,12 @@
 
 /* eslint-disable global-require, max-statements, no-loop-func, max-len */
 
-const Fs = require("fs");
+import * as Fs from "fs";
 const assert = require("assert");
-const Path = require("path");
-const _ = require("lodash");
-const { tryThrowOriginalSubappRegisterError } = require("subapp-util");
-const EventEmitter = require("events");
+import * as Path from "path";
+import * as _ from "lodash";
+import { tryThrowOriginalSubappRegisterError } from "subapp-util";
+import { EventEmitter } from "events";
 
 let CDN_ASSETS;
 let CDN_JS_BUNDLES;
@@ -218,6 +218,7 @@ ${ignoreMsg}`
 
       try {
         const assetsFp = Path.resolve(cdnAssetsFile);
+        // @ts-ignore
         CDN_ASSETS = JSON.parse(Fs.readFileSync(assetsFp));
       } catch (err) {
         if (prod) {
@@ -359,7 +360,7 @@ ${ignoreMsg}`
       throw new Error(msg);
     }
 
-    const assets = {};
+    const assets: any = {};
     const manifestAsset = _.find(stats.assets, asset => asset.name.endsWith("manifest.json"));
     if (manifestAsset) {
       assets.manifest = manifestAsset.name;
@@ -402,4 +403,4 @@ ${ignoreMsg}`
   }
 };
 
-module.exports = utils;
+export default utils;

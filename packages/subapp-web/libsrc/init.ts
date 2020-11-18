@@ -1,17 +1,15 @@
-"use strict";
 
-/* eslint-disable max-statements */
-
-const Fs = require("fs");
-const Path = require("path");
-const util = require("./util");
-const subappUtil = require("subapp-util");
-const _ = require("lodash");
+import * as Fs from "fs";
+import * as Path from "path";
+import * as subappUtil from "subapp-util";
+import * as _ from "lodash";
 const assert = require("assert");
+import { isomorphicLoader } from "@xarc/app";
+import util from "./util";
 
-const { getXRequire } = require("@xarc/app").isomorphicLoader;
+const { getXRequire } = isomorphicLoader;
 
-module.exports = function setup(setupContext) {
+export function setup(setupContext) {
   const cdnEnabled = _.get(setupContext, "routeOptions.cdn.enable");
   const distDir = process.env.NODE_ENV === "production" ? "../dist/min" : "../dist/dev";
   const clientJs = Fs.readFileSync(Path.join(__dirname, distDir, "subapp-web.js")).toString();

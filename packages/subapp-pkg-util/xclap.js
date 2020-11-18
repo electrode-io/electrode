@@ -15,10 +15,15 @@ xclap.load({
   "compile-dev": exec("babel src -d dist/dev --delete-dir-on-start --source-maps", {
     env: { BABEL_ENV: "-src-dev" }
   }),
-  "compile-min": exec("babel src -d dist/min --no-comments --delete-dir-on-start", {
-    env: { BABEL_ENV: "-src-minify" }
-  }),
+  "compile-min": ["minify"],
   "compile-node": exec("babel src -d dist/node --delete-dir-on-start --source-maps", {
     env: { BABEL_ENV: "-src-node" }
-  })
+  }),
+  minify(context) {
+    const src = context.argOpts.s || "src";
+    const dest = context.argOpts.d || "dist/min";
+    return exec(`babel ${src} -d ${dest} --no-comments --delete-dir-on-start`, {
+      env: { BABEL_ENV: "-src-minify" }
+    })
+  }
 });

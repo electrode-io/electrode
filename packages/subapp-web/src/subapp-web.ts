@@ -1,12 +1,15 @@
 // xarc subapp client side lib version 1
 // load into window.xarcV1 as a global
 (function (w) {
+  // @ts-ignore
   if (!w._wml) {
+    // @ts-ignore
     w._wml = {};
   }
-  
+
   const version = 1000000; // ###.###.### major.minor.patch
 
+  // @ts-ignore
   if (w.xarcV1 && w.xarcV1.version >= version) return w.xarcV1;
 
   const runtimeInfo = {
@@ -20,8 +23,10 @@
 
   let xv1;
 
+  // @ts-ignore
   return (w.xarcV1 = xv1 = {
     IS_BROWSER: true,
+    // @ts-ignore
     HAS_WINDOW: typeof window !== "undefined",
 
     version,
@@ -38,7 +43,8 @@
     },
 
     defer() {
-      const defer = {};
+      const defer: any = {};
+      // @ts-ignore
       defer.promise = new Promise((resolve, reject) => {
         defer.resolve = resolve;
         defer.reject = reject;
@@ -152,7 +158,7 @@
       if (!runtimeInfo.started || groupInfo.started || groupInfo.queue.length < groupInfo.total) {
         return;
       }
-      const makeInvoke = (m, queue) => {
+      const makeInvoke = (m: any, queue?: any) => {
         return () =>
           xv1.asyncMap(queue || groupInfo.queue, startInfo => {
             const subApp = startInfo.subApp;
@@ -189,12 +195,16 @@
     // action.
     //
     watchSubAppOnLoad(immediate) {
+      // @ts-ignore
       if (runtimeInfo.onLoadWatcher) {
+        // @ts-ignore
         clearTimeout(runtimeInfo.onLoadWatcher);
+        // @ts-ignore
         runtimeInfo.onLoadWatcher = undefined;
       }
 
       const watchCheck = () => {
+        // @ts-ignore
         runtimeInfo.onLoadWatcher = undefined;
         const ols = runtimeInfo.onLoadStart;
         let pending = 0;
@@ -210,6 +220,7 @@
             ols[name] = undefined;
             queue.forEach(options => {
               if (!options.id && !options.elementId) {
+                // @ts-ignore
                 options = Object.assign({}, options);
                 options._genId = options.name + "_inst_id_" + runtimeInfo.instId++;
               }
@@ -257,6 +268,7 @@
         watchCheck();
       }
 
+      // @ts-ignore
       runtimeInfo.onLoadWatcher = setTimeout(watchCheck, 10);
     },
 
@@ -297,10 +309,14 @@
     },
 
     getBundleAssets() {
+      // @ts-ignore
       if (!runtimeInfo.bundleAssets) {
+        // @ts-ignore
         runtimeInfo.bundleAssets = xv1.dyn("bundleAssets");
+        // @ts-ignore
         xv1.cdnInit(runtimeInfo.bundleAssets);
       }
+      // @ts-ignore
       return runtimeInfo.bundleAssets;
     },
 
@@ -349,6 +365,7 @@
             done();
           }
         };
+        // @ts-ignore
         loadjs(new_assets, id, {
           success: () => {
             console.log(`loaded asset for ${name} (id: ${id}) - ${assets}`);
@@ -356,6 +373,7 @@
             afterLoad();
           },
           error: () => {
+            // @ts-ignore
             console.error(`load asset ${name} (id: ${id}) failed`, err);
             afterLoad();
           }
@@ -365,6 +383,7 @@
 
     dyn(id) {
       const msg = "ERROR: fail retrieve dynamic data from element";
+      // @ts-ignore
       const element = document.getElementById(id);
       if (!element) {
         console.error(msg, id, "- get");
@@ -378,4 +397,5 @@
       }
     }
   });
+// @ts-ignore
 })(window);

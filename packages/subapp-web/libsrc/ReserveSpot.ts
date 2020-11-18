@@ -1,10 +1,7 @@
-"use strict";
 
-const ReserveSpot = (props, context) => {
+export const ReserveSpot = (props: any, context: any) => {
   if (props.saveId) {
     const spot = context.output.reserve();
     context.user[props.saveId] = spot;
   }
 };
-
-module.exports = ReserveSpot;
