@@ -151,7 +151,7 @@ export class TagTemplate {
     processor: RenderProcessor;
   }) {
     this._templateTags = options.templateTags.map((tag, ix) => {
-      if (tag.hasOwnProperty(TAG_TYPE)) {
+      if (tag && tag.hasOwnProperty(TAG_TYPE)) {
         tag.pos = ix;
       } else if (typeof tag === "function") {
         return { [TAG_TYPE]: "function", pos: ix, func: tag };
@@ -243,7 +243,7 @@ export class TagTemplate {
 
     for (let index = 0; index < this._templateTags.length && found.length < count; index++) {
       const token = this._templateTags[index];
-      if (token.id === id) {
+      if (token?.id === id) {
         found.push({ index, token });
       }
     }

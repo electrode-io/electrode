@@ -25,7 +25,7 @@ module.exports = function getDevOptions(user: XarcOptions = {}) {
   const legacy = getDevArchetypeLegacy();
   // try to read xarc-options.json if it exist and merge it into legacy
   const xarcOptions = loadXarcOptions();
-  user = _.merge({}, user, xarcOptions);
+  user = _.merge({}, xarcOptions, user);
   const proxy = getEnvProxy();
 
   // proxy config was not set in legacy, so add to top level here
