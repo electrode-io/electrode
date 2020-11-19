@@ -15,6 +15,17 @@ let cachedArchetype = null;
  * @returns options - final options with defaults and env applied
  */
 module.exports = function getDevOptions(user: XarcOptions = {}) {
+  //added this check because options.ts is setting our default values and cached is missing our xarc option into file
+  if (
+    !_.isNil(user) &&
+    !_.isNil(user.XARC_CWD) &&
+    !_.isNil(cachedArchetype) &&
+    _.isNil(cachedArchetype.options.XARC_CWD)
+  ) {
+    cachedArchetype.options.XARC_CWD = user.XARC_CWD;
+    saveXarcOptions(cachedArchetype);
+  }
+
   if (cachedArchetype) {
     cachedArchetype._fromCache = true;
     // maintained for backwards compatibility
@@ -25,7 +36,7 @@ module.exports = function getDevOptions(user: XarcOptions = {}) {
   const legacy = getDevArchetypeLegacy();
   // try to read xarc-options.json if it exist and merge it into legacy
   const xarcOptions = loadXarcOptions();
-  user = _.merge({}, xarcOptions, user);
+  user = _.merge({}, user, xarcOptions);
   const proxy = getEnvProxy();
 
   // proxy config was not set in legacy, so add to top level here
