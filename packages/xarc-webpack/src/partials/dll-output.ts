@@ -1,6 +1,6 @@
 import * as Path from "path";
 import { loadXarcOptions } from "../util/load-xarc-options";
-const { detectXARCPath } = require("@xarc/app-dev/lib/utils");
+import { detectXARCPath } from "@xarc/app-dev/lib/utils";
 const xarcOptions = loadXarcOptions();
 const xarcPath = detectXARCPath(xarcOptions.XARC_CWD);
 
