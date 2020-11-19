@@ -7,6 +7,7 @@ export {};
  */
 
 const Path = require("path");
+import { loadXarcOptions, detectXARCPath } from "./utils";
 
 const tildaSep = "/~/";
 const nmSep = "/node_modules/";
@@ -102,7 +103,10 @@ class ModuleProcessor {
       const getVersion = parents => {
         try {
           if (split.name !== ".") {
-            return require(Path.resolve(parents.join(nmSep), split.name, "package.json")).version; // eslint-disable-line
+            const xarcOptions = loadXarcOptions();
+            const xarcPath = detectXARCPath(xarcOptions.options.XARC_CWD);
+            return require(Path.resolve(xarcPath, parents.join(nmSep), split.name, "package.json"))
+              .version; // eslint-disable-line
           } else {
             return "-";
           }

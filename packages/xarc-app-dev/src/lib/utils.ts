@@ -156,3 +156,13 @@ export function detectCSSModule(xOptions) {
   }
   return Boolean(cssModuleSupport);
 }
+
+export function detectXARCPath(xarcCwd: string, cwd: string = process.cwd()) {
+  if (Path.resolve() === cwd) {
+    return cwd;
+  } else if (Path.resolve() === xarcCwd) {
+    return xarcCwd;
+  } else {
+    return Path.resolve(xarcCwd);
+  }
+}

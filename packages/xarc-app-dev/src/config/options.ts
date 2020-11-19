@@ -7,6 +7,7 @@ const utils = require("../lib/utils");
 const _ = require("lodash");
 const xenvConfig = require("xenv-config");
 const makeAppMode = require("@xarc/app/lib/app-mode");
+import { loadXarcOptions, detectXARCPath } from "../lib/utils";
 
 export function checkOptArchetypeInAppDep(dependencies, isDev = undefined) {
   const options = dependencies
@@ -47,9 +48,11 @@ export function checkOptArchetypeInAppDep(dependencies, isDev = undefined) {
 }
 
 export const getUserConfigOptions = (packageNames, devPackageNames) => {
+  const xarcOptions = loadXarcOptions();
+  const xarcPath = detectXARCPath(xarcOptions.options.XARC_CWD);
   return {
     reactLib: "react",
-    ...optionalRequire(Path.resolve("archetype/config"), { default: {} }).options,
+    ...optionalRequire(Path.resolve(xarcPath, "archetype/config"), { default: {} }).options,
     //
     // Check for any optional archetype in application's devDependencies or dependencies
     //
@@ -69,7 +72,9 @@ export function getDefaultArchetypeOptions() {
   // and devDependencies for modules that enable add on features.
   // Basically any package named electrode-archetype-opt-* or @xarc/opt-*
   //
-  const appPkg = optionalRequire(Path.resolve("package.json")) || {
+  const xarcOptions = loadXarcOptions();
+  const xarcPath = detectXARCPath(xarcOptions.options.XARC_CWD);
+  const appPkg = optionalRequire(Path.resolve(xarcPath, "package.json")) || {
     dependencies: {},
     devDependencies: {}
   };
@@ -79,7 +84,7 @@ export function getDefaultArchetypeOptions() {
   const { myPkg: pkg } = utils.getMyPkg();
 
   return {
-    dir: Path.resolve(__dirname, ".."),
+    dir: Path.resolve(xarcPath,__dirname, ".."),
     pkg,
     options: getUserConfigOptions(packageNames, devPackageNames),
     prodDir: constants.PROD_DIR,

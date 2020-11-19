@@ -3,6 +3,8 @@ import * as Path from "path";
 
 import { loadXarcOptions } from "../util/load-xarc-options";
 
+const { detectXARCPath } = require("@xarc/app-dev/lib/utils");
+
 const detectCssModule = require("../util/detect-css-module");
 
 const getOptRequire = require("../util/get-opt-require");
@@ -66,6 +68,7 @@ function loadPostCss() {
 /* eslint-disable complexity */
 module.exports = function() {
   const xarcOptions = loadXarcOptions();
+  const xarcPath = detectXARCPath(xarcOptions.XARC_CWD);
 
   const isProduction = process.env.NODE_ENV === "production";
   const isDevelopment = !isProduction;
@@ -103,9 +106,10 @@ module.exports = function() {
     const enableShortenCSSNames = xarcOptions.webpack.enableShortenCSSNames;
     const enableShortHash = isProduction && enableShortenCSSNames;
     const localIdentName = `${enableShortHash ? "" : "[name]__[local]___"}[hash:base64:5]`;
+    
 
     return {
-      context: Path.resolve("src"),
+      context: Path.resolve(xarcPath,"src"),
       modules: true,
       localIdentName
     };
@@ -241,7 +245,7 @@ module.exports = function() {
       isProduction && new OptimizeCssAssetsPlugin(xarcOptions.webpack.optimizeCssOptions),
       new webpack.LoaderOptionsPlugin({
         minimize: true,
-        options: { context: Path.resolve("src") }
+        options: { context: Path.resolve(xarcPath,"src") }
       })
     ].filter(x => !!x)
   };

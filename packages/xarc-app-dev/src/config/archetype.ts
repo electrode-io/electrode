@@ -45,6 +45,11 @@ module.exports = function getDevOptions(user: XarcOptions = {}) {
     addOnFeatures: undefined
   });
 
+  //added XARC CMD option
+  if (!_.isNil(user) && !_.isNil(user.XARC_CWD)) {
+    legacy.options.XARC_CWD = user.XARC_CWD;
+  }
+
   saveXarcOptions(legacy);
 
   cachedArchetype = legacy;

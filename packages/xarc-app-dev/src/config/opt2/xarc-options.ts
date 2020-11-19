@@ -76,4 +76,9 @@ export type XarcOptions = {
    * options related to babel transpiler
    */
   babelOptions?: BabelOptions;
+
+  /**
+   * option for app cwd to be used from xarc-options
+  */
+ XARC_CWD?: string;
 };

@@ -5,8 +5,11 @@ const Path = require("path");
 const Fs = require("fs");
 
 let cachedProxy = null;
+import { loadXarcOptions, detectXARCPath } from "../lib/utils"
 
 module.exports = function createDevProxy() {
+  const xarcOptions = loadXarcOptions();
+  const xarcPath = detectXARCPath(xarcOptions.options.XARC_CWD);
   if (cachedProxy) {
     return cachedProxy;
   }
@@ -65,8 +68,8 @@ module.exports = function createDevProxy() {
 
     const searchDirs = ["", "config", "test", "src"];
     for (const f of searchDirs) {
-      const key = Path.resolve(f, "dev-proxy.key");
-      const cert = Path.resolve(f, "dev-proxy.crt");
+      const key = Path.resolve(xarcPath, f, "dev-proxy.key");
+      const cert = Path.resolve(xarcPath, f, "dev-proxy.crt");
       if (Fs.existsSync(key) && Fs.existsSync(cert)) {
         return { key, cert };
       }

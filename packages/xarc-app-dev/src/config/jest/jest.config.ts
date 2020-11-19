@@ -10,9 +10,10 @@ const optRequire = getOptArchetypeRequire(["@xarc/opt-jest", "electrode-archetyp
 const jestPkg = optRequire("jest/package.json");
 const jestMajVersion = parseInt(jestPkg.version.split(".")[0], 10);
 
-import { loadXarcOptions } from "../../lib/utils";
+import { loadXarcOptions, detectXARCPath } from "../../lib/utils";
 
 const xarcOptions = loadXarcOptions();
+const xarcPath = detectXARCPath(xarcOptions.options.XARC_CWD);
 
 const { enableTypeScript } = xarcOptions.babel;
 
@@ -20,7 +21,7 @@ const { enableTypeScript } = xarcOptions.babel;
 const scrTypes = enableTypeScript ? "jt" : "j";
 const testRegex = `(/_?_tests?_?_/.*|(\\.|\/)(test|spec))\\.[${scrTypes}]sx?$`;
 
-const rootDir = process.cwd();
+const rootDir = xarcPath;
 
 const jestDefaultConfig = {
   rootDir,

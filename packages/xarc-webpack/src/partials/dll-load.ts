@@ -21,9 +21,13 @@ import * as webpack from "webpack";
 const DonePlugin = require("../plugins/done-plugin");
 const dllUtil = require("../util/dll-util");
 const _ = require("lodash");
+import { loadXarcOptions } from "../util/load-xarc-options";
+const { detectXARCPath } = require("@xarc/app-dev/lib/utils");
 
 module.exports = function() {
   const dll = dllUtil.loadAssets();
+  const xarcOptions = loadXarcOptions();
+  const xarcPath = detectXARCPath(xarcOptions.XARC_CWD);
 
   // no DLL
   if (_.isEmpty(dll.assets)) {
@@ -39,7 +43,7 @@ module.exports = function() {
     plugins: dll.info
       .map(info => {
         return new webpack.DllReferencePlugin({
-          context: process.cwd(),
+          context: xarcPath,
           manifest: dllUtil.loadJson(info.manifest)
         });
       })

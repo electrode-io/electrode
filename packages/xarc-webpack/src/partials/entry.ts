@@ -10,15 +10,18 @@ const chalk = require("chalk");
 const logger = require("@xarc/app-dev/lib/logger");
 const mkdirp = require("mkdirp");
 import { loadXarcOptions } from "../util/load-xarc-options";
+const { detectXARCPath } = require("@xarc/app-dev/lib/utils");
+
 
 const DEV_HMR_DIR = ".__dev_hmr";
 
 function makeEntryPartial() {
   const xarcOptions = loadXarcOptions();
+  const xarcPath = detectXARCPath(xarcOptions.XARC_CWD);
   const AppMode = xarcOptions.AppMode;
 
   const partial: any = {
-    context: Path.resolve(AppMode.src.client)
+    context: Path.resolve(xarcPath,AppMode.src.client)
   };
 
   //
@@ -124,7 +127,7 @@ if (module.hot) {
     }
 
     const isDev = Boolean(process.env.WEBPACK_DEV);
-    const hmrDir = Path.resolve(AppMode.src.dir, DEV_HMR_DIR);
+    const hmrDir = Path.resolve(xarcPath,AppMode.src.dir, DEV_HMR_DIR);
     const gitIgnoreFile = Path.join(hmrDir, ".gitignore");
     if (isDev && !Fs.existsSync(gitIgnoreFile)) {
       mkdirp.sync(hmrDir);
@@ -137,7 +140,7 @@ if (module.hot) {
 `
       );
     }
-    partial.context = Path.resolve(AppMode.src.dir);
+    partial.context = Path.resolve(xarcPath,AppMode.src.dir);
     const entry = {};
     _.each(subApps, ma => {
       const entryName = `${ma.name.toLowerCase()}`;

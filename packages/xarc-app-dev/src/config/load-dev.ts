@@ -7,13 +7,16 @@ export {};
 
 const Path = require("path");
 const optionalRequire = require("optional-require")(require);
+import { loadXarcOptions, detectXARCPath } from "../lib/utils";
 
 function checkTopDevArchetype(devArchName) {
-  const topPkg = optionalRequire(Path.resolve("package.json"));
+  const xarcOptions = loadXarcOptions();
+  const xarcPath = detectXARCPath(xarcOptions.options.XARC_CWD);
+  const topPkg = optionalRequire(Path.resolve(xarcPath, "package.json"));
   if (topPkg && topPkg.name === devArchName) {
     // In case @xarc/app is being used for test/dev in the -dev archetype
     // resolve config/archetype in @xarc/app-dev's own dir
-    return optionalRequire(Path.resolve("config/archetype"));
+    return optionalRequire(Path.resolve(xarcPath, "config/archetype"));
   } else {
     return optionalRequire(`${devArchName}/config/archetype`);
   }

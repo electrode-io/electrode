@@ -15,19 +15,19 @@ export {};
  */
 const Path = require("path");
 
-import { loadXarcOptions } from "../lib/utils";
+import { loadXarcOptions, detectXARCPath } from "../lib/utils";
 
 const serverDir = process.argv[2] || "src/server";
 
 let start;
-
+const xarcOptions = loadXarcOptions();
+const xarcPath = detectXARCPath(xarcOptions.options.XARC_CWD);
 try {
   // Try to load user's dev.js under src/server
-  start = require(Path.resolve(serverDir, "dev.js"));
+  start = require(Path.resolve(xarcPath, serverDir, "dev.js"));
 } catch (e) {
-  const xarcOptions = loadXarcOptions();
-  const cwdNM = Path.resolve("node_modules");
-  const cwd = process.cwd();
+  const cwdNM = Path.resolve(xarcPath, "node_modules");
+  const cwd = xarcPath;
 
   // fallback to default action that loads babel-register and then requires
   // src/server, under which there should be an index.js file.
@@ -44,7 +44,7 @@ try {
     cache: true
   });
 
-  const fullServerDir = Path.resolve(serverDir);
+  const fullServerDir = Path.resolve(xarcPath, serverDir);
 
   start = require(fullServerDir);
 }

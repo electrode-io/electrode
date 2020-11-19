@@ -16,8 +16,12 @@ const webpackCovCfg = require(customCheck.getWebpackStartConfig(
   "../webpack/webpack.config.coverage",
   false
 ));
+import { loadXarcOptions, detectXARCPath } from "../../lib/utils";
 
 module.exports = function(config) {
+  const xarcOptions = loadXarcOptions();
+  const xarcPath = detectXARCPath(xarcOptions.options.XARC_CWD);
+
   karmaConf(config);
   const settings = {
     reporters: ["spec", "sonarqubeUnit", "coverage"],
@@ -28,12 +32,12 @@ module.exports = function(config) {
         { type: "lcov", subdir: "." },
         { type: "text", subdir: "." }
       ],
-      dir: Path.resolve("coverage", "client")
+      dir: Path.resolve(xarcPath, "coverage", "client")
     },
     sonarQubeUnitReporter: {
       sonarQubeVersion: "5.x",
       outputFile: "gunit.xml",
-      outputDir: Path.resolve("coverage", "client"),
+      outputDir: Path.resolve(xarcPath, "coverage", "client"),
       useBrowserName: false
     }
   };
