@@ -2,7 +2,8 @@ import { expect } from "chai";
 import { templateTags as templateTags1 } from "../data/template1";
 import { templateTags as templateTags2 } from "../data/template2";
 import { describe, it } from "mocha";
-import { TagTemplate } from "../../src";
+import { TagTemplate, createTemplateTagsFromArray } from "../../src";
+import { TAG_TYPE } from "../../src/symbols";
 
 describe("tag template", function () {
   const template2 = new TagTemplate({ templateTags: templateTags2, processor: null });
@@ -12,6 +13,11 @@ describe("tag template", function () {
     const template = new TagTemplate({ templateTags: templateTags1, processor: null });
     const ssrToken = template.findTokensById(`ssr-content`);
     expect(ssrToken).to.exist;
+  });
+
+  it("should create TagTemplate from array", () => {
+    const template = createTemplateTagsFromArray([1, 2, 3]);
+    expect(template[TAG_TYPE]).equal("template");
   });
 
   describe("_findTokenIndex", function () {

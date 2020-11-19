@@ -3,6 +3,7 @@ import { TagRenderer, createTemplateTags } from "../../src";
 import { templateTags as templateTags1 } from "../data/template1";
 import { templateTags as templateTags2 } from "../data/template2";
 import { templateTags as templateTags3 } from "../data/template3";
+import { templateTags as templateTags4 } from "../data/template4";
 
 import { describe, it } from "mocha";
 
@@ -22,6 +23,15 @@ describe("tag template", function () {
     );
     expect(context.result).contains("<title>user-handler-title</title>");
     expect(context.result).contains("custom-1</div>hello world from function: user,options");
+  });
+
+  it("should render a TagTemplate with array of tokens", async () => {
+    const renderer = new TagRenderer({
+      templateTags: templateTags4
+    });
+
+    const context = await renderer.render({});
+    expect(context.result.trim()).to.equal("foo from Bar test hello world");
   });
 
   it("should render a TagTemplate with handler that returns a sub template", async () => {

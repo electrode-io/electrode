@@ -2,6 +2,7 @@
 import * as Path from "path";
 
 import { loadXarcOptions } from "../util/load-xarc-options";
+import { xAppRequire } from "@xarc/app";
 
 const { detectXARCPath } = require("@xarc/app-dev/lib/utils");
 
@@ -26,6 +27,9 @@ const sassLoader = optSassRequire.resolve("sass-loader");
 // LESS support
 const optLessRequire = getOptRequire(["@xarc/opt-less", "electrode-archetype-opt-less"]);
 const lessLoader = optLessRequire.resolve("less-loader");
+
+// isomorphic-loader
+const isomorphicLoader = xAppRequire.resolve("isomorphic-loader");
 
 function loadPostCss() {
   const optPostcssRequire = getOptRequire(["@xarc/opt-postcss", "electrode-archetype-opt-postcss"]);
@@ -134,7 +138,7 @@ module.exports = function() {
       hmr: isDevelopment,
       reload: isDevelopment,
       publicPath: "",
-      esModule: true,
+      esModule: !isModule,
       modules: Boolean(isModule)
     }
   });
@@ -152,7 +156,11 @@ module.exports = function() {
     enableCssModule && {
       _name: `extract-css-modules`,
       test: /\.css$/,
-      use: [miniCssExtractLoader(true), ...getCssQueryUse(true)],
+      use: [
+        isomorphicLoader,
+        miniCssExtractLoader(true),
+        ...getCssQueryUse(true)
+      ],
       include: cssModuleRegExp
     }
   );
@@ -176,6 +184,7 @@ module.exports = function() {
         _name: `extract-css-modules-scss`,
         test: /\.(scss|sass)$/,
         use: [
+          isomorphicLoader,
           miniCssExtractLoader(true),
           ...getCssQueryUse(true).concat({ loader: sassLoader } as any)
         ],
@@ -201,7 +210,11 @@ module.exports = function() {
       enableCssModule && {
         _name: `extract-css-modules-stylus`,
         test: /\.styl$/,
-        use: [miniCssExtractLoader(true), ...getCssQueryUse(true).concat(stylusQuery)],
+        use: [
+          isomorphicLoader,
+          miniCssExtractLoader(true),
+          ...getCssQueryUse(true).concat(stylusQuery)
+        ],
         include: cssModuleRegExp
       }
     );
@@ -225,6 +238,7 @@ module.exports = function() {
         _name: `extract-css-modules-less`,
         test: /\.less$/,
         use: [
+          isomorphicLoader,
           miniCssExtractLoader(true),
           ...getCssQueryUse(true).concat({ loader: lessLoader } as any)
         ],

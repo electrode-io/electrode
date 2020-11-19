@@ -78,10 +78,10 @@
       "test"
     ],
     "check-coverage": true,
-    "statements": 97.67,
-    "branches": 98.55,
-    "functions": 92.86,
-    "lines": 97.55,
+    "statements": 100,
+    "branches": 100,
+    "functions": 100,
+    "lines": 100,
     "cache": false
   },
   "fyn": {
