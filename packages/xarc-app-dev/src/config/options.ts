@@ -84,7 +84,7 @@ export function getDefaultArchetypeOptions() {
   const { myPkg: pkg } = utils.getMyPkg();
 
   return {
-    dir: Path.resolve(xarcPath,__dirname, ".."),
+    dir: Path.resolve(__dirname, ".."),
     pkg,
     options: getUserConfigOptions(packageNames, devPackageNames),
     prodDir: constants.PROD_DIR,

@@ -23,9 +23,11 @@ module.exports = function(options) {
   logger.verbose("add-dll-references configurations", JSON.stringify(config, null, 2));
 
   try {
-    const exists = fs.existsSync(Path.resolve(xarcPath,xarcOptions.AppMode.src.client, "dll.config.js"));
+    const exists = fs.existsSync(
+      Path.resolve(xarcPath, xarcOptions.AppMode.src.client, "dll.config.js")
+    );
     const filenames = filterScanDir.sync({
-      dir: Path.resolve(xarcPath,"dll", "js"),
+      dir: Path.resolve(xarcPath, "dll", "js"),
       includeRoot: true,
       filter(file, path, extras) {
         return extras.ext === ".json" && file.indexOf("-manifest") >= 0;
