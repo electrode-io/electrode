@@ -45,11 +45,15 @@ export const templateTags = createTemplateTags`<html>
   ${Token("webapp-header-bundles")}
   ${Token("webapp-body-bundles")}
   ${Token("PAGE_TITLE")}
+  ${""}
   ${Token("prefetch-bundles")}
+  ${false}
   ${TokenInvoke(custom1)}
+  ${undefined}
   ${context => {
     return `hello world from function: ${Object.keys(context)}\n`;
   }}
+  ${null}
   <script>
     console.log("test");
   </script>

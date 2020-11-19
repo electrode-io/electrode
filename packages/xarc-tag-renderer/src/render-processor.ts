@@ -33,7 +33,7 @@ export class RenderProcessor {
 
   applyTokenModuleLoad(options, template: TagTemplate) {
     for (const tokenModule of template._templateTags) {
-      if (tokenModule.load && typeof tokenModule.load === "function") {
+      if (typeof tokenModule?.load === "function") {
         tokenModule.load({ ...this._renderer._handlerContext, ...options });
       }
     }
@@ -103,7 +103,9 @@ export class RenderProcessor {
     const options = this._options;
     const insertTokenIds = this._insertTokenIds;
 
-    if (tk[TAG_TYPE] === "function") {
+    if (!tk) {
+      opCode = null;
+    } else if (tk[TAG_TYPE] === "function") {
       opCode = {
         tk,
         code: STEP_FUNC_HANDLER
