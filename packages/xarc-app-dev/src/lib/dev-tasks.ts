@@ -72,8 +72,8 @@ export { XarcOptions } from "../config/opt2/xarc-options";
  */
 export const getDevTaskRunner = (xarcOptions: XarcOptions = {}) => {
   const archetype = getArchetype(xarcOptions);
-  const xarcPath = detectXARCPath(archetype.options.cwd);
-  return requireAt(xarcPath)("xclap") || require("xclap");
+  const cwd = detectXARCPath(archetype.options.cwd);
+  return requireAt(cwd)("xclap") || require("xclap");
 };
 
 /**

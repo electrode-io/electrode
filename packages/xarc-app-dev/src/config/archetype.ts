@@ -52,6 +52,7 @@ module.exports = function getDevOptions(user: XarcOptions = {}) {
   // merge the rest into top level
   _.merge(legacy, {
     ...user,
+    cwd,
     webpackOptions: undefined,
     babelOptions: undefined,
     addOnFeatures: undefined
