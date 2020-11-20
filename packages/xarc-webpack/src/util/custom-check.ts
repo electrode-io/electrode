@@ -22,7 +22,7 @@ function getWebpackStartConfig(defaultFile: string, relativeToCwd = true) {
     : Path.join(archetype.config.webpack, defaultFile || "webpack.config.js");
 
   if (relativeToCwd && Path.isAbsolute(configFilePath)) {
-    const cwdRel = Path.relative(process.cwd(), configFilePath);
+    const cwdRel = Path.relative(archetype.cwd, configFilePath);
     return cwdRel.length < configFilePath.length ? cwdRel : configFilePath;
   } else {
     return configFilePath;
