@@ -2,12 +2,11 @@
 
 import * as Path from "path";
 import { loadXarcOptions } from "../util/load-xarc-options";
-const { detectXARCPath } = require("@xarc/app-dev/lib/utils");
 
 module.exports = () => {
   const xarcOptions = loadXarcOptions();
   const AppMode = xarcOptions.AppMode;
-  const xarcCwd = detectXARCPath(xarcOptions);
+  const xarcCwd = xarcOptions.cwd;
   const clientDllConfig = require(Path.resolve(xarcCwd, AppMode.src.client, "dll.config.js"));
 
   return {

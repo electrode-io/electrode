@@ -1,9 +1,9 @@
 /* eslint @typescript-eslint/no-var-requires: "off" */
 import * as Path from "path";
 import { loadXarcOptions } from "../util/load-xarc-options";
-const { detectXARCPath } = require("@xarc/app-dev/lib/utils");
+
 const xarcOptions = loadXarcOptions();
-const xarcCwd = detectXARCPath(xarcOptions);
+const xarcCwd = xarcOptions.cwd;
 
 module.exports = () => ({
   output: {

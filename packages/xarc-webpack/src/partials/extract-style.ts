@@ -4,8 +4,6 @@ import * as Path from "path";
 import { loadXarcOptions } from "../util/load-xarc-options";
 import { xAppRequire } from "@xarc/app";
 
-const { detectXARCPath } = require("@xarc/app-dev/lib/utils");
-
 const detectCssModule = require("../util/detect-css-module");
 
 const getOptRequire = require("../util/get-opt-require");
@@ -72,7 +70,7 @@ function loadPostCss() {
 /* eslint-disable complexity */
 module.exports = function() {
   const xarcOptions = loadXarcOptions();
-  const xarcCwd = detectXARCPath(xarcOptions);
+  const xarcCwd = xarcOptions.cwd;
   const isProduction = process.env.NODE_ENV === "production";
   const isDevelopment = !isProduction;
 

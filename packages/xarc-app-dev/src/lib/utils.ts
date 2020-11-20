@@ -157,13 +157,3 @@ export function detectCSSModule(xOptions) {
   }
   return Boolean(cssModuleSupport);
 }
-
-/**
- * Detect the xarc path if provided in the app and use it if process.cwd
- * if xarc cwd is available then check if its absolute or not -
- * if its aboslute then return it.
- * if not then create the abosolute path and concatinate with xarc path
- */
-export function detectXARCPath(user: XarcOptions = {}) {
-  return Path.resolve(user.cwd === undefined ? "" : user.cwd);
-}

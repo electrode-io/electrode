@@ -22,12 +22,11 @@ const DonePlugin = require("../plugins/done-plugin");
 const dllUtil = require("../util/dll-util");
 const _ = require("lodash");
 import { loadXarcOptions } from "../util/load-xarc-options";
-const { detectXARCPath } = require("@xarc/app-dev/lib/utils");
 
 module.exports = function() {
   const dll = dllUtil.loadAssets();
   const xarcOptions = loadXarcOptions();
-  const xarcCwd = detectXARCPath(xarcOptions);
+  const xarcCwd = xarcOptions.cwd;
 
   // no DLL
   if (_.isEmpty(dll.assets)) {

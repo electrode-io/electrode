@@ -3,9 +3,9 @@
 import * as Path from "path";
 const webpack = require("webpack");
 import { loadXarcOptions } from "../util/load-xarc-options";
-const { detectXARCPath } = require("@xarc/app-dev/lib/utils");
+
 const xarcOptions = loadXarcOptions();
-const xarcCwd = detectXARCPath(xarcOptions);
+const xarcCwd = xarcOptions.cwd;
 
 module.exports = function() {
   return {

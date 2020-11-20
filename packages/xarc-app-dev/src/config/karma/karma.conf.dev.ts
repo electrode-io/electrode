@@ -13,11 +13,11 @@ export {};
 const loadUserConfig = require("./util/load-user-config");
 const Path = require("path");
 const browserSettings = require("./browser-settings");
-import { loadXarcOptions, detectXARCPath } from "../../lib/utils";
+import { loadXarcOptions } from "../../lib/utils";
 
 module.exports = function(config) {
   const xarcOptions = loadXarcOptions();
-  const xarcCwd = detectXARCPath(xarcOptions);
+  const xarcCwd = xarcOptions.cwd;
   const settings = {
     frameworks: ["mocha"],
     reporters: ["spec"],

@@ -23,7 +23,7 @@ const scanDir = require("filter-scan-dir");
 
 const xsh = require("xsh");
 const logger = require("./logger");
-import { createGitIgnoreDir, detectXARCPath } from "./utils";
+import { createGitIgnoreDir } from "./utils";
 let xarcCwd: string;
 
 /**
@@ -72,7 +72,7 @@ export { XarcOptions } from "../config/opt2/xarc-options";
  */
 export const getDevTaskRunner = (xarcOptions: XarcOptions = {}) => {
   const archetype = getArchetype(xarcOptions);
-  const cwd = detectXARCPath(archetype);
+  const cwd = archetype.cwd;
   return requireAt(cwd)("xclap") || require("xclap");
 };
 
@@ -106,7 +106,7 @@ export function loadXarcDevTasks(xrun, xarcOptions: XarcOptions = {}) {
   // lazy require modules that have effects so as to permit customization
   // from userspace, i.e. `userOptions`
   const archetype = getArchetype(xarcOptions);
-  xarcCwd = detectXARCPath(archetype);
+  xarcCwd = archetype.cwd;
   function setupPath() {
     const nmBin = Path.join("node_modules", ".bin");
     xsh.envPath.addToFront(Path.resolve(xarcCwd, nmBin));

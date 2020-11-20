@@ -6,10 +6,10 @@ const assign = require("lodash/assign");
 const babelLoader = require.resolve("babel-loader");
 
 import { loadXarcOptions } from "../util/load-xarc-options";
-const { detectXARCPath } = require("@xarc/app-dev/lib/utils");
+
 module.exports = function(options) {
   const xarcOptions = loadXarcOptions();
-  const xarcCwd = detectXARCPath(xarcOptions);
+  const xarcCwd = xarcOptions.cwd;
   const AppMode = xarcOptions.AppMode;
 
   const clientVendor = Path.join(AppMode.src.client, "vendor/");

@@ -10,12 +10,12 @@ const chalk = require("chalk");
 const logger = require("@xarc/app-dev/lib/logger");
 const mkdirp = require("mkdirp");
 import { loadXarcOptions } from "../util/load-xarc-options";
-const { detectXARCPath } = require("@xarc/app-dev/lib/utils");
+
 const DEV_HMR_DIR = ".__dev_hmr";
 
 function makeEntryPartial() {
   const xarcOptions = loadXarcOptions();
-  const xarcCwd = detectXARCPath(xarcOptions);
+  const xarcCwd = xarcOptions.cwd;
   const AppMode = xarcOptions.AppMode;
   const partial: any = {
     context: Path.resolve(xarcCwd, AppMode.src.client)

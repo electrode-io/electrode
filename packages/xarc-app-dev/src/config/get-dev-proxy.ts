@@ -5,11 +5,11 @@ const Path = require("path");
 const Fs = require("fs");
 
 let cachedProxy = null;
-import { loadXarcOptions, detectXARCPath } from "../lib/utils";
+import { loadXarcOptions } from "../lib/utils";
 
 module.exports = function createDevProxy() {
   const xarcOptions = loadXarcOptions();
-  const xarcCwd = detectXARCPath(xarcOptions);
+  const xarcCwd = xarcOptions.cwd;
   if (cachedProxy) {
     return cachedProxy;
   }

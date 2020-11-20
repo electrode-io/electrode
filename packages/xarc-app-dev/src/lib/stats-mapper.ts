@@ -2,7 +2,7 @@
 export {};
 
 const _ = require("lodash");
-import { loadXarcOptions, detectXARCPath } from "./utils";
+import { loadXarcOptions } from "./utils";
 
 function extractBundles(stats) {
   // Stats has modules, single bundle
@@ -15,7 +15,7 @@ function extractBundles(stats) {
   return [stats];
 }
 const xarcOptions = loadXarcOptions();
-const xarcCwd = detectXARCPath(xarcOptions);
+const xarcCwd = xarcOptions.cwd;
 const WEBPACK_LOADER_MARKER = `!${xarcCwd[0]}`;
 
 function getBundles(statsResult) {

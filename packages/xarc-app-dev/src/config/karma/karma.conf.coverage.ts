@@ -16,11 +16,11 @@ const webpackCovCfg = require(customCheck.getWebpackStartConfig(
   "../webpack/webpack.config.coverage",
   false
 ));
-import { loadXarcOptions, detectXARCPath } from "../../lib/utils";
+import { loadXarcOptions } from "../../lib/utils";
 
 module.exports = function(config) {
   const xarcOptions = loadXarcOptions();
-  const xarcCwd = detectXARCPath(xarcOptions);
+  const xarcCwd = xarcOptions.cwd;
 
   karmaConf(config);
   const settings = {

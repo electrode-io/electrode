@@ -13,11 +13,10 @@ import * as webpack from "webpack";
 const filterScanDir = require("filter-scan-dir");
 import { loadXarcOptions } from "../util/load-xarc-options";
 const logger = require("@xarc/app-dev/lib/logger");
-const { detectXARCPath } = require("@xarc/app-dev/lib/utils");
 
 module.exports = function(options) {
   const xarcOptions = loadXarcOptions();
-  const xarcCwd = detectXARCPath(xarcOptions);
+  const xarcCwd = xarcOptions.cwd;
 
   const config = options.currentConfig;
   logger.verbose("add-dll-references configurations", JSON.stringify(config, null, 2));

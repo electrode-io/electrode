@@ -6,7 +6,7 @@ const customCheck = require("@xarc/webpack/lib/util/custom-check");
 const loadUserConfig = require("./util/load-user-config");
 const browserSettings = require("./browser-settings");
 const loadElectrodeDll = require("./util/load-electrode-dll");
-import { loadXarcOptions, detectXARCPath } from "../../lib/utils";
+import { loadXarcOptions } from "../../lib/utils";
 
 function getXarcOptPlugins() {
   try {
@@ -56,7 +56,7 @@ let MAIN_PATH;
 
 try {
   const xarcOptions = loadXarcOptions();
-  const xarcCwd = detectXARCPath(xarcOptions);
+  const xarcCwd = xarcOptions.cwd;
   MAIN_PATH = require.resolve(Path.resolve(xarcCwd, "test/karma-entry"));
 } catch (err) {
   if (getXarcOptPlugins()) {
@@ -93,7 +93,7 @@ module.exports = function(config) {
     plugins = [];
   }
   const xarcOptions = loadXarcOptions();
-  const xarcCwd = detectXARCPath(xarcOptions);
+  const xarcCwd = xarcOptions.cwd;
   const settings = {
     basePath: xarcCwd,
     frameworks: ["mocha", "intl-shim"],

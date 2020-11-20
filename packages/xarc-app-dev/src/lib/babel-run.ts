@@ -15,13 +15,13 @@ export {};
  */
 const Path = require("path");
 
-import { loadXarcOptions, detectXARCPath } from "../lib/utils";
+import { loadXarcOptions } from "../lib/utils";
 
 const serverDir = process.argv[2] || "src/server";
 
 let start;
 const xarcOptions = loadXarcOptions();
-const xarcCwd = detectXARCPath(xarcOptions);
+const xarcCwd = xarcOptions.cwd;
 try {
   // Try to load user's dev.js under src/server
   start = require(Path.resolve(xarcCwd, serverDir, "dev.js"));

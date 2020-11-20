@@ -22,10 +22,6 @@ module.exports = function getDevOptions(user: XarcOptions = {}) {
   if (cachedArchetype) {
     // if cached is already runnig
     cachedArchetype._fromCache = true;
-    if ((_.isNil(cachedArchetype.options.cwd) && !_.isNil(cwd)) || cachedArchetype.cwd !== cwd) {
-      cachedArchetype.cwd = cwd;
-      saveXarcOptions(cachedArchetype);
-    }
     // maintained for backwards compatibility
     return cachedArchetype;
   }
