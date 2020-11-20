@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/no-var-requires: "off" */
 import * as Path from "path";
 import { loadXarcOptions } from "../util/load-xarc-options";
 const { detectXARCPath } = require("@xarc/app-dev/lib/utils");
