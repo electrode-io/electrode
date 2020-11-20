@@ -27,7 +27,7 @@ const { detectXARCPath } = require("@xarc/app-dev/lib/utils");
 module.exports = function() {
   const dll = dllUtil.loadAssets();
   const xarcOptions = loadXarcOptions();
-  const xarcPath = detectXARCPath(xarcOptions.options.cwd);
+  const xarcCwd = detectXARCPath(xarcOptions);
 
   // no DLL
   if (_.isEmpty(dll.assets)) {
@@ -43,7 +43,7 @@ module.exports = function() {
     plugins: dll.info
       .map(info => {
         return new webpack.DllReferencePlugin({
-          context: xarcPath,
+          context: xarcCwd,
           manifest: dllUtil.loadJson(info.manifest)
         });
       })

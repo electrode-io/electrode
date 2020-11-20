@@ -11,12 +11,12 @@ import { loadXarcOptions, detectXARCPath } from "../lib/utils";
 
 function checkTopDevArchetype(devArchName) {
   const xarcOptions = loadXarcOptions();
-  const xarcPath = detectXARCPath(xarcOptions.options.cwd);
-  const topPkg = optionalRequire(Path.resolve(xarcPath, "package.json"));
+  const xarcCwd = detectXARCPath(xarcOptions);
+  const topPkg = optionalRequire(Path.resolve(xarcCwd, "package.json"));
   if (topPkg && topPkg.name === devArchName) {
     // In case @xarc/app is being used for test/dev in the -dev archetype
     // resolve config/archetype in @xarc/app-dev's own dir
-    return optionalRequire(Path.resolve(xarcPath, "config/archetype"));
+    return optionalRequire(Path.resolve(xarcCwd, "config/archetype"));
   } else {
     return optionalRequire(`${devArchName}/config/archetype`);
   }

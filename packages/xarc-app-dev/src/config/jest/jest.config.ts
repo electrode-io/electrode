@@ -13,7 +13,7 @@ const jestMajVersion = parseInt(jestPkg.version.split(".")[0], 10);
 import { loadXarcOptions, detectXARCPath } from "../../lib/utils";
 
 const xarcOptions = loadXarcOptions();
-const xarcPath = detectXARCPath(xarcOptions.options.cwd);
+const xarcCwd = detectXARCPath(xarcOptions);
 
 const { enableTypeScript } = xarcOptions.babel;
 
@@ -21,7 +21,7 @@ const { enableTypeScript } = xarcOptions.babel;
 const scrTypes = enableTypeScript ? "jt" : "j";
 const testRegex = `(/_?_tests?_?_/.*|(\\.|\/)(test|spec))\\.[${scrTypes}]sx?$`;
 
-const rootDir = xarcPath;
+const rootDir = xarcCwd;
 
 const jestDefaultConfig = {
   rootDir,

@@ -2,6 +2,7 @@
 
 import * as readPkgUp from "read-pkg-up";
 import * as pkgUp from "pkg-up";
+import { XarcOptions } from "../config/opt2/xarc-options";
 const mkdirp = require("mkdirp");
 const logger = require("./logger");
 const ck = require("chalker");
@@ -163,6 +164,6 @@ export function detectCSSModule(xOptions) {
  * if its aboslute then return it.
  * if not then create the abosolute path and concatinate with xarc path
  */
-export function detectXARCPath(xarcCwd: string = process.cwd()) {
-  return Path.resolve(xarcCwd);
+export function detectXARCPath(user: XarcOptions = {}) {
+  return Path.resolve(user.cwd === undefined ? "" : user.cwd);
 }

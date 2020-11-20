@@ -17,11 +17,11 @@ import { loadXarcOptions, detectXARCPath } from "../../lib/utils";
 
 module.exports = function(config) {
   const xarcOptions = loadXarcOptions();
-  const xarcPath = detectXARCPath(xarcOptions.options.cwd);
+  const xarcCwd = detectXARCPath(xarcOptions);
   const settings = {
     frameworks: ["mocha"],
     reporters: ["spec"],
-    basePath: xarcPath, // repository root.
+    basePath: xarcCwd, // repository root.
     files: [
       // Test bundle (must be created via `npm run dev|server-test`)
       "http://127.0.0.1:3001/assets/bundle.js"

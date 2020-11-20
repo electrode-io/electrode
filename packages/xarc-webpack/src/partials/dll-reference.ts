@@ -17,17 +17,17 @@ const { detectXARCPath } = require("@xarc/app-dev/lib/utils");
 
 module.exports = function(options) {
   const xarcOptions = loadXarcOptions();
-  const xarcPath = detectXARCPath(xarcOptions.options.cwd);
+  const xarcCwd = detectXARCPath(xarcOptions);
 
   const config = options.currentConfig;
   logger.verbose("add-dll-references configurations", JSON.stringify(config, null, 2));
 
   try {
     const exists = fs.existsSync(
-      Path.resolve(xarcPath, xarcOptions.AppMode.src.client, "dll.config.js")
+      Path.resolve(xarcCwd, xarcOptions.AppMode.src.client, "dll.config.js")
     );
     const filenames = filterScanDir.sync({
-      dir: Path.resolve(xarcPath, "dll", "js"),
+      dir: Path.resolve(xarcCwd, "dll", "js"),
       includeRoot: true,
       filter(file, path, extras) {
         return extras.ext === ".json" && file.indexOf("-manifest") >= 0;

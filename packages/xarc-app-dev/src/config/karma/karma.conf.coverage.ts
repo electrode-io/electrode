@@ -20,7 +20,7 @@ import { loadXarcOptions, detectXARCPath } from "../../lib/utils";
 
 module.exports = function(config) {
   const xarcOptions = loadXarcOptions();
-  const xarcPath = detectXARCPath(xarcOptions.options.cwd);
+  const xarcCwd = detectXARCPath(xarcOptions);
 
   karmaConf(config);
   const settings = {
@@ -32,12 +32,12 @@ module.exports = function(config) {
         { type: "lcov", subdir: "." },
         { type: "text", subdir: "." }
       ],
-      dir: Path.resolve(xarcPath, "coverage", "client")
+      dir: Path.resolve(xarcCwd, "coverage", "client")
     },
     sonarQubeUnitReporter: {
       sonarQubeVersion: "5.x",
       outputFile: "gunit.xml",
-      outputDir: Path.resolve(xarcPath, "coverage", "client"),
+      outputDir: Path.resolve(xarcCwd, "coverage", "client"),
       useBrowserName: false
     }
   };

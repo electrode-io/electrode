@@ -72,7 +72,7 @@ function loadPostCss() {
 /* eslint-disable complexity */
 module.exports = function() {
   const xarcOptions = loadXarcOptions();
-  const xarcPath = detectXARCPath(xarcOptions.options.cwd);
+  const xarcCwd = detectXARCPath(xarcOptions);
   const isProduction = process.env.NODE_ENV === "production";
   const isDevelopment = !isProduction;
 
@@ -111,7 +111,7 @@ module.exports = function() {
     const localIdentName = `${enableShortHash ? "" : "[name]__[local]___"}[hash:base64:5]`;
 
     return {
-      context: Path.resolve(xarcPath, "src"),
+      context: Path.resolve(xarcCwd, "src"),
       modules: true,
       localIdentName
     };
@@ -253,7 +253,7 @@ module.exports = function() {
       isProduction && new OptimizeCssAssetsPlugin(xarcOptions.webpack.optimizeCssOptions),
       new webpack.LoaderOptionsPlugin({
         minimize: true,
-        options: { context: Path.resolve(xarcPath, "src") }
+        options: { context: Path.resolve(xarcCwd, "src") }
       })
     ].filter(x => !!x)
   };

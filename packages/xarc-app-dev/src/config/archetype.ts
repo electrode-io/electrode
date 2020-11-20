@@ -22,11 +22,8 @@ module.exports = function getDevOptions(user: XarcOptions = {}) {
   if (cachedArchetype) {
     // if cached is already runnig
     cachedArchetype._fromCache = true;
-    if (
-      (_.isNil(cachedArchetype.options.cwd) && !_.isNil(cwd)) ||
-      cachedArchetype.options.cwd !== cwd
-    ) {
-      cachedArchetype.options.cwd = cwd;
+    if ((_.isNil(cachedArchetype.options.cwd) && !_.isNil(cwd)) || cachedArchetype.cwd !== cwd) {
+      cachedArchetype.cwd = cwd;
       saveXarcOptions(cachedArchetype);
     }
     // maintained for backwards compatibility
@@ -37,7 +34,7 @@ module.exports = function getDevOptions(user: XarcOptions = {}) {
   const legacy = getDevArchetypeLegacy();
   // try to read xarc-options.json if it exist and merge it into legacy
   const xarcOptions = loadXarcOptions();
-  user = _.merge({}, user, xarcOptions);
+  user = _.merge({}, xarcOptions, user);
   const proxy = getEnvProxy();
 
   // proxy config was not set in legacy, so add to top level here
@@ -60,7 +57,7 @@ module.exports = function getDevOptions(user: XarcOptions = {}) {
 
   //added XARC CMD option
   if (!_.isNil(user) && !_.isNil(user.cwd)) {
-    legacy.options.cwd = user.cwd;
+    legacy.cwd = user.cwd;
   }
 
   saveXarcOptions(legacy);

@@ -50,8 +50,8 @@ export function cssModuleHook(
 ) {
   const defaultRootDirPath = process.env.NODE_ENV === "production" ? "lib" : "src";
   options.generateScopedName = options.generateScopedName || "[hash:base64]";
-  const xarcPath = detectXARCPath(archetype.options.cwd);
-  options.rootDir = options.rootDir || `${xarcPath}/${defaultRootDirPath}`;
+  const xarcCwd = detectXARCPath(archetype);
+  options.rootDir = options.rootDir || `${xarcCwd}/${defaultRootDirPath}`;
 
   require("css-modules-require-hook")(options);
 }
@@ -299,7 +299,7 @@ if (!getAppMode().hasEnv()) {
   const guessAppSrcDir = () => {
     if (module.parent && module.parent.filename) {
       const fn = module.parent.filename;
-      const dir = fn.substr(detectXARCPath(archetype.options.cwd)).split("/")[0];
+      const dir = fn.substr(detectXARCPath(archetype.cwd).length + 1).split("/")[0];
       if (dir === getAppMode().src.dir || dir === getAppMode().lib.dir) {
         return `${dir}/`;
       }

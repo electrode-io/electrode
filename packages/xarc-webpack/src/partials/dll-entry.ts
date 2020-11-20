@@ -7,8 +7,8 @@ const { detectXARCPath } = require("@xarc/app-dev/lib/utils");
 module.exports = () => {
   const xarcOptions = loadXarcOptions();
   const AppMode = xarcOptions.AppMode;
-  const xarcPath = detectXARCPath(xarcOptions.options.cwd);
-  const clientDllConfig = require(Path.resolve(xarcPath, AppMode.src.client, "dll.config.js"));
+  const xarcCwd = detectXARCPath(xarcOptions);
+  const clientDllConfig = require(Path.resolve(xarcCwd, AppMode.src.client, "dll.config.js"));
 
   return {
     entry: clientDllConfig

@@ -46,8 +46,8 @@ class AppDevMiddleware {
       data.refreshModules.forEach(m => {
         try {
           const xarcOptions = loadXarcOptions();
-          const xarcPath = detectXARCPath(xarcOptions.options.cwd);
-          const moduleFullPath = require.resolve(Path.resolve(xarcPath, m));
+          const xarcCwd = detectXARCPath(xarcOptions);
+          const moduleFullPath = require.resolve(Path.resolve(xarcCwd, m));
           delete require.cache[moduleFullPath];
         } catch (err) {
           //

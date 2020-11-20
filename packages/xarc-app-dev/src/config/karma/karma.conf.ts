@@ -56,8 +56,8 @@ let MAIN_PATH;
 
 try {
   const xarcOptions = loadXarcOptions();
-  const xarcPath = detectXARCPath(xarcOptions.options.cwd);
-  MAIN_PATH = require.resolve(Path.resolve(xarcPath, "test/karma-entry"));
+  const xarcCwd = detectXARCPath(xarcOptions);
+  MAIN_PATH = require.resolve(Path.resolve(xarcCwd, "test/karma-entry"));
 } catch (err) {
   if (getXarcOptPlugins()) {
     MAIN_PATH = require.resolve("./entry-xarc.js");
@@ -93,9 +93,9 @@ module.exports = function(config) {
     plugins = [];
   }
   const xarcOptions = loadXarcOptions();
-  const xarcPath = detectXARCPath(xarcOptions.options.cwd);
+  const xarcCwd = detectXARCPath(xarcOptions);
   const settings = {
-    basePath: xarcPath,
+    basePath: xarcCwd,
     frameworks: ["mocha", "intl-shim"],
     files: DLL_PATHS.concat(MAIN_PATH),
     plugins,
@@ -128,12 +128,12 @@ module.exports = function(config) {
         { type: "lcov", subdir: "." },
         { type: "text", subdir: "." }
       ],
-      dir: Path.resolve(xarcPath, "coverage", "client")
+      dir: Path.resolve(xarcCwd, "coverage", "client")
     },
     sonarQubeUnitReporter: {
       sonarQubeVersion: "5.x",
       outputFile: "gunit.xml",
-      outputDir: Path.resolve(xarcPath, "coverage", "client"),
+      outputDir: Path.resolve(xarcCwd, "coverage", "client"),
       useBrowserName: false
     },
     captureTimeout: 100000,

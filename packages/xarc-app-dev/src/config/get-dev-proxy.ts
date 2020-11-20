@@ -9,7 +9,7 @@ import { loadXarcOptions, detectXARCPath } from "../lib/utils";
 
 module.exports = function createDevProxy() {
   const xarcOptions = loadXarcOptions();
-  const xarcPath = detectXARCPath(xarcOptions.options.cwd);
+  const xarcCwd = detectXARCPath(xarcOptions);
   if (cachedProxy) {
     return cachedProxy;
   }
@@ -68,8 +68,8 @@ module.exports = function createDevProxy() {
 
     const searchDirs = ["", "config", "test", "src"];
     for (const f of searchDirs) {
-      const key = Path.resolve(xarcPath, f, "dev-proxy.key");
-      const cert = Path.resolve(xarcPath, f, "dev-proxy.crt");
+      const key = Path.resolve(xarcCwd, f, "dev-proxy.key");
+      const cert = Path.resolve(xarcCwd, f, "dev-proxy.crt");
       if (Fs.existsSync(key) && Fs.existsSync(cert)) {
         return { key, cert };
       }
