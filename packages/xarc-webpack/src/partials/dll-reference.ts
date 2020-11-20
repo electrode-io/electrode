@@ -17,7 +17,7 @@ const { detectXARCPath } = require("@xarc/app-dev/lib/utils");
 
 module.exports = function(options) {
   const xarcOptions = loadXarcOptions();
-  const xarcPath = detectXARCPath(xarcOptions.XARC_CWD);
+  const xarcPath = detectXARCPath(xarcOptions.options.cwd);
 
   const config = options.currentConfig;
   logger.verbose("add-dll-references configurations", JSON.stringify(config, null, 2));

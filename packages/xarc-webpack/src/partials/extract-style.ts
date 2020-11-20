@@ -72,7 +72,7 @@ function loadPostCss() {
 /* eslint-disable complexity */
 module.exports = function() {
   const xarcOptions = loadXarcOptions();
-  const xarcPath = detectXARCPath(xarcOptions.XARC_CWD);
+  const xarcPath = detectXARCPath(xarcOptions.options.cwd);
   const isProduction = process.env.NODE_ENV === "production";
   const isDevelopment = !isProduction;
 
@@ -154,11 +154,7 @@ module.exports = function() {
     enableCssModule && {
       _name: `extract-css-modules`,
       test: /\.css$/,
-      use: [
-        isomorphicLoader,
-        miniCssExtractLoader(true),
-        ...getCssQueryUse(true)
-      ],
+      use: [isomorphicLoader, miniCssExtractLoader(true), ...getCssQueryUse(true)],
       include: cssModuleRegExp
     }
   );

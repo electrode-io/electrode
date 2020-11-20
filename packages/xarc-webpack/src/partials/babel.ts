@@ -9,7 +9,7 @@ import { loadXarcOptions } from "../util/load-xarc-options";
 const { detectXARCPath } = require("@xarc/app-dev/lib/utils");
 module.exports = function(options) {
   const xarcOptions = loadXarcOptions();
-  const xarcPath = detectXARCPath(xarcOptions.XARC_CWD);
+  const xarcPath = detectXARCPath(xarcOptions.options.cwd);
   const AppMode = xarcOptions.AppMode;
 
   const clientVendor = Path.join(AppMode.src.client, "vendor/");

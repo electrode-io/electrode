@@ -5,7 +5,7 @@ const webpack = require("webpack");
 import { loadXarcOptions } from "../util/load-xarc-options";
 const { detectXARCPath } = require("@xarc/app-dev/lib/utils");
 const xarcOptions = loadXarcOptions();
-const xarcPath = detectXARCPath(xarcOptions.XARC_CWD);
+const xarcPath = detectXARCPath(xarcOptions.options.cwd);
 
 module.exports = function() {
   return {

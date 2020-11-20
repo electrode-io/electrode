@@ -79,6 +79,6 @@ export type XarcOptions = {
 
   /**
    * option for app cwd to be used from xarc-options
-  */
- XARC_CWD?: string;
+   */
+  cwd?: string;
 };

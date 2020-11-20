@@ -15,19 +15,20 @@ let cachedArchetype = null;
  * @returns options - final options with defaults and env applied
  */
 module.exports = function getDevOptions(user: XarcOptions = {}) {
-  //added this check because options.ts is setting our default values and cached is missing our xarc option into file
-  if (
-    !_.isNil(user) &&
-    !_.isNil(user.XARC_CWD) &&
-    !_.isNil(cachedArchetype) &&
-    _.isNil(cachedArchetype.options.XARC_CWD)
-  ) {
-    cachedArchetype.options.XARC_CWD = user.XARC_CWD;
-    saveXarcOptions(cachedArchetype);
-  }
+  //checking for cwd from xclap or from env
+  const cwd = user.cwd || process.env.XARC_CWD || process.cwd();
+  process.env.XARC_CWD = cwd;
 
   if (cachedArchetype) {
+    // if cached is already runnig
     cachedArchetype._fromCache = true;
+    if (
+      (_.isNil(cachedArchetype.options.cwd) && !_.isNil(cwd)) ||
+      cachedArchetype.options.cwd !== cwd
+    ) {
+      cachedArchetype.options.cwd = cwd;
+      saveXarcOptions(cachedArchetype);
+    }
     // maintained for backwards compatibility
     return cachedArchetype;
   }
@@ -57,8 +58,8 @@ module.exports = function getDevOptions(user: XarcOptions = {}) {
   });
 
   //added XARC CMD option
-  if (!_.isNil(user) && !_.isNil(user.XARC_CWD)) {
-    legacy.options.XARC_CWD = user.XARC_CWD;
+  if (!_.isNil(user) && !_.isNil(user.cwd)) {
+    legacy.options.cwd = user.cwd;
   }
 
   saveXarcOptions(legacy);

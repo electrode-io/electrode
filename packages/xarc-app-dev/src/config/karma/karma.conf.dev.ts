@@ -17,7 +17,7 @@ import { loadXarcOptions, detectXARCPath } from "../../lib/utils";
 
 module.exports = function(config) {
   const xarcOptions = loadXarcOptions();
-  const xarcPath = detectXARCPath(xarcOptions.options.XARC_CWD);
+  const xarcPath = detectXARCPath(xarcOptions.options.cwd);
   const settings = {
     frameworks: ["mocha"],
     reporters: ["spec"],

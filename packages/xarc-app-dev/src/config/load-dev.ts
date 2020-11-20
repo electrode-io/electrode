@@ -11,7 +11,7 @@ import { loadXarcOptions, detectXARCPath } from "../lib/utils";
 
 function checkTopDevArchetype(devArchName) {
   const xarcOptions = loadXarcOptions();
-  const xarcPath = detectXARCPath(xarcOptions.options.XARC_CWD);
+  const xarcPath = detectXARCPath(xarcOptions.options.cwd);
   const topPkg = optionalRequire(Path.resolve(xarcPath, "package.json"));
   if (topPkg && topPkg.name === devArchName) {
     // In case @xarc/app is being used for test/dev in the -dev archetype

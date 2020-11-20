@@ -163,6 +163,6 @@ export function detectCSSModule(xOptions) {
  * if its aboslute then return it.
  * if not then create the abosolute path and concatinate with xarc path
  */
-export function detectXARCPath(xarcCwd: string = "") {
+export function detectXARCPath(xarcCwd: string = process.cwd()) {
   return Path.resolve(xarcCwd);
 }

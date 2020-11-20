@@ -72,7 +72,7 @@ export { XarcOptions } from "../config/opt2/xarc-options";
  */
 export const getDevTaskRunner = (xarcOptions: XarcOptions = {}) => {
   const archetype = getArchetype(xarcOptions);
-  const xarcPath = detectXARCPath(archetype.options.XARC_CWD);
+  const xarcPath = detectXARCPath(archetype.options.cwd);
   return requireAt(xarcPath)("xclap") || require("xclap");
 };
 
@@ -106,7 +106,7 @@ export function loadXarcDevTasks(xrun, xarcOptions: XarcOptions = {}) {
   // lazy require modules that have effects so as to permit customization
   // from userspace, i.e. `userOptions`
   const archetype = getArchetype(xarcOptions);
-  xarcPath = detectXARCPath(archetype.options.XARC_CWD);
+  xarcPath = detectXARCPath(archetype.options.cwd);
   function setupPath() {
     const nmBin = Path.join("node_modules", ".bin");
     xsh.envPath.addToFront(Path.resolve(xarcPath, nmBin));

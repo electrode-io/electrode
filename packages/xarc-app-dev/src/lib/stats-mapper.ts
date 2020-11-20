@@ -15,7 +15,7 @@ function extractBundles(stats) {
   return [stats];
 }
 const xarcOptions = loadXarcOptions();
-const xarcPath = detectXARCPath(xarcOptions.options.XARC_CWD);
+const xarcPath = detectXARCPath(xarcOptions.options.cwd);
 const WEBPACK_LOADER_MARKER = `!${xarcPath[0]}`;
 
 function getBundles(statsResult) {

@@ -21,7 +21,7 @@ const serverDir = process.argv[2] || "src/server";
 
 let start;
 const xarcOptions = loadXarcOptions();
-const xarcPath = detectXARCPath(xarcOptions.options.XARC_CWD);
+const xarcPath = detectXARCPath(xarcOptions.options.cwd);
 try {
   // Try to load user's dev.js under src/server
   start = require(Path.resolve(xarcPath, serverDir, "dev.js"));

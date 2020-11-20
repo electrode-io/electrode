@@ -104,7 +104,7 @@ class ModuleProcessor {
         try {
           if (split.name !== ".") {
             const xarcOptions = loadXarcOptions();
-            const xarcPath = detectXARCPath(xarcOptions.options.XARC_CWD);
+            const xarcPath = detectXARCPath(xarcOptions.options.cwd);
             return require(Path.resolve(xarcPath, parents.join(nmSep), split.name, "package.json"))
               .version; // eslint-disable-line
           } else {

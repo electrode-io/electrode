@@ -15,7 +15,7 @@ const DEV_HMR_DIR = ".__dev_hmr";
 
 function makeEntryPartial() {
   const xarcOptions = loadXarcOptions();
-  const xarcPath = detectXARCPath(xarcOptions.XARC_CWD);
+  const xarcPath = detectXARCPath(xarcOptions.options.cwd);
   const AppMode = xarcOptions.AppMode;
   const partial: any = {
     context: Path.resolve(xarcPath, AppMode.src.client)

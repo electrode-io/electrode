@@ -27,7 +27,7 @@ const { detectXARCPath } = require("@xarc/app-dev/lib/utils");
 module.exports = function() {
   const dll = dllUtil.loadAssets();
   const xarcOptions = loadXarcOptions();
-  const xarcPath = detectXARCPath(xarcOptions.XARC_CWD);
+  const xarcPath = detectXARCPath(xarcOptions.options.cwd);
 
   // no DLL
   if (_.isEmpty(dll.assets)) {

@@ -56,7 +56,7 @@ let MAIN_PATH;
 
 try {
   const xarcOptions = loadXarcOptions();
-  const xarcPath = detectXARCPath(xarcOptions.options.XARC_CWD);
+  const xarcPath = detectXARCPath(xarcOptions.options.cwd);
   MAIN_PATH = require.resolve(Path.resolve(xarcPath, "test/karma-entry"));
 } catch (err) {
   if (getXarcOptPlugins()) {
@@ -93,7 +93,7 @@ module.exports = function(config) {
     plugins = [];
   }
   const xarcOptions = loadXarcOptions();
-  const xarcPath = detectXARCPath(xarcOptions.options.XARC_CWD);
+  const xarcPath = detectXARCPath(xarcOptions.options.cwd);
   const settings = {
     basePath: xarcPath,
     frameworks: ["mocha", "intl-shim"],
