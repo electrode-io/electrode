@@ -13,7 +13,6 @@ const jestMajVersion = parseInt(jestPkg.version.split(".")[0], 10);
 import { loadXarcOptions, detectXARCPath } from "../../lib/utils";
 
 const xarcOptions = loadXarcOptions();
-console.log(`jest.config ${xarcOptions.options.cwd}`);
 const xarcPath = detectXARCPath(xarcOptions.options.cwd);
 
 const { enableTypeScript } = xarcOptions.babel;
