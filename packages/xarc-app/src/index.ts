@@ -299,7 +299,7 @@ if (!getAppMode().hasEnv()) {
   const guessAppSrcDir = () => {
     if (module.parent && module.parent.filename) {
       const fn = module.parent.filename;
-      const dir = fn.substr(detectXARCPath(archetype.cwd).length + 1).split("/")[0];
+      const dir = fn.substr(detectXARCPath(archetype).length + 1).split("/")[0];
       if (dir === getAppMode().src.dir || dir === getAppMode().lib.dir) {
         return `${dir}/`;
       }
