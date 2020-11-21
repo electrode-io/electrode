@@ -49,7 +49,7 @@ export function checkOptArchetypeInAppDep(dependencies, isDev = undefined) {
 
 export const getUserConfigOptions = (packageNames, devPackageNames) => {
   const xarcOptions = loadXarcOptions();
-  const xarcCwd = xarcOptions.cwd;
+  const xarcCwd = xarcOptions.cwd || process.cwd();
   return {
     reactLib: "react",
     ...optionalRequire(Path.resolve(xarcCwd, "archetype/config"), { default: {} }).options,
@@ -73,7 +73,7 @@ export function getDefaultArchetypeOptions() {
   // Basically any package named electrode-archetype-opt-* or @xarc/opt-*
   //
   const xarcOptions = loadXarcOptions();
-  const xarcCwd = xarcOptions.cwd;
+  const xarcCwd = xarcOptions.cwd || process.cwd();
   const appPkg = optionalRequire(Path.resolve(xarcCwd, "package.json")) || {
     dependencies: {},
     devDependencies: {}
