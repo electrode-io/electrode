@@ -78,7 +78,7 @@ export type XarcOptions = {
   babelOptions?: BabelOptions;
 
   /**
-   * option for app cwd to be used from xarc-options
+   * option related to app cwd
    */
   cwd?: string;
 };
