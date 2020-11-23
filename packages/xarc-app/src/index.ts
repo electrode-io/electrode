@@ -10,6 +10,7 @@ const makeAppMode = require("../lib/app-mode");
 const Path = require("path");
 const constants = require("../lib/constants");
 const logger = require("../lib/logger");
+
 let AppMode;
 const archetype = require("@xarc/app-dev/config/archetype")();
 
