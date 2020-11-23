@@ -91,7 +91,7 @@ export const jsonParser = (key, value) => {
 
 let cachedXarcOptions;
 
-export function loadXarcOptions(dir: string = process.cwd()) {
+export function loadXarcOptions(dir: string = process.cwd(), showError = true) {
   let cwd;
   if (process.env.XARC_CWD) {
     cwd = process.env.XARC_CWD;
@@ -107,17 +107,20 @@ export function loadXarcOptions(dir: string = process.cwd()) {
     return (cachedXarcOptions = JSON.parse(data, jsonParser));
   } catch (err) {
     // eslint-disable-next-line
-    console.error(ck`
-<red>ERROR</>: Electrode xarc fail to load <cyan>.etmp/xarc-options.json</> in
-dev mode.  This means you are trying to use something not through
-xarc's development tasks.
+    if (showError) {
+      console.error(ck`
+      <red>ERROR</>: Electrode xarc fail to load <cyan>.etmp/xarc-options.json</> in
+      dev mode.  This means you are trying to use something not through
+      xarc's development tasks.
+      
+      full path: ${filename}
+      
+      Please run "clap setup-dev" once to initialize the file
+      <cyan>.etmp/xarc-options.json</> before doing your thing that loads
+      xarc's development code.
+      `);
+    }
 
-full path: ${filename}
-
-Please run "clap setup-dev" once to initialize the file
-<cyan>.etmp/xarc-options.json</> before doing your thing that loads
-xarc's development code.
-`);
     return (cachedXarcOptions = {
       webpack: {},
       babel: {},
