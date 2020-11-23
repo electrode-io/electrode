@@ -68,6 +68,7 @@ function loadPostCss() {
  */
 
 /* eslint-disable complexity */
+
 module.exports = function() {
   const xarcOptions = loadXarcOptions();
   const xarcCwd = xarcOptions.cwd;
