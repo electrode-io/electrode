@@ -91,13 +91,11 @@ export const jsonParser = (key, value) => {
 
 let cachedXarcOptions;
 
-export function loadXarcOptions(dir: string = process.cwd(), showError = true) {
-  let cwd;
-  if (process.env.XARC_CWD) {
-    cwd = process.env.XARC_CWD;
-  } else {
-    cwd = dir;
-  }
+export function loadXarcOptions(
+  dir: string = process.env.XARC_CWD || process.cwd(),
+  showError = true
+) {
+  let cwd = dir;
   if (cachedXarcOptions) {
     return cachedXarcOptions;
   }
