@@ -7,7 +7,7 @@
   "scripts": {
     "build": "clap compile",
     "test": "BABEL_ENV=src-minify xrun xarc/test-only",
-    "coverage": "clap check",
+    "coverage": "xrun xarc/check",
     "prepublishOnly": "xrun [[build], xarc/check]",
     "docs": "xrun xarc/docs"
   },
@@ -106,6 +106,7 @@
       "coverage",
       "dist",
       "docs",
+      "lib",
       "gulpfile.js",
       "node-dist",
       "test",
@@ -132,6 +133,7 @@
       "eslint",
       "eslintTS",
       "mocha",
+      "typedoc",
       "typescript"
     ]
   },

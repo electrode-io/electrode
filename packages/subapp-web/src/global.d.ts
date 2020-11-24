@@ -1,10 +1,10 @@
-export {}
+export {};
 declare global {
   namespace NodeJS {
     interface Global {
         _wml: {
-            jwt: any
-        },
+            jwt: any;
+        };
         xarcV1: any;
     }
   }

@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 
 import * as Fs from "fs";
 import * as Path from "path";
