@@ -15,7 +15,12 @@ let cachedArchetype = null;
  * @returns options - final options with defaults and env applied
  */
 module.exports = function getDevOptions(user: XarcOptions = {}) {
+  //checking for cwd from xclap or from env
+  const cwd = user.cwd || process.env.XARC_CWD || process.cwd();
+  process.env.XARC_CWD = cwd;
+
   if (cachedArchetype) {
+    // if cached is already runnig
     cachedArchetype._fromCache = true;
     // maintained for backwards compatibility
     return cachedArchetype;
@@ -24,7 +29,17 @@ module.exports = function getDevOptions(user: XarcOptions = {}) {
   // first get legacy configs
   const legacy = getDevArchetypeLegacy();
   // try to read xarc-options.json if it exist and merge it into legacy
-  const xarcOptions = loadXarcOptions();
+  const xarcOptions = {
+    ...loadXarcOptions(cwd, false),
+    // don't want these from saved options because the calculated ones in
+    // legacy is most up to date.  otherwise an outdated saved options
+    // will break everything if dependencies were updated
+    dir: undefined,
+    devDir: undefined,
+    config: undefined,
+    cwd: undefined // we know what this is already
+  };
+
   user = _.merge({}, xarcOptions, user);
   const proxy = getEnvProxy();
 
@@ -40,6 +55,7 @@ module.exports = function getDevOptions(user: XarcOptions = {}) {
   // merge the rest into top level
   _.merge(legacy, {
     ...user,
+    cwd,
     webpackOptions: undefined,
     babelOptions: undefined,
     addOnFeatures: undefined

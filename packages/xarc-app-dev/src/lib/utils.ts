@@ -2,6 +2,7 @@
 
 import * as readPkgUp from "read-pkg-up";
 import * as pkgUp from "pkg-up";
+import { XarcOptions } from "../config/opt2/xarc-options";
 const mkdirp = require("mkdirp");
 const logger = require("./logger");
 const ck = require("chalker");
@@ -90,7 +91,10 @@ export const jsonParser = (key, value) => {
 
 let cachedXarcOptions;
 
-export function loadXarcOptions(dir: string = process.cwd()) {
+export function loadXarcOptions(
+  dir: string = process.env.XARC_CWD || process.cwd(),
+  showError = true
+) {
   if (cachedXarcOptions) {
     return cachedXarcOptions;
   }
@@ -100,7 +104,8 @@ export function loadXarcOptions(dir: string = process.cwd()) {
     return (cachedXarcOptions = JSON.parse(data, jsonParser));
   } catch (err) {
     // eslint-disable-next-line
-    console.error(ck`
+    if (showError) {
+      console.error(ck`
 <red>ERROR</>: Electrode xarc fail to load <cyan>.etmp/xarc-options.json</> in
 dev mode.  This means you are trying to use something not through
 xarc's development tasks.
@@ -111,6 +116,8 @@ Please run "clap setup-dev" once to initialize the file
 <cyan>.etmp/xarc-options.json</> before doing your thing that loads
 xarc's development code.
 `);
+    }
+
     return (cachedXarcOptions = {
       webpack: {},
       babel: {},

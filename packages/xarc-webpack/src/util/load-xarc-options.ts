@@ -20,7 +20,7 @@ export const jsonParser = (key, value) => {
 
 let cachedXarcOptions;
 
-export function loadXarcOptions(dir: string = process.cwd()) {
+export function loadXarcOptions(dir: string = process.env.XARC_CWD || process.cwd()) {
   if (cachedXarcOptions) {
     return cachedXarcOptions;
   }

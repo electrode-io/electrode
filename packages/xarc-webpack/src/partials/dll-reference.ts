@@ -16,14 +16,17 @@ const logger = require("@xarc/app-dev/lib/logger");
 
 module.exports = function(options) {
   const xarcOptions = loadXarcOptions();
+  const xarcCwd = xarcOptions.cwd;
 
   const config = options.currentConfig;
   logger.verbose("add-dll-references configurations", JSON.stringify(config, null, 2));
 
   try {
-    const exists = fs.existsSync(Path.resolve(xarcOptions.AppMode.src.client, "dll.config.js"));
+    const exists = fs.existsSync(
+      Path.resolve(xarcCwd, xarcOptions.AppMode.src.client, "dll.config.js")
+    );
     const filenames = filterScanDir.sync({
-      dir: Path.resolve("dll", "js"),
+      dir: Path.resolve(xarcCwd, "dll", "js"),
       includeRoot: true,
       filter(file, path, extras) {
         return extras.ext === ".json" && file.indexOf("-manifest") >= 0;

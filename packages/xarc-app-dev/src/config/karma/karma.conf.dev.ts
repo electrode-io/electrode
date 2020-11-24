@@ -13,12 +13,15 @@ export {};
 const loadUserConfig = require("./util/load-user-config");
 const Path = require("path");
 const browserSettings = require("./browser-settings");
+import { loadXarcOptions } from "../../lib/utils";
 
 module.exports = function(config) {
+  const xarcOptions = loadXarcOptions();
+  const xarcCwd = xarcOptions.cwd;
   const settings = {
     frameworks: ["mocha"],
     reporters: ["spec"],
-    basePath: process.cwd(), // repository root.
+    basePath: xarcCwd, // repository root.
     files: [
       // Test bundle (must be created via `npm run dev|server-test`)
       "http://127.0.0.1:3001/assets/bundle.js"

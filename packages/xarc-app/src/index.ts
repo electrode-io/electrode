@@ -47,9 +47,10 @@ export function cssModuleHook(
     [key: string]: any;
   } = {}
 ) {
+  const archetype = require("@xarc/app-dev/config/archetype")();
   const defaultRootDirPath = process.env.NODE_ENV === "production" ? "lib" : "src";
   options.generateScopedName = options.generateScopedName || "[hash:base64]";
-  options.rootDir = options.rootDir || Path.resolve(defaultRootDirPath);
+  options.rootDir = options.rootDir || Path.resolve(archetype.cwd, defaultRootDirPath);
 
   require("css-modules-require-hook")(options);
 }
@@ -295,9 +296,10 @@ export function load(
 
 if (!getAppMode().hasEnv()) {
   const guessAppSrcDir = () => {
+    const archetype = require("@xarc/app-dev/config/archetype")();
     if (module.parent && module.parent.filename) {
       const fn = module.parent.filename;
-      const dir = fn.substr(process.cwd().length + 1).split("/")[0];
+      const dir = fn.substr(archetype.cwd.length + 1).split("/")[0];
       if (dir === getAppMode().src.dir || dir === getAppMode().lib.dir) {
         return `${dir}/`;
       }
@@ -306,4 +308,5 @@ if (!getAppMode().hasEnv()) {
   };
   getAppMode().setEnv(guessAppSrcDir());
 }
+
 logger.info(`${getAppMode().envKey} set to`, getAppMode().getEnv());

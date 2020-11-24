@@ -47,7 +47,7 @@ module.exports = function(options) {
       {
         loader: babelLoader,
         options: Object.assign(
-          { cacheDirectory: Path.resolve(".etmp/babel-loader") },
+          { cacheDirectory: Path.resolve(xarcOptions.cwd, ".etmp/babel-loader") },
           options.babel
         )
       }

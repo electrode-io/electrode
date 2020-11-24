@@ -15,10 +15,10 @@ const DEV_HMR_DIR = ".__dev_hmr";
 
 function makeEntryPartial() {
   const xarcOptions = loadXarcOptions();
+  const xarcCwd = xarcOptions.cwd;
   const AppMode = xarcOptions.AppMode;
-
   const partial: any = {
-    context: Path.resolve(AppMode.src.client)
+    context: Path.resolve(xarcCwd, AppMode.src.client)
   };
 
   //
@@ -124,7 +124,7 @@ if (module.hot) {
     }
 
     const isDev = Boolean(process.env.WEBPACK_DEV);
-    const hmrDir = Path.resolve(AppMode.src.dir, DEV_HMR_DIR);
+    const hmrDir = Path.resolve(xarcCwd, AppMode.src.dir, DEV_HMR_DIR);
     const gitIgnoreFile = Path.join(hmrDir, ".gitignore");
     if (isDev && !Fs.existsSync(gitIgnoreFile)) {
       mkdirp.sync(hmrDir);
@@ -137,7 +137,7 @@ if (module.hot) {
 `
       );
     }
-    partial.context = Path.resolve(AppMode.src.dir);
+    partial.context = Path.resolve(xarcCwd, AppMode.src.dir);
     const entry = {};
     _.each(subApps, ma => {
       const entryName = `${ma.name.toLowerCase()}`;

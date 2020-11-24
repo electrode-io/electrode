@@ -12,6 +12,8 @@ import {
   WEBPACK_EVENT_STATS
 } from "./dev-admin/webpack-dev-relay";
 
+import { loadXarcOptions } from "./utils";
+
 class AppDevMiddleware {
   webpackDev: any;
 
@@ -43,7 +45,9 @@ class AppDevMiddleware {
     if (!_.isEmpty(data.refreshModules)) {
       data.refreshModules.forEach(m => {
         try {
-          const moduleFullPath = require.resolve(Path.resolve(m));
+          const xarcOptions = loadXarcOptions();
+          const xarcCwd = xarcOptions.cwd;
+          const moduleFullPath = require.resolve(Path.resolve(xarcCwd, m));
           delete require.cache[moduleFullPath];
         } catch (err) {
           //
