@@ -104,9 +104,12 @@ class ModuleProcessor {
         try {
           if (split.name !== ".") {
             const xarcOptions = loadXarcOptions();
-            const xarcCwd = xarcOptions.cwd;
-            return require(Path.resolve(xarcCwd, parents.join(nmSep), split.name, "package.json"))
-              .version; // eslint-disable-line
+            return require(Path.resolve(
+              xarcOptions.cwd,
+              parents.join(nmSep),
+              split.name,
+              "package.json"
+            )).version; // eslint-disable-line
           } else {
             return "-";
           }
