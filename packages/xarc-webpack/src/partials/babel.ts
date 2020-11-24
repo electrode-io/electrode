@@ -9,7 +9,6 @@ import { loadXarcOptions } from "../util/load-xarc-options";
 
 module.exports = function(options) {
   const xarcOptions = loadXarcOptions();
-  const xarcCwd = xarcOptions.cwd;
   const AppMode = xarcOptions.AppMode;
 
   const clientVendor = Path.join(AppMode.src.client, "vendor/");
@@ -48,7 +47,7 @@ module.exports = function(options) {
       {
         loader: babelLoader,
         options: Object.assign(
-          { cacheDirectory: Path.resolve(xarcCwd, ".etmp/babel-loader") },
+          { cacheDirectory: Path.resolve(xarcOptions.cwd, ".etmp/babel-loader") },
           options.babel
         )
       }
