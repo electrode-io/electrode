@@ -78,7 +78,8 @@ export type XarcOptions = {
   babelOptions?: BabelOptions;
 
   /**
-   * option related to app cwd
+   * option for app directory if passed to loadXarcDevTasks using xclap.ts
+   * e.g: loadXarcDevTasks(null, { cwd: "/actual-dir-of-app" });
    */
   cwd?: string;
 };
