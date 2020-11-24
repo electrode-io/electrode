@@ -12,7 +12,6 @@ const constants = require("../lib/constants");
 const logger = require("../lib/logger");
 
 let AppMode;
-const archetype = require("@xarc/app-dev/config/archetype")();
 
 function getAppMode() {
   if (AppMode) {
@@ -20,6 +19,7 @@ function getAppMode() {
   }
 
   try {
+    const archetype = require("@xarc/app-dev/config/archetype")();
     return (AppMode = archetype.AppMode);
   } catch (e) {
     return (AppMode = makeAppMode(constants.PROD_DIR));
@@ -47,10 +47,10 @@ export function cssModuleHook(
     [key: string]: any;
   } = {}
 ) {
+  const archetype = require("@xarc/app-dev/config/archetype")();
   const defaultRootDirPath = process.env.NODE_ENV === "production" ? "lib" : "src";
   options.generateScopedName = options.generateScopedName || "[hash:base64]";
-  const xarcCwd = archetype.cwd;
-  options.rootDir = options.rootDir || `${xarcCwd}/${defaultRootDirPath}`;
+  options.rootDir = options.rootDir || `${archetype.cwd}/${defaultRootDirPath}`;
 
   require("css-modules-require-hook")(options);
 }
@@ -296,6 +296,7 @@ export function load(
 
 if (!getAppMode().hasEnv()) {
   const guessAppSrcDir = () => {
+    const archetype = require("@xarc/app-dev/config/archetype")();
     if (module.parent && module.parent.filename) {
       const fn = module.parent.filename;
       const dir = fn.substr(archetype.cwd.length + 1).split("/")[0];
