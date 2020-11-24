@@ -95,11 +95,10 @@ export function loadXarcOptions(
   dir: string = process.env.XARC_CWD || process.cwd(),
   showError = true
 ) {
-  let cwd = dir;
   if (cachedXarcOptions) {
     return cachedXarcOptions;
   }
-  const filename = Path.join(cwd, ".etmp/xarc-options.json");
+  const filename = Path.join(dir, ".etmp/xarc-options.json");
   try {
     const data = Fs.readFileSync(filename, "utf-8");
     return (cachedXarcOptions = JSON.parse(data, jsonParser));
