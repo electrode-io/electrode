@@ -50,7 +50,7 @@ export function cssModuleHook(
   const archetype = require("@xarc/app-dev/config/archetype")();
   const defaultRootDirPath = process.env.NODE_ENV === "production" ? "lib" : "src";
   options.generateScopedName = options.generateScopedName || "[hash:base64]";
-  options.rootDir = options.rootDir || `${Path.resolve(archetype.cwd)}/${defaultRootDirPath}`;
+  options.rootDir = options.rootDir || Path.resolve(archetype.cwd, defaultRootDirPath);
 
   require("css-modules-require-hook")(options);
 }
