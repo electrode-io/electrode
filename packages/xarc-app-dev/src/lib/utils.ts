@@ -2,7 +2,6 @@
 
 import * as readPkgUp from "read-pkg-up";
 import * as pkgUp from "pkg-up";
-import { XarcOptions } from "../config/opt2/xarc-options";
 const mkdirp = require("mkdirp");
 const logger = require("./logger");
 const ck = require("chalker");

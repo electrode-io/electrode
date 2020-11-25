@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 export {};
 
-let cachedEnvBabel = null;
-
 module.exports = function getEnvBabel() {
   const xenvConfig = require("xenv-config");
   const { merge } = require("lodash");
@@ -42,6 +40,6 @@ module.exports = function getEnvBabel() {
       default: {}
     }
   };
-  cachedEnvBabel = cachedEnvBabel || xenvConfig(babelConfigSpec, userConfig.babel, { merge });
-  return cachedEnvBabel;
+
+  return xenvConfig(babelConfigSpec, userConfig.babel, { merge });
 };

@@ -4,15 +4,8 @@ export {};
 const Path = require("path");
 const Fs = require("fs");
 
-let cachedProxy = null;
-import { loadXarcOptions } from "../lib/utils";
-
 module.exports = function createDevProxy() {
-  const xarcOptions = loadXarcOptions();
-  const xarcCwd = xarcOptions.cwd;
-  if (cachedProxy) {
-    return cachedProxy;
-  }
+  const xarcCwd = process.env.XARC_CWD || process.cwd();
 
   const envWebpack = require("./env-webpack")();
   const envApp = require("./env-app")();
@@ -131,7 +124,7 @@ module.exports = function createDevProxy() {
     reporter: `${devPath}/reporter`
   };
 
-  cachedProxy = cachedProxy || {
+  return {
     settings,
     devServer: useDevProxy
       ? // when using dev proxy, all routes and assets are unified at the same protocol/host/port
@@ -147,6 +140,4 @@ module.exports = function createDevProxy() {
     controlPaths,
     searchSSLCerts
   };
-
-  return cachedProxy;
 };
