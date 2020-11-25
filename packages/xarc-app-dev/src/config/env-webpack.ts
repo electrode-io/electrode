@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 export {};
 
-let cachedWebpackConfig = null;
-
 module.exports = function getEnvWebpack() {
   const xenvConfig = require("xenv-config");
   const userConfig = require("./user-config")();
@@ -50,7 +48,6 @@ module.exports = function getEnvWebpack() {
     loadDlls: { env: "ELECTRODE_LOAD_DLLS", type: "json", default: {} },
     minify: { env: "WEBPACK_MINIFY", default: true }
   };
-  cachedWebpackConfig =
-    cachedWebpackConfig || xenvConfig(webpackConfigSpec, userConfig.webpack, { merge });
-  return cachedWebpackConfig;
+
+  return xenvConfig(webpackConfigSpec, userConfig.webpack, { merge });
 };

@@ -11,7 +11,7 @@ const assert = require("assert");
 const requireAt = require("require-at");
 const optionalRequire = require("optional-require")(require);
 const { updateEnv } = require("xclap");
-const getArchetype = require("../config/archetype");
+const getDevOptions = require("../config/archetype");
 const ck = require("chalker");
 const xaa = require("xaa");
 const { psChildren } = require("ps-get");
@@ -68,11 +68,11 @@ export { XarcOptions } from "../config/opt2/xarc-options";
 /**
  * Get the dev task runner (xclap) from Electrode module's perspective.
  *
+ * @param cwd - current working dir for your app - default to `process.cwd()`
+ *
  * @returns the instance of xclap that's required
  */
-export const getDevTaskRunner = (xarcOptions: XarcOptions = {}) => {
-  const archetype = getArchetype(xarcOptions);
-  const cwd = archetype.cwd;
+export const getDevTaskRunner = (cwd: string = process.cwd()) => {
   return requireAt(cwd)("xclap") || require("xclap");
 };
 
@@ -98,19 +98,18 @@ export const getDevTaskRunner = (xarcOptions: XarcOptions = {}) => {
  *
  * @param  xrun - `@xarc/run` (or xclap) task runner.  pass `null` and an
  *   internal version will be used.
- * @param  xarcOptions user provided options to configure features etc
+ * @param  userOptions user provided options to configure features etc
  *
  * @returns The xclap task runner instance that was used.
  */
-export function loadXarcDevTasks(xrun, xarcOptions: XarcOptions = {}) {
-  // lazy require modules that have effects so as to permit customization
-  // from userspace, i.e. `userOptions`
-  const archetype = getArchetype(xarcOptions);
-  xarcCwd = archetype.cwd;
+export function loadXarcDevTasks(xrun, userOptions: XarcOptions = {}) {
+  let xarcOptions = getDevOptions(userOptions);
+  xarcCwd = xarcOptions.cwd;
+
   function setupPath() {
     const nmBin = Path.join("node_modules", ".bin");
     xsh.envPath.addToFront(Path.resolve(xarcCwd, nmBin));
-    xsh.envPath.addToFront(Path.join(archetype.devDir, nmBin));
+    xsh.envPath.addToFront(Path.join(xarcOptions.devDir, nmBin));
   }
 
   setupPath();
@@ -119,7 +118,7 @@ export function loadXarcDevTasks(xrun, xarcOptions: XarcOptions = {}) {
   const flattenMessagesL10n = require(`../scripts/l10n/flatten-messages.js`);
   const mapIsomorphicCdn = require(`../scripts/map-isomorphic-cdn.js`);
 
-  const config = archetype.config;
+  const config = xarcOptions.config;
   const karmaConfig = file => Path.join(config.karma, file);
   const mochaConfig = file => Path.join(config.mocha, file);
   const eslintConfig = file => Path.join(config.eslint, file);
@@ -181,7 +180,7 @@ export function loadXarcDevTasks(xrun, xarcOptions: XarcOptions = {}) {
     process.env.APP_SERVER_PORT = "3100";
   }
 
-  const eTmpDir = archetype.eTmpDir;
+  const eTmpDir = xarcOptions.eTmpDir;
 
   function removeLogFiles() {
     try {
@@ -284,7 +283,7 @@ export function loadXarcDevTasks(xrun, xarcOptions: XarcOptions = {}) {
     const targetPath = Path.resolve(xarcCwd, "dist/js/critical.css");
     const serverPromise = require(Path.resolve(
       xarcCwd,
-      `${archetype.AppMode.src.server}/index.js`
+      `${xarcOptions.AppMode.src.server}/index.js`
     ))();
     const penthouseOptions = {
       url,
@@ -318,8 +317,8 @@ export function loadXarcDevTasks(xrun, xarcOptions: XarcOptions = {}) {
     const x = argFlags.length > 0 ? ` with options: ${argFlags.join(" ")}` : "";
     logger.info(`Starting app server${x}`);
     logger.info("To terminate press Ctrl+C.");
-    archetype.AppMode.setEnv(archetype.AppMode.lib.dir);
-    return exec(`node`, argFlags, Path.join(archetype.AppMode.lib.server, "index.js"));
+    xarcOptions.AppMode.setEnv(xarcOptions.AppMode.lib.dir);
+    return exec(`node`, argFlags, Path.join(xarcOptions.AppMode.lib.server, "index.js"));
   }
 
   function generateBrowsersListRc() {
@@ -373,10 +372,10 @@ export function loadXarcDevTasks(xrun, xarcOptions: XarcOptions = {}) {
       const modulePath = Path.resolve(xarcCwd, "node_modules", module);
       assert(shell.test("-d", modulePath), `${modulePath} is not a directory`);
       createGitIgnoreDir(
-        Path.resolve(xarcCwd, archetype.prodModulesDir),
+        Path.resolve(xarcCwd, xarcOptions.prodModulesDir),
         "Electrode production modules dir"
       );
-      const prodPath = Path.join(archetype.prodModulesDir, module);
+      const prodPath = Path.join(xarcOptions.prodModulesDir, module);
       const cmd = mkCmd(
         `babel -q ${quote(modulePath)} --no-babelrc --ignore dist -D`,
         `--plugins transform-node-env-inline,minify-dead-code-elimination`,
@@ -412,11 +411,11 @@ module.exports = {
       );
     };
 
-    const AppMode = archetype.AppMode;
+    const AppMode = xarcOptions.AppMode;
 
     const babelCliIgnore = quote(
       [...jestTestDirectories.map(dir => `**/${dir}`), `**/*.spec.js`, `**/*.spec.jsx`]
-        .concat(archetype.babel.enableTypeScript && [`**/*.test.ts`, `**/*.test.tsx`])
+        .concat(xarcOptions.babel.enableTypeScript && [`**/*.test.ts`, `**/*.test.tsx`])
         .concat(`**/.__dev_hmr`)
         .filter(x => x)
         .join(",")
@@ -424,12 +423,12 @@ module.exports = {
 
     const babelCliExtensions = quote(
       [".js", ".jsx"]
-        .concat(archetype.babel.enableTypeScript && [".ts", ".tsx"])
+        .concat(xarcOptions.babel.enableTypeScript && [".ts", ".tsx"])
         .filter(x => x)
         .join(",")
     );
 
-    const babelEnvTargetsArr = Object.keys(archetype.babel.envTargets).filter(k => k !== "node");
+    const babelEnvTargetsArr = Object.keys(xarcOptions.babel.envTargets).filter(k => k !== "node");
 
     const buildDistDirs = babelEnvTargetsArr
       .filter(name => name !== "default")
@@ -437,12 +436,21 @@ module.exports = {
 
     let tasks = {
       ".mk-prod-dir": () =>
-        createGitIgnoreDir(Path.resolve(xarcCwd, archetype.prodDir), "Electrode production dir"),
+        createGitIgnoreDir(Path.resolve(xarcCwd, xarcOptions.prodDir), "Electrode production dir"),
       ".mk-dist-dir": () => createGitIgnoreDir(Path.resolve(xarcCwd, "dist"), "Electrode dist dir"),
       ".mk-dll-dir": () => createGitIgnoreDir(Path.resolve(xarcCwd, "dll"), "Electrode dll dir"),
-      ".production-env": () => setProductionEnv(),
-      ".development-env": () => setDevelopmentEnv(),
-      ".webpack-dev": () => setWebpackDev(),
+      ".production-env": () => {
+        setProductionEnv();
+        xarcOptions = getDevOptions(userOptions); // re-evaluate options
+      },
+      ".development-env": () => {
+        setDevelopmentEnv();
+        xarcOptions = getDevOptions(userOptions); // re-evaluate options
+      },
+      ".webpack-dev": () => {
+        setWebpackDev();
+        xarcOptions = getDevOptions(userOptions); // re-evaluate options
+      },
       ".static-files-env": () => setStaticFilesEnv(),
       ".remove-log-files": () => removeLogFiles(),
       build: {
@@ -513,12 +521,12 @@ module.exports = {
       ".ss-clean.prod-react": () => {
         shell.rm(
           "-rf",
-          Path.join(archetype.prodModulesDir, "react"),
-          Path.join(archetype.prodModulesDir, "react-dom")
+          Path.join(xarcOptions.prodModulesDir, "react"),
+          Path.join(xarcOptions.prodModulesDir, "react-dom")
         );
       },
       "ss-prod-react": {
-        desc: `Make optimized copy of react&react-dom for server side in dir ${archetype.prodModulesDir}`,
+        desc: `Make optimized copy of react&react-dom for server side in dir ${xarcOptions.prodModulesDir}`,
         dep: [".ss-clean.prod-react", ".mk-prod-dir"],
         task: xclap2.concurrent(".ss-prod-react", ".ss-prod-react-dom")
       },
@@ -599,7 +607,7 @@ module.exports = {
               Fs.readFile(isomorphicPath, { encoding: "utf8" }, (err, data) => {
                 if (err) throw err;
                 const assetsJson = JSON.parse(data);
-                const { envTargets } = archetype.babel;
+                const { envTargets } = xarcOptions.babel;
                 assetsJson.targets = envTargets[dir.split("-")[1]];
                 // eslint-disable-next-line no-shadow
                 Fs.writeFile(isomorphicPath, JSON.stringify(assetsJson, null, 2), err => {
@@ -623,7 +631,7 @@ module.exports = {
       ".build-lib": () => undefined,
 
       ".check.top.level.babelrc": () => {
-        if (archetype.checkUserBabelRc() !== false) {
+        if (xarcOptions.checkUserBabelRc() !== false) {
           logger.error(`
   You are using src for client & server, archetype will ignore your top level .babelrc
   Please remove your top level .babelrc file if you have no other use of it.
@@ -758,7 +766,7 @@ module.exports = {
       clean: [".clean.dist", ".clean.lib", ".clean.prod", ".clean.etmp", ".clean.dll"],
       ".clean.dist": () => shell.rm("-rf", "dist", ...buildDistDirs),
       ".clean.lib": () => undefined, // to be updated below for src mode
-      ".clean.prod": () => shell.rm("-rf", archetype.prodDir),
+      ".clean.prod": () => shell.rm("-rf", xarcOptions.prodDir),
       ".clean.etmp": () => shell.rm("-rf", eTmpDir),
       ".clean.dll": () => shell.rm("-rf", "dll"),
       ".clean.build": [".clean.dist", ".clean.dll"],
@@ -803,6 +811,7 @@ module.exports = {
       "setup-dev": {
         desc: `Setup development related options for your application. \
 You only need to run this if you are doing something not through the xarc tasks.`,
+        dep: [".webpack-dev", ".development-env"],
         task() {
           console.log(`xarc dev options configured.`);
         }
@@ -823,7 +832,7 @@ You only need to run this if you are doing something not through the xarc tasks.
       hot: {
         desc: "Start app dev with hot reload enabled",
         task: () => {
-          archetype.webpack.enableHotModuleReload = true;
+          xarcOptions.webpack.enableHotModuleReload = true;
           return "dev";
         }
       },
@@ -884,7 +893,7 @@ You only need to run this if you are doing something not through the xarc tasks.
           setWebpackProfile("development");
           AppMode.setEnv(AppMode.src.dir);
           // eslint-disable-next-line no-shadow
-          const exec = quote(Path.join(archetype.devDir, "lib/babel-run"));
+          const exec = quote(Path.join(xarcOptions.devDir, "lib/babel-run"));
           const isNodeArgs = x => x.startsWith("--inspect");
           const nodeArgs = context.args.filter(isNodeArgs);
           const otherArgs = context.args.filter(x => !isNodeArgs(x));
@@ -892,7 +901,7 @@ You only need to run this if you are doing something not through the xarc tasks.
           return mkCmd(
             `~(tty)$node`,
             nodeArgs.join(" "),
-            quote(Path.join(archetype.devDir, "lib/dev-admin")),
+            quote(Path.join(xarcOptions.devDir, "lib/dev-admin")),
             otherArgs.join(" "),
             `--exec ${exec} --ext js,jsx,json,yaml,log,ts,tsx`,
             `--watch config ${AppMode.src.server}`,
@@ -907,14 +916,14 @@ You only need to run this if you are doing something not through the xarc tasks.
           setWebpackProfile("test");
           AppMode.setEnv(AppMode.src.dir);
           // eslint-disable-next-line no-shadow
-          const exec = quote(Path.join(archetype.devDir, "lib/babel-run"));
+          const exec = quote(Path.join(xarcOptions.devDir, "lib/babel-run"));
           const isNodeArgs = x => x.startsWith("--inspect");
           const nodeArgs = context.args.filter(isNodeArgs);
           const otherArgs = context.args.filter(x => !isNodeArgs(x));
           return mkCmd(
             `~(tty)$node`,
             nodeArgs.join(" "),
-            quote(Path.join(archetype.devDir, "lib/dev-admin")),
+            quote(Path.join(xarcOptions.devDir, "lib/dev-admin")),
             otherArgs.join(" "),
             `--exec ${exec} --ext js,jsx,json,yaml,log,ts,tsx`,
             `--watch config ${AppMode.src.server}`,
@@ -983,7 +992,7 @@ You only need to run this if you are doing something not through the xarc tasks.
       }
     };
 
-    if (archetype.options.flow && optFlow) {
+    if (xarcOptions.options.flow && optFlow) {
       const flowPkgDir = Path.dirname(require.resolve("electrode-archetype-opt-flow"));
       Object.assign(tasks, {
         initflow: {
@@ -1030,7 +1039,7 @@ You only need to run this if you are doing something not through the xarc tasks.
       });
     }
 
-    if (archetype.options.eslint) {
+    if (xarcOptions.options.eslint) {
       Object.assign(tasks, {
         lint: xclap2.concurrent(
           "lint-client",
@@ -1087,7 +1096,7 @@ You only need to run this if you are doing something not through the xarc tasks.
       });
     }
 
-    if (archetype.options.karma) {
+    if (xarcOptions.options.karma) {
       const noSingleRun = process.argv.indexOf("--no-single-run") >= 0 ? "--no-single-run" : "";
 
       Object.assign(tasks, {
@@ -1160,7 +1169,7 @@ You only need to run this if you are doing something not through the xarc tasks.
       });
     }
 
-    if (archetype.options.jest) {
+    if (xarcOptions.options.jest) {
       Object.assign(tasks, {
         jest: {
           desc: "Run jest tests (--inspect-brk to start debugger)",
@@ -1185,7 +1194,7 @@ You only need to run this if you are doing something not through the xarc tasks.
           }
 
           if (!runJest) {
-            const { roots } = archetype.jest;
+            const { roots } = xarcOptions.jest;
             runJest = roots && roots.length > 0;
           }
 
@@ -1201,7 +1210,7 @@ You only need to run this if you are doing something not through the xarc tasks.
               brk,
               jestBinJs,
               jestOpts.join(" "),
-              `--config ${archetype.config.jest}/jest.config.js`
+              `--config ${xarcOptions.config.jest}/jest.config.js`
             );
           } else {
             return undefined;
@@ -1217,7 +1226,7 @@ You only need to run this if you are doing something not through the xarc tasks.
       });
     }
 
-    if (archetype.options.mocha) {
+    if (xarcOptions.options.mocha) {
       Object.assign(tasks, {
         "test-server-cov": () => {
           if (shell.test("-d", "test/server")) {
@@ -1260,11 +1269,12 @@ You only need to run this if you are doing something not through the xarc tasks.
   //   require.resolve(`${archetype.devArchetypeName}/package.json`);
   // }
 
-  xrun = xrun || getDevTaskRunner(xarcOptions);
+  xrun = xrun || getDevTaskRunner(xarcCwd);
   process.env._ELECTRODE_DEV_ = "1";
   if (!process.env.hasOwnProperty("FORCE_COLOR")) {
     process.env.FORCE_COLOR = "1"; // force color for chalk
   }
+
   xrun.load("electrode", makeTasks(xrun), -10);
   generateBrowsersListRc();
 
