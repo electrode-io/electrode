@@ -1,3 +1,55 @@
+# 12/1/2020
+
+- [Minor] [Feature] allow user to change app's root directory
+- [feat] native server side support for css modules
+- [fix] treat array in tag template as a sub template
+- [fix] handle null/undefined tag tokens
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.1.25` `(8.1.24 => 8.1.25)`
+- `@xarc/app-dev@8.1.25` `(8.1.24 => 8.1.25)`
+- `@xarc/create-app@3.0.15` `(3.0.14 => 3.0.15)`
+- `@xarc/tag-renderer@1.0.4` `(1.0.3 => 1.0.4)`
+- `@xarc/webpack@9.0.5` `(9.0.4 => 9.0.5)`
+
+### Lerna Updated
+
+- `@xarc/index-page@1.0.6` `(1.0.5 => 1.0.6)`
+- `subapp-pbundle@0.0.36` `(0.0.35 => 0.0.36)`
+- `subapp-react@0.0.33` `(0.0.32 => 0.0.33)`
+- `subapp-redux@1.0.42` `(1.0.41 => 1.0.42)`
+- `subapp-server@1.3.10` `(1.3.9 => 1.3.10)`
+- `subapp-web@1.0.42` `(1.0.41 => 1.0.42)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - [chore] dep: isomorphic-loader@4.2.1 [commit](http://github.com/electrode-io/electrode/commit/7be23dae366abe45567f4a85da2de76dc58fd7b8)
+  - [Minor] [Feature] allow user to change app's root directory ([#1760](https://github.com/electrode-io/electrode/pull/1760)) [commit](http://github.com/electrode-io/electrode/commit/fe883aa176022d5df8de322aa5a5fb81c875bdc0)
+  - [Patch][bug] fix for reading xarcOptions with legacy ([#1757](https://github.com/electrode-io/electrode/pull/1757)) [commit](http://github.com/electrode-io/electrode/commit/bc32222f40071e8bae89edee51e0f27952821105)
+  - [feat] native server side support for css modules ([#1756](https://github.com/electrode-io/electrode/pull/1756)) [commit](http://github.com/electrode-io/electrode/commit/b7f4e8853aee1e74fc3441159ab9ad3fa418d3dd)
+  - [chore] update generated docs [commit](http://github.com/electrode-io/electrode/commit/4a68683cae8954051e6f172dbc22db17b4d6d8c0)
+  - [fix] need to always regen xarc options if called by user ([#1761](https://github.com/electrode-io/electrode/pull/1761)) [commit](http://github.com/electrode-io/electrode/commit/6e0a5f1fdb77950d3e68b64fa67fd24148ee40bb)
+
+- `packages/xarc-create-app`
+
+  - [Minor] [Feature] allow user to change app's root directory ([#1760](https://github.com/electrode-io/electrode/pull/1760)) [commit](http://github.com/electrode-io/electrode/commit/fe883aa176022d5df8de322aa5a5fb81c875bdc0)
+
+- `packages/xarc-tag-renderer`
+
+  - [fix] handle null/undefined tag tokens ([#1759](https://github.com/electrode-io/electrode/pull/1759)) [commit](http://github.com/electrode-io/electrode/commit/c4d141dc90b3e74e467fc19543cdd5ba615d4450)
+  - [fix] treat array in tag template as a sub template ([#1755](https://github.com/electrode-io/electrode/pull/1755)) [commit](http://github.com/electrode-io/electrode/commit/5f885e33a8a1f91e9d3a997f38476737cd4b1ed8)
+
+- `packages/xarc-webpack`
+
+  - [Minor] [Feature] allow user to change app's root directory ([#1760](https://github.com/electrode-io/electrode/pull/1760)) [commit](http://github.com/electrode-io/electrode/commit/fe883aa176022d5df8de322aa5a5fb81c875bdc0)
+  - [feat] native server side support for css modules ([#1756](https://github.com/electrode-io/electrode/pull/1756)) [commit](http://github.com/electrode-io/electrode/commit/b7f4e8853aee1e74fc3441159ab9ad3fa418d3dd)
+  - [chore] update generated docs [commit](http://github.com/electrode-io/electrode/commit/4a68683cae8954051e6f172dbc22db17b4d6d8c0)
+
 # 11/15/2020
 
 - fix tasks to run only if their dependent opt packages are installed
