@@ -82,10 +82,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
 					<a name="xarcoptions" class="tsd-anchor"></a>
 					<h3>Xarc<wbr>Options</h3>
-					<div class="tsd-signature tsd-kind-icon">Xarc<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>addOnFeatures<span class="tsd-signature-symbol">?: </span><a href="_config_opt2_add_on_features_.html#addonfeatures" class="tsd-signature-type">AddOnFeatures</a><span class="tsd-signature-symbol">; </span>adminLogLevel<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>adminPort<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>appServerPort<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>babelOptions<span class="tsd-signature-symbol">?: </span><a href="_config_opt2_babel_options_.html#babeloptions" class="tsd-signature-type">BabelOptions</a><span class="tsd-signature-symbol">; </span>host<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>httpsPort<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>port<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>webpackOptions<span class="tsd-signature-symbol">?: </span><a href="_config_opt2_webpack_options_.html#webpackoptions" class="tsd-signature-type">WebpackOptions</a><span class="tsd-signature-symbol"> }</span></div>
+					<div class="tsd-signature tsd-kind-icon">Xarc<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>addOnFeatures<span class="tsd-signature-symbol">?: </span><a href="_config_opt2_add_on_features_.html#addonfeatures" class="tsd-signature-type">AddOnFeatures</a><span class="tsd-signature-symbol">; </span>adminLogLevel<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>adminPort<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>appServerPort<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>babelOptions<span class="tsd-signature-symbol">?: </span><a href="_config_opt2_babel_options_.html#babeloptions" class="tsd-signature-type">BabelOptions</a><span class="tsd-signature-symbol">; </span>cwd<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>host<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>httpsPort<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>port<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>webpackOptions<span class="tsd-signature-symbol">?: </span><a href="_config_opt2_webpack_options_.html#webpackoptions" class="tsd-signature-type">WebpackOptions</a><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/773d9f97/packages/xarc-app-dev/src/config/opt2/xarc-options.ts#L5">src/config/opt2/xarc-options.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/6e0a5f1f/packages/xarc-app-dev/src/config/opt2/xarc-options.ts#L5">src/config/opt2/xarc-options.ts:5</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -141,6 +141,15 @@
 								<div class="tsd-comment tsd-typography">
 									<div class="lead">
 										<p>options related to babel transpiler</p>
+									</div>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> cwd<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>option for app directory if passed to loadXarcDevTasks using xclap.ts
+										e.g: loadXarcDevTasks(null, { cwd: &quot;/actual-dir-of-app&quot; });</p>
 									</div>
 								</div>
 							</li>

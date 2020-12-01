@@ -96,15 +96,15 @@
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="getdevtaskrunner" class="tsd-anchor"></a>
-					<h3>get<wbr>Dev<wbr>Task<wbr>Runner</h3>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> get<wbr>Dev<wbr>Task<wbr>Runner</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Dev<wbr>Task<wbr>Runner<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Dev<wbr>Task<wbr>Runner<span class="tsd-signature-symbol">(</span>cwd<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/773d9f97/packages/xarc-app-dev/src/lib/dev-tasks.ts#L72">src/lib/dev-tasks.ts:72</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/6e0a5f1f/packages/xarc-app-dev/src/lib/dev-tasks.ts#L75">src/lib/dev-tasks.ts:75</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -112,6 +112,17 @@
 									<p>Get the dev task runner (xclap) from Electrode module&#39;s perspective.</p>
 								</div>
 							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> cwd: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = process.cwd()</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>current working dir for your app - default to <code>process.cwd()</code></p>
+										</div>
+									</div>
+								</li>
+							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
 							<p>the instance of xclap that&#39;s required</p>
 						</li>
@@ -121,13 +132,13 @@
 					<a name="loadxarcdevtasks" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagExport assignment">Export assignment</span> load<wbr>Xarc<wbr>Dev<wbr>Tasks</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">load<wbr>Xarc<wbr>Dev<wbr>Tasks<span class="tsd-signature-symbol">(</span>xrun<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, xarcOptions<span class="tsd-signature-symbol">?: </span><a href="_lib_dev_tasks_.html#xarcoptions" class="tsd-signature-type">XarcOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">load<wbr>Xarc<wbr>Dev<wbr>Tasks<span class="tsd-signature-symbol">(</span>xrun<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, userOptions<span class="tsd-signature-symbol">?: </span><a href="_lib_dev_tasks_.html#xarcoptions" class="tsd-signature-type">XarcOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/773d9f97/packages/xarc-app-dev/src/lib/dev-tasks.ts#L102">src/lib/dev-tasks.ts:102</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/6e0a5f1f/packages/xarc-app-dev/src/lib/dev-tasks.ts#L105">src/lib/dev-tasks.ts:105</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -157,7 +168,7 @@ loadXarcDevTasks();</code></pre>
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> xarcOptions: <a href="_lib_dev_tasks_.html#xarcoptions" class="tsd-signature-type">XarcOptions</a><span class="tsd-signature-symbol"> = {}</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> userOptions: <a href="_lib_dev_tasks_.html#xarcoptions" class="tsd-signature-type">XarcOptions</a><span class="tsd-signature-symbol"> = {}</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>user provided options to configure features etc</p>
 									</div>

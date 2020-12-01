@@ -99,7 +99,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/8e7547d8/packages/xarc-tag-renderer/src/tag-template.ts#L124">tag-template.ts:124</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/c4d141dc/packages/xarc-tag-renderer/src/tag-template.ts#L124">tag-template.ts:124</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -112,9 +112,9 @@
 <span class="hljs-keyword">const</span> templateTags = createTemplateTags<span class="hljs-string">`
 <span class="hljs-subst">${RegisterTokenIds(() =&gt; {
   <span class="hljs-keyword">return</span> {
-    ID1: context =&gt; { }</span>
+    ID1: context =&gt; { }
   }
-})}</span></code></pre>
+})}</span></span></code></pre>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -150,7 +150,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/8e7547d8/packages/xarc-tag-renderer/src/tag-template.ts#L82">tag-template.ts:82</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/c4d141dc/packages/xarc-tag-renderer/src/tag-template.ts#L82">tag-template.ts:82</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -194,7 +194,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/8e7547d8/packages/xarc-tag-renderer/src/tag-template.ts#L97">tag-template.ts:97</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/c4d141dc/packages/xarc-tag-renderer/src/tag-template.ts#L97">tag-template.ts:97</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -238,7 +238,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/8e7547d8/packages/xarc-tag-renderer/src/tag-template.ts#L44">tag-template.ts:44</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/c4d141dc/packages/xarc-tag-renderer/src/tag-template.ts#L44">tag-template.ts:44</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -252,22 +252,22 @@
 <span class="hljs-keyword">import</span> { myTokenIdRegister } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./my-token-id-handler&quot;</span>
 
 <span class="hljs-keyword">const</span> subTemplate = createTemplateTags<span class="hljs-string">`<span class="hljs-subst">${(context: any) =&gt; {
-  <span class="hljs-keyword">const</span> { query }</span> = context.options.request;
-  if (query.userName) {
-    return `</span>hello there ${query.userName}<span class="hljs-string">`;
+  <span class="hljs-keyword">const</span> { query } = context.options.request;
+  <span class="hljs-keyword">if</span> (query.userName) {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`hello there <span class="hljs-subst">${query.userName}</span>`</span>;
   }
-}}`</span>;
+}}</span>`</span>;
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> templateTags = createTemplateTags<span class="hljs-string">`&lt;!DOCTYPE html&gt;
 <span class="hljs-subst">${RegisterTokenIds(myTokenIdRegister)}</span>
-&lt;html&gt;<span class="hljs-subst">${Token(<span class="hljs-string">&quot;INITIALIZE&quot;</span>, {}</span>)}
+&lt;html&gt;<span class="hljs-subst">${Token(<span class="hljs-string">&quot;INITIALIZE&quot;</span>, {})}</span>
 &lt;head&gt;
-<span class="hljs-subst">${TokenInvoke(myTokenHandler, {}</span>)}
+<span class="hljs-subst">${TokenInvoke(myTokenHandler, {})}</span>
 <span class="hljs-subst">${subTemplate}</span>
 <span class="hljs-subst">${() =&gt; subTemplate}</span>
 <span class="hljs-subst">${() =&gt; <span class="hljs-built_in">Promise</span>.resolve(subTemplate)}</span>
 &lt;/head&gt;
-&lt;body&gt;<span class="hljs-subst">${TokenInvoke(myHtmlRenderHandler, {}</span>)}&lt;/body&gt;
+&lt;body&gt;<span class="hljs-subst">${TokenInvoke(myHtmlRenderHandler, {})}</span>&lt;/body&gt;
 &lt;/html&gt;
 `</span></code></pre>
 							</div>
@@ -305,7 +305,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/8e7547d8/packages/xarc-tag-renderer/src/tag-template.ts#L68">tag-template.ts:68</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/c4d141dc/packages/xarc-tag-renderer/src/tag-template.ts#L68">tag-template.ts:68</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
