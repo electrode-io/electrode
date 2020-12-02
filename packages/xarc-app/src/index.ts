@@ -16,7 +16,7 @@ let AppMode;
 
 function getAppMode() {
   if (!AppMode) {
-    AppMode = devArchetype ? devArchetype() : makeAppMode(constants.PROD_DIR);
+    AppMode = devArchetype ? devArchetype().AppMode : makeAppMode(constants.PROD_DIR);
   }
 
   return AppMode;

@@ -1,3 +1,27 @@
+# 12/2/2020
+
+- [fix] avoid ref'ing app-dev in prod mode
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.1.27` `(8.1.25 => 8.1.27)`
+- `@xarc/app-dev@8.1.27` `(8.1.25 => 8.1.27)`
+
+### Lerna Updated
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - [fix] avoid ref'ing app-dev in prod mode [commit](http://github.com/electrode-io/electrode/commit/a83ae79340b78e4caefb442f36415ceb2e3cd172)
+
+- `MISC`
+
+  - dep: fynpo@0.1.31 [commit](http://github.com/electrode-io/electrode/commit/753913dcfd2f4be49ffe7696179d46e08321a5fb)
+  - ci run samples tests serially [commit](http://github.com/electrode-io/electrode/commit/e6abdf670721b90b6b5e3dbe55b300f7b44f5a61)
+
 # 12/1/2020
 
 - [Minor] [Feature] allow user to change app's root directory
