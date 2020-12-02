@@ -10,20 +10,21 @@ const makeAppMode = require("../lib/app-mode");
 const Path = require("path");
 const constants = require("../lib/constants");
 const logger = require("../lib/logger");
+const devArchetype = optionalRequire("@xarc/app-dev/config/archetype");
 
 let AppMode;
 
 function getAppMode() {
-  if (AppMode) {
-    return AppMode;
+  if (!AppMode) {
+    AppMode = devArchetype ? devArchetype() : makeAppMode(constants.PROD_DIR);
   }
 
-  try {
-    const archetype = require("@xarc/app-dev/config/archetype")();
-    return (AppMode = archetype.AppMode);
-  } catch (e) {
-    return (AppMode = makeAppMode(constants.PROD_DIR));
-  }
+  return AppMode;
+}
+
+function getXarcCwd() {
+  const archetype = devArchetype && devArchetype();
+  return (archetype && archetype.cwd) || process.env.XARC_CWD || process.cwd();
 }
 
 /**
@@ -47,10 +48,9 @@ export function cssModuleHook(
     [key: string]: any;
   } = {}
 ) {
-  const archetype = require("@xarc/app-dev/config/archetype")();
   const defaultRootDirPath = process.env.NODE_ENV === "production" ? "lib" : "src";
   options.generateScopedName = options.generateScopedName || "[hash:base64]";
-  options.rootDir = options.rootDir || Path.resolve(archetype.cwd, defaultRootDirPath);
+  options.rootDir = options.rootDir || Path.resolve(getXarcCwd(), defaultRootDirPath);
 
   require("css-modules-require-hook")(options);
 }
@@ -296,10 +296,10 @@ export function load(
 
 if (!getAppMode().hasEnv()) {
   const guessAppSrcDir = () => {
-    const archetype = require("@xarc/app-dev/config/archetype")();
     if (module.parent && module.parent.filename) {
       const fn = module.parent.filename;
-      const dir = fn.substr(archetype.cwd.length + 1).split("/")[0];
+      const cwd = getXarcCwd();
+      const dir = fn.substr(cwd.length + 1).split("/")[0];
       if (dir === getAppMode().src.dir || dir === getAppMode().lib.dir) {
         return `${dir}/`;
       }
