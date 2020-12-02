@@ -78,7 +78,7 @@ const runAppTest = (dir, forceLocal) => {
   };
 
   const localClap = Path.join("node_modules", ".bin", "clap");
-  return exec({ cwd: dir }, `fyn --pg simple -q v i`)
+  return exec({ cwd: dir }, `fyn --pg simple -q v i --sl fyn-ci-${process.pid}.log`)
     .then(() => exec({ cwd: dir }, `npm test`))
     .then(() => exec({ cwd: dir }, `${localClap} -n build`));
 };
@@ -122,10 +122,10 @@ xclap.load({
           const updatedStr = updated.join(" ");
 
           if (updatedStr.indexOf("@xarc/app") >= 0) {
-            tasks.push([".", ".build-react-component", ".test-tree-shaking"]);
+            tasks.push([".build-react-component", ".test-tree-shaking"]);
           }
 
-          return tasks;
+          return xclap.serial(tasks);
         })
         .catch(err => {
           if (err.output.stderr.indexOf("No packages need updating") < 0) {
