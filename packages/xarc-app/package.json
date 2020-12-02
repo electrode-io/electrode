@@ -1,6 +1,6 @@
 {
   "name": "@xarc/app",
-  "version": "8.1.26",
+  "version": "8.1.27",
   "description": "Electrode X application runtime support",
   "main": "index.js",
   "homepage": "http://www.electrode.io",
