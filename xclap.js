@@ -78,9 +78,12 @@ const runAppTest = (dir, forceLocal) => {
   };
 
   const localClap = Path.join("node_modules", ".bin", "clap");
-  return exec({ cwd: dir }, `fyn --pg simple -q v i --sl fyn-ci-${process.pid}.log`)
-    .then(() => exec({ cwd: dir }, `npm test`))
-    .then(() => exec({ cwd: dir }, `${localClap} -n build`));
+  return exec(
+    { cwd: dir },
+    `fyn --pg simple -q v i --run-npm test build --sl fyn-ci-${process.pid}.log`
+  );
+  // .then(() => exec({ cwd: dir }, `npm test`))
+  // .then(() => exec({ cwd: dir }, `${localClap} -n build`));
 };
 
 const testCreateApp = async (testDir, name, clean, runTest, prompts) => {
@@ -122,7 +125,7 @@ xclap.load({
           const updatedStr = updated.join(" ");
 
           if (updatedStr.indexOf("@xarc/app") >= 0) {
-            tasks.push([".build-react-component", ".test-tree-shaking"]);
+            tasks.push(".build-react-component", ".test-tree-shaking");
           }
 
           return xclap.serial(tasks);
