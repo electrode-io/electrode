@@ -9,6 +9,8 @@ const optRequire = getOptArchetypeRequire(["@xarc/opt-jest", "electrode-archetyp
 
 const jestPkg = optRequire("jest/package.json");
 const jestMajVersion = parseInt(jestPkg.version.split(".")[0], 10);
+// Jest changed its config setting for setup files on version 24
+const SETUP_FILES_VERSION_SPLIT = 24;
 
 import { loadXarcOptions } from "../../lib/utils";
 
@@ -44,18 +46,15 @@ const jestDefaultConfig = {
   testURL: "http://localhost/"
 };
 
-const jestVersionSpecificConfig = {
-  23: {
-    setupTestFrameworkScriptFile: frameworkMock
-  },
-  24: {
-    setupFilesAfterEnv: [frameworkMock]
-  }
-};
+const jestSetupFilesDeprecated = { setupTestFrameworkScriptFile: frameworkMock };
+const jestSetupFilesNew = { setupFilesAfterEnv: [frameworkMock] };
+
+const jestSetupFilesConfig =
+  jestMajVersion >= SETUP_FILES_VERSION_SPLIT ? jestSetupFilesNew : jestSetupFilesDeprecated;
 
 module.exports = _.merge(
   {},
   _.pickBy(jestDefaultConfig, x => x !== undefined),
-  jestVersionSpecificConfig[jestMajVersion],
+  jestSetupFilesConfig,
   xarcOptions.jest
 );
