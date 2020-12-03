@@ -44,18 +44,14 @@ const jestDefaultConfig = {
   testURL: "http://localhost/"
 };
 
-const jestVersionSpecificConfig = {
-  23: {
-    setupTestFrameworkScriptFile: frameworkMock
-  },
-  24: {
-    setupFilesAfterEnv: [frameworkMock]
-  }
-};
+const jestSetupFilesDeprecated = { setupTestFrameworkScriptFile: frameworkMock };
+const jestSetupFilesNew = { setupFilesAfterEnv: [frameworkMock] };
+
+const jestSetupFilesConfig = jestMajVersion >= 24 ? jestSetupFilesNew : jestSetupFilesDeprecated
 
 module.exports = _.merge(
   {},
   _.pickBy(jestDefaultConfig, x => x !== undefined),
-  jestVersionSpecificConfig[jestMajVersion],
+  jestSetupFilesConfig,
   xarcOptions.jest
 );
