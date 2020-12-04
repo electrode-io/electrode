@@ -1142,14 +1142,14 @@ electrode-archetype-webpack-dll-dev:
    bluebird: ^3.5.3
    glob: ^7.1.3
    optional-require: '*'
-   require-at: ^1.0.2
+   require-at: ^1.0.6
    source-map-explorer: ^1.6.0
    uglifyjs-webpack-plugin: ^2.0.1
    webpack: ^4.26.0
    webpack-cli: ^3.1.2
    webpack-config-composer: ^1.1.2
    webpack-stats-plugin: ^0.2.1
-   xclap: ^0.2.38
+   xclap: ^0.2.53
    xsh: ^0.4.4
   peerDependencies:
    electrode-archetype-webpack-dll: 1.1.0
@@ -3041,9 +3041,13 @@ repeat-string:
   $: sha1-jcrkcOHIirwtYA//Sndihtp15jc=
   _: 'https://registry.npmjs.org/repeat-string/-/repeat-string-1.6.1.tgz'
 require-at:
- _latest: 1.0.4
+ _latest: 1.0.6
  _:
-  '^1.0.2,^1.0.4': 1.0.4
+  ^1.0.4: 1.0.4
+  ^1.0.6: 1.0.6
+ 1.0.6:
+  $: sha512-7i1auJbMUrXEAZCOQ0VNJgmcT2VOKPRl2YGJwgpHpC9CE91Mv4/4UYIUm4chGJaI381ZDq1JUicFii64Hapd8g==
+  _: 'https://registry.npmjs.org/require-at/-/require-at-1.0.6.tgz'
  1.0.4:
   $: sha512-6CL3iL+yh6Zq5Rakldl0EgtmMkqnEUOrUPTYtOmEbtaks/sR/E4Vgx6LEsRzJ9RbEy2oH3DpZmHYV/h0y3Oj4g==
   _: 'https://registry.npmjs.org/require-at/-/require-at-1.0.4.tgz'
@@ -4036,7 +4040,7 @@ wrappy:
 xclap:
  _latest: 0.2.53
  _:
-  ^0.2.38: 0.2.53
+  ^0.2.53: 0.2.53
  0.2.53:
   $: sha512-sKGFvLhZySDy4zBxzgcFu9a5+01ma6S/E8rQNMSbTuaWegdpD2leB5GzqIxktmzdkSjSJ5XjI2MGM0OGcyf2HA==
   _: 'https://registry.npmjs.org/xclap/-/xclap-0.2.53.tgz'
