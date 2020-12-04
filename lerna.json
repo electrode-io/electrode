@@ -1,10 +1,9 @@
 {
-  "lerna": "2.11.0",
   "version": "independent",
   "command.publish.config": {
     "ignore": ["*.md"]
   },
-  "commands": {
+  "command": {
     "bootstrap": {
       "ignore": ["ignite-core", "electrode-ignite", "generator-electrode"]
     }

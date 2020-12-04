@@ -63,7 +63,23 @@ const removeNpmScope = name => {
   return name;
 };
 
-const processLernaUpdated = output => {
+const processLerna2Updated = output => {
+  /*
+lerna info version 2.11.0
+lerna info versioning independent
+lerna info Checking for updated packages...
+lerna info Comparing with rel-v8-20201202.
+lerna info Checking for prereleased packages...
+lerna info result
+- electrode-react-webapp
+- subapp-server
+- @xarc/app-dev
+- @xarc/index-page
+- @xarc/jsx-renderer
+- @xarc/render-context
+- @xarc/tag-renderer
+  */
+
   // search for last commit that's Publish using lerna
   const lernaInfo = output.stderr.split("\n");
   const tagSig = "Comparing with";
@@ -85,6 +101,51 @@ const processLernaUpdated = output => {
     .split("\n")
     .filter(x => x.trim().length > 0)
     .map(x => x.substr(2).split(" ")[0]);
+  return { tag, packages };
+};
+
+const processLerna3Updated = output => {
+  /*
+lerna notice cli v3.22.1
+lerna info versioning independent
+lerna info Looking for changed packages since rel-v8-20201202
+electrode-react-webapp
+subapp-server
+@xarc/app-dev
+@xarc/index-page
+@xarc/jsx-renderer
+@xarc/render-context
+@xarc/tag-renderer
+lerna success found 7 packages ready to publish
+*/
+
+  // search for last commit that's Publish using lerna
+  const lernaInfo = output.stderr.split("\n");
+  const tagSig = "Looking for changed packages since";
+  let tagIndex;
+  let tagLine = lernaInfo
+    .find(x => {
+      tagIndex = x.indexOf(tagSig);
+      return tagIndex >= 0;
+    })
+    .trim();
+
+  if (tagLine.endsWith(".")) {
+    tagLine = tagLine.substr(0, tagLine.length - 1);
+  }
+
+  assert(tagLine, "Can't find last publish tag from lerna");
+  const tag = tagLine.substr(tagIndex + tagSig.length).trim();
+  const packages = output.stdout.split("\n").filter(x => x.trim().length > 0);
+
+  if (packages.length > 0) {
+    console.log(
+      `detected from lerna: since tag '${tag}', these packages changed: ${packages.join(" ")}`
+    );
+  } else {
+    console.log(`no packages changed since tag '${tag}'`);
+  }
+
   return { tag, packages };
 };
 
@@ -375,7 +436,7 @@ const commitChangeLogFile = clean => {
 
 xsh
   .exec(true, `lerna updated`)
-  .then(processLernaUpdated)
+  .then(processLerna3Updated)
   .then(listGitCommits)
   .then(collateCommitsPackages)
   .then(determinePackageVersions)
