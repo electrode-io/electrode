@@ -42,7 +42,6 @@
     "eslint-plugin-filenames": "^1.1.0",
     "eslint-plugin-jsdoc": "^21.0.0",
     "mocha": "^7.1.0",
-    "munchy": "^1.0.7",
     "nyc": "^15.0.0",
     "prettier": "^2.0.4",
     "run-verify": "^1.2.5",
@@ -78,7 +77,7 @@
   "dependencies": {
     "@xarc/render-context": "^1.0.3",
     "lodash": "^4.17.15",
-    "munchy": "^1.0.7",
+    "munchy": "^1.0.9",
     "optional-require": "^1.0.0",
     "require-at": "^1.0.4",
     "xaa": "^1.4.0"
