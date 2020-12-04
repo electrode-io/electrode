@@ -25,7 +25,7 @@
     "optional-require": "^1.0.0"
   },
   "devDependencies": {
-    "electrode-archetype-njs-module-dev": "^3.0.0"
+    "electrode-archetype-njs-module-dev": "^3.0.3"
   },
   "nyc": {
     "all": true,

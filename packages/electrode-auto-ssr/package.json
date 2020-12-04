@@ -4,7 +4,7 @@
   "description": "Detect server load and response times to detect server side rendering",
   "main": "lib/autossr.js",
   "devDependencies": {
-    "electrode-archetype-njs-module-dev": "^2.1.0",
+    "electrode-archetype-njs-module-dev": "^2.3.2",
     "hapi": "^16.0.0",
     "xclap": "^0.2.0"
   },

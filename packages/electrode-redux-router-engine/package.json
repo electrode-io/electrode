@@ -37,7 +37,7 @@
     "babel-preset-react": "^6.0.15",
     "babel-preset-stage-0": "^6.0.15",
     "babel-register": "^6.5.2",
-    "electrode-archetype-njs-module-dev": "^2.1.0",
+    "electrode-archetype-njs-module-dev": "^2.3.2",
     "electrode-server": "^1.5.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",

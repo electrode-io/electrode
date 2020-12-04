@@ -12,7 +12,7 @@
   "author": "Joel Chen <xchen@walmartlabs.com>",
   "license": "Apache-2.0",
   "devDependencies": {
-    "electrode-archetype-njs-module-dev": "^3.0.0",
+    "electrode-archetype-njs-module-dev": "^3.0.3",
     "electrode-archetype-webpack-dll-dev": "../electrode-archetype-webpack-dll-dev",
     "xsh": "^0.4.4"
   },

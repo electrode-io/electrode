@@ -43,7 +43,7 @@
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.4.4",
-    "electrode-archetype-njs-module-dev": "^3.0.0",
+    "electrode-archetype-njs-module-dev": "^3.0.3",
     "electrode-server": "^3.0.0",
     "run-verify": "^1.1.2",
     "@xarc/fastify-server": "^1.1.0"

@@ -41,7 +41,7 @@
     "@babel/register": "^7.7.7",
     "@xarc/app": "^8.1.20",
     "babel-preset-minify": "^0.5.1",
-    "electrode-archetype-njs-module-dev": "^3.0.0",
+    "electrode-archetype-njs-module-dev": "^3.0.3",
     "jsdom": "^15.2.1",
     "preact": "^10.2.1",
     "preact-render-to-string": "^5.1.3",

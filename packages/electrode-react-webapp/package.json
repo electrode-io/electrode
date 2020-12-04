@@ -70,7 +70,7 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.4.4",
     "benchmark": "^2.1.4",
-    "electrode-archetype-njs-module-dev": "^3.0.0",
+    "electrode-archetype-njs-module-dev": "^3.0.3",
     "electrode-redux-router-engine": "../electrode-redux-router-engine",
     "electrode-server": "^1.8.0",
     "electrode-server2": "./electrode-server2",

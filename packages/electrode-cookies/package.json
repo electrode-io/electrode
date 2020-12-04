@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "bluebird": "^2.10.2",
-    "electrode-archetype-njs-module-dev": "^2.2.0",
+    "electrode-archetype-njs-module-dev": "^2.3.2",
     "electrode-server": "^2.0.0",
     "eslint-config-prettier": "^2.3.0",
     "jsdom": "^9.4.2",

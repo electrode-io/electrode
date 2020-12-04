@@ -34,7 +34,7 @@
     "prop-types": "^15.5.10"
   },
   "devDependencies": {
-    "electrode-archetype-njs-module-dev": "^2.2.0",
+    "electrode-archetype-njs-module-dev": "^2.3.2",
     "react": "^15.0.0 || ^0.14.8",
     "react-dom": "^15.0.0 || ^0.14.0"
   },

@@ -8,7 +8,7 @@
   "author": "Electrode",
   "license": "Apache-2.0",
   "dependencies": {
-    "shcmd": "^0.7.9",
+    "shcmd": "^0.8.4",
     "xclap": "^0.2.40"
   }
 }

@@ -48,7 +48,7 @@
     "babel-cli": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "bluebird": "^2.11.0",
-    "electrode-archetype-njs-module-dev": "^3.0.1"
+    "electrode-archetype-njs-module-dev": "^3.0.3"
   },
   "dependencies": {
     "bluebird": "^2.11.0",
