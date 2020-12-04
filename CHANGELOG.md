@@ -1,3 +1,46 @@
+# 12/4/2020
+
+- Support automatic enzyme configuration for Jest above version 24.
+- dep: munchy@1.0.9 - update for node.js 14
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.1.28` `(8.1.27 => 8.1.28)`
+- `@xarc/app-dev@8.1.28` `(8.1.27 => 8.1.28)`
+- `@xarc/jsx-renderer@1.0.6` `(1.0.5 => 1.0.6)`
+- `@xarc/render-context@1.0.4` `(1.0.3 => 1.0.4)`
+- `electrode-react-webapp@4.0.2` `(4.0.1 => 4.0.2)`
+
+### Lerna Updated
+
+- `@xarc/index-page@1.0.7` `(1.0.6 => 1.0.7)`
+- `@xarc/tag-renderer@1.0.5` `(1.0.4 => 1.0.5)`
+- `subapp-server@1.3.11` `(1.3.10 => 1.3.11)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - Support automatic enzyme configuration for Jest above version 24. ([#1763](https://github.com/electrode-io/electrode/pull/1763)) [commit](http://github.com/electrode-io/electrode/commit/a2deb690ffd98234413c334e67d50227d27368a9)
+
+- `packages/xarc-jsx-renderer`
+
+  - dep: munchy@1.0.9 - update for node.js 14 [commit](http://github.com/electrode-io/electrode/commit/d4f4b3841d856ba42f119c392b333b4b1bae3b57)
+
+- `packages/xarc-render-context`
+
+  - dep: munchy@1.0.9 - update for node.js 14 [commit](http://github.com/electrode-io/electrode/commit/d4f4b3841d856ba42f119c392b333b4b1bae3b57)
+
+- `packages/electrode-react-webapp`
+
+  - dep: munchy@1.0.9 - update for node.js 14 [commit](http://github.com/electrode-io/electrode/commit/d4f4b3841d856ba42f119c392b333b4b1bae3b57)
+
+- `tools`
+
+  - dep: lerna@3.22.1 [commit](http://github.com/electrode-io/electrode/commit/d1af56b5a819c2a786463396fc037fea05175128)
+
 # 12/2/2020
 
 - [fix] avoid ref'ing app-dev in prod mode
