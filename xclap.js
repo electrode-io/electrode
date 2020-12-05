@@ -8,6 +8,8 @@ const fs = require("fs");
 const Path = require("path");
 const _ = require("lodash");
 
+const { spawn } = require("child_process");
+
 const isWin32 = process.platform.startsWith("win32");
 const packagesDir = Path.join(__dirname, "packages");
 
@@ -67,23 +69,26 @@ const pullLocalPackages = dir => {
 };
 
 const runAppTest = (dir, forceLocal) => {
-  const appPkgData =
-    (forceLocal || process.env.BUILD_TEST || process.env.CI) && pullLocalPackages(dir);
+  return new Promise((resolve, reject) => {
+    const child = spawn(
+      `fyn`,
+      `--pg simple -q=v i --run-npm build test --sl fyn-ci-${process.pid}.log`.split(" "),
+      {
+        cwd: dir,
+        // somehow the stdout from fyn got chopped off by node.js, and the only way to
+        // get them all is let spawn pipe the output directly to parent stdout
+        stdio: [null, process.stdout, process.stderr]
+      }
+    );
 
-  const restore = () => {
-    if (appPkgData) {
-      const appPkgFile = Path.join(dir, "package.json");
-      fs.writeFileSync(appPkgFile, appPkgData);
-    }
-  };
-
-  const localClap = Path.join("node_modules", ".bin", "clap");
-  return exec(
-    { cwd: dir },
-    `fyn --pg simple -q v i --run-npm test build --sl fyn-ci-${process.pid}.log`
-  );
-  // .then(() => exec({ cwd: dir }, `npm test`))
-  // .then(() => exec({ cwd: dir }, `${localClap} -n build`));
+    child.on("close", code => {
+      if (code) {
+        reject(new Error(`Failed runAppTest for app at ${dir} - fyn exit code ${code}`));
+      } else {
+        resolve();
+      }
+    });
+  });
 };
 
 const testCreateApp = async (testDir, name, clean, runTest, prompts) => {
