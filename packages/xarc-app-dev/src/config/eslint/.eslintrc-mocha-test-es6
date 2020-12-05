@@ -13,3 +13,4 @@ rules:
   "max-nested-callbacks": "off"
   "prefer-arrow-callback": "off"
   "no-multi-spaces": "off"
+  "func-style": ["off"]

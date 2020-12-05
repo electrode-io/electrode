@@ -15,3 +15,4 @@ rules:
   "flowtype/define-flow-type": "warn"
   "flowtype/use-flow-type": "warn"
   "flowtype/require-valid-file-annotation": "error"
+  "func-style": ["off"]
