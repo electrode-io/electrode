@@ -1,6 +1,6 @@
 {
   "name": "electrode-auto-ssr",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Detect server load and response times to detect server side rendering",
   "main": "lib/autossr.js",
   "devDependencies": {

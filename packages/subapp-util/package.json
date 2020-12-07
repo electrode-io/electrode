@@ -1,6 +1,6 @@
 {
   "name": "subapp-util",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Util for Electrode SubApp",
   "main": "lib/index.js",
   "scripts": {
