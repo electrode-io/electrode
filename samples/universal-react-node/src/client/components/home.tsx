@@ -4,7 +4,7 @@ import electrodeLogo from "../images/electrode.svg";
 import Notifications from "react-notify-toast";
 
 type HomeProps = {
-  data: string
+  data: string;
 };
 
 /* eslint-disable max-len */
@@ -40,14 +40,14 @@ export class Home extends Component<HomeProps> {
           </li>
           <li>
             <a href="/above-the-fold?skip=true">
-              Above the Fold Render with skip=true - increase your App's performance by using a skip
-              prop
+              Above the Fold Render with skip=true - increase your App&apos;s performance by using a
+              skip prop
             </a>
           </li>
           <li>
             <a href="/above-the-fold?skip=false">
-              Above the Fold Render with skip=false - increase your App's performance by using a
-              skip prop
+              Above the Fold Render with skip=false - increase your App&apos;s performance by using
+              a skip prop
             </a>
           </li>
           <li>

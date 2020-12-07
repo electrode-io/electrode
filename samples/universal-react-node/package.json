@@ -56,11 +56,8 @@
   },
   "devDependencies": {
     "@xarc/app-dev": "^7.0.5",
-    "redux-devtools": "^3.3.1",
-    "redux-devtools-dock-monitor": "^1.1.1",
-    "redux-devtools-log-monitor": "^1.0.11",
+    "@xarc/opt-eslint": "^1.0.0",
     "electrode-archetype-opt-critical-css": "^1.0.3",
-    "electrode-archetype-opt-eslint": "^1.0.3",
     "electrode-archetype-opt-flow": "^1.0.2",
     "electrode-archetype-opt-jest": "^24.0.0",
     "electrode-archetype-opt-karma": "^2.0.6",
@@ -71,7 +68,10 @@
     "electrode-archetype-opt-pwa": "^1.0.6",
     "electrode-archetype-opt-sinon": "^1.0.3",
     "electrode-archetype-opt-stylus": "^1.0.2",
-    "electrode-archetype-opt-typescript": "^1.0.3"
+    "electrode-archetype-opt-typescript": "^1.0.3",
+    "redux-devtools": "^3.3.1",
+    "redux-devtools-dock-monitor": "^1.1.1",
+    "redux-devtools-log-monitor": "^1.0.11"
   },
   "fyn": {
     "dependencies": {
@@ -81,7 +81,8 @@
       "react-vendor-dll": "../react-vendor-dll"
     },
     "devDependencies": {
-      "@xarc/app-dev": "../../packages/xarc-app-dev"
+      "@xarc/app-dev": "../../packages/xarc-app-dev",
+      "@xarc/opt-eslint": "../../packages/xarc-opt-eslint"
     }
   },
   "optionalDependencies": {}

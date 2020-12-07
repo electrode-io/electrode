@@ -30,6 +30,7 @@ export class AboveFold extends React.Component {
             <a
               href="https://github.com/electrode-io/above-the-fold-only-server-render"
               target="_blank"
+              rel="noreferrer"
             >
               Read more about this module and see our live demo
             </a>
@@ -53,8 +54,8 @@ export class AboveFold extends React.Component {
             and it always will be rendered on server side.
           </p>
           <p>
-            To verify, use your browser's view source to see the original HTML of this page and see
-            this being part of the SSR content
+            To verify, use your browser&apos;s view source to see the original HTML of this page and
+            see this being part of the SSR content
           </p>
           <p>
             You should see this fill up your browser screen to push content below the browser view
@@ -70,7 +71,7 @@ export class AboveFold extends React.Component {
         </div>
         {this.props.skip ? (
           <div>
-            In the page source you should NOT see any more HTML after this except a few empty{" "}
+            In the page source you should NOT see any more HTML after this except a few empty
             <span>divs</span>
           </div>
         ) : (
@@ -92,7 +93,7 @@ export class AboveFold extends React.Component {
             }}
           >
             <p>
-              This content block is wrapped inside the <span>AboveTheFoldOnlyServerRender</span>{" "}
+              This content block is wrapped inside the <span>AboveTheFoldOnlyServerRender</span>
               component, with the
               <span> skip</span> prop set to <span>{`${this.props.skip}`}</span>.
             </p>

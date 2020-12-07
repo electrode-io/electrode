@@ -228,10 +228,23 @@ export function loadXarcDevTasks(xrun, userOptions: XarcOptions = {}) {
       { custom: [], archetype: [] }
     );
 
+    const ignorePattern = options.ignorePatterns
+      ? options.ignorePatterns.map(p => `--ignore-pattern ${p}`)
+      : "";
+
+    const version = require("eslint/package.json")
+      .version.split(".")
+      .map(x => parseInt(x));
+    const noUnmatchError =
+      version[0] > 6 && version[1] > 8 ? ` --no-error-on-unmatched-pattern` : "";
+
     const commands = [
-      grouped.custom.length > 0 && `~$eslint${ext} ${grouped.custom.join(" ")}`,
+      grouped.custom.length > 0 &&
+        `~$eslint${ext}${noUnmatchError} ${grouped.custom.join(" ")} ${ignorePattern}`,
       grouped.archetype.length > 0 &&
-        `~$eslint${ext} --no-eslintrc -c ${options.config} ${grouped.archetype.join(" ")}`
+        `~$eslint${ext}${noUnmatchError} --no-eslintrc -c ${
+          options.config
+        } ${grouped.archetype.join(" ")} ${ignorePattern}`
     ];
 
     return Promise.resolve(commands.filter(x => x));
@@ -1040,50 +1053,78 @@ You only need to run this if you are doing something not through the xarc tasks.
     }
 
     if (xarcOptions.options.eslint) {
+      const hasTest = Fs.existsSync("test");
+      const hasTestServer = Fs.existsSync("test/server");
+      // legacy src/client and src/server only setup?
+      let isLegacySrc = false;
+      try {
+        const files = Fs.readdirSync("src").filter(x => !x.startsWith("."));
+        isLegacySrc = files.sort().join("") === "clientserver";
+      } catch (err) {
+        //
+      }
+
+      const lintTasks = [
+        "lint-client",
+        hasTest && "lint-client-test",
+        "lint-server",
+        hasTestServer && "lint-server-test"
+      ].filter(x => x);
+
       Object.assign(tasks, {
-        lint: xclap2.concurrent(
-          "lint-client",
-          "lint-client-test",
-          "lint-server",
-          "lint-server-test"
-        ),
+        lint: xclap2.concurrent(...lintTasks),
+
         "lint-client": {
-          desc: "Run eslint on client code in directories client and templates",
+          desc:
+            "Run eslint on code in src/client and templates with react rules (ignore src/server)",
           task: () =>
             lint({
-              ext: ".js,.jsx",
+              ext: ".js,.jsx,.ts,.tsx",
               config: eslintConfig(".eslintrc-react"),
-              targets: [AppMode.src.client, "templates"]
+              targets: isLegacySrc
+                ? [AppMode.src.client, "templates"]
+                : [AppMode.src.dir, "templates"],
+              ignorePatterns: [AppMode.src.server]
             })
         },
-        "lint-client-test": {
-          desc: "Run eslint on client test code in directory test/client",
-          task: () =>
-            lint({
-              ext: ".js,.jsx",
-              config: eslintConfig(".eslintrc-react-test"),
-              targets: ["test/client", ...jestTestDirectories.map(dir => `${dir}/client`)]
-            })
-        },
+
         "lint-server": {
-          desc: "Run eslint on server code in directory server",
+          desc: "Run eslint on server code in src/server with node.js rules",
           task: () =>
             lint({
+              ext: ".js,.jsx,.ts,.tsx",
               config: eslintConfig(".eslintrc-node"),
               targets: [AppMode.src.server]
             })
-        },
-        "lint-server-test": {
-          desc: "Run eslint on server test code in directories test/server and test/func",
+        }
+      });
+
+      if (hasTest) {
+        tasks["lint-client-test"] = {
+          desc: "Run eslint on code in test with react rules (ignore test/server)",
           task: () =>
             lint({
+              ext: ".js,.jsx,.ts,.tsx",
+              config: eslintConfig(".eslintrc-react-test"),
+              targets: ["test", ...jestTestDirectories.map(dir => `${dir}`)],
+              ignorePatterns: ["test/server"]
+            })
+        };
+      }
+
+      if (hasTestServer) {
+        tasks["lint-server-test"] = {
+          desc: "Run eslint on code in in test/server with node.js rules",
+          task: () =>
+            lint({
+              ext: ".js,.jsx,.ts,.tsx",
               config: process.env.SERVER_ES6
                 ? eslintConfig(".eslintrc-mocha-test-es6")
                 : eslintConfig(".eslintrc-mocha-test"),
-              targets: ["test/server", "test/func"]
+              targets: ["test/server"]
             })
-        }
-      });
+        };
+      }
     } else {
       const lintDisabled = () => {
         logger.info(`eslint tasks are disabled because @xarc/opt-eslint is not installed.

@@ -15,7 +15,7 @@ describe("Home", () => {
   });
 
   it("has expected content with deep render", () => {
-    component = ReactDOM.render(<Home />, container);
+    component = ReactDOM.render(<Home />, container); // eslint-disable-line react/no-render-return-value
 
     expect(component).to.not.be.false;
   });

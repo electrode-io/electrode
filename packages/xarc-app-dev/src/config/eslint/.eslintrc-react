@@ -1,14 +1,18 @@
 ---
 extends:
   - "./js/es6-react.js"
+  - "plugin:react/recommended"
 globals:
   window: false
   document: false
   ReactElement: false
-plugins: [
-  "flowtype"
-]
+env:
+  mocha: true
+plugins:
+  - flowtype
+  - react
 rules:
+  "maxlen": "off"
   "react/jsx-boolean-value": "off"
   "react/jsx-closing-bracket-location": "off"
   "react/no-string-refs": "off"
@@ -20,3 +24,21 @@ rules:
   "flowtype/define-flow-type": "warn"
   "flowtype/use-flow-type": "warn"
   "flowtype/require-valid-file-annotation": "error"
+  "func-style": ["off"]
+
+  "react/no-render-return-value": "warn"
+  "react/display-name": "warn"
+"settings":
+  "react":
+    "createClass": "createReactClass"
+    "pragma": "React"
+    "fragment": "Fragment"
+    "version": "detect"
+    "flowVersion": "0.53"
+  "propWrapperFunctions":
+      - "forbidExtraProps"
+      - {"property": "freeze", "object": "Object"}
+      - {"property": "myFavoriteWrapper"}
+  "linkComponents":
+    - "Hyperlink"
+    - {"name": "Link", "linkAttribute": "to"}
