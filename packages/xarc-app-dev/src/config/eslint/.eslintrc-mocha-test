@@ -7,6 +7,7 @@ globals:
   sinon: false
 env:
   mocha: true
+  node: true
 rules:
   "no-unused-expressions": "off" # for `chai.expect`
   "max-len": ["error", 100, 2, {ignorePattern: "^\\s*(?:it|describe)\\(.*"}]

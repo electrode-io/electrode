@@ -24,6 +24,9 @@ const scanDir = require("filter-scan-dir");
 const xsh = require("xsh");
 const logger = require("./logger");
 import { createGitIgnoreDir } from "./utils";
+import { jestTestDirectories } from "./tasks/constants";
+import { eslintTasks } from "./tasks/eslint";
+
 let xarcCwd: string;
 
 /**
@@ -121,7 +124,6 @@ export function loadXarcDevTasks(xrun, userOptions: XarcOptions = {}) {
   const config = xarcOptions.config;
   const karmaConfig = file => Path.join(config.karma, file);
   const mochaConfig = file => Path.join(config.mocha, file);
-  const eslintConfig = file => Path.join(config.eslint, file);
 
   const shell = xsh.$;
   const exec = xsh.exec;
@@ -129,8 +131,6 @@ export function loadXarcDevTasks(xrun, userOptions: XarcOptions = {}) {
 
   const penthouse = optionalRequire("penthouse");
   const CleanCSS = optionalRequire("clean-css");
-
-  const jestTestDirectories = ["_test_", "_tests_", "__test__", "__tests__"];
 
   const watchExec = (files, cmd) => {
     let timer;
@@ -190,64 +190,6 @@ export function loadXarcDevTasks(xrun, userOptions: XarcOptions = {}) {
     try {
       Fs.unlinkSync(Path.resolve(xarcCwd, "archetype-debug.log"));
     } catch (e) {} // eslint-disable-line
-  }
-
-  /*
-   *  There are multiple eslint config for different groups of code
-   *
-   *   - eslintrc-react for directories client and templates (React Code)
-   *   - eslintrc-react-test for test/client (React test code)
-   *   - eslintrc-node for server (NodeJS code)
-   *   - eslintrc-mocha-test for test/server and test/func (NodeJS test code)
-   *
-   *  If the directory contains a .eslintrc then it's used instead
-   *
-   */
-
-  function lint(options) {
-    const ext = options.ext ? ` --ext ${options.ext}` : "";
-
-    const checkCustom = t => {
-      const f = ["", ".json", ".yml", ".yaml", ".js"].find(e => {
-        const x = Path.resolve(xarcCwd, Path.join(t, `.eslintrc${e}`));
-        return Fs.existsSync(x);
-      });
-      return f !== undefined;
-    };
-
-    //
-    // group target directories into custom and archetype
-    // custom - .eslintrc file exist
-    // archetype - no .eslintrc, use config from archetype
-    //
-    const grouped = options.targets.reduce(
-      (a, t) => {
-        (checkCustom(t) ? a.custom : a.archetype).push(t);
-        return a;
-      },
-      { custom: [], archetype: [] }
-    );
-
-    const ignorePattern = options.ignorePatterns
-      ? options.ignorePatterns.map(p => `--ignore-pattern ${p}`)
-      : "";
-
-    const version = require("eslint/package.json")
-      .version.split(".")
-      .map(x => parseInt(x));
-    const noUnmatchError =
-      version[0] > 6 && version[1] > 8 ? ` --no-error-on-unmatched-pattern` : "";
-
-    const commands = [
-      grouped.custom.length > 0 &&
-        `~$eslint${ext}${noUnmatchError} ${grouped.custom.join(" ")} ${ignorePattern}`,
-      grouped.archetype.length > 0 &&
-        `~$eslint${ext}${noUnmatchError} --no-eslintrc -c ${
-          options.config
-        } ${grouped.archetype.join(" ")} ${ignorePattern}`
-    ];
-
-    return Promise.resolve(commands.filter(x => x));
   }
 
   /*
@@ -1052,90 +994,7 @@ You only need to run this if you are doing something not through the xarc tasks.
       });
     }
 
-    if (xarcOptions.options.eslint) {
-      const hasTest = Fs.existsSync("test");
-      const hasTestServer = Fs.existsSync("test/server");
-      // legacy src/client and src/server only setup?
-      let isLegacySrc = false;
-      try {
-        const files = Fs.readdirSync("src").filter(x => !x.startsWith("."));
-        isLegacySrc = files.sort().join("") === "clientserver";
-      } catch (err) {
-        //
-      }
-
-      const lintTasks = [
-        "lint-client",
-        hasTest && "lint-client-test",
-        "lint-server",
-        hasTestServer && "lint-server-test"
-      ].filter(x => x);
-
-      Object.assign(tasks, {
-        lint: xclap2.concurrent(...lintTasks),
-
-        "lint-client": {
-          desc:
-            "Run eslint on code in src/client and templates with react rules (ignore src/server)",
-          task: () =>
-            lint({
-              ext: ".js,.jsx,.ts,.tsx",
-              config: eslintConfig(".eslintrc-react"),
-              targets: isLegacySrc
-                ? [AppMode.src.client, "templates"]
-                : [AppMode.src.dir, "templates"],
-              ignorePatterns: [AppMode.src.server]
-            })
-        },
-
-        "lint-server": {
-          desc: "Run eslint on server code in src/server with node.js rules",
-          task: () =>
-            lint({
-              ext: ".js,.jsx,.ts,.tsx",
-              config: eslintConfig(".eslintrc-node"),
-              targets: [AppMode.src.server]
-            })
-        }
-      });
-
-      if (hasTest) {
-        tasks["lint-client-test"] = {
-          desc: "Run eslint on code in test with react rules (ignore test/server)",
-          task: () =>
-            lint({
-              ext: ".js,.jsx,.ts,.tsx",
-              config: eslintConfig(".eslintrc-react-test"),
-              targets: ["test", ...jestTestDirectories.map(dir => `${dir}`)],
-              ignorePatterns: ["test/server"]
-            })
-        };
-      }
-
-      if (hasTestServer) {
-        tasks["lint-server-test"] = {
-          desc: "Run eslint on code in in test/server with node.js rules",
-          task: () =>
-            lint({
-              ext: ".js,.jsx,.ts,.tsx",
-              config: process.env.SERVER_ES6
-                ? eslintConfig(".eslintrc-mocha-test-es6")
-                : eslintConfig(".eslintrc-mocha-test"),
-              targets: ["test/server"]
-            })
-        };
-      }
-    } else {
-      const lintDisabled = () => {
-        logger.info(`eslint tasks are disabled because @xarc/opt-eslint is not installed.
-        Please add it to your devDependencies to enable eslint.`);
-      };
-      Object.assign(tasks, {
-        lint: lintDisabled,
-        "lint-server": lintDisabled,
-        "lint-server-test": lintDisabled
-      });
-    }
+    Object.assign(tasks, eslintTasks(xarcOptions, xclap2));
 
     if (xarcOptions.options.karma) {
       const noSingleRun = process.argv.indexOf("--no-single-run") >= 0 ? "--no-single-run" : "";

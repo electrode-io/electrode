@@ -9,6 +9,7 @@ globals:
   Element: false
 env:
   mocha: true
+  browser: true
 plugins:
   - flowtype
   - react

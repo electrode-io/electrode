@@ -12,3 +12,6 @@ rules:
   "no-process-exit": ["off"]
   "func-style": ["off"]
   "no-multi-spaces": "off"
+env:
+  node: true
+
