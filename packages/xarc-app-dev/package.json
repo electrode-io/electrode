@@ -83,7 +83,7 @@
     "read-pkg-up": "^7.0.1",
     "regenerator-runtime": "^0.13.7",
     "request": "^2.88.2",
-    "require-at": "^1.0.4",
+    "require-at": "^1.0.6",
     "semver": "^7.3.2",
     "serve-index-fs": "^1.10.1",
     "subapp-util": "^1.1.1",

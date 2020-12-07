@@ -23,7 +23,7 @@
     "format": "prettier --write --print-width 100 *.{js,jsx} `find . -type d -d 1 -exec echo '{}/**/*.{js,jsx}' \\; | egrep -v '(/node_modules/|/dist/|/coverage/)'`"
   },
   "dependencies": {
-    "require-at": "^1.0.0"
+    "require-at": "^1.0.6"
   },
   "devDependencies": {
     "prettier": "^1.4.4"

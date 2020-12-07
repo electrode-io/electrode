@@ -59,7 +59,7 @@
     "in-publish": "^2.0.0",
     "lodash": "^4.17.10",
     "munchy": "^1.0.9",
-    "require-at": "^1.0.0",
+    "require-at": "^1.0.6",
     "string-array": "^1.0.0",
     "xaa": "^1.6.0"
   },
