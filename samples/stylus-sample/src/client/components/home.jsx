@@ -22,6 +22,8 @@ import { DemoButtons } from "./demo-buttons";
 
 /**/
 
+/* eslint-disable react/display-name */
+
 export default () => (
   <div className="container">
     {/**/}
