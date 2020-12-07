@@ -1,3 +1,133 @@
+# 12/7/2020
+
+- node.js 14 updates
+- update to eslint 7 for xarc-opt-eslint
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.1.29` `(8.1.28 => 8.1.29)`
+- `@xarc/app-dev@8.1.29` `(8.1.28 => 8.1.29)`
+- `@xarc/jsx-renderer@1.0.7` `(1.0.6 => 1.0.7)`
+- `@xarc/opt-eslint@2.0.0` `(1.0.0 => 2.0.0)`
+- `@xarc/render-context@1.0.5` `(1.0.4 => 1.0.5)`
+- `@xarc/webpack@9.0.6` `(9.0.5 => 9.0.6)`
+- `electrode-archetype-webpack-dll@2.0.2` `(2.0.1 => 2.0.2)`
+- `electrode-archetype-webpack-dll-dev@2.0.2` `(2.0.1 => 2.0.2)`
+- `electrode-auto-ssr@1.0.4` `(1.0.3 => 1.0.4)`
+- `electrode-cookies@1.0.5` `(1.0.4 => 1.0.5)`
+- `electrode-node-resolver@2.0.2` `(2.0.1 => 2.0.2)`
+- `electrode-react-context@1.0.2` `(1.0.1 => 1.0.2)`
+- `electrode-react-webapp@4.0.3` `(4.0.2 => 4.0.3)`
+- `electrode-redux-router-engine@4.0.1` `(4.0.0 => 4.0.1)`
+- `electrode-ui-config@1.3.2` `(1.3.1 => 1.3.2)`
+- `electrode-ui-logger@1.1.6` `(1.1.5 => 1.1.6)`
+- `subapp-pbundle@0.0.37` `(0.0.36 => 0.0.37)`
+- `subapp-react@0.0.34` `(0.0.33 => 0.0.34)`
+- `subapp-redux@1.0.43` `(1.0.42 => 1.0.43)`
+- `subapp-server@1.3.12` `(1.3.11 => 1.3.12)`
+- `subapp-util@1.1.2` `(1.1.1 => 1.1.2)`
+- `subapp-web@1.0.43` `(1.0.42 => 1.0.43)`
+
+### Lerna Updated
+
+- `@xarc/index-page@1.0.8` `(1.0.7 => 1.0.8)`
+- `@xarc/tag-renderer@1.0.6` `(1.0.5 => 1.0.6)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - [fix] refactor to prepare for updating to eslint 7 ([#1767](https://github.com/electrode-io/electrode/pull/1767)) [commit](http://github.com/electrode-io/electrode/commit/2612d49487c775bc058c119c3ad5b44c43142ff8)
+  - dep: require-at@1.0.6 (node.js 14) [commit](http://github.com/electrode-io/electrode/commit/59126b114ea8fd5b47a5566472a1952ff63f9f80)
+  - [fix] update eslint rules and commands for src ([#1766](https://github.com/electrode-io/electrode/pull/1766)) [commit](http://github.com/electrode-io/electrode/commit/a46276901f2be5421e9e38a273fde15e2aea7dc0)
+
+- `packages/xarc-jsx-renderer`
+
+  - dep: require-at@1.0.6 (node.js 14) [commit](http://github.com/electrode-io/electrode/commit/59126b114ea8fd5b47a5566472a1952ff63f9f80)
+
+- `packages/xarc-opt-eslint`
+
+  - [major] update to eslint 7 ([#1768](https://github.com/electrode-io/electrode/pull/1768)) [commit](http://github.com/electrode-io/electrode/commit/6ebd25c11eb97bf137919a40253767e67277fa2a)
+
+- `packages/xarc-render-context`
+
+  - dep: require-at@1.0.6 (node.js 14) [commit](http://github.com/electrode-io/electrode/commit/59126b114ea8fd5b47a5566472a1952ff63f9f80)
+
+- `packages/xarc-webpack`
+
+  - dep: require-at@1.0.6 (node.js 14) [commit](http://github.com/electrode-io/electrode/commit/59126b114ea8fd5b47a5566472a1952ff63f9f80)
+
+- `packages/electrode-archetype-webpack-dll[-dev]`
+
+  - [chore] dev dep to avoid node.js 14 deprecate warnings [commit](http://github.com/electrode-io/electrode/commit/28495aec297282f58f9271d50a8f7e1bf75d2278)
+
+- `packages/electrode-auto-ssr`
+
+  - [chore] dev dep to avoid node.js 14 deprecate warnings [commit](http://github.com/electrode-io/electrode/commit/28495aec297282f58f9271d50a8f7e1bf75d2278)
+
+- `packages/electrode-cookies`
+
+  - [chore] dev dep to avoid node.js 14 deprecate warnings [commit](http://github.com/electrode-io/electrode/commit/28495aec297282f58f9271d50a8f7e1bf75d2278)
+
+- `packages/electrode-node-resolver`
+
+  - dep: require-at@1.0.6 (node.js 14) [commit](http://github.com/electrode-io/electrode/commit/59126b114ea8fd5b47a5566472a1952ff63f9f80)
+
+- `packages/electrode-react-context`
+
+  - [chore] dev dep to avoid node.js 14 deprecate warnings [commit](http://github.com/electrode-io/electrode/commit/28495aec297282f58f9271d50a8f7e1bf75d2278)
+
+- `packages/electrode-react-webapp`
+
+  - dep: require-at@1.0.6 (node.js 14) [commit](http://github.com/electrode-io/electrode/commit/59126b114ea8fd5b47a5566472a1952ff63f9f80)
+  - [chore] dev dep to avoid node.js 14 deprecate warnings [commit](http://github.com/electrode-io/electrode/commit/28495aec297282f58f9271d50a8f7e1bf75d2278)
+
+- `packages/electrode-redux-router-engine`
+
+  - [chore] dev dep to avoid node.js 14 deprecate warnings [commit](http://github.com/electrode-io/electrode/commit/28495aec297282f58f9271d50a8f7e1bf75d2278)
+
+- `packages/electrode-ui-config`
+
+  - [chore] dev dep to avoid node.js 14 deprecate warnings [commit](http://github.com/electrode-io/electrode/commit/28495aec297282f58f9271d50a8f7e1bf75d2278)
+
+- `packages/electrode-ui-logger`
+
+  - [chore] dev dep to avoid node.js 14 deprecate warnings [commit](http://github.com/electrode-io/electrode/commit/28495aec297282f58f9271d50a8f7e1bf75d2278)
+
+- `packages/subapp-pbundle`
+
+  - [chore] dev dep to avoid node.js 14 deprecate warnings [commit](http://github.com/electrode-io/electrode/commit/28495aec297282f58f9271d50a8f7e1bf75d2278)
+
+- `packages/subapp-pkg-util`
+
+  - [chore] dev dep to avoid node.js 14 deprecate warnings [commit](http://github.com/electrode-io/electrode/commit/28495aec297282f58f9271d50a8f7e1bf75d2278)
+
+- `packages/subapp-react`
+
+  - [chore] dev dep to avoid node.js 14 deprecate warnings [commit](http://github.com/electrode-io/electrode/commit/28495aec297282f58f9271d50a8f7e1bf75d2278)
+
+- `packages/subapp-redux`
+
+  - [chore] dev dep to avoid node.js 14 deprecate warnings [commit](http://github.com/electrode-io/electrode/commit/28495aec297282f58f9271d50a8f7e1bf75d2278)
+
+- `packages/subapp-server`
+
+  - [chore] dev dep to avoid node.js 14 deprecate warnings [commit](http://github.com/electrode-io/electrode/commit/28495aec297282f58f9271d50a8f7e1bf75d2278)
+
+- `packages/subapp-util`
+
+  - [chore] dev dep to avoid node.js 14 deprecate warnings [commit](http://github.com/electrode-io/electrode/commit/28495aec297282f58f9271d50a8f7e1bf75d2278)
+
+- `packages/subapp-web`
+
+  - [chore] dev dep to avoid node.js 14 deprecate warnings [commit](http://github.com/electrode-io/electrode/commit/28495aec297282f58f9271d50a8f7e1bf75d2278)
+
+- `MISC`
+
+  - [chore] fix run app test spawn chop off fyn output [commit](http://github.com/electrode-io/electrode/commit/792feb9c978797132e8556a0ff85b804d4c07ba1)
+
 # 12/4/2020
 
 - Support automatic enzyme configuration for Jest above version 24.
