@@ -60,7 +60,7 @@
   },
   "devDependencies": {
     "@xarc/app-dev": "^5.3.4",
-    "@xarc/opt-eslint": "^1.0.3",
+    "@xarc/opt-eslint": "^1.0.0",
     "@xarc/opt-jest": "^26.0.0",
     "@xarc/opt-less": "^1.0.2",
     "@xarc/opt-mocha": "../../packages/xarc-opt-mocha",
@@ -81,7 +81,6 @@
     },
     "devDependencies": {
       "@xarc/app-dev": "../../packages/xarc-app-dev",
-      "@xarc/opt-eslint": "../../packages/xarc-opt-eslint",
       "@xarc/opt-jest": "../../packages/xarc-opt-jest",
       "@xarc/opt-less": "../../packages/xarc-opt-less",
       "@xarc/opt-mocha": "../../packages/xarc-opt-mocha",
