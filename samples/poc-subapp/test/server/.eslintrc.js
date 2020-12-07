@@ -1,11 +1,5 @@
-var path = require("path");
-var archetype = require("@xarc/app/config/archetype")();
-var archetypeEslint = path.join(archetype.config.eslint, ".eslintrc-mocha-test-es6");
-
-function dotify(p) {
-  return path.isAbsolute(p) ? p : "." + path.sep + p;
-}
+const { eslintNodeTestRc } = require("@xarc/app-dev");
 
 module.exports = {
-  extends: dotify(path.relative(__dirname, archetypeEslint))
+  extends: eslintNodeTestRc
 };

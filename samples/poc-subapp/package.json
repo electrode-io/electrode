@@ -51,7 +51,8 @@
     "subapp-web": "^1.0.30"
   },
   "devDependencies": {
-    "@xarc/app-dev": "^8.1.6"
+    "@xarc/app-dev": "^8.1.6",
+    "@xarc/opt-eslint": "^1.0.0"
   },
   "fyn": {
     "dependencies": {
@@ -62,7 +63,8 @@
       "subapp-web": "../../packages/subapp-web"
     },
     "devDependencies": {
-      "@xarc/app-dev": "../../packages/xarc-app-dev"
+      "@xarc/app-dev": "../../packages/xarc-app-dev",
+      "@xarc/opt-eslint": "../../packages/xarc-opt-eslint"
     }
   },
   "prettier": {

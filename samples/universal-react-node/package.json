@@ -81,8 +81,7 @@
       "react-vendor-dll": "../react-vendor-dll"
     },
     "devDependencies": {
-      "@xarc/app-dev": "../../packages/xarc-app-dev",
-      "@xarc/opt-eslint": "../../packages/xarc-opt-eslint"
+      "@xarc/app-dev": "../../packages/xarc-app-dev"
     }
   },
   "optionalDependencies": {}
