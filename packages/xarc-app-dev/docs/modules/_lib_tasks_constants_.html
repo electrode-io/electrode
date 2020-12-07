@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;lib/dev-admin/webpack-dev-relay&quot; | @xarc/app-dev</title>
+	<title>&quot;lib/tasks/constants&quot; | @xarc/app-dev</title>
 	<meta name="description" content="Documentation for @xarc/app-dev">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,10 +54,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_lib_dev_admin_webpack_dev_relay_.html">&quot;lib/dev-admin/webpack-dev-relay&quot;</a>
+					<a href="_lib_tasks_constants_.html">&quot;lib/tasks/constants&quot;</a>
 				</li>
 			</ul>
-			<h1>Module &quot;lib/dev-admin/webpack-dev-relay&quot;</h1>
+			<h1>Module &quot;lib/tasks/constants&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -69,17 +69,12 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Classes</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/_lib_dev_admin_webpack_dev_relay_.webpackdevrelay.html" class="tsd-kind-icon">Webpack<wbr>Dev<wbr>Relay</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="_lib_dev_admin_webpack_dev_relay_.html#webpack_event_isomorphic_config" class="tsd-kind-icon">WEBPACK_<wbr>EVENT_<wbr>ISOMORPHIC_<wbr>CONFIG</a></li>
-								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="_lib_dev_admin_webpack_dev_relay_.html#webpack_event_report" class="tsd-kind-icon">WEBPACK_<wbr>EVENT_<wbr>REPORT</a></li>
-								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="_lib_dev_admin_webpack_dev_relay_.html#webpack_event_stats" class="tsd-kind-icon">WEBPACK_<wbr>EVENT_<wbr>STATS</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="_lib_tasks_constants_.html#allsourcedirs" class="tsd-kind-icon">all<wbr>Source<wbr>Dirs</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="_lib_tasks_constants_.html#appsourcedirs" class="tsd-kind-icon">app<wbr>Source<wbr>Dirs</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="_lib_tasks_constants_.html#jesttestdirectories" class="tsd-kind-icon">jest<wbr>Test<wbr>Directories</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="_lib_tasks_constants_.html#serveronlysourcedirs" class="tsd-kind-icon">server<wbr>Only<wbr>Source<wbr>Dirs</a></li>
 							</ul>
 						</section>
 					</div>
@@ -88,32 +83,42 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Variables</h2>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
-					<a name="webpack_event_isomorphic_config" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> WEBPACK_<wbr>EVENT_<wbr>ISOMORPHIC_<wbr>CONFIG</h3>
-					<div class="tsd-signature tsd-kind-icon">WEBPACK_<wbr>EVENT_<wbr>ISOMORPHIC_<wbr>CONFIG<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"isomorphic-loader-config"</span><span class="tsd-signature-symbol"> = &quot;isomorphic-loader-config&quot;</span></div>
+					<a name="allsourcedirs" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> all<wbr>Source<wbr>Dirs</h3>
+					<div class="tsd-signature tsd-kind-icon">all<wbr>Source<wbr>Dirs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [].concat(appSourceDirs, jestTestDirectories)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/2612d494/packages/xarc-app-dev/src/lib/dev-admin/webpack-dev-relay.ts#L6">src/lib/dev-admin/webpack-dev-relay.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/2612d494/packages/xarc-app-dev/src/lib/tasks/constants.ts#L3">src/lib/tasks/constants.ts:3</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
-					<a name="webpack_event_report" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> WEBPACK_<wbr>EVENT_<wbr>REPORT</h3>
-					<div class="tsd-signature tsd-kind-icon">WEBPACK_<wbr>EVENT_<wbr>REPORT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"webpack-report"</span><span class="tsd-signature-symbol"> = &quot;webpack-report&quot;</span></div>
+					<a name="appsourcedirs" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> app<wbr>Source<wbr>Dirs</h3>
+					<div class="tsd-signature tsd-kind-icon">app<wbr>Source<wbr>Dirs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [&quot;src&quot;, &quot;test&quot;]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/2612d494/packages/xarc-app-dev/src/lib/dev-admin/webpack-dev-relay.ts#L8">src/lib/dev-admin/webpack-dev-relay.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/2612d494/packages/xarc-app-dev/src/lib/tasks/constants.ts#L2">src/lib/tasks/constants.ts:2</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
-					<a name="webpack_event_stats" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> WEBPACK_<wbr>EVENT_<wbr>STATS</h3>
-					<div class="tsd-signature tsd-kind-icon">WEBPACK_<wbr>EVENT_<wbr>STATS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"webpack-stats"</span><span class="tsd-signature-symbol"> = &quot;webpack-stats&quot;</span></div>
+					<a name="jesttestdirectories" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> jest<wbr>Test<wbr>Directories</h3>
+					<div class="tsd-signature tsd-kind-icon">jest<wbr>Test<wbr>Directories<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [&quot;_test_&quot;, &quot;_tests_&quot;, &quot;__test__&quot;, &quot;__tests__&quot;]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/2612d494/packages/xarc-app-dev/src/lib/dev-admin/webpack-dev-relay.ts#L10">src/lib/dev-admin/webpack-dev-relay.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/2612d494/packages/xarc-app-dev/src/lib/tasks/constants.ts#L1">src/lib/tasks/constants.ts:1</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="serveronlysourcedirs" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> server<wbr>Only<wbr>Source<wbr>Dirs</h3>
+					<div class="tsd-signature tsd-kind-icon">server<wbr>Only<wbr>Source<wbr>Dirs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [&quot;src/server&quot;, &quot;src/server-routes&quot;, &quot;test/server&quot;]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/2612d494/packages/xarc-app-dev/src/lib/tasks/constants.ts#L4">src/lib/tasks/constants.ts:4</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -126,23 +131,23 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="_lib_dev_admin_webpack_dev_relay_.html">&quot;lib/dev-<wbr>admin/webpack-<wbr>dev-<wbr>relay&quot;</a>
+						<a href="_lib_tasks_constants_.html">&quot;lib/tasks/constants&quot;</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="../classes/_lib_dev_admin_webpack_dev_relay_.webpackdevrelay.html" class="tsd-kind-icon">Webpack<wbr>Dev<wbr>Relay</a>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="_lib_tasks_constants_.html#allsourcedirs" class="tsd-kind-icon">all<wbr>Source<wbr>Dirs</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="_lib_dev_admin_webpack_dev_relay_.html#webpack_event_isomorphic_config" class="tsd-kind-icon">WEBPACK_<wbr>EVENT_<wbr>ISOMORPHIC_<wbr>CONFIG</a>
+						<a href="_lib_tasks_constants_.html#appsourcedirs" class="tsd-kind-icon">app<wbr>Source<wbr>Dirs</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="_lib_dev_admin_webpack_dev_relay_.html#webpack_event_report" class="tsd-kind-icon">WEBPACK_<wbr>EVENT_<wbr>REPORT</a>
+						<a href="_lib_tasks_constants_.html#jesttestdirectories" class="tsd-kind-icon">jest<wbr>Test<wbr>Directories</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="_lib_dev_admin_webpack_dev_relay_.html#webpack_event_stats" class="tsd-kind-icon">WEBPACK_<wbr>EVENT_<wbr>STATS</a>
+						<a href="_lib_tasks_constants_.html#serveronlysourcedirs" class="tsd-kind-icon">server<wbr>Only<wbr>Source<wbr>Dirs</a>
 					</li>
 				</ul>
 			</nav>
