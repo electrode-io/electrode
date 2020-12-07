@@ -25,6 +25,9 @@ rules:
   "flowtype/use-flow-type": "warn"
   "flowtype/require-valid-file-annotation": "error"
   "func-style": ["off"]
+
+  "react/no-render-return-value": "warn"
+  "react/display-name": "warn"
 "settings":
   "react":
     "createClass": "createReactClass"

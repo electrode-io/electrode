@@ -26,7 +26,6 @@ describe("Home", () => {
 
     const store = createStore(rootReducer, initialState);
 
-    // eslint-disable-next-line react/no-render-return-value
     component = ReactDOM.render(
       <Provider store={store}>
         <BrowserRouter>
