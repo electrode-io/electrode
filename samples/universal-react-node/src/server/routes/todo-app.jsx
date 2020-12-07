@@ -4,7 +4,7 @@ import path from "path";
 
 const readFile = Promise.promisify(fs.readFile);
 
-export default async function(options) {
+export default async function(/*options*/) {
   let storage;
 
   try {

@@ -1,3 +1,5 @@
+/* eslint-disable no-magic-numbers */
+
 import reducer from "../../client/reducers";
 import Promise from "bluebird";
 
