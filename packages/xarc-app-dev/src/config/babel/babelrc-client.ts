@@ -23,6 +23,12 @@ const {
 const addFlowPlugin = Boolean(enableFlow && optFlow);
 
 const basePlugins = [
+  [
+    "module:fast-async",
+    {
+      spec: true
+    }
+  ],
   ...(enableDynamicImport
     ? ["@babel/plugin-syntax-dynamic-import", "@loadable/babel-plugin"]
     : [false]),

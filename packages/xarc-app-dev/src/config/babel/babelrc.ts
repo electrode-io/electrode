@@ -149,7 +149,15 @@ const plugins = basePlugins.concat(
   !isNodeTarget &&
     enableKarmaCov && [
       getPluginFrom(["@xarc/opt-karma", "electrode-archetype-opt-karma"], "babel-plugin-istanbul")
+    ],
+  !isNodeTarget && [
+    [
+      "module:fast-async",
+      {
+        spec: true
+      }
     ]
+  ]
 );
 
 const target = isNodeTarget ? "node" : babelTarget;
@@ -174,6 +182,8 @@ const presets = [
   [
     "@babel/preset-env",
     {
+      exclude: ["transform-async-to-generator", "transform-regenerator"],
+
       modules: isNodeTarget || isProduction || enableDynamicImport ? "auto" : "commonjs",
       loose: true,
       targets,
@@ -183,7 +193,8 @@ const presets = [
   enableTypeScript && "@babel/preset-typescript",
   "@babel/preset-react"
 ];
-
+//console.log(`presets for fast async ${JSON.stringify(presets)}`);
+//console.log(`plugins for fast async:" ${JSON.stringify(plugins)}`);
 module.exports = {
   presets: presets.filter(x => x),
   plugins: plugins.filter(x => x)
