@@ -12,7 +12,7 @@ import { getPluginFrom, loadXarcOptions, detectCSSModule } from "./common";
 const _ = require("lodash");
 
 const xOptions = loadXarcOptions(process.env.XARC_APP_DIR);
-
+console.log(`xOptions-Durrab ${xOptions}`);
 const isJest = Boolean(process.env.JEST_WORKER_ID);
 
 const {
@@ -83,6 +83,12 @@ const getReactCssModulePlugin = () => {
 };
 
 const basePlugins = [
+  !isNodeTarget && [
+    "module:fast-async",
+    {
+      spec: true
+    }
+  ],
   !isNodeTarget && enableDynamicImport && "@babel/plugin-syntax-dynamic-import",
   // add plugin for loadable component
   // Note: this is needed for server side (node.js) also.
@@ -149,15 +155,7 @@ const plugins = basePlugins.concat(
   !isNodeTarget &&
     enableKarmaCov && [
       getPluginFrom(["@xarc/opt-karma", "electrode-archetype-opt-karma"], "babel-plugin-istanbul")
-    ],
-  !isNodeTarget && [
-    [
-      "module:fast-async",
-      {
-        spec: true
-      }
     ]
-  ]
 );
 
 const target = isNodeTarget ? "node" : babelTarget;
@@ -182,7 +180,7 @@ const presets = [
   [
     "@babel/preset-env",
     {
-      exclude: ["transform-async-to-generator", "transform-regenerator"],
+      exclude: !isNodeTarget ? ["transform-async-to-generator", "transform-regenerator"] : [],
       modules: isNodeTarget || isProduction || enableDynamicImport ? "auto" : "commonjs",
       loose: true,
       targets,
@@ -193,7 +191,14 @@ const presets = [
   "@babel/preset-react"
 ];
 
+const env = {
+  commonjs: {
+    plugins: [["@babel/plugin-transform-modules-commonjs", { loose: true }]]
+  }
+};
+
 module.exports = {
   presets: presets.filter(x => x),
-  plugins: plugins.filter(x => x)
+  plugins: plugins.filter(x => x),
+  env: env
 };
