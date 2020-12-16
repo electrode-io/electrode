@@ -23,12 +23,7 @@ const {
 const addFlowPlugin = Boolean(enableFlow && optFlow);
 
 const basePlugins = [
-  [
-    "module:fast-async",
-    {
-      spec: true
-    }
-  ],
+  ["module:fast-async"],
   ...(enableDynamicImport
     ? ["@babel/plugin-syntax-dynamic-import", "@loadable/babel-plugin"]
     : [false]),
@@ -145,11 +140,6 @@ const presets = [
   enableTypeScript && "@babel/preset-typescript",
   "@babel/preset-react"
 ];
-const env = {
-  commonjs: {
-    plugins: [["@babel/plugin-transform-modules-commonjs", { loose: true }]]
-  }
-};
 
 module.exports = {
   presets: presets.filter(x => x),
