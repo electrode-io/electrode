@@ -5,8 +5,7 @@ const optFlow = optionalRequire("electrode-archetype-opt-flow");
 import { getPluginFrom, loadXarcOptions } from "./common";
 const xOptions = loadXarcOptions(process.env.XARC_APP_DIR);
 const _ = require("lodash");
-//Durrab
-console.log(`xOptions-Durrab ${xOptions}`);
+
 const {
   enableTypeScript,
   flowRequireDirective,
