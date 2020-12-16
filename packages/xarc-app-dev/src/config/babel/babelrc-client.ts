@@ -140,6 +140,11 @@ const presets = [
   enableTypeScript && "@babel/preset-typescript",
   "@babel/preset-react"
 ];
+const env = {
+  commonjs: {
+    plugins: [["@babel/plugin-transform-modules-commonjs", { loose: true }]]
+  }
+};
 
 module.exports = {
   presets: presets.filter(x => x),

@@ -174,6 +174,7 @@ const presets = [
   [
     "@babel/preset-env",
     {
+      exclude: !isNodeTarget ? ["transform-async-to-generator", "transform-regenerator"] : [],
       modules: isNodeTarget || isProduction || enableDynamicImport ? "auto" : "commonjs",
       loose: true,
       targets,
@@ -184,7 +185,14 @@ const presets = [
   "@babel/preset-react"
 ];
 
+const env = {
+  commonjs: {
+    plugins: [["@babel/plugin-transform-modules-commonjs", { loose: true }]]
+  }
+};
+
 module.exports = {
   presets: presets.filter(x => x),
-  plugins: plugins.filter(x => x)
+  plugins: plugins.filter(x => x),
+  env: env
 };
