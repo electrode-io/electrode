@@ -185,14 +185,7 @@ const presets = [
   "@babel/preset-react"
 ];
 
-const env = {
-  commonjs: {
-    plugins: [["@babel/plugin-transform-modules-commonjs", { loose: true }]]
-  }
-};
-
 module.exports = {
   presets: presets.filter(x => x),
-  plugins: plugins.filter(x => x),
-  env: env
+  plugins: plugins.filter(x => x)
 };
