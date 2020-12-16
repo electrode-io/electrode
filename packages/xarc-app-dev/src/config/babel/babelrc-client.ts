@@ -5,7 +5,8 @@ const optFlow = optionalRequire("electrode-archetype-opt-flow");
 import { getPluginFrom, loadXarcOptions } from "./common";
 const xOptions = loadXarcOptions(process.env.XARC_APP_DIR);
 const _ = require("lodash");
-
+//Durrab
+console.log(`xOptions-Durrab ${xOptions}`);
 const {
   enableTypeScript,
   flowRequireDirective,
@@ -135,6 +136,7 @@ const presets = [
   [
     "@babel/preset-env",
     {
+      exclude: ["transform-async-to-generator", "transform-regenerator"],
       modules: isProduction || enableDynamicImport ? "auto" : "commonjs",
       loose: true,
       targets,
@@ -144,6 +146,11 @@ const presets = [
   enableTypeScript && "@babel/preset-typescript",
   "@babel/preset-react"
 ];
+const env = {
+  commonjs: {
+    plugins: [["@babel/plugin-transform-modules-commonjs", { loose: true }]]
+  }
+};
 
 module.exports = {
   presets: presets.filter(x => x),
