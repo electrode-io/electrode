@@ -1,15 +1,13 @@
 {
   "version": "independent",
-  "command.publish.config": {
-    "ignore": ["*.md"]
-  },
   "command": {
     "bootstrap": {
-      "ignore": ["ignite-core", "electrode-ignite", "generator-electrode"]
-    }
-  },
-  "fynpo": {
-    "publishConfig": {
+      "ignore": [],
+      "npmClientArgs": [],
+      "npmRunScripts": ["build"]
+    },
+    "publish": {
+      "ignoreChanges": ["*.md"],
       "tags": {
         "xarc8": {
           "enabled": false,
@@ -31,5 +29,6 @@
         }
       }
     }
-  }
+  },
+  "fynpo": true
 }
