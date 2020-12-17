@@ -83,6 +83,19 @@ const getReactCssModulePlugin = () => {
 };
 
 const basePlugins = [
+  // plugin to transpile async/await to Promise
+  // not for node.js because it has native async/await
+  !isNodeTarget && [
+    "module:fast-async",
+    {
+      compiler: {
+        promises: true,
+        generators: false
+      },
+      runtimePattern: null,
+      useRuntimeModule: true
+    }
+  ],
   !isNodeTarget && enableDynamicImport && "@babel/plugin-syntax-dynamic-import",
   // add plugin for loadable component
   // Note: this is needed for server side (node.js) also.
@@ -174,6 +187,9 @@ const presets = [
   [
     "@babel/preset-env",
     {
+      // exclude these to allow fast-async to transpile async/await to promise
+      // also is ok to exclude for node.js because it has native async/await
+      exclude: ["transform-async-to-generator", "transform-regenerator"],
       modules: isNodeTarget || isProduction || enableDynamicImport ? "auto" : "commonjs",
       loose: true,
       targets,

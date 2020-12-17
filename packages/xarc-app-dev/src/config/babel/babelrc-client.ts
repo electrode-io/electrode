@@ -23,6 +23,18 @@ const {
 const addFlowPlugin = Boolean(enableFlow && optFlow);
 
 const basePlugins = [
+  // plugin to transpile async/await to Promise
+  [
+    "module:fast-async",
+    {
+      compiler: {
+        promises: true,
+        generators: false
+      },
+      runtimePattern: null,
+      useRuntimeModule: true
+    }
+  ],
   ...(enableDynamicImport
     ? ["@babel/plugin-syntax-dynamic-import", "@loadable/babel-plugin"]
     : [false]),
@@ -129,6 +141,8 @@ const presets = [
   [
     "@babel/preset-env",
     {
+      // exclude these to allow fast-async to transpile async/await to promise
+      exclude: ["transform-async-to-generator", "transform-regenerator"],
       modules: isProduction || enableDynamicImport ? "auto" : "commonjs",
       loose: true,
       targets,
