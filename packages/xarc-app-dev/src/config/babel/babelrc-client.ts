@@ -23,6 +23,7 @@ const {
 const addFlowPlugin = Boolean(enableFlow && optFlow);
 
 const basePlugins = [
+  ["module:fast-async"],
   ...(enableDynamicImport
     ? ["@babel/plugin-syntax-dynamic-import", "@loadable/babel-plugin"]
     : [false]),
@@ -129,6 +130,7 @@ const presets = [
   [
     "@babel/preset-env",
     {
+      exclude: ["transform-async-to-generator", "transform-regenerator"],
       modules: isProduction || enableDynamicImport ? "auto" : "commonjs",
       loose: true,
       targets,

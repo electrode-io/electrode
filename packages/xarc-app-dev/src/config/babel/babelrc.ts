@@ -83,6 +83,7 @@ const getReactCssModulePlugin = () => {
 };
 
 const basePlugins = [
+  !isNodeTarget && ["module:fast-async"],
   !isNodeTarget && enableDynamicImport && "@babel/plugin-syntax-dynamic-import",
   // add plugin for loadable component
   // Note: this is needed for server side (node.js) also.
@@ -174,6 +175,7 @@ const presets = [
   [
     "@babel/preset-env",
     {
+      exclude: !isNodeTarget ? ["transform-async-to-generator", "transform-regenerator"] : [],
       modules: isNodeTarget || isProduction || enableDynamicImport ? "auto" : "commonjs",
       loose: true,
       targets,
