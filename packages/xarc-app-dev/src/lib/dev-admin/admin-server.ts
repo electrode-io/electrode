@@ -22,7 +22,6 @@ const { formUrl } = require("../utils");
 const {
   settings: { useDevProxy: DEV_PROXY_ENABLED, adminLogLevel },
   fullDevServer,
-  fullAdminServer,
   controlPaths
 } = require("../../config/dev-proxy");
 
@@ -73,7 +72,6 @@ export class AdminServer {
   _appWatcher: any;
   _startDefer: any;
   _adminHttp: AdminHttp;
-  _fullAdminServer: any;
 
   constructor(args, options) {
     this._opts = args.opts;
@@ -103,12 +101,6 @@ export class AdminServer {
   }
 
   async start() {
-    this._fullAdminServer = {
-      protocol: fullAdminServer.protocol,
-      host: fullAdminServer.host,
-      port: this._adminHttp._port
-    };
-
     this._startTime = Date.now();
     this._io.show(ck`<orange>Dev Admin start time <cyan>${this._startTime}</></>`);
     this._wds = ck`<gray.inverse>[wds]</> `;
