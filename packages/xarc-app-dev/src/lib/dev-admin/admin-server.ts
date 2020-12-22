@@ -155,6 +155,7 @@ ${this._appLogLevel} </> | ${this._statusLine}${this._menu}${exitMsg}`
     const menu = ck`             <green.inverse>   Electrode Dev Admin Console   </>
 
 <white.inverse>For your app server</> ${this._app}
+
   <magenta>A</> - Restart <magenta>D</> - <cyan>inspect-brk</> mode <magenta>I</> - <cyan>inspect</> mode <magenta>K</> - Kill&nbsp;
 <white.inverse>For Electrode webpack dev server</>  ${this._wds}
   <magenta>W</> - Restart <magenta>E</> - <cyan>inspect-brk</> mode <magenta>R</> - <cyan>inspect</> mode <magenta>X</> - Kill&nbsp;
