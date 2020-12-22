@@ -173,8 +173,7 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
 <green>         App URL: <cyan.underline>${formUrl(fullDevServer)}</></>
 <green>     App Log URL: <cyan.underline>${logUrl}</></>
 <green>   DEV dashboard: <cyan.underline>${devurl}</></>
-<green>WebPack reporter: <cyan.underline>${reporterUrl}</></>
-<green>       Admin URL: <cyan.underline>${formUrl(this._fullAdminServer)}</></>`;
+<green>WebPack reporter: <cyan.underline>${reporterUrl}</></>`;
 
     this._menu = "\n" + boxen(menu, { margin: { left: 5 }, padding: { right: 3, left: 3 } });
   }

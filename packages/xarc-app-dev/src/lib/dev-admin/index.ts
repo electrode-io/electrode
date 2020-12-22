@@ -31,7 +31,6 @@ const parsed = new NixClap()
   })
   .parse();
 import { AdminServer } from "./admin-server";
-import { parse } from "./log-parser";
 
 const admin = new AdminServer(parsed, {});
 
