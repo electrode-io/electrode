@@ -108,6 +108,7 @@ export const getDevTaskRunner = (cwd: string = process.cwd()) => {
 export function loadXarcDevTasks(xrun, userOptions: XarcOptions = {}) {
   let xarcOptions = getDevOptions(userOptions);
   xarcCwd = xarcOptions.cwd;
+  process.env.ELECTRODE_ADMIN_PORT = process.env.XARC_ADMIN_PORT || xarcOptions.adminPort;
 
   function setupPath() {
     const nmBin = Path.join("node_modules", ".bin");

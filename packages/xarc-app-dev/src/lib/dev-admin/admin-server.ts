@@ -22,6 +22,7 @@ const { formUrl } = require("../utils");
 const {
   settings: { useDevProxy: DEV_PROXY_ENABLED, adminLogLevel },
   fullDevServer,
+  fullAdminServer,
   controlPaths
 } = require("../../config/dev-proxy");
 
@@ -72,6 +73,7 @@ export class AdminServer {
   _appWatcher: any;
   _startDefer: any;
   _adminHttp: AdminHttp;
+  _fullAdminServer: any;
 
   constructor(args, options) {
     this._opts = args.opts;
@@ -101,6 +103,12 @@ export class AdminServer {
   }
 
   async start() {
+    this._fullAdminServer = {
+      protocol: fullAdminServer.protocol,
+      host: fullAdminServer.host,
+      port: this._adminHttp._port
+    };
+
     this._startTime = Date.now();
     this._io.show(ck`<orange>Dev Admin start time <cyan>${this._startTime}</></>`);
     this._wds = ck`<gray.inverse>[wds]</> `;
@@ -155,6 +163,7 @@ ${this._appLogLevel} </> | ${this._statusLine}${this._menu}${exitMsg}`
     const menu = ck`             <green.inverse>   Electrode Dev Admin Console   </>
 
 <white.inverse>For your app server</> ${this._app}
+
   <magenta>A</> - Restart <magenta>D</> - <cyan>inspect-brk</> mode <magenta>I</> - <cyan>inspect</> mode <magenta>K</> - Kill&nbsp;
 <white.inverse>For Electrode webpack dev server</>  ${this._wds}
   <magenta>W</> - Restart <magenta>E</> - <cyan>inspect-brk</> mode <magenta>R</> - <cyan>inspect</> mode <magenta>X</> - Kill&nbsp;
@@ -164,7 +173,8 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
 <green>         App URL: <cyan.underline>${formUrl(fullDevServer)}</></>
 <green>     App Log URL: <cyan.underline>${logUrl}</></>
 <green>   DEV dashboard: <cyan.underline>${devurl}</></>
-<green>WebPack reporter: <cyan.underline>${reporterUrl}</></>`;
+<green>WebPack reporter: <cyan.underline>${reporterUrl}</></>
+<green>       Admin URL: <cyan.underline>${formUrl(this._fullAdminServer)}</></>`;
 
     this._menu = "\n" + boxen(menu, { margin: { left: 5 }, padding: { right: 3, left: 3 } });
   }
