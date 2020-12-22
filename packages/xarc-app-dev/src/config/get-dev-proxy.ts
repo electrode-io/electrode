@@ -137,7 +137,6 @@ module.exports = function createDevProxy() {
     fullDevServer: { protocol, host, port },
     // If using dev proxy in HTTPS, then it's also listening on a HTTP port also:
     httpDevServer: { protocol: "http", host, port: httpPort, https: false },
-    fullAdminServer: { protocol, host },
     controlPaths,
     searchSSLCerts
   };
