@@ -68,10 +68,10 @@ const verifyVersions = info => {
   Object.keys(versions).forEach(pkgDir => {
     const pkgInfo = versions[pkgDir];
     const modName = pkgInfo.name;
-    const pkgNmDir = Path.posix.join("node_modules", pkgDir);
+    const pkgNmDir = Path.dirname(require.resolve(`${modName}/package.json`));
     let pkg;
     try {
-      pkg = requireAt(Path.resolve(pkgNmDir), "./package.json");
+      pkg = requireAt(pkgNmDir, "./package.json");
     } catch (err) {
       logger.info(
         "Electrode DLL module",
