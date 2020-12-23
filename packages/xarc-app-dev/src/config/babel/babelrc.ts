@@ -11,7 +11,7 @@ const optFlow = optionalRequire("electrode-archetype-opt-flow");
 import { getPluginFrom, loadXarcOptions, detectCSSModule } from "./common";
 const _ = require("lodash");
 
-const xOptions = loadXarcOptions(process.env.XARC_APP_DIR);
+const xOptions = loadXarcOptions(process.env.XARC_CWD);
 
 const isJest = Boolean(process.env.JEST_WORKER_ID);
 

@@ -3,7 +3,7 @@
 const optionalRequire = require("optional-require")(require);
 const optFlow = optionalRequire("electrode-archetype-opt-flow");
 import { getPluginFrom, loadXarcOptions } from "./common";
-const xOptions = loadXarcOptions(process.env.XARC_APP_DIR);
+const xOptions = loadXarcOptions(process.env.XARC_CWD);
 const _ = require("lodash");
 
 const {
