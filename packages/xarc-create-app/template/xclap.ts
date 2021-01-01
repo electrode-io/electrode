@@ -24,4 +24,13 @@ xclap.updateEnv(
   }
 );
 
-loadXarcDevTasks(xclap, {});
+/**
+ * All of the configurable options can be pass here
+ */
+loadXarcDevTasks(xclap, {
+  options: {},
+  webpackOptions: {
+    /** set this to true to enable CSS Module support */
+    cssModuleSupport: false
+  }
+});
