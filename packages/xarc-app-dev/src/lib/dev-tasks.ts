@@ -10,7 +10,7 @@ const Path = require("path");
 const assert = require("assert");
 const requireAt = require("require-at");
 const optionalRequire = require("optional-require")(require);
-const { updateEnv } = require("xclap");
+const xclap = require("xclap");
 const getDevOptions = require("../config/archetype");
 const ck = require("chalker");
 const xaa = require("xaa");
@@ -26,6 +26,8 @@ const logger = require("./logger");
 import { createGitIgnoreDir } from "./utils";
 import { jestTestDirectories } from "./tasks/constants";
 import { eslintTasks } from "./tasks/eslint";
+
+export { xclap };
 
 let xarcCwd: string;
 
@@ -133,7 +135,7 @@ export function loadXarcDevTasks(xrun, userOptions: XarcOptions = {}) {
   const penthouse = optionalRequire("penthouse");
   const CleanCSS = optionalRequire("clean-css");
 
-  const watchExec = (files, cmd) => {
+  const watchExec = (files: string | string[], cmd) => {
     let timer;
     let child;
     const defer = xaa.makeDefer();
@@ -741,13 +743,17 @@ module.exports = {
         - NODE_ENV is set to 'production' if it's not set.
         - options: [all options will be passed to node when starting your app server]`,
         task(context) {
-          updateEnv({ NODE_ENV: "production" }, { override: false });
+          xclap.updateEnv({ NODE_ENV: "production" }, { override: false });
 
           const mockTask = xclap2.concurrent([
             "dev-proxy --mock-cdn",
             xclap2.serial(
               () => xaa.delay(500),
-              () => watchExec("config/assets.json", `node ${context.args.join(" ")} lib/server`)
+              () =>
+                watchExec(
+                  ["config/assets.json", "lib/server"],
+                  `node ${context.args.join(" ")} lib/server`
+                )
             )
           ]);
 

@@ -207,7 +207,7 @@ export function eslint7Tasks(xarcOptions: any, xclap: any) {
           })
           .filter(x => x)
           .join(" ");
-        return xclap.exec(`eslint ${validDirs}`);
+        return xclap.exec(`eslint --ext .js,.ts,.jsx,.tsx ${validDirs}`);
       }
     }
   };

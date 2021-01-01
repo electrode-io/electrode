@@ -6,6 +6,7 @@ const _ = require("lodash");
 import { xAppRequire } from "@xarc/app";
 const { getXRequire } = xAppRequire("isomorphic-loader");
 const { refreshAllSubApps } = require("subapp-util");
+const { refreshAllSubApps2 } = require("@xarc/subapp");
 import {
   WEBPACK_EVENT_ISOMORPHIC_CONFIG,
   WEBPACK_EVENT_REPORT,
@@ -55,6 +56,7 @@ class AppDevMiddleware {
       });
 
       refreshAllSubApps();
+      refreshAllSubApps2();
     }
 
     // activate extend require for isomorphic assets

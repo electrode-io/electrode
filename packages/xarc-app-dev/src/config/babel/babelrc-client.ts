@@ -3,7 +3,7 @@
 const optionalRequire = require("optional-require")(require);
 const optFlow = optionalRequire("electrode-archetype-opt-flow");
 import { getPluginFrom, loadXarcOptions } from "./common";
-const xOptions = loadXarcOptions(process.env.XARC_APP_DIR);
+const xOptions = loadXarcOptions(process.env.XARC_CWD);
 const _ = require("lodash");
 
 const {
@@ -143,7 +143,14 @@ const presets = [
     {
       // exclude these to allow fast-async to transpile async/await to promise
       exclude: ["transform-async-to-generator", "transform-regenerator"],
-      modules: isProduction || enableDynamicImport ? "auto" : "commonjs",
+      //
+      // We actually want/need auto.  Webpack understand import and ESM to do code splitting.
+      // With commonjs, code splitting breaks.  The only reason we are trying to do commonjs
+      // is because some apps have unit test that use sinon to modify ES6 module to fake exports
+      // but ESM doesn't allow that.
+      //
+      // modules: isProduction || enableDynamicImport ? "auto" : "commonjs",
+      modules: "auto",
       loose: true,
       targets,
       ...useBuiltIns

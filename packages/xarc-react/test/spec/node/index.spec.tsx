@@ -19,7 +19,9 @@ describe("createDynamicComponent", function () {
     const ssrLib = new SSRReactLib();
 
     const html = ssrLib.renderToString(<Component />);
-    expect(html).to.equal(`<div data-reactroot="">subapp component loading... </div>`);
+    expect(html).to.equal(
+      `<div data-reactroot="">subapp <!-- -->test<!-- --> component loading... </div>`
+    );
 
     await container.test._getModule();
 
