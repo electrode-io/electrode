@@ -82,4 +82,15 @@ export type XarcOptions = {
    * e.g: loadXarcDevTasks(null, { cwd: "/actual-dir-of-app" });
    */
   cwd?: string;
+
+  /**
+   * Specify a namespace prefix for your application's JS/Style asset bundles
+   * For example, instead of `main.bundle.js`, it's `{ns}.main.bundle.js`
+   *
+   * This is useful if you want to be able to mix subapps from different apps
+   * on the same page, or if you want to implement a top level app shell that
+   * loads subapps from different sources and render them on the page.
+   *
+   */
+  namespace?: string;
 };

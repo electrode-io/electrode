@@ -26,7 +26,6 @@ export const subapp: ReactSubApp = {
   Component: StaticHome,
   wantFeatures: [
     staticPropsFeature({
-      React,
       serverModule: require.resolve("./static-props")
     })
   ]

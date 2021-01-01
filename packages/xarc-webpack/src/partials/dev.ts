@@ -67,12 +67,15 @@ module.exports = function() {
     }
   };
 
+  const { namespace } = xarcOptions;
+  const nsTag = namespace ? `${namespace}.` : ``;
+
   const config = {
     devServer: devServerConfig,
     output: {
       publicPath: makePublicPath(),
-      filename: "[name].bundle.dev.js",
-      chunkFilename: "[name].bundle.dev.js"
+      filename: `${nsTag}[name].bundle.dev.js`,
+      chunkFilename: `${nsTag}[name].bundle.dev.js`
     },
     devtool: "inline-source-map",
     // TODO: why is this here and duplicates what's in extract-style partial?  This is causing

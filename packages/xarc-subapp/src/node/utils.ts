@@ -1,7 +1,8 @@
 import * as Path from "path";
 import * as Fs from "fs";
 import * as Crypto from "crypto";
-import { NonceInfo } from "./init-v2";
+import { NonceInfo, InitProps } from "./types";
+import * as Url from "url";
 
 export function loadCdnMap(cdnMap: string): any {
   const fullPath = Path.isAbsolute(cdnMap)
@@ -51,7 +52,7 @@ export function nonceGenerator(_?: string) {
 }
 
 export function generateNonce(
-  token: any,
+  token: Partial<{ props: InitProps }>,
   fallback: NonceInfo = null,
   tag = ""
 ): { attr: string; nonce?: NonceInfo } {
@@ -60,7 +61,7 @@ export function generateNonce(
   }
 
   let nonceToken: string;
-  let nonce: NonceInfo = token.props.nonce || fallback;
+  let nonce: NonceInfo = (token.props.nonce as NonceInfo) || fallback;
 
   if (nonce) {
     if (nonce[tag] === false) {
@@ -73,4 +74,28 @@ export function generateNonce(
   }
 
   return { attr: ` nonce="${nonceToken}"`, nonce };
+}
+
+/**
+ * Join a base url with path parts
+ *
+ * @param baseUrl - base url (protocol, host, port, first path parts)
+ * @param pathParts - other path parts.  the first one start with ? or & causes
+ *   the remaining parts to be treated as query params
+ * @returns full URL
+ */
+export function urlJoin(baseUrl: string, ...pathParts: string[]) {
+  const url = Url.parse(baseUrl);
+  let onlyPaths = pathParts;
+  const lastPathIx = pathParts.findIndex(x => x[0] === "?" || x[0] === "&");
+  if (lastPathIx >= 0) {
+    onlyPaths = pathParts.slice(0, lastPathIx);
+    const queries = pathParts.slice(lastPathIx);
+    const search = queries.map(x => (x[0] === "?" || x[0] === "&" ? x.substr(1) : x)).join("&");
+    url.search = url.search ? `${url.search}&${search}` : `?${search}`;
+  }
+  if (onlyPaths.length > 0) {
+    url.pathname = Path.posix.join(url.pathname || "", ...onlyPaths);
+  }
+  return Url.format(url);
 }

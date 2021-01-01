@@ -1,48 +1,10 @@
 /* eslint-disable no-console, max-statements, global-require, @typescript-eslint/no-var-requires */
 
 import * as Path from "path";
-import { generateNonce, loadCdnMap, mapCdn, wrapStringFragment } from "./utils";
+import { generateNonce, loadCdnMap, mapCdn, wrapStringFragment, urlJoin } from "./utils";
 import { WebpackStats } from "./webpack-stats";
-
-/**
- * Pass nonce info to xarc for generating script and style tags into the HTML
- */
-export type NonceInfo = {
-  /** insert nonce for script tags? default: `true` */
-  script?: boolean;
-  /** insert nonce for style tags? default: `true` */
-  style?: boolean;
-
-  /** nonce tokens */
-  tokens: {
-    all?: string;
-    script?: string;
-    style?: string;
-  };
-
-  /** token generator */
-  generator?: (tag?: string) => string;
-};
-
-/**
- * mapping of asset path by file extensions
- *
- * - extensions must have `.` prefix: `.js`
- * - `base` must be provided
- *
- * ie:
- * ```js
- * {
- *   base: "/assets",
- *   ".js": "/js",
- *   ".css": "/css"
- * }
- * ```
- */
-export type AssetPathMap = {
-  /** The common base path for all */
-  base: string;
-} & Record<string, string>;
+import * as Crypto from "crypto";
+import { AssetPathMap, InitProps } from "./types";
 
 /**
  * Initialize all the up front code required for running subapps in the browser.
@@ -51,13 +13,12 @@ export type AssetPathMap = {
  * @param setupToken - token for setup
  * @returns data with template process callback
  */
-export function initSubApp(setupContext: any, setupToken: any) {
+export function initSubApp(setupContext: any, setupToken: Partial<{ props: InitProps }>) {
   const isProd = process.env.NODE_ENV === "production";
   const distDir = isProd
     ? Path.join(__dirname, "../../dist/min")
     : Path.join(__dirname, "../../dist-browser~es5~cjs~/browser");
 
-  // this only exist in dev because it's comment, which are removed from minified version
   const getClientJs = (file: string, exportName: string) => {
     const code = require(Path.join(distDir, file))[exportName].toString();
     return `(${code})(window);
@@ -66,19 +27,40 @@ export function initSubApp(setupContext: any, setupToken: any) {
 
   const isWebpackDev = Boolean(process.env.WEBPACK_DEV);
 
+  const props: InitProps = setupToken.props;
+
   const stats = new WebpackStats();
   stats.load();
 
-  const assetBasePath = (!isWebpackDev && setupToken.props.assetPathMap) || {
-    base: "/js"
-  };
+  let pathMap: AssetPathMap;
+  let cdnMap;
 
-  const cdnMap = !isWebpackDev && setupToken.props.cdnMap;
+  if (isWebpackDev) {
+    if (props.devAssetData) {
+      pathMap = props.devAssetData.pathMap;
+      cdnMap = props.devAssetData.cdnMap;
+    }
+  } else if (props.prodAssetData) {
+    pathMap = props.prodAssetData.pathMap;
+    cdnMap = props.prodAssetData.cdnMap;
+  }
+
+  if (!pathMap) {
+    pathMap = { base: "/js" };
+  }
+
   const cdnMapData = cdnMap && (typeof cdnMap === "string" ? loadCdnMap(cdnMap) : cdnMap);
-  const cdnMapDataScripts = !cdnMapData
-    ? ""
-    : `window.xarcV2.cdnUpdate({md:${JSON.stringify(cdnMapData)}})
+  let cdnAsJsonScript = "";
+  let cdnUpdateScript = "";
+  if (cdnMapData) {
+    const cdnMapJsonId = `cdn-map-${Crypto.randomBytes(8).toString("base64")}`;
+    cdnAsJsonScript = `<script{{SCRIPT_NONCE}} type="application/json" id="${cdnMapJsonId}">
+${JSON.stringify(cdnMapData)}
+</script>
 `;
+    cdnUpdateScript = `window.xarcV2.cdnUpdate({md:window.xarcV2.dyn("${cdnMapJsonId}")})
+`;
+  }
 
   // client side JS code required to start subapps and load assets
   const webpack4JsonpJs = getClientJs("webpack4-jsonp.js", "webpack4JsonP");
@@ -91,9 +73,9 @@ export function initSubApp(setupContext: any, setupToken: any) {
       return fromCdn;
     }
 
-    const prefix = assetBasePath.base;
-    const ext = assetBasePath[Path.extname(file)] || "";
-    return Path.posix.join(prefix, ext, file);
+    const prefix = pathMap.base;
+    const ext = pathMap[Path.extname(file)] || "";
+    return urlJoin(prefix, ext, file);
   };
 
   const runtimeJsFiles = stats.getChunkAssetFilename("runtime", ".js");
@@ -186,10 +168,10 @@ export function initSubApp(setupContext: any, setupToken: any) {
       };
 
       return `
-${addStyleNonce(allCssLinks)}<script${scriptNonceAttr}>
+${addStyleNonce(allCssLinks)}${addScriptNonce(cdnAsJsonScript)}<script${scriptNonceAttr}>
 // xarc client side support code
 ${webpack4JsonpJs}${xarcV2Js}${cdnMapScripts}// End of xarc client side support code
-${cdnMapDataScripts}</script>
+${cdnUpdateScript}</script>
 ${addScriptNonce(runtimeJsScripts)}${addScriptNonce(mainJsScripts)}`;
     }
   };

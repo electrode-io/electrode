@@ -4,15 +4,16 @@ import * as Path from "path";
 import { loadXarcOptions } from "../util/load-xarc-options";
 
 module.exports = () => {
-  const { babel } = loadXarcOptions();
+  const { babel, namespace } = loadXarcOptions();
 
   const inspectpack = process.env.INSPECTPACK_DEBUG === "true";
 
   const getOutputFilename = () => {
-    let filename = "[name].bundle.[contenthash].js";
+    const nsTag = namespace ? `${namespace}.` : "";
+    let filename = `${nsTag}[name].bundle.[contenthash].js`;
 
     if (babel.hasMultiTargets) {
-      filename = `${babel.target}.[name].bundle.[contenthash].js`;
+      filename = `${babel.target}.${nsTag}[name].bundle.[contenthash].js`;
     }
 
     return filename;

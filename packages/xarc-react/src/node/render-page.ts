@@ -10,7 +10,7 @@ import {
   isSubAppReady,
   subAppReady,
   LoadSubAppOptions,
-  AssetPathMap,
+  InitProps,
   NonceInfo
 } from "./index";
 
@@ -39,7 +39,7 @@ export type TemplateInserts = {
   };
 };
 
-export type PageOptions = {
+export type PageOptions = InitProps & {
   /**
    * Name of subapps to load and render on the page
    */
@@ -57,21 +57,6 @@ export type PageOptions = {
 
   /** meta charset, default: "UTF-8", set to false to disable */
   charSet?: string | boolean;
-
-  /**
-   * Mapping of base path for static assets.  default: `{ base: "/js" }`
-   *
-   * @remarks Only used when env `WEBPACK_DEV` is not defined
-   *
-   */
-  assetPathMap?: AssetPathMap;
-
-  /**
-   * path to JSON file with CDN mapping data or the actual mapping data
-   *
-   * @remarks Only used when `NODE_ENV` is `production`
-   */
-  cdnMap?: string | Record<string, string>;
 
   /**
    * Allows you to insert template tags at some predefined locations within the
@@ -105,25 +90,32 @@ export type RenderOptions = {
  * Renderer to render a page with xarc subapps on it
  */
 export class PageRenderer {
+  private _options: PageOptions;
   private _template: any[];
   private _renderer: TagRenderer;
 
   constructor(options: PageOptions) {
+    this._options = options;
     const { subApps } = options;
-    const { cdnMap, templateInserts: { head = {}, body = {} } = {} } = options;
+    const {
+      nonce,
+      prodAssetData,
+      devAssetData,
+      templateInserts: { head = {}, body = {} } = {}
+    } = options;
 
     const { charSet = "UTF-8" } = options;
 
     const charSetStr = charSet ? `\n<meta charset="${charSet}">\n` : "";
 
-    const assetPathMap = (!process.env.WEBPACK_DEV && options.assetPathMap) || { base: "/js" };
+    const initProps: InitProps = { prodAssetData, devAssetData, nonce };
 
     this._template = createTemplateTags`<!doctype html>
 <html>
 <head>${charSetStr}
 ${head.begin}
 ${options.pageTitle && `<title>${options.pageTitle}</title>`}
-${TokenInvoke(initSubApp, { assetPathMap, cdnMap, nonce: options.nonce })}
+${TokenInvoke(initSubApp, initProps)}
 ${head.afterInit}
 ${head.end}
 </head>
@@ -141,6 +133,11 @@ ${body.end}
     this._renderer = new TagRenderer({ templateTags: this._template });
   }
 
+  _getSSRSubAppNames() {
+    const { subApps } = this._options;
+    return subApps.map(s => s.ssr && s.name).filter(x => x);
+  }
+
   /**
    * Render index.html with subapps
    *
@@ -148,7 +145,7 @@ ${body.end}
    */
   async render(options: RenderOptions): Promise<RenderContext> {
     if (!isSubAppReady()) {
-      await subAppReady();
+      await subAppReady(this._getSSRSubAppNames());
     }
 
     return await this._renderer.render(options);

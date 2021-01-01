@@ -2,7 +2,7 @@
 /* eslint-env browser */
 /* global globalThis */
 
-import { XarcSubAppClientV2 } from "../subapp/index";
+import { XarcSubAppClientV2, CDNData } from "../subapp/index";
 //
 // add CDN mapping support to xarc subapp client side lib
 //
@@ -17,11 +17,11 @@ export function xarcCdnMap(
   if (!xv2) return;
 
   // cdnUpdate({md: {}}) - add mapping data to the CDN mapping resource
-  xv2.cdnUpdate = data => {
+  xv2.cdnUpdate = (data: CDNData, replace: boolean) => {
     const md = data.md;
     for (const k in md) {
-      if (xv2.rt.md[k]) {
-        console.error("CDN map already exist:", k);
+      if (xv2.rt.md[k] && !replace) {
+        console.error("replace falsy but CDN map already exist:", k);
       } else {
         xv2.rt.md[k] = md[k];
       }

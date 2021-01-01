@@ -1,4 +1,5 @@
 /* eslint-disable no-console, no-return-assign, prefer-const, prefer-spread, prefer-rest-params */
+/* eslint-disable max-statements */
 /* eslint-env browser */
 /* global globalThis */
 /**
@@ -9,7 +10,8 @@ import {
   LoadSubAppOptions,
   SubAppDef,
   SubAppStartOptions,
-  XarcSubAppClientV2
+  XarcSubAppClientV2,
+  _xarcV2RunTimeInfo
 } from "../subapp/index";
 
 //
@@ -35,13 +37,12 @@ export function xarcV2Client(
 
   if (w.xarcV2 && w.xarcV2.version >= version) return w.xarcV2;
 
-  const runtimeInfo = {
+  const runtimeInfo: _xarcV2RunTimeInfo = {
     instId: 1,
     subApps: {},
-    bundles: {},
     onLoadStart: {},
-    groups: {},
-    started: false
+    started: false,
+    md: {}
   };
 
   let xv2: XarcSubAppClientV2;
@@ -95,15 +96,6 @@ export function xarcV2Client(
 
       if (!ols[name]) {
         ols[name] = [];
-      }
-
-      const group = options.group;
-      if (group) {
-        let groupInfo = runtimeInfo.groups[group];
-        if (!groupInfo) {
-          groupInfo = runtimeInfo.groups[group] = { group: group, total: 0, queue: [] };
-        }
-        groupInfo.total++;
       }
 
       ols[name].push(Object.assign({}, options, data));

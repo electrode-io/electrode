@@ -15,10 +15,9 @@
   "scripts": {
     "build": "xrun user/build",
     "test": "xrun xarc/test-only",
-    "check": "xrun xarc/check",
+    "coverage": "xrun xarc/check",
     "prepublishOnly": "xrun [[build, docs], xarc/check]",
-    "docs": "xrun xarc/docs",
-    "coverage": "xrun xarc/test-cov"
+    "docs": "xrun xarc/docs"
   },
   "keywords": [],
   "author": "WalmartLabs GTP.js team",

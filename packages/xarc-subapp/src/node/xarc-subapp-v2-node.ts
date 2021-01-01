@@ -3,7 +3,7 @@
  * SubApp client side shell version 2
  */
 
-import { XarcSubAppClientV2, LoadSubAppOptions } from "../subapp/index";
+import { XarcSubAppClientV2, LoadSubAppOptions, _xarcV2RunTimeInfo } from "../subapp/index";
 
 export const xarcV2: Partial<XarcSubAppClientV2> = {
   IS_BROWSER: false,
@@ -11,7 +11,7 @@ export const xarcV2: Partial<XarcSubAppClientV2> = {
 
   version: 2000000,
 
-  rt: {},
+  rt: {} as _xarcV2RunTimeInfo,
 
   //
   // empty place holders for CDN mapping

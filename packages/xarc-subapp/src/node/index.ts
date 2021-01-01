@@ -10,9 +10,10 @@ import {
 // re-exports
 //
 export * from "../subapp/index";
+export * from "./types";
 export * from "./xarc-subapp-v2-node";
 export { loadSubApp } from "./load-v2";
-export { initSubApp, AssetPathMap, NonceInfo } from "./init-v2";
+export { initSubApp } from "./init-v2";
 export { startSubApp } from "./start-v2";
 
 const CONTAINER: SubAppContainer = {};
@@ -110,17 +111,15 @@ export async function subAppReady(list: boolean | string[] = false): Promise<any
     }
   }
 
-  for (const promise of subappModules) {
-    await promise;
-  }
+  await Promise.all(subappModules);
+
+  readySubAppCount = beforeWaitCount;
 
   // if loading a subapp module triggered more subapps to be declared, then
   // need to ensure those are ready also.
   if (beforeWaitCount !== declareSubAppCount) {
     await subAppReady();
   }
-
-  readySubAppCount = declareSubAppCount;
 }
 
 /**

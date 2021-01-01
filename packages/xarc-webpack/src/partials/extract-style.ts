@@ -239,11 +239,14 @@ module.exports = function() {
       }
     );
   }
+  const { namespace } = xarcOptions;
+
+  const nsTag = namespace ? `${namespace}.` : ``;
 
   const styleBundleFilename =
     process.env.WEBPACK_DEV || xarcOptions.babel.hasMultiTargets
-      ? "[name].style.css"
-      : "[name].style.[contenthash].css";
+      ? `${nsTag}[name].style.css`
+      : `${nsTag}[name].style.[contenthash].css`;
 
   return {
     module: { rules: rules.filter(x => x) },

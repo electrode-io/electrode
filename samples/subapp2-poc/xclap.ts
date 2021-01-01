@@ -24,6 +24,7 @@ xclap.updateEnv(
 );
 
 loadXarcDevTasks(xclap, {
+  namespace: "poc1",
   webpackOptions: {
     cssModuleSupport: true
   }

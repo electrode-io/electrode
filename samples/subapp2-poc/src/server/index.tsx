@@ -13,7 +13,8 @@ import {
   subAppReady,
   createDynamicComponent,
   PageRenderer,
-  createTemplateTags as cTT
+  createTemplateTags as cTT,
+  PageOptions
 } from "@xarc/react";
 
 import { home, staticHome } from "../app";
@@ -83,7 +84,7 @@ ${s}
     }
   });
 
-  /**
+  /*
    * Below are routes to demo using Electrode X's PageRenderer to render pages with
    * ES6 tag string templates for the HTML, with full subapp features including:
    *
@@ -94,8 +95,9 @@ ${s}
    * - SSR and Hot Module Reloading
    */
 
-  const commonRenderOptions = {
-    cdnMap: "config/assets.json"
+  const commonRenderOptions: Partial<PageOptions> = {
+    prodAssetData: { cdnMap: "config/assets.json" },
+    devAssetData: { pathMap: { base: "", ".css": "/js", ".js": "/js" } }
   };
 
   const constructHomeRouteRenderer = () => {
@@ -139,7 +141,7 @@ ${s}
         const context = await pageRenderer.render({ request });
         sendResponse(reply, context);
       } catch (error) {
-        // TODO: handle error
+        reply.send(error.stack);
       }
     }
   });
@@ -170,7 +172,7 @@ ${s}
 
         sendResponse(reply, context);
       } catch (error) {
-        // TODO: handle error
+        reply.send(error.stack);
       }
     }
   });
@@ -193,7 +195,7 @@ ${s}
         const context = await pageRenderer.render({ request });
         sendResponse(reply, context);
       } catch (error) {
-        // TODO: handle error
+        reply.send(error.stack);
       }
     }
   });

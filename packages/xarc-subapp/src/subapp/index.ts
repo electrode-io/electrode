@@ -1,5 +1,19 @@
 /* eslint-disable no-use-before-define */
 
+export type CDNData = {
+  /** mapping data */
+  md: Record<string, any>;
+};
+
+export type _xarcV2RunTimeInfo = {
+  instId: number;
+  subApps: Record<string, any>;
+  onLoadStart: Record<string, any>;
+  started: boolean;
+  /** CDN mapping data */
+  md: Record<string, any>;
+};
+
 /**
  * xarc subapp version client interface
  */
@@ -7,10 +21,24 @@ export interface XarcSubAppClientV2 {
   IS_BROWSER: boolean;
   HAS_WINDOW: boolean;
   version: number;
-  rt: any; // run time info
-  cdnInit(data: any): void;
-  cdnUpdate(data: any): void;
-  cdnMap(x: string): string;
+  rt: _xarcV2RunTimeInfo; // run time info
+  /**
+   * Initialize CDN mapping
+   * @param data - data to initialize with
+   */
+  cdnInit(data: CDNData): void;
+  /**
+   * Add CDN mapping data from data into the CDN mapping for looking up assets
+   * @param data - CDN data
+   * @param replace - replace existing entry?
+   */
+  cdnUpdate(data: CDNData, replace: boolean): void;
+  /**
+   * Map an asset name to its CDN version
+   *
+   * @param name - asset name to map
+   */
+  cdnMap(name: string): string;
   getOnLoadStart(name: string): any[];
   addOnLoadStart(name: string, load: any): void;
   startSubAppOnLoad(options: any, data: any): void;
@@ -21,7 +49,12 @@ export interface XarcSubAppClientV2 {
    * console.debug is just an alias for console.log.
    */
   debug(...args: any[]): void;
-  dyn(id: string): any;
+  /**
+   * Extract JSON data from a script tag
+   * @param id - script element id
+   * @returns the data extracted
+   */
+  dyn(id: string): unknown;
 }
 
 /**
