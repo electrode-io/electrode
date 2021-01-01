@@ -69,7 +69,7 @@ export class AdminHttp {
   constructor(options: AdminHttpOptions) {
     this._server = http.createServer(this.requestListener.bind(this));
     this._getLogs = options.getLogs;
-    this._port = options.port || 9001;
+    this._port = options.port || 8991;
     this._server.listen(this._port);
     this._instanceId = Date.now();
     this._eventClientId = 0;

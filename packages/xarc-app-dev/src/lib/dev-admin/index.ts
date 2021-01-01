@@ -25,11 +25,12 @@ const parsed = new NixClap()
     },
     port: {
       type: "number",
-      default: process.env.ELECTRODE_ADMIN_PORT || 8991,
+      default: 8991,
       desc: "HTTP port to serve admin data"
     }
   })
   .parse();
+
 import { AdminServer } from "./admin-server";
 
 const admin = new AdminServer(parsed, {});

@@ -1,5 +1,5 @@
 import { XarcOptions } from "../config/opt2/xarc-options";
-
+import { getDevAdminPortFromEnv } from "./utils";
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 /* eslint-disable object-shorthand, max-statements, no-magic-numbers */
@@ -110,7 +110,6 @@ export const getDevTaskRunner = (cwd: string = process.cwd()) => {
 export function loadXarcDevTasks(xrun, userOptions: XarcOptions = {}) {
   let xarcOptions = getDevOptions(userOptions);
   xarcCwd = xarcOptions.cwd;
-  process.env.ELECTRODE_ADMIN_PORT = process.env.XARC_ADMIN_PORT || xarcOptions.adminPort;
 
   function setupPath() {
     const nmBin = Path.join("node_modules", ".bin");
@@ -857,14 +856,19 @@ You only need to run this if you are doing something not through the xarc tasks.
           // eslint-disable-next-line no-shadow
           const exec = quote(Path.join(xarcOptions.devDir, "lib/babel-run"));
           const isNodeArgs = x => x.startsWith("--inspect");
-          const nodeArgs = context.args.filter(isNodeArgs);
-          const otherArgs = context.args.filter(x => !isNodeArgs(x));
+          const nodeArgs = context.args.filter(isNodeArgs).join(" ");
+          const otherArgs = context.args.filter(x => !isNodeArgs(x)).join(" ");
+
+          // get user specified port for admin
+          const userPort = getDevAdminPortFromEnv(xarcOptions.adminPort);
+          const portArg = !otherArgs.includes("--port") && userPort ? `--port ${userPort}` : "";
 
           return mkCmd(
             `~(tty)$node`,
-            nodeArgs.join(" "),
+            nodeArgs,
             quote(Path.join(xarcOptions.devDir, "lib/dev-admin")),
-            otherArgs.join(" "),
+            otherArgs,
+            portArg,
             `--exec ${exec} --ext js,jsx,json,yaml,log,ts,tsx`,
             `--watch config ${AppMode.src.server}`,
             `-- ${AppMode.src.server}`

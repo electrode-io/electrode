@@ -162,3 +162,13 @@ export function detectCSSModule(xOptions) {
   }
   return Boolean(cssModuleSupport);
 }
+
+export function getDevAdminPortFromEnv(fallback?: number): number {
+  const fromEnv = parseInt(
+    process.env.XARC_ADMIN_PORT ||
+      // deprecated but still check
+      process.env.ELECTRODE_ADMIN_PORT
+  );
+
+  return fromEnv || fallback || 8991;
+}

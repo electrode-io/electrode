@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires, max-statements, no-console, prefer-const */
-export {};
+
+import { getDevAdminPortFromEnv } from "../lib/utils";
 
 const Path = require("path");
 const Fs = require("fs");
@@ -106,7 +107,8 @@ module.exports = function createDevProxy() {
     protocol,
     elevated,
     useDevProxy,
-    devAdminPort: parseInt(process.env.ELECTRODE_ADMIN_PORT || "8991")
+    // dev admin-server will set its port in env when invoking the proxy
+    devAdminPort: getDevAdminPortFromEnv()
   };
 
   const adminPath = `/__proxy_admin`;

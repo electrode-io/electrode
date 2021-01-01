@@ -353,8 +353,10 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
     const start = () => {
       const forkOpts: any = {
         env: Object.assign({}, process.env, {
-          ELECTRODE_ADMIN_SERVER: true,
-          ELECTRODE_ADMIN_PORT: this._adminHttp._port,
+          // let child process know that dev admin is running
+          XARC_ADMIN_SERVER: true,
+          // pass admin port to child process
+          XARC_ADMIN_PORT: this._adminHttp._port,
           ...SERVER_ENVS[name]
         }),
         silent: true

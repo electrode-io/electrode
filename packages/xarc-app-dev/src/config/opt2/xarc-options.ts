@@ -29,7 +29,7 @@ export type XarcOptions = {
    * In case you want to serve your app with https on a port other
    * than 443, then you can set it with this.
    *
-   * - if not set, then check env `ELECTRODE_DEV_HTTPS`, then `XARC_DEV_HTTPS`
+   * - if not set, then check env then `XARC_DEV_HTTPS`
    *
    * @remarks
    * If this is set, it cannot be the same as `port`, which then will be
@@ -48,7 +48,7 @@ export type XarcOptions = {
   /**
    * Dev admin log level
    *
-   * - if not set, then check env `ELECTRODE_ADMIN_LOG_LEVEL`, `DEV_ADMIN_LOG_LEVEL`, then `XARC_ADMIN_LOG_LEVEL`
+   * - if not set, then check env `XARC_ADMIN_LOG_LEVEL`
    * - TBD: list levels
    */
   adminLogLevel?: number;
@@ -57,7 +57,7 @@ export type XarcOptions = {
    * Port number the dev admin listens to serve its pages.
    *
    * - **Default: 8991**
-   * - if not set, then check env `ELECTRODE_ADMIN_PORT`
+   * - if not set, then check env `XARC_ADMIN_PORT`
    *
    */
   adminPort?: number;
