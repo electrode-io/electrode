@@ -118,22 +118,27 @@ const registerElectrodeDevRules = ({
   appPort,
   webpackDevPort,
   restart,
-  enableCdnMock
+  enableCdnMock,
+  noDev
 }) => {
   const { dev: devPath, admin: adminPath, hmr: hmrPath, appLog, reporter } = controlPaths;
   const logEventsPath = `${devPath}/log-events`;
   const logStreamsPath = `${devPath}/stream-logs`;
-  const appForwards = [
-    [{}, { port: appPort }],
-    [{ path: `/js` }, { path: `/js`, port: webpackDevPort }],
-    [{ path: hmrPath }, { path: hmrPath, port: webpackDevPort }],
-    [{ path: appLog }, { path: appLog, port: settings.devAdminPort }],
-    [{ path: logEventsPath }, { path: logEventsPath, port: settings.devAdminPort }],
-    [{ path: logStreamsPath }, { path: logStreamsPath, port: settings.devAdminPort }],
-    [{ path: devPath }, { path: devPath, port: webpackDevPort }],
-    [{ path: reporter }, { path: reporter, port: webpackDevPort }],
-    [{ path: `${adminPath}/test-google` }, { protocol: "https", host: "www.google.com" }]
-  ];
+  const appForwards: any[] = [[{}, { port: appPort }]];
+
+  if (!noDev) {
+    appForwards.push(
+      [{ path: `/js` }, { path: `/js`, port: webpackDevPort }],
+      [{ path: hmrPath }, { path: hmrPath, port: webpackDevPort }],
+      [{ path: appLog }, { path: appLog, port: settings.devAdminPort }],
+      [{ path: logEventsPath }, { path: logEventsPath, port: settings.devAdminPort }],
+      [{ path: logStreamsPath }, { path: logStreamsPath, port: settings.devAdminPort }],
+      [{ path: devPath }, { path: devPath, port: webpackDevPort }],
+      [{ path: reporter }, { path: reporter, port: webpackDevPort }],
+      [{ path: `${adminPath}/test-google` }, { protocol: "https", host: "www.google.com" }]
+    );
+  }
+
   const appRules = appForwards
     .map(([src, target, opts]) => {
       return [
@@ -282,8 +287,9 @@ const startProxy = (inOptions = {}) => {
   });
 
   const enableCdnMock = process.argv.includes("--mock-cdn");
+  const noDev = process.argv.includes("--no-dev");
   // register with primary protocol/host/port
-  registerElectrodeDevRules({ ...options, ssl, proxy, restart, enableCdnMock });
+  registerElectrodeDevRules({ ...options, ssl, proxy, restart, enableCdnMock, noDev });
 
   // if primary protocol is https, then register regular http rules at httpPort
   if (ssl) {

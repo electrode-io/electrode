@@ -745,7 +745,7 @@ module.exports = {
           xclap.updateEnv({ NODE_ENV: "production" }, { override: false });
 
           const mockTask = xclap2.concurrent([
-            "dev-proxy --mock-cdn",
+            "dev-proxy --mock-cdn --no-dev",
             xclap2.serial(
               () => xaa.delay(500),
               () =>
