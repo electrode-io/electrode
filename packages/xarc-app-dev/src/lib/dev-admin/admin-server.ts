@@ -102,7 +102,6 @@ export class AdminServer {
 
   async start() {
     this._startTime = Date.now();
-    this._io.show(ck`<orange>Dev Admin start time <cyan>${this._startTime}</></>`);
     this._wds = ck`<gray.inverse>[wds]</> `;
     this._proxy = ck`<green.inverse>[proxy]</> `;
     this._app = ck`<cyan.inverse>[app]</> `;
@@ -120,7 +119,6 @@ export class AdminServer {
 
     this._fullyStarted = false;
     this._shutdown || (await this.startWebpackDevServer());
-    this.logTime(`Time Webpack Dev Server took`);
     this._shutdown || (await this.startAppServer());
     if (!this._shutdown && DEV_PROXY_ENABLED) {
       // to debug dev proxy
@@ -444,7 +442,7 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
         const listenForReport = () =>
           info._child.once("message", data => {
             if (data.name === "webpack-report") {
-              resolve();
+              resolve(null);
             } else {
               listenForReport();
             }
@@ -453,7 +451,7 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
         listenForReport();
 
         info._child.once("exit", () => {
-          resolve();
+          resolve(null);
         });
       });
     };

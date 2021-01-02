@@ -28,7 +28,6 @@ const ck = require("chalker");
 const _ = require("lodash");
 const statsUtils = require("../stats-utils");
 const statsMapper = require("../stats-mapper");
-const xsh = require("xsh");
 
 function urlJoin(...args) {
   if (args.length < 1) return undefined;

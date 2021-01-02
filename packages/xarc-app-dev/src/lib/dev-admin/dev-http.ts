@@ -7,9 +7,8 @@ import { getType } from "mime";
 import { createServer, Server } from "http";
 import * as Url from "url";
 import { resolve as pathResolve } from "path";
-
-const Middleware = require("./middleware");
 const FakeRes = require("../fake-res");
+
 export interface DevHttpServerOptions {
   port: number;
   host: string;
@@ -26,11 +25,9 @@ export interface DevHttpServer {
   addListener: (event: HttpServerEvent, hander: any) => void;
 }
 
-export const setupHttpDevServer = function({
-  port,
-  host,
-  protocol = "http"
-}: DevHttpServerOptions): DevHttpServer {
+function getMiddleware({ port, host, protocol = "http" }: DevHttpServerOptions) {
+  const Middleware = require("./middleware");
+
   const middleware = new Middleware({
     baseUrl: () => {
       return Url.format({
@@ -43,8 +40,27 @@ export const setupHttpDevServer = function({
 
   middleware.setup();
 
+  return middleware;
+}
+
+export const setupHttpDevServer = function({
+  port,
+  host,
+  protocol = "http"
+}: DevHttpServerOptions): DevHttpServer {
+  const createMiddleware = new Promise(resolve => {
+    process.nextTick(() => {
+      resolve(getMiddleware({ port, host, protocol }));
+    });
+  });
+
+  let middleware;
+
   const server: Server = createServer(async (req, res) => {
     try {
+      if (!middleware) {
+        middleware = await createMiddleware;
+      }
       const next1 = await middleware.process(req, res, {
         skip: () => middleware.canContinue,
         replyHtml: html =>
