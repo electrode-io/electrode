@@ -49,9 +49,9 @@ export const setupHttpDevServer = function({
   protocol = "http"
 }: DevHttpServerOptions): DevHttpServer {
   const createMiddleware = new Promise(resolve => {
-    process.nextTick(() => {
+    setTimeout(() => {
       resolve(getMiddleware({ port, host, protocol }));
-    });
+    }, 1);
   });
 
   let middleware;
@@ -99,7 +99,9 @@ export const setupHttpDevServer = function({
   });
 
   return {
-    start: () => server.listen(port, host),
+    start: () => {
+      server.listen(port, host);
+    },
     stop: () => {
       server.close(function() {
         /* eslint-disable no-console */
