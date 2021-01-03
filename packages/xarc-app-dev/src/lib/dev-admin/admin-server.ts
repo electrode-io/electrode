@@ -19,6 +19,9 @@ const isCI = require("is-ci");
 const { doCleanup } = require("./cleanup");
 const xaa = require("xaa");
 const { formUrl } = require("../utils");
+const optionalRequire = require("optional-require")(require);
+const WT = optionalRequire("worker_threads");
+
 const {
   settings: { useDevProxy: DEV_PROXY_ENABLED, adminLogLevel },
   fullDevServer,
@@ -188,12 +191,14 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
   handleServerExit(name) {
     const info = this.getServer(name);
     if (info._child) {
-      const { pid } = info._child;
-      info._child.once("exit", (code, signal) => {
+      const child = info._child;
+      const { pid } = child;
+      child.once("exit", (code, signal) => {
         const signalText = signal ? `- signal ${signal}` : "";
         this._io.show(ck`<orange>${name} (PID: ${pid}) exited code ${code} ${signalText}</orange>`);
-        info._child = undefined;
-        info._starting = false;
+        if (info._child === child) {
+          info._child = undefined;
+        }
         this._webpackDevRelay.setAppServer(null);
       });
     }
@@ -201,14 +206,14 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
 
   async signal(name, sig) {
     const info = this.getServer(name);
-    if (info._child) {
+    if (info._child && info._child.kill) {
       info._child.kill(sig);
     }
   }
 
   async sendMsg(name, data) {
     const info = this.getServer(name);
-    if (info._child) {
+    if (info._child && info._child.send) {
       info._child.send(data);
     }
   }
@@ -221,13 +226,23 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
     }
     const child = info._child;
     if (child) {
-      const defer = xaa.defer();
-      child.once("close", () => defer.resolve());
-      child.kill(sig);
-      await xaa.try(() => xaa.runTimeout(defer.promise, 5000));
-      child.kill("SIGKILL");
+      if (child.kill) {
+        child.kill(sig);
+        const defer = xaa.defer();
+        child.once("close", () => defer.resolve());
+        await xaa.try(() => xaa.runTimeout(defer.promise, 1000));
+        child.kill("SIGKILL");
+      } else if (child.terminate) {
+        child.postMessage("kill");
+        const defer1 = xaa.defer();
+        child.once("message", msg => defer1.resolve(msg));
+        await xaa.try(() => xaa.runTimeout(defer1.promise, 1000));
+        child.terminate();
+        const defer2 = xaa.defer();
+        child.once("exit", () => defer2.resolve());
+        await xaa.try(() => xaa.runTimeout(defer2.promise, 1000));
+      }
       info._child = undefined;
-      info._starting = false;
     } else if (info._starting) {
       this._io.show(ck`<red>No child process for ${name} to send signal ${sig}</>`);
     }
@@ -315,12 +330,12 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
   async startServer(options) {
     const { name, debug, killKey } = options;
 
-    if (!this._servers[name]) this._servers[name] = { time: Date.now() };
+    if (!this._servers[name]) {
+      this._servers[name] = { time: Date.now() };
+    }
 
     const info = this._servers[name];
 
-    info.options = options;
-    info.name = name;
     if (info._starting) {
       this._io.show(
         ck`<yellow.inverse> Start ${name} already in progress - press<magenta> ${killKey} </>to kill it.</>`
@@ -328,17 +343,28 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
       return;
     }
 
+    info.options = options;
+    info.name = name;
+    info._starting = true;
+
     const debugMsg = debug ? ` with <cyan>${debug}</>` : "";
+
+    const Worker =
+      process.env.XARC_WDS_WORKER && options.exec.includes("dev-server") && WT && WT.Worker;
+
+    const wtMsg = Worker ? ` [using worker threads]` : "";
 
     // show Restarting or Starting message
     const re = info._child ? "Res" : "S";
-    this._io.show(ck`<orange>${re}tarting ${name}${debugMsg} - log tag:</orange> ${options.tag}`);
+    this._io.show(
+      ck`<orange>${re}tarting ${name}${wtMsg}${debugMsg} - log tag:</orange> ${options.tag}`
+    );
+
     if (info._child) {
       await this.kill(name, "SIGINT");
     }
 
     info._startDefer = xaa.defer();
-    info._starting = true;
 
     //
     // file watcher to restart server in case of change
@@ -349,28 +375,34 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
     }
 
     const start = () => {
-      const forkOpts: any = {
-        env: Object.assign({}, process.env, {
-          // let child process know that dev admin is running
-          XARC_ADMIN_SERVER: true,
-          // pass admin port to child process
-          XARC_ADMIN_PORT: this._adminHttp._port,
-          ...SERVER_ENVS[name]
-        }),
-        silent: true
-      };
+      const env = Object.assign({}, process.env, {
+        // let child process know that dev admin is running
+        XARC_ADMIN_SERVER: true,
+        // pass admin port to child process
+        XARC_ADMIN_PORT: this._adminHttp._port,
+        ...SERVER_ENVS[name]
+      });
 
-      if (options.passThruArgs) {
-        forkOpts.args = options.passThruArgs;
-      }
-
-      if (debug) {
-        forkOpts.execArgv = [debug];
+      if (Worker) {
+        info._child = new Worker(options.exec, { env, stdin: true, stdout: true, stderr: true });
       } else {
-        forkOpts.execArgv = [];
-      }
+        const forkOpts: any = {
+          env,
+          silent: true
+        };
 
-      info._child = fork(options.exec, forkOpts);
+        if (options.passThruArgs) {
+          forkOpts.args = options.passThruArgs;
+        }
+
+        if (debug) {
+          forkOpts.execArgv = [debug];
+        } else {
+          forkOpts.execArgv = [];
+        }
+
+        info._child = fork(options.exec, forkOpts);
+      }
       this.handleServerExit(name);
     };
 
@@ -394,9 +426,22 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
   async startWebpackDevServer(debug = undefined) {
     const progSig = `<s> [webpack.Progress] `;
     const waitStart = async info => {
-      const cwdRegex = new RegExp(process.cwd(), "g");
+      const cwdRegex = new RegExp(process.env.XARC_CWD || process.cwd(), "g");
       let removeTimer;
       let progLine = "";
+      let isNowMsg = "";
+
+      const setupCompletion = () => {
+        clearTimeout(removeTimer);
+        removeTimer = setTimeout(() => {
+          if (isNowMsg) {
+            this.updateStatus(isNowMsg);
+            isNowMsg = "";
+          }
+          this._io.removeItem(WDS_PROGRESS);
+        }, 2000).unref();
+      };
+
       const watchWdsLog = input => {
         const processLine = data => {
           const line = data.toString();
@@ -415,17 +460,15 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
             if (match) {
               this.updateStatus(ck`Webpack Compile Progress [<orange>${match[0]}</>]`);
             }
-            clearTimeout(removeTimer);
-          } else {
-            if (progLine) {
-              removeTimer = setTimeout(() => this._io.removeItem(WDS_PROGRESS), 2000).unref();
+            if ((match && match[0] === "100%") || isNowMsg) {
+              setupCompletion();
               progLine = "";
             }
-            if (line.includes("webpack bundle is now")) {
-              this.updateStatus(line);
-            } else {
-              this._io.show(this._wds + line.replace(cwdRegex, "."));
-            }
+          } else if (line.includes("webpack bundle is now")) {
+            isNowMsg = line;
+            setupCompletion();
+          } else {
+            this._io.show(this._wds + line.replace(cwdRegex, "."));
           }
         };
 
@@ -796,7 +839,10 @@ ${info.name} - assuming it started.</>`);
     const info = this.getServer(name);
 
     if (!info._watcher && !info.options.skipWatch && !_.isEmpty(info.options.watch)) {
-      info._watcher = chokidar.watch(info.options.watch, { cwd: process.cwd(), persistent: true });
+      info._watcher = chokidar.watch(info.options.watch, {
+        cwd: process.env.XARC_CWD || process.cwd(),
+        persistent: true
+      });
       info._watcher.on("change", restart);
     }
   }

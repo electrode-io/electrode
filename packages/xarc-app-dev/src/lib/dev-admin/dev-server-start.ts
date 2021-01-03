@@ -18,17 +18,20 @@ function tryVanillaNode(xarcOptions) {
     port: xarcOptions.webpack.devPort
   });
   devHttpServer.addListener("error", err => {
-    console.error(ck`<red>HTTP webpack dev server having an error</>${err}`);
+    console.error(ck`<red>webpack dev server error:</> ${err}`);
+    devHttpServer.stop();
   });
 
-  devHttpServer.addListener("listening", () =>
-    console.log(
-      ck`<green>Node.js webpack dev server listening on port ${xarcOptions.webpack.devPort}</>`
-    )
-  );
+  devHttpServer.addListener("listening", () => {
+    console.log(ck`<green>webpack dev server listening on port ${xarcOptions.webpack.devPort}</>`);
+    process.send({
+      name: "webpack-report",
+      valid: false
+    });
+  });
   devHttpServer.start();
 
-  return true;
+  return devHttpServer;
 }
 
 function tryFastify(xarcOptions) {
@@ -152,10 +155,10 @@ function tryExpress(xarcOptions) {
 
 export function startDevServer() {
   //
-  // requiring all the modules, such as webpack, could take a long time, especially
+  // Requiring all the modules, such as webpack, could take a long time, especially
   // when node.js cache is not primed sometimes.
-  // doing require here helps with some perceptive on how long webpack dev server
-  // starts up.  TODO: use worker thread to run WDS in dev-admin's process
+  // Doing require here helps with the perception of how long webpack dev server
+  // took to start up.
   //
   const { loadXarcOptions } = require("../../lib/utils");
 
@@ -178,10 +181,7 @@ Please install at least one of these dependencies:
 
 </red>`)
     );
-  } else {
-    process.send({
-      name: "webpack-report",
-      valid: false
-    });
   }
+
+  return started;
 }

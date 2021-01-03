@@ -43,7 +43,9 @@ export class WebpackDevRelay {
   // - stats is written to a temp file on disk currently.
   //
   receiveWebpackDevMessage(data) {
-    if (WEBPACK_DEV_MESSAGES.indexOf(data.name) >= 0) {
+    if (data === "exit") {
+      // WDS exit as a worker thread
+    } else if (WEBPACK_DEV_MESSAGES.indexOf(data.name) >= 0) {
       this._webpackData[data.name] = data;
       if (this._servers.app) {
         this._servers.app.child.send(data);
