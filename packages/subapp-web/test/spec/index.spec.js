@@ -147,6 +147,26 @@ describe("subapp-web", function() {
     expect(subApp._started).to.exist;
   });
 
+  it("loadSubApp with namespace should run load subapp under correct path", async () => {
+    require("../../src/subapp-web");
+    const xarc = require("../../src/xarc").default;
+    const index = require("../../src/index");
+    const subAppInfo = {
+      name: "testsubapp",
+      Component: () => "asdf",
+      ns: "test-namespace"
+    };
+    index.loadSubApp(subAppInfo);
+    const subApp = xarc.getSubApp("testsubapp");
+
+    expect(xarc.rt.bundles).to.deep.equal({
+      "test-namespace": {
+        testsubapp: true
+      }
+    });
+    expect(subApp._started).to.exist;
+  });
+
   it("loadSubApp should call preStart, preRender, signalReady", async () => {
     let preStartCalled = false;
     let preRenderCalled = false;
