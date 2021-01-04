@@ -5,7 +5,7 @@
 
 import { XarcSubAppClientV2, LoadSubAppOptions, _xarcV2RunTimeInfo } from "../subapp/index";
 
-export const xarcV2: Partial<XarcSubAppClientV2> = {
+export const xarcV2: XarcSubAppClientV2 = {
   IS_BROWSER: false,
   HAS_WINDOW: false,
 

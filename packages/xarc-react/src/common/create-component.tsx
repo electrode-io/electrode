@@ -11,10 +11,17 @@ export class SubAppComponent extends Component {
   resolveName: string;
   state: { module: any; TheComponent: typeof Component };
   _info: SubAppMountInfo;
+  _props: any;
+  props: {
+    __subapp: SubAppDef;
+    __props: any;
+    __resolveName: string;
+  };
 
   constructor(props) {
     super(props);
     this.subapp = props.__subapp;
+    this._props = props.__props;
     this.resolveName = props.__resolveName || this.subapp.resolveName;
     this.state = this.makeState(this.subapp._module);
     this.loading = <div>subapp {this.subapp.name} component loading... </div>;
@@ -56,7 +63,7 @@ export class SubAppComponent extends Component {
   render() {
     if (this.state.module) {
       if (this.state.TheComponent) {
-        return <this.state.TheComponent {...this.props} />;
+        return <this.state.TheComponent {...this._props} />;
       } else {
         return <div>subapp {this.subapp.name}'s module did not export a SubApp</div>;
       }
@@ -109,6 +116,6 @@ export function __createDynamicComponent(
   }
 
   return (props: any) => (
-    <SubAppComponent {...props} __subapp={subappDef} __resolveName={options.resolveName} />
+    <SubAppComponent __subapp={subappDef} __resolveName={options.resolveName} __props={props} />
   );
 }
