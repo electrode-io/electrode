@@ -6,7 +6,7 @@ export const home = declareSubApp({
 });
 
 export const Demo2 = declareSubApp({
-  name: "demo1b",
+  name: "demo2",
   getModule: () => import("./demo2")
 });
 

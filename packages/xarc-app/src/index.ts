@@ -283,7 +283,7 @@ export function load(
         waitTo();
         xReq.once("activate", () => {
           clearTimeout(timer);
-          resolve();
+          resolve(null);
         });
       }).then(() => setupIsomorphicCdnAssetsMapping(options.isomorphicCdnOptions));
     } else {

@@ -2,8 +2,8 @@
 // A more complicate demo subapp using Redux
 //
 // Note: using redux requires top level Redux store initialization so if another
-// subapp tries to use this as a dynamic component, then it must also redux and
-// provide the redux top level store facility.
+// subapp tries to use this as a dynamic component, then it must also uses redux and
+// provides the redux top level store facility.
 //
 
 import { React, ReactSubApp } from "@xarc/react";

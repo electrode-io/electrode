@@ -1,15 +1,19 @@
 import { PageRenderer } from "@xarc/react";
-const support = require("@xarc/app/support");
+import { load } from "@xarc/app/support";
 const electrodeServer = require("@xarc/fastify-server");
 
 import { config } from "./config";
 import { Demo2, home } from "../app";
 
 async function start() {
-  await support.load();
+  await load({
+    isomorphicCdnOptions: {
+      prodOnly: true
+    }
+  });
   const server = await electrodeServer(config);
 
-  let homeRenderer;
+  let homeRenderer: PageRenderer;
 
   server.route({
     method: "GET",
@@ -22,7 +26,10 @@ async function start() {
             subApps: [
               { name: home.name, ssr: true },
               { name: Demo2.name, ssr: true }
-            ]
+            ],
+            prodAssetData: {
+              cdnMap: "config/assets.json"
+            }
           });
         }
         const context = await homeRenderer.render({ request });
