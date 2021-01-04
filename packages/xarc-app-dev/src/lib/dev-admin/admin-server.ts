@@ -466,7 +466,13 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
             }
           } else if (line.includes("webpack bundle is now")) {
             isNowMsg = line;
-            setupCompletion();
+            if (progLine.includes("100%")) {
+              // the 100% progress line already received, so just setup timer
+              // to complete the final status message
+              setupCompletion();
+            } else {
+              this.updateStatus(line);
+            }
           } else {
             this._io.show(this._wds + line.replace(cwdRegex, "."));
           }
