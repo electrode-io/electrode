@@ -350,7 +350,7 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
     const debugMsg = debug ? ` with <cyan>${debug}</>` : "";
 
     const Worker =
-      !process.env.XARC_NO_WDS_WORKER && options.exec.includes("dev-server") && WT && WT.Worker;
+      process.env.XARC_WDS_WORKER && options.exec.includes("dev-server") && WT && WT.Worker;
 
     const wtMsg = Worker ? ` [using worker threads]` : "";
 
