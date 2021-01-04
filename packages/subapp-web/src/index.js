@@ -17,11 +17,13 @@ export function loadSubApp(info, renderStart, options) {
   info = makeSubAppSpec(info);
 
   const name = info.name;
+  const ns = info.ns;
+
   let subApp = xarc.getSubApp(name) || { info };
 
   // mark the subapp's webpack bundle as loaded
-  if (!xarc.getBundle(name)) {
-    xarc.setBundle(name, true);
+  if (!xarc.getBundle(name, ns)) {
+    xarc.setBundle(name, true, ns);
   }
 
   // subapp already loaded, do nothing and return the info
@@ -182,7 +184,7 @@ export function isLoaded(name) {
   return Boolean(xarc.getSubApp(name));
 }
 
-export function lazyLoadSubApp({ name, id, timeout = 15000, onLoad, onError, fallback }) {
+export function lazyLoadSubApp({ name, id, timeout = 15000, onLoad, onError, fallback, ns }) {
   // TODO: timeout and callback
   const lname = name.toLowerCase();
 
@@ -205,8 +207,8 @@ export function lazyLoadSubApp({ name, id, timeout = 15000, onLoad, onError, fal
     return false;
   };
 
-  if (xarc.getBundle(name) === undefined) {
-    xarc.loadSubAppBundles(lname);
+  if (xarc.getBundle(name, ns) === undefined) {
+    xarc.loadSubAppBundles(lname, null, ns);
   } else if (!id && !onLoad) {
     const inlined = renderInline();
     if (inlined) {

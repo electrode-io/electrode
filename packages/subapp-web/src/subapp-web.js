@@ -20,6 +20,10 @@
 
   let xv1;
 
+  const DEFAULT_NAMESPACE = "root";
+
+  const ensureNamespace = (namespace = DEFAULT_NAMESPACE) => namespace;
+  
   return (w.xarcV1 = xv1 = {
     IS_BROWSER: true,
     HAS_WINDOW: typeof window !== "undefined",
@@ -112,12 +116,20 @@
       return defer.promise;
     },
 
-    getBundle(name) {
-      return name ? runtimeInfo.bundles[name.toLowerCase()] : undefined;
+    getBundle(name, namespace) {
+      namespace = ensureNamespace(namespace);
+
+      if (!name || !runtimeInfo.bundles[namespace] || !runtimeInfo.bundles[namespace][name.toLowerCase()]) {
+        return;
+      }
+
+      return runtimeInfo.bundles[namespace][name.toLowerCase()];
     },
 
-    setBundle(name, state) {
-      runtimeInfo.bundles[name.toLowerCase()] = state;
+    setBundle(name, state, namespace) {
+      namespace = ensureNamespace(namespace);
+      runtimeInfo.bundles[namespace] = runtimeInfo.bundles[namespace] || {};
+      runtimeInfo.bundles[namespace][name.toLowerCase()] = state;
     },
 
     getSubApp(name) {
@@ -290,30 +302,41 @@
       xv1.watchSubAppOnLoad(true);
     },
 
-    markBundlesLoaded(ids) {
+    markBundlesLoaded(ids, namespace) {
       [].concat(ids).forEach(id => {
-        xv1.setBundle(id.toString(), 1);
+        xv1.setBundle(id.toString(), 1, namespace);
       });
     },
 
-    getBundleAssets() {
+    getBundleAssets(namespace) {
+      namespace = ensureNamespace(namespace);
+
       if (!runtimeInfo.bundleAssets) {
-        runtimeInfo.bundleAssets = xv1.dyn("bundleAssets");
-        xv1.cdnInit(runtimeInfo.bundleAssets);
+        runtimeInfo.bundleAssets = {};
       }
-      return runtimeInfo.bundleAssets;
+
+      if (!runtimeInfo.bundleAssets[namespace]) {
+        const bundleName = namespace === DEFAULT_NAMESPACE ? "bundleAssets": `${namespace}Assets`;
+        runtimeInfo.bundleAssets[namespace] = xv1.dyn(bundleName);
+
+        const updater = xv1.rt.md === "undefined" ? xv1.cdnInit : xv1.cdnUpdate;
+        updater(runtimeInfo.bundleAssets[namespace]);
+      }
+
+      return runtimeInfo.bundleAssets[namespace];
     },
 
-    loadSubAppBundles(names, done) {
+    loadSubAppBundles(names, done, namespace) {
       done = done || (() => {});
+      namespace = ensureNamespace(namespace);
 
-      const toLoad = [].concat(names).filter(x => xv1.getBundle(x) === undefined);
+      const toLoad = [].concat(names).filter(x => xv1.getBundle(x, namespace) === undefined);
 
       if (toLoad.length === 0) {
         return done();
       }
 
-      const ba = xv1.getBundleAssets();
+      const ba = xv1.getBundleAssets(namespace);
       const loaded = [];
       const assetsToLoad = toLoad
         .reduce((a, name) => {
@@ -332,8 +355,8 @@
         }, [])
         .filter(({ id }) => {
           id = id.toString();
-          if (xv1.getBundle(id) === undefined) {
-            xv1.setBundle(id, 0); // mark as loading
+          if (xv1.getBundle(id, namespace) === undefined) {
+            xv1.setBundle(id, 0, namespace); // mark as loading
 
             return true;
           }
