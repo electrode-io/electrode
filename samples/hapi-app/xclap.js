@@ -46,13 +46,17 @@ process.env.ENABLE_SHORTEN_CSS_NAMES = true;
 
 // process.env.KARMA_BROWSER = "phantomjs";
 
-const { getDevTaskRunner, loadXarcDevTasks } = require("@xarc/app-dev/lib/dev-tasks");
+const { getDevTaskRunner, loadXarcDevTasks, xclap } = require("@xarc/app-dev/lib/dev-tasks");
 
 const runner = getDevTaskRunner();
 runner.load({
   foo: runner.exec("echo hello from foo task")
 });
 
-loadXarcDevTasks();
+loadXarcDevTasks(xclap, {
+  webpackOptions: {
+    cssModuleSupport: "all"
+  }
+});
 
 //
