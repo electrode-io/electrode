@@ -65,9 +65,6 @@ export type WebpackOptions = {
    *    ie: `/\.(mod|module)\.(css|styl|sass|scss)$/i`
    * 5. `false`: Disable CSS module completely
    *
-   *
-   * Note: CSS module support require the package `@xarc/opt-postcss`, please add it to your `devDependencies`.
-   *
    * - Legacy: You can also set this option with env `CSS_MODULE_SUPPORT`.
    *
    */
