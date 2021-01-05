@@ -55,11 +55,20 @@ export type WebpackOptions = {
   devArtifactsPath?: string;
 
   /**
-   * Set to true to explicitly enable CSS module support for all style files
-   * - **Default: `undefined` (auto detect)**
-   * - If not set, then check env `CSS_MODULE_SUPPORT`
+   * Configure CSS module support.
+   *
+   * Settings:
+   * 1. `true` or "cssOnly" (**default**): CSS module for any file with `.css` extension
+   * 2. RegExp: CSS module for any file that matches the custom RegExp
+   * 3. `"all"`: CSS module for all style files (`css`, `styl`, `sass`, `scss`)
+   * 4. `"byModExt"`: Use the preset RegExp that matches any file ending with `.mod.{ext}` or `.module.{ext}`
+   *    ie: `/\.(mod|module)\.(css|styl|sass|scss)$/i`
+   * 5. `false`: Disable CSS module completely
+   *
+   * - Legacy: You can also set this option with env `CSS_MODULE_SUPPORT`.
+   *
    */
-  cssModuleSupport?: boolean | RegExp;
+  cssModuleSupport?: boolean | RegExp | "all" | "byModExt" | "cssOnly";
 
   /**
    * Enable loading `@babel/polyfill` for application

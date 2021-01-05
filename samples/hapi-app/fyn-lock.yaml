@@ -2232,7 +2232,7 @@ $pkg:
    babel-plugin-react-css-modules: ^5.2.6
    css-modules-require-hook: ^4.0.2
    ignore-styles: ^5.0.1
-   isomorphic-loader: ^4.2.1
+   isomorphic-loader: ^4.2.2
    optional-require: ^1.0.0
    subapp-util: ^1.1.2
 '@xarc/app-dev':
@@ -2451,8 +2451,8 @@ $pkg:
    '@xarc/render-context': ^1.0.3
    '@xarc/subapp': ^0.0.3
    '@xarc/tag-renderer': ^1.0.3
-   react: ^16.13.1
-   react-dom: ^16.13.1
+   react: '>= 16'
+   react-dom: '>= 16'
   peerDependencies:
    tslib: ^2.0.3
 '@xarc/render-context':
@@ -7460,12 +7460,12 @@ isobject:
   dependencies:
    isarray: 1.0.0
 isomorphic-loader:
- _latest: 4.2.1
+ _latest: 4.2.2
  _:
-  ^4.2.1: 4.2.1
- 4.2.1:
-  $: sha512-k6/lRYHit1MAiwZ2eWKL3ZMZl8XEhGSxQz30UhvIWqj7b2boFC5cVVv4UGEGW3YoIK84+eHacbNqEGBDKtsIOA==
-  _: 'https://registry.npmjs.org/isomorphic-loader/-/isomorphic-loader-4.2.1.tgz'
+  ^4.2.2: 4.2.2
+ 4.2.2:
+  $: sha512-wBUDq1UgXcQZWYZPo767izp5c+srE0aK2b/jCVguVmTQLnh+kIx8UGE/X/aEFJnR5n3WzBl9yHDUKvrzmSHUVQ==
+  _: 'https://registry.npmjs.org/isomorphic-loader/-/isomorphic-loader-4.2.2.tgz'
 isstream:
  _latest: 0.1.2
  _:
@@ -10816,7 +10816,7 @@ raw-body:
 react:
  _latest: 17.0.1
  _:
-  '^16.0.0,^16.13.1': 16.14.0
+  '>= 16,^16.0.0': 16.14.0
  16.14.0:
   $: sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
   _: 'https://registry.npmjs.org/react/-/react-16.14.0.tgz'
@@ -10827,7 +10827,7 @@ react:
 react-dom:
  _latest: 17.0.1
  _:
-  '^16.0.0,^16.13.1': 16.14.0
+  '>= 16,^16.0.0': 16.14.0
  16.14.0:
   $: sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw==
   _: 'https://registry.npmjs.org/react-dom/-/react-dom-16.14.0.tgz'
