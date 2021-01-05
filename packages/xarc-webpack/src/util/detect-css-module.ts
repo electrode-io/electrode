@@ -37,7 +37,7 @@ function detectCSSModule(archetype) {
           `Could not parse cssModuleSupport RegExp string "${cssModuleSupport}". Enabling CSS Module support for all ".css" files.`
         );
 
-        cssModuleRegExp = presetRegExp.all;
+        cssModuleRegExp = presetRegExp.cssOnly;
       }
     }
   } else if (cssModuleSupport.constructor.name === "RegExp") {
