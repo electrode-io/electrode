@@ -13,7 +13,7 @@ describe("createDynamicComponent", function () {
       getModule: () => import("../../blah")
     });
 
-    expect(container).to.have.key("test");
+    expect(container.getNames()).contains("test");
     expect(Component).to.be.a("function");
   });
 });

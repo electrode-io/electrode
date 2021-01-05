@@ -24,13 +24,19 @@ export function getContainer(): SubAppContainer {
   const w: any = window;
 
   if (!w._subapps) {
-    w._subapps = {};
+    w._subapps = new SubAppContainer({});
   }
 
   return w._subapps;
 }
 
-export const xarcV2 = (window as any).xarcV2 as XarcSubAppClientV2;
+export const xarcV2 = ((window as any).xarcV2 as XarcSubAppClientV2) || {
+  // in case xarc subapp client is not loaded, provide an empty fill-in to handle debug calls
+  // this occurs when app is using subapp for dynamic import component only without the subapp features.
+  debug: () => {
+    //
+  }
+};
 
 export function _setupEnvHooks() {
   if (!envHooks.getContainer) {

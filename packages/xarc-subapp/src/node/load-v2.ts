@@ -41,7 +41,7 @@ export function loadSubApp(setupContext: any, { props: setupProps }) {
       // console.log("subapp load", name, "useReactRouter", subApp.useReactRouter);
       const { name } = props;
 
-      const subapp = getContainer()[name];
+      const subapp = getContainer().get(name);
 
       // reserve output spot in index.html
       const outputSpot = context.output.reserve();
