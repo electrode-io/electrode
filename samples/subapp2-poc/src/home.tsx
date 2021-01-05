@@ -1,13 +1,11 @@
+import PropTypes from "prop-types";
 import { React, declareSubApp, createDynamicComponent, ReactSubApp, xarcV2 } from "@xarc/react";
+import { connect, reduxFeature } from "@xarc/react-redux";
+import { reactRouterFeature, Route, Switch } from "@xarc/react-router";
+import { Component as Demo2 } from "./demo2";
 import { message } from "./message";
 import electrodePng from "../static/electrode.png";
-import { Component as Demo2 } from "./demo2";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import custom from "./styles/custom.module.css"; // eslint-disable-line no-unused-vars
-import { reduxFeature } from "@xarc/redux";
-import { reactRouterFeature } from "@xarc/react-router";
-import { Route, Switch } from "react-router-dom";
 
 export const demo1 = declareSubApp({
   name: "demo1",

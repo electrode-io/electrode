@@ -18,3 +18,14 @@ export type ReactRouterFeatureOptions = {
 
 export const _id = "router-provider";
 export const _subId = "react-router";
+
+//
+// re-export react-router-dom as ReactRouterDom etc
+//
+export * as ReactRouterDom from "react-router-dom";
+export * from "react-router-dom";
+
+//
+// re-export react-router as ReactRouter
+//
+export * as ReactRouter from "react-router";

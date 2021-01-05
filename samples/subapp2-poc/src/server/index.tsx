@@ -5,8 +5,8 @@ const electrodeServer = require("@xarc/fastify-server");
 //
 // for manually rendering
 //
-import { Provider } from "react-redux";
-import { combineReducers, createStore } from "redux";
+import { Provider } from "@xarc/react-redux";
+import { combineReducers, createStore } from "@xarc/react-redux";
 
 import {
   React,

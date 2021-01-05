@@ -7,8 +7,7 @@
 //
 
 import { React, ReactSubApp } from "@xarc/react";
-import { reduxFeature } from "@xarc/redux";
-import { connect } from "react-redux";
+import { reduxFeature, connect } from "@xarc/react-redux";
 export { reduxReducers } from "./reducers";
 
 const incNumber = () => {

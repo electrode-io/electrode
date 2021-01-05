@@ -4,6 +4,19 @@ import { SubAppDef, SubAppFeatureFactory, SubAppFeature } from "@xarc/subapp";
 import { Provider } from "react-redux";
 import { combineReducers, createStore, Reducer } from "redux";
 
+//
+// re-export redux as Redux etc
+//
+export * as Redux from "redux";
+export { combineReducers, createStore, Reducer, bindActionCreators } from "redux";
+
+//
+// re-export react-redux as ReactRedux etc
+//
+
+export * as ReactRedux from "react-redux";
+export { connect, Provider, batch, useSelector, useDispatch, useStore } from "react-redux";
+
 export type ReduxFeatureOptions = {
   /**
    * The React module.
