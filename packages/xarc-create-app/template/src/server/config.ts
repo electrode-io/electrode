@@ -24,21 +24,7 @@ export const config = {
     "@xarc/app-dev": {
       priority: -1,
       enable: process.env.WEBPACK_DEV === "true"
-    },
-    /**
-     * Register the server routes plugin for the app
-     */
-    "subapp-server": {
-      options: {
-        cdn: {
-          /**
-           * Enable CDN in production mode.  To try this locally, do:
-           * 1. npm run build
-           * 2. NODE_ENV=production clap mock-cloud
-           */
-          enable: process.env.NODE_ENV === "production"
-        }
-      }
     }
-  }
+  },
+  deferStart: true
 };

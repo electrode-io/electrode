@@ -12,4 +12,6 @@ const number = (store = { value: 0 }, action) => {
   return store;
 };
 
-export default number;
+export const reduxReducers = {
+  number
+};

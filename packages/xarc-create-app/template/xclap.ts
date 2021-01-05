@@ -1,5 +1,4 @@
-import { loadXarcDevTasks } from "@xarc/app-dev/lib/dev-tasks";
-import xclap from "xclap";
+import { loadXarcDevTasks, xclap } from "@xarc/app-dev/lib/dev-tasks";
 
 xclap.updateEnv(
   {
