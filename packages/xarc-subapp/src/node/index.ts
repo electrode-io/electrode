@@ -90,5 +90,5 @@ export function refreshAllSubApps2() {
     container.get(name)._module = null;
   }
 
-  container.readyCount = -1;
+  container.updateReady();
 }

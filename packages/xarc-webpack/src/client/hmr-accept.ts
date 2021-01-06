@@ -32,8 +32,10 @@ export function hmrSetup(w: any, hot: any, reload?: ReloadFunction) {
   if (!reload) {
     reload = (modName: string, subAppNames: string[]) => {
       for (const subAppName of subAppNames) {
-        const subapp = w._subapps && w._subapps[subAppName];
-        if (subapp && subapp._reload) {
+        const subapp = w._subapps && w._subapps.get && w._subapps.get(subAppName);
+        if (!subapp) {
+          console.error("HMR reload can't find subapp in window._subapps container:", subAppName);
+        } else if (subapp._reload) {
           subapp._reload(subAppName, modName);
         }
       }

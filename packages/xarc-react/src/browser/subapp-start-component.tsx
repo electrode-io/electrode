@@ -3,6 +3,8 @@
 
 import { createElement, Component } from "react"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import { SubAppDef, SubAppMountInfo } from "./index";
+import { xarcV2 } from "./index";
+import { envHooks } from "@xarc/subapp";
 
 type PropsType = {
   __subapp: SubAppDef;
@@ -25,6 +27,8 @@ export class SubAppStartComponent extends Component {
   }
 
   reload() {
+    xarcV2.debug("SubAppStartComponent reloading subapp", this.subapp.name);
+    this.subapp = envHooks.getContainer().get(this.subapp.name);
     this._Component = this.subapp._module.Component || this.subapp._module.subapp.Component;
     this.setState({ count: this.state.count + 1 });
   }

@@ -38,6 +38,7 @@ export function subAppReady(
   }
 
   const toWait = container.getNames();
+
   const subappModules = [];
 
   for (const name of toWait) {

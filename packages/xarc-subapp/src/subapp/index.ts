@@ -1,6 +1,5 @@
-import { SubAppDef, SubAppMountInfo, SubAppOptions, SubAppFeatureFactory } from "./types";
+import { SubAppDef, SubAppOptions, SubAppFeatureFactory } from "./types";
 import { envHooks } from "./envhooks";
-
 export * from "./types";
 export * from "./envhooks";
 export * from "./subapp-ready";
@@ -17,6 +16,8 @@ const noop = () => {
   //
 };
 
+let id = 1;
+
 /**
  * **internal use only**
  *
@@ -24,39 +25,42 @@ const noop = () => {
  * @returns subapp definition
  */
 export function __declareSubApp(opts: SubAppOptions): SubAppDef {
-  const container = envHooks.getContainer();
+  const def = Object.assign(
+    {
+      _id: id++,
+      _getModule() {
+        const container = envHooks.getContainer();
+        const subapp = container.get(def.name);
 
-  let def = container.get(opts.name);
+        // not doing async/await to avoid ts transpiling them to non-promise ES5
+        // https://github.com/microsoft/TypeScript/issues/31621
+        const mod = typeof subapp.getModule === "function" ? subapp.getModule() : subapp.getModule;
+        return mod.then(mod2 => {
+          // get subapp def from container again in case subapp was re-declared by a reloaded module
+          // while getModule was in flight.
+          const subapp2 = container.get(def.name);
 
-  if (!def) {
-    def = Object.assign(
-      {
-        _getModule() {
-          // not doing async/await to avoid ts transpiling them to non-promise ES5
-          // https://github.com/microsoft/TypeScript/issues/31621
-          const mod = typeof opts.getModule === "function" ? opts.getModule() : opts.getModule;
-          return mod.then(mod2 => {
-            def._module = mod2;
+          if (!subapp2) {
+            console.error("_getModule can't find the subapp in container for:", this.name); // eslint-disable-line no-console
+          } else {
+            subapp2._module = mod2;
             loadFeatures(def, mod2.subapp?.wantFeatures);
-            return mod2;
-          });
-        },
-        _module: undefined,
-        _ssr: false,
-        _features: {},
-        _mount: noop,
-        _unmount: noop
+          }
+          container.updateReady();
+
+          return mod2;
+        });
       },
-      opts
-    );
+      _module: undefined,
+      _ssr: false,
+      _features: {},
+      _mount: noop,
+      _unmount: noop
+    },
+    opts
+  );
 
-    (def as any)._createTime = Date.now();
-  } else if (def._module) {
-    def._module = false;
-    container.readyCount--;
-  }
-
-  container.declare(opts.name, def);
+  envHooks.getContainer().declare(opts.name, def);
   loadFeatures(def, opts.wantFeatures);
 
   return def;

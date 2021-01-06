@@ -124,6 +124,10 @@ export type SubAppOptions = {
  * definition of a subapp from declareSubApp
  */
 export type SubAppDef = SubAppOptions & {
+  /**
+   * unique instance ID, if a subapp with same name is re-declared then it will have a diff _id
+   */
+  _id: number;
   _getModule: () => Promise<any>;
   _module: any;
   _ssr: boolean;
@@ -284,11 +288,21 @@ export class SubAppContainer {
   declare(name: string, subapp: SubAppDef): SubAppDef {
     this.$[name] = subapp;
     this.declareCount = this.getNames().length;
+    this.updateReady();
     return subapp;
   }
 
   isReady() {
     return this.readyCount === this.declareCount;
+  }
+
+  updateReady() {
+    this.readyCount = 0;
+    for (const name in this.$) {
+      if (this.$[name]._module) {
+        this.readyCount++;
+      }
+    }
   }
 
   getNames() {
