@@ -102,7 +102,7 @@ export function xarcV2Client(
       ols[name].push(Object.assign({}, options, data));
     },
 
-    _start(ignore: string[] = []) {
+    _start(ignore: string[]) {
       runtimeInfo.started = true;
       const promises = [];
       const onLoadStart = runtimeInfo.onLoadStart;
@@ -160,7 +160,7 @@ export function xarcV2Client(
         console.error("No subapps registered, nothing to start.");
         return Promise.resolve();
       }
-      return this._start();
+      return this._start([]);
     },
 
     dyn(id) {
