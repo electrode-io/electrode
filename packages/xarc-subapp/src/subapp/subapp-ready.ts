@@ -54,8 +54,6 @@ export function subAppReady(
 
   return Promise.all(subappModules)
     .then(results => {
-      container.readyCount = toWait.length;
-
       // if loading a subapp module triggered more subapps to be declared, then
       // need to ensure those are ready also.
       if (toWait.length !== container.declareCount) {
