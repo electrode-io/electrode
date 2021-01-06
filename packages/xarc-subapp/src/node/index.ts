@@ -24,9 +24,9 @@ let CONTAINER: SubAppContainer;
  * @returns subapp container
  */
 export function getContainer(): SubAppContainer {
-    if (!CONTAINER) {
-      CONTAINER = new SubAppContainer({});
-    }
+  if (!CONTAINER) {
+    CONTAINER = new SubAppContainer({});
+  }
 
   return CONTAINER;
 }
@@ -84,7 +84,9 @@ export { SubAppServer } from "./subapp-server";
 export function refreshAllSubApps2() {
   const container = getContainer();
 
-  for (const name of container.getNames()) {
+  const subAppNames = container.getNames();
+
+  for (const name of subAppNames) {
     container.get(name)._module = null;
   }
 

@@ -23,38 +23,52 @@ export function isSubAppReady() {
  * @param list - list of subapps' names to wait (if it's true, then wait for all)
  * @returns promise
  */
-export function subAppReady(list: boolean | string[] = false): Promise<any> {
+export function subAppReady(
+  list: boolean | string[] = false,
+  ignores: string[] = [],
+  callDepth = 0
+): Promise<any> {
   // not doing async/await to avoid ts transpiling them to non-promise ES5
   // https://github.com/microsoft/TypeScript/issues/31621
+
   const container = envHooks.getContainer();
 
   if (container.isReady()) {
     return Promise.resolve();
   }
 
-  const beforeWaitCount = container.declareCount;
-
+  const toWait = container.getNames();
   const subappModules = [];
 
-  for (const name of container.getNames()) {
+  for (const name of toWait) {
     if (
-      list === true ||
-      (Array.isArray(list) && list.indexOf(name) >= 0) ||
-      container.get(name)._ssr
+      ignores.indexOf(name) < 0 && // must use indexOf, because ts doesn't transpile .includes to ES5
+      (list === true ||
+        (Array.isArray(list) && list.indexOf(name) >= 0) ||
+        container.get(name)._ssr)
     ) {
       subappModules.push(container.get(name)._getModule());
     }
   }
 
-  return Promise.all(subappModules).then(results => {
-    container.readyCount = beforeWaitCount;
+  return Promise.all(subappModules)
+    .then(results => {
+      container.readyCount = toWait.length;
 
-    // if loading a subapp module triggered more subapps to be declared, then
-    // need to ensure those are ready also.
-    if (beforeWaitCount !== container.declareCount) {
-      return subAppReady();
-    }
+      // if loading a subapp module triggered more subapps to be declared, then
+      // need to ensure those are ready also.
+      if (toWait.length !== container.declareCount) {
+        if (callDepth < 15) {
+          // just load all new subapps but ignore what's just loaded
+          return subAppReady(true, toWait, callDepth + 1);
+        } else {
+          console.error("subapp ready call nesting too deep", callDepth);
+        }
+      }
 
-    return results;
-  });
+      return results;
+    })
+    .catch(err => {
+      console.error("get subapp module failure", err);
+    });
 }

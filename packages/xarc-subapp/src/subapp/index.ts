@@ -13,7 +13,7 @@ function loadFeatures(subapp: SubAppDef, features: SubAppFeatureFactory[]) {
   }
 }
 
-const noop = (_: SubAppMountInfo) => {
+const noop = () => {
   //
 };
 
@@ -24,30 +24,39 @@ const noop = (_: SubAppMountInfo) => {
  * @returns subapp definition
  */
 export function __declareSubApp(opts: SubAppOptions): SubAppDef {
-  const def: SubAppDef = Object.assign(
-    {
-      _getModule() {
-        // not doing async/await to avoid ts transpiling them to non-promise ES5
-        // https://github.com/microsoft/TypeScript/issues/31621
-        const mod = typeof opts.getModule === "function" ? opts.getModule() : opts.getModule;
-        return mod.then(mod2 => {
-          this._module = mod2;
-          loadFeatures(this, mod2.subapp?.wantFeatures);
-          return mod;
-        });
-      },
-      _module: null,
-      _ssr: false,
-      _features: {},
-      _mount: noop,
-      _unmount: noop
-    },
-    opts
-  );
-
   const container = envHooks.getContainer();
-  container.declare(opts.name, def);
 
+  let def = container.get(opts.name);
+
+  if (!def) {
+    def = Object.assign(
+      {
+        _getModule() {
+          // not doing async/await to avoid ts transpiling them to non-promise ES5
+          // https://github.com/microsoft/TypeScript/issues/31621
+          const mod = typeof opts.getModule === "function" ? opts.getModule() : opts.getModule;
+          return mod.then(mod2 => {
+            def._module = mod2;
+            loadFeatures(def, mod2.subapp?.wantFeatures);
+            return mod2;
+          });
+        },
+        _module: undefined,
+        _ssr: false,
+        _features: {},
+        _mount: noop,
+        _unmount: noop
+      },
+      opts
+    );
+
+    (def as any)._createTime = Date.now();
+  } else if (def._module) {
+    def._module = false;
+    container.readyCount--;
+  }
+
+  container.declare(opts.name, def);
   loadFeatures(def, opts.wantFeatures);
 
   return def;
