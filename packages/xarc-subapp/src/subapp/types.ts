@@ -43,7 +43,7 @@ export interface XarcSubAppClientV2 {
   addOnLoadStart(name: string, load: any): void;
   startSubAppOnLoad(options: any, data: any): void;
   start(): Promise<any>;
-  _start(ignore: string[]): Promise<any>;
+  _start(ignore: string[], callDepth: number): Promise<any>;
   /**
    * Need this for node.js.  While chrome dev tools allow setting console level, node.js'
    * console.debug is just an alias for console.log.

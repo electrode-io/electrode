@@ -102,7 +102,7 @@ export function xarcV2Client(
       ols[name].push(Object.assign({}, options, data));
     },
 
-    _start(ignore: string[]) {
+    _start(ignore: string[], callDepth) {
       runtimeInfo.started = true;
       const promises = [];
       const onLoadStart = runtimeInfo.onLoadStart;
@@ -139,8 +139,12 @@ export function xarcV2Client(
           console.debug("subapp onStart loaded modules. msec taken:", Date.now() - beginTs, mods);
           // Some modules declared more subapps, load them first, but ignore what we just loaded.
           if (subapps.declareCount > subappsBeforeLoad.length) {
-            console.debug("new subapps declared => loading them");
-            return this._start(subappsBeforeLoad);
+            if (callDepth < 15) {
+              console.debug("new subapps declared => loading them");
+              return this._start(subappsBeforeLoad, callDepth + 1);
+            } else {
+              console.error("subapp _start callDepth too deep, giving up:", callDepth);
+            }
           }
           const doc: Document = w.document;
           for (const name in onLoadStart) {
@@ -160,7 +164,7 @@ export function xarcV2Client(
         console.error("No subapps registered, nothing to start.");
         return Promise.resolve();
       }
-      return this._start([]);
+      return this._start([], 0);
     },
 
     dyn(id) {
