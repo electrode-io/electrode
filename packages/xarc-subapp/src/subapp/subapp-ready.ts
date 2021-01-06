@@ -62,13 +62,13 @@ export function subAppReady(
           // just load all new subapps but ignore what's just loaded
           return subAppReady(true, toWait, callDepth + 1);
         } else {
-          console.error("subapp ready call nesting too deep", callDepth);
+          console.error("subapp ready call nesting too deep", callDepth); // eslint-disable-line no-console
         }
       }
 
       return results;
     })
     .catch(err => {
-      console.error("get subapp module failure", err);
+      console.error("get subapp module failure", err); // eslint-disable-line no-console
     });
 }

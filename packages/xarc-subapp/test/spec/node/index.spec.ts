@@ -12,7 +12,7 @@ describe("declareSubApp", function () {
     });
     expect(container.getNames()).contains("test");
     expect(container.get("test")).to.equal(subapp);
-    expect(subapp._module).to.equal(null);
+    expect(subapp._module).to.equal(undefined);
 
     const mod = await subapp._getModule();
 
