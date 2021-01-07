@@ -1,8 +1,8 @@
-import * as Path from "path";
-import * as Fs from "fs";
-import * as Crypto from "crypto";
+import Path from "path";
+import Fs from "fs";
+import Crypto from "crypto";
 import { NonceInfo, InitProps } from "./types";
-import * as Url from "url";
+import Url from "url";
 
 export function loadCdnMap(cdnMap: string): any {
   const fullPath = Path.isAbsolute(cdnMap)

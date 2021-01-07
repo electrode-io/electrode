@@ -1,6 +1,6 @@
-import * as React from "react";
-import * as ReactDom from "react-dom";
-import * as ReactDomServer from "react-dom/server";
+import React from "react";
+import ReactDom from "react-dom";
+import ReactDomServer from "react-dom/server";
 import { FrameworkLib, SubAppOptions, SubApp, SubAppFeatureFactory, SubAppDef } from "@xarc/subapp";
 
 export type ReactSubApp = SubApp<React.Component>;

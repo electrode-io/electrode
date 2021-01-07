@@ -5,7 +5,7 @@
     "jsxFactory": "createElement",
     "lib": ["es2018", "DOM"],
     "module": "CommonJS",
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "importHelpers": true,
     "target": "ES2018",
     "preserveConstEnums": true,

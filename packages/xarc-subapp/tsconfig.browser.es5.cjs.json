@@ -3,7 +3,7 @@
     "outDir": "dist-browser~es5~cjs~",
     "lib": ["es2018", "DOM"],
     "module": "CommonJS",
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "importHelpers": true,
     "target": "ES5",
     "preserveConstEnums": false,

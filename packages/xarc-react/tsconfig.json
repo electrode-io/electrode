@@ -3,7 +3,7 @@
     "outDir": "dist-node-cjs",
     "lib": ["es2018"],
     "module": "CommonJS",
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "importHelpers": true,
     "target": "ES2018",
     "preserveConstEnums": true,

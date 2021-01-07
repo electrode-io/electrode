@@ -1,9 +1,9 @@
 /* eslint-disable no-console, max-statements, global-require, @typescript-eslint/no-var-requires */
 
-import * as Path from "path";
+import Path from "path";
 import { generateNonce, loadCdnMap, mapCdn, wrapStringFragment, urlJoin } from "./utils";
 import { WebpackStats } from "./webpack-stats";
-import * as Crypto from "crypto";
+import Crypto from "crypto";
 import { AssetPathMap, InitProps } from "./types";
 
 /**

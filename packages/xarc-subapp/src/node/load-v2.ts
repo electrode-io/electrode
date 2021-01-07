@@ -13,7 +13,7 @@
  *   - generate code to bootstrap subapp on client
  */
 
-import * as _ from "lodash";
+import _ from "lodash";
 import { getContainer } from "./index";
 
 // global name to store client subapp runtime, ie: window.xarcV1

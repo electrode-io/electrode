@@ -3,7 +3,7 @@
     "outDir": "dist-browser~es2x~esm~",
     "lib": ["es2018", "DOM"],
     "module": "ES2020",
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "importHelpers": true,
     "target": "ES2019",
     "preserveConstEnums": true,
