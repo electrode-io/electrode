@@ -1748,7 +1748,7 @@ $pkg:
    babel-plugin-react-css-modules: ^5.2.6
    css-modules-require-hook: ^4.0.2
    ignore-styles: ^5.0.1
-   isomorphic-loader: ^4.2.1
+   isomorphic-loader: ^4.2.2
    optional-require: ^1.0.0
    subapp-util: ^1.1.2
 '@xarc/app-dev':
@@ -5831,12 +5831,12 @@ isobject:
   dependencies:
    isarray: 1.0.0
 isomorphic-loader:
- _latest: 4.2.1
+ _latest: 4.2.2
  _:
-  ^4.2.1: 4.2.1
- 4.2.1:
-  $: sha512-k6/lRYHit1MAiwZ2eWKL3ZMZl8XEhGSxQz30UhvIWqj7b2boFC5cVVv4UGEGW3YoIK84+eHacbNqEGBDKtsIOA==
-  _: 'https://registry.npmjs.org/isomorphic-loader/-/isomorphic-loader-4.2.1.tgz'
+  ^4.2.2: 4.2.2
+ 4.2.2:
+  $: sha512-wBUDq1UgXcQZWYZPo767izp5c+srE0aK2b/jCVguVmTQLnh+kIx8UGE/X/aEFJnR5n3WzBl9yHDUKvrzmSHUVQ==
+  _: 'https://registry.npmjs.org/isomorphic-loader/-/isomorphic-loader-4.2.2.tgz'
 isstream:
  _latest: 0.1.2
  _:
