@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
     "jsx": "react",
+    "jsxFactory": "createElement",
     "outDir": "dist",
-    "lib": ["es2018"],
+    "lib": ["es2018", "DOM"],
     "module": "CommonJS",
     "esModuleInterop": true,
     "importHelpers": true,
