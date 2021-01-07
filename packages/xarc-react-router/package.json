@@ -1,6 +1,6 @@
 {
   "name": "@xarc/react-router",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "xarc React Router support for SubApp version 2",
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
@@ -28,7 +28,7 @@
     }
   },
   "dependencies": {
-    "@xarc/subapp": "^0.1.0",
+    "@xarc/subapp": "^0.1.1",
     "history": "^5.0.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
