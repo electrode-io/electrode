@@ -1,6 +1,6 @@
 {
   "name": "@xarc/app-dev",
-  "version": "8.1.29",
+  "version": "8.2.0",
   "description": "Electrode X application development support",
   "main": "lib/index.js",
   "homepage": "http://www.electrode.io",
@@ -53,8 +53,8 @@
     "@babel/register": "^7.0.0",
     "@jchip/redbird": "^1.1.2",
     "@loadable/babel-plugin": "^5.10.0",
-    "@xarc/subapp": "^0.0.3",
-    "@xarc/webpack": "^9.0.6",
+    "@xarc/subapp": "^0.1.0",
+    "@xarc/webpack": "^9.1.0",
     "ansi-to-html": "^0.6.8",
     "babel-plugin-dynamic-import-node": "^2.2.0",
     "babel-plugin-lodash": "^3.3.4",
