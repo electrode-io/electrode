@@ -6,6 +6,7 @@
     "lib": ["es2018"],
     "module": "CommonJS",
     "esModuleInterop": false,
+    "importHelpers": true,
     "target": "ES2018",
     "preserveConstEnums": true,
     "sourceMap": true,

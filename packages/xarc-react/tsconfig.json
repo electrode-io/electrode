@@ -1,20 +1,15 @@
 {
   "compilerOptions": {
     "outDir": "dist-node-cjs",
-    "lib": [
-      "es2018"
-    ],
+    "lib": ["es2018"],
     "module": "CommonJS",
     "esModuleInterop": false,
+    "importHelpers": true,
     "target": "ES2018",
     "preserveConstEnums": true,
     "sourceMap": true,
     "declaration": true,
-    "types": [
-      "node",
-      "react",
-      "react-dom"
-    ],
+    "types": ["node", "react", "react-dom"],
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "alwaysStrict": true,
@@ -23,8 +18,5 @@
     "jsxFactory": "createElement",
     "moduleResolution": "Node"
   },
-  "include": [
-    "src/node",
-    "src/common"
-  ]
+  "include": ["src/node", "src/common"]
 }
