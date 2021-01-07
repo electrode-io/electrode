@@ -51,7 +51,6 @@
     "@xarc/opt-jest": "../../packages/xarc-opt-jest",
     "@xarc/opt-karma": "../../packages/xarc-opt-karma",
     "@xarc/opt-mocha": "../../packages/xarc-opt-mocha",
-    "electrode-archetype-opt-phantomjs": "../../packages/electrode-archetype-opt-phantomjs",
     "@xarc/opt-stylus": "^1.0.0"
   },
   "fyn": {
@@ -65,7 +64,6 @@
       "@xarc/opt-jest": "../../packages/xarc-opt-jest",
       "@xarc/opt-karma": "../../packages/xarc-opt-karma",
       "@xarc/opt-mocha": "../../packages/xarc-opt-mocha",
-      "electrode-archetype-opt-phantomjs": "../../packages/electrode-archetype-opt-phantomjs",
       "@xarc/opt-stylus": "../../packages/xarc-opt-stylus"
     }
   }
