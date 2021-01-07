@@ -78,8 +78,4 @@ const Navigation = () => {
 
 const RouterNavigation = withRouter(Navigation);
 
-export { RouterNavigation as Navigation };
-
-export const subapp: ReactSubApp = {
-  Component: Navigation
-}
+export { RouterNavigation as Navigation }

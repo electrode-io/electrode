@@ -6,7 +6,9 @@ import { Component as Demo2 } from "./demo2";
 import { message } from "./message";
 import electrodePng from "../static/electrode.png";
 import custom from "./styles/custom.module.css"; // eslint-disable-line no-unused-vars
-import { withRouter } from "react-router";
+import { Navigation } from "./components/navigation";
+import { createMemoryHistory } from 'history';
+const history = createMemoryHistory();
 
 
 
@@ -20,10 +22,7 @@ export const demo1B = declareSubApp({
   getModule: () => import("./demo1")
 });
 
-export const navigation = declareSubApp({
-  name: "navigation",
-  getModule: () => import("./components/navigation")
-})
+
 
 export const products = declareSubApp({
   name: "products",
@@ -34,7 +33,6 @@ export const products = declareSubApp({
 
 const Demo1 = createDynamicComponent(demo1, { ssr: true });
 const Demo1B = createDynamicComponent(demo1B, { ssr: true });
-const Navigation = createDynamicComponent(navigation, { ssr: true });
 const Products = createDynamicComponent(products, { ssr: true });
 
 
@@ -77,12 +75,15 @@ const MainBody = props => {
   return (
     <div>
       <Navigation />
+
       <Switch>
         <Route path="/" exact component={Home} {...props} />
         <Route path="/products" component={Products} {...props} />
         <Route path="/stores" component={Stores} {...props} />
         <Route path="/contact" component={Contact} {...props} />
       </Switch>
+
+
     </div>
   );
 };
