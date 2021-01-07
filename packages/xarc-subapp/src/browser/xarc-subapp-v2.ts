@@ -8,6 +8,7 @@
 
 import {
   LoadSubAppOptions,
+  SubAppContainer,
   SubAppDef,
   SubAppStartOptions,
   XarcSubAppClientV2,
@@ -26,7 +27,7 @@ export function xarcV2Client(
     typeof globalThis & {
       _wml?: any;
       xarcV2?: XarcSubAppClientV2;
-      _subapps?: Record<string, SubAppDef>;
+      _subapps?: SubAppContainer;
     }
 ) {
   if (!w._wml) {
@@ -101,27 +102,28 @@ export function xarcV2Client(
       ols[name].push(Object.assign({}, options, data));
     },
 
-    _start(ignore: string[] = []) {
+    _start(ignore: string[], callDepth) {
       runtimeInfo.started = true;
       const promises = [];
       const onLoadStart = runtimeInfo.onLoadStart;
-      const subappsBeforeLoad = Object.keys(w._subapps);
-
       const subapps = w._subapps;
+      const subappsBeforeLoad = subapps.getNames();
 
       const beginTs = Date.now();
       for (const name in onLoadStart) {
-        if (!subapps[name]._module) {
-          promises.push(subapps[name]._getModule());
+        const subapp = subapps.get(name);
+        if (!subapp._module) {
+          promises.push(subapp._getModule());
         }
       }
 
       if (ignore.length > 0) {
-        for (const name in subapps) {
-          const sa = subapps[name];
-          if (ignore.indexOf(name) < 0 && !sa._module && sa._ssr) {
-            console.debug(" -> loading module of new SSR subapp declared", name, sa._ssr);
-            promises.push(subapps[name]._getModule());
+        // some previously loaded subapps (in ignore) cause more subapps to be declared
+        for (const name of subapps.getNames()) {
+          const subapp = subapps.get(name);
+          if (ignore.indexOf(name) < 0 && !subapp._module && subapp._ssr) {
+            console.debug(" -> loading module of new SSR subapp declared", name, subapp._ssr);
+            promises.push(subapp._getModule());
           }
         }
       }
@@ -135,17 +137,21 @@ export function xarcV2Client(
         })
         .then(mods => {
           console.debug("subapp onStart loaded modules. msec taken:", Date.now() - beginTs, mods);
-          // Some modules declared more subapps, load them first.
-          if (Object.keys(subapps).length > subappsBeforeLoad.length) {
-            console.debug("new subapps declared => loading them");
-            return this._start(subappsBeforeLoad);
+          // Some modules declared more subapps, load them first, but ignore what we just loaded.
+          if (subapps.declareCount > subappsBeforeLoad.length) {
+            if (callDepth < 15) {
+              console.debug("new subapps declared => loading them");
+              return this._start(subappsBeforeLoad, callDepth + 1);
+            } else {
+              console.error("subapp _start callDepth too deep, giving up:", callDepth);
+            }
           }
           const doc: Document = w.document;
           for (const name in onLoadStart) {
             onLoadStart[name].forEach((startOpts: SubAppStartOptions) => {
               const element = doc.getElementById(startOpts.elementId || `subapp2-${name}`);
               console.debug(name, "starting subapp into", element);
-              w._subapps[name]._start(Object.assign({}, startOpts, { element }));
+              subapps.get(name)._start(Object.assign({}, startOpts, { element }));
             });
           }
           return mods;
@@ -158,7 +164,7 @@ export function xarcV2Client(
         console.error("No subapps registered, nothing to start.");
         return Promise.resolve();
       }
-      return this._start();
+      return this._start([], 0);
     },
 
     dyn(id) {

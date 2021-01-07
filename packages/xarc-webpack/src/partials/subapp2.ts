@@ -8,7 +8,9 @@ import { JsonpScriptSrcPlugin } from "../plugins/jsonp-script-src-plugin";
 module.exports = function(opts) {
   return {
     optimization: {
-      runtimeChunk: "single"
+      // TODO: always generating runtime chunk could break apps that doesn't
+      // check and load it.  don't do this for now.
+      // runtimeChunk: "single"
     },
     plugins: [
       new SubAppWebpackPlugin({

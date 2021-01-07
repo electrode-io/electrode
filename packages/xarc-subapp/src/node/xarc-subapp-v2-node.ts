@@ -34,8 +34,8 @@ export const xarcV2: XarcSubAppClientV2 = {
 
   startSubAppOnLoad(options: LoadSubAppOptions, data: any) {},
 
-  _start(ignore: string[] = []) {
-    return Promise.resolve();
+  _start(ignore: string[]) {
+    return Promise.resolve(ignore);
   },
 
   start() {

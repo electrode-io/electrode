@@ -5,24 +5,38 @@ import { createElement, Component } from "react"; // eslint-disable-line @typesc
 // rename declareSubApp to avoid triggering subapp webpack plugin
 import { SubAppDef, IS_BROWSER, SubAppOptions, SubAppMountInfo, declareSubApp } from "@xarc/subapp";
 
+/**
+ * Create Component Options
+ */
+export type CreateComponentOptions = {
+  /** Support Server Side Rendering */
+  ssr?: boolean;
+  /** Fall back JSX element to render while component module is loading */
+  fallback?: JSX.Element;
+  /** Specify a different resolve name to get the subapp from the module */
+  resolveName?: string;
+};
+
 export class SubAppComponent extends Component {
   subapp: SubAppDef;
   loading: JSX.Element;
-  resolveName: string;
+  resolveName: string | false;
   state: { module: any; TheComponent: typeof Component };
   _info: SubAppMountInfo;
   _props: any;
+  _options: CreateComponentOptions;
   props: {
     __subapp: SubAppDef;
     __props: any;
-    __resolveName: string;
+    __options: CreateComponentOptions;
   };
 
   constructor(props) {
     super(props);
     this.subapp = props.__subapp;
     this._props = props.__props;
-    this.resolveName = props.__resolveName || this.subapp.resolveName;
+    this._options = props.__options;
+    this.resolveName = this._options.resolveName || this.subapp.resolveName;
     this.state = this.makeState(this.subapp._module);
     this.loading = <div>subapp {this.subapp.name} component loading... </div>;
     this._info = { component: this, subapp: props.__subapp };
@@ -69,25 +83,15 @@ export class SubAppComponent extends Component {
       }
     }
 
-    console.warn(
-      `subapp ${this.subapp.name} dynamic import component module is not ready - rendering loading fallback`
-    );
+    if (this._options.ssr) {
+      console.warn(
+        `module is not ready for SSR dynamic import component of subapp ${this.subapp.name} - rendering loading fallback`
+      );
+    }
 
     return this.loading;
   }
 }
-
-/**
- * Create Component Options
- */
-export type CreateComponentOptions = {
-  /** Support Server Side Rendering */
-  ssr?: boolean;
-  /** Fall back JSX element to render while component module is loading */
-  fallback?: JSX.Element;
-  /** Specify a different resolve name to get the subapp from the module */
-  resolveName?: string;
-};
 
 /**
  * Create a React component from a subapp definition
@@ -116,6 +120,6 @@ export function __createDynamicComponent(
   }
 
   return (props: any) => (
-    <SubAppComponent __subapp={subappDef} __resolveName={options.resolveName} __props={props} />
+    <SubAppComponent __subapp={subappDef} __options={options} __props={props} />
   );
 }

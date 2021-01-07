@@ -10,9 +10,9 @@ describe("declareSubApp", function () {
       name: "test",
       getModule: () => import("../../blah")
     });
-    expect(container).to.have.key("test");
-    expect(container.test).to.equal(subapp);
-    expect(subapp._module).to.equal(null);
+    expect(container.getNames()).contains("test");
+    expect(container.get("test")).to.equal(subapp);
+    expect(subapp._module).to.equal(undefined);
 
     const mod = await subapp._getModule();
 

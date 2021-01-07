@@ -13,7 +13,7 @@ describe("createDynamicComponent", function () {
       getModule: () => import("../../blah")
     });
 
-    expect(container).to.have.key("test");
+    expect(container.getNames()).contains("test");
     expect(Component).to.be.a("function");
 
     const ssrLib = new SSRReactLib();
@@ -23,7 +23,7 @@ describe("createDynamicComponent", function () {
       `<div data-reactroot="">subapp <!-- -->test<!-- --> component loading... </div>`
     );
 
-    await container.test._getModule();
+    await container.get("test")._getModule();
 
     const html2 = ssrLib.renderToString(<Component />);
     expect(html2).to.equal(`<div data-reactroot="">hello</div>`);
