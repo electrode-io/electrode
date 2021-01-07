@@ -152,6 +152,20 @@ ${s}
 
   server.route({
     method: "GET",
+    path: "/contact",
+    async handler(request, reply) {
+      try {
+        const pageRenderer = memoize("route:/", constructHomeRouteRenderer);
+        const context = await pageRenderer.render({ request });
+        sendResponse(reply, context);
+      } catch (error) {
+        reply.send(error.stack);
+      }
+    }
+  });
+
+  server.route({
+    method: "GET",
     path: "/static",
     async handler(request, reply) {
       try {

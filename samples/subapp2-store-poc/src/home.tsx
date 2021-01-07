@@ -51,8 +51,8 @@ const decNumber = () => {
   };
 };
 
-const Stores = () => `Stores`;
-const Contact = () => `Contact`;
+const Stores = () => `<h1>Stores</h1>`;
+const Contact = () => `<h1>Contact</h1>`;
 
 const Home = () => {
   return (
@@ -120,7 +120,7 @@ const HomeRouter = () => {
 };
 
 export const subapp: ReactSubApp = {
-  Component: HomeRouter,
+  Component: Component,
   wantFeatures: [
     reduxFeature({
       React,
