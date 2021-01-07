@@ -136,7 +136,7 @@ xclap.load({
           return xclap.serial(tasks);
         })
         .catch(err => {
-          if (err.output.stderr.indexOf("No packages need updating") < 0) {
+          if (!err.output.stderr.includes("No changed packages found")) {
             throw err;
           }
         });
