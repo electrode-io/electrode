@@ -82,10 +82,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
 					<a name="xarcoptions" class="tsd-anchor"></a>
 					<h3>Xarc<wbr>Options</h3>
-					<div class="tsd-signature tsd-kind-icon">Xarc<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>addOnFeatures<span class="tsd-signature-symbol">?: </span><a href="_config_opt2_add_on_features_.html#addonfeatures" class="tsd-signature-type">AddOnFeatures</a><span class="tsd-signature-symbol">; </span>adminLogLevel<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>adminPort<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>appServerPort<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>babelOptions<span class="tsd-signature-symbol">?: </span><a href="_config_opt2_babel_options_.html#babeloptions" class="tsd-signature-type">BabelOptions</a><span class="tsd-signature-symbol">; </span>cwd<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>host<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>httpsPort<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>port<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>webpackOptions<span class="tsd-signature-symbol">?: </span><a href="_config_opt2_webpack_options_.html#webpackoptions" class="tsd-signature-type">WebpackOptions</a><span class="tsd-signature-symbol"> }</span></div>
+					<div class="tsd-signature tsd-kind-icon">Xarc<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>addOnFeatures<span class="tsd-signature-symbol">?: </span><a href="_config_opt2_add_on_features_.html#addonfeatures" class="tsd-signature-type">AddOnFeatures</a><span class="tsd-signature-symbol">; </span>adminLogLevel<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>adminPort<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>appServerPort<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>babelOptions<span class="tsd-signature-symbol">?: </span><a href="_config_opt2_babel_options_.html#babeloptions" class="tsd-signature-type">BabelOptions</a><span class="tsd-signature-symbol">; </span>cwd<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>host<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>httpsPort<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>namespace<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>port<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>webpackOptions<span class="tsd-signature-symbol">?: </span><a href="_config_opt2_webpack_options_.html#webpackoptions" class="tsd-signature-type">WebpackOptions</a><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/2612d494/packages/xarc-app-dev/src/config/opt2/xarc-options.ts#L5">src/config/opt2/xarc-options.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/2416db2b/packages/xarc-app-dev/src/config/opt2/xarc-options.ts#L5">src/config/opt2/xarc-options.ts:5</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -106,7 +106,7 @@
 										<p>Dev admin log level</p>
 									</div>
 									<ul>
-										<li>if not set, then check env <code>ELECTRODE_ADMIN_LOG_LEVEL</code>, <code>DEV_ADMIN_LOG_LEVEL</code>, then <code>XARC_ADMIN_LOG_LEVEL</code></li>
+										<li>if not set, then check env <code>XARC_ADMIN_LOG_LEVEL</code></li>
 										<li>TBD: list levels</li>
 									</ul>
 								</div>
@@ -119,7 +119,7 @@
 									</div>
 									<ul>
 										<li><strong>Default: 8991</strong></li>
-										<li>if not set, then check env <code>ELECTRODE_ADMIN_PORT</code></li>
+										<li>if not set, then check env <code>XARC_ADMIN_PORT</code></li>
 									</ul>
 								</div>
 							</li>
@@ -173,7 +173,7 @@
 										than 443, then you can set it with this.</p>
 									</div>
 									<ul>
-										<li>if not set, then check env <code>ELECTRODE_DEV_HTTPS</code>, then <code>XARC_DEV_HTTPS</code></li>
+										<li>if not set, then check env then <code>XARC_DEV_HTTPS</code></li>
 									</ul>
 									<dl class="tsd-comment-tags">
 										<dt>remarks</dt>
@@ -181,6 +181,18 @@
 											forced to be HTTP only.</p>
 										</dd>
 									</dl>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> namespace<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Specify a namespace prefix for your application&#39;s JS/Style asset bundles
+										For example, instead of <code>main.bundle.js</code>, it&#39;s <code>{ns}.main.bundle.js</code></p>
+									</div>
+									<p>This is useful if you want to be able to mix subapps from different apps
+										on the same page, or if you want to implement a top level app shell that
+									loads subapps from different sources and render them on the page.</p>
 								</div>
 							</li>
 							<li class="tsd-parameter">

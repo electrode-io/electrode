@@ -54,10 +54,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_node_react_lib_.html">&quot;node/react-lib&quot;</a>
+					<a href="../modules/_node_react_lib_node_.html">&quot;node/react-lib-node&quot;</a>
 				</li>
 				<li>
-					<a href="_node_react_lib_.ssrreactlib.html">SSRReactLib</a>
+					<a href="_node_react_lib_node_.ssrreactlib.html">SSRReactLib</a>
 				</li>
 			</ul>
 			<h1>Class SSRReactLib</h1>
@@ -67,6 +67,13 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>implementation of server side rendering support for React</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -88,13 +95,14 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_node_react_lib_.ssrreactlib.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_node_react_lib_node_.ssrreactlib.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_node_react_lib_.ssrreactlib.html#rendertostring" class="tsd-kind-icon">render<wbr>ToString</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_node_react_lib_node_.ssrreactlib.html#handlessr" class="tsd-kind-icon">handleSSR</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_node_react_lib_node_.ssrreactlib.html#rendertostring" class="tsd-kind-icon">render<wbr>ToString</a></li>
 							</ul>
 						</section>
 					</div>
@@ -106,22 +114,54 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new SSRReact<wbr>Lib<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_node_react_lib_.ssrreactlib.html" class="tsd-signature-type">SSRReactLib</a></li>
+						<li class="tsd-signature tsd-kind-icon">new SSRReact<wbr>Lib<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_node_react_lib_node_.ssrreactlib.html" class="tsd-signature-type">SSRReactLib</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/4cfc660c/packages/xarc-react/src/node/react-lib.tsx#L6">src/node/react-lib.tsx:6</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/7657dbc0/packages/xarc-react/src/node/react-lib-node.tsx#L10">src/node/react-lib-node.tsx:10</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="_node_react_lib_.ssrreactlib.html" class="tsd-signature-type">SSRReactLib</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_node_react_lib_node_.ssrreactlib.html" class="tsd-signature-type">SSRReactLib</a></h4>
 						</li>
 					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="handlessr" class="tsd-anchor"></a>
+					<h3>handleSSR</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">handleSSR<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><a href="../modules/_common_index_.html#subappssrdata" class="tsd-signature-type">SubAppSSRData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>content<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>props<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/7657dbc0/packages/xarc-react/src/node/react-lib-node.tsx#L29">src/node/react-lib-node.tsx:29</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Handle server side rendering for subapps</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>data: <a href="../modules/_common_index_.html#subappssrdata" class="tsd-signature-type">SubAppSSRData</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>SSR server data</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>content<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>props<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>SSR result</p>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="rendertostring" class="tsd-anchor"></a>
 					<h3>render<wbr>ToString</h3>
@@ -132,13 +172,20 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/4cfc660c/packages/xarc-react/src/node/react-lib.tsx#L11">src/node/react-lib.tsx:11</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/7657dbc0/packages/xarc-react/src/node/react-lib-node.tsx#L20">src/node/react-lib-node.tsx:20</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Render react element to string</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>element: <span class="tsd-signature-type">ReactElement</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -154,10 +201,19 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="../modules/_browser_feat_app_context_browser_.html">&quot;browser/feat-<wbr>app-<wbr>context-<wbr>browser&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_browser_feat_static_props_browser_.html">&quot;browser/feat-<wbr>static-<wbr>props-<wbr>browser&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="../modules/_browser_index_.html">&quot;browser/index&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/_browser_react_lib_.html">&quot;browser/react-<wbr>lib&quot;</a>
+						<a href="../modules/_browser_react_lib_browser_.html">&quot;browser/react-<wbr>lib-<wbr>browser&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_browser_subapp_start_component_.html">&quot;browser/subapp-<wbr>start-<wbr>component&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_common_app_context_.html">&quot;common/app-<wbr>context&quot;</a>
@@ -166,13 +222,28 @@
 						<a href="../modules/_common_create_component_.html">&quot;common/create-<wbr>component&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="../modules/_common_feat_app_context_types_.html">&quot;common/feat-<wbr>app-<wbr>context-<wbr>types&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_common_feat_static_props_types_.html">&quot;common/feat-<wbr>static-<wbr>props-<wbr>types&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="../modules/_common_index_.html">&quot;common/index&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_node_feat_app_context_node_.html">&quot;node/feat-<wbr>app-<wbr>context-<wbr>node&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_node_feat_static_props_node_.html">&quot;node/feat-<wbr>static-<wbr>props-<wbr>node&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_node_index_.html">&quot;node/index&quot;</a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="../modules/_node_react_lib_.html">&quot;node/react-<wbr>lib&quot;</a>
+						<a href="../modules/_node_react_lib_node_.html">&quot;node/react-<wbr>lib-<wbr>node&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_node_render_page_.html">&quot;node/render-<wbr>page&quot;</a>
 					</li>
 				</ul>
 			</nav>
@@ -181,13 +252,16 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-module">
-						<a href="_node_react_lib_.ssrreactlib.html" class="tsd-kind-icon">SSRReact<wbr>Lib</a>
+						<a href="_node_react_lib_node_.ssrreactlib.html" class="tsd-kind-icon">SSRReact<wbr>Lib</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="_node_react_lib_.ssrreactlib.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="_node_react_lib_node_.ssrreactlib.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_node_react_lib_.ssrreactlib.html#rendertostring" class="tsd-kind-icon">render<wbr>ToString</a>
+								<a href="_node_react_lib_node_.ssrreactlib.html#handlessr" class="tsd-kind-icon">handleSSR</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_node_react_lib_node_.ssrreactlib.html#rendertostring" class="tsd-kind-icon">render<wbr>ToString</a>
 							</li>
 						</ul>
 					</li>
@@ -203,15 +277,14 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 		</div>
 	</div>

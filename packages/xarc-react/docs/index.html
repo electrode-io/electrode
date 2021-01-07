@@ -71,12 +71,12 @@
 				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { declareSubApp } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@xarc/react&quot;</span>;
 
 <span class="hljs-keyword">const</span> subAppDef = declareSubApp({
-  name: <span class="hljs-string">&quot;test&quot;</span>,
-  getModule: <span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">&quot;./subapp-hello&quot;</span>)
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;test&quot;</span>,
+  <span class="hljs-attr">getModule</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">&quot;./subapp-hello&quot;</span>)
 });</code></pre>
 				<p><code>subapp-hello.ts</code>:</p>
 				<pre><code class="language-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> subapp = {
-  Component: <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-attr">Component</span>: <span class="hljs-function">() =&gt;</span> {
     <span class="hljs-comment">// UI component</span>
   }
 };</code></pre>
@@ -89,10 +89,19 @@
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="modules/_browser_feat_app_context_browser_.html">&quot;browser/feat-<wbr>app-<wbr>context-<wbr>browser&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_browser_feat_static_props_browser_.html">&quot;browser/feat-<wbr>static-<wbr>props-<wbr>browser&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="modules/_browser_index_.html">&quot;browser/index&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_browser_react_lib_.html">&quot;browser/react-<wbr>lib&quot;</a>
+						<a href="modules/_browser_react_lib_browser_.html">&quot;browser/react-<wbr>lib-<wbr>browser&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_browser_subapp_start_component_.html">&quot;browser/subapp-<wbr>start-<wbr>component&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="modules/_common_app_context_.html">&quot;common/app-<wbr>context&quot;</a>
@@ -101,13 +110,28 @@
 						<a href="modules/_common_create_component_.html">&quot;common/create-<wbr>component&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="modules/_common_feat_app_context_types_.html">&quot;common/feat-<wbr>app-<wbr>context-<wbr>types&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_common_feat_static_props_types_.html">&quot;common/feat-<wbr>static-<wbr>props-<wbr>types&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="modules/_common_index_.html">&quot;common/index&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_node_feat_app_context_node_.html">&quot;node/feat-<wbr>app-<wbr>context-<wbr>node&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_node_feat_static_props_node_.html">&quot;node/feat-<wbr>static-<wbr>props-<wbr>node&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="modules/_node_index_.html">&quot;node/index&quot;</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_node_react_lib_.html">&quot;node/react-<wbr>lib&quot;</a>
+						<a href="modules/_node_react_lib_node_.html">&quot;node/react-<wbr>lib-<wbr>node&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_node_render_page_.html">&quot;node/render-<wbr>page&quot;</a>
 					</li>
 				</ul>
 			</nav>
@@ -129,7 +153,6 @@
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
 			</ul>
 		</div>
 	</div>
