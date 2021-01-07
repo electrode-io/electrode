@@ -1,3 +1,94 @@
+# 1/6/2021
+
+- subapp version 2 alpha release - `@xarc/react@0.1.0`, `@xarc/react-redux@0.0.2`, `@xarc/react-router@0.1.0`, `@xarc/subapp@0.1.0`, `@xarc/create-app@4.0.0`
+- use env XARC_CWD for app dir
+- fast-async integration - transpile async/await to promises
+- use worker threads for webpack dev server if possible
+- subapp version 1 feat: Allow bundle name spacing
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.2.0` `(8.1.29 => 8.2.0)`
+- `@xarc/app-dev@8.2.0` `(8.1.29 => 8.2.0)`
+- `@xarc/create-app@4.0.0` `(3.0.15 => 4.0.0)`
+- `@xarc/react@0.1.0` `(0.0.3 => 0.1.0)`
+- `@xarc/react-redux@0.0.2` `(0.0.1 => 0.0.2)`
+- `@xarc/react-router@0.1.0` `(0.0.1 => 0.1.0)`
+- `@xarc/subapp@0.1.0` `(0.0.3 => 0.1.0)`
+- `@xarc/webpack@9.1.0` `(9.0.6 => 9.1.0)`
+- `subapp-web@1.0.44` `(1.0.43 => 1.0.44)`
+
+### Lerna Updated
+
+- `subapp-pbundle@0.0.38` `(0.0.37 => 0.0.38)`
+- `subapp-react@0.0.35` `(0.0.34 => 0.0.35)`
+- `subapp-redux@1.0.44` `(1.0.43 => 1.0.44)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - [fix] CSS module support options and make it work for hapi-app sample ([#1775](https://github.com/electrode-io/electrode/pull/1775)) [commit](http://github.com/electrode-io/electrode/commit/2416db2b64a53f6062b6afcabbe4a4b53df9c16c)
+  - add types for app runtime support load [commit](http://github.com/electrode-io/electrode/commit/7767d2831012f29496abfde2d7cc19d654a7938c)
+  - fix wds progress line display in dev admin [commit](http://github.com/electrode-io/electrode/commit/483762e65107575037f1d1c3d34131de09a5e5a3)
+  - use worker threads for webpack dev server if possible [commit](http://github.com/electrode-io/electrode/commit/27f6236b501009a451fdfe2a7deb6e75ad3277d4)
+  - subapp2 fixes and updates [commit](http://github.com/electrode-io/electrode/commit/e020d243683f0059885d41e5b02f3b15daa4c57f)
+  - [fix] improve dev server startup efficiency and speed [commit](http://github.com/electrode-io/electrode/commit/ab7a3e490d719b163df0b3518674fae35db24242)
+  - [fix] don't add dev rules in proxy for mock-cloud [commit](http://github.com/electrode-io/electrode/commit/393b4900457e04e2d65cd688d57b8126afa46a8d)
+  - [fix] admin port option [commit](http://github.com/electrode-io/electrode/commit/db5b55095fe1b4581921cd778a1c4c7296a956cd)
+  - [minor] version 2 subapp poc app [commit](http://github.com/electrode-io/electrode/commit/67059288e854837abe58996a9e212dfab8305aa4)
+  - [fix] add file extensions for eslint 7 command [commit](http://github.com/electrode-io/electrode/commit/0b61cabf3a2a888b09ee53df871b739273fe8dce)
+  - [fix] use env XARC_CWD for app dir [commit](http://github.com/electrode-io/electrode/commit/dd9501e6e9df8422d13d21c1d6932c421f23205b)
+  - [fix] reading admin port from options ([#1772](https://github.com/electrode-io/electrode/pull/1772)) [commit](http://github.com/electrode-io/electrode/commit/3ed06bae275e511f382674a6e069ba74ee962ff2)
+  - [FEATURE] adding fast-async integration ([#1771](https://github.com/electrode-io/electrode/pull/1771)) [commit](http://github.com/electrode-io/electrode/commit/30edcf4180daa4d0c16dfcf5e3e78fc511ea266e)
+  - [chore] typedocs generated [commit](http://github.com/electrode-io/electrode/commit/f90b2835fd95535ebd1f83c2f2d005c6d2c8383c)
+
+- `packages/xarc-create-app`
+
+  - [major] update create-app to use subapp2 demo [commit](http://github.com/electrode-io/electrode/commit/12c11ccf0671a0ba71d483cb995e5fca32b66afd)
+
+- `packages/xarc-react`
+
+  - subapp2 create-app demo [commit](http://github.com/electrode-io/electrode/commit/ac0313a3c1049eb6ac77cfe2d5733aee789dc98f)
+  - subapp2 fixes and updates [commit](http://github.com/electrode-io/electrode/commit/e020d243683f0059885d41e5b02f3b15daa4c57f)
+  - [minor] version 2 subapp poc app [commit](http://github.com/electrode-io/electrode/commit/67059288e854837abe58996a9e212dfab8305aa4)
+  - make SubAppContainer a class ([#1776](https://github.com/electrode-io/electrode/pull/1776)) [commit](http://github.com/electrode-io/electrode/commit/7657dbc085f53ec6dbea18f44e86c203d4207913)
+
+- `packages/xarc-react-redux`
+
+  - make redux and react-router modules available through xarc packages [commit](http://github.com/electrode-io/electrode/commit/328d198b81ba8206d8df2ca36562d51db97400dd)
+
+- `packages/xarc-react-router`
+
+  - make redux and react-router modules available through xarc packages [commit](http://github.com/electrode-io/electrode/commit/328d198b81ba8206d8df2ca36562d51db97400dd)
+  - subapp2 fixes and updates [commit](http://github.com/electrode-io/electrode/commit/e020d243683f0059885d41e5b02f3b15daa4c57f)
+  - [minor] version 2 subapp poc app [commit](http://github.com/electrode-io/electrode/commit/67059288e854837abe58996a9e212dfab8305aa4)
+
+- `packages/xarc-subapp`
+
+  - subapp2 create-app demo [commit](http://github.com/electrode-io/electrode/commit/ac0313a3c1049eb6ac77cfe2d5733aee789dc98f)
+  - subapp2 fixes and updates [commit](http://github.com/electrode-io/electrode/commit/e020d243683f0059885d41e5b02f3b15daa4c57f)
+  - [minor] version 2 subapp poc app [commit](http://github.com/electrode-io/electrode/commit/67059288e854837abe58996a9e212dfab8305aa4)
+  - make SubAppContainer a class ([#1776](https://github.com/electrode-io/electrode/pull/1776)) [commit](http://github.com/electrode-io/electrode/commit/7657dbc085f53ec6dbea18f44e86c203d4207913)
+
+- `packages/xarc-webpack`
+
+  - [fix] CSS module support options and make it work for hapi-app sample ([#1775](https://github.com/electrode-io/electrode/pull/1775)) [commit](http://github.com/electrode-io/electrode/commit/2416db2b64a53f6062b6afcabbe4a4b53df9c16c)
+  - subapp2 fixes and updates [commit](http://github.com/electrode-io/electrode/commit/e020d243683f0059885d41e5b02f3b15daa4c57f)
+  - [minor] version 2 subapp poc app [commit](http://github.com/electrode-io/electrode/commit/67059288e854837abe58996a9e212dfab8305aa4)
+  - [fix] dll loading issue inside monorepo ([#1765](https://github.com/electrode-io/electrode/pull/1765)) [commit](http://github.com/electrode-io/electrode/commit/7f1c114543cb21f3670675f95c4c357018ff16f3)
+  - make SubAppContainer a class ([#1776](https://github.com/electrode-io/electrode/pull/1776)) [commit](http://github.com/electrode-io/electrode/commit/7657dbc085f53ec6dbea18f44e86c203d4207913)
+
+- `packages/subapp-web`
+
+  - feat: Allow bundle name spacing ([#1774](https://github.com/electrode-io/electrode/pull/1774)) [commit](http://github.com/electrode-io/electrode/commit/2d56858890e9b9139c12f1be43586cb1d47fd944)
+
+- `MISC`
+
+  - dep: fynpo@0.1.32 [commit](http://github.com/electrode-io/electrode/commit/1814a2d54aec4cb629f5a22bcbbe5629cc42d995)
+
 # 12/7/2020
 
 - node.js 14 updates
