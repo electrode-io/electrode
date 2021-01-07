@@ -1,3 +1,43 @@
+# 1/7/2021
+
+- minor updates and fixes for subapp 2 modules
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/react@0.1.1` `(0.1.0 => 0.1.1)`
+- `@xarc/react-redux@0.1.0` `(0.0.2 => 0.1.0)`
+- `@xarc/react-router@0.1.1` `(0.1.0 => 0.1.1)`
+- `@xarc/subapp@0.1.1` `(0.1.0 => 0.1.1)`
+
+### Lerna Updated
+
+## Commits
+
+- `packages/xarc-react`
+
+  - enable esModuleInterop for subapp2 modules [commit](http://github.com/electrode-io/electrode/commit/106cb3ee3071fa1bdda7574b78473c46b8d8db6f)
+  - fix use tslib [commit](http://github.com/electrode-io/electrode/commit/29b4aa824656da465281df69241bac91c0059b37)
+  - update generated docs [commit](http://github.com/electrode-io/electrode/commit/a7af2f952752d6e147a4f004747a8342d539f070)
+
+- `packages/xarc-react-redux`
+
+  - enable esModuleInterop for subapp2 modules [commit](http://github.com/electrode-io/electrode/commit/106cb3ee3071fa1bdda7574b78473c46b8d8db6f)
+  - [minor] minor release [commit](http://github.com/electrode-io/electrode/commit/621a12fdd63311e4fb0150ceb6c5ad753b817a37)
+  - fix use tslib [commit](http://github.com/electrode-io/electrode/commit/29b4aa824656da465281df69241bac91c0059b37)
+
+- `packages/xarc-react-router`
+
+  - enable esModuleInterop for subapp2 modules [commit](http://github.com/electrode-io/electrode/commit/106cb3ee3071fa1bdda7574b78473c46b8d8db6f)
+  - fix use tslib [commit](http://github.com/electrode-io/electrode/commit/29b4aa824656da465281df69241bac91c0059b37)
+
+- `packages/xarc-subapp`
+
+  - enable esModuleInterop for subapp2 modules [commit](http://github.com/electrode-io/electrode/commit/106cb3ee3071fa1bdda7574b78473c46b8d8db6f)
+  - fix use tslib [commit](http://github.com/electrode-io/electrode/commit/29b4aa824656da465281df69241bac91c0059b37)
+  - update generated docs [commit](http://github.com/electrode-io/electrode/commit/a7af2f952752d6e147a4f004747a8342d539f070)
+
 # 1/6/2021
 
 - subapp version 2 alpha release - `@xarc/react@0.1.0`, `@xarc/react-redux@0.0.2`, `@xarc/react-router@0.1.0`, `@xarc/subapp@0.1.0`, `@xarc/create-app@4.0.0`
