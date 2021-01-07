@@ -1,44 +1,33 @@
 /* eslint-disable max-statements, no-console */
-import { FrameworkLib, SubAppSSRData, SubAppFeatureResult } from "@xarc/subapp";
+import {
+  ServerFrameworkLib,
+  SubAppSSRData,
+  SubAppSSRResult,
+  SubAppFeatureResult
+} from "@xarc/subapp";
 // import { render } from "react-dom";
-import { createElement } from "react";
+import { createElement, Component } from "react";
 import { renderToString } from "react-dom/server";
 
 /**
  * implementation of server side rendering support for React
  */
-export class SSRReactLib implements FrameworkLib {
+export class SSRReactLib implements ServerFrameworkLib {
   constructor() {
     //
   }
 
-  /**
-   * Render react element to string
-   *
-   * @param element
-   */
-  renderToString(element: React.ReactElement) {
-    return renderToString(element);
-  }
-
-  /**
-   * Handle server side rendering for subapps
-   * @param data - SSR server data
-   * @returns SSR result
-   */
-  async handleSSR(data: SubAppSSRData) {
+  async prepareSSR?(data: SubAppSSRData) {
     const { subapp } = data;
     if (!subapp._module) {
       await subapp._getModule();
     }
 
-    const mod = subapp._module;
-
-    const Component = mod.Component || mod.subapp?.Component;
+    const Comp = subapp._getExport<Component>()?.Component;
 
     const featNames = Object.keys(subapp._features);
 
-    let result: SubAppFeatureResult = { Component };
+    let result: SubAppFeatureResult = { Component: Comp };
     // the order feature providers will be invoked
     const featIds = ["state-provider", "router-provider", "app-context-provider"];
 
@@ -54,8 +43,39 @@ export class SSRReactLib implements FrameworkLib {
       }
     }
 
+    // const results = (data.request[ssrPrepResult] = data.request[ssrPrepResult] || {});
+    // results[subapp.name] = result;
+
+    return result;
+  }
+
+  /**
+   * Handle server side rendering for subapps
+   * @param data - SSR server data
+   * @returns SSR result
+   */
+  async handleSSR(data: SubAppSSRData) {
+    const result = await this.prepareSSR(data);
+
     const content = renderToString(<result.Component />);
 
     return { props: result.props, content };
+  }
+
+  handleSSRSync(data: SubAppSSRData, prepResult: SubAppFeatureResult): SubAppSSRResult {
+    const { subapp } = data;
+    if (!subapp._module) {
+      return {
+        content: `<h3>SubApp ${subapp.name} can't SSR sync because its module not yet loaded</h3>`,
+        props: undefined
+      };
+    }
+
+    const content = renderToString(<prepResult.Component />);
+
+    return {
+      content,
+      props: prepResult.props
+    };
   }
 }

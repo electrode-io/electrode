@@ -1,6 +1,6 @@
-import { React, ReactSubApp } from "@xarc/react";
+import { React } from "@xarc/react";
 
-const Demo2 = props => {
+export const Demo2 = props => {
   return (
     <div style={{ padding: "5px", border: "solid", marginLeft: "15%", marginRight: "15%" }}>
       <p>abc subapp demo2</p>
@@ -10,10 +10,4 @@ const Demo2 = props => {
       </p>
     </div>
   );
-};
-
-export { Demo2 as Component };
-
-export const subapp: ReactSubApp = {
-  Component: Demo2
 };

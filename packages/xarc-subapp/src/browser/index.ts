@@ -1,20 +1,26 @@
 /* eslint-env browser */
 /* eslint-disable no-console, @typescript-eslint/ban-ts-comment */
 /* global window */
-
-export * from "../subapp/index";
-
 import {
   __declareSubApp,
   envHooks,
   SubAppContainer,
   SubAppOptions,
   SubAppDef,
-  SubAppStartOptions,
-  SubAppMountInfo,
-  XarcSubAppClientV2
+  SubAppMountInfo
 } from "../subapp/index";
 
+import { ClientRenderPipeline } from "./client-render-pipeline";
+
+import { xarcV2 } from "./xarcv2";
+
+//
+// re-exports
+//
+
+export * from "../subapp/index";
+export { xarcV2 };
+export { ClientRenderPipeline };
 /**
  * Get the subapp container
  *
@@ -30,19 +36,29 @@ export function getContainer(): SubAppContainer {
   return w._subapps;
 }
 
-export const xarcV2 = ((window as any).xarcV2 as XarcSubAppClientV2) || {
-  // in case xarc subapp client is not loaded, provide an empty fill-in to handle debug calls
-  // this occurs when app is using subapp for dynamic import component only without the subapp features.
-  debug: () => {
-    //
-  }
-};
-
 export function _setupEnvHooks() {
   if (!envHooks.getContainer) {
     envHooks.getContainer = getContainer;
   }
 }
+
+const clientOverrideMethods: Partial<SubAppDef> = {
+  _start({ csrData }) {
+    xarcV2.debug("subapp _start - creating pipeline and calling start", this.name);
+    if (csrData.inlineId) {
+      const ix = this._renderPipelines.findIndex(p => p.csrData.inlineId === csrData.inlineId);
+      if (ix >= 0) {
+        xarcV2.debug("subapp _start - removing existing inline pipeline", this.name);
+        this._renderPipelines.slice(ix, 1);
+      }
+    }
+    const pipeline = this._pipelineFactory({ csrData });
+    this._renderPipelines.push(pipeline);
+    return pipeline.start();
+  }
+};
+
+const _dynamics = [];
 
 /**
  * Declare a subapp.
@@ -70,13 +86,17 @@ export function _setupEnvHooks() {
  * @returns subapp definition
  *
  */
-
-const _dynamics = [];
-
 export function declareSubApp(options: SubAppOptions): SubAppDef {
   _setupEnvHooks();
 
-  const def = __declareSubApp(options);
+  const existDef = getContainer().get(options.name);
+
+  const def = __declareSubApp(options, clientOverrideMethods);
+
+  // transfer render pipelines from exist definition for hot reload support
+  if (existDef) {
+    def._renderPipelines = existDef._renderPipelines;
+  }
 
   //
   // Preload module so it's available ASAP.  This also ensure module is reloaded when
@@ -84,26 +104,30 @@ export function declareSubApp(options: SubAppOptions): SubAppDef {
   //
   def._getModule();
 
-  def._start = function (startOptions: SubAppStartOptions) {
-    def._startOptions = startOptions;
-    return def._frameworkFactory!().startSubApp(this, startOptions);
-  };
-
   // In production build, webpack will replace module.hot with false and the code will be optimized out
   // @ts-ignore
   if (module.hot) {
-    def._mount = (info: SubAppMountInfo) => {
-      xarcV2.debug("subapp _mount for", def.name, info, info.component.constructor.name);
-      if (info.component.constructor.name === "SubAppStartComponent") {
-        def._startComponent = info.component;
+    def._mount = function (info: SubAppMountInfo) {
+      // TODO: need to attach pipeline to component
+      xarcV2.debug("subapp _mount for", info.subapp.name, info, info.component.constructor.name);
+      const pipelines = this._renderPipelines;
+      for (const pipeline of pipelines) {
+        pipeline._mount(info);
       }
-      if (_dynamics.indexOf(info) < 0) {
+      // dynamic import components are just plain components without the subapp
+      // rendering features so there are no pipelines for them so need to track
+      // them here in order to reload them.
+      if (info.type === "dynamic" && _dynamics.indexOf(info) < 0) {
         _dynamics.push(info);
       }
     };
 
-    def._unmount = (info: SubAppMountInfo) => {
-      xarcV2.debug("subapp _unmount for", def.name, info, info.component.constructor.name);
+    def._unmount = function (info: SubAppMountInfo) {
+      xarcV2.debug("subapp _unmount for", info.subapp.name, info, info.component.constructor.name);
+      const pipelines = this._renderPipelines;
+      for (const pipeline of pipelines) {
+        pipeline._unmount(info);
+      }
       const ix = _dynamics.indexOf(info);
       if (ix >= 0) {
         _dynamics.splice(ix, 1);
@@ -111,22 +135,18 @@ export function declareSubApp(options: SubAppOptions): SubAppDef {
     };
 
     def._reload = function (subAppName: string, _modName?: string) {
-      return def
+      xarcV2.debug("subapp _reload", subAppName);
+      // get the potentially new subapp definition
+      const subapp = getContainer().get(subAppName);
+      // transfer render pipelines over
+      subapp._renderPipelines = this._renderPipelines;
+      // reload its module and reload all pipelines
+      return subapp
         ._getModule()
-        .then((m: any) => {
-          return m.reload && m.reload("HMR");
-        })
         .then(() => {
-          if (def._startOptions) {
-            if (def._startComponent) {
-              xarcV2.debug("Reloading a subapp with its start component");
-              // restart a rendered subapp
-              setTimeout(() => def._startComponent.reload(def._module), 1);
-            } else {
-              return def._frameworkFactory!().startSubApp(this, def._startOptions, true);
-            }
-          }
-          return null;
+          const pipelines = this._renderPipelines;
+          const promises = pipelines.map(pipeline => pipeline._reload(subAppName, _modName));
+          return Promise.all(promises);
         })
         .then(() => {
           _dynamics.forEach(dyn => {

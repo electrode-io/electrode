@@ -18,7 +18,7 @@ export function reactRouterFeature(options: ReactRouterFeatureOptions): SubAppFe
         id,
         subId,
         execute({ input, ssrData }) {
-          const Component = input.Component || subapp._module.subapp.Component;
+          const Component = input.Component || subapp._getExport()?.Component;
           const routerContext = {};
           ssrData.context.user.routerContext = routerContext;
 

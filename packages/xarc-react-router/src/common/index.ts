@@ -5,7 +5,7 @@ export type ReactRouterFeatureOptions = {
    * This is needed for the react router feature to wrap subapp's component inside
    * the Router component.
    */
-  React: any;
+  React: Partial<{ createElement: unknown }>;
   /**
    * A custom browser history object and control which Router to use.
    *

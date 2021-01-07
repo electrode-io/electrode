@@ -107,15 +107,21 @@ ${s}
       // URL path
       // path: "/tag-template",
       pageTitle: "subapp2-poc demo",
-      subApps: [{ name: home.name, ssr: true }],
+      subApps: [
+        { name: home.name, ssr: true },
+        { name: "demo3", ssr: true, prepareOnly: true, inlineId: "1234" }
+      ],
       templateInserts: {
         head: {
-          begin: cTT`<h1>begin of head</h1>`
+          begin: cTT`<!-- begin head inserts -->`,
+          contextReady: cTT`${context => {
+            return `<link${context.user.styleNonceAttr} href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">`;
+          }}`
         },
         body: {
-          begin: cTT`<h1>begin of body</h1>`,
-          beforeStart: cTT`<h1>here we go</h1>`,
-          end: cTT`<h1>end of body</h1>`
+          begin: cTT`<!-- begin body inserts -->`,
+          beforeStart: cTT`<!-- before start inserts -->`,
+          end: cTT`<!-- end of body inserts -->`
         }
       },
       ...commonRenderOptions
@@ -187,6 +193,7 @@ ${s}
             pageTitle: "mix subapp and state providers demo",
             subApps: [
               { name: staticHome.name, ssr: true },
+              { name: "demo3", ssr: true, prepareOnly: true, inlineId: "123" },
               { name: home.name, ssr: true }
             ],
             ...commonRenderOptions

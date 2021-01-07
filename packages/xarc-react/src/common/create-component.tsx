@@ -3,7 +3,14 @@
 
 import { createElement, Component } from "react"; // eslint-disable-line @typescript-eslint/no-unused-vars
 // rename declareSubApp to avoid triggering subapp webpack plugin
-import { SubAppDef, IS_BROWSER, SubAppOptions, SubAppMountInfo, declareSubApp } from "@xarc/subapp";
+import {
+  SubAppDef,
+  IS_BROWSER,
+  SubAppOptions,
+  SubAppMountInfo,
+  declareSubApp,
+  envHooks
+} from "@xarc/subapp";
 
 /**
  * Create Component Options
@@ -37,25 +44,20 @@ export class SubAppComponent extends Component {
     this._props = props.__props;
     this._options = props.__options;
     this.resolveName = this._options.resolveName || this.subapp.resolveName;
-    this.state = this.makeState(this.subapp._module);
+    this.state = this.makeState();
     this.loading = <div>subapp {this.subapp.name} component loading... </div>;
-    this._info = { component: this, subapp: props.__subapp };
+    this._info = { component: this, subapp: props.__subapp, type: "dynamic" };
     this.subapp._mount(this._info);
   }
 
-  makeState(mod) {
-    let TheComponent: typeof Component;
-    if (mod) {
-      const resolveName = [this.resolveName, "subapp", "default"].find(x => x && mod[x]);
-
-      TheComponent = (resolveName && mod[resolveName]?.Component) || mod.subapp?.Component;
-    }
-
-    return { module: mod, TheComponent };
+  makeState() {
+    const subapp = envHooks.getContainer().get(this.subapp.name);
+    const TheComponent = subapp._getExport<typeof Component>()?.Component;
+    return { module: subapp._module, TheComponent };
   }
 
-  reload(mod) {
-    this.setState(this.makeState(mod));
+  reload() {
+    this.setState(this.makeState());
   }
 
   componentWillUnmount() {
@@ -67,8 +69,8 @@ export class SubAppComponent extends Component {
       if (!IS_BROWSER) {
         console.error("SSR can't dynamic load subapp module");
       } else {
-        this.subapp._getModule().then(mod => {
-          this.setState(this.makeState(mod));
+        this.subapp._getModule().then(() => {
+          this.setState(this.makeState());
         });
       }
     }

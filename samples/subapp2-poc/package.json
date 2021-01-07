@@ -51,8 +51,7 @@
       "@xarc/app": "../../packages/xarc-app",
       "@xarc/react": "../../packages/xarc-react",
       "@xarc/react-router": "../../packages/xarc-react-router",
-      "@xarc/react-redux": "../../packages/xarc-react-redux",
-      "@xarc/tag-renderer": "../../packages/xarc-tag-renderer"
+      "@xarc/react-redux": "../../packages/xarc-react-redux"
     },
     "devDependencies": {
       "@xarc/app-dev": "../../packages/xarc-app-dev",

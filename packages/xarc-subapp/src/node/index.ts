@@ -3,8 +3,11 @@ import {
   SubAppOptions,
   envHooks,
   SubAppDef,
-  SubAppContainer
+  SubAppContainer,
+  PipelineFactoryParams
 } from "../subapp/index";
+import { SubAppServerRenderPipeline } from "./server-render-pipeline";
+import { SSR_PIPELINES } from "./utils";
 
 //
 // re-exports
@@ -13,8 +16,12 @@ export * from "../subapp/index";
 export * from "./types";
 export * from "./xarc-subapp-v2-node";
 export { loadSubApp } from "./load-v2";
+export { initContext } from "./init-context";
 export { initSubApp } from "./init-v2";
 export { startSubApp } from "./start-v2";
+export { SSR_PIPELINES } from "./utils";
+export { SubAppServerRenderPipeline };
+export { ClientRenderPipeline } from "../subapp/client-render-pipeline";
 
 let CONTAINER: SubAppContainer;
 
@@ -36,6 +43,25 @@ export function _setupEnvHooks() {
     envHooks.getContainer = getContainer;
   }
 }
+
+const serverOverrideMethods: Partial<SubAppDef> = {
+  _start({ ssrData }) {
+    const { request } = ssrData;
+    const pipelines: SubAppServerRenderPipeline[] = request[SSR_PIPELINES];
+    const pipeline = this._pipelineFactory({ ssrData });
+    pipelines.push(pipeline);
+    return pipeline.startPrepare();
+  },
+
+  /**
+   * Server side render pipeline factory
+   * @param params
+   */
+  _pipelineFactory(params: PipelineFactoryParams) {
+    const { ssrData } = params;
+    return new SubAppServerRenderPipeline(ssrData);
+  }
+};
 
 /**
  * Declare a subapp.
@@ -64,7 +90,8 @@ export function _setupEnvHooks() {
  */
 export function declareSubApp(options: SubAppOptions): SubAppDef {
   _setupEnvHooks();
-  const def = __declareSubApp(options as SubAppDef);
+
+  const def = __declareSubApp(options as SubAppDef, serverOverrideMethods);
   return def;
 }
 
@@ -72,8 +99,6 @@ export function declareSubApp(options: SubAppOptions): SubAppDef {
  * boolean that indicate if app is running in the browser
  */
 export const IS_BROWSER = false;
-
-export { SubAppServer } from "./subapp-server";
 
 /**
  * Refresh all subapps modules by setting its loaded module to null

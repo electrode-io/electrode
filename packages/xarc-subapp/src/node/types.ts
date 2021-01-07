@@ -1,3 +1,7 @@
+/* eslint-disable max-statements */
+import _ from "lodash";
+import { SubAppSSRData, SubAppFeatureResult } from "../subapp/types";
+
 /**
  * Pass nonce info to xarc for generating script and style tags into the HTML
  */
@@ -69,3 +73,44 @@ export type InitProps = {
   /** script nonce options */
   nonce?: NonceInfo | boolean;
 };
+
+/**
+ * result of server side rendering
+ */
+export type SubAppSSRResult = {
+  /**
+   * content of the rendering
+   * TODO: types - could be string or a stream
+   */
+  content: any;
+
+  /**
+   * initialState props
+   */
+  props: any;
+};
+
+export interface ServerFrameworkLib {
+  /**
+   * Prepare a subapp's data and features for doing SSR.
+   *
+   * This is separate because preparing data is likely async and if app
+   * requires using the sync `renderToString`, then it has to be in two
+   * stages.
+   *
+   * @param data
+   */
+  prepareSSR?(data: SubAppSSRData): Promise<any>;
+
+  /** async version of running actual SSR */
+  handleSSR?(data: SubAppSSRData): Promise<SubAppSSRResult>;
+
+  /**
+   * Server side render a subapp sync.
+   *
+   * sync means the subapp's module must have been loaded
+   *
+   * @param data - ssr data
+   */
+  handleSSRSync?(data: SubAppSSRData, prepResult: SubAppFeatureResult): SubAppSSRResult;
+}

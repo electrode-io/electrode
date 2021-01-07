@@ -18,6 +18,7 @@ export * from "../common/index";
 export * from "@xarc/tag-renderer";
 export * from "./render-page";
 export * from "./feat-static-props-node";
+export * from "./subapp-as-component";
 export { SSRReactLib, subAppReady, loadSubApp, appContextFeature };
 
 /**

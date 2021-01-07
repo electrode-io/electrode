@@ -99,3 +99,5 @@ export function urlJoin(baseUrl: string, ...pathParts: string[]) {
   }
   return Url.format(url);
 }
+
+export const SSR_PIPELINES = Symbol("subapp-ssr-pipelines");

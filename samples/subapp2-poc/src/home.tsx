@@ -1,8 +1,15 @@
 import PropTypes from "prop-types";
-import { React, declareSubApp, createDynamicComponent, ReactSubApp, xarcV2 } from "@xarc/react";
+import {
+  React,
+  declareSubApp,
+  createDynamicComponent,
+  ReactSubApp,
+  xarcV2,
+  subAppInlineComponent
+} from "@xarc/react";
 import { connect, reduxFeature } from "@xarc/react-redux";
 import { reactRouterFeature, Route, Switch } from "@xarc/react-router";
-import { Component as Demo2 } from "./demo2";
+import { Demo2 } from "./demo2";
 import { message } from "./message";
 import electrodePng from "../static/electrode.png";
 import custom from "./styles/custom.module.css"; // eslint-disable-line no-unused-vars
@@ -19,6 +26,14 @@ export const demo1B = declareSubApp({
 
 const Demo1 = createDynamicComponent(demo1, { ssr: true });
 const Demo1B = createDynamicComponent(demo1B, { ssr: true });
+
+const Demo3 = subAppInlineComponent(
+  declareSubApp({
+    name: "demo3",
+    getModule: () => import("./demo3")
+  }),
+  { ssr: true }
+);
 
 const incNumber = () => {
   return {
@@ -55,6 +70,8 @@ const Home = props => {
       <Demo1 />
       <Demo1B />
       <Demo2 />
+      <h1>subapp as a component</h1>
+      <Demo3 />
     </div>
   );
 };
@@ -76,7 +93,7 @@ const mapStateToProps = state => {
   return { value: state.number.value };
 };
 
-const Component = connect(mapStateToProps, dispatch => ({ dispatch }))(Home);
+const ReduxHome = connect(mapStateToProps, dispatch => ({ dispatch }))(Home);
 
 //
 // ROUTING
@@ -85,8 +102,8 @@ const Component = connect(mapStateToProps, dispatch => ({ dispatch }))(Home);
 const HomeRouter = () => {
   return (
     <Switch>
-      <Route path="/" exact component={Component} />
-      <Route path="/mix" component={Component} />
+      <Route path="/" exact component={ReduxHome} />
+      <Route path="/mix" component={ReduxHome} />
     </Switch>
   );
 };

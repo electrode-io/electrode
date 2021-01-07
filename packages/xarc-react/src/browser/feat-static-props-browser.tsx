@@ -27,8 +27,8 @@ export function staticPropsFeature(_options: StaticPropsFeatureOptions): SubAppF
       subapp._features.staticProps = {
         id,
         subId,
-        execute({ input, startOptions }) {
-          const props = startOptions.getInitialState();
+        execute({ input, csrData }) {
+          const props = csrData.getInitialState();
           return {
             Component: () => {
               return <input.Component {...props} />;

@@ -1,5 +1,7 @@
 /* eslint-disable no-use-before-define */
 
+import { SubAppRenderPipeline } from "./subapp-render-pipeline";
+
 export type CDNData = {
   /** mapping data */
   md: Record<string, any>;
@@ -121,15 +123,44 @@ export type SubAppOptions = {
 };
 
 /**
+ * SubApp client side rendering data
+ */
+export type SubAppCSRData = LoadSubAppOptions & {
+  element?: Element;
+  elementId?: string;
+  getInitialState?(): any;
+};
+
+export type SubAppStartParams = {
+  /** server side render data */
+  ssrData?: SubAppSSRData;
+  /** client side render data */
+  csrData?: SubAppCSRData;
+};
+
+export type PipelineFactoryParams = SubAppStartParams;
+
+/**
  * definition of a subapp from declareSubApp
  */
 export type SubAppDef = SubAppOptions & {
   /**
-   * unique instance ID, if a subapp with same name is re-declared then it will have a diff _id
+   * Unique definition ID, if a subapp with same name is re-declared then it will have a diff _id
    */
   _id: number;
+  /**
+   * handle loading the subapp's module
+   */
   _getModule: () => Promise<any>;
+  /**
+   * The module that implements the subapp
+   */
   _module: any;
+  /**
+   * Indicate if this subapp involves being used in any server side rendering
+   * TODO: this is not the right place for this?  Since different routes could be using the
+   * same subapp def but not for SSR.
+   */
   _ssr: boolean;
   /**
    * SubApp's start method that declareSubApp will create, with versions
@@ -140,17 +171,44 @@ export type SubAppDef = SubAppOptions & {
    *
    * @param options
    */
-  _start?(options?: SubAppStartOptions): Promise<any>;
-  _startOptions?: SubAppStartOptions;
-  /** The UI component instance that this subapp started on */
-  _startComponent?: any;
+  _start?(params: SubAppStartParams, reload?: boolean): Promise<any>;
+  /**
+   * Handles HMR on client side
+   * @param subAppName
+   * @param modName
+   */
   _reload?(subAppName: string, modName?: string): Promise<any>;
+  /**
+   * Features this subapp wants
+   */
   _features?: Record<string, SubAppFeature>;
-  _frameworkFactory?: () => FrameworkLib;
+  /**
+   * Create a render pipeline
+   *
+   * The respective env/framework specific implementation should set this accordingly
+   */
+  _pipelineFactory?: (params: PipelineFactoryParams) => SubAppRenderPipeline;
+  /**
+   * factory to return a framework object for the running env.  it's unknown because we don't know
+   * what the env or the framework could be.
+   */
+  _frameworkFactory?: () => unknown;
   /** For UI component instance to let the subapp know it's mounting to the subapp */
   _mount?(info: SubAppMountInfo): void;
   /** For UI component instance to let the subapp know it's unmounting from the subapp */
   _unmount?(info: SubAppMountInfo): void;
+  /**
+   * Holds rendering pipeline instances for this subapp.
+   *
+   * This is only used on client side.  On server side, there are multiple page rendering for
+   * multiple requests.  We need to maintain and manage the pipelines for each request.  So
+   * they are stored in their owning request object.
+   */
+  _renderPipelines?: SubAppRenderPipeline[];
+  /**
+   * Get the export subapp object from the module
+   */
+  _getExport?: <T>() => SubApp<T>;
 };
 
 /**
@@ -191,9 +249,9 @@ export type SubAppFeatureResult = {
 
 export type SubAppFeatureExecuteParams = {
   input: SubAppFeatureResult;
-  startOptions?: SubAppStartOptions;
-  reload?: boolean;
   ssrData?: SubAppSSRData;
+  csrData?: SubAppCSRData;
+  reload?: boolean;
 };
 
 /**
@@ -208,6 +266,11 @@ export interface ISubAppFeature {
 
 export type SubAppFeature = ISubAppFeature & SubAppFeatureInfo;
 
+/**
+ * Options for loading a subapp into a page
+ *
+ * The subapp should've been declared.
+ */
 export type LoadSubAppOptions = {
   /**
    * Name of the subapp to load
@@ -220,16 +283,32 @@ export type LoadSubAppOptions = {
   ssr?: boolean;
 
   /**
+   * If SSR, set this to `true` to prepare subapp's data only but don't actually do render to string.
+   */
+  prepareOnly?: boolean;
+
+  /**
+   * ID for the subapp inlined as a component.
+   *
+   * For now, any non-empty string ID will do.
+   */
+  inlineId?: string;
+
+  /**
    * group the subapp belongs to
    */
   group?: string;
 };
 
-export type SubAppStartOptions = LoadSubAppOptions & {
-  element?: Element;
-  elementId?: string;
-  getInitialState?(): any;
-};
+/**
+ * Type of Component that's mounting a subapp
+ *
+ * - `dynamic` - using subapp as a plain dynamic import component
+ * - `inline` - inline nesting a subapp within another as a component
+ * - `start` - as a start component for the subapp to handle hot reload
+ *
+ */
+export type MountType = "dynamic" | "inline" | "start";
 
 /**
  * For a UI component to let the subapp know it has mount itself for the subapp
@@ -239,6 +318,9 @@ export type SubAppMountInfo = {
   component: any;
   /** The subapp that the UI component instance mount to */
   subapp: SubAppDef;
+
+  /** type of component trying to mount to the subapp */
+  type?: MountType;
 };
 
 /**
@@ -314,45 +396,16 @@ export class SubAppContainer {
  * potential data for doing server side rendering
  */
 export type SubAppSSRData = {
+  /**
+   * RenderContext from `@xarc/render-context`
+   *
+   * TODO: need to type this
+   */
   context: any;
   subapp: SubAppDef;
-  props?: any;
+  options: LoadSubAppOptions;
   request?: any;
   path?: string;
   params?: Record<string, string>;
   query?: Record<string, string>;
 };
-
-/**
- * result of server side rendering
- */
-export type SubAppSSRResult = {
-  /**
-   * content of the rendering
-   * TODO: types - could be string or a stream
-   */
-  content: any;
-
-  /**
-   * initialState props
-   */
-  props: any;
-};
-
-/**
- * Allow specific UI framework to be configured
- *
- * TBD
- */
-export interface FrameworkLib {
-  // TODO: what goes here?
-  // 1. Browser side startup and render
-  // 2. Server side rendering
-  renderStart?(): void;
-
-  renderToString?(Component: unknown): string;
-
-  handleSSR?(data: SubAppSSRData): any;
-
-  startSubApp?(def: SubAppDef, options: SubAppStartOptions, reload?: boolean): Promise<any>;
-}

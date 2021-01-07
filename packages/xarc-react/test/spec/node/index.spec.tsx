@@ -1,4 +1,6 @@
-import { createDynamicComponent, getContainer, SSRReactLib } from "../../../src/node/index";
+import { createDynamicComponent, getContainer } from "../../../src/node";
+import { renderToString } from "react-dom/server";
+
 import { describe, it } from "mocha";
 import { expect } from "chai";
 
@@ -16,16 +18,14 @@ describe("createDynamicComponent", function () {
     expect(container.getNames()).contains("test");
     expect(Component).to.be.a("function");
 
-    const ssrLib = new SSRReactLib();
-
-    const html = ssrLib.renderToString(<Component />);
+    const html = renderToString(<Component />);
     expect(html).to.equal(
       `<div data-reactroot="">subapp <!-- -->test<!-- --> component loading... </div>`
     );
 
     await container.get("test")._getModule();
 
-    const html2 = ssrLib.renderToString(<Component />);
+    const html2 = renderToString(<Component />);
     expect(html2).to.equal(`<div data-reactroot="">hello</div>`);
   });
 });

@@ -4,6 +4,7 @@ import { RenderContext } from "@xarc/render-context";
 import { createTemplateTags, TokenInvoke, TagRenderer } from "@xarc/tag-renderer";
 
 import {
+  initContext,
   initSubApp,
   loadSubApp,
   startSubApp,
@@ -22,6 +23,8 @@ export type TemplateInserts = {
   head?: {
     /** insert immediately after <head> */
     begin?: any[];
+    /** insert after context initialized and context.user available */
+    contextReady?: any[];
     /** insert immediately before </head> */
     end?: any[];
     /** insert immediately after xarc's subapp init scripts */
@@ -115,6 +118,8 @@ export class PageRenderer {
 <head>${charSetStr}
 ${head.begin}
 ${options.pageTitle && `<title>${options.pageTitle}</title>`}
+${TokenInvoke(initContext, initProps)}
+${head.contextReady}
 ${TokenInvoke(initSubApp, initProps)}
 ${head.afterInit}
 ${head.end}

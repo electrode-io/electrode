@@ -5,6 +5,7 @@ import { generateNonce, loadCdnMap, mapCdn, wrapStringFragment, urlJoin } from "
 import { WebpackStats } from "./webpack-stats";
 import Crypto from "crypto";
 import { AssetPathMap, InitProps } from "./types";
+import { SSR_PIPELINES } from "./utils";
 
 /**
  * Initialize all the up front code required for running subapps in the browser.
@@ -120,51 +121,19 @@ ${JSON.stringify(cdnMapData)}
 
   return {
     process(context) {
-      const { attr: scriptNonceAttr, nonce: scriptNonce } = generateNonce(
-        setupToken,
-        null,
-        "script"
-      );
-      const { attr: styleNonceAttr, nonce: styleNonce } = generateNonce(
-        setupToken,
-        scriptNonce,
-        "style"
-      );
-
-      if (!context.user) {
-        context.user = {};
-      }
-
-      context.user.request = context.options.request;
-      context.user.scriptNonce = scriptNonce;
-      context.user.scriptNonceAttr = scriptNonceAttr;
-      context.user.styleNonce = styleNonce;
-      context.user.styleNonceAttr = styleNonceAttr;
-
-      const cspValues = [];
-      const setCspNonce = (nonce, tag) => {
-        if (nonce) {
-          const { tokens } = nonce;
-          const token = tokens[tag] || tokens.all;
-          // strict-dynamic is required for webpack to load dynamic import bundles
-          // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#strict-dynamic_2
-          cspValues.push(`${tag}-src-elem 'strict-dynamic' 'nonce-${token}';`);
-        }
-      };
-
-      setCspNonce(context.user.scriptNonce, "script");
-      setCspNonce(context.user.styleNonce, "style");
-
-      if (cspValues.length > 0) {
-        context.user.cspHeader = cspValues.join(" ");
-      }
+      const { request, scriptNonceAttr, styleNonceAttr } = context.user;
+      request[SSR_PIPELINES] = [];
 
       const addScriptNonce = (text: string) => {
-        return text && text.replace(/{{SCRIPT_NONCE}}/g, scriptNonceAttr);
+        return !scriptNonceAttr
+          ? text
+          : text && text.replace(/{{SCRIPT_NONCE}}/g, context.user.scriptNonceAttr);
       };
 
       const addStyleNonce = (text: string) => {
-        return text && text.replace(/{{STYLE_NONCE}}/g, styleNonceAttr);
+        return !styleNonceAttr
+          ? text
+          : text && text.replace(/{{STYLE_NONCE}}/g, context.user.styleNonceAttr);
       };
 
       return `

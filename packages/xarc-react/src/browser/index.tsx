@@ -1,14 +1,22 @@
 // import { ReactLib } from "./react-lib";
-import { declareSubApp as dsa, SubAppDef, SubAppOptions, SubAppFeatureFactory } from "@xarc/subapp";
+import {
+  declareSubApp as dsa,
+  SubAppDef,
+  SubAppOptions,
+  SubAppFeatureFactory,
+  PipelineFactoryParams
+} from "@xarc/subapp";
 import { __createDynamicComponent, CreateComponentOptions } from "../common/create-component";
 import { BrowserReactLib } from "./react-lib-browser";
 import { __reactFrameworkFeature, __addFeature } from "../common";
 import { appContextFeature } from "./feat-app-context-browser";
+import { ReactClientRenderPipeline } from "./react-render-pipeline";
 //
 // re-exports
 //
 export * from "../common";
 export * from "./feat-static-props-browser";
+export * from "./subapp-as-component";
 export { appContextFeature };
 
 /**
@@ -29,7 +37,12 @@ function __declareSubApp(options: SubAppOptions): SubAppDef {
   // add framework feature if it's not exist
   let opts = __addFeature(options, "framework", reactFrameworkFeature);
   opts = __addFeature(opts, "app-context-provider", appContextFeature);
-  return dsa(opts);
+  const def = dsa(opts);
+  def._pipelineFactory = function ({ csrData }: PipelineFactoryParams) {
+    return new ReactClientRenderPipeline(csrData);
+  };
+
+  return def;
 }
 
 export { __declareSubApp as declareSubApp };

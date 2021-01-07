@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDom from "react-dom";
 import ReactDomServer from "react-dom/server";
-import { FrameworkLib, SubAppOptions, SubApp, SubAppFeatureFactory, SubAppDef } from "@xarc/subapp";
+import { SubAppOptions, SubApp, SubAppFeatureFactory, SubAppDef } from "@xarc/subapp";
 
 export type ReactSubApp = SubApp<React.Component>;
 
@@ -12,6 +12,8 @@ export * from "@xarc/subapp";
 export { React, ReactDom, ReactDomServer };
 export { AppContext } from "./app-context";
 export { CreateComponentOptions } from "./create-component";
+export { Component } from "react";
+
 export * from "./feat-static-props-types";
 export * from "./feat-app-context-types";
 /**
@@ -21,7 +23,7 @@ export * from "./feat-app-context-types";
  *
  * @returns framework feature
  */
-export function __reactFrameworkFeature(factory: () => FrameworkLib): SubAppFeatureFactory {
+export function __reactFrameworkFeature(factory: () => unknown): SubAppFeatureFactory {
   return {
     id: "framework",
     subId: "react",
@@ -53,3 +55,11 @@ export function __addFeature(
         wantFeatures: [].concat(options.wantFeatures || [], featureProvider())
       };
 }
+
+/**
+ * Options to inline a subapp as a component nesting within another subapp
+ */
+export type SubAppInlineOptions = {
+  /** Run SSR on the inlined subapp */
+  ssr?: boolean;
+};

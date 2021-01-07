@@ -40,7 +40,7 @@ export function reactRouterFeature(options: ReactRouterFeatureOptions): SubAppFe
         id,
         subId,
         execute({ input }) {
-          const Component = input.Component || subapp._module.subapp.Component;
+          const Component = input.Component || subapp._getExport()?.Component;
           return {
             Component: (props: any) => {
               return (

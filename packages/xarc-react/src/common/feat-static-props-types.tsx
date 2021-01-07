@@ -29,13 +29,14 @@ export type StaticPropsFeatureOptions = {
    *
    * Typically this should be from something like `require.resolve("./static-props")`
    *
-   * Your module will be loaded and executed on the server only and will not be bundled for the client, and
-   * it can use any node.js APIs.
+   * Your module will be loaded and executed on the server only and will not be bundled for the
+   * client, and it can use any node.js APIs.
    */
   serverModule: string;
 
   /**
-   * Specify the name if the static props module exports the method as a different name than `getStaticProps`
+   * If your module export the get static props method with a different name than `getStaticProps`,
+   * then specify it here.
    */
   exportName?: string;
 };

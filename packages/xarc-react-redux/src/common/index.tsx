@@ -24,7 +24,7 @@ export type ReduxFeatureOptions = {
    * This is needed for the redux feature to wrap subapp's component inside
    * the Redux Provider component.
    */
-  React: any;
+  React: Partial<{ createElement: unknown }>;
 
   /**
    * Configure the redux store to use
@@ -95,7 +95,7 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
     };
     redux.prepare = options.prepare;
 
-    redux.execute = async function ({ input, startOptions, reload }) {
+    redux.execute = async function ({ input, csrData, reload }) {
       let initialState: any;
 
       let reducers = options.reducers;
@@ -115,7 +115,7 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
           redux._store.replaceReducer(reducers);
         }
       } else {
-        const props = startOptions && (await startOptions.getInitialState());
+        const props = csrData && (await csrData.getInitialState());
         if (reducers === true) {
           reducers = subapp._module.reduxReducers;
         }
@@ -130,7 +130,7 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
       return {
         Component: () =>
           this.wrap({
-            Component: input.Component || subapp._module.subapp.Component,
+            Component: input.Component || subapp._getExport()?.Component,
             store: redux._store
           }),
         props: initialState

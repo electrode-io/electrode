@@ -54,7 +54,9 @@ export const xarcV2: XarcSubAppClientV2 = {
 };
 
 if (process.env.XARC_DEBUG) {
-  xarcV2.debug = function xarcV2Debug(...args) {
-    console.log(...args);
-  };
+  Object.defineProperty(xarcV2, "debug", {
+    get() {
+      return console.log;
+    }
+  });
 }

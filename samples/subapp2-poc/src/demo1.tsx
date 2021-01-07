@@ -22,8 +22,6 @@ const Demo1 = props => {
   );
 };
 
-export { Demo1 as Component };
-
 export const subapp: ReactSubApp = {
   Component: Demo1
 };

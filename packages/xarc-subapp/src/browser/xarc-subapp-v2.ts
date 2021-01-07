@@ -9,8 +9,7 @@
 import {
   LoadSubAppOptions,
   SubAppContainer,
-  SubAppDef,
-  SubAppStartOptions,
+  SubAppCSRData,
   XarcSubAppClientV2,
   _xarcV2RunTimeInfo
 } from "../subapp/index";
@@ -34,7 +33,14 @@ export function xarcV2Client(
     w._wml = {};
   }
 
+  let debugLog = () => {
+    //
+  };
+
   const version = 2000000; // ###.###.### major.minor.patch
+
+  console.log("xarcV2 version", version);
+  console.debug("xarcV2 debug log", (debugLog = console.debug));
 
   if (w.xarcV2 && w.xarcV2.version >= version) return w.xarcV2;
 
@@ -112,7 +118,9 @@ export function xarcV2Client(
       const beginTs = Date.now();
       for (const name in onLoadStart) {
         const subapp = subapps.get(name);
-        if (!subapp._module) {
+        if (!subapp) {
+          console.debug("onload start subapp not yet registered:", name);
+        } else if (!subapp._module) {
           promises.push(subapp._getModule());
         }
       }
@@ -148,10 +156,10 @@ export function xarcV2Client(
           }
           const doc: Document = w.document;
           for (const name in onLoadStart) {
-            onLoadStart[name].forEach((startOpts: SubAppStartOptions) => {
+            onLoadStart[name].forEach((startOpts: SubAppCSRData) => {
               const element = doc.getElementById(startOpts.elementId || `subapp2-${name}`);
               console.debug(name, "starting subapp into", element);
-              subapps.get(name)._start(Object.assign({}, startOpts, { element }));
+              subapps.get(name)._start({ csrData: Object.assign({}, startOpts, { element }) });
             });
           }
           return mods;
@@ -159,7 +167,6 @@ export function xarcV2Client(
     },
 
     start() {
-      console.log("xarcV2 start, version:", version);
       if (!w._subapps) {
         console.error("No subapps registered, nothing to start.");
         return Promise.resolve();
@@ -183,8 +190,8 @@ export function xarcV2Client(
       }
     },
 
-    debug() {
-      console.debug.apply(console, Array.prototype.slice.call(arguments));
+    get debug() {
+      return debugLog;
     }
   });
 }
