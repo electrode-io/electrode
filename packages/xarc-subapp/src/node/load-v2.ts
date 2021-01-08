@@ -39,7 +39,7 @@ export function loadSubApp(setupContext: any, { props: setupProps }) {
       // ensure subapp's data prep are executed and embedded as initial state in index.html
 
       // console.log("subapp load", name, "useReactRouter", subApp.useReactRouter);
-      const { name } = props;
+      const { name, ssr } = props;
 
       const subapp = getContainer().get(name);
 
@@ -52,27 +52,38 @@ export function loadSubApp(setupContext: any, { props: setupProps }) {
         // get framework library
         const frameworkLib = subapp._frameworkFactory!();
         const startTime = Date.now();
-        const { props: ssrProps, content: ssrContent } = await frameworkLib.handleSSR!({
-          context,
-          subapp,
-          props: {},
-          request,
-          path: request.path
-        });
+
+        let ssrResult;
+
+        if (ssr) {
+          ssrResult = await frameworkLib.handleSSR!({
+            context,
+            subapp,
+            props: {},
+            request,
+            path: request.path
+          });
+        } else {
+          // TODO: still need to prepare props? like when subapp uses staticProps feature.
+          ssrResult = {
+            content: `<!-- SSR disabled for subapp ${name} -->`
+          };
+        }
+
         const now = Date.now();
         let initialStateData = "";
         let initialStateScript = "";
-        if (!_.isEmpty(ssrProps)) {
+        if (!_.isEmpty(ssrResult.props)) {
           const dataId = `${name}-initial-state-${Date.now()}-${++INITIAL_STATE_TAG_ID}`;
           initialStateData = `
 <script${scriptNonceAttr} type="application/json" id="${dataId}">
-${JSON.stringify(ssrProps)}
+${JSON.stringify(ssrResult.props)}
 </script>`;
           initialStateScript = `${xarc}.dyn("${dataId}")`;
         }
         outputSpot.add(
           `<!-- time: ${startTime} -->
-<div id="subapp2-${name}">${ssrContent}</div>${initialStateData}
+<div id="subapp2-${name}">${ssrResult.content}</div>${initialStateData}
 <!-- time: ${now} diff: ${now - startTime} -->
 <script${scriptNonceAttr}>${xarc}.startSubAppOnLoad(${JSON.stringify(props)},
 {getInitialState:function(){return ${initialStateScript}}});</script>
@@ -83,6 +94,8 @@ ${JSON.stringify(ssrProps)}
       };
 
       asyncProcess();
+
+      return undefined;
     }
   };
 }
