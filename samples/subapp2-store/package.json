@@ -1,5 +1,5 @@
 {
-  "name": "subapp2-store-poc",
+  "name": "subapp2-poc",
   "version": "0.0.1",
   "description": "Web application using Electrode X",
   "homepage": "",
@@ -36,8 +36,9 @@
     "@xarc/react": "^0.0.3",
     "@xarc/react-redux": "^0.1.0",
     "@xarc/react-router": "^0.1.0",
+    "@xarc/subapp": "^0.1.1",
     "classnames": "^2.2.6",
-    "tslib": "^2.0.3"
+    "subapp-web": "^1.0.30"
   },
   "devDependencies": {
     "@types/node": "^14.14.6",

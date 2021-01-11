@@ -1,25 +1,24 @@
 import { React, ReactSubApp, AppContext } from "@xarc/react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-// temp
-import { render } from "react-dom";
+import custom from "./bootstrap.css"
 
 const DealItem = props => {
   const { item } = props;
-  const panelClass = `panel panel-${item.type || "primary"}`;
+  const panelClass = custom[`panel panel-${item.type || "primary"}`];
   return (
-    <div className="col-sm-4">
+    <div className={custom["col-sm-4"]}>
       <div className={panelClass}>
-        <div className="panel-heading">{item.heading}</div>
-        <div className="panel-body">
+        <div className={custom["panel-heading"]}>{item.heading}</div>
+        <div className={custom["panel-body"]}>
           <img
             src={item.imageUrl}
-            className="img-responsive"
+            className={custom["img-responsive"]}
             style={{ width: "100%" }}
             alt="Image"
           />
         </div>
-        <div className="panel-footer">{item.footer}</div>
+        <div className={custom["panel-footer"]}>{item.footer}</div>
       </div>
     </div>
   );
@@ -31,7 +30,7 @@ const DealRow = props => {
   for (let i = 0; i < 3 && index + i < items.length; i++) {
     elements.push(<DealItem key={i} item={items[index + i]} />);
   }
-  return <div className="row">{elements}</div>;
+  return <div className={custom.row}>{elements}</div>;
 };
 
 const incNumber = () => {
@@ -54,26 +53,19 @@ const Products = props => {
   }
 
   return (
-    <AppContext.Consumer>
-      {({ isSsr, ssr }) => {
-        return (
-          <div className="container">
-            <p>Products</p>
-            <div>
-              Redux State Demo: <button onClick={() => dispatch(decNumber())}>&#8810;</button>
-        &nbsp;{props.value}&nbsp;
-        <button onClick={() => dispatch(incNumber())}>&#8811;</button>
-            </div>
-            {rows}
-          </div>
-        );
-      }}
-    </AppContext.Consumer>
-  );
 
-  /*
-  
-  */
+    <div className={custom.container}>
+      <p>Products</p>
+      <div>
+        Redux State Demo: <button onClick={() => dispatch(decNumber())}>&#8810;</button>
+        &nbsp;{value}&nbsp;
+        <button onClick={() => dispatch(incNumber())}>&#8811;</button>
+      </div>
+      {rows}
+    </div>
+
+
+  );
 };
 
 Products.propTypes = {
@@ -90,10 +82,9 @@ const ReduxProducts = connect(
   dispatch => ({ dispatch })
 )(Products);
 
-export { ReduxProducts as Products };
-
+export { ReduxProducts as Component };
 export const subapp: ReactSubApp = {
-  Component: Products
-}
+  Component: ReduxProducts
+};
 
 

@@ -17,7 +17,7 @@ import {
   PageOptions
 } from "@xarc/react";
 
-import { home, staticHome } from "../app";
+import { header, home, bottom, footer, staticHome, extras } from "../app";
 import { renderToString } from "react-dom/server";
 
 const MEMOIZE_STORE = {};
@@ -106,8 +106,20 @@ ${s}
       // useStream: true,
       // URL path
       // path: "/tag-template",
-      pageTitle: "subapp2-store-poc demo",
-      subApps: [{ name: home.name, ssr: true }],
+      pageTitle: "subapp2-store-demo",
+      subApps: [{ name: header.name, ssr: true }, { name: home.name, ssr: true }, { name: extras.name, ssr: true }, { name: bottom.name, ssr: true }, { name: footer.name, ssr: true }],
+      templateInserts: {
+        head: {
+          begin: cTT`<link nounce
+          rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        />`
+        },
+        body: {
+          begin: cTT`<div style='background-color:green'>`,
+          end: cTT`</div>`
+        }
+      },
       ...commonRenderOptions
     });
   };
@@ -116,7 +128,7 @@ ${s}
     reply.type("text/html");
 
     if (context.user.cspHeader) {
-      reply.header(`content-security-policy`, context.user.cspHeader);
+      //reply.header(`content-security-policy`, context.user.cspHeader);
     }
 
     reply.send(context.result);
@@ -138,7 +150,35 @@ ${s}
 
   server.route({
     method: "GET",
+    path: "/home",
+    async handler(request, reply) {
+      try {
+        const pageRenderer = memoize("route:/", constructHomeRouteRenderer);
+        const context = await pageRenderer.render({ request });
+        sendResponse(reply, context);
+      } catch (error) {
+        reply.send(error.stack);
+      }
+    }
+  });
+
+  server.route({
+    method: "GET",
     path: "/products",
+    async handler(request, reply) {
+      try {
+        const pageRenderer = memoize("route:/", constructHomeRouteRenderer);
+        const context = await pageRenderer.render({ request });
+        sendResponse(reply, context);
+      } catch (error) {
+        reply.send(error.stack);
+      }
+    }
+  });
+
+  server.route({
+    method: "GET",
+    path: "/stores",
     async handler(request, reply) {
       try {
         const pageRenderer = memoize("route:/", constructHomeRouteRenderer);
