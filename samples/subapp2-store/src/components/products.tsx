@@ -1,7 +1,7 @@
 import { React, ReactSubApp, AppContext } from "@xarc/react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import custom from "./bootstrap.css"
+import custom from "../styles/bootstrap.css";
 
 const DealItem = props => {
   const { item } = props;
@@ -53,7 +53,6 @@ const Products = props => {
   }
 
   return (
-
     <div className={custom.container}>
       <p>Products</p>
       <div>
@@ -63,8 +62,6 @@ const Products = props => {
       </div>
       {rows}
     </div>
-
-
   );
 };
 
@@ -77,14 +74,6 @@ const mapStateToProps = state => {
   return { items: state.items, value: state.number.value };
 };
 
-const ReduxProducts = connect(
-  mapStateToProps,
-  dispatch => ({ dispatch })
-)(Products);
+const ReduxProducts = connect(mapStateToProps, dispatch => ({ dispatch }))(Products);
 
-export { ReduxProducts as Component };
-export const subapp: ReactSubApp = {
-  Component: ReduxProducts
-};
-
-
+export { ReduxProducts as Products };

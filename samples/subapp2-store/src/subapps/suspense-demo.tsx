@@ -51,8 +51,6 @@ class SuspenseDemo extends React.Component {
   }
 }
 
-export { SuspenseDemo as Component };
-
 export const subapp: ReactSubApp = {
   Component: SuspenseDemo
 };

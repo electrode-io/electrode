@@ -39,4 +39,4 @@ Large.propTypes = {
   imagesData: PropTypes.array.isRequired
 };
 
-export default Large;
+export { Large };

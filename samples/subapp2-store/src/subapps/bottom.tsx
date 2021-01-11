@@ -1,11 +1,13 @@
 import { React, ReactSubApp, xarcV2, AppContext } from "@xarc/react";
 import { connect, reduxFeature } from "@xarc/react-redux";
-import { reactRouterFeature, Route, Switch } from "@xarc/react-router";
+import { reactRouterFeature, Route, Switch, ReactRouter } from "@xarc/react-router";
 import PropTypes from "prop-types";
-import Large from "../../components/large";
+import { Large } from "../components/large";
 import classNames from "classnames";
-import custom from "../../components/bootstrap.css"
+import custom from "../styles/bootstrap.css";
 // import AdvGridList from "../components/adv-grid";
+
+const { withRouter } = ReactRouter;
 
 const MoreProducts = props => {
   return (
@@ -47,27 +49,22 @@ const MoreDeals = () => {
 
 const Bottom = props => {
   return (
-    <AppContext.Consumer>
-      {({ isSsr, ssr }) => {
-        return (
-          <Switch>
-            <Route path="/products" component={() => <MoreProducts {...props} imagesData={[]} />} />
-            <Route path="/deals" component={MoreDeals} />
-          </Switch>
-        );
-      }}
-    </AppContext.Consumer>
+    <Switch>
+      <Route path="/products" component={() => <MoreProducts {...props} imagesData={[]} />} />
+      <Route path="/deals" component={MoreDeals} />
+    </Switch>
   );
-
 };
 
-const Component = connect(state => state, dispatch => ({ dispatch }))(Bottom);
-
-
-
+const Component = withRouter(
+  connect(
+    state => state,
+    dispatch => ({ dispatch })
+  )(Bottom)
+);
 
 export const subapp: ReactSubApp = {
-  Component: Component,
+  Component,
   wantFeatures: [
     reduxFeature({
       React,
