@@ -1,5 +1,5 @@
 import { SubAppDef, SubAppFeatureFactory } from "@xarc/subapp";
-import { BrowserRouter } from "react-router-dom";
+import { Router, BrowserRouter } from "react-router-dom";
 import { createBrowserHistory } from "history";
 
 import { ReactRouterFeatureOptions, _id, _subId } from "../common";
@@ -17,7 +17,15 @@ export function reactRouterFeature(options: ReactRouterFeatureOptions): SubAppFe
     id,
     subId,
     add(subapp: SubAppDef) {
-      const history = options.history || createBrowserHistory();
+      let history: any;
+      let TheRouter: any;
+
+      if (!options.history) {
+        TheRouter = BrowserRouter;
+      } else {
+        history = options.history === true ? createBrowserHistory() : options.history;
+        TheRouter = Router;
+      }
 
       subapp._features.reactRouter = {
         id,
@@ -27,9 +35,9 @@ export function reactRouterFeature(options: ReactRouterFeatureOptions): SubAppFe
           return {
             Component: (props: any) => {
               return (
-                <BrowserRouter history={history}>
+                <TheRouter history={history}>
                   <Component {...props} />
-                </BrowserRouter>
+                </TheRouter>
               );
             }
           };

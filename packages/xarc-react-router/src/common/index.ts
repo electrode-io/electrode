@@ -9,11 +9,13 @@ export type ReactRouterFeatureOptions = {
    */
   React: any;
   /**
-   * The browser history object.
+   * The browser history object - custom browser history object and control which Router to use.
    *
-   * Default to create with createBrowserHistory from https://www.npmjs.com/package/history
+   * - If it's falsy, then `BrowserRouter` will be used.
+   * - If it's `true`, then `Router` is used with history from `createBrowserHistory` from https://www.npmjs.com/package/history
+   * - Otherwise it's assumed to be a history object and `Router` will be used with it.
    */
-  history?: BrowserHistory<object>; // eslint-disable-line @typescript-eslint/ban-types
+  history?: boolean | BrowserHistory<object>; // eslint-disable-line @typescript-eslint/ban-types
 };
 
 export const _id = "router-provider";
