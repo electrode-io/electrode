@@ -52,7 +52,7 @@ export const subapp: ReactSubApp = {
     reduxFeature({
       React,
       shareStore: true,
-      reducers: x => x,
+      reducers: true,
       // provider({ Component, props }) {}
       prepare: async initialState => {
         xarcV2.debug("Home (home.tsx) subapp redux prepare, initialState:", initialState);
@@ -113,4 +113,23 @@ export const subapp: ReactSubApp = {
     // TODO: https://recoiljs.org/
     // recoilFeature({})
   ]
+};
+
+export const reduxReducers = {
+  number: (store, action) => {
+    if (action.type === "INC_NUMBER") {
+      return {
+        value: store.value + 1
+      };
+    } else if (action.type === "DEC_NUMBER") {
+      return {
+        value: store.value - 1
+      };
+    }
+
+    return store || { value: 999 };
+  },
+  items: s => {
+    return s || { items: [] };
+  }
 };
