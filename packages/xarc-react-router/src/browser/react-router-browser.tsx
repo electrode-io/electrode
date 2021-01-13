@@ -1,7 +1,9 @@
 import { SubAppDef, SubAppFeatureFactory } from "@xarc/subapp";
 import { Router, BrowserRouter } from "react-router-dom";
-import RouterHistory from "./router-history"
+//import RouterHistory from "./router-history"
 import { ReactRouterFeatureOptions, _id, _subId } from "../common";
+import { createBrowserHistory } from "history";
+const reactRouterHistory = createBrowserHistory();
 /**
  * Implement the component wrapping support for using react router on a subapp
  */
@@ -21,7 +23,7 @@ export function reactRouterFeature(options: ReactRouterFeatureOptions): SubAppFe
       if (options.history === false) {
         TheRouter = BrowserRouter;
       } else {
-        history = options.history === true ? RouterHistory.history : (options.history instanceof Object ? options.history : RouterHistory.history);
+        history = options.history === true ? reactRouterHistory : (options.hasOwnProperty("history") !== undefined ? options.history : reactRouterHistory);
         TheRouter = Router;
       }
 
