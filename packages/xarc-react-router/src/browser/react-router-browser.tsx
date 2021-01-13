@@ -10,6 +10,7 @@ let staticHistory;
  */
 
 export function reactRouterFeature(options: ReactRouterFeatureOptions): SubAppFeatureFactory {
+  console.log(`options.history ${options.history}`)
   const { createElement } = options.React; // eslint-disable-line
 
   const id = _id;

@@ -5,6 +5,10 @@ import PropTypes from "prop-types";
 import { Large } from "../components/large";
 import classNames from "classnames";
 import custom from "../styles/bootstrap.css";
+<<<<<<< HEAD
+=======
+
+>>>>>>> [MINOR] fixed react-router-browser.tsx with history issue
 
 const { withRouter } = ReactRouter;
 
