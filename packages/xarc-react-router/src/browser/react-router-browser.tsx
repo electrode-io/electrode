@@ -23,7 +23,7 @@ export function reactRouterFeature(options: ReactRouterFeatureOptions): SubAppFe
       if (options.history === false) {
         TheRouter = BrowserRouter;
       } else {
-        history = options.history === true ? reactRouterHistory : (options.hasOwnProperty("history") !== undefined ? options.history : reactRouterHistory);
+        history = options.history === true ? reactRouterHistory : (options.hasOwnProperty("history") ? options.history : reactRouterHistory);
         TheRouter = Router;
       }
 
