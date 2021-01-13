@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { Large } from "../components/large";
 import classNames from "classnames";
 import custom from "../styles/bootstrap.css";
-// import AdvGridList from "../components/adv-grid";
+
 
 const { withRouter } = ReactRouter;
 

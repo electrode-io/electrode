@@ -7,6 +7,7 @@ let reactRouterHistory;
  * Implement the component wrapping support for using react router on a subapp
  */
 export function reactRouterFeature(options: ReactRouterFeatureOptions): SubAppFeatureFactory {
+  console.log(`options.history ${options.history}`)
   const { createElement } = options.React; // eslint-disable-line
 
   const id = _id;
@@ -28,7 +29,7 @@ export function reactRouterFeature(options: ReactRouterFeatureOptions): SubAppFe
         if (options.history === true) {
           history = reactRouterHistory;
         } else {
-          history = options.hasOwnProperty("history") ? options.history : reactRouterHistory;
+          history = options.history !== undefined ? options.history : reactRouterHistory;
         }
         TheRouter = Router;
       }
