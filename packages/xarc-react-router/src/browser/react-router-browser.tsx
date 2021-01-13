@@ -1,6 +1,5 @@
 import { SubAppDef, SubAppFeatureFactory } from "@xarc/subapp";
 import { Router, BrowserRouter } from "react-router-dom";
-//import RouterHistory from "./router-history"
 import { ReactRouterFeatureOptions, _id, _subId } from "../common";
 import { createBrowserHistory } from "history";
 const reactRouterHistory = createBrowserHistory();
