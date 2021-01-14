@@ -36,7 +36,6 @@ export function reactRouterFeature(options: ReactRouterFeatureOptions): SubAppFe
         // user specify a falsy history, fallback to BrowserRouter
         TheRouter = BrowserRouter;
       }
-
       subapp._features.reactRouter = {
         id,
         subId,
