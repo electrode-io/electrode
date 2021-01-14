@@ -50,6 +50,7 @@ const Navigation = () => {
             </NavItem>
             <NavItem to="/products">Products</NavItem>
             <NavItem to="/stores">Stores</NavItem>
+            <NavItem to="/deals">Deals</NavItem>
             <NavItem to="/contact">Contact</NavItem>
           </ul>
           <ul className={classNames(custom.nav, custom["navbar-nav"], custom["navbar-right"])}>
