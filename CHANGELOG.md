@@ -1,3 +1,45 @@
+# 1/14/2021
+
+- `[fix] shared router history for subapps`
+- `[fix] use history@4 with react-router@5`
+- `[fix] handle ssr off when loading subapp`
+- `[fix] bad if to check for initial CDN map data`
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/react-router@0.1.2` `(0.1.1 => 0.1.2)`
+- `@xarc/subapp@0.1.2` `(0.1.1 => 0.1.2)`
+- `subapp-web@1.0.45` `(1.0.44 => 1.0.45)`
+
+### Lerna Updated
+
+- `@xarc/app@8.2.1` `(8.2.0 => 8.2.1)`
+- `@xarc/app-dev@8.2.1` `(8.2.0 => 8.2.1)`
+- `@xarc/react@0.1.2` `(0.1.1 => 0.1.2)`
+- `@xarc/react-redux@0.1.1` `(0.1.0 => 0.1.1)`
+- `subapp-pbundle@0.0.39` `(0.0.38 => 0.0.39)`
+- `subapp-react@0.0.36` `(0.0.35 => 0.0.36)`
+- `subapp-redux@1.0.45` `(1.0.44 => 1.0.45)`
+
+## Commits
+
+- `packages/xarc-react-router`
+
+  - `[fix] shared router history for subapps` ([#1783](https://github.com/electrode-io/electrode/pull/1783)) [commit](http://github.com/electrode-io/electrode/commit/acafbcf0157a41e12b62d4e4715bee7ac516661c)
+  - `[fix] use history@4 with react-router@5` [commit](http://github.com/electrode-io/electrode/commit/3fa593c5a3f8df87298a3c64a3b077c25080e792)
+  - `[fix] use BrowserRouter in browser routing code` ([#1779](https://github.com/electrode-io/electrode/pull/1779)) [commit](http://github.com/electrode-io/electrode/commit/c9ad8b99b581af5721071fad9eb5bda07e2fd15b)
+  - `cleanup` [commit](http://github.com/electrode-io/electrode/commit/7386e670c4c635b2b8d3622ac5607bbfbe86882d)
+
+- `packages/xarc-subapp`
+
+  - `[fix] handle ssr off when loading subapp` ([#1780](https://github.com/electrode-io/electrode/pull/1780)) [commit](http://github.com/electrode-io/electrode/commit/b4a66602b6790b27f49738c67b69142bdcc21bcd)
+
+- `packages/subapp-web`
+
+  - `[fix] bad if to check for initial CDN map data` ([#1784](https://github.com/electrode-io/electrode/pull/1784)) [commit](http://github.com/electrode-io/electrode/commit/b6717f10a5e11de2e3730914f9187dbd8aa69c2a)
+
 # 1/7/2021
 
 - minor updates and fixes for subapp 2 modules
