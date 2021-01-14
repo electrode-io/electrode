@@ -5,9 +5,6 @@ import { reactRouterFeature, Route, Switch } from "@xarc/react-router";
 import { Navigation } from "../components/navigation";
 import { Products } from "../components/products";
 
-
-
-
 const MainBody = props => {
   return <div>Home</div>;
 };

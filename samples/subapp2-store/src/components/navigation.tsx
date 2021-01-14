@@ -1,6 +1,5 @@
-import { React, ReactSubApp, AppContext } from "@xarc/react";
+import { React } from "@xarc/react";
 import { Route, Link } from "react-router-dom";
-import { withRouter } from "react-router";
 import classNames from "classnames";
 import custom from "../styles/bootstrap.css";
 

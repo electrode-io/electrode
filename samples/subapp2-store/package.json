@@ -36,9 +36,7 @@
     "@xarc/react": "^0.0.3",
     "@xarc/react-redux": "^0.1.0",
     "@xarc/react-router": "^0.1.0",
-    "@xarc/subapp": "^0.1.1",
-    "classnames": "^2.2.6",
-    "history": "4.10.1"
+    "classnames": "^2.2.6"
   },
   "devDependencies": {
     "@types/node": "^14.14.6",

@@ -1,4 +1,4 @@
-import { React, ReactSubApp, xarcV2, AppContext } from "@xarc/react";
+import { React, ReactSubApp } from "@xarc/react";
 import { connect, reduxFeature } from "@xarc/react-redux";
 import PropTypes from "prop-types";
 import classNames from "classnames";

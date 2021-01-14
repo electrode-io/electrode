@@ -1,11 +1,10 @@
-import { React, ReactSubApp, xarcV2, AppContext } from "@xarc/react";
+import { React, ReactSubApp, xarcV2 } from "@xarc/react";
 import { connect, reduxFeature } from "@xarc/react-redux";
 import { reactRouterFeature, Route, Switch, ReactRouter } from "@xarc/react-router";
 import PropTypes from "prop-types";
 import { Large } from "../components/large";
 import classNames from "classnames";
 import custom from "../styles/bootstrap.css";
-
 
 const { withRouter } = ReactRouter;
 

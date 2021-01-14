@@ -1,4 +1,4 @@
-import { React, ReactSubApp, AppContext } from "@xarc/react";
+import { React } from "@xarc/react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import custom from "../styles/bootstrap.css";

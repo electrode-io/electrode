@@ -1,8 +1,9 @@
-import { React, ReactSubApp, AppContext, xarcV2 } from "@xarc/react";
+import { React, ReactSubApp } from "@xarc/react";
 import PropTypes from "prop-types";
 import { connect, reduxFeature } from "@xarc/react-redux";
 import classNames from "classnames";
 import custom from "../styles/bootstrap.css";
+
 const Footer = (props: { title: any }) => {
   return (
     <footer
