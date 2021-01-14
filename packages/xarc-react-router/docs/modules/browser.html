@@ -116,10 +116,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
 					<a name="reactrouterfeatureoptions" class="tsd-anchor"></a>
 					<h3>React<wbr>Router<wbr>Feature<wbr>Options</h3>
-					<div class="tsd-signature tsd-kind-icon">React<wbr>Router<wbr>Feature<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>React<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>history<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">BrowserHistory</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> }</span></div>
+					<div class="tsd-signature tsd-kind-icon">React<wbr>Router<wbr>Feature<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>React<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>history<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/328d198b/packages/xarc-react-router/src/common/index.ts#L3">common/index.ts:3</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7386e670/packages/xarc-react-router/src/common/index.ts#L1">common/index.ts:1</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -136,12 +136,19 @@
 								</div>
 							</li>
 							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> history<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">BrowserHistory</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> history<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">unknown</span></h5>
 								<div class="tsd-comment tsd-typography">
 									<div class="lead">
-										<p>The browser history object.</p>
+										<p>A custom browser history object and control which Router to use.</p>
 									</div>
-									<p>Default to create with createBrowserHistory from <a href="https://www.npmjs.com/package/history">https://www.npmjs.com/package/history</a></p>
+									<ul>
+										<li>If it&#39;s <code>true</code>, or not specified, then <code>Router</code> is used with history from <code>createBrowserHistory</code>
+											from <a href="https://www.npmjs.com/package/history">https://www.npmjs.com/package/history</a> and the same history object will be shared
+										among all subapps</li>
+										<li>If it&#39;s a valid object, then it&#39;s assumed to be a history object and used with <code>Router</code></li>
+										<li>Finally fallback to use <code>BrowserRouter</code>, which internally uses its own history object that&#39;s not
+										shared with other subapps.</li>
+									</ul>
 								</div>
 							</li>
 						</ul>
@@ -156,7 +163,7 @@
 					<div class="tsd-signature tsd-kind-icon">_id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;router-provider&quot;</span><span class="tsd-signature-symbol"> = &quot;router-provider&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/328d198b/packages/xarc-react-router/src/common/index.ts#L19">common/index.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7386e670/packages/xarc-react-router/src/common/index.ts#L22">common/index.ts:22</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -166,7 +173,7 @@
 					<div class="tsd-signature tsd-kind-icon">_sub<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;react-router&quot;</span><span class="tsd-signature-symbol"> = &quot;react-router&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/328d198b/packages/xarc-react-router/src/common/index.ts#L20">common/index.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7386e670/packages/xarc-react-router/src/common/index.ts#L23">common/index.ts:23</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -183,7 +190,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/328d198b/packages/xarc-react-router/src/browser/react-router-browser.tsx#L10">browser/react-router-browser.tsx:10</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/7386e670/packages/xarc-react-router/src/browser/react-router-browser.tsx#L12">browser/react-router-browser.tsx:12</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -210,11 +217,11 @@
 					<div class="tsd-signature tsd-kind-icon">React<wbr>Router<wbr>Dom<span class="tsd-signature-symbol">:</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/328d198b/packages/xarc-react-router/src/common/index.ts#L31">common/index.ts:31</a></li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/328d198b/packages/xarc-react-router/src/common/index.ts#L25">common/index.ts:25</a></li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/328d198b/packages/xarc-react-router/src/common/index.ts#L31">common/index.ts:31</a></li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/328d198b/packages/xarc-react-router/src/common/index.ts#L25">common/index.ts:25</a></li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/328d198b/packages/xarc-react-router/src/common/index.ts#L31">common/index.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7386e670/packages/xarc-react-router/src/common/index.ts#L34">common/index.ts:34</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7386e670/packages/xarc-react-router/src/common/index.ts#L28">common/index.ts:28</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7386e670/packages/xarc-react-router/src/common/index.ts#L34">common/index.ts:34</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7386e670/packages/xarc-react-router/src/common/index.ts#L28">common/index.ts:28</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7386e670/packages/xarc-react-router/src/common/index.ts#L34">common/index.ts:34</a></li>
 						</ul>
 					</aside>
 				</section>
