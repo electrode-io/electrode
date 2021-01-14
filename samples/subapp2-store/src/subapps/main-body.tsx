@@ -5,6 +5,9 @@ import { reactRouterFeature, Route, Switch } from "@xarc/react-router";
 import { Navigation } from "../components/navigation";
 import { Products } from "../components/products";
 
+
+
+
 const MainBody = props => {
   return <div>Home</div>;
 };
@@ -52,7 +55,7 @@ export const subapp: ReactSubApp = {
     reduxFeature({
       React,
       shareStore: true,
-      reducers: x => x,
+      reducers: true,
       // provider({ Component, props }) {}
       prepare: async initialState => {
         xarcV2.debug("Home (home.tsx) subapp redux prepare, initialState:", initialState);
@@ -107,10 +110,29 @@ export const subapp: ReactSubApp = {
       }
     }),
     // https://reactrouter.com/
-    reactRouterFeature({ React })
+    reactRouterFeature({ React, history: true })
     // TODO: https://react-query.tanstack.com/docs/overview
     // reactQueryFeature({})
     // TODO: https://recoiljs.org/
     // recoilFeature({})
   ]
+};
+
+export const reduxReducers = {
+  number: (store, action) => {
+    if (action.type === "INC_NUMBER") {
+      return {
+        value: store.value + 1
+      };
+    } else if (action.type === "DEC_NUMBER") {
+      return {
+        value: store.value - 1
+      };
+    }
+
+    return store || { value: 999 };
+  },
+  items: s => {
+    return s || { items: [] };
+  }
 };
