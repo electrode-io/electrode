@@ -7,6 +7,7 @@ import { Products } from "../components/products";
 
 
 
+
 const MainBody = props => {
   return <div>Home</div>;
 };
@@ -109,7 +110,7 @@ export const subapp: ReactSubApp = {
       }
     }),
     // https://reactrouter.com/
-    reactRouterFeature({ React })
+    reactRouterFeature({ React, history: true })
     // TODO: https://react-query.tanstack.com/docs/overview
     // reactQueryFeature({})
     // TODO: https://recoiljs.org/

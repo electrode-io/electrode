@@ -13,10 +13,11 @@ export type ReactRouterFeatureOptions = {
    *
    * - If it's false, then `BrowserRouter` will be used and it will use its own history.
    * - Note: BrowserRouter use its own history object and its not shared among other subapps
-   * - If it's `true`, then `Router` is used with history from `createBrowserHistory` from https://www.npmjs.com/package/history and the same history object will be shared among all subapps
+   * - If it's `true`, then `Router` is used with history from `createBrowserHistory`
+   *   from https://www.npmjs.com/package/history and the same history object will be shared among all subapps
    * - Otherwise it's assumed to be a history object and `Router` will be used with it. If its undefined then shared history object will be used for all subapps
    */
-  history?: any | undefined; // eslint-disable-line @typescript-eslint/ban-types
+  history?: boolean | unknown; // eslint-disable-line @typescript-eslint/ban-types
 };
 
 export const _id = "router-provider";
