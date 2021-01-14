@@ -1,10 +1,10 @@
 // xarc subapp client side lib version 1
 // load into window.xarcV1 as a global
-(function (w) {
+(function(w) {
   if (!w._wml) {
     w._wml = {};
   }
-  
+
   const version = 1000000; // ###.###.### major.minor.patch
 
   if (w.xarcV1 && w.xarcV1.version >= version) return w.xarcV1;
@@ -23,7 +23,7 @@
   const DEFAULT_NAMESPACE = "root";
 
   const ensureNamespace = (namespace = DEFAULT_NAMESPACE) => namespace;
-  
+
   return (w.xarcV1 = xv1 = {
     IS_BROWSER: true,
     HAS_WINDOW: typeof window !== "undefined",
@@ -119,7 +119,11 @@
     getBundle(name, namespace) {
       namespace = ensureNamespace(namespace);
 
-      if (!name || !runtimeInfo.bundles[namespace] || !runtimeInfo.bundles[namespace][name.toLowerCase()]) {
+      if (
+        !name ||
+        !runtimeInfo.bundles[namespace] ||
+        !runtimeInfo.bundles[namespace][name.toLowerCase()]
+      ) {
         return;
       }
 
@@ -316,10 +320,10 @@
       }
 
       if (!runtimeInfo.bundleAssets[namespace]) {
-        const bundleName = namespace === DEFAULT_NAMESPACE ? "bundleAssets": `${namespace}Assets`;
+        const bundleName = namespace === DEFAULT_NAMESPACE ? "bundleAssets" : `${namespace}Assets`;
         runtimeInfo.bundleAssets[namespace] = xv1.dyn(bundleName);
 
-        const updater = xv1.rt.md === "undefined" ? xv1.cdnInit : xv1.cdnUpdate;
+        const updater = !xv1.rt.md ? xv1.cdnInit : xv1.cdnUpdate;
         updater(runtimeInfo.bundleAssets[namespace]);
       }
 
