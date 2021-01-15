@@ -1,9 +1,20 @@
 import PropTypes from "prop-types";
-import { React, ReactSubApp, xarcV2 } from "@xarc/react";
+import { React, ReactSubApp, xarcV2, declareSubApp, createDynamicComponent } from "@xarc/react";
 import { connect, reduxFeature } from "@xarc/react-redux";
 import { reactRouterFeature, Route, Switch } from "@xarc/react-router";
 import { Navigation } from "../components/navigation";
 import { Products } from "../components/products";
+
+
+export const deals = declareSubApp({
+  name: "deals",
+  getModule: () => import("../subapps/deal")
+});
+
+const Deals = createDynamicComponent(deals, { ssr: true });
+
+
+
 
 const MainBody = props => {
   return <div>Home</div>;
@@ -38,6 +49,7 @@ const MainRouter = () => {
         <Route path="/" exact component={ReduxHome} />
         <Route path="/products" component={Products} />
         <Route path="/stores" component={Stores} />
+        <Route path="/deals" component={Deals} />
         <Route path="/contact" component={Contact} />
       </Switch>
     </div>
@@ -61,6 +73,7 @@ export const subapp: ReactSubApp = {
         } else {
           return {
             initialState: {
+              deals: { value: "My Special Deals from Main Body App" },
               number: { value: -1 },
               items: [
                 {
@@ -131,5 +144,8 @@ export const reduxReducers = {
   },
   items: s => {
     return s || { items: [] };
+  },
+  deals: s => {
+    return s || { value: "my deals" }
   }
 };
