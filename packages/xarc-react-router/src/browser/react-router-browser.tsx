@@ -10,7 +10,6 @@ let staticHistory;
  */
 
 export function reactRouterFeature(options: ReactRouterFeatureOptions): SubAppFeatureFactory {
-  console.log(`options.history ${options.history}`)
   const { createElement } = options.React; // eslint-disable-line
 
   const id = _id;
@@ -36,6 +35,7 @@ export function reactRouterFeature(options: ReactRouterFeatureOptions): SubAppFe
         // user specify a falsy history, fallback to BrowserRouter
         TheRouter = BrowserRouter;
       }
+
       subapp._features.reactRouter = {
         id,
         subId,
