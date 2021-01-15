@@ -727,14 +727,16 @@ ${instruction}`
 
   passThruLineOutput(tag, input, output) {
     const reader = readline.createInterface({ input });
-    let deferWrites;
+    let lineBuffers = [];
+    let deferWrite;
 
     reader.on("line", data => {
-      if (!deferWrites) {
-        deferWrites = [];
-        setTimeout(() => output.show(deferWrites.join("\n")), 500).unref();
-      }
-      deferWrites.push(tag + data);
+      clearTimeout(deferWrite);
+      deferWrite = setTimeout(() => {
+        output.show(lineBuffers.join("\n"));
+        lineBuffers = [];
+      }, 500).unref();
+      lineBuffers.push(tag + data);
     });
 
     return reader;

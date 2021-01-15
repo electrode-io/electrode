@@ -51,7 +51,7 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.0.0",
     "@babel/register": "^7.0.0",
-    "@jchip/redbird": "^1.1.2",
+    "@jchip/redbird": "^1.2.1",
     "@loadable/babel-plugin": "^5.10.0",
     "@xarc/subapp": "^0.1.2",
     "@xarc/webpack": "^9.1.0",
