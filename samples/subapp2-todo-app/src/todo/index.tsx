@@ -1,10 +1,6 @@
 import { React, ReactSubApp, createDynamicComponent } from "@xarc/react";
 import { reduxFeature } from "@xarc/react-redux";
-import { ADD_TODO, TOGGLE_TODO } from "./redux/action";
-
-const initState = {
-  todos: [],
-};
+export { reduxReducers } from "./redux/reducer"
 
 export const TodoApp = createDynamicComponent(
   {
@@ -18,49 +14,6 @@ const Todo = () => (
     <TodoApp />
   </div>
 );
-
-export function reduxReducers(state = initState, action) {
-
-  
-
-  switch (action.type) {
-    case ADD_TODO: {
-      const { id, content, completed } = action.payload;
-      return {
-        todos: [
-          ...state.todos,
-          {
-            id,
-            content,
-            completed,
-          },
-        ],
-      };
-    }
-    case TOGGLE_TODO: {
-      const { id } = action.payload;
-      console.log('reducer')
-      console.log(id)
-      console.log(state)
-      console.log(state.todos)
-      const todos = state.todos.map((curElement) => {
-        if (curElement.id === id) {
-          return {
-            ...curElement,
-            completed: !curElement.completed,
-          };
-        }
-
-        return curElement;
-      });
-
-      console.log(todos)
-      return { todos: todos };
-    }
-    default:
-      return state;
-  }
-}
 
 export const subapp: ReactSubApp = {
   Component: Todo,

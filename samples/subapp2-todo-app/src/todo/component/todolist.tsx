@@ -1,5 +1,6 @@
 import { React, ReactSubApp, createDynamicComponent } from "@xarc/react";
 import { connect } from "@xarc/react-redux";
+import custom from "../styles/bootstrap.css";
 
 export const Todo = createDynamicComponent(
   {
@@ -12,12 +13,12 @@ const TodoList = ({ todos }) => {
   console.log('TodoList')
   console.log(todos)
   return (
-  <ul>
+  <ul className={custom["list-group"]}>
     {todos && todos.length
       ? todos.map((todo) => {
           return <Todo key={`todo-${todo.id}`} todo={todo} />;
         })
-      : "Empty!"}
+      : <li className={custom["list-group-item"]}>Empty List!</li>}
   </ul>
 )};
 

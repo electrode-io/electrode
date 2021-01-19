@@ -4,7 +4,7 @@ export const initialState = {
   todos: [],
 };
 
-export function todoReducer(state = initialState, action) {
+export function reduxReducers(state = initState, action) {
   switch (action.type) {
     case ADD_TODO: {
       const { id, content, completed } = action.payload;
@@ -21,6 +21,10 @@ export function todoReducer(state = initialState, action) {
     }
     case TOGGLE_TODO: {
       const { id } = action.payload;
+      console.log('reducer')
+      console.log(id)
+      console.log(state)
+      console.log(state.todos)
       const todos = state.todos.map((curElement) => {
         if (curElement.id === id) {
           return {
@@ -32,6 +36,7 @@ export function todoReducer(state = initialState, action) {
         return curElement;
       });
 
+      console.log(todos)
       return { todos: todos };
     }
     default:
