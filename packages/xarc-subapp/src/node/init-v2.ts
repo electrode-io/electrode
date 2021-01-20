@@ -1,11 +1,11 @@
 /* eslint-disable no-console, max-statements, global-require, @typescript-eslint/no-var-requires */
 
 import Path from "path";
-import { generateNonce, loadCdnMap, mapCdn, wrapStringFragment, urlJoin } from "./utils";
+import { loadCdnMap, mapCdn, wrapStringFragment, urlJoin } from "./utils";
 import { WebpackStats } from "./webpack-stats";
 import Crypto from "crypto";
 import { AssetPathMap, InitProps } from "./types";
-import { SSR_PIPELINES } from "./utils";
+import { SSR_PIPELINES, safeStringifyJson } from "./utils";
 
 /**
  * Initialize all the up front code required for running subapps in the browser.
@@ -56,7 +56,7 @@ export function initSubApp(setupContext: any, setupToken: Partial<{ props: InitP
   if (cdnMapData) {
     const cdnMapJsonId = `cdn-map-${Crypto.randomBytes(8).toString("base64")}`;
     cdnAsJsonScript = `<script{{SCRIPT_NONCE}} type="application/json" id="${cdnMapJsonId}">
-${JSON.stringify(cdnMapData)}
+${safeStringifyJson(cdnMapData)}
 </script>
 `;
     cdnUpdateScript = `window.xarcV2.cdnUpdate({md:window.xarcV2.dyn("${cdnMapJsonId}")})

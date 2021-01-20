@@ -101,3 +101,14 @@ export function urlJoin(baseUrl: string, ...pathParts: string[]) {
 }
 
 export const SSR_PIPELINES = Symbol("subapp-ssr-pipelines");
+
+/**
+ * Stringify a JSON object and replace some tags to avoid XSS:
+ *  - `<script>` => `&lt;script>`
+ *  - `</script>` => `&lt;/script>`
+ * @param obj - object to stringify
+ * @returns JSON string of object
+ */
+export function safeStringifyJson(obj) {
+  return JSON.stringify(obj).replace(/<(\/?)script>/g, "&lt;$1script>");
+}

@@ -3,6 +3,7 @@ import _ from "lodash";
 import { SubAppRenderPipeline } from "../subapp/subapp-render-pipeline";
 import { SubAppSSRData, SubAppFeatureResult, LoadSubAppOptions } from "../subapp/types";
 import { ServerFrameworkLib } from "./types";
+import { safeStringifyJson } from "./utils";
 // global name to store client subapp runtime, ie: window.xarcV1
 // V1: version 1.
 const xarc = "window.xarcV2";
@@ -94,16 +95,19 @@ export class SubAppServerRenderPipeline implements SubAppRenderPipeline {
       const dataId = `${name}-initial-state-${Date.now()}-${++SubAppServerRenderPipeline.INITIAL_STATE_TAG_ID}`;
       initialStateData = `
 <script${scriptNonceAttr} type="application/json" id="${dataId}">
-${JSON.stringify(ssrProps)}
+${safeStringifyJson(ssrProps)}
 </script>`;
       initialStateScript = `${xarc}.dyn("${dataId}")`;
     }
 
+    // about using safeStringifyJson here: We don't expect user to write their own code
+    // with <script> or </script> in their options, but if they do, it's their problem,
+    // but we at least avoid code blowing up due to that.
     this.outputSpot.add(
       `<!-- time: ${this.startTime} -->
 ${ssrContent}${initialStateData}
 <!-- time: ${now} diff: ${now - this.startTime} -->
-<script${scriptNonceAttr}>${xarc}.startSubAppOnLoad(${JSON.stringify(this.options)},
+<script${scriptNonceAttr}>${xarc}.startSubAppOnLoad(${safeStringifyJson(this.options)},
 {getInitialState:function(){return ${initialStateScript};}});</script>
 `
     );

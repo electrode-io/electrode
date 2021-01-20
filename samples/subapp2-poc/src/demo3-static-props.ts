@@ -6,7 +6,13 @@ export const getStaticProps = async () => {
     setTimeout(resolve, delay);
   }).then(() => {
     return {
-      props: { message: "demo3 this is static props", delay }
+      props: {
+        message: "demo3 this is static props",
+        // this actually won't execute even if we didn't escape the <script> tags
+        // because this sample enables CSP nonce
+        xss: "</script><script>alert('oops, xss')</script>",
+        delay
+      }
     };
   });
 };

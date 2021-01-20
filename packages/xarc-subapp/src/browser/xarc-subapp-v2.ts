@@ -182,7 +182,7 @@ export function xarcV2Client(
         return {};
       } else {
         try {
-          return JSON.parse(element.innerHTML);
+          return JSON.parse(element.innerHTML.replace(/&lt;(\/?)script>/g, "<$1script>"));
         } catch (err) {
           console.error(msg, id, "- parse");
           return {};
