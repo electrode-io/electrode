@@ -1,3 +1,40 @@
+# 1/19/2021
+
+- `[fix] redirect proxy output not showing`
+- `use render pipeline for subapp version 2`
+
+## Packages
+
+- `@xarc/app@8.2.2` `(8.2.1 => 8.2.2)`
+- `@xarc/app-dev@8.2.2` `(8.2.1 => 8.2.2)`
+- `@xarc/react@0.1.3` `(0.1.2 => 0.1.3)`
+- `@xarc/react-redux@0.1.2` `(0.1.1 => 0.1.2)`
+- `@xarc/react-router@0.1.3` `(0.1.2 => 0.1.3)`
+- `@xarc/subapp@0.1.3` `(0.1.2 => 0.1.3)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - [fix] redirect proxy output not showing [commit](http://github.com/electrode-io/electrode/commit/a3fb29a8e4b91ff3672a11312de38de0e58bcfdd)
+
+- `packages/xarc-react`
+
+  - use render pipeline for subapp version 2 [commit](http://github.com/electrode-io/electrode/commit/f71798dce95c335fb44c1e9d638ae779816cf7a8)
+
+- `packages/xarc-react-redux`
+
+  - use render pipeline for subapp version 2 [commit](http://github.com/electrode-io/electrode/commit/f71798dce95c335fb44c1e9d638ae779816cf7a8)
+
+- `packages/xarc-react-router`
+
+  - use render pipeline for subapp version 2 [commit](http://github.com/electrode-io/electrode/commit/f71798dce95c335fb44c1e9d638ae779816cf7a8)
+
+- `packages/xarc-subapp`
+
+  - use render pipeline for subapp version 2 [commit](http://github.com/electrode-io/electrode/commit/f71798dce95c335fb44c1e9d638ae779816cf7a8)
+  - [fix] subapp2 safe stringify props for client [commit](http://github.com/electrode-io/electrode/commit/1e430f931e6b122cb84aa05f7e2506140ff2b325)
+
 # 1/14/2021
 
 - `[fix] shared router history for subapps`
