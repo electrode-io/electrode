@@ -1,6 +1,6 @@
 {
   "name": "@xarc/react-redux",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "xarc React.js application redux support",
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
@@ -27,7 +27,7 @@
     "react-dom": "*"
   },
   "dependencies": {
-    "@xarc/subapp": "^0.1.2",
+    "@xarc/subapp": "^0.1.3",
     "react-redux": ">= 7",
     "redux": ">= 4",
     "tslib": "^2.1.0"
