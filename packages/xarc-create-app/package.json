@@ -37,7 +37,11 @@
     "@babel/preset-env": "^7.6.2",
     "@types/chai": "^4.2.11",
     "@types/mocha": "^7.0.2",
+    "@xarc/app": "^8.2.2",
+    "@xarc/app-dev": "^8.2.2",
     "@xarc/module-dev": "^2.2.4",
+    "@xarc/react": "^0.1.3",
+    "@xarc/react-redux": "^0.1.2",
     "babel-loader": "^8.0.6",
     "chai": "^4.2.0",
     "chalker": "^1.2.0",
@@ -46,14 +50,14 @@
     "nyc": "^15.0.0",
     "opfs": "^1.1.1",
     "prompts": "^2.3.2",
+    "run-verify": "^1.2.5",
     "shcmd": "^0.7.9",
     "sinon": "^7.2.6",
     "sinon-chai": "^3.3.0",
     "webpack": "^4.41.0",
     "webpack-bundle-analyzer": "^3.5.2",
     "webpack-cli": "^3.3.9",
-    "xclap": "^0.2.51",
-    "run-verify": "^1.2.5"
+    "xclap": "^0.2.51"
   },
   "prettier": {
     "printWidth": 100,
@@ -96,5 +100,13 @@
     "functions": 100,
     "lines": 100,
     "cache": true
+  },
+  "fyn": {
+    "devDependencies": {
+      "@xarc/app": "../xarc-app",
+      "@xarc/app-dev": "../xarc-app-dev",
+      "@xarc/react": "../xarc-react",
+      "@xarc/react-redux": "../xarc-react-redux"
+    }
   }
 }
