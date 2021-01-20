@@ -48,7 +48,12 @@ export function subAppReady(
         (Array.isArray(list) && list.indexOf(name) >= 0) ||
         container.get(name)._ssr)
     ) {
-      subappModules.push(container.get(name)._getModule());
+      subappModules.push(
+        container
+          .get(name)
+          ._getModule()
+          .then(() => name)
+      );
     }
   }
 

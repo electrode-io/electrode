@@ -35,6 +35,14 @@ const Demo3 = subAppInlineComponent(
   { ssr: true }
 );
 
+const Demo4 = subAppInlineComponent(
+  declareSubApp({
+    name: "demo4",
+    getModule: () => import("./demo4")
+  }),
+  { ssr: true }
+);
+
 const incNumber = () => {
   return {
     type: "INC_NUMBER"
@@ -72,6 +80,8 @@ const Home = props => {
       <Demo2 />
       <h1>subapp as a component</h1>
       <Demo3 />
+      <h1>subapp with react-query</h1>
+      <Demo4 />
     </div>
   );
 };
@@ -127,8 +137,6 @@ export const subapp: ReactSubApp = {
     }),
     // https://reactrouter.com/
     reactRouterFeature({ React })
-    // TODO: https://react-query.tanstack.com/docs/overview
-    // reactQueryFeature({})
     // TODO: https://recoiljs.org/
     // recoilFeature({})
   ]

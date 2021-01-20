@@ -150,7 +150,11 @@ ${body.end}
    */
   async render(options: RenderOptions): Promise<RenderContext> {
     if (!isSubAppReady()) {
-      await subAppReady(this._getSSRSubAppNames());
+      // make sure the subapps this render depends on are ready
+      const readyNames = await subAppReady(this._getSSRSubAppNames());
+      // In case there are other subapps that are not ready,
+      // asynchronously load all of them
+      subAppReady(true, readyNames);
     }
 
     return await this._renderer.render(options);

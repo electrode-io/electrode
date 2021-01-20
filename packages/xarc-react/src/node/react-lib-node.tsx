@@ -3,7 +3,8 @@ import {
   ServerFrameworkLib,
   SubAppSSRData,
   SubAppSSRResult,
-  SubAppFeatureResult
+  SubAppFeatureResult,
+  envHooks
 } from "@xarc/subapp";
 // import { render } from "react-dom";
 import { createElement, Component } from "react";
@@ -18,7 +19,7 @@ export class SSRReactLib implements ServerFrameworkLib {
   }
 
   async prepareSSR?(data: SubAppSSRData) {
-    const { subapp } = data;
+    const subapp = envHooks.getContainer().get(data.subapp.name);
     if (!subapp._module) {
       await subapp._getModule();
     }

@@ -109,7 +109,8 @@ ${s}
       pageTitle: "subapp2-poc demo",
       subApps: [
         { name: home.name, ssr: true },
-        { name: "demo3", ssr: true, prepareOnly: true, inlineId: "1234" }
+        { name: "demo3", ssr: true, prepareOnly: true, inlineId: "1234" },
+        { name: "demo4", ssr: true, prepareOnly: true, inlineId: "1234" }
       ],
       templateInserts: {
         head: {

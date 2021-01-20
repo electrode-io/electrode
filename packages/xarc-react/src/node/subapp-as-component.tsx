@@ -19,6 +19,13 @@ const SubAppSSR = (props: PropsType) => {
         const pipelines: SubAppServerRenderPipeline[] = ssr.request[SSR_PIPELINES];
         const pipeline = pipelines.find(p => p.ssrData.subapp.name === props.subapp.name);
 
+        if (!pipeline) {
+          const msg = `Unable to find data for server side rendering subapp '${props.subapp.name}'.
+  It's most likely because the subapp was not specified in 'subApps' options when
+  creating the 'PageRenderer' for the server route.`;
+          console.error(`\nError: ${msg}\n`); // eslint-disable-line
+          throw new Error(msg);
+        }
         const framework: SSRReactLib = pipeline.framework as any;
         const ssrResult = framework.handleSSRSync(pipeline.ssrData, pipeline.prepResult);
         const elementId = `subapp-as-component-${props.subapp.name}`;

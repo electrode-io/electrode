@@ -8,7 +8,7 @@ export * from "./subapp-render-pipeline";
 export * from "./client-framework-lib";
 
 function loadFeatures(subapp: SubAppDef, features: SubAppFeatureFactory[]) {
-  if (features) {
+  if (features && features.length > 0) {
     for (const feat of features) {
       feat.add(subapp);
     }
@@ -46,7 +46,7 @@ function _getModule(): Promise<any> {
         console.error("_getModule can't find the subapp in container for:", this.name); // eslint-disable-line no-console
       } else {
         subappB._module = mod;
-        loadFeatures(this, subapp._getExport<unknown>()?.wantFeatures);
+        loadFeatures(this, subappB._getExport<unknown>()?.wantFeatures);
       }
       container.updateReady();
 
@@ -58,8 +58,10 @@ function _getModule(): Promise<any> {
     // TODO: update types
     //
     const mod = getMod as any;
-    subapp._module = mod;
-    loadFeatures(this, subapp._getExport<unknown>()?.wantFeatures);
+    const subappB = container.get(this.name);
+    subappB._module = mod;
+    loadFeatures(this, subappB._getExport<unknown>()?.wantFeatures);
+    container.updateReady();
     return Promise.resolve(mod);
   }
 }

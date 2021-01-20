@@ -34,8 +34,9 @@
     "@xarc/app": "^8.1.8",
     "@xarc/fastify-server": "^2.0.0",
     "@xarc/react": "^0.0.3",
-    "@xarc/react-router": "^0.1.0",
-    "@xarc/react-redux": "^0.1.0"
+    "@xarc/react-query": "^0.0.1",
+    "@xarc/react-redux": "^0.1.0",
+    "@xarc/react-router": "^0.1.0"
   },
   "devDependencies": {
     "@types/node": "^14.14.6",
@@ -50,8 +51,9 @@
     "dependencies": {
       "@xarc/app": "../../packages/xarc-app",
       "@xarc/react": "../../packages/xarc-react",
-      "@xarc/react-router": "../../packages/xarc-react-router",
-      "@xarc/react-redux": "../../packages/xarc-react-redux"
+      "@xarc/react-query": "../../packages/xarc-react-query",
+      "@xarc/react-redux": "../../packages/xarc-react-redux",
+      "@xarc/react-router": "../../packages/xarc-react-router"
     },
     "devDependencies": {
       "@xarc/app-dev": "../../packages/xarc-app-dev",
