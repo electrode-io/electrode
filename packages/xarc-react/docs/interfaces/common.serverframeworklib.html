@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>FrameworkLib | @xarc/react</title>
+	<title>ServerFrameworkLib | @xarc/react</title>
 	<meta name="description" content="Documentation for @xarc/react">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,33 +55,31 @@
 					<a href="../modules.html">@xarc/react</a>
 				</li>
 				<li>
-					<a href="../modules/node.html">node</a>
+					<a href="../modules/common.html">common</a>
 				</li>
 				<li>
-					<a href="node.frameworklib.html">FrameworkLib</a>
+					<a href="common.serverframeworklib.html">ServerFrameworkLib</a>
 				</li>
 			</ul>
-			<h1>Interface FrameworkLib</h1>
+			<h1>Interface ServerFrameworkLib</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Allow specific UI framework to be configured</p>
-					</div>
-					<p>TBD</p>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">FrameworkLib</span>
+						<span class="target">ServerFrameworkLib</span>
 					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel">
+				<h3>Implemented by</h3>
+				<ul class="tsd-hierarchy">
+					<li><a href="../classes/node_react_lib_node.ssrreactlib.html" class="tsd-signature-type" data-tsd-kind="Class">SSRReactLib</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -91,10 +89,9 @@
 						<section class="tsd-index-section tsd-is-external">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-external"><a href="node.frameworklib.html#handlessr" class="tsd-kind-icon">handleSSR</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-external"><a href="node.frameworklib.html#renderstart" class="tsd-kind-icon">render<wbr>Start</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-external"><a href="node.frameworklib.html#rendertostring" class="tsd-kind-icon">render<wbr>ToString</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-external"><a href="node.frameworklib.html#startsubapp" class="tsd-kind-icon">start<wbr>Sub<wbr>App</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-external"><a href="common.serverframeworklib.html#handlessr" class="tsd-kind-icon">handleSSR</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-external"><a href="common.serverframeworklib.html#handlessrsync" class="tsd-kind-icon">handleSSRSync</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-external"><a href="common.serverframeworklib.html#preparessr" class="tsd-kind-icon">prepareSSR</a></li>
 							</ul>
 						</section>
 					</div>
@@ -106,88 +103,92 @@
 					<a name="handlessr" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> handleSSR</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">handleSSR<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><a href="../modules/common.html#subappssrdata" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppSSRData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">handleSSR<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><a href="../modules/common.html#subappssrdata" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppSSRData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/common.html#subappssrresult" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppSSRResult</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/.f/_/@xarc/subapp/0.1.1-fynlocal_h/@xarc/subapp/dist-node-cjs/subapp/types.d.ts:292</li>
+									<li>Defined in node_modules/.f/_/@xarc/subapp/0.1.2-fynlocal_h/@xarc/subapp/dist-node-cjs/node/types.d.ts:93</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>async version of running actual SSR</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>data: <a href="../modules/common.html#subappssrdata" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppSSRData</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/common.html#subappssrresult" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppSSRResult</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-external">
-					<a name="renderstart" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> render<wbr>Start</h3>
+					<a name="handlessrsync" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> handleSSRSync</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">render<wbr>Start<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">handleSSRSync<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><a href="../modules/common.html#subappssrdata" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppSSRData</a>, prepResult<span class="tsd-signature-symbol">: </span><a href="../modules/common.html#subappfeatureresult" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppFeatureResult</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/common.html#subappssrresult" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppSSRResult</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/.f/_/@xarc/subapp/0.1.1-fynlocal_h/@xarc/subapp/dist-node-cjs/subapp/types.d.ts:290</li>
+									<li>Defined in node_modules/.f/_/@xarc/subapp/0.1.2-fynlocal_h/@xarc/subapp/dist-node-cjs/node/types.d.ts:101</li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-external">
-					<a name="rendertostring" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> render<wbr>ToString</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">render<wbr>ToString<span class="tsd-signature-symbol">(</span>Component<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in node_modules/.f/_/@xarc/subapp/0.1.1-fynlocal_h/@xarc/subapp/dist-node-cjs/subapp/types.d.ts:291</li>
-								</ul>
-							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Server side render a subapp sync.</p>
+								</div>
+								<p>sync means the subapp&#39;s module must have been loaded</p>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>Component: <span class="tsd-signature-type">unknown</span></h5>
+									<h5>data: <a href="../modules/common.html#subappssrdata" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppSSRData</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>ssr data</p>
+									</div>
+								</li>
+								<li>
+									<h5>prepResult: <a href="../modules/common.html#subappfeatureresult" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppFeatureResult</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../modules/common.html#subappssrresult" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppSSRResult</a></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-external">
-					<a name="startsubapp" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> start<wbr>Sub<wbr>App</h3>
+					<a name="preparessr" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> prepareSSR</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">start<wbr>Sub<wbr>App<span class="tsd-signature-symbol">(</span>def<span class="tsd-signature-symbol">: </span><a href="../modules/common.html#subappdef" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppDef</a>, options<span class="tsd-signature-symbol">: </span><a href="../modules/common.html#subappstartoptions" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppStartOptions</a>, reload<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">prepareSSR<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><a href="../modules/common.html#subappssrdata" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppSSRData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/.f/_/@xarc/subapp/0.1.1-fynlocal_h/@xarc/subapp/dist-node-cjs/subapp/types.d.ts:293</li>
+									<li>Defined in node_modules/.f/_/@xarc/subapp/0.1.2-fynlocal_h/@xarc/subapp/dist-node-cjs/node/types.d.ts:91</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Prepare a subapp&#39;s data and features for doing SSR.</p>
+								</div>
+								<p>This is separate because preparing data is likely async and if app
+									requires using the sync <code>renderToString</code>, then it has to be in two
+								stages.</p>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>def: <a href="../modules/common.html#subappdef" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppDef</a></h5>
-								</li>
-								<li>
-									<h5>options: <a href="../modules/common.html#subappstartoptions" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppStartOptions</a></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> reload: <span class="tsd-signature-type">boolean</span></h5>
+									<h5>data: <a href="../modules/common.html#subappssrdata" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppSSRData</a></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -202,8 +203,19 @@
 					<li class=" ">
 						<a href="../modules.html">Exports</a>
 					</li>
-					<li class=" tsd-kind-module">
+					<li class="current tsd-kind-module">
 						<a href="../modules/common.html">common</a>
+						<ul>
+							<li class=" tsd-kind-namespace tsd-parent-kind-module tsd-is-external">
+								<a href="../modules/common.react.html">React</a>
+							</li>
+							<li class=" tsd-kind-namespace tsd-parent-kind-module tsd-is-external">
+								<a href="../modules/common.reactdom.html">React<wbr>Dom</a>
+							</li>
+							<li class=" tsd-kind-namespace tsd-parent-kind-module tsd-is-external">
+								<a href="../modules/common.reactdomserver.html">React<wbr>Dom<wbr>Server</a>
+							</li>
+						</ul>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/common_app_context.html">common/app-<wbr>context</a>
@@ -217,7 +229,7 @@
 					<li class=" tsd-kind-module">
 						<a href="../modules/common_feat_static_props_types.html">common/feat-<wbr>static-<wbr>props-<wbr>types</a>
 					</li>
-					<li class="current tsd-kind-module">
+					<li class=" tsd-kind-module">
 						<a href="../modules/node.html">node</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -232,6 +244,9 @@
 					<li class=" tsd-kind-module">
 						<a href="../modules/node_render_page.html">node/render-<wbr>page</a>
 					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/node_subapp_as_component.html">node/subapp-<wbr>as-<wbr>component</a>
+					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
@@ -239,19 +254,16 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-is-external">
-						<a href="node.frameworklib.html" class="tsd-kind-icon">Framework<wbr>Lib</a>
+						<a href="common.serverframeworklib.html" class="tsd-kind-icon">Server<wbr>Framework<wbr>Lib</a>
 						<ul>
 							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-external">
-								<a href="node.frameworklib.html#handlessr" class="tsd-kind-icon">handleSSR</a>
+								<a href="common.serverframeworklib.html#handlessr" class="tsd-kind-icon">handleSSR</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-external">
-								<a href="node.frameworklib.html#renderstart" class="tsd-kind-icon">render<wbr>Start</a>
+								<a href="common.serverframeworklib.html#handlessrsync" class="tsd-kind-icon">handleSSRSync</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-external">
-								<a href="node.frameworklib.html#rendertostring" class="tsd-kind-icon">render<wbr>ToString</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-external">
-								<a href="node.frameworklib.html#startsubapp" class="tsd-kind-icon">start<wbr>Sub<wbr>App</a>
+								<a href="common.serverframeworklib.html#preparessr" class="tsd-kind-icon">prepareSSR</a>
 							</li>
 						</ul>
 					</li>

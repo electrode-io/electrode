@@ -70,12 +70,19 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
+							<h3>Interfaces</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/node_types.serverframeworklib.html" class="tsd-kind-icon">Server<wbr>Framework<wbr>Lib</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="node_types.html#assetdata" class="tsd-kind-icon">Asset<wbr>Data</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="node_types.html#assetpathmap" class="tsd-kind-icon">Asset<wbr>Path<wbr>Map</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="node_types.html#initprops" class="tsd-kind-icon">Init<wbr>Props</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="node_types.html#nonceinfo" class="tsd-kind-icon">Nonce<wbr>Info</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="node_types.html#subappssrresult" class="tsd-kind-icon">Sub<wbr>AppSSRResult</a></li>
 							</ul>
 						</section>
 					</div>
@@ -89,7 +96,7 @@
 					<div class="tsd-signature tsd-kind-icon">Asset<wbr>Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>cdnMap<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>pathMap<span class="tsd-signature-symbol">?: </span><a href="node_types.html#assetpathmap" class="tsd-signature-type" data-tsd-kind="Type alias">AssetPathMap</a><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4a66602/packages/xarc-subapp/src/node/types.ts#L47">node/types.ts:47</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/1e430f93/packages/xarc-subapp/src/node/types.ts#L51">node/types.ts:51</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -127,7 +134,7 @@
 					<div class="tsd-signature tsd-kind-icon">Asset<wbr>Path<wbr>Map<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>base<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4a66602/packages/xarc-subapp/src/node/types.ts#L36">node/types.ts:36</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/1e430f93/packages/xarc-subapp/src/node/types.ts#L40">node/types.ts:40</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -153,7 +160,7 @@
 					<div class="tsd-signature tsd-kind-icon">Init<wbr>Props<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>devAssetData<span class="tsd-signature-symbol">?: </span><a href="node_types.html#assetdata" class="tsd-signature-type" data-tsd-kind="Type alias">AssetData</a><span class="tsd-signature-symbol">; </span>nonce<span class="tsd-signature-symbol">?: </span><a href="node_types.html#nonceinfo" class="tsd-signature-type" data-tsd-kind="Type alias">NonceInfo</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>prodAssetData<span class="tsd-signature-symbol">?: </span><a href="node_types.html#assetdata" class="tsd-signature-type" data-tsd-kind="Type alias">AssetData</a><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4a66602/packages/xarc-subapp/src/node/types.ts#L57">node/types.ts:57</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/1e430f93/packages/xarc-subapp/src/node/types.ts#L61">node/types.ts:61</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -199,7 +206,7 @@
 					<div class="tsd-signature tsd-kind-icon">Nonce<wbr>Info<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>generator<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span>tag<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>script<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>style<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>tokens<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>all<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>script<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>style<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4a66602/packages/xarc-subapp/src/node/types.ts#L4">node/types.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/1e430f93/packages/xarc-subapp/src/node/types.ts#L8">node/types.ts:8</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -274,6 +281,43 @@
 						</ul>
 					</div>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="subappssrresult" class="tsd-anchor"></a>
+					<h3>Sub<wbr>AppSSRResult</h3>
+					<div class="tsd-signature tsd-kind-icon">Sub<wbr>AppSSRResult<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>content<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>props<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/1e430f93/packages/xarc-subapp/src/node/types.ts#L80">node/types.ts:80</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>result of server side rendering</p>
+						</div>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5>content<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>content of the rendering
+										TODO: types - could be string or a stream</p>
+									</div>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5>props<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>initialState props</p>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</section>
 			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -286,19 +330,19 @@
 						<a href="node.html">node</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="node_init_context.html">node/init-<wbr>context</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="node_init_v2.html">node/init-<wbr>v2</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="node_load_v2.html">node/load-<wbr>v2</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="node_ssr_info.html">node/ssr-<wbr>info</a>
+						<a href="node_server_render_pipeline.html">node/server-<wbr>render-<wbr>pipeline</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="node_start_v2.html">node/start-<wbr>v2</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="node_subapp_server.html">node/subapp-<wbr>server</a>
 					</li>
 					<li class="current tsd-kind-module">
 						<a href="node_types.html">node/types</a>
@@ -316,10 +360,19 @@
 						<a href="subapp.html">subapp</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="subapp_client_framework_lib.html">subapp/client-<wbr>framework-<wbr>lib</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="subapp_client_render_pipeline.html">subapp/client-<wbr>render-<wbr>pipeline</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="subapp_envhooks.html">subapp/envhooks</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="subapp_subapp_ready.html">subapp/subapp-<wbr>ready</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="subapp_subapp_render_pipeline.html">subapp/subapp-<wbr>render-<wbr>pipeline</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="subapp_types.html">subapp/types</a>
@@ -328,6 +381,9 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/node_types.serverframeworklib.html" class="tsd-kind-icon">Server<wbr>Framework<wbr>Lib</a>
+					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
 						<a href="node_types.html#assetdata" class="tsd-kind-icon">Asset<wbr>Data</a>
 					</li>
@@ -339,6 +395,9 @@
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
 						<a href="node_types.html#nonceinfo" class="tsd-kind-icon">Nonce<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="node_types.html#subappssrresult" class="tsd-kind-icon">Sub<wbr>AppSSRResult</a>
 					</li>
 				</ul>
 			</nav>

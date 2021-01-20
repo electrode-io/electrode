@@ -86,7 +86,7 @@
 			<section class="tsd-panel">
 				<h3>Implements</h3>
 				<ul class="tsd-hierarchy">
-					<li><a href="../interfaces/common.frameworklib.html" class="tsd-signature-type" data-tsd-kind="Interface">FrameworkLib</a></li>
+					<li><a href="../interfaces/common.serverframeworklib.html" class="tsd-signature-type" data-tsd-kind="Interface">ServerFrameworkLib</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -103,7 +103,8 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="node_react_lib_node.ssrreactlib.html#handlessr" class="tsd-kind-icon">handleSSR</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="node_react_lib_node.ssrreactlib.html#rendertostring" class="tsd-kind-icon">render<wbr>ToString</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="node_react_lib_node.ssrreactlib.html#handlessrsync" class="tsd-kind-icon">handleSSRSync</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="node_react_lib_node.ssrreactlib.html#preparessr" class="tsd-kind-icon">prepareSSR</a></li>
 							</ul>
 						</section>
 					</div>
@@ -121,7 +122,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/106cb3ee/packages/xarc-react/src/node/react-lib-node.tsx#L10">src/node/react-lib-node.tsx:10</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react/src/node/react-lib-node.tsx#L15">src/node/react-lib-node.tsx:15</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="node_react_lib_node.ssrreactlib.html" class="tsd-signature-type" data-tsd-kind="Class">SSRReactLib</a></h4>
@@ -140,9 +141,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/common.frameworklib.html">FrameworkLib</a>.<a href="../interfaces/common.frameworklib.html#handlessr">handleSSR</a></p>
+								<p>Implementation of <a href="../interfaces/common.serverframeworklib.html">ServerFrameworkLib</a>.<a href="../interfaces/common.serverframeworklib.html#handlessr">handleSSR</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/106cb3ee/packages/xarc-react/src/node/react-lib-node.tsx#L29">src/node/react-lib-node.tsx:29</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react/src/node/react-lib-node.tsx#L57">src/node/react-lib-node.tsx:57</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -165,32 +166,53 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="rendertostring" class="tsd-anchor"></a>
-					<h3>render<wbr>ToString</h3>
+					<a name="handlessrsync" class="tsd-anchor"></a>
+					<h3>handleSSRSync</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">render<wbr>ToString<span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><a href="../interfaces/common.react.reactelement.html" class="tsd-signature-type" data-tsd-kind="Interface">ReactElement</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/common.react.reactelement.html" class="tsd-signature-type" data-tsd-kind="Interface">ReactElement</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">(props: any) &#x3D;&gt; ReactElement&lt;any, string | ... | (new (props: any) &#x3D;&gt; Component&lt;any, any, any&gt;)&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="common.react.component.html" class="tsd-signature-type" data-tsd-kind="Class">Component</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="common.react.component.html" class="tsd-signature-type" data-tsd-kind="Class">Component</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">handleSSRSync<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><a href="../modules/common.html#subappssrdata" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppSSRData</a>, prepResult<span class="tsd-signature-symbol">: </span><a href="../modules/common.html#subappfeatureresult" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppFeatureResult</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/common.html#subappssrresult" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppSSRResult</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/common.serverframeworklib.html">ServerFrameworkLib</a>.<a href="../interfaces/common.serverframeworklib.html#handlessrsync">handleSSRSync</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/106cb3ee/packages/xarc-react/src/node/react-lib-node.tsx#L20">src/node/react-lib-node.tsx:20</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react/src/node/react-lib-node.tsx#L65">src/node/react-lib-node.tsx:65</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Render react element to string</p>
-								</div>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>element: <a href="../interfaces/common.react.reactelement.html" class="tsd-signature-type" data-tsd-kind="Interface">ReactElement</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/common.react.reactelement.html" class="tsd-signature-type" data-tsd-kind="Interface">ReactElement</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">(props: any) &#x3D;&gt; ReactElement&lt;any, string | ... | (new (props: any) &#x3D;&gt; Component&lt;any, any, any&gt;)&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="common.react.component.html" class="tsd-signature-type" data-tsd-kind="Class">Component</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="common.react.component.html" class="tsd-signature-type" data-tsd-kind="Class">Component</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">&gt;</span></h5>
-									<div class="tsd-comment tsd-typography">
-									</div>
+									<h5>data: <a href="../modules/common.html#subappssrdata" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppSSRData</a></h5>
+								</li>
+								<li>
+									<h5>prepResult: <a href="../modules/common.html#subappfeatureresult" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppFeatureResult</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../modules/common.html#subappssrresult" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppSSRResult</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="preparessr" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> prepareSSR</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">prepareSSR<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><a href="../modules/common.html#subappssrdata" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppSSRData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/common.html#subappfeatureresult" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppFeatureResult</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/common.serverframeworklib.html">ServerFrameworkLib</a>.<a href="../interfaces/common.serverframeworklib.html#preparessr">prepareSSR</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react/src/node/react-lib-node.tsx#L20">src/node/react-lib-node.tsx:20</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>data: <a href="../modules/common.html#subappssrdata" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppSSRData</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/common.html#subappfeatureresult" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppFeatureResult</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -232,6 +254,9 @@
 					<li class=" tsd-kind-module">
 						<a href="../modules/node_render_page.html">node/render-<wbr>page</a>
 					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/node_subapp_as_component.html">node/subapp-<wbr>as-<wbr>component</a>
+					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
@@ -248,7 +273,10 @@
 								<a href="node_react_lib_node.ssrreactlib.html#handlessr" class="tsd-kind-icon">handleSSR</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="node_react_lib_node.ssrreactlib.html#rendertostring" class="tsd-kind-icon">render<wbr>ToString</a>
+								<a href="node_react_lib_node.ssrreactlib.html#handlessrsync" class="tsd-kind-icon">handleSSRSync</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="node_react_lib_node.ssrreactlib.html#preparessr" class="tsd-kind-icon">prepareSSR</a>
 							</li>
 						</ul>
 					</li>

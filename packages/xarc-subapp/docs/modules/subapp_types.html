@@ -78,7 +78,6 @@
 						<section class="tsd-index-section ">
 							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/subapp_types.frameworklib.html" class="tsd-kind-icon">Framework<wbr>Lib</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/subapp_types.isubappfeature.html" class="tsd-kind-icon">ISub<wbr>App<wbr>Feature</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/subapp_types.isubappfeaturefactory.html" class="tsd-kind-icon">ISub<wbr>App<wbr>Feature<wbr>Factory</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/subapp_types.xarcsubappclientv2.html" class="tsd-kind-icon">Xarc<wbr>Sub<wbr>App<wbr>Client<wbr>V2</a></li>
@@ -89,7 +88,10 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="subapp_types.html#cdndata" class="tsd-kind-icon">CDNData</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="subapp_types.html#loadsubappoptions" class="tsd-kind-icon">Load<wbr>Sub<wbr>App<wbr>Options</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="subapp_types.html#mounttype" class="tsd-kind-icon">Mount<wbr>Type</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="subapp_types.html#pipelinefactoryparams" class="tsd-kind-icon">Pipeline<wbr>Factory<wbr>Params</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="subapp_types.html#subapp" class="tsd-kind-icon">Sub<wbr>App</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="subapp_types.html#subappcsrdata" class="tsd-kind-icon">Sub<wbr>AppCSRData</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="subapp_types.html#subappdef" class="tsd-kind-icon">Sub<wbr>App<wbr>Def</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="subapp_types.html#subappfeature" class="tsd-kind-icon">Sub<wbr>App<wbr>Feature</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="subapp_types.html#subappfeatureexecuteparams" class="tsd-kind-icon">Sub<wbr>App<wbr>Feature<wbr>Execute<wbr>Params</a></li>
@@ -99,8 +101,7 @@
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="subapp_types.html#subappmountinfo" class="tsd-kind-icon">Sub<wbr>App<wbr>Mount<wbr>Info</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="subapp_types.html#subappoptions" class="tsd-kind-icon">Sub<wbr>App<wbr>Options</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="subapp_types.html#subappssrdata" class="tsd-kind-icon">Sub<wbr>AppSSRData</a></li>
-								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="subapp_types.html#subappssrresult" class="tsd-kind-icon">Sub<wbr>AppSSRResult</a></li>
-								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="subapp_types.html#subappstartoptions" class="tsd-kind-icon">Sub<wbr>App<wbr>Start<wbr>Options</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="subapp_types.html#subappstartparams" class="tsd-kind-icon">Sub<wbr>App<wbr>Start<wbr>Params</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="subapp_types.html#_xarcv2runtimeinfo" class="tsd-kind-icon">_xarc<wbr>V2Run<wbr>Time<wbr>Info</a></li>
 							</ul>
 						</section>
@@ -115,7 +116,7 @@
 					<div class="tsd-signature tsd-kind-icon">CDNData<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>md<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4a66602/packages/xarc-subapp/src/subapp/types.ts#L3">subapp/types.ts:3</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/1e430f93/packages/xarc-subapp/src/subapp/types.ts#L5">subapp/types.ts:5</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -135,12 +136,18 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
 					<a name="loadsubappoptions" class="tsd-anchor"></a>
 					<h3>Load<wbr>Sub<wbr>App<wbr>Options</h3>
-					<div class="tsd-signature tsd-kind-icon">Load<wbr>Sub<wbr>App<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>group<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>ssr<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span></div>
+					<div class="tsd-signature tsd-kind-icon">Load<wbr>Sub<wbr>App<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>group<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>inlineId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>prepareOnly<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>ssr<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4a66602/packages/xarc-subapp/src/subapp/types.ts#L211">subapp/types.ts:211</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/1e430f93/packages/xarc-subapp/src/subapp/types.ts#L274">subapp/types.ts:274</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Options for loading a subapp into a page</p>
+						</div>
+						<p>The subapp should&#39;ve been declared.</p>
+					</div>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
@@ -153,10 +160,27 @@
 								</div>
 							</li>
 							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> inline<wbr>Id<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>ID for the subapp inlined as a component.</p>
+									</div>
+									<p>For now, any non-empty string ID will do.</p>
+								</div>
+							</li>
+							<li class="tsd-parameter">
 								<h5>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
 								<div class="tsd-comment tsd-typography">
 									<div class="lead">
 										<p>Name of the subapp to load</p>
+									</div>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> prepare<wbr>Only<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>If SSR, set this to <code>true</code> to prepare subapp&#39;s data only but don&#39;t actually do render to string.</p>
 									</div>
 								</div>
 							</li>
@@ -171,13 +195,43 @@
 						</ul>
 					</div>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="mounttype" class="tsd-anchor"></a>
+					<h3>Mount<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">Mount<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;dynamic&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;inline&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;start&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/1e430f93/packages/xarc-subapp/src/subapp/types.ts#L311">subapp/types.ts:311</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Type of Component that&#39;s mounting a subapp</p>
+						</div>
+						<ul>
+							<li><code>dynamic</code> - using subapp as a plain dynamic import component</li>
+							<li><code>inline</code> - inline nesting a subapp within another as a component</li>
+							<li><code>start</code> - as a start component for the subapp to handle hot reload</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="pipelinefactoryparams" class="tsd-anchor"></a>
+					<h3>Pipeline<wbr>Factory<wbr>Params</h3>
+					<div class="tsd-signature tsd-kind-icon">Pipeline<wbr>Factory<wbr>Params<span class="tsd-signature-symbol">:</span> <a href="subapp_types.html#subappstartparams" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppStartParams</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/1e430f93/packages/xarc-subapp/src/subapp/types.ts#L141">subapp/types.ts:141</a></li>
+						</ul>
+					</aside>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
 					<a name="subapp" class="tsd-anchor"></a>
 					<h3>Sub<wbr>App</h3>
 					<div class="tsd-signature tsd-kind-icon">Sub<wbr>App&lt;ComponentType&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>Component<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ComponentType</span><span class="tsd-signature-symbol">; </span>wantFeatures<span class="tsd-signature-symbol">?: </span><a href="subapp_types.html#subappfeaturefactory" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppFeatureFactory</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4a66602/packages/xarc-subapp/src/subapp/types.ts#L247">subapp/types.ts:247</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/1e430f93/packages/xarc-subapp/src/subapp/types.ts#L329">subapp/types.ts:329</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -226,12 +280,27 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
-					<a name="subappdef" class="tsd-anchor"></a>
-					<h3>Sub<wbr>App<wbr>Def</h3>
-					<div class="tsd-signature tsd-kind-icon">Sub<wbr>App<wbr>Def<span class="tsd-signature-symbol">:</span> <a href="subapp_types.html#subappoptions" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppOptions</a><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>_features<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="subapp_types.html#subappfeature" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppFeature</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>_frameworkFactory<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/subapp_types.frameworklib.html" class="tsd-signature-type" data-tsd-kind="Interface">FrameworkLib</a><span class="tsd-signature-symbol">; </span>_getModule<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>_id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>_module<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>_ssr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>_startComponent<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>_startOptions<span class="tsd-signature-symbol">?: </span><a href="subapp_types.html#subappstartoptions" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppStartOptions</a><span class="tsd-signature-symbol">; </span>_mount<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>_reload<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>_start<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>_unmount<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></div>
+					<a name="subappcsrdata" class="tsd-anchor"></a>
+					<h3>Sub<wbr>AppCSRData</h3>
+					<div class="tsd-signature tsd-kind-icon">Sub<wbr>AppCSRData<span class="tsd-signature-symbol">:</span> <a href="subapp_types.html#loadsubappoptions" class="tsd-signature-type" data-tsd-kind="Type alias">LoadSubAppOptions</a><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>element<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">; </span>elementId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>getInitialState<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4a66602/packages/xarc-subapp/src/subapp/types.ts#L126">subapp/types.ts:126</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/1e430f93/packages/xarc-subapp/src/subapp/types.ts#L128">subapp/types.ts:128</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>SubApp client side rendering data</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="subappdef" class="tsd-anchor"></a>
+					<h3>Sub<wbr>App<wbr>Def</h3>
+					<div class="tsd-signature tsd-kind-icon">Sub<wbr>App<wbr>Def<span class="tsd-signature-symbol">:</span> <a href="subapp_types.html#subappoptions" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppOptions</a><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>_features<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="subapp_types.html#subappfeature" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppFeature</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>_frameworkFactory<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">; </span>_getExport<span class="tsd-signature-symbol">?: </span>&lt;T&gt;<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="subapp_types.html#subapp" class="tsd-signature-type" data-tsd-kind="Type alias">SubApp</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>_getModule<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>_id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>_module<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>_pipelineFactory<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span>params<span class="tsd-signature-symbol">: </span><a href="subapp_types.html#pipelinefactoryparams" class="tsd-signature-type" data-tsd-kind="Type alias">PipelineFactoryParams</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/subapp_subapp_render_pipeline.subapprenderpipeline.html" class="tsd-signature-type" data-tsd-kind="Interface">SubAppRenderPipeline</a><span class="tsd-signature-symbol">; </span>_renderPipelines<span class="tsd-signature-symbol">?: </span><a href="../interfaces/subapp_subapp_render_pipeline.subapprenderpipeline.html" class="tsd-signature-type" data-tsd-kind="Interface">SubAppRenderPipeline</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>_ssr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>_mount<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>_reload<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>_start<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>_unmount<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/1e430f93/packages/xarc-subapp/src/subapp/types.ts#L146">subapp/types.ts:146</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -246,22 +315,25 @@
 					<div class="tsd-signature tsd-kind-icon">Sub<wbr>App<wbr>Feature<span class="tsd-signature-symbol">:</span> <a href="../interfaces/subapp_types.isubappfeature.html" class="tsd-signature-type" data-tsd-kind="Interface">ISubAppFeature</a><span class="tsd-signature-symbol"> &amp; </span><a href="subapp_types.html#subappfeatureinfo" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppFeatureInfo</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4a66602/packages/xarc-subapp/src/subapp/types.ts#L209">subapp/types.ts:209</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/1e430f93/packages/xarc-subapp/src/subapp/types.ts#L267">subapp/types.ts:267</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
 					<a name="subappfeatureexecuteparams" class="tsd-anchor"></a>
 					<h3>Sub<wbr>App<wbr>Feature<wbr>Execute<wbr>Params</h3>
-					<div class="tsd-signature tsd-kind-icon">Sub<wbr>App<wbr>Feature<wbr>Execute<wbr>Params<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>input<span class="tsd-signature-symbol">: </span><a href="subapp_types.html#subappfeatureresult" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppFeatureResult</a><span class="tsd-signature-symbol">; </span>reload<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>ssrData<span class="tsd-signature-symbol">?: </span><a href="subapp_types.html#subappssrdata" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppSSRData</a><span class="tsd-signature-symbol">; </span>startOptions<span class="tsd-signature-symbol">?: </span><a href="subapp_types.html#subappstartoptions" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppStartOptions</a><span class="tsd-signature-symbol"> }</span></div>
+					<div class="tsd-signature tsd-kind-icon">Sub<wbr>App<wbr>Feature<wbr>Execute<wbr>Params<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>csrData<span class="tsd-signature-symbol">?: </span><a href="subapp_types.html#subappcsrdata" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppCSRData</a><span class="tsd-signature-symbol">; </span>input<span class="tsd-signature-symbol">: </span><a href="subapp_types.html#subappfeatureresult" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppFeatureResult</a><span class="tsd-signature-symbol">; </span>reload<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>ssrData<span class="tsd-signature-symbol">?: </span><a href="subapp_types.html#subappssrdata" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppSSRData</a><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4a66602/packages/xarc-subapp/src/subapp/types.ts#L192">subapp/types.ts:192</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/1e430f93/packages/xarc-subapp/src/subapp/types.ts#L250">subapp/types.ts:250</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> csr<wbr>Data<span class="tsd-signature-symbol">?: </span><a href="subapp_types.html#subappcsrdata" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppCSRData</a></h5>
+							</li>
 							<li class="tsd-parameter">
 								<h5>input<span class="tsd-signature-symbol">: </span><a href="subapp_types.html#subappfeatureresult" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppFeatureResult</a></h5>
 							</li>
@@ -270,9 +342,6 @@
 							</li>
 							<li class="tsd-parameter">
 								<h5><span class="tsd-flag ts-flagOptional">Optional</span> ssr<wbr>Data<span class="tsd-signature-symbol">?: </span><a href="subapp_types.html#subappssrdata" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppSSRData</a></h5>
-							</li>
-							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> start<wbr>Options<span class="tsd-signature-symbol">?: </span><a href="subapp_types.html#subappstartoptions" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppStartOptions</a></h5>
 							</li>
 						</ul>
 					</div>
@@ -283,7 +352,7 @@
 					<div class="tsd-signature tsd-kind-icon">Sub<wbr>App<wbr>Feature<wbr>Factory<span class="tsd-signature-symbol">:</span> <a href="../interfaces/subapp_types.isubappfeaturefactory.html" class="tsd-signature-type" data-tsd-kind="Interface">ISubAppFeatureFactory</a><span class="tsd-signature-symbol"> &amp; </span><a href="subapp_types.html#subappfeatureinfo" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppFeatureInfo</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4a66602/packages/xarc-subapp/src/subapp/types.ts#L185">subapp/types.ts:185</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/1e430f93/packages/xarc-subapp/src/subapp/types.ts#L243">subapp/types.ts:243</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -298,7 +367,7 @@
 					<div class="tsd-signature tsd-kind-icon">Sub<wbr>App<wbr>Feature<wbr>Info<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>subId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4a66602/packages/xarc-subapp/src/subapp/types.ts#L159">subapp/types.ts:159</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/1e430f93/packages/xarc-subapp/src/subapp/types.ts#L217">subapp/types.ts:217</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -334,7 +403,7 @@
 					<div class="tsd-signature tsd-kind-icon">Sub<wbr>App<wbr>Feature<wbr>Result<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>Component<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>props<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4a66602/packages/xarc-subapp/src/subapp/types.ts#L187">subapp/types.ts:187</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/1e430f93/packages/xarc-subapp/src/subapp/types.ts#L245">subapp/types.ts:245</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -352,10 +421,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
 					<a name="subappmountinfo" class="tsd-anchor"></a>
 					<h3>Sub<wbr>App<wbr>Mount<wbr>Info</h3>
-					<div class="tsd-signature tsd-kind-icon">Sub<wbr>App<wbr>Mount<wbr>Info<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>component<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>subapp<span class="tsd-signature-symbol">: </span><a href="subapp_types.html#subappdef" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppDef</a><span class="tsd-signature-symbol"> }</span></div>
+					<div class="tsd-signature tsd-kind-icon">Sub<wbr>App<wbr>Mount<wbr>Info<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>component<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>subapp<span class="tsd-signature-symbol">: </span><a href="subapp_types.html#subappdef" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppDef</a><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">?: </span><a href="subapp_types.html#mounttype" class="tsd-signature-type" data-tsd-kind="Type alias">MountType</a><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4a66602/packages/xarc-subapp/src/subapp/types.ts#L237">subapp/types.ts:237</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/1e430f93/packages/xarc-subapp/src/subapp/types.ts#L316">subapp/types.ts:316</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -382,6 +451,14 @@
 									</div>
 								</div>
 							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> type<span class="tsd-signature-symbol">?: </span><a href="subapp_types.html#mounttype" class="tsd-signature-type" data-tsd-kind="Type alias">MountType</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>type of component trying to mount to the subapp</p>
+									</div>
+								</div>
+							</li>
 						</ul>
 					</div>
 				</section>
@@ -391,7 +468,7 @@
 					<div class="tsd-signature tsd-kind-icon">Sub<wbr>App<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>__filename<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>bundleName<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>getModule<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">; </span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>resolveName<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol">; </span>wantFeatures<span class="tsd-signature-symbol">?: </span><a href="subapp_types.html#subappfeaturefactory" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppFeatureFactory</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4a66602/packages/xarc-subapp/src/subapp/types.ts#L63">subapp/types.ts:63</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/1e430f93/packages/xarc-subapp/src/subapp/types.ts#L65">subapp/types.ts:65</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -487,10 +564,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
 					<a name="subappssrdata" class="tsd-anchor"></a>
 					<h3>Sub<wbr>AppSSRData</h3>
-					<div class="tsd-signature tsd-kind-icon">Sub<wbr>AppSSRData<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>context<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>params<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>path<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>props<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>query<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>request<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>subapp<span class="tsd-signature-symbol">: </span><a href="subapp_types.html#subappdef" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppDef</a><span class="tsd-signature-symbol"> }</span></div>
+					<div class="tsd-signature tsd-kind-icon">Sub<wbr>AppSSRData<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>context<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>options<span class="tsd-signature-symbol">: </span><a href="subapp_types.html#loadsubappoptions" class="tsd-signature-type" data-tsd-kind="Type alias">LoadSubAppOptions</a><span class="tsd-signature-symbol">; </span>params<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>path<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>query<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>request<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>subapp<span class="tsd-signature-symbol">: </span><a href="subapp_types.html#subappdef" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppDef</a><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4a66602/packages/xarc-subapp/src/subapp/types.ts#L316">subapp/types.ts:316</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/1e430f93/packages/xarc-subapp/src/subapp/types.ts#L398">subapp/types.ts:398</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -503,15 +580,21 @@
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter">
 								<h5>context<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>RenderContext from <code>@xarc/render-context</code></p>
+									</div>
+									<p>TODO: need to type this</p>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5>options<span class="tsd-signature-symbol">: </span><a href="subapp_types.html#loadsubappoptions" class="tsd-signature-type" data-tsd-kind="Type alias">LoadSubAppOptions</a></h5>
 							</li>
 							<li class="tsd-parameter">
 								<h5><span class="tsd-flag ts-flagOptional">Optional</span> params<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 							<li class="tsd-parameter">
 								<h5><span class="tsd-flag ts-flagOptional">Optional</span> path<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
-							</li>
-							<li class="tsd-parameter">
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> props<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span></h5>
 							</li>
 							<li class="tsd-parameter">
 								<h5><span class="tsd-flag ts-flagOptional">Optional</span> query<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
@@ -526,51 +609,35 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
-					<a name="subappssrresult" class="tsd-anchor"></a>
-					<h3>Sub<wbr>AppSSRResult</h3>
-					<div class="tsd-signature tsd-kind-icon">Sub<wbr>AppSSRResult<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>content<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>props<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></div>
+					<a name="subappstartparams" class="tsd-anchor"></a>
+					<h3>Sub<wbr>App<wbr>Start<wbr>Params</h3>
+					<div class="tsd-signature tsd-kind-icon">Sub<wbr>App<wbr>Start<wbr>Params<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>csrData<span class="tsd-signature-symbol">?: </span><a href="subapp_types.html#subappcsrdata" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppCSRData</a><span class="tsd-signature-symbol">; </span>ssrData<span class="tsd-signature-symbol">?: </span><a href="subapp_types.html#subappssrdata" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppSSRData</a><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4a66602/packages/xarc-subapp/src/subapp/types.ts#L329">subapp/types.ts:329</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/1e430f93/packages/xarc-subapp/src/subapp/types.ts#L134">subapp/types.ts:134</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>result of server side rendering</p>
-						</div>
-					</div>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter">
-								<h5>content<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></h5>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> csr<wbr>Data<span class="tsd-signature-symbol">?: </span><a href="subapp_types.html#subappcsrdata" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppCSRData</a></h5>
 								<div class="tsd-comment tsd-typography">
 									<div class="lead">
-										<p>content of the rendering
-										TODO: types - could be string or a stream</p>
+										<p>client side render data</p>
 									</div>
 								</div>
 							</li>
 							<li class="tsd-parameter">
-								<h5>props<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></h5>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> ssr<wbr>Data<span class="tsd-signature-symbol">?: </span><a href="subapp_types.html#subappssrdata" class="tsd-signature-type" data-tsd-kind="Type alias">SubAppSSRData</a></h5>
 								<div class="tsd-comment tsd-typography">
 									<div class="lead">
-										<p>initialState props</p>
+										<p>server side render data</p>
 									</div>
 								</div>
 							</li>
 						</ul>
 					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
-					<a name="subappstartoptions" class="tsd-anchor"></a>
-					<h3>Sub<wbr>App<wbr>Start<wbr>Options</h3>
-					<div class="tsd-signature tsd-kind-icon">Sub<wbr>App<wbr>Start<wbr>Options<span class="tsd-signature-symbol">:</span> <a href="subapp_types.html#loadsubappoptions" class="tsd-signature-type" data-tsd-kind="Type alias">LoadSubAppOptions</a><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>element<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">; </span>elementId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>getInitialState<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4a66602/packages/xarc-subapp/src/subapp/types.ts#L228">subapp/types.ts:228</a></li>
-						</ul>
-					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
 					<a name="_xarcv2runtimeinfo" class="tsd-anchor"></a>
@@ -578,7 +645,7 @@
 					<div class="tsd-signature tsd-kind-icon">_xarc<wbr>V2Run<wbr>Time<wbr>Info<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>instId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>md<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>onLoadStart<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>started<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>subApps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4a66602/packages/xarc-subapp/src/subapp/types.ts#L8">subapp/types.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/1e430f93/packages/xarc-subapp/src/subapp/types.ts#L10">subapp/types.ts:10</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -619,19 +686,19 @@
 						<a href="node.html">node</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="node_init_context.html">node/init-<wbr>context</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="node_init_v2.html">node/init-<wbr>v2</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="node_load_v2.html">node/load-<wbr>v2</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="node_ssr_info.html">node/ssr-<wbr>info</a>
+						<a href="node_server_render_pipeline.html">node/server-<wbr>render-<wbr>pipeline</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="node_start_v2.html">node/start-<wbr>v2</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="node_subapp_server.html">node/subapp-<wbr>server</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="node_types.html">node/types</a>
@@ -649,10 +716,19 @@
 						<a href="subapp.html">subapp</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="subapp_client_framework_lib.html">subapp/client-<wbr>framework-<wbr>lib</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="subapp_client_render_pipeline.html">subapp/client-<wbr>render-<wbr>pipeline</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="subapp_envhooks.html">subapp/envhooks</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="subapp_subapp_ready.html">subapp/subapp-<wbr>ready</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="subapp_subapp_render_pipeline.html">subapp/subapp-<wbr>render-<wbr>pipeline</a>
 					</li>
 					<li class="current tsd-kind-module">
 						<a href="subapp_types.html">subapp/types</a>
@@ -663,9 +739,6 @@
 				<ul class="before-current">
 					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="../classes/subapp_types.subappcontainer.html" class="tsd-kind-icon">Sub<wbr>App<wbr>Container</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="../interfaces/subapp_types.frameworklib.html" class="tsd-kind-icon">Framework<wbr>Lib</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="../interfaces/subapp_types.isubappfeature.html" class="tsd-kind-icon">ISub<wbr>App<wbr>Feature</a>
@@ -682,8 +755,17 @@
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
 						<a href="subapp_types.html#loadsubappoptions" class="tsd-kind-icon">Load<wbr>Sub<wbr>App<wbr>Options</a>
 					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="subapp_types.html#mounttype" class="tsd-kind-icon">Mount<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="subapp_types.html#pipelinefactoryparams" class="tsd-kind-icon">Pipeline<wbr>Factory<wbr>Params</a>
+					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="subapp_types.html#subapp" class="tsd-kind-icon">Sub<wbr>App</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="subapp_types.html#subappcsrdata" class="tsd-kind-icon">Sub<wbr>AppCSRData</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
 						<a href="subapp_types.html#subappdef" class="tsd-kind-icon">Sub<wbr>App<wbr>Def</a>
@@ -713,10 +795,7 @@
 						<a href="subapp_types.html#subappssrdata" class="tsd-kind-icon">Sub<wbr>AppSSRData</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="subapp_types.html#subappssrresult" class="tsd-kind-icon">Sub<wbr>AppSSRResult</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="subapp_types.html#subappstartoptions" class="tsd-kind-icon">Sub<wbr>App<wbr>Start<wbr>Options</a>
+						<a href="subapp_types.html#subappstartparams" class="tsd-kind-icon">Sub<wbr>App<wbr>Start<wbr>Params</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
 						<a href="subapp_types.html#_xarcv2runtimeinfo" class="tsd-kind-icon">_xarc<wbr>V2Run<wbr>Time<wbr>Info</a>
