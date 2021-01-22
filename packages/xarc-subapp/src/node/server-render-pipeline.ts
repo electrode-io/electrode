@@ -81,7 +81,7 @@ export class SubAppServerRenderPipeline implements SubAppRenderPipeline {
       ssrContent = `<!-- SSR prepare only for subapp ${name} -->`;
       ssrProps = this.prepResult.props;
     } else if (!this.options.ssr) {
-      ssrContent = `<!-- SSR disabled for subapp ${name} -->`;
+      ssrContent = `<!-- SSR disabled for subapp ${name} --><div id="subapp2-${name}"></div>`;
     } else {
       const ssrResult = this.framework.handleSSRSync(this.ssrData, this.prepResult);
       ssrContent = `<div id="subapp2-${name}">${ssrResult.content}</div>`;
