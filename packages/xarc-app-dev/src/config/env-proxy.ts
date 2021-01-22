@@ -1,5 +1,6 @@
+import { isValidPort } from "../lib/utils";
+
 /* eslint-disable @typescript-eslint/no-var-requires */
-export {};
 
 const { merge } = require("lodash");
 
@@ -12,9 +13,9 @@ module.exports = function getEnvProxy() {
         "ELECTRODE_DEV_HTTPS", // deprecated but still check
         "XARC_DEV_HTTPS"
       ],
-      default: 0,
-      envMap: { true: 443, false: 0 },
-      post: x => x || 0
+      default: -1,
+      envMap: { true: 443, false: -1 },
+      post: x => (isValidPort(x) ? x : -1)
     },
     adminLogLevel: {
       env: [

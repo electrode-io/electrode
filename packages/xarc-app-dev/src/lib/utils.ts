@@ -172,3 +172,12 @@ export function getDevAdminPortFromEnv(fallback?: number): number {
 
   return fromEnv || fallback || 8991;
 }
+
+/**
+ * Check if a port number is valid
+ * @param p - port number
+ * @returns `true` or `false`
+ */
+export const isValidPort = p => {
+  return Number.isInteger(p) && p >= 0 && p < 65536;
+};

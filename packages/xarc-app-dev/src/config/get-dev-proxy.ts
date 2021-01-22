@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires, max-statements, no-console, prefer-const */
 
-import { getDevAdminPortFromEnv } from "../lib/utils";
+import { getDevAdminPortFromEnv, isValidPort } from "../lib/utils";
 
 const Path = require("path");
 const Fs = require("fs");
@@ -81,13 +81,20 @@ module.exports = function createDevProxy() {
   const { elevated } = envProxy;
   const useDevProxy = appPort > 0;
 
-  if (httpsPort) {
+  // auto do https for 443 or 8443
+  if ((httpPort === 443 || httpPort === 8443) && !isValidPort(httpsPort)) {
+    httpsPort = httpPort;
+    protocol = "https";
+    httpPort = appPort !== 3000 ? 3000 : 3300;
+  }
+
+  if (isValidPort(httpsPort)) {
     port = httpsPort;
     protocol = "https";
-  } else if (httpPort === 443) {
-    port = httpsPort = httpPort;
-    httpPort = appPort !== 3000 ? 3000 : 3300;
-    protocol = "https";
+    // avoid http and https conflicting
+    if (httpPort === httpsPort) {
+      httpPort = -1;
+    }
   } else {
     port = httpPort;
     protocol = "http";
@@ -95,11 +102,11 @@ module.exports = function createDevProxy() {
 
   const settings = {
     host,
-    port,
+    port, // the primary port to listen for app, could be http or https
     adminLogLevel,
     appPort,
-    httpPort,
-    httpsPort,
+    httpPort, // the port to always listen on for HTTP
+    httpsPort, // dev proxy actually ignores this
     https: protocol === "https",
     webpackDev,
     webpackDevPort,

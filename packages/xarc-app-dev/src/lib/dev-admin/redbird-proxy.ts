@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/ban-ts-ignore */
-export {};
+import { isValidPort } from "../utils";
 
+/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/ban-ts-ignore */
 /* eslint-disable max-statements, no-process-exit, global-require, no-console */
 
 const assert = require("assert");
@@ -221,9 +221,8 @@ const startProxy = (inOptions = {}) => {
   const options = Object.assign(
     {
       xfwd: false,
-      bunyan: {
-        level: "warn",
-        name: "redbird"
+      pino: {
+        level: "warn"
       },
       resolvers: []
     },
@@ -231,17 +230,46 @@ const startProxy = (inOptions = {}) => {
     inOptions
   );
 
-  const proxyOptions = _.pick(options, ["port", "xfwd", "bunyan", "resolvers"]);
+  const proxyOptions = _.pick(options, ["port", "xfwd", "pino", "resolvers"]);
   const { host, port, protocol } = options;
 
   const ssl = Boolean(options.httpsPort);
+  const enableCdnMock = process.argv.includes("--mock-cdn");
 
-  if (ssl) {
+  let listenReportTimer;
+  const proxyUrls = {} as any;
+  proxyOptions.reportListening = (proto, _port, actualPort) => {
+    proxyUrls[proto] = formUrl({ protocol: proto, host, port: actualPort });
+    console.log(`Electrode dev proxy listening on ${proto} port`, actualPort);
+    clearTimeout(listenReportTimer);
+    listenReportTimer = setTimeout(() => {
+      const mockCdnMsg = enableCdnMock
+        ? `\nMock CDN is enabled (mapping saved to config/assets.json)\n`
+        : "\n";
+      console.log(
+        ck`${mockCdnMsg}${buildProxyTree(options, ["appPort", "webpackDevPort"])}
+View status at <green>${proxyUrls.https || proxyUrls.http}${controlPaths.status}</>`
+      );
+
+      const urlsShow = Object.keys(proxyUrls)
+        .map(x => {
+          return ck`<green>${proxyUrls[x]}</>`;
+        })
+        .join(" or ");
+
+      console.log(ck`You can access your app at ${urlsShow}`);
+    }, 100).unref();
+  };
+
+  const enableSsl = ssl && isValidPort(options.httpsPort);
+
+  if (enableSsl) {
     const proxyCerts = searchSSLCerts();
     assert(proxyCerts.key && proxyCerts.cert, "Dev Proxy can't find SSL key and certs");
+    const httpPort = isValidPort(options.httpPort) ? options.httpPort : -1;
     Object.assign(proxyOptions, {
       // We still setup a regular http rules even if HTTPS is enabled
-      port: options.httpPort,
+      port: httpPort,
       host,
       secure: true,
       ssl: {
@@ -286,13 +314,12 @@ const startProxy = (inOptions = {}) => {
     res.end();
   });
 
-  const enableCdnMock = process.argv.includes("--mock-cdn");
   const noDev = process.argv.includes("--no-dev");
   // register with primary protocol/host/port
-  registerElectrodeDevRules({ ...options, ssl, proxy, restart, enableCdnMock, noDev });
+  registerElectrodeDevRules({ ...options, ssl: enableSsl, proxy, restart, enableCdnMock, noDev });
 
   // if primary protocol is https, then register regular http rules at httpPort
-  if (ssl) {
+  if (enableSsl && isValidPort(options.httpPort)) {
     // @ts-ignore
     registerElectrodeDevRules({
       proxy,
@@ -309,17 +336,6 @@ const startProxy = (inOptions = {}) => {
     console.log("Calling proxy setupRules from your archetype/config/dev-proxy");
     userDevProxy.setupRules(proxy, options);
   }
-
-  const proxyUrl = formUrl({ protocol, host, port: options.port });
-  const mockCdnMsg = enableCdnMock
-    ? `\nMock CDN is enabled (mapping saved to config/assets.json)\n`
-    : "\n";
-  console.log(
-    ck`Electrode dev proxy server running:${mockCdnMsg}
-${buildProxyTree(options, ["appPort", "webpackDevPort"])}
-View status at <green>${proxyUrl}${controlPaths.status}</>`
-  );
-  console.log(ck`You can access your app at <green>${proxyUrl}</>`);
 };
 
 module.exports = startProxy;
