@@ -23,13 +23,12 @@ export const subapp: ReactSubApp = {
       shareStore: true,
       reducers: true, // true => read the reduxReducers export from this file
       prepare: async initialState => {
-        console.log("Home (home.tsx) subapp redux prepare, initialState:", initialState);
         if (initialState) {
           return { initialState };
         } else {
           return {
             initialState: {
-              todos: []
+              todoList: {todos: []}
             }
           };
         }
