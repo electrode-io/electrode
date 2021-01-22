@@ -23,9 +23,7 @@ module.exports = function getEnvBabel() {
       type: "json",
       default: {
         //`default` and `node` targets object is required
-        default: {
-          ie: "8"
-        },
+        default: {},
         node: { node: process.versions.node.split(".")[0] }
       }
     },
