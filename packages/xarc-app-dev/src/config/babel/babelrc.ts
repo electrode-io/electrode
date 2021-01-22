@@ -169,7 +169,10 @@ const target = isNodeTarget ? "node" : babelTarget;
 
 const targets = envTargets[target];
 if (!isJest) {
-  console.log(ck`<orange>Babel preset-env compile targets: </><cyan>${JSON.stringify(targets)}</>`);
+  const srcMsg = _.isEmpty(targets) ? " (will read from '.browserslistrc')" : "";
+  console.log(
+    ck`<orange>Babel preset-env compile targets: </><cyan>${JSON.stringify(targets)}</>${srcMsg}`
+  );
 }
 
 const useBuiltIns =

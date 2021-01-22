@@ -290,10 +290,10 @@ export function loadXarcDevTasks(xrun, userOptions: XarcOptions = {}) {
     Fs.writeFileSync(
       destRcFile,
       `# Browsers that we support
-  last 2 versions
-  ie >= 11
-  > 5%
-  `
+last 2 versions
+ie >= 11
+> 5%
+`
     );
     logger.info(`Generating ${configRcFile} for you - please commit it.`);
   }
