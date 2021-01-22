@@ -165,7 +165,7 @@ const plugins = basePlugins.concat(
     ]
 );
 
-const target = isNodeTarget ? "node" : babelTarget;
+const target = isNodeTarget ? "node" : undefined;
 
 const targets = envTargets[target];
 if (!isJest) {
