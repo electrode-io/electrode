@@ -16,32 +16,53 @@ export type XarcOptions = {
    * port to listen on for serving your application
    *
    * @remarks
-   *  This is what the dev proxy listens on.  Your app server
-   *  listens on a different port that the proxy forwards to.
+   *  In development, this is what the dev proxy listens on.  Your app server
+   *  listens on `appServerPort` that the proxy forwards to.
+   *
+   * - Typical values are `3000` for `HTTP` or `443`/`8443` for `HTTPS`.
    *
    * - **Default: `3000`**
-   * - If it's 443, then automatically enable HTTPS.
+   * - If it's `443` or `8443`, then automatically enable `HTTPS` and try
+   *   to **also** listen on `3000` or `3300` for `http`
+   * - Set it to `0` and the proxy will pick a random port.
+   * - Set it to `-1` to disable `http` and use `httpsPort` to listen on `https` only.
    * - If not set, then check env `PORT`
+   *
+   * @remarks Regarding `HTTPS`:
+   * - If you want full control of `https` and `http` ports, set `httpsPort` and `port`.
+   * - If you set `port` to `443` or `8443`, then dev proxy do `https` on that port, and
+   *   listens on something that doesn't conflict with `appServerPort`, which is
+   *   `3000` or `3300`.
+   * - if `https` is enabled, the dev proxy will always try to listen on `http` also.
+   *
+   * .
    */
   port?: number;
 
   /**
-   * In case you want to serve your app with https on a port other
-   * than 443, then you can set it with this.
+   * Set this to force `https` on the port you want, in case you want to serve your app
+   * with https on a port other than `443` or `8443`.
    *
    * - if not set, then check env then `XARC_DEV_HTTPS`
+   * - Set it to `0` and the proxy will pick a random port for `https`.
+   * - Set to `-1` to force disable `https`
    *
    * @remarks
    * If this is set, it cannot be the same as `port`, which then will be
-   * forced to be HTTP only.
+   * forced to be `http` only.
+   *
+   * .
    */
   httpsPort?: number;
+
   /**
    * Port number for your app server to listen on so the dev proxy
    * can forward request to it.
    *
    * - **Default: `3100`**
    * - If not set, then check env `APP_PORT_FOR_PROXY`, then `APP_SERVER_PORT`
+   *
+   * .
    */
   appServerPort?: number; // renamed from portForProxy
 
