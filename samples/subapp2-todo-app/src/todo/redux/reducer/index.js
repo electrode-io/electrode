@@ -45,5 +45,15 @@ export const reduxReducers = {
         return state || VISIBILITY_FILTERS.ALL;
       }
     }
+  },
+  visibilityFilter: (state, action) => {
+    switch (action.type) {
+      case SET_FILTER: {
+        return action.payload.filter;
+      }
+      default: {
+        return state || VISIBILITY_FILTERS.ALL;
+      }
+    }
   }
 };
