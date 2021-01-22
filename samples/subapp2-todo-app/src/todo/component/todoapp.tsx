@@ -1,6 +1,7 @@
 import { React, ReactSubApp, createDynamicComponent } from "@xarc/react";
 import classNames from "classnames";
 import custom from "../styles/bootstrap.css";
+import VisibilityFilters from "./visibility-filters";
 
 export const TodoInput = createDynamicComponent(
   {
@@ -16,12 +17,15 @@ export const TodoList = createDynamicComponent(
   }
 );
 
+
+
 function TodoApp() {
   return (
     <div>
       <h1 className={classNames(custom["page-header"], custom["text-center"])}>My To-do List</h1>
       <TodoInput />
       <TodoList />
+      <VisibilityFilters />
     </div>
   );
 }

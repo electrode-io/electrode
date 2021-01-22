@@ -1,6 +1,7 @@
-import { React, ReactSubApp, createDynamicComponent, declareSubApp } from "@xarc/react";
+import { React, ReactSubApp } from "@xarc/react";
 import { connect } from "@xarc/react-redux";
 import custom from "../styles/bootstrap.css";
+import { getTodosByVisibilityFilter } from "../redux/selector"
 import { Todo } from "./todo";
 
 const TodoList = ({ todos, dispatch }) => {
@@ -20,7 +21,10 @@ const TodoList = ({ todos, dispatch }) => {
 };
 
 const mapStateToProps = state => {
-  return { todos: state.todoList.todos };
+  const { visibilityFilter } = state;
+  const todos = getTodosByVisibilityFilter(state, visibilityFilter);
+
+  return { todos: todos };
 };
 
 // export default connect(mapStateToProps)(TodoList);

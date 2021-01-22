@@ -1,6 +1,9 @@
 import { React, ReactSubApp, createDynamicComponent } from "@xarc/react";
 import { reduxFeature } from "@xarc/react-redux";
+import { VISIBILITY_FILTERS } from "./constant";
+
 export { reduxReducers } from "./redux/reducer"
+
 
 export const TodoApp = createDynamicComponent(
   {
@@ -28,7 +31,8 @@ export const subapp: ReactSubApp = {
         } else {
           return {
             initialState: {
-              todoList: {todos: []}
+              todoList: {todos: []},
+              visibilityFilter: VISIBILITY_FILTERS.ALL
             }
           };
         }

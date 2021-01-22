@@ -1,4 +1,5 @@
-import { ADD_TODO, TOGGLE_TODO } from "../action";
+import { ADD_TODO, TOGGLE_TODO, SET_FILTER } from "../action";
+import { VISIBILITY_FILTERS } from "../../constant";
 
 export const reduxReducers = {
   todoList: (state, action) => {
@@ -33,6 +34,16 @@ export const reduxReducers = {
       
       default:
         return state || { todos: []};
+    }
+  },
+  visibilityFilter: (state, action) => {
+    switch (action.type) {
+      case SET_FILTER: {
+        return action.payload.filter;
+      }
+      default: {
+        return state || VISIBILITY_FILTERS.ALL;
+      }
     }
   }
 };
