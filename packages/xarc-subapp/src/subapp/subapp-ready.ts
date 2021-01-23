@@ -64,7 +64,7 @@ export function subAppReady(
       if (toWait.length !== container.declareCount) {
         if (callDepth < 15) {
           // just load all new subapps but ignore what's just loaded
-          return subAppReady(true, toWait, callDepth + 1);
+          return subAppReady(true, toWait, callDepth + 1).then(res2 => results.concat(res2));
         } else {
           console.error("subapp ready call nesting too deep", callDepth); // eslint-disable-line no-console
         }
@@ -74,5 +74,6 @@ export function subAppReady(
     })
     .catch(err => {
       console.error("get subapp module failure", err); // eslint-disable-line no-console
+      return [];
     });
 }

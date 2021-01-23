@@ -1,5 +1,7 @@
+import "@xarc/app/runtime-setup";
+
 import { config } from "./config";
-import * as support from "@xarc/app/support";
+import support from "@xarc/app/support";
 const electrodeServer = require("@xarc/fastify-server");
 
 //
@@ -7,6 +9,7 @@ const electrodeServer = require("@xarc/fastify-server");
 //
 import { Provider } from "@xarc/react-redux";
 import { combineReducers, createStore } from "@xarc/react-redux";
+import { Demo3 } from "../home";
 
 import {
   React,
@@ -109,7 +112,7 @@ ${s}
       pageTitle: "subapp2-poc demo",
       subApps: [
         { name: home.name, ssr: true },
-        { name: "demo3", ssr: true, prepareOnly: true, inlineId: "1234" },
+        Demo3.loadOptions,
         { name: "demo4", ssr: true, prepareOnly: true, inlineId: "1234" }
       ],
       templateInserts: {

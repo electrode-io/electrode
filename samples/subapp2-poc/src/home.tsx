@@ -27,7 +27,7 @@ export const demo1B = declareSubApp({
 const Demo1 = createDynamicComponent(demo1, { ssr: true });
 const Demo1B = createDynamicComponent(demo1B, { ssr: true });
 
-const Demo3 = subAppInlineComponent(
+export const Demo3 = subAppInlineComponent(
   declareSubApp({
     name: "demo3",
     getModule: () => import("./demo3")

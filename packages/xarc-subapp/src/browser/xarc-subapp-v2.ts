@@ -40,7 +40,7 @@ export function xarcV2Client(
   const version = 2000000; // ###.###.### major.minor.patch
 
   console.log("xarcV2 version", version);
-  console.debug("xarcV2 debug log", (debugLog = console.debug));
+  console.debug("xarcV2 debug log", (debugLog = console.debug.bind(console)));
 
   if (w.xarcV2 && w.xarcV2.version >= version) return w.xarcV2;
 

@@ -150,8 +150,17 @@ ${body.end}
    */
   async render(options: RenderOptions): Promise<RenderContext> {
     if (!isSubAppReady()) {
+      const ssrNames = this._getSSRSubAppNames();
       // make sure the subapps this render depends on are ready
-      const readyNames = await subAppReady(this._getSSRSubAppNames());
+      const readyNames = await subAppReady(ssrNames);
+      const badNames = ssrNames.filter(sn => !readyNames.includes(sn));
+
+      if (badNames.length > 0) {
+        throw new Error(
+          "PageRenderer.render failed wait ready for these subapps. Please check names in 'subApps' options: " +
+            badNames.join(", ")
+        );
+      }
       // In case there are other subapps that are not ready,
       // asynchronously load all of them
       subAppReady(true, readyNames);

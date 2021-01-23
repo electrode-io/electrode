@@ -21,7 +21,7 @@
     "coverage": "xrun xarc/test-cov"
   },
   "files": [
-    "arch-clap.js",
+    "runtime-setup.js",
     "config",
     "dist",
     "lib",
@@ -40,7 +40,7 @@
     "babel-plugin-react-css-modules": "^5.2.6",
     "css-modules-require-hook": "^4.0.2",
     "ignore-styles": "^5.0.1",
-    "isomorphic-loader": "^4.2.2",
+    "isomorphic-loader": "^4.3.0",
     "optional-require": "^1.0.0",
     "subapp-util": "^1.1.2"
   },

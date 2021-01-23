@@ -114,11 +114,30 @@ export const setupIsomorphicCdnAssetsMapping = (options?: XarcCdnAssetsMappingOp
 
 /**
  * Load the require hook to support isomorphic assets when doing SSR
+ *
+ * @param assetExtensions - when a require file is not found, and its extension is
+ *   in this, then it will be considered an isomorphic asset and an empty `{}` will
+ *   be returned for it to avoid failing with module not found errors.
+ *   - **Default**: `".jpg|.jpeg|.gif|.svg|.png|.css|.less|.styl|.sass|.scss"`
+ *   - set to `false` to disable this and let module not found error to throw
+ *
+ * @returns isomorphic require extender
  */
-export function isomorphicExtendRequire() {
+export function setupIsomorphicLoader(
+  assetExtensions:
+    | false
+    | string
+    | string[] = ".jpg|.jpeg|.gif|.svg|.png|.css|.less|.styl|.sass|.scss"
+) {
+  debugger;
+  if (getXRequire()) {
+    return getXRequire();
+  }
+
   const appSrcDir = (getAppMode().getEnv() || getAppMode().lib.dir).split("/")[0];
   const xReq = extendRequire({
-    appSrcDir
+    appSrcDir,
+    interceptByExts: assetExtensions
   });
 
   setXRequire(xReq);
@@ -260,7 +279,7 @@ export function load(
   let promise;
 
   if (options.isomorphicExtendRequire !== false) {
-    const xReq = isomorphicExtendRequire();
+    const xReq = setupIsomorphicLoader();
     const start = Date.now();
     if (options.awaitReady && !xReq.activated) {
       promise = new Promise((resolve, reject) => {
