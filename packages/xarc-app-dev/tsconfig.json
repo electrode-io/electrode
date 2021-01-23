@@ -13,7 +13,8 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "alwaysStrict": true,
-    "strictFunctionTypes": true
+    "strictFunctionTypes": true,
+    "importHelpers": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "lib", "config", "dist", "src/**/*.js"]

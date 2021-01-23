@@ -36,13 +36,14 @@
     "Joel Chen <xchen@walmartlabs.com>"
   ],
   "dependencies": {
-    "@babel/runtime": "^7.8.3",
+    "@babel/runtime": "^7.12.5",
     "babel-plugin-react-css-modules": "^5.2.6",
     "css-modules-require-hook": "^4.0.2",
     "ignore-styles": "^5.0.1",
     "isomorphic-loader": "^4.3.0",
     "optional-require": "^1.0.0",
-    "subapp-util": "^1.1.2"
+    "subapp-util": "^1.1.2",
+    "tslib": "^2.1.0"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",

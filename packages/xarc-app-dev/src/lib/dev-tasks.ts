@@ -20,12 +20,14 @@ const { getWebpackStartConfig, setWebpackProfile } = require("@xarc/webpack/lib/
 const chokidar = require("chokidar");
 const { spawn } = require("child_process");
 const scanDir = require("filter-scan-dir");
+import * as _ from "lodash";
 
 const xsh = require("xsh");
 const logger = require("./logger");
 import { createGitIgnoreDir } from "./utils";
 import { jestTestDirectories } from "./tasks/constants";
 import { eslintTasks } from "./tasks/eslint";
+import { updateAppDep } from "./tasks/package-json";
 
 export { xclap };
 
@@ -297,6 +299,8 @@ ie >= 11
     );
     logger.info(`Generating ${configRcFile} for you - please commit it.`);
   }
+
+  updateAppDep(xarcCwd);
 
   /*
    *

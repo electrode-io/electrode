@@ -134,7 +134,7 @@ const basePlugins = [
   // ],
   !isNodeTarget && "transform-node-env-inline",
   !isNodeTarget && "babel-plugin-lodash",
-  !isNodeTarget && "@babel/plugin-transform-runtime",
+  "@babel/plugin-transform-runtime",
   addFlowPlugin && [
     "@babel/plugin-transform-flow-strip-types",
     { requireDirective: flowRequireDirective, ...enableFlow }
