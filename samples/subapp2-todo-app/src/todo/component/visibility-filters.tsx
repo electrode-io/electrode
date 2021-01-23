@@ -3,7 +3,7 @@ import { connect } from "@xarc/react-redux";
 import classNames from "classnames";
 import { setFilter } from "../redux/action";
 import { VISIBILITY_FILTERS } from "../constant";
-import custom from "../styles/bootstrap.css";
+const custom = require('../styles/bootstrap.css');
 
 const VisibilityFilters = ({ dispatch, activeFilter }) => {
   return (
