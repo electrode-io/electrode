@@ -1,6 +1,6 @@
 import { React, ReactSubApp, createDynamicComponent } from "@xarc/react";
 import classNames from "classnames";
-import custom from "../styles/bootstrap.css";
+const custom = require("../styles/bootstrap.css");
 import VisibilityFilters from "./visibility-filters";
 
 export const TodoInput = createDynamicComponent({

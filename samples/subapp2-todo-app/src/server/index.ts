@@ -1,9 +1,7 @@
 import { PageRenderer } from "@xarc/react";
 import { load } from "@xarc/app/support";
-const electrodeServer = require("@xarc/fastify-server");
-
+import electrodeServer from "@xarc/fastify-server";
 import { config } from "./config";
-// import { Demo2, home,  } from "../app";
 import { Todo } from "../app";
 
 async function start() {
@@ -23,7 +21,7 @@ async function start() {
       try {
         if (!homeRenderer) {
           homeRenderer = new PageRenderer({
-            pageTitle: "xarc React App demo",
+            pageTitle: "Electrode X Redux ToDo demo",
             subApps: [
               // { name: home.name, ssr: true },
               // { name: Demo2.name, ssr: true }

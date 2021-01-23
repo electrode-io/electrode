@@ -2,7 +2,7 @@ import { React, ReactSubApp } from "@xarc/react";
 import { connect } from "@xarc/react-redux";
 import { addTodo } from "../redux/action";
 import classNames from "classnames";
-import custom from "../styles/bootstrap.css";
+const custom = require("../styles/bootstrap.css");
 
 const TodoInput = props => {
   const [input, setInput] = React.useState("");

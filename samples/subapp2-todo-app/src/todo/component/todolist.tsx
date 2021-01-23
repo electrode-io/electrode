@@ -1,6 +1,6 @@
 import { React, ReactSubApp } from "@xarc/react";
 import { connect } from "@xarc/react-redux";
-import custom from "../styles/bootstrap.css";
+const custom = require("../styles/bootstrap.css");
 import { getTodosByVisibilityFilter } from "../redux/selector";
 import { Todo } from "./todo";
 
