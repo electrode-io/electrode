@@ -48,7 +48,10 @@ export const loadPkgJson = (dir: string) => {
  * @returns none
  */
 export const savePkgJson = (dir: string, pkgJson: any) => {
-  return Fs.writeFileSync(Path.resolve(dir, "package.json"), JSON.stringify(pkgJson, null, 2));
+  return Fs.writeFileSync(
+    Path.resolve(dir, "package.json"),
+    `${JSON.stringify(pkgJson, null, 2)}\n`
+  );
 };
 
 /* eslint-disable @typescript-eslint/no-var-requires */
