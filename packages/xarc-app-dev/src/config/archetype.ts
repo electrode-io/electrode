@@ -41,7 +41,7 @@ module.exports = function getDevOptions(userOptions: XarcOptions = null) {
 
   userOptions = _.merge({}, xarcOptions, userOptions);
 
-  //checking for cwd from xclap or from env
+  // checking for cwd from options or from env
   const cwd = userOptions.cwd || process.env.XARC_CWD || process.cwd();
   process.env.XARC_CWD = cwd;
 

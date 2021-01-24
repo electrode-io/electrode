@@ -96,7 +96,6 @@
     "webpack-hot-middleware": "^2.25.0",
     "winston": "^2.4.4",
     "xaa": "^1.6.0",
-    "xclap": "^0.2.53",
     "xenv-config": "^1.3.1",
     "xsh": "^0.4.5"
   },
@@ -111,7 +110,7 @@
     "@typescript-eslint/parser": "^2.21.0",
     "@xarc/app": "^8.2.4",
     "@xarc/module-dev": "^2.2.3",
-    "@xarc/run": "^1.0.3",
+    "@xarc/run": "^1.0.4",
     "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
     "e1": "./e1",

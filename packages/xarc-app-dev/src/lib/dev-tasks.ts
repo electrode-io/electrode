@@ -10,7 +10,7 @@ const Path = require("path");
 const assert = require("assert");
 const requireAt = require("require-at");
 const optionalRequire = require("optional-require")(require);
-const xclap = require("xclap");
+const xrun = require("@xarc/run");
 const getDevOptions = require("../config/archetype");
 const ck = require("chalker");
 const xaa = require("xaa");
@@ -29,7 +29,12 @@ import { jestTestDirectories } from "./tasks/constants";
 import { eslintTasks } from "./tasks/eslint";
 import { updateAppDep } from "./tasks/package-json";
 
-export { xclap };
+export {
+  /** The task runner @xarc/run */
+  xrun,
+  /** The task runner @xarc/run */
+  xrun as xclap
+};
 
 let xarcCwd: string;
 
@@ -73,14 +78,14 @@ function setWebpackDev() {
 export { XarcOptions } from "../config/opt2/xarc-options";
 
 /**
- * Get the dev task runner (xclap) from Electrode module's perspective.
+ * Get the dev task runner (@xarc/run) from Electrode module's perspective.
  *
  * @param cwd - current working dir for your app - default to `process.cwd()`
  *
- * @returns the instance of xclap that's required
+ * @returns the instance of @xarc/run that's required
  */
 export const getDevTaskRunner = (cwd: string = process.cwd()) => {
-  return requireAt(cwd)("xclap") || require("xclap");
+  return requireAt(cwd)("@xarc/run") || require("@xarc/run");
 };
 
 /**
@@ -94,20 +99,20 @@ export const getDevTaskRunner = (cwd: string = process.cwd()) => {
  * ```js
  * import { getDevTaskRunner, loadXarcDevTasks } from "@xarc/app-dev/lib/dev-tasks"
  *
- * const xclap = getDevTaskRunner();
+ * const xrun = getDevTaskRunner();
  *
- * xclap.load("user", {
- *   check: xclap.exec("echo my custom check task")
+ * xrun.load("user", {
+ *   check: xrun.exec("echo my custom check task")
  * });
  *
  * loadXarcDevTasks();
  * ```
  *
- * @param  xrun - `@xarc/run` (or xclap) task runner.  pass `null` and an
+ * @param  xrun - `@xarc/run` task runner.  pass `null` and an
  *   internal version will be used.
  * @param  userOptions user provided options to configure features etc
  *
- * @returns The xclap task runner instance that was used.
+ * @returns The `@xarc/run` task runner instance that was used.
  */
 export function loadXarcDevTasks(xrun, userOptions: XarcOptions = {}) {
   let xarcOptions = getDevOptions(userOptions);
@@ -150,7 +155,10 @@ export function loadXarcDevTasks(xrun, userOptions: XarcOptions = {}) {
         const run = msg => {
           child = true;
           console.log(`${msg} '${cmd}'`);
-          const ch = spawn(cmd, { shell: true, stdio: "inherit" });
+          const ch = spawn(cmd, {
+            shell: true,
+            stdio: "inherit"
+          });
           ch.on("close", () => {
             if (child === "restart") {
               run("Restarting");
@@ -306,7 +314,7 @@ ie >= 11
    *
    * For information on how to specify a task, see:
    *
-   * https://www.npmjs.com/package/xclap
+   * https://www.npmjs.com/package/`@xarc/run`
    *
    */
 
@@ -316,8 +324,7 @@ ie >= 11
   // - when invoking tasks in [], starting name with ? means optional (ie: won't fail if task not found)
 
   // eslint-disable-next-line complexity
-  function makeTasks(xclap2) {
-    assert(xclap2.concurrent, "xclap version must be 0.2.28+");
+  function makeTasks(xrun2) {
     process.env.ENABLE_KARMA_COV = "false";
 
     const checkFrontendCov = (minimum = "5") => {
@@ -489,7 +496,7 @@ module.exports = {
       "ss-prod-react": {
         desc: `Make optimized copy of react&react-dom for server side in dir ${xarcOptions.prodModulesDir}`,
         dep: [".ss-clean.prod-react", ".mk-prod-dir"],
-        task: xclap2.concurrent(".ss-prod-react", ".ss-prod-react-dom")
+        task: xrun2.concurrent(".ss-prod-react", ".ss-prod-react-dom")
       },
 
       "build-dist-dll": () => undefined,
@@ -498,17 +505,23 @@ module.exports = {
       "build-dist-min": {
         dep: [".production-env", () => setWebpackProfile("production")],
         desc: "build dist for production",
-        task: xclap2.concurrent(
+        task: xrun2.concurrent(
           babelEnvTargetsArr.map((name, index) =>
-            xclap2.exec(
+            xrun2.exec(
               [
                 `${webpackCmd()} --config`,
                 quote(getWebpackStartConfig("webpack.config.js")),
                 `--colors --display-error-details`
               ],
               {
-                xclap: { delayRunMs: index * 2000 },
-                execOptions: { env: { ENV_TARGET: name } }
+                xclap: {
+                  delayRunMs: index * 2000
+                },
+                execOptions: {
+                  env: {
+                    ENV_TARGET: name
+                  }
+                }
               }
             )
           )
@@ -565,16 +578,22 @@ module.exports = {
             // add `targets` field to `dist-X/isomorphic-assets.json`
             const isomorphicPath = Path.resolve(xarcCwd, dir, "isomorphic-assets.json");
             if (Fs.existsSync(isomorphicPath)) {
-              Fs.readFile(isomorphicPath, { encoding: "utf8" }, (err, data) => {
-                if (err) throw err;
-                const assetsJson = JSON.parse(data);
-                const { envTargets } = xarcOptions.babel;
-                assetsJson.targets = envTargets[dir.split("-")[1]];
-                // eslint-disable-next-line no-shadow
-                Fs.writeFile(isomorphicPath, JSON.stringify(assetsJson, null, 2), err => {
+              Fs.readFile(
+                isomorphicPath,
+                {
+                  encoding: "utf8"
+                },
+                (err, data) => {
                   if (err) throw err;
-                });
-              });
+                  const assetsJson = JSON.parse(data);
+                  const { envTargets } = xarcOptions.babel;
+                  assetsJson.targets = envTargets[dir.split("-")[1]];
+                  // eslint-disable-next-line no-shadow
+                  Fs.writeFile(isomorphicPath, JSON.stringify(assetsJson, null, 2), err => {
+                    if (err) throw err;
+                  });
+                }
+              );
             }
           });
           return;
@@ -651,7 +670,7 @@ module.exports = {
           ".mk.lib.server.dir",
           ".build.babelrc"
         ],
-        task: xclap2.exec(
+        task: xrun2.exec(
           [
             `babel ${AppMode.src.dir}`,
             `--out-dir=${AppMode.lib.dir}`,
@@ -659,7 +678,11 @@ module.exports = {
             `--source-maps=inline --copy-files`,
             `--verbose --ignore=${babelCliIgnore}`
           ],
-          { env: { XARC_BABEL_TARGET: "node" } }
+          {
+            env: {
+              XARC_BABEL_TARGET: "node"
+            }
+          }
         ),
         finally: [".build-lib:delete-babel-ignored-files"]
       },
@@ -746,11 +769,18 @@ module.exports = {
         - NODE_ENV is set to 'production' if it's not set.
         - options: [all options will be passed to node when starting your app server]`,
         task(context) {
-          xclap.updateEnv({ NODE_ENV: "production" }, { override: false });
+          xrun.updateEnv(
+            {
+              NODE_ENV: "production"
+            },
+            {
+              override: false
+            }
+          );
 
-          const mockTask = xclap2.concurrent([
+          const mockTask = xrun2.concurrent([
             "dev-proxy --mock-cdn --no-dev",
-            xclap2.serial(
+            xrun2.serial(
               () => xaa.delay(500),
               () =>
                 watchExec(
@@ -762,14 +792,14 @@ module.exports = {
 
           if (!Fs.existsSync("dist")) {
             console.log("dist does not exist, running build task first.");
-            return xclap2.serial(
+            return xrun2.serial(
               "build",
               () => console.log("build completed, starting mock prod mode with proxy"),
               mockTask
             );
           }
 
-          return xclap2.serial(() => console.log("dist exist, skipping build task"), mockTask);
+          return xrun2.serial(() => console.log("dist exist, skipping build task"), mockTask);
         }
       },
 
@@ -912,8 +942,8 @@ You only need to run this if you are doing something not through the xarc tasks.
         }
       },
 
-      "test-server": xclap2.concurrent(["lint-server", "lint-server-test"], "test-server-cov"),
-      "test-watch-all": xclap2.concurrent("server-admin.test", "test-frontend-dev-watch"),
+      "test-server": xrun2.concurrent(["lint-server", "lint-server-test"], "test-server-cov"),
+      "test-watch-all": xrun2.concurrent("server-admin.test", "test-frontend-dev-watch"),
 
       "test-ci": ["test-frontend-ci"],
       "test-cov": [
@@ -1009,7 +1039,7 @@ You only need to run this if you are doing something not through the xarc tasks.
       });
     }
 
-    Object.assign(tasks, eslintTasks(xarcOptions, xclap2));
+    Object.assign(tasks, eslintTasks(xarcOptions, xrun2));
 
     if (xarcOptions.options.karma) {
       const noSingleRun = process.argv.indexOf("--no-single-run") >= 0 ? "--no-single-run" : "";

@@ -82,7 +82,7 @@ function eslintDisabledTasks() {
 /**
  * Generate legacy tasks that were for eslint-4.0, messy, no JS config support etc
  */
-export function eslint4Tasks(xarcOptions: any, xclap: any) {
+export function eslint4Tasks(xarcOptions: any, xrun: any) {
   const AppMode = xarcOptions.AppMode;
   const tasks = {};
 
@@ -112,7 +112,7 @@ export function eslint4Tasks(xarcOptions: any, xclap: any) {
   ].filter(x => x);
 
   Object.assign(tasks, {
-    lint: xclap.concurrent(...lintTasks),
+    lint: xrun.concurrent(...lintTasks),
 
     "lint-client": {
       desc: "Run eslint on code in src/client and templates with react rules (ignore src/server)",
@@ -183,7 +183,7 @@ export function eslint4Tasks(xarcOptions: any, xclap: any) {
 /**
  * Generate tasks for eslint-7.0
  */
-export function eslint7Tasks(xarcOptions: any, xclap: any) {
+export function eslint7Tasks(xarcOptions: any, xrun: any) {
   if (!xarcOptions.options.eslint) {
     return eslintDisabledTasks();
   }
@@ -207,22 +207,22 @@ export function eslint7Tasks(xarcOptions: any, xclap: any) {
           })
           .filter(x => x)
           .join(" ");
-        return xclap.exec(`eslint --ext .js,.ts,.jsx,.tsx ${validDirs}`);
+        return xrun.exec(`eslint --ext .js,.ts,.jsx,.tsx ${validDirs}`);
       }
     }
   };
 }
 
-export function eslintTasks(xarcOptions: any, xclap: any) {
+export function eslintTasks(xarcOptions: any, xrun: any) {
   //
   const xarcOptPkg = optionalRequire("@xarc/opt-eslint/package.json");
   if (xarcOptPkg) {
     const version = parseInt(xarcOptPkg.version.split(".")[0]);
 
     if (version >= 2) {
-      return eslint7Tasks(xarcOptions, xclap);
+      return eslint7Tasks(xarcOptions, xrun);
     }
   }
 
-  return eslint4Tasks(xarcOptions, xclap);
+  return eslint4Tasks(xarcOptions, xrun);
 }
