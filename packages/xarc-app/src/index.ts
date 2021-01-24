@@ -11,48 +11,25 @@ const Path = require("path");
 const constants = require("../lib/constants");
 const logger = require("../lib/logger");
 const devArchetype = optionalRequire("@xarc/app-dev/config/archetype");
+const devRequire = optionalRequire("@xarc/app-dev/require");
+const optionalDevRequire = require("optional-require")(devRequire);
 
 let AppMode;
 
+function getXarcDev() {
+  return devArchetype ? devArchetype() : {};
+}
+
 function getAppMode() {
   if (!AppMode) {
-    AppMode = devArchetype ? devArchetype().AppMode : makeAppMode(constants.PROD_DIR);
+    AppMode = getXarcDev().AppMode || makeAppMode(constants.PROD_DIR);
   }
 
   return AppMode;
 }
 
 function getXarcCwd() {
-  const archetype = devArchetype && devArchetype();
-  return (archetype && archetype.cwd) || process.env.XARC_CWD || process.cwd();
-}
-
-/**
- * Load CSS module run time hook
- *
- * @param options - options for the hook
- */
-export function cssModuleHook(
-  options: {
-    /**
-     * template for scope name to generate, default: "[hash:base64]"
-     */
-    generateScopedName?: string;
-    /**
-     * rootDir - src or lib in production
-     */
-    rootDir?: string;
-    /**
-     * any other options for css-modules-require-hook
-     */
-    [key: string]: any;
-  } = {}
-) {
-  const defaultRootDirPath = process.env.NODE_ENV === "production" ? "lib" : "src";
-  options.generateScopedName = options.generateScopedName || "[hash:base64]";
-  options.rootDir = options.rootDir || Path.resolve(getXarcCwd(), defaultRootDirPath);
-
-  require("css-modules-require-hook")(options);
+  return getXarcDev().cwd || process.env.XARC_CWD || process.cwd();
 }
 
 /**
@@ -80,7 +57,14 @@ export type XarcCdnAssetsMappingOptions = {
   prodOnly?: boolean;
 };
 
+/**
+ * Setup assets mapping to CDN URLs
+ *
+ * @param options - asset mapping options
+ * @returns nothing
+ */
 export const setupIsomorphicCdnAssetsMapping = (options?: XarcCdnAssetsMappingOptions) => {
+  // only setup CDN mapping for production mode
   if (!options || (options.prodOnly && process.env.NODE_ENV !== "production")) {
     return;
   }
@@ -155,18 +139,6 @@ type XarcSupportOptions = {
    */
   babelRegister?: any;
   /**
-   * - boolean: if true, then load and setup CSS module runtime for node.js
-   * - object: options to be passed to cssModuleHook
-   */
-  cssModuleHook?: boolean | object;
-  /**
-   * if no CSS module hook, then a default ignore hook is load to avoid errors
-   * when trying to load CSS modules.
-   *
-   * Set this to false to avoid loading the ignore hook.
-   */
-  ignoreStyles?: boolean;
-  /**
    * Set to false to avoid loading node.js require hook to handle isomorphic assets.
    */
   isomorphicExtendRequire?: boolean;
@@ -207,12 +179,11 @@ export function load(
   options: XarcSupportOptions = {}
 ): Promise<any> {
   if (options.babelRegister) {
-    const babelRegister = optionalRequire("@babel/register");
+    const babelRegister = optionalDevRequire("@babel/register");
     if (!babelRegister) {
-      console.log(
-        "To use @babel/register mode, you need to install the @babel/register and support modules."
+      console.error(
+        "To use @babel/register mode, you need to install @xarc/app-dev in devDependencies."
       );
-      console.log("Please see documentation for more details.");
       return process.exit(1);
     }
     const regOptions = Object.assign(
@@ -227,53 +198,6 @@ export function load(
     );
     logger.info(`The transpilation only occurs the first time you load a file.`);
     babelRegister(regOptions);
-  }
-
-  /**
-   * Any app that needs CSS module support has to set this flag when calling
-   * support.  We can't default this to enabled because it would break apps
-   * that doesn't use CSS modules.
-   *
-   * css-modules-require-hook: handle css-modules on node.js server.
-   * similar to Babel's babel/register it compiles CSS modules in runtime.
-   *
-   * generateScopedName - Short alias for the postcss-modules-scope plugin's option.
-   * Helps you to specify the custom way to build generic names for the class selectors.
-   * You may also use a string pattern similar to the webpack's css-loader.
-   *
-   * https://github.com/css-modules/css-modules-require-hook#generatescopedname-function
-   * https://github.com/webpack/css-loader#local-scope
-   * https://github.com/css-modules/postcss-modules-scope
-   */
-  if (options.cssModuleHook === true || Object.keys(options.cssModuleHook || {}).length > 0) {
-    const opts = Object.assign(
-      {
-        generateScopedName: `${
-          process.env.NODE_ENV === "production" ? "" : "[name]__[local]___"
-        }[hash:base64:5]`,
-        extensions: [".scss", ".styl", ".less", ".css"],
-        preprocessCss: function(css, filename) {
-          if (filename.endsWith(".styl")) {
-            return require("stylus")(css)
-              .set("filename", filename)
-              .render();
-          } else if (filename.endsWith(".scss")) {
-            return require("node-sass").renderSync({
-              css,
-              file: filename
-            }).css;
-          } else {
-            return css;
-          }
-        },
-        processorOpts: { parser: require("postcss-less").parse }
-      },
-      options.cssModuleHook || {}
-    );
-
-    cssModuleHook(opts);
-  } else if (options.ignoreStyles !== false) {
-    optionalRequire("ignore-styles");
   }
 
   let promise;

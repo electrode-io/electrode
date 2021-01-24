@@ -37,9 +37,6 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.12.5",
-    "babel-plugin-react-css-modules": "^5.2.6",
-    "css-modules-require-hook": "^4.0.2",
-    "ignore-styles": "^5.0.1",
     "isomorphic-loader": "^4.4.0",
     "optional-require": "^1.0.0",
     "subapp-util": "^1.1.2",
@@ -108,12 +105,6 @@
     "lines": 0,
     "cache": false
   },
-  "fyn": {
-    "dependencies": {
-      "subapp-util": "../subapp-util"
-    },
-    "devDependencies": {}
-  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
@@ -139,5 +130,10 @@
       "@xarc/module-dev/config/test/setup.js"
     ],
     "recursive": true
+  },
+  "fyn": {
+    "dependencies": {
+      "subapp-util": "../subapp-util"
+    }
   }
 }
