@@ -6,13 +6,7 @@ export const testFetch = async ({ queryKey }) => {
 
 export const prefetchQuery = async ({ queryClient }) => {
   await queryClient.prefetchQuery("test", testFetch);
-
-  const x = {
-    queryClient,
-    dehydratedState: dehydrate(queryClient)
-  };
-
+  const dehydratedState = dehydrate(queryClient);
   queryClient.resetQueries();
-
-  return x;
+  return { queryClient, dehydratedState };
 };
