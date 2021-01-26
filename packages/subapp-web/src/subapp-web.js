@@ -1,6 +1,6 @@
 // xarc subapp client side lib version 1
 // load into window.xarcV1 as a global
-(function(w) {
+(function (w) {
   if (!w._wml) {
     w._wml = {};
   }
@@ -379,7 +379,7 @@
         loadjs(new_assets, id, {
           success: () => {
             console.log(`loaded asset for ${name} (id: ${id}) - ${assets}`);
-            runtimeInfo.bundles[id]++;
+            xv1.setBundle(id, 1, namespace);
             afterLoad();
           },
           error: () => {

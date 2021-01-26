@@ -23,7 +23,7 @@ export function loadSubApp(info, renderStart, options) {
 
   // mark the subapp's webpack bundle as loaded
   if (!xarc.getBundle(name, ns)) {
-    xarc.setBundle(name, true, ns);
+    xarc.setBundle(name, 1, ns);
   }
 
   // subapp already loaded, do nothing and return the info

@@ -47,6 +47,8 @@ module.exports = function setup(setupContext) {
     ? Fs.readFileSync(Path.join(__dirname, distDir, "webpack4-jsonp.js")).toString()
     : "";
 
+  const namespace = _.get(setupContext, "routeOptions.namespace");
+
   let inlineRuntimeJS = "";
   let runtimeEntryPoints = [];
   if (process.env.NODE_ENV === "production") {
@@ -63,10 +65,14 @@ module.exports = function setup(setupContext) {
         .replace(/\/\/#\ssourceMappingURL=.*$/, "") +
       "/*rt*/";
 
-    inlineRuntimeJS += `\nwindow.xarcV1.markBundlesLoaded(${JSON.stringify(runtimeEntryPoints)});`;
+    inlineRuntimeJS += `\nwindow.xarcV1.markBundlesLoaded(${JSON.stringify(runtimeEntryPoints)}${
+      namespace ? ", " + JSON.stringify(namespace) : ""
+    });`;
   }
 
-  const webSubAppJs = `<script id="bundleAssets" type="application/json">
+  const scriptId = namespace ? namespace : "bundle";
+
+  const webSubAppJs = `<script id="${scriptId}Assets" type="application/json">
 ${JSON.stringify(bundleAssets)}
 </script>
 <script>/*LJ*/${loadJs}/*LJ*/

@@ -331,12 +331,16 @@ ${stack}`,
       };
 
       const processSubapp = async () => {
+        const namespace = setupContext.routeOptions.namespace;
+
         context.user.numOfSubapps++;
         const { bundles, scripts, preLoads } = await prepareSubAppSplitBundles(context);
         outputSpot.add(`${comment}`);
         if (bundles.length > 0) {
           outputSpot.add(`${scripts}
-<script>${xarc}.markBundlesLoaded(${JSON.stringify(bundles)});</script>
+<script>${xarc}.markBundlesLoaded(${JSON.stringify(bundles)}${
+            namespace ? ", " + JSON.stringify(namespace) : ""
+          });</script>
 `);
         }
         if (preLoads.length > 0) {
