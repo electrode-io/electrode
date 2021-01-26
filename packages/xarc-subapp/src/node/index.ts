@@ -4,7 +4,8 @@ import {
   envHooks,
   SubAppDef,
   SubAppContainer,
-  PipelineFactoryParams
+  PipelineFactoryParams,
+  SubAppRenderPipeline
 } from "../subapp/index";
 import { SubAppServerRenderPipeline } from "./server-render-pipeline";
 import { SSR_PIPELINES } from "./utils";

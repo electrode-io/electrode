@@ -6,11 +6,11 @@ import { generateNonce } from "./utils";
 /**
  * Initialize all the up front code required for running subapps in the browser.
  *
- * @param setupContext - context for setup
+ * @param _setupContext - context for setup
  * @param setupToken - token for setup
  * @returns data with template process callback
  */
-export function initContext(setupContext: any, setupToken: Partial<{ props: InitProps }>) {
+export function initContext(_setupContext: any, setupToken: Partial<{ props: InitProps }>): any {
   return {
     process(context) {
       const { attr: scriptNonceAttr, nonce: scriptNonce } = generateNonce(

@@ -3,9 +3,12 @@
 /* global globalThis */
 
 import { XarcSubAppClientV2, CDNData } from "../subapp/index";
-//
-// add CDN mapping support to xarc subapp client side lib
-//
+
+/**
+ * add CDN mapping support to xarc subapp client side lib
+ *
+ * @param w window object
+ */
 export function xarcCdnMap(
   w: Window &
     typeof globalThis & {

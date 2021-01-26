@@ -2,7 +2,7 @@ import { declareSubApp, getContainer } from "../../../src/node/index";
 import { describe, it } from "mocha";
 import { expect } from "chai";
 
-describe("declareSubApp", function () {
+describe("declareSubApp", () => {
   it("should add the subapp into container", async () => {
     const container = getContainer();
 

@@ -11,7 +11,7 @@
  *
  * @param w - window object
  */
-export function webpack4JsonP(w: any) {
+export function webpack4JsonP(w: any): any {
   /* eslint-disable-next-line camelcase */
   w.__webpack_get_script_src__ = (chunkId: any, publicPath: string, originalSrc: string) => {
     console.debug("webpack4JsonP", chunkId, publicPath, originalSrc); // eslint-disable-line

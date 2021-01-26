@@ -1,3 +1,3 @@
 export const subapp = {
-  Component: () => "hello"
+  Component: ():string => "hello"
 };
