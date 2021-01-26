@@ -1,3 +1,4 @@
+/* eslint-disable prefer-arrow-callback */
 //
 import { reactQueryFeature } from "../../src/browser/index";
 import { describe, it } from "mocha";
@@ -6,7 +7,7 @@ import React from "react";
 import { SubAppDef, envHooks } from "@xarc/subapp";
 import { SubAppContainer } from "@xarc/subapp";
 
-describe("reactQueryFeature", function () {
+describe("reactQueryFeature browser", function () {
   it("should return a feature factory", async () => {
     const factory = reactQueryFeature({ React });
     expect(factory.id).equal("state-provider");
