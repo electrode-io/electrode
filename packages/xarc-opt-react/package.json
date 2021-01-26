@@ -14,6 +14,10 @@
   "files": [
     "xarc-opt-check.js"
   ],
+  "engines": {
+    "node": ">= 12",
+    "npm": ">= 6"
+  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
@@ -30,8 +34,8 @@
     "prepare": "shx cp node_modules/opt-archetype-check/xarc-opt-check.js ."
   },
   "dependencies": {
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react": ">= 16",
+    "react-dom": ">= 16"
   },
   "devDependencies": {
     "opt-archetype-check": "../opt-archetype-check",

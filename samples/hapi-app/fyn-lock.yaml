@@ -1325,7 +1325,7 @@ $pkg:
 '@babel/runtime':
  _latest: 7.12.5
  _:
-  '^7.1.2,^7.12.1,^7.7.7,^7.8.3,^7.8.4': 7.12.5
+  '^7.1.2,^7.12.1,^7.12.5,^7.7.7,^7.8.4': 7.12.5
  7.12.5:
   $: sha512-plcc+hbExy3McchJCEQG3knOsuh3HH+Prx1P6cLIkET/0dLuQDEnrT+s27Axgc9bqfsmNUNHfscgMUdBpC9xfg==
   _: 'https://npme.walmart.com/@babel/runtime/-/runtime-7.12.5.tgz'
@@ -2165,13 +2165,11 @@ $pkg:
   $: local
   _: ../../packages/xarc-app
   dependencies:
-   '@babel/runtime': ^7.8.3
-   babel-plugin-react-css-modules: ^5.2.6
-   css-modules-require-hook: ^4.0.2
-   ignore-styles: ^5.0.1
-   isomorphic-loader: ^4.2.2
+   '@babel/runtime': ^7.12.5
+   isomorphic-loader: ^4.3.0
    optional-require: ^1.0.0
    subapp-util: ^1.1.2
+   tslib: ^2.1.0
 '@xarc/app-dev':
  _latest: 8.2.2-fynlocal_h
  _:
@@ -2195,19 +2193,20 @@ $pkg:
    '@babel/register': ^7.0.0
    '@jchip/redbird': ^1.2.2
    '@loadable/babel-plugin': ^5.10.0
+   '@xarc/run': ^1.0.4
    '@xarc/subapp': ^0.1.3
    '@xarc/webpack': ^9.1.0
    ansi-to-html: ^0.6.8
    babel-plugin-dynamic-import-node: ^2.2.0
    babel-plugin-lodash: ^3.3.4
    babel-plugin-minify-dead-code-elimination: ^0.5.0
+   babel-plugin-react-css-modules: ^5.2.6
    babel-plugin-transform-node-env-inline: ^0.4.3
    babel-plugin-transform-react-remove-prop-types: ^0.4.20
    boxen: ^4.2.0
    chalker: ^1.2.0
    chokidar: ^3.4.1
    core-js: ^3.6.5
-   electrode-hapi-compat: ^1.3.3
    electrode-node-resolver: ^2.0.2
    fast-async: ^7.0.5
    filter-scan-dir: ^1.0.10
@@ -2232,12 +2231,12 @@ $pkg:
    serve-index-fs: ^1.10.1
    subapp-util: ^1.1.2
    sudo-prompt: ^8.2.5
+   tslib: ^2.1.0
    visual-logger: ^1.1.3
    webpack-dev-middleware: ^3.7.2
    webpack-hot-middleware: ^2.25.0
    winston: ^2.4.4
-   xaa: ^1.6.0
-   xclap: ^0.2.53
+   xaa: ^1.6.1
    xenv-config: ^1.3.1
    xsh: ^0.4.5
   peerDependencies:
@@ -2349,8 +2348,8 @@ $pkg:
   $: local
   _: ../../packages/xarc-opt-react
   dependencies:
-   react: ^16.0.0
-   react-dom: ^16.0.0
+   react: '>= 16'
+   react-dom: '>= 16'
 '@xarc/opt-sass':
  _latest: 1.0.0-fynlocal_h
  _:
@@ -2405,10 +2404,10 @@ $pkg:
 '@xarc/run':
  _latest: 1.0.4
  _:
-  ^1.0.2: 1.0.4
+  ^1.0.4: 1.0.4
  1.0.4:
   $: sha512-9OsnvjhjYpS6IV4zj1nov2QN0ZoyQC2l+XlNGzmrsjUvRgKKype/wlCYu2JBr9QtM1CkhdCNwwnBaGPwWWGa8Q==
-  _: 'https://npme.walmart.com/@xarc/run/-/run-1.0.4.tgz'
+  _: 'https://registry.npmjs.org/@xarc/run/-/run-1.0.4.tgz'
   dependencies:
    chalk: ^4.1.0
    chalker: ^1.2.0
@@ -4468,26 +4467,6 @@ css-modules-loader-core:
    postcss-modules-local-by-default: 1.2.0
    postcss-modules-scope: 1.1.0
    postcss-modules-values: 1.3.0
-css-modules-require-hook:
- _latest: 4.2.3
- _:
-  ^4.0.2: 4.2.3
- 4.2.3:
-  $: sha1-Z5LKQSsV4j5vm+agfc739Xf/kE0=
-  _: 'https://npme.walmart.com/css-modules-require-hook/-/css-modules-require-hook-4.2.3.tgz'
-  dependencies:
-   debug: ^2.2.0
-   generic-names: ^1.0.1
-   glob-to-regexp: ^0.3.0
-   icss-replace-symbols: ^1.0.2
-   lodash: ^4.3.0
-   postcss: ^6.0.1
-   postcss-modules-extract-imports: ^1.0.0
-   postcss-modules-local-by-default: ^1.0.1
-   postcss-modules-resolve-imports: ^1.3.0
-   postcss-modules-scope: ^1.0.0
-   postcss-modules-values: ^1.1.1
-   seekout: ^1.0.1
 css-parse:
  _latest: 2.0.0
  _:
@@ -5063,7 +5042,7 @@ electrode-cookies:
 electrode-hapi-compat:
  _latest: 1.3.3
  _:
-  '^1.0.0,^1.2.0,^1.3.3': 1.3.3
+  '^1.0.0,^1.2.0': 1.3.3
  1.3.3:
   $: sha512-cvpUs0csNP5NI4V3w6wbApUTRDlFb2gV11pjTmuDHc86QKQJb6YOhYHb9wT2Cp4+5bJost7p1jtCgz7m4TY1LA==
   _: 'https://npme.walmart.com/electrode-hapi-compat/-/electrode-hapi-compat-1.3.3.tgz'
@@ -6250,18 +6229,12 @@ gaze:
 generic-names:
  _latest: 3.0.0
  _:
-  ^1.0.1: 1.0.3
   ^2.0.1: 2.0.1
  2.0.1:
   $: sha512-kPCHWa1m9wGG/OwQpeweTwM/PYiQLrUIxXbt/P4Nic3LbGjCP0YwrALHW1uNLKZ0LIMg+RF+XRlj2ekT9ZlZAQ==
   _: 'https://npme.walmart.com/generic-names/-/generic-names-2.0.1.tgz'
   dependencies:
    loader-utils: ^1.1.0
- 1.0.3:
-  $: sha1-LXhqEhruUIh2eWk56OO/+DbCCRc=
-  _: 'https://npme.walmart.com/generic-names/-/generic-names-1.0.3.tgz'
-  dependencies:
-   loader-utils: ^0.2.16
 gensync:
  _latest: 1.0.0-beta.2
  _:
@@ -6365,13 +6338,6 @@ glob-parent:
   dependencies:
    is-glob: ^3.1.0
    path-dirname: ^1.0.0
-glob-to-regexp:
- _latest: 0.4.1
- _:
-  ^0.3.0: 0.3.0
- 0.3.0:
-  $: sha1-jFoUlNIGbFcMw7/kSWF1rMTVAqs=
-  _: 'https://npme.walmart.com/glob-to-regexp/-/glob-to-regexp-0.3.0.tgz'
 global-modules:
  _latest: 2.0.0
  _:
@@ -6828,12 +6794,6 @@ icss-utils:
  _latest: 5.1.0
  _:
   ^2.1.0: 2.1.0
-  ^3.0.1: 3.0.1
- 3.0.1:
-  $: sha1-7nDTroysOMa+XtkehRsn7tNDrQ8=
-  _: 'https://npme.walmart.com/icss-utils/-/icss-utils-3.0.1.tgz'
-  dependencies:
-   postcss: ^6.0.2
  2.1.0:
   $: sha1-g/Cg7DeL8yRheLbCrZE28TWxyWI=
   _: 'https://npme.walmart.com/icss-utils/-/icss-utils-2.1.0.tgz'
@@ -6869,13 +6829,6 @@ ignore:
  4.0.6:
   $: sha512-cyFDKrqc/YdcWFniJhzI42+AzS+gNwmUzOSFcRCQYwySuBBBy/KjuxWLZ/FHEH6Moq1NizMOBWyTcv8O4OZIMg==
   _: 'https://npme.walmart.com/ignore/-/ignore-4.0.6.tgz'
-ignore-styles:
- _latest: 5.0.1
- _:
-  ^5.0.1: 5.0.1
- 5.0.1:
-  $: sha1-tJ7yJ0va/NikiAqWa/440aC/RnE=
-  _: 'https://npme.walmart.com/ignore-styles/-/ignore-styles-5.0.1.tgz'
 image-size:
  _latest: 0.9.3
  _:
@@ -7461,12 +7414,12 @@ isobject:
   dependencies:
    isarray: 1.0.0
 isomorphic-loader:
- _latest: 4.2.2
+ _latest: 4.3.0
  _:
-  ^4.2.2: 4.2.2
- 4.2.2:
-  $: sha512-wBUDq1UgXcQZWYZPo767izp5c+srE0aK2b/jCVguVmTQLnh+kIx8UGE/X/aEFJnR5n3WzBl9yHDUKvrzmSHUVQ==
-  _: 'https://npme.walmart.com/isomorphic-loader/-/isomorphic-loader-4.2.2.tgz'
+  ^4.3.0: 4.3.0
+ 4.3.0:
+  $: sha512-x2zP3JsUfTKEypGrHx6tAs1ytDrOd2s1IpG3cadX3UNNvtEwgqC2hEGv2f2dZQmTzABBEZSrLoAdJEQK45Znvw==
+  _: 'https://registry.npmjs.org/isomorphic-loader/-/isomorphic-loader-4.3.0.tgz'
 isstream:
  _latest: 0.1.2
  _:
@@ -8032,7 +7985,7 @@ loader-runner:
 loader-utils:
  _latest: 2.0.0
  _:
-  '^0.2.16,^0.2.9': 0.2.17
+  ^0.2.9: 0.2.17
   '^1.0.1,^1.0.2,^1.1.0,^1.2.3,^1.4.0': 1.4.0
   ^2.0.0: 2.0.0
  2.0.0:
@@ -8076,7 +8029,7 @@ locate-path:
 lodash:
  _latest: 4.17.20
  _:
-  '^4.0.0,^4.13.1,^4.17.10,^4.17.11,^4.17.14,^4.17.15,^4.17.19,^4.17.20,^4.17.5,^4.3.0,^4.5.0,^4.6.1,~4.17.10': 4.17.20
+  '^4.0.0,^4.13.1,^4.17.10,^4.17.11,^4.17.14,^4.17.15,^4.17.19,^4.17.20,^4.17.5,^4.5.0,^4.6.1,~4.17.10': 4.17.20
  4.17.20:
   top: 1
   $: sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
@@ -9734,7 +9687,7 @@ postcss:
   ^6.0.1:
    - 6.0.23
    - 6.0.1
-  '^6.0.2,^6.0.23': 6.0.23
+  ^6.0.23: 6.0.23
   '^7.0.0,^7.0.1,^7.0.14,^7.0.17,^7.0.2,^7.0.27,^7.0.32,^7.0.5,^7.0.6': 7.0.35
  7.0.35:
   $: sha512-3QT8bBJeX/S5zKTTjTCIjRF3If4avAT6kqxcASlTWEtAFCb9NH0OUxNDfgZSWdP5fJnBYCMEWkIFfWeugjzYMg==
@@ -10175,7 +10128,7 @@ postcss-modules-extract-imports:
  _latest: 3.0.0
  _:
   1.1.0: 1.1.0
-  '^1.0.0,^1.2.0': 1.2.1
+  ^1.2.0: 1.2.1
  1.2.1:
   $: sha512-6jt9XZwUhwmRUhb/CkyJY020PYaPJsCyt3UjbaWo6XEbH/94Hmv6MP7fG2C5NDU/BcHzyGYxNtHvM+LTf9HrYw==
   _: 'https://npme.walmart.com/postcss-modules-extract-imports/-/postcss-modules-extract-imports-1.2.1.tgz'
@@ -10189,7 +10142,7 @@ postcss-modules-extract-imports:
 postcss-modules-local-by-default:
  _latest: 4.0.0
  _:
-  '1.2.0,^1.0.1,^1.2.0': 1.2.0
+  '1.2.0,^1.2.0': 1.2.0
  1.2.0:
   $: sha1-99gMOYxaOT+nlkRmvRlQCn1hwGk=
   _: 'https://npme.walmart.com/postcss-modules-local-by-default/-/postcss-modules-local-by-default-1.2.0.tgz'
@@ -10207,23 +10160,10 @@ postcss-modules-parser:
    icss-replace-symbols: ^1.0.2
    lodash.foreach: ^3.0.3
    postcss: ^5.0.10
-postcss-modules-resolve-imports:
- _latest: 1.3.0
- _:
-  ^1.3.0: 1.3.0
- 1.3.0:
-  $: sha1-OY0wALla6WlCDN9M2D+oBn8cXq4=
-  _: 'https://npme.walmart.com/postcss-modules-resolve-imports/-/postcss-modules-resolve-imports-1.3.0.tgz'
-  dependencies:
-   css-selector-tokenizer: ^0.7.0
-   icss-utils: ^3.0.1
-   minimist: ^1.2.0
-  peerDependencies:
-   postcss: ^6.0.0
 postcss-modules-scope:
  _latest: 3.0.0
  _:
-  '1.1.0,^1.0.0,^1.1.0': 1.1.0
+  '1.1.0,^1.1.0': 1.1.0
  1.1.0:
   $: sha1-1upkmUx5+XtipytCb75gVqGUu5A=
   _: 'https://npme.walmart.com/postcss-modules-scope/-/postcss-modules-scope-1.1.0.tgz'
@@ -10233,7 +10173,7 @@ postcss-modules-scope:
 postcss-modules-values:
  _latest: 4.0.0
  _:
-  '1.3.0,^1.1.1,^1.3.0': 1.3.0
+  '1.3.0,^1.3.0': 1.3.0
  1.3.0:
   $: sha1-7P+p1+GSUYOJ9CrQ6D9yrsRW6iA=
   _: 'https://npme.walmart.com/postcss-modules-values/-/postcss-modules-values-1.3.0.tgz'
@@ -10885,28 +10825,26 @@ raw-body:
 react:
  _latest: 17.0.1
  _:
-  '>= 16,^16.0.0': 16.14.0
- 16.14.0:
-  $: sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
-  _: 'https://npme.walmart.com/react/-/react-16.14.0.tgz'
+  '>= 16': 17.0.1
+ 17.0.1:
+  $: sha512-lG9c9UuMHdcAexXtigOZLX8exLWkW0Ku29qPRU8uhF2R9BN96dLCt0psvzPLlHc5OWkgymP3qwTRgbnw5BKx3w==
+  _: 'https://registry.npmjs.org/react/-/react-17.0.1.tgz'
   dependencies:
    loose-envify: ^1.1.0
    object-assign: ^4.1.1
-   prop-types: ^15.6.2
 react-dom:
  _latest: 17.0.1
  _:
-  '>= 16,^16.0.0': 16.14.0
- 16.14.0:
-  $: sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw==
-  _: 'https://npme.walmart.com/react-dom/-/react-dom-16.14.0.tgz'
+  '>= 16': 17.0.1
+ 17.0.1:
+  $: sha512-6eV150oJZ9U2t9svnsspTMrWNyHc6chX0KzDeAOXftRa8bNeOKTTfCJ7KorIwenkHd2xqVTBTCZd79yk/lx/Ug==
+  _: 'https://registry.npmjs.org/react-dom/-/react-dom-17.0.1.tgz'
   dependencies:
    loose-envify: ^1.1.0
    object-assign: ^4.1.1
-   prop-types: ^15.6.2
-   scheduler: ^0.19.1
+   scheduler: ^0.20.1
   peerDependencies:
-   react: ^16.14.0
+   react: 17.0.1
 react-is:
  _latest: 17.0.1
  _:
@@ -11573,9 +11511,16 @@ scheduler:
  _latest: 0.20.1
  _:
   ^0.19.1: 0.19.1
+  ^0.20.1: 0.20.1
+ 0.20.1:
+  $: sha512-LKTe+2xNJBNxu/QhHvDR14wUXHRQbVY5ZOYpOGWRzhydZUqrLb2JBvLPY7cAqFmqrWuDED0Mjk7013SZiOz6Bw==
+  _: 'https://registry.npmjs.org/scheduler/-/scheduler-0.20.1.tgz'
+  dependencies:
+   loose-envify: ^1.1.0
+   object-assign: ^4.1.1
  0.19.1:
   $: sha512-n/zwRWRYSUj0/3g/otKDRPMh6qv2SYMWNq85IEa8iZyAv8od9zDYpGSnpBEjNgcMNq6Scbu5KfIPxNF72R/2EA==
-  _: 'https://npme.walmart.com/scheduler/-/scheduler-0.19.1.tgz'
+  _: 'https://registry.npmjs.org/scheduler/-/scheduler-0.19.1.tgz'
   dependencies:
    loose-envify: ^1.1.0
    object-assign: ^4.1.1
@@ -11616,13 +11561,6 @@ scss-tokenizer:
   dependencies:
    js-base64: ^2.1.8
    source-map: ^0.4.2
-seekout:
- _latest: 1.0.2
- _:
-  ^1.0.1: 1.0.2
- 1.0.2:
-  $: sha1-CbqfG9W0b7sTRxjrGaaDgsuxuck=
-  _: 'https://npme.walmart.com/seekout/-/seekout-1.0.2.tgz'
 select-hose:
  _latest: 2.0.0
  _:
@@ -13461,18 +13399,15 @@ xaa:
  _latest: 1.6.0
  _:
   '^1.5.0,^1.6.0': 1.6.0
+  ^1.6.1: 1.6.1
+ 1.6.1:
+  $: sha512-/WQVhjBDsumKfsLfd8KsfOWW9h641hvq106uq8CIYcu+GSK7csNEpuO9qoFoRh7/2B2WDnERJ8mNSwOwAmOgTA==
+  _: 'https://registry.npmjs.org/xaa/-/xaa-1.6.1.tgz'
+  dependencies:
+   tslib: ^2.1.0
  1.6.0:
   $: sha512-BbxlOEfA3ndnab9cbHvUWh3Ow0rhVaiTgxwPaRrBdW6tcIGoR8ks7PuGLYvijuasclX9I1jfAiUC+V09knYWgQ==
   _: 'https://npme.walmart.com/xaa/-/xaa-1.6.0.tgz'
-xclap:
- _latest: 0.2.53
- _:
-  ^0.2.53: 0.2.53
- 0.2.53:
-  $: sha512-sKGFvLhZySDy4zBxzgcFu9a5+01ma6S/E8rQNMSbTuaWegdpD2leB5GzqIxktmzdkSjSJ5XjI2MGM0OGcyf2HA==
-  _: 'https://npme.walmart.com/xclap/-/xclap-0.2.53.tgz'
-  dependencies:
-   '@xarc/run': ^1.0.2
 xenv-config:
  _latest: 1.3.1
  _:
