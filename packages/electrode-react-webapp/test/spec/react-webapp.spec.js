@@ -16,7 +16,7 @@ describe("react-webapp", function() {
       const f = "./test/data/bad-content.js";
       const content = reactWebapp.resolveContent({ module: f });
       intercept.restore();
-      expect(content.content).includes("test/data/bad-content.js failed");
+      expect(content.content).includes("test/data/bad-content.js");
       expect(intercept.stderr.join("")).includes("Error: Cannot find module 'foo-blah'");
     });
 
