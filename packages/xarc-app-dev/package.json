@@ -133,7 +133,7 @@
     "typescript": "^3.8.3"
   },
   "engines": {
-    "node": ">= 10",
+    "node": ">= 12",
     "npm": ">= 6"
   },
   "fyn": {
