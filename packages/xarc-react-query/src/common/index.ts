@@ -50,6 +50,19 @@ export type ReactQueryFeatureOptions = {
    *
    * Your module will be loaded and executed on the server only and will not be bundled for the
    * client, and it can use any node.js APIs.
+   *
+   * A typical `prefetchQuery` may look like this:
+   *
+   * ```js
+   * export const prefetchQuery = async ({ queryClient, ssrData }) => {
+   *   await queryClient.prefetchQuery("test", testFetch);
+   *   const dehydratedState = dehydrate(queryClient);
+   *   queryClient.resetQueries();
+   *   return { queryClient, dehydratedState };
+   * };
+   * ```
+   *
+   * .
    */
   serverModule?: string;
 
