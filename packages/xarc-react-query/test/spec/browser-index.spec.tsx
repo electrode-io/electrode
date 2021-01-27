@@ -1,4 +1,5 @@
 /* eslint-disable prefer-arrow-callback */
+import "jsdom-global/register";
 import React from "react"; // eslint-disable-line
 import { describe, it } from "mocha";
 import { expect } from "chai";
@@ -6,6 +7,7 @@ import { SubAppDef, SubAppContainer, envHooks } from "@xarc/subapp";
 import { useQuery } from "react-query";
 import { reactQueryFeature } from "../../src/browser/index";
 import { testFetch } from "../prefetch";
+import { render, waitFor, screen } from "@testing-library/react";
 
 const { createElement } = React; // eslint-disable-line
 
@@ -38,7 +40,9 @@ describe("reactQueryFeature browser", function () {
   it("should render subapp with react-query", async () => {
     const container = new SubAppContainer({});
     envHooks.getContainer = () => container;
+
     const factory = reactQueryFeature({ React });
+
     const def = {
       name: "test",
       getModule() {
@@ -46,19 +50,25 @@ describe("reactQueryFeature browser", function () {
       },
       _features: {}
     } as SubAppDef;
+
     container.declare("test", def);
 
     factory.add(def);
 
-    (def._features.reactQuery as any).wrap = props => {
-      return JSON.stringify(props);
-    };
-
     const res = await def._features.reactQuery.execute({
       input: {
         Component: () => {
-          const { data } = useQuery("test", testFetch);
-          return <div>test {JSON.stringify(data)}</div>;
+          const { data } = useQuery("test", testFetch, {
+            // ensure react-query doesn't keep node.js running with its timers
+            cacheTime: 200
+          });
+          return data ? (
+            <div>
+              test <p>{JSON.stringify(data)}</p>
+            </div>
+          ) : (
+            ""
+          );
         }
       },
       csrData: {
@@ -68,9 +78,10 @@ describe("reactQueryFeature browser", function () {
     });
 
     expect(res).to.be.an("object");
-    const mockComponentFunc = res.Component;
-    expect(mockComponentFunc()).equal(
-      `{"queryClient":{"queryCache":{"listeners":[],"config":{},"queries":[],"queriesMap":{}},"mutationCache":{"listeners":[],"config":{},"mutations":[],"mutationId":0},"defaultOptions":{},"queryDefaults":[],"mutationDefaults":[]},"dehydratedState":"test"}`
-    );
+    render(<res.Component />);
+
+    const element = await waitFor(() => screen.getByText("test"), { timeout: 500 });
+
+    expect(element.innerHTML).contains(`<p>{"msg":"foo","queryKey":["test"]}</p>`);
   });
 });
