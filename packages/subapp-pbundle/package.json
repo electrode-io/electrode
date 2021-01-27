@@ -1,6 +1,6 @@
 {
   "name": "subapp-pbundle",
-  "version": "0.0.39",
+  "version": "0.0.40",
   "description": "Electrode subapp support for Preact and redux-bundler",
   "module": "dist/dev/index.js",
   "main": "lib/index.js",
@@ -30,7 +30,7 @@
     "@babel/runtime": "^7.8.3",
     "redux-bundler-preact": "^2.0.1",
     "subapp-util": "^1.1.2",
-    "subapp-web": "^1.0.45"
+    "subapp-web": "^1.0.46"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
