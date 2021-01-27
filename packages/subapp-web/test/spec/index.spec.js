@@ -11,7 +11,7 @@ const expect = chai.expect;
 
 let clock;
 
-describe("subapp-web", function() {
+describe("subapp-web", function () {
   beforeEach(() => {
     const dom = new JSDOM("");
     clock = sinon.useFakeTimers();
@@ -161,7 +161,7 @@ describe("subapp-web", function() {
 
     expect(xarc.rt.bundles).to.deep.equal({
       "test-namespace": {
-        testsubapp: true
+        testsubapp: 1
       }
     });
     expect(subApp._started).to.exist;
