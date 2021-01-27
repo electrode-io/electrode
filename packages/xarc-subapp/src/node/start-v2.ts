@@ -1,9 +1,9 @@
 import { SSR_PIPELINES } from "./utils";
 import { SubAppRenderPipeline } from "../subapp";
 
-export function startSubApp() {
+export function startSubApp(): any {
   return {
-    process(context) {
+    process(context): string {
       const { scriptNonceAttr = "", request } = context.user;
 
       const asyncProcess = async () => {

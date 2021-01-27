@@ -91,7 +91,9 @@
       "gulpfile.js",
       "test",
       "xrun*.js",
-      "xrun*.ts"
+      "xrun*.ts",
+      ".eslintrc.js",
+      ".babelrc.js"
     ],
     "check-coverage": false,
     "statements": 100,

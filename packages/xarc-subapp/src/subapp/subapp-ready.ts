@@ -3,12 +3,14 @@ import { envHooks } from "./envhooks";
 // let declareSubAppCount = 0;
 // let readySubAppCount = 0;
 
+const MAX_CALL_DEPTH = 15;
+
 /**
  * Check if subapps are ready for SSR.
  *
  * @returns boolean - indicate if subapps are ready
  */
-export function isSubAppReady() {
+export function isSubAppReady():boolean {
   return envHooks.getContainer().isReady();
 }
 
@@ -21,6 +23,8 @@ export function isSubAppReady() {
  *  3. The param `list` is array of strings and contains the subapp's name.
  *
  * @param list - list of subapps' names to wait (if it's true, then wait for all)
+ * @param ignores - List of subapp names to ignore
+ * @param callDepth - Call depth to search
  * @returns promise
  */
 export function subAppReady(
@@ -62,7 +66,7 @@ export function subAppReady(
       // if loading a subapp module triggered more subapps to be declared, then
       // need to ensure those are ready also.
       if (toWait.length !== container.declareCount) {
-        if (callDepth < 15) {
+        if (callDepth < MAX_CALL_DEPTH) {
           // just load all new subapps but ignore what's just loaded
           return subAppReady(true, toWait, callDepth + 1).then(res2 => results.concat(res2));
         } else {

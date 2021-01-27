@@ -7,6 +7,12 @@ export * from "./client-render-pipeline";
 export * from "./subapp-render-pipeline";
 export * from "./client-framework-lib";
 
+/**
+ * Load features
+ *
+ * @param subapp : Subapp definition
+ * @param features : Subapp features
+ */
 function loadFeatures(subapp: SubAppDef, features: SubAppFeatureFactory[]) {
   if (features && features.length > 0) {
     for (const feat of features) {
@@ -24,7 +30,7 @@ let id = 1;
 /**
  * Load the dynamic import module for a subapp
  *
- * @remark not doing async/await to avoid ts transpiling them to non-promise ES5
+ * Note: not doing async/await to avoid ts transpiling them to non-promise ES5
  *  https://github.com/microsoft/TypeScript/issues/31621
  *
  * @returns Promise resolving to module loaded
@@ -87,6 +93,7 @@ function _getExport<T>(): SubApp<T> {
  * **internal use only**
  *
  * @param opts - declare subapp options
+ * @param override - define overrides
  * @returns subapp definition
  */
 export function __declareSubApp(opts: SubAppOptions, override?: Partial<SubAppDef>): SubAppDef {

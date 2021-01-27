@@ -14,13 +14,20 @@ import {
   _xarcV2RunTimeInfo
 } from "../subapp/index";
 
+const MAX_CALL_DEPTH = 15;
+
 //
 // all console.log and console.debug in this file will be optimized out for production
 // Do not use xarcV2.debug in this file.
 //
 
-// xarc subapp client side lib version 2
-// load into window.xarcV2 as a global
+/**
+ * xarc subapp client side lib version 2
+ * load into window.xarcV2 as a global
+ *
+ * @param w window object
+ * @returns xarc v2 client
+ */
 export function xarcV2Client(
   w: Window &
     typeof globalThis & {
@@ -147,7 +154,7 @@ export function xarcV2Client(
           console.debug("subapp onStart loaded modules. msec taken:", Date.now() - beginTs, mods);
           // Some modules declared more subapps, load them first, but ignore what we just loaded.
           if (subapps.declareCount > subappsBeforeLoad.length) {
-            if (callDepth < 15) {
+            if (callDepth < MAX_CALL_DEPTH) {
               console.debug("new subapps declared => loading them");
               return this._start(subappsBeforeLoad, callDepth + 1);
             } else {

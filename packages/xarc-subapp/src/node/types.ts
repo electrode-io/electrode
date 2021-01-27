@@ -1,5 +1,4 @@
 /* eslint-disable max-statements */
-import _ from "lodash";
 import { SubAppSSRData, SubAppFeatureResult } from "../subapp/types";
 
 /**

@@ -24,17 +24,22 @@ export interface XarcSubAppClientV2 {
   HAS_WINDOW: boolean;
   version: number;
   rt: _xarcV2RunTimeInfo; // run time info
+
   /**
    * Initialize CDN mapping
+   *
    * @param data - data to initialize with
    */
   cdnInit(data: CDNData): void;
+
   /**
    * Add CDN mapping data from data into the CDN mapping for looking up assets
+   *
    * @param data - CDN data
    * @param replace - replace existing entry?
    */
   cdnUpdate(data: CDNData, replace: boolean): void;
+
   /**
    * Map an asset name to its CDN version
    *
@@ -46,13 +51,16 @@ export interface XarcSubAppClientV2 {
   startSubAppOnLoad(options: any, data: any): void;
   start(): Promise<any>;
   _start(ignore: string[], callDepth: number): Promise<any>;
+
   /**
    * Need this for node.js.  While chrome dev tools allow setting console level, node.js'
    * console.debug is just an alias for console.log.
    */
   debug(...args: any[]): void;
+
   /**
    * Extract JSON data from a script tag
+   *
    * @param id - script element id
    * @returns the data extracted
    */
@@ -172,31 +180,39 @@ export type SubAppDef = SubAppOptions & {
    * @param options
    */
   _start?(params: SubAppStartParams, reload?: boolean): Promise<any>;
+
   /**
    * Handles HMR on client side
+   *
    * @param subAppName
    * @param modName
    */
   _reload?(subAppName: string, modName?: string): Promise<any>;
+
   /**
    * Features this subapp wants
    */
   _features?: Record<string, SubAppFeature>;
+
   /**
    * Create a render pipeline
    *
    * The respective env/framework specific implementation should set this accordingly
    */
   _pipelineFactory?: (params: PipelineFactoryParams) => SubAppRenderPipeline;
+
   /**
    * factory to return a framework object for the running env.  it's unknown because we don't know
    * what the env or the framework could be.
    */
   _frameworkFactory?: () => unknown;
+
   /** For UI component instance to let the subapp know it's mounting to the subapp */
   _mount?(info: SubAppMountInfo): void;
+
   /** For UI component instance to let the subapp know it's unmounting from the subapp */
   _unmount?(info: SubAppMountInfo): void;
+
   /**
    * Holds rendering pipeline instances for this subapp.
    *
@@ -205,6 +221,7 @@ export type SubAppDef = SubAppOptions & {
    * they are stored in their owning request object.
    */
   _renderPipelines?: SubAppRenderPipeline[];
+
   /**
    * Get the export subapp object from the module
    */
@@ -374,11 +391,11 @@ export class SubAppContainer {
     return subapp;
   }
 
-  isReady() {
+  isReady():boolean {
     return this.readyCount === this.declareCount;
   }
 
-  updateReady() {
+  updateReady():void {
     this.readyCount = 0;
     for (const name in this.$) {
       if (this.$[name]._module) {
@@ -387,7 +404,7 @@ export class SubAppContainer {
     }
   }
 
-  getNames() {
+  getNames():string[] {
     return Object.keys(this.$);
   }
 }

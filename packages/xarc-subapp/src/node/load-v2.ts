@@ -13,10 +13,15 @@
  *   - generate code to bootstrap subapp on client
  */
 
-import _ from "lodash";
 import { getContainer } from "./index";
 
-export function loadSubApp(setupContext: any, { props: setupProps }) {
+/**
+ * Server side load for subapp v2
+ *
+ * @param _setupContext setup context
+ * @param param1 props object
+ */
+export function loadSubApp(_setupContext: any, { props: setupProps }): any {
   // name="Header"
   // async=true
   // defer=true

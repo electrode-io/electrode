@@ -4,6 +4,13 @@ import Crypto from "crypto";
 import { NonceInfo, InitProps } from "./types";
 import Url from "url";
 
+const NONCE_SIZE = 16;
+
+/**
+ * Load CDN map
+ *
+ * @param cdnMap CDN map
+ */
 export function loadCdnMap(cdnMap: string): any {
   const fullPath = Path.isAbsolute(cdnMap)
     ? cdnMap
@@ -16,7 +23,7 @@ export function loadCdnMap(cdnMap: string): any {
   }
 }
 
-export function mapCdn(file: string, data: Record<string, string>) {
+export function mapCdn(file: string, data: Record<string, string>): string | boolean {
   if (data) {
     const reqBase = Path.posix.basename(file);
     for (const k in data) {
@@ -37,7 +44,7 @@ export function mapCdn(file: string, data: Record<string, string>) {
  * @param postfix - go after fragment
  * @returns wrapped string
  */
-export function wrapStringFragment(fragment: string, prefix = "", postfix = "") {
+export function wrapStringFragment(fragment: string, prefix = "", postfix = ""): string {
   if (fragment) {
     return `${prefix}${fragment}${postfix}`;
   }
@@ -45,9 +52,10 @@ export function wrapStringFragment(fragment: string, prefix = "", postfix = "") 
   return "";
 }
 
-export function nonceGenerator(_?: string) {
-  const token = Crypto.randomBytes(16).toString("base64");
+export function nonceGenerator(_?: string): string {
+  const token = Crypto.randomBytes(NONCE_SIZE).toString("base64");
   // drop "==" at the end
+  // eslint-disable no-magic-numbers
   return token.substr(0, token.length - 2);
 }
 
@@ -95,6 +103,7 @@ export function urlJoin(baseUrl: string, ...pathParts: string[]) {
     url.search = url.search ? `${url.search}&${search}` : `?${search}`;
   }
   if (onlyPaths.length > 0) {
+    // istanbul ignore next
     url.pathname = Path.posix.join(url.pathname || "", ...onlyPaths);
   }
   return Url.format(url);

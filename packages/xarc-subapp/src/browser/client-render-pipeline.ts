@@ -21,7 +21,7 @@ export class ClientRenderPipeline implements Partial<SubAppRenderPipeline> {
     this.framework = this._getSubApp()._frameworkFactory() as ClientFrameworkLib;
   }
 
-  async start(_reload?: boolean) {
+  async start(_reload?: boolean): Promise<any> {
     this.startPrepare();
     await this.waitForPrepare();
     if (!this.csrData.prepareOnly && !this.csrData.inlineId) {
@@ -29,27 +29,27 @@ export class ClientRenderPipeline implements Partial<SubAppRenderPipeline> {
     }
   }
 
-  startPrepare() {
+  startPrepare(): any {
     xarcV2.debug(this.constructor.name, "pipeline startPrepare for subapp", this.subAppName);
     this.preparePromise = this.framework.prepareCSR(this.csrData, this).then(result => {
       return (this.prepResult = result);
     });
   }
 
-  async waitForPrepare() {
+  async waitForPrepare(): Promise<SubAppFeatureResult> {
     this.prepResult = await this.preparePromise;
     return this.prepResult;
   }
 
-  getPrepResult() {
+  getPrepResult(): any {
     return this.prepResult;
   }
 
-  isPrepared() {
+  isPrepared(): boolean {
     return !!this.prepResult;
   }
 
-  executeRender() {
+  executeRender(): void {
     xarcV2.debug("ClientRenderPipeline executeRender for subapp", this.csrData.name);
     this.framework.startSubAppSync(this.csrData, this);
   }
@@ -60,13 +60,13 @@ export class ClientRenderPipeline implements Partial<SubAppRenderPipeline> {
     return subapp;
   }
 
-  _mount(_: any) {
+  _mount(_: any): any {
     //
   }
-  _unmount(_: any) {
+  _unmount(_: any): any {
     //
   }
-  _reload() {
+  _reload(): Promise<any> {
     return Promise.resolve();
   }
 }

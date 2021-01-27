@@ -36,7 +36,11 @@ export function getContainer(): SubAppContainer {
   return w._subapps;
 }
 
-export function _setupEnvHooks() {
+/**
+ * Setup event hooks
+ *
+ */
+export function _setupEnvHooks(): void {
   if (!envHooks.getContainer) {
     envHooks.getContainer = getContainer;
   }

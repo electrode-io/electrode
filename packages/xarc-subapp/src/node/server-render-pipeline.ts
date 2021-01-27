@@ -1,7 +1,12 @@
 /* eslint-disable max-statements */
 import _ from "lodash";
 import { SubAppRenderPipeline } from "../subapp/subapp-render-pipeline";
-import { SubAppSSRData, SubAppFeatureResult, LoadSubAppOptions } from "../subapp/types";
+import {
+  SubAppSSRData,
+  SubAppFeatureResult,
+  LoadSubAppOptions,
+  SubAppMountInfo
+} from "../subapp/types";
 import { ServerFrameworkLib } from "./types";
 import { safeStringifyJson } from "./utils";
 // global name to store client subapp runtime, ie: window.xarcV1
@@ -43,33 +48,33 @@ export class SubAppServerRenderPipeline implements SubAppRenderPipeline {
     this.framework = data.subapp._frameworkFactory();
   }
 
-  async start(_reload?: boolean) {
+  async start(_reload?: boolean): Promise<any> {
     throw new Error("SubAppServerRenderPipeline doesn't handle start");
   }
 
   /** start to run through all the subapp's features to prepare data for calling renderToString */
-  startPrepare() {
+  startPrepare(): void {
     this.startTime = Date.now();
     this.preparePromise = this.framework.prepareSSR(this.ssrData).then(result => {
       return (this.prepResult = result);
     });
   }
 
-  async waitForPrepare() {
+  async waitForPrepare(): Promise<SubAppFeatureResult> {
     this.prepResult = await this.preparePromise;
 
     return this.prepResult;
   }
 
-  getPrepResult() {
+  getPrepResult(): SubAppFeatureResult {
     return this.prepResult;
   }
 
-  isPrepared() {
+  isPrepared(): boolean {
     return !!this.prepResult;
   }
 
-  executeRender() {
+  executeRender(): void {
     const { name } = this.ssrData.subapp;
     const { scriptNonceAttr = "" } = this.ssrData.context.user;
 
@@ -118,7 +123,7 @@ ${ssrContent}${initialStateData}
   /** Hot module reload (HMR) support - empty filler */
   _reload: () => Promise<any>;
   /** For HMR: a component mount itself to the subapp/pipeline - empty filler */
-  _mount: (info: any) => void;
+  _mount: (info: SubAppMountInfo) => void;
   /** For HMR: a component unmount itself from the subapp/pipeline - empty filler */
-  _unmount: (info: any) => void;
+  _unmount: (info: SubAppMountInfo) => void;
 }
