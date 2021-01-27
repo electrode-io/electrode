@@ -78,9 +78,9 @@
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_index_.html#cssmodulehook" class="tsd-kind-icon">css<wbr>Module<wbr>Hook</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_index_.html#isomorphicextendrequire" class="tsd-kind-icon">isomorphic<wbr>Extend<wbr>Require</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_index_.html#load" class="tsd-kind-icon">load</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_index_.html#setupisomorphiccdnassetsmapping" class="tsd-kind-icon">setup<wbr>Isomorphic<wbr>Cdn<wbr>Assets<wbr>Mapping</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_index_.html#setupisomorphicloader" class="tsd-kind-icon">setup<wbr>Isomorphic<wbr>Loader</a></li>
 							</ul>
 						</section>
 					</div>
@@ -94,7 +94,7 @@
 					<div class="tsd-signature tsd-kind-icon">Xarc<wbr>Cdn<wbr>Assets<wbr>Mapping<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>extendRequire<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>mapping<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">; </span>prodOnly<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7767d283/packages/xarc-app/src/index.ts#L61">index.ts:61</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/e196b9b1/packages/xarc-app/src/index.ts#L61">index.ts:61</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -155,7 +155,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/7767d283/packages/xarc-app/src/index.ts#L35">index.ts:35</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/e196b9b1/packages/xarc-app/src/index.ts#L35">index.ts:35</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -203,28 +203,6 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="isomorphicextendrequire" class="tsd-anchor"></a>
-					<h3>isomorphic<wbr>Extend<wbr>Require</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">isomorphic<wbr>Extend<wbr>Require<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/7767d283/packages/xarc-app/src/index.ts#L118">index.ts:118</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Load the require hook to support isomorphic assets when doing SSR</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="load" class="tsd-anchor"></a>
 					<h3>load</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
@@ -234,7 +212,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/7767d283/packages/xarc-app/src/index.ts#L184">index.ts:184</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/e196b9b1/packages/xarc-app/src/index.ts#L202">index.ts:202</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -266,7 +244,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/7767d283/packages/xarc-app/src/index.ts#L83">index.ts:83</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/e196b9b1/packages/xarc-app/src/index.ts#L83">index.ts:83</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -276,6 +254,44 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="setupisomorphicloader" class="tsd-anchor"></a>
+					<h3>setup<wbr>Isomorphic<wbr>Loader</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">setup<wbr>Isomorphic<wbr>Loader<span class="tsd-signature-symbol">(</span>assetExtensions<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/e196b9b1/packages/xarc-app/src/index.ts#L126">index.ts:126</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Load the require hook to support isomorphic assets when doing SSR</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> assetExtensions: <span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = &quot;.jpg|.jpeg|.gif|.svg|.png|.css|.less|.styl|.sass|.scss&quot;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>when a require file is not found, and its extension is
+											in this, then it will be considered an isomorphic asset and an empty <code>{}</code> will
+										be returned for it to avoid failing with module not found errors.</p>
+										<ul>
+											<li><strong>Default</strong>: <code>&quot;.jpg|.jpeg|.gif|.svg|.png|.css|.less|.styl|.sass|.scss&quot;</code></li>
+											<li>set to <code>false</code> to disable this and let module not found error to throw</li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+							<p>isomorphic require extender</p>
 						</li>
 					</ul>
 				</section>
@@ -301,13 +317,13 @@
 						<a href="_index_.html#cssmodulehook" class="tsd-kind-icon">css<wbr>Module<wbr>Hook</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="_index_.html#isomorphicextendrequire" class="tsd-kind-icon">isomorphic<wbr>Extend<wbr>Require</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="_index_.html#load" class="tsd-kind-icon">load</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="_index_.html#setupisomorphiccdnassetsmapping" class="tsd-kind-icon">setup<wbr>Isomorphic<wbr>Cdn<wbr>Assets<wbr>Mapping</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="_index_.html#setupisomorphicloader" class="tsd-kind-icon">setup<wbr>Isomorphic<wbr>Loader</a>
 					</li>
 				</ul>
 			</nav>

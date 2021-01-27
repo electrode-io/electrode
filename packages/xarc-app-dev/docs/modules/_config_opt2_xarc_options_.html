@@ -85,7 +85,7 @@
 					<div class="tsd-signature tsd-kind-icon">Xarc<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>addOnFeatures<span class="tsd-signature-symbol">?: </span><a href="_config_opt2_add_on_features_.html#addonfeatures" class="tsd-signature-type">AddOnFeatures</a><span class="tsd-signature-symbol">; </span>adminLogLevel<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>adminPort<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>appServerPort<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>babelOptions<span class="tsd-signature-symbol">?: </span><a href="_config_opt2_babel_options_.html#babeloptions" class="tsd-signature-type">BabelOptions</a><span class="tsd-signature-symbol">; </span>cwd<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>host<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>httpsPort<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>namespace<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>port<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>webpackOptions<span class="tsd-signature-symbol">?: </span><a href="_config_opt2_webpack_options_.html#webpackoptions" class="tsd-signature-type">WebpackOptions</a><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/2416db2b/packages/xarc-app-dev/src/config/opt2/xarc-options.ts#L5">src/config/opt2/xarc-options.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/a284f749/packages/xarc-app-dev/src/config/opt2/xarc-options.ts#L5">src/config/opt2/xarc-options.ts:5</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -134,6 +134,7 @@
 										<li><strong>Default: <code>3100</code></strong></li>
 										<li>If not set, then check env <code>APP_PORT_FOR_PROXY</code>, then <code>APP_SERVER_PORT</code></li>
 									</ul>
+									<p>.</p>
 								</div>
 							</li>
 							<li class="tsd-parameter">
@@ -169,16 +170,19 @@
 								<h5><span class="tsd-flag ts-flagOptional">Optional</span> https<wbr>Port<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
 								<div class="tsd-comment tsd-typography">
 									<div class="lead">
-										<p>In case you want to serve your app with https on a port other
-										than 443, then you can set it with this.</p>
+										<p>Set this to force <code>https</code> on the port you want, in case you want to serve your app
+										with https on a port other than <code>443</code> or <code>8443</code>.</p>
 									</div>
 									<ul>
 										<li>if not set, then check env then <code>XARC_DEV_HTTPS</code></li>
+										<li>Set it to <code>0</code> and the proxy will pick a random port for <code>https</code>.</li>
+										<li>Set to <code>-1</code> to force disable <code>https</code></li>
 									</ul>
 									<dl class="tsd-comment-tags">
 										<dt>remarks</dt>
 										<dd><p>If this is set, it cannot be the same as <code>port</code>, which then will be
-											forced to be HTTP only.</p>
+											forced to be <code>http</code> only.</p>
+											<p>.</p>
 										</dd>
 									</dl>
 								</div>
@@ -203,13 +207,34 @@
 									</div>
 									<dl class="tsd-comment-tags">
 										<dt>remarks</dt>
-										<dd><p> This is what the dev proxy listens on.  Your app server
-											listens on a different port that the proxy forwards to.</p>
+										<dd><p> In development, this is what the dev proxy listens on.  Your app server
+											listens on <code>appServerPort</code> that the proxy forwards to.</p>
 											<ul>
-												<li><strong>Default: <code>3000</code></strong></li>
-												<li>If it&#39;s 443, then automatically enable HTTPS.</li>
-												<li>If not set, then check env <code>PORT</code></li>
+												<li><p>Typical values are <code>3000</code> for <code>HTTP</code> or <code>443</code>/<code>8443</code> for <code>HTTPS</code>.</p>
+												</li>
+												<li><p><strong>Default: <code>3000</code></strong></p>
+												</li>
+												<li><p>If it&#39;s <code>443</code> or <code>8443</code>, then automatically enable <code>HTTPS</code> and try
+													to <strong>also</strong> listen on <code>3000</code> or <code>3300</code> for <code>http</code></p>
+												</li>
+												<li><p>Set it to <code>0</code> and the proxy will pick a random port.</p>
+												</li>
+												<li><p>Set it to <code>-1</code> to disable <code>http</code> and use <code>httpsPort</code> to listen on <code>https</code> only.</p>
+												</li>
+												<li><p>If not set, then check env <code>PORT</code></p>
+												</li>
 											</ul>
+										</dd>
+										<dt>remarks</dt>
+										<dd><p>Regarding <code>HTTPS</code>:</p>
+											<ul>
+												<li>If you want full control of <code>https</code> and <code>http</code> ports, set <code>httpsPort</code> and <code>port</code>.</li>
+												<li>If you set <code>port</code> to <code>443</code> or <code>8443</code>, then dev proxy do <code>https</code> on that port, and
+													listens on something that doesn&#39;t conflict with <code>appServerPort</code>, which is
+												<code>3000</code> or <code>3300</code>.</li>
+												<li>if <code>https</code> is enabled, the dev proxy will always try to listen on <code>http</code> also.</li>
+											</ul>
+											<p>.</p>
 										</dd>
 									</dl>
 								</div>

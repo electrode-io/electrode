@@ -1,0 +1,1061 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>QueryObserver | @xarc/react-query</title>
+	<meta name="description" content="Documentation for @xarc/react-query">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">@xarc/react-query</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../modules.html">@xarc/react-query</a>
+				</li>
+				<li>
+					<a href="../modules/browser.html">browser</a>
+				</li>
+				<li>
+					<a href="browser.queryobserver.html">QueryObserver</a>
+				</li>
+			</ul>
+			<h1>Class QueryObserver&lt;TQueryFnData, TError, TData, TQueryData&gt;</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>TQueryFnData = <span class="tsd-signature-type">unknown</span></h4>
+					</li>
+					<li>
+						<h4>TError = <span class="tsd-signature-type">unknown</span></h4>
+					</li>
+					<li>
+						<h4>TData = <span class="tsd-signature-type">TQueryFnData</span></h4>
+					</li>
+					<li>
+						<h4>TQueryData = <span class="tsd-signature-type">TQueryFnData</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="tsd-signature-type">Subscribable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">QueryObserverListener</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">QueryObserver</span>
+								<ul class="tsd-hierarchy">
+									<li>
+										<a href="browser.infinitequeryobserver.html" class="tsd-signature-type" data-tsd-kind="Class">InfiniteQueryObserver</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section tsd-is-external">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter tsd-is-external"><a href="browser.queryobserver.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-external">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryobserver.html#clearrefetchinterval" class="tsd-kind-icon">clear<wbr>Refetch<wbr>Interval</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryobserver.html#clearstaletimeout" class="tsd-kind-icon">clear<wbr>Stale<wbr>Timeout</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryobserver.html#cleartimers" class="tsd-kind-icon">clear<wbr>Timers</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryobserver.html#client" class="tsd-kind-icon">client</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryobserver.html#currentquery" class="tsd-kind-icon">current<wbr>Query</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryobserver.html#currentresult" class="tsd-kind-icon">current<wbr>Result</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryobserver.html#currentresultstate" class="tsd-kind-icon">current<wbr>Result<wbr>State</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryobserver.html#executefetch" class="tsd-kind-icon">execute<wbr>Fetch</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryobserver.html#initialdataupdatecount" class="tsd-kind-icon">initial<wbr>Data<wbr>Update<wbr>Count</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryobserver.html#initialerrorupdatecount" class="tsd-kind-icon">initial<wbr>Error<wbr>Update<wbr>Count</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryobserver.html#isstale" class="tsd-kind-icon">is<wbr>Stale</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external"><a href="browser.queryobserver.html#listeners" class="tsd-kind-icon">listeners</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryobserver.html#notify" class="tsd-kind-icon">notify</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryobserver.html#optionalfetch" class="tsd-kind-icon">optional<wbr>Fetch</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="browser.queryobserver.html#options" class="tsd-kind-icon">options</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryobserver.html#previousqueryresult" class="tsd-kind-icon">previous<wbr>Query<wbr>Result</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryobserver.html#refetchintervalid" class="tsd-kind-icon">refetch<wbr>Interval<wbr>Id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryobserver.html#shouldnotifylisteners" class="tsd-kind-icon">should<wbr>Notify<wbr>Listeners</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryobserver.html#staletimeoutid" class="tsd-kind-icon">stale<wbr>Timeout<wbr>Id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryobserver.html#updatequery" class="tsd-kind-icon">update<wbr>Query</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryobserver.html#updaterefetchinterval" class="tsd-kind-icon">update<wbr>Refetch<wbr>Interval</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryobserver.html#updateresult" class="tsd-kind-icon">update<wbr>Result</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryobserver.html#updatestaletimeout" class="tsd-kind-icon">update<wbr>Stale<wbr>Timeout</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryobserver.html#updatetimers" class="tsd-kind-icon">update<wbr>Timers</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryobserver.html#willfetchoptionally" class="tsd-kind-icon">will<wbr>Fetch<wbr>Optionally</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-external">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-external"><a href="browser.queryobserver.html#bindmethods" class="tsd-kind-icon">bind<wbr>Methods</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryobserver.html#destroy" class="tsd-kind-icon">destroy</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-external"><a href="browser.queryobserver.html#fetch" class="tsd-kind-icon">fetch</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryobserver.html#getcurrentquery" class="tsd-kind-icon">get<wbr>Current<wbr>Query</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryobserver.html#getcurrentresult" class="tsd-kind-icon">get<wbr>Current<wbr>Result</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-external"><a href="browser.queryobserver.html#getnewresult" class="tsd-kind-icon">get<wbr>New<wbr>Result</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryobserver.html#getnextresult" class="tsd-kind-icon">get<wbr>Next<wbr>Result</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryobserver.html#haslisteners" class="tsd-kind-icon">has<wbr>Listeners</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryobserver.html#onqueryupdate" class="tsd-kind-icon">on<wbr>Query<wbr>Update</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-external"><a href="browser.queryobserver.html#onsubscribe" class="tsd-kind-icon">on<wbr>Subscribe</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-external"><a href="browser.queryobserver.html#onunsubscribe" class="tsd-kind-icon">on<wbr>Unsubscribe</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryobserver.html#refetch" class="tsd-kind-icon">refetch</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryobserver.html#remove" class="tsd-kind-icon">remove</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryobserver.html#setoptions" class="tsd-kind-icon">set<wbr>Options</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryobserver.html#subscribe" class="tsd-kind-icon">subscribe</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryobserver.html#willfetchonmount" class="tsd-kind-icon">will<wbr>Fetch<wbr>OnMount</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryobserver.html#willfetchonreconnect" class="tsd-kind-icon">will<wbr>Fetch<wbr>OnReconnect</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryobserver.html#willfetchonwindowfocus" class="tsd-kind-icon">will<wbr>Fetch<wbr>OnWindow<wbr>Focus</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryobserver.html#willloadonmount" class="tsd-kind-icon">will<wbr>Load<wbr>OnMount</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryobserver.html#willrefetchonmount" class="tsd-kind-icon">will<wbr>Refetch<wbr>OnMount</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Query<wbr>Observer&lt;TQueryFnData, TError, TData, TQueryData&gt;<span class="tsd-signature-symbol">(</span>client<span class="tsd-signature-symbol">: </span><a href="browser.queryclient.html" class="tsd-signature-type" data-tsd-kind="Class">QueryClient</a>, options<span class="tsd-signature-symbol">: </span><a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="browser.queryobserver.html" class="tsd-signature-type" data-tsd-kind="Class">QueryObserver</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:19</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>TQueryFnData = <span class="tsd-signature-type">unknown</span></h4>
+								</li>
+								<li>
+									<h4>TError = <span class="tsd-signature-type">unknown</span></h4>
+								</li>
+								<li>
+									<h4>TData = <span class="tsd-signature-type">TQueryFnData</span></h4>
+								</li>
+								<li>
+									<h4>TQueryData = <span class="tsd-signature-type">TQueryFnData</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>client: <a href="browser.queryclient.html" class="tsd-signature-type" data-tsd-kind="Class">QueryClient</a></h5>
+								</li>
+								<li>
+									<h5>options: <a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="browser.queryobserver.html" class="tsd-signature-type" data-tsd-kind="Class">QueryObserver</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="clearrefetchinterval" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> clear<wbr>Refetch<wbr>Interval</h3>
+					<div class="tsd-signature tsd-kind-icon">clear<wbr>Refetch<wbr>Interval<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:46</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="clearstaletimeout" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> clear<wbr>Stale<wbr>Timeout</h3>
+					<div class="tsd-signature tsd-kind-icon">clear<wbr>Stale<wbr>Timeout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:45</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="cleartimers" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> clear<wbr>Timers</h3>
+					<div class="tsd-signature tsd-kind-icon">clear<wbr>Timers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:44</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="client" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> client</h3>
+					<div class="tsd-signature tsd-kind-icon">client<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:11</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="currentquery" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> current<wbr>Query</h3>
+					<div class="tsd-signature tsd-kind-icon">current<wbr>Query<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:12</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="currentresult" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> current<wbr>Result</h3>
+					<div class="tsd-signature tsd-kind-icon">current<wbr>Result<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:13</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="currentresultstate" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagOptional">Optional</span> current<wbr>Result<wbr>State</h3>
+					<div class="tsd-signature tsd-kind-icon">current<wbr>Result<wbr>State<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:14</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="executefetch" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> execute<wbr>Fetch</h3>
+					<div class="tsd-signature tsd-kind-icon">execute<wbr>Fetch<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:40</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="initialdataupdatecount" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> initial<wbr>Data<wbr>Update<wbr>Count</h3>
+					<div class="tsd-signature tsd-kind-icon">initial<wbr>Data<wbr>Update<wbr>Count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:16</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="initialerrorupdatecount" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> initial<wbr>Error<wbr>Update<wbr>Count</h3>
+					<div class="tsd-signature tsd-kind-icon">initial<wbr>Error<wbr>Update<wbr>Count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:17</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="isstale" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> is<wbr>Stale</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Stale<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:30</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external">
+					<a name="listeners" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> listeners</h3>
+					<div class="tsd-signature tsd-kind-icon">listeners<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">QueryObserverListener</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/subscribable.d.ts:3</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="notify" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> notify</h3>
+					<div class="tsd-signature tsd-kind-icon">notify<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:52</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="optionalfetch" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> optional<wbr>Fetch</h3>
+					<div class="tsd-signature tsd-kind-icon">optional<wbr>Fetch<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:39</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
+					<a name="options" class="tsd-anchor"></a>
+					<h3>options</h3>
+					<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:10</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="previousqueryresult" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagOptional">Optional</span> previous<wbr>Query<wbr>Result</h3>
+					<div class="tsd-signature tsd-kind-icon">previous<wbr>Query<wbr>Result<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:15</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="refetchintervalid" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagOptional">Optional</span> refetch<wbr>Interval<wbr>Id</h3>
+					<div class="tsd-signature tsd-kind-icon">refetch<wbr>Interval<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:19</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="shouldnotifylisteners" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> should<wbr>Notify<wbr>Listeners</h3>
+					<div class="tsd-signature tsd-kind-icon">should<wbr>Notify<wbr>Listeners<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:48</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="staletimeoutid" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagOptional">Optional</span> stale<wbr>Timeout<wbr>Id</h3>
+					<div class="tsd-signature tsd-kind-icon">stale<wbr>Timeout<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:18</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="updatequery" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> update<wbr>Query</h3>
+					<div class="tsd-signature tsd-kind-icon">update<wbr>Query<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:50</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="updaterefetchinterval" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> update<wbr>Refetch<wbr>Interval</h3>
+					<div class="tsd-signature tsd-kind-icon">update<wbr>Refetch<wbr>Interval<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:42</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="updateresult" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> update<wbr>Result</h3>
+					<div class="tsd-signature tsd-kind-icon">update<wbr>Result<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:49</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="updatestaletimeout" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> update<wbr>Stale<wbr>Timeout</h3>
+					<div class="tsd-signature tsd-kind-icon">update<wbr>Stale<wbr>Timeout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:41</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="updatetimers" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> update<wbr>Timers</h3>
+					<div class="tsd-signature tsd-kind-icon">update<wbr>Timers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:43</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="willfetchoptionally" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> will<wbr>Fetch<wbr>Optionally</h3>
+					<div class="tsd-signature tsd-kind-icon">will<wbr>Fetch<wbr>Optionally<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:29</li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-external">
+					<a name="bindmethods" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> bind<wbr>Methods</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">bind<wbr>Methods<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:21</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="destroy" class="tsd-anchor"></a>
+					<h3>destroy</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">destroy<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:31</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-external">
+					<a name="fetch" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> fetch</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">fetch<span class="tsd-signature-symbol">(</span>fetchOptions<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ObserverFetchOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/browser.html#queryobserverresult" class="tsd-signature-type" data-tsd-kind="Type alias">QueryObserverResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:38</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> fetchOptions: <span class="tsd-signature-type">ObserverFetchOptions</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/browser.html#queryobserverresult" class="tsd-signature-type" data-tsd-kind="Type alias">QueryObserverResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="getcurrentquery" class="tsd-anchor"></a>
+					<h3>get<wbr>Current<wbr>Query</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Current<wbr>Query<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="browser.query.html" class="tsd-signature-type" data-tsd-kind="Class">Query</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:35</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="browser.query.html" class="tsd-signature-type" data-tsd-kind="Class">Query</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="getcurrentresult" class="tsd-anchor"></a>
+					<h3>get<wbr>Current<wbr>Result</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Current<wbr>Result<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/browser.html#queryobserverresult" class="tsd-signature-type" data-tsd-kind="Type alias">QueryObserverResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:33</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="../modules/browser.html#queryobserverresult" class="tsd-signature-type" data-tsd-kind="Type alias">QueryObserverResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-external">
+					<a name="getnewresult" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> get<wbr>New<wbr>Result</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>New<wbr>Result<span class="tsd-signature-symbol">(</span>willFetch<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/browser.html#queryobserverresult" class="tsd-signature-type" data-tsd-kind="Type alias">QueryObserverResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:47</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> willFetch: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../modules/browser.html#queryobserverresult" class="tsd-signature-type" data-tsd-kind="Type alias">QueryObserverResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="getnextresult" class="tsd-anchor"></a>
+					<h3>get<wbr>Next<wbr>Result</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Next<wbr>Result<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/browser.resultoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">ResultOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/browser.html#queryobserverresult" class="tsd-signature-type" data-tsd-kind="Type alias">QueryObserverResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:34</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/browser.resultoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">ResultOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/browser.html#queryobserverresult" class="tsd-signature-type" data-tsd-kind="Type alias">QueryObserverResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="haslisteners" class="tsd-anchor"></a>
+					<h3>has<wbr>Listeners</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">has<wbr>Listeners<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/subscribable.d.ts:6</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="onqueryupdate" class="tsd-anchor"></a>
+					<h3>on<wbr>Query<wbr>Update</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Query<wbr>Update<span class="tsd-signature-symbol">(</span>action<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Action</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:51</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>action: <span class="tsd-signature-type">Action</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-external">
+					<a name="onsubscribe" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> on<wbr>Subscribe</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Subscribe<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:22</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-external">
+					<a name="onunsubscribe" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> on<wbr>Unsubscribe</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Unsubscribe<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:23</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="refetch" class="tsd-anchor"></a>
+					<h3>refetch</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">refetch<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/browser.refetchoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">RefetchOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/browser.html#queryobserverresult" class="tsd-signature-type" data-tsd-kind="Type alias">QueryObserverResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:37</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/browser.refetchoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">RefetchOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/browser.html#queryobserverresult" class="tsd-signature-type" data-tsd-kind="Type alias">QueryObserverResult</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="remove" class="tsd-anchor"></a>
+					<h3>remove</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">remove<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:36</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="setoptions" class="tsd-anchor"></a>
+					<h3>set<wbr>Options</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Options<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:32</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TQueryData</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="subscribe" class="tsd-anchor"></a>
+					<h3>subscribe</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">subscribe<span class="tsd-signature-symbol">(</span>listener<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">QueryObserverListener</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/subscribable.d.ts:5</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> listener: <span class="tsd-signature-type">QueryObserverListener</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h4>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter-signature">
+									<ul class="tsd-signatures tsd-kind-type-literal tsd-is-external">
+										<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+									</ul>
+									<ul class="tsd-descriptions">
+										<li class="tsd-description">
+											<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="willfetchonmount" class="tsd-anchor"></a>
+					<h3>will<wbr>Fetch<wbr>OnMount</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">will<wbr>Fetch<wbr>OnMount<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:26</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="willfetchonreconnect" class="tsd-anchor"></a>
+					<h3>will<wbr>Fetch<wbr>OnReconnect</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">will<wbr>Fetch<wbr>OnReconnect<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:27</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="willfetchonwindowfocus" class="tsd-anchor"></a>
+					<h3>will<wbr>Fetch<wbr>OnWindow<wbr>Focus</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">will<wbr>Fetch<wbr>OnWindow<wbr>Focus<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:28</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="willloadonmount" class="tsd-anchor"></a>
+					<h3>will<wbr>Load<wbr>OnMount</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">will<wbr>Load<wbr>OnMount<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:24</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="willrefetchonmount" class="tsd-anchor"></a>
+					<h3>will<wbr>Refetch<wbr>OnMount</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">will<wbr>Refetch<wbr>OnMount<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryObserver.d.ts:25</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="../modules.html">Exports</a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="../modules/browser.html">browser</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/common.html">common</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/common_feature_info.html">common/feature-<wbr>info</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/node.html">node</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-module tsd-has-type-parameter tsd-is-external">
+						<a href="browser.queryobserver.html" class="tsd-kind-icon">Query<wbr>Observer</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+								<a href="browser.queryobserver.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryobserver.html#clearrefetchinterval" class="tsd-kind-icon">clear<wbr>Refetch<wbr>Interval</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryobserver.html#clearstaletimeout" class="tsd-kind-icon">clear<wbr>Stale<wbr>Timeout</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryobserver.html#cleartimers" class="tsd-kind-icon">clear<wbr>Timers</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryobserver.html#client" class="tsd-kind-icon">client</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryobserver.html#currentquery" class="tsd-kind-icon">current<wbr>Query</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryobserver.html#currentresult" class="tsd-kind-icon">current<wbr>Result</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryobserver.html#currentresultstate" class="tsd-kind-icon">current<wbr>Result<wbr>State</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryobserver.html#executefetch" class="tsd-kind-icon">execute<wbr>Fetch</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryobserver.html#initialdataupdatecount" class="tsd-kind-icon">initial<wbr>Data<wbr>Update<wbr>Count</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryobserver.html#initialerrorupdatecount" class="tsd-kind-icon">initial<wbr>Error<wbr>Update<wbr>Count</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryobserver.html#isstale" class="tsd-kind-icon">is<wbr>Stale</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-external">
+								<a href="browser.queryobserver.html#listeners" class="tsd-kind-icon">listeners</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryobserver.html#notify" class="tsd-kind-icon">notify</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryobserver.html#optionalfetch" class="tsd-kind-icon">optional<wbr>Fetch</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryobserver.html#options" class="tsd-kind-icon">options</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryobserver.html#previousqueryresult" class="tsd-kind-icon">previous<wbr>Query<wbr>Result</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryobserver.html#refetchintervalid" class="tsd-kind-icon">refetch<wbr>Interval<wbr>Id</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryobserver.html#shouldnotifylisteners" class="tsd-kind-icon">should<wbr>Notify<wbr>Listeners</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryobserver.html#staletimeoutid" class="tsd-kind-icon">stale<wbr>Timeout<wbr>Id</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryobserver.html#updatequery" class="tsd-kind-icon">update<wbr>Query</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryobserver.html#updaterefetchinterval" class="tsd-kind-icon">update<wbr>Refetch<wbr>Interval</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryobserver.html#updateresult" class="tsd-kind-icon">update<wbr>Result</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryobserver.html#updatestaletimeout" class="tsd-kind-icon">update<wbr>Stale<wbr>Timeout</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryobserver.html#updatetimers" class="tsd-kind-icon">update<wbr>Timers</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryobserver.html#willfetchoptionally" class="tsd-kind-icon">will<wbr>Fetch<wbr>Optionally</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-external">
+								<a href="browser.queryobserver.html#bindmethods" class="tsd-kind-icon">bind<wbr>Methods</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryobserver.html#destroy" class="tsd-kind-icon">destroy</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-external">
+								<a href="browser.queryobserver.html#fetch" class="tsd-kind-icon">fetch</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryobserver.html#getcurrentquery" class="tsd-kind-icon">get<wbr>Current<wbr>Query</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryobserver.html#getcurrentresult" class="tsd-kind-icon">get<wbr>Current<wbr>Result</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-external">
+								<a href="browser.queryobserver.html#getnewresult" class="tsd-kind-icon">get<wbr>New<wbr>Result</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryobserver.html#getnextresult" class="tsd-kind-icon">get<wbr>Next<wbr>Result</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryobserver.html#haslisteners" class="tsd-kind-icon">has<wbr>Listeners</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryobserver.html#onqueryupdate" class="tsd-kind-icon">on<wbr>Query<wbr>Update</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-external">
+								<a href="browser.queryobserver.html#onsubscribe" class="tsd-kind-icon">on<wbr>Subscribe</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-external">
+								<a href="browser.queryobserver.html#onunsubscribe" class="tsd-kind-icon">on<wbr>Unsubscribe</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryobserver.html#refetch" class="tsd-kind-icon">refetch</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryobserver.html#remove" class="tsd-kind-icon">remove</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryobserver.html#setoptions" class="tsd-kind-icon">set<wbr>Options</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryobserver.html#subscribe" class="tsd-kind-icon">subscribe</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryobserver.html#willfetchonmount" class="tsd-kind-icon">will<wbr>Fetch<wbr>OnMount</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryobserver.html#willfetchonreconnect" class="tsd-kind-icon">will<wbr>Fetch<wbr>OnReconnect</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryobserver.html#willfetchonwindowfocus" class="tsd-kind-icon">will<wbr>Fetch<wbr>OnWindow<wbr>Focus</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryobserver.html#willloadonmount" class="tsd-kind-icon">will<wbr>Load<wbr>OnMount</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryobserver.html#willrefetchonmount" class="tsd-kind-icon">will<wbr>Refetch<wbr>OnMount</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,1484 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>QueryClient | @xarc/react-query</title>
+	<meta name="description" content="Documentation for @xarc/react-query">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">@xarc/react-query</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../modules.html">@xarc/react-query</a>
+				</li>
+				<li>
+					<a href="../modules/browser.html">browser</a>
+				</li>
+				<li>
+					<a href="browser.queryclient.html">QueryClient</a>
+				</li>
+			</ul>
+			<h1>Class QueryClient</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">QueryClient</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section tsd-is-external">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-external"><a href="browser.queryclient.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-private tsd-is-private-protected tsd-is-external">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryclient.html#defaultoptions" class="tsd-kind-icon">default<wbr>Options</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryclient.html#mutationcache" class="tsd-kind-icon">mutation<wbr>Cache</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryclient.html#mutationdefaults" class="tsd-kind-icon">mutation<wbr>Defaults</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryclient.html#querycache" class="tsd-kind-icon">query<wbr>Cache</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryclient.html#querydefaults" class="tsd-kind-icon">query<wbr>Defaults</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryclient.html#unsubscribefocus" class="tsd-kind-icon">unsubscribe<wbr>Focus</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="browser.queryclient.html#unsubscribeonline" class="tsd-kind-icon">unsubscribe<wbr>Online</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-external">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryclient.html#cancelmutations" class="tsd-kind-icon">cancel<wbr>Mutations</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryclient.html#cancelqueries" class="tsd-kind-icon">cancel<wbr>Queries</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryclient.html#clear" class="tsd-kind-icon">clear</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external"><a href="browser.queryclient.html#defaultmutationoptions" class="tsd-kind-icon">default<wbr>Mutation<wbr>Options</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external"><a href="browser.queryclient.html#defaultqueryobserveroptions" class="tsd-kind-icon">default<wbr>Query<wbr>Observer<wbr>Options</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external"><a href="browser.queryclient.html#defaultqueryoptions" class="tsd-kind-icon">default<wbr>Query<wbr>Options</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external"><a href="browser.queryclient.html#executemutation" class="tsd-kind-icon">execute<wbr>Mutation</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external"><a href="browser.queryclient.html#fetchinfinitequery" class="tsd-kind-icon">fetch<wbr>Infinite<wbr>Query</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external"><a href="browser.queryclient.html#fetchquery" class="tsd-kind-icon">fetch<wbr>Query</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryclient.html#getdefaultoptions" class="tsd-kind-icon">get<wbr>Default<wbr>Options</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryclient.html#getmutationcache" class="tsd-kind-icon">get<wbr>Mutation<wbr>Cache</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryclient.html#getmutationdefaults" class="tsd-kind-icon">get<wbr>Mutation<wbr>Defaults</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryclient.html#getquerycache" class="tsd-kind-icon">get<wbr>Query<wbr>Cache</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external"><a href="browser.queryclient.html#getquerydata" class="tsd-kind-icon">get<wbr>Query<wbr>Data</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryclient.html#getquerydefaults" class="tsd-kind-icon">get<wbr>Query<wbr>Defaults</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external"><a href="browser.queryclient.html#getquerystate" class="tsd-kind-icon">get<wbr>Query<wbr>State</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryclient.html#invalidatequeries" class="tsd-kind-icon">invalidate<wbr>Queries</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryclient.html#isfetching" class="tsd-kind-icon">is<wbr>Fetching</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryclient.html#mount" class="tsd-kind-icon">mount</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryclient.html#prefetchinfinitequery" class="tsd-kind-icon">prefetch<wbr>Infinite<wbr>Query</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryclient.html#prefetchquery" class="tsd-kind-icon">prefetch<wbr>Query</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryclient.html#refetchqueries" class="tsd-kind-icon">refetch<wbr>Queries</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryclient.html#removequeries" class="tsd-kind-icon">remove<wbr>Queries</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryclient.html#resetqueries" class="tsd-kind-icon">reset<wbr>Queries</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryclient.html#resumepausedmutations" class="tsd-kind-icon">resume<wbr>Paused<wbr>Mutations</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryclient.html#setdefaultoptions" class="tsd-kind-icon">set<wbr>Default<wbr>Options</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryclient.html#setmutationdefaults" class="tsd-kind-icon">set<wbr>Mutation<wbr>Defaults</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external"><a href="browser.queryclient.html#setquerydata" class="tsd-kind-icon">set<wbr>Query<wbr>Data</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryclient.html#setquerydefaults" class="tsd-kind-icon">set<wbr>Query<wbr>Defaults</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="browser.queryclient.html#unmount" class="tsd-kind-icon">unmount</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Query<wbr>Client<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">QueryClientConfig</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="browser.queryclient.html" class="tsd-signature-type" data-tsd-kind="Class">QueryClient</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:19</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> config: <span class="tsd-signature-type">QueryClientConfig</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="browser.queryclient.html" class="tsd-signature-type" data-tsd-kind="Class">QueryClient</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected tsd-is-external">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="defaultoptions" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> default<wbr>Options</h3>
+					<div class="tsd-signature tsd-kind-icon">default<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:15</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="mutationcache" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> mutation<wbr>Cache</h3>
+					<div class="tsd-signature tsd-kind-icon">mutation<wbr>Cache<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:14</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="mutationdefaults" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> mutation<wbr>Defaults</h3>
+					<div class="tsd-signature tsd-kind-icon">mutation<wbr>Defaults<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:17</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="querycache" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> query<wbr>Cache</h3>
+					<div class="tsd-signature tsd-kind-icon">query<wbr>Cache<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:13</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="querydefaults" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> query<wbr>Defaults</h3>
+					<div class="tsd-signature tsd-kind-icon">query<wbr>Defaults<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:16</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="unsubscribefocus" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagOptional">Optional</span> unsubscribe<wbr>Focus</h3>
+					<div class="tsd-signature tsd-kind-icon">unsubscribe<wbr>Focus<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:18</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="unsubscribeonline" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagOptional">Optional</span> unsubscribe<wbr>Online</h3>
+					<div class="tsd-signature tsd-kind-icon">unsubscribe<wbr>Online<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:19</li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="cancelmutations" class="tsd-anchor"></a>
+					<h3>cancel<wbr>Mutations</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">cancel<wbr>Mutations<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:50</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="cancelqueries" class="tsd-anchor"></a>
+					<h3>cancel<wbr>Queries</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">cancel<wbr>Queries<span class="tsd-signature-symbol">(</span>filters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">QueryFilters</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">CancelOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">cancel<wbr>Queries<span class="tsd-signature-symbol">(</span>queryKey<span class="tsd-signature-symbol">?: </span><a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a>, filters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">QueryFilters</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">CancelOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:32</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> filters: <span class="tsd-signature-type">QueryFilters</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">CancelOptions</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:33</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> queryKey: <a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> filters: <span class="tsd-signature-type">QueryFilters</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">CancelOptions</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="clear" class="tsd-anchor"></a>
+					<h3>clear</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">clear<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:64</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+					<a name="defaultmutationoptions" class="tsd-anchor"></a>
+					<h3>default<wbr>Mutation<wbr>Options</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">default<wbr>Mutation<wbr>Options&lt;T&gt;<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:63</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T<span class="tsd-signature-symbol">: </span><a href="../interfaces/browser.mutationoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">MutationOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">T</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+					<a name="defaultqueryobserveroptions" class="tsd-anchor"></a>
+					<h3>default<wbr>Query<wbr>Observer<wbr>Options</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">default<wbr>Query<wbr>Observer<wbr>Options&lt;T&gt;<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:62</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T<span class="tsd-signature-symbol">: </span><a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">T</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+					<a name="defaultqueryoptions" class="tsd-anchor"></a>
+					<h3>default<wbr>Query<wbr>Options</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">default<wbr>Query<wbr>Options&lt;T&gt;<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:61</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T<span class="tsd-signature-symbol">: </span><a href="../interfaces/browser.queryoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">T</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+					<a name="executemutation" class="tsd-anchor"></a>
+					<h3>execute<wbr>Mutation</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">execute<wbr>Mutation&lt;TData, TError, TVariables, TContext&gt;<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/browser.mutationoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">MutationOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TVariables</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TContext</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:52</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>TData = <span class="tsd-signature-type">unknown</span></h4>
+								</li>
+								<li>
+									<h4>TError = <span class="tsd-signature-type">unknown</span></h4>
+								</li>
+								<li>
+									<h4>TVariables = <span class="tsd-signature-type">void</span></h4>
+								</li>
+								<li>
+									<h4>TContext = <span class="tsd-signature-type">unknown</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/browser.mutationoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">MutationOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TVariables</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TContext</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+					<a name="fetchinfinitequery" class="tsd-anchor"></a>
+					<h3>fetch<wbr>Infinite<wbr>Query</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">fetch<wbr>Infinite<wbr>Query&lt;TQueryFnData, TError, TData&gt;<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/browser.fetchinfinitequeryoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchInfiniteQueryOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/browser.infinitedata.html" class="tsd-signature-type" data-tsd-kind="Interface">InfiniteData</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">fetch<wbr>Infinite<wbr>Query&lt;TQueryFnData, TError, TData&gt;<span class="tsd-signature-symbol">(</span>queryKey<span class="tsd-signature-symbol">: </span><a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/browser.fetchinfinitequeryoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchInfiniteQueryOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/browser.infinitedata.html" class="tsd-signature-type" data-tsd-kind="Interface">InfiniteData</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">fetch<wbr>Infinite<wbr>Query&lt;TQueryFnData, TError, TData&gt;<span class="tsd-signature-symbol">(</span>queryKey<span class="tsd-signature-symbol">: </span><a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a>, queryFn<span class="tsd-signature-symbol">: </span><a href="../modules/browser.html#queryfunction" class="tsd-signature-type" data-tsd-kind="Type alias">QueryFunction</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">&gt;</span>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/browser.fetchinfinitequeryoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchInfiniteQueryOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/browser.infinitedata.html" class="tsd-signature-type" data-tsd-kind="Interface">InfiniteData</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:44</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>TQueryFnData = <span class="tsd-signature-type">unknown</span></h4>
+								</li>
+								<li>
+									<h4>TError = <span class="tsd-signature-type">unknown</span></h4>
+								</li>
+								<li>
+									<h4>TData = <span class="tsd-signature-type">TQueryFnData</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/browser.fetchinfinitequeryoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchInfiniteQueryOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/browser.infinitedata.html" class="tsd-signature-type" data-tsd-kind="Interface">InfiniteData</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:45</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>TQueryFnData = <span class="tsd-signature-type">unknown</span></h4>
+								</li>
+								<li>
+									<h4>TError = <span class="tsd-signature-type">unknown</span></h4>
+								</li>
+								<li>
+									<h4>TData = <span class="tsd-signature-type">TQueryFnData</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>queryKey: <a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/browser.fetchinfinitequeryoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchInfiniteQueryOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/browser.infinitedata.html" class="tsd-signature-type" data-tsd-kind="Interface">InfiniteData</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:46</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>TQueryFnData = <span class="tsd-signature-type">unknown</span></h4>
+								</li>
+								<li>
+									<h4>TError = <span class="tsd-signature-type">unknown</span></h4>
+								</li>
+								<li>
+									<h4>TData = <span class="tsd-signature-type">TQueryFnData</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>queryKey: <a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a></h5>
+								</li>
+								<li>
+									<h5>queryFn: <a href="../modules/browser.html#queryfunction" class="tsd-signature-type" data-tsd-kind="Type alias">QueryFunction</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/browser.fetchinfinitequeryoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchInfiniteQueryOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/browser.infinitedata.html" class="tsd-signature-type" data-tsd-kind="Interface">InfiniteData</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+					<a name="fetchquery" class="tsd-anchor"></a>
+					<h3>fetch<wbr>Query</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">fetch<wbr>Query&lt;TQueryFnData, TError, TData&gt;<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/browser.fetchqueryoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchQueryOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">fetch<wbr>Query&lt;TQueryFnData, TError, TData&gt;<span class="tsd-signature-symbol">(</span>queryKey<span class="tsd-signature-symbol">: </span><a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/browser.fetchqueryoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchQueryOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">fetch<wbr>Query&lt;TQueryFnData, TError, TData&gt;<span class="tsd-signature-symbol">(</span>queryKey<span class="tsd-signature-symbol">: </span><a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a>, queryFn<span class="tsd-signature-symbol">: </span><a href="../modules/browser.html#queryfunction" class="tsd-signature-type" data-tsd-kind="Type alias">QueryFunction</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">&gt;</span>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/browser.fetchqueryoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchQueryOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:38</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>TQueryFnData = <span class="tsd-signature-type">unknown</span></h4>
+								</li>
+								<li>
+									<h4>TError = <span class="tsd-signature-type">unknown</span></h4>
+								</li>
+								<li>
+									<h4>TData = <span class="tsd-signature-type">TQueryFnData</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/browser.fetchqueryoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchQueryOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:39</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>TQueryFnData = <span class="tsd-signature-type">unknown</span></h4>
+								</li>
+								<li>
+									<h4>TError = <span class="tsd-signature-type">unknown</span></h4>
+								</li>
+								<li>
+									<h4>TData = <span class="tsd-signature-type">TQueryFnData</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>queryKey: <a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/browser.fetchqueryoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchQueryOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:40</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>TQueryFnData = <span class="tsd-signature-type">unknown</span></h4>
+								</li>
+								<li>
+									<h4>TError = <span class="tsd-signature-type">unknown</span></h4>
+								</li>
+								<li>
+									<h4>TData = <span class="tsd-signature-type">TQueryFnData</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>queryKey: <a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a></h5>
+								</li>
+								<li>
+									<h5>queryFn: <a href="../modules/browser.html#queryfunction" class="tsd-signature-type" data-tsd-kind="Type alias">QueryFunction</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/browser.fetchqueryoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchQueryOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TQueryFnData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="getdefaultoptions" class="tsd-anchor"></a>
+					<h3>get<wbr>Default<wbr>Options</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Default<wbr>Options<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/browser.defaultoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">DefaultOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:55</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/browser.defaultoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">DefaultOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="getmutationcache" class="tsd-anchor"></a>
+					<h3>get<wbr>Mutation<wbr>Cache</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Mutation<wbr>Cache<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="browser.mutationcache.html" class="tsd-signature-type" data-tsd-kind="Class">MutationCache</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:54</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="browser.mutationcache.html" class="tsd-signature-type" data-tsd-kind="Class">MutationCache</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="getmutationdefaults" class="tsd-anchor"></a>
+					<h3>get<wbr>Mutation<wbr>Defaults</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Mutation<wbr>Defaults<span class="tsd-signature-symbol">(</span>mutationKey<span class="tsd-signature-symbol">?: </span><a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/browser.mutationobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">MutationObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:60</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> mutationKey: <a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/browser.mutationobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">MutationObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="getquerycache" class="tsd-anchor"></a>
+					<h3>get<wbr>Query<wbr>Cache</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Query<wbr>Cache<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="browser.querycache.html" class="tsd-signature-type" data-tsd-kind="Class">QueryCache</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:53</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="browser.querycache.html" class="tsd-signature-type" data-tsd-kind="Class">QueryCache</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+					<a name="getquerydata" class="tsd-anchor"></a>
+					<h3>get<wbr>Query<wbr>Data</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Query<wbr>Data&lt;TData&gt;<span class="tsd-signature-symbol">(</span>queryKey<span class="tsd-signature-symbol">: </span><a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a>, filters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">QueryFilters</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TData</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:25</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>TData = <span class="tsd-signature-type">unknown</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>queryKey: <a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> filters: <span class="tsd-signature-type">QueryFilters</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TData</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="getquerydefaults" class="tsd-anchor"></a>
+					<h3>get<wbr>Query<wbr>Defaults</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Query<wbr>Defaults<span class="tsd-signature-symbol">(</span>queryKey<span class="tsd-signature-symbol">?: </span><a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:58</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> queryKey: <a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+					<a name="getquerystate" class="tsd-anchor"></a>
+					<h3>get<wbr>Query<wbr>State</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Query<wbr>State&lt;TData, TError&gt;<span class="tsd-signature-symbol">(</span>queryKey<span class="tsd-signature-symbol">: </span><a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a>, filters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">QueryFilters</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">QueryState</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:27</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>TData = <span class="tsd-signature-type">unknown</span></h4>
+								</li>
+								<li>
+									<h4>TError = <span class="tsd-signature-type">undefined</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>queryKey: <a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> filters: <span class="tsd-signature-type">QueryFilters</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">QueryState</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TError</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="invalidatequeries" class="tsd-anchor"></a>
+					<h3>invalidate<wbr>Queries</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">invalidate<wbr>Queries<span class="tsd-signature-symbol">(</span>filters<span class="tsd-signature-symbol">?: </span><a href="../interfaces/browser.invalidatequeryfilters.html" class="tsd-signature-type" data-tsd-kind="Interface">InvalidateQueryFilters</a>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/browser.invalidateoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">InvalidateOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">invalidate<wbr>Queries<span class="tsd-signature-symbol">(</span>queryKey<span class="tsd-signature-symbol">?: </span><a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a>, filters<span class="tsd-signature-symbol">?: </span><a href="../interfaces/browser.invalidatequeryfilters.html" class="tsd-signature-type" data-tsd-kind="Interface">InvalidateQueryFilters</a>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/browser.invalidateoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">InvalidateOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:34</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> filters: <a href="../interfaces/browser.invalidatequeryfilters.html" class="tsd-signature-type" data-tsd-kind="Interface">InvalidateQueryFilters</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/browser.invalidateoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">InvalidateOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:35</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> queryKey: <a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> filters: <a href="../interfaces/browser.invalidatequeryfilters.html" class="tsd-signature-type" data-tsd-kind="Interface">InvalidateQueryFilters</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/browser.invalidateoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">InvalidateOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="isfetching" class="tsd-anchor"></a>
+					<h3>is<wbr>Fetching</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Fetching<span class="tsd-signature-symbol">(</span>filters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">QueryFilters</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Fetching<span class="tsd-signature-symbol">(</span>queryKey<span class="tsd-signature-symbol">?: </span><a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a>, filters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">QueryFilters</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:23</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> filters: <span class="tsd-signature-type">QueryFilters</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:24</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> queryKey: <a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> filters: <span class="tsd-signature-type">QueryFilters</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="mount" class="tsd-anchor"></a>
+					<h3>mount</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">mount<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:21</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="prefetchinfinitequery" class="tsd-anchor"></a>
+					<h3>prefetch<wbr>Infinite<wbr>Query</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">prefetch<wbr>Infinite<wbr>Query<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/browser.fetchinfinitequeryoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchInfiniteQueryOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">prefetch<wbr>Infinite<wbr>Query<span class="tsd-signature-symbol">(</span>queryKey<span class="tsd-signature-symbol">: </span><a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/browser.fetchinfinitequeryoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchInfiniteQueryOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">prefetch<wbr>Infinite<wbr>Query<span class="tsd-signature-symbol">(</span>queryKey<span class="tsd-signature-symbol">: </span><a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a>, queryFn<span class="tsd-signature-symbol">: </span><a href="../modules/browser.html#queryfunction" class="tsd-signature-type" data-tsd-kind="Type alias">QueryFunction</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/browser.fetchinfinitequeryoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchInfiniteQueryOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:47</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/browser.fetchinfinitequeryoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchInfiniteQueryOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:48</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>queryKey: <a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/browser.fetchinfinitequeryoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchInfiniteQueryOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:49</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>queryKey: <a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a></h5>
+								</li>
+								<li>
+									<h5>queryFn: <a href="../modules/browser.html#queryfunction" class="tsd-signature-type" data-tsd-kind="Type alias">QueryFunction</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/browser.fetchinfinitequeryoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchInfiniteQueryOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="prefetchquery" class="tsd-anchor"></a>
+					<h3>prefetch<wbr>Query</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">prefetch<wbr>Query<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/browser.fetchqueryoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchQueryOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">prefetch<wbr>Query<span class="tsd-signature-symbol">(</span>queryKey<span class="tsd-signature-symbol">: </span><a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/browser.fetchqueryoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchQueryOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">prefetch<wbr>Query<span class="tsd-signature-symbol">(</span>queryKey<span class="tsd-signature-symbol">: </span><a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a>, queryFn<span class="tsd-signature-symbol">: </span><a href="../modules/browser.html#queryfunction" class="tsd-signature-type" data-tsd-kind="Type alias">QueryFunction</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/browser.fetchqueryoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchQueryOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:41</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/browser.fetchqueryoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchQueryOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:42</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>queryKey: <a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/browser.fetchqueryoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchQueryOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:43</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>queryKey: <a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a></h5>
+								</li>
+								<li>
+									<h5>queryFn: <a href="../modules/browser.html#queryfunction" class="tsd-signature-type" data-tsd-kind="Type alias">QueryFunction</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/browser.fetchqueryoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">FetchQueryOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="refetchqueries" class="tsd-anchor"></a>
+					<h3>refetch<wbr>Queries</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">refetch<wbr>Queries<span class="tsd-signature-symbol">(</span>filters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">QueryFilters</span>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/browser.refetchoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">RefetchOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">refetch<wbr>Queries<span class="tsd-signature-symbol">(</span>queryKey<span class="tsd-signature-symbol">?: </span><a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a>, filters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">QueryFilters</span>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/browser.refetchoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">RefetchOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:36</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> filters: <span class="tsd-signature-type">QueryFilters</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/browser.refetchoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">RefetchOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:37</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> queryKey: <a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> filters: <span class="tsd-signature-type">QueryFilters</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/browser.refetchoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">RefetchOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="removequeries" class="tsd-anchor"></a>
+					<h3>remove<wbr>Queries</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Queries<span class="tsd-signature-symbol">(</span>filters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">QueryFilters</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Queries<span class="tsd-signature-symbol">(</span>queryKey<span class="tsd-signature-symbol">?: </span><a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a>, filters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">QueryFilters</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:28</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> filters: <span class="tsd-signature-type">QueryFilters</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:29</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> queryKey: <a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> filters: <span class="tsd-signature-type">QueryFilters</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="resetqueries" class="tsd-anchor"></a>
+					<h3>reset<wbr>Queries</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">reset<wbr>Queries<span class="tsd-signature-symbol">(</span>filters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">QueryFilters</span>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/browser.resetoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">ResetOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">reset<wbr>Queries<span class="tsd-signature-symbol">(</span>queryKey<span class="tsd-signature-symbol">?: </span><a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a>, filters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">QueryFilters</span>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/browser.resetoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">ResetOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:30</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> filters: <span class="tsd-signature-type">QueryFilters</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/browser.resetoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">ResetOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:31</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> queryKey: <a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> filters: <span class="tsd-signature-type">QueryFilters</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/browser.resetoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">ResetOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="resumepausedmutations" class="tsd-anchor"></a>
+					<h3>resume<wbr>Paused<wbr>Mutations</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">resume<wbr>Paused<wbr>Mutations<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:51</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="setdefaultoptions" class="tsd-anchor"></a>
+					<h3>set<wbr>Default<wbr>Options</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Default<wbr>Options<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/browser.defaultoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">DefaultOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:56</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/browser.defaultoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">DefaultOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="setmutationdefaults" class="tsd-anchor"></a>
+					<h3>set<wbr>Mutation<wbr>Defaults</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Mutation<wbr>Defaults<span class="tsd-signature-symbol">(</span>mutationKey<span class="tsd-signature-symbol">: </span><a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a>, options<span class="tsd-signature-symbol">: </span><a href="../interfaces/browser.mutationobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">MutationObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:59</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>mutationKey: <a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a></h5>
+								</li>
+								<li>
+									<h5>options: <a href="../interfaces/browser.mutationobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">MutationObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+					<a name="setquerydata" class="tsd-anchor"></a>
+					<h3>set<wbr>Query<wbr>Data</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Query<wbr>Data&lt;TData&gt;<span class="tsd-signature-symbol">(</span>queryKey<span class="tsd-signature-symbol">: </span><a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a>, updater<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Updater</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SetDataOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TData</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:26</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>TData</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>queryKey: <a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a></h5>
+								</li>
+								<li>
+									<h5>updater: <span class="tsd-signature-type">Updater</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TData</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">SetDataOptions</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TData</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="setquerydefaults" class="tsd-anchor"></a>
+					<h3>set<wbr>Query<wbr>Defaults</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Query<wbr>Defaults<span class="tsd-signature-symbol">(</span>queryKey<span class="tsd-signature-symbol">: </span><a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a>, options<span class="tsd-signature-symbol">: </span><a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:57</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>queryKey: <a href="../modules/browser.html#querykey" class="tsd-signature-type" data-tsd-kind="Type alias">QueryKey</a></h5>
+								</li>
+								<li>
+									<h5>options: <a href="../interfaces/browser.queryobserveroptions.html" class="tsd-signature-type" data-tsd-kind="Interface">QueryObserverOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="unmount" class="tsd-anchor"></a>
+					<h3>unmount</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">unmount<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/.f/_/react-query/3.5.16/react-query/types/core/queryClient.d.ts:22</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="../modules.html">Exports</a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="../modules/browser.html">browser</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/common.html">common</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/common_feature_info.html">common/feature-<wbr>info</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/node.html">node</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-module tsd-is-external">
+						<a href="browser.queryclient.html" class="tsd-kind-icon">Query<wbr>Client</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryclient.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryclient.html#defaultoptions" class="tsd-kind-icon">default<wbr>Options</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryclient.html#mutationcache" class="tsd-kind-icon">mutation<wbr>Cache</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryclient.html#mutationdefaults" class="tsd-kind-icon">mutation<wbr>Defaults</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryclient.html#querycache" class="tsd-kind-icon">query<wbr>Cache</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryclient.html#querydefaults" class="tsd-kind-icon">query<wbr>Defaults</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryclient.html#unsubscribefocus" class="tsd-kind-icon">unsubscribe<wbr>Focus</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="browser.queryclient.html#unsubscribeonline" class="tsd-kind-icon">unsubscribe<wbr>Online</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryclient.html#cancelmutations" class="tsd-kind-icon">cancel<wbr>Mutations</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryclient.html#cancelqueries" class="tsd-kind-icon">cancel<wbr>Queries</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryclient.html#clear" class="tsd-kind-icon">clear</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+								<a href="browser.queryclient.html#defaultmutationoptions" class="tsd-kind-icon">default<wbr>Mutation<wbr>Options</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+								<a href="browser.queryclient.html#defaultqueryobserveroptions" class="tsd-kind-icon">default<wbr>Query<wbr>Observer<wbr>Options</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+								<a href="browser.queryclient.html#defaultqueryoptions" class="tsd-kind-icon">default<wbr>Query<wbr>Options</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+								<a href="browser.queryclient.html#executemutation" class="tsd-kind-icon">execute<wbr>Mutation</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+								<a href="browser.queryclient.html#fetchinfinitequery" class="tsd-kind-icon">fetch<wbr>Infinite<wbr>Query</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+								<a href="browser.queryclient.html#fetchquery" class="tsd-kind-icon">fetch<wbr>Query</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryclient.html#getdefaultoptions" class="tsd-kind-icon">get<wbr>Default<wbr>Options</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryclient.html#getmutationcache" class="tsd-kind-icon">get<wbr>Mutation<wbr>Cache</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryclient.html#getmutationdefaults" class="tsd-kind-icon">get<wbr>Mutation<wbr>Defaults</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryclient.html#getquerycache" class="tsd-kind-icon">get<wbr>Query<wbr>Cache</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+								<a href="browser.queryclient.html#getquerydata" class="tsd-kind-icon">get<wbr>Query<wbr>Data</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryclient.html#getquerydefaults" class="tsd-kind-icon">get<wbr>Query<wbr>Defaults</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+								<a href="browser.queryclient.html#getquerystate" class="tsd-kind-icon">get<wbr>Query<wbr>State</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryclient.html#invalidatequeries" class="tsd-kind-icon">invalidate<wbr>Queries</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryclient.html#isfetching" class="tsd-kind-icon">is<wbr>Fetching</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryclient.html#mount" class="tsd-kind-icon">mount</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryclient.html#prefetchinfinitequery" class="tsd-kind-icon">prefetch<wbr>Infinite<wbr>Query</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryclient.html#prefetchquery" class="tsd-kind-icon">prefetch<wbr>Query</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryclient.html#refetchqueries" class="tsd-kind-icon">refetch<wbr>Queries</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryclient.html#removequeries" class="tsd-kind-icon">remove<wbr>Queries</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryclient.html#resetqueries" class="tsd-kind-icon">reset<wbr>Queries</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryclient.html#resumepausedmutations" class="tsd-kind-icon">resume<wbr>Paused<wbr>Mutations</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryclient.html#setdefaultoptions" class="tsd-kind-icon">set<wbr>Default<wbr>Options</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryclient.html#setmutationdefaults" class="tsd-kind-icon">set<wbr>Mutation<wbr>Defaults</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+								<a href="browser.queryclient.html#setquerydata" class="tsd-kind-icon">set<wbr>Query<wbr>Data</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryclient.html#setquerydefaults" class="tsd-kind-icon">set<wbr>Query<wbr>Defaults</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="browser.queryclient.html#unmount" class="tsd-kind-icon">unmount</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
