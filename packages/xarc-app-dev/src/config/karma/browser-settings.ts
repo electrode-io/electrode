@@ -2,13 +2,15 @@
 
 import { loadXarcOptions } from "../../lib/utils";
 
-module.exports = function(settings) {
+import { logger } from "../../lib/logger";
+
+export = function(settings) {
   const xarcOptions = loadXarcOptions();
-  const logger = require("@xarc/app/lib/logger");
+
   const browser = xarcOptions.karma.browser.toLowerCase();
+
   if (browser === "chrome") {
     settings.browsers = ["ChromeHeadless"];
-
     logger.info("Using Chrome Headless to run Karma test");
   } else if (browser === "phantomjs") {
     settings.frameworks.push("phantomjs-shim");

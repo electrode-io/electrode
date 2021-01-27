@@ -33,6 +33,7 @@
     "build": "clap build"
   },
   "dependencies": {
+    "@babel/runtime": "^7.12.5",
     "@xarc/app": "^8.1.7",
     "@xarc/fastify-server": "^2.0.0",
     "electrode-confippet": "^1.5.0",
@@ -47,20 +48,22 @@
   },
   "devDependencies": {
     "@xarc/app-dev": "^8.1.7",
-    "electrode-archetype-opt-sass": "^2.0.0",
+    "@xarc/opt-postcss": "^1.0.0",
+    "@xarc/opt-sass": "^1.0.0",
     "prettier": "^1.19.1",
     "tachyons-sass": "^4.9.5"
   },
   "fyn": {
     "dependencies": {
       "@xarc/app": "../../packages/xarc-app",
-      "electrode-archetype-opt-preact": "../../packages/electrode-archetype-opt-preact",
+      "@xarc/opt-preact": "../../packages/xarc-opt-preact",
       "subapp-pbundle": "../../packages/subapp-pbundle",
       "subapp-server": "../../packages/subapp-server"
     },
     "devDependencies": {
       "@xarc/app-dev": "../../packages/xarc-app-dev",
-      "electrode-archetype-opt-sass": "../../packages/electrode-archetype-opt-sass"
+      "@xarc/opt-postcss": "../../packages/xarc-opt-postcss",
+      "@xarc/opt-sass": "../../packages/xarc-opt-sass"
     }
   },
   "prettier": {

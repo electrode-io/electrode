@@ -7,7 +7,7 @@ process.on("SIGINT", () => {
 });
 
 const electrodeConfippet = require("electrode-confippet");
-const support = require("@xarc/app/support");
+const { loadRuntimeSupport } = require("@xarc/app");
 
 //
 const electrodeServer = require("@xarc/fastify-server");
@@ -34,7 +34,7 @@ const startServer = config => {
 //
 
 module.exports = () =>
-  support.load().then(() => {
+  loadRuntimeSupport().then(() => {
     const config = electrodeConfippet.config;
     return startServer(config).catch(e => {
       console.log("start server failed -", e.message); // eslint-disable-line

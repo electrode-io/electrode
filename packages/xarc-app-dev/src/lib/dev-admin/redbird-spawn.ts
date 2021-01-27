@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-empty-function */
-export {};
-
 /* eslint-disable no-magic-numbers, no-process-exit, global-require, no-console, max-statements */
 
-const sudoPrompt = require("sudo-prompt");
-const request = require("request");
-const http = require("http");
-const Util = require("util");
-const { controlPaths, settings, httpDevServer } = require("../../config/dev-proxy");
+import sudoPrompt from "sudo-prompt";
+import request from "request";
+import http from "http";
+import Util from "util";
+import { formUrl } from "../utils";
+import { devProxy } from "../../config/dev-proxy";
+
 const proxyJs = require.resolve("./redbird-proxy");
-const { formUrl } = require("../utils");
+
+const { controlPaths, settings, httpDevServer } = devProxy;
 
 const canListenPort = async (port, host = undefined) => {
   const server = http.createServer(() => {});

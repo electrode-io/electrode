@@ -7,7 +7,7 @@ process.on("SIGINT", () => {
 });
 
 const electrodeConfippet = require("electrode-confippet");
-const support = require("@xarc/app/support");
+const { loadRuntimeSupport } = require("@xarc/app");
 
 //
 const staticPathsDecor = require("electrode-static-paths");
@@ -37,7 +37,7 @@ const startServer = config => {
 };
 
 module.exports = () =>
-  support.load().then(() => {
+  loadRuntimeSupport().then(() => {
     const config = electrodeConfippet.config;
     return startServer(config);
   });

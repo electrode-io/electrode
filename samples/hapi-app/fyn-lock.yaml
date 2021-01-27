@@ -1,5 +1,6 @@
 $pkg:
  dep:
+  '@babel/runtime': ^7.12.5
   '@hapi/good': ^8.2.4
   '@hapi/good-console': ^8.1.2
   '@hapi/inert': ^5.1.2
@@ -1327,8 +1328,9 @@ $pkg:
  _:
   '^7.1.2,^7.12.1,^7.12.5,^7.7.7,^7.8.4': 7.12.5
  7.12.5:
+  top: 1
   $: sha512-plcc+hbExy3McchJCEQG3knOsuh3HH+Prx1P6cLIkET/0dLuQDEnrT+s27Axgc9bqfsmNUNHfscgMUdBpC9xfg==
-  _: 'https://npme.walmart.com/@babel/runtime/-/runtime-7.12.5.tgz'
+  _: 'https://registry.npmjs.org/@babel/runtime/-/runtime-7.12.5.tgz'
   dependencies:
    regenerator-runtime: ^0.13.4
 '@babel/template':
@@ -1862,7 +1864,7 @@ $pkg:
 '@loadable/babel-plugin':
  _latest: 5.13.2
  _:
-  '^5.10.0,^5.13.2': 5.13.2
+  ^5.13.2: 5.13.2
  5.13.2:
   top: 1
   $: sha512-vSZUVeTH1S1sDbk8Tzft0plZSkN7W4zmVR5w/Bmy4UmvBiu9lin7ztrDpoUTUzxpoups+OJbTc/OosvN0aMXWg==
@@ -2157,24 +2159,24 @@ $pkg:
    '@webassemblyjs/wast-parser': 1.9.0
    '@xtuc/long': 4.2.2
 '@xarc/app':
- _latest: 8.2.2-fynlocal_h
+ _latest: 8.2.3-fynlocal_h
  _:
-  ../../packages/xarc-app: 8.2.2-fynlocal_h
- 8.2.2-fynlocal_h:
+  ../../packages/xarc-app: 8.2.3-fynlocal_h
+ 8.2.3-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/xarc-app
   dependencies:
    '@babel/runtime': ^7.12.5
-   isomorphic-loader: ^4.3.0
+   isomorphic-loader: ^4.4.0
    optional-require: ^1.0.0
    subapp-util: ^1.1.2
    tslib: ^2.1.0
 '@xarc/app-dev':
- _latest: 8.2.2-fynlocal_h
+ _latest: 8.2.3-fynlocal_h
  _:
-  ../../packages/xarc-app-dev: 8.2.2-fynlocal_h
- 8.2.2-fynlocal_h:
+  ../../packages/xarc-app-dev: 8.2.3-fynlocal_h
+ 8.2.3-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/xarc-app-dev
@@ -2192,12 +2194,10 @@ $pkg:
    '@babel/preset-typescript': ^7.0.0
    '@babel/register': ^7.0.0
    '@jchip/redbird': ^1.2.2
-   '@loadable/babel-plugin': ^5.10.0
    '@xarc/run': ^1.0.4
-   '@xarc/subapp': ^0.1.3
-   '@xarc/webpack': ^9.1.0
+   '@xarc/subapp': ^0.1.4
+   '@xarc/webpack': ^9.1.1
    ansi-to-html: ^0.6.8
-   babel-plugin-dynamic-import-node: ^2.2.0
    babel-plugin-lodash: ^3.3.4
    babel-plugin-minify-dead-code-elimination: ^0.5.0
    babel-plugin-react-css-modules: ^5.2.6
@@ -2375,16 +2375,16 @@ $pkg:
    stylus: ^0.54.7
    stylus-relative-loader: ^3.4.0
 '@xarc/react':
- _latest: 0.1.3-fynlocal_h
+ _latest: 0.1.4-fynlocal_h
  _:
-  ../../packages/xarc-react: 0.1.3-fynlocal_h
- 0.1.3-fynlocal_h:
+  ../../packages/xarc-react: 0.1.4-fynlocal_h
+ 0.1.4-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/xarc-react
   dependencies:
    '@xarc/render-context': ^1.0.3
-   '@xarc/subapp': ^0.1.3
+   '@xarc/subapp': ^0.1.4
    '@xarc/tag-renderer': ^1.0.3
    react: '>= 16'
    react-dom: '>= 16'
@@ -2423,10 +2423,10 @@ $pkg:
    unwrap-npm-cmd: ^1.1.1
    xsh: ^0.4.5
 '@xarc/subapp':
- _latest: 0.1.3-fynlocal_h
+ _latest: 0.1.4-fynlocal_h
  _:
-  ../xarc-subapp: 0.1.3-fynlocal_h
- 0.1.3-fynlocal_h:
+  ../xarc-subapp: 0.1.4-fynlocal_h
+ 0.1.4-fynlocal_h:
   $: local
   _: ../../packages/xarc-subapp
   dependencies:
@@ -2442,10 +2442,10 @@ $pkg:
   dependencies:
    '@xarc/render-context': ^1.0.5
 '@xarc/webpack':
- _latest: 9.1.0-fynlocal_h
+ _latest: 9.1.1-fynlocal_h
  _:
-  ../xarc-webpack: 9.1.0-fynlocal_h
- 9.1.0-fynlocal_h:
+  ../xarc-webpack: 9.1.1-fynlocal_h
+ 9.1.1-fynlocal_h:
   $: local
   _: ../../packages/xarc-webpack
   dependencies:
@@ -3105,7 +3105,7 @@ babel-loader:
 babel-plugin-dynamic-import-node:
  _latest: 2.3.3
  _:
-  '^2.2.0,^2.3.3': 2.3.3
+  ^2.3.3: 2.3.3
  2.3.3:
   $: sha512-jZVI+s9Zg3IqA/kdi0i6UDCybUI3aSBLnglhYbSSjKlV7yF1F/5LWv8MakQmvYpnbJDS6fcBL2KzHSxNCMtWSQ==
   _: 'https://npme.walmart.com/babel-plugin-dynamic-import-node/-/babel-plugin-dynamic-import-node-2.3.3.tgz'
@@ -5056,10 +5056,10 @@ electrode-node-resolver:
   dependencies:
    require-at: ^1.0.6
 electrode-react-webapp:
- _latest: 4.0.3-fynlocal_h
+ _latest: 4.0.4-fynlocal_h
  _:
-  ../../packages/electrode-react-webapp: 4.0.3-fynlocal_h
- 4.0.3-fynlocal_h:
+  ../../packages/electrode-react-webapp: 4.0.4-fynlocal_h
+ 4.0.4-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/electrode-react-webapp
@@ -7414,12 +7414,12 @@ isobject:
   dependencies:
    isarray: 1.0.0
 isomorphic-loader:
- _latest: 4.3.0
+ _latest: 4.4.0
  _:
-  ^4.3.0: 4.3.0
- 4.3.0:
-  $: sha512-x2zP3JsUfTKEypGrHx6tAs1ytDrOd2s1IpG3cadX3UNNvtEwgqC2hEGv2f2dZQmTzABBEZSrLoAdJEQK45Znvw==
-  _: 'https://registry.npmjs.org/isomorphic-loader/-/isomorphic-loader-4.3.0.tgz'
+  ^4.4.0: 4.4.0
+ 4.4.0:
+  $: sha512-1qEb+6XGOD02wTVzICzyWlbYFgzrqdQytqFpXI4KzaZymTvSYN5U6CjhNp11yt3KjRjsdjglaSmP2gBVncOJYQ==
+  _: 'https://registry.npmjs.org/isomorphic-loader/-/isomorphic-loader-4.4.0.tgz'
 isstream:
  _latest: 0.1.2
  _:

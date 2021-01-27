@@ -1,7 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-export {};
-
-module.exports = function getEnvKarma() {
+export function getEnvKarma() {
   const xenvConfig = require("xenv-config");
   const { merge } = require("lodash");
   const userConfig = require("./user-config");
@@ -10,4 +7,4 @@ module.exports = function getEnvKarma() {
     browser: { env: "KARMA_BROWSER", default: "chrome" }
   };
   return xenvConfig(karmaConfigSpec, userConfig.karma, { merge });
-};
+}

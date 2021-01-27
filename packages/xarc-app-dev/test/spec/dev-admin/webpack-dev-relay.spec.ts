@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires, callback-return */
 
 const { EventEmitter } = require("events");
-const WebpackDevRelay = require("../../../src/lib/dev-admin/webpack-dev-relay");
+import { WebpackDevRelay } from "../../../src/lib/dev-admin/webpack-dev-relay";
 const isomorphicConfig = require("isomorphic-loader/lib/config");
 const { asyncVerify } = require("run-verify");
 const _ = require("lodash");

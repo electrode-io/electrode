@@ -84,8 +84,6 @@ const isTest = (BABEL_ENV || NODE_ENV) === "test";
 
 // @ts-ignore
 const plugins = basePlugins.concat(
-  // test env
-  isTest && ["babel-plugin-dynamic-import-node"],
   // production env
   isProduction && [
     "@babel/plugin-transform-react-constant-elements",
@@ -156,7 +154,7 @@ const presets = [
   "@babel/preset-react"
 ];
 
-module.exports = {
+export = {
   presets: presets.filter(x => x),
   plugins: plugins.filter(x => x)
 };

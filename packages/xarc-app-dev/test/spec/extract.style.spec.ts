@@ -2,11 +2,13 @@
 /* eslint-disable @typescript-eslint/ban-ts-ignore, no-invalid-this, @typescript-eslint/class-name-casing */
 /* eslint-disable no-unused-expressions, max-nested-callbacks, no-unused-expressions */
 
-const archetype = require("../../src/config/archetype")();
+import { getDevOptions } from "../../src/config/archetype";
 const moduleName = "@xarc/webpack/lib/partials/extract-style";
 
 import { describe, it, afterEach } from "mocha";
 import { expect } from "chai";
+
+const archetype = getDevOptions();
 
 // TODO: should move to xarc-webpack
 describe.skip("@xarc/app-dev extract-styles", function() {

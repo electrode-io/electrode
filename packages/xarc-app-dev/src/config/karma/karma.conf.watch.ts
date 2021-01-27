@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/ban-ts-ignore */
-export {};
-
 /*
  * Karma Configuration: "watch" version.
  *
@@ -8,10 +6,10 @@ export {};
  */
 
 const dev = require("./karma.conf.dev");
-const loadUserConfig = require("./util/load-user-config");
+import { loadUserConfig } from "./util/load-user-config";
 const Path = require("path");
 
-module.exports = function(config) {
+export = function(config) {
   dev(config);
   const settings = {
     crossOriginAttribute: false,

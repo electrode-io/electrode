@@ -21,7 +21,7 @@ import * as Fs from "fs";
 import * as _ from "lodash";
 import * as Path from "path";
 
-const logger = require("@xarc/app-dev/lib/logger");
+const { logger } = require("@xarc/app-dev/lib/logger");
 import { loadXarcOptions } from "../util/load-xarc-options";
 const mkdirp = require("mkdirp");
 const { devServerBaseUrl } = require("../util/webpack-dev-url");

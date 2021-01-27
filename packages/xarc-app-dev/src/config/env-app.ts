@@ -1,7 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-export {};
-
-module.exports = function getAppEnv() {
+export function getEnvApp() {
   const xenvConfig = require("xenv-config");
   const { merge } = require("lodash");
 
@@ -17,4 +14,4 @@ module.exports = function getAppEnv() {
   };
 
   return xenvConfig(appConfigSpec, {}, { merge });
-};
+}

@@ -1,7 +1,7 @@
 import "@xarc/app/runtime-setup";
 
 import { config } from "./config";
-import support from "@xarc/app/support";
+import { loadRuntimeSupport } from "@xarc/app";
 const electrodeServer = require("@xarc/fastify-server");
 
 //
@@ -35,7 +35,7 @@ function memoize(key: any, factory: () => any) {
 const Home = createDynamicComponent(home, { ssr: true });
 
 async function start() {
-  await support.load({
+  await loadRuntimeSupport({
     awaitReady: false,
     isomorphicCdnOptions: {
       prodOnly: true

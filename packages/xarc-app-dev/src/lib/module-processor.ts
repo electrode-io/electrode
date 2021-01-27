@@ -1,12 +1,9 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-export {};
-
 /**
  * Take webpack Stat JSON output and group modules by npm packages,
  * noting duplicates if there are any.
  */
 
-const Path = require("path");
+import Path from "path";
 import { loadXarcOptions } from "./utils";
 
 const tildaSep = "/~/";
@@ -18,7 +15,7 @@ const atModRegex = new RegExp(`([^/]+/[^/]+)/(.+)`);
 // match packageName/file
 const modRegex = new RegExp(`([^/]+)/(.+)`);
 
-class ModuleProcessor {
+export class ModuleProcessor {
   statJson: any;
   modulesByPackage: any;
   totalSize: any;
@@ -142,5 +139,3 @@ class ModuleProcessor {
     return this.modulesByPackage;
   }
 }
-
-module.exports = ModuleProcessor;

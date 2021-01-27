@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
-export {};
 
 /* eslint-disable no-console, no-process-exit */
 
-class AutomationIO {
+export class AutomationIO {
   constructor(name) {
     console.log(`
 =================================================================================================
@@ -37,5 +36,3 @@ class AutomationIO {
     process.exit();
   }
 }
-
-module.exports = AutomationIO;

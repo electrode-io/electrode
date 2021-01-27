@@ -18,7 +18,7 @@ const addFlowPlugin = Boolean(enableFlow && optFlow);
 
 const { node } = envTargets;
 
-module.exports = {
+export = {
   presets: [
     [
       "@babel/preset-env",

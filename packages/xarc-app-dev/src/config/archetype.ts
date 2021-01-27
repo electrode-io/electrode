@@ -2,8 +2,8 @@
 
 import { XarcOptions } from "./opt2/xarc-options";
 import { getDevArchetypeLegacy } from "./options";
-const _ = require("lodash");
-const getEnvProxy = require("./env-proxy");
+import _ from "lodash";
+import { getEnvProxy } from "./env-proxy";
 import { saveXarcOptions, loadXarcOptions } from "../lib/utils";
 
 let cachedArchetype = null;
@@ -14,7 +14,7 @@ let cachedArchetype = null;
  * @param user - user options
  * @returns options - final options with defaults and env applied
  */
-module.exports = function getDevOptions(userOptions: XarcOptions = null) {
+export function getDevOptions(userOptions: XarcOptions = null) {
   if (!userOptions && cachedArchetype) {
     // if cached is already running
     cachedArchetype._fromCache = true;
@@ -74,4 +74,4 @@ module.exports = function getDevOptions(userOptions: XarcOptions = null) {
   cachedArchetype = legacy;
 
   return cachedArchetype;
-};
+}

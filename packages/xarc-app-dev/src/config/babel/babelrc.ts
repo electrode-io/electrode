@@ -138,8 +138,6 @@ const basePlugins = [
 
 // @ts-ignore
 const plugins = basePlugins.concat(
-  // test env
-  isTest && ["babel-plugin-dynamic-import-node"],
   // production env
   !isNodeTarget &&
     isProduction && [
@@ -205,7 +203,7 @@ const presets = [
   "@babel/preset-react"
 ];
 
-module.exports = {
+export = {
   presets: presets.filter(x => x),
   plugins: plugins.filter(x => x)
 };

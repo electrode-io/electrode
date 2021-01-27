@@ -35,6 +35,7 @@
     "build": "clap build"
   },
   "dependencies": {
+    "@babel/runtime": "^7.12.5",
     "@xarc/app": "^8.0.0",
     "@xarc/fastify-server": "^2.0.0",
     "electrode-confippet": "^1.5.0",

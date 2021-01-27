@@ -15,7 +15,7 @@ import {
 
 import { loadXarcOptions } from "./utils";
 
-class AppDevMiddleware {
+export class AppDevMiddleware {
   webpackDev: any;
 
   constructor() {
@@ -87,5 +87,3 @@ class AppDevMiddleware {
     process.nextTick(() => process.send && process.send({ name: "app-setup" }));
   }
 }
-
-module.exports = AppDevMiddleware;

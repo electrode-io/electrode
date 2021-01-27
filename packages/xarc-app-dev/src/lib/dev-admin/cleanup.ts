@@ -1,15 +1,12 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-export {};
-
 /* eslint-disable no-console, no-process-exit */
-const { psChildren } = require("ps-get");
+import { psChildren } from "ps-get";
 
 /**
  * Attempt to clean up any child process remaining
  */
 let cleaned = false;
 
-const doCleanup = async () => {
+export const doCleanup = async () => {
   if (cleaned) {
     return;
   }
@@ -29,20 +26,20 @@ const doCleanup = async () => {
   });
 };
 
-["uncaughtException", "unhandledRejection"].forEach((event: any) => {
-  process.on(event, async (err: Error) => {
-    console.log("dev-admin failure", event, err.stack);
-    await doCleanup();
-    process.exit(process.exitCode);
+export function setupCleanupHooks() {
+  ["uncaughtException", "unhandledRejection"].forEach((event: any) => {
+    process.on(event, async (err: Error) => {
+      console.log("dev-admin failure", event, err.stack);
+      await doCleanup();
+      process.exit(process.exitCode);
+    });
   });
-});
 
-["SIGTERM", "SIGINT", "SIGHUP"].forEach((sig: any) => {
-  process.on(sig, async name => {
-    console.log("dev-admin received signal:", name);
-    await doCleanup();
-    process.exit(process.exitCode);
+  ["SIGTERM", "SIGINT", "SIGHUP"].forEach((sig: any) => {
+    process.on(sig, async name => {
+      console.log("dev-admin received signal:", name);
+      await doCleanup();
+      process.exit(process.exitCode);
+    });
   });
-});
-
-module.exports = { doCleanup };
+}

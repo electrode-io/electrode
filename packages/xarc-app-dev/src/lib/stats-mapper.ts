@@ -1,7 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-export {};
-
-const _ = require("lodash");
+import _ from "lodash";
 import { loadXarcOptions } from "./utils";
 
 function extractBundles(stats) {
@@ -18,7 +15,7 @@ const xarcOptions = loadXarcOptions();
 const xarcCwd = xarcOptions.cwd;
 const WEBPACK_LOADER_MARKER = `!${xarcCwd[0]}`;
 
-function getBundles(statsResult) {
+export function getBundles(statsResult) {
   const mapModules = mod => {
     if (mod.modules) {
       return mod.modules.map(mapModules);
@@ -44,7 +41,3 @@ function getBundles(statsResult) {
     };
   });
 }
-
-module.exports = {
-  getBundles
-};

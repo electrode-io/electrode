@@ -1,9 +1,14 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-export {};
-
 /* eslint-disable no-magic-numbers */
 
-const makeWinstonLogger = (winston, handlers = true, options: any = {}) => {
+/**
+ * Make a logger using winston for logging development info
+ * @param winston - winston
+ * @param handlers - log handlers
+ * @param options - log options
+ *
+ * @returns winston logger
+ */
+export const makeWinstonLogger = (winston, handlers = true, options: any = {}) => {
   return new winston.Logger({
     exceptionHandlers: handlers && [
       new winston.transports.Console({
@@ -35,5 +40,3 @@ const makeWinstonLogger = (winston, handlers = true, options: any = {}) => {
     ].filter(x => x)
   });
 };
-
-module.exports = makeWinstonLogger;

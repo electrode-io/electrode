@@ -1,1 +1,1 @@
-module.exports = require("@xarc/webpack/lib/webpack.config");
+export = require("@xarc/webpack/lib/webpack.config");

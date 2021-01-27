@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/ban-ts-ignore, no-invalid-this, @typescript-eslint/class-name-casing */
 
-const hapiCompat = require("electrode-hapi-compat");
-const ver17Register = require("../../src/lib/webpack-dev-hapi17");
+const { hapi17Plugin } = require("../../src/lib/webpack-dev-hapi17");
 
-const moduleName = "../../src/lib/webpack-dev-hapi";
+const moduleName = "../../src/lib/index";
 
 import { asyncVerify, runFinally } from "run-verify";
 import { expect } from "chai";
@@ -15,7 +14,7 @@ describe("dev-hapi 17", function() {
   this.timeout(10000);
 
   before(() => {
-    hapiCompat.hapiVersion = 18;
+    //
   });
 
   beforeEach(() => {});
@@ -77,9 +76,7 @@ describe("dev-hapi 17", function() {
   it("should allow using the hapi17 register function directly", () => {
     return testPlugin17({
       plugins: {
-        "webpack-dev": {
-          register: ver17Register
-        }
+        "webpack-dev": hapi17Plugin
       }
     });
   });

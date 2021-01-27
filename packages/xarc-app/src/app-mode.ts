@@ -1,12 +1,10 @@
-"use strict";
-
 /* eslint-disable no-param-reassign */
 
-const Path = require("path");
-const Fs = require("fs");
-const subappUtil = require("subapp-util");
-const logger = require("./logger");
-const constants = require("./constants");
+import Path from "path";
+import Fs from "fs";
+import subappUtil from "subapp-util";
+import { logger } from "./logger";
+import { PROD_DIR } from "./constants";
 
 /**
  * Figure out the mode app is setup.
@@ -24,7 +22,7 @@ const constants = require("./constants");
  *
  * @returns app mode data
  */
-function makeAppMode(prodDir = constants.PROD_DIR, reactLib = "react") {
+export function makeAppMode(prodDir = PROD_DIR, reactLib = "react") {
   const client = "client";
   const server = "server";
 
@@ -51,7 +49,7 @@ function makeAppMode(prodDir = constants.PROD_DIR, reactLib = "react") {
       libDir = "lib";
       return hasSubApps ? { subApps, hasSubApps } : {};
     } else if (Fs.existsSync(savedFileFP)) {
-      const saved = JSON.parse(Fs.readFileSync(savedFileFP));
+      const saved = JSON.parse(Fs.readFileSync(savedFileFP, "utf-8"));
       if (saved.version === version) {
         return saved;
       }
@@ -106,4 +104,3 @@ function makeAppMode(prodDir = constants.PROD_DIR, reactLib = "react") {
     version
   };
 }
-module.exports = makeAppMode;

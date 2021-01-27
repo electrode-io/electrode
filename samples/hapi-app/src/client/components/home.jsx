@@ -85,7 +85,7 @@ class Home extends React.Component {
 
         <div styleName="custom.docs-section">
           <h6 styleName="custom.docs-header">Demo Isomorphic UI Config</h6>
-          <div>config.ui.demo: "{config.ui.demo}"</div>
+          <div>config.ui.demo: {config.ui.demo}</div>
         </div>
 
         <div styleName="custom.docs-section">

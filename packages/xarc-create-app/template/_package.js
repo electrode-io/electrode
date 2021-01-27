@@ -9,9 +9,9 @@ module.exports = (base, merge) => {
     description: "Web application using Electrode X",
     homepage: "",
     scripts: {
-      dev: "clap -q dev",
-      test: "clap check",
-      build: "clap build",
+      dev: "xrun -q electrode/dev",
+      test: "xrun electrode/check",
+      build: "xrun electrode/build",
       start: "node lib/server"
     },
     author: {
@@ -28,10 +28,11 @@ module.exports = (base, merge) => {
     },
     license: "UNLICENSED",
     engines: {
-      node: ">= 10",
+      node: ">= 12",
       npm: ">= 6"
     },
     dependencies: {
+      "@babel/runtime": "^7.12.5",
       "@xarc/app": "^8.2.0", // version will come from ../package.json
       "@xarc/fastify-server": "^2.0.0",
       "@xarc/react": "^0.1.0", // version will come from ../package.json

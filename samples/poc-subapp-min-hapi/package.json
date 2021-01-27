@@ -35,6 +35,7 @@
     "build": "clap build"
   },
   "dependencies": {
+    "@babel/runtime": "^7.12.5",
     "@hapi/inert": "^5.2.2",
     "@xarc/app": "^7.0.0",
     "electrode-confippet": "^1.5.0",

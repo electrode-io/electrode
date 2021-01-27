@@ -1,12 +1,12 @@
 /* eslint-disable max-statements */
 
-import * as http from "http";
-import * as Path from "path";
-import * as Fs from "fs";
-import * as Url from "url";
+import http from "http";
+import Path from "path";
+import Fs from "fs";
+import Url from "url";
 import { getLogEventAsHtml } from "./log-parser";
-import * as QS from "querystring";
-import * as _ from "lodash";
+import QS from "querystring";
+import _ from "lodash";
 
 export type AdminHttpOptions = {
   port?: number;

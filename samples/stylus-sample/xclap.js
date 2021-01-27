@@ -28,6 +28,7 @@ process.env.SERVER_ES6 = true;
 
 // process.env.KARMA_BROWSER = "phantomjs";
 
-require("@xarc/app")();
+const { loadDevTasks } = require("@xarc/app-dev");
 
+exports.xrun = loadDevTasks();
 //

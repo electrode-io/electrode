@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires, no-console */
-export {};
-
 const Path = require("path");
 const customCheck = require("@xarc/webpack/lib/util/custom-check");
-const loadUserConfig = require("./util/load-user-config");
+import { loadUserConfig } from "./util/load-user-config";
 const browserSettings = require("./browser-settings");
 const loadElectrodeDll = require("./util/load-electrode-dll");
 import { loadXarcOptions } from "../../lib/utils";
@@ -86,7 +84,7 @@ function loadWebpackConfig() {
   return {};
 }
 
-module.exports = function(config) {
+export = function(config) {
   let plugins = getXarcOptPlugins() || getArchetypeOptPlugins();
   if (!plugins) {
     console.error("ERROR: @xarc/opt-karma not found - running karma tests is not possible");

@@ -5,29 +5,30 @@ import { getDevAdminPortFromEnv } from "./utils";
 /* eslint-disable object-shorthand, max-statements, no-magic-numbers */
 /* eslint-disable no-console, no-process-exit, global-require, no-param-reassign */
 
-const Fs = require("fs");
-const Path = require("path");
-const assert = require("assert");
-const requireAt = require("require-at");
-const optionalRequire = require("optional-require")(require);
-const xrun = require("@xarc/run");
-const getDevOptions = require("../config/archetype");
-const ck = require("chalker");
-const xaa = require("xaa");
-const { psChildren } = require("ps-get");
-const optFlow = optionalRequire("electrode-archetype-opt-flow");
-const { getWebpackStartConfig, setWebpackProfile } = require("@xarc/webpack/lib/util/custom-check");
-const chokidar = require("chokidar");
-const { spawn } = require("child_process");
-const scanDir = require("filter-scan-dir");
-import * as _ from "lodash";
-
-const xsh = require("xsh");
-const logger = require("./logger");
+import Fs from "fs";
+import Path from "path";
+import assert from "assert";
+import requireAt from "require-at";
+import makeOptionalRequire from "optional-require";
+import xrun from "@xarc/run";
+import { getDevOptions } from "../config/archetype";
+import ck from "chalker";
+import * as xaa from "xaa"; // really import ESM into single xaa var
+import { psChildren } from "ps-get";
+import chokidar from "chokidar";
+import { spawn } from "child_process";
+import scanDir from "filter-scan-dir";
+import _ from "lodash";
+import xsh from "xsh";
+import { logger } from "./logger";
 import { createGitIgnoreDir } from "./utils";
 import { jestTestDirectories } from "./tasks/constants";
 import { eslintTasks } from "./tasks/eslint";
 import { updateAppDep } from "./tasks/package-json";
+
+const { getWebpackStartConfig, setWebpackProfile } = require("@xarc/webpack/lib/util/custom-check");
+
+const optionalRequire = makeOptionalRequire(require);
 
 export {
   /** The task runner @xarc/run */
@@ -244,7 +245,7 @@ export function loadXarcDevTasks(xrun, userOptions: XarcOptions = {}) {
     const PATH = process.env.CRITICAL_PATH || "/";
     const url = `http://${HOST}:${PORT}${PATH}`;
     const statsPath = Path.resolve(xarcCwd, "dist/server/stats.json");
-    const stats = JSON.parse(Fs.readFileSync(statsPath));
+    const stats = JSON.parse(Fs.readFileSync(statsPath, "utf-8"));
     const cssAsset = stats.assets.find(asset => asset.name.endsWith(".css"));
     const cssAssetPath = Path.resolve(xarcCwd, `dist/js/${cssAsset.name}`);
     const targetPath = Path.resolve(xarcCwd, "dist/js/critical.css");
@@ -372,8 +373,9 @@ ie >= 11
       Fs.writeFileSync(
         newName,
         `"use strict";
-module.exports = {
-  extends: "@xarc/app-dev/config/babel/${rcFile}"
+const { babelPresetFile } = require("@xarc/app-dev");
+export =  {
+  presets: [babelPresetFile]
 };
 `
       );
@@ -991,20 +993,6 @@ You only need to run this if you are doing something not through the xarc tasks.
         task: () => generateBrowsersListRc()
       }
     };
-
-    if (xarcOptions.options.flow && optFlow) {
-      const flowPkgDir = Path.dirname(require.resolve("electrode-archetype-opt-flow"));
-      Object.assign(tasks, {
-        initflow: {
-          desc: "Initiate Flow for type checker",
-          task: mkCmd(`flow init`)
-        },
-        "flow-typed-install": {
-          desc: "Install flow 3rd-party interface library definitions from flow-typed repo.",
-          task: mkCmd(`flow-typed install --packageDir ${flowPkgDir}`)
-        }
-      });
-    }
 
     tasks = Object.assign(tasks, {
       ".clean.lib": () =>

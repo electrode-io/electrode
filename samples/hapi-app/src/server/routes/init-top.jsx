@@ -1,7 +1,7 @@
 import reducer from "../../client/reducers";
 
+// eslint-disable-next-line
 export default function initTop(a, b, c) {
-  debugger;
   return {
     reducer,
     initialState: {

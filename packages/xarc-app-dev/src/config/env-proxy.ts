@@ -1,12 +1,9 @@
+import xenvConfig from "xenv-config";
 import { isValidPort } from "../lib/utils";
 
-/* eslint-disable @typescript-eslint/no-var-requires */
+import { merge } from "lodash";
 
-const { merge } = require("lodash");
-
-module.exports = function getEnvProxy() {
-  const xenvConfig = require("xenv-config");
-
+export function getEnvProxy() {
   const proxyConfigSpec = {
     httpsPort: {
       env: [
@@ -28,4 +25,4 @@ module.exports = function getEnvProxy() {
     elevated: { env: ["ELECTRODE_DEV_ELEVATED"], default: false }
   };
   return xenvConfig(proxyConfigSpec, {}, { merge });
-};
+}

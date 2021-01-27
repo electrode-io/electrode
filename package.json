@@ -17,7 +17,7 @@
   "devDependencies": {
     "@xarc/run": "^1.0.4",
     "bluebird": "^3.5.0",
-    "fynpo": "^0.1.32",
+    "fynpo": "^0.1.33",
     "lerna": "^3.22.1",
     "lodash": "^4.17.10",
     "semver": "^5.3.0",

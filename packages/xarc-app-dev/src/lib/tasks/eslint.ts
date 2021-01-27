@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires, max-statements */
 
-import * as Fs from "fs";
-import * as Path from "path";
+import Fs from "fs";
+import Path from "path";
 import { jestTestDirectories, allSourceDirs } from "./constants";
-const logger = require("../logger");
-const optionalRequire = require("optional-require")(require);
+import { logger } from "../logger";
+import makeOptionalRequire from "optional-require";
+
+const optionalRequire = makeOptionalRequire(require);
 
 /*
  *  There are multiple eslint config for different groups of code

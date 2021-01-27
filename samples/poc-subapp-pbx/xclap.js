@@ -20,4 +20,5 @@ process.env.APP_SERVER_PORT = 3100;
 
 process.env.USE_APP_WEBPACK_CONFIG = true;
 
-require("@xarc/app")();
+const { loadDevTasks } = require("@xarc/app-dev");
+loadDevTasks();

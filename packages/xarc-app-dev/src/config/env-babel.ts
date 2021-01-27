@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-export {};
+import xenvConfig from "xenv-config";
+import { merge } from "lodash";
 
-module.exports = function getEnvBabel() {
-  const xenvConfig = require("xenv-config");
-  const { merge } = require("lodash");
+import { getUserConfig } from "./user-config";
 
-  const userConfig = require("./user-config")();
+export function getEnvBabel() {
+  const userConfig = getUserConfig();
   const { options } = userConfig;
 
   const babelConfigSpec = {
@@ -39,4 +38,4 @@ module.exports = function getEnvBabel() {
   };
 
   return xenvConfig(babelConfigSpec, userConfig.babel, { merge });
-};
+}

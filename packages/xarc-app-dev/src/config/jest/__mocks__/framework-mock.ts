@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-export {};
 
-const optionalRequire = require("optional-require")(require);
+import makeOptionalRequire from "optional-require";
+
+const optionalRequire = makeOptionalRequire(require);
 
 const Enzyme = optionalRequire("enzyme");
 const EnzymeAdapter = optionalRequire("enzyme-adapter-react-16");

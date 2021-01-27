@@ -1,11 +1,11 @@
 "use strict";
 
 const electrodeConfippet = require("electrode-confippet");
-const support = require("@xarc/app/support");
+const { loadRuntimeSupport } = require("@xarc/app");
 const fastifyServer = require("@xarc/fastify-server");
 
 module.exports = async () => {
-  await support.load();
+  await loadRuntimeSupport();
   const config = electrodeConfippet.config;
   return await fastifyServer(config);
 };

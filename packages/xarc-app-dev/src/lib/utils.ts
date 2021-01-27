@@ -1,15 +1,14 @@
 /* eslint-disable @typescript-eslint/no-var-requires, no-console */
 
-import * as readPkgUp from "read-pkg-up";
-import * as pkgUp from "pkg-up";
-const mkdirp = require("mkdirp");
-const logger = require("./logger");
-const ck = require("chalker");
-const Path = require("path");
-const Fs = require("fs");
-const _ = require("lodash");
-
-const Url = require("url");
+import readPkgUp from "read-pkg-up";
+import pkgUp from "pkg-up";
+import mkdirp from "mkdirp";
+import { logger } from "./logger";
+import ck from "chalker";
+import Path from "path";
+import Fs from "fs";
+import _ from "lodash";
+import Url from "url";
 
 export const getOptArchetypeRequire = require("@xarc/webpack/lib/util/get-opt-require");
 

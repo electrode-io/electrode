@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-export {};
+import xenvConfig from "xenv-config";
+import { merge } from "lodash";
+import { getUserConfig } from "./user-config";
 
-module.exports = function getEnvWebpack() {
-  const xenvConfig = require("xenv-config");
-  const userConfig = require("./user-config")();
-  const { merge } = require("lodash");
+export function getEnvWebpack() {
+  const userConfig = getUserConfig();
 
   const webpackConfigSpec = {
     webpackDev: { env: "WEBPACK_DEV", default: false },
@@ -50,4 +49,4 @@ module.exports = function getEnvWebpack() {
   };
 
   return xenvConfig(webpackConfigSpec, userConfig.webpack, { merge });
-};
+}

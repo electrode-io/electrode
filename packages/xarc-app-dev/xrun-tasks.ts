@@ -1,10 +1,10 @@
-import * as Path from "path";
-import * as xrun from "@xarc/run";
-import * as scanDir from "filter-scan-dir";
+import Path from "path";
+import xrun from "@xarc/run";
+import scanDir from "filter-scan-dir";
 import { loadTasks } from "@xarc/module-dev";
-import * as xsh from "xsh";
-import * as _ from "lodash";
-import * as Fs from "fs";
+import xsh from "xsh";
+import _ from "lodash";
+import Fs from "fs";
 
 loadTasks({ xrun });
 

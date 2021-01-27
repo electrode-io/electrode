@@ -1,1 +1,1 @@
-module.exports = require("@xarc/app/lib/constants");
+export * from "@xarc/app/dist/constants";
