@@ -242,13 +242,16 @@ const resolveContent = (pathData, xrequire) => {
         content: xrequire(mod)
       };
     } catch (error) {
-      const msg = `electrode-react-webapp: load SSR content ${mod} failed - ${error.message}`;
+      const msg = `electrode-react-webapp: failed to load SSR content from module ${mod}`;
       console.error(msg, "\n", error); // eslint-disable-line
       return {
         fullPath: null,
         error,
         resolveTime,
-        content: msg
+        content: `<h1>electrode-react-webapp: SSR failed</h1>
+<p>${msg}</p>
+<pre>${error.stack}</pre>
+`
       };
     }
   }
