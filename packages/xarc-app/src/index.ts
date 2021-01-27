@@ -129,7 +129,6 @@ export function setupIsomorphicLoader(
     | string
     | string[] = ".jpg|.jpeg|.gif|.svg|.png|.css|.less|.styl|.sass|.scss"
 ) {
-  debugger;
   if (getXRequire()) {
     return getXRequire();
   }

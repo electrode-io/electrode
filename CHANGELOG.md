@@ -1,3 +1,77 @@
+# 1/27/2021
+
+- enable babel runtime for node
+- `[fix] handling of https/http for dev proxy`
+- `[fix] not using .browserlistrc for browser`
+- `[fix] more informative SSR error`
+- subapp1 Fix subapp namespacing issues
+- subapp2 error handling for loading
+- subapp2 react query support
+- `[fix] subapp2 add element for ssr off subapp`
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.2.3` `(8.2.2 => 8.2.3)`
+- `@xarc/app-dev@8.2.3` `(8.2.2 => 8.2.3)`
+- `@xarc/create-app@4.0.1` `(4.0.0 => 4.0.1)`
+- `@xarc/react@0.1.4` `(0.1.3 => 0.1.4)`
+- `@xarc/react-query@0.1.0` `(0.0.1 => 0.1.0)`
+- `@xarc/subapp@0.1.4` `(0.1.3 => 0.1.4)`
+- `electrode-react-webapp@4.0.4` `(4.0.3 => 4.0.4)`
+- `subapp-web@1.0.46` `(1.0.45 => 1.0.46)`
+
+### Lerna Updated
+
+- `@xarc/react-redux@0.1.3` `(0.1.2 => 0.1.3)`
+- `@xarc/react-router@0.1.4` `(0.1.3 => 0.1.4)`
+- `@xarc/webpack@9.1.1` `(9.1.0 => 9.1.1)`
+- `subapp-pbundle@0.0.40` `(0.0.39 => 0.0.40)`
+- `subapp-react@0.0.37` `(0.0.36 => 0.0.37)`
+- `subapp-redux@1.0.46` `(1.0.45 => 1.0.46)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - save file with EOF [commit](http://github.com/electrode-io/electrode/commit/a284f7495086833b9cf5bb35c4bf949325bfbaca)
+  - enable babel runtime for node [commit](http://github.com/electrode-io/electrode/commit/3ccc7f45e1af3bc45c7551c995bdf90e82d24c71)
+  - subapp2 error handling for loading [commit](http://github.com/electrode-io/electrode/commit/62c56c5844e876d102bd11111924cbc06b27c0b8)
+  - [fix] minor cosmetics for .browserslistrc handling [commit](http://github.com/electrode-io/electrode/commit/73e0cecdf1172b378a21d259327b5d83c6c776c3)
+  - [fix] handling of https/http for dev proxy ([#1788](https://github.com/electrode-io/electrode/pull/1788)) [commit](http://github.com/electrode-io/electrode/commit/c9c5099f85d6c4576bd6ba049961f231b9673513)
+  - [fix] not using .browserlistrc for browser ([#1787](https://github.com/electrode-io/electrode/pull/1787)) [commit](http://github.com/electrode-io/electrode/commit/af933047d2f43aef6b4835675c10426540e68aff)
+
+- `packages/xarc-create-app`
+
+  - create-app auto use latest packages [commit](http://github.com/electrode-io/electrode/commit/60ea8c31de4611acee549300315f5165dcd42343)
+
+- `packages/xarc-react`
+
+  - subapp2 error handling for loading [commit](http://github.com/electrode-io/electrode/commit/62c56c5844e876d102bd11111924cbc06b27c0b8)
+  - subapp2 react query support [commit](http://github.com/electrode-io/electrode/commit/5236d8b58681a1efa0e7a34e18a9deec53b83e09)
+
+- `packages/xarc-react-query`
+
+  - add test with rendering for react-query ([#1792](https://github.com/electrode-io/electrode/pull/1792)) [commit](http://github.com/electrode-io/electrode/commit/497defeaefcd55215c10e77058fdbe85dbe0aedd)
+  - added unit test for react query browser side ([#1791](https://github.com/electrode-io/electrode/pull/1791)) [commit](http://github.com/electrode-io/electrode/commit/a1dbf574a4ccdfccc932e2e2e7a36840142cdf57)
+  - subapp2 react query support [commit](http://github.com/electrode-io/electrode/commit/5236d8b58681a1efa0e7a34e18a9deec53b83e09)
+  - [minor][chore] mark for minor release [commit](http://github.com/electrode-io/electrode/commit/9383b09efeb07a542c423ba1ad31e37e1f5df813)
+
+- `packages/xarc-subapp`
+
+  - subapp2 error handling for loading [commit](http://github.com/electrode-io/electrode/commit/62c56c5844e876d102bd11111924cbc06b27c0b8)
+  - [fix] subapp2 add element for ssr off subapp [commit](http://github.com/electrode-io/electrode/commit/7cc0296e428b5ae51e58d5f79d8187f2d614c7ac)
+  - subapp2 react query support [commit](http://github.com/electrode-io/electrode/commit/5236d8b58681a1efa0e7a34e18a9deec53b83e09)
+
+- `packages/electrode-react-webapp`
+
+  - [fix] more informative SSR error ([#1794](https://github.com/electrode-io/electrode/pull/1794)) [commit](http://github.com/electrode-io/electrode/commit/a684d0ae492f304361e2b78367d610db150ab90c)
+
+- `packages/subapp-web`
+
+  - Fix subapp namespacing issues ([#1795](https://github.com/electrode-io/electrode/pull/1795)) [commit](http://github.com/electrode-io/electrode/commit/1c37fc76c759446dcecb633079e2f7fd3e26cc12)
+
 # 1/19/2021
 
 - `[fix] redirect proxy output not showing`
