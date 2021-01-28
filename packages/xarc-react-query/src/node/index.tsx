@@ -68,6 +68,21 @@ export function reactQueryFeature(options: ReactQueryFeatureOptions): SubAppFeat
 
       xarcV2.debug("react-query execute for subapp:", subAppName);
 
+      if (
+        (!input.Component && !envHooks.getContainer().get(subAppName)._getExport) ||
+        (!input.Component &&
+          typeof envHooks.getContainer().get(subAppName)._getExport !== "function")
+      ) {
+        console.error("Wrapper component not found!"); // eslint-disable-line
+        return {
+          Component: () => (
+            <div>
+              Error:<p>Wrapper component not found!</p>
+            </div>
+          )
+        };
+      }
+
       return {
         Component: () => {
           xarcV2.debug("react-query component for subapp:", subAppName, "queryClient:", typeof qc);

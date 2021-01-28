@@ -46,6 +46,22 @@ export function reactQueryFeature(options: ReactQueryFeatureOptions): SubAppFeat
 
     reactQuery.execute = async function ({ input, csrData }) {
       const dehydratedState = csrData.getInitialState();
+
+      if (
+        (!input.Component && !envHooks.getContainer().get(subAppName)._getExport) ||
+        (!input.Component &&
+          typeof envHooks.getContainer().get(subAppName)._getExport !== "function")
+      ) {
+        console.error("Wrapper component not found!"); // eslint-disable-line
+        return {
+          Component: () => (
+            <div>
+              Error:<p>Wrapper component not found!</p>
+            </div>
+          )
+        };
+      }
+
       const WrapComp = this.wrap({
         Component:
           input.Component || envHooks.getContainer().get(subAppName)._getExport()?.Component,
