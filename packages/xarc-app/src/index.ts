@@ -115,19 +115,20 @@ export const setupIsomorphicCdnAssetsMapping = (options?: XarcCdnAssetsMappingOp
 /**
  * Load the require hook to support isomorphic assets when doing SSR
  *
- * @param assetExtensions - when a require file is not found, and its extension is
+ * @param ignoreExtensions - when a require file is not found, and its extension is
  *   in this, then it will be considered an isomorphic asset and an empty `{}` will
  *   be returned for it to avoid failing with module not found errors.
- *   - **Default**: `".jpg|.jpeg|.gif|.svg|.png|.css|.less|.styl|.sass|.scss"`
+ *   - **Default**:
+ *     `".css|.scss|.sass|.pcss|.stylus|.styl|.less|.sss|.gif|.jpeg|.jpg|.png|.svg|.mp4|.webm|.ogv|.aac|.mp3|.wav|.ogg"`
  *   - set to `false` to disable this and let module not found error to throw
  *
  * @returns isomorphic require extender
  */
 export function setupIsomorphicLoader(
-  assetExtensions:
+  ignoreExtensions:
     | false
     | string
-    | string[] = ".jpg|.jpeg|.gif|.svg|.png|.css|.less|.styl|.sass|.scss"
+    | string[] = ".css|.scss|.sass|.pcss|.stylus|.styl|.less|.sss|.gif|.jpeg|.jpg|.png|.svg|.mp4|.webm|.ogv|.aac|.mp3|.wav|.ogg"
 ) {
   if (getXRequire()) {
     return getXRequire();
@@ -136,7 +137,7 @@ export function setupIsomorphicLoader(
   const appSrcDir = (getAppMode().getEnv() || getAppMode().lib.dir).split("/")[0];
   const xReq = extendRequire({
     appSrcDir,
-    interceptByExts: assetExtensions
+    ignoreExtensions
   });
 
   setXRequire(xReq);
