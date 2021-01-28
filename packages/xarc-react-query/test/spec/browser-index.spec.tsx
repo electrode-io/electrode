@@ -84,7 +84,7 @@ describe("reactQueryFeature browser", function () {
     expect(element.innerHTML).contains(`<p>{"msg":"foo","queryKey":["test"]}</p>`);
   });
 
-  it("should render subapp with react-query when input component exist on subApp container", async () => {
+  it("should render subapp with react-query when input component does not exist", async () => {
     const container = new SubAppContainer({});
     envHooks.getContainer = () => container;
 
@@ -126,42 +126,5 @@ describe("reactQueryFeature browser", function () {
     const element = await waitFor(() => screen.getByText("test"), { timeout: 500 });
 
     expect(element.innerHTML).equal(`test <p>text</p>`);
-  });
-
-  it("should render error message subapp with react-query when input component does not exist", async () => {
-    const container = new SubAppContainer({});
-    envHooks.getContainer = () => container;
-
-    const factory = reactQueryFeature({ React });
-
-    const def = {
-      name: "test",
-      getModule() {
-        return Promise.resolve({});
-      },
-      _features: {}
-    } as SubAppDef;
-
-    container.declare("test", def);
-
-    factory.add(def);
-
-    const res = await def._features.reactQuery.execute({
-      input: {
-        Component: undefined
-      },
-      csrData: {
-        name: "test",
-        getInitialState: () => "test"
-      }
-    });
-
-    render(<res.Component />);
-
-    const element: HTMLElement = await waitFor(() => screen.getByText("Error:"), {
-      timeout: 500
-    });
-
-    expect(element.innerHTML).equal(`Error:<p>Wrapper component not found!</p>`);
   });
 });

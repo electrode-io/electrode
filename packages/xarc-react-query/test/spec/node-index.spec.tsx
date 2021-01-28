@@ -1,4 +1,5 @@
 /* eslint-disable prefer-arrow-callback */
+import "jsdom-global/register";
 import React from "react"; // eslint-disable-line
 import { describe, it } from "mocha";
 import { expect } from "chai";
@@ -175,7 +176,7 @@ describe("reactQueryFeature node.js", function () {
     expect(element.innerHTML).contains(`<p>{"msg":"foo","queryKey":["test"]}</p>`);
   });
 
-  it("should render subapp with react-query if input component not exist", async () => {
+  it("should render subapp with react-query when input component does not exist", async () => {
     const container = new SubAppContainer({});
 
     envHooks.getContainer = () => container;
@@ -190,7 +191,16 @@ describe("reactQueryFeature node.js", function () {
       getModule() {
         return Promise.resolve({});
       },
-      _features: {}
+      _features: {},
+      _getExport: () => {
+        return {
+          Component: () => (
+            <div>
+              test <p>text</p>
+            </div>
+          )
+        };
+      }
     } as SubAppDef;
 
     container.declare("test", def);
@@ -205,8 +215,8 @@ describe("reactQueryFeature node.js", function () {
 
     render(<res.Component />);
 
-    const element = await waitFor(() => screen.getByText("Error:"), { timeout: 500 });
+    const element = await waitFor(() => screen.getByText("test"), { timeout: 500 });
 
-    expect(element.innerHTML).contains(`Error:<p>Wrapper component not found!</p>`);
+    expect(element.innerHTML).contains(`test <p>text</p>`);
   });
 });
