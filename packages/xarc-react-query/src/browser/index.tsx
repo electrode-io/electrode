@@ -46,6 +46,7 @@ export function reactQueryFeature(options: ReactQueryFeatureOptions): SubAppFeat
 
     reactQuery.execute = async function ({ input, csrData }) {
       const dehydratedState = csrData.getInitialState();
+
       const WrapComp = this.wrap({
         Component:
           input.Component || envHooks.getContainer().get(subAppName)._getExport()?.Component,

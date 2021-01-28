@@ -37,7 +37,7 @@ describe("reactQueryFeature browser", function () {
     expect(def._features.reactQuery).to.be.an("object");
   });
 
-  it("should render subapp with react-query", async () => {
+  it("should render subapp with react-query when component exists on input", async () => {
     const container = new SubAppContainer({});
     envHooks.getContainer = () => container;
 
@@ -77,11 +77,54 @@ describe("reactQueryFeature browser", function () {
       }
     });
 
-    expect(res).to.be.an("object");
     render(<res.Component />);
 
     const element = await waitFor(() => screen.getByText("test"), { timeout: 500 });
 
     expect(element.innerHTML).contains(`<p>{"msg":"foo","queryKey":["test"]}</p>`);
+  });
+
+  it("should render subapp with react-query when input component does not exist", async () => {
+    const container = new SubAppContainer({});
+    envHooks.getContainer = () => container;
+
+    const factory = reactQueryFeature({ React });
+
+    const def = {
+      name: "test",
+      getModule() {
+        return Promise.resolve({});
+      },
+      _features: {},
+      _getExport: () => {
+        return {
+          Component: () => (
+            <div>
+              test <p>text</p>
+            </div>
+          )
+        };
+      }
+    } as SubAppDef;
+
+    container.declare("test", def);
+
+    factory.add(def);
+
+    const res = await def._features.reactQuery.execute({
+      input: {
+        Component: undefined
+      },
+      csrData: {
+        name: "test",
+        getInitialState: () => "test"
+      }
+    });
+
+    render(<res.Component />);
+
+    const element = await waitFor(() => screen.getByText("test"), { timeout: 500 });
+
+    expect(element.innerHTML).equal(`test <p>text</p>`);
   });
 });

@@ -1,4 +1,5 @@
 /* eslint-disable prefer-arrow-callback */
+import "jsdom-global/register";
 import React from "react"; // eslint-disable-line
 import { describe, it } from "mocha";
 import { expect } from "chai";
@@ -7,6 +8,7 @@ import { SubAppDef, SubAppContainer, envHooks } from "@xarc/subapp";
 import { useQuery } from "react-query";
 import { reactQueryFeature } from "../../src/node/index";
 import { testFetch } from "../prefetch";
+import { render, waitFor, screen } from "@testing-library/react";
 
 const { createElement } = React; // eslint-disable-line
 
@@ -59,8 +61,17 @@ describe("reactQueryFeature node.js", function () {
     const result = await def._features.reactQuery.execute({
       input: {
         Component: () => {
-          const { data } = useQuery("test", testFetch);
-          return <div>test {JSON.stringify(data)}</div>;
+          const { data } = useQuery(
+            "test",
+            testFetch,
+            // ensure react-query doesn't keep node.js running with its timers
+            { cacheTime: 200 }
+          );
+          return (
+            <div>
+              test <p>{JSON.stringify(data)}</p>
+            </div>
+          );
         }
       }
     });
@@ -68,8 +79,54 @@ describe("reactQueryFeature node.js", function () {
     const str = renderToString(<result.Component />);
 
     expect(str).equals(
-      `<div>test <!-- -->{&quot;msg&quot;:&quot;foo&quot;,&quot;queryKey&quot;:[&quot;test&quot;]}</div>`
+      `<div>test <p>{&quot;msg&quot;:&quot;foo&quot;,&quot;queryKey&quot;:[&quot;test&quot;]}</p></div>`
     );
+  });
+
+  it("should render subapp with react-query if nothing gets prefetched", async () => {
+    const container = new SubAppContainer({});
+
+    envHooks.getContainer = () => container;
+
+    const factory = reactQueryFeature({
+      React,
+      serverModule: require.resolve("../prefetch-empty-res")
+    });
+
+    const def = {
+      name: "test",
+      getModule() {
+        return Promise.resolve({});
+      },
+      _features: {}
+    } as SubAppDef;
+
+    container.declare("test", def);
+
+    factory.add(def);
+    const res = await def._features.reactQuery.execute({
+      input: {
+        Component: () => {
+          const { data } = useQuery(
+            "test",
+            testFetch,
+            // ensure react-query doesn't keep node.js running with its timers
+            { cacheTime: 200 }
+          );
+          return (
+            <div>
+              test <p>{JSON.stringify(data)}</p>
+            </div>
+          );
+        }
+      }
+    });
+
+    render(<res.Component />);
+
+    const element = await waitFor(() => screen.getByText("test"), { timeout: 500 });
+
+    expect(element.innerHTML).equal(`test <p>{"msg":"foo","queryKey":["test"]}</p>`);
   });
 
   it("should render subapp with react-query if it fails on fetching data when doing SSR", async () => {
@@ -94,22 +151,72 @@ describe("reactQueryFeature node.js", function () {
 
     factory.add(def);
 
-    (def._features.reactQuery as any).wrap = props => {
-      return JSON.stringify(props);
-    };
-
-    const result = await def._features.reactQuery.execute({
+    const res = await def._features.reactQuery.execute({
       input: {
         Component: () => {
-          const { data } = useQuery("test", testFetch);
-          return <div>test {JSON.stringify(data)}</div>;
+          const { data } = useQuery(
+            "test",
+            testFetch,
+            // ensure react-query doesn't keep node.js running with its timers
+            { cacheTime: 200 }
+          );
+          return (
+            <div>
+              test <p>{JSON.stringify(data)}</p>
+            </div>
+          );
         }
       }
     });
 
-    const mockComponentFunc = result.Component;
-    expect(mockComponentFunc()).equals(
-      `{"queryClient":{"queryCache":{"listeners":[],"config":{},"queries":[],"queriesMap":{}},"mutationCache":{"listeners":[],"config":{},"mutations":[],"mutationId":0},"defaultOptions":{},"queryDefaults":[],"mutationDefaults":[]},"dehydratedState":{"mutations":[],"queries":[]}}`
-    );
+    render(<res.Component />);
+
+    const element = await waitFor(() => screen.getByText("test"), { timeout: 500 });
+
+    expect(element.innerHTML).contains(`<p>{"msg":"foo","queryKey":["test"]}</p>`);
+  });
+
+  it("should render subapp with react-query when input component does not exist", async () => {
+    const container = new SubAppContainer({});
+
+    envHooks.getContainer = () => container;
+
+    const factory = reactQueryFeature({
+      React,
+      serverModule: undefined
+    });
+
+    const def = {
+      name: "test",
+      getModule() {
+        return Promise.resolve({});
+      },
+      _features: {},
+      _getExport: () => {
+        return {
+          Component: () => (
+            <div>
+              test <p>text</p>
+            </div>
+          )
+        };
+      }
+    } as SubAppDef;
+
+    container.declare("test", def);
+
+    factory.add(def);
+
+    const res = await def._features.reactQuery.execute({
+      input: {
+        Component: undefined
+      }
+    });
+
+    render(<res.Component />);
+
+    const element = await waitFor(() => screen.getByText("test"), { timeout: 500 });
+
+    expect(element.innerHTML).contains(`test <p>text</p>`);
   });
 });
