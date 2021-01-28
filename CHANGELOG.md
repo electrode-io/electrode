@@ -1,3 +1,22 @@
+# 1/28/2021
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@8.2.4` `(8.2.3 => 8.2.4)`
+
+### Lerna Updated
+
+- `@xarc/app-dev@8.2.4` `(8.2.3 => 8.2.4)`
+- `@xarc/create-app@4.0.2` `(4.0.1 => 4.0.2)`
+
+## Commits
+
+- `packages/xarc-app[-dev]`
+
+  - dep: isomorphic-loader@4.4.0 [commit](http://github.com/electrode-io/electrode/commit/cbe0e9bebfa36ce3f82e3aa2e3db918fa321989c)
+
 # 1/27/2021
 
 - enable babel runtime for node
