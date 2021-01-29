@@ -1,0 +1,307 @@
+{
+  "assetsByChunkName": {
+    "subapp-demo1": [
+      "poc1.subapp-demo1.bundle.ad4e057b192750300507.js",
+      "../map/poc1.subapp-demo1.bundle.ad4e057b192750300507.js.map"
+    ],
+    "vendors~subapp-home~subapp-static": [
+      "poc1.vendors~subapp-home~subapp-static.bundle.6e127ca81fd5be4d605b.js",
+      "../map/poc1.vendors~subapp-home~subapp-static.bundle.6e127ca81fd5be4d605b.js.map"
+    ],
+    "main": [
+      "poc1.main.bundle.2ce93434dd0e0b9f6d2e.js",
+      "../map/poc1.main.bundle.2ce93434dd0e0b9f6d2e.js.map"
+    ],
+    "subapp-demo3": [
+      "poc1.subapp-demo3.bundle.abec5b8087976c84f1f7.js",
+      "../map/poc1.subapp-demo3.bundle.abec5b8087976c84f1f7.js.map"
+    ],
+    "subapp-demo4": [
+      "poc1.subapp-demo4.bundle.6a5771dedb5432de0bc9.js",
+      "../map/poc1.subapp-demo4.bundle.6a5771dedb5432de0bc9.js.map"
+    ],
+    "subapp-home": [
+      "poc1.subapp-home.style.5faa52f5a3012ca195e2.css",
+      "poc1.subapp-home.bundle.1eb7ac0b24ebcd8281bc.js",
+      "../map/poc1.subapp-home.bundle.1eb7ac0b24ebcd8281bc.js.map"
+    ],
+    "subapp-static": [
+      "poc1.subapp-static.style.5faa52f5a3012ca195e2.css",
+      "poc1.subapp-static.bundle.2d5a97f8cc7cb8bcc28c.js",
+      "../map/poc1.subapp-static.bundle.2d5a97f8cc7cb8bcc28c.js.map"
+    ],
+    "vendors~subapp-demo4": [
+      "poc1.vendors~subapp-demo4.bundle.c27ec4a0bdc64599254c.js",
+      "../map/poc1.vendors~subapp-demo4.bundle.c27ec4a0bdc64599254c.js.map"
+    ]
+  },
+  "assets": [
+    {
+      "name": "../map/poc1.main.bundle.2ce93434dd0e0b9f6d2e.js.map",
+      "size": 428263,
+      "chunks": [2],
+      "chunkNames": ["main"],
+      "info": {
+        "development": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "../map/poc1.subapp-demo1.bundle.ad4e057b192750300507.js.map",
+      "size": 1441,
+      "chunks": [0],
+      "chunkNames": ["subapp-demo1"],
+      "info": {
+        "development": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "../map/poc1.subapp-demo3.bundle.abec5b8087976c84f1f7.js.map",
+      "size": 1978,
+      "chunks": [3],
+      "chunkNames": ["subapp-demo3"],
+      "info": {
+        "development": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "../map/poc1.subapp-demo4.bundle.6a5771dedb5432de0bc9.js.map",
+      "size": 2688,
+      "chunks": [4],
+      "chunkNames": ["subapp-demo4"],
+      "info": {
+        "development": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "../map/poc1.subapp-home.bundle.1eb7ac0b24ebcd8281bc.js.map",
+      "size": 7923,
+      "chunks": [5],
+      "chunkNames": ["subapp-home"],
+      "info": {
+        "development": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "../map/poc1.subapp-static.bundle.2d5a97f8cc7cb8bcc28c.js.map",
+      "size": 9811,
+      "chunks": [6, 5],
+      "chunkNames": ["subapp-static"],
+      "info": {
+        "development": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "../map/poc1.vendors~subapp-demo4.bundle.c27ec4a0bdc64599254c.js.map",
+      "size": 137012,
+      "chunks": [7],
+      "chunkNames": ["vendors~subapp-demo4"],
+      "info": {
+        "development": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "../map/poc1.vendors~subapp-home~subapp-static.bundle.6e127ca81fd5be4d605b.js.map",
+      "size": 242935,
+      "chunks": [1],
+      "chunkNames": ["vendors~subapp-home~subapp-static"],
+      "info": {
+        "development": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "../subapps.json",
+      "size": 650,
+      "chunks": [],
+      "chunkNames": [],
+      "info": {},
+      "emitted": false
+    },
+    {
+      "name": "2b7ac2d4ff91cca5b9c8e742eda58b24.png",
+      "size": 5402,
+      "chunks": [],
+      "chunkNames": [],
+      "info": {},
+      "emitted": false
+    },
+    {
+      "name": "poc1.main.bundle.2ce93434dd0e0b9f6d2e.js",
+      "size": 167898,
+      "chunks": [2],
+      "chunkNames": ["main"],
+      "info": {
+        "immutable": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "poc1.subapp-demo1.bundle.ad4e057b192750300507.js",
+      "size": 772,
+      "chunks": [0],
+      "chunkNames": ["subapp-demo1"],
+      "info": {
+        "immutable": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "poc1.subapp-demo3.bundle.abec5b8087976c84f1f7.js",
+      "size": 976,
+      "chunks": [3],
+      "chunkNames": ["subapp-demo3"],
+      "info": {
+        "immutable": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "poc1.subapp-demo4.bundle.6a5771dedb5432de0bc9.js",
+      "size": 1416,
+      "chunks": [4],
+      "chunkNames": ["subapp-demo4"],
+      "info": {
+        "immutable": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "poc1.subapp-home.bundle.1eb7ac0b24ebcd8281bc.js",
+      "size": 3494,
+      "chunks": [5],
+      "chunkNames": ["subapp-home"],
+      "info": {
+        "immutable": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "poc1.subapp-home.style.5faa52f5a3012ca195e2.css",
+      "size": 956,
+      "chunks": [5],
+      "chunkNames": ["subapp-home"],
+      "info": {
+        "immutable": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "poc1.subapp-static.bundle.2d5a97f8cc7cb8bcc28c.js",
+      "size": 4280,
+      "chunks": [6, 5],
+      "chunkNames": ["subapp-static"],
+      "info": {
+        "immutable": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "poc1.subapp-static.style.5faa52f5a3012ca195e2.css",
+      "size": 956,
+      "chunks": [6, 5],
+      "chunkNames": ["subapp-static"],
+      "info": {
+        "immutable": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "poc1.vendors~subapp-demo4.bundle.c27ec4a0bdc64599254c.js",
+      "size": 39460,
+      "chunks": [7],
+      "chunkNames": ["vendors~subapp-demo4"],
+      "info": {
+        "immutable": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "poc1.vendors~subapp-home~subapp-static.bundle.6e127ca81fd5be4d605b.js",
+      "size": 41012,
+      "chunks": [1],
+      "chunkNames": ["vendors~subapp-home~subapp-static"],
+      "info": {
+        "immutable": true
+      },
+      "emitted": false
+    }
+  ],
+  "entrypoints": {
+    "main": [2]
+  },
+  "chunks": [
+    {
+      "id": 0,
+      "hash": "cd4a79e97a70427a951f",
+      "names": ["subapp-demo1"],
+      "entry": false,
+      "initial": false,
+      "rendered": true
+    },
+    {
+      "id": 1,
+      "hash": "a8fcca25d04ca3bc26ab",
+      "names": ["vendors~subapp-home~subapp-static"],
+      "entry": false,
+      "initial": false,
+      "rendered": true,
+      "reason": "split chunk (cache group: vendors) (name: vendors~subapp-home~subapp-static)"
+    },
+    {
+      "id": 2,
+      "hash": "52f5bd6e802cf8cad4b4",
+      "names": ["main"],
+      "entry": true,
+      "initial": true,
+      "rendered": true
+    },
+    {
+      "id": 3,
+      "hash": "d71b2f786849b4e35ac0",
+      "names": ["subapp-demo3"],
+      "entry": false,
+      "initial": false,
+      "rendered": true
+    },
+    {
+      "id": 4,
+      "hash": "24466bb6939de709516c",
+      "names": ["subapp-demo4"],
+      "entry": false,
+      "initial": false,
+      "rendered": true
+    },
+    {
+      "id": 5,
+      "hash": "e77aab2255ae11e1d76e",
+      "names": ["subapp-home"],
+      "entry": false,
+      "initial": false,
+      "rendered": true
+    },
+    {
+      "id": 6,
+      "hash": "988f82b1a7c69c12acf2",
+      "names": ["subapp-static"],
+      "entry": false,
+      "initial": false,
+      "rendered": true
+    },
+    {
+      "id": 7,
+      "hash": "34e10030430024ec3ab1",
+      "names": ["vendors~subapp-demo4"],
+      "entry": false,
+      "initial": false,
+      "rendered": true,
+      "reason": "split chunk (cache group: vendors) (name: vendors~subapp-demo4)"
+    }
+  ]
+}
