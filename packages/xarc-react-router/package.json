@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
+    "@testing-library/react": "^11.2.3",
     "@types/chai": "^4.2.14",
     "@types/mocha": "^8.2.0",
     "@types/node": "^14.14.16",
@@ -52,6 +53,8 @@
     "eslint-config-walmart": "^2.2.1",
     "eslint-plugin-filenames": "^1.1.0",
     "eslint-plugin-jsdoc": "^30.7.9",
+    "jsdom": "^16.4.0",
+    "jsdom-global": "^3.0.2",
     "mocha": "^8.2.1",
     "nyc": "^15.1.0",
     "react": ">= 16",
@@ -90,7 +93,8 @@
       "gulpfile.js",
       "test",
       "xrun*.js",
-      "xrun*.ts"
+      "xrun*.ts",
+      ".eslintrc.js"
     ],
     "check-coverage": false,
     "statements": 100,
