@@ -1,5 +1,5 @@
 import { config } from "./config";
-import * as support from "@xarc/app/support";
+import { loadRuntimeSupport } from "@xarc/app";
 const electrodeServer = require("@xarc/fastify-server");
 
 import { PageRenderer, createTemplateTags as cTT, PageOptions } from "@xarc/react";
@@ -16,7 +16,7 @@ function memoize(key: any, factory: () => any) {
 }
 
 async function start() {
-  await support.load({
+  await loadRuntimeSupport({
     awaitReady: false,
     isomorphicCdnOptions: {
       prodOnly: true

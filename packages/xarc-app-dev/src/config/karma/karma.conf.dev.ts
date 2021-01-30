@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-export {};
-
 /*
  * Karma Configuration: "dev" version.
  *
@@ -10,12 +8,12 @@ export {};
  * server during the test run.
  */
 
-const loadUserConfig = require("./util/load-user-config");
+import { loadUserConfig } from "./util/load-user-config";
 const Path = require("path");
 const browserSettings = require("./browser-settings");
 import { loadXarcOptions } from "../../lib/utils";
 
-module.exports = function(config) {
+export = function(config) {
   const xarcOptions = loadXarcOptions();
   const xarcCwd = xarcOptions.cwd;
   const settings = {

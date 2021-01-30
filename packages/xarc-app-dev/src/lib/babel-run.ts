@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-export {};
-
 /*
  * Start user's app server from src/server directory in dev mode.
  *
@@ -13,8 +11,7 @@ export {};
  * trying to load .babelrc or process files from them.
  *
  */
-const Path = require("path");
-
+import Path from "path";
 import { loadXarcOptions } from "../lib/utils";
 
 const serverDir = process.argv[2] || "src/server";
@@ -22,6 +19,7 @@ const serverDir = process.argv[2] || "src/server";
 let start;
 const xarcOptions = loadXarcOptions();
 const xarcCwd = xarcOptions.cwd;
+
 try {
   // Try to load user's dev.js under src/server
   start = require(Path.resolve(xarcCwd, serverDir, "dev.js"));

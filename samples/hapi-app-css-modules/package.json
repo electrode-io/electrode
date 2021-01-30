@@ -39,6 +39,7 @@
     "prod": "echo 'Starting standalone server in PROD mode'; NODE_ENV=production node ./lib/server/"
   },
   "dependencies": {
+    "@babel/runtime": "^7.12.5",
     "@hapi/good": "^8.2.4",
     "@hapi/good-console": "^8.1.2",
     "@hapi/inert": "^5.1.2",

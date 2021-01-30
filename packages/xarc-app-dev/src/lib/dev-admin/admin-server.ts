@@ -1,34 +1,35 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-export {};
-
 /* eslint-disable complexity, no-unused-expressions */
 /* eslint-disable no-magic-numbers, max-len, max-statements, prefer-template */
 
-const Path = require("path");
-const _ = require("lodash");
-const boxen = require("boxen");
-const ck = require("chalker");
-const chokidar = require("chokidar");
-const readline = require("readline");
+import Path from "path";
+import _ from "lodash";
+import boxen from "boxen";
+import ck from "chalker";
+import chokidar from "chokidar";
+import readline from "readline";
+import { fork } from "child_process";
+import { ConsoleIO } from "./console-io";
+import { AutomationIO } from "./automation-io";
+import isCI from "is-ci";
+import { doCleanup } from "./cleanup";
+import * as xaa from "xaa";
+import { formUrl } from "../utils";
+import makeOptionalRequire from "optional-require";
+const optionalRequire = makeOptionalRequire(require);
+
+const WT = optionalRequire("worker_threads");
+
 import { parse as parseLog } from "./log-parser";
 import { WebpackDevRelay } from "./webpack-dev-relay";
-const { fork } = require("child_process");
-const ConsoleIO = require("./console-io");
-const AutomationIO = require("./automation-io");
-const isCI = require("is-ci");
-const { doCleanup } = require("./cleanup");
-const xaa = require("xaa");
-const { formUrl } = require("../utils");
-const optionalRequire = require("optional-require")(require);
-const WT = optionalRequire("worker_threads");
+import { AdminHttp } from "./admin-http";
+
+import { devProxy } from "../../config/dev-proxy";
 
 const {
   settings: { useDevProxy: DEV_PROXY_ENABLED, adminLogLevel },
   fullDevServer,
   controlPaths
-} = require("../../config/dev-proxy");
-
-import { AdminHttp } from "./admin-http";
+} = devProxy;
 
 const ADMIN_LOG_LEVEL = parseInt(adminLogLevel) || 0;
 
@@ -168,7 +169,8 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
 <green>   DEV dashboard: <cyan.underline>${devurl}</></>
 <green>WebPack reporter: <cyan.underline>${reporterUrl}</></>`;
 
-    this._menu = "\n" + boxen(menu, { margin: { left: 5 }, padding: { right: 3, left: 3 } });
+    this._menu =
+      "\n" + boxen(menu, { margin: { left: 5 } as any, padding: { right: 3, left: 3 } as any });
   }
 
   showMenu(force = undefined) {

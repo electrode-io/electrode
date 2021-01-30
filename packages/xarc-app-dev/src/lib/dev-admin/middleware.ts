@@ -1,17 +1,14 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-export {};
-
 /* eslint-disable no-console, no-magic-numbers, max-statements */
 /* eslint-disable max-params, prefer-template, complexity, global-require */
 
-const Path = require("path");
-const Fs = require("fs");
-const webpack = require("webpack");
-const hotHelpers = require("webpack-hot-middleware/helpers");
-const Url = require("url");
+import Path from "path";
+import Fs from "fs";
+import webpack from "webpack";
+import hotHelpers from "webpack-hot-middleware/helpers";
+import Url from "url";
 const { getWebpackStartConfig } = require("@xarc/webpack/lib/util/custom-check");
-const { fullDevServer, controlPaths } = require("../../config/dev-proxy");
-const { formUrl } = require("../utils");
+import { devProxy } from "../../config/dev-proxy";
+import { formUrl } from "../utils";
 
 hotHelpers.pathMatch = (url, path) => {
   try {
@@ -21,13 +18,15 @@ hotHelpers.pathMatch = (url, path) => {
   }
 };
 
-const webpackDevMiddleware = require("webpack-dev-middleware");
-const webpackHotMiddleware = require("webpack-hot-middleware");
-const serveIndex = require("serve-index-fs");
-const ck = require("chalker");
-const _ = require("lodash");
-const statsUtils = require("../stats-utils");
-const statsMapper = require("../stats-mapper");
+import webpackDevMiddleware from "webpack-dev-middleware";
+import webpackHotMiddleware from "webpack-hot-middleware";
+import serveIndex from "serve-index-fs";
+import ck from "chalker";
+import _ from "lodash";
+import { jsonToHtml } from "../stats-utils";
+import { getBundles } from "../stats-mapper";
+
+const { fullDevServer, controlPaths } = devProxy;
 
 function urlJoin(...args) {
   if (args.length < 1) return undefined;
@@ -64,7 +63,7 @@ const skipWebpackDevMiddleware = req => {
     (h["user-agent"] === "shot" || h.SKIP_WEBPACK_DEV_MIDDLEWARE === "true")
   );
 };
-class Middleware {
+export class Middleware {
   _options: any;
   canContinue: symbol;
   _instanceId: number;
@@ -231,7 +230,7 @@ class Middleware {
       const refreshModules = [];
       if (!this.webpackDev.hasErrors) {
         const cwd = process.cwd() + "/";
-        const bundles = statsMapper.getBundles(reporterOptions.stats);
+        const bundles = getBundles(reporterOptions.stats);
         bundles.forEach(b => {
           b.modules.forEach(m => {
             if (m.indexOf("node_modules") >= 0) return;
@@ -322,7 +321,7 @@ doReload(1); </script></body></html>`)
     const serveReporter = reporterOptions => {
       const stats = reporterOptions.stats;
       const jsonData = stats.toJson({}, true);
-      const html = statsUtils.jsonToHtml(jsonData, true);
+      const html = jsonToHtml(jsonData, true, undefined);
       const jumpToError =
         html.indexOf(`a name="error"`) > 0 || html.indexOf(`a name="warning"`) > 0
           ? `<script>(function(){var t = document.getElementById("anchor_warning") ||
@@ -399,5 +398,3 @@ ${listDirectoryHtml(this.listAssetPath, outputPath)}
     return Promise.resolve(this.canContinue);
   }
 }
-
-module.exports = Middleware;

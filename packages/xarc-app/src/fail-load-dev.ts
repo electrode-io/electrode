@@ -1,8 +1,6 @@
-"use strict";
+import { logger } from "./logger";
 
-const logger = require("./logger");
-
-module.exports = function failLoadDev(err) {
+export function failLoadDev(err) {
   logger.error(err);
   logger.error(`
 
@@ -17,4 +15,4 @@ module.exports = function failLoadDev(err) {
 `);
 
   process.exit(1); // eslint-disable-line
-};
+}

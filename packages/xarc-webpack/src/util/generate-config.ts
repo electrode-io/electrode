@@ -9,7 +9,7 @@ const xsh = require("xsh");
 const partials = require("../partials");
 const WebpackConfigComposer = require("webpack-config-composer");
 const optionalRequire = require("optional-require")(require);
-const logger = require("@xarc/app-dev/lib/logger");
+const { logger } = require("@xarc/app-dev/lib/logger");
 const ck = require("chalker");
 
 const xarcWebpackConfig = Symbol("Electrode X webpack config");
@@ -55,7 +55,7 @@ function searchUserCustomConfig(options) {
     logger.info(`Custom webpack config ${foundLocation.file} loaded from ${dir}`);
   } else {
     const dirs = [cwd, archPath].map(d => xsh.pathCwd.replace(d)).join("; ");
-    logger.info(`No custom webpack config ${configFilename} found in dirs ${dirs}`);
+    // logger.info(`No custom webpack config ${configFilename} found in dirs ${dirs}`);
   }
 
   return customConfig;

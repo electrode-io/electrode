@@ -14,7 +14,6 @@ const {
   legacyDecorators,
   transformClassProps,
   looseClassProps,
-  enableDynamicImport,
   hasMultiTargets,
   target: babelTarget,
   envTargets = {}
@@ -35,9 +34,6 @@ const basePlugins = [
       useRuntimeModule: true
     }
   ],
-  ...(enableDynamicImport
-    ? ["@babel/plugin-syntax-dynamic-import", "@loadable/babel-plugin"]
-    : [false]),
   // allow decorators on class and method
   // Note: This must go before @babel/plugin-proposal-class-properties
   (enableTypeScript || proposalDecorators) && [
@@ -88,8 +84,6 @@ const isTest = (BABEL_ENV || NODE_ENV) === "test";
 
 // @ts-ignore
 const plugins = basePlugins.concat(
-  // test env
-  isTest && ["babel-plugin-dynamic-import-node"],
   // production env
   isProduction && [
     "@babel/plugin-transform-react-constant-elements",
@@ -160,7 +154,7 @@ const presets = [
   "@babel/preset-react"
 ];
 
-module.exports = {
+export = {
   presets: presets.filter(x => x),
   plugins: plugins.filter(x => x)
 };

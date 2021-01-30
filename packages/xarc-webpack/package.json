@@ -33,7 +33,6 @@
     "Joel Chen <xchen@walmartlabs.com>"
   ],
   "dependencies": {
-    "@loadable/webpack-plugin": "^5.7.1",
     "autoprefixer": "^9.6.0",
     "babel-loader": "^8.1.0",
     "chalk": "^4.1.0",
@@ -89,7 +88,7 @@
     "typescript": "^3.8.3"
   },
   "engines": {
-    "node": ">= 10",
+    "node": ">= 12",
     "npm": ">= 6"
   },
   "nyc": {

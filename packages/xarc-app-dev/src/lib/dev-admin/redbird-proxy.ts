@@ -1,18 +1,19 @@
-import { isValidPort } from "../utils";
-
 /* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/ban-ts-ignore */
 /* eslint-disable max-statements, no-process-exit, global-require, no-console */
 
-const assert = require("assert");
-const Path = require("path");
-const _ = require("lodash");
-const redbird = require("@jchip/redbird");
-const ck = require("chalker");
-const optionalRequire = require("optional-require")(require);
-const { settings, searchSSLCerts, controlPaths } = require("../../config/dev-proxy");
-const cdnMock = require("./cdn-mock");
+import assert from "assert";
+import Path from "path";
+import _ from "lodash";
+import redbird from "@jchip/redbird";
+import ck from "chalker";
+import makeOptionalRequire from "optional-require";
+import { devProxy } from "../../config/dev-proxy";
+import { cdnMock } from "./cdn-mock";
+import { isValidPort, formUrl } from "../utils";
 
-const { formUrl } = require("../utils");
+const { settings, searchSSLCerts, controlPaths } = devProxy;
+
+const optionalRequire = makeOptionalRequire(require);
 
 let APP_RULES = [];
 
@@ -33,6 +34,7 @@ const getNotFoundPage = data => {
     $Env:HOST="${actualHost}"; clap dev
   </code>
 </p>`;
+
   return `<html>
   <body>
     <div style="text-align:center;">
@@ -264,7 +266,7 @@ View status at <green>${proxyUrls.https || proxyUrls.http}${controlPaths.status}
   const enableSsl = ssl && isValidPort(options.httpsPort);
 
   if (enableSsl) {
-    const proxyCerts = searchSSLCerts();
+    const proxyCerts: any = searchSSLCerts();
     assert(proxyCerts.key && proxyCerts.cert, "Dev Proxy can't find SSL key and certs");
     const httpPort = isValidPort(options.httpPort) ? options.httpPort : -1;
     Object.assign(proxyOptions, {
@@ -338,6 +340,6 @@ View status at <green>${proxyUrls.https || proxyUrls.http}${controlPaths.status}
   }
 };
 
-module.exports = startProxy;
+export = startProxy;
 
 startProxy();

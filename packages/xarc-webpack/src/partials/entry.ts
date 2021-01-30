@@ -7,7 +7,7 @@ import * as Path from "path";
 import * as _ from "lodash";
 const optionalRequire = require("optional-require")(require);
 const chalk = require("chalk");
-const logger = require("@xarc/app-dev/lib/logger");
+const { logger } = require("@xarc/app-dev/lib/logger");
 const mkdirp = require("mkdirp");
 import { loadXarcOptions } from "../util/load-xarc-options";
 
@@ -43,7 +43,9 @@ function makeEntryPartial() {
         logger.error(`Loading ${entryPath} failed`, err);
         process.exit(1);
       },
-      notFound: () => logger.info(`No custom entry point configuration ${entryPath}`)
+      notFound: () => {
+        // logger.info(`No custom entry point configuration ${entryPath}`);
+      }
     });
 
     if (entry) {
@@ -117,7 +119,7 @@ if (module.hot) {
     const subApps = AppMode.subApps;
 
     if (_.isEmpty(subApps)) {
-      logger.info(`No version 1 subapps found under ${AppMode.src.dir}`);
+      // logger.info(`No version 1 subapps found under ${AppMode.src.dir}`);
       return false;
     } else {
       logger.info(`Found version 1 subapps: ${Object.keys(subApps).join(", ")}`);

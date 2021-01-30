@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-export {};
+import winston from "winston";
+import { makeWinstonLogger } from "./winston-logger";
 
-module.exports = require("./winston-logger")(require("winston"));
+export const logger = makeWinstonLogger(winston);

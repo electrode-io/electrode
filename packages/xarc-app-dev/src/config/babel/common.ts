@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-import * as requireAt from "require-at";
+import requireAt from "require-at";
 
 //
 // Resolve full path of a plugin that's the dependency of host npm package

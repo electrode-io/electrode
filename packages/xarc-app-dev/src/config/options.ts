@@ -1,12 +1,18 @@
 /* eslint-disable @typescript-eslint/no-var-requires, max-statements */
 
-const Path = require("path");
-const optionalRequire = require("optional-require")(require);
-const constants = require("./constants");
-const utils = require("../lib/utils");
-const _ = require("lodash");
-const xenvConfig = require("xenv-config");
-const makeAppMode = require("@xarc/app/lib/app-mode");
+import Path from "path";
+import makeOptionalRequire from "optional-require";
+import * as utils from "../lib/utils"; // really import ESM into single var utils
+import _ from "lodash";
+import xenvConfig from "xenv-config";
+import { makeAppMode } from "@xarc/app";
+import { getEnvWebpack } from "./env-webpack";
+import { getEnvBabel } from "./env-babel";
+import { getEnvKarma } from "./env-karma";
+
+import { PROD_DIR, ETMP_DIR } from "@xarc/app";
+
+const optionalRequire = makeOptionalRequire(require);
 
 export function checkOptArchetypeInAppDep(dependencies, isDev = undefined) {
   const options = dependencies
@@ -82,9 +88,9 @@ export function getDefaultArchetypeOptions() {
     dir: Path.resolve(__dirname, ".."),
     pkg,
     options: getUserConfigOptions(packageNames, devPackageNames),
-    prodDir: constants.PROD_DIR,
-    eTmpDir: constants.ETMP_DIR,
-    prodModulesDir: Path.join(constants.PROD_DIR, "modules"),
+    prodDir: PROD_DIR,
+    eTmpDir: ETMP_DIR,
+    prodModulesDir: Path.join(PROD_DIR, "modules"),
     checkUserBabelRc: utils.checkUserBabelRc,
     devArchetypeName: "@xarc/app-dev"
   };
@@ -101,9 +107,9 @@ export function getDevArchetypeLegacy() {
   const defaultArchetypeConfig = getDefaultArchetypeOptions();
   const userConfig = defaultArchetypeConfig.options;
 
-  const webpack = require("./env-webpack")();
-  const babel = require("./env-babel")();
-  const karma = require("./env-karma")();
+  const webpack = getEnvWebpack();
+  const babel = getEnvBabel();
+  const karma = getEnvKarma();
 
   const { myPkg: devPkg, myDir: devDir } = utils.getMyPkg();
   const configDir = Path.join(devDir, "config");
@@ -127,9 +133,9 @@ export function getDevArchetypeLegacy() {
       jest: `${configDir}/jest`,
       ...userConfig.configPaths
     },
-    prodDir: constants.PROD_DIR,
-    eTmpDir: constants.ETMP_DIR,
-    AppMode: makeAppMode(constants.PROD_DIR, userConfig.reactLib)
+    prodDir: PROD_DIR,
+    eTmpDir: ETMP_DIR,
+    AppMode: makeAppMode(PROD_DIR, userConfig.reactLib)
   };
 
   const topConfigSpec = {

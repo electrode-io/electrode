@@ -18,4 +18,5 @@ process.env.APP_SERVER_PORT = 3100;
 
 // process.env.KARMA_BROWSER = "phantomjs";
 
-require("@xarc/app")();
+const { loadDevTasks } = require("@xarc/app-dev");
+loadDevTasks();

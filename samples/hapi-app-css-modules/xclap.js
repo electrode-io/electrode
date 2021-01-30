@@ -46,6 +46,8 @@ process.env.ENABLE_SHORTEN_CSS_NAMES = true;
 
 // process.env.KARMA_BROWSER = "phantomjs";
 
-require("@xarc/app")();
+const { loadDevTasks } = require("@xarc/app-dev");
+
+loadDevTasks();
 
 //

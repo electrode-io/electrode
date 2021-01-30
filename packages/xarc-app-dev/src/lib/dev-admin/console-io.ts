@@ -1,14 +1,12 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-export {};
-
 /* eslint-disable no-console, no-process-exit */
 
-const readline = require("readline");
-const VisualLogger = require("visual-logger");
+import readline from "readline";
+import VisualLogger from "visual-logger";
 
-class ConsoleIO extends VisualLogger {
-  constructor(options) {
+export class ConsoleIO extends VisualLogger {
+  constructor(options = {}) {
     super({ ...options, saveLogs: false });
+    // @ts-ignore
     this.setPrefix("");
   }
 
@@ -31,17 +29,18 @@ class ConsoleIO extends VisualLogger {
   }
 
   show(...args) {
+    // @ts-ignore
     this.log(...args);
   }
 
   write(str) {
+    // @ts-ignore
     this.log(str.trimRight());
   }
 
   exit() {
+    // @ts-ignore
     this.clearItems();
     process.exit();
   }
 }
-
-module.exports = ConsoleIO;

@@ -1,13 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-export {};
-
 /* eslint-disable no-console, no-magic-numbers */
 
-const AppDevMiddleware = require("./app-dev-middleware");
+import { AppDevMiddleware } from "./app-dev-middleware";
 
-async function register(server) {
+export async function fastifyPlugin(server) {
   if (process.env.WEBPACK_DEV) {
-    const middleware = new AppDevMiddleware({});
+    const middleware = new AppDevMiddleware();
 
     middleware.setup();
 
@@ -18,5 +16,3 @@ async function register(server) {
 
   return;
 }
-
-module.exports = register;

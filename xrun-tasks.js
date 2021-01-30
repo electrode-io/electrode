@@ -1,6 +1,6 @@
 "use strict";
 
-const xclap = require("xclap");
+const xrun = require("@xarc/run");
 const xsh = require("xsh");
 const shell = xsh.$;
 const exec = xsh.exec;
@@ -104,7 +104,7 @@ const testCreateApp = async (testDir, name, clean, runTest, prompts) => {
   shell.popd();
 };
 
-xclap.load({
+xrun.load({
   ".lerna.coverage": "~$lerna run --stream coverage",
   bootstrap: "~$fynpo",
   test: ["bootstrap", ".lerna.coverage", "build-test"],
@@ -117,7 +117,7 @@ xclap.load({
     desc: "Run CI test",
     task: () => {
       process.env.BUILD_TEST = "true";
-      process.env.NODE_PRESERVE_SYMLINKS = "1";
+      // process.env.NODE_PRESERVE_SYMLINKS = "1";
       const tasks = ["test-boilerplate", "test-stylus-sample", ".test-jest-sample"];
       let updated;
       return exec("lerna updated")
@@ -133,7 +133,7 @@ xclap.load({
             tasks.push(".build-react-component", ".test-tree-shaking");
           }
 
-          return xclap.serial(tasks);
+          return xrun.serial(tasks);
         })
         .catch(err => {
           if (!err.output.stderr.includes("No changed packages found")) {

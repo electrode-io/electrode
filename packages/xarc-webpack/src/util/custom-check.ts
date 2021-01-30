@@ -31,7 +31,7 @@ function getWebpackStartConfig(defaultFile: string, relativeToCwd = true) {
 
 function setWebpackProfile(profile) {
   if (useAppWebpackConfig()) {
-    const logger = require("@xarc/app-dev/lib/logger");
+    const { logger } = require("@xarc/app-dev/lib/logger");
     // verify that profile exist in options directory
     require.resolve(`../options/${profile}`);
     process.env.ELECTRODE_WEBPACK_PROFILE = profile || "production";

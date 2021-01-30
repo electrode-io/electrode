@@ -6,14 +6,14 @@ The app is generated using Electrode generator, and then added the Electrode sam
 
 To verify that webpack tree shaking is removing unused exports:
 
-- run `clap build` to create JS bundles in `dist/js`
+- run `npm run build` to create JS bundles in `dist/js`
 - run `grep DeadCardExampleToBeRemovedByTreeShaking dist/js/*.js`
 
 Note that nothing is found.
 
 ## Installation
 
-Since this app depends on components and packages located in the same repo, to install dependencies, use [fyn].
+Use [fyn] to install dependencies and local packages from the mono-repo.
 
 ```sh
 $ fyn
@@ -22,7 +22,7 @@ $ fyn
 Then to test in dev mode:
 
 ```
-$ clap dev
+$ npm run dev
 ```
 
 in prod mode:

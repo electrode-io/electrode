@@ -10,6 +10,8 @@ process.env.SERVER_ES6 = true;
 
 process.env.ENABLE_SHORTEN_CSS_NAMES = true;
 
-require("@xarc/app")();
+const { loadDevTasks } = require("@xarc/app-dev");
+
+exports.xrun = loadDevTasks();
 
 //

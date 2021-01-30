@@ -1,1 +1,1 @@
-module.exports = require("@xarc/webpack");
+export = require("@xarc/webpack");

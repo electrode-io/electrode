@@ -47,8 +47,6 @@
     "xstdout": "^0.1.1"
   },
   "dependencies": {
-    "@loadable/component": "^5.7.0",
-    "@loadable/server": "^5.9.0",
     "optional-require": "^1.0.0",
     "react-redux": "^4.4.5 || ^5.x.x",
     "react-router": "^5.1.2",

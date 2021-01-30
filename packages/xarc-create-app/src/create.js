@@ -27,11 +27,13 @@ async function create() {
   sortDeps(pkg);
 
   Fs.writeFileSync(Path.resolve("package.json"), `${JSON.stringify(pkg, null, 2)}\n`);
-  shcmd.cp(Path.join(srcDir, "xclap.ts"), process.cwd());
+  shcmd.cp(Path.join(srcDir, "babel.config.js"), process.cwd());
+  shcmd.cp(Path.join(srcDir, "xrun-tasks.ts"), process.cwd());
   shcmd.cp("-R", Path.join(srcDir, "src"), process.cwd());
   shcmd.cp("-R", Path.join(srcDir, "static"), process.cwd());
   shcmd.cp("-R", Path.join(srcDir, "_gitignore"), Path.resolve(".gitignore"));
   shcmd.cp("-R", Path.join(srcDir, "_tsconfig.json"), Path.resolve("tsconfig.json"));
+  shcmd.cp("-R", Path.join(srcDir, "_browserslistrc"), Path.resolve(".browserslistrc"));
   shcmd.cp("-R", Path.join(srcDir, "README.md"), Path.resolve("README.md"));
 
   console.log(ck`

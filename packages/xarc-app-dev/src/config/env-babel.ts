@@ -1,16 +1,14 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-export {};
+import xenvConfig from "xenv-config";
+import { merge } from "lodash";
 
-module.exports = function getEnvBabel() {
-  const xenvConfig = require("xenv-config");
-  const { merge } = require("lodash");
+import { getUserConfig } from "./user-config";
 
-  const userConfig = require("./user-config")();
+export function getEnvBabel() {
+  const userConfig = getUserConfig();
   const { options } = userConfig;
 
   const babelConfigSpec = {
     enableTypeScript: { env: "ENABLE_BABEL_TYPESCRIPT", default: options.typescript || true },
-    enableDynamicImport: { env: "ENABLE_DYNAMIC_IMPORT", default: false },
     enableFlow: { env: "ENABLE_BABEL_FLOW", default: true },
     // require the @flow directive in source to enable FlowJS type stripping
     flowRequireDirective: { env: "FLOW_REQUIRE_DIRECTIVE", default: false },
@@ -40,4 +38,4 @@ module.exports = function getEnvBabel() {
   };
 
   return xenvConfig(babelConfigSpec, userConfig.babel, { merge });
-};
+}

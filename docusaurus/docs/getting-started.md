@@ -3,9 +3,9 @@ id: getting-started
 title: Getting started
 ---
 
-## Building large scale universal React Web Applications
+## Web Applications with node.js and React
 
-Electrode was developed as the engine that has been powering the <http://www.walmart.com> eCommerce website since 2016.
+Electrode was developed to make node.js and React.js a primary tech choice for developing applications at Walmart. It has been powering the <http://www.walmart.com> eCommerce website since 2017.
 
 Electrode Web is a rapid application development framework; a full stack, end-to-end platform for developing, deploying, and maintaining JavaScript applications at Walmart.
 
@@ -21,7 +21,7 @@ Try it now!
 
 To generate and deploy your Electrode app and Electrode components, install the following (if you have not already):
 
-1. Install the [node.js] version 10.x.x or later
+1. Install the [node.js] version 12.x.x or later
 
    - We recommend a tool such as [nvm] for managing node.js installations.
    - If you are on Windows, then [universal nvm] is recommended.
@@ -56,25 +56,27 @@ New Electrode X packages are published under the npm scope `@xarc`, where arc is
 
 ### Essentials
 
-| Package       | Description                               | Corresponding old package         |
-| ------------- | ----------------------------------------- | --------------------------------- |
-| @xarc/app     | JS server runtime support for electrode X | electrode-archetype-react-app     |
-| @xarc/app-dev | dev support for electrode X               | electrode-archetype-react-app-dev |
-| @xarc/webpack | default webpack configs                   | N/A                               |
+| Package       | Description                                              |
+| ------------- | -------------------------------------------------------- |
+| @xarc/app     | node.js runtime support; should be in `dependencies`     |
+| @xarc/app-dev | development only support; should be in `devDependencies` |
+| @xarc/react   | react.js support                                         |
 
 #### Optionals
 
-| Package             |
-| ------------------- |
-| @xarc/config-jest   |
-| @xarc/config-karma  |
-| @xarc/config-mocha  |
-| @xarc/ui-config     |
-| @xarc/ui-logger     |
-| @xarc/dll           |
-| @xarc/dll-dev       |
-| @xarc/config-eslint |
-| @xarc/create-app    |
+| Package            | Description                           |
+| ------------------ | ------------------------------------- |
+| @xarc/react-redux  | react redux support                   |
+| @xarc/react-query  | react query support                   |
+| @xarc/react-router | react router support                  |
+| @xarc/create-app   | create a starter app for you with npx |
+| @xarc/opt-postcss  | Extra style support                   |
+| @xarc/opt-stylus   | stylus support                        |
+| @xarc/opt-sass     | sass support                          |
+| @xarc/opt-less     | less support                          |
+| @xarc/opt-jest     | jest support                          |
+| @xarc/opt-karma    | karma support                         |
+| @xarc/opt-mocha    | mocha support                         |
 
 ## License
 

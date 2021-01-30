@@ -1,3 +1,7 @@
 "use strict";
 
-require("./support").setupIsomorphicLoader();
+const { setupAppSrcDir, setupIsomorphicLoader } = require("./dist/support");
+
+setupAppSrcDir();
+
+setupIsomorphicLoader();

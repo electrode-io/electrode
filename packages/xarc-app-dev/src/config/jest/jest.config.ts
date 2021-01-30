@@ -52,7 +52,7 @@ const jestSetupFilesNew = { setupFilesAfterEnv: [frameworkMock] };
 const jestSetupFilesConfig =
   jestMajVersion >= SETUP_FILES_VERSION_SPLIT ? jestSetupFilesNew : jestSetupFilesDeprecated;
 
-module.exports = _.merge(
+export = _.merge(
   {},
   _.pickBy(jestDefaultConfig, x => x !== undefined),
   jestSetupFilesConfig,

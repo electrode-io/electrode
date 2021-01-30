@@ -1,6 +1,6 @@
-import * as Fs from "fs";
-import * as Path from "path";
-import * as _ from "lodash";
+import Fs from "fs";
+import Path from "path";
+import _ from "lodash";
 
 /**
  * Add a list of packages to a package.json's depedencies
@@ -56,7 +56,7 @@ export const savePkgJson = (dir: string, pkgJson: any) => {
 
 /* eslint-disable @typescript-eslint/no-var-requires */
 const xarcAppPkgJson = require("@xarc/app/package.json");
-const logger = require("../logger");
+import { logger } from "../logger";
 
 /**
  * Update app's dependencies
