@@ -3,7 +3,13 @@
 
 import { AppDevMiddleware } from "./app-dev-middleware";
 
-export async function fastifyPlugin(server) {
+/**
+ * webpack dev server fastify plugin
+ *
+ * @param server fastify server
+ *
+ */
+export async function fastifyPlugin(server: any): Promise<void> {
   if (process.env.WEBPACK_DEV) {
     const middleware = new AppDevMiddleware();
 
@@ -13,6 +19,4 @@ export async function fastifyPlugin(server) {
       request.app.webpackDev = middleware.webpackDev;
     });
   }
-
-  return;
 }

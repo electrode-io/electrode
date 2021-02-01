@@ -4,6 +4,7 @@ import _ from "lodash";
 
 /**
  * Add a list of packages to a package.json's depedencies
+ *
  * @param pkgJson - package.json data
  * @param packages - list of packages to add
  * @param dep - which dependencies section to add
@@ -34,6 +35,7 @@ export const addDepToPkgJson = (pkgJson: any, packages: Record<string, string>, 
 
 /**
  * Load a package.json from dir
+ *
  * @param dir - directory
  * @returns package.json object
  */
@@ -43,7 +45,9 @@ export const loadPkgJson = (dir: string) => {
 
 /**
  * Save a package.json to dir
+ *
  * @param dir - directory
+ * @param pkgJson
  * @params pkgJson - package.json object
  * @returns none
  */

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires, max-statements, no-console, prefer-const */
+/* eslint-disable max-statements, no-console, prefer-const, no-magic-numbers */
 
 import { getDevAdminPortFromEnv, isValidPort } from "../lib/utils";
 
@@ -10,21 +10,28 @@ import Fs from "fs";
 
 // note: used by subapp-server/lib/util
 
-export function getDevProxy() {
+/**
+ * Get information to run the dev proxy
+ *
+ * @returns info for dev proxy
+ */
+export function getDevProxy(): any {
   const xarcCwd = process.env.XARC_CWD || process.cwd();
 
   const envWebpack = getEnvWebpack();
   const envApp = getEnvApp();
   const envProxy = getEnvProxy();
 
-  /*
+  /**
    * Look in app's dependencies and devDependencies for a module with a name that starts with ssl-certs,
    * load it, and try to get dev SSL key/cert file from the functions devKeyFile and devCertFile.
    *
    * If they exist and return strings, then use them as the path to the SSL key/cert file
    * for the dev proxy.
+   *
+   * @returns `undefined` or `{key, cert }`
    */
-  function searchSSLCertsModule() {
+  function searchSSLCertsModule(): any {
     let sslCertsMod;
 
     try {
@@ -35,7 +42,7 @@ export function getDevProxy() {
         Object.keys(appPkg.devDependencies || {}).find(matchModName);
 
       if (sslCertsMod) {
-        const sslCerts = require(sslCertsMod);
+        const sslCerts = require(sslCertsMod); // eslint-disable-line
         const key = sslCerts.devKeyFile();
         const cert = sslCerts.devCertFile();
         Fs.accessSync(key);
@@ -58,7 +65,12 @@ export function getDevProxy() {
     return undefined;
   }
 
-  function searchSSLCerts() {
+  /**
+   * search for dev SSL certs under app's directory
+   *
+   * @returns SSL cert file paths
+   */
+  function searchSSLCerts(): any {
     const fromModule = searchSSLCertsModule();
 
     if (fromModule) {
@@ -156,4 +168,7 @@ export function getDevProxy() {
   };
 }
 
+/**
+ * Default information for dev proxy
+ */
 export const devProxy = getDevProxy();

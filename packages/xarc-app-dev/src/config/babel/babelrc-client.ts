@@ -1,10 +1,12 @@
-/* eslint-disable @typescript-eslint/no-var-requires, no-console, @typescript-eslint/ban-ts-ignore */
+/* eslint-disable @typescript-eslint/no-var-requires, no-console, @typescript-eslint/ban-ts-comment */
 
-const optionalRequire = require("optional-require")(require);
-const optFlow = optionalRequire("electrode-archetype-opt-flow");
+import makeOptionalRequire from "optional-require";
 import { getPluginFrom, loadXarcOptions } from "./common";
+import _ from "lodash";
+
+const optionalRequire = makeOptionalRequire(require);
+const optFlow = optionalRequire("electrode-archetype-opt-flow");
 const xOptions = loadXarcOptions(process.env.XARC_CWD);
-const _ = require("lodash");
 
 const {
   enableTypeScript,
@@ -80,7 +82,7 @@ const { BABEL_ENV, NODE_ENV, ENABLE_KARMA_COV } = process.env;
 const enableCssModule = Boolean(_.get(xOptions, "webpack.cssModuleSupport"));
 const enableKarmaCov = ENABLE_KARMA_COV === "true";
 const isProduction = (BABEL_ENV || NODE_ENV) === "production";
-const isTest = (BABEL_ENV || NODE_ENV) === "test";
+// const isTest = (BABEL_ENV || NODE_ENV) === "test";
 
 // @ts-ignore
 const plugins = basePlugins.concat(

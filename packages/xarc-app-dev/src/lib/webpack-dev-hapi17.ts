@@ -3,6 +3,9 @@
 
 import { AppDevMiddleware } from "./app-dev-middleware";
 
+/**
+ * @param server
+ */
 function register(server) {
   const middleware = new AppDevMiddleware();
 

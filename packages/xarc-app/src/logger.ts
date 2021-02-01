@@ -1,4 +1,4 @@
-/* eslint-disable global-require */
+/* eslint-disable global-require, @typescript-eslint/no-var-requires */
 
 export const logger = {
   _logger: undefined,

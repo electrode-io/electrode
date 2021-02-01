@@ -1,10 +1,16 @@
-/* eslint-disable @typescript-eslint/no-var-requires, no-process-exit */
+/* eslint-disable no-process-exit */
 
 import { loadXarcOptions } from "../../lib/utils";
 
 import { logger } from "../../lib/logger";
 
-export = function(settings) {
+/**
+ * Karma settings to update for the specified browser
+ *
+ * @param settings - incoming settings to update
+ * @returns updated settings
+ */
+export = function updateKarmaBrowserSettings(settings: any): any {
   const xarcOptions = loadXarcOptions();
 
   const browser = xarcOptions.karma.browser.toLowerCase();

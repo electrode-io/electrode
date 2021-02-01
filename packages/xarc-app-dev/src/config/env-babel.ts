@@ -3,7 +3,12 @@ import { merge } from "lodash";
 
 import { getUserConfig } from "./user-config";
 
-export function getEnvBabel() {
+/**
+ * Get babel settings from env (deprecated)
+ *
+ * @returns babel settings
+ */
+export function getEnvBabel(): any {
   const userConfig = getUserConfig();
   const { options } = userConfig;
 

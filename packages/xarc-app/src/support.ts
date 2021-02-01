@@ -69,7 +69,7 @@ export type XarcCdnAssetsMappingOptions = {
    * 2. config/assets.json
    *
    */
-  mapping?: object;
+  mapping?: Record<string, unknown>;
   /**
    * Only setup in production mode (NODE_ENV === "production")
    */

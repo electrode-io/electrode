@@ -1,6 +1,5 @@
+/* eslint-disable */
 "use strict";
-
-/* eslint-disable no-process-exit */
 
 const Fs = require("fs");
 const filterScanDir = require("filter-scan-dir");

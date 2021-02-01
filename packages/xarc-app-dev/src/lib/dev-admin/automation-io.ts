@@ -1,7 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-empty-function */
-/* eslint-disable @typescript-eslint/ban-ts-ignore */
-
-/* eslint-disable no-console, no-process-exit */
+/* eslint-disable no-console */
 
 export class AutomationIO {
   constructor(name) {
@@ -12,7 +9,9 @@ export class AutomationIO {
 `);
   }
 
-  setup() {}
+  setup() {
+    //
+  }
 
   async getUserInput() {
     return new Promise(resolve => {
@@ -24,15 +23,23 @@ export class AutomationIO {
     console.log(...args);
   }
 
-  write() {}
+  write() {
+    //
+  }
 
-  addItem() {}
+  addItem() {
+    //
+  }
 
-  updateItem() {}
+  updateItem() {
+    //
+  }
 
-  removeItem() {}
+  removeItem() {
+    //
+  }
 
   exit() {
-    process.exit();
+    process.exit(); // eslint-disable-line
   }
 }

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires, no-console */
+/* eslint-disable no-console, no-magic-numbers */
 
 import readPkgUp from "read-pkg-up";
 import pkgUp from "pkg-up";
@@ -9,10 +9,22 @@ import Path from "path";
 import Fs from "fs";
 import _ from "lodash";
 import Url from "url";
+import { XarcInternalOptions, XarcOptions } from "../config/opt2/xarc-options";
 
-export const getOptArchetypeRequire = require("@xarc/webpack/lib/util/get-opt-require");
+export const getOptArchetypeRequire = require("@xarc/webpack/lib/util/get-opt-require"); // eslint-disable-line
 
-export const formUrl = ({ protocol = "http", host = "", port = "", path = "" }) => {
+/**
+ * Form a url string from URL object
+ *
+ * @param urlObj - object with URL info
+ * @param urlObj.protocol - protocol
+ * @param urlObj.host - host
+ * @param urlObj.port - port
+ * @param urlObj.path - path
+ *
+ * @returns url string
+ */
+export const formUrl = ({ protocol = "http", host = "", port = "", path = "" }): string => {
   const proto = protocol.toString().toLowerCase();
   const sp = port.toString();
   const host2 =
@@ -23,7 +35,12 @@ export const formUrl = ({ protocol = "http", host = "", port = "", path = "" }) 
   return Url.format({ protocol: proto, host: host2, pathname: path });
 };
 
-export function checkUserBabelRc() {
+/**
+ * Check user's babel rc files
+ *
+ * @returns babel type or false if none was found
+ */
+export function checkUserBabelRc(): false | string {
   const user = Path.resolve(".babelrc");
   if (Fs.existsSync(user)) {
     const userRc = JSON.parse(Fs.readFileSync(user).toString());
@@ -44,7 +61,12 @@ export function checkUserBabelRc() {
 let myPkg;
 let myDir;
 
-export function getMyPkg() {
+/**
+ * Return this module's package.json and directory
+ *
+ * @returns `{ myPkg, myDir }`
+ */
+export function getMyPkg(): any {
   if (!myPkg) {
     myPkg = readPkgUp.sync({ cwd: __dirname });
     myDir = Path.dirname(pkgUp.sync({ cwd: __dirname }));
@@ -53,8 +75,13 @@ export function getMyPkg() {
   return { myPkg, myDir };
 }
 
-export function createGitIgnoreDir(dir, comment) {
-  comment = comment || "";
+/**
+ * Create a directory that's ignored by git
+ *
+ * @param dir - name of dir to create
+ * @param comment - comment about why it's ignored etc
+ */
+export function createGitIgnoreDir(dir: string, comment = ""): void {
   const dirFP = Path.resolve(dir);
   try {
     mkdirp.sync(dirFP);
@@ -70,7 +97,14 @@ export function createGitIgnoreDir(dir, comment) {
 
 const regExpSig = "@xarc/__RegExp__@";
 
-export const jsonStringifier = (key, value) => {
+/**
+ * JSON.stringify custom stringifier, for converting Regex to string
+ *
+ * @param _key - unused
+ * @param value - data to stringify
+ * @returns string | unknown
+ */
+export const jsonStringifier = (_key: string, value: unknown): string | unknown => {
   if (value instanceof RegExp) {
     return `${regExpSig}${value.toString()}`;
   } else {
@@ -78,7 +112,14 @@ export const jsonStringifier = (key, value) => {
   }
 };
 
-export const jsonParser = (key, value) => {
+/**
+ * JSON.parse custom parser, for detecting and converting regex string to RegEx object
+ *
+ * @param _key - unused
+ * @param value - value to parse
+ * @returns RegExp | unknown
+ */
+export const jsonParser = (_key: string, value: unknown): RegExp | unknown => {
   if (typeof value === "string" && value.startsWith(regExpSig)) {
     const m = value.substr(regExpSig.length).match(/\/(.*)\/(.*)?/);
     return new RegExp(m[1], m[2] || "");
@@ -89,10 +130,17 @@ export const jsonParser = (key, value) => {
 
 let cachedXarcOptions;
 
+/**
+ * Load xarc options that's saved to disk
+ *
+ * @param dir - app directory
+ * @param showError - log error if failed
+ * @returns xarc options
+ */
 export function loadXarcOptions(
   dir: string = process.env.XARC_CWD || process.cwd(),
   showError = true
-) {
+): XarcInternalOptions {
   if (cachedXarcOptions) {
     return cachedXarcOptions;
   }
@@ -120,17 +168,27 @@ xarc's development code.
       webpack: {},
       babel: {},
       options: {}
-    });
+    } as XarcInternalOptions);
   }
 }
 
+/**
+ * Create electrode's temp directory
+ *
+ * @param eTmpDir - name of the temp dir
+ */
 function createElectrodeTmpDir(eTmpDir = ".etmp") {
   createGitIgnoreDir(Path.resolve(eTmpDir), "Electrode tmp dir");
 }
 
-export function saveXarcOptions(config) {
-  const filename = `${config.eTmpDir}/xarc-options.json`;
-  const copy = { ...config, pkg: undefined, devPkg: undefined };
+/**
+ * Save xarc options to disk
+ *
+ * @param options - options to save
+ */
+export function saveXarcOptions(options: any): void {
+  const filename = `${options.eTmpDir}/xarc-options.json`;
+  const copy = { ...options, pkg: undefined, devPkg: undefined };
   let existStr;
 
   try {
@@ -142,7 +200,7 @@ export function saveXarcOptions(config) {
   const str = JSON.stringify(copy, jsonStringifier, 2);
   if (str !== existStr) {
     try {
-      createElectrodeTmpDir(config.eTmpDir);
+      createElectrodeTmpDir(options.eTmpDir);
 
       Fs.writeFileSync(filename, str);
     } catch (err) {
@@ -154,7 +212,13 @@ export function saveXarcOptions(config) {
   }
 }
 
-export function detectCSSModule(xOptions) {
+/**
+ * Detect if CSS modules should be enabled
+ *
+ * @param xOptions xarc options
+ * @returns `true` or `false`
+ */
+export function detectCSSModule(xOptions: XarcOptions): boolean {
   const cssModuleSupport = _.get(xOptions, "webpack.cssModuleSupport", undefined);
   if (cssModuleSupport === undefined) {
     return true;
@@ -162,6 +226,12 @@ export function detectCSSModule(xOptions) {
   return Boolean(cssModuleSupport);
 }
 
+/**
+ * Get dev admin's http port from env
+ *
+ * @param fallback fallback port
+ * @returns port number
+ */
 export function getDevAdminPortFromEnv(fallback?: number): number {
   const fromEnv = parseInt(
     process.env.XARC_ADMIN_PORT ||
@@ -174,9 +244,10 @@ export function getDevAdminPortFromEnv(fallback?: number): number {
 
 /**
  * Check if a port number is valid
- * @param p - port number
+ *
+ * @param port - port number
  * @returns `true` or `false`
  */
-export const isValidPort = p => {
-  return Number.isInteger(p) && p >= 0 && p < 65536;
+export const isValidPort = (port: number): boolean => {
+  return Number.isInteger(port) && port >= 0 && port < 65536;
 };

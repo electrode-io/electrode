@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use strict";
 
 /* eslint-disable max-statements, no-process-exit */

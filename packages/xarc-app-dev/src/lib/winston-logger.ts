@@ -2,13 +2,14 @@
 
 /**
  * Make a logger using winston for logging development info
+ *
  * @param winston - winston
  * @param handlers - log handlers
  * @param options - log options
  *
  * @returns winston logger
  */
-export const makeWinstonLogger = (winston, handlers = true, options: any = {}) => {
+export const makeWinstonLogger = (winston, handlers = true, options: any = {}): any => {
   return new winston.Logger({
     exceptionHandlers: handlers && [
       new winston.transports.Console({

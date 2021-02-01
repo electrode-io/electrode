@@ -1,6 +1,9 @@
 import _ from "lodash";
 import { loadXarcOptions } from "./utils";
 
+/**
+ * @param stats
+ */
 function extractBundles(stats) {
   // Stats has modules, single bundle
   if (stats.modules) return [stats];
@@ -15,6 +18,9 @@ const xarcOptions = loadXarcOptions();
 const xarcCwd = xarcOptions.cwd;
 const WEBPACK_LOADER_MARKER = `!${xarcCwd[0]}`;
 
+/**
+ * @param statsResult
+ */
 export function getBundles(statsResult) {
   const mapModules = mod => {
     if (mod.modules) {

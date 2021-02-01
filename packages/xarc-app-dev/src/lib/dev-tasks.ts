@@ -52,26 +52,44 @@ function webpackCmd() {
   return Fs.existsSync(exactCmd) ? Path.relative(xarcCwd, exactCmd) : cmd;
 }
 
+/**
+ * @param str
+ */
 function quote(str) {
   return str.startsWith(`"`) ? str : `"${str}"`;
 }
 
+/**
+ *
+ */
 function setProductionEnv() {
   process.env.NODE_ENV = "production";
 }
 
+/**
+ *
+ */
 function setDevelopmentEnv() {
   process.env.NODE_ENV = "development";
 }
 
+/**
+ *
+ */
 function setKarmaCovEnv() {
   process.env.ENABLE_KARMA_COV = "true";
 }
 
+/**
+ *
+ */
 function setStaticFilesEnv() {
   process.env.STATIC_FILES = "true";
 }
 
+/**
+ *
+ */
 function setWebpackDev() {
   process.env.WEBPACK_DEV = "true";
 }
@@ -86,7 +104,7 @@ export { XarcOptions } from "../config/opt2/xarc-options";
  * @returns the instance of @xarc/run that's required
  */
 export const getDevTaskRunner = (cwd: string = process.cwd()) => {
-  return requireAt(cwd)("@xarc/run") || require("@xarc/run");
+  return requireAt(cwd)("@xarc/run") || xrun;
 };
 
 /**
@@ -109,16 +127,19 @@ export const getDevTaskRunner = (cwd: string = process.cwd()) => {
  * loadXarcDevTasks();
  * ```
  *
- * @param  xrun - `@xarc/run` task runner.  pass `null` and an
+ * @param  userXrun - `@xarc/run` task runner.  pass `null` and an
  *   internal version will be used.
  * @param  userOptions user provided options to configure features etc
  *
  * @returns The `@xarc/run` task runner instance that was used.
  */
-export function loadXarcDevTasks(xrun, userOptions: XarcOptions = {}) {
+export function loadXarcDevTasks(userXrun, userOptions: XarcOptions = {}) {
   let xarcOptions = getDevOptions(userOptions);
   xarcCwd = xarcOptions.cwd;
 
+  /**
+   *
+   */
   function setupPath() {
     const nmBin = Path.join("node_modules", ".bin");
     xsh.envPath.addToFront(Path.resolve(xarcCwd, nmBin));
@@ -195,6 +216,9 @@ export function loadXarcDevTasks(xrun, userOptions: XarcOptions = {}) {
 
   const eTmpDir = xarcOptions.eTmpDir;
 
+  /**
+   *
+   */
   function removeLogFiles() {
     try {
       Fs.unlinkSync(Path.resolve(xarcCwd, "archetype-exceptions.log"));
@@ -208,6 +232,9 @@ export function loadXarcDevTasks(xrun, userOptions: XarcOptions = {}) {
   /*
    * [generateServiceWorker clap task to generate service worker code that will precache specific
    * resources so they work offline.]
+   *
+   */
+  /**
    *
    */
   function generateServiceWorker() {
@@ -239,6 +266,9 @@ export function loadXarcDevTasks(xrun, userOptions: XarcOptions = {}) {
     }
   }
 
+  /**
+   *
+   */
   function inlineCriticalCSS() {
     const HOST = process.env.HOST || "localhost";
     const PORT = process.env.PORT || 3000;
@@ -280,6 +310,9 @@ export function loadXarcDevTasks(xrun, userOptions: XarcOptions = {}) {
     });
   }
 
+  /**
+   * @param argFlags
+   */
   function startAppServer(argFlags = []) {
     argFlags = argFlags || [];
     const x = argFlags.length > 0 ? ` with options: ${argFlags.join(" ")}` : "";
@@ -289,6 +322,9 @@ export function loadXarcDevTasks(xrun, userOptions: XarcOptions = {}) {
     return exec(`node`, argFlags, Path.join(xarcOptions.AppMode.lib.server, "index.js"));
   }
 
+  /**
+   *
+   */
   function generateBrowsersListRc() {
     const configRcFile = ".browserslistrc";
     const destRcFile = Path.resolve(xarcCwd, configRcFile);
@@ -325,6 +361,9 @@ ie >= 11
   // - when invoking tasks in [], starting name with ? means optional (ie: won't fail if task not found)
 
   // eslint-disable-next-line complexity
+  /**
+   * @param xrun2
+   */
   function makeTasks(xrun2) {
     process.env.ENABLE_KARMA_COV = "false";
 
@@ -771,7 +810,7 @@ export =  {
         - NODE_ENV is set to 'production' if it's not set.
         - options: [all options will be passed to node when starting your app server]`,
         task(context) {
-          xrun.updateEnv(
+          userXrun.updateEnv(
             {
               NODE_ENV: "production"
             },
@@ -1202,14 +1241,14 @@ You only need to run this if you are doing something not through the xarc tasks.
   //   require.resolve(`${archetype.devArchetypeName}/package.json`);
   // }
 
-  xrun = xrun || getDevTaskRunner(xarcCwd);
+  userXrun = userXrun || getDevTaskRunner(xarcCwd);
   process.env._ELECTRODE_DEV_ = "1";
   if (!process.env.hasOwnProperty("FORCE_COLOR")) {
     process.env.FORCE_COLOR = "1"; // force color for chalk
   }
 
-  xrun.load("electrode", makeTasks(xrun), -10);
+  userXrun.load("electrode", makeTasks(userXrun), -10);
   generateBrowsersListRc();
 
-  return xrun;
+  return userXrun;
 }

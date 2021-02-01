@@ -3,6 +3,6 @@
  *
  * @returns electrode's babel config
  */
-export = function electrodeBabelRcAsPreset() {
+export = function electrodeBabelRcAsPreset(): any {
   return require("./babelrc"); // eslint-disable-line
 };

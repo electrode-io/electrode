@@ -1,7 +1,12 @@
-export function getEnvApp() {
-  const xenvConfig = require("xenv-config");
-  const { merge } = require("lodash");
+import xenvConfig from "xenv-config";
+import { merge } from "lodash";
 
+/**
+ * Get app settings from env
+ *
+ * @returns app settings
+ */
+export function getEnvApp(): any {
   const appConfigSpec = {
     host: { env: ["HOST"], default: "localhost" },
     port: { env: ["PORT"], default: 3000 },

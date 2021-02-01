@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires, callback-return */
+/* eslint-disable @typescript-eslint/no-var-requires, no-magic-numbers, callback-return, prefer-arrow-callback */
 
 const { EventEmitter } = require("events");
 import { WebpackDevRelay } from "../../../src/lib/dev-admin/webpack-dev-relay";

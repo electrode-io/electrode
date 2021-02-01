@@ -14,6 +14,10 @@ import { PROD_DIR, ETMP_DIR } from "@xarc/app";
 
 const optionalRequire = makeOptionalRequire(require);
 
+/**
+ * @param dependencies
+ * @param isDev
+ */
 export function checkOptArchetypeInAppDep(dependencies, isDev = undefined) {
   const options = dependencies
     .filter(x => x.startsWith("electrode-archetype-opt-") || x.startsWith("@xarc/opt-"))

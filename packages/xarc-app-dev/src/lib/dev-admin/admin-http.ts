@@ -1,4 +1,4 @@
-/* eslint-disable max-statements */
+/* eslint-disable max-statements, no-magic-numbers */
 
 import http from "http";
 import Path from "path";
@@ -10,7 +10,7 @@ import _ from "lodash";
 
 export type AdminHttpOptions = {
   port?: number;
-  getLogs?: Function;
+  getLogs?: (name: string) => any;
 };
 
 /**
@@ -32,6 +32,9 @@ type EventClient = {
   res: http.ServerResponse;
 };
 
+/**
+ * @param str
+ */
 function parseEntryId(str: string): LogEntryId {
   if (str.indexOf(",") > 0) {
     const parts = str.split(",");
@@ -44,6 +47,10 @@ function parseEntryId(str: string): LogEntryId {
   return { ts: parseInt(str) };
 }
 
+/**
+ * @param a
+ * @param b
+ */
 function compareEntryId(a: LogEntryId, b: LogEntryId) {
   if (a.ts === b.ts) {
     return (a.tx || 0) - (b.tx || 0);
@@ -51,13 +58,13 @@ function compareEntryId(a: LogEntryId, b: LogEntryId) {
   return a.ts - b.ts;
 }
 
-function stringifyEntryId(entryId) {
-  return entryId.tx ? `${entryId.ts},${entryId.tx}` : `${entryId.ts}`;
-}
+// function stringifyEntryId(entryId) {
+//   return entryId.tx ? `${entryId.ts},${entryId.tx}` : `${entryId.ts}`;
+// }
 
 export class AdminHttp {
   _server: http.Server;
-  _getLogs: Function;
+  _getLogs: (name: string) => any;
   _logHtml: string;
   _adminHtml: string;
   _port: number;
@@ -76,7 +83,7 @@ export class AdminHttp {
     this._eventClients = {};
   }
 
-  _readAsset(filename: string, memoize: string, processor?: Function): string {
+  _readAsset(filename: string, memoize: string, processor?: (c: any) => any): string {
     if (!this[memoize]) {
       let content = Fs.readFileSync(filename).toString();
       if (processor) {

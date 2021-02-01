@@ -1,4 +1,4 @@
-/* eslint-disable no-console, no-process-exit */
+/* eslint-disable no-console, no-process-exit, @typescript-eslint/ban-ts-comment */
 
 import readline from "readline";
 import VisualLogger from "visual-logger";

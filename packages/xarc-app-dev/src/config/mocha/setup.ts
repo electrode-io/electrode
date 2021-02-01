@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/ban-ts-ignore */
-
 import makeOptionalRequire from "optional-require";
 const optionalRequire = makeOptionalRequire(require);
 
@@ -12,6 +10,9 @@ if (Enzyme && Adapter) {
 
 const chai = optionalRequire("chai");
 
+/**
+ * @param addons
+ */
 function chaiUse(addons) {
   [].concat(addons).forEach(x => {
     const AddonMod = x && optionalRequire(x);
@@ -26,6 +27,5 @@ if (chai) {
 
   chai.config.includeStack = true;
 
-  // @ts-ignore
-  global.expect = chai.expect;
+  (global as any).expect = chai.expect;
 }
