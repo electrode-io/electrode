@@ -2,6 +2,9 @@ import { AddOnFeatures } from "./add-on-features";
 import { WebpackOptions } from "./webpack-options";
 import { BabelOptions } from "./babel-options";
 
+/**
+ * User facing options for configuring features
+ */
 export type XarcOptions = {
   // configurations from env-app.ts
   /**
@@ -114,4 +117,22 @@ export type XarcOptions = {
    *
    */
   namespace?: string;
+};
+
+/**
+ * Internal options for configuring features base on user options
+ */
+export type XarcInternalOptions = XarcOptions & {
+  options: any;
+  webpack: any;
+  babel: any;
+  jest: any;
+  karma: any;
+  config: any;
+  AppMode?: any;
+  devDir?: string;
+  eTmpDir?: string;
+  prodModulesDir?: string;
+  prodDir?: string;
+  checkUserBabelRc?: () => boolean;
 };

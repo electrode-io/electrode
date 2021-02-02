@@ -2,6 +2,9 @@ import NixClap from "nix-clap";
 import { AdminServer } from "./admin-server";
 import { setupCleanupHooks } from "./cleanup";
 
+/**
+ *
+ */
 function startDevAdmin() {
   const parsed = new NixClap()
     .init({

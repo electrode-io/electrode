@@ -1,11 +1,11 @@
 /* eslint-disable global-require, no-console */
 
 import ck from "chalker";
-import { createServer } from "http";
 import { setupHttpDevServer } from "./dev-http";
 
 /**
  * Create HTTP server for dev admin
+ *
  * @param xarcOptions - xarc options
  *
  * @returns http server
@@ -32,6 +32,9 @@ function createDevAdminHttpServer(xarcOptions) {
   return devHttpServer;
 }
 
+/**
+ *
+ */
 export function startDevServer() {
   //
   // Requiring all the modules, such as webpack, could take a long time, especially
@@ -39,7 +42,7 @@ export function startDevServer() {
   // Doing require here helps with the perception of how long webpack dev server
   // took to start up.
   //
-  const { loadXarcOptions } = require("../../lib/utils");
+  const { loadXarcOptions } = require("../../lib/utils"); // eslint-disable-line
 
   const xarcOptions = loadXarcOptions();
   const started = createDevAdminHttpServer(xarcOptions);

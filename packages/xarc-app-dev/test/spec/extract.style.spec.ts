@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-empty-function */
-/* eslint-disable @typescript-eslint/ban-ts-ignore, no-invalid-this, @typescript-eslint/class-name-casing */
+/* eslint-disable no-invalid-this, global-require, no-magic-numbers */
 /* eslint-disable no-unused-expressions, max-nested-callbacks, no-unused-expressions */
 
 import { getDevOptions } from "../../src/config/archetype";

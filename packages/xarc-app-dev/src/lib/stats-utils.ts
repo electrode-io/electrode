@@ -3,6 +3,9 @@ import _ from "lodash";
 import { ModuleProcessor } from "./module-processor";
 import AnsiConvert from "ansi-to-html";
 
+/**
+ * @param html
+ */
 export function escapeHtml(html) {
   const htmlMap = {
     "<": "&lt;",
@@ -11,11 +14,17 @@ export function escapeHtml(html) {
   return html.replace(/([<>])/g, (m, a) => htmlMap[a]);
 }
 
+/**
+ * @param stats
+ */
 export function getInfo(stats) {
   const info = _.pick(stats, ["hash", "version", "time", "publicPath"]);
   return info;
 }
 
+/**
+ * @param stats
+ */
 export function getAssets(stats) {
   if (stats.assets && stats.assets.length > 0) {
     return stats.assets.map(asset => {
@@ -26,6 +35,9 @@ export function getAssets(stats) {
   return [];
 }
 
+/**
+ * @param stats
+ */
 export function getModulesByPkg(stats) {
   const processor = new ModuleProcessor(stats);
   return {
@@ -34,6 +46,9 @@ export function getModulesByPkg(stats) {
   };
 }
 
+/**
+ * @param logs
+ */
 export function logsToHtml(logs) {
   if (logs) {
     const convert = new AnsiConvert();
@@ -42,10 +57,16 @@ export function logsToHtml(logs) {
   return [];
 }
 
+/**
+ * @param stats
+ */
 export function getErrorsHtml(stats) {
   return logsToHtml(stats.errors);
 }
 
+/**
+ * @param stats
+ */
 export function getWarningsHtml(stats) {
   return logsToHtml(stats.warnings);
 }

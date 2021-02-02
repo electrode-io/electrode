@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-var-requires, prefer-arrow-callback */
 
 const { parse } = require("../../../src/lib/dev-admin/log-parser");
 import { describe, it } from "mocha";

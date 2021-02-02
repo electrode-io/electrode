@@ -20,6 +20,10 @@ const optionalRequire = makeOptionalRequire(require);
  *
  */
 
+/**
+ * @param options
+ * @param xarcOptions
+ */
 function lint(options, xarcOptions) {
   const ext = options.ext ? ` --ext ${options.ext}` : "";
 
@@ -69,6 +73,9 @@ function lint(options, xarcOptions) {
  * return tasks to show eslint is not enabled
  */
 
+/**
+ *
+ */
 function eslintDisabledTasks() {
   const lintDisabled = () => {
     logger.info(`eslint tasks are disabled because @xarc/opt-eslint is not installed.
@@ -83,6 +90,9 @@ function eslintDisabledTasks() {
 
 /**
  * Generate legacy tasks that were for eslint-4.0, messy, no JS config support etc
+ *
+ * @param xarcOptions
+ * @param xrun
  */
 export function eslint4Tasks(xarcOptions: any, xrun: any) {
   const AppMode = xarcOptions.AppMode;
@@ -184,6 +194,9 @@ export function eslint4Tasks(xarcOptions: any, xrun: any) {
 
 /**
  * Generate tasks for eslint-7.0
+ *
+ * @param xarcOptions
+ * @param xrun
  */
 export function eslint7Tasks(xarcOptions: any, xrun: any) {
   if (!xarcOptions.options.eslint) {
@@ -215,6 +228,10 @@ export function eslint7Tasks(xarcOptions: any, xrun: any) {
   };
 }
 
+/**
+ * @param xarcOptions
+ * @param xrun
+ */
 export function eslintTasks(xarcOptions: any, xrun: any) {
   //
   const xarcOptPkg = optionalRequire("@xarc/opt-eslint/package.json");

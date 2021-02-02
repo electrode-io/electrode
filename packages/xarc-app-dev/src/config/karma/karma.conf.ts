@@ -6,6 +6,9 @@ const browserSettings = require("./browser-settings");
 const loadElectrodeDll = require("./util/load-electrode-dll");
 import { loadXarcOptions } from "../../lib/utils";
 
+/**
+ *
+ */
 function getXarcOptPlugins() {
   try {
     require.resolve("@xarc/opt-karma");
@@ -28,6 +31,9 @@ function getXarcOptPlugins() {
   }
 }
 
+/**
+ *
+ */
 function getArchetypeOptPlugins() {
   try {
     require.resolve("electrode-archetype-opt-karma");
@@ -72,6 +78,9 @@ PREPROCESSORS[MAIN_PATH] = ["webpack", "sourcemap"];
 
 const DLL_PATHS = loadElectrodeDll().map(x => require.resolve(x));
 
+/**
+ *
+ */
 function loadWebpackConfig() {
   if (!process.env.KARMA_RUN_TYPE) {
     process.env.KARMA_RUN_TYPE = "base";
@@ -84,7 +93,13 @@ function loadWebpackConfig() {
   return {};
 }
 
-export = function(config) {
+/**
+ * get karma config
+ *
+ * @param config
+ * @returns karma config
+ */
+export = function getKarmaConfig(config): any {
   let plugins = getXarcOptPlugins() || getArchetypeOptPlugins();
   if (!plugins) {
     console.error("ERROR: @xarc/opt-karma not found - running karma tests is not possible");

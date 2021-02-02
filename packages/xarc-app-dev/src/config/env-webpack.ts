@@ -2,7 +2,12 @@ import xenvConfig from "xenv-config";
 import { merge } from "lodash";
 import { getUserConfig } from "./user-config";
 
-export function getEnvWebpack() {
+/**
+ * Get webpack settings from env (deprecated)
+ *
+ * @returns webpack settings from env
+ */
+export function getEnvWebpack(): any {
   const userConfig = getUserConfig();
 
   const webpackConfigSpec = {

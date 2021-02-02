@@ -69,6 +69,9 @@ const handleRestart = type => {
   });
 };
 
+/**
+ *
+ */
 async function mainSpawn() {
   if (await isProxyRunning()) {
     console.log("Electrode dev proxy already running - exiting.");

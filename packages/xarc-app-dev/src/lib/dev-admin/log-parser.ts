@@ -22,6 +22,10 @@ const tagLevelMap = {
   "debugger listening on": "silly"
 };
 
+/**
+ * @param str
+ * @param last
+ */
 export function parse(str: string, last: any) {
   let jsonData;
   let show;
@@ -107,6 +111,9 @@ const Levels = {
   }
 };
 
+/**
+ * @param event
+ */
 export function getLogEventAsHtml(event) {
   const levelInfo = Levels[event.level];
   const levelName = levelInfo.name.substring(0, 4);

@@ -2,7 +2,16 @@
 
 import { AppDevMiddleware } from "./app-dev-middleware";
 
-export function register(server, options, next) {
+/**
+ * Hapi 16 and lower plugin for webpack dev
+ *
+ * @param server hapi server
+ * @param _options plugin options
+ * @param next callback
+ *
+ * @returns nothing
+ */
+export function register(server: any, _options: any, next: (err?: Error) => void): void {
   try {
     const middleware = new AppDevMiddleware();
 
@@ -18,7 +27,7 @@ export function register(server, options, next) {
     return next && next();
   } catch (err) {
     if (next) {
-      next(err);
+      return next(err);
     } else {
       throw err;
     }

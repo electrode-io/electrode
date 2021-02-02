@@ -1,6 +1,5 @@
+/* eslint-disable */
 "use strict";
-
-/* eslint-disable no-var */
 
 /**
  * All requires in this file will be processed by webpack, which is unforgiving

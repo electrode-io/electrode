@@ -6,6 +6,11 @@ import assert from "assert";
 
 const optionalRequire = makeOptionalRequire(require);
 
+/**
+ * @param filename
+ * @param config
+ * @param settings
+ */
 export function loadUserConfig(filename, config, settings) {
   const filePath = Path.resolve("archetype/config/karma", filename);
   const userConfig = optionalRequire(filePath);

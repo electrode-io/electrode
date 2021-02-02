@@ -26,6 +26,9 @@ export const doCleanup = async () => {
   });
 };
 
+/**
+ *
+ */
 export function setupCleanupHooks() {
   ["uncaughtException", "unhandledRejection"].forEach((event: any) => {
     process.on(event, async (err: Error) => {

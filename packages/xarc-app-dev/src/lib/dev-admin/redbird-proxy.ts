@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/ban-ts-ignore */
 /* eslint-disable max-statements, no-process-exit, global-require, no-console */
 
 import assert from "assert";
@@ -153,13 +152,10 @@ const registerElectrodeDevRules = ({
       // repeat all rules for 127.0.0.1
       appForwards.map(([src, target, opts]) => {
         return [
-          // @ts-ignore
           formUrl({ protocol, port, ...src, host: src.host || "127.0.0.1" }),
           formUrl({
             ...target,
-            // @ts-ignore
             protocol: target.protocol || "http",
-            // @ts-ignore
             host: target.host || "127.0.0.1"
           }),
           opts
@@ -322,7 +318,6 @@ View status at <green>${proxyUrls.https || proxyUrls.http}${controlPaths.status}
 
   // if primary protocol is https, then register regular http rules at httpPort
   if (enableSsl && isValidPort(options.httpPort)) {
-    // @ts-ignore
     registerElectrodeDevRules({
       proxy,
       protocol: "http",
@@ -331,7 +326,7 @@ View status at <green>${proxyUrls.https || proxyUrls.http}${controlPaths.status}
       appPort: options.appPort,
       webpackDevPort: options.webpackDevPort,
       restart
-    });
+    } as any);
   }
 
   if (userDevProxy && userDevProxy.setupRules) {

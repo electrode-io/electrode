@@ -1,8 +1,3 @@
-/**
- * Take webpack Stat JSON output and group modules by npm packages,
- * noting duplicates if there are any.
- */
-
 import Path from "path";
 import { loadXarcOptions } from "./utils";
 
@@ -15,6 +10,12 @@ const atModRegex = new RegExp(`([^/]+/[^/]+)/(.+)`);
 // match packageName/file
 const modRegex = new RegExp(`([^/]+)/(.+)`);
 
+/**
+ * Process modules from webpack stats for reporter display.
+ *
+ * Take webpack Stat JSON output and group modules by npm packages,
+ * noting duplicates if there are any.
+ */
 export class ModuleProcessor {
   statJson: any;
   modulesByPackage: any;
@@ -101,12 +102,13 @@ export class ModuleProcessor {
         try {
           if (split.name !== ".") {
             const xarcOptions = loadXarcOptions();
+            // eslint-disable-next-line
             return require(Path.resolve(
               xarcOptions.cwd,
               parents.join(nmSep),
               split.name,
               "package.json"
-            )).version; // eslint-disable-line
+            )).version;
           } else {
             return "-";
           }

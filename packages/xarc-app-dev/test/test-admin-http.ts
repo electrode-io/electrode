@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 /**
  * A simple test to run a admin HTTP standalone with a mock logging generator
  * for testing the log viewer in streaming mode
@@ -8,7 +9,7 @@ import { AdminHttp } from "../src/lib/dev-admin/admin-http";
 const logs = [];
 
 const ah = new AdminHttp({
-  getLogs(app) {
+  getLogs(_app) {
     return logs;
   }
 });
@@ -17,7 +18,7 @@ let lineId = 1;
 
 let now;
 let tx = 0;
-const i1 = setInterval(() => {
+setInterval(() => {
   if (tx === 0) {
     now = Date.now();
   }
@@ -37,7 +38,7 @@ const i1 = setInterval(() => {
   }
 }, 100);
 
-const i2 = setInterval(() => {
+setInterval(() => {
   ah.sendLogsToStreamClients();
 }, 250);
 

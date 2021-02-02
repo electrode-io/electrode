@@ -26,6 +26,12 @@ export interface DevHttpServer {
   addListener: (event: HttpServerEvent, hander: any) => void;
 }
 
+/**
+ * @param root0
+ * @param root0.port
+ * @param root0.host
+ * @param root0.protocol
+ */
 function getMiddleware({ port, host, protocol = "http" }: DevHttpServerOptions) {
   const middleware = new Middleware({
     baseUrl: () => {
@@ -102,7 +108,7 @@ export const setupHttpDevServer = function({
       server.listen(port, host);
     },
     stop: () => {
-      server.close(function() {
+      server.close(() => {
         /* eslint-disable no-console */
         console.log("Server closed!");
       });

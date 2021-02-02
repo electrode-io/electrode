@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use strict";
 
 /* eslint-disable no-process-exit, no-console */

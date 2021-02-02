@@ -3,7 +3,12 @@ import { isValidPort } from "../lib/utils";
 
 import { merge } from "lodash";
 
-export function getEnvProxy() {
+/**
+ * Get proxy settings from env (deprecated)
+ *
+ * @returns proxy settings from env
+ */
+export function getEnvProxy(): any {
   const proxyConfigSpec = {
     httpsPort: {
       env: [
@@ -24,5 +29,6 @@ export function getEnvProxy() {
     },
     elevated: { env: ["ELECTRODE_DEV_ELEVATED"], default: false }
   };
+
   return xenvConfig(proxyConfigSpec, {}, { merge });
 }

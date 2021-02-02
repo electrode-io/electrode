@@ -1,14 +1,15 @@
 /* eslint-disable no-console, no-magic-numbers, max-statements */
-/* eslint-disable max-params, prefer-template, complexity, global-require */
+/* eslint-disable max-params, prefer-template, complexity */
 
 import Path from "path";
 import Fs from "fs";
 import webpack from "webpack";
 import hotHelpers from "webpack-hot-middleware/helpers";
 import Url from "url";
-const { getWebpackStartConfig } = require("@xarc/webpack/lib/util/custom-check");
 import { devProxy } from "../../config/dev-proxy";
 import { formUrl } from "../utils";
+
+const { getWebpackStartConfig } = require("@xarc/webpack/lib/util/custom-check"); // eslint-disable-line
 
 hotHelpers.pathMatch = (url, path) => {
   try {
@@ -28,6 +29,9 @@ import { getBundles } from "../stats-mapper";
 
 const { fullDevServer, controlPaths } = devProxy;
 
+/**
+ * @param {...any} args
+ */
 function urlJoin(...args) {
   if (args.length < 1) return undefined;
 
@@ -94,7 +98,7 @@ export class Middleware {
   setup() {
     const options = this._options;
 
-    const config = require(getWebpackStartConfig("webpack.config.dev.js", false));
+    const config = require(getWebpackStartConfig("webpack.config.dev.js", false)); // eslint-disable-line
 
     this._hmrPath = controlPaths.hmr;
 
