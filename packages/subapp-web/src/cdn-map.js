@@ -42,5 +42,5 @@
   };
 
   // initialize bundle assets
-  xv1.getBundleAssets();
+  xv1.getBundleAssets(w.__default__namespace);
 })(window);
