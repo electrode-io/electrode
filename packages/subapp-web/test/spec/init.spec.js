@@ -39,6 +39,7 @@ describe("init", function () {
     expect(context.user.assets).to.be.ok;
     expect(initJs).contains(`<script id="bundleAssets" type="application/json">`);
     expect(initJs).contains(`<script>/*LJ*/`);
+    expect(initJs).not.contains(`window.__default__namespace="testNameSpace";`);
   });
 
   it("should return assets as JSON script and loadJs for a given namespace", () => {
@@ -67,6 +68,7 @@ describe("init", function () {
     expect(context.user.assets).to.be.ok;
     expect(initJs).contains(`<script id="testNameSpaceAssets" type="application/json">`);
     expect(initJs).contains(`<script>/*LJ*/`);
+    expect(initJs).contains(`window.__default__namespace="testNameSpace";`);
   });
 
   it("it should load runtime.bundle.js inline and mark includedBundles.runtime to true", () => {
