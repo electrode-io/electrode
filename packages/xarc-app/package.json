@@ -1,6 +1,6 @@
 {
   "name": "@xarc/app",
-  "version": "8.2.4",
+  "version": "9.0.0",
   "description": "Electrode X application runtime support",
   "main": "dist/index.js",
   "homepage": "http://www.electrode.io",
@@ -103,7 +103,8 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-    "access": "public"
+    "access": "public",
+    "tag": "beta"
   },
   "prettier": {
     "printWidth": 100,
