@@ -15,10 +15,11 @@
   "scripts": {
     "build": "xrun user/build",
     "test": "xrun xarc/test-only",
+    "coverage": "xrun xarc/test-cov",
+    "check": "xrun xarc/check",
     "format": "prettier --write --print-width 100 *.{js,jsx} `find . -type d -d 1 -exec echo '{}/**/*.{js,jsx}' \\; | egrep -v '(/node_modules/|/dist/|/coverage/)'`",
     "prepublishOnly": "xrun [[build, docs], xarc/check]",
-    "docs": "xrun xarc/docs",
-    "coverage": "xrun xarc/test-cov"
+    "docs": "xrun xarc/docs"
   },
   "files": [
     "dist",

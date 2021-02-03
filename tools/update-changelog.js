@@ -23,27 +23,16 @@ const _ = require("lodash");
 const changeLogFile = Path.resolve("CHANGELOG.md");
 const changeLog = Fs.readFileSync(changeLogFile).toString();
 let gitClean = false;
-const packageMapping = {
-  "@xarc/app": "@xarc/app[-dev]",
-  "@xarc/app-dev": "@xarc/app[-dev]",
-  "electrode-archetype-webpack-dll": "electrode-archetype-webpack-dll[-dev]",
-  "electrode-archetype-webpack-dll-dev": "electrode-archetype-webpack-dll[-dev]"
-};
 
-const reverseMapping = Object.assign.apply(
-  undefined,
-  _(packageMapping)
-    .values()
-    .uniq()
-    .map(mapped => {
-      return { [mapped]: _.keys(_.pickBy(packageMapping, v => v === mapped)) };
-    })
-    .value()
-);
+const versionLocking = [
+  ["@xarc/app", "@xarc/app-dev"],
+  ["electrode-archetype-webpack-dll", "electrode-archetype-webpack-dll-dev"]
+];
 
-const mapPkg = n => {
-  return packageMapping[n] || n;
-};
+const versionLockMap = versionLocking.reduce((mapping, locks) => {
+  locks.forEach(name => (mapping[name] = locks));
+  return mapping;
+}, {});
 
 const checkGitClean = () => {
   return xsh
@@ -120,6 +109,7 @@ lerna success found 7 packages ready to publish
 */
 
   // search for last commit that's Publish using lerna
+  // find git tag used to determine last publish from lerna's info
   const lernaInfo = output.stderr.split("\n");
   const tagSig = "Looking for changed packages since";
   let tagIndex;
@@ -136,7 +126,9 @@ lerna success found 7 packages ready to publish
 
   assert(tagLine, "Can't find last publish tag from lerna");
   const tag = tagLine.substr(tagIndex + tagSig.length).trim();
-  const packages = output.stdout.split("\n").filter(x => x.trim().length > 0);
+
+  const pkgGraph = JSON.parse(output.stdout);
+  const packages = Object.keys(pkgGraph);
 
   if (packages.length > 0) {
     console.log(
@@ -146,7 +138,7 @@ lerna success found 7 packages ready to publish
     console.log(`no packages changed since tag '${tag}'`);
   }
 
-  return { tag, packages };
+  return { tag, packages, pkgGraph };
 };
 
 const listGitCommits = updated => {
@@ -154,7 +146,9 @@ const listGitCommits = updated => {
   return xsh
     .exec(true, `git log ${tag}...HEAD --pretty=format:'%H %s'`)
     .then(output => {
-      const commits = output.stdout.split("\n").filter(x => !x.startsWith("Merge pull request #"));
+      const commits = output.stdout.split("\n").filter(x => {
+        return !x.startsWith("Merge pull request #") && !x.includes("[no-changelog]");
+      });
       return commits.reduce(
         (a, x) => {
           const idx = x.indexOf(" ");
@@ -171,23 +165,25 @@ const listGitCommits = updated => {
         console.log("change log already contain a commit from new commits");
         process.exit(1);
       }
-      return commits;
+      return { commits, updated };
     });
 };
 
-const collateCommitsPackages = commits => {
+const collateCommitsPackages = ({ commits, updated }) => {
   const commitIds = commits.ids;
   const collated = {
     realPackages: [],
     packages: {},
     samples: {},
     others: {},
-    files: {}
+    files: {},
+    updated
   };
 
   return Promise.map(
     commitIds,
     id => {
+      // any package that was affected by at least one commit is add to collated.realPackages
       return xsh.exec(true, `git diff-tree --no-commit-id --name-only -r ${id}`).then(output => {
         // determine packages changed
         const files = output.stdout.split("\n").filter(x => x.trim().length > 0);
@@ -209,7 +205,7 @@ const collateCommitsPackages = commits => {
               if (parts[0] === "packages" && collated.realPackages.indexOf(Pkg.name) < 0) {
                 collated.realPackages.push(Pkg.name);
               }
-              add(parts[0], mapPkg(Pkg.name));
+              add(parts[0], Pkg.name);
             }
           } else if (parts.length > 1) {
             add("others", parts[0]);
@@ -224,31 +220,9 @@ const collateCommitsPackages = commits => {
     },
     { concurrency: 1 }
   ).then(() => {
-    collated.lernaPackages = commits.updated.packages.filter(
-      r => collated.realPackages.indexOf(r) < 0
-    );
-
-    const checkGroupMap = key => {
-      const updateByMap = _(collated[key])
-        .map(p => packageMapping[p])
-        .filter()
-        .map(p => {
-          return reverseMapping[p] || undefined;
-        })
-        .flatMap()
-        .filter(x => {
-          return collated.realPackages.indexOf(x) < 0 && collated.lernaPackages.indexOf(x) < 0;
-        })
-        .value();
-      collated[key] = _.uniq(collated[key].concat(updateByMap));
-    };
-
-    checkGroupMap("realPackages");
-    checkGroupMap("lernaPackages");
-
-    collated.forcePackages = collated.realPackages.filter(
-      r => commits.updated.packages.indexOf(r) < 0
-    );
+    // collated.forcePackages = collated.realPackages.filter(
+    //   r => commits.updated.packages.indexOf(r) < 0
+    // );
     return collated;
   });
 };
@@ -256,44 +230,79 @@ const collateCommitsPackages = commits => {
 const determinePackageVersions = collated => {
   const types = ["patch", "minor", "major"];
 
-  const findVersion = (name, packages) => {
-    const pkgDir = removeNpmScope(name);
-    const Pkg = require(Path.resolve("packages", pkgDir, "package.json"));
-    const mappedName = mapPkg(name);
-    packages[mappedName] = packages[mappedName] || {};
-    const msgs = packages[mappedName].msgs || [];
+  const findVersion = (name, packages, minBumpType = -1) => {
+    packages[name] = packages[name] || {};
+    const msgs = packages[name].msgs || [];
     const updateType = msgs.reduce((a, x) => {
-      if (x.m.indexOf("[maj") >= 0) {
+      if (x.m.includes("[no-rel")) {
+        // no release
+      } else if (x.m.includes("[maj")) {
         if (a < 2) {
           a = 2;
         }
-      } else if (x.m.indexOf("[min") >= 0) {
+      } else if (x.m.includes("[min")) {
         if (a < 1) {
           a = 1;
         }
+      } else if (a < 0) {
+        a = 0;
       }
       return a;
-    }, 0);
-    packages[mappedName].version = Pkg.version;
+    }, minBumpType);
+
+    const pkgDir = removeNpmScope(name);
+    const Pkg = require(Path.resolve("packages", pkgDir, "package.json"));
+    packages[name].version = Pkg.version;
     const x = semver.parse(Pkg.version);
-    packages[mappedName].versionOnly = `${x.major}.${x.minor}.${x.patch}`;
-    packages[mappedName].semver = x;
-    packages[mappedName].newVersion = semver.inc(
-      packages[mappedName].versionOnly,
-      types[updateType]
-    );
-    packages[mappedName].originalPkg = Pkg;
+    packages[name].versionOnly = `${x.major}.${x.minor}.${x.patch}`;
+    packages[name].semver = x;
+    packages[name].originalPkg = Pkg;
+    packages[name].updateType = updateType;
+
+    if (updateType >= 0) {
+      packages[name].newVersion = semver.inc(packages[name].versionOnly, types[updateType]);
+    }
+
+    return name;
   };
 
-  return Promise.map(collated.realPackages, name => findVersion(name, collated.packages))
-    .then(() => {
-      const packages = collated.lernaPackages;
-      collated._lernaPackages = {};
-      return Promise.map(collated.lernaPackages, name =>
-        findVersion(name, collated._lernaPackages)
-      );
-    })
-    .then(() => collated);
+  return Promise.resolve().then(() => {
+    // update versions for packages that have direct changes
+    collated.realPackages.forEach(name => findVersion(name, collated.packages));
+
+    // update any package that depend on a directly bumped package with the same bump type
+    const { updated } = collated;
+    let count = 0;
+    const indirectBumps = [];
+    const directBumps = collated.realPackages.filter(
+      name => collated.packages[name] && collated.packages[name].newVersion
+    );
+
+    do {
+      count = 0;
+      updated.packages.map(name => {
+        const pkg = collated.packages[name];
+        if (!pkg || !pkg.newVersion) {
+          // does pkg dep on a bumped pkg?
+          const deps = updated.pkgGraph[name];
+          const bumpDeps = deps
+            .map(depName => collated.packages[depName])
+            .filter(x => x && x.newVersion);
+          if (bumpDeps.length > 0) {
+            count++;
+            const minBumpType = _.max(bumpDeps.map(x => x.updateType));
+            findVersion(name, collated.packages, minBumpType);
+            indirectBumps.push(name);
+          }
+        }
+      });
+    } while (count > 0);
+
+    collated.directBumps = directBumps;
+    collated.indirectBumps = indirectBumps;
+
+    return collated;
+  });
 };
 
 const lernaRc = require("../lerna.json");
@@ -328,21 +337,31 @@ const getTaggedVersion = pkg => {
 const updateChangelog = collated => {
   const d = new Date();
   const output = [];
-  const lernaUpdated = collated.lernaPackages.length > 0;
+  const hasIndirectBumps = collated.indirectBumps.length > 0;
   output.push(`# ${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}\n\n## Packages\n\n`);
-  if (lernaUpdated) {
+  if (hasIndirectBumps) {
     output.push(`### Directly Updated\n\n`);
   }
-  const emitPackageMsg = (p, packages) => {
-    const pkg = packages[mapPkg(p)];
+  const emitPackageMsg = (pkgName, packages) => {
+    const pkg = packages[pkgName];
+    if (!pkg.newVersion) return "";
     const newVer = getTaggedVersion(pkg);
-    if (pkg.originalPkg.private) return;
-    output.push(`-   \`${p}@${newVer}\` ` + "`" + `(${pkg.version} => ${newVer})` + "`\n");
+    if (pkg.originalPkg.private) return "";
+    return `- \`${pkgName}@${newVer}\` ` + "`" + `(${pkg.version} => ${newVer})` + "`\n";
   };
-  collated.realPackages.sort().forEach(p => emitPackageMsg(p, collated.packages));
-  if (lernaUpdated) {
-    output.push(`\n### Lerna Updated\n\n`);
-    collated.lernaPackages.sort().forEach(p => emitPackageMsg(p, collated._lernaPackages));
+
+  const directUpdateLines = collated.directBumps
+    .sort()
+    .map(p => emitPackageMsg(p, collated.packages))
+    .filter(x => x);
+  output.push(...directUpdateLines);
+
+  if (hasIndirectBumps) {
+    const indirectUpdateLines = collated.indirectBumps
+      .sort()
+      .map(p => emitPackageMsg(p, collated.packages))
+      .filter(x => x);
+    output.push("\n### Lerna Updated\n\n", ...indirectUpdateLines);
   }
   output.push(`\n## Commits\n\n`);
 
@@ -354,7 +373,7 @@ const updateChangelog = collated => {
 
   const emitCommitMsg = msg => {
     emitCommitMsg[msg.id] = true;
-    output.push(`    -   ${linkifyPR(msg.m)} [commit](${commitUrl}/${msg.id})\n`);
+    output.push(`  - ${linkifyPR(msg.m)} [commit](${commitUrl}/${msg.id})\n`);
   };
 
   const outputCommitMsgs = (items, prefix) => {
@@ -362,8 +381,8 @@ const updateChangelog = collated => {
     if (keys.length === 0) return;
     keys.sort().forEach(p => {
       const pkg = items[p];
-      if (pkg.msgs.length === 0) return;
-      output.push("-   `" + prefix + removeNpmScope(p) + "`\n\n");
+      if (!pkg.msgs || pkg.msgs.length === 0) return;
+      output.push("- `" + prefix + removeNpmScope(p) + "`\n\n");
       pkg.msgs.slice().reverse().forEach(emitCommitMsg);
       output.push("\n");
     });
@@ -402,8 +421,9 @@ const showPublishInfo = collated => {
     "publish command: node_modules/.bin/lerna publish",
     (collated.forcePackages || []).map(p => `--force-publish ${p}`).join(" ")
   );
-  const majorBumps = collated.realPackages.filter(p => {
-    const pkg = collated.packages[mapPkg(p)];
+  const majorBumps = collated.realPackages.filter(pkgName => {
+    const pkg = collated.packages[pkgName];
+    if (!pkg.newVersion) return false;
     return pkg.newVersion.split(".")[0] > pkg.version.split(".")[0];
   });
   const majorArchetypes = majorBumps.filter(p => p.startsWith("electrode-archetype-react"));
@@ -435,7 +455,7 @@ const commitChangeLogFile = clean => {
 };
 
 xsh
-  .exec(true, `lerna updated`)
+  .exec(true, `lerna updated --graph`)
   .then(processLerna3Updated)
   .then(listGitCommits)
   .then(collateCommitsPackages)

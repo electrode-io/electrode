@@ -6,7 +6,8 @@
   "scripts": {
     "build": "clap user/build",
     "test": "clap test",
-    "coverage": "clap check",
+    "coverage": "clap test-cov",
+    "check": "clap check",
     "prepublishOnly": "clap -n build docs && clap check",
     "docs": "clap xarc/docs"
   },

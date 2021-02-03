@@ -18,8 +18,9 @@
   "scripts": {
     "build": "xrun user/build",
     "test": "xrun xarc/test-only",
+    "coverage": "xrun xarc/test-cov",
+    "check": "xrun xarc/check",
     "lint": "clap lint",
-    "coverage": "xrun xarc/check",
     "prepublishOnly": "xrun [[build, docs], xarc/check]",
     "docs": "xrun xarc/docs"
   },

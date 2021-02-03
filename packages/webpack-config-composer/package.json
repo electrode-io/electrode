@@ -15,6 +15,7 @@
   "scripts": {
     "test": "mocha test/spec",
     "coverage": "istanbul cover _mocha -- test/spec/*.js",
+    "check": "istanbul cover _mocha -- test/spec/*.js",
     "lint": "eslint \"**/**/*.js\""
   },
   "author": "Electrode (http://www.electrode.io/)",

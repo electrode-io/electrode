@@ -105,9 +105,9 @@ const testCreateApp = async (testDir, name, clean, runTest, prompts) => {
 };
 
 xrun.load({
-  ".lerna.coverage": "~$lerna run --stream coverage",
+  ".lerna.check": "~$lerna run --stream check",
   bootstrap: "~$fynpo",
-  test: ["bootstrap", ".lerna.coverage", "build-test"],
+  test: ["bootstrap", ".lerna.check", "build-test"],
   "test-create-app": [".test-create-app"],
   "test-boilerplate": [".test-boilerplate"],
   "test-stylus-sample": [".test-stylus-sample"],

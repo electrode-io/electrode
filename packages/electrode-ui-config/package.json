@@ -23,9 +23,9 @@
     }
   },
   "scripts": {
-    "prepare": "clap pkg/check",
     "test": "clap pkg/check",
     "coverage": "clap pkg/check",
+    "check": "clap pkg/check",
     "lint-src": "eslint src --color",
     "compile": "babel --presets=es2015 src -d dist --source-maps"
   },

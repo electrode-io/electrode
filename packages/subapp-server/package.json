@@ -4,8 +4,9 @@
   "description": "Electrode SubApp app server support",
   "main": "lib/index.js",
   "scripts": {
-    "test": "clap -n -x build check",
-    "coverage": "clap -n -x build check",
+    "test": "clap -n -x build electrode/test-only",
+    "coverage": "clap -n -x build electrode/test-cov",
+    "check": "clap -n -x build electrode/check",
     "build": "babel src -d resources --source-maps",
     "prepare": "npm run build",
     "prepublishOnly": "npm run build"

@@ -4,9 +4,10 @@
   "description": "Handle async data for React Server Side Rendering using Redux and Router",
   "main": "lib/redux-router-engine.js",
   "scripts": {
-    "test": "clap test",
+    "test": "clap test-only",
     "lint": "clap lint",
-    "coverage": "clap check"
+    "coverage": "clap test-cov",
+    "check": "clap check"
   },
   "homepage": "http://www.electrode.io",
   "repository": {

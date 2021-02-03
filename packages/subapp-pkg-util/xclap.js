@@ -5,9 +5,9 @@ const shcmd = require("shcmd");
 xclap.load({
   "node-env": env({ BABEL_ENV: "-src-node" }),
   test: serial("compile", "node-env", "electrode/test-only"),
-  coverage: serial("compile", "node-env", "electrode/check"),
+  coverage: serial("compile", "node-env", "electrode/test-cov"),
+  check: serial("compile", "node-env", "electrode/check"),
   "test-only": ["test"],
-  check: ["coverage"],
   compile: serial(
     () => shcmd.rm("-rf", "dist"),
     concurrent("compile-dev", "compile-min", "compile-node")

@@ -6,7 +6,8 @@
   "scripts": {
     "prepublishOnly": "webpack",
     "test": "mocha",
-    "coverage": "nyc npm test"
+    "coverage": "nyc npm test",
+    "check": "nyc npm test"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
