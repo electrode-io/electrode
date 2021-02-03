@@ -1,3 +1,111 @@
+# 2/3/2021
+
+Major Changes, (released on npm tag `beta`)
+
+- `[major] re-organize exports and ES modules`
+- `[major] move to node 12 as minimum`
+- `[major] move to @xarc/run`
+- `[major] remove old css module hooks`
+- `[major] remove loadable and replace with subapp v2`
+- `[major] default to react 17`
+
+TBD: add link to migration doc
+
+Minor changes and fixes:
+
+- fix types for xarc/react
+- subappv1: pass default namespace to getbundleassets inside cdn-map.js
+
+## Packages
+
+### Directly Updated
+
+Major releases:
+
+- `@xarc/app@9.0.0` `(8.2.4 => 9.0.0)`
+- `@xarc/app-dev@9.0.0` `(8.2.4 => 9.0.0)`
+- `@xarc/create-app@5.0.0` `(4.0.2 => 5.0.0)`
+- `@xarc/opt-react@2.0.0` `(1.0.0 => 2.0.0)`
+- `@xarc/webpack@10.0.0` `(9.1.1 => 10.0.0)`
+- `electrode-redux-router-engine@5.0.0` `(4.0.1 => 5.0.0)`
+
+Patch releases:
+
+- `@xarc/react@0.1.5` `(0.1.4 => 0.1.5)`
+- `@xarc/react-query@0.1.1` `(0.1.0 => 0.1.1)`
+- `@xarc/react-router@0.1.5` `(0.1.4 => 0.1.5)`
+- `@xarc/subapp@0.1.5` `(0.1.4 => 0.1.5)`
+- `subapp-web@1.0.47` `(1.0.46 => 1.0.47)`
+
+### Lerna Updated
+
+- `@xarc/react-redux@0.1.4` `(0.1.3 => 0.1.4)`
+- `subapp-pbundle@0.0.41` `(0.0.40 => 0.0.41)`
+- `subapp-react@0.0.38` `(0.0.37 => 0.0.38)`
+- `subapp-redux@1.0.47` `(1.0.46 => 1.0.47)`
+
+## Commits
+
+- `packages/xarc-app`
+
+  - fix lint ([#1804](https://github.com/electrode-io/electrode/pull/1804)) [commit](http://github.com/electrode-io/electrode/commit/fbba8651dee9cd51bd7ab654fb5650a730244b7b)
+  - [major] re-organize exports and ES modules [commit](http://github.com/electrode-io/electrode/commit/f8860985c667be7d6f04daa29b95a7f3a88339dd)
+  - [major] move to node 12 as minimum [commit](http://github.com/electrode-io/electrode/commit/51ddf8944b37c9b6b88f443470f9a88cd8cae874)
+  - [major] remove old css module hooks [commit](http://github.com/electrode-io/electrode/commit/ac074cbb635be8f21b226bdedaf536e0ce933808)
+
+- `packages/xarc-app-dev`
+
+  - fix lint ([#1804](https://github.com/electrode-io/electrode/pull/1804)) [commit](http://github.com/electrode-io/electrode/commit/fbba8651dee9cd51bd7ab654fb5650a730244b7b)
+  - [major] re-organize exports and ES modules [commit](http://github.com/electrode-io/electrode/commit/f8860985c667be7d6f04daa29b95a7f3a88339dd)
+  - [major] move to node 12 as minimum [commit](http://github.com/electrode-io/electrode/commit/51ddf8944b37c9b6b88f443470f9a88cd8cae874)
+  - [major] move to @xarc/run [commit](http://github.com/electrode-io/electrode/commit/ac0afc5597772acfd103fdd6b53b7c3f2b5d6a63)
+  - [major] remove old css module hooks [commit](http://github.com/electrode-io/electrode/commit/ac074cbb635be8f21b226bdedaf536e0ce933808)
+  - [major] remove loadable and replace with subapp v2 [commit](http://github.com/electrode-io/electrode/commit/56b8d2d0172e097986b9bcfa62401e0b3412ea3f)
+
+- `packages/xarc-create-app`
+
+  - [major] re-organize exports and ES modules [commit](http://github.com/electrode-io/electrode/commit/f8860985c667be7d6f04daa29b95a7f3a88339dd)
+  - fix types for xarc/react [commit](http://github.com/electrode-io/electrode/commit/4cc5c1573729576d2cea5ac54e3b78654026d4ac)
+
+- `packages/xarc-opt-react`
+
+  - [major] default to react 17 [commit](http://github.com/electrode-io/electrode/commit/e945a27f1c5f29409cdde96972b80013f952606d)
+
+- `packages/xarc-react`
+
+  - fix types for xarc/react [commit](http://github.com/electrode-io/electrode/commit/4cc5c1573729576d2cea5ac54e3b78654026d4ac)
+
+- `packages/xarc-react-query`
+
+  - add more tests for react query to increase test coverage ([#1800](https://github.com/electrode-io/electrode/pull/1800)) [commit](http://github.com/electrode-io/electrode/commit/81aa193e709d775853b8bb9be3405698dcb0b1f4)
+
+- `packages/xarc-react-router`
+
+  - add unit tests for xarc react router ([#1802](https://github.com/electrode-io/electrode/pull/1802)) [commit](http://github.com/electrode-io/electrode/commit/87ff73b576c74970297f802e31d65e102c820382)
+
+- `packages/xarc-subapp`
+
+  - fix lint ([#1804](https://github.com/electrode-io/electrode/pull/1804)) [commit](http://github.com/electrode-io/electrode/commit/fbba8651dee9cd51bd7ab654fb5650a730244b7b)
+  - more tests for xarc-subapp ([#1801](https://github.com/electrode-io/electrode/pull/1801)) [commit](http://github.com/electrode-io/electrode/commit/c9f66fb6a9d7f66cf06ff74b16341d12030a2116)
+
+- `packages/xarc-webpack`
+
+  - [major] re-organize exports and ES modules [commit](http://github.com/electrode-io/electrode/commit/f8860985c667be7d6f04daa29b95a7f3a88339dd)
+  - [major] move to node 12 as minimum [commit](http://github.com/electrode-io/electrode/commit/51ddf8944b37c9b6b88f443470f9a88cd8cae874)
+  - [major] remove loadable and replace with subapp v2 [commit](http://github.com/electrode-io/electrode/commit/56b8d2d0172e097986b9bcfa62401e0b3412ea3f)
+
+- `packages/electrode-redux-router-engine`
+
+  - [major] remove loadable and replace with subapp v2 [commit](http://github.com/electrode-io/electrode/commit/56b8d2d0172e097986b9bcfa62401e0b3412ea3f)
+
+- `packages/subapp-web`
+
+  - pass default namespace to gerbundleassets inside cdn-map.js ([#1805](https://github.com/electrode-io/electrode/pull/1805)) [commit](http://github.com/electrode-io/electrode/commit/9464aba3dec1fb7be2c705aa43323e844c12d322)
+
+- `docusaurus`
+
+  - [major] re-organize exports and ES modules [commit](http://github.com/electrode-io/electrode/commit/f8860985c667be7d6f04daa29b95a7f3a88339dd)
+
 # 1/28/2021
 
 ## Packages
