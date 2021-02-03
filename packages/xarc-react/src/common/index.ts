@@ -3,7 +3,7 @@ import ReactDom from "react-dom";
 import ReactDomServer from "react-dom/server";
 import { SubAppOptions, SubApp, SubAppFeatureFactory, SubAppDef } from "@xarc/subapp";
 
-export type ReactSubApp = SubApp<React.Component>;
+export type ReactSubApp = SubApp<React.Component | React.FunctionComponent>;
 
 //
 // re-exports

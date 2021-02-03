@@ -24,6 +24,7 @@
   "author": "Electrode",
   "license": "Apache-2.0",
   "dependencies": {
+    "@types/react": ">= 16",
     "@xarc/render-context": "^1.0.3",
     "@xarc/subapp": "^0.1.4",
     "@xarc/tag-renderer": "^1.0.3",
