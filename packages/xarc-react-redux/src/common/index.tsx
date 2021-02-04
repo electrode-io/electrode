@@ -61,6 +61,7 @@ export type ReduxFeatureOptions = {
    * if selected then redux observable will be injected
    */
   reduxObservable?: boolean;
+
   /**
    * if redux observable is selected then we need a rootEpic
    */
