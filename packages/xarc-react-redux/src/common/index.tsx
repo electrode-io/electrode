@@ -2,7 +2,9 @@
 
 import { SubAppDef, SubAppFeatureFactory, SubAppFeature } from "@xarc/subapp";
 import { Provider } from "react-redux";
-import { combineReducers, createStore, Reducer } from "redux";
+import { combineReducers, createStore, Reducer, applyMiddleware } from "redux";
+import { createEpicMiddleware } from "redux-observable";
+import createSagaMiddleware from "redux-saga";
 
 //
 // re-export redux as Redux etc
@@ -54,6 +56,25 @@ export type ReduxFeatureOptions = {
    * @returns Promise<{initialState: any}>
    */
   prepare(initialState: any): Promise<any>;
+
+  /*
+   * if selected then redux observable will be injected
+   */
+  reduxObservable?: boolean;
+  /**
+   * if redux observable is selected then we need a rootEpic
+   */
+  rootEpic?: any;
+
+  /**
+   * if selected then redux saga will be injected
+   */
+  reduxSaga?: boolean;
+
+  /**
+   * if saga is selected then we need a rootEpic
+   */
+  rootSaga?: any;
 };
 
 export type ReduxFeature = SubAppFeature & {
@@ -97,6 +118,10 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
 
     redux.execute = async function ({ input, csrData, reload }) {
       let initialState: any;
+      const reduxObservable = options.reduxObservable;
+      const rootEpic = options.rootEpic;
+      const reduxSaga = options.reduxSaga;
+      const rootSaga = options.rootSaga;
 
       let reducers = options.reducers;
 
@@ -124,7 +149,22 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
           reducers = combineReducers(reducers) as Reducer<unknown, any>;
         }
         initialState = (await options.prepare(props)).initialState;
-        redux._store = createStore((reducers as Reducer<unknown, any>) || (x => x), initialState);
+        if (reduxObservable === true) {
+          if (!rootEpic) { throw new Error("[REDUX-OBSERVABLE] must provide a root epic if redux-observable selected!"); }
+          const epicMiddleware = createEpicMiddleware();
+          const observerMiddleware = applyMiddleware(epicMiddleware);
+          redux._store = createStore((reducers as Reducer<unknown, any>) || (x => x), initialState, observerMiddleware);
+          epicMiddleware.run(rootEpic);
+
+        } else if (reduxSaga === true) {
+          if (!rootSaga) { throw new Error("[REDUX-SAGA] must provide a root saga if redux-saga selected!"); }
+          const sagaMiddleware = createSagaMiddleware();
+          redux._store = createStore((reducers as Reducer<unknown, any>) || (x => x), initialState, applyMiddleware(sagaMiddleware));
+          sagaMiddleware.run(rootSaga);
+
+        } else {
+          redux._store = createStore((reducers as Reducer<unknown, any>) || (x => x), initialState);
+        }
       }
 
       return {

@@ -1,9 +1,26 @@
 import PropTypes from "prop-types";
 import { React, ReactSubApp, xarcV2, declareSubApp, createDynamicComponent } from "@xarc/react";
-import { connect, reduxFeature } from "@xarc/react-redux";
+import { connect, reduxFeature, useDispatch } from "@xarc/react-redux";
 import { reactRouterFeature, Route, Switch } from "@xarc/react-router";
 import { Navigation } from "../components/navigation";
 import { Products } from "../components/products";
+
+import { Epic, combineEpics } from "redux-observable";
+import { from, of } from "rxjs";
+import { exhaustMap, filter, map, catchError, delay, mapTo } from "rxjs/operators";
+
+const pingEpic = action$ => action$.pipe(
+  filter((action: any) => action.type === 'PING'),
+  delay(1000), // Asynchronously wait 1000ms then continue
+  mapTo({ type: 'PONG' })
+);
+
+const epics = [];
+epics.push(pingEpic);
+//const dd = new Middlewares();
+////console.log(dd.REDUX_OBSERVABLE);
+
+export const rootEpic = combineEpics(...epics);
 
 
 export const deals = declareSubApp({
@@ -42,6 +59,13 @@ const Stores = () => `Stores`;
 const Contact = () => `Contact`;
 
 const MainRouter = () => {
+    const dispatcher = useDispatch();
+  React.useEffect(() => {
+    // console.log(`ping called`)
+    setInterval(() => {
+      dispatcher({ type: 'PING' });
+    }, 2000);
+  }, []);
   return (
     <div>
       <Navigation />
@@ -65,6 +89,8 @@ export const subapp: ReactSubApp = {
       React,
       shareStore: true,
       reducers: true,
+      reduxObservable: true,
+      rootEpic: rootEpic,
       // provider({ Component, props }) {}
       prepare: async initialState => {
         xarcV2.debug("Home (home.tsx) subapp redux prepare, initialState:", initialState);
@@ -130,6 +156,12 @@ export const subapp: ReactSubApp = {
 
 export const reduxReducers = {
   number: (store, action) => {
+    if (action.type === 'PING') {
+      console.log(`PING called from epic`);
+    }
+    if (action.type === 'PONG') {
+      console.log(`PONG called from epic`);
+    }
     if (action.type === "INC_NUMBER") {
       return {
         value: store.value + 1
