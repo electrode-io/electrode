@@ -9,7 +9,7 @@
     "./dist-node-esm/node/index.js": "./dist-browser~es2x~esm~/browser/index.js"
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
+    "registry": "https://registry.npmjs.com/",
     "access": "public"
   },
   "scripts": {

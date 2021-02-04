@@ -10,7 +10,7 @@
     "check": "nyc npm test"
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
+    "registry": "https://registry.npmjs.com/",
     "access": "public",
     "tag": "beta"
   },

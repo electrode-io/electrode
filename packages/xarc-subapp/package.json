@@ -14,7 +14,7 @@
     "url": "https://github.com/electrode-io/electrode.git"
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
+    "registry": "https://registry.npmjs.com/",
     "access": "public"
   },
   "scripts": {

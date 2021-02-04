@@ -19,7 +19,7 @@
     "npm": ">= 6"
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
+    "registry": "https://registry.npmjs.com/",
     "access": "public"
   },
   "author": "Electrode (http://www.electrode.io/)",
