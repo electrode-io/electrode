@@ -164,7 +164,7 @@ export function xarcV2Client(
           const doc: Document = w.document;
           for (const name in onLoadStart) {
             onLoadStart[name].forEach((startOpts: SubAppCSRData) => {
-              const element = doc.getElementById(startOpts.elementId || `subapp2-${name}`);
+              const element = doc.getElementById(startOpts.elementId);
               console.debug(name, "starting subapp into", element);
               subapps.get(name)._start({ csrData: Object.assign({}, startOpts, { element }) });
             });

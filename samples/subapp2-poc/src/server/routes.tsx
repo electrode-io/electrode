@@ -95,6 +95,7 @@ ${s}
       // URL path
       // path: "/tag-template",
       pageTitle: "subapp2-poc demo",
+      namespace: "poc1",
       subApps: [
         { name: home.name, ssr: true },
         Demo3.loadOptions,
@@ -133,7 +134,8 @@ ${s}
     async handler(request, reply) {
       try {
         const pageRenderer = memoize("route:/", constructHomeRouteRenderer);
-        const context = await pageRenderer.render({ request });
+
+        const context = await pageRenderer.render({ request, namespace: request.query.ns });
         sendResponse(reply, context);
       } catch (error) {
         reply.send(error.stack);

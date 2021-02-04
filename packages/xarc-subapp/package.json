@@ -40,6 +40,8 @@
   "keywords": [],
   "license": "Apache-2.0",
   "dependencies": {
+    "@xarc/render-context": "^1.0.5",
+    "@xarc/tag-renderer": "^1.0.6",
     "lodash": "^4.17.20",
     "tslib": "^2.1.0"
   },
@@ -119,5 +121,11 @@
       "@xarc/module-dev/config/test/setup.js"
     ],
     "recursive": true
+  },
+  "fyn": {
+    "dependencies": {
+      "@xarc/render-context": "../xarc-render-context",
+      "@xarc/tag-renderer": "../xarc-tag-renderer"
+    }
   }
 }

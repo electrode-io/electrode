@@ -29,13 +29,14 @@ export function initContext(_setupContext: any, setupToken: Partial<{ props: Ini
         context.user = {};
       }
 
-      const { request } = context.options;
+      const { request, namespace } = context.options;
 
       context.user.request = request;
       context.user.scriptNonce = scriptNonce;
       context.user.scriptNonceAttr = scriptNonceAttr;
       context.user.styleNonce = styleNonce;
       context.user.styleNonceAttr = styleNonceAttr;
+      context.user.namespace = namespace || setupToken.props.namespace || "ns0";
 
       const cspValues = [];
       const setCspNonce = (nonce, tag) => {

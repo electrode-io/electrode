@@ -311,6 +311,9 @@ export type LoadSubAppOptions = {
    */
   inlineId?: string;
 
+  /** namespace to load subapp into.  **Default** `"ns0"` */
+  namespace?: string;
+
   /**
    * group the subapp belongs to
    */
@@ -391,11 +394,11 @@ export class SubAppContainer {
     return subapp;
   }
 
-  isReady():boolean {
+  isReady(): boolean {
     return this.readyCount === this.declareCount;
   }
 
-  updateReady():void {
+  updateReady(): void {
     this.readyCount = 0;
     for (const name in this.$) {
       if (this.$[name]._module) {
@@ -404,7 +407,7 @@ export class SubAppContainer {
     }
   }
 
-  getNames():string[] {
+  getNames(): string[] {
     return Object.keys(this.$);
   }
 }

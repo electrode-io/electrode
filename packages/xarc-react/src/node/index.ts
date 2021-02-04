@@ -4,7 +4,9 @@ import {
   declareSubApp as dsa,
   SubAppDef,
   SubAppOptions,
-  SubAppFeatureFactory
+  SubAppFeatureFactory,
+  RenderOptions,
+  PageRenderer
 } from "@xarc/subapp";
 import { __createDynamicComponent, CreateComponentOptions } from "../common/create-component";
 import { SSRReactLib } from "./react-lib-node";
@@ -16,10 +18,9 @@ import { appContextFeature } from "./feat-app-context-node";
 //
 export * from "../common/index";
 export * from "@xarc/tag-renderer";
-export * from "./render-page";
 export * from "./feat-static-props-node";
 export * from "./subapp-as-component";
-export { SSRReactLib, subAppReady, loadSubApp, appContextFeature };
+export { SSRReactLib, subAppReady, loadSubApp, appContextFeature, RenderOptions, PageRenderer };
 
 /**
  * Add React framework feature to a subapp (node.js version)
