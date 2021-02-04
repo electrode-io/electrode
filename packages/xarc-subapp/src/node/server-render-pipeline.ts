@@ -76,20 +76,23 @@ export class SubAppServerRenderPipeline implements SubAppRenderPipeline {
 
   executeRender(): void {
     const { name } = this.ssrData.subapp;
-    const { scriptNonceAttr = "" } = this.ssrData.context.user;
+    const { namespace, scriptNonceAttr = "" } = this.ssrData.context.user;
 
     let ssrContent;
     let ssrProps;
+
+    let elementId = `${namespace}.subapp2-${name}`;
 
     if (this.options.prepareOnly) {
       // TODO: still need to prepare props? like when subapp uses staticProps feature.
       ssrContent = `<!-- SSR prepare only for subapp ${name} -->`;
       ssrProps = this.prepResult.props;
+      elementId = undefined;
     } else if (!this.options.ssr) {
-      ssrContent = `<!-- SSR disabled for subapp ${name} --><div id="subapp2-${name}"></div>`;
+      ssrContent = `<!-- SSR disabled for subapp ${name} --><div id="${elementId}"></div>`;
     } else {
       const ssrResult = this.framework.handleSSRSync(this.ssrData, this.prepResult);
-      ssrContent = `<div id="subapp2-${name}">${ssrResult.content}</div>`;
+      ssrContent = `<div id="${elementId}">${ssrResult.content}</div>`;
       ssrProps = ssrResult.props;
     }
 
@@ -97,7 +100,7 @@ export class SubAppServerRenderPipeline implements SubAppRenderPipeline {
     let initialStateData = "";
     let initialStateScript = "{}";
     if (!_.isEmpty(ssrProps)) {
-      const dataId = `${name}-initial-state-${Date.now()}-${++SubAppServerRenderPipeline.INITIAL_STATE_TAG_ID}`;
+      const dataId = `${namespace}.${name}-initial-state-${Date.now()}-${++SubAppServerRenderPipeline.INITIAL_STATE_TAG_ID}`;
       initialStateData = `
 <script${scriptNonceAttr} type="application/json" id="${dataId}">
 ${safeStringifyJson(ssrProps)}
@@ -112,9 +115,10 @@ ${safeStringifyJson(ssrProps)}
       `<!-- time: ${this.startTime} -->
 ${ssrContent}${initialStateData}
 <!-- time: ${now} diff: ${now - this.startTime} -->
-<script${scriptNonceAttr}>${xarc}.startSubAppOnLoad(${safeStringifyJson(this.options)},
-{getInitialState:function(){return ${initialStateScript};}});</script>
-`
+<script${scriptNonceAttr}>${xarc}.startSubAppOnLoad(
+  ${safeStringifyJson({ ...this.options, namespace, elementId })},
+  {getInitialState:function(){return ${initialStateScript};}});
+</script>`
     );
 
     this.outputSpot.close();

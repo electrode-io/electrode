@@ -2,6 +2,7 @@
 
 import { RenderContext } from "@xarc/render-context";
 import { createTemplateTags, TokenInvoke, TagRenderer } from "@xarc/tag-renderer";
+import { PageOptions } from "./types";
 
 import {
   initContext,
@@ -10,73 +11,8 @@ import {
   startSubApp,
   isSubAppReady,
   subAppReady,
-  LoadSubAppOptions,
-  InitProps,
-  NonceInfo
+  InitProps
 } from "./index";
-
-/**
- * allow setting template fragments to be inserted into various predefined points
- * in the main template for rendering the HTML
- */
-export type TemplateInserts = {
-  head?: {
-    /** insert immediately after <head> */
-    begin?: any[];
-    /** insert after context initialized and context.user available */
-    contextReady?: any[];
-    /** insert immediately before </head> */
-    end?: any[];
-    /** insert immediately after xarc's subapp init scripts */
-    afterInit?: any[];
-  };
-  body?: {
-    /** insert immediately after <body> */
-    begin?: any[];
-    /** insert immediately before </body> */
-    end?: any[];
-    /** insert immediately before the starting subapps code */
-    beforeStart?: any[];
-    /** insert immediately after the starting subapps code */
-    afterStart?: any[];
-  };
-};
-
-export type PageOptions = InitProps & {
-  /**
-   * Name of subapps to load and render on the page
-   */
-  subApps: LoadSubAppOptions[];
-
-  /**
-   * title for the page
-   */
-  pageTitle?: string;
-
-  /**
-   * Path or URL to a favicon for the page
-   */
-  favicon?: string;
-
-  /** meta charset, default: "UTF-8", set to false to disable */
-  charSet?: string | boolean;
-
-  /**
-   * Allows you to insert template tags at some predefined locations within the
-   * main template.  You can create template tags with the createTemplateTags API.
-   */
-  templateInserts?: TemplateInserts;
-
-  /**
-   * Nonce info for script and style tags.
-   *
-   * By default, renderPage will always generate nonce for your page.
-   *
-   * - You can pass in NonceInfo to customize the token value.
-   * - If you really don't want nonce generated, then pass `false`
-   */
-  nonce?: boolean | NonceInfo;
-};
 
 /**
  * Options for rendering a page for each request
@@ -87,6 +23,9 @@ export type RenderOptions = {
    * through React context.
    */
   request?: any;
+
+  /** namespace to load the subapps */
+  namespace?: string;
 };
 
 /**
@@ -101,6 +40,7 @@ export class PageRenderer {
     this._options = options;
     const { subApps } = options;
     const {
+      namespace,
       nonce,
       prodAssetData,
       devAssetData,
@@ -111,7 +51,7 @@ export class PageRenderer {
 
     const charSetStr = charSet ? `\n<meta charset="${charSet}">\n` : "";
 
-    const initProps: InitProps = { prodAssetData, devAssetData, nonce };
+    const initProps: InitProps = { prodAssetData, devAssetData, nonce, namespace };
 
     this._template = createTemplateTags`<!doctype html>
 <html>

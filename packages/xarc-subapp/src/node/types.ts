@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import { SubAppSSRData, SubAppFeatureResult } from "../subapp/types";
+import { SubAppSSRData, SubAppFeatureResult, LoadSubAppOptions } from "../subapp/types";
 
 /**
  * Pass nonce info to xarc for generating script and style tags into the HTML
@@ -69,8 +69,22 @@ export type InitProps = {
    */
   devAssetData?: AssetData;
 
-  /** script nonce options */
-  nonce?: NonceInfo | boolean;
+  /**
+   * Nonce info for script and style tags.
+   *
+   * By default, renderPage will always generate nonce for your page.
+   *
+   * - You can pass in NonceInfo to customize the token value.
+   * - If you really don't want nonce generated, then pass `false`
+   */
+  nonce?: boolean | NonceInfo;
+
+  /**
+   * namespace to load subapps under for the page
+   *
+   * **default** `"ns0"`
+   */
+  namespace?: string;
 };
 
 /**
@@ -113,3 +127,56 @@ export interface ServerFrameworkLib {
    */
   handleSSRSync?(data: SubAppSSRData, prepResult: SubAppFeatureResult): SubAppSSRResult;
 }
+
+/**
+ * allow setting template fragments to be inserted into various predefined points
+ * in the main template for rendering the HTML
+ */
+export type TemplateInserts = {
+  head?: {
+    /** insert immediately after <head> */
+    begin?: any[];
+    /** insert after context initialized and context.user available */
+    contextReady?: any[];
+    /** insert immediately before </head> */
+    end?: any[];
+    /** insert immediately after xarc's subapp init scripts */
+    afterInit?: any[];
+  };
+  body?: {
+    /** insert immediately after <body> */
+    begin?: any[];
+    /** insert immediately before </body> */
+    end?: any[];
+    /** insert immediately before the starting subapps code */
+    beforeStart?: any[];
+    /** insert immediately after the starting subapps code */
+    afterStart?: any[];
+  };
+};
+
+export type PageOptions = InitProps & {
+  /**
+   * Name of subapps to load and render on the page
+   */
+  subApps: LoadSubAppOptions[];
+
+  /**
+   * title for the page
+   */
+  pageTitle?: string;
+
+  /**
+   * Path or URL to a favicon for the page
+   */
+  favicon?: string;
+
+  /** meta charset, default: "UTF-8", set to false to disable */
+  charSet?: string | boolean;
+
+  /**
+   * Allows you to insert template tags at some predefined locations within the
+   * main template.  You can create template tags with the createTemplateTags API.
+   */
+  templateInserts?: TemplateInserts;
+};
