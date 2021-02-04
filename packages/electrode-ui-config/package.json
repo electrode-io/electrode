@@ -27,7 +27,8 @@
     "coverage": "clap pkg/check",
     "check": "clap pkg/check",
     "lint-src": "eslint src --color",
-    "compile": "babel --presets=es2015 src -d dist --source-maps"
+    "compile": "babel --presets=es2015 src -d dist --source-maps",
+    "build": "babel --presets=es2015 src -d dist --source-maps"
   },
   "repository": {
     "type": "git",
