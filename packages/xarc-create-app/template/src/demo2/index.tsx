@@ -41,7 +41,6 @@ const Demo2 = props => {
         &nbsp;{value}&nbsp;
         <button onClick={() => dispatch(incNumber())}>&#8811;</button>
       </div>
-      <p style={{ textAlign: "center" }}>© {new Date().getFullYear()} Your (Company) name here</p>
     </div>
   );
 };

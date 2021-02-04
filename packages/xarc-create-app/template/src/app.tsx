@@ -10,4 +10,9 @@ export const Demo2 = declareSubApp({
   getModule: () => import("./demo2")
 });
 
+export const Demo3 = declareSubApp({
+  name: "demo3",
+  getModule: () => import("./demo3")
+});
+
 xarcV2.debug("app.tsx");

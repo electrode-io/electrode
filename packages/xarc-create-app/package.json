@@ -43,6 +43,7 @@
     "@xarc/app-dev": "^9.0.0",
     "@xarc/module-dev": "^2.2.4",
     "@xarc/react": "^0.1.5",
+    "@xarc/react-query": "^0.1.1",
     "@xarc/react-redux": "^0.1.4",
     "babel-loader": "^8.0.6",
     "chai": "^4.2.0",
@@ -108,6 +109,7 @@
       "@xarc/app": "../xarc-app",
       "@xarc/app-dev": "../xarc-app-dev",
       "@xarc/react": "../xarc-react",
+      "@xarc/react-query": "../xarc-react-query",
       "@xarc/react-redux": "../xarc-react-redux"
     }
   }
