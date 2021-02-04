@@ -1,18 +1,13 @@
 import { React } from "@xarc/react";
-import { useMutation, QueryClient, useQuery } from "@xarc/react-query";
-import { update, fetch, mockTodos } from "../constant";
+import { useMutation, useQuery } from "@xarc/react-query";
+import { update, fetch, mockTodos } from "../mock-fetch";
 const custom = require("../styles/bootstrap.css");
 
 export const Todo = props => {
   const { todo } = props;
 
-  console.log("Todo");
-  console.log(todo);
-
   const mutation: any = useMutation("test", {
     onMutate: id => {
-      console.log("Todo on mute");
-
       update(id);
       return mockTodos.todos;
     },
@@ -31,7 +26,6 @@ export const Todo = props => {
     <li
       className={custom["list-group-item"]}
       onClick={() => {
-        console.log("TODO   mutate here");
         mutation.mutate(todo.id);
       }}
     >

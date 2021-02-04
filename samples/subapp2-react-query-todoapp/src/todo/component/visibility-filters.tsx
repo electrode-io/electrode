@@ -1,11 +1,9 @@
 import { React } from "@xarc/react";
-import { connect } from "@xarc/react-redux";
 import classNames from "classnames";
-import { setFilter } from "../redux/action";
 import { VISIBILITY_FILTERS } from "../constant";
 const custom = require("../styles/bootstrap.css");
 
-const VisibilityFilters = ({ dispatch, activeFilter }) => {
+const VisibilityFilters = ({ setFilter }) => {
   return (
     <div className={custom["row"]}>
       <div
@@ -20,7 +18,7 @@ const VisibilityFilters = ({ dispatch, activeFilter }) => {
               className={classNames(custom["btn"], custom["btn-default"])}
               key={`visibility-filter-${currentFilter}`}
               onClick={() => {
-                dispatch(setFilter(currentFilter));
+                setFilter(currentFilter);
               }}
             >
               {currentFilter}
@@ -32,8 +30,4 @@ const VisibilityFilters = ({ dispatch, activeFilter }) => {
   );
 };
 
-const mapStateToProps = state => {
-  return { activeFilter: state.visibilityFilter };
-};
-// export default VisibilityFilters;
-export default connect(mapStateToProps, dispatch => ({ dispatch }))(VisibilityFilters);
+export default VisibilityFilters;

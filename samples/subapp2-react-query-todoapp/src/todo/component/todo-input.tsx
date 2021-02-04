@@ -1,9 +1,7 @@
-import { React, ReactSubApp } from "@xarc/react";
-import { connect } from "@xarc/react-redux";
-import { addTodo } from "../redux/action";
+import { React } from "@xarc/react";
 import classNames from "classnames";
 const custom = require("../styles/bootstrap.css");
-import { create, mockTodos } from "../constant";
+import { create, mockTodos } from "../mock-fetch";
 import { useMutation, QueryClient } from "@xarc/react-query";
 
 const TodoInput = props => {
@@ -29,11 +27,16 @@ const TodoInput = props => {
       <input
         className={classNames(custom["form-control"])}
         onChange={e => {
-          console.log("coming Here on change");
           e.preventDefault();
           props.setInput((e.target as any).value);
         }}
         value={input}
+        onKeyDown={e => {
+          if (e.keyCode === 13 && input) {
+            mutation.mutate({ content: input });
+            props.setInput("");
+          }
+        }}
       />
       <span className={custom["input-group-btn"]}>
         <button

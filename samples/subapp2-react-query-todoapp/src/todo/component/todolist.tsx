@@ -1,10 +1,6 @@
-import { React, ReactSubApp } from "@xarc/react";
-import { connect } from "@xarc/react-redux";
+import { React } from "@xarc/react";
 const custom = require("../styles/bootstrap.css");
-import { getTodosByVisibilityFilter } from "../redux/selector";
 import { Todo } from "./todo";
-import { reactQueryFeature, useQuery } from "@xarc/react-query";
-import { fetch } from "../constant";
 
 const TodoList = ({ status, todos, error }) => {
   if (status === "loading") {
@@ -14,9 +10,6 @@ const TodoList = ({ status, todos, error }) => {
   if (status === "error") {
     return <div>Error Message: {JSON.stringify(error)}</div>;
   }
-
-  console.log("todolist");
-  console.log(todos);
 
   return (
     <ul className={custom["list-group"]}>
