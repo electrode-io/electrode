@@ -1,4 +1,5 @@
 /* eslint-disable max-statements */
+/* eslint-disable complexity */
 
 import { SubAppDef, SubAppFeatureFactory, SubAppFeature } from "@xarc/subapp";
 import { Provider } from "react-redux";
@@ -151,18 +152,30 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
         }
         initialState = (await options.prepare(props)).initialState;
         if (reduxObservable === true) {
-          if (!rootEpic) { throw new Error("[REDUX-OBSERVABLE] must provide a root epic if redux-observable selected!"); }
+          if (!rootEpic) {
+            throw new Error(
+              "[REDUX-OBSERVABLE] must provide a root epic if redux-observable selected!"
+            );
+          }
           const epicMiddleware = createEpicMiddleware();
           const observerMiddleware = applyMiddleware(epicMiddleware);
-          redux._store = createStore((reducers as Reducer<unknown, any>) || (x => x), initialState, observerMiddleware);
+          redux._store = createStore(
+            (reducers as Reducer<unknown, any>) || (x => x),
+            initialState,
+            observerMiddleware
+          );
           epicMiddleware.run(rootEpic);
-
         } else if (reduxSaga === true) {
-          if (!rootSaga) { throw new Error("[REDUX-SAGA] must provide a root saga if redux-saga selected!"); }
+          if (!rootSaga) {
+            throw new Error("[REDUX-SAGA] must provide a root saga if redux-saga selected!");
+          }
           const sagaMiddleware = createSagaMiddleware();
-          redux._store = createStore((reducers as Reducer<unknown, any>) || (x => x), initialState, applyMiddleware(sagaMiddleware));
+          redux._store = createStore(
+            (reducers as Reducer<unknown, any>) || (x => x),
+            initialState,
+            applyMiddleware(sagaMiddleware)
+          );
           sagaMiddleware.run(rootSaga);
-
         } else {
           redux._store = createStore((reducers as Reducer<unknown, any>) || (x => x), initialState);
         }
