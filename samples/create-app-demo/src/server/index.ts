@@ -4,6 +4,7 @@ import { config } from "./config";
 
 /**
  * main entry point for application
+ *
  * @returns fastify server instance
  */
 export async function start() {
@@ -15,6 +16,8 @@ export async function start() {
 
   const server = await fastifyServer(config);
 
+  // it's important that the routes setup is import *after* runtime support is loaded
+  // else isomorphic assets during development may not work properly
   const { setupRoutes } = await import("./routes");
   setupRoutes(server);
 

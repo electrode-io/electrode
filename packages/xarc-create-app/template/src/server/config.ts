@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * A simple configuration to setup fastify to serve routes for the
  * Electrode X webapp.
@@ -23,7 +21,7 @@ export const config = {
      */
     "@xarc/app-dev": {
       priority: -1,
-      enable: process.env.WEBPACK_DEV === "true"
+      enable: Boolean(process.env.WEBPACK_DEV)
     }
   },
   // don't start fastify server automatically so app can setup routes

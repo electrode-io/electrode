@@ -7,26 +7,23 @@ import { PageRenderer } from "@xarc/react";
  * @returns nothing
  */
 export function setupRoutes(server) {
-  let homeRenderer: PageRenderer;
+  const homeRenderer: PageRenderer = new PageRenderer({
+    pageTitle: "xarc React App demo",
+    subApps: [
+      { name: home.name, ssr: true },
+      { name: Demo2.name, ssr: true },
+      { name: Demo3.name, ssr: true }
+    ],
+    prodAssetData: {
+      cdnMap: "config/assets.json"
+    }
+  });
 
   server.route({
     method: "GET",
     path: "/",
     async handler(request, reply) {
       try {
-        if (!homeRenderer) {
-          homeRenderer = new PageRenderer({
-            pageTitle: "xarc React App demo",
-            subApps: [
-              { name: home.name, ssr: true },
-              { name: Demo2.name, ssr: true },
-              { name: Demo3.name, ssr: true }
-            ],
-            prodAssetData: {
-              cdnMap: "config/assets.json"
-            }
-          });
-        }
         const context = await homeRenderer.render({ request });
         reply.type("text/html");
 
