@@ -4,6 +4,7 @@ import * as Path from "path";
 const identity = require("lodash/identity");
 const assign = require("lodash/assign");
 const babelLoader = require.resolve("babel-loader");
+import { generateBabelLoaderCacheId } from "../util/generate-babel-loader-cache-id";
 
 import { loadXarcOptions } from "../util/load-xarc-options";
 
@@ -39,6 +40,7 @@ module.exports = function(options) {
 
   const test = xarcOptions.babel.enableTypeScript ? /\.[tj]sx?$/ : /\.jsx?$/;
 
+  const cacheIdentifier = generateBabelLoaderCacheId(xarcOptions.cwd);
   const babelLoaderConfig = {
     _name: "babel",
     test,
@@ -47,7 +49,10 @@ module.exports = function(options) {
       {
         loader: babelLoader,
         options: Object.assign(
-          { cacheDirectory: Path.resolve(xarcOptions.cwd, ".etmp/babel-loader") },
+          {
+            cacheIdentifier,
+            cacheDirectory: Path.resolve(xarcOptions.cwd, ".etmp/babel-loader")
+          },
           options.babel
         )
       }
