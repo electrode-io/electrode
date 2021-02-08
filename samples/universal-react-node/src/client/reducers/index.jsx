@@ -2,7 +2,7 @@
 
 import todos from "./todos";
 import visibilityFilter from "./visibility-filter";
-
+//  eslint-disable-next-line
 export default function rootReducer(state: Object = {}, action: Object) {
   return {
     skip: state.skip, // ATF rendering skip below the fold for SSR

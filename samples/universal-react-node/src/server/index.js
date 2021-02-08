@@ -1,7 +1,7 @@
-"use strict";
+"use strict"; //  eslint-disable-line
 
 process.on("SIGINT", () => {
-  process.exit(0);
+  process.exit(0); //  eslint-disable-line
 });
 
 import support from "@xarc/app/support";

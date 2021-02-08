@@ -12,6 +12,20 @@ type Type = {
   navEntry: string
 };
 
+class SSRCachingSimpleType extends Component<Type> {
+  render() {
+    return (
+      <div>
+        <p>{this.props.navEntry}</p>
+      </div>
+    );
+  }
+}
+
+SSRCachingSimpleType.propTypes = {
+  navEntry: PropTypes.string
+};
+
 class SSRCachingSimpleTypeWrapper extends Component<TypeWrapper> {
   render() {
     const count = this.props.count;
@@ -28,20 +42,6 @@ class SSRCachingSimpleTypeWrapper extends Component<TypeWrapper> {
 
 SSRCachingSimpleTypeWrapper.propTypes = {
   count: PropTypes.number
-};
-
-class SSRCachingSimpleType extends Component<Type> {
-  render() {
-    return (
-      <div>
-        <p>{this.props.navEntry}</p>
-      </div>
-    );
-  }
-}
-
-SSRCachingSimpleType.propTypes = {
-  navEntry: PropTypes.string
 };
 
 const mapStateToProps = state => ({

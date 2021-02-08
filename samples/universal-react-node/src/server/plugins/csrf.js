@@ -1,4 +1,4 @@
-"use strict";
+"use strict"; //  eslint-disable-line
 /*eslint-env es6*/
 const plugin = {};
 
@@ -6,7 +6,7 @@ const plugin = {};
   Sample endpoints to demonstrate CSRF protection via the electrode-csrf-jwt module.
   Note the endpoints require no special configuration for protection to be enabled.
 */
-plugin.register = function (server, options, next) {
+plugin.register = function(server, options, next) {
   /* a demo GET endpoint which will return a CSRF cookie + header */
   server.route({
     method: "GET",

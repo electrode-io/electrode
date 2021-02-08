@@ -1,5 +1,5 @@
 // @flow
-
+//  eslint-disable-next-line
 const visibilityFilter = (state: string = "SHOW_ALL", action: Object) => {
   switch (action.type) {
     case "SET_VISIBILITY_FILTER":

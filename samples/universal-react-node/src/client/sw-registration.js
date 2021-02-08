@@ -2,7 +2,7 @@
 
 /* eslint-env browser */
 /* eslint-disable no-console */
-
+//  eslint-disable-next-line
 module.exports = (notify: (value: Object) => void) => {
   // Exit early if the navigator isn't available
   if (typeof navigator === "undefined") {

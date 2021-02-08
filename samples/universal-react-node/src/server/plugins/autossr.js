@@ -1,4 +1,4 @@
-"use strict";
+"use strict"; //  eslint-disable-line
 
 import machineLoadCondition from "../conditions/machine-load";
 import serverLoadCondition from "../conditions/server-load";

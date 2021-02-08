@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Home } from "client/components/home";
+import { expect } from "chai";
 
 describe("Home", () => {
   let component;
@@ -15,8 +16,8 @@ describe("Home", () => {
   });
 
   it("has expected content with deep render", () => {
-    component = ReactDOM.render(<Home />, container); // eslint-disable-line react/no-render-return-value
+    component = ReactDOM.render(<Home />, container);
 
-    expect(component).to.not.be.false;
+    expect(component).to.not.be.false;  //  eslint-disable-line
   });
 });

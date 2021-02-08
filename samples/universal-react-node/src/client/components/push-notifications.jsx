@@ -1,12 +1,11 @@
 // @flow
 
-/* eslint-disable react/no-did-mount-set-state */
 import React, { Component } from "react";
 import icon from "../images/logo-192x192.png";
 import badge from "../images/logo-72x72.png";
 
 export default class PushNotifications extends Component<
-  {},
+  {}, // eslint-disable-line
   {
     supported: boolean,
     error: any,
@@ -33,9 +32,9 @@ export default class PushNotifications extends Component<
       title: "",
       body: ""
     };
-    (this: any).handleSendNotification = this.handleSendNotification.bind(this);
-    (this: any).handleInputChange = this.handleInputChange.bind(this);
-    (this: any).handleSubscribe = this.handleSubscribe.bind(this);
+    this.handleSendNotification = this.handleSendNotification.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubscribe = this.handleSubscribe.bind(this);
   }
 
   componentDidMount() {

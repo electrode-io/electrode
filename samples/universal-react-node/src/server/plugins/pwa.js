@@ -1,8 +1,8 @@
-"use strict";
+"use strict"; //  eslint-disable-line
 /*eslint-env es6*/
 const plugin = {};
 
-plugin.register = function (server, options, next) {
+plugin.register = function(server, options, next) {
   server.route({
     method: "GET",
     path: "/sw.js",

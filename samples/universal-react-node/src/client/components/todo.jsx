@@ -4,7 +4,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 type ToDo = {
-  onClick: (value: SyntheticEvent<>) => void,
+  onClick: (value: SyntheticEvent<>) => void, //  eslint-disable-line
   completed: boolean,
   text: string
 };

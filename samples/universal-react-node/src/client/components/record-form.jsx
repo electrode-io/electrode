@@ -6,7 +6,7 @@ const HTTP_BAD_REQUEST = 400;
 const HTTP_OK = 200;
 let token;
 
-type TypeRecordForm = {};
+type TypeRecordForm = {}; // eslint-disable-line
 
 class RecordForm extends Component<TypeRecordForm, { name: string, artist: string }> {
   constructor(props: any) {
@@ -16,9 +16,9 @@ class RecordForm extends Component<TypeRecordForm, { name: string, artist: strin
       artist: ""
     };
 
-    (this: any).handleNameChange = this.handleNameChange.bind(this);
-    (this: any).handleArtistChange = this.handleArtistChange.bind(this);
-    (this: any).handleSubmit = this.handleSubmit.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleArtistChange = this.handleArtistChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleNameChange(event: InputEvent) {
@@ -31,7 +31,7 @@ class RecordForm extends Component<TypeRecordForm, { name: string, artist: strin
       artist: event.target.value
     });
   }
-  handleSubmit(event: SyntheticEvent<>) {
+  handleSubmit(event: SyntheticEvent<>) { //  eslint-disable-line
     fetch("/1", { credentials: "same-origin" })
       .then(resp => {
         if (resp.status === HTTP_OK) {

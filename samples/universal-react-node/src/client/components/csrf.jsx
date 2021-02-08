@@ -3,14 +3,14 @@
 import React, { Component } from "react";
 const HTTP_OK = 200;
 
-export class CSRF extends Component<{}, { testResult: string }> {
+export class CSRF extends Component<{}, { testResult: string }> { //  eslint-disable-line
   constructor() {
     super();
     this.state = {
       testResult: ""
     };
-    (this: any).handleTestValid = this.handleTestValid.bind(this);
-    (this: any).handleTestInvalid = this.handleTestInvalid.bind(this);
+    this.handleTestValid = this.handleTestValid.bind(this);
+    this.handleTestInvalid = this.handleTestInvalid.bind(this);
   }
 
   doPost(csrfToken: string) {

@@ -1,4 +1,4 @@
-"use strict";
+"use strict"; //  eslint-disable-line
 /*eslint-env es6*/
 const plugin = {};
 const HTTP_CREATED = 201;

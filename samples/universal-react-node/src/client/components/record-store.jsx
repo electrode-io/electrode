@@ -6,7 +6,7 @@ import RecordForm from "./record-form";
 const HTTP_BAD_REQUEST = 400;
 
 type TypeState = {
-  records: [{}]
+  records: [{}] //  eslint-disable-line
 };
 
 class RecordStore extends Component<string, TypeState> {
@@ -44,7 +44,7 @@ class RecordStore extends Component<string, TypeState> {
         <h2>Welcome to the Electrode Record Store</h2>
         <h3> Available Records</h3>
         <ul>
-          {this.state.records.map((record: Object) => (
+          {this.state.records.map((record: Object) => ( //  eslint-disable-line
             <li key={record._id}>
               {record.name} By {record.artist}
             </li>

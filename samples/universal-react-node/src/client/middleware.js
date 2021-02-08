@@ -3,8 +3,9 @@
 const HTTP_BAD_REQUEST = 400;
 const HTTP_OK = 200;
 let token;
-
+//  eslint-disable-next-line
 const updateStorage = (store: Object) => (next: (value: string) => void) => (action: string) => {
+  //  eslint-disable-next-line
   const result = next(action);
   const completeState = store.getState();
   fetch("/1", { credentials: "same-origin" })

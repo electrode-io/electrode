@@ -1,4 +1,4 @@
-"use strict";
+"use strict"; //  eslint-disable-line
 
 import machine from "./machine-info";
 

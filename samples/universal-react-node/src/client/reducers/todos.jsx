@@ -7,7 +7,7 @@ const newTodo = (id, text, completed) => {
     completed
   };
 };
-
+//  eslint-disable-next-line
 export default (state: Array<Object> = [], action: Object) => {
   const todos = state;
   switch (action.type) {
@@ -19,6 +19,7 @@ export default (state: Array<Object> = [], action: Object) => {
     case "TOGGLE_TODO": {
       const x = todos.findIndex(t => t.id === action.id);
       if (x >= 0) {
+        //  eslint-disable-next-line
         const toggled: Array<Object> = todos.slice();
         const o = toggled[x];
         toggled[x] = newTodo(o.id, o.text, !o.completed);

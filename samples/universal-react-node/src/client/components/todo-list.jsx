@@ -5,8 +5,8 @@ import PropTypes from "prop-types";
 import Todo from "./todo";
 
 type ToDoList = {
-  todos: Array<Object>,
-  onTodoClick: (value: SyntheticEvent<>) => void
+  todos: Array<Object>, //  eslint-disable-line
+  onTodoClick: (value: SyntheticEvent<>) => void  //  eslint-disable-line
 };
 
 const TodoList = ({ todos, onTodoClick }: ToDoList) => {

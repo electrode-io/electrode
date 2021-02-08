@@ -1,6 +1,7 @@
 import React from "react";
 import { Home } from "client/components/home";
 import { mount } from "enzyme";
+import {expect} from "chai";
 
 describe("Home", () => {
   let component;
@@ -16,16 +17,16 @@ describe("Home", () => {
   });
 
   it("has expected content with deep render", () => {
-    expect(component).not.toEqual(false);
+    expect(component).not.to.equal(false);
   });
 
   it("has 'Demonstrate Components' header", () => {
     const text = "Demonstration Components";
-    expect(component.find("h2").text()).toEqual(text);
+    expect(component.find("h2").text()).to.equal(text);
   });
 
   it("has 8 items on menu", () => {
-    expect(component.find("li").length).toEqual(8); // eslint-disable-line no-magic-numbers
+    expect(component.find("li").length).to.equal(8); // eslint-disable-line no-magic-numbers
 
     const items = [
       "CSRF protection using electrode-csrf-jwt",
@@ -44,7 +45,7 @@ describe("Home", () => {
           .find("li")
           .at(x)
           .text()
-      ).toEqual(items[x]);
+      ).to.equal(items[x]);
     }
   });
 });
