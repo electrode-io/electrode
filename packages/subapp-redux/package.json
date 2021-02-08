@@ -1,12 +1,13 @@
 {
   "name": "subapp-redux",
-  "version": "1.0.46",
+  "version": "1.0.47",
   "description": "Electrode subapp redux support",
   "module": "dist/dev/index.js",
   "main": "lib/index.js",
   "scripts": {
     "test": "clap test",
     "coverage": "clap coverage",
+    "check": "clap check",
     "build": "clap compile",
     "prepublishOnly": "clap compile"
   },
@@ -15,6 +16,10 @@
     "react",
     "subapp"
   ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.com/",
+    "access": "public"
+  },
   "author": "Electrode (http://www.electrode.io/)",
   "contributors": [
     "Joel Chen <xchen@walmartlabs.com>"
@@ -27,7 +32,7 @@
   "dependencies": {
     "optional-require": "^1.0.0",
     "subapp-util": "^1.1.2",
-    "subapp-web": "^1.0.46"
+    "subapp-web": "^1.0.47"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

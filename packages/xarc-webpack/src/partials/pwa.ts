@@ -10,7 +10,7 @@ const optionalRequire = require("optional-require")(require);
 
 const swConfigPath = Path.resolve("config", "sw-config.js");
 const mkdirp = require("mkdirp");
-const logger = require("@xarc/app-dev/lib/logger");
+const { logger } = require("@xarc/app-dev/lib/logger");
 
 /**
  * Takes a file path and returns a webpack-compatible

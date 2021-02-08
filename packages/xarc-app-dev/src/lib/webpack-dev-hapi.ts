@@ -1,37 +1,46 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-export {};
-
 /* eslint-disable no-console, no-magic-numbers */
 
-const { universalHapiPlugin } = require("electrode-hapi-compat");
-const hapi17Plugin = require("./webpack-dev-hapi17");
+import { AppDevMiddleware } from "./app-dev-middleware";
 
-const AppDevMiddleware = require("./app-dev-middleware");
+/**
+ * Hapi 16 and lower plugin for webpack dev
+ *
+ * @param server hapi server
+ * @param _options plugin options
+ * @param next callback
+ *
+ * @returns nothing
+ */
+export function register(server: any, _options: any, next: (err?: Error) => void): void {
+  try {
+    const middleware = new AppDevMiddleware();
 
-function register(server, options, next) {
-  const middleware = new AppDevMiddleware({});
+    middleware.setup();
 
-  middleware.setup();
-
-  server.ext({
-    type: "onRequest",
-    method: (request, reply) => {
-      request.app.webpackDev = middleware.webpackDev;
-      reply.continue();
+    server.ext({
+      type: "onRequest",
+      method: (request, reply) => {
+        request.app.webpackDev = middleware.webpackDev;
+        reply.continue();
+      }
+    });
+    return next && next();
+  } catch (err) {
+    if (next) {
+      return next(err);
+    } else {
+      throw err;
     }
-  });
-
-  return next();
+  }
 }
 
-const registers = {
-  hapi16: register,
-  hapi17: hapi17Plugin
-};
-
 const pkg = {
-  name: "electrode-dev-hapi",
+  name: "electrode-x-dev-hapi16",
   version: "1.0.0"
 };
 
-module.exports = universalHapiPlugin(registers, pkg);
+register.attributes = { pkg };
+
+export const hapiPlugin = {
+  register
+};

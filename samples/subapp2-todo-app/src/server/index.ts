@@ -1,11 +1,11 @@
 import { PageRenderer } from "@xarc/react";
-import { load } from "@xarc/app/support";
+import { loadRuntimeSupport } from "@xarc/app";
 import electrodeServer from "@xarc/fastify-server";
 import { config } from "./config";
 import { Todo } from "../app";
 
 async function start() {
-  await load({
+  await loadRuntimeSupport({
     isomorphicCdnOptions: {
       prodOnly: true
     }

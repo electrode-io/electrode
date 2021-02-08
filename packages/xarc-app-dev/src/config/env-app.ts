@@ -1,10 +1,12 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-export {};
+import xenvConfig from "xenv-config";
+import { merge } from "lodash";
 
-module.exports = function getAppEnv() {
-  const xenvConfig = require("xenv-config");
-  const { merge } = require("lodash");
-
+/**
+ * Get app settings from env
+ *
+ * @returns app settings
+ */
+export function getEnvApp(): any {
   const appConfigSpec = {
     host: { env: ["HOST"], default: "localhost" },
     port: { env: ["PORT"], default: 3000 },
@@ -17,4 +19,4 @@ module.exports = function getAppEnv() {
   };
 
   return xenvConfig(appConfigSpec, {}, { merge });
-};
+}

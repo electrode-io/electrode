@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-export {};
-
 /* eslint-disable no-console, no-magic-numbers */
 
-const AppDevMiddleware = require("./app-dev-middleware");
+import { AppDevMiddleware } from "./app-dev-middleware";
 
+/**
+ * @param server
+ */
 function register(server) {
-  const middleware = new AppDevMiddleware({});
+  const middleware = new AppDevMiddleware();
 
   middleware.setup();
 
@@ -21,4 +22,8 @@ function register(server) {
   return;
 }
 
-module.exports = register;
+export const hapi17Plugin = {
+  name: "electrode-x-dev-hapi17",
+  version: "1.0.0",
+  register
+};

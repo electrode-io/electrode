@@ -1,4 +1,4 @@
-"use strict";
+
 
 /* eslint-disable no-magic-numbers, no-use-before-define, no-unused-vars */
 /* eslint-disable no-console, max-statements, no-param-reassign, complexity */
@@ -9,6 +9,9 @@ let logStreamReconnectDelay = 5000;
 let logStreamReconnectTimer;
 let debugStreamEvents;
 
+/**
+ *
+ */
 function startLogStream() {
   const close = () => {
     if (logStream) {
@@ -55,6 +58,10 @@ const logDisplayElement = document.getElementById("logs");
 // when received new entries, only those with ID after this are kept
 let lastEntryId = { ts: 0, tx: 0 };
 
+/**
+ * @param a
+ * @param b
+ */
 function compareEntryId(a, b) {
   if (a.ts === b.ts) {
     return (a.tx || 0) - (b.tx || 0);
@@ -62,6 +69,9 @@ function compareEntryId(a, b) {
   return a.ts - b.ts;
 }
 
+/**
+ * @param entryId
+ */
 function stringifyEntryId(entryId) {
   return entryId.tx ? `${entryId.ts},${entryId.tx}` : `${entryId.ts}`;
 }
@@ -166,6 +176,9 @@ class HashValues {
 
 const hashVal = new HashValues();
 
+/**
+ *
+ */
 function getLevelSelections() {
   const levels = Object.keys(defaultLevelSelections);
   const levelSelections = levels.reduce((acc, level) => {
@@ -176,10 +189,17 @@ function getLevelSelections() {
   return { ...defaultLevelSelections, ...levelSelections };
 }
 
+/**
+ *
+ */
 function levelChangeHandler() {
   refreshLogs(getLevelSelections(), false);
 }
 
+/**
+ * @param levelSelections
+ * @param scrollToEnd
+ */
 function refreshLogs(levelSelections, scrollToEnd = true) {
   levelSelections = levelSelections || getLevelSelections();
 
@@ -203,12 +223,18 @@ function refreshLogs(levelSelections, scrollToEnd = true) {
   hashVal.add(offLevels);
 }
 
+/**
+ *
+ */
 function clearLogs() {
   while (logDisplayElement.lastChild) {
     logDisplayElement.removeChild(logDisplayElement.lastChild);
   }
 }
 
+/**
+ *
+ */
 function wipeLogs() {
   const last = logDisplayElement.lastChild;
 
@@ -224,6 +250,11 @@ function wipeLogs() {
   clearLogs();
 }
 
+/**
+ * @param data
+ * @param levelSelections
+ * @param scrollToEnd
+ */
 async function updateLogs(data, levelSelections, scrollToEnd = true) {
   levelSelections = levelSelections || getLevelSelections();
 
@@ -276,6 +307,10 @@ async function updateLogs(data, levelSelections, scrollToEnd = true) {
   }
 }
 
+/**
+ * @param levelSelections
+ * @param scrollToEnd
+ */
 async function displayLogs(levelSelections, scrollToEnd = true) {
   levelSelections = levelSelections || getLevelSelections();
 
@@ -302,6 +337,9 @@ async function displayLogs(levelSelections, scrollToEnd = true) {
   updateLogs(data, levelSelections, scrollToEnd);
 }
 
+/**
+ *
+ */
 function updateLevelCheckboxes() {
   Object.keys(defaultLevelSelections).forEach(k => {
     const elem = document.getElementById(`level.${k}`);
@@ -311,6 +349,9 @@ function updateLevelCheckboxes() {
   });
 }
 
+/**
+ * @param str
+ */
 function parseEntryId(str) {
   if (str.indexOf(",") > 0) {
     const parts = str.split(",");
@@ -344,7 +385,7 @@ window.addEventListener(
   false
 );
 
-window.addEventListener("keypress", function(event) {
+window.addEventListener("keypress", (event) => {
   if (event.ctrlKey && event.code === "KeyK") {
     wipeLogs();
   }

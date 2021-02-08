@@ -1,9 +1,10 @@
-import * as Fs from "fs";
-import * as Path from "path";
-import * as _ from "lodash";
+import Fs from "fs";
+import Path from "path";
+import _ from "lodash";
 
 /**
  * Add a list of packages to a package.json's depedencies
+ *
  * @param pkgJson - package.json data
  * @param packages - list of packages to add
  * @param dep - which dependencies section to add
@@ -34,6 +35,7 @@ export const addDepToPkgJson = (pkgJson: any, packages: Record<string, string>, 
 
 /**
  * Load a package.json from dir
+ *
  * @param dir - directory
  * @returns package.json object
  */
@@ -43,7 +45,9 @@ export const loadPkgJson = (dir: string) => {
 
 /**
  * Save a package.json to dir
+ *
  * @param dir - directory
+ * @param pkgJson
  * @params pkgJson - package.json object
  * @returns none
  */
@@ -56,7 +60,7 @@ export const savePkgJson = (dir: string, pkgJson: any) => {
 
 /* eslint-disable @typescript-eslint/no-var-requires */
 const xarcAppPkgJson = require("@xarc/app/package.json");
-const logger = require("../logger");
+import { logger } from "../logger";
 
 /**
  * Update app's dependencies

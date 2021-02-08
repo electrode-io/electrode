@@ -18,14 +18,13 @@
           }
         },
         "beta": {
-          "enabled": false,
+          "enabled": true,
           "packages": {
             "@xarc/app": true,
             "@xarc/app-dev": true,
-            "@xarc/webpack": true,
-            "subapp-server": true
+            "@xarc/create-app": true
           },
-          "addToVersion": true
+          "addToVersion": false
         }
       }
     }

@@ -1,11 +1,4 @@
-var path = require("path");
-var archetype = require("@xarc/app/config/archetype")();
-var archetypeEslint = path.join(archetype.config.eslint, ".eslintrc-node");
-
-function dotify(p) {
-  return path.isAbsolute(p) ? p : "." + path.sep + p;
-}
-
+const { eslintRcNode } = require("@xarc/app-dev");
 module.exports = {
-  extends: dotify(path.relative(__dirname, archetypeEslint))
+  extends: eslintRcNode
 };

@@ -8,13 +8,41 @@ import { AssetPathMap, InitProps } from "./types";
 import { SSR_PIPELINES, safeStringifyJson } from "./utils";
 
 /**
- * Initialize all the up front code required for running subapps in the browser.
+ * Initialize assets that namespace will isolate
  *
- * @param setupContext - context for setup
- * @param setupToken - token for setup
- * @returns data with template process callback
+ * @param props - server template token props
+ * @param staticAssets - static assets
+ * @param namespace - name space
+ *
+ * @returns assets
  */
-export function initSubApp(setupContext: any, setupToken: Partial<{ props: InitProps }>) {
+
+function initializeNamespaceAssets(staticAssets: any, namespace: string) {
+  const { cdnMapData, cdnMapDataString, randomId } = staticAssets;
+
+  let cdnAsJsonScript = "";
+  let cdnUpdateScript = "";
+  if (cdnMapData) {
+    const cdnMapJsonId = `${namespace}.cdn-map-${randomId}`;
+    cdnAsJsonScript = `<script{{SCRIPT_NONCE}} type="application/json" id="${cdnMapJsonId}">
+${cdnMapDataString}
+</script>
+`;
+    cdnUpdateScript = `window.xarcV2.cdnUpdate({md:window.xarcV2.dyn("${cdnMapJsonId}")})
+`;
+  }
+
+  return { cdnUpdateScript, cdnAsJsonScript };
+}
+
+/**
+ * Initialize common static assets such as xarcV2 client code, CDN data, and other JS bundles.
+ *
+ * @param props - server template token props
+ *
+ * @returns assets
+ */
+function initializeStaticAssets(props: InitProps) {
   const isProd = process.env.NODE_ENV === "production";
   const distDir = isProd
     ? Path.join(__dirname, "../../dist/min")
@@ -27,8 +55,6 @@ export function initSubApp(setupContext: any, setupToken: Partial<{ props: InitP
   };
 
   const isWebpackDev = Boolean(process.env.WEBPACK_DEV);
-
-  const props: InitProps = setupToken.props;
 
   const stats = new WebpackStats();
   stats.load();
@@ -51,17 +77,6 @@ export function initSubApp(setupContext: any, setupToken: Partial<{ props: InitP
   }
 
   const cdnMapData = cdnMap && (typeof cdnMap === "string" ? loadCdnMap(cdnMap) : cdnMap);
-  let cdnAsJsonScript = "";
-  let cdnUpdateScript = "";
-  if (cdnMapData) {
-    const cdnMapJsonId = `cdn-map-${Crypto.randomBytes(8).toString("base64")}`;
-    cdnAsJsonScript = `<script{{SCRIPT_NONCE}} type="application/json" id="${cdnMapJsonId}">
-${safeStringifyJson(cdnMapData)}
-</script>
-`;
-    cdnUpdateScript = `window.xarcV2.cdnUpdate({md:window.xarcV2.dyn("${cdnMapJsonId}")})
-`;
-  }
 
   // client side JS code required to start subapps and load assets
   const webpack4JsonpJs = getClientJs("webpack4-jsonp.js", "webpack4JsonP");
@@ -120,8 +135,45 @@ ${safeStringifyJson(cdnMapData)}
   );
 
   return {
+    webpack4JsonpJs,
+    xarcV2Js,
+    cdnMapScripts,
+    cdnMapData,
+    cdnMapDataString: cdnMapData && safeStringifyJson(cdnMapData),
+    runtimeJsScripts,
+    mainJsScripts,
+    allCssLinks,
+    randomId: Crypto.randomBytes(8).toString("base64")
+  };
+}
+
+/**
+ * Initialize all the up front code required for running subapps in the browser.
+ *
+ * @param setupContext - context for setup
+ * @param setupToken - token for setup
+ * @returns data with template process callback
+ */
+export function initSubApp(setupContext: any, setupToken: Partial<{ props: InitProps }>) {
+  const staticAssets = initializeStaticAssets(setupToken.props);
+  const {
+    allCssLinks,
+    xarcV2Js,
+    cdnMapScripts,
+    webpack4JsonpJs,
+    runtimeJsScripts,
+    mainJsScripts
+  } = staticAssets;
+
+  return {
     process(context) {
-      const { request, scriptNonceAttr, styleNonceAttr } = context.user;
+      const { request, scriptNonceAttr, styleNonceAttr, namespace } = context.user;
+
+      const { cdnAsJsonScript, cdnUpdateScript } = initializeNamespaceAssets(
+        staticAssets,
+        namespace
+      );
+
       request[SSR_PIPELINES] = [];
 
       const addScriptNonce = (text: string) => {

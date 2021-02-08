@@ -1,3 +1,5 @@
 .wrapper {
   font-size: 5em;
+  border: solid 5px blue;
+  text-align: center;
 }

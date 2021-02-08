@@ -5,31 +5,37 @@ import { getDevAdminPortFromEnv } from "./utils";
 /* eslint-disable object-shorthand, max-statements, no-magic-numbers */
 /* eslint-disable no-console, no-process-exit, global-require, no-param-reassign */
 
-const Fs = require("fs");
-const Path = require("path");
-const assert = require("assert");
-const requireAt = require("require-at");
-const optionalRequire = require("optional-require")(require);
-const xclap = require("xclap");
-const getDevOptions = require("../config/archetype");
-const ck = require("chalker");
-const xaa = require("xaa");
-const { psChildren } = require("ps-get");
-const optFlow = optionalRequire("electrode-archetype-opt-flow");
-const { getWebpackStartConfig, setWebpackProfile } = require("@xarc/webpack/lib/util/custom-check");
-const chokidar = require("chokidar");
-const { spawn } = require("child_process");
-const scanDir = require("filter-scan-dir");
-import * as _ from "lodash";
-
-const xsh = require("xsh");
-const logger = require("./logger");
+import Fs from "fs";
+import Path from "path";
+import assert from "assert";
+import requireAt from "require-at";
+import makeOptionalRequire from "optional-require";
+import xrun from "@xarc/run";
+import { getDevOptions } from "../config/archetype";
+import ck from "chalker";
+import * as xaa from "xaa"; // really import ESM into single xaa var
+import { psChildren } from "ps-get";
+import chokidar from "chokidar";
+import { spawn } from "child_process";
+import scanDir from "filter-scan-dir";
+import _ from "lodash";
+import xsh from "xsh";
+import { logger } from "./logger";
 import { createGitIgnoreDir } from "./utils";
 import { jestTestDirectories } from "./tasks/constants";
 import { eslintTasks } from "./tasks/eslint";
 import { updateAppDep } from "./tasks/package-json";
 
-export { xclap };
+const { getWebpackStartConfig, setWebpackProfile } = require("@xarc/webpack/lib/util/custom-check");
+
+const optionalRequire = makeOptionalRequire(require);
+
+export {
+  /** The task runner @xarc/run */
+  xrun,
+  /** The task runner @xarc/run */
+  xrun as xclap
+};
 
 let xarcCwd: string;
 
@@ -46,26 +52,44 @@ function webpackCmd() {
   return Fs.existsSync(exactCmd) ? Path.relative(xarcCwd, exactCmd) : cmd;
 }
 
+/**
+ * @param str
+ */
 function quote(str) {
   return str.startsWith(`"`) ? str : `"${str}"`;
 }
 
+/**
+ *
+ */
 function setProductionEnv() {
   process.env.NODE_ENV = "production";
 }
 
+/**
+ *
+ */
 function setDevelopmentEnv() {
   process.env.NODE_ENV = "development";
 }
 
+/**
+ *
+ */
 function setKarmaCovEnv() {
   process.env.ENABLE_KARMA_COV = "true";
 }
 
+/**
+ *
+ */
 function setStaticFilesEnv() {
   process.env.STATIC_FILES = "true";
 }
 
+/**
+ *
+ */
 function setWebpackDev() {
   process.env.WEBPACK_DEV = "true";
 }
@@ -73,14 +97,14 @@ function setWebpackDev() {
 export { XarcOptions } from "../config/opt2/xarc-options";
 
 /**
- * Get the dev task runner (xclap) from Electrode module's perspective.
+ * Get the dev task runner (@xarc/run) from Electrode module's perspective.
  *
  * @param cwd - current working dir for your app - default to `process.cwd()`
  *
- * @returns the instance of xclap that's required
+ * @returns the instance of @xarc/run that's required
  */
 export const getDevTaskRunner = (cwd: string = process.cwd()) => {
-  return requireAt(cwd)("xclap") || require("xclap");
+  return requireAt(cwd)("@xarc/run") || xrun;
 };
 
 /**
@@ -94,25 +118,28 @@ export const getDevTaskRunner = (cwd: string = process.cwd()) => {
  * ```js
  * import { getDevTaskRunner, loadXarcDevTasks } from "@xarc/app-dev/lib/dev-tasks"
  *
- * const xclap = getDevTaskRunner();
+ * const xrun = getDevTaskRunner();
  *
- * xclap.load("user", {
- *   check: xclap.exec("echo my custom check task")
+ * xrun.load("user", {
+ *   check: xrun.exec("echo my custom check task")
  * });
  *
  * loadXarcDevTasks();
  * ```
  *
- * @param  xrun - `@xarc/run` (or xclap) task runner.  pass `null` and an
+ * @param  userXrun - `@xarc/run` task runner.  pass `null` and an
  *   internal version will be used.
  * @param  userOptions user provided options to configure features etc
  *
- * @returns The xclap task runner instance that was used.
+ * @returns The `@xarc/run` task runner instance that was used.
  */
-export function loadXarcDevTasks(xrun, userOptions: XarcOptions = {}) {
+export function loadXarcDevTasks(userXrun, userOptions: XarcOptions = {}) {
   let xarcOptions = getDevOptions(userOptions);
   xarcCwd = xarcOptions.cwd;
 
+  /**
+   *
+   */
   function setupPath() {
     const nmBin = Path.join("node_modules", ".bin");
     xsh.envPath.addToFront(Path.resolve(xarcCwd, nmBin));
@@ -150,7 +177,10 @@ export function loadXarcDevTasks(xrun, userOptions: XarcOptions = {}) {
         const run = msg => {
           child = true;
           console.log(`${msg} '${cmd}'`);
-          const ch = spawn(cmd, { shell: true, stdio: "inherit" });
+          const ch = spawn(cmd, {
+            shell: true,
+            stdio: "inherit"
+          });
           ch.on("close", () => {
             if (child === "restart") {
               run("Restarting");
@@ -186,6 +216,9 @@ export function loadXarcDevTasks(xrun, userOptions: XarcOptions = {}) {
 
   const eTmpDir = xarcOptions.eTmpDir;
 
+  /**
+   *
+   */
   function removeLogFiles() {
     try {
       Fs.unlinkSync(Path.resolve(xarcCwd, "archetype-exceptions.log"));
@@ -199,6 +232,9 @@ export function loadXarcDevTasks(xrun, userOptions: XarcOptions = {}) {
   /*
    * [generateServiceWorker clap task to generate service worker code that will precache specific
    * resources so they work offline.]
+   *
+   */
+  /**
    *
    */
   function generateServiceWorker() {
@@ -230,13 +266,16 @@ export function loadXarcDevTasks(xrun, userOptions: XarcOptions = {}) {
     }
   }
 
+  /**
+   *
+   */
   function inlineCriticalCSS() {
     const HOST = process.env.HOST || "localhost";
     const PORT = process.env.PORT || 3000;
     const PATH = process.env.CRITICAL_PATH || "/";
     const url = `http://${HOST}:${PORT}${PATH}`;
     const statsPath = Path.resolve(xarcCwd, "dist/server/stats.json");
-    const stats = JSON.parse(Fs.readFileSync(statsPath));
+    const stats = JSON.parse(Fs.readFileSync(statsPath, "utf-8"));
     const cssAsset = stats.assets.find(asset => asset.name.endsWith(".css"));
     const cssAssetPath = Path.resolve(xarcCwd, `dist/js/${cssAsset.name}`);
     const targetPath = Path.resolve(xarcCwd, "dist/js/critical.css");
@@ -271,6 +310,9 @@ export function loadXarcDevTasks(xrun, userOptions: XarcOptions = {}) {
     });
   }
 
+  /**
+   * @param argFlags
+   */
   function startAppServer(argFlags = []) {
     argFlags = argFlags || [];
     const x = argFlags.length > 0 ? ` with options: ${argFlags.join(" ")}` : "";
@@ -280,6 +322,9 @@ export function loadXarcDevTasks(xrun, userOptions: XarcOptions = {}) {
     return exec(`node`, argFlags, Path.join(xarcOptions.AppMode.lib.server, "index.js"));
   }
 
+  /**
+   *
+   */
   function generateBrowsersListRc() {
     const configRcFile = ".browserslistrc";
     const destRcFile = Path.resolve(xarcCwd, configRcFile);
@@ -306,7 +351,7 @@ ie >= 11
    *
    * For information on how to specify a task, see:
    *
-   * https://www.npmjs.com/package/xclap
+   * https://www.npmjs.com/package/`@xarc/run`
    *
    */
 
@@ -316,8 +361,10 @@ ie >= 11
   // - when invoking tasks in [], starting name with ? means optional (ie: won't fail if task not found)
 
   // eslint-disable-next-line complexity
-  function makeTasks(xclap2) {
-    assert(xclap2.concurrent, "xclap version must be 0.2.28+");
+  /**
+   * @param xrun2
+   */
+  function makeTasks(xrun2) {
     process.env.ENABLE_KARMA_COV = "false";
 
     const checkFrontendCov = (minimum = "5") => {
@@ -365,8 +412,9 @@ ie >= 11
       Fs.writeFileSync(
         newName,
         `"use strict";
-module.exports = {
-  extends: "@xarc/app-dev/config/babel/${rcFile}"
+const { babelPresetFile } = require("@xarc/app-dev");
+export =  {
+  presets: [babelPresetFile]
 };
 `
       );
@@ -489,7 +537,7 @@ module.exports = {
       "ss-prod-react": {
         desc: `Make optimized copy of react&react-dom for server side in dir ${xarcOptions.prodModulesDir}`,
         dep: [".ss-clean.prod-react", ".mk-prod-dir"],
-        task: xclap2.concurrent(".ss-prod-react", ".ss-prod-react-dom")
+        task: xrun2.concurrent(".ss-prod-react", ".ss-prod-react-dom")
       },
 
       "build-dist-dll": () => undefined,
@@ -498,17 +546,23 @@ module.exports = {
       "build-dist-min": {
         dep: [".production-env", () => setWebpackProfile("production")],
         desc: "build dist for production",
-        task: xclap2.concurrent(
+        task: xrun2.concurrent(
           babelEnvTargetsArr.map((name, index) =>
-            xclap2.exec(
+            xrun2.exec(
               [
                 `${webpackCmd()} --config`,
                 quote(getWebpackStartConfig("webpack.config.js")),
                 `--colors --display-error-details`
               ],
               {
-                xclap: { delayRunMs: index * 2000 },
-                execOptions: { env: { ENV_TARGET: name } }
+                xclap: {
+                  delayRunMs: index * 2000
+                },
+                execOptions: {
+                  env: {
+                    ENV_TARGET: name
+                  }
+                }
               }
             )
           )
@@ -565,16 +619,22 @@ module.exports = {
             // add `targets` field to `dist-X/isomorphic-assets.json`
             const isomorphicPath = Path.resolve(xarcCwd, dir, "isomorphic-assets.json");
             if (Fs.existsSync(isomorphicPath)) {
-              Fs.readFile(isomorphicPath, { encoding: "utf8" }, (err, data) => {
-                if (err) throw err;
-                const assetsJson = JSON.parse(data);
-                const { envTargets } = xarcOptions.babel;
-                assetsJson.targets = envTargets[dir.split("-")[1]];
-                // eslint-disable-next-line no-shadow
-                Fs.writeFile(isomorphicPath, JSON.stringify(assetsJson, null, 2), err => {
+              Fs.readFile(
+                isomorphicPath,
+                {
+                  encoding: "utf8"
+                },
+                (err, data) => {
                   if (err) throw err;
-                });
-              });
+                  const assetsJson = JSON.parse(data);
+                  const { envTargets } = xarcOptions.babel;
+                  assetsJson.targets = envTargets[dir.split("-")[1]];
+                  // eslint-disable-next-line no-shadow
+                  Fs.writeFile(isomorphicPath, JSON.stringify(assetsJson, null, 2), err => {
+                    if (err) throw err;
+                  });
+                }
+              );
             }
           });
           return;
@@ -651,7 +711,7 @@ module.exports = {
           ".mk.lib.server.dir",
           ".build.babelrc"
         ],
-        task: xclap2.exec(
+        task: xrun2.exec(
           [
             `babel ${AppMode.src.dir}`,
             `--out-dir=${AppMode.lib.dir}`,
@@ -659,7 +719,11 @@ module.exports = {
             `--source-maps=inline --copy-files`,
             `--verbose --ignore=${babelCliIgnore}`
           ],
-          { env: { XARC_BABEL_TARGET: "node" } }
+          {
+            env: {
+              XARC_BABEL_TARGET: "node"
+            }
+          }
         ),
         finally: [".build-lib:delete-babel-ignored-files"]
       },
@@ -746,11 +810,18 @@ module.exports = {
         - NODE_ENV is set to 'production' if it's not set.
         - options: [all options will be passed to node when starting your app server]`,
         task(context) {
-          xclap.updateEnv({ NODE_ENV: "production" }, { override: false });
+          userXrun.updateEnv(
+            {
+              NODE_ENV: "production"
+            },
+            {
+              override: false
+            }
+          );
 
-          const mockTask = xclap2.concurrent([
+          const mockTask = xrun2.concurrent([
             "dev-proxy --mock-cdn --no-dev",
-            xclap2.serial(
+            xrun2.serial(
               () => xaa.delay(500),
               () =>
                 watchExec(
@@ -762,14 +833,14 @@ module.exports = {
 
           if (!Fs.existsSync("dist")) {
             console.log("dist does not exist, running build task first.");
-            return xclap2.serial(
+            return xrun2.serial(
               "build",
               () => console.log("build completed, starting mock prod mode with proxy"),
               mockTask
             );
           }
 
-          return xclap2.serial(() => console.log("dist exist, skipping build task"), mockTask);
+          return xrun2.serial(() => console.log("dist exist, skipping build task"), mockTask);
         }
       },
 
@@ -912,8 +983,8 @@ You only need to run this if you are doing something not through the xarc tasks.
         }
       },
 
-      "test-server": xclap2.concurrent(["lint-server", "lint-server-test"], "test-server-cov"),
-      "test-watch-all": xclap2.concurrent("server-admin.test", "test-frontend-dev-watch"),
+      "test-server": xrun2.concurrent(["lint-server", "lint-server-test"], "test-server-cov"),
+      "test-watch-all": xrun2.concurrent("server-admin.test", "test-frontend-dev-watch"),
 
       "test-ci": ["test-frontend-ci"],
       "test-cov": [
@@ -962,20 +1033,6 @@ You only need to run this if you are doing something not through the xarc tasks.
       }
     };
 
-    if (xarcOptions.options.flow && optFlow) {
-      const flowPkgDir = Path.dirname(require.resolve("electrode-archetype-opt-flow"));
-      Object.assign(tasks, {
-        initflow: {
-          desc: "Initiate Flow for type checker",
-          task: mkCmd(`flow init`)
-        },
-        "flow-typed-install": {
-          desc: "Install flow 3rd-party interface library definitions from flow-typed repo.",
-          task: mkCmd(`flow-typed install --packageDir ${flowPkgDir}`)
-        }
-      });
-    }
-
     tasks = Object.assign(tasks, {
       ".clean.lib": () =>
         shell.rm("-rf", AppMode.lib.client, AppMode.lib.server, AppMode.savedFile),
@@ -1009,7 +1066,7 @@ You only need to run this if you are doing something not through the xarc tasks.
       });
     }
 
-    Object.assign(tasks, eslintTasks(xarcOptions, xclap2));
+    Object.assign(tasks, eslintTasks(xarcOptions, xrun2));
 
     if (xarcOptions.options.karma) {
       const noSingleRun = process.argv.indexOf("--no-single-run") >= 0 ? "--no-single-run" : "";
@@ -1184,14 +1241,14 @@ You only need to run this if you are doing something not through the xarc tasks.
   //   require.resolve(`${archetype.devArchetypeName}/package.json`);
   // }
 
-  xrun = xrun || getDevTaskRunner(xarcCwd);
+  userXrun = userXrun || getDevTaskRunner(xarcCwd);
   process.env._ELECTRODE_DEV_ = "1";
   if (!process.env.hasOwnProperty("FORCE_COLOR")) {
     process.env.FORCE_COLOR = "1"; // force color for chalk
   }
 
-  xrun.load("electrode", makeTasks(xrun), -10);
+  userXrun.load("electrode", makeTasks(userXrun), -10);
   generateBrowsersListRc();
 
-  return xrun;
+  return userXrun;
 }

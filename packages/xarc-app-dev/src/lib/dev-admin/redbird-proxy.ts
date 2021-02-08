@@ -1,18 +1,18 @@
-import { isValidPort } from "../utils";
-
-/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/ban-ts-ignore */
 /* eslint-disable max-statements, no-process-exit, global-require, no-console */
 
-const assert = require("assert");
-const Path = require("path");
-const _ = require("lodash");
-const redbird = require("@jchip/redbird");
-const ck = require("chalker");
-const optionalRequire = require("optional-require")(require);
-const { settings, searchSSLCerts, controlPaths } = require("../../config/dev-proxy");
-const cdnMock = require("./cdn-mock");
+import assert from "assert";
+import Path from "path";
+import _ from "lodash";
+import redbird from "@jchip/redbird";
+import ck from "chalker";
+import makeOptionalRequire from "optional-require";
+import { devProxy } from "../../config/dev-proxy";
+import { cdnMock } from "./cdn-mock";
+import { isValidPort, formUrl } from "../utils";
 
-const { formUrl } = require("../utils");
+const { settings, searchSSLCerts, controlPaths } = devProxy;
+
+const optionalRequire = makeOptionalRequire(require);
 
 let APP_RULES = [];
 
@@ -33,6 +33,7 @@ const getNotFoundPage = data => {
     $Env:HOST="${actualHost}"; clap dev
   </code>
 </p>`;
+
   return `<html>
   <body>
     <div style="text-align:center;">
@@ -151,13 +152,10 @@ const registerElectrodeDevRules = ({
       // repeat all rules for 127.0.0.1
       appForwards.map(([src, target, opts]) => {
         return [
-          // @ts-ignore
           formUrl({ protocol, port, ...src, host: src.host || "127.0.0.1" }),
           formUrl({
             ...target,
-            // @ts-ignore
             protocol: target.protocol || "http",
-            // @ts-ignore
             host: target.host || "127.0.0.1"
           }),
           opts
@@ -264,7 +262,7 @@ View status at <green>${proxyUrls.https || proxyUrls.http}${controlPaths.status}
   const enableSsl = ssl && isValidPort(options.httpsPort);
 
   if (enableSsl) {
-    const proxyCerts = searchSSLCerts();
+    const proxyCerts: any = searchSSLCerts();
     assert(proxyCerts.key && proxyCerts.cert, "Dev Proxy can't find SSL key and certs");
     const httpPort = isValidPort(options.httpPort) ? options.httpPort : -1;
     Object.assign(proxyOptions, {
@@ -320,7 +318,6 @@ View status at <green>${proxyUrls.https || proxyUrls.http}${controlPaths.status}
 
   // if primary protocol is https, then register regular http rules at httpPort
   if (enableSsl && isValidPort(options.httpPort)) {
-    // @ts-ignore
     registerElectrodeDevRules({
       proxy,
       protocol: "http",
@@ -329,7 +326,7 @@ View status at <green>${proxyUrls.https || proxyUrls.http}${controlPaths.status}
       appPort: options.appPort,
       webpackDevPort: options.webpackDevPort,
       restart
-    });
+    } as any);
   }
 
   if (userDevProxy && userDevProxy.setupRules) {
@@ -338,6 +335,6 @@ View status at <green>${proxyUrls.https || proxyUrls.http}${controlPaths.status}
   }
 };
 
-module.exports = startProxy;
+export = startProxy;
 
 startProxy();

@@ -23,7 +23,7 @@ export const config = {
      */
     "@xarc/app-dev": {
       priority: -1,
-      enable: process.env.WEBPACK_DEV === "true"
+      enable: Boolean(process.env.WEBPACK_DEV)
     }
   },
   deferStart: true

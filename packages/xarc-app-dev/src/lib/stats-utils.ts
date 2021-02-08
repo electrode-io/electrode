@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-export {};
+import _ from "lodash";
+import { ModuleProcessor } from "./module-processor";
+import AnsiConvert from "ansi-to-html";
 
-const _ = require("lodash");
-const ModuleProcessor = require("./module-processor");
-const AnsiConvert = require("ansi-to-html");
-
-function escapeHtml(html) {
+/**
+ * @param html
+ */
+export function escapeHtml(html) {
   const htmlMap = {
     "<": "&lt;",
     ">": "&gt;"
@@ -13,12 +14,18 @@ function escapeHtml(html) {
   return html.replace(/([<>])/g, (m, a) => htmlMap[a]);
 }
 
-function getInfo(stats) {
+/**
+ * @param stats
+ */
+export function getInfo(stats) {
   const info = _.pick(stats, ["hash", "version", "time", "publicPath"]);
   return info;
 }
 
-function getAssets(stats) {
+/**
+ * @param stats
+ */
+export function getAssets(stats) {
   if (stats.assets && stats.assets.length > 0) {
     return stats.assets.map(asset => {
       return _.pick(asset, ["name", "size", "chunks", "emitted", "chunkNames"]);
@@ -28,7 +35,10 @@ function getAssets(stats) {
   return [];
 }
 
-function getModulesByPkg(stats) {
+/**
+ * @param stats
+ */
+export function getModulesByPkg(stats) {
   const processor = new ModuleProcessor(stats);
   return {
     modulesByPkg: processor.makeModulesByPackage(),
@@ -36,7 +46,10 @@ function getModulesByPkg(stats) {
   };
 }
 
-function logsToHtml(logs) {
+/**
+ * @param logs
+ */
+export function logsToHtml(logs) {
   if (logs) {
     const convert = new AnsiConvert();
     return logs.map(x => convert.toHtml(escapeHtml(x)));
@@ -44,11 +57,17 @@ function logsToHtml(logs) {
   return [];
 }
 
-function getErrorsHtml(stats) {
+/**
+ * @param stats
+ */
+export function getErrorsHtml(stats) {
   return logsToHtml(stats.errors);
 }
 
-function getWarningsHtml(stats) {
+/**
+ * @param stats
+ */
+export function getWarningsHtml(stats) {
   return logsToHtml(stats.warnings);
 }
 
@@ -56,7 +75,7 @@ function getWarningsHtml(stats) {
 // A quick HTML output adapted from original Stat.jsonToString
 //
 /* eslint-disable */
-function jsonToHtml(obj, useColors, anchors) {
+export function jsonToHtml(obj, useColors, anchors) {
   anchors = anchors || {};
   const buf = [];
 
@@ -463,13 +482,3 @@ function jsonToHtml(obj, useColors, anchors) {
   }
   return buf.join("");
 }
-
-module.exports = {
-  getInfo,
-  getAssets,
-  getModulesByPkg,
-  getErrorsHtml,
-  getWarningsHtml,
-  escapeHtml,
-  jsonToHtml
-};

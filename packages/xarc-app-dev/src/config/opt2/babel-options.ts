@@ -14,7 +14,6 @@ export type BabelOptions = {
    * - if not set, then we check env `ENABLE_BABEL_TYPESCRIPT`
    */
   enableTypeScript?: boolean;
-  // DEPRECATE: enableDynamicImport?: boolean;
 
   /**
    * Enable support for stripping flow.js types using `@babel/plugin-transform-flow-strip-types`

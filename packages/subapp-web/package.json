@@ -1,12 +1,13 @@
 {
   "name": "subapp-web",
-  "version": "1.0.46",
+  "version": "1.0.47",
   "description": "Electrode subapp web support",
   "module": "dist/dev/index.js",
   "main": "lib/index.js",
   "scripts": {
     "test": "clap test",
     "coverage": "clap coverage",
+    "check": "clap check",
     "build": "clap compile",
     "prepublishOnly": "clap compile"
   },
@@ -15,6 +16,10 @@
     "react",
     "subapp"
   ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.com/",
+    "access": "public"
+  },
   "author": "Electrode (http://www.electrode.io/)",
   "contributors": [
     "Joel Chen <xchen@walmartlabs.com>"
@@ -36,7 +41,7 @@
     "xaa": "^1.6.0"
   },
   "peerDependencies": {
-    "@xarc/app": "^8.1.20"
+    "@xarc/app": "^9.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -45,7 +50,7 @@
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.7.7",
-    "@xarc/app": "^8.1.20",
+    "@xarc/app": "^9.0.0",
     "babel-preset-minify": "^0.5.1",
     "chai-as-promised": "^7.1.1",
     "electrode-archetype-njs-module-dev": "^3.0.3",

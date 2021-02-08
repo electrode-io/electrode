@@ -2,9 +2,8 @@
   "compilerOptions": {
     "outDir": "dist",
     "lib": ["es2018"],
-    "allowJs": true,
     "module": "CommonJS",
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "target": "ES2018",
     "preserveConstEnums": true,
     "sourceMap": true,
@@ -14,6 +13,7 @@
     "noImplicitReturns": true,
     "alwaysStrict": true,
     "strictFunctionTypes": true,
+    "allowJs": true,
     "importHelpers": true
   },
   "include": ["src"],

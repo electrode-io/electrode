@@ -7,8 +7,7 @@ process.on("SIGINT", () => {
 });
 
 const electrodeConfippet = require("electrode-confippet");
-const support = require("@xarc/app/support");
-const xaa = require("xaa");
+const { loadRuntimeSupport } = require("@xarc/app");
 
 //
 const electrodeServer = require("@xarc/fastify-server");
@@ -27,7 +26,7 @@ function setupElectrodeServerEvents(emitter) {
   emitter.on("complete", (data, next) => next());
 }
 
-const startServer = config => {
+const startServer = (config) => {
   if (!config.listener) {
     config.listener = setupElectrodeServerEvents;
   }
@@ -39,7 +38,7 @@ const startServer = config => {
 //
 
 module.exports = async () => {
-  await support.load();
+  await loadRuntimeSupport();
   const config = electrodeConfippet.config;
   const server = await startServer(config);
   return server;

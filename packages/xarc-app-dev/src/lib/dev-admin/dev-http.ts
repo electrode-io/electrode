@@ -5,9 +5,10 @@ import { createReadStream } from "fs";
 import { Readable } from "stream";
 import { getType } from "mime";
 import { createServer, Server } from "http";
-import * as Url from "url";
+import Url from "url";
 import { resolve as pathResolve } from "path";
-const FakeRes = require("../fake-res");
+import { FakeRes } from "../fake-res";
+import { Middleware } from "./middleware";
 
 export interface DevHttpServerOptions {
   port: number;
@@ -25,9 +26,13 @@ export interface DevHttpServer {
   addListener: (event: HttpServerEvent, hander: any) => void;
 }
 
+/**
+ * @param root0
+ * @param root0.port
+ * @param root0.host
+ * @param root0.protocol
+ */
 function getMiddleware({ port, host, protocol = "http" }: DevHttpServerOptions) {
-  const Middleware = require("./middleware");
-
   const middleware = new Middleware({
     baseUrl: () => {
       return Url.format({
@@ -103,7 +108,7 @@ export const setupHttpDevServer = function({
       server.listen(port, host);
     },
     stop: () => {
-      server.close(function() {
+      server.close(() => {
         /* eslint-disable no-console */
         console.log("Server closed!");
       });

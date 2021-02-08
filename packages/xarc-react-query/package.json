@@ -1,6 +1,6 @@
 {
   "name": "@xarc/react-query",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "xarc React.js application react-query support",
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
@@ -9,13 +9,14 @@
     "./dist-node-esm/node/index.js": "./dist-browser~es2x~esm~/browser/index.js"
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
+    "registry": "https://registry.npmjs.com/",
     "access": "public"
   },
   "scripts": {
     "build": "xrun user/build",
     "test": "xrun xarc/test-only",
-    "coverage": "xrun xarc/check",
+    "coverage": "xrun xarc/test-cov",
+    "check": "xrun xarc/check",
     "prepublishOnly": "xrun [[build, docs], xarc/check]",
     "docs": "xrun xarc/docs"
   },
@@ -27,7 +28,7 @@
     "react-dom": "*"
   },
   "dependencies": {
-    "@xarc/subapp": "^0.1.4",
+    "@xarc/subapp": "^0.1.5",
     "react-query": "^3.5.16",
     "tslib": "^2.1.0"
   },

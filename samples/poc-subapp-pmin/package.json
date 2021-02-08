@@ -24,7 +24,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">= 10",
+    "node": ">= 12",
     "npm": ">= 6"
   },
   "scripts": {
@@ -33,6 +33,7 @@
     "build": "clap build"
   },
   "dependencies": {
+    "@babel/runtime": "^7.12.5",
     "@xarc/app": "^8.1.7",
     "@xarc/fastify-server": "^2.0.0",
     "electrode-confippet": "^1.5.0",
@@ -46,9 +47,10 @@
   },
   "devDependencies": {
     "@xarc/app-dev": "^8.1.6",
-    "tachyons-sass": "^4.9.5",
-    "electrode-archetype-opt-sass": "../../packages/electrode-archetype-opt-sass",
-    "electrode-archetype-opt-stylus": "../../packages/electrode-archetype-opt-stylus"
+    "@xarc/opt-postcss": "^1.0.0",
+    "@xarc/opt-sass": "^1.0.0",
+    "@xarc/opt-stylus": "^1.0.0",
+    "tachyons-sass": "^4.9.5"
   },
   "fyn": {
     "dependencies": {
@@ -57,8 +59,10 @@
       "subapp-server": "../../packages/subapp-server"
     },
     "devDependencies": {
-      "@xarc/app-dev": "../../packages/xarc-app-dev"
+      "@xarc/app-dev": "../../packages/xarc-app-dev",
+      "@xarc/opt-postcss": "../../packages/xarc-opt-postcss",
+      "@xarc/opt-sass": "../../packages/xarc-opt-sass",
+      "@xarc/opt-stylus": "../../packages/xarc-opt-stylus"
     }
-  },
-  "optionalDependencies": {}
+  }
 }

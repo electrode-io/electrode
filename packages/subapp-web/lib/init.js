@@ -70,6 +70,8 @@ module.exports = function setup(setupContext) {
     });`;
   }
 
+  const namespaceScriptJs = namespace ? `window.__default__namespace="${namespace}";` : "";
+
   const scriptId = namespace ? namespace : "bundle";
 
   const webSubAppJs = `<script id="${scriptId}Assets" type="application/json">
@@ -77,6 +79,7 @@ ${JSON.stringify(bundleAssets)}
 </script>
 <script>/*LJ*/${loadJs}/*LJ*/
 ${webpackJsonpJS}
+${namespaceScriptJs}
 ${clientJs}
 ${cdnJs}
 ${inlineRuntimeJS}

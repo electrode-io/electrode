@@ -1,12 +1,17 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-export {};
+import makeOptionalRequire from "optional-require";
 
-const optionalRequire = require("optional-require")(require);
-const Path = require("path");
-const _ = require("lodash");
-const assert = require("assert");
+import Path from "path";
+import _ from "lodash";
+import assert from "assert";
 
-module.exports = function loadUserConfig(filename, config, settings) {
+const optionalRequire = makeOptionalRequire(require);
+
+/**
+ * @param filename
+ * @param config
+ * @param settings
+ */
+export function loadUserConfig(filename, config, settings) {
   const filePath = Path.resolve("archetype/config/karma", filename);
   const userConfig = optionalRequire(filePath);
 
@@ -16,4 +21,4 @@ module.exports = function loadUserConfig(filename, config, settings) {
   } else {
     config.set(settings);
   }
-};
+}

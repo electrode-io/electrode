@@ -14,8 +14,6 @@ import {
   _xarcV2RunTimeInfo
 } from "../subapp/index";
 
-const MAX_CALL_DEPTH = 15;
-
 //
 // all console.log and console.debug in this file will be optimized out for production
 // Do not use xarcV2.debug in this file.
@@ -43,6 +41,8 @@ export function xarcV2Client(
   let debugLog = () => {
     //
   };
+
+  const MAX_CALL_DEPTH = 15;
 
   const version = 2000000; // ###.###.### major.minor.patch
 
@@ -164,7 +164,7 @@ export function xarcV2Client(
           const doc: Document = w.document;
           for (const name in onLoadStart) {
             onLoadStart[name].forEach((startOpts: SubAppCSRData) => {
-              const element = doc.getElementById(startOpts.elementId || `subapp2-${name}`);
+              const element = doc.getElementById(startOpts.elementId);
               console.debug(name, "starting subapp into", element);
               subapps.get(name)._start({ csrData: Object.assign({}, startOpts, { element }) });
             });

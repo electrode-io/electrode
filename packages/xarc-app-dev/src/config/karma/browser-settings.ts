@@ -1,14 +1,22 @@
-/* eslint-disable @typescript-eslint/no-var-requires, no-process-exit */
+/* eslint-disable no-process-exit */
 
 import { loadXarcOptions } from "../../lib/utils";
 
-module.exports = function(settings) {
+import { logger } from "../../lib/logger";
+
+/**
+ * Karma settings to update for the specified browser
+ *
+ * @param settings - incoming settings to update
+ * @returns updated settings
+ */
+export = function updateKarmaBrowserSettings(settings: any): any {
   const xarcOptions = loadXarcOptions();
-  const logger = require("@xarc/app/lib/logger");
+
   const browser = xarcOptions.karma.browser.toLowerCase();
+
   if (browser === "chrome") {
     settings.browsers = ["ChromeHeadless"];
-
     logger.info("Using Chrome Headless to run Karma test");
   } else if (browser === "phantomjs") {
     settings.frameworks.push("phantomjs-shim");

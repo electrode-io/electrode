@@ -1,23 +1,24 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-export {};
-
 /* eslint-disable no-console, no-magic-numbers, prefer-template */
 
 /*
  * search all files under dist and generate a config/assets.json file for mocking CDN
  */
 
-const Path = require("path");
-const filterScanDir = require("filter-scan-dir");
-const Url = require("url");
-const Fs = require("fs");
-const chokidar = require("chokidar");
-const mime = require("mime");
-const mkdirp = require("mkdirp");
+import Path from "path";
+import filterScanDir from "filter-scan-dir";
+import Url from "url";
+import Fs from "fs";
+import chokidar from "chokidar";
+import mime from "mime";
+import mkdirp from "mkdirp";
 
 const LOADED_ASSETS = {};
 
-const cdnMock = {
+export class CDNMock {
+  constructor() {
+    //
+  }
+
   generateMockAssets(baseUrl) {
     const watcher = chokidar.watch("dist");
     let timer;
@@ -29,12 +30,12 @@ const cdnMock = {
       timer = setTimeout(() => {
         timer = undefined;
         console.log("Refreshing mock CDN mapping - please restart app");
-        cdnMock._generateMockAssets(baseUrl);
+        this._generateMockAssets(baseUrl);
       }, 250).unref();
     };
     watcher.on("change", updateCdnMock);
-    cdnMock._generateMockAssets(baseUrl);
-  },
+    this._generateMockAssets(baseUrl);
+  }
 
   _generateMockAssets(baseUrl) {
     const files = filterScanDir.sync({ dir: "dist" });
@@ -50,7 +51,7 @@ const cdnMock = {
 
     mkdirp.sync("config");
     Fs.writeFileSync("config/assets.json", `${JSON.stringify(mockAssets, null, 2)}\n`);
-  },
+  }
 
   respondAsset(req, res) {
     const filePath = req.url.replace(/\/__mock-cdn\/[0-9]+/, "dist");
@@ -85,6 +86,6 @@ ${err.stack}
       res.end();
     }
   }
-};
+}
 
-module.exports = cdnMock;
+export const cdnMock = new CDNMock();

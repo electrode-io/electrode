@@ -15,12 +15,12 @@
     "update-changelog": "clap update-changelog"
   },
   "devDependencies": {
+    "@xarc/run": "^1.0.4",
     "bluebird": "^3.5.0",
-    "fynpo": "^0.1.32",
+    "fynpo": "^0.1.33",
     "lerna": "^3.22.1",
     "lodash": "^4.17.10",
     "semver": "^5.3.0",
-    "xclap": "^0.2.18",
     "xsh": "^0.4.0"
   },
   "bugs": {
@@ -31,7 +31,7 @@
     "url": "https://github.com/electrode-io/electrode.git"
   },
   "engines": {
-    "node": ">= 10",
+    "node": ">= 12",
     "npm": ">= 6"
   },
   "private": true,

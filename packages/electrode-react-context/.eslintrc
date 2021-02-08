@@ -1,3 +1,0 @@
----
-extends:
-  - "./node_modules/electrode-archetype-njs-module-dev/config/eslint/.eslintrc-node"

@@ -1,12 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-export {};
-
-/**
- * Take webpack Stat JSON output and group modules by npm packages,
- * noting duplicates if there are any.
- */
-
-const Path = require("path");
+import Path from "path";
 import { loadXarcOptions } from "./utils";
 
 const tildaSep = "/~/";
@@ -18,7 +10,13 @@ const atModRegex = new RegExp(`([^/]+/[^/]+)/(.+)`);
 // match packageName/file
 const modRegex = new RegExp(`([^/]+)/(.+)`);
 
-class ModuleProcessor {
+/**
+ * Process modules from webpack stats for reporter display.
+ *
+ * Take webpack Stat JSON output and group modules by npm packages,
+ * noting duplicates if there are any.
+ */
+export class ModuleProcessor {
   statJson: any;
   modulesByPackage: any;
   totalSize: any;
@@ -104,12 +102,13 @@ class ModuleProcessor {
         try {
           if (split.name !== ".") {
             const xarcOptions = loadXarcOptions();
+            // eslint-disable-next-line
             return require(Path.resolve(
               xarcOptions.cwd,
               parents.join(nmSep),
               split.name,
               "package.json"
-            )).version; // eslint-disable-line
+            )).version;
           } else {
             return "-";
           }
@@ -142,5 +141,3 @@ class ModuleProcessor {
     return this.modulesByPackage;
   }
 }
-
-module.exports = ModuleProcessor;

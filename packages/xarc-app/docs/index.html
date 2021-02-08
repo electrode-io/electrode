@@ -7,6 +7,7 @@
 	<meta name="description" content="Documentation for @xarc/app">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
 </head>
 <body>
 <header>
@@ -49,11 +50,6 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<ul class="tsd-breadcrumb">
-				<li>
-					<a href="globals.html">Globals</a>
-				</li>
-			</ul>
 			<h1>@xarc/app</h1>
 		</div>
 	</div>
@@ -80,21 +76,25 @@
 				<a href="#install-the-two-complementary-modules" id="install-the-two-complementary-modules" style="color: inherit; text-decoration: none;">
 					<h6>Install the two complementary modules</h6>
 				</a>
-				<pre><code class="language-bash">$ npm install --save @xarc/app
-$ npm install --save-dev @xarc/app-dev</code></pre>
+				<pre><code class="language-bash"><span style="color: #000000">$ npm install --save @xarc/app</span>
+<span style="color: #000000">$ npm install --save-dev @xarc/app-dev</span>
+</code></pre>
 				<a href="#add-a-xclapjs" id="add-a-xclapjs" style="color: inherit; text-decoration: none;">
 					<h6>Add a <code>xclap.js</code></h6>
 				</a>
 				<p>The <code>xclap.js</code> should contain the following and be located in the root of your project</p>
-				<pre><code class="language-js"><span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@xarc/app&quot;</span>)();</code></pre>
+				<pre><code class="language-js"><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;@xarc/app&quot;</span><span style="color: #000000">)();</span>
+</code></pre>
 				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
 					<h2>Usage</h2>
 				</a>
 				<p>The primary interface to the archetype is a list of tasks you can invoke with clap to do your bidding.</p>
 				<p>To see the tasks, simply run:</p>
-				<pre><code class="language-bash">$ clap</code></pre>
+				<pre><code class="language-bash"><span style="color: #000000">$ clap</span>
+</code></pre>
 				<p>To invoke a task, for example, the <code>dev</code> task, run:</p>
-				<pre><code class="language-bash">$ clap dev</code></pre>
+				<pre><code class="language-bash"><span style="color: #000000">$ clap dev</span>
+</code></pre>
 				<a href="#directory-structure" id="directory-structure" style="color: inherit; text-decoration: none;">
 					<h2>Directory Structure</h2>
 				</a>
@@ -109,18 +109,19 @@ $ npm install --save-dev @xarc/app-dev</code></pre>
 				<p>For the things that should be initialized at your Node server&#39;s startup, they are all combined into a single API in the archetype as <code>support.load</code>.</p>
 				<p>Here is how you can use it:</p>
 				<p>In your <code>server/index.js</code>:</p>
-				<pre><code class="language-js"><span class="hljs-keyword">const</span> support = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@xarc/app/support&quot;</span>);
-<span class="hljs-keyword">const</span> electrodeServer = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;electrode-server&quot;</span>);
-<span class="hljs-keyword">const</span> electrodeConfippet = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;electrode-confippet&quot;</span>);
+				<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">support</span><span style="color: #000000"> = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;@xarc/app/support&quot;</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">electrodeServer</span><span style="color: #000000"> = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;electrode-server&quot;</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">electrodeConfippet</span><span style="color: #000000"> = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;electrode-confippet&quot;</span><span style="color: #000000">);</span>
 
-support
-  .load()
-  .then(<span class="hljs-function">() =&gt;</span> {
-    <span class="hljs-keyword">return</span> electrodeServer(electrodeConfippet.config);
-  })
-  .catch(<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> {
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Server start failed&quot;</span>, e); <span class="hljs-comment">// eslint-disable-line no-console</span>
-  });</code></pre>
+<span style="color: #001080">support</span>
+<span style="color: #000000">  .</span><span style="color: #795E26">load</span><span style="color: #000000">()</span>
+<span style="color: #000000">  .</span><span style="color: #795E26">then</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #795E26">electrodeServer</span><span style="color: #000000">(</span><span style="color: #001080">electrodeConfippet</span><span style="color: #000000">.</span><span style="color: #001080">config</span><span style="color: #000000">);</span>
+<span style="color: #000000">  })</span>
+<span style="color: #000000">  .</span><span style="color: #795E26">catch</span><span style="color: #000000">(</span><span style="color: #001080">e</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Server start failed&quot;</span><span style="color: #000000">, </span><span style="color: #001080">e</span><span style="color: #000000">); </span><span style="color: #008000">// eslint-disable-line no-console</span>
+<span style="color: #000000">  });</span>
+</code></pre>
 				<p>If you are using this API, then things like isomorphic support and React module optimization are handled for you.</p>
 				<p>It accepts a single <code>options</code> object, with the following supported fields:</p>
 				<ul>
@@ -150,7 +151,8 @@ support
 				<p>If you need to refer to your client or server code from outside, you can use <a href="#app_src_dir"><code>APP_SRC_DIR</code> environment variable</a> to automatically refer to the directory where code is being executed from.</p>
 				<p>For UI code under <code>src/client</code> or <code>test/client</code>, webpack config sets <code>src</code> as a root so you can refer to code in <code>src/client</code> with <code>&quot;client/foo&quot;</code>.</p>
 				<p>For example:</p>
-				<pre><code class="language-js"><span class="hljs-keyword">import</span> Hello <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;client/components/hello&quot;</span>;</code></pre>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">Hello</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;client/components/hello&quot;</span><span style="color: #000000">;</span>
+</code></pre>
 				<p>For code under <code>src/server</code>, you can refer to client with <code>&quot;../client/foo&quot;</code>.</p>
 				<a href="#development" id="development" style="color: inherit; text-decoration: none;">
 					<h5>development</h5>
@@ -170,23 +172,24 @@ support
 				<p>An env variable <code>APP_SRC_DIR</code> is always set by the <a href="#run-time-support-api">Run time support API</a> to indicate where your code is running from. If your app config needs to refer to some code there, you can use this.</p>
 				<p><strong>NOTE:</strong> The dir path set in <code>$APP_SRC_DIR</code> will include the trailing <code>/</code> automatically. ie: <code>src/</code> or <code>lib/</code></p>
 				<p>For example, to pass your server side React app entry to react-webapp:</p>
-				<pre><code class="language-js">{
-  <span class="hljs-string">&quot;plugins&quot;</span>: {
-    <span class="hljs-string">&quot;electrode-react-webapp&quot;</span>: {
-      <span class="hljs-string">&quot;options&quot;</span>: {
-        <span class="hljs-string">&quot;pageTitle&quot;</span>: <span class="hljs-string">&quot;Getting Started&quot;</span>,
-        <span class="hljs-string">&quot;paths&quot;</span>: {
-          <span class="hljs-string">&quot;/{args*}&quot;</span>: {
-            <span class="hljs-string">&quot;view&quot;</span>: <span class="hljs-string">&quot;index&quot;</span>,
-            <span class="hljs-string">&quot;content&quot;</span>: {
-              <span class="hljs-string">&quot;module&quot;</span>: <span class="hljs-string">&quot;./{{env.APP_SRC_DIR}}/server/app&quot;</span>   <span class="hljs-comment">// Note the use of APP_SRC_DIR here</span>
-            }
-          }
-        }
-      }
-    }
-  }
-}</code></pre>
+				<pre><code class="language-js"><span style="color: #000000">{</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;plugins&quot;</span><span style="color: #000000">: {</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&quot;electrode-react-webapp&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #A31515">&quot;options&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;pageTitle&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;Getting Started&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;paths&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">          </span><span style="color: #A31515">&quot;/{args*}&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">            </span><span style="color: #A31515">&quot;view&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;index&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            </span><span style="color: #A31515">&quot;content&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">              </span><span style="color: #A31515">&quot;module&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;./{{env.APP_SRC_DIR}}/server/app&quot;</span><span style="color: #000000">   </span><span style="color: #008000">// Note the use of APP_SRC_DIR here</span>
+<span style="color: #000000">            }</span>
+<span style="color: #000000">          }</span>
+<span style="color: #000000">        }</span>
+<span style="color: #000000">      }</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">  }</span>
+<span style="color: #000000">}</span>
+</code></pre>
 				<a href="#npm-prune-for-production" id="npm-prune-for-production" style="color: inherit; text-decoration: none;">
 					<h4>NPM Prune for production</h4>
 				</a>
@@ -201,11 +204,12 @@ support
 					you can define multiple entry points for your application, so the Webpack will create bundles for each app
 				entry point. To do that, place <code>entry.config.js</code> module into your app&#39;s <code>client</code> directory:</p>
 				<p>Here is an <strong>example</strong> of <code>entry.config.js</code>:</p>
-				<pre><code class="language-js"><span class="hljs-built_in">module</span>.exports = {
-  <span class="hljs-attr">web</span>: <span class="hljs-string">&quot;./app-web.js&quot;</span>,
-  <span class="hljs-attr">ios</span>: <span class="hljs-string">&quot;./app-ios.js&quot;</span>,
-  <span class="hljs-attr">android</span>: <span class="hljs-string">&quot;./app-android.js&quot;</span>
-};</code></pre>
+				<pre><code class="language-js"><span style="color: #267F99">module</span><span style="color: #000000">.</span><span style="color: #267F99">exports</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">  </span><span style="color: #001080">web:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;./app-web.js&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">ios:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;./app-ios.js&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">android:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;./app-android.js&quot;</span>
+<span style="color: #000000">};</span>
+</code></pre>
 				<a href="#nodejs-server-required-runtime-support" id="nodejs-server-required-runtime-support" style="color: inherit; text-decoration: none;">
 					<h2>NodeJS Server Required Runtime Support</h2>
 				</a>
@@ -218,36 +222,40 @@ support
 					on the fly using <code>babel-register</code>. For performance reasons, we recommend
 					whitelisting the <code>react</code> module to be transpiled as well, so that the
 				<code>transform-node-env-inline</code> plugin gets applied to the React codebase:</p>
-				<pre><code class="language-js"><span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;babel-core/register&quot;</span>)({
-  <span class="hljs-attr">ignore</span>: <span class="hljs-regexp">/node_modules\/(?!react\/)/</span>
-});</code></pre>
+				<pre><code class="language-js"><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;babel-core/register&quot;</span><span style="color: #000000">)({</span>
+<span style="color: #000000">  </span><span style="color: #001080">ignore:</span><span style="color: #811F3F"> /node_modules</span><span style="color: #EE0000">\/</span><span style="color: #D16969">(?!</span><span style="color: #811F3F">react</span><span style="color: #EE0000">\/</span><span style="color: #D16969">)</span><span style="color: #811F3F">/</span>
+<span style="color: #000000">});</span>
+</code></pre>
 				<a href="#cssmodulehook-for-isomorphic-css-modules" id="cssmodulehook-for-isomorphic-css-modules" style="color: inherit; text-decoration: none;">
 					<h3><code>cssModuleHook</code> for isomorphic CSS modules</h3>
 				</a>
 				<p>If you want to enable isomorphic css modules, the server needs to know how to import css files
 					and generate unique class names.
 				The archetype can handle this for you using the <code>supports</code> module. In your server entry point:</p>
-				<pre><code class="language-js"><span class="hljs-keyword">var</span> supports = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@xarc/app/supports&quot;</span>);
+				<pre><code class="language-js"><span style="color: #0000FF">var</span><span style="color: #000000"> </span><span style="color: #001080">supports</span><span style="color: #000000"> = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;@xarc/app/supports&quot;</span><span style="color: #000000">);</span>
 
-supports.cssModuleHook();</code></pre>
+<span style="color: #001080">supports</span><span style="color: #000000">.</span><span style="color: #795E26">cssModuleHook</span><span style="color: #000000">();</span>
+</code></pre>
 				<a href="#extending-webpack-configuration" id="extending-webpack-configuration" style="color: inherit; text-decoration: none;">
 					<h2>Extending Webpack Configuration</h2>
 				</a>
 				<p>The webpack config for your app is being generated by the archetype. While composing the webpack config, the archetype looks for the <code>archetype/config</code> folder at the project root of your app.</p>
 				<p>In order to override or extend the webpack configuration you should create a file under <code>archetype/config/webpack</code>.</p>
 				<p>Your directory structure should look like this:</p>
-				<pre><code class="language-bash">archetype
-└── config
-    └── webpack
-        └── webpack.config.js</code></pre>
+				<pre><code class="language-bash"><span style="color: #000000">archetype</span>
+<span style="color: #000000">└── config</span>
+<span style="color: #000000">    └── webpack</span>
+<span style="color: #000000">        └── webpack.config.js</span>
+</code></pre>
 				<p>Where <code>webpack.config.js</code> is your extended or overriding webpack config, for example:</p>
-				<pre><code class="language-js"><span class="hljs-keyword">const</span> BellOnBundlerErrorPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;bell-on-bundler-error-plugin&quot;</span>);
+				<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">BellOnBundlerErrorPlugin</span><span style="color: #000000"> = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;bell-on-bundler-error-plugin&quot;</span><span style="color: #000000">);</span>
 
-<span class="hljs-keyword">const</span> config = {
-  <span class="hljs-attr">plugins</span>: [<span class="hljs-keyword">new</span> BellOnBundlerErrorPlugin()]
-};
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">config</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">  </span><span style="color: #001080">plugins:</span><span style="color: #000000"> [</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">BellOnBundlerErrorPlugin</span><span style="color: #000000">()]</span>
+<span style="color: #000000">};</span>
 
-<span class="hljs-built_in">module</span>.exports = config;</code></pre>
+<span style="color: #267F99">module</span><span style="color: #000000">.</span><span style="color: #267F99">exports</span><span style="color: #000000"> = </span><span style="color: #001080">config</span><span style="color: #000000">;</span>
+</code></pre>
 				<p>Built with :heart: by <a href="https://github.com/orgs/electrode-io/people">Team Electrode</a> @WalmartLabs.</p>
 				<hr>
 			</div>
@@ -255,11 +263,26 @@ supports.cssModuleHook();</code></pre>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_index_.html">&quot;index&quot;</a>
+						<a href="modules/app_mode.html">app-<wbr>mode</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/constants.html">constants</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/fail_load_dev.html">fail-<wbr>load-<wbr>dev</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/index.html">index</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/logger.html">logger</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/support.html">support</a>
 					</li>
 				</ul>
 			</nav>
@@ -275,6 +298,7 @@ supports.cssModuleHook();</code></pre>
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
 			</ul>

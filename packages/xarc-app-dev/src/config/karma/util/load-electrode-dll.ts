@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-export {};
-
 const dllUtil = require("@xarc/webpack/lib/util/dll-util");
 
-module.exports = () => {
+export = () => {
   const tag = process.env.NODE_ENV === "production" ? "" : ".dev";
 
   const dllPaths = [];

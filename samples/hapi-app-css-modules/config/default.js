@@ -28,7 +28,7 @@ module.exports = {
       }
     },
     "webpack-dev": {
-      module: "@xarc/app-dev/lib/webpack-dev-hapi",
+      module: "@xarc/app-dev",
       enable: process.env.WEBPACK_DEV === "true",
       options: {
         // webpack dev middleware options

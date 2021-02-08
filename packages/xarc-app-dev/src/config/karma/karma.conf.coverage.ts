@@ -1,24 +1,29 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-export {};
-
 process.env.KARMA_RUN_TYPE = "coverage";
+
+import Path from "path";
 
 /*
  * Karma Configuration: "coverage" version.
  *
  * This configuration is the same as basic one-shot version, just with coverage.
  */
-const karmaConf = require("./karma.conf");
-const loadUserConfig = require("./util/load-user-config");
-const Path = require("path");
-const customCheck = require("@xarc/webpack/lib/util/custom-check");
+import karmaConf from "./karma.conf";
+import { loadUserConfig } from "./util/load-user-config";
+import { loadXarcOptions } from "../../lib/utils";
+const customCheck = require("@xarc/webpack/lib/util/custom-check"); // eslint-disable-line
+// eslint-disable-next-line
 const webpackCovCfg = require(customCheck.getWebpackStartConfig(
   "../webpack/webpack.config.coverage",
   false
 ));
-import { loadXarcOptions } from "../../lib/utils";
 
-module.exports = function(config) {
+/**
+ * Get Karma config for coverage
+ *
+ * @param config base config
+ * @returns karma config
+ */
+export = function(config): any {
   const xarcOptions = loadXarcOptions();
   const xarcCwd = xarcOptions.cwd;
 

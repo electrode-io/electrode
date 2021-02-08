@@ -80,6 +80,7 @@ export type WebpackOptions = {
    * Enable webpack's NodeSourcePlugin to simulate node.js libs in browser
    * - **Default: `false`**
    * - If not set, then check env `ENABLE_NODESOURCE_PLUGIN`
+   *
    * @remarks
    *  This will bundle 100K+ of JavaScript to simulate node.js env
    */
@@ -133,14 +134,14 @@ export type WebpackOptions = {
    * - if not set, then we check env: `OPTIMIZE_CSS_OPTIONS` (which should be a JSON string)
    * - TBD: define type for it
    */
-  optimizeCssOptions?: object;
+  optimizeCssOptions?: Record<any, unknown>;
   /**
    * Custom object with list of webpack DLLs to load
    * - **Default: `{}`**
    * - if not set, then we check env: `ELECTRODE_LOAD_DLLS` (which should be a JSON string)
    * - TBD: define type for it
    */
-  loadDlls?: object;
+  loadDlls?: Record<any, unknown>;
   /**
    * Should webpack minify code output in production mode?
    * - **Default: `true`**

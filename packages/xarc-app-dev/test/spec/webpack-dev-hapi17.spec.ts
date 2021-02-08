@@ -1,21 +1,19 @@
 /* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-empty-function */
-/* eslint-disable @typescript-eslint/ban-ts-ignore, no-invalid-this, @typescript-eslint/class-name-casing */
+/* eslint-disable no-invalid-this, no-magic-numbers */
 
-const hapiCompat = require("electrode-hapi-compat");
-const ver17Register = require("../../src/lib/webpack-dev-hapi17");
-
-const moduleName = "../../src/lib/webpack-dev-hapi";
-
+import { hapi17Plugin } from "../../src/lib/webpack-dev-hapi17";
 import { asyncVerify, runFinally } from "run-verify";
 import { expect } from "chai";
 import { before, beforeEach, describe, it, after, afterEach } from "mocha";
-const electrodeServer = require("electrode-server");
+import electrodeServer from "electrode-server";
+
+const moduleName = "../../src/lib/index";
 
 describe("dev-hapi 17", function() {
   this.timeout(10000);
 
   before(() => {
-    hapiCompat.hapiVersion = 18;
+    //
   });
 
   beforeEach(() => {});
@@ -33,7 +31,7 @@ describe("dev-hapi 17", function() {
     server.route({
       method: "GET",
       path: "/test",
-      handler: (request, h) => {
+      handler: (request, _h) => {
         data.request = request;
         data.called = true;
         return "DONE";
@@ -77,9 +75,7 @@ describe("dev-hapi 17", function() {
   it("should allow using the hapi17 register function directly", () => {
     return testPlugin17({
       plugins: {
-        "webpack-dev": {
-          register: ver17Register
-        }
+        "webpack-dev": hapi17Plugin
       }
     });
   });

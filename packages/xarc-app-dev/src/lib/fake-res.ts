@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-export {};
 
 //
 // simulate a res object for webpack dev middleware in case
@@ -7,13 +6,19 @@ export {};
 // For non express server, result in this fake res will be used
 // to send back with the real framework APIs
 //
-const assert = require("assert");
-const EventEmitter = require("events");
+import assert from "assert";
+import EventEmitter from "events";
 
 const SENT = 1;
 const END = 2;
 
-class FakeRes extends EventEmitter {
+export class FakeRes extends EventEmitter {
+  _headers: any;
+  _content: any;
+  _encoding: any;
+  _end: any;
+  _statusCode: any;
+
   constructor() {
     super();
     this._headers = {};
@@ -95,5 +100,3 @@ class FakeRes extends EventEmitter {
     return res;
   }
 }
-
-module.exports = FakeRes;

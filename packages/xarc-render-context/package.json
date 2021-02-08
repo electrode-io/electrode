@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "clap xarc/test-only",
-    "coverage": "clap xarc/check",
+    "coverage": "clap xarc/test-cov",
+    "check": "clap xarc/check",
     "build": "clap user/build",
     "prepublishOnly": "clap -n build docs && clap check",
     "docs": "clap xarc/docs"

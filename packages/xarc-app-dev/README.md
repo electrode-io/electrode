@@ -1,8 +1,10 @@
-# Archetype: Electrode React App (Development Part)
+# Web App with node.js and React
 
 [![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url] [![devDependency Status][daviddm-dev-image]][daviddm-dev-url] [![npm downloads][npm-downloads-image]][npm-downloads-url]
 
-A Walmart Labs flavored react app archetype.
+A Walmart Labs flavored React Universal App archetype.
+
+<https://www.electrode.io/electrode/>
 
 ---
 

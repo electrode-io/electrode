@@ -1,15 +1,18 @@
-/* eslint-disable @typescript-eslint/no-var-requires, no-console, @typescript-eslint/ban-ts-ignore */
+/* eslint-disable no-console, @typescript-eslint/ban-ts-comment */
 
 /*
  * A single babel RC for all transpiling, including client and server code.
  * When transpiling for node.js, env XARC_BABEL_TARGET should be set to "node"
  * and this file will set preset-env targets accordingly.
  */
-const ck = require("chalker");
-const optionalRequire = require("optional-require")(require);
-const optFlow = optionalRequire("electrode-archetype-opt-flow");
+import ck from "chalker";
+import makeOptionalRequire from "optional-require";
+import _ from "lodash";
 import { getPluginFrom, loadXarcOptions, detectCSSModule } from "./common";
-const _ = require("lodash");
+
+const optionalRequire = makeOptionalRequire(require);
+
+const optFlow = optionalRequire("electrode-archetype-opt-flow");
 
 const xOptions = loadXarcOptions(process.env.XARC_CWD);
 
@@ -23,7 +26,6 @@ const {
   legacyDecorators,
   transformClassProps,
   looseClassProps,
-  enableDynamicImport,
   hasMultiTargets,
   target: babelTarget,
   envTargets = {}
@@ -36,7 +38,7 @@ const { BABEL_ENV, NODE_ENV, XARC_BABEL_TARGET, ENABLE_KARMA_COV } = process.env
 const enableCssModule = detectCSSModule(xOptions);
 const enableKarmaCov = ENABLE_KARMA_COV === "true";
 const isProduction = (BABEL_ENV || NODE_ENV) === "production";
-const isTest = (BABEL_ENV || NODE_ENV) === "test";
+// const isTest = (BABEL_ENV || NODE_ENV) === "test";
 const isNodeTarget = XARC_BABEL_TARGET === "node";
 
 /**
@@ -51,8 +53,10 @@ const isNodeTarget = XARC_BABEL_TARGET === "node";
  * https://github.com/gajus/babel-plugin-react-css-modules/issues/291
  *
  * Resolution: TBD
+ *
+ * @returns null or settings for babel-plugin-react-css-modules
  */
-const getReactCssModulePlugin = () => {
+const getReactCssModulePlugin = (): any => {
   if (!enableCssModule) {
     return null;
   }
@@ -96,10 +100,6 @@ const basePlugins = [
       useRuntimeModule: true
     }
   ],
-  !isNodeTarget && enableDynamicImport && "@babel/plugin-syntax-dynamic-import",
-  // add plugin for loadable component
-  // Note: this is needed for server side (node.js) also.
-  enableDynamicImport && "@loadable/babel-plugin",
   // allow decorators on class and method
   // Note: This must go before @babel/plugin-proposal-class-properties
   (enableTypeScript || proposalDecorators) && [
@@ -143,8 +143,6 @@ const basePlugins = [
 
 // @ts-ignore
 const plugins = basePlugins.concat(
-  // test env
-  isTest && ["babel-plugin-dynamic-import-node"],
   // production env
   !isNodeTarget &&
     isProduction && [
@@ -177,7 +175,10 @@ if (!isJest) {
 
 const useBuiltIns =
   !isNodeTarget && hasMultiTargets
-    ? { useBuiltIns: "entry", corejs: require("core-js/package.json").version.split(".")[0] }
+    ? {
+        useBuiltIns: "entry",
+        corejs: require("core-js/package.json").version.split(".")[0] // eslint-disable-line
+      }
     : {};
 
 const presets = [
@@ -210,7 +211,7 @@ const presets = [
   "@babel/preset-react"
 ];
 
-module.exports = {
+export = {
   presets: presets.filter(x => x),
   plugins: plugins.filter(x => x)
 };

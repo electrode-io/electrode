@@ -1,12 +1,13 @@
 {
   "name": "electrode-redux-router-engine",
-  "version": "4.0.1",
+  "version": "5.0.0",
   "description": "Handle async data for React Server Side Rendering using Redux and Router",
   "main": "lib/redux-router-engine.js",
   "scripts": {
-    "test": "clap test",
+    "test": "clap test-only",
     "lint": "clap lint",
-    "coverage": "clap check"
+    "coverage": "clap test-cov",
+    "check": "clap check"
   },
   "homepage": "http://www.electrode.io",
   "repository": {
@@ -22,6 +23,10 @@
     "SSR",
     "router"
   ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.com/",
+    "access": "public"
+  },
   "author": "Electrode (http://www.electrode.io/)",
   "contributors": [
     "Joel Chen <xchen@walmartlabs.com>"
@@ -47,8 +52,6 @@
     "xstdout": "^0.1.1"
   },
   "dependencies": {
-    "@loadable/component": "^5.7.0",
-    "@loadable/server": "^5.9.0",
     "optional-require": "^1.0.0",
     "react-redux": "^4.4.5 || ^5.x.x",
     "react-router": "^5.1.2",

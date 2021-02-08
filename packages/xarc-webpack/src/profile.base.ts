@@ -18,7 +18,6 @@ const profile = {
     _stats: { order: 2400 },
     _isomorphic: { order: 2500 },
     _pwa: { order: 2600 },
-    _loadable: { order: 2700 },
     "_dll-load": { order: 20000 },
     _node: { order: 30000 }
   }

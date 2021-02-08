@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 import { loadXarcOptions } from "../util/load-xarc-options";
-const logger = require("@xarc/app-dev/lib/logger");
+const { logger } = require("@xarc/app-dev/lib/logger");
 
 module.exports = function(options) {
   const xarcOptions = loadXarcOptions();

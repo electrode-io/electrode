@@ -15,6 +15,7 @@ import { SSR_PIPELINES } from "./utils";
 export * from "../subapp/index";
 export * from "./types";
 export * from "./xarc-subapp-v2-node";
+export * from "./render-page";
 export { loadSubApp } from "./load-v2";
 export { initContext } from "./init-context";
 export { initSubApp } from "./init-v2";

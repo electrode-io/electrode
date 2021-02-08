@@ -42,5 +42,15 @@
     "classnames": "^2.2.6",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.3"
+  },
+  "fyn": {
+    "dependencies": {
+      "@xarc/app": "../../packages/xarc-app",
+      "@xarc/react": "../../packages/xarc-react",
+      "@xarc/react-query": "../../packages/xarc-react-query"
+    },
+    "devDependencies": {
+      "@xarc/app-dev": "../../packages/xarc-app-dev"
+    }
   }
 }

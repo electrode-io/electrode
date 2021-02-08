@@ -1,19 +1,20 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-export {};
+import { AppDevMiddleware } from "./app-dev-middleware";
 
-const AppDevMiddleware = require("./app-dev-middleware");
-
-function setup(app) {
+/**
+ * Express middleware for webpack dev server
+ *
+ * @param app express app
+ *
+ */
+export function expressMiddleware(app: any): void {
   const isProduction = process.env.NODE_ENV === "production";
   if (!isProduction) {
-    const middleware = new AppDevMiddleware({});
+    const middleware = new AppDevMiddleware();
     middleware.setup();
-    app.use((req, res, next) => {
+    app.use((req, _res, next) => {
       if (!req.app) req.app = {};
       req.app.webpackDev = middleware.webpackDev;
       next();
     });
   }
 }
-
-module.exports = setup;
