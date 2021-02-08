@@ -56,27 +56,29 @@ function getArchetypeOptPlugins() {
   }
 }
 
-let MAIN_PATH;
+function getPaths(xarcCwd) {
+  let MAIN_PATH;
 
-try {
-  const xarcOptions = loadXarcOptions();
-  const xarcCwd = xarcOptions.cwd;
-  MAIN_PATH = require.resolve(Path.resolve(xarcCwd, "test/karma-entry"));
-} catch (err) {
-  if (getXarcOptPlugins()) {
-    MAIN_PATH = require.resolve("./entry-xarc.js");
-  } else {
-    MAIN_PATH = require.resolve("./entry.js");
+  try {
+    MAIN_PATH = require.resolve(Path.resolve(xarcCwd, "test/karma-entry"));
+  } catch (err) {
+    if (getXarcOptPlugins()) {
+      MAIN_PATH = require.resolve("./entry-xarc.js");
+    } else {
+      MAIN_PATH = require.resolve("./entry.js");
+    }
   }
+
+  console.log(`KARMA will use entry file ${MAIN_PATH}`);
+
+  const PREPROCESSORS = {};
+
+  PREPROCESSORS[MAIN_PATH] = ["webpack", "sourcemap"];
+
+  const DLL_PATHS = loadElectrodeDll().map(x => require.resolve(x));
+
+  return { MAIN_PATH, PREPROCESSORS, DLL_PATHS };
 }
-
-console.log(`KARMA will use entry file ${MAIN_PATH}`);
-
-const PREPROCESSORS = {};
-
-PREPROCESSORS[MAIN_PATH] = ["webpack", "sourcemap"];
-
-const DLL_PATHS = loadElectrodeDll().map(x => require.resolve(x));
 
 /**
  *
@@ -106,14 +108,19 @@ export = function getKarmaConfig(config): any {
     plugins = [];
   }
   const xarcOptions = loadXarcOptions();
-  const xarcCwd = xarcOptions.cwd;
+  const xarcCwd = process.env.XARC_CWD || xarcOptions.cwd;
+
+  const { MAIN_PATH, PREPROCESSORS, DLL_PATHS } = getPaths(xarcCwd);
+
+  const webpack = loadWebpackConfig();
+
   const settings = {
     basePath: xarcCwd,
     frameworks: ["mocha", "intl-shim"],
     files: DLL_PATHS.concat(MAIN_PATH),
     plugins,
     preprocessors: PREPROCESSORS,
-    webpack: loadWebpackConfig(),
+    webpack,
     webpackServer: {
       port: 3002, // Choose a non-conflicting port (3000 app, 3001 test dev)
       quiet: false,

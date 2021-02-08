@@ -44,9 +44,7 @@ export function getEnvWebpack(): any {
       env: "OPTIMIZE_CSS_OPTIONS",
       type: "json",
       default: {
-        cssProcessorOptions: {
-          zindex: false
-        }
+        //
       }
     },
     loadDlls: { env: "ELECTRODE_LOAD_DLLS", type: "json", default: {} },

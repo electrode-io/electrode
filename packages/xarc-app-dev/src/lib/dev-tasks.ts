@@ -479,7 +479,7 @@ module.exports =  {
           `${webpackCmd()}`,
           `--config`,
           quote(getWebpackStartConfig("webpack.config.browsercoverage.js")),
-          `--colors`
+          `--color`
         );
       },
       "build-browser-coverage": {
@@ -520,8 +520,7 @@ module.exports =  {
           return mkCmd(
             `~$${webpackCmd()} --config`,
             quote(getWebpackStartConfig("webpack.config.dev.static.js")),
-            `--colors`,
-            `--display-error-details`
+            `--color`
           );
         }
       },
@@ -553,7 +552,7 @@ module.exports =  {
               [
                 `${webpackCmd()} --config`,
                 quote(getWebpackStartConfig("webpack.config.js")),
-                `--colors --display-error-details`
+                `--color`
               ],
               {
                 xclap: {
@@ -1058,8 +1057,7 @@ You only need to run this if you are doing something not through the xarc tasks.
             return exec(
               `${webpackCmd()} --config`,
               quote(getWebpackStartConfig("webpack.config.dll.js")),
-              `--colors`,
-              `--display-error-details`
+              `--color`
             );
           }
         },

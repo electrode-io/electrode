@@ -11,11 +11,6 @@ import karmaConf from "./karma.conf";
 import { loadUserConfig } from "./util/load-user-config";
 import { loadXarcOptions } from "../../lib/utils";
 const customCheck = require("@xarc/webpack/lib/util/custom-check"); // eslint-disable-line
-// eslint-disable-next-line
-const webpackCovCfg = require(customCheck.getWebpackStartConfig(
-  "../webpack/webpack.config.coverage",
-  false
-));
 
 /**
  * Get Karma config for coverage
@@ -25,9 +20,17 @@ const webpackCovCfg = require(customCheck.getWebpackStartConfig(
  */
 export = function(config): any {
   const xarcOptions = loadXarcOptions();
-  const xarcCwd = xarcOptions.cwd;
+  const xarcCwd = process.env.XARC_CWD || xarcOptions.cwd;
+  const webpackConfigFile = customCheck.getWebpackStartConfig(
+    "../webpack/webpack.config.coverage",
+    false
+  );
+
+  // eslint-disable-next-line
+  const webpackCovCfg = require(webpackConfigFile);
 
   karmaConf(config);
+
   const settings = {
     reporters: ["spec", "sonarqubeUnit", "coverage"],
     webpack: webpackCovCfg,

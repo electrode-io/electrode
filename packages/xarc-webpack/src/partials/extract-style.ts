@@ -9,7 +9,7 @@ const detectCssModule = require("../util/detect-css-module");
 const getOptRequire = require("../util/get-opt-require");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 const autoprefixer = require("autoprefixer");
 const cssLoader = require.resolve("css-loader");
@@ -132,11 +132,13 @@ module.exports = function() {
   const miniCssExtractLoader = (isModule = false) => ({
     loader: MiniCssExtractPlugin.loader,
     options: {
-      hmr: isDevelopment,
-      reload: isDevelopment,
+      // TODO: verify CSS HMR
+      // hmr: isDevelopment,
+      // reload: isDevelopment,
       publicPath: "",
-      esModule: !isModule,
-      modules: Boolean(isModule)
+      esModule: !isModule
+      // TODO: webpack5 update - modules options
+      // modules: Boolean(isModule)
     }
   });
 
@@ -252,7 +254,7 @@ module.exports = function() {
     module: { rules: rules.filter(x => x) },
     plugins: [
       new MiniCssExtractPlugin({ filename: styleBundleFilename }),
-      isProduction && new OptimizeCssAssetsPlugin(xarcOptions.webpack.optimizeCssOptions),
+      isProduction && new CssMinimizerPlugin(xarcOptions.webpack.optimizeCssOptions),
       new webpack.LoaderOptionsPlugin({
         minimize: true,
         options: { context: Path.resolve(xarcCwd, "src") }

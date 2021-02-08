@@ -1,6 +1,6 @@
 module.exports = () => ({
   output: {
-    path: process.cwd(),
+    // path: process.cwd(),
     filename: "[name].bundle.js",
     publicPath: "/assets/"
   }

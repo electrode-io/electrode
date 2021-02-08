@@ -18,13 +18,15 @@
           }
         },
         "beta": {
-          "enabled": false,
+          "enabled": true,
           "packages": {
             "@xarc/app": true,
             "@xarc/app-dev": true,
+            "@xarc/webpack": true,
+            "@xarc/opt-karma": true,
             "@xarc/create-app": true
           },
-          "addToVersion": false
+          "addToVersion": true
         }
       }
     }

@@ -10,7 +10,6 @@ const _ = require("lodash");
 
 const { spawn } = require("child_process");
 
-const isWin32 = process.platform.startsWith("win32");
 const packagesDir = Path.join(__dirname, "packages");
 
 const removeNpmScope = name => {
@@ -112,13 +111,16 @@ xrun.load({
   "test-boilerplate": [".test-boilerplate"],
   "test-stylus-sample": [".test-stylus-sample"],
   "update-changelog": ["~$node tools/update-changelog.js"],
-  "gitbook-serve": ["~$gitbook serve --no-watch --no-live"],
   "build-test": {
     desc: "Run CI test",
     task: () => {
       process.env.BUILD_TEST = "true";
       // process.env.NODE_PRESERVE_SYMLINKS = "1";
-      const tasks = ["test-boilerplate", "test-stylus-sample", ".test-jest-sample"];
+      const tasks = [
+        // "test-boilerplate", // TODO: webpack 5
+        "test-stylus-sample",
+        ".test-jest-sample"
+      ];
       let updated;
       return exec("lerna updated")
         .then(output => {

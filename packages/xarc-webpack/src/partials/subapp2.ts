@@ -14,7 +14,8 @@ module.exports = function(opts) {
     },
     plugins: [
       new SubAppWebpackPlugin({
-        webpackVersion: 4,
+        // let plugin figure out webpack version
+        // webpackVersion: 4,
         assetsFile: "../subapps.json"
       }),
       new JsonpScriptSrcPlugin()

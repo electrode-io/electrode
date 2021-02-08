@@ -83,7 +83,8 @@ module.exports = function() {
     // Comment out for now
     // plugins: [new MiniCssExtractPlugin({ filename: "[name].style.css" })],
     optimization: {
-      noEmitOnErrors: true
+      emitOnErrors: false // webpack 5
+      // noEmitOnErrors: true
     }
   };
 

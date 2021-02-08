@@ -33,8 +33,8 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.12.5",
-    "isomorphic-loader": "^4.4.1",
-    "optional-require": "^1.0.0",
+    "isomorphic-loader": "^4.5.0",
+    "optional-require": "^1.0.2",
     "subapp-util": "^1.1.2",
     "tslib": "^2.1.0"
   },
