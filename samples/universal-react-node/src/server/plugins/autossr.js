@@ -1,15 +1,18 @@
 "use strict";
 
-const machineLoadCondition = require("../conditions/machine-load");
-const serverLoadCondition = require("../conditions/server-load");
-const responseTimeCondition = require("../conditions/response-time");
+import machineLoadCondition from "../conditions/machine-load";
+import serverLoadCondition from "../conditions/server-load";
+import responseTimeCondition from "../conditions/response-time";
 
 const ElectrodeSSRFlag = {};
 
-ElectrodeSSRFlag.register = function (server, options, next) {
-  const _opts = Object.assign({
-    disabled: {}
-  }, options);
+ElectrodeSSRFlag.register = function(server, options, next) {
+  const _opts = Object.assign(
+    {
+      disabled: {}
+    },
+    options
+  );
 
   if (!_opts.disabled.serverLoadCondition) {
     const serverLoadHandler = serverLoadCondition(_opts);

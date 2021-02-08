@@ -1,6 +1,6 @@
 "use strict";
 
-const os = require("os");
+import os from "os";
 
 module.exports = {
   numCpus: () => os.cpus().length,

@@ -4,7 +4,7 @@
 //  with excess stuff from Devtools.
 const DevTools =
   process.env.NODE_ENV !== "production"
-    ? require("./devtools.dev").default
-    : require("./devtools.prod").default;
+    ? require("./devtools.dev").default // eslint-disable-line
+    : require("./devtools.prod").default; // eslint-disable-line
 
 export default DevTools;

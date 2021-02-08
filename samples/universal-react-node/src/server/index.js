@@ -4,11 +4,11 @@ process.on("SIGINT", () => {
   process.exit(0);
 });
 
-const support = require("@xarc/app/support");
+import support from "@xarc/app/support";
 // test import syntax properly handled by babel
 import electrodeConfippet from "electrode-confippet";
-const electrodeServer = require("electrode-server");
-const staticPathsDecor = require("electrode-static-paths");
+import electrodeServer from "electrode-server";
+import staticPathsDecor from "electrode-static-paths";
 
 // test JSX syntax properly handled by babel
 import React from "react";

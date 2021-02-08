@@ -1,17 +1,18 @@
 "use strict";
 /*eslint-env es6*/
 const plugin = {};
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path";
 const HTTP_CREATED = 201;
 const HTTP_ISE = 500;
 
-plugin.register = function (server, options, next) {
+plugin.register = function(server, options, next) {
   server.route({
     method: "POST",
     path: "/updateStorage",
     handler: (request, reply) => {
-      fs.writeFile(path.join(process.cwd(), "data/storage.json"),
+      fs.writeFile(
+        path.join(process.cwd(), "data/storage.json"),
         JSON.stringify(request.payload),
         "utf-8",
         err => {

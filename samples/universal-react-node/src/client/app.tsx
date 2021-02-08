@@ -16,6 +16,7 @@ import { renderRoutes } from "react-router-config";
 require.ensure(
   ["./sw-registration"],
   require => {
+    // eslint-disable-next-line
     require("./sw-registration")(notify);
   },
   "sw-registration"

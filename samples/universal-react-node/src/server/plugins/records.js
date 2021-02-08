@@ -2,10 +2,10 @@
 /*eslint-env es6*/
 const plugin = {};
 const HTTP_CREATED = 201;
-const mongojs = require("mongojs");
-const uuidV1 = require("uuid/v1");
+import mongojs from "mongojs";
+import uuidV1 from "uuid/v1";
 
-plugin.register = function (server, options, next) {
+plugin.register = function(server, options, next) {
   const db = mongojs("electrode-mongo", ["records"]);
 
   //Get All Records
@@ -27,18 +27,22 @@ plugin.register = function (server, options, next) {
     method: "GET",
     path: "/records/{id}",
     handler: (request, reply) => {
-      db.records.findOne({
-        _id: request.params.id
-      }, (err, doc) => { // eslint-disable-line consistent-return
-        if (err) {
-          return reply("Internal MongoDB error");
+      db.records.findOne(
+        {
+          _id: request.params.id
+        },
+        (err, doc) => {
+          // eslint-disable-line consistent-return
+          if (err) {
+            return reply("Internal MongoDB error");
+          }
+          if (!doc) {
+            return reply("No Record Found");
+          }
+          const responseString = doc.map(record => JSON.stringify(record)).toString();
+          return reply(responseString);
         }
-        if (!doc) {
-          return reply("No Record Found");
-        }
-        const responseString = doc.map(record => JSON.stringify(record)).toString();
-        reply(responseString);
-      });
+      );
     }
   });
 
@@ -51,12 +55,13 @@ plugin.register = function (server, options, next) {
       //Create an id
       record._id = uuidV1();
 
-      db.records.save(record, err => { // eslint-disable-line consistent-return
+      db.records.save(record, err => {
+        // eslint-disable-line consistent-return
         if (err) {
           console.log(err); // eslint-disable-line no-console
           return reply("Internal MongoDB error");
         }
-        reply(record).code(HTTP_CREATED);
+        return reply(record).code(HTTP_CREATED);
       });
     }
   });
