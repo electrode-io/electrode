@@ -47,13 +47,13 @@ export default class PushNotifications extends Component<
             .then(subscription => {
               // No current subscription, let the user subscribe
               if (!subscription) {
-                this.setState({
+                this.setState({ //  eslint-disable-line
                   loading: false,
                   subscribed: false,
                   supported: true
                 });
               } else {
-                this.setState({
+                this.setState({ //  eslint-disable-line
                   subscription,
                   subscribed: true,
                   loading: false,
@@ -62,21 +62,21 @@ export default class PushNotifications extends Component<
               }
             })
             .catch(error => {
-              this.setState({
+              this.setState({ //  eslint-disable-line
                 loading: false,
                 error
               });
             });
         })
         .catch(error => {
-          this.setState({
+          this.setState({ //  eslint-disable-line
             loading: false,
             error
           });
         });
     } else {
       // ServiceWorkers are not supported, let the user know.
-      this.setState({
+      this.setState({ //  eslint-disable-line
         loading: false,
         supported: false
       });
