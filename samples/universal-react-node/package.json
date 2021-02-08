@@ -57,8 +57,8 @@
   },
   "devDependencies": {
     "@xarc/app-dev": "^7.0.5",
-    "@xarc/opt-eslint": "^1.0.0",
     "electrode-archetype-opt-critical-css": "^1.0.3",
+    "electrode-archetype-opt-eslint": "^2.0.0",
     "electrode-archetype-opt-flow": "^1.0.2",
     "electrode-archetype-opt-jest": "^24.0.0",
     "electrode-archetype-opt-karma": "^2.0.6",
