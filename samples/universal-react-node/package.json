@@ -91,7 +91,8 @@
       "react-vendor-dll": "../react-vendor-dll"
     },
     "devDependencies": {
-      "@xarc/app-dev": "../../packages/xarc-app-dev"
+      "@xarc/app-dev": "../../packages/xarc-app-dev",
+      "@xarc/module-dev": "^3.0.2"
     }
   },
   "optionalDependencies": {},
@@ -103,5 +104,11 @@
       "typedoc",
       "typescript"
     ]
+  },
+  "mocha": {
+    "require": [
+      "@xarc/module-dev/config/test/setup.js"
+    ],
+    "recursive": true
   }
 }
