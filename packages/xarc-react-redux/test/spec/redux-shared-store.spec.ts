@@ -29,13 +29,8 @@ describe("shareStore", function () {
     expect(initContainer(undefined)).eql({ namedStores: {} });
   });
 
-  // export function setStoreContainer(storeContainer: any) {
-  //   persistentStoreContainer = storeContainer;
-  //   initContainer(storeContainer);
-  //   return storeContainer;
-  // }
   it("should setStoreContainer", () => {
-    expect(setStoreContainer({ namedStores: { a: "test" } })).deep.equal({
+    expect(setStoreContainer({ namedStores: { a: "test" } })).to.eql({
       namedStores: { a: "test" }
     });
 
@@ -47,7 +42,7 @@ describe("shareStore", function () {
 
     expect(getSharedStore("a", { namedStores: { a: "test_a" } })).equal("test_a");
 
-    expect(getSharedStore(false, { namedStores: { b: "test_b" } })).deep.equal({});
+    expect(getSharedStore(false, { namedStores: { b: "test_b" } })).eql({});
   });
 
   it("should setSharedStore", () => {
@@ -122,7 +117,6 @@ describe("shareStore", function () {
     expect(createSharedStore({ a: "test" }, info, storeContainer)).to.equal(
       storeContainer.namedStores._.store
     );
-    sinon.restore();
   });
 
   it("should createSharedStore without shared store", () => {
@@ -152,7 +146,6 @@ describe("shareStore", function () {
     expect(
       createSharedStore({ a: "test" }, info, storeContainer)[originalReplaceReducerSym]
     ).to.be.a("function");
-    sinon.restore();
   });
 
   it("should createSharedStore with reduxCreateStore", () => {

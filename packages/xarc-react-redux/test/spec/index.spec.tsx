@@ -165,7 +165,7 @@ describe("reactReduxFeature", function () {
 
     expect(element.innerHTML).equal(`test<p>mock-component-content</p>`);
 
-    expect(res.props).deep.equal({});
+    expect(res.props).to.eql({});
   });
 
   it("should render subapp with combined reducer on browser side", async () => {
@@ -204,7 +204,7 @@ describe("reactReduxFeature", function () {
 
     expect(element.innerHTML).equal(`test<p>mock-component-content</p>`);
 
-    expect(res.props).deep.equal({});
+    expect(res.props).to.eql({});
   });
 
   it("should render subapp without reducer on browser side", async () => {
@@ -252,7 +252,7 @@ describe("reactReduxFeature", function () {
 
     expect(element.innerHTML).equal(`test <p>get-export-mock-content</p>`);
 
-    expect(res.props).deep.equal({});
+    expect(res.props).to.eql({});
   });
 
   it("should render subapp with simple reducer on node side", async () => {
