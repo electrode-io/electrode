@@ -5,7 +5,6 @@ import sinon from "sinon";
 import {
   initContainer,
   setStoreContainer,
-  clearSharedStore,
   getSharedStore,
   setSharedStore,
   replaceReducer,
@@ -13,7 +12,7 @@ import {
   getReduxCreateStore
 } from "../../src/common/redux-shared-store";
 
-describe.only("shareStore", function () {
+describe("shareStore", function () {
   beforeEach(() => {
     setStoreContainer({ namedStores: {} });
   });
@@ -78,7 +77,7 @@ describe.only("shareStore", function () {
     const storeContainer = {
       namedStores: {
         _: {
-          store: { [reducerNamesSym]: x => x, [originalReplaceReducerSym]: spy }, //  TODO find mock function hook
+          store: { [reducerNamesSym]: x => x, [originalReplaceReducerSym]: spy },
           reducerContainer: {
             [reducerNamesSym]: ["test1", "test2"],
             test1: { a: "a", b: "b" },
@@ -96,34 +95,155 @@ describe.only("shareStore", function () {
     sinon.restore();
   });
 
-  // it("should createSharedStore with shared store", () => {
-  //   const reducerNamesSym = "- reducer owner names -";
-  //   const originalReplaceReducerSym = "- original replace reducer -";
+  it("should createSharedStore with shared store", () => {
+    const reducerNamesSym = "- reducer owner names -";
+    const originalReplaceReducerSym = "- original replace reducer -";
 
-  //   const info = {
-  //     name: "reducers",
-  //     reduxShareStore: true
-  //   };
-  //   const spy = sinon.spy();
+    const info = {
+      name: "reducers",
+      reduxShareStore: true,
+      reduxReducers: { t1: x => x || 1, t2: y => y + 1 || 2 }
+    };
 
-  //   const storeContainer = {
-  //     namedStores: {
-  //       _: {
-  //         store: { [reducerNamesSym]: x => x, [originalReplaceReducerSym]: spy }, //  TODO find mock function hook
-  //         reducerContainer: {
-  //           [reducerNamesSym]: ["test1", "test2"],
-  //           test1: { a: "a", b: "b" },
-  //           test2: { c: "c", d: "d" },
-  //           reducers: {}
-  //         }
-  //       }
-  //     }
-  //   };
+    const storeContainer = {
+      namedStores: {
+        _: {
+          store: { [reducerNamesSym]: x => x || 1, [originalReplaceReducerSym]: y => y || 2 },
+          reducerContainer: {
+            [reducerNamesSym]: ["test1", "test2"],
+            test1: { a: "a", b: "b" },
+            test2: { c: "c", d: "d" },
+            reducers: {}
+          }
+        }
+      }
+    };
 
-  //   const mockReducers = { t1: x => x, t2: y => y + 1 };
-  //   replaceReducer(mockReducers, info, storeContainer);
+    expect(createSharedStore({ a: "test" }, info, storeContainer)).to.equal(
+      storeContainer.namedStores._.store
+    );
+    sinon.restore();
+  });
 
-  //   expect(spy.called).to.equal(true);
-  //   sinon.restore();
-  // });
+  it("should createSharedStore without shared store", () => {
+    const reducerNamesSym = "- reducer owner names -";
+    const originalReplaceReducerSym = "- original replace reducer -";
+
+    const info = {
+      name: "reducers",
+      reduxShareStore: true,
+      reduxReducers: { t1: x => x || 1, t2: y => y + 1 || 2 }
+    };
+
+    const storeContainer = {
+      namedStores: {
+        _: {
+          store: undefined,
+          reducerContainer: {
+            [reducerNamesSym]: ["test1", "test2"],
+            test1: { a: "a", b: "b" },
+            test2: { c: "c", d: "d" },
+            reducers: {}
+          }
+        }
+      }
+    };
+
+    expect(
+      createSharedStore({ a: "test" }, info, storeContainer)[originalReplaceReducerSym]
+    ).to.be.a("function");
+    sinon.restore();
+  });
+
+  it("should createSharedStore with reduxCreateStore", () => {
+    const reducerNamesSym = "- reducer owner names -";
+    const originalReplaceReducerSym = "- original replace reducer -";
+    const spy = sinon.spy();
+    const info = {
+      name: "reducers",
+      reduxShareStore: false,
+      reduxReducers: { t1: x => x || 1, t2: y => y + 1 || 2 },
+      reduxCreateStore: spy,
+      _genReduxCreateStore: false
+    };
+
+    const mockInitState = { a: "test" };
+    const storeContainer = {
+      namedStores: {
+        _: {
+          store: undefined,
+          reducerContainer: {
+            [reducerNamesSym]: ["test1", "test2"],
+            test1: { a: "a", b: "b" },
+            test2: { c: "c", d: "d" },
+            reducers: {}
+          }
+        }
+      }
+    };
+
+    createSharedStore(mockInitState, info, storeContainer);
+    expect(spy.calledOnceWith(mockInitState)).to.equal(true);
+    sinon.restore();
+  });
+
+  it("should createSharedStore with function reducer type", () => {
+    const reducerNamesSym = "- reducer owner names -";
+    const info = {
+      name: "reducers",
+      reduxShareStore: false,
+      reduxReducers: x => x || 1,
+      reduxCreateStore: false,
+      _genReduxCreateStore: true
+    };
+
+    const mockInitState = { a: "test" };
+    const storeContainer = {
+      namedStores: {
+        _: {
+          store: undefined,
+          reducerContainer: {
+            [reducerNamesSym]: ["test1", "test2"],
+            test1: { a: "a", b: "b" },
+            test2: { c: "c", d: "d" },
+            reducers: {}
+          }
+        }
+      }
+    };
+
+    expect(createSharedStore(mockInitState, info, storeContainer)).to.be.an("object");
+  });
+
+  it("should createSharedStore with object reducer type", () => {
+    const reducerNamesSym = "- reducer owner names -";
+    const info = {
+      name: "reducers",
+      reduxShareStore: false,
+      reduxReducers: { a: x => x || 1, b: y => y || 2 },
+      reduxCreateStore: false,
+      _genReduxCreateStore: true
+    };
+
+    const mockInitState = { a: "test" };
+    const storeContainer = {
+      namedStores: {
+        _: {
+          store: undefined,
+          reducerContainer: {
+            [reducerNamesSym]: ["test1", "test2"],
+            test1: { a: "a", b: "b" },
+            test2: { c: "c", d: "d" },
+            reducers: {}
+          }
+        }
+      }
+    };
+
+    expect(createSharedStore(mockInitState, info, storeContainer)).to.be.an("object");
+  });
+
+  it("Should getReduxCreateStore", () => {
+    expect(getReduxCreateStore("test")).to.be.a("function");
+  });
 });

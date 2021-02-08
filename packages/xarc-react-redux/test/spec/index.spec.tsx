@@ -10,11 +10,9 @@ import sinon from "sinon";
 import { createStore, reduxFeature, ReduxFeature } from "../../src/browser/index";
 
 const { createElement } = React; // eslint-disable-line
-
 const mockPrepare = async initialState => {
   return { initialState: "init-state" };
 };
-
 const options = {
   React,
   prepare: mockPrepare
@@ -35,7 +33,7 @@ describe("reactReduxFeature", function () {
     expect(factory.add).to.be.a("function");
   });
 
-  it("should add redux feature to subapp", async () => {
+  it("should add redux feature to subapp", () => {
     const container = new SubAppContainer({});
     envHooks.getContainer = () => container;
     const factory = reduxFeature(options);
