@@ -2,13 +2,13 @@
 
 import { SubAppDef, SubAppFeatureFactory, SubAppFeature } from "@xarc/subapp";
 import { Provider } from "react-redux";
-import { combineReducers, createStore, Reducer } from "redux";
+import { applyMiddleware, combineReducers, createStore, Reducer, Store } from "redux";
 
 //
 // re-export redux as Redux etc
 //
 export * as Redux from "redux";
-export { combineReducers, createStore, Reducer, bindActionCreators } from "redux";
+export { combineReducers, createStore, Reducer, bindActionCreators, applyMiddleware } from "redux";
 
 //
 // re-export react-redux as ReactRedux etc
@@ -17,7 +17,31 @@ export { combineReducers, createStore, Reducer, bindActionCreators } from "redux
 export * as ReactRedux from "react-redux";
 export { connect, Provider, batch, useSelector, useDispatch, useStore } from "react-redux";
 
+export type FeatureDecorator = {
+
+
+  /**
+   * decorator function for redux observable or saga
+   */
+  decor: (options: any) => Store;
+
+  /**
+   * if redux observable is selected then we need a rootEpic
+   */
+  rootEpic?: any;
+
+  /**
+   * if saga is selected then we need a rootEpic
+   */
+  rootSaga?: any;
+}
+
 export type ReduxFeatureOptions = {
+
+  /**
+   * This is needed for injecting the middlewares through sub apps. e.g: [@xarc-react-redux-observable]
+   */
+  decorators?: FeatureDecorator[];
   /**
    * The React module.
    *
@@ -69,6 +93,7 @@ export type ReduxFeature = SubAppFeature & {
  * Add support for Redux to a subapp
  *
  * @param meta
+ * @param options
  * @returns unknown
  */
 export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory {
@@ -99,6 +124,7 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
       let initialState: any;
 
       let reducers = options.reducers;
+      const decorators = options.decorators;
 
       if (reload) {
         //
@@ -124,7 +150,20 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
           reducers = combineReducers(reducers) as Reducer<unknown, any>;
         }
         initialState = (await options.prepare(props)).initialState;
-        redux._store = createStore((reducers as Reducer<unknown, any>) || (x => x), initialState);
+        if (decorators) {
+          decorators.forEach(d => {
+            redux._store = d.decor({
+              rootEpic: d.rootEpic,
+              rootSaga: d.rootSaga,
+              applyMiddleware: applyMiddleware,
+              createStore: createStore,
+              reducers: reducers,
+              initialState: initialState
+            });
+          });
+        } else {
+          redux._store = createStore((reducers as Reducer<unknown, any>) || (x => x), initialState);
+        }
       }
 
       return {
