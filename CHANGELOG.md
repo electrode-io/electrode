@@ -1,3 +1,59 @@
+# 2/8/2021
+
+- update dep isomorphic-loader to 4.4.1
+- add react-query demo to create app demo
+- subappv2 namespace support
+- [fix] babel-loader cache consider browserslistrc
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@9.0.1` `(9.0.0 => 9.0.1)`
+- `@xarc/app-dev@9.0.1` `(9.0.0 => 9.0.1)`
+- `@xarc/create-app@5.0.1` `(5.0.0 => 5.0.1)`
+- `@xarc/react@0.1.6` `(0.1.5 => 0.1.6)`
+- `@xarc/react-redux@0.1.5` `(0.1.4 => 0.1.5)`
+- `@xarc/subapp@0.1.6` `(0.1.5 => 0.1.6)`
+- `@xarc/webpack@10.0.1` `(10.0.0 => 10.0.1)`
+
+### Lerna Updated
+
+- `@xarc/react-query@0.1.2` `(0.1.1 => 0.1.2)`
+- `@xarc/react-router@0.1.6` `(0.1.5 => 0.1.6)`
+
+## Commits
+
+- `packages/xarc-app`
+
+  - update dep isomorphic-loader to 4.4.1 [commit](http://github.com/electrode-io/electrode/commit/c5fd4c51be8773c89fbefec6505d66896a4babe8)
+  - update outdated README [commit](http://github.com/electrode-io/electrode/commit/ea6736e4667bbce3451fa1a02d81464674a373c8)
+
+- `packages/xarc-app-dev`
+
+  - update outdated README [commit](http://github.com/electrode-io/electrode/commit/ea6736e4667bbce3451fa1a02d81464674a373c8)
+
+- `packages/xarc-create-app`
+
+  - update demo for create-app [commit](http://github.com/electrode-io/electrode/commit/5cc0bb28b0ab978da9098fccdc0d5494821c8348)
+  - add react-query demo to create app demo ([#1809](https://github.com/electrode-io/electrode/pull/1809)) [commit](http://github.com/electrode-io/electrode/commit/89da6fb962c613bcc127a40d819cccf682818774)
+
+- `packages/xarc-react`
+
+  - subappv2 namespace support ([#1807](https://github.com/electrode-io/electrode/pull/1807)) [commit](http://github.com/electrode-io/electrode/commit/b9b2ee3130c5e4c3bdbb7147c8b3b4ae1661aace)
+
+- `packages/xarc-react-redux`
+
+  - add unit test for react redux ([#1811](https://github.com/electrode-io/electrode/pull/1811)) [commit](http://github.com/electrode-io/electrode/commit/49f74211fbd36a360934187161c86ba87e732493)
+
+- `packages/xarc-subapp`
+
+  - subappv2 namespace support ([#1807](https://github.com/electrode-io/electrode/pull/1807)) [commit](http://github.com/electrode-io/electrode/commit/b9b2ee3130c5e4c3bdbb7147c8b3b4ae1661aace)
+
+- `packages/xarc-webpack`
+
+  - [fix] babel-loader cache consider browserslistrc [commit](http://github.com/electrode-io/electrode/commit/00a24be0e6f5ee0bb7bfe990a50d9209f0803e0b)
+
 # 2/3/2021
 
 Major Changes, (released on npm tag `beta`)
