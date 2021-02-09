@@ -5,7 +5,6 @@ import { RenderOutput } from "../../src/RenderOutput";
 import { expect } from "chai";
 import { PassThrough } from "stream";
 import { makeDefer } from "xaa";
-import { Context } from "mocha";
 
 // import { Fs } from "fs";
 describe("render-context", function () {
