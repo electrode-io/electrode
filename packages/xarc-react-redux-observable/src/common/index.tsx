@@ -6,10 +6,28 @@ import { createEpicMiddleware, Epic } from "redux-observable";
 
 export type ReduxObservableOption = {
 
+    /** 
+     * rootEpic must be provided from the App for initializing Redux Observable Middleware
+    */
     rootEpic: Epic;
+    /**
+     * applyMiddlware provided from @xarc-react-redux
+     */
     applyMiddleware: (e: any) => StoreEnhancer;
+
+    /**
+     * createStore provided from @xarc-react-redux
+     */
     createStore: StoreCreator;
+
+    /**
+     * reducers provided from @xarc-react-redux
+     */
     reducers: Reducer<unknown, any>;
+
+    /**
+     * initialState provided from @xarc-react-redux
+     */
     initialState: any;
 }
 

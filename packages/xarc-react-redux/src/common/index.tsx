@@ -24,6 +24,7 @@ export type FeatureDecorator = {
    * decorator function for redux observable or saga
    */
   decor: (options: any) => Store;
+
   /**
    * if redux observable is selected then we need a rootEpic
    */
@@ -37,6 +38,9 @@ export type FeatureDecorator = {
 
 export type ReduxFeatureOptions = {
 
+  /**
+   * This is needed for injecting the middlewares through sub apps. e.g: [@xarc-react-redux-observable]
+   */
   decorators?: FeatureDecorator[];
   /**
    * The React module.
