@@ -27,12 +27,12 @@ let persistentStoreContainer = { namedStores: {} };
  * @param storeContainer - container
  * @returns the store container
  */
-export function initContainer(storeContainer: any) {
-  storeContainer = storeContainer || persistentStoreContainer;
-  if (!storeContainer.namedStores) {
-    storeContainer.namedStores = {};
+export function initContainer(storeContainer: any): any {
+  const storeCon = storeContainer || persistentStoreContainer;
+  if (!storeCon.namedStores) {
+    storeCon.namedStores = {};
   }
-  return storeContainer;
+  return storeCon;
 }
 
 /**
@@ -44,7 +44,7 @@ export function initContainer(storeContainer: any) {
  * @param storeContainer - container for shared redux stores
  * @returns the container passed in
  */
-export function setStoreContainer(storeContainer: any) {
+export function setStoreContainer(storeContainer: any): any {
   persistentStoreContainer = storeContainer;
   initContainer(storeContainer);
   return storeContainer;
@@ -53,23 +53,24 @@ export function setStoreContainer(storeContainer: any) {
 /**
  * Remove all saved redux stores
  *
- * @returns none
+ * @returns {void}
  */
-export function clearSharedStore() {
+export function clearSharedStore(): void {
   persistentStoreContainer.namedStores = {};
 }
 
 /**
  * Get a saved redux store by name
+ *
  * @param name - name of redux store to get
  *             - if this is `true` then return the default global redux store
  * @param storeContainer - the container of redux stores
  *
- * @returns
+ * @returns {object} - return named stores
  */
-export function getSharedStore(name: boolean | string, storeContainer: any) {
-  storeContainer = initContainer(storeContainer);
-  return (name && storeContainer.namedStores[name === true ? "_" : name]) || {};
+export function getSharedStore(name: boolean | string, storeContainer: any): any {
+  const storeCon = initContainer(storeContainer);
+  return (name && storeCon.namedStores[name === true ? "_" : name]) || {};
 }
 
 /**
@@ -79,22 +80,22 @@ export function getSharedStore(name: boolean | string, storeContainer: any) {
  *             - if this is `true`, then set as the global redux store
  * @param contents - store content
  * @param storeContainer - store container
- * @returns none
+ * @returns {void}
  */
-export function setSharedStore(name: boolean | string, contents, storeContainer: any) {
-  storeContainer = initContainer(storeContainer);
-  storeContainer.namedStores[name === true ? "_" : (name as string)] = contents;
+export function setSharedStore(name: boolean | string, contents: any, storeContainer: any): void {
+  const storeCon = initContainer(storeContainer);
+  storeCon.namedStores[name === true ? "_" : (name as string)] = contents;
 }
 
 /**
  * assert condition
  *
- * @param condition - must be truthy
+ * @param flag - must be truthy
  * @param msg - error message if condition fail assert
- * @returns none
+ * @returns {void}
  * @throws Error if assertion fail
  */
-const assert = (flag: any, msg: string) => {
+const assert = (flag: any, msg: string): void => {
   if (!flag) {
     throw new Error(msg);
   }
@@ -111,9 +112,10 @@ const errReducersMustBeObject = `${WHEN_SHARED_MSG}, reduxReducers must be an ob
 /**
  * Add a reducer to a shared redux store
  *
- * @param info
- * @param container
- * @param reducers
+ * @param {object} info - info about shared store
+ * @param {object} container - store container
+ * @param {object} reducers - reducers
+ * @returns {object} - combined reducers
  */
 const addSharedReducer = (info: any, container: any, reducers: Record<string, any>) => {
   assert(typeof reducers === "object", errReducersMustBeObject);
@@ -135,7 +137,15 @@ const combineSharedReducers = (info, container, reducers) => {
   return combineReducers(addSharedReducer(info, container, reducers));
 };
 
-export function replaceReducer(newReducers, info, storeContainer) {
+/**
+ * replaceReducer reducer on the shared redux store
+ *
+ * @param {object} newReducers - reducer object
+ * @param {object} info - info about redux shared store
+ * @param {object} storeContainer - container of the shared store
+ * @returns {object} - shared store's original replaced reducer
+ */
+export function replaceReducer(newReducers: any, info: any, storeContainer: any): any {
   const { store, reducerContainer } = getSharedStore(info.reduxShareStore, storeContainer);
 
   const reducer = combineSharedReducers(info, reducerContainer, newReducers);
@@ -147,10 +157,11 @@ export function replaceReducer(newReducers, info, storeContainer) {
  * Create a new redux store with an initial state for sharing
  *
  * @param initialState - initial state to create the store with
- * @param info -
+ * @param info - info about shared store
  * @param storeContainer - optional container for the store.
+ * @returns {object} - shared store
  */
-export function createSharedStore(initialState, info, storeContainer?: any) {
+export function createSharedStore(initialState: any, info: any, storeContainer?: any): any {
   const sharedStoreName = info.reduxShareStore;
 
   if (sharedStoreName) {
@@ -209,6 +220,12 @@ export function createSharedStore(initialState, info, storeContainer?: any) {
   return createStore(reducer, initialState);
 }
 
-export function getReduxCreateStore(info: any) {
+/**
+ * Get a function to create redux shared store
+ *
+ * @param info - info about shared store
+ * @returns {Function} -  create shared store function
+ */
+export function getReduxCreateStore(info: any): any {
   return (initialState, storeContainer) => createSharedStore(initialState, info, storeContainer);
 }
