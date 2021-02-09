@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;util/generate-config&quot; | @xarc/webpack</title>
+	<title>&quot;util/generate-babel-loader-cache-id&quot; | @xarc/webpack</title>
 	<meta name="description" content="Documentation for @xarc/webpack">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,10 +54,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_util_generate_config_.html">&quot;util/generate-config&quot;</a>
+					<a href="_util_generate_babel_loader_cache_id_.html">&quot;util/generate-babel-loader-cache-id&quot;</a>
 				</li>
 			</ul>
-			<h1>Module &quot;util/generate-config&quot;</h1>
+			<h1>Module &quot;util/generate-babel-loader-cache-id&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -71,8 +71,7 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_util_generate_config_.html#generateconfig" class="tsd-kind-icon">generate<wbr>Config</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_util_generate_config_.html#initwebpackconfigcomposer" class="tsd-kind-icon">init<wbr>Webpack<wbr>Config<wbr>Composer</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_util_generate_babel_loader_cache_id_.html#generatebabelloadercacheid" class="tsd-kind-icon">generate<wbr>Babel<wbr>Loader<wbr>Cache<wbr>Id</a></li>
 							</ul>
 						</section>
 					</div>
@@ -81,51 +80,34 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="generateconfig" class="tsd-anchor"></a>
-					<h3>generate<wbr>Config</h3>
+					<a name="generatebabelloadercacheid" class="tsd-anchor"></a>
+					<h3>generate<wbr>Babel<wbr>Loader<wbr>Cache<wbr>Id</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">generate<wbr>Config<span class="tsd-signature-symbol">(</span>opts<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, archetypeControl<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">generate<wbr>Babel<wbr>Loader<wbr>Cache<wbr>Id<span class="tsd-signature-symbol">(</span>cwd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/00a24be0/packages/xarc-webpack/src/util/generate-config.ts#L83">util/generate-config.ts:83</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/00a24be0/packages/xarc-webpack/src/util/generate-babel-loader-cache-id.ts#L10">util/generate-babel-loader-cache-id.ts:10</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Generate a cache identifier for babel-loader</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>opts: <span class="tsd-signature-type">any</span></h5>
-								</li>
-								<li>
-									<h5>archetypeControl: <span class="tsd-signature-type">any</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="initwebpackconfigcomposer" class="tsd-anchor"></a>
-					<h3>init<wbr>Webpack<wbr>Config<wbr>Composer</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">init<wbr>Webpack<wbr>Config<wbr>Composer<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/00a24be0/packages/xarc-webpack/src/util/generate-config.ts#L68">util/generate-config.ts:68</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>options: <span class="tsd-signature-type">any</span></h5>
+									<h5>cwd: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>app dir</p>
+									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>cache identifier</p>
 						</li>
 					</ul>
 				</section>
@@ -138,17 +120,14 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="_util_generate_config_.html">&quot;util/generate-<wbr>config&quot;</a>
+						<a href="_util_generate_babel_loader_cache_id_.html">&quot;util/generate-<wbr>babel-<wbr>loader-<wbr>cache-<wbr>id&quot;</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="_util_generate_config_.html#generateconfig" class="tsd-kind-icon">generate<wbr>Config</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="_util_generate_config_.html#initwebpackconfigcomposer" class="tsd-kind-icon">init<wbr>Webpack<wbr>Config<wbr>Composer</a>
+						<a href="_util_generate_babel_loader_cache_id_.html#generatebabelloadercacheid" class="tsd-kind-icon">generate<wbr>Babel<wbr>Loader<wbr>Cache<wbr>Id</a>
 					</li>
 				</ul>
 			</nav>
