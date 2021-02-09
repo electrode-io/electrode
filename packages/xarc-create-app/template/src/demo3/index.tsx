@@ -37,7 +37,7 @@ export const subapp: ReactSubApp = {
   wantFeatures: [
     reactQueryFeature({
       React,
-      serverModule: require.resolve("./react-query-fetch.ts")
+      serverModule: require.resolve("./react-query-fetch")
     })
   ]
 };
