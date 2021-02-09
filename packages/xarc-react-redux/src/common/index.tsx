@@ -68,7 +68,7 @@ export type ReduxFeature = SubAppFeature & {
 /**
  * Add support for Redux to a subapp
  *
- * @param meta
+ * @param options - redux feature options
  * @returns unknown
  */
 export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory {
