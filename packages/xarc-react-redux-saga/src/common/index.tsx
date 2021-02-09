@@ -8,7 +8,7 @@ import createSagaMiddleware from "redux-saga"
 export type ReduxObservableOption = {
 
     /** 
-     * rootSaga must be provided from the App for initializing Redux Observable Middleware
+     * rootSaga must be provided from the App for initializing Redux Saga Middleware
     */
     rootSaga: any;
     /**
@@ -31,13 +31,6 @@ export type ReduxObservableOption = {
      */
     initialState: any;
 }
-
-/*
- if (!rootSaga) { throw new Error("[REDUX-SAGA] must provide a root saga if redux-saga selected!"); }
-            const sagaMiddleware = createSagaMiddleware();
-            redux._store = createStore((reducers as Reducer<unknown, any>) || (x => x), initialState, applyMiddleware(sagaMiddleware));
-            sagaMiddleware.run(rootSaga);
-*/
 
 /**
  * @param options
