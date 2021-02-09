@@ -12,10 +12,11 @@ import {
   getReduxCreateStore
 } from "../../src/common/redux-shared-store";
 
-describe("shareStore", function () {
+describe("shareStore", () => {
   beforeEach(() => {
     setStoreContainer({ namedStores: {} });
   });
+
   it("should initContainer with store container input", () => {
     const storeContainerWithNamedStore = { namedStores: { a: "test" } };
 
@@ -97,13 +98,13 @@ describe("shareStore", function () {
     const info = {
       name: "reducers",
       reduxShareStore: true,
-      reduxReducers: { t1: x => x || 1, t2: y => y + 1 || 2 }
+      reduxReducers: { t1: x => x || "1", t2: y => y + 1 || "2" }
     };
 
     const storeContainer = {
       namedStores: {
         _: {
-          store: { [reducerNamesSym]: x => x || 1, [originalReplaceReducerSym]: y => y || 2 },
+          store: { [reducerNamesSym]: x => x || "1", [originalReplaceReducerSym]: y => y || "2" },
           reducerContainer: {
             [reducerNamesSym]: ["test1", "test2"],
             test1: { a: "a", b: "b" },
@@ -126,7 +127,7 @@ describe("shareStore", function () {
     const info = {
       name: "reducers",
       reduxShareStore: true,
-      reduxReducers: { t1: x => x || 1, t2: y => y + 1 || 2 }
+      reduxReducers: { t1: x => x || "1", t2: y => y + 1 || "2" }
     };
 
     const storeContainer = {
@@ -150,12 +151,11 @@ describe("shareStore", function () {
 
   it("should createSharedStore with reduxCreateStore", () => {
     const reducerNamesSym = "- reducer owner names -";
-    const originalReplaceReducerSym = "- original replace reducer -";
     const spy = sinon.spy();
     const info = {
       name: "reducers",
       reduxShareStore: false,
-      reduxReducers: { t1: x => x || 1, t2: y => y + 1 || 2 },
+      reduxReducers: { t1: x => x || "1", t2: y => y + 1 || "2" },
       reduxCreateStore: spy,
       _genReduxCreateStore: false
     };
@@ -185,7 +185,7 @@ describe("shareStore", function () {
     const info = {
       name: "reducers",
       reduxShareStore: false,
-      reduxReducers: x => x || 1,
+      reduxReducers: x => x || "1",
       reduxCreateStore: false,
       _genReduxCreateStore: true
     };
@@ -213,7 +213,7 @@ describe("shareStore", function () {
     const info = {
       name: "reducers",
       reduxShareStore: false,
-      reduxReducers: { a: x => x || 1, b: y => y || 2 },
+      reduxReducers: { a: x => x || "1", b: y => y || "2" },
       reduxCreateStore: false,
       _genReduxCreateStore: true
     };

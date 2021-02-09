@@ -18,8 +18,6 @@ export * as ReactRedux from "react-redux";
 export { connect, Provider, batch, useSelector, useDispatch, useStore } from "react-redux";
 
 export type FeatureDecorator = {
-
-
   /**
    * decorator function for redux observable or saga
    */
@@ -34,10 +32,9 @@ export type FeatureDecorator = {
    * if saga is selected then we need a rootEpic
    */
   rootSaga?: any;
-}
+};
 
 export type ReduxFeatureOptions = {
-
   /**
    * This is needed for injecting the middlewares through sub apps. e.g: [@xarc-react-redux-observable]
    */
@@ -92,8 +89,7 @@ export type ReduxFeature = SubAppFeature & {
 /**
  * Add support for Redux to a subapp
  *
- * @param meta
- * @param options
+ * @param options - redux feature options
  * @returns unknown
  */
 export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory {
