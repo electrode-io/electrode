@@ -4,8 +4,9 @@ const custom = require("../styles/bootstrap.css");
 import { create, mockTodos } from "../mock-fetch";
 import { useMutation, QueryClient } from "@xarc/react-query";
 
-const TodoInput = props => {
-  const { input } = props;
+const TodoInput = () => {
+  const [input, setInput] = React.useState("");
+
   const mutation: any = useMutation("test", {
     onMutate: variables => {
       create(variables as any);
@@ -28,13 +29,13 @@ const TodoInput = props => {
         className={classNames(custom["form-control"])}
         onChange={e => {
           e.preventDefault();
-          props.setInput((e.target as any).value);
+          setInput((e.target as any).value);
         }}
         value={input}
         onKeyDown={e => {
-          if (e.keyCode === 13 && input) {
+          if (e.key === "Enter" && input) {
             mutation.mutate({ content: input });
-            props.setInput("");
+            setInput("");
           }
         }}
       />
@@ -44,7 +45,7 @@ const TodoInput = props => {
           onClick={() => {
             if (input) {
               mutation.mutate({ content: input });
-              props.setInput("");
+              setInput("");
             }
           }}
         >

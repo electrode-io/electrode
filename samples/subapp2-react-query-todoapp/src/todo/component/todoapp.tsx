@@ -13,16 +13,14 @@ function TodoApp() {
     // Refetch the data every second
     refetchInterval: 1000
   });
-  const [inputStr, setInputStr] = React.useState("");
-  const [curFilter, setCurFilter] = React.useState(VISIBILITY_FILTERS.ALL);
 
   let todos = [];
 
   if (data) {
     todos = data.todos.filter(e => {
-      if (curFilter === VISIBILITY_FILTERS.ALL) {
+      if (data.filter === VISIBILITY_FILTERS.ALL) {
         return true;
-      } else if (curFilter === VISIBILITY_FILTERS.COMPLETED) {
+      } else if (data.filter === VISIBILITY_FILTERS.COMPLETED) {
         if (e.completed) {
           return true;
         }
@@ -41,9 +39,9 @@ function TodoApp() {
   return (
     <div style={{ margin: "24px" }}>
       <h1 className={classNames(custom["page-header"], custom["text-center"])}>My To-do List</h1>
-      <TodoInput input={inputStr} setInput={setInputStr} />
+      <TodoInput />
       <TodoList status={status} todos={todos} error={error} />
-      <VisibilityFilters setFilter={setCurFilter} />
+      <VisibilityFilters />
     </div>
   );
 }

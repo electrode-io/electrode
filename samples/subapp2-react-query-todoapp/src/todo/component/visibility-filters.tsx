@@ -2,8 +2,12 @@ import { React } from "@xarc/react";
 import classNames from "classnames";
 import { VISIBILITY_FILTERS } from "../constant";
 const custom = require("../styles/bootstrap.css");
+import { useMutation, useQuery } from "@xarc/react-query";
+import { changeFilter } from "../mock-fetch";
 
-const VisibilityFilters = ({ setFilter }) => {
+const VisibilityFilters = () => {
+  const mutation: any = useMutation(changeFilter);
+
   return (
     <div className={custom["row"]}>
       <div
@@ -18,7 +22,7 @@ const VisibilityFilters = ({ setFilter }) => {
               className={classNames(custom["btn"], custom["btn-default"])}
               key={`visibility-filter-${currentFilter}`}
               onClick={() => {
-                setFilter(currentFilter);
+                mutation.mutate(currentFilter);
               }}
             >
               {currentFilter}
