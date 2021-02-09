@@ -36,6 +36,7 @@
     "@xarc/fastify-server": "^2.0.0",
     "@xarc/react": "^0.0.3",
     "@xarc/react-redux": "^0.1.0",
+    "@xarc/react-redux-observable": "^0.1.0",
     "@xarc/react-router": "^0.1.0",
     "classnames": "^2.2.6"
   },
@@ -53,6 +54,7 @@
       "@xarc/app": "../../packages/xarc-app",
       "@xarc/react": "../../packages/xarc-react",
       "@xarc/react-redux": "../../packages/xarc-react-redux",
+      "@xarc/react-redux-observable": "../../packages/xarc-react-redux-observable",
       "@xarc/react-router": "../../packages/xarc-react-router",
       "@xarc/tag-renderer": "../../packages/xarc-tag-renderer"
     },

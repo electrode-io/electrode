@@ -1,13 +1,13 @@
 import PropTypes from "prop-types";
 import { React, ReactSubApp, xarcV2, declareSubApp, createDynamicComponent } from "@xarc/react";
-import { connect, reduxFeature, useDispatch } from "@xarc/react-redux";
+import { connect, reduxFeature, useDispatch, FeatureDecorator } from "@xarc/react-redux";
 import { reactRouterFeature, Route, Switch } from "@xarc/react-router";
 import { Navigation } from "../components/navigation";
 import { Products } from "../components/products";
-
 import { Epic, combineEpics } from "redux-observable";
 import { from, of } from "rxjs";
 import { exhaustMap, filter, map, catchError, delay, mapTo } from "rxjs/operators";
+import { reduxObservableDecor } from "@xarc/react-redux-observable";
 
 const pingEpic = action$ => action$.pipe(
   filter((action: any) => action.type === 'PING'),
@@ -59,7 +59,7 @@ const Stores = () => `Stores`;
 const Contact = () => `Contact`;
 
 const MainRouter = () => {
-    const dispatcher = useDispatch();
+  const dispatcher = useDispatch();
   React.useEffect(() => {
     // console.log(`ping called`)
     setInterval(() => {
@@ -81,16 +81,18 @@ const MainRouter = () => {
 };
 
 //const ReduxHomeRouter = connect(mapStateToProps, dispatch => ({ dispatch }))(HomeRouter);
+const reduxObservableFeature: FeatureDecorator = {};
+reduxObservableFeature.decor = reduxObservableDecor;
+reduxObservableFeature.rootEpic = rootEpic;
 
 export const subapp: ReactSubApp = {
   Component: MainRouter,
   wantFeatures: [
     reduxFeature({
+      decorators: [reduxObservableFeature],
       React,
-      shareStore: true,
+      shareStore: false,
       reducers: true,
-      reduxObservable: true,
-      rootEpic: rootEpic,
       // provider({ Component, props }) {}
       prepare: async initialState => {
         xarcV2.debug("Home (home.tsx) subapp redux prepare, initialState:", initialState);

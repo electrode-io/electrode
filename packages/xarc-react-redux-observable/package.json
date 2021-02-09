@@ -1,7 +1,7 @@
 {
-  "name": "@xarc/react-redux",
-  "version": "0.1.4",
-  "description": "xarc React.js application redux support",
+  "name": "@xarc/react-redux-observable",
+  "version": "0.1.0",
+  "description": "xarc React.js application redux observable support",
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
   "browser": {
@@ -9,14 +9,13 @@
     "./dist-node-esm/node/index.js": "./dist-browser~es2x~esm~/browser/index.js"
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.com/",
+    "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
   "scripts": {
     "build": "xrun user/build",
     "test": "xrun xarc/test-only",
-    "coverage": "xrun xarc/test-cov",
-    "check": "xrun xarc/check",
+    "coverage": "xrun xarc/check",
     "prepublishOnly": "xrun [[build, docs], xarc/check]",
     "docs": "xrun xarc/docs"
   },
@@ -28,14 +27,14 @@
     "react-dom": "*"
   },
   "dependencies": {
-    "@xarc/subapp": "^0.1.5",
-    "react-redux": ">= 7",
-    "redux": ">= 4",
+    "@xarc/react-redux": "^0.1.0",
+    "redux-observable": "^1.2.0",
+    "rxjs": "^6.6.3",
     "tslib": "^2.1.0"
   },
   "fyn": {
     "dependencies": {
-      "@xarc/subapp": "../xarc-subapp"
+      "@xarc/react-redux": "../xarc-react-redux"
     }
   },
   "devDependencies": {
@@ -58,10 +57,6 @@
     "eslint-plugin-jsdoc": "^30.7.9",
     "mocha": "^8.2.1",
     "nyc": "^15.1.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-redux": "^7.2.2",
-    "redux": "^4.0.5",
     "sinon": "^9.2.2",
     "sinon-chai": "^3.5.0",
     "source-map-support": "^0.5.19",

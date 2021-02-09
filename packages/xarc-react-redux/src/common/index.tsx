@@ -1,17 +1,14 @@
 /* eslint-disable max-statements */
-/* eslint-disable complexity */
 
 import { SubAppDef, SubAppFeatureFactory, SubAppFeature } from "@xarc/subapp";
 import { Provider } from "react-redux";
-import { combineReducers, createStore, Reducer, applyMiddleware } from "redux";
-import { createEpicMiddleware } from "redux-observable";
-import createSagaMiddleware from "redux-saga";
+import { applyMiddleware, combineReducers, createStore, Reducer, Store } from "redux";
 
 //
 // re-export redux as Redux etc
 //
 export * as Redux from "redux";
-export { combineReducers, createStore, Reducer, bindActionCreators } from "redux";
+export { combineReducers, createStore, Reducer, bindActionCreators, applyMiddleware } from "redux";
 
 //
 // re-export react-redux as ReactRedux etc
@@ -20,7 +17,27 @@ export { combineReducers, createStore, Reducer, bindActionCreators } from "redux
 export * as ReactRedux from "react-redux";
 export { connect, Provider, batch, useSelector, useDispatch, useStore } from "react-redux";
 
+export type FeatureDecorator = {
+
+
+  /**
+   * decorator function for redux observable or saga
+   */
+  decor: (options: any) => Store;
+  /**
+   * if redux observable is selected then we need a rootEpic
+   */
+  rootEpic?: any;
+
+  /**
+   * if saga is selected then we need a rootEpic
+   */
+  rootSaga?: any;
+}
+
 export type ReduxFeatureOptions = {
+
+  decorators?: FeatureDecorator[];
   /**
    * The React module.
    *
@@ -57,26 +74,6 @@ export type ReduxFeatureOptions = {
    * @returns Promise<{initialState: any}>
    */
   prepare(initialState: any): Promise<any>;
-
-  /*
-   * if selected then redux observable will be injected
-   */
-  reduxObservable?: boolean;
-
-  /**
-   * if redux observable is selected then we need a rootEpic
-   */
-  rootEpic?: any;
-
-  /**
-   * if selected then redux saga will be injected
-   */
-  reduxSaga?: boolean;
-
-  /**
-   * if saga is selected then we need a rootEpic
-   */
-  rootSaga?: any;
 };
 
 export type ReduxFeature = SubAppFeature & {
@@ -92,6 +89,7 @@ export type ReduxFeature = SubAppFeature & {
  * Add support for Redux to a subapp
  *
  * @param meta
+ * @param options
  * @returns unknown
  */
 export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory {
@@ -120,12 +118,9 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
 
     redux.execute = async function ({ input, csrData, reload }) {
       let initialState: any;
-      const reduxObservable = options.reduxObservable;
-      const rootEpic = options.rootEpic;
-      const reduxSaga = options.reduxSaga;
-      const rootSaga = options.rootSaga;
 
       let reducers = options.reducers;
+      const decorators = options.decorators;
 
       if (reload) {
         //
@@ -151,31 +146,17 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
           reducers = combineReducers(reducers) as Reducer<unknown, any>;
         }
         initialState = (await options.prepare(props)).initialState;
-        if (reduxObservable === true) {
-          if (!rootEpic) {
-            throw new Error(
-              "[REDUX-OBSERVABLE] must provide a root epic if redux-observable selected!"
-            );
-          }
-          const epicMiddleware = createEpicMiddleware();
-          const observerMiddleware = applyMiddleware(epicMiddleware);
-          redux._store = createStore(
-            (reducers as Reducer<unknown, any>) || (x => x),
-            initialState,
-            observerMiddleware
-          );
-          epicMiddleware.run(rootEpic);
-        } else if (reduxSaga === true) {
-          if (!rootSaga) {
-            throw new Error("[REDUX-SAGA] must provide a root saga if redux-saga selected!");
-          }
-          const sagaMiddleware = createSagaMiddleware();
-          redux._store = createStore(
-            (reducers as Reducer<unknown, any>) || (x => x),
-            initialState,
-            applyMiddleware(sagaMiddleware)
-          );
-          sagaMiddleware.run(rootSaga);
+        if (decorators) {
+          decorators.forEach(d => {
+            redux._store = d.decor({
+              rootEpic: d.rootEpic,
+              rootSaga: d.rootSaga,
+              applyMiddleware: applyMiddleware,
+              createStore: createStore,
+              reducers: reducers,
+              initialState: initialState
+            });
+          });
         } else {
           redux._store = createStore((reducers as Reducer<unknown, any>) || (x => x), initialState);
         }
