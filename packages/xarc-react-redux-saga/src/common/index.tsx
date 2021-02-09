@@ -5,7 +5,7 @@ import { Reducer, Store, StoreCreator } from "redux";
 import createSagaMiddleware from "redux-saga"
 
 
-export type ReduxObservableOption = {
+export type ReduxSagaOption = {
 
     /** 
      * rootSaga must be provided from the App for initializing Redux Saga Middleware
@@ -35,7 +35,7 @@ export type ReduxObservableOption = {
 /**
  * @param options
  */
-export function reduxSagaDecor(options: ReduxObservableOption): Store {
+export function reduxSagaDecor(options: ReduxSagaOption): Store {
     const { rootSaga, applyMiddleware, createStore, reducers, initialState } = options;
 
     if (!rootSaga) { throw new Error("[REDUX-SAGA] must provide a root epic if redux-saga selected!"); }
