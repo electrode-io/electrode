@@ -1,8 +1,10 @@
 import { dehydrate } from "react-query/hydration";
+import { VISIBILITY_FILTERS } from "./constant";
 
 let id = 0;
 export const mockTodos = {
-  todos: []
+  todos: [],
+  filter: VISIBILITY_FILTERS.ALL
 };
 
 export const create = async ({ content }) => {
@@ -17,6 +19,10 @@ export const update = async id => {
 
     return element;
   });
+};
+
+export const changeFilter = async filter => {
+  mockTodos.filter = filter;
 };
 
 export const fetch = async ({ queryKey }) => {
