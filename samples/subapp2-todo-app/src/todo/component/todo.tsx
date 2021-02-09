@@ -6,14 +6,16 @@ export const Todo = props => {
   const { todo, dispatch } = props;
 
   return (
-    <li
-      className={custom["list-group-item"]}
-      onClick={() => {
-        dispatch(toggleTodo(todo.id));
-      }}
-    >
-      {todo.completed === true ? "    ✅Completed  --  " : "    🔥TODO  --  "}
-      <span>{todo && todo.content && todo.content}</span>
+    <li className={custom["list-group-item"]}>
+      <input
+        type="checkbox"
+        checked={todo.completed}
+        onChange={() => dispatch(toggleTodo(todo.id))}
+      />
+      <span>
+        {"    "}
+        {todo && todo.content && todo.content}
+      </span>
     </li>
   );
 };
