@@ -15,7 +15,7 @@ export const TodoList = createDynamicComponent({
 
 function TodoApp() {
   return (
-    <div>
+    <div style={{ margin: "24px" }}>
       <h1 className={classNames(custom["page-header"], custom["text-center"])}>My To-do List</h1>
       <TodoInput />
       <TodoList />

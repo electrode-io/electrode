@@ -12,13 +12,22 @@ const TodoInput = props => {
       <input
         className={classNames(custom["form-control"])}
         onChange={e => setInput(e.target.value)}
+        onKeyDown={e => {
+          if (e.key === "Enter" && input) {
+            dispatch(addTodo(input));
+            setInput("");
+          }
+        }}
         value={input}
       />
       <span className={custom["input-group-btn"]}>
         <button
           className={classNames(custom["btn"], custom["btn-default"])}
           onClick={() => {
-            if (input) dispatch(addTodo(input), setInput(""));
+            if (input) {
+              dispatch(addTodo(input));
+            }
+            setInput("");
           }}
         >
           Add Todo
