@@ -11,7 +11,7 @@ import { createStore, reduxFeature, ReduxFeature } from "../../src/browser/index
 
 const { createElement } = React; // eslint-disable-line
 const mockPrepare = async initialState => {
-  return { initialState: "init-state" };
+  return { initialState: "init-state-" + initialState };
 };
 const options = {
   React,
@@ -114,7 +114,7 @@ describe("reactReduxFeature", function () {
 
     const redux: Partial<ReduxFeature> = def._features.redux;
 
-    const stubbed = sinon
+    sinon
       .stub(require("redux"), "createStore") // eslint-disable-line
       .callsFake((reducer, initalState) => reducer(initalState));
 
@@ -185,7 +185,7 @@ describe("reactReduxFeature", function () {
     container.declare("test", def);
 
     factory.add(def);
-    def._module = { reduxReducers: { a: x => x || 1, b: x => x || 2 } };
+    def._module = { reduxReducers: { a: x => x || "1", b: x => x || "2" } };
     (def._features.redux as any)._store = createStore(x => x);
     const res = await def._features.redux.execute({
       input: {
@@ -292,7 +292,7 @@ describe("reactReduxFeature", function () {
 
     expect(element.innerHTML).equal(`test<p>mock-component-content</p>`);
 
-    expect(res.props).equal("init-state");
+    expect(res.props).equal("init-state-test");
   });
 
   it("should render subapp with combined reducer on node side", async () => {
@@ -312,7 +312,7 @@ describe("reactReduxFeature", function () {
     container.declare("test", def);
 
     factory.add(def);
-    def._module = { reduxReducers: { a: x => x || 1, b: x => x || 2 } };
+    def._module = { reduxReducers: { a: x => x || "1", b: x => x || "2" } };
     (def._features.redux as any)._store = createStore(x => x);
     const res = await def._features.redux.execute({
       input: {
@@ -331,7 +331,7 @@ describe("reactReduxFeature", function () {
 
     expect(element.innerHTML).equal(`test<p>mock-component-content</p>`);
 
-    expect(res.props).equal("init-state");
+    expect(res.props).equal("init-state-test");
   });
 
   it("should render subapp without reducer on node side", async () => {
@@ -379,6 +379,6 @@ describe("reactReduxFeature", function () {
 
     expect(element.innerHTML).equal(`test <p>get-export-mock-content</p>`);
 
-    expect(res.props).equal("init-state");
+    expect(res.props).equal("init-state-test");
   });
 });
