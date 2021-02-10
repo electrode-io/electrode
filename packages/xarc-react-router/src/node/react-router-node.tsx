@@ -4,6 +4,9 @@ import { ReactRouterFeatureOptions, _id, _subId } from "../common";
 
 /**
  * Implement the component wrapping support for using react router on a subapp
+ *
+ * @param {object} options - router feature options
+ * @returns {object} - feature factory which can add router feature on a subapp
  */
 export function reactRouterFeature(options: ReactRouterFeatureOptions): SubAppFeatureFactory {
   const { createElement } = options.React; // eslint-disable-line

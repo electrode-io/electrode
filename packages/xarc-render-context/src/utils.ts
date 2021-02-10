@@ -1,11 +1,11 @@
 /** @ignore */ /** */
 
-const MAX_CWD_LEN = 3;
+const MIN_CWD_LEN = 3;
 
 export const munchyHandleStreamError = (err, cwd = process.cwd()) => {
   let errMsg = (process.env.NODE_ENV !== "production" && err.stack) || err.message;
 
-  if (cwd.length > MAX_CWD_LEN) {
+  if (cwd.length > MIN_CWD_LEN) {
     errMsg = (errMsg || "").replace(new RegExp(process.cwd(), "g"), "CWD");
   }
 
