@@ -1,4 +1,4 @@
-import { TokenModule, loadTokenModuleHandler } from "../../src";
+import { TokenModule } from "../../src";
 import { expect } from "chai";
 import * as Path from "path";
 import { TEMPLATE_DIR, TOKEN_HANDLER } from "../../src/index";

@@ -1,5 +1,5 @@
 /**
- * @packageDocumentation
+ * @package
  * @module index
  */
 /* eslint-disable comma-dangle, arrow-parens, filenames/match-regex, no-magic-numbers */
@@ -41,8 +41,8 @@ export class RenderContext {
 
   /**
    *
-   * @param options
-   * @param asyncTemplate
+   * @param options - render context options
+   * @param asyncTemplate - async template
    */
   constructor(options: any, asyncTemplate) {
     this.user = false;

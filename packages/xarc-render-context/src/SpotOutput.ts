@@ -1,5 +1,5 @@
 /**
- * @packageDocumentation
+ * @package
  * @module index
  */
 

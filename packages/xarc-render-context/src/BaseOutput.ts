@@ -1,5 +1,5 @@
 /**
- * @packageDocumentation
+ * @package
  * @module index
  */
 
@@ -55,6 +55,7 @@ export class BaseOutput {
    * length
    *
    * Get the number of items (data) added to the output
+   *
    * @returns number of items in the output
    */
   get length() {
