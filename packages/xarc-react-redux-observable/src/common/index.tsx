@@ -19,13 +19,16 @@ export type ReduxObservableOptions = {
 };
 
 /**
- * @param options
+ * adds decorator for redux observable support to the redux feature
+ *
+ * @param options redux observable options
+ * @returns redux decorator result
  */
 export function reduxObservableDecor(options: ReduxObservableOptions): ReduxFeatureDecorator {
   const { rootEpic } = options;
 
   return {
-    decorate(reduxFeat: ReduxFeature, params: ReduxDecoratorParams) {
+    decorate(_reduxFeat: ReduxFeature, params: ReduxDecoratorParams) {
       const epicMiddleware = createEpicMiddleware();
       const observerMiddleware = applyMiddleware(epicMiddleware);
 
