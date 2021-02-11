@@ -1,8 +1,8 @@
-/* eslint-disable max-statements */
+/* eslint-disable max-statements, complexity */
 
 import { SubAppDef, SubAppFeatureFactory, SubAppFeature, FeatureDecorator } from "@xarc/subapp";
 import { Provider } from "react-redux";
-import { applyMiddleware, combineReducers, createStore, Reducer } from "redux";
+import { combineReducers, createStore, Reducer } from "redux";
 
 //
 // re-export redux as Redux etc
@@ -39,7 +39,7 @@ export type ReduxDecoratorResult = {
  * Redux feature decorator
  */
 export type ReduxFeatureDecorator = FeatureDecorator<
-  ReduxFeature,
+  ReduxFeature, // eslint-disable-line no-use-before-define
   ReduxDecoratorParams,
   ReduxDecoratorResult
 >;
