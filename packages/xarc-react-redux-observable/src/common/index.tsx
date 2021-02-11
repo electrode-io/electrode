@@ -1,49 +1,46 @@
-import { StoreEnhancer } from "redux";
-import { Reducer, Store, StoreCreator } from "redux";
 import { createEpicMiddleware, Epic } from "redux-observable";
+import {
+  applyMiddleware,
+  Reducer,
+  createStore,
+  ReduxFeature,
+  ReduxDecoratorParams,
+  ReduxFeatureDecorator
+} from "@xarc/react-redux";
 
-export type ReduxObservableOption = {
+/**
+ * Options for creating a redux observable for use with redux feature
+ */
+export type ReduxObservableOptions = {
   /**
    * rootEpic must be provided from the App for initializing Redux Observable Middleware
    */
   rootEpic: Epic;
-  /**
-   * applyMiddlware provided from @xarc-react-redux
-   */
-  applyMiddleware: (e: any) => StoreEnhancer;
-
-  /**
-   * createStore provided from @xarc-react-redux
-   */
-  createStore: StoreCreator;
-
-  /**
-   * reducers provided from @xarc-react-redux
-   */
-  reducers: Reducer<unknown, any>;
-
-  /**
-   * initialState provided from @xarc-react-redux
-   */
-  initialState: any;
 };
 
 /**
- * @param options
+ * adds decorator for redux observable support to the redux feature
+ *
+ * @param options redux observable options
+ * @returns redux decorator result
  */
-export function reduxObservableDecor(options: ReduxObservableOption): Store {
-  const { rootEpic, applyMiddleware, createStore, reducers, initialState } = options;
+export function reduxObservableDecor(options: ReduxObservableOptions): ReduxFeatureDecorator {
+  const { rootEpic } = options;
 
-  if (!rootEpic) {
-    throw new Error("[REDUX-OBSERVABLE] must provide a root epic if redux-observable selected!");
-  }
-  const epicMiddleware = createEpicMiddleware();
-  const observerMiddleware = applyMiddleware(epicMiddleware);
-  const reduxObservableStore = createStore(
-    (reducers as Reducer<unknown, any>) || (x => x),
-    initialState,
-    observerMiddleware
-  );
-  epicMiddleware.run(rootEpic);
-  return reduxObservableStore;
+  return {
+    decorate(_reduxFeat: ReduxFeature, params: ReduxDecoratorParams) {
+      const epicMiddleware = createEpicMiddleware();
+      const observerMiddleware = applyMiddleware(epicMiddleware);
+
+      const store = createStore(
+        (params.reducers as Reducer<unknown, any>) || (x => x),
+        params.initialState,
+        observerMiddleware
+      );
+
+      epicMiddleware.run(rootEpic);
+
+      return { store };
+    }
+  };
 }

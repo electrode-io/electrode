@@ -1,8 +1,8 @@
-/* eslint-disable max-statements */
+/* eslint-disable max-statements, complexity */
 
-import { SubAppDef, SubAppFeatureFactory, SubAppFeature } from "@xarc/subapp";
+import { SubAppDef, SubAppFeatureFactory, SubAppFeature, FeatureDecorator } from "@xarc/subapp";
 import { Provider } from "react-redux";
-import { applyMiddleware, combineReducers, createStore, Reducer, Store } from "redux";
+import { combineReducers, createStore, Reducer } from "redux";
 
 //
 // re-export redux as Redux etc
@@ -17,28 +17,43 @@ export { combineReducers, createStore, Reducer, bindActionCreators, applyMiddlew
 export * as ReactRedux from "react-redux";
 export { connect, Provider, batch, useSelector, useDispatch, useStore } from "react-redux";
 
-export type FeatureDecorator = {
-  /**
-   * decorator function for redux observable or saga
-   */
-  decor: (options: any) => Store;
-
-  /**
-   * if redux observable is selected then we need a rootEpic
-   */
-  rootEpic?: any;
-
-  /**
-   * if saga is selected then we need a rootEpic
-   */
-  rootSaga?: any;
+/**
+ * redux decorator params
+ */
+export type ReduxDecoratorParams = {
+  /** initial state  */
+  initialState: unknown;
+  /** reducers */
+  reducers: unknown;
 };
 
+/**
+ * redux decorator result
+ */
+export type ReduxDecoratorResult = {
+  /** store if the decorator created one */
+  store: any;
+};
+
+/**
+ * Redux feature decorator
+ */
+export type ReduxFeatureDecorator = FeatureDecorator<
+  ReduxFeature, // eslint-disable-line no-use-before-define
+  ReduxDecoratorParams,
+  ReduxDecoratorResult
+>;
+
+/**
+ * options for redux feature
+ */
 export type ReduxFeatureOptions = {
   /**
-   * This is needed for injecting the middlewares through sub apps. e.g: [@xarc-react-redux-observable]
+   * add redux decorators to the redux feature.
+   *
+   * decorators: `@xarc/react-redux-observable`
    */
-  decorators?: FeatureDecorator[];
+  decorators?: ReduxFeatureDecorator[];
   /**
    * The React module.
    *
@@ -77,6 +92,9 @@ export type ReduxFeatureOptions = {
   prepare(initialState: any): Promise<any>;
 };
 
+/**
+ * redux support for a subapp
+ */
 export type ReduxFeature = SubAppFeature & {
   options: ReduxFeatureOptions;
   wrap: (_: any) => any;
@@ -128,7 +146,7 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
         // we don't need initialState and we just assign it to {}
         //
         initialState = {};
-        // replace the reducers maybe have been udpated.
+        // replace the reducers maybe have been updated.
         if (reducers === true) {
           reducers = subapp._module.reduxReducers;
           if (typeof reducers === "object") {
@@ -138,6 +156,7 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
         }
       } else {
         const props = csrData && (await csrData.getInitialState());
+
         if (reducers === true) {
           reducers = subapp._module.reduxReducers;
         }
@@ -145,19 +164,19 @@ export function reduxFeature(options: ReduxFeatureOptions): SubAppFeatureFactory
         if (typeof reducers === "object") {
           reducers = combineReducers(reducers) as Reducer<unknown, any>;
         }
+
         initialState = (await options.prepare(props)).initialState;
+
         if (decorators) {
-          decorators.forEach(d => {
-            redux._store = d.decor({
-              rootEpic: d.rootEpic,
-              rootSaga: d.rootSaga,
-              applyMiddleware: applyMiddleware,
-              createStore: createStore,
-              reducers: reducers,
-              initialState: initialState
-            });
-          });
-        } else {
+          for (const decor of decorators) {
+            const { store } = decor.decorate(redux as ReduxFeature, { reducers, initialState });
+            if (store) {
+              redux._store = store;
+            }
+          }
+        }
+
+        if (!redux._store) {
           redux._store = createStore((reducers as Reducer<unknown, any>) || (x => x), initialState);
         }
       }

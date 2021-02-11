@@ -4,9 +4,8 @@ import { connect, reduxFeature, useDispatch, FeatureDecorator } from "@xarc/reac
 import { reactRouterFeature, Route, Switch } from "@xarc/react-router";
 import { Navigation } from "../components/navigation";
 import { Products } from "../components/products";
-import { Epic, combineEpics } from "redux-observable";
-import { from, of } from "rxjs";
-import { exhaustMap, filter, map, catchError, delay, mapTo } from "rxjs/operators";
+import { combineEpics } from "redux-observable";
+import { filter, delay, mapTo } from "rxjs/operators";
 import { reduxObservableDecor } from "@xarc/react-redux-observable";
 
 const pingEpic = action$ =>
@@ -78,15 +77,12 @@ const MainRouter = () => {
 };
 
 //const ReduxHomeRouter = connect(mapStateToProps, dispatch => ({ dispatch }))(HomeRouter);
-const reduxObservableFeature: FeatureDecorator = {};
-reduxObservableFeature.decor = reduxObservableDecor;
-reduxObservableFeature.rootEpic = rootEpic;
 
 export const subapp: ReactSubApp = {
   Component: MainRouter,
   wantFeatures: [
     reduxFeature({
-      decorators: [reduxObservableFeature],
+      decorators: [reduxObservableDecor({ rootEpic })],
       React,
       shareStore: false,
       reducers: true,
