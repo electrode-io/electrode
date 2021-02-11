@@ -48,21 +48,5 @@
     "@xarc/opt-stylus": "^1.0.0",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.3"
-  },
-  "fyn": {
-    "dependencies": {
-      "@xarc/app": "../../packages/xarc-app",
-      "@xarc/react": "../../packages/xarc-react",
-      "@xarc/react-redux": "../../packages/xarc-react-redux",
-      "@xarc/react-redux-observable": "../../packages/xarc-react-redux-observable",
-      "@xarc/react-router": "../../packages/xarc-react-router",
-      "@xarc/tag-renderer": "../../packages/xarc-tag-renderer"
-    },
-    "devDependencies": {
-      "@xarc/app-dev": "../../packages/xarc-app-dev",
-      "@xarc/opt-eslint": "../../packages/xarc-opt-eslint",
-      "@xarc/opt-postcss": "../../packages/xarc-opt-postcss",
-      "@xarc/opt-stylus": "../../packages/xarc-opt-stylus"
-    }
   }
 }
