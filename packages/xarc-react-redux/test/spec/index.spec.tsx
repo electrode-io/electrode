@@ -258,29 +258,33 @@ describe("reactReduxFeature", function () {
     expect(res.props).to.eql({});
   });
 
-  it.skip("should render subapp with decorator", async () => {
+  it("should render subapp with decorator", async () => {
     const container = new SubAppContainer({});
     envHooks.getContainer = () => container;
 
-    const fake1 = sinon.fake();
-    const fake2 = sinon.fake();
-
-    const factory = reduxFeature({
+    const reduxFeatureOptions = {
       ...options,
-      reducers: true
-      // decorators: [
-      //   {
-      //     decor: fake1,
-      //     rootEpic: "test-epic1",
-      //     rootSaga: "test-saga1"
-      //   },
-      //   {
-      //     decor: fake2,
-      //     rootEpic: "test-epic2",
-      //     rootSaga: "test-saga2"
-      //   }
-      // ]
-    });
+      reducers: true,
+      decorators: [
+        {
+          decorate: (reduxFeat, reduxDecoratorParam) => {
+            return {
+              store: "mock-store1" + JSON.stringify(reduxFeat) + JSON.stringify(reduxDecoratorParam)
+            };
+          }
+        },
+        {
+          decorate: (reduxFeat, reduxDecoratorParam) => {
+            return {
+              store: "mock-store2" + JSON.stringify(reduxFeat) + JSON.stringify(reduxDecoratorParam)
+            };
+          }
+        }
+      ]
+    };
+    const factory = reduxFeature(reduxFeatureOptions);
+    const spy1 = sinon.spy(reduxFeatureOptions.decorators[0], "decorate");
+    const spy2 = sinon.spy(reduxFeatureOptions.decorators[1], "decorate");
 
     const def = {
       name: "test",
@@ -308,9 +312,51 @@ describe("reactReduxFeature", function () {
       reload: false
     });
 
-    expect(fake1.called).to.eql(true);
-    expect(fake2.called).to.eql(true);
-    expect(fake1.calledBefore(fake2)).to.eql(true);
+    expect(spy1.calledOnce && spy2.calledOnce).to.eql(true);
+    expect(spy1.calledBefore(spy2)).to.eql(true);
+    sinon.restore();
+  });
+
+  it("should render subapp without reload and decorator", async () => {
+    const container = new SubAppContainer({});
+    envHooks.getContainer = () => container;
+
+    const reduxFeatureOptions = {
+      ...options,
+      reducers: x => x || "1"
+    };
+    const factory = reduxFeature(reduxFeatureOptions);
+
+    const def = {
+      name: "test",
+      getModule() {
+        return Promise.resolve({});
+      },
+      _features: {}
+    } as SubAppDef;
+
+    container.declare("test", def);
+
+    factory.add(def);
+
+    const stub1 = sinon.stub(def._features.redux as any, "wrap").callsFake(obj => obj);
+
+    const res = await def._features.redux.execute({
+      input: {
+        Component: MockComponent
+      },
+      csrData: {
+        name: "test",
+        getInitialState: () => "test"
+      },
+      reload: false
+    });
+    //  eslint-disable-next-line
+    res.Component();
+    expect(stub1.calledOnce).to.eql(true);
+    expect(
+      stub1.calledWith({ Component: MockComponent, store: (def._features.redux as any)._store })
+    ).to.eql(true);
   });
 
   it("should render subapp with simple reducer on node side", async () => {
