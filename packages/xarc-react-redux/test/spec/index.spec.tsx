@@ -10,13 +10,16 @@ import sinon from "sinon";
 import { createStore, reduxFeature, ReduxFeature } from "../../src/browser/index";
 
 const { createElement } = React; // eslint-disable-line
+
 const mockPrepare = async initialState => {
   return { initialState: "init-state-" + initialState };
 };
+
 const options = {
   React,
   prepare: mockPrepare
 };
+
 const MockComponent = () => {
   return (
     <div>
@@ -253,6 +256,61 @@ describe("reactReduxFeature", function () {
     expect(element.innerHTML).equal(`test <p>get-export-mock-content</p>`);
 
     expect(res.props).to.eql({});
+  });
+
+  it("should render subapp with decorator", async () => {
+    const container = new SubAppContainer({});
+    envHooks.getContainer = () => container;
+
+    const fake1 = sinon.fake();
+    const fake2 = sinon.fake();
+
+    const factory = reduxFeature({
+      ...options,
+      reducers: true,
+      decorators: [
+        {
+          decor: fake1,
+          rootEpic: "test-epic1",
+          rootSaga: "test-saga1"
+        },
+        {
+          decor: fake2,
+          rootEpic: "test-epic2",
+          rootSaga: "test-saga2"
+        }
+      ]
+    });
+
+    const def = {
+      name: "test",
+      getModule() {
+        return Promise.resolve({});
+      },
+      _features: {}
+    } as SubAppDef;
+
+    container.declare("test", def);
+
+    factory.add(def);
+
+    def._module = { reduxReducers: x => x };
+    (def._features.redux as any)._store = createStore(x => x);
+
+    await def._features.redux.execute({
+      input: {
+        Component: MockComponent
+      },
+      csrData: {
+        name: "test",
+        getInitialState: () => "test"
+      },
+      reload: false
+    });
+
+    expect(fake1.called).to.eql(true);
+    expect(fake2.called).to.eql(true);
+    expect(fake1.calledBefore(fake2)).to.eql(true);
   });
 
   it("should render subapp with simple reducer on node side", async () => {
