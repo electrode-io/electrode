@@ -2,12 +2,13 @@ import { React, ReactSubApp, xarcV2, AppContext } from "@xarc/react";
 import { connect, reduxFeature } from "@xarc/react-redux";
 
 const Deal = props => {
-  return (<AppContext.Consumer>
-    {({ isSsr, ssr }) => {
-      return <div>SPECIAL DEAL - SPECIAL DEAL - {props.deals}</div>;
-    }}
-  </AppContext.Consumer>);
-
+  return (
+    <AppContext.Consumer>
+      {({ isSsr, ssr }) => {
+        return <div>SPECIAL DEAL - SPECIAL DEAL - {props.deals}</div>;
+      }}
+    </AppContext.Consumer>
+  );
 };
 
 const mapStateToProps = state => {

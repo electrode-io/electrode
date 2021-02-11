@@ -9,11 +9,12 @@ import { from, of } from "rxjs";
 import { exhaustMap, filter, map, catchError, delay, mapTo } from "rxjs/operators";
 import { reduxObservableDecor } from "@xarc/react-redux-observable";
 
-const pingEpic = action$ => action$.pipe(
-  filter((action: any) => action.type === 'PING'),
-  delay(1000), // Asynchronously wait 1000ms then continue
-  mapTo({ type: 'PONG' })
-);
+const pingEpic = action$ =>
+  action$.pipe(
+    filter((action: any) => action.type === "PING"),
+    delay(1000), // Asynchronously wait 1000ms then continue
+    mapTo({ type: "PONG" })
+  );
 
 const epics = [];
 epics.push(pingEpic);
@@ -22,16 +23,12 @@ epics.push(pingEpic);
 
 export const rootEpic = combineEpics(...epics);
 
-
 export const deals = declareSubApp({
   name: "deals",
   getModule: () => import("../subapps/deal")
 });
 
 const Deals = createDynamicComponent(deals, { ssr: true });
-
-
-
 
 const MainBody = props => {
   return <div>Home</div>;
@@ -63,7 +60,7 @@ const MainRouter = () => {
   React.useEffect(() => {
     // console.log(`ping called`)
     setInterval(() => {
-      dispatcher({ type: 'PING' });
+      dispatcher({ type: "PING" });
     }, 2000);
   }, []);
   return (
@@ -158,10 +155,10 @@ export const subapp: ReactSubApp = {
 
 export const reduxReducers = {
   number: (store, action) => {
-    if (action.type === 'PING') {
+    if (action.type === "PING") {
       console.log(`PING called from epic`);
     }
-    if (action.type === 'PONG') {
+    if (action.type === "PONG") {
       console.log(`PONG called from epic`);
     }
     if (action.type === "INC_NUMBER") {
@@ -180,6 +177,6 @@ export const reduxReducers = {
     return s || { items: [] };
   },
   deals: s => {
-    return s || { value: "my deals" }
+    return s || { value: "my deals" };
   }
 };

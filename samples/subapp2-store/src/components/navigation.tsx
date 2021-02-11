@@ -49,7 +49,7 @@ const Navigation = () => {
               Home
             </NavItem>
             <NavItem to="/products">Products</NavItem>
-             <NavItem to="/deals">Deals</NavItem>
+            <NavItem to="/deals">Deals</NavItem>
             <NavItem to="/stores">Stores</NavItem>
             <NavItem to="/contact">Contact</NavItem>
           </ul>
