@@ -17,24 +17,41 @@ export { combineReducers, createStore, Reducer, bindActionCreators, applyMiddlew
 export * as ReactRedux from "react-redux";
 export { connect, Provider, batch, useSelector, useDispatch, useStore } from "react-redux";
 
+/**
+ * redux decorator params
+ */
 export type ReduxDecoratorParams = {
+  /** initial state  */
   initialState: unknown;
+  /** reducers */
   reducers: unknown;
 };
 
+/**
+ * redux decorator result
+ */
 export type ReduxDecoratorResult = {
+  /** store if the decorator created one */
   store: any;
 };
 
+/**
+ * Redux feature decorator
+ */
 export type ReduxFeatureDecorator = FeatureDecorator<
   ReduxFeature,
   ReduxDecoratorParams,
   ReduxDecoratorResult
 >;
 
+/**
+ * options for redux feature
+ */
 export type ReduxFeatureOptions = {
   /**
-   * This is needed for injecting the middlewares through sub apps. e.g: [@xarc-react-redux-observable]
+   * add redux decorators to the redux feature.
+   *
+   * decorators: `@xarc/react-redux-observable`
    */
   decorators?: ReduxFeatureDecorator[];
   /**
@@ -75,6 +92,9 @@ export type ReduxFeatureOptions = {
   prepare(initialState: any): Promise<any>;
 };
 
+/**
+ * redux support for a subapp
+ */
 export type ReduxFeature = SubAppFeature & {
   options: ReduxFeatureOptions;
   wrap: (_: any) => any;
