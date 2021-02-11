@@ -32,11 +32,6 @@
     "rxjs": "^6.6.3",
     "tslib": "^2.1.0"
   },
-  "fyn": {
-    "dependencies": {
-      "@xarc/react-redux": "../xarc-react-redux"
-    }
-  },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@types/chai": "^4.2.14",

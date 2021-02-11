@@ -429,3 +429,13 @@ export type SubAppSSRData = {
   params?: Record<string, string>;
   query?: Record<string, string>;
 };
+
+/**
+ * Implement a subapp feature decorator
+ *
+ * The behavior of the decorator will be very specific to the internals of the feature
+ * it decorated.
+ */
+export interface FeatureDecorator<TF = unknown, TP = unknown, TR = void> {
+  decorate(feature: TF, params: TP): TR;
+}
