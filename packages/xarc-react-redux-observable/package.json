@@ -109,5 +109,10 @@
       "@xarc/module-dev/config/test/setup.js"
     ],
     "recursive": true
+  },
+  "fyn": {
+    "dependencies": {
+      "@xarc/react-redux": "../xarc-react-redux"
+    }
   }
 }

@@ -80,7 +80,7 @@ async function start() {
     }
   };
 
-  ["/", "/home", "/products", "/deals", "/stores", "/contact", "/account", "/cart", "/recoil"].forEach(
+  ["/", "/home", "/products", "/deals", "/stores", "/contact", "/account", "/cart"].forEach(
     path => {
       server.route({
         method: "GET",
