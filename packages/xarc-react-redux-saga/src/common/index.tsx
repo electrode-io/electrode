@@ -1,48 +1,37 @@
-import { StoreEnhancer } from "redux";
-import { Reducer, Store, StoreCreator } from "redux";
 import createSagaMiddleware from "redux-saga";
+
+import {
+  applyMiddleware,
+  Reducer,
+  createStore,
+  ReduxFeature,
+  ReduxDecoratorParams,
+  ReduxFeatureDecorator
+} from "@xarc/react-redux";
 
 export type ReduxSagaOption = {
   /**
    * rootSaga must be provided from the App for initializing Redux Saga Middleware
    */
   rootSaga: any;
-  /**
-   * applyMiddlware provided from @xarc-react-redux
-   */
-  applyMiddleware: (e: any) => StoreEnhancer;
-
-  /**
-   * createStore provided from @xarc-react-redux
-   */
-  createStore: StoreCreator;
-
-  /**
-   * reducers provided from @xarc-react-redux
-   */
-  reducers: Reducer<unknown, any>;
-
-  /**
-   * initialState provided from @xarc-react-redux
-   */
-  initialState: any;
 };
 
 /**
  * @param options
  */
-export function reduxSagaDecor(options: ReduxSagaOption): Store {
-  const { rootSaga, applyMiddleware, createStore, reducers, initialState } = options;
+export function reduxSagaDecor(options: ReduxSagaOption): ReduxFeatureDecorator {
+  const { rootSaga } = options;
 
-  if (!rootSaga) {
-    throw new Error("[REDUX-SAGA] must provide a root epic if redux-saga selected!");
+  return {
+    decorate(_reduxFeat: ReduxFeature, params: ReduxDecoratorParams) {
+      const sagaMiddleware = createSagaMiddleware();
+      const store = createStore(
+        (params.reducers as Reducer<unknown, any>) || (x => x),
+        params.initialState,
+        applyMiddleware(sagaMiddleware)
+      );
+      sagaMiddleware.run(rootSaga);
+      return { store };
+    }
   }
-  const sagaMiddleware = createSagaMiddleware();
-  const reduxSagaStore = createStore(
-    (reducers as Reducer<unknown, any>) || (x => x),
-    initialState,
-    applyMiddleware(sagaMiddleware)
-  );
-  sagaMiddleware.run(rootSaga);
-  return reduxSagaStore;
 }
