@@ -32,13 +32,15 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.12.5",
+    "@types/recoil": "^0.0.1",
     "@xarc/app": "^8.1.8",
     "@xarc/fastify-server": "^2.0.0",
     "@xarc/react": "^0.0.3",
     "@xarc/react-redux": "^0.1.0",
     "@xarc/react-redux-observable": "^0.1.0",
     "@xarc/react-router": "^0.1.0",
-    "classnames": "^2.2.6"
+    "classnames": "^2.2.6",
+    "recoil": "^0.1.2"
   },
   "devDependencies": {
     "@types/node": "^14.14.6",
@@ -48,5 +50,10 @@
     "@xarc/opt-stylus": "^1.0.0",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.3"
+  },
+  "fyn": {
+    "dependencies": {
+      "@xarc/react-redux-observable": "../../packages/xarc-react-redux-observable"
+    }
   }
 }
