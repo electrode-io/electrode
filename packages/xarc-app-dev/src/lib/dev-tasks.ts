@@ -411,9 +411,10 @@ ie >= 11
       console.log(ck`<orange>Generating <cyan>${newName}</> for you - please commit it.</>`);
       Fs.writeFileSync(
         newName,
+        // NOTE: do not change module.exports below, this is .js file for app
         `"use strict";
 const { babelPresetFile } = require("@xarc/app-dev");
-export =  {
+module.exports =  {
   presets: [babelPresetFile]
 };
 `
