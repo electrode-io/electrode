@@ -1,6 +1,6 @@
 {
   "name": "@xarc/subapp",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "xarc subapp version 2",
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
@@ -40,8 +40,8 @@
   "keywords": [],
   "license": "Apache-2.0",
   "dependencies": {
-    "@xarc/render-context": "^1.0.5",
-    "@xarc/tag-renderer": "^1.0.6",
+    "@xarc/render-context": "^1.0.6",
+    "@xarc/tag-renderer": "^1.0.7",
     "lodash": "^4.17.20",
     "tslib": "^2.1.0"
   },

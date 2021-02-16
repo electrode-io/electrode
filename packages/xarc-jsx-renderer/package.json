@@ -1,6 +1,6 @@
 {
   "name": "@xarc/jsx-renderer",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Render index.htm from JSX template",
   "main": "dist/index.js",
   "scripts": {
@@ -76,7 +76,7 @@
     "trailingComma": "none"
   },
   "dependencies": {
-    "@xarc/render-context": "^1.0.5",
+    "@xarc/render-context": "^1.0.6",
     "lodash": "^4.17.15",
     "munchy": "^1.0.9",
     "optional-require": "^1.0.0",
