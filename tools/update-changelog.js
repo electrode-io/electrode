@@ -274,6 +274,23 @@ const determinePackageVersions = collated => {
     const { updated } = collated;
     let count = 0;
     const indirectBumps = [];
+
+    // check for version locking of direct bump packages
+    collated.realPackages.filter(pkgName => {
+      const verLocks = versionLockMap[pkgName];
+      if (verLocks) {
+        console.log("verLocks", pkgName, verLocks);
+        for (const lockPkgName of _.without(verLocks, pkgName)) {
+          if (!collated.realPackages.includes(lockPkgName)) {
+            collated.realPackages.push(lockPkgName);
+            findVersion(lockPkgName, collated.packages, collated.packages[pkgName].updateType);
+            return true;
+          }
+        }
+      }
+      return false;
+    });
+
     const directBumps = collated.realPackages.filter(
       name => collated.packages[name] && collated.packages[name].newVersion
     );
@@ -297,6 +314,22 @@ const determinePackageVersions = collated => {
         }
       });
     } while (count > 0);
+
+    // check for version locking of indirect bump packages
+    const indirectLockBumps = indirectBumps.filter(pkgName => {
+      const verLocks = versionLockMap[pkgName];
+      if (verLocks) {
+        for (const lockPkgName of _.without(verLocks, pkgName)) {
+          if (!indirectBumps.includes(lockPkgName)) {
+            findVersion(lockPkgName, collated.packages, collated.packages[pkgName].updateType);
+            return true;
+          }
+        }
+      }
+      return false;
+    });
+
+    indirectBumps.push(...indirectLockBumps);
 
     collated.directBumps = directBumps;
     collated.indirectBumps = indirectBumps;
