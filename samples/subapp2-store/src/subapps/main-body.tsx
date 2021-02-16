@@ -27,7 +27,13 @@ export const deals = declareSubApp({
   getModule: () => import("../subapps/deal")
 });
 
+export const recoilTodoApp = declareSubApp({
+  name: "recoilTodoApp",
+  getModule: () => import("../subapps/recoilTodo")
+});
+
 const Deals = createDynamicComponent(deals, { ssr: true });
+const RecoilApp = createDynamicComponent(recoilTodoApp, { ssr: true });
 
 const MainBody = props => {
   return <div>Home</div>;
@@ -70,6 +76,7 @@ const MainRouter = () => {
         <Route path="/products" component={Products} />
         <Route path="/stores" component={Stores} />
         <Route path="/deals" component={Deals} />
+        <Route path="/recoil" component={RecoilApp} />
         <Route path="/contact" component={Contact} />
       </Switch>
     </div>
