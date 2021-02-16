@@ -74,6 +74,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="browser.html#provider" class="tsd-kind-icon">Provider</a></li>
 								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="browser.html#reducer" class="tsd-kind-icon">Reducer</a></li>
+								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="browser.html#applymiddleware" class="tsd-kind-icon">apply<wbr>Middleware</a></li>
 								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="browser.html#batch" class="tsd-kind-icon">batch</a></li>
 								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="browser.html#bindactioncreators" class="tsd-kind-icon">bind<wbr>Action<wbr>Creators</a></li>
 								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="browser.html#combinereducers" class="tsd-kind-icon">combine<wbr>Reducers</a></li>
@@ -93,20 +94,18 @@
 						<section class="tsd-index-section ">
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="browser.html#reduxdecoratorparams" class="tsd-kind-icon">Redux<wbr>Decorator<wbr>Params</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="browser.html#reduxdecoratorresult" class="tsd-kind-icon">Redux<wbr>Decorator<wbr>Result</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="browser.html#reduxfeature" class="tsd-kind-icon">Redux<wbr>Feature</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="browser.html#reduxfeaturedecorator" class="tsd-kind-icon">Redux<wbr>Feature<wbr>Decorator</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="browser.html#reduxfeatureoptions" class="tsd-kind-icon">Redux<wbr>Feature<wbr>Options</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="browser.html#reactredux" class="tsd-kind-icon">React<wbr>Redux</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="browser.html#reduxfeature-1" class="tsd-kind-icon">redux<wbr>Feature</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Methods</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-module"><a href="browser.html#reactredux" class="tsd-kind-icon">React<wbr>Redux</a></li>
 							</ul>
 						</section>
 					</div>
@@ -123,6 +122,11 @@
 					<a name="reducer" class="tsd-anchor"></a>
 					<h3>Reducer</h3>
 					Re-exports <a href="browser.redux.html#reducer">Reducer</a>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-reference tsd-parent-kind-module">
+					<a name="applymiddleware" class="tsd-anchor"></a>
+					<h3>apply<wbr>Middleware</h3>
+					Re-exports <a href="browser.redux.html#applymiddleware">applyMiddleware</a>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-reference tsd-parent-kind-module">
 					<a name="batch" class="tsd-anchor"></a>
@@ -168,24 +172,113 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Type aliases</h2>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
-					<a name="reduxfeature" class="tsd-anchor"></a>
-					<h3>Redux<wbr>Feature</h3>
-					<div class="tsd-signature tsd-kind-icon">Redux<wbr>Feature<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">SubAppFeature</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>Provider<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">typeof </span><a href="browser.html#reactredux" class="tsd-signature-type" data-tsd-kind="Method">ReactRedux</a><span class="tsd-signature-symbol">; </span>_store<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>createStore<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">typeof </span><a href="browser.redux.html#createstore" class="tsd-signature-type" data-tsd-kind="Function">createStore</a><span class="tsd-signature-symbol">; </span>options<span class="tsd-signature-symbol">: </span><a href="common.html#reduxfeatureoptions" class="tsd-signature-type" data-tsd-kind="Type alias">ReduxFeatureOptions</a><span class="tsd-signature-symbol">; </span>prepare<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>wrap<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>_<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></div>
+					<a name="reduxdecoratorparams" class="tsd-anchor"></a>
+					<h3>Redux<wbr>Decorator<wbr>Params</h3>
+					<div class="tsd-signature tsd-kind-icon">Redux<wbr>Decorator<wbr>Params<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>initialState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">; </span>reducers<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react-redux/src/common/index.tsx#L59">src/common/index.tsx:59</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L23">src/common/index.tsx:23</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>redux decorator params</p>
+						</div>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5>initial<wbr>State<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>initial state</p>
+									</div>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5>reducers<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>reducers</p>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="reduxdecoratorresult" class="tsd-anchor"></a>
+					<h3>Redux<wbr>Decorator<wbr>Result</h3>
+					<div class="tsd-signature tsd-kind-icon">Redux<wbr>Decorator<wbr>Result<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>store<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L33">src/common/index.tsx:33</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>redux decorator result</p>
+						</div>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5>store<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>store if the decorator created one</p>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="reduxfeature" class="tsd-anchor"></a>
+					<h3>Redux<wbr>Feature</h3>
+					<div class="tsd-signature tsd-kind-icon">Redux<wbr>Feature<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">SubAppFeature</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>Provider<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">typeof </span><a href="browser.html#reactredux" class="tsd-signature-type" data-tsd-kind="Function">ReactRedux</a><span class="tsd-signature-symbol">; </span>_store<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>createStore<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">typeof </span><a href="browser.redux.html#createstore" class="tsd-signature-type" data-tsd-kind="Function">createStore</a><span class="tsd-signature-symbol">; </span>options<span class="tsd-signature-symbol">: </span><a href="common.html#reduxfeatureoptions" class="tsd-signature-type" data-tsd-kind="Type alias">ReduxFeatureOptions</a><span class="tsd-signature-symbol">; </span>prepare<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>wrap<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>_<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L98">src/common/index.tsx:98</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>redux support for a subapp</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="reduxfeaturedecorator" class="tsd-anchor"></a>
+					<h3>Redux<wbr>Feature<wbr>Decorator</h3>
+					<div class="tsd-signature tsd-kind-icon">Redux<wbr>Feature<wbr>Decorator<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FeatureDecorator</span><span class="tsd-signature-symbol">&lt;</span><a href="common.html#reduxfeature" class="tsd-signature-type" data-tsd-kind="Type alias">ReduxFeature</a><span class="tsd-signature-symbol">, </span><a href="common.html#reduxdecoratorparams" class="tsd-signature-type" data-tsd-kind="Type alias">ReduxDecoratorParams</a><span class="tsd-signature-symbol">, </span><a href="common.html#reduxdecoratorresult" class="tsd-signature-type" data-tsd-kind="Type alias">ReduxDecoratorResult</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L41">src/common/index.tsx:41</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Redux feature decorator</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
 					<a name="reduxfeatureoptions" class="tsd-anchor"></a>
 					<h3>Redux<wbr>Feature<wbr>Options</h3>
-					<div class="tsd-signature tsd-kind-icon">Redux<wbr>Feature<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>React<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>createElement<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>reducers<span class="tsd-signature-symbol">?: </span><a href="browser.redux.html#reducer" class="tsd-signature-type" data-tsd-kind="Type alias">Reducer</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="browser.redux.html#reducer" class="tsd-signature-type" data-tsd-kind="Type alias">Reducer</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>shareStore<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>prepare<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></div>
+					<div class="tsd-signature tsd-kind-icon">Redux<wbr>Feature<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>React<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>createElement<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>decorators<span class="tsd-signature-symbol">?: </span><a href="common.html#reduxfeaturedecorator" class="tsd-signature-type" data-tsd-kind="Type alias">ReduxFeatureDecorator</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>reducers<span class="tsd-signature-symbol">?: </span><a href="browser.redux.html#reducer" class="tsd-signature-type" data-tsd-kind="Type alias">Reducer</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="browser.redux.html#reducer" class="tsd-signature-type" data-tsd-kind="Type alias">Reducer</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>shareStore<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>prepare<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react-redux/src/common/index.tsx#L20">src/common/index.tsx:20</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L50">src/common/index.tsx:50</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>options for redux feature</p>
+						</div>
+					</div>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
@@ -197,6 +290,15 @@
 									</div>
 									<p>This is needed for the redux feature to wrap subapp&#39;s component inside
 									the Redux Provider component.</p>
+								</div>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> decorators<span class="tsd-signature-symbol">?: </span><a href="common.html#reduxfeaturedecorator" class="tsd-signature-type" data-tsd-kind="Type alias">ReduxFeatureDecorator</a><span class="tsd-signature-symbol">[]</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>add redux decorators to the redux feature.</p>
+									</div>
+									<p>decorators: <code>@xarc/react-redux-observable</code></p>
 								</div>
 							</li>
 							<li class="tsd-parameter">
@@ -236,7 +338,7 @@
 									<li class="tsd-description">
 										<aside class="tsd-sources">
 											<ul>
-												<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react-redux/src/common/index.tsx#L56">src/common/index.tsx:56</a></li>
+												<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L92">src/common/index.tsx:92</a></li>
 											</ul>
 										</aside>
 										<div class="tsd-comment tsd-typography">
@@ -266,6 +368,35 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="reactredux" class="tsd-anchor"></a>
+					<h3>React<wbr>Redux</h3>
+					<div class="tsd-signature tsd-kind-icon">React<wbr>Redux<span class="tsd-signature-symbol">:</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L17">src/common/index.tsx:17</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L17">src/common/index.tsx:17</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="reduxfeature-1" class="tsd-anchor"></a>
 					<h3>redux<wbr>Feature</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
@@ -275,7 +406,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react-redux/src/common/index.tsx#L74">src/common/index.tsx:74</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L113">src/common/index.tsx:113</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -287,44 +418,15 @@
 							<ul class="tsd-parameters">
 								<li>
 									<h5>options: <a href="common.html#reduxfeatureoptions" class="tsd-signature-type" data-tsd-kind="Type alias">ReduxFeatureOptions</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>redux feature options</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SubAppFeatureFactory</span></h4>
 							<p>unknown</p>
 						</li>
 					</ul>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module">
-					<a name="reactredux" class="tsd-anchor"></a>
-					<h3>React<wbr>Redux</h3>
-					<div class="tsd-signature tsd-kind-icon">React<wbr>Redux<span class="tsd-signature-symbol">:</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react-redux/src/common/index.tsx#L17">src/common/index.tsx:17</a></li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react-redux/src/common/index.tsx#L17">src/common/index.tsx:17</a></li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/f71798dc/packages/xarc-react-redux/src/common/index.tsx#L18">src/common/index.tsx:18</a></li>
-						</ul>
-					</aside>
 				</section>
 			</section>
 		</div>
@@ -357,6 +459,9 @@
 						<a href="browser.html#reducer" class="tsd-kind-icon">Reducer</a>
 					</li>
 					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="browser.html#applymiddleware" class="tsd-kind-icon">apply<wbr>Middleware</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
 						<a href="browser.html#batch" class="tsd-kind-icon">batch</a>
 					</li>
 					<li class=" tsd-kind-reference tsd-parent-kind-module">
@@ -381,16 +486,25 @@
 						<a href="browser.html#usestore" class="tsd-kind-icon">use<wbr>Store</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="browser.html#reduxdecoratorparams" class="tsd-kind-icon">Redux<wbr>Decorator<wbr>Params</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="browser.html#reduxdecoratorresult" class="tsd-kind-icon">Redux<wbr>Decorator<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
 						<a href="browser.html#reduxfeature" class="tsd-kind-icon">Redux<wbr>Feature</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="browser.html#reduxfeaturedecorator" class="tsd-kind-icon">Redux<wbr>Feature<wbr>Decorator</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
 						<a href="browser.html#reduxfeatureoptions" class="tsd-kind-icon">Redux<wbr>Feature<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="browser.html#reduxfeature-1" class="tsd-kind-icon">redux<wbr>Feature</a>
-					</li>
-					<li class=" tsd-kind-method tsd-parent-kind-module">
 						<a href="browser.html#reactredux" class="tsd-kind-icon">React<wbr>Redux</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="browser.html#reduxfeature-1" class="tsd-kind-icon">redux<wbr>Feature</a>
 					</li>
 				</ul>
 			</nav>
