@@ -1,5 +1,88 @@
 # 2/15/2021
 
+- fix generate babel.config.js
+- subapp2 generic feature decorator
+- add xarc-react-redux-observable for subapp2 redux middleware support
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@9.0.2` `(9.0.1 => 9.0.2)`
+- `@xarc/app-dev@9.0.2` `(9.0.1 => 9.0.2)`
+- `@xarc/create-app@5.0.2` `(5.0.1 => 5.0.2)`
+- `@xarc/react-redux@0.1.6` `(0.1.5 => 0.1.6)`
+- `@xarc/react-redux-observable@0.1.0` `(0.0.2 => 0.1.0)`
+- `@xarc/react-redux-saga@0.1.0` `(0.0.1 => 0.1.0)`
+- `@xarc/react-router@0.1.7` `(0.1.6 => 0.1.7)`
+- `@xarc/render-context@1.0.6` `(1.0.5 => 1.0.6)`
+- `@xarc/subapp@0.1.7` `(0.1.6 => 0.1.7)`
+
+### Lerna Updated
+
+- `@xarc/index-page@1.0.9` `(1.0.8 => 1.0.9)`
+- `@xarc/jsx-renderer@1.0.8` `(1.0.7 => 1.0.8)`
+- `@xarc/react@0.1.7` `(0.1.6 => 0.1.7)`
+- `@xarc/react-query@0.1.3` `(0.1.2 => 0.1.3)`
+- `@xarc/tag-renderer@1.0.7` `(1.0.6 => 1.0.7)`
+- `subapp-server@1.3.13` `(1.3.12 => 1.3.13)`
+
+## Commits
+
+- `packages/xarc-app-dev`
+
+  - fix generate babel.config.js [commit](http://github.com/electrode-io/electrode/commit/0d94c51fc00e30530cb28009407cbec68b4fc387)
+
+- `packages/xarc-create-app`
+
+  - [fix] create-app use self name from package.json [commit](http://github.com/electrode-io/electrode/commit/307f6e4ba7fe8402748cbd3b5d93a7c74c174677)
+  - fix create app demo build mode require module not found [commit](http://github.com/electrode-io/electrode/commit/45128e55ea45caa2cce16588592832be8e8b177b)
+
+- `packages/xarc-react-redux`
+
+  - update unit test for xarc-react-redux ([#1821](https://github.com/electrode-io/electrode/pull/1821)) [commit](http://github.com/electrode-io/electrode/commit/717d8770094a7433e1dfd0b7582be2835ded9bc8)
+  - subapp2 generic feature decorator ([#1820](https://github.com/electrode-io/electrode/pull/1820)) [commit](http://github.com/electrode-io/electrode/commit/7fcc9521c0cc955013a618d348e548966b2671f5)
+  - add more unit test to react redux ([#1819](https://github.com/electrode-io/electrode/pull/1819)) [commit](http://github.com/electrode-io/electrode/commit/a25fa4c832cccc84f9726ea9546edbda79716e8e)
+  - fix react redux lint warnings ([#1816](https://github.com/electrode-io/electrode/pull/1816)) [commit](http://github.com/electrode-io/electrode/commit/d42a4411ccf15f15019e636ae2a61b8bb279b9c8)
+  - add xarc-react-redux-observable for subapp2 redux middleware support ([#1808](https://github.com/electrode-io/electrode/pull/1808)) [commit](http://github.com/electrode-io/electrode/commit/17994be0d324c78c6339d10d3556c16c87925f81)
+
+- `packages/xarc-react-redux-observable`
+
+  - subapp2 generic feature decorator ([#1820](https://github.com/electrode-io/electrode/pull/1820)) [commit](http://github.com/electrode-io/electrode/commit/7fcc9521c0cc955013a618d348e548966b2671f5)
+  - format code [commit](http://github.com/electrode-io/electrode/commit/be9c69a77d0f0b2f0f66b717260232daf411af52)
+  - add xarc-react-redux-observable for subapp2 redux middleware support ([#1808](https://github.com/electrode-io/electrode/pull/1808)) [commit](http://github.com/electrode-io/electrode/commit/17994be0d324c78c6339d10d3556c16c87925f81)
+  - [minor] mark for minor release [commit](http://github.com/electrode-io/electrode/commit/b4eef3b603973cb1e272b2e623158466581b5ef1)
+
+- `packages/xarc-react-redux-saga`
+
+  - [FIX] xarc-react-redux-saga with factory method ([#1822](https://github.com/electrode-io/electrode/pull/1822)) [commit](http://github.com/electrode-io/electrode/commit/91aee06f91f9f5572231a03ba65c69196964729e)
+  - format code [commit](http://github.com/electrode-io/electrode/commit/be9c69a77d0f0b2f0f66b717260232daf411af52)
+  - add xarc-react-redux-observable for subapp2 redux middleware support ([#1808](https://github.com/electrode-io/electrode/pull/1808)) [commit](http://github.com/electrode-io/electrode/commit/17994be0d324c78c6339d10d3556c16c87925f81)
+  - [minor] mark for minor release [commit](http://github.com/electrode-io/electrode/commit/b4eef3b603973cb1e272b2e623158466581b5ef1)
+
+- `packages/xarc-react-router`
+
+  - fix lints for xarc react router ([#1818](https://github.com/electrode-io/electrode/pull/1818)) [commit](http://github.com/electrode-io/electrode/commit/3bc34a21119b928cc92362b20af04e95afb91948)
+
+- `packages/xarc-render-context`
+
+  - fix lints for xarc react router ([#1818](https://github.com/electrode-io/electrode/pull/1818)) [commit](http://github.com/electrode-io/electrode/commit/3bc34a21119b928cc92362b20af04e95afb91948)
+  - fix render context lint warnings ([#1817](https://github.com/electrode-io/electrode/pull/1817)) [commit](http://github.com/electrode-io/electrode/commit/69d949af4e44c55f0b5f8e49403fec77513117c6)
+
+- `packages/xarc-subapp`
+
+  - subapp2 generic feature decorator ([#1820](https://github.com/electrode-io/electrode/pull/1820)) [commit](http://github.com/electrode-io/electrode/commit/7fcc9521c0cc955013a618d348e548966b2671f5)
+
+- `tools`
+
+  - update-changelog handle version lock updates [commit](http://github.com/electrode-io/electrode/commit/145b79404605a63743d494997dc0a56c83c581e9)
+
+- `MISC`
+
+  - Update changelog [commit](http://github.com/electrode-io/electrode/commit/da1e8438d8fe99421764d371c7d44671235f1c54)
+
+# 2/15/2021
+
 ## Packages
 
 ### Directly Updated
