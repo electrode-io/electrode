@@ -9,6 +9,9 @@ import {
   ReduxFeatureDecorator
 } from "@xarc/react-redux";
 
+/**
+ * Redux saga options
+ */
 export type ReduxSagaOption = {
   /**
    * rootSaga must be provided from the App for initializing Redux Saga Middleware
@@ -17,7 +20,10 @@ export type ReduxSagaOption = {
 };
 
 /**
- * @param options
+ * Decorate `@xarc/react-redux` with Redux saga support
+ *
+ * @param options redux saga options
+ * @returns Redux feature decorator
  */
 export function reduxSagaDecor(options: ReduxSagaOption): ReduxFeatureDecorator {
   const { rootSaga } = options;
@@ -33,5 +39,5 @@ export function reduxSagaDecor(options: ReduxSagaOption): ReduxFeatureDecorator 
       sagaMiddleware.run(rootSaga);
       return { store };
     }
-  }
+  };
 }
