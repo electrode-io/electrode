@@ -1,6 +1,6 @@
 {
   "name": "@xarc/react-redux-saga",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "xarc React.js application redux saga support",
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
