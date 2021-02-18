@@ -97,7 +97,7 @@ function loadWebpackConfig() {
  * get karma config
  *
  * @param config
- * @returns karma config
+ * @returns {void} karma config
  */
 export = function getKarmaConfig(config): any {
   let plugins = getXarcOptPlugins() || getArchetypeOptPlugins();

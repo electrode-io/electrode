@@ -193,7 +193,7 @@ export class Middleware {
 
     this.returnReporter = undefined;
 
-    defaultReporter = (middlewareOptions, reporterOptions) => {
+    defaultReporter = (_middlewareOptions, reporterOptions) => {
       if (!reporterOptions.state) {
         process.send({
           name: "webpack-report",
@@ -242,8 +242,9 @@ export class Middleware {
             if (m.startsWith("multi ")) return;
             // webpack4 output like "./routes.jsx + 9 modules"
             const plusIx = m.indexOf(" + ");
-            if (plusIx > 0) m = m.substring(0, plusIx);
-            refreshModules.push(m.replace(cwd, ""));
+            let n = m;
+            if (plusIx > 0) n = m.substring(0, plusIx);
+            refreshModules.push(n.replace(cwd, ""));
           });
         });
       }

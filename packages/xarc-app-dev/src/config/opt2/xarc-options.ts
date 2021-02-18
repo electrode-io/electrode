@@ -18,7 +18,7 @@ export type XarcOptions = {
   /**
    * port to listen on for serving your application
    *
-   * @remarks
+   * "@remarks"
    *  In development, this is what the dev proxy listens on.  Your app server
    *  listens on `appServerPort` that the proxy forwards to.
    *
@@ -31,7 +31,7 @@ export type XarcOptions = {
    * - Set it to `-1` to disable `http` and use `httpsPort` to listen on `https` only.
    * - If not set, then check env `PORT`
    *
-   * @remarks Regarding `HTTPS`:
+   * "@remarks" Regarding `HTTPS`:
    * - If you want full control of `https` and `http` ports, set `httpsPort` and `port`.
    * - If you set `port` to `443` or `8443`, then dev proxy do `https` on that port, and
    *   listens on something that doesn't conflict with `appServerPort`, which is
@@ -50,7 +50,7 @@ export type XarcOptions = {
    * - Set it to `0` and the proxy will pick a random port for `https`.
    * - Set to `-1` to force disable `https`
    *
-   * @remarks
+   * "@remarks"
    * If this is set, it cannot be the same as `port`, which then will be
    * forced to be `http` only.
    *

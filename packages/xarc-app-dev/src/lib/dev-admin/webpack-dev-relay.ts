@@ -55,7 +55,7 @@ export class WebpackDevRelay {
     }
   }
 
-  receiveAppServerMessage(data) {}
+  receiveAppServerMessage(_data) {}
 
   _setServer(name, child, handlers = undefined) {
     const info = this._servers[name];

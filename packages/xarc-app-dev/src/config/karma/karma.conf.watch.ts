@@ -12,7 +12,7 @@ import { loadUserConfig } from "./util/load-user-config";
  * Karma config for watching mode
  *
  * @param config
- * @returns karma config
+ * @returns {void} karma config
  */
 export = function(config) {
   dev(config);

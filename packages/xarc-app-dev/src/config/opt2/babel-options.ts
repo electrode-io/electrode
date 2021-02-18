@@ -7,7 +7,7 @@ export type BabelOptions = {
   /**
    * enable support for typescript types using `@babel/preset-typescript`
    *
-   * @remarks
+   * "@remarks"
    *  transpile only, no type checking
    *
    * - **Default: true**
@@ -18,7 +18,7 @@ export type BabelOptions = {
   /**
    * Enable support for stripping flow.js types using `@babel/plugin-transform-flow-strip-types`
    *
-   * @remarks
+   * "@remarks"
    *  transpile only, no type checking
    *
    * - **Default: `false`**

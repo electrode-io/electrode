@@ -59,7 +59,7 @@ const getNotFoundPage = data => {
 };
 
 // eslint-disable-next-line max-params
-const getLineForTree = (protocol, host) => (tree, [envVarName, port], idx, arr) => {
+const getLineForTree = (_rotocol, host) => (tree, [envVarName, port], idx, arr) => {
   const boxChar = idx === arr.length - 1 ? "└" : "├";
   const portText = envVarName.replace(/port/gi, "");
   return ck`${tree}  ${boxChar}─<green>${formUrl({
@@ -78,7 +78,7 @@ const buildProxyTree = (options, ports) => {
   return ck`<orange>${formUrl({ protocol, host, port })}</> (proxy) \n${portTree}`;
 };
 
-const onExitRequest = (req, res) => {
+const onExitRequest = (_req, res) => {
   res.statusCode = 200;
   res.write(`<!DOCTYPE html>
 <html><head></head><body>
@@ -92,7 +92,7 @@ const onExitRequest = (req, res) => {
   return false;
 };
 
-const onStatusRequest = (req, res) => {
+const onStatusRequest = (_req, res) => {
   res.statusCode = 200;
   res.write(`<!DOCTYPE html>
 <html><head></head><body>
@@ -186,7 +186,7 @@ const registerElectrodeDevRules = ({
     ssl,
     src: formUrl({ protocol, host, path: controlPaths.restart }),
     target: `http://localhost:29999/skip`,
-    onRequest: (req, res) => {
+    onRequest: (_req, res) => {
       res.statusCode = 200;
       res.write(`restarted`);
       res.end();

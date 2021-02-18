@@ -397,7 +397,7 @@ ie >= 11
       });
     };
 
-    const makeBabelConfig = (destDir, rcFile, resultFile = "babel.config.js") => {
+    const makeBabelConfig = (destDir, _rcFile, resultFile = "babel.config.js") => {
       destDir = Path.resolve(xarcCwd, destDir);
 
       const files = [".babelrc.js", resultFile];
