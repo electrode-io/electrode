@@ -53,6 +53,17 @@ const SERVER_ENVS = {
   [PROXY_SERVER_NAME]: {}
 };
 
+const getTerminalColumns = () => {
+  const { env, stdout, stderr } = process;
+
+  return (
+    (stdout && stdout.columns) ||
+    (stderr && stderr.columns) ||
+    (env.COLUMNS && Number.parseInt(env.COLUMNS, 10)) ||
+    80
+  );
+};
+
 export class AdminServer {
   _opts: any;
   _passThru: any;
@@ -378,6 +389,7 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
 
     const start = () => {
       const env = Object.assign({}, process.env, {
+        COLUMNS: getTerminalColumns(),
         // let child process know that dev admin is running
         XARC_ADMIN_SERVER: true,
         // pass admin port to child process
