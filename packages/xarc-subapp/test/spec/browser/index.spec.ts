@@ -56,7 +56,7 @@ describe("browser index", () => {
 
   describe("IS_BROWSER", () => {
     it("should IS_BROWSER be true", () => {
-      expect(IS_BROWSER).true;
+      expect(IS_BROWSER).true; //  eslint-disable-line
     });
   });
 

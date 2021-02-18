@@ -19,7 +19,7 @@ describe("subapp-ready", () => {
 
   describe("isSubAppReady", () => {
     it("should isSubAppReady return true", () => {
-      expect(isSubAppReady()).true;
+      expect(isSubAppReady()).true; //  eslint-disable-line
     });
   });
 
@@ -49,10 +49,10 @@ describe("subapp-ready", () => {
 
       sinon.stub(envHooks, "getContainer").returns({
         ...subappCon,
-        get: str => subappDef,
-        declare: (str, def) => subappDef,
+        get: str => subappDef, //  eslint-disable-line
+        declare: (str, def) => subappDef, //  eslint-disable-line
         isReady: () => false,
-        updateReady: () => {},
+        updateReady: () => {}, //  eslint-disable-line
         getNames: () => ["test-subapp1", "test-subapp2"]
       });
 
@@ -76,10 +76,10 @@ describe("subapp-ready", () => {
       sinon.stub(envHooks, "getContainer").returns({
         ...subappCon,
         declareCount: 1,
-        get: str => subappDef,
-        declare: (str, def) => subappDef,
+        get: str => subappDef, //  eslint-disable-line
+        declare: (str, def) => subappDef, //  eslint-disable-line
         isReady: () => false,
-        updateReady: () => {},
+        updateReady: () => {}, //  eslint-disable-line
         getNames: () => []
       });
 

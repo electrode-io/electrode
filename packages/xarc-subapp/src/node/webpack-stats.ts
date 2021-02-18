@@ -17,7 +17,7 @@ export class WebpackStats {
    * - `WEBPACK_ENV` defined - load from `.etmp` dir
    * - otherwise - load from `dist/server` dir
    *
-   * @remarks will look for the data under dir by env `XARC_CWD` or `process.cwd()`
+   * '@remarks' will look for the data under dir by env `XARC_CWD` or `process.cwd()`
    *
    */
   load() {
@@ -26,12 +26,18 @@ export class WebpackStats {
     this._stats = JSON.parse(Fs.readFileSync(statsFile).toString());
   }
 
-  /** names of all chunks */
+  /** names of all chunks
+   *
+   * @returns an array of chuck names of assets
+   */
   get allChunkNames() {
     return Object.keys(this._stats.assetsByChunkName);
   }
 
-  /** The raw stats data as loaded */
+  /** The raw stats data as loaded
+   *
+   * @returns webpack status object
+   */
   get stats() {
     return this._stats;
   }

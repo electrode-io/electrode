@@ -3,12 +3,12 @@ import { xarcV2Client } from "../../../src/browser/xarc-subapp-v2";
 
 import { describe, it } from "mocha";
 import { expect } from "chai";
-require("jsdom-global")("", { url: "https://localhost/" });
+require("jsdom-global")("", { url: "https://localhost/" }); //  eslint-disable-line
 
 const mockWindow = Object.assign({}, window);
 describe("xarcCdnMap", () => {
   it("should xarcCdnMap return undefined when window not having xarcV2 attribute", () => {
-    expect(xarcCdnMap(mockWindow)).undefined;
+    expect(xarcCdnMap(mockWindow)).undefined; //  eslint-disable-line
   });
 
   it("should xarcCdnMap add subapp2 global attribute and method on window object", () => {

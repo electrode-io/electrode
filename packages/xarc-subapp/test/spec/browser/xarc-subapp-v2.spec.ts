@@ -1,19 +1,21 @@
+//  eslint-disable max-statements
 import { xarcV2Client } from "../../../src/browser/xarc-subapp-v2";
 import { describe, it } from "mocha";
 import { expect } from "chai";
-require("jsdom-global")("", { url: "https://localhost/" });
+require("jsdom-global")("", { url: "https://localhost/" }); //  eslint-disable-line
 
 const mockWindow = Object.assign({}, window);
-
+let xarcV2;
 describe("xarcV2Client", () => {
-  it("should xarcV2Client add attribute and method on window object", () => {
-    //  eslint-disable max-len
+  before(() => {
     xarcV2Client(mockWindow);
-    const xarcV2 = (mockWindow as any).xarcV2;
+    xarcV2 = (mockWindow as any).xarcV2;
+  });
+  it("should xarcV2Client add attributes on window object", () => {
     expect(xarcV2).to.be.an("object");
-    expect(xarcV2.IS_BROWSER).true;
-    expect(xarcV2.HAS_WINDOW).true;
-    expect(xarcV2.version).equal(2000000);
+    expect(xarcV2.IS_BROWSER).true; //  eslint-disable-line
+    expect(xarcV2.HAS_WINDOW).true; //  eslint-disable-line
+    expect(xarcV2.version).equal(2000000); //  eslint-disable-line
     expect(xarcV2.rt).eql({
       instId: 1,
       subApps: {},
@@ -21,6 +23,9 @@ describe("xarcV2Client", () => {
       started: false,
       md: {}
     });
+  });
+
+  it("should xarcV2Client add methods on window object", () => {
     expect(xarcV2.cdnInit).to.be.a("function");
     expect(xarcV2.cdnUpdate).to.be.a("function");
     expect(xarcV2.getOnLoadStart).to.be.a("function");

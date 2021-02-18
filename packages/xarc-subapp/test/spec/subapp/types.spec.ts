@@ -17,7 +17,7 @@ describe("SubAppContainer", () => {
     expect(container.get("test1")).eql(subappDef1);
     expect(container.get("test2")).eql(undefined);
     expect(container.getNames()).eql(["test1"]);
-    expect(container.isReady()).true;
+    expect(container.isReady()).true; //  eslint-disable-line
 
     const subappDef2 = declareSubApp({
       name: "test-subapp2",
@@ -28,7 +28,7 @@ describe("SubAppContainer", () => {
     expect(container.get("test1")).eql(subappDef1);
     expect(container.get("test2")).eql(subappDef2);
     expect(container.getNames()).eql(["test1", "test2"]);
-    expect(container.getNames().length).eql(2);
-    expect(container.isReady()).true;
+    expect(container.getNames().length).eql(2); //  eslint-disable-line
+    expect(container.isReady()).true; //  eslint-disable-line
   });
 });

@@ -25,13 +25,14 @@ describe("Test load-v2", () => {
       getModule: () => import("../../blah")
     });
 
-    const res = loadSubApp({ user: { request: () => {} } }, { props: { name: "test-subapp1" } });
+    const res = loadSubApp({ user: { request: () => {} } }, { props: { name: "test-subapp1" } }); //  eslint-disable-line
     const subapp = getContainer().get("test-subapp1");
     subapp._start = sinon.spy();
+    //  eslint-disable-next-line
     expect(res.process({ user: { request: () => {} } }, { props: { name: "test-subapp1" } })).eql(
       undefined
     );
-    expect((subapp._start as any).calledOnce).true;
+    expect((subapp._start as any).calledOnce).true; //  eslint-disable-line
     sinon.restore();
   });
 });

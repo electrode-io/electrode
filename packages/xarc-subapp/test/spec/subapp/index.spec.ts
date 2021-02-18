@@ -1,4 +1,3 @@
-import { __declareSubApp } from "../../../src/subapp/index";
 import {
   declareSubApp,
   getContainer,
@@ -53,9 +52,9 @@ describe("declareSubApp", () => {
     expect(container.get("test")).to.equal(subapp);
     expect(subapp._module).to.equal(undefined);
 
-    expect(spy1.calledOnce).true;
-    expect(spy2.calledOnce).true;
-    expect(spy1.calledBefore(spy2)).true;
+    expect(spy1.calledOnce).true; //  eslint-disable-line
+    expect(spy2.calledOnce).true; //  eslint-disable-line
+    expect(spy1.calledBefore(spy2)).true; //  eslint-disable-line
 
     sinon.restore();
   });

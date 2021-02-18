@@ -2,7 +2,7 @@ import { webpack4JsonP } from "../../../src/browser/webpack4-jsonp";
 import { describe, it } from "mocha";
 import { expect } from "chai";
 
-let mockWindow: any = {};
+const mockWindow: any = {};
 describe("webpack4JsonP", () => {
   it("should webpack4JsonP set __webpack_get_script_src__ method on window", () => {
     webpack4JsonP(mockWindow);

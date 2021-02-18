@@ -7,7 +7,7 @@ import {
   IS_BROWSER,
   refreshAllSubApps2
 } from "../../../src/node/index";
-import { __declareSubApp, envHooks } from "../../../src/subapp/index";
+import { envHooks } from "../../../src/subapp/index";
 import { describe, it } from "mocha";
 import { expect } from "chai";
 import sinon from "sinon";
@@ -57,7 +57,7 @@ describe("node index", () => {
   });
 
   it("should IS_BROWSER be false", () => {
-    expect(IS_BROWSER).false;
+    expect(IS_BROWSER).false; //  eslint-disable-line
   });
 
   it("should refreshAllSubApps2 fresh all the subapp2 components", () => {
@@ -79,11 +79,11 @@ describe("node index", () => {
 
     refreshAllSubApps2();
 
-    expect(spy1.calledOnce).true;
-    expect(spy2.calledTwice).true;
-    expect(spy3.calledOnce).true;
-    expect(spy1.calledBefore(spy2)).true;
-    expect(spy2.calledBefore(spy3)).true;
+    expect(spy1.calledOnce).true; //  eslint-disable-line
+    expect(spy2.calledTwice).true; //  eslint-disable-line
+    expect(spy3.calledOnce).true; //  eslint-disable-line
+    expect(spy1.calledBefore(spy2)).true; //  eslint-disable-line
+    expect(spy2.calledBefore(spy3)).true; //  eslint-disable-line
     sinon.restore();
   });
 

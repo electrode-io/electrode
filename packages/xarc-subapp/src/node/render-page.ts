@@ -85,7 +85,7 @@ ${body.end}
 
   /**
    * Render index.html with subapps
-   *
+   * @params RenderOptions
    * @returns Promise<RenderContext>
    */
   async render(options: RenderOptions): Promise<RenderContext> {
