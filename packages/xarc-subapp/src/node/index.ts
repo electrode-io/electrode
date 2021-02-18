@@ -39,6 +39,10 @@ export function getContainer(): SubAppContainer {
   return CONTAINER;
 }
 
+export function _clearContainer(): void {
+  CONTAINER = undefined;
+}
+
 export function _setupEnvHooks() {
   if (!envHooks.getContainer) {
     envHooks.getContainer = getContainer;
