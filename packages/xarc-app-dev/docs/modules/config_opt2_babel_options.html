@@ -86,7 +86,7 @@
 					<div class="tsd-signature tsd-kind-icon">Babel<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>enableFlow<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>requireDirective<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">; </span>enableTypeScript<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>excludeRegExp<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>includeRegExp<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>proposalDecorators<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>legacy<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">; </span>transformClassProps<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>loose<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/0d94c51f/packages/xarc-app-dev/src/config/opt2/babel-options.ts#L6">src/config/opt2/babel-options.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/497a72b3/packages/xarc-app-dev/src/config/opt2/babel-options.ts#L6">src/config/opt2/babel-options.ts:6</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -103,20 +103,17 @@
 									<div class="lead">
 										<p>Enable support for stripping flow.js types using <code>@babel/plugin-transform-flow-strip-types</code></p>
 									</div>
-									<dl class="tsd-comment-tags">
-										<dt>remarks</dt>
-										<dd><p> transpile only, no type checking</p>
-											<ul>
-												<li><strong>Default: <code>false</code></strong></li>
-												<li>if not set, then we check env <code>ENABLE_BABEL_FLOW</code></li>
-											</ul>
-											<p>requireDirective behavior (defaulted to <strong>NOT</strong> required):</p>
-											<ul>
-												<li>When this plugin is enabled, it&#39;s defaulted to not require the <code>@flow</code> directive in source.</li>
-												<li>To change this behavior, set this option to <code>{ requireDirective: true }</code></li>
-											</ul>
-										</dd>
-									</dl>
+									<p>&quot;@remarks&quot;
+									transpile only, no type checking</p>
+									<ul>
+										<li><strong>Default: <code>false</code></strong></li>
+										<li>if not set, then we check env <code>ENABLE_BABEL_FLOW</code></li>
+									</ul>
+									<p>requireDirective behavior (defaulted to <strong>NOT</strong> required):</p>
+									<ul>
+										<li>When this plugin is enabled, it&#39;s defaulted to not require the <code>@flow</code> directive in source.</li>
+										<li>To change this behavior, set this option to <code>{ requireDirective: true }</code></li>
+									</ul>
 								</div>
 							</li>
 							<li class="tsd-parameter">
@@ -125,15 +122,12 @@
 									<div class="lead">
 										<p>enable support for typescript types using <code>@babel/preset-typescript</code></p>
 									</div>
-									<dl class="tsd-comment-tags">
-										<dt>remarks</dt>
-										<dd><p> transpile only, no type checking</p>
-											<ul>
-												<li><strong>Default: true</strong></li>
-												<li>if not set, then we check env <code>ENABLE_BABEL_TYPESCRIPT</code></li>
-											</ul>
-										</dd>
-									</dl>
+									<p>&quot;@remarks&quot;
+									transpile only, no type checking</p>
+									<ul>
+										<li><strong>Default: true</strong></li>
+										<li>if not set, then we check env <code>ENABLE_BABEL_TYPESCRIPT</code></li>
+									</ul>
 								</div>
 							</li>
 							<li class="tsd-parameter">
