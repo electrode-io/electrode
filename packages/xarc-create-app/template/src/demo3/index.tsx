@@ -9,6 +9,7 @@
 import { React, ReactSubApp } from "@xarc/react";
 import { reactQueryFeature, useQuery } from "@xarc/react-query";
 import { demo3QueryFn } from "./react-query-fetch";
+import { copyRightMessage } from "./copyright";
 
 const Demo3 = () => {
   const { data } = useQuery("demo3", demo3QueryFn, { staleTime: 2000 });
@@ -27,7 +28,7 @@ const Demo3 = () => {
         <h2>subapp demo3 with react-query</h2>
         data: <pre>{JSON.stringify(data)}</pre>
       </div>
-      <p style={{ textAlign: "center" }}>© {new Date().getFullYear()} Your (Company) name here</p>
+      <p style={{ textAlign: "center" }}>{copyRightMessage}</p>
     </div>
   );
 };

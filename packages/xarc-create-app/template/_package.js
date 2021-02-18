@@ -34,7 +34,7 @@ module.exports = (base, merge) => {
     dependencies: {
       "@babel/runtime": "^7.12.5",
       "@xarc/app": "^8.2.0", // version will come from ../package.json
-      "@xarc/fastify-server": "^2.0.0",
+      "@xarc/fastify-server": "^3.2.2",
       "@xarc/react": "^0.1.0", // version will come from ../package.json
       "@xarc/react-query": "^0.1.1", // version will come from ../package.json
       "@xarc/react-redux": "^0.1.0" // version will come from ../package.json
