@@ -1,7 +1,7 @@
 //
 //
 
-import { SubAppCSRData, SubAppFeatureResult } from "../subapp/types";
+import { SubAppCSRData, SubAppDef, SubAppFeatureResult } from "../subapp/types";
 import { envHooks } from "../subapp/envhooks";
 import { SubAppRenderPipeline } from "../subapp/subapp-render-pipeline";
 import { ClientFrameworkLib } from "../subapp/client-framework-lib";
@@ -20,7 +20,8 @@ export class ClientRenderPipeline implements Partial<SubAppRenderPipeline> {
     this.csrData = csrData;
     this.framework = this._getSubApp()._frameworkFactory() as ClientFrameworkLib;
   }
-
+  //  TODO: '_reload' is defined but never used
+  //  eslint-disable-next-line
   async start(_reload?: boolean): Promise<any> {
     this.startPrepare();
     await this.waitForPrepare();
@@ -54,15 +55,18 @@ export class ClientRenderPipeline implements Partial<SubAppRenderPipeline> {
     this.framework.startSubAppSync(this.csrData, this);
   }
 
-  _getSubApp() {
+  _getSubApp(): SubAppDef {
     const container = envHooks.getContainer();
     const subapp = container.get(this.subAppName);
     return subapp;
   }
 
+  //  eslint-disable-next-line
   _mount(_: any): any {
     //
   }
+
+  //  eslint-disable-next-line
   _unmount(_: any): any {
     //
   }

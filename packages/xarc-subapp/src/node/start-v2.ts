@@ -1,6 +1,10 @@
 import { SSR_PIPELINES } from "./utils";
 import { SubAppRenderPipeline } from "../subapp";
 
+/** To get start subapp object
+ *
+ * @returns an object with process method which can start subapp process
+ */
 export function startSubApp(): any {
   return {
     process(context): string {

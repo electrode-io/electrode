@@ -10,6 +10,7 @@ const NONCE_SIZE = 16;
  * Load CDN map
  *
  * @param cdnMap CDN map
+ * @returns cdn Map, if not found, return undefined
  */
 export function loadCdnMap(cdnMap: string): any {
   const fullPath = Path.isAbsolute(cdnMap)
@@ -23,6 +24,13 @@ export function loadCdnMap(cdnMap: string): any {
   }
 }
 
+/**
+ * get
+ *
+ * @param file - string to wrap
+ * @param data - string go before fragment
+ * @returns if found, return request's path name, if not, return false
+ */
 export function mapCdn(file: string, data: Record<string, string>): string | boolean {
   if (data) {
     const reqBase = Path.posix.basename(file);
@@ -52,13 +60,22 @@ export function wrapStringFragment(fragment: string, prefix = "", postfix = ""):
   return "";
 }
 
+//  eslint-disable-next-line
 export function nonceGenerator(_?: string): string {
   const token = Crypto.randomBytes(NONCE_SIZE).toString("base64");
   // drop "==" at the end
-  // eslint-disable no-magic-numbers
+  //  eslint-disable-next-line
   return token.substr(0, token.length - 2);
 }
 
+/**
+ * generate nonce token
+ *
+ * @param token init props
+ * @param fallback nonce fallback
+ * @param tag nonce token tag or nonce generator tag
+ * @returns an object with generated string token and nonce info
+ */
 export function generateNonce(
   token: Partial<{ props: InitProps }>,
   fallback: NonceInfo = null,
@@ -115,6 +132,7 @@ export const SSR_PIPELINES = Symbol("subapp-ssr-pipelines");
  * Stringify a JSON object and replace some tags to avoid XSS:
  *  - `<script>` => `&lt;script>`
  *  - `</script>` => `&lt;/script>`
+ *
  * @param obj - object to stringify
  * @returns JSON string of object
  */

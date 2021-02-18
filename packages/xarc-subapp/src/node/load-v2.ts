@@ -21,6 +21,7 @@ import { getContainer } from "./index";
  * @param _setupContext setup context
  * @param param1 props object
  */
+//  eslint-disable-next-line
 export function loadSubApp(_setupContext: any, { props: setupProps }): any {
   // name="Header"
   // async=true

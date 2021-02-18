@@ -72,9 +72,11 @@ export function xarcV2Client(
     //
     // empty place holders for CDN mapping
     //
+    //  eslint-disable-next-line
     cdnInit(_: any) {
       //
     },
+    //  eslint-disable-next-line
     cdnUpdate(_: any) {
       //
     },

@@ -143,7 +143,7 @@ function initializeStaticAssets(props: InitProps) {
     runtimeJsScripts,
     mainJsScripts,
     allCssLinks,
-    randomId: Crypto.randomBytes(8).toString("base64")
+    randomId: Crypto.randomBytes(8).toString("base64") //  eslint-disable-line
   };
 }
 

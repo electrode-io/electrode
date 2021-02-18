@@ -39,6 +39,10 @@ export function getContainer(): SubAppContainer {
   return CONTAINER;
 }
 
+export function _clearContainer(): void {
+  CONTAINER = undefined;
+}
+
 export function _setupEnvHooks() {
   if (!envHooks.getContainer) {
     envHooks.getContainer = getContainer;
@@ -56,7 +60,8 @@ const serverOverrideMethods: Partial<SubAppDef> = {
 
   /**
    * Server side render pipeline factory
-   * @param params
+   * @param params pipeline factory params
+   * @returns subapp sever render pipeline object
    */
   _pipelineFactory(params: PipelineFactoryParams) {
     const { ssrData } = params;

@@ -48,6 +48,7 @@ export class SubAppServerRenderPipeline implements SubAppRenderPipeline {
     this.framework = data.subapp._frameworkFactory();
   }
 
+  //  eslint-disable-next-line
   async start(_reload?: boolean): Promise<any> {
     throw new Error("SubAppServerRenderPipeline doesn't handle start");
   }
