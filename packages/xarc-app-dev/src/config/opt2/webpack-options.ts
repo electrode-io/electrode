@@ -81,7 +81,7 @@ export type WebpackOptions = {
    * - **Default: `false`**
    * - If not set, then check env `ENABLE_NODESOURCE_PLUGIN`
    *
-   * @remarks
+   * "@remarks"
    *  This will bundle 100K+ of JavaScript to simulate node.js env
    */
   enableNodeSourcePlugin?: boolean;

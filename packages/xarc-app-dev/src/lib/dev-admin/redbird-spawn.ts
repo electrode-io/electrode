@@ -52,7 +52,7 @@ const handleRestart = type => {
       ...httpDevServer,
       path: controlPaths.restart
     });
-    request(restartUrl, (err, res, body) => {
+    request(restartUrl, (err, _res, body) => {
       if (!err) {
         console.log(body);
       } else {

@@ -66,7 +66,7 @@ import { logger } from "../logger";
  * Update app's dependencies
  *
  * @param xarcCwd - CWD for app
- * @returns nothing
+ * @returns {void} nothing
  */
 export const updateAppDep = (xarcCwd: string) => {
   const appPkg = loadPkgJson(xarcCwd);

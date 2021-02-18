@@ -21,7 +21,7 @@ const webpackCovCfg = require(customCheck.getWebpackStartConfig(
  * Get Karma config for coverage
  *
  * @param config base config
- * @returns karma config
+ * @returns {void} void
  */
 export = function(config): any {
   const xarcOptions = loadXarcOptions();

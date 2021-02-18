@@ -1,5 +1,3 @@
-
-
 /* eslint-disable no-magic-numbers, no-use-before-define, no-unused-vars */
 /* eslint-disable no-console, max-statements, no-param-reassign, complexity */
 /* global window, document, EventSource, fetch */
@@ -32,11 +30,11 @@ function startLogStream() {
     const data = JSON.parse(e.data);
     updateLogs(data);
   });
-  logStream.addEventListener("open", e => {
+  logStream.addEventListener("open", _e => {
     console.log("log stream opened");
     logStreamReconnectDelay = 5000;
   });
-  logStream.addEventListener("error", (e, a) => {
+  logStream.addEventListener("error", (e, _a) => {
     console.log("log stream connect error", e);
     close();
     logStreamReconnectTimer = setTimeout(() => {
@@ -200,7 +198,7 @@ function levelChangeHandler() {
  * @param levelSelections
  * @param scrollToEnd
  */
-function refreshLogs(levelSelections, scrollToEnd = true) {
+function refreshLogs(levelSelections, _scrollToEnd = true) {
   levelSelections = levelSelections || getLevelSelections();
 
   for (let line = logDisplayElement.firstChild; line !== null; line = line.nextSibling) {
@@ -385,7 +383,7 @@ window.addEventListener(
   false
 );
 
-window.addEventListener("keypress", (event) => {
+window.addEventListener("keypress", event => {
   if (event.ctrlKey && event.code === "KeyK") {
     wipeLogs();
   }

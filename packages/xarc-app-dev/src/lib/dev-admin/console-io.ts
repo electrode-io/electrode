@@ -20,10 +20,11 @@ export class ConsoleIO extends VisualLogger {
   async getUserInput() {
     return new Promise(resolve => {
       process.stdin.once("keypress", (str, key) => {
+        let strVal = str;
         if (key.ctrl && key.name === "c") {
-          str = "^c";
+          strVal = "^c";
         }
-        resolve({ str: str && str.toLowerCase(), key });
+        resolve({ str: strVal && strVal.toLowerCase(), key });
       });
     });
   }

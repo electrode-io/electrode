@@ -32,8 +32,8 @@ try {
   require("@babel/register")({
     only: [
       x => {
-        x = Path.normalize(x);
-        return x.startsWith(cwd) && !x.startsWith(cwdNM);
+        const y = Path.normalize(x);
+        return y.startsWith(cwd) && !y.startsWith(cwdNM);
       }
     ],
     extensions: [".js", ".jsx"]

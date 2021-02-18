@@ -11,7 +11,7 @@ export function escapeHtml(html) {
     "<": "&lt;",
     ">": "&gt;"
   };
-  return html.replace(/([<>])/g, (m, a) => htmlMap[a]);
+  return html.replace(/([<>])/g, (_m, a) => htmlMap[a]);
 }
 
 /**
