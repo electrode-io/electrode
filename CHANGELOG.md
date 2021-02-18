@@ -1,3 +1,28 @@
+# 2/18/2021
+
+- admin server pass thru real terminal columns as env
+- update create-app demo to fastify-server ver 3
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@9.0.3` `(9.0.2 => 9.0.3)`
+- `@xarc/app-dev@9.0.3` `(9.0.2 => 9.0.3)`
+- `@xarc/create-app@5.0.3` `(5.0.2 => 5.0.3)`
+
+## Commits
+
+- `packages/xarc-app-dev`
+
+  - fix app-dev lint warnings ([#1827](https://github.com/electrode-io/electrode/pull/1827)) [commit](http://github.com/electrode-io/electrode/commit/7ce85aa536810f685d096a1b0f22a403d17d26dd)
+  - admin server pass thru real terminal columns as env ([#1829](https://github.com/electrode-io/electrode/pull/1829)) [commit](http://github.com/electrode-io/electrode/commit/497a72b3603e797a51998a32afcb705a1479901d)
+
+- `packages/xarc-create-app`
+
+  - update create-app demo to fastify-server ver 3 ([#1828](https://github.com/electrode-io/electrode/pull/1828)) [commit](http://github.com/electrode-io/electrode/commit/da468b77379612070f28b8d80c11c881affc2fb7)
+  - admin server pass thru real terminal columns as env ([#1829](https://github.com/electrode-io/electrode/pull/1829)) [commit](http://github.com/electrode-io/electrode/commit/497a72b3603e797a51998a32afcb705a1479901d)
+
 # 2/15/2021
 
 - fix generate babel.config.js
