@@ -10,6 +10,7 @@ const NONCE_SIZE = 16;
  * Load CDN map
  *
  * @param cdnMap CDN map
+ * @returns cdn Map, if not found, return undefined
  */
 export function loadCdnMap(cdnMap: string): any {
   const fullPath = Path.isAbsolute(cdnMap)
@@ -24,7 +25,7 @@ export function loadCdnMap(cdnMap: string): any {
 }
 
 /**
- * get 
+ * get
  *
  * @param file - string to wrap
  * @param data - string go before fragment
