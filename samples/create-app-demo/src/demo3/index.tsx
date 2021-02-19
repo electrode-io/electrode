@@ -9,7 +9,7 @@
 import { React, ReactSubApp } from "@xarc/react";
 import { reactQueryFeature, useQuery } from "@xarc/react-query";
 import { demo3QueryFn } from "./react-query-fetch";
-import { copyRightMessage } from "./copyright";
+import { copyRightMessage } from "../info";
 
 const Demo3 = () => {
   const { data } = useQuery("demo3", demo3QueryFn, { staleTime: 2000 });

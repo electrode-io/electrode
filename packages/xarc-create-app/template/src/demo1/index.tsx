@@ -1,4 +1,5 @@
 import { React, ReactSubApp } from "@xarc/react";
+import { docsLink } from "../info";
 
 const Demo1 = props => {
   return (
@@ -6,7 +7,7 @@ const Demo1 = props => {
       <p>subapp demo1</p>
       props: {JSON.stringify(props)}
       <p>
-        <a href="https://www.electrode.io/electrode/">Electrode Docs</a>
+        <a href={docsLink}>Electrode Docs</a>
       </p>
     </div>
   );

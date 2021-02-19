@@ -1,7 +1,6 @@
 import {
   ConnectionConfig,
   PluginsConfig,
-  PluginOptions,
   ElectrodeServerConfig
 } from "@xarc/fastify-server/lib/types";
 
