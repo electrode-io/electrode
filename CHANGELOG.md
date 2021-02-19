@@ -1,3 +1,15 @@
+# 2/19/2021
+
+## Packages
+
+- `@xarc/create-app@5.0.4` `(5.0.3 => 5.0.4)`
+
+## Commits
+
+- `packages/xarc-create-app`
+
+  - update create-app demo [commit](http://github.com/electrode-io/electrode/commit/94e1eebf1ce1efac50e6e336182ac9b28fa7ae4d)
+
 # 2/18/2021
 
 - admin server pass thru real terminal columns as env
