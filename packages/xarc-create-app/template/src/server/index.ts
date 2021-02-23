@@ -1,5 +1,5 @@
 import { loadRuntimeSupport } from "@xarc/app";
-import fastifyServer from "@xarc/fastify-server";
+import { electrodeServer } from "@xarc/fastify-server";
 import { config } from "./config";
 
 /**
@@ -14,7 +14,7 @@ export async function start() {
     }
   });
 
-  const server = await fastifyServer(config);
+  const server = await electrodeServer(config);
 
   // it's important that the routes setup is import *after* runtime support is loaded
   // else isomorphic assets during development may not work properly

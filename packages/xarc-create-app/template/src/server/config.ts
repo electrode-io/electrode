@@ -1,8 +1,4 @@
-import {
-  ConnectionConfig,
-  PluginsConfig,
-  ElectrodeServerConfig
-} from "@xarc/fastify-server/lib/types";
+import { ConnectionConfig, PluginsConfig, ElectrodeServerConfig } from "@xarc/fastify-server";
 
 //
 // specify connection info for fastify server
