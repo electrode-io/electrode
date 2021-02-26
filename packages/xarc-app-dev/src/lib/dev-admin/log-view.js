@@ -239,7 +239,7 @@ function levelChangeHandler() {
 function toggleMeta() {
   const metaSpans = document.querySelectorAll(".meta");
 
-  for (s of metaSpans) {
+  for (const s of metaSpans) {
     if (s.getAttribute("class").indexOf("hide") === -1) {
       s.setAttribute("class", "hide meta");
     } else {
