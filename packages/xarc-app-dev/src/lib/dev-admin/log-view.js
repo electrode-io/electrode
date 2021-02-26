@@ -354,7 +354,7 @@ async function updateLogs(data, levelSelections, scrollToEnd = true) {
       const newLineNum = document.createElement("span");
       newLineNum.innerHTML = logLineNum.toString();
       logLineNum++;
-      newLineNum.setAttribute("class", "mx-4 w-20");
+      newLineNum.setAttribute("class", "mx-4 w-20 inline-block");
 
       const newLevelInfo = document.createElement("span");
       const levelInfo = Levels[event.level];
