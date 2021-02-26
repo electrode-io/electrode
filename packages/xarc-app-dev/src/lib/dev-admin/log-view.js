@@ -234,6 +234,21 @@ function levelChangeHandler() {
 }
 
 /**
+ * @description hide meta column
+ */
+function toggleMeta() {
+  const metaSpans = document.querySelectorAll(".meta");
+
+  for (s of metaSpans) {
+    if (s.getAttribute("class").indexOf("hide") === -1) {
+      s.setAttribute("class", "hide meta");
+    } else {
+      s.setAttribute("class", "show unselectable meta");
+    }
+  }
+}
+
+/**
  * @param levelSelections
  * @param scrollToEnd
  */
@@ -334,13 +349,12 @@ async function updateLogs(data, levelSelections, scrollToEnd = true) {
       }
 
       const newMeta = document.createElement("span");
-      newMeta.setAttribute("class", "unselectable");
+      newMeta.setAttribute("class", "show unselectable meta");
 
       const newLineNum = document.createElement("span");
       newLineNum.innerHTML = logLineNum.toString();
       logLineNum++;
-
-      newLineNum.setAttribute("class", "mx-4");
+      newLineNum.setAttribute("class", "mx-4 w-20");
 
       const newLevelInfo = document.createElement("span");
       const levelInfo = Levels[event.level];
@@ -451,6 +465,10 @@ window.addEventListener(
 window.addEventListener("keypress", event => {
   if (event.ctrlKey && event.code === "KeyK") {
     wipeLogs();
+  }
+
+  if (event.ctrlKey && event.code === "KeyH") {
+    toggleMeta();
   }
 });
 
