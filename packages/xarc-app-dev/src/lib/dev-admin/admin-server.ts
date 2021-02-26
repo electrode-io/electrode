@@ -612,7 +612,7 @@ ${instruction}`
             logs.push(tag + store[ix]);
           } else if (store[ix]) {
             const json = store[ix];
-            logs.push(tag + JSON.stringify(json));
+            logs.push(tag + (json.msg || json.message || JSON.stringify(json)));
           }
         }
 
