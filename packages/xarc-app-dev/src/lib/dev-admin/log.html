@@ -50,10 +50,41 @@
       .hide {
         display: none;
       }
+
+      .show {
+        display: inline;
+      }
+
+      .unselectable {
+        user-select: none;
+        -webkit-user-select: none;
+      }
+
+      .mx-4 {
+        margin-left: 4px;
+        margin-right: 4px;
+      }
+
+      .mr-8 {
+        margin-right: 8px;
+      }
+
+      .w-10	 {
+        width: 2.5rem;
+      }
+
+      .inline-block {
+        display: inline-block;
+      }
+
+      .text-center {
+        text-align: center;
+      }
     </style>
   </head>
   <body>
     <div id="controls" class="navbar">
+      <button type="button" onclick="toggleMeta();">Hide/Show Meta Info [Ctrl+H]</button>
       <button type="button" onclick="displayLogs();">Refresh Logs</button>
       <button type="button" onclick="wipeLogs();">Wipe Logs [Ctrl+K]</button>
       <label>

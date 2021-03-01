@@ -2,10 +2,49 @@
 /* eslint-disable no-console, max-statements, no-param-reassign, complexity */
 /* global window, document, EventSource, fetch */
 
+let logLineNum = 1;
 let logStream;
 let logStreamReconnectDelay = 5000;
 let logStreamReconnectTimer;
 let debugStreamEvents;
+
+const Levels = {
+  error: {
+    color: "red",
+    index: 0,
+    name: "error"
+  },
+  warn: {
+    color: "yellow",
+    index: 1,
+    name: "warn"
+  },
+  info: {
+    color: "green",
+    index: 2,
+    name: "info"
+  },
+  http: {
+    color: "green",
+    index: 3,
+    name: "http"
+  },
+  verbose: {
+    color: "blue",
+    index: 4,
+    name: "verbose"
+  },
+  debug: {
+    color: "orange",
+    index: 5,
+    name: "debug"
+  },
+  silly: {
+    color: "purple",
+    index: 6,
+    name: "silly"
+  }
+};
 
 /**
  *
@@ -195,6 +234,21 @@ function levelChangeHandler() {
 }
 
 /**
+ * @description hide meta column
+ */
+function toggleMeta() {
+  const metaSpans = document.querySelectorAll(".meta");
+
+  for (const s of metaSpans) {
+    if (s.getAttribute("class").indexOf("hide") === -1) {
+      s.setAttribute("class", "hide meta");
+    } else {
+      s.setAttribute("class", "show unselectable meta");
+    }
+  }
+}
+
+/**
  * @param levelSelections
  * @param scrollToEnd
  */
@@ -228,6 +282,7 @@ function clearLogs() {
   while (logDisplayElement.lastChild) {
     logDisplayElement.removeChild(logDisplayElement.lastChild);
   }
+  logLineNum = 1;
 }
 
 /**
@@ -292,7 +347,31 @@ async function updateLogs(data, levelSelections, scrollToEnd = true) {
       if (!levelSelections[event.level]) {
         newLine.setAttribute("class", "hide");
       }
-      newLine.innerHTML = event.message;
+
+      const newMeta = document.createElement("span");
+      newMeta.setAttribute("class", "show unselectable meta");
+
+      const newLineNum = document.createElement("span");
+      newLineNum.innerHTML = logLineNum.toString();
+      logLineNum++;
+      newLineNum.setAttribute("class", "mx-4 w-10 inline-block text-center");
+
+      const newLevelInfo = document.createElement("span");
+      const levelInfo = Levels[event.level];
+      if (levelInfo.color) {
+        newLevelInfo.setAttribute("style", `color: ${levelInfo.color}`);
+      }
+      newLevelInfo.setAttribute("class", "mx-4 mr-8");
+      newLevelInfo.innerHTML = levelInfo.name.substring(0, 4);
+
+      newMeta.appendChild(newLineNum);
+      newMeta.appendChild(newLevelInfo);
+
+      const newLog = document.createElement("span");
+      newLog.innerHTML = event.message;
+
+      newLine.appendChild(newMeta);
+      newLine.appendChild(newLog);
       logDisplayElement.appendChild(newLine);
     });
   }
@@ -386,6 +465,10 @@ window.addEventListener(
 window.addEventListener("keypress", event => {
   if (event.ctrlKey && event.code === "KeyK") {
     wipeLogs();
+  }
+
+  if (event.ctrlKey && event.code === "KeyH") {
+    toggleMeta();
   }
 });
 
