@@ -36,6 +36,7 @@
     "@xarc/fastify-server": "^2.0.0",
     "@xarc/react": "^0.0.3",
     "@xarc/react-query": "^0.0.1",
+    "@xarc/react-recoil": "^0.1.0",
     "@xarc/react-redux": "^0.1.0",
     "@xarc/react-router": "^0.1.0",
     "isomorphic-loader": "^4.2.2"

@@ -10,4 +10,9 @@ export const staticHome = declareSubApp({
   getModule: () => import("./static")
 });
 
+export const recoilApp = declareSubApp({
+  name: "recoilApp",
+  getModule: () => import("./recoilTodo")
+});
+
 xarcV2.debug("app.tsx");
