@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "jsx": "react",
+    "jsxFactory": "createElement",
+    "lib": ["es2018", "DOM"],
+    "module": "CommonJS",
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "target": "ES2018",
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "declaration": true,
+    "types": ["node"],
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "alwaysStrict": true,
+    "strictFunctionTypes": true
+  },
+  "include": ["src"]
+}
