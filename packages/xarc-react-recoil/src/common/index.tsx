@@ -2,35 +2,20 @@
 import { SubAppDef, SubAppFeatureFactory, SubAppFeature, envHooks } from "@xarc/subapp";
 
 import {
-  RecoilRoot, RecoilState,
+  RecoilRoot,
 } from "recoil";
 
 export * from "recoil";
 
-export class AtomCreator {
-  key: string;
-  value: RecoilState<any>;
-  constructor(key: string, value: RecoilState<any>) {
-    this.key = key;
-    this.value = value;
-  }
-  getValue() {
-    return this.value;
-  }
-  getKey() {
-    return this.key;
-  }
-}
-
 /**
- * options for redux feature
+ * options for recoil feature
  */
 export type RecoilFeatureOptions = {
   /**
    * The React module.
    *
-   * This is needed for the redux feature to wrap subapp's component inside
-   * the Redux Provider component.
+   * This is needed for the recoil feature to wrap subapp's component inside
+   * the Recoil Provider component.
    */
   React: Partial<{ createElement: unknown }>;
 
@@ -38,7 +23,7 @@ export type RecoilFeatureOptions = {
 };
 
 /**
- * redux support for a subapp
+ * recoil support for a subapp
  */
 export type RecoilFeature = SubAppFeature & {
   options: RecoilFeatureOptions;
@@ -71,10 +56,7 @@ export function recoilFeature(options: RecoilFeatureOptions): SubAppFeatureFacto
     recoil.RecoilRoot = RecoilRoot;
     recoil.wrap = ({ Component, store }) => {
       return (
-
         <RecoilRoot><Component store={store} /></RecoilRoot>
-
-
       );
     };
     recoil.execute = async function ({ input, csrData }) {
