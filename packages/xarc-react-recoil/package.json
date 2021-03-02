@@ -1,7 +1,7 @@
 {
   "name": "@xarc/react-recoil",
-  "version": "0.1.0",
-  "description": "xarc React.js application recoil support",
+  "version": "0.0.1",
+  "description": "Electrode xarc React application recoil support",
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
   "browser": {
