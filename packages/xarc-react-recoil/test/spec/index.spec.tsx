@@ -29,7 +29,6 @@ const MockComponent = () => {
 
 describe("reactRecoilFeature", function () {
   it("should return a feature factory", () => {
-    expect("durrab").equal("durrab");
     const factory = recoilFeature({ React, prepare: mockPrepare });
     expect(factory.id).equal("state-provider");
     expect(factory.subId).equal("react-recoil");
