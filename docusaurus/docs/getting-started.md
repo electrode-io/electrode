@@ -44,7 +44,7 @@ Created react/node webapp in directory 'my-app'
 
 Your new electrode app will appear as shown below.
 
-![Hello from Electrode](/electrode/img/electrode-first-run.png)
+![Hello from Electrode](/img/electrode-first-run.png)
 
 :::important Important: Existing electrode users
 If you are an existing electrode user, please take note of the following sections
