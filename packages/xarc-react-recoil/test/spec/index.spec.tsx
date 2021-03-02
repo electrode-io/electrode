@@ -51,17 +51,17 @@ describe("reactRecoilFeature", function () {
 
     factory.add(def);
 
-    const redux: Partial<RecoilFeature> = def._features.recoil;
-    expect(redux.RecoilRoot).equal(RecoilRoot);
+    const recoil: Partial<RecoilFeature> = def._features.recoil;
+    expect(recoil.RecoilRoot).equal(RecoilRoot);
 
-    expect(redux.wrap).to.be.an("function");
-    expect(redux.execute).to.be.an("function");
+    expect(recoil.wrap).to.be.an("function");
+    expect(recoil.execute).to.be.an("function");
 
-    expect(redux.options).equal(options);
-    expect(redux.options.prepare).equal(options.prepare);
+    expect(recoil.options).equal(options);
+    expect(recoil.options.prepare).equal(options.prepare);
 
-    expect(redux.id).equal("state-provider");
-    expect(redux.subId).equal("react-recoil");
+    expect(recoil.id).equal("state-provider");
+    expect(recoil.subId).equal("react-recoil");
   });
 
   it("should render subapp have recoil wrapper", async () => {
@@ -82,11 +82,11 @@ describe("reactRecoilFeature", function () {
 
     factory.add(def);
 
-    const redux: Partial<RecoilFeature> = def._features.recoil;
+    const recoil: Partial<RecoilFeature> = def._features.recoil;
     const atomsMap = { key: "key", value: "RecoilState" };
 
     render(
-      redux.wrap({
+      recoil.wrap({
         Component: MockComponent,
         store: atomsMap
       })
