@@ -21,4 +21,8 @@ xrun.updateEnv(
 
 loadDevTasks(xrun, {
   // options to customize features
+  webpackOptions: {
+    // enable CSS module for files other than `.mod.css`
+    cssModuleSupport: "byModExt"
+  }
 });
