@@ -1,3 +1,44 @@
+# 3/1/2021
+
+- remove beta tag from ver9
+- improve log viewer ui/ux
+- add css module to create app demo
+- initial recoil.js support
+
+## Packages
+
+- `@xarc/app@9.0.4` `(9.0.3 => 9.0.4)`
+- `@xarc/app-dev@9.0.4` `(9.0.3 => 9.0.4)`
+- `@xarc/create-app@5.0.5` `(5.0.4 => 5.0.5)`
+- `@xarc/react-recoil@0.1.0` `(0.0.1 => 0.1.0)`
+
+## Commits
+
+- `packages/xarc-app`
+
+  - remove beta tag from ver9 [commit](http://github.com/electrode-io/electrode/commit/b68766e738ceda1654da0604d493274f7e1d7e0e)
+
+- `packages/xarc-app-dev`
+
+  - improve log viewer ui/ux ([#1833](https://github.com/electrode-io/electrode/pull/1833)) [commit](http://github.com/electrode-io/electrode/commit/86eec14c18f572f28deefac4931e23c15bf62c83)
+  - remove beta tag from ver9 [commit](http://github.com/electrode-io/electrode/commit/b68766e738ceda1654da0604d493274f7e1d7e0e)
+
+- `packages/xarc-create-app`
+
+  - add css module to create app demo [commit](http://github.com/electrode-io/electrode/commit/13230e59da21a44c16180cb3d526ba0f36b79a8c)
+  - add info about css support to create-app demo README [commit](http://github.com/electrode-io/electrode/commit/f1678827d31005e41bbc85cd8ef45559b30dc74e)
+  - update create-app demo to @xarc/fastify-server 3.2.3 [commit](http://github.com/electrode-io/electrode/commit/e86e769139f34c21511a91efcdc9ec1e4d630684)
+
+- `packages/xarc-react-recoil`
+
+  - [chore] empty test for ci [commit](http://github.com/electrode-io/electrode/commit/3d5cf47b337c1d6be8dd66396aca790165c9be21)
+  - subapp v2 recoil.js initial support ([#1835](https://github.com/electrode-io/electrode/pull/1835)) [commit](http://github.com/electrode-io/electrode/commit/470f20ca44ed9340c5bb883d99caf6776a865028)
+  - [minor] mark for initial release [commit](http://github.com/electrode-io/electrode/commit/f12af2c889866acc847d57b0d07faae9084c8e57)
+
+- `docusaurus`
+
+  - update contributing guide and docs [commit](http://github.com/electrode-io/electrode/commit/06bc5d88f2d3b33c353d01d10559a5d95264451a)
+
 # 2/19/2021
 
 ## Packages
