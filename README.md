@@ -6,13 +6,14 @@
 
 # Web Applications with node.js and React
 
-Electrode was developed to make node.js and React.js a primary tech choice for developing applications at Walmart. It has been powering the <http://www.walmart.com> eCommerce website since 2017.
+The Electrode project was developed to make [node.js] and [React] the primary tech choices for developing applications at Walmart. It has been powering the <http://www.walmart.com> eCommerce website since 2017.
 
-Electrode Web is a rapid application development framework; a full stack, end-to-end platform for developing, deploying, and maintaining JavaScript applications at Walmart.
+Originally designed for Walmart specific use cases, we open-sourced part of Electrode with the hope that it will be useful to some of you in the JavaScript community. This is the same version that is used to power many applications at Walmart.
 
-Originally designed for Walmart-specific use cases, we decided to open-source electrode with the hope that it will be useful to developers in the JavaScript community.
+What we open-sourced here is the web application development part of Electrode. It focuses on building web apps with the following emphases:
 
-This is the same version that is used to power many web applications at Walmart.
+- large scale micro-frontend architecture
+- universal webapp with server side rendering powered by [node.js]
 
 # Getting Started
 
@@ -22,7 +23,7 @@ Please go to our [docs](https://www.electrode.io/electrode/docs/getting-started)
 
 # Contributing
 
-Do you find Electrode useful for your application development, or learning node.js or React? Please send us your encouragement with a github star.
+Do you find Electrode useful for your application development, exploring, or learning [node.js] and [React]? Please send us your encouragement with a github star.
 
 Did you find an issue? Would you like to help with the project? Please see our [contributing guide] for instructions on [submitting a PR] or [reporting an issue].
 
@@ -33,7 +34,8 @@ Copyright (c) 2016-present, Walmart
 Licensed under the [Apache License, Version 2.0]
 
 [apache license, version 2.0]: https://www.apache.org/licenses/LICENSE-2.0
-[node.js]: https://nodejs.org/en/download
+[node.js]: https://nodejs.org/
 [submitting a pr]: https://github.com/electrode-io/electrode/pulls
 [reporting an issue]: https://github.com/electrode-io/electrode/issues
 [contributing guide]: CONTRIBUTING.md
+[react]: https://reactjs.org/

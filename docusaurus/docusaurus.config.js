@@ -16,7 +16,7 @@ module.exports = {
         alt: "electrode logo",
         src: "/img/electrode-io-logo.png"
       },
-      links: [
+      items: [
         {
           to: "docs/getting-started",
           label: "Getting Started",
@@ -32,18 +32,18 @@ module.exports = {
     footer: {
       style: "dark",
       links: [
-        {
-          title: "Docs",
-          items: [{}]
-        },
-        {
-          title: "Community",
-          items: [{}]
-        },
-        {
-          title: "More",
-          items: [{}]
-        }
+        // {
+        //   title: "Docs",
+        //   items: [{}]
+        // },
+        // {
+        //   title: "Community",
+        //   items: [{}]
+        // },
+        // {
+        //   title: "More",
+        //   items: [{}]
+        // }
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Walmart`
     }
