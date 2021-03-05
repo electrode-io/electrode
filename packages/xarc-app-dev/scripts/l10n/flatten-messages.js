@@ -10,6 +10,7 @@ const getFilePaths = Util.promisify(require("glob"));
 const MESSAGES_PATTERN = "./tmp/messages/**/*.json";
 const RAW_MESSAGES_DIR = "./dist/";
 const RAW_MESSAGES_NAME = "raw-messages.json";
+const xaa = require("xaa");
 
 /**
  * @param  {String}  filePath  The file path
@@ -37,15 +38,14 @@ function readFileAsJSON(filePath) {
  * @return  {Promise}  A promise that resolves to a flat POJO with the default messages extracted
  *                     from all files
  */
-function getAllDefaultMessages(messageFilesPathPattern) {
-  return getFilePaths(messageFilesPathPattern)
-    .map(readFileAsJSON)
-    .reduce((previousValue, defaultMessageDescriptors) => {
-      defaultMessageDescriptors.forEach(descriptor => {
-        previousValue[descriptor.id] = descriptor;
-      });
-      return previousValue;
-    }, {});
+async function getAllDefaultMessages(messageFilesPathPattern) {
+  const fileJsons = await xaa.map(await getFilePaths(messageFilesPathPattern), readFileAsJSON);
+  return fileJsons.reduce((previousValue, defaultMessageDescriptors) => {
+    defaultMessageDescriptors.forEach(descriptor => {
+      previousValue[descriptor.id] = descriptor;
+    });
+    return previousValue;
+  }, {});
 }
 
 const writeRawMessages = _.partial(writeFileAsJSON, RAW_MESSAGES_DIR, RAW_MESSAGES_NAME);
