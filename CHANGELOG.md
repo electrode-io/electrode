@@ -1,3 +1,30 @@
+# 3/4/2021
+
+## Packages
+
+- `@xarc/app@10.0.0` `(9.0.4 => 10.0.0)`
+- `@xarc/app-dev@10.0.0` `(9.0.4 => 10.0.0)`
+- `@xarc/opt-karma@2.0.0` `(1.0.0 => 2.0.0)`
+- `@xarc/webpack@11.0.0` `(10.0.1 => 11.0.0)`
+
+## Commits
+
+- `packages/xarc-app`
+
+  - [major] updating to webpack 5 [commit](http://github.com/electrode-io/electrode/commit/2f5d543c7c83a10e09e2e1daab71bb4907b81917)
+
+- `packages/xarc-app-dev`
+
+  - [major] updating to webpack 5 [commit](http://github.com/electrode-io/electrode/commit/2f5d543c7c83a10e09e2e1daab71bb4907b81917)
+
+- `packages/xarc-opt-karma`
+
+  - [major] updating to webpack 5 [commit](http://github.com/electrode-io/electrode/commit/2f5d543c7c83a10e09e2e1daab71bb4907b81917)
+
+- `packages/xarc-webpack`
+
+  - [major] updating to webpack 5 [commit](http://github.com/electrode-io/electrode/commit/2f5d543c7c83a10e09e2e1daab71bb4907b81917)
+
 # 3/1/2021
 
 - remove beta tag from ver9
