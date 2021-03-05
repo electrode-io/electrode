@@ -2,6 +2,19 @@
 
 ## Packages
 
+- `@xarc/app@10.0.1` `(10.0.0 => 10.0.1)`
+- `@xarc/app-dev@10.0.1` `(10.0.0 => 10.0.1)`
+
+## Commits
+
+- `packages/xarc-app-dev`
+
+  - fix bluebird dep [commit](http://github.com/electrode-io/electrode/commit/9309688942f640ce3c37b364572b166047a97972)
+
+# 3/4/2021
+
+## Packages
+
 - `@xarc/app@10.0.0` `(9.0.4 => 10.0.0)`
 - `@xarc/app-dev@10.0.0` `(9.0.4 => 10.0.0)`
 - `@xarc/opt-karma@2.0.0` `(1.0.0 => 2.0.0)`
