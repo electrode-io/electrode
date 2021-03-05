@@ -4,9 +4,9 @@
 /* eslint-disable no-process-exit, no-console */
 
 const _ = require("lodash");
-const Promise = require("bluebird");
-const fs = Promise.promisifyAll(require("fs-extra"));
-const getFilePaths = Promise.promisify(require("glob"));
+const Util = require("util");
+const Fs = require("fs-extra");
+const getFilePaths = Util.promisify(require("glob"));
 const MESSAGES_PATTERN = "./tmp/messages/**/*.json";
 const RAW_MESSAGES_DIR = "./dist/";
 const RAW_MESSAGES_NAME = "raw-messages.json";
@@ -17,10 +17,9 @@ const RAW_MESSAGES_NAME = "raw-messages.json";
  * @param  {Object}  contents  The contents written to the file
  * @return  {Promise}  A promise that resolves when the file has been written
  */
-function writeFileAsJSON(filePath, name, contents) {
-  return Promise.try(() => JSON.stringify(contents, null, 2)).then(result =>
-    fs.writeFileAsync(filePath + name, result)
-  );
+async function writeFileAsJSON(filePath, name, contents) {
+  const result = JSON.stringify(contents, null, 2);
+  await Fs.writeFile(filePath + name, result);
 }
 
 /**
@@ -28,7 +27,7 @@ function writeFileAsJSON(filePath, name, contents) {
  * @return  {Promise}  A promise that resolves to a POJO with the file's contents
  */
 function readFileAsJSON(filePath) {
-  return fs.readFileAsync(filePath, "utf8").then(JSON.parse);
+  return Fs.readFile(filePath, "utf8").then(JSON.parse);
 }
 
 /**
@@ -54,7 +53,7 @@ const writeRawMessages = _.partial(writeFileAsJSON, RAW_MESSAGES_DIR, RAW_MESSAG
 const isMain = require.main === module;
 
 function flattenMessagesL10n() {
-  return Promise.all([getAllDefaultMessages(MESSAGES_PATTERN), fs.ensureDirAsync(RAW_MESSAGES_DIR)])
+  return Promise.all([getAllDefaultMessages(MESSAGES_PATTERN), Fs.ensureDir(RAW_MESSAGES_DIR)])
     .then(_.first)
     .then(writeRawMessages)
     .then(() => {
