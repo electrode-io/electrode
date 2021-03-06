@@ -45,6 +45,9 @@
     "lodash": "^4.17.20",
     "tslib": "^2.1.0"
   },
+  "peerDependencies": {
+    "@xarc/app": "*"
+  },
   "devDependencies": {
     "@babel/cli": "^7.12.1",
     "@istanbuljs/nyc-config-typescript": "^1.0.1",

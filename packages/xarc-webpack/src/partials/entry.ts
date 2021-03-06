@@ -218,19 +218,23 @@ if (module.hot) {
     let entry = appEntry();
     const polyfill = shouldPolyfill();
 
+    const jsonpCdn = "@xarc/app-dev/scripts/webpack5-jsonp-cdn";
+
     if (polyfill) {
       const coreJs = "core-js";
       const runtime = "regenerator-runtime/runtime";
       if (_.isArray(entry)) {
-        entry = { main: [coreJs, runtime, ...entry] };
+        entry = { main: [jsonpCdn, coreJs, runtime, ...entry] };
       } else if (_.isObject(entry)) {
         entry = Object.entries(entry).reduce((prev, [k, v]) => {
-          prev[k] = [coreJs, runtime].concat(v as any[]);
+          prev[k] = [jsonpCdn, coreJs, runtime].concat(v as any[]);
           return prev;
         }, {});
       } else {
-        entry = { main: [coreJs, runtime, entry] };
+        entry = { main: [jsonpCdn, coreJs, runtime, entry] };
       }
+    } else {
+      entry = [jsonpCdn, entry];
     }
 
     return entry;

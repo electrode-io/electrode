@@ -78,8 +78,12 @@ function initializeStaticAssets(props: InitProps) {
 
   const cdnMapData = cdnMap && (typeof cdnMap === "string" ? loadCdnMap(cdnMap) : cdnMap);
 
+  // eslint-disable-next-line
+  const xarcVer = require("@xarc/app/package.json").version.split(".")[0];
+
   // client side JS code required to start subapps and load assets
-  const webpack4JsonpJs = getClientJs("webpack4-jsonp.js", "webpack4JsonP");
+  // @xarc/app version 10 above use webpack 5 and no longer need webpack4Jsonp scripts
+  const webpack4JsonpJs = xarcVer < 10 ? getClientJs("webpack4-jsonp.js", "webpack4JsonP") : "";
   const xarcV2Js = getClientJs("xarc-subapp-v2.js", "xarcV2Client");
   const cdnMapScripts = !cdnMap ? "" : getClientJs("xarc-cdn-map.js", "xarcCdnMap");
 

@@ -3,7 +3,6 @@
  */
 
 import { SubAppWebpackPlugin } from "../plugins/subapp-plugin";
-import { JsonpScriptSrcPlugin } from "../plugins/jsonp-script-src-plugin";
 
 module.exports = function(opts) {
   return {
@@ -17,8 +16,7 @@ module.exports = function(opts) {
         // let plugin figure out webpack version
         // webpackVersion: 4,
         assetsFile: "../subapps.json"
-      }),
-      new JsonpScriptSrcPlugin()
+      })
     ]
   };
 };
