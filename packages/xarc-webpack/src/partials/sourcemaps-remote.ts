@@ -7,7 +7,7 @@ module.exports = function() {
     plugins: [
       new SourceMapDevToolPlugin({
         filename: "../map/[file].map",
-        append: `\n//# sourceMappingURL=/map/[url]`
+        append: `\n//# sourceMappingURL=../[url]`
       })
     ]
   };
