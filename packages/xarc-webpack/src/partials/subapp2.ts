@@ -2,7 +2,7 @@
  * SubApp version 2 support
  */
 
-import { SubAppWebpackPlugin } from "../plugins/subapp-plugin";
+import { SubAppWebpackPlugin } from "../plugins/subapp-plugin-webpack5";
 
 module.exports = function(opts) {
   return {
@@ -14,7 +14,7 @@ module.exports = function(opts) {
     plugins: [
       new SubAppWebpackPlugin({
         // let plugin figure out webpack version
-        // webpackVersion: 4,
+        webpackVersion: 5,
         assetsFile: "../subapps.json"
       })
     ]

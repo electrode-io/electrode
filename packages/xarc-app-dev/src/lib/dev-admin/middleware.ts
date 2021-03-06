@@ -8,6 +8,7 @@ import hotHelpers from "webpack-hot-middleware/helpers";
 import Url from "url";
 import { devProxy } from "../../config/dev-proxy";
 import { formUrl } from "../utils";
+import getFilenameFromUrl from "webpack-dev-middleware/dist/utils/getFilenameFromUrl";
 
 const { getWebpackStartConfig } = require("@xarc/webpack/lib/util/custom-check"); // eslint-disable-line
 
@@ -161,36 +162,35 @@ export class Middleware {
         },
         // port: archetype.webpack.devPort,
         // host: archetype.webpack.devHostname,
-        quiet: false,
-        lazy: false,
-        watchOptions: {
-          aggregateTimeout: 2000,
-          poll: false
-        },
+        // quiet: false,
+        // lazy: false,
+        // watchOptions: {
+        //   aggregateTimeout: 2000,
+        //   poll: false
+        // },
         stats: {
           colors: true
         },
         publicPath: "/js",
-        serverSideRender: false,
-        clientLogLevel: "info"
+        serverSideRender: false
+        // clientLogLevel: "info"
       },
       options.common,
       options.dev
     );
-
-    let defaultReporter; // eslint-disable-line
-    webpackDevOptions.reporter = (a, b) => defaultReporter(a, b);
 
     this.devMiddleware = webpackDevMiddleware(compiler, webpackDevOptions);
     this.hotMiddleware = webpackHotMiddleware(compiler, webpackHotOptions);
     this.publicPath = webpackDevOptions.publicPath || "/";
     this.listAssetPath = urlJoin(this.publicPath, "/");
 
-    this.memFsCwd = this.devMiddleware.fileSystem.existsSync(process.cwd()) ? process.cwd() : "/";
+    const outputFileSystem: any = this.devMiddleware.context.outputFileSystem;
+
+    this.memFsCwd = outputFileSystem.existsSync(process.cwd()) ? process.cwd() : "/";
     this.cwdMemIndex = serveIndex(this.memFsCwd, {
       icons: true,
       hidden: true,
-      fs: this.devMiddleware.fileSystem,
+      fs: outputFileSystem,
       path: Path.posix
     });
 
@@ -211,7 +211,7 @@ export class Middleware {
 
     this.returnReporter = undefined;
 
-    defaultReporter = (_middlewareOptions, reporterOptions) => {
+    const defaultReporter = (_middlewareOptions, reporterOptions) => {
       if (!reporterOptions.state) {
         process.send({
           name: "webpack-report",
@@ -277,6 +277,13 @@ export class Middleware {
         refreshModules
       });
     };
+
+    compiler.hooks.done.tap("webpack-dev-middleware", stats => {
+      defaultReporter({}, { state: true, stats });
+    });
+    compiler.hooks.invalid.tap("webpack-dev-middleware", () => {
+      defaultReporter({}, { state: false });
+    });
   }
 
   process(req, res, cycle) {
@@ -363,14 +370,16 @@ ${jumpToError}</body></html>
       // do nothing and continue to webpack dev middleware
       return Promise.resolve(this.canContinue);
     } else if (req.url === this.publicPath || req.url === this.listAssetPath) {
-      const outputPath = this.devMiddleware.getFilenameFromUrl(this.publicPath);
-      const filesystem = this.devMiddleware.fileSystem;
+      const outputPath = Path.dirname(
+        getFilenameFromUrl(this.devMiddleware.context, this.publicPath)
+      );
+      const outputFileSystem = this.devMiddleware.context.outputFileSystem;
 
       const listDirectoryHtml = (baseUrl, basePath) => {
         return (
-          filesystem.readdirSync(basePath).reduce((a, item) => {
+          outputFileSystem.readdirSync(basePath).reduce((a, item) => {
             const p = `${basePath}/${item}`;
-            if (filesystem.statSync(p).isFile()) {
+            if (outputFileSystem.statSync(p).isFile()) {
               return `${a}<li><a href="${baseUrl}${item}">${item}</a></li>\n`;
             } else {
               return `${a}<li>${item}<br>` + listDirectoryHtml(`${baseUrl}${item}/`, p) + "</li>\n";
@@ -390,7 +399,7 @@ ${listDirectoryHtml(this.listAssetPath, outputPath)}
       const isMemFs = true;
       return serveStatic(
         this.cwdContextBaseUrl,
-        this.devMiddleware.fileSystem,
+        this.devMiddleware.context.outputFileSystem,
         this.cwdMemIndex,
         this.memFsCwd,
         isMemFs

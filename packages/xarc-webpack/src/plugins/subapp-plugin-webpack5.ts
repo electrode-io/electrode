@@ -258,10 +258,20 @@ export class SubAppWebpackPlugin {
     return undefined;
   }
 
+  /**
+   * Webpack 5 Reference:
+   * - lib/HotModuleReplacementPlugin.js
+   *
+   * @param compiler
+   */
   _applyHmrInject(compiler) {
     compiler.hooks.compilation.tap(pluginName, (compilation, { normalModuleFactory }) => {
-      const hotUpdateChunkTemplate = compilation.hotUpdateChunkTemplate;
-      if (!hotUpdateChunkTemplate) return;
+      // This applies the HMR injection only to the targeted compiler
+      // It should not affect child compilations
+      if (compilation.compiler !== compiler) return;
+
+      // const hotUpdateChunkTemplate = compilation.hotUpdateChunkTemplate;
+      // if (!hotUpdateChunkTemplate) return;
 
       compilation.dependencyFactories.set(SubAppHotAcceptDependency, normalModuleFactory);
 
