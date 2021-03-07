@@ -2,6 +2,7 @@
 
 import * as Path from "path";
 import { loadXarcOptions } from "../util/load-xarc-options";
+import * as mkdirp from "mkdirp";
 
 module.exports = () => {
   const { babel, namespace } = loadXarcOptions();
@@ -27,9 +28,15 @@ module.exports = () => {
     }
   };
 
+  const path = getOutputPath();
+
+  // karma 3.x uses fs.mkdirSync to create output and it fails if the output has multi dirs
+  // so create the output path here to help it get pass that.
+  mkdirp.sync(path);
+
   return {
     output: {
-      path: getOutputPath(),
+      path,
       pathinfo: inspectpack, // Enable path information for inspectpack
       publicPath: "/js/",
       chunkFilename: getOutputFilename(),

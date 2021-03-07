@@ -88,20 +88,28 @@ class SubAppHotAcceptDependency extends ModuleDependency {
   }
 }
 
+const where = (source, loc) => {
+  return `${source}:${loc.start.line}:${loc.start.column + 1}`;
+};
+
+const noCwd = x => x.replace(process.cwd(), ".");
+
 /**
  * subapp hot accept template, this will insert HMR code from ../client/hmr-accept.ts
  * into the module that declareSubApp.
  *
  */
 class SubAppHotAcceptTemplate {
-  apply(dep: SubAppHotAcceptDependency, source: any, runtime: any) {
+  apply(dep: SubAppHotAcceptDependency, source: any, { runtimeTemplate, moduleGraph, chunkGraph }) {
     if (!(dep instanceof SubAppHotAcceptDependency)) {
       return;
     }
 
-    const content = runtime.moduleId({
-      module: dep.module,
-      request: dep.request
+    const content = runtimeTemplate.moduleId({
+      module: moduleGraph.getModule(dep),
+      chunkGraph,
+      request: dep.request,
+      weak: dep.weak
     });
 
     const script = [];
@@ -114,9 +122,11 @@ class SubAppHotAcceptTemplate {
       // exported and its toString to get the code.  So it's important the
       // function is fully self contained without external dependencies.
       //
+      // TODO: update subapp-plugin to make module used?
       script.push(`
 /* subapp HMR accept */
-var __xarcHmr__ = (${hmrSetup.toString()})(window, module.hot);`);
+var __xarcHmr__ = (${hmrSetup.toString()})(window,
+  (typeof __unused_webpack_module !== "undefined" ? __unused_webpack_module : module).hot);`);
     }
 
     if (!dep.injected[content]) {
@@ -147,6 +157,8 @@ export class SubAppWebpackPlugin {
   _makeIdentifierBEE: Function;
   _tapAssets: Function;
   _assetsFile: string;
+  _hasHmr: (compilation: any) => boolean;
+  _foundSubApps: string;
 
   /**
    *
@@ -162,9 +174,9 @@ export class SubAppWebpackPlugin {
      */
     declareApiName?: string | string[];
     /**
-     * Webpack version (4, 5, etc)
+     * Webpack version
      *
-     * minimum 4
+     * minimum 5
      */
     webpackVersion?: number;
     /**
@@ -177,24 +189,15 @@ export class SubAppWebpackPlugin {
     this._subApps = {};
     this._webpackMajorVersion = webpackVersion;
 
-    const { makeIdentifierBEE, tapAssets } = this[`initWebpackVer${this._webpackMajorVersion}`]();
+    const { makeIdentifierBEE, tapAssets, hasHmr } = this[
+      `initWebpackVer${this._webpackMajorVersion}`
+    ]();
 
     this._makeIdentifierBEE = makeIdentifierBEE;
     this._tapAssets = tapAssets;
     this._assetsFile = assetsFile;
-  }
-
-  initWebpackVer4() {
-    const BEE = require("webpack/lib/BasicEvaluatedExpression");
-    return {
-      BasicEvaluatedExpression: BEE,
-      makeIdentifierBEE: expr => {
-        return new BEE().setIdentifier(expr.name).setRange(expr.range);
-      },
-      tapAssets: compiler => {
-        compiler.hooks.emit.tap(pluginName, compilation => this.updateAssets(compilation.assets));
-      }
-    };
+    this._hasHmr = hasHmr;
+    this._foundSubApps = "";
   }
 
   initWebpackVer5() {
@@ -211,7 +214,9 @@ export class SubAppWebpackPlugin {
         compiler.hooks.compilation.tap(pluginName, compilation => {
           compilation.hooks.processAssets.tap(pluginName, assets => this.updateAssets(assets));
         });
-      }
+      },
+      // TODO: detect HMR from compilation
+      hasHmr: () => Boolean(process.env.WEBPACK_DEV)
     };
   }
 
@@ -234,11 +239,15 @@ export class SubAppWebpackPlugin {
         source: () => subapps,
         size: () => subapps.length
       };
-      console.log("version 2 subapps found:", keys.join(", ")); // eslint-disable-line
+      const found = keys.join(", ");
+      if (this._foundSubApps !== found) {
+        this._foundSubApps = found;
+        console.log("version 2 subapps found:", found); // eslint-disable-line
+      }
     }
   }
 
-  findImportCall(ast) {
+  private findImportCall(ast, source) {
     switch (ast.type) {
       case "CallExpression":
         const arg = _.get(ast, "arguments[0]", {});
@@ -246,14 +255,24 @@ export class SubAppWebpackPlugin {
           return arg.value;
         }
       case "ReturnStatement":
-        return this.findImportCall(ast.argument);
+        return this.findImportCall(ast.argument, source);
       case "BlockStatement":
         for (const n of ast.body) {
-          const res = this.findImportCall(n);
+          const res = this.findImportCall(n, source);
           if (res) {
             return res;
           }
         }
+      // webpack 5
+      case "ImportExpression":
+        assert(
+          ast.source.type === "Literal",
+          `${where(
+            noCwd(source),
+            ast.source.loc
+          )}: subapp module import must use literal string, got ${ast.source.type}`
+        );
+        return ast.source.value;
     }
     return undefined;
   }
@@ -270,11 +289,11 @@ export class SubAppWebpackPlugin {
       // It should not affect child compilations
       if (compilation.compiler !== compiler) return;
 
-      // const hotUpdateChunkTemplate = compilation.hotUpdateChunkTemplate;
-      // if (!hotUpdateChunkTemplate) return;
+      if (!this._hasHmr(compilation)) {
+        return;
+      }
 
       compilation.dependencyFactories.set(SubAppHotAcceptDependency, normalModuleFactory);
-
       compilation.dependencyTemplates.set(SubAppHotAcceptDependency, new SubAppHotAcceptTemplate());
     });
   }
@@ -320,12 +339,6 @@ export class SubAppWebpackPlugin {
           return parser[SHIM_parseCommentOptions](range);
         };
 
-        const noCwd = x => x.replace(process.cwd(), ".");
-
-        const where = (source, loc) => {
-          return `${source}:${loc.start.line}:${loc.start.column + 1}`;
-        };
-
         const parseForSubApp = (expression, apiName) => {
           const currentSource = _.get(parser, "state.current.resource", "");
           const props = _.get(expression, "arguments[0].properties");
@@ -360,7 +373,9 @@ export class SubAppWebpackPlugin {
           // try to figure out the module that's being imported for this subapp
           // getModule function: () => import("./subapp-module")
           // getModule function: function () { return import("./subapp-module") }
-          const mod = this.findImportCall(gm);
+          const mod = this.findImportCall(gm, currentSource);
+
+          assert(mod, `${cw()}: unable to find the request of the subapp's module import call`);
 
           this._subApps[nameVal] = {
             name: nameVal,
@@ -371,7 +386,7 @@ export class SubAppWebpackPlugin {
             module: mod
           };
 
-          if (process.env.WEBPACK_DEV && parser.state.compilation.hotUpdateChunkTemplate) {
+          if (this._hasHmr(parser.state.compilation)) {
             const dep = new SubAppHotAcceptDependency(
               mod,
               parser.state.module,

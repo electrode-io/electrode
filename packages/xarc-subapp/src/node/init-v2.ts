@@ -36,6 +36,20 @@ ${cdnMapDataString}
 }
 
 /**
+ * get @xarc/app major version to determine webpack 4 or 5
+ *
+ * @returns @xarc/app major version
+ */
+function getXarcAppVersion() {
+  try {
+    // eslint-disable-next-line
+    return require("@xarc/app/package.json").version.split(".")[0];
+  } catch {
+    return 9;
+  }
+}
+
+/**
  * Initialize common static assets such as xarcV2 client code, CDN data, and other JS bundles.
  *
  * @param props - server template token props
@@ -78,12 +92,10 @@ function initializeStaticAssets(props: InitProps) {
 
   const cdnMapData = cdnMap && (typeof cdnMap === "string" ? loadCdnMap(cdnMap) : cdnMap);
 
-  // eslint-disable-next-line
-  const xarcVer = require("@xarc/app/package.json").version.split(".")[0];
-
   // client side JS code required to start subapps and load assets
   // @xarc/app version 10 above use webpack 5 and no longer need webpack4Jsonp scripts
-  const webpack4JsonpJs = xarcVer < 10 ? getClientJs("webpack4-jsonp.js", "webpack4JsonP") : "";
+  const webpack4JsonpJs =
+    getXarcAppVersion() < 10 ? getClientJs("webpack4-jsonp.js", "webpack4JsonP") : "";
   const xarcV2Js = getClientJs("xarc-subapp-v2.js", "xarcV2Client");
   const cdnMapScripts = !cdnMap ? "" : getClientJs("xarc-cdn-map.js", "xarcCdnMap");
 

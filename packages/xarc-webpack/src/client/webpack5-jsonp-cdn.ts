@@ -7,6 +7,7 @@
  * - https://github.com/webpack/webpack.js.org/pull/3033
  */
 
+/* eslint-disable no-undef, @typescript-eslint/camelcase */
 // @ts-nocheck
 
 function setup(w: any) {

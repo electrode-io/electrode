@@ -3,6 +3,8 @@
 import { InitProps } from "./types";
 import { generateNonce } from "./utils";
 
+const isWebpackDev = Boolean(process.env.WEBPACK_DEV);
+
 /**
  * Initialize all the up front code required for running subapps in the browser.
  *
@@ -50,7 +52,13 @@ export function initContext(_setupContext: any, setupToken: Partial<{ props: Ini
       };
 
       setCspNonce(context.user.scriptNonce, "script");
-      setCspNonce(context.user.styleNonce, "style");
+      //
+      // TODO: with Webpack 5 and mini-css-extract-plugin 1.x style HMR breaks when there's
+      //       nonce enforcement so don't set style CSP nonce header.
+      //
+      if (!isWebpackDev) {
+        setCspNonce(context.user.styleNonce, "style");
+      }
 
       if (cspValues.length > 0) {
         context.user.cspHeader = cspValues.join(" ");
