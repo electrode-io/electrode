@@ -26,6 +26,7 @@
             "@xarc/opt-karma": true,
             "@xarc/create-app": true
           },
+          "regex": [".*"],
           "addToVersion": true
         }
       }

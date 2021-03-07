@@ -343,7 +343,7 @@ const lernaRc = require("../lerna.json");
 const getTaggedVersion = pkg => {
   const newVer = pkg.newVersion;
 
-  const fynpoTags = _.get(lernaRc, "fynpo.publishConfig.tags");
+  const fynpoTags = _.get(lernaRc, "command.publish.tags");
   if (fynpoTags) {
     for (const tag in fynpoTags) {
       if (!tag.match(/^[0-9A-Za-z-]+$/)) {
@@ -351,7 +351,10 @@ const getTaggedVersion = pkg => {
       }
       const tagInfo = fynpoTags[tag];
       if (tagInfo.enabled === false) continue;
-      const enabled = _.get(tagInfo, ["packages", pkg.originalPkg.name]);
+      let enabled = _.get(tagInfo, ["packages", pkg.originalPkg.name]);
+      if (enabled === undefined && tagInfo.regex) {
+        enabled = Boolean(tagInfo.regex.find(r => new RegExp(r).exec(pkg.originalPkg.name)));
+      }
       if (enabled) {
         if (tag !== "latest" && tagInfo.addToVersion) {
           const semv = pkg.semver;

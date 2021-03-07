@@ -1,12 +1,12 @@
 $pkg:
  dev:
   '@xarc/run': ^1.0.4
-  bluebird: ^3.5.0
-  fynpo: ^0.1.33
+  bluebird: ^3.7.2
+  fynpo: ^0.1.34
   lerna: ^3.22.1
-  lodash: ^4.17.10
-  semver: ^5.3.0
-  xsh: ^0.4.0
+  lodash: ^4.17.21
+  semver: ^7.3.4
+  xsh: ^0.4.5
 '@babel/code-frame':
  _latest: 7.12.13
  _:
@@ -1466,7 +1466,7 @@ before-after-hook:
 bluebird:
  _latest: 3.7.2
  _:
-  '^3.5.0,^3.5.1,^3.5.3,^3.5.5': 3.7.2
+  '^3.5.1,^3.5.3,^3.5.5,^3.7.2': 3.7.2
  3.7.2:
   top: 1
   $: sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==
@@ -1667,7 +1667,7 @@ caseless:
 chalk:
  _latest: 4.1.0
  _:
-  '^2.0.0,^2.3.0,^2.3.1,^2.4.1,^2.4.2': 2.4.2
+  '^2.0.0,^2.3.1,^2.4.2': 2.4.2
   '^4.0.0,^4.1.0': 4.1.0
  4.1.0:
   $: sha512-qwx12AxXe2Q5xQ43Ac//I6v5aXTipYrSESdOgzrN+9XjgEpyjpKuvSGaN4qE93f7TQTlerQQ8S+EQ0EyDoVL1A==
@@ -2690,32 +2690,32 @@ function-bind:
   $: sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==
   _: 'https://registry.npmjs.org/function-bind/-/function-bind-1.1.1.tgz'
 fyn:
- _latest: 0.4.16
+ _latest: 0.4.17
  _:
-  ^0.4.9: 0.4.16
- 0.4.16:
-  $: sha512-EhF0NuQfWplce/dHmmFinfyUTFJJPSIam9KElee9RKo1f48mQD5IvwjBd6Gi7ZsUwUv1Fa66NNdAXdFZ3XRSvA==
-  _: 'https://registry.npmjs.org/fyn/-/fyn-0.4.16.tgz'
+  ^0.4.17: 0.4.17
+ 0.4.17:
+  $: sha512-qe8PIliO7sP7fmDzHIAXp2wy7Axmre6aXXwBDkOmdw1O/tDnSlL9wrobPTAuVCH+jaU0J98GEryj1e7v8ndx+w==
+  _: 'https://registry.npmjs.org/fyn/-/fyn-0.4.17.tgz'
 fynpo:
- _latest: 0.1.33
+ _latest: 0.2.0
  _:
-  ^0.1.33: 0.1.33
- 0.1.33:
+  ^0.1.34: 0.1.34
+ 0.1.34:
   top: 1
-  $: sha512-PnNA0tJso35SW9a/j7ndNYqA3rLBkaGKSUfs7nrOgDatEhlh8hFwwIabm6H6RfadxPWCyVmbVG05kb9xQ/pONQ==
-  _: 'https://registry.npmjs.org/fynpo/-/fynpo-0.1.33.tgz'
+  $: sha512-PO3N96n+go7j9PXamJM6yks23qnr0AvORsgC9H2vcGxbEMeyMwPAHvWOf4ztuQ4RU+ryIKXsNy5VZXEZ1pTl4A==
+  _: 'https://registry.npmjs.org/fynpo/-/fynpo-0.1.34.tgz'
   dependencies:
-   bluebird: ^3.5.1
-   chalk: ^2.4.1
+   bluebird: ^3.7.2
+   chalk: ^4.1.0
    filter-scan-dir: ^1.0.10
-   fyn: ^0.4.9
-   item-queue: ^1.0.0
-   lodash: ^4.17.4
-   nix-clap: ^1.3.0
-   semver: ^5.6.0
-   visual-exec: ^0.1.0
-   visual-logger: ^0.1.3
-   xsh: ^0.4.2
+   fyn: ^0.4.17
+   item-queue: ^1.0.4
+   lodash: ^4.17.21
+   nix-clap: ^1.3.12
+   semver: ^7.3.4
+   visual-exec: ^0.1.8
+   visual-logger: ^1.1.3
+   xsh: ^0.4.5
 gauge:
  _latest: 3.0.0
  _:
@@ -2979,7 +2979,7 @@ has:
   dependencies:
    function-bind: ^1.1.1
 has-ansi:
- _latest: 4.0.0
+ _latest: 4.0.1
  _:
   ^3.0.0: 3.0.0
  3.0.0:
@@ -3579,7 +3579,7 @@ isstream:
 item-queue:
  _latest: 1.0.4
  _:
-  ^1.0.0: 1.0.4
+  ^1.0.4: 1.0.4
  1.0.4:
   $: sha512-JLGx41JDCccb4Jw9YpRjFTvRF5sQi9TSO+Azvn0GlHDc2PHXBpNnU/WIVzVOEiQ8IBWbPosVQjbelcff6awo/g==
   _: 'https://registry.npmjs.org/item-queue/-/item-queue-1.0.4.tgz'
@@ -3790,13 +3790,13 @@ locate-path:
    p-locate: ^2.0.0
    path-exists: ^3.0.0
 lodash:
- _latest: 4.17.20
+ _latest: 4.17.21
  _:
-  '^4.17.10,^4.17.12,^4.17.15,^4.17.4,^4.2.1': 4.17.20
- 4.17.20:
+  '^4.17.12,^4.17.15,^4.17.21,^4.2.1': 4.17.21
+ 4.17.21:
   top: 1
-  $: sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
-  _: 'https://registry.npmjs.org/lodash/-/lodash-4.17.20.tgz'
+  $: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
+  _: 'https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz'
 lodash._reinterpolate:
  _latest: 3.0.0
  _:
@@ -4290,7 +4290,7 @@ nice-try:
 nix-clap:
  _latest: 1.3.12
  _:
-  '^1.3.0,^1.3.12': 1.3.12
+  ^1.3.12: 1.3.12
  1.3.12:
   $: sha512-aNAjM41Cb95Csdn//aKQGfuunIAfgXdHkwtr9dpGfihLquyux2UYcWqj5wTC2cS3XQeQMLavc9kj67ptWbtQMw==
   _: 'https://registry.npmjs.org/nix-clap/-/nix-clap-1.3.12.tgz'
@@ -5424,10 +5424,11 @@ safer-buffer:
 semver:
  _latest: 7.3.4
  _:
-  '2 || 3 || 4 || 5,2.x || 3.x || 4 || 5,^5.3.0,^5.4.1,^5.5.0,^5.5.1,^5.6.0,^5.7.0,^5.7.1': 5.7.1
+  '2 || 3 || 4 || 5,2.x || 3.x || 4 || 5,^5.4.1,^5.5.0,^5.5.1,^5.6.0,^5.7.0,^5.7.1': 5.7.1
   '^6.0.0,^6.2.0': 6.3.0
-  ^7.3.2: 7.3.4
+  '^7.3.2,^7.3.4': 7.3.4
  7.3.4:
+  top: 1
   $: sha512-tCfb2WLjqFAtXn4KEdxIhalnRtoKFN7nAwj0B3ZXCbQloV2tq5eDbcTmT68JJD3nRJq24/XgxtQKFIpQdtvmVw==
   _: 'https://registry.npmjs.org/semver/-/semver-7.3.4.tgz'
   dependencies:
@@ -5436,7 +5437,6 @@ semver:
   $: sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==
   _: 'https://registry.npmjs.org/semver/-/semver-6.3.0.tgz'
  5.7.1:
-  top: 1
   $: sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==
   _: 'https://registry.npmjs.org/semver/-/semver-5.7.1.tgz'
 set-blocking:
@@ -5775,10 +5775,10 @@ string-width:
   '^1.0.1,^1.0.2 || 2': 1.0.2
   ^2.1.0: 2.1.1
   '^3.0.0,^3.1.0': 3.1.0
-  ^4.1.0: 4.2.0
- 4.2.0:
-  $: sha512-zUz5JD+tgqtuDjMhwIg5uFVV3dtqZ9yQJlZVfq4I01/K5Paj5UHj7VyrQOJvzawSVlKpObApbfD0Ed6yJc+1eg==
-  _: 'https://registry.npmjs.org/string-width/-/string-width-4.2.0.tgz'
+  ^4.1.0: 4.2.2
+ 4.2.2:
+  $: sha512-XBJbT3N4JhVumXE0eoLU9DCjcaF92KLNqTmFCnG1pf8duUxFGwtP6AD6nkjw9a3IdiRtL3E2w3JDiE/xi3vOeA==
+  _: 'https://registry.npmjs.org/string-width/-/string-width-4.2.2.tgz'
   dependencies:
    emoji-regex: ^8.0.0
    is-fullwidth-code-point: ^3.0.0
@@ -6326,7 +6326,7 @@ verror:
 visual-exec:
  _latest: 0.1.8
  _:
-  ^0.1.0: 0.1.8
+  ^0.1.8: 0.1.8
  0.1.8:
   $: sha512-fw4XR+lifbjJ1MKP/h/JAcP8g/HPEr4gJXycjQNmieRA7cx75pGI4fpCAywDChCj7lQKOz2T+58evO2devLwUQ==
   _: 'https://registry.npmjs.org/visual-exec/-/visual-exec-0.1.8.tgz'
@@ -6340,19 +6340,12 @@ visual-exec:
 visual-logger:
  _latest: 1.1.3
  _:
-  ^0.1.3: 0.1.10
-  ^1.1.1: 1.1.3
+  '^1.1.1,^1.1.3': 1.1.3
  1.1.3:
   $: sha512-8XPxTR+RoZZtSkx1TY+aLAvG1EivsO0352WuWyXr0nU7n7T2XOh3ty/QwGS2dx7ZUDJQ5PTVp/p5StXaR11H7w==
   _: 'https://registry.npmjs.org/visual-logger/-/visual-logger-1.1.3.tgz'
   dependencies:
    chalk: ^4.0.0
-   log-update: ^4.0.0
- 0.1.10:
-  $: sha512-RAmW+iqcMzIr9lqt9e/71LDvsrE1Z5j8elEto/OLuY8gaWfLCOHPzMCf2Qdgq78+83uUj8+MVYRzWhHV+8z59A==
-  _: 'https://registry.npmjs.org/visual-logger/-/visual-logger-0.1.10.tgz'
-  dependencies:
-   chalk: ^2.3.0
    log-update: ^4.0.0
 wcwidth:
  _latest: 1.0.1
@@ -6497,7 +6490,7 @@ write-pkg:
 xsh:
  _latest: 0.4.5
  _:
-  '^0.4.0,^0.4.2,^0.4.4,^0.4.5': 0.4.5
+  '^0.4.4,^0.4.5': 0.4.5
  0.4.5:
   top: 1
   $: sha512-Tkmj2v1+Uik0zaTU/0+Qwbv8b/NEnPwHgSfnhPIjlSoIb2dRW8HlJMrJb4x232LoITzZATKr7fhdMR4renzhzg==

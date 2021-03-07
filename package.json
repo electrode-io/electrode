@@ -16,12 +16,12 @@
   },
   "devDependencies": {
     "@xarc/run": "^1.0.4",
-    "bluebird": "^3.5.0",
-    "fynpo": "^0.1.33",
+    "bluebird": "^3.7.2",
+    "fynpo": "^0.1.34",
     "lerna": "^3.22.1",
-    "lodash": "^4.17.10",
-    "semver": "^5.3.0",
-    "xsh": "^0.4.0"
+    "lodash": "^4.17.21",
+    "semver": "^7.3.4",
+    "xsh": "^0.4.5"
   },
   "bugs": {
     "url": "https://github.com/electrode-io/electrode/issues"
