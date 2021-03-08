@@ -1,3 +1,58 @@
+# 3/7/2021
+
+- update to webpack-dev-middleware 4
+- fix jsonp asset url cdn mapping
+- fix sourcemap and remove node source plugin config
+- fix webpack 5 subapp HMR code injection
+- [minor] mark for beta release of @xarc/subapp for webpack5
+- [major] release create-app beta for ver10
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@10.0.2-beta.0` `(10.0.1 => 10.0.2-beta.0)`
+- `@xarc/app-dev@10.0.2-beta.0` `(10.0.1 => 10.0.2-beta.0)`
+- `@xarc/create-app@6.0.0-beta.0` `(5.1.0 => 6.0.0-beta.0)`
+- `@xarc/subapp@0.2.0-beta.0` `(0.1.7 => 0.2.0-beta.0)`
+- `@xarc/webpack@11.0.1-beta.0` `(11.0.0 => 11.0.1-beta.0)`
+
+### Lerna Updated
+
+- `@xarc/react@0.2.0-beta.0` `(0.1.7 => 0.2.0-beta.0)`
+- `@xarc/react-query@0.2.0-beta.0` `(0.1.3 => 0.2.0-beta.0)`
+- `@xarc/react-recoil@0.2.0-beta.0` `(0.1.0 => 0.2.0-beta.0)`
+- `@xarc/react-redux@0.2.0-beta.0` `(0.1.6 => 0.2.0-beta.0)`
+- `@xarc/react-redux-observable@0.2.0-beta.0` `(0.1.0 => 0.2.0-beta.0)`
+- `@xarc/react-redux-saga@0.2.0-beta.0` `(0.1.0 => 0.2.0-beta.0)`
+- `@xarc/react-router@0.2.0-beta.0` `(0.1.7 => 0.2.0-beta.0)`
+
+## Commits
+
+- `packages/xarc-app-dev`
+
+  - update to webpack-dev-middleware 4 [commit](http://github.com/electrode-io/electrode/commit/943ce35738d1110a2e968901c8dc0dc142cb24a4)
+  - fix jsonp asset url cdn mapping [commit](http://github.com/electrode-io/electrode/commit/2aab6d941db2bdf2832f1044df558afa5638358d)
+  - fix l10n script [commit](http://github.com/electrode-io/electrode/commit/7728699af41d8f2fb86e838ac793862e2667a399)
+
+- `packages/xarc-create-app`
+
+  - [major] release create-app beta for ver10 [commit](http://github.com/electrode-io/electrode/commit/d9b153e442dc1b37614d7119f3f2fb07bcf6de6c)
+  - update create-app deps [commit](http://github.com/electrode-io/electrode/commit/d27ac551917ccf0e47e87efde336ae2fa4137e71)
+
+- `packages/xarc-subapp`
+
+  - [minor] mark for beta release of @xarc/subapp for webpack5 [commit](http://github.com/electrode-io/electrode/commit/15aa994a7d3ff72dfbab1b68d2a4e0b58ef0a703)
+  - fix webpack 5 subapp HMR code injection [commit](http://github.com/electrode-io/electrode/commit/f202c0a171b82b3c187cde200b6d0d6791e07c56)
+  - fix jsonp asset url cdn mapping [commit](http://github.com/electrode-io/electrode/commit/2aab6d941db2bdf2832f1044df558afa5638358d)
+
+- `packages/xarc-webpack`
+
+  - fix webpack 5 subapp HMR code injection [commit](http://github.com/electrode-io/electrode/commit/f202c0a171b82b3c187cde200b6d0d6791e07c56)
+  - fix sourcemap and remove node source plugin config [commit](http://github.com/electrode-io/electrode/commit/7fdaa12b5b2d501a404ec068d5d7cb5f4fc48edd)
+  - update to webpack-dev-middleware 4 [commit](http://github.com/electrode-io/electrode/commit/943ce35738d1110a2e968901c8dc0dc142cb24a4)
+  - fix jsonp asset url cdn mapping [commit](http://github.com/electrode-io/electrode/commit/2aab6d941db2bdf2832f1044df558afa5638358d)
+
 # 3/4/2021
 
 ## Packages
