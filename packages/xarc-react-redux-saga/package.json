@@ -1,6 +1,6 @@
 {
   "name": "@xarc/react-redux-saga",
-  "version": "0.1.0",
+  "version": "0.2.0-beta.0",
   "description": "xarc React.js application redux saga support",
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
@@ -10,7 +10,8 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.com/",
-    "access": "public"
+    "access": "public",
+    "tag": "beta"
   },
   "scripts": {
     "build": "xrun user/build",
@@ -27,7 +28,7 @@
     "react-dom": "*"
   },
   "dependencies": {
-    "@xarc/react-redux": "^0.1.6",
+    "@xarc/react-redux": "^0.2.0-beta.0",
     "redux-saga": "^1.1.3",
     "tslib": "^2.1.0"
   },

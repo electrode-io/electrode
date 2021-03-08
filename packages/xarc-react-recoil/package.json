@@ -1,6 +1,6 @@
 {
   "name": "@xarc/react-recoil",
-  "version": "0.1.0",
+  "version": "0.2.0-beta.0",
   "description": "Electrode xarc React application recoil support",
   "main": "dist-node-cjs/node/index.js",
   "module": "dist-node-esm/node/index.js",
@@ -10,7 +10,8 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.com/",
-    "access": "public"
+    "access": "public",
+    "tag": "beta"
   },
   "scripts": {
     "build": "xrun user/build",
@@ -29,7 +30,7 @@
   },
   "dependencies": {
     "@types/recoil": "^0.0.1",
-    "@xarc/subapp": "^0.1.7",
+    "@xarc/subapp": "^0.2.0-beta.0",
     "recoil": "^0.1.2",
     "tslib": "^2.1.0"
   },
