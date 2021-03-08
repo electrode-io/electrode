@@ -15,7 +15,8 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.com/",
-    "access": "public"
+    "access": "public",
+    "tag": "beta"
   },
   "scripts": {
     "build": "xrun user/build",
