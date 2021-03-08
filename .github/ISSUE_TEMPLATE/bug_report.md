@@ -46,34 +46,14 @@ Example report:
  - Chrome: ...
 -->
 
-**Electrode Version**
+**Electrode Package Versions**
 
-- Are you using `electrode-archetype-react-app` or `@xarc/app`? What is its version?
-- Are you using subapp or the legacy redux-router-engine? Please provide versions of the following npm package if you use them:
-  - `subapp-react`
-  - `subapp-pbundle`
-  - `electrode-redux-router-engine`
+In your package.json's `dependencies` and `devDependencies`, please copy all packages under the `@xarc` scope, the `subapp-*`, or the `electrode-*` packages.
 
-To find the versions of the npm packages, please use `npm ls`.
-
-Please run `npm ls subapp-react subapp-pbundle electrode-archetype-react-app @xarc/app electrode-redux-router-engine` and paste the output:
+If you like, just copy all your dependencies.
 
 ```
-# paste npm ls output here
-```
-
-**Framework Version**
-
-- Which of the following are you using? Please provide versions:
-  - React
-  - Preact
-  - Redux
-  - Redux-router
-
-Please run `npm ls react react-dom redux react-router preact` and paste the output:
-
-```
-# paste npm ls output here
+# paste dependencies info here
 ```
 
 **Additional context**
