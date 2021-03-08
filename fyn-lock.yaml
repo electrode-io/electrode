@@ -2,7 +2,7 @@ $pkg:
  dev:
   '@xarc/run': ^1.0.4
   bluebird: ^3.7.2
-  fynpo: ^0.1.34
+  fynpo: ^0.1.35
   lerna: ^3.22.1
   lodash: ^4.17.21
   semver: ^7.3.4
@@ -2699,11 +2699,11 @@ fyn:
 fynpo:
  _latest: 0.2.0
  _:
-  ^0.1.34: 0.1.34
- 0.1.34:
+  ^0.1.35: 0.1.35
+ 0.1.35:
   top: 1
-  $: sha512-PO3N96n+go7j9PXamJM6yks23qnr0AvORsgC9H2vcGxbEMeyMwPAHvWOf4ztuQ4RU+ryIKXsNy5VZXEZ1pTl4A==
-  _: 'https://registry.npmjs.org/fynpo/-/fynpo-0.1.34.tgz'
+  $: sha512-Aykb3SWY5raGsU2OMyLtmigIS4l6HlBVuVQmTNrK9/BXu2zw1FDsjs0O/a4GZXIeb7TBCFZgR5AI20yN3Q7H1Q==
+  _: 'https://registry.npmjs.org/fynpo/-/fynpo-0.1.35.tgz'
   dependencies:
    bluebird: ^3.7.2
    chalk: ^4.1.0
