@@ -675,10 +675,11 @@ async function updateLogs(data, levelSelections, scrollToEnd = true) {
 
       //  if it's json string, pretty it
 
-      const jsonStr = event.message.match(/{"[a-zA-Z0-9_]+":.+}/);
+      const matchArr = event.message.match(/{"[a-zA-Z0-9_]+":.+}/g);
 
-      if (jsonStr) {
+      if (matchArr && matchArr.length !== 0) {
         try {
+          const jsonStr = matchArr[0];
           const jsonObj = JSON.parse(jsonStr);
 
           const startIndex = event.message.indexOf(jsonStr);
@@ -701,7 +702,7 @@ async function updateLogs(data, levelSelections, scrollToEnd = true) {
           });
 
           if (startIndex + jsonStr.length !== event.message.length) {
-            const msgAfterJson = event.message.slice(0, startIndex);
+            const msgAfterJson = event.message.slice(startIndex + jsonStr.length);
             const msgAfterJsonDiv = document.createElement("div");
             msgAfterJsonDiv.innerHTML = msgAfterJson;
             newLog.appendChild(msgAfterJsonDiv);
