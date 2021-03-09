@@ -674,19 +674,43 @@ async function updateLogs(data, levelSelections, scrollToEnd = true) {
       const newLog = document.createElement("span");
 
       //  if it's json string, pretty it
-      try {
-        const myJSON = JSON.parse(event.message);
-        const formatter = new JSONFormatter(myJSON);
-        newLog.appendChild(formatter.render(), 1, {
-          hoverPreviewEnabled: false,
-          hoverPreviewArrayCount: 100,
-          hoverPreviewFieldCount: 5,
-          theme: "dark",
-          animateOpen: true,
-          animateClose: true,
-          useToJSON: true
-        });
-      } catch (e) {
+
+      const jsonStr = event.message.match(/{"[a-zA-Z0-9_]+":.+}/);
+
+      if (jsonStr) {
+        try {
+          const jsonObj = JSON.parse(jsonStr);
+
+          const startIndex = event.message.indexOf(jsonStr);
+          if (startIndex) {
+            const msgBeforeJson = event.message.slice(0, startIndex);
+            const msgBeforeJsonDiv = document.createElement("div");
+            msgBeforeJsonDiv.innerHTML = msgBeforeJson;
+            newLog.appendChild(msgBeforeJsonDiv);
+          }
+
+          const formatter = new JSONFormatter(jsonObj);
+          newLog.appendChild(formatter.render(), 1, {
+            hoverPreviewEnabled: false,
+            hoverPreviewArrayCount: 10,
+            hoverPreviewFieldCount: 5,
+            theme: "dark",
+            animateOpen: true,
+            animateClose: true,
+            useToJSON: true
+          });
+
+          if (startIndex + jsonStr.length !== event.message.length) {
+            const msgAfterJson = event.message.slice(0, startIndex);
+            const msgAfterJsonDiv = document.createElement("div");
+            msgAfterJsonDiv.innerHTML = msgAfterJson;
+            newLog.appendChild(msgAfterJsonDiv);
+          }
+        } catch (e) {
+          console.error(e);
+          newLog.innerHTML = event.message;
+        }
+      } else {
         newLog.innerHTML = event.message;
       }
 
