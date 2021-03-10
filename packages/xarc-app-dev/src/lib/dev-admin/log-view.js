@@ -349,6 +349,8 @@ async function updateLogs(data, levelSelections, scrollToEnd = true) {
       newLine.setAttribute("entryId", stringifyEntryId(event));
       if (!levelSelections[event.level]) {
         newLine.setAttribute("class", "hide");
+      } else {
+        newLine.setAttribute("class", "flex");
       }
 
       const newMeta = document.createElement("span");
@@ -358,7 +360,7 @@ async function updateLogs(data, levelSelections, scrollToEnd = true) {
       const newLineNum = document.createElement("span");
       newLineNum.innerHTML = logLineNum.toString();
       logLineNum++;
-      newLineNum.setAttribute("class", "mx-4 w-10 inline-block text-center");
+      newLineNum.setAttribute("class", "mx-2 w-10 inline-block text-left");
 
       //  level info
       const newLevelInfo = document.createElement("span");
@@ -366,8 +368,8 @@ async function updateLogs(data, levelSelections, scrollToEnd = true) {
       if (levelInfo.color) {
         newLevelInfo.setAttribute("style", `color: ${levelInfo.color}`);
       }
-      newLevelInfo.setAttribute("class", "mx-4 mr-8");
-      newLevelInfo.innerHTML = levelInfo.name.substring(0, 4);
+      newLevelInfo.setAttribute("class", "mr-16");
+      newLevelInfo.innerHTML = levelInfo.name.substring(0, 4) + " >>";
 
       newMeta.appendChild(newLineNum);
       newMeta.appendChild(newLevelInfo);
