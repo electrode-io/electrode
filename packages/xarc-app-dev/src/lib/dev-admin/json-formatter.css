@@ -23,6 +23,17 @@
 .json-formatter-row .json-formatter-children.json-formatter-empty.json-formatter-array:after {
   content: "[]";
 }
+.json-formatter-row .json-formatter-string:hover,
+.json-formatter-row .json-formatter-stringifiable:hover,
+.json-formatter-row .json-formatter-number:hover,
+.json-formatter-row .json-formatter-boolean:hover,
+.json-formatter-row .json-formatter-null:hover,
+.json-formatter-row .json-formatter-undefined:hover,
+.json-formatter-row .json-formatter-function:hover,
+.json-formatter-row .json-formatter-date:hover,
+.json-formatter-row .json-formatter-bracket:hover {
+  color: white;
+}
 .json-formatter-row .json-formatter-string,
 .json-formatter-row .json-formatter-stringifiable {
   color: #e9fdac;
@@ -124,6 +135,17 @@
   .json-formatter-children.json-formatter-empty.json-formatter-array:after {
   content: "[]";
 }
+.json-formatter-acai.json-formatter-row .json-formatter-string:hover,
+.json-formatter-acai.json-formatter-row .json-formatter-stringifiable:hover,
+.json-formatter-acai.json-formatter-row .json-formatter-number:hover,
+.json-formatter-acai.json-formatter-row .json-formatter-boolean:hover,
+.json-formatter-acai.json-formatter-row .json-formatter-null:hover,
+.json-formatter-acai.json-formatter-row .json-formatter-undefined:hover,
+.json-formatter-acai.json-formatter-row .json-formatter-function:hover,
+.json-formatter-acai.json-formatter-row .json-formatter-date:hover,
+.json-formatter-acai.json-formatter-row .json-formatter-bracket:hover {
+  color: white;
+}
 .json-formatter-acai.json-formatter-row .json-formatter-string,
 .json-formatter-acai.json-formatter-row .json-formatter-stringifiable {
   color: #fba856;
@@ -224,6 +246,17 @@
 .json-formatter-adventure.json-formatter-row
   .json-formatter-children.json-formatter-empty.json-formatter-array:after {
   content: "[]";
+}
+.json-formatter-adventure.json-formatter-row .json-formatter-string:hover,
+.json-formatter-adventure.json-formatter-row .json-formatter-stringifiable:hover,
+.json-formatter-adventure.json-formatter-row .json-formatter-number:hover,
+.json-formatter-adventure.json-formatter-row .json-formatter-boolean:hover,
+.json-formatter-adventure.json-formatter-row .json-formatter-null:hover,
+.json-formatter-adventure.json-formatter-row .json-formatter-undefined:hover,
+.json-formatter-adventure.json-formatter-row .json-formatter-function:hover,
+.json-formatter-adventure.json-formatter-row .json-formatter-date:hover,
+.json-formatter-adventure.json-formatter-row .json-formatter-bracket:hover {
+  color: white;
 }
 .json-formatter-adventure.json-formatter-row .json-formatter-string,
 .json-formatter-adventure.json-formatter-row .json-formatter-stringifiable {
@@ -327,6 +360,17 @@
 .json-formatter-monikai.json-formatter-row
   .json-formatter-children.json-formatter-empty.json-formatter-array:after {
   content: "[]";
+}
+.json-formatter-monikai.json-formatter-row .json-formatter-string:hover,
+.json-formatter-monikai.json-formatter-row .json-formatter-stringifiable:hover,
+.json-formatter-monikai.json-formatter-row .json-formatter-number:hover,
+.json-formatter-monikai.json-formatter-row .json-formatter-boolean:hover,
+.json-formatter-monikai.json-formatter-row .json-formatter-null:hover,
+.json-formatter-monikai.json-formatter-row .json-formatter-undefined:hover,
+.json-formatter-monikai.json-formatter-row .json-formatter-function:hover,
+.json-formatter-monikai.json-formatter-row .json-formatter-date:hover,
+.json-formatter-monikai.json-formatter-row .json-formatter-bracket:hover {
+  color: white;
 }
 .json-formatter-monikai.json-formatter-row .json-formatter-string,
 .json-formatter-monikai.json-formatter-row .json-formatter-stringifiable {
