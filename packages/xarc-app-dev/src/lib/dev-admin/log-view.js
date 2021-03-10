@@ -395,7 +395,7 @@ async function updateLogs(data, levelSelections, scrollToEnd = true) {
           }
 
           const formatter = new JSONFormatter(jsonObj, 1, {
-            hoverPreviewEnabled: false,
+            hoverPreviewEnabled: true,
             hoverPreviewArrayCount: 10,
             hoverPreviewFieldCount: 5,
             theme: themeArr[curThemeIdx++],
