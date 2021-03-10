@@ -1,7 +1,7 @@
 /* eslint-disable no-magic-numbers, no-use-before-define, no-unused-vars */
 /* eslint-disable no-console, max-statements, no-param-reassign, complexity */
 /* global window, document, EventSource, fetch */
-
+const JSONFormatter = c;
 let logLineNum = 1;
 let logStream;
 let logStreamReconnectDelay = 5000;

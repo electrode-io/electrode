@@ -1,3 +1,4 @@
+/* eslint-disable */
 function t(t) {
   return null === t ? "null" : typeof t;
 }
@@ -289,4 +290,4 @@ var a = /(^\d{1,4}[\.|\\/|-]\d{1,2}[\.|\\/|-]\d{1,4})(\s*(?:0?[1-9]:[0-5]|1(?=[0
     );
   })();
 
-const JSONFormatter = c;
+/* eslint-enable */
