@@ -1,6 +1,7 @@
 <html>
   <head>
     <title>LogViewer: xarc application development logs</title>
+    <link rel="stylesheet" href="./cwd/node_modules/@xarc/app-dev/lib/dev-admin/json-formatter.css">
     <style>
       /* styles from https://www.w3schools.com/howto/howto_css_fixed_menu.asp */
       /* The navigation bar */
@@ -47,12 +48,17 @@
         line-height: normal;
       }
 
+      .flex {
+        display: flex;
+      }
+
       .hide {
         display: none;
       }
 
       .show {
         display: inline;
+        flex: 0 0 128px;
       }
 
       .unselectable {
@@ -60,13 +66,13 @@
         -webkit-user-select: none;
       }
 
-      .mx-4 {
-        margin-left: 4px;
-        margin-right: 4px;
+      .mx-2 {
+        margin-left: 2px;
+        margin-right: 2px;
       }
 
-      .mr-8 {
-        margin-right: 8px;
+      .mr-16 {
+        margin-right: 16px;
       }
 
       .w-10	 {
@@ -78,7 +84,7 @@
       }
 
       .text-center {
-        text-align: center;
+        text-align: left;
       }
     </style>
   </head>
@@ -121,6 +127,7 @@
       <pre class="logs" id="logs"></pre>
     </div>
     <script>
+      /*{{JSON_FORMATTER_JS}}*/
       /*{{LOG_VIEW_JS}}*/
     </script>
   </body>

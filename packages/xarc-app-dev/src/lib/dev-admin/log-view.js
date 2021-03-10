@@ -2,6 +2,11 @@
 /* eslint-disable no-console, max-statements, no-param-reassign, complexity */
 /* global window, document, EventSource, fetch */
 
+//  c is from json-formatter-js.js, keep it loaded ahead of log-view.js
+/* eslint-disable no-undef */
+const JSONFormatter = c;
+/* eslint-enable no-undef */
+
 let logLineNum = 1;
 let logStream;
 let logStreamReconnectDelay = 5000;
@@ -45,6 +50,9 @@ const Levels = {
     name: "silly"
   }
 };
+
+const themeArr = ["", "adventure", "acai", "monikai"];
+let curThemeIdx = 0;
 
 /**
  *
@@ -304,6 +312,94 @@ function wipeLogs() {
 }
 
 /**
+ * @param level level string including info, warn, and so on...
+ * @return new span element with meta info
+ */
+function createMetaElement(level) {
+  const newMeta = document.createElement("span");
+  newMeta.setAttribute("class", "show unselectable meta");
+
+  //  line number
+  const newLineNum = document.createElement("span");
+  newLineNum.innerHTML = logLineNum.toString();
+  logLineNum++;
+  newLineNum.setAttribute("class", "mx-2 w-10 inline-block text-left");
+
+  //  level info
+  const newLevelInfo = document.createElement("span");
+  const levelInfo = Levels[level];
+  if (levelInfo.color) {
+    newLevelInfo.setAttribute("style", `color: ${levelInfo.color}`);
+  }
+  newLevelInfo.setAttribute("class", "mr-16");
+  newLevelInfo.innerHTML = levelInfo.name.substring(0, 4) + " >>";
+
+  newMeta.appendChild(newLineNum);
+  newMeta.appendChild(newLevelInfo);
+
+  return newMeta;
+}
+
+/**
+ * @param message log string
+ * @return new span element with log info
+ */
+
+function createLogElement(message) {
+  const newLog = document.createElement("span");
+  const matchArr = message.match(/{"[a-zA-Z0-9_]+":.+}/g);
+
+  //  if it's json string, pretty it
+  if (matchArr && matchArr.length !== 0) {
+    try {
+      const jsonStr = matchArr[0];
+      const jsonObj = JSON.parse(jsonStr);
+
+      const startIndex = message.indexOf(jsonStr);
+
+      //  append message before JSON
+      if (startIndex) {
+        const msgBeforeJson = message.slice(0, startIndex);
+        const msgBeforeJsonDiv = document.createElement("div");
+        msgBeforeJsonDiv.innerHTML = msgBeforeJson;
+        newLog.appendChild(msgBeforeJsonDiv);
+      }
+
+      const formatter = new JSONFormatter(jsonObj, 1, {
+        hoverPreviewEnabled: true,
+        hoverPreviewArrayCount: 10,
+        hoverPreviewFieldCount: 5,
+        theme: themeArr[curThemeIdx++],
+        animateOpen: true,
+        animateClose: true,
+        useToJSON: true
+      });
+
+      //  alternatively display different theme
+      if (curThemeIdx === themeArr.length) {
+        curThemeIdx = 0;
+      }
+
+      newLog.appendChild(formatter.render());
+
+      //  append message after JSON
+      if (startIndex + jsonStr.length !== message.length) {
+        const msgAfterJson = message.slice(startIndex + jsonStr.length);
+        const msgAfterJsonDiv = document.createElement("div");
+        msgAfterJsonDiv.innerHTML = msgAfterJson;
+        newLog.appendChild(msgAfterJsonDiv);
+      }
+    } catch (e) {
+      newLog.innerHTML = message;
+    }
+  } else {
+    newLog.innerHTML = message;
+  }
+
+  return newLog;
+}
+
+/**
  * @param data
  * @param levelSelections
  * @param scrollToEnd
@@ -346,32 +442,15 @@ async function updateLogs(data, levelSelections, scrollToEnd = true) {
       newLine.setAttribute("entryId", stringifyEntryId(event));
       if (!levelSelections[event.level]) {
         newLine.setAttribute("class", "hide");
+      } else {
+        newLine.setAttribute("class", "flex");
       }
 
-      const newMeta = document.createElement("span");
-      newMeta.setAttribute("class", "show unselectable meta");
+      const metaColumnElement = createMetaElement(event.level);
+      const logColumnElment = createLogElement(event.message);
 
-      const newLineNum = document.createElement("span");
-      newLineNum.innerHTML = logLineNum.toString();
-      logLineNum++;
-      newLineNum.setAttribute("class", "mx-4 w-10 inline-block text-center");
-
-      const newLevelInfo = document.createElement("span");
-      const levelInfo = Levels[event.level];
-      if (levelInfo.color) {
-        newLevelInfo.setAttribute("style", `color: ${levelInfo.color}`);
-      }
-      newLevelInfo.setAttribute("class", "mx-4 mr-8");
-      newLevelInfo.innerHTML = levelInfo.name.substring(0, 4);
-
-      newMeta.appendChild(newLineNum);
-      newMeta.appendChild(newLevelInfo);
-
-      const newLog = document.createElement("span");
-      newLog.innerHTML = event.message;
-
-      newLine.appendChild(newMeta);
-      newLine.appendChild(newLog);
+      newLine.appendChild(metaColumnElement);
+      newLine.appendChild(logColumnElment);
       logDisplayElement.appendChild(newLine);
     });
   }
