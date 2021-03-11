@@ -33,7 +33,7 @@ export type RecoilFeatureOptions = {
 /**
  * recoil support for a subapp
  */
-export type SampleFeature = SubAppFeature & {
+export type RecoilFeature = SubAppFeature & {
   options: RecoilFeatureOptions;
   wrap: (_: any) => any;
   prepare: any;
@@ -51,7 +51,7 @@ export function recoilFeature(options: RecoilFeatureOptions): SubAppFeatureFacto
   const id = "state-provider";
   const subId = "react-recoil";
   const add = (subapp: SubAppDef) => {
-    const recoil: Partial<SampleFeature> = { id, subId };
+    const recoil: Partial<RecoilFeature> = { id, subId };
     subapp._features.recoil = recoil as SubAppFeature;
     // wrap: callback to wrap component with recoil
     recoil.options = options;
