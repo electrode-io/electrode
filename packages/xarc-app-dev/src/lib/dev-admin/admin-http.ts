@@ -242,10 +242,15 @@ export class AdminHttp {
             Path.join(__dirname, "log.html"),
             "_logHtml",
             (content: string): string => {
-              return content.replace(
-                "/*{{LOG_VIEW_JS}}*/",
-                Fs.readFileSync(Path.join(__dirname, "log-view.js")).toString()
-              );
+              return content
+                .replace(
+                  "/*{{JSON_FORMATTER_JS}}*/",
+                  Fs.readFileSync(Path.join(__dirname, "json-formatter-js.js")).toString()
+                )
+                .replace(
+                  "/*{{LOG_VIEW_JS}}*/",
+                  Fs.readFileSync(Path.join(__dirname, "log-view.js")).toString()
+                );
             }
           )
         );

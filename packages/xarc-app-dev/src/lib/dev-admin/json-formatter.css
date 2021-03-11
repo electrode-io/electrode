@@ -1,0 +1,448 @@
+.json-formatter-row {
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+.json-formatter-row,
+.json-formatter-row a,
+.json-formatter-row a:hover {
+  color: #f8f8f2;
+  text-decoration: none;
+}
+.json-formatter-row .json-formatter-row {
+  margin-left: 1rem;
+}
+.json-formatter-row .json-formatter-children.json-formatter-empty {
+  opacity: 0.5;
+  margin-left: 1rem;
+}
+.json-formatter-row .json-formatter-children.json-formatter-empty:after {
+  display: none;
+}
+.json-formatter-row .json-formatter-children.json-formatter-empty.json-formatter-object:after {
+  content: "No properties";
+}
+.json-formatter-row .json-formatter-children.json-formatter-empty.json-formatter-array:after {
+  content: "[]";
+}
+.json-formatter-row .json-formatter-string:hover,
+.json-formatter-row .json-formatter-stringifiable:hover,
+.json-formatter-row .json-formatter-number:hover,
+.json-formatter-row .json-formatter-boolean:hover,
+.json-formatter-row .json-formatter-null:hover,
+.json-formatter-row .json-formatter-undefined:hover,
+.json-formatter-row .json-formatter-function:hover,
+.json-formatter-row .json-formatter-date:hover,
+.json-formatter-row .json-formatter-bracket:hover {
+  color: white;
+}
+.json-formatter-row .json-formatter-string,
+.json-formatter-row .json-formatter-stringifiable {
+  color: #e9fdac;
+  white-space: pre;
+  word-wrap: break-word;
+}
+.json-formatter-row .json-formatter-number {
+  color: #fdb082;
+}
+.json-formatter-row .json-formatter-boolean {
+  color: #6699cc;
+}
+.json-formatter-row .json-formatter-null {
+  color: #ca0b69;
+}
+.json-formatter-row .json-formatter-undefined {
+  color: #ca0b69;
+}
+.json-formatter-row .json-formatter-function {
+  color: #fdb082;
+}
+.json-formatter-row .json-formatter-date {
+  background-color: rgba(248, 248, 242, 0.05);
+}
+.json-formatter-row .json-formatter-url {
+  text-decoration: underline;
+  color: lightblue;
+  cursor: pointer;
+}
+.json-formatter-row .json-formatter-bracket {
+  color: #046304;
+}
+.json-formatter-row .json-formatter-key {
+  color: #14a407;
+  padding-right: 0.2rem;
+}
+.json-formatter-row .json-formatter-toggler-link {
+  cursor: pointer;
+}
+.json-formatter-row .json-formatter-toggler {
+  line-height: 1.2rem;
+  font-size: 1rem;
+  vertical-align: middle;
+  opacity: 0.8;
+  cursor: pointer;
+  padding-right: 0.2rem;
+}
+.json-formatter-row .json-formatter-toggler:after {
+  display: inline-block;
+  transition: transform 50ms ease-in;
+  content: "►";
+}
+.json-formatter-row > a > .json-formatter-preview-text {
+  opacity: 0;
+  transition: opacity 0.15s ease-in;
+  font-style: italic;
+}
+.json-formatter-row:hover > a > .json-formatter-preview-text {
+  opacity: 0.6;
+}
+.json-formatter-row.json-formatter-open
+  > .json-formatter-toggler-link
+  .json-formatter-toggler:after {
+  transform: rotate(90deg);
+}
+.json-formatter-row.json-formatter-open > .json-formatter-children:after {
+  display: inline-block;
+}
+.json-formatter-row.json-formatter-open > a > .json-formatter-preview-text {
+  display: none;
+}
+.json-formatter-row.json-formatter-open.json-formatter-empty:after {
+  display: block;
+}
+.json-formatter-acai.json-formatter-row {
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+.json-formatter-acai.json-formatter-row,
+.json-formatter-acai.json-formatter-row a,
+.json-formatter-acai.json-formatter-row a:hover {
+  color: #a3bbe8;
+  text-decoration: none;
+}
+.json-formatter-acai.json-formatter-row .json-formatter-row {
+  margin-left: 1rem;
+}
+.json-formatter-acai.json-formatter-row .json-formatter-children.json-formatter-empty {
+  opacity: 0.5;
+  margin-left: 1rem;
+}
+.json-formatter-acai.json-formatter-row .json-formatter-children.json-formatter-empty:after {
+  display: none;
+}
+.json-formatter-acai.json-formatter-row
+  .json-formatter-children.json-formatter-empty.json-formatter-object:after {
+  content: "No properties";
+}
+.json-formatter-acai.json-formatter-row
+  .json-formatter-children.json-formatter-empty.json-formatter-array:after {
+  content: "[]";
+}
+.json-formatter-acai.json-formatter-row .json-formatter-string:hover,
+.json-formatter-acai.json-formatter-row .json-formatter-stringifiable:hover,
+.json-formatter-acai.json-formatter-row .json-formatter-number:hover,
+.json-formatter-acai.json-formatter-row .json-formatter-boolean:hover,
+.json-formatter-acai.json-formatter-row .json-formatter-null:hover,
+.json-formatter-acai.json-formatter-row .json-formatter-undefined:hover,
+.json-formatter-acai.json-formatter-row .json-formatter-function:hover,
+.json-formatter-acai.json-formatter-row .json-formatter-date:hover,
+.json-formatter-acai.json-formatter-row .json-formatter-bracket:hover {
+  color: white;
+}
+.json-formatter-acai.json-formatter-row .json-formatter-string,
+.json-formatter-acai.json-formatter-row .json-formatter-stringifiable {
+  color: #fba856;
+  white-space: pre;
+  word-wrap: break-word;
+}
+.json-formatter-acai.json-formatter-row .json-formatter-number {
+  color: #93a3bf;
+}
+.json-formatter-acai.json-formatter-row .json-formatter-boolean {
+  color: #448aa9;
+}
+.json-formatter-acai.json-formatter-row .json-formatter-null {
+  color: red;
+}
+.json-formatter-acai.json-formatter-row .json-formatter-undefined {
+  color: red;
+}
+.json-formatter-acai.json-formatter-row .json-formatter-function {
+  color: #93a3bf;
+}
+.json-formatter-acai.json-formatter-row .json-formatter-date {
+  background-color: rgba(163, 187, 232, 0.05);
+}
+.json-formatter-acai.json-formatter-row .json-formatter-url {
+  text-decoration: underline;
+  color: lightblue;
+  cursor: pointer;
+}
+.json-formatter-acai.json-formatter-row .json-formatter-bracket {
+  color: #babafa;
+}
+.json-formatter-acai.json-formatter-row .json-formatter-key {
+  color: #b553bf;
+  padding-right: 0.2rem;
+}
+.json-formatter-acai.json-formatter-row .json-formatter-toggler-link {
+  cursor: pointer;
+}
+.json-formatter-acai.json-formatter-row .json-formatter-toggler {
+  line-height: 1.2rem;
+  font-size: 1rem;
+  vertical-align: middle;
+  opacity: 0.8;
+  cursor: pointer;
+  padding-right: 0.2rem;
+}
+.json-formatter-acai.json-formatter-row .json-formatter-toggler:after {
+  display: inline-block;
+  transition: transform 50ms ease-in;
+  content: "►";
+}
+.json-formatter-acai.json-formatter-row > a > .json-formatter-preview-text {
+  opacity: 0;
+  transition: opacity 0.15s ease-in;
+  font-style: italic;
+}
+.json-formatter-acai.json-formatter-row:hover > a > .json-formatter-preview-text {
+  opacity: 0.6;
+}
+.json-formatter-acai.json-formatter-row.json-formatter-open
+  > .json-formatter-toggler-link
+  .json-formatter-toggler:after {
+  transform: rotate(90deg);
+}
+.json-formatter-acai.json-formatter-row.json-formatter-open > .json-formatter-children:after {
+  display: inline-block;
+}
+.json-formatter-acai.json-formatter-row.json-formatter-open > a > .json-formatter-preview-text {
+  display: none;
+}
+.json-formatter-acai.json-formatter-row.json-formatter-open.json-formatter-empty:after {
+  display: block;
+}
+.json-formatter-adventure.json-formatter-row {
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+.json-formatter-adventure.json-formatter-row,
+.json-formatter-adventure.json-formatter-row a,
+.json-formatter-adventure.json-formatter-row a:hover {
+  color: #f5bb12;
+  text-decoration: none;
+}
+.json-formatter-adventure.json-formatter-row .json-formatter-row {
+  margin-left: 1rem;
+}
+.json-formatter-adventure.json-formatter-row .json-formatter-children.json-formatter-empty {
+  opacity: 0.5;
+  margin-left: 1rem;
+}
+.json-formatter-adventure.json-formatter-row .json-formatter-children.json-formatter-empty:after {
+  display: none;
+}
+.json-formatter-adventure.json-formatter-row
+  .json-formatter-children.json-formatter-empty.json-formatter-object:after {
+  content: "No properties";
+}
+.json-formatter-adventure.json-formatter-row
+  .json-formatter-children.json-formatter-empty.json-formatter-array:after {
+  content: "[]";
+}
+.json-formatter-adventure.json-formatter-row .json-formatter-string:hover,
+.json-formatter-adventure.json-formatter-row .json-formatter-stringifiable:hover,
+.json-formatter-adventure.json-formatter-row .json-formatter-number:hover,
+.json-formatter-adventure.json-formatter-row .json-formatter-boolean:hover,
+.json-formatter-adventure.json-formatter-row .json-formatter-null:hover,
+.json-formatter-adventure.json-formatter-row .json-formatter-undefined:hover,
+.json-formatter-adventure.json-formatter-row .json-formatter-function:hover,
+.json-formatter-adventure.json-formatter-row .json-formatter-date:hover,
+.json-formatter-adventure.json-formatter-row .json-formatter-bracket:hover {
+  color: white;
+}
+.json-formatter-adventure.json-formatter-row .json-formatter-string,
+.json-formatter-adventure.json-formatter-row .json-formatter-stringifiable {
+  color: #7fd6fa;
+  white-space: pre;
+  word-wrap: break-word;
+}
+.json-formatter-adventure.json-formatter-row .json-formatter-number {
+  color: #bfd7db;
+}
+.json-formatter-adventure.json-formatter-row .json-formatter-boolean {
+  color: #4bae16;
+}
+.json-formatter-adventure.json-formatter-row .json-formatter-null {
+  color: orange;
+}
+.json-formatter-adventure.json-formatter-row .json-formatter-undefined {
+  color: orange;
+}
+.json-formatter-adventure.json-formatter-row .json-formatter-function {
+  color: #bfd7db;
+}
+.json-formatter-adventure.json-formatter-row .json-formatter-date {
+  background-color: rgba(245, 187, 18, 0.05);
+}
+.json-formatter-adventure.json-formatter-row .json-formatter-url {
+  text-decoration: underline;
+  color: lightblue;
+  cursor: pointer;
+}
+.json-formatter-adventure.json-formatter-row .json-formatter-bracket {
+  color: #6dcfed;
+}
+.json-formatter-adventure.json-formatter-row .json-formatter-key {
+  color: #d3422e;
+  padding-right: 0.2rem;
+}
+.json-formatter-adventure.json-formatter-row .json-formatter-toggler-link {
+  cursor: pointer;
+}
+.json-formatter-adventure.json-formatter-row .json-formatter-toggler {
+  line-height: 1.2rem;
+  font-size: 1rem;
+  vertical-align: middle;
+  opacity: 0.8;
+  cursor: pointer;
+  padding-right: 0.2rem;
+}
+.json-formatter-adventure.json-formatter-row .json-formatter-toggler:after {
+  display: inline-block;
+  transition: transform 50ms ease-in;
+  content: "►";
+}
+.json-formatter-adventure.json-formatter-row > a > .json-formatter-preview-text {
+  opacity: 0;
+  transition: opacity 0.15s ease-in;
+  font-style: italic;
+}
+.json-formatter-adventure.json-formatter-row:hover > a > .json-formatter-preview-text {
+  opacity: 0.6;
+}
+.json-formatter-adventure.json-formatter-row.json-formatter-open
+  > .json-formatter-toggler-link
+  .json-formatter-toggler:after {
+  transform: rotate(90deg);
+}
+.json-formatter-adventure.json-formatter-row.json-formatter-open > .json-formatter-children:after {
+  display: inline-block;
+}
+.json-formatter-adventure.json-formatter-row.json-formatter-open
+  > a
+  > .json-formatter-preview-text {
+  display: none;
+}
+.json-formatter-adventure.json-formatter-row.json-formatter-open.json-formatter-empty:after {
+  display: block;
+}
+.json-formatter-monikai.json-formatter-row {
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+.json-formatter-monikai.json-formatter-row,
+.json-formatter-monikai.json-formatter-row a,
+.json-formatter-monikai.json-formatter-row a:hover {
+  color: #66d9ef;
+  text-decoration: none;
+}
+.json-formatter-monikai.json-formatter-row .json-formatter-row {
+  margin-left: 1rem;
+}
+.json-formatter-monikai.json-formatter-row .json-formatter-children.json-formatter-empty {
+  opacity: 0.5;
+  margin-left: 1rem;
+}
+.json-formatter-monikai.json-formatter-row .json-formatter-children.json-formatter-empty:after {
+  display: none;
+}
+.json-formatter-monikai.json-formatter-row
+  .json-formatter-children.json-formatter-empty.json-formatter-object:after {
+  content: "No properties";
+}
+.json-formatter-monikai.json-formatter-row
+  .json-formatter-children.json-formatter-empty.json-formatter-array:after {
+  content: "[]";
+}
+.json-formatter-monikai.json-formatter-row .json-formatter-string:hover,
+.json-formatter-monikai.json-formatter-row .json-formatter-stringifiable:hover,
+.json-formatter-monikai.json-formatter-row .json-formatter-number:hover,
+.json-formatter-monikai.json-formatter-row .json-formatter-boolean:hover,
+.json-formatter-monikai.json-formatter-row .json-formatter-null:hover,
+.json-formatter-monikai.json-formatter-row .json-formatter-undefined:hover,
+.json-formatter-monikai.json-formatter-row .json-formatter-function:hover,
+.json-formatter-monikai.json-formatter-row .json-formatter-date:hover,
+.json-formatter-monikai.json-formatter-row .json-formatter-bracket:hover {
+  color: white;
+}
+.json-formatter-monikai.json-formatter-row .json-formatter-string,
+.json-formatter-monikai.json-formatter-row .json-formatter-stringifiable {
+  color: #fd971f;
+  white-space: pre;
+  word-wrap: break-word;
+}
+.json-formatter-monikai.json-formatter-row .json-formatter-number {
+  color: #a6e22e;
+}
+.json-formatter-monikai.json-formatter-row .json-formatter-boolean {
+  color: #ac81fe;
+}
+.json-formatter-monikai.json-formatter-row .json-formatter-null {
+  color: #66d9ef;
+}
+.json-formatter-monikai.json-formatter-row .json-formatter-undefined {
+  color: #66d9ef;
+}
+.json-formatter-monikai.json-formatter-row .json-formatter-function {
+  color: #a6e22e;
+}
+.json-formatter-monikai.json-formatter-row .json-formatter-date {
+  background-color: rgba(102, 217, 239, 0.05);
+}
+.json-formatter-monikai.json-formatter-row .json-formatter-url {
+  text-decoration: underline;
+  color: lightblue;
+  cursor: pointer;
+}
+.json-formatter-monikai.json-formatter-row .json-formatter-bracket {
+  color: #2ef145;
+}
+.json-formatter-monikai.json-formatter-row .json-formatter-key {
+  color: #c826f9;
+  padding-right: 0.2rem;
+}
+.json-formatter-monikai.json-formatter-row .json-formatter-toggler-link {
+  cursor: pointer;
+}
+.json-formatter-monikai.json-formatter-row .json-formatter-toggler {
+  line-height: 1.2rem;
+  font-size: 1rem;
+  vertical-align: middle;
+  opacity: 0.8;
+  cursor: pointer;
+  padding-right: 0.2rem;
+}
+.json-formatter-monikai.json-formatter-row .json-formatter-toggler:after {
+  display: inline-block;
+  transition: transform 50ms ease-in;
+  content: "►";
+}
+.json-formatter-monikai.json-formatter-row > a > .json-formatter-preview-text {
+  opacity: 0;
+  transition: opacity 0.15s ease-in;
+  font-style: italic;
+}
+.json-formatter-monikai.json-formatter-row:hover > a > .json-formatter-preview-text {
+  opacity: 0.6;
+}
+.json-formatter-monikai.json-formatter-row.json-formatter-open
+  > .json-formatter-toggler-link
+  .json-formatter-toggler:after {
+  transform: rotate(90deg);
+}
+.json-formatter-monikai.json-formatter-row.json-formatter-open > .json-formatter-children:after {
+  display: inline-block;
+}
+.json-formatter-monikai.json-formatter-row.json-formatter-open > a > .json-formatter-preview-text {
+  display: none;
+}
+.json-formatter-monikai.json-formatter-row.json-formatter-open.json-formatter-empty:after {
+  display: block;
+}
