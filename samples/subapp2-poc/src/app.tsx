@@ -12,7 +12,12 @@ export const staticHome = declareSubApp({
 
 export const recoilApp = declareSubApp({
   name: "recoilApp",
-  getModule: () => import("./recoilTodo")
+  getModule: () => import("./recoil-todo-app")
+});
+
+export const characterCounterApp = declareSubApp({
+  name: "sampleApp",
+  getModule: () => import("./recoil-character-counter")
 });
 
 xarcV2.debug("app.tsx");

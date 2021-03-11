@@ -13,7 +13,6 @@ import { Demo2 } from "./demo2";
 import { message } from "./message";
 import electrodePng from "../static/electrode.png";
 import custom from "./styles/custom.module.css"; // eslint-disable-line no-unused-vars
-import { RecoilRoot } from "@xarc/react-recoil";
 
 export const demo1 = declareSubApp({
   name: "demo1",
@@ -24,14 +23,9 @@ export const demo1B = declareSubApp({
   name: "demo1b",
   getModule: () => import("./demo1")
 });
-export const recoilApp = declareSubApp({
-  name: "recoilApp",
-  getModule: () => import("./recoilTodo")
-});
 
 const Demo1 = createDynamicComponent(demo1, { ssr: true });
 const Demo1B = createDynamicComponent(demo1B, { ssr: true });
-const RecoilTodoApp = createDynamicComponent(recoilApp, { ssr: true });
 
 export const Demo3 = subAppInlineComponent(
   declareSubApp({
@@ -88,7 +82,6 @@ const Home = props => {
       <Demo3 />
       <h1>subapp with react-query</h1>
       <Demo4 />
-      <h1>Recoil Todo App</h1>
     </div>
   );
 };

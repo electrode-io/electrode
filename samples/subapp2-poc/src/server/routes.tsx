@@ -14,7 +14,7 @@ import {
   PageOptions
 } from "@xarc/react";
 
-import { home, staticHome, recoilApp } from "../app";
+import { home, staticHome, characterCounterApp, recoilApp } from "../app";
 import { renderToString } from "react-dom/server";
 
 const MEMOIZE_STORE = {};
@@ -98,7 +98,8 @@ ${s}
       namespace: "poc1",
       subApps: [
         { name: home.name, ssr: true },
-        { name: recoilApp.name, ssr: true },
+        { name: recoilApp.name, ssr: true }, //sampleApp
+        { name: characterCounterApp.name, ssr: true }, //sampleApp
         Demo3.loadOptions,
         { name: "demo4", ssr: true, prepareOnly: true, inlineId: "1234" }
       ],
@@ -187,6 +188,7 @@ ${s}
               { name: staticHome.name, ssr: true },
               { name: "demo3", ssr: true, prepareOnly: true, inlineId: "123" },
               { name: home.name, ssr: true },
+
               { name: recoilApp.name, ssr: true }
             ],
             ...commonRenderOptions
