@@ -6,17 +6,12 @@ import { expect } from "chai";
 import { SubAppDef, SubAppContainer, envHooks } from "@xarc/subapp";
 import { render, waitFor, screen } from "@testing-library/react";
 import sinon from "sinon";
-import { recoilFeature, RecoilFeature, Recoil } from "../../src/browser/index";
+import { recoilFeature, RecoilFeature } from "../../src/browser/index";
 
 const { createElement } = React; // eslint-disable-line
 
 const mockPrepare = async initialState => {
-  return {
-    state: {
-      todoListState: { key: "todoListState", value: [] },
-      todoListFilterState: { key: "todoListFilterState", value: "Show All" }
-    }
-  };
+  return { atoms: { key: "atomKey", value: {} } };
 };
 
 const options = {
@@ -56,7 +51,6 @@ describe("reactRecoilFeature", function () {
     factory.add(def);
 
     const recoil: Partial<RecoilFeature> = def._features.recoil;
-
     expect(recoil.wrap).to.be.an("function");
     expect(recoil.execute).to.be.an("function");
 
@@ -86,12 +80,7 @@ describe("reactRecoilFeature", function () {
     factory.add(def);
 
     const recoil: Partial<RecoilFeature> = def._features.recoil;
-    const atomsMap = {
-      state: {
-        todoListState: { key: "todoListState", value: [] },
-        todoListFilterState: { key: "todoListFilterState", value: "Show All" }
-      }
-    };
+    const atomsMap = { key: "key", value: "RecoilState" };
 
     render(
       recoil.wrap({
