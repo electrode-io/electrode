@@ -11,7 +11,12 @@ import { recoilFeature, RecoilFeature, Recoil } from "../../src/browser/index";
 const { createElement } = React; // eslint-disable-line
 
 const mockPrepare = async initialState => {
-  return { atoms: { key: "atomKey", value: {} } };
+  return {
+    state: {
+      todoListState: { key: "todoListState", value: [] },
+      todoListFilterState: { key: "todoListFilterState", value: "Show All" }
+    }
+  };
 };
 
 const options = {
@@ -81,7 +86,12 @@ describe("reactRecoilFeature", function () {
     factory.add(def);
 
     const recoil: Partial<RecoilFeature> = def._features.recoil;
-    const atomsMap = { key: "key", value: "RecoilState" };
+    const atomsMap = {
+      state: {
+        todoListState: { key: "todoListState", value: [] },
+        todoListFilterState: { key: "todoListFilterState", value: "Show All" }
+      }
+    };
 
     render(
       recoil.wrap({
