@@ -53,6 +53,7 @@ const Levels = {
 
 const themeArr = ["", "adventure", "acai", "monikai"];
 let curThemeIdx = 0;
+let isPrettyJSONEnabled = true;
 
 /**
  *
@@ -219,7 +220,7 @@ class HashValues {
   }
 }
 
-const hashVal = new HashValues();
+let hashVal = new HashValues();
 
 /**
  *
@@ -254,6 +255,18 @@ function toggleMeta() {
       s.setAttribute("class", "show unselectable meta");
     }
   }
+}
+
+/**
+ * @description turn on/off JSON prettier
+ */
+function toggleJSONPretty() {
+  isPrettyJSONEnabled = !isPrettyJSONEnabled;
+  clearLogs();
+  hashVal = new HashValues();
+  lastEntryId = { ts: 0, tx: 0 };
+  instanceId = -1;
+  startLogStream();
 }
 
 /**
@@ -340,57 +353,66 @@ function createMetaElement(level) {
   return newMeta;
 }
 
-/**
- * @param message log string
- * @return new span element with log info
- */
+function getJSONInfo(msg) {
+  const matchArr = msg.match(/{"[a-zA-Z0-9_]+":.+}/g);
 
-function createLogElement(message) {
-  const newLog = document.createElement("span");
-  const matchArr = message.match(/{"[a-zA-Z0-9_]+":.+}/g);
-
-  //  if it's json string, pretty it
   if (matchArr && matchArr.length !== 0) {
     try {
       const jsonStr = matchArr[0];
       const jsonObj = JSON.parse(jsonStr);
-
-      const startIndex = message.indexOf(jsonStr);
-
-      //  append message before JSON
-      if (startIndex) {
-        const msgBeforeJson = message.slice(0, startIndex);
-        const msgBeforeJsonDiv = document.createElement("div");
-        msgBeforeJsonDiv.innerHTML = msgBeforeJson;
-        newLog.appendChild(msgBeforeJsonDiv);
-      }
-
-      const formatter = new JSONFormatter(jsonObj, 1, {
-        hoverPreviewEnabled: true,
-        hoverPreviewArrayCount: 10,
-        hoverPreviewFieldCount: 5,
-        theme: themeArr[curThemeIdx++],
-        animateOpen: true,
-        animateClose: true,
-        useToJSON: true
-      });
-
-      //  alternatively display different theme
-      if (curThemeIdx === themeArr.length) {
-        curThemeIdx = 0;
-      }
-
-      newLog.appendChild(formatter.render());
-
-      //  append message after JSON
-      if (startIndex + jsonStr.length !== message.length) {
-        const msgAfterJson = message.slice(startIndex + jsonStr.length);
-        const msgAfterJsonDiv = document.createElement("div");
-        msgAfterJsonDiv.innerHTML = msgAfterJson;
-        newLog.appendChild(msgAfterJsonDiv);
-      }
+      return { jsonStr: jsonStr, jsonObj: jsonObj, startIdx: msg.indexOf(jsonStr) };
     } catch (e) {
-      newLog.innerHTML = message;
+      return null;
+    }
+  } else {
+    return null;
+  }
+}
+
+function prettyJSON(jsonObj) {
+  const formatter = new JSONFormatter(jsonObj, 1, {
+    hoverPreviewEnabled: true,
+    hoverPreviewArrayCount: 10,
+    hoverPreviewFieldCount: 5,
+    theme: themeArr[curThemeIdx++],
+    animateOpen: true,
+    animateClose: true,
+    useToJSON: true
+  });
+
+  //  alternatively display different theme
+  if (curThemeIdx === themeArr.length) {
+    curThemeIdx = 0;
+  }
+
+  return formatter.render();
+}
+
+/**
+ * @param message log string
+ * @return new span element with log info
+ */
+function createLogElement(message) {
+  const newLog = document.createElement("span");
+
+  const jsonInfo = getJSONInfo(message);
+  if (jsonInfo && isPrettyJSONEnabled) {
+    //  append message before JSON
+    if (jsonInfo.startIdx) {
+      const msgBeforeJson = message.slice(0, jsonInfo.startIdx);
+      const msgBeforeJsonDiv = document.createElement("div");
+      msgBeforeJsonDiv.innerHTML = msgBeforeJson;
+      newLog.appendChild(msgBeforeJsonDiv);
+    }
+
+    newLog.appendChild(prettyJSON(jsonInfo.jsonObj));
+
+    //  append message after JSON
+    if (jsonInfo.startIdx + jsonInfo.jsonStr.length !== message.length) {
+      const msgAfterJson = message.slice(jsonInfo.startIdx + jsonInfo.jsonStr.length);
+      const msgAfterJsonDiv = document.createElement("div");
+      msgAfterJsonDiv.innerHTML = msgAfterJson;
+      newLog.appendChild(msgAfterJsonDiv);
     }
   } else {
     newLog.innerHTML = message;
@@ -546,8 +568,12 @@ window.addEventListener("keypress", event => {
     wipeLogs();
   }
 
-  if (event.ctrlKey && event.code === "KeyH") {
+  if (event.ctrlKey && event.code === "KeyM") {
     toggleMeta();
+  }
+
+  if (event.ctrlKey && event.code === "KeyJ") {
+    toggleJSONPretty();
   }
 });
 
