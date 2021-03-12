@@ -220,7 +220,7 @@ class HashValues {
   }
 }
 
-const hashVal = new HashValues();
+let hashVal = new HashValues();
 
 /**
  *
@@ -262,6 +262,11 @@ function toggleMeta() {
  */
 function toggleJSONPretty() {
   isPrettyJSONEnabled = !isPrettyJSONEnabled;
+  clearLogs();
+  hashVal = new HashValues();
+  lastEntryId = { ts: 0, tx: 0 };
+  instanceId = -1;
+  startLogStream();
 }
 
 /**
