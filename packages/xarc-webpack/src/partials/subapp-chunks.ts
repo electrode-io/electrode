@@ -56,12 +56,12 @@ function makeConfig() {
       splitChunks: {
         chunks: "all",
         minSize: 30 * 1024,
-        maxSize: 0,
+        maxSize: 250 * 1024,
         minChunks: 2,
         maxAsyncRequests: 500,
         maxInitialRequests: 500,
         automaticNameDelimiter: "~",
-        automaticNameMaxLength: 250,
+        // automaticNameMaxLength: 250,
         cacheGroups: {
           vendors: {
             test: /[\\/]node_modules[\\/]/,

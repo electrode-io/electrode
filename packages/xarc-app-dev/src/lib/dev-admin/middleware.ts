@@ -9,7 +9,7 @@ import Url from "url";
 import { devProxy } from "../../config/dev-proxy";
 import { formUrl } from "../utils";
 import getFilenameFromUrl from "webpack-dev-middleware/dist/utils/getFilenameFromUrl";
-
+import { injectEntry } from "@xarc/webpack/lib/util/inject-entry";
 const { getWebpackStartConfig } = require("@xarc/webpack/lib/util/custom-check"); // eslint-disable-line
 
 hotHelpers.pathMatch = (url, path) => {
@@ -116,32 +116,9 @@ export class Middleware {
 
     const encodeHmrPath = encodeURIComponent(webpackHotOptions.path);
 
-    const hmrClient = [`webpack-hot-middleware/client?path=${encodeHmrPath}`];
-
     // webpack 5 entry config: https://webpack.js.org/concepts/entry-points/
-    const injectHmrToEntry = entry => {
-      if (!Array.isArray(entry) && typeof entry === "object") {
-        if (entry.import) {
-          entry.import = hmrClient.concat(entry.import);
-        }
-      } else {
-        return hmrClient.concat(entry);
-      }
-      return entry;
-    };
-
-    if (!Array.isArray(config.entry) && typeof config.entry === "object") {
-      for (const k in config.entry) {
-        config.entry[k] = injectHmrToEntry(config.entry[k]);
-      }
-    } else {
-      config.entry = hmrClient.concat(config.entry);
-    }
-
-    console.log(
-      "Webpack config entry updated with HMR client",
-      JSON.stringify(config.entry, null, 2)
-    );
+    injectEntry(config, [`webpack-hot-middleware/client?path=${encodeHmrPath}`]);
+    console.log("Webpack config entry updated with HMR client");
 
     config.plugins = [
       new webpack.HotModuleReplacementPlugin(),

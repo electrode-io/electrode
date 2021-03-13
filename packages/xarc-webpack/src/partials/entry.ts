@@ -10,6 +10,7 @@ const chalk = require("chalk");
 const { logger } = require("@xarc/app-dev/lib/logger");
 const mkdirp = require("mkdirp");
 import { loadXarcOptions } from "../util/load-xarc-options";
+import { injectEntry } from "../util/inject-entry";
 
 const DEV_HMR_DIR = ".__dev_hmr";
 
@@ -218,23 +219,17 @@ if (module.hot) {
     let entry = appEntry();
     const polyfill = shouldPolyfill();
 
-    const jsonpCdn = "@xarc/app-dev/scripts/webpack5-jsonp-cdn";
+    //
+    // need to insert CDN mapping code for webpack jsonp in production mode
+    //
+    const jsonpCdn = !process.env.WEBPACK_DEV && "@xarc/app-dev/scripts/webpack5-jsonp-cdn";
 
     if (polyfill) {
       const coreJs = "core-js";
       const runtime = "regenerator-runtime/runtime";
-      if (_.isArray(entry)) {
-        entry = { main: [jsonpCdn, coreJs, runtime, ...entry] };
-      } else if (_.isObject(entry)) {
-        entry = Object.entries(entry).reduce((prev, [k, v]) => {
-          prev[k] = [jsonpCdn, coreJs, runtime].concat(v as any[]);
-          return prev;
-        }, {});
-      } else {
-        entry = { main: [jsonpCdn, coreJs, runtime, entry] };
-      }
+      entry = injectEntry({ entry }, [jsonpCdn, coreJs, runtime]).entry;
     } else {
-      entry = [jsonpCdn, entry];
+      entry = injectEntry({ entry }, jsonpCdn).entry;
     }
 
     return entry;
