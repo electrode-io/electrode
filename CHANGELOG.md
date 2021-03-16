@@ -1,3 +1,32 @@
+# 3/16/2021
+
+- fix subapp ver1 with webpack5
+- improve JSON display in Log viewer
+
+## Packages
+
+- `@xarc/app@10.0.2-beta.1` `(10.0.2-beta.0 => 10.0.2-beta.1)`
+- `@xarc/app-dev@10.0.2-beta.1` `(10.0.2-beta.0 => 10.0.2-beta.1)`
+- `@xarc/react-recoil@0.2.0-beta.1` `(0.2.0-beta.0 => 0.2.0-beta.1)`
+- `@xarc/webpack@11.0.1-beta.1` `(11.0.1-beta.0 => 11.0.1-beta.1)`
+
+## Commits
+
+- `packages/xarc-app-dev`
+
+  - support log viewer json formatter on off ([#1841](https://github.com/electrode-io/electrode/pull/1841)) [commit](http://github.com/electrode-io/electrode/commit/1862bd416c213630277e181b51e19d851ab6b6b4)
+  - remove unused dependency in app-dev ([#1839](https://github.com/electrode-io/electrode/pull/1839)) [commit](http://github.com/electrode-io/electrode/commit/4acbe1c340af98d0ed47afe9768ad08c271f036f)
+  - improve JSON display in Log viewer ([#1838](https://github.com/electrode-io/electrode/pull/1838)) [commit](http://github.com/electrode-io/electrode/commit/95f0bc329135f93cf031c2c81674c4b5d8df709c)
+  - fix subapp ver1 with webpack5 [commit](http://github.com/electrode-io/electrode/commit/b4c85cd1d4f221c82a0c0701891dc7e893086de8)
+
+- `packages/xarc-react-recoil`
+
+  - xarc-react-recoil added ssr support with store contains recoil atoms ([#1840](https://github.com/electrode-io/electrode/pull/1840)) [commit](http://github.com/electrode-io/electrode/commit/30d818f3fbf91ef68d2e3bf976971fac3949556b)
+
+- `packages/xarc-webpack`
+
+  - fix subapp ver1 with webpack5 [commit](http://github.com/electrode-io/electrode/commit/b4c85cd1d4f221c82a0c0701891dc7e893086de8)
+
 # 3/7/2021
 
 - update to webpack-dev-middleware 4
