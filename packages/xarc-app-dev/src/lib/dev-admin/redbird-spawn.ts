@@ -46,16 +46,19 @@ const isProxyRunning = async () => {
 };
 
 const handleRestart = type => {
-  const restart = () => {
-    console.log(`${type}Electrode dev proxy restarting`);
+  const restart = (options: any = {}) => {
+    if (!options.quiet) {
+      console.log(`${type}Electrode dev proxy restarting`);
+    }
     const restartUrl = formUrl({
       ...httpDevServer,
-      path: controlPaths.restart
+      path: controlPaths.restart,
+      search: Object.keys(options)
+        .map(k => `${k}=${options[k]}`)
+        .join("&")
     });
     request(restartUrl, (err, _res, body) => {
-      if (!err) {
-        console.log(body);
-      } else {
+      if (err) {
         console.error("Restarting failed, body:", body, "Error", err, "\nrestart URL", restartUrl);
       }
     });
@@ -64,7 +67,7 @@ const handleRestart = type => {
   process.on("SIGHUP", restart);
   process.on("message", data => {
     if (data.name === "restart") {
-      restart();
+      restart({ ...data, name: undefined });
     }
   });
 };

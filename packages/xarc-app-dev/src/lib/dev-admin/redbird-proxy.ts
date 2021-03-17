@@ -9,6 +9,7 @@ import makeOptionalRequire from "optional-require";
 import { devProxy } from "../../config/dev-proxy";
 import { cdnMock } from "./cdn-mock";
 import { isValidPort, formUrl } from "../utils";
+import QS from "querystring";
 
 const { settings, searchSSLCerts, controlPaths } = devProxy;
 
@@ -110,6 +111,8 @@ ${APP_RULES.map(
   return false;
 };
 
+let regAppPort = 0;
+
 const registerElectrodeDevRules = ({
   proxy,
   ssl,
@@ -126,6 +129,7 @@ const registerElectrodeDevRules = ({
   const logEventsPath = `${devPath}/log-events`;
   const logStreamsPath = `${devPath}/stream-logs`;
   const appForwards: any[] = [[{}, { port: appPort }]];
+  regAppPort = appPort;
 
   if (!noDev) {
     appForwards.push(
@@ -186,12 +190,14 @@ const registerElectrodeDevRules = ({
     ssl,
     src: formUrl({ protocol, host, path: controlPaths.restart }),
     target: `http://localhost:29999/skip`,
-    onRequest: (_req, res) => {
+    onRequest: (req, res) => {
+      const restartOpts = QS.parse(req._url.split("?")[1]);
+
       res.statusCode = 200;
-      res.write(`restarted`);
+      res.write(`proxy restarted`);
       res.end();
 
-      process.nextTick(restart);
+      process.nextTick(() => restart(restartOpts));
 
       return false;
     }
@@ -237,9 +243,12 @@ const startProxy = (inOptions = {}) => {
   let listenReportTimer;
   const proxyUrls = {} as any;
   proxyOptions.reportListening = (proto, _port, actualPort) => {
+    clearTimeout(listenReportTimer);
+    if (!regAppPort) {
+      return;
+    }
     proxyUrls[proto] = formUrl({ protocol: proto, host, port: actualPort });
     console.log(`Electrode dev proxy listening on ${proto} port`, actualPort);
-    clearTimeout(listenReportTimer);
     listenReportTimer = setTimeout(() => {
       const mockCdnMsg = enableCdnMock
         ? `\nMock CDN is enabled (mapping saved to config/assets.json)\n`
@@ -284,17 +293,16 @@ View status at <green>${proxyUrls.https || proxyUrls.http}${controlPaths.status}
 
   const userDevProxy = userDevProxyFile && require(Path.resolve(userDevProxyFile));
 
-  const restart = async () => {
+  const restart = async (restartOpts = {}) => {
     // ensure user's proxy rules are refreshed
     if (userDevProxyFile) {
       delete require.cache[userDevProxyFile];
     }
     if (proxy) {
-      console.log("... Closing proxy server ...");
       const old = proxy;
       proxy = undefined;
       await old.close(true);
-      process.nextTick(() => startProxy(inOptions));
+      process.nextTick(() => startProxy({ ...inOptions, ...restartOpts }));
     }
   };
 
@@ -327,6 +335,10 @@ View status at <green>${proxyUrls.https || proxyUrls.http}${controlPaths.status}
       webpackDevPort: options.webpackDevPort,
       restart
     } as any);
+  }
+
+  if (process.send) {
+    process.send({ name: "proxy-started", appPort: regAppPort });
   }
 
   if (userDevProxy && userDevProxy.setupRules) {

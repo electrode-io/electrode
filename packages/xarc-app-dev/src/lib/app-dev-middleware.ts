@@ -70,7 +70,7 @@ export class AppDevMiddleware {
     });
   }
 
-  setup() {
+  setup({ serverPort = undefined } = {}) {
     process.on("message", data => {
       switch (data.name) {
         case WEBPACK_EVENT_REPORT:
@@ -84,6 +84,11 @@ export class AppDevMiddleware {
       }
     });
     // notify dev-admin that app server started
-    process.nextTick(() => process.send && process.send({ name: "app-setup" }));
+
+    this.update({ serverPort, name: "app-setup" });
+  }
+
+  update({ serverPort, name = "app-update" }) {
+    process.nextTick(() => process.send && process.send({ name, appPort: serverPort }));
   }
 }

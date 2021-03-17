@@ -49,8 +49,8 @@ const SERVER_ENVS = {
   [APP_SERVER_NAME]: {
     XARC_BABEL_TARGET: "node"
   },
-  [DEV_SERVER_NAME]: {},
-  [PROXY_SERVER_NAME]: {}
+  [DEV_SERVER_NAME]: {} as any,
+  [PROXY_SERVER_NAME]: {} as any
 };
 
 const getTerminalColumns = () => {
@@ -78,6 +78,7 @@ export class AdminServer {
   _wds: any;
   _proxy: any;
   _app: any;
+  _appPort: number;
   _appLogLevel: any;
   _menu: any;
   _fullyStarted: any;
@@ -135,6 +136,9 @@ export class AdminServer {
     this._fullyStarted = false;
     this._shutdown || (await this.startWebpackDevServer());
     this._shutdown || (await this.startAppServer());
+
+    this._appPort = devProxy.appPort;
+
     if (!this._shutdown && DEV_PROXY_ENABLED) {
       // to debug dev proxy
       // await this.startProxyServer("--inspect-brk");
@@ -764,6 +768,16 @@ ${instruction}`
       debug,
       exec: Path.join(__dirname, "redbird-spawn"),
       waitStart: async info => {
+        info._child.on("message", (data: any) => {
+          // this._io.show(ck`<orange>proxy message ${JSON.stringify(data)}</>`, this._appPort);
+          if (data.name === "proxy-started" && `${data.appPort}` !== `${this._appPort}`) {
+            this.sendMsg(PROXY_SERVER_NAME, {
+              appPort: this._appPort,
+              name: "restart",
+              quiet: true
+            });
+          }
+        });
         this.passThruLineOutput(this._proxy, info._child.stdout, this._io);
         this.passThruLineOutput(this._proxy, info._child.stderr, this._io);
       }
@@ -809,13 +823,27 @@ ${info.name} - assuming it started.</>`);
       return started;
     };
 
-    messageHandler = (data = {}) => {
+    const appUpdateHandler = (data: any = {}) => {
+      if (data.name === "app-update") {
+        // this._io.show(ck`<orange>app-update ${JSON.stringify(data)}</>`);
+        if (DEV_PROXY_ENABLED) {
+          if (data.appPort) {
+            SERVER_ENVS[PROXY_SERVER_NAME].APP_SERVER_PORT = data.appPort;
+            this._appPort = data.appPort;
+            this.sendMsg(PROXY_SERVER_NAME, { ...data, name: "restart" });
+          }
+        }
+      }
+    };
+
+    messageHandler = (data: any = {}) => {
       if (!checkStarted(data)) {
         return;
       }
 
       if (info._child) {
         info._child.removeListener("message", messageHandler);
+        info._child.on("message", appUpdateHandler);
       }
       this.watchServer(info.name);
       defer.resolve();

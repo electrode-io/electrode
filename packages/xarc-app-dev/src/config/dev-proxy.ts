@@ -96,7 +96,7 @@ export function getDevProxy(): any {
   let httpPort = envApp.port;
   let { adminLogLevel, httpsPort } = envProxy;
   const { elevated } = envProxy;
-  const useDevProxy = appPort > 0;
+  const useDevProxy = appPort >= 0;
 
   // auto do https for 443 or 8443
   if ((httpPort === 443 || httpPort === 8443) && !isValidPort(httpsPort)) {
