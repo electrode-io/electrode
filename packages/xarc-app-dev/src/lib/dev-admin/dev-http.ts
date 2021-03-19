@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable no-console */
+/* eslint-disable no-console, max-statements */
 
 import { createReadStream } from "fs";
 import { Readable } from "stream";
