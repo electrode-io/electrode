@@ -795,12 +795,13 @@ ${instruction}`
       this._ports = update;
       clearTimeout(this._updateProxyTimer);
       this._updateProxyTimer = setTimeout(() => {
+        this._updateProxyTimer = null;
         this.sendMsg(PROXY_SERVER_NAME, {
           ...update,
           name: "restart",
           quiet: true
         });
-      }, 250);
+      }, 250).unref();
     }
   }
 
