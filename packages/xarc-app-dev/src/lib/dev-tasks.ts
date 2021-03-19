@@ -811,14 +811,11 @@ module.exports =  {
         - NODE_ENV is set to 'production' if it's not set.
         - options: [all options will be passed to node when starting your app server]`,
         task(context) {
-          userXrun.updateEnv(
-            {
-              NODE_ENV: "production"
-            },
-            {
-              override: false
-            }
-          );
+          userXrun.updateEnv({ NODE_ENV: "production" }, { override: false });
+          if (process.env.APP_SERVER_PORT === "0") {
+            console.log("mock-cloud need to explicitly set APP_SERVER_PORT, changing 0 to 3100");
+            process.env.APP_SERVER_PORT = "3100";
+          }
 
           const mockTask = xrun2.concurrent([
             "dev-proxy --mock-cdn --no-dev",

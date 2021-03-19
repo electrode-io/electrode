@@ -21,9 +21,11 @@ function createDevAdminHttpServer(xarcOptions) {
   });
 
   devHttpServer.addListener("listening", () => {
-    console.log(ck`<green>webpack dev server listening on port ${xarcOptions.webpack.devPort}</>`);
+    const port = devHttpServer.getPort();
+    console.log(ck`<green>webpack dev server listening on port ${port}</>`);
     process.send({
       name: "webpack-report",
+      port,
       valid: false
     });
   });

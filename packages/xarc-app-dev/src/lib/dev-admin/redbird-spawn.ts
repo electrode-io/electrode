@@ -48,7 +48,7 @@ const isProxyRunning = async () => {
 const handleRestart = type => {
   const restart = (options: any = {}) => {
     if (!options.quiet) {
-      console.log(`${type}Electrode dev proxy restarting`);
+      console.log(`${type}Electrode dev proxy restarting`, options);
     }
     const restartUrl = formUrl({
       ...httpDevServer,

@@ -112,6 +112,7 @@ ${APP_RULES.map(
 };
 
 let regAppPort = 0;
+let regWebpackDevPort = 0;
 
 const registerElectrodeDevRules = ({
   proxy,
@@ -130,6 +131,7 @@ const registerElectrodeDevRules = ({
   const logStreamsPath = `${devPath}/stream-logs`;
   const appForwards: any[] = [[{}, { port: appPort }]];
   regAppPort = appPort;
+  regWebpackDevPort = webpackDevPort;
 
   if (!noDev) {
     appForwards.push(

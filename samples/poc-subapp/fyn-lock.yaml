@@ -1683,24 +1683,24 @@ $pkg:
    '@webassemblyjs/wast-parser': 1.9.0
    '@xtuc/long': 4.2.2
 '@xarc/app':
- _latest: 8.2.3-fynlocal_h
+ _latest: 9.0.4-fynlocal_h
  _:
-  ../../packages/xarc-app: 8.2.3-fynlocal_h
- 8.2.3-fynlocal_h:
+  ../../packages/xarc-app: 9.0.4-fynlocal_h
+ 9.0.4-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/xarc-app
   dependencies:
    '@babel/runtime': ^7.12.5
-   isomorphic-loader: ^4.4.0
+   isomorphic-loader: ^4.4.1
    optional-require: ^1.0.0
    subapp-util: ^1.1.2
    tslib: ^2.1.0
 '@xarc/app-dev':
- _latest: 8.2.3-fynlocal_h
+ _latest: 9.0.4-fynlocal_h
  _:
-  ../../packages/xarc-app-dev: 8.2.3-fynlocal_h
- 8.2.3-fynlocal_h:
+  ../../packages/xarc-app-dev: 9.0.4-fynlocal_h
+ 9.0.4-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/xarc-app-dev
@@ -1719,15 +1719,15 @@ $pkg:
    '@babel/register': ^7.0.0
    '@jchip/redbird': ^1.2.2
    '@xarc/run': ^1.0.4
-   '@xarc/subapp': ^0.1.4
-   '@xarc/webpack': ^9.1.1
+   '@xarc/subapp': ^0.1.7
+   '@xarc/webpack': ^10.0.1
    ansi-to-html: ^0.6.8
    babel-plugin-lodash: ^3.3.4
    babel-plugin-minify-dead-code-elimination: ^0.5.0
    babel-plugin-react-css-modules: ^5.2.6
    babel-plugin-transform-node-env-inline: ^0.4.3
    babel-plugin-transform-react-remove-prop-types: ^0.4.20
-   boxen: ^4.2.0
+   boxen: ^5.0.0
    chalker: ^1.2.0
    chokidar: ^3.4.1
    core-js: ^3.6.5
@@ -1760,11 +1760,11 @@ $pkg:
    webpack-dev-middleware: ^3.7.2
    webpack-hot-middleware: ^2.25.0
    winston: ^2.4.4
-   xaa: ^1.6.1
+   xaa: ^1.6.2
    xenv-config: ^1.3.1
    xsh: ^0.4.5
   peerDependencies:
-   '@xarc/app': ^8.1.19
+   '@xarc/app': ^9.0.4
 '@xarc/fastify-server':
  _latest: 2.0.0
  _:
@@ -1783,25 +1783,25 @@ $pkg:
    require-at: ^1.0.4
    xaa: ^1.6.0
 '@xarc/index-page':
- _latest: 1.0.8-fynlocal_h
+ _latest: 1.0.9-fynlocal_h
  _:
-  ../xarc-index-page: 1.0.8-fynlocal_h
- 1.0.8-fynlocal_h:
+  ../xarc-index-page: 1.0.9-fynlocal_h
+ 1.0.9-fynlocal_h:
   $: local
   _: ../../packages/xarc-index-page
   dependencies:
-   '@xarc/jsx-renderer': ^1.0.7
-   '@xarc/render-context': ^1.0.5
-   '@xarc/tag-renderer': ^1.0.6
+   '@xarc/jsx-renderer': ^1.0.8
+   '@xarc/render-context': ^1.0.6
+   '@xarc/tag-renderer': ^1.0.7
 '@xarc/jsx-renderer':
- _latest: 1.0.7-fynlocal_h
+ _latest: 1.0.8-fynlocal_h
  _:
-  ../xarc-jsx-renderer: 1.0.7-fynlocal_h
- 1.0.7-fynlocal_h:
+  ../xarc-jsx-renderer: 1.0.8-fynlocal_h
+ 1.0.8-fynlocal_h:
   $: local
   _: ../../packages/xarc-jsx-renderer
   dependencies:
-   '@xarc/render-context': ^1.0.5
+   '@xarc/render-context': ^1.0.6
    lodash: ^4.17.15
    munchy: ^1.0.9
    optional-require: ^1.0.0
@@ -1825,10 +1825,10 @@ $pkg:
    eslint-plugin-mocha: ^8.0.0
    eslint-plugin-react: ^7.21.5
 '@xarc/render-context':
- _latest: 1.0.5-fynlocal_h
+ _latest: 1.0.6-fynlocal_h
  _:
-  ../xarc-render-context: 1.0.5-fynlocal_h
- 1.0.5-fynlocal_h:
+  ../xarc-render-context: 1.0.6-fynlocal_h
+ 1.0.6-fynlocal_h:
   $: local
   _: ../../packages/xarc-render-context
   dependencies:
@@ -1858,29 +1858,31 @@ $pkg:
    unwrap-npm-cmd: ^1.1.1
    xsh: ^0.4.5
 '@xarc/subapp':
- _latest: 0.1.4-fynlocal_h
+ _latest: 0.1.7-fynlocal_h
  _:
-  ../xarc-subapp: 0.1.4-fynlocal_h
- 0.1.4-fynlocal_h:
+  ../xarc-subapp: 0.1.7-fynlocal_h
+ 0.1.7-fynlocal_h:
   $: local
   _: ../../packages/xarc-subapp
   dependencies:
+   '@xarc/render-context': ^1.0.6
+   '@xarc/tag-renderer': ^1.0.7
    lodash: ^4.17.20
    tslib: ^2.1.0
 '@xarc/tag-renderer':
- _latest: 1.0.6-fynlocal_h
+ _latest: 1.0.7-fynlocal_h
  _:
-  ../xarc-tag-renderer: 1.0.6-fynlocal_h
- 1.0.6-fynlocal_h:
+  ../xarc-tag-renderer: 1.0.7-fynlocal_h
+ 1.0.7-fynlocal_h:
   $: local
   _: ../../packages/xarc-tag-renderer
   dependencies:
-   '@xarc/render-context': ^1.0.5
+   '@xarc/render-context': ^1.0.6
 '@xarc/webpack':
- _latest: 9.1.1-fynlocal_h
+ _latest: 10.0.1-fynlocal_h
  _:
-  ../xarc-webpack: 9.1.1-fynlocal_h
- 9.1.1-fynlocal_h:
+  ../xarc-webpack: 10.0.1-fynlocal_h
+ 10.0.1-fynlocal_h:
   $: local
   _: ../../packages/xarc-webpack
   dependencies:
@@ -1906,8 +1908,8 @@ $pkg:
    webpack-stats-plugin: ^0.3.1
    xsh: ^0.4.5
   peerDependencies:
-   '@xarc/app': ^8.1.19
-   '@xarc/app-dev': ^8.1.19
+   '@xarc/app': ^9.0.1
+   '@xarc/app-dev': ^9.0.1
 '@xtuc/ieee754':
  _latest: 1.2.0
  _:
@@ -2609,19 +2611,19 @@ boolbase:
 boxen:
  _latest: 5.0.0
  _:
-  ^4.2.0: 4.2.0
- 4.2.0:
-  $: sha512-eB4uT9RGzg2odpER62bBwSLvUeGC+WbRjjyyFhGsKnc8wp/m0+hQsMUvUe3H2V0D5vw0nBdO1hCJoZo5mKeuIQ==
-  _: 'https://registry.npmjs.org/boxen/-/boxen-4.2.0.tgz'
+  ^5.0.0: 5.0.0
+ 5.0.0:
+  $: sha512-5bvsqw+hhgUi3oYGK0Vf4WpIkyemp60WBInn7+WNfoISzAqk/HX4L7WNROq38E6UR/y3YADpv6pEm4BfkeEAdA==
+  _: 'https://npme.walmart.com/boxen/-/boxen-5.0.0.tgz'
   dependencies:
    ansi-align: ^3.0.0
-   camelcase: ^5.3.1
-   chalk: ^3.0.0
-   cli-boxes: ^2.2.0
-   string-width: ^4.1.0
-   term-size: ^2.1.0
-   type-fest: ^0.8.1
+   camelcase: ^6.2.0
+   chalk: ^4.1.0
+   cli-boxes: ^2.2.1
+   string-width: ^4.2.0
+   type-fest: ^0.20.2
    widest-line: ^3.1.0
+   wrap-ansi: ^7.0.0
 brace-expansion:
  _latest: 2.0.0
  _:
@@ -2877,12 +2879,16 @@ camelcase:
  _:
   5.0.0: 5.0.0
   '^5.0.0,^5.3.1': 5.3.1
+  ^6.2.0: 6.2.0
+ 6.2.0:
+  $: sha512-c7wVvbw3f37nuobQNtgsgG9POC9qMbNuMQmTCqZv23b6MIz0fcYpBiOlv9gEN/hdLdnZTDQhg6e9Dq5M1vKvfg==
+  _: 'https://npme.walmart.com/camelcase/-/camelcase-6.2.0.tgz'
  5.3.1:
   $: sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
-  _: 'https://registry.npmjs.org/camelcase/-/camelcase-5.3.1.tgz'
+  _: 'https://npme.walmart.com/camelcase/-/camelcase-5.3.1.tgz'
  5.0.0:
   $: sha512-faqwZqnWxbxn+F1d399ygeamQNy3lPp/H9H6rNrqYh4FSVCtcY+3cub1MxA8o9mDd55mM8Aghuu/kuyYA6VTsA==
-  _: 'https://registry.npmjs.org/camelcase/-/camelcase-5.0.0.tgz'
+  _: 'https://npme.walmart.com/camelcase/-/camelcase-5.0.0.tgz'
 caniuse-api:
  _latest: 3.0.0
  _:
@@ -2914,17 +2920,10 @@ chalk:
  _:
   '2.4.2,^2.0.0,^2.4.1,^2.4.2': 2.4.2
   ^1.1.3: 1.1.3
-  ^3.0.0: 3.0.0
   '^4.0.0,^4.1.0': 4.1.0
  4.1.0:
   $: sha512-qwx12AxXe2Q5xQ43Ac//I6v5aXTipYrSESdOgzrN+9XjgEpyjpKuvSGaN4qE93f7TQTlerQQ8S+EQ0EyDoVL1A==
   _: 'https://registry.npmjs.org/chalk/-/chalk-4.1.0.tgz'
-  dependencies:
-   ansi-styles: ^4.1.0
-   supports-color: ^7.1.0
- 3.0.0:
-  $: sha512-4D3B6Wf41KOYRFdszmDqMCGq5VV/uMAB273JILmO+3jAlh8X4qDtdtgCR3fxtbLEMzSx22QdhnDcJvu2u1fVwg==
-  _: 'https://registry.npmjs.org/chalk/-/chalk-3.0.0.tgz'
   dependencies:
    ansi-styles: ^4.1.0
    supports-color: ^7.1.0
@@ -3044,10 +3043,10 @@ clean-stack:
 cli-boxes:
  _latest: 3.0.0
  _:
-  ^2.2.0: 2.2.1
+  ^2.2.1: 2.2.1
  2.2.1:
   $: sha512-y4coMcylgSCdVinjiDBuR8PCC2bLjyGTwEmPb9NHR/QaNU6EUOXcTY/s6VjGMD6ENSEaeQYHCY0GNGS5jfMwPw==
-  _: 'https://registry.npmjs.org/cli-boxes/-/cli-boxes-2.2.1.tgz'
+  _: 'https://npme.walmart.com/cli-boxes/-/cli-boxes-2.2.1.tgz'
 cli-cursor:
  _latest: 3.1.0
  _:
@@ -5714,12 +5713,12 @@ isobject:
   dependencies:
    isarray: 1.0.0
 isomorphic-loader:
- _latest: 4.4.0
+ _latest: 4.5.0
  _:
-  ^4.4.0: 4.4.0
- 4.4.0:
-  $: sha512-1qEb+6XGOD02wTVzICzyWlbYFgzrqdQytqFpXI4KzaZymTvSYN5U6CjhNp11yt3KjRjsdjglaSmP2gBVncOJYQ==
-  _: 'https://registry.npmjs.org/isomorphic-loader/-/isomorphic-loader-4.4.0.tgz'
+  ^4.4.1: 4.5.0
+ 4.5.0:
+  $: sha512-4xsT6LrXvCocODjzqZSRK2arvI20ydyVAjLIeu0meYZP8wYgNO1W4bIaO1Fhv6e9WrTzX+ND9LMo66F2leOs/Q==
+  _: 'https://npme.walmart.com/isomorphic-loader/-/isomorphic-loader-4.5.0.tgz'
 isstream:
  _latest: 0.1.2
  _:
@@ -9239,10 +9238,10 @@ stylehacks:
    postcss: ^7.0.0
    postcss-selector-parser: ^3.0.0
 subapp-react:
- _latest: 0.0.37-fynlocal_h
+ _latest: 0.0.38-fynlocal_h
  _:
-  ../../packages/subapp-react: 0.0.37-fynlocal_h
- 0.0.37-fynlocal_h:
+  ../../packages/subapp-react: 0.0.38-fynlocal_h
+ 0.0.38-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-react
@@ -9250,40 +9249,40 @@ subapp-react:
    '@babel/runtime': ^7.8.3
    optional-require: ^1.0.0
    subapp-util: ^1.1.2
-   subapp-web: ^1.0.46
+   subapp-web: ^1.0.47
   peerDependencies:
    react: '*'
    react-dom: '*'
 subapp-redux:
- _latest: 1.0.46-fynlocal_h
+ _latest: 1.0.47-fynlocal_h
  _:
-  ../../packages/subapp-redux: 1.0.46-fynlocal_h
- 1.0.46-fynlocal_h:
+  ../../packages/subapp-redux: 1.0.47-fynlocal_h
+ 1.0.47-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-redux
   dependencies:
    optional-require: ^1.0.0
    subapp-util: ^1.1.2
-   subapp-web: ^1.0.46
+   subapp-web: ^1.0.47
   peerDependencies:
    react: '*'
    react-dom: '*'
    redux: '*'
    react-redux: '*'
 subapp-server:
- _latest: 1.3.12-fynlocal_h
+ _latest: 1.3.13-fynlocal_h
  _:
-  ../../packages/subapp-server: 1.3.12-fynlocal_h
- 1.3.12-fynlocal_h:
+  ../../packages/subapp-server: 1.3.13-fynlocal_h
+ 1.3.13-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-server
   dependencies:
    '@hapi/boom': ^7.4.1
-   '@xarc/index-page': ^1.0.8
-   '@xarc/jsx-renderer': ^1.0.7
-   '@xarc/tag-renderer': ^1.0.6
+   '@xarc/index-page': ^1.0.9
+   '@xarc/jsx-renderer': ^1.0.8
+   '@xarc/tag-renderer': ^1.0.7
    filter-scan-dir: ^1.0.9
    http-status-codes: ^1.3.0
    optional-require: ^1.0.0
@@ -9300,10 +9299,10 @@ subapp-util:
    filter-scan-dir: ^1.0.9
    optional-require: ^1.0.0
 subapp-web:
- _latest: 1.0.46-fynlocal_h
+ _latest: 1.0.47-fynlocal_h
  _:
-  '../../packages/subapp-web,../subapp-web': 1.0.46-fynlocal_h
- 1.0.46-fynlocal_h:
+  '../../packages/subapp-web,../subapp-web': 1.0.47-fynlocal_h
+ 1.0.47-fynlocal_h:
   top: 1
   $: local
   _: ../../packages/subapp-web
@@ -9318,7 +9317,7 @@ subapp-web:
    subapp-util: ^1.1.2
    xaa: ^1.6.0
   peerDependencies:
-   '@xarc/app': ^8.1.20
+   '@xarc/app': ^9.0.0
 sudo-prompt:
  _latest: 9.2.1
  _:
@@ -9404,13 +9403,6 @@ tapable:
  1.1.3:
   $: sha512-4WK/bYZmj8xLr+HUCODHGF1ZFzsYffasLUgEiMBY4fgtltdO6B4WJtlSbPaDTLpYTcGVwM2qLnFTICEcNxs3kA==
   _: 'https://registry.npmjs.org/tapable/-/tapable-1.1.3.tgz'
-term-size:
- _latest: 2.2.1
- _:
-  ^2.1.0: 2.2.1
- 2.2.1:
-  $: sha512-wK0Ri4fOGjv/XPy8SBHZChl8CM7uMc5VML7SqiQ0zG7+J5Vr+RMQDoHa2CNT6KHUnTGIXH34UDMkPzAUyapBZg==
-  _: 'https://registry.npmjs.org/term-size/-/term-size-2.2.1.tgz'
 terser:
  _latest: 5.5.1
  _:
@@ -9611,20 +9603,24 @@ type-check:
   dependencies:
    prelude-ls: ^1.2.1
 type-fest:
- _latest: 0.20.2
+ _latest: 0.21.3
  _:
   ^0.11.0: 0.11.0
+  ^0.20.2: 0.20.2
   ^0.6.0: 0.6.0
   '^0.8.0,^0.8.1': 0.8.1
+ 0.20.2:
+  $: sha512-Ne+eE4r0/iWnpAxD852z3A+N0Bt5RN//NjJwRd2VFHEmrywxf5vsZlh4R6lixl6B+wz/8d+maTSAkN1FIkI3LQ==
+  _: 'https://npme.walmart.com/type-fest/-/type-fest-0.20.2.tgz'
  0.11.0:
   $: sha512-OdjXJxnCN1AvyLSzeKIgXTXxV+99ZuXl3Hpo9XpJAv9MBcHrrJOQ5kV7ypXOuQie+AmWG25hLbiKdwYTifzcfQ==
-  _: 'https://registry.npmjs.org/type-fest/-/type-fest-0.11.0.tgz'
+  _: 'https://npme.walmart.com/type-fest/-/type-fest-0.11.0.tgz'
  0.8.1:
   $: sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
-  _: 'https://registry.npmjs.org/type-fest/-/type-fest-0.8.1.tgz'
+  _: 'https://npme.walmart.com/type-fest/-/type-fest-0.8.1.tgz'
  0.6.0:
   $: sha512-q+MB8nYR1KDLrgr4G5yemftpMC7/QLqVndBmEEdqzmNj5dcFOO4Oo8qlwZE3ULT3+Zim1F8Kq4cBnikNhlCMlg==
-  _: 'https://registry.npmjs.org/type-fest/-/type-fest-0.6.0.tgz'
+  _: 'https://npme.walmart.com/type-fest/-/type-fest-0.6.0.tgz'
 typedarray:
  _latest: 0.0.6
  _:
@@ -10125,16 +10121,24 @@ wrap-ansi:
  _:
   ^5.1.0: 5.1.0
   ^6.2.0: 6.2.0
+  ^7.0.0: 7.0.0
+ 7.0.0:
+  $: sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
+  _: 'https://npme.walmart.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz'
+  dependencies:
+   ansi-styles: ^4.0.0
+   string-width: ^4.1.0
+   strip-ansi: ^6.0.0
  6.2.0:
   $: sha512-r6lPcBGxZXlIcymEu7InxDMhdW0KDxpLgoFLcguasxCaJ/SOIZwINatK9KY/tf+ZrlywOKU0UDj3ATXUBfxJXA==
-  _: 'https://registry.npmjs.org/wrap-ansi/-/wrap-ansi-6.2.0.tgz'
+  _: 'https://npme.walmart.com/wrap-ansi/-/wrap-ansi-6.2.0.tgz'
   dependencies:
    ansi-styles: ^4.0.0
    string-width: ^4.1.0
    strip-ansi: ^6.0.0
  5.1.0:
   $: sha512-QC1/iN/2/RPVJ5jYK8BGttj5z83LmSKmvbvrXPNCLZSEb32KKVDJDl/MOt2N01qU2H/FkzEa9PKto1BqDjtd7Q==
-  _: 'https://registry.npmjs.org/wrap-ansi/-/wrap-ansi-5.1.0.tgz'
+  _: 'https://npme.walmart.com/wrap-ansi/-/wrap-ansi-5.1.0.tgz'
   dependencies:
    ansi-styles: ^3.2.0
    string-width: ^3.0.0
@@ -10162,10 +10166,10 @@ xaa:
  _latest: 1.6.0
  _:
   '^1.4.0,^1.5.0,^1.6.0': 1.6.0
-  ^1.6.1: 1.6.1
- 1.6.1:
-  $: sha512-/WQVhjBDsumKfsLfd8KsfOWW9h641hvq106uq8CIYcu+GSK7csNEpuO9qoFoRh7/2B2WDnERJ8mNSwOwAmOgTA==
-  _: 'https://registry.npmjs.org/xaa/-/xaa-1.6.1.tgz'
+  ^1.6.2: 1.7.0
+ 1.7.0:
+  $: sha512-Q779RyQA/KjaA0DIocmFtIHBLIZiVzM/EiSQ2kgvLdJW/CkC1jlXH6QeCYLbroUkKjYaIxVMoeXPg4Dzlp+6VQ==
+  _: 'https://npme.walmart.com/xaa/-/xaa-1.7.0.tgz'
   dependencies:
    tslib: ^2.1.0
  1.6.0:
