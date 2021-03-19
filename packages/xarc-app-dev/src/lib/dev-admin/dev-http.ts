@@ -9,6 +9,7 @@ import Url from "url";
 import { resolve as pathResolve } from "path";
 import { FakeRes } from "../fake-res";
 import { Middleware } from "./middleware";
+import { makeDefer } from "xaa";
 
 export interface DevHttpServerOptions {
   port: number;
@@ -24,6 +25,7 @@ export interface DevHttpServer {
   stop: () => void;
   httpServer?: Server;
   addListener: (event: HttpServerEvent, hander: any) => void;
+  getPort: () => number;
 }
 
 /**
@@ -53,18 +55,16 @@ export const setupHttpDevServer = function({
   host,
   protocol = "http"
 }: DevHttpServerOptions): DevHttpServer {
-  const createMiddleware = new Promise(resolve => {
-    setTimeout(() => {
-      resolve(getMiddleware({ port, host, protocol }));
-    }, 1);
-  });
-
+  let createMiddlewarePromise;
   let middleware;
+  let listenDefer = makeDefer();
 
   const server: Server = createServer(async (req, res) => {
     try {
       if (!middleware) {
-        middleware = await createMiddleware;
+        await listenDefer;
+        middleware = await createMiddlewarePromise;
+        listenDefer = createMiddlewarePromise = null;
       }
       const next1 = await middleware.process(req, res, {
         skip: () => middleware.canContinue,
@@ -104,8 +104,13 @@ export const setupHttpDevServer = function({
   });
 
   return {
-    start: () => {
-      server.listen(port, host);
+    start() {
+      server.listen(port, host, () => {
+        createMiddlewarePromise = new Promise(resolve => {
+          resolve(getMiddleware({ port: this.getPort(), host, protocol }));
+        });
+        listenDefer.resolve();
+      });
     },
     stop: () => {
       server.close(() => {
@@ -116,7 +121,10 @@ export const setupHttpDevServer = function({
     addListener: (event: HttpServerEvent, cb) => {
       server.addListener(event.toString(), cb);
     },
-    httpServer: server
+    httpServer: server,
+    getPort: () => {
+      return server && (server.address() as any).port;
+    }
   };
 };
 export const setup = setupHttpDevServer;
