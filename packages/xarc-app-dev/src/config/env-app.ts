@@ -13,7 +13,7 @@ export function getEnvApp(): any {
     portForProxy: {
       env: ["APP_PORT_FOR_PROXY", "APP_SERVER_PORT"],
       default: 0,
-      envMap: { false: 0, true: 3100 },
+      envMap: { false: -1, true: 3100 },
       post: x => x || 0
     }
   };

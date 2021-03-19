@@ -49,8 +49,8 @@ const SERVER_ENVS = {
   [APP_SERVER_NAME]: {
     XARC_BABEL_TARGET: "node"
   },
-  [DEV_SERVER_NAME]: {},
-  [PROXY_SERVER_NAME]: {}
+  [DEV_SERVER_NAME]: {} as any,
+  [PROXY_SERVER_NAME]: {} as any
 };
 
 const getTerminalColumns = () => {
@@ -64,6 +64,7 @@ const getTerminalColumns = () => {
   );
 };
 
+type ProcessPorts = { webpackDevPort?: number; appPort?: number };
 export class AdminServer {
   _opts: any;
   _passThru: any;
@@ -78,6 +79,8 @@ export class AdminServer {
   _wds: any;
   _proxy: any;
   _app: any;
+  _ports: ProcessPorts;
+  _updateProxyTimer: any;
   _appLogLevel: any;
   _menu: any;
   _fullyStarted: any;
@@ -104,6 +107,8 @@ export class AdminServer {
       const autoIo = args.source.interactive === "cli" ? !args.opts.interactive : isCI;
       return autoIo ? new AutomationIO("Dev Admin") : new ConsoleIO();
     };
+
+    this._ports = { appPort: devProxy.appPort };
 
     this._io = (options && options.inputOutput) || defaultIo();
 
@@ -135,6 +140,7 @@ export class AdminServer {
     this._fullyStarted = false;
     this._shutdown || (await this.startWebpackDevServer());
     this._shutdown || (await this.startAppServer());
+
     if (!this._shutdown && DEV_PROXY_ENABLED) {
       // to debug dev proxy
       // await this.startProxyServer("--inspect-brk");
@@ -505,6 +511,10 @@ ${proxyItem}<magenta>M</> - Show this menu <magenta>Q</> - Shutdown
         const listenForReport = () =>
           info._child.once("message", data => {
             if (data.name === "webpack-report") {
+              if (data.port) {
+                SERVER_ENVS[PROXY_SERVER_NAME].WEBPACK_DEV_PORT = data.port;
+                this.updateProxyServer({ webpackDevPort: parseInt(data.port, 10) });
+              }
               resolve(null);
             } else {
               listenForReport();
@@ -764,10 +774,35 @@ ${instruction}`
       debug,
       exec: Path.join(__dirname, "redbird-spawn"),
       waitStart: async info => {
+        info._child.on("message", (data: any) => {
+          // this._io.show(ck`<orange>proxy message ${JSON.stringify(data)}</>`, this._appPort);
+          if (data.name === "proxy-started") {
+            const proxyPorts = { appPort: parseInt(data.appPort, 10) };
+            if (proxyPorts.appPort !== this._ports.appPort) {
+              this.updateProxyServer({}, true);
+            }
+          }
+        });
         this.passThruLineOutput(this._proxy, info._child.stdout, this._io);
         this.passThruLineOutput(this._proxy, info._child.stderr, this._io);
       }
     });
+  }
+
+  updateProxyServer(newPorts: ProcessPorts, force = false) {
+    const update: ProcessPorts = { ...this._ports, ...newPorts };
+    if (!_.isEqual(update, this._ports) || force) {
+      this._ports = update;
+      clearTimeout(this._updateProxyTimer);
+      this._updateProxyTimer = setTimeout(() => {
+        this._updateProxyTimer = null;
+        this.sendMsg(PROXY_SERVER_NAME, {
+          ...update,
+          name: "restart",
+          quiet: true
+        });
+      }, 250).unref();
+    }
   }
 
   async waitForAppServerStart(info) {
@@ -809,7 +844,19 @@ ${info.name} - assuming it started.</>`);
       return started;
     };
 
-    messageHandler = (data = {}) => {
+    const appUpdateHandler = (data: any = {}) => {
+      if (data.name === "app-update") {
+        // this._io.show(ck`<orange>app-update ${JSON.stringify(data)}</>`);
+        if (DEV_PROXY_ENABLED) {
+          if (data.appPort) {
+            SERVER_ENVS[PROXY_SERVER_NAME].APP_SERVER_PORT = data.appPort;
+            this.updateProxyServer({ appPort: parseInt(data.appPort, 10) });
+          }
+        }
+      }
+    };
+
+    messageHandler = (data: any = {}) => {
       if (!checkStarted(data)) {
         return;
       }
@@ -834,6 +881,7 @@ ${info.name} - assuming it started.</>`);
     });
 
     info._child.on("message", messageHandler);
+    info._child.on("message", appUpdateHandler);
 
     if (info.options.noTimeoutCheck !== true) {
       startTimeout = setTimeout(handleTimeout, 20000);

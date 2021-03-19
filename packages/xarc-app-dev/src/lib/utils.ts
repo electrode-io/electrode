@@ -24,7 +24,13 @@ export const getOptArchetypeRequire = require("@xarc/webpack/lib/util/get-opt-re
  *
  * @returns url string
  */
-export const formUrl = ({ protocol = "http", host = "", port = "", path = "" }): string => {
+export const formUrl = ({
+  protocol = "http",
+  host = "",
+  port = "",
+  path = "",
+  search = ""
+}): string => {
   const proto = protocol.toString().toLowerCase();
   const sp = port.toString();
   const host2 =
@@ -32,7 +38,7 @@ export const formUrl = ({ protocol = "http", host = "", port = "", path = "" }):
       ? `${host}:${port}`
       : host;
 
-  return Url.format({ protocol: proto, host: host2, pathname: path });
+  return Url.format({ protocol: proto, host: host2, pathname: path, search });
 };
 
 /**

@@ -15,6 +15,15 @@ export async function fastifyPlugin(server: any): Promise<void> {
 
     middleware.setup();
 
+    // TODO: find out how to get fastify listening event
+    const waitListen = setInterval(() => {
+      const address = server.server.address();
+      if (address) {
+        clearInterval(waitListen);
+        middleware.update({ serverPort: address.port });
+      }
+    }, 20).unref();
+
     server.addHook("onRequest", async request => {
       request.app.webpackDev = middleware.webpackDev;
     });

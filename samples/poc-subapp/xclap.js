@@ -4,7 +4,8 @@ exports.xrun = xrun;
 
 xrun.updateEnv(
   {
-    APP_SERVER_PORT: 3100
+    WEBPACK_DEV_PORT: 0,
+    APP_SERVER_PORT: 0
   },
   { override: false }
 );
