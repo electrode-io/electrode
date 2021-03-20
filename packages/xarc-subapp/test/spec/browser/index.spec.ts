@@ -8,6 +8,7 @@ import {
 import { envHooks } from "../../../src/subapp/index";
 import { describe, it } from "mocha";
 import { expect } from "chai";
+import sinon from "sinon";
 
 describe("browser index", () => {
   afterEach(() => {
@@ -51,6 +52,27 @@ describe("browser index", () => {
 
       expect(subapp._module).to.equal(mod);
       expect(mod.subapp.Component()).to.equal("hello"); // eslint-disable-line
+
+      const stub = sinon.stub().returns("testabc");
+      subapp._renderPipelines = [
+        { csrData: { inlineId: "test1" } } as any,
+        { csrData: { inlineId: "test2" } } as any
+      ];
+      subapp._pipelineFactory = (obj => {
+        return {
+          start: stub
+        };
+      }) as any;
+      expect(
+        subapp._start({
+          csrData: {
+            inlineId: "test1"
+          }
+        } as any)
+      ).eql("testabc");
+
+      //  eslint-disable-next-line
+      expect(stub.called).true;
     });
   });
 
