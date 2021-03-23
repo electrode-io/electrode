@@ -7,6 +7,7 @@ import http from "http";
 import Util from "util";
 import { formUrl } from "../utils";
 import { devProxy } from "../../config/dev-proxy";
+import _ from "lodash";
 
 const proxyJs = require.resolve("./redbird-proxy");
 
@@ -67,7 +68,7 @@ const handleRestart = type => {
   process.on("SIGHUP", restart);
   process.on("message", data => {
     if (data.name === "restart") {
-      restart({ ...data, name: undefined });
+      restart(_.omit(data, "name"));
     }
   });
 };

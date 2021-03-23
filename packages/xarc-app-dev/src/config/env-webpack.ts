@@ -13,7 +13,10 @@ export function getEnvWebpack(): any {
   const webpackConfigSpec = {
     webpackDev: { env: "WEBPACK_DEV", default: false },
     devHostname: { env: ["WEBPACK_HOST", "WEBPACK_DEV_HOST", "HOST"], default: "localhost" },
-    devPort: { env: "WEBPACK_DEV_PORT", default: 2992 },
+    //
+    // WEBPACK DEV port.  default to 0 to select a randomly available port
+    //
+    devPort: { env: "WEBPACK_DEV_PORT", default: 0 },
     // Using a built-in reverse proxy, the webpack dev assets are served from the
     // same host and port as the app.  In that case, the URLs to assets are relative
     // without protocol, host, port.

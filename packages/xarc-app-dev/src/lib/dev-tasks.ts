@@ -207,12 +207,10 @@ export function loadXarcDevTasks(userXrun, userOptions: XarcOptions = {}) {
   };
 
   // By default, the dev proxy server will be hosted from PORT (3000)
-  //  and the app from APP_SERVER_PORT (3100).
+  //  and the app from APP_SERVER_PORT.
   //  If the APP_SERVER_PORT is set to the empty string however,
   //  leave it empty and therefore disable the dev proxy server.
-  if (!process.env.APP_SERVER_PORT && process.env.APP_SERVER_PORT !== "") {
-    process.env.APP_SERVER_PORT = "3100";
-  }
+  xrun.updateEnv({ APP_SERVER_PORT: "0", WEBPACK_DEV_PORT: "0" }, { override: false });
 
   const eTmpDir = xarcOptions.eTmpDir;
 
@@ -855,10 +853,8 @@ You only need to run this if you are doing something not through the xarc tasks.
         options: node.js --inspect can be used to debug the dev-admin`,
         dep: [".remove-log-files", ".development-env", ".build.babelrc"],
         task() {
-          return [
-            ".webpack-dev",
-            [`server-admin ${this.args.join(" ")}`, "generate-service-worker"]
-          ];
+          const args = this.args.join(" ");
+          return [".webpack-dev", [`server-admin ${args}`, "generate-service-worker"]];
         }
       },
 
