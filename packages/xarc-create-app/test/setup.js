@@ -1,3 +1,2 @@
-const chai = require("chai")
+const chai = require("chai");
 const sinon = require("sinon");
-

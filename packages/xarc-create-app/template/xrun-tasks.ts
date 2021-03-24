@@ -10,7 +10,7 @@ xrun.updateEnv(
      * In dev mode, a proxy server listens at `PORT` and forward requests to
      * to actual node.js app server and webpack dev server.
      */
-    PORT: 3000
+    PORT: 3000,
     /**
      * In dev mode, `APP_SERVER_PORT` sets the proxy forward port for the
      * node.js app server.  If it's not defined or `0`, then a randomly available
@@ -26,7 +26,7 @@ xrun.updateEnv(
   },
   {
     // do not override any env flag already set in process.env
-    override: false
+    override: false,
   }
 );
 
@@ -34,6 +34,6 @@ loadDevTasks(xrun, {
   // options to customize features
   webpackOptions: {
     // enable CSS module for files other than `.mod.css`
-    cssModuleSupport: "byModExt"
-  }
+    cssModuleSupport: "byModExt",
+  },
 });

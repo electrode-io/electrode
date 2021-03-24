@@ -12,17 +12,17 @@ export { reduxReducers } from "./reducers";
 
 const incNumber = () => {
   return {
-    type: "INC_NUMBER"
+    type: "INC_NUMBER",
   };
 };
 
 const decNumber = () => {
   return {
-    type: "DEC_NUMBER"
+    type: "DEC_NUMBER",
   };
 };
 
-const Demo2 = props => {
+const Demo2 = (props) => {
   const { value, dispatch } = props;
 
   return (
@@ -33,7 +33,7 @@ const Demo2 = props => {
           marginTop: "15px",
           border: "solid",
           marginLeft: "15%",
-          marginRight: "15%"
+          marginRight: "15%",
         }}
       >
         <h2>subapp demo2 with Redux</h2>
@@ -45,20 +45,20 @@ const Demo2 = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return { value: state.number.value };
 };
 
 export const subapp: ReactSubApp = {
-  Component: connect(mapStateToProps, dispatch => ({ dispatch }))(Demo2),
+  Component: connect(mapStateToProps, (dispatch) => ({ dispatch }))(Demo2),
   wantFeatures: [
     reduxFeature({
       React,
       shareStore: true,
       reducers: true, // true => read the reduxReducers export from this file
-      prepare: async initialState => {
+      prepare: async (initialState) => {
         return { initialState: initialState || { number: { value: 999 } } };
-      }
-    })
-  ]
+      },
+    }),
+  ],
 };

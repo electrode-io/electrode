@@ -12,11 +12,11 @@ export function setupRoutes(server) {
     subApps: [
       { name: home.name, ssr: true },
       { name: Demo2.name, ssr: true },
-      { name: Demo3.name, ssr: true }
+      { name: Demo3.name, ssr: true },
     ],
     prodAssetData: {
-      cdnMap: "config/assets.json"
-    }
+      cdnMap: "config/assets.json",
+    },
   });
 
   server.route({
@@ -35,6 +35,6 @@ export function setupRoutes(server) {
       } catch (error) {
         reply.send(error.stack);
       }
-    }
+    },
   });
 }

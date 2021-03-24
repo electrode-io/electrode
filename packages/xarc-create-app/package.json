@@ -51,6 +51,7 @@
     "mocha": "^7.1.0",
     "nyc": "^15.0.0",
     "opfs": "^1.1.1",
+    "prettier": "^2.2.1",
     "prompts": "^2.3.2",
     "run-verify": "^1.2.5",
     "shcmd": "^0.7.9",
@@ -62,9 +63,7 @@
     "xclap": "^0.2.51"
   },
   "prettier": {
-    "printWidth": 100,
-    "arrowParens": "avoid",
-    "trailingComma": "none"
+    "printWidth": 100
   },
   "mocha": {
     "require": [
