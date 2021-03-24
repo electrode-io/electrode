@@ -81,7 +81,7 @@ export type XarcOptions = {
   /**
    * Port number the dev admin listens to serve its pages.
    *
-   * - **Default: 8991**
+   * - **Default: 0** - pick a random port
    * - if not set, then check env `XARC_ADMIN_PORT`
    *
    */

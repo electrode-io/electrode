@@ -138,6 +138,7 @@ export class AdminServer {
     this.handleUserInput();
 
     this._fullyStarted = false;
+    await this._adminHttp._ready;
     this._shutdown || (await this.startWebpackDevServer());
     this._shutdown || (await this.startAppServer());
 

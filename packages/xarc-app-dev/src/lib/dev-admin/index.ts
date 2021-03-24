@@ -28,7 +28,7 @@ function startDevAdmin() {
       },
       port: {
         type: "number",
-        default: 8991,
+        default: 0,
         desc: "HTTP port to serve admin data"
       }
     })

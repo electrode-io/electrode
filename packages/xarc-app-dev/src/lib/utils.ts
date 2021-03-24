@@ -233,6 +233,16 @@ export function detectCSSModule(xOptions: XarcOptions): boolean {
 }
 
 /**
+ * Check if a port number is valid
+ *
+ * @param port - port number
+ * @returns `true` or `false`
+ */
+export const isValidPort = (port: number): boolean => {
+  return Number.isInteger(port) && port >= 0 && port < 65536;
+};
+
+/**
  * Get dev admin's http port from env
  *
  * @param fallback fallback port
@@ -245,15 +255,5 @@ export function getDevAdminPortFromEnv(fallback?: number): number {
       process.env.ELECTRODE_ADMIN_PORT
   );
 
-  return fromEnv || fallback || 8991;
+  return [fromEnv, fallback, 0].find(x => isValidPort(x));
 }
-
-/**
- * Check if a port number is valid
- *
- * @param port - port number
- * @returns `true` or `false`
- */
-export const isValidPort = (port: number): boolean => {
-  return Number.isInteger(port) && port >= 0 && port < 65536;
-};

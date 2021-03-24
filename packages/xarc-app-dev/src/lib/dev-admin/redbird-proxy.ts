@@ -199,15 +199,15 @@ const registerElectrodeDevRules = ({
 
       if (restartOpts.updatePorts) {
         if (restartOpts.hasOwnProperty("appPort")) {
-          const appPort = restartOpts.appPort as string;
-          if (appPort !== `${regAppPort}`) {
-            newPorts.appPort = appPort;
+          const tmpPort = restartOpts.appPort as string;
+          if (tmpPort !== `${regAppPort}`) {
+            newPorts.appPort = tmpPort;
           }
         }
         if (restartOpts.hasOwnProperty("webpackDevPort")) {
-          const webpackDevPort = restartOpts.webpackDevPort as string;
-          if (webpackDevPort !== `${regWebpackDevPort}`) {
-            newPorts.webpackDevPort = webpackDevPort;
+          const tmpPort = restartOpts.webpackDevPort as string;
+          if (tmpPort !== `${regWebpackDevPort}`) {
+            newPorts.webpackDevPort = tmpPort;
           }
         }
         res.statusCode = 200;
