@@ -54,7 +54,7 @@
     "prettier": "^2.2.1",
     "prompts": "^2.3.2",
     "run-verify": "^1.2.5",
-    "shcmd": "^0.7.9",
+    "shcmd": "^0.8.4",
     "sinon": "^7.2.6",
     "sinon-chai": "^3.3.0",
     "webpack": "^4.41.0",

@@ -31,6 +31,9 @@ module.exports = (base, merge) => {
       node: ">= 12",
       npm: ">= 6",
     },
+    prettier: {
+      printWidth: 100,
+    },
     dependencies: {
       "@babel/runtime": "^7.12.5",
       "@xarc/app": "^9.0.3", // version will come from ../package.json
@@ -44,6 +47,7 @@ module.exports = (base, merge) => {
       "@xarc/app-dev": "^9.0.3", // version will come from ../package.json
       "@xarc/opt-postcss": "^1.0.0",
       "@xarc/opt-stylus": "^1.0.0",
+      prettier: "^2.2.1",
       "ts-node": "^9.1.1",
       typescript: "^4.1.3",
     },

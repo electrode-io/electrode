@@ -22,7 +22,7 @@ const Demo3 = () => {
           marginTop: "15px",
           border: "solid",
           marginLeft: "15%",
-          marginRight: "15%"
+          marginRight: "15%",
         }}
       >
         <h2>subapp demo3 with react-query</h2>
@@ -38,7 +38,7 @@ export const subapp: ReactSubApp = {
   wantFeatures: [
     reactQueryFeature({
       React,
-      serverModule: require.resolve("./react-query-fetch")
-    })
-  ]
+      serverModule: require.resolve("./react-query-fetch"),
+    }),
+  ],
 };
