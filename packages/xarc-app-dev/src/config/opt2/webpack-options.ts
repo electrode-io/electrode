@@ -14,9 +14,17 @@ export type WebpackOptions = {
    *  - If not set, then check env `WEBPACK_HOST`, then `WEBPACK_DEV_HOST`, and finally `HOST`
    */
   devHostname?: string;
+
   /**
-   * Port to use for webpack dev URL.  **Default: 2992**
+   *
+   * In dev mode, this sets the proxy forward port for the webpack dev server.
+   * If it's not defined or `0`, then a randomly available port is picked every time.
+   *
+   * - **Default: `0`** - pick a random port
+   *
    * - If not set, then check env `WEBPACK_DEV_PORT`
+   *
+   * .
    */
   devPort?: number;
 
