@@ -145,9 +145,7 @@ export class Middleware {
         //   aggregateTimeout: 2000,
         //   poll: false
         // },
-        stats: {
-          colors: true
-        },
+        stats: "errors-warnings",
         publicPath: "/js",
         serverSideRender: false
         // clientLogLevel: "info"
