@@ -193,13 +193,38 @@ const registerElectrodeDevRules = ({
     src: formUrl({ protocol, host, path: controlPaths.restart }),
     target: `http://localhost:29999/skip`,
     onRequest: (req, res) => {
-      const restartOpts = QS.parse(req._url.split("?")[1]);
+      const restartOpts = { ...QS.parse(req._url.split("?")[1]) };
 
-      res.statusCode = 200;
-      res.write(`proxy restarted`);
-      res.end();
+      const newPorts: any = {};
 
-      process.nextTick(() => restart(restartOpts));
+      if (restartOpts.updatePorts) {
+        if (restartOpts.hasOwnProperty("appPort")) {
+          const appPort = restartOpts.appPort as string;
+          if (appPort !== `${regAppPort}`) {
+            newPorts.appPort = appPort;
+          }
+        }
+        if (restartOpts.hasOwnProperty("webpackDevPort")) {
+          const webpackDevPort = restartOpts.webpackDevPort as string;
+          if (webpackDevPort !== `${regWebpackDevPort}`) {
+            newPorts.webpackDevPort = webpackDevPort;
+          }
+        }
+        res.statusCode = 200;
+        if (_.isEmpty(newPorts)) {
+          res.write(`update-ports - proxy ports same: app ${regAppPort}, wds ${regWebpackDevPort}`);
+        } else {
+          res.write(`update-ports - proxy proxy ports updated`);
+          process.nextTick(() => restart({ ...restartOpts, newPorts }));
+        }
+        res.end();
+      } else {
+        res.statusCode = 200;
+        res.write(`proxy restarted`);
+        res.end();
+
+        process.nextTick(() => restart({ ...restartOpts, newPorts }));
+      }
 
       return false;
     }

@@ -798,7 +798,7 @@ ${instruction}`
         this._updateProxyTimer = null;
         this.sendMsg(PROXY_SERVER_NAME, {
           ...update,
-          name: "restart",
+          name: "update-ports",
           quiet: true
         });
       }, 250).unref();
