@@ -59,10 +59,11 @@ export type XarcOptions = {
   httpsPort?: number;
 
   /**
-   * Port number for your app server to listen on so the dev proxy
-   * can forward request to it.
    *
-   * - **Default: `3100`**
+   * In dev mode, this sets the proxy forward port for the node.js app server.
+   * If it's not defined or `0`, then a randomly available port is picked every time.
+   *
+   * - **Default: `0`** - pick a random port
    * - If not set, then check env `APP_PORT_FOR_PROXY`, then `APP_SERVER_PORT`
    *
    * .
@@ -80,7 +81,7 @@ export type XarcOptions = {
   /**
    * Port number the dev admin listens to serve its pages.
    *
-   * - **Default: 8991**
+   * - **Default: 0** - pick a random port
    * - if not set, then check env `XARC_ADMIN_PORT`
    *
    */

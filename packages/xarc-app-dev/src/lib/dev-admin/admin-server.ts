@@ -138,6 +138,7 @@ export class AdminServer {
     this.handleUserInput();
 
     this._fullyStarted = false;
+    await this._adminHttp._ready;
     this._shutdown || (await this.startWebpackDevServer());
     this._shutdown || (await this.startAppServer());
 
@@ -798,7 +799,7 @@ ${instruction}`
         this._updateProxyTimer = null;
         this.sendMsg(PROXY_SERVER_NAME, {
           ...update,
-          name: "restart",
+          name: "update-ports",
           quiet: true
         });
       }, 250).unref();

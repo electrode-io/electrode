@@ -7,6 +7,8 @@ import Url from "url";
 import { getLogEventAsHtml } from "./log-parser";
 import QS from "querystring";
 import _ from "lodash";
+import { isValidPort } from "../utils";
+import { Defer, makeDefer } from "xaa";
 
 export type AdminHttpOptions = {
   port?: number;
@@ -72,12 +74,17 @@ export class AdminHttp {
   _eventClientId: number;
   _eventClients: Record<number, EventClient>;
   _sendStreamTimer: NodeJS.Timeout;
+  _ready: Defer<number>;
 
   constructor(options: AdminHttpOptions) {
+    this._ready = makeDefer();
     this._server = http.createServer(this.requestListener.bind(this));
     this._getLogs = options.getLogs;
-    this._port = options.port || 8991;
-    this._server.listen(this._port);
+    const port = isValidPort(options.port) ? 0 : options.port;
+    this._server.listen(port, () => {
+      this._port = (this._server.address() as any).port;
+      this._ready.resolve(this._port);
+    });
     this._instanceId = Date.now();
     this._eventClientId = 0;
     this._eventClients = {};

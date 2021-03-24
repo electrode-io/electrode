@@ -69,6 +69,8 @@ const handleRestart = type => {
   process.on("message", data => {
     if (data.name === "restart") {
       restart(_.omit(data, "name"));
+    } else if (data.name === "update-ports") {
+      restart({ ..._.omit(data, "name"), updatePorts: true });
     }
   });
 };
