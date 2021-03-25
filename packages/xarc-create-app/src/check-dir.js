@@ -8,7 +8,7 @@ async function checkDir(dirName) {
     const response = await prompts({
       type: "confirm",
       name: "overwrite",
-      message: `Your directory '${dirName}' is not empty, write to it?`
+      message: `Your directory '${dirName}' is not empty, write to it?`,
     });
 
     return response.overwrite;

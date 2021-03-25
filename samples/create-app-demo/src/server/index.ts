@@ -10,8 +10,8 @@ import { config } from "./config";
 export async function start() {
   await loadRuntimeSupport({
     isomorphicCdnOptions: {
-      prodOnly: true
-    }
+      prodOnly: true,
+    },
   });
 
   const server = await electrodeServer(config);

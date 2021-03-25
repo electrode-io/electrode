@@ -5,7 +5,7 @@ const maxDelay = 50;
 export const demo3QueryFn = async ({ queryKey }) => {
   const delay = Math.floor(Math.random() * maxDelay);
 
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     setTimeout(resolve, delay);
   }).then(() => {
     return { msg: "react-query", queryKey, delay };
@@ -17,6 +17,6 @@ export const prefetchQuery = async ({ queryClient, ssrData }) => {
 
   return {
     queryClient,
-    dehydratedState: dehydrate(queryClient)
+    dehydratedState: dehydrate(queryClient),
   };
 };

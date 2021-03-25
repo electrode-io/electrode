@@ -8,32 +8,32 @@ const base = {
   mode: process.env.ANALYZE_BUNDLE ? "development" : "production",
   //devtool: "source-map",
   entry: {
-    "index.js": Path.resolve("src/index.js")
+    "index.js": Path.resolve("src/index.js"),
   },
-  plugins: [process.env.ANALYZE_BUNDLE && new BundleAnalyzerPlugin()].filter(x => x),
+  plugins: [process.env.ANALYZE_BUNDLE && new BundleAnalyzerPlugin()].filter((x) => x),
   resolve: {
     symlinks: false, // don't resolve symlinks to their real path
-    alias: {}
+    alias: {},
   },
   output: {
     filename: `[name]`,
     path: Path.resolve("dist"),
-    libraryTarget: "commonjs2"
+    libraryTarget: "commonjs2",
   },
   target: "node",
   node: {
     __filename: false,
-    __dirname: false
+    __dirname: false,
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        exclude: x => x.indexOf("node_modules") > 0,
-        use: "babel-loader"
-      }
-    ]
-  }
+        exclude: (x) => x.indexOf("node_modules") > 0,
+        use: "babel-loader",
+      },
+    ],
+  },
 };
 
 module.exports = base;

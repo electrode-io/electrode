@@ -5,7 +5,7 @@ import styles from "../styles/demo1.mod.styl";
 // CSS module support for .css
 import styles2 from "../styles/demo1.mod.css";
 
-const Demo1 = props => {
+const Demo1 = (props) => {
   return (
     <div style={{ padding: "5px", border: "solid", marginLeft: "15%", marginRight: "15%" }}>
       <p className={styles.demo1}>subapp demo1 (.styl css module blue color)</p>
@@ -19,5 +19,5 @@ const Demo1 = props => {
 };
 
 export const subapp: ReactSubApp = {
-  Component: Demo1
+  Component: Demo1,
 };

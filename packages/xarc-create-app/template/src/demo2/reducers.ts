@@ -1,11 +1,11 @@
 const number = (store = { value: 0 }, action) => {
   if (action.type === "INC_NUMBER") {
     return {
-      value: store.value + 1
+      value: store.value + 1,
     };
   } else if (action.type === "DEC_NUMBER") {
     return {
-      value: store.value - 1
+      value: store.value - 1,
     };
   }
 
@@ -13,5 +13,5 @@ const number = (store = { value: 0 }, action) => {
 };
 
 export const reduxReducers = {
-  number
+  number,
 };

@@ -5,12 +5,12 @@ import { message } from "./message";
 export const Demo1 = createDynamicComponent(
   {
     name: "demo1",
-    getModule: () => import("../demo1")
+    getModule: () => import("../demo1"),
   },
   { ssr: true }
 );
 
-const Home = props => {
+const Home = (props) => {
   return (
     <div style={{ textAlign: "center" }}>
       <h1>
@@ -30,7 +30,7 @@ export const subapp: ReactSubApp = {
   Component: Home,
   wantFeatures: [
     staticPropsFeature({
-      serverModule: require.resolve("./static-props")
-    })
-  ]
+      serverModule: require.resolve("./static-props"),
+    }),
+  ],
 };
