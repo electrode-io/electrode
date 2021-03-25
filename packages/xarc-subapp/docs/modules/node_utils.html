@@ -98,8 +98,7 @@
 					<div class="tsd-signature tsd-kind-icon">SSR_<wbr>PIPELINES<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">typeof </span><a href="node_utils.html#ssr_pipelines" class="tsd-signature-type" data-tsd-kind="Variable">SSR_PIPELINES</a><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-subapp/src/node/utils.ts#L112">node/utils.ts:112</a></li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-subapp/src/node/index.ts#L23">node/index.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/f202c0a1/packages/xarc-subapp/src/node/utils.ts#L129">node/utils.ts:129</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -116,22 +115,37 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-subapp/src/node/utils.ts#L62">node/utils.ts:62</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/f202c0a1/packages/xarc-subapp/src/node/utils.ts#L79">node/utils.ts:79</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>generate nonce token</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>token: <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>props<span class="tsd-signature-symbol">: </span><a href="node_types.html#initprops" class="tsd-signature-type" data-tsd-kind="Type alias">InitProps</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>init props</p>
+									</div>
 								</li>
 								<li>
 									<h5>fallback: <a href="node_types.html#nonceinfo" class="tsd-signature-type" data-tsd-kind="Type alias">NonceInfo</a><span class="tsd-signature-symbol"> = null</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>nonce fallback</p>
+									</div>
 								</li>
 								<li>
 									<h5>tag: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;&quot;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>nonce token tag or nonce generator tag</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>attr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>nonce<span class="tsd-signature-symbol">?: </span><a href="node_types.html#nonceinfo" class="tsd-signature-type" data-tsd-kind="Type alias">NonceInfo</a><span class="tsd-signature-symbol"> }</span></h4>
+							<p>an object with generated string token and nonce info</p>
 							<ul class="tsd-parameters">
 								<li class="tsd-parameter">
 									<h5>attr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
@@ -153,7 +167,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-subapp/src/node/utils.ts#L14">node/utils.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/f202c0a1/packages/xarc-subapp/src/node/utils.ts#L15">node/utils.ts:15</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -171,6 +185,7 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+							<p>cdn Map, if not found, return undefined</p>
 						</li>
 					</ul>
 				</section>
@@ -184,19 +199,31 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-subapp/src/node/utils.ts#L26">node/utils.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/f202c0a1/packages/xarc-subapp/src/node/utils.ts#L34">node/utils.ts:34</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>get</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>file: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>string to wrap</p>
+									</div>
 								</li>
 								<li>
 									<h5>data: <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>string go before fragment</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></h4>
+							<p>if found, return request&#39;s path name, if not, return false</p>
 						</li>
 					</ul>
 				</section>
@@ -210,7 +237,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-subapp/src/node/utils.ts#L55">node/utils.ts:55</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/f202c0a1/packages/xarc-subapp/src/node/utils.ts#L64">node/utils.ts:64</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -233,7 +260,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-subapp/src/node/utils.ts#L121">node/utils.ts:121</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/f202c0a1/packages/xarc-subapp/src/node/utils.ts#L139">node/utils.ts:139</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -269,7 +296,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-subapp/src/node/utils.ts#L95">node/utils.ts:95</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/f202c0a1/packages/xarc-subapp/src/node/utils.ts#L112">node/utils.ts:112</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -308,7 +335,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-subapp/src/node/utils.ts#L47">node/utils.ts:47</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/f202c0a1/packages/xarc-subapp/src/node/utils.ts#L55">node/utils.ts:55</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">

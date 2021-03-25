@@ -87,7 +87,7 @@
 					<div class="tsd-signature tsd-kind-icon">Xarc<wbr>Internal<wbr>Options<span class="tsd-signature-symbol">:</span> <a href="config_opt2_xarc_options.html#xarcoptions" class="tsd-signature-type" data-tsd-kind="Type alias">XarcOptions</a><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>AppMode<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>babel<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>checkUserBabelRc<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>devDir<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>eTmpDir<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>jest<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>karma<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>prodDir<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>prodModulesDir<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>webpack<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/86eec14c/packages/xarc-app-dev/src/config/opt2/xarc-options.ts#L125">src/config/opt2/xarc-options.ts:125</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/dafd8f99/packages/xarc-app-dev/src/config/opt2/xarc-options.ts#L126">src/config/opt2/xarc-options.ts:126</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -102,8 +102,7 @@
 					<div class="tsd-signature tsd-kind-icon">Xarc<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>addOnFeatures<span class="tsd-signature-symbol">?: </span><a href="config_opt2_add_on_features.html#addonfeatures" class="tsd-signature-type" data-tsd-kind="Type alias">AddOnFeatures</a><span class="tsd-signature-symbol">; </span>adminLogLevel<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>adminPort<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>appServerPort<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>babelOptions<span class="tsd-signature-symbol">?: </span><a href="config_opt2_babel_options.html#babeloptions" class="tsd-signature-type" data-tsd-kind="Type alias">BabelOptions</a><span class="tsd-signature-symbol">; </span>cwd<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>host<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>httpsPort<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>namespace<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>port<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>webpackOptions<span class="tsd-signature-symbol">?: </span><a href="config_opt2_webpack_options.html#webpackoptions" class="tsd-signature-type" data-tsd-kind="Type alias">WebpackOptions</a><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/86eec14c/packages/xarc-app-dev/src/config/opt2/xarc-options.ts#L8">src/config/opt2/xarc-options.ts:8</a></li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/86eec14c/packages/xarc-app-dev/src/lib/dev-tasks.ts#L97">src/lib/dev-tasks.ts:97</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/dafd8f99/packages/xarc-app-dev/src/config/opt2/xarc-options.ts#L8">src/config/opt2/xarc-options.ts:8</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -141,7 +140,7 @@
 										<p>Port number the dev admin listens to serve its pages.</p>
 									</div>
 									<ul>
-										<li><strong>Default: 8991</strong></li>
+										<li><strong>Default: 0</strong> - pick a random port</li>
 										<li>if not set, then check env <code>XARC_ADMIN_PORT</code></li>
 									</ul>
 								</div>
@@ -150,11 +149,11 @@
 								<h5><span class="tsd-flag ts-flagOptional">Optional</span> app<wbr>Server<wbr>Port<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
 								<div class="tsd-comment tsd-typography">
 									<div class="lead">
-										<p>Port number for your app server to listen on so the dev proxy
-										can forward request to it.</p>
+										<p>In dev mode, this sets the proxy forward port for the node.js app server.
+										If it&#39;s not defined or <code>0</code>, then a randomly available port is picked every time.</p>
 									</div>
 									<ul>
-										<li><strong>Default: <code>3100</code></strong></li>
+										<li><strong>Default: <code>0</code></strong> - pick a random port</li>
 										<li>If not set, then check env <code>APP_PORT_FOR_PROXY</code>, then <code>APP_SERVER_PORT</code></li>
 									</ul>
 									<p>.</p>
@@ -296,6 +295,7 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
+				<li class="tsd-kind-namespace"><span class="tsd-kind-icon">Namespace</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>

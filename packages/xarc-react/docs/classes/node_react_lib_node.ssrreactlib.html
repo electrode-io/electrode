@@ -179,6 +179,12 @@
 									<li>Defined in <a href="https://github.com/jchip/electrode/blob/b9b2ee31/packages/xarc-react/src/node/react-lib-node.tsx#L66">src/node/react-lib-node.tsx:66</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Server side render a subapp sync.</p>
+								</div>
+								<p>sync means the subapp&#39;s module must have been loaded</p>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -206,6 +212,14 @@
 									<li>Defined in <a href="https://github.com/jchip/electrode/blob/b9b2ee31/packages/xarc-react/src/node/react-lib-node.tsx#L21">src/node/react-lib-node.tsx:21</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Prepare a subapp&#39;s data and features for doing SSR.</p>
+								</div>
+								<p>This is separate because preparing data is likely async and if app
+									requires using the sync <code>renderToString</code>, then it has to be in two
+								stages.</p>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>

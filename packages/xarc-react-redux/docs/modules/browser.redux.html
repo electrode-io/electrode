@@ -149,9 +149,7 @@
 						<li>
 							<h4>R</h4>
 							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Type of reducer.</p>
-								</div>
+								<p>Type of reducer.</p>
 							</div>
 						</li>
 					</ul>
@@ -175,9 +173,7 @@
 						<li>
 							<h4>M</h4>
 							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Object map of reducers as provided to <code>combineReducers(map: M)</code>.</p>
-								</div>
+								<p>Object map of reducers as provided to <code>combineReducers(map: M)</code>.</p>
 							</div>
 						</li>
 					</ul>
@@ -185,7 +181,7 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
 					<a name="combinedstate" class="tsd-anchor"></a>
 					<h3>Combined<wbr>State</h3>
-					<div class="tsd-signature tsd-kind-icon">Combined<wbr>State&lt;S&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>__@$CombinedState@22587<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">S</span></div>
+					<div class="tsd-signature tsd-kind-icon">Combined<wbr>State&lt;S&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>[$CombinedState]<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">S</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in node_modules/.f/_/redux/4.0.5/redux/index.d.ts:56</li>
@@ -540,7 +536,7 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-namespace tsd-has-type-parameter tsd-is-external">
 					<a name="preloadedstate" class="tsd-anchor"></a>
 					<h3>Preloaded<wbr>State</h3>
-					<div class="tsd-signature tsd-kind-icon">Preloaded<wbr>State&lt;S&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Required</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>__@$CombinedState@22587<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol"> extends </span><a href="browser.redux.html#combinedstate" class="tsd-signature-type" data-tsd-kind="Type alias">CombinedState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">infer </span> S1<span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-symbol">{</span><span class="tsd-signature-symbol">[ </span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol"> in </span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">S1</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">S1</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> ? </span><a href="browser.redux.html#preloadedstate" class="tsd-signature-type" data-tsd-kind="Type alias">PreloadedState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S1</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">S1</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">never</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-symbol">{</span><span class="tsd-signature-symbol">[ </span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol"> in </span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> ? </span><a href="browser.redux.html#preloadedstate" class="tsd-signature-type" data-tsd-kind="Type alias">PreloadedState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> }</span></div>
+					<div class="tsd-signature tsd-kind-icon">Preloaded<wbr>State&lt;S&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Required</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>[$CombinedState]<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol"> extends </span><a href="browser.redux.html#combinedstate" class="tsd-signature-type" data-tsd-kind="Type alias">CombinedState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">infer </span> S1<span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-symbol">{</span><span class="tsd-signature-symbol">[ </span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol"> in </span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">S1</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">S1</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> ? </span><a href="browser.redux.html#preloadedstate" class="tsd-signature-type" data-tsd-kind="Type alias">PreloadedState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S1</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">S1</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">never</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-symbol">{</span><span class="tsd-signature-symbol">[ </span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol"> in </span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> ? </span><a href="browser.redux.html#preloadedstate" class="tsd-signature-type" data-tsd-kind="Type alias">PreloadedState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in node_modules/.f/_/redux/4.0.5/redux/index.d.ts:63</li>
@@ -567,9 +563,6 @@
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in node_modules/.f/_/redux/4.0.5/redux/index.d.ts:101</li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L11">src/common/index.tsx:11</a></li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L11">src/common/index.tsx:11</a></li>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/7fcc9521/packages/xarc-react-redux/src/common/index.tsx#L11">src/common/index.tsx:11</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -596,17 +589,13 @@
 						<li>
 							<h4>S = <span class="tsd-signature-type">any</span></h4>
 							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>The type of state consumed and produced by this reducer.</p>
-								</div>
+								<p>The type of state consumed and produced by this reducer.</p>
 							</div>
 						</li>
 						<li>
 							<h4>A<span class="tsd-signature-symbol">: </span><a href="../interfaces/browser.redux.action.html" class="tsd-signature-type" data-tsd-kind="Interface">Action</a> = <a href="../interfaces/browser.redux.anyaction.html" class="tsd-signature-type" data-tsd-kind="Interface">AnyAction</a></h4>
 							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>The type of actions the reducer can potentially respond to.</p>
-								</div>
+								<p>The type of actions the reducer can potentially respond to.</p>
 							</div>
 						</li>
 					</ul>
@@ -654,9 +643,7 @@
 						<li>
 							<h4>M</h4>
 							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Object map of reducers as provided to <code>combineReducers(map: M)</code>.</p>
-								</div>
+								<p>Object map of reducers as provided to <code>combineReducers(map: M)</code>.</p>
 							</div>
 						</li>
 					</ul>
@@ -683,9 +670,7 @@
 						<li>
 							<h4>A<span class="tsd-signature-symbol">: </span><a href="../interfaces/browser.redux.action.html" class="tsd-signature-type" data-tsd-kind="Interface">Action</a> = <a href="../interfaces/browser.redux.action.html" class="tsd-signature-type" data-tsd-kind="Interface">Action</a></h4>
 							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>The type of actions the reducers can potentially respond to.</p>
-								</div>
+								<p>The type of actions the reducers can potentially respond to.</p>
 							</div>
 						</li>
 					</ul>
@@ -709,9 +694,7 @@
 						<li>
 							<h4>M</h4>
 							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Object map of reducers as provided to <code>combineReducers(map: M)</code>.</p>
-								</div>
+								<p>Object map of reducers as provided to <code>combineReducers(map: M)</code>.</p>
 							</div>
 						</li>
 					</ul>
@@ -747,17 +730,13 @@
 						<li>
 							<h4>Ext = <span class="tsd-signature-symbol">{}</span></h4>
 							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Store extension that is mixed into the Store type.</p>
-								</div>
+								<p>Store extension that is mixed into the Store type.</p>
 							</div>
 						</li>
 						<li>
 							<h4>StateExt = <span class="tsd-signature-symbol">{}</span></h4>
 							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>State extension that is mixed into the state type.</p>
-								</div>
+								<p>State extension that is mixed into the state type.</p>
 							</div>
 						</li>
 					</ul>

@@ -86,7 +86,7 @@
 					<div class="tsd-signature tsd-kind-icon">Webpack<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>cdnHostname<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>cdnPort<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>cdnProtocol<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>cssModuleSupport<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;all&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;byModExt&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;cssOnly&quot;</span><span class="tsd-signature-symbol">; </span>devArtifactsPath<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>devHostname<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>devPort<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>enableBabelPolyfill<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>enableHotModuleReload<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>enableNodeSourcePlugin<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>enableShortenCSSNames<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>enableWarningsOverlay<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>loadDlls<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>minify<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>minimizeSubappChunks<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>optimizeCssOptions<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>preserveSymlinks<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>webpackDev<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>woffFontInlineLimit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/86eec14c/packages/xarc-app-dev/src/config/opt2/webpack-options.ts#L6">src/config/opt2/webpack-options.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/dafd8f99/packages/xarc-app-dev/src/config/opt2/webpack-options.ts#L6">src/config/opt2/webpack-options.ts:6</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -184,11 +184,16 @@
 								<h5><span class="tsd-flag ts-flagOptional">Optional</span> dev<wbr>Port<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
 								<div class="tsd-comment tsd-typography">
 									<div class="lead">
-										<p>Port to use for webpack dev URL.  <strong>Default: 2992</strong></p>
-										<ul>
-											<li>If not set, then check env <code>WEBPACK_DEV_PORT</code></li>
-										</ul>
+										<p>In dev mode, this sets the proxy forward port for the webpack dev server.
+										If it&#39;s not defined or <code>0</code>, then a randomly available port is picked every time.</p>
 									</div>
+									<ul>
+										<li><p><strong>Default: <code>0</code></strong> - pick a random port</p>
+										</li>
+										<li><p>If not set, then check env <code>WEBPACK_DEV_PORT</code></p>
+										</li>
+									</ul>
+									<p>.</p>
 								</div>
 							</li>
 							<li class="tsd-parameter">
@@ -368,6 +373,7 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
+				<li class="tsd-kind-namespace"><span class="tsd-kind-icon">Namespace</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
