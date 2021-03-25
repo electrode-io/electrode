@@ -1,3 +1,90 @@
+# 3/25/2021
+
+## Packages
+
+- `@xarc/app@10.0.3` `(10.0.2-beta.1 => 10.0.3)`
+- `@xarc/app-dev@10.0.3` `(10.0.2-beta.1 => 10.0.3)`
+- `@xarc/create-app@6.0.1` `(6.0.0-beta.0 => 6.0.1)`
+- `@xarc/opt-karma@2.0.1` `(2.0.0 => 2.0.1)`
+- `@xarc/react@0.2.1` `(0.2.0-beta.0 => 0.2.1)`
+- `@xarc/react-query@0.2.1` `(0.2.0-beta.0 => 0.2.1)`
+- `@xarc/react-recoil@0.2.1` `(0.2.0-beta.1 => 0.2.1)`
+- `@xarc/react-redux@0.2.1` `(0.2.0-beta.0 => 0.2.1)`
+- `@xarc/react-redux-observable@0.2.1` `(0.2.0-beta.0 => 0.2.1)`
+- `@xarc/react-redux-saga@0.2.1` `(0.2.0-beta.0 => 0.2.1)`
+- `@xarc/react-router@0.2.1` `(0.2.0-beta.0 => 0.2.1)`
+- `@xarc/subapp@0.2.1` `(0.2.0-beta.0 => 0.2.1)`
+- `@xarc/webpack@11.0.2` `(11.0.1-beta.1 => 11.0.2)`
+
+## Commits
+
+- `packages/xarc-app`
+
+  - release ver10/webpack5 as latest [commit](http://github.com/electrode-io/electrode/commit/9ebb10d8fb3c9aa207dea0ffc156d013c6e43342)
+
+- `packages/xarc-app-dev`
+
+  - don't output webpack summary in dev mode [commit](http://github.com/electrode-io/electrode/commit/dafd8f99bf72361a2787e27a3f18f3b8eb3329f8)
+  - pick a random port for admin http [commit](http://github.com/electrode-io/electrode/commit/02638840794620c9bec271233157f37b3fa4ad8f)
+  - proxy server support update-ports restart command [commit](http://github.com/electrode-io/electrode/commit/45a2ab261540a634ba6538d2b77f29f77a8919ad)
+  - update comments for 0 port for app and dev server [commit](http://github.com/electrode-io/electrode/commit/44819a1affe1045ce42d047350f0dd5737f3312f)
+  - fix proxy SSL certs searching and 0 port in dev mode [commit](http://github.com/electrode-io/electrode/commit/17318816502dfeb82db023e5e4ce28fb399ceabf)
+  - dev-admin support webpack dev server randomly select available port ([#1842](https://github.com/electrode-io/electrode/pull/1842)) [commit](http://github.com/electrode-io/electrode/commit/d4bcbdee0dcbada407f3041c1a4f8a4aaf1441ce)
+  - dev-admin support app server randomly select available port [commit](http://github.com/electrode-io/electrode/commit/3f88ecef07f8728f0a6efc1818c70eb618641416)
+  - release ver10/webpack5 as latest [commit](http://github.com/electrode-io/electrode/commit/9ebb10d8fb3c9aa207dea0ffc156d013c6e43342)
+
+- `packages/xarc-create-app`
+
+  - update create-app-demo sample [commit](http://github.com/electrode-io/electrode/commit/00ecc0e5e7da876c811e3b083eac357874d67d25)
+  - [chore] format code with prettier 2.0 defaults [commit](http://github.com/electrode-io/electrode/commit/36d173f61e1aee0f9d3e4cd14e5b9f1853673984)
+  - update comments for 0 port for app and dev server [commit](http://github.com/electrode-io/electrode/commit/44819a1affe1045ce42d047350f0dd5737f3312f)
+  - release ver10/webpack5 as latest [commit](http://github.com/electrode-io/electrode/commit/9ebb10d8fb3c9aa207dea0ffc156d013c6e43342)
+
+- `packages/xarc-opt-karma`
+
+  - release ver10/webpack5 as latest [commit](http://github.com/electrode-io/electrode/commit/9ebb10d8fb3c9aa207dea0ffc156d013c6e43342)
+
+- `packages/xarc-react`
+
+  - release ver10/webpack5 as latest [commit](http://github.com/electrode-io/electrode/commit/9ebb10d8fb3c9aa207dea0ffc156d013c6e43342)
+
+- `packages/xarc-react-query`
+
+  - release ver10/webpack5 as latest [commit](http://github.com/electrode-io/electrode/commit/9ebb10d8fb3c9aa207dea0ffc156d013c6e43342)
+
+- `packages/xarc-react-recoil`
+
+  - release ver10/webpack5 as latest [commit](http://github.com/electrode-io/electrode/commit/9ebb10d8fb3c9aa207dea0ffc156d013c6e43342)
+
+- `packages/xarc-react-redux`
+
+  - release ver10/webpack5 as latest [commit](http://github.com/electrode-io/electrode/commit/9ebb10d8fb3c9aa207dea0ffc156d013c6e43342)
+
+- `packages/xarc-react-redux-observable`
+
+  - release ver10/webpack5 as latest [commit](http://github.com/electrode-io/electrode/commit/9ebb10d8fb3c9aa207dea0ffc156d013c6e43342)
+
+- `packages/xarc-react-redux-saga`
+
+  - release ver10/webpack5 as latest [commit](http://github.com/electrode-io/electrode/commit/9ebb10d8fb3c9aa207dea0ffc156d013c6e43342)
+
+- `packages/xarc-react-router`
+
+  - release ver10/webpack5 as latest [commit](http://github.com/electrode-io/electrode/commit/9ebb10d8fb3c9aa207dea0ffc156d013c6e43342)
+
+- `packages/xarc-subapp`
+
+  - add unit test for xarc-subapp ([#1843](https://github.com/electrode-io/electrode/pull/1843)) [commit](http://github.com/electrode-io/electrode/commit/93325aa28043b9807cfe0fbabf3280ed9ce03416)
+  - release ver10/webpack5 as latest [commit](http://github.com/electrode-io/electrode/commit/9ebb10d8fb3c9aa207dea0ffc156d013c6e43342)
+
+- `packages/xarc-webpack`
+
+  - release ver10/webpack5 as latest [commit](http://github.com/electrode-io/electrode/commit/9ebb10d8fb3c9aa207dea0ffc156d013c6e43342)
+
+- `.vscode`
+
+  - update lockfile [commit](http://github.com/electrode-io/electrode/commit/90c2e2935bd9ecc3aa6e7e96fc76913601462d1a)
+
 # 3/16/2021
 
 - fix subapp ver1 with webpack5
