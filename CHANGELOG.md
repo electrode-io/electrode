@@ -1,3 +1,53 @@
+# 3/24/2021
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@9.0.5` `(9.0.4 => 9.0.5)`
+- `@xarc/app-dev@9.0.5` `(9.0.4 => 9.0.5)`
+- `@xarc/create-app@5.0.6` `(5.0.5 => 5.0.6)`
+- `@xarc/react-recoil@0.1.1` `(0.1.0 => 0.1.1)`
+- `@xarc/subapp@0.1.8` `(0.1.7 => 0.1.8)`
+
+### Lerna Updated
+
+- `@xarc/react@0.1.8` `(0.1.7 => 0.1.8)`
+- `@xarc/react-query@0.1.4` `(0.1.3 => 0.1.4)`
+- `@xarc/react-redux@0.1.7` `(0.1.6 => 0.1.7)`
+- `@xarc/react-redux-observable@0.1.1` `(0.1.0 => 0.1.1)`
+- `@xarc/react-redux-saga@0.1.1` `(0.1.0 => 0.1.1)`
+- `@xarc/react-router@0.1.8` `(0.1.7 => 0.1.8)`
+
+## Commits
+
+- `packages/xarc-app-dev`
+
+  - pick a random port for admin http [commit](http://github.com/electrode-io/electrode/commit/02638840794620c9bec271233157f37b3fa4ad8f)
+  - proxy server support update-ports restart command [commit](http://github.com/electrode-io/electrode/commit/45a2ab261540a634ba6538d2b77f29f77a8919ad)
+  - update comments for 0 port for app and dev server [commit](http://github.com/electrode-io/electrode/commit/44819a1affe1045ce42d047350f0dd5737f3312f)
+  - fix proxy SSL certs searching and 0 port in dev mode [commit](http://github.com/electrode-io/electrode/commit/17318816502dfeb82db023e5e4ce28fb399ceabf)
+  - dev-admin support webpack dev server randomly select available port ([#1842](https://github.com/electrode-io/electrode/pull/1842)) [commit](http://github.com/electrode-io/electrode/commit/d4bcbdee0dcbada407f3041c1a4f8a4aaf1441ce)
+  - dev-admin support app server randomly select available port [commit](http://github.com/electrode-io/electrode/commit/3f88ecef07f8728f0a6efc1818c70eb618641416)
+  - support log viewer json formatter on off ([#1841](https://github.com/electrode-io/electrode/pull/1841)) [commit](http://github.com/electrode-io/electrode/commit/1862bd416c213630277e181b51e19d851ab6b6b4)
+  - remove unused dependency in app-dev ([#1839](https://github.com/electrode-io/electrode/pull/1839)) [commit](http://github.com/electrode-io/electrode/commit/4acbe1c340af98d0ed47afe9768ad08c271f036f)
+  - improve JSON display in Log viewer ([#1838](https://github.com/electrode-io/electrode/pull/1838)) [commit](http://github.com/electrode-io/electrode/commit/95f0bc329135f93cf031c2c81674c4b5d8df709c)
+
+- `packages/xarc-create-app`
+
+  - [chore] format code with prettier 2.0 defaults [commit](http://github.com/electrode-io/electrode/commit/36d173f61e1aee0f9d3e4cd14e5b9f1853673984)
+  - update comments for 0 port for app and dev server [commit](http://github.com/electrode-io/electrode/commit/44819a1affe1045ce42d047350f0dd5737f3312f)
+  - update create-app-demo sample [commit](http://github.com/electrode-io/electrode/commit/00ecc0e5e7da876c811e3b083eac357874d67d25)
+
+- `packages/xarc-react-recoil`
+
+  - xarc-react-recoil added ssr support with store contains recoil atoms ([#1840](https://github.com/electrode-io/electrode/pull/1840)) [commit](http://github.com/electrode-io/electrode/commit/30d818f3fbf91ef68d2e3bf976971fac3949556b)
+  - added unit test for react-recoil ([#1837](https://github.com/electrode-io/electrode/pull/1837)) [commit](http://github.com/electrode-io/electrode/commit/97d37619ffa3263d9d839e698c69c31a00e00437)
+
+- `packages/xarc-subapp`
+
+  - add unit test for xarc-subapp ([#1843](https://github.com/electrode-io/electrode/pull/1843)) [commit](http://github.com/electrode-io/electrode/commit/93325aa28043b9807cfe0fbabf3280ed9ce03416)
+
 # 3/1/2021
 
 - remove beta tag from ver9
