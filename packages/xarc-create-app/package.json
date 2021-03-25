@@ -11,8 +11,7 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.com/",
-    "access": "public",
-    "tag": "beta"
+    "access": "public"
   },
   "bin": {
     "create-app": "bin/create-app.js"

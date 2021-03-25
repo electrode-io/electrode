@@ -18,8 +18,7 @@
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.com/",
-    "access": "public",
-    "tag": "beta"
+    "access": "public"
   },
   "author": "Electrode (http://www.electrode.io/)",
   "contributors": [

@@ -123,8 +123,7 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.com/",
-    "access": "public",
-    "tag": "beta"
+    "access": "public"
   },
   "mocha": {
     "require": [
