@@ -32,7 +32,11 @@ module.exports = () => {
 
   // karma 3.x uses fs.mkdirSync to create output and it fails if the output has multi dirs
   // so create the output path here to help it get pass that.
-  mkdirp.sync(path);
+  try {
+    mkdirp.sync(path);
+  } catch {
+    //
+  }
 
   return {
     output: {
