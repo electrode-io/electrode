@@ -55,7 +55,7 @@
     "chai-as-promised": "^7.1.1",
     "electrode-archetype-njs-module-dev": "^3.0.3",
     "electrode-react-webapp": "^3.8.9",
-    "jsdom": "^15.2.1",
+    "jsdom": "^16.5.1",
     "mock-require": "^1.3.0",
     "run-verify": "^1.2.2",
     "subapp-pkg-util": "../subapp-pkg-util"
@@ -84,7 +84,8 @@
       "dist",
       "test",
       "browser",
-      "node-dist"
+      "node-dist",
+      ".babelrc.js"
     ],
     "check-coverage": true,
     "statements": 0,
