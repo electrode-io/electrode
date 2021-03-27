@@ -119,11 +119,7 @@
     getBundle(name, namespace) {
       namespace = ensureNamespace(namespace);
 
-      if (
-        !name ||
-        !runtimeInfo.bundles[namespace] ||
-        !runtimeInfo.bundles[namespace][name.toLowerCase()]
-      ) {
+      if (!name || !runtimeInfo.bundles[namespace]) {
         return;
       }
 
@@ -334,7 +330,10 @@
       done = done || (() => {});
       namespace = ensureNamespace(namespace);
 
-      const toLoad = [].concat(names).filter(x => xv1.getBundle(x, namespace) === undefined);
+      const toLoad = [].concat(names).filter(x => {
+        const s = xv1.getBundle(x, namespace);
+        return s === undefined;
+      });
 
       if (toLoad.length === 0) {
         return done();
@@ -372,13 +371,13 @@
         const afterLoad = () => {
           loaded.push(assets);
           if (loaded.length === assetsToLoad.length) {
-            console.log("all assets loaded", assetsToLoad);
+            console.debug("all assets loaded", assetsToLoad);
             done();
           }
         };
         loadjs(new_assets, id, {
           success: () => {
-            console.log(`loaded asset for ${name} (id: ${id}) - ${assets}`);
+            console.debug(`loaded asset for ${name} (id: ${id}) - ${assets}`);
             xv1.setBundle(id, 1, namespace);
             afterLoad();
           },
