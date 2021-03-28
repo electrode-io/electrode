@@ -52,6 +52,7 @@
     "@babel/preset-typescript": "^7.0.0",
     "@babel/register": "^7.0.0",
     "@jchip/redbird": "^1.2.2",
+    "@xarc/dev-base": "^0.0.1",
     "@xarc/run": "^1.0.4",
     "@xarc/subapp": "^0.2.1",
     "@xarc/webpack": "^11.0.2",
@@ -121,7 +122,7 @@
     "mocha": "^8.2.1",
     "mock-require": "^3.0.3",
     "nyc": "^15.1.0",
-    "prettier": "^1.14.2",
+    "prettier": "^2.2.1",
     "run-verify": "^1.2.5",
     "shx": "^0.3.2",
     "sinon": "^9.2.2",
@@ -140,7 +141,8 @@
       "@xarc/subapp": "../xarc-subapp",
       "@xarc/webpack": "../xarc-webpack",
       "electrode-node-resolver": "../electrode-node-resolver",
-      "subapp-util": "../subapp-util"
+      "subapp-util": "../subapp-util",
+      "@xarc/dev-base": "../xarc-dev-base"
     },
     "devDependencies": {
       "@xarc/app": "../xarc-app",

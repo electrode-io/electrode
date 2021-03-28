@@ -4,10 +4,10 @@ import * as Path from "path";
 const webpack = require("webpack");
 import { loadXarcOptions } from "../util/load-xarc-options";
 
-const xarcOptions = loadXarcOptions();
-const xarcCwd = xarcOptions.cwd;
-
 module.exports = function() {
+  const xarcOptions = loadXarcOptions();
+  const xarcCwd = xarcOptions.cwd;
+
   return {
     plugins: [
       new webpack.DllPlugin({

@@ -2,19 +2,38 @@
 
 export { initWebpackConfigComposer, generateConfig as compose } from "./util/generate-config";
 
-export { JsonpScriptSrcPlugin } from "./plugins/jsonp-script-src-plugin";
-export { SubAppWebpackPlugin } from "./plugins/subapp-plugin";
+export { SubAppWebpackPlugin } from "./plugins/subapp-plugin-webpack5";
 
-//
-// When xrun execute a build task that involves invoking webpack it
-// will check if user wants webpack to start with their webpack.config.js
-// If yes, then the task will set env ELECTRODE_WEBPACK_PROFILE to
-// the desired profile, so when webpack runs, it's passed to the
-// archetype, where we can check and load the correct internal
-// webpack config accordingly.
-//
-export const env = process.env.ELECTRODE_WEBPACK_PROFILE || "production";
-export const options = require(`./options/${env}`);
+/**
+ * Return the env profile for compiling the app.
+ *
+ * Values could be:
+ *
+ * - `development` - for development
+ * - `production` - building app for production
+ * - `test` - running Karma test
+ * - `coverage` - running Karma test with coverage
+ *
+ * `@xarc/app-dev` will set this up depending on the action user is taking.
+ *
+ */
+export const getEnvProfile = (): string => {
+  return process.env.ELECTRODE_WEBPACK_PROFILE || "production";
+};
+
+/**
+ *
+ * The options that will be used to compose the final webpack config
+ *
+ * @param envProfile - the env profile such as `development` or `production`, will call `getEnvProfile`
+ *   to get it if not passed
+ *
+ * @returns compose options for the given env profile
+ */
+export const getComposeOptions = (envProfile?: string): any => {
+  const env = envProfile || getEnvProfile();
+  return require(`./options/${env}`);
+};
 
 /**
  * The copy of webpack module that's installed for @xarc/webpack's use with its configs.
@@ -29,7 +48,12 @@ const genPartials = require("./partials");
 const ConfigPartial = require("webpack-config-composer/lib/partial");
 
 /**
- * The webpack config partials this module provides for building a webapp
+ * The webpack config partials xarc uses to compose the final webpack config for building
+ * your application.
+ *
+ * If you want to customize the webpack config, you can create your own `webpack.config.ts`
+ * and use these partials to compose your own final webpack config.
+ *
  */
 export const partials = {
   /**

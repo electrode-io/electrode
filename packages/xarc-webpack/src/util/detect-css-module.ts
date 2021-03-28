@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires, max-statements */
 
 import * as _ from "lodash";
-const { logger } = require("@xarc/app-dev/lib/logger");
+import { logger } from "@xarc/dev-base";
 
 function detectCSSModule(archetype) {
   const cssModuleSupport = _.get(archetype, "webpack.cssModuleSupport", true);

@@ -34,6 +34,7 @@
     "Joel Chen <xchen@walmartlabs.com>"
   ],
   "dependencies": {
+    "@xarc/dev-base": "^0.0.1",
     "autoprefixer": "^9.6.0",
     "babel-loader": "^8.1.0",
     "chalk": "^4.1.0",
@@ -146,7 +147,8 @@
     "dependencies": {
       "electrode-cdn-file-loader": "../electrode-cdn-file-loader",
       "electrode-node-resolver": "../electrode-node-resolver",
-      "webpack-config-composer": "../webpack-config-composer"
+      "webpack-config-composer": "../webpack-config-composer",
+      "@xarc/dev-base": "../xarc-dev-base"
     },
     "devDependencies": {
       "@xarc/app": "../xarc-app",

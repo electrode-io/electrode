@@ -42,7 +42,7 @@ export function generateBabelLoaderCacheId(cwd: string): string {
     .concat(
       babelConfig,
       process.env.BABEL_ENV,
-      process.env.NODE_NV,
+      process.env.NODE_ENV,
       browsersListRc,
       process.env.BROWSERSLIST_ENV
     )

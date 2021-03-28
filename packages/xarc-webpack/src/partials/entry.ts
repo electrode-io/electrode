@@ -7,7 +7,7 @@ import * as Path from "path";
 import * as _ from "lodash";
 const optionalRequire = require("optional-require")(require);
 const chalk = require("chalk");
-const { logger } = require("@xarc/app-dev/lib/logger");
+import { logger } from "@xarc/dev-base";
 const mkdirp = require("mkdirp");
 import { loadXarcOptions } from "../util/load-xarc-options";
 import { injectEntry } from "../util/inject-entry";

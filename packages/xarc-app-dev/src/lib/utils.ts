@@ -168,6 +168,8 @@ Please run "clap setup-dev" once to initialize the file
 <cyan>.etmp/xarc-options.json</> before doing your thing that loads
 xarc's development code.
 `);
+
+      console.error(err.stack); // eslint-disable-line
     }
 
     return (cachedXarcOptions = {

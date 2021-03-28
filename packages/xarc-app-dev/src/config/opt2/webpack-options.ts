@@ -156,4 +156,13 @@ export type WebpackOptions = {
    * - Useful if you want to build production without minifying for debugging
    */
   minify?: boolean;
+
+  /**
+   * For customizing xarc's webpack config, you can create your own `webpack.config.ts` in your
+   * app's root dir and xarc will load it if it exist.
+   *
+   * If you want to turn off this behavior, set this flag to `false`.
+   *
+   */
+  useAppWebpackConfig?: boolean;
 };

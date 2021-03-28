@@ -1,13 +1,13 @@
 /* eslint-disable global-require, @typescript-eslint/no-var-requires */
 
 const notifyBundleValid = require("../util/notify-bundle-valid");
+import { logger } from "@xarc/dev-base";
 
 /* eslint max-statements: 0 */
 function webpackDevReporter(reporterOptions) {
   const state = reporterOptions.state;
   const stats = reporterOptions.stats;
   const options = reporterOptions.options;
-  const { logger } = require("@xarc/app-dev/lib/logger");
 
   if (state) {
     let displayStats = !options.quiet && options.stats !== false;

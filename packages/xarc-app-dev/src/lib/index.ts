@@ -58,3 +58,12 @@ export const babelConfigFile = require.resolve("../config/babel/babelrc");
  * .
  */
 export const babelPresetFile = require.resolve("../config/babel/preset");
+
+/**
+ * Contains the webpack utilities and configuration.
+ *
+ * If you want to customize your own webpack config, then you can use this
+ * to get xarc's internal webpack configs and modify them to your need.
+ *
+ */
+export * as xarcWebpack from "@xarc/webpack";

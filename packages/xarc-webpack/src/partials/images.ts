@@ -6,7 +6,7 @@ import { xAppRequire } from "@xarc/app";
 
 const isomorphicLoader = xAppRequire.resolve("isomorphic-loader");
 const optionalRequire = require("optional-require")(require);
-const { logger } = require("@xarc/app-dev/lib/logger");
+import { logger } from "@xarc/dev-base";
 
 function getCdnLoader(optLoader) {
   if (optLoader) {

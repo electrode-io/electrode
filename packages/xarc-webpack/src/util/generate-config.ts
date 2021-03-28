@@ -9,7 +9,7 @@ const xsh = require("xsh");
 const partials = require("../partials");
 const WebpackConfigComposer = require("webpack-config-composer");
 const optionalRequire = require("optional-require")(require);
-const { logger } = require("@xarc/app-dev/lib/logger");
+import { logger } from "@xarc/dev-base";
 const ck = require("chalker");
 
 const xarcWebpackConfig = Symbol("Electrode X webpack config");

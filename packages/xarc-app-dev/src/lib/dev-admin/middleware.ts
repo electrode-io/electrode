@@ -99,7 +99,11 @@ export class Middleware {
   setup() {
     const options = this._options;
 
-    const config = require(getWebpackStartConfig("webpack.config.dev.js", false)); // eslint-disable-line
+    let config = require(getWebpackStartConfig("webpack.config.dev.js", false)); // eslint-disable-line
+
+    if (config.__esModule) {
+      config = config.default;
+    }
 
     this._hmrPath = controlPaths.hmr;
 

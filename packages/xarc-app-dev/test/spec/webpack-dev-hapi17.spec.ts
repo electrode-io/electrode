@@ -9,7 +9,7 @@ import electrodeServer from "electrode-server";
 
 const moduleName = "../../src/lib/index";
 
-describe("dev-hapi 17", function() {
+describe("dev-hapi 17", function () {
   this.timeout(10000);
 
   before(() => {
@@ -53,9 +53,7 @@ describe("dev-hapi 17", function() {
       },
       resp => {
         expect(resp.statusCode).to.equal(200);
-        expect(data.request.app)
-          .to.have.key("webpackDev")
-          .that.is.an("object");
+        expect(data.request.app).to.have.key("webpackDev").that.is.an("object");
       },
       runFinally(() => server.stop())
     );
