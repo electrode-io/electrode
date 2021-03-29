@@ -1,3 +1,42 @@
+# 3/29/2021
+
+## Packages
+
+### Directly Updated
+
+- `@xarc/app@10.0.4` `(10.0.3 => 10.0.4)`
+- `@xarc/app-dev@10.0.4` `(10.0.3 => 10.0.4)`
+- `@xarc/dev-base@0.1.0` `(0.0.2 => 0.1.0)`
+- `@xarc/webpack@11.0.3` `(11.0.2 => 11.0.3)`
+- `subapp-web@1.0.48` `(1.0.47 => 1.0.48)`
+
+### Lerna Updated
+
+- `subapp-pbundle@0.0.42` `(0.0.41 => 0.0.42)`
+- `subapp-react@0.0.39` `(0.0.38 => 0.0.39)`
+- `subapp-redux@1.0.48` `(1.0.47 => 1.0.48)`
+
+## Commits
+
+- `packages/xarc-app-dev`
+
+  - default to enable loading app webpack config [commit](http://github.com/electrode-io/electrode/commit/40b24d323199c51f4742873fcca0c7fe60bddbc6)
+
+- `packages/xarc-dev-base`
+
+  - default to enable loading app webpack config [commit](http://github.com/electrode-io/electrode/commit/40b24d323199c51f4742873fcca0c7fe60bddbc6)
+  - [minor] mark for release [commit](http://github.com/electrode-io/electrode/commit/19238ebfb51acfea1ef755f87971e8f0f1c7afd2)
+
+- `packages/xarc-webpack`
+
+  - default to enable loading app webpack config [commit](http://github.com/electrode-io/electrode/commit/40b24d323199c51f4742873fcca0c7fe60bddbc6)
+  - continue if can't make output dir for webpack [commit](http://github.com/electrode-io/electrode/commit/e39ed8cec8608a3dffb8b363741db6d74f47a2a4)
+
+- `packages/subapp-web`
+
+  - fix subapp-web matchEntry for webpack5 [commit](http://github.com/electrode-io/electrode/commit/21388945280230ef1e54e4322f47285727f9facf)
+  - fix subapp v1 loadSubAppBundles [commit](http://github.com/electrode-io/electrode/commit/3eeb04e746798b33b182e7235d692efeff5cf8e5)
+
 # 3/25/2021
 
 ## Packages
