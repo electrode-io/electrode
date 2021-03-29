@@ -1,6 +1,6 @@
 {
   "name": "@xarc/webpack",
-  "version": "11.0.2",
+  "version": "11.0.3",
   "description": "Electrode X webpack config",
   "main": "lib/index.js",
   "homepage": "http://www.electrode.io",
@@ -34,7 +34,7 @@
     "Joel Chen <xchen@walmartlabs.com>"
   ],
   "dependencies": {
-    "@xarc/dev-base": "^0.0.1",
+    "@xarc/dev-base": "^0.1.0",
     "autoprefixer": "^9.6.0",
     "babel-loader": "^8.1.0",
     "chalk": "^4.1.0",
@@ -58,8 +58,8 @@
     "xsh": "^0.4.5"
   },
   "peerDependencies": {
-    "@xarc/app": "^10.0.3",
-    "@xarc/app-dev": "^10.0.3"
+    "@xarc/app": "^10.0.4",
+    "@xarc/app-dev": "^10.0.4"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
@@ -70,7 +70,7 @@
     "@types/sinon-chai": "^3.2.4",
     "@typescript-eslint/eslint-plugin": "^2.21.0",
     "@typescript-eslint/parser": "^2.21.0",
-    "@xarc/app": "^10.0.3",
+    "@xarc/app": "^10.0.4",
     "@xarc/module-dev": "^2.2.5",
     "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
