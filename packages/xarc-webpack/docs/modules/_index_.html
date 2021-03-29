@@ -71,7 +71,6 @@
 						<section class="tsd-index-section ">
 							<h3>References</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="_index_.html#jsonpscriptsrcplugin" class="tsd-kind-icon">Jsonp<wbr>Script<wbr>Src<wbr>Plugin</a></li>
 								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="_index_.html#subappwebpackplugin" class="tsd-kind-icon">Sub<wbr>App<wbr>Webpack<wbr>Plugin</a></li>
 								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="_index_.html#compose" class="tsd-kind-icon">compose</a></li>
 								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="_index_.html#initwebpackconfigcomposer" class="tsd-kind-icon">init<wbr>Webpack<wbr>Config<wbr>Composer</a></li>
@@ -86,8 +85,6 @@
 						<section class="tsd-index-section ">
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="_index_.html#env" class="tsd-kind-icon">env</a></li>
-								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="_index_.html#options" class="tsd-kind-icon">options</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="_index_.html#webpack" class="tsd-kind-icon">webpack</a></li>
 							</ul>
 						</section>
@@ -95,6 +92,8 @@
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_index_.html#applypartials" class="tsd-kind-icon">apply<wbr>Partials</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_index_.html#getcomposeoptions" class="tsd-kind-icon">get<wbr>Compose<wbr>Options</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_index_.html#getenvprofile" class="tsd-kind-icon">get<wbr>Env<wbr>Profile</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -111,14 +110,9 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>References</h2>
 				<section class="tsd-panel tsd-member tsd-kind-reference tsd-parent-kind-module">
-					<a name="jsonpscriptsrcplugin" class="tsd-anchor"></a>
-					<h3>Jsonp<wbr>Script<wbr>Src<wbr>Plugin</h3>
-					Re-exports <a href="../classes/_plugins_jsonp_script_src_plugin_.jsonpscriptsrcplugin.html">JsonpScriptSrcPlugin</a>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-reference tsd-parent-kind-module">
 					<a name="subappwebpackplugin" class="tsd-anchor"></a>
 					<h3>Sub<wbr>App<wbr>Webpack<wbr>Plugin</h3>
-					Re-exports <a href="../classes/_plugins_subapp_plugin_.subappwebpackplugin.html">SubAppWebpackPlugin</a>
+					Re-exports <a href="../classes/_plugins_subapp_plugin_webpack5_.subappwebpackplugin.html">SubAppWebpackPlugin</a>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-reference tsd-parent-kind-module">
 					<a name="compose" class="tsd-anchor"></a>
@@ -139,7 +133,7 @@
 					<div class="tsd-signature tsd-kind-icon">Plain<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L227">index.ts:227</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L251">index.ts:251</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -152,32 +146,12 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Variables</h2>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
-					<a name="env" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> env</h3>
-					<div class="tsd-signature tsd-kind-icon">env<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = process.env.ELECTRODE_WEBPACK_PROFILE || &quot;production&quot;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L16">index.ts:16</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
-					<a name="options" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> options</h3>
-					<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = require(&#x60;./options/${env}&#x60;)</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L17">index.ts:17</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
 					<a name="webpack" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> webpack</h3>
 					<div class="tsd-signature tsd-kind-icon">webpack<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = require(&quot;webpack&quot;)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L25">index.ts:25</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L44">index.ts:44</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -201,7 +175,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L266">index.ts:266</a></li>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L290">index.ts:290</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -248,6 +222,71 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="getcomposeoptions" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> get<wbr>Compose<wbr>Options</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Compose<wbr>Options<span class="tsd-signature-symbol">(</span>envProfile<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L33">index.ts:33</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The options that will be used to compose the final webpack config</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> envProfile: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>the env profile such as <code>development</code> or <code>production</code>, will call <code>getEnvProfile</code>
+											to get it if not passed</p>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+							<p>compose options for the given env profile</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="getenvprofile" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> get<wbr>Env<wbr>Profile</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Env<wbr>Profile<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L20">index.ts:20</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Return the env profile for compiling the app.</p>
+								</div>
+								<p>Values could be:</p>
+								<ul>
+									<li><code>development</code> - for development</li>
+									<li><code>production</code> - building app for production</li>
+									<li><code>test</code> - running Karma test</li>
+									<li><code>coverage</code> - running Karma test with coverage</li>
+								</ul>
+								<p><code>@xarc/app-dev</code> will set this up depending on the action user is taking.</p>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Object literals</h2>
@@ -257,7 +296,7 @@
 					<div class="tsd-signature tsd-kind-icon">default<wbr>Configs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L291">index.ts:291</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L315">index.ts:315</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -281,7 +320,7 @@
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L300">index.ts:300</a></li>
+										<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L324">index.ts:324</a></li>
 									</ul>
 								</aside>
 								<div class="tsd-comment tsd-typography">
@@ -320,7 +359,7 @@
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L327">index.ts:327</a></li>
+										<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L351">index.ts:351</a></li>
 									</ul>
 								</aside>
 								<div class="tsd-comment tsd-typography">
@@ -359,7 +398,7 @@
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L315">index.ts:315</a></li>
+										<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L339">index.ts:339</a></li>
 									</ul>
 								</aside>
 								<div class="tsd-comment tsd-typography">
@@ -395,13 +434,16 @@
 					<div class="tsd-signature tsd-kind-icon">partials<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L34">index.ts:34</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L58">index.ts:58</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The webpack config partials this module provides for building a webapp</p>
+							<p>The webpack config partials xarc uses to compose the final webpack config for building
+							your application.</p>
 						</div>
+						<p>If you want to customize the webpack config, you can create your own <code>webpack.config.ts</code>
+						and use these partials to compose your own final webpack config.</p>
 					</div>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
 						<a name="partials.babel" class="tsd-anchor"></a>
@@ -409,7 +451,7 @@
 						<div class="tsd-signature tsd-kind-icon">babel<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials._babel</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L87">index.ts:87</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L111">index.ts:111</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -424,7 +466,7 @@
 						<div class="tsd-signature tsd-kind-icon">base<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials[&quot;_base-options&quot;]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L38">index.ts:38</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L62">index.ts:62</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -439,7 +481,7 @@
 						<div class="tsd-signature tsd-kind-icon">dev<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials._dev</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L132">index.ts:132</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L156">index.ts:156</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -454,7 +496,7 @@
 						<div class="tsd-signature tsd-kind-icon">dev<wbr>Mode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials[&quot;_dev-mode&quot;]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L153">index.ts:153</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L177">index.ts:177</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -469,7 +511,7 @@
 						<div class="tsd-signature tsd-kind-icon">dll<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials._dll</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L137">index.ts:137</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L161">index.ts:161</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -479,7 +521,7 @@
 						<div class="tsd-signature tsd-kind-icon">dll<wbr>Entry<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials[&quot;_dll-entry&quot;]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L133">index.ts:133</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L157">index.ts:157</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -489,7 +531,7 @@
 						<div class="tsd-signature tsd-kind-icon">dll<wbr>Load<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials[&quot;_dll-load&quot;]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L136">index.ts:136</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L160">index.ts:160</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -499,7 +541,7 @@
 						<div class="tsd-signature tsd-kind-icon">dll<wbr>Output<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials[&quot;_dll-output&quot;]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L134">index.ts:134</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L158">index.ts:158</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -509,7 +551,7 @@
 						<div class="tsd-signature tsd-kind-icon">dll<wbr>Reference<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials[&quot;_dll-reference&quot;]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L135">index.ts:135</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L159">index.ts:159</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -519,7 +561,7 @@
 						<div class="tsd-signature tsd-kind-icon">entry<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials._entry</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L42">index.ts:42</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L66">index.ts:66</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -534,7 +576,7 @@
 						<div class="tsd-signature tsd-kind-icon">extract<wbr>Style<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials[&quot;_extract-style&quot;]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L91">index.ts:91</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L115">index.ts:115</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -549,7 +591,7 @@
 						<div class="tsd-signature tsd-kind-icon">fail<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials._fail</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L127">index.ts:127</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L151">index.ts:151</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -564,7 +606,7 @@
 						<div class="tsd-signature tsd-kind-icon">fonts<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials._fonts</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L96">index.ts:96</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L120">index.ts:120</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -579,7 +621,7 @@
 						<div class="tsd-signature tsd-kind-icon">images<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials._images</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L100">index.ts:100</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L124">index.ts:124</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -594,7 +636,7 @@
 						<div class="tsd-signature tsd-kind-icon">isomorphic<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials._isomorphic</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L104">index.ts:104</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L128">index.ts:128</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -609,7 +651,7 @@
 						<div class="tsd-signature tsd-kind-icon">karma<wbr>Base<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials[&quot;_test-base&quot;]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L70">index.ts:70</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L94">index.ts:94</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -624,7 +666,7 @@
 						<div class="tsd-signature tsd-kind-icon">karma<wbr>Entry<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials[&quot;_test-entry&quot;]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L74">index.ts:74</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L98">index.ts:98</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -639,7 +681,7 @@
 						<div class="tsd-signature tsd-kind-icon">karma<wbr>Output<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials[&quot;_test-output&quot;]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L78">index.ts:78</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L102">index.ts:102</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -654,7 +696,7 @@
 						<div class="tsd-signature tsd-kind-icon">karma<wbr>Resolve<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials[&quot;_test-resolve&quot;]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L82">index.ts:82</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L106">index.ts:106</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -669,7 +711,7 @@
 						<div class="tsd-signature tsd-kind-icon">locales<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials._locales</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L123">index.ts:123</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L147">index.ts:147</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -684,7 +726,7 @@
 						<div class="tsd-signature tsd-kind-icon">minify<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials._uglify</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L119">index.ts:119</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L143">index.ts:143</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -701,7 +743,7 @@
 						<div class="tsd-signature tsd-kind-icon">node<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials._node</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L50">index.ts:50</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L74">index.ts:74</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -716,7 +758,7 @@
 						<div class="tsd-signature tsd-kind-icon">output<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials._output</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L54">index.ts:54</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L78">index.ts:78</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -731,7 +773,7 @@
 						<div class="tsd-signature tsd-kind-icon">prod<wbr>Mode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials[&quot;_prod-mode&quot;]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L157">index.ts:157</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L181">index.ts:181</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -746,7 +788,7 @@
 						<div class="tsd-signature tsd-kind-icon">progress<wbr>Simple<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials[&quot;_simple-progress&quot;]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L141">index.ts:141</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L165">index.ts:165</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -761,7 +803,7 @@
 						<div class="tsd-signature tsd-kind-icon">pwa<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials._pwa</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L108">index.ts:108</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L132">index.ts:132</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -776,7 +818,7 @@
 						<div class="tsd-signature tsd-kind-icon">resolve<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials._resolve</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L58">index.ts:58</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L82">index.ts:82</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -791,7 +833,7 @@
 						<div class="tsd-signature tsd-kind-icon">resolve<wbr>Loader<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials[&quot;_resolve-loader&quot;]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L62">index.ts:62</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L86">index.ts:86</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -806,7 +848,7 @@
 						<div class="tsd-signature tsd-kind-icon">source<wbr>Maps<wbr>Inline<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials[&quot;_sourcemaps-inline&quot;]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L145">index.ts:145</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L169">index.ts:169</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -821,7 +863,7 @@
 						<div class="tsd-signature tsd-kind-icon">source<wbr>Maps<wbr>Remote<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials[&quot;_sourcemaps-remote&quot;]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L149">index.ts:149</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L173">index.ts:173</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -836,7 +878,7 @@
 						<div class="tsd-signature tsd-kind-icon">stats<wbr>Writer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials._stats</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L112">index.ts:112</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L136">index.ts:136</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -851,7 +893,7 @@
 						<div class="tsd-signature tsd-kind-icon">subapp2<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials[&quot;_subapp2&quot;]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L66">index.ts:66</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L90">index.ts:90</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -866,7 +908,7 @@
 						<div class="tsd-signature tsd-kind-icon">subapp<wbr>Chunks<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = genPartials[&quot;_subapp-chunks&quot;]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L46">index.ts:46</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L70">index.ts:70</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -882,7 +924,7 @@
 					<div class="tsd-signature tsd-kind-icon">profiles<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L172">index.ts:172</a></li>
+							<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L196">index.ts:196</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -903,7 +945,7 @@
 						<div class="tsd-signature tsd-kind-icon">base<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [partials.baseOptions,partials.entry,partials.subappChunks,partials.output,partials.resolve,partials.resolveLoader,partials.subapp2,partials.babel,partials.extractStyle,partials.fonts,partials.images,partials.statsWriter,partials.isomorphic,partials.node]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L179">index.ts:179</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L203">index.ts:203</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -921,7 +963,7 @@
 						<div class="tsd-signature tsd-kind-icon">development<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [partials.devMode, partials.dev]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L209">index.ts:209</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L233">index.ts:233</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -936,7 +978,7 @@
 						<div class="tsd-signature tsd-kind-icon">karma<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [partials.devMode,partials.sourceMapsInline,partials.progressSimple,partials.karmaBase,partials.karmaEntry,partials.karmaOutput,partials.karmaResolve]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L213">index.ts:213</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L237">index.ts:237</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -951,7 +993,7 @@
 						<div class="tsd-signature tsd-kind-icon">production<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [partials.prodMode,partials.dllReference,partials.minify,partials.locales,partials.sourceMapsRemote,partials.progressSimple]</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jchip/electrode/blob/b4c85cd1/packages/xarc-webpack/src/index.ts#L198">index.ts:198</a></li>
+								<li>Defined in <a href="https://github.com/jchip/electrode/blob/40b24d32/packages/xarc-webpack/src/index.ts#L222">index.ts:222</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -977,9 +1019,6 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-reference tsd-parent-kind-module">
-						<a href="_index_.html#jsonpscriptsrcplugin" class="tsd-kind-icon">Jsonp<wbr>Script<wbr>Src<wbr>Plugin</a>
-					</li>
-					<li class=" tsd-kind-reference tsd-parent-kind-module">
 						<a href="_index_.html#subappwebpackplugin" class="tsd-kind-icon">Sub<wbr>App<wbr>Webpack<wbr>Plugin</a>
 					</li>
 					<li class=" tsd-kind-reference tsd-parent-kind-module">
@@ -992,16 +1031,16 @@
 						<a href="_index_.html#plainconfig" class="tsd-kind-icon">Plain<wbr>Config</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="_index_.html#env" class="tsd-kind-icon">env</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="_index_.html#options" class="tsd-kind-icon">options</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-module">
 						<a href="_index_.html#webpack" class="tsd-kind-icon">webpack</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="_index_.html#applypartials" class="tsd-kind-icon">apply<wbr>Partials</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="_index_.html#getcomposeoptions" class="tsd-kind-icon">get<wbr>Compose<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="_index_.html#getenvprofile" class="tsd-kind-icon">get<wbr>Env<wbr>Profile</a>
 					</li>
 					<li class=" tsd-kind-object-literal tsd-parent-kind-module">
 						<a href="_index_.html#defaultconfigs" class="tsd-kind-icon">default<wbr>Configs</a>
