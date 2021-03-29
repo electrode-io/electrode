@@ -71,7 +71,12 @@ const utils = {
     // <entryName>.~<hash>.bundle[.dev].js
     // See xarc-webpack/lib/partial/subapp-chunks.js
     //
-    const matchEntry = x => x.startsWith(`${entryName}.bundle`) || x.startsWith(`${entryName}.~`);
+    const matchEntry = x =>
+      x &&
+      (x.startsWith(`${entryName}.bundle`) ||
+        // if a subapp comes from a package in node_modules, webpack5 names entry like this
+        x.startsWith(`${entryName}~_.bundle`) ||
+        x.startsWith(`${entryName}.~`));
     // map all IDs to actual assets
     const bundleAssets = entryPoints
       .map(id => {
