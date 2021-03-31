@@ -158,11 +158,16 @@ export type WebpackOptions = {
   minify?: boolean;
 
   /**
-   * For customizing xarc's webpack config, you can create your own `webpack.config.ts` in your
-   * app's root dir and xarc will load it if it exist.
+   * Use this flag to control how we load your `webpack.config.js|ts`.
    *
-   * If you want to turn off this behavior, set this flag to `false`.
+   * When you create your own `webpack.config.js|ts` to customize webpack config, we start webpack
+   * with your config, which is responsible for loading xarc's internal config.
    *
+   * If you want to turn off this behavior so we start with xarc's internal webpack config
+   * and then load yours, then set this to false.
+   *
+   * If you use `.ts` (typescript) for your config file, then we will try to load `ts-node/register`.
+   * You need to install ts-node package and have your tsconfig setup for your typescript.
    */
   useAppWebpackConfig?: boolean;
 };
