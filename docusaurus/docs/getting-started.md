@@ -11,10 +11,10 @@ In this quick start guide, we will show you how to create and run your first app
 
 ### Requirements
 
-1. Install the [node.js] version 12.x.x or later
+1. Install [node.js] version 12.x.x or later
 
-   - We recommend a tool such as [nvm] for managing node.js installations.
-   - If you are on Windows, then [universal nvm] is recommended.
+   - For Unix or Windows, we recommend a [universal node version manager] tool for managing node.js installations.
+   - If you are using Unix only, then the Unix only [nvm] tool is a good option.
 
 ### Creating Your First App
 
@@ -49,5 +49,5 @@ Licensed under the [Apache License, Version 2.0]
 [apache license, version 2.0]: https://www.apache.org/licenses/LICENSE-2.0
 [nvm]: https://github.com/nvm-sh/nvm#install-script
 [node.js]: https://nodejs.org/en/download
-[universal nvm]: https://www.npmjs.com/package/@jchip/nvm
+[universal node version manager]: https://www.npmjs.com/package/@jchip/nvm
 [react]: https://reactjs.org/

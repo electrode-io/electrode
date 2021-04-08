@@ -13,7 +13,7 @@ Your app consists of these essential top level directories and files:
 
 | Files and Dirs    | Description                                                                |
 | ----------------- | -------------------------------------------------------------------------- |
-| `package.json`    | npm's package.json                                                         |
+| `package.json`    | node.js/npm package.json                                                   |
 | `xrun-tasks.ts`   | The file that loads Electrode X's development tasks for `xrun` task runner |
 | `tsconfig.json`   | Typescript config                                                          |
 | `babel.config.js` | Babel config                                                               |
@@ -119,3 +119,5 @@ export async function fastifyPlugin(server: ElectrodeFastifyInstance) {
   });
 }
 ```
+
+[browserslist]: https://www.npmjs.com/package/browserslist
