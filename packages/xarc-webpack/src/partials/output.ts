@@ -4,7 +4,7 @@ import * as Path from "path";
 import { loadXarcOptions } from "../util/load-xarc-options";
 import * as mkdirp from "mkdirp";
 
-module.exports = () => {
+export const webpackPartial = () => {
   const { babel, namespace } = loadXarcOptions();
 
   const inspectpack = process.env.INSPECTPACK_DEBUG === "true";

@@ -1,5 +1,7 @@
 // webpack config collected from env-webpack.ts
 
+import { RemoteSubAppOptions } from "./remote-federation";
+
 /**
  * User configurable options that are related to Webpack
  */
@@ -170,4 +172,17 @@ export type WebpackOptions = {
    * You need to install ts-node package and have your tsconfig setup for your typescript.
    */
   useAppWebpackConfig?: boolean;
+
+  /**
+   * Specify Module Federation options to expose or consume remote V1 subapps through webpack5's
+   * ModuleFederationPlugin.  See docs at https://webpack.js.org/concepts/module-federation/
+   *
+   * TODO: Exposing SubApps remotely has these limitations:
+   * 1. `publicPath` must be `"auto"` to expose subapps remotely.
+   * 2. Due to 1, cannot use CDN for assets.
+   * 3. Cannot use `"single"` shared webpack `runtimeChunk` optimization.
+   *
+   * @remark this is only for subappV1
+   */
+  v1RemoteSubApps?: RemoteSubAppOptions;
 };

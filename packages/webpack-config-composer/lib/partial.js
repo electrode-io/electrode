@@ -45,7 +45,7 @@ class Partial {
   compose(options) {
     options = Object.assign({}, this.options, options);
 
-    const config = this.config;
+    const config = this.config.webpackPartial || this.config;
     const configType = typeof config;
 
     let ret;

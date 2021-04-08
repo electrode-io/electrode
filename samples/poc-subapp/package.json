@@ -36,9 +36,12 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.12.5",
+    "@module-federation/concat-runtime": "^0.0.1",
     "@xarc/app": "^8.1.6",
     "@xarc/fastify-server": "^2.0.0",
     "electrode-confippet": "^1.5.0",
+    "history": "^4.10.1",
+    "html-webpack-plugin": "^5.3.1",
     "react": "^16.13.1",
     "react-async-ssr": "^0.7.2",
     "react-dom": "^16.13.1",
@@ -49,7 +52,7 @@
     "subapp-react": "^0.0.21",
     "subapp-redux": "^1.0.30",
     "subapp-server": "^1.2.4",
-    "subapp-web": "^1.0.30"
+    "subapp-web": "^1.0.47"
   },
   "devDependencies": {
     "@xarc/app-dev": "^8.1.6",

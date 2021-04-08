@@ -18,6 +18,32 @@ process.env.APP_SERVER_PORT = 3100;
 
 // process.env.KARMA_BROWSER = "phantomjs";
 
-const { loadDevTasks } = require("@xarc/app-dev");
+const { loadDevTasks, xrun } = require("@xarc/app-dev");
 
-loadDevTasks();
+loadDevTasks(xrun, {
+  webpackOptions: {
+    v1RemoteSubApps: {
+      name: "shell-app",
+      shared: {
+        react: {
+          import: "react",
+          shareKey: "react",
+          shareScope: "default",
+          singleton: true
+        },
+        "react-dom": {
+          singleton: true
+        },
+        history: {
+          singleton: true
+        },
+        "subapp-web": {
+          singleton: true
+        },
+        "@babel/runtime": {
+          singleton: true
+        }
+      }
+    }
+  }
+});
