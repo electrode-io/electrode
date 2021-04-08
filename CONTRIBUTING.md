@@ -10,15 +10,13 @@ This repo uses a custom [Lerna] mono-repo setup with [fyn] as package manager to
 
 ### Setup
 
+This is a mono-repo and we use [fyn] to install and local linking packages when doing development. You can use `npm run`, but never use `npm install` in our repo else things will break. Below, `fun` is an alias for `npm run` that [fyn] provides.
+
 Install some CLI tools globally for convenience:
 
 ```bash
 $ npm install -g xclap-cli @xarc/run-cli fyn
-$ fyn -v
-0.2.47
 ```
-
-> Make sure `fyn`'s version is at least `0.2.47`
 
 Fork and clone the repo at <https://github.com/electrode-io/electrode.git> and bootstrap all the packages.
 
@@ -29,11 +27,7 @@ $ fyn # install node_modules
 $ fun bootstrap # run npm script bootstrap
 ```
 
-### Quick Test
-
-This is a mono-repo and we use [fyn] to install and local linking packages when doing development. You can use `npm run`, but never use `npm install` in our repo else things will break. Below, `fun` is an alias for `npm run` that [fyn] provides.
-
-#### Try a sample
+### Try a sample
 
 Now you can go to the `samples` folder and try the `create-app-demo` sample app, develop and test your changes over there. This is the exact same app that our create-app package generates.
 
@@ -43,14 +37,14 @@ $ fyn
 $ fun dev
 ```
 
-After running above, you should see some output in the console with `[DEV ADMIN]`. You can press `M` for the dev menu.
+You should see some output in the console with `[DEV ADMIN]`. You can press `M` for the dev menu.
 
 And when you open the browser at `http://localhost:3000`, you should see the demo web page.
 
 ### **Useful** Notes
 
-- You should bootstrap the entire repo at the top dir at least once with `xrun bootstrap`
-- After you make changes to any module under packages, if you want to test them in one of the samples, just run [fyn] in that sample and it will ensure all changed local packages are properly rebuilt.
+- You should bootstrap the entire repo at the top dir at least once with `fun bootstrap`
+- After you make changes to any module under packages, if you want to test them in one of the samples, just run [fyn] in that sample and it will ensure all changed local packages are properly rebuilt and installed.
 
 #### Test with `@xarc/create-app`
 

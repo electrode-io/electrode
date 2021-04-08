@@ -4,15 +4,15 @@
   "description": "Electrode Platform for NodeJS/React Universal Application",
   "homepage": "http://www.electrode.io",
   "scripts": {
-    "test": "clap test",
-    "test-generator": "clap test-generator",
-    "test-boilerplate": "clap test-boilerplate",
-    "bootstrap": "clap bootstrap",
-    "clean": "npm run nuke && npm run nuke-packages && npm run nuke-samples",
+    "test": "xrun user/test",
+    "test-generator": "xrun user/test-generator",
+    "test-boilerplate": "xrun user/test-boilerplate",
+    "bootstrap": "xrun user/bootstrap",
+    "clean": "xrun -s nuke nuke-packages nuke-samples",
     "nuke": "rm -rf node_modules tmp lerna-debug.log npm-debug.log",
     "nuke-packages": "rm -rf packages/*/node_modules packages/*/coverage",
     "nuke-samples": "rm -rf samples/*/node_modules samples/*/coverage samples/*/dist samples/*/.isomorphic-loader-config.json samples/*/.etmp",
-    "update-changelog": "clap update-changelog"
+    "update-changelog": "xrun user/update-changelog"
   },
   "devDependencies": {
     "@xarc/run": "^1.0.4",

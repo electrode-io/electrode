@@ -103,7 +103,7 @@ const testCreateApp = async (testDir, name, clean, runTest, prompts) => {
   shell.popd();
 };
 
-xrun.load({
+xrun.load("user", {
   ".lerna.check": "~$lerna run --stream check",
   bootstrap: "~$fynpo",
   test: ["bootstrap", ".lerna.check", "build-test"],
