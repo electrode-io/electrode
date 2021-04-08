@@ -1,12 +1,12 @@
 "use strict";
 
-const WebpackConfigComposer = require("../..");
+import { WebpackConfigComposer } from "../..";
 import { expect } from "chai";
-const fooPartial = require("../fixtures/partial/foo");
-const barPartial = require("../fixtures/partial/bar");
-const loaderPartial = require("../fixtures/partial/loader");
-const _ = require("lodash");
-const FooPlugin = require("../fixtures/plugins/foo-plugin");
+import fooPartial  from "../fixtures/partial/foo";
+import barPartial  from "../fixtures/partial/bar";
+import loaderPartial  from "../fixtures/partial/loader";
+import _ from "lodash";
+import {FooPlugin}  from "../fixtures/plugins/foo-plugin";
 
 describe("composer", function () {
   it("should accept partials and generate config", () => {
@@ -40,7 +40,7 @@ describe("composer", function () {
         }
       }
     });
-    composer.addPartials(fooPartial, barPartial);
+    composer.addPartials([fooPartial, barPartial]);
     expect(composer.profiles).to.have.keys("a", "b");
     expect(composer.getProfile("a")).to.exist;
     expect(composer.getPartial("test")).to.exist;
@@ -94,7 +94,7 @@ describe("composer", function () {
   });
 
   it("instance should have deleteCustomProps", () => {
-    const composer = new WebpackConfigComposer();
+    const composer = new WebpackConfigComposer({});
     expect(
       composer.deleteCustomProps({
         _name: "test",
@@ -104,7 +104,7 @@ describe("composer", function () {
   });
 
   it("should skip adding __name to plugins", () => {
-    const composer = new WebpackConfigComposer();
+    const composer = new WebpackConfigComposer({});
     composer.addPartials({
       foo: {
         config: {
@@ -124,8 +124,8 @@ describe("composer", function () {
   });
 
   it("should call a partial config if it's a function", () => {
-    const composer = new WebpackConfigComposer();
-    composer.addPartials(fooPartial, loaderPartial);
+    const composer = new WebpackConfigComposer({});
+    composer.addPartials([fooPartial, loaderPartial]);
     const config = composer.compose(
       {},
       [
@@ -150,12 +150,12 @@ describe("composer", function () {
   });
 
   it("should call return function twice to get final partial config", () => {
-    const composer = new WebpackConfigComposer();
-    composer.addPartials(fooPartial, {
+    const composer = new WebpackConfigComposer({});
+    composer.addPartials([fooPartial, {
       loader: {
         config: () => require("../fixtures/partial/loader").loader.config
       }
-    });
+    }]);
     const config = composer.compose(
       {},
       { partials: { loader: {} } }
@@ -164,7 +164,7 @@ describe("composer", function () {
   });
 
   it("should throw if a partial config cannot be processed", () => {
-    const composer = new WebpackConfigComposer();
+    const composer = new WebpackConfigComposer({});
     composer.addPartials({
       test: {
         config: true
@@ -179,15 +179,15 @@ describe("composer", function () {
   });
 
   it("should allow a config function to apply the config by returning nothing", () => {
-    const composer = new WebpackConfigComposer();
-    composer.addPartials(fooPartial, {
+    const composer = new WebpackConfigComposer({});
+    composer.addPartials([fooPartial, {
       loader: {
         config: options => {
           const config = require("../fixtures/partial/loader").loader.config(options);
           _.merge(options.currentConfig, config);
         }
       }
-    });
+    }]);
     const config = composer.compose(
       {},
       { partials: { loader: {} } }
@@ -197,13 +197,13 @@ describe("composer", function () {
 
   describe("addProfiles", function () {
     it("should accept multiple profiles", () => {
-      const composer = new WebpackConfigComposer();
+      const composer = new WebpackConfigComposer({});
       composer.addProfiles({ a: { partials: {} }, b: { partials: {} } });
       expect(composer.profiles).to.have.keys("a", "b");
     });
 
     it("should accept profiles as an array", () => {
-      const composer = new WebpackConfigComposer();
+      const composer = new WebpackConfigComposer({});
       composer.addProfiles([{ a: { partials: {} }, b: { partials: {} } }]);
       expect(composer.profiles).to.have.keys("a", "b");
     });
@@ -211,18 +211,16 @@ describe("composer", function () {
 
   describe("addProfile", function () {
     it("should take list of partial names for new profile", () => {
-      const composer = new WebpackConfigComposer();
-      composer.addProfile("test", "a", "b", "c");
+      const composer = new WebpackConfigComposer({});
+      composer.addProfile("test", "a");
       const prof = composer.getProfile("test");
       expect(prof.partials).to.deep.equal({
-        a: {},
-        b: {},
-        c: {}
+        a: {}
       });
     });
 
     it("should add profile with an object of partials", () => {
-      const composer = new WebpackConfigComposer();
+      const composer = new WebpackConfigComposer({});
       composer.addProfile("test", {
         a: {},
         b: {},
@@ -239,8 +237,8 @@ describe("composer", function () {
 
   describe("addPartialToProfile", function () {
     it("should create profile if it doesn't exist", () => {
-      const composer = new WebpackConfigComposer();
-      composer.addPartialToProfile("user", "test", { plugins: [] });
+      const composer = new WebpackConfigComposer({});
+      composer.addPartialToProfile("user", "test", { plugins: [] }, {});
       const user = composer.getPartial("user");
       expect(user).to.exist;
       expect(user.config).to.deep.equal({ plugins: [] });
@@ -249,8 +247,8 @@ describe("composer", function () {
     });
 
     it("should add the partial", () => {
-      const composer = new WebpackConfigComposer();
-      composer.addPartialToProfile("user", "test", { plugins: [] });
+      const composer = new WebpackConfigComposer({});
+      composer.addPartialToProfile("user", "test", { plugins: [] }, {});
       const user = composer.getPartial("user");
       expect(user).to.exist;
       expect(user.config).to.deep.equal({ plugins: [] });
@@ -258,9 +256,9 @@ describe("composer", function () {
     });
 
     it("should use existing profile", () => {
-      const composer = new WebpackConfigComposer();
+      const composer = new WebpackConfigComposer({});
       composer.addProfile("test", "foo");
-      composer.addPartialToProfile("user", "test", { plugins: [] });
+      composer.addPartialToProfile("user", "test", { plugins: [] }, {});
       const prof = composer.getProfile("test");
       expect(prof).to.exist;
       expect(prof.getPartial("foo")).to.deep.equal({});
@@ -269,7 +267,7 @@ describe("composer", function () {
 
   describe("addPartials", function () {
     it("should add new partial as class intance", () => {
-      const composer = new WebpackConfigComposer();
+      const composer = new WebpackConfigComposer({});
       composer.addPartials(fooPartial);
       const foo = composer.getPartial("foo");
       expect(foo.config).to.deep.equal(fooPartial.foo.config);
@@ -282,7 +280,7 @@ describe("composer", function () {
     });
 
     it("should add new partials as an array", () => {
-      const composer = new WebpackConfigComposer();
+      const composer = new WebpackConfigComposer({});
       composer.addPartials([fooPartial, barPartial]);
       expect(composer.getPartial("foo").config).to.deep.equal(fooPartial.foo.config);
       expect(composer.getPartial("bar").config).to.deep.equal(barPartial.bar.config);

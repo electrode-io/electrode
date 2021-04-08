@@ -1,6 +1,6 @@
 "use strict";
 
-const headConcatArrayMerge = require("../../lib/head-concat-array-merge");
+import headConcatArrayMerge from "../../lib/head-concat-array-merge";
 import { expect } from "chai";
 
 describe("head concat array", function () {

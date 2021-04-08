@@ -1,6 +1,6 @@
 "use strict";
 
-const deleteCustomProps = require("../../lib/delete-custom-props");
+import { deleteCustomProps } from "../../lib/delete-custom-props";
 import { expect } from "chai";
 
 describe("delete custom props", function () {

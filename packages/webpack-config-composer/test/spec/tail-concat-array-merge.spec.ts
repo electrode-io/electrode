@@ -1,6 +1,6 @@
 "use strict";
 
-const tailConcatArrayMerge = require("../../lib/tail-concat-array-merge");
+import tailConcatArrayMerge from "../../lib/tail-concat-array-merge";
 import { expect } from "chai";
 
 describe("tail concat array", function () {
