@@ -1,7 +1,7 @@
 "use strict";
 
 const headConcatArrayMerge = require("../../lib/head-concat-array-merge");
-const expect = require("chai").expect;
+import { expect } from "chai";
 
 describe("head concat array", function () {
   it("merge two arrays", () => {

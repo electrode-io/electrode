@@ -1,5 +1,5 @@
-module.exports = (a, b) => {
+export default (a, b) => {
   return (Array.isArray(a) && Array.isArray(b))
     ? [].concat(b).concat(a)
     : undefined;
-};
+  };

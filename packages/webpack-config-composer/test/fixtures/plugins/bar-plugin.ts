@@ -1,9 +1,9 @@
 "use strict";
 
-class BarPlugin {
+export class BarPlugin {
+  test: string;
+
   constructor() {
     this.test = "bar";
   }
 }
-
-module.exports = BarPlugin;

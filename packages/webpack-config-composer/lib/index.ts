@@ -5,11 +5,12 @@ const _ = require("lodash");
 const assert = require("assert");
 const Partial = require("./partial");
 const Profile = require("./profile");
-const { getConcatMethod } = require("./concat-method");
-
+import { getConcatMethod } from "./concat-method";
 const { PARTIALS, PROFILES } = require("./constants");
 
-class WebpackConfigComposer {
+export class WebpackConfigComposer {
+  logger: any;
+
   constructor(options) {
     options = options || {};
     this[PROFILES] = {};
@@ -48,7 +49,7 @@ class WebpackConfigComposer {
       // take argument as list of partial names
       const partialNames = Array.prototype.slice.call(arguments, 1);
       profile = new Profile(name);
-      partialNames.forEach(pn => {
+      partialNames.forEach((pn) => {
         profile.partials[pn] = {};
       });
     } else {
@@ -69,7 +70,7 @@ class WebpackConfigComposer {
       !profile.getPartial(partialName),
       `Partial ${partialName} already exist in profile ${profileName}`
     );
-    this.addPartial(partialName, config);
+    this.addPartial(partialName, config, null);
     profile.setPartial(partialName, partialOptions);
   }
 
@@ -153,7 +154,7 @@ class WebpackConfigComposer {
 
     const currentConfig = options.currentConfig || {};
 
-    const concat = getConcatMethod(options.concatArray);
+    const concat = getConcatMethod(options.concatArray, null);
 
     sortedKeys.forEach(partialName => {
       const partial = this.getPartial(partialName);
@@ -192,7 +193,3 @@ class WebpackConfigComposer {
     return deleteCustomProps(config);
   }
 }
-
-WebpackConfigComposer.deleteCustomProps = deleteCustomProps;
-
-module.exports = WebpackConfigComposer;

@@ -1,14 +1,14 @@
 "use strict";
 
 const WebpackConfigComposer = require("../..");
-const expect = require("chai").expect;
+import { expect } from "chai";
 const fooPartial = require("../fixtures/partial/foo");
 const barPartial = require("../fixtures/partial/bar");
 const loaderPartial = require("../fixtures/partial/loader");
 const _ = require("lodash");
 const FooPlugin = require("../fixtures/plugins/foo-plugin");
 
-describe("composer", function() {
+describe("composer", function () {
   it("should accept partials and generate config", () => {
     const composer = new WebpackConfigComposer({
       partials: {
@@ -195,7 +195,7 @@ describe("composer", function() {
     expect(config.module.rules[0]).to.equal("loader-rule1");
   });
 
-  describe("addProfiles", function() {
+  describe("addProfiles", function () {
     it("should accept multiple profiles", () => {
       const composer = new WebpackConfigComposer();
       composer.addProfiles({ a: { partials: {} }, b: { partials: {} } });
@@ -209,7 +209,7 @@ describe("composer", function() {
     });
   });
 
-  describe("addProfile", function() {
+  describe("addProfile", function () {
     it("should take list of partial names for new profile", () => {
       const composer = new WebpackConfigComposer();
       composer.addProfile("test", "a", "b", "c");
@@ -237,7 +237,7 @@ describe("composer", function() {
     });
   });
 
-  describe("addPartialToProfile", function() {
+  describe("addPartialToProfile", function () {
     it("should create profile if it doesn't exist", () => {
       const composer = new WebpackConfigComposer();
       composer.addPartialToProfile("user", "test", { plugins: [] });
@@ -267,7 +267,7 @@ describe("composer", function() {
     });
   });
 
-  describe("addPartials", function() {
+  describe("addPartials", function () {
     it("should add new partial as class intance", () => {
       const composer = new WebpackConfigComposer();
       composer.addPartials(fooPartial);

@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = {
+export default {
   PARTIALS: Symbol("partials"),
-  PROFILES: Symbol("profiles")
+  PROFILES: Symbol("profiles"),
 };

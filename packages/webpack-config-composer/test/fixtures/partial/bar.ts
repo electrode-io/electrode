@@ -1,12 +1,10 @@
-const BarPlugin = require("../plugins/bar-plugin");
+import { BarPlugin } from "../plugins/bar-plugin";
 
-module.exports = {
-  "bar": {
+export default {
+  bar: {
     config: {
       entry: "bar.js",
-      plugins: [
-        new BarPlugin()
-      ]
-    }
-  }
+      plugins: [new BarPlugin()],
+    },
+  },
 };

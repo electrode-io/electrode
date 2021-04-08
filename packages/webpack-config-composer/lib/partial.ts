@@ -1,13 +1,15 @@
 "use strict";
 
 const _ = require("lodash");
-const { getConcatMethod } = require("./concat-method");
+import { getConcatMethod } from "./concat-method";
 const assert = require("assert");
 
 const OVERRIDE = Symbol("override webpack config partial");
 const DATA = Symbol("webpack partial data");
 
-class Partial {
+export class Partial {
+  _name: any;
+
   constructor(name, data) {
     this._name = name;
     if (typeof data === "function") {
@@ -15,7 +17,7 @@ class Partial {
     } else {
       this[DATA] = Object.assign({ config: {}, options: {} }, data);
     }
-    this.setOverride();
+    this.setOverride(_.identity);
   }
 
   set config(config) {
@@ -35,7 +37,7 @@ class Partial {
   }
 
   merge(data, concatArray) {
-    _.mergeWith(this[DATA], data, getConcatMethod(concatArray));
+    _.mergeWith(this[DATA], data, getConcatMethod(concatArray, null));
   }
 
   setOverride(fn) {
@@ -66,5 +68,3 @@ class Partial {
     return override || ret;
   }
 }
-
-module.exports = Partial;

@@ -1,13 +1,11 @@
-const FooPlugin = require("../plugins/foo-plugin");
+import { FooPlugin } from "../plugins/foo-plugin";
 
-module.exports = {
-  "foo": {
+export default {
+  foo: {
     config: {
       entry: "foo.js",
       testFoo: "foo",
-      plugins: [
-        new FooPlugin()
-      ]
-    }
-  }
+      plugins: [new FooPlugin()],
+    },
+  },
 };

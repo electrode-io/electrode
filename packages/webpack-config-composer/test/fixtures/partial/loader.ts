@@ -1,13 +1,11 @@
-module.exports = {
+export default {
   loader: {
     config: () => {
       return {
         module: {
-          rules: [
-            "loader-rule1"
-          ]
-        }
-      }
-    }
-  }
+          rules: ["loader-rule1"],
+        },
+      };
+    },
+  },
 };

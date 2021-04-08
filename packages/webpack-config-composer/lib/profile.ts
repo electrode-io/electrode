@@ -2,7 +2,9 @@
 
 const { PARTIALS } = require("./constants");
 
-class Profile {
+export class Profile {
+  _name: any;
+
   constructor(name, partials) {
     this._name = name;
     this[PARTIALS] = partials || {};
@@ -28,5 +30,3 @@ class Profile {
     delete this[PARTIALS][name];
   }
 }
-
-module.exports = Profile;

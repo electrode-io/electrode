@@ -1,7 +1,7 @@
 "use strict";
 
 const deleteCustomProps = require("../../lib/delete-custom-props");
-const expect = require("chai").expect;
+import { expect } from "chai";
 
 describe("delete custom props", function () {
   it("should preserve __dirname and delete _ prefixed", () => {

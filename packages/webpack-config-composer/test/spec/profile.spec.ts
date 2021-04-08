@@ -1,9 +1,9 @@
 "use strict";
 
 const Profile = require("../../lib/profile");
-const expect = require("chai").expect;
+import { expect } from "chai";
 
-describe("profile", function() {
+describe("profile", function () {
   it("should default partials to {}", () => {
     const prof = new Profile("test");
     expect(prof.partials).to.deep.equal({});

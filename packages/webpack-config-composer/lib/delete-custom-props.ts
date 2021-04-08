@@ -1,6 +1,6 @@
 "use strict";
 
-function deleteCustomProps(o) {
+export function deleteCustomProps(o) {
   if (!o) {
     return o;
   }
@@ -17,5 +17,3 @@ function deleteCustomProps(o) {
   }
   return o;
 }
-
-module.exports = deleteCustomProps;
