@@ -40,32 +40,6 @@ Your new electrode app will appear as shown below.
 
 ![Hello from Electrode](/img/getting-started/first-app.png)
 
-### The Packages
-
-#### Essentials
-
-| Package       | Description                                              |
-| ------------- | -------------------------------------------------------- |
-| @xarc/app     | node.js runtime support; should be in `dependencies`     |
-| @xarc/app-dev | development only support; should be in `devDependencies` |
-| @xarc/react   | react.js support                                         |
-
-#### Optionals
-
-| Package            | Description                           |
-| ------------------ | ------------------------------------- |
-| @xarc/react-redux  | react redux support                   |
-| @xarc/react-query  | react query support                   |
-| @xarc/react-router | react router support                  |
-| @xarc/create-app   | create a starter app for you with npx |
-| @xarc/opt-postcss  | Extra style support                   |
-| @xarc/opt-stylus   | stylus support                        |
-| @xarc/opt-sass     | sass support                          |
-| @xarc/opt-less     | less support                          |
-| @xarc/opt-jest     | jest support                          |
-| @xarc/opt-karma    | karma support                         |
-| @xarc/opt-mocha    | mocha support                         |
-
 ## License
 
 Copyright (c) 2016-present, Walmart
