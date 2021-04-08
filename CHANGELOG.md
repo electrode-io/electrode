@@ -1,3 +1,24 @@
+# 4/8/2021
+
+- update create-app template to register routes as a plugin
+
+## Packages
+
+- `@xarc/app@10.0.5` `(10.0.4 => 10.0.5)`
+- `@xarc/app-dev@10.0.5` `(10.0.4 => 10.0.5)`
+- `@xarc/create-app@6.0.2` `(6.0.1 => 6.0.2)`
+
+## Commits
+
+- `packages/xarc-app-dev`
+
+  - update comments [commit](http://github.com/electrode-io/electrode/commit/d627be7a3a79dca1ff55f02429595fa27c63e246)
+  - update create-app template to register routes as a plugin [commit](http://github.com/electrode-io/electrode/commit/5cdb907ec67536a385ffff365194ae5a8ebfda6e)
+
+- `packages/xarc-create-app`
+
+  - update create-app template to register routes as a plugin [commit](http://github.com/electrode-io/electrode/commit/5cdb907ec67536a385ffff365194ae5a8ebfda6e)
+
 # 3/29/2021
 
 ## Packages
