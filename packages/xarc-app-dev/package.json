@@ -23,6 +23,9 @@
     "docs": "xrun xarc/docs",
     "bootstrap": "cd ../.. && npx fynpo bootstrap --only @xarc/app-dev"
   },
+  "bin": {
+    "xrun": "bin/xrun.js"
+  },
   "files": [
     "config",
     "dist",
@@ -53,7 +56,7 @@
     "@babel/register": "^7.0.0",
     "@jchip/redbird": "^1.2.2",
     "@xarc/dev-base": "^0.1.0",
-    "@xarc/run": "^1.0.4",
+    "@xarc/run": "^1.0.5",
     "@xarc/subapp": "^0.2.1",
     "@xarc/webpack": "^11.0.3",
     "ansi-to-html": "^0.6.8",

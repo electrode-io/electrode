@@ -222,8 +222,6 @@ fastlane/screenshots
 *.class
 
 # Generated files
-bin/
-gen/
 
 # Gradle files
 .gradle/
@@ -317,7 +315,6 @@ fabric.properties
 ### Eclipse ###
 *.pydevproject
 .metadata
-bin/
 tmp/
 *.tmp
 *.bak
