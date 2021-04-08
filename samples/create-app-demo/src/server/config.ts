@@ -11,7 +11,7 @@ const connection: ConnectionConfig = {
 };
 
 //
-// specify plugins to register with fastify server
+// specify plugins to register with electrode fastify server
 //
 const plugins: PluginsConfig = {
   /**
@@ -20,6 +20,15 @@ const plugins: PluginsConfig = {
   "@xarc/app-dev": {
     priority: -1,
     enable: Boolean(process.env.WEBPACK_DEV),
+  },
+
+  // set require path so can use "./routes"
+  requireFromPath: __dirname,
+  /**
+   * Register the plugin to setup routes
+   */
+  routes: {
+    module: "./routes",
   },
 };
 
@@ -34,8 +43,6 @@ const plugins: PluginsConfig = {
  *
  */
 export const config: ElectrodeServerConfig = {
-  // don't start fastify server automatically so app can setup routes
-  deferStart: true,
   connection,
   plugins,
 };

@@ -1,12 +1,13 @@
 import { Demo2, Demo3, home } from "../app";
 import { PageRenderer } from "@xarc/react";
-
+import { ElectrodeFastifyInstance } from "@xarc/fastify-server";
 /**
- * Setup application routes
+ * Fastify plugin to setup application routes
+ *
  * @param server - fastify server, should not have started yet
  * @returns nothing
  */
-export function setupRoutes(server) {
+export async function fastifyPlugin(server: ElectrodeFastifyInstance) {
   const homeRenderer: PageRenderer = new PageRenderer({
     pageTitle: "xarc React App demo",
     subApps: [
@@ -21,7 +22,7 @@ export function setupRoutes(server) {
 
   server.route({
     method: "GET",
-    path: "/",
+    url: "/",
     async handler(request, reply) {
       try {
         const context = await homeRenderer.render({ request });

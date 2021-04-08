@@ -133,7 +133,7 @@ export const getDevTaskRunner = (cwd: string = process.cwd()) => {
  *
  * @returns The `@xarc/run` task runner instance that was used.
  */
-export function loadXarcDevTasks(userXrun, userOptions: XarcOptions = {}) {
+export function loadXarcDevTasks(userXrun?: any, userOptions: XarcOptions = {}) {
   let xarcOptions = getDevOptions(userOptions);
   xarcCwd = xarcOptions.cwd;
 
@@ -513,7 +513,7 @@ module.exports =  {
       "mv-to-dist": ["mv-to-dist:clean", "mv-to-dist:mv-dirs", "mv-to-dist:keep-targets"],
       "build-dist-dev-static": {
         desc: false,
-        task: function() {
+        task: function () {
           setWebpackProfile("static");
           return mkCmd(
             `~$${webpackCmd()} --config`,
