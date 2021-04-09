@@ -1,5 +1,3 @@
-"use strict";
-
 import { WebpackConfigComposer } from "../../lib/index";
 import { expect } from "chai";
 import fooPartial from "../fixtures/partial/foo";
@@ -9,7 +7,7 @@ import loaderPartial from "../fixtures/partial/loader";
 const _ = require("lodash");
 import { FooPlugin } from "../fixtures/plugins/foo-plugin";
 
-describe("composer", function () {
+describe("composer", () => {
   it("should accept partials and generate config", () => {
     const composer = new WebpackConfigComposer({
       partials: {
@@ -43,8 +41,10 @@ describe("composer", function () {
     });
     composer.addPartials([fooPartial, barPartial]);
     expect(composer.profiles).to.have.keys("a", "b");
+    /*  eslint-disable no-unused-expressions */
     expect(composer.getProfile("a")).to.exist;
     expect(composer.getPartial("test")).to.exist;
+    /*  eslint-enable no-unused-expressions */
     const config = composer.compose(
       {},
       "a",
@@ -201,7 +201,7 @@ describe("composer", function () {
     expect(config.module.rules[0]).to.equal("loader-rule1");
   });
 
-  describe("addProfiles", function () {
+  describe("addProfiles", () => {
     it("should accept multiple profiles", () => {
       const composer = new WebpackConfigComposer({});
       composer.addProfiles({ a: { partials: {} }, b: { partials: {} } });
@@ -215,7 +215,7 @@ describe("composer", function () {
     });
   });
 
-  describe("addProfile", function () {
+  describe("addProfile", () => {
     it("should take list of partial names for new profile", () => {
       const composer = new WebpackConfigComposer({});
       composer.addProfile("test", "a");
@@ -241,14 +241,16 @@ describe("composer", function () {
     });
   });
 
-  describe("addPartialToProfile", function () {
+  describe("addPartialToProfile", () => {
     it("should create profile if it doesn't exist", () => {
       const composer = new WebpackConfigComposer({});
       composer.addPartialToProfile("user", "test", { plugins: [] }, {});
       const user = composer.getPartial("user");
+      //  eslint-disable-next-line no-unused-expressions
       expect(user).to.exist;
       expect(user.config).to.deep.equal({ plugins: [] });
       expect(user.options).to.deep.equal({});
+      //  eslint-disable-next-line no-unused-expressions
       expect(composer.getProfile("test")).to.exist;
     });
 
@@ -256,6 +258,7 @@ describe("composer", function () {
       const composer = new WebpackConfigComposer({});
       composer.addPartialToProfile("user", "test", { plugins: [] }, {});
       const user = composer.getPartial("user");
+      //  eslint-disable-next-line no-unused-expressions
       expect(user).to.exist;
       expect(user.config).to.deep.equal({ plugins: [] });
       expect(user.options).to.deep.equal({});
@@ -266,12 +269,13 @@ describe("composer", function () {
       composer.addProfile("test", "foo");
       composer.addPartialToProfile("user", "test", { plugins: [] }, {});
       const prof = composer.getProfile("test");
+      //  eslint-disable-next-line no-unused-expressions
       expect(prof).to.exist;
       expect(prof.getPartial("foo")).to.deep.equal({});
     });
   });
 
-  describe("addPartials", function () {
+  describe("addPartials", () => {
     it("should add new partial as class intance", () => {
       const composer = new WebpackConfigComposer({});
       composer.addPartials(fooPartial);

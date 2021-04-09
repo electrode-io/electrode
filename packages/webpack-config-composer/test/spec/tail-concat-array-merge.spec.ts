@@ -1,9 +1,9 @@
-"use strict";
+
 
 import tailConcatArrayMerge from "../../lib/tail-concat-array-merge";
 import { expect } from "chai";
 
-describe("tail concat array", function () {
+describe("tail concat array", () => {
   it("merge two arrays", () => {
     expect(tailConcatArrayMerge([1, 2, 3], [4, 5, 6])).to.deep.equal([1, 2, 3, 4, 5, 6]);
   });

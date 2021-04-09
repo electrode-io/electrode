@@ -1,9 +1,7 @@
-"use strict";
-
 import { Profile } from "../../lib/profile";
 import { expect } from "chai";
 
-describe("profile", function () {
+describe("profile", () => {
   it("should default partials to {}", () => {
     const prof = new Profile("test", {});
     expect(prof.partials).to.deep.equal({});
@@ -22,6 +20,7 @@ describe("profile", function () {
     expect(prof.getPartial("bar")).to.deep.equal({});
     expect(prof.getPartial("blah")).to.deep.equal({ order: 10 });
     prof.delPartial("blah");
+    // eslint-disable-next-line no-unused-expressions
     expect(prof.getPartial("blah")).to.not.exist;
   });
 });

@@ -1,9 +1,9 @@
-"use strict";
+
 
 import { deleteCustomProps } from "../../lib/delete-custom-props";
 import { expect } from "chai";
 
-describe("delete custom props", function () {
+describe("delete custom props", () => {
   it("should preserve __dirname and delete _ prefixed", () => {
     const o = {
       module: {

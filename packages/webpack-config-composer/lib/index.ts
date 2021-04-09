@@ -1,5 +1,3 @@
-"use strict";
-
 import { deleteCustomProps } from "./delete-custom-props";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const _ = require("lodash");
@@ -13,7 +11,7 @@ const { PROFILES, PARTIALS } = CONSTANT;
 export class WebpackConfigComposer {
   logger: any;
 
-  constructor(options) {
+  constructor(options: Record<string, unknown> | undefined | null) {
     options = options || {};
     this[PROFILES] = {};
     this[PARTIALS] = {};
@@ -23,18 +21,19 @@ export class WebpackConfigComposer {
     if (options.partials) {
       this.addPartials(options.partials);
     }
+    // eslint-disable-next-line no-console
     this.logger = options.logger || console.log;
   }
 
-  get profiles() {
+  get profiles(): any {
     return this[PROFILES];
   }
 
-  get partials() {
+  get partials(): any {
     return this[PARTIALS];
   }
 
-  addProfiles(profiles) {
+  addProfiles(profiles: any): any {
     // eslint-disable-next-line prefer-rest-params
     profiles = Array.isArray(profiles) ? profiles : Array.prototype.slice.call(arguments);
 
@@ -43,7 +42,7 @@ export class WebpackConfigComposer {
     });
   }
 
-  addProfile(name, partials) {
+  addProfile(name: string, partials: Record<string, unknown> | unknown): any {
     assert(!this.getProfile(name), `Profile ${name} already exist.`);
 
     let profile;
@@ -125,6 +124,7 @@ export class WebpackConfigComposer {
     return this[PROFILES][name];
   }
 
+  /* eslint-disable max-statements */
   compose(options, ...profiles) {
     const allProfiles = _.flatten(profiles);
 
@@ -139,6 +139,7 @@ export class WebpackConfigComposer {
 
       return p.partials || {};
     });
+    /* eslint-enable max-statements */
 
     profPartials = _.merge({}, ...profPartials);
 

@@ -1,6 +1,4 @@
-"use strict";
-
-export function deleteCustomProps(o) {
+export function deleteCustomProps(o: any): any {
   if (!o) {
     return o;
   }

@@ -1,9 +1,9 @@
-"use strict";
+
 
 import headConcatArrayMerge from "../../lib/head-concat-array-merge";
 import { expect } from "chai";
 
-describe("head concat array", function () {
+describe("head concat array", () => {
   it("merge two arrays", () => {
     expect(headConcatArrayMerge([1, 2, 3], [4, 5, 6])).to.deep.equal([4, 5, 6, 1, 2, 3]);
   });

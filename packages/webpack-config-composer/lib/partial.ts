@@ -1,4 +1,3 @@
-"use strict";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const _ = require("lodash");
 import { getConcatMethod } from "./concat-method";

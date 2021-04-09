@@ -1,4 +1,4 @@
-"use strict";
+
 
 import headConcatArrayMerge from "./head-concat-array-merge";
 import tailConcatArrayMerge from "./tail-concat-array-merge";
@@ -9,7 +9,7 @@ const concatArrayMerge = {
   no: undefined
 };
 
-export const getConcatMethod = (method, fallback) => {
+export const getConcatMethod: any = (method: any, fallback: any) => {
   return concatArrayMerge.hasOwnProperty(method)
     ? concatArrayMerge[method]
     : fallback || concatArrayMerge.tail;

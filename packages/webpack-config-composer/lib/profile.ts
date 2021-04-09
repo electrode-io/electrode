@@ -1,5 +1,3 @@
-"use strict";
-
 import CONSTANTS from "./constants";
 const { PARTIALS } = CONSTANTS;
 export class Profile {
