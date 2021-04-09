@@ -23,11 +23,6 @@
   "keywords": [],
   "author": "WalmartLabs GTP.js team",
   "license": "Apache-2.0",
-  "fyn": {
-    "dependencies": {
-      "@xarc/subapp": "../xarc-subapp"
-    }
-  },
   "dependencies": {
     "@xarc/subapp": "^0.2.1",
     "history": "^4.10.1",

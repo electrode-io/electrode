@@ -62,16 +62,6 @@
     "react": "*",
     "react-dom": "*"
   },
-  "fyn": {
-    "dependencies": {
-      "subapp-web": "../subapp-web",
-      "subapp-util": "../subapp-util"
-    },
-    "devDependencies": {
-      "@xarc/app": "../xarc-app",
-      "subapp-pkg-util": "../subapp-pkg-util"
-    }
-  },
   "nyc": {
     "all": true,
     "require": [

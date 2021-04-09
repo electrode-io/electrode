@@ -47,10 +47,5 @@
       "@xarc/opt-jest",
       "electrode-archetype-opt-jest"
     ]
-  },
-  "fyn": {
-    "devDependencies": {
-      "opt-archetype-check": "../opt-archetype-check"
-    }
   }
 }

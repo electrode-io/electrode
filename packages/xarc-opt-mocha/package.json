@@ -50,10 +50,5 @@
       "@xarc/opt-mocha",
       "electrode-archetype-opt-mocha"
     ]
-  },
-  "fyn": {
-    "devDependencies": {
-      "opt-archetype-check": "../opt-archetype-check"
-    }
   }
 }

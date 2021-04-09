@@ -111,12 +111,6 @@
     "lines": 100,
     "cache": false
   },
-  "fyn": {
-    "dependencies": {
-      "@xarc/render-context": "../xarc-render-context"
-    },
-    "devDependencies": {}
-  },
   "@xarc/module-dev": {
     "srcDir": [
       "src"

@@ -49,14 +49,6 @@
     "run-verify": "^1.1.2",
     "@xarc/fastify-server": "^1.1.0"
   },
-  "fyn": {
-    "dependencies": {
-      "@xarc/index-page": "../xarc-index-page",
-      "subapp-util": "../subapp-util",
-      "@xarc/jsx-renderer": "../xarc-jsx-renderer",
-      "@xarc/tag-renderer": "../xarc-tag-renderer"
-    }
-  },
   "nyc": {
     "all": true,
     "reporter": [

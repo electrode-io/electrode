@@ -105,13 +105,6 @@
       "typescript"
     ]
   },
-  "fyn": {
-    "dependencies": {
-      "@xarc/render-context": "../xarc-render-context",
-      "@xarc/subapp": "../xarc-subapp",
-      "@xarc/tag-renderer": "../xarc-tag-renderer"
-    }
-  },
   "mocha": {
     "require": [
       "ts-node/register",

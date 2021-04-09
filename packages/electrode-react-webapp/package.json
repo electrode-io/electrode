@@ -119,11 +119,6 @@
       "@babel/register"
     ]
   },
-  "fyn": {
-    "devDependencies": {
-      "electrode-redux-router-engine": "../electrode-redux-router-engine"
-    }
-  },
   "prettier": {
     "printWidth": 100,
     "trailingComma": "none",

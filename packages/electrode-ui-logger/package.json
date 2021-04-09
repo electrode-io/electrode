@@ -51,10 +51,5 @@
       "dist",
       "test"
     ]
-  },
-  "fyn": {
-    "dependencies": {
-      "electrode-ui-config": "../electrode-ui-config"
-    }
   }
 }

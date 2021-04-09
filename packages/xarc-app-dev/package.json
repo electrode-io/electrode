@@ -139,19 +139,6 @@
     "node": ">= 12",
     "npm": ">= 6"
   },
-  "fyn": {
-    "dependencies": {
-      "@xarc/subapp": "../xarc-subapp",
-      "@xarc/webpack": "../xarc-webpack",
-      "electrode-node-resolver": "../electrode-node-resolver",
-      "subapp-util": "../subapp-util",
-      "@xarc/dev-base": "../xarc-dev-base"
-    },
-    "devDependencies": {
-      "@xarc/app": "../xarc-app",
-      "e1": "./e1"
-    }
-  },
   "nyc": {
     "all": true,
     "reporter": [

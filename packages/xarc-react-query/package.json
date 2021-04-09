@@ -32,11 +32,6 @@
     "react-query": "^3.5.16",
     "tslib": "^2.1.0"
   },
-  "fyn": {
-    "dependencies": {
-      "@xarc/subapp": "../xarc-subapp"
-    }
-  },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@testing-library/react": "^11.2.3",

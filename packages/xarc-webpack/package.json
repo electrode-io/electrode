@@ -142,17 +142,5 @@
       "typedoc",
       "typescript"
     ]
-  },
-  "fyn": {
-    "dependencies": {
-      "electrode-cdn-file-loader": "../electrode-cdn-file-loader",
-      "electrode-node-resolver": "../electrode-node-resolver",
-      "webpack-config-composer": "../webpack-config-composer",
-      "@xarc/dev-base": "../xarc-dev-base"
-    },
-    "devDependencies": {
-      "@xarc/app": "../xarc-app",
-      "@xarc/app-dev": "../xarc-app-dev"
-    }
   }
 }

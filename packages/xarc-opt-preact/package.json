@@ -47,10 +47,5 @@
       "electrode-archetype-opt-react",
       "electrode-archetype-opt-inferno"
     ]
-  },
-  "fyn": {
-    "devDependencies": {
-      "opt-archetype-check": "../opt-archetype-check"
-    }
   }
 }

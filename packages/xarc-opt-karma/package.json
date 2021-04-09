@@ -69,10 +69,5 @@
       "@xarc/opt-karma",
       "electrode-archetype-opt-karma"
     ]
-  },
-  "fyn": {
-    "devDependencies": {
-      "opt-archetype-check": "../opt-archetype-check"
-    }
   }
 }

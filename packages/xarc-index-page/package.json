@@ -99,12 +99,5 @@
       "@xarc/module-dev/config/test/setup.js"
     ],
     "recursive": true
-  },
-  "fyn": {
-    "dependencies": {
-      "@xarc/jsx-renderer": "../xarc-jsx-renderer",
-      "@xarc/render-context": "../xarc-render-context",
-      "@xarc/tag-renderer": "../xarc-tag-renderer"
-    }
   }
 }

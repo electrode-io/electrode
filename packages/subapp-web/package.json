@@ -60,16 +60,6 @@
     "run-verify": "^1.2.2",
     "subapp-pkg-util": "../subapp-pkg-util"
   },
-  "fyn": {
-    "dependencies": {
-      "subapp-util": "../subapp-util"
-    },
-    "devDependencies": {
-      "@xarc/app": "../xarc-app",
-      "electrode-react-webapp": "../electrode-react-webapp",
-      "subapp-pkg-util": "../subapp-pkg-util"
-    }
-  },
   "nyc": {
     "all": true,
     "reporter": [

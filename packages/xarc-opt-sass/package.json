@@ -45,10 +45,5 @@
       "@xarc/opt-sass",
       "electrode-archetype-opt-sass"
     ]
-  },
-  "fyn": {
-    "devDependencies": {
-      "opt-archetype-check": "../opt-archetype-check"
-    }
   }
 }

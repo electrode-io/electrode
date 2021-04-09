@@ -101,14 +101,5 @@
     "functions": 100,
     "lines": 100,
     "cache": true
-  },
-  "fyn": {
-    "devDependencies": {
-      "@xarc/app": "../xarc-app",
-      "@xarc/app-dev": "../xarc-app-dev",
-      "@xarc/react": "../xarc-react",
-      "@xarc/react-query": "../xarc-react-query",
-      "@xarc/react-redux": "../xarc-react-redux"
-    }
   }
 }
