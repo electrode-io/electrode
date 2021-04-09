@@ -139,7 +139,7 @@ export class WebpackConfigComposer {
 
       return p.partials || {};
     });
-    /* eslint-enable max-statements */
+
 
     profPartials = _.merge({}, ...profPartials);
 
@@ -195,6 +195,7 @@ export class WebpackConfigComposer {
 
     return currentConfig;
   }
+  /* eslint-enable max-statements */
 
   deleteCustomProps(config) {
     return deleteCustomProps(config);
