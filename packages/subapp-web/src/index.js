@@ -226,7 +226,8 @@ export function lazyLoadSubApp({ name, id, timeout = 15000, onLoad, onError, fal
       }
 
       if (timeout > 50 && Date.now() - startTime > timeout) {
-        return onError(new Error("lazyLoadSubApp Timeout"));
+        const msg = "lazyLoadSubApp Timeout: " + name;
+        return onError ? onError(new Error(msg)) : console.error(msg);
       }
 
       return load(50);

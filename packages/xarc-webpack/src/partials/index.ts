@@ -14,7 +14,6 @@ const Partial = require("webpack-config-composer/lib/partial");
 const orders = [
   "_base-options",
   "_entry",
-  "_subapp-chunks",
   "_node",
   "_output",
   "_resolve",
@@ -37,6 +36,7 @@ const orders = [
   "_fail",
   "_coverage",
   "_dev",
+  "_subapp-chunks",
   "_dll-entry",
   "_dll-output",
   "_dll-reference",
@@ -57,6 +57,7 @@ const partials = files.reduce((a, p) => {
   const k = `_${p}`;
   assert(orders.indexOf(k) >= 0, `No default order specified for partial ${p}`);
   a[k] = new Partial(k, { config: require(`./${p}`) });
+  a[k].options.order = (orders.indexOf(k) + 1) * 100;
   return a;
 }, {});
 

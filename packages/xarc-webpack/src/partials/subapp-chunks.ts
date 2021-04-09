@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-
-/* eslint-disable global-require, no-magic-numbers */
+/* eslint-disable global-require, no-magic-numbers, max-statements */
 
 import * as Crypto from "crypto";
 import { loadXarcOptions } from "../util/load-xarc-options";
+import { container } from "webpack";
+import * as _ from "lodash";
 
 const splitMap = {};
 
@@ -22,7 +22,7 @@ function hashChunks(mod, chunks, key) {
   return `${key}.~${digest}`;
 }
 
-function makeConfig() {
+function makeConfig(options) {
   const { AppMode, webpack } = loadXarcOptions();
 
   const config: any = {};
@@ -31,9 +31,59 @@ function makeConfig() {
     return config;
   }
 
+  let runtimeChunk = "single";
+
+  if (webpack.v1RemoteSubApps) {
+    let exposeRemote = 0;
+    const modFedPlugins = [].concat(webpack.v1RemoteSubApps).map(remote => {
+      const missing = [];
+      const subAppsToExpose = []
+        .concat(remote.subAppsToExpose)
+        .filter(x => x)
+        .reduce((exp, x) => {
+          if (!AppMode.subApps[x]) {
+            missing.push(x);
+          } else {
+            const subapp = AppMode.subApps[x];
+            exp[`./${subapp.name}`] = `./${subapp.subAppDir}/${subapp.entry}`;
+          }
+          return exp;
+        }, {});
+      if (missing.length > 0) {
+        throw new Error(`v1RemoteSubApps exposed subapp not found: ${missing.join(", ")}`);
+      }
+      const exposes = { ...remote.exposes, ...subAppsToExpose };
+      const eager = _.isEmpty(exposes);
+      if (!eager) {
+        exposeRemote++;
+      }
+      const shared = Object.keys(remote.shared).reduce((sh, x) => {
+        sh[x] = { ...remote.shared[x], eager };
+        return sh;
+      }, {});
+
+      const idName = remote.name.replace(/[^_\$0-9A-Za-z]/g, "_");
+      const name = !eager ? `__remote_${idName}` : idName;
+
+      return new container.ModuleFederationPlugin({
+        name,
+        filename: remote.filename || `_remote_~.${idName}.js`,
+        exposes,
+        shared
+      });
+    });
+    config.plugins = [].concat(config.plugins, modFedPlugins).filter(x => x);
+
+    // if app is exposing modules for remote loading, then we must set following
+    if (exposeRemote > 0) {
+      options.currentConfig.output.publicPath = "auto";
+      runtimeChunk = undefined;
+    }
+  }
+
   if (webpack.minimizeSubappChunks) {
     config.optimization = {
-      runtimeChunk: "single",
+      runtimeChunk,
       splitChunks: {
         cacheGroups: {
           common: {
@@ -52,7 +102,7 @@ function makeConfig() {
     // The filename has the pattern of hex-sum.bundle1~bundle2~bundle#.js
     // https://webpack.js.org/plugins/split-chunks-plugin/
     config.optimization = {
-      runtimeChunk: "single",
+      runtimeChunk,
       splitChunks: {
         chunks: "all",
         minSize: 30 * 1024,
