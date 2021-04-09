@@ -153,7 +153,7 @@ describe("composer", function () {
     const composer = new WebpackConfigComposer({});
     composer.addPartials([fooPartial, {
       loader: {
-        config: () => require("../fixtures/partial/loader").loader.config
+        config: () => require("../fixtures/partial/loader").default.loader.config
       }
     }]);
     const config = composer.compose(
@@ -183,7 +183,7 @@ describe("composer", function () {
     composer.addPartials([fooPartial, {
       loader: {
         config: options => {
-          const config = require("../fixtures/partial/loader").loader.config(options);
+          const config = require("../fixtures/partial/loader").default.loader.config(options);
           _.merge(options.currentConfig, config);
         }
       }
