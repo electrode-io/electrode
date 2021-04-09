@@ -1,6 +1,7 @@
 "use strict";
 
 import { deleteCustomProps } from "./delete-custom-props";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const _ = require("lodash");
 import assert = require("assert");
 import { Partial } from "./partial";
@@ -34,6 +35,7 @@ export class WebpackConfigComposer {
   }
 
   addProfiles(profiles) {
+    // eslint-disabline-next-line prefer-rest-params
     profiles = Array.isArray(profiles) ? profiles : Array.prototype.slice.call(arguments);
 
     profiles.forEach(a => {
@@ -48,6 +50,7 @@ export class WebpackConfigComposer {
 
     if (typeof partials !== "object") {
       // take argument as list of partial names
+      // eslint-disabline-next-line prefer-rest-params
       const partialNames = Array.prototype.slice.call(arguments, 1);
       profile = new Profile(name, {});
       partialNames.forEach((pn) => {
@@ -61,7 +64,8 @@ export class WebpackConfigComposer {
 
     return profile;
   }
-
+  
+  // eslint-disable-next-line max-params
   addPartialToProfile(partialName, profileName, config, partialOptions) {
     let profile = this.getProfile(profileName);
     if (!profile) {
@@ -76,6 +80,7 @@ export class WebpackConfigComposer {
   }
 
   addPartials(partials) {
+    // eslint-disabline-next-line prefer-rest-params
     partials = Array.isArray(partials) ? partials : Array.prototype.slice.call(arguments);
 
     partials.forEach(a => {

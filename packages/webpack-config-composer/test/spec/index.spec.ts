@@ -5,6 +5,7 @@ import { expect } from "chai";
 import fooPartial from "../fixtures/partial/foo";
 import barPartial from "../fixtures/partial/bar";
 import loaderPartial from "../fixtures/partial/loader";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const _ = require("lodash");
 import { FooPlugin } from "../fixtures/plugins/foo-plugin";
 
@@ -151,11 +152,15 @@ describe("composer", function () {
 
   it("should call return function twice to get final partial config", () => {
     const composer = new WebpackConfigComposer({});
-    composer.addPartials([fooPartial, {
-      loader: {
-        config: () => require("../fixtures/partial/loader").default.loader.config
+    composer.addPartials([
+      fooPartial,
+      {
+        loader: {
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
+          config: () => require("../fixtures/partial/loader").default.loader.config
+        }
       }
-    }]);
+    ]);
     const config = composer.compose(
       {},
       { partials: { loader: {} } }
@@ -183,6 +188,7 @@ describe("composer", function () {
     composer.addPartials([fooPartial, {
       loader: {
         config: options => {
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
           const config = require("../fixtures/partial/loader").default.loader.config(options);
           _.merge(options.currentConfig, config);
         }
