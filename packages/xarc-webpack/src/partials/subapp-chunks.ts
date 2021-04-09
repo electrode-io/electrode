@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-
-/* eslint-disable global-require, no-magic-numbers */
+/* eslint-disable global-require, no-magic-numbers, max-statements */
 
 import * as Crypto from "crypto";
 import { loadXarcOptions } from "../util/load-xarc-options";
