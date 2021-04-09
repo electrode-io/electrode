@@ -1,7 +1,7 @@
 "use strict";
 
-const headConcatArrayMerge = require("./head-concat-array-merge");
-const tailConcatArrayMerge = require("./tail-concat-array-merge");
+import headConcatArrayMerge from "./head-concat-array-merge";
+import tailConcatArrayMerge from "./tail-concat-array-merge";
 
 const concatArrayMerge = {
   head: headConcatArrayMerge,

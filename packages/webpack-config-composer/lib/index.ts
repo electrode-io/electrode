@@ -1,12 +1,13 @@
 "use strict";
 
-const deleteCustomProps = require("./delete-custom-props");
+import { deleteCustomProps } from "./delete-custom-props";
 const _ = require("lodash");
-const assert = require("assert");
-const Partial = require("./partial");
-const Profile = require("./profile");
+import assert = require("assert");
+import { Partial } from "./partial";
+import { Profile } from "./profile";
 import { getConcatMethod } from "./concat-method";
-const { PARTIALS, PROFILES } = require("./constants");
+import CONSTANT from "./constants";
+const { PROFILES, PARTIALS } = CONSTANT;
 
 export class WebpackConfigComposer {
   logger: any;
@@ -48,7 +49,7 @@ export class WebpackConfigComposer {
     if (typeof partials !== "object") {
       // take argument as list of partial names
       const partialNames = Array.prototype.slice.call(arguments, 1);
-      profile = new Profile(name);
+      profile = new Profile(name, {});
       partialNames.forEach((pn) => {
         profile.partials[pn] = {};
       });

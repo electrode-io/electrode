@@ -1,12 +1,12 @@
 "use strict";
 
-import { WebpackConfigComposer } from "../..";
+import { WebpackConfigComposer } from "../../lib/index";
 import { expect } from "chai";
-import fooPartial  from "../fixtures/partial/foo";
-import barPartial  from "../fixtures/partial/bar";
-import loaderPartial  from "../fixtures/partial/loader";
-import _ from "lodash";
-import {FooPlugin}  from "../fixtures/plugins/foo-plugin";
+import fooPartial from "../fixtures/partial/foo";
+import barPartial from "../fixtures/partial/bar";
+import loaderPartial from "../fixtures/partial/loader";
+const _ = require("lodash");
+import { FooPlugin } from "../fixtures/plugins/foo-plugin";
 
 describe("composer", function () {
   it("should accept partials and generate config", () => {

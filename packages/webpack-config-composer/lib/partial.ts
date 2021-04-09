@@ -2,7 +2,6 @@
 
 const _ = require("lodash");
 import { getConcatMethod } from "./concat-method";
-const assert = require("assert");
 
 const OVERRIDE = Symbol("override webpack config partial");
 const DATA = Symbol("webpack partial data");

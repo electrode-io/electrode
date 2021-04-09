@@ -1,7 +1,7 @@
 "use strict";
 
-const { PARTIALS } = require("./constants");
-
+import CONSTANTS from "./constants";
+const { PARTIALS } = CONSTANTS;
 export class Profile {
   _name: any;
 
