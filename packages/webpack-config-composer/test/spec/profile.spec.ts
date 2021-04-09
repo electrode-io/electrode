@@ -3,7 +3,7 @@ import { expect } from "chai";
 
 describe("profile", () => {
   it("should default partials to {}", () => {
-    const prof = new Profile("test", {});
+    const prof = new Profile("test", null);
     expect(prof.partials).to.deep.equal({});
   });
 
