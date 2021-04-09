@@ -61,9 +61,13 @@ function makeConfig(options) {
         sh[x] = { ...remote.shared[x], eager };
         return sh;
       }, {});
+
+      const idName = remote.name.replace(/[^_\$0-9A-Za-z]/g, "_");
+      const name = !eager ? `__remote_${idName}` : idName;
+
       return new container.ModuleFederationPlugin({
-        name: "__remote_" + remote.name.replace(/-/g, "_"),
-        filename: "_remote_~." + remote.name + ".js",
+        name,
+        filename: remote.filename || `_remote_~.${idName}.js`,
         exposes,
         shared
       });

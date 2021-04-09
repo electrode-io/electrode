@@ -23,8 +23,8 @@ function testLoadRemoteModule(scope, module) {
         resolve(x);
       });
     } else {
-      loadjs("http://localhost:3001/js/_remote_~.poc-subapp.js", "remote_extras", () => {
-        console.log("loaded remote_~.poc-subapp.js");
+      loadjs("http://localhost:3001/js/_remote_~.poc_subapp.js", "remote_extras", () => {
+        console.log("loaded _remote_~.poc_subapp.js");
         loadRemoteModule(scope, module).then(x => {
           console.log("loaded module", x, "default", x.default);
           resolve(x);

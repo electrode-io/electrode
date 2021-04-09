@@ -19,14 +19,17 @@ export type ModuleShareOptions = {
  */
 export type RemoteSubAppOptions = {
   /**
-   * Name of the remote entry
+   * Name of the remote entry.
    *
-   * The name must only contain characters valid for a JavaScript variable name (identifier).
+   * The name must only contain characters valid for a JavaScript variable name (identifier),
+   * which are `_$0-9A-Za-z`, and it can't start with numbers.
    *
-   * These character are automatically replaced with _: '-'
+   * Invalid characters are automatically replaced with `_`.
+   *
+   * We add `__remote_` to the beginning if you expose some modules.
    *
    */
-  name?: string;
+  name: string;
   /**
    * Name the remote entry JS file
    *
@@ -34,7 +37,7 @@ export type RemoteSubAppOptions = {
    *
    * `_remote_~.${name}.js`
    *
-   * Where name is the original name without the `_` replacement.
+   * Where name is the original name after replacing invalid chars with `_`.
    *
    */
   filename?: string;
@@ -45,10 +48,10 @@ export type RemoteSubAppOptions = {
    * - For example, the subapp `'Deal'` would be exposed as a module `'./Deal'`
    *
    */
-  subAppsToExpose: string[];
+  subAppsToExpose?: string[];
 
   /**
-   * Directly specify exposes config according to webpack5 ModuleFederationPlugin options.
+   * Directly specify `exposes` config according to webpack5 ModuleFederationPlugin options.
    *
    * See https://webpack.js.org/concepts/module-federation/
    */
