@@ -232,6 +232,7 @@ describe("composer", () => {
 
   it("instance should created with null input", () => {
     const composer = new WebpackConfigComposer(null);
+    // eslint-disable-next-line no-unused-expressions
     expect(composer).to.exist;
   });
 
