@@ -12,4 +12,15 @@ describe("partial", () => {
     expect(partial[DATA].config).to.deep.equal(fn);
     expect(partial[OVERRIDE]).to.deep.equal(_.identity);
   });
+
+  it("should setOverride", () => {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    const fn = () => {};
+    const partial = new Partial("test", {});
+    expect(partial[OVERRIDE]).not.to.equals(fn);
+    partial.setOverride(fn);
+    expect(partial[OVERRIDE]).to.deep.equals(fn);
+    partial.setOverride(null);
+    expect(partial[OVERRIDE]).to.deep.equal(_.identity);
+  });
 });

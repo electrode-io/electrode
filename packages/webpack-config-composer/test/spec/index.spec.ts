@@ -7,6 +7,8 @@ import loaderPartial from "../fixtures/partial/loader";
 const _ = require("lodash");
 import { FooPlugin } from "../fixtures/plugins/foo-plugin";
 import { Partial } from "../../lib/partial";
+import CONSTANT from "../../lib/constants";
+const { PARTIALS } = CONSTANT;
 
 /* eslint-disable max-statements */
 describe("composer", () => {
@@ -203,7 +205,7 @@ describe("composer", () => {
     expect(config.module.rules[0]).to.equal("loader-rule1");
   });
 
-  it("should return", () => {
+  it("compose should correct config module when meta is enabled", () => {
     const composer = new WebpackConfigComposer({});
     composer.addPartials([
       fooPartial,
@@ -226,6 +228,11 @@ describe("composer", () => {
         ]
       }
     });
+  });
+
+  it("instance should created with null input", () => {
+    const composer = new WebpackConfigComposer(null);
+    expect(composer).to.exist;
   });
 
   describe("addProfiles", () => {
@@ -381,10 +388,39 @@ describe("composer", () => {
       expect(composer.partials.foo.config.plugins[0]).to.equal("fooTest");
       expect(composer.partials.bar.config.plugins[0]).to.equal("barTest");
     });
+
+    it("should addPartial when given name does not exist but options having replace method", () => {
+      const composer = new WebpackConfigComposer({});
+      composer.addPartial(
+        "bar",
+        {
+          plugins: ["barTest"],
+        },
+        {
+          method: "replace"
+        }
+      );
+
+      expect(composer[PARTIALS].bar).to.deep.equal(new Partial("bar", { plugins: ["barTest"] }));
+    });
+
+    it("should addPartial when given name does not exist but options having replace method", () => {
+      const composer = new WebpackConfigComposer({});
+      const testPartialInstance = new Partial("foo", {});
+      composer._addPartial(
+        "bar",
+        testPartialInstance,
+        {
+          method: "replace"
+        }
+      );
+
+      expect(composer[PARTIALS].bar).to.deep.equal(testPartialInstance);
+    });
   });
 
   describe("enablePartial", () => {
-    it("should enable partial", () => {
+    it("should find partial enabled", () => {
       const testName = "test_9527";
       const composer = new WebpackConfigComposer({});
       expect(composer.getPartial(testName)).to.equal(undefined);
@@ -392,6 +428,15 @@ describe("composer", () => {
       expect(composer.getPartial(testName).enable).to.equal(undefined);
       composer.enablePartial(testName, true);
       expect(composer.getPartial(testName).enable).to.equal(true);
+    });
+
+    it("should find partial not enabled", () => {
+      const testName = "test_9527";
+      const composer = new WebpackConfigComposer({});
+      composer.addPartial(testName, { foor: "bar" }, null);
+      expect(composer.getPartial(testName).enable).to.equal(undefined);
+      composer.enablePartial("abc", true);
+      expect(composer.getPartial(testName).enable).to.equal(undefined);
     });
   });
 
