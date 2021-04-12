@@ -251,7 +251,7 @@ export const profiles = {
  */
 export type PlainConfig = Record<string, any>;
 
-import * as WebpackComposer from "webpack-config-composer";
+import { WebpackConfigComposer as WebpackComposer } from "webpack-config-composer";
 
 /**
  *
