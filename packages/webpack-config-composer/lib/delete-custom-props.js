@@ -1,6 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteCustomProps = void 0;
 function deleteCustomProps(o) {
     if (!o) {
         return o;
@@ -20,5 +18,5 @@ function deleteCustomProps(o) {
     }
     return o;
 }
-exports.deleteCustomProps = deleteCustomProps;
+module.exports = deleteCustomProps;
 //# sourceMappingURL=delete-custom-props.js.map

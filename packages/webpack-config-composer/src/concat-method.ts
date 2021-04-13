@@ -9,8 +9,10 @@ const concatArrayMerge = {
   no: undefined
 };
 
-export const getConcatMethod: any = (method: any, fallback: any) => {
+const getConcatMethod: any = (method: any, fallback: any) => {
   return concatArrayMerge.hasOwnProperty(method)
     ? concatArrayMerge[method]
     : fallback || concatArrayMerge.tail;
 };
+
+export = { getConcatMethod };

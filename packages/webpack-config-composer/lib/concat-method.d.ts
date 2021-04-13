@@ -1,1 +1,4 @@
-export declare const getConcatMethod: any;
+declare const _default: {
+    getConcatMethod: any;
+};
+export = _default;

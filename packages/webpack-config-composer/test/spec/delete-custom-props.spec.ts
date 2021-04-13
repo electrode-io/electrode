@@ -1,6 +1,6 @@
 
 
-import { deleteCustomProps } from "../../src/delete-custom-props";
+import deleteCustomProps from "../../src/delete-custom-props";
 import { expect } from "chai";
 
 describe("delete custom props", () => {

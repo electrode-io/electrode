@@ -1,7 +1,8 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Profile = void 0;
-const constants_1 = require("./constants");
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+const constants_1 = __importDefault(require("./constants"));
 const { PARTIALS } = constants_1.default;
 class Profile {
     constructor(name, partials) {
@@ -24,5 +25,5 @@ class Profile {
         delete this[PARTIALS][name];
     }
 }
-exports.Profile = Profile;
+module.exports = Profile;
 //# sourceMappingURL=profile.js.map

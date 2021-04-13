@@ -1,6 +1,4 @@
-export declare const OVERRIDE: unique symbol;
-export declare const DATA: unique symbol;
-export declare class Partial {
+declare class Partial {
     _name: any;
     constructor(name: any, data: any);
     set config(config: any);
@@ -11,3 +9,4 @@ export declare class Partial {
     setOverride(fn: any): void;
     compose(options: any): any;
 }
+export = Partial;

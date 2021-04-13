@@ -1,6 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (a, b) => {
+module.exports = (a, b) => {
     return (Array.isArray(a) && Array.isArray(b))
         ? [].concat(b).concat(a)
         : undefined;

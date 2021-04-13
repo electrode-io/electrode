@@ -1,1 +1,2 @@
-export declare function deleteCustomProps(o: any): any;
+declare function deleteCustomProps(o: any): any;
+export = deleteCustomProps;

@@ -1,4 +1,4 @@
-export declare class Profile {
+declare class Profile {
     _name: any;
     constructor(name: any, partials: any);
     get name(): any;
@@ -7,3 +7,4 @@ export declare class Profile {
     getPartial(name: any): any;
     delPartial(name: any): void;
 }
+export = Profile;

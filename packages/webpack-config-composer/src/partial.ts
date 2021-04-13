@@ -1,11 +1,12 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const _ = require("lodash");
-import { getConcatMethod } from "./concat-method";
+import CONSTANT from "./constants";
+import ConcatMethod from "./concat-method";
 
-export const OVERRIDE = Symbol("override webpack config partial");
-export const DATA = Symbol("webpack partial data");
+const { DATA, OVERRIDE } = CONSTANT;
+const { getConcatMethod } = ConcatMethod;
 
-export class Partial {
+class Partial {
   _name: any;
 
   constructor(name, data) {
@@ -66,3 +67,5 @@ export class Partial {
     return override || ret;
   }
 }
+
+export = Partial;

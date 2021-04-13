@@ -1,4 +1,4 @@
-export function deleteCustomProps(o: any): any {
+function deleteCustomProps(o: any): any {
   if (!o) {
     return o;
   }
@@ -15,3 +15,5 @@ export function deleteCustomProps(o: any): any {
   }
   return o;
 }
+
+export = deleteCustomProps;

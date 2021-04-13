@@ -1,14 +1,16 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.WebpackConfigComposer = void 0;
-const delete_custom_props_1 = require("./delete-custom-props");
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+const delete_custom_props_1 = __importDefault(require("./delete-custom-props"));
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const _ = require("lodash");
 const assert = require("assert");
-const partial_1 = require("./partial");
-const profile_1 = require("./profile");
-const concat_method_1 = require("./concat-method");
-const constants_1 = require("./constants");
+const partial_1 = __importDefault(require("./partial"));
+const profile_1 = __importDefault(require("./profile"));
+const concat_method_1 = __importDefault(require("./concat-method"));
+const constants_1 = __importDefault(require("./constants"));
+const { getConcatMethod } = concat_method_1.default;
 const { PROFILES, PARTIALS } = constants_1.default;
 class WebpackConfigComposer {
     constructor(options) {
@@ -44,13 +46,13 @@ class WebpackConfigComposer {
             // take argument as list of partial names
             // eslint-disable-next-line prefer-rest-params
             const partialNames = Array.prototype.slice.call(arguments, 1);
-            profile = new profile_1.Profile(name, {});
+            profile = new profile_1.default(name, {});
             partialNames.forEach((pn) => {
                 profile.partials[pn] = {};
             });
         }
         else {
-            profile = new profile_1.Profile(name, partials);
+            profile = new profile_1.default(name, partials);
         }
         this[PROFILES][name] = profile;
         return profile;
@@ -77,7 +79,7 @@ class WebpackConfigComposer {
     _addPartial(name, data, addOpt) {
         const exist = this[PARTIALS][name];
         if (!exist || _.get(addOpt, "method") === "replace") {
-            this[PARTIALS][name] = data instanceof partial_1.Partial ? data : new partial_1.Partial(name, data);
+            this[PARTIALS][name] = data instanceof partial_1.default ? data : new partial_1.default(name, data);
         }
         else {
             exist.merge(data, _.get(addOpt, "concatArray"));
@@ -128,7 +130,7 @@ class WebpackConfigComposer {
             .sortBy(partialOrder)
             .value();
         const currentConfig = options.currentConfig || {};
-        const concat = concat_method_1.getConcatMethod(options.concatArray, null);
+        const concat = getConcatMethod(options.concatArray, null);
         sortedKeys.forEach(partialName => {
             const partial = this.getPartial(partialName);
             assert(partial, `Partial ${partialName} doesn't exist or has not been added`);
@@ -147,7 +149,7 @@ class WebpackConfigComposer {
             });
         }
         if (!options.keepCustomProps) {
-            delete_custom_props_1.deleteCustomProps(currentConfig);
+            delete_custom_props_1.default(currentConfig);
         }
         if (options.meta) {
             return { config: currentConfig, profileNames, partialNames: sortedKeys };
@@ -156,8 +158,8 @@ class WebpackConfigComposer {
     }
     /* eslint-enable max-statements */
     deleteCustomProps(config) {
-        return delete_custom_props_1.deleteCustomProps(config);
+        return delete_custom_props_1.default(config);
     }
 }
-exports.WebpackConfigComposer = WebpackConfigComposer;
+module.exports = WebpackConfigComposer;
 //# sourceMappingURL=index.js.map

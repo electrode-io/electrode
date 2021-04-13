@@ -1,5 +1,7 @@
 declare const _default: {
     PARTIALS: symbol;
     PROFILES: symbol;
+    OVERRIDE: symbol;
+    DATA: symbol;
 };
-export default _default;
+export = _default;

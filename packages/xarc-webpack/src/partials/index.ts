@@ -4,7 +4,7 @@
 
 import * as Fs from "fs";
 const assert = require("assert");
-const { Partial } = require("webpack-config-composer/lib/partial");
+const Partial = require("webpack-config-composer/lib/partial");
 
 
 //

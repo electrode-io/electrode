@@ -1,6 +1,6 @@
 import CONSTANTS from "./constants";
 const { PARTIALS } = CONSTANTS;
-export class Profile {
+class Profile {
   _name: any;
 
   constructor(name, partials) {
@@ -28,3 +28,5 @@ export class Profile {
     delete this[PARTIALS][name];
   }
 }
+
+export = Profile;

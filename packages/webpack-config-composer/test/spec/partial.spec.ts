@@ -1,5 +1,7 @@
-import { Partial, DATA, OVERRIDE } from "../../src/partial";
+import CONSTANT from "../../src/constants";
+import Partial from "../../src/partial";
 import { expect } from "chai";
+const { DATA, OVERRIDE } = CONSTANT;
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const _ = require("lodash");

@@ -1,14 +1,15 @@
-import { deleteCustomProps } from "./delete-custom-props";
+import deleteCustomProps from "./delete-custom-props";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const _ = require("lodash");
 import assert = require("assert");
-import { Partial } from "./partial";
-import { Profile } from "./profile";
-import { getConcatMethod } from "./concat-method";
+import Partial from "./partial";
+import Profile from "./profile";
+import ConcatMethod from "./concat-method";
 import CONSTANT from "./constants";
+const { getConcatMethod } = ConcatMethod;
 const { PROFILES, PARTIALS } = CONSTANT;
 
-export class WebpackConfigComposer {
+class WebpackConfigComposer {
   logger: any;
 
   constructor(options: Record<string, unknown> | undefined | null) {
@@ -201,3 +202,5 @@ export class WebpackConfigComposer {
     return deleteCustomProps(config);
   }
 }
+
+export = WebpackConfigComposer;

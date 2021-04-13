@@ -1,5 +1,3 @@
-
-
 import tailConcatArrayMerge from "../../src/tail-concat-array-merge";
 import { expect } from "chai";
 

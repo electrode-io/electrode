@@ -1,4 +1,4 @@
-export declare class WebpackConfigComposer {
+declare class WebpackConfigComposer {
     logger: any;
     constructor(options: Record<string, unknown> | undefined | null);
     get profiles(): any;
@@ -16,3 +16,4 @@ export declare class WebpackConfigComposer {
     compose(options: any, ...profiles: any[]): any;
     deleteCustomProps(config: any): any;
 }
+export = WebpackConfigComposer;
