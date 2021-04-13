@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
+    "outDir": "lib",
     "lib": ["es2018"],
     "module": "CommonJS",
     "esModuleInterop": false,
@@ -21,6 +21,6 @@
     "strictFunctionTypes": true
   },
   "include": [
-    "lib"
+    "src"
   ]
 }
