@@ -1,4 +1,4 @@
-import { Partial, DATA, OVERRIDE } from "../../lib/partial";
+import { Partial, DATA, OVERRIDE } from "../../src/partial";
 import { expect } from "chai";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires

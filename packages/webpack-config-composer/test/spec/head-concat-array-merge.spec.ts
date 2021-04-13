@@ -1,6 +1,6 @@
 
 
-import headConcatArrayMerge from "../../lib/head-concat-array-merge";
+import headConcatArrayMerge from "../../src/head-concat-array-merge";
 import { expect } from "chai";
 
 describe("head concat array", () => {

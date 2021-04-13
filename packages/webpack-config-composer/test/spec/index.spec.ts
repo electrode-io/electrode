@@ -1,4 +1,4 @@
-import { WebpackConfigComposer } from "../../lib/index";
+import { WebpackConfigComposer } from "../../src/index";
 import { expect } from "chai";
 import fooPartial from "../fixtures/partial/foo";
 import barPartial from "../fixtures/partial/bar";
@@ -6,8 +6,8 @@ import loaderPartial from "../fixtures/partial/loader";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const _ = require("lodash");
 import { FooPlugin } from "../fixtures/plugins/foo-plugin";
-import { Partial } from "../../lib/partial";
-import CONSTANT from "../../lib/constants";
+import { Partial } from "../../src/partial";
+import CONSTANT from "../../src/constants";
 const { PARTIALS } = CONSTANT;
 
 /* eslint-disable max-statements */

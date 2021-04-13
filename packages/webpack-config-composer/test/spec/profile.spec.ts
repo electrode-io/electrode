@@ -1,4 +1,4 @@
-import { Profile } from "../../lib/profile";
+import { Profile } from "../../src/profile";
 import { expect } from "chai";
 
 describe("profile", () => {
