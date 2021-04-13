@@ -13,30 +13,104 @@
   },
   "license": "Apache-2.0",
   "scripts": {
-    "test": "mocha test/spec",
-    "coverage": "istanbul cover _mocha -- test/spec/*.js",
-    "check": "istanbul cover _mocha -- test/spec/*.js",
-    "lint": "eslint \"**/**/*.js\""
+    "build": "rm -rf lib && tsc",
+    "test": "xrun xarc/test-only",
+    "coverage": "xrun xarc/test-cov",
+    "check": "clap xarc/check",
+    "prepublishOnly": "xrun [build, xarc/check]"
   },
   "author": "Electrode (http://www.electrode.io/)",
   "contributors": [
     "Joel Chen <xchen@walmartlabs.com>"
   ],
   "files": [
-    "lib"
+    "lib",
+    "src"
   ],
   "dependencies": {
-    "lodash": "^4.13.1"
+    "lodash": "^4.13.1",
+    "tslib": "^2.1.0"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "eslint": "^3.9.1",
-    "eslint-config-walmart": "^1.1.1",
+    "@istanbuljs/nyc-config-typescript": "^1.0.1",
+    "@types/chai": "^4.2.14",
+    "@types/mocha": "^8.2.2",
+    "@types/node": "^14.14.16",
+    "@types/sinon": "^9.0.10",
+    "@types/sinon-chai": "^3.2.5",
+    "@typescript-eslint/eslint-plugin": "^4.11.0",
+    "@typescript-eslint/parser": "^4.11.0",
+    "@xarc/module-dev": "^4.0.0",
+    "babel-eslint": "^10.1.0",
+    "chai": "^4.2.0",
+    "eslint": "^7.16.0",
+    "eslint-config-walmart": "^2.2.1",
+    "eslint-plugin-filenames": "^1.1.0",
+    "eslint-plugin-jsdoc": "^30.7.9",
+    "eslint-plugin-tsdoc": "^0.2.11",
     "istanbul": "^0.4.5",
-    "mocha": "^3.2.0"
+    "mocha": "^8.2.1",
+    "nyc": "^15.1.0",
+    "prettier": "^2.2.1",
+    "sinon": "^9.2.2",
+    "sinon-chai": "^3.5.0",
+    "source-map-support": "^0.5.19",
+    "ts-node": "^9.1.1",
+    "typedoc": "^0.20.13",
+    "typescript": "^4.1.3"
   },
   "engines": {
     "node": ">= 6",
     "npm": ">= 3"
+  },
+  "mocha": {
+    "require": [
+      "ts-node/register",
+      "source-map-support/register",
+      "@xarc/module-dev/config/test/setup.js"
+    ],
+    "recursive": true
+  },
+  "nyc": {
+    "extends": [
+      "@istanbuljs/nyc-config-typescript"
+    ],
+    "all": true,
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "exclude": [
+      "*clap.js",
+      "*clap.ts",
+      ".eslintrc.js",
+      "coverage",
+      "dist",
+      "docs",
+      "gulpfile.js",
+      "test",
+      "xrun*.js",
+      "xrun*.ts"
+    ],
+    "check-coverage": true,
+    "statements": 100,
+    "branches": 100,
+    "functions": 100,
+    "lines": 100,
+    "cache": false
+  },
+  "prettier": {
+    "printWidth": 100
+  },
+  "@xarc/module-dev": {
+    "features": [
+      "eslint",
+      "eslintTS",
+      "mocha",
+      "prettier",
+      "typedoc",
+      "typescript"
+    ]
   }
 }

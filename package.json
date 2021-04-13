@@ -15,6 +15,7 @@
     "update-changelog": "xrun user/update-changelog"
   },
   "devDependencies": {
+    "@xarc/module-dev": "^4.0.0",
     "@xarc/run": "^1.0.4",
     "bluebird": "^3.7.2",
     "fynpo": "^0.1.36",

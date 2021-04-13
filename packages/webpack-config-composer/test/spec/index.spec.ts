@@ -1,14 +1,17 @@
-"use strict";
-
-const WebpackConfigComposer = require("../..");
-const expect = require("chai").expect;
-const fooPartial = require("../fixtures/partial/foo");
-const barPartial = require("../fixtures/partial/bar");
-const loaderPartial = require("../fixtures/partial/loader");
+import WebpackConfigComposer from "../../src/index";
+import { expect } from "chai";
+import fooPartial from "../fixtures/partial/foo";
+import barPartial from "../fixtures/partial/bar";
+import loaderPartial from "../fixtures/partial/loader";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const _ = require("lodash");
-const FooPlugin = require("../fixtures/plugins/foo-plugin");
+import { FooPlugin } from "../fixtures/plugins/foo-plugin";
+import Partial from "../../src/partial";
+import CONSTANT from "../../src/constants";
+const { PARTIALS } = CONSTANT;
 
-describe("composer", function() {
+/* eslint-disable max-statements */
+describe("composer", () => {
   it("should accept partials and generate config", () => {
     const composer = new WebpackConfigComposer({
       partials: {
@@ -23,27 +26,29 @@ describe("composer", function() {
         b: {
           partials: {
             bar: {
-              order: 200
+              order: 200,
             },
             test: {
-              order: 300
-            }
-          }
+              order: 300,
+            },
+          },
         },
 
         a: {
           partials: {
             foo: {
-              order: "100"
+                order: "100"
+              }
             }
           }
         }
-      }
     });
-    composer.addPartials(fooPartial, barPartial);
+    composer.addPartials([fooPartial, barPartial]);
     expect(composer.profiles).to.have.keys("a", "b");
+    /*  eslint-disable no-unused-expressions */
     expect(composer.getProfile("a")).to.exist;
     expect(composer.getPartial("test")).to.exist;
+    /*  eslint-enable no-unused-expressions */
     const config = composer.compose(
       {},
       "a",
@@ -94,7 +99,7 @@ describe("composer", function() {
   });
 
   it("instance should have deleteCustomProps", () => {
-    const composer = new WebpackConfigComposer();
+    const composer = new WebpackConfigComposer({});
     expect(
       composer.deleteCustomProps({
         _name: "test",
@@ -104,7 +109,7 @@ describe("composer", function() {
   });
 
   it("should skip adding __name to plugins", () => {
-    const composer = new WebpackConfigComposer();
+    const composer = new WebpackConfigComposer({});
     composer.addPartials({
       foo: {
         config: {
@@ -124,8 +129,8 @@ describe("composer", function() {
   });
 
   it("should call a partial config if it's a function", () => {
-    const composer = new WebpackConfigComposer();
-    composer.addPartials(fooPartial, loaderPartial);
+    const composer = new WebpackConfigComposer({});
+    composer.addPartials([fooPartial, loaderPartial]);
     const config = composer.compose(
       {},
       [
@@ -150,12 +155,16 @@ describe("composer", function() {
   });
 
   it("should call return function twice to get final partial config", () => {
-    const composer = new WebpackConfigComposer();
-    composer.addPartials(fooPartial, {
-      loader: {
-        config: () => require("../fixtures/partial/loader").loader.config
+    const composer = new WebpackConfigComposer({});
+    composer.addPartials([
+      fooPartial,
+      {
+        loader: {
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
+          config: () => require("../fixtures/partial/loader").default.loader.config
+        }
       }
-    });
+    ]);
     const config = composer.compose(
       {},
       { partials: { loader: {} } }
@@ -164,7 +173,7 @@ describe("composer", function() {
   });
 
   it("should throw if a partial config cannot be processed", () => {
-    const composer = new WebpackConfigComposer();
+    const composer = new WebpackConfigComposer({});
     composer.addPartials({
       test: {
         config: true
@@ -179,15 +188,16 @@ describe("composer", function() {
   });
 
   it("should allow a config function to apply the config by returning nothing", () => {
-    const composer = new WebpackConfigComposer();
-    composer.addPartials(fooPartial, {
+    const composer = new WebpackConfigComposer({});
+    composer.addPartials([fooPartial, {
       loader: {
         config: options => {
-          const config = require("../fixtures/partial/loader").loader.config(options);
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
+          const config = require("../fixtures/partial/loader").default.loader.config(options);
           _.merge(options.currentConfig, config);
         }
       }
-    });
+    }]);
     const config = composer.compose(
       {},
       { partials: { loader: {} } }
@@ -195,34 +205,63 @@ describe("composer", function() {
     expect(config.module.rules[0]).to.equal("loader-rule1");
   });
 
-  describe("addProfiles", function() {
+  it("compose should correct config module when meta is enabled", () => {
+    const composer = new WebpackConfigComposer({});
+    composer.addPartials([
+      fooPartial,
+      {
+        loader: {
+          config: (options) => {
+            // eslint-disable-next-line @typescript-eslint/no-var-requires
+            const config = require("../fixtures/partial/loader").default.loader.config(options);
+            _.merge(options.currentConfig, config);
+          },
+        },
+      },
+    ]);
+    const config = composer.compose({ meta: true }, { partials: { loader: {} } });
+
+    expect(config.config).to.eql({
+      module: {
+        rules: [
+          "loader-rule1"
+        ]
+      }
+    });
+  });
+
+  it("instance should created with null input", () => {
+    const composer = new WebpackConfigComposer(null);
+    // eslint-disable-next-line no-unused-expressions
+    expect(composer).to.exist;
+  });
+
+  describe("addProfiles", () => {
     it("should accept multiple profiles", () => {
-      const composer = new WebpackConfigComposer();
+      const composer = new WebpackConfigComposer({});
       composer.addProfiles({ a: { partials: {} }, b: { partials: {} } });
       expect(composer.profiles).to.have.keys("a", "b");
     });
 
     it("should accept profiles as an array", () => {
-      const composer = new WebpackConfigComposer();
+      const composer = new WebpackConfigComposer({});
       composer.addProfiles([{ a: { partials: {} }, b: { partials: {} } }]);
       expect(composer.profiles).to.have.keys("a", "b");
     });
   });
 
-  describe("addProfile", function() {
+  describe("addProfile", () => {
     it("should take list of partial names for new profile", () => {
-      const composer = new WebpackConfigComposer();
-      composer.addProfile("test", "a", "b", "c");
+      const composer = new WebpackConfigComposer({});
+      composer.addProfile("test", "a");
       const prof = composer.getProfile("test");
       expect(prof.partials).to.deep.equal({
-        a: {},
-        b: {},
-        c: {}
+        a: {}
       });
     });
 
     it("should add profile with an object of partials", () => {
-      const composer = new WebpackConfigComposer();
+      const composer = new WebpackConfigComposer({});
       composer.addProfile("test", {
         a: {},
         b: {},
@@ -237,39 +276,43 @@ describe("composer", function() {
     });
   });
 
-  describe("addPartialToProfile", function() {
+  describe("addPartialToProfile", () => {
     it("should create profile if it doesn't exist", () => {
-      const composer = new WebpackConfigComposer();
-      composer.addPartialToProfile("user", "test", { plugins: [] });
+      const composer = new WebpackConfigComposer({});
+      composer.addPartialToProfile("user", "test", { plugins: [] }, {});
       const user = composer.getPartial("user");
+      //  eslint-disable-next-line no-unused-expressions
       expect(user).to.exist;
       expect(user.config).to.deep.equal({ plugins: [] });
       expect(user.options).to.deep.equal({});
+      //  eslint-disable-next-line no-unused-expressions
       expect(composer.getProfile("test")).to.exist;
     });
 
     it("should add the partial", () => {
-      const composer = new WebpackConfigComposer();
-      composer.addPartialToProfile("user", "test", { plugins: [] });
+      const composer = new WebpackConfigComposer({});
+      composer.addPartialToProfile("user", "test", { plugins: [] }, {});
       const user = composer.getPartial("user");
+      //  eslint-disable-next-line no-unused-expressions
       expect(user).to.exist;
       expect(user.config).to.deep.equal({ plugins: [] });
       expect(user.options).to.deep.equal({});
     });
 
     it("should use existing profile", () => {
-      const composer = new WebpackConfigComposer();
+      const composer = new WebpackConfigComposer({});
       composer.addProfile("test", "foo");
-      composer.addPartialToProfile("user", "test", { plugins: [] });
+      composer.addPartialToProfile("user", "test", { plugins: [] }, {});
       const prof = composer.getProfile("test");
+      //  eslint-disable-next-line no-unused-expressions
       expect(prof).to.exist;
       expect(prof.getPartial("foo")).to.deep.equal({});
     });
   });
 
-  describe("addPartials", function() {
+  describe("addPartials", () => {
     it("should add new partial as class intance", () => {
-      const composer = new WebpackConfigComposer();
+      const composer = new WebpackConfigComposer({});
       composer.addPartials(fooPartial);
       const foo = composer.getPartial("foo");
       expect(foo.config).to.deep.equal(fooPartial.foo.config);
@@ -282,7 +325,7 @@ describe("composer", function() {
     });
 
     it("should add new partials as an array", () => {
-      const composer = new WebpackConfigComposer();
+      const composer = new WebpackConfigComposer({});
       composer.addPartials([fooPartial, barPartial]);
       expect(composer.getPartial("foo").config).to.deep.equal(fooPartial.foo.config);
       expect(composer.getPartial("bar").config).to.deep.equal(barPartial.bar.config);
@@ -290,17 +333,17 @@ describe("composer", function() {
 
     it("should merge into existing partial", () => {
       const composer = new WebpackConfigComposer({
-        partials: [fooPartial, barPartial]
+        partials: [fooPartial, barPartial],
       });
 
       composer.addPartials({
         foo: {
           config: {
-            plugins: ["fooTest"]
+            plugins: ["fooTest"],
           },
           addOptions: {
-            concatArray: "tail"
-          }
+            concatArray: "tail",
+          },
         },
         bar: {
           config: {
@@ -346,5 +389,72 @@ describe("composer", function() {
       expect(composer.partials.foo.config.plugins[0]).to.equal("fooTest");
       expect(composer.partials.bar.config.plugins[0]).to.equal("barTest");
     });
+
+    it("should addPartial when given name does not exist but options having replace method", () => {
+      const composer = new WebpackConfigComposer({});
+      composer.addPartial(
+        "bar",
+        {
+          plugins: ["barTest"],
+        },
+        {
+          method: "replace"
+        }
+      );
+
+      expect(composer[PARTIALS].bar).to.deep.equal(new Partial("bar", { plugins: ["barTest"] }));
+    });
+
+    it("should addPartial when given name does not exist but options having replace method", () => {
+      const composer = new WebpackConfigComposer({});
+      const testPartialInstance = new Partial("foo", {});
+      composer._addPartial(
+        "bar",
+        testPartialInstance,
+        {
+          method: "replace"
+        }
+      );
+
+      expect(composer[PARTIALS].bar).to.deep.equal(testPartialInstance);
+    });
+  });
+
+  describe("enablePartial", () => {
+    it("should find partial enabled", () => {
+      const testName = "test_9527";
+      const composer = new WebpackConfigComposer({});
+      expect(composer.getPartial(testName)).to.equal(undefined);
+      composer.addPartial(testName, { foor: "bar" }, null);
+      expect(composer.getPartial(testName).enable).to.equal(undefined);
+      composer.enablePartial(testName, true);
+      expect(composer.getPartial(testName).enable).to.equal(true);
+    });
+
+    it("should find partial not enabled", () => {
+      const testName = "test_9527";
+      const composer = new WebpackConfigComposer({});
+      composer.addPartial(testName, { foor: "bar" }, null);
+      expect(composer.getPartial(testName).enable).to.equal(undefined);
+      composer.enablePartial("abc", true);
+      expect(composer.getPartial(testName).enable).to.equal(undefined);
+    });
+  });
+
+  describe("replacePartial", () => {
+    it("should replacePartial", () => {
+      const testName = "test_9528";
+      const composer = new WebpackConfigComposer({});
+      expect(composer.getPartial(testName)).to.equal(undefined);
+      composer.addPartial(testName, { foo1: "bar1" }, null);
+      expect(composer.getPartial(testName)).to.deep.equal(
+        new Partial(testName, { config: { foo1: "bar1" } })
+      );
+      composer.replacePartial(testName, { foo2: "bar2" }, null);
+      expect(composer.getPartial(testName)).to.deep.equal(
+        new Partial(testName, { config: { foo2: "bar2" } })
+      );
+    });
   });
 });
+/* eslint-enable max-statements */
