@@ -3,29 +3,31 @@
 	Author Tobias Koppers @sokra, Zackary Jackson @ScriptedAlchemy, Marais Rossouw @maraisr
 */
 
-"use strict";
+/* eslint-disable */
 
-const { validate } = require("schema-utils");
-const schema = require("../../schemas/plugins/container/ContainerPlugin.json");
-const ContainerEntryDependency = require("./ContainerEntryDependency");
-const ContainerEntryModuleFactory = require("./ContainerEntryModuleFactory");
-const ContainerExposedDependency = require("./ContainerExposedDependency");
-const { parseOptions } = require("./options");
+// const { validate } = require("schema-utils");
+// const schema = require("webpack/schemas/plugins/container/ContainerPlugin.json");
+const ContainerEntryDependency = require("webpack/lib/container/ContainerEntryDependency");
+const ContainerEntryModuleFactory = require("webpack/lib/container/ContainerEntryModuleFactory");
+const ContainerExposedDependency = require("webpack/lib/container/ContainerExposedDependency");
+const { parseOptions } = require("webpack/lib/container/options");
 
 /** @typedef {import("../../declarations/plugins/container/ContainerPlugin").ContainerPluginOptions} ContainerPluginOptions */
 /** @typedef {import("../Compiler")} Compiler */
 
 const PLUGIN_NAME = "ContainerPlugin";
 
-class ContainerPlugin {
+export class ContainerPlugin {
+  _options: any;
   /**
    * @param {ContainerPluginOptions} options options
    */
   constructor(options) {
-    validate(schema, options, { name: "Container Plugin" });
+    // validate(schema, options, { name: "Container Plugin" });
 
     this._options = {
       name: options.name,
+      entry: options.entry,
       shareScope: options.shareScope || "default",
       library: options.library || {
         type: "var",
@@ -52,13 +54,27 @@ class ContainerPlugin {
    * @returns {void}
    */
   apply(compiler) {
-    const { name, exposes, shareScope, filename, library } = this._options;
+    const { name, exposes, shareScope, filename, library, entry } = this._options;
 
     compiler.options.output.enabledLibraryTypes.push(library.type);
 
-    compiler.hooks.make.tapAsync(PLUGIN_NAME, (compilation, callback) => {
+    if (entry) {
+      compiler.hooks.compilation.tap(PLUGIN_NAME, compilation => {
+        const EntryPlugin = require("webpack/lib/EntryPlugin");
+        for (const ent of [].concat(entry)) {
+          new EntryPlugin(compilation.options.context, ent, {
+            name
+          }).apply(compiler);
+        }
+        return true;
+      });
+    }
+
+    // setting stage to 1 to ensure the remote runtime module is the last one added
+    compiler.hooks.make.tapAsync({ name: PLUGIN_NAME, stage: 1 }, (compilation, callback) => {
       const dep = new ContainerEntryDependency(name, exposes, shareScope);
       dep.loc = { name };
+
       compilation.addEntry(
         compilation.options.context,
         dep,
@@ -84,5 +100,3 @@ class ContainerPlugin {
     });
   }
 }
-
-module.exports = ContainerPlugin;

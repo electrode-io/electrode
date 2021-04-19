@@ -16,8 +16,14 @@ function setup(w: any) {
   const originalPublicPath = __webpack_public_path__;
   __webpack_public_path__ = "";
 
+  const xarc = w.xarcV2 || w.xarcV1;
+
+  if (xarc && typeof __remoteCdnMapping !== "undefined") {
+    xarc.cdnUpdate({ md: __remoteCdnMapping });
+  }
+
   const getCdnMapSrc = originalSrc => {
-    const src = w.xarcV2 && w.xarcV2.cdnMap(originalSrc);
+    const src = xarc && xarc.cdnMap(originalSrc);
     return src && src !== originalSrc ? src : null;
   };
 

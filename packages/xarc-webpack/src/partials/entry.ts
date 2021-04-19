@@ -222,7 +222,7 @@ if (module.hot) {
     //
     // need to insert CDN mapping code for webpack jsonp in production mode
     //
-    const jsonpCdn = !process.env.WEBPACK_DEV && "@xarc/app-dev/scripts/webpack5-jsonp-cdn";
+    const jsonpCdn = !process.env.WEBPACK_DEV && require.resolve("../client/webpack5-jsonp-cdn");
 
     if (polyfill) {
       const coreJs = "core-js";

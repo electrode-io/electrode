@@ -14,7 +14,7 @@ module.exports = {
       module: "@xarc/app-dev/lib/webpack-dev-fastify",
       enable: process.env.WEBPACK_DEV === "true"
     },
-    "subapp-server": { options: { insertTokenIds: true } }
+    "subapp-server": { options: { insertTokenIds: true, cdn: { enable: true } } }
   },
   connection: {
     host: process.env.HOST,

@@ -2,9 +2,8 @@
 
 import * as Crypto from "crypto";
 import { loadXarcOptions } from "../util/load-xarc-options";
-import { container } from "webpack";
 import * as _ from "lodash";
-
+import { ModuleFederationPlugin } from "../container/ModuleFederationPlugin";
 const splitMap = {};
 
 function hashChunks(mod, chunks, key) {
@@ -65,18 +64,23 @@ function makeConfig(options) {
       const idName = remote.name.replace(/[^_\$0-9A-Za-z]/g, "_");
       const name = !eager ? `__remote_${idName}` : idName;
 
-      return new container.ModuleFederationPlugin({
+      return new ModuleFederationPlugin({
         name,
         filename: remote.filename || `_remote_~.${idName}.js`,
+        entry: !process.env.WEBPACK_DEV && require.resolve("../client/webpack5-jsonp-cdn"),
         exposes,
         shared
-      });
+      } as any);
     });
     config.plugins = [].concat(config.plugins, modFedPlugins).filter(x => x);
 
     // if app is exposing modules for remote loading, then we must set following
     if (exposeRemote > 0) {
-      options.currentConfig.output.publicPath = "auto";
+      if (process.env.WEBPACK_DEV) {
+        // in dev mode there's no CDN mapping, so must set public path to auto for
+        // remote container to load its bundles
+        options.currentConfig.output.publicPath = "auto";
+      }
       runtimeChunk = undefined;
     }
   }
