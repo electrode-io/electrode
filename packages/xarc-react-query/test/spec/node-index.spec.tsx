@@ -79,7 +79,7 @@ describe("reactQueryFeature node.js", function () {
     const str = renderToString(<result.Component />);
 
     expect(str).equals(
-      `<div>test <p>{&quot;msg&quot;:&quot;foo&quot;,&quot;queryKey&quot;:[&quot;test&quot;]}</p></div>`
+      `<div>test <p>{&quot;msg&quot;:&quot;foo&quot;,&quot;queryKey&quot;:&quot;test&quot;}</p></div>`
     );
   });
 
@@ -126,7 +126,7 @@ describe("reactQueryFeature node.js", function () {
 
     const element = await waitFor(() => screen.getByText("test"), { timeout: 500 });
 
-    expect(element.innerHTML).equal(`test <p>{"msg":"foo","queryKey":["test"]}</p>`);
+    expect(element.innerHTML).equal(`test <p>{"msg":"foo","queryKey":"test"}</p>`);
   });
 
   it("should render subapp with react-query if it fails on fetching data when doing SSR", async () => {
@@ -173,7 +173,7 @@ describe("reactQueryFeature node.js", function () {
 
     const element = await waitFor(() => screen.getByText("test"), { timeout: 500 });
 
-    expect(element.innerHTML).contains(`<p>{"msg":"foo","queryKey":["test"]}</p>`);
+    expect(element.innerHTML).contains(`<p>{"msg":"foo","queryKey":"test"}</p>`);
   });
 
   it("should render subapp with react-query when input component does not exist", async () => {
