@@ -1722,33 +1722,33 @@ $pkg:
    '@webassemblyjs/ast': 1.11.0
    '@xtuc/long': 4.2.2
 '@webpack-cli/configtest':
- _latest: 1.0.1
+ _latest: 1.0.2
  _:
-  ^1.0.1: 1.0.1
- 1.0.1:
-  $: sha512-B+4uBUYhpzDXmwuo3V9yBH6cISwxEI4J+NO5ggDaGEEHb0osY/R7MzeKc0bHURXQuZjMM4qD+bSJCKIuI3eNBQ==
-  _: 'https://npme.walmart.com/@webpack-cli/configtest/-/configtest-1.0.1.tgz'
+  ^1.0.2: 1.0.2
+ 1.0.2:
+  $: sha512-3OBzV2fBGZ5TBfdW50cha1lHDVf9vlvRXnjpVbJBa20pSZQaSkMJZiwA8V2vD9ogyeXn8nU5s5A6mHyf5jhMzA==
+  _: 'https://registry.npmjs.org/@webpack-cli/configtest/-/configtest-1.0.2.tgz'
   peerDependencies:
    webpack: '4.x.x || 5.x.x'
    webpack-cli: 4.x.x
 '@webpack-cli/info':
- _latest: 1.2.2
+ _latest: 1.2.3
  _:
-  ^1.2.2: 1.2.2
- 1.2.2:
-  $: sha512-5U9kUJHnwU+FhKH4PWGZuBC1hTEPYyxGSL5jjoBI96Gx8qcYJGOikpiIpFoTq8mmgX3im2zAo2wanv/alD74KQ==
-  _: 'https://npme.walmart.com/@webpack-cli/info/-/info-1.2.2.tgz'
+  ^1.2.3: 1.2.3
+ 1.2.3:
+  $: sha512-lLek3/T7u40lTqzCGpC6CAbY6+vXhdhmwFRxZLMnRm6/sIF/7qMpT8MocXCRQfz0JAh63wpbXLMnsQ5162WS7Q==
+  _: 'https://registry.npmjs.org/@webpack-cli/info/-/info-1.2.3.tgz'
   dependencies:
    envinfo: ^7.7.3
   peerDependencies:
    webpack-cli: 4.x.x
 '@webpack-cli/serve':
- _latest: 1.3.0
+ _latest: 1.3.1
  _:
-  ^1.3.0: 1.3.0
- 1.3.0:
-  $: sha512-k2p2VrONcYVX1wRRrf0f3X2VGltLWcv+JzXRBDmvCxGlCeESx4OXw91TsWeKOkp784uNoVQo313vxJFHXPPwfw==
-  _: 'https://npme.walmart.com/@webpack-cli/serve/-/serve-1.3.0.tgz'
+  ^1.3.1: 1.3.1
+ 1.3.1:
+  $: sha512-0qXvpeYO6vaNoRBI52/UsbcaBydJCggoBBnIo/ovQQdn6fug0BgwsjorV1hVS7fMqGVTZGcVxv8334gjmbj5hw==
+  _: 'https://registry.npmjs.org/@webpack-cli/serve/-/serve-1.3.1.tgz'
   peerDependencies:
    webpack-cli: 4.x.x
 '@xarc/app':
@@ -1986,8 +1986,8 @@ $pkg:
    optional-require: ^1.0.2
    require-at: ^1.0.6
    url-loader: ^4.1.0
-   webpack: ^5.24.3
-   webpack-cli: ^4.5.0
+   webpack: ^5.33.2
+   webpack-cli: ^4.6.0
    webpack-config-composer: ^1.1.3
    webpack-stats-plugin: ^1.0.3
    xsh: ^0.4.5
@@ -9392,12 +9392,12 @@ wbuf:
   dependencies:
    minimalistic-assert: ^1.0.0
 webpack:
- _latest: 5.27.0
+ _latest: 5.33.2
  _:
-  ^5.24.3: 5.27.0
- 5.27.0:
-  $: sha512-So7grHu//UyJ+80VrNHjWwW6WSZkfWWD6a7NV/88r8G92PO6TYOGzbtTiZBwbPVkx6LVP8OYvHD+IxuJ2KBz4g==
-  _: 'https://npme.walmart.com/webpack/-/webpack-5.27.0.tgz'
+  ^5.33.2: 5.33.2
+ 5.33.2:
+  $: sha512-X4b7F1sYBmJx8mlh2B7mV5szEkE0jYNJ2y3akgAP0ERi0vLCG1VvdsIxt8lFd4st6SUy0lf7W0CCQS566MBpJg==
+  _: 'https://registry.npmjs.org/webpack/-/webpack-5.33.2.tgz'
   dependencies:
    '@types/eslint-scope': ^3.7.0
    '@types/estree': ^0.0.46
@@ -9423,17 +9423,17 @@ webpack:
    watchpack: ^2.0.0
    webpack-sources: ^2.1.1
 webpack-cli:
- _latest: 4.5.0
+ _latest: 4.6.0
  _:
-  ^4.5.0: 4.5.0
- 4.5.0:
-  $: sha512-wXg/ef6Ibstl2f50mnkcHblRPN/P9J4Nlod5Hg9HGFgSeF8rsqDGHJeVe4aR26q9l62TUJi6vmvC2Qz96YJw1Q==
-  _: 'https://npme.walmart.com/webpack-cli/-/webpack-cli-4.5.0.tgz'
+  ^4.6.0: 4.6.0
+ 4.6.0:
+  $: sha512-9YV+qTcGMjQFiY7Nb1kmnupvb1x40lfpj8pwdO/bom+sQiP4OBMKjHq29YQrlDWDPZO9r/qWaRRywKaRDKqBTA==
+  _: 'https://registry.npmjs.org/webpack-cli/-/webpack-cli-4.6.0.tgz'
   dependencies:
    '@discoveryjs/json-ext': ^0.5.0
-   '@webpack-cli/configtest': ^1.0.1
-   '@webpack-cli/info': ^1.2.2
-   '@webpack-cli/serve': ^1.3.0
+   '@webpack-cli/configtest': ^1.0.2
+   '@webpack-cli/info': ^1.2.3
+   '@webpack-cli/serve': ^1.3.1
    colorette: ^1.2.1
    commander: ^7.0.0
    enquirer: ^2.3.6
@@ -9455,6 +9455,7 @@ webpack-config-composer:
   _: ../../packages/webpack-config-composer
   dependencies:
    lodash: ^4.13.1
+   tslib: ^2.1.0
 webpack-dev-middleware:
  _latest: 4.1.0
  _:

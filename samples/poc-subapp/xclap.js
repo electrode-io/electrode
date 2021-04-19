@@ -14,6 +14,7 @@ const deps = require("./package.json").dependencies;
 
 loadDevTasks(xrun, {
   webpackOptions: {
+    minify: true,
     v1RemoteSubApps: {
       name: "poc-subapp",
       subAppsToExpose: ["Deal", "Extras"],

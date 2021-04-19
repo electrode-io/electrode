@@ -6,6 +6,9 @@ module.exports = function() {
   const xarcOptions = loadXarcOptions();
 
   return {
-    mode: xarcOptions.webpack.minify ? "production" : "development"
+    mode: "production",
+    optimization: {
+      minimize: xarcOptions.webpack.minify
+    }
   };
 };

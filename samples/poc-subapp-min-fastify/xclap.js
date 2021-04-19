@@ -4,7 +4,7 @@
 
 // process.env.SERVER_ES6 = true;
 
-process.env.APP_SERVER_PORT = 3100;
+// process.env.APP_SERVER_PORT = 3100;
 
 /*
  * Enable webpack's NodeSourcePlugin to simulate NodeJS libs in browser
