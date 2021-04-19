@@ -30,6 +30,7 @@ export type RemoteSubAppOptions = {
    *
    */
   name: string;
+
   /**
    * Name the remote entry JS file
    *

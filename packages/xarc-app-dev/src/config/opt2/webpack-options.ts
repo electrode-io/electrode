@@ -3,6 +3,35 @@
 import { RemoteSubAppOptions } from "./remote-federation";
 
 /**
+ * Options for CDN server.
+ *
+ */
+export type WebpackCdnOptions = {
+  /**
+   * Enable the use of a CDN server for serving assets.
+   *
+   * - Setting this `true` will force `publicPath` default to `"auto"` for production mode **unless**
+   * mapping is also set to `true`.
+   *
+   */
+  enable?: boolean;
+  /**
+   * Enable URL mapping if CDN server gives a different URL for each asset
+   *
+   * - If `mapping` is `false`, then `publicPath` must be `"auto"` for assets to work.
+   * - If `mapping` is `true`, then post processing is required to provide the mapping data
+   *   for the app.
+   */
+  mapping?: boolean;
+
+  /**
+   * If you don't need CDN mapping, but `"auto"` `publicPath` doesn't work, and you know
+   * ahead of time what it should be, then you can set it here.
+   */
+  publicPath?: string;
+};
+
+/**
  * User configurable options that are related to Webpack
  */
 export type WebpackOptions = {
@@ -172,6 +201,34 @@ export type WebpackOptions = {
    * You need to install ts-node package and have your tsconfig setup for your typescript.
    */
   useAppWebpackConfig?: boolean;
+
+  /**
+   * Options for if you need to serve your assets from a CDN server
+   *
+   * **When should you use this:**
+   *
+   * - You need to serve your assets from a CDN server that gives URLs that are:
+   *
+   * > 1. Changes original asset filenames
+   * > 2. Gives a different URL for each asset file
+   *
+   * - or if you need to set a `publicPath` other than `"auto"`.  Normally, webpack can auto detect
+   *   the correct base URL, but if that doesn't work and you know ahead of time what it can be, you
+   *   can set it.
+   *
+   * - If `"auto"` doesn't work and you don't know ahead of time what `publicPath` should be, then
+   *   you would need CDN mapping.
+   *
+   * **About how CDN and mapping affects `publicPath`**
+   *  - Without CDN mapping, for module federation remote assets to work, it must set
+   *    `publicPath` to `"auto"`.
+   *  - In development mode, webpack dev server serves the assets and CDN options
+   *    will have no effect, and `publicPath` is forced to be the following:
+   *  > - module federation remote assets - `"auto"`
+   *  > - normal assets - `"/js"`
+   *
+   */
+  cdn?: WebpackCdnOptions;
 
   /**
    * Specify Module Federation options to expose or consume remote V1 subapps through webpack5's
