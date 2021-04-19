@@ -34,6 +34,7 @@ function makeConfig(options) {
 
   if (webpack.v1RemoteSubApps) {
     let exposeRemote = 0;
+    const cdnMapping = _.get(webpack, "cdn.enable", false) && _.get(webpack, "cdn.mapping", false);
     const modFedPlugins = [].concat(webpack.v1RemoteSubApps).map(remote => {
       const missing = [];
       const subAppsToExpose = []
@@ -67,7 +68,8 @@ function makeConfig(options) {
       return new ModuleFederationPlugin({
         name,
         filename: remote.filename || `_remote_~.${idName}.js`,
-        entry: !process.env.WEBPACK_DEV && require.resolve("../client/webpack5-jsonp-cdn"),
+        entry:
+          cdnMapping && !process.env.WEBPACK_DEV && require.resolve("../client/webpack5-jsonp-cdn"),
         exposes,
         shared
       } as any);
@@ -76,7 +78,7 @@ function makeConfig(options) {
 
     // if app is exposing modules for remote loading, then we must set following
     if (exposeRemote > 0) {
-      if (process.env.WEBPACK_DEV) {
+      if (process.env.WEBPACK_DEV || !cdnMapping) {
         // in dev mode there's no CDN mapping, so must set public path to auto for
         // remote container to load its bundles
         options.currentConfig.output.publicPath = "auto";
